@@ -1,3 +1,5 @@
+import '../app.postcss';
+
 export type ButtonType = 'button' | 'submit' | 'reset' | null | undefined;
 
 // Buttons

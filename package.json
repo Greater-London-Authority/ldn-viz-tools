@@ -1,6 +1,6 @@
 {
 	"name": "ldn-viz-tools",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Data-viz tools used by London City Intelligence Unit",
 	"author": {
 		"name": "Chris Knight",
@@ -10,7 +10,9 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run package",
+		"build": "npm run buildSvelte && npm run buildVanilla",
+		"buildSvelte": "vite build && npm run package",
+		"buildVanilla": "vite build -c vite.config.vanilla.ts",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
@@ -28,7 +30,8 @@
 		}
 	},
 	"files": [
-		"dist"
+		"dist",
+		"vanilla"
 	],
 	"peerDependencies": {
 		"svelte": "^3.54.0"
