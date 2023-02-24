@@ -1,5 +1,5 @@
 <script lang="ts">
-	type ButtonType = import('../index').Button;
+	type ButtonType = import('../index').ButtonType;
 
 	export let type: ButtonType = 'button';
 	export let disabled = false;

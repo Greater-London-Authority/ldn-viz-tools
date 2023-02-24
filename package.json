@@ -1,6 +1,6 @@
 {
 	"name": "ldn-viz-tools",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"description": "Data-viz tools used by London City Intelligence Unit",
 	"author": {
 		"name": "Chris Knight",
@@ -58,7 +58,7 @@
 		"autoprefixer": "^10.4.7",
 		"tailwindcss": "^3.1.5"
 	},
-	"svelte": "./dist/index.ts",
+	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"keywords": [

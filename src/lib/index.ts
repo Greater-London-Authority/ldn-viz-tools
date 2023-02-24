@@ -1,4 +1,4 @@
-// Reexport your entry components here
+export type ButtonType = 'button' | 'submit' | 'reset' | null | undefined;
 
 // Buttons
-export { default as Button } from './buttons/Button.svelte';
+export { default as Button } from './button/Button.svelte';
