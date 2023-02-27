@@ -6,6 +6,6 @@
 
 <Hst.Story title="ldn-viz/Button">
 	<!-- Typed! -->
-	<Hst.Variant title="default"><Button primary>Primary button</Button></Hst.Variant>
-	<Hst.Variant title="Fast"><Button>Seconday Button</Button></Hst.Variant>
+	<Hst.Variant title="default"><Button>Default button</Button></Hst.Variant>
+	<Hst.Variant title="primary"><Button primary>Primary Button</Button></Hst.Variant>
 </Hst.Story>
