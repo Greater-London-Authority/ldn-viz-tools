@@ -45,6 +45,7 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
 		"@sveltejs/package": "^2.0.0",
+		"@types/d3": "^7.4.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.7",
@@ -77,5 +78,8 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Greater-London-Authority/ldn-viz-tools"
+	},
+	"dependencies": {
+		"d3": "^7.8.2"
 	}
 }
