@@ -5,6 +5,7 @@
 	export let disabled = false;
 	export let primary = false;
 	export let value = false;
+	export let label: string = 'Button';
 
 	$: mode = primary
 		? 'bg-core-blue-500 text-white border-b-core-grey-500'
@@ -21,5 +22,5 @@
 	on:mouseover
 	on:focus
 >
-	<slot />
+	<slot>{label}</slot>
 </button>
