@@ -5,7 +5,7 @@
 	export let xScale: any;
 	export let yScale: any;
 
-	$: console.log(xScale(data.value));
+	$: console.log(yScale(data[xKey]));
 </script>
 
 <div

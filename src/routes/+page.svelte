@@ -6,7 +6,7 @@
 	// new Button({ target: document.getElementById('app'), props: { primary: true, label: 'boom' } });
 	// onMount(draw);
 
-	import { Button, Scatterplot } from '../lib';
+	import { BarChart, Button, Scatterplot } from '../lib';
 	function handleClick() {
 		alert('clicked');
 	}
@@ -104,5 +104,7 @@
 <Button on:click={handleClick} />
 
 <Scatterplot title="The Title" {data} xKey="year" yKey="value" />
+
+<BarChart title="The Title" {data} xKey="year" yKey="value" />
 
 <div id="app" />
