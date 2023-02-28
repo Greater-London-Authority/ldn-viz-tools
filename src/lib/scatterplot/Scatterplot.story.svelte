@@ -5,7 +5,7 @@
 	export let Hst: Hst;
 </script>
 
-<Hst.Story title="ldn-viz/Scatterplot">
+<Hst.Story title="Charts/Scatterplot">
 	<Hst.Variant title="default"><Scatterplot {data} xKey="year" yKey="value" /></Hst.Variant>
 	<Hst.Variant title="with title"
 		><Scatterplot {data} xKey="year" yKey="value" title="Chart Title" /></Hst.Variant

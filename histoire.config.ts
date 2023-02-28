@@ -4,6 +4,14 @@ import { defineConfig } from 'histoire';
 export default defineConfig({
 	plugins: [HstSvelte()],
 	setupFile: '/src/histoire.setup.ts',
+	tree: {
+		groups: [
+			{
+				id: 'top',
+				title: '' // No toggle
+			}
+		]
+	},
 	theme: {
 		colors: {
 			primary: {

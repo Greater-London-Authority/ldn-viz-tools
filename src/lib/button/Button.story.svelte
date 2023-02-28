@@ -4,7 +4,7 @@
 	export let Hst: Hst;
 </script>
 
-<Hst.Story title="ldn-viz/Button">
+<Hst.Story title="ui/Button">
 	<!-- Typed! -->
 	<Hst.Variant title="default"><Button>Default button</Button></Hst.Variant>
 	<Hst.Variant title="primary"><Button primary>Primary Button</Button></Hst.Variant>
