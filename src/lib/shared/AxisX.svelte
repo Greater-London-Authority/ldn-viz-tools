@@ -1,18 +1,13 @@
 <script lang="ts">
-	export let height: number;
-	export let xScale: any;
-	export let margin: { [key: string]: number };
+	import { getChartContext } from '../chartContainer/ChartContainer.svelte';
+
+	const { height, chartHeight, xScale } = getChartContext();
+
 	let xTicks = xScale.ticks(5);
 </script>
 
-<g>
+<g class="axis x-axis" transform="translate(0, {$chartHeight})">
 	{#each xTicks as tick}
-		<text
-			x={xScale(tick)}
-			y={height - margin.bottom}
-			dominant-baseline="hanging"
-			dy="6"
-			fill="black">{tick}</text
-		>
+		<text x={xScale(tick)} y={height} dominant-baseline="hanging" dy="6" fill="black">{tick}</text>
 	{/each}
 </g>
