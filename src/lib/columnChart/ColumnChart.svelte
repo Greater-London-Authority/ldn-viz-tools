@@ -1,7 +1,7 @@
 <script lang="ts">
-	import AnyChild from '$lib/shared/AnyChild.svelte';
 	import AxisX from '$lib/shared/AxisX.svelte';
 	import AxisY from '$lib/shared/AxisY.svelte';
+	import Column from '$lib/shared/Column.svelte';
 	import Container from '../chartContainer/ChartContainer.svelte';
 
 	export let data: { [key: string]: any }[];
@@ -15,5 +15,5 @@
 <Container {data} {title} {subTitle} {alt} {footer} {exportBtns}>
 	<AxisX />
 	<AxisY />
-	<AnyChild />
+	<Column />
 </Container>

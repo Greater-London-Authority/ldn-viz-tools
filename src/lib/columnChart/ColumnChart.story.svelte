@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { Hst } from '@histoire/plugin-svelte';
 	import { data } from '../../data/testData';
-	import Scatterplot from './Scatterplot.svelte';
+	import ColumnChart from './ColumnChart.svelte';
 	export let Hst: Hst;
 </script>
 
-<Hst.Story title="Charts/Scatterplot">
+<Hst.Story title="Charts/ColumnChart">
 	<Hst.Variant title="default">
-		<Scatterplot {data} title="Dots" />
+		<ColumnChart {data} title="Column Chart" subTitle="subTitle" />
 	</Hst.Variant>
 </Hst.Story>
