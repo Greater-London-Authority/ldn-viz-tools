@@ -6,8 +6,8 @@
 		data: { [key: string]: any }[];
 		xScale: any; //check types
 		yScale: any; //check types
-		width: number;
-		height: number;
+		containerWidth: number;
+		containerHeight: number;
 		chartWidth: number;
 		chartHeight: number;
 	};
@@ -22,8 +22,8 @@
 	import { writable } from 'svelte/store';
 
 	import { extent } from 'd3-array';
-	import { scaleLinear } from 'd3-scale';
 
+	import { scaleLinear } from 'd3';
 	import ExportBtns from '../shared/ExportBtns.svelte';
 	import Footer from '../shared/Footer.svelte';
 	import SubTitle from '../shared/SubTitle.svelte';
@@ -36,12 +36,22 @@
 	export let footer: boolean = false;
 	export let exportBtns: boolean = false;
 
-	const width = writable(400);
-	const height = writable(400);
-	const chartWidth = writable(400);
-	const chartHeight = writable(400);
+	let containerWidth = 400;
+	let containerHeight = 400;
+	let chartWidth = undefined || 400;
+	let chartHeight = 400;
 
-	let chart;
+	const _containerWidth = writable(containerWidth);
+	const _containerHeight = writable(containerHeight);
+	const _chartWidth = writable(chartWidth);
+	const _chartHeight = writable(chartHeight);
+
+	$: $_containerWidth = containerWidth;
+	$: $_containerHeight = containerHeight;
+	$: $_chartWidth = chartWidth;
+	$: $_chartHeight = chartHeight;
+
+	let chart: any;
 
 	// const xScale = () => {
 	// 	return scaleLinear().domain([0, 100]).nice().range([0, 200]);
@@ -54,24 +64,30 @@
 	const xScale = scaleLinear()
 		.domain(extentX as number[])
 		.nice()
-		.range([0, $chartWidth]);
+		.range([0, $_chartWidth]);
 	const yScale = scaleLinear()
 		.domain(extentY as number[])
 		.nice()
-		.range([$chartHeight, 0]);
+		.range([$_chartHeight, 0]);
 
-	setContext(key, {
+	$: context = {
 		data,
 		xScale,
 		yScale,
-		width,
-		height,
-		chartWidth,
-		chartHeight
-	});
+		containerWidth: _containerWidth,
+		containerHeight: _containerHeight,
+		chartHeight: _chartHeight,
+		chartWidth: _chartWidth
+	};
+
+	$: setContext(key, context);
 </script>
 
-<div class="chart-container">
+<div
+	class="chart-container h-screen"
+	bind:clientWidth={containerWidth}
+	bind:clientHeight={containerHeight}
+>
 	{#if title}
 		<Title>{title}</Title>
 	{/if}
@@ -83,9 +99,16 @@
 		<h5 class="sr-only">{alt}</h5>
 	{/if}
 
+	ChartWidth {$_chartWidth}
+	ChartHeight {$_chartHeight}
+
+	containerWidth {$_containerWidth}
+	containerHeight {$_containerHeight}
+
 	<!-- Viz element goes here -->
-	<div class="chart" bind:clientWidth={$width} bind:clientHeight={$height}>
-		<svg bind:this={chart} width={$chartWidth} height={$chartHeight}>
+
+	<div class="chart h-60" bind:clientWidth={chartWidth} bind:clientHeight={chartHeight}>
+		<svg bind:this={chart}>
 			<slot {chart} />
 		</svg>
 	</div>

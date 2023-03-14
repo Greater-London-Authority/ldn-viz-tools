@@ -7,7 +7,7 @@
 	// onMount(draw);
 
 	import { data } from '../data/testData';
-	import { BarChart, Button, Scatterplot } from '../lib';
+	import { BarChart, Button } from '../lib';
 	function handleClick() {
 		alert('clicked');
 	}
@@ -20,8 +20,6 @@
 <Button primary on:click={handleClick}>Hello</Button>
 
 <Button on:click={handleClick} />
-
-<Scatterplot title="The Title" {data} xKey="year" yKey="value" />
 
 <BarChart title="The Title" {data} xKey="year" yKey="value" />
 
