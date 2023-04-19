@@ -355,7 +355,7 @@ const config = {
   },
   darkMode: ['class', '[data-theme="dark"]'],
 
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require('daisyui')]
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')]
 };
 
 module.exports = config;
