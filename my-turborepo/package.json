@@ -8,10 +8,14 @@
   },
   "devDependencies": {
     "eslint": "^8.0.0",
-    "eslint-config-custom": "workspace:*",
+    "eslint-config-custom": "*",
     "prettier": "^2.7.1",
     "prettier-plugin-svelte": "^2.7.0",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@7.15.0"
+  "packageManager": "npm@9.5.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }
