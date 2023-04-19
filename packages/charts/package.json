@@ -1,8 +1,8 @@
 {
-	"name": "ldn-viz-tools-ui",
+	"name": "ldn-viz-tools-charts",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev --port 3005 --open",
+		"dev": "vite dev --port 3003 --open",
 		"build": "vite build && npm run package",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
