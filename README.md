@@ -1,32 +1,21 @@
-# Turborepo Svelte starter
+# LDN Viz Tools
 
-This is an official starter Turborepo.
+This is a mono-repo containing several componentS:
 
-## Using this example
+- the `ldn-viz-tools-charts` package is in [charts](./packages/charts); it contains components for visualizing data 
+- the `ldn-viz-tools-maps` package is in [maps](./packages/maps); it contains components for rendering maps
+- the `ldn-viz-tools-ui` package is in [ui](./packages/ui); it contains general UI components like modals or sidebars
+- the `ldn-viz-tools-theme` package is in [theme](./packages/theme); it contains CSS and design tokens that are used by other components
 
-Run the following command:
+These packages are intended primarily for use in projects created by Greater London Authority's Intelligence Unit.
 
-```sh
-npx create-turbo@latest -e with-svelte
-```
+### Tooling
 
-## What's inside?
+The structure of this repo was initially based on Vercel's [Turborepo & SvelteKit Starter](https://vercel.com/templates/svelte/turborepo-sveltekit-starter) template.
 
-This Turborepo includes the following packages/apps:
+It uses:
 
-### Apps and Packages
-
-- `docs`: a [svelte-kit](https://kit.svelte.dev/) app
-- `web`: another [svelte-kit](https://kit.svelte.dev/) app
-- `ui`: a stub Svelte component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
+- [Turbo](https://turbo.build/) as an incremental bundler and build system
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
