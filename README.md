@@ -33,3 +33,5 @@ Each package is structured so that components live next to their stories (and te
 │ │ ├─ Button.stories.ts`
 
 Storybook needs to be restarted when adding a new story to allow it to index the new file.
+
+You can preview the storybook by running `npm run storybook -w apps/docs`.
