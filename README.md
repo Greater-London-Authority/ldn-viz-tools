@@ -35,3 +35,5 @@ lib/
 ```
 
 Storybook needs to be restarted when adding a new story to allow it to index the new file.
+
+You can preview the storybook by running `npm run storybook -w apps/docs`.
