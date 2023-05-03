@@ -26,10 +26,12 @@ There is a single storybook instance in apps/docs. Once installed run `npm run s
 
 Each package is structured so that components live next to their stories (and tests etc)
 
-`lib/
+```
+lib/
 ├─ src/
 │ ├─ Button/
 │ │ ├─ Button.svelte
-│ │ ├─ Button.stories.ts`
+│ │ ├─ Button.stories.ts
+```
 
 Storybook needs to be restarted when adding a new story to allow it to index the new file.
