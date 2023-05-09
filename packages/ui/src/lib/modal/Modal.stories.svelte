@@ -3,7 +3,7 @@
 
     import Modal from "./Modal.svelte";
 
-    let isOpen;
+    let isOpen = true;
 </script>
 
 <Meta title="Ui/Modal" component={Modal}/>
