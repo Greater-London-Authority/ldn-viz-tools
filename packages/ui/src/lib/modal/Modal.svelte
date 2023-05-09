@@ -9,6 +9,8 @@
     export let isOpen = false;
     export let title: string;
     export let description: string;
+
+    const hasChildren = Object.keys($$slots).length > 0;
 </script>
 
 <Dialog open={isOpen} on:close={() => (isOpen = false)} class="relative z-10 overflow-y-auto">
@@ -44,8 +46,12 @@
                 <DialogDescription class="px-2">{description}</DialogDescription>
             {/if}
 
-            {#if Object.keys($$slots).length > 0}
+            {#if hasChildren && description}
                 <div class="border-dotted border-t border-core-grey-300  pt-4 mx-2 text-sm">
+                    <slot></slot>
+                </div>
+            {:else if hasChildren}
+                <div class="border-dotted border-core-grey-300 mx-2 text-sm">
                     <slot></slot>
                 </div>
             {/if}
