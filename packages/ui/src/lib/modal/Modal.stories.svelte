@@ -9,10 +9,13 @@
 <Meta title="Ui/Modal" component={Modal}/>
 
 <Template let:args>
-    <Modal title="My title" description="DEscription...">
-        Foo!
+    <Modal {...args}>
+        This content is the child of the modal!
     </Modal>
 </Template>
+
+<Story name="Default" args={{title: "Title", description: "Description", isOpen: true}} />
+
 
 <Story name="Description only">
     <button class="btn bg-core-grey-500 p-4" on:click={() => isOpen = true}>Open modal!</button>
