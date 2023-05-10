@@ -59,3 +59,17 @@
 		</ul>
 	</Modal>
 </Story>
+
+<Story name="Modal with close button">
+    <button class="btn bg-core-grey-500 p-4" on:click={() => isOpen = true}>Open modal!</button>
+
+    <Modal bind:isOpen title="A modal with close button!">
+        <div class="p-4">
+            In a real example, these buttons would be appropriately styled, and potentially perform some action in
+            addition to closing the modal.
+        </div>
+
+        <button class="btn bg-core-grey-500 text-core-grey-50 p-4" on:click={() => isOpen = false}>Accept</button>
+        <button class="btn bg-core-grey-500 text-core-grey-50 p-4" on:click={() => isOpen = false}>Cancel</button>
+    </Modal>
+</Story>
