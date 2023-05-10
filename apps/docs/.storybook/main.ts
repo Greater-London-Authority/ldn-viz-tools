@@ -4,7 +4,7 @@ const config: StorybookConfig = {
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/ui/src/**/*.mdx',
-    '../../../packages/ui/src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../../packages/ui/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
     '../../../packages/charts/**/*.mdx',
     '../../../packages/charts/src/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/maps/**/*.mdx',
@@ -13,7 +13,8 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions'
+    '@storybook/addon-interactions',
+    '@storybook/addon-svelte-csf',
   ],
   framework: {
     name: '@storybook/sveltekit',
