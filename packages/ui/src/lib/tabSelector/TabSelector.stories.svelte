@@ -12,14 +12,6 @@
 
 <Meta title="Ui/TabSelector" component={TabSelector}/>
 
-
-<Template let:args>
-    <TabSelector {...args}/>
-</Template>
-
-<Story name="Default" args={{}}/>
-
-
 <Story name="Icons above labels">
 
     <div class="pb-8">
