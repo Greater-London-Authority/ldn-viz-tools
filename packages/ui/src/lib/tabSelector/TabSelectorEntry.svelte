@@ -1,16 +1,19 @@
 <script>
+    import { getContext } from 'svelte';
+
     export let value;
-    export let selectedValue;
     const keydownHandler = (ev) => {
         if (ev.key === "Enter" || ev.key === " ") {
-            selectedValue = value;
+            $selectedValue = value;
         }
     }
+
+    const {selectedValue} = getContext("selectedValue")
 </script>
 
-<div class="buttonGroupItem"
-     class:selected={selectedValue===value}
-     on:click={() => selectedValue=value}
+<div class="buttonGroupItem flex flex-col float-left text-center border-none pb-2 select-none"
+     class:selected={$selectedValue===value}
+     on:click={() => $selectedValue=value}
      on:keydown={keydownHandler}
      tabindex="0" role="button">
     <slot/>
@@ -24,16 +27,6 @@
 
     .buttonGroupItem {
         flex: 1 0 auto; /* scale so buttons fill width */
-
-        display: flex;
-        flex-direction: column;
-
-        float: left;
-        text-align: center;
-        border-bottom: none;
-        padding-bottom: 7px;
-
-        user-select: none;
     }
 </style>
 

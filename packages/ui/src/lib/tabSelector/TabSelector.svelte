@@ -1,18 +1,17 @@
 <script>
-    import Fa from 'svelte-fa/src/fa.svelte';
-    import {faFilter, faLayerGroup, faChartLine} from '@fortawesome/free-solid-svg-icons'
-    import TabSelectorEntry from "./TabSelectorEntry.svelte";
+    import {setContext} from 'svelte';
+    import {writable} from 'svelte/store';
 
-    export let value;
+    export let selectedValue;
+
+    const val = writable(selectedValue);
+    val.subscribe(newVal => selectedValue = newVal);
+
+    setContext("selectedValue", {
+        selectedValue: val
+    });
 </script>
 
-<div class="groupsNav">
-
-<slot/>
+<div class="flex">
+    <slot/>
 </div>
-
-<style>
-    .groupsNav {
-        display: flex;
-    }
-</style>

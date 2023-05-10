@@ -23,22 +23,22 @@
 <Story name="Icons above labels">
 
     <div class="pb-8">
-        Selected value: {selectedValue}
+        Selected value: <b>{selectedValue}</b>
     </div>
 
     <div style="width: 300px">
-        <TabSelector>
-            <TabSelectorEntry bind:selectedValue value="filter">
+        <TabSelector bind:selectedValue>
+            <TabSelectorEntry value="filter">
                 <Fa icon={faFilter} focusable="false"/>
                 Filters
             </TabSelectorEntry>
 
-            <TabSelectorEntry bind:selectedValue value="analysis">
+            <TabSelectorEntry value="analysis">
                 <Fa icon={faChartLine} focusable="false"/>
                 Analysis
             </TabSelectorEntry>
 
-            <TabSelectorEntry bind:selectedValue value="layers">
+            <TabSelectorEntry value="layers">
                 <Fa icon={faLayerGroup} focusable="false"/>
                 Layers
             </TabSelectorEntry>
@@ -54,18 +54,18 @@
     </div>
 
     <div style="width: 300px">
-        <TabSelector>
-            <TabSelectorEntry bind:selectedValue value="filter">
+        <TabSelector bind:selectedValue>
+            <TabSelectorEntry value="filter">
                 Filters
                 <Fa icon={faFilter} focusable="false"/>
             </TabSelectorEntry>
 
-            <TabSelectorEntry bind:selectedValue value="analysis">
+            <TabSelectorEntry value="analysis">
                 Analysis
                 <Fa icon={faChartLine} focusable="false"/>
             </TabSelectorEntry>
 
-            <TabSelectorEntry bind:selectedValue value="layers">
+            <TabSelectorEntry value="layers">
                 Layers
                 <Fa icon={faLayerGroup} focusable="false"/>
             </TabSelectorEntry>
