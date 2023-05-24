@@ -22,6 +22,15 @@
         {color: "#63C5B5", label: "baz", id: "baz"},
 
     ];
+
+    const options3 = [
+        {color: "rgb(103, 150, 245)", id: "water_fountains", label: "Water fountains", description: "Drinking fountains"},
+        {color: "rgb(54, 163, 153)", id: "outdoor", label: "Outdoor cool spaces", description: "These open spaces have been designated as Cool Spaces where relief can be sought during hot days."},
+        {color: "rgb(238, 38, 109)", id: "indoor", label: "Indoor cool spaces", description: "These venues have been designated as Cool Spaces where refuge can be sought during hot days."},
+        {color: "rgb(0, 255, 255)", id: "cooler_areas", label: "Cooler Areas", description: "Modelled average land surface temperature - the more visible this layer's information is, the cooler the area is likely to be."},
+        {color: "rgb(94, 161, 93)", id: "tree_canopies", label: "Tree canopy cover", description: "Indicative location of mature tree canopy cover in public open areas."},
+        {color: "rgb(65, 108, 137)", id: "water_courses", label: "Water courses", description: "Water cools the air, so places next to water courses can be less hot."},
+    ];
 </script>
 
 <Meta title="Ui/LayerControl" component={LayerControl}/>
@@ -65,5 +74,11 @@
 
     <div class="bg-core-grey-900 w-fit">
         <LayerControlWrapper options={options2} bind:selected={selected2} exclusive={true}/>
+    </div>
+</Story>
+
+<Story name="Cooler Spaces example">
+    <div class="bg-core-grey-900 w-fit">
+        <LayerControlWrapper options={options3} />
     </div>
 </Story>
