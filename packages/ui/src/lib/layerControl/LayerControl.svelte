@@ -51,6 +51,16 @@
                         fill={ checked ? color : "white"}
                         on:click={toggleChecked}
                 />
+
+                {#if toggleChecked}
+                    <circle cx="5" cy="5" r="3"
+                            title={`${label}`}
+                            stroke={"white"}
+                            fill={"none"}
+                            on:click={toggleChecked}
+                    />
+                {/if}
+
             </svg>
 
             <a target="_self" class="layerTitle"
