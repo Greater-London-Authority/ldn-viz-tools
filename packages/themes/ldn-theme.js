@@ -347,13 +347,12 @@ const ldnColors = {
 
 const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
-
+  darkMode: 'class',
   theme: {
     extend: {
       colors: ldnColors
     }
   },
-  darkMode: ['class', '[data-theme="dark"]'],
 
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')]
 };
