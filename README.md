@@ -31,7 +31,7 @@ lib/
 ├─ src/
 │ ├─ Button/
 │ │ ├─ Button.svelte
-│ │ ├─ Button.stories.ts
+│ │ ├─ Button.stories.svelte
 ```
 
 Storybook needs to be restarted when adding a new story to allow it to index the new file.
