@@ -15,7 +15,7 @@
 <Meta title="Ui/TabSelector" component={TabSelector} />
 
 <Story name="Icons above labels">
-	<div class="pb-8">
+	<div class="pb-8 dark:text-white">
 		Selected value: <b>{selectedValue}</b>
 	</div>
 
@@ -40,7 +40,7 @@
 </Story>
 
 <Story name="Icons below labels">
-	<div class="pb-8">
+	<div class="pb-8 dark:text-white">
 		Selected value: <b>{selectedValue}</b>
 	</div>
 

@@ -20,8 +20,8 @@
 <div
 	class={classNames(
 		$selectedValue === value
-			? 'border-b-2 border-core-grey-700 text-core-grey-700'
-			: 'text-core-grey-400 bg-core-grey-50 hover:bg-white hover:border-core-blue-600 dark:text-core-grey-200',
+			? 'border-b-2 border-core-grey-700 text-core-grey-700 dark:text-white dark:border-white'
+			: 'text-core-grey-400 bg-core-grey-50 hover:bg-white hover:border-core-blue-600 dark:text-core-grey-200 dark:bg-core-grey-700',
 		'flex-auto flex flex-col items-center py-2 select-none hover:border-b-2'
 	)}
 	on:click={() => ($selectedValue = value)}
