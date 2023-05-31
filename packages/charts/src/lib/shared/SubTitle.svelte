@@ -1,7 +1,1 @@
-<div class="subtitle"><slot /></div>
-
-<style>
-	.subtitle {
-		@apply mb-4 text-core-grey-500;
-	}
-</style>
+<div class="mb-4 text-core-grey-500 dark:text-core-grey-200"><slot /></div>

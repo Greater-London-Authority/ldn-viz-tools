@@ -57,6 +57,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"layercake": "^7.4.0"
+		"layercake": "^7.4.0",
+		"ldn-viz-tools-ui": "*"
 	}
 }
