@@ -1,5 +1,5 @@
 {
-	"name": "ldn-viz-tools-maps",
+	"name": "@ldn-viz/maps",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev --port 3004 --open",
