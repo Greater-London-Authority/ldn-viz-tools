@@ -7,7 +7,7 @@ This is a mono-repo containing several components:
 - the `ldn-viz-tools-ui` package is in [ui](./packages/ui); it contains general UI components like modals or sidebars
 - the `ldn-viz-tools-theme` package is in [theme](./packages/theme); it contains CSS and design tokens that are used by other components
 
-These packages are intended primarily for use in projects created by Greater London Authority's Intelligence Unit.
+These packages are intended primarily for use in projects created by [Greater London Authority](https://london.gov.uk/)'s [City Intelligence Unit](https://www.london.gov.uk/programmes-strategies/research-and-analysis).
 
 ### Tooling
 
