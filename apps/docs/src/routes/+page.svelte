@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { ScatterPlot } from 'ldn-viz-tools-charts';
-  import { Map } from 'ldn-viz-tools-maps';
-  import { Button } from 'ldn-viz-tools-ui';
+  import { ScatterPlot } from '@ldn-viz/charts';
+  import { Map } from '@ldn-viz/maps';
+  import { Button } from '@ldn-viz/ui';
 </script>
 
 <h1>Docs</h1>
