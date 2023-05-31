@@ -1,0 +1,41 @@
+name: Publish Packages to NPM
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout the git repository
+        uses: actions/checkout@v3
+
+      - name: Setup .npmrc file to publish to npm
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish packages
+        run: turbo run publish-packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A .changeset
+          git add packages/*/CHANGELOG.md
+          git add packages/*/package.json
+
+          git diff-index --quiet HEAD || git commit -m "Update CHANGELOG and package.json"
+
+      - name: Push committed changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
