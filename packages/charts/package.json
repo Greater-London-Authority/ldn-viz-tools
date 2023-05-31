@@ -40,7 +40,6 @@
 		"eslint-plugin-svelte3": "^4.0.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
-		"ldn-viz-tools-ui": "*",
 		"publint": "^0.1.9",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
@@ -58,6 +57,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"layercake": "^7.4.0"
+		"layercake": "^7.4.0",
+		"ldn-viz-tools-ui": "*"
 	}
 }
