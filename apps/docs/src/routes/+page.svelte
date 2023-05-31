@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { BarChart } from 'ldn-viz-tools-charts';
+  import { ScatterPlot } from 'ldn-viz-tools-charts';
   import { Map } from 'ldn-viz-tools-maps';
   import { Button } from 'ldn-viz-tools-ui';
 </script>
 
 <h1>Docs</h1>
-<BarChart />
+<ScatterPlot />
 <Map />
 <Button />
 
