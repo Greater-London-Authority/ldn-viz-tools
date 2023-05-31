@@ -16,12 +16,9 @@ jobs:
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-          
-      - name: Install turbo
-        run: npm install turbo
-        
+                  
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         
       - name: Publish packages
         run: turbo run publish-packages
