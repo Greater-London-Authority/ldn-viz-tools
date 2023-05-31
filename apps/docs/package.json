@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "@ldn-viz/docs",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite dev --port 3001 --open",
