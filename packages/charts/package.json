@@ -1,6 +1,6 @@
 {
-	"name": "ldn-viz-tools-charts",
-	"version": "0.0.1",
+	"name": "@ldn-viz/charts",
+	"version": "0.0.2",
 	"scripts": {
 		"dev": "vite dev --port 3003 --open",
 		"build": "vite build && npm run package",
@@ -58,6 +58,6 @@
 	"type": "module",
 	"dependencies": {
 		"layercake": "^7.4.0",
-		"ldn-viz-tools-ui": "*"
+		"@ldn-viz/ui": "*"
 	}
 }
