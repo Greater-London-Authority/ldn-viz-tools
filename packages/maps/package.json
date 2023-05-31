@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"scripts": {
 		"dev": "vite dev --port 3004 --open",
 		"build": "vite build && npm run package",
