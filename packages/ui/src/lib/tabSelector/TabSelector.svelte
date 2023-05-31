@@ -1,17 +1,17 @@
-<script>
-    import {setContext} from 'svelte';
-    import {writable} from 'svelte/store';
+<script lang="ts">
+	import { setContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
 
-    export let selectedValue;
+	export let selectedValue;
 
-    const val = writable(selectedValue);
-    val.subscribe(newVal => selectedValue = newVal);
+	const val: Writable<string> = writable(selectedValue);
+	val.subscribe((newVal) => (selectedValue = newVal));
 
-    setContext("selectedValue", {
-        selectedValue: val
-    });
+	setContext('selectedValue', {
+		selectedValue: val
+	});
 </script>
 
 <div class="flex">
-    <slot/>
+	<slot />
 </div>
