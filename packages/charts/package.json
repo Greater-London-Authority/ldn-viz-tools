@@ -1,6 +1,6 @@
 {
-	"name": "ldn-viz-tools-charts",
-	"version": "0.0.1",
+	"name": "@ldn-viz/charts",
+	"version": "0.0.2",
 	"scripts": {
 		"dev": "vite dev --port 3003 --open",
 		"build": "vite build && npm run package",
@@ -46,9 +46,18 @@
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^4.2.0",
-		"vitest": "^0.25.3"
+		"vitest": "^0.25.3",
+		"postcss": "^8.4.23",
+		"postcss-load-config": "^4.0.1",
+		"svelte-preprocess": "^5.0.3",
+		"autoprefixer": "^10.4.14",
+		"tailwindcss": "^3.3.1"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"layercake": "^7.4.0",
+		"@ldn-viz/ui": "*"
+	}
 }
