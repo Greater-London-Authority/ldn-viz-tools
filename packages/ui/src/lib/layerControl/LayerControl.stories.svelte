@@ -3,6 +3,7 @@
 
     import LayerControl from "./LayerControl.svelte";
     import LayerControlWrapper from "./LayerControlWrapper.svelte";
+    import LayerControlWithOpacity from "./LayerControlWithOpacity.svelte";
 
     let selected;
     const options1 = [
@@ -31,6 +32,9 @@
         {color: "rgb(94, 161, 93)", id: "tree_canopies", label: "Tree canopy cover", description: "Indicative location of mature tree canopy cover in public open areas."},
         {color: "rgb(65, 108, 137)", id: "water_courses", label: "Water courses", description: "Water cools the air, so places next to water courses can be less hot."},
     ];
+
+    let opacity1 = 0.5;
+    let opacity2 = 0.75;
 </script>
 
 <Meta title="Ui/LayerControl" component={LayerControl}/>
@@ -80,5 +84,20 @@
 <Story name="Cooler Spaces example">
     <div class="bg-core-grey-900 w-fit">
         <LayerControlWrapper options={options3} />
+    </div>
+</Story>
+
+
+<Story name="Creating individual LayerControl elements with opacity sliders">
+
+    <div>Opacities: {opacity1}, {opacity2}</div>
+
+    <div class="bg-core-grey-900 w-fit">
+        <LayerControlWithOpacity color="#9E0059" label="bar" bind:opacity={opacity1} />
+
+        <LayerControlWithOpacity color="#6DA7DE" label="foo" bind:opacity={opacity2} >
+            Some description of what this option is...
+        </LayerControlWithOpacity>
+
     </div>
 </Story>
