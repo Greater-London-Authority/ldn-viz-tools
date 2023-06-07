@@ -1,7 +1,5 @@
 <script lang="ts">
-
-
-  import { DocumentDownloadIcon } from "@rgossiaux/svelte-heroicons/outline";
+    import {DocumentDownloadIcon} from "@rgossiaux/svelte-heroicons/outline";
 
     import {csvFormat} from "d3-dsv";
 
@@ -36,6 +34,7 @@
     const download = (format === "JSON") ? downloadJSON : downloadCSV;
 </script>
 
-<button {title} on:click={download} {disabled} class="w-fit border border-core-grey-700 disabled:bg-core-grey-300">
-    {label}<DocumentDownloadIcon class="color-gray-900 w-4 h-4 inline" />
+<button {title} on:click={download} {disabled} class="flex items-center w-fit border border-core-grey-700 disabled:bg-core-grey-300">
+    {label}
+    <DocumentDownloadIcon class="color-gray-900 w-4 h-4 inline"/>
 </button>
