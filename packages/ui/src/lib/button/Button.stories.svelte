@@ -45,3 +45,7 @@
 		>Custom classes applied</Button
 	>
 </Story>
+
+<Story name="Full width">
+	<Button class="w-full">Custom classes applied</Button>
+</Story>
