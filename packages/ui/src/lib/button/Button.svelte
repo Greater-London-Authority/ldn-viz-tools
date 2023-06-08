@@ -23,7 +23,7 @@
 	let buttonClass: string;
 
 	$: buttonClass = classNames(
-		'px-4 py-2 text-center inline-flex',
+		'px-4 py-2 inline-flex justify-center',
 		sizeClasses[size],
 		styleClasses[style],
 		$$props.disabled && 'cursor-not-allowed text-core-grey-300 border-core-grey-200 opacity-50',
