@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Button} from 'ldn-viz-tools-ui';
+	import { Button } from '@ldn-viz/ui';
 </script>
 
 <div class="flex justify-end">
