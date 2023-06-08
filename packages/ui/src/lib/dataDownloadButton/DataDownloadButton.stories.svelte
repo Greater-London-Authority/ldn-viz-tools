@@ -27,7 +27,9 @@
 </Story>
 
 <Story name="Label on button and custom data">
-    <DataDownloadButton {data} label="Download!" tooltip="Download this - it's very important!"/>
+    <DataDownloadButton {data} tooltip="Download this - it's very important!">
+        Download!
+    </DataDownloadButton>
 </Story>
 
 <Story name="Disabled">
