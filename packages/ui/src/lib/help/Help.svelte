@@ -12,9 +12,7 @@
         placement: "bottom",
         middleware: [
             shift()
-        ],
-
-
+        ]
     });
 
     let showTooltip = false;
