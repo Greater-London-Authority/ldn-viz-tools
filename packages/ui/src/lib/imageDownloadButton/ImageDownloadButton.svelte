@@ -3,8 +3,6 @@
 
     export let svgNode;
     export let scaleFactor = 2;
-    export let label = "";
-    export let title = "Download image";
     export let filename;
     export let disabled = false;
     export let format: "PNG" | "SVG" | undefined;
@@ -69,8 +67,8 @@
 </script>
 
 
-<button {title} on:click={download} {disabled}
+<button on:click={download} {disabled}
         class="flex items-center w-fit border border-core-grey-700 disabled:bg-core-grey-300">
-    {label}
+    <slot>Download Image</slot>
     <DocumentDownloadIcon class="color-gray-900 w-4 h-4 inline"/>
 </button>

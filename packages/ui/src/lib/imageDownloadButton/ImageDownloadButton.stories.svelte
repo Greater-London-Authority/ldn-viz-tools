@@ -38,8 +38,11 @@
         <circle cx="10" cy="10" r="10" fill="blue"/>
     </svg>
 
-    <ImageDownloadButton svgNode={svgRef4} label="Download" tooltip="Click to download!"
-                         filename="I was downloaded from Storybook.png"/>
+    <ImageDownloadButton svgNode={svgRef4}
+                         tooltip="Click to download!"
+                         filename="I was downloaded from Storybook.png">
+        Download
+    </ImageDownloadButton>
 </Story>
 
 
