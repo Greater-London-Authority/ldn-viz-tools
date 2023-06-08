@@ -6,6 +6,7 @@
     export let filename;
     export let disabled = false;
     export let format: "PNG" | "SVG" | undefined;
+    export let tooltip;
 
     const downloadFromURL = (url) => {
         if (!filename){
@@ -68,7 +69,9 @@
 
 
 <button on:click={download} {disabled}
-        class="flex items-center w-fit border border-core-grey-700 disabled:bg-core-grey-300">
+        class="flex items-center w-fit border border-core-grey-700 disabled:bg-core-grey-300"
+        title={tooltip}
+>
     <slot>Download Image</slot>
     <DocumentDownloadIcon class="color-gray-900 w-4 h-4 inline"/>
 </button>
