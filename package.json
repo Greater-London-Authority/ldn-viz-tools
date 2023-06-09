@@ -1,6 +1,8 @@
 {
   "private": true,
   "scripts": {
+    "clean": "rm -rf packages/*/.svelte-kit packages/*/.turbo packages/*/dist",
+    "docs": "npm run storybook -w apps/docs",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
