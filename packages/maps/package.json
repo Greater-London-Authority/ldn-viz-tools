@@ -55,6 +55,6 @@
 		"@deck.gl/core": "^8.9.18",
 		"@deck.gl/layers": "^8.9.18",
 		"@deck.gl/mapbox": "^8.9.18",
-		"svelte-maplibre": "^0.2.1"
+		"svelte-maplibre": "^0.2.2"
 	}
 }
