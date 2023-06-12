@@ -41,7 +41,7 @@
 
 
 <Story name="Light OS Basemap">
-    <p>This is our default light basemap - it's the OS's <a
+    <p>This is our default light basemap - it's the OS's <a class="underline"
             href="https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets">
         OS_VTS_3857_Light.json</a> stylesheet.</p>
 
@@ -58,6 +58,7 @@
 
 <Story name="Greyscale OS Basemap">
     <p>This is the greyscale basemap used on the Cool Spaces map. - it's very similar to the OS's <a
+            class="underline"
             href="https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets">
         OS_VTS_3857_Greyscale.json</a> stylesheet, with a few tweaks.</p>
 
@@ -87,6 +88,7 @@
 
 <Story name="Dark OS Basemap">
     <p>This was created by the OS, inspired by Mike Brondbjerg's dark gray theme with muted buildings. It is <a
+            class="underline"
             href="https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets">OS_VTS_3857_Dark.json</a></p>
 
     <MapLibre
