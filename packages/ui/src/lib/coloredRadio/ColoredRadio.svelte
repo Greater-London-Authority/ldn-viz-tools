@@ -23,7 +23,7 @@
          role="radio"
          aria-checked={checked ? "true" : "false"}
          tabindex="0"
-         aria-label={`${checked ? 'Checked' : 'Unchecked'} checkbox for ${label}`}
+         aria-label={label}
          on:keydown={keydownHandler}
         class=""
     >
