@@ -2,11 +2,11 @@
 	import TabLabel from './TabLabel.svelte';
 	import TabList from './TabList.svelte';
 
-	import { setContext } from 'svelte';
+	import { setContext, type ComponentType } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
 	export let selectedValue;
-	export let collapsed;
+	export let collapsed = false;
 
 	const val: Writable<string> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
@@ -20,7 +20,7 @@
 		collapsed: isCollapsed
 	});
 
-	export let tabs = [];
+	export let tabs: { id: string; label: string; icon: ComponentType }[] = [];
 </script>
 
 <div
