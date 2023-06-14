@@ -19,8 +19,10 @@
 
 <div class="flex gap-2 items-center content-center" >
     <svg viewBox="0 0 10 10" height="1.5em"
-         role="button" tabindex="0"
-         aria-label={`${checked ? 'Checked' : 'Unchecked'} checkbox for ${label}`}
+         tabindex="0"
+         role="checkbox"
+         aria-checked={checked ? "true" : "false"}
+         aria-label={label}
          on:keydown={keydownHandler}
         class=""
     >
