@@ -6,19 +6,26 @@
     import {writable, type Writable} from 'svelte/store';
 
     export let selectedValue;
+    export let collapsed;
 
     const val: Writable<string> = writable(selectedValue);
     val.subscribe((newVal) => (selectedValue = newVal));
-
     setContext('selectedValue', {
         selectedValue: val
     });
+
+    const isCollapsed: Writable<boolean> = writable(collapsed);
+    isCollapsed.subscribe((newVal) => (collapsed = newVal));
+    setContext('collapsed', {
+        collapsed: isCollapsed
+    });
+
 
     export let tabs = []
 </script>
 
 
-<div id="sidebar" class="bg-core-grey-800 h-screen flex">
+<div id="sidebar" class="bg-core-grey-800 h-screen flex" class:collapsed={collapsed} class:expanded={!collapsed}>
 
     <TabList>
         {#each tabs as tab}
@@ -36,7 +43,12 @@
 
 
 <style>
-    #sidebar {
+    .expanded {
         width: 488px;
+    }
+
+    .collapsed {
+        width: 80px;
+        overflow-x: hidden;
     }
 </style>

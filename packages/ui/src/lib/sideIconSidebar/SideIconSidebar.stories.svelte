@@ -16,6 +16,8 @@
         {id: "layers", label: "Layers", icon: MapIcon}
     ]
 
+    let collapsed = true;
+
 </script>
 
 <Meta title="Ui/SideIconSidebar" component={SideIconSidebarWrapper}/>
@@ -63,7 +65,8 @@
 <Story name="Constructed from nested components">
 
     <p>
-        Rather than defining the list of tabs with an array, we can encode it as a series of <code>&lt;TabLabel&gt;</code> components inside a <code>&lt;TabList&gt;</code> component.
+        Rather than defining the list of tabs with an array, we can encode it as a series of
+        <code>&lt;TabLabel&gt;</code> components inside a <code>&lt;TabList&gt;</code> component.
         This allows greater flexibility over the appearance of tab labels (e.g., the use of an alternative icon set).
     </p>
 
@@ -116,3 +119,36 @@
         </div>
     </SideIconSidebar>
 </Story>
+
+
+<Story name="Collapsed">
+    <SideIconSidebar {collapsed}>
+
+        <TabList>
+            <TabLabel tabId="markers">
+                <LocationMarkerIcon class="h-5 w-5" style="fill: white" aria-hidden="true"/>
+                Markers
+            </TabLabel>
+
+            <TabLabel tabId="filters">
+                <FilterIcon class="h-5 w-5" style="fill: white" aria-hidden="true"/>
+                Filters
+            </TabLabel>
+
+            <TabLabel tabId="analysis">
+                <ChartBarIcon class="h-5 w-5" style="fill: white" aria-hidden="true"/>
+                Analysis
+            </TabLabel>
+
+            <TabLabel tabId="layers">
+                <MapIcon class="h-5 w-5" style="fill: white" aria-hidden="true"/>
+                Layers
+            </TabLabel>
+        </TabList>
+
+        <div class="p-6 text-white">
+           This sidebar is empty...
+        </div>
+    </SideIconSidebar>
+</Story>
+
