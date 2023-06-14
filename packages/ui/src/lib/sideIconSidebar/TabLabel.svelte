@@ -8,10 +8,6 @@
 	const { collapsed } = getContext<{ collapsed: Writable<boolean> }>('collapsed');
 
 	const handleSelection = () => {
-		console.log(
-			`Handling selection: tabID ${tabId}, collapsed ${$collapsed}, selectedValue ${$selectedValue}`
-		);
-
 		if ($collapsed) {
 			// if we're collapsed, clicking any tab label will open that tab
 			$collapsed = false;
