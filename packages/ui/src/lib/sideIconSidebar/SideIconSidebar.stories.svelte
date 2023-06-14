@@ -96,7 +96,7 @@
 			</TabLabel>
 		</TabList>
 
-		<div class="p-6">
+		<div class="p-6" role="tabpanel">
 			{#if selectedValue === 'markers'}
 				<div class="text-white">
 					Markers is selected, so we'd render a
@@ -150,6 +150,6 @@
 			</TabLabel>
 		</TabList>
 
-		<div class="p-6 text-white">This sidebar is empty...</div>
+		<div class="p-6 text-white" role="tabpanel">This sidebar is empty...</div>
 	</SideIconSidebar>
 </Story>

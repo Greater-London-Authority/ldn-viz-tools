@@ -37,7 +37,7 @@
 	on:click={handleSelection}
 	on:keydown={keydownHandler}
 	tabindex="0"
-	role="button"
+	role="tab"
 	class:bg-core-blue-600={tabId === $selectedValue}
 	class="w-20 h-20 p-2 flex flex-col items-center justify-center text-white text-xs text-center select-none hover:bg-core-grey-600"
 >
