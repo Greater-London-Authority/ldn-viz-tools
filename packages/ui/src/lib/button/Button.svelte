@@ -1,8 +1,7 @@
 <script lang="ts">
-	import classNames from 'classnames';
-
 	export let style: 'primary' | 'secondary' | 'ghost' = 'primary';
 	export let size: 'xs' | 'sm' | 'base' | 'lg' | 'xl' = 'base';
+	export let disabled: boolean = false;
 	export let href: string | undefined = undefined;
 	export let type: 'button' | 'submit' = 'button';
 
@@ -22,11 +21,17 @@
 
 	let buttonClass: string;
 
+	const classNames = (...classes: string[]) => {
+		return classes.filter(Boolean).join(' ');
+	};
+
 	$: buttonClass = classNames(
 		'px-4 py-2 inline-flex justify-center',
 		sizeClasses[size],
 		styleClasses[style],
-		$$props.disabled && 'cursor-not-allowed text-core-grey-300 border-core-grey-200 opacity-50',
+		disabled === true
+			? 'cursor-not-allowed text-core-grey-300 border-core-grey-200 opacity-50'
+			: '',
 		$$props.class
 	);
 </script>
