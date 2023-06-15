@@ -1,6 +1,6 @@
 <script>
     import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
-    import ColoredRadio from './ColoredRadio.svelte';
+    import ColoredRadioButton from './ColoredRadioButton.svelte';
     import ColoredRadioButtonGroup from "./ColoredRadioButtonGroup.svelte";
 
     let checked = false;
@@ -14,17 +14,17 @@
     ]
 </script>
 
-<Meta title="Ui/ColoredRadio" component={ColoredRadio}/>
+<Meta title="Ui/ColoredRadioButton" component={ColoredRadioButton}/>
 
 <Template let:args>
-    <ColoredRadio {...args}></ColoredRadio>
+    <ColoredRadioButton {...args}></ColoredRadioButton>
 </Template>
 
 <Story name="Default">
     <p>selectedId: {selectedId}</p>
 
     <p>Checked: {!!selectedId}</p>
-    <ColoredRadio color="#008D48" bind:selectedId label="Foo" id="foo" name="isolated"/>
+    <ColoredRadioButton color="#008D48" bind:selectedId label="Foo" id="foo" name="isolated"/>
 </Story>
 
 <Story name="Multiple options">
@@ -36,9 +36,9 @@
 
     <p>Selected id: {selectedId}</p>
 
-    <ColoredRadio color="#00AEEF" label="Foo" id="foo" name="group1" bind:selectedId/>
-    <ColoredRadio color="#008D48" label="Bar" id="bar" name="group1" bind:selectedId/>
-    <ColoredRadio color="#9E0059" label="Baz" id="baz" name="group1" bind:selectedId/>
+    <ColoredRadioButton color="#00AEEF" label="Foo" id="foo" name="group1" bind:selectedId/>
+    <ColoredRadioButton color="#008D48" label="Bar" id="bar" name="group1" bind:selectedId/>
+    <ColoredRadioButton color="#9E0059" label="Baz" id="baz" name="group1" bind:selectedId/>
 </Story>
 
 <Story name="ColoredRadioGroup">
