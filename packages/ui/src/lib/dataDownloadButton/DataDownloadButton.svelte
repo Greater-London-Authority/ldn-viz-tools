@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { DocumentDownloadIcon } from '@rgossiaux/svelte-heroicons/outline';
+	import Button from '../button/Button.svelte';
 
 	import { csvFormat } from 'd3-dsv';
 
 	export let format: 'CSV' | 'JSON' | undefined;
-	export let tooltip = 'Download data';
 	export let data: any;
 	export let filename: string;
 
@@ -33,12 +32,6 @@
 	const download = format === 'JSON' ? downloadJSON : downloadCSV;
 </script>
 
-<button
-	title={tooltip}
-	on:click={download}
-	{disabled}
-	class="flex items-center w-fit border border-core-grey-700 disabled:bg-core-grey-300"
->
+<Button on:click={download} {disabled} {...$$restProps}>
 	<slot />
-	<DocumentDownloadIcon class="color-gray-900 w-4 h-4 inline" />
-</button>
+</Button>
