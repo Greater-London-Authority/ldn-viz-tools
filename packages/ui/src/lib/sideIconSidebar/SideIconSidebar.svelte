@@ -2,7 +2,7 @@
 	import { setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
-	export let selectedValue = '';
+	export let selectedValue: string | undefined = undefined;
 	export let collapsed = false;
 
 	const val: Writable<string> = writable(selectedValue);
