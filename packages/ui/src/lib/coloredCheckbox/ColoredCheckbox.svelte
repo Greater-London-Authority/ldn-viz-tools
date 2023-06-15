@@ -8,7 +8,7 @@
 </script>
 
 
-<input class="absolute p-0 border-0 h-px w-px overflow-hidden" style="clip: rect(1px, 1px, 1px, 1px);" id={inputID}
+<input class="sr-only" id={inputID}
        bind:checked={checked}
        type="checkbox"
 >
