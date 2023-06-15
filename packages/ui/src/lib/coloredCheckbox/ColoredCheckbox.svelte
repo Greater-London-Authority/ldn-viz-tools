@@ -1,46 +1,47 @@
 <script lang="ts">
-    import {createEventDispatcher} from 'svelte';
-
     export let color: string;
     export let checked = false;
     export let label: string;
-    const dispatch = createEventDispatcher();
-    const toggleChecked = () => {
-        checked = !checked;
-        dispatch('click', {})
-    }
-    const keydownHandler = (ev) => {
-        if (ev.key === "Enter" || ev.key === " ") {
-            toggleChecked();
-        }
-    }
+    export let id: string;
+
+    let inputID = `input-${id}`;
 </script>
 
 
-<div class="flex gap-2 items-center content-center" >
-    <svg viewBox="0 0 10 10" height="1.5em"
-         tabindex="0"
-         role="checkbox"
-         aria-checked={checked ? "true" : "false"}
-         aria-label={label}
-         on:keydown={keydownHandler}
-        class=""
-    >
+<input class="absolute p-0 border-0 h-px w-px overflow-hidden" style="clip: rect(1px, 1px, 1px, 1px);" id={inputID}
+       bind:checked={checked}
+       type="checkbox"
+>
+
+<label class="flex focus:border-gray-500 focus:border-2 focus:border-dashed" for={inputID}>
+    <svg viewBox="0 0 10 10" height="1.5em" aria-hidden="true">
         <rect x="1" y="1" width="8" height="8"
-                title={`${label}`}
-                stroke={color}
-                fill={ checked ? color : "white"}
-                on:click={toggleChecked}
+              title={`${label}`}
+              stroke={color}
+              fill={ checked ? color : "white"}
         />
 
-        {#if toggleChecked}
+        {#if checked}
             <rect x="2" y="2" width="6" height="6"
-                    title={`${label}`}
-                    stroke={"white"}
-                    fill={"none"}
-                    on:click={toggleChecked}
+                  title={`${label}`}
+                  stroke={"white"}
+                  fill={"none"}
             />
         {/if}
     </svg>
-    <span>{label}</span>
-</div>
+    {label}
+</label>
+
+
+<style>
+    /* highlight label that has focus... */
+    input:focus + label {
+        outline: dashed 2px lightgrey;
+        width: fit-content;
+    }
+
+    /* but not if it was focused by clicking on (rather than with keyboard) */
+    input:focus:not(:focus-visible) + label {
+        outline: none;
+    }
+</style>

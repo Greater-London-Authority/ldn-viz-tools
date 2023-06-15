@@ -23,7 +23,7 @@
 		component.
 	</p>
 
-	<ColoredRadio color="#00AEEF" label="Foo"/>
-	<ColoredRadio color="#008D48" label="Bar"/>
-	<ColoredRadio color="#9E0059" label="Baz"/>
+	<ColoredRadio color="#00AEEF" label="Foo" id="foo"/>
+	<ColoredRadio color="#008D48" label="Bar" id="bar"/>
+	<ColoredRadio color="#9E0059" label="Baz" id="baz"/>
 </Story>

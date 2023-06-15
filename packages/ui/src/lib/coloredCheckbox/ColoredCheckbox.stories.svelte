@@ -18,7 +18,7 @@
 
 <Story name="Multiple checkboxes">
 
-    <ColoredCheckbox color="#00AEEF" label="Foo"/>
-    <ColoredCheckbox color="#008D48" label="Bar"/>
-    <ColoredCheckbox color="#9E0059" label="Baz"/>
+    <ColoredCheckbox color="#00AEEF" label="Foo" id="foo"/>
+    <ColoredCheckbox color="#008D48" label="Bar" id="bar"/>
+    <ColoredCheckbox color="#9E0059" label="Baz" id="baz"/>
 </Story>
