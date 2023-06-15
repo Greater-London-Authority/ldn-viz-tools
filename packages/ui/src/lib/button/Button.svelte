@@ -11,6 +11,13 @@
 		ghost: 'bg-transparent hover:bg-core-grey-100 dark:text-white dark:hover:bg-core-grey-400'
 	};
 
+	const disabledClasses = {
+		primary: 'cursor-not-allowed text-core-grey-200 border-core-grey-300',
+		secondary:
+			'cursor-not-allowed bg-core-grey-500 text-core-grey-200 border-core-grey-300 dark:bg-core-grey-500',
+		ghost: 'cursor-not-allowed text-core-grey-300 border-core-grey-300 dark:text-core-grey-300'
+	};
+
 	const sizeClasses = {
 		xs: 'text-xs',
 		sm: 'text-sm',
@@ -29,9 +36,7 @@
 		'px-4 py-2 inline-flex justify-center',
 		sizeClasses[size],
 		styleClasses[style],
-		disabled === true
-			? 'cursor-not-allowed text-core-grey-300 border-core-grey-200 opacity-50'
-			: '',
+		disabled === true ? disabledClasses[style] : '',
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
