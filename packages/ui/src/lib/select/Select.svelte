@@ -7,6 +7,7 @@
 		ListboxOptions
 	} from '@rgossiaux/svelte-headlessui';
 
+	import { CheckIcon } from '@rgossiaux/svelte-heroicons/solid';
 	import { createEventDispatcher } from 'svelte';
 	import { classNames } from '../utils/classNames';
 
@@ -76,6 +77,11 @@
 					)}
 				let:selected
 			>
+				{#if selected}
+					<span class={'absolute inset-y-0 right-0 flex items-center pr-4'}>
+						<CheckIcon class="h-5 w-5" aria-hidden="true" />
+					</span>
+				{/if}
 				<span class="block truncate">
 					{option.label}
 				</span>
