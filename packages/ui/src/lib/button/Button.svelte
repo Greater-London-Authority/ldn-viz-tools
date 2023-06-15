@@ -32,6 +32,7 @@
 		disabled === true
 			? 'cursor-not-allowed text-core-grey-300 border-core-grey-200 opacity-50'
 			: '',
+		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
 </script>
@@ -40,6 +41,7 @@
 	this={href ? 'a' : 'button'}
 	type={href ? undefined : type}
 	class={buttonClass}
+	{href}
 	on:click
 	on:change
 	on:keydown

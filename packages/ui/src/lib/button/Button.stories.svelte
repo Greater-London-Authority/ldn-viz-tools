@@ -72,3 +72,8 @@
 <Story name="Full width">
 	<Button class="w-full">Custom classes applied</Button>
 </Story>
+
+<Story name="With Link">
+	<Button href="#">Link</Button>
+	<Button disabled href="#">Link</Button>
+</Story>
