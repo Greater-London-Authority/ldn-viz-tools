@@ -1,16 +1,23 @@
 <script lang="ts">
-    export let color: string;
-    export let checked = false;
+    export let color = "black";
+    export let selectedId = false;
     export let label: string;
     export let id: string;
+    export let name: string | undefined;
 
     let inputID = `input-${id}`;
+
+    $: {
+        console.log(selectedId)
+    }
 </script>
 
 
 <input class="sr-only" id={inputID}
-       bind:checked={checked}
-       type="checkbox"
+       bind:group={selectedId}
+       type="radio"
+       name={name}
+       value={id}
 >
 
 <label class="flex focus:border-gray-500 focus:border-2 focus:border-dashed" for={inputID}>
@@ -18,10 +25,10 @@
         <circle cx="5" cy="5" r="4"
                 title={`${label}`}
                 stroke={color}
-                fill={ checked ? color : "white"}
+                fill={ (selectedId === id) ? color : "white"}
         />
 
-        {#if checked}
+        {#if (selectedId === id)}
             <circle cx="5" cy="5" r="3"
                     title={`${label}`}
                     stroke={"white"}
