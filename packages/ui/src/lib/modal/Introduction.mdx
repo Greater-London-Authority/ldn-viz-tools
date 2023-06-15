@@ -1,21 +1,11 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Ui/Button" />
+<Meta title="Ui/Modal" />
 
-# Button
+# Modal
 
-The `Button` component has several *variants*: [`default`](./?path=/story/ui-button--default),
-[`primary`](./?path=/story/ui-button--primary), [`secondary`](./?path=/story/ui-button--default),
-and [`ghost`](./?path=/story/ui-button--default).
+The `Modal` component is used to transiently display content on top of any other part of the user interface.
 
-It is available in several [sizes](./?path=/story/ui-button--sizes): `xs`, `sm`, `base`, `lg`, and `xl`;
-it can be [made full-width](./?path=/story/ui-button--full-width) by applying the class `w-full`.
+It supports "light dismiss": it can be closed by clicking on the cross/close icon, by pressing the Escape key, or by clicking on anything other the modal.
 
-It can [contain an icon](./?path=/story/ui-button--with-icon).
-
-By providing the `href` prop it [can be used](./?path=/story/ui-button--with-link) to create something with the visual
-appearance of a button but the functionality of an `<a>` link element.
-This is inappropriate for most navigational links, as users typically expect clicking a button to trigger an action
-other than navigation between pages; however, it has some uses such as the "Start exploring the data" call-to-action
-button on the [Survey of Londoners Explorer](https://apps.london.gov.uk/survey-of-londoners/).
-
+It allows a `title` and (optionally) a `description` to be provided as props; arbitrary additional content is accepted by a slot.
