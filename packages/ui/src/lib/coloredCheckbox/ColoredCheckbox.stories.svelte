@@ -11,7 +11,7 @@
         {id: "bus", label: "Bus stops", color: "#00AEEF"},
         {id: "train", label: "Train stations", color: "#008D48"},
         {id: "underground", label: "Underground stations", color: "#9E0059"},
-
+        {id: "taxi", label: "Taxi ranks", color: "firebrick", disabled: true},
     ]
 
 </script>
@@ -27,7 +27,7 @@
     <ColoredCheckboxGroup options={optionsForGroup} bind:selectedOptions={selectedOptions} />
 </Story>
 
-<Story name="ColoredCheckboxGroup - disbaled buttons">
+<Story name="ColoredCheckboxGroup - disabled buttons">
     <p>selectedOptions: {JSON.stringify(selectedOptions)}</p>
     <ColoredCheckboxGroup options={optionsForGroup} bind:selectedOptions={selectedOptions} buttonsHidden />
 </Story>
@@ -37,6 +37,12 @@
     <p>Checked: {checked}</p>
     <ColoredCheckbox color="#008D48" bind:checked label="Foo"/>
 </Story>
+
+<Story name="Single checkbox (disabled)">
+    <p>Checked: {checked}</p>
+    <ColoredCheckbox color="#008D48" bind:checked label="Foo" disabled/>
+</Story>
+
 
 <Story name="Multiple checkboxes not in group">
 

@@ -1,8 +1,12 @@
 <script lang="ts">
-    export let color: string;
+    import {classNames} from '../utils/classNames';
+
+    export let color = "black";
     export let checked = false;
     export let label: string;
     export let id: string;
+
+    export let disabled = false;
 
     let inputID = `input-${id}`;
 </script>
@@ -11,9 +15,10 @@
 <input class="sr-only" id={inputID}
        bind:checked={checked}
        type="checkbox"
+       {disabled}
 >
 
-<label class="flex focus:border-gray-500 focus:border-2 focus:border-dashed" for={inputID}>
+<label class={classNames("flex focus:border-gray-500 focus:border-2 focus:border-dashed", disabled ? 'opacity-40' : '' )} for={inputID}>
     <svg viewBox="0 0 10 10" height="1.5em" aria-hidden="true">
         <rect x="1" y="1" width="8" height="8"
               title={`${label}`}
