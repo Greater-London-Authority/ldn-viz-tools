@@ -10,7 +10,8 @@
     let optionsForGroup = [
         {id: "bus", label: "Bus stops", color: "#00AEEF"},
         {id: "train", label: "Train stations", color: "#008D48"},
-        {id: "underground", label: "Underground stations", color: "#9E0059"}
+        {id: "underground", label: "Underground stations", color: "#9E0059"},
+        {id: "taxi", label: "Taxi ranks", color: "firebrick", disabled: true},
     ]
 </script>
 
@@ -41,6 +42,15 @@
     <p>Checked: {!!selectedId}</p>
     <ColoredRadioButton color="#008D48" bind:selectedId label="Foo" id="foo" name="isolated"/>
 </Story>
+
+<Story name="Single ColoredRadioButton (disabled)">
+    <p>selectedId: {selectedId}</p>
+
+    <p>Checked: {!!selectedId}</p>
+    <ColoredRadioButton color="#008D48" bind:selectedId label="Foo" id="foo" name="isolated" disabled/>
+</Story>
+
+
 
 <Story name="Multiple ColoredRadioButtons not in group">
 

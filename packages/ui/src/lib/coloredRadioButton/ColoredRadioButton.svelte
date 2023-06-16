@@ -1,9 +1,13 @@
 <script lang="ts">
+    import {classNames} from '../utils/classNames';
+
     export let color = "black";
     export let selectedId = false;
     export let label: string;
     export let id: string;
     export let name: string | undefined;
+
+    export let disabled = false;
 
     let inputID = `input-${id}`;
 
@@ -18,9 +22,10 @@
        type="radio"
        name={name}
        value={id}
+       {disabled}
 >
 
-<label class="flex focus:border-gray-500 focus:border-2 focus:border-dashed" for={inputID}>
+<label class={classNames("flex focus:border-gray-500 focus:border-2 focus:border-dashed", disabled ? 'opacity-40' : '')} for={inputID}>
     <svg viewBox="0 0 10 10" height="1.5em" aria-hidden="true">
         <circle cx="5" cy="5" r="4"
                 title={`${label}`}
