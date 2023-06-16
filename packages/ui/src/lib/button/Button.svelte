@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let style: 'primary' | 'secondary' | 'ghost' = 'primary';
 	export let size: 'xs' | 'sm' | 'base' | 'lg' | 'xl' = 'base';
-	export let disabled: boolean = false;
-	export let href: string | undefined = undefined;
+	export let disabled = false;
+	export let href = '';
 	export let type: 'button' | 'submit' = 'button';
 
 	const styleClasses = {
