@@ -47,6 +47,7 @@
 	type={href ? undefined : type}
 	class={buttonClass}
 	{href}
+	{disabled}
 	on:click
 	on:change
 	on:keydown
