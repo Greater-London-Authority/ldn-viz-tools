@@ -20,14 +20,29 @@
     <ColoredRadioButton {...args}></ColoredRadioButton>
 </Template>
 
-<Story name="Default">
+<Story name="ColoredRadioGroup">
+    <p>Selected id: {selectedId}</p>
+
+    <ColoredRadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId/>
+</Story>
+
+
+<Story name="ColoredRadioGroup - no clear button">
+    <p>Selected id: {selectedId}</p>
+
+    <ColoredRadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId buttonsHidden/>
+</Story>
+
+
+
+<Story name="Single ColoredRadioButton">
     <p>selectedId: {selectedId}</p>
 
     <p>Checked: {!!selectedId}</p>
     <ColoredRadioButton color="#008D48" bind:selectedId label="Foo" id="foo" name="isolated"/>
 </Story>
 
-<Story name="Multiple options">
+<Story name="Multiple ColoredRadioButtons not in group">
 
     <p>The Colored Radio button is intended for use when only one option can be selected at a time.
         For this behaviour to work correctly for a set of <code>ColoredRadio</code> components, assign them the same
@@ -39,19 +54,6 @@
     <ColoredRadioButton color="#00AEEF" label="Foo" id="foo" name="group1" bind:selectedId/>
     <ColoredRadioButton color="#008D48" label="Bar" id="bar" name="group1" bind:selectedId/>
     <ColoredRadioButton color="#9E0059" label="Baz" id="baz" name="group1" bind:selectedId/>
-</Story>
-
-<Story name="ColoredRadioGroup">
-    <p>Selected id: {selectedId}</p>
-
-    <ColoredRadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId/>
-</Story>
-
-
-<Story name="ColoredRadioGroup - no clear button">
-    <p>Selected id: {selectedId}</p>
-
-    <ColoredRadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId hideClearButton/>
 </Story>
 
 

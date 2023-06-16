@@ -3,11 +3,11 @@
     export let selectedId: string;
     export let name: string;
     export let options: { id: string, label: string }[] = [];
-    export let hideClearButton = false;
+    export let buttonsHidden = false;
 </script>
 
 <div>
-    {#if !hideClearButton}
+    {#if !buttonsHidden}
         <button on:click={() => selectedId = undefined}>Clear</button>
     {/if}
 
