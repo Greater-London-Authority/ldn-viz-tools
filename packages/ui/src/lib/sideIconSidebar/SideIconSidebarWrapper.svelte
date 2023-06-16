@@ -1,6 +1,6 @@
 <script lang="ts">
-	import TabLabel from './TabLabel.svelte';
-	import TabList from './TabList.svelte';
+	import SideIconSidebarTabLabel from './SideIconSidebarTabLabel.svelte';
+	import SideIconSidebarTabList from './SideIconSidebarTabList.svelte';
 
 	import { setContext, type ComponentType } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
@@ -29,14 +29,14 @@
 	class:collapsed
 	class:expanded={!collapsed}
 >
-	<TabList>
+	<SideIconSidebarTabList>
 		{#each tabs as tab}
-			<TabLabel tabId={tab.id}>
+			<SideIconSidebarTabLabel tabId={tab.id}>
 				<svelte:component this={tab.icon} class="h-5 w-5 mb-1" aria-hidden="true" />
 				{tab.label}
-			</TabLabel>
+			</SideIconSidebarTabLabel>
 		{/each}
-	</TabList>
+	</SideIconSidebarTabList>
 
 	<div class="p-6" role="tabpanel">
 		<slot />

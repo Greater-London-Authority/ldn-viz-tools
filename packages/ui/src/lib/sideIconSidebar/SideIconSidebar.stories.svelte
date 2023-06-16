@@ -9,8 +9,8 @@
 	} from '@rgossiaux/svelte-heroicons/solid';
 	import SideIconSidebar from './SideIconSidebar.svelte';
 	import SideIconSidebarWrapper from './SideIconSidebarWrapper.svelte';
-	import TabLabel from './TabLabel.svelte';
-	import TabList from './TabList.svelte';
+	import SideIconSidebarTabLabel from './SideIconSidebarTabLabel.svelte';
+	import SideIconSidebarTabList from './SideIconSidebarTabList.svelte';
 
 	let selectedValue = 'filters';
 
@@ -69,32 +69,32 @@
 <Story name="Constructed from nested components">
 	<p>
 		Rather than defining the list of tabs with an array, we can encode it as a series of
-		<code>&lt;TabLabel&gt;</code> components inside a <code>&lt;TabList&gt;</code> component. This allows
+		<code>&lt;SideIconSidebaTabLabel&gt;</code> components inside a <code>&lt;SideIconSidebaTabList&gt;</code> component. This allows
 		greater flexibility over the appearance of tab labels (e.g., the use of an alternative icon set).
 	</p>
 
 	<SideIconSidebar bind:selectedValue>
-		<TabList>
-			<TabLabel tabId="markers">
+		<SideIconSidebarTabList>
+			<SideIconSidebarTabLabel tabId="markers">
 				<LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Markers
-			</TabLabel>
+			</SideIconSidebarTabLabel>
 
-			<TabLabel tabId="filters">
+			<SideIconSidebarTabLabel tabId="filters">
 				<FilterIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Filters
-			</TabLabel>
+			</SideIconSidebarTabLabel>
 
-			<TabLabel tabId="analysis">
+			<SideIconSidebarTabLabel tabId="analysis">
 				<ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Analysis
-			</TabLabel>
+			</SideIconSidebarTabLabel>
 
-			<TabLabel tabId="layers">
+			<SideIconSidebarTabLabel tabId="layers">
 				<MapIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Layers
-			</TabLabel>
-		</TabList>
+			</SideIconSidebarTabLabel>
+		</SideIconSidebarTabList>
 
 		<div class="p-6" role="tabpanel">
 			{#if selectedValue === 'markers'}
@@ -128,27 +128,27 @@
 
 <Story name="Collapsed">
 	<SideIconSidebar {collapsed}>
-		<TabList>
-			<TabLabel tabId="markers">
+		<SideIconSidebarTabList>
+			<SideIconSidebarTabLabel tabId="markers">
 				<LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Markers
-			</TabLabel>
+			</SideIconSidebarTabLabel>
 
-			<TabLabel tabId="filters">
+			<SideIconSidebarTabLabel tabId="filters">
 				<FilterIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Filters
-			</TabLabel>
+			</SideIconSidebarTabLabel>
 
-			<TabLabel tabId="analysis">
+			<SideIconSidebarTabLabel tabId="analysis">
 				<ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Analysis
-			</TabLabel>
+			</SideIconSidebarTabLabel>
 
-			<TabLabel tabId="layers">
+			<SideIconSidebarTabLabel tabId="layers">
 				<MapIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Layers
-			</TabLabel>
-		</TabList>
+			</SideIconSidebarTabLabel>
+		</SideIconSidebarTabList>
 
 		<div class="p-6 text-white" role="tabpanel">This sidebar is empty...</div>
 	</SideIconSidebar>
