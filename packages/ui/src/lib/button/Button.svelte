@@ -4,6 +4,7 @@
 	export let disabled: boolean = false;
 	export let href: string | undefined = undefined;
 	export let type: 'button' | 'submit' = 'button';
+	import { classNames } from '../utils/classNames';
 
 	const styleClasses = {
 		primary: 'bg-core-grey-500 border-b-4 border-core-blue-600 text-white hover:bg-core-grey-400',
@@ -27,10 +28,6 @@
 	};
 
 	let buttonClass: string;
-
-	const classNames = (...classes: string[]) => {
-		return classes.filter(Boolean).join(' ');
-	};
 
 	$: buttonClass = classNames(
 		'px-4 py-2 inline-flex justify-center',
