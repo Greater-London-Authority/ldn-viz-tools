@@ -7,7 +7,6 @@
 
     const handleSelection = () => {
         $selectedValue = tabId;
-        console.log({tabId, selectedValue: $selectedValue})
     };
     const keydownHandler = (ev: KeyboardEvent) => {
         if (ev.key === 'Enter' || ev.key === ' ') {
