@@ -26,11 +26,11 @@
         bind:this={iconRef}
         use:floatingRef
 >
-    <InformationCircleIcon style="height: 2em"/>
+    <InformationCircleIcon class="h-6" {...$$restProps} />
 
     {#if showTooltip}
-        <div class="arrow"
-             style={`left: ${ iconRef.getBoundingClientRect().x + 5 }px; top: ${iconRef.getBoundingClientRect().y + 30}px`}/>
+        <div class="arrow absolute w-h h-5 bg-white border-t border-t-core-grey-400 border-l border-l-core-grey-400 rotate-45"
+             style={`width: 20px; height: 20px; left: ${ iconRef.getBoundingClientRect().x + 5 }px; top: ${iconRef.getBoundingClientRect().y + 30}px`}/>
     {/if}
 
 </div>
@@ -38,28 +38,7 @@
 
 {#if showTooltip}
 
-    <div style="position:absolute" use:floatingContent class="popover" on:click={() => showTooltip = false}>
+    <div style="position:absolute" use:floatingContent class="text-black mt-2.5 border border-core-grey-400 bg-white p-4" on:click={() => showTooltip = false}>
         <slot/>
     </div>
 {/if}
-
-
-<style>
-    .arrow {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background: white;
-
-        border-top: 1px solid gray;
-        border-left: 1px solid gray;
-
-        transform: rotate(45deg);
-    }
-
-    .popover {
-        border: 1px solid gray;
-        background: white;
-        padding: 1em;
-    }
-</style>

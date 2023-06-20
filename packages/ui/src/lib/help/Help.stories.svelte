@@ -1,6 +1,7 @@
 <script>
     import {Meta, Template, Story} from '@storybook/addon-svelte-csf';
 
+    import Button from "../button/Button.svelte";
     import Help from "./Help.svelte";
 
 </script>
@@ -73,9 +74,15 @@
         <p class="flex align-middle">Scooter
             <Help>Don't fall off!</Help>
         </p>
+</Story>
 
-
-
+<Story name="In button">
+    <Button on:click={() => console.log("Clicked on button")} class="gap-x-2">
+        Guess what I do!
+        <Help>
+            <span class="text-black">If you click me, I'll log a message to the console.</span>
+        </Help>
+    </Button>
 </Story>
 
 <style>
