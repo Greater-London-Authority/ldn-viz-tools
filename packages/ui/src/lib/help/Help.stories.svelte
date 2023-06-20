@@ -15,7 +15,7 @@
 </Template>
 
 <Story name="Default">
-    <p>Mouse-over the icon to see the message.</p>
+    <p class="dark:text-white">Mouse-over the icon to see the message.</p>
 
     <Help>
         This is some helpful text...
@@ -24,7 +24,7 @@
 
 
 <Story name="Require click">
-    <p>Click the icon to see the message.</p>
+    <p class="dark:text-white">Click the icon to see the message.</p>
 
     <Help requireClick>
         This is some helpful text...
@@ -61,17 +61,17 @@
     <Help>
         Select the type of vehicle you use</Help></p>
 
-        <p class="flex align-middle">Car
+        <p class="flex align-middle dark:text-white">Car
             <Help>This has 4 wheels</Help>
         </p>
-        <p class="flex align-middle">Bicycle
+        <p class="flex align-middle dark:text-white">Bicycle
             <Help>You cycle this</Help>
         </p>
-        <p class="flex align-middle">Motorbike
+        <p class="flex align-middle dark:text-white">Motorbike
             <Help>Like a bicycle, but with an engine</Help>
         </p>
 
-        <p class="flex align-middle">Scooter
+        <p class="flex align-middle dark:text-white">Scooter
             <Help>Don't fall off!</Help>
         </p>
 </Story>
