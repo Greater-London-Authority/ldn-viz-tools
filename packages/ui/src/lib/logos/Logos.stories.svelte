@@ -38,6 +38,6 @@
 	<div class="text-white flex space-x-6">
 		<LogoMayor class="w-40 fill-gla-pink-500" />
 		<LogoCIU class="w-40 fill-core-blue-600 dark:fill-core-grey-100" />
-		<LogoLOTI class="h-10 fill-[#ffcc00]" />
+		<LogoLOTI class="h-10 !fill-[#ffcc00]" />
 	</div>
 </Story>
