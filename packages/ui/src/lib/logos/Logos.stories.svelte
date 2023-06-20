@@ -27,7 +27,7 @@
 </Story>
 
 <Story name="Inherit font color (default)">
-	<div class="text-white flex space-x-6">
+	<div class="text-core-grey-800 dark:text-white flex space-x-6">
 		<LogoMayor class="w-40" />
 		<LogoCIU class="w-40" />
 		<LogoLOTI class="h-10" />
@@ -36,16 +36,16 @@
 
 <Story name="Custom fill color">
 	<div class="space-y-4">
-		<div class="text-white flex space-x-6">
-			<LogoMayor class="w-40 text-core-grey-400 dark:fill-core-grey-50 " />
-			<LogoCIU class="w-40 text-core-grey-400 dark:fill-core-grey-50" />
-			<LogoLOTI class="h-10 text-core-grey-400 dark:fill-core-grey-50" />
+		<div class="flex space-x-6">
+			<LogoMayor class="w-40 fill-core-grey-400 dark:fill-core-grey-50 " />
+			<LogoCIU class="w-40 fill-core-grey-400 dark:fill-core-grey-50" />
+			<LogoLOTI class="h-10 fill-core-grey-400 dark:fill-core-grey-50" />
 		</div>
 
-		<div class="text-white flex space-x-6">
-			<LogoMayor class="w-40 text-core-grey-800 dark:fill-core-grey-400" />
-			<LogoCIU class="w-40 text-core-grey-800 dark:fill-core-grey-400" />
-			<LogoLOTI class="h-10 text-core-grey-800 dark:fill-core-grey-400" />
+		<div class="flex space-x-6">
+			<LogoMayor class="w-40 fill-core-grey-800 dark:fill-core-grey-400" />
+			<LogoCIU class="w-40 fill-core-grey-800 dark:fill-core-grey-400" />
+			<LogoLOTI class="h-10 fill-core-grey-800 dark:fill-core-grey-400" />
 		</div>
 	</div>
 </Story>
