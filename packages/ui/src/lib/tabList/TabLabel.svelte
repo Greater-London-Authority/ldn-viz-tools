@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
+	import { classNames } from '../utils/classNames';
 
 	export let value: string;
 
@@ -11,10 +12,6 @@
 	};
 
 	const { selectedValue } = getContext<{ selectedValue: Writable<string> }>('selectedValue');
-
-	const classNames = (...classes: string[]) => {
-		return classes.filter(Boolean).join(' ');
-	};
 </script>
 
 <div

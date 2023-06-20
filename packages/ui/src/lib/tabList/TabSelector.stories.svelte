@@ -6,13 +6,13 @@
 	} from '@rgossiaux/svelte-heroicons/solid';
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-	import TabSelector from './TabSelector.svelte';
-	import TabSelectorEntry from './TabSelectorEntry.svelte';
+	import TabList from './TabList.svelte';
+	import TabLabel from './TabLabel.svelte';
 
 	let selectedValue = 'filter';
 </script>
 
-<Meta title="Ui/TabSelector" component={TabSelector} />
+<Meta title="Ui/TabList" component={TabList} />
 
 <Story name="Icons above labels">
 	<div class="pb-8 dark:text-white">
@@ -20,22 +20,22 @@
 	</div>
 
 	<div class="w-[300px]">
-		<TabSelector bind:selectedValue>
-			<TabSelectorEntry value="filter">
+		<TabList bind:selectedValue>
+			<TabLabel value="filter">
 				<FilterIcon class="w-6 h-6" aria-hidden="true" />
 				Filters
-			</TabSelectorEntry>
+			</TabLabel>
 
-			<TabSelectorEntry value="analysis">
+			<TabLabel value="analysis">
 				<PresentationChartLineIcon class="w-6 h-6" aria-hidden="true" />
 				Analysis
-			</TabSelectorEntry>
+			</TabLabel>
 
-			<TabSelectorEntry value="layers">
+			<TabLabel value="layers">
 				<MapIcon class="w-6 h-6" aria-hidden="true" />
 				Layers
-			</TabSelectorEntry>
-		</TabSelector>
+			</TabLabel>
+		</TabList>
 	</div>
 </Story>
 
@@ -45,21 +45,21 @@
 	</div>
 
 	<div style="width: 300px">
-		<TabSelector bind:selectedValue>
-			<TabSelectorEntry value="filter">
+		<TabList bind:selectedValue>
+			<TabLabel value="filter">
 				Filters
 				<FilterIcon class="w-6 h-6 mt-1" aria-hidden="true" />
-			</TabSelectorEntry>
+			</TabLabel>
 
-			<TabSelectorEntry value="analysis">
+			<TabLabel value="analysis">
 				Analysis
 				<PresentationChartLineIcon class="w-6 h-6 mt-1" aria-hidden="true" />
-			</TabSelectorEntry>
+			</TabLabel>
 
-			<TabSelectorEntry value="layers">
+			<TabLabel value="layers">
 				Layers
 				<MapIcon class="w-6 h-6 mt-1" aria-hidden="true" />
-			</TabSelectorEntry>
-		</TabSelector>
+			</TabLabel>
+		</TabList>
 	</div>
 </Story>
