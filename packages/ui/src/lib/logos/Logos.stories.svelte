@@ -35,9 +35,18 @@
 </Story>
 
 <Story name="Custom fill color">
-	<div class="text-white flex space-x-6">
-		<LogoMayor class="w-40 fill-gla-pink-500" />
-		<LogoCIU class="w-40 fill-core-blue-600 dark:fill-core-grey-100" />
-		<LogoLOTI class="h-10 !fill-[#ffcc00]" />
+	<div class="space-y-4">
+		<div class="text-white flex space-x-6">
+			<LogoMayor class="w-40 text-core-grey-400 dark:fill-core-grey-50 "/>
+			<LogoCIU class="w-40 text-core-grey-400 dark:fill-core-grey-50"/>
+			<LogoLOTI class="h-10 text-core-grey-400 dark:fill-core-grey-50"/>
+		</div>
+
+		<div class="text-white flex space-x-6">
+			<LogoMayor class="w-40 text-core-grey-800 dark:fill-core-grey-400"/>
+			<LogoCIU class="w-40 text-core-grey-800 dark:fill-core-grey-400"/>
+			<LogoLOTI class="h-10 text-core-grey-800 dark:fill-core-grey-400"/>
+		</div>
+
 	</div>
 </Story>
