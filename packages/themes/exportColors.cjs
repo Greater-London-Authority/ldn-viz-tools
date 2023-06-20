@@ -49,17 +49,5 @@ const exportToCSS = (colors) => {
     stream.end()
 }
 
-const exportToJSON = (colors) => {
-
-    fs.writeFile("./colors.json", JSON.stringify(colors, null, 2), (err) => {
-        if (err) {
-            console.error('Error writing JSON to file:', err);
-            return;
-        }
-    });
-}
-
-
 const colors = extractColors();
 exportToCSS(colors);
-exportToJSON(colors);

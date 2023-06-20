@@ -4,7 +4,7 @@
   "scripts": {
     "lint": "prettier --plugin-search-dir . --check . && eslint . && publint",
     "fmt": "prettier --plugin-search-dir . --check . --write",
-    "build": "node exportColorsToCSS.cjs"
+    "build": "node exportColors.cjs"
   },
   "devDependencies": {
     "eslint": "^8.28.0",
