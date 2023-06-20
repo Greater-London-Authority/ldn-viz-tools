@@ -18,6 +18,8 @@
 		<TopTabLabel tabId="histograms">Histograms of charge events</TopTabLabel>
 	</TopTabList>
 
-	<p>Selected value is: <code>{selectedValue}</code></p>
+	<div class="text-black dark:text-white">
+			<p>Selected value is: <code>{selectedValue}</code></p>
+	</div>
 
 </Story>
