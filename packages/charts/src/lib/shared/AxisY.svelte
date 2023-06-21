@@ -3,14 +3,14 @@
 	import { getContext } from 'svelte';
 	const { yScale, yRange, xRange, padding, width } = getContext<LayerCake>('LayerCake');
 
-	export let gridlines: boolean = false;
-	export let baseline: boolean = false;
+	export let gridlines = false;
+	export let baseline = false;
 
 	export let ticks: number | [] | ((d: any) => void) = 10;
-	export let xTick: number = 0;
-	export let yTick: number = 6;
-	export let dxTick: number = 0;
-	export let dyTick: number = -4;
+	export let xTick = 0;
+	export let yTick = 6;
+	export let dxTick = 0;
+	export let dyTick = -4;
 	export let textAnchor = 'start';
 	export let prefix = '';
 	export let suffix = '';
