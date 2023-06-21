@@ -1,9 +1,10 @@
 <script lang="ts">
 	export let style: 'primary' | 'secondary' | 'ghost' = 'primary';
 	export let size: 'xs' | 'sm' | 'base' | 'lg' | 'xl' = 'base';
-	export let disabled: boolean = false;
-	export let href: string | undefined = undefined;
+	export let disabled = false;
+	export let href = '';
 	export let type: 'button' | 'submit' = 'button';
+	import { classNames } from '../utils/classNames';
 
 	const styleClasses = {
 		primary: 'bg-core-grey-500 border-b-4 border-core-blue-600 text-white hover:bg-core-grey-400',
@@ -28,10 +29,6 @@
 
 	let buttonClass: string;
 
-	const classNames = (...classes: string[]) => {
-		return classes.filter(Boolean).join(' ');
-	};
-
 	$: buttonClass = classNames(
 		'px-4 py-2 inline-flex justify-center',
 		sizeClasses[size],
@@ -47,6 +44,7 @@
 	type={href ? undefined : type}
 	class={buttonClass}
 	{href}
+	{disabled}
 	on:click
 	on:change
 	on:keydown
