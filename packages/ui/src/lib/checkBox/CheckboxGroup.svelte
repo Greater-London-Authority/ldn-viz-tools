@@ -2,7 +2,7 @@
 	import Button from '../button/Button.svelte';
 	import Checkbox from './Checkbox.svelte';
 
-	export let options: { id: string; label: string; disabled?: boolean }[] = [];
+	export let options: { id: string; label: string; disabled?: boolean; color?: string }[] = [];
 
 	export let buttonsHidden = false;
 
@@ -49,6 +49,7 @@
 		<Checkbox
 			id={option.id}
 			label={option.label}
+			color={option.color}
 			disabled={option.disabled}
 			bind:checked={selectionState[option.id]}
 		/>
