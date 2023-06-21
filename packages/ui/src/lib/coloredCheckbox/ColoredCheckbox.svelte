@@ -1,52 +1,61 @@
 <script lang="ts">
-    import {classNames} from '../utils/classNames';
+	import { classNames } from '../utils/classNames';
+	export let color = 'black';
+	export let checked = false;
+	export let label: string;
+	export let id: string;
 
-    export let color = "black";
-    export let checked = false;
-    export let label: string;
-    export let id: string;
+	export let disabled = false;
 
-    export let disabled = false;
+	let inputID = `input-${id}`;
 
-    let inputID = `input-${id}`;
+	const lightClasses = 'border-core-grey-200  focus:ring-core-blue-600';
+
+	const darkClasses =
+		'dark:border-core-grey-500 dark:bg-core-grey-600 dark:focus:ring-offset-core-grey-800';
+
+	const disabledClasses = '!bg-core-grey-300 !border-core-grey-300';
+
+	let CheckboxClass: string;
+	let LabelClass: string;
+
+	$: CheckboxClass = classNames(
+		'h-5 w-5 mr-2 border',
+		disabled === true ? `${disabledClasses} pointer-events-none` : '',
+		lightClasses,
+		darkClasses
+	);
+
+	$: LabelClass = classNames(
+		'flex items-center mr-4',
+		disabled === true ? 'text-core-grey-300' : 'text-core-grey-700 dark:text-white'
+	);
 </script>
 
-
-<input class="sr-only" id={inputID}
-       bind:checked={checked}
-       type="checkbox"
-       {disabled}
->
-
-<label class={classNames("flex focus:border-gray-500 focus:border-2 focus:border-dashed", disabled ? 'opacity-40' : '' )} for={inputID}>
-    <svg viewBox="0 0 10 10" height="1.5em" aria-hidden="true">
-        <rect x="1" y="1" width="8" height="8"
-              title={`${label}`}
-              stroke={color}
-              fill={ checked ? color : "white"}
-        />
-
-        {#if checked}
-            <rect x="2" y="2" width="6" height="6"
-                  title={`${label}`}
-                  stroke={"white"}
-                  fill={"none"}
-            />
-        {/if}
-    </svg>
-    {label}
+<label class={LabelClass}>
+	<input
+		id={inputID}
+		class={CheckboxClass}
+		type="checkbox"
+		bind:checked
+		{disabled}
+		style="--border-color: {color}; --background-color: {color}; --tw-ring-color: {color}"
+	/>
+	{label}
 </label>
 
-
 <style>
-    /* highlight label that has focus... */
-    input:focus + label {
-        outline: dashed 2px lightgrey;
-        width: fit-content;
-    }
+	input {
+		border-color: var(--border-color);
+	}
 
-    /* but not if it was focused by clicking on (rather than with keyboard) */
-    input:focus:not(:focus-visible) + label {
-        outline: none;
-    }
+	input:focus,
+	.dark input:focus {
+		color: var(--background-color);
+	}
+
+	input:checked,
+	.dark input:checked {
+		background-color: var(--background-color);
+	}
 </style>
