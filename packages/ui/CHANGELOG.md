@@ -1,5 +1,19 @@
 # ldn-viz-tools-ui
 
+## 0.1.0
+
+### Minor Changes
+
+- d5434ea: implement button component
+- 99de4e1: add component for downloading an SVG as an image file
+- 1c76060: prevent interaction with disabled Button component
+- 29a2beb: Add component for downloading data
+- e960b60: add tab selector component
+
+### Patch Changes
+
+- db4714c: Replace boilerplate README files
+
 ## 0.0.3
 
 ### Patch Changes
