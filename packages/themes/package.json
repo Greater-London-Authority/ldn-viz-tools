@@ -1,10 +1,9 @@
 {
   "name": "@ldn-viz/themes",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "lint": "prettier --plugin-search-dir . --check . && eslint . && publint",
-    "fmt": "prettier --plugin-search-dir . --check . --write",
-    "build": "node exportColors.cjs"
+    "fmt": "prettier --plugin-search-dir . --check . --write"
   },
   "devDependencies": {
     "eslint": "^8.28.0",
