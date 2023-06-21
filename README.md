@@ -2,12 +2,12 @@
 
 This is a mono-repo containing several components:
 
-- the `ldn-viz-tools-charts` package is in [charts](./packages/charts); it contains components for visualizing data
-- the `ldn-viz-tools-maps` package is in [maps](./packages/maps); it contains components for rendering maps
-- the `ldn-viz-tools-ui` package is in [ui](./packages/ui); it contains general UI components like modals or sidebars
-- the `ldn-viz-tools-theme` package is in [theme](./packages/theme); it contains CSS and design tokens that are used by other components
+- the [`@ldn-viz/charts`](https://www.npmjs.com/package/@ldn-viz/charts) package is in [charts](./packages/charts); it contains components for visualizing data
+- the [`@ldn-viz/maps`](https://www.npmjs.com/package/@ldn-viz/maps) package is in [maps](./packages/maps); it contains components for rendering maps
+- the [`@ldn-viz/ui`](https://www.npmjs.com/package/@ldn-viz/ui) package is in [ui](./packages/ui); it contains general UI components like modals or sidebars
+- the [`@ldn-viz/themes`](https://www.npmjs.com/package/@ldn-viz/themes) package is in [theme](./packages/themes); it contains CSS and design tokens that are used by other components
 
-These packages are intended primarily for use in projects created by Greater London Authority's Intelligence Unit.
+These packages are intended primarily for use in projects created by [Greater London Authority](https://london.gov.uk/)'s [City Intelligence Unit](https://www.london.gov.uk/programmes-strategies/research-and-analysis).
 
 ### Tooling
 
@@ -19,6 +19,7 @@ It uses:
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
+- [Changesets](https://github.com/changesets/changesets) to keep track of changes as they are made, and then automatically updating `CHANGELOG`files and version numbers in `package.json` files when releases are made
 
 ### Developing with Storybook
 
@@ -31,7 +32,7 @@ lib/
 ├─ src/
 │ ├─ Button/
 │ │ ├─ Button.svelte
-│ │ ├─ Button.stories.ts
+│ │ ├─ Button.stories.svelte
 ```
 
 Storybook needs to be restarted when adding a new story to allow it to index the new file.
@@ -46,11 +47,11 @@ The `dev` branch is periodically merged into the `main` branch, from which relea
 Following the [recommendations of the Turbo project maintainers](https://turbo.build/repo/docs/handbook/publishing-packages/versioning-and-publishing), we use `changesets` to keep track of changes.
 
 Before merging a PR that adds a feature or fixes a bug, run `changeset`.
-This will prompt for a description of the changes, which will be saved as a markdown file in [`.changeset/](./.changeset/).
+This will prompt for a description of the changes, which will be saved as a markdown file in [`.changeset/`](./.changeset/).
 
 When a release is made, `changeset` will add these descriptions of changes to a `CHANGELONG.md` file in the directory of the appropriate package; the version numbers in `package.json` files will also be updated appropriately.
 
 Releases are made by manually triggering the [`publish-packages`](./.github/publish-packages.yml) workflow in GitHub.
-This runs the `publish-packages` script defined in the top-level [`package.json](./package.json) file.
+This runs the `publish-packages` script defined in the top-level [`package.json`](./package.json) file.
 It uses a token that was [generated in NPM](https://www.npmjs.com/settings/ldn-viz/tokens/) and [saved as an Action secret in GitHub](https://github.com/Greater-London-Authority/ldn-viz-tools/settings/secrets/actions).
 

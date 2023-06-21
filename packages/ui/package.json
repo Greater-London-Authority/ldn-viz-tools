@@ -55,11 +55,14 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
+	"main": "./dist/index.js",
 	"type": "module",
 	"dependencies": {
 		"@rgossiaux/svelte-headlessui": "^1.0.2",
 		"@rgossiaux/svelte-heroicons": "^0.1.2",
 		"@tailwindcss/forms": "^0.5.3",
-		"@tailwindcss/typography": "^0.5.9"
+		"@tailwindcss/typography": "^0.5.9",
+		"@types/d3-dsv": "^3.0.1",
+		"d3-dsv": "^3.0.1"
 	}
 }

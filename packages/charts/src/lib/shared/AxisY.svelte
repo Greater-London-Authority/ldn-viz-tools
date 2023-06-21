@@ -48,7 +48,7 @@
 					x2={$width + $padding.left}
 					y1={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}
 					y2={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}
-					class="stroke-gray-200"
+					class="stroke-core-grey-200 dark:stroke-core-grey-400"
 				/>
 			{/if}
 			<text
@@ -57,6 +57,7 @@
 				dx={isBandwidth ? -4 : dxTick}
 				dy={isBandwidth ? 4 : dyTick}
 				style="text-anchor:{isBandwidth ? 'end' : textAnchor};"
+				class="fill-core-grey-400 dark:fill-white"
 			>
 				{i == tickVals.length - 1 ? prefix + formatTick(tick) + suffix : formatTick(tick)}</text
 			>
@@ -69,7 +70,7 @@
 			x2={0}
 			y1={Math.min(...$yRange)}
 			y2={Math.max(...$yRange)}
-			class="stroke-gray-400"
+			class="stroke-core-grey-400"
 		/>
 	{/if}
 </g>

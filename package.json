@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "docs": "npm run storybook -w apps/docs",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",

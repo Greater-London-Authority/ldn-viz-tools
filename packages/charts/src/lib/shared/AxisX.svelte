@@ -44,7 +44,13 @@
 	{#each tickVals as tick, i (tick)}
 		<g class="tick tick-{i}" transform="translate({$xScale(tick)},{Math.max(...$yRange)})">
 			{#if gridlines !== false}
-				<line y1={$height * -1} y2="0" x1="0" x2="0" class="stroke-gray-200" />
+				<line
+					y1={$height * -1}
+					y2="0"
+					x1="0"
+					x2="0"
+					class="stroke-core-grey-200 dark:stroke-core-grey-400"
+				/>
 			{/if}
 			<text
 				x={xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0}
@@ -52,6 +58,7 @@
 				dx={dxTick}
 				dy={dyTick}
 				text-anchor={textAnchor(i)}
+				class="fill-core-grey-400 dark:fill-white"
 				>{i == tickVals.length - 1 ? prefix + formatTick(tick) + suffix : formatTick(tick)}</text
 			>
 		</g>
