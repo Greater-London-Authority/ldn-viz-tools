@@ -13,7 +13,7 @@
 	let labelClass: string;
 
 	$: checkboxClass = classNames(
-		'h-5 w-5 mr-2 border',
+		'h-5 w-5 mr-2 border-2',
 		'border-core-grey-200  focus:ring-core-blue-600',
 		'dark:border-core-grey-500 dark:bg-core-grey-600 dark:focus:ring-offset-core-grey-800',
 		disabled === true ? `!border-core-grey-300 !bg-core-grey-300 pointer-events-none` : ''
