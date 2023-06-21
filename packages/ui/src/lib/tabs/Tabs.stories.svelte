@@ -7,7 +7,7 @@
 	let selectedValue = 'aggregates';
 </script>
 
-<Meta title="Ui/TabList" component={TabList} />
+<Meta title="Ui/Tabs" component={TabList} />
 
 <Story name="Default">
 
