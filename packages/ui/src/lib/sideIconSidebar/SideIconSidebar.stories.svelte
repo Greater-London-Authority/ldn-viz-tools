@@ -8,9 +8,9 @@
 		MapIcon
 	} from '@rgossiaux/svelte-heroicons/solid';
 	import SideIconSidebar from './SideIconSidebar.svelte';
-	import SideIconSidebarWrapper from './SideIconSidebarWrapper.svelte';
 	import SideIconSidebarTabLabel from './SideIconSidebarTabLabel.svelte';
 	import SideIconSidebarTabList from './SideIconSidebarTabList.svelte';
+	import SideIconSidebarWrapper from './SideIconSidebarWrapper.svelte';
 
 	let selectedValue = 'filters';
 
@@ -31,12 +31,13 @@
 </Template>
 
 <Story name="Constructed from list">
-	<p>This example constructs the sidebar from an array of options.</p>
-	<p>
-		In actual use, would probably have a separate component for each pane of the tab, and render
-		conditionally.
-	</p>
-
+	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
+		<p>This example constructs the sidebar from an array of options.</p>
+		<p>
+			In actual use, would probably have a separate component for each pane of the tab, and render
+			conditionally.
+		</p>
+	</div>
 	<SideIconSidebarWrapper {tabs} bind:selectedValue>
 		{#if selectedValue === 'markers'}
 			<div class="text-white">
@@ -67,11 +68,14 @@
 </Story>
 
 <Story name="Constructed from nested components">
-	<p>
-		Rather than defining the list of tabs with an array, we can encode it as a series of
-		<code>&lt;SideIconSidebaTabLabel&gt;</code> components inside a <code>&lt;SideIconSidebaTabList&gt;</code> component. This allows
-		greater flexibility over the appearance of tab labels (e.g., the use of an alternative icon set).
-	</p>
+	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
+		<p>
+			Rather than defining the list of tabs with an array, we can encode it as a series of
+			<code>&lt;SideIconSidebaTabLabel&gt;</code> components inside a
+			<code>&lt;SideIconSidebaTabList&gt;</code> component. This allows greater flexibility over the
+			appearance of tab labels (e.g., the use of an alternative icon set).
+		</p>
+	</div>
 
 	<SideIconSidebar bind:selectedValue>
 		<SideIconSidebarTabList>
@@ -91,7 +95,22 @@
 			</SideIconSidebarTabLabel>
 
 			<SideIconSidebarTabLabel tabId="layers">
-				<MapIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="h-5 w-5 mb-1"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+					/>
+				</svg>
+
 				Layers
 			</SideIconSidebarTabLabel>
 		</SideIconSidebarTabList>
@@ -145,7 +164,21 @@
 			</SideIconSidebarTabLabel>
 
 			<SideIconSidebarTabLabel tabId="layers">
-				<MapIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="h-5 w-5 mb-1"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+					/>
+				</svg>
 				Layers
 			</SideIconSidebarTabLabel>
 		</SideIconSidebarTabList>
