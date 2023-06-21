@@ -1,5 +1,6 @@
 <script lang="ts">
-	import ColoredRadioButton from './ColoredRadioButton.svelte';
+	import Button from '../button/Button.svelte';
+	import RadioButton from './RadioButton.svelte';
 	export let selectedId: string;
 	export let name: string;
 	export let options: { id: string; label: string; color: string; disabled?: boolean }[] = [];
@@ -8,11 +9,10 @@
 
 <div>
 	{#if !buttonsHidden}
-		<button on:click={() => (selectedId = '')}>Clear</button>
+		<Button style="ghost" on:click={() => (selectedId = '')}>Clear</Button>
 	{/if}
-
 	{#each options as option}
-		<ColoredRadioButton
+		<RadioButton
 			id={option.id}
 			label={option.label}
 			color={option.color}
