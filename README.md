@@ -19,6 +19,7 @@ It uses:
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
+- [Changesets](https://github.com/changesets/changesets) to keep track of changes as they are made, and then automatically updating `CHANGELOG`files and version numbers in `package.json` files when releases are made
 
 ### Developing with Storybook
 
