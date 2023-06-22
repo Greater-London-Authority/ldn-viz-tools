@@ -32,6 +32,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          git checkout -b release-msg
+          
           git add -A .changeset
           git add packages/*/CHANGELOG.md
           git add packages/*/package.json
@@ -42,3 +45,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release-msg
