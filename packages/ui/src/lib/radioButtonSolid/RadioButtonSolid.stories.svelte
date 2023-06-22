@@ -14,6 +14,50 @@
 
 <Meta title="Ui/RadioButtonSolid" component={RadioButtonGroupSolid} />
 
+<Story name="No icons">
+	<div class="pb-8 dark:text-white">
+		Selected value: <b>{selectedValue}</b>
+	</div>
+
+	<div class="w-[300px]">
+		<RadioButtonGroupSolid bind:selectedValue>
+			<RadioButtonSolid value="filter" style="radio">
+				Filters
+			</RadioButtonSolid>
+
+			<RadioButtonSolid value="analysis" style="radio">
+				Analysis
+			</RadioButtonSolid>
+
+			<RadioButtonSolid value="layers" style="radio">
+				Layers
+			</RadioButtonSolid>
+		</RadioButtonGroupSolid>
+	</div>
+</Story>
+
+<Story name="No icons - tab style">
+	<div class="pb-8 dark:text-white">
+		Selected value: <b>{selectedValue}</b>
+	</div>
+
+	<div class="w-[300px]">
+		<RadioButtonGroupSolid bind:selectedValue>
+			<RadioButtonSolid value="filter">
+				Filters
+			</RadioButtonSolid>
+
+			<RadioButtonSolid value="analysis">
+				Analysis
+			</RadioButtonSolid>
+
+			<RadioButtonSolid value="layers">
+				Layers
+			</RadioButtonSolid>
+		</RadioButtonGroupSolid>
+	</div>
+</Story>
+
 <Story name="Icons above labels">
 	<div class="pb-8 dark:text-white">
 		Selected value: <b>{selectedValue}</b>
