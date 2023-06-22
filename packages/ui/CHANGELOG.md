@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 0.2.0
+
+### Minor Changes
+
+- f74b4cc: add sidebar component with tab icons on the left
+- d6ffe1e: add custom colored checkbox and radio buttons
+
 ## 0.1.0
 
 ### Minor Changes
