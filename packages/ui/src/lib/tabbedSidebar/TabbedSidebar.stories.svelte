@@ -7,10 +7,10 @@
 		LocationMarkerIcon,
 		MapIcon
 	} from '@rgossiaux/svelte-heroicons/solid';
-	import SideIconSidebar from './SideIconSidebar.svelte';
-	import SideIconSidebarWrapper from './SideIconSidebarWrapper.svelte';
-	import SideIconSidebarTabLabel from './SideIconSidebarTabLabel.svelte';
-	import SideIconSidebarTabList from './SideIconSidebarTabList.svelte';
+	import TabbedSidebar from './TabbedSidebar.svelte';
+	import TabbedSidebarWrapper from './TabbedSidebarWrapper.svelte';
+	import TabbedSidebarTabLabel from './TabbedSidebarTabLabel.svelte';
+	import TabbedSidebarTabList from './TabbedSidebarTabList.svelte';
 
 	let selectedValue = 'filters';
 
@@ -24,10 +24,10 @@
 	let collapsed = true;
 </script>
 
-<Meta title="Ui/SideIconSidebar" component={SideIconSidebarWrapper} />
+<Meta title="Ui/TabbedSidebar" component={TabbedSidebarWrapper} />
 
 <Template let:args>
-	<SideIconSidebarWrapper {...args} />
+	<TabbedSidebarWrapper {...args} />
 </Template>
 
 <Story name="Constructed from list">
@@ -37,7 +37,7 @@
 		conditionally.
 	</p>
 
-	<SideIconSidebarWrapper {tabs} bind:selectedValue>
+	<TabbedSidebarWrapper {tabs} bind:selectedValue>
 		{#if selectedValue === 'markers'}
 			<div class="text-white">
 				Markers is selected, so we'd render a
@@ -63,7 +63,7 @@
 				component
 			</div>
 		{/if}
-	</SideIconSidebarWrapper>
+	</TabbedSidebarWrapper>
 </Story>
 
 <Story name="Constructed from nested components">
@@ -73,28 +73,28 @@
 		greater flexibility over the appearance of tab labels (e.g., the use of an alternative icon set).
 	</p>
 
-	<SideIconSidebar bind:selectedValue>
-		<SideIconSidebarTabList>
-			<SideIconSidebarTabLabel tabId="markers">
+	<TabbedSidebar bind:selectedValue>
+		<TabbedSidebarTabList>
+			<TabbedSidebarTabLabel tabId="markers">
 				<LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Markers
-			</SideIconSidebarTabLabel>
+			</TabbedSidebarTabLabel>
 
-			<SideIconSidebarTabLabel tabId="filters">
+			<TabbedSidebarTabLabel tabId="filters">
 				<FilterIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Filters
-			</SideIconSidebarTabLabel>
+			</TabbedSidebarTabLabel>
 
-			<SideIconSidebarTabLabel tabId="analysis">
+			<TabbedSidebarTabLabel tabId="analysis">
 				<ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Analysis
-			</SideIconSidebarTabLabel>
+			</TabbedSidebarTabLabel>
 
-			<SideIconSidebarTabLabel tabId="layers">
+			<TabbedSidebarTabLabel tabId="layers">
 				<MapIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Layers
-			</SideIconSidebarTabLabel>
-		</SideIconSidebarTabList>
+			</TabbedSidebarTabLabel>
+		</TabbedSidebarTabList>
 
 		<div class="p-6" role="tabpanel">
 			{#if selectedValue === 'markers'}
@@ -123,33 +123,33 @@
 				</div>
 			{/if}
 		</div>
-	</SideIconSidebar>
+	</TabbedSidebar>
 </Story>
 
 <Story name="Collapsed">
-	<SideIconSidebar {collapsed}>
-		<SideIconSidebarTabList>
-			<SideIconSidebarTabLabel tabId="markers">
+	<TabbedSidebar {collapsed}>
+		<TabbedSidebarTabList>
+			<TabbedSidebarTabLabel tabId="markers">
 				<LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Markers
-			</SideIconSidebarTabLabel>
+			</TabbedSidebarTabLabel>
 
-			<SideIconSidebarTabLabel tabId="filters">
+			<TabbedSidebarTabLabel tabId="filters">
 				<FilterIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Filters
-			</SideIconSidebarTabLabel>
+			</TabbedSidebarTabLabel>
 
-			<SideIconSidebarTabLabel tabId="analysis">
+			<TabbedSidebarTabLabel tabId="analysis">
 				<ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Analysis
-			</SideIconSidebarTabLabel>
+			</TabbedSidebarTabLabel>
 
-			<SideIconSidebarTabLabel tabId="layers">
+			<TabbedSidebarTabLabel tabId="layers">
 				<MapIcon class="h-5 w-5 mb-1" aria-hidden="true" />
 				Layers
-			</SideIconSidebarTabLabel>
-		</SideIconSidebarTabList>
+			</TabbedSidebarTabLabel>
+		</TabbedSidebarTabList>
 
 		<div class="p-6 text-white" role="tabpanel">This sidebar is empty...</div>
-	</SideIconSidebar>
+	</TabbedSidebar>
 </Story>
