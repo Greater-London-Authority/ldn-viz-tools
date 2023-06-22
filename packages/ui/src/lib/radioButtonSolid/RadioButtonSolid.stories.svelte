@@ -6,13 +6,13 @@
 	} from '@rgossiaux/svelte-heroicons/solid';
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-	import TabList from './TabList.svelte';
-	import TabLabel from './TabLabel.svelte';
+	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
+	import RadioButtonSolid from './RadioButtonSolid.svelte';
 
 	let selectedValue = 'filter';
 </script>
 
-<Meta title="Ui/TabList" component={TabList} />
+<Meta title="Ui/RadioButtonSolid" component={RadioButtonGroupSolid} />
 
 <Story name="Icons above labels">
 	<div class="pb-8 dark:text-white">
@@ -20,22 +20,22 @@
 	</div>
 
 	<div class="w-[300px]">
-		<TabList bind:selectedValue>
-			<TabLabel value="filter">
+		<RadioButtonGroupSolid bind:selectedValue>
+			<RadioButtonSolid value="filter">
 				<FilterIcon class="w-6 h-6" aria-hidden="true" />
 				Filters
-			</TabLabel>
+			</RadioButtonSolid>
 
-			<TabLabel value="analysis">
+			<RadioButtonSolid value="analysis">
 				<PresentationChartLineIcon class="w-6 h-6" aria-hidden="true" />
 				Analysis
-			</TabLabel>
+			</RadioButtonSolid>
 
-			<TabLabel value="layers">
+			<RadioButtonSolid value="layers">
 				<MapIcon class="w-6 h-6" aria-hidden="true" />
 				Layers
-			</TabLabel>
-		</TabList>
+			</RadioButtonSolid>
+		</RadioButtonGroupSolid>
 	</div>
 </Story>
 
@@ -45,21 +45,21 @@
 	</div>
 
 	<div style="width: 300px">
-		<TabList bind:selectedValue>
-			<TabLabel value="filter">
+		<RadioButtonGroupSolid bind:selectedValue>
+			<RadioButtonSolid value="filter">
 				Filters
 				<FilterIcon class="w-6 h-6 mt-1" aria-hidden="true" />
-			</TabLabel>
+			</RadioButtonSolid>
 
-			<TabLabel value="analysis">
+			<RadioButtonSolid value="analysis">
 				Analysis
 				<PresentationChartLineIcon class="w-6 h-6 mt-1" aria-hidden="true" />
-			</TabLabel>
+			</RadioButtonSolid>
 
-			<TabLabel value="layers">
+			<RadioButtonSolid value="layers">
 				Layers
 				<MapIcon class="w-6 h-6 mt-1" aria-hidden="true" />
-			</TabLabel>
-		</TabList>
+			</RadioButtonSolid>
+		</RadioButtonGroupSolid>
 	</div>
 </Story>
