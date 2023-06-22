@@ -9,4 +9,7 @@ export { default as Modal } from './modal/Modal.svelte';
 export { default as Select } from './select/Select.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
-
+export { default as TabbedSidebar } from './tabs/TabbedSidebar.svelte';
+export { default as TabbedSidebarTabLabel } from './tabs/TabbedSidebarTabLabel.svelte';
+export { default as TabbedSidebarTabList } from './tabs/TabbedSidebarTabList.svelte';
+export { default as TabbedSidebarWrapper } from './tabs/TabbedSidebarWrapper.svelte';
