@@ -15,25 +15,25 @@
 <Story name="Default" />
 
 <Story name="Primary">
-	<Button style="primary">Primary Style</Button>
-	<Button style="primary" disabled>Primary Style (disabled)</Button>
+	<Button variant="primary">Primary Variant</Button>
+	<Button variant="primary" disabled>Primary Variant (disabled)</Button>
 </Story>
 
 <Story name="Secondary">
-	<Button style="secondary">Secondary Style</Button>
-	<Button style="secondary" disabled>Secondary Style (disabled)</Button>
+	<Button variant="secondary">Secondary Variant</Button>
+	<Button variant="secondary" disabled>Secondary Variant (disabled)</Button>
 </Story>
 
 <Story name="Ghost">
-	<Button style="ghost">Ghost Style</Button>
-	<Button style="ghost" disabled>Ghost Style (disabled)</Button>
+	<Button variant="ghost">Ghost Variant</Button>
+	<Button variant="ghost" disabled>Ghost Variant (disabled)</Button>
 </Story>
 
 <Story name="Disabled">
-	<Button disabled>Default Style</Button>
-	<Button style="primary" disabled>Primary Style</Button>
-	<Button style="secondary" disabled>Secondary Style</Button>
-	<Button style="ghost" disabled>Ghost Style</Button>
+	<Button disabled>Default Variant</Button>
+	<Button variant="primary" disabled>Primary Variant</Button>
+	<Button variant="secondary" disabled>Secondary Variant</Button>
+	<Button variant="ghost" disabled>Ghost Variant</Button>
 </Story>
 
 <Story name="Sizes">
