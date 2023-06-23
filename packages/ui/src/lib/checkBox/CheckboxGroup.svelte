@@ -35,12 +35,12 @@
 <div>
 	{#if !buttonsHidden}
 		<Button
-			style="ghost"
+			variant="ghost"
 			on:click={selectAll}
 			disabled={numAvailableOptionsSelected === numAvailableOptions}
 			>Select all
 		</Button>
-		<Button style="ghost" on:click={clearAll} disabled={numAvailableOptionsSelected === 0}
+		<Button style="variant" on:click={clearAll} disabled={numAvailableOptionsSelected === 0}
 			>Clear all</Button
 		>
 	{/if}
