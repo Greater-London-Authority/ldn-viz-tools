@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { classNames } from '../utils/classNames';
-	export let color = 'black';
+	export let color: string | undefined = undefined;
 	export let checked = false;
 	export let label: string;
 	export let id: string;
@@ -8,47 +7,37 @@
 	export let disabled = false;
 
 	let inputID = `input-${id}`;
-
-	let checkboxClass: string;
-	let labelClass: string;
-
-	$: checkboxClass = classNames(
-		'h-5 w-5 mr-2 border-2',
-		'border-core-grey-200  focus:ring-core-blue-600',
-		'dark:border-core-grey-500 dark:bg-core-grey-600 dark:focus:ring-offset-core-grey-800',
-		disabled === true ? `!border-core-grey-300 !bg-core-grey-300 pointer-events-none` : ''
-	);
-
-	$: labelClass = classNames(
-		'flex items-center mr-4',
-		disabled === true ? 'text-core-grey-300' : 'text-core-grey-700 dark:text-white'
-	);
 </script>
 
-<label class={labelClass}>
+<label class="flex items-center">
 	<input
 		id={inputID}
-		class={checkboxClass}
+		class="form-checkbox"
 		type="checkbox"
 		bind:checked
 		{disabled}
-		style="--border-color: {color}; --background-color: {color}; --tw-ring-color: {color}"
+		style={!!color
+			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
+			: ''}
 	/>
-	{label}
+	<span class="mx-2 form-label">{label}</span>
 </label>
 
-<style>
-	input {
-		border-color: var(--border-color);
-	}
+{#if color}
+	<style>
+		.form-checkbox,
+		.dark .form-checkbox {
+			color: var(--border-color);
+			border-color: var(--border-color);
+			border-width: 2px;
+		}
 
-	input:focus,
-	.dark input:focus {
-		color: var(--background-color);
-	}
+		.dark .form-checkbox:checked {
+			background-color: var(--background-color);
+		}
 
-	input:checked,
-	.dark input:checked {
-		background-color: var(--background-color);
-	}
-</style>
+		.form-checkbox:disabled {
+			@apply border-core-grey-300 cursor-not-allowed;
+		}
+	</style>
+{/if}
