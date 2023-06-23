@@ -4,10 +4,10 @@
 
 	const { data, xGet, yGet, xScale, yScale } = getContext<LayerCake>('LayerCake');
 
-	export let r: number = 5;
-	export let fill: string = '#0cf';
-	export let stroke: string = '#000';
-	export let strokeWidth: number = 0;
+	export let r = 5;
+	export let fill = '#0cf';
+	export let stroke = '#000';
+	export let strokeWidth = 0;
 </script>
 
 <g class="scatter-group">
