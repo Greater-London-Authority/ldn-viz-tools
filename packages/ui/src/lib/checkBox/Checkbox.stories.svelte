@@ -5,7 +5,7 @@
 
 	let checked = false;
 
-	let selectedOptions: string[] = [];
+	let selectedOptions: string[] = ['bus', 'underground'];
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
