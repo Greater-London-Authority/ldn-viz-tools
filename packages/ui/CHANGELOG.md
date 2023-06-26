@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 32b9dd7: allow checkboxes in a checkboxGroup to be initially checked
+- 32b9dd7: rename "style" prop of Button to "variant"
+
 ## 0.2.0
 
 ### Minor Changes
