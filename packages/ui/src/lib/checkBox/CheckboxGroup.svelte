@@ -7,7 +7,7 @@
 	export let buttonsHidden = false;
 
 	export let selectedOptions: string[] = [];
-	let selectionState = Object.fromEntries(options.map((o) => [o.id, false]));
+	let selectionState = Object.fromEntries(options.map((o) => [o.id, selectedOptions.includes(o.id)]));
 
 	const numAvailableOptions = options.filter((o) => !o.disabled).length;
 	let numAvailableOptionsSelected: number;
@@ -35,12 +35,12 @@
 <div>
 	{#if !buttonsHidden}
 		<Button
-			style="ghost"
+			variant="ghost"
 			on:click={selectAll}
 			disabled={numAvailableOptionsSelected === numAvailableOptions}
 			>Select all
 		</Button>
-		<Button style="ghost" on:click={clearAll} disabled={numAvailableOptionsSelected === 0}
+		<Button style="variant" on:click={clearAll} disabled={numAvailableOptionsSelected === 0}
 			>Clear all</Button
 		>
 	{/if}

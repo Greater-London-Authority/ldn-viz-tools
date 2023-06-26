@@ -14,7 +14,7 @@
 	export let options: { id: number | string; value: any; label: string }[];
 	export let value: string | number | string[] | null | undefined;
 	export let label: string | undefined = undefined;
-	export let disabled: boolean = false;
+	export let disabled = false;
 
 	const dispatch = createEventDispatcher();
 </script>
