@@ -26,7 +26,7 @@
 			img.onload = resolve;
 			img.src = url;
 		});
-		//@ts-ignore
+
 		return img;
 	};
 
