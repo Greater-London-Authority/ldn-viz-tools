@@ -30,7 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm install
         
-      - name: Build
+      # if we don't do this, imports between packages will fail
+      # (e.g., import of Button from @ldn-viz/ui into @ldn-viz/charts)
+      - name: Build everything
+        run: npm run build
+        
+      - name: Build storybook site
         run: npm run build-storybook -w apps/docs
         
       - name: Upload artifact

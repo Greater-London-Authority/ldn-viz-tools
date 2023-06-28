@@ -5,7 +5,6 @@
     import {
         GREATER_LONDON_ZOOM,
         GREATER_LONDON_CENTER,
-        GREATER_LONDON_BOUNDS,
     } from "../themes/bounds.js"
 
     import * as lightStyle from '../themes/os_light_vts.json';

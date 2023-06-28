@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let style: 'primary' | 'secondary' | 'ghost' = 'primary';
+	export let variant: 'primary' | 'secondary' | 'ghost' = 'primary';
 	export let size: 'xs' | 'sm' | 'base' | 'lg' | 'xl' = 'base';
 	export let disabled = false;
 	export let href = '';
@@ -32,8 +32,8 @@
 	$: buttonClass = classNames(
 		'px-4 py-2 inline-flex justify-center',
 		sizeClasses[size],
-		styleClasses[style],
-		disabled === true ? disabledClasses[style] : '',
+		styleClasses[variant],
+		disabled === true ? disabledClasses[variant] : '',
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);

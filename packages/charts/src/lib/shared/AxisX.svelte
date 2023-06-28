@@ -4,18 +4,18 @@
 
 	const { height, xScale, xRange, yRange } = getContext<LayerCake>('LayerCake');
 
-	export let gridlines: boolean = false;
-	export let baseline: boolean = false;
+	export let gridlines = false;
+	export let baseline = false;
 
 	export let ticks: number | any[] | ((d: any) => void) | undefined = undefined;
 	export let xTick: number | undefined = undefined;
-	export let yTick: number = 16;
+	export let yTick = 16;
 	export let formatTick: (d: any) => void = (d) => d;
 	export let snapTicks = false;
-	export let dxTick: number = 0;
-	export let dyTick: number = 10;
-	export let prefix: string = '';
-	export let suffix: string = '';
+	export let dxTick = 0;
+	export let dyTick = 10;
+	export let prefix = '';
+	export let suffix = '';
 
 	$: isBandwidth = typeof $xScale.bandwidth === 'function';
 

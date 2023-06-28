@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/ui",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"scripts": {
 		"dev": "vite dev --port 3005 --open",
 		"build": "vite build && npm run package",
@@ -11,7 +11,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"lint": "prettier --plugin-search-dir . --check . && eslint src",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"exports": {
