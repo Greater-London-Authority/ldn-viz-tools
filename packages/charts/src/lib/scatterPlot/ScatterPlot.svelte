@@ -14,7 +14,7 @@
 	export let y = 'y';
 	export let xDomain: any[] = [0, null];
 	export let yDomain: any[] = [0, null];
-	export let yScale:  ((x: any) => number | undefined) | undefined = undefined;
+	export let yScale: ((x: any) => number | undefined) | undefined = undefined;
 
 	export let xAxis: { [key: string]: any } = { display: true };
 	export let yAxis: { [key: string]: any } = { display: true };

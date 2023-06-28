@@ -7,7 +7,9 @@
 	export let buttonsHidden = false;
 
 	export let selectedOptions: string[] = [];
-	let selectionState = Object.fromEntries(options.map((o) => [o.id, selectedOptions.includes(o.id)]));
+	let selectionState = Object.fromEntries(
+		options.map((o) => [o.id, selectedOptions.includes(o.id)])
+	);
 
 	const numAvailableOptions = options.filter((o) => !o.disabled).length;
 	let numAvailableOptionsSelected: number;
