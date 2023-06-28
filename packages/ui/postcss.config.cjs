@@ -1,6 +1,6 @@
 const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
-const discardcomments = require('postcss-discard-comments')
+const discardcomments = require('postcss-discard-comments');
 const config = {
 	plugins: [
 		//Some plugins, like tailwindcss/nesting, need to run before Tailwind,
