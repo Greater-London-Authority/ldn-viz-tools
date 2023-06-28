@@ -3,7 +3,9 @@
 	"version": "0.3.0",
 	"scripts": {
 		"dev": "vite dev --port 3005 --open",
-		"build": "vite build && npm run package",
+		"build:sveltekit": "vite build && npm run package",
+		"build:tailwind": "postcss src/app.postcss -o dist/ldn-viz-ui.css",
+		"build": "npm run build:sveltekit && npm run build:tailwind",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
@@ -61,6 +63,8 @@
 		"@rgossiaux/svelte-headlessui": "^1.0.2",
 		"@rgossiaux/svelte-heroicons": "^0.1.2",
 		"@types/d3-dsv": "^3.0.1",
-		"d3-dsv": "^3.0.1"
+		"d3-dsv": "^3.0.1",
+		"postcss-cli": "^10.1.0",
+		"postcss-discard-comments": "^6.0.0"
 	}
 }
