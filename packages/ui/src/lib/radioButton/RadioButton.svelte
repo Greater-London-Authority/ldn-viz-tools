@@ -19,7 +19,7 @@
 		{name}
 		value={id}
 		{disabled}
-		style={!!color
+		style={color
 			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
 			: ''}
 	/>
