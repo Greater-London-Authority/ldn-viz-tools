@@ -8,13 +8,13 @@
 	export let title: string | null = null;
 	export let subTitle: string | null = null;
 	export let alt: string | null = null;
-	export let footer: boolean = false;
-	export let exportBtns: boolean = false;
-	export let x: string = 'x';
-	export let y: string = 'y';
+	export let footer = false;
+	export let exportBtns = false;
+	export let x = 'x';
+	export let y = 'y';
 	export let xDomain: any[] = [0, null];
 	export let yDomain: any[] = [0, null];
-	export let yScale: Function | undefined = undefined;
+	export let yScale:  ((x: any) => number | undefined) | undefined = undefined;
 
 	export let xAxis: { [key: string]: any } = { display: true };
 	export let yAxis: { [key: string]: any } = { display: true };

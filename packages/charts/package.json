@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/charts",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"scripts": {
 		"dev": "vite dev --port 3003 --open",
 		"build": "vite build && npm run package",
@@ -11,7 +11,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"lint": "prettier --plugin-search-dir . --check . && eslint src",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"exports": {

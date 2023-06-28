@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"scripts": {
 		"dev": "vite dev --port 3004 --open",
 		"build": "vite build && npm run package",
@@ -11,16 +11,11 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"lint": "prettier --plugin-search-dir . --check . && eslint src",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js"
-		}
-	},
 	"files": [
+		"themes",
 		"dist",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
@@ -50,5 +45,11 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@deck.gl/core": "^8.9.18",
+		"@deck.gl/layers": "^8.9.18",
+		"@deck.gl/mapbox": "^8.9.18",
+		"svelte-maplibre": "^0.2.2"
+	}
 }

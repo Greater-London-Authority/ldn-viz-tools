@@ -7,18 +7,16 @@
 		ListboxOptions
 	} from '@rgossiaux/svelte-headlessui';
 
+	import { CheckIcon } from '@rgossiaux/svelte-heroicons/solid';
 	import { createEventDispatcher } from 'svelte';
+	import { classNames } from '../utils/classNames';
 
 	export let options: { id: number | string; value: any; label: string }[];
 	export let value: string | number | string[] | null | undefined;
 	export let label: string | undefined = undefined;
-	export let disabled: boolean = false;
+	export let disabled = false;
 
 	const dispatch = createEventDispatcher();
-
-	const classNames = (...classes: string[]) => {
-		return classes.filter(Boolean).join(' ');
-	};
 </script>
 
 <Listbox bind:value on:change={(ev) => dispatch('change', ev.detail)} {disabled} class="relative">
@@ -79,11 +77,11 @@
 					)}
 				let:selected
 			>
-				<!-- {#if selected}
+				{#if selected}
 					<span class={'absolute inset-y-0 right-0 flex items-center pr-4'}>
 						<CheckIcon class="h-5 w-5" aria-hidden="true" />
 					</span>
-				{/if} -->
+				{/if}
 				<span class="block truncate">
 					{option.label}
 				</span>
