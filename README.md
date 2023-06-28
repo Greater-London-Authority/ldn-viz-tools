@@ -54,4 +54,3 @@ When a release is made, `changeset` will add these descriptions of changes to a 
 Releases are made by manually triggering the [`publish-packages`](./.github/publish-packages.yml) workflow in GitHub.
 This runs the `publish-packages` script defined in the top-level [`package.json`](./package.json) file.
 It uses a token that was [generated in NPM](https://www.npmjs.com/settings/ldn-viz/tokens/) and [saved as an Action secret in GitHub](https://github.com/Greater-London-Authority/ldn-viz-tools/settings/secrets/actions).
-

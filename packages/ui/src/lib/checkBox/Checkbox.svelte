@@ -16,7 +16,7 @@
 		type="checkbox"
 		bind:checked
 		{disabled}
-		style={!!color
+		style={color
 			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
 			: ''}
 	/>

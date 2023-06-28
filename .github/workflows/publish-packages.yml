@@ -7,7 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout the git repository
         uses: actions/checkout@v3
 
@@ -16,13 +15,13 @@ jobs:
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-                  
+
       - name: Install dependencies
         run: npm ci
-       
+
       - name: Install turbo
         run: npm install turbo --global
-        
+
       - name: Publish packages
         run: npm run publish-packages
         env:
@@ -32,9 +31,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
+
           git checkout -b release-msg
-          
+
           git add -A .changeset
           git add packages/*/CHANGELOG.md
           git add packages/*/package.json

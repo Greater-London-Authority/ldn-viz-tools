@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
-const ldnColors = require('./colors.json');
-const svgToDataUri = require('mini-svg-data-uri');
-const plugin = require('tailwindcss/plugin');
+const ldnColors = require('./colors.json'); // eslint-disable-line
+const svgToDataUri = require('mini-svg-data-uri'); // eslint-disable-line
+const plugin = require('tailwindcss/plugin'); // eslint-disable-line
 
 const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -15,9 +15,9 @@ const config = {
   },
 
   plugins: [
-    require('@tailwindcss/typography'),
+    require('@tailwindcss/typography'), // eslint-disable-line
     // provides form-element reset
-    require('@tailwindcss/forms')({ strategy: 'class' }),
+    require('@tailwindcss/forms')({ strategy: 'class' }), // eslint-disable-line
     // LDN default form themeing check ui/lib/introduction.mdx for more
     plugin(function ({ addComponents }) {
       addComponents({

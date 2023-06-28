@@ -6,8 +6,8 @@ import { Meta } from '@storybook/blocks';
 
 The`maps` package currently provides two things:
 
-* a set of useful constants (such as a bounding box for Greater London)
-* a set of maplibre style files for commonly-used basemaps
+- a set of useful constants (such as a bounding box for Greater London)
+- a set of maplibre style files for commonly-used basemaps
 
 ### Geocoding
 
@@ -16,13 +16,12 @@ This prevents users form being annoyed or distracted by irrelevant suggestions.
 For example:
 
 ```js
-
-import {GREATER_LONDON_BOUNDS_FLAT} from "@ldn-viz/maps";
+import { GREATER_LONDON_BOUNDS_FLAT } from '@ldn-viz/maps';
 
 const geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl_accessToken,
-    mapboxgl: maplibregl,
-    bbox: GREATER_LONDON_BOUNDS_FLAT
+	accessToken: mapboxgl_accessToken,
+	mapboxgl: maplibregl,
+	bbox: GREATER_LONDON_BOUNDS_FLAT
 });
 
 map.addControl(geocoder);
