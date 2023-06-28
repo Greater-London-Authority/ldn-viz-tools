@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const ldnColors = require("./colors.json");
+const ldnColors = require('./colors.json');
 
 const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
