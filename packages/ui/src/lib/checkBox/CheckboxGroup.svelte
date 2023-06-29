@@ -44,7 +44,11 @@
 			>Select all
 		</Button>
 
-		<Button style="variant" on:click={clearAll} disabled={numAvailableOptionsSelected === 0}
+		<Button
+			size="sm" 
+			variant="ghost" 
+			on:click={clearAll}
+			disabled={numAvailableOptionsSelected === 0}
 			>Clear all</Button
 		>
 	{/if}
