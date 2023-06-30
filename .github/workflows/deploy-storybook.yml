@@ -2,7 +2,7 @@ name: Deploy Storybook site to Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   workflow_dispatch:
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -20,24 +20,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-          
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: '16'
           cache: npm
-          
+
       - name: Install dependencies
         run: npm install
-        
+
       # if we don't do this, imports between packages will fail
       # (e.g., import of Button from @ldn-viz/ui into @ldn-viz/charts)
       - name: Build everything
         run: npm run build
-        
+
       - name: Build storybook site
         run: npm run build-storybook -w apps/docs
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
