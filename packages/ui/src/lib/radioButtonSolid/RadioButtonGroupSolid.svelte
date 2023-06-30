@@ -1,25 +1,48 @@
 <script lang="ts">
-    import {setContext} from 'svelte';
-    import {writable, type Writable} from 'svelte/store';
+	import RadioButtonSolid from './RadioButtonSolid.svelte';
+	export let selectedId: string;
+	export let name: string;
 
-    export let selectedValue;
-    export let variant: "tabs" | "radio" = "radio";
-
-    const val: Writable<string> = writable(selectedValue);
-    val.subscribe((newVal) => (selectedValue = newVal));
-
-    setContext('selectedValue', {
-        selectedValue: val
-    });
-
-    setContext('variant', variant);
-
-    $: {
-        // update value of store when value of prop changes
-        $val = selectedValue;
-    }
+	export let options: {
+		id: string;
+		label: string;
+		disabled?: boolean;
+		icon?: SVGElement;
+		iconPosition?: 'above' | 'below';
+	}[] = [];
 </script>
 
-<div class="flex gap-0.5">
-    <slot/>
+<div class="flex">
+	{#each options as option}
+		<RadioButtonSolid
+			id={option.id}
+			label={option.label}
+			disabled={option.disabled}
+			bind:selectedId
+			{name}
+		/>
+	{/each}
 </div>
+
+<!-- <script lang="ts">
+	import { setContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
+
+	export let selectedValue;
+
+	const val: Writable<string> = writable(selectedValue);
+	val.subscribe((newVal) => (selectedValue = newVal));
+
+	setContext('selectedValue', {
+		selectedValue: val
+	});
+
+	$: {
+		// update value of store when value of prop changes
+		$val = selectedValue;
+	}
+</script>
+
+<div>
+	<slot />
+</div> -->

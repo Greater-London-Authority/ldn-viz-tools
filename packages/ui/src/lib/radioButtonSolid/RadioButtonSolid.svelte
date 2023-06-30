@@ -1,43 +1,35 @@
 <script lang="ts">
-    import {getContext} from 'svelte';
-    import type {Writable} from 'svelte/store';
-    import {classNames} from '../utils/classNames';
-    import Button from "../button/Button.svelte";
+	import { classNames } from '../utils/classNames';
 
-    export let value: string;
-    const keydownHandler = (ev: KeyboardEvent) => {
-        if (ev.key === 'Enter' || ev.key === ' ') {
-            $selectedValue = value;
-        }
-    };
+	export let selectedId = '';
+	export let label: string;
+	export let id: string;
+	export let name: string | undefined;
 
-    const {selectedValue} = getContext<{ selectedValue: Writable<string> }>('selectedValue');
-    const variant = getContext<"tabs" | "radio">('variant');
+	export let disabled = false;
 
-    const commonClasses = {
-        tabs: 'flex-auto flex flex-col items-center py-2 select-none',
-        radio: 'flex-auto flex flex-col items-center py-2 select-none !border-b-0 hover:border-b-2',
-    };
-
-    const activeClasses = {
-        tabs: 'border-b-2 border-core-grey-700 text-core-grey-700 dark:text-white dark:border-white',
-        radio: '!bg-core-blue-500',
-    };
-
-    const inactiveClasses = {
-        tabs: 'text-core-grey-400 bg-core-grey-50 hover:border-core-blue-600 dark:text-core-grey-200 dark:bg-core-grey-700 !border-b-0',
-        radio: 'text-core-grey-400 bg-core-grey-50 hover:border-core-blue-600 dark:text-core-grey-200 !dark:bg-core-grey-700',
-    }
+	let inputID = `input-${id}`;
 </script>
 
-<Button
-        on:click={() => ($selectedValue = value)}
-        on:keydown={keydownHandler}
-        tabindex="0"
-        class={classNames(
-		$selectedValue === value ? activeClasses[variant] : inactiveClasses[variant],
-		commonClasses[variant]
-	)}
->
-    <slot/>
-</Button>
+<div class="w-1/3 relative">
+	<input
+		id={inputID}
+		type="radio"
+		bind:group={selectedId}
+		{name}
+		value={id}
+		{disabled}
+		class="peer absolute top-0 left-0 opacity-0"
+	/>
+	<label
+		for={inputID}
+		class={classNames(
+			disabled
+				? 'cursor-not-allowed bg-core-grey-200 !text-core-grey-400'
+				: 'cursor-pointer bg-core-grey-100 hover:bg-core-grey-200 dark:bg-core-grey-700 dark:hover:bg-core-grey-900',
+			'form-label flex justify-center items-center h-10 w-full ring-1 ring-white peer-checked:bg-core-blue-600 peer-checked:text-white  dark:ring-core-grey-800'
+		)}
+	>
+		{label}
+	</label>
+</div>
