@@ -2,10 +2,10 @@ name: Lint PRs
 
 on:
   pull_request:
-    branches: ["dev", "main"]
+    branches: ['dev', 'main']
 
   push:
-    branches: ["dev", "main"]
+    branches: ['dev', 'main']
   workflow_dispatch:
 
 
@@ -15,16 +15,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-          
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: '16'
           cache: npm
-          
+
       - name: Install dependencies
         run: npm install
-        
+
       - name: Lint
         run: npm run lint
-        
