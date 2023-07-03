@@ -1,4 +1,5 @@
 <script>
+	// Not ideal pathing but Storybook doesn't support Svelte aliases
 	import bgMap from '../../../static/background-map-of-london.png'
 </script>
 
@@ -11,11 +12,11 @@
 		position: relative;
 
 		width: 600px;
-		height: 400px;
+		height: 600px;
 
 		border: 2px solid goldenrod;
 		background-position: center;
-		background-size: 1000px 700px;
+		background-size: 1200px 800px;
 		background-repeat: no-repeat;
 
 		overflow: hidden;

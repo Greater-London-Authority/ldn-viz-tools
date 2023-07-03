@@ -1,12 +1,12 @@
 import { writable } from 'svelte/store'
 
-export const isDesktopView = writable(false)
+export const isWideView = writable(false)
 export const isSidebarOpen = writable(true)
 export const sidebarAlignment = writable('bottom')
 // Options: ['top', 'bottom', 'left', 'right']
 
 export default {
-	isDesktopView,
+	isWideView,
 	isSidebarOpen,
 	sidebarAlignment,
 }

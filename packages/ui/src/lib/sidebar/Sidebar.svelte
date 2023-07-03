@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte'
-	import { isSidebarOpen, sidebarAlignment, isDesktopView } from './sidebar-state.js'
+	import { isSidebarOpen, sidebarAlignment, isWideView } from './sidebar-state.js'
 
 	import DefaultHood from './DefaultHood.svelte'
 	import DefaultContent from './DefaultContent.svelte'
@@ -22,20 +22,18 @@
 	}
 
 	const updateAppState = () => {
-		// TODO: Should this get its parent element width instead?
-		//       I think it should. That would make it more flexible and remove the
-		//       the requirement on media queries.
-		const notMobileView = window.matchMedia('(min-width: 900px)').matches
-		isDesktopView.set(notMobileView)
+		// TODO: Get the value from themes.screens?
+		const laptopView = window.matchMedia('(min-width: 900px)').matches
+		isWideView.set(laptopView)
 	}
 
 	const updateContentSize = (elem) => {
 		const rect = contentElem.getBoundingClientRect()
-		contentSize = $isDesktopView ? rect.width : rect.height
+		contentSize = $isWideView ? rect.width : rect.height
 	}
 
 	const updateSidebarAlignment = (top, left) => {
-		if ($isDesktopView) {
+		if ($isWideView) {
 			sidebarAlignment.set(left ? 'left' : 'right')
 		} else {
 			sidebarAlignment.set(top ? 'top' : 'bottom')
@@ -43,14 +41,14 @@
 	}
 
 	$: updateSidebarAlignment(top, left)
-	$: hoodOnLeft = ['left', 'top'].includes($sidebarAlignment)
+	$: hoodOnLeftOrTop = ['left', 'top'].includes($sidebarAlignment)
 </script>
 
 <svelte:window on:resize={resize} />
 
 <section
 	style:--content-size={`${contentSize}px`}
-	class="side-bar"
+	class="sidebar"
 	class:open={$isSidebarOpen}
 	class:closed={!$isSidebarOpen}
 	class:top
@@ -58,7 +56,7 @@
 	class:left
 	class:right={!left}>
 
-	{#if !hoodOnLeft}
+	{#if !hoodOnLeftOrTop}
 		<div class="hood">
 			<slot name="hood">
 				<DefaultHood />
@@ -72,7 +70,7 @@
 		</slot>
 	</div>
 
-	{#if hoodOnLeft}
+	{#if hoodOnLeftOrTop}
 		<div class="hood">
 			<slot name="hood">
 				<DefaultHood />
@@ -82,7 +80,7 @@
 </section>
 
 <style>
-	.side-bar {
+	.sidebar {
 		position: absolute;
 
 		width: 100%;
@@ -91,7 +89,7 @@
 		pointer-events: none;
 	}
 
-	.side-bar :global(*) {
+	.sidebar :global(*) {
 		pointer-events: auto;
 	}
 
@@ -137,7 +135,7 @@
 	}
 
 	@media (min-width: 900px) {
-		.side-bar {
+		.sidebar {
 			display: flex;
 
 			width: auto;

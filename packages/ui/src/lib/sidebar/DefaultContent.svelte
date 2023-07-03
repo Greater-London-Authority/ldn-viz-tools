@@ -1,27 +1,30 @@
-<div class="default-content">
+<div class="default-content w-full h-96 desktop:w-96 desktop:h-full flex flex-col bg-core-grey-800">
 	<p class="text-white p-4 mb-2">
-		Hello there,
+		Hello there, it looks like you're building a new map.
 	</p>
-	<p class="text-white p-4 mb-2">
-		It looks like you're building a new map. You'll need to replace me with your own content container.
+	<p class="text-white p-4 pb-0">
+		You'll need to replace me using:
 	</p>
+	
+	<!-- prettier-ignore -->
+	<pre class="text-white">
+		<code>
+	&lt;Sidebar&gt;
+		&lt;... slot="content" /&gt;
+	&lt;/Sidebar&gt;
+		</code>
+	</pre>
+
+	<p class="text-white p-4 pb-0">
+		Optionally replace the hood containing the open/close toggle using:
+	</p>
+
+	<!-- prettier-ignore -->
+	<pre class="text-white">
+		<code>
+	&lt;Sidebar&gt;
+		&lt;... slot="hood" /&gt;
+	&lt;/Sidebar&gt;
+		</code>
+	</pre>
 </div>
-
-<style>
-	.default-content {
-		display: flex;
-		flex-direction: column;
-
-		width: 100%;
-		height: 400px;
-
-		background: #1b2021;
-	}
-
-	@media (min-width: 900px) {
-		.default-content {
-			width: 400px;
-			height: 100%;
-		}
-	}
-</style>
