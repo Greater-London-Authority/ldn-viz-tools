@@ -1,5 +1,14 @@
 # ldn-viz-tools-ui
 
+## 0.4.0
+
+### Minor Changes
+
+- 750d139: fix styling of buttons in CheckboxGroup
+- fb5eaed: allow checkboxes in a checkboxGroup to be initially checked
+- 750d139: generate CSS file containing directives for the Tailwind classes that are used
+- 0821c2e: rename "style" prop of Button to "variant"
+
 ## 0.3.0
 
 ### Minor Changes
