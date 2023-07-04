@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 0.5.0
+
+### Minor Changes
+
+- e7698cd: refactor TabSelector into a new RadioButtonSolidGroup component
+
 ## 0.4.0
 
 ### Minor Changes
