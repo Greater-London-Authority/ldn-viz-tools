@@ -12,6 +12,13 @@
 	import TabbedSidebarTabList from './TabbedSidebarTabList.svelte';
 	import TabbedSidebarWrapper from './TabbedSidebarWrapper.svelte';
 
+    import SidebarContents from "../sidebarContents/SidebarContents.svelte";
+    import SidebarTitle from "../sidebarTitle/SidebarTitle.svelte";
+    import SidebarGroupTitle from "../sidebarGroupTitle/SidebarGroupTitle.svelte";
+    import SidebarSection from "../sidebarSection/SidebarSection.svelte";
+    import SidebarSectionTitle from "../sidebarSectionTitle/SidebarSectionTitle.svelte";
+
+
 	let selectedValue = 'filters';
 
 	let tabs = [
@@ -185,3 +192,274 @@
 		<div class="p-6 text-white" role="tabpanel">This sidebar is empty...</div>
 	</TabbedSidebar>
 </Story>
+
+<Story name="With complete contents - full height">
+    <TabbedSidebar>
+        <TabbedSidebarTabList>
+            <TabbedSidebarTabLabel tabId="markers">
+                <LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true"/>
+                Markers
+            </TabbedSidebarTabLabel>
+
+            <TabbedSidebarTabLabel tabId="filters">
+                <FilterIcon class="h-5 w-5 mb-1" aria-hidden="true"/>
+                Filters
+            </TabbedSidebarTabLabel>
+
+            <TabbedSidebarTabLabel tabId="analysis">
+                <ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true"/>
+                Analysis
+            </TabbedSidebarTabLabel>
+
+            <TabbedSidebarTabLabel tabId="layers">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-5 w-5 mb-1"
+                        aria-hidden="true"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+                    />
+                </svg>
+                Layers
+            </TabbedSidebarTabLabel>
+        </TabbedSidebarTabList>
+
+          <SidebarContents>
+                <SidebarTitle>
+                    Main sidebar title
+
+                    <span slot="description">This is a short description of this sidebar. Why does it exist? What does it let you do?</span>
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+		            </span>
+                </SidebarTitle>
+
+
+                <SidebarGroupTitle>
+                    Group 1
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                    </span>
+                </SidebarGroupTitle>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 1
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 2
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+                <SidebarGroupTitle>
+                    Group 2
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                    </span>
+                </SidebarGroupTitle>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 3
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 4
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+            </SidebarContents>
+
+    </TabbedSidebar>
+</Story>
+
+
+
+
+<Story name="With complete contents - limited height">
+    <TabbedSidebar height="400px" >
+        <TabbedSidebarTabList>
+            <TabbedSidebarTabLabel tabId="markers">
+                <LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true"/>
+                Markers
+            </TabbedSidebarTabLabel>
+
+            <TabbedSidebarTabLabel tabId="filters">
+                <FilterIcon class="h-5 w-5 mb-1" aria-hidden="true"/>
+                Filters
+            </TabbedSidebarTabLabel>
+
+            <TabbedSidebarTabLabel tabId="analysis">
+                <ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true"/>
+                Analysis
+            </TabbedSidebarTabLabel>
+
+            <TabbedSidebarTabLabel tabId="layers">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-5 w-5 mb-1"
+                        aria-hidden="true"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+                    />
+                </svg>
+                Layers
+            </TabbedSidebarTabLabel>
+        </TabbedSidebarTabList>
+
+          <SidebarContents>
+                <SidebarTitle>
+                    Main sidebar title
+
+                    <span slot="description">This is a short description of this sidebar. Why does it exist? What does it let you do?</span>
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+		            </span>
+                </SidebarTitle>
+
+
+                <SidebarGroupTitle>
+                    Group 1
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                    </span>
+                </SidebarGroupTitle>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 1
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 2
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+                <SidebarGroupTitle>
+                    Group 2
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                    </span>
+                </SidebarGroupTitle>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 3
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 4
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+            </SidebarContents>
+
+    </TabbedSidebar>
+</Story>
+
+

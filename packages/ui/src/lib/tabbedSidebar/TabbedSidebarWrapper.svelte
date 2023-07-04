@@ -7,6 +7,7 @@
 
 	export let selectedValue;
 	export let collapsed = false;
+	export let height = "";
 
 	const val: Writable<string> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
@@ -25,7 +26,8 @@
 
 <div
 	id="sidebar"
-	class="bg-core-grey-800 h-screen flex"
+	class="bg-core-grey-800 flex"
+	style={`height: ${height ? height : '100vh'}`}
 	class:collapsed
 	class:expanded={!collapsed}
 >
@@ -45,7 +47,7 @@
 
 <style>
 	.expanded {
-		width: 488px;
+		width: calc(408px + 80px);
 	}
 
 	.collapsed {

@@ -2,6 +2,8 @@
 	import { setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
+	export let height = "";
+
 	export let selectedValue: string | undefined = undefined;
 	export let collapsed = false;
 
@@ -21,6 +23,7 @@
 <div
 	id="sidebar"
 	class="bg-core-grey-800 h-screen flex"
+	style={`height: ${height ? height : '100vh'}`}
 	class:collapsed
 	class:expanded={!collapsed}
 >
@@ -29,7 +32,7 @@
 
 <style>
 	.expanded {
-		width: 488px;
+		width: calc(408px + 80px);
 	}
 
 	.collapsed {
