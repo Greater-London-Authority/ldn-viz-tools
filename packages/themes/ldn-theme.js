@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const ldnScreens = require('./screens.json'); // eslint-disable-line
+const screens = require('./screens.json'); // eslint-disable-line
 const ldnColors = require('./colors.json'); // eslint-disable-line
 const svgToDataUri = require('mini-svg-data-uri'); // eslint-disable-line
 const plugin = require('tailwindcss/plugin'); // eslint-disable-line
@@ -9,7 +9,7 @@ const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   darkMode: 'class',
   theme: {
-    screens: ldnScreens,
+    screens: screens,
     ringColor: ldnColors.core.blue[600],
     extend: {
       colors: ldnColors

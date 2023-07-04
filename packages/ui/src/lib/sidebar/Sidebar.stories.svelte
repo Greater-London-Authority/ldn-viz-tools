@@ -22,11 +22,11 @@
 	</DummyScreen>
 </Story>
 
-<Story name="Left aligned">
+<Story name="Left & top aligned">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
 		<p>The minimal amount of code to get a sidebar showing.</p>
 	</div>
 	<DummyScreen>
-		<Sidebar left />
+		<Sidebar top left />
 	</DummyScreen>
 </Story>

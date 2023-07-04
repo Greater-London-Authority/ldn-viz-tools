@@ -1,3 +1,4 @@
 {
-  "desktop": "900px"
+  "not-wide": { "max": "899px" },
+  "wide": "900px"
 }
