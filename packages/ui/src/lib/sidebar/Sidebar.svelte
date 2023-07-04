@@ -1,14 +1,16 @@
-<script>
-	import { onMount } from 'svelte'
-	import { isSidebarOpen, sidebarAlignment, isWideView } from './sidebar-state.js'
+<script lang='ts'>
+	import type { Align } from './sidebarState'
 
+	import { onMount } from 'svelte'
+
+	import { isSidebarOpen, sidebarAlignment, isWideView } from './sidebarState'
 	import DefaultHood from './DefaultHood.svelte'
 	import DefaultContent from './DefaultContent.svelte'
 
 	export let top = false // Default is bottom
 	export let left = false // Default is right
 
-	let contentElem = null
+	let contentElem: undefined | HTMLElement
 	let contentSize = 0
 
 	onMount(() => {
@@ -16,23 +18,23 @@
 	})
 
 	const resize = () => {
-		updateAppState()
+		updateWideViewState()
 		updateContentSize()
 		updateSidebarAlignment(top, left)
 	}
 
-	const updateAppState = () => {
+	const updateWideViewState = () => {
 		// TODO: How to get screens.wide?
-		const laptopView = window.matchMedia(`(min-width: 900px)`).matches
-		isWideView.set(laptopView)
+		const match = window.matchMedia(`(min-width: 900px)`).matches
+		isWideView.set(match)
 	}
 
-	const updateContentSize = (elem) => {
+	const updateContentSize = () => {
 		const rect = contentElem.getBoundingClientRect()
 		contentSize = $isWideView ? rect.width : rect.height
 	}
 
-	const updateSidebarAlignment = (top, left) => {
+	const updateSidebarAlignment = (top: boolean, left: boolean) => {
 		if ($isWideView) {
 			sidebarAlignment.set(left ? 'left' : 'right')
 		} else {
@@ -41,9 +43,11 @@
 	}
 
 	$: updateSidebarAlignment(top, left)
-	$: hoodAfterContent = ['left', 'top'].includes($sidebarAlignment)
 	$: style = $isSidebarOpen ? '' : `${$sidebarAlignment}: ${-contentSize}px`
 	$: classes = `${$sidebarAlignment}-0`
+
+	const HoodAfterContentAlignments: Align[] = ['left', 'top']
+	$: hoodAfterContent = HoodAfterContentAlignments.includes($sidebarAlignment)
 </script>
 
 <svelte:window on:resize={resize} />
@@ -84,6 +88,7 @@
 	}
 
 	#sidebar-hood > :global(*) {
+		/* TODO: This might be not be required */
 		pointer-events: auto;
 	}
 </style>

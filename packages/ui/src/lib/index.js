@@ -20,4 +20,4 @@ export { default as TabList } from './tabs/TabList.svelte';
 
 // Sidebar
 export { default as Sidebar } from './sidebar/Sidebar.svelte'
-export { default as sidebarState } from './sidebar/sidebar-state.svelte'
+export { default as sidebarState } from './sidebar/sidebarState'
