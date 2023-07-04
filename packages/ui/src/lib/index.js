@@ -10,6 +10,8 @@ export { default as LogoMayor } from './logos/LogoMayor.svelte';
 export { default as Modal } from './modal/Modal.svelte';
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
+export { default as RadioButtonSolid } from './RadioButtonSolid/RadioButtonSolid.svelte';
+export { default as RadioButtonGroupSolid } from './RadioButtonSolid/RadioButtonGroupSolid.svelte';
 export { default as Select } from './select/Select.svelte';
 export { default as TabbedSidebar } from './tabbedSidebar/TabbedSidebar.svelte';
 export { default as TabbedSidebarTabLabel } from './tabbedSidebar/TabbedSidebarTabLabel.svelte';
