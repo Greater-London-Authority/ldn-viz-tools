@@ -19,5 +19,8 @@ export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 
 // Sidebar
-export { default as Sidebar } from './sidebar/Sidebar.svelte'
 export { default as sidebarState } from './sidebar/sidebarState'
+export { default as Sidebar } from './sidebar/Sidebar.svelte'
+export { default as TabbedHood } from './sidebar/TabbedHood.svelte'
+export { default as TabbedContent } from './sidebar/TabbedContent.svelte'
+export { default as TabbedSidebar } from './sidebar/TabbedSidebar.svelte'

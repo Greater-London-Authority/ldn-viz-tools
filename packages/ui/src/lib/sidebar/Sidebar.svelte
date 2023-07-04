@@ -44,7 +44,9 @@
 
 	$: updateSidebarAlignment(top, left)
 	$: style = $isSidebarOpen ? '' : `${$sidebarAlignment}: ${-contentSize}px`
-	$: classes = `${$sidebarAlignment}-0`
+
+	let classes = ''
+	$: classes = $isSidebarOpen ? `${$sidebarAlignment}-0` : ''
 
 	const HoodAfterContentAlignments: Align[] = ['left', 'top']
 	$: hoodAfterContent = HoodAfterContentAlignments.includes($sidebarAlignment)

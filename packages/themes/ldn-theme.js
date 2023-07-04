@@ -9,10 +9,10 @@ const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   darkMode: 'class',
   theme: {
-    screens: screens,
     ringColor: ldnColors.core.blue[600],
     extend: {
-      colors: ldnColors
+      colors: ldnColors,
+      screens: screens,
     }
   },
 
