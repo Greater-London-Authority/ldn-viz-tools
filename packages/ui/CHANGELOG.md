@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 0.6.0
+
+### Minor Changes
+
+- e081448: actually export the RadioButtonSolid and RadioButtonGroupSolid components
+
 ## 0.5.0
 
 ### Minor Changes
