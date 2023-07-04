@@ -1,0 +1,111 @@
+<script>
+    import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
+    import SidebarContents from "./SidebarContents.svelte";
+    import SidebarTitle from "../sidebarTitle/SidebarTitle.svelte";
+    import SidebarGroupTitle from "../sidebarGroupTitle/SidebarGroupTitle.svelte";
+    import SidebarSectionTitle from "../sidebarSectionTitle/SidebarSectionTitle.svelte";
+    import SidebarDivider from "../sidebarDivider/SidebarDivider.svelte";
+    import SidebarSection from "../sidebarSection/SidebarSection.svelte";
+</script>
+
+<Meta title="Ui/Sidebars" component={SidebarContents}/>
+
+<Template let:args>
+    <SidebarContents {...args}/>
+</Template>
+
+<Story name="A complete sidebar panel">
+    <div class="w-[408px]">
+            <SidebarContents>
+                <SidebarTitle>
+                    Main sidebar title
+
+                    <span slot="description">This is a short description of this sidebar. Why does it exist? What does it let you do?</span>
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+		            </span>
+                </SidebarTitle>
+
+
+                <SidebarGroupTitle>
+                    Group 1
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                    </span>
+                </SidebarGroupTitle>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 1
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 2
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+                <SidebarGroupTitle>
+                    Group 2
+
+                    <span slot="info">
+			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                    </span>
+                </SidebarGroupTitle>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 3
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+
+                <SidebarSection>
+                    <SidebarSectionTitle>
+                        Section 4
+
+                        <span slot="description">Select a borough to download usage stats by LSOA.</span>
+
+                        <span slot="info">
+                            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
+                        </span>
+                    </SidebarSectionTitle>
+
+                    <p>Some controls would go here...</p>
+                </SidebarSection>
+
+            </SidebarContents>
+    </div>
+</Story>
