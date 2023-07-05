@@ -27,7 +27,7 @@
         </div>
 
     {:else}
-        <div class="text-xl text-white">
+        <div class="text-base text-white">
             <slot/>
         </div>
     {/if}
