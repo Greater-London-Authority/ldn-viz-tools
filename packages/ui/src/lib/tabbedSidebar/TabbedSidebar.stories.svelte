@@ -13,10 +13,10 @@
 	import TabbedSidebarWrapper from './TabbedSidebarWrapper.svelte';
 
     import SidebarContents from "../sidebar/SidebarContents.svelte";
-    import SidebarTitle from "../sidebarTitle/SidebarTitle.svelte";
+    import SidebarTitle from "../sidebar/SidebarTitle.svelte";
     import SidebarGroupTitle from "../sidebar/SidebarGroupTitle.svelte";
-    import SidebarSection from "../sidebarSection/SidebarSection.svelte";
-    import SidebarSectionTitle from "../sidebarSectionTitle/SidebarSectionTitle.svelte";
+    import SidebarSection from "../sidebar/SidebarSection.svelte";
+    import SidebarSectionTitle from "../sidebar/SidebarSectionTitle.svelte";
 
 
 	let selectedValue = 'filters';

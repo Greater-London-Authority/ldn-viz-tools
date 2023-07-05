@@ -2,7 +2,7 @@
 
     import {InformationCircleIcon} from "@rgossiaux/svelte-heroicons/solid";
 
-    import Modal from "../Modal/Modal.svelte";
+    import Modal from "../modal/Modal.svelte";
 
     let isOpen = false;
     const openModal = () => isOpen = true

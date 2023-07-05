@@ -1,11 +1,11 @@
 <script>
     import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
     import SidebarContents from "./SidebarContents.svelte";
-    import SidebarTitle from "../sidebarTitle/SidebarTitle.svelte";
+    import SidebarTitle from "./SidebarTitle.svelte";
     import SidebarGroupTitle from "./SidebarGroupTitle.svelte";
-    import SidebarSectionTitle from "../sidebarSectionTitle/SidebarSectionTitle.svelte";
+    import SidebarSectionTitle from "./SidebarSectionTitle.svelte";
     import SidebarDivider from "./sidebarDivider/SidebarDivider.svelte";
-    import SidebarSection from "../sidebarSection/SidebarSection.svelte";
+    import SidebarSection from "./SidebarSection.svelte";
 </script>
 
 <Meta title="Ui/Sidebars" component={SidebarContents}/>
