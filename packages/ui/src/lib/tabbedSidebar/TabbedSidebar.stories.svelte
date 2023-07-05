@@ -12,9 +12,9 @@
 	import TabbedSidebarTabList from './TabbedSidebarTabList.svelte';
 	import TabbedSidebarWrapper from './TabbedSidebarWrapper.svelte';
 
-    import SidebarContents from "../sidebarContents/SidebarContents.svelte";
+    import SidebarContents from "../sidebar/SidebarContents.svelte";
     import SidebarTitle from "../sidebarTitle/SidebarTitle.svelte";
-    import SidebarGroupTitle from "../sidebarGroupTitle/SidebarGroupTitle.svelte";
+    import SidebarGroupTitle from "../sidebar/SidebarGroupTitle.svelte";
     import SidebarSection from "../sidebarSection/SidebarSection.svelte";
     import SidebarSectionTitle from "../sidebarSectionTitle/SidebarSectionTitle.svelte";
 

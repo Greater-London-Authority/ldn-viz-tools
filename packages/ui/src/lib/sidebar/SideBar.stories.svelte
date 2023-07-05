@@ -2,9 +2,9 @@
     import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
     import SidebarContents from "./SidebarContents.svelte";
     import SidebarTitle from "../sidebarTitle/SidebarTitle.svelte";
-    import SidebarGroupTitle from "../sidebarGroupTitle/SidebarGroupTitle.svelte";
+    import SidebarGroupTitle from "./SidebarGroupTitle.svelte";
     import SidebarSectionTitle from "../sidebarSectionTitle/SidebarSectionTitle.svelte";
-    import SidebarDivider from "../sidebarDivider/SidebarDivider.svelte";
+    import SidebarDivider from "./sidebarDivider/SidebarDivider.svelte";
     import SidebarSection from "../sidebarSection/SidebarSection.svelte";
 </script>
 

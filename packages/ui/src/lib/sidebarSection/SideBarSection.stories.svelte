@@ -2,7 +2,7 @@
     import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
     import SidebarSection from "./SidebarSection.svelte";
     import SidebarSectionTitle from "../sidebarSectionTitle/SidebarSectionTitle.svelte";
-    import SidebarContents from "../sidebarContents/SidebarContents.svelte";
+    import SidebarContents from "../sidebar/SidebarContents.svelte";
 </script>
 
 <Meta title="Ui/Sidebars/SidebarSection" component={SidebarSection}/>
