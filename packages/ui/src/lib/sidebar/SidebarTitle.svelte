@@ -38,7 +38,7 @@
 
 
     {#if $$slots.info}
-        <Modal title="More info" bind:isOpen>
+        <Modal title="More info" description="" bind:isOpen>
             <slot name="info"/>
         </Modal>
     {/if}
