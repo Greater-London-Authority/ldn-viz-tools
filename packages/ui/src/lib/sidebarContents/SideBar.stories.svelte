@@ -28,13 +28,6 @@
                 </SidebarTitle>
 
 
-                <SidebarGroupTitle>
-                    Group 1
-
-                    <span slot="info">
-			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
-                    </span>
-                </SidebarGroupTitle>
 
 
                 <SidebarSection>
@@ -48,7 +41,16 @@
                         </span>
                     </SidebarSectionTitle>
 
-                    <p>Some controls would go here...</p>
+                <SidebarGroupTitle>
+                    Group 1
+                </SidebarGroupTitle>
+
+
+                <SidebarGroupTitle>
+                    Group 2
+                </SidebarGroupTitle>
+
+
                 </SidebarSection>
 
 
@@ -64,17 +66,17 @@
                         </span>
                     </SidebarSectionTitle>
 
-                    <p>Some controls would go here...</p>
+                    <SidebarGroupTitle>
+                        Group 3
+                    </SidebarGroupTitle>
+
+                    <SidebarGroupTitle>
+                        Group 4
+                    </SidebarGroupTitle>
+
                 </SidebarSection>
 
 
-                <SidebarGroupTitle>
-                    Group 2
-
-                    <span slot="info">
-			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
-                    </span>
-                </SidebarGroupTitle>
 
 
                 <SidebarSection>

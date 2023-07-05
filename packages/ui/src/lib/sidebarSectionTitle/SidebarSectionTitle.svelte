@@ -14,12 +14,12 @@
     {#if $$slots.info}
 
         <div class="flex justify-between items-end self-stretch">
-            <div class="text-base text-white">
+            <div class="text-base font-bold text-white">
                 <slot/>
             </div>
 
-            <div class="text-xs text-core-grey-200 flex gap-2">
-                <span on:click={openModal}>More info</span>
+            <div class="text-xs text-core-grey-200 flex gap-1">
+                <span on:click={openModal}>more info</span>
                 <InformationCircleIcon class="h-4 w-4 fill-current" on:click={openModal}/>
             </div>
 
@@ -32,7 +32,7 @@
         </div>
     {/if}
 
-    <div class="text-xs text-white">
+    <div class="text-xs text-white mt-1">
         <slot name="description"/>
     </div>
 

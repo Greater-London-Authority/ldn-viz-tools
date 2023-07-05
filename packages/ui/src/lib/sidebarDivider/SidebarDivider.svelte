@@ -1,2 +1,2 @@
 
-<hr class="bg-core-grey-360 w-full" />
+<hr class="border-core-grey-400 w-full" />
