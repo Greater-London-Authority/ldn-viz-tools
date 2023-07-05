@@ -1,4 +1,6 @@
 <script lang='ts'>
+	import type {ComponentType} from "svelte";
+
 	import { isSidebarOpen, selectedTabId } from './sidebarState'
 
 	export let id: string

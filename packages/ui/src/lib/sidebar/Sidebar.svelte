@@ -1,9 +1,8 @@
 <script lang='ts'>
-	import type { Align } from './sidebarState'
-
 	import { onMount } from 'svelte'
-
+	import { Align } from './sidebarState'
 	import { isSidebarOpen, sidebarAlignment, isWideView } from './sidebarState'
+
 	import DefaultHood from './DefaultHood.svelte'
 	import DefaultContent from './DefaultContent.svelte'
 
@@ -36,19 +35,16 @@
 
 	const updateSidebarAlignment = (top: boolean, left: boolean) => {
 		if ($isWideView) {
-			sidebarAlignment.set(left ? 'left' : 'right')
+			sidebarAlignment.set(left ? Align.Left : Align.Right)
 		} else {
-			sidebarAlignment.set(top ? 'top' : 'bottom')
+			sidebarAlignment.set(top ? Align.Top : Align.Bottom)
 		}
 	}
 
 	$: updateSidebarAlignment(top, left)
-	$: style = $isSidebarOpen ? '' : `${$sidebarAlignment}: ${-contentSize}px`
+	$: style = $isSidebarOpen ? `${$sidebarAlignment}: 0` : `${$sidebarAlignment}: ${-contentSize}px`
 
-	let classes = ''
-	$: classes = $isSidebarOpen ? `${$sidebarAlignment}-0` : ''
-
-	const HoodAfterContentAlignments: Align[] = ['left', 'top']
+	const HoodAfterContentAlignments = [Align.Left, Align.Top]
 	$: hoodAfterContent = HoodAfterContentAlignments.includes($sidebarAlignment)
 </script>
 
@@ -56,8 +52,8 @@
 
 <section
 	id="sidebar"
-	style={style}
-	class="absolute pointer-events-none w-full not-wide:left-0 wide:top-0 wide:w-auto wide:h-full wide:flex {classes}">
+	{style}
+	class="absolute pointer-events-none w-full not-wide:left-0 wide:top-0 wide:w-auto wide:h-full wide:flex">
 
 	{#if !hoodAfterContent}
 		<div id="sidebar-hood" class="pointer-events-none">

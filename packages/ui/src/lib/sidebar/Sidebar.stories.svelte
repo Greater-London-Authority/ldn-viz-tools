@@ -3,8 +3,8 @@
 
 	import DummyScreen from './DummyScreen.svelte'
 	import Sidebar from './Sidebar.svelte';
-	import TabbedHood from './TabbedHood.svelte'
-	import TabbedContent from './TabbedContent.svelte'
+	import TabList from './TabList.svelte'
+	import TabPanel from './TabPanel.svelte'
 	import TabbedSidebar from './TabbedSidebar.svelte'
 
 	import {
@@ -50,12 +50,12 @@
 
 <Story name="Tabbed content">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
-		<p>Here the sidebar slots in &lt;TabbedHood&gt; and &lt;TabbedContent&gt; for a tabbed sidebar.</p>
+		<p>Here the sidebar slots in &lt;TabList&gt; and &lt;TabPanel&gt; for a tabbed sidebar.</p>
 	</div>
 	<DummyScreen>
 		<Sidebar>
-			<TabbedHood slot="hood" {tabs} />
-			<TabbedContent slot="content" {tabs} />
+			<TabList slot="hood" {tabs} />
+			<TabPanel slot="content" {tabs} />
 		</Sidebar>
 	</DummyScreen>
 </Story>

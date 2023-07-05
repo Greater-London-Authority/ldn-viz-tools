@@ -3,8 +3,8 @@
 
 	import { selectedTabId } from './sidebarState'
 	import Sidebar from './Sidebar.svelte'
-	import TabbedHood from './TabbedHood.svelte'
-	import TabbedContent from './TabbedContent.svelte'
+	import TabList from './TabList.svelte'
+	import TabPanel from './TabPanel.svelte'
 
 	export let tabs: Tab[] = []
 	export let initialTabId: null | string = null
@@ -15,10 +15,10 @@
 </script>
 
 <Sidebar {...$$restProps}>
-	<TabbedHood slot="hood" {tabs} />
-	<TabbedContent slot="content" {tabs}>
+	<TabList slot="hood" {tabs} />
+	<TabPanel slot="content" {tabs}>
 		<slot>
 			<div class="text-white h-full w-full pt-8 flex justify-center">Todo</div>
 		</slot>
-	</TabbedContent>
+	</TabPanel>
 </Sidebar>

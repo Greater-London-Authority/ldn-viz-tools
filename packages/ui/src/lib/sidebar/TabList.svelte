@@ -2,7 +2,7 @@
 	import type { Tab } from './sidebarState'
 
 	import { isWideView } from './sidebarState'
-	import TabbedHoodTab from './TabbedHoodTab.svelte'
+	import TabLabel from './TabLabel.svelte'
 
 	export let tabs: Tab[] = [];
 
@@ -10,8 +10,8 @@
 	$: classes = $isWideView ? 'flex-col h-full' : 'w-full'
 </script>
 
-<div class="bg-core-grey-800 flex {classes}">
+<div role="tablist" class="bg-core-grey-800 flex {classes}">
 	{#each tabs as { id, label, icon } (id)}
-		<TabbedHoodTab {id} {label} {icon} />
+		<TabLabel {id} {label} {icon} />
 	{/each}
 </div>
