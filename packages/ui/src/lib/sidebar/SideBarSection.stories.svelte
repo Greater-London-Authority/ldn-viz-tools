@@ -13,17 +13,18 @@
 
 <Story name="Default">
     <div class="w-[408px]">
+        <SidebarContents>
+            <SidebarSection>
+                <SidebarSectionTitle>
+                    Sidebar section title
 
-        <SidebarSection>
-            <SidebarSectionTitle>
-                Sidebar section title
+                    <span slot="description">Select a borough to download usage stats by LSOA.</span>
+                </SidebarSectionTitle>
 
-                <span slot="description">Select a borough to download usage stats by LSOA.</span>
-            </SidebarSectionTitle>
+                <p class="text-white">Here is some content</p>
 
-            <p class="text-white">Here is some content</p>
-
-        </SidebarSection>
+            </SidebarSection>
+        </SidebarContents>
     </div>
 
 </Story>
