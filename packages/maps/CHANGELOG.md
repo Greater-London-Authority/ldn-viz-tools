@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 0.1.1
+
+### Patch Changes
+
+- e7698cd: fix typo in README (charts -> maps)
+
 ## 0.1.0
 
 ### Minor Changes
