@@ -2,7 +2,7 @@
     import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
     import SidebarSection from "./SidebarSection.svelte";
     import SidebarSectionTitle from "./SidebarSectionTitle.svelte";
-    import SidebarContents from "./SidebarContents.svelte";
+    import SidebarContainer from "./SidebarContainer.svelte";
 </script>
 
 <Meta title="Ui/Sidebars/SidebarSection" component={SidebarSection}/>
@@ -13,7 +13,7 @@
 
 <Story name="Default">
     <div class="w-[408px]">
-        <SidebarContents>
+        <SidebarContainer>
             <SidebarSection>
                 <SidebarSectionTitle>
                     Sidebar section title
@@ -24,7 +24,7 @@
                 <p class="text-white">Here is some content</p>
 
             </SidebarSection>
-        </SidebarContents>
+        </SidebarContainer>
     </div>
 
 </Story>
@@ -33,7 +33,7 @@
 <Story name="Multiple sections">
     <div class="w-[408px]">
 
-        <SidebarContents>
+        <SidebarContainer>
             <SidebarSection>
                 <SidebarSectionTitle>
                     Sidebar section 1
@@ -55,6 +55,6 @@
                 <p class="text-white">Here is some content corresponding to the second sidebar section.</p>
 
             </SidebarSection>
-        </SidebarContents>
+        </SidebarContainer>
     </div>
 </Story>

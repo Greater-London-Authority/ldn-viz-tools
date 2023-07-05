@@ -12,7 +12,7 @@
 	import TabbedSidebarTabList from './TabbedSidebarTabList.svelte';
 	import TabbedSidebarWrapper from './TabbedSidebarWrapper.svelte';
 
-    import SidebarContents from "../sidebar/SidebarContents.svelte";
+    import SidebarContainer from "../sidebar/SidebarContainer.svelte";
     import SidebarTitle from "../sidebar/SidebarTitle.svelte";
     import SidebarGroupTitle from "../sidebar/SidebarGroupTitle.svelte";
     import SidebarSection from "../sidebar/SidebarSection.svelte";
@@ -231,7 +231,7 @@
             </TabbedSidebarTabLabel>
         </TabbedSidebarTabList>
 
-          <SidebarContents>
+            <SidebarContainer>
                 <SidebarTitle>
                     Main sidebar title
 
@@ -243,13 +243,6 @@
                 </SidebarTitle>
 
 
-                <SidebarGroupTitle>
-                    Group 1
-
-                    <span slot="info">
-			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
-                    </span>
-                </SidebarGroupTitle>
 
 
                 <SidebarSection>
@@ -263,7 +256,16 @@
                         </span>
                     </SidebarSectionTitle>
 
-                    <p>Some controls would go here...</p>
+                <SidebarGroupTitle>
+                    Group 1
+                </SidebarGroupTitle>
+
+
+                <SidebarGroupTitle>
+                    Group 2
+                </SidebarGroupTitle>
+
+
                 </SidebarSection>
 
 
@@ -279,17 +281,17 @@
                         </span>
                     </SidebarSectionTitle>
 
-                    <p>Some controls would go here...</p>
+                    <SidebarGroupTitle>
+                        Group 3
+                    </SidebarGroupTitle>
+
+                    <SidebarGroupTitle>
+                        Group 4
+                    </SidebarGroupTitle>
+
                 </SidebarSection>
 
 
-                <SidebarGroupTitle>
-                    Group 2
-
-                    <span slot="info">
-			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
-                    </span>
-                </SidebarGroupTitle>
 
 
                 <SidebarSection>
@@ -321,7 +323,7 @@
                     <p>Some controls would go here...</p>
                 </SidebarSection>
 
-            </SidebarContents>
+            </SidebarContainer>
 
     </TabbedSidebar>
 </Story>
@@ -367,7 +369,7 @@
             </TabbedSidebarTabLabel>
         </TabbedSidebarTabList>
 
-          <SidebarContents>
+            <SidebarContainer>
                 <SidebarTitle>
                     Main sidebar title
 
@@ -379,13 +381,6 @@
                 </SidebarTitle>
 
 
-                <SidebarGroupTitle>
-                    Group 1
-
-                    <span slot="info">
-			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
-                    </span>
-                </SidebarGroupTitle>
 
 
                 <SidebarSection>
@@ -399,7 +394,16 @@
                         </span>
                     </SidebarSectionTitle>
 
-                    <p>Some controls would go here...</p>
+                <SidebarGroupTitle>
+                    Group 1
+                </SidebarGroupTitle>
+
+
+                <SidebarGroupTitle>
+                    Group 2
+                </SidebarGroupTitle>
+
+
                 </SidebarSection>
 
 
@@ -415,17 +419,17 @@
                         </span>
                     </SidebarSectionTitle>
 
-                    <p>Some controls would go here...</p>
+                    <SidebarGroupTitle>
+                        Group 3
+                    </SidebarGroupTitle>
+
+                    <SidebarGroupTitle>
+                        Group 4
+                    </SidebarGroupTitle>
+
                 </SidebarSection>
 
 
-                <SidebarGroupTitle>
-                    Group 2
-
-                    <span slot="info">
-			            This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user clicks on 'more info'.
-                    </span>
-                </SidebarGroupTitle>
 
 
                 <SidebarSection>
@@ -457,7 +461,7 @@
                     <p>Some controls would go here...</p>
                 </SidebarSection>
 
-            </SidebarContents>
+            </SidebarContainer>
 
     </TabbedSidebar>
 </Story>

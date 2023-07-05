@@ -1,6 +1,6 @@
 <script>
     import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
-    import SidebarContents from "./SidebarContents.svelte";
+    import SidebarContainer from "./SidebarContainer.svelte";
     import SidebarTitle from "./SidebarTitle.svelte";
     import SidebarGroupTitle from "./SidebarGroupTitle.svelte";
     import SidebarSectionTitle from "./SidebarSectionTitle.svelte";
@@ -8,15 +8,15 @@
     import SidebarSection from "./SidebarSection.svelte";
 </script>
 
-<Meta title="Ui/Sidebars" component={SidebarContents}/>
+<Meta title="Ui/Sidebars" component={SidebarContainer}/>
 
 <Template let:args>
-    <SidebarContents {...args}/>
+    <SidebarContainer {...args}/>
 </Template>
 
 <Story name="A complete sidebar panel">
     <div class="w-[408px]">
-            <SidebarContents>
+            <SidebarContainer>
                 <SidebarTitle>
                     Main sidebar title
 
@@ -108,6 +108,6 @@
                     <p>Some controls would go here...</p>
                 </SidebarSection>
 
-            </SidebarContents>
+            </SidebarContainer>
     </div>
 </Story>
