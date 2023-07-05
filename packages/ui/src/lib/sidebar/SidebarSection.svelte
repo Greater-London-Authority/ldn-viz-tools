@@ -1,6 +1,6 @@
 <script>
     import SidebarSectionTitle from "./SidebarSectionTitle.svelte";
-    import SidebarDivider from "./sidebarDivider/SidebarDivider.svelte";
+    import SidebarDivider from "./SidebarDivider.svelte";
 </script>
 
 <slot />

@@ -4,7 +4,7 @@
     import SidebarTitle from "./SidebarTitle.svelte";
     import SidebarGroupTitle from "./SidebarGroupTitle.svelte";
     import SidebarSectionTitle from "./SidebarSectionTitle.svelte";
-    import SidebarDivider from "./sidebarDivider/SidebarDivider.svelte";
+    import SidebarDivider from "./SidebarDivider.svelte";
     import SidebarSection from "./SidebarSection.svelte";
 </script>
 
