@@ -1,4 +1,4 @@
-# @ldn-viz/charts
+# @ldn-viz/maps
 
 This package is intended primarily for use in projects created by [Greater London Authority](https://london.gov.uk/)'s [City Intelligence Unit](https://www.london.gov.uk/programmes-strategies/research-and-analysis).
 

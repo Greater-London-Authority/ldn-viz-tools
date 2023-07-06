@@ -9,7 +9,6 @@ const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   darkMode: 'class',
   theme: {
-    ringColor: ldnColors.core.blue[600],
     extend: {
       colors: ldnColors,
       screens: screens,
@@ -54,7 +53,7 @@ const config = {
         '.dark': {
           '.form-input, .form-textarea, .form-select, .form-multiselect, .form-checkbox, .form-radio':
             {
-              'border-color': ldnColors.core.grey[600],
+              'border-color': ldnColors.core.grey[400],
               'background-color': ldnColors.core.grey[600],
               color: ldnColors.core.grey[50],
               '&:focus': {
