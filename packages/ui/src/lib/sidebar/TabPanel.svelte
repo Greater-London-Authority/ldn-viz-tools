@@ -1,12 +1,12 @@
-<script lang='ts'>
-	import type { Tab } from './sidebarState'
+<script lang="ts">
+	import type { Tab } from './sidebarState';
 
-	import { isWideView } from './sidebarState'
+	import { isWideView } from './sidebarState';
 
-	export let tabs: Tab[] = []
+	export let tabs: Tab[] = [];
 
-	let classes = 'w-full h-52'
-	$: classes = $isWideView ? 'h-full w-52' : 'w-full h-52'
+	let classes = 'w-full h-52';
+	$: classes = $isWideView ? 'h-full w-52' : 'w-full h-52';
 </script>
 
 <div role="tabpanel" class="bg-core-grey-800 {classes}">

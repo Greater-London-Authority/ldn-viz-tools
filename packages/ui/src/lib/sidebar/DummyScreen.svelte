@@ -1,6 +1,6 @@
 <script>
 	// Not ideal pathing but Storybook doesn't support Svelte aliases
-	import bgMap from '../../../static/background-map-of-london.png'
+	import bgMap from '../../../static/background-map-of-london.png';
 </script>
 
 <div class="dummy-screen" style:background-image="url({bgMap})">
