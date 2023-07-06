@@ -3,8 +3,8 @@
 	import { Align } from './sidebarState';
 	import { isSidebarOpen, sidebarAlignment, isWideView } from './sidebarState';
 
-	import DefaultHood from './DefaultHood.svelte';
-	import DefaultContent from './DefaultContent.svelte';
+	import SimpleOpenCloseToggle from './SimpleOpenCloseToggle.svelte';
+	import FlexContent from './FlexContent.svelte';
 
 	export let top = false; // Default is bottom
 	export let left = false; // Default is right
@@ -23,7 +23,7 @@
 	};
 
 	const updateWideViewState = () => {
-		// TODO: How to get screens.wide?
+		// TODO: How to get themes.screens.wide?
 		const match = window.matchMedia(`(min-width: 900px)`).matches;
 		isWideView.set(match);
 	};
@@ -51,41 +51,41 @@
 <svelte:window on:resize={resize} />
 
 <section
-	id="sidebar"
+	id="map-sidebar"
 	{style}
 	class="absolute pointer-events-none w-full not-wide:left-0 wide:top-0 wide:w-auto wide:h-full wide:flex"
 >
 	{#if !hoodAfterContent}
-		<div id="sidebar-hood" class="pointer-events-none">
+		<div id="map-sidebar-hood" class="pointer-events-none">
 			<slot name="hood">
-				<DefaultHood />
+				<SimpleOpenCloseToggle />
 			</slot>
 		</div>
 	{/if}
 
 	<div bind:this={contentElem} class="pointer-events-auto">
 		<slot name="content">
-			<DefaultContent />
+			<FlexContent />
 		</slot>
 	</div>
 
 	{#if hoodAfterContent}
-		<div id="sidebar-hood" class="pointer-events-none">
+		<div id="map-sidebar-hood" class="pointer-events-none">
 			<slot name="hood">
-				<DefaultHood />
+				<SimpleOpenCloseToggle />
 			</slot>
 		</div>
 	{/if}
 </section>
 
 <style>
-	#sidebar {
+	#map-sidebar {
 		transition-property: top, bottom, left, right;
 		transition-duration: 0.4s;
 		transition-timing-function: ease-out;
 	}
 
-	#sidebar-hood > :global(*) {
+	#map-sidebar-hood > :global(*) {
 		/* TODO: This might be not be required */
 		pointer-events: auto;
 	}

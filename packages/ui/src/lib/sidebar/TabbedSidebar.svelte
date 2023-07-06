@@ -16,7 +16,7 @@
 
 <Sidebar {...$$restProps}>
 	<TabList slot="hood" {tabs} />
-	<TabPanel slot="content" {tabs}>
+	<TabPanel slot="content">
 		<slot />
 	</TabPanel>
 </Sidebar>

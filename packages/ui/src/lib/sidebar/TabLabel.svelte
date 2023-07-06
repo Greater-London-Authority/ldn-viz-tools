@@ -27,12 +27,7 @@
 		}
 	};
 
-	let classes = '';
-	$: if (id === $selectedTabId) {
-		classes = 'bg-core-blue-600 hover:bg-core-blue-700';
-	} else {
-		classes = 'hover:bg-core-grey-600';
-	}
+	$: selected = $selectedTabId === id;
 </script>
 
 <div
@@ -40,8 +35,20 @@
 	on:click={clickHandler}
 	tabindex="0"
 	role="tab"
-	class="w-20 h-20 p-2 flex flex-col items-center justify-center text-white text-xs text-center select-none cursor-pointer {classes}"
+	class="w-20 h-20 p-2 flex flex-col items-center justify-center text-white text-xs text-center select-none cursor-pointer"
+	class:not-selected={!selected}
+	class:selected
 >
 	{label}
 	<svelte:component this={icon} class="h-5 w-5 mb-1" aria-hidden="true" />
 </div>
+
+<style>
+	.not-selected {
+		@apply hover:bg-core-grey-600;
+	}
+
+	.selected {
+		@apply bg-core-blue-600 hover:bg-core-blue-700;
+	}
+</style>

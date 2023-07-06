@@ -3,34 +3,23 @@
 
 	import { isWideView, isSidebarOpen, selectedTabId } from './sidebarState';
 
-	export let tabs: Tab[] = [];
-	let parentPanelElem;
+	let panelElem;
 
-	const toggleDisplayedPanel = (tabId) => {
-		if (!$isSidebarOpen) {
-			// Don't remove content if closing the sidebar.
-			// The user may reopen the same tab.
-			return;
-		}
-
-		const panels = parentPanelElem.children;
-
-		for (const panel of panels) {
-			if (tabId === panel.dataset.tabId) {
-				panel.classList.add('tab-panel-selected-tab');
+	$: if (panelElem && $isSidebarOpen) {
+		for (const tabContent of panelElem.children) {
+			if ($selectedTabId === tabContent.dataset.tabId) {
+				tabContent.classList.add('tab-panel-selected-tab-content');
 			} else {
-				panel.classList.remove('tab-panel-selected-tab');
+				tabContent.classList.remove('tab-panel-selected-tab-content');
 			}
 		}
-	};
-
-	$: parentPanelElem && toggleDisplayedPanel($selectedTabId);
+	}
 </script>
 
 <div
-	bind:this={parentPanelElem}
+	bind:this={panelElem}
 	role="tabpanel"
-	class="tab-panel bg-core-grey-800"
+	class="tab-panel bg-core-grey-800 p-6"
 	class:narrow-view={!$isWideView}
 	class:wide-view={$isWideView}
 >
@@ -38,7 +27,7 @@
 </div>
 
 <style>
-	.tab-panel > :global(:not(.tab-panel-selected-tab)) {
+	.tab-panel > :global(:not(.tab-panel-selected-tab-content)) {
 		display: none;
 	}
 

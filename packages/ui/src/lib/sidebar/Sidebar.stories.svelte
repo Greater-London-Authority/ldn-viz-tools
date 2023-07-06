@@ -1,8 +1,10 @@
 <script>
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import DummyScreen from './DummyScreen.svelte';
+	import MockContainer from './MockContainer.svelte';
+
 	import Sidebar from './Sidebar.svelte';
+	import FlexContent from './FlexContent.svelte';
 	import TabList from './TabList.svelte';
 	import TabPanel from './TabPanel.svelte';
 	import TabbedSidebar from './TabbedSidebar.svelte';
@@ -27,9 +29,9 @@
 <Meta title="Ui/Sidebar" component={Sidebar} />
 
 <Template let:args>
-	<DummyScreen>
+	<MockContainer>
 		<Sidebar {...args} />
-	</DummyScreen>
+	</MockContainer>
 </Template>
 
 <Story name="Minimal">
@@ -39,9 +41,9 @@
 			increase to see right alignment
 		</p>
 	</div>
-	<DummyScreen>
+	<MockContainer>
 		<Sidebar />
-	</DummyScreen>
+	</MockContainer>
 </Story>
 
 <Story name="Left & top aligned">
@@ -51,21 +53,38 @@
 			see left alignment.
 		</p>
 	</div>
-	<DummyScreen>
+	<MockContainer>
 		<Sidebar top left />
-	</DummyScreen>
+	</MockContainer>
+</Story>
+
+<Story name="With content">
+	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
+		<p>Lets add some content.</p>
+	</div>
+	<MockContainer>
+		<Sidebar>
+			<FlexContent slot="content">
+				<div class="m-2">One</div>
+				<div class="m-2">word</div>
+				<div class="m-2">at</div>
+				<div class="m-2">a</div>
+				<div class="m-2">time</div>
+			</FlexContent>
+		</Sidebar>
+	</MockContainer>
 </Story>
 
 <Story name="Tabbed content">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
 		<p>Here the sidebar slots in &lt;TabList&gt; and &lt;TabPanel&gt; for a tabbed sidebar.</p>
 	</div>
-	<DummyScreen>
+	<MockContainer>
 		<Sidebar>
 			<TabList slot="hood" {tabs} />
-			<TabPanel slot="content" {tabs} />
+			<TabPanel slot="content" />
 		</Sidebar>
-	</DummyScreen>
+	</MockContainer>
 </Story>
 
 <Story name="Tabbed sidebar component">
@@ -75,7 +94,7 @@
 			encapsulated into a component of its own &lt;TabbedSidebar&gt;.
 		</p>
 	</div>
-	<DummyScreen>
+	<MockContainer>
 		<ExampleTabbedSidebar />
-	</DummyScreen>
+	</MockContainer>
 </Story>
