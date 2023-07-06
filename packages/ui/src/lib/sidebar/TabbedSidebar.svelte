@@ -17,8 +17,6 @@
 <Sidebar {...$$restProps}>
 	<TabList slot="hood" {tabs} />
 	<TabPanel slot="content" {tabs}>
-		<slot>
-			<div class="text-white h-full w-full pt-8 flex justify-center">Todo</div>
-		</slot>
+		<slot />
 	</TabPanel>
 </Sidebar>

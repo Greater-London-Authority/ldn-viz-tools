@@ -7,6 +7,8 @@
 	import TabPanel from './TabPanel.svelte';
 	import TabbedSidebar from './TabbedSidebar.svelte';
 
+	import ExampleTabbedSidebar from './ExampleTabbedSidebar.svelte';
+
 	import {
 		ChartBarIcon,
 		FilterIcon,
@@ -66,7 +68,7 @@
 	</DummyScreen>
 </Story>
 
-<Story name="TabbedSidebar">
+<Story name="Tabbed sidebar component">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
 		<p>
 			Because tabbed sidebars are becoming a common occurrence, the above setup has been
@@ -74,6 +76,6 @@
 		</p>
 	</div>
 	<DummyScreen>
-		<TabbedSidebar {tabs} initialTabId={tabs[0].id} />
+		<ExampleTabbedSidebar />
 	</DummyScreen>
 </Story>
