@@ -3,12 +3,12 @@
 	import bgMap from '../../../static/background-map-of-london.png';
 </script>
 
-<div style:background-image="url({bgMap})" class="mock-container">
+<div style:background-image="url({bgMap})" class="story-app-container">
 	<slot />
 </div>
 
 <style>
-	.mock-container {
+	.story-app-container {
 		position: relative;
 
 		width: 600px;

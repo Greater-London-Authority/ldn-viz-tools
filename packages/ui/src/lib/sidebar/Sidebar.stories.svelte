@@ -1,15 +1,13 @@
 <script>
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import MockContainer from './MockContainer.svelte';
+	import StoryAppContainer from './StoryAppContainer.svelte';
 
 	import Sidebar from './Sidebar.svelte';
-	import FlexContent from './FlexContent.svelte';
-	import TabList from './TabList.svelte';
-	import TabPanel from './TabPanel.svelte';
+	import SidebarContainer from './SidebarContainer.svelte';
 	import TabbedSidebar from './TabbedSidebar.svelte';
 
-	import ExampleTabbedSidebar from './ExampleTabbedSidebar.svelte';
+	import TabbedSidebarUsageExample from './TabbedSidebarUsageExample.svelte';
 
 	import {
 		ChartBarIcon,
@@ -29,72 +27,83 @@
 <Meta title="Ui/Sidebar" component={Sidebar} />
 
 <Template let:args>
-	<MockContainer>
+	<StoryAppContainer>
 		<Sidebar {...args} />
-	</MockContainer>
+	</StoryAppContainer>
 </Template>
 
-<Story name="Minimal">
+<Story name="Simple sidebar">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
 		<p>
 			The minimal amount of code to get a sidebar showing. Reduce to see bottom alignment or
-			increase to see right alignment
+			increase to see right alignment.
 		</p>
 	</div>
-	<MockContainer>
+	<StoryAppContainer>
 		<Sidebar />
-	</MockContainer>
+	</StoryAppContainer>
 </Story>
 
-<Story name="Left & top aligned">
+<Story name="Sidebars with left and top alignment">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
 		<p>
 			Left and top alignment depending on screen width. Reduce to see top alignment or increase to
 			see left alignment.
 		</p>
 	</div>
-	<MockContainer>
+	<StoryAppContainer>
 		<Sidebar top left />
-	</MockContainer>
+	</StoryAppContainer>
 </Story>
 
-<Story name="With content">
+<Story name="Adding content to a sidebar">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
 		<p>Lets add some content.</p>
 	</div>
-	<MockContainer>
+	<StoryAppContainer>
 		<Sidebar>
-			<FlexContent slot="content">
+			<SidebarContainer slot="content">
 				<div class="m-2">One</div>
 				<div class="m-2">word</div>
 				<div class="m-2">at</div>
 				<div class="m-2">a</div>
 				<div class="m-2">time</div>
-			</FlexContent>
+			</SidebarContainer>
 		</Sidebar>
-	</MockContainer>
-</Story>
-
-<Story name="Tabbed content">
-	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
-		<p>Here the sidebar slots in &lt;TabList&gt; and &lt;TabPanel&gt; for a tabbed sidebar.</p>
-	</div>
-	<MockContainer>
-		<Sidebar>
-			<TabList slot="hood" {tabs} />
-			<TabPanel slot="content" />
-		</Sidebar>
-	</MockContainer>
+	</StoryAppContainer>
 </Story>
 
 <Story name="Tabbed sidebar component">
 	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
 		<p>
-			Because tabbed sidebars are becoming a common occurrence, the above setup has been
-			encapsulated into a component of its own &lt;TabbedSidebar&gt;.
+			Tabbed sidebars are becoming a common occurrence. Tabbed sidebar components have been
+			encapsulated into an easy to use component &lt;TabbedSidebar&gt;. This should deal with all
+			use cases thus far.
+		</p>
+		<p>
+			If exceptions arise we can expose the underlying &lt;SidebarTabList&gt; and
+			&lt;SidebarTabPanel&gt; components for greater flexibility (a minor release change).
 		</p>
 	</div>
-	<MockContainer>
-		<ExampleTabbedSidebar />
-	</MockContainer>
+	<StoryAppContainer>
+		<TabbedSidebarUsageExample />
+	</StoryAppContainer>
+</Story>
+
+<Story name="Tabbed sidebar hide space">
+	<div class="my-4 text-core-grey-500 dark:text-core-grey-200 space-y-2">
+		<p>
+			You can hide unused space by passing the boolean '<code>hideSpace</code>' property
+			(&lt;TabbedSidebar hideSpace&gt;).
+		</p>
+	</div>
+	<StoryAppContainer>
+		<TabbedSidebarUsageExample hideSpace />
+	</StoryAppContainer>
+</Story>
+
+<Story name="Tabbed sidebar left and top">
+	<StoryAppContainer>
+		<TabbedSidebarUsageExample left top />
+	</StoryAppContainer>
 </Story>

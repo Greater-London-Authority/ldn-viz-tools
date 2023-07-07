@@ -2,19 +2,21 @@
 	import type { Tab } from './sidebarState';
 
 	import { isWideView } from './sidebarState';
-	import TabLabel from './TabLabel.svelte';
+	import SidebarTabLabel from './SidebarTabLabel.svelte';
 
+	export let hideSpace = false;
 	export let tabs: Tab[] = [];
 </script>
 
 <div
 	role="tablist"
-	class="bg-core-grey-800 flex"
+	class="bg-core-grey-800 flex pointer-events-auto"
+	class:hideSpace
 	class:narrow-view={!$isWideView}
 	class:wide-view={$isWideView}
 >
 	{#each tabs as { id, label, icon } (id)}
-		<TabLabel {id} {label} {icon} />
+		<SidebarTabLabel {id} {label} {icon} />
 	{/each}
 </div>
 
@@ -25,5 +27,13 @@
 
 	.wide-view {
 		@apply h-full flex-col;
+	}
+
+	.hideSpace.narrow-view {
+		@apply w-min;
+	}
+
+	.hideSpace.wide-view {
+		@apply h-min;
 	}
 </style>

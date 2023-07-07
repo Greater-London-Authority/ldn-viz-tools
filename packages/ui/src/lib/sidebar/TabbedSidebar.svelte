@@ -1,22 +1,23 @@
 <script lang="ts">
 	import type { Tab } from './sidebarState';
 
-	import { selectedTabId } from './sidebarState';
+	import { sidebarTabId } from './sidebarState';
 	import Sidebar from './Sidebar.svelte';
-	import TabList from './TabList.svelte';
-	import TabPanel from './TabPanel.svelte';
+	import SidebarTabList from './SidebarTabList.svelte';
+	import SidebarTabPanel from './SidebarTabPanel.svelte';
 
 	export let tabs: Tab[] = [];
 	export let initialTabId: null | string = null;
+	export let hideSpace = false;
 
 	if (initialTabId) {
-		selectedTabId.set(initialTabId);
+		sidebarTabId.set(initialTabId);
 	}
 </script>
 
 <Sidebar {...$$restProps}>
-	<TabList slot="hood" {tabs} />
-	<TabPanel slot="content">
+	<SidebarTabList slot="hood" {tabs} {hideSpace} />
+	<SidebarTabPanel slot="content">
 		<slot />
-	</TabPanel>
+	</SidebarTabPanel>
 </Sidebar>

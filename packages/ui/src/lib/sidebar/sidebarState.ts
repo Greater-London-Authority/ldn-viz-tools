@@ -16,11 +16,11 @@ export type Tab = {
 export const isWideView = writable(false);
 export const isSidebarOpen = writable(true);
 export const sidebarAlignment: Writable<Align> = writable('bottom');
-export const selectedTabId: Writable<null | string> = writable(null);
+export const sidebarTabId: Writable<null | string> = writable(null);
 
 export default {
 	isWideView,
 	isSidebarOpen,
 	sidebarAlignment,
-	selectedTabId
+	sidebarTabId
 };

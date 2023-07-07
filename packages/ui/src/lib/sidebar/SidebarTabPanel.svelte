@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { Tab } from './sidebarState';
 
-	import { isWideView, isSidebarOpen, selectedTabId } from './sidebarState';
+	import { isWideView, isSidebarOpen, sidebarTabId } from './sidebarState';
 
 	let panelElem;
 
 	$: if (panelElem && $isSidebarOpen) {
 		for (const tabContent of panelElem.children) {
-			if ($selectedTabId === tabContent.dataset.tabId) {
+			if ($sidebarTabId === tabContent.dataset.tabId) {
 				tabContent.classList.add('tab-panel-selected-tab-content');
 			} else {
 				tabContent.classList.remove('tab-panel-selected-tab-content');
@@ -19,7 +19,7 @@
 <div
 	bind:this={panelElem}
 	role="tabpanel"
-	class="tab-panel bg-core-grey-800 p-6"
+	class="tab-panel bg-core-grey-800 p-6 text-white flex wide:flex-col overflow-y-auto"
 	class:narrow-view={!$isWideView}
 	class:wide-view={$isWideView}
 >
@@ -32,10 +32,10 @@
 	}
 
 	.narrow-view {
-		@apply w-full h-52;
+		@apply w-full h-[400px];
 	}
 
 	.wide-view {
-		@apply h-full w-52;
+		@apply h-full w-[400px];
 	}
 </style>

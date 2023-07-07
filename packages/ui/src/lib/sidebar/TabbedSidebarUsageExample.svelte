@@ -16,25 +16,25 @@
 	];
 </script>
 
-<TabbedSidebar initialTabId="markers" {tabs}>
+<TabbedSidebar initialTabId="markers" {tabs} {...$$restProps}>
 	<div data-tab-id="markers" class="text-white">
 		Markers is selected, so we'd render a
 		<code> &lt;Marker /&gt;</code>
-		component
+		component.
 	</div>
 	<div data-tab-id="filters" class="text-white">
 		Filter is selected, so we'd render a
 		<code> &lt;Filters /&gt;</code>
-		component
+		component.
 	</div>
 	<div data-tab-id="analysis" class="text-white">
 		Analysis is selected, so we'd render a
 		<code> &lt;Analysis /&gt;</code>
-		component
+		component.
 	</div>
 	<div data-tab-id="layers" class="text-white">
 		Layers is selected, so we'd render a
 		<code> &lt;Layer /&gt;</code>
-		component
+		component.
 	</div>
 </TabbedSidebar>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ComponentType } from 'svelte';
 
-	import { isSidebarOpen, selectedTabId } from './sidebarState';
+	import { isSidebarOpen, sidebarTabId } from './sidebarState';
 
 	export let id: string;
 	export let label: string;
@@ -14,20 +14,20 @@
 	};
 
 	const clickHandler = () => {
-		if ($isSidebarOpen && $selectedTabId === id) {
-			selectedTabId.set(null);
+		if ($isSidebarOpen && $sidebarTabId === id) {
+			sidebarTabId.set(null);
 			isSidebarOpen.set(false); // Collapse sidebar
 			return;
 		}
 
-		selectedTabId.set(id);
+		sidebarTabId.set(id);
 
 		if (!$isSidebarOpen) {
 			isSidebarOpen.set(true); // Open sidebar
 		}
 	};
 
-	$: selected = $selectedTabId === id;
+	$: selected = $sidebarTabId === id;
 </script>
 
 <div
