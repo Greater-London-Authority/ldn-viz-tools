@@ -11,7 +11,7 @@ const config = {
   theme: {
     extend: {
       colors: ldnColors,
-      screens: screens,
+      screens: screens
     }
   },
 
