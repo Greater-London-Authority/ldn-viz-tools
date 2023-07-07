@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+const defaultTheme = require('tailwindcss/defaultTheme'); // eslint-disable-line
 const screens = require('./screens.json'); // eslint-disable-line
 const ldnColors = require('./colors.json'); // eslint-disable-line
 const svgToDataUri = require('mini-svg-data-uri'); // eslint-disable-line
@@ -11,7 +12,10 @@ const config = {
   theme: {
     extend: {
       colors: ldnColors,
-      screens: screens
+      screens: screens,
+      fontFamily: {
+        sans: ['"Roboto"', ...defaultTheme.fontFamily.sans]
+      }
     }
   },
 
