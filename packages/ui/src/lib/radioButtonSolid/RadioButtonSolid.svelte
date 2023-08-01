@@ -14,7 +14,7 @@
 	const { selectedId } = getContext<{ selectedId: Writable<string> }>('selectedId');
 </script>
 
-<div class="w-1/3 flex">
+<div class="w-2 flex flex-grow flex-shrink">
 	<input
 		id={inputID}
 		type="radio"
