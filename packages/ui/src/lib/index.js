@@ -19,3 +19,8 @@ export { default as TabbedSidebarTabList } from './tabbedSidebar/TabbedSidebarTa
 export { default as TabbedSidebarWrapper } from './tabbedSidebar/TabbedSidebarWrapper.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
+
+// Messenger
+export { default as Messenger } from './messenger/Messenger.svelte';
+export { postMessage } from './messenger/Messenger.svelte';
+export { MessageType } from './messenger/Message.svelte';
