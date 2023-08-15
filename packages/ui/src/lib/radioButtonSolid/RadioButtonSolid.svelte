@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import { classNames } from '../utils/classNames';
+	import { classNames } from '../utils';
 
 	export let label = '';
 	export let id: string;

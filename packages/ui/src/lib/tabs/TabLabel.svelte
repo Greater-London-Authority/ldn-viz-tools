@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/types/runtime/store';
-	import { classNames } from '../utils/classNames';
+	import { classNames } from '../utils';
 
 	export let tabId: string;
 	const { selectedValue } = getContext<{ selectedValue: Writable<string> }>('selectedValue');

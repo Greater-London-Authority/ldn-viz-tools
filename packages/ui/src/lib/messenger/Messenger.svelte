@@ -1,54 +1,63 @@
 <script context="module" lang="ts">
-	import Message, { type MessageType } from './Message.svelte';
+	import Message, { MessageType } from './Message.svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import { toCSS } from '../util.js';
+	import { objectToCSS } from '../util.js';
 
-	type MessageProps = {
+	type UserMessage = {
 		id: string;
 		type: MessageType;
 		text: string;
 		remove: () => void;
-	} 
+	};
 
-	const TIME_TO_LIVE = 4000;
-	const MAX_MESSAGES = 3
-	const messages: Writable<MessageProps[]> = writable([]);
+	const DEFAULT_TIME_TO_LIVE: number = 3500;
+	const MAX_MESSAGES: number = 3;
+	const messages: Writable<UserMessage[]> = writable([]);
 
-	export const postMessage = (type: MessageType, text: string) => {
-		const msg: MessageProps = {
-			id: crypto.randomUUID(),
-			type: type,
-			text: text,
-			remove: () => {},
-		}
-
-		msg.remove = () => {
-			messages.update((msgList: MessageProps[]) => {
-				return msgList.filter((m) => m.id !== msg.id);
-			});
-		}
-
-		addMessage(msg);
+	export const postMessage = (
+		text: string,
+		type = MessageType.Notice,
+		timeToLive = DEFAULT_TIME_TO_LIVE
+	) => {
+		const msg = newMessage(text, type);
+		showMessage(msg);
+		removeMesssageAfter(msg, timeToLive);
 		return msg;
 	};
 
-	const addMessage = (msg: MessageProps) => {
-		messages.update((msgList: MessageProps[]) => {
-			msgList = [msg, ...msgList]
-			limitMessages(msgList)
-			return msgList
-		})
+	const newMessage = (text: string, type: MessageType): UserMessage => {
+		const id = crypto.randomUUID();
 
-		setTimeout(msg.remove, TIME_TO_LIVE);
+		return {
+			id: id,
+			type: type,
+			text: text,
+			remove: () => removeMessage(id)
+		};
 	};
 
-	const limitMessages = (msgList: MessageProps[]) => {
-		while (msgList.length > MAX_MESSAGES) {
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			msgList.pop().remove()
+	const showMessage = (msg: UserMessage) => {
+		messages.update((msgList: UserMessage[]) => {
+			msgList = [msg, ...msgList];
+			return limitNumberOfMessages(msgList);
+		});
+	};
+
+	const removeMessage = (id: string) => {
+		messages.update((msgList: UserMessage[]) => {
+			return msgList.filter((m) => m.id !== id);
+		});
+	};
+
+	const removeMesssageAfter = (msg: UserMessage, timeToLive: number) => {
+		if (timeToLive > 0) {
+			setTimeout(msg.remove, timeToLive);
 		}
-	}
+	};
+
+	const limitNumberOfMessages = (msgList: UserMessage[]) => {
+		return msgList.slice(0, MAX_MESSAGES);
+	};
 </script>
 
 <script lang="ts">
@@ -60,7 +69,7 @@
 		right: '8px'
 	};
 
-	const style = toCSS({
+	const style = objectToCSS({
 		...defaultStyles,
 		...styles
 	});

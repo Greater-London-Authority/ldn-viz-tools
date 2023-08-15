@@ -1,7 +1,15 @@
+// classNames receives zero or more arguments as strings: any which are empty
+// are discarded, then the remainder are joined together (separated by a space
+// character) and returned as a single string
+export const classNames = (...classes: string[]) => {
+	return classes.filter(Boolean).join(' ');
+};
+
+// newEnterKeyHandler wraps a handler for keyboard events and only invokes it
+// when an enter key is pressed. 
 export const newEnterKeyHandler = (handler: (e: KeyboardEvent) => any) => {
-	const ENTER_KEY = 13;
 	return (e: KeyboardEvent) => {
-		if (e.keyCode === ENTER_KEY) {
+		if (e.key === 'Enter') {
 			handler(e);
 		}
 	};
@@ -11,15 +19,19 @@ interface Styles {
 	[key: string]: any
 }
 
-const asCleanString = (v: any) => (v ? v.toString().trim() : '');
-const toCleanValues = ([k, v]: [string, any]) => [k, asCleanString(v)];
-const notEmpty = (pair: any[]) => !!pair[1];
-const asString = ([k, v]: any[]) => `${k}: ${v}`;
+// objectToCSS converts key value pairs of an object into a CSS string.
+export const objectToCSS = (styles: Styles) =>
+	Object.entries(styles).map(toCleanValue).filter(noneEmptyValues).map(pairToString).join(';') + ';';
 
-export const toCSS = (styles: Styles) =>
-	Object.entries(styles).map(toCleanValues).filter(notEmpty).map(asString).join(';') + ';';
+const toCleanValue = ([k, v]: [string, any]) => {
+	v = (v ? v.toString().trim() : '')
+	return [k, v]
+};
+const noneEmptyValues = (pair: any[]) => !!pair[1];
+const pairToString = ([k, v]: any[]) => `${k}: ${v}`;
 
 export default {
+	classNames,
 	newEnterKeyHandler,
-	toCSS
+	objectToCSS
 };

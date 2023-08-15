@@ -4,7 +4,7 @@
 	export let disabled = false;
 	export let href = '';
 	export let type: 'button' | 'submit' = 'button';
-	import { classNames } from '../utils/classNames';
+	import { classNames } from '../utils';
 
 	const styleClasses = {
 		primary: 'bg-core-grey-500 border-b-4 border-core-blue-600 text-white hover:bg-core-grey-400',
