@@ -9,7 +9,7 @@
 		remove: () => void;
 	};
 
-	const DEFAULT_TIME_TO_LIVE: number = 3500;
+	const DEFAULT_TIME_TO_LIVE = 3500;
 	const MAX_MESSAGES = 3;
 	const messages: Writable<UserMessage[]> = writable([]);
 
