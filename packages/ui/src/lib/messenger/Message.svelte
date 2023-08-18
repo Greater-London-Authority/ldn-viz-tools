@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script context="module" lang="ts">
 	export enum MessageType {
 		Notice = 'Notice',
 		Success = 'Success',
@@ -19,7 +19,7 @@
 	import { fade } from 'svelte/transition';
 
 	import CloseIcon from '@rgossiaux/svelte-heroicons/outline/XCircle';
-	import { newEnterKeyHandler } from '../util.js';
+	import { newEnterKeyHandler } from '../util';
 
 	export let id: string;
 	export let type: MessageType = MessageType.Notice;

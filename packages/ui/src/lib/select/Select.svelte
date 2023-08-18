@@ -9,7 +9,7 @@
 
 	import { CheckIcon } from '@rgossiaux/svelte-heroicons/solid';
 	import { createEventDispatcher } from 'svelte';
-	import { classNames } from '../utils';
+	import { classNames } from '../util';
 
 	export let options: { id: number | string; value: any; label: string }[];
 	export let value: string | number | string[] | null | undefined;

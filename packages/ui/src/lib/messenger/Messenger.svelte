@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import Message, { MessageType } from './Message.svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import { objectToCSS } from '../util.js';
+	import { objectToCSS } from '../util';
 
 	type UserMessage = {
 		id: string;
@@ -61,21 +61,10 @@
 </script>
 
 <script lang="ts">
-	export let styles = {};
-
-	const defaultStyles = {
-		position: 'fixed',
-		bottom: '8px',
-		right: '8px'
-	};
-
-	const style = objectToCSS({
-		...defaultStyles,
-		...styles
-	});
+	export let classes = '';
 </script>
 
-<div class="flex flex-col gap-4 z-40" {style}>
+<div class="fixed bottom-2 right-2 flex flex-col gap-4 z-40 {classes}">
 	{#each $messages as msg (msg.id)}
 		<Message {...msg} />
 	{/each}
