@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	import Message, { MessageType } from './Message.svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import { objectToCSS } from '../util';
 
 	type UserMessage = {
 		id: string;
@@ -11,7 +10,7 @@
 	};
 
 	const DEFAULT_TIME_TO_LIVE: number = 3500;
-	const MAX_MESSAGES: number = 3;
+	const MAX_MESSAGES = 3;
 	const messages: Writable<UserMessage[]> = writable([]);
 
 	export const postMessage = (
