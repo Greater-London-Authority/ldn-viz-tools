@@ -6,7 +6,7 @@ export const classNames = (...classes: string[]) => {
 };
 
 // newEnterKeyHandler wraps a handler for keyboard events and only invokes it
-// when an enter key is pressed. 
+// when an enter key is pressed.
 export const newEnterKeyHandler = (handler: (e: KeyboardEvent) => any) => {
 	return (e: KeyboardEvent) => {
 		if (e.key === 'Enter') {
@@ -16,16 +16,17 @@ export const newEnterKeyHandler = (handler: (e: KeyboardEvent) => any) => {
 };
 
 interface Styles {
-	[key: string]: any
+	[key: string]: any;
 }
 
 // objectToCSS converts key value pairs of an object into a CSS string.
 export const objectToCSS = (styles: Styles) =>
-	Object.entries(styles).map(toCleanValue).filter(noneEmptyValues).map(pairToString).join(';') + ';';
+	Object.entries(styles).map(toCleanValue).filter(noneEmptyValues).map(pairToString).join(';') +
+	';';
 
 const toCleanValue = ([k, v]: [string, any]) => {
-	v = (v ? v.toString().trim() : '')
-	return [k, v]
+	v = v ? v.toString().trim() : '';
+	return [k, v];
 };
 const noneEmptyValues = (pair: any[]) => !!pair[1];
 const pairToString = ([k, v]: any[]) => `${k}: ${v}`;
