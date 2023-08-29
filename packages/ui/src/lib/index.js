@@ -5,6 +5,7 @@ export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
+export { default as LogoFooter } from './logos/LogoFooter.svelte'
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
 export { default as Modal } from './modal/Modal.svelte';
