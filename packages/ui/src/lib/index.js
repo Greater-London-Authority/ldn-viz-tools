@@ -3,6 +3,7 @@ export { default as Button } from './button/Button.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
+export { default as IconButton } from './iconButton/IconButton.svelte';
 export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
