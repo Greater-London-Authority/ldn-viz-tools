@@ -39,7 +39,7 @@
 
 ### Minor Changes
 
-- d5434ea: ADDED -  `Button` component
+- d5434ea: ADDED - `Button` component
 - 99de4e1: ADDED - `ImageDownloadButton`
 - 1c76060: FIXED - prevent interaction with disabled Button component
 - 29a2beb: ADDED - `DataDownloadButton` component
