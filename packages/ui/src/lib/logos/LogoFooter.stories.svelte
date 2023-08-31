@@ -10,8 +10,8 @@
 <Story name="Default">
 	<div class="border-2 border-core-grey-400 bg-white h-96 flex flex-col justify-between">
 		<p>
-			Default CIU footer shows <code>&lt;LogoCIU&gt;</code> and <code>&lt;LogoMayor&gt;</code>. The
-			footer will size itself to its content.
+			Default CIU footer shows <code>&lt;LogoMayor&gt;</code> (left) and
+			<code>&lt;LogoCIU&gt;</code> (right). The footer will size itself to its content.
 		</p>
 		<LogoFooter />
 	</div>
@@ -27,7 +27,7 @@
 				</p>
 			</div>
 			<div class="border-2 border-core-grey-400 w-1/2 flex flex-col justify-between">
-				<p>Or in a sub component such as a sidebar.</p>
+				<p>Or in a sub component such as a sidebar or modal.</p>
 				<LogoFooter classes="mt-auto" />
 			</div>
 		</div>
