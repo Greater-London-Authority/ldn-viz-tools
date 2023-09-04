@@ -14,12 +14,12 @@ export { default as LogoMayor } from './logos/LogoMayor.svelte';
 
 export { default as Modal } from './modal/Modal.svelte';
 
-export { default as NavAuth} from './navbar/NavAuth.svelte';
-export { default as NavBarContainer} from './navbar/NavBarContainer.svelte';
-export { default as NavItem} from './navbar/NavItem.svelte';
-export { default as NavLink} from './navbar/NavLink.svelte';
-export { default as NavLinks} from './navbar/NavLinks.svelte';
-export { default as NavTitle} from './navbar/NavTitle.svelte';
+export { default as NavAuth } from './navbar/NavAuth.svelte';
+export { default as NavBarContainer } from './navbar/NavBarContainer.svelte';
+export { default as NavItem } from './navbar/NavItem.svelte';
+export { default as NavLink } from './navbar/NavLink.svelte';
+export { default as NavLinks } from './navbar/NavLinks.svelte';
+export { default as NavTitle } from './navbar/NavTitle.svelte';
 
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
