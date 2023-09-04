@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-add NavBar components
+ADDED - `Header` component

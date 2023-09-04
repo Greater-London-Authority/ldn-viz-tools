@@ -1,31 +1,31 @@
 <script lang="ts">
     import {Meta, Story, Template} from '@storybook/addon-svelte-csf';
 
-    import NavBarContainer from "./NavBarContainer.svelte";
+    import Header from "./Header.svelte";
     import NavLink from "./NavLink.svelte";
     import NavLinks from "./NavLinks.svelte";
-    import NavTitle from "./NavTitle.svelte";
-    import NavAuth from "./NavAuth.svelte";
-    import NavItem from "./NavItem.svelte";
+    import HeaderTitle from "./HeaderTitle.svelte";
+    import HeaderRight from "./HeaderRight.svelte";
+    import HeaderItem from "./HeaderItem.svelte";
 
 </script>
 
-<Meta title="Ui/NavBar" component={NavBarContainer}/>
+<Meta title="Ui/Header" component={Header}/>
 
 <Template let:args>
-    <NavBarContainer {...args}/>
+    <Header {...args}/>
 </Template>
 
 <Story name="NavBar - title only">
-    <NavBarContainer>
-        <NavTitle>An interesting app</NavTitle>
-    </NavBarContainer>
+    <Header>
+        <HeaderTitle>An interesting app</HeaderTitle>
+    </Header>
 </Story>
 
 
 <Story name="A NavBar - title and links to pages">
-    <NavBarContainer>
-        <NavTitle>EV Charger Dashboard</NavTitle>
+    <Header>
+        <HeaderTitle>EV Charger Dashboard</HeaderTitle>
 
         <NavLinks>
             <NavLink target="map">
@@ -36,12 +36,12 @@
                 Trends
             </NavLink>
         </NavLinks>
-    </NavBarContainer>
+    </Header>
 </Story>
 
 <Story name="A NavBar - title, links, and auth section">
-    <NavBarContainer>
-        <NavTitle>EV Charger Dashboard</NavTitle>
+    <Header>
+        <HeaderTitle>EV Charger Dashboard</HeaderTitle>
 
         <NavLinks>
             <NavLink target="map">
@@ -54,16 +54,16 @@
         </NavLinks>
 
 
-        <NavAuth>
-            <NavItem>
+        <HeaderRight>
+            <HeaderItem>
                 <span>Logged in as <b>Bob Smith</b></span>
-            </NavItem>
+            </HeaderItem>
 
 
-            <NavItem>
+            <HeaderItem>
                 <a href="/#">Log Out</a>
-            </NavItem>
-        </NavAuth>
-    </NavBarContainer>
+            </HeaderItem>
+        </HeaderRight>
+    </Header>
 </Story>
 
