@@ -80,6 +80,6 @@
 		bind:isOpen
 		width="6xl"
 		title="A wider modal!"
-		description="We can use the width prop to set differetn max-widths from xs though 7xl and full. Default is md"
+		description="We can use the width prop to set different max-widths from xs though 7xl and full. Default is md"
 	/>
 </Story>

@@ -3,4 +3,4 @@
 '@ldn-viz/docs': patch
 ---
 
-Added a width prop to the modal component
+CHANGED - Added a `width` prop to the `Modal` component
