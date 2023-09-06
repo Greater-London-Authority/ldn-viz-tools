@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-actually export the RadioButtonSolid and RadioButtonGroupSolid components
+FIXED - actually export the RadioButtonSolid and RadioButtonGroupSolid components
