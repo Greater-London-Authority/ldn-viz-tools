@@ -1,5 +1,10 @@
 # LDN Viz Tools
 
+![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fcharts?label=%40ldn-viz%2Fcharts%20version)
+![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fmaps?label=%40ldn-viz%2Fmaps%20version)
+![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fui?label=%40ldn-viz%2Fui%20version)
+![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fthemes?label=%40ldn-viz%2Fthemes%20version)
+
 This is a mono-repo containing several components:
 
 - the [`@ldn-viz/charts`](https://www.npmjs.com/package/@ldn-viz/charts) package is in [charts](./packages/charts); it contains components for visualizing data
