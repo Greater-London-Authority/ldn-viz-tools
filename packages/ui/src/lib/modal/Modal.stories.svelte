@@ -72,3 +72,14 @@
 		>
 	</Modal>
 </Story>
+
+<Story name="Modal width">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal
+		bind:isOpen
+		width="6xl"
+		title="A wider modal!"
+		description="We can use the width prop to set differetn max-widths from xs though 7xl and full. Default is md"
+	/>
+</Story>
