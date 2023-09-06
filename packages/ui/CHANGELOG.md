@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 0.7.0
+
+### Minor Changes
+
+- 22cf480: CHANGED - Added a `width` prop to the `Modal` component
+
 ## 0.6.0
 
 ### Minor Changes
