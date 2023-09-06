@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 0.2.0
+
+### Minor Changes
+
+- 86513d1: CHANGED - apply Roboto typeface in theme
+
 ## 0.1.0
 
 ### Minor Changes

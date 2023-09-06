@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/ui",
-	"version": "0.6.0",
+	"version": "0.7.0",
 	"scripts": {
 		"dev": "vite dev --port 3005 --open",
 		"build:sveltekit": "vite build && npm run package",
