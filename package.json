@@ -9,7 +9,7 @@
     "publish-packages": "turbo run build && changeset version && changeset publish"
   },
   "devDependencies": {
-    "@storybook/addon-svelte-csf": "^3.0.2",
+    "@storybook/addon-svelte-csf": "^4.0.9",
     "eslint": "^8.0.0",
     "eslint-config-custom": "*",
     "prettier": "^2.7.1",
