@@ -66,5 +66,14 @@
 		"d3-dsv": "^3.0.1",
 		"postcss-cli": "^10.1.0",
 		"postcss-discard-comments": "^6.0.0"
+	},
+	"overrides": {
+		"@rgossiaux/svelte-headlessui": {
+		  "svelte": "$svelte"
+		},
+		"@rgossiaux/svelte-heroicons": {
+			"svelte": "$svelte"
+		  }
+  
 	}
 }
