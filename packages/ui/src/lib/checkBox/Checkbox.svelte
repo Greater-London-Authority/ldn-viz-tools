@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let color: string | undefined = undefined;
 	export let checked = false;
+	export let indeterminate = false;
 	export let label: string;
 	export let id: string;
 
@@ -16,6 +17,8 @@
 		type="checkbox"
 		bind:checked
 		{disabled}
+		{indeterminate}
+		on:change
 		style={color
 			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
 			: ''}
