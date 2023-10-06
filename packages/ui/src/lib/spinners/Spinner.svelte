@@ -11,7 +11,7 @@
 	{...$$restProps}
 >
 	<circle stroke="#515a5e" cx="50" cy="50" r="38" class={circleClass} />
-	<path stroke="#6DA7DE" stroke-linecap="round" d="M 50,12 a 38,38 0 0,1 38,38" class={arcClass}>
+	<path stroke="#6DA7DE" d="M 50,12 a 38,38 0 0,1 38,38" class={arcClass}>
 		<animateTransform
 			attributeName="transform"
 			type="rotate"
