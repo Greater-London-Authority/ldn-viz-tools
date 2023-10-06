@@ -4,6 +4,7 @@ export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
+export { default as LogoByCIU } from './logos/LogoByCIU.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
@@ -13,6 +14,7 @@ export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svel
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';
 export { default as Select } from './select/Select.svelte';
+export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabbedSidebar } from './tabbedSidebar/TabbedSidebar.svelte';
 export { default as TabbedSidebarTabLabel } from './tabbedSidebar/TabbedSidebarTabLabel.svelte';
 export { default as TabbedSidebarTabList } from './tabbedSidebar/TabbedSidebarTabList.svelte';

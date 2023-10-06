@@ -61,3 +61,39 @@
 	</RadioButtonGroupSolid>
 	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
 </Story>
+
+<Story name="With 2 options">
+    <RadioButtonGroupSolid name="station-type" bind:selectedId>
+        <RadioButtonSolid id="bus" name="station-type-bus">
+            <FilterIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
+            Bus
+        </RadioButtonSolid>
+        <RadioButtonSolid id="train" name="station-type-train">
+            <MapIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
+            Train
+        </RadioButtonSolid>
+    </RadioButtonGroupSolid>
+    <p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With 4 options">
+    <RadioButtonGroupSolid name="station-type" bind:selectedId>
+        <RadioButtonSolid id="bus" name="station-type-bus">
+            <FilterIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
+            Bus
+        </RadioButtonSolid>
+        <RadioButtonSolid id="train" name="station-type-train">
+            <MapIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
+            Train
+        </RadioButtonSolid>
+        <RadioButtonSolid id="plane" name="station-type-plane">
+            <PresentationChartLineIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
+            Plane
+        </RadioButtonSolid>
+        <RadioButtonSolid id="plane" name="station-type-plane">
+            <PresentationChartLineIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
+            This_label_is_far_too_long
+        </RadioButtonSolid>
+    </RadioButtonGroupSolid>
+    <p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+</Story>
