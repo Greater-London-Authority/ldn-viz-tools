@@ -1,53 +1,65 @@
 # ldn-viz-tools-ui
 
+## 0.7.0
+
+### Minor Changes
+
+- 22cf480: CHANGED - Added a `width` prop to the `Modal` component
+
+## 0.6.0
+
+### Minor Changes
+
+- e081448: FIXED actually export the RadioButtonSolid and RadioButtonGroupSolid components
+
 ## 0.5.0
 
 ### Minor Changes
 
-- e7698cd: refactor TabSelector into a new RadioButtonSolidGroup component
+- e7698cd: refactor - REMOVED `TabSelector` and ADDED a new `RadioButtonSolidGroup` component
 
 ## 0.4.0
 
 ### Minor Changes
 
-- 750d139: fix styling of buttons in CheckboxGroup
-- fb5eaed: allow checkboxes in a checkboxGroup to be initially checked
-- 750d139: generate CSS file containing directives for the Tailwind classes that are used
-- 0821c2e: rename "style" prop of Button to "variant"
+- 750d139: FIXED - fix styling of buttons in CheckboxGroup
+- fb5eaed: CHANGED - allow checkboxes in a checkboxGroup to be initially checked
+- 750d139: ADDED - generate CSS file containing directives for the Tailwind classes that are used
+- 0821c2e: CHANGED - rename "style" prop of Button to "variant"
 
 ## 0.3.0
 
 ### Minor Changes
 
-- 32b9dd7: allow checkboxes in a checkboxGroup to be initially checked
-- 32b9dd7: rename "style" prop of Button to "variant"
+- 32b9dd7: FIXED - allow checkboxes in a checkboxGroup to be initially checked
+- 32b9dd7: CHANGED - rename "style" prop of Button to "variant"
 
 ## 0.2.0
 
 ### Minor Changes
 
-- f74b4cc: add sidebar component with tab icons on the left
-- d6ffe1e: add custom colored checkbox and radio buttons
+- f74b4cc: ADDED - `TabbedSidebar` component with tab icons on the left
+- d6ffe1e: ADDED - add custom colored `Checkbox`/`CheckboxGroup` and `RadioButton`/`RadioButtonGroup` compoents
 
 ## 0.1.0
 
 ### Minor Changes
 
-- d5434ea: implement button component
-- 99de4e1: add component for downloading an SVG as an image file
-- 1c76060: prevent interaction with disabled Button component
-- 29a2beb: Add component for downloading data
-- e960b60: add tab selector component
+- d5434ea: ADDED - `Button` component
+- 99de4e1: ADDED - `ImageDownloadButton`
+- 1c76060: FIXED - prevent interaction with disabled Button component
+- 29a2beb: ADDED - `DataDownloadButton` component
+- e960b60: ADDED - `TabSelector` component
 
 ### Patch Changes
 
-- db4714c: Replace boilerplate README files
+- db4714c: CHANGED - Replace boilerplate README files
 
 ## 0.0.3
 
 ### Patch Changes
 
-- df43eb9: Export Modal and Select from ui package.
+- df43eb9: FIXED - export Modal and Select from ui package.
 
 ## 0.0.2
 
