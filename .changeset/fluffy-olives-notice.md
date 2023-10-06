@@ -7,4 +7,4 @@
 '@ldn-viz/docs': minor
 ---
 
-CHANGED - update form Svelte 3 to Svelte 4 and update Storybook
+CHANGED - update from Svelte 3 to Svelte 4 and update Storybook
