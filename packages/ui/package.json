@@ -69,11 +69,10 @@
 	},
 	"overrides": {
 		"@rgossiaux/svelte-headlessui": {
-		  "svelte": "$svelte"
+			"svelte": "$svelte"
 		},
 		"@rgossiaux/svelte-heroicons": {
 			"svelte": "$svelte"
-		  }
-  
+		}
 	}
 }
