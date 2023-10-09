@@ -1,10 +1,10 @@
 ---
-'eslint-config-custom': minor
-'@ldn-viz/charts': minor
-'@ldn-viz/themes': minor
-'@ldn-viz/maps': minor
-'@ldn-viz/ui': minor
-'@ldn-viz/docs': minor
+'eslint-config-custom': major
+'@ldn-viz/charts': major
+'@ldn-viz/themes': major
+'@ldn-viz/maps': major
+'@ldn-viz/ui': major
+'@ldn-viz/docs': major
 ---
 
 CHANGED - update from Svelte 3 to Svelte 4 and update Storybook
