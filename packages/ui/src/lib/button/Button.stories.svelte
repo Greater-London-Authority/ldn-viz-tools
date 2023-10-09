@@ -1,13 +1,15 @@
-<script>
+<script lang='ts'>
 	import { ArrowCircleDownIcon } from '@rgossiaux/svelte-heroicons/solid';
 
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
+	import type { ButtonProps } from './Button.svelte';
 	import Button from './Button.svelte';
 
-	const sizes = ['sm', 'md', 'lg'];
-	const conditions = ['default', 'disabled', 'success', 'error', 'warning'];
-	const variants = ['brand', 'square', 'solid', 'outline', 'text'];
+	const emphasisOptions: ButtonProps['emphasis'][] = ['primary', 'secondary']
+	const sizes: ButtonProps['size'][] = ['sm', 'md', 'lg'];
+	const conditions: ButtonProps['condition'][] = ['default', 'success', 'error', 'warning'];
+	const variants: ButtonProps['variant'][] = ['brand', 'square', 'solid', 'outline', 'text'];
 </script>
 
 <Meta title="Ui/Button" component={Button} />
@@ -18,7 +20,7 @@
 
 <Story name="Summary table">
 	<div class="flex flex-col gap-20 text-core-grey-600">
-		{#each ['primary', 'secondary'] as emphasis}
+		{#each emphasisOptions as emphasis}
 			<div>
 				<h2 class="font-bold">Emphasis: <span class="text-sm text-core-grey-400 font-mono">{emphasis}</span></h2>
 				<div
@@ -50,29 +52,33 @@
 						{#each variants as variant}
 							{#each sizes as size}
 								<div class="flex items-end justify-center">
-									{#if condition === 'disabled'}
-										<Button {emphasis} disabled {size} {variant}>
-											{#if variant ==='square'}
-												<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
-												{#if size === 'lg'}Button{/if}
-											{:else}
-												Button
-											{/if}
-										</Button>
-									{:else}
-										<Button {emphasis} {condition} {size} {variant}>
-											{#if variant ==='square'}
-												<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
-												{#if size === 'lg'}Button{/if}
-											{:else}
-												Button
-											{/if}
-										</Button>
-									{/if}
+									<Button {emphasis} {condition} {size} {variant}>
+										{#if variant ==='square'}
+											<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+											{#if size === 'lg'}Button{/if}
+										{:else}
+											Button
+										{/if}
+									</Button>
 								</div>
 							{/each}
-						{/each}
+						{/each}						
 					{/each}
+					<span class="self-end text-sm text-core-grey-400 font-mono">disabled</span>
+					{#each variants as variant}
+						{#each sizes as size}
+							<div class="flex items-end justify-center">
+								<Button {emphasis} disabled {size} {variant}>
+									{#if variant ==='square'}
+										<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+										{#if size === 'lg'}Button{/if}
+									{:else}
+										Button
+									{/if}
+								</Button>
+							</div>
+						{/each}
+					{/each}		
 				</div>
 			</div>
 		{/each}
