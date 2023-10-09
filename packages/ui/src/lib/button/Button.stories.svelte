@@ -14,35 +14,88 @@
 
 <Story name="Default" />
 
-<Story name="Primary">
-	<Button variant="primary">Primary Variant</Button>
-	<Button variant="primary" disabled>Primary Variant (disabled)</Button>
+<Story name="Brand">
+	<Button variant="brand">Brand Primary</Button>
+	<Button variant="brand" condition="success">Success</Button>
+	<Button variant="brand" condition="warning">Warning</Button>
+	<Button variant="brand" condition="error">Error</Button>
+	<Button variant="brand" emphasis="secondary">Brand Secondary</Button>
+	<Button variant="brand" emphasis="secondary" condition="success">Success</Button>
+	<Button variant="brand" emphasis="secondary" condition="warning">Warning</Button>
+	<Button variant="brand" emphasis="secondary" condition="error">Error</Button>
+	<Button variant="brand" disabled>Brand Primary (disabled)</Button>
 </Story>
 
-<Story name="Secondary">
-	<Button variant="secondary">Secondary Variant</Button>
-	<Button variant="secondary" disabled>Secondary Variant (disabled)</Button>
+<Story name="Solid">
+	<Button variant="solid">Solid Primary</Button>
+	<Button variant="solid" condition="success">Success</Button>
+	<Button variant="solid" condition="warning">Warning</Button>
+	<Button variant="solid" condition="error">Error</Button>
+	<Button variant="solid" emphasis="secondary">Solid Secondary</Button>
+	<Button variant="solid" condition="success" emphasis="secondary">Success</Button>
+	<Button variant="solid" condition="warning" emphasis="secondary">Warning</Button>
+	<Button variant="solid" condition="error" emphasis="secondary">Error</Button>
+	<Button variant="solid" disabled>Solid Primary (disabled)</Button>
 </Story>
 
-<Story name="Ghost">
-	<Button variant="ghost">Ghost Variant</Button>
-	<Button variant="ghost" disabled>Ghost Variant (disabled)</Button>
+<Story name="Outline">
+	<Button variant="outline">Outline Primary</Button>
+	<Button variant="outline" condition="success">Success</Button>
+	<Button variant="outline" condition="warning">Warning</Button>
+	<Button variant="outline" condition="error">Error</Button>
+	<Button variant="outline" emphasis="secondary">Outline Secondary</Button>
+	<Button variant="outline" condition="success" emphasis="secondary">Success</Button>
+	<Button variant="outline" condition="warning" emphasis="secondary">Warning</Button>
+	<Button variant="outline" condition="error" emphasis="secondary">Error</Button>
+	<Button variant="outline" disabled>Outline Primary (disabled)</Button>
+</Story>
+
+<Story name="Text">
+	<Button variant="text">Text Primary</Button>
+	<Button variant="text" condition="success">Success</Button>
+	<Button variant="text" condition="warning">Warning</Button>
+	<Button variant="text" condition="error">Error</Button>
+	<Button variant="text" emphasis="secondary">Text Secondary</Button>
+	<Button variant="text" condition="success" emphasis="secondary">Success</Button>
+	<Button variant="text" condition="warning" emphasis="secondary">Warning</Button>
+	<Button variant="text" condition="error" emphasis="secondary">Error</Button>
+	<Button variant="text" disabled>Text Primary (disabled)</Button>
+</Story>
+
+<Story name="Square">
+	<Button variant="square"><ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" /></Button>
+	<Button variant="square" emphasis="secondary">
+		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" disabled>
+		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+	</Button>
+
+	<Button variant="square" size="sm">
+		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" size="md">
+		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" size="lg">
+		<ArrowCircleDownIcon class="w-6 h-6 mb-1" aria-hidden="true" />
+		Large
+	</Button>
 </Story>
 
 <Story name="Disabled">
 	<Button disabled>Default Variant</Button>
-	<Button variant="primary" disabled>Primary Variant</Button>
-	<Button variant="secondary" disabled>Secondary Variant</Button>
-	<Button variant="ghost" disabled>Ghost Variant</Button>
+	<Button variant="brand" disabled>Brand Variant</Button>
+	<Button variant="solid" disabled>Solid Variant</Button>
+	<Button variant="outline" disabled>Outline Variant</Button>
+	<Button variant="text" disabled>Text Variant</Button>
 </Story>
 
 <Story name="Sizes">
 	<div class="flex items-end space-x-2">
-		<Button size="xs">xs</Button>
 		<Button size="sm">sm</Button>
-		<Button size="base">base</Button>
+		<Button size="md">md</Button>
 		<Button size="lg">lg</Button>
-		<Button size="xl">xl</Button>
 	</div>
 </Story>
 
