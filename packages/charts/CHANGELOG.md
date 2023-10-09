@@ -1,5 +1,16 @@
 # ldn-viz-tools-charts
 
+## 1.0.0
+
+### Major Changes
+
+- 0651ebb: CHANGED - update from Svelte 3 to Svelte 4 and update Storybook
+
+### Patch Changes
+
+- Updated dependencies [0651ebb]
+  - @ldn-viz/ui@1.0.0
+
 ## 0.0.3
 
 ### Patch Changes
