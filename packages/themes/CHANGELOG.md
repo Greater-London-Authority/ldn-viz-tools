@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 1.0.0
+
+### Major Changes
+
+- 0651ebb: CHANGED - update from Svelte 3 to Svelte 4 and update Storybook
+
 ## 0.3.0
 
 ### Minor Changes

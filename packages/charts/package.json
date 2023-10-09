@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/charts",
-	"version": "0.0.3",
+	"version": "1.0.0",
 	"scripts": {
 		"dev": "vite dev --port 3003 --open",
 		"build": "vite build && npm run package",
