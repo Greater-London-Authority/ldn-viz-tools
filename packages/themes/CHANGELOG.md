@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 0.3.0
+
+### Minor Changes
+
+- 79f514e: Includes tailwind forms and mini-svg-data-uri as named dependencies in package json
+
 ## 0.2.0
 
 ### Minor Changes
