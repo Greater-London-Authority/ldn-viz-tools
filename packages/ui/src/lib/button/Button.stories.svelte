@@ -145,7 +145,7 @@
 					style={`grid-template-columns: repeat(${1 + variants.length * sizes.length}, 1fr);`}
 				>
 					<!-- variants header -->
-					<span class="font-italic">Variant:</span>
+					<span class="italic">Variant:</span>
 					{#each variants as variant, i}
 						<div
 							style={`grid-column: ${2 + sizes.length * i} / ${2 + sizes.length * (i + 1)}`}
@@ -156,7 +156,7 @@
 					{/each}
 
 					<!-- size header -->
-					<span class="font-italic">Size:</span>
+					<span class="italic">Size:</span>
 					{#each new Array(variants.length) as i}
 						{#each sizes as size}
 							<span class="text-center">{size}</span>
