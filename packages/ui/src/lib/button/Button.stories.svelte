@@ -4,6 +4,10 @@
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Button from './Button.svelte';
+
+	const sizes = ['sm', 'md', 'lg'];
+	const conditions = ['default', 'disabled', 'success', 'error', 'warning'];
+	const variants = ['brand', 'square', 'solid', 'outline', 'text'];
 </script>
 
 <Meta title="Ui/Button" component={Button} />
@@ -129,4 +133,53 @@
 <Story name="With Link">
 	<Button href="#">Link</Button>
 	<Button disabled href="#">Link</Button>
+</Story>
+
+<Story name="Sumamry table">
+	<div class="flex flex-col gap-20">
+		{#each ['primary', 'secondary'] as emphasis}
+			<div>
+				<h2 class="text-lg"><i>Emphasis</i>: {emphasis}</h2>
+				<div
+					class="grid gap-2"
+					style={`grid-template-columns: repeat(${1 + variants.length * sizes.length}, 1fr);`}
+				>
+					<!-- variants header -->
+					<span class="font-italic">Variant:</span>
+					{#each variants as variant, i}
+						<div
+							style={`grid-column: ${2 + sizes.length * i} / ${2 + sizes.length * (i + 1)}`}
+							class="text-center border-b-2 border-gray-200"
+						>
+							{variant}
+						</div>
+					{/each}
+
+					<!-- size header -->
+					<span class="font-italic">Size:</span>
+					{#each new Array(variants.length) as i}
+						{#each sizes as size}
+							<span class="text-center">{size}</span>
+						{/each}
+					{/each}
+
+					{#each conditions as condition}
+						<span class="self-end">{condition}</span>
+
+						{#each variants as variant}
+							{#each sizes as size}
+								<div class="flex items-end justify-center">
+									{#if condition === 'disabled'}
+										<Button {emphasis} disabled {size} {variant}>Button</Button>
+									{:else}
+										<Button {emphasis} {condition} {size} {variant}>Button</Button>
+									{/if}
+								</div>
+							{/each}
+						{/each}
+					{/each}
+				</div>
+			</div>
+		{/each}
+	</div>
 </Story>
