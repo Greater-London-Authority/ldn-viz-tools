@@ -1,5 +1,5 @@
-<script lang="ts">
-	interface Button {
+<script context="module" lang="ts">
+	export interface ButtonProps {
 		variant: 'brand' | 'square' | 'solid' | 'outline' | 'text';
 		emphasis: 'primary' | 'secondary';
 		condition: 'default' | 'success' | 'error' | 'warning';
@@ -7,16 +7,18 @@
 	}
 
 	type ButtonStyle = Record<
-		Button['variant'],
-		Record<Button['emphasis'], Record<Button['condition'], string>>
+		ButtonProps['variant'],
+		Record<ButtonProps['emphasis'], Record<ButtonProps['condition'], string>>
 	>;
 
-	type DisabledStyle = Record<Button['variant'], string>;
+	type DisabledStyle = Record<ButtonProps['variant'], string>;
+  </script>
 
-	export let variant: Button['variant'] = 'solid';
-	export let emphasis: Button['emphasis'] = 'primary';
-	export let condition: Button['condition'] = 'default';
-	export let size: Button['size'] = 'md';
+<script lang="ts">
+	export let variant: ButtonProps['variant'] = 'solid';
+	export let emphasis: ButtonProps['emphasis'] = 'primary';
+	export let condition: ButtonProps['condition'] = 'default';
+	export let size: ButtonProps['size'] = 'md';
 	export let disabled = false;
 	export let href = '';
 	export let type: 'button' | 'submit' = 'button';
