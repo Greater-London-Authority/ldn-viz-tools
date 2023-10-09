@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 0.8.0
+
+### Minor Changes
+
+- 7bcd033: ADDED - add a `LogoByCIU` component that says "City Intelligence \n Designed and developed by GLA City Intelligence"
+- a93fbb1: CHANGED - in CheckboxGroup, replace Select/Clear All buttons with a checkbox
+- 29c372c: ADDED - `Header` component
+- 8e603ac: ADDED - added a `Spinner` component to show that something is loading
+- b8b34b9: CHANGE - change appearance and properties of `Button` component
+- 3f7fa59: CHANGE - fix sizing of `RadioButtonSolid` when the number of buttons in a group is not 3
+
 ## 0.7.0
 
 ### Minor Changes
