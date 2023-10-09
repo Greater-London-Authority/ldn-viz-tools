@@ -1,9 +1,15 @@
-<script>
+<script lang='ts'>
 	import { ArrowCircleDownIcon } from '@rgossiaux/svelte-heroicons/solid';
 
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
+	import type { ButtonProps } from './Button.svelte';
 	import Button from './Button.svelte';
+
+	const emphasisOptions: ButtonProps['emphasis'][] = ['primary', 'secondary']
+	const sizes: ButtonProps['size'][] = ['sm', 'md', 'lg'];
+	const conditions: ButtonProps['condition'][] = ['default', 'success', 'error', 'warning'];
+	const variants: ButtonProps['variant'][] = ['brand', 'square', 'solid', 'outline', 'text'];
 </script>
 
 <Meta title="Ui/Button" component={Button} />
@@ -11,6 +17,73 @@
 <Template let:args>
 	<Button {...args}>I'm a button from UI!</Button>
 </Template>
+
+<Story name="Summary table">
+	<div class="flex flex-col gap-20 text-core-grey-600">
+		{#each emphasisOptions as emphasis}
+			<div>
+				<h2 class="font-bold">Emphasis: <span class="text-sm text-core-grey-400 font-mono">{emphasis}</span></h2>
+				<div
+					class="grid gap-2"
+					style={`grid-template-columns: repeat(${1 + variants.length * sizes.length}, 1fr);`}
+				>
+					<!-- variants header -->
+					<span class="font-bold">Variant:</span>
+					{#each variants as variant, i}
+						<div
+							style={`grid-column: ${2 + sizes.length * i} / ${2 + sizes.length * (i + 1)}`}
+							class="text-center border-b-2 border-gray-200 text-sm text-core-grey-400 font-mono"
+						>
+							{variant}
+						</div>
+					{/each}
+
+					<!-- size header -->
+					<span class="font-bold">Size:</span>
+					{#each new Array(variants.length) as i}
+						{#each sizes as size}
+							<span class="text-center text-sm text-core-grey-400 font-mono">{size}</span>
+						{/each}
+					{/each}
+
+					{#each conditions as condition}
+						<span class="self-end text-sm text-core-grey-400 font-mono">{condition}</span>
+
+						{#each variants as variant}
+							{#each sizes as size}
+								<div class="flex items-end justify-center">
+									<Button {emphasis} {condition} {size} {variant}>
+										{#if variant ==='square'}
+											<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+											{#if size === 'lg'}Button{/if}
+										{:else}
+											Button
+										{/if}
+									</Button>
+								</div>
+							{/each}
+						{/each}						
+					{/each}
+					<span class="self-end text-sm text-core-grey-400 font-mono">disabled</span>
+					{#each variants as variant}
+						{#each sizes as size}
+							<div class="flex items-end justify-center">
+								<Button {emphasis} disabled {size} {variant}>
+									{#if variant ==='square'}
+										<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+										{#if size === 'lg'}Button{/if}
+									{:else}
+										Button
+									{/if}
+								</Button>
+							</div>
+						{/each}
+					{/each}		
+				</div>
+			</div>
+		{/each}
+	</div>
+</Story>
 
 <Story name="Default" />
 
