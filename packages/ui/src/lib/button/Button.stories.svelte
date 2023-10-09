@@ -135,7 +135,7 @@
 	<Button disabled href="#">Link</Button>
 </Story>
 
-<Story name="Sumamry table">
+<Story name="Summary table">
 	<div class="flex flex-col gap-20">
 		{#each ['primary', 'secondary'] as emphasis}
 			<div>
