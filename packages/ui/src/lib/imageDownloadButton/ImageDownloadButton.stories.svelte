@@ -32,16 +32,16 @@
 		<circle cx="10" cy="10" r="10" fill="blue" />
 	</svg>
 
-	<ImageDownloadButton svgNode={svgRef} filename="download" variant="primary">
+	<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="primary">
 		Primary
 		<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
-	<ImageDownloadButton svgNode={svgRef} filename="download" variant="secondary">
+	<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="secondary">
 		Secondary
 		<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
-	<ImageDownloadButton svgNode={svgRef} filename="download" variant="ghost">
-		Ghost
+	<ImageDownloadButton svgNode={svgRef} filename="download" variant="text">
+		Text
 		<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>

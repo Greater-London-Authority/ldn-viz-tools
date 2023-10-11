@@ -23,14 +23,14 @@
 </Story>
 
 <Story name="Button types">
-	<DataDownloadButton {data} filename="download" format="CSV" variant="primary">
+	<DataDownloadButton {data} filename="download" format="CSV" emphasis="primary">
 		Primary<ArrowCircleDownIcon class="ml-2 w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
-	<DataDownloadButton {data} filename="download" format="CSV" variant="secondary">
+	<DataDownloadButton {data} filename="download" format="CSV" emphasis="secondary">
 		Secondary<DocumentDownloadIcon class="ml-2 w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
-	<DataDownloadButton {data} filename="download" format="CSV" variant="ghost">
-		Ghost<svg
+	<DataDownloadButton {data} filename="download" format="CSV" variant="text">
+		Text<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
