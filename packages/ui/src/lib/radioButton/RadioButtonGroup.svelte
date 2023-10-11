@@ -9,7 +9,7 @@
 
 <div>
 	{#if !buttonsHidden}
-		<Button variant="ghost" on:click={() => (selectedId = '')}>Clear</Button>
+		<Button variant="text" on:click={() => (selectedId = '')}>Clear</Button>
 	{/if}
 	{#each options as option}
 		<RadioButton
