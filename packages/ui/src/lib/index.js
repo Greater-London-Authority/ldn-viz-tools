@@ -1,7 +1,7 @@
 // Reexport your entry components here
 export { default as Button } from './button/Button.svelte';
 
-export { default as CardLink } from "./cardLink/CardLink.svelte";
+export { default as CardLink } from './cardLink/CardLink.svelte';
 
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
