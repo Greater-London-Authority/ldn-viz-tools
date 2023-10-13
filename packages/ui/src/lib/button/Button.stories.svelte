@@ -161,7 +161,7 @@
 		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 	<Button variant="square" size="lg">
-		<ArrowCircleDownIcon class="w-6 h-6 mb-1" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
 		Large
 	</Button>
 </Story>
