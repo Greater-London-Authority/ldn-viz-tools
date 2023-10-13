@@ -21,9 +21,18 @@
 		'group transition h-full flex flex-col max-w-xl'
 	)}
 >
-	<div class="p-4 max-w-xl h-full">
-		<slot name="body" />
-	</div>
+	{#if $$slots.title}
+		<div class="p-4 max-w-xl text-3xl mb-2 mt-2">
+			<slot name="title" />
+		</div>
+	{/if}
+
+	{#if $$slots.body}
+		<div class="p-4 max-w-xl h-full">
+			<slot name="body" />
+		</div>
+	{/if}
+
 	<div
 		class={classNames(
 			green ? 'bg-core-green-800' : 'bg-core-grey-800 group-hover:bg-core-blue-600',
