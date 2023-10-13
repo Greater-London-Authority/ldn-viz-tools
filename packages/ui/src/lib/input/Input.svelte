@@ -4,13 +4,13 @@
 	export let id: string;
 	export let name: string;
 	export let placeholder = '';
-	export let type = ''; // TODO: fix
+	export let type = 'text';
 
 	if (!name) {
 		name = id;
 	}
 </script>
 
-<InputWrapper {...$$props}>
-	<input class="form-input" type="text" {id} {name} {placeholder} {type} />
+<InputWrapper {...$$restProps} {id}>
+	<input class="form-input" {id} {name} {placeholder} {type} />
 </InputWrapper>
