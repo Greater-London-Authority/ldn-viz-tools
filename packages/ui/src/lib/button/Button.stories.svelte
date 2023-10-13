@@ -1,12 +1,13 @@
-<script lang='ts'>
-	import { ArrowCircleDownIcon } from '@rgossiaux/svelte-heroicons/solid';
+<script lang="ts">
+	import { ArrowDownCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import type { ButtonProps } from './Button.svelte';
 	import Button from './Button.svelte';
 
-	const emphasisOptions: ButtonProps['emphasis'][] = ['primary', 'secondary']
+	const emphasisOptions: ButtonProps['emphasis'][] = ['primary', 'secondary'];
 	const sizes: ButtonProps['size'][] = ['sm', 'md', 'lg'];
 	const conditions: ButtonProps['condition'][] = ['default', 'success', 'error', 'warning'];
 	const variants: ButtonProps['variant'][] = ['brand', 'square', 'solid', 'outline', 'text'];
@@ -22,7 +23,9 @@
 	<div class="flex flex-col gap-20 text-core-grey-600">
 		{#each emphasisOptions as emphasis}
 			<div>
-				<h2 class="font-bold">Emphasis: <span class="text-sm text-core-grey-400 font-mono">{emphasis}</span></h2>
+				<h2 class="font-bold">
+					Emphasis: <span class="text-sm text-core-grey-400 font-mono">{emphasis}</span>
+				</h2>
 				<div
 					class="grid gap-2"
 					style={`grid-template-columns: repeat(${1 + variants.length * sizes.length}, 1fr);`}
@@ -53,8 +56,13 @@
 							{#each sizes as size}
 								<div class="flex items-end justify-center">
 									<Button {emphasis} {condition} {size} {variant}>
-										{#if variant ==='square'}
-											<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+										{#if variant === 'square'}
+											<Icon
+												src={ArrowDownCircle}
+												theme="solid"
+												class="w-6 h-6"
+												aria-hidden="true"
+											/>
 											{#if size === 'lg'}Button{/if}
 										{:else}
 											Button
@@ -62,15 +70,15 @@
 									</Button>
 								</div>
 							{/each}
-						{/each}						
+						{/each}
 					{/each}
 					<span class="self-end text-sm text-core-grey-400 font-mono">disabled</span>
 					{#each variants as variant}
 						{#each sizes as size}
 							<div class="flex items-end justify-center">
 								<Button {emphasis} disabled {size} {variant}>
-									{#if variant ==='square'}
-										<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+									{#if variant === 'square'}
+										<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 										{#if size === 'lg'}Button{/if}
 									{:else}
 										Button
@@ -78,7 +86,7 @@
 								</Button>
 							</div>
 						{/each}
-					{/each}		
+					{/each}
 				</div>
 			</div>
 		{/each}
