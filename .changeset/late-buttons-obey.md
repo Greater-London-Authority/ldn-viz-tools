@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-ADDED - added `CardLink` component
+ADDED - added `PlacardButton` component

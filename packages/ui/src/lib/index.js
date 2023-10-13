@@ -1,8 +1,6 @@
 // Reexport your entry components here
 export { default as Button } from './button/Button.svelte';
 
-export { default as CardLink } from './cardLink/CardLink.svelte';
-
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 
@@ -22,6 +20,8 @@ export { default as HeaderRight } from './header/HeaderRight.svelte';
 export { default as HeaderTitle } from './header/HeaderTitle.svelte';
 export { default as NavLink } from './header/NavLink.svelte';
 export { default as NavLinks } from './header/NavLinks.svelte';
+
+export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
 
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
