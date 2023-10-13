@@ -9,7 +9,7 @@
 	{href}
 	target={newWindow ? '_blank' : '_self'}
 	rel={newWindow ? 'noopener noreferrer' : ''}
-	class="bg-core-grey-700 group hover:bg-core-grey-800 transition h-full flex flex-col text-white"
+	class="bg-core-grey-700 group hover:bg-core-grey-800 transition h-full flex flex-col text-white max-w-xl"
 >
 	<div class="p-4 max-w-lg h-full space-y-2">
 		{#if $$slots.title}
