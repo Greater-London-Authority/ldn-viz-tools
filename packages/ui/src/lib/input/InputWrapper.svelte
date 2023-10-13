@@ -31,7 +31,7 @@
 	let descriptionClass: string;
 
 	$: descriptionClass = classNames(
-		error ? 'text-core-red-500' : '',
+		error ? 'text-core-red-400 dark:text-core-red-400' : '',
 		descriptionAlignment === 'left'
 			? 'text-core-grey-500 dark:text-core-grey-200'
 			: 'ml-auto text-core-grey-400 dark:text-core-grey-300',
@@ -39,8 +39,8 @@
 	);
 
 	$: labelClasses = classNames(
-		error ? 'text-core-red-500' : '',
-		disabled ? 'text-core-grey-300 dark:core-grey-400' : '',
+		error ? 'text-core-red-400 dark:text-core-red-400' : '',
+		disabled ? 'text-core-grey-300 dark:text-core-grey-400' : '',
 		'form-label'
 	);
 </script>

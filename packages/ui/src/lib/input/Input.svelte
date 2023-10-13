@@ -13,7 +13,11 @@
 		name = id;
 	}
 
-	$: inputClasses = classNames(error ? 'border-core-red-500' : '', 'form-input');
+	$: inputClasses = classNames(
+		error ? 'border-core-red-400 dark:border-core-red-400' : '',
+		disabled ? 'cursor-not-allowed ' : '',
+		'form-input'
+	);
 </script>
 
 <InputWrapper {...$$restProps} {id} {disabled} {error}>
