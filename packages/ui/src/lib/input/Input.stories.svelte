@@ -20,8 +20,48 @@
 		id="labelled-input"
 		placeholder="Placeholder text"
 		hintText="Tooltip text"
-		decription="descriptive text"
-		tooltip="A biref contextual help text"
+		description="descriptive text"
+		tooltip="A brief contextual help text"
+		optional
+	/>
+</Story>
+
+<Story name="Description alignment">
+	<Input
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hintText="Tooltip text"
+		description="descriptive text"
+		tooltip="A brief contextual help text"
+		descriptionAlignment="right"
+		optional
+	/>
+</Story>
+
+<Story name="Error">
+	<Input
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hintText="Tooltip text"
+		description="descriptive text"
+		tooltip="A brief contextual help text"
+		optional
+		error
+		errorMessage="something has gone wrong here"
+	/>
+</Story>
+
+<Story name="Disabled">
+	<Input
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hintText="Tooltip text"
+		description="descriptive text"
+		tooltip="A brief contextual help text"
+		disabled
 		optional
 	/>
 </Story>
