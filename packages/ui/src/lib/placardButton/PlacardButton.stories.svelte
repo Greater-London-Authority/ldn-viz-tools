@@ -47,8 +47,8 @@
 <Story name="Extra-wide, with limited text width">
 	<div class="max-w-3xl">
 		<PlacardButton>
-			<span slot="title" class="max-w-xl inline-block"> Getting the Data. </span>
-			<span slot="body" class="max-w-xl inline-block">
+			<span slot="title">Getting the Data.</span>
+			<span slot="body">
 				The full dataset that this explorer is based on is available for download from the London
 				Datastore, along with other documents like the Technical Report, which contains the
 				questionnaires from the survey.

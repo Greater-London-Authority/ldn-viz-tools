@@ -19,7 +19,7 @@
 		{/if}
 
 		{#if $$slots.body}
-			<div class="h-full text-core-grey-100">
+			<div class="h-full text-core-grey-100 prose leading-snug">
 				<slot name="body" />
 			</div>
 		{/if}
