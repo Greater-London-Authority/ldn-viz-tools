@@ -1,44 +1,31 @@
 <script lang="ts">
 	import { ArrowRightIcon } from '@rgossiaux/svelte-heroicons/solid';
 
-	import { classNames } from '../utils/classNames';
-
 	export let href = '';
 	export let newWindow = false;
-
-	export let green = false;
 </script>
 
 <a
 	{href}
 	target={newWindow ? '_blank' : '_self'}
 	rel={newWindow ? 'noopener noreferrer' : ''}
-	class={classNames(
-		green
-			? 'bg-core-green-600 hover:bg-core-green-700 text-white'
-			: 'bg-core-grey-700 hover:bg-core-grey-800 text-white',
-		green ? '' : 'dark:bg-core-grey-200 dark:group dark:hover:bg-core-grey-300 dark:text-black',
-		'group transition h-full flex flex-col max-w-xl'
-	)}
+	class="bg-core-grey-700 group hover:bg-core-grey-800 transition h-full flex flex-col text-white"
 >
-	{#if $$slots.title}
-		<div class="p-4 max-w-xl text-3xl mb-2 mt-2">
-			<slot name="title" />
-		</div>
-	{/if}
+	<div class="p-4 max-w-lg h-full space-y-2">
+		{#if $$slots.title}
+			<div class="max-w-xl text-2xl font-bold">
+				<slot name="title" />
+			</div>
+		{/if}
 
-	{#if $$slots.body}
-		<div class="p-4 max-w-xl h-full">
-			<slot name="body" />
-		</div>
-	{/if}
-
+		{#if $$slots.body}
+			<div class="max-w-xl h-full text-core-grey-100">
+				<slot name="body" />
+			</div>
+		{/if}
+	</div>
 	<div
-		class={classNames(
-			green ? 'bg-core-green-800' : 'bg-core-grey-800 group-hover:bg-core-blue-600',
-			green ? '' : 'dark:bg-core-grey-300 dark:group-hover:bg-core-blue-600',
-			'p-4 mt-4 flex justify-between  transition'
-		)}
+		class="bg-core-grey-600 group-hover:bg-core-blue-600 dark:group-hover:bg-core-blue-600 p-4 mt-4 flex justify-between transition"
 	>
 		<slot name="footer" />
 		<slot name="icon">

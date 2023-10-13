@@ -26,14 +26,6 @@
 	</PlacardButton>
 </Story>
 
-<Story name="With Title Only - Green">
-	<PlacardButton green>
-		<span slot="title"> Download the User Guide. </span>
-		<span slot="footer">PDF</span>
-		<span slot="icon"><DocumentDownloadIcon class="h-6 w-6" /></span>
-	</PlacardButton>
-</Story>
-
 <Story name="With Title and Body">
 	<PlacardButton>
 		<span slot="title"> Getting the Data. </span>
