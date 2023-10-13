@@ -52,7 +52,7 @@
 
 <Story name="Download as JSON">
 	<DataDownloadButton {data} filename="download" format="JSON">
-		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 ml-2" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
 
