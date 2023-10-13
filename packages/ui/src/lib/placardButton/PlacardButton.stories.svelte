@@ -18,16 +18,8 @@
 	</PlacardButton>
 </Story>
 
-<Story name="Rounded">
-	<PlacardButton rounded>
-		<span slot="body" class="text-3xl font-serif mb-2"> Download the User Guide. </span>
-		<span slot="footer">PDF</span>
-		<span slot="icon"><DocumentDownloadIcon class="h-6 w-6" /></span>
-	</PlacardButton>
-</Story>
-
 <Story name="Green Rounded">
-	<PlacardButton rounded green>
+	<PlacardButton green>
 		<span slot="body" class="text-3xl font-serif mb-2"> Download the User Guide. </span>
 		<span slot="footer">PDF</span>
 		<span slot="icon"><DocumentDownloadIcon class="h-6 w-6" /></span>

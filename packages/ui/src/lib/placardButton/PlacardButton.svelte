@@ -5,7 +5,6 @@
 
 	export let href = '';
 	export let newWindow = false;
-	export let rounded = false;
 
 	export let green = false;
 </script>
@@ -19,8 +18,7 @@
 			? 'bg-core-green-600 hover:bg-core-green-700 text-white'
 			: 'bg-core-grey-700 hover:bg-core-grey-800 text-white',
 		green ? '' : 'dark:bg-core-grey-200 dark:group dark:hover:bg-core-grey-300 dark:text-black',
-		'group transition h-full flex flex-col max-w-xl',
-		rounded ? 'rounded-lg' : ''
+		'group transition h-full flex flex-col max-w-xl'
 	)}
 >
 	<div class="p-4 max-w-xl h-full">
@@ -30,8 +28,7 @@
 		class={classNames(
 			green ? 'bg-core-green-800' : 'bg-core-grey-800 group-hover:bg-core-blue-600',
 			green ? '' : 'dark:bg-core-grey-300 dark:group-hover:bg-core-blue-600',
-			'p-4 mt-4 flex justify-between  transition',
-			rounded ? 'rounded-b-lg' : ''
+			'p-4 mt-4 flex justify-between  transition'
 		)}
 	>
 		<slot name="footer" />
