@@ -124,6 +124,7 @@
 			--item-hover-bg: #3787d2;
 			--item-is-active-bg: #2566a2;
 			--item-hover-color: #ffffff;
+			--border-focused: #3787d2 1px solid;
 		}
 
 		.dark .form-select {

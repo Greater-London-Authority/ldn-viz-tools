@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Select from './Select.svelte';
 
-	let value;
+	let value: any;
 
 	const items = [
 		{ label: 'One', value: 1 },
@@ -21,7 +21,7 @@
 <Story name="Default" args={{ items: items }} />
 
 <Story name="Basic">
-	<Select {items} />
+	<Select {items} id="labelled-input" />
 </Story>
 
 <Story name="More suff">
@@ -54,7 +54,9 @@
 		on:change={() => console.log('Selection changed!')}
 	/>
 
-	<span>Value is: {JSON.stringify(value)}</span>
+	<span class="mt-4 text-core-grey-700 dark:text-core-grey-200 block">
+		Value is: {JSON.stringify(value)}
+	</span>
 </Story>
 
 <Story name="Description alignment">
