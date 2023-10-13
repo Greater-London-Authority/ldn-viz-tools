@@ -11,5 +11,17 @@
 </Story>
 
 <Story name="With Label">
-	<Input label="Label" id="labelled-input" />
+	<Input label="Label" id="labelled-input" hintText="Tooltip text" />
+</Story>
+
+<Story name="More suff">
+	<Input
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hintText="Tooltip text"
+		decription="descriptive text"
+		tooltip="A biref contextual help text"
+		optional
+	/>
 </Story>

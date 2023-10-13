@@ -1,20 +1,17 @@
 <script lang="ts">
-  	import { ArrowCircleDownIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { ArrowCircleDownIcon } from '@rgossiaux/svelte-heroicons/solid';
 	export let label = '';
-	export let placeholder = ''; // type
 	export let description = '';
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 	export let tooltip = '';
 
 	export let hintText = '';
-    export let hintLabel = 'what is this?'; 
+	export let hintLabel = 'what is this?';
 
 	export let error = false;
 	export let errorMessage = '';
 	export let disabled = false;
 	export let optional = false;
-
-	export let type = ''; // TODO: fix
 
 	// TOOD: hint below?
 	// prefix and suffix slots
@@ -25,11 +22,14 @@
 </script>
 
 <label for={id}>
-	{label}
+	{label}{#if optional} (optional){/if}
 </label>
 
-{#if hint}
-{hintLabel} 
+{#if hintText}
+	<span title={hintText}>
+		{hintLabel}
+		<ArrowCircleDownIcon class="w-[18px] h-[18px]" />
+	</span>
 {/if}
 
 <slot {id} />
