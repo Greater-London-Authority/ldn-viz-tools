@@ -12,7 +12,7 @@
 	>;
 
 	type DisabledStyle = Record<ButtonProps['variant'], string>;
-  </script>
+</script>
 
 <script lang="ts">
 	export let variant: ButtonProps['variant'] = 'solid';
@@ -157,6 +157,8 @@
 	on:touchcancel
 	on:mouseenter
 	on:mouseleave
+	role="button"
+	tabindex="0"
 >
 	<slot />
 </svelte:element>

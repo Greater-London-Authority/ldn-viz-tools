@@ -11,7 +11,7 @@
 </Story>
 
 <Story name="With Label">
-	<Input label="Label" id="labelled-input" hintText="Tooltip text" />
+	<Input label="Label" id="labelled-input" />
 </Story>
 
 <Story name="More suff">
@@ -19,9 +19,10 @@
 		label="Label"
 		id="labelled-input"
 		placeholder="Placeholder text"
+		hint
 		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
 		description="descriptive text"
-		tooltip="A brief contextual help text"
 		optional
 	/>
 </Story>
@@ -31,9 +32,10 @@
 		label="Label"
 		id="labelled-input"
 		placeholder="Placeholder text"
+		hint
 		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
 		description="descriptive text"
-		tooltip="A brief contextual help text"
 		descriptionAlignment="right"
 		optional
 	/>
@@ -44,9 +46,10 @@
 		label="Label"
 		id="labelled-input"
 		placeholder="Placeholder text"
+		hint
 		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
 		description="descriptive text"
-		tooltip="A brief contextual help text"
 		optional
 		error
 		errorMessage="something has gone wrong here"
@@ -58,9 +61,10 @@
 		label="Label"
 		id="labelled-input"
 		placeholder="Placeholder text"
+		hint
 		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
 		description="descriptive text"
-		tooltip="A brief contextual help text"
 		disabled
 		optional
 	/>
