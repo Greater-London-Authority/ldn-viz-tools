@@ -9,17 +9,17 @@
 	{href}
 	target={newWindow ? '_blank' : '_self'}
 	rel={newWindow ? 'noopener noreferrer' : ''}
-	class="bg-core-grey-700 group hover:bg-core-grey-800 transition h-full flex flex-col text-white max-w-xl"
+	class="bg-core-grey-700 group hover:bg-core-grey-800 transition h-full flex flex-col text-white"
 >
-	<div class="p-4 max-w-lg h-full space-y-2">
+	<div class="p-4 h-full space-y-2">
 		{#if $$slots.title}
-			<div class="max-w-xl text-2xl font-bold">
+			<div class="text-2xl font-bold">
 				<slot name="title" />
 			</div>
 		{/if}
 
 		{#if $$slots.body}
-			<div class="max-w-xl h-full text-core-grey-100">
+			<div class="h-full text-core-grey-100">
 				<slot name="body" />
 			</div>
 		{/if}
