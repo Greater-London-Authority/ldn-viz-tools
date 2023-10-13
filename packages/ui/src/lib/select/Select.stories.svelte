@@ -3,12 +3,12 @@
 
 	import Select from './Select.svelte';
 
-	let value = 1;
+	let value;
 
-	const options = [
-		{ id: 0, label: 'One', value: 1 },
-		{ id: 1, label: 'Two', value: 2 },
-		{ id: 2, label: 'Three', value: 3 }
+	const items = [
+		{ label: 'One', value: 1 },
+		{ label: 'Two', value: 2 },
+		{ label: 'Three', value: 3 }
 	];
 </script>
 
@@ -18,12 +18,87 @@
 	<Select {...args} />
 </Template>
 
-<Story name="Default" args={{ options: options }} />
+<Story name="Default" args={{ items: items }} />
 
-<Story name="With Label" args={{ options: options, label: "I'm the label" }} />
+<Story name="Basic">
+	<Select {items} />
+</Story>
 
-<Story name="Disabled" args={{ options: options, label: "I'm the label", disabled: true }} />
+<Story name="More suff">
+	<Select
+		{items}
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hint
+		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
+		description="descriptive text"
+		optional
+	/>
+</Story>
 
-<Story name="With initial value">
-	<Select {options} bind:value />
+<Story name="More suff - multiple selects">
+	<Select
+		{items}
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hint
+		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
+		description="descriptive text"
+		optional
+		multiple
+		bind:value
+		on:change={() => console.log('Selection changed!')}
+	/>
+
+	<span>Value is: {JSON.stringify(value)}</span>
+</Story>
+
+<Story name="Description alignment">
+	<Select
+		{items}
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hint
+		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
+		description="descriptive text"
+		descriptionAlignment="right"
+		optional
+	/>
+</Story>
+
+<Story name="Error">
+	<Select
+		{items}
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hint
+		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
+		description="descriptive text"
+		optional
+		error
+		errorMessage="something has gone wrong here"
+	/>
+</Story>
+
+<Story name="Disabled">
+	<Select
+		{items}
+		label="Label"
+		id="labelled-input"
+		placeholder="Placeholder text"
+		hint
+		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
+		description="descriptive text"
+		disabled
+		optional
+	/>
 </Story>
