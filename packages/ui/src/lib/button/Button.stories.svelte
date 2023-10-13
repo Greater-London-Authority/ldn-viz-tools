@@ -144,19 +144,21 @@
 </Story>
 
 <Story name="Square">
-	<Button variant="square"><ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" /></Button>
+	<Button variant="square"
+		><Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" /></Button
+	>
 	<Button variant="square" emphasis="secondary">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 	<Button variant="square" disabled>
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 
 	<Button variant="square" size="sm">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 	<Button variant="square" size="md">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 	<Button variant="square" size="lg">
 		<ArrowCircleDownIcon class="w-6 h-6 mb-1" aria-hidden="true" />
@@ -184,15 +186,15 @@
 	<div class="flex space-y-2 flex-col w-40">
 		<Button
 			>Icon via slot
-			<ArrowCircleDownIcon class="w-6 h-6 ml-2" aria-hidden="true" />
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 ml-2" aria-hidden="true" />
 		</Button>
 		<Button>
-			<ArrowCircleDownIcon class="w-6 h-6 mr-2" aria-hidden="true" />
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 mr-2" aria-hidden="true" />
 			Icon via slot
 		</Button>
 		<Button class="flex-col items-center">
 			Icon via slot
-			<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 		</Button>
 	</div>
 </Story>
