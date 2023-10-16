@@ -3,7 +3,15 @@
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { writable, type Writable } from 'svelte/store';
 	import { floatingContent } from './tooltip';
-	export let showTooltip: boolean = false;
+
+	import { InformationCircleIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { floatingRef } from '../tooltip/tooltip.js';
+
+	export let hintLabel = 'what is this?';
+
+	let showTooltip: boolean = false;
+
+	let element: HTMLSpanElement;
 
 	const arrowRef: Writable<HTMLElement> = writable();
 	let dynamicOptions = {};
@@ -28,6 +36,23 @@
 		};
 	}
 </script>
+
+<span
+	class="inline-flex items-center text-core-grey-400 dark:text-core-grey-300 cursor-pointer"
+	bind:this={element}
+	on:mouseenter={(e) => {
+		showTooltip = true;
+		floatingRef(element);
+	}}
+	on:mouseleave|stopPropagation={() => (showTooltip = false)}
+	use:floatingRef
+	role="tooltip"
+>
+	<slot name="hint">
+		{hintLabel}
+		<InformationCircleIcon class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+	</slot>
+</span>
 
 {#if showTooltip}
 	<div
