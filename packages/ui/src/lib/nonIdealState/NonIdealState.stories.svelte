@@ -37,6 +37,19 @@
 	</div>
 </Story>
 
+<Story
+	name="
+Spinner"
+>
+	<div class="w-96 h-96">
+		<NonIdealState spinner={true}>
+			<svelte:fragment slot="title">Something is loading</svelte:fragment>
+
+			Hopefully it will be ready soon.
+		</NonIdealState>
+	</div>
+</Story>
+
 <Story name="Long body">
 	<div class="w-full h-96">
 		<NonIdealState>
