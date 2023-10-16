@@ -14,6 +14,8 @@ export { default as LogoMayor } from './logos/LogoMayor.svelte';
 
 export { default as Modal } from './modal/Modal.svelte';
 
+export { default as NonIdealState } from './nonIdealState/NonIdealState.svelte';
+
 export { default as Header } from './header/Header.svelte';
 export { default as HeaderItem } from './header/HeaderItem.svelte';
 export { default as HeaderRight } from './header/HeaderRight.svelte';
