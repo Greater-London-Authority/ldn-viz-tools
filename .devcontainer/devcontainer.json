@@ -28,6 +28,7 @@
           "source.fixAll": true,
           "source.organizeImports": true
         },
+        "svelte.enable-ts-plugin": true,
         "typescript.tsdk": "node_modules\\typescript\\lib"
       },
       "extensions": [
