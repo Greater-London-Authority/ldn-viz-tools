@@ -12,7 +12,7 @@
 	>;
 
 	type DisabledStyle = Record<ButtonProps['variant'], string>;
-  </script>
+</script>
 
 <script lang="ts">
 	export let variant: ButtonProps['variant'] = 'solid';
@@ -22,7 +22,7 @@
 	export let disabled = false;
 	export let href = '';
 	export let type: 'button' | 'submit' = 'button';
-	export let title: undefined | string = undefined
+	export let title: undefined | string = undefined;
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {
