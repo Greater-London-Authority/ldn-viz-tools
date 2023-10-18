@@ -136,21 +136,23 @@
 </Story>
 
 <Story name="Square">
-	<Button variant="square"><ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" /></Button>
-	<Button variant="square" emphasis="secondary">
+	<Button variant="square" title="Down">
 		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
 	</Button>
-	<Button variant="square" disabled>
+	<Button variant="square" emphasis="secondary" title="Down">
+		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" disabled title="Down">
 		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
 	</Button>
 
-	<Button variant="square" size="sm">
+	<Button variant="square" size="sm" title="Down">
 		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
 	</Button>
-	<Button variant="square" size="md">
+	<Button variant="square" size="md" title="Down">
 		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
 	</Button>
-	<Button variant="square" size="lg">
+	<Button variant="square" size="lg" title="Down">
 		<ArrowCircleDownIcon class="w-6 h-6 mb-1" aria-hidden="true" />
 		Large
 	</Button>
