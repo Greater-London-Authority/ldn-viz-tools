@@ -1,6 +1,9 @@
 <script context="module">
+	// Sidebar is the core component for applications with sidebars.
+	//
+	// 
+
 	import { writable } from 'svelte/store';
-	import { isMobileDevice } from '$map/device';
 
 	const newSidebarLayout = () => {
 		const layout = {
@@ -36,7 +39,11 @@
 	export const sidebarIsOpen = writable(false);
 
 	const identifyMode = () => {
-		return isMobileDevice() ? 'vertical' : 'horizontal';
+		return isMobileScreen() ? 'vertical' : 'horizontal';
+	};
+
+	const isMobileScreen = () => {
+		return window.matchMedia('(max-width: 639px)').matches;
 	};
 
 	const identifyAlignment = (mode) => {
@@ -121,7 +128,12 @@
 
 <svelte:window on:resize={resize} />
 
-<aside
+<!--
+	<aside> is not suitable here because the sidebar contains primary	content and
+	sometimes primary controls, not just supplimentary stuff, e.g. title and
+	description.
+--> 
+<section
 	id="gla-sidebar"
 	class="fixed z-20 pointer-events-none"
 	style:display={$sidebarLayout.isHorizontal() ? 'flex' : 'block'}
@@ -147,7 +159,7 @@
 			<SidebarContent />
 		</slot>
 	</div>
-</aside>
+</section>
 
 <style>
 	#gla-sidebar {

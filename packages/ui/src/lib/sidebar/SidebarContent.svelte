@@ -1,4 +1,10 @@
 <script>
+	// SidebarContent is the standard content container for Sidebars.
+	//
+	// It should be imported and used to wrap sidebar content in the vast
+	// majority of projects as it provides the standard footer, overflow
+	// management, layout, sizing, and styling.
+
 	import { LogoMayor, LogoCIU } from '@ldn-viz/ui';
 	import { sidebarLayout } from './Sidebar.svelte';
 
@@ -25,13 +31,13 @@
 
 			<SidebarSection title="Standard sidebar">
 				<p>
-					For most maps you should use this sidebar content component with your own slotted content.
+					For most maps you should use this SidebarContent component with your own slotted content.
 					Optionally replace the sidebar hood containing the open/close toggle.
 				</p>
 
 				<p>
 					It will take care of applying the standard sidebar sizing, spacing for inner elements,
-					scrollbars when needed, and add the footer. You can slot in your own footer if needed:
+					scrollbars when needed, and add the default footer. You can slot in your own footer if needed:
 				</p>
 
 				<div class="italic flex flex-col">
@@ -49,7 +55,7 @@
 				<p>
 					In the rare event that a non-standard layout is essential you'll need to do all the
 					sizing, spacing, footer, and other styling manually; just omit the sidebar content
-					component:
+					component. I recommend copying the SidebarContent code into a custom project component and modifying to suit.
 				</p>
 
 				<div class="italic flex flex-col">

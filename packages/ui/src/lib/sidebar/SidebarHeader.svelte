@@ -1,4 +1,8 @@
 <script>
+	// SidebarHeader should be the first section in a sidebar. It contains the
+	// title and any application description should be provided in the slot;
+	// usually as one or more <p> tags.
+
 	import SidebarMoreInfoModal from './SidebarMoreInfoModal.svelte';
 
 	export let title;

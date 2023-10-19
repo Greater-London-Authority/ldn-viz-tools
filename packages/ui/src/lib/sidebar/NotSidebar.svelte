@@ -1,4 +1,10 @@
 <script>
+	// NotSidebar is a container, for holding non-sidebar content, that grows and
+	// shrinks with the Sidebar.
+	//
+	// It is not required for use with the Sidebar component but useful when you
+	// don't want the Sidebar to cover your main content. 
+
 	import { browser } from '$app/environment';
 	import { sidebarLayout, sidebarIsOpen } from './Sidebar.svelte';
 

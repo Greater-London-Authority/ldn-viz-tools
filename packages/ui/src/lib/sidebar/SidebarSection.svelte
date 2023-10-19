@@ -1,4 +1,8 @@
 <script>
+	// SidebarSection should be used to break up sidebar content into individual
+	// sections each containing semantically related content. The exception is
+	// the first section which should use the SidebarHeader component.
+
 	import SidebarMoreInfoModal from './SidebarMoreInfoModal.svelte';
 
 	export let title = '';
