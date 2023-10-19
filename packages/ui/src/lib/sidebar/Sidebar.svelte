@@ -1,0 +1,158 @@
+<script context="module">
+	import { writable } from 'svelte/store';
+	import { isMobileDevice } from '$map/device';
+
+	const newSidebarLayout = () => {
+		const layout = {
+			mode: 'vertical',
+			alignment: 'bottom',
+			hoodWidth: 0,
+			hoodHeight: 0,
+			contentWidth: 0,
+			contentHeight: 0
+		};
+
+		layout.isVertical = () => layout.mode === 'vertical';
+		layout.isHorizontal = () => layout.mode === 'horizontal';
+
+		layout.isRight = () => layout.mode === 'right';
+		layout.isBottom = () => layout.mode === 'bottom';
+
+		return layout;
+	};
+
+	const newLayoutStyle = () => {
+		return {
+			bottom: 'unset',
+			right: 'unset',
+			width: 'auto',
+			height: 'auto',
+			maxWidth: '100dvw',
+			maxHeight: '100dvh'
+		};
+	};
+
+	export const sidebarLayout = writable(newSidebarLayout());
+	export const sidebarIsOpen = writable(false);
+
+	const identifyMode = () => {
+		return isMobileDevice() ? 'vertical' : 'horizontal';
+	};
+
+	const identifyAlignment = (mode) => {
+		return mode === 'horizontal' ? 'right' : 'bottom';
+	};
+</script>
+
+<script>
+	import { onMount, tick } from 'svelte';
+	import SidebarToggle from './SidebarToggle.svelte';
+	import SidebarContent from './SidebarContent.svelte';
+
+	let hoodElem;
+	let contentElem;
+	let visibility = 'hidden';
+	let styles = newLayoutStyle();
+
+	const resize = async () => {
+		// Because this and other components need to be rendered in the DOM before
+		// the full correct layout can be identified, relayout is called multiple
+		// times. Smartphones can be a bit funny with sizing due to their
+		// dynamic view heights so this is called a third time. The performance
+		// hit is negligible in comparison to an applications main content load.
+
+		relayout();
+		await tick();
+
+		relayout();
+		visibility = 'visible';
+
+		await tick();
+		relayout();
+	};
+
+	const relayout = async () => {
+		if (!hoodElem || !contentElem) {
+			return;
+		}
+		const layout = newSidebarLayout();
+
+		layout.mode = identifyMode();
+		layout.alignment = identifyAlignment(layout.mode);
+
+		let rect = hoodElem.getBoundingClientRect();
+		layout.hoodWidth = rect.width;
+		layout.hoodHeight = rect.height;
+
+		rect = contentElem.getBoundingClientRect();
+		layout.contentWidth = rect.width;
+		layout.contentHeight = rect.height;
+
+		sidebarLayout.set(layout);
+		updateLayoutStyles(layout);
+	};
+
+	const updateLayoutStyles = (layout) => {
+		styles = newLayoutStyle();
+
+		if (!layout) {
+			layout = $sidebarLayout;
+		}
+
+		const openBy = (size) => {
+			return $sidebarIsOpen ? 0 : size + 'px';
+		};
+
+		if (layout.alignment === 'bottom') {
+			styles.bottom = openBy(-layout.contentHeight);
+			styles.width = '100%';
+			styles.maxHeight = `calc(100dvh - ${layout.hoodHeight}px - 72px`;
+			return;
+		}
+
+		styles.right = openBy(-layout.contentWidth);
+		styles.height = '100%';
+		styles.maxWidth = `calc(100dvw - ${layout.hoodWidth}px - 72px`;
+	};
+
+	onMount(resize);
+	$: updateLayoutStyles(null, $sidebarIsOpen);
+</script>
+
+<svelte:window on:resize={resize} />
+
+<aside
+	id="gla-sidebar"
+	class="fixed z-20 pointer-events-none"
+	style:display={$sidebarLayout.isHorizontal() ? 'flex' : 'block'}
+	style:visibility
+	style:bottom={styles.bottom}
+	style:right={styles.right}
+	style:width={styles.width}
+	style:height={styles.height}
+>
+	<div bind:this={hoodElem}>
+		<slot name="hood">
+			<SidebarToggle />
+		</slot>
+	</div>
+
+	<div
+		bind:this={contentElem}
+		class="pointer-events-auto overflow-y-auto"
+		style:max-width={styles.maxWidth}
+		style:max-height={styles.maxHeight}
+	>
+		<slot>
+			<SidebarContent />
+		</slot>
+	</div>
+</aside>
+
+<style>
+	#gla-sidebar {
+		transition-property: bottom, right;
+		transition-duration: 150ms;
+		transition-timing-function: ease-out;
+	}
+</style>
