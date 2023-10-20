@@ -190,35 +190,6 @@
 	</Sidebar>
 </Story>
 
-<Story name="Sidebar Overscroll Management">
-	<Sidebar>
-		<SidebarContent>
-			<SidebarHeader title="Sidebar section">
-				<p>
-					Sidebar sections are <code>{"<section>"}</code> elements for
-					splitting up sidebar content in to meaningful chunks that crawlers,
-					browsers, and accessibility can navigate meaningfully.
-				</p>
-			</SidebarHeader>
-
-			<SidebarSection title="Title">
-				<p>
-					A title is provided using the <i>title</i> property which may
-					contain standard HTML tags, e.i. not Svelte components. Section
-					titles are optional.
-				</p>
-			</SidebarSection>
-
-			<SidebarSection title="Content">
-				<p>
-					The section content is spaced accordingly but may be modified via
-					local CSS, the style property, or utility classes.
-				</p>
-			</SidebarSection>
-		</SidebarContent>
-	</Sidebar>
-</Story>
-
 <Story name="Not the Sidebar">
 	<NotSidebar classes="p-6">
 		<h1 class="text-3xl">I am not the Sidebar.</h1>
