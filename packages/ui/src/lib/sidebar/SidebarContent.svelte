@@ -27,12 +27,12 @@
 	<div class="grow overflow-y-auto overscroll-contain p-2 flex flex-col gap-5">
 		<slot>
 			<SidebarHeader title="Hello there,">
-				<p>It looks like you're building a new map.</p>
+				<p>It looks like you're building a new app.</p>
 			</SidebarHeader>
 
 			<SidebarSection title="Standard sidebar">
 				<p>
-					For most maps you should use this SidebarContent component with your own slotted content.
+					For most apps you should use this <code>{"<SidebarContent>"}</code> component with your own slotted content.
 					Optionally replace the sidebar hood containing the open/close toggle.
 				</p>
 
@@ -55,8 +55,8 @@
 			<SidebarSection title="Custom sidebar">
 				<p>
 					In the rare event that a non-standard layout is essential you'll need to do all the
-					sizing, spacing, footer, and other styling manually; just omit the sidebar content
-					component. I recommend copying the SidebarContent code into a custom project component and modifying to suit.
+					sizing, spacing, footer, and other styling manually, just omit the sidebar content
+					component. I recommend copying the <code>{"<SidebarContent>"}</code> code into a custom project component and modifying to suit.
 				</p>
 
 				<div class="italic flex flex-col">
@@ -81,3 +81,9 @@
 		</footer>
 	</slot>
 </div>
+
+<style>
+	code {
+		@apply text-perceptual-orange-100;
+	}
+</style>

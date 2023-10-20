@@ -6,7 +6,7 @@
 	// don't want the Sidebar to cover your main content. 
 
 	import { browser } from '$app/environment';
-	import { sidebarLayout, sidebarIsOpen } from './Sidebar.svelte';
+	import { sidebarLayout, sidebarOpen } from './Sidebar.svelte';
 
 	export let hideContent = false;
 	export let classes = ""
@@ -32,7 +32,7 @@
 	$: if (browser && $sidebarLayout) {
 		const pxSize = fitToParent();
 
-		if ($sidebarIsOpen) {
+		if ($sidebarOpen) {
 			adjustForSidebar(pxSize);
 		}
 
@@ -47,7 +47,7 @@
 	class="absolute top-0 left-0 {classes}"
 	style:width={size.width}
 	style:height={size.height}
-	style:transition-delay={!$sidebarIsOpen ? '0ms' : '150ms'}
+	style:transition-delay={!$sidebarOpen ? '0ms' : '150ms'}
 	{...$$restProps}
 >
 	{#if !hideContent}

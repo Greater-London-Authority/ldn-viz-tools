@@ -4,10 +4,10 @@
 
 	import Menu from '@rgossiaux/svelte-heroicons/outline/Menu';
 	import Button from '../button/Button.svelte';
-	import { sidebarIsOpen } from './Sidebar.svelte';
+	import { sidebarOpen } from './Sidebar.svelte';
 
 	const toggleOpen = () => {
-		sidebarIsOpen.update((isOpen) => !isOpen);
+		sidebarOpen.update((isOpen) => !isOpen);
 	};
 </script>
 

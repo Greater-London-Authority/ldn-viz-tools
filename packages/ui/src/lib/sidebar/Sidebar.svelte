@@ -34,7 +34,7 @@
 	};
 
 	export const sidebarLayout = writable(newSidebarLayout());
-	export const sidebarIsOpen = writable(false);
+	export const sidebarOpen = writable(false);
 
 	const identifyMode = () => {
 		return isMobileScreen() ? 'vertical' : 'horizontal';
@@ -105,7 +105,7 @@
 		}
 
 		const openBy = (size) => {
-			return $sidebarIsOpen ? 0 : size + 'px';
+			return $sidebarOpen ? 0 : size + 'px';
 		};
 
 		if (layout.alignment === 'bottom') {
@@ -121,7 +121,7 @@
 	};
 
 	onMount(resize);
-	$: updateLayoutStyles(null, $sidebarIsOpen);
+	$: updateLayoutStyles(null, $sidebarOpen);
 </script>
 
 <svelte:window on:resize={resize} />
