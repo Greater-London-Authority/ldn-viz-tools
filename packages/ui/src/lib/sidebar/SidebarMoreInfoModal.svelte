@@ -1,6 +1,6 @@
 <script>
 	import { InformationCircleIcon } from '@rgossiaux/svelte-heroicons/solid';
-	import { Modal } from '../../ui';
+	import Modal from '../modal/Modal.svelte';
 
 	export let title = undefined;
 

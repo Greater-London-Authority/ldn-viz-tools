@@ -1,7 +1,5 @@
 <script context="module">
 	// Sidebar is the core component for applications with sidebars.
-	//
-	// 
 
 	import { writable } from 'svelte/store';
 

@@ -9,6 +9,7 @@
 	import { sidebarLayout, sidebarIsOpen } from './Sidebar.svelte';
 
 	export let hideContent = false;
+	export let classes = ""
 
 	let size = {
 		width: '100%',
@@ -43,11 +44,11 @@
 </script>
 
 <div
-	{...$$restProps}
-	class="absolute top-0 left-0"
+	class="absolute top-0 left-0 {classes}"
 	style:width={size.width}
 	style:height={size.height}
 	style:transition-delay={!$sidebarIsOpen ? '0ms' : '150ms'}
+	{...$$restProps}
 >
 	{#if !hideContent}
 		<slot />

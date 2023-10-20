@@ -5,9 +5,10 @@
 	// majority of projects as it provides the standard footer, overflow
 	// management, layout, sizing, and styling.
 
-	import { LogoMayor, LogoCIU } from '@ldn-viz/ui';
-	import { sidebarLayout } from './Sidebar.svelte';
+	import LogoMayor from '../logos/LogoMayor.svelte';
+	import LogoCIU from '../logos/LogoCIU.svelte';
 
+	import { sidebarLayout } from './Sidebar.svelte';
 	import SidebarHeader from './SidebarHeader.svelte';
 	import SidebarSection from './SidebarSection.svelte';
 

@@ -3,7 +3,7 @@
 	// toggle.
 
 	import Menu from '@rgossiaux/svelte-heroicons/outline/Menu';
-	import { Button } from '@ldn-viz/ui';
+	import Button from '../button/Button.svelte';
 	import { sidebarIsOpen } from './Sidebar.svelte';
 
 	const toggleOpen = () => {
