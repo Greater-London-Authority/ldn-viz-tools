@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 	import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
 
 	import Sidebar, { sidebarOpen } from './Sidebar.svelte';
