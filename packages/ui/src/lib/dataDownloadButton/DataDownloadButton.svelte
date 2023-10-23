@@ -4,7 +4,7 @@
 	import { csvFormat } from 'd3-dsv';
 
 	export let format: 'CSV' | 'JSON' | undefined;
-	export let data: any;
+	export let data: Record<string, number | string>[];
 	export let filename: string;
 
 	export let disabled = false;
