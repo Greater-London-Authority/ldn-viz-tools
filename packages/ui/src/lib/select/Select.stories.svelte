@@ -3,9 +3,10 @@
 
 	import Select from './Select.svelte';
 
-	let value: any;
+	type Item = { label: string, value: number };
+	let value: Item;
 
-	const items = [
+	const items: Item[] = [
 		{ label: 'One', value: 1 },
 		{ label: 'Two', value: 2 },
 		{ label: 'Three', value: 3 }

@@ -9,7 +9,7 @@
 
 	export let hintLabel = 'what is this?';
 
-	let showTooltip: boolean = false;
+	let showTooltip = false;
 
 	let element: HTMLSpanElement;
 
@@ -40,7 +40,7 @@
 <span
 	class="inline-flex items-center text-core-grey-400 dark:text-core-grey-300 cursor-pointer"
 	bind:this={element}
-	on:mouseenter={(e) => {
+	on:mouseenter={() => {
 		showTooltip = true;
 		floatingRef(element);
 	}}

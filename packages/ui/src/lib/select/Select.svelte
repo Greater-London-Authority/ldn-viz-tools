@@ -5,10 +5,10 @@
 	export let items: { [key: string]: any }[];
 
 	export let id: string;
-	export let name: string = '';
+	export let name = '';
 	export let placeholder = 'Select an option';
-	export let disabled: boolean = false;
-	export let error: boolean = false;
+	export let disabled = false;
+	export let error = false;
 
 	export let labelField = 'label';
 

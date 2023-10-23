@@ -3,11 +3,11 @@
 	import InputWrapper from './InputWrapper.svelte';
 
 	export let id: string;
-	export let name: string = '';
+	export let name = '';
 	export let placeholder = '';
 	export let type = 'text';
-	export let disabled: boolean = false;
-	export let error: boolean = false;
+	export let disabled = false;
+	export let error = false;
 
 	if (!name) {
 		name = id;
