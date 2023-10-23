@@ -130,7 +130,7 @@
 	<aside> is not suitable here because the sidebar contains primary	content and
 	sometimes primary controls, not just supplimentary stuff, e.g. title and
 	description.
---> 
+-->
 <section
 	id="gla-sidebar"
 	class="fixed z-20 pointer-events-none"

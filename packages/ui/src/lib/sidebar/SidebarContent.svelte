@@ -32,13 +32,14 @@
 
 			<SidebarSection title="Standard sidebar">
 				<p>
-					For most apps you should use this <code>{"<SidebarContent>"}</code> component with your own slotted content.
-					Optionally replace the sidebar hood containing the open/close toggle.
+					For most apps you should use this <code>{'<SidebarContent>'}</code> component with your own
+					slotted content. Optionally replace the sidebar hood containing the open/close toggle.
 				</p>
 
 				<p>
 					It will take care of applying the standard sidebar sizing, spacing for inner elements,
-					scrollbars when needed, and add the default footer. You can slot in your own footer if needed:
+					scrollbars when needed, and add the default footer. You can slot in your own footer if
+					needed:
 				</p>
 
 				<div class="italic flex flex-col">
@@ -56,7 +57,8 @@
 				<p>
 					In the rare event that a non-standard layout is essential you'll need to do all the
 					sizing, spacing, footer, and other styling manually, just omit the sidebar content
-					component. I recommend copying the <code>{"<SidebarContent>"}</code> code into a custom project component and modifying to suit.
+					component. I recommend copying the <code>{'<SidebarContent>'}</code> code into a custom project
+					component and modifying to suit.
 				</p>
 
 				<div class="italic flex flex-col">

@@ -3,13 +3,13 @@
 	// shrinks with the Sidebar.
 	//
 	// It is not required for use with the Sidebar component but useful when you
-	// don't want the Sidebar to cover your main content. 
+	// don't want the Sidebar to cover your main content.
 
 	import { browser } from '$app/environment';
 	import { sidebarLayout, sidebarOpen } from './Sidebar.svelte';
 
 	export let hideContent = false;
-	export let classes = ""
+	export let classes = '';
 
 	let size = {
 		width: '100%',
