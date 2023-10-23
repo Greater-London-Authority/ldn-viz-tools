@@ -22,13 +22,13 @@
 
 	const selectAll = () => {
 		selectionState = Object.fromEntries(
-			options.map((o, i) => [o.id, o.disabled ? selectionState[o.id] : true])
+			options.map((o) => [o.id, o.disabled ? selectionState[o.id] : true])
 		);
 	};
 
 	const clearAll = () => {
 		selectionState = Object.fromEntries(
-			options.map((o, i) => [o.id, o.disabled ? selectionState[o.id] : false])
+			options.map((o) => [o.id, o.disabled ? selectionState[o.id] : false])
 		);
 	};
 
