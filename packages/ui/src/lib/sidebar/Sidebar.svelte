@@ -3,6 +3,23 @@
 
 	import { writable } from 'svelte/store';
 
+	type Mode = 'vertical' | 'horizontal';
+	type Alignment = 'right' | 'bottom';
+	type Layout = {
+		mode: Mode,
+		alignment: Alignment,
+		hoodWidth: number,
+		hoodHeight: number,
+		contentWidth: number,
+		contentHeight: number,
+		isVertical: () => boolean,
+		isHorizontal: () => boolean,
+		isRight: () => boolean,
+		isBottom: () => boolean,
+
+	}
+
+
 	const newSidebarLayout = () => {
 		const layout = {
 			mode: 'vertical',
