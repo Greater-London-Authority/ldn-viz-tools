@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
 	// Sidebar is the core component for applications with sidebars.
 
 	import { writable } from 'svelte/store';
