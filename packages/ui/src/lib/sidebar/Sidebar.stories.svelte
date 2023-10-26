@@ -105,7 +105,7 @@
 
 			<SidebarSection title="$sidebarLayout">
 				<p>
-					<code>$sidebarLayout</code> is an object contains information about how the sidebar is laid
+					<code>$sidebarLayout</code> is an object that contains information about how the sidebar is laid
 					out with a few utility functions to ensure readable user code.
 				</p>
 
