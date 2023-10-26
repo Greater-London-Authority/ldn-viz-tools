@@ -41,7 +41,7 @@
 		layout.isRight = () => layout.mode === 'right';
 		layout.isBottom = () => layout.mode === 'bottom';
 
-		return layout;
+		return layout as Layout;
 	};
 
 	const newLayoutStyle = () => {
