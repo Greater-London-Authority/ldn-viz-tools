@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// SidebarContent is the standard content container for Sidebars.
 	//
 	// It should be imported and used to wrap sidebar content in the vast
