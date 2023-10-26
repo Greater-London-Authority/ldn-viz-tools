@@ -13,10 +13,12 @@
 	);
 
 	let allCheckboxesCheckedOrDisabled;
-	$: allCheckboxesCheckedOrDisabled = options.every(o =>  o.disabled ? true :  selectionState[o.id]);
+	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
+		o.disabled ? true : selectionState[o.id]
+	);
 
 	let noCheckboxesChecked;
-	$: noCheckboxesChecked = !Object.values(selectionState).some(d => d);
+	$: noCheckboxesChecked = !Object.values(selectionState).some((d) => d);
 
 	const selectAll = () => {
 		selectionState = Object.fromEntries(
@@ -31,24 +33,24 @@
 	};
 
 	const toggleAll = () => {
-		console.log("TOGGLING!")
+		console.log('TOGGLING!');
 
-		if (!allCheckboxesCheckedOrDisabled){
+		if (!allCheckboxesCheckedOrDisabled) {
 			selectAll();
 		} else {
 			clearAll();
 		}
-	}
+	};
 </script>
 
 <div>
 	{#if !buttonsHidden}
 		<Checkbox
-				label="Select all"
-				color="#3787D2"
-				checked={allCheckboxesCheckedOrDisabled}
-				indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
-				on:change={toggleAll}
+			label="Select all"
+			color="#3787D2"
+			checked={allCheckboxesCheckedOrDisabled}
+			indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+			on:change={toggleAll}
 		/>
 	{/if}
 

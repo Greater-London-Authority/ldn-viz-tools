@@ -1,5 +1,7 @@
 <script>
-	import { CameraIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { Camera } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import ImageDownloadButton from './ImageDownloadButton.svelte';
@@ -22,7 +24,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef}>
-		Download as PNG<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as PNG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -32,17 +34,17 @@
 		<circle cx="10" cy="10" r="10" fill="blue" />
 	</svg>
 
-	<ImageDownloadButton svgNode={svgRef} filename="download" variant="primary">
+	<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="primary">
 		Primary
-		<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
-	<ImageDownloadButton svgNode={svgRef} filename="download" variant="secondary">
+	<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="secondary">
 		Secondary
-		<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
-	<ImageDownloadButton svgNode={svgRef} filename="download" variant="ghost">
-		Ghost
-		<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+	<ImageDownloadButton svgNode={svgRef} filename="download" variant="text">
+		Text
+		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -53,7 +55,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef} disabled={true}>
-		Download as PNG<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as PNG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -64,7 +66,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef2}>
-		Download as PNG<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as PNG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -75,7 +77,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef3} format="SVG">
-		Download as SVG<CameraIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as SVG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 

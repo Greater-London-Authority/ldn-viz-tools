@@ -21,6 +21,8 @@ export { default as HeaderTitle } from './header/HeaderTitle.svelte';
 export { default as NavLink } from './header/NavLink.svelte';
 export { default as NavLinks } from './header/NavLinks.svelte';
 
+export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
+
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
 

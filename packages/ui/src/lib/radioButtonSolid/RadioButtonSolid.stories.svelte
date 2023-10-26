@@ -1,9 +1,7 @@
 <script lang="ts">
-	import {
-		FilterIcon,
-		MapIcon,
-		PresentationChartLineIcon
-	} from '@rgossiaux/svelte-heroicons/solid';
+	import { Funnel, Map, PresentationChartLine } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
 	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
@@ -29,15 +27,15 @@
 <Story name="RadioGroup with Icons above">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
-			<FilterIcon class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Funnel} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
 			Bus
 		</RadioButtonSolid>
 		<RadioButtonSolid id="train" name="station-type-train">
-			<MapIcon class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Map} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
 			Train
 		</RadioButtonSolid>
 		<RadioButtonSolid id="plane" name="station-type-plane">
-			<PresentationChartLineIcon class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
 			Plane
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
@@ -48,52 +46,52 @@
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
 			Bus
-			<FilterIcon class="w-6 h-6 mt-1" aria-hidden="true" />
+			<Icon src={Funnel} theme="solid" class="w-6 h-6 mt-1" aria-hidden="true" />
 		</RadioButtonSolid>
 		<RadioButtonSolid id="train" name="station-type-train">
 			Train
-			<MapIcon class="w-6 h-6 mt-1" aria-hidden="true" />
+			<Icon src={Map} theme="solid" class="w-6 h-6 mt-1" aria-hidden="true" />
 		</RadioButtonSolid>
 		<RadioButtonSolid id="plane" name="station-type-plane">
 			Plane
-			<PresentationChartLineIcon class="w-6 h-6 mt-1" aria-hidden="true" />
+			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mt-1" aria-hidden="true" />
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
 	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="With 2 options">
-    <RadioButtonGroupSolid name="station-type" bind:selectedId>
-        <RadioButtonSolid id="bus" name="station-type-bus">
-            <FilterIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
-            Bus
-        </RadioButtonSolid>
-        <RadioButtonSolid id="train" name="station-type-train">
-            <MapIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
-            Train
-        </RadioButtonSolid>
-    </RadioButtonGroupSolid>
-    <p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<RadioButtonGroupSolid name="station-type" bind:selectedId>
+		<RadioButtonSolid id="bus" name="station-type-bus">
+			<Icon src={Funnel} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			Bus
+		</RadioButtonSolid>
+		<RadioButtonSolid id="train" name="station-type-train">
+			<Icon src={Map} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			Train
+		</RadioButtonSolid>
+	</RadioButtonGroupSolid>
+	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="With 4 options">
-    <RadioButtonGroupSolid name="station-type" bind:selectedId>
-        <RadioButtonSolid id="bus" name="station-type-bus">
-            <FilterIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
-            Bus
-        </RadioButtonSolid>
-        <RadioButtonSolid id="train" name="station-type-train">
-            <MapIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
-            Train
-        </RadioButtonSolid>
-        <RadioButtonSolid id="plane" name="station-type-plane">
-            <PresentationChartLineIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
-            Plane
-        </RadioButtonSolid>
-        <RadioButtonSolid id="plane" name="station-type-plane">
-            <PresentationChartLineIcon class="w-6 h-6 mb-1" aria-hidden="true"/>
-            This_label_is_far_too_long
-        </RadioButtonSolid>
-    </RadioButtonGroupSolid>
-    <p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<RadioButtonGroupSolid name="station-type" bind:selectedId>
+		<RadioButtonSolid id="bus" name="station-type-bus">
+			<Icon src={Funnel} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			Bus
+		</RadioButtonSolid>
+		<RadioButtonSolid id="train" name="station-type-train">
+			<Icon src={Map} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			Train
+		</RadioButtonSolid>
+		<RadioButtonSolid id="plane" name="station-type-plane">
+			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			Plane
+		</RadioButtonSolid>
+		<RadioButtonSolid id="plane" name="station-type-plane">
+			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			This_label_is_far_too_long
+		</RadioButtonSolid>
+	</RadioButtonGroupSolid>
+	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
 </Story>
