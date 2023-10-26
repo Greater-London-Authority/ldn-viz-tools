@@ -40,9 +40,9 @@ export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 
 export * from './sidebar/Sidebar.svelte';
-export { default as Sidebar } from './sidebar/Sidebar.svelte';
 export { default as NotSidebar } from './sidebar/NotSidebar.svelte';
-export { default as SidebarToggle } from './sidebar/SidebarToggle.svelte';
+export { default as Sidebar } from './sidebar/Sidebar.svelte';
 export { default as SidebarContent } from './sidebar/SidebarContent.svelte';
 export { default as SidebarHeader } from './sidebar/SidebarHeader.svelte';
 export { default as SidebarSection } from './sidebar/SidebarSection.svelte';
+export { default as SidebarToggle } from './sidebar/SidebarToggle.svelte';
