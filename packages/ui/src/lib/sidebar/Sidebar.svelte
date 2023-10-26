@@ -76,8 +76,8 @@
 	import SidebarToggle from './SidebarToggle.svelte';
 	import SidebarContent from './SidebarContent.svelte';
 
-	let hoodElem;
-	let contentElem;
+	let hoodElem: HTMLElement;
+	let contentElem: HTMLElement;
 	let visibility = 'hidden';
 	let styles = newLayoutStyle();
 
