@@ -170,7 +170,7 @@
 
 			<SidebarSection title="Section title">
 				<p>
-					A title is provided using the <i>title</i> property which may contain standard HTML tags, e.i.
+					A title is provided using the <i>title</i> property which may contain standard HTML tags, i.e.
 					not Svelte components. Section titles are optional.
 				</p>
 			</SidebarSection>
