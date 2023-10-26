@@ -59,7 +59,7 @@
 			</p>
 
 			<p>
-				You can change the footer using the named slot 'footer'. You should use the <code
+				You can change the footer using the named slot <code>footer</code>. You should use the <code
 					>{'<footer>'}</code
 				> tag and you'll need to style it yourself:
 			</p>
