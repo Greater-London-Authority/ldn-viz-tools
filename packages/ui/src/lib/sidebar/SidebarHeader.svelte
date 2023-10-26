@@ -5,7 +5,7 @@
 
 	import SidebarMoreInfoModal from './SidebarMoreInfoModal.svelte';
 
-	export let title;
+	export let title = '';
 	export let infoTitle = title;
 	export let classes = '';
 </script>
