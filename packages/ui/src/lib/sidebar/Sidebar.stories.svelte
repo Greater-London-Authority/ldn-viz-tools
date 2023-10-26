@@ -162,6 +162,7 @@
 	<Sidebar>
 		<SidebarContent>
 			<SidebarHeader title="Sidebar section">
+							<svelte:fragment slot="info">Here's some more info that goes with the header...</svelte:fragment>
 				<p>
 					Sidebar sections are <code>{'<section>'}</code> elements for splitting up sidebar content in
 					to meaningful chunks that crawlers, browsers, and accessibility can navigate meaningfully.
