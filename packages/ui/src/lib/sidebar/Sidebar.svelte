@@ -27,7 +27,12 @@
 			hoodWidth: 0,
 			hoodHeight: 0,
 			contentWidth: 0,
-			contentHeight: 0
+			contentHeight: 0,
+
+			isVertical: () => false,
+			isHorizontal: () => false,
+			isRight: () => false,
+			isBottom: () => false,
 		};
 
 		layout.isVertical = () => layout.mode === 'vertical';
