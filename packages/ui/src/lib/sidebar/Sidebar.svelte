@@ -66,7 +66,7 @@
 		return window.matchMedia('(max-width: 639px)').matches;
 	};
 
-	const identifyAlignment = (mode) => {
+	const identifyAlignment = (mode: Mode) => {
 		return mode === 'horizontal' ? 'right' : 'bottom';
 	};
 </script>
