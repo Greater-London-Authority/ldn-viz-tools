@@ -1,5 +1,7 @@
 <script>
-	import { ArrowCircleDownIcon, DocumentDownloadIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { ArrowDownCircle, DocumentArrowDown } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 	import DataDownloadButton from './DataDownloadButton.svelte';
 
@@ -18,16 +20,16 @@
 
 <Story name="Default">
 	<DataDownloadButton {data} filename="download" format="CSV">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
 
 <Story name="Button types">
 	<DataDownloadButton {data} filename="download" format="CSV" emphasis="primary">
-		Primary<ArrowCircleDownIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		Primary <Icon src={ArrowDownCircle} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
 	<DataDownloadButton {data} filename="download" format="CSV" emphasis="secondary">
-		Secondary<DocumentDownloadIcon class="ml-2 w-6 h-6" aria-hidden="true" />
+		Secondary <Icon src={DocumentArrowDown} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
 	<DataDownloadButton {data} filename="download" format="CSV" variant="text">
 		Text<svg
@@ -50,18 +52,18 @@
 
 <Story name="Download as JSON">
 	<DataDownloadButton {data} filename="download" format="JSON">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 ml-2" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
 
 <Story name="Label on button and custom data">
 	<DataDownloadButton {data} filename="download" format="CSV">
-		Download<ArrowCircleDownIcon class="w-6 h-6 ml-2" aria-hidden="true" />
+		Download <Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
 
 <Story name="Disabled">
 	<DataDownloadButton {data} disabled={true} filename="download" format="CSV">
-		<ArrowCircleDownIcon class="w-6 h-" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
