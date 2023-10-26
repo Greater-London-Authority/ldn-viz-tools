@@ -119,7 +119,7 @@
 		updateLayoutStyles(layout);
 	};
 
-	const updateLayoutStyles = (layout) => {
+	const updateLayoutStyles = (layout: Layout) => {
 		styles = newLayoutStyle();
 
 		if (!layout) {
