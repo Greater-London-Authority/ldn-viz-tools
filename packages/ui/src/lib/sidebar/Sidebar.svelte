@@ -128,7 +128,7 @@
 
 <!--
 	<aside> is not suitable here because the sidebar contains primary	content and
-	sometimes primary controls, not just supplimentary stuff, e.g. title and
+	sometimes primary controls, not just supplementary stuff, e.g. title and
 	description.
 -->
 <section
