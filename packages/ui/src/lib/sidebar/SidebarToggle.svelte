@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// SidebarToggle is the standard sidebar hood containing an open close
 	// toggle.
 
