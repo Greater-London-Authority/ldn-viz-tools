@@ -126,8 +126,8 @@
 			layout = $sidebarLayout;
 		}
 
-		const openBy = (size) => {
-			return $sidebarOpen ? 0 : size + 'px';
+		const openBy = (size: number) => {
+			return $sidebarOpen ? '0' : size + 'px';
 		};
 
 		if (layout.alignment === 'bottom') {
