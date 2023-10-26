@@ -1,3 +1,3 @@
 <div class="flex flex-grow items-center justify-end">
-    <slot/>
+	<slot />
 </div>
