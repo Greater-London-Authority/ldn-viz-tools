@@ -18,6 +18,6 @@
 	<InformationCircleIcon class="h-4 w-4 fill-current" on:click={openModal} />
 </button>
 
-<Modal bind:open={modalOpen} {title}>
+<Modal bind:isOpen={modalOpen} {title}>
 	<slot />
 </Modal>
