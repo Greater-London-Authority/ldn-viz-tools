@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// SidebarSection should be used to break up sidebar content into individual
 	// sections each containing semantically related content. The exception is
 	// the first section which should use the SidebarHeader component.
