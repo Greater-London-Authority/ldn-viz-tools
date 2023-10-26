@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { InformationCircleIcon } from '@rgossiaux/svelte-heroicons/solid';
 	import Modal from '../modal/Modal.svelte';
 
