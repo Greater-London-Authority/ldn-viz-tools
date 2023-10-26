@@ -28,8 +28,8 @@
 	<Sidebar>
 		<div class="w-[300px] bg-core-blue-800 p-4 space-y-4 text-white text-sm">
 			<p>
-				<code>{'<Sidebar>'}</code> is a generic component with it's width, height, and other layout attributes
-				calculated based on it's content.
+				<code>{'<Sidebar>'}</code> is a generic component with its width, height, and other layout attributes
+				calculated based on its content.
 			</p>
 
 			<p>
