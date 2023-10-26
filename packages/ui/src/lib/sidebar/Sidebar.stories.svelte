@@ -147,7 +147,7 @@
 				</p>
 				<p>
 					The title is provided using the <i>title</i> property which may contain standard HTML tags,
-					e.i. not Svelte components.
+					i.e. not Svelte components.
 				</p>
 				<p>
 					Supply the description as unamed slotted content. Use a series of
