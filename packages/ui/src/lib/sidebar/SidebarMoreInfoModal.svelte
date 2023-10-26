@@ -2,7 +2,7 @@
 	import { InformationCircleIcon } from '@rgossiaux/svelte-heroicons/solid';
 	import Modal from '../modal/Modal.svelte';
 
-	export let title = undefined;
+	export let title = '';
 
 	let modalOpen = false;
 	const openModal = () => (modalOpen = true);
