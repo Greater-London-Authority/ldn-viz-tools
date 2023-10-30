@@ -56,6 +56,16 @@ This will prompt for a description of the changes, which will be saved as a mark
 
 When a release is made, `changeset` will add these descriptions of changes to a `CHANGELONG.md` file in the directory of the appropriate package; the version numbers in `package.json` files will also be updated appropriately.
 
-Releases are made by manually triggering the [`publish-packages`](./.github/publish-packages.yml) workflow in GitHub.
+### Making releases/publishing packages
+
+Rather than having a fixed release schedule, we make releases when someone wants to make use of unreleased code in the `main` branch.
+
+The process for making a release is:
+
+* check whether there are any open PRs that should be included in the release; if so, merge them first
+* merge from the `dev` branch into the `main` branch, using the 'merge commit' option (this will mean that each commit made to the `dev` branch will be added to the `main` branch)
+* manually trigger the [`publish-packages`](./.github/publish-packages.yml) workflow in GitHub.
 This runs the `publish-packages` script defined in the top-level [`package.json`](./package.json) file.
 It uses a token that was [generated in NPM](https://www.npmjs.com/settings/ldn-viz/tokens/) and [saved as an Action secret in GitHub](https://github.com/Greater-London-Authority/ldn-viz-tools/settings/secrets/actions).
+* make a Pull Request from the `release-msg` branch to `main`, merge it, then delete the branch (the action that generates the release notes can't push directly to the `main` branch because it is protected, and [GitHub Actions can't push to protected branches](https://github.com/orgs/community/discussions/25305))
+* merge from the `main` branch to `dev`, using the 'merge commit' option
