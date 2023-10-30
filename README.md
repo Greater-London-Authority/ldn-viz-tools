@@ -69,3 +69,5 @@ This runs the `publish-packages` script defined in the top-level [`package.json`
 It uses a token that was [generated in NPM](https://www.npmjs.com/settings/ldn-viz/tokens/) and [saved as an Action secret in GitHub](https://github.com/Greater-London-Authority/ldn-viz-tools/settings/secrets/actions).
 * make a Pull Request from the `release-msg` branch to `main`, merge it, then delete the branch (the action that generates the release notes can't push directly to the `main` branch because it is protected, and [GitHub Actions can't push to protected branches](https://github.com/orgs/community/discussions/25305))
 * merge from the `main` branch to `dev`, using the 'merge commit' option
+
+The version number badges on the README will update automatically.
