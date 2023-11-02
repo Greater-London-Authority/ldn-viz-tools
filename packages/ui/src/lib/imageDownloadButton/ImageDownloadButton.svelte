@@ -79,7 +79,7 @@
 			const isWebGL = /webgl/i;
 
 			ContextClass.prototype.getContext = (function (origFn) {
-				return function (type: string, attributes: CanvasRenderingContext2DSettings) {
+				return function (type: string, attributes: any) {
 					if (isWebGL.test(type)) {
 						attributes = Object.assign({}, attributes || {}, { preserveDrawingBuffer: true });
 					}
