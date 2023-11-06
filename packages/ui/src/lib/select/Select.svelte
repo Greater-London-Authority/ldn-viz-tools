@@ -7,7 +7,9 @@
 		ListboxOptions
 	} from '@rgossiaux/svelte-headlessui';
 
-	import { CheckIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { Check } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import { createEventDispatcher } from 'svelte';
 	import { classNames } from '../utils/classNames';
 
@@ -79,7 +81,7 @@
 			>
 				{#if selected}
 					<span class={'absolute inset-y-0 right-0 flex items-center pr-4'}>
-						<CheckIcon class="h-5 w-5" aria-hidden="true" />
+						<Icon src={Check} theme="solid" class="h-5 w-5" aria-hidden="true" />
 					</span>
 				{/if}
 				<span class="block truncate">

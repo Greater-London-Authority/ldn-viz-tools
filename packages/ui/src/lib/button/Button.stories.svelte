@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ArrowCircleDownIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { ArrowDownCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
@@ -56,7 +57,12 @@
 								<div class="flex items-end justify-center">
 									<Button {emphasis} {condition} {size} {variant}>
 										{#if variant === 'square'}
-											<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+											<Icon
+												src={ArrowDownCircle}
+												theme="solid"
+												class="w-6 h-6"
+												aria-hidden="true"
+											/>
 											{#if size === 'lg'}Button{/if}
 										{:else}
 											Button
@@ -72,7 +78,7 @@
 							<div class="flex items-end justify-center">
 								<Button {emphasis} disabled {size} {variant}>
 									{#if variant === 'square'}
-										<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+										<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 										{#if size === 'lg'}Button{/if}
 									{:else}
 										Button
@@ -139,23 +145,23 @@
 
 <Story name="Square">
 	<Button variant="square" title="Down">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
-	</Button>
+    <Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+  </Button>
 	<Button variant="square" emphasis="secondary" title="Down">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 	<Button variant="square" disabled title="Down">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 
 	<Button variant="square" size="sm" title="Down">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 	<Button variant="square" size="md" title="Down">
-		<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>
 	<Button variant="square" size="lg" title="Down">
-		<ArrowCircleDownIcon class="w-6 h-6 mb-1" aria-hidden="true" />
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
 		Large
 	</Button>
 </Story>
@@ -180,15 +186,15 @@
 	<div class="flex space-y-2 flex-col w-40">
 		<Button
 			>Icon via slot
-			<ArrowCircleDownIcon class="w-6 h-6 ml-2" aria-hidden="true" />
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 ml-2" aria-hidden="true" />
 		</Button>
 		<Button>
-			<ArrowCircleDownIcon class="w-6 h-6 mr-2" aria-hidden="true" />
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6 mr-2" aria-hidden="true" />
 			Icon via slot
 		</Button>
 		<Button class="flex-col items-center">
 			Icon via slot
-			<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 		</Button>
 	</div>
 </Story>

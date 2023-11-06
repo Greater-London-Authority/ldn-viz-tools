@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ArrowRightIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { ArrowRight } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let href = '';
 	export let newWindow = false;
@@ -29,7 +30,12 @@
 	>
 		<slot name="footer" />
 		<slot name="icon">
-			<ArrowRightIcon class="h-6 w-6" />
+			<Icon
+				src={ArrowRight}
+				theme="solid"
+				class="w-6 h-6"
+				aria-hidden="true"
+			/>
 		</slot>
 	</div>
 </a>
