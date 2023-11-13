@@ -7,65 +7,77 @@
 <Meta title="Ui/Input" component={Input} />
 
 <Story name="Default">
-	<Input id="default" />
+	<div class="w-96">
+		<Input id="default" />
+	</div>
 </Story>
 
 <Story name="With Label">
-	<Input label="Label" id="labelled-input" />
+	<div class="w-96">
+		<Input label="Label" id="labelled-input" />
+	</div>
 </Story>
 
-<Story name="More suff">
-	<Input
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		optional
-	/>
+<Story name="More Chrome">
+	<div class="w-96">
+		<Input
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			optional
+		/>
+	</div>
 </Story>
 
 <Story name="Description alignment">
-	<Input
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		descriptionAlignment="right"
-		optional
-	/>
+	<div class="w-96">
+		<Input
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			descriptionAlignment="right"
+			optional
+		/>
+	</div>
 </Story>
 
 <Story name="Error">
-	<Input
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		optional
-		error
-		errorMessage="something has gone wrong here"
-	/>
+	<div class="w-96">
+		<Input
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			optional
+			error
+			errorMessage="something has gone wrong here"
+		/>
+	</div>
 </Story>
 
 <Story name="Disabled">
-	<Input
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		disabled
-		optional
-	/>
+	<div class="w-96">
+		<Input
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			disabled
+			optional
+		/>
+	</div>
 </Story>

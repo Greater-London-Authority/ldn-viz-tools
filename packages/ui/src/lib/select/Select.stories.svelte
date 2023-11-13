@@ -22,99 +22,119 @@
 <Story name="Default" args={{ items: items }} />
 
 <Story name="Basic">
-	<Select {items} id="labelled-input" />
+	<div class="w-96">
+		<Select {items} id="labelled-input" />
+	</div>
 </Story>
 
 <Story name="With Label">
-	<Select {items} label="Label" id="labelled-input" />
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" />
+	</div>
 </Story>
 
 <Story name="Optional">
-	<Select {items} label="Label" id="labelled-input" optional />
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" optional />
+	</div>
 </Story>
 
 <Story name="Custom Placeholder">
-	<Select {items} label="Label" id="labelled-input" placeholder="Custom Placeholder text" />
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" placeholder="Custom Placeholder text" />
+	</div>
 </Story>
 
 <Story name="With Context Hint">
-	<Select
-		{items}
-		label="Label"
-		id="labelled-input"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-	/>
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+		/>
+	</div>
 </Story>
 
 <Story name="Description">
-	<Select {items} label="Label" id="labelled-input" description="descriptive text" />
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" description="descriptive text" />
+	</div>
 </Story>
 
 <Story name="Description alignment">
-	<Select
-		{items}
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		descriptionAlignment="right"
-		optional
-	/>
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			descriptionAlignment="right"
+			optional
+		/>
+	</div>
 </Story>
 
 <Story name="Multiple selects">
-	<Select
-		{items}
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		optional
-		multiple
-		bind:value
-		on:change={() => console.log('Selection changed!')}
-	/>
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			optional
+			multiple
+			bind:value
+			on:change={() => console.log('Selection changed!')}
+		/>
 
-	<span class="mt-4 text-core-grey-700 dark:text-core-grey-200 block">
-		Value is: {JSON.stringify(value)}
-	</span>
+		<span class="mt-4 text-core-grey-700 dark:text-core-grey-200 block">
+			Value is: {JSON.stringify(value)}
+		</span>
+	</div>
 </Story>
 
 <Story name="Error">
-	<Select
-		{items}
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		optional
-		error
-		errorMessage="something has gone wrong here"
-	/>
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			optional
+			error
+			errorMessage="something has gone wrong here"
+		/>
+	</div>
 </Story>
 
 <Story name="Disabled">
-	<Select
-		{items}
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		disabled
-		optional
-	/>
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			disabled
+			optional
+		/>
+	</div>
 </Story>
