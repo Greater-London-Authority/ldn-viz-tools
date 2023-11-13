@@ -3,7 +3,7 @@
 
 	import Select from './Select.svelte';
 
-	type Item = { label: string, value: number };
+	type Item = { label: string; value: number };
 	let value: Item;
 
 	const items: Item[] = [
@@ -25,7 +25,34 @@
 	<Select {items} id="labelled-input" />
 </Story>
 
-<Story name="More suff">
+<Story name="With Label">
+	<Select {items} label="Label" id="labelled-input" />
+</Story>
+
+<Story name="Optional">
+	<Select {items} label="Label" id="labelled-input" optional />
+</Story>
+
+<Story name="Custom Placeholder">
+	<Select {items} label="Label" id="labelled-input" placeholder="Custom Placeholder text" />
+</Story>
+
+<Story name="With Context Hint">
+	<Select
+		{items}
+		label="Label"
+		id="labelled-input"
+		hint
+		hintText="Tooltip text"
+		hintTooltipContent="A brief contextual help text"
+	/>
+</Story>
+
+<Story name="Description">
+	<Select {items} label="Label" id="labelled-input" description="descriptive text" />
+</Story>
+
+<Story name="Description alignment">
 	<Select
 		{items}
 		label="Label"
@@ -35,11 +62,12 @@
 		hintText="Tooltip text"
 		hintTooltipContent="A brief contextual help text"
 		description="descriptive text"
+		descriptionAlignment="right"
 		optional
 	/>
 </Story>
 
-<Story name="More suff - multiple selects">
+<Story name="Multiple selects">
 	<Select
 		{items}
 		label="Label"
@@ -58,21 +86,6 @@
 	<span class="mt-4 text-core-grey-700 dark:text-core-grey-200 block">
 		Value is: {JSON.stringify(value)}
 	</span>
-</Story>
-
-<Story name="Description alignment">
-	<Select
-		{items}
-		label="Label"
-		id="labelled-input"
-		placeholder="Placeholder text"
-		hint
-		hintText="Tooltip text"
-		hintTooltipContent="A brief contextual help text"
-		description="descriptive text"
-		descriptionAlignment="right"
-		optional
-	/>
 </Story>
 
 <Story name="Error">
