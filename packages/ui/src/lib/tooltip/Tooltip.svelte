@@ -4,7 +4,9 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { floatingContent } from './tooltip';
 
-	import { InformationCircleIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { InformationCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import { floatingRef } from '../tooltip/tooltip.js';
 
 	export let hintLabel = 'what is this?';
@@ -50,7 +52,12 @@
 >
 	<slot name="hint">
 		{hintLabel}
-		<InformationCircleIcon class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+		<Icon
+			src={InformationCircle}
+			theme="solid"
+			class="w-[18px] h-[18px] ml-0.5"
+			aria-hidden="true"
+		/>
 	</slot>
 </span>
 
