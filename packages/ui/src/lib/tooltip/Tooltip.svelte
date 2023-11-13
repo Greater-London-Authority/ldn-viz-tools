@@ -56,7 +56,7 @@
 
 {#if showTooltip}
 	<div
-		class="absolute max-w-[200px] text-xs p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md"
+		class="absolute max-w-[200px] text-xs p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md z-50"
 		use:floatingContent={dynamicOptions}
 	>
 		<slot />
