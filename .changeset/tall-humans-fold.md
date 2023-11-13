@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-Provide a default light theme for tabs
+CHANGED - provide a default light theme for tabs
