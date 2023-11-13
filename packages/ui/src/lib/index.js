@@ -9,12 +9,16 @@ export { default as HeaderRight } from './header/HeaderRight.svelte';
 export { default as HeaderTitle } from './header/HeaderTitle.svelte';
 export { default as NavLink } from './header/NavLink.svelte';
 export { default as NavLinks } from './header/NavLinks.svelte';
+
 export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
 export { default as LogoByCIU } from './logos/LogoByCIU.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
 export { default as Modal } from './modal/Modal.svelte';
+
+export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
+
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
 export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';

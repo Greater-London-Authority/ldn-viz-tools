@@ -25,11 +25,8 @@
     "svelte-select": "^5.7.0"
   },
   "overrides": {
-    "@rgossiaux/svelte-headlessui": {
-      "svelte": "4.0.0"
-    },
-    "@rgossiaux/svelte-heroicons": {
-      "svelte": "4.0.0"
-    }
-  }
+		"@rgossiaux/svelte-headlessui": {
+			"svelte": "4.0.0"
+		}
+	}
 }
