@@ -1,5 +1,18 @@
 # ldn-viz-tools-ui
 
+## 3.0.0
+
+### Major Changes
+
+- d9c32c7: CHANGED - the select component is now based on the `svelte-select` library
+  ADDED - a new `Tooltip` component allows the display of help tooltips when an icon is hovered over
+  ADDED - an `InputWrapper` provides consisten chrome (such as help text or error messages) around input elements
+
+### Minor Changes
+
+- 71bb3e8: ADDED - `title` property to `Button` component so that quick accessible tooltips can be added.
+- 5d7a227: CHANGED - provide a default light theme for tabs
+
 ## 2.0.0
 
 ### Major Changes
