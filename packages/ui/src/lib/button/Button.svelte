@@ -22,6 +22,7 @@
 	export let disabled = false;
 	export let href = '';
 	export let type: 'button' | 'submit' = 'button';
+	export let title: undefined | string = undefined;
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {
@@ -147,6 +148,7 @@
 	type={href ? undefined : type}
 	{href}
 	{disabled}
+	{title}
 	class={buttonClass}
 	on:click
 	on:change
