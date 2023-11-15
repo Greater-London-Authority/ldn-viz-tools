@@ -5,8 +5,8 @@
 ### Major Changes
 
 - d9c32c7: CHANGED - the select component is now based on the `svelte-select` library
-  ADDED - a new `Tooltip` component allows the display of help tooltips when an icon is hovered over
-  ADDED - an `InputWrapper` provides consisten chrome (such as help text or error messages) around input elements
+- d9c32c7: ADDED - a new `Tooltip` component allows the display of help tooltips when an icon is hovered over
+- d9c32c7: ADDED - an `InputWrapper` provides consisten chrome (such as help text or error messages) around input elements
 
 ### Minor Changes
 
@@ -18,7 +18,7 @@
 ### Major Changes
 
 - 3c90996: CHANGED - switch from using `@rgossiaux/svelte-heroicons` to using `@steeze-ui/heroicons` as an icon library
-  CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `rawIcon` prop)
+- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `rawIcon` prop)
 
 ### Minor Changes
 
