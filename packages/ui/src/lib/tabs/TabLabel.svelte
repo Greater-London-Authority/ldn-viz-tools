@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/types/runtime/store';
+	import type { Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 
 	export let tabId: string;
@@ -23,9 +23,9 @@
 	role="tab"
 	class={classNames(
 		tabId === $selectedValue
-			? 'bg-core-blue-600 cursor-default'
-			: 'bg-core-grey-600 hover:bg-core-grey-500 cursor-pointer',
-		'text-white text-base py-2 px-4 flex items-center select-none '
+			? 'bg-core-blue-600 cursor-default text-white'
+			: 'bg-core-grey-100 hover:bg-core-grey-200 text-core-grey-800 dark:bg-core-grey-600 dark:hover:bg-core-grey-500 dark:text-white cursor-pointer',
+		'text-base py-2 px-4 flex items-center select-none '
 	)}
 >
 	<slot />
