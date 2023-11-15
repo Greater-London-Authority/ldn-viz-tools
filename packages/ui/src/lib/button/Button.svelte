@@ -157,6 +157,8 @@
 	on:touchcancel
 	on:mouseenter
 	on:mouseleave
+	role="button"
+	tabindex="0"
 >
 	<slot />
 </svelte:element>
