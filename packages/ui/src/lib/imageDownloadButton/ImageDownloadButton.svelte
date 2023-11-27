@@ -38,6 +38,10 @@
 		return img;
 	};
 
+	// See https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
+	const bytesToBase64 = (bytes) => window.btoa(String.fromCodePoint(...bytes));
+	const stringToBase64 = (str) => bytesToBase64(new TextEncoder().encode(str))
+
 	const downloadFromSVG = async () => {
 		// This hack is necessary because .drawImage() doesn't work
 		// unless the SVG that is being copied has an explicitly-set size
@@ -46,7 +50,7 @@
 		svgNodeClone.setAttribute('height', svgNode.clientHeight.toString());
 
 		const svgString = new XMLSerializer().serializeToString(svgNodeClone);
-		const svgURL = 'data:image/svg+xml;base64,' + window.btoa(svgString);
+		const svgURL = 'data:image/svg+xml;base64,' + stringToBase64(svgString);
 		// the non base-64 encoded URL would be: "data:image/svg+xml;utf8," + svgString;
 
 		// an alternative is:
