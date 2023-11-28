@@ -26,8 +26,8 @@
 	export let disabled = false;
 	export let options = {};
 
-	export let whenMapLoads = null
-	export let whenMapUnloads = null
+	export let whenMapLoads = null;
+	export let whenMapUnloads = null;
 
 	const defaultOptions = {
 		bounds: GREATER_LONDON_BOUNDS,

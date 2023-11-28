@@ -10,25 +10,26 @@
 	import Map, { appendOSKeyToUrl } from './Map.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
-	let clickedLayerIDs = ["Click a point on the map to list the vector layer IDs"]
-	let map = null
+	let clickedLayerIDs = ['Click a point on the map to list the vector layer IDs'];
+	let map = null;
 
 	const updateClickedLayers = (event) => {
 		if (map) {
 			clickedLayerIDs = map.queryRenderedFeatures(event.point).map((f) => f.layer.id);
 		}
-	}
+	};
 
 	const whenMapLoads = (newMap) => {
-		map = newMap
+		map = newMap;
 		newMap.getCanvas().style.cursor = 'pointer';
-		newMap.on('click', updateClickedLayers)
-	}
+		newMap.on('click', updateClickedLayers);
+	};
+
 	const whenMapUnloads = (oldMap) => {
 		oldMap.getCanvas().style.cursor = '';
-		oldMap.off('click', updateClickedLayers)
-		map = null
-	}
+		oldMap.off('click', updateClickedLayers);
+		map = null;
+	};
 </script>
 
 <Meta
@@ -138,16 +139,15 @@
 	<MapApp>
 		<div class="text-white space-y-4 m-2">
 			<p>
-				The <code>{"{whenMapLoads}"}</code> and <code>{"{whenMapUnloads}"}</code> props
-				are functions called when the <code>{"<Map>"}</code> component mounts
-				and unmounts respectively. Here a simple click listener is created that
-				prints out the layer IDs where a feature exists at the click location.
+				The <code>{'whenMapLoads'}</code> and <code>{'whenMapUnloads'}</code> props are functions
+				called when the <code>{'<Map>'}</code> component mounts and unmounts respectively. In this example
+				a simple click listener is attached to the map which prints out the layer IDs where a feature
+				exists at the click location.
 			</p>
 
 			<p>
-				The <code>{"{options}"}</code> prop allows users to override and extend the
-				GLA default MapLibre options. Use it to specify a map style specification
-				and append the OS key.
+				The <code>{'options'}</code> prop allows users to override and extend the GLA default MapLibre
+				options. Use it to specify a map style specification and append the OS key.
 			</p>
 		</div>
 
@@ -157,10 +157,11 @@
 			options={{
 				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}>
+			}}
+		>
 			<ul class="absolute top-0 left-0 z-10 bg-core-grey-800/75 text-white text-sm m-2 p-2">
 				{#each clickedLayerIDs as id (id)}
-					<li>{id}</li>	
+					<li>{id}</li>
 				{/each}
 			</ul>
 		</Map>
