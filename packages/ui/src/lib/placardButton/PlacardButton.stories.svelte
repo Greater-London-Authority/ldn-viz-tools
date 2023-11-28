@@ -28,13 +28,9 @@
 			<span slot="title"> Download the User Guide. </span>
 			<span slot="footer">PDF</span>
 			<span slot="icon">
-				<Icon
-				src={DocumentArrowDown}
-				theme="solid"
-				class="w-6 h-6"
-				aria-hidden="true"
-			/>
-		</PlacardButton>
+				<Icon src={DocumentArrowDown} theme="solid" class="w-6 h-6" aria-hidden="true" />
+			</span></PlacardButton
+		>
 	</div>
 </Story>
 
