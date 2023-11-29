@@ -18,10 +18,8 @@
 				<p>
 					<b>Dev mode:</b> Please wait while optimising dependencies.
 				</p>
-				<p>(Or you have JavaScript turned off).</p>
-			{:else}
-				<p>Please enable JavaScript to explore this map.</p>
 			{/if}
+			<p>Please enable JavaScript to explore this map.</p>
 		</section>
 	{:else}
 		<slot />
