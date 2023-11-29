@@ -39,8 +39,8 @@ export const scaleBounds = (bounds, scaleFactor = { x: 1, y: 1 }) => {
 
 export const GREATER_LONDON_ZOOM = 11;
 export const GREATER_LONDON_BOUNDS = [
-	[-0.505, 51.285],
-	[0.33, 51.693]
+	[-0.517, 51.278],
+	[0.342, 51.698]
 ];
 export const GREATER_LONDON_BOUNDS_MAX = scaleBounds(
 	GREATER_LONDON_BOUNDS,
