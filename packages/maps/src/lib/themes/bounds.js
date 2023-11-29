@@ -3,31 +3,36 @@ export const centerOfBounds = (bounds) => {
 	return [midpoint(bounds[0][0], bounds[1][0]), midpoint(bounds[0][1], bounds[1][1])];
 };
 
-// scaleBounds returns a new bounds that scales the input bounds up by the
-// specified amount { x, y } with the center as the origin.
+// scaleBounds returns a new bounds that scales the input bounds by the
+// specified scaleFactor { x, y } using the center as the origin.
 //
-// Given the amounts:
-// - { x: 0.1, y: 0.1 } then both width and height will be 10% bigger;
-// - { x: 0.5, y: 1 } then width will be 50% bigger and height 100% bigger;
-// - { x: 2, y: 0 } then width will be 200% bigger and height left unchanged;
+// Given the factors:
+// - { x: 1.1, y: 1.1 } then both width and height will be 10% bigger;
+// - { x: 0.5, y: 1 } then width will be 50% bigger and height left unchanged;
+// - { x: 2, y: 0 } then width will be twice as big and height as zero;
 // - etc.
-export const scaleBounds = (bounds, amount = { x: 0, y: 0 }) => {
-	const width = bounds[0][0] - bounds[1][0];
-	const height = bounds[0][1] - bounds[1][1];
+export const scaleBounds = (bounds, scaleFactor = { x: 1, y: 1 }) => {
+	const numberOrDefault = (n, elseDefault) => {
+		return typeof n === 'number' ? n : elseDefault;
+	};
 
-	const widthMul = (amount.x || 0) / 2;
-	const heightMul = (amount.y || 0) / 2;
+	const center = centerOfBounds(bounds);
+	const oldWidth = Math.abs(bounds[1][0] - bounds[0][0]);
+	const oldHeight = Math.abs(bounds[1][1] - bounds[0][1]);
+
+	const halfWidth = (numberOrDefault(scaleFactor.x, 1) * oldWidth) / 2;
+	const halfHeight = (numberOrDefault(scaleFactor.y, 1) * oldHeight) / 2;
 
 	return [
 		[
 			// Bottom left point
-			bounds[0][0] - Math.abs(width * widthMul),
-			bounds[0][1] - Math.abs(height * heightMul)
+			center[0] - halfWidth,
+			center[1] - halfHeight
 		],
 		[
 			// Top right point
-			bounds[1][0] + Math.abs(width * widthMul),
-			bounds[1][1] + Math.abs(height * heightMul)
+			center[0] + halfWidth,
+			center[1] + halfHeight
 		]
 	];
 };
@@ -39,7 +44,7 @@ export const GREATER_LONDON_BOUNDS = [
 ];
 export const GREATER_LONDON_BOUNDS_MAX = scaleBounds(
 	GREATER_LONDON_BOUNDS,
-	{ x: 2.5, y: 2.1 } // Tuned to fit both tall and wide devices
+	[1.25, 1.05] // Tuned to fit both tall and wide devices
 );
 export const GREATER_LONDON_CENTER = centerOfBounds(GREATER_LONDON_BOUNDS);
 
