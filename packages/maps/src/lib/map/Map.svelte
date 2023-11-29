@@ -7,8 +7,8 @@
 				return { url: url.href };
 			}
 
-			const WGS84 = 3857;
-			url.searchParams.set('srs', WGS84);
+			const WEB_MERCATOR_EPSG = 3857;
+			url.searchParams.set('srs', WEB_MERCATOR_EPSG);
 			url.searchParams.set('key', osKey);
 
 			return { url: url.href };
