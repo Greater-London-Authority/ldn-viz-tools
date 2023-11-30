@@ -5,6 +5,7 @@
 	import MapApp from '../map/MapApp.svelte';
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 
+	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 	import MapControlGroup from './MapControlGroup.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 
@@ -44,6 +45,11 @@
 			<MapControlGroup position="TopLeft">
 				<MapControlZoom {map} />
 			</MapControlGroup>
+
+			<MapControlGroup position="BottomLeft">
+				<MapControlFullscreen {map} />
+			</MapControlGroup>
+
 			<div
 				class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.9] text-white text-sm p-2"
 			>

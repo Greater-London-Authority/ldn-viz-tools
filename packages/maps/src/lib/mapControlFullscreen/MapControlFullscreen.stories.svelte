@@ -6,42 +6,34 @@
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
-	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
+	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	let map = null;
 </script>
 
 <Meta
-	title="Maps/MapControlZoom"
-	component={MapControlZoom}
+	title="Maps/MapControlFullscreen"
+	component={MapControlFullscreen}
 	parameters={{
 		layout: 'fullscreen'
 	}}
 />
 
 <Template let:args>
-	<MapControlZoom {...args} />
+	<MapControlFullscreen {...args} />
 </Template>
 
-<Story name="Zoom Buttons">
+<Story name="Fullscreen Button">
 	<MapApp>
 		<div class="text-white space-y-4 m-2">
 			<p>
-				The zoom buttons are usually positioned in the top left corner under the location search.
-				They enable <a
+				The fullscreen button is usually positioned in the bottom left corner above the refresh page
+				button. If this page is embedded then clicking the button takes the user to the map page
+				else the <a
 					class="underline"
-					href="https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#zoomin"
-				>
-					zoom in
-				</a>
-				and
-				<a
-					class="underline"
-					href="https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#zoomout"
-				>
-					zoom out
-				</a> by one zoom level per click.
+					href="https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API">Fullscreen API</a
+				> is envoked.
 			</p>
 		</div>
 
@@ -52,8 +44,8 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapControlGroup position="TopLeft">
-				<MapControlZoom {map} />
+			<MapControlGroup position="BottomLeft">
+				<MapControlFullscreen {map} />
 			</MapControlGroup>
 		</Map>
 	</MapApp>

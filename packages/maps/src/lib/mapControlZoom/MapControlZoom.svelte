@@ -6,24 +6,22 @@
 
 	export let map;
 
-	const zoomIn = (e) => {
-		if (map) {
-			map.zoomIn(ZOOM_ANIMATION_OPTIONS);
-			map.getCanvas().focus();
-		}
-	};
+	const zoomIn = () => map.zoomIn(ZOOM_ANIMATION_OPTIONS);
+	const zoomOut = () => map.zoomOut(ZOOM_ANIMATION_OPTIONS);
 
-	const zoomOut = (e) => {
-		if (map) {
-			map.zoomOut(ZOOM_ANIMATION_OPTIONS);
-			map.getCanvas().focus();
-		}
+	const newClickHandler = (handler) => {
+		return () => {
+			if (map) {
+				handler();
+				map.getCanvas().focus();
+			}
+		};
 	};
 
 	const newKeyHandler = (handler) => {
 		return (e) => {
-			if (e.key === 'Enter') {
-				handler(e);
+			if (map && e.key === 'Enter') {
+				handler();
 			}
 		};
 	};
@@ -35,7 +33,7 @@
 		emphasis="secondary"
 		title="Zoom in"
 		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-		on:click={zoomIn}
+		on:click={newClickHandler(zoomIn)}
 		on:keypress={newKeyHandler(zoomIn)}
 	>
 		<Icon src={PlusSmall} class="w-8 h-8" />
@@ -45,7 +43,7 @@
 		emphasis="secondary"
 		title="Zoom out"
 		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-		on:click={zoomOut}
+		on:click={newClickHandler(zoomOut)}
 		on:keypress={newKeyHandler(zoomOut)}
 	>
 		<Icon src={MinusSmall} class="w-8 h-8" />

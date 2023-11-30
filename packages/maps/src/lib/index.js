@@ -4,6 +4,7 @@ export { default as Map } from './map/Map.svelte';
 export { default as MapApp } from './map/MapApp.svelte';
 
 // Controls
+export { default as MapControlFullscreen } from './mapControlFullscreen/MapControlFullscreen.svelte';
 export { default as MapControlGroup } from './mapControlGroup/MapControlGroup.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 
