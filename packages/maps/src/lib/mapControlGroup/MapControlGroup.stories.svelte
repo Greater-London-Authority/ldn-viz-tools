@@ -7,6 +7,7 @@
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 	import MapControlGroup from './MapControlGroup.svelte';
+	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
@@ -48,6 +49,7 @@
 
 			<MapControlGroup position="BottomLeft">
 				<MapControlFullscreen {map} />
+				<MapControlRefresh />
 			</MapControlGroup>
 
 			<div
@@ -90,6 +92,11 @@
 		>
 			<MapControlGroup position="TopLeft">
 				<MapControlZoom {map} />
+			</MapControlGroup>
+
+			<MapControlGroup position="BottomLeft">
+				<MapControlFullscreen {map} />
+				<MapControlRefresh />
 			</MapControlGroup>
 
 			<div
