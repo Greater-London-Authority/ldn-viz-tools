@@ -15,7 +15,7 @@
 		[key: MapControlGroupPositions]: string;
 	};
 
-	export const positionClasses: PositionClass = {
+	const positionClasses: PositionClass = {
 		TopLeft: 'top-6 left-6',
 		TopCenter: 'top-6 left-1/2 -translate-x-1/2 transform',
 		TopRight: 'top-6 right-6',

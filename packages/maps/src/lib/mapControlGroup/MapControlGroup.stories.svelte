@@ -6,7 +6,8 @@
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
-	import MapControlGroup from './MapControlGroup.svelte';
+	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
+	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 
@@ -28,14 +29,6 @@
 
 <Story name="Positioning">
 	<MapApp>
-		<div class="text-white space-y-4 m-2">
-			<p>
-				Group and position sets of map controls using the
-				<code>{'<MapControlGroup position="...">'}</code>. Specific map control components are
-				slotted top first.
-			</p>
-		</div>
-
 		<Map
 			whenMapLoads={(m) => (map = m)}
 			options={{
@@ -43,39 +36,21 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapControlGroup position="TopLeft">
-				<MapControlZoom {map} />
-			</MapControlGroup>
-
-			<MapControlGroup position="BottomLeft">
-				<MapControlFullscreen {map} />
-				<MapControlRefresh />
-			</MapControlGroup>
+			{#each Object.keys(MapControlGroupPositions) as position}
+				<MapControlGroup {position}>
+					<p class="bg-core-grey-800 p-2 text-white">{position}</p>
+				</MapControlGroup>
+			{/each}
 
 			<div
-				class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.9] text-white text-sm p-2"
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.8] text-white text-center text-sm p-4 space-y-4"
 			>
-				<h1 class="text-lg font-bold text-center mb-6">Available positions</h1>
-				<div
-					class="grid grid-rows-3 grid-flow-col gap-6 text-center [&>p]:w-40 [&>p]:p-2 [&>p]:flex [&>p]:justify-center [&>p]:items-center"
-				>
-					<p class="flex-col">
-						<span>TopLeft</span>
-						<span class="text-core-grey-300">(default)</span>
-					</p>
-					<p>CenterLeft</p>
-					<p>BottomLeft</p>
-					<p>TopCenter</p>
-					<div />
-					<p>BottomCenter</p>
-					<p class="flex-col">
-						<span>TopRight</span>
-						<span>& TopRightOffset</span>
-						<span class="text-core-grey-300">(offset adds clearance for sidebar toggle)</span>
-					</p>
-					<p>CenterRight</p>
-					<p>BottomRight</p>
-				</div>
+				<p>
+					Group and position map controls using
+					<code>{'<MapControlGroup position="...">'}</code>.
+				</p>
+
+				<p>The available positions are shown around the edges of this map.</p>
 			</div>
 		</Map>
 	</MapApp>
@@ -90,6 +65,15 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
+			<div
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.8] text-white text-sm p-4"
+			>
+				<p class="text-center p-2">
+					The controls shown on the left are standard for every map. Those on the right are context
+					dependent. On small devices most map controls will hide themselves.
+				</p>
+			</div>
+
 			<MapControlGroup position="TopLeft">
 				<MapControlZoom {map} />
 			</MapControlGroup>
@@ -99,40 +83,15 @@
 				<MapControlRefresh />
 			</MapControlGroup>
 
-			<div
-				class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.9] text-white text-sm p-2"
-			>
-				<h1 class="text-lg font-bold text-center mb-6">Standard layout for map controls</h1>
-				<div
-					class="grid grid-rows-3 grid-flow-col gap-6 text-center [&>p]:w-40 [&>p]:p-2 [&>p]:flex [&>p]:justify-center [&>p]:items-center"
-				>
-					<p class="flex-col">
-						<span>TopLeft</span>
-						<span class="text-core-grey-300">(Location search)</span>
-						<span class="text-core-grey-300">(Zoom buttons)</span>
-					</p>
-					<div />
-					<p class="flex-col">
-						<span>BottomLeft</span>
-						<span class="text-core-grey-300">(Fullscreen button)</span>
-						<span class="text-core-grey-300">(Refresh button)</span>
-					</p>
-					<div class="w-32" />
-					<div />
-					<div />
-					<p class="flex-col">
-						<span>TopRight</span>
-						<span>& TopRightOffset</span>
-						<span class="text-core-grey-300">(Map specific controls, e.g. drawing)</span>
-					</p>
-					<div />
-					<p class="flex-col">
-						<span>BottomRight</span>
-						<span class="text-core-grey-300">(Pan buttons)</span>
-						<span class="text-core-grey-300">(Custom logo)</span>
-					</p>
-				</div>
-			</div>
+			<MapControlGroup position="TopRight">
+				<p class="bg-core-grey-800 p-2 text-white text-center">
+					Bespoke controls<br />E.g. Drawing
+				</p>
+			</MapControlGroup>
+
+			<MapControlGroup position="BottomRight">
+				<MapControlPan {map} />
+			</MapControlGroup>
 		</Map>
 	</MapApp>
 </Story>
