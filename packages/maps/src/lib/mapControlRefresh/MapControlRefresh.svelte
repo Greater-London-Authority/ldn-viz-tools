@@ -20,6 +20,6 @@
 		on:click={handler}
 		on:keypress={keyHandler}
 	>
-		<Icon src={ArrowPath} class="w-8 h-8" />
+		<Icon src={ArrowPath} class="w-8 h-8 p-1" />
 	</Button>
 </div>

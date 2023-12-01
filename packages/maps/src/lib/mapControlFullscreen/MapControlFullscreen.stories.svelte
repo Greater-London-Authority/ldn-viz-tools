@@ -29,11 +29,14 @@
 		<div class="text-white space-y-4 m-2">
 			<p>
 				The fullscreen button is usually positioned in the bottom left corner above the refresh page
-				button. If this page is embedded then clicking the button takes the user to the map page
-				else the <a
+				button.
+			</p>
+
+			<p>
+				If this page is embedded then clicking the button takes the user to the map page else the <a
 					class="underline"
 					href="https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API">Fullscreen API</a
-				> is envoked.
+				> is envoked. The button icon will change depending on the mode.
 			</p>
 		</div>
 

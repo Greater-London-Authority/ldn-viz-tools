@@ -1,74 +1,77 @@
 <script context="module">
+	import { writable } from 'svelte/store';
+	import { ArrowsPointingIn, ArrowsPointingOut, ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
+
+	const isFullscreen = writable(false);
+
 	const isPageEmbedded = () => window !== window.top;
 
-	const fullscreenIsAllowed = () => {
+	const isFullscreenAllowed = () => {
 		return isPageEmbedded() || document.fullscreenEnabled;
 	};
 
-	const enterFullscreen = (element = document.body) => {
-		if (element.requestFullscreen) {
-			element.requestFullscreen();
-			return;
-		}
-
-		if (element.webkitRequestFullscreen) {
-			element.webkitRequestFullscreen(); // Safari
-		}
-	};
-
-	const exitFullscreen = () => {
-		if (document.exitFullscreen) {
-			document.exitFullscreen();
-			return;
-		}
-
-		if (document.webkitExitFullscreen) {
-			document.webkitExitFullscreen(); // Safari
-		}
-	};
-
-	const toggleFullscreen = () => {
-		document.fullscreen ? exitFullscreen() : enterFullscreen();
-	};
-
 	const MODE_EMBED = {
-		title: 'Full page map',
-		icon: ArrowTopRightOnSquare,
-		apply: () => (window.top.location.href = window.location.href)
+		titleOut: 'View as full page',
+		iconOut: ArrowTopRightOnSquare,
+		enterFullscreen: () => (window.top.location.href = window.location.href)
 	};
 
 	const MODE_API = {
-		title: 'Toggle fullscreen',
-		icon: ArrowsPointingOut,
-		apply: toggleFullscreen
+		titleOut: 'Enter fullscreen',
+		titleIn: 'Exit fullscreen',
+		iconOut: ArrowsPointingOut,
+		iconIn: ArrowsPointingIn,
+		enterFullscreen: (element = document.body) => {
+			const updateState = () => isFullscreen.set(true);
+
+			if (element.requestFullscreen) {
+				element.requestFullscreen().then(updateState);
+				return;
+			}
+
+			if (element.webkitRequestFullscreen) {
+				element.webkitRequestFullscreen().then(updateState); // Safari
+			}
+		},
+		exitFullscreen: () => {
+			const updateState = () => isFullscreen.set(false);
+
+			if (document.exitFullscreen) {
+				document.exitFullscreen().then(updateState);
+				return;
+			}
+
+			if (document.webkitExitFullscreen) {
+				document.webkitExitFullscreen().then(updateState); // Safari
+			}
+		}
 	};
 </script>
 
 <script>
 	import { onMount } from 'svelte';
 	import { Button } from '@ldn-viz/ui';
-	import { ArrowsPointingOut, ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let map;
 	let mode = null;
 
 	onMount(() => {
-		if (fullscreenIsAllowed()) {
+		if (isFullscreenAllowed()) {
 			mode = isPageEmbedded() ? MODE_EMBED : MODE_API;
 		}
 	});
 
 	const clickHandler = () => {
 		if (map && mode) {
-			mode.apply();
+			$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
 			map.getCanvas().focus();
 		}
 	};
 
 	const keyHandler = (e) => {
 		if (e.key === 'Enter' && mode) {
-			mode.apply();
+			$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
 		}
 	};
 </script>
@@ -78,12 +81,12 @@
 		<Button
 			variant="square"
 			emphasis="secondary"
-			title={mode.title}
+			title={$isFullscreen ? mode.titleIn : mode.titleOut}
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
 			on:click={clickHandler}
 			on:keypress={keyHandler}
 		>
-			<Icon src={mode.icon} class="w-8 h-8" />
+			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="w-8 h-8 p-1" />
 		</Button>
 	</div>
 {/if}

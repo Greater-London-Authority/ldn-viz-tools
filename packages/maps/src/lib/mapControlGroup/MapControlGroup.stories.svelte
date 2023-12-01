@@ -43,14 +43,17 @@
 			{/each}
 
 			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.8] text-white text-center text-sm p-4 space-y-4"
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white text-center p-4 space-y-4"
 			>
 				<p>
 					Group and position map controls using
 					<code>{'<MapControlGroup position="...">'}</code>.
 				</p>
 
-				<p>The available positions are shown around the edges of this map.</p>
+				<p>
+					The named layout positions are shown around the edges of this map. If using typescript you
+					can import the <code>MapControlGroupPositions</code> enum.
+				</p>
 			</div>
 		</Map>
 	</MapApp>
@@ -66,15 +69,24 @@
 			}}
 		>
 			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.8] text-white text-sm p-4"
+				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white p-4 space-y-4"
 			>
-				<p class="text-center p-2">
-					The controls shown on the left are standard for every map. Those on the right are context
-					dependent. On small devices most map controls will hide themselves.
-				</p>
+				<p class="text-left">⮜ Controls on the left are standard for every map</p>
+
+				<p class="text-right">Those on the right are context or map dependent ⮞</p>
+
+				<p class="text-center">On small devices most controls will hide themselves.</p>
 			</div>
 
 			<MapControlGroup position="TopLeft">
+				<div class="text-white w-80 flex">
+					<input
+						type="text"
+						class="grow bg-core-grey-500 placeholder-core-grey-200 p-2"
+						placeholder="Placeholder for the location search"
+					/>
+					<button title="Find my location" class="bg-core-grey-800 w-10 h-10 text-3xl"> ◎ </button>
+				</div>
 				<MapControlZoom {map} />
 			</MapControlGroup>
 

@@ -36,7 +36,7 @@
 		on:click={newClickHandler(zoomIn)}
 		on:keypress={newKeyHandler(zoomIn)}
 	>
-		<Icon src={PlusSmall} class="w-8 h-8" />
+		<Icon src={PlusSmall} class="w-8 h-8 p-0.5" />
 	</Button>
 	<Button
 		variant="square"
@@ -46,6 +46,6 @@
 		on:click={newClickHandler(zoomOut)}
 		on:keypress={newKeyHandler(zoomOut)}
 	>
-		<Icon src={MinusSmall} class="w-8 h-8" />
+		<Icon src={MinusSmall} class="w-8 h-8 p-0.5" />
 	</Button>
 </div>

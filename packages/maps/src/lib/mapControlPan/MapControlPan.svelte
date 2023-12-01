@@ -62,7 +62,7 @@
 			on:click={newClickHandler(panUp)}
 			on:keypress={newKeyHandler(panUp)}
 		>
-			<Icon src={ChevronUp} class="w-8 h-8" />
+			<Icon src={ChevronUp} class="w-8 h-8 p-0.5" />
 		</Button>
 	</div>
 
@@ -75,7 +75,7 @@
 			on:click={newClickHandler(panLeft)}
 			on:keypress={newKeyHandler(panLeft)}
 		>
-			<Icon src={ChevronLeft} class="w-8 h-8" />
+			<Icon src={ChevronLeft} class="w-8 h-8 p-0.5" />
 		</Button>
 
 		<Button
@@ -86,7 +86,7 @@
 			on:click={newClickHandler(panDown)}
 			on:keypress={newKeyHandler(panDown)}
 		>
-			<Icon src={ChevronDown} class="w-8 h-8" />
+			<Icon src={ChevronDown} class="w-8 h-8 p-0.5" />
 		</Button>
 
 		<Button
@@ -97,7 +97,7 @@
 			on:click={newClickHandler(panRight)}
 			on:keypress={newKeyHandler(panRight)}
 		>
-			<Icon src={ChevronRight} class="w-8 h-8" />
+			<Icon src={ChevronRight} class="w-8 h-8 p-0.5" />
 		</Button>
 	</div>
 </div>
