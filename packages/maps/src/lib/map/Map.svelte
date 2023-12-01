@@ -22,6 +22,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 
 	import { GREATER_LONDON_BOUNDS, GREATER_LONDON_BOUNDS_MAX } from '../themes/bounds';
+	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	export let disabled = false;
 	export let options = {};
@@ -30,6 +31,7 @@
 	export let whenMapUnloads = null;
 
 	const defaultOptions = {
+		style: os_light_vts,
 		bounds: GREATER_LONDON_BOUNDS,
 		maxBounds: GREATER_LONDON_BOUNDS_MAX,
 		attributionControl: true,
