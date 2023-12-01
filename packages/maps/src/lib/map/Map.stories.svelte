@@ -159,7 +159,7 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<ul class="absolute top-0 left-0 z-10 bg-core-grey-800/75 text-white text-sm m-2 p-2">
+			<ul class="absolute top-0 left-0 z-10 bg-core-grey-800/[0.8] text-white text-sm m-2 p-2">
 				{#each clickedLayerIDs as id (id)}
 					<li>{id}</li>
 				{/each}
