@@ -36,7 +36,7 @@
 				If this page is embedded then clicking the button takes the user to the map page else the <a
 					class="underline"
 					href="https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API">Fullscreen API</a
-				> is envoked. The button icon will change depending on the mode.
+				> is invoked. The button icon will change depending on the mode.
 			</p>
 		</div>
 
