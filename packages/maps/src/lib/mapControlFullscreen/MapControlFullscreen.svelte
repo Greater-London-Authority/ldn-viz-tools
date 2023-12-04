@@ -62,16 +62,15 @@
 		}
 	});
 
-	const clickHandler = () => {
-		if (map && mode) {
-			$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
-			map.getCanvas().focus();
+	const handle = (event) => {
+		if (!map || !mode) {
+			return;
 		}
-	};
 
-	const keyHandler = (e) => {
-		if (e.key === 'Enter' && mode) {
-			$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
+		$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
+
+		if (event.detail > 0) {
+			map.getCanvas().focus();
 		}
 	};
 </script>
@@ -83,8 +82,7 @@
 			emphasis="secondary"
 			title={$isFullscreen ? mode.titleIn : mode.titleOut}
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-			on:click={clickHandler}
-			on:keypress={keyHandler}
+			on:click={handle}
 		>
 			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="w-8 h-8 p-1" />
 		</Button>

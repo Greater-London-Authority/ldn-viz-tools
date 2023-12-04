@@ -6,21 +6,16 @@
 
 	export let map;
 
-	const newClickHandler = (handler) => {
-		return (e) => {
-			if (map) {
-				handler();
-				map.getCanvas().focus();
+	const newHandler = (handle) => {
+		return (event) => {
+			if (!map) {
+				return;
 			}
-		};
-	};
 
-	const newKeyHandler = (handler) => {
-		return (e) => {
-			if (e.key === 'Enter') {
-				if (map) {
-					handler();
-				}
+			handle();
+
+			if (event.detail > 0) {
+				map.getCanvas().focus();
 			}
 		};
 	};
@@ -59,8 +54,7 @@
 			emphasis="secondary"
 			title="Pan up"
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-			on:click={newClickHandler(panUp)}
-			on:keypress={newKeyHandler(panUp)}
+			on:click={newHandler(panUp)}
 		>
 			<Icon src={ChevronUp} class="w-8 h-8 p-0.5" />
 		</Button>
@@ -72,8 +66,7 @@
 			emphasis="secondary"
 			title="Pan left"
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-			on:click={newClickHandler(panLeft)}
-			on:keypress={newKeyHandler(panLeft)}
+			on:click={newHandler(panLeft)}
 		>
 			<Icon src={ChevronLeft} class="w-8 h-8 p-0.5" />
 		</Button>
@@ -83,8 +76,7 @@
 			emphasis="secondary"
 			title="Pan down"
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-			on:click={newClickHandler(panDown)}
-			on:keypress={newKeyHandler(panDown)}
+			on:click={newHandler(panDown)}
 		>
 			<Icon src={ChevronDown} class="w-8 h-8 p-0.5" />
 		</Button>
@@ -94,8 +86,7 @@
 			emphasis="secondary"
 			title="Pan right"
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-			on:click={newClickHandler(panRight)}
-			on:keypress={newKeyHandler(panRight)}
+			on:click={newHandler(panRight)}
 		>
 			<Icon src={ChevronRight} class="w-8 h-8 p-0.5" />
 		</Button>

@@ -9,19 +9,16 @@
 	const zoomIn = () => map.zoomIn(ZOOM_ANIMATION_OPTIONS);
 	const zoomOut = () => map.zoomOut(ZOOM_ANIMATION_OPTIONS);
 
-	const newClickHandler = (handler) => {
-		return () => {
-			if (map) {
-				handler();
-				map.getCanvas().focus();
+	const newHandler = (handle) => {
+		return (event) => {
+			if (!map) {
+				return;
 			}
-		};
-	};
 
-	const newKeyHandler = (handler) => {
-		return (e) => {
-			if (map && e.key === 'Enter') {
-				handler();
+			handle();
+
+			if (event.detail > 0) {
+				map.getCanvas().focus();
 			}
 		};
 	};
@@ -33,8 +30,7 @@
 		emphasis="secondary"
 		title="Zoom in"
 		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-		on:click={newClickHandler(zoomIn)}
-		on:keypress={newKeyHandler(zoomIn)}
+		on:click={newHandler(zoomIn)}
 	>
 		<Icon src={PlusSmall} class="w-8 h-8 p-0.5" />
 	</Button>
@@ -43,8 +39,7 @@
 		emphasis="secondary"
 		title="Zoom out"
 		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-		on:click={newClickHandler(zoomOut)}
-		on:keypress={newKeyHandler(zoomOut)}
+		on:click={newHandler(zoomOut)}
 	>
 		<Icon src={MinusSmall} class="w-8 h-8 p-0.5" />
 	</Button>
