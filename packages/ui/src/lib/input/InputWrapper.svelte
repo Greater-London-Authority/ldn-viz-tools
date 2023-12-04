@@ -62,4 +62,3 @@
 		<span class={descriptionClass}>{errorMessage}</span>
 	{/if}
 </div>
-
