@@ -12,7 +12,6 @@
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
-	let map = null;
 </script>
 
 <Meta
@@ -30,7 +29,6 @@
 <Story name="Positioning">
 	<MapApp>
 		<Map
-			whenMapLoads={(m) => (map = m)}
 			options={{
 				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
@@ -62,19 +60,16 @@
 <Story name="Standard Layout">
 	<MapApp>
 		<Map
-			whenMapLoads={(m) => (map = m)}
 			options={{
 				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
 			<div
-				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white p-4 space-y-4"
+				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white p-4 space-y-8"
 			>
-				<p class="text-left">⮜ Controls on the left are standard for every map</p>
-
-				<p class="text-right">Those on the right are context or map dependent ⮞</p>
-
+				<p class="w-52">⮜ Controls on the left are standard for every map</p>
+				<p class="ml-auto w-52">Those on the right are context or map dependent ⮞</p>
 				<p class="text-center">On small devices most controls will hide themselves.</p>
 			</div>
 
@@ -87,11 +82,11 @@
 					/>
 					<button title="Find my location" class="bg-core-grey-800 w-10 h-10 text-3xl"> ◎ </button>
 				</div>
-				<MapControlZoom {map} />
+				<MapControlZoom />
 			</MapControlGroup>
 
 			<MapControlGroup position="BottomLeft">
-				<MapControlFullscreen {map} />
+				<MapControlFullscreen />
 				<MapControlRefresh />
 			</MapControlGroup>
 
@@ -102,7 +97,7 @@
 			</MapControlGroup>
 
 			<MapControlGroup position="BottomRight">
-				<MapControlPan {map} />
+				<MapControlPan />
 			</MapControlGroup>
 		</Map>
 	</MapApp>

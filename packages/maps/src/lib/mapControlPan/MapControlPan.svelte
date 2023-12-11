@@ -1,21 +1,22 @@
 <script>
+	import { getContext } from 'svelte';
 	import { Button } from '@ldn-viz/ui';
 	import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { FLY_ANIMATION_OPTIONS } from '../themes/animations';
 
-	export let map;
+	const map = getContext('map');
 
 	const newHandler = (handle) => {
-		return (event) => {
-			if (!map) {
+		return (e) => {
+			if (!$map) {
 				return;
 			}
 
 			handle();
 
 			if (event.detail > 0) {
-				map.getCanvas().focus();
+				$map.getCanvas().focus();
 			}
 		};
 	};
@@ -27,11 +28,11 @@
 
 	const panHandler = (direction) => {
 		const moveAmount = calcMoveAmount(direction);
-		map.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
+		$map.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
 	};
 
 	const calcMoveAmount = (direction) => {
-		const rect = map.getContainer().getBoundingClientRect();
+		const rect = $map.getContainer().getBoundingClientRect();
 		const calcDistance = (size) => size * 0.14;
 
 		switch (direction) {
@@ -47,7 +48,7 @@
 	};
 </script>
 
-<div class="flex flex-col space-y-1 invisible sm:visible">
+<div class="flex flex-col invisible sm:visible">
 	<div class="flex justify-center">
 		<Button
 			variant="square"
@@ -56,11 +57,11 @@
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
 			on:click={newHandler(panUp)}
 		>
-			<Icon src={ChevronUp} class="w-8 h-8 p-0.5" />
+			<Icon src={ChevronUp} class="w-8 h-8 pb-1 pt-0.5" />
 		</Button>
 	</div>
 
-	<div class="flex space-x-1">
+	<div class="flex">
 		<Button
 			variant="square"
 			emphasis="secondary"
@@ -68,18 +69,10 @@
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
 			on:click={newHandler(panLeft)}
 		>
-			<Icon src={ChevronLeft} class="w-8 h-8 p-0.5" />
+			<Icon src={ChevronLeft} class="w-8 h-8 pr-1 pl-0.5" />
 		</Button>
 
-		<Button
-			variant="square"
-			emphasis="secondary"
-			title="Pan down"
-			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
-			on:click={newHandler(panDown)}
-		>
-			<Icon src={ChevronDown} class="w-8 h-8 p-0.5" />
-		</Button>
+		<div class="w-10" />
 
 		<Button
 			variant="square"
@@ -88,7 +81,19 @@
 			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
 			on:click={newHandler(panRight)}
 		>
-			<Icon src={ChevronRight} class="w-8 h-8 p-0.5" />
+			<Icon src={ChevronRight} class="w-8 h-8 pl-1 pr-0.5" />
+		</Button>
+	</div>
+
+	<div class="flex justify-center">
+		<Button
+			variant="square"
+			emphasis="secondary"
+			title="Pan down"
+			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
+			on:click={newHandler(panDown)}
+		>
+			<Icon src={ChevronDown} class="w-8 h-8 pt-1 pb-0.5" />
 		</Button>
 	</div>
 </div>

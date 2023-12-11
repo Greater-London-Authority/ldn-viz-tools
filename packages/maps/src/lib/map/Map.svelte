@@ -17,12 +17,19 @@
 </script>
 
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
+	import { writable } from 'svelte/store';
 	import maplibre_gl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 
 	import { GREATER_LONDON_BOUNDS, GREATER_LONDON_BOUNDS_MAX } from '../themes/bounds';
 	import * as os_light_vts from '../themes/os_light_vts.json';
+
+	const map = writable(null);
+	const map_gl = writable(null);
+
+	setContext('map', map);
+	setContext('map_gl', map_gl);
 
 	export let disabled = false;
 	export let options = {};
@@ -45,17 +52,29 @@
 			return;
 		}
 
-		const map = new maplibre_gl.Map({
+		const maplibre = new maplibre_gl.Map({
 			...defaultOptions,
 			...options,
 			container
 		});
 
-		map.once('load', () => {
-			whenMapLoads && whenMapLoads(map, maplibre_gl);
+		maplibre.once('load', () => {
+			map.set(maplibre);
+			map_gl.set(maplibre_gl);
+
+			if (whenMapLoads) {
+				whenMapLoads(maplibre, maplibre_gl);
+			}
 		});
 
-		return () => whenMapUnloads && whenMapUnloads(map, maplibre_gl);
+		return () => {
+			if (whenMapUnloads) {
+				whenMapUnloads(maplibre, maplibre_gl);
+			}
+
+			map.set(null);
+			map_gl.set(null);
+		};
 	});
 </script>
 

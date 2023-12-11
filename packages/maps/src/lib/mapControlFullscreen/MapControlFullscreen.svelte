@@ -49,11 +49,12 @@
 </script>
 
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, getContext } from 'svelte';
 	import { Button } from '@ldn-viz/ui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let map;
+	const map = getContext('map');
+
 	let mode = null;
 
 	onMount(() => {
@@ -63,14 +64,14 @@
 	});
 
 	const handle = (event) => {
-		if (!map || !mode) {
+		if (!$map || !mode) {
 			return;
 		}
 
 		$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
 
 		if (event.detail > 0) {
-			map.getCanvas().focus();
+			$map.getCanvas().focus();
 		}
 	};
 </script>

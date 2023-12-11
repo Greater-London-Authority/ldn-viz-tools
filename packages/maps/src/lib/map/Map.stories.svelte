@@ -13,12 +13,17 @@
 	let clickedLayerIDs = ['Click a point on the map to list the vector layer IDs'];
 	let map = null;
 
-	const updateClickedLayers = async (event) => {
-		if (map && clickedLayerIDs) {
-			clickedLayerIDs = null;
-			clickedLayerIDs = map.queryRenderedFeatures(event.point).map((f) => f.layer.id);
+	const updateClickedLayers = (event) => {
+		if (map) {
+			clickedLayerIDs = queryVectorLayerIDs(event.point);
+			clickedLayerIDs = removeDuplicates(clickedLayerIDs);
 		}
 	};
+
+	const queryVectorLayerIDs = (point) => {
+		return map.queryRenderedFeatures(point).map((f) => f.layer.id);
+	};
+	const removeDuplicates = (array) => [...new Set(array)];
 
 	const whenMapLoads = (newMap) => {
 		map = newMap;

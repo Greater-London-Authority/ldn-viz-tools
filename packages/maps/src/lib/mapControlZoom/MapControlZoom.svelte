@@ -1,24 +1,25 @@
 <script>
+	import { getContext } from 'svelte';
 	import { Button } from '@ldn-viz/ui';
 	import { PlusSmall, MinusSmall } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ZOOM_ANIMATION_OPTIONS } from '../themes/animations';
 
-	export let map;
+	const map = getContext('map');
 
-	const zoomIn = () => map.zoomIn(ZOOM_ANIMATION_OPTIONS);
-	const zoomOut = () => map.zoomOut(ZOOM_ANIMATION_OPTIONS);
+	const zoomIn = () => $map.zoomIn(ZOOM_ANIMATION_OPTIONS);
+	const zoomOut = () => $map.zoomOut(ZOOM_ANIMATION_OPTIONS);
 
 	const newHandler = (handle) => {
 		return (event) => {
-			if (!map) {
+			if (!$map) {
 				return;
 			}
 
 			handle();
 
 			if (event.detail > 0) {
-				map.getCanvas().focus();
+				$map.getCanvas().focus();
 			}
 		};
 	};
