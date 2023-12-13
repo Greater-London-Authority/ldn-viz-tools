@@ -15,9 +15,15 @@
 
 	const updateClickedLayers = (event) => {
 		if (map) {
-			clickedLayerIDs = map.queryRenderedFeatures(event.point).map((f) => f.layer.id);
+			clickedLayerIDs = queryVectorLayerIDs(event.point);
+			clickedLayerIDs = removeDuplicates(clickedLayerIDs);
 		}
 	};
+
+	const queryVectorLayerIDs = (point) => {
+		return map.queryRenderedFeatures(point).map((f) => f.layer.id);
+	};
+	const removeDuplicates = (array) => [...new Set(array)];
 
 	const whenMapLoads = (newMap) => {
 		map = newMap;
