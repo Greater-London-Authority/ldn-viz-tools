@@ -21,8 +21,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@changesets/cli": "^2.26.1",
-    "svelte-select": "^5.7.0"
+    "@changesets/cli": "^2.26.1"
   },
   "overrides": {
 		"@rgossiaux/svelte-headlessui": {
