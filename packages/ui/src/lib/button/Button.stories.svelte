@@ -145,8 +145,8 @@
 
 <Story name="Square">
 	<Button variant="square" title="Down">
-    <Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
-  </Button>
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+	</Button>
 	<Button variant="square" emphasis="secondary" title="Down">
 		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</Button>

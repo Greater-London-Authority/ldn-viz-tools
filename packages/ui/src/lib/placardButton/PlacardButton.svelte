@@ -30,12 +30,7 @@
 	>
 		<slot name="footer" />
 		<slot name="icon">
-			<Icon
-				src={ArrowRight}
-				theme="solid"
-				class="w-6 h-6"
-				aria-hidden="true"
-			/>
+			<Icon src={ArrowRight} theme="solid" class="w-6 h-6" aria-hidden="true" />
 		</slot>
 	</div>
 </a>

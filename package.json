@@ -5,6 +5,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
     "format": "prettier --write .",
     "publish-packages": "turbo run build && changeset version && changeset publish"
   },
@@ -13,7 +15,7 @@
     "eslint-config-custom": "*",
     "prettier": "^2.7.1",
     "prettier-plugin-svelte": "^2.7.0",
-    "turbo": "latest"
+    "turbo": "^1.10.16"
   },
   "packageManager": "npm@9.5.0",
   "workspaces": [
@@ -21,12 +23,11 @@
     "packages/*"
   ],
   "dependencies": {
-    "@changesets/cli": "^2.26.1",
-    "svelte-select": "^5.7.0"
+    "@changesets/cli": "^2.26.1"
   },
   "overrides": {
-		"@rgossiaux/svelte-headlessui": {
-			"svelte": "4.0.0"
-		}
-	}
+    "@rgossiaux/svelte-headlessui": {
+      "svelte": "4.0.0"
+    }
+  }
 }

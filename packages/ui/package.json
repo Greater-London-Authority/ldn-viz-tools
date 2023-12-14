@@ -10,9 +10,9 @@
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
 		"test": "playwright test",
+		"test:unit": "vitest run",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint src",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
@@ -68,7 +68,8 @@
 		"d3-dsv": "^3.0.1",
 		"postcss-cli": "^10.1.0",
 		"postcss-discard-comments": "^6.0.0",
-		"svelte-floating-ui": "^1.5.3"
+		"svelte-floating-ui": "^1.5.3",
+		"svelte-select": "^5.7.0"
 	},
 	"overrides": {
 		"@rgossiaux/svelte-headlessui": {

@@ -8,9 +8,9 @@
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
 		"test": "playwright test",
+		"test:unit": "vitest run",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint src",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
@@ -50,6 +50,7 @@
 		"@deck.gl/core": "^8.9.18",
 		"@deck.gl/layers": "^8.9.18",
 		"@deck.gl/mapbox": "^8.9.18",
-		"svelte-maplibre": "^0.5.0"
+		"svelte-maplibre": "^0.5.0",
+		"maplibre-gl": "3.4.0"
 	}
 }
