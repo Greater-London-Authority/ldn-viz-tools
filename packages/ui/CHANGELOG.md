@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 3.1.0
+
+### Minor Changes
+
+- cc6960a: fix specification of svelte-select as a dependency
+
 ## 3.0.0
 
 ### Major Changes
