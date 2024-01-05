@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="flex bg-core-grey-800 border-b-4 border-b-core-blue-600 w-full pt-5 px-4 pb-0 space-x-0.5 items-end"
+	class="flex bg-white dark:bg-core-grey-800 border-b-4 border-b-core-blue-600 w-full pt-5 px-4 pb-0 space-x-0.5 items-end"
 >
 	<slot />
 </div>
