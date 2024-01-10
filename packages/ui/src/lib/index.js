@@ -32,4 +32,4 @@ export { default as TabbedSidebarWrapper } from './tabbedSidebar/TabbedSidebarWr
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 
-export {classNames} from "./utils/classNames"
+export { classNames } from './utils/classNames';
