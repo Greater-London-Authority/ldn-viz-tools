@@ -2,6 +2,8 @@ export { default as ChartContainer } from './chartContainer/ChartContainer.svelt
 
 export { default as ScatterPlot } from './scatterPlot/ScatterPlot.svelte';
 
+export { default as ObservablePlot } from './observablePlot/ObservablePlot.svelte';
+
 export { default as AxisX } from './shared/AxisX.svelte';
 export { default as AxisY } from './shared/AxisY.svelte';
 export { default as ExportBtns } from './shared/ExportBtns.svelte';
