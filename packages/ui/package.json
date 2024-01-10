@@ -60,7 +60,6 @@
 	"main": "./dist/index.js",
 	"type": "module",
 	"dependencies": {
-		"@rgossiaux/svelte-headlessui": "^1.0.2",
 		"@steeze-ui/heroicons": "^2.2.3",
 		"@steeze-ui/svelte-icon": "^1.5.0",
 		"@storybook/addon-svelte-csf": "^4.0.9",
@@ -69,14 +68,8 @@
 		"postcss-cli": "^10.1.0",
 		"postcss-discard-comments": "^6.0.0",
 		"svelte-floating-ui": "^1.5.3",
-		"svelte-select": "^5.7.0"
-	},
-	"overrides": {
-		"@rgossiaux/svelte-headlessui": {
-			"svelte": "$svelte"
-		},
-		"@rgossiaux/svelte-heroicons": {
-			"svelte": "$svelte"
-		}
+		"svelte-headlessui": "^0.0.33",
+		"svelte-select": "^5.7.0",
+		"svelte-transition": "^0.0.10"
 	}
 }
