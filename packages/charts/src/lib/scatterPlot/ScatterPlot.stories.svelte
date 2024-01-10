@@ -58,10 +58,12 @@
 
 <Story name="Default" />
 
-<Story name="With Title" args={{ title: 'Chart Title' }} />
+<Story
+	name="With Chrome "
+	args={{ title: 'Chart Title', subTitle: 'This is a sub title', footer: true, exportBtns: true }}
+/>
 
-<Story name="With Subtitle" args={{ title: 'Chart Title', subTitle: 'This is a sub title' }} />
-
-<Story name="With Footer" args={{ footer: true }} />
-
-<Story name="With Export Buttons" args={{ exportBtns: true }} />
+<Story
+	name="With Chrome but no downlaod buttons "
+	args={{ title: 'Chart Title', subTitle: 'This is a sub title', footer: true, exportBtns: false }}
+/>
