@@ -229,7 +229,31 @@
 	// const spec = { x: 'culmen_length_mm', y: 'culmen_depth_mm' };
 
 	const spec = {
-		marks: [Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' })]
+		style: {
+			fontFamily: "Roboto",
+			fontSize: "12pt",
+			color: "#666666",
+		},
+
+		grid: true,
+		marginBottom: 50,
+
+		x: {
+			labelAnchor : "center",
+			labelArrow : "none",
+			label: "Culmen length/mm",
+		},
+
+		y: {
+			insetTop: 20,
+			labelArrow : "none",
+		},
+
+		marks: [
+				Plot.ruleY([0], {stroke: "#666666"}),
+				Plot.ruleX([0], {stroke: "#666666"}),
+				Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+		]
 	};
 </script>
 
