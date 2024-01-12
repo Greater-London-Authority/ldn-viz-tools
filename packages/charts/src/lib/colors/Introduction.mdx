@@ -1,0 +1,17 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Charts/Colors" />
+
+# Color functions.
+
+Our color system for charts is documented in the Observable notebook [@ldn/color-system]](https://observablehq.com/@ldn/color-system).
+
+It exports two _objects_ defining colors:
+
+- `ldnColors`: an object that defines sets of named colors. Each colour is split into a predefined 10 point sequential ramp (numbered `50`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900`, ordered from light to dark)
+- `theme`: an object that maps the colors to series of design tokens to create light and dark themes.
+
+It also exports two _functions_ for constructing color scales:
+
+- `getColorScale(count, colors, even)`
+- `getThresholdBreaksColorsLabels(breakCount, extent, anchorToZero, discreteZeroBin, offsetZeroVal, labelFormat, valueAppend, valuePrepend, colors, even)`

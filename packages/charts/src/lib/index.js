@@ -9,3 +9,5 @@ export { default as Footer } from './shared/Footer.svelte';
 export { default as Scatter } from './shared/Scatter.svelte';
 export { default as SubTitle } from './shared/SubTitle.svelte';
 export { default as Title } from './shared/Title.svelte';
+
+export * from './colors/colors';
