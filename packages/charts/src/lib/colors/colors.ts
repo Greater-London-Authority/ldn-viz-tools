@@ -138,7 +138,7 @@ export const getThresholdBreaksColorsLabels = ({
 
 	// loop through each bin
 	for (let b = 0; b < binLen; b++) {
-		let binX = binnedVals[b][binXType];
+		const binX = binnedVals[b][binXType];
 		// push in double offsetZeroVal in dvg+discreteZeroBin scale, or just regular push
 		if (scaleType == 'dvg' && binX == 0 && discreteZeroBin) {
 			// need to create slighlty offset (from 0) break(s)
