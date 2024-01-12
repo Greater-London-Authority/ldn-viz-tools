@@ -11,12 +11,12 @@
     "publish-packages": "turbo run build && changeset version && changeset publish"
   },
   "devDependencies": {
-    "eslint": "^8.0.0",
-    "eslint-config-custom": "*",
+    "eslint": "^8.56.0",
+    "eslint-config-custom": "^1.0.0",
     "eslint-plugin-turbo": "^1.11.3",
-    "prettier": "^2.7.1",
-    "prettier-plugin-svelte": "^2.7.0",
-    "turbo": "^1.10.16"
+    "prettier": "^3.1.1",
+    "prettier-plugin-svelte": "^3.1.2",
+    "turbo": "^1.11.3"
   },
   "packageManager": "npm@9.5.0",
   "workspaces": [
@@ -24,12 +24,9 @@
     "packages/*"
   ],
   "dependencies": {
-    "@changesets/cli": "^2.26.1",
+    "@changesets/cli": "^2.27.1",
     "html2canvas": "^1.4.1"
   },
   "overrides": {
-    "@rgossiaux/svelte-headlessui": {
-      "svelte": "4.0.0"
-    }
   }
 }

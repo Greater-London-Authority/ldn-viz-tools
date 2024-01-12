@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	import { dev } from '$app/environment';
 
 	let noscript = true;
 
@@ -14,11 +13,6 @@
 		<section
 			class="bg-core-grey-800 w-full h-full flex justify-center items-center text-center ldn-viz-map-app-noscript-animation"
 		>
-			{#if dev}
-				<p>
-					<b>Dev mode:</b> Please wait while optimising dependencies.
-				</p>
-			{/if}
 			<p>Please enable JavaScript to explore this map.</p>
 		</section>
 	{:else}
