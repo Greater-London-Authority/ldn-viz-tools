@@ -1,8 +1,5 @@
-<script context="module" lang="ts">
-	import { LayerCake, Svg } from 'layercake';
-</script>
-
 <script lang="ts">
+	import { classNames } from '@ldn-viz/ui';
 	import ExportBtns from './ExportBtns.svelte';
 	import Footer from './Footer.svelte';
 	import SubTitle from './SubTitle.svelte';
@@ -14,19 +11,17 @@
 	export let alt: string | null = null;
 	export let footer = false;
 	export let exportBtns = false;
+	export let chartHeight = 'h-60'; // tailwind class to set chart are height
+	let chartClass = classNames('w-full relative', chartHeight);
 
 	// export props for layercake
 	export let data: { [key: string]: any }[];
-	export let x = 'x';
-	export let y = 'y';
-	export let yScale: ((x: any) => number | undefined) | undefined = undefined;
-	export let xDomain: any[] = [0, null];
-	export let yDomain: any[] = [0, null];
-	// all other layercake props accepted with ...$$restProps rtm
-	let padding = { left: 50, bottom: 0 };
+
+	// For save as image
+	let chartToCapture: HTMLDivElement;
 </script>
 
-<div class="chart-container">
+<div class="chart-container" bind:this={chartToCapture} id="captureElement">
 	{#if title}
 		<Title>{title}</Title>
 	{/if}
@@ -39,34 +34,15 @@
 	{/if}
 
 	<!-- Viz element goes here -->
-	<div class="chart">
-		<LayerCake
-			{data}
-			{x}
-			{y}
-			{yScale}
-			{xDomain}
-			{yDomain}
-			{padding}
-			{...$$restProps}
-			let:aspectRatio
-			let:containerHeight
-			let:containerWidth
-			let:height
-			let:width
-			let:element
-		>
-			<Svg>
-				<slot {aspectRatio} {containerHeight} {containerWidth} {height} {width} {element} />
-			</Svg>
-		</LayerCake>
+	<div class={chartClass}>
+		<slot />
 	</div>
 
 	{#if footer === true}
 		<Footer />
 	{/if}
 	{#if exportBtns === true}
-		<ExportBtns />
+		<ExportBtns {chartToCapture} {data} />
 	{/if}
 </div>
 
@@ -74,15 +50,4 @@
 	.chart-container {
 		@apply flex flex-col w-full;
 	}
-
-	.chart {
-		@apply w-full h-60 relative;
-	}
-
-	/* svg {
-		position: absolute;
-		top: 0;
-		left: 0;
-		overflow: visible;
-	} */
 </style>

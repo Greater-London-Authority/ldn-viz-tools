@@ -6,6 +6,8 @@ export { default as Title } from './chartContainer/Title.svelte';
 
 export { default as ScatterPlot } from './scatterPlot/ScatterPlot.svelte';
 
+export { default as ObservablePlot } from './observablePlot/ObservablePlot.svelte';
+
 export { default as AxisX } from './shared/AxisX.svelte';
 export { default as AxisY } from './shared/AxisY.svelte';
 export { default as Scatter } from './shared/Scatter.svelte';
