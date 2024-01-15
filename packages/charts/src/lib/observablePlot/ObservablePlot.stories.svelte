@@ -230,29 +230,29 @@
 
 	const spec = {
 		style: {
-			fontFamily: "Roboto",
-			fontSize: "12pt",
-			color: "#666666",
+			fontFamily: 'Roboto',
+			fontSize: '12pt',
+			color: '#666666'
 		},
 
 		grid: true,
 		marginBottom: 50,
 
 		x: {
-			labelAnchor : "center",
-			labelArrow : "none",
-			label: "Culmen length/mm",
+			labelAnchor: 'center',
+			labelArrow: 'none',
+			label: 'Culmen length/mm'
 		},
 
 		y: {
 			insetTop: 20,
-			labelArrow : "none",
+			labelArrow: 'none'
 		},
 
 		marks: [
-				Plot.ruleY([0], {stroke: "#666666"}),
-				Plot.ruleX([0], {stroke: "#666666"}),
-				Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+			Plot.ruleY([0], { stroke: '#666666' }),
+			Plot.ruleX([0], { stroke: '#666666' }),
+			Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' })
 		]
 	};
 </script>
@@ -273,5 +273,17 @@
 		subTitle: 'A scatterplot of depth against length',
 		exportBtns: true,
 		data: penguins
+	}}
+/>
+
+<Story
+	name="With responsive width"
+	args={{
+		spec,
+		title: 'Penguin Culmens',
+		subTitle: 'A scatterplot of depth against length',
+		exportBtns: true,
+		data: penguins,
+		responsiveWidth: true
 	}}
 />
