@@ -4,10 +4,15 @@
 	import { csvFormat } from 'd3-dsv';
 
 	export let format: 'CSV' | 'JSON' | undefined;
-	export let data: any;
+	export let data: Record<string, number | string>[];
 	export let filename: string;
 
 	export let disabled = false;
+	export let columnMapping: undefined | { [oldName: string]: string };
+
+	const enforceExtension = (name: string, extension: string) => {
+		return name.toLocaleLowerCase().endsWith(extension) ? name : `name${extension}`;
+	}
 
 	const downloadFromURL = (url: string, name: string) => {
 		const link = document.createElement('a');
@@ -18,15 +23,30 @@
 	};
 
 	const downloadJSON = () => {
-		const dataString = JSON.stringify(data, null, 4);
+		const dataString = JSON.stringify(renameColumns(), null, 4);
 		const dataURL = 'data:application/json;base64,' + window.btoa(dataString);
-		downloadFromURL(dataURL, filename || `data.json`);
+		downloadFromURL(dataURL, enforceExtension(filename || 'data', '.json'));
 	};
 
 	const downloadCSV = () => {
-		const dataString = csvFormat(data);
+		const dataString = csvFormat(renameColumns());
 		const dataURL = 'data:application/csv;base64,' + window.btoa(dataString);
-		downloadFromURL(dataURL, filename || `data.csv`);
+		downloadFromURL(dataURL, enforceExtension(filename || 'data', '.csv'));
+	};
+
+	const renameColumns = () => {
+		return data.map((datum) => {
+			if (!columnMapping) {
+				return datum;
+			} else {
+				const reshapedDatum: { [newName: string]: string | number } = {};
+
+				for (const oldColName of Object.keys(columnMapping)) {
+					reshapedDatum[columnMapping[oldColName]] = datum[oldColName];
+				}
+				return reshapedDatum;
+			}
+		});
 	};
 
 	const download = format === 'JSON' ? downloadJSON : downloadCSV;
