@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { classNames } from '@ldn-viz/ui';
-	import ExportBtns from '../shared/ExportBtns.svelte';
-	import Footer from '../shared/Footer.svelte';
-	import SubTitle from '../shared/SubTitle.svelte';
-	import Title from '../shared/Title.svelte';
+	import ExportBtns from './ExportBtns.svelte';
+	import Footer from './Footer.svelte';
+	import SubTitle from './SubTitle.svelte';
+	import Title from './Title.svelte';
 
 	// export props to popultae the container
 	export let title: string | null = null;
