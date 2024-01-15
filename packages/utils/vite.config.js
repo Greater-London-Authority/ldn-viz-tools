@@ -1,6 +1,6 @@
 // vite.config.js
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
@@ -9,7 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/main.ts'),
       name: '@ldn-viz/utils',
       // the proper extensions will be added
-      fileName: 'ldn-viz-utils',
+      fileName: 'ldn-viz-utils'
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -18,9 +18,8 @@ export default defineConfig({
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
-        globals: {
-        },
-      },
-    },
-  },
-})
+        globals: {}
+      }
+    }
+  }
+});

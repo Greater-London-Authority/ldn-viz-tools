@@ -1,3 +1,3 @@
-import { theme } from "./colors/theme";
+export { getColorScale, getThresholdBreaksColorsLabels } from './colors/scales';
 
-export {theme};
+export { theme, ldnColors } from './colors/theme';
