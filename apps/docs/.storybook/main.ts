@@ -12,7 +12,6 @@ function getAbsolutePath(value: string): any {
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
-		'../src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
 		'../../../packages/ui/src/**/*.mdx',
 		'../../../packages/ui/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
 		'../../../packages/charts/src/**/*.mdx',
@@ -33,7 +32,8 @@ const config: StorybookConfig = {
 		options: {}
 	},
 	docs: {
-		autodocs: 'tag'
+		autodocs: true,
+		defaultName: 'Documentation'
 	}
 };
 export default config;
