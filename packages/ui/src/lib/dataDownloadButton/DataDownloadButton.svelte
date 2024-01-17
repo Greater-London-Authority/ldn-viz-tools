@@ -1,13 +1,22 @@
+<script context="module" lang="ts">
+	export interface DataDownloadButtonProps {
+		format?: 'CSV' | 'JSON';
+		data: any;
+		filename: string;
+		disabled: boolean;
+	}
+</script>
+
 <script lang="ts">
 	import Button from '../button/Button.svelte';
 
 	import { csvFormat } from 'd3-dsv';
 
-	export let format: 'CSV' | 'JSON' | undefined;
-	export let data: any;
-	export let filename: string;
+	export let format: DataDownloadButtonProps['format'];
+	export let data: DataDownloadButtonProps['data'];
+	export let filename: DataDownloadButtonProps['filename'];
 
-	export let disabled = false;
+	export let disabled: DataDownloadButtonProps['disabled'] = false;
 
 	const downloadFromURL = (url: string, name: string) => {
 		const link = document.createElement('a');
