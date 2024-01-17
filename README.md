@@ -51,9 +51,11 @@ The `dev` branch is periodically merged into the `main` branch, from which relea
 
 Following the [recommendations of the Turbo project maintainers](https://turbo.build/repo/docs/handbook/publishing-packages/versioning-and-publishing), we use `changesets` to keep track of changes.
 
-Before merging a PR that adds a feature or fixes a bug, run the command `changeset`.
+Before merging a PR that adds a feature or fixes a bug, run the command `npx changeset`.
 This will prompt for a description of the changes, which will be saved as a markdown file in [`.changeset/`](./.changeset/).
 For more details, see the [Adding a Changeset](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md) section of the `changeset` docs.
+
+When writing changelog messages, consider the suggestions from [keep a changelog](https://keepachangelog.com/).
 
 When a release is made, `changeset` will add these descriptions of changes to a `CHANGELONG.md` file in the directory of the appropriate package; the version numbers in `package.json` files will also be updated appropriately.
 
