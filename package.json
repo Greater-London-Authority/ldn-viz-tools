@@ -11,8 +11,8 @@
     "publish-packages": "turbo run build && changeset version && changeset publish"
   },
   "devDependencies": {
+    "@ldn-viz/eslint-config-custom": "*",
     "eslint": "^8.0.0",
-    "eslint-config-custom": "*",
     "eslint-plugin-turbo": "^1.11.3",
     "prettier": "^2.7.1",
     "prettier-plugin-svelte": "^2.7.0",
