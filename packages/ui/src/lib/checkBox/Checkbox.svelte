@@ -10,6 +10,7 @@
 </script>
 
 <script lang="ts">
+	/** A hex string to add a color to the box - this should correspond to the design system colors. */
 	export let color: CheckboxProps['color'] = '';
 	export let checked: CheckboxProps['checked'] = false;
 	export let indeterminate: CheckboxProps['indeterminate'] = false;
