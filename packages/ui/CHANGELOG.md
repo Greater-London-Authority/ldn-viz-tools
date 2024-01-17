@@ -1,5 +1,15 @@
 # ldn-viz-tools-ui
 
+## 3.2.0
+
+### Minor Changes
+
+- 10f9fca: CHANGED: `DataDownloadButton` now accepts a prop defining a mapping from the names of fields in the provided data object, and the names that should be used in the downloaded file
+
+### Patch Changes
+
+- 94dee5e: Changed: Spinner updated with dark mode
+
 ## 3.1.0
 
 ### Minor Changes
