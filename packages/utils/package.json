@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "vite build",
-    "lint": "prettier --plugin-search-dir . --check . && eslint . && publint",
+    "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "fmt": "prettier --plugin-search-dir . --check . --write",
     "test": "echo no tests",
     "test:unit": "echo no tests"
@@ -25,8 +25,7 @@
     "@types/d3-format": "^3.0.4",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^9.0.0",
-    "prettier": "^2.8.8",
-    "publint": "^0.1.16"
+    "prettier": "^2.8.8"
   },
   "dependencies": {
     "chroma-js": "^2.4.2",
