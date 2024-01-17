@@ -1,101 +1,126 @@
+<script context="module">
+	import Button from './Button.svelte';
+
+	export const meta = {
+		title: 'Ui/Button',
+		component: Button,
+		argTypes: {
+			emphasis: {
+				options: ['primary', 'secondary'],
+				control: { type: 'radio' }
+			},
+			variant: {
+				options: ['brand', 'solid', 'outline', 'text'], //square
+				control: { type: 'select' }
+			},
+			condition: {
+				options: ['default', 'success', 'error', 'warning'],
+				control: { type: 'select' }
+			},
+			size: {
+				options: ['sm', 'md', 'lg'],
+				control: { type: 'radio' }
+			},
+			type: {
+				options: ['button', 'submit'],
+				control: { type: 'radio' }
+			}
+		},
+		args: {
+			title: 'storybook button'
+		}
+	};
+</script>
+
 <script lang="ts">
 	import { ArrowDownCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
-	import type { ButtonProps } from './Button.svelte';
-	import Button from './Button.svelte';
-
-	const emphasisOptions: ButtonProps['emphasis'][] = ['primary', 'secondary'];
-	const sizes: ButtonProps['size'][] = ['sm', 'md', 'lg'];
-	const conditions: ButtonProps['condition'][] = ['default', 'success', 'error', 'warning'];
-	const variants: ButtonProps['variant'][] = ['brand', 'square', 'solid', 'outline', 'text'];
+	let count = 0;
+	function handleClick() {
+		count += 1;
+	}
 </script>
 
-<Meta title="Ui/Button" component={Button} />
-
 <Template let:args>
-	<Button {...args}>I'm a button from UI!</Button>
+	<Button {...args} on:click on:click={handleClick}>
+		You clicked: {count}
+	</Button>
 </Template>
 
-<Story name="Summary table">
-	<div class="flex flex-col gap-20 text-core-grey-600">
-		{#each emphasisOptions as emphasis}
-			<div>
-				<h2 class="font-bold">
-					Emphasis: <span class="text-sm text-core-grey-400 font-mono">{emphasis}</span>
-				</h2>
-				<div
-					class="grid gap-2"
-					style={`grid-template-columns: repeat(${1 + variants.length * sizes.length}, 1fr);`}
-				>
-					<!-- variants header -->
-					<span class="font-bold">Variant:</span>
-					{#each variants as variant, i}
-						<div
-							style={`grid-column: ${2 + sizes.length * i} / ${2 + sizes.length * (i + 1)}`}
-							class="text-center border-b-2 border-gray-200 text-sm text-core-grey-400 font-mono"
-						>
-							{variant}
-						</div>
-					{/each}
+<Story
+	name="Default"
+	source
+	parameters={{
+		options: {
+			showPanel: true
+		}
+	}}
+/>
 
-					<!-- size header -->
-					<span class="font-bold">Size:</span>
-					{#each new Array(variants.length) as i}
-						{#each sizes as size}
-							<span class="text-center text-sm text-core-grey-400 font-mono">{size}</span>
-						{/each}
-					{/each}
-
-					{#each conditions as condition}
-						<span class="self-end text-sm text-core-grey-400 font-mono">{condition}</span>
-
-						{#each variants as variant}
-							{#each sizes as size}
-								<div class="flex items-end justify-center">
-									<Button {emphasis} {condition} {size} {variant}>
-										{#if variant === 'square'}
-											<Icon
-												src={ArrowDownCircle}
-												theme="solid"
-												class="w-6 h-6"
-												aria-hidden="true"
-											/>
-											{#if size === 'lg'}Button{/if}
-										{:else}
-											Button
-										{/if}
-									</Button>
-								</div>
-							{/each}
-						{/each}
-					{/each}
-					<span class="self-end text-sm text-core-grey-400 font-mono">disabled</span>
-					{#each variants as variant}
-						{#each sizes as size}
-							<div class="flex items-end justify-center">
-								<Button {emphasis} disabled {size} {variant}>
-									{#if variant === 'square'}
-										<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
-										{#if size === 'lg'}Button{/if}
-									{:else}
-										Button
-									{/if}
-								</Button>
-							</div>
-						{/each}
-					{/each}
-				</div>
-			</div>
-		{/each}
+<Story name="Emphasis">
+	<div class="flex items-end space-x-2">
+		<Button>Primary</Button>
+		<Button emphasis="secondary">Secondary</Button>
 	</div>
 </Story>
 
-<Story name="Default" />
+<Story name="Brand" source args={{ variant: 'brand' }} />
 
-<Story name="Brand">
+<Story name="Solid" source args={{ variant: 'solid' }} />
+
+<Story name="Outline" source args={{ variant: 'outline' }} />
+
+<Story name="Text" source args={{ variant: 'text' }} />
+
+<Story name="Square" args={{ variant: 'square' }}>
+	<Button variant="square" title="Down" size="sm">
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" title="Down" size="md">
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" title="Down" size="lg">
+		<Icon src={ArrowDownCircle} theme="solid" class="w-8 h-8" aria-hidden="true" />
+		Down
+	</Button>
+</Story>
+
+<Story name="Disabled">
+	<Button disabled>Cant touch this!</Button>
+</Story>
+
+<Story name="Sizes">
+	<div class="flex items-end space-x-2">
+		<Button size="sm">sm</Button>
+		<Button size="md">md</Button>
+		<Button size="lg">lg</Button>
+	</div>
+</Story>
+
+<Story name="With class prop">
+	<Button class="text-core-darkPink-500 border-core-pink-700 bg-yellow-500">
+		Custom classes applied
+	</Button>
+</Story>
+
+<Story
+	name="Full width"
+	parameters={{
+		layout: 'fullscreen'
+	}}
+>
+	<Button class="w-full">Custom classes applied</Button>
+</Story>
+
+<Story name="With Link">
+	<Button href="#">Link</Button>
+	<Button disabled href="#">Link</Button>
+</Story>
+
+<!-- 
+<Story name="Brand" args={{ variant: 'brand' }}>
 	<Button variant="brand">Brand Primary</Button>
 	<Button variant="brand" condition="success">Success</Button>
 	<Button variant="brand" condition="warning">Warning</Button>
@@ -212,4 +237,4 @@
 <Story name="With Link">
 	<Button href="#">Link</Button>
 	<Button disabled href="#">Link</Button>
-</Story>
+</Story> -->
