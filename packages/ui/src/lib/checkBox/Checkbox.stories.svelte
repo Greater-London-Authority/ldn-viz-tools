@@ -10,12 +10,14 @@
 				control: { type: 'color' }
 			},
 			label: {
+				control: { type: 'text' },
 				table: {
 					defaultValue: { summary: '' },
 					type: { summary: 'string' }
 				}
 			},
 			id: {
+				control: { type: 'text' },
 				table: {
 					defaultValue: { summary: '' },
 					type: { summary: 'string' }
