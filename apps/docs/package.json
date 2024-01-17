@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@ldn-viz/charts": "*",
+    "@ldn-viz/eslint-config-custom": "*",
     "@ldn-viz/maps": "*",
     "@ldn-viz/ui": "*",
     "@storybook/addon-essentials": "7.4.6",
@@ -35,7 +36,6 @@
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.25.1",
     "autoprefixer": "^10.4.7",
-    "eslint-config-custom": "*",
     "postcss": "^8.4.14",
     "postcss-load-config": "^4.0.1",
     "react": "^18.2.0",
