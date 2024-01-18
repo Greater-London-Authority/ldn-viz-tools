@@ -27,9 +27,9 @@ jobs:
       - name: Build storybook site
         run: npm run build-storybook -w apps/docs
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: build-artifact
-        path: ./apps/docs/storybook-static
-        retention-days: 5
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact
+          path: ./apps/docs/storybook-static
+          retention-days: 5
