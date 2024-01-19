@@ -38,9 +38,9 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	let count = 0;
-	function handleClick() {
+	const handleClick = () => {
 		count += 1;
-	}
+	};
 </script>
 
 <Template let:args>
