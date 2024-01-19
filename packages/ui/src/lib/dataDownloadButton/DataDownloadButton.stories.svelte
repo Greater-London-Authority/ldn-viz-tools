@@ -53,6 +53,17 @@
 	}}
 />
 
+<Story name="Rename Columns">
+	<DataDownloadButton
+		{data}
+		filename="download"
+		format="CSV"
+		columnMapping={{ A: 'foo', B: 'bar', C: 'baz' }}
+	>
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+	</DataDownloadButton>
+</Story>
+
 <Story name="Button types">
 	<DataDownloadButton {data} filename="download" format="CSV" emphasis="primary">
 		Primary <Icon src={ArrowDownTray} theme="solid" class="ml-2 w-5 h-5" aria-hidden="true" />

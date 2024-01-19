@@ -1,5 +1,18 @@
 # ldn-viz-tools-charts
 
+## 1.1.0
+
+### Minor Changes
+
+- 6df130b: Added: `ObservablePlot` component for rendering a chart using Observable's Plot library
+  Changed: Updated the `ChartContainer` component
+
+### Patch Changes
+
+- Updated dependencies [10f9fca]
+- Updated dependencies [94dee5e]
+  - @ldn-viz/ui@3.2.0
+
 ## 1.0.0
 
 ### Major Changes
