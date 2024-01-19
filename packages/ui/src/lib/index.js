@@ -14,7 +14,7 @@ export { default as LogoByCIU } from './logos/LogoByCIU.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
-// export { default as Modal } from './modal/Modal.svelte';
+export { default as Modal } from './modal/Modal.svelte';
 export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
