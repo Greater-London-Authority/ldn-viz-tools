@@ -4,7 +4,9 @@
 	export let circleColorClass = '';
 	export let arcColorClass = '';
 
-	$: circleClasses = classNames(circleColorClass || 'stroke-core-grey-200 dark:stroke-core-grey-500');
+	$: circleClasses = classNames(
+		circleColorClass || 'stroke-core-grey-200 dark:stroke-core-grey-500'
+	);
 	$: pathClasses = classNames(arcColorClass || 'stroke-core-blue-600');
 </script>
 
