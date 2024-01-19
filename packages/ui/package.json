@@ -61,6 +61,7 @@
 	"main": "./dist/index.js",
 	"type": "module",
 	"dependencies": {
+		"@rgossiaux/svelte-headlessui": "^2.0.0",
 		"@steeze-ui/heroicons": "^2.3.0",
 		"@steeze-ui/svelte-icon": "^1.5.0",
 		"@storybook/addon-svelte-csf": "^4.1.0",
@@ -72,5 +73,9 @@
 		"svelte-floating-ui": "^1.5.8",
 		"svelte-select": "^5.8.3"
 	},
-	"overrides": {}
+	"overrides": {
+		"@rgossiaux/svelte-headlessui": {
+			"svelte": "4.2.8"
+		}
+	}
 }

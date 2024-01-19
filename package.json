@@ -27,5 +27,9 @@
     "@changesets/cli": "^2.27.1",
     "html2canvas": "^1.4.1"
   },
-  "overrides": {}
+  "overrides": {
+    "@rgossiaux/svelte-headlessui": {
+      "svelte": "4.2.8"
+    }
+  }
 }
