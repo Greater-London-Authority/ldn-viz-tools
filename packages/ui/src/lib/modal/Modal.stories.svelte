@@ -1,91 +1,84 @@
-<script lang="ts">
-	import {
-		Dialog,
-		DialogDescription,
-		DialogOverlay,
-		DialogTitle
-	} from '@rgossiaux/svelte-headlessui';
-	import { classNames } from '../utils/classNames';
+<script>
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	export let isOpen = false;
-	export let title: string;
-	export let description: string;
-	export let width:
-		| 'xs'
-		| 'sm'
-		| 'md'
-		| 'lg'
-		| 'xl'
-		| '2xl'
-		| '3xl'
-		| '4xl'
-		| '5xl'
-		| '6xl'
-		| '7xl'
-		| 'full' = 'md';
+	import Modal from './Modal.svelte';
 
-	const hasChildren = Object.keys($$slots).length > 0;
+	import Button from '../button/Button.svelte';
 
-	const widthClasses = {
-		xs: 'max-w-xs',
-		sm: 'max-w-sm',
-		md: 'max-w-md',
-		lg: 'max-w-lg',
-		xl: 'max-w-xl',
-		'2xl': 'max-w-2xl',
-		'3xl': 'max-w-3xl',
-		'4xl': 'max-w-4xl',
-		'5xl': 'max-w-5xl',
-		'6xl': 'max-w-6xl',
-		'7xl': 'max-w-7xl',
-		full: 'max-w-full'
-	};
-
-	$: modalClass = classNames(
-		'inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl space-y-2 pb-4 pointer-events-auto',
-		widthClasses[width]
-	);
+	let isOpen = true;
 </script>
 
-<Dialog open={isOpen} on:close={() => (isOpen = false)} class="relative z-10 overflow-y-auto">
-	<DialogOverlay class="fixed inset-0 bg-black bg-opacity-40" />
+<Meta title="Ui/Modal" component={Modal} />
 
-	<!--Full-screen container to center the panel -->
-	<div class="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
-		<div class={modalClass}>
-			<div class="bg-core-grey-600 text-white p-2 relative">
-				<DialogTitle>{title}</DialogTitle>
-				<button
-					on:click={() => (isOpen = false)}
-					class="bg-core-grey-500 absolute top-2 right-2 hover:bg-core-grey-800"
-				>
-					<span class="sr-only">Close</span>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="w-6 h-6"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				</button>
-			</div>
+<Template let:args>
+	<Modal {...args}>This content is the child of the modal!</Modal>
+</Template>
 
-			{#if description}
-				<DialogDescription class="px-2">{description}</DialogDescription>
-			{/if}
+<Story name="Default" args={{ title: 'Title', description: 'Description', isOpen: true }} />
 
-			{#if hasChildren && description}
-				<div class="border-dotted border-t border-core-grey-300 pt-4 mx-2 text-sm">
-					<slot />
-				</div>
-			{:else if hasChildren}
-				<div class="border-dotted border-core-grey-300 mx-2 text-sm">
-					<slot />
-				</div>
-			{/if}
+<Story name="Description only">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal
+		bind:isOpen
+		title="A modal with contents!"
+		description="This modal has a description, but no contents!"
+	/>
+</Story>
+
+<Story name="Description and Contents">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal
+		bind:isOpen
+		title="A modal with contents!"
+		description="This modal has a description and contents!"
+	>
+		<p>A list</p>
+		<ul>
+			<li>One</li>
+			<li>Two</li>
+			<li>Three</li>
+		</ul>
+	</Modal>
+</Story>
+
+<Story name="Contents without description">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal bind:isOpen title="A modal with contents!">
+		<p>A list</p>
+		<ul>
+			<li>One</li>
+			<li>Two</li>
+			<li>Three</li>
+		</ul>
+	</Modal>
+</Story>
+
+<Story name="Modal with close button">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal bind:isOpen title="A modal with close button!">
+		<div class="mb-4">
+			In a real example, these buttons would be appropriately styled, and potentially perform some
+			action in addition to closing the modal.
 		</div>
-	</div>
-</Dialog>
+
+		<Button variant="text" class="bg-core-green-400" on:click={() => (isOpen = false)}
+			>Accept</Button
+		>
+		<Button variant="text" class="bg-core-red-400" on:click={() => (isOpen = false)}>Cancel</Button>
+	</Modal>
+</Story>
+
+<Story name="Modal width">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal
+		bind:isOpen
+		width="6xl"
+		title="A wider modal!"
+		description="We can use the width prop to set different max-widths from xs though 7xl and full. Default is md"
+	/>
+</Story>
