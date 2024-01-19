@@ -4,6 +4,10 @@
 		emphasis: 'primary' | 'secondary';
 		condition: 'default' | 'success' | 'error' | 'warning';
 		size: 'sm' | 'md' | 'lg';
+		disabled: boolean;
+		href: string;
+		type: 'button' | 'submit';
+		title: string;
 	}
 
 	type ButtonStyle = Record<
@@ -19,10 +23,11 @@
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
 	export let condition: ButtonProps['condition'] = 'default';
 	export let size: ButtonProps['size'] = 'md';
-	export let disabled = false;
-	export let href = '';
-	export let type: 'button' | 'submit' = 'button';
-	export let title: undefined | string = undefined;
+	export let disabled: ButtonProps['disabled'] = false;
+	export let href: ButtonProps['href'] = '';
+	export let type: ButtonProps['type'] = 'button';
+	/** Title that appears in hint on hover */
+	export let title: ButtonProps['title'] = '';
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {
