@@ -60,7 +60,7 @@
 		format="CSV"
 		columnMapping={{ A: 'foo', B: 'bar', C: 'baz' }}
 	>
-		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+		<Icon src={ArrowDownTray} theme="solid" class="w-6 h-6" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
 
