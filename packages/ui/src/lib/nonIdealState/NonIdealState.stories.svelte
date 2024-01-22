@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { QuestionMarkCircleIcon } from '@rgossiaux/svelte-heroicons/outline';
+	import { QuestionMarkCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
@@ -27,7 +28,12 @@
 	<div class="w-96 h-96">
 		<NonIdealState>
 			<svelte:fragment slot="icon">
-				<QuestionMarkCircleIcon class="w-12 h-12 stroke-core-grey-200" aria-hidden="true" />
+				<Icon
+					src={QuestionMarkCircle}
+					theme="solid"
+					class="w-12 h-12 stroke-core-grey-200"
+					aria-hidden="true"
+				/>
 			</svelte:fragment>
 
 			<svelte:fragment slot="title">Something has gone wrong</svelte:fragment>
