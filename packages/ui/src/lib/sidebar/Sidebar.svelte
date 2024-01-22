@@ -69,7 +69,7 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
 	import { onMount, tick } from 'svelte';
 	import SidebarToggle from './SidebarToggle.svelte';
 	import SidebarContent from './SidebarContent.svelte';
