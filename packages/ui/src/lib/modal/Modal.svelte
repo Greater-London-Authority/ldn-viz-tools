@@ -6,8 +6,8 @@
 		DialogTitle
 	} from '@rgossiaux/svelte-headlessui';
 	import { classNames } from '../utils/classNames';
-	import CloseIcon from "./CloseIcon.svelte";
-	import Button from "../button/Button.svelte";
+	import CloseIcon from './CloseIcon.svelte';
+	import Button from '../button/Button.svelte';
 
 	export let isOpen = false;
 	export let title: string;
@@ -55,11 +55,14 @@
 	<!--Full-screen container to center the panel -->
 	<div class="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
 		<div class={modalClass}>
-			<div class="bg-core-grey-600 text-white p-2 relative h-[56px] flex items-center justify-between border-l-4 border-core-blue-500">
+			<div
+				class="bg-core-grey-600 text-white p-2 relative h-[56px] flex items-center justify-between border-l-4 border-core-blue-500"
+			>
 				<DialogTitle class="text-lg">{title}</DialogTitle>
 				<Button
-					variant="square" emphasis="secondary"
-					 class="w-8 h-8 self-center"
+					variant="square"
+					emphasis="secondary"
+					class="w-8 h-8 self-center"
 					on:click={() => (isOpen = false)}
 				>
 					<span class="sr-only">Close</span>
