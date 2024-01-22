@@ -29,7 +29,7 @@ const config = {
             'border-color': ldnColors.core.grey[300],
 
             '&:disabled': {
-              'background-color': ldnColors.core.grey[200]
+              'background-color': ldnColors.core.grey[100]
             }
           },
         '.form-input, .form-textarea, .form-select, .form-multiselect': {
@@ -38,6 +38,9 @@ const config = {
             'border-color': ldnColors.core.blue[600]
           }
         },
+        '.form-input::placeholder, .form-textarea::placeholder': {
+          color: ldnColors.core.grey[300]
+        },
         '.form-checkbox, .form-radio': {
           color: ldnColors.core.blue[600],
           '&:focus': {
@@ -45,7 +48,8 @@ const config = {
           }
         },
         '.form-label': {
-          color: ldnColors.core.grey[700]
+          color: ldnColors.core.grey[700],
+          'font-weight': '500'
         },
         '.form-select': {
           'background-image': `url("${svgToDataUri(
@@ -55,7 +59,7 @@ const config = {
         '.dark': {
           '.form-input, .form-textarea, .form-select, .form-multiselect, .form-checkbox, .form-radio':
             {
-              'border-color': ldnColors.core.grey[400],
+              'border-color': ldnColors.core.grey[600],
               'background-color': ldnColors.core.grey[600],
               color: ldnColors.core.grey[50],
               '&:focus': {
@@ -63,11 +67,11 @@ const config = {
               },
               '&:disabled, &:disabled::placeholder': {
                 'background-color': ldnColors.core.grey[400],
-                color: ldnColors.core.grey[600]
+                color: ldnColors.core.grey[300]
               }
             },
           '.form-input::placeholder, .form-textarea::placeholder': {
-            color: ldnColors.core.grey[200]
+            color: ldnColors.core.grey[300]
           },
           '.form-checkbox, .form-radio': {
             color: ldnColors.core.blue[600]

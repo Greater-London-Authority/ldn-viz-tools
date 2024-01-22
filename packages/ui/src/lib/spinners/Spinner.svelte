@@ -1,6 +1,13 @@
 <script>
-	export let circleClass = '';
-	export let arcClass = '';
+	import { classNames } from '../utils/classNames';
+
+	export let circleColorClass = '';
+	export let arcColorClass = '';
+
+	$: circleClasses = classNames(
+		circleColorClass || 'stroke-core-grey-200 dark:stroke-core-grey-500'
+	);
+	$: pathClasses = classNames(arcColorClass || 'stroke-core-blue-600');
 </script>
 
 <svg
@@ -10,8 +17,8 @@
 	stroke-width="8"
 	{...$$restProps}
 >
-	<circle stroke="#515a5e" cx="50" cy="50" r="38" class={circleClass} />
-	<path stroke="#6DA7DE" d="M 50,12 a 38,38 0 0,1 38,38" class={arcClass}>
+	<circle cx="50" cy="50" r="38" class={circleClasses} />
+	<path d="M 50,12 a 38,38 0 0,1 38,38" class={pathClasses}>
 		<animateTransform
 			attributeName="transform"
 			type="rotate"

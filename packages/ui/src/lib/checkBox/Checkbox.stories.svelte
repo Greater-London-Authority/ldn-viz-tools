@@ -1,7 +1,37 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
 	import Checkbox from './Checkbox.svelte';
 	import CheckboxGroup from './CheckboxGroup.svelte';
+
+	export const meta = {
+		title: 'Ui/Checkbox',
+		component: Checkbox,
+		argTypes: {
+			color: {
+				control: { type: 'color' }
+			},
+			label: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
+			id: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			}
+		},
+		args: {
+			label: 'Label for Checkbox'
+		}
+	};
+</script>
+
+<script lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	let checked = false;
 
@@ -15,11 +45,19 @@
 	];
 </script>
 
-<Meta title="Ui/Checkbox" component={Checkbox} />
-
 <Template let:args>
-	<Checkbox {...args}>This content is the child of the modal!</Checkbox>
+	<Checkbox {...args} />
 </Template>
+
+<Story
+	name="Default"
+	source
+	parameters={{
+		options: {
+			showPanel: true
+		}
+	}}
+/>
 
 <Story name="Single checkbox">
 	<Checkbox bind:checked id="single_id" label="Foo" />

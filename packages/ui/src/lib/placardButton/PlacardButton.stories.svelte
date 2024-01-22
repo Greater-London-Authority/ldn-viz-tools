@@ -1,5 +1,7 @@
 <script>
-	import { DocumentDownloadIcon } from '@rgossiaux/svelte-heroicons/solid';
+	import { DocumentArrowDown } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
 	import PlacardButton from './PlacardButton.svelte';
@@ -25,8 +27,10 @@
 		<PlacardButton>
 			<span slot="title"> Download the User Guide. </span>
 			<span slot="footer">PDF</span>
-			<span slot="icon"><DocumentDownloadIcon class="h-6 w-6" /></span>
-		</PlacardButton>
+			<span slot="icon">
+				<Icon src={DocumentArrowDown} theme="solid" class="w-6 h-6" aria-hidden="true" />
+			</span></PlacardButton
+		>
 	</div>
 </Story>
 

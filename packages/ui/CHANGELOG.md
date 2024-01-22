@@ -1,5 +1,45 @@
 # ldn-viz-tools-ui
 
+## 3.2.0
+
+### Minor Changes
+
+- 10f9fca: CHANGED: `DataDownloadButton` now accepts a prop defining a mapping from the names of fields in the provided data object, and the names that should be used in the downloaded file
+
+### Patch Changes
+
+- 94dee5e: Changed: Spinner updated with dark mode
+
+## 3.1.0
+
+### Minor Changes
+
+- cc6960a: fix specification of svelte-select as a dependency
+
+## 3.0.0
+
+### Major Changes
+
+- d9c32c7: CHANGED - the select component is now based on the `svelte-select` library
+- d9c32c7: ADDED - a new `Tooltip` component allows the display of help tooltips when an icon is hovered over
+- d9c32c7: ADDED - an `InputWrapper` provides consisten chrome (such as help text or error messages) around input elements
+
+### Minor Changes
+
+- 71bb3e8: ADDED - `title` property to `Button` component so that quick accessible tooltips can be added.
+- 5d7a227: CHANGED - provide a default light theme for tabs
+
+## 2.0.0
+
+### Major Changes
+
+- 3c90996: CHANGED - switch from using `@rgossiaux/svelte-heroicons` to using `@steeze-ui/heroicons` as an icon library
+- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `rawIcon` prop)
+
+### Minor Changes
+
+- 1713d79: ADDED - added `PlacardButton` component
+
 ## 1.0.0
 
 ### Major Changes

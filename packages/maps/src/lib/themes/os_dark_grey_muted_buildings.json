@@ -5,7 +5,8 @@
 	"sources": {
 		"esri": {
 			"type": "vector",
-			"url": "https://api.os.uk/maps/vector/v1/vts"
+			"url": "https://api.os.uk/maps/vector/v1/vts",
+			"attribution": "Contains OS data © Crown copyright and database rights 2023"
 		}
 	},
 	"layers": [
