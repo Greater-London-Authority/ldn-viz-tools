@@ -1,14 +1,15 @@
-<script>
+<script lang="ts">
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Select from './Select.svelte';
 
-	let value = 1;
+	type Item = { label: string; value: number };
+	let value: Item;
 
-	const options = [
-		{ id: 0, label: 'One', value: 1 },
-		{ id: 1, label: 'Two', value: 2 },
-		{ id: 2, label: 'Three', value: 3 }
+	const items: Item[] = [
+		{ label: 'One', value: 1 },
+		{ label: 'Two', value: 2 },
+		{ label: 'Three', value: 3 }
 	];
 </script>
 
@@ -18,12 +19,122 @@
 	<Select {...args} />
 </Template>
 
-<Story name="Default" args={{ options: options }} />
+<Story name="Default" args={{ items: items }} />
 
-<Story name="With Label" args={{ options: options, label: "I'm the label" }} />
+<Story name="Basic">
+	<div class="w-96">
+		<Select {items} id="labelled-input" />
+	</div>
+</Story>
 
-<Story name="Disabled" args={{ options: options, label: "I'm the label", disabled: true }} />
+<Story name="With Label">
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" />
+	</div>
+</Story>
 
-<Story name="With initial value">
-	<Select {options} bind:value />
+<Story name="Optional">
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" optional />
+	</div>
+</Story>
+
+<Story name="Custom Placeholder">
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" placeholder="Custom Placeholder text" />
+	</div>
+</Story>
+
+<Story name="With Context Hint">
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+		/>
+	</div>
+</Story>
+
+<Story name="Description">
+	<div class="w-96">
+		<Select {items} label="Label" id="labelled-input" description="descriptive text" />
+	</div>
+</Story>
+
+<Story name="Description alignment">
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			descriptionAlignment="right"
+			optional
+		/>
+	</div>
+</Story>
+
+<Story name="Multiple selects">
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			optional
+			multiple
+			bind:value
+			on:change={() => console.log('Selection changed!')}
+		/>
+
+		<span class="mt-4 text-core-grey-700 dark:text-core-grey-200 block">
+			Value is: {JSON.stringify(value)}
+		</span>
+	</div>
+</Story>
+
+<Story name="Error">
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			optional
+			error
+			errorMessage="something has gone wrong here"
+		/>
+	</div>
+</Story>
+
+<Story name="Disabled">
+	<div class="w-96">
+		<Select
+			{items}
+			label="Label"
+			id="labelled-input"
+			placeholder="Placeholder text"
+			hint
+			hintText="Tooltip text"
+			hintTooltipContent="A brief contextual help message"
+			description="descriptive text"
+			disabled
+			optional
+		/>
+	</div>
 </Story>

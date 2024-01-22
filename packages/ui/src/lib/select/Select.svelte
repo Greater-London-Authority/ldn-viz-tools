@@ -1,93 +1,145 @@
 <script lang="ts">
-	import {
-		Listbox,
-		ListboxButton,
-		ListboxLabel,
-		ListboxOption,
-		ListboxOptions
-	} from '@rgossiaux/svelte-headlessui';
+	import Select from 'svelte-select';
+	import InputWrapper from '../input/InputWrapper.svelte';
 
-	import { Check } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	export let items: { [key: string]: any }[];
 
-	import { createEventDispatcher } from 'svelte';
-	import { classNames } from '../utils/classNames';
-
-	export let options: { id: number | string; value: any; label: string }[];
-	export let value: string | number | string[] | null | undefined;
-	export let label: string | undefined = undefined;
+	export let id: string;
+	export let name = '';
+	export let placeholder = 'Select an option';
 	export let disabled = false;
+	export let error = false;
 
-	const dispatch = createEventDispatcher();
+	export let labelField = 'label';
+
+	// svelte-select options
+	export let container: any = undefined;
+	export let input: any = undefined;
+	export let multiple = false;
+	export let multiFullItemClearable = false;
+	export let focused = false;
+	export let value: any = null;
+	export let filterText = '';
+	export let placeholderAlwaysShow = false;
+	export let itemFilter = (label: string, filterText: string, option: any) =>
+		`${label}`.toLowerCase().includes(filterText.toLowerCase());
+	export let groupBy: any = undefined;
+	export let groupFilter = (groups: any) => groups;
+	export let groupHeaderSelectable = false;
+	export let itemId = 'value';
+	export let loadOptions: any = undefined;
+	export let containerStyles = '';
+	export let hasError = error;
+	export let filterSelectedItems = true;
+	export let required = false;
+	export let closeListOnChange = true;
+
+	export let createGroupHeaderItem: any = undefined; // ?
+	export const getFilteredItems: any = undefined; // ?
+
+	export let searchable = true;
+	export let inputStyles = '';
+	export let clearable = false;
+	export let loading = false;
+	export let listOpen = false;
+
+	export let debounce: any = undefined;
+
+	export let debounceWait = 300;
+	export let hideEmptyState = false;
+	export let inputAttributes = {};
+	export let listAutoWidth = true;
+	export let showChevron = true;
+	export let listOffset = 5;
+	export let hoverItemIndex = 0;
+	export let floatingConfig = {};
 </script>
 
-<Listbox bind:value on:change={(ev) => dispatch('change', ev.detail)} {disabled} class="relative">
-	{#if label !== undefined}
-		<ListboxLabel
-			class={({ disabled }) =>
-				classNames(
-					disabled
-						? 'text-gray-700 dark:text-core-grey-400'
-						: 'text-gray-700 dark:text-core-grey-50',
-					'block text-sm font-medium'
-				)}
-			>{label}
-		</ListboxLabel>
-	{/if}
-	<div class="relative mt-1">
-		<ListboxButton
-			class={({ disabled }) =>
-				classNames(
-					disabled
-						? 'bg-gray-200 dark:bg-core-grey-600 dark:text-core-grey-400'
-						: 'bg-white dark:bg-core-grey-600 dark:text-core-grey-50',
-					'relative w-full cursor-default border border-gray-300 dark:border-gray-700 py-2 pl-3 pr-10 text-left shadow-sm focus:border-core-blue-500 focus:outline-none focus:ring-1 focus:ring-core-blue-500 sm:text-sm'
-				)}
-		>
-			<span class="block truncate">
-				{!(value === undefined || value === null) && !disabled && options.length > 0
-					? options.filter((d) => d.id === value)[0]?.label
-					: 'Select option'}
-			</span>
-			<span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-				<!-- ChevronUpDownIcon -->
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 20 20"
-					fill="currentColor"
-					aria-hidden="true"
-					class="w-5 h-5 text-gray-400"
-					><path
-						fill-rule="evenodd"
-						d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-						clip-rule="evenodd"
-					/></svg
-				>
-			</span>
-		</ListboxButton>
+<InputWrapper {...$$restProps} {id} {disabled} {error}>
+	<div>
+		<Select
+			{name}
+			label={labelField}
+			class="form-select"
+			{items}
+			{container}
+			{input}
+			{multiple}
+			{multiFullItemClearable}
+			{focused}
+			bind:value
+			{filterText}
+			{placeholderAlwaysShow}
+			{itemFilter}
+			{groupBy}
+			{groupFilter}
+			{groupHeaderSelectable}
+			{itemId}
+			{loadOptions}
+			{containerStyles}
+			{hasError}
+			{filterSelectedItems}
+			{required}
+			{closeListOnChange}
+			{createGroupHeaderItem}
+			{getFilteredItems}
+			{searchable}
+			{inputStyles}
+			{clearable}
+			{loading}
+			{listOpen}
+			{debounce}
+			{debounceWait}
+			{hideEmptyState}
+			{inputAttributes}
+			{listAutoWidth}
+			{showChevron}
+			{listOffset}
+			{hoverItemIndex}
+			{floatingConfig}
+			{disabled}
+			{placeholder}
+			on:change
+			on:input
+			on:focus
+			on:blur
+			on:clear
+			on:loaded
+			on:error
+			on:filter
+			on:hoverItem
+		/>
 	</div>
-	<ListboxOptions
-		class="absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white dark:bg-core-grey-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-	>
-		{#each options as option (option.id)}
-			<ListboxOption
-				value={option.id}
-				class={({ active }) =>
-					classNames(
-						active ? 'text-white bg-core-blue-600' : 'text-gray-900 dark:text-core-grey-50',
-						'relative cursor-default select-none py-2 pl-3 pr-9'
-					)}
-				let:selected
-			>
-				{#if selected}
-					<span class={'absolute inset-y-0 right-0 flex items-center pr-4'}>
-						<Icon src={Check} theme="solid" class="h-5 w-5" aria-hidden="true" />
-					</span>
-				{/if}
-				<span class="block truncate">
-					{option.label}
-				</span>
-			</ListboxOption>
-		{/each}
-	</ListboxOptions>
-</Listbox>
+</InputWrapper>
+
+{#if !!true}
+	<style>
+		:root {
+			--bg-color-dark: #343434;
+		}
+		.form-select,
+		.dark .form-select {
+			--border-radius: 0px;
+			--placeholder-color: #aeb1b4;
+			--item-hover-bg: #3787d2;
+			--item-is-active-bg: #2566a2;
+			--item-hover-color: #ffffff;
+			--border-focused: #3787d2 1px solid;
+			--list-border-radius: 0px;
+			--item-first-border-radius: 0px;
+		}
+
+		.dark .form-select {
+			--border-radius: 0px;
+			--background: var(--bg-color-dark);
+			--border: 1px solid var(--bg-color-dark);
+			--border-hover: 1px solid #515a5e;
+			--error-background: var(--bg-color-dark);
+			--disabled-background: #868b8e;
+			--disabled-border-color: var(--bg-color-dark);
+			--disabled-placeholder-color: #aeb1b4;
+			--list-background: var(--bg-color-dark);
+			--multi-item-color: var(--bg-color-dark);
+		}
+	</style>
+{/if}
