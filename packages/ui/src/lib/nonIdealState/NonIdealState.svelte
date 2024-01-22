@@ -14,12 +14,12 @@
 		<Spinner class="w-12" />
 	{:else}
 		<slot name="icon">
-		<Icon
-			src={Exclamation}
-			theme="solid"
-			class="w-12 h-12 stroke-core-grey-200"
-			aria-hidden="true"
-		/>
+			<Icon
+				src={Exclamation}
+				theme="solid"
+				class="w-12 h-12 stroke-core-grey-200"
+				aria-hidden="true"
+			/>
 		</slot>
 	{/if}
 
