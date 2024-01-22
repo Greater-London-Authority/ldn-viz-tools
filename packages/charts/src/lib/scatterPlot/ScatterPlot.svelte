@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Container from '../chartContainer/ChartContainer.svelte';
+	import { LayerCake, Svg } from 'layercake';
+	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import AxisX from '../shared/AxisX.svelte';
 	import AxisY from '../shared/AxisY.svelte';
 	import Scatter from '../shared/Scatter.svelte';
@@ -19,27 +20,38 @@
 	export let xAxis: { [key: string]: any } = { display: true };
 	export let yAxis: { [key: string]: any } = { display: true };
 	export let markOptions: { [key: string]: any } = {};
+
+	// all other layercake props accepted with ...$$restProps rtm
+	let padding = { left: 50, bottom: 0 };
 </script>
 
-<Container
-	{data}
-	{x}
-	{y}
-	{xDomain}
-	{yDomain}
-	{yScale}
-	{title}
-	{subTitle}
-	{alt}
-	{footer}
-	{exportBtns}
-	{...$$restProps}
->
-	{#if xAxis.display != false}
-		<AxisX {...xAxis} />
-	{/if}
-	{#if yAxis.display != false}
-		<AxisY {...yAxis} />
-	{/if}
-	<Scatter {...markOptions} />
-</Container>
+<ChartContainer {data} {title} {subTitle} {alt} {footer} {exportBtns} {...$$restProps}>
+	<LayerCake
+		{data}
+		{x}
+		{y}
+		{yScale}
+		{xDomain}
+		{yDomain}
+		{padding}
+		{...$$restProps}
+		let:aspectRatio
+		let:containerHeight
+		let:containerWidth
+		let:height
+		let:width
+		let:element
+	>
+		<Svg>
+			<!--	<slot {aspectRatio} {containerHeight} {containerWidth} {height} {width} {element} />  -->
+
+			{#if xAxis.display != false}
+				<AxisX {...xAxis} />
+			{/if}
+			{#if yAxis.display != false}
+				<AxisY {...yAxis} />
+			{/if}
+			<Scatter {...markOptions} />
+		</Svg>
+	</LayerCake>
+</ChartContainer>

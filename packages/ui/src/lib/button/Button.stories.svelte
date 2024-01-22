@@ -1,75 +1,116 @@
-<script>
-	import { ArrowCircleDownIcon } from '@rgossiaux/svelte-heroicons/solid';
-
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
+<script context="module">
 	import Button from './Button.svelte';
+
+	export const meta = {
+		title: 'Ui/Button',
+		component: Button,
+		argTypes: {
+			emphasis: {
+				options: ['primary', 'secondary'],
+				control: { type: 'radio' }
+			},
+			variant: {
+				options: ['brand', 'solid', 'outline', 'text'], //square
+				control: { type: 'select' }
+			},
+			condition: {
+				options: ['default', 'success', 'error', 'warning'],
+				control: { type: 'select' }
+			},
+			size: {
+				options: ['sm', 'md', 'lg'],
+				control: { type: 'radio' }
+			},
+			type: {
+				options: ['button', 'submit'],
+				control: { type: 'radio' }
+			}
+		},
+		args: {
+			title: 'storybook button'
+		}
+	};
 </script>
 
-<Meta title="Ui/Button" component={Button} />
+<script lang="ts">
+	import { ArrowDownCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+
+	let count = 0;
+	const handleClick = () => {
+		count += 1;
+	};
+</script>
 
 <Template let:args>
-	<Button {...args}>I'm a button from UI!</Button>
+	<Button {...args} on:click on:click={handleClick}>
+		You clicked: {count}
+	</Button>
 </Template>
 
-<Story name="Default" />
+<Story
+	name="Default"
+	source
+	parameters={{
+		options: {
+			showPanel: true
+		}
+	}}
+/>
 
-<Story name="Primary">
-	<Button variant="primary">Primary Variant</Button>
-	<Button variant="primary" disabled>Primary Variant (disabled)</Button>
+<Story name="Emphasis">
+	<div class="flex items-end space-x-2">
+		<Button>Primary</Button>
+		<Button emphasis="secondary">Secondary</Button>
+	</div>
 </Story>
 
-<Story name="Secondary">
-	<Button variant="secondary">Secondary Variant</Button>
-	<Button variant="secondary" disabled>Secondary Variant (disabled)</Button>
-</Story>
+<Story name="Brand" source args={{ variant: 'brand' }} />
 
-<Story name="Ghost">
-	<Button variant="ghost">Ghost Variant</Button>
-	<Button variant="ghost" disabled>Ghost Variant (disabled)</Button>
+<Story name="Solid" source args={{ variant: 'solid' }} />
+
+<Story name="Outline" source args={{ variant: 'outline' }} />
+
+<Story name="Text" source args={{ variant: 'text' }} />
+
+<Story name="Square" args={{ variant: 'square' }}>
+	<Button variant="square" title="Down" size="sm">
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" title="Down" size="md">
+		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+	</Button>
+	<Button variant="square" title="Down" size="lg">
+		<Icon src={ArrowDownCircle} theme="solid" class="w-8 h-8" aria-hidden="true" />
+		Down
+	</Button>
 </Story>
 
 <Story name="Disabled">
-	<Button disabled>Default Variant</Button>
-	<Button variant="primary" disabled>Primary Variant</Button>
-	<Button variant="secondary" disabled>Secondary Variant</Button>
-	<Button variant="ghost" disabled>Ghost Variant</Button>
+	<Button disabled>Cant touch this!</Button>
 </Story>
 
 <Story name="Sizes">
 	<div class="flex items-end space-x-2">
-		<Button size="xs">xs</Button>
 		<Button size="sm">sm</Button>
-		<Button size="base">base</Button>
+		<Button size="md">md</Button>
 		<Button size="lg">lg</Button>
-		<Button size="xl">xl</Button>
-	</div>
-</Story>
-
-<Story name="With Icon">
-	<div class="flex space-y-2 flex-col w-40">
-		<Button
-			>Icon via slot
-			<ArrowCircleDownIcon class="w-6 h-6 ml-2" aria-hidden="true" />
-		</Button>
-		<Button>
-			<ArrowCircleDownIcon class="w-6 h-6 mr-2" aria-hidden="true" />
-			Icon via slot
-		</Button>
-		<Button class="flex-col items-center">
-			Icon via slot
-			<ArrowCircleDownIcon class="w-6 h-6" aria-hidden="true" />
-		</Button>
 	</div>
 </Story>
 
 <Story name="With class prop">
-	<Button class="text-core-darkPink-500 border-core-pink-700 bg-yellow-500"
-		>Custom classes applied</Button
-	>
+	<Button class="text-core-darkPink-500 border-core-pink-700 bg-yellow-500">
+		Custom classes applied
+	</Button>
 </Story>
 
-<Story name="Full width">
+<Story
+	name="Full width"
+	parameters={{
+		layout: 'fullscreen'
+	}}
+>
 	<Button class="w-full">Custom classes applied</Button>
 </Story>
 

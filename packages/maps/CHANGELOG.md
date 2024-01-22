@@ -1,5 +1,22 @@
 # ldn-viz-tools-maps
 
+## 1.1.0
+
+### Minor Changes
+
+- 40031d8: ADDED - added `MapControlFullscreen` component
+  ADDED - added `MapControlGroup` component
+  ADDED - added `MapControlPan` component
+  ADDED - added `MapControlRefresh` component
+  ADDED - added `MapControlZoom` component
+  ADDED - added `animations` file for sharing MapLibre animation options
+
+## 1.0.0
+
+### Major Changes
+
+- 0651ebb: CHANGED - update from Svelte 3 to Svelte 4 and update Storybook
+
 ## 0.1.1
 
 ### Patch Changes

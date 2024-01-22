@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Button from '../button/Button.svelte';
 	import Checkbox from './Checkbox.svelte';
 
 	export let options: { id: string; label: string; disabled?: boolean; color?: string }[] = [];
@@ -7,59 +6,63 @@
 	export let buttonsHidden = false;
 
 	export let selectedOptions: string[] = [];
+	$: selectedOptions = options.map((o) => o.id).filter((id) => selectionState[id]);
+
 	let selectionState = Object.fromEntries(
 		options.map((o) => [o.id, selectedOptions.includes(o.id)])
 	);
 
-	const numAvailableOptions = options.filter((o) => !o.disabled).length;
-	let numAvailableOptionsSelected: number;
+	let allCheckboxesCheckedOrDisabled;
+	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
+		o.disabled ? true : selectionState[o.id]
+	);
+
+	let noCheckboxesChecked;
+	$: noCheckboxesChecked = !Object.values(selectionState).some((d) => d);
 
 	const selectAll = () => {
 		selectionState = Object.fromEntries(
-			options.map((o, i) => [o.id, o.disabled ? selectionState[o.id] : true])
+			options.map((o) => [o.id, o.disabled ? selectionState[o.id] : true])
 		);
 	};
 
 	const clearAll = () => {
 		selectionState = Object.fromEntries(
-			options.map((o, i) => [o.id, o.disabled ? selectionState[o.id] : false])
+			options.map((o) => [o.id, o.disabled ? selectionState[o.id] : false])
 		);
 	};
 
-	$: {
-		selectedOptions = options.map((o) => o.id).filter((id) => selectionState[id]);
-		numAvailableOptionsSelected = options.filter(
-			(o, i) => !o.disabled && selectionState[o.id]
-		).length;
-	}
+	const toggleAll = () => {
+		console.log('TOGGLING!');
+
+		if (!allCheckboxesCheckedOrDisabled) {
+			selectAll();
+		} else {
+			clearAll();
+		}
+	};
 </script>
 
 <div>
 	{#if !buttonsHidden}
-		<Button
-			size="sm"
-			variant="ghost"
-			on:click={selectAll}
-			disabled={numAvailableOptionsSelected === numAvailableOptions}
-			>Select all
-		</Button>
-
-		<Button
-			size="sm" 
-			variant="ghost" 
-			on:click={clearAll}
-			disabled={numAvailableOptionsSelected === 0}
-			>Clear all</Button
-		>
+		<Checkbox
+			label="Select all"
+			color="#3787D2"
+			checked={allCheckboxesCheckedOrDisabled}
+			indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+			on:change={toggleAll}
+		/>
 	{/if}
 
-	{#each options as option}
-		<Checkbox
-			id={option.id}
-			label={option.label}
-			color={option.color}
-			disabled={option.disabled}
-			bind:checked={selectionState[option.id]}
-		/>
-	{/each}
+	<div class={buttonsHidden ? '' : 'pl-[28px]'}>
+		{#each options as option}
+			<Checkbox
+				id={option.id}
+				label={option.label}
+				color={option.color}
+				disabled={option.disabled}
+				bind:checked={selectionState[option.id]}
+			/>
+		{/each}
+	</div>
 </div>

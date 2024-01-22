@@ -1,5 +1,23 @@
 # @ldn-viz/themes
 
+## 1.0.0
+
+### Major Changes
+
+- 0651ebb: CHANGED - update from Svelte 3 to Svelte 4 and update Storybook
+
+## 0.3.0
+
+### Minor Changes
+
+- 79f514e: Includes tailwind forms and mini-svg-data-uri as named dependencies in package json
+
+## 0.2.0
+
+### Minor Changes
+
+- 86513d1: CHANGED - apply Roboto typeface in theme
+
 ## 0.1.0
 
 ### Minor Changes

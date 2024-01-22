@@ -1,6 +1,13 @@
 <script lang="ts">
+	import html2canvas from 'html2canvas';
 	import Button from '../button/Button.svelte';
-	export let svgNode: SVGElement;
+
+	export let svgNode: SVGElement | undefined;
+
+	export let htmlNode: HTMLElement | undefined;
+	export let idToPad = '';
+	export let padding = '30px';
+
 	export let scaleFactor = 2;
 	export let filename: string | undefined = undefined;
 	export let disabled = false;
@@ -16,6 +23,7 @@
 		link.setAttribute('target', '_blank');
 		link.setAttribute('download', filename);
 		link.dispatchEvent(new MouseEvent('click'));
+		link.remove();
 	};
 
 	const createHTMLImageFromURL = async (url: string) => {
@@ -30,7 +38,11 @@
 		return img;
 	};
 
-	const download = async () => {
+	// See https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
+	const bytesToBase64 = (bytes) => window.btoa(String.fromCodePoint(...bytes));
+	const stringToBase64 = (str) => bytesToBase64(new TextEncoder().encode(str));
+
+	const downloadFromSVG = async () => {
 		// This hack is necessary because .drawImage() doesn't work
 		// unless the SVG that is being copied has an explicitly-set size
 		const svgNodeClone = svgNode.cloneNode(true) as SVGElement;
@@ -38,7 +50,7 @@
 		svgNodeClone.setAttribute('height', svgNode.clientHeight.toString());
 
 		const svgString = new XMLSerializer().serializeToString(svgNodeClone);
-		const svgURL = 'data:image/svg+xml;base64,' + window.btoa(svgString);
+		const svgURL = 'data:image/svg+xml;base64,' + stringToBase64(svgString);
 		// the non base-64 encoded URL would be: "data:image/svg+xml;utf8," + svgString;
 
 		// an alternative is:
@@ -61,6 +73,55 @@
 			canvas.convertToBlob().then((blob) => {
 				downloadFromURL(URL.createObjectURL(blob));
 			});
+		}
+	};
+
+	///
+
+	const preserveDrawingBuffer = () => {
+		function wrapGetContext(ContextClass: any) {
+			const isWebGL = /webgl/i;
+
+			ContextClass.prototype.getContext = (function (origFn) {
+				return function (type: string, attributes: any) {
+					if (isWebGL.test(type)) {
+						attributes = Object.assign({}, attributes || {}, { preserveDrawingBuffer: true });
+					}
+					return origFn.call(this, type, attributes);
+				};
+			})(ContextClass.prototype.getContext);
+		}
+
+		if (typeof HTMLCanvasElement !== 'undefined') {
+			wrapGetContext(HTMLCanvasElement);
+		}
+		if (typeof OffscreenCanvas !== 'undefined') {
+			wrapGetContext(OffscreenCanvas);
+		}
+	};
+
+	const downloadFromHTML = async (el: HTMLElement) => {
+		preserveDrawingBuffer();
+
+		const canvas = await html2canvas(el, {
+			onclone: (clone: Document) => {
+				if (idToPad) {
+					clone.getElementById(idToPad)!.style.padding = padding;
+				}
+			},
+			windowWidth: 1500
+		});
+		const image = canvas.toDataURL('image/png', 1.0);
+		downloadFromURL(image);
+	};
+
+	const download = async () => {
+		if (svgNode) {
+			downloadFromSVG();
+		} else if (htmlNode) {
+			downloadFromHTML(htmlNode);
+		} else {
+			console.log('CMust supply either an svgNode or htmlNode to be converted to image');
 		}
 	};
 </script>

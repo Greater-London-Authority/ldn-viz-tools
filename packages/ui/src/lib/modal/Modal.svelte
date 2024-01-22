@@ -5,12 +5,46 @@
 		DialogOverlay,
 		DialogTitle
 	} from '@rgossiaux/svelte-headlessui';
+	import { classNames } from '../utils/classNames';
 
 	export let isOpen = false;
 	export let title: string;
 	export let description: string;
+	export let width:
+		| 'xs'
+		| 'sm'
+		| 'md'
+		| 'lg'
+		| 'xl'
+		| '2xl'
+		| '3xl'
+		| '4xl'
+		| '5xl'
+		| '6xl'
+		| '7xl'
+		| 'full' = 'md';
 
 	const hasChildren = Object.keys($$slots).length > 0;
+
+	const widthClasses = {
+		xs: 'max-w-xs',
+		sm: 'max-w-sm',
+		md: 'max-w-md',
+		lg: 'max-w-lg',
+		xl: 'max-w-xl',
+		'2xl': 'max-w-2xl',
+		'3xl': 'max-w-3xl',
+		'4xl': 'max-w-4xl',
+		'5xl': 'max-w-5xl',
+		'6xl': 'max-w-6xl',
+		'7xl': 'max-w-7xl',
+		full: 'max-w-full'
+	};
+
+	$: modalClass = classNames(
+		'inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl space-y-2 pb-4 pointer-events-auto',
+		widthClasses[width]
+	);
 </script>
 
 <Dialog open={isOpen} on:close={() => (isOpen = false)} class="relative z-10 overflow-y-auto">
@@ -18,9 +52,7 @@
 
 	<!--Full-screen container to center the panel -->
 	<div class="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
-		<div
-			class="inline-block w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl space-y-2 pb-4 pointer-events-auto"
-		>
+		<div class={modalClass}>
 			<div class="bg-core-grey-600 text-white p-2 relative">
 				<DialogTitle>{title}</DialogTitle>
 				<button
