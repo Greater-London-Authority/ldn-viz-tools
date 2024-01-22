@@ -8,7 +8,7 @@
 	const map = getContext('map');
 
 	const newHandler = (handle) => {
-		return (e) => {
+		return (event) => {
 			if (!$map) {
 				return;
 			}

@@ -21,7 +21,11 @@
 
 <Story name="Color">
 	<div class="text-core-grey-800">
-		<Spinner class="w-40" circleColorClass="stroke-core-blue-200" arcColorClass="stroke-core-glaPink-600" />
+		<Spinner
+			class="w-40"
+			circleColorClass="stroke-core-blue-200"
+			arcColorClass="stroke-core-glaPink-600"
+		/>
 	</div>
 </Story>
 
