@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Exclamation } from '@steeze-ui/heroicons';
+	import { ExclamationTriangle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import Spinner from '../spinners/Spinner.svelte';
@@ -15,7 +15,7 @@
 	{:else}
 		<slot name="icon">
 			<Icon
-				src={Exclamation}
+				src={ExclamationTriangle}
 				theme="solid"
 				class="w-12 h-12 stroke-core-grey-200"
 				aria-hidden="true"
