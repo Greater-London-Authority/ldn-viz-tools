@@ -1,12 +1,9 @@
 <script>
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import {
-		ChartBarIcon,
-		FilterIcon,
-		LocationMarkerIcon,
-		MapIcon
-	} from '@rgossiaux/svelte-heroicons/solid';
+	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import TabbedSidebar from './TabbedSidebar.svelte';
 	import TabbedSidebarTabLabel from './TabbedSidebarTabLabel.svelte';
 	import TabbedSidebarTabList from './TabbedSidebarTabList.svelte';
@@ -15,10 +12,10 @@
 	let selectedValue = 'filters';
 
 	let tabs = [
-		{ id: 'markers', label: 'Data Markers', icon: LocationMarkerIcon },
-		{ id: 'filters', label: 'Filters', icon: FilterIcon },
-		{ id: 'analysis', label: 'Analysis', icon: ChartBarIcon },
-		{ id: 'layers', label: 'Layers', icon: MapIcon }
+		{ id: 'markers', label: 'Data Markers', icon: MapPin },
+		{ id: 'filters', label: 'Filters', icon: Funnel },
+		{ id: 'analysis', label: 'Analysis', icon: ChartBar },
+		{ id: 'layers', label: 'Layers', icon: Map }
 	];
 
 	let collapsed = true;
@@ -80,17 +77,17 @@
 	<TabbedSidebar bind:selectedValue>
 		<TabbedSidebarTabList>
 			<TabbedSidebarTabLabel tabId="markers">
-				<LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Markers
 			</TabbedSidebarTabLabel>
 
 			<TabbedSidebarTabLabel tabId="filters">
-				<FilterIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Filters
 			</TabbedSidebarTabLabel>
 
 			<TabbedSidebarTabLabel tabId="analysis">
-				<ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Analysis
 			</TabbedSidebarTabLabel>
 
@@ -148,17 +145,17 @@
 	<TabbedSidebar {collapsed}>
 		<TabbedSidebarTabList>
 			<TabbedSidebarTabLabel tabId="markers">
-				<LocationMarkerIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Markers
 			</TabbedSidebarTabLabel>
 
 			<TabbedSidebarTabLabel tabId="filters">
-				<FilterIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Filters
 			</TabbedSidebarTabLabel>
 
 			<TabbedSidebarTabLabel tabId="analysis">
-				<ChartBarIcon class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Analysis
 			</TabbedSidebarTabLabel>
 

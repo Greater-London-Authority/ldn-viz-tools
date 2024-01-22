@@ -5,15 +5,18 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
     "format": "prettier --write .",
     "publish-packages": "turbo run build && changeset version && changeset publish"
   },
   "devDependencies": {
-    "eslint": "^8.0.0",
-    "eslint-config-custom": "*",
-    "prettier": "^2.7.1",
-    "prettier-plugin-svelte": "^2.7.0",
-    "turbo": "latest"
+    "@ldn-viz/eslint-config-custom": "*",
+    "eslint": "^8.56.0",
+    "eslint-plugin-turbo": "^1.11.3",
+    "prettier": "^3.2.3",
+    "prettier-plugin-svelte": "^3.1.2",
+    "turbo": "^1.11.3"
   },
   "packageManager": "npm@9.5.0",
   "workspaces": [
@@ -21,15 +24,12 @@
     "packages/*"
   ],
   "dependencies": {
-    "@changesets/cli": "^2.26.1"
+    "@changesets/cli": "^2.27.1",
+    "html2canvas": "^1.4.1"
   },
   "overrides": {
-		"@rgossiaux/svelte-headlessui": {
-			"svelte": "4.0.0"
-		},
-		"@rgossiaux/svelte-heroicons": {
-			"svelte": "4.0.0"
-		}
-	}
+    "@rgossiaux/svelte-headlessui": {
+      "svelte": "4.2.8"
+    }
+  }
 }
-
