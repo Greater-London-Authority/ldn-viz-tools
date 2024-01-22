@@ -2,7 +2,9 @@
 	// SidebarToggle is the standard sidebar hood containing an open close
 	// toggle.
 
-	import Menu from '@rgossiaux/svelte-heroicons/outline/Menu';
+	import { Bars3 } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import Button from '../button/Button.svelte';
 	import { sidebarOpen } from './Sidebar.svelte';
 
@@ -13,7 +15,13 @@
 
 <div class="pointer-events-auto gla-sidebar-toggle">
 	<Button variant="square" emphasis="secondary">
-		<Menu class="w-full h-full p-2 stroke-1" aria-hidden="true" on:click={toggleOpen} />
+		<Icon
+			src={Bars3}
+			theme="solid"
+			class="w-full h-full p-2 stroke-1"
+			aria-hidden="true"
+			on:click={toggleOpen}
+		/>
 	</Button>
 </div>
 
