@@ -59,9 +59,8 @@
 			</p>
 
 			<p>
-				You can change the footer using the named slot <code>footer</code>. You should use the <code
-					>{'<footer>'}</code
-				> tag and you'll need to style it yourself:
+				You can change the footer using the named slot <code>footer</code>. You should use the
+				<code>{'<footer>'}</code> tag and you'll need to style it yourself:
 			</p>
 
 			<pre><code
@@ -105,8 +104,8 @@
 
 			<SidebarSection title="$sidebarLayout">
 				<p>
-					<code>$sidebarLayout</code> is an object that contains information about how the sidebar is laid
-					out with a few utility functions to ensure readable user code.
+					<code>$sidebarLayout</code> is an object that contains information about how the sidebar is
+					laid out with a few utility functions to ensure readable user code.
 				</p>
 
 				<p>
@@ -162,7 +161,9 @@
 	<Sidebar>
 		<SidebarContent>
 			<SidebarHeader title="Sidebar section">
-							<svelte:fragment slot="info">Here's some more info that goes with the header...</svelte:fragment>
+				<svelte:fragment slot="info"
+					>Here's some more info that goes with the header...</svelte:fragment
+				>
 				<p>
 					Sidebar sections are <code>{'<section>'}</code> elements for splitting up sidebar content in
 					to meaningful chunks that crawlers, browsers, and accessibility can navigate meaningfully.
@@ -170,7 +171,7 @@
 			</SidebarHeader>
 
 			<SidebarSection title="Section title">
-							<svelte:fragment slot="info">Here's some more info about this section...</svelte:fragment>
+				<svelte:fragment slot="info">Here's some more info about this section...</svelte:fragment>
 				<p>
 					A title is provided using the <i>title</i> property which may contain standard HTML tags, i.e.
 					not Svelte components. Section titles are optional.

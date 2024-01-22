@@ -6,19 +6,17 @@
 	type Mode = 'vertical' | 'horizontal';
 	type Alignment = 'right' | 'bottom';
 	type Layout = {
-		mode: Mode,
-		alignment: Alignment,
-		hoodWidth: number,
-		hoodHeight: number,
-		contentWidth: number,
-		contentHeight: number,
-		isVertical: () => boolean,
-		isHorizontal: () => boolean,
-		isRight: () => boolean,
-		isBottom: () => boolean,
-
-	}
-
+		mode: Mode;
+		alignment: Alignment;
+		hoodWidth: number;
+		hoodHeight: number;
+		contentWidth: number;
+		contentHeight: number;
+		isVertical: () => boolean;
+		isHorizontal: () => boolean;
+		isRight: () => boolean;
+		isBottom: () => boolean;
+	};
 
 	const newSidebarLayout = () => {
 		const layout = {
@@ -32,7 +30,7 @@
 			isVertical: () => false,
 			isHorizontal: () => false,
 			isRight: () => false,
-			isBottom: () => false,
+			isBottom: () => false
 		};
 
 		layout.isVertical = () => layout.mode === 'vertical';
