@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { ExclamationIcon } from '@rgossiaux/svelte-heroicons/outline';
+	import { Exclamation } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import Spinner from '../spinners/Spinner.svelte';
 
 	export let spinner = false;
@@ -12,7 +14,12 @@
 		<Spinner class="w-12" />
 	{:else}
 		<slot name="icon">
-			<ExclamationIcon class="w-12 h-12 stroke-core-grey-200" aria-hidden="true" />
+		<Icon
+			src={Exclamation}
+			theme="solid"
+			class="w-12 h-12 stroke-core-grey-200"
+			aria-hidden="true"
+		/>
 		</slot>
 	{/if}
 
