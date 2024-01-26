@@ -1,6 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 
+	export let classes = '';
+
 	const dev = import.meta.env.DEV;
 	let noscript = true;
 
@@ -9,7 +11,7 @@
 	});
 </script>
 
-<div class="bg-core-grey-800 w-[100dvw] h-[100dvh] overflow-hidden flex flex-col">
+<div class="bg-core-grey-800 w-[100dvw] h-[100dvh] overflow-hidden flex flex-col {classes}">
 	<slot name="header" />
 
 	<main class="grow overflow-hidden flex flex-col">
