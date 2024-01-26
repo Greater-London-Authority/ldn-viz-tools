@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
+	const dev = import.meta.env.DEV;
 	let noscript = true;
 
 	onMount(() => {
@@ -8,17 +9,30 @@
 	});
 </script>
 
-<main class="bg-core-grey-800 w-[100dvw] h-[100dvh] overflow-hidden flex flex-col">
-	{#if noscript}
-		<section
-			class="bg-core-grey-800 w-full h-full flex justify-center items-center text-center ldn-viz-map-app-noscript-animation"
-		>
-			<p>Please enable JavaScript to explore this map.</p>
-		</section>
-	{:else}
-		<slot />
-	{/if}
-</main>
+<div class="bg-core-grey-800 w-[100dvw] h-[100dvh] overflow-hidden flex flex-col">
+	<slot name="header" />
+
+	<main class="grow overflow-hidden flex flex-col">
+		{#if noscript}
+			<section
+				class="bg-core-grey-800 w-full h-full flex justify-center items-center text-center ldn-viz-map-app-noscript-animation"
+			>
+				{#if dev}
+					<p>
+						<b>Dev mode:</b> Please wait as the initial load is the longest. Reloading may occur due
+						to dependency optimisation. Please ensure JavaScript is enabled.
+					</p>
+				{:else}
+					<p>Please enable JavaScript to explore this map.</p>
+				{/if}
+			</section>
+		{:else}
+			<slot />
+		{/if}
+	</main>
+
+	<slot name="footer" />
+</div>
 
 <style>
 	.ldn-viz-map-app-noscript-animation {
