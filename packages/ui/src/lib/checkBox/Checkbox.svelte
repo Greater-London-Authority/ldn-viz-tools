@@ -4,7 +4,8 @@
 		checked: boolean;
 		indeterminate: boolean;
 		label: string;
-		id: string;
+		id?: string;
+		name: string;
 		disabled: boolean;
 	}
 </script>
@@ -15,14 +16,16 @@
 	export let checked: CheckboxProps['checked'] = false;
 	export let indeterminate: CheckboxProps['indeterminate'] = false;
 	export let label: CheckboxProps['label'];
-	export let id: CheckboxProps['id'];
+	export let id: CheckboxProps['id'] = undefined;
+	export let name: CheckboxProps['name'];
 	export let disabled: CheckboxProps['disabled'] = false;
 
-	let inputID = `input-${id}`;
+	let inputID = id ? `input-${id}` : undefined;
 </script>
 
 <label class="flex items-center">
 	<input
+		{name}
 		id={inputID}
 		class="form-checkbox"
 		type="checkbox"

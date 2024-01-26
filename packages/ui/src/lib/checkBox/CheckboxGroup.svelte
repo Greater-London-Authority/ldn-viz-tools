@@ -1,20 +1,26 @@
 <script lang="ts">
 	import Checkbox from './Checkbox.svelte';
 
-	export let options: { id: string; label: string; disabled?: boolean; color?: string }[] = [];
+	export let options: {
+		id: string;
+		name: string;
+		label: string;
+		disabled?: boolean;
+		color?: string;
+	}[] = [];
 
 	export let buttonsHidden = false;
 
 	export let selectedOptions: string[] = [];
-	$: selectedOptions = options.map((o) => o.id).filter((id) => selectionState[id]);
+	$: selectedOptions = options.map((o) => o.name).filter((name) => selectionState[name]);
 
 	let selectionState = Object.fromEntries(
-		options.map((o) => [o.id, selectedOptions.includes(o.id)])
+		options.map((o) => [o.name, selectedOptions.includes(o.name)])
 	);
 
 	let allCheckboxesCheckedOrDisabled;
 	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
-		o.disabled ? true : selectionState[o.id]
+		o.disabled ? true : selectionState[o.name]
 	);
 
 	let noCheckboxesChecked;
@@ -22,13 +28,13 @@
 
 	const selectAll = () => {
 		selectionState = Object.fromEntries(
-			options.map((o) => [o.id, o.disabled ? selectionState[o.id] : true])
+			options.map((o) => [o.name, o.disabled ? selectionState[o.name] : true])
 		);
 	};
 
 	const clearAll = () => {
 		selectionState = Object.fromEntries(
-			options.map((o) => [o.id, o.disabled ? selectionState[o.id] : false])
+			options.map((o) => [o.name, o.disabled ? selectionState[o.name] : false])
 		);
 	};
 
@@ -58,10 +64,11 @@
 		{#each options as option}
 			<Checkbox
 				id={option.id}
+				name={option.name}
 				label={option.label}
 				color={option.color}
 				disabled={option.disabled}
-				bind:checked={selectionState[option.id]}
+				bind:checked={selectionState[option.name]}
 			/>
 		{/each}
 	</div>
