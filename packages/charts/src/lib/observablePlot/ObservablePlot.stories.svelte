@@ -275,3 +275,15 @@
 		data: penguins
 	}}
 />
+
+<Story
+	name="With responsive width"
+	args={{
+		spec,
+		title: 'Penguin Culmens',
+		subTitle: 'A scatterplot of depth against length',
+		exportBtns: true,
+		data: penguins,
+		responsiveWidth: true
+	}}
+/>
