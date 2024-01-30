@@ -10,6 +10,8 @@ export { default as HeaderTitle } from './header/HeaderTitle.svelte';
 export { default as NavLink } from './header/NavLink.svelte';
 export { default as NavLinks } from './header/NavLinks.svelte';
 export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
+export { default as Input } from './input/Input.svelte';
+export { default as InputWrapper } from './input/InputWrapper.svelte';
 export { default as LogoByCIU } from './logos/LogoByCIU.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
