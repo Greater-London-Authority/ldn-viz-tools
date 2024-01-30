@@ -1,0 +1,35 @@
+name: Deploy branch preview of storybook site to Pages
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
+
+      # if we don't do this, imports between packages will fail
+      # (e.g., import of Button from @ldn-viz/ui into @ldn-viz/charts)
+      - name: Build everything
+        run: npm run build
+
+      - name: Build storybook site
+        run: npm run build-storybook -w apps/docs
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact
+          path: ./apps/docs/storybook-static
+          retention-days: 5

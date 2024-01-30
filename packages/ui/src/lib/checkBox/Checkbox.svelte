@@ -1,11 +1,22 @@
-<script lang="ts">
-	export let color: string | undefined = undefined;
-	export let checked = false;
-	export let indeterminate = false;
-	export let label: string;
-	export let id: string;
+<script context="module" lang="ts">
+	export interface CheckboxProps {
+		color: string;
+		checked: boolean;
+		indeterminate: boolean;
+		label: string;
+		id: string;
+		disabled: boolean;
+	}
+</script>
 
-	export let disabled = false;
+<script lang="ts">
+	/** A hex string to add a color to the box - this should correspond to the design system colors. */
+	export let color: CheckboxProps['color'] = '';
+	export let checked: CheckboxProps['checked'] = false;
+	export let indeterminate: CheckboxProps['indeterminate'] = false;
+	export let label: CheckboxProps['label'];
+	export let id: CheckboxProps['id'];
+	export let disabled: CheckboxProps['disabled'] = false;
 
 	let inputID = `input-${id}`;
 </script>

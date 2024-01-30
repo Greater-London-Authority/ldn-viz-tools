@@ -19,8 +19,16 @@
 </script>
 
 {#key spec}
-	<ChartContainer {data} {title} {subTitle} {alt} {footer} {exportBtns} {...$$restProps} chartHeight={"h-fit"}>
+	<ChartContainer
+		{data}
+		{title}
+		{subTitle}
+		{alt}
+		{footer}
+		{exportBtns}
+		{...$$restProps}
+		chartHeight={'h-fit'}
+	>
 		<div use:renderPlot {...$$restProps} bind:this={domNode} />
 	</ChartContainer>
 {/key}
-
