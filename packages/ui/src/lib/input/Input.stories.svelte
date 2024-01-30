@@ -1,10 +1,48 @@
-<script>
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
-
+<script context="module">
 	import Input from './Input.svelte';
+
+	export const meta = {
+		title: 'Ui/Input',
+		component: Input,
+		argTypes: {
+			id: {
+				control: { type: 'text' }
+			},
+			label: {
+				control: { type: 'text' }
+			}
+		}
+		// argTypes: {
+		// 	emphasis: {
+		// 		options: ['primary', 'secondary'],
+		// 		control: { type: 'radio' }
+		// 	},
+		// 	variant: {
+		// 		options: ['brand', 'solid', 'outline', 'text'], //square
+		// 		control: { type: 'select' }
+		// 	},
+		// 	condition: {
+		// 		options: ['default', 'success', 'error', 'warning'],
+		// 		control: { type: 'select' }
+		// 	},
+		// 	size: {
+		// 		options: ['sm', 'md', 'lg'],
+		// 		control: { type: 'radio' }
+		// 	},
+		// 	type: {
+		// 		options: ['button', 'submit'],
+		// 		control: { type: 'radio' }
+		// 	}
+		// },
+		// args: {
+		// 	id: 'storybook button'
+		// }
+	};
 </script>
 
-<Meta title="Ui/Input" component={Input} />
+<script>
+	import { Story } from '@storybook/addon-svelte-csf';
+</script>
 
 <Story name="Default">
 	<div class="w-96">
