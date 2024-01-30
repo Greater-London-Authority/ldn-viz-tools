@@ -37,6 +37,8 @@
 	export let whenMapLoads = null;
 	export let whenMapUnloads = null;
 
+	export let classes = '';
+
 	const defaultOptions = {
 		style: os_light_vts,
 		bounds: GREATER_LONDON_BOUNDS,
@@ -80,8 +82,7 @@
 
 <section
 	bind:this={container}
-	id="ldn-viz-map-container"
-	class="w-full h-full relative"
+	class="w-full h-full relative overflow-hidden {classes}"
 	{...$$restProps}
 >
 	<slot />
