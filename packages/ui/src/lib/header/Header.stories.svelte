@@ -9,22 +9,23 @@
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
+	import HeaderItem from './HeaderItem.svelte';
+	import HeaderRight from './HeaderRight.svelte';
+	import HeaderTitle from './HeaderTitle.svelte';
 	import NavLink from './NavLink.svelte';
 	import NavLinks from './NavLinks.svelte';
-	import HeaderTitle from './HeaderTitle.svelte';
-	import HeaderRight from './HeaderRight.svelte';
-	import HeaderItem from './HeaderItem.svelte';
-
 </script>
 
 <Template let:args>
 	<Header {...args} />
 </Template>
 
-<Story name="NavBar - title only"
-parameters={{
-	layout: 'fullscreen'
-}}>
+<Story
+	name="NavBar - title only"
+	parameters={{
+		layout: 'fullscreen'
+	}}
+>
 	<Header>
 		<HeaderTitle>An interesting app</HeaderTitle>
 	</Header>
