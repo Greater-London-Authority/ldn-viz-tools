@@ -1,7 +1,7 @@
 <script>
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-	import MergeValues from './MergeValues.svelte';
+	import MergeValuesControl from './MergeValuesControl.svelte';
 
 	const values = [
 		'Single family household: No children',
@@ -17,11 +17,11 @@
 	let groupings = { ungrouped: values, grouped: {} };
 </script>
 
-<Meta title="Ui/MergeValues" component={MergeValues} />
+<Meta title="Ui/MergeValuesControl" component={MergeValuesControl} />
 
 <Story name="Default">
 	<div class="w-96">
-		<MergeValues bind:groups={groupings} />
+		<MergeValuesControl bind:groups={groupings} />
 	</div>
 </Story>
 
@@ -29,7 +29,7 @@
 	<div class="flex flex-col gap-8">
 		<div class="w-96">
 			<h2 class="text-large font-bold">Control</h2>
-			<MergeValues bind:groups={groupings} />
+			<MergeValuesControl bind:groups={groupings} />
 		</div>
 
 		<div>
