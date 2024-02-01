@@ -43,7 +43,6 @@
 
 		if (groups.grouped[catName].length === 0) {
 			delete groups.grouped[catName];
-			groups.grouped = groups.grouped;
 		}
 
 		onGroupingsChanged();
