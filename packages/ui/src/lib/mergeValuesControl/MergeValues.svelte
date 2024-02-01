@@ -138,24 +138,24 @@
 		draggedOverGroup = undefined;
 	};
 
-	let newGroupName = 'New Group';
+	let newGroupName = 'New Category';
 	$: {
 		let i = 0;
 		const allGroupNames = Object.keys(groups.grouped);
 
 		while (allGroupNames.includes(newGroupName)) {
 			i++;
-			newGroupName = `New Group ${i}`;
+			newGroupName = `New Category ${i}`;
 		}
 	}
 </script>
 
 <div class="flex flex-col gap-4">
 	<div class="flex flex-col gap-1 w-96">
-		<HelpText>Create group from selected values</HelpText>
+		<HelpText>Merge selected values</HelpText>
 
 		<div class="flex gap-1">
-			<label for="category-name">Group name:</label>
+			<label for="category-name">New name:</label>
 			<input id="category-name" class="form-input h-5 w-36" bind:value={catName} />
 			<Button
 				disabled={!catName}
@@ -180,12 +180,12 @@
 			class:currentDropTarget={draggedOverGroup === newGroupName}
 		>
 			<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
-			Drag value here to create new group
+			Drag value here to create new category
 		</div>
 	</div>
 
 	<div class="flex flex-col gap-1 w-96">
-		<span class="font-bold">Un-grouped values:</span>
+		<span class="font-bold">Un-merged values:</span>
 		<ul
 			class="list-none"
 			on:dragover={(ev) => dragOver(ev, '')}
@@ -231,7 +231,7 @@
 						/>
 						<Button on:click={() => deleteCat(groupName)} variant="text" size="sm">Delete</Button>
 					</div>
-					<HelpText>Click on title on edit</HelpText>
+					<HelpText>Click on name on edit</HelpText>
 				</div>
 
 				<ul class="list-none">
