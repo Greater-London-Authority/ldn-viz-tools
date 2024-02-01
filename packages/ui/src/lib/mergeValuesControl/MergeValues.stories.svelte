@@ -20,21 +20,20 @@
 <Meta title="Ui/MergeValues" component={MergeValues} />
 
 <Story name="Default">
-		<div class="w-96">
-			<MergeValues groups={groupings} />
-		</div>
+	<div class="w-96">
+		<MergeValues bind:groups={groupings} />
+	</div>
 </Story>
-
 
 <Story name="Showing output">
 	<div class="flex flex-col gap-8">
 		<div class="w-96">
-            <h2 class="text-large font-bold">Control</h2>
-			<MergeValues groups={groupings} />
+			<h2 class="text-large font-bold">Control</h2>
+			<MergeValues bind:groups={groupings} />
 		</div>
 
 		<div>
-            <h2 class="text-large font-bold">Group object</h2>
+			<h2 class="text-large font-bold">Group object</h2>
 			<pre>{JSON.stringify(groupings, null, 2)}</pre>
 		</div>
 	</div>

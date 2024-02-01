@@ -152,7 +152,7 @@
 
 <div class="flex flex-col gap-4">
 	<div class="flex flex-col gap-1 w-96">
-		<HelpText>Select values to be combined into new group.</HelpText>
+		<HelpText>Create group from selected values</HelpText>
 
 		<div class="flex gap-1">
 			<label for="category-name">Group name:</label>
@@ -168,26 +168,45 @@
 		</div>
 	</div>
 
-	<ul
-		class="list-none"
-		on:dragover={(ev) => dragOver(ev, '')}
-		on:dragleave={(ev) => dragLeave()}
-		on:dragenter={(ev) => ev.preventDefault()}
-		on:drop={dropOutOfGroup}
-		class:currentDropTarget={draggedOverGroup === ''}
-	>
-		{#each groups.ungrouped as val}
-			<li
-				class="pl-2 cursor-grab hover:bg-core-blue-500 hover:p-1"
-				draggable="true"
-				data-id={val}
-				on:dragstart={(ev) => dragStart(ev, '')}
-			>
-				<input type="checkbox" bind:checked={selected[val]} />
-				{val}
-			</li>
-		{/each}
-	</ul>
+	<div class="flex flex-col gap-1 w-96">
+		<HelpText>Or drag a value to the drop-zone below.</HelpText>
+
+		<div
+			class="border-core-green-600 border-2 black p-2 flex items-center"
+			on:dragover={(ev) => dragOver(ev, newGroupName)}
+			on:dragleave={(ev) => dragLeave()}
+			on:dragenter={(ev) => ev.preventDefault()}
+			on:drop={(ev) => dragDrop(ev, newGroupName)}
+			class:currentDropTarget={draggedOverGroup === newGroupName}
+		>
+			<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
+			Drag value here to create new group
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-1 w-96">
+		<span class="font-bold">Un-grouped values:</span>
+		<ul
+			class="list-none"
+			on:dragover={(ev) => dragOver(ev, '')}
+			on:dragleave={(ev) => dragLeave()}
+			on:dragenter={(ev) => ev.preventDefault()}
+			on:drop={dropOutOfGroup}
+			class:currentDropTarget={draggedOverGroup === ''}
+		>
+			{#each groups.ungrouped as val}
+				<li
+					class="pl-2 cursor-grab hover:bg-core-blue-500 hover:p-1"
+					draggable="true"
+					data-id={val}
+					on:dragstart={(ev) => dragStart(ev, '')}
+				>
+					<input type="checkbox" bind:checked={selected[val]} />
+					{val}
+				</li>
+			{/each}
+		</ul>
+	</div>
 
 	<ul class="list-none">
 		{#each Object.keys(groups.grouped) as groupName}
@@ -199,16 +218,21 @@
 				on:drop={(ev) => dragDrop(ev, groupName)}
 				class:currentDropTarget={draggedOverGroup === groupName}
 			>
-				<input
-					on:change={(ev) => {
-						if (ev.target && !renameGroup(groupName, ev.target.value)) {
-							ev.target.value = groupName;
-						}
-					}}
-					value={groupName}
-					class="border-0 padding-0 font-bold"
-				/>
-				<Button on:click={() => deleteCat(groupName)} variant="text" size="sm">Delete</Button>
+				<div class="flex flex-col gap-1">
+					<div>
+						<input
+							on:change={(ev) => {
+								if (ev.target && !renameGroup(groupName, ev.target.value)) {
+									ev.target.value = groupName;
+								}
+							}}
+							value={groupName}
+							class="border-0 padding-0 font-bold width-fit"
+						/>
+						<Button on:click={() => deleteCat(groupName)} variant="text" size="sm">Delete</Button>
+					</div>
+					<HelpText>Click on title on edit</HelpText>
+				</div>
 
 				<ul class="list-none">
 					{#each groups.grouped[groupName] as val}
@@ -232,18 +256,6 @@
 			</li>
 		{/each}
 	</ul>
-
-	<div
-		class="border-core-green-600 border-2 black p-2 flex items-center"
-		on:dragover={(ev) => dragOver(ev, newGroupName)}
-		on:dragleave={(ev) => dragLeave()}
-		on:dragenter={(ev) => ev.preventDefault()}
-		on:drop={(ev) => dragDrop(ev, newGroupName)}
-		class:currentDropTarget={draggedOverGroup === newGroupName}
-	>
-		<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
-		Drag value here to create new group
-	</div>
 </div>
 
 <style>
