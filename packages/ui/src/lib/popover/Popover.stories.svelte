@@ -20,13 +20,10 @@
 			</svelte:fragment>
 
 			<h2 class="text-large font-bold">Aggregate Values</h2>
-            <p>Here is some text in a popover....</p>
+			<p>Here is some text in a popover....</p>
 		</Popover>
 	</div>
 </Story>
-
-
-
 
 <Story name="Controls">
 	<div class="max-w-xl">
@@ -38,12 +35,9 @@
 
 			<h2 class="text-large font-bold">Add Item</h2>
 
-            <Input id="name" label="Name" />
+			<Input id="name" label="Name" />
 
-            <Button>Add</Button>
+			<Button>Add</Button>
 		</Popover>
 	</div>
 </Story>
-
-
-

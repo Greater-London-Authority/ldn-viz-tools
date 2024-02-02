@@ -69,7 +69,8 @@
 		<Button variant="text" class="bg-core-green-400" on:click={() => ($isOpen = false)}
 			>Accept</Button
 		>
-		<Button variant="text" class="bg-core-red-400" on:click={() => ($isOpen = false)}>Cancel</Button>
+		<Button variant="text" class="bg-core-red-400" on:click={() => ($isOpen = false)}>Cancel</Button
+		>
 	</Modal>
 </Story>
 

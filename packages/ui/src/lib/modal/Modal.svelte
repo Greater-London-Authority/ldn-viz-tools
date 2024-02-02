@@ -5,7 +5,15 @@
 	export let isOpen = writable(false);
 
 	const {
-		elements: { trigger, portalled, overlay, content, title: meltTitle, description: meltDescripton, close },
+		elements: {
+			trigger,
+			portalled,
+			overlay,
+			content,
+			title: meltTitle,
+			description: meltDescripton,
+			close
+		},
 		states: { open }
 	} = createDialog({ open: isOpen });
 
