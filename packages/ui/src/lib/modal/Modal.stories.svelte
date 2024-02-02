@@ -4,8 +4,9 @@
 	import Modal from './Modal.svelte';
 
 	import Button from '../button/Button.svelte';
+	import { writable } from 'svelte/store';
 
-	let isOpen = true;
+	let isOpen = writable(true);
 </script>
 
 <Meta title="Ui/Modal" component={Modal} />
@@ -17,7 +18,7 @@
 <Story name="Default" args={{ title: 'Title', description: 'Description', isOpen: true }} />
 
 <Story name="Description only">
-	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -27,7 +28,7 @@
 </Story>
 
 <Story name="Description and Contents">
-	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -44,7 +45,7 @@
 </Story>
 
 <Story name="Contents without description">
-	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen title="A modal with contents!">
 		<p>A list</p>
@@ -57,7 +58,7 @@
 </Story>
 
 <Story name="Modal with close button">
-	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen title="A modal with close button!">
 		<div class="mb-4">
@@ -65,15 +66,15 @@
 			action in addition to closing the modal.
 		</div>
 
-		<Button variant="text" class="bg-core-green-400" on:click={() => (isOpen = false)}
+		<Button variant="text" class="bg-core-green-400" on:click={() => ($isOpen = false)}
 			>Accept</Button
 		>
-		<Button variant="text" class="bg-core-red-400" on:click={() => (isOpen = false)}>Cancel</Button>
+		<Button variant="text" class="bg-core-red-400" on:click={() => ($isOpen = false)}>Cancel</Button>
 	</Modal>
 </Story>
 
 <Story name="Modal width">
-	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
