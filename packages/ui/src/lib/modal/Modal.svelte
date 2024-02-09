@@ -47,7 +47,7 @@
 	);
 </script>
 
-<Dialog open={isOpen} on:close={() => (isOpen = false)} class="relative z-10 overflow-y-auto">
+<Dialog open={isOpen} on:close={() => (isOpen = false)} class="relative z-40 overflow-y-auto">
 	<DialogOverlay class="fixed inset-0 bg-black bg-opacity-40" />
 
 	<!--Full-screen container to center the panel -->
