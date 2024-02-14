@@ -6,6 +6,7 @@
 	import Button from '../button/Button.svelte';
 
 	import ExampleOverview from './ExampleOverview.svelte';
+	import exampleCode from './ExampleOverview.svelte?raw';
 
 	let isOpen;
 	const toggleSidebar = () => isOpen.update((v) => !v);
@@ -26,7 +27,10 @@
 </Story>
 
 <Story name="Getting Started">
-	<ExampleOverview />
+	<ExampleOverview>
+		<p class="mb-2 font-bold">This is the code for this story:</p>
+		<pre><code>{exampleCode}</code></pre>
+	</ExampleOverview>
 </Story>
 
 <Story name="Custom Sizing">
@@ -34,7 +38,7 @@
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>Custom sidebar width for desktop and height for mobile:</p>
 			<pre><code
-					>{[`<SidebarContainer`, `\tidebarWidth="500px" `, `\tsidebarHeight="400px"`].join(
+					>{[`<SidebarContainer`, `\tsidebarWidth="500px" `, `\tsidebarHeight="400px"`].join(
 						'\n'
 					)}</code
 				></pre>
@@ -44,7 +48,7 @@
 </Story>
 
 <Story name="Open State Store">
-	<SidebarContainer startOpen bind:open={isOpen}>
+	<SidebarContainer startOpen bind:isOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>
 				You can bind on the <i><code>open</code></i> prop to access the writable Svelte store managing
@@ -59,8 +63,7 @@
 				</Button>
 			</p>
 
-			<pre><code>{[`<SidebarContainer`, `\tstartOpen`, `\tbind:open={isOpen}`].join('\n')}</code
-				></pre>
+			<pre><code>{`<SidebarContainer startOpen bind:isOpen />`}</code></pre>
 		</div>
 		<Sidebar slot="sidebar" />
 	</SidebarContainer>
@@ -77,7 +80,7 @@
 			<pre><code
 					>{[
 						`\timport { getContext } from 'svelte'`,
-						`\tgetContext('sidebarOpen')`,
+						`\tgetContext('sidebarIsOpen')`,
 						`\tgetContext('sidebarContainer')`
 					].join('\n')}</code
 				></pre>
@@ -90,13 +93,13 @@
 
 			<p>
 				You can query it if the content layout is dependent on the viewing mode (horizontal or
-				vertical). For example:
+				vertical) and access the containers diemensions. For example:
 			</p>
 
 			<pre><code
 					>{[
-						`\tconst con = getContext('sidebarContainer')`,
-						`\tconst isDesktop = $con.mode === $con.MODE_HORIZONTAL`
+						`\tconst container = getContext('sidebarContainer')`,
+						`\tconst isDesktop = $container.isAlignedRight()`
 					].join('\n')}</code
 				></pre>
 		</div>

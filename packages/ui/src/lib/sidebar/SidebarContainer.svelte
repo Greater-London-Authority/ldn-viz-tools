@@ -1,6 +1,6 @@
 <script context="module">
-	export const MODE_VERTICAL = 'vertical';
-	export const MODE_HORIZONTAL = 'horizontal';
+	export const ALIGNMENT_BOTTOM = 'bottom';
+	export const ALIGNMENT_RIGHT = 'right';
 </script>
 
 <script>
@@ -17,7 +17,7 @@
 	export let sidebarHeight = 'calc(100% - 8rem)';
 
 	export let startOpen = false;
-	export const open = writable(startOpen);
+	export const isOpen = writable(startOpen);
 
 	const refresher = writable(false);
 	const refresh = () => refresher.update((v) => !v);
@@ -26,53 +26,47 @@
 		return window.matchMedia('(max-width: 639px)').matches;
 	};
 
-	const identifyMode = () => {
-		return ssr || isSmallScreen() ? MODE_VERTICAL : MODE_HORIZONTAL;
+	const identifyAlignment = () => {
+		return ssr || isSmallScreen() ? ALIGNMENT_BOTTOM : ALIGNMENT_RIGHT;
 	};
 
-	const generateConfig = ([isOpen, refresher]) => {
-		const mode = identifyMode();
-		const slideFromRight = mode === MODE_HORIZONTAL;
-
-		const ctd = isOpen ? '150ms' : '0ms';
-
-		const cw = !slideFromRight || !isOpen ? '100%' : `calc(100% - ${sidebarWidth})`;
-		const sw = slideFromRight ? sidebarWidth : '100%';
-		const sr = !slideFromRight || isOpen ? 0 : `-${sidebarWidth}`;
-
-		const ch = slideFromRight || !isOpen ? '100%' : `calc(100% - ${sidebarHeight})`;
-		const sh = slideFromRight ? '100%' : sidebarHeight;
-		const sb = slideFromRight || isOpen ? 0 : `calc(0px - ${sidebarHeight})`;
+	const generateConfig = ([open, refresher]) => {
+		const alignment = identifyAlignment();
+		const rightAligned = alignment === ALIGNMENT_RIGHT;
+		const botAligned = alignment === ALIGNMENT_BOTTOM;
 
 		const c = {
-			MODE_VERTICAL,
-			MODE_HORIZONTAL,
-			mode,
+			ALIGNMENT_BOTTOM,
+			ALIGNMENT_RIGHT,
+			alignment,
 			// Container
 			containerWidth,
 			containerHeight,
 			// Content
-			contentWidth: cw,
-			contentHeight: ch,
-			contentTransitionDelay: ctd,
+			contentWidth: botAligned || !open ? '100%' : `calc(100% - ${sidebarWidth})`,
+			contentHeight: rightAligned || !open ? '100%' : `calc(100% - ${sidebarHeight})`,
+			contentTransitionDelay: open ? '150ms' : '0ms',
 			// Sidebar
-			sidebarWidth: sw,
-			sidebarHeight: sh,
-			sidebarRight: sr,
-			sidebarBottom: sb,
-			sidebarOpen: isOpen
+			sidebarWidth: rightAligned ? sidebarWidth : '100%',
+			sidebarHeight: rightAligned ? '100%' : sidebarHeight,
+			sidebarRight: botAligned || open ? 0 : `-${sidebarWidth}`,
+			sidebarBottom: rightAligned || open ? 0 : `calc(0px - ${sidebarHeight})`,
+			sidebarIsOpen: isOpen
 		};
+
+		c.isAlignedBottom = () => c.alignment === c.ALIGNMENT_BOTTOM;
+		c.isAlignedRight = () => c.alignment === c.ALIGNMENT_RIGHT;
 
 		return c;
 	};
 
 	export const config = derived(
-		[open, refresher], //
+		[isOpen, refresher], //
 		generateConfig, //
 		generateConfig([startOpen, refresher]) //
 	);
 
-	setContext('sidebarOpen', open);
+	setContext('sidebarIsOpen', isOpen);
 	setContext('sidebarContainer', config);
 </script>
 

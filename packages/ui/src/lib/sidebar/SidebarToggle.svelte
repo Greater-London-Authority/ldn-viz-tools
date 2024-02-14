@@ -4,9 +4,9 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
 
-	const sidebarOpen = getContext('sidebarOpen');
+	const sidebarIsOpen = getContext('sidebarIsOpen');
 	const toggleOpen = () => {
-		sidebarOpen.update((isOpen) => !isOpen);
+		sidebarIsOpen.update((isOpen) => !isOpen);
 	};
 </script>
 

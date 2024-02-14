@@ -38,20 +38,21 @@
 
 <SidebarSection title="State Management Store">
 	<p>
-		You can bind on the <i><code>open</code></i> prop to access the writable Svelte store managing the
-		sidebar's open/closed state.
+		You can bind on the <i><code>isOpen</code></i> prop to access the writable Svelte store managing
+		the sidebar's open/closed state. Adding the <i><code>startOpen</code></i> flag will set the sidebar
+		as open on load.
 	</p>
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
-		<code>&lt;SidebarContainer startOpen bind:open={'{isOpen}'} /&gt;</code>
+		<code>&lt;SidebarContainer startOpen bind:isOpen /&gt;</code>
 	</div>
 </SidebarSection>
 
 <SidebarSection title="Svelte Context">
 	<p>
-		You can acces the <i><code>open</code></i> prop via Svelte context too:
+		You can acces the <i><code>isOpen</code></i> prop via Svelte context too:
 	</p>
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
-		<code>getContext('sidebarOpen')</code>
+		<code>getContext('sidebarIsOpen')</code>
 	</div>
 
 	<p>

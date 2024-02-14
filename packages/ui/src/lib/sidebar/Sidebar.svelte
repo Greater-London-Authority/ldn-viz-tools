@@ -7,7 +7,7 @@
 	export let classes = '';
 
 	const sidebarContainer = getContext('sidebarContainer');
-	$: slidesFromRight = $sidebarContainer.mode === $sidebarContainer.MODE_HORIZONTAL;
+	$: isAlignedRight = $sidebarContainer.isAlignedRight();
 </script>
 
 <section
@@ -15,10 +15,10 @@
 >
 	<div
 		class="absolute"
-		style:top={slidesFromRight ? '0' : 'unset'}
-		style:right={slidesFromRight ? '100%' : 'unset'}
-		style:bottom={slidesFromRight ? 'unset' : '100%'}
-		style:left={slidesFromRight ? 'unset' : '0'}
+		style:top={isAlignedRight ? '0' : 'unset'}
+		style:right={isAlignedRight ? '100%' : 'unset'}
+		style:bottom={isAlignedRight ? 'unset' : '100%'}
+		style:left={isAlignedRight ? 'unset' : '0'}
 	>
 		<slot name="toggle">
 			<SidebarToggle />
