@@ -50,7 +50,6 @@
 	</SidebarContainer>
 </Story>
 
-
 <Story name="With more info only">
 	<SidebarContainer>
 		<Sidebar slot="sidebar">
@@ -63,4 +62,3 @@
 		</Sidebar>
 	</SidebarContainer>
 </Story>
-
