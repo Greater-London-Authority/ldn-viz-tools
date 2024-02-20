@@ -1,8 +1,8 @@
 <script>
 	import SidebarContainer from './SidebarContainer.svelte';
 	import Sidebar from './Sidebar.svelte';
-	import SidebarHeader from './SidebarHeader.svelte';
-	import SidebarSection from './SidebarSection.svelte';
+	import SidebarHeader from '../sidebarElements/SidebarHeader.svelte';
+	import SidebarSection from '../sidebarElements/SidebarSection.svelte';
 
 	/*
 		import {

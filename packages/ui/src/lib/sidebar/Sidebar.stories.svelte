@@ -6,6 +6,10 @@
 	import SidebarContainer from './SidebarContainer.svelte';
 
 	import { ChartBar, Funnel, Map as MapIcon, MapPin } from '@steeze-ui/heroicons';
+	import SidebarDivider from '../sidebarElements/SidebarDivider.svelte';
+	import SidebarGroup from '../sidebarElements/SidebarGroup.svelte';
+	import SidebarHeader from '../sidebarElements/SidebarHeader.svelte';
+	import SidebarSection from '../sidebarElements/SidebarSection.svelte';
 	import TabbedSidebarWrapper from '../sidebarTabs/TabbedSidebarWrapper.svelte';
 	import ExampleOverview from './ExampleOverview.svelte';
 	import exampleCode from './ExampleOverview.svelte?raw';
@@ -153,6 +157,84 @@
 					</div>
 				{/if}
 			</TabbedSidebarWrapper>
+		</Sidebar>
+	</SidebarContainer>
+</Story>
+
+<Story name="Sidebar with structured content">
+	<SidebarContainer>
+		<div slot="content" class="p-6 text-white space-y-2">
+			<span>This is the main content of the page.</span>
+		</div>
+
+		<Sidebar slot="sidebar">
+			<SidebarHeader title="Main sidebar title">
+				<span slot="info">
+					This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
+					clicks on 'more info'.
+				</span>
+
+				<span>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</span>
+			</SidebarHeader>
+
+			<SidebarSection title="Sidebar section 1">
+				<span slot="info">
+					This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
+					clicks on 'more info'.
+				</span>
+
+				<span>Here is some content inside the first section.</span>
+
+				<SidebarGroup title="Sidebar group 1">
+					<span slot="info">
+						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
+						clicks on 'more info'.
+					</span>
+
+					<span>Here is some content inside the first group.</span>
+				</SidebarGroup>
+
+				<SidebarGroup title="Sidebar group 2">
+					<span slot="info">
+						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
+						clicks on 'more info'.
+					</span>
+
+					<span>Here is some content inside the second group.</span>
+				</SidebarGroup>
+			</SidebarSection>
+
+			<SidebarDivider />
+
+			<SidebarSection title="Sidebar section 2">
+				<span slot="info">
+					This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
+					clicks on 'more info'.
+				</span>
+
+				<span>Here is some content inside the second section.</span>
+
+				<SidebarGroup title="Sidebar group 3">
+					<span slot="info">
+						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
+						clicks on 'more info'.
+					</span>
+
+					<span>Here is some content inside the first group.</span>
+				</SidebarGroup>
+
+				<SidebarGroup title="Sidebar group 4">
+					<span slot="info">
+						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
+						clicks on 'more info'.
+					</span>
+
+					<span>Here is some content inside the second group.</span>
+				</SidebarGroup>
+			</SidebarSection>
 		</Sidebar>
 	</SidebarContainer>
 </Story>
