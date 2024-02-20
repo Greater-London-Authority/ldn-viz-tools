@@ -1,11 +1,11 @@
 <script>
-	import SidebarHeader from '../sidebarElements/SidebarHeader.svelte';
+	import SidebarAppHeader from '../sidebarElements/SidebarAppHeader.svelte';
 	import SidebarSection from '../sidebarElements/SidebarSection.svelte';
 </script>
 
-<SidebarHeader title="Hello there,">
+<SidebarAppHeader title="Hello there,">
 	<p>It looks like you're building a new app.</p>
-</SidebarHeader>
+</SidebarAppHeader>
 
 <SidebarSection title="Boilerplate">
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
