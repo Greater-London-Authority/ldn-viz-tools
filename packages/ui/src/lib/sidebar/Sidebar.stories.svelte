@@ -1,15 +1,25 @@
 <script lang="ts">
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-	import SidebarContainer from './SidebarContainer.svelte';
-	import Sidebar from './Sidebar.svelte';
 	import Button from '../button/Button.svelte';
+	import Sidebar from './Sidebar.svelte';
+	import SidebarContainer from './SidebarContainer.svelte';
 
+	import { ChartBar, Funnel, Map as MapIcon, MapPin } from '@steeze-ui/heroicons';
+	import TabbedSidebarWrapper from '../sidebarTabs/TabbedSidebarWrapper.svelte';
 	import ExampleOverview from './ExampleOverview.svelte';
 	import exampleCode from './ExampleOverview.svelte?raw';
 
 	let isOpen;
 	const toggleSidebar = () => isOpen.update((v) => !v);
+
+	let selectedTab: string;
+	let tabs = [
+		{ id: 'markers', label: 'Data Markers', icon: MapPin },
+		{ id: 'filters', label: 'Filters', icon: Funnel },
+		{ id: 'analysis', label: 'Analysis', icon: ChartBar },
+		{ id: 'layers', label: 'Layers', icon: MapIcon }
+	];
 </script>
 
 <Meta
@@ -104,5 +114,45 @@
 				></pre>
 		</div>
 		<Sidebar slot="sidebar" />
+	</SidebarContainer>
+</Story>
+
+<Story name="Sidebar with tabs">
+	<SidebarContainer>
+		<div slot="content" class="p-6 text-white space-y-2">
+			<span>This is the main content of the page.</span>
+		</div>
+
+		<Sidebar slot="sidebar">
+			<TabbedSidebarWrapper {tabs} bind:selectedValue={selectedTab}>
+				Selected tab: {selectedTab}
+
+				{#if selectedTab === 'markers'}
+					<div class="text-white">
+						Markers is selected, so we'd render a
+						<code> &lt;Marker /&gt;</code>
+						component
+					</div>
+				{:else if selectedTab === 'filters'}
+					<div class="text-white">
+						Filter is selected, so we'd render a
+						<code> &lt;Filters /&gt;</code>
+						component
+					</div>
+				{:else if selectedTab === 'analysis'}
+					<div class="text-white">
+						Analysis is selected, so we'd render a
+						<code> &lt;Analysis /&gt;</code>
+						component
+					</div>
+				{:else if selectedTab === 'layers'}
+					<div class="text-white">
+						Layers is selected, so we'd render a
+						<code> &lt;Layer /&gt;</code>
+						component
+					</div>
+				{/if}
+			</TabbedSidebarWrapper>
+		</Sidebar>
 	</SidebarContainer>
 </Story>

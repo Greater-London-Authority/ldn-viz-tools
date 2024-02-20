@@ -3,6 +3,7 @@
 
 	import SidebarToggle from './SidebarToggle.svelte';
 	import DefaultSidebarContent from './DefaultSidebarContent.svelte';
+	import SidebarContent from './SidebarContent.svelte';
 
 	export let classes = '';
 
@@ -25,11 +26,11 @@
 		</slot>
 	</div>
 
-	<div class="dark grow overflow-y-auto overscroll-contain p-6 pb-2 flex flex-col gap-6">
-		<slot>
+	<slot>
+		<SidebarContent>
 			<DefaultSidebarContent />
-		</slot>
-	</div>
+		</SidebarContent>
+	</slot>
 
 	<slot name="footer" />
 </section>
