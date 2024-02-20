@@ -52,9 +52,7 @@
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>Custom sidebar width for desktop and height for mobile:</p>
 			<pre><code
-					>{[`<AppShell`, `\tsidebarWidth="500px" `, `\tsidebarHeight="400px"`].join(
-						'\n'
-					)}</code
+					>{[`<AppShell`, `\tsidebarWidth="500px" `, `\tsidebarHeight="400px"`].join('\n')}</code
 				></pre>
 		</div>
 		<Sidebar slot="sidebar" />
@@ -87,8 +85,8 @@
 	<AppShell>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>
-				Every Svelte component inside the <code>AppShell</code> or one of it's children can access
-				two context objects:
+				Every Svelte component inside the <code>AppShell</code> or one of it's children can access two
+				context objects:
 			</p>
 
 			<pre><code

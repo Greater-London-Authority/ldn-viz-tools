@@ -6,10 +6,7 @@
 	export let classes = '';
 </script>
 
-<header
-	class="relative text-white flex flex-col gap-4 pb-1 {classes}"
-	{...$$restProps}
->
+<header class="relative text-white flex flex-col gap-4 pb-1 {classes}" {...$$restProps}>
 	{#if title || $$slots.info}
 		<div>
 			{#if $$slots.info}
