@@ -9,13 +9,13 @@
 
 <SidebarSection title="Boilerplate">
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
-		<code>&lt;SidebarContainer&gt;</code>
+		<code>&lt;AppShell&gt;</code>
 		<code class="pl-4">&lt;... slot="content" /&gt;</code>
 		<code class="pl-4">&lt;Sidebar slot="sidebar"&gt;</code>
 		<code class="pl-8">&lt;... /&gt;</code>
 		<code class="pl-8">&lt;... slot="footer" /&gt;</code>
 		<code class="pl-4">&lt;Sidebar&gt;</code>
-		<code>&lt;/SidebarContainer&gt;</code>
+		<code>&lt;/AppShell&gt;</code>
 	</div>
 </SidebarSection>
 
@@ -25,14 +25,14 @@
 		Defaults to <code>408px</code>.
 	</p>
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
-		<code>&lt;SidebarContainer sidebarWidth="600px" /&gt;</code>
+		<code>&lt;AppShell sidebarWidth="600px" /&gt;</code>
 	</div>
 	<p>
 		When in vertical mode (mobile) the <code>sidebarHeight</code> property will be applied. Defaults
 		to <code>calc(100% - 8rem)</code> to account for the map geocoder.
 	</p>
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
-		<code>&lt;SidebarContainer sidebarHeight="400px" /&gt;</code>
+		<code>&lt;AppShell sidebarHeight="400px" /&gt;</code>
 	</div>
 </SidebarSection>
 
@@ -43,7 +43,7 @@
 		as open on load.
 	</p>
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
-		<code>&lt;SidebarContainer startOpen bind:isOpen /&gt;</code>
+		<code>&lt;AppShell startOpen bind:isOpen /&gt;</code>
 	</div>
 </SidebarSection>
 
@@ -60,6 +60,6 @@
 		can query it if you want the current viewing mode (horizontal or vertical) or dimensions:
 	</p>
 	<div class="italic flex flex-col [&_code]:text-perceptual-orange-100">
-		<code>getContext('sidebarContainer')</code>
+		<code>getContext('appShell')</code>
 	</div>
 </SidebarSection>

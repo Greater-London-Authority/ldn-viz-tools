@@ -1,7 +1,7 @@
 <script>
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 	import Sidebar from '../sidebar/Sidebar.svelte';
-	import SidebarContainer from '../sidebar/SidebarContainer.svelte';
+	import AppShell from '../sidebar/AppShell.svelte';
 	import SidebarGroup from './SidebarGroup.svelte';
 </script>
 
@@ -12,17 +12,17 @@
 </Template>
 
 <Story name="Title only">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar">
 			<SidebarGroup title="Sidebar group title">
 				<span>Here is some content inside the group.</span>
 			</SidebarGroup>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Title and info">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar">
 			<SidebarGroup title="Sidebar group title">
 				<span slot="info">
@@ -33,11 +33,11 @@
 				<span>Here is some content inside the group.</span>
 			</SidebarGroup>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Multiple groups">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar">
 			<SidebarGroup title="Sidebar group 1">
 				<span slot="info">
@@ -66,5 +66,5 @@
 				<span>Here is some content inside the third group.</span>
 			</SidebarGroup>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>

@@ -2,13 +2,12 @@
 	import { getContext } from 'svelte';
 
 	import DefaultSidebarContent from './DefaultSidebarContent.svelte';
-	import SidebarContent from './SidebarContent.svelte';
 	import SidebarToggle from './SidebarToggle.svelte';
 
 	export let classes = '';
 
-	const sidebarContainer = getContext('sidebarContainer');
-	$: isAlignedRight = $sidebarContainer.isAlignedRight();
+	const appShell = getContext('appShell');
+	$: isAlignedRight = $appShell.isAlignedRight();
 </script>
 
 <section

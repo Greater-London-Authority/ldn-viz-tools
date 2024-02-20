@@ -3,7 +3,7 @@
 
 	import Button from '../button/Button.svelte';
 	import Sidebar from './Sidebar.svelte';
-	import SidebarContainer from './SidebarContainer.svelte';
+	import AppShell from './AppShell.svelte';
 
 	import { ChartBar, Funnel, Map as MapIcon, MapPin } from '@steeze-ui/heroicons';
 	import SidebarDivider from '../sidebarElements/SidebarDivider.svelte';
@@ -35,9 +35,9 @@
 />
 
 <Story name="Default">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar" />
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Getting Started">
@@ -48,21 +48,21 @@
 </Story>
 
 <Story name="Custom Sizing">
-	<SidebarContainer sidebarWidth="500px" sidebarHeight="400px">
+	<AppShell sidebarWidth="500px" sidebarHeight="400px">
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>Custom sidebar width for desktop and height for mobile:</p>
 			<pre><code
-					>{[`<SidebarContainer`, `\tsidebarWidth="500px" `, `\tsidebarHeight="400px"`].join(
+					>{[`<AppShell`, `\tsidebarWidth="500px" `, `\tsidebarHeight="400px"`].join(
 						'\n'
 					)}</code
 				></pre>
 		</div>
 		<Sidebar slot="sidebar" />
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Open State Store">
-	<SidebarContainer startOpen bind:isOpen>
+	<AppShell startOpen bind:isOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>
 				You can bind on the <i><code>open</code></i> prop to access the writable Svelte store managing
@@ -77,17 +77,17 @@
 				</Button>
 			</p>
 
-			<pre><code>{`<SidebarContainer startOpen bind:isOpen />`}</code></pre>
+			<pre><code>{`<AppShell startOpen bind:isOpen />`}</code></pre>
 		</div>
 		<Sidebar slot="sidebar" />
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Sidebar Context">
-	<SidebarContainer>
+	<AppShell>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>
-				Every Svelte component inside the <code>SidebarContainer</code> or one of it's children can access
+				Every Svelte component inside the <code>AppShell</code> or one of it's children can access
 				two context objects:
 			</p>
 
@@ -95,7 +95,7 @@
 					>{[
 						`\timport { getContext } from 'svelte'`,
 						`\tgetContext('sidebarIsOpen')`,
-						`\tgetContext('sidebarContainer')`
+						`\tgetContext('AppShell')`
 					].join('\n')}</code
 				></pre>
 
@@ -112,17 +112,17 @@
 
 			<pre><code
 					>{[
-						`\tconst container = getContext('sidebarContainer')`,
+						`\tconst container = getContext('appShell')`,
 						`\tconst isDesktop = $container.isAlignedRight()`
 					].join('\n')}</code
 				></pre>
 		</div>
 		<Sidebar slot="sidebar" />
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Sidebar with tabs">
-	<SidebarContainer>
+	<AppShell>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<span>This is the main content of the page.</span>
 		</div>
@@ -160,11 +160,11 @@
 				</TabbedSidebarWrapper>
 			</svelte:fragment>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Sidebar with structured content">
-	<SidebarContainer>
+	<AppShell>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<span>This is the main content of the page.</span>
 		</div>
@@ -238,5 +238,5 @@
 				</SidebarGroup>
 			</SidebarSection>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>

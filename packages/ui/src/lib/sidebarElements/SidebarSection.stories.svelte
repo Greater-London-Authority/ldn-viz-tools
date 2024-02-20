@@ -1,7 +1,7 @@
 <script>
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 	import Sidebar from '../sidebar/Sidebar.svelte';
-	import SidebarContainer from '../sidebar/SidebarContainer.svelte';
+	import AppShell from '../sidebar/AppShell.svelte';
 	import SidebarHeader from './SidebarHeader.svelte';
 	import SidebarSection from './SidebarSection.svelte';
 </script>
@@ -13,17 +13,17 @@
 </Template>
 
 <Story name="Title only">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar">
 			<SidebarSection title="Sidebar section title">
 				<span>Here is some content inside the section.</span>
 			</SidebarSection>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Title and info">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar">
 			<SidebarSection title="Sidebar section title">
 				<span slot="info">
@@ -34,11 +34,11 @@
 				<span>Here is some content inside the section.</span>
 			</SidebarSection>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>
 
 <Story name="Multiple sections">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar">
 			<SidebarSection title="Sidebar section 1">
 				<span slot="info">
@@ -67,5 +67,5 @@
 				<span>Here is some content inside the third section.</span>
 			</SidebarSection>
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>

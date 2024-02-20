@@ -3,7 +3,7 @@
 
 	import Button from '../button/Button.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
-	import SidebarContainer from '../sidebar/SidebarContainer.svelte';
+	import AppShell from '../sidebar/AppShell.svelte';
 
 	import { ChartBar, Funnel, Map as MapIcon, MapPin } from '@steeze-ui/heroicons';
 	import SidebarHeader from './SidebarHeader.svelte';
@@ -18,9 +18,9 @@
 />
 
 <Story name="Default">
-	<SidebarContainer>
+	<AppShell>
 		<Sidebar slot="sidebar">
 			<SidebarHeader />
 		</Sidebar>
-	</SidebarContainer>
+	</AppShell>
 </Story>

@@ -67,7 +67,7 @@
 	);
 
 	setContext('sidebarIsOpen', isOpen);
-	setContext('sidebarContainer', config);
+	setContext('appShell', config);
 </script>
 
 <svelte:window on:resize={refresh} />

@@ -1,12 +1,12 @@
 <script>
-	import SidebarContainer from './SidebarContainer.svelte';
+	import AppShell from './AppShell.svelte';
 	import Sidebar from './Sidebar.svelte';
 	import SidebarHeader from '../sidebarElements/SidebarHeader.svelte';
 	import SidebarSection from '../sidebarElements/SidebarSection.svelte';
 
 	/*
 		import {
-			SidebarContainer,
+			AppShell,
 			Sidebar,
 			SidebarHeader,
 			SidebarSection
@@ -14,7 +14,7 @@
 	*/
 </script>
 
-<SidebarContainer>
+<AppShell>
 	<div slot="content" class="p-6 text-white">
 		<slot />
 	</div>
@@ -30,4 +30,4 @@
 			<p slot="info">More section info content.</p>
 		</SidebarSection>
 	</Sidebar>
-</SidebarContainer>
+</AppShell>
