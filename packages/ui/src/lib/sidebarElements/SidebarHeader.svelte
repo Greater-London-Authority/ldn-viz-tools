@@ -7,7 +7,7 @@
 </script>
 
 <header
-	class="relative text-white flex flex-col gap-4 pl-4 pb-1 {classes}"
+	class="relative text-white flex flex-col gap-4 pb-1 {classes}"
 	{...$$restProps}
 >
 	{#if title || $$slots.info}
