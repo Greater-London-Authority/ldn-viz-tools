@@ -25,7 +25,7 @@ export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButton
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as Select } from './select/Select.svelte';
 export { default as Sidebar } from './sidebar/Sidebar.svelte';
-export { default as SidebarContainer } from './sidebar/SidebarContainer.svelte';
+export { default as SidebarContainer } from './sidebar/AppShell.svelte';
 export { default as SidebarHeader } from './sidebarElements/SidebarHeader.svelte';
 export { default as SidebarToggle } from './sidebar/SidebarToggle.svelte';
 export { default as SidebarSection } from './sidebarElements/SidebarSection.svelte';
