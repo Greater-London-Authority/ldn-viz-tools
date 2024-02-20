@@ -1,9 +1,9 @@
 <script>
 	import { getContext } from 'svelte';
 
-	import SidebarToggle from './SidebarToggle.svelte';
 	import DefaultSidebarContent from './DefaultSidebarContent.svelte';
 	import SidebarContent from './SidebarContent.svelte';
+	import SidebarToggle from './SidebarToggle.svelte';
 
 	export let classes = '';
 
@@ -26,11 +26,13 @@
 		</slot>
 	</div>
 
-	<slot>
-		<SidebarContent>
-			<DefaultSidebarContent />
-		</SidebarContent>
-	</slot>
+	<slot name="unpadded-content" />
+
+	<div class="dark grow overflow-y-auto overscroll-contain p-6 pb-2 flex flex-col gap-6">
+		<slot>
+			{#if !$$slots['unpadded-content']}<DefaultSidebarContent />{/if}
+		</slot>
+	</div>
 
 	<slot name="footer" />
 </section>

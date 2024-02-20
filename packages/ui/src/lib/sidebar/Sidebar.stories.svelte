@@ -128,35 +128,37 @@
 		</div>
 
 		<Sidebar slot="sidebar">
-			<TabbedSidebarWrapper {tabs} bind:selectedValue={selectedTab}>
-				Selected tab: {selectedTab}
+			<svelte:fragment slot="unpadded-content">
+				<TabbedSidebarWrapper {tabs} bind:selectedValue={selectedTab}>
+					Selected tab: {selectedTab}
 
-				{#if selectedTab === 'markers'}
-					<div class="text-white">
-						Markers is selected, so we'd render a
-						<code> &lt;Marker /&gt;</code>
-						component
-					</div>
-				{:else if selectedTab === 'filters'}
-					<div class="text-white">
-						Filter is selected, so we'd render a
-						<code> &lt;Filters /&gt;</code>
-						component
-					</div>
-				{:else if selectedTab === 'analysis'}
-					<div class="text-white">
-						Analysis is selected, so we'd render a
-						<code> &lt;Analysis /&gt;</code>
-						component
-					</div>
-				{:else if selectedTab === 'layers'}
-					<div class="text-white">
-						Layers is selected, so we'd render a
-						<code> &lt;Layer /&gt;</code>
-						component
-					</div>
-				{/if}
-			</TabbedSidebarWrapper>
+					{#if selectedTab === 'markers'}
+						<div class="text-white">
+							Markers is selected, so we'd render a
+							<code> &lt;Marker /&gt;</code>
+							component
+						</div>
+					{:else if selectedTab === 'filters'}
+						<div class="text-white">
+							Filter is selected, so we'd render a
+							<code> &lt;Filters /&gt;</code>
+							component
+						</div>
+					{:else if selectedTab === 'analysis'}
+						<div class="text-white">
+							Analysis is selected, so we'd render a
+							<code> &lt;Analysis /&gt;</code>
+							component
+						</div>
+					{:else if selectedTab === 'layers'}
+						<div class="text-white">
+							Layers is selected, so we'd render a
+							<code> &lt;Layer /&gt;</code>
+							component
+						</div>
+					{/if}
+				</TabbedSidebarWrapper>
+			</svelte:fragment>
 		</Sidebar>
 	</SidebarContainer>
 </Story>
