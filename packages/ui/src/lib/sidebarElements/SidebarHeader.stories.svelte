@@ -5,7 +5,7 @@
 	import SidebarHeader from './SidebarHeader.svelte';
 </script>
 
-<Meta title="Ui/Sidebars/SidebarHeader" component={SidebarHeader} />
+<Meta title="Ui/SidebarElements/SidebarHeader" component={SidebarHeader} />
 
 <Template let:args>
 	<SidebarHeader {...args} />

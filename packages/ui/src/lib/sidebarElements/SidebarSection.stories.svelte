@@ -6,7 +6,7 @@
 	import SidebarSection from './SidebarSection.svelte';
 </script>
 
-<Meta title="Ui/Sidebars/SidebarSection" component={SidebarSection} />
+<Meta title="Ui/SidebarElements/SidebarSection" component={SidebarSection} />
 
 <Template let:args>
 	<SidebarSection {...args} />

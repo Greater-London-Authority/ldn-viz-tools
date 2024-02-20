@@ -5,7 +5,7 @@
 	import SidebarGroup from './SidebarGroup.svelte';
 </script>
 
-<Meta title="Ui/Sidebars/SidebarGroup" component={SidebarGroup} />
+<Meta title="Ui/SidebarElements/SidebarGroup" component={SidebarGroup} />
 
 <Template let:args>
 	<SidebarGroup {...args} />
