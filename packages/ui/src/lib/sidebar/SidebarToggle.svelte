@@ -1,7 +1,7 @@
 <script>
-	import { getContext } from 'svelte';
 	import { Bars3 } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getContext } from 'svelte';
 	import Button from '../button/Button.svelte';
 
 	const sidebarIsOpen = getContext('sidebarIsOpen');

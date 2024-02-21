@@ -31,9 +31,9 @@
 	};
 
 	const identifyAlignment = () => {
-		if (ssr || isSmallScreen() ){
+		if (ssr || isSmallScreen()) {
 			return ALIGNMENT_BOTTOM;
-		} else if (sidebarLeft){
+		} else if (sidebarLeft) {
 			return ALIGMENT_LEFT;
 		}
 		return ALIGNMENT_RIGHT;
@@ -55,13 +55,14 @@
 			containerHeight,
 			// Content
 			contentWidth: botAligned || !open ? '100%' : `calc(100% - ${sidebarWidth})`,
-			contentHeight: rightAligned || leftAligned || !open ? '100%' : `calc(100% - ${sidebarHeight})`,
+			contentHeight:
+				rightAligned || leftAligned || !open ? '100%' : `calc(100% - ${sidebarHeight})`,
 			contentTransitionDelay: open ? '150ms' : '0ms',
 			// Sidebar
 			sidebarWidth: rightAligned || leftAligned ? sidebarWidth : '100%',
 			sidebarHeight: rightAligned || leftAligned ? '100%' : sidebarHeight,
 			sidebarRight: botAligned || open ? 0 : `-${sidebarWidth}`, // ?
-			sidebarLeft: (leftAligned && !open) ? `-${sidebarWidth}` : 0,
+			sidebarLeft: leftAligned && !open ? `-${sidebarWidth}` : 0,
 			sidebarBottom: rightAligned || leftAligned || open ? 0 : `calc(0px - ${sidebarHeight})`,
 			sidebarIsOpen: isOpen
 		};
