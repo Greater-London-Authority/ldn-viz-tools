@@ -10,7 +10,7 @@
 	import SidebarGroup from '../sidebarElements/SidebarGroup.svelte';
 	import SidebarHeader from '../sidebarElements/SidebarHeader.svelte';
 	import SidebarSection from '../sidebarElements/SidebarSection.svelte';
-	import TabbedSidebarWrapper from '../sidebarTabs/TabbedSidebarWrapper.svelte';
+	import SidebarTabsWrapper from '../sidebarTabs/SidebarTabsWrapper.svelte';
 	import ExampleOverview from './ExampleOverview.svelte';
 	import exampleCode from './ExampleOverview.svelte?raw';
 
@@ -127,7 +127,7 @@
 
 		<Sidebar slot="sidebar">
 			<svelte:fragment slot="unpadded-content">
-				<TabbedSidebarWrapper {tabs} bind:selectedValue={selectedTab}>
+				<SidebarTabsWrapper {tabs} bind:selectedValue={selectedTab}>
 					Selected tab: {selectedTab}
 
 					{#if selectedTab === 'markers'}
@@ -155,7 +155,7 @@
 							component
 						</div>
 					{/if}
-				</TabbedSidebarWrapper>
+				</SidebarTabsWrapper>
 			</svelte:fragment>
 		</Sidebar>
 	</AppShell>

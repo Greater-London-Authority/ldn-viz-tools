@@ -24,11 +24,22 @@ export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svel
 export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as Select } from './select/Select.svelte';
-export { default as Sidebar } from './sidebar/Sidebar.svelte';
+
 export { default as AppShell } from './sidebar/AppShell.svelte';
-export { default as SidebarHeader } from './sidebarElements/SidebarHeader.svelte';
+
+export { default as Sidebar } from './sidebar/Sidebar.svelte';
 export { default as SidebarToggle } from './sidebar/SidebarToggle.svelte';
+
+export { default as SidebarAppHeader } from './sidebarElements/SidebarAppHeader.svelte';
+export { default as SidebarDivider } from './sidebarElements/SidebarDivider.svelte';
+export { default as SidebarGroup } from './sidebarElements/SidebarGroup.svelte';
+export { default as SidebarHeader } from './sidebarElements/SidebarHeader.svelte';
 export { default as SidebarSection } from './sidebarElements/SidebarSection.svelte';
+
+export { default as SidebarTabLabel } from './sidebarTabs/SidebarTabLabel.svelte';
+export { default as SidebarTabList } from './sidebarTabs/SidebarTabList.svelte';
+export { default as SidebarTabsWrapper } from './sidebarTabs/SidebarTabsWrapper.svelte';
+
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabbedSidebar } from './tabbedSidebar/TabbedSidebar.svelte';
 export { default as TabbedSidebarTabLabel } from './tabbedSidebar/TabbedSidebarTabLabel.svelte';

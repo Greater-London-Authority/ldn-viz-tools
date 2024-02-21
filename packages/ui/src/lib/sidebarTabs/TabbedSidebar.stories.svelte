@@ -3,7 +3,7 @@
 
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 
-	import TabbedSidebarWrapper from './TabbedSidebarWrapper.svelte';
+	import SidebarTabsWrapper from './SidebarTabsWrapper.svelte';
 
 	let selectedValue = 'filters';
 
@@ -15,10 +15,10 @@
 	];
 </script>
 
-<Meta title="Ui/SidebarTabs" component={TabbedSidebarWrapper} />
+<Meta title="Ui/SidebarTabs" component={SidebarTabsWrapper} />
 
 <Template let:args>
-	<TabbedSidebarWrapper {...args} />
+	<SidebarTabsWrapper {...args} />
 </Template>
 
 <Story name="Constructed from list">
@@ -29,7 +29,7 @@
 		</p>
 	</div>
 
-	<TabbedSidebarWrapper {tabs} bind:selectedValue>
+	<SidebarTabsWrapper {tabs} bind:selectedValue>
 		{#if selectedValue === 'markers'}
 			<div class="text-white">
 				Markers is selected, so we'd render a
@@ -55,5 +55,5 @@
 				component
 			</div>
 		{/if}
-	</TabbedSidebarWrapper>
+	</SidebarTabsWrapper>
 </Story>
