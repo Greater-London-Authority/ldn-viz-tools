@@ -2,8 +2,8 @@
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
 	import Button from '../button/Button.svelte';
-	import Sidebar from './Sidebar.svelte';
 	import AppShell from './AppShell.svelte';
+	import Sidebar from './Sidebar.svelte';
 
 	import { ChartBar, Funnel, Map as MapIcon, MapPin } from '@steeze-ui/heroicons';
 	import SidebarDivider from '../sidebarElements/SidebarDivider.svelte';
@@ -11,6 +11,7 @@
 	import SidebarHeader from '../sidebarElements/SidebarHeader.svelte';
 	import SidebarSection from '../sidebarElements/SidebarSection.svelte';
 	import SidebarTabsWrapper from '../sidebarTabs/SidebarTabsWrapper.svelte';
+	import DefaultSidebarContent from './DefaultSidebarContent.svelte';
 	import ExampleOverview from './ExampleOverview.svelte';
 	import exampleCode from './ExampleOverview.svelte?raw';
 
@@ -23,6 +24,13 @@
 		{ id: 'filters', label: 'Filters', icon: Funnel },
 		{ id: 'analysis', label: 'Analysis', icon: ChartBar },
 		{ id: 'layers', label: 'Layers', icon: MapIcon }
+	];
+
+	let tabs2 = [
+		{ id: 'markers', label: 'Data Markers', icon: MapPin, content: DefaultSidebarContent },
+		{ id: 'filters', label: 'Filters', icon: Funnel, content: DefaultSidebarContent },
+		{ id: 'analysis', label: 'Analysis', icon: ChartBar, content: DefaultSidebarContent },
+		{ id: 'layers', label: 'Layers', icon: MapIcon, content: DefaultSidebarContent }
 	];
 </script>
 
@@ -155,6 +163,29 @@
 							component
 						</div>
 					{/if}
+				</SidebarTabsWrapper>
+			</svelte:fragment>
+		</Sidebar>
+	</AppShell>
+</Story>
+
+<Story name="Sidebar with tabs - specified components">
+	<AppShell>
+		<div slot="content" class="p-6 text-white space-y-2">
+			<span>This is the main content of the page.</span>
+		</div>
+
+		<Sidebar slot="sidebar">
+			<svelte:fragment slot="unpadded-content">
+				<SidebarTabsWrapper tabs={tabs2} bind:selectedValue={selectedTab}>
+					<span class="font-bold pb-6" slot="top">
+						In a real use, would provide a separate component for each tab. We can add content above
+						the tab-specific component.
+					</span>
+
+					<span class="font-bold pt-6">
+						And we can add content below the tab-specific component
+					</span>
 				</SidebarTabsWrapper>
 			</svelte:fragment>
 		</Sidebar>

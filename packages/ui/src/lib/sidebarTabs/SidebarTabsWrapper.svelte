@@ -8,7 +8,7 @@
 	import { setContext, type ComponentType } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
-	export let selectedValue;
+	export let selectedValue: string;
 
 	const val: Writable<string> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
@@ -21,7 +21,11 @@
 		label: string;
 		icon?: IconSource;
 		rawIcon?: ComponentType;
+		content: ComponentType;
 	}[] = [];
+
+	let component: ComponentType | undefined;
+	$: component = tabs.find((d) => d.id === selectedValue)?.content;
 </script>
 
 <div class="flex">
@@ -39,6 +43,10 @@
 	</SidebarTabList>
 
 	<div class="p-6">
+		<slot name="top" />
+		{#if component}
+			<svelte:component this={component} />
+		{/if}
 		<slot />
 	</div>
 </div>
