@@ -14,6 +14,7 @@
 	import DefaultSidebarContent from './DefaultSidebarContent.svelte';
 	import ExampleOverview from './ExampleOverview.svelte';
 	import exampleCode from './ExampleOverview.svelte?raw';
+	import SidebarLeft from './SidebarLeft.svelte';
 
 	let isOpen;
 	const toggleSidebar = () => isOpen.update((v) => !v);
@@ -45,6 +46,12 @@
 <Story name="Default">
 	<AppShell>
 		<Sidebar slot="sidebar" />
+	</AppShell>
+</Story>
+
+<Story name="Sibebar on left">
+	<AppShell sidebarLeft>
+		<SidebarLeft slot="sidebar" />
 	</AppShell>
 </Story>
 
