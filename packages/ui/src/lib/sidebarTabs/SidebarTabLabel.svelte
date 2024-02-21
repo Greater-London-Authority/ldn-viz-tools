@@ -6,22 +6,8 @@
 
 	const { selectedValue } = getContext<{ selectedValue: Writable<string> }>('selectedValue');
 
-	const sidebarIsOpen = getContext('sidebarIsOpen');
-	const toggleOpen = () => {
-		sidebarIsOpen.update((isOpen) => !isOpen);
-	};
-
 	const handleSelection = () => {
-		if (!sidebarIsOpen) {
-			$selectedValue = tabId;
-		} else if ($selectedValue == tabId) {
-			// if we're expanded, clicking the currently selected tab label triggers collapse
-			toggleOpen();
-			$selectedValue = '';
-		} else {
-			// if we're expanded, clicking a different tab label switched tab
-			$selectedValue = tabId;
-		}
+		$selectedValue = tabId;
 	};
 
 	const keydownHandler = (ev: KeyboardEvent) => {
