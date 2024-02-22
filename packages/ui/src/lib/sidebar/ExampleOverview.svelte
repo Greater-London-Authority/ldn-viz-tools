@@ -14,7 +14,7 @@
 	*/
 </script>
 
-<AppShell>
+<AppShell startOpen>
 	<div slot="content" class="p-6 text-white">
 		<slot />
 	</div>

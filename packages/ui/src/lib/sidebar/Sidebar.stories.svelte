@@ -44,13 +44,13 @@
 />
 
 <Story name="Default">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar" />
 	</AppShell>
 </Story>
 
 <Story name="Sibebar on left">
-	<AppShell sidebarLeft>
+	<AppShell sidebarLeft startOpen>
 		<SidebarLeft slot="sidebar" />
 	</AppShell>
 </Story>
@@ -63,7 +63,7 @@
 </Story>
 
 <Story name="Custom Sizing">
-	<AppShell sidebarWidth="500px" sidebarHeight="400px">
+	<AppShell sidebarWidth="500px" sidebarHeight="400px" startOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>Custom sidebar width for desktop and height for mobile:</p>
 			<pre><code
@@ -115,7 +115,7 @@
 </Story>
 
 <Story name="Sidebar Context">
-	<AppShell>
+	<AppShell startOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>
 				Every Svelte component inside the <code>AppShell</code> or one of it's children can access two
@@ -153,7 +153,7 @@
 </Story>
 
 <Story name="Sidebar with tabs">
-	<AppShell>
+	<AppShell startOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<span>This is the main content of the page.</span>
 		</div>
@@ -195,7 +195,7 @@
 </Story>
 
 <Story name="Sidebar with tabs - specified components">
-	<AppShell>
+	<AppShell startOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<span>This is the main content of the page.</span>
 		</div>
@@ -218,7 +218,7 @@
 </Story>
 
 <Story name="Sidebar with structured content">
-	<AppShell>
+	<AppShell startOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<span>This is the main content of the page.</span>
 		</div>
