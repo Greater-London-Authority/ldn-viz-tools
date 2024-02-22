@@ -24,12 +24,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           cache: npm
 
       - name: Install dependencies
-        run: npm install
-
+        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
+        
       # if we don't do this, imports between packages will fail
       # (e.g., import of Button from @ldn-viz/ui into @ldn-viz/charts)
       - name: Build everything

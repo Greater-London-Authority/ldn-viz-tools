@@ -40,7 +40,7 @@
 
 	// See https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
 	const bytesToBase64 = (bytes) => window.btoa(String.fromCodePoint(...bytes));
-	const stringToBase64 = (str) => bytesToBase64(new TextEncoder().encode(str))
+	const stringToBase64 = (str) => bytesToBase64(new TextEncoder().encode(str));
 
 	const downloadFromSVG = async () => {
 		// This hack is necessary because .drawImage() doesn't work
