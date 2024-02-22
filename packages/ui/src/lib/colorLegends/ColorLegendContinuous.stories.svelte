@@ -18,13 +18,17 @@
 <Meta title="Ui/Legends/ColorLegendContinuous" component={ColorLegendContinuous} />
 
 <Story name="Continuous color scale">
-	<ColorLegendContinuous scale={continuousColorScale} title="Unemployment/%" />
+	<div class="w-[400px]">
+		<ColorLegendContinuous scale={continuousColorScale} title="Unemployment/%" />
+	</div>
 </Story>
 
 <Story name="Continuous color scale - flipped">
-	<p>
-		Flipping both the range and the domain doesn't affect the mapping from values to colors, but
-		does change the direction the scale is drawn in.
-	</p>
-	<ColorLegendContinuous scale={continuousColorScaleFlipped} title="Unemployment/%" />
+	<div class="w-[400px]">
+		<p>
+			Flipping both the range and the domain doesn't affect the mapping from values to colors, but
+			does change the direction the scale is drawn in.
+		</p>
+		<ColorLegendContinuous scale={continuousColorScaleFlipped} title="Unemployment/%" />
+	</div>
 </Story>

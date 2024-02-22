@@ -12,5 +12,7 @@
 <Meta title="Ui/Legends/ColorLegendOrdinalHorizontal" component={ColorLegendOrdinalHorizontal} />
 
 <Story name="Categorical color scale">
-	<ColorLegendOrdinalHorizontal scale={ordinalScale} title="Current EPC Rating" />
+	<div class="w-[400px]">
+		<ColorLegendOrdinalHorizontal scale={ordinalScale} title="Current EPC Rating" />
+	</div>
 </Story>

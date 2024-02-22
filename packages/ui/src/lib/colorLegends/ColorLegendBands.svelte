@@ -29,7 +29,7 @@
 <div class="flex flex-col items-center gap-2">
 	{#if title}<p class="font-bold">{title}</p>{/if}
 
-	<svg viewBox={`-10 0 ${width + 25} ${height + 40}`} class="max-w-3xl">
+	<svg viewBox={`-10 0 ${width + 25} ${height + 45}`} class="max-w-3xl">
 		{#if minVal}
 			{@const startX = xScale(minVal ?? domain[0])}
 			<rect x={startX} width={xScale(domain[0]) - startX} y={0} {height} fill={scale(minVal)} />
@@ -65,11 +65,11 @@
 			</text>
 		{/each}
 
-		<text x={0} y={height + 20 + 15} text-anchor="start" font-size="12px">
+		<text x={0} y={height + 20 + 20} text-anchor="start" font-size="20px">
 			{leftLabel}
 		</text>
 
-		<text x={width} y={height + 20 + 15} text-anchor="end" font-size="12px">
+		<text x={width} y={height + 20 + 20} text-anchor="end" font-size="20px">
 			{rightLabel}
 		</text>
 	</svg>
