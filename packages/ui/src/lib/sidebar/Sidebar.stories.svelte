@@ -100,8 +100,6 @@
 	<AppShell startOpen>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>This sidebar is always open - there is no control to collapse it.</p>
-
-			<pre><code>{`<AppShell startOpen bind:isOpen />`}</code></pre>
 		</div>
 		<Sidebar slot="sidebar" hideToggle />
 	</AppShell>
@@ -111,8 +109,6 @@
 	<AppShell startOpen sidebarLeft>
 		<div slot="content" class="p-6 text-white space-y-2">
 			<p>This sidebar is always open - there is no control to collapse it.</p>
-
-			<pre><code>{`<AppShell startOpen bind:isOpen />`}</code></pre>
 		</div>
 		<SidebarLeft slot="sidebar" hideToggle />
 	</AppShell>
