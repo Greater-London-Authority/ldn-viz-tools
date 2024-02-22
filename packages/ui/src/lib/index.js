@@ -2,6 +2,10 @@
 export { default as Button } from './button/Button.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
+export { default as ColorLegendBands } from './colorLegends/ColorLegendBands.svelte';
+export { default as ColorLegendContinuous } from './colorLegends/ColorLegendContinuous.svelte';
+export { default as ColorLegendOrdinal } from './colorLegends/ColorLegendOrdinal.svelte';
+export { default as ColorLegendOrdinalHorizontal } from './colorLegends/ColorLegendOrdinalHorizontal.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as Header } from './header/Header.svelte';
 export { default as HeaderItem } from './header/HeaderItem.svelte';
