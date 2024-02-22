@@ -32,12 +32,27 @@
 		&lt; a threshold.
 	</p>
 
-	<p>This scale color bands of "&lt;22", "22 - 35", "35-51", "51-72", "&gt;72"</p>
+	<p>The scale bands are "&lt;22", "22 - 35", "35-51", "51-72", "&gt;72"</p>
 	<ColorLegendBands
 		scale={bandColorScale}
 		title="Index of Multiple Deprivation"
 		minVal={10}
 		maxVal={100}
+		leftLabel="Less deprived"
+		rightLabel="More deprived"
+	/>
+</Story>
+
+<Story name="Continuous color scale - min and max not specified">
+	<p>In this example, min and max values aren't set.</p>
+
+	<p>
+		The scale bands are "&lt;22", "22 - 35", "35-51", "51-72", "&gt;72" - but as no min or max
+		values are set, the bars for "&lt;22" and "&gt;72" have zero width.
+	</p>
+	<ColorLegendBands
+		scale={bandColorScale}
+		title="Index of Multiple Deprivation"
 		leftLabel="Less deprived"
 		rightLabel="More deprived"
 	/>
