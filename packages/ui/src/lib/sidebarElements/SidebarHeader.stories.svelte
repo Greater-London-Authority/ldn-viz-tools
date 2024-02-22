@@ -12,7 +12,7 @@
 </Template>
 
 <Story name="Title only">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarHeader title="Main sidebar title" />
 		</Sidebar>
@@ -20,7 +20,7 @@
 </Story>
 
 <Story name="With description">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarHeader title="Main sidebar title">
 				<span>
@@ -33,7 +33,7 @@
 </Story>
 
 <Story name="With description and more info">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarHeader title="Main sidebar title">
 				<span>
@@ -51,7 +51,7 @@
 </Story>
 
 <Story name="With more info only">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarHeader title="Main sidebar title">
 				<span slot="info">

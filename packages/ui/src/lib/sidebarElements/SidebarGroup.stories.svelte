@@ -12,7 +12,7 @@
 </Template>
 
 <Story name="Title only">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarGroup title="Sidebar group title">
 				<span>Here is some content inside the group.</span>
@@ -22,7 +22,7 @@
 </Story>
 
 <Story name="Title and info">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarGroup title="Sidebar group title">
 				<span slot="info">
@@ -37,7 +37,7 @@
 </Story>
 
 <Story name="Multiple groups">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarGroup title="Sidebar group 1">
 				<span slot="info">

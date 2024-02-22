@@ -13,7 +13,7 @@
 </Template>
 
 <Story name="Title only">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarSection title="Sidebar section title">
 				<span>Here is some content inside the section.</span>
@@ -23,7 +23,7 @@
 </Story>
 
 <Story name="Title and info">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarSection title="Sidebar section title">
 				<span slot="info">
@@ -38,7 +38,7 @@
 </Story>
 
 <Story name="Multiple sections">
-	<AppShell>
+	<AppShell startOpen>
 		<Sidebar slot="sidebar">
 			<SidebarSection title="Sidebar section 1">
 				<span slot="info">
