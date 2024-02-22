@@ -96,6 +96,28 @@
 	</AppShell>
 </Story>
 
+<Story name="Always open">
+	<AppShell startOpen>
+		<div slot="content" class="p-6 text-white space-y-2">
+			<p>This sidebar is always open - there is no control to collapse it.</p>
+
+			<pre><code>{`<AppShell startOpen bind:isOpen />`}</code></pre>
+		</div>
+		<Sidebar slot="sidebar" hideToggle />
+	</AppShell>
+</Story>
+
+<Story name="Always open on left">
+	<AppShell startOpen sidebarLeft>
+		<div slot="content" class="p-6 text-white space-y-2">
+			<p>This sidebar is always open - there is no control to collapse it.</p>
+
+			<pre><code>{`<AppShell startOpen bind:isOpen />`}</code></pre>
+		</div>
+		<SidebarLeft slot="sidebar" hideToggle />
+	</AppShell>
+</Story>
+
 <Story name="Sidebar Context">
 	<AppShell>
 		<div slot="content" class="p-6 text-white space-y-2">

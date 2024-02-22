@@ -5,6 +5,7 @@
 	import SidebarToggle from './SidebarToggle.svelte';
 
 	export let classes = '';
+	export let hideToggle = false;
 
 	const appShell = getContext('appShell');
 	$: isAlignedRight = $appShell.isAlignedRight();
@@ -19,6 +20,7 @@
 		style:right={isAlignedRight ? '100%' : 'unset'}
 		style:bottom={isAlignedRight ? 'unset' : '100%'}
 		style:left={isAlignedRight ? 'unset' : '0'}
+		style:display={hideToggle ? 'none' : ''}
 	>
 		<slot name="toggle">
 			<SidebarToggle />
