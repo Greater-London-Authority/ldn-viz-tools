@@ -21,7 +21,7 @@
 	<ColorLegendContinuous scale={continuousColorScale} title="Unemployment/%" />
 </Story>
 
-<Story name="Continuous color scal - flipped">
+<Story name="Continuous color scale - flipped">
 	<p>
 		Flipping both the range and the domain doesn't affect the mapping from values to colors, but
 		does change the direction the scale is drawn in.
