@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { scaleLinear, type ScaleLinear } from 'd3-scale';
 
-	export let scale: ScaleLinear<number, string>;
+	export let scale: ScaleLinear<number | string, string>;
 	export let title = '';
+	export let highlightedValue: number | string | undefined = undefined;
 
 	const width = 600;
 	const height = 20;
@@ -28,6 +29,7 @@
 				y={height + 20}
 				text-anchor="middle"
 				class="select-none"
+				style:font-weight={val === highlightedValue ? 'bold' : 'normal'}
 			>
 				{val}
 			</text>

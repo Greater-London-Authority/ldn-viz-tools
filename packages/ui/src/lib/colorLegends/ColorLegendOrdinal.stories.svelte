@@ -16,3 +16,13 @@
 		<ColorLegendOrdinalOrdinal scale={ordinalScale} title="Current EPC Rating" />
 	</div>
 </Story>
+
+<Story name="Ordinal color scale - highlighted value">
+	<div class="w-[400px]">
+		<ColorLegendOrdinalOrdinal
+			scale={ordinalScale}
+			title="Current EPC Rating"
+			highlightedValue="B"
+		/>
+	</div>
+</Story>

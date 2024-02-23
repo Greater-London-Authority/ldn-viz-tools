@@ -45,6 +45,26 @@
 	</div>
 </Story>
 
+<Story name="Continuous color scale - highlighted vlaue">
+	<div class="w-[400px]">
+		<p>
+			Setting minVal and maxVal extends the scale - useful if some colors correspond to values &gt;
+			or &lt; a threshold.
+		</p>
+
+		<p>The scale bands are "&lt;22", "22 - 35", "35-51", "51-72", "&gt;72"</p>
+		<ColorLegendBands
+			scale={bandColorScale}
+			title="Index of Multiple Deprivation"
+			minVal={10}
+			maxVal={100}
+			leftLabel="Less deprived"
+			rightLabel="More deprived"
+			highlightedValue={30}
+		/>
+	</div>
+</Story>
+
 <Story name="Continuous color scale - min and max not specified">
 	<div class="w-[400px]">
 		<p>In this example, min and max values aren't set.</p>

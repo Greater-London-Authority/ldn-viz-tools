@@ -23,6 +23,16 @@
 	</div>
 </Story>
 
+<Story name="Continuous color scale - highlighted value">
+	<div class="w-[400px]">
+		<ColorLegendContinuous
+			scale={continuousColorScale}
+			title="Unemployment/%"
+			highlightedValue={7.5}
+		/>
+	</div>
+</Story>
+
 <Story name="Continuous color scale - flipped">
 	<div class="w-[400px]">
 		<p>
