@@ -146,7 +146,13 @@
 <!-- new stories, not in observable notebook -->
 
 <Story name="Color bands">
-    <p>The scale bands are "&lt;22", "22 - 35", "35-51", "51-72", "&gt;72"</p>
+	<p>The scale bands are "&lt;22", "22 - 35", "35-51", "51-72", "&gt;72"</p>
 
 	<ColorLegend color={bandColorScale} title="Age (years)" />
+</Story>
+
+<Story name="Left and right labels">
+	<div class="w-[400px]">
+		<ColorLegend color={bandColorScale} title="Age" leftLabel="Younger" rightLabel="Older" />
+	</div>
 </Story>

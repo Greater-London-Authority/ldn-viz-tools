@@ -23,6 +23,8 @@
 	export let tickValues: undefined | number[];
 
 	export let highlightedValue: undefined | string | number;
+	export let leftLabel = '';
+	export let rightLabel = '';
 
 	function ramp(color, n = 256) {
 		const canvas = document.createElement('canvas');
@@ -73,15 +75,15 @@
 			const thresholds = color.thresholds
 				? color.thresholds() // scaleQuantize
 				: color.quantiles
-				? color.quantiles() // scaleQuantile
-				: color.domain(); // scaleThreshold
+					? color.quantiles() // scaleQuantile
+					: color.domain(); // scaleThreshold
 
 			const thresholdFormat =
 				tickFormat === undefined
 					? (d) => d
 					: typeof tickFormat === 'string'
-					? d3.format(tickFormat)
-					: tickFormat;
+						? d3.format(tickFormat)
+						: tickFormat;
 
 			x = d3
 				.scaleLinear()
@@ -194,6 +196,14 @@
 	{/if}
 
 	<g id="axis-group" transform={`translate(0,${height - marginBottom})`} />
+
+	<text x={0} y={height - marginBottom + 10} text-anchor="start" font-size="10px">
+		{leftLabel}
+	</text>
+
+	<text x={width} y={height - marginBottom + 10} text-anchor="end" font-size="10px">
+		{rightLabel}
+	</text>
 
 	{#if highlightedValue}
 		<g transform={`translate(${x(highlightedValue)}, ${height - marginBottom + 10} ) scale(10) `}>
