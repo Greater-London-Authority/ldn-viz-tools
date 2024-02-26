@@ -47,7 +47,7 @@
 
 	const bandColorScaleFlipped = scaleThreshold(
 		[22, 35, 51, 72].reverse(),
-		[22, 35, 51, 72].reverse(), 
+		[22, 35, 51, 72].reverse(),
 		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'].reverse()
 	);
 </script>
@@ -141,4 +141,12 @@
 		title="Age (years)"
 		tickSize={0}
 	/>
+</Story>
+
+<!-- new stories, not in observable notebook -->
+
+<Story name="Color bands">
+    <p>The scale bands are "&lt;22", "22 - 35", "35-51", "51-72", "&gt;72"</p>
+
+	<ColorLegend color={bandColorScale} title="Age (years)" />
 </Story>
