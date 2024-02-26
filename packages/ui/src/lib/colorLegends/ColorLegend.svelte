@@ -5,7 +5,7 @@
 	// Copyright 2021, Observable Inc.
 	// Released under the ISC license.
 
-	// It has bene modified to use Svelte rather than just D3.js
+	// It has been modified to use Svelte rather than just D3.js, and to allow a value on the scale to be highlighted.
 
 	import * as d3 from 'd3';
 	export let color;
@@ -21,6 +21,8 @@
 	export let ticks = width / 64;
 	export let tickFormat;
 	export let tickValues;
+
+	export let highlightedValue: undefined | string | number;
 
 	function ramp(color, n = 256) {
 		const canvas = document.createElement('canvas');
@@ -190,4 +192,10 @@
 	{/if}
 
 	<g id="axis-group" transform={`translate(0,${height - marginBottom})`} />
+
+	{#if highlightedValue}
+		<g transform={`translate(${x(highlightedValue)}, ${height - marginBottom + 10} ) scale(10) `}>
+			<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="red" />
+		</g>
+	{/if}
 </svg>

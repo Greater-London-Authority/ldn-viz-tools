@@ -47,6 +47,7 @@
 
 	const bandColorScaleFlipped = scaleThreshold(
 		[22, 35, 51, 72].reverse(),
+		[22, 35, 51, 72].reverse(), 
 		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'].reverse()
 	);
 </script>
@@ -55,6 +56,14 @@
 
 <Story name="Sequential color scale">
 	<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
+</Story>
+
+<Story name="Sequential color scale - highlighted value">
+	<ColorLegend
+		color={scaleSequential([0, 100], interpolateViridis)}
+		title="Temperature (°F)"
+		highlightedValue={25}
+	/>
 </Story>
 
 <Story name="Sequential color scale with square root">
