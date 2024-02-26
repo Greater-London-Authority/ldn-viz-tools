@@ -8,7 +8,7 @@
 	// It has been modified to use Svelte rather than just D3.js, and to allow a value on the scale to be highlighted.
 
 	import * as d3 from 'd3';
-	export let color;
+	export let color: any;
 
 	export let title = '';
 	export let tickSize = 6;
@@ -19,8 +19,8 @@
 	export let marginBottom = 16 + tickSize;
 	export let marginLeft = 0;
 	export let ticks = width / 64;
-	export let tickFormat;
-	export let tickValues;
+	export let tickFormat: (v: any) => string;
+	export let tickValues: undefined | number[];
 
 	export let highlightedValue: undefined | string | number;
 
@@ -29,9 +29,11 @@
 		canvas.width = n;
 		canvas.height = 1;
 		const context = canvas.getContext('2d');
-		for (let i = 0; i < n; ++i) {
-			context.fillStyle = color(i / (n - 1));
-			context.fillRect(i, 0, 1, 1);
+		if (context) {
+			for (let i = 0; i < n; ++i) {
+				context.fillStyle = color(i / (n - 1));
+				context.fillRect(i, 0, 1, 1);
+			}
 		}
 		return canvas.toDataURL();
 	}
@@ -99,7 +101,7 @@
 		}
 	}
 
-	let svgRef;
+	let svgRef: SVGElement;
 	$: {
 		if (svgRef) {
 			const svg = d3.select(svgRef);
@@ -116,8 +118,8 @@
 						.tickValues(tickValues)
 				)
 				.call(tickAdjust)
-				.call((g) => g.select('.domain').remove())
-				.call((g) =>
+				.call((g: any) => g.select('.domain').remove())
+				.call((g: any) =>
 					g
 						.append('text')
 						.attr('x', marginLeft)
@@ -195,7 +197,7 @@
 
 	{#if highlightedValue}
 		<g transform={`translate(${x(highlightedValue)}, ${height - marginBottom + 10} ) scale(10) `}>
-			<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="red" />
+			<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="black" />
 		</g>
 	{/if}
 </svg>

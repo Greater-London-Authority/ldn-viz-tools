@@ -76,7 +76,7 @@
 
 		{#if highlightedValue}
 			<g transform={`translate(${xScale(highlightedValue)}, ${height + 20} ) scale(20) `}>
-				<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="red" />
+				<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="black" />
 			</g>
 		{/if}
 	</svg>
