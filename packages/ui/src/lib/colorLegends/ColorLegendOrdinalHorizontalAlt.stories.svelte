@@ -9,7 +9,10 @@
 		.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']);
 </script>
 
-<Meta title="Ui/Legends/ColorLegendOrdinalHorizontalAlt" component={ColorLegendOrdinalHorizontalAlt} />
+<Meta
+	title="Ui/Legends/ColorLegendOrdinalHorizontalAlt"
+	component={ColorLegendOrdinalHorizontalAlt}
+/>
 
 <Story name="Categorical color scale">
 	<div class="w-[400px]">

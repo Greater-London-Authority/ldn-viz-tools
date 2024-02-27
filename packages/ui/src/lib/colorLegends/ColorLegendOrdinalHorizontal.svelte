@@ -6,7 +6,6 @@
 	export let highlightedValue: number | string | undefined = undefined;
 </script>
 
-
 <div class="flex flex-col">
 	{#if title}
 		<span class="font-bold">{title}</span>

@@ -31,8 +31,6 @@
 	import { range } from 'd3-array';
 
 	import ColorLegend from './ColorLegend.svelte';
-	import ColorLegendBands from './ColorLegendBands.svelte';
-	import ColorLegendContinuous from './ColorLegendContinuous.svelte';
 
 	const continuousColorScale = scaleSequential(interpolateBlues).domain([0, 10]);
 
@@ -154,5 +152,21 @@
 <Story name="Left and right labels">
 	<div class="w-[400px]">
 		<ColorLegend color={bandColorScale} title="Age" leftLabel="Younger" rightLabel="Older" />
+	</div>
+</Story>
+
+<Story name="Flipping scale direction">
+	<div class="w-[400px]">
+		<p>
+			Flipping both the range and domain of the scale affects the direction in which the legend is
+			drawn, without affecitng the mapping from values to colors.
+		</p>
+		
+		<ColorLegend color={scaleSequential(interpolateBlues).domain([0, 10])} title="Original" />
+
+		<ColorLegend
+			color={scaleSequential((d) => interpolateBlues(1 - d)).domain([0, 10].reverse())}
+			title="Flipped"
+		/>
 	</div>
 </Story>
