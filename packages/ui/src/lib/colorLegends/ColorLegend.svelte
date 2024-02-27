@@ -197,11 +197,23 @@
 
 	<g id="axis-group" transform={`translate(0,${height - marginBottom})`} />
 
-	<text x={0} y={height - marginBottom + 10} text-anchor="start" font-size="10px">
+	<text
+		x={0}
+		y={height + 5}
+		text-anchor="start"
+		font-size="10px"
+		fill="currentColor"
+	>
 		{leftLabel}
 	</text>
 
-	<text x={width} y={height - marginBottom + 10} text-anchor="end" font-size="10px">
+	<text
+		x={width}
+		y={height + 5}
+		text-anchor="end"
+		font-size="10px"
+		fill="currentColor"
+	>
 		{rightLabel}
 	</text>
 
