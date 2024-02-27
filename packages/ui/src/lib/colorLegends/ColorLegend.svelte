@@ -137,8 +137,7 @@
 </script>
 
 <svg
-	{width}
-	{height}
+	width="100%"
 	viewBox="0  0 {width} {height}"
 	style="overflow: visible; display: block;"
 	bind:this={svgRef}
