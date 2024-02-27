@@ -26,7 +26,7 @@
 	export let leftLabel = '';
 	export let rightLabel = '';
 
-	function ramp(color, n = 256) {
+	const ramp = (color, n = 256) => {
 		const canvas = document.createElement('canvas');
 		canvas.width = n;
 		canvas.height = 1;
@@ -38,7 +38,7 @@
 			}
 		}
 		return canvas.toDataURL();
-	}
+	};
 
 	let x;
 	let n;
