@@ -2,24 +2,24 @@
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
 	import { scaleOrdinal } from 'd3-scale';
-	import ColorLegendOrdinalOrdinal from './ColorLegendOrdinal.svelte';
+	import ColorLegendOrdinalHorizontalAlt from './ColorLegendOrdinalHorizontalAlt.svelte';
 
 	const ordinalScale = scaleOrdinal()
 		.domain(['A', 'B', 'C', 'D'])
 		.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']);
 </script>
 
-<Meta title="Ui/Legends/ColorLegendOrdinal" component={ColorLegendOrdinalOrdinal} />
+<Meta title="Ui/Legends/ColorLegendOrdinalHorizontalAlt" component={ColorLegendOrdinalHorizontalAlt} />
 
-<Story name="Ordinal color scale">
+<Story name="Categorical color scale">
 	<div class="w-[400px]">
-		<ColorLegendOrdinalOrdinal scale={ordinalScale} title="Current EPC Rating" />
+		<ColorLegendOrdinalHorizontalAlt scale={ordinalScale} title="Current EPC Rating" />
 	</div>
 </Story>
 
-<Story name="Ordinal color scale - highlighted value">
+<Story name="Categorical color scale - highlighted value">
 	<div class="w-[400px]">
-		<ColorLegendOrdinalOrdinal
+		<ColorLegendOrdinalHorizontalAlt
 			scale={ordinalScale}
 			title="Current EPC Rating"
 			highlightedValue="B"
