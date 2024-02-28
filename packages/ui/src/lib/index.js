@@ -31,5 +31,8 @@ export { default as TabbedSidebarTabList } from './tabbedSidebar/TabbedSidebarTa
 export { default as TabbedSidebarWrapper } from './tabbedSidebar/TabbedSidebarWrapper.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
+export { default as Toaster } from './toaster/Toaster.svelte';
+export * from './toaster/toaster';
+export * from './toaster/types';
 
 export { classNames } from './utils/classNames';
