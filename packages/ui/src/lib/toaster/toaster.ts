@@ -2,7 +2,7 @@ import { writable, type Writable } from 'svelte/store';
 import type { ToastMessage, ToastMessageOptions } from './types';
 import { ToastType } from './types';
 
-const DEFAULT_TIME_TO_LIVE = 4000;
+const DEFAULT_TIME_TO_LIVE = 5000;
 const MAX_MESSAGES = 3;
 
 export const messages: Writable<ToastMessage[]> = writable([]);
@@ -10,12 +10,12 @@ export const messages: Writable<ToastMessage[]> = writable([]);
 // newToastMessage creates a storable message that can be posted or refreshed
 // by the user dev using the ToastMessage.post function.
 //
-// E.g. when a user tries to advance to the next form page but the current
-// form page contains errors, spamming the next button should only refresh the
-// existing error message and not create a long list of duplicate messages.
+// Often there is no need to store and reuse a toast. You can simple fire and
+// forget: newTostMessage("This is a notice!").post().
 export const newToastMessage = (text: string, options: ToastMessageOptions = {}) => {
 	const id = options.id ? options.id : crypto.randomUUID();
 	const type = options.type ? options.type : ToastType.Notice;
+	const timeToLive = options.timeToLive ? options.timeToLive : DEFAULT_TIME_TO_LIVE;
 
 	const msg: ToastMessage = {
 		text: text,
@@ -28,25 +28,13 @@ export const newToastMessage = (text: string, options: ToastMessageOptions = {})
 
 	msg.post = () => {
 		removeMessage(msg);
-		postMessage(msg, 'timeToLive' in options ? options.timeToLive : DEFAULT_TIME_TO_LIVE);
+		postMessage(msg, timeToLive);
 	};
 
 	msg.remove = () => {
 		removeMessage(msg);
 	};
 
-	return msg;
-};
-
-// postToastMessage creates and posts a new message.
-//
-// It is intended for situations where you just need to tell the end user
-// something and there is little or no chance of the message being repeated
-// before timeout or where the precise text content changes from message to
-// message.
-export const postToastMessage = (text: string, options: ToastMessageOptions = {}) => {
-	const msg = newToastMessage(text, options);
-	msg.post();
 	return msg;
 };
 
