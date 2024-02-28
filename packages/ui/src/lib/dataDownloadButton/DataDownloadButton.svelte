@@ -1,3 +1,14 @@
+<!-- 
+	// TODO CHECK TYPES FOR STORY BOOK
+	<script context="module" lang="ts">
+	export interface DataDownloadButtonProps {
+		format?: 'CSV' | 'JSON';
+		data: any;
+		filename: string;
+		disabled: boolean;
+	}
+</script> -->
+
 <script lang="ts">
 	import Button from '../button/Button.svelte';
 
@@ -12,7 +23,7 @@
 
 	const enforceExtension = (name: string, extension: string) => {
 		return name.toLocaleLowerCase().endsWith(extension) ? name : `name${extension}`;
-	}
+	};
 
 	const downloadFromURL = (url: string, name: string) => {
 		const link = document.createElement('a');
