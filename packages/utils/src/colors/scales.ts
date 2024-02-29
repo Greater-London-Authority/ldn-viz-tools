@@ -15,7 +15,7 @@ const d3 = {
 
 // Leave swatch/swatches/swatchGrid/asRamp/ramp
 
-export const getColorScale = ({
+export const getColorRamp = ({
   count = 5,
   colors = [ldnColors.core.blue[500], ldnColors.core.blue[200]],
   even = false
@@ -144,12 +144,12 @@ export const getThresholdBreaksColorsLabels = ({
   const posColorsNeeded = posBreaks.length + 1;
 
   // generate reference colour ramps (at max length)
-  const negRefRamp = getColorScale({
+  const negRefRamp = getColorRamp({
     colors: [colors.neg.low, colors.neg.high],
     count: maxColorsNeeded,
     even: even
   });
-  const posRefRamp = getColorScale({
+  const posRefRamp = getColorRamp({
     colors: [colors.pos.low, colors.pos.high],
     count: maxColorsNeeded,
     even: even
@@ -243,4 +243,4 @@ export const getThresholdBreaksColorsLabels = ({
   return thresholdObj;
 };
 
-console.log(getColorScale());
+console.log(getColorRamp());
