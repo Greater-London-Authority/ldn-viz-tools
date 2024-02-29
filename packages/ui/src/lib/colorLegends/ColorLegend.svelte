@@ -103,22 +103,18 @@
 		}
 	}
 
-	let svgRef: SVGElement;
+	let ticksRef: SVGElement;
 	$: {
-		if (svgRef) {
-			const svg = d3.select(svgRef);
+		if (ticksRef) {
+			const bottomAxis = d3
+				.axisBottom(x)
+				.ticks(ticks, typeof tickFormat === 'string' ? tickFormat : undefined)
+				.tickFormat(typeof tickFormat === 'function' ? tickFormat : undefined)
+				.tickSize(tickSize)
+				.tickValues(tickValues);
 
-			svg
-				.append('g')
-				.attr('transform', `translate(0,${height - marginBottom})`)
-				.call(
-					d3
-						.axisBottom(x)
-						.ticks(ticks, typeof tickFormat === 'string' ? tickFormat : undefined)
-						.tickFormat(typeof tickFormat === 'function' ? tickFormat : undefined)
-						.tickSize(tickSize)
-						.tickValues(tickValues)
-				)
+			d3.select(ticksRef)
+				.call(bottomAxis)
 				.call(tickAdjust)
 				.call((g: any) => g.select('.domain').remove())
 				.call((g: any) =>
@@ -136,12 +132,7 @@
 	}
 </script>
 
-<svg
-	width="100%"
-	viewBox="0  0 {width} {height}"
-	style="overflow: visible; display: block;"
-	bind:this={svgRef}
->
+<svg width="100%" viewBox="0  0 {width} {height}" style="overflow: visible; display: block;">
 	{#if !color}
 		<text>Loading...</text>
 	{:else if color.interpolate}
@@ -194,7 +185,7 @@
 		</g>
 	{/if}
 
-	<g id="axis-group" transform={`translate(0,${height - marginBottom})`} />
+	<g id="ticks" bind:this={ticksRef} transform={`translate(0,${height - marginBottom})`} />
 
 	<text x={0} y={height + 5} text-anchor="start" font-size="10px" fill="currentColor">
 		{leftLabel}
