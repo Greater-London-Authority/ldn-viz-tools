@@ -1,16 +1,4 @@
 <script lang="ts" context="module">
-	export enum ToasterPosition {
-		TopLeft = 'TopLeft',
-		TopCenter = 'TopCenter',
-		TopRight = 'TopRight',
-		CenterRight = 'CenterRight',
-		BottomRight = 'BottomRight',
-		BottomCenter = 'BottomCenter',
-		BottomLeft = 'BottomLeft',
-		CenterLeft = 'CenterLeft',
-		Center = 'Center'
-	}
-
 	type ToasterPositionClass = {
 		[key: string]: string;
 	};
@@ -32,8 +20,15 @@
 	import Toast from './Toast.svelte';
 	import { messages } from './toaster';
 
+	// position is used to layout the Toaster. You can specify your own classes
+	// for positioning via the classes property if you want something bespoke.
 	export let position = 'TopCenter';
+
+	// classes for applying additional classes. These are appended to the class
+	// string so they have implicit but weak priority over other styles.
 	export let classes = '';
+
+	// ...$$restProps applied to the top level element.
 
 	$: posClasses = positionClasses[position] || '';
 </script>

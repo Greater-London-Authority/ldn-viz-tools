@@ -6,6 +6,8 @@
 	import { newToastMessage } from './toaster';
 	import { ToastType } from './types';
 
+	import typeDocs from './types?raw';
+
 	const toastNotice = () => {
 		newToastMessage('A notice!').post();
 	};
@@ -81,6 +83,12 @@
 			<Button condition="warning" on:click={toastWarning}>Warning</Button>
 			<Button condition="error" on:click={toastError}>Error</Button>
 		</div>
+	</div>
+</Story>
+
+<Story name="TypeScript">
+	<div class="text-white p-6 w-[100vw]">
+		<pre><code>{typeDocs}</code></pre>
 	</div>
 </Story>
 

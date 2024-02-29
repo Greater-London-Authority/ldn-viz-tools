@@ -6,6 +6,20 @@ export enum ToastType {
 	Error = 'Error'
 }
 
+// ToasterPosition is an enumeration of valid positions that can be passed to
+// the Toaster component via the 'position' property.
+export enum ToasterPosition {
+	TopLeft = 'TopLeft',
+	TopCenter = 'TopCenter',
+	TopRight = 'TopRight',
+	CenterRight = 'CenterRight',
+	BottomRight = 'BottomRight',
+	BottomCenter = 'BottomCenter',
+	BottomLeft = 'BottomLeft',
+	CenterLeft = 'CenterLeft',
+	Center = 'Center'
+}
+
 // ToastMessage represents a message with functionality for posting, removing
 // and refreshing itself.
 export interface ToastMessage {
