@@ -12,7 +12,7 @@
 	}
 
 	type PositionClass = {
-		[key: string]: string;
+		[key in keyof typeof MapControlGroupPositions]: string;
 	};
 
 	const positionClasses: PositionClass = {
