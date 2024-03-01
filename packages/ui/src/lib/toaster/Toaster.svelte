@@ -19,10 +19,11 @@
 <script lang="ts">
 	import Toast from './Toast.svelte';
 	import { messages } from './toaster';
+	import type { ToasterPosition } from './types';
 
 	// position is used to layout the Toaster. You can specify your own classes
 	// for positioning via the classes property if you want something bespoke.
-	export let position = 'TopCenter';
+	export let position: keyof typeof ToasterPosition = 'TopCenter';
 
 	// classes for applying additional classes. These are appended to the class
 	// string so they have implicit but weak priority over other styles.
