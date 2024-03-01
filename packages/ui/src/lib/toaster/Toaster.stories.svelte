@@ -98,15 +98,31 @@
 		<div
 			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform flex flex-wrap justify-center gap-6 [&>*]:basis-3/12"
 		>
-			<Button on:click={setToaster}>TopLeft</Button>
-			<Button on:click={setToaster}>TopCenter</Button>
-			<Button on:click={setToaster}>TopRight</Button>
-			<Button on:click={setToaster}>CenterLeft</Button>
-			<Button condition="warning" on:click={toastNotice}>Toast!</Button>
-			<Button on:click={setToaster}>CenterRight</Button>
-			<Button on:click={setToaster}>BottomLeft</Button>
-			<Button on:click={setToaster}>BottomCenter</Button>
-			<Button on:click={setToaster}>BottomRight</Button>
+			<Button on:click={setToaster} variant={position === 'TopLeft' ? 'solid' : 'outline'}>
+				TopLeft
+			</Button>
+			<Button on:click={setToaster} variant={position === 'TopCenter' ? 'solid' : 'outline'}>
+				TopCenter
+			</Button>
+			<Button on:click={setToaster} variant={position === 'TopRight' ? 'solid' : 'outline'}>
+				TopRight
+			</Button>
+			<Button on:click={setToaster} variant={position === 'CenterLeft' ? 'solid' : 'outline'}>
+				CenterLeft
+			</Button>
+			<Button condition="warning" on:click={toastNotice}>Add Toast!</Button>
+			<Button on:click={setToaster} variant={position === 'CenterRight' ? 'solid' : 'outline'}>
+				CenterRight
+			</Button>
+			<Button on:click={setToaster} variant={position === 'BottomLeft' ? 'solid' : 'outline'}>
+				BottomLeft
+			</Button>
+			<Button on:click={setToaster} variant={position === 'BottomCenter' ? 'solid' : 'outline'}>
+				BottomCenter
+			</Button>
+			<Button on:click={setToaster} variant={position === 'BottomRight' ? 'solid' : 'outline'}>
+				BottomRight
+			</Button>
 		</div>
 	</div>
 </Story>
