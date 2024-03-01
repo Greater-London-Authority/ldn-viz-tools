@@ -29,7 +29,7 @@
 </script>
 
 <script lang="ts">
-	export let position: string | MapControlGroupPositions = MapControlGroupPositions.TopLeft;
+	export let position: keyof typeof MapControlGroupPositions = MapControlGroupPositions.TopLeft;
 	export let classes = '';
 
 	const positionClass = positionClasses[position];
