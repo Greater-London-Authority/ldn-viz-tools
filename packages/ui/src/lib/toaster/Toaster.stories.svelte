@@ -25,7 +25,7 @@
 	};
 
 	const longLivedMessage = newToastMessage(
-		'These messages decay and disappear after five seconds. You can set a' +
+		'By default, messages disappear after five seconds. You can set a' +
 			' longer timeToLive and enable closeButton if you need a message to' +
 			' stick around. In the presence of a close button users will think they' +
 			' have to manually dismiss the popup so short lived toasts should not' +
