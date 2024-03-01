@@ -30,7 +30,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom in"
-		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
+		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500 pointer-events-auto"
 		on:click={newHandler(zoomIn)}
 	>
 		<Icon src={PlusSmall} class="w-8 h-8 p-0.5" />
@@ -39,7 +39,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom out"
-		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
+		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500 pointer-events-auto"
 		on:click={newHandler(zoomOut)}
 	>
 		<Icon src={MinusSmall} class="w-8 h-8 p-0.5" />
