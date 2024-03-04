@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 1.3.0
+
+### Minor Changes
+
+- ae498d9: FIX - export of styles
+
 ## 1.2.0
 
 ### Minor Changes
