@@ -1,5 +1,18 @@
 # ldn-viz-tools-ui
 
+## 3.3.0
+
+### Minor Changes
+
+- d42c49b: ADDED - add a `NonIdealState` component to explain why content is unavailable
+- 35cdb77: adds index files to routes (stops warnings) adds tailwind to maps
+
+### Patch Changes
+
+- 3d2918e: Fix MapApp layout sizing and lack of overflow hidden for Map.
+- 1d0f93b: \* Export `Input` and `InputWrapper` components
+- a988817: FIXED - Unused space within map controls interfering with map interactions.
+
 ## 3.2.0
 
 ### Minor Changes
