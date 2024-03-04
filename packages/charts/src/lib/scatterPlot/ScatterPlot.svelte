@@ -21,8 +21,8 @@
 	export let yAxis: { [key: string]: any } = { display: true };
 	export let markOptions: { [key: string]: any } = {};
 
-		// all other layercake props accepted with ...$$restProps rtm
-		let padding = { left: 50, bottom: 0 };
+	// all other layercake props accepted with ...$$restProps rtm
+	let padding = { left: 50, bottom: 0 };
 </script>
 
 <ChartContainer {data} {title} {subTitle} {alt} {footer} {exportBtns} {...$$restProps}>

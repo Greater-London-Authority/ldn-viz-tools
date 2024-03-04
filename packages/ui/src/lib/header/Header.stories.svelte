@@ -1,7 +1,14 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
+<script context="module" lang="ts">
 	import Header from './Header.svelte';
+	export const meta = {
+		title: 'Ui/Header',
+		component: Header
+	};
+</script>
+
+<script lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+
 	import NavLink from './NavLink.svelte';
 	import NavLinks from './NavLinks.svelte';
 	import HeaderTitle from './HeaderTitle.svelte';
@@ -9,13 +16,16 @@
 	import HeaderItem from './HeaderItem.svelte';
 </script>
 
-<Meta title="Ui/Header" component={Header} />
-
 <Template let:args>
 	<Header {...args} />
 </Template>
 
-<Story name="NavBar - title only">
+<Story
+	name="NavBar - title only"
+	parameters={{
+		layout: 'fullscreen'
+	}}
+>
 	<Header>
 		<HeaderTitle>An interesting app</HeaderTitle>
 	</Header>
