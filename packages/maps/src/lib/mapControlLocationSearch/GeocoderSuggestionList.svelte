@@ -1,0 +1,43 @@
+<script lang='ts'>
+	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
+	import type { GeocoderAdapter, GeocoderLocation } from './GeocoderAdapter'
+		import type { MapControlLocationUpdate } from './types'
+
+	export let adapter: GeocoderAdapter;
+	export let suggestions: GeocoderLocation[];
+	export let onSelect: MapControlLocationUpdate;
+
+	const attribution = adapter.attribution && adapter.attribution();
+
+	let highlighted = null;
+
+	const highlightFirstSuggestion = () => {
+		highlighted = suggestions.length > 0 ? suggestions[0] : null;
+	};
+
+	$: highlightFirstSuggestion(suggestions);
+</script>
+
+<ul class="absolute top-10 left-0 bg-core-grey-600 text-white text-sm w-full">
+	{#if suggestions.length === 0}
+		<li class="w-full px-2.5 py-1.5">
+			<h1 class="pointer-events-none">No locations found</h1>
+		</li>
+	{:else}
+		{#each suggestions as suggestion (suggestion.name + suggestion.address)}
+			<GeocoderSuggestion {suggestion} {onSelect} bind:highlighted />
+		{/each}
+	{/if}
+
+	{#if attribution && attribution.text}
+		<li class="w-full px-2.5 py-1.5 text-right text-core-grey-300">
+			{#if attribution.link}
+				<a href={attribution.link} target="_blank" rel="noopener" class="text-core-blue-500">
+					{attribution.text}
+				</a>
+			{:else}
+				{attribution.text}
+			{/if}
+		</li>
+	{/if}
+</ul>
