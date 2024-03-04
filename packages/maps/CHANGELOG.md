@@ -1,5 +1,15 @@
 # ldn-viz-tools-maps
 
+## 1.2.0
+
+### Minor Changes
+
+- 35cdb77: adds index files to routes (stops warnings) adds tailwind to maps
+
+### Patch Changes
+
+- 55c3237: Fixes map sometimes failing to resize when container resizes.
+
 ## 1.1.0
 
 ### Minor Changes

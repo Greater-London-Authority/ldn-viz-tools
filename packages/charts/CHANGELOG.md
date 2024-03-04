@@ -1,5 +1,20 @@
 # ldn-viz-tools-charts
 
+## 1.2.0
+
+### Minor Changes
+
+- 35cdb77: adds index files to routes (stops warnings) adds tailwind to maps
+
+### Patch Changes
+
+- Updated dependencies [3d2918e]
+- Updated dependencies [d42c49b]
+- Updated dependencies [1d0f93b]
+- Updated dependencies [a988817]
+- Updated dependencies [35cdb77]
+  - @ldn-viz/ui@3.3.0
+
 ## 1.1.0
 
 ### Minor Changes
