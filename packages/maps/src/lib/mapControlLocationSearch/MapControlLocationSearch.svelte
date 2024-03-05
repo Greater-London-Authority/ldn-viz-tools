@@ -1,12 +1,12 @@
 <script lang="ts">
 	import MapControlGeocoder from './MapControlGeocoder.svelte';
 	import MapControlGeolocator from './MapControlGeolocator.svelte';
-	import type { GeocoderAdapter } from './GeocoderAdapter'
-	import type { MapControlLocationUpdate, MapControlLocationError } from './types'
+	import type { GeocoderAdapter } from './GeocoderAdapter';
+	import type { OnSearchResult, OnSearchError } from './types';
 
 	export let adapter: GeocoderAdapter;
-	export let onLocationFound: MapControlLocationUpdate = undefined;
-	export let onLocationNotFound: MapControlLocationError = undefined;
+	export let onLocationFound: OnSearchResult = undefined;
+	export let onLocationNotFound: OnSearchError = undefined;
 </script>
 
 <div class="flex" {...$$restProps}>

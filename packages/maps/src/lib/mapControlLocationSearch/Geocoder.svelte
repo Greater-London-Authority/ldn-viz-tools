@@ -1,6 +1,8 @@
-<script context="module">
-	const newDebouncer = (func, delay) => {
-		let timerId = null;
+<script lang="ts" context="module">
+	type Timeout = ReturnType<typeof setTimeout>;
+
+	const newDebouncer = (func: () => void, delay: number) => {
+		let timerId: undefined | Timeout = undefined;
 
 		const restart = () => {
 			clearTimeout(timerId);
@@ -15,12 +17,12 @@
 	};
 </script>
 
-<script lang='ts'>
+<script lang="ts">
 	import { MagnifyingGlass } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import GeocoderSuggestionList from './GeocoderSuggestionList.svelte';
-		import type { GeocoderAdapter } from './GeocoderAdapter'
-			import type { MapControlLocationUpdate } from './types'
+	import type { Geolocation, GeocoderAdapter, GeolocationNamed } from './GeocoderAdapter';
+	import type { OnSearchResult } from './types';
 
 	export let adapter: GeocoderAdapter;
 
@@ -29,11 +31,11 @@
 
 	// onLocationSelected is called when a user clicks a location from the
 	// suggestions list.
-	export let onLocationSelected: MapControlLocationUpdate = undefined;
+	export let onLocationSelected: OnSearchResult = undefined;
 
 	// results can be bound via 'bind:results' to be notified of new search
 	// results reactively.
-	export let results = null;
+	export let results: null | GeolocationNamed[] = null;
 
 	// disableSuggestionList can be used to disable to dropdown suggestion
 	// list. The suggestion property will still be updated.
@@ -64,7 +66,7 @@
 		try {
 			results = (await adapter.search(query)) || [];
 			showSuggestionList = !disableSuggestionList;
-		} catch (e: Error) {
+		} catch (e: unknown) {
 			console.error(e);
 			showSuggestionList = false;
 		}
@@ -77,7 +79,7 @@
 		showSuggestionList = false;
 	};
 
-	const onSelect = (suggestion) => {
+	const onSelect = (suggestion: Geolocation) => {
 		closeSuggestionsList();
 
 		if (onLocationSelected) {
@@ -85,14 +87,15 @@
 		}
 	};
 
-	const hideSuggestionList = (event) => {
-		if (!isElementOrChildOf(event.target, container)) {
+	const hideSuggestionList = (event: MouseEvent | KeyboardEvent) => {
+		const target = event.target as HTMLElement;
+		if (!target || !container || !isElementOrChildOf(target, container)) {
 			closeSuggestionsList();
 		}
 	};
 
-	const isElementOrChildOf = (element, possibleParent) => {
-		const position = element.compareDocumentPosition(possibleParent);
+	const isElementOrChildOf = (element: HTMLElement, parent: HTMLElement) => {
+		const position = element.compareDocumentPosition(parent);
 		return !!(position & Node.DOCUMENT_POSITION_CONTAINS);
 	};
 
@@ -102,13 +105,16 @@
 		}
 	};
 
-	const selectFirstSuggestion = (event) => {
+	const selectFirstSuggestion = (event: KeyboardEvent) => {
 		if (!disableSuggestionList && results && results.length > 0 && event.key === 'Enter') {
 			onSelect(results[0]);
 		}
 	};
 
-	$: scheduleUpdate(query);
+	$: {
+		query;
+		scheduleUpdate();
+	}
 </script>
 
 <svelte:window on:mousedown={hideSuggestionList} on:keyup={hideSuggestionList} />

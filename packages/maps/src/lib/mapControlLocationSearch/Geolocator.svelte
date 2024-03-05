@@ -1,11 +1,11 @@
-<script lang='ts'>
+<script lang="ts">
 	import { Button, Spinner } from '@ldn-viz/ui';
 	import TargetIcon from './TargetIcon.svelte';
-		import type { GeocoderAdapter } from './GeocoderAdapter'
-	import type { MapControlLocationUpdate } from './types'
+	import type { Coords } from './GeocoderAdapter';
+	import type { OnSearchResult, OnSearchError } from './types';
 
-	export let onLocationFound: MapControlLocationUpdate = undefined;
-	export let onLocationNotFound: MapControlLocationUpdate = undefined;
+	export let onLocationFound: OnSearchResult = undefined;
+	export let onLocationNotFound: OnSearchError = undefined;
 
 	let isSearching = false;
 
@@ -22,11 +22,11 @@
 		navigator.geolocation.getCurrentPosition(apiFoundLocation, apiNotFoundLocation);
 	};
 
-	const apiFoundLocation = (result: ) => {
+	const apiFoundLocation = (result: GeolocationPosition) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates
 		isSearching = false;
 
-		const coords = extractCoords(result);
+		const coords: null | Coords = extractCoords(result);
 		if (!coords) {
 			return;
 		}
@@ -36,7 +36,7 @@
 		}
 	};
 
-	const apiNotFoundLocation = (err) => {
+	const apiNotFoundLocation = (err: GeolocationPositionError) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
 		isSearching = false;
 
@@ -53,27 +53,30 @@
 		}
 	};
 
-	const logError = (...msg) => {
+	const logError = (...msg: string[]) => {
 		console.error(`[Geolocator]`, ...msg);
 	};
 
-	const extractCoords = (result) => {
+	const extractCoords = (result: GeolocationPosition): null | Coords => {
 		const lng = result?.coords?.longitude;
 		const lat = result?.coords?.latitude;
 
 		if (!isValidCoords(lng, lat)) {
-			logError('Invalid location provided by browser', result);
+			logError(
+				'Invalid location provided by browser', //
+				JSON.stringify(result, null, 2)
+			);
 			return null;
 		}
 
 		return [lng, lat];
 	};
 
-	const isValidCoords = (lng, lat) => {
+	const isValidCoords = (lng: number, lat: number): boolean => {
 		// 0,0 is a valid coordinate (null island)
 		// But, actually, it's not because maps are limited to Greater London area!
 		// But there might be a case for no limit so better safe than sorry.
-		return (lng || lng === 0) && (lat || lat === 0);
+		return (!!lng || lng === 0) && (!!lat || lat === 0);
 	};
 </script>
 

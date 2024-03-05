@@ -1,10 +1,10 @@
-import type { GeocoderAdapter, GeocoderLocation, GeocoderAttribution } from './GeocoderAdapter';
+import type { GeocoderAdapter, GeolocationNamed, GeocoderAttribution } from './GeocoderAdapter';
 
 export class GeocoderAdapterList implements GeocoderAdapter {
-	private _locations: GeocoderLocation[]
-	private _attribution: undefined | GeocoderAttribution
+	private _locations: GeolocationNamed[];
+	private _attribution: undefined | GeocoderAttribution;
 
-	constructor(locations: GeocoderLocation[] = []) {
+	constructor(locations: GeolocationNamed[] = []) {
 		this._locations = locations;
 		this._attribution = undefined;
 	}
@@ -22,11 +22,11 @@ export class GeocoderAdapterList implements GeocoderAdapter {
 
 	// GeocoderAdapterList functions.
 
-	locations(): GeocoderLocation[] {
+	locations(): GeolocationNamed[] {
 		return this._locations;
 	}
 
-	setLocations(locations: GeocoderLocation[]): GeocoderAdapterList {
+	setLocations(locations: GeolocationNamed[]): GeocoderAdapterList {
 		this._locations = locations;
 		return this;
 	}
@@ -37,7 +37,7 @@ export class GeocoderAdapterList implements GeocoderAdapter {
 	}
 }
 
-const containsQuery = (location: GeocoderLocation, searchText: string): boolean => {
+const containsQuery = (location: GeolocationNamed, searchText: string): boolean => {
 	const haystack = location.name + ' ' + location.address;
 	return haystack.toLowerCase().includes(searchText.toLowerCase());
 };

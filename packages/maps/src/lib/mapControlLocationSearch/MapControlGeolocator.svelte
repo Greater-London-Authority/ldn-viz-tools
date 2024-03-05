@@ -1,22 +1,18 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-		import type { Geolocation } from './GeocoderAdapter'
-	import type { MapControlLocationUpdate, MapControlLocationError } from './types'
+	import type { Coords, GeolocationUnamed } from './GeocoderAdapter';
+	import type { MapStore, OnSearchResult, OnSearchError } from './types';
 
 	import Geolocator from './Geolocator.svelte';
 
-	interface Map {
-		flyTo: (options: any) => void
-	}
+	export let onLocationFound: OnSearchResult = undefined;
+	export let onLocationNotFound: OnSearchError = undefined;
 
-	export let onLocationFound: MapControlLocationUpdate = undefined;
-	export let onLocationNotFound: MapControlLocationError = undefined;
-
-	const map = getContext('map');
+	const map: MapStore = getContext('map');
 	const zoomLevel = 16;
 
-	const onLocationFoundWrap = (location: Geolocation) => {
+	const onLocationFoundWrap = (location: GeolocationUnamed) => {
 		if (!$map) {
 			return;
 		}
@@ -28,7 +24,7 @@
 		}
 	};
 
-	const flyToCoords = (coords) => {
+	const flyToCoords = (coords: Coords) => {
 		$map.flyTo({
 			...GLIDE_ANIMATION_OPTIONS,
 			zoom: zoomLevel,

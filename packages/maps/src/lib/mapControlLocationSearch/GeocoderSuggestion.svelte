@@ -1,16 +1,10 @@
-<script lang='ts'>
-	import type { GeocoderLocation } from './GeocoderAdapter'
-		import type { MapControlLocationUpdate } from './types'
+<script lang="ts">
+	import type { GeolocationNamed } from './GeocoderAdapter';
+	import type { OnSearchResult } from './types';
 
-	export let suggestion: GeocoderLocation;
-	export let onSelect: MapControlLocationUpdate;
-	export let highlighted: GeocoderLocation;
-
-	const keyHandler = (event: KeyboardEvent) => {
-		if (event.key === 'Enter') {
-			select(event);
-		}
-	};
+	export let suggestion: GeolocationNamed;
+	export let onSelect: OnSearchResult;
+	export let highlighted: null | GeolocationNamed;
 
 	const select = () => {
 		onSelect && onSelect(suggestion);

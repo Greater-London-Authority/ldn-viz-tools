@@ -1,8 +1,8 @@
-import type { GeocoderAdapter, GeocoderLocation } from './GeocoderAdapter';
+import type { GeocoderAdapter, GeolocationNamed } from './GeocoderAdapter';
 
 interface LocalCustodianCode {
-	borough: string,
-	code: number
+	borough: string;
+	code: number;
 }
 
 export const OS_LONDON_LOCAL_CUSTODIAN_CODES: LocalCustodianCode[] = [
@@ -140,17 +140,23 @@ export const OS_LONDON_LOCAL_CUSTODIAN_CODES: LocalCustodianCode[] = [
 	}
 ];
 
-type DPAFeature = {
+interface DPAFeature {
 	UPRN: string;
 	ADDRESS: string;
 	CENTER: [number, number];
+	LNG: number;
+	LAT: number;
 	[otherOptions: string]: unknown;
-};
+}
 
-type OSPlaces = {
-	results: DPAFeature[];
+interface OSPlacesResult {
+	DPA: DPAFeature;
+}
+
+interface OSPlaces {
+	results: OSPlacesResult[];
 	[otherOptions: string]: unknown;
-};
+}
 
 // This adapter provides address searching within a specified borough.
 //
@@ -177,7 +183,7 @@ export class GeocoderAdapterOSPlaces implements GeocoderAdapter {
 		const url = buildUrl(text, this._key, this._lcc, this._resultCount);
 		return fetch(url)
 			.then((res) => res.json())
-			.then(transformResultsToGeocoderLocations);
+			.then(transformResultsToGeolocationNameds);
 	}
 
 	attribution() {
@@ -189,8 +195,8 @@ export class GeocoderAdapterOSPlaces implements GeocoderAdapter {
 
 	// GeocoderAdapterOSPlaces functions.
 
-	setLocalCustodianCode(llc: number): GeocoderAdapterOSPlaces {
-		this._llc = llc;
+	setLocalCustodianCode(_lcc: number): GeocoderAdapterOSPlaces {
+		this._lcc = _lcc;
 		return this;
 	}
 
@@ -206,14 +212,14 @@ const buildUrl = (text: string, key: string, lcc: number, resultCount: number): 
 		key: key,
 		output_srs: 'WGS84',
 		format: 'JSON',
-		maxresults: resultCount,
+		maxresults: resultCount.toString(),
 		fq: `LOCAL_CUSTODIAN_CODE:${lcc}`
 	});
 
 	return `https://api.os.uk/search/places/v1/find?${queryString}`;
 };
 
-const transformResultsToGeocoderLocations = (data: OSPlaces): GeocoderLocation[] => {
+const transformResultsToGeolocationNameds = (data: OSPlaces): GeolocationNamed[] => {
 	if (!data.results) {
 		return [];
 	}

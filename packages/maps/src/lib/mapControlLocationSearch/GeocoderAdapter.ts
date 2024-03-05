@@ -1,16 +1,18 @@
-// Geolocation represents a geographical location with a center point and
-// possible bounding box.
-export interface Geolocation {
-	// center in the form [lng, lat].
-	center: [number, number];
+// Coords represents map coordinates in the form [lng, lat].
+export type Coords = [number, number];
 
-	// bounds in the form [minLng, minLat, maxLng, maxLat].
-	bounds?: [number, number, number, number];
+// Boudns represents map bounds in the form [minLng, minLat, maxLng, maxLat].
+export type Bounds = [number, number, number, number];
+
+// GeolocationUnamed represents a geographical location with a center point
+// and possible bounding box.
+export interface GeolocationUnamed {
+	center: Coords;
+	bounds?: Bounds;
 }
 
-// GeocoderLocation should contain either a name, an address, or both.
-export interface GeocoderLocation<ExtraType = any> extends Geolocation {
-	// id or identifier.
+// GeolocationNamed represents a named and possible addressed location.
+export interface GeolocationNamed extends GeolocationUnamed {
 	id: string;
 
 	// name is the short human readable name of the loaction presented to the
@@ -20,9 +22,12 @@ export interface GeocoderLocation<ExtraType = any> extends Geolocation {
 	// address in the human readable address presented to the user.
 	address?: string;
 
-	// extra allows adapters to store extra information
-	extra: ExtraType;
+	// otherProps allows adapters to store or pass adapter specific information.
+	[otherProps: string]: unknown;
 }
+
+// Geolocation represents either a named or unamed location.
+export type Geolocation = GeolocationUnamed | GeolocationNamed;
 
 // GeocoderAttribution specifies the attribution text and optional link
 // returned by an adapter.
@@ -52,7 +57,7 @@ export interface GeocoderAdapter {
 	// Except for the above constraints, every change to the search input box
 	// will trigger a search request. It is up to individual adapters to apply
 	// any caching or search optimisation.
-	search: (query: string) => Promise<GeocoderLocation[]>;
+	search: (query: string) => Promise<GeolocationNamed[]>;
 
 	// attribution returns an object containing two strings acknowledging the
 	// authors or owners of the location data or hosting service and an optional

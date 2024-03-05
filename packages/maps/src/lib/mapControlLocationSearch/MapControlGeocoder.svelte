@@ -1,26 +1,21 @@
-<script lang='ts'>
+<script lang="ts">
 	import { getContext } from 'svelte';
 	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-	import type { GeocoderAdapter, GeocoderLocation } from './GeocoderAdapter'
-		import type { MapControlLocationUpdate } from './types'
+	import type { Coords, Bounds, GeocoderAdapter, Geolocation } from './GeocoderAdapter';
+	import type { MapStore, OnSearchResult } from './types';
 
 	import Geocoder from './Geocoder.svelte';
 
-	interface Map {
-		flyTo: (options: any) => void
-		fitBounds: (bounds: [number, number, number, number], options: any) => void
-	}
-
 	export let adapter: GeocoderAdapter;
-	export let onLocationFound: MapControlLocationUpdate = undefined;
+	export let onLocationFound: OnSearchResult = undefined;
 	export let classes = '';
 	export let inputClasses = '';
 
-	const map = getContext('map');
+	const map: MapStore = getContext('map');
 	const zoomLevel = 16;
 	const delay = 500;
 
-	const onLocationSelected = (location: GeocoderLocation) => {
+	const onLocationSelected = (location: Geolocation) => {
 		if (!$map) {
 			return;
 		}
@@ -36,13 +31,13 @@
 		}
 	};
 
-	const flyToBounds = (bounds) => {
+	const flyToBounds = (bounds: Bounds) => {
 		$map.fitBounds(bounds, {
 			...GLIDE_ANIMATION_OPTIONS
 		});
 	};
 
-	const flyToCoords = (coords) => {
+	const flyToCoords = (coords: Coords) => {
 		$map.flyTo({
 			...GLIDE_ANIMATION_OPTIONS,
 			zoom: zoomLevel,

@@ -1,4 +1,4 @@
-import type { GeocoderAdapter, GeocoderLocation } from './GeocoderAdapter';
+import type { GeocoderAdapter, GeolocationNamed } from './GeocoderAdapter';
 import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
 
 type MapBoxFeature = {
@@ -16,8 +16,8 @@ type MapBoxFeatureCollection = {
 };
 
 export class GeocoderAdapterMapBox implements GeocoderAdapter {
-	private _token: string = ''
-	private _resultCount: number = 5
+	private _token: string = '';
+	private _resultCount: number = 5;
 
 	constructor(token: string, resultCount = 5) {
 		this._token = token;
@@ -30,7 +30,7 @@ export class GeocoderAdapterMapBox implements GeocoderAdapter {
 		const url = buildUrl(text, this._token, this._resultCount);
 		return fetch(url)
 			.then((res) => res.json())
-			.then(transformGeoJSONToGeocoderLocations);
+			.then(transformGeoJSONToGeolocationNameds);
 	}
 
 	attribution() {
@@ -65,17 +65,17 @@ const buildUrl = (text: string, token: string, resultCount: number): string => {
 
 	const queryString = new URLSearchParams({
 		access_token: token,
-		bbox: GREATER_LONDON_BOUNDS_PADDED.flat(),
-		autocomplete: true,
-		limit: resultCount
+		bbox: GREATER_LONDON_BOUNDS_PADDED.flat().toString(),
+		autocomplete: true.toString(),
+		limit: resultCount.toString()
 	});
 
 	return `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${queryString}`;
 };
 
-const transformGeoJSONToGeocoderLocations = (
+const transformGeoJSONToGeolocationNameds = (
 	geojson: MapBoxFeatureCollection
-): GeocoderLocation[] => {
+): GeolocationNamed[] => {
 	return geojson.features.map((loc) => ({
 		id: loc.id,
 		name: loc.text,
