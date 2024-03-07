@@ -1,8 +1,8 @@
 import { type AnimationOptions, type FlyOptions } from 'maplibre-gl';
 
 // https://easings.net/
-export const easeOutQuad = (t) => 1 - (1 - t) * (1 - t);
-export const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+export const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
+export const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 
 export const ZOOM_ANIMATION_OPTIONS: AnimationOptions = {
 	animate: true,
