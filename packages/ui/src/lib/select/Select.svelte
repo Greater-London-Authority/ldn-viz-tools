@@ -35,7 +35,6 @@
 	export let closeListOnChange = true;
 
 	export let createGroupHeaderItem: any = undefined; // ?
-	export const getFilteredItems: any = undefined; // ?
 
 	export let searchable = true;
 	export let inputStyles = '';
@@ -102,7 +101,6 @@
 			{required}
 			{closeListOnChange}
 			{createGroupHeaderItem}
-			{getFilteredItems}
 			{searchable}
 			{inputStyles}
 			{clearable}
