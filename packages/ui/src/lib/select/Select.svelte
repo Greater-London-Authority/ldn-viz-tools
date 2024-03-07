@@ -53,6 +53,26 @@
 	export let listOffset = 5;
 	export let hoverItemIndex = 0;
 	export let floatingConfig = {};
+
+	// We expose a justValue prop that is writable: the main svelte-select component has one that is read-only
+	export let justValue: any;
+
+	// respond to external change in justValue
+	const applyChangeFromjustValue = (newjustValue: any) => {
+		if (!value || newjustValue != value[itemId]) {
+			value = items.find((f) => f[itemId] === newjustValue);
+		}
+	};
+	$: applyChangeFromjustValue(justValue);
+
+	// respond to changes in selection
+	const updatejustValueFromSelection = (newValue: { [key: string]: any }) => {
+		const newjustValue = newValue && newValue[itemId];
+		if (justValue !== newjustValue) {
+			justValue = newjustValue;
+		}
+	};
+	$: updatejustValueFromSelection(value);
 </script>
 
 <InputWrapper {...$$restProps} {id} {disabled} {error}>
