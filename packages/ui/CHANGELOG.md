@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 3.4.0
+
+### Minor Changes
+
+- a1f130a: ADDED: `ColorLegend`, `ColorLegendOrdinalHorizontal` and `ColorLegendOrdinalHorizontalAlt` components
+
 ## 3.3.0
 
 ### Minor Changes
