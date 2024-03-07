@@ -1,5 +1,5 @@
 ---
-'@ldn-viz/ui': patch
+'@ldn-viz/ui': minor
 ---
 
 ADDED: `ColorLegend`, `ColorLegendOrdinalHorizontal` and `ColorLegendOrdinalHorizontalAlt` components
