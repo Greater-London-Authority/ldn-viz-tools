@@ -1,33 +1,4 @@
-// Coords represents map coordinates in the form [lng, lat].
-export type Coords = [number, number];
-
-// Boudns represents map bounds in the form [minLng, minLat, maxLng, maxLat].
-export type Bounds = [number, number, number, number];
-
-// GeolocationUnamed represents a geographical location with a center point
-// and possible bounding box.
-export interface GeolocationUnamed {
-	center: Coords;
-	bounds?: Bounds;
-}
-
-// GeolocationNamed represents a named and possible addressed location.
-export interface GeolocationNamed extends GeolocationUnamed {
-	id: string;
-
-	// name is the short human readable name of the loaction presented to the
-	// user.
-	name?: string;
-
-	// address in the human readable address presented to the user.
-	address?: string;
-
-	// otherProps allows adapters to store or pass adapter specific information.
-	[otherProps: string]: unknown;
-}
-
-// Geolocation represents either a named or unamed location.
-export type Geolocation = GeolocationUnamed | GeolocationNamed;
+import type { GeolocationNamed } from './types';
 
 // GeocoderAttribution specifies the attribution text and optional link
 // returned by an adapter.
@@ -47,6 +18,10 @@ export interface GeocoderAttribution {
 // The simple design allows for bespoke adapters to be developed easily.
 // E.g. an application may require location searching within a non-standard
 // API or where non-standard filtering is needed.
+//
+// If an adapter encounters an error that means it can't return any results it
+// must reject (possible via throw) with a type compatible with
+// OnGeolocationSearchError.
 export interface GeocoderAdapter {
 	// search returns a promise for a list of search results.
 	//

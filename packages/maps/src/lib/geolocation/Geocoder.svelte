@@ -21,8 +21,15 @@
 	import { MagnifyingGlass } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import GeocoderSuggestionList from './GeocoderSuggestionList.svelte';
-	import type { Geolocation, GeocoderAdapter, GeolocationNamed } from './GeocoderAdapter';
-	import type { OnSearchResult } from './types';
+
+	import type { GeocoderAdapter } from './GeocoderAdapter';
+	import type {
+		GeolocationNamed, //
+		Geolocation,
+		GeolocationSearchError,
+		OnGeolocationSearchResult,
+		OnGeolocationSearchError
+	} from './types';
 
 	export let adapter: GeocoderAdapter;
 
@@ -31,7 +38,10 @@
 
 	// onLocationSelected is called when a user clicks a location from the
 	// suggestions list.
-	export let onLocationSelected: OnSearchResult = undefined;
+	export let onLocationSelected: OnGeolocationSearchResult;
+
+	// onSearchError is called when the adapter promise rejects a search request.
+	export let onSearchError: OnGeolocationSearchError;
 
 	// results can be bound via 'bind:results' to be notified of new search
 	// results reactively.
@@ -64,7 +74,14 @@
 		}
 
 		try {
-			results = (await adapter.search(query)) || [];
+			results = await adapter
+				.search(query)
+				.then((res) => res || [])
+				.catch((err: unknown) => {
+					console.error('[Location Search] Search results could not be retrieved.');
+					onSearchError(err as GeolocationSearchError);
+					return [];
+				});
 			showSuggestionList = !disableSuggestionList;
 		} catch (e: unknown) {
 			console.error(e);

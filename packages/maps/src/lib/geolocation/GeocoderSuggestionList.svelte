@@ -1,11 +1,14 @@
 <script lang="ts">
 	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
-	import type { GeocoderAdapter, GeolocationNamed } from './GeocoderAdapter';
-	import type { OnSearchResult } from './types';
+	import type { GeocoderAdapter } from './GeocoderAdapter';
+	import type {
+		GeolocationNamed, //
+		OnGeolocationSearchResult
+	} from './types';
 
 	export let adapter: GeocoderAdapter;
 	export let suggestions: GeolocationNamed[];
-	export let onSelect: OnSearchResult;
+	export let onSelect: OnGeolocationSearchResult;
 
 	const attribution = adapter.attribution && adapter.attribution();
 

@@ -1,36 +1,36 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-	import type { Coords, GeolocationUnamed } from './GeocoderAdapter';
-	import type { MapStore, OnSearchResult, OnSearchError } from './types';
+	import Geolocator from '../geolocation/Geolocator.svelte';
 
-	import Geolocator from './Geolocator.svelte';
+	import type { MapStore } from './map-types';
+	import type {
+		GeolocationUnamed, //
+		OnGeolocationSearchResult,
+		OnGeolocationSearchError
+	} from '../geolocation/types';
 
-	export let onLocationFound: OnSearchResult = undefined;
-	export let onLocationNotFound: OnSearchError = undefined;
+	export let onLocationFound: OnGeolocationSearchResult;
+	export let onSearchError: OnGeolocationSearchError;
 
 	const map: MapStore = getContext('map');
 	const zoomLevel = 16;
 
-	const onLocationFoundWrap = (location: GeolocationUnamed) => {
+	const flyToLocation = (location: GeolocationUnamed) => {
 		if (!$map) {
 			return;
 		}
 
-		flyToCoords(location.center);
+		$map.flyTo({
+			...GLIDE_ANIMATION_OPTIONS,
+			zoom: zoomLevel,
+			center: location.center
+		});
 
 		if (onLocationFound) {
 			onLocationFound(location);
 		}
 	};
-
-	const flyToCoords = (coords: Coords) => {
-		$map.flyTo({
-			...GLIDE_ANIMATION_OPTIONS,
-			zoom: zoomLevel,
-			center: coords
-		});
-	};
 </script>
 
-<Geolocator onLocationFound={onLocationFoundWrap} {onLocationNotFound} />
+<Geolocator onLocationFound={flyToLocation} {onSearchError} />

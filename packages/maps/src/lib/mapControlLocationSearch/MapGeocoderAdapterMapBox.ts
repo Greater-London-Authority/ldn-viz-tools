@@ -1,4 +1,5 @@
-import type { GeocoderAdapter, GeolocationNamed } from './GeocoderAdapter';
+import type { GeolocationNamed } from '../geolocation/types';
+import type { GeocoderAdapter } from '../geolocation/GeocoderAdapter';
 import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
 
 type MapBoxFeature = {
@@ -15,7 +16,11 @@ type MapBoxFeatureCollection = {
 	[otherOptions: string]: unknown;
 };
 
-export class GeocoderAdapterMapBox implements GeocoderAdapter {
+// MapGeocoderAdapterMapBox adapter uses the MapBox API to source locations.
+//
+// Due to licensing this adapter can only be used within @ldn-viz maps and
+// result locations must be shown on the map.
+export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 	private _token: string = '';
 	private _resultCount: number = 5;
 
@@ -40,18 +45,18 @@ export class GeocoderAdapterMapBox implements GeocoderAdapter {
 		};
 	}
 
-	// GeocoderAdapterMapBox functions.
+	// MapGeocoderAdapterMapBox functions.
 
-	setResultCount(resultCount: number): GeocoderAdapterMapBox {
+	setResultCount(resultCount: number): MapGeocoderAdapterMapBox {
 		if (resultCount > 10) {
 			resultCount = 10;
 			console.warn(
-				`[GeocoderAdapterMapBox] maximum MapBox API result count is 10. ${resultCount} is too high so defaulting to 10`
+				`[MapGeocoderAdapterMapBox] maximum MapBox API result count is 10. ${resultCount} is too high so defaulting to 10`
 			);
 		} else if (resultCount < 1) {
 			resultCount = 1;
 			console.warn(
-				`[GeocoderAdapterMapBox] minimum MapBox API result count is 1. ${resultCount} is too low so defaulting to 1`
+				`[MapGeocoderAdapterMapBox] minimum MapBox API result count is 1. ${resultCount} is too low so defaulting to 1`
 			);
 		}
 

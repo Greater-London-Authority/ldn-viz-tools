@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { Button, Spinner } from '@ldn-viz/ui';
 	import TargetIcon from './TargetIcon.svelte';
-	import type { Coords } from './GeocoderAdapter';
-	import type { OnSearchResult, OnSearchError } from './types';
 
-	export let onLocationFound: OnSearchResult = undefined;
-	export let onLocationNotFound: OnSearchError = undefined;
+	import type {
+		GeolocationCoords, //
+		OnGeolocationSearchResult,
+		OnGeolocationSearchError
+	} from './types';
+
+	export let onLocationFound: OnGeolocationSearchResult;
+	export let onSearchError: OnGeolocationSearchError;
 
 	let isSearching = false;
 
@@ -19,14 +23,17 @@
 		}
 
 		isSearching = true;
-		navigator.geolocation.getCurrentPosition(apiFoundLocation, apiNotFoundLocation);
+		navigator.geolocation.getCurrentPosition(
+			apiFoundLocation, //
+			apiNotFoundLocation
+		);
 	};
 
 	const apiFoundLocation = (result: GeolocationPosition) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates
 		isSearching = false;
 
-		const coords: null | Coords = extractCoords(result);
+		const coords: null | GeolocationCoords = extractCoords(result);
 		if (!coords) {
 			return;
 		}
@@ -48,8 +55,8 @@
 			logError('User location unavailable.');
 		}
 
-		if (onLocationNotFound) {
-			onLocationNotFound(err);
+		if (onSearchError) {
+			onSearchError(err);
 		}
 	};
 
@@ -57,7 +64,7 @@
 		console.error(`[Geolocator]`, ...msg);
 	};
 
-	const extractCoords = (result: GeolocationPosition): null | Coords => {
+	const extractCoords = (result: GeolocationPosition): null | GeolocationCoords => {
 		const lng = result?.coords?.longitude;
 		const lat = result?.coords?.latitude;
 

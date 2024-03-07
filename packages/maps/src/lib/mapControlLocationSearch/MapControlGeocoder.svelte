@@ -1,13 +1,21 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-	import type { Coords, Bounds, GeocoderAdapter, Geolocation } from './GeocoderAdapter';
-	import type { MapStore, OnSearchResult } from './types';
+	import Geocoder from '../geolocation/Geocoder.svelte';
 
-	import Geocoder from './Geocoder.svelte';
+	import type { MapStore } from './map-types';
+	import type { GeocoderAdapter } from '../geolocation/GeocoderAdapter';
+	import type {
+		GeolocationCoords,
+		GeolocationBounds,
+		Geolocation,
+		OnGeolocationSearchResult,
+		OnGeolocationSearchError
+	} from '../geolocation/types';
 
 	export let adapter: GeocoderAdapter;
-	export let onLocationFound: OnSearchResult = undefined;
+	export let onLocationFound: OnGeolocationSearchResult;
+	export let onSearchError: OnGeolocationSearchError;
 	export let classes = '';
 	export let inputClasses = '';
 
@@ -31,13 +39,13 @@
 		}
 	};
 
-	const flyToBounds = (bounds: Bounds) => {
+	const flyToBounds = (bounds: GeolocationBounds) => {
 		$map.fitBounds(bounds, {
 			...GLIDE_ANIMATION_OPTIONS
 		});
 	};
 
-	const flyToCoords = (coords: Coords) => {
+	const flyToCoords = (coords: GeolocationCoords) => {
 		$map.flyTo({
 			...GLIDE_ANIMATION_OPTIONS,
 			zoom: zoomLevel,
@@ -46,4 +54,4 @@
 	};
 </script>
 
-<Geocoder {adapter} {delay} {onLocationSelected} {classes} {inputClasses} />
+<Geocoder {adapter} {delay} {onSearchError} {onLocationSelected} {classes} {inputClasses} />

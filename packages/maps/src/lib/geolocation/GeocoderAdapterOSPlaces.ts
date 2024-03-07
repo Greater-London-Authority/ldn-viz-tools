@@ -1,141 +1,146 @@
-import type { GeocoderAdapter, GeolocationNamed } from './GeocoderAdapter';
+import type { GeolocationNamed } from './types';
+import type { GeocoderAdapter } from './GeocoderAdapter';
 
-interface LocalCustodianCode {
-	borough: string;
+// LocalCustodianCode represents a mapping between a custodian code and its
+// readable label.
+export interface LocalCustodianCode {
+	label: string;
 	code: number;
 }
 
+// OS_LONDON_LOCAL_CUSTODIAN_CODES is an array of custodian codes mapped to
+// their "borough" name (label).
 export const OS_LONDON_LOCAL_CUSTODIAN_CODES: LocalCustodianCode[] = [
 	{
-		borough: 'CITY OF LONDON',
+		label: 'CITY OF LONDON',
 		code: 5030
 	},
 	{
-		borough: 'BARKING AND DAGENHAM',
+		label: 'BARKING AND DAGENHAM',
 		code: 5060
 	},
 	{
-		borough: 'BARNET',
+		label: 'BARNET',
 		code: 5090
 	},
 	{
-		borough: 'BEXLEY',
+		label: 'BEXLEY',
 		code: 5120
 	},
 	{
-		borough: 'BRENT',
+		label: 'BRENT',
 		code: 5150
 	},
 	{
-		borough: 'LONDON BOROUGH OF BROMLEY',
+		label: 'LONDON BOROUGH OF BROMLEY',
 		code: 5180
 	},
 	{
-		borough: 'CAMDEN',
+		label: 'CAMDEN',
 		code: 5210
 	},
 	{
-		borough: 'CROYDON',
+		label: 'CROYDON',
 		code: 5240
 	},
 	{
-		borough: 'EALING',
+		label: 'EALING',
 		code: 5270
 	},
 	{
-		borough: 'ENFIELD',
+		label: 'ENFIELD',
 		code: 5300
 	},
 	{
-		borough: 'GREENWICH',
+		label: 'GREENWICH',
 		code: 5330
 	},
 	{
-		borough: 'HACKNEY',
+		label: 'HACKNEY',
 		code: 5360
 	},
 	{
-		borough: 'HAMMERSMITH AND FULHAM',
+		label: 'HAMMERSMITH AND FULHAM',
 		code: 5390
 	},
 	{
-		borough: 'LONDON BOROUGH OF HARINGEY',
+		label: 'LONDON BOROUGH OF HARINGEY',
 		code: 5420
 	},
 	{
-		borough: 'HARROW',
+		label: 'HARROW',
 		code: 5450
 	},
 	{
-		borough: 'HAVERING',
+		label: 'HAVERING',
 		code: 5480
 	},
 	{
-		borough: 'HILLINGDO',
+		label: 'HILLINGDO',
 		code: 5510
 	},
 	{
-		borough: 'LONDON BOROUGH OF HOUNSLOW',
+		label: 'LONDON BOROUGH OF HOUNSLOW',
 		code: 5540
 	},
 	{
-		borough: 'ISLINGTON',
+		label: 'ISLINGTON',
 		code: 5570
 	},
 	{
-		borough: 'KENSINGTON AND CHELSEA',
+		label: 'KENSINGTON AND CHELSEA',
 		code: 5600
 	},
 	{
-		borough: 'KINGSTON UPO',
+		label: 'KINGSTON UPO',
 		code: 5630
 	},
 	{
-		borough: 'LAMBETH',
+		label: 'LAMBETH',
 		code: 5660
 	},
 	{
-		borough: 'LEWISHAM',
+		label: 'LEWISHAM',
 		code: 5690
 	},
 	{
-		borough: 'MERTON',
+		label: 'MERTON',
 		code: 5720
 	},
 	{
-		borough: 'NEWHAM',
+		label: 'NEWHAM',
 		code: 5750
 	},
 	{
-		borough: 'REDBRIDGE',
+		label: 'REDBRIDGE',
 		code: 5780
 	},
 	{
-		borough: 'RICHMOND UPON THAMES',
+		label: 'RICHMOND UPON THAMES',
 		code: 5810
 	},
 	{
-		borough: 'SOUTHWARK',
+		label: 'SOUTHWARK',
 		code: 5840
 	},
 	{
-		borough: 'SUTTON',
+		label: 'SUTTON',
 		code: 5870
 	},
 	{
-		borough: 'TOWER HAMLETS',
+		label: 'TOWER HAMLETS',
 		code: 5900
 	},
 	{
-		borough: 'WALTHAM FOREST',
+		label: 'WALTHAM FOREST',
 		code: 5930
 	},
 	{
-		borough: 'WANDSWORTH',
+		label: 'WANDSWORTH',
 		code: 5960
 	},
 	{
-		borough: 'CITY OF WESTMINSTER',
+		label: 'CITY OF WESTMINSTER',
 		code: 5990
 	}
 ];
@@ -158,7 +163,8 @@ interface OSPlaces {
 	[otherOptions: string]: unknown;
 }
 
-// This adapter provides address searching within a specified borough.
+// GeocoderAdapterOSPlaces provides address searching within a specified
+// borough using the OS places API.
 //
 // Usage requires passing an API key and a LOCAL_CUSTODIAN_CODE which
 // represents the borough or borough sized geographical area.
@@ -168,7 +174,7 @@ interface OSPlaces {
 // geographical area in between (AFAIK).
 export class GeocoderAdapterOSPlaces implements GeocoderAdapter {
 	private _key: string = '';
-	private _lcc: number = OS_LONDON_LOCAL_CUSTODIAN_CODES[0].code;
+	private _lcc: number = -1;
 	private _resultCount: number = 5;
 
 	constructor(key: string, localCustodianCode: number, resultCount = 5) {

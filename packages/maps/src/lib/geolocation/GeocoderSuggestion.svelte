@@ -1,9 +1,11 @@
 <script lang="ts">
-	import type { GeolocationNamed } from './GeocoderAdapter';
-	import type { OnSearchResult } from './types';
+	import type {
+		GeolocationNamed, //
+		OnGeolocationSearchResult
+	} from './types';
 
 	export let suggestion: GeolocationNamed;
-	export let onSelect: OnSearchResult;
+	export let onSelect: OnGeolocationSearchResult;
 	export let highlighted: null | GeolocationNamed;
 
 	const select = () => {
