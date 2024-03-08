@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 3.5.0
+
+### Minor Changes
+
+- 5f4de0a: CHANGED: `Select` component now exposes a `justValue` prop that can be bound to
+
 ## 3.4.0
 
 ### Minor Changes
