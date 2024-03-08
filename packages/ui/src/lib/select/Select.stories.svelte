@@ -2,6 +2,7 @@
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Select from './Select.svelte';
+	import Button from '../button/Button.svelte';
 
 	type Item = { label: string; value: number };
 	let value: Item;
@@ -11,6 +12,8 @@
 		{ label: 'Two', value: 2 },
 		{ label: 'Three', value: 3 }
 	];
+
+	let justValue: number;
 </script>
 
 <Meta title="Ui/Select" component={Select} />
@@ -136,5 +139,21 @@
 			disabled
 			optional
 		/>
+	</div>
+</Story>
+
+<Story name="Binidng to justValue">
+	<div class="w-[500px] flex flex-col gap-2">
+		<p>
+			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
+			object including the <code>label</code> as well as <code>vlaue</code>)
+		</p>
+
+		<div>Current value: <span class="font-bold">{justValue}</span></div>
+
+		<Button on:click={() => (justValue = 2)}>Reset to 2</Button>
+		<Button on:click={() => (justValue = null)}>Clear</Button>
+
+		<Select {items} bind:justValue id="labelled-input" />
 	</div>
 </Story>
