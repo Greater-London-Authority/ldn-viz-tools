@@ -1,13 +1,11 @@
 <script lang="ts">
 	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
 	import type { GeocoderAdapter } from './GeocoderAdapter';
-	import type {
-		GeolocationNamed, //
-		OnGeolocationSearchResult
-	} from './types';
+	import type {	GeolocationNamed, OnGeolocationSearchResult } from './types';
 
 	export let adapter: GeocoderAdapter;
 	export let suggestions: GeolocationNamed[];
+	export let maxSuggestions: number;
 	export let onSelect: OnGeolocationSearchResult;
 
 	const attribution = adapter.attribution && adapter.attribution();
@@ -27,8 +25,10 @@
 			<h1 class="pointer-events-none">No locations found</h1>
 		</li>
 	{:else}
-		{#each suggestions as suggestion (suggestion.id)}
-			<GeocoderSuggestion {suggestion} {onSelect} bind:highlighted />
+		{#each suggestions as suggestion, i (suggestion.id)}
+			{#if i < maxSuggestions}
+				<GeocoderSuggestion {suggestion} {onSelect} bind:highlighted />
+			{/if}
 		{/each}
 	{/if}
 

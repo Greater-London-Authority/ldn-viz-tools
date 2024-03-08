@@ -54,6 +54,10 @@
 	// the results in custom way.
 	export let disableSuggestionList = false;
 
+	// maxSuggestions is the maximum number of suggestion to show. This does
+	// not limit the results array.
+	export let maxSuggestions: number = 5
+
 	// classes is a space separated list of additional classes applied to the
 	// root container.
 	export let classes = '';
@@ -156,6 +160,6 @@
 	/>
 
 	{#if showSuggestionList && results}
-		<GeocoderSuggestionList {adapter} suggestions={results} {onSelect} />
+		<GeocoderSuggestionList {adapter} suggestions={results} {maxSuggestions} {onSelect} />
 	{/if}
 </search>

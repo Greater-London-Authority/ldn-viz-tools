@@ -17,7 +17,7 @@
 		{adapter}
 		{onLocationFound}
 		{onSearchError}
-		inputClasses="max-w-[calc(100dvw-2.5rem-1.5rem-1.5rem)]"
+		inputClasses="w-72 max-w-[calc(100dvw-2.5rem-1.5rem-1.5rem)]"
 	/>
 	<MapControlGeolocator {onLocationFound} {onSearchError} />
 </div>
