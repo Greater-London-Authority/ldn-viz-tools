@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 3.5.1
+
+### Patch Changes
+
+- 4fbbae0: FIXED: `ColorLegend` component now correctly updates when domain of threshold scale is updated
+
 ## 3.5.0
 
 ### Minor Changes
