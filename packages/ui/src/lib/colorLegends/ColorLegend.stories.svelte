@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
 
+	import { cumsum } from 'd3-array';
+
 	import {
 		scaleDiverging,
 		scaleDivergingSqrt,
@@ -30,6 +32,7 @@
 
 	import { range } from 'd3-array';
 
+	import Button from '../button/Button.svelte';
 	import ColorLegend from './ColorLegend.svelte';
 
 	const continuousColorScale = scaleSequential(interpolateBlues).domain([0, 10]);
@@ -48,6 +51,9 @@
 		[22, 35, 51, 72].reverse(),
 		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'].reverse()
 	);
+
+	let scale;
+	let randomThresholdScale;
 </script>
 
 <Meta title="Ui/Legends/ColorLegend" component={ColorLegend} />
@@ -169,4 +175,30 @@
 			title="Flipped"
 		/>
 	</div>
+</Story>
+
+<Story name="Updating scale">
+	<Button
+		on:click={() =>
+			(scale = scaleSequentialQuantile(
+				range(100).map(() => Math.random() ** 2),
+				interpolateBlues
+			))}>Update scale</Button
+	>
+	{#if scale}
+		<ColorLegend color={scale} title="Quantile" tickFormat=".2f" />
+	{/if}
+</Story>
+
+<Story name="Updating threshold scale">
+	<Button
+		on:click={() =>
+			(randomThresholdScale = scaleThreshold(
+				cumsum(range(5).map(() => Math.random() ** 2)),
+				schemeRdBu[5]
+			))}>Update scale</Button
+	>
+	{#if randomThresholdScale}
+		<ColorLegend color={randomThresholdScale} title="Threshold" tickFormat=".2f" />
+	{/if}
 </Story>

@@ -42,6 +42,7 @@
 
 	let x;
 	let n;
+	let tickF;
 	let tickAdjust = (g) => g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
 	$: {
 		if (color.interpolate) {
@@ -66,7 +67,7 @@
 					tickValues = d3.range(n).map((i) => d3.quantile(color.domain(), i / (n - 1)));
 				}
 				if (typeof tickFormat !== 'function') {
-					tickFormat = d3.format(tickFormat === undefined ? ',f' : tickFormat);
+					tickF = d3.format(tickFormat === undefined ? ',f' : tickFormat);
 				}
 			}
 		} else if (color.invertExtent) {
@@ -91,7 +92,7 @@
 				.rangeRound([marginLeft, width - marginRight]);
 
 			tickValues = d3.range(thresholds.length);
-			tickFormat = (i) => thresholdFormat(thresholds[i], i);
+			tickF = (i) => thresholdFormat(thresholds[i], i);
 		} else {
 			// ordinal scale
 			x = d3
@@ -101,6 +102,10 @@
 
 			tickAdjust = () => {};
 		}
+
+		if (tickFormat && !tickF) {
+			tickF = tickFormat;
+		}
 	}
 
 	let ticksRef: SVGElement;
@@ -108,8 +113,8 @@
 		if (ticksRef) {
 			const bottomAxis = d3
 				.axisBottom(x)
-				.ticks(ticks, typeof tickFormat === 'string' ? tickFormat : undefined)
-				.tickFormat(typeof tickFormat === 'function' ? tickFormat : undefined)
+				.ticks(ticks, typeof tickF === 'string' ? tickF : undefined)
+				.tickFormat(typeof tickF === 'function' ? tickF : undefined)
 				.tickSize(tickSize)
 				.tickValues(tickValues);
 
