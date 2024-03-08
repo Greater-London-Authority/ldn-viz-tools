@@ -1,12 +1,11 @@
 <script lang="ts">
 	import MapControlGeocoder from './MapControlGeocoder.svelte';
 	import MapControlGeolocator from './MapControlGeolocator.svelte';
-
-	import type { GeocoderAdapter } from '../geolocation/GeocoderAdapter';
 	import type {
-		OnGeolocationSearchResult, //
+		GeocoderAdapter,
+		OnGeolocationSearchResult,
 		OnGeolocationSearchError
-	} from '../geolocation/types';
+	} from '@ldn-viz/ui';
 
 	export let adapter: GeocoderAdapter;
 	export let onLocationFound: OnGeolocationSearchResult;

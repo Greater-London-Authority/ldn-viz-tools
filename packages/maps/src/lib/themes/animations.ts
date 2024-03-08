@@ -1,4 +1,4 @@
-import { type AnimationOptions, type FlyOptions } from 'maplibre-gl';
+import type { AnimationOptions, FlyToOptions } from 'maplibre-gl';
 
 // https://easings.net/
 export const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
@@ -11,7 +11,7 @@ export const ZOOM_ANIMATION_OPTIONS: AnimationOptions = {
 	freezeElevation: true
 };
 
-export const GLIDE_ANIMATION_OPTIONS: FlyOptions = {
+export const GLIDE_ANIMATION_OPTIONS: FlyToOptions = {
 	animate: true,
 	duration: 1000,
 	easing: easeOutQuad
@@ -21,7 +21,7 @@ export const GLIDE_ANIMATION_OPTIONS: FlyOptions = {
 	// - speed (& maxDuration)
 };
 
-export const FLY_ANIMATION_OPTIONS: FlyOptions = {
+export const FLY_ANIMATION_OPTIONS: FlyToOptions = {
 	animate: true,
 	duration: 300,
 	easing: easeOutQuad

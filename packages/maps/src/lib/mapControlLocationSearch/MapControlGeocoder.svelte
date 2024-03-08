@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-	import Geocoder from '../geolocation/Geocoder.svelte';
+	import { GLIDE_ANIMATION_OPTIONS } from '../themes/animations';
+	import { Geocoder } from '@ldn-viz/ui';
 
-	import type { MapStore } from './map-types';
-	import type { GeocoderAdapter } from '../geolocation/GeocoderAdapter';
 	import type {
 		GeolocationCoords,
 		GeolocationBounds,
 		Geolocation,
 		OnGeolocationSearchResult,
-		OnGeolocationSearchError
-	} from '../geolocation/types';
+		OnGeolocationSearchError,
+		GeocoderAdapter
+	} from '@ldn-viz/ui';
+	import type { MapStore } from './map-types';
 
 	export let adapter: GeocoderAdapter;
 	export let onLocationFound: OnGeolocationSearchResult;

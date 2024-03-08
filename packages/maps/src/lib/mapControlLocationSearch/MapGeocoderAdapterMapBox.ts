@@ -1,6 +1,5 @@
-import type { GeolocationNamed } from '../geolocation/types';
-import type { GeocoderAdapter } from '../geolocation/GeocoderAdapter';
-import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
+import type { GeolocationNamed, GeocoderAdapter } from '@ldn-viz/ui';
+import { GREATER_LONDON_BOUNDS_PADDED } from '../themes/bounds';
 
 type MapBoxFeature = {
 	id: string;

@@ -32,4 +32,13 @@ export { default as TabbedSidebarWrapper } from './tabbedSidebar/TabbedSidebarWr
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 
+// Geolocation
+export * from './geolocation/types';
+export * from './geolocation/GeocoderAdapter';
+export * from './geolocation/GeocoderAdapterList';
+export * from './geolocation/GeocoderAdapterList';
+export * from './geolocation/GeocoderAdapterOSPlaces';
+export { default as Geocoder } from './geolocation/Geocoder.svelte';
+export { default as Geolocator } from './geolocation/Geolocator.svelte';
+
 export { classNames } from './utils/classNames';

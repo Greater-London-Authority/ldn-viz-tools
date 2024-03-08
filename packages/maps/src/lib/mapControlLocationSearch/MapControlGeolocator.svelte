@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-	import Geolocator from '../geolocation/Geolocator.svelte';
-
-	import type { MapStore } from './map-types';
+	import { GLIDE_ANIMATION_OPTIONS } from '../themes/animations';
+	import { Geolocator } from '@ldn-viz/ui';
 	import type {
-		GeolocationUnamed, //
+		GeolocationUnamed,
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError
-	} from '../geolocation/types';
+	} from '@ldn-viz/ui';
+
+	import type { MapStore } from './map-types';
 
 	export let onLocationFound: OnGeolocationSearchResult;
 	export let onSearchError: OnGeolocationSearchError;

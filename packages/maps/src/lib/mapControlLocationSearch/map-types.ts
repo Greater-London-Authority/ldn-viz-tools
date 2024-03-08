@@ -1,5 +1,5 @@
 import type { Writable } from 'svelte/store';
-import type { GeolocationBounds } from '../geolocation/types';
+import type { GeolocationBounds } from '@ldn-viz/ui';
 
 export type Options = { [key: string]: unknown };
 
