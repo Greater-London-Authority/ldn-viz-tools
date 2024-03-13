@@ -1,14 +1,13 @@
 /** @type { import("eslint").Linter.Config } */
 module.exports = {
 	root: true,
-	// extends: ['@ldn-viz/eslint-config-custom']
 	extends: [
-		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:svelte/recommended',
-		'prettier',
-		'plugin:storybook/recommended'
-	],
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:svelte/recommended",
+        "prettier",
+        "plugin:storybook/recommended"
+    ],
 	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint'],
 	parserOptions: {
