@@ -2,6 +2,9 @@
 export { default as Button } from './button/Button.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
+export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
+export { default as ColorLegendOrdinalHorizontal } from './colorLegends/ColorLegendOrdinalHorizontal.svelte';
+export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as Header } from './header/Header.svelte';
 export { default as HeaderItem } from './header/HeaderItem.svelte';
@@ -31,5 +34,8 @@ export { default as TabbedSidebarTabList } from './tabbedSidebar/TabbedSidebarTa
 export { default as TabbedSidebarWrapper } from './tabbedSidebar/TabbedSidebarWrapper.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
+export { default as Toaster } from './toaster/Toaster.svelte';
+export * from './toaster/toaster';
+export * from './toaster/types';
 
 export { classNames } from './utils/classNames';

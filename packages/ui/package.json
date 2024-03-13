@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/ui",
-	"version": "3.2.0",
+	"version": "3.5.1",
 	"scripts": {
 		"dev": "vite dev --port 3005 --open",
 		"build:sveltekit": "vite build && npm run package",
@@ -36,6 +36,7 @@
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/package": "^2.2.6",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@types/d3": "^7.4.3",
 		"@typescript-eslint/eslint-plugin": "^6.19.0",
 		"@typescript-eslint/parser": "^6.19.0",
 		"autoprefixer": "^10.4.16",
