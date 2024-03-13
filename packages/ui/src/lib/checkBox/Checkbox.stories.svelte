@@ -16,7 +16,7 @@
 					type: { summary: 'string' }
 				}
 			},
-			id: {
+			name: {
 				control: { type: 'text' },
 				table: {
 					defaultValue: { summary: '' },
@@ -38,10 +38,10 @@
 	let selectedOptions: string[] = ['bus', 'underground'];
 
 	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
-		{ id: 'train', label: 'Train stations', color: '#008D48' },
-		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
+		{ name: 'bus', label: 'Bus stops', color: '#00AEEF' },
+		{ name: 'train', label: 'Train stations', color: '#008D48' },
+		{ name: 'underground', label: 'Underground stations', color: '#9E0059' },
+		{ name: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
 	];
 </script>
 
