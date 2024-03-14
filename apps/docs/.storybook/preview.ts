@@ -1,7 +1,7 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/svelte';
 import { themes } from '@storybook/theming';
-import ciuTheme from './ciuTheme';
+import ciuTheme, { docs } from './ciuStorybookTheme';
 
 import '../src/app.postcss';
 
@@ -14,7 +14,7 @@ const preview: Preview = {
 			}
 		},
 		docs: {
-			theme: ciuTheme
+			theme: docs
 		}
 	},
 	decorators: [
