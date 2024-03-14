@@ -1,15 +1,19 @@
 <script lang="ts">
-	import {
-		Dialog,
-		DialogDescription,
-		DialogOverlay,
-		DialogTitle
-	} from '@rgossiaux/svelte-headlessui';
+	import { createDialog } from '@melt-ui/svelte';
+	import { XMark } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { writable } from 'svelte/store';
+	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
+	export let isOpen = writable(false);
 
-	export let isOpen = false;
+	const {
+		elements: { portalled, overlay, content, title: meltTitle, description: meltDescripton, close },
+		states: { open }
+	} = createDialog({ open: isOpen });
+
 	export let title: string;
-	export let description: string;
+	export let description: string = '';
 	export let width:
 		| 'xs'
 		| 'sm'
@@ -42,50 +46,44 @@
 	};
 
 	$: modalClass = classNames(
-		'inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl space-y-2 pb-4 pointer-events-auto',
+		'inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
 </script>
 
-<Dialog open={isOpen} on:close={() => (isOpen = false)} class="relative z-10 overflow-y-auto">
-	<DialogOverlay class="fixed inset-0 bg-black bg-opacity-40" />
+<div {...$portalled} use:$portalled.action>
+	{#if $open}
+		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
-	<!--Full-screen container to center the panel -->
-	<div class="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
-		<div class={modalClass}>
-			<div class="bg-core-grey-600 text-white p-2 relative">
-				<DialogTitle>{title}</DialogTitle>
-				<button
-					on:click={() => (isOpen = false)}
-					class="bg-core-grey-500 absolute top-2 right-2 hover:bg-core-grey-800"
+		<div class="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
+			<div {...$content} use:$content.action class={modalClass}>
+				<div
+					class="bg-core-grey-700 text-white p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-core-blue-500"
 				>
-					<span class="sr-only">Close</span>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="w-6 h-6"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				</button>
+					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
+					<div {...$close} use:$close.action>
+						<Button
+							variant="square"
+							emphasis="secondary"
+							class="w-8 h-8 self-center"
+							on:click={() => ($isOpen = false)}
+						>
+							<span class="sr-only">Close</span>
+							<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />
+						</Button>
+					</div>
+				</div>
+
+				<div class="p-4">
+					{#if description}
+						<div {...$meltDescripton} use:$meltDescripton.action>{description}</div>
+					{/if}
+
+					{#if hasChildren}
+						<slot />
+					{/if}
+				</div>
 			</div>
-
-			{#if description}
-				<DialogDescription class="px-2">{description}</DialogDescription>
-			{/if}
-
-			{#if hasChildren && description}
-				<div class="border-dotted border-t border-core-grey-300 pt-4 mx-2 text-sm">
-					<slot />
-				</div>
-			{:else if hasChildren}
-				<div class="border-dotted border-core-grey-300 mx-2 text-sm">
-					<slot />
-				</div>
-			{/if}
 		</div>
-	</div>
-</Dialog>
+	{/if}
+</div>
