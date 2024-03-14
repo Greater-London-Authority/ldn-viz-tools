@@ -65,7 +65,7 @@
 						<Button
 							variant="square"
 							emphasis="secondary"
-							class="w-8 h-8 self-center"
+							class="w-8 h-8 self-center dark:bg-core-grey-900 dark:text-white"
 							on:click={() => ($isOpen = false)}
 						>
 							<span class="sr-only">Close</span>
