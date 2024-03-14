@@ -1,7 +1,6 @@
 /** @type { import("eslint").Linter.Config } */
 module.exports = {
 	root: true,
-	// extends: ['@ldn-viz/eslint-config-custom']
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
