@@ -22,11 +22,11 @@
 	let classes = typeClasses[message.type];
 
 	if (!classes) {
-		classes = 'bg-core-grey-100 text-core-grey-800 border-core-grey-700';
+		classes = 'bg-core-grey-100 text-core-grey-800';
 	}
 </script>
 
-<div role="dialog" id={message.id} class="p-0.5 bg-core-grey-800/50" out:fade={{ duration: 100 }}>
+<div role="dialog" id={message.id} class="shadow-lg" out:fade={{ duration: 100 }}>
 	<div class="border p-2 pl-4 pr-4 {classes}">
 		<div class="text-lg font-bold flex justify-between items-center">
 			{message.type}
