@@ -9,7 +9,7 @@ export default create({
 
 	brandTitle: 'LDN viz-tools Storybook',
 	brandUrl: 'https://data.london.gov.uk/blog/gla-intelligence-and-analysis-unit/',
-	brandImage: '/cilogo.svg',
+	brandImage: './cilogo.svg',
 	brandTarget: '_self',
 
 	colorPrimary: colors.core.blue[600],
