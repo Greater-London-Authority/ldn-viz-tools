@@ -11,7 +11,7 @@ export const messages: Writable<ToastMessage[]> = writable([]);
 // by the user dev using the ToastMessage.post function.
 //
 // Often there is no need to store and reuse a toast. You can simple fire and
-// forget: newTostMessage("This is a notice!").post().
+// forget: newToastMessage("This is a notice!").post().
 export const newToastMessage = (text: string, options: ToastMessageOptions = {}) => {
 	const id = options.id ? options.id : crypto.randomUUID();
 	const type = options.type ? options.type : ToastType.Notice;
