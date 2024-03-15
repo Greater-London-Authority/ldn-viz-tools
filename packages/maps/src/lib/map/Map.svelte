@@ -78,10 +78,17 @@
 			map_gl.set(null);
 		};
 	});
+
+	// client width and height because on:resize won't always trigger refresh.
+	let clientWidth = 0;
+	let clientHeight = 0;
+	$: clientWidth && clientHeight && $map?.resize();
 </script>
 
 <section
 	bind:this={container}
+	bind:clientWidth
+	bind:clientHeight
 	class="w-full h-full relative overflow-hidden {classes}"
 	{...$$restProps}
 >

@@ -74,7 +74,7 @@
 			</div>
 
 			<MapControlGroup position="TopLeft">
-				<div class="text-white w-80 flex">
+				<div class="text-white w-80 flex pointer-events-auto">
 					<input
 						type="text"
 						class="grow bg-core-grey-500 placeholder-core-grey-200 p-2"
@@ -91,7 +91,7 @@
 			</MapControlGroup>
 
 			<MapControlGroup position="TopRight">
-				<p class="bg-core-grey-800 p-2 text-white text-center">
+				<p class="bg-core-grey-800 p-2 text-white text-center pointer-events-auto">
 					Bespoke controls<br />E.g. Drawing
 				</p>
 			</MapControlGroup>

@@ -12,7 +12,7 @@
 	}
 
 	type PositionClass = {
-		[key: MapControlGroupPositions]: string;
+		[key in keyof typeof MapControlGroupPositions]: string;
 	};
 
 	const positionClasses: PositionClass = {
@@ -29,12 +29,12 @@
 </script>
 
 <script lang="ts">
-	export let position = MapControlGroupPositions.TopLeft;
+	export let position: keyof typeof MapControlGroupPositions = MapControlGroupPositions.TopLeft;
 	export let classes = '';
 
 	const positionClass = positionClasses[position];
 </script>
 
-<div class="absolute {positionClass} z-10 flex flex-col space-y-2 {classes}">
+<div class="absolute {positionClass} z-10 flex flex-col space-y-2 pointer-events-none {classes}">
 	<slot />
 </div>

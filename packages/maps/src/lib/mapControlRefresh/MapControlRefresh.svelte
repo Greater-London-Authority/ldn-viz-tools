@@ -11,7 +11,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Refresh page"
-		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500"
+		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500 pointer-events-auto"
 		on:click={handle}
 	>
 		<Icon src={ArrowPath} class="w-8 h-8 p-1" />
