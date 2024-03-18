@@ -1,5 +1,17 @@
 # ldn-viz-tools-charts
 
+## 1.3.0
+
+### Minor Changes
+
+- 48b02df: ADDED - color theme object and functions for generating color scales
+
+### Patch Changes
+
+- Updated dependencies [74db575]
+- Updated dependencies [030c002]
+  - @ldn-viz/ui@3.6.0
+
 ## 1.2.0
 
 ### Minor Changes
