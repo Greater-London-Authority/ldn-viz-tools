@@ -13,7 +13,7 @@ const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../../../packages/ui/src/**/*.mdx',
-		'../../../packages/ui/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
+		'../../../packages/ui/src/**/*.stories.@(js|ts|svelte)',
 		'../../../packages/charts/src/**/*.mdx',
 		'../../../packages/charts/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
 		'../../../packages/maps/src/**/*.mdx',
@@ -21,11 +21,12 @@ const config: StorybookConfig = {
 	],
 	addons: [
 		'@storybook/addon-svelte-csf',
-		'@storybook/addon-essentials',
-		'@storybook/addon-links',
-		'@storybook/addon-interactions',
-		'@storybook/addon-a11y',
-		'storybook-dark-mode'
+		getAbsolutePath('@storybook/addon-themes'),
+		getAbsolutePath('@storybook/addon-links'),
+		getAbsolutePath('@storybook/addon-essentials'),
+		getAbsolutePath('@chromatic-com/storybook'),
+		getAbsolutePath('@storybook/addon-interactions'),
+		getAbsolutePath('@storybook/addon-a11y')
 	],
 	framework: {
 		name: '@storybook/sveltekit',
@@ -34,6 +35,7 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: true,
 		defaultName: 'Documentation'
-	}
+	},
+	staticDirs: ['../static']
 };
 export default config;
