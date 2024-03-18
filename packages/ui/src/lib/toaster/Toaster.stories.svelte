@@ -1,12 +1,41 @@
+<script context="module">
+	import Toaster from './Toaster.svelte';
+
+	export const meta = {
+		title: 'Ui/Toaster ',
+		component: Toaster,
+		argTypes: {
+			position: {
+				description:
+					'Position is used to layout the Toaster. You can specify your own classes for positioning via the classes property if you want something bespoke.',
+				options: [
+					'TopLeft',
+					'TopCenter',
+					'TopRight',
+					'CenterRight',
+					'BottomRight',
+					'BottomCenter',
+					'BottomLeft',
+					'CenterLeft',
+					'Center'
+				],
+				control: { type: 'select' }
+			},
+			classes: {
+				description:
+					'classes for applying additional classes. These are appended to the class string so they have implicit but weak priority over other styles.',
+				control: { type: 'text' }
+			}
+		}
+	};
+</script>
+
 <script lang="ts">
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 
-	import Toaster from './Toaster.svelte';
 	import { newToastMessage } from './toaster';
-	import { ToastType } from './types';
-
-	import typeDocs from './types?raw';
+	import { ToastType, ToasterPosition } from './types';
 
 	const toastNotice = () => {
 		newToastMessage('A notice!').post();
@@ -41,93 +70,30 @@
 		longLivedMessage.post();
 	};
 
-	let position = 'TopLeft';
+	let position: keyof typeof ToasterPosition = 'TopLeft';
 	const setToaster = (event: MouseEvent) => {
 		const target = event.target as HTMLButtonElement;
 		if (target && target.textContent) {
-			position = target.textContent;
+			position = target.textContent as keyof typeof ToasterPosition;
 		}
 	};
 </script>
 
-<Meta
-	title="Ui/Toaster"
-	component={Toaster}
-	parameters={{
-		layout: 'full'
-	}}
-/>
+<Template let:args>
+	<Toaster {...args} />
+</Template>
 
-<Story name="Default">
-	<Toaster />
-</Story>
-
-<Story name="Types Dark">
-	<div class="p-6 w-[100vw] h-[100vh]">
-		<Toaster position="Center" />
-		<div class="flex gap-6">
-			<Button on:click={toastNotice}>Notice</Button>
-			<Button condition="success" on:click={toastSuccess}>Success</Button>
-			<Button condition="warning" on:click={toastWarning}>Warning</Button>
-			<Button condition="error" on:click={toastError}>Error</Button>
-		</div>
+<Story name="Types">
+	<Toaster position="Center" />
+	<div class="flex gap-6">
+		<Button on:click={toastNotice}>Notice</Button>
+		<Button condition="success" on:click={toastSuccess}>Success</Button>
+		<Button condition="warning" on:click={toastWarning}>Warning</Button>
+		<Button condition="error" on:click={toastError}>Error</Button>
 	</div>
 </Story>
 
-<Story name="Types Light">
-	<div class="bg-white p-6 w-[100vw] h-[100vh]">
-		<Toaster position="Center" />
-		<div class="flex gap-6">
-			<Button on:click={toastNotice}>Notice</Button>
-			<Button condition="success" on:click={toastSuccess}>Success</Button>
-			<Button condition="warning" on:click={toastWarning}>Warning</Button>
-			<Button condition="error" on:click={toastError}>Error</Button>
-		</div>
-	</div>
-</Story>
-
-<Story name="TypeScript">
-	<div class="text-white p-6 w-[100vw]">
-		<pre><code>{typeDocs}</code></pre>
-	</div>
-</Story>
-
-<Story name="Position Dark">
-	<div class="relative p-6 w-[100vw] h-[100vh]">
-		<Toaster {position} />
-		<div
-			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform flex flex-wrap justify-center gap-6 [&>*]:basis-3/12"
-		>
-			<Button on:click={setToaster} variant={position === 'TopLeft' ? 'solid' : 'outline'}>
-				TopLeft
-			</Button>
-			<Button on:click={setToaster} variant={position === 'TopCenter' ? 'solid' : 'outline'}>
-				TopCenter
-			</Button>
-			<Button on:click={setToaster} variant={position === 'TopRight' ? 'solid' : 'outline'}>
-				TopRight
-			</Button>
-			<Button on:click={setToaster} variant={position === 'CenterLeft' ? 'solid' : 'outline'}>
-				CenterLeft
-			</Button>
-			<Button condition="warning" on:click={toastNotice}>Add Toast!</Button>
-			<Button on:click={setToaster} variant={position === 'CenterRight' ? 'solid' : 'outline'}>
-				CenterRight
-			</Button>
-			<Button on:click={setToaster} variant={position === 'BottomLeft' ? 'solid' : 'outline'}>
-				BottomLeft
-			</Button>
-			<Button on:click={setToaster} variant={position === 'BottomCenter' ? 'solid' : 'outline'}>
-				BottomCenter
-			</Button>
-			<Button on:click={setToaster} variant={position === 'BottomRight' ? 'solid' : 'outline'}>
-				BottomRight
-			</Button>
-		</div>
-	</div>
-</Story>
-
-<Story name="Position Light">
+<Story name="Position">
 	<div class="bg-white relative p-6 w-[100vw] h-[100vh]">
 		<Toaster {position} />
 		<div

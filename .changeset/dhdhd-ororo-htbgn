@@ -1,0 +1,5 @@
+---
+'@ldn-viz/ui': patch
+---
+
+CHANGED Toast messages to use `shadow-lg` rather than a border. 
