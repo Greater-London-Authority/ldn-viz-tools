@@ -1,5 +1,5 @@
 ---
-'@ldn-viz/theme': patch
+'@ldn-viz/theme': minor
 ---
 
 CHANGED update colors in theme object. 
