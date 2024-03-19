@@ -1,39 +1,39 @@
-<script>
-	import { getContext } from 'svelte';
+<script lang="ts">
+	import { classNames } from '../utils/classNames';
+	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';
 
-	import DefaultSidebarContent from './DefaultSidebarContent.svelte';
-	import SidebarToggle from './SidebarToggle.svelte';
+	export let width: 'standard' | 'wide' = 'standard';
 
-	export let classes = '';
-	export let hideToggle = false;
+	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
+	const lightThemeClasses = 'bg-white text-core-grey-700';
 
-	const appShell = getContext('appShell');
-	$: isAlignedRight = $appShell.isAlignedRight();
+	const themeClasses = [darkThemeClasses, lightThemeClasses];
+
+	const widthClasses = {
+		standard: 'w-[408px]',
+		wide: 'w-[608px]'
+	};
+
+	$: sidebarClasses = classNames(
+		'p-6 flex flex-0 flex-col h-full',
+		...themeClasses,
+		widthClasses[width]
+	);
 </script>
 
-<section
-	class="relative bg-core-grey-800 w-full h-full flex flex-col text-white text-sm z-30 {classes}"
->
-	<div
-		class="absolute"
-		style:top={isAlignedRight ? '0' : 'unset'}
-		style:right={isAlignedRight ? '100%' : 'unset'}
-		style:bottom={isAlignedRight ? 'unset' : '100%'}
-		style:left={isAlignedRight ? 'unset' : '0'}
-		style:display={hideToggle ? 'none' : ''}
-	>
-		<slot name="toggle">
-			<SidebarToggle />
-		</slot>
+<div class="flex h-screen dark">
+	{#if $$slots.tabs}
+		<div class="bg-core-grey-100 dark:bg-core-grey-900">
+			<slot name="tabs" />
+		</div>
+	{:else}
+		<SidebarToggle isOpen={true} />
+	{/if}
+	<div class={sidebarClasses}>
+		<div class="space-y-4">
+			<slot name="header" />
+			<slot name="sections" />
+		</div>
+		<slot name="footer" />
 	</div>
-
-	<slot name="unpadded-content" />
-
-	<div class="dark grow overflow-y-auto overscroll-contain p-6 pb-2 flex flex-col gap-6">
-		<slot>
-			{#if !$$slots['unpadded-content']}<DefaultSidebarContent />{/if}
-		</slot>
-	</div>
-
-	<slot name="footer" />
-</section>
+</div>

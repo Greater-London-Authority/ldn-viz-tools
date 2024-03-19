@@ -1,296 +1,197 @@
-<script lang="ts">
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
-
-	import Button from '../button/Button.svelte';
-	import AppShell from './AppShell.svelte';
+<script context="module">
+	import LogoCIU from '../logos/LogoCIU.svelte';
+	import LogoMayor from '../logos/LogoMayor.svelte';
 	import Sidebar from './Sidebar.svelte';
+	import SidebarFooter from './elements/sidebarFooter/SidebarFooter.svelte';
+	import SidebarHeader from './elements/sidebarHeader/SidebarHeader.svelte';
+	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
+	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 
-	import { ChartBar, Funnel, Map as MapIcon, MapPin } from '@steeze-ui/heroicons';
-	import SidebarDivider from '../sidebarElements/SidebarDivider.svelte';
-	import SidebarGroup from '../sidebarElements/SidebarGroup.svelte';
-	import SidebarHeader from '../sidebarElements/SidebarHeader.svelte';
-	import SidebarSection from '../sidebarElements/SidebarSection.svelte';
-	import SidebarTabsWrapper from '../sidebarTabs/SidebarTabsWrapper.svelte';
-	import DefaultSidebarContent from './DefaultSidebarContent.svelte';
-	import ExampleOverview from './ExampleOverview.svelte';
-	import exampleCode from './ExampleOverview.svelte?raw';
-	import SidebarLeft from './SidebarLeft.svelte';
+	import TabLabel from '../tabs/TabLabel.svelte';
+	import TabList from '../tabs/TabList.svelte';
 
-	let isOpen;
-	const toggleSidebar = () => isOpen.update((v) => !v);
+	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
-	let selectedTab: string;
-	let tabs = [
-		{ id: 'markers', label: 'Data Markers', icon: MapPin },
-		{ id: 'filters', label: 'Filters', icon: Funnel },
-		{ id: 'analysis', label: 'Analysis', icon: ChartBar },
-		{ id: 'layers', label: 'Layers', icon: MapIcon }
-	];
+	let selectedValue = 'aggregates';
 
-	let tabs2 = [
-		{ id: 'markers', label: 'Data Markers', icon: MapPin, content: DefaultSidebarContent },
-		{ id: 'filters', label: 'Filters', icon: Funnel, content: DefaultSidebarContent },
-		{ id: 'analysis', label: 'Analysis', icon: ChartBar, content: DefaultSidebarContent },
-		{ id: 'layers', label: 'Layers', icon: MapIcon, content: DefaultSidebarContent }
-	];
+	export const meta = {
+		title: 'Ui/Sidebar',
+		component: Sidebar
+	};
 </script>
 
-<Meta
-	title="Ui/Sidebar"
-	component={Sidebar}
-	parameters={{
-		layout: 'full'
-	}}
-/>
+<script>
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+</script>
 
-<Story name="Default">
-	<AppShell startOpen>
-		<Sidebar slot="sidebar" />
-	</AppShell>
-</Story>
+<Template let:args>
+	<Sidebar {...args} />
+</Template>
 
-<Story name="Sibebar on left">
-	<AppShell sidebarLeft startOpen>
-		<SidebarLeft slot="sidebar" />
-	</AppShell>
-</Story>
-
-<Story name="Getting Started">
-	<ExampleOverview>
-		<p class="mb-2 font-bold">This is the code for this story:</p>
-		<pre><code>{exampleCode}</code></pre>
-	</ExampleOverview>
-</Story>
-
-<Story name="Custom Sizing">
-	<AppShell sidebarWidth="500px" sidebarHeight="400px" startOpen>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<p>Custom sidebar width for desktop and height for mobile:</p>
-			<pre><code
-					>{[`<AppShell`, `\tsidebarWidth="500px" `, `\tsidebarHeight="400px"`].join('\n')}</code
-				></pre>
-		</div>
-		<Sidebar slot="sidebar" />
-	</AppShell>
-</Story>
-
-<Story name="Open State Store">
-	<AppShell startOpen bind:isOpen>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<p>
-				You can bind on the <i><code>open</code></i> prop to access the writable Svelte store managing
-				the sidebar's open/closed state.
-			</p>
-
-			<p>
-				<Button type="secondary" variant="outline" on:click={toggleSidebar}>
-					Is open:&nbsp;<span class="text-core-red-300" class:text-core-green-400={$isOpen}
-						>{$isOpen}</span
-					>
-				</Button>
-			</p>
-
-			<pre><code>{`<AppShell startOpen bind:isOpen />`}</code></pre>
-		</div>
-		<Sidebar slot="sidebar" />
-	</AppShell>
-</Story>
-
-<Story name="Always open">
-	<AppShell startOpen>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<p>This sidebar is always open - there is no control to collapse it.</p>
-		</div>
-		<Sidebar slot="sidebar" hideToggle />
-	</AppShell>
-</Story>
-
-<Story name="Always open on left">
-	<AppShell startOpen sidebarLeft>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<p>This sidebar is always open - there is no control to collapse it.</p>
-		</div>
-		<SidebarLeft slot="sidebar" hideToggle />
-	</AppShell>
-</Story>
-
-<Story name="Sidebar Context">
-	<AppShell startOpen>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<p>
-				Every Svelte component inside the <code>AppShell</code> or one of it's children can access two
-				context objects:
-			</p>
-
-			<pre><code
-					>{[
-						`\timport { getContext } from 'svelte'`,
-						`\tgetContext('sidebarIsOpen')`,
-						`\tgetContext('AppShell')`
-					].join('\n')}</code
-				></pre>
-
-			<p>
-				The first returns the writable open store presented in the previous story. The latter
-				returns a derived store holding the sidebar container's layout configuration. It's required
-				to layout the <code>Sidebar</code> component.
-			</p>
-
-			<p>
-				You can query it if the content layout is dependent on the viewing mode (horizontal or
-				vertical) and access the containers diemensions. For example:
-			</p>
-
-			<pre><code
-					>{[
-						`\tconst container = getContext('appShell')`,
-						`\tconst isDesktop = $container.isAlignedRight()`
-					].join('\n')}</code
-				></pre>
-		</div>
-		<Sidebar slot="sidebar" />
-	</AppShell>
-</Story>
-
-<Story name="Sidebar with tabs">
-	<AppShell startOpen>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<span>This is the main content of the page.</span>
-		</div>
-
-		<Sidebar slot="sidebar">
-			<svelte:fragment slot="unpadded-content">
-				<SidebarTabsWrapper {tabs} bind:selectedValue={selectedTab}>
-					Selected tab: {selectedTab}
-
-					{#if selectedTab === 'markers'}
-						<div class="text-white">
-							Markers is selected, so we'd render a
-							<code> &lt;Marker /&gt;</code>
-							component
-						</div>
-					{:else if selectedTab === 'filters'}
-						<div class="text-white">
-							Filter is selected, so we'd render a
-							<code> &lt;Filters /&gt;</code>
-							component
-						</div>
-					{:else if selectedTab === 'analysis'}
-						<div class="text-white">
-							Analysis is selected, so we'd render a
-							<code> &lt;Analysis /&gt;</code>
-							component
-						</div>
-					{:else if selectedTab === 'layers'}
-						<div class="text-white">
-							Layers is selected, so we'd render a
-							<code> &lt;Layer /&gt;</code>
-							component
-						</div>
-					{/if}
-				</SidebarTabsWrapper>
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
-</Story>
-
-<Story name="Sidebar with tabs - specified components">
-	<AppShell startOpen>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<span>This is the main content of the page.</span>
-		</div>
-
-		<Sidebar slot="sidebar">
-			<svelte:fragment slot="unpadded-content">
-				<SidebarTabsWrapper tabs={tabs2} bind:selectedValue={selectedTab}>
-					<span class="font-bold pb-6" slot="top">
-						In a real use, would provide a separate component for each tab. We can add content above
-						the tab-specific component.
-					</span>
-
-					<span class="font-bold pt-6">
-						And we can add content below the tab-specific component
-					</span>
-				</SidebarTabsWrapper>
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
-</Story>
-
-<Story name="Sidebar with structured content">
-	<AppShell startOpen>
-		<div slot="content" class="p-6 text-white space-y-2">
-			<span>This is the main content of the page.</span>
-		</div>
-
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title">
-				<span slot="info">
-					This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
-					clicks on 'more info'.
-				</span>
-
-				<span>
+<Story name="Default" source>
+	<Sidebar>
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
 					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
 					venenatis sapien. Etiam venenatis felis.
-				</span>
-			</SidebarHeader>
-
-			<SidebarSection title="Sidebar section 1">
-				<span slot="info">
-					This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
-					clicks on 'more info'.
-				</span>
-
-				<span>Here is some content inside the first section.</span>
-
-				<SidebarGroup title="Sidebar group 1">
-					<span slot="info">
-						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
-						clicks on 'more info'.
-					</span>
-
-					<span>Here is some content inside the first group.</span>
-				</SidebarGroup>
-
-				<SidebarGroup title="Sidebar group 2">
-					<span slot="info">
-						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
-						clicks on 'more info'.
-					</span>
-
-					<span>Here is some content inside the second group.</span>
-				</SidebarGroup>
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
 			</SidebarSection>
-
-			<SidebarDivider />
-
-			<SidebarSection title="Sidebar section 2">
-				<span slot="info">
-					This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
-					clicks on 'more info'.
-				</span>
-
-				<span>Here is some content inside the second section.</span>
-
-				<SidebarGroup title="Sidebar group 3">
-					<span slot="info">
-						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
-						clicks on 'more info'.
-					</span>
-
-					<span>Here is some content inside the first group.</span>
-				</SidebarGroup>
-
-				<SidebarGroup title="Sidebar group 4">
-					<span slot="info">
-						This is some (hopefully <i>helpful</i>) explanatory text that will appear when the user
-						clicks on 'more info'.
-					</span>
-
-					<span>Here is some content inside the second group.</span>
-				</SidebarGroup>
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
 			</SidebarSection>
-		</Sidebar>
-	</AppShell>
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<SidebarFooter>
+				<div class="flex justify-between">
+					<div class="w-[165px]"><LogoMayor /></div>
+					<div class="w-[165px]"><LogoCIU /></div>
+				</div>
+				<svelte:fragment slot="menu">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+				</svelte:fragment>
+			</SidebarFooter>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<Story name="Wide" source>
+	<Sidebar width="wide">
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
+			</SidebarSection>
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
+			</SidebarSection>
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<SidebarFooter>
+				<div class="flex justify-between">
+					<div class="w-[165px]"><LogoMayor /></div>
+					<div class="w-[165px]"><LogoCIU /></div>
+				</div>
+				<svelte:fragment slot="menu">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+				</svelte:fragment>
+			</SidebarFooter>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<Story name="Tabbed Sidebar" source>
+	<Sidebar>
+		<svelte:fragment slot="tabs">
+			<TabList bind:selectedValue orientation="vertical">
+				<TabLabel tabId="markers">
+					<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Data Markers
+				</TabLabel>
+				<TabLabel tabId="filters">
+					<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Filters
+				</TabLabel>
+				<TabLabel tabId="analysis">
+					<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Analysis
+				</TabLabel>
+				<TabLabel tabId="layers">
+					<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Layers
+				</TabLabel>
+			</TabList>
+		</svelte:fragment>
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
+			</SidebarSection>
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
+			</SidebarSection>
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<SidebarFooter>
+				<div class="flex justify-between">
+					<div class="w-[165px]"><LogoMayor /></div>
+					<div class="w-[165px]"><LogoCIU /></div>
+				</div>
+				<svelte:fragment slot="menu">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+				</svelte:fragment>
+			</SidebarFooter>
+		</SidebarFooter>
+	</Sidebar>
 </Story>
