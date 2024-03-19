@@ -4,7 +4,10 @@
 	import { classNames } from '../utils/classNames';
 
 	export let tabId: string;
-	const { selectedValue } = getContext<{ selectedValue: Writable<string> }>('selectedValue');
+	const { selectedValue, orientation } = getContext<{
+		selectedValue: Writable<string>;
+		orientation: 'vertical' | 'horizontal';
+	}>('tabContext');
 
 	const handleSelection = () => {
 		$selectedValue = tabId;
@@ -14,6 +17,20 @@
 			handleSelection();
 		}
 	};
+
+	const darkThemeClasses = 'dark:bg-core-grey-900 dark:hover:bg-core-blue-700 dark:text-white';
+
+	const lightThemeClasses = 'bg-core-grey-100 hover:bg-core-grey-200 text-core-grey-800';
+
+	const themeClasses = [darkThemeClasses, lightThemeClasses];
+
+	const orientationClasses = {
+		vertical:
+			'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center cursor-pointer',
+		horizontal: 'text-base py-2 px-4 flex items-center select-none'
+	};
+
+	$: tabLabelClasses = classNames(...themeClasses, orientationClasses[orientation]);
 </script>
 
 <div
@@ -22,10 +39,8 @@
 	tabindex="0"
 	role="tab"
 	class={classNames(
-		tabId === $selectedValue
-			? 'bg-core-blue-600 cursor-default text-white'
-			: 'bg-core-grey-100 hover:bg-core-grey-200 text-core-grey-800 dark:bg-core-grey-600 dark:hover:bg-core-grey-500 dark:text-white cursor-pointer',
-		'text-base py-2 px-4 flex items-center select-none '
+		tabLabelClasses,
+		tabId === $selectedValue ? '!bg-core-blue-600 cursor-default text-white' : 'cursor-pointer'
 	)}
 >
 	<slot />
