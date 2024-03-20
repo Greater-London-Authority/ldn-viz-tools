@@ -7,12 +7,12 @@
 
 	// It has been modified to use Svelte rather than just D3.js, and to allow a value on the scale to be highlighted.
 
-	import {range, quantile} from "d3-array";
-	import {axisBottom} from "d3-axis";
-	import {format} from "d3-format";
-	import {interpolate, interpolateRound, quantize} from "d3-interpolate";
-	import {scaleLinear, scaleBand} from "d3-scale"
-	import {select} from "d3-selection";
+	import { range, quantile } from 'd3-array';
+	import { axisBottom } from 'd3-axis';
+	import { format } from 'd3-format';
+	import { interpolate, interpolateRound, quantize } from 'd3-interpolate';
+	import { scaleLinear, scaleBand } from 'd3-scale';
+	import { select } from 'd3-selection';
 
 	export let color: any;
 
