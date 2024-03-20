@@ -1,18 +1,17 @@
 <script context="module">
-	import SidebarToggle from './sidebarToggle.svelte';
 	import { AdjustmentsHorizontal } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import SidebarToggle from './SidebarToggle.svelte';
 
 	export const meta = {
 		title: 'Ui/Sidebar/elements/SidebarToggle',
 		component: SidebarToggle
 	};
-
-	let isOpen = false;
 </script>
 
-<script>
+<script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	let isOpen: boolean;
 </script>
 
 <Template let:args>

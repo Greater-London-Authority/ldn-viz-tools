@@ -1,11 +1,17 @@
-<script>
+<script lang="ts">
 	import { Bars3, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
 	import Button from '../../../button/Button.svelte';
 	import { classNames } from '../../../utils/classNames';
 
-	export let isOpen;
+	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
+	$: isOpen = $sidebarIsOpen;
+
+	const toggleOpen = () => {
+		sidebarIsOpen.update((isOpen) => !isOpen);
+	};
 
 	const darkThemeClasses =
 		'dark:bg-core-grey-800 dark:hover:bg-core-grey-900 dark:!text-white dark:hover:!text-core-grey-100';
@@ -22,7 +28,7 @@
 		variant="square"
 		emphasis="secondary"
 		class={sidebarToggleClasses}
-		on:click={() => (isOpen = !isOpen)}
+		on:click={toggleOpen}
 	>
 		{#if isOpen === false}
 			{#if !$$slots.icon}

@@ -7,8 +7,8 @@
 	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 
-	import TabLabel from '../tabs/TabLabel.svelte';
-	import TabList from '../tabs/TabList.svelte';
+	import SidebarTabLabel from './elements/sidebarTabs/SidebarTabLabel.svelte';
+	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
 
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -21,8 +21,21 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+	import type { SidebarConfig } from './types';
+
+	let sidebar: SidebarConfig = {
+		inFrom: 'right',
+		startOpen: false
+	};
+
+	const isOpen = writable(false);
+
+	setContext('sidebarIsOpen', isOpen);
+	setContext('sidebarConfig', sidebar);
 </script>
 
 <Template let:args>
@@ -130,24 +143,24 @@
 <Story name="Tabbed Sidebar" source>
 	<Sidebar>
 		<svelte:fragment slot="tabs">
-			<TabList bind:selectedValue orientation="vertical">
-				<TabLabel tabId="markers">
+			<SidebarTabList bind:selectedValue>
+				<SidebarTabLabel tabId="markers">
 					<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Data Markers
-				</TabLabel>
-				<TabLabel tabId="filters">
+				</SidebarTabLabel>
+				<SidebarTabLabel tabId="filters">
 					<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Filters
-				</TabLabel>
-				<TabLabel tabId="analysis">
+				</SidebarTabLabel>
+				<SidebarTabLabel tabId="analysis">
 					<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Analysis
-				</TabLabel>
-				<TabLabel tabId="layers">
+				</SidebarTabLabel>
+				<SidebarTabLabel tabId="layers">
 					<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Layers
-				</TabLabel>
-			</TabList>
+				</SidebarTabLabel>
+			</SidebarTabList>
 		</svelte:fragment>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
@@ -195,3 +208,52 @@
 		</SidebarFooter>
 	</Sidebar>
 </Story>
+
+<!-- <Story name="Toggle On Right" source>
+	<Sidebar>
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
+			</SidebarSection>
+			<SidebarSection title="Section Title">
+				Section Content
+				<div>
+					<SidebarGroupTitle hintType="modal" hintLabel="why">
+						Pay Attention to this group
+						<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+					</SidebarGroupTitle>
+					Grouped content
+				</div>
+			</SidebarSection>
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<SidebarFooter>
+				<div class="flex justify-between">
+					<div class="w-[165px]"><LogoMayor /></div>
+					<div class="w-[165px]"><LogoCIU /></div>
+				</div>
+				<svelte:fragment slot="menu">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+				</svelte:fragment>
+			</SidebarFooter>
+		</SidebarFooter>
+	</Sidebar>
+</Story> -->
