@@ -58,7 +58,7 @@
 	setContext('sidebarPlacement', sidebarPlacementStore);
 </script>
 
-<!-- Inorder to get consistent width between code and css we need to use the innerwidth of the window -->
+<!-- In order to get consistent width between code and css we need to use the innerWidth of the window -->
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
