@@ -39,7 +39,7 @@
 
 <Story name="Vertical">
 	<div class="flex">
-		<SidebarTabList bind:selectedValue >
+		<SidebarTabList bind:selectedValue>
 			<SidebarTabLabel tabId="aggregates">Aggregated counts across London</SidebarTabLabel>
 			<SidebarTabLabel tabId="chargers">Details of chargers</SidebarTabLabel>
 			<SidebarTabLabel tabId="averages">Averages of charge events</SidebarTabLabel>
@@ -54,7 +54,7 @@
 
 <Story name="Vertical with Icons">
 	<div class="flex">
-		<SidebarTabList bind:selectedValue >
+		<SidebarTabList bind:selectedValue>
 			<SidebarTabLabel tabId="markers">
 				<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Data Markers
