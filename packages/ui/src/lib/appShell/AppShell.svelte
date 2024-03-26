@@ -32,13 +32,14 @@
 	$: sidebarWidthClasses = widthLookup[$sidebarWidthStore][bpProp];
 	$: sidebarHeightClasses = heightLookup[$sidebarWidthStore][bpProp];
 
-	let borderBoxSize: any;
-
 	$: innerWidth = 0;
 
-	// we dont use this but it was intended to calculte heights in css can probs remove
-	$: borderBoxHeight = borderBoxSize ? borderBoxSize[0].blockSize : -1;
-
+	/*
+		Below are settings for Breakpoint Prop and Always Open Prop.
+		This is the secret sause that allows us to pass an object containing different props per breakpoint.
+		The breakpoints are configurable if required, but use defaults: Demo to follow.
+		See also appShell/utils/getSettingByScreenWidth 
+	*/
 	// bpProp = breakpoint prop - better name?
 	$: bpProp = getSetting(sidebarPlacement, innerWidth);
 	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
@@ -57,43 +58,30 @@
 	setContext('sidebarPlacement', sidebarPlacementStore);
 </script>
 
-<!-- Inorder to get consostent width between code and css we need to use the innerwidth of the window -->
+<!-- Inorder to get consistent width between code and css we need to use the innerwidth of the window -->
 <svelte:window bind:innerWidth />
 
-<!-- to get the height we bind to borderbox for performance improvements over clientHeight (see note above about removing)-->
-<div bind:borderBoxSize>
-	<main class={wrapperClasses}>
-		<div class={'grow'}>
-			<slot name="main">
-				<p>
-					<span class="font-bold">
-						Provide some main content. The main cotent you provide should have appropriate padding
-						applied...
-					</span>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquet fermentum nulla.
-					Suspendisse porta gravida ipsum ac tincidunt. Donec ac rutrum ligula. Duis tortor erat, blandit
-					non ante vitae, facilisis finibus arcu. Phasellus eget felis tempor, eleifend lectus quis,
-					facilisis lectus.
-				</p>
-				<p>
-					Provide some main content Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Maecenas aliquet fermentum nulla. Suspendisse porta gravida ipsum ac tincidunt. Donec ac
-					rutrum ligula. Duis tortor erat, blandit non ante vitae, facilisis finibus arcu. Phasellus
-					eget felis tempor, eleifend lectus quis, facilisis lectus.
-				</p>
-			</slot>
-		</div>
-
-		<slot name="sidebar">Sidebar</slot>
-
-		<!-- This div exists to push content to the side of the sidebar	-->
-		{#if sidebarPush && $isOpen && $sidebarWidthStore}
-			<div
-				class={classNames('flex', sidebarHeightClasses)}
-				transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
-			>
-				<div class={classNames('shrink-0', sidebarWidthClasses)} />
-			</div>
-		{/if}
+<div class={wrapperClasses}>
+	<main class={'grow'}>
+		<slot name="main">
+			<p>
+				<span class="font-bold">
+					Provide some main content. The main cotent you provide should have appropriate padding
+					applied...
+				</span>
+			</p>
+		</slot>
 	</main>
+
+	<slot name="sidebar">Sidebar</slot>
+
+	<!-- This div exists to push content to the side of the sidebar	when sidebar push is set to true-->
+	{#if sidebarPush && $isOpen && $sidebarWidthStore}
+		<div
+			class={classNames('flex', sidebarHeightClasses)}
+			transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
+		>
+			<div class={classNames('shrink-0', sidebarWidthClasses)} />
+		</div>
+	{/if}
 </div>

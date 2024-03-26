@@ -11,15 +11,6 @@ export interface SidebarPlacement {
 	'2xl'?: PlacementType;
 }
 
-// export interface SidebarAlwaysOpen {
-// 	initial?: AlwaysOpenType;
-// 	sm?: AlwaysOpenType;
-// 	md?: AlwaysOpenType;
-// 	lg?: AlwaysOpenType;
-// 	xl?: AlwaysOpenType;
-// 	'2xl'?: AlwaysOpenType;
-// }
-
 // Can maybe extend SidebarPlacement above
 export type PlacementLookup = { [key: string]: string }; // tighten first key to litterals
 
