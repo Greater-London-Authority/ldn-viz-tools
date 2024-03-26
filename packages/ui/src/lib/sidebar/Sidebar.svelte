@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { type Writable } from 'svelte/store';
+	import { slide } from 'svelte/transition';
 	import { classNames } from '../utils/classNames';
 	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';
 	import {
+		heightLookup,
 		placementLookup,
+		smTogglePlacementLookup,
 		tabPlacementLookup,
 		togglePlacementLookup,
+		transitionAxis,
 		widthLookup
 	} from './sidebarUtils';
 	import { sidebarWidthStore } from './stores';
@@ -20,22 +24,25 @@
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
 
-	const wrapperClasses = `${position} dark transition-all max-w-screen max-h-screen`;
-	const sidebarClasses = 'flex flex-col bg-core-grey-800 pb-6 h-full '; // p-6 pad on container or elements (overflow position)
+	const wrapperClasses = `${position} z-30 dark`;
+	const sidebarClasses = 'flex flex-col grow bg-core-grey-800 pb-6'; // p-6 pad on container or elements (overflow position)
 
 	// If a context provides a reactive placement use that
 	$: placement = $sidebarPlacementFromContext ? $sidebarPlacementFromContext : placement;
 
 	$: placementClasses = placementLookup[placement];
 	$: togglePlacementClasses = togglePlacementLookup[placement];
+	$: smallScreenTogglePlacementClasses = smTogglePlacementLookup[placement];
 	$: tabPlacementClasses = tabPlacementLookup[placement];
 	$: widthClasses = widthLookup[width][placement];
+	$: heightClasses = heightLookup[width][placement];
 
 	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
 	$: $sidebarWidthStore = width;
 </script>
 
-<div class={classNames(wrapperClasses, placementClasses, $sidebarIsOpen ? widthClasses : '')}>
+<div class={classNames(wrapperClasses, placementClasses)}>
+	<!-- $sidebarIsOpen ? widthClasses : '' -->
 	{#if $$slots.tabs}
 		<div class={classNames('absolute bg-core-grey-100 dark:bg-core-grey-900', tabPlacementClasses)}>
 			<slot name="tabs" />
@@ -47,16 +54,27 @@
 	{/if}
 
 	{#if $sidebarIsOpen}
-		<div class={classNames(sidebarClasses)}>
-			<div class="p-6 pb-0">
-				<slot name="header" />
-			</div>
-			<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
-				<div class="space-y-4">
-					<slot name="sections" />
-				</div>
+		<div
+			class={classNames('flex', heightClasses)}
+			transition:slide={{ duration: 300, axis: transitionAxis[placement] }}
+		>
+			<!-- <div class={classNames('absolute', smallScreenTogglePlacementClasses)}>
+				<SidebarToggle />
+			</div> -->
 
-				<slot name="footer" />
+			<!--  style:width={'calc(100vw - 40px)'} -->
+
+			<div class={classNames(sidebarClasses, widthClasses)}>
+				<div class="p-6 pb-0">
+					<slot name="header" />
+				</div>
+				<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
+					<div class="space-y-4">
+						<slot name="sections" />
+					</div>
+
+					<slot name="footer" />
+				</div>
 			</div>
 		</div>
 	{/if}

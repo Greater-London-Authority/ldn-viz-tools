@@ -378,7 +378,7 @@
 			</svelte:fragment>
 		</SidebarHeader>
 		<svelte:fragment slot="sections">
-			{@const sections = [1, 2]}
+			{@const sections = [1, 2, 3, 4, 5, 6, 7, 8]}
 			{#each sections as section}
 				<SidebarSection title="Section Title">
 					Section Content

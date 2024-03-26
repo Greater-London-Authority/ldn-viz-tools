@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { widthLookup, wrapperFlowLookup } from '../sidebar/sidebarUtils';
+	import { slide } from 'svelte/transition';
+	import {
+		heightLookup,
+		transitionAxis,
+		widthLookup,
+		wrapperFlowLookup
+	} from '../sidebar/sidebarUtils';
 	import { sidebarWidthStore } from '../sidebar/stores';
 	import type { AlwaysOpenType, SidebarPlacement } from '../sidebar/types';
 	import { classNames } from '../utils/classNames';
@@ -23,13 +29,19 @@
 		wrapperFlowLookup[bpProp]
 	);
 
+	$: sidebarWidthClasses = widthLookup[$sidebarWidthStore][bpProp];
+	$: sidebarHeightClasses = heightLookup[$sidebarWidthStore][bpProp];
+
 	let borderBoxSize: any;
 
-	$: bpWidth = 0;
+	$: innerWidth = 0;
+
+	// we dont use this but it was intended to calculte heights in css can probs remove
 	$: borderBoxHeight = borderBoxSize ? borderBoxSize[0].blockSize : -1;
 
-	$: bpProp = getSetting(sidebarPlacement, bpWidth);
-	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, bpWidth) : undefined;
+	// bpProp = breakpoint prop - better name?
+	$: bpProp = getSetting(sidebarPlacement, innerWidth);
+	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
 	$: if (aoProp === 'true') {
 		sidebarPush = true;
@@ -46,15 +58,15 @@
 </script>
 
 <!-- Inorder to get consostent width between code and css we need to use the innerwidth of the window -->
-<svelte:window bind:innerWidth={bpWidth} />
+<svelte:window bind:innerWidth />
 
-<!-- to get the height we bind to borderbox for performance improvements over clientHeight -->
+<!-- to get the height we bind to borderbox for performance improvements over clientHeight (see note above about removing)-->
 <div bind:borderBoxSize>
 	<main class={wrapperClasses}>
 		<div class={'grow'}>
 			<slot name="main">
 				<p>
-					<span class="bold">
+					<span class="font-bold">
 						Provide some main content. The main cotent you provide should have appropriate padding
 						applied...
 					</span>
@@ -76,7 +88,12 @@
 
 		<!-- This div exists to push content to the side of the sidebar	-->
 		{#if sidebarPush && $isOpen && $sidebarWidthStore}
-			<div class={classNames('shrink-0', widthLookup[$sidebarWidthStore][bpProp])} />
+			<div
+				class={classNames('flex', sidebarHeightClasses)}
+				transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
+			>
+				<div class={classNames('shrink-0', sidebarWidthClasses)} />
+			</div>
 		{/if}
 	</main>
 </div>
