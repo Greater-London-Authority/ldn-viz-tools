@@ -28,26 +28,26 @@ export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButton
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as Select } from './select/Select.svelte';
 
-export { default as AppShell } from './sidebar/AppShell.svelte';
+export { default as AppShell } from './appShell/AppShell.svelte';
+export * from './appShell/utils/getSettingByScreenWidth';
 
 export { default as Sidebar } from './sidebar/Sidebar.svelte';
-export { default as SidebarToggle } from './sidebar/SidebarToggle.svelte';
 
-export { default as SidebarAppHeader } from './sidebarElements/SidebarAppHeader.svelte';
-export { default as SidebarDivider } from './sidebarElements/SidebarDivider.svelte';
-export { default as SidebarGroup } from './sidebarElements/SidebarGroup.svelte';
-export { default as SidebarHeader } from './sidebarElements/SidebarHeader.svelte';
-export { default as SidebarSection } from './sidebarElements/SidebarSection.svelte';
+export { default as SidebarToggle } from './sidebar/elements/sidebarToggle/SidebarToggle.svelte';
 
-export { default as SidebarTabLabel } from './sidebarTabs/SidebarTabLabel.svelte';
-export { default as SidebarTabList } from './sidebarTabs/SidebarTabList.svelte';
-export { default as SidebarTabsWrapper } from './sidebarTabs/SidebarTabsWrapper.svelte';
+export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
+export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
+
+export { default as SidebarHint } from './sidebar/elements/sidebarHint/SidebarHint.svelte';
+
+export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
+export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
+export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
+
+export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
+export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
 
 export { default as Spinner } from './spinners/Spinner.svelte';
-export { default as TabbedSidebar } from './tabbedSidebar/TabbedSidebar.svelte';
-export { default as TabbedSidebarTabLabel } from './tabbedSidebar/TabbedSidebarTabLabel.svelte';
-export { default as TabbedSidebarTabList } from './tabbedSidebar/TabbedSidebarTabList.svelte';
-export { default as TabbedSidebarWrapper } from './tabbedSidebar/TabbedSidebarWrapper.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 export { default as Toaster } from './toaster/Toaster.svelte';
