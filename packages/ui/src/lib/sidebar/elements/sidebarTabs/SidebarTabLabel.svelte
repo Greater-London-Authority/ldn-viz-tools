@@ -4,22 +4,30 @@
 	import { classNames } from '../../../utils/classNames';
 
 	export let tabId: string;
+
 	const { selectedValue, orientation } = getContext<{
 		selectedValue: Writable<string>;
 		orientation: 'vertical' | 'horizontal';
 	}>('tabContext');
 
+	// Context required to make sidebar open/ close
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
+
+	// Context provided by wrapping component to force always open
+	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
 
 	const handleSelection = () => {
 		if ($sidebarIsOpen === false) {
 			// if we're collapsed, clicking any tab label will open that tab
 			$sidebarIsOpen = true;
 			$selectedValue = tabId;
-		} else if ($selectedValue == tabId) {
-			// if we're expanded, clicking the currently selected tab label triggers collapse
-			$sidebarIsOpen = false;
-			$selectedValue = '';
+		} else if ($selectedValue === tabId) {
+			// The sidebarAlways open context is provided by the app shell
+			if ($sidebarAlwaysOpen === 'false' || $sidebarAlwaysOpen === undefined) {
+				// if we're expanded, clicking the currently selected tab label triggers collapse
+				$sidebarIsOpen = false;
+				$selectedValue = '';
+			}
 		} else {
 			// if we're expanded, clicking a different tab label switched tab
 			$selectedValue = tabId;

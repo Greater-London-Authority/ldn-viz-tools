@@ -1,68 +1,63 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { type Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';
-	import type { SidebarConfig } from './types';
+	import {
+		placementLookup,
+		tabPlacementLookup,
+		togglePlacementLookup,
+		widthLookup
+	} from './sidebarUtils';
+	import { sidebarWidthStore } from './stores';
+	import type { PlacementType } from './types';
 
 	export let width: 'standard' | 'wide' = 'standard';
+	export let position: 'fixed' | 'absolute' = 'absolute';
+	export let placement: PlacementType = 'right';
 
-	const config = getContext<SidebarConfig>('sidebarConfig');
+	const sidebarPlacementFromContext = getContext<Writable<PlacementType>>('sidebarPlacement');
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
+	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
 
-	const togglePosition = $$slots.tabs ? 'right' : config.inFrom;
+	const wrapperClasses = `${position} dark transition-all max-w-screen max-h-screen`;
+	const sidebarClasses = 'flex flex-col bg-core-grey-800 pb-6 h-full '; // p-6 pad on container or elements (overflow position)
 
-	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
-	const lightThemeClasses = 'bg-white text-core-grey-700';
+	// If a context provides a reactive placement use that
+	$: placement = $sidebarPlacementFromContext ? $sidebarPlacementFromContext : placement;
 
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
+	$: placementClasses = placementLookup[placement];
+	$: togglePlacementClasses = togglePlacementLookup[placement];
+	$: tabPlacementClasses = tabPlacementLookup[placement];
+	$: widthClasses = widthLookup[width][placement];
 
-	const widthClasses = {
-		standard: 'w-[408px]',
-		wide: 'w-[608px]'
-	};
-
-	const translateClasses = {
-		standard: { left: '-translate-x-[408px]', right: 'translate-x-[408px]' },
-		wide: { left: '-translate-x-[608px]', right: 'translate-x-[608px]' }
-	};
-
-	// const pushClasses = config.push ? '' : '';
-
-	$: wrapperClasses = classNames(
-		'fixed inset-y-0 end-0 transition-x duration-300 dark',
-		config.inFrom === 'left' ? 'start-0' : 'end-0',
-		$sidebarIsOpen ? translateClasses[width][config.inFrom] : ''
-	);
-
-	$: sidebarClasses = classNames(
-		'fixed h-dvh inset-y-0 end-0 flex flex-col',
-		widthClasses[width],
-		...themeClasses,
-		config.inFrom === 'left' ? 'start-0' : 'end-0'
-	);
+	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
+	$: $sidebarWidthStore = width;
 </script>
 
-<div class:navOpen={$sidebarIsOpen} class={wrapperClasses}>
-	<div class={sidebarClasses}>
-		{#if $$slots.tabs}
-			<div
-				class={`absolute inset-y-0 bg-core-grey-100 dark:bg-core-grey-900 ${config.inFrom === 'left' ? '-start-20' : '-start-20'}`}
-			>
-				<slot name="tabs" />
-			</div>
-		{:else}
-			<div class={`absolute inset-y-0 ${togglePosition === 'left' ? '-end-10' : '-start-10'}`}>
-				<SidebarToggle />
-			</div>
-		{/if}
-
-		<div class={`p-6 h-full flex flex-col`}>
-			<div class="space-y-4">
-				<slot name="header" />
-				<slot name="sections" />
-			</div>
-			<slot name="footer" />
+<div class={classNames(wrapperClasses, placementClasses, $sidebarIsOpen ? widthClasses : '')}>
+	{#if $$slots.tabs}
+		<div class={classNames('absolute bg-core-grey-100 dark:bg-core-grey-900', tabPlacementClasses)}>
+			<slot name="tabs" />
 		</div>
-	</div>
+	{:else if $sidebarAlwaysOpen !== 'true'}
+		<div class={classNames('absolute', togglePlacementClasses)}>
+			<SidebarToggle />
+		</div>
+	{/if}
+
+	{#if $sidebarIsOpen}
+		<div class={classNames(sidebarClasses)}>
+			<div class="p-6 pb-0">
+				<slot name="header" />
+			</div>
+			<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
+				<div class="space-y-4">
+					<slot name="sections" />
+				</div>
+
+				<slot name="footer" />
+			</div>
+		</div>
+	{/if}
 </div>

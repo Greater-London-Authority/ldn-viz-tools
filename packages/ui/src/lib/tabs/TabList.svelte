@@ -5,6 +5,7 @@
 
 	export let selectedValue: string | undefined = undefined;
 	export let orientation: 'vertical' | 'horizontal' = 'horizontal';
+
 	const val: Writable<string | undefined> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
 	setContext('tabContext', {
@@ -13,7 +14,6 @@
 	});
 
 	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
-
 	const lightThemeClasses = 'bg-white text-core-grey-700';
 
 	const themeClasses = [darkThemeClasses, lightThemeClasses];
@@ -23,7 +23,7 @@
 		horizontal: 'flex border-b-4 border-b-core-blue-600 w-full pt-5 pb-0 space-x-0.5 items-end'
 	};
 
-	$: tabListClasses = classNames(...themeClasses, orientationClasses[orientation]);
+	$: tabListClasses = classNames(...themeClasses, orientationClasses[orientation], $$props.class);
 </script>
 
 <div class={tabListClasses} role="tablist">

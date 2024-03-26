@@ -1,53 +1,82 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
+	import { writable } from 'svelte/store';
+	import { widthLookup, wrapperFlowLookup } from '../sidebar/sidebarUtils';
+	import { sidebarWidthStore } from '../sidebar/stores';
+	import type { AlwaysOpenType, SidebarPlacement } from '../sidebar/types';
 	import { classNames } from '../utils/classNames';
+	import { getSetting } from './utils/getSettingByScreenWidth';
 
-	import type { SidebarConfig } from '../sidebar/types';
-
-	export let sidebar: SidebarConfig = {
-		inFrom: 'right',
-		startOpen: false
-	};
-
-	let { inFrom, startOpen } = sidebar;
-
+	export let sidebarPlacement: SidebarPlacement = { initial: 'bottom', md: 'right' };
+	export let sidebarAlwaysOpen: { [key: string]: AlwaysOpenType } | undefined = undefined;
+	export let sidebarPush = false;
+	export let startOpen = true;
 	export const isOpen = writable(startOpen);
 
-	const layoutClasses = {
-		left: 'bg-core-yellow-500 flex-row-reverse',
-		right: 'bg-core-green-500'
-	};
+	export const isAlwaysOpen = writable('false');
+	export const sidebarPlacementStore = writable(sidebarPlacement);
 
-	const darkThemeClasses = '';
-	const lightThemeClasses = '';
+	// Classes applied to the wrapper element
+	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
+	$: wrapperClasses = classNames(
+		'h-full min-h-dvh flex relative bg-core-yellow-50 xl:bg-core-green-50',
+		wrapperFlowLookup[bpProp]
+	);
 
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
+	let borderBoxSize: any;
 
-	$: wrapperClasses = classNames('min-h-dvh flex relative', ...themeClasses, layoutClasses[inFrom]);
+	$: bpWidth = 0;
+	$: borderBoxHeight = borderBoxSize ? borderBoxSize[0].blockSize : -1;
 
+	$: bpProp = getSetting(sidebarPlacement, bpWidth);
+	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, bpWidth) : undefined;
+
+	$: if (aoProp === 'true') {
+		sidebarPush = true;
+		$isOpen = true;
+	}
+
+	$: $isAlwaysOpen = aoProp;
+	$: $sidebarPlacementStore = bpProp;
+
+	setContext('sidebarAlwaysOpen', isAlwaysOpen);
 	setContext('sidebarIsOpen', isOpen);
-	setContext('sidebarConfig', sidebar);
+	setContext('sidebarPush', sidebarPush);
+	setContext('sidebarPlacement', sidebarPlacementStore);
 </script>
 
-<main class={wrapperClasses}>
-	<div class="bg-slate-600 w-full">
-		<slot name="main">
-			Provide some main content Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-			aliquet fermentum nulla. Suspendisse porta gravida ipsum ac tincidunt. Donec ac rutrum ligula.
-			Duis tortor erat, blandit non ante vitae, facilisis finibus arcu. Phasellus eget felis tempor,
-			eleifend lectus quis, facilisis lectus. Proin a turpis ut tortor bibendum sagittis.
-			Pellentesque accumsan aliquet eros, id semper urna blandit at. Curabitur accumsan felis eu sem
-			egestas, sit amet porta orci semper. Quisque semper varius sodales. Maecenas ut justo nec
-			velit venenatis vestibulum. Suspendisse leo diam, consequat at sapien et, sodales ultricies
-			nisi. Maecenas ipsum lacus, tristique faucibus interdum nec, scelerisque in enim. Donec nec
-			interdum dolor. Maecenas eget nisi turpis. Proin ut auctor nisl. Etiam id est ultricies,
-			rhoncus quam ac, dignissim justo. Ut elementum sapien et mi mollis condimentum. Pellentesque
-			quis ex efficitur, ullamcorper massa non, pellentesque sem. Aenean a enim scelerisque, varius
-			dolor eu, semper sem. Etiam non enim vitae odio scelerisque tempus et vitae risus. Nulla non
-			tristique nibh. Nam consectetur molestie facilisis. Nam augue elit, cursus sed turpis sit
-			amet, interdum pharetra ex. Nunc quis laoreet enim. Aliquam et dignissim lacus.
-		</slot>
-	</div>
-	<slot name="sidebar">Sidebar</slot>
-</main>
+<!-- Inorder to get consostent width between code and css we need to use the innerwidth of the window -->
+<svelte:window bind:innerWidth={bpWidth} />
+
+<!-- to get the height we bind to borderbox for performance improvements over clientHeight -->
+<div bind:borderBoxSize>
+	<main class={wrapperClasses}>
+		<div class={'grow'}>
+			<slot name="main">
+				<p>
+					<span class="bold">
+						Provide some main content. The main cotent you provide should have appropriate padding
+						applied...
+					</span>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquet fermentum nulla.
+					Suspendisse porta gravida ipsum ac tincidunt. Donec ac rutrum ligula. Duis tortor erat, blandit
+					non ante vitae, facilisis finibus arcu. Phasellus eget felis tempor, eleifend lectus quis,
+					facilisis lectus.
+				</p>
+				<p>
+					Provide some main content Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Maecenas aliquet fermentum nulla. Suspendisse porta gravida ipsum ac tincidunt. Donec ac
+					rutrum ligula. Duis tortor erat, blandit non ante vitae, facilisis finibus arcu. Phasellus
+					eget felis tempor, eleifend lectus quis, facilisis lectus.
+				</p>
+			</slot>
+		</div>
+
+		<slot name="sidebar">Sidebar</slot>
+
+		<!-- This div exists to push content to the side of the sidebar	-->
+		{#if sidebarPush && $isOpen && $sidebarWidthStore}
+			<div class={classNames('shrink-0', widthLookup[$sidebarWidthStore][bpProp])} />
+		{/if}
+	</main>
+</div>
