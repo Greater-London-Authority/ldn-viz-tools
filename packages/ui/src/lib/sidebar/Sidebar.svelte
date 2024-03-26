@@ -7,7 +7,6 @@
 	import {
 		heightLookup,
 		placementLookup,
-		smTogglePlacementLookup,
 		tabPlacementLookup,
 		togglePlacementLookup,
 		transitionAxis,
@@ -32,7 +31,6 @@
 
 	$: placementClasses = placementLookup[placement];
 	$: togglePlacementClasses = togglePlacementLookup[placement];
-	$: smallScreenTogglePlacementClasses = smTogglePlacementLookup[placement];
 	$: tabPlacementClasses = tabPlacementLookup[placement];
 	$: widthClasses = widthLookup[width][placement];
 	$: heightClasses = heightLookup[width][placement];
@@ -58,12 +56,6 @@
 			class={classNames('flex', heightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[placement] }}
 		>
-			<!-- <div class={classNames('absolute', smallScreenTogglePlacementClasses)}>
-				<SidebarToggle />
-			</div> -->
-
-			<!--  style:width={'calc(100vw - 40px)'} -->
-
 			<div class={classNames(sidebarClasses, widthClasses)}>
 				<div class="p-6 pb-0">
 					<slot name="header" />

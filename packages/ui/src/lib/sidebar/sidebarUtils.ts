@@ -16,13 +16,6 @@ export const togglePlacementLookup: PlacementLookup = {
 	bottom: '-top-[40px]'
 };
 
-export const smTogglePlacementLookup: PlacementLookup = {
-	left: 'top-0 left-0',
-	right: 'top-0 right-0',
-	top: 'hidden',
-	bottom: 'hidden'
-};
-
 export const tabPlacementLookup: PlacementLookup = {
 	left: '-end-[80px] inset-y-0',
 	right: '-start-[80px] inset-y-0',
