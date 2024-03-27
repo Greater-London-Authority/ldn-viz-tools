@@ -17,7 +17,6 @@
 	import SidebarHeader from './elements/sidebarHeader/SidebarHeader.svelte';
 	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
-	// import type { SidebarPlacement } from './types';
 
 	import SidebarTabLabel from './elements/sidebarTabs/SidebarTabLabel.svelte';
 	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
@@ -27,14 +26,10 @@
 
 	let selectedValue = 'markers';
 
-	// let sidebarPlacement: SidebarPlacement = { initial: 'bottom', md: 'right' };
-
 	// In order for the sidebar to open/ close a writable boolean store must be provided to context.
 	// NB. This is provided by AppShell when using
 	const isOpen = writable(true);
 	setContext('sidebarIsOpen', isOpen);
-
-	// setContext('sidebarPlacement', sidebarPlacement);
 </script>
 
 <Template let:args>
