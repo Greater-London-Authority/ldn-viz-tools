@@ -1,3 +1,3 @@
 <div class="relative min-h-dvh">
-    <slot />
+	<slot />
 </div>
