@@ -221,25 +221,25 @@
 		</SidebarHeader>
 		<svelte:fragment slot="sections">
 			{#if selectedValue === 'markers'}
-				<div class="text-white">
+				<div class="text-core-grey-700 dark:text-white">
 					Markers is selected, so we'd render a
 					<code> &lt;Marker /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'filters'}
-				<div class="text-white">
+				<div class="text-core-grey-700 dark:text-white">
 					Filter is selected, so we'd render a
 					<code> &lt;Filters /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'analysis'}
-				<div class="text-white">
+				<div class="text-core-grey-700 dark:text-white">
 					Analysis is selected, so we'd render a
 					<code> &lt;Analysis /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'layers'}
-				<div class="text-white">
+				<div class="text-core-grey-700 dark:text-white">
 					Layers is selected, so we'd render a
 					<code> &lt;Layer /&gt;</code>
 					component
@@ -454,6 +454,92 @@
 						Grouped content
 					</div>
 				</SidebarSection>
+			{/each}
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<SidebarFooter>
+				<div class="flex justify-between">
+					<div class="w-[165px]"><LogoMayor /></div>
+					<div class="w-[165px]"><LogoCIU /></div>
+				</div>
+				<svelte:fragment slot="menu">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+				</svelte:fragment>
+			</SidebarFooter>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<Story name="Light Theme (Experimental)" source>
+	<Sidebar theme="light">
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			{@const sections = [1, 2]}
+			{#each sections as section}
+				<SidebarSection title="Section Title">
+					Section Content
+					<div>
+						<SidebarGroupTitle hintType="modal" hintLabel="why">
+							Pay Attention to this group
+							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						</SidebarGroupTitle>
+						Grouped content
+					</div>
+				</SidebarSection>
+			{/each}
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<SidebarFooter>
+				<div class="flex justify-between">
+					<div class="w-[165px]"><LogoMayor /></div>
+					<div class="w-[165px]"><LogoCIU /></div>
+				</div>
+				<svelte:fragment slot="menu">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+				</svelte:fragment>
+			</SidebarFooter>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<!-- TODO: Although this isn't a design that features in figma <i>yet</i> it should be... Components will need to be updated accordingly to achieve better theme inheritance -->
+<Story name="Dark Theme with white panel" source>
+	<Sidebar>
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			{@const sections = [1]}
+			{#each sections as section}
+				<div class="bg-white">Section Content</div>
+				<!-- <SidebarSection title="Section Title">
+					Section Content
+					<div>
+						<SidebarGroupTitle hintType="modal" hintLabel="why">
+							Pay Attention to this group
+							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						</SidebarGroupTitle>
+						Grouped content
+					</div>
+				</SidebarSection> -->
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">

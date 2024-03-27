@@ -5,7 +5,7 @@
 
 	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
 
-	const lightThemeClasses = 'bg-white text-core-grey-700';
+	const lightThemeClasses = 'bg-core-grey-50 text-core-grey-700';
 
 	const themeClasses = [darkThemeClasses, lightThemeClasses];
 

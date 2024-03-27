@@ -14,8 +14,8 @@
 	};
 
 	const darkThemeClasses =
-		'dark:bg-core-grey-800 dark:hover:bg-core-grey-900 dark:!text-white dark:hover:!text-core-grey-100';
-	const lightThemeClasses = 'bg-white !text-core-grey-700 hover:!text-white';
+		'dark:!bg-core-grey-800 dark:hover:!bg-core-grey-900 dark:!text-white dark:hover:!text-core-grey-100';
+	const lightThemeClasses = '!bg-core-grey-50 !text-core-grey-700 hover:!text-core-grey-300';
 
 	const themeClasses = [darkThemeClasses, lightThemeClasses];
 

@@ -17,14 +17,15 @@
 
 	export let width: 'standard' | 'wide' = 'standard';
 	export let position: 'fixed' | 'absolute' = 'absolute';
+	export let theme: 'light' | 'dark' = 'dark';
 	export let placement: PlacementType = 'right';
 
 	const sidebarPlacementFromContext = getContext<Writable<PlacementType>>('sidebarPlacement');
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
 
-	const wrapperClasses = `${position} z-30 dark`;
-	const sidebarClasses = 'flex flex-col grow bg-core-grey-800 pb-6'; // p-6 pad on container or elements (overflow position)
+	const wrapperClasses = `${position} z-30 ${theme}`;
+	const sidebarClasses = 'flex flex-col grow bg-core-grey-50 dark:bg-core-grey-800 pb-6'; // p-6 pad on container or elements (overflow position)
 
 	// If a context provides a reactive placement use that
 	$: placement = $sidebarPlacementFromContext ? $sidebarPlacementFromContext : placement;

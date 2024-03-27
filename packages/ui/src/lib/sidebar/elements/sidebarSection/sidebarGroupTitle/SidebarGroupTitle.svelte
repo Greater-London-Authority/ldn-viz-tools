@@ -5,8 +5,8 @@
 	export let hintType: 'popover' | 'modal' | 'tooltip' | undefined = undefined;
 	export let hintLabel: string | undefined = undefined;
 
-	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
-	const lightThemeClasses = 'bg-white text-core-grey-700';
+	const darkThemeClasses = 'dark:text-white';
+	const lightThemeClasses = 'text-core-grey-700';
 
 	const themeClasses = [darkThemeClasses, lightThemeClasses];
 
