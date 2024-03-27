@@ -58,7 +58,7 @@
 	setContext('sidebarPlacement', sidebarPlacementStore);
 </script>
 
-<!-- Inorder to get consistent width between code and css we need to use the innerwidth of the window -->
+<!-- In order to get consistent width between code and css we need to use the innerWidth of the window -->
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
@@ -75,7 +75,7 @@
 
 	<slot name="sidebar">Sidebar</slot>
 
-	<!-- This div exists to push content to the side of the sidebar	when sidebar push is set to true-->
+	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
 	{#if sidebarPush && $isOpen && $sidebarWidthStore}
 		<div
 			class={classNames('flex', sidebarHeightClasses)}

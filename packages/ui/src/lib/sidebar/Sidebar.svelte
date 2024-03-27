@@ -40,7 +40,6 @@
 </script>
 
 <div class={classNames(wrapperClasses, placementClasses)}>
-	<!-- $sidebarIsOpen ? widthClasses : '' -->
 	{#if $$slots.tabs}
 		<div class={classNames('absolute bg-core-grey-100 dark:bg-core-grey-900', tabPlacementClasses)}>
 			<slot name="tabs" />
