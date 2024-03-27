@@ -1,0 +1,85 @@
+<script context="module">
+	import SidebarTabList from './SidebarTabList.svelte';
+	import { SidebarLeftContext } from '@ldn-viz/docs';
+	import { SidebarTopContext } from '@ldn-viz/docs';
+
+	export const meta = {
+		title: 'Ui/Sidebar/elements/SidebarTabs',
+		component: SidebarTabList,
+		decorators: [() => SidebarLeftContext]
+	};
+</script>
+
+<script lang="ts">
+	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import SidebarTabLabel from './SidebarTabLabel.svelte';
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+
+	let selectedValue = 'markers';
+</script>
+
+<Template let:args>
+	<SidebarTabList bind:selectedValue {...args}>
+		<SidebarTabLabel tabId="markers">Markers</SidebarTabLabel>
+		<SidebarTabLabel tabId="filters">Filters</SidebarTabLabel>
+		<SidebarTabLabel tabId="analysis">Analysis</SidebarTabLabel>
+		<SidebarTabLabel tabId="layers">Layers</SidebarTabLabel>
+	</SidebarTabList>
+</Template>
+
+<!-- The SidebarTabList component is a wrapper around the TabList component it uses 'sidebarPlacement' context provided by the sidebar to determine it's vertical or horizontal orientation, <br />
+	As with the TabList the selected Value is bound to 'selectedValue'.
+-->
+<Story name="Default (Vertical)">
+	<SidebarTabList bind:selectedValue>
+		<SidebarTabLabel tabId="markers">Markers</SidebarTabLabel>
+		<SidebarTabLabel tabId="filters">Filters</SidebarTabLabel>
+		<SidebarTabLabel tabId="analysis">Analysis</SidebarTabLabel>
+		<SidebarTabLabel tabId="layers">Layers</SidebarTabLabel>
+	</SidebarTabList>
+</Story>
+
+<Story name="Vertical with Icons">
+	<SidebarTabList bind:selectedValue orientation="vertical">
+		<SidebarTabLabel tabId="markers">
+			<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Data Markers
+		</SidebarTabLabel>
+		<SidebarTabLabel tabId="filters">
+			<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Filters
+		</SidebarTabLabel>
+		<SidebarTabLabel tabId="analysis">
+			<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Analysis
+		</SidebarTabLabel>
+		<SidebarTabLabel tabId="layers">
+			<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Layers
+		</SidebarTabLabel>
+	</SidebarTabList>
+</Story>
+
+<Story name="Horizontal with Icons" decorators={[() => SidebarTopContext]}>
+	<SidebarTabList bind:selectedValue>
+		<SidebarTabLabel tabId="markers">
+			<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Data Markers
+		</SidebarTabLabel>
+		<SidebarTabLabel tabId="filters">
+			<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Filters
+		</SidebarTabLabel>
+		<SidebarTabLabel tabId="analysis">
+			<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Analysis
+		</SidebarTabLabel>
+		<SidebarTabLabel tabId="layers">
+			<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+			Layers
+		</SidebarTabLabel>
+	</SidebarTabList>
+</Story>
