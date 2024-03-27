@@ -1,9 +1,28 @@
 <script context="module">
 	import Sidebar from './Sidebar.svelte';
+	import { RelativeWrapper } from '@ldn-viz/docs';
 
 	export const meta = {
 		title: 'Ui/Sidebar',
-		component: Sidebar
+		component: Sidebar,
+		decorators: [() => RelativeWrapper],
+		parameters: {
+			layout: 'fullscreen'
+		},
+		argTypes: {
+			width: {
+				options: ['standard', 'wide'],
+				control: { type: 'radio' }
+			},
+			position: {
+				options: ['absolute', 'fixed'],
+				control: { type: 'radio' }
+			},
+			placement: {
+				options: ['right', 'left', 'bottom', 'top'],
+				control: { type: 'select' }
+			}
+		}
 	};
 </script>
 
@@ -36,7 +55,15 @@
 	<Sidebar {...args} />
 </Template>
 
-<Story name="Default" source>
+<Story
+	name="Default"
+	source
+	parameters={{
+		options: {
+			showPanel: true
+		}
+	}}
+>
 	<Sidebar>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
