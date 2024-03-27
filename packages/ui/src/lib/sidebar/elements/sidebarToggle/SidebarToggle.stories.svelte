@@ -11,7 +11,12 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	let isOpen: boolean;
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+
+	let isOpen = false;
+	let sidebarOpen = writable(isOpen);
+	setContext('sidebarIsOpen', sidebarOpen);
 </script>
 
 <Template let:args>

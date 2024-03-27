@@ -31,10 +31,10 @@
 		on:click={toggleOpen}
 	>
 		{#if isOpen === false}
-			{#if !$$slots.icon}
-				<Icon src={Bars3} class="p-1" aria-hidden="true" />
-			{:else}
+			{#if $$slots.icon === true}
 				<slot name="icon" />
+			{:else}
+				<Icon src={Bars3} class="p-1" aria-hidden="true" />
 			{/if}
 		{:else}
 			<Icon src={XMark} class="p-1" aria-hidden="true" />
