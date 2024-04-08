@@ -1,5 +1,14 @@
 # ldn-viz-tools-ui
 
+## 4.0.0
+
+### Major Changes
+
+- 4192681: ADDED - `AppShell` and `Sidebar` components.
+  CHANGED - increased z-index of `Modal`.
+  CHANGED - `TabList` component now accpts an `orientation` prop.
+  REMOVED - `TabbedSidebar` component (and `TabbedSidebarTabLabel`, `TabbedSidebarTabList`, `TabbedSidebarWrapper`)
+
 ## 3.6.1
 
 ### Patch Changes
