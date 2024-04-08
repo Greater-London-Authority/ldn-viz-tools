@@ -4,6 +4,8 @@
 ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fmaps?label=%40ldn-viz%2Fmaps%20version)
 ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fui?label=%40ldn-viz%2Fui%20version)
 ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fthemes?label=%40ldn-viz%2Fthemes%20version)
+![npm](https://img.shields.io/npm/v/%40ldn-viz%2Futils?label=%40ldn-viz%2Futils%20version)
+
 
 This is a mono-repo containing several components:
 

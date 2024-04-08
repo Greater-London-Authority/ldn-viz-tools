@@ -1,5 +1,22 @@
 # ldn-viz-tools-ui
 
+## 3.6.1
+
+### Patch Changes
+
+- 258bed8: FIXED List dependencies for `ColorLegend` component.
+
+## 3.6.0
+
+### Minor Changes
+
+- 030c002: ADDED `Toaster` component for toast messages
+  ADDED `newToastMessage` creating and posting toasts
+
+### Patch Changes
+
+- 74db575: CHANGE checkbox - set name attribute on generated input element
+
 ## 3.5.1
 
 ### Patch Changes
