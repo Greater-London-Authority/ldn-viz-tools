@@ -50,6 +50,9 @@ export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/Sideba
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
+
+export { default as Tooltip } from './tooltip/Tooltip.svelte';
+
 export { default as Toaster } from './toaster/Toaster.svelte';
 export * from './toaster/toaster';
 export * from './toaster/types';
