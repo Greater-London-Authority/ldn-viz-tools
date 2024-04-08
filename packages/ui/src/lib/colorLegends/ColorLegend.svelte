@@ -7,7 +7,13 @@
 
 	// It has been modified to use Svelte rather than just D3.js, and to allow a value on the scale to be highlighted.
 
-	import * as d3 from 'd3';
+	import { range, quantile } from 'd3-array';
+	import { axisBottom } from 'd3-axis';
+	import { format } from 'd3-format';
+	import { interpolate, interpolateRound, quantize } from 'd3-interpolate';
+	import { scaleLinear, scaleBand } from 'd3-scale';
+	import { select } from 'd3-selection';
+
 	export let color: any;
 
 	export let title = '';
@@ -48,11 +54,11 @@
 		if (color.interpolate) {
 			// continuous scale
 			n = Math.min(color.domain().length, color.range().length);
-			x = color.copy().rangeRound(d3.quantize(d3.interpolate(marginLeft, width - marginRight), n));
+			x = color.copy().rangeRound(quantize(interpolate(marginLeft, width - marginRight), n));
 		} else if (color.interpolator) {
 			// Sequential scale
 			x = Object.assign(
-				color.copy().interpolator(d3.interpolateRound(marginLeft, width - marginRight)),
+				color.copy().interpolator(interpolateRound(marginLeft, width - marginRight)),
 				{
 					range() {
 						return [marginLeft, width - marginRight];
@@ -64,10 +70,10 @@
 			if (!x.ticks) {
 				if (tickValues === undefined) {
 					n = Math.round(ticks + 1);
-					tickValues = d3.range(n).map((i) => d3.quantile(color.domain(), i / (n - 1)));
+					tickValues = range(n).map((i) => quantile(color.domain(), i / (n - 1)));
 				}
 				if (typeof tickFormat !== 'function') {
-					tickF = d3.format(tickFormat === undefined ? ',f' : tickFormat);
+					tickF = format(tickFormat === undefined ? ',f' : tickFormat);
 				}
 			}
 		} else if (color.invertExtent) {
@@ -83,20 +89,18 @@
 				tickFormat === undefined
 					? (d) => d
 					: typeof tickFormat === 'string'
-						? d3.format(tickFormat)
+						? format(tickFormat)
 						: tickFormat;
 
-			x = d3
-				.scaleLinear()
+			x = scaleLinear()
 				.domain([-1, color.range().length - 1])
 				.rangeRound([marginLeft, width - marginRight]);
 
-			tickValues = d3.range(thresholds.length);
+			tickValues = range(thresholds.length);
 			tickF = (i) => thresholdFormat(thresholds[i], i);
 		} else {
 			// ordinal scale
-			x = d3
-				.scaleBand()
+			x = scaleBand()
 				.domain(color.domain())
 				.rangeRound([marginLeft, width - marginRight]);
 
@@ -111,14 +115,13 @@
 	let ticksRef: SVGElement;
 	$: {
 		if (ticksRef) {
-			const bottomAxis = d3
-				.axisBottom(x)
+			const bottomAxis = axisBottom(x)
 				.ticks(ticks, typeof tickF === 'string' ? tickF : undefined)
 				.tickFormat(typeof tickF === 'function' ? tickF : undefined)
 				.tickSize(tickSize)
 				.tickValues(tickValues);
 
-			d3.select(ticksRef)
+			select(ticksRef)
 				.call(bottomAxis)
 				.call(tickAdjust)
 				.call((g: any) => g.select('.domain').remove())
@@ -149,7 +152,7 @@
 			width={width - marginLeft - marginRight}
 			height={height - marginTop - marginBottom}
 			preserveAspectRatio="none"
-			xlink:href={ramp(color.copy().domain(d3.quantize(d3.interpolate(0, 1), n)))}
+			xlink:href={ramp(color.copy().domain(quantize(interpolate(0, 1), n)))}
 		/>
 	{:else if color.interpolator}
 		<!-- sequential -->
