@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 3.6.1
+
+### Patch Changes
+
+- 258bed8: FIXED List dependencies for `ColorLegend` component.
+
 ## 3.6.0
 
 ### Minor Changes
