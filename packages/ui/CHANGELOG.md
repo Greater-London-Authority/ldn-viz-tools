@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 4.1.0
+
+### Minor Changes
+
+- cb2d96f: ADDED - export the `Tooltip` component.
+
 ## 4.0.0
 
 ### Major Changes
