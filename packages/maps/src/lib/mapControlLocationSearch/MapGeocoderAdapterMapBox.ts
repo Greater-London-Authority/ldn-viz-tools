@@ -1,5 +1,5 @@
-import type { GeolocationNamed, GeocoderAdapter } from '@ldn-viz/ui';
-import { GREATER_LONDON_BOUNDS_PADDED } from '../themes/bounds';
+import type { GeolocationNamed, GeocoderAdapter } from '$unstable/geolocation';
+import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
 
 type MapBoxFeature = {
 	id: string;
@@ -80,13 +80,16 @@ const buildUrl = (text: string, token: string, resultCount: number): string => {
 const transformGeoJSONToGeolocationNameds = (
 	geojson: MapBoxFeatureCollection
 ): GeolocationNamed[] => {
-	return geojson.features.map((loc) => ({
-		id: loc.id,
-		name: loc.text,
-		address: removeNameFromAddress(loc.place_name, loc.text),
-		center: loc.center,
-		bounds: loc.bbox
-	}));
+	return geojson.features.map((loc) => {
+		return {
+			id: loc.id,
+			name: loc.text,
+			address: removeNameFromAddress(loc.place_name, loc.text),
+			// loc.center isn't always the center of the bbox
+			center: calcCorrectCenter(loc.bbox, loc.center),
+			bounds: loc.bbox
+		};
+	});
 };
 
 const removeNameFromAddress = (address: string, name: string) => {
@@ -101,4 +104,12 @@ const removeNameFromAddress = (address: string, name: string) => {
 	}
 
 	return address;
+};
+
+const calcCorrectCenter = (bbox, center) => {
+	if (!bbox) {
+		return center;
+	}
+
+	return [(bbox[0] + bbox[2]) / 2, (bbox[1] + bbox[3]) / 2];
 };

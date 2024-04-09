@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { Button, Spinner } from '@ldn-viz/ui';
 	import TargetIcon from './TargetIcon.svelte';
 
@@ -12,6 +13,7 @@
 	export let onSearchError: OnGeolocationSearchError;
 
 	let isSearching = false;
+	let initialised = false;
 
 	const isGeolocatorAvailable = () => {
 		return 'geolocation' in navigator;
@@ -85,9 +87,13 @@
 		// But there might be a case for no limit so better safe than sorry.
 		return (!!lng || lng === 0) && (!!lat || lat === 0);
 	};
+
+	onMount(() => {
+		initialised = isGeolocatorAvailable();
+	});
 </script>
 
-{#if isGeolocatorAvailable()}
+{#if initialised}
 	<div class="pointer-events-auto">
 		<Button
 			variant="square"
@@ -95,6 +101,7 @@
 			title="Find my location"
 			role="search"
 			aria-label="My location"
+			class="!bg-core-grey-800"
 			on:click={startSearch}
 		>
 			{#if isSearching}
@@ -104,7 +111,7 @@
 					class="w-8 h-8 p-0.5 stroke-[12]"
 				/>
 			{:else}
-				<TargetIcon class="w-8 h-8 p-0.5" />
+				<TargetIcon class="w-8 h-8 p-0.5 stroke-white" />
 			{/if}
 		</Button>
 	</div>

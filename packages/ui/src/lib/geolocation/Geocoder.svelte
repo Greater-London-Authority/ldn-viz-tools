@@ -18,7 +18,7 @@
 </script>
 
 <script lang="ts">
-	import { MagnifyingGlass } from '@steeze-ui/heroicons';
+	import { MagnifyingGlass, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import GeocoderSuggestionList from './GeocoderSuggestionList.svelte';
 
@@ -31,6 +31,7 @@
 		OnGeolocationSearchError
 	} from './types';
 
+	// adapter to source location suggestions from.
 	export let adapter: GeocoderAdapter;
 
 	// delay in ms after a key stroke to minimise redundant API requests.
@@ -43,20 +44,9 @@
 	// onSearchError is called when the adapter promise rejects a search request.
 	export let onSearchError: OnGeolocationSearchError;
 
-	// results can be bound via 'bind:results' to be notified of new search
-	// results reactively.
-	export let results: null | GeolocationNamed[] = null;
-
-	// disableSuggestionList can be used to disable to dropdown suggestion
-	// list. The suggestion property will still be updated.
-	//
-	// This is useful if you're binding to the results property and showing
-	// the results in custom way.
-	export let disableSuggestionList = false;
-
-	// maxSuggestions is the maximum number of suggestion to show. This does
-	// not limit the results array.
-	export let maxSuggestions: number = 5
+	// suggestions can be bound via 'bind:suggestions' to reactively receive
+	// changes to search results.
+	export let suggestions: GeolocationNamed[] = [];
 
 	// classes is a space separated list of additional classes applied to the
 	// root container.
@@ -66,27 +56,34 @@
 	// the input element because laying input elements can be quite fiddly.
 	export let inputClasses = '';
 
+	// showClearButton forces the showing of the clear button at the end of the
+	// input element.
+	//
+	// It is set to false each time the user clicks the button so binding on this
+	// prop is useful.
+	export let showClearButton = false;
+
 	let container: HTMLElement;
 	let query = '';
 	let showSuggestionList = false;
 
 	const updateSuggestionsNow = async () => {
 		if (!query || query.length < 3) {
-			results = null;
+			suggestions = [];
 			showSuggestionList = false;
 			return;
 		}
 
 		try {
-			results = await adapter
+			suggestions = await adapter
 				.search(query)
 				.then((res) => res || [])
 				.catch((err: unknown) => {
-					console.error('[Location Search] Search results could not be retrieved.');
+					console.error('[Location Search] Search suggestions could not be retrieved.');
 					onSearchError(err as GeolocationSearchError);
 					return [];
 				});
-			showSuggestionList = !disableSuggestionList;
+			showSuggestionList = !!$$slots.default;
 		} catch (e: unknown) {
 			console.error(e);
 			showSuggestionList = false;
@@ -102,10 +99,7 @@
 
 	const onSelect = (suggestion: Geolocation) => {
 		closeSuggestionsList();
-
-		if (onLocationSelected) {
-			onLocationSelected(suggestion);
-		}
+		onLocationSelected(suggestion);
 	};
 
 	const hideSuggestionList = (event: MouseEvent | KeyboardEvent) => {
@@ -121,15 +115,26 @@
 	};
 
 	const reshowSuggestionList = () => {
-		if (results) {
-			showSuggestionList = !disableSuggestionList;
+		if (suggestions) {
+			showSuggestionList = !!$$slots.default;
 		}
 	};
 
 	const selectFirstSuggestion = (event: KeyboardEvent) => {
-		if (!disableSuggestionList && results && results.length > 0 && event.key === 'Enter') {
-			onSelect(results[0]);
+		if (event.key !== 'Enter') {
+			return;
 		}
+
+		if (showSuggestionList && suggestions && suggestions.length > 0) {
+			onSelect(suggestions[0]);
+		}
+	};
+
+	const clearSearch = () => {
+		showClearButton = false;
+		query = '';
+		suggestions = [];
+		showSuggestionList = false;
 	};
 
 	$: {
@@ -150,6 +155,7 @@
 
 	<input
 		class="min-w-0 w-64 max-w-[100%] pl-10 grow shrink bg-core-grey-600 border-core-grey-600 placeholder-core-grey-300 h-full text-white {inputClasses}"
+		class:pr-8={showClearButton}
 		type="search"
 		placeholder="Location search"
 		bind:value={query}
@@ -159,7 +165,17 @@
 		on:keypress={selectFirstSuggestion}
 	/>
 
-	{#if showSuggestionList && results}
-		<GeocoderSuggestionList {adapter} suggestions={results} {maxSuggestions} {onSelect} />
+	{#if showClearButton || query?.length > 0}
+		<button on:click={clearSearch} class="absolute top-0 right-0 flex items-center justify-center">
+			<Icon src={XMark} class="w-10 h-10 py-1 pl-2 pr-1 stroke-white" />
+		</button>
+	{/if}
+
+	{#if showSuggestionList && suggestions}
+		<slot
+			onLocationSelected={onSelect}
+			attribution={adapter?.attribution ? adapter.attribution() : undefined}
+			{suggestions}
+		/>
 	{/if}
 </search>

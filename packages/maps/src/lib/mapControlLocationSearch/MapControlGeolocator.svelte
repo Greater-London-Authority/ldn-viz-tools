@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { GLIDE_ANIMATION_OPTIONS } from '../themes/animations';
-	import { Geolocator } from '@ldn-viz/ui';
+	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
+	import { Geolocator } from '$unstable/geolocation';
 	import type {
 		GeolocationUnamed,
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError
-	} from '@ldn-viz/ui';
+	} from '$unstable/geolocation';
 
 	import type { MapStore } from './map-types';
 
-	export let onLocationFound: OnGeolocationSearchResult;
+	export let onLocationFound: undefined | OnGeolocationSearchResult = undefined;
 	export let onSearchError: OnGeolocationSearchError;
 
 	const map: MapStore = getContext('map');

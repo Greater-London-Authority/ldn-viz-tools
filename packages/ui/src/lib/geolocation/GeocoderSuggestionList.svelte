@@ -1,14 +1,20 @@
 <script lang="ts">
 	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
-	import type { GeocoderAdapter } from './GeocoderAdapter';
-	import type {	GeolocationNamed, OnGeolocationSearchResult } from './types';
+	import type { GeocoderAttribution } from './GeocoderAdapter';
+	import type { GeolocationNamed, OnGeolocationSearchResult } from './types';
 
-	export let adapter: GeocoderAdapter;
+	export let attribution: undefined | GeocoderAttribution = undefined;
+
+	// suggestions is an array of named geolocations. The suggestions will be
+	// presented in order and limited by maxSuggestions.
 	export let suggestions: GeolocationNamed[];
-	export let maxSuggestions: number;
-	export let onSelect: OnGeolocationSearchResult;
 
-	const attribution = adapter.attribution && adapter.attribution();
+	// maxSuggestions is the maximum number of suggestion to show. This does
+	// not limit the results array.
+	export let maxSuggestions: number = 5;
+
+	// onLocationSelected is invoked when a user clicks a suggestion.
+	export let onLocationSelected: OnGeolocationSearchResult;
 
 	let highlighted: null | GeolocationNamed = null;
 
@@ -27,7 +33,7 @@
 	{:else}
 		{#each suggestions as suggestion, i (suggestion.id)}
 			{#if i < maxSuggestions}
-				<GeocoderSuggestion {suggestion} {onSelect} bind:highlighted />
+				<GeocoderSuggestion {suggestion} {onLocationSelected} bind:highlighted />
 			{/if}
 		{/each}
 	{/if}
