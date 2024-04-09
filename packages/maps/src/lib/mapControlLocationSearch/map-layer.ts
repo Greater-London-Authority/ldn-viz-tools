@@ -1,4 +1,5 @@
 import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
+import type { GeolocationCoords, GeolocationBounds, Geolocation } from '@ldn-viz/ui';
 
 import type {
 	Map,
@@ -8,10 +9,8 @@ import type {
 	LayerSpecification,
 	FlyToOptions
 } from 'maplibre-gl';
+
 import type { FeatureCollection } from 'geojson';
-
-import type { GeolocationCoords, GeolocationBounds, Geolocation } from '@ldn-viz/ui';
-
 import type { MapGL } from './map-types';
 
 let marker: null | Marker = null;
@@ -111,8 +110,7 @@ const addMarkerAndFlyToLocation = (
 
 const setMarker = (map: Map, mapgl: MapGL, coords: GeolocationCoords) => {
 	clearMarker();
-	marker = mapgl
-		.Marker() // //
+	marker = new mapgl.Marker() //
 		.setLngLat(coords)
 		.addTo(map);
 };
