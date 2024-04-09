@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { initMapLayer, setFeature, clearFeature } from './map-layer';
 	import type { MapStore, MapGLStore } from './map-types';
 
 	import type {
-		GeolocationCoords,
-		GeolocationBounds,
 		Geolocation,
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError,

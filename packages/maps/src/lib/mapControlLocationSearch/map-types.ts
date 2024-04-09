@@ -1,5 +1,4 @@
 import type { Writable } from 'svelte/store';
-import type { GeolocationBounds } from '@ldn-viz/ui';
 
 import type {
 	Map, //
@@ -8,7 +7,7 @@ import type {
 
 export interface MapGL {
 	Marker: () => Marker;
-	[keys: string]: any;
+	[keys: string]: unknown;
 }
 
 export type Options = { [key: string]: unknown };

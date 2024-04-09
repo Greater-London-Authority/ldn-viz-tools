@@ -20,7 +20,6 @@
 <script lang="ts">
 	import { MagnifyingGlass, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import GeocoderSuggestionList from './GeocoderSuggestionList.svelte';
 
 	import type { GeocoderAdapter } from './GeocoderAdapter';
 	import type {
