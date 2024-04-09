@@ -39,10 +39,10 @@
 
 	// onLocationSelected is called when a user clicks a location from the
 	// suggestions list.
-	export let onLocationSelected: OnGeolocationSearchResult;
+	export let onLocationSelected: undefined | OnGeolocationSearchResult;
 
 	// onSearchError is called when the adapter promise rejects a search request.
-	export let onSearchError: OnGeolocationSearchError;
+	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	// suggestions can be bound via 'bind:suggestions' to reactively receive
 	// changes to search results.
@@ -80,7 +80,7 @@
 				.then((res) => res || [])
 				.catch((err: unknown) => {
 					console.error('[Location Search] Search suggestions could not be retrieved.');
-					onSearchError(err as GeolocationSearchError);
+					onSearchError && onSearchError(err as GeolocationSearchError);
 					return [];
 				});
 			showSuggestionList = !!$$slots.default;
@@ -99,7 +99,7 @@
 
 	const onSelect = (suggestion: Geolocation) => {
 		closeSuggestionsList();
-		onLocationSelected(suggestion);
+		onLocationSelected && onLocationSelected(suggestion);
 	};
 
 	const hideSuggestionList = (event: MouseEvent | KeyboardEvent) => {

@@ -1,9 +1,23 @@
 import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
 
-let marker = null;
+import type {
+	Map,
+	Marker,
+	GeoJSONSource,
+	SourceSpecification,
+	LayerSpecification,
+	FlyToOptions
+} from 'maplibre-gl';
+import type { FeatureCollection } from 'geojson';
+
+import type { GeolocationCoords, GeolocationBounds, Geolocation } from '@ldn-viz/ui';
+
+import type { MapGL } from './map-types';
+
+let marker: null | Marker = null;
 const sourceId = 'gla/context/location-search';
 
-const sourceSpec = {
+const sourceSpec: SourceSpecification = {
 	type: 'geojson',
 	data: {
 		type: 'FeatureCollection',
@@ -11,7 +25,7 @@ const sourceSpec = {
 	}
 };
 
-const layerSpecs = [
+const layerSpecs: LayerSpecification[] = [
 	{
 		id: `${sourceId}/map-point-symbol`,
 		source: sourceId,
@@ -34,7 +48,7 @@ const layerSpecs = [
 	*/
 ];
 
-export const initMapLayer = (map) => {
+export const initMapLayer = (map: Map) => {
 	if (!map) {
 		return;
 	}
@@ -43,7 +57,7 @@ export const initMapLayer = (map) => {
 	addLayers(map);
 };
 
-const removeLayers = (map) => {
+const removeLayers = (map: Map) => {
 	for (const layer of layerSpecs) {
 		if (map.getLayer(layer.id)) {
 			map.removeLayer(layer.id);
@@ -55,7 +69,7 @@ const removeLayers = (map) => {
 	}
 };
 
-const addLayers = (map) => {
+const addLayers = (map: Map) => {
 	map.addSource(sourceId, sourceSpec);
 
 	for (const layer of layerSpecs) {
@@ -63,19 +77,29 @@ const addLayers = (map) => {
 	}
 };
 
-export const setFeature = (map, mapgl, location, flyOptions = {}) => {
+export const setFeature = (
+	map: Map,
+	mapgl: MapGL,
+	location: Geolocation,
+	flyOptions: FlyToOptions = {}
+) => {
 	if (!map) {
 		return;
 	}
 
-	map //
-		.getSource(sourceId) //
-		.setData(createFeatureCollection(location));
+	(map.getSource(sourceId) as GeoJSONSource)?.setData(
+		createFeatureCollection(location) as FeatureCollection
+	);
 
 	addMarkerAndFlyToLocation(map, mapgl, location, flyOptions);
 };
 
-const addMarkerAndFlyToLocation = (map, mapgl, location, flyOptions) => {
+const addMarkerAndFlyToLocation = (
+	map: Map,
+	mapgl: MapGL,
+	location: Geolocation,
+	flyOptions: FlyToOptions
+) => {
 	setMarker(map, mapgl, location.center);
 
 	if (location.bounds) {
@@ -85,9 +109,10 @@ const addMarkerAndFlyToLocation = (map, mapgl, location, flyOptions) => {
 	}
 };
 
-const setMarker = (map, mapgl, coords) => {
+const setMarker = (map: Map, mapgl: MapGL, coords: GeolocationCoords) => {
 	clearMarker();
-	marker = new mapgl.Marker() // //
+	marker = mapgl
+		.Marker() // //
 		.setLngLat(coords)
 		.addTo(map);
 };
@@ -99,60 +124,61 @@ const clearMarker = () => {
 	}
 };
 
-export const clearFeature = (map) => {
+export const clearFeature = (map: Map) => {
 	if (!map) {
 		return;
 	}
 
 	clearMarker();
-	map.getSource(sourceId)?.setData({
+	(map.getSource(sourceId) as GeoJSONSource)?.setData({
 		type: 'FeatureCollection',
 		features: []
 	});
 };
 
-const createFeatureCollection = (location) => {
+const createFeatureCollection = (location: Geolocation) => {
 	return {
 		type: 'FeatureCollection',
 		features: [createFeature(location)]
 	};
 };
 
-const createFeature = (location) => {
+const createFeature = (location: Geolocation) => {
 	return {
 		type: 'Feature',
-		geometry: createFeatureGeometry(location)
+		geometry: createFeatureGeometry(location),
+		properties: {}
 	};
 };
 
-const createFeatureGeometry = (location) => {
+const createFeatureGeometry = (location: Geolocation) => {
 	if (location.bounds) {
 		return createFeatureGeometryBounds(location);
 	}
 	return createFeatureGeometryPoint(location);
 };
 
-const createFeatureGeometryPoint = (location) => {
+const createFeatureGeometryPoint = (location: Geolocation) => {
 	return {
 		type: 'Point',
-		coordinates: location.center
+		coordinates: location.center as [number, number]
 	};
 };
 
-const createFeatureGeometryBounds = (location) => {
+const createFeatureGeometryBounds = (location: Geolocation) => {
 	return {
 		type: 'Polygon',
-		coordinates: [location.bounds]
+		coordinates: [location.bounds as [number, number, number, number]]
 	};
 };
 
-const flyToBounds = (map, bounds) => {
+const flyToBounds = (map: Map, bounds: GeolocationBounds) => {
 	map.fitBounds(bounds, {
 		...GLIDE_ANIMATION_OPTIONS
 	});
 };
 
-const flyToCoords = (map, coords, options) => {
+const flyToCoords = (map: Map, coords: GeolocationCoords, options: FlyToOptions) => {
 	map.flyTo({
 		...GLIDE_ANIMATION_OPTIONS,
 		center: coords,

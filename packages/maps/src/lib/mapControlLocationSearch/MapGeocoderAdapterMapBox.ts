@@ -1,5 +1,10 @@
-import type { GeolocationNamed, GeocoderAdapter } from '$unstable/geolocation';
 import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
+import type {
+	GeolocationCoords,
+	GeolocationBounds,
+	GeolocationNamed,
+	GeocoderAdapter
+} from '@ldn-viz/ui';
 
 type MapBoxFeature = {
 	id: string;
@@ -106,7 +111,10 @@ const removeNameFromAddress = (address: string, name: string) => {
 	return address;
 };
 
-const calcCorrectCenter = (bbox, center) => {
+const calcCorrectCenter = (
+	bbox: undefined | GeolocationBounds,
+	center: GeolocationCoords
+): GeolocationCoords => {
 	if (!bbox) {
 		return center;
 	}

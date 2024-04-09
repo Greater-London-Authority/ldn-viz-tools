@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-	import { Geocoder, GeocoderSuggestionList } from '$unstable/geolocation';
+	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { initMapLayer, setFeature, clearFeature } from './map-layer';
+	import type { MapStore, MapGLStore } from './map-types';
 
 	import type {
 		GeolocationCoords,
@@ -11,9 +12,7 @@
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError,
 		GeocoderAdapter
-	} from '$unstable/geolocation';
-
-	import type { MapStore } from './map-types';
+	} from '@ldn-viz/ui';
 
 	// adapter to source location suggestions from.
 	export let adapter: GeocoderAdapter;
@@ -22,7 +21,7 @@
 	export let onLocationSelected: undefined | OnGeolocationSearchResult = undefined;
 
 	// onSearchError is invoked when the adapter rejects a promise for a search.
-	export let onSearchError: OnGeolocationSearchError;
+	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	// maxSuggestions is the maximum number of suggestion to show. This does
 	// not limit the results array.
@@ -37,12 +36,12 @@
 	export let inputClasses = '';
 
 	const map: MapStore = getContext('map');
-	const mapgl: MapMarker = getContext('map_gl');
+	const mapgl: MapGLStore = getContext('map_gl');
 
 	const zoomLevel = 16;
 	const delay = 500;
 
-	let showClearButton;
+	let showClearButton = false;
 
 	const onLocationSelectedGeocoder = (location: Geolocation) => {
 		if (!$map) {

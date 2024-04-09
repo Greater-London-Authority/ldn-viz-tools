@@ -136,7 +136,7 @@
 					onLocationSelected={onSelectSuggestion}
 					{attribution}
 					{suggestions}
-					maxSuggestions={5}
+					maxSuggestions="5"
 				/>
 			{/if}
 		</Geocoder>

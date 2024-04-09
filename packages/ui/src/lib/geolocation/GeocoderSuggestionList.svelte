@@ -14,7 +14,7 @@
 	export let maxSuggestions: number = 5;
 
 	// onLocationSelected is invoked when a user clicks a suggestion.
-	export let onLocationSelected: OnGeolocationSearchResult;
+	export let onLocationSelected: undefined | OnGeolocationSearchResult;
 
 	let highlighted: null | GeolocationNamed = null;
 

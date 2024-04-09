@@ -5,7 +5,7 @@
 	} from './types';
 
 	export let suggestion: GeolocationNamed;
-	export let onLocationSelected: OnGeolocationSearchResult;
+	export let onLocationSelected: undefined | OnGeolocationSearchResult;
 	export let highlighted: null | GeolocationNamed;
 
 	const select = () => {

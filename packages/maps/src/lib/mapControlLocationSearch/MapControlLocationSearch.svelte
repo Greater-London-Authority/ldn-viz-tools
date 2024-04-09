@@ -6,7 +6,7 @@
 		GeocoderAdapter,
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError
-	} from '$unstable/geolocation';
+	} from '@ldn-viz/ui';
 
 	// adapter to source location suggestions from.
 	export let adapter: GeocoderAdapter;
@@ -15,7 +15,7 @@
 	export let onLocationFound: undefined | OnGeolocationSearchResult = undefined;
 
 	// onSearchError is invoked when the adapter rejects a promise for a search.
-	export let onSearchError: OnGeolocationSearchError;
+	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	// maxSuggestions is the maximum number of suggestion to show. This does
 	// not limit the results array.

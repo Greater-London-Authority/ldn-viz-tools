@@ -9,8 +9,8 @@
 		OnGeolocationSearchError
 	} from './types';
 
-	export let onLocationFound: OnGeolocationSearchResult;
-	export let onSearchError: OnGeolocationSearchError;
+	export let onLocationFound: OnGeolocationSearchResult | undefined;
+	export let onSearchError: OnGeolocationSearchError | undefined;
 
 	let isSearching = false;
 	let initialised = false;

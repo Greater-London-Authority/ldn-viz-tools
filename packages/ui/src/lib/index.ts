@@ -40,5 +40,6 @@ export * from './geolocation/GeocoderAdapterList';
 export * from './geolocation/GeocoderAdapterOSPlaces';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
 export { default as Geolocator } from './geolocation/Geolocator.svelte';
+export { default as GeocoderSuggestionList } from './geolocation/GeocoderSuggestionList.svelte';
 
 export { classNames } from './utils/classNames';
