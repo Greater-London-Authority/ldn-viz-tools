@@ -24,6 +24,7 @@
 <label class="flex items-center">
 	<input
 		id={inputID}
+		name={id}
 		class="form-checkbox"
 		type="checkbox"
 		bind:checked

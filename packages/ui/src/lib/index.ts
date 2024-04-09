@@ -2,6 +2,9 @@
 export { default as Button } from './button/Button.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
+export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
+export { default as ColorLegendOrdinalHorizontal } from './colorLegends/ColorLegendOrdinalHorizontal.svelte';
+export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as Header } from './header/Header.svelte';
 export { default as HeaderItem } from './header/HeaderItem.svelte';
@@ -24,15 +27,36 @@ export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svel
 export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as Select } from './select/Select.svelte';
+
+export { default as AppShell } from './appShell/AppShell.svelte';
+export * from './appShell/utils/getSettingByScreenWidth';
+
+export { default as Sidebar } from './sidebar/Sidebar.svelte';
+
+export { default as SidebarToggle } from './sidebar/elements/sidebarToggle/SidebarToggle.svelte';
+
+export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
+export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
+
+export { default as SidebarHint } from './sidebar/elements/sidebarHint/SidebarHint.svelte';
+
+export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
+export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
+export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
+
+export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
+export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
+
 export { default as Spinner } from './spinners/Spinner.svelte';
-export { default as TabbedSidebar } from './tabbedSidebar/TabbedSidebar.svelte';
-export { default as TabbedSidebarTabLabel } from './tabbedSidebar/TabbedSidebarTabLabel.svelte';
-export { default as TabbedSidebarTabList } from './tabbedSidebar/TabbedSidebarTabList.svelte';
-export { default as TabbedSidebarWrapper } from './tabbedSidebar/TabbedSidebarWrapper.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 
-// Geolocation
+export { default as Tooltip } from './tooltip/Tooltip.svelte';
+
+export { default as Toaster } from './toaster/Toaster.svelte';
+export * from './toaster/toaster';
+export * from './toaster/types';
+
 export * from './geolocation/types';
 export * from './geolocation/GeocoderAdapter';
 export * from './geolocation/GeocoderAdapterList';

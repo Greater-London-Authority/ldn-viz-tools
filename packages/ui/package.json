@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/ui",
-	"version": "3.3.0",
+	"version": "4.1.0",
 	"scripts": {
 		"dev": "vite dev --port 3005 --open",
 		"build:sveltekit": "vite build && npm run package",
@@ -29,32 +29,34 @@
 	],
 	"peerDependencies": {
 		"@sveltejs/kit": "^2.3.3",
-		"svelte": "4.0.0"
+		"svelte": "^4.2.12"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.41.0",
+		"@playwright/test": "^1.42.1",
 		"@sveltejs/adapter-static": "^3.0.1",
-		"@sveltejs/package": "^2.2.6",
-		"@sveltejs/vite-plugin-svelte": "^3.0.1",
-		"@typescript-eslint/eslint-plugin": "^6.19.0",
-		"@typescript-eslint/parser": "^6.19.0",
-		"autoprefixer": "^10.4.16",
-		"eslint": "^8.56.0",
+		"@sveltejs/package": "^2.3.0",
+		"@sveltejs/vite-plugin-svelte": "^3.0.2",
+		"@types/d3": "^7.4.3",
+		"@typescript-eslint/eslint-plugin": "^7.2.0",
+		"@typescript-eslint/parser": "^7.2.0",
+		"autoprefixer": "^10.4.18",
+		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
-		"postcss": "^8.4.33",
-		"postcss-load-config": "^5.0.2",
-		"prettier": "^3.2.3",
-		"prettier-plugin-svelte": "^3.1.2",
+		"postcss": "^8.4.35",
+		"postcss-load-config": "^5.0.3",
+		"prettier": "^3.2.5",
+		"prettier-plugin-svelte": "^3.2.2",
 		"publint": "^0.2.7",
-		"svelte": "4.2.8",
-		"svelte-check": "^3.6.3",
+		"svelte": "4.2.12",
+		"svelte-check": "^3.6.7",
 		"svelte-preprocess": "^5.1.3",
 		"tailwindcss": "^3.4.1",
 		"tslib": "^2.6.2",
-		"typescript": "^5.3.3",
-		"vite": "^5.0.11",
-		"vitest": "^1.2.0"
+		"typescript": "^5.4.2",
+		"vite": "^5.1.6",
+		"vitest": "^1.3.1",
+		"@ldn-viz/docs": "^0.0.1"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -64,18 +66,24 @@
 		"@rgossiaux/svelte-headlessui": "^2.0.0",
 		"@steeze-ui/heroicons": "^2.3.0",
 		"@steeze-ui/svelte-icon": "^1.5.0",
-		"@storybook/addon-svelte-csf": "^4.1.0",
+		"@storybook/addon-svelte-csf": "^4.1.2",
 		"@types/d3-dsv": "^3.0.7",
+		"d3-array": "^3.2.4",
+		"d3-axis": "^3.0.0",
 		"d3-dsv": "^3.0.1",
+		"d3-format": "^3.1.0",
+		"d3-interpolate": "^3.0.1",
+		"d3-scale": "^4.0.2",
+		"d3-selection": "^3.0.0",
 		"html2canvas": "^1.4.1",
 		"postcss-cli": "^11.0.0",
-		"postcss-discard-comments": "^6.0.1",
+		"postcss-discard-comments": "^6.0.2",
 		"svelte-floating-ui": "^1.5.8",
 		"svelte-select": "^5.8.3"
 	},
 	"overrides": {
 		"@rgossiaux/svelte-headlessui": {
-			"svelte": "4.2.8"
+			"svelte": "4.2.12"
 		}
 	}
 }
