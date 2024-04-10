@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { setFeature, clearFeature } from './map-layer';
-	import { Geolocator } from '../geolocation';
+	import { Geolocator } from '@ldn-viz/ui';
 	import type { MapStore, MapGLStore } from './map-types';
 
 	import type {

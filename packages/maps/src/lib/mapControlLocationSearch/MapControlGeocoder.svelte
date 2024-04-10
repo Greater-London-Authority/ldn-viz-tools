@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Geocoder, GeocoderSuggestionList } from '../geolocation';
+	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { setFeature, clearFeature } from './map-layer';
 	import type { MapStore, MapGLStore } from './map-types';
 
