@@ -5,7 +5,7 @@ import type { GeocoderAdapter, GeocoderAttribution } from './GeocoderAdapter';
 // is searched using name and address.
 //
 // It is very simple being intended for prototyping and demonstration. However,
-// it does make good boiler plate for new adapters.
+// it does make good boilerplate for new adapters.
 export class GeocoderAdapterList implements GeocoderAdapter {
 	private _locations: GeolocationNamed[];
 	private _attribution: undefined | GeocoderAttribution;
