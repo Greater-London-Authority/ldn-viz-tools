@@ -53,9 +53,7 @@
 		);
 	};
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const apiFoundLocation = (result: GeolocationPosition) => {
+	const apiFoundLocation = (result: Position) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates
 		isSearching = false;
 		showClearButton = true;
@@ -70,9 +68,7 @@
 		}
 	};
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const apiNotFoundLocation = (err: GeolocationPositionError) => {
+	const apiNotFoundLocation = (err: PositionError) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
 		isSearching = false;
 
@@ -96,9 +92,7 @@
 		console.error(`[Geolocator]`, ...msg);
 	};
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const extractCoords = (result: GeolocationPosition): null | GeolocationCoords => {
+	const extractCoords = (result: Position): null | GeolocationCoords => {
 		const lng = result?.coords?.longitude;
 		const lat = result?.coords?.latitude;
 
