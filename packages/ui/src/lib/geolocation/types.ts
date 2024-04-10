@@ -1,7 +1,6 @@
 export type GeolocationCoords = [lng: number, lat: number];
 
-// Boudns represents map bounds in the form [minLng, minLat, maxLng, maxLat].
-export type GeolocationBounds = [number, number, number, number];
+export type GeolocationBounds = [minLng: number, minLat: number, maxLng: number, maxLat: number];
 
 // GeolocationUnamed represents a geographical location with a center point
 // and possible bounding box.
