@@ -1,5 +1,5 @@
 declare const _default: {
-        year: number;
+	year: number;
 	value: number;
 	alt: number;
 	group: string;
