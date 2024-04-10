@@ -38,17 +38,6 @@ const layerSpecs: LayerSpecification[] = [
 			'icon-size': 0.4
 		}
 	}
-	/*
-	{
-		id: `${sourceId}/bounds`,
-		source: sourceId,
-		type: 'line',
-		paint: {
-			'line-color': '#000',
-			'line-width': 10
-		}
-	}
-	*/
 ];
 
 export const initMapLayer = (map: Map) => {
