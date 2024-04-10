@@ -1,8 +1,5 @@
 <script lang="ts">
-	import type {
-		GeolocationNamed, //
-		OnGeolocationSearchResult
-	} from './types';
+	import type { GeolocationNamed, OnGeolocationSearchResult } from './types';
 
 	export let suggestion: GeolocationNamed;
 	export let onLocationSelected: undefined | OnGeolocationSearchResult;
