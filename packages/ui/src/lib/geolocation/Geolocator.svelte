@@ -53,7 +53,7 @@
 		);
 	};
 
-	const apiFoundLocation = (result: Position) => {
+	const apiFoundLocation = (result: GeolocationPosition) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates
 		isSearching = false;
 		showClearButton = true;
@@ -68,7 +68,7 @@
 		}
 	};
 
-	const apiNotFoundLocation = (err: PositionError) => {
+	const apiNotFoundLocation = (err: GeolocationPositionError) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError
 		isSearching = false;
 
@@ -92,7 +92,7 @@
 		console.error(`[Geolocator]`, ...msg);
 	};
 
-	const extractCoords = (result: Position): null | GeolocationCoords => {
+	const extractCoords = (result: GeolocationPosition): null | GeolocationCoords => {
 		const lng = result?.coords?.longitude;
 		const lat = result?.coords?.latitude;
 
