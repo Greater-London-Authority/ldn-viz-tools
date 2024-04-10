@@ -8,7 +8,7 @@ export interface LocalCustodianCode {
 	code: number;
 }
 
-// OS_LONDON_LOCAL_CUSTODIAN_CODES is an array of custodian codes mapped to
+// OS_LONDON_LOCAL_CUSTODIAN_CODES is an array of AddressBase custodian codes mapped to
 // their "borough" name (label).
 export const OS_LONDON_LOCAL_CUSTODIAN_CODES: LocalCustodianCode[] = [
 	{
