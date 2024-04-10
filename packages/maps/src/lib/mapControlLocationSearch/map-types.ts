@@ -1,7 +1,7 @@
 import type { Writable } from 'svelte/store';
 
 import type {
-	Map, //
+	Map,
 	Marker
 } from 'maplibre-gl';
 
