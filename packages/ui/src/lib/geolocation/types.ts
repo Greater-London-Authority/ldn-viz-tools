@@ -18,7 +18,7 @@ export interface GeolocationNamed extends GeolocationUnamed {
 	// user.
 	name?: string;
 
-	// address in the human readable address presented to the user.
+	// address in the human-readable address presented to the user.
 	address?: string;
 
 	// otherProps allows adapters to store or pass adapter specific information.
