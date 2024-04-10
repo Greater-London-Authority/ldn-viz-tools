@@ -14,7 +14,7 @@ export interface GeolocationUnamed {
 export interface GeolocationNamed extends GeolocationUnamed {
 	id: string;
 
-	// name is the short human readable name of the loaction presented to the
+	// name is the short human-readable name of the location presented to the
 	// user.
 	name?: string;
 
