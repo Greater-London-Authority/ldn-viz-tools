@@ -32,9 +32,8 @@ export type Geolocation = GeolocationUnamed | GeolocationNamed;
 // or geolocator search.
 export type GeolocationSearchError = Error | GeolocationPositionError;
 
-// OnGeolocationSearchResult is invoked when a location search feature
-// (Geocoder or Geolocator) finds a result or a suggested result is selected by
-// the user.
+// OnGeolocationSearchResult is invoked when a Geocoder or Geolocator
+// finds a result or a suggested result is selected by the user.
 export type OnGeolocationSearchResult = (loc: Geolocation) => void;
 
 // OnGeolocationSearchError is invoked when an adapter promise rejects a
