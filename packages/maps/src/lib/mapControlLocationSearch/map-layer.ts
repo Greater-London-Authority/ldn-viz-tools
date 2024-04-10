@@ -1,6 +1,6 @@
 import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
 import type {
-	GeolocationCoords, //
+	GeolocationCoords,
 	GeolocationBounds,
 	Geolocation
 } from '@ldn-viz/ui';
