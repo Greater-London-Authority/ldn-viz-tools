@@ -1,5 +1,4 @@
-// Coords represents map coordinates in the form [lng, lat].
-export type GeolocationCoords = [number, number];
+export type GeolocationCoords = [lng: number, lat: number];
 
 // Boudns represents map bounds in the form [minLng, minLat, maxLng, maxLat].
 export type GeolocationBounds = [number, number, number, number];
