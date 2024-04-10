@@ -1,9 +1,6 @@
 import type { Writable } from 'svelte/store';
 
-import type {
-	Map,
-	Marker
-} from 'maplibre-gl';
+import type { Map, Marker } from 'maplibre-gl';
 
 export interface MapGL {
 	Marker: Marker;
