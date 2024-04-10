@@ -110,7 +110,7 @@ const setMarker = (ref: string, map: Map, mapgl: MapGL, coords: GeolocationCoord
 	// @ts-ignore
 	markers[ref] = new mapgl.Marker()
 		.setLngLat(coords)
-		.addTo(map); //
+		.addTo(map);
 };
 
 const clearMarker = (ref: string) => {
