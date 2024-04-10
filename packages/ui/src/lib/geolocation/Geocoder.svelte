@@ -82,6 +82,7 @@
 					onSearchError && onSearchError(err as GeolocationSearchError);
 					return [];
 				});
+
 			showSuggestionList = !!$$slots.default;
 		} catch (e: unknown) {
 			console.error(e);
@@ -165,7 +166,11 @@
 	/>
 
 	{#if showClearButton || query?.length > 0}
-		<button on:click={clearSearch} class="absolute top-0 right-0 flex items-center justify-center">
+		<button
+			on:click={clearSearch}
+			class="absolute top-0 right-0 flex items-center justify-center"
+			title="Clear search and marker"
+		>
 			<Icon src={XMark} class="w-10 h-10 py-1 pl-2 pr-1 stroke-white" />
 		</button>
 	{/if}

@@ -1,5 +1,9 @@
 import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-import type { GeolocationCoords, GeolocationBounds, Geolocation } from '@ldn-viz/ui';
+import type {
+	GeolocationCoords, //
+	GeolocationBounds,
+	Geolocation
+} from '@ldn-viz/ui';
 
 import type {
 	Map,
@@ -13,7 +17,7 @@ import type {
 import type { FeatureCollection } from 'geojson';
 import type { MapGL } from './map-types';
 
-let marker: null | Marker = null;
+const markers: { [keys: string]: Marker } = {};
 const sourceId = 'gla/context/location-search';
 
 const sourceSpec: SourceSpecification = {
@@ -77,6 +81,7 @@ const addLayers = (map: Map) => {
 };
 
 export const setFeature = (
+	ref: string,
 	map: Map,
 	mapgl: MapGL,
 	location: Geolocation,
@@ -90,16 +95,17 @@ export const setFeature = (
 		createFeatureCollection(location) as FeatureCollection
 	);
 
-	addMarkerAndFlyToLocation(map, mapgl, location, flyOptions);
+	addMarkerAndFlyToLocation(ref, map, mapgl, location, flyOptions);
 };
 
 const addMarkerAndFlyToLocation = (
+	ref: string,
 	map: Map,
 	mapgl: MapGL,
 	location: Geolocation,
 	flyOptions: FlyToOptions
 ) => {
-	setMarker(map, mapgl, location.center);
+	setMarker(ref, map, mapgl, location.center);
 
 	if (location.bounds) {
 		flyToBounds(map, location.bounds);
@@ -108,26 +114,29 @@ const addMarkerAndFlyToLocation = (
 	}
 };
 
-const setMarker = (map: Map, mapgl: MapGL, coords: GeolocationCoords) => {
-	clearMarker();
-	marker = new mapgl.Marker() //
+const setMarker = (ref: string, map: Map, mapgl: MapGL, coords: GeolocationCoords) => {
+	clearMarker(ref);
+
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	markers[ref] = new mapgl.Marker() //
 		.setLngLat(coords)
-		.addTo(map);
+		.addTo(map); //
 };
 
-const clearMarker = () => {
-	if (marker) {
-		marker.remove();
-		marker = null;
+const clearMarker = (ref: string) => {
+	if (markers[ref]) {
+		markers[ref].remove();
+		delete markers[ref];
 	}
 };
 
-export const clearFeature = (map: Map) => {
+export const clearFeature = (ref: string, map: Map) => {
 	if (!map) {
 		return;
 	}
 
-	clearMarker();
+	clearMarker(ref);
 	(map.getSource(sourceId) as GeoJSONSource)?.setData({
 		type: 'FeatureCollection',
 		features: []

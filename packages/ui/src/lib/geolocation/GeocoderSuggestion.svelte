@@ -9,7 +9,7 @@
 	export let highlighted: null | GeolocationNamed;
 
 	const select = () => {
-		onLocationSelected(suggestion);
+		onLocationSelected && onLocationSelected(suggestion);
 	};
 
 	const highlight = () => {

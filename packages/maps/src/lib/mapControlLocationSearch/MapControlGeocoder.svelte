@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
-	import { initMapLayer, setFeature, clearFeature } from './map-layer';
+	import { Geocoder, GeocoderSuggestionList } from '../geolocation';
+	import { setFeature, clearFeature } from './map-layer';
 	import type { MapStore, MapGLStore } from './map-types';
 
 	import type {
@@ -38,23 +38,21 @@
 	const zoomLevel = 16;
 	const delay = 500;
 
-	let showClearButton = false;
-
 	const onLocationSelectedGeocoder = (location: Geolocation) => {
 		if (!$map) {
 			return;
 		}
 
 		showClearButton = true;
-		setFeature($map, $mapgl, location, { zoom: zoomLevel });
+		setFeature('geocoder', $map, $mapgl, location, { zoom: zoomLevel });
 
 		if (onLocationSelected) {
 			onLocationSelected(location);
 		}
 	};
 
-	$: initMapLayer($map);
-	$: !showClearButton && clearFeature($map);
+	let showClearButton = false;
+	$: !showClearButton && clearFeature('geocoder', $map);
 </script>
 
 <Geocoder

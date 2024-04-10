@@ -6,10 +6,9 @@ import type {
 } from 'maplibre-gl';
 
 export interface MapGL {
-	Marker: () => Marker;
+	Marker: Marker;
 	[keys: string]: unknown;
 }
 
-export type Options = { [key: string]: unknown };
 export type MapStore = Writable<Map>;
 export type MapGLStore = Writable<MapGL>;
