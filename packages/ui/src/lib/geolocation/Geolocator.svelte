@@ -6,7 +6,7 @@
 	import TargetIcon from './TargetIcon.svelte';
 
 	import type {
-		GeolocationCoords, //
+		GeolocationCoords,
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError
 	} from './types';
