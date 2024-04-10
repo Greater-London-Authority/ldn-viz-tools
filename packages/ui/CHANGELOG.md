@@ -1,5 +1,37 @@
 # ldn-viz-tools-ui
 
+## 4.1.0
+
+### Minor Changes
+
+- cb2d96f: ADDED - export the `Tooltip` component.
+
+## 4.0.0
+
+### Major Changes
+
+- 4192681: ADDED - `AppShell` and `Sidebar` components.
+- 4192681: CHANGED - increased z-index of `Modal`.
+- 4192681: CHANGED - `TabList` component now accpts an `orientation` prop.
+- 4192681: REMOVED - `TabbedSidebar` component (and `TabbedSidebarTabLabel`, `TabbedSidebarTabList`, `TabbedSidebarWrapper`)
+
+## 3.6.1
+
+### Patch Changes
+
+- 258bed8: FIXED List dependencies for `ColorLegend` component.
+
+## 3.6.0
+
+### Minor Changes
+
+- 030c002: ADDED `Toaster` component for toast messages
+  ADDED `newToastMessage` creating and posting toasts
+
+### Patch Changes
+
+- 74db575: CHANGE checkbox - set name attribute on generated input element
+
 ## 3.5.1
 
 ### Patch Changes

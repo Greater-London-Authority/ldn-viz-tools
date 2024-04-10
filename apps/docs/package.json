@@ -51,5 +51,14 @@
 		"vite": "^5.0.3",
 		"vitest": "^1.2.0"
 	},
-	"type": "module"
+	"type": "module",
+	"svelte": "./src/lib/index.js",
+	"types": "./src/lib/index.d.ts",
+	"main": "./src/lib/index.js",
+	"exports": {
+		".": {
+			"types": "./src/lib/index.d.ts",
+			"svelte": "./src/lib/index.js"
+		}
+	}
 }
