@@ -54,13 +54,13 @@
 		"@storybook/theming": "^8.0.0"
 	},
 	"type": "module",
-	"svelte": "./src/lib/index.js",
+	"svelte": "./src/lib/index.ts",
 	"types": "./src/lib/index.d.ts",
-	"main": "./src/lib/index.js",
+	"main": "./src/lib/index.ts",
 	"exports": {
 		".": {
 			"types": "./src/lib/index.d.ts",
-			"svelte": "./src/lib/index.js"
+			"svelte": "./src/lib/index.ts"
 		}
 	}
 }
