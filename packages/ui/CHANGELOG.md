@@ -1,5 +1,15 @@
 # ldn-viz-tools-ui
 
+## 5.0.0
+
+### Major Changes
+
+- 2049d5b: CHANGED - modify `Modal` component to use `@melt-ui/svelte-ui` rather than `@rgossiaux/svelte-headlessui`. The `isOpen` prop is now a store rather than a Boolean.
+
+### Minor Changes
+
+- 71a6bb4: CHANGED - modify appearance of the `Header` component (make background darker, and blue brand flash wider).
+
 ## 4.1.0
 
 ### Minor Changes
