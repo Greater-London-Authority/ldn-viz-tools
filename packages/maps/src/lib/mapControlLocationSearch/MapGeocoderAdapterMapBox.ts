@@ -91,7 +91,7 @@ const transformGeoJSONToNamedGeolocations = (
 			name: loc.text,
 			address: removeNameFromAddress(loc.place_name, loc.text),
 			// loc.center isn't always the center of the bbox
-			center: calcCorrectCenter(loc.bbox, loc.center),
+			center: calcBoundingBoxCenter(loc.bbox, loc.center),
 			bounds: loc.bbox
 		};
 	});
@@ -111,7 +111,7 @@ const removeNameFromAddress = (address: string, name: string) => {
 	return address;
 };
 
-const calcCorrectCenter = (
+const calcBoundingBoxCenter = (
 	bbox: undefined | GeolocationBounds,
 	center: GeolocationCoords
 ): GeolocationCoords => {
