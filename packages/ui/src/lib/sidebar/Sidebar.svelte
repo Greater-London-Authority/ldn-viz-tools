@@ -62,13 +62,21 @@
 						<slot name="header" />
 					</div>
 				{/if}
-				<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
-					<div class="space-y-4">
-						<slot name="sections" />
-					</div>
 
+				{#if $$slots.unstyledContent}
+					<slot name="unstyledContent" />
 					<slot name="footer" />
-				</div>
+				{:else}
+					<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
+						{#if $$slots.sections}
+							<div class="space-y-4">
+								<slot name="sections" />
+							</div>
+						{/if}
+
+						<slot name="footer" />
+					</div>
+				{/if}
 			</div>
 		</div>
 	{/if}
