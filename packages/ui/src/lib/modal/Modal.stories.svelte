@@ -90,3 +90,25 @@
 		description="We can use the width prop to set different max-widths from xs though 7xl and full. Default is md"
 	/>
 </Story>
+
+<Story name="Modal with very long content">
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+
+	<Modal bind:isOpen title="Modal with very long content!" width="6xl">
+		{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+
+		{#each sections as section}
+			<div class="mb-4">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci leo, lacinia sed
+				nulla vel, eleifend bibendum magna. Suspendisse potenti. Suspendisse vestibulum consequat
+				maximus. Aenean nec odio pellentesque ligula fermentum tempor. Ut eu vulputate leo. Donec
+				viverra viverra tellus a convallis. Fusce diam lacus, semper eget pulvinar sed, mattis in
+				est. Cras vestibulum ultrices tortor et pulvinar. Maecenas id lorem et tellus ornare lacinia
+				non posuere est. Suspendisse molestie tortor erat, id pharetra nibh aliquet vitae.
+			</div>
+		{/each}
+
+		<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
+		<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button>
+	</Modal>
+</Story>
