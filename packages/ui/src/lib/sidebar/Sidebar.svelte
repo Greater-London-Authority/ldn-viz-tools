@@ -56,7 +56,13 @@
 			class={classNames('flex', heightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[placement] }}
 		>
-			<div class={classNames(sidebarClasses, widthClasses)}>
+			<div
+				class={classNames(
+					sidebarClasses,
+					widthClasses,
+					$$slots.tabs && placement === 'left' ? 'ml-[80px]' : ''
+				)}
+			>
 				{#if $$slots.header}
 					<div class="p-6 pb-0">
 						<slot name="header" />
