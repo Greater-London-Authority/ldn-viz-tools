@@ -39,7 +39,7 @@ export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 		const url = buildUrl(text, this._token, this._resultCount);
 		return fetch(url)
 			.then((res) => res.json())
-			.then(transformGeoJSONToGeolocationNameds);
+			.then(transformGeoJSONToNamedGeolocations);
 	}
 
 	attribution() {
@@ -82,7 +82,7 @@ const buildUrl = (text: string, token: string, resultCount: number): string => {
 	return `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${queryString}`;
 };
 
-const transformGeoJSONToGeolocationNameds = (
+const transformGeoJSONToNamedGeolocations = (
 	geojson: MapBoxFeatureCollection
 ): GeolocationNamed[] => {
 	return geojson.features.map((loc) => {

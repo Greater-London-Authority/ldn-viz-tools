@@ -1,9 +1,5 @@
 import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-import type {
-	GeolocationCoords,
-	GeolocationBounds,
-	Geolocation
-} from '@ldn-viz/ui';
+import type { GeolocationCoords, GeolocationBounds, Geolocation } from '@ldn-viz/ui';
 
 import type {
 	Map,
@@ -108,9 +104,7 @@ const setMarker = (ref: string, map: Map, mapgl: MapGL, coords: GeolocationCoord
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	markers[ref] = new mapgl.Marker()
-		.setLngLat(coords)
-		.addTo(map);
+	markers[ref] = new mapgl.Marker().setLngLat(coords).addTo(map);
 };
 
 const clearMarker = (ref: string) => {
