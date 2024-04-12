@@ -48,7 +48,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -78,7 +78,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -108,7 +108,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -138,7 +138,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -168,7 +168,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -198,7 +198,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -248,7 +248,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -278,7 +278,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -344,7 +344,7 @@
 						<div>
 							<SidebarGroupTitle hintType="modal" hintLabel="why">
 								Pay Attention to this group
-								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+								<svelte:fragment slot="hint">Because it's Awesome!</svelte:fragment>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
