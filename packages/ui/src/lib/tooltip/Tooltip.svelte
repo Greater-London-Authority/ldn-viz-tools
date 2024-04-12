@@ -7,9 +7,11 @@
 	import { InformationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	import Button from '../button/Button.svelte';
 	import { floatingRef } from '../tooltip/tooltip.js';
 
 	export let hintLabel = 'what is this?';
+	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
 	let showTooltip = false;
 
@@ -39,27 +41,32 @@
 	}
 </script>
 
-<span
-	class="inline-flex items-center text-core-grey-400 dark:text-core-grey-300 cursor-pointer"
-	bind:this={element}
-	on:mouseenter={() => {
-		showTooltip = true;
-		floatingRef(element);
-	}}
-	on:mouseleave|stopPropagation={() => (showTooltip = false)}
-	use:floatingRef
-	role="tooltip"
->
-	<slot name="hint">
-		{hintLabel}
-		<Icon
-			src={InformationCircle}
-			theme="solid"
-			class="w-[18px] h-[18px] ml-0.5"
-			aria-hidden="true"
-		/>
-	</slot>
-</span>
+<Button variant="text" size={hintSize} class="!p-0 !text-core-grey-400 dark:!text-core-grey-300">
+	<span
+		use:floatingRef
+		bind:this={element}
+		on:mouseenter={() => {
+			showTooltip = true;
+			floatingRef(element);
+		}}
+		on:mouseleave|stopPropagation={() => (showTooltip = false)}
+		role="tooltip"
+		class="inline-flex"
+	>
+		{#if $$slots.hint}
+			<slot name="hint" />
+		{:else}
+			{hintLabel}
+
+			<Icon
+				src={InformationCircle}
+				theme="solid"
+				class="w-[18px] h-[18px] ml-0.5"
+				aria-hidden="true"
+			/>
+		{/if}
+	</span>
+</Button>
 
 {#if showTooltip}
 	<div
