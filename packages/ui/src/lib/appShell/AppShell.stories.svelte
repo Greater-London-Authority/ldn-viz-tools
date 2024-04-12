@@ -270,6 +270,21 @@
 					</p>
 				</svelte:fragment>
 			</SidebarHeader>
+			<svelte:fragment slot="sections">
+				{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+				{#each sections as section}
+					<SidebarSection title="Section Title">
+						Section Content
+						<div>
+							<SidebarGroupTitle hintType="modal" hintLabel="why">
+								Pay Attention to this group
+								<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+							</SidebarGroupTitle>
+							Grouped content
+						</div>
+					</SidebarSection>
+				{/each}
+			</svelte:fragment>
 		</Sidebar>
 	</AppShell>
 </Story>

@@ -57,7 +57,7 @@ export const heightLookup: WidthLookup = {
 		left: 'h-full',
 		right: 'h-full',
 		top: 'h-[60dvh] max-h-[800px]', //TODO breakpoints?
-		bottom: 'h-[60dvh]max-h-[800px]'
+		bottom: 'h-[60dvh] max-h-[800px]'
 	}
 };
 
