@@ -57,9 +57,11 @@
 			transition:slide={{ duration: 300, axis: transitionAxis[placement] }}
 		>
 			<div class={classNames(sidebarClasses, widthClasses)}>
-				<div class="p-6 pb-0">
-					<slot name="header" />
-				</div>
+				{#if $$slots.header}
+					<div class="p-6 pb-0">
+						<slot name="header" />
+					</div>
+				{/if}
 				<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
 					<div class="space-y-4">
 						<slot name="sections" />

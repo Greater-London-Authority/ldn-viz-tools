@@ -1,6 +1,6 @@
 <script context="module">
-	import Sidebar from './Sidebar.svelte';
 	import { RelativeWrapper } from '@ldn-viz/docs';
+	import Sidebar from './Sidebar.svelte';
 
 	export const meta = {
 		title: 'Ui/Sidebar',
@@ -540,6 +540,40 @@
 						Grouped content
 					</div>
 				</SidebarSection> -->
+			{/each}
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<SidebarFooter>
+				<div class="flex justify-between">
+					<div class="w-[165px]"><LogoMayor /></div>
+					<div class="w-[165px]"><LogoCIU /></div>
+				</div>
+				<svelte:fragment slot="menu">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+				</svelte:fragment>
+			</SidebarFooter>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<Story name="With no header" source>
+	<Sidebar>
+		<svelte:fragment slot="sections">
+			{@const sections = [1, 2]}
+			{#each sections as section}
+				<SidebarSection title="Section Title">
+					Section Content
+					<div>
+						<SidebarGroupTitle hintType="modal" hintLabel="why">
+							Pay Attention to this group
+							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						</SidebarGroupTitle>
+						Grouped content
+					</div>
+				</SidebarSection>
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
