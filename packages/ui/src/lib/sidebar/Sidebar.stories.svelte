@@ -1,6 +1,6 @@
 <script context="module">
-	import Sidebar from './Sidebar.svelte';
 	import { RelativeWrapper } from '@ldn-viz/docs';
+	import Sidebar from './Sidebar.svelte';
 
 	export const meta = {
 		title: 'Ui/Sidebar',
@@ -89,18 +89,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -131,18 +129,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -173,18 +169,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -247,18 +241,16 @@
 			{/if}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -289,18 +281,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -331,18 +321,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -373,18 +361,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -415,18 +401,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -457,18 +441,16 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
@@ -499,24 +481,21 @@
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>
 
-<!-- TODO: Although this isn't a design that features in figma <i>yet</i> it should be... Components will need to be updated accordingly to achieve better theme inheritance -->
-<Story name="Dark Theme with white panel" source>
+<Story name="Dark Theme with white panel (unstyledContent)" source>
 	<Sidebar>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
@@ -526,11 +505,42 @@
 				</p>
 			</svelte:fragment>
 		</SidebarHeader>
-		<svelte:fragment slot="sections">
+		<svelte:fragment slot="unstyledContent">
 			{@const sections = [1]}
 			{#each sections as section}
-				<div class="bg-white">Section Content</div>
-				<!-- <SidebarSection title="Section Title">
+				<div class="bg-core-grey-50 p-6 mt-4 h-full space-y-4">
+					<p>
+						This is totally unstyled content and so needs to have extra classes to ensure correct
+						padding etc. Use with extreme caution!
+					</p>
+					<p>
+						Using the "unstyledContent" slot also means you need to adjust to footer to compensate
+						by adding padding
+					</p>
+				</div>
+			{/each}
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<div class="flex justify-between px-6">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2 px-6">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<Story name="With no header" source>
+	<Sidebar>
+		<svelte:fragment slot="sections">
+			{@const sections = [1, 2]}
+			{#each sections as section}
+				<SidebarSection title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle hintType="modal" hintLabel="why">
@@ -539,22 +549,20 @@
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
-				</SidebarSection> -->
+				</SidebarSection>
 			{/each}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
-			<SidebarFooter>
-				<div class="flex justify-between">
-					<div class="w-[165px]"><LogoMayor /></div>
-					<div class="w-[165px]"><LogoCIU /></div>
-				</div>
-				<svelte:fragment slot="menu">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
-				</svelte:fragment>
-			</SidebarFooter>
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
 </Story>

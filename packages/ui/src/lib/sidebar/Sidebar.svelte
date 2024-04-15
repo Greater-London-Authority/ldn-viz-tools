@@ -56,17 +56,33 @@
 			class={classNames('flex', heightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[placement] }}
 		>
-			<div class={classNames(sidebarClasses, widthClasses)}>
-				<div class="p-6 pb-0">
-					<slot name="header" />
-				</div>
-				<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
-					<div class="space-y-4">
-						<slot name="sections" />
+			<div
+				class={classNames(
+					sidebarClasses,
+					widthClasses,
+					$$slots.tabs && placement === 'left' ? 'ml-[80px]' : ''
+				)}
+			>
+				{#if $$slots.header}
+					<div class="p-6 pb-0">
+						<slot name="header" />
 					</div>
+				{/if}
 
+				{#if $$slots.unstyledContent}
+					<slot name="unstyledContent" />
 					<slot name="footer" />
-				</div>
+				{:else}
+					<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
+						{#if $$slots.sections}
+							<div class="space-y-4">
+								<slot name="sections" />
+							</div>
+						{/if}
+
+						<slot name="footer" />
+					</div>
+				{/if}
 			</div>
 		</div>
 	{/if}
