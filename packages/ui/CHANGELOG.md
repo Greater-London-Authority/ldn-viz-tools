@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 5.1.0
+
+### Minor Changes
+
+- 94a96f2: Fixes sidebar modal after Modal component update. Fixes docs after switch to index.ts
+- 702f0f3: CHANGED - updates to sidebar following initial use feedback
+
 ## 5.0.0
 
 ### Major Changes
