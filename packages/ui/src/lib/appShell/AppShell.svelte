@@ -24,10 +24,7 @@
 
 	// Classes applied to the wrapper element
 	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
-	$: wrapperClasses = classNames(
-		'h-full min-h-dvh flex relative bg-core-yellow-50 xl:bg-core-green-50',
-		wrapperFlowLookup[bpProp]
-	);
+	$: wrapperClasses = classNames('h-full min-h-dvh flex relative', wrapperFlowLookup[bpProp]);
 
 	$: sidebarWidthClasses = widthLookup[$sidebarWidthStore][bpProp];
 	$: sidebarHeightClasses = heightLookup[$sidebarWidthStore][bpProp];
@@ -64,11 +61,9 @@
 <div class={wrapperClasses}>
 	<main class={'grow'}>
 		<slot name="main">
-			<p>
-				<span class="font-bold">
-					Provide some main content. The main cotent you provide should have appropriate padding
-					applied...
-				</span>
+			<p class="font-bold">
+				Provide some main content. The main cotent you provide should have appropriate padding
+				applied...
 			</p>
 		</slot>
 	</main>

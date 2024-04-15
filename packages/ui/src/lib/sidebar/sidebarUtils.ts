@@ -17,7 +17,8 @@ export const togglePlacementLookup: PlacementLookup = {
 };
 
 export const tabPlacementLookup: PlacementLookup = {
-	left: '-end-[80px] inset-y-0',
+	// left: '-end-[80px] inset-y-0',
+	left: 'inset-y-0 z-30 ',
 	right: '-start-[80px] inset-y-0',
 	top: '-bottom-[80px] inset-x-0',
 	bottom: '-top-[80px] inset-x-0'
@@ -57,7 +58,7 @@ export const heightLookup: WidthLookup = {
 		left: 'h-full',
 		right: 'h-full',
 		top: 'h-[60dvh] max-h-[800px]', //TODO breakpoints?
-		bottom: 'h-[60dvh]max-h-[800px]'
+		bottom: 'h-[60dvh] max-h-[800px]'
 	}
 };
 

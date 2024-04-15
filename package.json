@@ -12,8 +12,6 @@
   },
   "devDependencies": {
     "@ldn-viz/eslint-config-custom": "*",
-    "@storybook/manager-api": "^8.0.0",
-    "@storybook/theming": "^8.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-turbo": "^1.12.5",
     "prettier": "^3.2.5",
@@ -28,10 +26,5 @@
   "dependencies": {
     "@changesets/cli": "^2.27.1",
     "html2canvas": "^1.4.1"
-  },
-  "overrides": {
-    "@rgossiaux/svelte-headlessui": {
-      "svelte": "4.2.12"
-    }
   }
 }

@@ -1,10 +1,10 @@
 # LDN Viz Tools
 
-![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fcharts?label=%40ldn-viz%2Fcharts%20version)
-![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fmaps?label=%40ldn-viz%2Fmaps%20version)
-![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fui?label=%40ldn-viz%2Fui%20version)
-![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fthemes?label=%40ldn-viz%2Fthemes%20version)
-![npm](https://img.shields.io/npm/v/%40ldn-viz%2Futils?label=%40ldn-viz%2Futils%20version)
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fcharts?label=%40ldn-viz%2Fcharts%20version) ](https://www.npmjs.com/package/@ldn-viz/charts)
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fmaps?label=%40ldn-viz%2Fmaps%20version) ](https://www.npmjs.com/package/@ldn-viz/maps)
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fui?label=%40ldn-viz%2Fui%20version) ](https://www.npmjs.com/package/@ldn-viz/ui)
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fthemes?label=%40ldn-viz%2Fthemes%20version) ](https://www.npmjs.com/package/@ldn-viz/themes)
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Futils?label=%40ldn-viz%2Futils%20version)  ](https://www.npmjs.com/package/@ldn-viz/utils)
 
 
 This is a mono-repo containing several components:

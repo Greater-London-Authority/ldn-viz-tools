@@ -29,7 +29,7 @@
 
 <header class={headerClasses}>
 	<div class="flex justify-between items-end">
-		<h1 class="text-xl font-bold">{title}</h1>
+		<h1 class="text-xl font-bold">{@html title}</h1>
 
 		{#if hintType}
 			<SidebarHint {hintType} {hintLabel}>
