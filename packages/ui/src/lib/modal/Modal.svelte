@@ -46,7 +46,7 @@
 	};
 
 	$: modalClass = classNames(
-		'inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
+		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
 </script>
@@ -55,7 +55,7 @@
 	{#if $open}
 		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
-		<div class="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
+		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
 					class="bg-core-grey-700 text-white p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-core-blue-500"
@@ -74,14 +74,16 @@
 					</div>
 				</div>
 
-				<div class="p-4">
-					{#if description}
-						<div {...$meltDescripton} use:$meltDescripton.action>{description}</div>
-					{/if}
+				<div class="overflow-y-auto">
+					<div class="p-4">
+						{#if description}
+							<div {...$meltDescripton} use:$meltDescripton.action>{description}</div>
+						{/if}
 
-					{#if hasChildren}
-						<slot />
-					{/if}
+						{#if hasChildren}
+							<slot />
+						{/if}
+					</div>
 				</div>
 			</div>
 		</div>
