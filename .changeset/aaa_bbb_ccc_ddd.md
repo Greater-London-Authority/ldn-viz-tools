@@ -3,5 +3,6 @@
 '@ldn-viz/ui': minor
 ---
 
-Added geolocation package with geocoder and geolocator.
-Added map control for map specific geocoding and geolocation.
+ADDED `MapControlGeocoder`, `MapControlGeolocator`, and `MapControlLocationSearch` components to `@ldn-viz/maps`
+
+ADDED `Geocoder`, `Geolocator`, and `GeocoderSuggestionList` components to `@ldn-viz/ui`
