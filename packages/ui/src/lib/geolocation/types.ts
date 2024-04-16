@@ -39,3 +39,7 @@ export type OnGeolocationSearchResult = (loc: Geolocation) => void;
 // OnGeolocationSearchError is invoked when an adapter promise rejects a
 // search request.
 export type OnGeolocationSearchError = (err: GeolocationSearchError) => void;
+
+// OnSuggestionListInteraction is invoked when a keyboard, mouse, or touch
+// event occurs in the suggestion list, except when a suggestion is selected.
+export type OnSuggestionListInteraction = (event: Event, geolocation: GeolocationNamed) => void;

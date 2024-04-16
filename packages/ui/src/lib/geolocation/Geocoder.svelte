@@ -27,7 +27,8 @@
 		Geolocation,
 		GeolocationSearchError,
 		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnSuggestionListInteraction
 	} from './types';
 
 	// adapter to source location suggestions from.
@@ -63,6 +64,7 @@
 	export let showClearButton = false;
 
 	let container: HTMLElement;
+	let input: HTMLInputElement;
 	let query = '';
 	let showSuggestionList = false;
 
@@ -102,7 +104,93 @@
 		onLocationSelected && onLocationSelected(suggestion);
 	};
 
-	const hideSuggestionList = (event: MouseEvent | KeyboardEvent) => {
+	const onSuggestionEvent: OnSuggestionListInteraction = (
+		event: Event,
+		suggestion: GeolocationNamed
+	) => {
+		const pressEvent = event as KeyboardEvent;
+		const clickEvent = event as PointerEvent;
+
+		if (pressEvent.key === 'Enter' || clickEvent.type === 'click') {
+			closeSuggestionsList();
+			onLocationSelected && onLocationSelected(suggestion);
+			return;
+		}
+
+		if (pressEvent.key === 'Escape') {
+			closeSuggestionsList();
+			return;
+		}
+
+		if (pressEvent.key === 'ArrowDown') {
+			focusOnNextSuggestion(suggestion);
+			return;
+		}
+
+		if (pressEvent.key === 'ArrowUp') {
+			if (isFirstSuggestion(suggestion)) {
+				focusOnInput();
+				return;
+			}
+
+			focusOnPrevSuggestion(suggestion);
+		}
+	};
+
+	const findSuggestionIndex = (suggestion?: GeolocationNamed) => {
+		if (!suggestion || !suggestions) {
+			return -1;
+		}
+
+		for (let i = 0; i < suggestions.length; i++) {
+			if (suggestions[i].id === suggestion.id) {
+				return i;
+			}
+		}
+
+		return -1;
+	};
+
+	const isFirstSuggestion = (suggestion: GeolocationNamed) => {
+		return findSuggestionIndex(suggestion) === 0;
+	};
+
+	const focusOnPrevSuggestion = (suggestion: GeolocationNamed) => {
+		const i = findSuggestionIndex(suggestion);
+		if (i >= 0) {
+			const prev = i - 1 >= 0 ? suggestions[i - 1] : undefined;
+			focusOnLocation(prev);
+		}
+	};
+
+	const focusOnNextSuggestion = (suggestion: GeolocationNamed) => {
+		const i = findSuggestionIndex(suggestion);
+		if (i >= 0) {
+			const next = i + 1 < suggestions.length ? suggestions[i + 1] : undefined;
+			focusOnLocation(next);
+		}
+	};
+
+	const focusOnLocation = (suggestion?: GeolocationNamed) => {
+		if (!suggestion) {
+			return;
+		}
+
+		const elem = document.querySelector(`[data-geocoder-suggestion-id="${suggestion.id}"]`);
+		if (elem) {
+			(elem as HTMLElement).focus();
+		}
+	};
+
+	const focusOnInput = () => {
+		input.focus();
+		setTimeout(() => {
+			const end = input.value.length;
+			input.setSelectionRange(end, end);
+		}, 0);
+	};
+
+	const hideSuggestionList = (event: Event) => {
 		const target = event.target as HTMLElement;
 		if (!target || !container || !isElementOrChildOf(target, container)) {
 			closeSuggestionsList();
@@ -114,19 +202,33 @@
 		return !!(position & Node.DOCUMENT_POSITION_CONTAINS);
 	};
 
-	const reshowSuggestionList = () => {
+	const reshowSuggestionList = (event: Event) => {
 		if (suggestions) {
 			showSuggestionList = !!$$slots.default;
 		}
+
+		navigateSuggestionList(event);
 	};
 
-	const selectFirstSuggestion = (event: KeyboardEvent) => {
-		if (event.key !== 'Enter') {
+	const navigateSuggestionList = (event: Event) => {
+		if (!showSuggestionList || !suggestions || suggestions.length === 0) {
 			return;
 		}
 
-		if (showSuggestionList && suggestions && suggestions.length > 0) {
+		const pressEvent = event as KeyboardEvent;
+
+		if (pressEvent.key === 'Enter') {
 			onSelect(suggestions[0]);
+			return;
+		}
+
+		if (pressEvent.key === 'Escape') {
+			closeSuggestionsList();
+			return;
+		}
+
+		if (pressEvent.key === 'ArrowDown') {
+			focusOnLocation(suggestions[0]);
 		}
 	};
 
@@ -154,15 +256,15 @@
 	</div>
 
 	<input
-		class="min-w-0 w-64 max-w-[100%] pl-10 grow shrink bg-core-grey-600 border-core-grey-600 placeholder-core-grey-300 h-full text-white {inputClasses}"
-		class:pr-8={showClearButton}
+		bind:this={input}
 		type="search"
 		placeholder="Location search"
+		class="min-w-0 w-64 max-w-[100%] pl-10 grow shrink bg-core-grey-600 border-core-grey-600 placeholder-core-grey-300 h-full text-white {inputClasses}"
+		class:pr-8={showClearButton}
 		bind:value={query}
 		on:focus={reshowSuggestionList}
 		on:click={reshowSuggestionList}
 		on:keyup={reshowSuggestionList}
-		on:keypress={selectFirstSuggestion}
 	/>
 
 	{#if showClearButton || query?.length > 0}
@@ -177,9 +279,9 @@
 
 	{#if showSuggestionList && suggestions}
 		<slot
-			onLocationSelected={onSelect}
 			attribution={adapter?.attribution ? adapter.attribution() : undefined}
 			{suggestions}
+			{onSuggestionEvent}
 		/>
 	{/if}
 </search>

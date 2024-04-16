@@ -22,6 +22,7 @@
 	import { MapGeocoderAdapterMapBox } from './MapGeocoderAdapterMapBox';
 	import type { OnGeolocationSearchError, GeolocationSearchError } from '@ldn-viz/ui';
 
+	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 	const adapter = new MapGeocoderAdapterMapBox(
 		'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
 	);
@@ -40,11 +41,26 @@
 		<Map
 			options={{
 				style: os_light_vts,
-				transformRequest: appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP')
+				transformRequest
 			}}
 		>
 			<MapControlGroup position="TopLeft">
 				<MapControlLocationSearch {adapter} {onSearchError} />
+			</MapControlGroup>
+		</Map>
+	</MapApp>
+</Story>
+
+<Story name="Hidden Geolocator">
+	<MapApp>
+		<Map
+			options={{
+				style: os_light_vts,
+				transformRequest
+			}}
+		>
+			<MapControlGroup position="TopLeft">
+				<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
 			</MapControlGroup>
 		</Map>
 	</MapApp>

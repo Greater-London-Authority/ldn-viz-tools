@@ -123,7 +123,7 @@
 			Try entering 'brick' or 'london' if you're having trouble finding any places.
 		</p>
 		<Geocoder
-			let:onLocationSelected={onSelectSuggestion}
+			let:onSuggestionEvent
 			let:attribution
 			let:suggestions
 			adapter={listAdapter}
@@ -133,7 +133,7 @@
 		>
 			{#if suggestions?.length > 0}
 				<GeocoderSuggestionList
-					onLocationSelected={onSelectSuggestion}
+					{onSuggestionEvent}
 					{attribution}
 					{suggestions}
 					maxSuggestions={5}

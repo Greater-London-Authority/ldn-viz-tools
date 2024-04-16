@@ -1,7 +1,7 @@
 <script lang="ts">
 	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
 	import type { GeocoderAttribution } from './GeocoderAdapter';
-	import type { GeolocationNamed, OnGeolocationSearchResult } from './types';
+	import type { GeolocationNamed, OnSuggestionListInteraction } from './types';
 
 	export let attribution: undefined | GeocoderAttribution = undefined;
 
@@ -13,9 +13,11 @@
 	// not limit the results array.
 	export let maxSuggestions: number = 5;
 
-	// onLocationSelected is invoked when a user clicks a suggestion.
-	export let onLocationSelected: undefined | OnGeolocationSearchResult;
+	// onSuggestionEvent is invoked when a keyboard, mouse, or touch
+	// event occurs in the suggestion list, except when a suggestion is selected.
+	export let onSuggestionEvent: OnSuggestionListInteraction;
 
+	// Mouse highlight only
 	let highlighted: null | GeolocationNamed = null;
 
 	const highlightFirstSuggestion = (suggestions: GeolocationNamed[]) => {
@@ -33,7 +35,7 @@
 	{:else}
 		{#each suggestions as suggestion, i (suggestion.id)}
 			{#if i < maxSuggestions}
-				<GeocoderSuggestion {suggestion} {onLocationSelected} bind:highlighted />
+				<GeocoderSuggestion {suggestion} {onSuggestionEvent} bind:highlighted />
 			{/if}
 		{/each}
 	{/if}

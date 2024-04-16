@@ -63,17 +63,12 @@
 	{classes}
 	{inputClasses}
 	bind:showClearButton
-	let:onLocationSelected={onSelectSuggestion}
+	let:onSuggestionEvent
 	let:attribution
 	let:suggestions
 	{...$$restProps}
 >
 	{#if suggestions.length > 0}
-		<GeocoderSuggestionList
-			onLocationSelected={onSelectSuggestion}
-			{attribution}
-			{suggestions}
-			{maxSuggestions}
-		/>
+		<GeocoderSuggestionList {onSuggestionEvent} {attribution} {suggestions} {maxSuggestions} />
 	{/if}
 </Geocoder>

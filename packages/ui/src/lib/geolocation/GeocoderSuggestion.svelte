@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { GeolocationNamed, OnGeolocationSearchResult } from './types';
+	import type { GeolocationNamed, OnSuggestionListInteraction } from './types';
 
 	export let suggestion: GeolocationNamed;
-	export let onLocationSelected: undefined | OnGeolocationSearchResult;
+	export let onSuggestionEvent: OnSuggestionListInteraction;
 	export let highlighted: null | GeolocationNamed;
 
-	const select = () => {
-		onLocationSelected && onLocationSelected(suggestion);
+	const navigateList = (event: Event) => {
+		onSuggestionEvent(event, suggestion);
 	};
 
 	const highlight = () => {
@@ -18,12 +18,13 @@
 	<div
 		role="button"
 		class="w-full px-2.5 py-1.5 cursor-pointer"
-		on:click|self={select}
-		on:keypress={select}
+		on:click|self={navigateList}
+		on:keydown={navigateList}
 		on:mouseenter={highlight}
 		on:focus={highlight}
 		class:bg-core-blue-600={highlighted === suggestion}
 		tabindex="0"
+		data-geocoder-suggestion-id={suggestion.id}
 	>
 		{#if suggestion.name}
 			<h1 class="underline pointer-events-none mb-1">{suggestion.name}</h1>
