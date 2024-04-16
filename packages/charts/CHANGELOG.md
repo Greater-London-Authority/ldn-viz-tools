@@ -1,5 +1,16 @@
 # ldn-viz-tools-charts
 
+## 1.4.0
+
+### Minor Changes
+
+- c703bb6: CHANGED - specify Svelte version as a range rather than pinning specific version.
+
+### Patch Changes
+
+- Updated dependencies [c703bb6]
+  - @ldn-viz/ui@5.2.0
+
 ## 1.3.0
 
 ### Minor Changes

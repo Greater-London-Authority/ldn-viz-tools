@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 5.2.0
+
+### Minor Changes
+
+- c703bb6: CHANGED - specify Svelte version as a range rather than pinning specific version.
+
 ## 5.1.0
 
 ### Minor Changes
