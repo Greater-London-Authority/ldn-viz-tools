@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 1.4.0
+
+### Minor Changes
+
+- c703bb6: CHANGED - specify Svelte version as a range rather than pinning specific version.
+
 ## 1.3.0
 
 ### Minor Changes
