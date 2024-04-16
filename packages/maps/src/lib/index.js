@@ -13,3 +13,8 @@ export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelt
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
+
+export * as theme_os_dark_grey_muted_buildings from './themes/os_dark_grey_muted_buildings.json';
+export * as theme_os_dark from './themes/os_dark.json';
+export * as theme_os_greyscale from './themes/os_greyscale.json';
+export * as theme_os_light_vts from './themes/os_light_vts.json';
