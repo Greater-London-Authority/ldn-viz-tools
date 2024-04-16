@@ -198,8 +198,8 @@
 	};
 
 	const isElementOrChildOf = (element: HTMLElement, parent: HTMLElement) => {
-		const position = element.compareDocumentPosition(parent);
-		return !!(position & Node.DOCUMENT_POSITION_CONTAINS);
+		const positionBitmask = element.compareDocumentPosition(parent);
+		return !!(positionBitmask & Node.DOCUMENT_POSITION_CONTAINS);
 	};
 
 	const reshowSuggestionList = (event: Event) => {
