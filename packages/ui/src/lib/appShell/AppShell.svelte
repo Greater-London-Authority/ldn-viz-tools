@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { slide } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	import {
 		heightLookup,
 		transitionAxis,
@@ -68,7 +68,11 @@
 		</slot>
 	</main>
 
-	<slot name="sidebar">Sidebar</slot>
+	{#if innerWidth !== 0}
+		<div transition:fade={{ duration: 200 }}>
+			<slot name="sidebar">Sidebar</slot>
+		</div>
+	{/if}
 
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
 	{#if sidebarPush && $isOpen && $sidebarWidthStore}
