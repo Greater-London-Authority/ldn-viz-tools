@@ -2,4 +2,4 @@
 "@ldn-viz/ui": minor
 ---
 
-AppShell awaits innerwidth calc before showing sidebar
+CHANGED - `AppShell` waits for innerWidth to be available before showing sidebar, to avoid an initial flash of incorrect layout
