@@ -9,6 +9,7 @@
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import SidebarHint from '../sidebarHint/SidebarHint.svelte';
 	import SidebarGroupTitle from './sidebarGroupTitle/SidebarGroupTitle.svelte';
 </script>
 
@@ -24,9 +25,11 @@
 	<SidebarSection title="Section Title">
 		Section Content
 		<div>
-			<SidebarGroupTitle hintType="modal" hintLabel="why">
+			<SidebarGroupTitle>
 				Pay Attention to this group
-				<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+				<SidebarHint slot="hint" hintType="modal" hintLabel="why">
+					Beacuse it's Awesome!
+				</SidebarHint>
 			</SidebarGroupTitle>
 			Grouped content
 		</div>

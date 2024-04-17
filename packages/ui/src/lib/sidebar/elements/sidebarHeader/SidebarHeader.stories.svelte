@@ -37,16 +37,19 @@
 </Story>
 
 <Story name="With Hint" source>
-	<SidebarHeader title="Main sidebar title" hintType="modal">
-		<svelte:fragment slot="hint">Content hint here</svelte:fragment>
+	<SidebarHeader title="Main sidebar title">
+		<SidebarHint slot="hint" hintType="modal" modalTitle="About" modalWidth="5xl">
+			<p class="mb-4">Any content you want can go here</p>
+			<p>
+				Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+				venenatis sapien. Etiam venenatis felis.
+			</p>
+		</SidebarHint>
 	</SidebarHeader>
 </Story>
 
 <Story name="With Long Title" source>
 	<SidebarHeader
 		title={`Main sidebar title which is<br /> unfortunately very long and so<br /> needs some breaks inserting`}
-		hintType="modal"
-	>
-		<svelte:fragment slot="hint">Content hint here</svelte:fragment>
-	</SidebarHeader>
+	></SidebarHeader>
 </Story>
