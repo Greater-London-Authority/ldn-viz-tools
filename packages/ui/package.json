@@ -56,7 +56,7 @@
 		"typescript": "^5.4.2",
 		"vite": "^5.1.6",
 		"vitest": "^1.3.1",
-		"@ldn-viz/docs": "^0.0.1"
+		"@ldn-viz/docs": "*"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",

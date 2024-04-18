@@ -1,4 +1,5 @@
 <script context="module">
+	import SidebarHint from '../../sidebarHint/SidebarHint.svelte';
 	import SidebarSectionTitle from './SidebarSectionTitle.svelte';
 
 	export const meta = {
@@ -29,8 +30,14 @@
 </Story>
 
 <Story name="With Hint" source>
-	<SidebarSectionTitle hintType="modal">
+	<SidebarSectionTitle>
 		Section Title
-		<svelte:fragment slot="hint">Content hint here</svelte:fragment>
+		<SidebarHint slot="hint" hintType="tooltip">
+			<p class="mb-4">Any content you want can go here</p>
+			<p>
+				Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+				venenatis sapien. Etiam venenatis felis.
+			</p>
+		</SidebarHint>
 	</SidebarSectionTitle>
 </Story>
