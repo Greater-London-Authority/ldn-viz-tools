@@ -1,4 +1,5 @@
 <script context="module">
+	import SidebarHint from '../../sidebarHint/SidebarHint.svelte';
 	import SidebarGroupTitle from './SidebarGroupTitle.svelte';
 
 	export const meta = {
@@ -20,5 +21,14 @@
 </Story>
 
 <Story name="With Hint" source>
-	<SidebarGroupTitle hintType="modal">Group Title</SidebarGroupTitle>
+	<SidebarGroupTitle>
+		Group Title
+		<SidebarHint slot="hint" hintType="tooltip">
+			<p class="mb-4">Any content you want can go here</p>
+			<p>
+				Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+				venenatis sapien. Etiam venenatis felis.
+			</p>
+		</SidebarHint>
+	</SidebarGroupTitle>
 </Story>

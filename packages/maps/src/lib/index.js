@@ -10,6 +10,17 @@ export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 
+// Location Search
+export * from './mapControlLocationSearch/MapGeocoderAdapterMapBox';
+export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
+export { default as MapControlGeolocator } from './mapControlLocationSearch/MapControlGeolocator.svelte';
+export { default as MapControlLocationSearch } from './mapControlLocationSearch/MapControlLocationSearch.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
+
+export * as theme_os_dark_grey_muted_buildings from './themes/os_dark_grey_muted_buildings.json';
+export * as theme_os_dark from './themes/os_dark.json';
+export * as theme_os_greyscale from './themes/os_greyscale.json';
+export * as theme_os_light_vts from './themes/os_light_vts.json';

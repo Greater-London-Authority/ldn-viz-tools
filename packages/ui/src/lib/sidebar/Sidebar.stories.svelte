@@ -1,5 +1,5 @@
 <script context="module">
-	import { RelativeWrapper } from '@ldn-viz/docs';
+	import { RelativeWrapper } from '../../../../../apps/docs';
 	import Sidebar from './Sidebar.svelte';
 
 	export const meta = {
@@ -42,6 +42,7 @@
 
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import SidebarHint from './elements/sidebarHint/SidebarHint.svelte';
 
 	let selectedValue = 'markers';
 
@@ -79,9 +80,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -119,9 +126,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -159,9 +172,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -271,9 +290,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -311,9 +336,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -351,9 +382,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -391,9 +428,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -431,9 +474,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -471,9 +520,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -543,9 +598,15 @@
 				<SidebarSection title="Section Title">
 					Section Content
 					<div>
-						<SidebarGroupTitle hintType="modal" hintLabel="why">
-							Pay Attention to this group
-							<svelte:fragment slot="hint">Beacuse it's Awesome!</svelte:fragment>
+						<SidebarGroupTitle>
+							Group Title
+							<SidebarHint slot="hint" hintType="tooltip">
+								<p class="mb-4">Any content you want can go here</p>
+								<p>
+									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+									nec venenatis sapien. Etiam venenatis felis.
+								</p>
+							</SidebarHint>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>

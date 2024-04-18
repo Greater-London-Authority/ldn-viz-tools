@@ -24,11 +24,11 @@
 </script>
 
 {#if hintType === 'tooltip'}
-	<Tooltip {hintLabel}>
+	<Tooltip {hintLabel} hintSize="sm">
 		<slot />
 	</Tooltip>
 {:else if hintType === 'popover'}
-	<Tooltip {hintLabel}>
+	<Tooltip {hintLabel} hintSize="sm">
 		<slot />
 	</Tooltip>
 {:else if hintType === 'modal'}
