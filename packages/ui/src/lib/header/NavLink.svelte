@@ -6,7 +6,7 @@
 
 	let classes: string;
 	$: {
-                if (!target && $page.url?.pathname === "/") { 
+		if (!target && $page.url?.pathname === '/') {
 			classes = 'flex h-[50px] bg-core-blue-500 items-center px-4 py-2 items-center';
 		} else if (!!target && ($page.url?.pathname || '').endsWith(target)) {
 			classes = 'flex h-[50px] bg-core-blue-500 items-center px-4 py-2 items-center';
