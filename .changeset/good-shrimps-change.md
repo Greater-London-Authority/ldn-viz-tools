@@ -1,5 +1,5 @@
 ---
-"@ldn-viz/ui": minor
+"@ldn-viz/ui": major
 ---
 
-Updates sidebar elements to accept hint component as a slot
+CHANGED - sidebar elements now accept `SidebarHint` component as a slot
