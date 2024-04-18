@@ -1,5 +1,17 @@
 # ldn-viz-tools-maps
 
+## 2.0.0
+
+### Major Changes
+
+- 2c164cf: CHANGED - map themes are now imported as objects directly from `@ldn-viz/maps`, rather than being imported as JSON files from `@ldn-viz/maps/themes`
+
+### Minor Changes
+
+- de6bfb2: ADDED `MapControlGeocoder`, `MapControlGeolocator`, and `MapControlLocationSearch` components to `@ldn-viz/maps`
+
+  ADDED `Geocoder`, `Geolocator`, and `GeocoderSuggestionList` components to `@ldn-viz/ui`
+
 ## 1.4.0
 
 ### Minor Changes
