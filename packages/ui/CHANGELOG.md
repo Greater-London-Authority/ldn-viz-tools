@@ -1,5 +1,19 @@
 # ldn-viz-tools-ui
 
+## 6.0.0
+
+### Major Changes
+
+- a1c1c84: CHANGED - sidebar elements now accept `SidebarHint` component as a slot
+
+### Minor Changes
+
+- de6bfb2: ADDED `MapControlGeocoder`, `MapControlGeolocator`, and `MapControlLocationSearch` components to `@ldn-viz/maps`
+
+  ADDED `Geocoder`, `Geolocator`, and `GeocoderSuggestionList` components to `@ldn-viz/ui`
+
+- 47613aa: CHANGED - `AppShell` waits for innerWidth to be available before showing sidebar, to avoid an initial flash of incorrect layout
+
 ## 5.2.0
 
 ### Minor Changes
