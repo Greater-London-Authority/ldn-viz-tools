@@ -1,17 +1,28 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import { page } from '$app/stores';
+	import type { Page } from "@sveltejs/kit";
+	import type { Readable } from "svelte/store";
+
+	export let base = ""; // typcally imported from '$app/paths' then pased as prop
+	export let page: Readable<Page<Record<string, string>, string | null>>; // typically imported from '$app/stores then passed as prop
 
 	export let target = '';
 
 	let classes: string;
+	const highlightedClasses = 'flex h-[50px] bg-core-blue-500 items-center px-4 py-2 items-center';
+	const nonHighlightedClasses = 'flex h-[50px] bg-core-grey-700 items-center px-4 py-2 items-center';
 	$: {
-		if (!target && $page.url?.pathname === '/') {
-			classes = 'flex h-[50px] bg-core-blue-500 items-center px-4 py-2 items-center';
+		if (!page){
+			// no page store provided - we don't know whether or not we're on the page this links points at
+			classes = nonHighlightedClasses;
+		} else if (!target && $page.url?.pathname === '/') {
+			// we're currently on the homepage, and that is what this link points at
+			classes = highlightedClasses;
 		} else if (!!target && ($page.url?.pathname || '').endsWith(target)) {
-			classes = 'flex h-[50px] bg-core-blue-500 items-center px-4 py-2 items-center';
+			// we're currently on the page that this link points at
+			classes = highlightedClasses;
 		} else {
-			classes = 'flex h-[50px] bg-core-grey-700 items-center px-4 py-2 items-center';
+			// we're currently on a page that is not what this link points at
+			classes = nonHighlightedClasses;
 		}
 	}
 </script>
