@@ -1,9 +1,13 @@
 <script lang="ts">
-	import type { Page } from "@sveltejs/kit";
 	import type { Readable } from "svelte/store";
 
+	// really a Page is 
+	// import type { Page } from "@sveltejs/kit";
+	// and the page store is Readable<Page<Record<string, string>, string | null>>
+	// but we use Readable<{url: {pathname: string}} as an approximation to avoid a dependency on SvelteKit
+
 	export let base = ""; // typcally imported from '$app/paths' then pased as prop
-	export let page: Readable<Page<Record<string, string>, string | null>>; // typically imported from '$app/stores then passed as prop
+	export let page: Readable<{url?: {pathname: string}}>; // typically imported from '$app/stores then passed as prop
 
 	export let target = '';
 
