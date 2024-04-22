@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 7.0.0
+
+### Major Changes
+
+- 1b13246: CHANGED `NavLink` and `HeaderTitle` to receive SvelteKit stores as props rather than importing directly
+
 ## 6.0.0
 
 ### Major Changes
