@@ -9,9 +9,27 @@
 
 	import Button from '../button/Button.svelte';
 	import { floatingRef } from '../tooltip/tooltip.js';
+	import Modal from '../modal/Modal.svelte';
 
 	export let hintLabel = 'what is this?';
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
+
+	export let modalTitle = '';
+	export let modalDescription = '';
+	export let modalWidth:
+		| 'sm'
+		| 'md'
+		| 'lg'
+		| 'xs'
+		| 'xl'
+		| '2xl'
+		| '3xl'
+		| '4xl'
+		| '5xl'
+		| '6xl'
+		| '7xl'
+		| 'full'
+		| undefined = undefined;
 
 	let showTooltip = false;
 
@@ -19,6 +37,8 @@
 
 	const arrowRef: Writable<HTMLElement> = writable();
 	let dynamicOptions = {};
+
+	// TODO: Needs refactoring into something more readable.
 	$: if (showTooltip) {
 		dynamicOptions = {
 			middleware: [offset(10), flip(), shift(), arrow({ element: arrowRef })],
@@ -39,9 +59,21 @@
 			}
 		};
 	}
+
+	let isModalOpen: Writable<boolean> | undefined;
+	const openModal = () => {
+		if ($$slots.modal) {
+			isModalOpen?.set(true);
+		}
+	};
 </script>
 
-<Button variant="text" size={hintSize} class="!p-0 !text-core-grey-400 dark:!text-core-grey-300">
+<Button
+	variant="text"
+	size={hintSize}
+	class="!p-0 !text-core-grey-400 dark:!text-core-grey-300"
+	on:click={openModal}
+>
 	<span
 		use:floatingRef
 		bind:this={element}
@@ -67,6 +99,17 @@
 		{/if}
 	</span>
 </Button>
+
+{#if $$slots.modal}
+	<Modal
+		bind:isOpen={isModalOpen}
+		title={modalTitle}
+		description={modalDescription}
+		width={modalWidth}
+	>
+		<slot name="modal" />
+	</Modal>
+{/if}
 
 {#if showTooltip}
 	<div

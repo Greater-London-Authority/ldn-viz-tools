@@ -47,3 +47,10 @@
 		But I still work the same
 	</Tooltip>
 </Story>
+
+<Story name="Toggles modal on click">
+	<Tooltip modalTitle="This is the modal title" modalWidth="xl">
+		Click me!
+		<p slot="modal">This is the modal content in an extra large modal.</p>
+	</Tooltip>
+</Story>
