@@ -1,5 +1,5 @@
 <script>
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Spinner from './Spinner.svelte';
 	import Button from '../button/Button.svelte';
@@ -7,11 +7,13 @@
 
 <Meta title="Ui/Spinners" component={Spinner} />
 
-<Story name="Default">
+<Template let:args>
 	<div class="text-core-grey-800">
-		<Spinner class="w-40" />
+		<Spinner class="w-40" {...args} />
 	</div>
-</Story>
+</Template>
+
+<Story name="Default" source />
 
 <Story name="Thickness">
 	<div class="text-core-grey-800">

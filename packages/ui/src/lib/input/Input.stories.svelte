@@ -1,16 +1,17 @@
 <script>
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
-
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 	import Input from './Input.svelte';
 </script>
 
 <Meta title="Ui/Input" component={Input} />
 
-<Story name="Default">
+<Template let:args>
 	<div class="w-96">
-		<Input id="default" />
+		<Input {...args} />
 	</div>
-</Story>
+</Template>
+
+<Story name="Default" source />
 
 <Story name="With Label">
 	<div class="w-96">

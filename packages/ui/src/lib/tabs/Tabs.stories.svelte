@@ -3,7 +3,14 @@
 
 	export const meta = {
 		title: 'Ui/Tabs',
-		component: TabList
+		component: TabList,
+
+		argTypes: {
+			orientation: {
+				options: ['horizontal', 'vertical'],
+				control: { type: 'radio' }
+			}
+		}
 	};
 </script>
 
@@ -22,20 +29,13 @@
 		<TabLabel tabId="averages">Averages of charge events</TabLabel>
 		<TabLabel tabId="histograms">Histograms of charge events</TabLabel>
 	</TabList>
-</Template>
-
-<Story name="Default">
-	<TabList bind:selectedValue>
-		<TabLabel tabId="aggregates">Aggregated counts across London</TabLabel>
-		<TabLabel tabId="chargers">Details of chargers</TabLabel>
-		<TabLabel tabId="averages">Averages of charge events</TabLabel>
-		<TabLabel tabId="histograms">Histograms of charge events</TabLabel>
-	</TabList>
 
 	<div class="text-black dark:text-white p-4">
 		<p>Selected value is: <code>{selectedValue}</code></p>
 	</div>
-</Story>
+</Template>
+
+<Story name="Default" source />
 
 <Story name="Vertical">
 	<div class="flex">
