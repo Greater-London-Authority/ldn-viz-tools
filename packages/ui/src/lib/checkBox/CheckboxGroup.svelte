@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Checkbox from './Checkbox.svelte';
 
-	const selectAllId = crypto.randomUUID().slice(36 - 12);
+	const uuidLength = 36;
+	const lastTwelveUuidChars = uuidLength - 12;
+	const selectAllId = crypto.randomUUID().slice(lastTwelveUuidChars);
 
 	export let options: {
 		id: string;
