@@ -16,7 +16,7 @@
 <Meta title="Ui/RadioButton" component={RadioButton} />
 
 <Template let:args>
-	<RadioButton {...args} />
+	<RadioButton label="Foo" id="foo" {...args} />
 </Template>
 
 <Story name="Default" source />
