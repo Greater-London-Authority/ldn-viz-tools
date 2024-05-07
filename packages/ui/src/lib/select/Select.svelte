@@ -1,5 +1,11 @@
 <script lang="ts">
-	import Select from 'svelte-select';
+	/**
+	 * The `Select` component allows users to select an option form a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['Svelte Select'](https://github.com/rob-balfre/svelte-select).
+	 * @component
+	 */
+
+	import SvelteSelect from 'svelte-select';
 	import InputWrapper from '../input/InputWrapper.svelte';
 
 	export let items: { [key: string]: any }[];
@@ -76,7 +82,7 @@
 
 <InputWrapper {...$$restProps} {id} {disabled} {error}>
 	<div>
-		<Select
+		<SvelteSelect
 			{name}
 			label={labelField}
 			class="form-select"

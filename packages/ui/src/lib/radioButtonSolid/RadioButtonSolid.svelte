@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs. It's styled in the way used by most CIU web maps/visualizations.
+	 * @component
+	 */
+
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
