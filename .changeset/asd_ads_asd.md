@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-Add tooltips to Checkbox and CheckboxGroup.
+CHANGED: allow tooltips to be added to `Checkbox` and `CheckboxGroup`.

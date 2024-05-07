@@ -83,7 +83,7 @@
 		}}
 		on:mouseleave|stopPropagation={() => (showTooltip = false)}
 		role="tooltip"
-		class="inline-flex"
+		class="inline-flex items-center"
 	>
 		{#if $$slots.hint}
 			<slot name="hint" />

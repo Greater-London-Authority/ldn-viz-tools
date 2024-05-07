@@ -35,7 +35,6 @@
 	export let itemId = 'value';
 	export let loadOptions: any = undefined;
 	export let containerStyles = '';
-	export let hasError = error;
 	export let filterSelectedItems = true;
 	export let required = false;
 	export let closeListOnChange = true;
@@ -102,7 +101,7 @@
 			{itemId}
 			{loadOptions}
 			{containerStyles}
-			{hasError}
+			hasError={error}
 			{filterSelectedItems}
 			{required}
 			{closeListOnChange}
