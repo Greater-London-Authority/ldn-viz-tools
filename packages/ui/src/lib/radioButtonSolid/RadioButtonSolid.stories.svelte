@@ -1,11 +1,28 @@
+<script context="module">
+	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
+	import RadioButtonSolid from './RadioButtonSolid.svelte';
+
+	const componentDescription =
+		"The `RadioButtonSolid` component provides a set of buttons for switching between tabs. It's styled in the way used by most CIU web maps/visualizations.";
+
+	export const meta = {
+		title: 'Ui/RadioButtonSolid',
+		component: RadioButtonSolid,
+		parameters: {
+			docs: {
+				description: {
+					component: componentDescription
+				}
+			}
+		}
+	};
+</script>
+
 <script lang="ts">
 	import { Funnel, Map, PresentationChartLine } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import { Meta, Story } from '@storybook/addon-svelte-csf';
-
-	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
-	import RadioButtonSolid from './RadioButtonSolid.svelte';
 
 	let selectedId = 'bus';
 
@@ -16,8 +33,6 @@
 		{ id: 'taxi', label: 'Taxi ranks', disabled: true }
 	];
 </script>
-
-<Meta title="Ui/RadioButtonSolid" component={RadioButtonGroupSolid} />
 
 <Story name="RadioGroup">
 	<RadioButtonGroupSolid options={optionsForGroup} name="station-type" bind:selectedId />

@@ -1,7 +1,28 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module">
 	import RadioButton from './RadioButton.svelte';
 	import RadioButtonGroup from './RadioButtonGroup.svelte';
+
+	const componentDescription = `
+This provides a (round) radio-button component that can also be coloured and act as both a categorical color legend, and a control for which categories of things are displayed on a map or visualization.
+
+It should be used in cases where **no more that one** item from a list of options can be selected; if **multiple** items can be selected simultaneously, then a square [Checkbox](./?path=/docs/ui-checkbox--docs) should be used instead.
+`;
+
+	export const meta = {
+		title: 'Ui/RadioButton',
+		component: RadioButton,
+		parameters: {
+			docs: {
+				description: {
+					component: componentDescription
+				}
+			}
+		}
+	};
+</script>
+
+<script lang="ts">
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	let selectedId: string;
 
@@ -13,11 +34,11 @@
 	];
 </script>
 
-<Meta title="Ui/RadioButton" component={RadioButton} />
-
 <Template let:args>
 	<RadioButton {...args} />
 </Template>
+
+<Story name="Default" source />
 
 <Story name="Single RadioButton">
 	<RadioButton bind:selectedId label="Foo" id="foo" name="isolated" />
