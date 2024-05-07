@@ -3,7 +3,14 @@
 
 	export const meta = {
 		title: 'Ui/Tabs',
-		component: TabList
+		component: TabList,
+
+		argTypes: {
+			orientation: {
+				options: ['horizontal', 'vertical'],
+				control: { type: 'radio' }
+			}
+		}
 	};
 </script>
 
