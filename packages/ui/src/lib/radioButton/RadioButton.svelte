@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * This provides a (round) radio-button component that can also be coloured and act as both a categorical color legend, and a control for which categories of things are displayed on a map or visualization.
+	 *
+	 * It should be used in cases where **no more that one** item from a list of options can be selected; if **multiple** items can be selected simultaneously, then a square [Checkbox](./?path=/docs/ui-checkbox--docs) should be used instead.
+	 * @component
+	 */
+
 	export let color: string | undefined = undefined;
 	export let selectedId = '';
 	export let label: string;

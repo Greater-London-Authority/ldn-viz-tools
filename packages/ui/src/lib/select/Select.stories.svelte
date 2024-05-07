@@ -1,26 +1,7 @@
-<script context="module">
-	import Select from './Select.svelte';
-
-	const componentDescription =
-		'The `Select` component allows users to select an option form a drop-down list of alternatives. ' +
-		"Our select element is a wrapper around ['Svelte Select'](https://github.com/rob-balfre/svelte-select). ";
-
-	export const meta = {
-		title: 'Ui/Select',
-		component: Select,
-		parameters: {
-			docs: {
-				description: {
-					component: componentDescription
-				}
-			}
-		}
-	};
-</script>
-
 <script lang="ts">
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
+	import Select from './Select.svelte';
 	import Button from '../button/Button.svelte';
 
 	type Item = { label: string; value: number };
@@ -34,6 +15,8 @@
 
 	let justValue: number;
 </script>
+
+<Meta title="Ui/Select" component={Select} />
 
 <Template let:args>
 	<Select {...args} />
