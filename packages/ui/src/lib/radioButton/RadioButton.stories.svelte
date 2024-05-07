@@ -16,8 +16,10 @@
 <Meta title="Ui/RadioButton" component={RadioButton} />
 
 <Template let:args>
-	<RadioButton {...args} />
+	<RadioButton label="Foo" id="foo" {...args} />
 </Template>
+
+<Story name="Default" source />
 
 <Story name="Single RadioButton">
 	<RadioButton bind:selectedId label="Foo" id="foo" name="isolated" />
