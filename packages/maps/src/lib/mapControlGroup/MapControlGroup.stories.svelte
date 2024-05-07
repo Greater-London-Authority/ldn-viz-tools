@@ -87,7 +87,7 @@
 				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white text-center p-4 space-y-4"
 			>
 				<p>
-					The alignment of elemetns within a <code>MapControlGroup</code> depends on its position.
+					The alignment of elements within a <code>MapControlGroup</code> depends on its position.
 				</p>
 			</div>
 		</Map>
