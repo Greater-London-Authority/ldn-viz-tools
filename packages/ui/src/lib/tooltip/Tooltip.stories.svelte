@@ -26,9 +26,7 @@
 	<Tooltip {...args}>This is some text</Tooltip>
 </Template>
 
-<Story name="Default">
-	<Tooltip>This is some text</Tooltip>
-</Story>
+<Story name="Default" source />
 
 <Story name="Hint Size">
 	<Tooltip hintSize="sm">This is some text</Tooltip>

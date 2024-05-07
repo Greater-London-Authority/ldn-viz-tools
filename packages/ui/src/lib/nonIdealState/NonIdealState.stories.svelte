@@ -2,18 +2,20 @@
 	import { QuestionMarkCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import NonIdealState from './NonIdealState.svelte';
 </script>
 
 <Meta title="Ui/NonIdealState" component={NonIdealState} />
 
-<Story name="Default">
+<Template let:args>
 	<div class="w-96 h-96">
-		<NonIdealState>The server did not respond.</NonIdealState>
+		<NonIdealState {...args}>The server did not respond.</NonIdealState>
 	</div>
-</Story>
+</Template>
+
+<Story name="Default" source />
 
 <Story name="Custom title">
 	<div class="w-96 h-96">

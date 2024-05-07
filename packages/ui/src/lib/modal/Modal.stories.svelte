@@ -25,8 +25,12 @@
 </script>
 
 <Template let:args>
-	<Modal {...args}>This content is the child of the modal!</Modal>
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+
+	<Modal bind:isOpen {...args}></Modal>
 </Template>
+
+<Story name="Default" source />
 
 <Story name="Description only">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
