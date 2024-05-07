@@ -1,16 +1,8 @@
 <script lang="ts">
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 	import RadioButton from './RadioButton.svelte';
-	import RadioButtonGroup from './RadioButtonGroup.svelte';
 
 	let selectedId: string;
-
-	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
-		{ id: 'train', label: 'Train stations', color: '#008D48' },
-		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
-	];
 </script>
 
 <Meta title="Ui/RadioButton" component={RadioButton} />
@@ -35,16 +27,6 @@
 		<p>selectedId: {selectedId}</p>
 		<p>Checked: {!!selectedId}</p>
 	</div>
-</Story>
-
-<Story name="RadioGroup">
-	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
-</Story>
-
-<Story name="RadioGroup - no clear button">
-	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="Single Colored RadioButton">
