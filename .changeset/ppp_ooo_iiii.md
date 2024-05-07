@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-Add modal support to tooltips.
+CHANGED: add modal support to tooltips.
