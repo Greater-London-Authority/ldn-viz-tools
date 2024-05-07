@@ -6,10 +6,14 @@
 		label: string;
 		id: string;
 		disabled: boolean;
+		hint: string;
+		hintLabel: string;
 	}
 </script>
 
 <script lang="ts">
+	import Tooltip from '../tooltip/Tooltip.svelte';
+
 	/** A hex string to add a color to the box - this should correspond to the design system colors. */
 	export let color: CheckboxProps['color'] = '';
 	export let checked: CheckboxProps['checked'] = false;
@@ -17,6 +21,8 @@
 	export let label: CheckboxProps['label'];
 	export let id: CheckboxProps['id'];
 	export let disabled: CheckboxProps['disabled'] = false;
+	export let hint: CheckboxProps['hint'] = '';
+	export let hintLabel: CheckboxProps['hintLabel'] = '';
 
 	let inputID = `input-${id}`;
 </script>
@@ -36,6 +42,11 @@
 			: ''}
 	/>
 	<span class="mx-2 form-label">{label}</span>
+	{#if hint}
+		<Tooltip {hintLabel}>
+			{hint}
+		</Tooltip>
+	{/if}
 </label>
 
 {#if color}

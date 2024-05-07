@@ -1,7 +1,18 @@
 <script lang="ts">
 	import Checkbox from './Checkbox.svelte';
 
-	export let options: { id: string; label: string; disabled?: boolean; color?: string }[] = [];
+	const uuidLength = 36;
+	const lastTwelveUuidChars = uuidLength - 12;
+	const selectAllId = crypto.randomUUID().slice(lastTwelveUuidChars);
+
+	export let options: {
+		id: string;
+		label: string;
+		disabled?: boolean;
+		color?: string;
+		hint?: string;
+		hintLabel?: string;
+	}[] = [];
 
 	export let buttonsHidden = false;
 
@@ -33,8 +44,6 @@
 	};
 
 	const toggleAll = () => {
-		console.log('TOGGLING!');
-
 		if (!allCheckboxesCheckedOrDisabled) {
 			selectAll();
 		} else {
@@ -46,6 +55,7 @@
 <div>
 	{#if !buttonsHidden}
 		<Checkbox
+			id={selectAllId}
 			label="Select all"
 			color="#3787D2"
 			checked={allCheckboxesCheckedOrDisabled}
@@ -61,6 +71,8 @@
 				label={option.label}
 				color={option.color}
 				disabled={option.disabled}
+				hint={option.hint}
+				hintLabel={option.hintLabel}
 				bind:checked={selectionState[option.id]}
 			/>
 		{/each}
