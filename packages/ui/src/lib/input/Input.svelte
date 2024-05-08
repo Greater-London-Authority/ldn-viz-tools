@@ -1,16 +1,26 @@
 <script lang="ts" context="module">
 	export type FormatFunction = (
-		value,
-		details: {
-			name: string;
-			type: string;
-			disabled: boolean;
+		value: string,
+		details?: {
+			name?: string;
+			type?: string;
+			disabled?: boolean;
 		}
 	) => string;
 
-	export const trimInputFormatter: FormatFunction = (value) => {
-		return value && typeof value === 'string' ? value.trim() : value;
-	};
+	export type InputMode =
+		| 'none'
+		| 'search'
+		| 'text'
+		| 'tel'
+		| 'url'
+		| 'email'
+		| 'numeric'
+		| 'decimal'
+		| null
+		| undefined;
+
+	export const trimInput: FormatFunction = (value) => value.trim();
 </script>
 
 <script lang="ts">
@@ -19,7 +29,7 @@
 	import { randomId } from '../utils/randomId';
 
 	export let type = 'text';
-	export let inputmode: undefined | string = undefined;
+	export let inputmode: InputMode = undefined;
 
 	export let id = randomId();
 	export let label = '';
@@ -34,7 +44,7 @@
 	export let optional = false;
 	export let disabled = false;
 
-	export let format: null | FormatFunction = trimInputFormatter;
+	export let format: null | FormatFunction = trimInput;
 	export let value = '';
 	export let error = '';
 
@@ -47,18 +57,18 @@
 		inputmode = inputmode ? inputmode : 'numeric';
 	}
 
-	if (type === 'password' && format === trimInputFormatter) {
+	if (type === 'password' && format === trimInput) {
 		// Form input values rarely need to keep leading and trailing whitespace
-		// but passwords are an exception so default to no formatting for them.
+		// but passwords are an exception so default to no formatting.
 		format = null;
 	}
 
 	const discriptionId = `${id}-description`;
 	const errorId = `${id}-error`;
-	let input;
+	let input: HTMLInputElement | HTMLTextAreaElement;
 
-	// Svelte does not allow bind:type and bind:value simultaneously for input
-	// elements so this function acts as the input change handler.
+	// Svelte does not allow bind:type and bind:value simultaneously so this
+	// function acts as the input change handler.
 	const formatAndUpdateValue = () => {
 		if (!format) {
 			return;
@@ -70,13 +80,13 @@
 			disabled: !!$$restProps.disabled
 		});
 
-		// Protect form cyclic reactivity.
+		// Protect from cyclic reactivity.
 		if (input.value !== value) {
 			input.value = value;
 		}
 	};
 
-	const updateValue = (event) => {
+	const updateValue = () => {
 		// input.value will be an empty string if the value is invalid.
 		value = input.value;
 	};
