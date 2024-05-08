@@ -1,8 +1,22 @@
 <script lang="ts">
+	/**
+	 * The `<PlacardButton>` component creates a call-to-action link that includes a title and description.
+	 *
+	 * **Alternatives**: if the button does not need to be as visually prominent or include a description, consider using the [Button](./?path=/docs/ui-button--documentation) component with the `href` prop.
+	 * @component
+	 */
+
 	import { ArrowRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	/**
+	 * The target of the link.
+	 */
 	export let href = '';
+
+	/**
+	 * If `true`, then the targer of the link will open in a new browser tab or window.
+	 */
 	export let newWindow = false;
 </script>
 

@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * The `<Tooltip>` component renders a tooltip target, and displays a message in a tooltip when a user mouses-over it.
+	 *
+	 * **Alternatives**: for longer messages, or messages that must persist until being dismissed, consider using a [Modal](./?path=/docs/ui-modal--documentation).
+	 * @component
+	 */
+
 	import { arrow } from 'svelte-floating-ui';
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { writable, type Writable } from 'svelte/store';
@@ -10,7 +17,14 @@
 	import Button from '../button/Button.svelte';
 	import { floatingRef } from '../tooltip/tooltip.js';
 
+	/**
+	 * text that appears in the tooltip target, next to the icon
+	 */
 	export let hintLabel = 'what is this?';
+
+	/**
+	 * text size for the tooltip target
+	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
 	let showTooltip = false;

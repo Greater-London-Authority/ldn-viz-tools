@@ -17,7 +17,7 @@
 	];
 </script>
 
-<Meta title="Ui/RadioButtonSolid" component={RadioButtonSolid} />
+<Meta title="Ui/RadioButtonGroupSolid" component={RadioButtonGroupSolid} />
 
 <Story name="RadioGroup">
 	<RadioButtonGroupSolid options={optionsForGroup} name="station-type" bind:selectedId />

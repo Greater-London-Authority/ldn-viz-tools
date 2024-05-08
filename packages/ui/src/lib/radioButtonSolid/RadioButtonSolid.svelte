@@ -1,6 +1,8 @@
 <script lang="ts">
 	/**
-	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs. It's styled in the way used by most CIU web maps/visualizations.
+	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs or selecting one option from a small number of alternatives.
+	 *
+	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation).
 	 * @component
 	 */
 

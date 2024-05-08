@@ -1,10 +1,22 @@
 <script lang="ts">
+	/**
+	 * The `<Modal>` component provides content overlaid on the rest of the UI. It can provide the user with additional contextual information, or prompt for user interaction.
+	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
+	 *
+	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
+	 * @component
+	 */
+
 	import { createDialog } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
+
+	/**
+	 * boolean Svelte store that determines whether the modal is currently open.
+	 */
 	export let isOpen = writable(false);
 
 	const {
@@ -12,8 +24,19 @@
 		states: { open }
 	} = createDialog({ open: isOpen });
 
+	/**
+	 * title that appears at the top of the modal
+	 */
 	export let title: string;
+
+	/**
+	 * description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
+	 */
 	export let description: string = '';
+
+	/**
+	 * width of the modal
+	 */
 	export let width:
 		| 'xs'
 		| 'sm'

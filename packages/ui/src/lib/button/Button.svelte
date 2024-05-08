@@ -1,4 +1,14 @@
 <script context="module" lang="ts">
+	/**
+	 * The `<Button>` component creates an HTML `<button>` (or, if the `href` prop is set, an `<a>`) element.
+	 * Using it rather than the HTML element directly ensures that the button is styled consistently with our style-guide.
+	 * 
+	 * **Alternatives**: if clicking on the button should trigger the download of data or an image, consider using the [DataDownloadButton](./?path=/docs/ui-datadownloadbutton--documentation) or [ImageDownloadButton](./?path=/docs/ui-imagedownloadbutton--documentation) components.
+	 * If the button is intended as a link for navigation, consider using the [PlacardButton](./?path=/docs/ui-placardbutton--documentation).
+
+	 * @component
+	 */
+
 	export interface ButtonProps {
 		variant: 'brand' | 'square' | 'solid' | 'outline' | 'text';
 		emphasis: 'primary' | 'secondary';
@@ -19,15 +29,45 @@
 </script>
 
 <script lang="ts">
+
+	/**
+	 * Selects which family of styles should be applied to the button.
+	 */
 	export let variant: ButtonProps['variant'] = 'solid';
+
+	/**
+	 * Determines how much visual emphasis is placed on the button.
+	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
+
+	/**
+	 * Provides ability to modify appearance to represent success/error/warning conditions.
+	 */
 	export let condition: ButtonProps['condition'] = 'default';
+
+	/**
+	 * Sets the size of the button.
+	 */
 	export let size: ButtonProps['size'] = 'md';
+
+	/**
+	 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
+	 */
 	export let disabled: ButtonProps['disabled'] = false;
+
+	/**
+	 * If this is set, the button is a link with the specified target.
+	 */
 	export let href: ButtonProps['href'] = '';
+
+	/**
+	 * If `submit`, then this is a submit button for use with a form.
+	 */
 	export let type: ButtonProps['type'] = 'button';
-	/** Title that appears in hint on hover */
+
+	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
+
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {

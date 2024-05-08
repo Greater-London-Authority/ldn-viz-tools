@@ -1,11 +1,46 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
 	import RadioButton from './RadioButton.svelte';
+
+	export const meta = {
+		title: 'Ui/RadioButton',
+		component: RadioButton,
+		argTypes: {
+			color: {
+				control: { type: 'color' }
+			},
+			label: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
+			id: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
+			name: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			}
+		},
+		args: {
+			label: 'Label for Checkbox'
+		}
+	};
+</script>
+
+<script lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	let selectedId: string;
 </script>
-
-<Meta title="Ui/RadioButton" component={RadioButton} />
 
 <Template let:args>
 	<RadioButton label="Foo" id="foo" {...args} />

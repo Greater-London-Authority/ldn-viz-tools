@@ -1,10 +1,26 @@
 <script lang="ts">
+	/**
+	 * The `<CheckboxGroup>` component provides a way to create a set of `<Checkbox>` components defined by an array of objects.
+	 *
+	 * **Alternatives**: if representing a set of options that are mututally exclusive, use the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation) component rather than the [Checkbox](./?path=/docs/ui-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-checkboxgroup--documentation).
+	 * @component
+	 */
+
 	import Checkbox from './Checkbox.svelte';
 
 	const uuidLength = 36;
 	const lastTwelveUuidChars = uuidLength - 12;
 	const selectAllId = crypto.randomUUID().slice(lastTwelveUuidChars);
 
+	/**
+	 * Each element of this array defines a checkbox, and is an object with the properties:
+	 * * `id` (string)
+	 * * `label` (string) - the text displayed next to the checkbox
+	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
+	 * * `color` (string, optional) - CSS color of the checkbox
+	 * * `hint` (string, optional) - help text to be displayed in tooltip
+	 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
+	 */
 	export let options: {
 		id: string;
 		label: string;
@@ -14,8 +30,14 @@
 		hintLabel?: string;
 	}[] = [];
 
+	/**
+	 * Boolean determining whether or not the "Select all" control is displayed.
+	 */
 	export let buttonsHidden = false;
 
+	/**
+	 * An array containing the `id` of each entry in the `options` array for which the corresponding checkbox is selected.
+	 */
 	export let selectedOptions: string[] = [];
 	$: selectedOptions = options.map((o) => o.id).filter((id) => selectionState[id]);
 
