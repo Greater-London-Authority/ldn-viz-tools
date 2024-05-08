@@ -85,6 +85,10 @@
 		'm-0',
 		error ? 'border-core-red-400 dark:border-core-red-400' : '',
 		$$restProps.disabled ? 'cursor-not-allowed ' : '',
+		'dark:bg-core-grey-600',
+		'dark:text-white',
+		'placeholder-core-grey-400',
+		'dark:placeholder-core-grey-300',
 		'form-input'
 	);
 </script>
@@ -187,10 +191,7 @@
 		-webkit-appearance: none;
 	}
 
-	input,
 	textarea {
 		appearance: textfield;
-		@apply bg-core-grey-600 text-white;
-		@apply placeholder-core-grey-300;
 	}
 </style>

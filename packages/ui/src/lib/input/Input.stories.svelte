@@ -19,7 +19,7 @@
 	<div class="w-96 flex flex-col gap-4">
 		<Input name="bind-value-input" bind:value placeholder="Type here..." />
 		<div class="h-4">
-			<span class="font-medium">Value:</span>
+			<span class="font-medium dark:text-white">Value:</span>
 			{value}
 		</div>
 	</div>
@@ -117,7 +117,6 @@
 			name="email-input"
 			hint="Brings up the email keypad on touch screens"
 		/>
-		<Input type="range" label="Range" name="range-input" value="0" min="-10" max="10" />
 		<Input type="time" label="Time" name="time-input" />
 		<Input type="date" label="Date" name="date-input" />
 		<Input type="datetime-local" label="Datetime local" name="datetime-local-input" />
