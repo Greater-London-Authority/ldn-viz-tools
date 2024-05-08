@@ -1,25 +1,196 @@
+<script lang="ts" context="module">
+	export type FormatFunction = (
+		value,
+		details: {
+			name: string;
+			type: string;
+			disabled: boolean;
+		}
+	) => string;
+
+	export const trimInputFormatter: FormatFunction = (value) => {
+		return value && typeof value === 'string' ? value.trim() : value;
+	};
+</script>
+
 <script lang="ts">
-	import { classNames } from '../utils/classNames';
 	import InputWrapper from './InputWrapper.svelte';
+	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 
-	export let id: string;
-	export let name = '';
-	export let placeholder = '';
 	export let type = 'text';
-	export let disabled = false;
-	export let error = false;
+	export let inputmode: undefined | string = undefined;
 
-	if (!name) {
-		name = id;
+	export let id = randomId();
+	export let label = '';
+	export let name = id;
+
+	export let description = '';
+	export let descriptionAlignment: 'left' | 'right' = 'left';
+
+	export let hint = '';
+	export let hintLabel = '';
+
+	export let optional = false;
+	export let disabled = false;
+
+	export let format: null | FormatFunction = trimInputFormatter;
+	export let value = '';
+	export let error = '';
+
+	let inputType = type;
+
+	if (type === 'number') {
+		// Don't use type number. Advised by both MDN and GDS.
+		// Use inputmode numeric instead unless the user dev specified another.
+		inputType = 'text';
+		inputmode = inputmode ? inputmode : 'numeric';
 	}
 
+	if (type === 'password' && format === trimInputFormatter) {
+		// Form input values rarely need to keep leading and trailing whitespace
+		// but passwords are an exception so default to no formatting for them.
+		format = null;
+	}
+
+	const discriptionId = `${id}-description`;
+	const errorId = `${id}-error`;
+	let input;
+
+	// Svelte does not allow bind:type and bind:value simultaneously for input
+	// elements so this function acts as the input change handler.
+	const formatAndUpdateValue = () => {
+		if (!format) {
+			return;
+		}
+
+		value = format(value, {
+			name,
+			type,
+			disabled: !!$$restProps.disabled
+		});
+
+		// Protect form cyclic reactivity.
+		if (input.value !== value) {
+			input.value = value;
+		}
+	};
+
+	const updateValue = (event) => {
+		// input.value will be an empty string if the value is invalid.
+		value = input.value;
+	};
+
 	$: inputClasses = classNames(
+		'm-0',
 		error ? 'border-core-red-400 dark:border-core-red-400' : '',
-		disabled ? 'cursor-not-allowed ' : '',
+		$$restProps.disabled ? 'cursor-not-allowed ' : '',
 		'form-input'
 	);
 </script>
 
-<InputWrapper {...$$restProps} {id} {disabled} {error}>
-	<input class={inputClasses} {id} {name} {placeholder} {type} {disabled} />
+<InputWrapper
+	{label}
+	{id}
+	{discriptionId}
+	{description}
+	{descriptionAlignment}
+	{hintLabel}
+	{hint}
+	{errorId}
+	{error}
+	{disabled}
+	{optional}
+>
+	<!--
+		Svelte does not allow bind:text and bind:value on an input element at
+		the same time so an on change listener is required.
+	-->
+	{#if inputType === 'textarea'}
+		<textarea
+			bind:this={input}
+			class={inputClasses}
+			{id}
+			{name}
+			{value}
+			{disabled}
+			required={!optional}
+			aria-describedby={discriptionId}
+			aria-errormessage={errorId}
+			aria-invalid={!!error}
+			on:blur={formatAndUpdateValue}
+			on:input={updateValue}
+			on:input
+			on:blur
+			on:focus
+			on:focusin
+			on:focusout
+			on:keydown
+			on:keypress
+			on:keyup
+			on:click
+			on:mousedown
+			on:mouseenter
+			on:mouseleave
+			on:mouseout
+			on:mouseover
+			on:mouseup
+			on:touchcancel
+			on:touchend
+			on:touchmove
+			on:touchstart
+			{...$$restProps}
+		/>
+	{:else}
+		<input
+			bind:this={input}
+			class={inputClasses}
+			type={inputType}
+			{inputmode}
+			{id}
+			{name}
+			{value}
+			{disabled}
+			required={!optional}
+			aria-describedby={discriptionId}
+			aria-errormessage={errorId}
+			aria-invalid={!!error}
+			on:blur={formatAndUpdateValue}
+			on:input={updateValue}
+			on:input
+			on:blur
+			on:focus
+			on:focusin
+			on:focusout
+			on:keydown
+			on:keypress
+			on:keyup
+			on:click
+			on:mousedown
+			on:mouseenter
+			on:mouseleave
+			on:mouseout
+			on:mouseover
+			on:mouseup
+			on:touchcancel
+			on:touchend
+			on:touchmove
+			on:touchstart
+			{...$$restProps}
+		/>
+	{/if}
 </InputWrapper>
+
+<style>
+	input[type='number']::-webkit-outer-spin-button,
+	input[type='number']::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+	}
+
+	input,
+	textarea {
+		appearance: textfield;
+		@apply bg-core-grey-600 text-white;
+		@apply placeholder-core-grey-300;
+	}
+</style>
