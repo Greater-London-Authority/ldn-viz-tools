@@ -1,4 +1,3 @@
-
 <script lang="ts">
 	/**
 	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.

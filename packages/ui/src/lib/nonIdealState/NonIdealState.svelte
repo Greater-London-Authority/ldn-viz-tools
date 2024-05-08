@@ -1,12 +1,11 @@
 <script lang="ts">
-		/**
+	/**
 	 * The `<NonIdealState>` component acts as a placeholder for when other components are not ready render, or are prevented from successfully rendering by an error.
 	 * It can include an icon or spinner, and explanatory text.
-	 * 
+	 *
 	 * **Alternatives**: if no explanatory text is required, and a placeholder is not needed to prevent content re-flows, then consider using the [Spinner](./?path=/docs/ui-spinner--documentation) component.
 	 * @component
 	 */
-
 
 	import { ExclamationTriangle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

@@ -29,7 +29,6 @@
 </script>
 
 <script lang="ts">
-
 	/**
 	 * Selects which family of styles should be applied to the button.
 	 */

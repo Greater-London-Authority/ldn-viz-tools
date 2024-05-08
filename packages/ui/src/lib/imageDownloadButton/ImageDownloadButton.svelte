@@ -1,5 +1,5 @@
 <script lang="ts">
-		/**
+	/**
 	 * The `<ImageDownloadButton>` component renders a button which, when clicked on, downloads an image file showing either an `HTML` or `SVG` element and its children.
 	 * @component
 	 */
@@ -35,7 +35,7 @@
 	/**
 	 * The name the downloaded file will be saved with.
 	 */
-	export let filename = "";
+	export let filename = '';
 
 	/**
 	 * If `true`, the user will not be able to interact with the button to download data.

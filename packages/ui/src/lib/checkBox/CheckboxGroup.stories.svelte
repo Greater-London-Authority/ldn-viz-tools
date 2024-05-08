@@ -3,7 +3,7 @@
 
 	export const meta = {
 		title: 'Ui/CheckboxGroup',
-		component: CheckboxGroup,
+		component: CheckboxGroup
 	};
 </script>
 
