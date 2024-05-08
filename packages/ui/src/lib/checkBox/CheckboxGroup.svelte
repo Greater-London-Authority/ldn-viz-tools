@@ -31,7 +31,7 @@
 	}[] = [];
 
 	/**
-	 * Boolean determining whether or not the "Select all" control is displayed.
+	 * if `true`, then the "Select all" control is not displayed.
 	 */
 	export let buttonsHidden = false;
 
