@@ -19,7 +19,7 @@
 	export let selectedId = '';
 
 	/**
-	 * String appearing next to the radio buton.
+	 * String appearing next to the radio button.
 	 */
 	export let label: string;
 

@@ -3,7 +3,9 @@
 	import type { Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 
+	// unique identifier: will be used to set the value of `selectedValue` for the parent `TabList` when this item is selected
 	export let tabId: string;
+
 	const { selectedValue, orientation } = getContext<{
 		selectedValue: Writable<string>;
 		orientation: 'vertical' | 'horizontal';
@@ -43,5 +45,6 @@
 		tabId === $selectedValue ? '!bg-core-blue-600 cursor-default text-white' : 'cursor-pointer'
 	)}
 >
+	<!-- contents of the tab label (name and/or icon) -->
 	<slot />
 </div>

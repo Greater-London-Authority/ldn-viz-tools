@@ -1,11 +1,19 @@
+<script context="module">
+	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
+	import RadioButtonSolid from './RadioButtonSolid.svelte';
+
+	export const meta = {
+		title: 'Ui/RadioButtonGroupSolid',
+		component: RadioButtonGroupSolid,
+		subcomponents: { RadioButtonSolid }
+	};
+</script>
+
 <script lang="ts">
 	import { Funnel, Map, PresentationChartLine } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
-
-	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
-	import RadioButtonSolid from './RadioButtonSolid.svelte';
+	import { Story } from '@storybook/addon-svelte-csf';
 
 	let selectedId = 'bus';
 
@@ -16,8 +24,6 @@
 		{ id: 'taxi', label: 'Taxi ranks', disabled: true }
 	];
 </script>
-
-<Meta title="Ui/RadioButtonGroupSolid" component={RadioButtonGroupSolid} />
 
 <Story name="RadioGroup">
 	<RadioButtonGroupSolid options={optionsForGroup} name="station-type" bind:selectedId />
