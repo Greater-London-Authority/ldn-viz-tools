@@ -76,5 +76,6 @@
 </script>
 
 <Button on:click={download} {disabled} {...$$restProps}>
+	<!-- contents of the button -->
 	<slot />
 </Button>

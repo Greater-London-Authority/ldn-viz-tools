@@ -52,6 +52,7 @@
 			<RadioButtonSolid id={option.id} label={option.label} disabled={option.disabled} {name} />
 		{/each}
 	{:else}
+		<!-- should contain a series of `<RadioButtonSolid>` components  -->
 		<slot />
 	{/if}
 </div>

@@ -24,6 +24,7 @@
 	{#if spinner}
 		<Spinner class="w-12" />
 	{:else}
+		<!-- contains the icon -->
 		<slot name="icon">
 			<Icon
 				src={ExclamationTriangle}
@@ -35,10 +36,12 @@
 	{/if}
 
 	<span class="text-lg font-bold max-w-xl">
+		<!-- contains the title text, displayed below the icon -->
 		<slot name="title">Nothing to display</slot>
 	</span>
 
 	<div class="max-w-xl">
+		<!-- inserted into a `<div>` below the description -->
 		<slot />
 	</div>
 </div>

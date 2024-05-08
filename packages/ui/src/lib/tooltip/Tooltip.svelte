@@ -68,6 +68,7 @@
 		class="inline-flex items-center"
 	>
 		{#if $$slots.hint}
+			<!-- if present, replaces the default `hintLabel` and icon  -->
 			<slot name="hint" />
 		{:else}
 			{hintLabel}
@@ -87,6 +88,7 @@
 		class="absolute max-w-[200px] text-sm p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md z-50"
 		use:floatingContent={dynamicOptions}
 	>
+		<!-- the text that will be displayed in the tooltip -->
 		<slot />
 
 		<div

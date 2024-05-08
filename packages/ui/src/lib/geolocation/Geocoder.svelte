@@ -278,6 +278,7 @@
 	{/if}
 
 	{#if showSuggestionList && suggestions}
+		<!-- component that will render the list of suggestions (e.g, `<GeocoderSuggestionList>`)-->
 		<slot
 			attribution={adapter?.attribution ? adapter.attribution() : undefined}
 			{suggestions}

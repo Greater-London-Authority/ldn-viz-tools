@@ -206,5 +206,6 @@
 	role="button"
 	tabindex="0"
 >
+	<!-- contents of the button -->
 	<slot />
 </svelte:element>

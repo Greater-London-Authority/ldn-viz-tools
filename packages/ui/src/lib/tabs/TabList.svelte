@@ -41,5 +41,6 @@
 </script>
 
 <div class={tabListClasses} role="tablist">
+	<!-- should contain a series of `<TabLabel>` components  -->
 	<slot />
 </div>

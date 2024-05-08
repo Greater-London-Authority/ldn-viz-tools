@@ -104,6 +104,7 @@
 						{/if}
 
 						{#if hasChildren}
+							<!-- content to display below the `description`-->
 							<slot />
 						{/if}
 					</div>
