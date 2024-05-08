@@ -1,9 +1,6 @@
 <script lang="ts">
 	import Checkbox from './Checkbox.svelte';
-
-	const uuidLength = 36;
-	const lastTwelveUuidChars = uuidLength - 12;
-	const selectAllId = crypto.randomUUID().slice(lastTwelveUuidChars);
+	import { randomId } from '../utils/randomId';
 
 	export let options: {
 		id: string;
@@ -55,7 +52,7 @@
 <div>
 	{#if !buttonsHidden}
 		<Checkbox
-			id={selectAllId}
+			id={randomId()}
 			label="Select all"
 			color="#3787D2"
 			checked={allCheckboxesCheckedOrDisabled}
