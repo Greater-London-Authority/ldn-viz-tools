@@ -23,9 +23,7 @@
 				}
 			}
 		},
-		args: {
-			label: 'Label for Checkbox'
-		}
+		args: {}
 	};
 </script>
 
@@ -35,15 +33,16 @@
 	let selectedOptions: string[] = ['bus', 'underground'];
 
 	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
+		{ id: 'bus', name: 'bus', label: 'Bus stops', color: '#00AEEF' },
 		{
 			id: 'train',
+			name: 'train',
 			label: 'Train stations',
 			color: '#008D48',
 			hint: 'Excluding underground stations'
 		},
-		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
+		{ id: 'underground', name: 'underground', label: 'Underground stations', color: '#9E0059' },
+		{ id: 'taxi', name: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
 	];
 </script>
 

@@ -1,10 +1,11 @@
 <script context="module" lang="ts">
 	export interface CheckboxProps {
+		id: string;
+		name: string;
 		color: string;
 		checked: boolean;
 		indeterminate: boolean;
 		label: string;
-		id: string;
 		disabled: boolean;
 		hint: string;
 		hintLabel: string;
@@ -13,24 +14,25 @@
 
 <script lang="ts">
 	import Tooltip from '../tooltip/Tooltip.svelte';
+	import { randomId } from '../utils/randomId';
+
+	export let id = randomId();
+	export let name = '';
 
 	/** A hex string to add a color to the box - this should correspond to the design system colors. */
 	export let color: CheckboxProps['color'] = '';
 	export let checked: CheckboxProps['checked'] = false;
 	export let indeterminate: CheckboxProps['indeterminate'] = false;
 	export let label: CheckboxProps['label'];
-	export let id: CheckboxProps['id'];
 	export let disabled: CheckboxProps['disabled'] = false;
 	export let hint: CheckboxProps['hint'] = '';
 	export let hintLabel: CheckboxProps['hintLabel'] = '';
-
-	let inputID = `input-${id}`;
 </script>
 
 <label class="flex items-center">
 	<input
-		id={inputID}
-		name={id}
+		{id}
+		{name}
 		class="form-checkbox"
 		type="checkbox"
 		bind:checked
@@ -40,6 +42,7 @@
 		style={color
 			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
 			: ''}
+		{...$$restProps}
 	/>
 	<span class="mx-2 form-label">{label}</span>
 	{#if hint}

@@ -7,6 +7,7 @@
 
 	export let options: {
 		id: string;
+		name?: string;
 		label: string;
 		disabled?: boolean;
 		color?: string;
@@ -54,7 +55,12 @@
 
 <div>
 	{#if !buttonsHidden}
+		<!--
+			form="" should prevent this checkbox from being included in form
+			submissions.
+		-->
 		<Checkbox
+			form=""
 			id={selectAllId}
 			label="Select all"
 			color="#3787D2"
@@ -68,6 +74,7 @@
 		{#each options as option}
 			<Checkbox
 				id={option.id}
+				name={option.name}
 				label={option.label}
 				color={option.color}
 				disabled={option.disabled}
