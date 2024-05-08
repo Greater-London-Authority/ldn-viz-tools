@@ -8,3 +8,4 @@ CHANGED: update `Input` to export the bindable input element value.
 CHANGED: update `Input` to allow a format value function to be passed that formats the value when unfocusing the input.
 CHANGED: update `InputWrapper` to allow tooltip hints in the label.
 CHANGED: update `Input` and `InputWrapper` with aria and accessibility attributes.
+CHANGED: update `Select` with `InputWrapper` changes.

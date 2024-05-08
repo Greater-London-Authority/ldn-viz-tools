@@ -5,16 +5,19 @@
 	 * @component
 	 */
 
+	import { randomId } from '../utils/randomId';
+
 	import SvelteSelect from 'svelte-select';
 	import InputWrapper from '../input/InputWrapper.svelte';
 
 	export let items: { [key: string]: any }[];
 
-	export let id: string;
+	export let id = randomId();
 	export let name = '';
 	export let placeholder = 'Select an option';
 	export let disabled = false;
-	export let error = false;
+	export let error = '';
+	export let hasError = !!error;
 
 	export let labelField = 'label';
 
@@ -101,7 +104,7 @@
 			{itemId}
 			{loadOptions}
 			{containerStyles}
-			hasError={error}
+			{hasError}
 			{filterSelectedItems}
 			{required}
 			{closeListOnChange}

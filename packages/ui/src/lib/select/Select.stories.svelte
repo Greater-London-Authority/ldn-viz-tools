@@ -54,9 +54,8 @@
 			{items}
 			label="Label"
 			id="labelled-input"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 		/>
 	</div>
 </Story>
@@ -74,9 +73,8 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			descriptionAlignment="right"
 			optional
@@ -91,9 +89,8 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			optional
 			multiple
@@ -114,13 +111,11 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			optional
-			error
-			errorMessage="something has gone wrong here"
+			error="something has gone wrong here"
 		/>
 	</div>
 </Story>
@@ -132,9 +127,8 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			disabled
 			optional
@@ -146,7 +140,7 @@
 	<div class="w-[500px] flex flex-col gap-2">
 		<p>
 			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
-			object including the <code>label</code> as well as <code>vlaue</code>)
+			object including the <code>label</code> as well as <code>value</code>)
 		</p>
 
 		<div>Current value: <span class="font-bold">{justValue}</span></div>

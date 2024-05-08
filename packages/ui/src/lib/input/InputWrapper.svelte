@@ -3,16 +3,16 @@
 	import { classNames } from '../utils/classNames';
 
 	export let label = '';
-	export let id: string;
+	export let id: undefined | string = undefined;
 
-	export let discriptionId: string;
+	export let discriptionId: undefined | string = undefined;
 	export let description = '';
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 
 	export let hintLabel = '';
 	export let hint = '';
 
-	export let errorId: string;
+	export let errorId: undefined | string = undefined;
 	export let error = '';
 
 	export let disabled = false;
