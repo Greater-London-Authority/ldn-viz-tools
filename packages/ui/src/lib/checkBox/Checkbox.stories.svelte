@@ -22,6 +22,13 @@
 					type: { summary: 'string' }
 				}
 			},
+			name: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
 			hint: {
 				control: { type: 'text' },
 				table: {
@@ -81,7 +88,7 @@
 </Story>
 
 <Story name="Multiple checkboxes not in group">
-	<Checkbox color="#00AEEF" label="Foo" id="foo" />
-	<Checkbox color="#008D48" label="Bar" id="bar" />
-	<Checkbox color="#9E0059" label="Baz" id="baz" />
+	<Checkbox color="#00AEEF" label="Foo" name="foo" />
+	<Checkbox color="#008D48" label="Bar" name="bar" />
+	<Checkbox color="#9E0059" label="Baz" name="baz" />
 </Story>
