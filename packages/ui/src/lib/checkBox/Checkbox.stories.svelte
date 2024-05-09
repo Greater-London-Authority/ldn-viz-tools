@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
 	import Checkbox from './Checkbox.svelte';
-	import CheckboxGroup from './CheckboxGroup.svelte';
 
 	export const meta = {
 		title: 'Ui/Checkbox',
@@ -48,35 +47,13 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	let checked = false;
-
-	let selectedOptions: string[] = ['bus', 'underground'];
-
-	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
-		{
-			id: 'train',
-			label: 'Train stations',
-			color: '#008D48',
-			hint: 'Excluding underground stations'
-		},
-		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
-	];
 </script>
 
 <Template let:args>
 	<Checkbox {...args} />
 </Template>
 
-<Story
-	name="Default"
-	source
-	parameters={{
-		options: {
-			showPanel: true
-		}
-	}}
-/>
+<Story name="Default" source />
 
 <Story name="Single checkbox">
 	<Checkbox bind:checked id="single_id" label="Foo" />
@@ -91,20 +68,6 @@
 <Story name="Single checkbox with hint">
 	<Checkbox bind:checked id="hint_id" label="Foo" hint="A helpful hint" />
 	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Checked: {checked}</p>
-</Story>
-
-<Story name="Checkbox Group" id="CheckboxGroupStory">
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
-</Story>
-
-<Story name="Checkbox Group - disabled buttons">
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
 </Story>
 
 <Story name="Single colored checkbox">

@@ -1,24 +1,36 @@
-<!-- 
-	// TODO CHECK TYPES FOR STORY BOOK
-	<script context="module" lang="ts">
-	export interface DataDownloadButtonProps {
-		format?: 'CSV' | 'JSON';
-		data: any;
-		filename: string;
-		disabled: boolean;
-	}
-</script> -->
-
 <script lang="ts">
+	/**
+	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.
+	 * @component
+	 */
+
 	import Button from '../button/Button.svelte';
 
 	import { csvFormat } from 'd3-dsv';
 
+	/**
+	 * The data format of the downloaded file.
+	 */
 	export let format: 'CSV' | 'JSON' | undefined;
+
+	/**
+	 * The data that will be encoded in the downloaded file (formatted as an array of objects).
+	 */
 	export let data: Record<string, number | string>[];
+
+	/**
+	 * The name the downloaded file will be saved with.
+	 */
 	export let filename: string;
 
+	/**
+	 * If `true`, the user will not be able to interact with the button to download data.
+	 */
 	export let disabled = false;
+
+	/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
+	 */
 	export let columnMapping: undefined | { [oldName: string]: string };
 
 	const enforceExtension = (name: string, extension: string) => {
@@ -64,5 +76,6 @@
 </script>
 
 <Button on:click={download} {disabled} {...$$restProps}>
+	<!-- contents of the button -->
 	<slot />
 </Button>

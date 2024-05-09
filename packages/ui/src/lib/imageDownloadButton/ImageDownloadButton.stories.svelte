@@ -1,3 +1,22 @@
+<script context="module" lang="ts">
+	import ImageDownloadButton from './ImageDownloadButton.svelte';
+
+	export const meta = {
+		title: 'Ui/ImageDownloadButton',
+		component: ImageDownloadButton,
+		argTypes: {
+			format: {
+				options: ['PNG', 'SVG'],
+				control: { type: 'radio' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			}
+		}
+	};
+</script>
+
 <script lang="ts">
 	import { Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -5,7 +24,6 @@
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
-	import ImageDownloadButton from './ImageDownloadButton.svelte';
 
 	let svgRef;
 	let svgRef2;

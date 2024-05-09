@@ -26,7 +26,7 @@
 	<MapControlGroup {...args} />
 </Template>
 
-<Story name="Positioning">
+<Story name="Positioning labels">
 	<MapApp>
 		<Map
 			options={{
@@ -51,6 +51,43 @@
 				<p>
 					The named layout positions are shown around the edges of this map. If using typescript you
 					can import the <code>MapControlGroupPositions</code> enum.
+				</p>
+			</div>
+		</Map>
+	</MapApp>
+</Story>
+
+<Story name="Positioning controls">
+	<MapApp>
+		<Map
+			options={{
+				style: os_light_vts,
+				transformRequest: appendOSKeyToUrl(OS_KEY)
+			}}
+		>
+			{#each Object.keys(MapControlGroupPositions) as position}
+				{#if position != 'TopRightOffset'}
+					<MapControlGroup {position}>
+						<div class="text-white w-80 flex pointer-events-auto">
+							<input
+								type="text"
+								class="grow bg-core-grey-500 placeholder-core-grey-200 p-2"
+								placeholder="Placeholder for the location search"
+							/>
+							<button title="Find my location" class="bg-core-grey-800 w-10 h-10 text-3xl">
+								◎
+							</button>
+						</div>
+						<MapControlZoom />
+					</MapControlGroup>
+				{/if}
+			{/each}
+
+			<div
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white text-center p-4 space-y-4"
+			>
+				<p>
+					The alignment of elements within a <code>MapControlGroup</code> depends on its position.
 				</p>
 			</div>
 		</Map>

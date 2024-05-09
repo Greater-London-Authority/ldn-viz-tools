@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * The `<Tooltip>` component renders a tooltip target, and displays a message in a tooltip when a user mouses-over it.
+	 *
+	 * **Alternatives**: for longer messages, or messages that must persist until being dismissed, consider using a [Modal](./?path=/docs/ui-modal--documentation).
+	 * @component
+	 */
+
 	import { arrow } from 'svelte-floating-ui';
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { writable, type Writable } from 'svelte/store';
@@ -11,7 +18,14 @@
 	import { floatingRef } from '../tooltip/tooltip.js';
 	import Modal from '../modal/Modal.svelte';
 
+	/**
+	 * text that appears in the tooltip target, next to the icon
+	 */
 	export let hintLabel = 'what is this?';
+
+	/**
+	 * text size for the tooltip target
+	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
 	export let modalTitle = '';
@@ -86,6 +100,7 @@
 		class="inline-flex items-center"
 	>
 		{#if $$slots.hint}
+			<!-- if present, replaces the default `hintLabel` and icon  -->
 			<slot name="hint" />
 		{:else}
 			{hintLabel}
@@ -116,6 +131,7 @@
 		class="absolute max-w-[200px] text-sm p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md z-50"
 		use:floatingContent={dynamicOptions}
 	>
+		<!-- the text that will be displayed in the tooltip -->
 		<slot />
 
 		<div

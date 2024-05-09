@@ -1,7 +1,21 @@
 <script>
+	/**
+	 * The `<Spinner>` component displays an animation to show that an operation (such as data loading) is currently in progress.
+	 *
+	 * **Alternatives**: if it is necessary to display an explanation of what is happening, or to provide a placeholder to occupy space that will be occupied once an operation has completed, then consider using the [Non-Ideal State](./?path=/docs/ui-nonidealstate--documentation) component.
+	 * @component
+	 */
+
 	import { classNames } from '../utils/classNames';
 
+	/**
+	 * A TailwindCSS class (e.g., `stroke-core-blue-200`) to set the color of the background circle.
+	 */
 	export let circleColorClass = '';
+
+	/**
+	 * A TailwindCSS class (e.g., `stroke-core-glaPink-600`) to set the color of the arc whose movement is animated.
+	 */
 	export let arcColorClass = '';
 
 	$: circleClasses = classNames(
