@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import ImageDownloadButton from './ImageDownloadButton.svelte';
 
 	export const meta = {
@@ -20,9 +21,6 @@
 <script lang="ts">
 	import { Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
 	let svgRef;
@@ -30,8 +28,6 @@
 	let svgRef3;
 	let htmlRef: HTMLElement;
 </script>
-
-<Meta title="Ui/ImageDownloadButton" component={ImageDownloadButton} />
 
 <Template let:args>
 	<svg bind:this={svgRef} width="100" height="100">

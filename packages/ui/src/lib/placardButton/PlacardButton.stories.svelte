@@ -1,13 +1,16 @@
-<script>
+<script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+
 	import { DocumentArrowDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
 	import PlacardButton from './PlacardButton.svelte';
-</script>
 
-<Meta title="Ui/PlacardButton" component={PlacardButton} />
+	export const meta = {
+		title: 'Ui/PlacardButton',
+		component: PlacardButton
+	};
+</script>
 
 <Template let:args>
 	<div class="max-w-xl">
