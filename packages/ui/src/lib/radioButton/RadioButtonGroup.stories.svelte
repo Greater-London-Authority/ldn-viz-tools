@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import RadioButtonGroup from './RadioButtonGroup.svelte';
 
 	export const meta = {
@@ -8,8 +9,6 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	let selectedId: string;
 
 	let optionsForGroup = [
