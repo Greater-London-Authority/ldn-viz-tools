@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-CHANGED: add `name` prop to `Checkbox` and `CheckboxGroup` options so it can be used within forms.
+CHANGED: add optional `name` prop to `Checkbox` and to `options` props of `CheckboxGroup` so their values can be included with form submissions.
