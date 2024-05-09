@@ -1,6 +1,14 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
 	import RadioButtonGroup from './RadioButtonGroup.svelte';
+
+	export const meta = {
+		title: 'Ui/RadioButtonGroup',
+		component: RadioButtonGroup
+	};
+</script>
+
+<script lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	let selectedId: string;
 
@@ -11,8 +19,6 @@
 		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
 	];
 </script>
-
-<Meta title="Ui/RadioButtonGroup" component={RadioButtonGroup} />
 
 <Template let:args>
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId {...args} />

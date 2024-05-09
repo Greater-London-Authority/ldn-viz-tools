@@ -1,9 +1,13 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-	import Input from './Input.svelte';
-</script>
+<script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-<Meta title="Ui/Input" component={Input} />
+	import Input from './Input.svelte';
+
+	export const meta = {
+		title: 'Ui/Input',
+		component: Input
+	};
+</script>
 
 <Template let:args>
 	<div class="w-96">
