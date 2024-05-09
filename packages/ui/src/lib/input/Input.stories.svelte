@@ -111,7 +111,11 @@
 
 <Story name="Custom format function">
 	<div class="w-96">
-		<Input label="Type a number" description="It will be rounded to 2 d.p. when the input loses focus" format={round} />
+		<Input
+			label="Type a number"
+			description="It will be rounded to 2 d.p. when the input loses focus"
+			format={round}
+		/>
 	</div>
 </Story>
 
