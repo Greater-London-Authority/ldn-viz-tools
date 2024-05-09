@@ -13,7 +13,7 @@
 	import { classNames } from '../utils/classNames';
 
 	/**
-	 * Background classes to apply to the whole image.
+	 * Background classes to apply to both the `<svg>` and `<path>`.
 	 */
 	export let bgClass = `fill-white dark:fill-core-grey-800`;
 
@@ -27,7 +27,10 @@
 	 */
 	export let otherClasses = '';
 
-	$$restProps.class = classNames(strokeClass, bgClass, otherClasses);
+	$: {
+		$$restProps.class = classNames(strokeClass, bgClass, otherClasses);
+	}
+
 </script>
 
 <svg
