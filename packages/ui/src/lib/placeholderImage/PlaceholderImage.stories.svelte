@@ -12,6 +12,12 @@
 					defaultValue: { summary: '' },
 					type: { summary: 'string' }
 				}
+			},
+			$$restprops: {
+				description: 'Any other props are passed through to `<svg>` element',
+				table: {
+					category: 'properties'
+				}
 			}
 		},
 		args: {}
