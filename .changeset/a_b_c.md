@@ -9,3 +9,4 @@ CHANGED: update `Input` to allow a format value function to be passed that forma
 CHANGED: update `InputWrapper` to allow tooltip hints in the label.
 CHANGED: update `Input` and `InputWrapper` with aria and accessibility attributes.
 CHANGED: update `Select` with `InputWrapper` changes.
+CHANGED: changed props relating to tooltips - removed boolean `hint` prop, renamed `hintTooltipContent` -> `hint`, renamed `hintText` -> `hintLabel`
