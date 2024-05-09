@@ -5,6 +5,8 @@
 	 * is loading. This avoids the layout of a page or widget changing suddenly
 	 * due to a slow or user initiated image loads.
 	 *
+	 * **Alternatives**: if you need a placeholder that can display a message, consider using the [NonIdealState](./?path=/docs/ui-nonidealstate--documentation) component.
+	 *
 	 * @component
 	 */
 
