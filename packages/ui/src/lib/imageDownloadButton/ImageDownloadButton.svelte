@@ -1,16 +1,50 @@
 <script lang="ts">
+	/**
+	 * The `<ImageDownloadButton>` component renders a button which, when clicked on, downloads an image file showing either an `HTML` or `SVG` element and its children.
+	 * @component
+	 */
+
 	import html2canvas from 'html2canvas';
 	import Button from '../button/Button.svelte';
 
+	/**
+	 * A `SVGElement` node to be converted.
+	 */
 	export let svgNode: SVGElement | undefined;
 
+	/**
+	 * An `HTMLElement` node to be converted.
+	 */
 	export let htmlNode: HTMLElement | undefined;
+
+	/**
+	 * `id` of element to add padding to
+	 */
 	export let idToPad = '';
+
+	/**
+	 * Amount of padding to add, as a string including units.
+	 */
 	export let padding = '30px';
 
+	/**
+	 * If converting an SVG to PNG, the resolution of the PNG will be `scaleFactor` times the size at which the SVG was displayed at.
+	 */
 	export let scaleFactor = 2;
-	export let filename: string | undefined = undefined;
+
+	/**
+	 * The name the downloaded file will be saved with.
+	 */
+	export let filename = '';
+
+	/**
+	 * If `true`, the user will not be able to interact with the button to download data.
+	 */
 	export let disabled = false;
+
+	/**
+	 * The image format of the downloaded file.
+	 */
 	export let format: 'PNG' | 'SVG' | undefined = 'PNG';
 
 	const downloadFromURL = (url: string) => {
@@ -127,5 +161,6 @@
 </script>
 
 <Button on:click={download} {disabled} {...$$restProps}>
+	<!-- contents of the button -->
 	<slot />
 </Button>

@@ -1,6 +1,8 @@
 <script lang="ts">
 	/**
-	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs. It's styled in the way used by most CIU web maps/visualizations.
+	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs or selecting one option from a small number of alternatives.
+	 *
+	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation).
 	 * @component
 	 */
 
@@ -8,10 +10,24 @@
 	import type { Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 
+	/**
+	 * String appearing next to the radio button.
+	 */
 	export let label = '';
+
+	/**
+	 * Value that will be assigned to `selectedId` of parent `<RadioButtonGroupSolid>` if this item is selected.
+	 */
 	export let id: string;
+
+	/**
+	 * Name of group to which radio button is assigned.
+	 */
 	export let name: string | undefined;
 
+	/**
+	 * if `true` then user cannot interact with this button to select it
+	 */
 	export let disabled = false;
 
 	let inputID = `input-${id}`;
@@ -38,6 +54,7 @@
 			'form-label flex flex-col justify-center items-center p-2 w-full ring-1 ring-white peer-checked:bg-core-blue-600 hover:peer-checked:bg-core-blue-600 peer-checked:text-white  dark:ring-core-grey-800'
 		)}
 	>
+		<!-- contents of the radio button (name and/or icon) -->
 		<slot>{label}</slot>
 	</label>
 </div>
