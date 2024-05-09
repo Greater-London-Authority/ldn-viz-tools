@@ -20,6 +20,7 @@
 	];
 
 	let justValue: number;
+	let error = '';
 </script>
 
 <Template let:args>
@@ -153,5 +154,18 @@
 		<Button on:click={() => (justValue = null)}>Clear</Button>
 
 		<Select {items} bind:justValue id="labelled-input" />
+	</div>
+</Story>
+
+<Story name="Setting and clearing error message">
+	<div class="w-[500px] flex flex-col gap-2">
+		<div>
+			<Button on:click={() => (error = 'OH NO')}>Set error</Button>
+			<Button on:click={() => (error = '')}>Clear error</Button>
+		</div>
+
+		<span><code>error is:</code> {error}</span>
+
+		<Select {items} id="labelled-input" {error} />
 	</div>
 </Story>

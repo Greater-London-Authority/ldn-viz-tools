@@ -17,7 +17,6 @@
 	export let placeholder = 'Select an option';
 	export let disabled = false;
 	export let error = '';
-	export let hasError = !!error;
 
 	export let labelField = 'label';
 
@@ -104,7 +103,7 @@
 			{itemId}
 			{loadOptions}
 			{containerStyles}
-			{hasError}
+			hasError={!!error}
 			{filterSelectedItems}
 			{required}
 			{closeListOnChange}
