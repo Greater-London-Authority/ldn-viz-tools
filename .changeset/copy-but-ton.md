@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-ADDED: `CopyButton` that copies content to clipboard on click. 
+ADDED: `CopyButton` that copies content to clipboard on click.
