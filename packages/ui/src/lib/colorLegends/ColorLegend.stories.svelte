@@ -1,6 +1,14 @@
-<script lang="ts">
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
+	import { Story } from '@storybook/addon-svelte-csf';
+	import ColorLegend from './ColorLegend.svelte';
 
+	export const meta = {
+		title: 'Ui/Legends/ColorLegend',
+		component: ColorLegend
+	};
+</script>
+
+<script lang="ts">
 	import { cumsum } from 'd3-array';
 
 	import {
@@ -33,7 +41,6 @@
 	import { range } from 'd3-array';
 
 	import Button from '../button/Button.svelte';
-	import ColorLegend from './ColorLegend.svelte';
 
 	const continuousColorScale = scaleSequential(interpolateBlues).domain([0, 10]);
 
@@ -55,8 +62,6 @@
 	let scale;
 	let randomThresholdScale;
 </script>
-
-<Meta title="Ui/Legends/ColorLegend" component={ColorLegend} />
 
 <Story name="Sequential color scale">
 	<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
