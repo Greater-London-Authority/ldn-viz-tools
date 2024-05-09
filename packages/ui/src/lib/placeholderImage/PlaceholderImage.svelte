@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { classNames } from '../utils/classNames';
-
 	/**
 	 * The `<PlaceholderImage>` component shows a generic placeholder image as an
 	 * `<svg>` element. This can be used in place of a real image or whilst one
@@ -9,6 +7,8 @@
 	 *
 	 * @component
 	 */
+
+	import { classNames } from '../utils/classNames';
 
 	/**
 	 * Background classes to apply to the whole image.
