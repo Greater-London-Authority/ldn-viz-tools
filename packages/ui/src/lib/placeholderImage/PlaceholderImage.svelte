@@ -23,7 +23,7 @@
 	export let strokeClass = 'stroke-core-blue-600';
 
 	/**
-	 * Other classes to apply to the SVG.
+	 * Other classes to apply to the `<svg>`.
 	 */
 	export let otherClasses = '';
 
