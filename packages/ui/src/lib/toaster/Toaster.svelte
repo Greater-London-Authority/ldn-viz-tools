@@ -35,7 +35,7 @@
 	 *	id: 'a-warning-toast',
 	 *	type: ToastType.Warning,
 	 *	closeButton: true,
-     * timeToLive: 10 * 1000, // in ms, so this is 10 seconds
+	 * timeToLive: 10 * 1000, // in ms, so this is 10 seconds
 	 *});
 	 *
 	 * // calling .post() repeatedly on same toast object will refresh it, rather than creating duplicate toasts
