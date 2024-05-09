@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { classNames } from '../utils/classNames';
+
 	/**
 	 * The `<PlaceholderImage>` component shows a generic placeholder image as an
 	 * `<svg>` element. This can be used in place of a real image or whilst one
@@ -11,11 +13,19 @@
 	/**
 	 * Background classes to apply to the whole image.
 	 */
-	export let bgClass: string = `fill-white dark:fill-core-grey-800`;
+	export let bgClass = `fill-white dark:fill-core-grey-800`;
 
-	const baseClass = 'stroke-core-blue-600';
-	const userClass = $$restProps.class ? $$restProps.class : '';
-	$$restProps.class = baseClass + ' ' + userClass + ' ' + bgClass;
+	/**
+	 * Classes to apply to the stroke.
+	 */
+	export let strokeClass = 'stroke-core-blue-600';
+
+	/**
+	 * Other classes to apply to the SVG.
+	 */
+	export let otherClasses = '';
+
+	$$restProps.class = classNames(strokeClass, bgClass, otherClasses);
 </script>
 
 <svg

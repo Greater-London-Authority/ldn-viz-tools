@@ -34,12 +34,16 @@
 
 <Story name="Stroke">
 	<div class="max-w-md">
-		<PlaceholderImage class="stroke-core-red-400" />
+		<PlaceholderImage strokeClass="stroke-core-red-400 stroke-2" />
 	</div>
 </Story>
 
 <Story name="Width and height">
 	<PlaceholderImage width="160" height="200" />
+</Story>
+
+<Story name="Width and height as classes">
+	<PlaceholderImage otherClasses="w-40 h-52" />
 </Story>
 
 <Story name="Fixed background colour">
