@@ -1,9 +1,11 @@
 <script context="module">
+	import TabLabel from './TabLabel.svelte';
 	import TabList from './TabList.svelte';
 
 	export const meta = {
 		title: 'Ui/Tabs',
 		component: TabList,
+		subcomponents: { TabLabel },
 
 		argTypes: {
 			orientation: {
@@ -18,7 +20,6 @@
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import TabLabel from './TabLabel.svelte';
 	let selectedValue = 'aggregates';
 </script>
 

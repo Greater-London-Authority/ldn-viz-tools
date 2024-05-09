@@ -1,13 +1,18 @@
+<script context="module" lang="ts">
+	import NonIdealState from './NonIdealState.svelte';
+
+	export const meta = {
+		title: 'Ui/NonIdealState',
+		component: NonIdealState
+	};
+</script>
+
 <script lang="ts">
 	import { QuestionMarkCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
-	import NonIdealState from './NonIdealState.svelte';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 </script>
-
-<Meta title="Ui/NonIdealState" component={NonIdealState} />
 
 <Template let:args>
 	<div class="w-96 h-96">
