@@ -4,14 +4,34 @@
 
 	export const meta = {
 		title: 'Ui/Input',
-		component: Input
+		component: Input,
+		argTypes: {
+			// this is a module export, not a prop, so don't include it in table
+			trimInput: {
+				table: {
+					disable: true
+				}
+			},
+			/*
+			type: {
+				options: ['color', 'date', 'datetime-local', 'email'],
+				control: { type: 'select' }
+			},
+			*/
+
+			descriptionAlignment: {
+				options: ['left', 'right'],
+				control: { type: 'select' }
+			}
+		}
 	};
 </script>
 
-<script>
+<script lang="ts">
 	let value = '';
-</script>
 
+	const round = (x: string) => Math.round(+x * 100) / 100;
+</script>
 
 <Template let:args>
 	<div class="w-96">
@@ -86,6 +106,12 @@
 <Story name="Disabled">
 	<div class="w-96">
 		<Input label="Disabled" name="disabled-input" disabled />
+	</div>
+</Story>
+
+<Story name="Custom format function">
+	<div class="w-96">
+		<Input label="Type a number" description="It will be rounded to 2 d.p. when the input loses focus" format={round} />
 	</div>
 </Story>
 

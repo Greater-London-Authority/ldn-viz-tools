@@ -24,28 +24,80 @@
 </script>
 
 <script lang="ts">
-	import InputWrapper from './InputWrapper.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
+	import InputWrapper from './InputWrapper.svelte';
 
+	/**
+	 * The `type` of the `<input>` element (see [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)).
+	 */
 	export let type = 'text';
+
+	/**
+	 * The `inputmode` of the `<input>` element, which provides a hint about what type of virtual keyboard to display.
+	 */
 	export let inputmode: InputMode = undefined;
 
+	/**
+	 * The `id` of the `<input>` element: defaults to a randomly-generated value.
+	 */
 	export let id = randomId();
+
+	/**
+	 * Text displayed above the `<input>` element.
+	 */
 	export let label = '';
+
+	/**
+	 * The `name` of the `<input>` element. Defaults to same value as `id`. Optional, unless value of the input needs to be included with a form submission.
+	 */
 	export let name = id;
 
+	/**
+	 * Text that appears below the `<input>` element, in smaller font than the `label`.
+	 */
 	export let description = '';
+
+	/**
+	 * Determines which edge of the `<input>` the description is aligned with.
+	 */
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 
+	/**
+	 * Help text to be displayed in tooltip
+	 */
 	export let hint = '';
+
+	/**
+	 * Text to be displayed next to icon in tooltip trigger.
+	 */
 	export let hintLabel = '';
 
+	/**
+	 * If `false`, then `required` attribute is applied to `<input>`.
+	 */
 	export let optional = false;
+
+	/**
+	 * If `true`, then user is prevented from interacting with the `<input>`.
+	 */
 	export let disabled = false;
 
+	/**
+	 * Function that will be applied to transform the value when the input element loses focus.
+	 * By default, it trims leading and trailing whitespace (but does nothing if `type` is `password`).
+	 */
 	export let format: null | FormatFunction = trimInput;
+
+	/**
+	 * The value of the input. Can be bound to and externally modified.
+	 */
 	export let value = '';
+
+	/**
+	 * Message to be displayed below `<input>` in red text (replacing description).
+	 * If set, then the border of the `<input>` is also red.
+	 */
 	export let error = '';
 
 	let inputType = type;
@@ -106,7 +158,7 @@
 <InputWrapper
 	{label}
 	{id}
-	discriptionId={descriptionId}
+	{descriptionId}
 	{description}
 	{descriptionAlignment}
 	{hintLabel}
