@@ -5,7 +5,7 @@
 	export let label = '';
 	export let id: undefined | string = undefined;
 
-	export let discriptionId: undefined | string = undefined;
+	export let descriptionId: undefined | string = undefined;
 	export let description = '';
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 
@@ -56,7 +56,7 @@
 			{@html error}
 		</span>
 	{:else if description}
-		<span class={descriptionClass} id={discriptionId}>
+		<span class={descriptionClass} id={descriptionId}>
 			{@html description}
 		</span>
 	{/if}
