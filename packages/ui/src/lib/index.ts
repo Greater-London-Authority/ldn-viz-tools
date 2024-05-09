@@ -67,5 +67,6 @@ export { default as Geolocator } from './geolocation/Geolocator.svelte';
 export { default as GeocoderSuggestionList } from './geolocation/GeocoderSuggestionList.svelte';
 
 export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCookieConsent.svelte';
+export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 
 export { classNames } from './utils/classNames';

@@ -1,9 +1,15 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
+<script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import Select from './Select.svelte';
-	import Button from '../button/Button.svelte';
 
+	export const meta = {
+		title: 'Ui/Select',
+		component: Select
+	};
+</script>
+
+<script lang="ts">
+	import Button from '../button/Button.svelte';
 	type Item = { label: string; value: number };
 	let value: Item;
 
@@ -14,9 +20,8 @@
 	];
 
 	let justValue: number;
+	let error = '';
 </script>
-
-<Meta title="Ui/Select" component={Select} />
 
 <Template let:args>
 	<Select {...args} />
@@ -54,9 +59,8 @@
 			{items}
 			label="Label"
 			id="labelled-input"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 		/>
 	</div>
 </Story>
@@ -74,9 +78,8 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			descriptionAlignment="right"
 			optional
@@ -91,9 +94,8 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			optional
 			multiple
@@ -114,13 +116,11 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			optional
-			error
-			errorMessage="something has gone wrong here"
+			error="something has gone wrong here"
 		/>
 	</div>
 </Story>
@@ -132,9 +132,8 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hint
-			hintText="Tooltip text"
-			hintTooltipContent="A brief contextual help message"
+			hintLabel="Tooltip text"
+			hint="A brief contextual help message"
 			description="descriptive text"
 			disabled
 			optional
@@ -142,11 +141,11 @@
 	</div>
 </Story>
 
-<Story name="Binidng to justValue">
+<Story name="Binding to justValue">
 	<div class="w-[500px] flex flex-col gap-2">
 		<p>
 			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
-			object including the <code>label</code> as well as <code>vlaue</code>)
+			object including the <code>label</code> as well as <code>value</code>)
 		</p>
 
 		<div>Current value: <span class="font-bold">{justValue}</span></div>
@@ -155,5 +154,18 @@
 		<Button on:click={() => (justValue = null)}>Clear</Button>
 
 		<Select {items} bind:justValue id="labelled-input" />
+	</div>
+</Story>
+
+<Story name="Setting and clearing error message">
+	<div class="w-[500px] flex flex-col gap-2">
+		<div>
+			<Button on:click={() => (error = 'OH NO')}>Set error</Button>
+			<Button on:click={() => (error = '')}>Clear error</Button>
+		</div>
+
+		<span><code>error is:</code> {error}</span>
+
+		<Select {items} id="labelled-input" {error} />
 	</div>
 </Story>
