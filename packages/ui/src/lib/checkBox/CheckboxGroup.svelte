@@ -15,6 +15,7 @@
 	/**
 	 * Each element of this array defines a checkbox, and is an object with the properties:
 	 * * `id` (string)
+	 * * `name` (string, optional) - used to set the `name` attribute of the `<input>` element
 	 * * `label` (string) - the text displayed next to the checkbox
 	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 	 * * `color` (string, optional) - CSS color of the checkbox
