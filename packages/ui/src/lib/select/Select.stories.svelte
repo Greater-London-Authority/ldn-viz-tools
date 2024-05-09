@@ -1,9 +1,15 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
+<script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import Select from './Select.svelte';
-	import Button from '../button/Button.svelte';
 
+	export const meta = {
+		title: 'Ui/Select',
+		component: Select
+	};
+</script>
+
+<script lang="ts">
+	import Button from '../button/Button.svelte';
 	type Item = { label: string; value: number };
 	let value: Item;
 
@@ -15,8 +21,6 @@
 
 	let justValue: number;
 </script>
-
-<Meta title="Ui/Select" component={Select} />
 
 <Template let:args>
 	<Select {...args} />

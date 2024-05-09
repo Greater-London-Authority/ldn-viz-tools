@@ -1,11 +1,15 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+
+	import Button from '../button/Button.svelte';
 
 	import Spinner from './Spinner.svelte';
-	import Button from '../button/Button.svelte';
-</script>
 
-<Meta title="Ui/Spinner" component={Spinner} />
+	export const meta = {
+		title: 'Ui/Spinner',
+		component: Spinner
+	};
+</script>
 
 <Template let:args>
 	<div class="text-core-grey-800">

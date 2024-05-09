@@ -1,13 +1,16 @@
-<script>
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
+	import { Story } from '@storybook/addon-svelte-csf';
 
 	import LogoByCIU from './LogoByCIU.svelte';
 	import LogoCIU from './LogoCIU.svelte';
 	import LogoLOTI from './LogoLOTI.svelte';
 	import LogoMayor from './LogoMayor.svelte';
-</script>
 
-<Meta title="Ui/Logos" component={LogoLOTI} />
+	export const meta = {
+		title: 'Ui/Logos',
+		component: LogoLOTI
+	};
+</script>
 
 <Story name="Mayor of London">
 	<div class="text-core-grey-800 dark:text-white">
