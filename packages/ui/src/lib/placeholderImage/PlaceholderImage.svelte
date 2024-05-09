@@ -30,7 +30,6 @@
 	$: {
 		$$restProps.class = classNames(strokeClass, bgClass, otherClasses);
 	}
-
 </script>
 
 <svg
