@@ -7,10 +7,7 @@
 	 */
 
 	import Checkbox from './Checkbox.svelte';
-
-	const uuidLength = 36;
-	const lastTwelveUuidChars = uuidLength - 12;
-	const selectAllId = crypto.randomUUID().slice(lastTwelveUuidChars);
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * Each element of this array defines a checkbox, and is an object with the properties:
@@ -83,8 +80,8 @@
 			submissions.
 		-->
 		<Checkbox
+			id={randomId()}
 			form=""
-			id={selectAllId}
 			label="Select all"
 			color="#3787D2"
 			checked={allCheckboxesCheckedOrDisabled}
