@@ -12,13 +12,6 @@
 					disable: true
 				}
 			},
-			/*
-			type: {
-				options: ['color', 'date', 'datetime-local', 'email'],
-				control: { type: 'select' }
-			},
-			*/
-
 			descriptionAlignment: {
 				options: ['left', 'right'],
 				control: { type: 'select' }
