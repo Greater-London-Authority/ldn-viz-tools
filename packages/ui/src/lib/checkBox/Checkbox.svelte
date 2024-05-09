@@ -26,10 +26,10 @@
 	import { randomId } from '../utils/randomId';
 
 	/**
-	* Value set as the `id` attribute of the `<input>` element (defaults to randomly generated value).
-	*/
+	 * Value set as the `id` attribute of the `<input>` element (defaults to randomly generated value).
+	 */
 	export let id = randomId();
-	
+
 	/**
 	 * Value set as the `name` attribute of the `<input>` element (optional, but required if providing value with a form submission)
 	 */
