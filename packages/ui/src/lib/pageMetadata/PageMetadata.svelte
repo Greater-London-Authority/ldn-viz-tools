@@ -1,6 +1,28 @@
 <script lang="ts">
+	/**
+	 * The `<PageMetadata>` component adds metadata (`<meta>`) tags to the `<head>` of the page.
+	 * These tags are used for indexing by search engines, and for constructing preview links on search engine results pages (e.g. Google, DuckDuckGo), social media platforms (e.g. X/Twitter, Facebook), and communication platforms (e.g. MS Teams, WhatsApp).
+	 *
+	 * The `title`, `description` and `url` are required - if any of them are missing, then the component will throw an `Error` that prevents the site from building.
+	 *
+	 * The definitions of properties below are taken from [https://ogp.me](https://ogp.me).
+	 *
+	 * @component
+	 */
+
+	/**
+	 * "The title of your object as it should appear within the graph, e.g., 'The Rock'."
+	 */
 	export let title;
+
+	/**
+	 * "A one to two sentence description of your object."
+	 */
 	export let description;
+
+	/**
+	 * "The canonical URL of your object that will be used as its permanent ID in the graph". Should include the scheme (`http://` or `https://`).
+	 */
 	export let url; // Must be full URL with scheme
 
 	if (!title || !description || !url) {
@@ -8,17 +30,40 @@
 		throw new Error('Metadata component is missing either a title, description, or full URL');
 	}
 
-	// By default, assumes there is a favicon.ico file in the static folder.
+	/**
+	 * URL of the favicon. By default, assumes there is a favicon.ico file in the static folder.
+	 */
 	export let favicon = url.replace(/\/?$/, '/favicon.ico');
 
-	export let type = 'website'; // https://ogp.me/#types
+	/**
+	 * The object type - see [this documentation](https://ogp.me/#types)
+	 */
+	export let type = 'website';
+
+	/**
+	 * "If your object is part of a larger web site, the name which should be displayed for the overall site"
+	 */
 	export let site = 'GLA Intelligence and Analysis Unit';
 
+	/**
+	 * "An image URL which should represent your object within the graph".
+	 * If an `image` is provided, then `imageAlt` should be too.
+	 */
 	export let image = undefined;
+
+	/**
+	 * "A description of what is in the image (not a caption)."
+	 */
 	export let imageAlt = undefined;
 
-	// Image size should be as close to these dimensions as possible.
+	/**
+	 * Image width in pixels. Recommended value is 1200.
+	 */
 	export let imageWidth = 1200;
+
+	/**
+	 * Image height in pixels. Recommended value is 630.
+	 */
 	export let imageHeight = 630;
 </script>
 
