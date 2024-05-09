@@ -19,17 +19,37 @@
 	import Modal from '../modal/Modal.svelte';
 
 	/**
-	 * text that appears in the tooltip target, next to the icon
+	 * Text that appears in the tooltip target, next to the icon.
 	 */
 	export let hintLabel = 'what is this?';
 
 	/**
-	 * text size for the tooltip target
+	 * Text size for the tooltip target.
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
-	export let modalTitle = '';
+	/**
+	 * Description that appears below the title of the modal (the
+	 * `aria-describedby` for the modal points to the element containing this
+	 * text). The presence of this property enables modal toggling on tooltip
+	 * click.
+	 */
 	export let modalDescription = '';
+
+	/**
+	 * Title that appears at the top of the modal.
+	 *
+	 * This property is only applicable if a `modalDescription` or a named slot
+	 * called `modal` is provided.
+	 */
+	export let modalTitle = '';
+
+	/**
+	 * Width of the modal.
+	 *
+	 * This property is only applicable if a `modalDescription` or a named slot
+	 * called `modal` is provided.
+	 */
 	export let modalWidth:
 		| 'sm'
 		| 'md'
@@ -100,7 +120,7 @@
 		class="inline-flex items-center"
 	>
 		{#if $$slots.hint}
-			<!-- if present, replaces the default `hintLabel` and icon  -->
+			<!-- If present, replaces the default `hintLabel` and icon.  -->
 			<slot name="hint" />
 		{:else}
 			{hintLabel}
@@ -115,14 +135,16 @@
 	</span>
 </Button>
 
-{#if $$slots.modal}
+{#if modalDescription || $$slots.modal}
 	<Modal
 		bind:isOpen={isModalOpen}
 		title={modalTitle}
 		description={modalDescription}
 		width={modalWidth}
 	>
-		<slot name="modal" />
+		{#if $$slots.modal}
+			<slot name="modal" />
+		{/if}
 	</Modal>
 {/if}
 
@@ -131,7 +153,7 @@
 		class="absolute max-w-[200px] text-sm p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md z-50"
 		use:floatingContent={dynamicOptions}
 	>
-		<!-- the text that will be displayed in the tooltip -->
+		<!-- Text that will be displayed in the tooltip. -->
 		<slot />
 
 		<div
