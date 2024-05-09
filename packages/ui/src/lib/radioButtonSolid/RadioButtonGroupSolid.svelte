@@ -1,16 +1,36 @@
 <script lang="ts">
+	/**
+	 * The `RadioButtonGroupSolid` component contains a set of `RadioButtonSolid` buttons for switching between tabs or selecting one option from a small number of alternatives.
+	 *
+	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation).
+	 * @component
+	 */
+
 	import { setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
+
+	/**
+	 * the `id` of the entry in the `options` array that is currently selected.
+	 */
 	export let selectedId = '';
+
+	/**
+	 * the `name` assiged to the group of radio buttons.
+	 */
 	export let name: string;
+
+	/**
+	 * Each element of this array defines a radio button, and is an object with the properties:
+	 * * `id` (string)
+	 * * `label` (string) - the text displayed within the button
+	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
+	 */
 
 	export let options: {
 		id: string;
 		label: string;
 		disabled?: boolean;
-		icon?: SVGElement;
-		iconPosition?: 'above' | 'below';
 	}[] = [];
 
 	const val: Writable<string> = writable(selectedId);
@@ -32,6 +52,7 @@
 			<RadioButtonSolid id={option.id} label={option.label} disabled={option.disabled} {name} />
 		{/each}
 	{:else}
+		<!-- should contain a series of `<RadioButtonSolid>` components  -->
 		<slot />
 	{/if}
 </div>

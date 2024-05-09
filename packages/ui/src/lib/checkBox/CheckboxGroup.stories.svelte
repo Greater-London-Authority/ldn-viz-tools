@@ -4,27 +4,7 @@
 	export const meta = {
 		title: 'Ui/CheckboxGroup',
 		component: CheckboxGroup,
-		argTypes: {
-			color: {
-				control: { type: 'color' }
-			},
-			label: {
-				control: { type: 'text' },
-				table: {
-					defaultValue: { summary: '' },
-					type: { summary: 'string' }
-				}
-			},
-			id: {
-				control: { type: 'text' },
-				table: {
-					defaultValue: { summary: '' },
-					type: { summary: 'string' }
-				}
-			}
-		},
-		args: {}
-	};
+	}
 </script>
 
 <script lang="ts">

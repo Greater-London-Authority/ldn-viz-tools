@@ -5,7 +5,7 @@
 	import Button from '../button/Button.svelte';
 </script>
 
-<Meta title="Ui/Spinners" component={Spinner} />
+<Meta title="Ui/Spinner" component={Spinner} />
 
 <Template let:args>
 	<div class="text-core-grey-800">

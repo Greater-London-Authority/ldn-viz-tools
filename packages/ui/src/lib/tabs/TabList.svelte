@@ -1,9 +1,23 @@
 <script lang="ts">
+	/**
+	 * The `<TabList>` component allows users to select a tab from a list of options.
+	 *
+	 * **Alternatives**: if the user's choice doesn't replace what is rendered below (or, for vertical tabs, to the side of) the control then use the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation) or [RadioButtonSolid](./?path=/docs/ui-radiobuttongroupsolid--documentation).
+	 * @component
+	 */
+
 	import { setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 
+	/**
+	 * `id` of the currently selected tab
+	 */
 	export let selectedValue: string | undefined = undefined;
+
+	/**
+	 * orientation of the list of tabs
+	 */
 	export let orientation: 'vertical' | 'horizontal' = 'horizontal';
 
 	const val: Writable<string | undefined> = writable(selectedValue);
@@ -27,5 +41,6 @@
 </script>
 
 <div class={tabListClasses} role="tablist">
+	<!-- should contain a series of `<TabLabel>` components  -->
 	<slot />
 </div>
