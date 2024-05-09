@@ -63,7 +63,7 @@
 		format = null;
 	}
 
-	const discriptionId = `${id}-description`;
+	const descriptionId = `${id}-description`;
 	const errorId = `${id}-error`;
 	let input: HTMLInputElement | HTMLTextAreaElement;
 
@@ -106,7 +106,7 @@
 <InputWrapper
 	{label}
 	{id}
-	{discriptionId}
+	discriptionId={descriptionId}
 	{description}
 	{descriptionAlignment}
 	{hintLabel}
@@ -129,7 +129,7 @@
 			{value}
 			{disabled}
 			required={!optional}
-			aria-describedby={discriptionId}
+			aria-describedby={descriptionId}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
 			on:blur={formatAndUpdateValue}
@@ -166,7 +166,7 @@
 			{value}
 			{disabled}
 			required={!optional}
-			aria-describedby={discriptionId}
+			aria-describedby={descriptionId}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
 			on:blur={formatAndUpdateValue}
