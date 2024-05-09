@@ -50,6 +50,8 @@
 	 */
 	export let labelField = 'label';
 
+	// svelte-select options
+
 	/**
 	 * ???
 	 */
