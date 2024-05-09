@@ -141,7 +141,7 @@
 	</div>
 </Story>
 
-<Story name="Binidng to justValue">
+<Story name="Binding to justValue">
 	<div class="w-[500px] flex flex-col gap-2">
 		<p>
 			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
