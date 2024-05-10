@@ -1,8 +1,3 @@
-<!--
-@component
-This is a test...
--->
-
 <script context="module" lang="ts">
 	/**
 	 * The `<Header>` component appears at the top of a page.
@@ -10,8 +5,6 @@ This is a test...
 	 *
 	 * @component
 	 */
-
-	//export let a='';
 </script>
 
 <nav
