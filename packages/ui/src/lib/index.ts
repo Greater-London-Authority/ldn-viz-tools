@@ -2,6 +2,7 @@
 export { default as Button } from './button/Button.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
+export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as ColorLegendOrdinalHorizontal } from './colorLegends/ColorLegendOrdinalHorizontal.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
