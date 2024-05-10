@@ -33,6 +33,9 @@
 	 * position (usually the `AppShell` component).
 	 */
 	export let position: 'fixed' | 'absolute' = 'absolute';
+	/**
+	 * Colour scheme to use, either `light` or `dark`.
+	 */
 	export let theme: 'light' | 'dark' = 'dark';
 	export let placement: PlacementType = 'right';
 
