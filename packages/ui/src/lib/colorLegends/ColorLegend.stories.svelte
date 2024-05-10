@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import { Story } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import ColorLegend from './ColorLegend.svelte';
 
 	export const meta = {
@@ -62,6 +62,16 @@
 	let scale;
 	let randomThresholdScale;
 </script>
+
+<Template let:args>
+	<ColorLegend
+		color={scaleSequential([0, 100], interpolateViridis)}
+		title="Temperature (°F)"
+		{...args}
+	/>
+</Template>
+
+<Story name="Default" />
 
 <Story name="Sequential color scale">
 	<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
