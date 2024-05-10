@@ -10,7 +10,6 @@
 		title: 'Ui/Header',
 		component: Header,
 		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks },
-		description: 'TEST!'
 	};
 </script>
 
