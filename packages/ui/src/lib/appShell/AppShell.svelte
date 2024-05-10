@@ -35,7 +35,7 @@
 	export let sidebarAlwaysOpen: { [key: string]: AlwaysOpenType } | undefined = undefined;
 
 	/**
-	 * If `true`, then opening the sidebar will push other content to the side (or up/down, depending on the sidebar position), rather than th sidebar being superimposed on the content.
+	 * If `true`, then opening the sidebar will push other content to the side (or up/down, depending on the sidebar position), rather than the sidebar being superimposed on the content.
 	 */
 	export let sidebarPush = false;
 
