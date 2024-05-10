@@ -28,7 +28,7 @@
 	export let width: 'standard' | 'wide' = 'standard';
 	/**
 	 * Position of the sidebar which can be `fixed` to the screen so it's always shown
-	 * in the same screen location regardless of scroll position or `absolute`, 
+	 * in the same screen location regardless of scroll position or `absolute`,
 	 * positioned relative to the nearest parent  container with the `relative` CSS
 	 * position (usually the `AppShell` component).
 	 */
