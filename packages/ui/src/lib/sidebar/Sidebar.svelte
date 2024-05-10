@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * The `<Sidebar>` component renders a sidebar that is typically used to display controls and textual explanation.
+	 *
+	 * It should generally be used inside an [AppShell](.//?path=/docs/app-appshell--documentation)
+	 *
+	 * @component
+	 */
 	import { getContext } from 'svelte';
 	import { type Writable } from 'svelte/store';
 	import { slide } from 'svelte/transition';
@@ -15,8 +22,20 @@
 	import { sidebarWidthStore } from './stores';
 	import type { PlacementType } from './types';
 
+	/**
+	 * Width of the sidebar.
+	 */
 	export let width: 'standard' | 'wide' = 'standard';
+	/**
+	 * Position of the sidebar which can be `fixed` to the screen so it's always shown
+	 * in the same screen location regardless of scroll position or `absolute`, 
+	 * positioned relative to the nearest parent  container with the `relative` CSS
+	 * position (usually the `AppShell` component).
+	 */
 	export let position: 'fixed' | 'absolute' = 'absolute';
+	/**
+	 * Colour scheme to use, either `light` or `dark`.
+	 */
 	export let theme: 'light' | 'dark' = 'dark';
 	export let placement: PlacementType = 'right';
 
@@ -43,6 +62,7 @@
 <div class={classNames(wrapperClasses, placementClasses)}>
 	{#if $$slots.tabs}
 		<div class={classNames('absolute bg-core-grey-100 dark:bg-core-grey-900', tabPlacementClasses)}>
+			<!-- should contain a `<SidebarTabList>`, if the sidebar has tabs-->
 			<slot name="tabs" />
 		</div>
 	{:else if $sidebarAlwaysOpen !== 'true'}
@@ -65,21 +85,27 @@
 			>
 				{#if $$slots.header}
 					<div class="p-6 pb-0">
+						<!-- typically contains a `<SidebarHeader>` -->
 						<slot name="header" />
 					</div>
 				{/if}
 
 				{#if $$slots.unstyledContent}
+					<!-- can be used to display completely unstyled content - usually not required-->
 					<slot name="unstyledContent" />
+
+					<!-- usually contains a `<SidebarFooter>` -->
 					<slot name="footer" />
 				{:else}
 					<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
 						{#if $$slots.sections}
 							<div class="space-y-4">
+								<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
 								<slot name="sections" />
 							</div>
 						{/if}
 
+						<!-- typically contains a `<SidebarFooter>` -->
 						<slot name="footer" />
 					</div>
 				{/if}

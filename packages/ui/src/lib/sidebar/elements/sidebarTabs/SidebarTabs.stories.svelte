@@ -1,12 +1,12 @@
 <script context="module">
+	import { SidebarLeftContext, SidebarTopContext } from '@ldn-viz/docs';
 	import SidebarTabList from './SidebarTabList.svelte';
-	import { SidebarLeftContext } from '@ldn-viz/docs';
-	import { SidebarTopContext } from '@ldn-viz/docs';
 
 	export const meta = {
 		title: 'Ui/Sidebar/elements/SidebarTabs',
 		component: SidebarTabList,
-		decorators: [() => SidebarLeftContext]
+		decorators: [() => SidebarLeftContext],
+		subcomponents: { SidebarTabLabel }
 	};
 </script>
 
@@ -14,9 +14,9 @@
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import SidebarTabLabel from './SidebarTabLabel.svelte';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
+	import SidebarTabLabel from './SidebarTabLabel.svelte';
 
 	let selectedValue = 'markers';
 </script>
@@ -30,9 +30,6 @@
 	</SidebarTabList>
 </Template>
 
-<!-- The SidebarTabList component is a wrapper around the TabList component it uses 'sidebarPlacement' context provided by the sidebar to determine it's vertical or horizontal orientation, <br />
-	As with the TabList the selected Value is bound to 'selectedValue'.
--->
 <Story name="Default (Vertical)">
 	<SidebarTabList bind:selectedValue>
 		<SidebarTabLabel tabId="markers">Markers</SidebarTabLabel>
