@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * The `<SidebarTabList>` component is a wrapper around the `<TabList>` component it uses `sidebarPlacement` context provided by the `<Sidebar>` to determine it's vertical or horizontal orientation,
+	 * As with the `<TabList>` the selected Value is bound to `selectedValue`.
+	 *
+	 * @component
+	 */
+
 	import { getContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { tabLayoutOverride } from '../../../sidebar/sidebarUtils';
@@ -6,6 +13,9 @@
 	import TabList from '../../../tabs/TabList.svelte';
 	import { classNames } from '../../../utils/classNames';
 
+	/**
+	 * The `tabId` of the currently-selected child `<SidebarTabLabel>` component
+	 */
 	export let selectedValue: string | undefined = undefined;
 	let orientation: 'vertical' | 'horizontal' = 'vertical';
 
@@ -26,5 +36,6 @@
 	bind:selectedValue
 	class={classNames(tabLayoutOverride[$sidebarPlacementFromContext])}
 >
+	<!-- A series of `<SidebarTabLabel>` components -->
 	<slot />
 </TabList>
