@@ -9,7 +9,7 @@
 	export const meta = {
 		title: 'Ui/Header',
 		component: Header,
-		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks },
+		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks }
 	};
 </script>
 
