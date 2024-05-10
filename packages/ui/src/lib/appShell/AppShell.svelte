@@ -22,7 +22,7 @@
 
 	/**
 	 * Object expressing the sidebar position (`top`, `bottom`, `left`, `right`) at different screen sizes.
-	 * The keys are size breakpoints: for very small browser windows, the `initial` position will be used; for larger windows, the position corresponding to the largest breakpoint that is smaller than the window will be user.
+	 * The keys are size breakpoints: for very small browser windows, the `initial` position will be used; for larger windows, the position corresponding to the largest breakpoint that is smaller than the window will be used.
 	 * Breakpoints should be ordered in ascending order of size.
 	 */
 	export let sidebarPlacement: SidebarPlacement = { initial: 'bottom', md: 'right' };
