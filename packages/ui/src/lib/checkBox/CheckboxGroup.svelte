@@ -91,7 +91,7 @@
 	{/if}
 
 	<div class={buttonsHidden ? '' : 'pl-[28px]'}>
-		{#each options as option}
+		{#each options as option (option.id)}
 			<Checkbox
 				id={option.id}
 				name={option.name}
