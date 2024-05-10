@@ -37,30 +37,38 @@
 	// delay in ms after a key stroke to minimise redundant API requests.
 	export let delay = 250;
 
-	// onLocationSelected is called when a user clicks a location from the
-	// suggestions list.
+	/**
+	 * called when a user clicks a location from the suggestions list.
+	 */
 	export let onLocationSelected: undefined | OnGeolocationSearchResult;
 
-	// onSearchError is called when the adapter promise rejects a search request.
+	// called when the adapter promise rejects a search request.
 	export let onSearchError: undefined | OnGeolocationSearchError;
 
-	// suggestions can be bound via 'bind:suggestions' to reactively receive
-	// changes to search results.
+	/**
+	 * suggestions can be bound via 'bind:suggestions' to reactively receive
+	 * changes to search results.
+	 */
 	export let suggestions: GeolocationNamed[] = [];
 
-	// classes is a space separated list of additional classes applied to the
-	// root container.
+	/**
+	 * a space-separated list of additional classes applied to the root container.
+	 */
 	export let classes = '';
 
-	// inputClasses is a space separated list of additional classes applied to
-	// the input element because laying input elements can be quite fiddly.
+	/**
+	 * a space-separated list of additional classes applied to
+	 * the input element because laying input elements can be quite fiddly.
+	 */
 	export let inputClasses = '';
 
-	// showClearButton forces the showing of the clear button at the end of the
-	// input element.
-	//
-	// It is set to false each time the user clicks the button so binding on this
-	// prop is useful.
+	/**
+	 * `showClearButton` forces the showing of the clear button at the end of the
+	 * input element.
+	 *
+	 * It is set to `false` each time the user clicks the button so binding on this
+	 * prop is useful.
+	 */
 	export let showClearButton = false;
 
 	let container: HTMLElement;
