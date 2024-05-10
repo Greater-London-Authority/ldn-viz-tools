@@ -5,17 +5,25 @@
 	></script>
 
 	<script>
-		// Add the following script just before this component to configure
-		// the API key:
-		//
-		// <svelte:head>
-		//   <script>
-		//     window.ldnVizCivicApiKey = 'civic-api-key';
-		//     window.ldnVizCivicAppName = 'name-used-for-logging';
-		//   <\/script>
-		// <\/svelte:head>
-		//
-		// <GTMAnalyticsAndCookieConsent />
+		/**
+		 * The `<AnalyticsAndCookieConsent>` component sets up Google analytics and uses [Civic Cookie Control](https://www.civicuk.com/cookie-control/) to get consent for the use of cookies.
+		 * As the cookie consent applies across the *.london.gov.uk domain, the cookie consent sidebar is styled to match the main london.gov.uk site rather than the CIU's apps.
+		 *
+		 * Define the API key and AppName before using this component (replace `\/` with `/` in the closing `<script>` tag):
+		 *
+		 * ```js
+		 * <svelte:head>
+		 * <script>
+		 *     window.ldnVizCivicApiKey = 'civic-api-key';
+		 *     window.ldnVizCivicAppName = 'name-used-for-logging';
+		 * <\/script>
+		 * </svelte:head>
+		 *
+		 * <AnalyticsAndCookieConsent />
+		 *```
+		 *
+		 * @component
+		 */
 
 		var ldnVizCivic = {
 			appName: window.ldnVizCivicAppName || 'Embedded app',
