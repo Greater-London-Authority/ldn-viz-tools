@@ -47,7 +47,7 @@
 </Story>
 
 <!-- You can also provide any prop that is accepted by the [`<Button>` component](./?path=/docs/ui-button--documentation) -->
-<Story name="Applying extra props for button">
+<Story name="Changing button style">
 	<CopyButton content="Text to be copied." label="Copy" variant="solid" emphasis="secondary" />
 </Story>
 
