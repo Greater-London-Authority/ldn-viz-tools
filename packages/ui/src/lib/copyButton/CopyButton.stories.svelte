@@ -1,0 +1,71 @@
+<script context="module">
+	import CopyButton from './CopyButton.svelte';
+
+	export const meta = {
+		title: 'Ui/CopyButton',
+		component: CopyButton,
+		argTypes: {
+			content: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
+			label: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
+			$$restprops: {
+				description:
+					'Any other props are passed through to [`<Button>` component](./?path=/docs/ui-button--documentation).',
+				table: {
+					category: 'properties'
+				}
+			}
+		}
+	};
+</script>
+
+<script lang="ts">
+	import { ClipboardDocument, HandThumbUp } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+</script>
+
+<Template let:args>
+	<CopyButton {...args} />
+</Template>
+
+<Story name="Default" source />
+
+<Story name="Label">
+	<CopyButton content="Text to be copied." label="Copy to clipboard" />
+</Story>
+
+<!-- You can also provide any prop that is accepted by the [`<Button>` component](./?path=/docs/ui-button--documentation) -->
+<Story name="Changing button style">
+	<CopyButton content="Text to be copied." label="Copy" variant="solid" emphasis="secondary" />
+</Story>
+
+<Story name="Indictor icon">
+	<CopyButton content="One." label="One" />
+	<CopyButton content="Two." label="Two" />
+	<CopyButton content="Three." label="Three" />
+</Story>
+
+<Story name="Custom label">
+	<CopyButton content="Content to copy.">
+		<svelte:fragment slot="before-copy">
+			Copy
+			<Icon src={ClipboardDocument} class="w-6 h-6 pl-0.5 py-0.5 stroke-[0.1rem]" />
+		</svelte:fragment>
+		<svelte:fragment slot="after-copy">
+			Copied
+			<Icon src={HandThumbUp} class="w-6 h-6 pl-0.5 py-0.5 stroke-[0.1rem]" />
+		</svelte:fragment>
+	</CopyButton>
+</Story>
