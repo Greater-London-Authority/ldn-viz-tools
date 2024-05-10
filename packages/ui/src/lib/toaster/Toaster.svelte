@@ -17,6 +17,36 @@
 </script>
 
 <script lang="ts">
+	/**
+	 * The `<Toaster>` component acts as a container for short messages that appear temporarily ("toasts").
+	 * It can be included in the `+layout.svelte` file to avoid needing to add it to each route separately.
+	 *
+	 * On a page that includes a `<Toaster>` component, you can create a toast using the `newToastMessage()` function,
+	 * then display it by calling `.post()` on the object it returns; calling `.post()` repeatedly will refresh the toast.
+	 * You can remove a toast by calling `.remove()`.
+	 *
+	 * ```js
+	 *  // there should be an at-sign in the package name, but JSDoc chokes on it
+	 * import { newToastMessage, ToastType, ToastMessageOptions } from 'ldn-viz/ui';
+	 *
+	 * const staticToast = newToastMessage('This is a warning!', {
+	 *	// Type: ToastMessageOptions
+	 *	// An id is rarely needed but prevents HMR duplicates.
+	 *	id: 'a-warning-toast',
+	 *	type: ToastType.Warning,
+	 *	closeButton: true,
+	 * timeToLive: 10 * 1000, // in ms, so this is 10 seconds
+	 *});
+	 *
+	 * // calling .post() repeatedly on same toast object will refresh it, rather than creating duplicate toasts
+	 * staticToast.post();
+	 * staticToast.post();
+	 *
+	 *```
+	 *
+	 * @component
+	 */
+
 	import Toast from './Toast.svelte';
 	import { messages } from './toaster';
 	import type { ToasterPosition } from './types';
@@ -29,7 +59,7 @@
 	// string so they have implicit but weak priority over other styles.
 	export let classes = '';
 
-	// ...$$restProps applied to the top level element.
+	// ...$$restProps applied to the top-level `<div>` that contains the toast messages.
 
 	$: posClasses = positionClasses[position] || '';
 </script>
