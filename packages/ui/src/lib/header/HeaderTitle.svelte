@@ -1,5 +1,14 @@
 <script lang="ts">
-	export let base = ''; // typcally imported from '$app/paths' then pased as prop
+	/**
+	 * Typically imported from `$app/paths` then passed as prop.
+	 * Used to construct link to homepage.
+	 */
+	export let base = '';
 </script>
 
-<a href={base || '/'}><span class="mr-4 text-lg"><slot /></span></a>
+<a href={base || '/'}
+	><span class="mr-4 text-lg">
+		<!-- The app title, possibly including an icon. -->
+		<slot />
+	</span></a
+>

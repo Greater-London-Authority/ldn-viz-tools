@@ -1,19 +1,21 @@
 <script context="module" lang="ts">
 	import Header from './Header.svelte';
+	import HeaderItem from './HeaderItem.svelte';
+	import HeaderRight from './HeaderRight.svelte';
+	import HeaderTitle from './HeaderTitle.svelte';
+	import NavLink from './NavLink.svelte';
+	import NavLinks from './NavLinks.svelte';
+
 	export const meta = {
 		title: 'Ui/Header',
-		component: Header
+		component: Header,
+		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks },
+		description: 'TEST!'
 	};
 </script>
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-
-	import NavLink from './NavLink.svelte';
-	import NavLinks from './NavLinks.svelte';
-	import HeaderTitle from './HeaderTitle.svelte';
-	import HeaderRight from './HeaderRight.svelte';
-	import HeaderItem from './HeaderItem.svelte';
 </script>
 
 <Template let:args>
