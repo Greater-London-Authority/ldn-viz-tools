@@ -31,9 +31,9 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { ClipboardDocument, HandThumbUp } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 </script>
 
 <Template let:args>
