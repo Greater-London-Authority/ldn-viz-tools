@@ -18,6 +18,13 @@
 					defaultValue: { summary: '' },
 					type: { summary: 'string' }
 				}
+			},
+			$$restprops: {
+				description:
+					'Any other props are passed through to [`<Button>` component](./?path=/docs/ui-button--documentation).',
+				table: {
+					category: 'properties'
+				}
 			}
 		}
 	};
