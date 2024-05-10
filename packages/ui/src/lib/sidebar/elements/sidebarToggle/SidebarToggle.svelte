@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * The `<SidebarToggle>` component is the button that can be clicked on to open or close the `<Sidebar>`.
+	 * @component
+	 */
+
 	import { Bars3, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getContext } from 'svelte';
@@ -32,6 +37,7 @@
 	>
 		{#if isOpen === false}
 			{#if $$slots.icon === true}
+				<!-- Custom icon to use instead of the 'hamburger' menu icon-->
 				<slot name="icon" />
 			{:else}
 				<Icon src={Bars3} class="p-1" aria-hidden="true" />

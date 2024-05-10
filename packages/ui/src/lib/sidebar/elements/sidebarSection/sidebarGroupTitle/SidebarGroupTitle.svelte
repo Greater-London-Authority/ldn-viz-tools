@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * The `<SidebarGroupTitle>` component is used to display a subtitle to sub-divide a `<SidebarSection>`.
+	 * @component
+	 */
+
 	import { classNames } from '../../../../utils/classNames';
 
 	const darkThemeClasses = 'dark:text-white';
@@ -10,9 +15,13 @@
 </script>
 
 <div class={groupTitleClasses}>
-	<h3 class="font-bold text-sm"><slot /></h3>
+	<h3 class="font-bold text-sm">
+		<!-- The title. -->
+		<slot />
+	</h3>
 
 	{#if $$slots.hint}
+		<!-- An optional `<SidebarHint>` component to provide additional explanation. -->
 		<slot name="hint" />
 	{/if}
 </div>

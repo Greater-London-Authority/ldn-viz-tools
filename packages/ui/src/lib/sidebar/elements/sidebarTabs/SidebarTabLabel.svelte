@@ -3,6 +3,9 @@
 	import type { Writable } from 'svelte/store';
 	import { classNames } from '../../../utils/classNames';
 
+	/**
+	 * Value that will be stored as `selectedValue` in the parent `<SidebarTabList>` if this item is selected.
+	 */
 	export let tabId: string;
 
 	const { selectedValue, orientation } = getContext<{
@@ -65,5 +68,6 @@
 		tabId === $selectedValue ? '!bg-core-blue-600 cursor-default text-white' : 'cursor-pointer'
 	)}
 >
+	<!-- Label and/or icon -->
 	<slot />
 </div>
