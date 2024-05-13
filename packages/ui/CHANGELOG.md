@@ -1,5 +1,34 @@
 # ldn-viz-tools-ui
 
+## 8.0.0
+
+### Major Changes
+
+- 7b19981: CHANGED: update `Input` to allow textarea type.
+  CHANGED: update `Input` to pass `$restProps` to the input element to account for differences in properties for different input types.
+  CHANGED: update `Input` to export the bindable input element value.
+  CHANGED: update `Input` to allow a format value function to be passed that formats the value when unfocusing the input.
+  CHANGED: update `InputWrapper` to allow tooltip hints in the label.
+  CHANGED: update `Input` and `InputWrapper` with aria and accessibility attributes.
+  CHANGED: update `Select` with `InputWrapper` changes.
+  CHANGED: changed props relating to tooltips - removed boolean `hint` prop, renamed `hintTooltipContent` -> `hint`, renamed `hintText` -> `hintLabel`
+- 11aac47: CHANGED: removed `hasError` prop from `Select` component
+
+### Minor Changes
+
+- 7b19981: CHANGED: allow tooltips to be added to `Checkbox` and `CheckboxGroup`.
+- 7b19981: ADDED: `<AnalyticsAndCookieConsent />` that adds analytics and cookie consent to a page.
+- 7b19981: ADDED: `CopyButton` that copies content to clipboard on click.
+- 7b19981: CHANGED: changed alignment of help icon in `Tooltip` trigger
+- 7b19981: CHANGED: Increase Tooltip component text size for accessibility.
+- 7b19981: ADD: PageMetadata component providing OpenGraph and other head tag info.
+- 7b19981: ADDED: `PlaceholderImage` component to show while waiting for the real image to load or where an image is expected but not available.
+- 7b19981: CHANGED: add optional `name` prop to `Checkbox` and to `options` props of `CheckboxGroup` so their values can be included with form submissions.
+
+### Patch Changes
+
+- 7b19981: CHANGED: added key to `#each` in `CheckboxGroup` to avoid checkboxes being duplicated if options changes.
+
 ## 7.0.0
 
 ### Major Changes
