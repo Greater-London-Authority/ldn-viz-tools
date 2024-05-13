@@ -14,6 +14,10 @@
 				options: ['standard', 'wide'],
 				control: { type: 'radio' }
 			},
+			theme: {
+				options: ['light', 'dark'],
+				control: { type: 'radio' }
+			},
 			position: {
 				options: ['absolute', 'fixed'],
 				control: { type: 'radio' }
@@ -53,19 +57,7 @@
 </script>
 
 <Template let:args>
-	<Sidebar {...args} />
-</Template>
-
-<Story
-	name="Default"
-	source
-	parameters={{
-		options: {
-			showPanel: true
-		}
-	}}
->
-	<Sidebar>
+	<Sidebar {...args}>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
 				<p>
@@ -108,7 +100,17 @@
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
-</Story>
+</Template>
+
+<Story
+	name="Default"
+	source
+	parameters={{
+		options: {
+			showPanel: true
+		}
+	}}
+></Story>
 
 <Story name="Wide" source>
 	<Sidebar width="wide">

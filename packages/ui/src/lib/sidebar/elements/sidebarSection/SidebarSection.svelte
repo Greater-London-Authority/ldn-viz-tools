@@ -1,7 +1,15 @@
 <script lang="ts">
+	/**
+	 * The `<SidebarSection>` component is used to group together a 'section' of content within a `<Sidebar>`.
+	 * As well as accepting a section title as a prop (which it displays as a `<SidebarSectionTitle>`), it accepts the section content as a slot.
+	 * @component
+	 */
 	import { classNames } from '../../../utils/classNames';
 	import SidebarSectionTitle from './sidebarSectionTitle/SidebarSectionTitle.svelte';
 
+	/**
+	 * The title of this section.
+	 */
 	export let title = '';
 
 	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
@@ -18,6 +26,7 @@
 <section>
 	<div class={sectionClasses}>
 		<SidebarSectionTitle>{title}</SidebarSectionTitle>
+		<!-- The content to be displayed inside this section. -->
 		<slot />
 	</div>
 </section>

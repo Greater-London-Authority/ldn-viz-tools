@@ -1,13 +1,31 @@
-<script>
+<script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+
 	import { DocumentArrowDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
-
 	import PlacardButton from './PlacardButton.svelte';
+
+	export const meta = {
+		title: 'Ui/PlacardButton',
+		component: PlacardButton
+	};
 </script>
 
-<Meta title="Ui/PlacardButton" component={PlacardButton} />
+<Template let:args>
+	<div class="max-w-xl">
+		<PlacardButton {...args}>
+			<span slot="body">
+				The full dataset that this explorer is based on is available for download from the London
+				Datastore, along with other documents like the Technical Report, which contains the
+				questionnaires from the survey.
+			</span>
+			<span slot="footer">The Survey of Londoners on London Datastore</span>
+		</PlacardButton>
+	</div>
+</Template>
+
+<Story name="Default" source />
 
 <Story name="With Body Only">
 	<div class="max-w-xl">

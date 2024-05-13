@@ -1,11 +1,27 @@
+<script context="module" lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import ImageDownloadButton from './ImageDownloadButton.svelte';
+
+	export const meta = {
+		title: 'Ui/ImageDownloadButton',
+		component: ImageDownloadButton,
+		argTypes: {
+			format: {
+				options: ['PNG', 'SVG'],
+				control: { type: 'radio' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			}
+		}
+	};
+</script>
+
 <script lang="ts">
 	import { Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
-	import ImageDownloadButton from './ImageDownloadButton.svelte';
 
 	let svgRef;
 	let svgRef2;
@@ -13,13 +29,20 @@
 	let htmlRef: HTMLElement;
 </script>
 
-<Meta title="Ui/ImageDownloadButton" component={ImageDownloadButton} />
-
 <Template let:args>
-	<ImageDownloadButton {...args}>I'm an image download button!</ImageDownloadButton>
+	<svg bind:this={svgRef} width="100" height="100">
+		<rect x="0" y="0" width="100" height="100" fill="red" />
+		<circle cx="10" cy="10" r="10" fill="blue" />
+	</svg>
+
+	<ImageDownloadButton {...args} svgNode={svgRef}>
+		I'm an image download button!
+	</ImageDownloadButton>
 </Template>
 
-<Story name="Default">
+<Story name="Default" source />
+
+<Story name="Default - with image">
 	<svg bind:this={svgRef} width="100" height="100">
 		<rect x="0" y="0" width="100" height="100" fill="red" />
 		<circle cx="10" cy="10" r="10" fill="blue" />

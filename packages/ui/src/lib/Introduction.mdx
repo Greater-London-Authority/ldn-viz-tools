@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks';
+import { Markdown, Meta } from '@storybook/blocks';
 
 <Meta title="Ui/Introduction" />
 
@@ -23,26 +23,30 @@ To be flexible when inegrating with existing projects We don't gererate global f
 
 Here is a complete table of the provided `form-*` classes for reference:
 
+<Markdown>
+	{`
 | Base                      | Class              |
 | ------------------------- | ------------------ |
-| `[type='text']`           | `form-input`       |
-| `[type='email']`          | `form-input`       |
-| `[type='url']`            | `form-input`       |
-| `[type='password']`       | `form-input`       |
-| `[type='number']`         | `form-input`       |
-| `[type='date']`           | `form-input`       |
-| `[type='datetime-local']` | `form-input`       |
-| `[type='month']`          | `form-input`       |
-| `[type='search']`         | `form-input`       |
-| `[type='tel']`            | `form-input`       |
-| `[type='time']`           | `form-input`       |
-| `[type='week']`           | `form-input`       |
-| `textarea`                | `form-textarea`    |
-| `select`                  | `form-select`      |
-| `select[multiple]`        | `form-multiselect` |
-| `[type='checkbox']`       | `form-checkbox`    |
-| `[type='radio']`          | `form-radio`       |
-|                           | `form-label`       |
+| \`[type='text']\`           | \`form-input\`       |
+| \`[type='email']\`          | \`form-input\`       |
+| \`[type='url']\`            | \`form-input\`       |
+| \`[type='password']\`       | \`form-input\`       |
+| \`[type='number']\`         | \`form-input\`       |
+| \`[type='date']\`           | \`form-input\`       |
+| \`[type='datetime-local']\` | \`form-input\`       |
+| \`[type='month']\`          | \`form-input\`       |
+| \`[type='search']\`         | \`form-input\`       |
+| \`[type='tel']\`            | \`form-input\`       |
+| \`[type='time']\`           | \`form-input\`       |
+| \`[type='week']\`           | \`form-input\`       |
+| \`textarea\`                | \`form-textarea\`    |
+| \`select\`                  | \`form-select\`      |
+| \`select[multiple]\`        | \`form-multiselect\` |
+| \`[type='checkbox']\`       | \`form-checkbox\`    |
+| \`[type='radio']\`          | \`form-radio\`       |
+|                           | \`form-label\`       |
+`}
+</Markdown>
 
 ```html
 <!-- apply our theme to any native form element with a single class -->

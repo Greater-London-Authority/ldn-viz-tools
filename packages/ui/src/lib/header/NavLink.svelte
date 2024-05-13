@@ -1,4 +1,8 @@
 <script lang="ts">
+	/**
+	 * `<NavLink>` represents a single link.
+	 * The background color changes to indicate whether the target of the link is the current page.
+	 * */
 	import type { Readable } from 'svelte/store';
 
 	// really a Page is
@@ -6,9 +10,19 @@
 	// and the page store is Readable<Page<Record<string, string>, string | null>>
 	// but we use Readable<{url: {pathname: string}} as an approximation to avoid a dependency on SvelteKit
 
-	export let base = ''; // typcally imported from '$app/paths' then pased as prop
-	export let page: Readable<{ url?: { pathname: string } }>; // typically imported from '$app/stores then passed as prop
+	/**
+	 * The base URL: typically imported from `$app/paths` then passed as prop
+	 */
+	export let base = '';
 
+	/**
+	 * The current page store (typically imported from `$app/stores` then passed as prop).
+	 */
+	export let page: Readable<{ url?: { pathname: string } }>;
+
+	/**
+	 * The target of the link.
+	 */
 	export let target = '';
 
 	let classes: string;
@@ -34,6 +48,7 @@
 
 <div class={classes}>
 	<a href={`${base}/${target}`}>
+		<!-- contents of the link (text and/or an icon) -->
 		<slot />
 	</a>
 </div>

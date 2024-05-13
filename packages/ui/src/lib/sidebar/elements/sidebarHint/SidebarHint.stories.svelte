@@ -3,7 +3,14 @@
 
 	export const meta = {
 		title: 'Ui/Sidebar/elements/SidebarHint',
-		component: SidebarHint
+		component: SidebarHint,
+
+		argTypes: {
+			hintType: {
+				options: ['tooltip', 'popover', 'modal'],
+				control: { type: 'radio' }
+			}
+		}
 	};
 </script>
 
@@ -12,18 +19,16 @@
 </script>
 
 <Template let:args>
-	<SidebarHint {...args} />
-</Template>
-
-<Story name="Default (Modal)" source>
-	<SidebarHint hintType="modal">
+	<SidebarHint {...args}>
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 		labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
 		laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
 		voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
 		non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-	</SidebarHint>
-</Story>
+	</SidebarHint></Template
+>
+
+<Story name="Default (Modal)" source />
 
 <Story name="Modal width" source>
 	<SidebarHint hintType="modal" modalWidth="5xl">

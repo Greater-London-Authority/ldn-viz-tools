@@ -1,23 +1,52 @@
-<script lang="ts">
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
 	import RadioButton from './RadioButton.svelte';
-	import RadioButtonGroup from './RadioButtonGroup.svelte';
 
-	let selectedId: string;
-
-	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
-		{ id: 'train', label: 'Train stations', color: '#008D48' },
-		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
-	];
+	export const meta = {
+		title: 'Ui/RadioButton',
+		component: RadioButton,
+		argTypes: {
+			color: {
+				control: { type: 'color' }
+			},
+			label: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
+			id: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
+			name: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			}
+		},
+		args: {
+			label: 'Label for Checkbox'
+		}
+	};
 </script>
 
-<Meta title="Ui/RadioButton" component={RadioButton} />
+<script lang="ts">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+
+	let selectedId: string;
+</script>
 
 <Template let:args>
-	<RadioButton {...args} />
+	<RadioButton label="Foo" id="foo" {...args} />
 </Template>
+
+<Story name="Default" source />
 
 <Story name="Single RadioButton">
 	<RadioButton bind:selectedId label="Foo" id="foo" name="isolated" />
@@ -33,16 +62,6 @@
 		<p>selectedId: {selectedId}</p>
 		<p>Checked: {!!selectedId}</p>
 	</div>
-</Story>
-
-<Story name="RadioGroup">
-	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
-</Story>
-
-<Story name="RadioGroup - no clear button">
-	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="Single Colored RadioButton">
