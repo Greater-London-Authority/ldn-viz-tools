@@ -33,7 +33,7 @@
 		if (!page) {
 			// no page store provided - we don't know whether or not we're on the page this links points at
 			classes = nonHighlightedClasses;
-		} else if (!target && $page.url?.pathname === '/') {
+		} else if (!target && $page.route?.header === '/') {
 			// we're currently on the homepage, and that is what this link points at
 			classes = highlightedClasses;
 		} else if (!!target && ($page.url?.pathname || '').endsWith(target)) {
