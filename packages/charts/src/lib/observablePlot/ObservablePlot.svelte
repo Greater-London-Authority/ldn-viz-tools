@@ -6,7 +6,7 @@
 
 	export let responsiveWidth = false;
 
-	export let data = []; // for downlaod button only
+	export let data = []; // for download button only
 
 	// for container
 	export let title;

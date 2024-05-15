@@ -64,6 +64,6 @@
 />
 
 <Story
-	name="With Chrome but no downlaod buttons"
+	name="With Chrome but no download buttons"
 	args={{ title: 'Chart Title', subTitle: 'This is a sub title', footer: true, exportBtns: false }}
 />
