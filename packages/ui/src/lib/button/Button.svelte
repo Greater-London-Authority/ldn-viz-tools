@@ -188,25 +188,27 @@
 	);
 </script>
 
-<svelte:element
-	this={href ? 'a' : 'button'}
-	type={href ? undefined : type}
-	{href}
-	{disabled}
-	{title}
-	class={buttonClass}
-	on:click
-	on:change
-	on:keydown
-	on:keyup
-	on:touchstart
-	on:touchend
-	on:touchcancel
-	on:mouseenter
-	on:mouseleave
-	role="button"
-	tabindex="0"
->
-	<!-- contents of the button -->
-	<slot />
-</svelte:element>
+<div>
+	<svelte:element
+		this={href ? 'a' : 'button'}
+		type={href ? undefined : type}
+		{href}
+		{disabled}
+		{title}
+		class={buttonClass}
+		on:click
+		on:change
+		on:keydown
+		on:keyup
+		on:touchstart
+		on:touchend
+		on:touchcancel
+		on:mouseenter
+		on:mouseleave
+		role="button"
+		tabindex="0"
+	>
+		<!-- contents of the button -->
+		<slot />
+	</svelte:element>
+</div>
