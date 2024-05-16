@@ -1,6 +1,6 @@
 <script context="module">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import ObservablePlot from './ObservablePlot.svelte';
+	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
 	export const meta = {
 		title: 'Charts/ObservablePlotFragments',
