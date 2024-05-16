@@ -272,7 +272,8 @@
 					z: 'Age',
 					stroke: 'Age',
 					sort: { x: null, reverse: false },
-					filter: (d) => d.Type === 'Completions'
+					filter: (d) => d.Type === 'Completions',
+					strokeDasharray: "5,5"
 				}),
 
 				// 19-24
