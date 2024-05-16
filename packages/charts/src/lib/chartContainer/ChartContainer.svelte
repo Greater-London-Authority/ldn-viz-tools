@@ -49,6 +49,6 @@
 
 <style>
 	.chart-container {
-		@apply flex flex-col;
+		@apply flex flex-col w-full;
 	}
 </style>

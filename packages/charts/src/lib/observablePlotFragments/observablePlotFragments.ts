@@ -20,23 +20,20 @@ export const defaultSize = {
 
 export const defaultColor = {
 	legend: true,
-	swatchSize: 25,
+	swatchSize: 16,
 	className: 'defaultCcolorLegendLabel',
-
 	type: 'ordinal'
 };
 
 export const defaultXAxis = {
 	label: '',
 	grid: true,
-	labelArrow: 'none'
+	labelArrow: 'none',
+	insetLeft: 80
 };
 
 export const defaultYAxis = {
-	grid: true,
-	tickSize: 0,
-	label: '',
-	labelArrow: 'none'
+	dy: -14
 };
 
 export const defaultLine = {
