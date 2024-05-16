@@ -236,10 +236,9 @@
 		subTitle="Number of apprenticeship programme starts and completions in London for under 19s and 19-24 year olds between 2014/15 and 2022/23"
 		spec={{
 			y: {
-				...defaultYAxis,
 				domain: [0, 1.6e4],
-				percent: false,
-				ticks: 5
+				percent: false
+				// ticks: 5
 			},
 
 			x: defaultXAxis,
@@ -296,6 +295,10 @@
 					y: 'Count',
 					filter: (d) => d.Date === '2022/23',
 					stroke: 'Age'
+				}),
+
+				Plot.axisY({
+					...defaultYAxis
 				})
 			]
 		}}

@@ -27,6 +27,7 @@
 
 		grid: true,
 		marginBottom: 50,
+		// aspectRatio: 1,
 
 		x: {
 			labelAnchor: 'center',
@@ -61,22 +62,30 @@
 		spec,
 		title: 'Penguin Culmens',
 		subTitle: 'A scatterplot of depth against length',
-		exportBtns: true,
 		data: penguins
 	}}
 />
 
+<Story
+	name="With Footer"
+	args={{
+		spec,
+		title: 'Penguin Culmens',
+		subTitle: 'A scatterplot of depth against length',
+		data: penguins,
+		footer: { source: 'This is the source', note: 'This is a note', exportBtns: true }
+	}}
+/>
+<!--
 <Story
 	name="With responsive width"
 	args={{
 		spec,
 		title: 'Penguin Culmens',
 		subTitle: 'A scatterplot of depth against length',
-		exportBtns: true,
-		data: penguins,
-		responsiveWidth: true
+		data: penguins
 	}}
-/>
+/> -->
 
 <!--
 	The default tooltip allows you to display text, or a table showing the values of specific columns for the selected mark. 
@@ -127,8 +136,8 @@
 							sex: true,
 							culmen_length_mm: (d) => `${d}mm`,
 							culmen_depth_mm: (d) => `${d}mm`,
-							x: null,
-							y: null
+							x: undefined,
+							y: undefined
 						}
 					}
 				})
@@ -136,7 +145,6 @@
 		}}
 		title="Penguin Culmens"
 		subTitle="A scatterplot of depth against length"
-		exportBtns={true}
 		data={penguins}
 	/>
 </Story>
@@ -188,7 +196,6 @@
 		}}
 		title="Penguin Culmens"
 		subTitle="A scatterplot of depth against length"
-		exportBtns={true}
 		data={penguins}
 		{tooltipStore}
 	>
