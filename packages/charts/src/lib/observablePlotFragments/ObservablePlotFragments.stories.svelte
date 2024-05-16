@@ -18,7 +18,6 @@
 		defaultAnnotationText,
 		defaultArea,
 		defaultColor,
-		defaultDashedLine,
 		defaultDot,
 		defaultLine,
 		defaultRule,
@@ -266,7 +265,7 @@
 
 				// <19
 				Plot.lineY(education_data, {
-					...defaultDashedLine,
+					...defaultLine,
 					x: 'Date',
 					y: 'Count',
 					z: 'Age',
@@ -278,7 +277,7 @@
 
 				// 19-24
 				Plot.lineY(education_data, {
-					...defaultDashedLine,
+					...defaultLine,
 					x: 'Date',
 					y: 'Count',
 					z: 'Age',
