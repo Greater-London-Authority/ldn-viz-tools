@@ -271,8 +271,18 @@
 		spec,
 		title: 'Penguin Culmens',
 		subTitle: 'A scatterplot of depth against length',
-		exportBtns: true,
 		data: penguins
+	}}
+/>
+
+<Story
+	name="With Footer"
+	args={{
+		spec,
+		title: 'Penguin Culmens',
+		subTitle: 'A scatterplot of depth against length',
+		data: penguins,
+		footer: { source: 'This is the source', note: 'This is a note', exportBtns: true }
 	}}
 />
 
@@ -282,8 +292,6 @@
 		spec,
 		title: 'Penguin Culmens',
 		subTitle: 'A scatterplot of depth against length',
-		exportBtns: true,
-		data: penguins,
-		responsiveWidth: true
+		data: penguins
 	}}
 />
