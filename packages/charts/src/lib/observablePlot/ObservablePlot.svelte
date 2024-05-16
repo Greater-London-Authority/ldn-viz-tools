@@ -57,3 +57,9 @@
 		/>
 	</ChartContainer>
 {/key}
+
+<style>
+	:global(.defaultCcolorLegendLabel-swatch) {
+		font-size: 20px;
+	}
+</style>

@@ -60,10 +60,14 @@
 
 <Story
 	name="With Chrome"
-	args={{ title: 'Chart Title', subTitle: 'This is a sub title', footer: true, exportBtns: true }}
+	args={{ title: 'Chart Title', subTitle: 'This is a sub title', footer: { exportBtns: true } }}
 />
 
 <Story
 	name="With Chrome but no downlaod buttons"
-	args={{ title: 'Chart Title', subTitle: 'This is a sub title', footer: true, exportBtns: false }}
+	args={{
+		title: 'Chart Title',
+		subTitle: 'This is a sub title',
+		footer: { byline: 'byline', source: 'Source', note: 'Note', exportBtns: true }
+	}}
 />
