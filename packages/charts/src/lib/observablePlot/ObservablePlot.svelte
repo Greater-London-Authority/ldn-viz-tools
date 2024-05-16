@@ -1,6 +1,36 @@
+<script context="module">
+	export const addClick =
+		(posStore, markShape = 'circle') =>
+		(index, scales, values, dimensions, context, next) => {
+			const el = next(index, scales, values, dimensions, context);
+			const marks = el.querySelectorAll(markShape);
+			for (let i = 0; i < marks.length; i++) {
+				const d = { index: index[i], x: values.channels.x.value[i], y: values.channels.y.value[i] };
+				marks[i].addEventListener('mouseenter', (ev) => {
+					posStore.set({
+						...d,
+						clientX: ev.clientX,
+						clientY: ev.clientY,
+						pageX: ev.pageX,
+						pageY: ev.pageY,
+						layerX: ev.layerX,
+						layerY: ev.layerY
+					}); // can't use the $store syntax here
+				});
+
+				marks[i].addEventListener('mouseleave', () => {
+					posStore.set(undefined);
+				});
+			}
+			return el;
+		};
+</script>
+
 <script lang="ts">
+	import { setContext } from 'svelte';
+	import { derived, writable } from 'svelte/store';
+
 	import * as Plot from '@observablehq/plot';
-	import { onMount, tick } from 'svelte';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 
 	export let spec;
@@ -15,53 +45,53 @@
 
 	export let domNode: any;
 
-	const renderPlot = (node: any) => node.appendChild(Plot.plot(spec));
+	export let tooltipStore = writable();
 
+	/** A y-offset from the hover point, in pixels. */
+	export let tooltipOffset = -16;
+
+	const renderPlot = (node) => node.appendChild(Plot.plot(spec));
 	let width: number;
 	let height: number;
-	let dimensions = { height: 0, width: 0 };
 
 	let borderBoxSize: ResizeObserverSize[] | { blockSize: any; inlineSize: any }[];
 
 	$: spec.height = borderBoxSize ? borderBoxSize[0].blockSize : 550;
 	$: spec.width = borderBoxSize ? borderBoxSize[0].inlineSize : 550;
 
-	// $: width = borderBoxSize ? borderBoxSize[0].inlineSize : 550;
-	// $: height = borderBoxSize ? borderBoxSize[0].blockSize : 550;
-
-	// onMount(() => {
-	// 	updateDimensions();
-	// 	window.addEventListener('resize', updateDimensions);
-	// 	return () => {
-	// 		window.removeEventListener('resize', updateDimensions);
-	// 	};
-	// });
-
-	// const updateDimensions = () => {
-	// 	console.log(borderBoxSize);
-	// 	dimensions = {
-	// 		height: borderBoxSize ? borderBoxSize[0].blockSize : 550,
-	// 		width: borderBoxSize ? borderBoxSize[0].inlineSize : 550
-	// 	};
-	// 	// spec.width = Math.max(dimensions.width, 550);
-	// 	spec.width = dimensions.width;
-	// };
+	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
+		$tooltipStore ? data[$tooltipStore.index] : undefined
+	);
+	setContext('tooltipData', tooltipData);
 </script>
 
 {#key spec}
-	<ChartContainer {data} {title} {subTitle} {alt} {footer} {...$$restProps} chartHeight={'h-fit'}>
+	<ChartContainer
+		{data}
+		{title}
+		{subTitle}
+		{alt}
+		{footer}
+		{exportBtns}
+		{...$$restProps}
+		chartHeight={'h-fit'}
+	>
 		<div use:renderPlot {...$$restProps} bind:this={domNode} bind:borderBoxSize {width} {height} />
-	</ChartContainer>
 
-	<!-- bind:clientWidth={width}
-	bind:clientHeight={height} -->
+		<!-- todo: pass to slot data[i] -->
+		{#if $tooltipStore && $tooltipData}
+			<div
+				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
+				style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
+				style:left={`${$tooltipStore.layerX}px`}
+			>
+				<slot name="tooltip">
+					<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
+				</slot>
+			</div>
+		{/if}
+	</ChartContainer>
 {/key}
-<p>
-	border box size ={borderBoxSize ? borderBoxSize[0].inlineSize : 550} X {borderBoxSize
-		? borderBoxSize[0].blockSize
-		: 550}
-</p>
-<p>size = {width} x {height}</p>
 
 <style>
 	:global(.defaultCcolorLegendLabel-swatch) {

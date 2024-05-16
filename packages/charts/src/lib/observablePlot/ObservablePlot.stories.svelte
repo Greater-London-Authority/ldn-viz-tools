@@ -1,232 +1,22 @@
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import ObservablePlot from './ObservablePlot.svelte';
+
+	export const meta = {
+		title: 'Charts/ObservablePlot',
+		component: ObservablePlot
+	};
+</script>
+
 <script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+	import { writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
 
-	import { default as ObservablePlot, default as ScatterPlot } from './ObservablePlot.svelte';
+	import { penguins } from './exampleData';
 
-	const penguins = [
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 39.1,
-			culmen_depth_mm: 18.7,
-			flipper_length_mm: 181,
-			body_mass_g: 3750,
-			sex: 'MALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 39.5,
-			culmen_depth_mm: 17.4,
-			flipper_length_mm: 186,
-			body_mass_g: 3800,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 40.3,
-			culmen_depth_mm: 18,
-			flipper_length_mm: 195,
-			body_mass_g: 3250,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: null,
-			culmen_depth_mm: null,
-			flipper_length_mm: null,
-			body_mass_g: null,
-			sex: null
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 36.7,
-			culmen_depth_mm: 19.3,
-			flipper_length_mm: 193,
-			body_mass_g: 3450,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 39.3,
-			culmen_depth_mm: 20.6,
-			flipper_length_mm: 190,
-			body_mass_g: 3650,
-			sex: 'MALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 38.9,
-			culmen_depth_mm: 17.8,
-			flipper_length_mm: 181,
-			body_mass_g: 3625,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 39.2,
-			culmen_depth_mm: 19.6,
-			flipper_length_mm: 195,
-			body_mass_g: 4675,
-			sex: 'MALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 34.1,
-			culmen_depth_mm: 18.1,
-			flipper_length_mm: 193,
-			body_mass_g: 3475,
-			sex: null
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 42,
-			culmen_depth_mm: 20.2,
-			flipper_length_mm: 190,
-			body_mass_g: 4250,
-			sex: null
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 37.8,
-			culmen_depth_mm: 17.1,
-			flipper_length_mm: 186,
-			body_mass_g: 3300,
-			sex: null
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 37.8,
-			culmen_depth_mm: 17.3,
-			flipper_length_mm: 180,
-			body_mass_g: 3700,
-			sex: null
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 41.1,
-			culmen_depth_mm: 17.6,
-			flipper_length_mm: 182,
-			body_mass_g: 3200,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 38.6,
-			culmen_depth_mm: 21.2,
-			flipper_length_mm: 191,
-			body_mass_g: 3800,
-			sex: 'MALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 34.6,
-			culmen_depth_mm: 21.1,
-			flipper_length_mm: 198,
-			body_mass_g: 4400,
-			sex: 'MALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 36.6,
-			culmen_depth_mm: 17.8,
-			flipper_length_mm: 185,
-			body_mass_g: 3700,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 38.7,
-			culmen_depth_mm: 19,
-			flipper_length_mm: 195,
-			body_mass_g: 3450,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 42.5,
-			culmen_depth_mm: 20.7,
-			flipper_length_mm: 197,
-			body_mass_g: 4500,
-			sex: 'MALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 34.4,
-			culmen_depth_mm: 18.4,
-			flipper_length_mm: 184,
-			body_mass_g: 3325,
-			sex: 'FEMALE'
-		},
-		{
-			species: 'Adelie',
-			island: 'Torgersen',
-			culmen_length_mm: 46,
-			culmen_depth_mm: 21.5,
-			flipper_length_mm: 194,
-			body_mass_g: 4200,
-			sex: 'MALE'
-		}
-	];
-
-	//https://storybook.js.org/docs/svelte/essentials/controls
-	/*
-	const argTypes = {
-		data: {
-			description: 'overwritten description',
-			table: {
-				type: {
-					summary: 'something short',
-					detail: 'something really really long'
-				}
-			},
-			control: {
-				type: null
-			}
-		},
-		title: {
-			table: {
-				type: {
-					summary: 'string'
-				}
-			},
-			control: {
-				type: 'text'
-			}
-		},
-		subTitle: {
-			table: {
-				type: {
-					summary: 'string'
-				}
-			},
-			control: {
-				type: 'text'
-			}
-		}
-	};
-    */
-
-	// const spec = { x: 'culmen_length_mm', y: 'culmen_depth_mm' };
+	import DemoTooltip from './DemoTooltip.svelte';
+	import { addClick } from './ObservablePlot.svelte';
 
 	const spec = {
 		style: {
@@ -255,9 +45,9 @@
 			Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' })
 		]
 	};
-</script>
 
-<Meta title="Charts/ObservablePlot" component={ScatterPlot} />
+	const tooltipStore = writable();
+</script>
 
 <Template let:args>
 	<ObservablePlot {...args} {spec} />
@@ -295,3 +85,121 @@
 		data: penguins
 	}}
 />
+
+<!--
+	The default tooltip allows you to display text, or a table showing the values of specific columns for the selected mark. 
+	However, the appearance of these tooltips cannot be flexibly customized.
+-->
+
+<Story name="With default tooltips">
+	<ObservablePlot
+		spec={{
+			style: {
+				fontFamily: 'Roboto',
+				fontSize: '12pt',
+				color: '#666666'
+			},
+
+			grid: true,
+			marginBottom: 50,
+
+			x: {
+				labelAnchor: 'center',
+				labelArrow: 'none',
+				label: 'Culmen length/mm'
+			},
+
+			y: {
+				insetTop: 20,
+				labelArrow: 'none'
+			},
+
+			marks: [
+				Plot.ruleY([0], { stroke: '#666666' }),
+				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.dot(penguins, {
+					x: 'culmen_length_mm',
+					y: 'culmen_depth_mm',
+					render: addClick(tooltipStore),
+					stroke: 'black',
+					fill: 'white',
+
+					/* need to expose as a channel before including in tooltip */
+					channels: {
+						sex: 'sex',
+						culmen_length_mm: 'culmen_length_mm',
+						culmen_depth_mm: 'culmen_depth_mm'
+					},
+					tip: {
+						format: {
+							sex: true,
+							culmen_length_mm: (d) => `${d}mm`,
+							culmen_depth_mm: (d) => `${d}mm`,
+							x: null,
+							y: null
+						}
+					}
+				})
+			]
+		}}
+		title="Penguin Culmens"
+		subTitle="A scatterplot of depth against length"
+		exportBtns={true}
+		data={penguins}
+	/>
+</Story>
+
+<!--
+	Alternatively, you can use a custom Svelte component to render a tooltip.
+
+	To add a custom tooltip:
+	
+	* create a `tooltipStore` writable store
+	* add `render: addClick(tooltipStore)` to the marks that will trigger the tooltip (if the mark is not a `dot` you will also need to provide the SVG node type as the second argument to `addClick`)
+	* give these marks a `fill` (otheriwse the tooltips will trigger only when the outline/stroke of the mark is moused-over)
+	* provide the custom tooltip component into the named `tooltip` slot
+-->
+<Story name="With custom tooltips">
+	<ObservablePlot
+		spec={{
+			style: {
+				fontFamily: 'Roboto',
+				fontSize: '12pt',
+				color: '#666666'
+			},
+
+			grid: true,
+			marginBottom: 50,
+
+			x: {
+				labelAnchor: 'center',
+				labelArrow: 'none',
+				label: 'Culmen length/mm'
+			},
+
+			y: {
+				insetTop: 20,
+				labelArrow: 'none'
+			},
+
+			marks: [
+				Plot.ruleY([0], { stroke: '#666666' }),
+				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.dot(penguins, {
+					x: 'culmen_length_mm',
+					y: 'culmen_depth_mm',
+					render: addClick(tooltipStore),
+					stroke: 'black',
+					fill: 'white'
+				})
+			]
+		}}
+		title="Penguin Culmens"
+		subTitle="A scatterplot of depth against length"
+		exportBtns={true}
+		data={penguins}
+		{tooltipStore}
+	>
+		<DemoTooltip slot="tooltip" />
+	</ObservablePlot>
+</Story>
