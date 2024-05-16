@@ -1,10 +1,16 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import ObservablePlot from './ObservablePlot.svelte';
 
+	export const meta = {
+		title: 'Charts/ObservablePlotFragments',
+		component: ObservablePlot
+	};
+</script>
+
+<script lang="ts">
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
-
-	import ObservablePlot, { default as ScatterPlot } from '../observablePlot/ObservablePlot.svelte';
 
 	import { ldnColors, theme } from '@ldn-viz/utils';
 
@@ -31,8 +37,6 @@
 		lineChartData
 	} from './demo_data';
 </script>
-
-<Meta title="Charts/ObservablePlotFragments" component={ScatterPlot} />
 
 <Template let:args>
 	<ObservablePlot {...args} />
