@@ -49,7 +49,7 @@
 	} from './demo_data';
 
 	import DemoTooltip from './DemoTooltip.svelte';
-	import { addClick } from './ObservablePlot.svelte';
+	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';
 
 	const spec = {
 		style: {
@@ -79,6 +79,9 @@
 			Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' })
 		]
 	};
+
+	let clickedValue = undefined;
+	let clickedIndex = undefined;
 
 	const tooltipStore = writable();
 </script>
@@ -154,7 +157,6 @@
 				Plot.dot(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: addClick(tooltipStore),
 					stroke: 'black',
 					fill: 'white',
 
@@ -221,7 +223,7 @@
 				Plot.dot(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: addClick(tooltipStore),
+					render: registerTooltip(tooltipStore),
 					stroke: 'black',
 					fill: 'white'
 				})
@@ -234,6 +236,64 @@
 	>
 		<DemoTooltip slot="tooltip" />
 	</ObservablePlot>
+</Story>
+
+<!--
+	Using the `addEventHandler` function we can register an event handler for events (e.g, `click`, `mouseenter`, `mouseleave`) triggered by user interaction with an SVG mark.
+-->
+<Story name="With custom click interaction">
+	<ObservablePlot
+		spec={{
+			style: {
+				fontFamily: 'Roboto',
+				fontSize: '12pt',
+				color: '#666666'
+			},
+
+			grid: true,
+			marginBottom: 50,
+
+			x: {
+				labelAnchor: 'center',
+				labelArrow: 'none',
+				label: 'Culmen length/mm'
+			},
+
+			y: {
+				insetTop: 20,
+				labelArrow: 'none'
+			},
+
+			marks: [
+				Plot.ruleY([0], { stroke: '#666666' }),
+				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.dot(penguins, {
+					x: 'culmen_length_mm',
+					y: 'culmen_depth_mm',
+					render: addEventHandler('click', (ev, d) => {
+						clickedIndex = d.index;
+						clickedValue = penguins[d.index];
+					}),
+					stroke: 'black',
+					r: 5,
+					fill: (d, i) => {
+						return clickedIndex !== undefined && i === clickedIndex ? 'red' : 'white';
+					}
+				})
+			]
+		}}
+		title="Penguin Culmens"
+		subTitle="A scatterplot of depth against length"
+		data={penguins}
+		{tooltipStore}
+	>
+		<DemoTooltip slot="tooltip" />
+	</ObservablePlot>
+
+	<div>
+		Selected point:
+		<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
+	</div>
 </Story>
 
 <Story name="Area chart">

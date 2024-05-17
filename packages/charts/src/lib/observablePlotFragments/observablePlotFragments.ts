@@ -96,7 +96,7 @@ type generateAnnotationsConfig = {
 	 * However, if a mark is an `option` rather than `channel`, but the specified value is a function, then the function will be evaluated for the datum.
 	 * This means that you can specify `dx` as a function, without worrying about the fact the Observable Plot doesn't (currently) support this.
 	 */
-	options: Record<string, number | string | ((x: any) => any)>; // any; // object with ket
+	options?: Record<string, number | string | ((x: any) => any)>; // any; // object with ket
 
 	/**
 	 * Additional objects, expressed as functions that will be evaluated before Plot's mark function is called.
@@ -104,7 +104,7 @@ type generateAnnotationsConfig = {
 	 * this will be pre-processed so that plot sees either `fill: 'black'` (specifying a color constant) or `fill: 'GDPType` (speficying a field to be encoded using a color scale).
 	 * If this was not pre-processed, Observable Plot would apply a color encoding to the string literatal `'GDPType'` rather than the value of the field with that name.
 	 */
-	optionsToEval: Record<string, (x: any) => any>;
+	optionsToEval?: Record<string, (x: any) => any>;
 };
 
 export const preprocessOptions = (data: any[], config: generateAnnotationsConfig) => {
