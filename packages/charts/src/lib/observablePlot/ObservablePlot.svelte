@@ -1,4 +1,9 @@
 <script context="module" lang="ts">
+	/**
+	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapped in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
+	 *  @component
+	 */
+
 	import type { AddClickFunction, Position } from './types.ts';
 
 	export const addClick: AddClickFunction =
@@ -39,15 +44,40 @@
 	import * as Plot from '@observablehq/plot';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 
+	/**
+	 * The Observable Plot specification for the visualization.
+	 */
 	export let spec;
 
-	export let data: any = []; // for download button only
+	/**
+	 * Data being visualized (as an array of objects), to be used by data download button.
+	 */
+	export let data: any[] = [];
 
-	// for container
-	export let title: string | undefined = undefined;
-	export let subTitle: string | undefined = undefined;
-	export let alt: string | undefined = undefined;
-	export let footer:
+	/**
+	 * Title that is displayed in large text above the plot.
+	 */
+	 export let title = "";
+
+	/**
+	 * Subtitle that is displayed below the title, but above the plot.
+	 */
+	 export let subTitle = "";
+
+	/**
+	 * Alt-text for the plot.
+	 */
+	 export let alt = "";
+
+	/**
+	 * Object specifying what appears in the footer:
+	 *
+	 * * `byline` (string) - statement of who created the visualization
+	 * * `source` (string) - statement of where the data came from
+	 * * `note` (string) - any additional footnotes
+	 * * `exportBtns` (boolean) - if `false`, then data/image download buttons will be hidden
+	 */
+	 export let footer:
 		| {
 				byline?: string | undefined;
 				source?: string | undefined;
@@ -56,11 +86,18 @@
 		  }
 		| undefined = undefined;
 
-	export let domNode: any = undefined;
+	/**
+	 * Provides a way to access the DOM node into which the visualization is rendered.
+	 */
+	 export let domNode: any = undefined;
 
-	export let tooltipStore = writable<Position>();
+	/**
+	 * A store that stores details of the moused-over point.
+	 * Used for custom tooltips.
+	 */
+	 export let tooltipStore = writable<Position>();
 
-	/** A y-offset from the hover point, in pixels. */
+	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
 
 	const renderPlot = (node: HTMLDivElement) => {
