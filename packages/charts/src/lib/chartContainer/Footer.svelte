@@ -2,7 +2,7 @@
 	export let byline = '';
 	export let source = '';
 	export let note = '';
-	export let exportBtns = false;
+	export let exportBtns: boolean | undefined = false;
 </script>
 
 <div class="w-full flex flex-col sm:flex-row justify-between">
