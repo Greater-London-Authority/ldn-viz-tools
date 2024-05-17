@@ -57,17 +57,17 @@
 	/**
 	 * Title that is displayed in large text above the plot.
 	 */
-	 export let title: string | undefined = undefined;
+	 export let title = "";
 
 	/**
 	 * Subtitle that is displayed below the title, but above the plot.
 	 */
-	 export let subTitle: string | undefined = undefined;
+	 export let subTitle = "";
 
 	/**
 	 * Alt-text for the plot.
 	 */
-	 export let alt: string | undefined = undefined;
+	 export let alt = "";
 
 	/**
 	 * Object specifying what appears in the footer:

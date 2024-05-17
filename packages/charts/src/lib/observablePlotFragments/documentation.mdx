@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/blocks';
+
+import * as snippets from "./observablePlotFragments.ts";
+
+<Meta title="Charts/ObservablePlot/Reusable Fragments" />
+
+# Observable Plot fragments
+
+The library defines a number of reusable fragments of Observable Plot configuration, to allow plots to be consistently styled with less copy-and-paste of code.
+
+
+### General styles
+
+`fontStack` is:
+<code>{snippets.fontStack}</code>
+
+`defaultStyle` is:
+<code>{JSON.stringify(snippets.defaultStyle, null, 2)}</code>
+
+
+
+`defaultSize` is:
+<code>{JSON.stringify(snippets.defaultSize, null, 2)}</code>
+
+`defaultColor` is:
+<code>{JSON.stringify(snippets.defaultColor, null, 2)}</code>
+
+
+### Axis styles 
+
+`defaultXAxis` is:
+<code>{JSON.stringify(snippets.defaultXAxis, null, 2)}</code>
+
+`defaultYAxis` is:
+<code>{JSON.stringify(snippets.defaultYAxis, null, 2)}</code>
+
+
+### Line styles 
+
+`defaultLine` is:
+<code>{JSON.stringify(snippets.defaultLine, null, 2)}</code>
+
+`defaultDashedLine` is:
+<code>{JSON.stringify(snippets.defaultDashedLine, null, 2)}</code>
+
+
+### Styles for other marks
+
+`defaultDot` is:
+<code>{JSON.stringify(snippets.defaultDot, null, 2)}</code>
+
+`defaultArea` is:
+<code>{JSON.stringify(snippets.defaultArea, null, 2)}</code>
+
+`defaultRule` is:
+<code>{JSON.stringify(snippets.defaultRule, null, 2)}</code>
+
+`defaultAnnotationText` is:
+<code>{JSON.stringify(snippets.defaultAnnotationText, null, 2)}</code>
