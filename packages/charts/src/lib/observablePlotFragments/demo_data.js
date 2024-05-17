@@ -17,9 +17,6 @@ export const areaPlotPointsToLabel = [2014, 2019, 2020, 2022];
 
 /*******************************************************/
 
-export const ukQuartersToLabel = ['2023 Q3'];
-export const londonQuartersToLabel = ['2019 Q4', '2020 Q2', '2021 Q3', '2022 Q3', '2023 Q3'];
-
 export const lineChartData = [
 	{
 		Date: '2019-04-01T00:00:00.000Z',
@@ -61,7 +58,9 @@ export const lineChartData = [
 		Quarter: 'Q4 2019',
 		GDPType: 'London GDP',
 		Percent: 1,
-		QuarterRev: '2019 Q4'
+		QuarterRev: '2019 Q4',
+		highlight: true,
+		textAnchor: 'start'
 	},
 	{
 		Date: '2020-01-01T00:00:00.000Z',
@@ -89,7 +88,9 @@ export const lineChartData = [
 		Quarter: 'Q2 2020',
 		GDPType: 'London GDP',
 		Percent: 0.81,
-		QuarterRev: '2020 Q2'
+		QuarterRev: '2020 Q2',
+		highlight: true,
+		Offset: +30
 	},
 	{
 		Date: '2020-07-01T00:00:00.000Z',
@@ -159,7 +160,8 @@ export const lineChartData = [
 		Quarter: 'Q3 2021',
 		GDPType: 'London GDP',
 		Percent: 1.008,
-		QuarterRev: '2021 Q3'
+		QuarterRev: '2021 Q3',
+		highlight: true
 	},
 	{
 		Date: '2021-10-01T00:00:00.000Z',
@@ -215,7 +217,8 @@ export const lineChartData = [
 		Quarter: 'Q3 2022',
 		GDPType: 'London GDP',
 		Percent: 1.078,
-		QuarterRev: '2022 Q3'
+		QuarterRev: '2022 Q3',
+		highlight: true
 	},
 	{
 		Date: '2022-10-01T00:00:00.000Z',
@@ -264,7 +267,9 @@ export const lineChartData = [
 		Quarter: 'Q3 2023',
 		GDPType: 'UK GDP',
 		Percent: 1.018,
-		QuarterRev: '2023 Q3'
+		QuarterRev: '2023 Q3',
+		highlight: true,
+		Offset: +40
 	},
 	{
 		Date: '2023-07-01T00:00:00.000Z',
@@ -369,3 +374,10 @@ export const education_data = [
 		Type: 'Completions'
 	}
 ];
+
+export const educationLabelOffsets = {
+	'19-24 Starts': +50,
+	'19-24 Completions': -20,
+	'<19 Starts': +60,
+	'<19 Completions': +60
+};
