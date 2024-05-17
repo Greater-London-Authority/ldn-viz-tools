@@ -113,7 +113,7 @@ export const preprocessOptions = (data: any[], config: generateAnnotationsConfig
 	const optionsToConvert = ['dy', 'textAnchor'];
 
 	for (const entry of data.filter(config.filter || (() => true))) {
-		const options: Record<string, number | string> = {};
+		const options: Record<string, number | string | ((x: any) => any)> = {};
 
 		for (const key of Object.keys(config.options || {})) {
 			const val = config.options[key];
