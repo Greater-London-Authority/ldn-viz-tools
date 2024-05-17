@@ -4,12 +4,15 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let chartToCapture: HTMLDivElement;
-	export let exportData: any;
+	export let data: any;
 </script>
 
-<div class="flex flex-col sm:flex-row shrink-0 sm:ml-auto capture-ignore" data-html2canvas-ignore>
+<div
+	class="flex flex-col sm:flex-row shrink-0 sm:ml-auto sm:self-end capture-ignore"
+	data-html2canvas-ignore
+>
 	<DataDownloadButton
-		data={exportData}
+		{data}
 		filename="download.csv"
 		format="CSV"
 		variant="text"
@@ -24,7 +27,7 @@
 		/>
 	</DataDownloadButton>
 	<DataDownloadButton
-		data={exportData}
+		{data}
 		filename="download.json"
 		format="JSON"
 		variant="text"

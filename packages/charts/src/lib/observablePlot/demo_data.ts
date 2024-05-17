@@ -375,7 +375,7 @@ export const education_data = [
 	}
 ];
 
-export const educationLabelOffsets = {
+export const educationLabelOffsets: Record<string, number> = {
 	'19-24 Starts': +50,
 	'19-24 Completions': -20,
 	'<19 Starts': +60,
