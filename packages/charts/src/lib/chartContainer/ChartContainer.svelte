@@ -16,17 +16,17 @@
 	/**
 	 * Title that is displayed in large text above the plot.
 	 */
-	export let title = "";
+	export let title = '';
 
 	/**
 	 * Subtitle that is displayed below the title, but above the plot.
 	 */
-	export let subTitle = "";
+	export let subTitle = '';
 
 	/**
 	 * Alt-text for the plot.
 	 */
-	export let alt = "";
+	export let alt = '';
 
 	/**
 	 * Object specifying what appears in the footer:
@@ -47,15 +47,20 @@
 	let chartClass = classNames('relative', chartHeight);
 
 	/**
+	 * Tailwind class to set overall chart width
+	 */
+	export let chartWidth = 'w-full';
+
+	/**
 	 * Data being visualized (as an array of objects), to be used by data download button.
 	 */
-	export let data: { [key: string]: any }[];
+	export let exportData: { [key: string]: any }[] | undefined = undefined;
 
 	// For save as image
 	let chartToCapture: HTMLDivElement;
 </script>
 
-<div class={`chart-container`} bind:this={chartToCapture} id="captureElement">
+<div class={`chart-container ${chartWidth}`} bind:this={chartToCapture} id="captureElement">
 	{#if title}
 		<Title>{title}</Title>
 	{/if}
@@ -73,13 +78,13 @@
 	</div>
 	{#if footer}
 		<Footer {...footer}>
-			<ExportBtns {chartToCapture} data slot="exportBtns" />
+			<ExportBtns {chartToCapture} exportData slot="exportBtns" />
 		</Footer>
 	{/if}
 </div>
 
 <style>
 	.chart-container {
-		@apply flex flex-col w-full;
+		@apply flex flex-col;
 	}
 </style>

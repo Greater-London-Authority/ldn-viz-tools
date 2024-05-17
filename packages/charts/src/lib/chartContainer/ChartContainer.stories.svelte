@@ -12,15 +12,25 @@
 	<ChartContainer {...args} />
 </Template>
 
-<Story
-	name="Default"
-	args={{
-		title: 'Title',
-		subTitle: 'Sub-Title',
-		footer: {
-			byline: 'Made by someone',
-			source: 'With data from someone else',
-			note: 'Some caveats apply'
-		}
-	}}
-/>
+<Story name="Default" id="ChartcontainerDefault" />
+
+<Story name="With Title">
+	<ChartContainer title="This is the Chart Title" />
+</Story>
+
+<Story name="With Title and Subtitle">
+	<ChartContainer title="This is the Chart Title" subTitle="Subtitle provides extra context" />
+</Story>
+
+<Story name="Source, byline and note (footer)">
+	<ChartContainer
+		title="This is the Chart Title"
+		subTitle="Subtitle provides extra context"
+		footer={{
+			source: 'The source of this chart data',
+			byline: 'A byline for the chart',
+			note: 'Be aware that you can provide a note if required',
+			exportBtns: true
+		}}
+	/>
+</Story>

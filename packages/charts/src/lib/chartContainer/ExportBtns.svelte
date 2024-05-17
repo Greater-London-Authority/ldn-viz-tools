@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { Button, DataDownloadButton, ImageDownloadButton } from '@ldn-viz/ui';
+	import { DataDownloadButton, ImageDownloadButton } from '@ldn-viz/ui';
 	import { ArrowDownTray, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let chartToCapture: HTMLDivElement;
-	export let data: any;
+	export let exportData: any;
 </script>
 
 <div class="flex flex-col sm:flex-row shrink-0 sm:ml-auto capture-ignore" data-html2canvas-ignore>
 	<DataDownloadButton
-		{data}
+		data={exportData}
 		filename="download.csv"
 		format="CSV"
 		variant="text"
@@ -24,7 +24,7 @@
 		/>
 	</DataDownloadButton>
 	<DataDownloadButton
-		{data}
+		data={exportData}
 		filename="download.json"
 		format="JSON"
 		variant="text"
