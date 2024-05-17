@@ -26,7 +26,7 @@
 		bind:this={element}
 		on:mouseenter={() => triggerMouseEnter(element)}
 		on:mouseleave|stopPropagation={triggerMouseLeave}
-        on:click={triggerClick}
+		on:click={triggerClick}
 		role="tooltip"
 		class="inline-flex items-center"
 	>

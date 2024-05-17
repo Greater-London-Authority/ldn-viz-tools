@@ -6,7 +6,7 @@
 	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
 	 * @component
 	 */
-	
+
 	import { setContext } from 'svelte';
 
 	import { createDialog } from '@melt-ui/svelte';
