@@ -11,11 +11,8 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { floatingContent } from './tooltip';
 
-	import { InformationCircle } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-
-	import Button from '../button/Button.svelte';
-	import { floatingRef } from '../tooltip/tooltip.js';
+	import { setContext } from 'svelte';
+	import Trigger from './Trigger.svelte';
 
 	/**
 	 * text that appears in the tooltip target, next to the icon
@@ -28,8 +25,6 @@
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
 	let showTooltip = false;
-
-	let element: HTMLSpanElement;
 
 	const arrowRef: Writable<HTMLElement> = writable();
 	let dynamicOptions = {};
@@ -53,35 +48,17 @@
 			}
 		};
 	}
-</script>
 
-<Button variant="text" size={hintSize} class="!p-0 !text-core-grey-400 dark:!text-core-grey-300">
-	<span
-		use:floatingRef
-		bind:this={element}
-		on:mouseenter={() => {
+	setContext('triggerFuncs', {
+		triggerMouseEnter: (element) => {
 			showTooltip = true;
 			floatingRef(element);
-		}}
-		on:mouseleave|stopPropagation={() => (showTooltip = false)}
-		role="tooltip"
-		class="inline-flex items-center"
-	>
-		{#if $$slots.hint}
-			<!-- if present, replaces the default `hintLabel` and icon  -->
-			<slot name="hint" />
-		{:else}
-			{hintLabel}
+		},
+		triggerMouseLeave: () => (showTooltip = false)
+	});
+</script>
 
-			<Icon
-				src={InformationCircle}
-				theme="solid"
-				class="w-[18px] h-[18px] ml-0.5"
-				aria-hidden="true"
-			/>
-		{/if}
-	</span>
-</Button>
+<Trigger {hintSize} {hintLabel} />
 
 {#if showTooltip}
 	<div

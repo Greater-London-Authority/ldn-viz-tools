@@ -6,12 +6,15 @@
 	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
 	 * @component
 	 */
+	
+	import { setContext } from 'svelte';
 
 	import { createDialog } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
+	import Trigger from '../tooltip/Trigger.svelte';
 	import { classNames } from '../utils/classNames';
 
 	/**
@@ -51,6 +54,9 @@
 		| '7xl'
 		| 'full' = 'md';
 
+	export let hintLabel = 'More info';
+	export let showTrigger = false;
+
 	const hasChildren = Object.keys($$slots).length > 0;
 
 	const widthClasses = {
@@ -72,7 +78,25 @@
 		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
+
+	setContext('triggerFuncs', {
+		triggerClick: (element) => {
+			$open = true;
+		}
+	});
 </script>
+
+{#if showTrigger}
+	{#if $$slots.hint}
+		<Trigger>
+			<svelte:fragment slot="hint">
+				<slot name="hint" />
+			</svelte:fragment>
+		</Trigger>
+	{:else}
+		<Trigger {hintLabel} />
+	{/if}
+{/if}
 
 <div {...$portalled} use:$portalled.action>
 	{#if $open}

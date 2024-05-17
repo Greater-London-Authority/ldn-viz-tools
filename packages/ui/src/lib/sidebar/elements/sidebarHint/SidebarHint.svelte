@@ -4,6 +4,7 @@
 	 * @component
 	 */
 
+	import Modal from '../../../modal/Modal.svelte';
 	import Tooltip from '../../../tooltip/Tooltip.svelte';
 	import SidebarHintModal from './SidebarHintModal.svelte';
 
@@ -57,8 +58,12 @@
 		<slot />
 	</Tooltip>
 {:else if hintType === 'modal'}
-	<SidebarHintModal {hintLabel} {modalTitle} {modalDescription} {modalWidth}>
+	<Modal title={modalTitle || ''} description={modalDescription} width={modalWidth} showTrigger>
+		<svelte:fragment slot="hintText">
+			{hintLabel}
+		</svelte:fragment>
+
 		<!-- The help message. -->
 		<slot />
-	</SidebarHintModal>
+	</Modal>
 {/if}
