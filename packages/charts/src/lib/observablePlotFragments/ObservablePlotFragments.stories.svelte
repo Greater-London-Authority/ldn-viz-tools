@@ -1,10 +1,16 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
+	export const meta = {
+		title: 'Charts/ObservablePlotFragments',
+		component: ObservablePlot
+	};
+</script>
+
+<script lang="ts">
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
-
-	import ObservablePlot, { default as ScatterPlot } from '../observablePlot/ObservablePlot.svelte';
 
 	import { ldnColors, theme } from '@ldn-viz/utils';
 
@@ -12,27 +18,24 @@
 		defaultAnnotationText,
 		defaultArea,
 		defaultColor,
-		defaultDashedLine,
 		defaultDot,
 		defaultLine,
 		defaultRule,
 		defaultSize,
 		defaultStyle,
 		defaultXAxis,
-		defaultYAxis
+		defaultYAxis,
+		preprocessOptions
 	} from './observablePlotFragments';
 
 	import {
 		areaPlotData,
 		areaPlotPointsToLabel,
+		educationLabelOffsets,
 		education_data,
-		lineChartData,
-		londonQuartersToLabel,
-		ukQuartersToLabel
+		lineChartData
 	} from './demo_data';
 </script>
-
-<Meta title="Charts/ObservablePlotFragments" component={ScatterPlot} />
 
 <Template let:args>
 	<ObservablePlot {...args} />
@@ -72,16 +75,31 @@
 					...defaultArea
 				}),
 
+				// Top part of labels (non-bold)
 				Plot.text(areaPlotData, {
 					...defaultAnnotationText,
 					x: 'Year',
 					y: 'Percent',
-					text: (d) => `${d.Year}\n${d.Percent * 100}%`,
+					text: (d) => `${d.Year}`,
 					dy: +20,
 					lineAnchor: 'top',
 					dx: 5,
 					textAnchor: 'end',
 					filter: (d) => areaPlotPointsToLabel.includes(d.Year)
+				}),
+
+				// Bottom part of labels (bold)
+				Plot.text(areaPlotData, {
+					...defaultAnnotationText,
+					x: 'Year',
+					y: 'Percent',
+					text: (d) => `${d.Percent * 100}%`,
+					dy: +50,
+					lineAnchor: 'top',
+					dx: 5,
+					textAnchor: 'end',
+					filter: (d) => areaPlotPointsToLabel.includes(d.Year),
+					fontWeight: 'bold'
 				}),
 
 				Plot.dot(areaPlotData, {
@@ -136,63 +154,55 @@
 					sort: { x: null, reverse: false }
 				}),
 
-				Plot.text(lineChartData, {
-					x: 'Quarter',
-					y: 'Percent',
-					text: (d) => `London ${d.QuarterRev}`,
-					dy: -60,
-					dx: -10,
-					textAnchor: 'end',
-					lineAnchor: 'bottom',
-					fontSize: '15px',
-					fill: 'GDPType',
-					filter: (d) =>
-						d['GDPType'] === 'London GDP' && londonQuartersToLabel.includes(d.QuarterRev)
+				// First section of label (non-bold)
+				...preprocessOptions(lineChartData, {
+					type: Plot.text,
+					options: {
+						...defaultAnnotationText,
+						x: 'Quarter',
+						y: 'Percent',
+						text: (d) =>
+							d.QuarterRev === '2019 Q4'
+								? d.QuarterRev
+								: `${d['GDPType'] === 'London GDP' ? 'London' : 'UK'} ${d.QuarterRev}`,
+
+						filter: (d) => d.highlight,
+
+						dy: (d) => d.Offset || -50,
+						textAnchor: (d) => d.textAnchor || 'end',
+						lineAnchor: 'bottom',
+						fontSize: '15px',
+						fill: 'GDPType'
+					},
+					optionsToEval: {
+						fill: (d) => (d.QuarterRev === '2019 Q4' ? 'black' : 'GDPType')
+					}
 				}),
 
-				Plot.text(lineChartData, {
-					x: 'Quarter',
-					y: 'Percent',
-					text: (d) => `${format('0.2%')(d.Percent)}\nPre-pandemic GDP`,
-					fontWeight: 'bold',
-					dx: -10,
-					dy: -30,
-					textAnchor: 'end',
-					lineAnchor: 'bottom',
-					fontSize: '15px',
-					fill: 'GDPType',
-					filter: (d) =>
-						d['GDPType'] === 'London GDP' && londonQuartersToLabel.includes(d.QuarterRev)
-				}),
-
-				Plot.text(lineChartData, {
-					x: 'Quarter',
-					y: 'Percent',
-					text: (d) => `UK ${d.QuarterRev}`,
-					dy: +30,
-					textAnchor: 'end',
-					lineAnchor: 'top',
-					fontSize: '15px',
-					fill: 'GDPType',
-					filter: (d) => d['GDPType'] === 'UK GDP' && ukQuartersToLabel.includes(d.QuarterRev)
-				}),
-
-				Plot.text(lineChartData, {
-					x: 'Quarter',
-					y: 'Percent',
-					text: (d) => `${format('0.2%')(d.Percent)}\nPre-pandemic GDP`,
-					fontWeight: 'bold',
-					dy: +50,
-					textAnchor: 'end',
-					lineAnchor: 'top',
-					fontSize: '15px',
-					fill: 'GDPType',
-					filter: (d) => d['GDPType'] === 'UK GDP' && ukQuartersToLabel.includes(d.QuarterRev)
+				// Second section of labels (bold)
+				...preprocessOptions(lineChartData, {
+					type: Plot.text,
+					options: {
+						...defaultAnnotationText,
+						x: 'Quarter',
+						y: 'Percent',
+						text: (d) => `${format('0.2%')(d.Percent)}\nPre-pandemic GDP`,
+						filter: (d) => d.highlight,
+						dy: (d) => (d.Offset || -50) + 30,
+						textAnchor: (d) => d.textAnchor || 'end',
+						lineAnchor: 'bottom',
+						fontSize: '15px',
+						//fill: 'GDPType',
+						fontWeight: 'bold'
+					},
+					optionsToEval: {
+						fill: (d) => (d.QuarterRev === '2019 Q4' ? 'black' : 'GDPType')
+					}
 				}),
 
 				Plot.text([{ Quarter: 'Q4 2019', Percent: 1 }], {
 					x: 'Quarter',
-					dx: -30,
+					dx: -40,
 					y: 'Percent',
 					dy: -15,
 					textAnchor: 'end',
@@ -208,10 +218,7 @@
 					stroke: 'GDPType',
 					strokeWidth: 2,
 					sort: { x: null, reverse: false },
-					filter: (d) =>
-						(d['GDPType'] === 'UK GDP' ? ukQuartersToLabel : londonQuartersToLabel).includes(
-							d.QuarterRev
-						),
+					filter: (d) => d.highlight,
 					r: 8,
 					fill: 'white'
 				}),
@@ -236,10 +243,9 @@
 		subTitle="Number of apprenticeship programme starts and completions in London for under 19s and 19-24 year olds between 2014/15 and 2022/23"
 		spec={{
 			y: {
-				...defaultYAxis,
 				domain: [0, 1.6e4],
-				percent: false,
-				ticks: 5
+				percent: false
+				// ticks: 5
 			},
 
 			x: defaultXAxis,
@@ -258,18 +264,19 @@
 
 				// <19
 				Plot.lineY(education_data, {
-					...defaultDashedLine,
+					...defaultLine,
 					x: 'Date',
 					y: 'Count',
 					z: 'Age',
 					stroke: 'Age',
 					sort: { x: null, reverse: false },
-					filter: (d) => d.Type === 'Completions'
+					filter: (d) => d.Type === 'Completions',
+					strokeDasharray: '5,5'
 				}),
 
 				// 19-24
 				Plot.lineY(education_data, {
-					...defaultDashedLine,
+					...defaultLine,
 					x: 'Date',
 					y: 'Count',
 					z: 'Age',
@@ -278,16 +285,19 @@
 					filter: (d) => d.Type === 'Starts'
 				}),
 
-				Plot.text(education_data, {
-					...defaultAnnotationText,
-					x: 'Date',
-					y: 'Count',
-					text: (d) => `${d.Age} ${d.Type}\n${d.Count.toLocaleString()}`,
-					dy: -6,
-					textAnchor: 'start',
-					lineAnchor: 'bottom',
-					fill: 'Age',
-					filter: (d) => d.Date === '2022/23'
+				...preprocessOptions(education_data, {
+					type: Plot.text,
+					options: {
+						...defaultAnnotationText,
+						x: 'Date',
+						y: 'Count',
+						text: (d) => `${d.Age} ${d.Type}\n${d.Count.toLocaleString()}`,
+						dy: (d) => educationLabelOffsets[`${d.Age} ${d.Type}`],
+						textAnchor: 'end',
+						lineAnchor: 'bottom',
+						fill: 'Age',
+						filter: (d) => d.Date === '2022/23'
+					}
 				}),
 
 				Plot.dot(education_data, {
@@ -296,6 +306,10 @@
 					y: 'Count',
 					filter: (d) => d.Date === '2022/23',
 					stroke: 'Age'
+				}),
+
+				Plot.axisY({
+					...defaultYAxis
 				})
 			]
 		}}
