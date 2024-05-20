@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import ColorLegendOrdinalHorizontal from './ColorLegendOrdinalHorizontal.svelte';
+	import ColorLegendOrdinalChips from './ColorLegendOrdinalChips.svelte';
 
 	export const meta = {
-		title: 'Ui/Legends/ColorLegendOrdinalHorizontal',
-		component: ColorLegendOrdinalHorizontal,
+		title: 'Ui/Legends/ColorLegendOrdinalChips',
+		component: ColorLegendOrdinalChips,
 		argTypes: {
 			orientation: {
 				options: ['horizontal', 'vertical'],
@@ -23,20 +23,20 @@
 </script>
 
 <Template let:args>
-	<ColorLegendOrdinalHorizontal scale={ordinalScale} title="Current EPC Rating" {...args} />
+	<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" {...args} />
 </Template>
 
 <Story name="Default" />
 
 <Story name="Categorical color scale">
 	<div class="w-[400px]">
-		<ColorLegendOrdinalHorizontal scale={ordinalScale} title="Current EPC Rating" />
+		<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" />
 	</div>
 </Story>
 
 <Story name="Categorical color scale - highlighted value">
 	<div class="w-[400px]">
-		<ColorLegendOrdinalHorizontal
+		<ColorLegendOrdinalChips
 			scale={ordinalScale}
 			title="Current EPC Rating"
 			highlightedValue="B"
@@ -47,7 +47,7 @@
 <!-- If there are a large number of color options to include in the legend, it may be necessarily to spread them out vertically rather than horizontally. -->
 <Story name="Categorical color scale - vertical">
 	<div class="w-[400px]">
-		<ColorLegendOrdinalHorizontal
+		<ColorLegendOrdinalChips
 			scale={ordinalScale}
 			title="Current EPC Rating"
 			orientation="vertical"
