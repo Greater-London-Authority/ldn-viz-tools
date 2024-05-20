@@ -9,7 +9,7 @@
 	import { arrow } from 'svelte-floating-ui';
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { writable, type Writable } from 'svelte/store';
-	import { floatingContent } from './tooltip';
+	import { floatingContent, floatingRef } from './tooltip';
 
 	import { setContext } from 'svelte';
 	import Trigger from './Trigger.svelte';
