@@ -37,3 +37,14 @@
 		/>
 	</div>
 </Story>
+
+<!-- If there are a large number of color options to include in the legend, it may be necessarily to spread them out vertically rather than horizontally. -->
+<Story name="Categorical color scale - vertical">
+	<div class="w-[400px]">
+		<ColorLegendOrdinalHorizontal
+			scale={ordinalScale}
+			title="Current EPC Rating"
+			orientation="vertical"
+		/>
+	</div>
+</Story>
