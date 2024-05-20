@@ -4,7 +4,13 @@
 
 	export const meta = {
 		title: 'Ui/Legends/ColorLegendOrdinalHorizontal',
-		component: ColorLegendOrdinalHorizontal
+		component: ColorLegendOrdinalHorizontal,
+		argTypes: {
+			orientation: {
+				options: ['horizontal', 'vertical'],
+				control: { type: 'radio' }
+			}
+		}
 	};
 </script>
 
