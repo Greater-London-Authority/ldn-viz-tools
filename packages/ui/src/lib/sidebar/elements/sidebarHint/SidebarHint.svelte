@@ -5,7 +5,6 @@
 	 */
 
 	import Tooltip from '../../../tooltip/Tooltip.svelte';
-	import SidebarHintModal from './SidebarHintModal.svelte';
 
 	/**
 	 * Form in which the help text should be displayed.
@@ -57,8 +56,10 @@
 		<slot />
 	</Tooltip>
 {:else if hintType === 'modal'}
-	<SidebarHintModal {hintLabel} {modalTitle} {modalDescription} {modalWidth}>
+	<Tooltip {hintLabel} {modalTitle} {modalDescription} {modalWidth}>
 		<!-- The help message. -->
-		<slot />
-	</SidebarHintModal>
+		<svelte:fragment slot="modal">
+			<slot />
+		</svelte:fragment>
+	</Tooltip>
 {/if}
