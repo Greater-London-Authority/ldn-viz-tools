@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 2.1.0
+
+### Minor Changes
+
+- 7b19981: CHANGED: determine left/right/center alignment on contents of `MapControlGroup` based on whether it is positioned to the Left/Rght/Center.
+
 ## 2.0.0
 
 ### Major Changes

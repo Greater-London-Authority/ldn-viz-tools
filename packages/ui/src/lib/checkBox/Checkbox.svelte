@@ -1,10 +1,11 @@
 <script context="module" lang="ts">
 	export interface CheckboxProps {
+		id: string;
+		name: string;
 		color: string;
 		checked: boolean;
 		indeterminate: boolean;
 		label: string;
-		id: string;
 		disabled: boolean;
 		hint: string;
 		hintLabel: string;
@@ -22,6 +23,17 @@
 	 */
 
 	import Tooltip from '../tooltip/Tooltip.svelte';
+	import { randomId } from '../utils/randomId';
+
+	/**
+	 * Value set as the `id` attribute of the `<input>` element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
+	/**
+	 * Value set as the `name` attribute of the `<input>` element (optional, but required if providing value with a form submission)
+	 */
+	export let name = '';
 
 	/**
 	 * Color of the checkbox, as a string in any CSS color format
@@ -50,11 +62,6 @@
 	export let label: CheckboxProps['label'];
 
 	/**
-	 * Value set as the `id` attribute of the `<input>` element (after the prefix "input-" is added).
-	 */
-	export let id: CheckboxProps['id'];
-
-	/**
 	 * Boolean indicating whether the checkbox is *disabled*.
 	 * If it is disabled, then the user cannot change whether it is *checked* (either using the mouse or keyboard).
 	 */
@@ -71,14 +78,12 @@
 	 * It provides additional clues that help text is available (e.g. "More information", "About", "Help")
 	 */
 	export let hintLabel: CheckboxProps['hintLabel'] = '';
-
-	let inputID = `input-${id}`;
 </script>
 
 <label class="flex items-center">
 	<input
-		id={inputID}
-		name={id}
+		{id}
+		{name}
 		class="form-checkbox"
 		type="checkbox"
 		bind:checked
@@ -88,6 +93,7 @@
 		style={color
 			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
 			: ''}
+		{...$$restProps}
 	/>
 	<span class="mx-2 form-label">{label}</span>
 	{#if hint}

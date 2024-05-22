@@ -2,6 +2,7 @@
 export { default as Button } from './button/Button.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
+export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as ColorLegendOrdinalHorizontal } from './colorLegends/ColorLegendOrdinalHorizontal.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
@@ -65,5 +66,9 @@ export * from './geolocation/GeocoderAdapterOSPlaces';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
 export { default as Geolocator } from './geolocation/Geolocator.svelte';
 export { default as GeocoderSuggestionList } from './geolocation/GeocoderSuggestionList.svelte';
+
+export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCookieConsent.svelte';
+export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
+export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
 export { classNames } from './utils/classNames';

@@ -1,35 +1,96 @@
 <script lang="ts">
-	// This file is based on
+	/**
+	 * The `<ColorLegend>` component draws a legend for a D3 color scale.
+	 *
+	 * @component
+	 */
 
+	// This file is based on
 	// https://observablehq.com/@d3/color-legend
 	// Copyright 2021, Observable Inc.
 	// Released under the ISC license.
 
 	// It has been modified to use Svelte rather than just D3.js, and to allow a value on the scale to be highlighted.
 
-	import { range, quantile } from 'd3-array';
+	import { quantile, range } from 'd3-array';
 	import { axisBottom } from 'd3-axis';
 	import { format } from 'd3-format';
 	import { interpolate, interpolateRound, quantize } from 'd3-interpolate';
-	import { scaleLinear, scaleBand } from 'd3-scale';
+	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { select } from 'd3-selection';
 
+	/**
+	 * A d3 color scale object
+	 */
 	export let color: any;
 
+	/**
+	 * Title to display above the colors.
+	 */
 	export let title = '';
+
+	/**
+	 * Height of the axis ticks (pixels).
+	 */
 	export let tickSize = 6;
+
+	/**
+	 * Width of the legend (pixels).
+	 */
 	export let width = 320;
+
+	/**
+	 * Height of the legend (pixels).
+	 */
 	export let height = 44 + tickSize;
+
+	/**
+	 * Top margin size (pixels).
+	 */
 	export let marginTop = 18;
+
+	/**
+	 * Right margin size (pixels).
+	 */
 	export let marginRight = 0;
+
+	/**
+	 * Bottom margin size (pixels).
+	 */
 	export let marginBottom = 16 + tickSize;
+
+	/**
+	 * Left margin size (pixels).
+	 */
 	export let marginLeft = 0;
+
+	/**
+	 * Suggested number of ticks (the number of ticks is not guaranteed to be the same as this)
+	 */
 	export let ticks = width / 64;
+
+	/**
+	 * Format string to apply to tick labels (see the [`d3-format` docs](https://d3js.org/d3-format#locale_format))
+	 */
 	export let tickFormat: (v: any) => string;
+
 	export let tickValues: undefined | number[];
 
+	/**
+	 * Value to highlight on the scale with arrow.
+	 */
 	export let highlightedValue: undefined | string | number;
+
+	/**
+	 * Label displayed below legend, on the left.
+	 * Intended to describe the meaning of values at this end of the scale (e.g. "Younger" or "Less deprivation")
+	 */
 	export let leftLabel = '';
+
+	/**
+	 * Label displayed below legend, on the right.
+	 * Intended to describe the meaning of values at this end of the scale (e.g. "Older" or "More deprivation")
+	 */
 	export let rightLabel = '';
 
 	const ramp = (color, n = 256) => {

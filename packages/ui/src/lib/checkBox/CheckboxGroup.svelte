@@ -7,14 +7,12 @@
 	 */
 
 	import Checkbox from './Checkbox.svelte';
-
-	const uuidLength = 36;
-	const lastTwelveUuidChars = uuidLength - 12;
-	const selectAllId = crypto.randomUUID().slice(lastTwelveUuidChars);
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * Each element of this array defines a checkbox, and is an object with the properties:
 	 * * `id` (string)
+	 * * `name` (string, optional) - used to set the `name` attribute of the `<input>` element
 	 * * `label` (string) - the text displayed next to the checkbox
 	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 	 * * `color` (string, optional) - CSS color of the checkbox
@@ -23,6 +21,7 @@
 	 */
 	export let options: {
 		id: string;
+		name?: string;
 		label: string;
 		disabled?: boolean;
 		color?: string;
@@ -76,8 +75,13 @@
 
 <div>
 	{#if !buttonsHidden}
+		<!--
+			form="" should prevent this checkbox from being included in form
+			submissions.
+		-->
 		<Checkbox
-			id={selectAllId}
+			id={randomId()}
+			form=""
 			label="Select all"
 			color="#3787D2"
 			checked={allCheckboxesCheckedOrDisabled}
@@ -87,9 +91,10 @@
 	{/if}
 
 	<div class={buttonsHidden ? '' : 'pl-[28px]'}>
-		{#each options as option}
+		{#each options as option (option.id)}
 			<Checkbox
 				id={option.id}
+				name={option.name}
 				label={option.label}
 				color={option.color}
 				disabled={option.disabled}

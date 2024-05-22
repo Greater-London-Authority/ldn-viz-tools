@@ -25,6 +25,13 @@
 				description:
 					'classes for applying additional classes. These are appended to the class string so they have implicit but weak priority over other styles.',
 				control: { type: 'text' }
+			},
+			$$restprops: {
+				description:
+					'Any other props are applied to the top-level `<div>` that contains the toast messages',
+				table: {
+					category: 'properties'
+				}
 			}
 		}
 	};
@@ -80,8 +87,12 @@
 </script>
 
 <Template let:args>
+	<Button on:click={toastNotice}>Notice</Button>
+
 	<Toaster {...args} />
 </Template>
+
+<Story name="Default" source />
 
 <Story name="Types">
 	<Toaster position="Center" />
