@@ -54,25 +54,6 @@
 
 <Story name="Light OS Basemap">
 	<MapApp>
-		<div class="text-white space-y-4 m-2">
-			<p>
-				This is our default light basemap - it's the OS's <a
-					class="underline"
-					href="https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets"
-				>
-					OS_VTS_3857_Light.json</a
-				> stylesheet. Like all OS base maps it requires an OS access token.
-			</p>
-
-			<p>
-				If you're creating a full page map, as opposed to a map integrated into a dashboard or data
-				explorer, then wrap the <code>{'<Map>'}</code>,
-				<code>{'<Sidebar>'}</code> and other map components within a
-				<code>{'<MapApp>'}</code> component. It manages no-script messages and layout that accounts for
-				different browser overlays.
-			</p>
-		</div>
-
 		<Map
 			options={{
 				style: os_light_vts,
@@ -84,17 +65,6 @@
 
 <Story name="Greyscale OS Basemap">
 	<MapApp>
-		<div class="text-white space-y-4 m-2">
-			<p>
-				This is the greyscale basemap used on the Cool Spaces map. - it's very similar to the OS's <a
-					class="underline"
-					href="https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets"
-				>
-					OS_VTS_3857_Greyscale.json</a
-				> stylesheet, with a few tweaks.
-			</p>
-		</div>
-
 		<Map
 			options={{
 				style: greyStyle,
@@ -121,17 +91,6 @@
 
 <Story name="Dark OS Basemap">
 	<MapApp>
-		<div class="text-white space-y-4 m-2">
-			<p>
-				This was created by the OS, inspired by Mike Brondbjerg's dark gray theme with muted
-				buildings. It is <a
-					class="underline"
-					href="https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets"
-					>OS_VTS_3857_Dark.json</a
-				>
-			</p>
-		</div>
-
 		<Map
 			options={{
 				style: darkStyle,
@@ -143,20 +102,6 @@
 
 <Story name="Properties">
 	<MapApp>
-		<div class="text-white space-y-4 m-2">
-			<p>
-				The <code>{'whenMapLoads'}</code> and <code>{'whenMapUnloads'}</code> props are functions
-				called when the <code>{'<Map>'}</code> component mounts and unmounts respectively. In this example
-				a simple click listener is attached to the map which prints out the layer IDs where a feature
-				exists at the click location.
-			</p>
-
-			<p>
-				The <code>{'options'}</code> prop allows users to override and extend the GLA default MapLibre
-				options. Use it to specify a map style specification and append the OS key.
-			</p>
-		</div>
-
 		<Map
 			{whenMapLoads}
 			{whenMapUnloads}

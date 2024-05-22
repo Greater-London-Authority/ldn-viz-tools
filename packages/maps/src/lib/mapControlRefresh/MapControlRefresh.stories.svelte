@@ -25,13 +25,6 @@
 
 <Story name="Refresh Button">
 	<MapApp>
-		<div class="text-white space-y-4 m-2">
-			<p>
-				The refresh page button is usually positioned in the bottom left corner under the fullscreen
-				button.
-			</p>
-		</div>
-
 		<Map
 			options={{
 				style: os_light_vts,
