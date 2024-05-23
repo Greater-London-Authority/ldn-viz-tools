@@ -1,4 +1,10 @@
 <script lang="ts">
+	/**
+	 * The `<MapControlGeolocator>` component wraps the UI package's
+	 * `<Geolocator>` component for use with MapLibre maps.
+	 * @component
+	 */
+
 	import { getContext } from 'svelte';
 	import { setFeature, clearFeature } from './map-layer';
 	import { Geolocator } from '@ldn-viz/ui';
@@ -10,10 +16,14 @@
 		OnGeolocationSearchError
 	} from '@ldn-viz/ui';
 
-	// onLocationFound is invoked when the browser finds a location.
+	/**
+	 * Called when the browser finds a location.
+	 */
 	export let onLocationFound: undefined | OnGeolocationSearchResult = undefined;
 
-	// onSearchError is invoked when a search error occurs.
+	/**
+	 * Called when an error occurs while searching.
+	 */
 	export let onSearchError: undefined | OnGeolocationSearchError = undefined;
 
 	const map: MapStore = getContext('map');
