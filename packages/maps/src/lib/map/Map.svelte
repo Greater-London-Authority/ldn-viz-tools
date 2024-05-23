@@ -17,6 +17,21 @@
 </script>
 
 <script>
+	/**
+	 * The `<Map>` component wraps a MapLibre `Map` to provide:
+	 * - access to the `Map` and `maplibre_gl` objects via context;
+	 * - notification of both map initialisation and destruction events;
+	 * - default map options suitable for mapping in London;
+	 * - default styling to HTML elements rendered by the map.
+	 *
+	 * The map's container has a relative CSS position so slotted content can
+	 * position itself accordingly. Map controls and other overlay components
+	 * should be wrapped and positioned using a `MapControlGroup` instance.
+	 *
+	 * (see [MapLibre Map](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/)).
+	 * @component
+	 */
+
 	import { onMount, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import maplibre_gl from 'maplibre-gl';
@@ -31,12 +46,30 @@
 	setContext('map', map);
 	setContext('map_gl', map_gl);
 
+	/**
+	 * Disables initialisation of the map on mount. This is most often used
+	 * to speed up development on non-map components.
+	 */
 	export let disabled = false;
+
+	/**
+	 * Custom MapLibre options (see [MapOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
+	 */
 	export let options = {};
 
+	/**
+	 * Called when the map is finished loading and ready for use.
+	 */
 	export let whenMapLoads = null;
+
+	/**
+	 * Called when the map component is destroyed for when resources need to be cleaned up.
+	 */
 	export let whenMapUnloads = null;
 
+	/**
+	 * Additional classes applied to the map's container element.
+	 */
 	export let classes = '';
 
 	const defaultOptions = {
@@ -80,9 +113,9 @@
 	});
 
 	// client width and height because on:resize won't always trigger refresh.
-	let clientWidth = 0;
-	let clientHeight = 0;
-	$: clientWidth && clientHeight && $map?.resize();
+	let clientWidth = null;
+	let clientHeight = null;
+	$: clientWidth !== null && clientHeight !== null && $map?.resize();
 </script>
 
 <section
