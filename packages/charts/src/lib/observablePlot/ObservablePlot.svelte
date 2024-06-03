@@ -57,17 +57,22 @@
 	/**
 	 * Title that is displayed in large text above the plot.
 	 */
-	 export let title = "";
+	export let title = '';
 
 	/**
 	 * Subtitle that is displayed below the title, but above the plot.
 	 */
-	 export let subTitle = "";
+	export let subTitle = '';
 
 	/**
 	 * Alt-text for the plot.
 	 */
-	 export let alt = "";
+	export let alt = '';
+
+	/**
+	 * Tailwind width class passed to Chart Container.
+	 */
+	export let chartWidth = '';
 
 	/**
 	 * Object specifying what appears in the footer:
@@ -77,7 +82,7 @@
 	 * * `note` (string) - any additional footnotes
 	 * * `exportBtns` (boolean) - if `false`, then data/image download buttons will be hidden
 	 */
-	 export let footer:
+	export let footer:
 		| {
 				byline?: string | undefined;
 				source?: string | undefined;
@@ -89,13 +94,13 @@
 	/**
 	 * Provides a way to access the DOM node into which the visualization is rendered.
 	 */
-	 export let domNode: any = undefined;
+	export let domNode: any = undefined;
 
 	/**
 	 * A store that stores details of the moused-over point.
 	 * Used for custom tooltips.
 	 */
-	 export let tooltipStore = writable<Position>();
+	export let tooltipStore = writable<Position>();
 
 	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
@@ -125,10 +130,19 @@
 </script>
 
 {#key spec}
-	<ChartContainer {data} {title} {subTitle} {alt} {footer} {...$$restProps} chartHeight={'h-fit'}>
+	<ChartContainer
+		{data}
+		{title}
+		{subTitle}
+		{alt}
+		{footer}
+		{...$$restProps}
+		chartHeight={'h-fit'}
+		{chartWidth}
+	>
 		<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
 
-		<!-- todo: pass to slot data[i] -->
+		<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 		{#if $tooltipStore && $tooltipData}
 			<div
 				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
@@ -138,6 +152,10 @@
 				<slot name="tooltip">
 					<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
 				</slot>
+
+				<div
+					class="absolute bg-core-grey-100 dark:bg-core-grey-700 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
+				/>
 			</div>
 		{/if}
 	</ChartContainer>

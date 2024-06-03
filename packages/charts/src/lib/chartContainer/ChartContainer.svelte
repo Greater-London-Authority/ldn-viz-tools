@@ -44,7 +44,9 @@
 	 * Tailwind class to set chart area height
 	 */
 	export let chartHeight = 'h-60';
-	let chartClass = classNames('relative', chartHeight);
+
+	export let overrideClass = '';
+	let chartClass = classNames('relative', chartHeight, overrideClass);
 
 	/**
 	 * Tailwind class to set overall chart width
@@ -54,7 +56,7 @@
 	/**
 	 * Data being visualized (as an array of objects), to be used by data download button.
 	 */
-	export let exportData: { [key: string]: any }[] | undefined = undefined;
+	export let data: { [key: string]: any }[] | undefined = undefined;
 
 	// For save as image
 	let chartToCapture: HTMLDivElement;
@@ -78,7 +80,7 @@
 	</div>
 	{#if footer}
 		<Footer {...footer}>
-			<ExportBtns {chartToCapture} exportData slot="exportBtns" />
+			<ExportBtns {chartToCapture} data slot="exportBtns" />
 		</Footer>
 	{/if}
 </div>

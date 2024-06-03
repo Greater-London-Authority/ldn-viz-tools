@@ -1,21 +1,22 @@
 import { theme } from '@ldn-viz/utils';
+import type { AxisOptions } from '@observablehq/plot';
 
-export const fontStack = "'Aktiv Grotesk', system-ui, sans-serif";
+export const fontStack = "'Roboto', system-ui, sans-serif"; // TODO: swap for inter
 
 export const defaultStyle = {
 	color: theme.light.labels,
-	fontSize: '18px',
+	fontSize: '16px',
 	fontFamily: fontStack,
 	background: theme.light.background
 };
 
 export const defaultSize = {
-	width: 1100,
-	height: 600,
-	marginRight: 20,
-	marginLeft: 100,
-	marginTop: 30,
-	marginBottom: 50
+	// width: 1100, // set by container, defaults to full
+	// height: 600,
+	marginRight: 24,
+	marginLeft: 56,
+	// marginTop: 56,
+	marginBottom: 48
 };
 
 export const defaultColor = {
@@ -25,15 +26,38 @@ export const defaultColor = {
 	type: 'ordinal'
 };
 
-export const defaultXAxis = {
-	label: '',
+export const defaultXScale = {
 	grid: true,
-	labelArrow: 'none',
-	insetLeft: 80
+	// insetLeft: 80,
+	// label: '',
+	labelAnchor: 'center',
+	labelArrow: 'none'
 };
 
-export const defaultYAxis = {
-	dy: -14
+export const defaultYScale = {
+	grid: true,
+	ticks: 4,
+	// label: '',
+	labelAnchor: 'center',
+	labelArrow: 'none'
+};
+
+export const defaultXAxis = <AxisOptions>{
+	label: '',
+	labelAnchor: 'center',
+	labelArrow: 'none'
+};
+
+export const defaultYAxis = <AxisOptions>{
+	textAnchor: 'start',
+	textPadding: 0,
+	tickSize: 0,
+	label: '',
+	labelAnchor: 'center',
+	labelArrow: 'none',
+	dy: -14,
+	dx: 8,
+	ticks: 4 // this should match the ticks property passed to yScale
 };
 
 export const defaultLine = {
@@ -49,7 +73,7 @@ export const defaultDashedLine = {
 export const defaultDot = {
 	stroke: theme.light.primary,
 	strokeWidth: 2,
-	r: 8,
+	r: 4,
 	fill: 'white'
 };
 
@@ -65,7 +89,7 @@ export const defaultRule = {
 };
 
 export const defaultAnnotationText = {
-	fontSize: '25px',
+	fontSize: '16px',
 	fill: theme.light.primary
 };
 
@@ -104,7 +128,7 @@ type generateAnnotationsConfig = {
 	 * this will be pre-processed so that plot sees either `fill: 'black'` (specifying a color constant) or `fill: 'GDPType` (speficying a field to be encoded using a color scale).
 	 * If this was not pre-processed, Observable Plot would apply a color encoding to the string literatal `'GDPType'` rather than the value of the field with that name.
 	 */
-	optionsToEval: Record<string, (x: any) => any>;
+	optionsToEval?: Record<string, (x: any) => any>;
 };
 
 export const preprocessOptions = (data: any[], config: generateAnnotationsConfig) => {
@@ -113,7 +137,7 @@ export const preprocessOptions = (data: any[], config: generateAnnotationsConfig
 	const optionsToConvert = ['dy', 'textAnchor'];
 
 	for (const entry of data.filter(config.filter || (() => true))) {
-		const options: Record<string, number | string> = {};
+		const options: Record<string, number | string | ((x: any) => any)> = {};
 
 		for (const key of Object.keys(config.options || {})) {
 			const val = config.options[key];
@@ -125,14 +149,16 @@ export const preprocessOptions = (data: any[], config: generateAnnotationsConfig
 			}
 		}
 
-		for (const key of Object.keys(config.optionsToEval || {})) {
-			const val = config.optionsToEval[key];
+		if (config.optionsToEval) {
+			for (const key of Object.keys(config.optionsToEval || {})) {
+				const val = config.optionsToEval[key];
 
-			if (typeof val === 'function') {
-				console.log('Setting', key, ' to ', val(entry));
-				options[key] = val(entry);
-			} else {
-				options[key] = val;
+				if (typeof val === 'function') {
+					console.log('Setting', key, ' to ', val(entry));
+					options[key] = val(entry);
+				} else {
+					options[key] = val;
+				}
 			}
 		}
 
