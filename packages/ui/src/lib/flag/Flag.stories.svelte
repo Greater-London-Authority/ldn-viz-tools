@@ -3,10 +3,20 @@
 
 	export const meta = {
 		title: 'Ui/Flag',
-		component: Flag
+		component: Flag,
+
+		argTypes: {
+			condition: {
+				options: ['alpha', 'beta', 'alert', 'warning', 'positive', 'notice'],
+				control: { type: 'select' }
+			}
+		},
+		args: {
+			title: 'storybook button'
+		}
 	};
 
-	const types = ['alpha', 'beta', 'alert', 'warning', 'positive', 'notice'];
+	const conditions = ['alpha', 'beta', 'alert', 'warning', 'positive', 'notice'];
 </script>
 
 <script lang="ts">
@@ -14,29 +24,29 @@
 </script>
 
 <Template let:args>
-	<Flag {...args} />
+	<Flag {...args}>This is a flag</Flag>
 </Template>
 
 <Story name="Default" source />
 
 <Story name="Default Messages">
 	<div class="flex flex-col gap-4">
-		{#each ['alpha', 'beta'] as type}
-			<Flag level={type} />
+		{#each ['alpha', 'beta'] as condition}
+			<Flag {condition} />
 		{/each}
 	</div>
 </Story>
 
 <Story name="Levels">
 	<div class="flex flex-col gap-4">
-		{#each types as type}
-			<Flag level={type}>
-				{type}
+		{#each conditions as condition}
+			<Flag {condition}>
+				{condition}
 			</Flag>
 		{/each}
 	</div>
 </Story>
 
 <Story name="Links">
-	<Flag level="alpha" link="https://apps.london.gov.uk">This site is in beta.</Flag>
+	<Flag condition="alpha" link="https://apps.london.gov.uk">This site is in beta.</Flag>
 </Story>
