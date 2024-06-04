@@ -10,9 +10,6 @@
 				options: ['alpha', 'beta', 'alert', 'warning', 'positive', 'notice'],
 				control: { type: 'select' }
 			}
-		},
-		args: {
-			title: 'storybook button'
 		}
 	};
 
