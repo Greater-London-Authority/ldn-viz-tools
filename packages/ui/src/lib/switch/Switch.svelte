@@ -7,7 +7,7 @@
 	 * @component
 	 */
 
-	import { createSwitch, melt } from '@melt-ui/svelte';
+	import { createSwitch } from '@melt-ui/svelte';
 	import { writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 

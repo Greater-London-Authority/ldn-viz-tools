@@ -17,7 +17,7 @@
 </script>
 
 <Template let:args>
-	<Switch {checked} />
+	<Switch {checked} {...args} />
 
 	<div>Is checked?: {$checked}</div>
 </Template>
@@ -30,7 +30,7 @@
 
 <Story name="Control whether disabled" source>
 	<Button on:click={() => (disabled = !disabled)}>
-		Click to {!!disabled ? 'enable' : 'disable'}
+		Click to {disabled ? 'enable' : 'disable'}
 	</Button>
 
 	<Switch label="Enable something" {checked} {disabled} />
