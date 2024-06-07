@@ -50,10 +50,10 @@
 
 		{#if allowSorting}
 			<Icon
-					src={order ? icons[order] : icons['default']}
-					theme="mini"
-					class="ml-auto w-4 h-4"
-					aria-hidden="true"
+				src={order ? icons[order] : icons['default']}
+				theme="mini"
+				class="ml-auto w-4 h-4"
+				aria-hidden="true"
 			/>
 		{/if}
 	</div>
