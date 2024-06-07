@@ -18,7 +18,6 @@ export { default as MapControlLocationSearch } from './mapControlLocationSearch/
 
 // Events
 export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelte';
-export { default as ExpandClusterEvent } from './mapCursorEvent/ExpandClusterEvent.svelte';
 
 // themes
 export * from './themes/animations';
