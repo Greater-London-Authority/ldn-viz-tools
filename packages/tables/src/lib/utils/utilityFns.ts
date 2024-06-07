@@ -4,10 +4,3 @@
 export const classNames = (...classes: string[]) => {
 	return classes.filter(Boolean).join(' ');
 };
-
-const colorOrGrey = (val, scale) => {
-	if (!scale || scale === 'null' || scale === 'undefined') {
-		return 'lightgrey';
-	}
-	return scale(val);
-};
