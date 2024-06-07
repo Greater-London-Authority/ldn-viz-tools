@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
+
 	import { Button } from '@ldn-viz/ui';
 
 	export let numRows = 0;
@@ -45,10 +48,16 @@
 	</div>
 
 	<div class="flex items-center">
-		<Button variant="text" disabled={page === 1} on:click={() => page--}>Previous</Button>
+		<Button variant="text" disabled={page === 1} on:click={() => page--}>
+			<Icon src={ChevronLeft} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+			Previous
+		</Button>
 		<div>
 			Page <input bind:value={inputPage} on:change={inputPageChanged} class="border w-12" /> of {numPages}
 		</div>
-		<Button variant="text" disabled={page === numPages} on:click={() => page++}>Next</Button>
+		<Button variant="text" disabled={page === numPages} on:click={() => page++}>
+			Next
+			<Icon src={ChevronRight} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+		</Button>
 	</div>
 </div>
