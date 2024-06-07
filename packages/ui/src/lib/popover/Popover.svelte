@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<Modal>` component provides content near to its trigger element, similar to a tooltip.
+	 * The `<Popover>` component provides content near to its trigger element, similar to a tooltip.
 	 * However, like a modal, it remains open until it is dismissed by the user.
 	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
 	 *
