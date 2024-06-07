@@ -78,6 +78,11 @@
 	 */
 	export let allowColumnHiding = false;
 
+	/**
+	 * If `true`, then allow user to sort rows by interacting with column headings.
+	 */
+	export let allowSorting = false;
+
 	let rows = [];
 	const onRowsChange = (groups, rows) => {
 		// console.log({groups, rows});
@@ -153,7 +158,7 @@
 					<ColumnGroupHeadingRow {table} />
 				{/if}
 
-				<ColumnHeadingRow {table} />
+				<ColumnHeadingRow {table} {allowSorting} />
 
 				{#if tableSpec.showColumnControls}
 					<ControlRow {table} />

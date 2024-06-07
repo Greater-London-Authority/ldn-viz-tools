@@ -72,6 +72,10 @@
 
 <Story name="Default" source />
 
+<Story name="Sortable Rows" source>
+	<Table {data} {tableSpec} allowSorting />
+</Story>
+
 <Story name="Title" source>
 	<Table {data} {tableSpec} title="Some famous people, and a guess of their favourite pets" subTitle="Note that these are only guesses!"/>
 </Story>

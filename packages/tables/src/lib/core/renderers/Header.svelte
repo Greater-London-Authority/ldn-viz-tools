@@ -8,6 +8,8 @@
 	export let order: 'asc' | 'desc' | undefined = undefined;
 	export let toggle: (ev: Event) => void = () => {};
 
+	export let allowSorting;
+
 	export let value = '';
 	export let colAvg: number | undefined = undefined;
 	export let formatString = '.2f';
@@ -45,12 +47,15 @@
 		{/if}
 
 		<!--    {#if value}({f(+value)}{display_unit}){/if} -->
-		<Icon
-			src={order ? icons[order] : icons['default']}
-			theme="mini"
-			class="ml-auto w-4 h-4"
-			aria-hidden="true"
-		/>
+
+		{#if allowSorting}
+			<Icon
+					src={order ? icons[order] : icons['default']}
+					theme="mini"
+					class="ml-auto w-4 h-4"
+					aria-hidden="true"
+			/>
+		{/if}
 	</div>
 
 	<!--

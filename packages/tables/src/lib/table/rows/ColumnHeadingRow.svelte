@@ -6,6 +6,8 @@
 
 	export let table;
 
+	export let allowSorting;
+
 	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
 
 	const getCol = (colName) => table.columnSpec.find((d) => d.short_label === colName);
@@ -46,7 +48,8 @@
 					<Header
 						label={col.label ?? col.short_label}
 						order={undefined}
-						toggle={() => table.toggleSort(col.short_label)}
+						toggle={() => allowSorting && table.toggleSort(col.short_label)}
+						{allowSorting}
 						{...col}
 					/>
 				</div>
