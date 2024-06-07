@@ -1,0 +1,65 @@
+<script lang="ts">
+	import { Button, Select } from '@ldn-viz/ui';
+	import PopoverMenu from './PopoverMenu.svelte';
+
+	export let table;
+
+	let fields;
+	$: if (table) {
+		const new_fields = table.columnSpec.map((f) => ({
+			label: f.label ?? f.short_label,
+			id: f.short_label,
+			value: f.short_label
+		}));
+
+		if (JSON.stringify(new_fields) !== JSON.stringify(fields)) {
+			fields = new_fields;
+		}
+	}
+
+	//
+	let groupingSelection = [];
+	const applyGrouping = (groupingSelection) => {
+		if (table) {
+			// re-order cols
+			// TODO: lift this to dataObj?
+			//  /*
+			const sortingCols = table.groupingFields.map((f) =>
+				table.columnSpec.find((c) => c.short_label === f)
+			);
+			table.columnSpec = [
+				...sortingCols,
+				...table.columnSpec.filter((f) => !table.groupingFields.includes(f.short_label))
+			];
+			table.setColumnSpec(table.columnSpec);
+			//   */
+
+			const cols = (groupingSelection || []).map((o) => o.id);
+
+			if (JSON.stringify(table.groupingFields) !== JSON.stringify(cols)) {
+				console.log('GROUP:', table.groupingFields, cols);
+				table.setGrouping(cols);
+			}
+		}
+	};
+	$: applyGrouping(groupingSelection);
+</script>
+
+<PopoverMenu>
+	<svelte:fragment slot="trigger">
+		<Button variant="text">Group rows</Button>
+
+		<span class="sr-only">Open Popover</span>
+	</svelte:fragment>
+
+	<h2 class="text-large font-bold">Group rows by</h2>
+
+	<Select
+		items={fields}
+		bind:value={groupingSelection}
+		label=""
+		id="labelled-input"
+		placeholder="Placeholder text"
+		multiple
+	/>
+</PopoverMenu>

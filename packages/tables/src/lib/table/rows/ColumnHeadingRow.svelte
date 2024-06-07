@@ -1,0 +1,56 @@
+<script>
+	import { sum } from 'd3-array';
+
+	import Header from '../../core/renderers/Header.svelte';
+	import Scaffolding from './Scaffolding.svelte';
+
+	export let table;
+
+	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
+
+	const getCol = (colName) => table.columnSpec.find((d) => d.short_label === colName);
+	const getLabel = (colName) => getCol(colName).label ?? colName;
+</script>
+
+<Scaffolding {table}>
+	<svelte:fragment slot="groupSizes">
+		{#each table.groupingFields as colName}
+			<div
+				class="flex font-bold was-th"
+				role="columnheader"
+				colspan="1"
+				style:width={sumWidths([
+					table.widths.groupLabel,
+					table.widths.groupSizeLabel,
+					table.widths.groupSizeBar
+				])}
+			>
+				{getLabel(colName)}
+			</div>
+		{/each}
+	</svelte:fragment>
+
+	<div class="flex font-bold was-th" role="columnheader" slot="groupSizeLabel">
+		{table.groups.length > 1 ? 'Count' : ''}
+	</div>
+
+	<svelte:fragment slot="dataColumns">
+		{#each table.columnSpec as col}
+			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
+				<div
+					class="flex font-bold was-th"
+					role="columnheader"
+					colspan="1"
+					style:width={col.cell.width ?? table.widths.defaultCell}
+				>
+					<Header
+						label={col.label ?? col.short_label}
+						order={undefined}
+						toggle={() => table.toggleSort(col.short_label)}
+						{...col}
+					/>
+				</div>
+			{/if}
+		{/each}
+	</svelte:fragment>
+</Scaffolding>
