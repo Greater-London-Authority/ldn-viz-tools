@@ -158,7 +158,7 @@
 
 	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data}>
 		<div class="table-auto text-sm w-full" slot="table">
-			<div class="border-y border-core-grey-800">
+			<div class="border-t border-b" style="border-color: black">
 				{#if tableSpec.colGroups}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
