@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { TableData } from '../core/lib/dataObj';
-	import TableContainer from './wrapper/TableContainer.svelte';
+	import TableContainer from './TableContainer.svelte';
 	import RowRenderer from './rows/RowRenderer.svelte';
 	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import PaginationControls from './rows/PaginationControls.svelte';

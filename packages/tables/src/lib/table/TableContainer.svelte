@@ -2,12 +2,9 @@
 </script>
 
 <script lang="ts">
-	import { classNames } from '../../utils/utilityFns';
+	import { classNames } from '../utils/utilityFns';
 	//	import type { ReadOrWritable } from 'svelte-headless-table/lib/utils/store';
-	import ExportBtns from './ExportBtns.svelte';
-	import Footer from './Footer.svelte';
-	import SubTitle from './SubTitle.svelte';
-	import Title from './Title.svelte';
+	import { ExportBtns, Footer, SubTitle, Title } from '@ldn-viz/charts';
 
 	// export props to popultae the container
 	export let title: string | null = null;
