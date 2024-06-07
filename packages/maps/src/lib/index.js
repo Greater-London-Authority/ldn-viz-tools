@@ -27,6 +27,11 @@ export { default as MapPopupPlacement } from './mapPopup/MapPopupPlacement.svelt
 export { default as MapPopupStyledContainer } from './mapPopup/MapPopupStyledContainer.svelte';
 export { default as MapPopupTooltip } from './mapPopup/MapPopupTooltip.svelte';
 
+// Layers
+export { default as MapLayer } from './mapLayer/MapLayer.svelte';
+export { default as MapSource } from './mapLayer/MapSource.svelte';
+export { default as GeojsonMapSource } from './mapLayer/GeojsonMapSource.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
