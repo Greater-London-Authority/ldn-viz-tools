@@ -3,4 +3,3 @@
 ---
 
 ADDED: add `MapCursorEvent` component
-ADDED: add `ExpandClusterEvent` component
