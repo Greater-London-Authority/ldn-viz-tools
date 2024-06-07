@@ -52,12 +52,10 @@
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
 
-	<h2 class="text-large font-bold">Group rows by</h2>
-
 	<Select
 		items={fields}
 		bind:value={groupingSelection}
-		label=""
+		label="Group rows by"
 		id="labelled-input"
 		placeholder="Placeholder text"
 		multiple

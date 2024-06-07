@@ -64,39 +64,35 @@
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
+	<div class="flex flex-col gap-2">
+		<h2 class="text-large font-bold">Sort groups</h2>
 
-	<h2 class="text-large font-bold">Sort groups by</h2>
-
-	<span>the</span>
-
-	<Select
-		items={aggregationOptions}
-		bind:value={aggregationSelection}
-		label=""
-		id="labelled-input"
-		placeholder="Placeholder text"
-	/>
-
-	{#if aggregationSelection?.value !== 'count'}
-		<span>of their</span>
 		<Select
-			items={fields}
-			bind:value={fieldSelection}
-			label=""
+			items={aggregationOptions}
+			bind:value={aggregationSelection}
+			label="by the"
 			id="labelled-input"
 			placeholder="Placeholder text"
 		/>
-	{/if}
 
-	<span>in</span>
+		{#if aggregationSelection?.value !== 'count'}
+			<Select
+				items={fields}
+				bind:value={fieldSelection}
+				label="of their "
+				id="labelled-input"
+				placeholder="Placeholder text"
+			/>
+		{/if}
 
-	<Select
-		items={orderOptions}
-		bind:value={orderSelection}
-		label=""
-		id="labelled-input"
-		placeholder="Placeholder text"
-	/>
+		<Select
+			items={orderOptions}
+			bind:value={orderSelection}
+			label="in"
+			id="labelled-input"
+			placeholder="Placeholder text"
+		/>
 
-	<span>order.</span>
+		<span>order.</span>
+	</div>
 </PopoverMenu>
