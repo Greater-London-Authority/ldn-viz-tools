@@ -19,6 +19,14 @@ export { default as MapControlLocationSearch } from './mapControlLocationSearch/
 // Events
 export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelte';
 
+// Popups
+export { default as MapPopup } from './mapPopup/MapPopup.svelte';
+export { default as MapPopupFlyToFeature } from './mapPopup/MapPopupFlyToFeature.svelte';
+export { default as MapPopupMarker } from './mapPopup/MapPopupMarker.svelte';
+export { default as MapPopupPlacement } from './mapPopup/MapPopupPlacement.svelte';
+export { default as MapPopupStyledContainer } from './mapPopup/MapPopupStyledContainer.svelte';
+export { default as MapPopupTooltip } from './mapPopup/MapPopupTooltip.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
