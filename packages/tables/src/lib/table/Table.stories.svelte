@@ -9,7 +9,7 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import {Input} from "@ldn-viz/ui";
+	import { Input } from '@ldn-viz/ui';
 
 	const data = [
 		{ id: 1, first_name: 'Marilyn', last_name: 'Monroe', pet: 'dog' },
@@ -67,7 +67,7 @@
 </script>
 
 <Template let:args>
-	<Table {data} {tableSpec} {...args}/>
+	<Table {data} {tableSpec} {...args} />
 </Template>
 
 <Story name="Default" source />
@@ -77,7 +77,12 @@
 </Story>
 
 <Story name="Title" source>
-	<Table {data} {tableSpec} title="Some famous people, and a guess of their favourite pets" subTitle="Note that these are only guesses!"/>
+	<Table
+		{data}
+		{tableSpec}
+		title="Some famous people, and a guess of their favourite pets"
+		subTitle="Note that these are only guesses!"
+	/>
 </Story>
 
 <Story name="Zebra Striping" source>
@@ -100,24 +105,24 @@
 	<Table {data} {tableSpec} paginate pageSize={5} />
 </Story>
 
-<Story name="Paginated - page externally controlled" source>
+<Story name="Paginated - page size control" source>
+	<Table {data} {tableSpec} paginate allowPageSizeChanges />
+</Story>
 
+
+<Story name="Paginated - page externally controlled" source>
 	<div class="flex flex-col gap-4 max-w-2xl">
-		<div class="border-core-grey-200 border-2  p-2">
+		<div class="border-core-grey-200 border-2 p-2">
 			<span class="font-bold">Separate control</span>
 			<Input bind:value={page} label="Set page here"></Input>
-
 		</div>
 
 		<div class="border-core-grey-200 border-2 p-2">
 			<span class="font-bold">Table component</span>
 
-			<Table {data} {tableSpec} paginate pageSize={5} bind:page/>
-
+			<Table {data} {tableSpec} paginate pageSize={5} bind:page />
 		</div>
 	</div>
 </Story>
 
-
 <!-- TODO: add example of filtering -->
-

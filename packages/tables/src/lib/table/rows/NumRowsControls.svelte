@@ -26,6 +26,6 @@
 	$: console.log(numRowSelection);
 </script>
 
-<div class="w-48 mb-4">
+<div class="mb-4" style="width: 192px">
 	<Select bind:value={numRowSelection} items={numRowOptions} label="Entries per page"></Select>
 </div>

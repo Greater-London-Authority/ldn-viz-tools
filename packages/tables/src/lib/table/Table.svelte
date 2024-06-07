@@ -64,6 +64,11 @@
 	export let pageSize = 10;
 
 	/**
+	 * If `true`, then user can control the number of rows per page.
+	 */
+	export let allowPageSizeChanges = false;
+
+	/**
 	 * The current page.
 	 */
 	export let page = 1;
@@ -195,7 +200,7 @@
 		</div>
 
 		<div slot="numRowsControlSlot">
-			{#if paginate}
+			{#if paginate && allowPageSizeChanges}
 				<NumRowsControls bind:pageSize bind:page />
 			{/if}
 		</div>
