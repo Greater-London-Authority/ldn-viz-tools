@@ -37,11 +37,11 @@
 	 */
 	export let layerId = ctxLayerId;
 
-	const enterTopFeature: MapCursorFeatureHandler = (event) => {
+	const enterTopFeature: MapCursorFeatureHandler = () => {
 		getMap().getCanvas().style.cursor = 'pointer';
 	};
 
-	const leaveTopFeature: MapCursorFeatureHandler = (event) => {
+	const leaveTopFeature: MapCursorFeatureHandler = () => {
 		getMap().getCanvas().style.cursor = '';
 	};
 
