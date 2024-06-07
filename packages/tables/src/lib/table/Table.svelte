@@ -13,21 +13,70 @@
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
 
-	export let data;
+	/**
+	 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
+	 */
+	export let data: any[];
+
+	/**
+	 * Specification for how the table should be displayed.
+	 */
 	export let tableSpec;
 
-	export let title;
-	export let subTitle;
+	/**
+	 * Title to be displayed above the chart (optional).
+	 */
+	export let title = '';
+
+	/**
+	 * Subtitle to be displayed above the chart, below the main title (optional).
+	 */
+	export let subTitle = '';
+
+	/**
+	 * If `true`, there will be buttons to download the data or an image of the table.
+	 */
 	export let exportBtns = false;
 
+	/**
+	 * Height of the table (pixels).
+	 */
 	export let height = 1000;
 
-	export let table; // expose the table object, so it can be programmatially manipulated
+	/**
+	 * Exposes the internal table object, so that it can be programmatially manipulated.
+	 */
+	export let table;
 
-	export let zebraStripe;
+	/**
+	 * If `ture`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
+	 */
+	export let zebraStripe = false;
+
+	/**
+	 * If true, then the rows of the table will be split across multiple pages.
+	 */
 	export let paginate = false;
+
+	/**
+	 * The number of table rows to include on each page.
+	 */
 	export let pageSize = 10;
+
+	/**
+	 * The current page.
+	 */
 	export let page = 1;
+
+	/**
+	 * If `true`, then display controls allowing user to group rows (and order groups).
+	 */
+	export let allowRowGrouping = false;
+
+	/**
+	 * If `true`, then display controls allowing user to select which columns are displayed.
+	 */
+	export let allowColumnHiding = false;
 
 	let rows = [];
 	const onRowsChange = (groups, rows) => {
@@ -87,9 +136,14 @@
 
 {#if table && table.extents}
 	<div class="flex gap-2 ml-4 w-[430px]">
-		<GroupRowsMenu {table} />
-		<SortGroupsMenu {table} />
-		<ToggleColumnsMenu {table} />
+		{#if allowRowGrouping}
+			<GroupRowsMenu {table} />
+			<SortGroupsMenu {table} />
+		{/if}
+
+		{#if allowColumnHiding}
+			<ToggleColumnsMenu {table} />
+		{/if}
 	</div>
 
 	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data}>

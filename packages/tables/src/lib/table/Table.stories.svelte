@@ -9,6 +9,7 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import {Input} from "@ldn-viz/ui";
 
 	const data = [
 		{ id: 1, first_name: 'Marilyn', last_name: 'Monroe', pet: 'dog' },
@@ -61,13 +62,19 @@
 			}
 		]
 	};
+
+	export let page = 1;
 </script>
 
 <Template let:args>
-	<Table {data} {tableSpec} />
+	<Table {data} {tableSpec} {...args}/>
 </Template>
 
 <Story name="Default" source />
+
+<Story name="Title" source>
+	<Table {data} {tableSpec} title="Some famous people, and a guess of their favourite pets" subTitle="Note that these are only guesses!"/>
+</Story>
 
 <Story name="Zebra Striping" source>
 	<Table {data} {tableSpec} zebraStripe />
@@ -76,3 +83,37 @@
 <Story name="Export buttons" source>
 	<Table {data} {tableSpec} exportBtns />
 </Story>
+
+<Story name="Row Grouping" source>
+	<Table {data} {tableSpec} allowRowGrouping />
+</Story>
+
+<Story name="User selection of columns to show" source>
+	<Table {data} {tableSpec} allowColumnHiding />
+</Story>
+
+<Story name="Paginated" source>
+	<Table {data} {tableSpec} paginate pageSize={5} />
+</Story>
+
+<Story name="Paginated - page externally controlled" source>
+
+	<div class="flex flex-col gap-4 max-w-2xl">
+		<div class="border-core-grey-200 border-2  p-2">
+			<span class="font-bold">Separate control</span>
+			<Input bind:value={page} label="Set page here"></Input>
+
+		</div>
+
+		<div class="border-core-grey-200 border-2 p-2">
+			<span class="font-bold">Table component</span>
+
+			<Table {data} {tableSpec} paginate pageSize={5} bind:page/>
+
+		</div>
+	</div>
+</Story>
+
+
+<!-- TODO: add example of filtering -->
+
