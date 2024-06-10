@@ -7,7 +7,8 @@
 		table: {
 			type: {
 				summary: 'function',
-				detail: 'function(event: MouseEvent | TouchEvent, {\n  feature: GeoJSONFeature,\n  features: GeoJSONFeature[],\n  isTouchEvent: boolean\n}) => void'
+				detail:
+					'function(event: MouseEvent | TouchEvent, {\n  feature: GeoJSONFeature,\n  features: GeoJSONFeature[],\n  isTouchEvent: boolean\n}) => void'
 			}
 		}
 	};
