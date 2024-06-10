@@ -1,18 +1,36 @@
 <script>
+	/**
+	 * The `ProportionalSymbol` component renders a table cell encoding a single value as a circle, with the radius encoding the value.
+	 * @component
+	 */
 	import { format } from 'd3-format';
 
+	/**
+	 * The fill color of the proportional symbol.
+	 */
 	export let color = 'steelblue';
+
+	/**
+	 * The value to be encoded in the cell.
+	 */
+	export let value;
+
+	/**
+	 * If `true`, then the numerical value will be displayed as text beside the symbol.
+	 */
 	export let showValues = false;
 
-	export let value;
-	export let table;
-	export let colSpec;
-
+	/**
+	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
+	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
+	 */
 	export let formatString = '0.0f';
 	$: f = format(formatString);
 
-	let extent;
-	$: extent = table.extents[colSpec.short_label];
+	/**
+	 * Array containing the min and max values in the data; used ad domain for scale.
+	 */
+	export let extent;
 
 	let r;
 	$: r = Math.sqrt((value - extent[0]) / (extent[1] - extent[0]));

@@ -19,8 +19,8 @@
 						<LinkWrapper href={col.href} {row}>
 							<svelte:component
 								this={col.cell.renderer}
-								{table}
-								colSpec={col}
+								colorScale={table.scales[col.short_label]}
+								posScale={table.posScales[col.short_label]}
 								value={row[col.short_label]}
 								extent={table.extents[col.short_label]}
 								{...col.cell}

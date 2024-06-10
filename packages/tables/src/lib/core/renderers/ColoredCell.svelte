@@ -1,6 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `ColoredCell` component renders a table cell representing a numerical value as a label, with the background color encoding the value.
+	 * See also [ColorAndLabel](./?path=/docs/tables-encodings-colorandlabel--documentation).
 	 * @component
 	 */
 
