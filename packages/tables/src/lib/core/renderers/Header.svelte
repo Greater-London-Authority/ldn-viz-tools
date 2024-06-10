@@ -1,32 +1,37 @@
 <script lang="ts">
 	import { ChevronDown, ChevronUp, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { format } from 'd3';
 
+	/**
+	 * Text of label/column heading.
+	 */
 	export let label: string;
-	export let truncated_label: string | undefined = undefined;
+
+	/**
+	 * Text to display above the label (optional).
+	 */
+	export let superscriptText = '';
+
+	/**
+	 * If `true`, then allow user to sort by clicking on header.
+	 */
+	export let allowSorting = false;
+
+	/**
+	 * Current sort order (used to determine icons if `allowSorting` is `true`).
+	 */
 	export let order: 'asc' | 'desc' | undefined = undefined;
+
+	/**
+	 * Function called when user changes sort order.
+	 */
 	export let toggle: (ev: Event) => void = () => {};
-
-	export let allowSorting;
-
-	export let value = '';
-	export let colAvg: number | undefined = undefined;
-	export let formatString = '.2f';
-	$: f = format(formatString);
-	$: fplus = format(`+${formatString}`);
-	export let display_unit = '';
-	export let isSubHeader = false;
 
 	const icons = {
 		default: ChevronUpDown,
 		asc: ChevronUp,
 		desc: ChevronDown
 	};
-
-	$: console.log(formatString);
-
-	export let superscriptText: string | undefined;
 </script>
 
 <div
@@ -46,8 +51,6 @@
 			{label}
 		{/if}
 
-		<!--    {#if value}({f(+value)}{display_unit}){/if} -->
-
 		{#if allowSorting}
 			<Icon
 				src={order ? icons[order] : icons['default']}
@@ -57,12 +60,4 @@
 			/>
 		{/if}
 	</div>
-
-	<!--
-    {#if colAvg}
-        <div class="text-right p-2 border-t-2 border-core-grey-800">
-            {value ? fplus(+colAvg) : f(+colAvg)}{display_unit}
-        </div>
-    {/if}
-    -->
 </div>

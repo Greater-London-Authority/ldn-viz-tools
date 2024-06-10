@@ -1,8 +1,26 @@
 <script lang="ts">
+	/**
+	 * The `BarCell` component renders a table cell representing a numerical value as a bar, where the length of the bar encodes the value.
+	 * @component
+	 */
+
 	import { format } from 'd3-format';
 
-	export let value: string | number;
+	/**
+	 * The value to be encoded in the cell.
+	 */
+	export let value: number;
+
+	/**
+	 * Color of the bar, in any CSS format (color name, hex-string, `rgb()` notation, etc.).
+	 */
 	export let color: string | undefined = 'red';
+
+	/**
+	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
+	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
+	 * If set to a falsy value, then bars will not be labelled with a value.
+	 */
 	export let formatString = '0.0f';
 
 	export let extent = [0, 1]; // used to pass automatically extracted val
@@ -17,7 +35,10 @@
 		}
 	};
 
-	$: f = format(formatString);
+	let f;
+	$: if (formatString) {
+		f = format(formatString);
+	}
 </script>
 
 <div class="p-1">
@@ -26,13 +47,14 @@
 			style={`width:${scale(+value)}%; background-color:${color}`}
 			class="h-full text-right absolute left-0"
 		/>
+
 		{#if +value <= 0.4}
 			<div class="relative p-1 ml-1" style={`padding-left:${scale(+value)}%`}>
-				{f(+value)}
+				{#if formatString}{f(+value)}{/if}
 			</div>
 		{:else}
 			<div class="relative p-1 text-right text-white" style={`width:${scale(+value)}%`}>
-				{f(+value)}
+				{#if formatString}{f(+value)}{/if}
 			</div>
 		{/if}
 	</div>

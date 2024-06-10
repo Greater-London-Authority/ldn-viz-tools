@@ -22,11 +22,7 @@
 	$: w = 1 / posScale.domain().length;
 
 	let l;
-	// $: l = extent.indexOf(value) * (1 / extent.length);
 	$: l = posScale(value);
-
-	$: console.log(`Value ${value}, l ${l}`);
-	$: console.log('CatTIck extent:', extent);
 </script>
 
 <div

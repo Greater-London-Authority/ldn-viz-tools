@@ -1,27 +1,32 @@
 <script lang="ts">
+	/**
+	 * The `DateCell` component renders a table cell representing a single date or datetime as text.
+	 * @component
+	 */
 	import { utcFormat } from 'd3-time-format';
 	import { classNames } from '../../utils/utilityFns.js';
 
-	export let value: number | string;
+	/**
+	 * The value to be encoded in the cell.
+	 */
+	export let value: Date;
+
+	/**
+	 * Alignment of the text within the cell.
+	 */
 	export let alignText = 'left' | 'right' | 'center' | undefined;
 
+	/**
+	 * Format string defining how the number should be formatted for display (expressed in `d3-time-format`'s [notation](https://d3js.org/d3-time-format#locale_format),
+	 * which is based on "the venerable strptime and strftime functions from the C standard library")
+	 */
 	export let formatString = '%Y-%m-%dT%H:%M:%S.%LZ';
 	$: f = utcFormat(formatString ?? '');
-
-	/*
-    const alignmentClasses = {
-        left: "text-left",
-        right: "text-right",
-        center: "text-center",
-        justify: "text-justify"
-    }
-
-     */
 
 	const alignmentClasses = {
 		left: 'justify-start',
 		right: 'justify-end',
-		center: 'justify-middle'
+		center: 'justify-center'
 	};
 
 	let alignmentClass;

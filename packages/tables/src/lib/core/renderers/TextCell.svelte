@@ -1,4 +1,8 @@
 <script lang="ts">
+	/**
+	 * The `TextCell` component formats a single value as text and displays it in a table cell.
+	 * @component
+	 */
 	import { format } from 'd3-format';
 	import { classNames } from '../../utils/utilityFns.js';
 
@@ -8,20 +12,10 @@
 	export let formatString;
 	$: f = format(formatString ?? '');
 
-	/*
-    const alignmentClasses = {
-        left: "text-left",
-        right: "text-right",
-        center: "text-center",
-        justify: "text-justify"
-    }
-
-     */
-
 	const alignmentClasses = {
 		left: 'justify-start',
 		right: 'justify-end',
-		center: 'justify-middle'
+		center: 'justify-center'
 	};
 
 	let alignmentClass;
