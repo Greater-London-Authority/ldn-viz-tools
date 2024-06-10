@@ -2,9 +2,9 @@
 	import { getContext, onDestroy } from 'svelte';
 
 	const mapStore = getContext('mapStore');
-	const feature = getContext('feature');
-	const mapTooltip = getContext('mapTooltip');
-	const mapMarker = getContext('mapMarker');
+	const feature = getContext('mapPopupFeature');
+	const mapTooltip = getContext('mapPopupTooltip');
+	const mapMarker = getContext('mapPopupMarker');
 
 	const updatePosition = (event) => {
 		mapTooltip?.setLngLat(event.lngLat);

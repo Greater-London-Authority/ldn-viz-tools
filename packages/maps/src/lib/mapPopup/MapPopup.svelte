@@ -150,9 +150,9 @@
 			target: container,
 			context: new Map([
 				...contexts,
-				['mapTooltip', mapTooltip],
-				['layerId', layerId],
-				['feature', feature]
+				['mapPopupTooltip', mapTooltip],
+				['mapPopupLayerId', layerId],
+				['mapPopupFeature', feature]
 			])
 		});
 
@@ -177,9 +177,9 @@
 			target: container,
 			context: new Map([
 				...contexts,
-				['mapMarker', mapMarker],
-				['layerId', layerId],
-				['feature', feature]
+				['mapPopupMarker', mapMarker],
+				['mapPopupLayerId', layerId],
+				['mapPopupFeature', feature]
 			])
 		});
 
