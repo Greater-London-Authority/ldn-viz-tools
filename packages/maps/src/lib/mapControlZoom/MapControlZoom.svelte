@@ -5,21 +5,21 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ZOOM_ANIMATION_OPTIONS } from '../themes/animations';
 
-	const map = getContext('map');
+	const mapStore = getContext('mapStore');
 
-	const zoomIn = () => $map.zoomIn(ZOOM_ANIMATION_OPTIONS);
-	const zoomOut = () => $map.zoomOut(ZOOM_ANIMATION_OPTIONS);
+	const zoomIn = () => $mapStore.zoomIn(ZOOM_ANIMATION_OPTIONS);
+	const zoomOut = () => $mapStore.zoomOut(ZOOM_ANIMATION_OPTIONS);
 
 	const newHandler = (handle) => {
 		return (event) => {
-			if (!$map) {
+			if (!$mapStore) {
 				return;
 			}
 
 			handle();
 
 			if (event.detail > 0) {
-				$map.getCanvas().focus();
+				$mapStore.getCanvas().focus();
 			}
 		};
 	};
