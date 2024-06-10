@@ -1,5 +1,4 @@
 import HandlerCollection from './HandlerCollection';
-import util from './util';
 
 /**
  * MapCursor provides map cursor event and style management.
@@ -91,11 +90,8 @@ export default function MapCursor(map) {
 
 		isHandlingMove = true;
 
-		const eventFeatures = util.getFeaturesUnderEventPoint(map, event, handlers.layerIds);
-
+		const eventFeatures = getFeaturesUnderEventPoint(map, event, handlers.layerIds);
 		handleFeatureChanges(event, eventFeatures);
-		handleTopFeatureChanges(event, eventFeatures);
-
 		activeFeatures = eventFeatures;
 
 		setTimeout(() => {
@@ -105,8 +101,11 @@ export default function MapCursor(map) {
 	};
 
 	const handleFeatureChanges = (event, eventFeatures) => {
-		const eventFeatureMap = util.featureArrayToObject(eventFeatures);
-		const activeFeatureMap = util.featureArrayToObject(activeFeatures);
+		const eventFeatureMap = featureArrayToObject(eventFeatures);
+		const activeFeatureMap = featureArrayToObject(activeFeatures);
+		const newTopFeature = eventFeatures.length > 0 ? eventFeatures[0] : null;
+		const oldTopFeature = self.topFeature();
+		const sameTopFeature = featuresEqual(oldTopFeature, newTopFeature);
 
 		for (const id in activeFeatureMap) {
 			if (!eventFeatureMap[id]) {
@@ -114,26 +113,17 @@ export default function MapCursor(map) {
 			}
 		}
 
+		if (!sameTopFeature && oldTopFeature) {
+			callHandlerForFeature(event, 'leaveTopFeature', eventFeatures, oldTopFeature);
+		}
+
 		for (const id in eventFeatureMap) {
 			if (!activeFeatureMap[id]) {
 				callHandlerViaFeatureId(event, 'enterFeature', eventFeatures, id);
 			}
 		}
-	};
 
-	const handleTopFeatureChanges = (event, eventFeatures) => {
-		const newTopFeature = eventFeatures.length > 0 ? eventFeatures[0] : null;
-		const oldTopFeature = self.topFeature();
-
-		if (util.featuresEqual(oldTopFeature, newTopFeature)) {
-			return;
-		}
-
-		if (oldTopFeature) {
-			callHandlerForFeature(event, 'leaveTopFeature', eventFeatures, oldTopFeature);
-		}
-
-		if (newTopFeature) {
+		if (!sameTopFeature && newTopFeature) {
 			callHandlerForFeature(event, 'enterTopFeature', eventFeatures, newTopFeature);
 		}
 	};
@@ -188,3 +178,30 @@ export default function MapCursor(map) {
 
 	return self;
 }
+
+const featureArrayToObject = (features) => {
+	return features.reduce((acc, f) => {
+		acc[f.layer.id] = f;
+		return acc;
+	}, {});
+};
+
+const featuresEqual = (a, b) => {
+	if (!a && !b) {
+		return true;
+	}
+
+	return (
+		!!a && //
+		!!b &&
+		a.layer.id === b.layer.id &&
+		a.properties.objectid === b.properties.objectid
+	);
+};
+
+const getFeaturesUnderEventPoint = (map, event, layerIds) => {
+	const mousePoint = [event.point.x, event.point.y];
+	return map.queryRenderedFeatures(mousePoint, {
+		layers: layerIds
+	});
+};

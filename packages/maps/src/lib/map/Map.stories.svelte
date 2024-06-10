@@ -44,6 +44,32 @@
 	parameters={{
 		layout: 'full'
 	}}
+	argTypes={{
+		appendOSKeyToUrl: {
+			table: {
+				type: {
+					summary: 'function',
+					detail: '(osKey: string) => string'
+				}
+			}
+		},
+		whenMapLoads: {
+			table: {
+				type: {
+					summary: 'function',
+					detail: '(map: maplibre_gl.Map) => void'
+				}
+			}
+		},
+		whenMapUnloads: {
+			table: {
+				type: {
+					summary: 'function',
+					detail: '(map: maplibre_gl.Map) => void'
+				}
+			}
+		}
+	}}
 />
 
 <Template let:args>
