@@ -1,18 +1,21 @@
 <script lang="ts">
 	/**
 	 * The `<MapCursorEvent>` component exposes the map cursor capability, for a
-	 * specific map layer, as a Svelte component. It is designed to be slotted
-	 * into a `<MapLyer>`.
+	 * specific map layer, as a Svelte component. It's designed to be slotted
+	 * into a `<MapLyer>` where the `layerId` property is auto populated by
+	 * `mapLayerId` context. However, this component maybe slotted anywhere
+	 * within `<Map>` providing a layer ID is passed.
 	 *
-	 * Order of cursor movement calls:
-	 * 1. _leaveFeature_ (any features left)
-	 * 2. _enterFeature_ (any new features entered)
-	 * 3. _leaveTopFeature_
-	 * 4. _enterTopFeature_
+	 * Cursor movement events in order they are called when a mouse movement occurs:
+	 * 1. `leaveFeature`
+	 * 2. `enterFeature`
+	 * 3. `leaveTopFeature`
+	 * 4. `enterTopFeature`
 	 *
-	 * Order of click/touch calls:
-	 * 1. _clickMap_
-	 * 2. _clickFeature_
+	 * Click or touch events in order they are called per click:
+	 * 1. `clickMap`
+	 * 2. `clickFeature`
+	 *
 	 * @component
 	 */
 
