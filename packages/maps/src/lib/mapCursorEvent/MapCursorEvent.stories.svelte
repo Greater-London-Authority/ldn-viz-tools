@@ -7,7 +7,7 @@
 		table: {
 			type: {
 				summary: 'function',
-				detail: 'function(event, { feature, features, isTouchEvent })'
+				detail: 'function(event: MouseEvent | TouchEvent, {\n  feature: GeoJSONFeature,\n  features: GeoJSONFeature[],\n  isTouchEvent: boolean\n}) => void'
 			}
 		}
 	};
@@ -25,10 +25,10 @@
 					}
 				}
 			},
-			enterFeature: handlerArgType,
 			leaveFeature: handlerArgType,
-			enterTopFeature: handlerArgType,
 			leaveTopFeature: handlerArgType,
+			enterFeature: handlerArgType,
+			enterTopFeature: handlerArgType,
 			clickMap: handlerArgType,
 			clickFeature: handlerArgType
 		}

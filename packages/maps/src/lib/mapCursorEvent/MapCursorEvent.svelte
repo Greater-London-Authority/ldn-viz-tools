@@ -8,8 +8,8 @@
 	 *
 	 * Cursor movement events in order they are called when a mouse movement occurs:
 	 * 1. `leaveFeature`
-	 * 2. `enterFeature`
-	 * 3. `leaveTopFeature`
+	 * 2. `leaveTopFeature`
+	 * 3. `enterFeature`
 	 * 4. `enterTopFeature`
 	 *
 	 * Click or touch events in order they are called per click:
