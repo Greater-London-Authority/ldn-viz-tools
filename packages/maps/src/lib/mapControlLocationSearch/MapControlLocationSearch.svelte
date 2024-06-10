@@ -19,7 +19,7 @@
 		OnGeolocationSearchError
 	} from '@ldn-viz/ui';
 
-	const map: MapStore = getContext('map');
+	const mapStore: MapStore = getContext('mapStore');
 
 	/**
 	 * An adapter for sourcing location suggestions. All data fetching and
@@ -61,7 +61,7 @@
 		limitWidthClass = 'max-w-[calc(100dvw-2.5rem-1.5rem-1.5rem)]';
 	}
 
-	$: initMapLayer($map);
+	$: initMapLayer($mapStore);
 </script>
 
 <div class="flex" {...$$restProps}>

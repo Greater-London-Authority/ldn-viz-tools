@@ -53,7 +53,7 @@
 	import { Button } from '@ldn-viz/ui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const map = getContext('map');
+	const mapStore = getContext('mapStore');
 
 	let mode = null;
 
@@ -64,14 +64,14 @@
 	});
 
 	const handle = (event) => {
-		if (!$map || !mode) {
+		if (!$mapStore || !mode) {
 			return;
 		}
 
 		$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
 
 		if (event.detail > 0) {
-			$map.getCanvas().focus();
+			$mapStore.getCanvas().focus();
 		}
 	};
 </script>
