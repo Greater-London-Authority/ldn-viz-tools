@@ -1,20 +1,24 @@
 <script>
+	/**
+	 * The `ViolinPlot` component renders a set of values as a BoxPlot.
+	 * @component
+	 */
+
 	import { max, mean, min, quantile } from 'd3-array';
 	import { scaleLinear } from 'd3-scale';
 
+	/**
+	 * Array of values to be displayed.
+	 */
 	export let values;
-	export let table;
-	export let colSpec;
+	export let extent;
 
 	export let showAllPoints = false;
 
-	// Declare the chart dimensions and margins.
 	const width = 100;
 	const height = 30;
 	const marginRight = 10;
 	const marginLeft = 0;
-
-	// get the quartiles
 
 	let canvasRef;
 
@@ -23,7 +27,7 @@
 
 	const update = (values) => {
 		x = scaleLinear()
-			.domain(table.extents[colSpec.short_label])
+			.domain(extent)
 			.range([marginLeft, width - marginRight]);
 
 		box = {

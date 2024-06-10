@@ -1,13 +1,20 @@
 <script>
-	// "Distribution bar" in LineUp
+	/**
+	 * The `StackedBar` component represents a set of values as a stacked bar chart.
+	 */
 
 	import { scaleLinear } from 'd3-scale';
 
+	/**
+	 * Array of values to be displayed.
+	 */
 	export let values;
-	export let table;
-	export let colSpec;
 
-	// Declare the chart dimensions and margins.
+	/**
+	 * A D3 color scale used to determine bar color.
+	 */
+	export let colorScale;
+
 	const width = 100;
 	const height = 30;
 	const marginTop = 0;
@@ -23,6 +30,7 @@
 	let sortedData;
 	let bars = [];
 	const update = (values) => {
+
 		// count the values: produces a list of [value, count] pairs
 		const counts = Object.create(null);
 		values.forEach((val) => {
@@ -30,7 +38,6 @@
 		});
 
 		// sort by descending frequency: see https://stackoverflow.com/a/1069840
-		// TODO: not sure this is best approach: ideally want consistent order between plots for different groups
 		sortedData = Object.entries(counts).sort(([, a], [, b]) => b - a);
 
 		bars = [];
@@ -54,7 +61,7 @@
 			width={x(bar.end) - x(bar.start)}
 			y={0}
 			{height}
-			fill={table.scales ? table.scales[colSpec.short_label](bar.val) : 'lightgrey'}
+			fill={colorScale ? colorScale(bar.val) : 'lightgrey'}
 			stroke="black"
 		/>
 

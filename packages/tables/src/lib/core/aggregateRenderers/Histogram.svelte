@@ -1,19 +1,25 @@
 <script>
-	// This is based on the D3 Histogram example:
-	// https://observablehq.com/@d3/histogram/2?intent=fork
+	/**
+	 * The `Histogram` component renders a set of values as a histogram.
+	 * @component
+	 */
 
 	import { scaleLinear } from 'd3-scale';
 	import { bin, max } from 'd3-array';
 
+	/**
+	 * Array of values to be displayed.
+	 */
 	export let values;
-	export let table;
-	export let colSpec;
+	export let extent = [0, 1];
 
+	/**
+	 * Color of bars.
+	 */
 	export let color = 'steelblue';
 
 	// TODO: move labels to separate span so they don't get truncaed if max val is multiple digits
 
-	// Declare the chart dimensions and margins.
 	const width = 100;
 	const height = 30;
 	const marginTop = 0;
@@ -35,13 +41,10 @@
 
 		hints = [bins[0].x0, bins.slice(-1)[0].x1];
 
-		// Declare the x (horizontal position) scale.
 		x = scaleLinear()
-			.domain(table.extents[colSpec.short_label])
-			//   .domain([bins[0].x0, bins[bins.length - 1].x1])
+			.domain(extent)
 			.range([marginLeft, width - marginRight]);
 
-		// Declare the y (vertical position) scale.
 		y = scaleLinear()
 			.domain([0, max(bins, (d) => d.length)])
 			.range([height - marginBottom, marginTop]);

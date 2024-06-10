@@ -1,12 +1,19 @@
 <script>
+	/**
+	 * The `ViolinPlot` component renders a set of values as a violin plot.
+	 * @component
+	 */
+
 	import { scaleLinear } from 'd3-scale';
 	import { bin, max, mean, min, quantile } from 'd3-array';
 
 	import { area, curveCatmullRom } from 'd3-shape';
 
+	/**
+	 * Array of values to be displayed.
+	 */
 	export let values;
-	export let table;
-	export let colSpec;
+	export let extent = [0, 1];
 
 	// Declare the chart dimensions and margins.
 	const width = 100;
@@ -27,7 +34,7 @@
 		);
 
 		x = scaleLinear()
-			.domain(table.extents[colSpec.short_label])
+			.domain(extent)
 			.range([marginLeft, width - marginRight]);
 
 		// Declare the y (vertical position) scale.

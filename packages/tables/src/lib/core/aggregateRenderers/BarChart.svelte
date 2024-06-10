@@ -1,30 +1,33 @@
 <script>
-	// This is based on the D3 Bar Chart example:
-	// https://observablehq.com/@d3/bar-chart
-
-	// TODO: option to show either proportions or counts
+	/**
+	 * The `BarChart` component renders a set of values as a bar chart.
+	 * @component
+	 */
 
 	import { scaleLinear, scaleBand } from 'd3-scale';
 	import { max } from 'd3-array';
 
+	/**
+	 * Array of values to be displayed.
+	 */
 	export let values;
 
-	export let table;
-	export let colSpec;
+	/**
+	 * A D3 color scale used to determine bar color.
+	 */
+	export let colorScale;
 
-	// TODO: move labels to separate span so they don't get truncaed if max val is multiple digits
-	// TODO: logic for not overlapping lots of labels
+	/**
+	 * Categorical scale used to determine horizontal position of bar.
+	 */
+	export let posScale;
 
-	// Declare the chart dimensions and margins.
 	const width = 100;
 	const height = 30;
 	const marginTop = 0;
 	const marginRight = 10;
 	const marginBottom = 10;
 	const marginLeft = 0;
-
-	let posScale = () => 0;
-	$: posScale = table.posScales[colSpec.short_label];
 
 	let sortedData;
 	let x;
@@ -54,7 +57,6 @@
 					.range([marginLeft, width - marginRight])
 			: defaultScale;
 
-		// Declare the y (vertical position) scale.
 		y = scaleLinear()
 			.domain([0, max(sortedData, (d) => d[1])])
 			.range([height - marginBottom, marginTop]);
@@ -77,7 +79,7 @@
 	<g>
 		{#each sortedData as d}
 			<rect
-				fill={table.scales ? table.scales[colSpec.short_label](d[0]) : 'lightgrey'}
+				fill={colorScale ? colorScale(d[0]) : 'lightgrey'}
 				x={x(d[0])}
 				width={x.bandwidth()}
 				y={y(d[1])}

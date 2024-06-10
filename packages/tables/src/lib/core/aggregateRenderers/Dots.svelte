@@ -1,14 +1,18 @@
 <script>
-	// This has consistent x-axis based on computed extent of column
+	/**
+	 * The `Dots` component renders a set of values as something like a beeswarm plot or jittered Cleveland dot plot.
+	 * Different plots in the same column have a consistent x-axis based on computed extent of column.
+	 * @component
+	 */
 
 	import { scaleLinear } from 'd3-scale';
 
-	// adapted from https://observablehq.com/@d3/beeswarm/2?intent=fork
+	/**
+	 * Array of values to be displayed.
+	 */
 	export let values;
-	export let table;
-	export let colSpec;
+	export let extent = [0, 1];
 
-	// Declare the chart dimensions and margins.
 	const width = 100;
 	const height = 30;
 	const marginRight = 10;
@@ -34,7 +38,7 @@
 
 	const update = (values) => {
 		x = scaleLinear()
-			.domain(table.extents[colSpec.short_label])
+			.domain(extent)
 			.range([marginLeft, width - marginRight]);
 
 		dodgedValues = dodge(values, { radius: radius * 2 + padding });
@@ -45,8 +49,9 @@
 			const ctx = canvasRef.getContext('2d');
 			ctx.clearRect(0, 0, width, height);
 			for (const point of dodgedValues) {
-				const cx = x(point.x);
+				const cx = point.x;
 				const cy = (height - marginBottom) * point.y;
+				console.log('Point at:', point.x, cx);
 				ctx.fillStyle = 'rgb(200, 0, 0)';
 				ctx.fillRect(cx, cy, 1, 1);
 			}
