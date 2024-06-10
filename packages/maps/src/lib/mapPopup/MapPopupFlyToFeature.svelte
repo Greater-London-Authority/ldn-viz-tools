@@ -47,7 +47,7 @@
 
 <script>
 	const mapStore = getContext('mapStore');
-	const feature = getContext('feature');
+	const feature = getContext('mapPopupFeature');
 	const point = feature.geometry ? pointOnFeature(feature) : null;
 
 	let container;
