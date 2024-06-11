@@ -62,16 +62,3 @@
 		</svg>
 	{/if}
 </div>
-
-<style global>
-	.maplibregl-popup > * {
-		pointer-events: none;
-		border-radius: 0;
-		margin: 0;
-		padding: 0;
-	}
-
-	.maplibregl-popup-tip {
-		display: none;
-	}
-</style>
