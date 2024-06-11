@@ -11,7 +11,7 @@ export default (map) => {
 	});
 
 	map.addLayer({
-		id: `${sourceId}/poly`,
+		id: `${sourceId}/polygon`,
 		source: sourceId,
 		type: 'fill',
 		filter: ['==', '$type', 'Polygon'],
