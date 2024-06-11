@@ -181,7 +181,13 @@ export default function MapCursor(map) {
 
 const featureArrayToObject = (features) => {
 	return features.reduce((acc, f) => {
-		acc[f.layer.id] = f;
+		// For ESRI GeoJSON the layer ID and objectid provide enough uniqueness but
+		// non-ESRI GeoJSON requires the source specification set 'generateId' to
+		// true so that 'feature.id' is always set. However, not setting this is
+		// unlikely to cause an issue unless there are overlapping features in the
+		// same layer.
+		const id = f.layer.id + ':' + f.id + ':' + f.properties.objectid;
+		acc[id] = f;
 		return acc;
 	}, {});
 };
@@ -191,12 +197,19 @@ const featuresEqual = (a, b) => {
 		return true;
 	}
 
-	return (
-		!!a && //
-		!!b &&
-		a.layer.id === b.layer.id &&
-		a.properties.objectid === b.properties.objectid
-	);
+	if (!a || !b) {
+		return false;
+	}
+
+	if (a.layer.id !== b.layer.id) {
+		return false;
+	}
+
+	if (a.id !== undefined && b.id !== undefined) {
+		return a.id === b.id;
+	}
+
+	return a.properties.objectid === b.properties.objectid;
 };
 
 const getFeaturesUnderEventPoint = (map, event, layerIds) => {
