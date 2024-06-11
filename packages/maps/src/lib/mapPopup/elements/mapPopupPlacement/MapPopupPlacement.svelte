@@ -1,7 +1,7 @@
 <script>
 	/**
 	 * The `<MapPopupPlacement>` component is a wrapping container for use
-	 * within tooltips and markers components. It determines how a map tooltip or
+	 * within tooltip and marker components. It determines how a map tooltip or
 	 * marker is placed relative to its associated feature.
 	 * @component
 	 */

@@ -1,6 +1,7 @@
 <script>
 	/**
-	 * The `<MapPopupTooltip>` component encapsulates the standardised map
+	 * The `<MapPopupTooltip>` component is a wrapping container for use
+	 * within tooltip and marker components. It encapsulates the standardised map
 	 * tooltip styling and behaviour.
 	 * @component
 	 */
@@ -9,13 +10,23 @@
 	import MapPopupStyledContainer from '../mapPopupStyledContainer/MapPopupStyledContainer.svelte';
 
 	/**
-	 * Method to layout the popup. Either 'center' or 'follow'.
+	 * Method to layout and position the popup. Options are 'center', 'follow', or 'none'.
 	 */
 	export let placement = 'center';
+
+	/**
+	 * If true removes the styled tip at the bottom of the container.
+	 */
+	export let noTip = false;
+
+	/**
+	 * If true removes the standard container padding.
+	 */
+	export let noPad = false;
 </script>
 
 <MapPopupPlacement {placement}>
-	<MapPopupStyledContainer {...$$restProps}>
+	<MapPopupStyledContainer {noTip} {noPad}>
 		<slot />
 	</MapPopupStyledContainer>
 </MapPopupPlacement>

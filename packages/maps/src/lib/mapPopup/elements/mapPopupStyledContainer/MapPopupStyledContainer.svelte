@@ -1,7 +1,8 @@
 <script>
 	/**
-	 * The `<MapPopupStyled>` component provides a container with default
-	 * popup styling.
+	 * The `<MapPopupStyled>` component is a wrapping container for use
+	 * within tooltip and marker components. It provides standardised styling
+	 * that is suitable for the vast majority of map tooltips and markers.
 	 * @component
 	 */
 
@@ -29,20 +30,20 @@
 	delete $$restProps.class;
 </script>
 
-<div class="relative text-white text-sm">
-	<!--
-		Box shadow only visible when a tooltip and marker overlap.
-		Distinguishes the tooltip when it overlaps a marker.
+<!--
+	Box shadow only visible when a tooltip and marker overlap.
+	Distinguishes the tooltip when it overlaps a marker.
 
-		on:mousemove|stopImmediatePropagation prevents tooltips below this marker
-		from being shown when mouseover.	
-	-->
+	The stopImmediatePropagation on mousemove prevents tooltips below this
+	marker from being shown when mouseover.	
+-->
+<div class="relative text-white text-sm">
 	<div
 		role="tooltip"
 		bind:this={container}
 		on:wheel={preventZoom}
 		on:touchmove={preventZoom}
-		on:mousemove|stopImmediatePropagation
+		on:mousemove|stopImmediatePropagation={() => {}}
 		class={classes}
 		class:p-4={!noPad}
 		{...$$restProps}
