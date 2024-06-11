@@ -53,7 +53,26 @@
 				}
 			}
 		},
+		mapStore: {
+			control: 'none',
+			table: {
+				type: {
+					summary: 'Svelte store',
+					detail: 'writable<null | maplibre_gl.Map>'
+				}
+			}
+		},
+		mapCursorStore: {
+			control: 'none',
+			table: {
+				type: {
+					summary: 'Svelte store',
+					detail: 'writable<null | MapCursor>'
+				}
+			}
+		},
 		whenMapLoads: {
+			control: 'none',
 			table: {
 				type: {
 					summary: 'function',
@@ -62,6 +81,7 @@
 			}
 		},
 		whenMapUnloads: {
+			control: 'none',
 			table: {
 				type: {
 					summary: 'function',
