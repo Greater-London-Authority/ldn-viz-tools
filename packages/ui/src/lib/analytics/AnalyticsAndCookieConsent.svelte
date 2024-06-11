@@ -1,3 +1,49 @@
+<script context="module">
+	/**
+	 * The `<AnalyticsAndCookieConsent>` component sets up Google analytics and uses [Civic Cookie Control](https://www.civicuk.com/cookie-control/) to get consent for the use of cookies.
+	 * As the cookie consent applies across the *.london.gov.uk domain, the cookie consent sidebar is styled to match the main london.gov.uk site rather than the CIU's apps.
+	 *
+	 * Define the API key and AppName before using this component (replace `\/` with `/` in the closing `<script>` tag):
+	 *
+	 * ```js
+	 * <svelte:head>
+	 * <script>
+	 *     window.ldnVizCivicApiKey = 'civic-api-key';
+	 *     window.ldnVizCivicAppName = 'name-used-for-logging';
+	 * <\/script>
+	 * </svelte:head>
+	 *
+	 * <AnalyticsAndCookieConsent />
+	 *```
+	 *
+	 * @component
+	 */
+
+	/*
+		The majority of this Civic config is replicated across london.gov.uk.
+		Please check any needed changes with the Digital team before applying
+		them.
+	
+		If the Digital team informs the City Data team of config changes make
+		sure to remove any '\r\n' characters from text fields and use only
+		the apps.london.gov.uk API key (different sub domains have different
+		keys).
+	
+		If the page is embedded within another london.gov.uk page then cookie
+		consent is disabled. It will be enabled everywhere else including
+		other domains containing or managed by GLA teams,
+		e.g. registertovote.london.
+	
+		Docs: https://www.civicuk.com/cookie-control/documentation/getting-started
+
+		If this page is embeded within a london.gov.uk webpage and a cookie
+		consent has yet to be set then a periodic script will run that cancels
+		itself and reloads this page once the cookie is finally set. This
+		ensures analytics is disabled or enabled based on the users preference
+		set in the parent page.
+	*/
+</script>
+
 <svelte:head>
 	<script
 		src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js"
@@ -5,45 +51,9 @@
 	></script>
 
 	<script>
-		/**
-		 * The `<AnalyticsAndCookieConsent>` component sets up Google analytics and uses [Civic Cookie Control](https://www.civicuk.com/cookie-control/) to get consent for the use of cookies.
-		 * As the cookie consent applies across the *.london.gov.uk domain, the cookie consent sidebar is styled to match the main london.gov.uk site rather than the CIU's apps.
-		 *
-		 * Define the API key and AppName before using this component (replace `\/` with `/` in the closing `<script>` tag):
-		 *
-		 * ```js
-		 * <svelte:head>
-		 * <script>
-		 *     window.ldnVizCivicApiKey = 'civic-api-key';
-		 *     window.ldnVizCivicAppName = 'name-used-for-logging';
-		 * <\/script>
-		 * </svelte:head>
-		 *
-		 * <AnalyticsAndCookieConsent />
-		 *```
-		 *
-		 * @component
-		 */
-
 		var ldnVizCivic = {
 			appName: window.ldnVizCivicAppName || 'Embedded app',
 			intervalId: null,
-
-			// The majority of this Civic config is replicated across london.gov.uk.
-			// Please check any needed changes with the Digital team before applying
-			// them.
-			//
-			// If the Digital team informs the City Data team of config changes make
-			// sure to remove any '\r\n' characters from text fields and use only
-			// the apps.london.gov.uk API key (different sub domains have different
-			// keys).
-			//
-			// If the page is embedded within another london.gov.uk page then cookie
-			// consent is disabled. It will be enabled everywhere else including
-			// other domains containing or managed by GLA teams,
-			// e.g. registertovote.london.
-			//
-			// Docs: https://www.civicuk.com/cookie-control/documentation/getting-started
 			config: {
 				apiKey: window.ldnVizCivicApiKey,
 				product: 'PRO_MULTISITE',
@@ -162,33 +172,14 @@
 			}
 		};
 
-		// isCookieControlManagedByParent returns true if the page is embedded and
-		// has the london.gov.uk domain name, i.e. shares cookies and cookie
-		// consent with the main london.gov.uk website.
 		ldnVizCivic.isCookieControlManagedByParent = function () {
-			if (!ldnVizCivic.isPageEmbedded()) {
+			if (!window.top || window === window.top) {
 				return false;
 			}
-
-			if (!ldnVizCivic.isLondonGovUkDomain()) {
-				return false;
-			}
-
-			return true;
-		};
-
-		ldnVizCivic.isPageEmbedded = function () {
-			return window !== window.top;
-		};
-
-		ldnVizCivic.isLondonGovUkDomain = function () {
-			const londonGovDomains = [
-				'london.gov.uk' //
-				// 'registertovote.london',
-			];
 
 			try {
-				const url = new URL(window.location.href);
+				const londonGovDomains = ['london.gov.uk'];
+				const url = new URL(window.top.location.href);
 
 				for (const d of londonGovDomains) {
 					if (url.hostname.toLowerCase().endsWith(d)) {
@@ -202,17 +193,12 @@
 			}
 		};
 
-		// hasCookieControl returns true id the Civic cookie consent script has
-		// succssfully run and created a global CookieControl variable.
 		ldnVizCivic.hasCookieControl = function () {
 			return !!document.cookie
 				.split('; ') //
 				.find((c) => c.startsWith('CookieControl'));
 		};
 
-		// reloadWhenCookieControlAdded will reload embeded content if a global
-		// CookieConsent variable exists. It removes any periodic interval set
-		// within the init function below.
 		ldnVizCivic.reloadWhenCookieControlAdded = function () {
 			if (ldnVizCivic.hasCookieControl()) {
 				clearInterval(ldnVizCivic.intervalId);
@@ -221,15 +207,6 @@
 			}
 		};
 
-		// init immediately loads CookieControl with the Civic config at the start
-		// of this script if this page is not embeded within a london.gov.uk
-		// webpage.
-		//
-		// If this page is embeded within a london.gov.uk webpage and a cookie
-		// consent has yet to be set then a periodic script will run that cancels
-		// itself and reloads this page once the cookie is finally set. This
-		// ensures analytics is disabled or enabled based on the users preference
-		// set in the parent page.
 		ldnVizCivic.init = function () {
 			if (!ldnVizCivic.isCookieControlManagedByParent()) {
 				CookieControl.load(ldnVizCivic.config);
@@ -237,11 +214,8 @@
 			}
 
 			if (!ldnVizCivic.hasCookieControl()) {
-				// Only required on user's first visit.
-				ldnVizCivic.intervalId = setInterval(
-					ldnVizCivic.reloadWhenCookieControlAdded, //
-					1000
-				);
+				/* Only required on user's first visit. */
+				ldnVizCivic.intervalId = setInterval(ldnVizCivic.reloadWhenCookieControlAdded, 1000);
 			}
 		};
 
@@ -250,9 +224,6 @@
 
 	<script>
 		window.dataLayer = window.dataLayer || [];
-
-		// All cookies are denied by default via Google Analytics.
-		// CookieControl will enable based on user preference.
 
 		(function (w, d, s, l, i) {
 			w[l] = w[l] || [];
