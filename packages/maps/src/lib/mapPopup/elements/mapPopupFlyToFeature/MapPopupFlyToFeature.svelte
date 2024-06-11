@@ -1,8 +1,8 @@
 <script context="module">
 	/**
-	 * The `<MapPopupFlyToFeature>` component is a wrapping container for
-	 * tooltips and markers that centers the popup on the screen by flying to it
-	 * upon mount.
+	 * The `<MapPopupFlyToFeature>` component is a wrapping container for use
+	 * within tooltips and markers components. It moves the map so it centers
+	 * the popup on the screen. This is activated soon after mounting.
 	 * @component
 	 */
 

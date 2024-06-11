@@ -5,9 +5,9 @@
 	 * @component
 	 */
 
-	import MapPopupFlyToFeature from './MapPopupFlyToFeature.svelte';
-	import MapPopupPlacement from './MapPopupPlacement.svelte';
-	import MapPopupStyledContainer from './MapPopupStyledContainer.svelte';
+	import MapPopupFlyToFeature from '../mapPopupFlyToFeature/MapPopupFlyToFeature.svelte';
+	import MapPopupPlacement from '../mapPopupPlacement/MapPopupPlacement.svelte';
+	import MapPopupStyledContainer from '../mapPopupStyledContainer/MapPopupStyledContainer.svelte';
 
 	/**
 	 * Method to layout the popup. Either 'center' or 'follow'.

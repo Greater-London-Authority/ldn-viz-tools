@@ -1,7 +1,8 @@
 <script>
 	/**
-	 * The `<MapPopupPlacement>` component determines how to place a popup
-	 * relative to its associated feature.
+	 * The `<MapPopupPlacement>` component is a wrapping container for use
+	 * within tooltips and markers components. It determines how a map tooltip or
+	 * marker is placed relative to its associated feature.
 	 * @component
 	 */
 
@@ -9,9 +10,9 @@
 	import PlacementFollowMouse from './PlacementFollowMouse.svelte';
 
 	/**
-	 * Method to layout the popup. Either 'center' or 'follow'.
+	 * Method to layout and position the popup. Options are 'center', 'follow', or 'none'.
 	 */
-	export let placement = 'center'; // 'center' | 'follow'
+	export let placement = 'center';
 
 	if (placement !== 'center' && placement !== 'follow' && placement !== 'none') {
 		console.error(`[MapPopupPlacement] Unknown placement type '${placement}'`);

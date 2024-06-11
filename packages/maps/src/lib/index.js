@@ -21,11 +21,11 @@ export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelt
 
 // Popups
 export { default as MapPopup } from './mapPopup/MapPopup.svelte';
-export { default as MapPopupFlyToFeature } from './mapPopup/MapPopupFlyToFeature.svelte';
-export { default as MapPopupMarker } from './mapPopup/MapPopupMarker.svelte';
-export { default as MapPopupPlacement } from './mapPopup/MapPopupPlacement.svelte';
-export { default as MapPopupStyledContainer } from './mapPopup/MapPopupStyledContainer.svelte';
-export { default as MapPopupTooltip } from './mapPopup/MapPopupTooltip.svelte';
+export { default as MapPopupFlyToFeature } from './mapPopup/elements/mapPopupFlyToFeature/MapPopupFlyToFeature.svelte';
+export { default as MapPopupMarker } from './mapPopup/elements/mapPopupMarker/MapPopupMarker.svelte';
+export { default as MapPopupPlacement } from './mapPopup/elements/mapPopupPlacement/MapPopupPlacement.svelte';
+export { default as MapPopupStyledContainer } from './mapPopup/elements/mapPopupStyledContainer/MapPopupStyledContainer.svelte';
+export { default as MapPopupTooltip } from './mapPopup/elements/mapPopupTooltip/MapPopupTooltip.svelte';
 
 // themes
 export * from './themes/animations';

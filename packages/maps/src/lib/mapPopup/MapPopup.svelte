@@ -1,9 +1,16 @@
 <script>
 	/**
-	 * The `<MapPopup>` component allows tooltips and static markers to be added
-	 * easily using client side rendered components. This component is designed
-	 * to be slotted into `<MapLayer>` components but may be slotted anywhere
-	 * within a `<Map>` instance.
+	 * The `<MapPopup>` component allows tooltips and markers to easily be added
+	 * for feature hover and clicks respectively. This component may be slotted
+	 * anywhere provided the `<Map>` component context is available.
+	 *
+	 * The `tooltip` and `marker` components are client side rendered. This
+	 * component's context is passed to them along with three additional
+	 * values:
+	 * - `mapPopupTooltip` (tooltip component only) is the instance of `maplibre_gl.Popup` that contains the rendered tooltip component.
+	 * - `mapPopupMarker` (marker component only) is the instance of `maplibre_gl.Marker` that contains the rendered marker component.
+	 * - `mapPopupLayerId` is the ID of the map layer the feature belongs to.
+	 * - `mapPopupFeature` is the target GeoJSON feature. Note that MapLibre adds additional fields, e.g. `layer`.
 	 * @component
 	 */
 
@@ -32,7 +39,7 @@
 	export let noCursorStyle = false;
 
 	/**
-	 * Component to render when the users mouse hovers a feature.
+	 * Component to render when the user's mouse hovers a feature.
 	 */
 	export let tooltip = null;
 
