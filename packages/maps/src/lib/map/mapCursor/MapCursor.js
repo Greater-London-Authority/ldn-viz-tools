@@ -109,7 +109,7 @@ export default function MapCursor(map) {
 
 		for (const id in activeFeatureMap) {
 			if (!eventFeatureMap[id]) {
-				callHandlerViaFeatureId(event, 'leaveFeature', eventFeatures, id);
+				callHandlerForFeature(event, 'leaveFeature', eventFeatures, activeFeatureMap[id]);
 			}
 		}
 
@@ -119,7 +119,7 @@ export default function MapCursor(map) {
 
 		for (const id in eventFeatureMap) {
 			if (!activeFeatureMap[id]) {
-				callHandlerViaFeatureId(event, 'enterFeature', eventFeatures, id);
+				callHandlerForFeature(event, 'enterFeature', eventFeatures, eventFeatureMap[id]);
 			}
 		}
 
@@ -154,13 +154,6 @@ export default function MapCursor(map) {
 				features: activeFeatures,
 				isTouchEvent: isTouchEvent
 			});
-		}
-	};
-
-	const callHandlerViaFeatureId = (event, eventType, features, id) => {
-		const feature = features.find((f) => f.id == id);
-		if (feature) {
-			callHandlerForFeature(event, eventType, features, feature);
 		}
 	};
 
