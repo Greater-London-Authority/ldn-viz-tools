@@ -44,6 +44,52 @@
 	parameters={{
 		layout: 'full'
 	}}
+	argTypes={{
+		appendOSKeyToUrl: {
+			table: {
+				type: {
+					summary: 'function',
+					detail: '(osKey: string) => string'
+				}
+			}
+		},
+		mapStore: {
+			control: 'none',
+			table: {
+				type: {
+					summary: 'Svelte store',
+					detail: 'writable<null | maplibre_gl.Map>'
+				}
+			}
+		},
+		mapCursorStore: {
+			control: 'none',
+			table: {
+				type: {
+					summary: 'Svelte store',
+					detail: 'writable<null | MapCursor>'
+				}
+			}
+		},
+		whenMapLoads: {
+			control: 'none',
+			table: {
+				type: {
+					summary: 'function',
+					detail: '(map: maplibre_gl.Map) => void'
+				}
+			}
+		},
+		whenMapUnloads: {
+			control: 'none',
+			table: {
+				type: {
+					summary: 'function',
+					detail: '(map: maplibre_gl.Map) => void'
+				}
+			}
+		}
+	}}
 />
 
 <Template let:args>
