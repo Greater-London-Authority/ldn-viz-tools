@@ -2,7 +2,8 @@ import { extent } from 'd3-array';
 import { scaleOrdinal, scaleThreshold } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 
-import { getThresholdBreaksColorsLabels, type ColorScale } from './getThesholdBreaksColorsLabels';
+import {getThresholdBreaksColorsLabels} from "@ldn-viz/charts";
+import type {ColorScale} from "./types";
 
 export const getCategoricalColorScale = (values) => {
 	return scaleOrdinal(schemeCategory10).domain(values);
