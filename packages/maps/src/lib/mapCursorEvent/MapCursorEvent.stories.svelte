@@ -63,7 +63,7 @@
 	const whenMapLoads = (map) => {
 		loadTestLayers(map);
 		init = true;
-		map.getCanvas().style.cursor = 'default';
+		map.getCanvas().style.cursor = 'pointer';
 	};
 
 	let eventLog = [];
@@ -90,9 +90,7 @@
 	<MapCursorEvent {...args} />
 </Template>
 
-<Story name="Default" source />
-
-<Story name="Events">
+<Story name="Default">
 	<div class="relative w-[100dvw] h-[100dvh]">
 		<Map
 			{whenMapLoads}
@@ -101,15 +99,6 @@
 			}}
 		>
 			{#if init}
-				<MapCursorEvent
-					layerId="gla/ldn-viz-tools/test-data/point"
-					enterFeature={newLogEvent('enterFeature')}
-					leaveFeature={newLogEvent('leaveFeature')}
-					enterTopFeature={newLogEvent('enterTopFeature')}
-					leaveTopFeature={newLogEvent('leaveTopFeature')}
-					clickFeature={newLogEvent('clickFeature')}
-					clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/point')}
-				/>
 				<MapCursorEvent
 					layerId="gla/ldn-viz-tools/test-data/polygon"
 					enterFeature={newLogEvent('enterFeature')}
@@ -127,6 +116,15 @@
 					leaveTopFeature={newLogEvent('leaveTopFeature')}
 					clickFeature={newLogEvent('clickFeature')}
 					clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/line')}
+				/>
+				<MapCursorEvent
+					layerId="gla/ldn-viz-tools/test-data/point"
+					enterFeature={newLogEvent('enterFeature')}
+					leaveFeature={newLogEvent('leaveFeature')}
+					enterTopFeature={newLogEvent('enterTopFeature')}
+					leaveTopFeature={newLogEvent('leaveTopFeature')}
+					clickFeature={newLogEvent('clickFeature')}
+					clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/point')}
 				/>
 			{/if}
 		</Map>
