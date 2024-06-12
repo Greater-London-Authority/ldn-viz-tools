@@ -16,6 +16,9 @@ export { default as MapControlGeocoder } from './mapControlLocationSearch/MapCon
 export { default as MapControlGeolocator } from './mapControlLocationSearch/MapControlGeolocator.svelte';
 export { default as MapControlLocationSearch } from './mapControlLocationSearch/MapControlLocationSearch.svelte';
 
+// Events
+export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
