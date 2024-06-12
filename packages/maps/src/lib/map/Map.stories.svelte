@@ -6,15 +6,9 @@
 	import * as greyStyle from '../themes/os_greyscale.json';
 	import * as os_light_vts from '../themes/os_light_vts.json';
 
-<<<<<<< HEAD
-	import Map, { appendOSKeyToUrl } from './Map.svelte';
-	import PropertiesStory from './PropertiesStory.svelte';
-	import loadTestLayers from '../loadTestlayers';
-=======
 	import loadTestLayers from '../loadTestLayers';
 	import Map, { appendOSKeyToUrl } from './Map.svelte';
 	import PropertiesStory from './PropertiesStory.svelte';
->>>>>>> 03e8fdac981b41b799d8b031bd053be202283fc7
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>

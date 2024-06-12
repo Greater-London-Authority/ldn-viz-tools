@@ -29,12 +29,12 @@
 	export let layerId = ctxLayerId;
 
 	/**
-	 * Disables hover cursor styling.
+	 * Disables cursor style changes triggered on feature hover.
 	 *
-	 * By default the map cursor is a grab icon to
-	 * indicate the map can be panned. Hovering a feature with a marker shows a
-	 * pointer (implying a clickable feature) and tooltip only popups will
-	 * show the default OS cursor icon.
+	 * By default the map cursor is a grab icon to indicate the map can be
+	 * panned. Hovering a feature with a marker shows a pointer (implying a
+	 * clickable feature) and tooltip only popups will show the default OS
+	 * cursor icon.
 	 */
 	export let noCursorStyle = false;
 

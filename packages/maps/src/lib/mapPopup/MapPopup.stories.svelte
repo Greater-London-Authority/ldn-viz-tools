@@ -20,21 +20,11 @@
 		argTypes: {
 			layerId: {
 				type: 'string',
-				control: 'text',
-				table: {
-					type: {
-						summary: 'string'
-					}
-				}
+				control: 'none'
 			},
 			noCursorStyle: {
 				type: 'boolean',
-				control: 'boolean',
-				table: {
-					type: {
-						summary: 'boolean'
-					}
-				}
+				control: 'none'
 			},
 			tooltip: componentType,
 			marker: componentType
