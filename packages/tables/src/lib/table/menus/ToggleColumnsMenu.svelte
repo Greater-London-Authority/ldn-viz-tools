@@ -4,7 +4,6 @@
 
 	export let table;
 
-	/////
 	let fields;
 	$: if (table) {
 		const new_fields = table.columnSpec.map((f) => ({
@@ -16,15 +15,13 @@
 		if (JSON.stringify(new_fields) !== JSON.stringify(fields)) {
 			fields = new_fields;
 		}
-
-		console.log({ fields });
 	}
 
-	let fieldSelection = table.visibleFields; // TODO: set from table
+	let fieldSelection = table.visibleFields;
 	const updateVisibility = () => table.setVisibleFields(fieldSelection);
 	$: {
 		if (JSON.stringify(table.visibleFields) !== JSON.stringify(fieldSelection)) {
-			updateVisibility(fieldSelection);
+			updateVisibility();
 		}
 	}
 </script>

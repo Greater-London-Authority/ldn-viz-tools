@@ -5,7 +5,6 @@
 
 	export let table;
 
-	/////
 	let fields;
 	$: if (table) {
 		const new_fields = table.columnSpec.map((f) => ({
@@ -17,30 +16,23 @@
 		if (JSON.stringify(new_fields) !== JSON.stringify(fields)) {
 			fields = new_fields;
 		}
-
-		console.log({ fields });
 	}
 
 	let fieldSelection; // TODO: set from table
 
-	////
-
 	const orderOptions = ['ascending', 'descending'];
 	let orderSelection;
 
-	//
 	const aggregationOptions = ['min', 'mean', 'median', 'max', 'q1', 'q3', 'count'];
 	let aggregationSelection;
 
-	///
-
 	$: {
-		if (
-			!orderSelection ||
+
+		const incompleteState = !orderSelection ||
 			!aggregationSelection ||
-			(aggregationSelection?.value !== 'count' && !fieldSelection)
-		) {
-		} else {
+			(aggregationSelection?.value !== 'count' && !fieldSelection);
+
+		if (!incompleteState) {
 			const newOrdering: GroupOrderCriterion[] = [
 				{
 					field: fieldSelection?.id,
@@ -48,8 +40,6 @@
 					aggregation: aggregationSelection?.value
 				}
 			];
-
-			console.log({ newOrdering, tableSpec: table.groupingOrderSpec });
 
 			if (JSON.stringify(table.groupingOrderSpec) !== JSON.stringify(newOrdering)) {
 				table.setGroupOrdering(newOrdering);

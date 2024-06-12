@@ -17,7 +17,6 @@
 		}
 	}
 
-	//
 	let groupingSelection = [];
 	const applyGrouping = (groupingSelection) => {
 		if (table) {
