@@ -11,5 +11,3 @@ export { default as ObservablePlot } from './observablePlot/ObservablePlot.svelt
 export { default as AxisX } from './shared/AxisX.svelte';
 export { default as AxisY } from './shared/AxisY.svelte';
 export { default as Scatter } from './shared/Scatter.svelte';
-
-export * from './colors/colors';
