@@ -6,7 +6,7 @@
 	 * @component
 	 */
 
-	import PlacementCenterOnFeature from './PlacementCenterOnFeature.svelte';
+	import PlacementCenterAboveFeature from './PlacementCenterAboveFeature.svelte';
 	import PlacementFollowMouse from './PlacementFollowMouse.svelte';
 
 	/**
@@ -20,9 +20,9 @@
 </script>
 
 {#if placement === 'center'}
-	<PlacementCenterOnFeature>
+	<PlacementCenterAboveFeature>
 		<slot />
-	</PlacementCenterOnFeature>
+	</PlacementCenterAboveFeature>
 {:else if placement === 'follow'}
 	<PlacementFollowMouse>
 		<slot />

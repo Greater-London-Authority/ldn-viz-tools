@@ -3,7 +3,10 @@
 
 	export const meta = {
 		title: 'Maps/MapPopup/elements/MapPopupFlyToFeature',
-		component: MapPopupFlyToFeature
+		component: MapPopupFlyToFeature,
+		parameters: {
+			layout: 'full'
+		}
 	};
 </script>
 
@@ -12,8 +15,8 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
-	//import MapPopup from '../../MapPopup.svelte';
-	//import TestMarker from './TestMarker.svelte';
+	import loadTestLayers from '../../../loadTestLayers';
+	import MapPopup from '../../MapPopup.svelte';
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	setContext('mapPopupFeature', {});
@@ -23,20 +26,17 @@
 	<MapPopupFlyToFeature {...args} />
 </Template>
 
-<Story name="Default" source />
-
-<Story name="Fly on click">
+<Story name="Interactive Example">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
+			whenMapLoads={loadTestLayers}
 			options={{
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<!--TODO:
-				Add loadTestLayers.js when merged in.
-
-				<MapPopup layerId="gla/ldn-viz-tools/test-data/point" marker={TestMarker} />	
-			-->
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" marker={MapPopupFlyToFeature} />
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" marker={MapPopupFlyToFeature} />
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" marker={MapPopupFlyToFeature} />
 		</Map>
 	</div>
 </Story>

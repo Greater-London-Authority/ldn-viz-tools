@@ -1,18 +1,11 @@
 <script>
+	import { getContext } from 'svelte';
 	import MapPopupTooltip from './elements/mapPopupTooltip/MapPopupTooltip.svelte';
+
+	const feature = getContext('mapPopupFeature');
+	const props = feature.properties;
 </script>
 
-<MapPopupTooltip>Tooltip content.</MapPopupTooltip>
-
-<style>
-	:global(.maplibregl-popup > *) {
-		pointer-events: none;
-		border-radius: 0;
-		margin: 0;
-		padding: 0;
-	}
-
-	:global(.maplibregl-popup-tip) {
-		display: none;
-	}
-</style>
+<MapPopupTooltip>
+	{props.site_name}
+</MapPopupTooltip>
