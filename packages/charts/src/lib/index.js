@@ -12,4 +12,4 @@ export { default as AxisX } from './shared/AxisX.svelte';
 export { default as AxisY } from './shared/AxisY.svelte';
 export { default as Scatter } from './shared/Scatter.svelte';
 
-export * from './colors/colors.ts'
+export * from './colors/colors';
