@@ -7,8 +7,7 @@
 
 	const updateClickedLayers = (event) => {
 		if (map) {
-			clickedLayerIDs = queryVectorLayerIDs(event.point);
-			clickedLayerIDs = removeDuplicates(clickedLayerIDs);
+			clickedLayerIDs = removeDuplicates(queryVectorLayerIDs(event.point));
 		}
 	};
 
