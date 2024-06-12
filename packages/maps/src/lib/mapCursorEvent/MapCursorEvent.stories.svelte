@@ -145,5 +145,5 @@
 				{/each}
 			</table>
 		</div>
-	</div></Story
->
+	</div>
+</Story>
