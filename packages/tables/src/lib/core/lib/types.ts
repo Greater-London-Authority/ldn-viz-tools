@@ -39,3 +39,12 @@ export type ColumnType =
 	| 'Ordinal' // like categorical, but values are mapped to number so ordered
 	| 'Hierachical'
 	| 'Date';
+
+
+export type ColorScale = {
+	breaks: number[];
+	colors: string[];
+	labels: string[];
+	extendedBreaks: number[];
+};
+
