@@ -38,6 +38,8 @@ export class TableData {
 
 	expansionState: boolean[] = [];
 
+	colGrups: any[];
+
 	constructor(tableSpec) {
 		this.data = [];
 		this.rawData = [];
@@ -46,6 +48,7 @@ export class TableData {
 		this.rowOrderSpec = [];
 		this.filters = [];
 		this.rows = [];
+		this.colGroups = tableSpec.colGroups;
 
 		this.widths = {
 			groupControl: '20px', // replaces GROUP_CONTROL_COLUMN_WIDTH
