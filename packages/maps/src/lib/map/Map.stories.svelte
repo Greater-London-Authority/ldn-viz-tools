@@ -8,7 +8,7 @@
 
 	import Map, { appendOSKeyToUrl } from './Map.svelte';
 	import PropertiesStory from './PropertiesStory.svelte';
-	import loadTestLayers from '../loadTestlayers';
+	import loadTestLayers from '../loadTestLayers';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
