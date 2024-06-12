@@ -59,6 +59,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
+		"@ldn-viz/charts": "*",
 		"@ldn-viz/themes": "*",
 		"@ldn-viz/ui": "*",
 		"@melt-ui/svelte": "^0.71.0",
