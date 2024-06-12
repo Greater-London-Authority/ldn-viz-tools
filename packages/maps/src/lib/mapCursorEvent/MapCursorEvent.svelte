@@ -2,7 +2,7 @@
 	/**
 	 * The `<MapCursorEvent>` component exposes the map cursor capability, for a
 	 * specific map layer, as a Svelte component. It's designed to be slotted
-	 * into a `<MapLyer>` component where the `layerId` property is auto
+	 * into a `<MapLayer>` component where the `layerId` property is auto
 	 * populated by `mapLayerId` context.
 	 *
 	 * However, this component maybe slotted anywhere within `<Map>` providing
@@ -32,7 +32,7 @@
 	const ctxLayerId: undefined | string = getContext('mapLayerId');
 
 	/**
-	 * ID of the target layer. Defaults to using the value of 'mapLayerId'
+	 * ID of the target layer. Defaults to using the value of the `mapLayerId`
 	 * context if it exists.
 	 */
 	export let layerId = ctxLayerId;
@@ -61,7 +61,7 @@
 	export let leaveTopFeature: MaybeMapCursorFeatureHandler = null;
 
 	/**
-	 * Called when the any part of the map is clicked.
+	 * Called when any part of the map is clicked.
 	 */
 	export let clickMap: MaybeMapCursorFeatureHandler = null;
 
