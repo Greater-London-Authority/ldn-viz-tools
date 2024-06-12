@@ -219,14 +219,6 @@
 		},
 		{
 			"type": "Feature",
-			"geometry": { "type": "Point", "coordinates": [-0.049430559966051717, 51.533399316913879] },
-			"properties": {
-				"site_name": "Victoria Park",
-				"objectid": 128
-			}
-		},
-		{
-			"type": "Feature",
 			"geometry": { "type": "Point", "coordinates": [-0.018462569247184986, 51.582143303163612] },
 			"properties": {
 				"site_name": "Hoe Street (near Walthamstow Central Station)",
@@ -239,6 +231,50 @@
 			"properties": {
 				"site_name": "Leyton (High Street)",
 				"objectid": 130
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.16368390722709592, 51.506852708751126]
+			},
+			"properties": {
+				"site_name": "Hyde Park (Point)",
+				"objectid": 131
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.15716070957620332, 51.47920278366291]
+			},
+			"properties": {
+				"site_name": "Battersea Park (Point)",
+				"objectid": 132
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.03527848827064872, 51.5389785701621]
+			},
+			"properties": {
+				"site_name": "Victoria Park (Point)",
+				"objectid": 133
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [0.0009543851844000528, 51.47721274507717]
+			},
+			"properties": {
+				"site_name": "Greenwich Park (Point)",
+				"objectid": 134
 			}
 		},
 		{
