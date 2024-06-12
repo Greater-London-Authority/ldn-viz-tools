@@ -90,7 +90,6 @@
 
 	let rows = [];
 	const onRowsChange = (groups, rows) => {
-		// console.log({groups, rows});
 		table = table; // hack to force re-render
 	};
 
@@ -113,7 +112,6 @@
 
 	const setColSpec = (tableSpec) => {
 		if (table) {
-			console.log('SETTING SPEC', tableSpec.columns);
 			table.setColumnSpec(tableSpec.columns);
 		}
 	};
@@ -122,7 +120,6 @@
 	let visualRows = [];
 	$: {
 		visualRows = [];
-		console.log({ table });
 
 		for (let group of table.groups) {
 			if (group.parentGroup && !group.parentGroup.isExpanded) {
@@ -140,8 +137,6 @@
 			}
 		}
 	}
-
-	$: console.log('TABLE CHANGED:', table);
 </script>
 
 {#if table && table.extents}

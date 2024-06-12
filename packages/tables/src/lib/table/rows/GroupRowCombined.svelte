@@ -15,7 +15,6 @@
 	const DEFAULT_CELL_WIDTH = '100px';
 
 	const getNthAncestor = (group, i, n) => {
-		console.log({ group, i, n });
 		while (n > 0) {
 			group = group.parentGroup;
 			n--;

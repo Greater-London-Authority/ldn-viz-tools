@@ -60,9 +60,6 @@
 		.curve(curveCatmullRom);
 
 	$: update(values);
-
-	$: console.log('X domain', x.domain());
-	$: console.log(bins[0].x0, bins[0].x1, bins[0].length);
 </script>
 
 <!-- TODO: tooltips -->

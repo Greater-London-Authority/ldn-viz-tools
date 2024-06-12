@@ -22,8 +22,6 @@
 			changePageSize(numRowSelection.value);
 		}
 	}
-
-	$: console.log(numRowSelection);
 </script>
 
 <div class="mb-4" style="width: 192px">

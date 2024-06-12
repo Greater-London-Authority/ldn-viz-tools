@@ -4,14 +4,6 @@
 	export let table;
 
 	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', '')));
-
-	/*
-    const sumWidths = (widths) => {
-        console.log({widths});
-        return "200px"
-    }
-
-     */
 </script>
 
 <!-- items-center - came from DataRow -->

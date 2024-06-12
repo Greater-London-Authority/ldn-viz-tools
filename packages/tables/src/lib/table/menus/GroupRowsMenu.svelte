@@ -36,7 +36,6 @@
 			const cols = (groupingSelection || []).map((o) => o.id);
 
 			if (JSON.stringify(table.groupingFields) !== JSON.stringify(cols)) {
-				console.log('GROUP:', table.groupingFields, cols);
 				table.setGrouping(cols);
 			}
 		}

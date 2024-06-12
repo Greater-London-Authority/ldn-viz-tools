@@ -42,11 +42,9 @@ function getMemberIds(group: Group, groups: Group[]): number[] {
 }
 
 function getValuesForField(criterion: GroupOrderCriterion, groups: Group[], data) {
-	//  console.log(groups)
 	const aggregatedVals: Record<string, number> = {};
 
 	for (const group of groups) {
-		console.log(`group: ${group.name}, members: ${getMemberIds(group, groups)}`);
 		const values = getMemberIds(group, groups).map((ind) => data[ind][criterion.field]);
 
 		let aggregate: number = 0;
@@ -143,18 +141,14 @@ export function sortGroups(groups: Group[], data, orderingCriteria: GroupOrderCr
 		aggregatedVals.push(getValuesForField(criterion, groups, data));
 	}
 
-	console.log('AggregatedVals:', aggregatedVals);
-
 	// then do the sort
 	// first sort the top-level nodes
 
 	const compareFn = (a: Group, b: Group) => compareGroups(a, b, orderingCriteria, aggregatedVals);
 
 	const topLevelGroups = groups.filter((g) => !g.parentGroup);
-	console.log(topLevelGroups);
 
 	topLevelGroups.sort(compareFn);
-	console.log('TOP LEVEL GROUPS:', topLevelGroups);
 
 	const flattenedOrderedGroups = [];
 	for (const g of topLevelGroups) {
@@ -309,8 +303,6 @@ export function group(
 			}
 		}
 	}
-
-	//  console.log(groups);
 
 	return groups;
 }

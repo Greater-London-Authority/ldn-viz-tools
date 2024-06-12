@@ -154,8 +154,6 @@
 			newGroupName = `New Group ${i}`;
 		}
 	}
-
-	$: console.log(groups);
 </script>
 
 <div class="flex flex-col gap-4">

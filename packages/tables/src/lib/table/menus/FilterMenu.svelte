@@ -26,8 +26,6 @@
 	let selectedFilterType;
 
 	const applyFilter = () => {
-		console.log('Applying filter!');
-
 		if (!table) {
 			return;
 		}

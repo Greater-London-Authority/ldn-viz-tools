@@ -160,7 +160,6 @@ export class TableData {
 	}
 
 	setRowOrder(rowOrderSpec: LeafOrderCriterion[]) {
-		console.log('SETTING ROW ORDER TO', rowOrderSpec);
 		this.rowOrderSpec = rowOrderSpec;
 		this.rows = getRows(this.data, this.groups, this.filters);
 		this.notifyOfChanges();
@@ -224,7 +223,6 @@ export class TableData {
 	}
 
 	toggleSort(fieldName) {
-		console.log('TOGGLING SORT ON:', fieldName);
 		// TODO: implement
 
 		if (this.rowOrderSpec.length === 0) {
@@ -242,7 +240,6 @@ export class TableData {
 			];
 		}
 
-		console.log(this.rowOrderSpec);
 		this.setRowOrder(this.rowOrderSpec); // TODO: FIXME this doesn't see to work
 
 		this.rows = getRows(this.data, this.groups, this.filters);
@@ -266,7 +263,6 @@ export class TableData {
 
 		// TODO: construct scales for each column, based on type
 		for (const colSpec of this.columnSpec) {
-			console.log('PROCESSING SCALE FOR', colSpec);
 
 			const values = this.data.map((d) => d[colSpec.short_label]).filter((d) => d); // exclude nulls, or else values[0] may be null
 
@@ -292,11 +288,7 @@ export class TableData {
 			if (this.scales[colSpec.short_label]) {
 				// /    this.scales[colSpec.short_label] = (val) => (val === undefined) ? "lightgrey" : this.scales[colSpec.short_label](val);
 			}
-
-			console.log(colSpec);
 		}
-
-		console.log('Color scales:', this.scales);
 	}
 
 	computeExtents() {

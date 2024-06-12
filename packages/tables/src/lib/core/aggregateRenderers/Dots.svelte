@@ -51,7 +51,6 @@
 			for (const point of dodgedValues) {
 				const cx = point.x;
 				const cy = (height - marginBottom) * point.y;
-				console.log('Point at:', point.x, cx);
 				ctx.fillStyle = 'rgb(200, 0, 0)';
 				ctx.fillRect(cx, cy, 1, 1);
 			}

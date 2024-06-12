@@ -37,8 +37,6 @@
 		} else if (page !== num) {
 			page = num;
 		}
-
-		console.log('PAGE:', page);
 	};
 </script>
 
