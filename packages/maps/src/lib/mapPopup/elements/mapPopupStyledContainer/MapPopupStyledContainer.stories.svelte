@@ -4,6 +4,9 @@
 	export const meta = {
 		title: 'Maps/MapPopup/elements/MapPopupStyledContainer',
 		component: MapPopupStyledContainer,
+		parameters: {
+			layout: 'full'
+		},
 		argTypes: {
 			noTip: {
 				type: 'boolean',
@@ -22,16 +25,19 @@
 	import { writable } from 'svelte/store';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	//import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
-	//import MapPopup from '../../MapPopup.svelte';
-	//const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
+	import loadTestLayers from '../../../loadTestLayers';
+	import MapPopup from '../../MapPopup.svelte';
+	import TestTooltip from './TestTooltip.svelte';
+
+	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	setContext('mapPopupFeature', {});
 	setContext('mapStore', writable(null));
 </script>
 
 <Template let:args>
-	<div class="flex justify-center items-center mt-32">
+	<div class="flex justify-center items-center mt-32 mb-4">
 		<MapPopupStyledContainer {...args}>
 			<div class="w-auto max-w-44">
 				{#if args.noPad}
@@ -46,19 +52,17 @@
 
 <Story name="Default" source />
 
-<!--
-<Story name="Follow mouse">
+<Story name="Mapping Context">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
+			whenMapLoads={loadTestLayers}
 			options={{
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-				<MapPopup layerId="gla/ldn-viz-tools/test-data/poly" marker={TestFollowMouseTooltip} />	
-				<MapPopup layerId="gla/ldn-viz-tools/test-data/line" marker={TestFollowMouseTooltip} />	
-				<MapPopup layerId="gla/ldn-viz-tools/test-data/point" marker={TestFollowMouseTooltip} />	
-			
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltip} />
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltip} />
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltip} />
 		</Map>
 	</div>
 </Story>
--->

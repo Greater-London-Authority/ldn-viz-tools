@@ -6,6 +6,12 @@
 		component: MapPopupFlyToFeature,
 		parameters: {
 			layout: 'full'
+		},
+		argTypes: {
+			disabled: {
+				type: 'boolean',
+				control: 'none'
+			}
 		}
 	};
 </script>
@@ -17,6 +23,7 @@
 	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
 	import loadTestLayers from '../../../loadTestLayers';
 	import MapPopup from '../../MapPopup.svelte';
+
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	setContext('mapPopupFeature', {});

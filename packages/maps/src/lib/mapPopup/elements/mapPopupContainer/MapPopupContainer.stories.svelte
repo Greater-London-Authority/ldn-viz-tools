@@ -1,60 +1,53 @@
 <script context="module">
-	import MapPopup from './MapPopup.svelte';
-
-	const componentType = {
-		type: 'object',
-		control: 'none',
-		table: {
-			type: {
-				summary: 'Svelte component'
-			}
-		}
-	};
+	import MapPopupContainer from './MapPopupContainer.svelte';
 
 	export const meta = {
-		title: 'Maps/MapPopup',
-		component: MapPopup,
+		title: 'Maps/MapPopup/elements/MapPopupContainer',
+		component: MapPopupContainer,
 		parameters: {
 			layout: 'full'
 		},
 		argTypes: {
-			layerId: {
+			placement: {
+				options: ['center', 'follow', 'none'],
 				type: 'string',
-				control: 'text',
-				table: {
-					type: {
-						summary: 'string'
-					}
-				}
+				control: 'none'
 			},
-			noCursorStyle: {
+			noTip: {
 				type: 'boolean',
-				control: 'boolean',
-				table: {
-					type: {
-						summary: 'boolean'
-					}
-				}
+				control: 'none'
 			},
-			tooltip: componentType,
-			marker: componentType
+			noPad: {
+				type: 'boolean',
+				control: 'none'
+			},
+			flyToFeature: {
+				type: 'boolean',
+				control: 'none'
+			}
 		}
 	};
 </script>
 
 <script>
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import loadTestLayers from '../loadTestLayers';
+	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
+	import loadTestLayers from '../../../loadTestLayers';
+	import MapPopup from '../../MapPopup.svelte';
 	import TestTooltip from './TestTooltip.svelte';
 	import TestMarker from './TestMarker.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+
+	setContext('mapPopupFeature', {});
+	setContext('mapStore', writable(null));
 </script>
 
 <Template let:args>
-	<MapPopup {...args} />
+	<MapPopupContainer {...args} />
 </Template>
 
 <Story name="Interactive Example">

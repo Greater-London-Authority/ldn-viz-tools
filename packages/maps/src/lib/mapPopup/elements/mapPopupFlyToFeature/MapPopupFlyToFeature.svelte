@@ -46,6 +46,11 @@
 </script>
 
 <script>
+	/**
+	 * If true disables all fly events.
+	 */
+	export let disabled = false;
+
 	const mapStore = getContext('mapStore');
 	const feature = getContext('mapPopupFeature');
 	const point = feature.geometry ? pointOnFeature(feature) : null;
@@ -61,7 +66,7 @@
 	};
 
 	onMount(() => {
-		if (point?.geometry?.coordinates) {
+		if (!disabled && point?.geometry?.coordinates) {
 			// Ensure DOM updated so we have correct heights on elements.
 			setTimeout(flyToFeature, 1);
 		}

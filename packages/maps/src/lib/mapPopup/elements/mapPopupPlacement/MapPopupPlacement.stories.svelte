@@ -27,6 +27,8 @@
 	import MapPopup from '../../MapPopup.svelte';
 	import TestTooltipCenterAboveFeature from './TestTooltipCenterAboveFeature.svelte';
 	import TestTooltipFollowMouse from './TestTooltipFollowMouse.svelte';
+	import TestTooltipNone from './TestTooltipNone.svelte';
+
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	setContext('mapPopupFeature', {});
@@ -90,6 +92,21 @@
 			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
 			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
 			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipFollowMouse} />
+		</Map>
+	</div>
+</Story>
+
+<Story name="No placement">
+	<div class="w-[100dvw] h-[100dvh]">
+		<Map
+			whenMapLoads={loadTestLayers}
+			options={{
+				transformRequest: appendOSKeyToUrl(OS_KEY)
+			}}
+		>
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipNone} />
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipNone} />
+			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipNone} />
 		</Map>
 	</div>
 </Story>

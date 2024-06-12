@@ -1,11 +1,12 @@
 <script>
 	/**
-	 * The `<MapPopupTooltip>` component is a wrapping container for use
+	 * The `<MapPopupContainer>` component is a wrapping container for use
 	 * within tooltip and marker components. It encapsulates the standardised map
-	 * tooltip styling and behaviour.
+	 * styling and behaviour for popups.
 	 * @component
 	 */
 
+	import MapPopupFlyToFeature from '../mapPopupFlyToFeature/MapPopupFlyToFeature.svelte';
 	import MapPopupPlacement from '../mapPopupPlacement/MapPopupPlacement.svelte';
 	import MapPopupStyledContainer from '../mapPopupStyledContainer/MapPopupStyledContainer.svelte';
 
@@ -23,10 +24,17 @@
 	 * If true removes the standard container padding.
 	 */
 	export let noPad = false;
+
+	/**
+	 * If true flys to the feature after component is mounted.
+	 */
+	export let flyToFeature = false;
 </script>
 
-<MapPopupPlacement {placement}>
-	<MapPopupStyledContainer {noTip} {noPad}>
-		<slot />
-	</MapPopupStyledContainer>
-</MapPopupPlacement>
+<MapPopupFlyToFeature disabled={!flyToFeature}>
+	<MapPopupPlacement {placement}>
+		<MapPopupStyledContainer {noTip} {noPad}>
+			<slot />
+		</MapPopupStyledContainer>
+	</MapPopupPlacement>
+</MapPopupFlyToFeature>
