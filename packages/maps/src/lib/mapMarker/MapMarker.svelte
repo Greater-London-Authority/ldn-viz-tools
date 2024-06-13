@@ -42,12 +42,12 @@
 	export let noCursorStyle = false;
 
 	/**
-	 * Component to render when the user's mouse hovers a feature.
+	 * Component to render when the user's mouse hovers over a feature.
 	 */
 	export let tooltip = null;
 
 	/**
-	 * Component to render when the user clicks a feature.
+	 * Component to render when the user clicks on a feature.
 	 */
 	export let popup = null;
 
