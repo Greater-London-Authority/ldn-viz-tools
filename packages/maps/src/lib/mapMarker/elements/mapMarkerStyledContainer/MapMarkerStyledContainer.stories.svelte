@@ -1,9 +1,9 @@
 <script context="module">
-	import MapPopupStyledContainer from './MapPopupStyledContainer.svelte';
+	import MapMarkerStyledContainer from './MapMarkerStyledContainer.svelte';
 
 	export const meta = {
-		title: 'Maps/MapPopup/elements/MapPopupStyledContainer',
-		component: MapPopupStyledContainer,
+		title: 'Maps/MapMarker/elements/MapMarkerStyledContainer',
+		component: MapMarkerStyledContainer,
 		parameters: {
 			layout: 'full'
 		},
@@ -27,18 +27,18 @@
 
 	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
 	import loadTestLayers from '../../../loadTestLayers';
-	import MapPopup from '../../MapPopup.svelte';
+	import MapMarker from '../../MapMarker.svelte';
 	import TestTooltip from './TestTooltip.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
-	setContext('mapPopupFeature', {});
+	setContext('mapMarkerFeature', {});
 	setContext('mapStore', writable(null));
 </script>
 
 <Template let:args>
 	<div class="flex justify-center items-center mt-32 mb-4">
-		<MapPopupStyledContainer {...args}>
+		<MapMarkerStyledContainer {...args}>
 			<div class="w-auto max-w-44">
 				{#if args.noPad}
 					<p>Suitable for edge-to-edge images. Any padding will need to be applied manually.</p>
@@ -46,7 +46,7 @@
 					<p>Content goes here. Content goes here. Content goes here. Content goes here.</p>
 				{/if}
 			</div>
-		</MapPopupStyledContainer>
+		</MapMarkerStyledContainer>
 	</div>
 </Template>
 
@@ -60,9 +60,9 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltip} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltip} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltip} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltip} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltip} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltip} />
 		</Map>
 	</div>
 </Story>

@@ -1,16 +1,20 @@
 <script>
 	/**
-	 * The `<MapPopup>` component allows tooltips and markers to easily be added
+	 * The `<MapMarker>` component allows tooltips and popups to easily be added
 	 * for feature hover and clicks respectively. This component may be slotted
 	 * anywhere provided the `<Map>` component context is available.
 	 *
-	 * The `tooltip` and `marker` components are client side rendered. This
+	 * To ensure the correct behaviour for overlapping tooltips that aren't
+	 * sourced via ESRI servers, set `generateId` to true in your
+	 * [MapLibre Source Specifications](https://maplibre.org/maplibre-style-spec/sources/).
+	 *
+	 * The `tooltip` and `popup` components are client side rendered. This
 	 * component's context is passed to them along with three additional
 	 * values:
-	 * - `mapPopupTooltip` (tooltip component only) is the instance of `maplibre_gl.Popup` that contains the rendered tooltip component.
-	 * - `mapPopupMarker` (marker component only) is the instance of `maplibre_gl.Marker` that contains the rendered marker component.
-	 * - `mapPopupLayerId` is the ID of the map layer the feature belongs to.
-	 * - `mapPopupFeature` is the target GeoJSON feature. Note that MapLibre adds additional fields, e.g. `layer`.
+	 * - `mapMarkerMaplibrePopup` (tooltip component only) is the instance of `maplibre_gl.Popup` that contains the rendered tooltip component.
+	 * - `mapMarkerMaplibreMarker` (popup component only) is the instance of `maplibre_gl.Marker` that contains the rendered popup component.
+	 * - `mapMarkerLayerId` is the ID of the map layer the feature belongs to.
+	 * - `mapMarkerFeature` is the target GeoJSON feature. Note that MapLibre adds additional fields, e.g. `layer`.
 	 * @component
 	 */
 
@@ -32,8 +36,8 @@
 	 * Disables cursor style changes triggered on feature hover.
 	 *
 	 * By default the map cursor is a grab icon to indicate the map can be
-	 * panned. Hovering a feature with a marker shows a pointer (implying a
-	 * clickable feature) and tooltip only popups will show the default OS
+	 * panned. Hovering a feature that has a clickable popup shows a pointer
+	 * (the pointer implying clickability) and tooltips will show the default OS
 	 * cursor icon.
 	 */
 	export let noCursorStyle = false;
@@ -46,27 +50,27 @@
 	/**
 	 * Component to render when the user clicks a feature.
 	 */
-	export let marker = null;
+	export let popup = null;
 
-	let mapTooltip = null;
+	let tooltipMaplibrePopup = null;
 	let tooltipInstance = null;
 
-	let mapMarker = null;
-	let markerFeature = null;
-	let markerInstance = null;
+	let popupMaplibreMarker = null;
+	let popupFeature = null;
+	let popupInstance = null;
 
 	const enterTopFeature = (event, { feature }) => {
-		if (marker) {
+		if (popup) {
 			setCursorStyle('pointer');
 		} else if (tooltip) {
 			setCursorStyle('default');
 		}
 
-		if (markerFeature && featuresEqual(markerFeature, feature)) {
+		if (popupFeature && featuresEqual(popupFeature, feature)) {
 			return;
 		}
 
-		if (!mapTooltip && tooltip) {
+		if (!tooltipMaplibrePopup && tooltip) {
 			renderTooltip(event, feature);
 		}
 	};
@@ -83,68 +87,74 @@
 	};
 
 	const clickFeature = (event, { feature }) => {
-		if (!marker) {
+		if (!popup) {
 			return;
 		}
 
-		if (featuresEqual(feature, markerFeature)) {
+		if (featuresEqual(feature, popupFeature)) {
 			return;
 		}
 
 		removeTooltip();
-		markerFeature = feature;
-		renderMarker(event, feature);
+		popupFeature = feature;
+		renderPopup(event, feature);
 	};
 
 	const clickMap = (event, { features }) => {
-		if (!featuresEqual(features[0], markerFeature)) {
-			removeMarker();
+		if (!featuresEqual(features[0], popupFeature)) {
+			removePopup();
 		}
 	};
 
 	const featuresEqual = (a, b) => {
-		return a && b && a.layer.id === b.layer.id && areFeatureIdsEqual(a, b);
-	};
-
-	const areFeatureIdsEqual = (a, b) => {
-		const aProps = a.properties;
-		const bProps = b.properties;
-
-		if (aProps.objectid && bProps.objectid) {
-			return aProps.objectid === bProps.objectid;
+		if (!a || !b) {
+			return false;
 		}
 
-		if (aProps.cluster_id && bProps.cluster_id) {
-			return aProps.cluster_id === bProps.cluster_id;
+		if (a.layer.id !== b.layer.id) {
+			return false;
+		}
+
+		if (a.id !== undefined && b.id !== undefined) {
+			return a.id === b.id;
+		}
+
+		if (a.properties.objectid !== undefined && b.properties.objectid !== undefined) {
+			return a.properties.objectid === b.properties.objectid;
+		}
+
+		// Clusters may not have an ID and won't have an objectid.
+		if (a.properties.cluster_id !== undefined && b.properties.cluster_id !== undefined) {
+			return a.properties.cluster_id === b.properties.cluster_id;
 		}
 
 		return false;
 	};
 
 	const removeTooltip = () => {
-		mapTooltip?.remove();
-		mapTooltip = null;
+		tooltipMaplibrePopup?.remove();
+		tooltipMaplibrePopup = null;
 		tooltipInstance?.$destroy();
 		tooltipInstance = null;
 	};
 
-	const removeMarker = () => {
-		mapMarker?.remove();
-		mapMarker = null;
-		markerInstance?.$destroy();
-		markerInstance = null;
-		markerFeature = null;
+	const removePopup = () => {
+		popupMaplibreMarker?.remove();
+		popupMaplibreMarker = null;
+		popupInstance?.$destroy();
+		popupInstance = null;
+		popupFeature = null;
 	};
 
 	const renderTooltip = (event, feature) => {
-		mapTooltip = new maplibre_gl.Popup({
+		tooltipMaplibrePopup = new maplibre_gl.Popup({
 			closeButton: false,
 			closeOnClick: false
 		});
 
 		const container = document.createElement('div');
-		mapTooltip.setDOMContent(container);
-		mapTooltip.setLngLat(event.lngLat);
+		tooltipMaplibrePopup.setDOMContent(container);
+		tooltipMaplibrePopup.setLngLat(event.lngLat);
 
 		// We don't pass the event because some properties in the event object may
 		// get cleaned up or changed after the event has officially finished but
@@ -157,21 +167,21 @@
 			target: container,
 			context: new Map([
 				...contexts,
-				['mapPopupTooltip', mapTooltip],
-				['mapPopupLayerId', layerId],
-				['mapPopupFeature', feature]
+				['mapMarkerMaplibrePopup', tooltipMaplibrePopup],
+				['mapMarkerLayerId', layerId],
+				['mapMarkerFeature', feature]
 			])
 		});
 
-		mapTooltip.addTo($mapStore);
+		tooltipMaplibrePopup.addTo($mapStore);
 	};
 
-	const renderMarker = (event, feature) => {
-		mapMarker = new maplibre_gl.Marker();
-		mapMarker.setLngLat(event.lngLat);
-		mapMarker.setOffset([0, 0]);
-		mapMarker.getElement().replaceChildren();
-		const container = mapMarker.getElement();
+	const renderPopup = (event, feature) => {
+		popupMaplibreMarker = new maplibre_gl.Marker();
+		popupMaplibreMarker.setLngLat(event.lngLat);
+		popupMaplibreMarker.setOffset([0, 0]);
+		popupMaplibreMarker.getElement().replaceChildren();
+		const container = popupMaplibreMarker.getElement();
 
 		// We don't pass the event because some properties in the event object may
 		// get cleaned up or changed after the event has officially finished but
@@ -180,17 +190,17 @@
 		// If a new property from the event is required in component context, pass
 		// (and maybe clone) the specific event property and pass it into the
 		// function below to be set directly in the context.
-		markerInstance = new marker({
+		popupInstance = new popup({
 			target: container,
 			context: new Map([
 				...contexts,
-				['mapPopupMarker', mapMarker],
-				['mapPopupLayerId', layerId],
-				['mapPopupFeature', feature]
+				['mapMarkerMaplibreMarker', popupMaplibreMarker],
+				['mapMarkerLayerId', layerId],
+				['mapMarkerFeature', feature]
 			])
 		});
 
-		mapMarker.addTo($mapStore);
+		popupMaplibreMarker.addTo($mapStore);
 	};
 </script>
 

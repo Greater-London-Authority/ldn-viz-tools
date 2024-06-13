@@ -1,9 +1,9 @@
 <script context="module">
-	import MapPopupFlyToFeature from './MapPopupFlyToFeature.svelte';
+	import MapMarkerFlyToFeature from './MapMarkerFlyToFeature.svelte';
 
 	export const meta = {
-		title: 'Maps/MapPopup/elements/MapPopupFlyToFeature',
-		component: MapPopupFlyToFeature,
+		title: 'Maps/MapMarker/elements/MapMarkerFlyToFeature',
+		component: MapMarkerFlyToFeature,
 		parameters: {
 			layout: 'full'
 		},
@@ -22,15 +22,15 @@
 
 	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
 	import loadTestLayers from '../../../loadTestLayers';
-	import MapPopup from '../../MapPopup.svelte';
+	import MapMarker from '../../MapMarker.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
-	setContext('mapPopupFeature', {});
+	setContext('mapMarkerFeature', {});
 </script>
 
 <Template let:args>
-	<MapPopupFlyToFeature {...args} />
+	<MapMarkerFlyToFeature {...args} />
 </Template>
 
 <Story name="Interactive Example">
@@ -41,9 +41,9 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" marker={MapPopupFlyToFeature} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" marker={MapPopupFlyToFeature} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" marker={MapPopupFlyToFeature} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" popup={MapMarkerFlyToFeature} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" popup={MapMarkerFlyToFeature} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" popup={MapMarkerFlyToFeature} />
 		</Map>
 	</div>
 </Story>

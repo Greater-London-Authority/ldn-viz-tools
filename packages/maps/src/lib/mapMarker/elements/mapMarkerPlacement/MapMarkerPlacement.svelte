@@ -1,8 +1,8 @@
 <script>
 	/**
-	 * The `<MapPopupPlacement>` component is a wrapping container for use
-	 * within tooltip and marker components. It determines how a map tooltip or
-	 * marker is placed relative to its associated feature.
+	 * The `<MapMarkerPlacement>` component is a wrapping container for use
+	 * within marker components. It determines how a map marker is placed
+	 * relative to its associated feature.
 	 * @component
 	 */
 
@@ -15,7 +15,7 @@
 	export let placement = 'center';
 
 	if (placement !== 'center' && placement !== 'follow' && placement !== 'none') {
-		console.error(`[MapPopupPlacement] Unknown placement type '${placement}'`);
+		console.error(`[MapMarkerPlacement] Unknown placement type '${placement}'`);
 	}
 </script>
 

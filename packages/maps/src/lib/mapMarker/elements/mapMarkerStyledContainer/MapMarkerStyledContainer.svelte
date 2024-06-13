@@ -1,8 +1,8 @@
 <script>
 	/**
-	 * The `<MapPopupStyled>` component is a wrapping container for use
-	 * within tooltip and marker components. It provides standardised styling
-	 * that is suitable for the vast majority of map tooltips and markers.
+	 * The `<MapMarkerStyledContainer>` component is a wrapping container for use
+	 * within marker components. It provides standardised styling that is
+	 * suitable for the vast majority of map tooltips and popups.
 	 * @component
 	 */
 
@@ -31,8 +31,8 @@
 </script>
 
 <!--
-	Box shadow only visible when a tooltip and marker overlap.
-	Distinguishes the tooltip when it overlaps a marker.
+	Box shadow only visible when a tooltip and popup overlap.
+	Distinguishes the tooltip when it overlaps a popup.
 
 	The stopImmediatePropagation on mousemove prevents tooltips below this
 	marker from being shown when mouseover.	

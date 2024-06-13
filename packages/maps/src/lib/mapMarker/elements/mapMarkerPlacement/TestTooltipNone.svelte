@@ -1,10 +1,10 @@
 <script>
-	import MapPopupPlacement from './MapPopupPlacement.svelte';
+	import MapMarkerPlacement from './MapMarkerPlacement.svelte';
 </script>
 
-<MapPopupPlacement placement="none">
+<MapMarkerPlacement placement="none">
 	<div class="bg-core-grey-900 p-4 w-fit text-white">No placement.</div>
-</MapPopupPlacement>
+</MapMarkerPlacement>
 
 <style>
 	:global(.maplibregl-popup > *) {

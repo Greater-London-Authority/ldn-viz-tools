@@ -1,10 +1,10 @@
 <script>
-	import MapPopupPlacement from './MapPopupPlacement.svelte';
+	import MapMarkerPlacement from './MapMarkerPlacement.svelte';
 </script>
 
-<MapPopupPlacement placement="follow">
+<MapMarkerPlacement placement="follow">
 	<div class="bg-core-grey-900 p-4 w-fit text-white">Following mouse.</div>
-</MapPopupPlacement>
+</MapMarkerPlacement>
 
 <style>
 	:global(.maplibregl-popup > *) {

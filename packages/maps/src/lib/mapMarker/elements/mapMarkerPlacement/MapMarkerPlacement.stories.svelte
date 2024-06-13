@@ -1,9 +1,9 @@
 <script context="module">
-	import MapPopupPlacement from './MapPopupPlacement.svelte';
+	import MapMarkerPlacement from './MapMarkerPlacement.svelte';
 
 	export const meta = {
-		title: 'Maps/MapPopup/elements/MapPopupPlacement',
-		component: MapPopupPlacement,
+		title: 'Maps/MapMarker/elements/MapMarkerPlacement',
+		component: MapMarkerPlacement,
 		parameters: {
 			layout: 'full'
 		},
@@ -24,19 +24,19 @@
 
 	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
 	import loadTestLayers from '../../../loadTestLayers';
-	import MapPopup from '../../MapPopup.svelte';
+	import MapMarker from '../../MapMarker.svelte';
 	import TestTooltipCenterAboveFeature from './TestTooltipCenterAboveFeature.svelte';
 	import TestTooltipFollowMouse from './TestTooltipFollowMouse.svelte';
 	import TestTooltipNone from './TestTooltipNone.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
-	setContext('mapPopupFeature', {});
+	setContext('mapMarkerFeature', {});
 	setContext('mapStore', writable(null));
 </script>
 
 <Template let:args>
-	<MapPopupPlacement {...args} />
+	<MapMarkerPlacement {...args} />
 </Template>
 
 <Story name="Default">
@@ -47,9 +47,9 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
-			<MapPopup
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
+			<MapMarker
 				layerId="gla/ldn-viz-tools/test-data/point"
 				tooltip={TestTooltipCenterAboveFeature}
 			/>
@@ -65,15 +65,15 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapPopup
+			<MapMarker
 				layerId="gla/ldn-viz-tools/test-data/polygon"
 				tooltip={TestTooltipCenterAboveFeature}
 			/>
-			<MapPopup
+			<MapMarker
 				layerId="gla/ldn-viz-tools/test-data/line"
 				tooltip={TestTooltipCenterAboveFeature}
 			/>
-			<MapPopup
+			<MapMarker
 				layerId="gla/ldn-viz-tools/test-data/point"
 				tooltip={TestTooltipCenterAboveFeature}
 			/>
@@ -89,9 +89,9 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipFollowMouse} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipFollowMouse} />
 		</Map>
 	</div>
 </Story>
@@ -104,9 +104,9 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipNone} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipNone} />
-			<MapPopup layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipNone} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipNone} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipNone} />
+			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipNone} />
 		</Map>
 	</div>
 </Story>

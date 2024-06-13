@@ -1,6 +1,6 @@
 <script context="module">
 	/**
-	 * The `<MapPopupFlyToFeature>` component is a wrapping container for use
+	 * The `<MapMarkerFlyToFeature>` component is a wrapping container for use
 	 * within tooltip and marker components. It moves the map so it centers
 	 * the popup on the screen. This is activated soon after mounting.
 	 * @component
@@ -52,7 +52,7 @@
 	export let disabled = false;
 
 	const mapStore = getContext('mapStore');
-	const feature = getContext('mapPopupFeature');
+	const feature = getContext('mapMarkerFeature');
 	const point = feature.geometry ? pointOnFeature(feature) : null;
 
 	let container;

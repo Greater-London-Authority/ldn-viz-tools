@@ -1,12 +1,12 @@
 <script>
 	import { getContext } from 'svelte';
-	import MapPopupContainer from './MapPopupContainer.svelte';
+	import MapMarkerContainer from './MapMarkerContainer.svelte';
 
-	const feature = getContext('mapPopupFeature');
+	const feature = getContext('mapMarkerFeature');
 	const props = feature.properties;
 </script>
 
-<MapPopupContainer flyToFeature>
+<MapMarkerContainer flyToFeature>
 	<h1 class="text-lg font-medium text-center">
 		{props.site_name}
 	</h1>
@@ -20,4 +20,4 @@
 			{props.objectid}
 		</p>
 	</div>
-</MapPopupContainer>
+</MapMarkerContainer>

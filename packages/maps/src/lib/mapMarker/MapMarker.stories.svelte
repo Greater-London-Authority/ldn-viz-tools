@@ -1,53 +1,50 @@
 <script context="module">
-	import MapPopupContainer from './MapPopupContainer.svelte';
+	import MapMarker from './MapMarker.svelte';
+
+	const componentType = {
+		type: 'object',
+		control: 'none',
+		table: {
+			type: {
+				summary: 'Svelte component'
+			}
+		}
+	};
 
 	export const meta = {
-		title: 'Maps/MapPopup/elements/MapPopupContainer',
-		component: MapPopupContainer,
+		title: 'Maps/MapMarker',
+		component: MapMarker,
 		parameters: {
 			layout: 'full'
 		},
 		argTypes: {
-			placement: {
-				options: ['center', 'follow', 'none'],
+			layerId: {
 				type: 'string',
 				control: 'none'
 			},
-			noTip: {
+			noCursorStyle: {
 				type: 'boolean',
 				control: 'none'
 			},
-			noPad: {
-				type: 'boolean',
-				control: 'none'
-			},
-			flyToFeature: {
-				type: 'boolean',
-				control: 'none'
-			}
+			tooltip: componentType,
+			popup: componentType
 		}
 	};
 </script>
 
 <script>
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
-	import loadTestLayers from '../../../loadTestLayers';
-	import MapPopup from '../../MapPopup.svelte';
+	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import loadTestLayers from '../loadTestLayers';
 	import TestTooltip from './TestTooltip.svelte';
-	import TestMarker from './TestMarker.svelte';
+	import TestPopup from './TestPopup.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
-
-	setContext('mapPopupFeature', {});
-	setContext('mapStore', writable(null));
 </script>
 
 <Template let:args>
-	<MapPopupContainer {...args} />
+	<MapMarker {...args} />
 </Template>
 
 <Story name="Interactive Example">
@@ -58,20 +55,20 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapPopup
+			<MapMarker
 				layerId="gla/ldn-viz-tools/test-data/polygon"
 				tooltip={TestTooltip}
-				marker={TestMarker}
+				popup={TestPopup}
 			/>
-			<MapPopup
+			<MapMarker
 				layerId="gla/ldn-viz-tools/test-data/line"
 				tooltip={TestTooltip}
-				marker={TestMarker}
+				popup={TestPopup}
 			/>
-			<MapPopup
+			<MapMarker
 				layerId="gla/ldn-viz-tools/test-data/point"
 				tooltip={TestTooltip}
-				marker={TestMarker}
+				popup={TestPopup}
 			/>
 		</Map>
 	</div>
