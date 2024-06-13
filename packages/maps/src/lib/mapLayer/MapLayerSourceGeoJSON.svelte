@@ -1,7 +1,8 @@
 <script>
 	/**
-	 * The `<GeojsonMapSource>` component wraps the `<MapSource>` component
-	 * and provides a simplified interface for remote GeoJSON data.
+	 * The `<MapLayerSourceGeoJSON>` component wraps the `<MapLayerSource>`
+	 * component and provides a simplified interface for direct or remote
+	 * GeoJSON data.
 	 *
 	 * The raw GeoJSON is available by binding on the 'geojsonStore' property and
 	 * as an argument in the `onLoad` function.
@@ -10,13 +11,13 @@
 
 	import { getContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import MapSource from './MapSource.svelte';
+	import MapLayerSource from './MapLayerSource.svelte';
 
 	const mapStore = getContext('mapStore');
 
 	/**
 	 * A unique ID to reference the source in the map. Provided to slotted
-	 * component as context via the key 'mapSourceId'.
+	 * component as context via the key 'mapLayerSourceId'.
 	 */
 	export let id;
 
@@ -26,7 +27,7 @@
 	export let url = '';
 
 	/**
-	 * GeoJSON data. This data is used as the initial data. It will be
+	 * GeoJSON data. This data is used as the initial GeoJSON. It will be
 	 * overwritten by the results of a fetch via the provided url (if a url
 	 * is provided).
 	 */
@@ -47,17 +48,28 @@
 
 	/**
 	 * Called when the source is added to the map. The raw geojson can be
-	 * accessed within this callback.
+	 * accessed within this callback.  The function accepts an object with the
+	 * following fields:
+	 * - id: ID of the layer source.
+	 * - spec: MapLibre specification used to initialise the layer.
+	 * - geojson: transformed GeoJSON data.
 	 */
 	export let onLoad = null;
 
 	/**
-	 * Called when the source is removed from the map.
+	 * Called when the source is removed from the map. The function accepts an
+	 * object with the following fields:
+	 * - id: ID of the layer source.
+	 * - spec: MapLibre specification used to initialise the layer.
 	 */
 	export let onUnload = null;
 
 	/**
 	 * Called when there is an error fetching the data or passing it to the map.
+	 * The function accepts an errors followed by an object with the following
+	 * fields:
+	 * - id: ID of the layer source.
+	 * - spec: MapLibre specification used to initialise the layer.
 	 */
 	export let onError = null;
 
@@ -89,7 +101,7 @@
 			})
 			.catch((err) => {
 				if (onError) {
-					onError(err, { id });
+					onError(err, ctx);
 				} else {
 					console.error(err);
 				}
@@ -104,15 +116,14 @@
 	};
 </script>
 
-<MapSource
+<MapLayerSource
 	{id}
 	spec={{
 		type: 'geojson',
-		data,
-		...$$restProps
+		data
 	}}
 	onLoad={internalLoad}
 	onUnload={internalUnload}
 >
 	<slot />
-</MapSource>
+</MapLayerSource>
