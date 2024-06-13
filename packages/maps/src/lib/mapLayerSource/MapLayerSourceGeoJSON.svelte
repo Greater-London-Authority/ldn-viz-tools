@@ -4,7 +4,7 @@
 	 * component and provides a simplified interface for direct or remote
 	 * GeoJSON data.
 	 *
-	 * The raw GeoJSON is available by binding on the 'geojsonStore' property and
+	 * The raw GeoJSON is available by binding on the `geojsonStore` property and
 	 * as an argument in the `onLoad` function.
 	 * @component
 	 */
@@ -50,9 +50,9 @@
 	 * Called when the source is added to the map. The raw geojson can be
 	 * accessed within this callback.  The function accepts an object with the
 	 * following fields:
-	 * - id: ID of the layer source.
-	 * - spec: MapLibre specification used to initialise the layer.
-	 * - geojson: transformed GeoJSON data.
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
+	 * - **geojson**: transformed GeoJSON data.
 	 */
 	export let onLoad = null;
 
@@ -68,8 +68,8 @@
 	 * Called when there is an error fetching the data or passing it to the map.
 	 * The function accepts an errors followed by an object with the following
 	 * fields:
-	 * - id: ID of the layer source.
-	 * - spec: MapLibre specification used to initialise the layer.
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onError = null;
 

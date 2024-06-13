@@ -17,29 +17,29 @@
 
 	/**
 	 * A unique ID to reference the source in the map. Provided to slotted
-	 * component as context via the key 'mapLayerSourceId'.
+	 * component as context via the key `mapLayerSourceId`.
 	 */
 	export let id;
 
 	/**
 	 * A MapLibre source specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/sources/).
-	 * Provided to slotted component as context via the key 'mapLayerSourceSpec'.
+	 * Provided to slotted component as context via the key `mapLayerSourceSpec`.
 	 */
 	export let spec;
 
 	/**
 	 * Called when the source is added to the map. The function accepts an
 	 * object with the following fields:
-	 * - id: ID of the layer source.
-	 * - spec: MapLibre specification used to initialise the layer.
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onLoad = null;
 
 	/**
 	 * Called when the source is removed from the map. The function accepts an
 	 * object with the following fields:
-	 * - id: ID of the layer source.
-	 * - spec: MapLibre specification used to initialise the layer.
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onUnload = null;
 

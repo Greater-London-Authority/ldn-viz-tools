@@ -1,7 +1,8 @@
 <script>
 	/**
 	 * The `<MapLayerView>` component is slotted within a `<MapLayerSource>`
-	 * component to specify how to present data on the map.
+	 * component, or derived version, to specify how to present data on the
+	 * map.
 	 *
 	 * `<MapLayerView>` can be used directly or wrapped by a decorator or adapter
 	 * component to create bespoke and reusable presentation layers.
@@ -18,7 +19,7 @@
 
 	/**
 	 * A unique ID to reference the layer in the map. Provided to slotted
-	 * component as context via the key 'mapLayerViewId'.
+	 * component as context via the key `mapLayerViewId`.
 	 */
 	export let id;
 
@@ -30,7 +31,7 @@
 
 	/**
 	 * A MapLibre layer specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/layers/).
-	 * Provided to slotted component as context via the key 'mapLayerViewSpec'.
+	 * Provided to slotted component as context via the key `mapLayerViewSpec`.
 	 */
 	export let spec;
 
@@ -47,16 +48,16 @@
 	/**
 	 * Called when the layer is added to the map. The function accepts an
 	 * object with the following fields:
-	 * - id: ID of the layer view.
-	 * - spec: MapLibre specification used to initialise the layer.
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onLoad = null;
 
 	/**
 	 * Called when the layer is removed from the map. The function accepts an
 	 * object with the following fields:
-	 * - id: ID of the layer view.
-	 * - spec: MapLibre specification used to initialise the layer.
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onUnload = null;
 

@@ -27,9 +27,9 @@ export { default as MapMarkerPlacement } from './mapMarker/elements/mapMarkerPla
 export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
 // Layers
-export { default as MapLayerSource } from './mapLayer/MapLayerSource.svelte';
-export { default as MapLayerSourceGeoJSON } from './mapLayer/MapLayerSourceGeoJSON.svelte';
-export { default as MapLayerView } from './mapLayer/MapLayerView.svelte';
+export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
+export { default as MapLayerSourceGeoJSON } from './mapLayerSource/MapLayerSourceGeoJSON.svelte';
+export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
 // themes
 export * from './themes/animations';
