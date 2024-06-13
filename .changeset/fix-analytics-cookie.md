@@ -1,5 +1,5 @@
 ---
-'@ldn-viz/charts': patch
+'@ldn-viz/ui': patch
 ---
 
 CHANGED: Fix an issue in `<AnalyticsAndCookieConsent>` where an application embedded in a non-london.gov.uk website wouldn't load cookie consent properly.

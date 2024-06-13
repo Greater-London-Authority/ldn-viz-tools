@@ -19,6 +19,13 @@ export { default as MapControlLocationSearch } from './mapControlLocationSearch/
 // Events
 export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelte';
 
+// Popups
+export { default as MapMarker } from './mapMarker/MapMarker.svelte';
+export { default as MapMarkerContainer } from './mapMarker/elements/mapMarkerContainer/MapMarkerContainer.svelte';
+export { default as MapMarkerFlyToFeature } from './mapMarker/elements/mapMarkerFlyToFeature/MapMarkerFlyToFeature.svelte';
+export { default as MapMarkerPlacement } from './mapMarker/elements/mapMarkerPlacement/MapMarkerPlacement.svelte';
+export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
