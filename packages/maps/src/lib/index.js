@@ -33,7 +33,6 @@ export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
 // Context Layers
 export { default as BoroughsContextLayer } from './mapContextLayer/BoroughsContextLayer.svelte';
-export { boroughsContextLayer } from './mapContextLayer/BoroughsContextLayer.svelte';
 
 // themes
 export * from './themes/animations';
