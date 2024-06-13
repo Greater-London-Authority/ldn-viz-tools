@@ -7,7 +7,7 @@
 		table: {
 			type: {
 				summary: 'function',
-				detail: 'function({\n  id: string,\n  spec: SourceSpecification\n}) => void'
+				detail: '({\n  id: string,\n  spec: SourceSpecification\n}) => void'
 			}
 		}
 	};

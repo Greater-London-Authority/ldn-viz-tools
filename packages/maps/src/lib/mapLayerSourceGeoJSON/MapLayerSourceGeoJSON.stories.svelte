@@ -1,30 +1,9 @@
 <script context="module">
-	import MapLayerView from './MapLayerView.svelte';
-
-	const loadHandlerArgType = {
-		type: 'function',
-		control: 'none',
-		table: {
-			type: {
-				summary: 'function',
-				detail: '({\n  id: string,\n  spec: LayerSpecification\n}) => void'
-			}
-		}
-	};
-
-	const componentType = {
-		type: 'object',
-		control: 'none',
-		table: {
-			type: {
-				summary: 'Svelte component'
-			}
-		}
-	};
+	import MapLayerSourceGeoJSON from './MapLayerSourceGeoJSON.svelte';
 
 	export const meta = {
-		title: 'Maps/MapLayerView',
-		component: MapLayerView,
+		title: 'Maps/MapLayerSourceGeoJSON',
+		component: MapLayerSourceGeoJSON,
 		parameters: {
 			layout: 'full'
 		},
@@ -38,28 +17,74 @@
 					}
 				}
 			},
-			beforeId: {
+			url: {
 				type: 'string',
 				control: 'none',
 				table: {
 					type: {
-						summary: 'string'
+						summary: 'URL'
 					}
 				}
 			},
-			spec: {
+			data: {
 				type: 'object',
 				control: 'none',
 				table: {
 					type: {
-						summary: 'LayerSpecification'
+						summary: 'GeoJSON'
 					}
 				}
 			},
-			tooltip: componentType,
-			popup: componentType,
-			onLoad: loadHandlerArgType,
-			onUnload: loadHandlerArgType
+			transform: {
+				type: 'function',
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(geojson: GeoJSON) => GeoJSON'
+					}
+				}
+			},
+			geojsonStore: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'Svelte store',
+						detail: 'writable<GeoJSON>'
+					}
+				}
+			},
+			onLoad: {
+				type: 'function',
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail:
+							'({\n  id: string,\n  spec: SourceSpecification,\n  geojson: GeoJSON\n}) => void'
+					}
+				}
+			},
+			onUnload: {
+				type: 'function',
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '({\n  id: string,\n  spec: SourceSpecification\n}) => void'
+					}
+				}
+			},
+			onError: {
+				type: 'function',
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(error: any, {\n  id: string,\n  spec: SourceSpecification\n}) => void'
+					}
+				}
+			}
 		}
 	};
 </script>
@@ -69,7 +94,7 @@
 	import colors from '@ldn-viz/themes/colors.json';
 
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import MapLayerSource from '../mapLayerSource/MapLayerSource.svelte';
+	import MapLayerView from '../mapLayerView/MapLayerView.svelte';
 	import testData from '../testData.json';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
@@ -77,7 +102,7 @@
 </script>
 
 <Template let:args>
-	<MapLayerView {...args} />
+	<MapLayerSourceGeoJSON {...args} />
 </Template>
 
 <Story name="Default">
@@ -87,13 +112,7 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapLayerSource
-				id={sourceId}
-				spec={{
-					type: 'geojson',
-					data: testData
-				}}
-			>
+			<MapLayerSourceGeoJSON id={sourceId} data={testData}>
 				<MapLayerView
 					id="{sourceId}/polygon"
 					spec={{
@@ -135,7 +154,7 @@
 						}
 					}}
 				/>
-			</MapLayerSource>
+			</MapLayerSourceGeoJSON>
 		</Map>
 	</div>
 </Story>

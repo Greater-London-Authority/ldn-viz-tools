@@ -11,7 +11,7 @@
 
 	import { getContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import MapLayerSource from './MapLayerSource.svelte';
+	import MapLayerSource from '../mapLayerSource/MapLayerSource.svelte';
 
 	const mapStore = getContext('mapStore');
 
@@ -37,14 +37,14 @@
 	};
 
 	/**
-	 * A readonly store holding the raw GeoJSON data.
-	 */
-	export const geojsonStore = writable(data);
-
-	/**
 	 * Applies any transformations to the GeoJSON before it's added to the map.
 	 */
 	export let transform = (geojson) => geojson;
+
+	/**
+	 * A readonly store holding the raw GeoJSON data.
+	 */
+	export const geojsonStore = writable(data);
 
 	/**
 	 * Called when the source is added to the map. The raw geojson can be
@@ -66,7 +66,7 @@
 
 	/**
 	 * Called when there is an error fetching the data or passing it to the map.
-	 * The function accepts an errors followed by an object with the following
+	 * The function accepts an error followed by an object with the following
 	 * fields:
 	 * - **id**: ID of the layer source.
 	 * - **spec**: MapLibre specification used to initialise the layer.
