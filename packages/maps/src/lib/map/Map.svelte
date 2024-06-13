@@ -17,7 +17,7 @@
 	export type WhenMapLoads = (map: maplibre_gl.Map) => void;
 
 	/**
-	 * Apllied as the MapLibre transformRequest option to append the OS key
+	 * Applied as the MapLibre `transformRequest` option to append the OS key
 	 * to outgoing OS API requests.
 	 */
 	export const appendOSKeyToUrl = (osKey: string) => {

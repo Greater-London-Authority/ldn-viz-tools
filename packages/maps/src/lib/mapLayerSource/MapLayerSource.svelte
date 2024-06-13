@@ -1,11 +1,12 @@
 <script>
 	/**
-	 * The `<MapSource>` component is slotted within a `<Map>` component to
-	 * specify a data source. The slot primarily accepts one or many `<MapLayer>`
-	 * instances to present the data.
+	 * The `<MapLayerSource>` component is slotted within a `<Map>` component to
+	 * specify a data source. The slot primarily accepts one or many
+	 * `<MapLayerView>` instances to present the data.
 	 *
-	 * `<MapSource>` can be used directly or wrapped by a decorator or adapter
-	 * component for specific kinds of map sources, e.g. GeoJSON.
+	 * `<MapLayerSource>` can be used directly or wrapped by a decorator or
+	 * adapter component for specific kinds of map sources, e.g.
+	 * `<MapLayerSourceGeoJSON>`.
 	 * @component
 	 */
 
@@ -16,32 +17,40 @@
 
 	/**
 	 * A unique ID to reference the source in the map. Provided to slotted
-	 * component as context via the key 'mapSourceId'.
+	 * component as context via the key `mapLayerSourceId`.
 	 */
 	export let id;
 
 	/**
 	 * A MapLibre source specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/sources/).
-	 * Provided to slotted component as context via the key 'mapSourceSpec'.
+	 * Provided to slotted component as context via the key `mapLayerSourceSpec`.
 	 */
 	export let spec;
 
 	/**
-	 * Called when the source is added to the map.
+	 * Called when the source is added to the map. The function accepts an
+	 * object with the following fields:
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onLoad = null;
 
 	/**
-	 * Called when the source is removed from the map.
+	 * Called when the source is removed from the map. The function accepts an
+	 * object with the following fields:
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onUnload = null;
 
 	const loaded = writable(false);
-	const safeSpec = Object.freeze(structuredClone(spec));
+	let safeSpec = structuredClone(spec);
+	spec.generateId = true;
+	Object.freeze(safeSpec);
 
-	setContext('mapSourceId', id);
-	setContext('mapSourceSpec', safeSpec);
-	setContext('mapSourceLoaded', loaded);
+	setContext('mapLayerSourceId', id);
+	setContext('mapLayerSourceSpec', safeSpec);
+	setContext('mapLayerSourceLoaded', loaded);
 
 	const doLoad = () => {
 		loaded.set(false);

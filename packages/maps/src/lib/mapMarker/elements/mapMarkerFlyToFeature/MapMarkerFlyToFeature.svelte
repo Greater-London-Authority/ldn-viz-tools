@@ -1,8 +1,8 @@
 <script context="module">
 	/**
-	 * The `<MapPopupFlyToFeature>` component is a wrapping container for
-	 * tooltips and markers that centers the popup on the screen by flying to it
-	 * upon mount.
+	 * The `<MapMarkerFlyToFeature>` component is a wrapping container for use
+	 * within tooltip and marker components. It moves the map so it centers
+	 * the popup on the screen. This is activated soon after mounting.
 	 * @component
 	 */
 
@@ -46,8 +46,13 @@
 </script>
 
 <script>
+	/**
+	 * If true disables all fly events.
+	 */
+	export let disabled = false;
+
 	const mapStore = getContext('mapStore');
-	const feature = getContext('mapPopupFeature');
+	const feature = getContext('mapMarkerFeature');
 	const point = feature.geometry ? pointOnFeature(feature) : null;
 
 	let container;
@@ -61,7 +66,7 @@
 	};
 
 	onMount(() => {
-		if (point?.geometry?.coordinates) {
+		if (!disabled && point?.geometry?.coordinates) {
 			// Ensure DOM updated so we have correct heights on elements.
 			setTimeout(flyToFeature, 1);
 		}

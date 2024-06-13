@@ -20,17 +20,16 @@ export { default as MapControlLocationSearch } from './mapControlLocationSearch/
 export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelte';
 
 // Popups
-export { default as MapPopup } from './mapPopup/MapPopup.svelte';
-export { default as MapPopupFlyToFeature } from './mapPopup/MapPopupFlyToFeature.svelte';
-export { default as MapPopupMarker } from './mapPopup/MapPopupMarker.svelte';
-export { default as MapPopupPlacement } from './mapPopup/MapPopupPlacement.svelte';
-export { default as MapPopupStyledContainer } from './mapPopup/MapPopupStyledContainer.svelte';
-export { default as MapPopupTooltip } from './mapPopup/MapPopupTooltip.svelte';
+export { default as MapMarker } from './mapMarker/MapMarker.svelte';
+export { default as MapMarkerContainer } from './mapMarker/elements/mapMarkerContainer/MapMarkerContainer.svelte';
+export { default as MapMarkerFlyToFeature } from './mapMarker/elements/mapMarkerFlyToFeature/MapMarkerFlyToFeature.svelte';
+export { default as MapMarkerPlacement } from './mapMarker/elements/mapMarkerPlacement/MapMarkerPlacement.svelte';
+export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
 // Layers
-export { default as MapLayer } from './mapLayer/MapLayer.svelte';
-export { default as MapSource } from './mapLayer/MapSource.svelte';
-export { default as GeojsonMapSource } from './mapLayer/GeojsonMapSource.svelte';
+export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
+export { default as MapLayerSourceGeoJSON } from './mapLayerSource/MapLayerSourceGeoJSON.svelte';
+export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
 // Context Layers
 export { default as BoroughsContextLayer } from './mapContextLayer/BoroughsContextLayer.svelte';

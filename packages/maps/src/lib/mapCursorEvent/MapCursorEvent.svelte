@@ -1,18 +1,24 @@
 <script lang="ts">
 	/**
 	 * The `<MapCursorEvent>` component exposes the map cursor capability, for a
-	 * specific map layer, as a Svelte component. It is designed to be slotted
-	 * into a `<MapLyer>`.
+	 * specific map layer, as a Svelte component. It's designed to be slotted
+	 * into a `<MapLayer>` component where the `layerId` property is auto
+	 * populated by `mapLayerId` context.
 	 *
-	 * Order of cursor movement calls:
-	 * 1. _leaveFeature_ (any features left)
-	 * 2. _enterFeature_ (any new features entered)
-	 * 3. _leaveTopFeature_
-	 * 4. _enterTopFeature_
+	 * However, this component maybe slotted anywhere within `<Map>` providing
+	 * a layer ID is passed and guards are put in place so the layer is added to
+	 * MapLibre before this component is initialised.
 	 *
-	 * Order of click/touch calls:
-	 * 1. _clickMap_
-	 * 2. _clickFeature_
+	 * Cursor movement events in order they are called when a mouse movement occurs:
+	 * 1. `leaveFeature`
+	 * 2. `leaveTopFeature`
+	 * 3. `enterFeature`
+	 * 4. `enterTopFeature`
+	 *
+	 * Click or touch events in order they are called per click:
+	 * 1. `clickMap`
+	 * 2. `clickFeature`
+	 *
 	 * @component
 	 */
 
@@ -26,7 +32,7 @@
 	const ctxLayerId: undefined | string = getContext('mapLayerId');
 
 	/**
-	 * ID of the target layer. Defaults to using the value of 'mapLayerId'
+	 * ID of the target layer. Defaults to using the value of the `mapLayerId`
 	 * context if it exists.
 	 */
 	export let layerId = ctxLayerId;
@@ -55,7 +61,7 @@
 	export let leaveTopFeature: MaybeMapCursorFeatureHandler = null;
 
 	/**
-	 * Called when the any part of the map is clicked.
+	 * Called when any part of the map is clicked.
 	 */
 	export let clickMap: MaybeMapCursorFeatureHandler = null;
 

@@ -1,24 +1,25 @@
 <script>
 	/**
-	 * The `<MapLayer>` component is slotted within a `<MapSource>` component to
-	 * specify how to present data on the map.
+	 * The `<MapLayerView>` component is slotted within a `<MapLayerSource>`
+	 * component, or derived version, to specify how to present data on the
+	 * map.
 	 *
-	 * `<MapLayer>` can be used directly or wrapped by a decorator or adapter
+	 * `<MapLayerView>` can be used directly or wrapped by a decorator or adapter
 	 * component to create bespoke and reusable presentation layers.
 	 * @component
 	 */
 
 	import { onDestroy, getContext, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import MapPopup from '../mapPopup/MapPopup.svelte';
+	import MapMarker from '../mapMarker/MapMarker.svelte';
 
 	const mapStore = getContext('mapStore');
-	const mapSourceId = getContext('mapSourceId');
-	const mapSourceLoaded = getContext('mapSourceLoaded');
+	const mapSourceId = getContext('mapLayerSourceId');
+	const mapSourceLoaded = getContext('mapLayerSourceLoaded');
 
 	/**
 	 * A unique ID to reference the layer in the map. Provided to slotted
-	 * component as context via the key 'mapLayerId'.
+	 * component as context via the key `mapLayerViewId`.
 	 */
 	export let id;
 
@@ -30,7 +31,7 @@
 
 	/**
 	 * A MapLibre layer specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/layers/).
-	 * Provided to slotted component as context via the key 'mapLayerSpec'.
+	 * Provided to slotted component as context via the key `mapLayerViewSpec`.
 	 */
 	export let spec;
 
@@ -40,17 +41,23 @@
 	export let tooltip = null;
 
 	/**
-	 * Component to render as a popup/marker on mouse click.
+	 * Component to render as a popup on mouse click.
 	 */
-	export let marker = null;
+	export let popup = null;
 
 	/**
-	 * Called when the layer is added to the map.
+	 * Called when the layer is added to the map. The function accepts an
+	 * object with the following fields:
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onLoad = null;
 
 	/**
-	 * Called when the layer is removed from the map.
+	 * Called when the layer is removed from the map. The function accepts an
+	 * object with the following fields:
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onUnload = null;
 
@@ -61,9 +68,9 @@
 	safeSpec.source = mapSourceId;
 	Object.freeze(safeSpec);
 
-	setContext('mapLayerId', id);
-	setContext('mapLayerSpec', safeSpec);
-	setContext('mapLayerLoaded', loaded);
+	setContext('mapLayerViewId', id);
+	setContext('mapLayerViewSpec', safeSpec);
+	setContext('mapLayerViewLoaded', loaded);
 
 	const doLoad = () => {
 		loaded.set(false);
@@ -98,8 +105,8 @@
 </script>
 
 {#if $loaded}
-	{#if tooltip || marker}
-		<MapPopup layerId={id} {tooltip} {marker} />
+	{#if tooltip || popup}
+		<MapMarker layerId={id} {tooltip} {popup} />
 	{/if}
 	<slot />
 {/if}

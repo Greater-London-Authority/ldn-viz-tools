@@ -1,5 +1,4 @@
 import HandlerCollection from './HandlerCollection';
-import util from './util';
 
 /**
  * MapCursor provides map cursor event and style management.
@@ -91,11 +90,8 @@ export default function MapCursor(map) {
 
 		isHandlingMove = true;
 
-		const eventFeatures = util.getFeaturesUnderEventPoint(map, event, handlers.layerIds);
-
+		const eventFeatures = getFeaturesUnderEventPoint(map, event, handlers.layerIds);
 		handleFeatureChanges(event, eventFeatures);
-		handleTopFeatureChanges(event, eventFeatures);
-
 		activeFeatures = eventFeatures;
 
 		setTimeout(() => {
@@ -105,35 +101,29 @@ export default function MapCursor(map) {
 	};
 
 	const handleFeatureChanges = (event, eventFeatures) => {
-		const eventFeatureMap = util.featureArrayToObject(eventFeatures);
-		const activeFeatureMap = util.featureArrayToObject(activeFeatures);
+		const eventFeatureMap = featureArrayToObject(eventFeatures);
+		const activeFeatureMap = featureArrayToObject(activeFeatures);
+		const newTopFeature = eventFeatures.length > 0 ? eventFeatures[0] : null;
+		const oldTopFeature = self.topFeature();
+		const sameTopFeature = featuresEqual(oldTopFeature, newTopFeature);
 
 		for (const id in activeFeatureMap) {
 			if (!eventFeatureMap[id]) {
-				callHandlerViaFeatureId(event, 'leaveFeature', eventFeatures, id);
+				callHandlerForFeature(event, 'leaveFeature', eventFeatures, activeFeatureMap[id]);
 			}
+		}
+
+		if (!sameTopFeature && oldTopFeature) {
+			callHandlerForFeature(event, 'leaveTopFeature', eventFeatures, oldTopFeature);
 		}
 
 		for (const id in eventFeatureMap) {
 			if (!activeFeatureMap[id]) {
-				callHandlerViaFeatureId(event, 'enterFeature', eventFeatures, id);
+				callHandlerForFeature(event, 'enterFeature', eventFeatures, eventFeatureMap[id]);
 			}
 		}
-	};
 
-	const handleTopFeatureChanges = (event, eventFeatures) => {
-		const newTopFeature = eventFeatures.length > 0 ? eventFeatures[0] : null;
-		const oldTopFeature = self.topFeature();
-
-		if (util.featuresEqual(oldTopFeature, newTopFeature)) {
-			return;
-		}
-
-		if (oldTopFeature) {
-			callHandlerForFeature(event, 'leaveTopFeature', eventFeatures, oldTopFeature);
-		}
-
-		if (newTopFeature) {
+		if (!sameTopFeature && newTopFeature) {
 			callHandlerForFeature(event, 'enterTopFeature', eventFeatures, newTopFeature);
 		}
 	};
@@ -167,13 +157,6 @@ export default function MapCursor(map) {
 		}
 	};
 
-	const callHandlerViaFeatureId = (event, eventType, features, id) => {
-		const feature = features.find((f) => f.id == id);
-		if (feature) {
-			callHandlerForFeature(event, eventType, features, feature);
-		}
-	};
-
 	const callHandlerForFeature = (event, eventType, features, feature) => {
 		const entries = handlers.findAll(eventType, feature.layer.id);
 
@@ -188,3 +171,43 @@ export default function MapCursor(map) {
 
 	return self;
 }
+
+const featureArrayToObject = (features) => {
+	return features.reduce((acc, f) => {
+		// For ESRI GeoJSON the layer ID and objectid provide enough uniqueness but
+		// non-ESRI GeoJSON requires the source specification set 'generateId' to
+		// true so that 'feature.id' is always set. However, not setting this is
+		// unlikely to cause an issue unless there are overlapping features in the
+		// same layer.
+		const id = f.layer.id + ':' + f.id + ':' + f.properties.objectid;
+		acc[id] = f;
+		return acc;
+	}, {});
+};
+
+const featuresEqual = (a, b) => {
+	if (!a && !b) {
+		return true;
+	}
+
+	if (!a || !b) {
+		return false;
+	}
+
+	if (a.layer.id !== b.layer.id) {
+		return false;
+	}
+
+	if (a.id !== undefined && b.id !== undefined) {
+		return a.id === b.id;
+	}
+
+	return a.properties.objectid === b.properties.objectid;
+};
+
+const getFeaturesUnderEventPoint = (map, event, layerIds) => {
+	const mousePoint = [event.point.x, event.point.y];
+	return map.queryRenderedFeatures(mousePoint, {
+		layers: layerIds
+	});
+};

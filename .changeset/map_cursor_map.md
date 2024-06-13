@@ -1,5 +1,5 @@
 ---
-'@ldn-viz/charts': major
+'@ldn-viz/maps': major
 ---
 
 CHANGED: add TypeScript to `Map` component
