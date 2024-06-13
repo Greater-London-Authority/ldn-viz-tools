@@ -11,8 +11,7 @@
 	 * The `tooltip` and `popup` components are client side rendered. This
 	 * component's context is passed to them along with three additional
 	 * values:
-	 * - `mapMarkerMaplibrePopup` (tooltip component only) is the instance of `maplibre_gl.Popup` that contains the rendered tooltip component.
-	 * - `mapMarkerMaplibreMarker` (popup component only) is the instance of `maplibre_gl.Marker` that contains the rendered popup component.
+	 * - `mapMarkerMaplibrePopup` is the instance of `maplibre_gl.Popup` that contains the rendered tooltip component.
 	 * - `mapMarkerLayerId` is the ID of the map layer the feature belongs to.
 	 * - `mapMarkerFeature` is the target GeoJSON feature. Note that MapLibre adds additional fields, e.g. `layer`.
 	 * @component
@@ -55,7 +54,7 @@
 	let tooltipMaplibrePopup = null;
 	let tooltipInstance = null;
 
-	let popupMaplibreMarker = null;
+	let popupMaplibrePopup = null;
 	let popupFeature = null;
 	let popupInstance = null;
 
@@ -71,7 +70,9 @@
 		}
 
 		if (!tooltipMaplibrePopup && tooltip) {
-			renderTooltip(event, feature);
+			const [maplibrePopup, instance] = renderComponent(event, feature, tooltip);
+			tooltipMaplibrePopup = maplibrePopup;
+			tooltipInstance = instance;
 		}
 	};
 
@@ -96,8 +97,11 @@
 		}
 
 		removeTooltip();
+
+		const [maplibrePopup, instance] = renderComponent(event, feature, popup);
+		popupMaplibrePopup = maplibrePopup;
+		popupInstance = instance;
 		popupFeature = feature;
-		renderPopup(event, feature);
 	};
 
 	const clickMap = (event, { features }) => {
@@ -139,22 +143,22 @@
 	};
 
 	const removePopup = () => {
-		popupMaplibreMarker?.remove();
-		popupMaplibreMarker = null;
+		popupMaplibrePopup?.remove();
+		popupMaplibrePopup = null;
 		popupInstance?.$destroy();
 		popupInstance = null;
 		popupFeature = null;
 	};
 
-	const renderTooltip = (event, feature) => {
-		tooltipMaplibrePopup = new maplibre_gl.Popup({
+	const renderComponent = (event, feature, component) => {
+		const maplibrePopup = new maplibre_gl.Popup({
 			closeButton: false,
 			closeOnClick: false
 		});
 
 		const container = document.createElement('div');
-		tooltipMaplibrePopup.setDOMContent(container);
-		tooltipMaplibrePopup.setLngLat(event.lngLat);
+		maplibrePopup.setDOMContent(container);
+		maplibrePopup.setLngLat(event.lngLat);
 
 		// We don't pass the event because some properties in the event object may
 		// get cleaned up or changed after the event has officially finished but
@@ -163,44 +167,19 @@
 		// If a new property from the event is required in component context, pass
 		// (and maybe clone) the specific event property and pass it into the
 		// function below to be set directly in the context.
-		tooltipInstance = new tooltip({
+		const instance = new component({
 			target: container,
 			context: new Map([
 				...contexts,
-				['mapMarkerMaplibrePopup', tooltipMaplibrePopup],
+				['mapMarkerMaplibrePopup', maplibrePopup],
 				['mapMarkerLayerId', layerId],
 				['mapMarkerFeature', feature]
 			])
 		});
 
-		tooltipMaplibrePopup.addTo($mapStore);
-	};
+		maplibrePopup.addTo($mapStore);
 
-	const renderPopup = (event, feature) => {
-		popupMaplibreMarker = new maplibre_gl.Marker();
-		popupMaplibreMarker.setLngLat(event.lngLat);
-		popupMaplibreMarker.setOffset([0, 0]);
-		popupMaplibreMarker.getElement().replaceChildren();
-		const container = popupMaplibreMarker.getElement();
-
-		// We don't pass the event because some properties in the event object may
-		// get cleaned up or changed after the event has officially finished but
-		// before any async activity has occurred.
-		//
-		// If a new property from the event is required in component context, pass
-		// (and maybe clone) the specific event property and pass it into the
-		// function below to be set directly in the context.
-		popupInstance = new popup({
-			target: container,
-			context: new Map([
-				...contexts,
-				['mapMarkerMaplibreMarker', popupMaplibreMarker],
-				['mapMarkerLayerId', layerId],
-				['mapMarkerFeature', feature]
-			])
-		});
-
-		popupMaplibreMarker.addTo($mapStore);
+		return [maplibrePopup, instance];
 	};
 </script>
 

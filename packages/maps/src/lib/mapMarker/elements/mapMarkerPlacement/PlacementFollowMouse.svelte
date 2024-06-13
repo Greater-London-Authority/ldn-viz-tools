@@ -4,11 +4,9 @@
 	const mapStore = getContext('mapStore');
 	const feature = getContext('mapMarkerFeature');
 	const maplibrePopup = getContext('mapMarkerMaplibrePopup');
-	const maplibreMarker = getContext('mapMarkerMaplibreMarker');
 
 	const updatePosition = (event) => {
-		maplibrePopup?.setLngLat(event.lngLat);
-		maplibreMarker?.setLngLat(event.lngLat);
+		maplibrePopup.setLngLat(event.lngLat);
 	};
 
 	if (feature.geometry) {
