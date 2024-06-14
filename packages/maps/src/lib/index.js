@@ -32,7 +32,7 @@ export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptations/g
 export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
 // Context Layers
-export { default as BoroughsContextLayer } from './mapContextLayer/BoroughsContextLayer.svelte';
+export { default as BoroughsContextLayer } from './mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
 
 // themes
 export * from './themes/animations';
