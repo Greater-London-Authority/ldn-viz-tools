@@ -7,12 +7,12 @@
 	 */
 
 	/**
-	 * If true removes the styled tip at the bottom of the container.
+	 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
 	 */
 	export let noTip = false;
 
 	/**
-	 * If true removes the standard container padding.
+	 * If `true`, then the standard container padding is not applied.
 	 */
 	export let noPad = false;
 

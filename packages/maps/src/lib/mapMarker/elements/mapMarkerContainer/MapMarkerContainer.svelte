@@ -16,17 +16,17 @@
 	export let placement = 'center';
 
 	/**
-	 * If true removes the styled tip at the bottom of the container.
+	 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
 	 */
 	export let noTip = false;
 
 	/**
-	 * If true removes the standard container padding.
+	 * If `true`, then the standard container padding is not applied.
 	 */
 	export let noPad = false;
 
 	/**
-	 * If true flys to the feature after component is mounted.
+	 * If `true`, then the map will fly to the feature after the component is mounted.
 	 */
 	export let flyToFeature = false;
 </script>
