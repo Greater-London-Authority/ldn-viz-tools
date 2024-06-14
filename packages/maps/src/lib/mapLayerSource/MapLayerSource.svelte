@@ -4,9 +4,12 @@
 	 * specify a data source. The slot primarily accepts one or many
 	 * `<MapLayerView>` instances to present the data.
 	 *
-	 * `<MapLayerSource>` can be used directly or wrapped by a decorator or
-	 * adapter component for specific kinds of map sources, e.g.
-	 * `<MapLayerSourceGeoJSON>`.
+	 * By design, `<MapLayerSource>` is very simple with minimal features but
+	 * extendable by wrapping the component and using patterns such as:
+	 * [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern),
+	 * [Decorator](https://en.wikipedia.org/wiki/Decorator_pattern),
+	 * and [Facade](https://en.wikipedia.org/wiki/Facade_pattern). E.g.
+	 * `<GeoJSONMapLayerSource>`.
 	 * @component
 	 */
 

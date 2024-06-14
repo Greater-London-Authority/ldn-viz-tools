@@ -47,7 +47,7 @@
 
 <script>
 	/**
-	 * If true disables all fly events.
+	 * If `true`, then all fly events are disabled.
 	 */
 	export let disabled = false;
 

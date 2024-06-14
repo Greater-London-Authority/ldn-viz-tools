@@ -1,9 +1,9 @@
 <script context="module">
-	import MapLayerSourceGeoJSON from './MapLayerSourceGeoJSON.svelte';
+	import GeoJSONMapLayerSource from './GeoJSONMapLayerSource.svelte';
 
 	export const meta = {
-		title: 'Maps/MapLayerSourceGeoJSON',
-		component: MapLayerSourceGeoJSON,
+		title: 'Maps/MapLayerSource/adaptations/GeoJSONMapLayerSource',
+		component: GeoJSONMapLayerSource,
 		parameters: {
 			layout: 'full'
 		},
@@ -90,19 +90,19 @@
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import colors from '@ldn-viz/themes/colors.json';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import MapLayerView from '../mapLayerView/MapLayerView.svelte';
-	import testData from '../testData.json';
+	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
+	import MapLayerView from '../../../mapLayerView/MapLayerView.svelte';
+	import testData from '../../../testData.json';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
 </script>
 
 <Template let:args>
-	<MapLayerSourceGeoJSON {...args} />
+	<GeoJSONMapLayerSource {...args} />
 </Template>
 
 <Story name="Default">
@@ -112,7 +112,7 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapLayerSourceGeoJSON id={sourceId} data={testData}>
+			<GeoJSONMapLayerSource id={sourceId} data={testData}>
 				<MapLayerView
 					id="{sourceId}/polygon"
 					spec={{
@@ -154,7 +154,7 @@
 						}
 					}}
 				/>
-			</MapLayerSourceGeoJSON>
+			</GeoJSONMapLayerSource>
 		</Map>
 	</div>
 </Story>

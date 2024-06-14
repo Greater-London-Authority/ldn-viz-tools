@@ -1,7 +1,7 @@
 ---
-'@ldn-viz/charts': minor
+'@ldn-viz/maps': minor
 ---
 
-ADDED: `MapSource` component for specifying MapLibre data sources within a `<Map>`.
-ADDED: `GeoJSONMapSource` component for specifying remote GeoJSON data sources within a `<Map>`.
-ADDED: `MapLayer` component for specifying MapLibre layers within a `<MapSource>` or derived component.
+ADDED: `MapLayerSource` component for specifying MapLibre data sources within a `<Map>`.
+ADDED: `GeoJSONMapLayerSource` component for wrapping `MapLayerSource` for specifying local or remote GeoJSON sources.
+ADDED: `MapLayerView` component for specifying MapLibre layers within a `<MapLayerSource>` or derived component.

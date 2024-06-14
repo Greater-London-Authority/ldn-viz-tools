@@ -4,8 +4,11 @@
 	 * component, or derived version, to specify how to present data on the
 	 * map.
 	 *
-	 * `<MapLayerView>` can be used directly or wrapped by a decorator or adapter
-	 * component to create bespoke and reusable presentation layers.
+	 * By design, `<MapLayerView>` is very simple with minimal features but
+	 * extendable by wrapping the component and using patterns such as:
+	 * [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern),
+	 * [Decorator](https://en.wikipedia.org/wiki/Decorator_pattern),
+	 * and [Facade](https://en.wikipedia.org/wiki/Facade_pattern).
 	 * @component
 	 */
 

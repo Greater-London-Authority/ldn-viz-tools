@@ -81,6 +81,7 @@
 	</div>
 </Story>
 
+<!-- To see how this differs from centering on a feature, try moving your mouse across an area feature. -->
 <Story name="Follow mouse">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
