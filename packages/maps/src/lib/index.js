@@ -31,6 +31,9 @@ export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelt
 export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptations/geojsonMapLayerSource/GeoJSONMapLayerSource.svelte';
 export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
+// Context Layers
+export { default as BoroughsContextLayer } from './mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
