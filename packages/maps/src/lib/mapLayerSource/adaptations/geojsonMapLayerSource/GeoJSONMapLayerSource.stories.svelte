@@ -2,7 +2,7 @@
 	import GeoJSONMapLayerSource from './GeoJSONMapLayerSource.svelte';
 
 	export const meta = {
-		title: 'Maps/MapLayerSource/adaptions/GeoJSONMapLayerSource',
+		title: 'Maps/MapLayerSource/adaptations/GeoJSONMapLayerSource',
 		component: GeoJSONMapLayerSource,
 		parameters: {
 			layout: 'full'
@@ -90,8 +90,8 @@
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import colors from '@ldn-viz/themes/colors.json';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
 	import MapLayerView from '../../../mapLayerView/MapLayerView.svelte';
