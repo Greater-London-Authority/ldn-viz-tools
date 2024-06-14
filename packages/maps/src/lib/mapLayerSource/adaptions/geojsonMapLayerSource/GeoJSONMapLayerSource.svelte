@@ -1,23 +1,22 @@
 <script>
 	/**
-	 * The `<MapLayerSourceGeoJSON>` component wraps the `<MapLayerSource>`
-	 * component and provides a simplified interface for direct or remote
-	 * GeoJSON data.
+	 * The `<MapLayerSourceGeoJSON>` component is a specialised
+	 * `<MapLayerSource>` for local or remote GeoJSON data.
 	 *
-	 * The raw GeoJSON is available by binding on the `geojsonStore` property and
-	 * as an argument in the `onLoad` function.
+	 * The mapped GeoJSON is available by binding on the `geojsonStore` property
+	 * and as an argument in the `onLoad` function.
 	 * @component
 	 */
 
 	import { getContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import MapLayerSource from '../mapLayerSource/MapLayerSource.svelte';
+	import MapLayerSource from '../../MapLayerSource.svelte';
 
 	const mapStore = getContext('mapStore');
 
 	/**
 	 * A unique ID to reference the source in the map. Provided to slotted
-	 * component as context via the key 'mapLayerSourceId'.
+	 * component as context via the key `mapLayerSourceId`.
 	 */
 	export let id;
 

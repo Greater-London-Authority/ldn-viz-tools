@@ -28,7 +28,7 @@ export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMar
 
 // Layers
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
-export { default as MapLayerSourceGeoJSON } from './mapLayerSource/MapLayerSourceGeoJSON.svelte';
+export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptions/geojsonMapLayerSource/GeoJSONMapLayerSource.svelte';
 export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
 // themes

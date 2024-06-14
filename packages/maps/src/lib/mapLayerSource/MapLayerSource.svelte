@@ -6,7 +6,7 @@
 	 *
 	 * `<MapLayerSource>` can be used directly or wrapped by a decorator or
 	 * adapter component for specific kinds of map sources, e.g.
-	 * `<MapLayerSourceGeoJSON>`.
+	 * `<GeoJSONMapLayerSource>`.
 	 * @component
 	 */
 
