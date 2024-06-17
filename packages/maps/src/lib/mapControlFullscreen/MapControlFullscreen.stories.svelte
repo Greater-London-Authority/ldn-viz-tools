@@ -13,7 +13,7 @@
 </script>
 
 <Meta
-	title="Maps/MapControlFullscreen"
+	title="Maps/Controls/MapControlFullscreen"
 	component={MapControlFullscreen}
 	parameters={{
 		layout: 'fullscreen'

@@ -2,7 +2,7 @@
 	import MapControlLocationSearch from './MapControlLocationSearch.svelte';
 
 	export const meta = {
-		title: 'Maps/MapControlLocationSearch',
+		title: 'Maps/Controls/MapControlLocationSearch',
 		component: MapControlLocationSearch,
 		parameters: {
 			layout: 'fullscreen'
