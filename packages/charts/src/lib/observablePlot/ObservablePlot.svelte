@@ -1,12 +1,25 @@
-<script context="module">
-	export const addClick =
+<script context="module" lang="ts">
+	/**
+	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapped in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
+	 *  @component
+	 */
+
+	import type {
+		AddEventHandlerFunction,
+		AddEventHandlerInnerFunction,
+		Position,
+		RegisterTooltipFunction
+	} from './types.ts';
+
+	export const registerTooltip: RegisterTooltipFunction =
 		(posStore, markShape = 'circle') =>
 		(index, scales, values, dimensions, context, next) => {
-			const el = next(index, scales, values, dimensions, context);
-			const marks = el.querySelectorAll(markShape);
-			for (let i = 0; i < marks.length; i++) {
-				const d = { index: index[i], x: values.channels.x.value[i], y: values.channels.y.value[i] };
-				marks[i].addEventListener('mouseenter', (ev) => {
+			const el = next && next(index, scales, values, dimensions, context);
+			const marks = el?.querySelectorAll(markShape) || [];
+
+			addEventHandlerInner(
+				'mouseenter',
+				(ev: MouseEvent, d) => {
 					posStore.set({
 						...d,
 						clientX: ev.clientX,
@@ -16,60 +29,140 @@
 						layerX: ev.layerX,
 						layerY: ev.layerY
 					}); // can't use the $store syntax here
-				});
+				},
+				marks,
+				values,
+				index
+			);
 
-				marks[i].addEventListener('mouseleave', () => {
-					posStore.set(undefined);
-				});
-			}
-			return el;
+			addEventHandlerInner(
+				'mouseleave',
+				(ev: MouseEvent, d) => {
+					posStore.set(undefined); // can't use the $store syntax here
+				},
+				marks,
+				values,
+				index
+			);
+
+			return el ?? null;
 		};
+
+	export const addEventHandler: AddEventHandlerFunction =
+		(eventName, eventHandler, markShape = 'circle') =>
+		(index, scales, values, dimensions, context, next) => {
+			const el = next && next(index, scales, values, dimensions, context);
+			const marks = el?.querySelectorAll(markShape) || [];
+
+			addEventHandlerInner(eventName, eventHandler, marks, values, index);
+
+			return el ?? null;
+		};
+
+	const addEventHandlerInner: AddEventHandlerInnerFunction = (
+		eventName,
+		eventHandler,
+		marks,
+		values,
+		index
+	) => {
+		for (let i = 0; i < marks.length; i++) {
+			const d = {
+				index: index[i],
+				x: values.channels.x.value[i],
+				y: values.channels.y.value[i]
+			};
+
+			marks[i].addEventListener(eventName, (ev: any) => eventHandler(ev, d));
+		}
+	};
 </script>
 
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { derived, writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 
+	/**
+	 * The Observable Plot specification for the visualization.
+	 */
 	export let spec;
 
-	export let responsiveWidth = false;
+	/**
+	 * Data being visualized (as an array of objects), to be used by data download button.
+	 */
+	export let data: any[] = [];
 
-	export let data = []; // for download button only
+	/**
+	 * Title that is displayed in large text above the plot.
+	 */
+	export let title = '';
 
-	// for container
-	export let title;
-	export let subTitle;
-	export let alt;
-	export let footer;
-	export let exportBtns;
+	/**
+	 * Subtitle that is displayed below the title, but above the plot.
+	 */
+	export let subTitle = '';
 
-	export let domNode;
+	/**
+	 * Alt-text for the plot.
+	 */
+	export let alt = '';
 
-	export let tooltipStore = writable();
+	/**
+	 * Tailwind width class passed to Chart Container.
+	 */
+	export let chartWidth = '';
 
-	/** A y-offset from the hover point, in pixels. */
+	/**
+	 * Object specifying what appears in the footer:
+	 *
+	 * * `byline` (string) - statement of who created the visualization
+	 * * `source` (string) - statement of where the data came from
+	 * * `note` (string) - any additional footnotes
+	 * * `exportBtns` (boolean) - if `false`, then data/image download buttons will be hidden
+	 */
+	export let footer:
+		| {
+				byline?: string | undefined;
+				source?: string | undefined;
+				note?: string | undefined;
+				exportBtns: boolean;
+		  }
+		| undefined = undefined;
+
+	/**
+	 * Provides a way to access the DOM node into which the visualization is rendered.
+	 */
+	export let domNode: any = undefined;
+
+	/**
+	 * A store that stores details of the moused-over point.
+	 * Used for custom tooltips.
+	 */
+	export let tooltipStore = writable<Position>();
+
+	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
 
-	const renderPlot = (node) => node.appendChild(Plot.plot(spec));
-	let width: number;
-	let height: number;
-	let dimensions = { height: 0, width: 0 };
-	let updateDimensions;
-	$: {
-		clearTimeout(updateDimensions);
-		updateDimensions = setTimeout(() => {
-			dimensions = { height, width };
-		}, 200);
-	}
+	const renderPlot = (node: HTMLDivElement) => {
+		node.appendChild(Plot.plot(spec));
+	};
 
-	$: {
-		if (responsiveWidth) {
-			spec.width = dimensions.width;
-		}
-	}
+	let width: number;
+
+	onMount(() => {
+		updateDimensions();
+		window.addEventListener('resize', updateDimensions);
+		return () => {
+			window.removeEventListener('resize', updateDimensions);
+		};
+	});
+
+	const updateDimensions = () => {
+		spec.width = width;
+	};
 
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
 		$tooltipStore ? data[$tooltipStore.index] : undefined
@@ -84,19 +177,13 @@
 		{subTitle}
 		{alt}
 		{footer}
-		{exportBtns}
 		{...$$restProps}
 		chartHeight={'h-fit'}
+		{chartWidth}
 	>
-		<div
-			use:renderPlot
-			{...$$restProps}
-			bind:this={domNode}
-			bind:clientWidth={width}
-			bind:clientHeight={height}
-		/>
+		<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
 
-		<!-- todo: pass to slot data[i] -->
+		<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 		{#if $tooltipStore && $tooltipData}
 			<div
 				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
@@ -106,6 +193,10 @@
 				<slot name="tooltip">
 					<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
 				</slot>
+
+				<div
+					class="absolute bg-core-grey-100 dark:bg-core-grey-700 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
+				/>
 			</div>
 		{/if}
 	</ChartContainer>
@@ -113,6 +204,6 @@
 
 <style>
 	:global(.defaultCcolorLegendLabel-swatch) {
-		font-size: 20px;
+		font-size: 14px;
 	}
 </style>
