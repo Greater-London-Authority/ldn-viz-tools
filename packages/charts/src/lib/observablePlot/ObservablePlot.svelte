@@ -4,20 +4,22 @@
 	 *  @component
 	 */
 
-	import type { AddClickFunction, Position } from './types.ts';
+	import type {
+		AddEventHandlerFunction,
+		AddEventHandlerInnerFunction,
+		Position,
+		RegisterTooltipFunction
+	} from './types.ts';
 
-	export const addClick: AddClickFunction =
+	export const registerTooltip: RegisterTooltipFunction =
 		(posStore, markShape = 'circle') =>
 		(index, scales, values, dimensions, context, next) => {
 			const el = next && next(index, scales, values, dimensions, context);
 			const marks = el?.querySelectorAll(markShape) || [];
-			for (let i = 0; i < marks.length; i++) {
-				const d = {
-					index: index[i],
-					x: values.channels.x.value[i],
-					y: values.channels.y.value[i]
-				};
-				marks[i].addEventListener('mouseenter', (ev: any) => {
+
+			addEventHandlerInner(
+				'mouseenter',
+				(ev: MouseEvent, d) => {
 					posStore.set({
 						...d,
 						clientX: ev.clientX,
@@ -27,14 +29,53 @@
 						layerX: ev.layerX,
 						layerY: ev.layerY
 					}); // can't use the $store syntax here
-				});
+				},
+				marks,
+				values,
+				index
+			);
 
-				marks[i].addEventListener('mouseleave', () => {
-					posStore.set(undefined);
-				});
-			}
+			addEventHandlerInner(
+				'mouseleave',
+				(ev: MouseEvent, d) => {
+					posStore.set(undefined); // can't use the $store syntax here
+				},
+				marks,
+				values,
+				index
+			);
+
 			return el ?? null;
 		};
+
+	export const addEventHandler: AddEventHandlerFunction =
+		(eventName, eventHandler, markShape = 'circle') =>
+		(index, scales, values, dimensions, context, next) => {
+			const el = next && next(index, scales, values, dimensions, context);
+			const marks = el?.querySelectorAll(markShape) || [];
+
+			addEventHandlerInner(eventName, eventHandler, marks, values, index);
+
+			return el ?? null;
+		};
+
+	const addEventHandlerInner: AddEventHandlerInnerFunction = (
+		eventName,
+		eventHandler,
+		marks,
+		values,
+		index
+	) => {
+		for (let i = 0; i < marks.length; i++) {
+			const d = {
+				index: index[i],
+				x: values.channels.x.value[i],
+				y: values.channels.y.value[i]
+			};
+
+			marks[i].addEventListener(eventName, (ev: any) => eventHandler(ev, d));
+		}
+	};
 </script>
 
 <script lang="ts">

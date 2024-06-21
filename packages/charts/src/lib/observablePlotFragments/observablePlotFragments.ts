@@ -120,7 +120,7 @@ type generateAnnotationsConfig = {
 	 * However, if a mark is an `option` rather than `channel`, but the specified value is a function, then the function will be evaluated for the datum.
 	 * This means that you can specify `dx` as a function, without worrying about the fact the Observable Plot doesn't (currently) support this.
 	 */
-	options: Record<string, number | string | ((x: any) => any)>; // any; // object with ket
+	options?: Record<string, number | string | ((x: any) => any)>; // any; // object with ket
 
 	/**
 	 * Additional objects, expressed as functions that will be evaluated before Plot's mark function is called.
