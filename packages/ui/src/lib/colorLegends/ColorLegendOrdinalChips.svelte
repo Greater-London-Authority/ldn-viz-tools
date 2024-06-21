@@ -18,6 +18,11 @@
 	export let title = '';
 
 	/**
+	 * Direction in which to lay out color chips.
+	 */
+	export let orientation: 'horizontal' | 'vertical' = 'horizontal';
+
+	/**
 	 * Value to highlight.
 	 */
 	export let highlightedValue: number | string | undefined = undefined;
@@ -28,7 +33,7 @@
 		<span class="font-bold">{title}</span>
 	{/if}
 
-	<div class="flex gap-2">
+	<div class={orientation === 'horizontal' ? 'flex gap-2' : 'flex flex-col'}>
 		{#each scale.domain() as d}
 			<div class="flex items-center">
 				<div class="flex-none w-4 h-4 mr-1" style:background-color={scale(d)} />
