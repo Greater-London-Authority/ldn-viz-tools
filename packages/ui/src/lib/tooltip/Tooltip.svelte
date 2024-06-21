@@ -16,16 +16,54 @@
 
 	import Button from '../button/Button.svelte';
 	import { floatingRef } from '../tooltip/tooltip.js';
+	import Modal from '../modal/Modal.svelte';
 
 	/**
-	 * text that appears in the tooltip target, next to the icon
+	 * Text that appears in the tooltip target, next to the icon.
 	 */
 	export let hintLabel = 'what is this?';
 
 	/**
-	 * text size for the tooltip target
+	 * Text size for the tooltip target.
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
+
+	/**
+	 * Description that appears below the title of the modal (the
+	 * `aria-describedby` for the modal points to the element containing this
+	 * text). The presence of this property enables modal toggling on tooltip
+	 * click.
+	 */
+	export let modalDescription = '';
+
+	/**
+	 * Title that appears at the top of the modal.
+	 *
+	 * This property is only applicable if a `modalDescription` or a named slot
+	 * called `modal` is provided.
+	 */
+	export let modalTitle = '';
+
+	/**
+	 * Width of the modal.
+	 *
+	 * This property is only applicable if a `modalDescription` or a named slot
+	 * called `modal` is provided.
+	 */
+	export let modalWidth:
+		| 'sm'
+		| 'md'
+		| 'lg'
+		| 'xs'
+		| 'xl'
+		| '2xl'
+		| '3xl'
+		| '4xl'
+		| '5xl'
+		| '6xl'
+		| '7xl'
+		| 'full'
+		| undefined = undefined;
 
 	let showTooltip = false;
 
@@ -33,6 +71,8 @@
 
 	const arrowRef: Writable<HTMLElement> = writable();
 	let dynamicOptions = {};
+
+	// TODO: Needs refactoring into something more readable.
 	$: if (showTooltip) {
 		dynamicOptions = {
 			middleware: [offset(10), flip(), shift(), arrow({ element: arrowRef })],
@@ -53,9 +93,21 @@
 			}
 		};
 	}
+
+	let isModalOpen: Writable<boolean> | undefined;
+	const openModal = () => {
+		if ($$slots.modal) {
+			isModalOpen?.set(true);
+		}
+	};
 </script>
 
-<Button variant="text" size={hintSize} class="!p-0 !text-core-grey-400 dark:!text-core-grey-300">
+<Button
+	variant="text"
+	size={hintSize}
+	class="!p-0 !text-core-grey-400 dark:!text-core-grey-300"
+	on:click={openModal}
+>
 	<span
 		use:floatingRef
 		bind:this={element}
@@ -68,7 +120,7 @@
 		class="inline-flex items-center"
 	>
 		{#if $$slots.hint}
-			<!-- if present, replaces the default `hintLabel` and icon  -->
+			<!-- If present, replaces the default `hintLabel` and icon.  -->
 			<slot name="hint" />
 		{:else}
 			{hintLabel}
@@ -83,12 +135,25 @@
 	</span>
 </Button>
 
+{#if modalDescription || $$slots.modal}
+	<Modal
+		bind:isOpen={isModalOpen}
+		title={modalTitle}
+		description={modalDescription}
+		width={modalWidth}
+	>
+		{#if $$slots.modal}
+			<slot name="modal" />
+		{/if}
+	</Modal>
+{/if}
+
 {#if showTooltip}
 	<div
 		class="absolute max-w-[200px] text-sm p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md z-50"
 		use:floatingContent={dynamicOptions}
 	>
-		<!-- the text that will be displayed in the tooltip -->
+		<!-- Text that will be displayed in the tooltip. -->
 		<slot />
 
 		<div
