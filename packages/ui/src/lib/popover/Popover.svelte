@@ -31,7 +31,7 @@
 	export let hintLabel = 'what is this?';
 </script>
 
-<div {...$trigger} use:trigger>
+<div {...$trigger} use:trigger class="w-fit h-fit">
 	{#if $$slots.hint}
 		<!-- if present, replaces the default `hintLabel` and icon  -->
 		<slot name="hint" />
