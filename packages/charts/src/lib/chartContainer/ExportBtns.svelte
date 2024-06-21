@@ -7,7 +7,7 @@
 	export let data: any;
 </script>
 
-<div class="mt-6 py-4 flex flex-col sm:flex-row justify-end" data-html2canvas-ignore>
+<div class="flex flex-col sm:flex-row shrink-0 sm:ml-auto capture-ignore" data-html2canvas-ignore>
 	<DataDownloadButton
 		{data}
 		filename="download.csv"

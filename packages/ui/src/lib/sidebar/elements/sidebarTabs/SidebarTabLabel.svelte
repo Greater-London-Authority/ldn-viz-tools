@@ -55,7 +55,7 @@
 		horizontal: 'text-base py-2 px-4 flex items-center select-none'
 	};
 
-	$: tabLabelClasses = classNames(...themeClasses, orientationClasses[orientation]);
+	$: tabLabelClasses = classNames(...themeClasses, orientationClasses[orientation], 'select-none');
 </script>
 
 <div

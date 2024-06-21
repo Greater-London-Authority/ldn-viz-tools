@@ -12,7 +12,7 @@
 </script>
 
 <Meta
-	title="Maps/MapControlZoom"
+	title="Maps/MapControls/MapControlZoom"
 	component={MapControlZoom}
 	parameters={{
 		layout: 'fullscreen'

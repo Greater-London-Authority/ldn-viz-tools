@@ -29,7 +29,21 @@
 </script>
 
 <script lang="ts">
+	/**
+	 * The `<MapControlGroup>` component wraps map controls and other overlays
+	 * to provide positioning relative to a parent `<Map>` component instance.
+	 * @component
+	 */
+
+	/**
+	 * Position of the group over the map. Avialable positions defined by
+	 * `MapControlGroupPositions` enum type.
+	 */
 	export let position: keyof typeof MapControlGroupPositions = MapControlGroupPositions.TopLeft;
+
+	/**
+	 * Additional classes applied to the group's container element.
+	 */
 	export let classes = '';
 
 	const positionClass = positionClasses[position];
