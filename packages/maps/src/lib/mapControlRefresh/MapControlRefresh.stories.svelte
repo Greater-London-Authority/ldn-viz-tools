@@ -12,7 +12,7 @@
 </script>
 
 <Meta
-	title="Maps/Controls/MapControlRefresh"
+	title="Maps/MapControls/MapControlRefresh"
 	component={MapControlRefresh}
 	parameters={{
 		layout: 'fullscreen'

@@ -15,7 +15,7 @@
 </script>
 
 <Meta
-	title="Maps/Controls/MapControlGroup"
+	title="Maps/MapControls/MapControlGroup"
 	component={MapControlGroup}
 	parameters={{
 		layout: 'fullscreen'
