@@ -19,7 +19,7 @@
 
 			addEventHandlerInner(
 				'mouseenter',
-				(ev: MouseEvent, d) => {
+				(ev: MouseEvent, d: any) => {
 					posStore.set({
 						...d,
 						clientX: ev.clientX,
@@ -37,7 +37,7 @@
 
 			addEventHandlerInner(
 				'mouseleave',
-				(ev: MouseEvent, d) => {
+				(ev: MouseEvent, d: any) => {
 					posStore.set(undefined); // can't use the $store syntax here
 				},
 				marks,
