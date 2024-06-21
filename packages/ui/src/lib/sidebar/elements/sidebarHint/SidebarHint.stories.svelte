@@ -10,6 +10,9 @@
 				options: ['tooltip', 'popover', 'modal'],
 				control: { type: 'radio' }
 			}
+		},
+		args: {
+			hintType: 'modal'
 		}
 	};
 </script>
@@ -50,7 +53,6 @@
 </Story>
 
 <Story name="Popover" source>
-	TODO: Requires Popover component <br />
 	<SidebarHint hintType="popover">
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 		labore et dolore magna aliqua.'
