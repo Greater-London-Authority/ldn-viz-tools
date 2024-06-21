@@ -130,7 +130,7 @@
 					y: 'culmen_depth_mm',
 					stroke: 'black',
 					fill: 'white',
-					render: addClick(tooltipStore),
+					render: registerTooltip(tooltipStore),
 
 					/* need to expose as a channel before including in tooltip */
 					channels: {
@@ -250,7 +250,6 @@
 	</div>
 </Story>
 
-<Story name="Area chart">
 <!-- 
 	The example stories show how defaults can be over-riden to achieve chart specific styling.
 	For example the tratment of the Y axis relys on an insetLeft property on the Plot.X and manipulation of the margin and Plot.axisY component
