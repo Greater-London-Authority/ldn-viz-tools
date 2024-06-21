@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, DataDownloadButton, ImageDownloadButton } from '@ldn-viz/ui';
+	import { DataDownloadButton, ImageDownloadButton } from '@ldn-viz/ui';
 	import { ArrowDownTray, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -7,7 +7,10 @@
 	export let data: any;
 </script>
 
-<div class="flex flex-col sm:flex-row shrink-0 sm:ml-auto capture-ignore" data-html2canvas-ignore>
+<div
+	class="flex flex-col sm:flex-row shrink-0 sm:ml-auto sm:self-end capture-ignore"
+	data-html2canvas-ignore
+>
 	<DataDownloadButton
 		{data}
 		filename="download.csv"

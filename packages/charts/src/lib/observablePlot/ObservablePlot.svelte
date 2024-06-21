@@ -111,6 +111,11 @@
 	export let alt = '';
 
 	/**
+	 * Tailwind width class passed to Chart Container.
+	 */
+	export let chartWidth = '';
+
+	/**
 	 * Object specifying what appears in the footer:
 	 *
 	 * * `byline` (string) - statement of who created the visualization
@@ -166,10 +171,19 @@
 </script>
 
 {#key spec}
-	<ChartContainer {data} {title} {subTitle} {alt} {footer} {...$$restProps} chartHeight={'h-fit'}>
+	<ChartContainer
+		{data}
+		{title}
+		{subTitle}
+		{alt}
+		{footer}
+		{...$$restProps}
+		chartHeight={'h-fit'}
+		{chartWidth}
+	>
 		<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
 
-		<!-- todo: pass to slot data[i] -->
+		<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 		{#if $tooltipStore && $tooltipData}
 			<div
 				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
@@ -179,6 +193,10 @@
 				<slot name="tooltip">
 					<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
 				</slot>
+
+				<div
+					class="absolute bg-core-grey-100 dark:bg-core-grey-700 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
+				/>
 			</div>
 		{/if}
 	</ChartContainer>
