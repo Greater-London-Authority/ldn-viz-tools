@@ -79,7 +79,7 @@
 </script>
 
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { afterUpdate, onMount, setContext } from 'svelte';
 	import { derived, writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
@@ -158,6 +158,10 @@
 		return () => {
 			window.removeEventListener('resize', updateDimensions);
 		};
+	});
+
+	afterUpdate(() => {
+		updateDimensions();
 	});
 
 	const updateDimensions = () => {

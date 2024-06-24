@@ -1,13 +1,17 @@
-import { theme } from '@ldn-viz/utils';
+import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
 import type { AxisOptions } from '@observablehq/plot';
 
-export const fontStack = "'Roboto', system-ui, sans-serif"; // TODO: swap for inter
+export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for inter
+
+export const theme = (mode: 'light' | 'dark' = 'light') => {
+	return tokens.theme[mode];
+};
 
 export const defaultStyle = {
-	color: theme.light.labels,
+	color: theme().color.chart.label,
 	fontSize: '16px',
 	fontFamily: fontStack,
-	background: theme.light.background
+	background: theme().color.chart.background
 };
 
 export const defaultSize = {
@@ -61,7 +65,7 @@ export const defaultYAxis = <AxisOptions>{
 };
 
 export const defaultLine = {
-	stroke: theme.light.primary,
+	stroke: theme().color.data.primary,
 	strokeWidth: 2
 };
 
@@ -71,26 +75,26 @@ export const defaultDashedLine = {
 };
 
 export const defaultDot = {
-	stroke: theme.light.primary,
+	stroke: theme().color.data.primary,
 	strokeWidth: 2,
 	r: 4,
 	fill: 'white'
 };
 
 export const defaultArea = {
-	stroke: theme.light.primary,
+	stroke: theme().color.data.primary,
 	strokeWidth: 0,
-	fill: theme.light.primary,
+	fill: theme().color.data.primary,
 	opacity: 0.2
 };
 
 export const defaultRule = {
-	stroke: theme.light.axis
+	stroke: theme().color.chart.axis
 };
 
 export const defaultAnnotationText = {
 	fontSize: '16px',
-	fill: theme.light.primary
+	fill: theme().color.data.primary
 };
 
 /**
@@ -140,7 +144,7 @@ export const preprocessOptions = (data: any[], config: generateAnnotationsConfig
 		const options: Record<string, number | string | ((x: any) => any)> = {};
 
 		for (const key of Object.keys(config.options || {})) {
-			const val = config.options[key];
+			const val = config.options![key];
 
 			if (typeof val === 'function' && optionsToConvert.includes(key)) {
 				options[key] = val(entry);
@@ -154,7 +158,7 @@ export const preprocessOptions = (data: any[], config: generateAnnotationsConfig
 				const val = config.optionsToEval[key];
 
 				if (typeof val === 'function') {
-					console.log('Setting', key, ' to ', val(entry));
+					// console.log('Setting', key, ' to ', val(entry));
 					options[key] = val(entry);
 				} else {
 					options[key] = val;
