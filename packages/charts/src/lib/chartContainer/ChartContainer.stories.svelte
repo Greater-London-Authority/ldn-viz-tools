@@ -42,7 +42,7 @@
 
 <Story name="With Override Class">
 	<ChartContainer
-		overrideClass="bg-core-red-500"
+		overrideClass="bg-color-palette-red-500"
 		title="This is the Chart Title"
 		subTitle="Subtitle provides extra context"
 		footer={{
