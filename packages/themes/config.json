@@ -1,0 +1,57 @@
+{
+  "source": ["./tokens/**/*.json"],
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "buildPath": "./styles/",
+      "files": [
+        {
+          "destination": "global.css",
+          "format": "css/variables",
+          "filter": "cssGlobalFilter",
+          "options": {
+            "selector": ":root"
+          }
+        },
+        {
+          "destination": "light.css",
+          "format": "css/variables",
+          "filter": "cssLightThemeFilter",
+          "options": {
+            "selector": ":root"
+          }
+        },
+        {
+          "destination": "dark.css",
+          "format": "css/variables",
+          "filter": "cssDarkThemeFilter",
+          "options": {
+            "selector": ":root.dark"
+          }
+        }
+      ]
+    },
+    "web": {
+      "transformGroup": "web",
+      "buildPath": "./styles/",
+      "files": [
+        {
+          "destination": "tw-extend/color.js",
+          "format": "tw/css-variables",
+          "filter": "twFilter"
+        }
+      ]
+    },
+    "ts": {
+      "transformGroup": "js",
+      "buildPath": "./styles/",
+      "files": [
+        {
+          "destination": "js/theme-tokens.js",
+          "format": "javascript/esm",
+          "filter": "jsFilter"
+        }
+      ]
+    }
+  }
+}

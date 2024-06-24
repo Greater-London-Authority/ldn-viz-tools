@@ -2,6 +2,7 @@
 
 const defaultTheme = require('tailwindcss/defaultTheme'); // eslint-disable-line
 const ldnColors = require('./colors.json'); // eslint-disable-line
+const newLdnColors = require('./styles/tw-extend/color'); // eslint-disable-line
 const svgToDataUri = require('mini-svg-data-uri'); // eslint-disable-line
 const plugin = require('tailwindcss/plugin'); // eslint-disable-line
 
@@ -10,9 +11,9 @@ const config = {
   darkMode: 'class',
   theme: {
     extend: {
-      colors: ldnColors,
+      colors: { ...ldnColors, ...newLdnColors },
       fontFamily: {
-        sans: ['"Roboto"', ...defaultTheme.fontFamily.sans]
+        sans: ['"Inter"', ...defaultTheme.fontFamily.sans]
       }
     }
   },
