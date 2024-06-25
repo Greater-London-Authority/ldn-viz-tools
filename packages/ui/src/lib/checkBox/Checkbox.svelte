@@ -118,7 +118,7 @@
 		}
 
 		.form-checkbox:disabled {
-			@apply border-core-grey-300 cursor-not-allowed;
+			@apply border-color-input-border-disabled cursor-not-allowed;
 		}
 	</style>
 {/if}
