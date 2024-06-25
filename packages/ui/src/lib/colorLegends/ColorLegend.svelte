@@ -201,7 +201,12 @@
 	}
 </script>
 
-<svg width="100%" viewBox="0  0 {width} {height}" style="overflow: visible; display: block;">
+<svg
+	width="100%"
+	viewBox="0  0 {width} {height}"
+	style="overflow: visible; display: block;"
+	class="text-color-text-primary"
+>
 	{#if !color}
 		<text>Loading...</text>
 	{:else if color.interpolate}
