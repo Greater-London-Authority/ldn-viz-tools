@@ -149,7 +149,7 @@
 	}
 </script>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 text-color-text-primary">
 	<div class="flex flex-col gap-1 w-96">
 		<HelpText>Merge selected values</HelpText>
 
@@ -171,7 +171,7 @@
 		<HelpText>Or drag a value to the drop-zone below.</HelpText>
 
 		<div
-			class="border-core-green-600 border-2 black p-2 flex items-center"
+			class="border-color-ui-positive border-2 p-2 flex items-center"
 			on:dragover={(ev) => dragOver(ev, newGroupName)}
 			on:dragleave={(ev) => dragLeave()}
 			on:dragenter={(ev) => ev.preventDefault()}
@@ -184,7 +184,7 @@
 	</div>
 
 	<div class="flex flex-col gap-1 w-96">
-		<span class="font-bold">Un-merged values:</span>
+		<span class="font-semibold text-color-input-label">Un-merged values:</span>
 		<ul
 			class="list-none"
 			on:dragover={(ev) => dragOver(ev, '')}
@@ -195,7 +195,7 @@
 		>
 			{#each groups.ungrouped as val}
 				<li
-					class="pl-2 cursor-grab hover:bg-core-blue-500 hover:p-1"
+					class="pl-2 cursor-grab hover:bg-color-input-background-hover"
 					draggable="true"
 					data-id={val}
 					on:dragstart={(ev) => dragStart(ev, '')}
@@ -238,7 +238,7 @@
 						<li
 							data-id={val}
 							draggable="true"
-							class="cursor-grab hover:bg-core-blue-500 hover:p-1"
+							class="cursor-grab hover:bg-color-input-background-hover"
 							on:dragstart={(ev) => dragStart(ev, groupName)}
 						>
 							{val}
@@ -259,7 +259,6 @@
 
 <style>
 	.currentDropTarget {
-		@apply border-2 border-dashed border-core-blue-600;
-		@apply pb-4;
+		@apply border-2 border-dashed border-color-action-primary-active;
 	}
 </style>
