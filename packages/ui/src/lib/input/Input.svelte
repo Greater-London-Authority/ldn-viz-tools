@@ -145,12 +145,8 @@
 
 	$: inputClasses = classNames(
 		'm-0',
-		error ? 'border-core-red-400 dark:border-core-red-400' : '',
+		error ? 'border-color-input-border-error' : '',
 		$$restProps.disabled ? 'cursor-not-allowed ' : '',
-		'dark:bg-core-grey-600',
-		'dark:text-white',
-		'placeholder-core-grey-400',
-		'dark:placeholder-core-grey-300',
 		'form-input'
 	);
 </script>
