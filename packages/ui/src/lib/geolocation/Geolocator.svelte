@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { Button, Spinner } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { onMount } from 'svelte';
 	import TargetIcon from './TargetIcon.svelte';
 
 	import type {
 		GeolocationCoords,
-		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnGeolocationSearchResult
 	} from './types';
 
 	export let onLocationFound: OnGeolocationSearchResult | undefined;
@@ -129,7 +129,7 @@
 
 <div class="pointer-events-auto w-10 h-10">
 	{#if !searchPermitted && !allowsPermPrompt}
-		<div class="!bg-core-grey-800 w-10 h-10 p-1">
+		<div class="!bg-color-input-background w-10 h-10 p-1">
 			<TargetIcon
 				disabled
 				class="w-8 h-8 p-0.5 stroke-core-grey-400"
@@ -137,7 +137,7 @@
 			/>
 		</div>
 	{:else if isSearching}
-		<div class="!bg-core-grey-800 w-10 h-10 p-1">
+		<div class="!bg-color-input-background w-10 h-10 p-1">
 			<Spinner
 				title="Searching for location..."
 				alt="Spinning wheel indicating that location search is in progress"
@@ -151,10 +151,9 @@
 			title="Clear location marker"
 			role="search"
 			aria-label="Clear location"
-			class="!bg-core-grey-800"
 			on:click={handleClick}
 		>
-			<Icon src={XMark} class="w-8 h-8 p-0.5 stroke-white" />
+			<Icon src={XMark} class="w-8 h-8 p-0.5" />
 		</Button>
 	{:else}
 		<Button
@@ -163,10 +162,9 @@
 			title="Find my location"
 			role="search"
 			aria-label="Find my location"
-			class="!bg-core-grey-800"
 			on:click={handleClick}
 		>
-			<TargetIcon class="w-8 h-8 p-0.5 stroke-white" />
+			<TargetIcon class="w-8 h-8 p-0.5" />
 		</Button>
 	{/if}
 </div>
