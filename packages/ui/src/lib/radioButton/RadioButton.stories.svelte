@@ -50,7 +50,7 @@
 
 <Story name="Single RadioButton">
 	<RadioButton bind:selectedId label="Foo" id="foo" name="isolated" />
-	<div class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic space-y-2">
+	<div class="mt-8 text-color-text-secondary space-y-2">
 		<p>selectedId: {selectedId}</p>
 		<p>Checked: {!!selectedId}</p>
 	</div>
@@ -58,7 +58,7 @@
 
 <Story name="Single RadioButton (disabled)">
 	<RadioButton bind:selectedId label="Foo" id="foo" name="isolated" disabled />
-	<div class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic space-y-2">
+	<div class="mt-8 text-color-text-secondary space-y-2">
 		<p>selectedId: {selectedId}</p>
 		<p>Checked: {!!selectedId}</p>
 	</div>
@@ -66,7 +66,7 @@
 
 <Story name="Single Colored RadioButton">
 	<RadioButton color="#008D48" bind:selectedId label="Foo" id="foo" name="isolated" />
-	<div class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic space-y-2">
+	<div class="mt-8 text-color-text-secondary space-y-2">
 		<p>selectedId: {selectedId}</p>
 		<p>Checked: {!!selectedId}</p>
 	</div>
@@ -74,7 +74,7 @@
 
 <Story name="Single Colored RadioButton (disabled)">
 	<RadioButton color="#008D48" bind:selectedId label="Foo" id="foo" name="isolated" disabled />
-	<div class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic space-y-2">
+	<div class="mt-8 text-color-text-secondary space-y-2">
 		<p>selectedId: {selectedId}</p>
 		<p>Checked: {!!selectedId}</p>
 	</div>
@@ -90,5 +90,5 @@
 	<RadioButton color="#00AEEF" label="Foo" id="foo" name="group1" bind:selectedId />
 	<RadioButton color="#008D48" label="Bar" id="bar" name="group1" bind:selectedId />
 	<RadioButton color="#9E0059" label="Baz" id="baz" name="group1" bind:selectedId />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
