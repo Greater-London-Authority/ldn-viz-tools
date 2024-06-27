@@ -81,7 +81,7 @@
 </Story>
 
 <Story name="Multiple RadioButtons not in group">
-	<p class="my-8 text-core-grey-500 dark:text-core-grey-200">
+	<p class="my-8 text-color-text-secondary">
 		The Radio button is intended for use when only one option can be selected at a time. For this
 		behaviour to work correctly for a set of <code>Radio</code> components, assign them the same
 		<code>name</code> attribute, and bind their <code>selectedID</code> prop to the same variable.

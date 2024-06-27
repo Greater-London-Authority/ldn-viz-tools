@@ -167,7 +167,8 @@
 				warning: 'bg-transparent text-color-action-warning hover:text-color-action-warning-hover'
 			},
 			secondary: {
-				default: 'bg-transparent text-color-action-text-secondary hover:text-core-grey-300',
+				default:
+					'bg-transparent text-color-action-text-secondary hover:text-color-action-secondary-hover',
 				success: 'bg-transparent text-color-action-positive hover:text-color-action-positive-hover',
 				error: 'bg-transparent text-color-action-negarive hover:text-color-action-negative-hover',
 				warning: 'bg-transparent text-color-action-warning hover:text-color-action-warning-hover'

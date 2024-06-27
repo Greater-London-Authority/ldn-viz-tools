@@ -102,7 +102,9 @@
 </Story>
 
 <Story name="With class prop">
-	<Button class="text-core-darkPink-500 border-core-pink-700 bg-yellow-500">
+	<Button
+		class="text-color-palette-pink-100 border-2 border-color-palette-pink-700 bg-color-palette-yellow-500"
+	>
 		Custom classes applied
 	</Button>
 </Story>

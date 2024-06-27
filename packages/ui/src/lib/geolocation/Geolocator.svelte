@@ -132,7 +132,7 @@
 		<div class="!bg-color-input-background w-10 h-10 p-1">
 			<TargetIcon
 				disabled
-				class="w-8 h-8 p-0.5 stroke-core-grey-400"
+				class="w-8 h-8 p-0.5 text-color-action-disabled"
 				title="Please enable browser geolocation permissions"
 			/>
 		</div>

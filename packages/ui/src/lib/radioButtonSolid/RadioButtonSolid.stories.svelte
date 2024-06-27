@@ -27,7 +27,7 @@
 
 <Story name="RadioGroup">
 	<RadioButtonGroupSolid options={optionsForGroup} name="station-type" bind:selectedId />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="RadioGroup with Icons above">
@@ -45,7 +45,7 @@
 			Plane
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="RadioGroup with Icons below">
@@ -63,7 +63,7 @@
 			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mt-1" aria-hidden="true" />
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="With 2 options">
@@ -77,7 +77,7 @@
 			Train
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="With 4 options">
@@ -99,5 +99,5 @@
 			This_label_is_far_too_long
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>

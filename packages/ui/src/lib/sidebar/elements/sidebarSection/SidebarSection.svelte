@@ -14,7 +14,7 @@
 
 <section>
 	<div
-		class="border-b border-core-grey-600 space-y-2 pb-2 text-sm bg-color-container-background-level-1 text-color-text-primary"
+		class="border-b border-color-border-secondary space-y-2 pb-2 text-sm bg-color-container-background-level-1 text-color-text-primary"
 	>
 		<SidebarSectionTitle>{title}</SidebarSectionTitle>
 		<!-- The content to be displayed inside this section. -->
