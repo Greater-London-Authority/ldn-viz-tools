@@ -19,7 +19,8 @@
 	export let optional = false;
 
 	$: descriptionClass = classNames(
-		error ? 'text-color-input-label-error' : '',
+		error ? '!text-color-input-label-error' : '',
+		disabled ? 'text-color-input-label-disabled' : '',
 		descriptionAlignment === 'left'
 			? 'text-color-input-label-secondary'
 			: 'ml-auto text-color-input-label-secondary',
@@ -29,8 +30,7 @@
 	$: labelClasses = classNames(
 		error ? 'text-color-input-label-error' : '',
 		disabled ? 'text-color-input-label-disabled' : '',
-		'form-label',
-		'font-semibold'
+		'form-label'
 	);
 </script>
 
