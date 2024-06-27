@@ -154,7 +154,7 @@
 		<HelpText>Merge selected values</HelpText>
 
 		<div class="flex gap-1">
-			<label for="category-name">New name:</label>
+			<label for="category-name" class="form-label">New name:</label>
 			<input id="category-name" class="form-input h-5 w-36" bind:value={catName} />
 			<Button
 				disabled={!catName}
