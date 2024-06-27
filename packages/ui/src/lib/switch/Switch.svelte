@@ -46,7 +46,7 @@
 
 <div class="flex items-center">
 	<label
-		class="pr-4 leading-none text-color-input-label"
+		class="form-label pr-4 leading-none text-color-input-label"
 		for="airplane-mode"
 		id="airplane-mode-label"
 	>
