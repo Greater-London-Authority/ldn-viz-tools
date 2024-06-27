@@ -23,12 +23,12 @@
 	export let items: { [key: string]: any }[];
 
 	/**
-	 * Name of the field of entries in `items` that should be used as the label.
+	 * Name of the field of entries in `items` that should be used as the *label*.
 	 */
 	export let itemLabelField = 'label';
 
 	/**
-	 * `id` of selected item.
+	 * Name of the field of entries in `items` that should be used as the *value* recorded in `justValue`.
 	 */
 	export let itemIdField = 'value';
 
