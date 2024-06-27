@@ -25,7 +25,7 @@
 	/**
 	 * Name of the field of entries in `items` that should be used as the label.
 	 */
-	 export let itemLabelField = 'label';
+	export let itemLabelField = 'label';
 
 	/**
 	 * `id` of selected item.
@@ -35,8 +35,7 @@
 	/**
 	 * if `true`, then multiple items can be selected.
 	 */
-	 export let multiple = false;
-
+	export let multiple = false;
 
 	/**
 	 * Array containing the entries of `items` array that are currently selected. An array of just values is available as `justValues`.
@@ -46,7 +45,7 @@
 	/**
 	 * array containing the `value`s of selected items; unlike the prop exposed by the `svelte-select` component it is writable
 	 */
-	export let justValue: any;
+	export let justValue: any = undefined;
 
 	/**
 	 * The `id` of the `<input>` element: defaults to a randomly-generated value.
@@ -74,9 +73,7 @@
 	 */
 	export let error = '';
 
-
 	// svelte-select options
-
 
 	/**
 	 * if `false`, there is a cross-shaped symbol on each selected item to un-select it; if `true`, there is no cross symbol, and clicking anywhere on item un-selects it.
