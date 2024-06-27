@@ -1,5 +1,6 @@
-// const StyleDictionary = require('style-dictionary');
-const StyleDictionary = require('style-dictionary-utils');
+// import StyleDictionary from 'style-dictionary'
+import StyleDictionary from 'style-dictionary-utils';
+
 // This function traverses and replaces oldStr with newStr in the object
 const traverseAndReplace = (obj, oldStr, newStr) => {
   if (typeof obj === 'string') {
@@ -8,11 +9,9 @@ const traverseAndReplace = (obj, oldStr, newStr) => {
     return obj.map((item) => traverseAndReplace(item, oldStr, newStr));
   } else if (typeof obj === 'object' && obj !== null) {
     const result = {};
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        result[key] = traverseAndReplace(obj[key], oldStr, newStr);
-      }
-    }
+    Object.keys(obj).forEach((key) => {
+      result[key] = traverseAndReplace(obj[key], oldStr, newStr);
+    });
     return result;
   } else {
     return obj;
@@ -31,11 +30,9 @@ const replaceStringInMode = (obj, mode, oldStr, newStr) => {
   }
 
   // Recursively apply the function to all keys of the object
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      obj[key] = replaceStringInMode(obj[key], mode, oldStr, newStr);
-    }
-  }
+  Object.keys(obj).forEach((key) => {
+    obj[key] = replaceStringInMode(obj[key], mode, oldStr, newStr);
+  });
 
   return obj;
 };
@@ -51,12 +48,10 @@ const renameKeysDeep = (obj, keyMap) => {
   }
 
   const renamedObj = {};
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const newKey = keyMap[key] || key;
-      renamedObj[newKey] = renameKeysDeep(obj[key], keyMap);
-    }
-  }
+  Object.keys(obj).forEach((key) => {
+    const newKey = keyMap[key] || key;
+    renamedObj[newKey] = renameKeysDeep(obj[key], keyMap);
+  });
   return renamedObj;
 };
 
@@ -239,7 +234,7 @@ StyleDictionary.registerFormat({
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
-const StyleDictionaryExtended = StyleDictionary.extend(__dirname + '/config.json');
+const StyleDictionaryExtended = StyleDictionary.extend('./config.json');
 
 // FINALLY, BUILD ALL THE PLATFORMS
 StyleDictionaryExtended.buildAllPlatforms();

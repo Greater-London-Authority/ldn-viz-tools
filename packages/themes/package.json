@@ -1,6 +1,7 @@
 {
   "name": "@ldn-viz/themes",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "lint": "prettier --check . && eslint . && publint",
     "fmt": "prettier --check . --write",
