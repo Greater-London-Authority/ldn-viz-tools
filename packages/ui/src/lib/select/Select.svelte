@@ -22,6 +22,35 @@
 	 */
 	export let items: { [key: string]: any }[];
 
+	/**
+	 * Name of the field of entries in `items` that should be used as the label.
+	 */
+	 export let labelField = 'label';
+
+	/**
+	 * `id` of selected item.
+	 */
+	export let itemId = 'value';
+
+	/**
+	 * if `true`, then multiple items can be selected.
+	 */
+	 export let multiple = false;
+
+
+	/**
+	 * Array containing the entries of `items` array that are currently selected. An array of just values is available as `justValues`.
+	 */
+	export let value: any = null;
+
+	/**
+	 * array containing the `value`s of selected items; unlike the prop exposed by the `svelte-select` component it is writable
+	 */
+	export let justValue: any;
+
+	/**
+	 * The `id` of the `<input>` element: defaults to a randomly-generated value.
+	 */
 	export let id = randomId();
 
 	/**
@@ -45,17 +74,9 @@
 	 */
 	export let error = '';
 
-	/**
-	 * Name of the field of entries in `items` that should be used as the label.
-	 */
-	export let labelField = 'label';
 
 	// svelte-select options
 
-	/**
-	 * if `true`, then multiple items can be selected.
-	 */
-	export let multiple = false;
 
 	/**
 	 * if `false`, there is a cross-shaped symbol on each selected item to un-select it; if `true`, there is no cross symbol, and clicking anywhere on item un-selects it.
@@ -66,11 +87,6 @@
 	 * if `true` element has focus.
 	 */
 	export let focused = false;
-
-	/**
-	 * Array containing the entries of `items` array that are currently selected. An array of just values is available as `justValues`.
-	 */
-	export let value: any = null;
 
 	/**
 	 * text used to filter `items`
@@ -91,11 +107,6 @@
 	 * determines whether header items in `items` are selectable.
 	 */
 	export let groupHeaderSelectable = false;
-
-	/**
-	 * `id` of selected item.
-	 */
-	export let itemId = 'value';
 
 	/**
 	 * function that can be used to asynchronously load items.
@@ -146,7 +157,6 @@
 	 */
 	export let hideEmptyState = false;
 
-
 	/**
 	 * if `false` will ignore width of select
 	 */
@@ -155,11 +165,6 @@
 	export let listOffset = 5;
 
 	export let floatingConfig = {};
-
-	/**
-	 * array containing the `value`s of selected items; unlike the prop exposed by the `svelte-select` component it is writable
-	 */
-	export let justValue: any;
 
 	// respond to external change in justValue
 	const applyChangeFromjustValue = (newjustValue: any) => {
