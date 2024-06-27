@@ -30,7 +30,7 @@
 	/**
 	 * Name of the field of entries in `items` that should be used as the *value* recorded in `justValue`.
 	 */
-	export let itemIdField = 'value';
+	export let itemValueField = 'value';
 
 	/**
 	 * if `true`, then multiple items can be selected.
@@ -165,15 +165,15 @@
 
 	// respond to external change in justValue
 	const applyChangeFromjustValue = (newjustValue: any) => {
-		if (!value || newjustValue != value[itemIdField]) {
-			value = items.find((f) => f[itemIdField] === newjustValue);
+		if (!value || newjustValue != value[itemValueField]) {
+			value = items.find((f) => f[itemValueField] === newjustValue);
 		}
 	};
 	$: applyChangeFromjustValue(justValue);
 
 	// respond to changes in selection
 	const updatejustValueFromSelection = (newValue: { [key: string]: any }) => {
-		const newjustValue = newValue && newValue[itemIdField];
+		const newjustValue = newValue && newValue[itemValueField];
 		if (justValue !== newjustValue) {
 			justValue = newjustValue;
 		}
@@ -198,7 +198,7 @@
 			{groupBy}
 			{groupFilter}
 			{groupHeaderSelectable}
-			itemId={itemIdField}
+			itemId={itemValueField}
 			{loadOptions}
 			hasError={!!error}
 			{required}
