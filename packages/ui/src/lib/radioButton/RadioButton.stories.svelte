@@ -31,7 +31,7 @@
 			}
 		},
 		args: {
-			label: 'Label for Checkbox'
+			label: 'Label for Radio'
 		}
 	};
 </script>
