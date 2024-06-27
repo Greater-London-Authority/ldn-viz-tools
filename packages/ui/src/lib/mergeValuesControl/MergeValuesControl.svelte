@@ -134,10 +134,13 @@
 </script>
 
 <div class="flex flex-col gap-4">
-	<HelpText>Drag and drop to assign values to categories. Click on category name to edit.</HelpText>
+	<HelpText>
+		Drag and drop to assign values to categories; not all values need to be assigned to a category. 
+		Click on category name to edit.
+	</HelpText>
 
 	<div class="flex flex-col gap-1 w-96">
-		<span class="font-bold">Un-merged values:</span>
+		<span class="font-bold">Values not assigned to a category:</span>
 		<ul
 			class="list-none"
 			on:dragover={(ev) => dragOver(ev, '')}
@@ -198,7 +201,7 @@
 							on:click={() => deleteCat(groupName)}
 							variant="text"
 							size="sm"
-							title="Click to delete this category, and return values to 'Un-merged values' list"
+							title="Click to delete this category."
 						>
 							<Icon src={Trash} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
 						</Button>
