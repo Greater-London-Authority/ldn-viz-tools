@@ -53,16 +53,6 @@
 	// svelte-select options
 
 	/**
-	 * ???
-	 */
-	export let container: any = undefined;
-
-	/**
-	 * ???
-	 */
-	export let input: any = undefined;
-
-	/**
 	 * if `true`, then multiple items can be selected.
 	 */
 	export let multiple = false;
@@ -113,16 +103,6 @@
 	export let loadOptions: any = undefined;
 
 	/**
-	 * inline styles to be added to container.
-	 */
-	export let containerStyles = '';
-
-	/**
-	 * ???
-	 */
-	export let filterSelectedItems = true;
-
-	/**
 	 * determines whether field is required.
 	 */
 	export let required = false;
@@ -138,11 +118,6 @@
 	 * if `false` then filtering of options list is disabled.
 	 */
 	export let searchable = true;
-
-	/**
-	 * inline styles to be applied to input.
-	 */
-	export let inputStyles = '';
 
 	/**
 	 * determines whether selected values can be cleared.
@@ -170,19 +145,15 @@
 	 * if `true`, then hide list of options when it is empty.
 	 */
 	export let hideEmptyState = false;
-	export let inputAttributes = {};
+
 
 	/**
 	 * if `false` will ignore width of select
 	 */
 	export let listAutoWidth = true;
 
-	/**
-	 * determines whether downwards pointing chevron is displayed in the right of the control
-	 */
-	export let showChevron = true;
 	export let listOffset = 5;
-	export let hoverItemIndex = 0;
+
 	export let floatingConfig = {};
 
 	/**
@@ -215,8 +186,6 @@
 			label={labelField}
 			class="form-select"
 			{items}
-			{container}
-			{input}
 			{multiple}
 			{multiFullItemClearable}
 			{focused}
@@ -229,25 +198,19 @@
 			{groupHeaderSelectable}
 			{itemId}
 			{loadOptions}
-			{containerStyles}
 			hasError={!!error}
-			{filterSelectedItems}
 			{required}
 			{closeListOnChange}
 			{createGroupHeaderItem}
 			{searchable}
-			{inputStyles}
 			{clearable}
 			{loading}
 			{listOpen}
 			{debounce}
 			{debounceWait}
 			{hideEmptyState}
-			{inputAttributes}
 			{listAutoWidth}
-			{showChevron}
 			{listOffset}
-			{hoverItemIndex}
 			{floatingConfig}
 			{disabled}
 			{placeholder}
