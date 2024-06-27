@@ -135,7 +135,7 @@
 
 <div class="flex flex-col gap-4">
 	<HelpText>
-		Drag and drop to assign values to categories; not all values need to be assigned to a category. 
+		Drag and drop to assign values to categories; not all values need to be assigned to a category.
 		Click on category name to edit.
 	</HelpText>
 
