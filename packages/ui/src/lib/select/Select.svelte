@@ -188,7 +188,7 @@
 	/**
 	 * array containing the `value`s of selected items; unlike the prop exposed by the `svelte-select` component it is writable
 	 */
-	export let justValue: any;
+	export let justValue: any = undefined;
 
 	// respond to external change in justValue
 	const applyChangeFromjustValue = (newjustValue: any) => {
@@ -264,7 +264,7 @@
 	</div>
 </InputWrapper>
 
-{#if !!true}
+{#if true}
 	<style>
 		:root {
 			--bg-color-dark: #343434;

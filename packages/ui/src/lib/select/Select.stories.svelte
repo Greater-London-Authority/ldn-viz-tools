@@ -19,7 +19,7 @@
 		{ label: 'Three', value: 3 }
 	];
 
-	let justValue: number;
+	let justValue: number | null;
 	let error = '';
 </script>
 
