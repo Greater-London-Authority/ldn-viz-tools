@@ -103,7 +103,7 @@
 			on:change={() => console.log('Selection changed!')}
 		/>
 
-		<span class="mt-4 text-core-grey-700 dark:text-core-grey-200 block">
+		<span class="mt-4 text-color-text-secondary block">
 			Value is: {JSON.stringify(value)}
 		</span>
 	</div>
@@ -159,10 +159,8 @@
 
 <Story name="Setting and clearing error message">
 	<div class="w-[500px] flex flex-col gap-2">
-		<div>
-			<Button on:click={() => (error = 'OH NO')}>Set error</Button>
-			<Button on:click={() => (error = '')}>Clear error</Button>
-		</div>
+		<Button on:click={() => (error = 'OH NO')}>Set error</Button>
+		<Button on:click={() => (error = '')}>Clear error</Button>
 
 		<span><code>error is:</code> {error}</span>
 
