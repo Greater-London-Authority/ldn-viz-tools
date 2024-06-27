@@ -18,19 +18,19 @@
 	 * * `value` (string) - the value that is stored in `justValue` if this item is selected
 	 * * `label` (string) - the text displayed in the drop-down list of options
 	 *
-	 * Note that a different field can be used in place of `label`, if this name is provided as the `labelField` prop.
+	 * Note that a different field can be used in place of `label`, if this name is provided as the `itemLabelField` prop.
 	 */
 	export let items: { [key: string]: any }[];
 
 	/**
 	 * Name of the field of entries in `items` that should be used as the label.
 	 */
-	 export let labelField = 'label';
+	 export let itemLabelField = 'label';
 
 	/**
 	 * `id` of selected item.
 	 */
-	export let itemId = 'value';
+	export let itemIdField = 'value';
 
 	/**
 	 * if `true`, then multiple items can be selected.
@@ -168,15 +168,15 @@
 
 	// respond to external change in justValue
 	const applyChangeFromjustValue = (newjustValue: any) => {
-		if (!value || newjustValue != value[itemId]) {
-			value = items.find((f) => f[itemId] === newjustValue);
+		if (!value || newjustValue != value[itemIdField]) {
+			value = items.find((f) => f[itemIdField] === newjustValue);
 		}
 	};
 	$: applyChangeFromjustValue(justValue);
 
 	// respond to changes in selection
 	const updatejustValueFromSelection = (newValue: { [key: string]: any }) => {
-		const newjustValue = newValue && newValue[itemId];
+		const newjustValue = newValue && newValue[itemIdField];
 		if (justValue !== newjustValue) {
 			justValue = newjustValue;
 		}
@@ -188,7 +188,7 @@
 	<div>
 		<SvelteSelect
 			{name}
-			label={labelField}
+			label={itemLabelField}
 			class="form-select"
 			{items}
 			{multiple}
@@ -201,7 +201,7 @@
 			{groupBy}
 			{groupFilter}
 			{groupHeaderSelectable}
-			{itemId}
+			itemId={itemIdField}
 			{loadOptions}
 			hasError={!!error}
 			{required}
