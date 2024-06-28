@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 3.0.1
+
+### Patch Changes
+
+- f9bdc5b: FIXED: include `@turf/turf` as a dependency (rather than devDependency) of `@ldn-viz/maps`, to resolve import error when package is used
+
 ## 3.0.0
 
 ### Major Changes
