@@ -83,14 +83,14 @@
 					$$slots.tabs && placement === 'left' ? 'ml-[80px]' : ''
 				)}
 			>
-				{#if $$slots.header}
-					<div class="p-6 pb-0">
-						<!-- typically contains a `<SidebarHeader>` -->
-						<slot name="header" />
-					</div>
-				{/if}
-
 				{#if $$slots.unstyledContent}
+					{#if $$slots.header}
+						<div class="pb-4">
+							<!-- typically contains a `<SidebarHeader>` -->
+							<slot name="header" />
+						</div>
+					{/if}
+
 					<!-- can be used to display completely unstyled content - usually not required-->
 					<slot name="unstyledContent" />
 
@@ -98,7 +98,14 @@
 					<slot name="footer" />
 				{:else}
 					<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
-						{#if $$slots.sections}
+						{#if $$slots.header}
+							<div class="pb-4">
+								<!-- typically contains a `<SidebarHeader>` -->
+								<slot name="header" />
+							</div>
+						{/if}
+
+						{#if $$slots.sections || $$slots.header}
 							<div class="space-y-4">
 								<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
 								<slot name="sections" />
