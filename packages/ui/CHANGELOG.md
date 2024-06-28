@@ -1,5 +1,30 @@
 # ldn-viz-tools-ui
 
+## 9.0.0
+
+### Major Changes
+
+- ffffac0: CHANGED: rename the `ColorLegendOrdinalHorizontal` component to `ColorLegendOrdinalChips`, and allos `orientation` to be set to `vertical`
+
+### Minor Changes
+
+- ae07a91: FIXED: fix highlighting in `NavLink` component.
+- bcf8773: FIXED: fix location searching on mobile devices in `Geolocator` component.
+  ADDED: add modal popup when `Geolocator` component error occurs.
+  ADDED: add reactive props to `Geolocator` component that communicate its changing state.
+- 129cf32: CHANGED: increased z-index for geolocation suggestions so it sits above sidebar.
+- 628ae2c: ADDED - add a `MergeValuesControl` that allows users to define how different values of a categorical variable should be merged into new categories
+- e4fc1dc: CHANGED: make text in `SidebarTabLabel` component non-selectable.
+- 8d57614: ADDED: added `Popover` component as an alternative to `Modal` and `Tooltip`
+- 7ded8e8: ADDED: add a new `<Switch>` component
+- 12f8b2a: CHANGED: unfix `SidebarHeader` component so it scrolls with other sidebar content.
+
+### Patch Changes
+
+- c0814a6: CHANGED: Fix an issue in `<AnalyticsAndCookieConsent>` where an application embedded in a non-london.gov.uk website wouldn't load cookie consent properly.
+  CHANGED: Move general comments in `<AnalyticsAndCookieConsent>` to Svelte module script as comments in head tag scripts are not stripped by the Svelte compiler.
+  CHANGED: Optimised code in `<AnalyticsAndCookieConsent>` to be more concise and readable.
+
 ## 8.0.0
 
 ### Major Changes
