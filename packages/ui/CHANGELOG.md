@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 9.0.1
+
+### Patch Changes
+
+- 6493853: FIXED: include `@turf/turf` as a dependency (rather than devDependency) of `@ldn-viz/maps`, to resolve import error when package is used
+
 ## 9.0.0
 
 ### Major Changes
