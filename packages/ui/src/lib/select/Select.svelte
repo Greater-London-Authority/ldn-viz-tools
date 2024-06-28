@@ -18,10 +18,38 @@
 	 * * `value` (string) - the value that is stored in `justValue` if this item is selected
 	 * * `label` (string) - the text displayed in the drop-down list of options
 	 *
-	 * Note that a different field can be used in place of `label`, if this name is provided as the `labelField` prop.
+	 * Note that a different field can be used in place of `label`, if this name is provided as the `itemLabelField` prop.
 	 */
 	export let items: { [key: string]: any }[];
 
+	/**
+	 * Name of the field of entries in `items` that should be used as the *label*.
+	 */
+	export let itemLabelField = 'label';
+
+	/**
+	 * Name of the field of entries in `items` that should be used as the *value* recorded in `justValue`.
+	 */
+	export let itemValueField = 'value';
+
+	/**
+	 * if `true`, then multiple items can be selected.
+	 */
+	export let multiple = false;
+
+	/**
+	 * Array containing the entries of `items` array that are currently selected. An array of just values is available as `justValues`.
+	 */
+	export let value: any = null;
+
+	/**
+	 * array containing the `value`s of selected items; unlike the prop exposed by the `svelte-select` component it is writable
+	 */
+	export let justValue: any = undefined;
+
+	/**
+	 * The `id` of the `<input>` element: defaults to a randomly-generated value.
+	 */
 	export let id = randomId();
 
 	/**
@@ -45,27 +73,7 @@
 	 */
 	export let error = '';
 
-	/**
-	 * Name of the field of entries in `items` that should be used as the label.
-	 */
-	export let labelField = 'label';
-
 	// svelte-select options
-
-	/**
-	 * ???
-	 */
-	export let container: any = undefined;
-
-	/**
-	 * ???
-	 */
-	export let input: any = undefined;
-
-	/**
-	 * if `true`, then multiple items can be selected.
-	 */
-	export let multiple = false;
 
 	/**
 	 * if `false`, there is a cross-shaped symbol on each selected item to un-select it; if `true`, there is no cross symbol, and clicking anywhere on item un-selects it.
@@ -76,11 +84,6 @@
 	 * if `true` element has focus.
 	 */
 	export let focused = false;
-
-	/**
-	 * Array containing the entries of `items` array that are currently selected. An array of just values is available as `justValues`.
-	 */
-	export let value: any = null;
 
 	/**
 	 * text used to filter `items`
@@ -103,24 +106,9 @@
 	export let groupHeaderSelectable = false;
 
 	/**
-	 * `id` of selected item.
-	 */
-	export let itemId = 'value';
-
-	/**
 	 * function that can be used to asynchronously load items.
 	 */
 	export let loadOptions: any = undefined;
-
-	/**
-	 * inline styles to be added to container.
-	 */
-	export let containerStyles = '';
-
-	/**
-	 * ???
-	 */
-	export let filterSelectedItems = true;
 
 	/**
 	 * determines whether field is required.
@@ -138,11 +126,6 @@
 	 * if `false` then filtering of options list is disabled.
 	 */
 	export let searchable = true;
-
-	/**
-	 * inline styles to be applied to input.
-	 */
-	export let inputStyles = '';
 
 	/**
 	 * determines whether selected values can be cleared.
@@ -170,37 +153,27 @@
 	 * if `true`, then hide list of options when it is empty.
 	 */
 	export let hideEmptyState = false;
-	export let inputAttributes = {};
 
 	/**
 	 * if `false` will ignore width of select
 	 */
 	export let listAutoWidth = true;
 
-	/**
-	 * determines whether downwards pointing chevron is displayed in the right of the control
-	 */
-	export let showChevron = true;
 	export let listOffset = 5;
-	export let hoverItemIndex = 0;
-	export let floatingConfig = {};
 
-	/**
-	 * array containing the `value`s of selected items; unlike the prop exposed by the `svelte-select` component it is writable
-	 */
-	export let justValue: any;
+	export let floatingConfig = {};
 
 	// respond to external change in justValue
 	const applyChangeFromjustValue = (newjustValue: any) => {
-		if (!value || newjustValue != value[itemId]) {
-			value = items.find((f) => f[itemId] === newjustValue);
+		if (!value || newjustValue != value[itemValueField]) {
+			value = items.find((f) => f[itemValueField] === newjustValue);
 		}
 	};
 	$: applyChangeFromjustValue(justValue);
 
 	// respond to changes in selection
 	const updatejustValueFromSelection = (newValue: { [key: string]: any }) => {
-		const newjustValue = newValue && newValue[itemId];
+		const newjustValue = newValue && newValue[itemValueField];
 		if (justValue !== newjustValue) {
 			justValue = newjustValue;
 		}
@@ -212,11 +185,9 @@
 	<div>
 		<SvelteSelect
 			{name}
-			label={labelField}
+			label={itemLabelField}
 			class="form-select"
 			{items}
-			{container}
-			{input}
 			{multiple}
 			{multiFullItemClearable}
 			{focused}
@@ -227,27 +198,21 @@
 			{groupBy}
 			{groupFilter}
 			{groupHeaderSelectable}
-			{itemId}
+			itemId={itemValueField}
 			{loadOptions}
-			{containerStyles}
 			hasError={!!error}
-			{filterSelectedItems}
 			{required}
 			{closeListOnChange}
 			{createGroupHeaderItem}
 			{searchable}
-			{inputStyles}
 			{clearable}
 			{loading}
 			{listOpen}
 			{debounce}
 			{debounceWait}
 			{hideEmptyState}
-			{inputAttributes}
 			{listAutoWidth}
-			{showChevron}
 			{listOffset}
-			{hoverItemIndex}
 			{floatingConfig}
 			{disabled}
 			{placeholder}
