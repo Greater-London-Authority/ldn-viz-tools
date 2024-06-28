@@ -5,13 +5,13 @@
 	 *
 	 * Note that user settings and browser implementions of the Geolocation API
 	 * mean only simple usage is cross platform. The problem mostly affects
-	 * the querying and listening of permission changes from the browser.
+	 * the querying of, and listening for changes in, permissions.
 	 *
 	 * @component
 	 */
 
 	import { onMount } from 'svelte';
-	import { Button, Spinner, Modal } from '@ldn-viz/ui';
+	import { Button, Modal, Spinner } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import TargetIcon from './TargetIcon.svelte';
@@ -33,7 +33,7 @@
 	export let onSearchError: OnGeolocationSearchError | undefined;
 
 	/**
-	 * The last found location. This will be reset to null each time a new search
+	 * The last found location. This will be reset to `null` each time a new search
 	 * is started.
 	 */
 	export let location: GeolocationCoords[2] | null = null;
@@ -44,7 +44,7 @@
 	export let isSearching = false;
 
 	/**
-	 * If true, the search button will be replaced by a clear button.
+	 * If `true`, the search button will be replaced by a clear button.
 	 */
 	export let allowClearButton = false;
 
