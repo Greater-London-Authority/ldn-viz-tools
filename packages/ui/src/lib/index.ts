@@ -2,10 +2,10 @@
 export { default as Button } from './button/Button.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
-export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
-export { default as ColorLegendOrdinalHorizontal } from './colorLegends/ColorLegendOrdinalHorizontal.svelte';
+export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOrdinalChips.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
+export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as Header } from './header/Header.svelte';
 export { default as HeaderItem } from './header/HeaderItem.svelte';
@@ -23,11 +23,13 @@ export { default as LogoMayor } from './logos/LogoMayor.svelte';
 export { default as Modal } from './modal/Modal.svelte';
 export { default as NonIdealState } from './nonIdealState/NonIdealState.svelte';
 export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
+export { default as Popover } from './popover/Popover.svelte';
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
 export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as Select } from './select/Select.svelte';
+export { default as Switch } from './switch/Switch.svelte';
 
 export { default as AppShell } from './appShell/AppShell.svelte';
 export * from './appShell/utils/getSettingByScreenWidth';
@@ -58,14 +60,13 @@ export { default as Toaster } from './toaster/Toaster.svelte';
 export * from './toaster/toaster';
 export * from './toaster/types';
 
-export * from './geolocation/types';
+export { default as Geocoder } from './geolocation/Geocoder.svelte';
 export * from './geolocation/GeocoderAdapter';
 export * from './geolocation/GeocoderAdapterList';
-export * from './geolocation/GeocoderAdapterList';
 export * from './geolocation/GeocoderAdapterOSPlaces';
-export { default as Geocoder } from './geolocation/Geocoder.svelte';
-export { default as Geolocator } from './geolocation/Geolocator.svelte';
 export { default as GeocoderSuggestionList } from './geolocation/GeocoderSuggestionList.svelte';
+export { default as Geolocator } from './geolocation/Geolocator.svelte';
+export * from './geolocation/types';
 
 export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCookieConsent.svelte';
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';

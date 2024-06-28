@@ -5,6 +5,7 @@
 	 */
 
 	import Tooltip from '../../../tooltip/Tooltip.svelte';
+	import Popover from '../../../popover/Popover.svelte';
 	import SidebarHintModal from './SidebarHintModal.svelte';
 
 	/**
@@ -52,10 +53,10 @@
 		<slot />
 	</Tooltip>
 {:else if hintType === 'popover'}
-	<Tooltip {hintLabel} hintSize="sm">
+	<Popover {hintLabel}>
 		<!-- The help message. -->
 		<slot />
-	</Tooltip>
+	</Popover>
 {:else if hintType === 'modal'}
 	<SidebarHintModal {hintLabel} {modalTitle} {modalDescription} {modalWidth}>
 		<!-- The help message. -->

@@ -8,7 +8,7 @@ export default create({
 	fontCode: 'monospace',
 
 	brandTitle: 'LDN viz-tools Storybook',
-	brandUrl: 'https://data.london.gov.uk/blog/gla-intelligence-and-analysis-unit/',
+	brandUrl: 'https://greater-london-authority.github.io/ldn-viz-tools/',
 	brandImage: './cilogo.svg',
 	brandTarget: '_self',
 

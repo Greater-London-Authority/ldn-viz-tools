@@ -31,7 +31,7 @@
 	/**
 	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
 	 */
-	export let columnMapping: undefined | { [oldName: string]: string };
+	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 
 	const enforceExtension = (name: string, extension: string) => {
 		return name.toLocaleLowerCase().endsWith(extension) ? name : `name${extension}`;

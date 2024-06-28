@@ -1,1 +1,1 @@
-<div class="font-bold mb-4 text-xl text-core-grey-600 dark:text-white"><slot /></div>
+<div class="font-bold text-xl text-core-grey-800 dark:text-white max-w-prose"><slot /></div>
