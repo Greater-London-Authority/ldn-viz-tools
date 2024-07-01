@@ -1,7 +1,7 @@
 // import StyleDictionary from 'style-dictionary'
 import StyleDictionary from 'style-dictionary-utils';
 
-// This function traverses and replaces oldStr with newStr in the object
+// This function recursively traverses the `obj` object, replacing `oldStr` with `newStr` in any strings that it contains.
 const traverseAndReplace = (obj, oldStr, newStr) => {
   if (typeof obj === 'string') {
     return obj.replace(oldStr, newStr);
