@@ -37,7 +37,7 @@ const replaceStringInMode = (obj, mode, oldStr, newStr) => {
   return obj;
 };
 
-// This function renames keys in the object based on the keyMap
+// This function recursively renames keys in the `obj` object. The `keyMap` object is a mapping from old keys to their replacements; keys that are not in `keyMap` are not renamed. 
 const renameKeysDeep = (obj, keyMap) => {
   if (typeof obj !== 'object' || obj === null) {
     return obj;
