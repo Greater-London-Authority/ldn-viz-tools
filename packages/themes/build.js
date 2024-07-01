@@ -76,13 +76,11 @@ StyleDictionary.registerParser({
         'theme.dark'
       );
 
-      const parsedJsonObj = renameKeysDeep(darkParsed, {
+      return renameKeysDeep(darkParsed, {
         semantic: 'theme',
         'light-mode': 'light',
         'dark-mode': 'dark'
       });
-
-      return parsedJsonObj;
     } catch (error) {
       console.error(error);
     }
