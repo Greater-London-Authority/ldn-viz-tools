@@ -124,14 +124,15 @@ const conditionsJs = [
 ];
 
 const matchesCondition = (token, condition) => {
-  return Object.entries(condition).every(([key, value]) => {
-    if (typeof value === 'object' && value.not) {
-      return !value.not.includes(token.attributes[key]);
+  return Object.entries(condition).every(([field, filter]) => {
+    const val = token.attributes[field];
+    
+    if (typeof filter === 'object' && filter.not) {
+      return !filter.not.includes(val);
     }
-    return token.attributes[key] === value;
+    return filter === val;
   });
 };
-
 const tokenMatchesAnyCondition = (token, conditions) => {
   return conditions.some((condition) => matchesCondition(token, condition));
 };
