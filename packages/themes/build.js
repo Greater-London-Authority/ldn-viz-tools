@@ -65,7 +65,7 @@ StyleDictionary.registerParser({
       const lightParsed = replaceStringInMode(
         jsonObj['variables'],
         'light-mode',
-        'semantic.dark-mode', // Reference to incorrect mode prior to replacement
+        'semantic.dark-mode',
         'theme.light'
       );
 
