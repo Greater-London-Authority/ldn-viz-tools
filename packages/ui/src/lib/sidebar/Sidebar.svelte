@@ -97,7 +97,6 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					<slot name="footer" />
 				{:else}
-
 					<div class="overflow-y-auto flex flex-col h-full pt-6 px-6 text-color-text-primary">
 						{#if $$slots.header}
 							<div class="pb-4">

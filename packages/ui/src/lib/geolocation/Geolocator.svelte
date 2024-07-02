@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	/**
 	 * The `<Geolocator>` component uses the Geolocation API to identify the
 	 * users current location.
@@ -151,7 +150,6 @@
 <div class="pointer-events-auto w-10 h-10">
 	{#if isSearching}
 		<div class="!bg-color-input-background w-10 h-10 p-1">
-
 			<Spinner
 				title="Searching for location..."
 				alt="Spinning wheel indicating that location search is in progress"
@@ -168,7 +166,6 @@
 			on:click={clearSearch}
 		>
 			<Icon src={XMark} class="w-8 h-8 p-0.5" />
-
 		</Button>
 	{:else}
 		<Button
@@ -179,10 +176,7 @@
 			aria-label={errorMessage ? errorMessage : 'Find my location'}
 			on:click={startSearch}
 		>
-			<TargetIcon
-				title={errorMessage ? errorMessage : 'Find my location'}
-				class="w-8 h-8 p-0.5"
-			/>
+			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="w-8 h-8 p-0.5" />
 		</Button>
 	{/if}
 </div>
