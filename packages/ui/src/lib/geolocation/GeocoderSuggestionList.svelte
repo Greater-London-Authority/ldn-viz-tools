@@ -28,7 +28,7 @@
 </script>
 
 <ul
-	class="absolute top-11 left-0 bg-color-input-background text-color-text-primary text-sm w-full shadow-lg"
+	class="absolute top-11 left-0 bg-color-input-background text-color-text-primary text-sm w-full shadow-lg z-40"
 >
 	{#if suggestions.length === 0}
 		<li class="w-full px-2.5 py-1.5">
