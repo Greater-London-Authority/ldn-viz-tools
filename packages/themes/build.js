@@ -173,7 +173,7 @@ const transformString = (str, replace = 'theme', regex = /.*-color/) => {
   return str.replace(regex, replace);
 };
 
-const formatCSSVariable = (token) => {
+const formatCSSVariable = (dictionary) => (token) => {
   let originalName = token.name;
 
   let themedName =
@@ -195,7 +195,7 @@ StyleDictionary.registerFormat({
   name: 'css/variables',
   formatter({ dictionary }) {
     return `${this.options.selector} {
-          ${dictionary.allTokens.map(formatCSSVariable).join('\n')}
+          ${dictionary.allTokens.map(formatCSSVariable(dictionary)).join('\n')}
         }`;
   }
 });
@@ -221,7 +221,9 @@ StyleDictionary.registerFormat({
   name: 'tw/css-variables',
   formatter({ dictionary }) {
     return (
-      'module.exports = ' + `{\n${dictionary.allTokens.map(formatTailwindColor).join(',\n')}\n}`
+      `module.exports = {
+        ${dictionary.allTokens.map(formatTailwindColor).join(',\n')}
+      }`
     );
   }
 });
