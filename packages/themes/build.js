@@ -173,31 +173,32 @@ const transformString = (str, replace = 'theme', regex = /.*-color/) => {
   return str.replace(regex, replace);
 };
 
+
+const formatCSSVariable = (token) => {
+    let originalName = token.name;
+
+    let themedName =
+      token.path[0] === 'global'
+        ? originalName
+        : transformString(originalName, 'theme-', /.*-color-/);
+
+    if (dictionary.usesReference(token.original.value)) {
+      const reference = dictionary.getReferences(token.original.value);
+      const referenceName =
+        reference[0].path[0] === 'global'
+          ? reference[0].name
+          : transformString(reference[0].name);
+      return `  --${themedName}: var(--${referenceName}, ${token.value});`;
+    }
+
+    return `  --${themedName}: ${token.value};`;
+}
+
 StyleDictionary.registerFormat({
   name: 'css/variables',
   formatter({ dictionary }) {
     return `${this.options.selector} {
-          ${dictionary.allTokens
-            .map((token) => {
-              let originalName = token.name;
-
-              let themedName =
-                token.path[0] === 'global'
-                  ? originalName
-                  : transformString(originalName, 'theme-', /.*-color-/);
-
-              if (dictionary.usesReference(token.original.value)) {
-                const reference = dictionary.getReferences(token.original.value);
-                const referenceName =
-                  reference[0].path[0] === 'global'
-                    ? reference[0].name
-                    : transformString(reference[0].name);
-                return `  --${themedName}: var(--${referenceName}, ${token.value});`;
-              }
-
-              return `  --${themedName}: ${token.value};`;
-            })
-            .join('\n')}
+          ${dictionary.allTokens.map(formatCSSVariable).join('\n')}
         }`;
   }
 });
