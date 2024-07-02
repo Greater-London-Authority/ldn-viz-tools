@@ -102,7 +102,6 @@ const conditionsCssLightTheme = [{ category: 'theme', type: 'light' }];
 const conditionsCssDarkTheme = [{ category: 'theme', type: 'dark' }];
 
 const conditionsCssGlobal = [
-  // token.attributes.category === 'global' || token.attributes.category === 'spacing'
   { category: 'global', subitem: { not: ['seed'] } },
   { category: 'spacing' }
 ];
