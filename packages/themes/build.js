@@ -207,25 +207,26 @@ StyleDictionary.registerFormat({
  * Custom format that generates tailwind color config based on css variables
  */
 
+
+const formatTailwindColor = (token) => {
+    let originalName = token.name;
+
+    let themedName =
+      token.path[0] === 'global'
+        ? transformString(originalName, 'global-color')
+        : transformString(originalName, 'theme-', /.*-color-/);
+
+    let transformedName = transformString(originalName, 'color-', /.*-color-/);
+
+    return `  "${transformedName}": "var(--${themedName}, ${token.value})"`;
+}
+
 StyleDictionary.registerFormat({
   name: 'tw/css-variables',
   formatter({ dictionary }) {
     return (
       'module.exports = ' +
-      `{\n${dictionary.allTokens
-        .map((token) => {
-          let originalName = token.name;
-
-          let themedName =
-            token.path[0] === 'global'
-              ? transformString(originalName, 'global-color')
-              : transformString(originalName, 'theme-', /.*-color-/);
-
-          let transformedName = transformString(originalName, 'color-', /.*-color-/);
-
-          return `  "${transformedName}": "var(--${themedName}, ${token.value})"`;
-        })
-        .join(',\n')}\n}`
+      `{\n${dictionary.allTokens.map(formatTailwindColor).join(',\n')}\n}`
     );
   }
 });
