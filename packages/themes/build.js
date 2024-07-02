@@ -37,7 +37,7 @@ const replaceStringInMode = (obj, mode, oldStr, newStr) => {
   return obj;
 };
 
-// This function recursively renames keys in the `obj` object. The `keyMap` object is a mapping from old keys to their replacements; keys that are not in `keyMap` are not renamed. 
+// This function recursively renames keys in the `obj` object. The `keyMap` object is a mapping from old keys to their replacements; keys that are not in `keyMap` are not renamed.
 const renameKeysDeep = (obj, keyMap) => {
   if (typeof obj !== 'object' || obj === null) {
     return obj;
@@ -125,7 +125,7 @@ const conditionsJs = [
 const matchesCondition = (token, condition) => {
   return Object.entries(condition).every(([field, filter]) => {
     const val = token.attributes[field];
-    
+
     if (typeof filter === 'object' && filter.not) {
       return !filter.not.includes(val);
     }
@@ -173,32 +173,29 @@ const transformString = (str, replace = 'theme', regex = /.*-color/) => {
   return str.replace(regex, replace);
 };
 
+const formatCSSVariable = (dictionary) => (token) => {
+  let originalName = token.name;
 
-const formatCSSVariable = (token) => {
-    let originalName = token.name;
+  let themedName =
+    token.path[0] === 'global'
+      ? originalName
+      : transformString(originalName, 'theme-', /.*-color-/);
 
-    let themedName =
-      token.path[0] === 'global'
-        ? originalName
-        : transformString(originalName, 'theme-', /.*-color-/);
+  if (dictionary.usesReference(token.original.value)) {
+    const reference = dictionary.getReferences(token.original.value);
+    const referenceName =
+      reference[0].path[0] === 'global' ? reference[0].name : transformString(reference[0].name);
+    return `  --${themedName}: var(--${referenceName}, ${token.value});`;
+  }
 
-    if (dictionary.usesReference(token.original.value)) {
-      const reference = dictionary.getReferences(token.original.value);
-      const referenceName =
-        reference[0].path[0] === 'global'
-          ? reference[0].name
-          : transformString(reference[0].name);
-      return `  --${themedName}: var(--${referenceName}, ${token.value});`;
-    }
-
-    return `  --${themedName}: ${token.value};`;
-}
+  return `  --${themedName}: ${token.value};`;
+};
 
 StyleDictionary.registerFormat({
   name: 'css/variables',
   formatter({ dictionary }) {
     return `${this.options.selector} {
-          ${dictionary.allTokens.map(formatCSSVariable).join('\n')}
+          ${dictionary.allTokens.map(formatCSSVariable(dictionary)).join('\n')}
         }`;
   }
 });
@@ -207,27 +204,25 @@ StyleDictionary.registerFormat({
  * Custom format that generates tailwind color config based on css variables
  */
 
-
 const formatTailwindColor = (token) => {
-    let originalName = token.name;
+  let originalName = token.name;
 
-    let themedName =
-      token.path[0] === 'global'
-        ? transformString(originalName, 'global-color')
-        : transformString(originalName, 'theme-', /.*-color-/);
+  let themedName =
+    token.path[0] === 'global'
+      ? transformString(originalName, 'global-color')
+      : transformString(originalName, 'theme-', /.*-color-/);
 
-    let transformedName = transformString(originalName, 'color-', /.*-color-/);
+  let transformedName = transformString(originalName, 'color-', /.*-color-/);
 
-    return `  "${transformedName}": "var(--${themedName}, ${token.value})"`;
-}
+  return `  "${transformedName}": "var(--${themedName}, ${token.value})"`;
+};
 
 StyleDictionary.registerFormat({
   name: 'tw/css-variables',
   formatter({ dictionary }) {
-    return (
-      'module.exports = ' +
-      `{\n${dictionary.allTokens.map(formatTailwindColor).join(',\n')}\n}`
-    );
+    return `module.exports = {
+        ${dictionary.allTokens.map(formatTailwindColor).join(',\n')}
+      }`;
   }
 });
 
