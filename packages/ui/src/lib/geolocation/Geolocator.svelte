@@ -10,7 +10,6 @@
 	 * @component
 	 */
 
-	import { onMount } from 'svelte';
 	import { Button, Modal, Spinner } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -18,8 +17,8 @@
 
 	import type {
 		GeolocationCoords,
-		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnGeolocationSearchResult
 	} from './types';
 
 	/**

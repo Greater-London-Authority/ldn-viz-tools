@@ -1,9 +1,14 @@
 /* Write your global styles here, in PostCSS syntax */
+@import '@ldn-viz/themes/styles/global.css';
+@import '@ldn-viz/themes/styles/light.css';
+@import '@ldn-viz/themes/styles/dark.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
-body {
-	@apply dark:bg-core-grey-800;
+body,
+.docs-story {
+	@apply bg-color-container-background-level-0;
 }

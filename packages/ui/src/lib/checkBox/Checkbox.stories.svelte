@@ -64,27 +64,27 @@
 
 <Story name="Single checkbox">
 	<Checkbox bind:checked id="single_id" label="Foo" />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Checked: {checked}</p>
+	<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
 </Story>
 
 <Story name="Single checkbox (disabled)">
 	<Checkbox bind:checked id="disabled_id" label="Foo" disabled />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Checked: {checked}</p>
+	<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
 </Story>
 
 <Story name="Single checkbox with hint">
 	<Checkbox bind:checked id="hint_id" label="Foo" hint="A helpful hint" />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Checked: {checked}</p>
+	<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
 </Story>
 
 <Story name="Single colored checkbox">
 	<Checkbox color="#008D48" bind:checked id="single_id" label="Foo" />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Checked: {checked}</p>
+	<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
 </Story>
 
 <Story name="Single colored checkbox (disabled)">
 	<Checkbox color="#008D48" bind:checked id="disabled_id" label="Foo" disabled />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Checked: {checked}</p>
+	<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
 </Story>
 
 <Story name="Multiple checkboxes not in group">

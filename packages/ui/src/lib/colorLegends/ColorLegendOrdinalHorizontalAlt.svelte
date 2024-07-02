@@ -24,7 +24,7 @@
 </script>
 
 <div class="flex flex-col items-center gap-2">
-	{#if title}<p class="font-bold">{title}</p>{/if}
+	{#if title}<p class="font-semibold">{title}</p>{/if}
 
 	<svg viewBox={`0 0 ${width} ${height + 30}`} class="max-w-3xl">
 		{#each scale.domain() as val, i}

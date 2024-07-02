@@ -4,18 +4,9 @@
 	 * It is used by the `<SidebarSection>` component, which also groups together the content of a section in a `<div>`.
 	 * @component
 	 */
-
-	import { classNames } from '../../../../utils/classNames';
-
-	const darkThemeClasses = 'dark:text-white';
-	const lightThemeClasses = 'text-core-grey-700';
-
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
-
-	$: headerClasses = classNames(...themeClasses);
 </script>
 
-<header class={headerClasses}>
+<header class="text-color-text-primary">
 	<div class="flex justify-between items-end">
 		<h1 class="font-bold text-base">
 			<!-- The title of the section. -->

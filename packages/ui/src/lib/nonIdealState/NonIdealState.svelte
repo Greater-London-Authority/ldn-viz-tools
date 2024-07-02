@@ -19,19 +19,14 @@
 </script>
 
 <div
-	class="flex flex-col items-center justify-center text-center text-core-grey-400 gap-2 background-white border border-grey-400 px-2 py-2 w-full h-full"
+	class="flex flex-col items-center justify-center text-center text-color-text-secondary gap-2 bg-color-ui-background-neutral border border-color-ui-border-secondary px-2 py-2 w-full h-full"
 >
 	{#if spinner}
 		<Spinner class="w-12" />
 	{:else}
 		<!-- contains the icon -->
 		<slot name="icon">
-			<Icon
-				src={ExclamationTriangle}
-				theme="solid"
-				class="w-12 h-12 stroke-core-grey-200"
-				aria-hidden="true"
-			/>
+			<Icon src={ExclamationTriangle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 		</slot>
 	{/if}
 

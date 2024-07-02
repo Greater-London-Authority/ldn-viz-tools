@@ -14,8 +14,6 @@
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
 	import SidebarTabLabel from './SidebarTabLabel.svelte';
 
 	let selectedValue = 'markers';

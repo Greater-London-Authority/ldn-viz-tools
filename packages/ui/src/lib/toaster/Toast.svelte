@@ -4,29 +4,34 @@
 	}
 
 	const typeClasses: TypeClasses = {
-		Notice: 'bg-core-blue-100 text-core-blue-800 border-blue-800',
-		Success: 'bg-core-green-100 text-core-green-800 border-green-800',
-		Warning: 'bg-core-orange-100 text-core-orange-800 border-orange-800',
-		Error: 'bg-core-red-50 text-core-red-800 border-red-800'
+		Notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
+		Success: 'bg-color-ui-background-positive border-color-ui-border-positive',
+		Warning: 'bg-color-ui-background-warning border-color-ui-border-warning',
+		Error: 'bg-color-ui-background-negative border-color-ui-border-negative'
 	};
 </script>
 
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { Button } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Button } from '@ldn-viz/ui';
+	import { fade } from 'svelte/transition';
 	import type { ToastMessage } from './types';
 
 	export let message: ToastMessage;
 	let classes = typeClasses[message.type];
 
 	if (!classes) {
-		classes = 'bg-core-grey-100 text-core-grey-800';
+		classes = 'bg-background-color-ui-neutral';
 	}
 </script>
 
-<div role="dialog" id={message.id} class="shadow-lg" out:fade={{ duration: 100 }}>
+<div
+	role="dialog"
+	id={message.id}
+	class="shadow-lg text-color-text-primary"
+	out:fade={{ duration: 100 }}
+>
 	<div class="border p-2 pl-4 pr-4 {classes}">
 		<div class="text-lg font-bold flex justify-between items-center">
 			{message.type}
@@ -35,10 +40,10 @@
 					title="Close"
 					emphasis="secondary"
 					variant="square"
-					class="w-6 h-6 !bg-core-grey-700 hover:!bg-core-grey-500"
+					class="w-6 h-6"
 					on:click={message.remove}
 				>
-					<Icon src={XMark} class="stroke-2 stroke-white w-4 h-4" />
+					<Icon src={XMark} class="w-4 h-4" />
 				</Button>
 			{/if}
 		</div>

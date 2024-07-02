@@ -31,7 +31,7 @@
 	export let hintLabel = 'what is this?';
 </script>
 
-<div {...$trigger} use:trigger class="w-fit h-fit">
+<div {...$trigger} use:trigger class="w-fit h-fit inline-flex items-center">
 	{#if $$slots.hint}
 		<!-- if present, replaces the default `hintLabel` and icon  -->
 		<slot name="hint" />
@@ -52,11 +52,11 @@
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
-		class="z-10 w-60 bg-core-grey-50 p-4 shadow"
+		class="z-10 w-60 bg-color-container-background-level-1 p-4 shadow"
 	>
 		<div {...$arrow} use:arrow />
 
-		<div class="text-sm flex flex-col space-y-2 text-core-grey-800">
+		<div class="text-sm flex flex-col space-y-2 text-color-text-primary">
 			{#if $$slots.title}
 				<p class="font-bold">
 					<!-- Optional title for the popover -->

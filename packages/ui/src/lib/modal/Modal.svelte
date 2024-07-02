@@ -70,7 +70,7 @@
 	};
 
 	$: modalClass = classNames(
-		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
+		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-background-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
 </script>
@@ -82,14 +82,14 @@
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
-					class="bg-core-grey-700 text-white p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-core-blue-500"
+					class="bg-color-container-background-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand"
 				>
 					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
 					<div {...$close} use:$close.action>
 						<Button
 							variant="square"
 							emphasis="secondary"
-							class="w-8 h-8 self-center dark:bg-core-grey-900 dark:text-white"
+							class="w-8 h-8 self-center"
 							on:click={() => ($isOpen = false)}
 						>
 							<span class="sr-only">Close</span>

@@ -32,7 +32,7 @@
 	variant="text"
 	on:click={() => ($isOpen = true)}
 	size="sm"
-	class="!p-0 !text-core-grey-400 dark:!text-core-grey-300"
+	class="!p-0 !text-color-action-text-secondary"
 >
 	{hintLabel}
 	<Icon src={InformationCircle} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />

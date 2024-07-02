@@ -236,25 +236,25 @@
 		</SidebarHeader>
 		<svelte:fragment slot="sections">
 			{#if selectedValue === 'markers'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Markers is selected, so we'd render a
 					<code> &lt;Marker /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'filters'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Filter is selected, so we'd render a
 					<code> &lt;Filters /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'analysis'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Analysis is selected, so we'd render a
 					<code> &lt;Analysis /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'layers'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Layers is selected, so we'd render a
 					<code> &lt;Layer /&gt;</code>
 					component
@@ -565,7 +565,7 @@
 		<svelte:fragment slot="unstyledContent">
 			{@const sections = [1]}
 			{#each sections as section}
-				<div class="bg-core-grey-50 p-6 mt-4 h-full space-y-4">
+				<div class="bg-color-static-white p-6 mt-4 h-full space-y-4">
 					<p>
 						This is totally unstyled content and so needs to have extra classes to ensure correct
 						padding etc. Use with extreme caution!
