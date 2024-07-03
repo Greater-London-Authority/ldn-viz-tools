@@ -11,13 +11,15 @@
 	});
 </script>
 
-<div class="bg-core-grey-800 w-[100dvw] h-[100dvh] overflow-hidden flex flex-col {classes}">
+<div
+	class="bg-color-container-background-level-1 w-[100dvw] h-[100dvh] overflow-hidden flex flex-col dark {classes}"
+>
 	<slot name="header" />
 
 	<main class="grow overflow-hidden flex flex-col">
 		{#if noscript}
 			<section
-				class="bg-core-grey-800 w-full h-full flex justify-center items-center text-center ldn-viz-map-app-noscript-animation"
+				class="bg-color-container-background-level-1 w-full h-full flex justify-center items-center text-center ldn-viz-map-app-noscript-animation"
 			>
 				{#if dev}
 					<p>
