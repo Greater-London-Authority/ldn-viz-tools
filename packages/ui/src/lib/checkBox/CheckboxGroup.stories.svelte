@@ -11,7 +11,7 @@
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	let selectedOptions: string[] = ['bus', 'train'];
+	let selectedOptions: string[] = ['bus', 'underground'];
 
 	let optionsForGroup = [
 		{ id: 'bus', name: 'bus', label: 'Bus stops', color: '#00AEEF' },
@@ -44,8 +44,8 @@
 </Story>
 
 <Story name="Checkbox Group - externally updated">
-	<Button on:click={() => (selectedOptions = ['bus', 'underground'])}
-		>Select bus and underground!</Button
+	<Button on:click={() => (selectedOptions = ['bus', 'train'])}
+		>Select bus and train!</Button
 	>
 
 	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
