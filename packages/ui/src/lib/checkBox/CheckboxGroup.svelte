@@ -40,9 +40,19 @@
 	export let selectedOptions: string[] = [];
 	$: selectedOptions = options.map((o) => o.id).filter((id) => selectionState[id]);
 
-	let selectionState = Object.fromEntries(
-		options.map((o) => [o.id, selectedOptions.includes(o.id)])
-	);
+	const updateSelectionStateFromSelectedOptions = (selectedOptions: string[]) => {
+		const so = options.map((o) => o.id).filter((id) => selectionState[id]);
+		if (JSON.stringify(selectedOptions) !== JSON.stringify(so)) {
+			selectionState = Object.fromEntries(
+				options.map((o) => [o.id, selectedOptions.includes(o.id)])
+			);
+		}
+	};
+
+	let selectionState: Record<string, boolean> = {};
+	updateSelectionStateFromSelectedOptions(selectedOptions);
+
+	$: updateSelectionStateFromSelectedOptions(selectedOptions);
 
 	let allCheckboxesCheckedOrDisabled;
 	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
