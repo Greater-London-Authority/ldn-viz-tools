@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 9.1.0
+
+### Minor Changes
+
+- d23b8b7: FIXED: update visual appearance of `CheckboxGroup` component when bound `selectedOptions` prop is externally updated
+
 ## 9.0.1
 
 ### Patch Changes
