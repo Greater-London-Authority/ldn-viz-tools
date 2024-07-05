@@ -44,9 +44,7 @@
 </Story>
 
 <Story name="Checkbox Group - externally updated">
-	<Button on:click={() => (selectedOptions = ['bus', 'train'])}
-		>Select bus and train!</Button
-	>
+	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
 
 	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
 	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
