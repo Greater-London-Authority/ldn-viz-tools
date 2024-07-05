@@ -20,19 +20,16 @@
 		}
 	};
 
-	const darkThemeClasses = 'dark:bg-core-grey-900 dark:hover:bg-core-blue-700 dark:text-white';
-
-	const lightThemeClasses = 'bg-core-grey-100 hover:bg-core-grey-200 text-core-grey-800';
-
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
-
 	const orientationClasses = {
 		vertical:
 			'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center cursor-pointer',
 		horizontal: 'text-base py-2 px-4 flex items-center select-none'
 	};
 
-	$: tabLabelClasses = classNames(...themeClasses, orientationClasses[orientation]);
+	$: tabLabelClasses = classNames(
+		'bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-action-text-primary',
+		orientationClasses[orientation]
+	);
 </script>
 
 <div
@@ -42,7 +39,9 @@
 	role="tab"
 	class={classNames(
 		tabLabelClasses,
-		tabId === $selectedValue ? '!bg-core-blue-600 cursor-default text-white' : 'cursor-pointer'
+		tabId === $selectedValue
+			? '!bg-color-action-background-primary cursor-default text-color-static-white'
+			: 'cursor-pointer'
 	)}
 >
 	<!-- contents of the tab label (name and/or icon) -->

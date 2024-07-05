@@ -59,18 +59,20 @@
 		<circle cx="10" cy="10" r="10" fill="blue" />
 	</svg>
 
-	<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="primary">
-		Primary
-		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
-	</ImageDownloadButton>
-	<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="secondary">
-		Secondary
-		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
-	</ImageDownloadButton>
-	<ImageDownloadButton svgNode={svgRef} filename="download" variant="text">
-		Text
-		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
-	</ImageDownloadButton>
+	<div class="space-y-2">
+		<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="primary">
+			Primary
+			<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		</ImageDownloadButton>
+		<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="secondary">
+			Secondary
+			<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		</ImageDownloadButton>
+		<ImageDownloadButton svgNode={svgRef} filename="download" variant="text">
+			Text
+			<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		</ImageDownloadButton>
+	</div>
 </Story>
 
 <Story name="Disabled">
@@ -107,9 +109,9 @@
 </Story>
 
 <Story name="Download HTML">
-	<div bind:this={htmlRef} class="flex flex-col gap-2 w-fit pb-8">
+	<div bind:this={htmlRef} class="flex flex-col gap-2 w-fit pb-8 text-color-text-primary">
 		<h2 class="font-bold text-lg">A title</h2>
-		<p class="text-core-grey-500">A paragraph of text...</p>
+		<p class="text-color-text-secondary">A paragraph of text...</p>
 		<LogoByCiu class="w-80" />
 	</div>
 
@@ -119,9 +121,13 @@
 </Story>
 
 <Story name="Download HTML with default padding">
-	<div bind:this={htmlRef} id="divToSave" class="flex flex-col gap-2 w-fit pb-8">
+	<div
+		bind:this={htmlRef}
+		id="divToSave"
+		class="flex flex-col gap-2 w-fit pb-8 text-color-text-primary"
+	>
 		<h2 class="font-bold text-lg">A title</h2>
-		<p class="text-core-grey-500">A paragraph of text...</p>
+		<p class="text-color-text-secondary">A paragraph of text...</p>
 		<LogoByCiu class="w-80" />
 	</div>
 
@@ -131,9 +137,13 @@
 </Story>
 
 <Story name="Download HTML with custom padding">
-	<div bind:this={htmlRef} id="divToSave" class="flex flex-col gap-2 w-fit pb-8">
+	<div
+		bind:this={htmlRef}
+		id="divToSave"
+		class="flex flex-col gap-2 w-fit pb-8 text-color-text-primary"
+	>
 		<h2 class="font-bold text-lg">A title</h2>
-		<p class="text-core-grey-500">A paragraph of text...</p>
+		<p class="text-color-text-secondary">A paragraph of text...</p>
 		<LogoByCiu class="w-80" />
 	</div>
 

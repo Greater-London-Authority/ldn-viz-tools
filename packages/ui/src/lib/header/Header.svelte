@@ -8,7 +8,7 @@
 </script>
 
 <nav
-	class="w-screen flex items-center px-4 py-[.5rem] bg-core-grey-900 text-white text-left h-[50px] border-l-[5px] border-core-blue-500"
+	class="w-screen flex items-center px-4 py-[.5rem] bg-color-background-container-level-0 text-color-text-primary text-left h-[50px] border-l-[5px] border-color-static-brand"
 >
 	<!-- Contents of the header (typically a combination of `<HeaderTitle>`, `<HeaderRight>`, `<NavLinks>`, and `<HeaderItem>` components) -->
 	<slot />

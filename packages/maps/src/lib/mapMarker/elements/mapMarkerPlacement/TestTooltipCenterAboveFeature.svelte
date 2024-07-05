@@ -3,7 +3,9 @@
 </script>
 
 <MapMarkerPlacement placement="center">
-	<div class="bg-core-grey-800 p-4 w-fit text-white text-center">Centered above feature.</div>
+	<div class="bg-color-container-background-level-1 p-4 w-fit text-color-text-primary text-center">
+		Centered above feature.
+	</div>
 </MapMarkerPlacement>
 
 <style>

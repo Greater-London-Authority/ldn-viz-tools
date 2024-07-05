@@ -19,7 +19,7 @@
 
 			addEventHandlerInner(
 				'mouseenter',
-				(ev: MouseEvent, d) => {
+				(ev: MouseEvent, d: any) => {
 					posStore.set({
 						...d,
 						clientX: ev.clientX,
@@ -37,7 +37,7 @@
 
 			addEventHandlerInner(
 				'mouseleave',
-				(ev: MouseEvent, d) => {
+				(ev: MouseEvent, d: any) => {
 					posStore.set(undefined); // can't use the $store syntax here
 				},
 				marks,
@@ -79,7 +79,7 @@
 </script>
 
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { afterUpdate, onMount, setContext } from 'svelte';
 	import { derived, writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
@@ -158,6 +158,10 @@
 		return () => {
 			window.removeEventListener('resize', updateDimensions);
 		};
+	});
+
+	afterUpdate(() => {
+		updateDimensions();
 	});
 
 	const updateDimensions = () => {

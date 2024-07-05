@@ -3,14 +3,8 @@
 		[key: string]: string;
 	};
 
-	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
-
-	const lightThemeClasses = 'bg-core-grey-50 text-core-grey-700';
-
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
-
 	const brandClasses: SidebarHeaderBrandClass = {
-		true: 'pl-2 border-l-[5px] border-core-blue-500',
+		true: 'pl-2 border-l-[5px] border-color-static-brand',
 		false: ''
 	};
 </script>
@@ -32,7 +26,10 @@
 	 */
 	export let branded: 'true' | 'false' = 'true';
 
-	$: headerClasses = classNames('py-1', ...themeClasses, brandClasses[branded]);
+	$: headerClasses = classNames(
+		'py-1 bg-color-container-background-level-1 text-color-text-primary',
+		brandClasses[branded]
+	);
 </script>
 
 <header class={headerClasses}>

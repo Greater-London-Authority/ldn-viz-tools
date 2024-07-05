@@ -92,7 +92,7 @@
 		{indeterminate}
 		on:change
 		style={color
-			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
+			? `--theme-input-border: ${color}; --theme-input-background-active: ${color}; --theme-input-background-color: ${color}; --tw-ring-color: ${color};`
 			: ''}
 		{...$$restProps}
 	/>
@@ -103,22 +103,3 @@
 		</Tooltip>
 	{/if}
 </label>
-
-{#if color}
-	<style>
-		.form-checkbox,
-		.dark .form-checkbox {
-			color: var(--border-color);
-			border-color: var(--border-color);
-			border-width: 2px;
-		}
-
-		.dark .form-checkbox:checked {
-			background-color: var(--background-color);
-		}
-
-		.form-checkbox:disabled {
-			@apply border-core-grey-300 cursor-not-allowed;
-		}
-	</style>
-{/if}
