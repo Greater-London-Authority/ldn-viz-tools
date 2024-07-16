@@ -16,14 +16,16 @@
 	import { classNames } from '../utils/classNames';
 
 	/**
-	 * boolean Svelte store that determines whether the modal is currently open.
+	 * Boolean Svelte store that determines whether the modal is currently open.
 	 */
-	export let isOpen = writable(false);
+	export let isOpen = false;
+
+	const isOpenStore = writable(isOpen);
 
 	const {
 		elements: { portalled, overlay, content, title: meltTitle, description: meltDescripton, close },
 		states: { open }
-	} = createDialog({ open: isOpen });
+	} = createDialog({ open: isOpenStore });
 
 	/**
 	 * title that appears at the top of the modal
@@ -73,6 +75,20 @@
 		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
+
+	$: toggledExternally(isOpen);
+	const toggledExternally = (newIsOpen: boolean) => {
+		if ($isOpenStore != newIsOpen){
+			$isOpenStore = newIsOpen;
+		}
+	}
+
+	$: toggledInternally($isOpenStore);
+	const toggledInternally = (newStoreValue: boolean) => {
+		if (newStoreValue != isOpen){
+			isOpen = newStoreValue;
+		}
+	}
 </script>
 
 <div {...$portalled} use:$portalled.action>
@@ -90,7 +106,7 @@
 							variant="square"
 							emphasis="secondary"
 							class="w-8 h-8 self-center dark:bg-core-grey-900 dark:text-white"
-							on:click={() => ($isOpen = false)}
+							on:click={() => ($isOpenStore = false)}
 						>
 							<span class="sr-only">Close</span>
 							<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />

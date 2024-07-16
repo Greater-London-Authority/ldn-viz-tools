@@ -32,16 +32,37 @@
 	 */
 	export let label = '';
 
-	export let checked = writable(false);
+	export let checked = false;
+
+	const checkedStore = writable(checked);
 
 	const {
 		elements: { root, input },
 		options: { disabled: disabledStore, name: nameStore, required: requiredStore }
-	} = createSwitch({ disabled, checked });
+	} = createSwitch({ disabled, checked: checkedStore });
 
 	$: $disabledStore = disabled;
 	$: $nameStore = name;
 	$: $requiredStore = required;
+
+	$: toggledExternally(checked);
+	const toggledExternally = (newChecked: boolean) => {
+		console.log('Toggled externally:', $checkedStore, checked);
+
+		if ($checkedStore != newChecked) {
+			$checkedStore = newChecked;
+		}
+	};
+
+	$: console.log('checkedStore:', $checkedStore);
+	$: toggledInternally($checkedStore);
+	const toggledInternally = (newStoreValue: boolean) => {
+		console.log('Toggled internally:', $checkedStore, checked);
+		if (newStoreValue != checked) {
+			checked = newStoreValue;
+			console.log('Checked ins now:', checked);
+		}
+	};
 </script>
 
 <div class="flex items-center">
@@ -60,7 +81,7 @@
 				'thumb w-5 h-5 block rounded-full transition',
 				disabled ? 'bg-core-grey-100' : 'bg-white'
 			)}
-			style:transform={$checked ? `translate(20px, 0px)` : ''}
+			style:transform={checked ? `translate(20px, 0px)` : ''}
 		/>
 	</button>
 	<input {...$input} use:input />

@@ -18,14 +18,13 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 
-	let isOpen = writable(false);
+	let isOpen = false;
 </script>
 
 <Template let:args>
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen {...args}></Modal>
 </Template>
@@ -33,7 +32,7 @@
 <Story name="Default" source />
 
 <Story name="Description only">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -43,7 +42,7 @@
 </Story>
 
 <Story name="Description and Contents">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen title="A modal with contents!" description="This modal has a description...">
 		<div class="pt-2">
@@ -59,7 +58,7 @@
 </Story>
 
 <Story name="Contents without description">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen title="A modal with contents!">
 		<p>A list</p>
@@ -72,20 +71,20 @@
 </Story>
 
 <Story name="Modal with close button">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
-	<Modal bind:isOpen title="A modal with close button!">
+	<Modal bind:isOpen title="A modal with a close button!">
 		<div class="mb-4">
 			In a real example, these buttons would perform some action in addition to closing the modal.
 		</div>
 
-		<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
-		<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button>
+		<Button variant="solid" on:click={() => (isOpen = false)}>Accept</Button>
+		<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button>
 	</Modal>
 </Story>
 
 <Story name="Modal width">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -96,7 +95,7 @@
 </Story>
 
 <Story name="Modal with very long content">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen title="Modal with very long content!" width="6xl">
 		{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
@@ -112,7 +111,7 @@
 			</div>
 		{/each}
 
-		<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
-		<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button>
+		<Button variant="solid" on:click={() => (isOpen = false)}>Accept</Button>
+		<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button>
 	</Modal>
 </Story>
