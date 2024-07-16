@@ -1,0 +1,32 @@
+<script lang="ts">
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+
+	import { prefersDarkMode } from '@ldn-viz/utils';
+	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
+
+	$: $prefersDarkMode, applyTheme();
+	$: $userThemeSelectionStore, applyTheme();
+
+	const applyTheme = () => {
+		if (browser) {
+			document.documentElement.classList.toggle(
+				'dark',
+				$currentThemeMode === 'dark' ? true : false
+			);
+		}
+		globalThis.localStorage?.setItem('theme', $userThemeSelectionStore);
+	};
+
+	onMount(() => {
+		applyTheme();
+	});
+</script>
+
+<!-- Prevent FOUC -->
+<svelte:head>
+	<script>
+		var userPref = globalThis.localStorage?.getItem('theme');
+		document.documentElement.classList.toggle('dark', userPref === 'dark' ? true : false);
+	</script>
+</svelte:head>
