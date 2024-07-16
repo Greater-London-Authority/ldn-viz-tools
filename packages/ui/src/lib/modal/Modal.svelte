@@ -78,17 +78,17 @@
 
 	$: toggledExternally(isOpen);
 	const toggledExternally = (newIsOpen: boolean) => {
-		if ($isOpenStore != newIsOpen){
+		if ($isOpenStore != newIsOpen) {
 			$isOpenStore = newIsOpen;
 		}
-	}
+	};
 
 	$: toggledInternally($isOpenStore);
 	const toggledInternally = (newStoreValue: boolean) => {
-		if (newStoreValue != isOpen){
+		if (newStoreValue != isOpen) {
 			isOpen = newStoreValue;
 		}
-	}
+	};
 </script>
 
 <div {...$portalled} use:$portalled.action>
