@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import Button from '../button/Button.svelte';
 	import CheckboxGroup from './CheckboxGroup.svelte';
 
 	export const meta = {
