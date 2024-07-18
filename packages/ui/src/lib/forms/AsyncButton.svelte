@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Button from '../button/Button.svelte';
 	import Spinner from '../spinners/Spinner.svelte';
+	import type { FormButtonhandler } from './types';
 
-	export let onClick: (event: PointerEvent | TouchEvent) => void | Promise<unknwon>;
+	export let onClick: FormButtonhandler;
 	export let working = false;
 
-	const doClick = async (event) => {
+	const doClick: FormButtonhandler = async (event) => {
 		if (working) {
 			return;
 		}

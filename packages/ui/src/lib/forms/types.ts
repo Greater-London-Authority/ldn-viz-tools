@@ -1,4 +1,6 @@
-import type { Writable } from 'svelte';
+import type { Writable } from 'svelte/store';
+
+export type FormButtonhandler = (event: MouseEvent | TouchEvent) => void | Promise<unknown>;
 
 export type FormValues = {
 	[key: string]: unknown;

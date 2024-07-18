@@ -1,16 +1,22 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import AsyncButton from './AsyncButton.svelte';
-	import type { FormValues, FormValueStore, FormErrorStore, FormActiveButtonStore } from './types';
+	import type {
+		FormButtonhandler,
+		FormValues,
+		FormValueStore,
+		FormErrorStore,
+		FormActiveButtonStore
+	} from './types';
 
 	const activeButtonStore: FormActiveButtonStore = getContext('formActiveButtonStore');
 
-	export let onSubmit: (event: PointerEvent | TouchEvent) => void | Promise<unknwon>;
+	export let onSubmit: FormButtonhandler;
 	export let condition = 'default';
 	export let disabled = false;
 	export let working = false;
 
-	const onClick = async (event) => {
+	const onClick: FormButtonhandler = async (event) => {
 		event.preventDefault();
 
 		if ($activeButtonStore) {
