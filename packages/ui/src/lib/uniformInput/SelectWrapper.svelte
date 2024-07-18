@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Select } from '../select/Select.svelte';
+	import Select from '../select/Select.svelte';
 	import type { UniformInputProps } from './types';
 
 	export let value: UniformInputProps['value'] = '';

@@ -40,7 +40,7 @@
 		<Input
 			{disabled}
 			{required}
-			{type}
+			type="textarea"
 			{id}
 			{name}
 			{label}
