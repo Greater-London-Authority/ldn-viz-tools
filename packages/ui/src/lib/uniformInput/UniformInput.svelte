@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Checkbox from '../checkBox/Checkbox.svelte';
 	import Input from '../input/Input.svelte';
-	import SelectWrapper from './SelectWrapper.svelte';
+	import Select from '../select/Select.svelte';
 	import type { UniformInputProps } from './types';
 
 	export let name: UniformInputProps['name'] = undefined;
@@ -33,7 +33,7 @@
 		{...$$restProps}
 	/>
 {:else if type === 'select'}
-	<SelectWrapper
+	<Select
 		{disabled}
 		{required}
 		{id}
@@ -41,8 +41,8 @@
 		{label}
 		{description}
 		{placeholder}
-		{options}
-		bind:value
+		items={options}
+		bind:justValue={value}
 		bind:error
 		{...$$restProps}
 	/>
