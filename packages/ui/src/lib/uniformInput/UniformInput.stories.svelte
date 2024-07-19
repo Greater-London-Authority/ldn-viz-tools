@@ -23,6 +23,10 @@
 		control: { type: 'boolean' }
 	};
 
+	const immutableArg = {
+		control: { type: 'none' }
+	};
+
 	export const meta = {
 		title: 'Ui/UniformInput',
 		component: UniformInput,
@@ -49,6 +53,10 @@
 			disabled: boolArg,
 			required: boolArg,
 			description: stringArg,
+			descriptionAlignment: {
+				control: { type: 'select' },
+				options: ['left', 'right']
+			},
 			placeholder: stringArg,
 			color: stringArg,
 			rows: numberArg,
@@ -57,6 +65,23 @@
 			},
 			hint: stringArg,
 			hintLabel: stringArg,
+			inputmode: {
+				control: { type: 'select' },
+				options: [
+					'none',
+					'text',
+					'decimal',
+					'numeric',
+					'tel',
+					'search',
+					'email',
+					'url',
+					'search',
+					'tel',
+					'url'
+				]
+			},
+			format: immutableArg,
 			value: stringArg,
 			error: stringArg
 		},

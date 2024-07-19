@@ -1,6 +1,25 @@
+import type { FormatFunction } from '../input/Input.svelte';
+
+type InputMode =
+	| 'none'
+	| 'text'
+	| 'decimal'
+	| 'numeric'
+	| 'tel'
+	| 'search'
+	| 'email'
+	| 'url'
+	| 'search'
+	| 'tel'
+	| 'url';
+
 export interface InputOption {
 	value: string;
 	label: string;
+	id?: string;
+	name?: string;
+	disabled?: boolean;
+	color?: string;
 	hint?: string;
 	hintLabel?: string;
 }
@@ -22,12 +41,15 @@ export interface UniformInputProps {
 	id?: string;
 	label?: string;
 	description?: string;
+	descriptionAlignment?: 'left' | 'right';
 	placeholder?: string;
 	color?: string;
 	rows?: number | string;
 	options?: InputOption[];
 	hint?: string;
 	hintLabel?: string;
+	inputmode?: InputMode;
+	format?: null | FormatFunction;
 	value?: unknown;
 	error?: string;
 }
