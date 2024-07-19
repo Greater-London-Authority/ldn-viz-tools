@@ -72,4 +72,7 @@ export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCo
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
+export { default as UniformInput } from './uniformInput/UniformInput.svelte';
+export * from './uniformInput/types';
+
 export { classNames } from './utils/classNames';
