@@ -25,7 +25,15 @@
 </script>
 
 <Template let:args>
-	<GoodOrBad value={0.5} benchmarkValue={5} colorScale={() => 'red'} {...args} />
+	<GoodOrBad {...args} value={2} benchmarkValue={5} colorScale={() => 'red'}  />
 </Template>
 
 <Story name="Default" source />
+
+<Story name="Multiple">
+	<div class="flex flex-col">
+		<GoodOrBad value={2} benchmarkValue={5} colorScale={() => 'red'} />
+		<GoodOrBad value={5} benchmarkValue={5} colorScale={() => 'red'} />
+		<GoodOrBad value={7} benchmarkValue={5} colorScale={() => 'red'} />
+	</div>
+</Story>

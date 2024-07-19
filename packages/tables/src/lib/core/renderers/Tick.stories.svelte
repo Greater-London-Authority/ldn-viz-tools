@@ -29,3 +29,13 @@
 </Template>
 
 <Story name="Default" source />
+
+
+<Story name="Multiple">
+	<div class="flex flex-col">
+			<Tick value={0.2} extent={[0, 1]}  formatString="0.1f"/>
+			<Tick value={0.7} extent={[0, 1]}  formatString="0.1f" />
+			<Tick value={0.5} extent={[0, 1]}  formatString="0.1f" />
+			<Tick value={0.3} extent={[0, 1]}  formatString="0.1f" />
+	</div>
+</Story>
