@@ -15,6 +15,8 @@
 	export let color: UniformInputProps['color'] = '';
 	export let rows: UniformInputProps['rows'] = 2;
 	export let options: UniformInputProps['options'] = [];
+	export let hint: UniformInputProps['hint'] = '';
+	export let hintLabel: UniformInputProps['hintLabel'] = '';
 	export let value: UniformInputProps['value'] = undefined;
 	export let error: UniformInputProps['error'] = undefined;
 </script>
@@ -28,6 +30,8 @@
 		{id}
 		{name}
 		{color}
+		{hint}
+		{hintLabel}
 		label={label || ''}
 		bind:checked={value}
 		{...$$restProps}
@@ -58,6 +62,8 @@
 			{description}
 			{placeholder}
 			{rows}
+			{hint}
+			{hintLabel}
 			bind:value
 			bind:error
 			{...$$restProps}
@@ -73,6 +79,8 @@
 			{label}
 			{description}
 			{placeholder}
+			{hint}
+			{hintLabel}
 			bind:value
 			bind:error
 			{...$$restProps}

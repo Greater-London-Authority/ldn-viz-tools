@@ -55,6 +55,8 @@
 			options: {
 				control: { type: 'none' }
 			},
+			hint: stringArg,
+			hintLabel: stringArg,
 			value: stringArg,
 			error: stringArg
 		},
