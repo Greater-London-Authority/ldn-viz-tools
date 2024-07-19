@@ -1,5 +1,28 @@
 # ldn-viz-tools-charts
 
+## 1.5.0
+
+### Minor Changes
+
+- 9a5f3ef: CHANGED: allow custom Tooltip components to be used with `ObservablePlot` component
+- 0bd025a: ADDED: fragments of Observable Plot specifications encoding default styling
+  ADDED: `preprocessOptions` function for creating multiple marks with different values of options
+  ADDED: functions for adding registering event handlers for observable plot marks
+
+### Patch Changes
+
+- Updated dependencies [ffffac0]
+- Updated dependencies [ae07a91]
+- Updated dependencies [c0814a6]
+- Updated dependencies [bcf8773]
+- Updated dependencies [129cf32]
+- Updated dependencies [628ae2c]
+- Updated dependencies [e4fc1dc]
+- Updated dependencies [8d57614]
+- Updated dependencies [7ded8e8]
+- Updated dependencies [12f8b2a]
+  - @ldn-viz/ui@9.0.0
+
 ## 1.4.0
 
 ### Minor Changes

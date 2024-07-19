@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
-	"version": "2.1.0",
+	"version": "3.0.1",
 	"scripts": {
 		"dev": "vite dev --port 3004 --open",
 		"build": "vite build && npm run package",
@@ -62,6 +62,7 @@
 		"@deck.gl/core": "^8.9.35",
 		"@deck.gl/layers": "^8.9.35",
 		"@deck.gl/mapbox": "^8.9.35",
+		"@turf/turf": "6.5.0",
 		"maplibre-gl": "^4.1.0",
 		"svelte-maplibre": "^0.8.2"
 	}

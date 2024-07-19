@@ -4,6 +4,7 @@
 	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
 	 *
 	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
+	 * To display messages that remain open until dismissed, but are displayed close to the element that triggered them, consider using a [Popover](./?path=/docs/ui-popover--documentation).
 	 * @component
 	 */
 

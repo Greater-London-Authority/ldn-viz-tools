@@ -10,12 +10,12 @@
 	/**
 	 * A `SVGElement` node to be converted.
 	 */
-	export let svgNode: SVGElement | undefined;
+	export let svgNode: SVGElement | undefined = undefined;
 
 	/**
 	 * An `HTMLElement` node to be converted.
 	 */
-	export let htmlNode: HTMLElement | undefined;
+	export let htmlNode: HTMLElement | undefined = undefined;
 
 	/**
 	 * `id` of element to add padding to
@@ -61,7 +61,7 @@
 	};
 
 	const createHTMLImageFromURL = async (url: string) => {
-		let img: HTMLImageElement;
+		let img: HTMLImageElement | undefined;
 
 		await new Promise((resolve) => {
 			img = new Image();
@@ -69,19 +69,24 @@
 			img.src = url;
 		});
 
+		// Ensure img is defined before returning
+		if (!img) {
+			throw new Error('Failed to load image');
+		}
+
 		return img;
 	};
 
 	// See https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
-	const bytesToBase64 = (bytes) => window.btoa(String.fromCodePoint(...bytes));
-	const stringToBase64 = (str) => bytesToBase64(new TextEncoder().encode(str));
+	const bytesToBase64 = (bytes: Uint8Array) => window.btoa(String.fromCodePoint(...bytes));
+	const stringToBase64 = (str: string | undefined) => bytesToBase64(new TextEncoder().encode(str));
 
 	const downloadFromSVG = async () => {
 		// This hack is necessary because .drawImage() doesn't work
 		// unless the SVG that is being copied has an explicitly-set size
-		const svgNodeClone = svgNode.cloneNode(true) as SVGElement;
-		svgNodeClone.setAttribute('width', svgNode.clientWidth.toString());
-		svgNodeClone.setAttribute('height', svgNode.clientHeight.toString());
+		const svgNodeClone = svgNode!.cloneNode(true) as SVGElement;
+		svgNodeClone.setAttribute('width', svgNode!.clientWidth.toString());
+		svgNodeClone.setAttribute('height', svgNode!.clientHeight.toString());
 
 		const svgString = new XMLSerializer().serializeToString(svgNodeClone);
 		const svgURL = 'data:image/svg+xml;base64,' + stringToBase64(svgString);
@@ -97,8 +102,8 @@
 		} else {
 			img.src = svgURL;
 
-			const w = svgNode.clientWidth * scaleFactor;
-			const h = svgNode.clientHeight * scaleFactor;
+			const w = svgNode!.clientWidth * scaleFactor;
+			const h = svgNode!.clientHeight * scaleFactor;
 
 			const canvas = new OffscreenCanvas(w, h);
 
@@ -113,11 +118,11 @@
 	///
 
 	const preserveDrawingBuffer = () => {
-		function wrapGetContext(ContextClass: any) {
+		function wrapGetContext(ContextClass: typeof HTMLCanvasElement | typeof OffscreenCanvas) {
 			const isWebGL = /webgl/i;
 
-			ContextClass.prototype.getContext = (function (origFn) {
-				return function (type: string, attributes: any) {
+			ContextClass.prototype.getContext = (function (origFn: (type: any, attributes?: any) => any) {
+				return function (this: HTMLCanvasElement | OffscreenCanvas, type: any, attributes: any) {
 					if (isWebGL.test(type)) {
 						attributes = Object.assign({}, attributes || {}, { preserveDrawingBuffer: true });
 					}

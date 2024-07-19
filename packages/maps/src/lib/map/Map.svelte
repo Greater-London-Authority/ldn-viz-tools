@@ -1,25 +1,46 @@
-<script context="module">
-	export const appendOSKeyToUrl = (osKey) => {
-		return (url) => {
-			url = new URL(url);
+<script context="module" lang="ts">
+	import { onMount, setContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
+	import maplibre_gl from 'maplibre-gl';
+	import 'maplibre-gl/dist/maplibre-gl.css';
 
-			if (!url.hostname === 'api.os.uk') {
-				return { url: url.href };
+	import {
+		theme_os_light_vts,
+		GREATER_LONDON_BOUNDS,
+		GREATER_LONDON_BOUNDS_MAX
+	} from '@ldn-viz/maps';
+	import MapCursor from './mapCursor/MapCursor';
+	import type { MapCursorStore } from './mapCursor/types';
+
+	export type MapLibre = maplibre_gl.Map;
+	export type MapStore = Writable<null | maplibre_gl.Map>;
+	export type WhenMapLoads = (map: maplibre_gl.Map) => void;
+
+	/**
+	 * Applied as the MapLibre `transformRequest` option to append the OS key
+	 * to outgoing OS API requests.
+	 */
+	export const appendOSKeyToUrl = (osKey: string) => {
+		return (url: string) => {
+			const urlObj = new URL(url);
+
+			if (urlObj.hostname !== 'api.os.uk') {
+				return { url: urlObj.href };
 			}
 
-			const WEB_MERCATOR_EPSG = 3857;
-			url.searchParams.set('srs', WEB_MERCATOR_EPSG);
-			url.searchParams.set('key', osKey);
+			const WEB_MERCATOR_EPSG = '3857';
+			urlObj.searchParams.set('srs', WEB_MERCATOR_EPSG);
+			urlObj.searchParams.set('key', osKey);
 
-			return { url: url.href };
+			return { url: urlObj.href };
 		};
 	};
 </script>
 
-<script>
+<script lang="ts">
 	/**
 	 * The `<Map>` component wraps a MapLibre `Map` to provide:
-	 * - access to the `Map` and `maplibre_gl` objects via context;
+	 * - access to the `Map` and `MapCursor` objects via context;
 	 * - notification of both map initialisation and destruction events;
 	 * - default map options suitable for mapping in London;
 	 * - default styling to HTML elements rendered by the map.
@@ -32,19 +53,15 @@
 	 * @component
 	 */
 
-	import { onMount, setContext } from 'svelte';
-	import { writable } from 'svelte/store';
-	import maplibre_gl from 'maplibre-gl';
-	import 'maplibre-gl/dist/maplibre-gl.css';
+	/**
+	 * Store containing the MapLibre instance.
+	 */
+	export const mapStore: MapStore = writable(null);
 
-	import { GREATER_LONDON_BOUNDS, GREATER_LONDON_BOUNDS_MAX } from '../themes/bounds';
-	import * as os_light_vts from '../themes/os_light_vts.json';
-
-	const map = writable(null);
-	const map_gl = writable(null);
-
-	setContext('map', map);
-	setContext('map_gl', map_gl);
+	/**
+	 * Store containing the MapCursor instance.
+	 */
+	export const mapCursorStore: MapCursorStore = writable(null);
 
 	/**
 	 * Disables initialisation of the map on mount. This is most often used
@@ -60,62 +77,72 @@
 	/**
 	 * Called when the map is finished loading and ready for use.
 	 */
-	export let whenMapLoads = null;
+	export let whenMapLoads: null | WhenMapLoads = null;
 
 	/**
-	 * Called when the map component is destroyed for when resources need to be cleaned up.
+	 * Called when the map component is destroyed. Required when external resources need to be cleaned up.
 	 */
-	export let whenMapUnloads = null;
+	export let whenMapUnloads: null | WhenMapLoads = null;
 
 	/**
 	 * Additional classes applied to the map's container element.
 	 */
 	export let classes = '';
 
+	setContext('mapStore', mapStore);
+	setContext('mapCursorStore', mapCursorStore);
+
 	const defaultOptions = {
-		style: os_light_vts,
+		style: theme_os_light_vts,
 		bounds: GREATER_LONDON_BOUNDS,
 		maxBounds: GREATER_LONDON_BOUNDS_MAX,
 		attributionControl: true,
 		clickTolerance: 6
 	};
 
-	let container;
+	let container: null | HTMLElement;
 
 	onMount(() => {
 		if (disabled) {
 			return;
 		}
 
-		const maplibre = new maplibre_gl.Map({
+		const maplibre: maplibre_gl.Map = new maplibre_gl.Map({
 			...defaultOptions,
 			...options,
-			container
-		});
+			container: container as HTMLElement
+		} as maplibre_gl.MapOptions);
 
 		maplibre.once('load', () => {
-			map.set(maplibre);
-			map_gl.set(maplibre_gl);
+			mapStore.set(maplibre);
+			mapCursorStore.set(new MapCursor(maplibre));
 
 			if (whenMapLoads) {
-				whenMapLoads(maplibre, maplibre_gl);
+				whenMapLoads(maplibre);
 			}
+
+			// When embedded the map has a tendency to not spread itself across its
+			// entire canvas. This might be a MapLibre issue but it is resolved by
+			// forcing a resize.
+			maplibre.resize();
 		});
 
 		return () => {
 			if (whenMapUnloads) {
-				whenMapUnloads(maplibre, maplibre_gl);
+				whenMapUnloads(maplibre);
 			}
 
-			map.set(null);
-			map_gl.set(null);
+			$mapCursorStore?.destroy();
+
+			mapStore.set(null);
+			mapCursorStore.set(null);
 		};
 	});
 
 	// client width and height because on:resize won't always trigger refresh.
-	let clientWidth = null;
-	let clientHeight = null;
-	$: clientWidth !== null && clientHeight !== null && $map?.resize();
+	let clientWidth = 0;
+	let clientHeight = 0;
+	$: clientWidth && clientHeight && $mapStore?.resize();
 </script>
 
 <section

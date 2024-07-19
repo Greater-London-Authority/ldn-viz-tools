@@ -9,7 +9,7 @@
 	stroke-width="1.5"
 	stroke="currentColor"
 	fill="none"
-	{...$$props}
+	{...$$restProps}
 >
 	<title>{title}</title>
 	<circle cx="12" cy="12" r="3.5" />

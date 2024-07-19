@@ -5,18 +5,18 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { FLY_ANIMATION_OPTIONS } from '../themes/animations';
 
-	const map = getContext('map');
+	const mapStore = getContext('mapStore');
 
 	const newHandler = (handle) => {
 		return (event) => {
-			if (!$map) {
+			if (!$mapStore) {
 				return;
 			}
 
 			handle();
 
 			if (event.detail > 0) {
-				$map.getCanvas().focus();
+				$mapStore.getCanvas().focus();
 			}
 		};
 	};
@@ -28,11 +28,11 @@
 
 	const panHandler = (direction) => {
 		const moveAmount = calcMoveAmount(direction);
-		$map.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
+		$mapStore.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
 	};
 
 	const calcMoveAmount = (direction) => {
-		const rect = $map.getContainer().getBoundingClientRect();
+		const rect = $mapStore.getContainer().getBoundingClientRect();
 		const calcDistance = (size) => size * 0.14;
 
 		switch (direction) {
@@ -66,7 +66,7 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan left"
-			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500pointer-events-auto"
+			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500 pointer-events-auto"
 			on:click={newHandler(panLeft)}
 		>
 			<Icon src={ChevronLeft} class="w-8 h-8 pr-1 pl-0.5" />

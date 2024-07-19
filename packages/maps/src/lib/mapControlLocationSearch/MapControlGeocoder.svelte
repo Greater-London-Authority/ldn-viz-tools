@@ -6,9 +6,10 @@
 	 */
 
 	import { getContext } from 'svelte';
+	import mapgl from 'maplibre-gl';
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { setFeature, clearFeature } from './map-layer';
-	import type { MapStore, MapGLStore } from './map-types';
+	import type { MapStore } from './map-types';
 
 	import type {
 		Geolocation,
@@ -49,19 +50,18 @@
 	 */
 	export let inputClasses = '';
 
-	const map: MapStore = getContext('map');
-	const mapgl: MapGLStore = getContext('map_gl');
+	const mapStore: MapStore = getContext('mapStore');
 
 	const zoomLevel = 16;
 	const delay = 500;
 
 	const onLocationSelectedGeocoder = (location: Geolocation) => {
-		if (!$map) {
+		if (!$mapStore) {
 			return;
 		}
 
 		showClearButton = true;
-		setFeature('geocoder', $map, $mapgl, location, { zoom: zoomLevel });
+		setFeature('geocoder', $mapStore, mapgl, location, { zoom: zoomLevel });
 
 		if (onLocationSelected) {
 			onLocationSelected(location);
@@ -69,7 +69,7 @@
 	};
 
 	let showClearButton = false;
-	$: !showClearButton && clearFeature('geocoder', $map);
+	$: !showClearButton && clearFeature('geocoder', $mapStore);
 </script>
 
 <Geocoder

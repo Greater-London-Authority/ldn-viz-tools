@@ -1,47 +1,24 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
-	import data from '../../data/dataScatter';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import ScatterPlot from './ScatterPlot.svelte';
 
-	//https://storybook.js.org/docs/svelte/essentials/controls
-	const argTypes = {
-		data: {
-			description: 'overwritten description',
-			table: {
-				type: {
-					summary: 'something short',
-					detail: 'something really really long'
+	export const meta = {
+		title: 'Charts/ScatterPlot',
+		component: ScatterPlot,
+		argTypes: {
+			$$restprops: {
+				description: 'Any other props are passed through to `<LayerCake>`',
+				table: {
+					category: 'properties'
 				}
-			},
-			control: {
-				type: null
-			}
-		},
-		title: {
-			table: {
-				type: {
-					summary: 'string'
-				}
-			},
-			control: {
-				type: 'text'
-			}
-		},
-		subTitle: {
-			table: {
-				type: {
-					summary: 'string'
-				}
-			},
-			control: {
-				type: 'text'
 			}
 		}
 	};
 </script>
 
-<Meta title="Charts/ScatterPlot" component={ScatterPlot} {argTypes} />
+<script>
+	import data from '../../data/dataScatter';
+</script>
 
 <Template let:args>
 	<ScatterPlot

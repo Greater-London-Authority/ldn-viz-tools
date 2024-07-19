@@ -4,7 +4,16 @@
 
 	export const meta = {
 		title: 'Charts/ObservablePlot',
-		component: ObservablePlot
+		component: ObservablePlot,
+
+		argTypes: {
+			// this is a module export, not a prop, so don't include it in table
+			addClick: {
+				table: {
+					disable: true
+				}
+			}
+		}
 	};
 </script>
 
@@ -12,71 +21,95 @@
 	import { writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
+	import { format } from 'd3-format';
 
+	import { ldnColors, theme } from '@ldn-viz/utils';
 	import { penguins } from './exampleData';
 
+	import {
+		defaultAnnotationText,
+		defaultArea,
+		defaultColor,
+		defaultDot,
+		defaultLine,
+		defaultRule,
+		defaultSize,
+		defaultStyle,
+		defaultXAxis,
+		defaultXScale,
+		defaultYAxis,
+		defaultYScale,
+		preprocessOptions
+	} from '../observablePlotFragments/observablePlotFragments';
+
+	import {
+		areaPlotData,
+		areaPlotPointsToLabel,
+		educationLabelOffsets,
+		education_data,
+		lineChartData
+	} from './demo_data';
+
 	import DemoTooltip from './DemoTooltip.svelte';
-	import { addClick } from './ObservablePlot.svelte';
+	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';
 
 	const spec = {
 		style: {
-			fontFamily: 'Roboto',
-			fontSize: '12pt',
-			color: '#666666'
+			...defaultStyle
 		},
 
-		grid: true,
-		marginBottom: 50,
+		...defaultSize,
 
 		x: {
-			labelAnchor: 'center',
-			labelArrow: 'none',
-			label: 'Culmen length/mm'
+			...defaultXScale
 		},
 
 		y: {
-			insetTop: 20,
-			labelArrow: 'none'
+			...defaultYScale
 		},
 
 		marks: [
 			Plot.ruleY([0], { stroke: '#666666' }),
 			Plot.ruleX([0], { stroke: '#666666' }),
-			Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
 		]
 	};
+
+	let clickedValue = undefined;
+	let clickedIndex = undefined;
 
 	const tooltipStore = writable();
 </script>
 
 <Template let:args>
-	<ObservablePlot {...args} {spec} />
+	<ObservablePlot
+		{...args}
+		{spec}
+		title="Penguin Culmens"
+		subTitle="A scatterplot of depth against length"
+	/>
 </Template>
 
-<Story name="Default" args={{ spec }} />
+<Story name="Default" args={{ spec }} source />
 
-<Story
-	name="With Title"
-	args={{
-		spec,
-		title: 'Penguin Culmens',
-		subTitle: 'A scatterplot of depth against length',
-		exportBtns: true,
-		data: penguins
-	}}
-/>
+<!-- 
+	The width of the chart is contained within the wrapping chart container.
+	Tailwind width classes can be used to control the width. Either fixed: ie 'w-[500px]' or responsive: ie 'w-1/2'
+-->
+<Story name="With Chart Width">
+	<ObservablePlot spec={{ ...spec }} chartWidth="w-1/2" />
+</Story>
 
-<Story
-	name="With responsive width"
-	args={{
-		spec,
-		title: 'Penguin Culmens',
-		subTitle: 'A scatterplot of depth against length',
-		exportBtns: true,
-		data: penguins,
-		responsiveWidth: true
-	}}
-/>
+<!-- 
+	The height of the chart remains the reponsibility of the contained instance of plot. It can be set to a specific pixel value: ie 300
+-->
+<Story name="With Height">
+	<ObservablePlot spec={{ ...spec, height: 300 }} />
+</Story>
+
+<Story name="With Aspect Ratio">
+	<ObservablePlot spec={{ ...spec, aspectRatio: 1 }} />
+</Story>
 
 <!--
 	The default tooltip allows you to display text, or a table showing the values of specific columns for the selected mark. 
@@ -86,35 +119,18 @@
 <Story name="With default tooltips">
 	<ObservablePlot
 		spec={{
-			style: {
-				fontFamily: 'Roboto',
-				fontSize: '12pt',
-				color: '#666666'
-			},
-
-			grid: true,
-			marginBottom: 50,
-
-			x: {
-				labelAnchor: 'center',
-				labelArrow: 'none',
-				label: 'Culmen length/mm'
-			},
-
-			y: {
-				insetTop: 20,
-				labelArrow: 'none'
-			},
+			...spec,
 
 			marks: [
 				Plot.ruleY([0], { stroke: '#666666' }),
 				Plot.ruleX([0], { stroke: '#666666' }),
 				Plot.dot(penguins, {
+					...defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: addClick(tooltipStore),
 					stroke: 'black',
 					fill: 'white',
+					render: registerTooltip(tooltipStore),
 
 					/* need to expose as a channel before including in tooltip */
 					channels: {
@@ -127,8 +143,8 @@
 							sex: true,
 							culmen_length_mm: (d) => `${d}mm`,
 							culmen_depth_mm: (d) => `${d}mm`,
-							x: null,
-							y: null
+							x: undefined,
+							y: undefined
 						}
 					}
 				})
@@ -136,7 +152,6 @@
 		}}
 		title="Penguin Culmens"
 		subTitle="A scatterplot of depth against length"
-		exportBtns={true}
 		data={penguins}
 	/>
 </Story>
@@ -154,6 +169,35 @@
 <Story name="With custom tooltips">
 	<ObservablePlot
 		spec={{
+			...spec,
+			marks: [
+				Plot.ruleY([0], { stroke: '#666666' }),
+				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.dot(penguins, {
+					...defaultDot,
+					x: 'culmen_length_mm',
+					y: 'culmen_depth_mm',
+					render: registerTooltip(tooltipStore),
+					stroke: 'black',
+					fill: 'white'
+				})
+			]
+		}}
+		title="Penguin Culmens"
+		subTitle="A scatterplot of depth against length"
+		data={penguins}
+		{tooltipStore}
+	>
+		<DemoTooltip slot="tooltip" />
+	</ObservablePlot>
+</Story>
+
+<!--
+	Using the `addEventHandler` function we can register an event handler for events (e.g, `click`, `mouseenter`, `mouseleave`) triggered by user interaction with an SVG mark.
+-->
+<Story name="With custom click interaction">
+	<ObservablePlot
+		spec={{
 			style: {
 				fontFamily: 'Roboto',
 				fontSize: '12pt',
@@ -180,18 +224,491 @@
 				Plot.dot(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: addClick(tooltipStore),
+					render: addEventHandler('click', (ev, d) => {
+						clickedIndex = d.index;
+						clickedValue = penguins[d.index];
+					}),
 					stroke: 'black',
-					fill: 'white'
+					r: 5,
+					fill: (d, i) => {
+						return clickedIndex !== undefined && i === clickedIndex ? 'red' : 'white';
+					}
 				})
 			]
 		}}
 		title="Penguin Culmens"
 		subTitle="A scatterplot of depth against length"
-		exportBtns={true}
 		data={penguins}
 		{tooltipStore}
 	>
 		<DemoTooltip slot="tooltip" />
 	</ObservablePlot>
+
+	<div>
+		Selected point:
+		<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
+	</div>
+</Story>
+
+<!-- 
+	The example stories show how defaults can be over-riden to achieve chart specific styling.
+	For example the tratment of the Y axis relys on an insetLeft property on the Plot.X and manipulation of the margin and Plot.axisY component
+-->
+<Story name="Examples / Area chart">
+	<ObservablePlot
+		title="After a recent decline, the proportion of Londoners achieving at least 20 minutes of active travel per day has started to increase"
+		subTitle="Proportion of London residents achieving at least 20 minutes of active travel per day"
+		spec={{
+			y: {
+				...defaultYScale,
+				domain: [0, 60],
+				percent: true
+			},
+			x: {
+				...defaultXScale,
+				insetLeft: 80,
+				ticks: 12
+			},
+			style: { ...defaultStyle },
+
+			...defaultSize,
+			marginTop: 56,
+			marginLeft: 0,
+			marginBottom: 32,
+
+			marks: [
+				Plot.lineY(areaPlotData, {
+					...defaultLine,
+					x: 'Year',
+					y: 'Percent'
+				}),
+
+				Plot.areaY(areaPlotData, {
+					...defaultArea,
+					x: 'Year',
+					y: 'Percent'
+				}),
+
+				// Top part of labels (non-bold)
+				Plot.text(areaPlotData, {
+					...defaultAnnotationText,
+					x: 'Year',
+					y: 'Percent',
+					text: (d) => `${d.Year}`,
+					dy: +20,
+					lineAnchor: 'top',
+					dx: 5,
+					textAnchor: 'end',
+					filter: (d) => areaPlotPointsToLabel.includes(d.Year)
+				}),
+
+				// Bottom part of labels (bold)
+				Plot.text(areaPlotData, {
+					...defaultAnnotationText,
+					x: 'Year',
+					y: 'Percent',
+					text: (d) => `${d.Percent * 100}%`,
+					dy: +50,
+					lineAnchor: 'top',
+					dx: 5,
+					textAnchor: 'end',
+					filter: (d) => areaPlotPointsToLabel.includes(d.Year),
+					fontWeight: 'bold'
+				}),
+
+				Plot.dot(areaPlotData, {
+					...defaultDot,
+					x: 'Year',
+					y: 'Percent',
+					filter: (d) => areaPlotPointsToLabel.includes(d.Year)
+				}),
+
+				Plot.ruleY([0], { stroke: theme.light.axis }),
+
+				Plot.axisX({ ...defaultXAxis, tickFormat: (d) => `${d}`, ticks: 12 }),
+				Plot.axisY({ ...defaultYAxis, tickFormat: (d) => `${d}%` })
+			]
+		}}
+		data={areaPlotData}
+	/>
+</Story>
+
+<Story name="Examples / Line chart">
+	<ObservablePlot
+		overrideClass="mt-4"
+		title="London's GDP was up 7% year-on-year in Q3 2022 and down 0.1% in the most recent year to Q3 2023, but continue to outpace the UK's"
+		subTitle="GDP for London and the UK, indexed to their levels in Q4 2019"
+		spec={{
+			y: {
+				...defaultYScale,
+				domain: [65, 115],
+				percent: true
+			},
+
+			x: { ...defaultXScale, insetLeft: 60 },
+
+			color: {
+				...defaultColor,
+				range: [theme.light.primary, theme.light.neutral]
+			},
+
+			style: { ...defaultStyle },
+
+			...defaultSize,
+			marginRight: 2,
+			marginLeft: 0,
+			marginTop: 0,
+			marginBottom: 44,
+			aspectRatio: 5,
+
+			marks: [
+				Plot.ruleY([0], defaultRule),
+				Plot.ruleY([1], defaultRule),
+
+				Plot.lineY(lineChartData, {
+					x: 'Quarter',
+					y: 'Percent',
+					z: 'GDPType',
+					stroke: 'GDPType',
+					strokeWidth: 2,
+					sort: { x: null, reverse: false }
+				}),
+
+				// First section of label (non-bold)
+				...preprocessOptions(lineChartData, {
+					type: Plot.text,
+					options: {
+						...defaultAnnotationText,
+						x: 'Quarter',
+						y: 'Percent',
+						text: (d) =>
+							d.QuarterRev === '2019 Q4'
+								? d.QuarterRev
+								: `${d['GDPType'] === 'London GDP' ? 'London' : 'UK'} ${d.QuarterRev}`,
+
+						filter: (d) => d.highlight,
+
+						dy: (d) => d.Offset || -50,
+						textAnchor: (d) => d.textAnchor || 'end',
+						lineAnchor: 'bottom',
+						fontSize: '15px',
+						fill: 'GDPType'
+					},
+					optionsToEval: {
+						fill: (d) => (d.QuarterRev === '2019 Q4' ? 'black' : 'GDPType')
+					}
+				}),
+
+				// Second section of labels (bold)
+				...preprocessOptions(lineChartData, {
+					type: Plot.text,
+					options: {
+						...defaultAnnotationText,
+						x: 'Quarter',
+						y: 'Percent',
+						text: (d) => `${format('0.2%')(d.Percent)}\nPre-pandemic GDP`,
+						filter: (d) => d.highlight,
+						dy: (d) => (d.Offset || -50) + 30,
+						textAnchor: (d) => d.textAnchor || 'end',
+						lineAnchor: 'bottom',
+						fontSize: '15px',
+						//fill: 'GDPType',
+						fontWeight: 'bold'
+					},
+					optionsToEval: {
+						fill: (d) => (d.QuarterRev === '2019 Q4' ? 'black' : 'GDPType')
+					}
+				}),
+
+				Plot.text([{ Quarter: 'Q4 2019', Percent: 1 }], {
+					x: 'Quarter',
+					dx: -40,
+					y: 'Percent',
+					dy: -15,
+					textAnchor: 'end',
+					text: (d) => '(Index, 2019 Q4)',
+					fontSize: '15px',
+					fill: (d) => 'black'
+				}),
+
+				Plot.dot(lineChartData, {
+					x: 'Quarter',
+					y: 'Percent',
+					stroke: 'GDPType',
+					strokeWidth: 2,
+					sort: { x: null, reverse: false },
+					filter: (d) => d.highlight,
+					r: 8,
+					fill: 'white'
+				}),
+
+				Plot.axisX({
+					...defaultXAxis,
+					tickFormat: (d) => {
+						const year = d.split(' ')[1];
+						const q = d.split(' ')[0];
+						return q === 'Q1' ? `${q}\n${year}` : q;
+					},
+					marginBottom: 50
+				}),
+
+				Plot.axisY({
+					...defaultYAxis,
+					ticks: 4,
+					tickFormat: (d) => `${d}%`
+				})
+			]
+		}}
+		data={lineChartData}
+	/>
+</Story>
+
+<Story name="Examples / Line chart 2">
+	<ObservablePlot
+		overrideClass="mt-4"
+		title="In London, from 2021/22 to 2022/23, there was an uptick in under 19s and 19-24 year olds starting apprenticeship programmes"
+		subTitle="Number of apprenticeship programme starts and completions in London for under 19s and 19-24 year olds between 2014/15 and 2022/23"
+		spec={{
+			y: {
+				...defaultYScale,
+				domain: [0, 1.6e4],
+				percent: false
+			},
+
+			x: defaultXScale,
+
+			color: {
+				...defaultColor,
+				range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+			},
+			style: defaultStyle,
+
+			...defaultSize,
+			marginRight: 2,
+			marginLeft: 0,
+			marginTop: 0,
+			marginBottom: 44,
+			aspectRatio: 4500,
+
+			marks: [
+				Plot.ruleY([0], defaultRule),
+
+				// <19
+				Plot.lineY(education_data, {
+					...defaultLine,
+					x: 'Date',
+					y: 'Count',
+					z: 'Age',
+					stroke: 'Age',
+					sort: { x: null, reverse: false },
+					filter: (d) => d.Type === 'Completions',
+					strokeDasharray: '5,5'
+				}),
+
+				// 19-24
+				Plot.lineY(education_data, {
+					...defaultLine,
+					x: 'Date',
+					y: 'Count',
+					z: 'Age',
+					stroke: 'Age',
+					sort: { x: null, reverse: false },
+					filter: (d) => d.Type === 'Starts'
+				}),
+
+				...preprocessOptions(education_data, {
+					type: Plot.text,
+					options: {
+						...defaultAnnotationText,
+						x: 'Date',
+						y: 'Count',
+						text: (d) => `${d.Age} ${d.Type}\n${d.Count.toLocaleString()}`,
+						dy: (d) => educationLabelOffsets[`${d.Age} ${d.Type}`],
+						textAnchor: 'end',
+						lineAnchor: 'bottom',
+						fill: 'Age',
+						filter: (d) => d.Date === '2022/23'
+					}
+				}),
+
+				Plot.dot(education_data, {
+					...defaultDot,
+					x: 'Date',
+					y: 'Count',
+					filter: (d) => d.Date === '2022/23',
+					stroke: 'Age'
+				}),
+
+				Plot.axisX({
+					...defaultXAxis
+				}),
+				Plot.axisY({
+					...defaultYAxis
+				})
+			]
+		}}
+		data={education_data}
+	/>
+</Story>
+
+<Story name="Examples / Responsive Chart Swap">
+	<div class="block lg:hidden">
+		<ObservablePlot
+			overrideClass="mt-4"
+			title="I'm a simple chart and I get displayed on small screens"
+			spec={{
+				y: {
+					...defaultYScale,
+					domain: [0, 1.6e4],
+					percent: false
+				},
+
+				x: { ...defaultXScale, ticks: 2, insetLeft: 40 },
+
+				color: {
+					...defaultColor,
+					range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+				},
+				style: defaultStyle,
+
+				...defaultSize,
+				marginRight: 2,
+				marginLeft: 0,
+				marginTop: 8,
+				marginBottom: 44,
+				aspectRatio: 2500,
+
+				marks: [
+					Plot.ruleY([0], defaultRule),
+
+					// <19
+					Plot.lineY(education_data, {
+						...defaultLine,
+						x: 'Date',
+						y: 'Count',
+						z: 'Age',
+						stroke: 'Age',
+						sort: { x: null, reverse: false },
+						filter: (d) => d.Type === 'Completions',
+						strokeDasharray: '5,5'
+					}),
+
+					// 19-24
+					Plot.lineY(education_data, {
+						...defaultLine,
+						x: 'Date',
+						y: 'Count',
+						z: 'Age',
+						stroke: 'Age',
+						sort: { x: null, reverse: false },
+						filter: (d) => d.Type === 'Starts'
+					}),
+
+					Plot.dot(education_data, {
+						...defaultDot,
+						x: 'Date',
+						y: 'Count',
+						filter: (d) => d.Date === '2022/23',
+						stroke: 'Age'
+					}),
+
+					Plot.axisX({
+						...defaultXAxis,
+						interval: 'year' // this isn't correct but has the effect of clearing the axis
+					}),
+					Plot.axisY({
+						...defaultYAxis
+					})
+				]
+			}}
+			data={education_data}
+		/>
+	</div>
+
+	<div class="hidden lg:block">
+		<ObservablePlot
+			overrideClass="mt-4"
+			title="I'm a more complex densly labled chart and I get displayed on wider screens"
+			spec={{
+				y: {
+					...defaultYScale,
+					domain: [0, 1.6e4],
+					percent: false
+				},
+
+				x: defaultXScale,
+
+				color: {
+					...defaultColor,
+					range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+				},
+				style: defaultStyle,
+
+				...defaultSize,
+				marginRight: 2,
+				marginLeft: 0,
+				marginTop: 0,
+				marginBottom: 44,
+				aspectRatio: 4500,
+
+				marks: [
+					Plot.ruleY([0], defaultRule),
+
+					// <19
+					Plot.lineY(education_data, {
+						...defaultLine,
+						x: 'Date',
+						y: 'Count',
+						z: 'Age',
+						stroke: 'Age',
+						sort: { x: null, reverse: false },
+						filter: (d) => d.Type === 'Completions',
+						strokeDasharray: '5,5'
+					}),
+
+					// 19-24
+					Plot.lineY(education_data, {
+						...defaultLine,
+						x: 'Date',
+						y: 'Count',
+						z: 'Age',
+						stroke: 'Age',
+						sort: { x: null, reverse: false },
+						filter: (d) => d.Type === 'Starts'
+					}),
+
+					...preprocessOptions(education_data, {
+						type: Plot.text,
+						options: {
+							...defaultAnnotationText,
+							x: 'Date',
+							y: 'Count',
+							text: (d) => `${d.Age} ${d.Type}\n${d.Count.toLocaleString()}`,
+							dy: (d) => educationLabelOffsets[`${d.Age} ${d.Type}`],
+							textAnchor: 'end',
+							lineAnchor: 'bottom',
+							fill: 'Age',
+							filter: (d) => d.Date === '2022/23'
+						}
+					}),
+
+					Plot.dot(education_data, {
+						...defaultDot,
+						x: 'Date',
+						y: 'Count',
+						filter: (d) => d.Date === '2022/23',
+						stroke: 'Age'
+					}),
+
+					Plot.axisX({
+						...defaultXAxis
+					}),
+					Plot.axisY({
+						...defaultYAxis
+					})
+				]
+			}}
+			data={education_data}
+		/>
+	</div>
 </Story>
