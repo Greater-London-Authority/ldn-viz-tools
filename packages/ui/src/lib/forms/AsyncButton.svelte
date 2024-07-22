@@ -24,8 +24,12 @@
 </script>
 
 {#if working}
-	<div class="mx-12">
-		<Spinner class="w-8 h-8 stroke-[20]" />
+	<div class="relative px-4 py-2">
+		<Spinner
+			class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 w-8 h-8 stroke-[20]"
+		/>
+		<!-- This gives the outer div the correct size so the spinner is centered -->
+		<span class="invisible"><slot /></span>
 	</div>
 {:else}
 	<Button on:click={doClick} {...$$restProps}>
