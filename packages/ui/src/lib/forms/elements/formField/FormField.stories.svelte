@@ -30,7 +30,7 @@
 	};
 
 	export const meta = {
-		title: 'Ui/Forms/FormField',
+		title: 'Ui/Form/FormField',
 		component: FormField,
 		argTypes: {
 			type: {
