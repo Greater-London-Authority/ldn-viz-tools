@@ -15,6 +15,6 @@ export type FormValueStore = Writable<FormValues>;
 export type FormErrorStore = Writable<FormErrors>;
 export type FormActiveButtonStore = Writable<string>;
 
-export interface FormFieldProps extends UniformInputProps {
+export interface FormFieldProps extends Omit<UniformInputProps, 'name'> {
 	name: string;
 }

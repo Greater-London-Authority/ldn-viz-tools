@@ -19,8 +19,13 @@
 	export const errorStore: FormErrorStore = writable(structuredClone(initialErrors));
 	export const activeButtonStore: FormActiveButtonStore = writable('');
 
+	export const hasErrors = () => {
+		return !!Object.values($errorStore).find((err) => !!err);
+	};
+
 	setContext('formValueStore', valueStore);
 	setContext('formErrorStore', errorStore);
+	setContext('formHasErrors', hasErrors);
 	setContext('formActiveButtonStore', activeButtonStore);
 </script>
 
