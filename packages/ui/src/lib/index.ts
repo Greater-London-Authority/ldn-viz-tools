@@ -40,6 +40,7 @@ export { default as SidebarToggle } from './sidebar/elements/sidebarToggle/Sideb
 
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
+export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/PrivacyPolicyLink.svelte';
 
 export { default as SidebarHint } from './sidebar/elements/sidebarHint/SidebarHint.svelte';
 
@@ -69,6 +70,7 @@ export { default as Geolocator } from './geolocation/Geolocator.svelte';
 export * from './geolocation/types';
 
 export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCookieConsent.svelte';
+export { default as CookieControlSettings } from './analytics/CookieControlSettings.svelte';
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
