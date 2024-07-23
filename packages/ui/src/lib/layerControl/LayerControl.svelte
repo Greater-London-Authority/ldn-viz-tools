@@ -24,7 +24,6 @@
 	 */
 	export let hideSizeControl = false;
 
-
 	/**
 	 * the name of the layer
 	 */
@@ -47,7 +46,6 @@
 		opacity: 1.0,
 		size: 10
 	};
-
 
 	/**
 	 * minimum permitted value for the marker size
@@ -73,8 +71,8 @@
 		{/if}
 
 		{#if !hideSizeControl}
-		<ResizeControl bind:size={state.size} {minSize} {maxSize}/>
-			{/if}
+			<ResizeControl bind:size={state.size} {minSize} {maxSize} />
+		{/if}
 	</div>
 
 	<div class="flex items-center content-center gap-0.5">

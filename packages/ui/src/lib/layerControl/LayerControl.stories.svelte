@@ -79,7 +79,6 @@
 	/>
 </Story>
 
-
 <Story name="No controls - just the checkbox and help text" source>
 	<LayerControl
 		bind:state
