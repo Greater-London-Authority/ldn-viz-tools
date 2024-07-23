@@ -70,13 +70,24 @@
 	/>
 </Story>
 
-<Story name="No opacity or color control" source>
+<Story name="No size control" source>
+	<LayerControl
+		bind:state
+		label="Borough"
+		helpText="Boundaries of each of Greater London's 32 boroughs"
+		hideSizeControl
+	/>
+</Story>
+
+
+<Story name="No controls - just the checkbox and help text" source>
 	<LayerControl
 		bind:state
 		label="Borough"
 		helpText="Boundaries of each of Greater London's 32 boroughs"
 		hideOpacityControl
 		hideColorControl
+		hideSizeControl
 	/>
 </Story>
 

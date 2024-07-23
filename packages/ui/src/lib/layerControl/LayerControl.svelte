@@ -7,6 +7,7 @@
 	import OpacityControl from '../layerControl/OpacityControl.svelte';
 	import Checkbox from '../checkBox/Checkbox.svelte';
 	import ColorPicker from './ColorPicker.svelte';
+	import ResizeControl from './ResizeControl.svelte';
 
 	/**
 	 * if `true`, then the trigger to open the color picker is not displayed
@@ -17,6 +18,12 @@
 	 * if `true`, then the trigger to open the opacity control is not displayed
 	 */
 	export let hideOpacityControl = false;
+
+	/**
+	 * if `true`, then the trigger to open the size control is not displayed
+	 */
+	export let hideSizeControl = false;
+
 
 	/**
 	 * the name of the layer
@@ -37,8 +44,20 @@
 	export let state = {
 		color: '#000000',
 		visible: true,
-		opacity: 1.0
+		opacity: 1.0,
+		size: 10
 	};
+
+
+	/**
+	 * minimum permitted value for the marker size
+	 */
+	export let minSize = 1;
+
+	/**
+	 * maximum permitted value for the marker size
+	 */
+	export let maxSize = 100;
 </script>
 
 <div class="flex items-center content-center gap-2">
@@ -52,6 +71,10 @@
 		{#if !hideOpacityControl}
 			<OpacityControl bind:opacity={state.opacity} />
 		{/if}
+
+		{#if !hideSizeControl}
+		<ResizeControl bind:size={state.size} {minSize} {maxSize}/>
+			{/if}
 	</div>
 
 	<div class="flex items-center content-center gap-0.5">

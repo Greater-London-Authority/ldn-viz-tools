@@ -3,6 +3,7 @@
 	import { fade } from 'svelte/transition';
 
 	import CloseIcon from '../popover/CloseIcon.svelte';
+	import ResizeIcon from './ResizeIcon.svelte';
 
 	const {
 		elements: { trigger, content, arrow, close },
@@ -12,28 +13,14 @@
 		positioning: { placement: 'top' }
 	});
 
-	export let color = 1;
+	export let size = 1;
 
-	const colors = [
-		'#EE266D',
-		'#00AEEF',
-		'#008D48',
-		'#FFF200',
-		'#00AEEF',
-		'#E0001B',
-		'#9E0059',
-		'#00577D',
-		'#DCA000',
-		'#792C89',
-		'#353D42',
-		'#000000'
-	];
+	export let minSize;
+	export let maxSize;
 </script>
 
-<div {...$trigger} use:trigger class="w-fit h-fit" title="Set layer color">
-	<div class="w-6 h-6 bg-white">
-		<div class="w-4 h-4 relative left-[4px] top-[4px]" style:background={color}></div>
-	</div>
+<div {...$trigger} use:trigger class="w-fit h-fit" title="Adjust marker size">
+	<ResizeIcon class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
 </div>
 
 {#if $open}
@@ -46,20 +33,12 @@
 		<div {...$arrow} use:arrow />
 
 		<div class="text-sm flex flex-col space-y-2 text-core-grey-800">
-			<p class="font-bold">Color</p>
-			<span class="text-sm">Click to assign a color to this layer.</span>
+			<p class="font-bold">Marker size</p>
 
-			<div class="flex flex-wrap gap-2">
-				{#each colors as colorOption}
-					<div
-						class="w-6 h-6 bg-white"
-						style:background={colorOption}
-						on:click={() => {
-							color = colorOption;
-						}}
-						use:close
-					></div>
-				{/each}
+			<div class="flex gap-4 items-center pt-2">
+				<div class="w-40">
+					<input type="range" bind:value={size} min={minSize} max={maxSize} step="0.01" />
+				</div>
 			</div>
 		</div>
 
