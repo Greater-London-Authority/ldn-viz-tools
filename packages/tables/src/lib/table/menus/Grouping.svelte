@@ -30,7 +30,7 @@
 	const deleteCat = (catName: string) => {
 		groups.ungrouped = [...groups.ungrouped, ...groups.grouped[catName]];
 		delete groups.grouped[catName];
-		$groupings = $groupings;
+		$groupings = $groupings; // eslint-disable-line
 
 		onGroupingsChanged();
 	};
@@ -43,7 +43,7 @@
 
 		if (groups.grouped[catName].length === 0) {
 			delete groups.grouped[catName];
-			groups.grouped = groups.grouped;
+			groups.grouped = groups.grouped; // eslint-disable-line
 		}
 
 		onGroupingsChanged();
@@ -71,12 +71,12 @@
 
 	const renameGroup = (oldCatName: string, newCatName: string) => {
 		if (groups.grouped[newCatName]) {
-			$groupings = $groupings; // re-assign to trigger re-render
+			$groupings = $groupings; // eslint-disable-line
 			return false;
 		} else {
 			groups.grouped[newCatName] = groups.grouped[oldCatName];
 			delete groups.grouped[oldCatName];
-			$groupings = $groupings;
+			$groupings = $groupings; // eslint-disable-line
 			onGroupingsChanged();
 			return true;
 		}

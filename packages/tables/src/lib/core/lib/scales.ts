@@ -23,7 +23,7 @@ export const getContinuousColorScale = (
 		domain = domainType as [number, number];
 	}
 
-	let colorScale = getThresholdBreaksColorsLabels({
+	const colorScale = getThresholdBreaksColorsLabels({
 		extent: extent(domain) as number[],
 		breakCount: 10,
 		anchorToZero: false,

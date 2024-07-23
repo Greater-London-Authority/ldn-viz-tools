@@ -174,7 +174,7 @@ export class TableData {
 			}
 		}
 
-		this.groups = this.groups;
+		this.groups = this.groups; // eslint-disable-line
 		this.notifyOfChanges();
 	}
 
@@ -218,7 +218,7 @@ export class TableData {
 			}
 		}
 
-		this.groups = this.groups;
+		this.groups = this.groups; // eslint-disable-line
 		this.notifyOfChanges();
 	}
 

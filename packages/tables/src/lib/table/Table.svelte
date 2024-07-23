@@ -90,7 +90,7 @@
 
 	let rows = [];
 	const onRowsChange = (groups, rows) => {
-		table = table; // hack to force re-render
+		table = table; // eslint-disable-line no-self-assign
 	};
 
 	const createTable = (data) => {
