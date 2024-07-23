@@ -6,6 +6,7 @@
 		FormErrors,
 		FormValueStore,
 		FormErrorStore,
+		FormHasErrors,
 		FormActiveButtonStore
 	} from './types';
 
@@ -19,7 +20,7 @@
 	export const errorStore: FormErrorStore = writable(structuredClone(initialErrors));
 	export const activeButtonStore: FormActiveButtonStore = writable('');
 
-	export const hasErrors = () => {
+	export const hasErrors: FormHasErrors = () => {
 		return !!Object.values($errorStore).find((err) => !!err);
 	};
 

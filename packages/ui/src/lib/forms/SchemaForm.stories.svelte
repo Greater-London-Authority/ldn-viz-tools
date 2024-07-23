@@ -1,8 +1,8 @@
 <script context="module" lang="ts">
-	import FormSubmitButton from '../formSubmitButton/FormSubmitButton.svelte';
+	import FormSubmitButton from './elements/formSubmitButton/FormSubmitButton.svelte';
 	import SchemaForm from './SchemaForm.svelte';
 
-	import type { FormValueStore, FormErrorStore } from '../../types';
+	import type { FormValueStore, FormErrorStore } from './types';
 
 	const stringArg = {
 		control: { type: 'text' },
@@ -22,6 +22,10 @@
 		argTypes: {
 			id: stringArg,
 			name: stringArg,
+			title: stringArg,
+			description: stringArg,
+			fields: immutableArg,
+			customTypes: immutableArg,
 			initialValues: immutableArg,
 			initialErrors: immutableArg,
 			hasErrors: immutableArg,
@@ -35,7 +39,7 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import Button from '../../../button/Button.svelte';
+	import Button from '../button/Button.svelte';
 	import CustomInput from './CustomInput.svelte';
 
 	let valueStore: FormValueStore;
@@ -111,14 +115,13 @@
 	</div>
 </Story>
 
-<Story name="Custom input">
+<Story name="Title & description">
 	<SchemaForm
+		title="About you"
+		description="Please enter information about yourself."
 		name="about_you"
 		bind:valueStore
 		bind:errorStore
-		customTypes={{
-			slider: CustomInput
-		}}
 		fields={[
 			{
 				required: true,
@@ -126,6 +129,32 @@
 				name: 'name',
 				label: 'Name'
 			},
+			{
+				type: 'select',
+				name: 'color',
+				label: 'Colour',
+				options: [
+					{ label: 'Red', value: '#FF0000' },
+					{ label: 'Green', value: '#00FF00' },
+					{ label: 'Blue', value: '#0000FF' }
+				]
+			}
+		]}
+	>
+		<FormSubmitButton slot="rightButtons" onSubmit={() => {}} />
+	</SchemaForm>
+</Story>
+
+<Story name="Custom input type">
+	<SchemaForm
+		title="Custom type"
+		name="about_you"
+		bind:valueStore
+		bind:errorStore
+		customTypes={{
+			slider: CustomInput
+		}}
+		fields={[
 			{
 				required: true,
 				type: 'slider',
@@ -141,9 +170,8 @@
 			emphasis="secondary"
 			condition="warning"
 			on:click={() => {
-				$valueStore.name = '';
-				$valueStore.age = 40;
 				errorStore.set({});
+				$valueStore.age = 40;
 			}}
 		>
 			Clear
@@ -153,11 +181,7 @@
 			onSubmit={() => {
 				errorStore.set({});
 
-				if (!$valueStore.name) {
-					$errorStore.name = 'A name must be entered';
-				}
-
-				if ($valueStore.age && $valueStore.age > 122) {
+				if (typeof $valueStore.age === 'number' && $valueStore.age > 122) {
 					$errorStore.age = 'No one has yet lived over the age of 122';
 				}
 			}}

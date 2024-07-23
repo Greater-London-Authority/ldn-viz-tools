@@ -1,24 +1,33 @@
 <script lang="ts">
-	import Form from '../../Form.svelte';
+	import Form from './Form.svelte';
 	import SchemaFormField from './SchemaFormField.svelte';
-	import type { FormValues, FormErrors } from '../../types';
+	import type {
+		FormValues,
+		FormErrors,
+		FormValueStore,
+		FormErrorStore,
+		FormHasErrors,
+		FormActiveButtonStore,
+		SchemaFormFieldProps,
+		SchemaFormCustomTypes
+	} from './types';
 
 	export let id: string | undefined = undefined;
 	export let name: string | undefined = undefined;
 
-	export let title = '';
-	export let description = '';
+	export let title: string | undefined = undefined;
+	export let description: string | undefined = undefined;
 
-	export let fields = [];
-	export let customTypes = {};
+	export let fields: SchemaFormFieldProps[] = [];
+	export let customTypes: SchemaFormCustomTypes = {};
 
 	export let initialValues: FormValues = {};
 	export let initialErrors: FormErrors = {};
 
-	export let valueStore;
-	export let errorStore;
-	export let hasErrors;
-	export let activeButtonStore;
+	export let valueStore: FormValueStore | undefined;
+	export let errorStore: FormErrorStore | undefined;
+	export let hasErrors: FormHasErrors | undefined;
+	export let activeButtonStore: FormActiveButtonStore | undefined;
 </script>
 
 <Form

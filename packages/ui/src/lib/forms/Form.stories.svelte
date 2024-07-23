@@ -175,7 +175,13 @@
 			message: 'Click submit!'
 		}}
 	>
-		<FormField type="text" name="message" label="Message" required disabled={$activeButtonStore} />
+		<FormField
+			type="text"
+			name="message"
+			label="Message"
+			required
+			disabled={!!$activeButtonStore}
+		/>
 		<FormSubmitButton slot="rightButtons" async onSubmit={waitTwoSeconds} />
 	</Form>
 	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">

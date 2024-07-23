@@ -1,9 +1,10 @@
 <script lang="ts">
-	import InputWrapper from '../../../input/InputWrapper.svelte';
-	import { randomId } from '../../../utils/randomId';
-	import type { UniformInputProps } from '../../../uniformInput/types';
+	import InputWrapper from '../input/InputWrapper.svelte';
+	import { randomId } from '../utils/randomId';
+	import type { UniformInputProps } from '../uniformInput/types';
 
 	export let name: UniformInputProps['name'];
+	export let type: UniformInputProps['type'] = '';
 	export let required: UniformInputProps['required'] = false;
 	export let disabled: UniformInputProps['disabled'] = false;
 	export let id: UniformInputProps['id'] = randomId();
