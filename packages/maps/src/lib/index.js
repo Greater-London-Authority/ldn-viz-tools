@@ -17,7 +17,7 @@ export { default as MapControlGeolocator } from './mapControlLocationSearch/MapC
 export { default as MapControlLocationSearch } from './mapControlLocationSearch/MapControlLocationSearch.svelte';
 
 // Borough Selector
-export { default as MapControlBorough } from './MapControlBorough/MapControlBorough.svelte';
+export { default as MapControlBorough } from './mapControlBorough/MapControlBorough.svelte';
 
 // Events
 export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelte';
