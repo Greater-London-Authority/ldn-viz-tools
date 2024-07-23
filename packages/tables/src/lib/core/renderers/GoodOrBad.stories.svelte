@@ -25,7 +25,7 @@
 </script>
 
 <Template let:args>
-	<GoodOrBad {...args} value={2} benchmarkValue={5} colorScale={() => 'red'}  />
+	<GoodOrBad {...args} value={2} benchmarkValue={5} colorScale={() => 'red'} />
 </Template>
 
 <Story name="Default" source />

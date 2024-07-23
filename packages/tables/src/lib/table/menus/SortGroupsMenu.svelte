@@ -27,8 +27,8 @@
 	let aggregationSelection;
 
 	$: {
-
-		const incompleteState = !orderSelection ||
+		const incompleteState =
+			!orderSelection ||
 			!aggregationSelection ||
 			(aggregationSelection?.value !== 'count' && !fieldSelection);
 

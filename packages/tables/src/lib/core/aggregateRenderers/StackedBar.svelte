@@ -30,7 +30,6 @@
 	let sortedData;
 	let bars = [];
 	const update = (values) => {
-
 		// count the values: produces a list of [value, count] pairs
 		const counts = Object.create(null);
 		values.forEach((val) => {

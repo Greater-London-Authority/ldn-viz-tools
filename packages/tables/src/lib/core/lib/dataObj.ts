@@ -263,7 +263,6 @@ export class TableData {
 
 		// TODO: construct scales for each column, based on type
 		for (const colSpec of this.columnSpec) {
-
 			const values = this.data.map((d) => d[colSpec.short_label]).filter((d) => d); // exclude nulls, or else values[0] may be null
 
 			// TODO: switch based on recorded column types

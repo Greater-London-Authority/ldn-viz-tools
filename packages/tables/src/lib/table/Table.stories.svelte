@@ -109,7 +109,6 @@
 	<Table {data} {tableSpec} paginate allowPageSizeChanges />
 </Story>
 
-
 <Story name="Paginated - page externally controlled" source>
 	<div class="flex flex-col gap-4 max-w-2xl">
 		<div class="border-core-grey-200 border-2 p-2">

@@ -40,11 +40,9 @@ export type ColumnType =
 	| 'Hierachical'
 	| 'Date';
 
-
 export type ColorScale = {
 	breaks: number[];
 	colors: string[];
 	labels: string[];
 	extendedBreaks: number[];
 };
-
