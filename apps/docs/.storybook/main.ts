@@ -17,7 +17,9 @@ const config: StorybookConfig = {
 		'../../../packages/charts/src/**/*.mdx',
 		'../../../packages/charts/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
 		'../../../packages/maps/src/**/*.mdx',
-		'../../../packages/maps/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
+		'../../../packages/maps/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
+		'../../../packages/tables/src/**/*.mdx',
+		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
 		'@storybook/addon-svelte-csf',
