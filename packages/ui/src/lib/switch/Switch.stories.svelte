@@ -8,13 +8,13 @@
 		component: Switch,
 		argTypes: {
 			size: {
-								options: ['md', 'sm'],
+				options: ['md', 'sm'],
 				control: { type: 'select' }
 			},
-						labelOn: {
-								options: ['left', 'right'],
+			labelOn: {
+				options: ['left', 'right'],
 				control: { type: 'select' }
-			},
+			}
 		}
 	};
 
@@ -42,7 +42,7 @@
 	<Switch label="Enable something" size="sm" {checked} />
 </Story>
 
-<Story name="Label on left"  source>
+<Story name="Label on left" source>
 	<Switch label="Enable something" size="sm" labelOn="left" {checked} />
 </Story>
 
