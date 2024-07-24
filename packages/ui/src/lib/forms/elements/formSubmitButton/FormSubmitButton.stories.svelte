@@ -7,7 +7,14 @@
 		component: FormSubmitButton,
 		argTypes: {
 			onSubmit: {
-				control: { type: 'none' }
+				type: 'function',
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(event: MouseEvent | TouchEvent) => void | Promise<unknown>;'
+					}
+				}
 			},
 			async: {
 				control: { type: 'boolean' }

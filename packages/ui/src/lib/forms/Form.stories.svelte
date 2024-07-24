@@ -167,6 +167,25 @@
 	</div>
 </Story>
 
+<Story name="Custom inputs">
+	<Form name="about_you" bind:valueStore>
+		{#if valueStore}
+			<label>
+				Custom input
+				<textarea
+					name="custom_input"
+					class="w-full border border-core-grey-800"
+					rows="3"
+					bind:value={$valueStore.custom_input}
+				/>
+			</label>
+		{/if}
+	</Form>
+	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
+	</div>
+</Story>
+
 <Story name="Active button store">
 	<Form
 		name="about_you"
