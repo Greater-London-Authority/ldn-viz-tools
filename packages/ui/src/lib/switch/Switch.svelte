@@ -61,7 +61,7 @@
 <div class="flex items-center">
 
 	{#if labelOn === "left"}
-	<label class="pr-4 leading-none text-black" for={id} id={`${id}-label`}>
+	<label class="pr-4 leading-none text-black dark:text-white" for={id} id={`${id}-label`}>
 		{label}
 	</label>
 		{/if}
@@ -88,7 +88,7 @@
 	<input {...$input} use:input />
 
 		{#if labelOn === "right"}
-	<label class="pl-4 leading-none text-black" for={id} id={`${id}-label`}>
+	<label class="pl-4 leading-none text-black dark:text-white" for={id} id={`${id}-label`}>
 		{label}
 	</label>
 		{/if}
