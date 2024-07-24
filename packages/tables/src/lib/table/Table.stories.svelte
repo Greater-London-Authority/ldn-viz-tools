@@ -63,6 +63,31 @@
 		]
 	};
 
+	let wideTableSpec = { columns: [] };
+	for (let i = 0; i < 25; i++) {
+		wideTableSpec.columns.push({
+			short_label: `field_${i}`,
+			label: `Field ${i}`,
+
+			cell: {
+				renderer: 'TextCell',
+				width: '125px',
+				alignText: 'left'
+			},
+
+			column: { renderer: 'TextCell', value: '' }
+		});
+	}
+
+	let wideTableData = [];
+	for (let j = 0; j < 100; j++) {
+		let row = {};
+		for (let i = 0; i < 25; i++) {
+			row[`field_${i}`] = Math.round(Math.random() * 100) / 100;
+		}
+		wideTableData.push(row);
+	}
+
 	export let page = 1;
 </script>
 
@@ -124,4 +149,8 @@
 	</div>
 </Story>
 
+<!-- Example of a table that is wider than its parent and needs to be scrolled -->
+<Story name="Wide table">
+	<Table data={wideTableData} tableSpec={wideTableSpec} paginate pageSize={5} bind:page />
+</Story>
 <!-- TODO: add example of filtering -->
