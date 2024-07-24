@@ -10,17 +10,19 @@
 	import { createSwitch } from '@melt-ui/svelte';
 	import { writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * If `true`, the user will not be able to interact with the Switch to download data.
 	 */
-
 	export let disabled = false;
 
 	/**
 	 * Value set as the `name` attribute of the hidden `<input>` element (optional, but required if providing value with a form submission)
 	 */
 	export let name = '';
+
+	export let id = randomId();
 
 	/**
 	 * Determines whether field is required.
@@ -32,6 +34,16 @@
 	 */
 	export let label = '';
 
+	/**
+	 * The size of the switch.
+	 */
+	export let size: 'md' | 'sm' = 'md';
+
+	/**
+	 * Which side of the switch to display the label on.
+	 */
+	export let labelOn: 'left' | 'right' = 'right';
+
 	export let checked = writable(false);
 
 	const {
@@ -42,26 +54,42 @@
 	$: $disabledStore = disabled;
 	$: $nameStore = name;
 	$: $requiredStore = required;
+
+	const translation = { 'md' : '20px', 'sm': '15px'}
 </script>
 
 <div class="flex items-center">
-	<label class="pr-4 leading-none text-black" for="airplane-mode" id="airplane-mode-label">
+
+	{#if labelOn === "left"}
+	<label class="pr-4 leading-none text-black" for={id} id={`${id}-label`}>
 		{label}
 	</label>
+		{/if}
+
 	<button
 		{...$root}
 		use:root
-		class="relative h-6 cursor-default rounded-full bg-core-grey-200 transition-colors data-[state=checked]:bg-core-blue-600 w-11 p-0.5"
-		id="airplane-mode"
-		aria-labelledby="airplane-mode-label"
+		class={classNames(
+			"relative cursor-default rounded-full bg-core-grey-200 transition-colors data-[state=checked]:bg-core-blue-600 ",
+		(size === 'md') ? "h-6 w-11 p-[1px]" : "h-4 w-[30px] p-[1px]"
+		)}
+		id={id}
+		aria-labelledby={`${id}-label`}
 	>
 		<span
 			class={classNames(
-				'thumb w-5 h-5 block rounded-full transition',
+				'thumb block rounded-full transition border-core-grey-200 border',
+				(size === 'md') ? 'w-[22px] h-[22px]' : 'w-3.5 h-3.5 ',
 				disabled ? 'bg-core-grey-100' : 'bg-white'
 			)}
-			style:transform={$checked ? `translate(20px, 0px)` : ''}
+			style:transform={$checked ? `translate(${translation[size]}, 0px)` : ''}
 		/>
 	</button>
 	<input {...$input} use:input />
+
+		{#if labelOn === "right"}
+	<label class="pl-4 leading-none text-black" for={id} id={`${id}-label`}>
+		{label}
+	</label>
+		{/if}
 </div>

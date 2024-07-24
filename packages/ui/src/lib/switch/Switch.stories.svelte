@@ -5,7 +5,17 @@
 
 	export const meta = {
 		title: 'Ui/Switch',
-		component: Switch
+		component: Switch,
+		argTypes: {
+			size: {
+								options: ['md', 'sm'],
+				control: { type: 'select' }
+			},
+						labelOn: {
+								options: ['left', 'right'],
+				control: { type: 'select' }
+			},
+		}
 	};
 
 	let checked = writable(false);
@@ -26,6 +36,14 @@
 
 <Story name="With label" source>
 	<Switch label="Enable something" {checked} />
+</Story>
+
+<Story name="small" source>
+	<Switch label="Enable something" size="sm" {checked} />
+</Story>
+
+<Story name="Label on left"  source>
+	<Switch label="Enable something" size="sm" labelOn="left" {checked} />
 </Story>
 
 <Story name="Control whether disabled" source>
