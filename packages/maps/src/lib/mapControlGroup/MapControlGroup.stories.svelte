@@ -10,6 +10,8 @@
 	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
+	import MapControlLocationSearch from '../mapControlLocationSearch/MapControlLocationSearch.svelte';
+	import { MapGeocoderAdapterMapBox } from '../mapControlLocationSearch/MapGeocoderAdapterMapBox';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
@@ -68,16 +70,11 @@
 			{#each Object.keys(MapControlGroupPositions) as position}
 				{#if position != 'TopRightOffset'}
 					<MapControlGroup {position}>
-						<div class="text-white w-80 flex pointer-events-auto">
-							<input
-								type="text"
-								class="grow bg-core-grey-500 placeholder-core-grey-200 p-2"
-								placeholder="Placeholder for the location search"
-							/>
-							<button title="Find my location" class="bg-core-grey-800 w-10 h-10 text-3xl">
-								◎
-							</button>
-						</div>
+						<MapControlLocationSearch
+							adapter={new MapGeocoderAdapterMapBox(
+								'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+							)}
+						/>
 						<MapControlZoom />
 					</MapControlGroup>
 				{/if}
@@ -111,14 +108,11 @@
 			</div>
 
 			<MapControlGroup position="TopLeft">
-				<div class="text-white w-80 flex pointer-events-auto">
-					<input
-						type="text"
-						class="grow bg-core-grey-500 placeholder-core-grey-200 p-2"
-						placeholder="Placeholder for the location search"
-					/>
-					<button title="Find my location" class="bg-core-grey-800 w-10 h-10 text-3xl"> ◎ </button>
-				</div>
+				<MapControlLocationSearch
+					adapter={new MapGeocoderAdapterMapBox(
+						'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+					)}
+				/>
 				<MapControlZoom />
 			</MapControlGroup>
 
