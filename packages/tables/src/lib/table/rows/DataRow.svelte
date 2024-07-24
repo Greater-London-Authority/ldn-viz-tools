@@ -26,6 +26,9 @@
 								colorScale={table.scales[col.short_label]}
 								posScale={table.posScales[col.short_label]}
 								value={row[col.short_label]}
+								contextVals={col.cell.contextFields
+									? col.cell.contextFields.map((c) => row[c])
+									: []}
 								extent={table.extents[col.short_label]}
 								{...col.cell}
 							/>
