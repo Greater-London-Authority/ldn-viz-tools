@@ -14,7 +14,11 @@
 		{#each table.columnSpec as col}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
-				<div style:width={col.cell.width ?? DEFAULT_CELL_WIDTH} class="was-td">
+				<div
+					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
+					class="was-td"
+					style="flex-shrink: 0"
+				>
 					{#if col.cell && col.cell.renderer}
 						<LinkWrapper href={col.href} {row}>
 							<svelte:component

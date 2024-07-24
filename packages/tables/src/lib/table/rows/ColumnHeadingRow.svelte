@@ -21,6 +21,7 @@
 				class="flex font-bold was-th"
 				role="columnheader"
 				colspan="1"
+				style="flex-shrink: 0"
 				style:width={sumWidths([
 					table.widths.groupLabel,
 					table.widths.groupSizeLabel,
@@ -32,7 +33,12 @@
 		{/each}
 	</svelte:fragment>
 
-	<div class="flex font-bold was-th" role="columnheader" slot="groupSizeLabel">
+	<div
+		class="flex font-bold was-th"
+		role="columnheader"
+		slot="groupSizeLabel"
+		style="flex-shrink: 0"
+	>
 		{table.groups.length > 1 ? 'Count' : ''}
 	</div>
 
@@ -43,6 +49,7 @@
 					class="flex font-bold was-th"
 					role="columnheader"
 					colspan="1"
+					style="flex-shrink: 0"
 					style:width={col.cell.width ?? table.widths.defaultCell}
 				>
 					<Header
