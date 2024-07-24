@@ -14,7 +14,8 @@ It includes support for rendering visualizations inside table cells, and for ren
 
 - `core/lib`: these _functions_ manipulate tabular data, and create scales used by the renderers
 - `core/aggregateRenderers`: these _components_ render a visual encoding of an _array of values_ corresponding to the values of a particular column for multiple rows (provided as the `values` prop).
-- `core/renderers`: these _components_ render a visual encoding of a _single value_ corresponding to a single table cell (provided as the `value` prop)
+- `core/renderers`: these _components_ render a visual encoding of a _single value_ corresponding to a single table cell (provided as the `value` prop).
+  If requested by the specification, the value of additional columns for the same row will be provided as the `contextVals` prop.
 
 2. `table/`
 
