@@ -6,7 +6,6 @@
 	 */
 	import { format } from 'd3-format';
 	import { classNames } from '../../utils/utilityFns.js';
-	import { Tooltip } from '@ldn-viz/ui';
 
 	export let value: number | string;
 
@@ -27,15 +26,6 @@
 
 	$: textColor = contextVals.length > 0 && !contextVals[0] ? 'rgb(134, 139, 142)' : 'black';
 </script>
-
-<!--
-<div class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>
-  <span style="padding-right: 0.25em">{formatString ? f(value) : value}</span>
-    {#if contextVals.length >0 && contextVals[0]}
-    <Tooltip hintLabel="est"> This value is estimated, rather than known.</Tooltip>
-  {/if}
-</div>
--->
 
 <div class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>
 	<span style:color={textColor}>{formatString ? f(value) : value}</span>
