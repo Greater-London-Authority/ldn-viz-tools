@@ -31,8 +31,8 @@
 
 <style lang="postcss">
 	.trigger {
-		@apply inline-flex h-9 w-fit items-center justify-center rounded-full bg-white p-0;
-		@apply text-sm font-medium transition-colors hover:bg-white/90;
+		@apply inline-flex h-9 w-fit items-center justify-center rounded-full  p-0;
+		@apply text-sm font-medium transition-colors ;
 		@apply focus-visible:ring  focus-visible:ring-offset-2;
 	}
 
@@ -40,11 +40,12 @@
 		@apply absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full;
 		@apply transition-colors;
 		@apply focus-visible:ring  focus-visible:ring-offset-2;
-		@apply bg-white p-0 text-sm font-medium;
+		@apply  p-0 text-sm font-medium;
 	}
 
 	.content {
-		@apply z-10 w-60 rounded-[4px] bg-white p-5 shadow-sm;
-		@apply border border-core-grey-200;
+		@apply z-10 w-60 rounded-[4px] bg-white dark:bg-core-grey-800 p-5 shadow-sm;
+		@apply border border-core-grey-200 dark:border-core-grey-900;
+		@apply text-black dark:text-white;
 	}
 </style>
