@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scaleLinear, type ScaleLinear } from 'd3-scale';
+	import { type ScaleLinear } from 'd3-scale';
 
 	/**
 	 * An ordinal d3 color scale.
@@ -18,9 +18,6 @@
 
 	const width = 600;
 	const height = 20;
-
-	let xScale: ScaleLinear<number, number>;
-	$: xScale = scaleLinear().range([0, width]).domain(scale.domain());
 </script>
 
 <div class="flex flex-col items-center gap-2">
