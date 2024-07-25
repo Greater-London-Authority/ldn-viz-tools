@@ -4,8 +4,8 @@
 	 * @component
 	 */
 
-	import Tooltip from '../../../tooltip/Tooltip.svelte';
 	import Popover from '../../../popover/Popover.svelte';
+	import Tooltip from '../../../tooltip/Tooltip.svelte';
 	import SidebarHintModal from './SidebarHintModal.svelte';
 
 	/**
