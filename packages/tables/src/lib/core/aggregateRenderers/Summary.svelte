@@ -10,8 +10,6 @@
 	 */
 	export let values;
 
-	$: meanVal = mean(values);
-
 	export let formatString = '0.0f';
 	$: f = format(formatString);
 </script>
