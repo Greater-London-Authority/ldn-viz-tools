@@ -18,7 +18,7 @@
 	const themeClasses = [darkThemeClasses, lightThemeClasses];
 
 	$: sectionClasses = classNames(
-		'border-b border-core-grey-600 space-y-2 pb-2 text-sm',
+		'border-b border-core-grey-600 space-y-4 pb-2 text-sm',
 		...themeClasses
 	);
 </script>

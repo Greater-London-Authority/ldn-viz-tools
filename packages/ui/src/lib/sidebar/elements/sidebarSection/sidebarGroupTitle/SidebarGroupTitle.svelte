@@ -15,7 +15,7 @@
 </script>
 
 <div class={groupTitleClasses}>
-	<h3 class="font-bold text-sm">
+	<h3 class="font-semibold text-sm leading-snug">
 		<!-- The title. -->
 		<slot />
 	</h3>
