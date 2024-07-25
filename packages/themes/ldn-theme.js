@@ -56,6 +56,9 @@ const config = {
             `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${ldnColors.core.grey[700]}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
           )}")`
         },
+        '.form-range': {
+          'accent-color': ldnColors.core.blue[600]
+        },
         '.dark': {
           '.form-input, .form-textarea, .form-select, .form-multiselect, .form-checkbox, .form-radio':
             {
@@ -74,7 +77,7 @@ const config = {
             color: ldnColors.core.grey[300]
           },
           '.form-checkbox, .form-radio': {
-            color: ldnColors.core.blue[600]
+            color: ldnColors.core.blue[100]
           },
           '.form-checkbox:checked, .form-radio:checked': {
             'background-color': ldnColors.core.blue[600]
@@ -84,6 +87,9 @@ const config = {
             'background-image': `url("${svgToDataUri(
               `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${ldnColors.core.grey[100]}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
             )}")`
+          },
+          '.form-range': {
+            'accent-color': ldnColors.core.blue[600]
           }
         }
       });
