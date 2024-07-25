@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/tables",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"scripts": {
 		"dev": "vite dev --port 3004 --open",
 		"build": "vite build && npm run package",

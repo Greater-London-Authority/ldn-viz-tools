@@ -150,5 +150,6 @@
 		<Input type="date" label="Date" name="date-input" />
 		<Input type="datetime-local" label="Datetime local" name="datetime-local-input" />
 		<Input type="file" label="File" name="file-input" />
+		<Input type="range" label="Range" name="range" />
 	</div>
 </Story>
