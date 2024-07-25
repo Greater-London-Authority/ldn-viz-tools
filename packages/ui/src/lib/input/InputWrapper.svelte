@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Tooltip } from '@ldn-viz/ui';
+	import Tooltip from '../tooltip/Tooltip.svelte';
 	import { classNames } from '../utils/classNames';
 
 	export let label = '';
@@ -34,7 +34,7 @@
 	);
 </script>
 
-<div class="flex flex-col space-y-2">
+<div class="flex flex-col space-y-1">
 	<div class="flex justify-between [&>div]:text-sm">
 		{#if label}
 			<label for={id} class={labelClasses}>
