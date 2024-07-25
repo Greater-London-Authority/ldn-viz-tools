@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createPopover, melt } from '@melt-ui/svelte';
+	import { createPopover } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { XMark } from '@steeze-ui/heroicons';
