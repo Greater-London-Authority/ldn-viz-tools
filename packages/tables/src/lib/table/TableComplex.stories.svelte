@@ -426,12 +426,73 @@
 		]
 	};
 
+	////
+	import TextCellWithUncertainty from '../core/renderers/TextCellWithUncertainty.svelte';
+
+	const dataUncertain = [
+		{
+			Name: 'Bar',
+			Age: 18,
+			age_known: true,
+			Sex: 'Female',
+			sex_known: true
+		},
+		{
+			Name: 'Foo',
+			Age: 12,
+			age_known: false,
+			Sex: 'Male',
+			sex_known: true
+		},
+		{
+			Name: 'Baz',
+			Age: 22,
+			age_known: true,
+			Sex: 'Male',
+			sex_known: false
+		},
+		{
+			Name: 'Foobar',
+			Age: 22,
+			age_known: false,
+			Sex: 'Male',
+			sex_known: false
+		}
+	];
+	const tableSpecUncertain = {
+		showColSummaries: false,
+		columns: [
+			{
+				short_label: 'Name',
+				cell: { renderer: 'TextCell', width: '100px' }
+			},
+
+			{
+				short_label: 'Age',
+				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['age_known'] }
+			},
+
+			{
+				short_label: 'Sex',
+				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['sex_known'] }
+			}
+		]
+	};
+
 	export let page = 1;
 </script>
 
 <Template let:args>
 	<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} {...args} />
 </Template>
+
+<!--
+This example shows how the encoding used for a column can be influenced by the value of a second column.
+ In this case, some fields also have associated fields that record whether the value is known or merely estimated.
+ -->
+<Story name="Table with uncertain values in columns">
+	<Table data={dataUncertain} tableSpec={tableSpecUncertain} />
+</Story>
 
 <Story name="High Streets Benchmark Table" source>
 	<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} allowSorting />

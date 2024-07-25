@@ -46,4 +46,4 @@
 	$: !showClearButton && clearFeature('geolocator', $mapStore);
 </script>
 
-<Geolocator onLocationFound={flyToLocation} {onSearchError} bind:showClearButton />
+<Geolocator allowClearButton onLocationFound={flyToLocation} {onSearchError} bind:showClearButton />

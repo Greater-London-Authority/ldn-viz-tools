@@ -10,7 +10,11 @@
 	<svelte:fragment slot="dataColumns">
 		{#each table.columnSpec as col}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div style:width={col.cell.width ?? table.widths.defaultCell} class="was-td">
+				<div
+					style:width={col.cell.width ?? table.widths.defaultCell}
+					class="was-td"
+					style="flex-shrink: 0"
+				>
 					{#if col.group && col.group.renderer}
 						<svelte:component
 							this={col.group.renderer}

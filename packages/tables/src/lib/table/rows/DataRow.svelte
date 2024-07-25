@@ -14,7 +14,11 @@
 		{#each table.columnSpec as col}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
-				<div style:width={col.cell.width ?? DEFAULT_CELL_WIDTH} class="was-td">
+				<div
+					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
+					class="was-td"
+					style="flex-shrink: 0"
+				>
 					{#if col.cell && col.cell.renderer}
 						<LinkWrapper href={col.href} {row}>
 							<svelte:component
@@ -22,6 +26,9 @@
 								colorScale={table.scales[col.short_label]}
 								posScale={table.posScales[col.short_label]}
 								value={row[col.short_label]}
+								contextVals={col.cell.contextFields
+									? col.cell.contextFields.map((c) => row[c])
+									: []}
 								extent={table.extents[col.short_label]}
 								{...col.cell}
 							/>
