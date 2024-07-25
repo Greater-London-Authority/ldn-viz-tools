@@ -15,5 +15,5 @@
 </script>
 
 <div class="bg-core-grey-200 text-core-grey-400 w-full h-full flex items-center justify-center">
-	<Icon src={Photo} class="h-12 w-12 p-1 stroke-1" />
+	<Icon src={Photo} class="h-8 w-8" />
 </div>
