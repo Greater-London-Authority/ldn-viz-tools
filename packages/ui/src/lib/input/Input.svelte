@@ -151,7 +151,7 @@
 		'dark:text-white',
 		'placeholder-core-grey-400',
 		'dark:placeholder-core-grey-300',
-		type === 'range' ? '' : 'form-input'
+		type === 'range' ? 'form-range' : 'form-input'
 	);
 </script>
 
