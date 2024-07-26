@@ -23,7 +23,7 @@
 	});
 </script>
 
-<!-- Prevent FOUC -->
+<!-- Prevent FOUC (Flash of Unstyled Content) -->
 <svelte:head>
 	<script>
 		var userPref = globalThis.localStorage?.getItem('theme');
