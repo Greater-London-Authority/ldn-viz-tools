@@ -10,7 +10,6 @@
 	 * @component
 	 */
 
-	import { onMount } from 'svelte';
 	import { Button, Modal, Spinner } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -72,7 +71,6 @@
 	};
 
 	let errorMessage = '';
-	let errorMessageTitle = '';
 	let errorModalOpen;
 	$: errorModalOpen?.set(!!errorMessage);
 
@@ -84,7 +82,6 @@
 		showClearButton = false;
 		location = null;
 		errorMessage = '';
-		errorMessageTitle = '';
 	};
 
 	const apiFoundLocation = (result: GeolocationPosition) => {

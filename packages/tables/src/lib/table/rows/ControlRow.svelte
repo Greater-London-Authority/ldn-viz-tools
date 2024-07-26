@@ -15,7 +15,7 @@
 
 <Scaffolding {table}>
 	<svelte:fragment slot="groupControl">
-		{#each table.groupingFields || [] as field, i}
+		{#each table.groupingFields || [] as _field, i}
 			<div
 				style:width={table.widths.groupControl}
 				id="groupControl"

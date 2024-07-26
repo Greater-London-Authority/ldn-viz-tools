@@ -2,7 +2,7 @@
 	export let table;
 </script>
 
-{#each table.groupingFields || [] as field}
+{#each table.groupingFields || [] as _field}
 	<div style:width={table.widths.groupControl} id="groupControl"></div>
 {/each}
 <div style:width={table.widths.groupControl} id="groupControl"></div>
