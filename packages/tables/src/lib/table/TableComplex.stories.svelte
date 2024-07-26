@@ -446,7 +446,7 @@
 		},
 		{
 			Name: 'Baz',
-			Age: 22,
+			Age: 20,
 			age_known: true,
 			Sex: 'Male',
 			sex_known: false
@@ -464,16 +464,19 @@
 		columns: [
 			{
 				short_label: 'Name',
+				hintText: 'What this person is called.',
 				cell: { renderer: 'TextCell', width: '100px' }
 			},
 
 			{
 				short_label: 'Age',
+				hintText: 'How old this person is, in years.',
 				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['age_known'] }
 			},
 
 			{
 				short_label: 'Sex',
+				hintText: 'Whether this person is male or female.',
 				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['sex_known'] }
 			}
 		]
@@ -491,7 +494,7 @@ This example shows how the encoding used for a column can be influenced by the v
  In this case, some fields also have associated fields that record whether the value is known or merely estimated.
  -->
 <Story name="Table with uncertain values in columns">
-	<Table data={dataUncertain} tableSpec={tableSpecUncertain} />
+	<Table data={dataUncertain} tableSpec={tableSpecUncertain} allowSorting />
 </Story>
 
 <Story name="High Streets Benchmark Table" source>
