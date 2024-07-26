@@ -78,13 +78,13 @@
 	 * With this the user dev can disable, hide, or show content while a
 	 * long running asynchronus activity is in progress, e.g. submission.
 	 */
-	export let activeButtonStore: FormActiveButtonStore | undefined;
+	export let activeButtonStore: FormActiveButtonStore | undefined = undefined;
 
 	/**
 	 * Function that when called returns true if there are any errors in
 	 * the `errorStore`.
 	 */
-	export let hasErrors: FormHasErrors | undefined;
+	export let hasErrors: FormHasErrors | undefined = undefined;
 </script>
 
 <Form
