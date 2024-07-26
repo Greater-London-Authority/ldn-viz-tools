@@ -1,5 +1,11 @@
 # @ldn-viz/tables
 
+## 0.3.0
+
+### Minor Changes
+
+- 541e6e8: ADDED: it is now possible to display explanatory information about each column in a tooltip.
+
 ## 0.2.0
 
 ### Minor Changes
