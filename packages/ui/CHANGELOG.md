@@ -1,5 +1,24 @@
 # ldn-viz-tools-ui
 
+## 9.2.0
+
+### Minor Changes
+
+- c13d8c5: CHANGED: the `PlaceholderImage` component now contains a small fixed-size icon within a container. It no longer accepts props to control its styling.
+- 7472916: ADDED: Add `Form` component for creating forms containing fields and buttons.
+  ADDED: Add `FormField` component for slotted use exclusively within `Form`.
+  ADDED: Add `AsyncButton` component as a base for some async and slow processing form buttons.
+  ADDED: Add `FormSubmitButton` component for slotted use exclusively within `Form`.
+- 6fdd818: ADDED: Add `SchemaForm` component for creating a `Form` from schema.
+  ADDED: Add `SchemaFormField` (internal) used by `SchemaForm` that renders both library and custom input types.
+- 5ac83d9: ADDED: Add `UniformInput` component as a single component (API) encapsulating all input components.
+
+### Patch Changes
+
+- 4c430cd: FIXED: fix styling of `Input` element when `type='range'`
+- 5094d7d: CHANGED: fix errors that occured when using components in non-secure context without specifying an id
+- 1a37060: CHANGED: update `Switch` component to add control of size, and which size label is displayed on
+
 ## 9.1.1
 
 ### Patch Changes
