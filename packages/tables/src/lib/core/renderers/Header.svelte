@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ChevronDown, ChevronUp, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Tooltip } from '@ldn-viz/ui';
 
 	/**
 	 * Text of label/column heading.
@@ -27,6 +28,11 @@
 	 */
 	export let toggle: (ev: Event) => void = () => {};
 
+	/**
+	 * Text to be displayed in tooltip after user hovers on info icon after column heading.
+	 */
+	export let hintText = '';
+
 	const icons = {
 		default: ChevronUpDown,
 		asc: ChevronUp,
@@ -49,6 +55,9 @@
 			</div>
 		{:else}
 			{label}
+			{#if hintText}
+				<Tooltip hintLabel="" hintSize="sm">{hintText}</Tooltip>
+			{/if}
 		{/if}
 
 		{#if allowSorting}
