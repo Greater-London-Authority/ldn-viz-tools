@@ -1,4 +1,8 @@
 <script lang="ts">
+	/**
+	 * The `<SchemaForm>` component generates a form from an object describing its fields (the *schema*).
+	 * @component
+	 */
 	import Form from './Form.svelte';
 	import SchemaFormField from './SchemaFormField.svelte';
 	import type {
@@ -18,7 +22,7 @@
 	export let id: string | undefined = undefined;
 
 	/**
-	 * Name of the form that must be unique in the document.
+	 * Name of the form (must be unique in the document).
 	 */
 	export let name: string | undefined = undefined;
 
@@ -76,12 +80,12 @@
 	/**
 	 * Svelte store holding the name of the currently active async button.
 	 * With this the user dev can disable, hide, or show content while a
-	 * long running asynchronus activity is in progress, e.g. submission.
+	 * long-running asynchronous activity is in progress (e.g. submission).
 	 */
 	export let activeButtonStore: FormActiveButtonStore | undefined = undefined;
 
 	/**
-	 * Function that when called returns true if there are any errors in
+	 * Function that when called returns `true` if there are any errors in
 	 * the `errorStore`.
 	 */
 	export let hasErrors: FormHasErrors | undefined = undefined;
@@ -126,14 +130,14 @@
 	{/each}
 
 	<!--
-		Any buttons to be positioned on the bottom left of the form,
-		e.g. back button.
+		Any buttons to be positioned on the bottom-left of the form
+		(e.g. back button).
 	-->
 	<slot slot="leftButtons" name="leftButtons" />
 
 	<!--
-		Any buttons to be positioned on the bottom right of the form,
-		i.e. submit button.
+		Any buttons to be positioned on the bottom-right of the form
+		(e.g. submit button).
 	-->
 	<slot slot="rightButtons" name="rightButtons" />
 </Form>
