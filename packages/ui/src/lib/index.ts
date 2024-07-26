@@ -72,4 +72,7 @@ export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCo
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
+export { default as Theme } from './themeSwitcher/Theme.svelte';
+export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
+
 export { classNames } from './utils/classNames';
