@@ -13,7 +13,7 @@
 </script>
 
 <Template let:args>
-	<Popover>
+	<Popover {...args}>
 		<svelte:fragment slot="title">Metric note</svelte:fragment>
 
 		The contents of the popover...

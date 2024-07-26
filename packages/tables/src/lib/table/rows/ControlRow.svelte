@@ -15,7 +15,7 @@
 
 <Scaffolding {table}>
 	<svelte:fragment slot="groupControl">
-		{#each table.groupingFields || [] as field, i}
+		{#each table.groupingFields || [] as _field, i}
 			<div
 				style:width={table.widths.groupControl}
 				id="groupControl"
@@ -51,6 +51,7 @@
 					class="flex font-bold was-th"
 					role="columnheader"
 					colspan="1"
+					style="flex-shrink: 0"
 					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
 				>
 					<FilterMenu {table} {col} />

@@ -109,7 +109,7 @@
 			return;
 		}
 
-		if ($valueStore.error_field !== 'Svelte') {
+		if ($valueStore.error_field.toLowerCase() !== 'svelte') {
 			$errorStore.error_field = "The field may only contain the world 'Svelte'";
 		}
 	};

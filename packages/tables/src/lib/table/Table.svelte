@@ -12,6 +12,7 @@
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
+	import { sum } from 'd3-array';
 
 	/**
 	 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
@@ -137,6 +138,12 @@
 			}
 		}
 	}
+	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
+
+	$: tableWidth = sumWidths([
+		// TODO: may need to add some of the values from table.widths to account for chrome added when rows grouped
+		...table.columnSpec.map((c) => c.cell.width ?? table.widths.defaultCell)
+	]);
 </script>
 
 {#if table && table.extents}
@@ -153,7 +160,7 @@
 
 	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data}>
 		<div class="table-auto text-sm w-full" slot="table">
-			<div class="border-t border-b" style="border-color: black">
+			<div class="border-t border-b" style="border-color: black" style:width={tableWidth}>
 				{#if tableSpec.colGroups}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
@@ -173,6 +180,7 @@
 				style:height={paginate ? '' : `${height - 100}px`}
 				class:striped={zebraStripe && paginate}
 				class:stripedVirtual={zebraStripe && !paginate}
+				style:width={tableWidth}
 			>
 				{#if paginate}
 					{#each visualRows as visualRow, i}

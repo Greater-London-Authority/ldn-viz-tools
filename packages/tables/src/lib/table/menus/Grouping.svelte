@@ -82,9 +82,6 @@
 		}
 	};
 
-	let numCheckedCategories = 0;
-	$: numCheckedCategories = Object.values(selected).filter((d) => d).length;
-
 	// TODO: sorting
 
 	let draggedOverGroup: string | undefined;

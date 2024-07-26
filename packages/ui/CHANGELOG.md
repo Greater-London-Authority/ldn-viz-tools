@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 9.1.1
+
+### Patch Changes
+
+- 71f1f62: FIXED: `AnalyticsAndCookieConsent` component that when embedded due to tighter main website polices.
+
 ## 9.1.0
 
 ### Minor Changes

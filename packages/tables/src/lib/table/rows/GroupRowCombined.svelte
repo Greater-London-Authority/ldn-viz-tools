@@ -77,7 +77,7 @@
 		/>
 	{/each}
 
-	<div style:width={table.widths.groupLabel} class="was-td">
+	<div style:width={table.widths.groupLabel} class="was-td" style="flex-shrink: 0">
 		{constructLabel(group)}
 	</div>
 
@@ -105,7 +105,7 @@
 	<!-- actual columns -->
 	{#each table.columnSpec as col}
 		{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-			<div style:width={col.cell.width ?? DEFAULT_CELL_WIDTH} class="was-td">
+			<div style:width={col.cell.width ?? DEFAULT_CELL_WIDTH} class="was-td" style="flex-shrink: 0">
 				{#if col.group && col.group.renderer}
 					<svelte:component
 						this={col.group.renderer}

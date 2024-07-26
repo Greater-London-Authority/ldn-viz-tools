@@ -2,8 +2,8 @@
 	/**
 	 * The `<FormSubmitButton>` component is the standard way to add a submit
 	 * button to a `<Form>`. The component can only be used as slotted content
-	 * in parent components that set a `formActiveButtonStore` in context such
-	 * as `<Form>`.
+	 * in parent components that provide a `formActiveButtonStore` as context
+	 * (such as `<Form>`).
 	 * @component
 	 */
 
@@ -20,18 +20,18 @@
 	export let onSubmit: FormButtonhandler;
 
 	/**
-	 * If `true`, switches to a spinner while the `onSubmit` function is being
+	 * If `true`, the label will be replaced by a spinner while the `onSubmit` function is being
 	 * executed.
 	 */
 	export let async = false;
 
 	/**
-	 * Is set to `true` when the `onSubmit` function is being executed so
-	 * intended use is to bind on it to reactively know when a submission is
-	 * in progess.
+	 * Is set to `true` when the `onSubmit` function is being executed.
+	 * THe intended use is to bind to it to reactively know when a submission is
+	 * in progress.
 	 *
-	 * Working will return to `false` once the function, possible including a
-	 * retuned promise, has finished executing.
+	 * Working will be reset to `false` once the function (possibly including a
+	 * returned promise) has finished executing.
 	 */
 	export let working = false;
 
