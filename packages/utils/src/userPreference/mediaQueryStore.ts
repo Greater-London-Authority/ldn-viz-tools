@@ -1,4 +1,3 @@
-// import { browser } from '$app/environment';
 import { BROWSER } from 'esm-env';
 import { writable } from 'svelte/store';
 
