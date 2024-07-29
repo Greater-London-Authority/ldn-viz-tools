@@ -71,7 +71,7 @@
 	/**
 	 * Text to be displayed next to icon in tooltip trigger.
 	 */
-	export let hintLabel = '';
+	export let hintLabel = 'what is this?';
 
 	/**
 	 * If `false`, then `required` attribute is applied to `<input>`.
