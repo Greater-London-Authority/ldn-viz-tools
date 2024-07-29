@@ -101,7 +101,7 @@
 	<Modal bind:isOpen title="Modal with very long content!" width="6xl">
 		{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 
-		{#each sections as section}
+		{#each sections as _section}
 			<div class="mb-4">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci leo, lacinia sed
 				nulla vel, eleifend bibendum magna. Suspendisse potenti. Suspendisse vestibulum consequat

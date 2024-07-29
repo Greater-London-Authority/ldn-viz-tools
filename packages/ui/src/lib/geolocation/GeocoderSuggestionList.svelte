@@ -27,7 +27,7 @@
 	$: highlightFirstSuggestion(suggestions);
 </script>
 
-<ul class="absolute top-10 left-0 bg-core-grey-600 text-white text-sm w-full">
+<ul class="absolute top-10 left-0 bg-core-grey-600 text-white text-sm w-full z-40">
 	{#if suggestions.length === 0}
 		<li class="w-full px-2.5 py-1.5">
 			<h1 class="pointer-events-none">No locations found</h1>

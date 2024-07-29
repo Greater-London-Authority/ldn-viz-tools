@@ -1,5 +1,67 @@
 # ldn-viz-tools-ui
 
+## 9.2.0
+
+### Minor Changes
+
+- c13d8c5: CHANGED: the `PlaceholderImage` component now contains a small fixed-size icon within a container. It no longer accepts props to control its styling.
+- 7472916: ADDED: Add `Form` component for creating forms containing fields and buttons.
+  ADDED: Add `FormField` component for slotted use exclusively within `Form`.
+  ADDED: Add `AsyncButton` component as a base for some async and slow processing form buttons.
+  ADDED: Add `FormSubmitButton` component for slotted use exclusively within `Form`.
+- 6fdd818: ADDED: Add `SchemaForm` component for creating a `Form` from schema.
+  ADDED: Add `SchemaFormField` (internal) used by `SchemaForm` that renders both library and custom input types.
+- 5ac83d9: ADDED: Add `UniformInput` component as a single component (API) encapsulating all input components.
+
+### Patch Changes
+
+- 4c430cd: FIXED: fix styling of `Input` element when `type='range'`
+- 5094d7d: CHANGED: fix errors that occured when using components in non-secure context without specifying an id
+- 1a37060: CHANGED: update `Switch` component to add control of size, and which size label is displayed on
+
+## 9.1.1
+
+### Patch Changes
+
+- 71f1f62: FIXED: `AnalyticsAndCookieConsent` component that when embedded due to tighter main website polices.
+
+## 9.1.0
+
+### Minor Changes
+
+- d23b8b7: FIXED: update visual appearance of `CheckboxGroup` component when bound `selectedOptions` prop is externally updated
+
+## 9.0.1
+
+### Patch Changes
+
+- 6493853: FIXED: include `@turf/turf` as a dependency (rather than devDependency) of `@ldn-viz/maps`, to resolve import error when package is used
+
+## 9.0.0
+
+### Major Changes
+
+- ffffac0: CHANGED: rename the `ColorLegendOrdinalHorizontal` component to `ColorLegendOrdinalChips`, and allos `orientation` to be set to `vertical`
+
+### Minor Changes
+
+- ae07a91: FIXED: fix highlighting in `NavLink` component.
+- bcf8773: FIXED: fix location searching on mobile devices in `Geolocator` component.
+  ADDED: add modal popup when `Geolocator` component error occurs.
+  ADDED: add reactive props to `Geolocator` component that communicate its changing state.
+- 129cf32: CHANGED: increased z-index for geolocation suggestions so it sits above sidebar.
+- 628ae2c: ADDED - add a `MergeValuesControl` that allows users to define how different values of a categorical variable should be merged into new categories
+- e4fc1dc: CHANGED: make text in `SidebarTabLabel` component non-selectable.
+- 8d57614: ADDED: added `Popover` component as an alternative to `Modal` and `Tooltip`
+- 7ded8e8: ADDED: add a new `<Switch>` component
+- 12f8b2a: CHANGED: unfix `SidebarHeader` component so it scrolls with other sidebar content.
+
+### Patch Changes
+
+- c0814a6: CHANGED: Fix an issue in `<AnalyticsAndCookieConsent>` where an application embedded in a non-london.gov.uk website wouldn't load cookie consent properly.
+  CHANGED: Move general comments in `<AnalyticsAndCookieConsent>` to Svelte module script as comments in head tag scripts are not stripped by the Svelte compiler.
+  CHANGED: Optimised code in `<AnalyticsAndCookieConsent>` to be more concise and readable.
+
 ## 8.0.0
 
 ### Major Changes

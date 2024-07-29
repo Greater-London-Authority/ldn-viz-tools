@@ -1,5 +1,44 @@
 # ldn-viz-tools-maps
 
+## 3.0.2
+
+### Patch Changes
+
+- b04b40f: FIXED: fix `<MapControlGeolocator>` so the pin can be cleared as intended
+- 9658b8c: CHANGED: Improved stories for `<MapControlGroup>` so they use the real `<MapControlLocationSearch>` rather than a dummy.
+
+## 3.0.1
+
+### Patch Changes
+
+- f9bdc5b: FIXED: include `@turf/turf` as a dependency (rather than devDependency) of `@ldn-viz/maps`, to resolve import error when package is used
+
+## 3.0.0
+
+### Major Changes
+
+- b9a6199: CHANGED: add TypeScript to `Map` component
+  CHANGED: rename `map` context to `mapStore` in `Map` component
+  CHANGED: add framework for map mouse and touch events to `Map` component (`MapCursor`)
+  CHANGED: add `mapCursorStore` context to `Map` component
+  CHANGED: add `mapStore` and `mapCursorStore` properties to `Map` component
+
+### Minor Changes
+
+- 1ef0fbb: ADDED: `BoroughsContextLayer` component as a context layer for borough boundaries.
+- 03e8fda: ADDED: add `MapCursorEvent` component
+- 76cfe28: ADDED: `MapLayerSource` component for specifying MapLibre data sources within a `<Map>`.
+  ADDED: `GeoJSONMapLayerSource` component for wrapping `MapLayerSource` for specifying local or remote GeoJSON sources.
+  ADDED: `MapLayerView` component for specifying MapLibre layers within a `<MapLayerSource>` or derived component.
+- 45ff3ad: ADDED: `MapPopup` component for creating map tooltips and markers.
+  ADDED: `MapPopupContainer` container component as the standard container for creating tooltips and markers.
+  ADDED: `MapPopupStyledContainer` container component provides standard styling for tooltips and markers.
+  ADDED: `MapPopupFlyToFeature` container component flys to a tooltip or marker and centers it on screen.
+  ADDED: `MapPopupPlacement` container component provides various ways to layout and position a tooltip or marker.
+  ADDED: `PlacementCenterAboveFeature` container component places a tooltip or marker such that the tip is in the center of the feature.
+  ADDED: `PlacementFollowMouse` container component places a tooltip or marker such that it follows the users mouse movement.
+- 03e8fda: CHANGED: add test data to map stories.
+
 ## 2.1.0
 
 ### Minor Changes
