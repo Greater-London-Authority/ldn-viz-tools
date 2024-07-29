@@ -70,7 +70,7 @@
 			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
 			: ''}
 	/>
-	<span class="form-label mx-2">{label}</span>
+	<span class="form-label ml-2">{label}</span>
 	{#if hint}
 		<Tooltip {hintLabel}>
 			{hint}
