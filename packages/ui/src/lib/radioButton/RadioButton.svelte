@@ -6,6 +6,8 @@
 	 * @component
 	 */
 
+	import Tooltip from '../tooltip/Tooltip.svelte';
+
 	/**
 	 * Color of the radio button, as a string in any CSS color format
 	 * (e.g., "LightCoral", "#FFA500", "hsl(120, 100%, 25%)", "rgb(255, 0, 0)").
@@ -40,6 +42,18 @@
 
 	export let disabled = false;
 
+	/**
+	 * Optional help text that appears in a tooltip when a user interacts with the tooltip trigger.
+	 * It provides additional information intended to help the user decide whether or not to check the checkbox.
+	 */
+	export let hint = '';
+
+	/**
+	 * Optional text that appears next to the information icon (the letter "i" in a circle) in the tooltip trigger.
+	 * It provides additional clues that help text is available (e.g. "More information", "About", "Help")
+	 */
+	export let hintLabel = '';
+
 	let inputID = `input-${id}`;
 </script>
 
@@ -57,6 +71,11 @@
 			: ''}
 	/>
 	<span class="form-label mx-2">{label}</span>
+	{#if hint}
+		<Tooltip {hintLabel}>
+			{hint}
+		</Tooltip>
+	{/if}
 </label>
 
 {#if color}
