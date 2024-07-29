@@ -51,7 +51,17 @@
 	</div>
 </Story>
 
-<Story name="With tooltip">
+<Story name="With tooltip - default hintLabel">
+	<div class="w-96">
+		<Input
+			label="Tooltip"
+			name="tooltip-input"
+			hintLabel="optional hint label"
+		/>
+	</div>
+</Story>
+
+<Story name="With tooltip - custom hintLabel">
 	<div class="w-96">
 		<Input
 			label="Tooltip"
