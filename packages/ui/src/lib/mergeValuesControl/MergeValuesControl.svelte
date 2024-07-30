@@ -151,7 +151,7 @@
 		>
 			{#each groups.ungrouped as val}
 				<li
-					class="pl-2 cursor-grab hover:bg-core-blue-500 hover:p-1"
+					class="pl-2 cursor-grab hover:bg-core-blue-500"
 					draggable="true"
 					data-id={val}
 					on:dragstart={(ev) => dragStart(ev, '')}
@@ -213,7 +213,7 @@
 						<li
 							data-id={val}
 							draggable="true"
-							class="cursor-grab hover:bg-core-blue-500 hover:p-1 flex"
+							class="cursor-grab hover:bg-core-blue-500 flex"
 							on:dragstart={(ev) => dragStart(ev, groupName)}
 						>
 							<Button
