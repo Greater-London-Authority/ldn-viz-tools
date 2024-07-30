@@ -1,5 +1,23 @@
 # ldn-viz-tools-ui
 
+## 10.0.0
+
+### Major Changes
+
+- 8fc59bf: CHANGEE: removed some props from the Select componennt, and renamed two: `labelField` -> `itemLabelField`, `itemId` -> `itemValueField`
+
+### Minor Changes
+
+- 56370a9: ADDED: add `CookieControlSettings` and `PrivacyPolicyLink` components
+- 6ce827e: CHANGED: simplify the `MergeValuesControl` component.
+- 82b10d8: ADDED: `Flag` component for displaying banner messages (e.g. to indicate that a site is in beta)
+- 4da0c67: CHANGED: the `<SidebarSection>` component can now accept a `<SidebarSectionTitle>` component inside the `title` slot.
+
+### Patch Changes
+
+- 09410e2: FIXED: fix alignment of tooltip trigger button
+- 281c4e0: CHANGED: the default hintLabel for an input is now "what is this?" (rather than an empty string)
+
 ## 9.2.0
 
 ### Minor Changes
