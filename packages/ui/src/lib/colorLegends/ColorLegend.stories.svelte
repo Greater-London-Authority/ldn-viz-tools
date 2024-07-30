@@ -42,21 +42,9 @@
 
 	import Button from '../button/Button.svelte';
 
-	const continuousColorScale = scaleSequential(interpolateBlues).domain([0, 10]);
-
-	const continuousColorScaleFlipped = scaleSequential((d: number) =>
-		interpolateBlues(1 - d)
-	).domain([0, 10].reverse());
-
 	const bandColorScale = scaleThreshold(
 		[22, 35, 51, 72],
 		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']
-	);
-
-	const bandColorScaleFlipped = scaleThreshold(
-		[22, 35, 51, 72].reverse(),
-		[22, 35, 51, 72].reverse(),
-		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'].reverse()
 	);
 
 	let scale;

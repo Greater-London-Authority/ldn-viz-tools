@@ -26,8 +26,17 @@
 	 * * `label` (string) - the text displayed next to the checkbox
 	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 	 * * `color` (string, optional) - CSS color of the checkbox
+	 * * `hint` (string, optional) - help text to be displayed in tooltip
+	 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
 	 */
-	export let options: { id: string; label: string; color: string; disabled?: boolean }[] = [];
+	export let options: {
+		id: string;
+		label: string;
+		color: string;
+		disabled?: boolean;
+		hint?: string;
+		hintLabel: string;
+	}[] = [];
 
 	/**
 	 * if `true`, then then `Clear` button is not displayed.
@@ -45,6 +54,8 @@
 			label={option.label}
 			color={option.color}
 			disabled={option.disabled}
+			hint={option.hint}
+			hintLabel={option.hintLabel}
 			bind:selectedId
 			{name}
 		/>

@@ -242,7 +242,7 @@
 	{:else}
 		<!-- ordinal -->
 		<g>
-			{#each color.domain() as d, i}
+			{#each color.domain() as d}
 				<rect
 					x={x(d)}
 					y={marginTop}

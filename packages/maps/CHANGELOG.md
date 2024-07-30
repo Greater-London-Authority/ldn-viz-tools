@@ -1,5 +1,12 @@
 # ldn-viz-tools-maps
 
+## 3.0.2
+
+### Patch Changes
+
+- b04b40f: FIXED: fix `<MapControlGeolocator>` so the pin can be cleared as intended
+- 9658b8c: CHANGED: Improved stories for `<MapControlGroup>` so they use the real `<MapControlLocationSearch>` rather than a dummy.
+
 ## 3.0.1
 
 ### Patch Changes

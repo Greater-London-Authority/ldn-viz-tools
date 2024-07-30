@@ -71,7 +71,7 @@
 	/**
 	 * Text to be displayed next to icon in tooltip trigger.
 	 */
-	export let hintLabel = '';
+	export let hintLabel = 'more info';
 
 	/**
 	 * If `false`, then `required` attribute is applied to `<input>`.
@@ -151,7 +151,7 @@
 		'dark:text-white',
 		'placeholder-core-grey-400',
 		'dark:placeholder-core-grey-300',
-		'form-input'
+		type === 'range' ? 'form-range' : 'form-input'
 	);
 </script>
 
