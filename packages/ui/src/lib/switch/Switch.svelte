@@ -34,14 +34,14 @@
 	 */
 	export let label = '';
 
-  /**
-  * Whether the checbox is checked.
-  */
+	/**
+	 * Whether the checbox is checked.
+	 */
 	export let checked = false;
 
 	const checkedStore = writable(checked);
 
-  /**
+	/**
 	 * The size of the switch.
 	 */
 	export let size: 'md' | 'sm' = 'md';
@@ -50,7 +50,6 @@
 	 * Which side of the switch to display the label on.
 	 */
 	export let labelOn: 'left' | 'right' = 'right';
-
 
 	const {
 		elements: { root, input },
@@ -80,7 +79,7 @@
 		}
 	};
 
-  const translation = { md: '20px', sm: '15px' };
+	const translation = { md: '20px', sm: '15px' };
 </script>
 
 <div class="flex items-center">
