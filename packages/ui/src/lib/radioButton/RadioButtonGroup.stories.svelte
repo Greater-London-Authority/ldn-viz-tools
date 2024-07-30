@@ -13,7 +13,12 @@
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
-		{ id: 'train', label: 'Train stations', color: '#008D48' },
+		{
+			id: 'train',
+			label: 'Train stations',
+			color: '#008D48',
+			hint: 'Excluding underground stations'
+		},
 		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
 		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
 	];

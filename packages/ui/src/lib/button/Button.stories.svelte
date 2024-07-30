@@ -33,7 +33,7 @@
 </script>
 
 <script lang="ts">
-	import { ArrowDownCircle } from '@steeze-ui/heroicons';
+	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
@@ -112,6 +112,13 @@
 	}}
 >
 	<Button class="w-full">Custom classes applied</Button>
+</Story>
+
+<Story name="With Icon">
+	<Button>
+		Download as PNG
+		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+	</Button>
 </Story>
 
 <Story name="With Link">

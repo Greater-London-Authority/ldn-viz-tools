@@ -8,7 +8,7 @@
 	import SidebarSectionTitle from './sidebarSectionTitle/SidebarSectionTitle.svelte';
 
 	/**
-	 * The title of this section.
+	 * The title of this section. Note tat rather than supplying a title, you can supply a `<SidebarSectionTitle>` component in the `title` slot.
 	 */
 	export let title = '';
 
@@ -18,14 +18,20 @@
 	const themeClasses = [darkThemeClasses, lightThemeClasses];
 
 	$: sectionClasses = classNames(
-		'border-b border-core-grey-600 space-y-2 pb-2 text-sm',
+		'border-b border-core-grey-600 space-y-4 pb-2 text-sm',
 		...themeClasses
 	);
 </script>
 
 <section>
 	<div class={sectionClasses}>
-		<SidebarSectionTitle>{title}</SidebarSectionTitle>
+		{#if $$slots.title}
+			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->
+			<slot name="title" />
+		{:else}
+			<SidebarSectionTitle>{title}</SidebarSectionTitle>
+		{/if}
+
 		<!-- The content to be displayed inside this section. -->
 		<slot />
 	</div>

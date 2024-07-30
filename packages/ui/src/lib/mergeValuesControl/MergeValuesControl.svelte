@@ -77,9 +77,6 @@
 		}
 	};
 
-	let numCheckedCategories = 0;
-	$: numCheckedCategories = Object.values(selected).filter((d) => d).length;
-
 	let draggedOverGroup: string | undefined;
 
 	const dragOver = (ev: DragEvent, groupName: string) => {
@@ -173,7 +170,7 @@
 		<div
 			class="border-core-green-600 border-2 black p-2 flex items-center"
 			on:dragover={(ev) => dragOver(ev, newGroupName)}
-			on:dragleave={(ev) => dragLeave()}
+			on:dragleave={() => dragLeave()}
 			on:dragenter={(ev) => ev.preventDefault()}
 			on:drop={(ev) => dragDrop(ev, newGroupName)}
 			class:currentDropTarget={draggedOverGroup === newGroupName}
@@ -188,7 +185,7 @@
 		<ul
 			class="list-none"
 			on:dragover={(ev) => dragOver(ev, '')}
-			on:dragleave={(ev) => dragLeave()}
+			on:dragleave={() => dragLeave()}
 			on:dragenter={(ev) => ev.preventDefault()}
 			on:drop={dropOutOfGroup}
 			class:currentDropTarget={draggedOverGroup === ''}
@@ -212,7 +209,7 @@
 			<li
 				class="pt-4 pl-2"
 				on:dragover={(ev) => dragOver(ev, groupName)}
-				on:dragleave={(ev) => dragLeave()}
+				on:dragleave={() => dragLeave()}
 				on:dragenter={(ev) => ev.preventDefault()}
 				on:drop={(ev) => dragDrop(ev, groupName)}
 				class:currentDropTarget={draggedOverGroup === groupName}

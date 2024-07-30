@@ -188,7 +188,7 @@
 	);
 </script>
 
-<div>
+<div class="flex">
 	<svelte:element
 		this={href ? 'a' : 'button'}
 		type={href ? undefined : type}
