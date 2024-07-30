@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Plus } from '@steeze-ui/heroicons';
+	import { Minus, Plus, Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import Button from '../button/Button.svelte';
@@ -14,19 +14,6 @@
 
 	export let groups: Grouping = { ungrouped: [], grouped: {} };
 	export let onGroupingsChanged = () => null;
-
-	let selected: Record<string, boolean> = {};
-
-	let catName = '';
-	const createCat = () => {
-		groups.grouped[catName] = Object.keys(selected).filter((name) => selected[name]);
-		groups.ungrouped = groups.ungrouped.filter((name) => !selected[name]);
-
-		selected = {};
-		catName = '';
-
-		onGroupingsChanged();
-	};
 
 	const deleteCat = (catName: string) => {
 		groups.ungrouped = [...groups.ungrouped, ...groups.grouped[catName]];
@@ -134,54 +121,26 @@
 		draggedOverGroup = undefined;
 	};
 
-	let newGroupName = 'New Category';
+	let newGroupName = 'Unnamed Category';
 	$: {
 		let i = 0;
 		const allGroupNames = Object.keys(groups.grouped);
 
 		while (allGroupNames.includes(newGroupName)) {
 			i++;
-			newGroupName = `New Category ${i}`;
+			newGroupName = `Unnamed Category ${i}`;
 		}
 	}
 </script>
 
 <div class="flex flex-col gap-4">
-	<div class="flex flex-col gap-1 w-96">
-		<HelpText>Merge selected values</HelpText>
-
-		<div class="flex gap-1">
-			<label for="category-name">New name:</label>
-			<input id="category-name" class="form-input h-5 w-36" bind:value={catName} />
-			<Button
-				disabled={!catName}
-				on:click={createCat}
-				class="h-5 leading-5 py-0 items-center text-base"
-			>
-				<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
-				Create
-			</Button>
-		</div>
-	</div>
+	<HelpText>
+		Drag and drop to assign values to categories; not all values need to be assigned to a category.
+		Click on category name to edit.
+	</HelpText>
 
 	<div class="flex flex-col gap-1 w-96">
-		<HelpText>Or drag a value to the drop-zone below.</HelpText>
-
-		<div
-			class="border-core-green-600 border-2 black p-2 flex items-center"
-			on:dragover={(ev) => dragOver(ev, newGroupName)}
-			on:dragleave={() => dragLeave()}
-			on:dragenter={(ev) => ev.preventDefault()}
-			on:drop={(ev) => dragDrop(ev, newGroupName)}
-			class:currentDropTarget={draggedOverGroup === newGroupName}
-		>
-			<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
-			Drag value here to create new category
-		</div>
-	</div>
-
-	<div class="flex flex-col gap-1 w-96">
-		<span class="font-bold">Un-merged values:</span>
+		<span class="font-bold">Values not assigned to a category:</span>
 		<ul
 			class="list-none"
 			on:dragover={(ev) => dragOver(ev, '')}
@@ -192,16 +151,29 @@
 		>
 			{#each groups.ungrouped as val}
 				<li
-					class="pl-2 cursor-grab hover:bg-core-blue-500 hover:p-1"
+					class="pl-2 cursor-grab hover:bg-core-blue-500"
 					draggable="true"
 					data-id={val}
 					on:dragstart={(ev) => dragStart(ev, '')}
 				>
-					<input type="checkbox" bind:checked={selected[val]} />
 					{val}
 				</li>
 			{/each}
 		</ul>
+	</div>
+
+	<div class="flex flex-col gap-1 w-96">
+		<div
+			class="border-core-green-600 border-2 black p-2 flex items-center"
+			on:dragover={(ev) => dragOver(ev, newGroupName)}
+			on:dragleave={(ev) => dragLeave()}
+			on:dragenter={(ev) => ev.preventDefault()}
+			on:drop={(ev) => dragDrop(ev, newGroupName)}
+			class:currentDropTarget={draggedOverGroup === newGroupName}
+		>
+			<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
+			New category
+		</div>
 	</div>
 
 	<ul class="list-none">
@@ -215,7 +187,7 @@
 				class:currentDropTarget={draggedOverGroup === groupName}
 			>
 				<div class="flex flex-col gap-1">
-					<div>
+					<div class="flex">
 						<input
 							on:change={(ev) => {
 								if (ev.target && !renameGroup(groupName, ev.target.value)) {
@@ -225,9 +197,15 @@
 							value={groupName}
 							class="border-0 padding-0 font-bold width-fit"
 						/>
-						<Button on:click={() => deleteCat(groupName)} variant="text" size="sm">Delete</Button>
+						<Button
+							on:click={() => deleteCat(groupName)}
+							variant="text"
+							size="sm"
+							title="Click to delete this category."
+						>
+							<Icon src={Trash} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
+						</Button>
 					</div>
-					<HelpText>Click on name on edit</HelpText>
 				</div>
 
 				<ul class="list-none">
@@ -235,17 +213,20 @@
 						<li
 							data-id={val}
 							draggable="true"
-							class="cursor-grab hover:bg-core-blue-500 hover:p-1"
+							class="cursor-grab hover:bg-core-blue-500 flex"
 							on:dragstart={(ev) => dragStart(ev, groupName)}
 						>
-							{val}
 							<Button
 								on:click={() => removeFromCat(groupName, val)}
 								variant="text"
 								size="sm"
 								class="h-5 leading-5 py-0"
-								>-
+								title="Click to remove value from category"
+							>
+								<Icon src={Minus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
 							</Button>
+
+							{val}
 						</li>
 					{/each}
 				</ul>
