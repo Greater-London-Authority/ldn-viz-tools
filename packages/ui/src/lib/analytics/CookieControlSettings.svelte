@@ -1,21 +1,22 @@
 <script context="module">
 	const isCookieControlManagedByParent = () => {
-		if (!window.top || window === window.top) {
+		if (window.location === window.parent.location) {
 			return false;
 		}
 
 		try {
-			const londonGovDomains = ['london.gov.uk'];
-			const url = new URL(window.top.location.href);
+			const londonGovDomains = ['.london.gov.uk'];
+			const url = document.referrer;
+			const hostname = new URL(url).hostname;
 
-			for (const d of londonGovDomains) {
-				if (url.hostname.toLowerCase().endsWith(d)) {
+			for (const domain of londonGovDomains) {
+				if (hostname.endsWith(domain)) {
 					return true;
 				}
 			}
 
 			return false;
-		} catch (e) {
+		} catch (err) {
 			return false;
 		}
 	};
