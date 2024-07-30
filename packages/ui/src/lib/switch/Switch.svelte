@@ -105,7 +105,7 @@
 				size === 'md' ? 'w-[22px] h-[22px]' : 'w-3.5 h-3.5 ',
 				disabled ? 'bg-core-grey-100' : 'bg-white'
 			)}
-			style:transform={$checked ? `translate(${translation[size]}, 0px)` : ''}
+			style:transform={checked ? `translate(${translation[size]}, 0px)` : ''}
 		/>
 	</button>
 	<input {...$input} use:input />

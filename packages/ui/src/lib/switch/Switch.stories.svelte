@@ -36,7 +36,7 @@
 	<Switch label="Enable something" bind:checked />
 </Story>
 
-<Story name="small" source>
+<Story name="Small" source>
 	<Switch label="Enable something" size="sm" {checked} />
 </Story>
 
