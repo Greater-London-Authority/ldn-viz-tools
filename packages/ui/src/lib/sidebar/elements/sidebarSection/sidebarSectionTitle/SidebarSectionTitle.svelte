@@ -17,7 +17,7 @@
 
 <header class={headerClasses}>
 	<div class="flex justify-between items-end">
-		<h1 class="font-bold text-base">
+		<h1 class="font-semibold text-base leading-snug">
 			<!-- The title of the section. -->
 			<slot />
 		</h1>
@@ -29,7 +29,7 @@
 	</div>
 
 	{#if $$slots.subTitle}
-		<div class="text-sm">
+		<div class="text-xs leading-snug mb-2">
 			<!-- Optional longer subtitle to display below the main title. -->
 			<slot name="subTitle" />
 		</div>

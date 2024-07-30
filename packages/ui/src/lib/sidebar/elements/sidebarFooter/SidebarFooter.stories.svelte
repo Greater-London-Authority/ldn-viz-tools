@@ -1,6 +1,9 @@
 <script context="module">
 	import SidebarFooter from './SidebarFooter.svelte';
 
+	import CookieControlSettings from '../../../analytics/CookieControlSettings.svelte';
+	import PrivacyPolicyLink from './PrivacyPolicyLink.svelte';
+
 	export const meta = {
 		title: 'Ui/Sidebar/elements/SidebarFooter',
 		component: SidebarFooter
@@ -11,6 +14,10 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import LogoCIU from '../../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../../logos/LogoMayor.svelte';
+	import { writable } from 'svelte/store';
+
+	// hack to make the "View cookie settings" link appear
+	window.CookieControl = writable(true);
 </script>
 
 <Template let:args>
@@ -27,6 +34,21 @@
 			<ul class="flex space-x-2">
 				<li>View Cookie settings</li>
 				<li>Privacy Policy</li>
+			</ul>
+		</svelte:fragment>
+	</SidebarFooter>
+</Story>
+
+<Story name="Typical" source>
+	<SidebarFooter>
+		<div class="flex justify-between">
+			<div class="w-[165px]"><LogoMayor /></div>
+			<div class="w-[165px]"><LogoCIU /></div>
+		</div>
+		<svelte:fragment slot="menu">
+			<ul class="flex space-x-2">
+				<CookieControlSettings />
+				<PrivacyPolicyLink />
 			</ul>
 		</svelte:fragment>
 	</SidebarFooter>
