@@ -19,7 +19,7 @@
 		{ label: 'Three', value: 3 }
 	];
 
-	let justValue: number;
+	let justValue: number | null;
 	let error = '';
 </script>
 
@@ -27,7 +27,7 @@
 	<Select {...args} />
 </Template>
 
-<Story name="Default" args={{ items: items }} />
+<Story name="Default" args={{ items: items }} source />
 
 <Story name="Basic">
 	<div class="w-96">
