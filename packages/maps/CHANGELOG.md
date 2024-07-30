@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 3.1.0
+
+### Minor Changes
+
+- edf2d78: ADDED: Add `MapControlBorough` component to zoom to a selected borough
+
 ## 3.0.2
 
 ### Patch Changes
