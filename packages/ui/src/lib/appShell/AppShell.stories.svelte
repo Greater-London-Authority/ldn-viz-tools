@@ -29,7 +29,7 @@
 	<AppShell {...args} />
 </Template>
 
-<Story name="default">
+<Story name="Default positioning">
 	<AppShell>
 		<svelte:fragment slot="main">Some Content</svelte:fragment>
 		<Sidebar slot="sidebar">

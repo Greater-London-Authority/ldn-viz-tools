@@ -3,7 +3,9 @@
 </script>
 
 <MapMarkerPlacement placement="none">
-	<div class="bg-core-grey-900 p-4 w-fit text-white">No placement.</div>
+	<div class="bg-color-container-background-level-1 p-4 w-fit text-color-text-primary">
+		No placement.
+	</div>
 </MapMarkerPlacement>
 
 <style>

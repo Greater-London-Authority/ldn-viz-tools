@@ -22,7 +22,7 @@
 		on:keydown={navigateList}
 		on:mouseenter={highlight}
 		on:focus={highlight}
-		class:bg-core-blue-600={highlighted === suggestion}
+		class:bg-color-action-background-primary-100={highlighted === suggestion}
 		tabindex="0"
 		data-geocoder-suggestion-id={suggestion.id}
 	>

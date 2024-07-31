@@ -14,6 +14,8 @@ const config: StorybookConfig = {
 		'../src/**/*.mdx',
 		'../../../packages/ui/src/**/*.mdx',
 		'../../../packages/ui/src/**/*.stories.@(js|ts|svelte)',
+		'../../../packages/utils/src/**/*.mdx',
+		'../../../packages/utils/src/**/*.stories.@(js|ts|svelte)',
 		'../../../packages/charts/src/**/*.mdx',
 		'../../../packages/charts/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
 		'../../../packages/maps/src/**/*.mdx',

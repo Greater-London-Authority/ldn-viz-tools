@@ -17,14 +17,17 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
+	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
-	import { ldnColors, theme } from '@ldn-viz/utils';
 	import { penguins } from './exampleData';
+
+	import { theme } from '../observablePlotFragments/observablePlotFragments';
+	// const theme: { [key: string]: any } = tokens.theme;
 
 	import {
 		defaultAnnotationText,
@@ -50,12 +53,41 @@
 		lineChartData
 	} from './demo_data';
 
+	import { onMount } from 'svelte';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';
+	import type { Position } from './types';
 
-	const spec = {
+	let mode: 'light' | 'dark' = 'light';
+	const checkHtmlClass = () => {
+		return document.documentElement.classList.contains('dark');
+	};
+
+	const updateTheme = () => {
+		mode = checkHtmlClass() ? 'dark' : 'light';
+		return mode;
+	};
+
+	updateTheme();
+
+	onMount(() => {
+		const observer = new MutationObserver((mutationsList) => {
+			for (let mutation of mutationsList) {
+				if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+					updateTheme();
+				}
+			}
+		});
+		observer.observe(document.documentElement, { attributes: true });
+	});
+
+	// $: console.log(theme(mode));
+
+	$: spec = {
 		style: {
-			...defaultStyle
+			...defaultStyle,
+			color: theme(mode).color.chart.label,
+			background: theme(mode).color.chart.background
 		},
 
 		...defaultSize,
@@ -69,16 +101,16 @@
 		},
 
 		marks: [
-			Plot.ruleY([0], { stroke: '#666666' }),
-			Plot.ruleX([0], { stroke: '#666666' }),
+			Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
+			Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
 			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
 		]
 	};
 
-	let clickedValue = undefined;
-	let clickedIndex = undefined;
+	let clickedValue: any | undefined = undefined;
+	let clickedIndex: any | undefined = undefined;
 
-	const tooltipStore = writable();
+	const tooltipStore: Writable<Position> = writable();
 </script>
 
 <Template let:args>
@@ -122,14 +154,12 @@
 			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: '#666666' }),
-				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
 				Plot.dot(penguins, {
 					...defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					stroke: 'black',
-					fill: 'white',
 					render: registerTooltip(tooltipStore),
 
 					/* need to expose as a channel before including in tooltip */
@@ -171,15 +201,13 @@
 		spec={{
 			...spec,
 			marks: [
-				Plot.ruleY([0], { stroke: '#666666' }),
-				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
 				Plot.dot(penguins, {
 					...defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: registerTooltip(tooltipStore),
-					stroke: 'black',
-					fill: 'white'
+					render: registerTooltip(tooltipStore)
 				})
 			]
 		}}
@@ -198,40 +226,24 @@
 <Story name="With custom click interaction">
 	<ObservablePlot
 		spec={{
-			style: {
-				fontFamily: 'Roboto',
-				fontSize: '12pt',
-				color: '#666666'
-			},
-
-			grid: true,
-			marginBottom: 50,
-
-			x: {
-				labelAnchor: 'center',
-				labelArrow: 'none',
-				label: 'Culmen length/mm'
-			},
-
-			y: {
-				insetTop: 20,
-				labelArrow: 'none'
-			},
+			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: '#666666' }),
-				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
 				Plot.dot(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: addEventHandler('click', (ev, d) => {
+					render: addEventHandler('click', (_ev, d) => {
 						clickedIndex = d.index;
 						clickedValue = penguins[d.index];
 					}),
-					stroke: 'black',
+					stroke: theme(mode).color.data.primary,
 					r: 5,
-					fill: (d, i) => {
-						return clickedIndex !== undefined && i === clickedIndex ? 'red' : 'white';
+					fill: (_d, i) => {
+						return clickedIndex !== undefined && i === clickedIndex
+							? theme(mode).color.data.secondary
+							: 'white';
 					}
 				})
 			]
@@ -323,7 +335,7 @@
 					filter: (d) => areaPlotPointsToLabel.includes(d.Year)
 				}),
 
-				Plot.ruleY([0], { stroke: theme.light.axis }),
+				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
 
 				Plot.axisX({ ...defaultXAxis, tickFormat: (d) => `${d}`, ticks: 12 }),
 				Plot.axisY({ ...defaultYAxis, tickFormat: (d) => `${d}%` })
@@ -349,7 +361,7 @@
 
 			color: {
 				...defaultColor,
-				range: [theme.light.primary, theme.light.neutral]
+				range: [theme(mode).color.data.primary, theme(mode).color.data.neutral[0]]
 			},
 
 			style: { ...defaultStyle },
@@ -479,7 +491,7 @@
 
 			color: {
 				...defaultColor,
-				range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+				range: [theme(mode).color.data.primary, theme(mode).color.data.secondary]
 			},
 			style: defaultStyle,
 
@@ -567,7 +579,7 @@
 
 				color: {
 					...defaultColor,
-					range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+					range: [theme(mode).color.data.primary, theme(mode).color.data.secondary]
 				},
 				style: defaultStyle,
 
@@ -640,7 +652,7 @@
 
 				color: {
 					...defaultColor,
-					range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+					range: [theme(mode).color.data.primary, theme(mode).color.data.secondary]
 				},
 				style: defaultStyle,
 

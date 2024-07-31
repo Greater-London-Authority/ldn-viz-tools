@@ -39,14 +39,14 @@ export { default as Sidebar } from './sidebar/Sidebar.svelte';
 
 export { default as SidebarToggle } from './sidebar/elements/sidebarToggle/SidebarToggle.svelte';
 
+export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/PrivacyPolicyLink.svelte';
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/PrivacyPolicyLink.svelte';
 
 export { default as SidebarHint } from './sidebar/elements/sidebarHint/SidebarHint.svelte';
 
-export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
 export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
+export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
 export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
 
 export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
@@ -58,8 +58,8 @@ export { default as TabList } from './tabs/TabList.svelte';
 
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 
-export { default as Toaster } from './toaster/Toaster.svelte';
 export * from './toaster/toaster';
+export { default as Toaster } from './toaster/Toaster.svelte';
 export * from './toaster/types';
 
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
@@ -75,12 +75,15 @@ export { default as CookieControlSettings } from './analytics/CookieControlSetti
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
-export { default as UniformInput } from './uniformInput/UniformInput.svelte';
-export * from './uniformInput/types';
+export { default as Theme } from './themeSwitcher/Theme.svelte';
+export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
 
-export { default as Form } from './forms/Form.svelte';
+export * from './uniformInput/types';
+export { default as UniformInput } from './uniformInput/UniformInput.svelte';
+
 export { default as FormField } from './forms/elements/formField/FormField.svelte';
 export { default as FormSubmitButton } from './forms/elements/formSubmitButton/FormSubmitButton.svelte';
+export { default as Form } from './forms/Form.svelte';
 export { default as SchemaForm } from './forms/SchemaForm.svelte';
 export * from './forms/types';
 

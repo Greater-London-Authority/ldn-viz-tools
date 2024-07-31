@@ -133,7 +133,7 @@
 	}
 </script>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 text-color-text-primary">
 	<HelpText>
 		Drag and drop to assign values to categories; not all values need to be assigned to a category.
 		Click on category name to edit.
@@ -151,10 +151,12 @@
 		>
 			{#each groups.ungrouped as val}
 				<li
-					class="pl-2 cursor-grab hover:bg-core-blue-500"
+					class="pl-2 cursor-grab hover:bg-color-input-background-hover"
 					draggable="true"
 					data-id={val}
 					on:dragstart={(ev) => dragStart(ev, '')}
+					aria-grabbed="true"
+					aria-dropeffect="move"
 				>
 					{val}
 				</li>
@@ -170,6 +172,7 @@
 			on:dragenter={(ev) => ev.preventDefault()}
 			on:drop={(ev) => dragDrop(ev, newGroupName)}
 			class:currentDropTarget={draggedOverGroup === newGroupName}
+			role="none"
 		>
 			<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
 			New category
@@ -213,7 +216,7 @@
 						<li
 							data-id={val}
 							draggable="true"
-							class="cursor-grab hover:bg-core-blue-500 flex"
+							class="cursor-grab hover:bg-color-input-background-hover flex"
 							on:dragstart={(ev) => dragStart(ev, groupName)}
 						>
 							<Button
@@ -235,9 +238,8 @@
 	</ul>
 </div>
 
-<style>
+<style lang="postcss">
 	.currentDropTarget {
-		@apply border-2 border-dashed border-core-blue-600;
-		@apply pb-4;
+		@apply border-2 border-dashed border-color-action-primary-active;
 	}
 </style>

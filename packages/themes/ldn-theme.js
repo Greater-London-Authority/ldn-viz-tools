@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
 const defaultTheme = require('tailwindcss/defaultTheme'); // eslint-disable-line
-const ldnColors = require('./colors.json'); // eslint-disable-line
+const oldLdnColors = require('./colors.json'); // eslint-disable-line
+const ldnColors = require('./styles/tw-extend/color'); // eslint-disable-line
 const svgToDataUri = require('mini-svg-data-uri'); // eslint-disable-line
 const plugin = require('tailwindcss/plugin'); // eslint-disable-line
 
@@ -10,9 +11,9 @@ const config = {
   darkMode: 'class',
   theme: {
     extend: {
-      colors: ldnColors,
+      colors: { ...oldLdnColors, ...ldnColors },
       fontFamily: {
-        sans: ['"Roboto"', ...defaultTheme.fontFamily.sans]
+        sans: ['"Inter"', ...defaultTheme.fontFamily.sans]
       }
     }
   },
@@ -26,71 +27,69 @@ const config = {
       addComponents({
         '.form-input, .form-textarea, .form-select, .form-multiselect, .form-checkbox, .form-radio':
           {
-            'border-color': ldnColors.core.grey[300],
+            color: ldnColors['color-input-valuetext'],
+            'border-color': ldnColors['color-input-border'],
+            'background-color': ldnColors['color-input-background'],
 
             '&:disabled': {
-              'background-color': ldnColors.core.grey[100]
+              'background-color': ldnColors['color-input-background-disabled']
             }
           },
         '.form-input, .form-textarea, .form-select, .form-multiselect': {
           '&:focus': {
-            '--tw-ring-color': ldnColors.core.blue[600],
-            'border-color': ldnColors.core.blue[600]
+            '--tw-ring-color': ldnColors['color-input-border-focussed'],
+            'border-color': ldnColors['color-input-border-focussed']
           }
         },
         '.form-input::placeholder, .form-textarea::placeholder': {
-          color: ldnColors.core.grey[300]
+          color: ldnColors['color-input-placeholder']
         },
         '.form-checkbox, .form-radio': {
-          color: ldnColors.core.blue[600],
+          'border-width': '2px',
+          width: '1.25rem',
+          height: '1.25rem',
+          color: ldnColors['color-input-background-active'],
+          '&:hover': {
+            'border-color': ldnColors['color-input-border-hover']
+          },
           '&:focus': {
-            '--tw-ring-color': ldnColors.core.blue[600]
+            '--tw-ring-color': ldnColors['color-input-border-focussed'],
+            '--tw-ring-offset-color': ldnColors['color-input-background']
+          },
+          '&:disabled': {
+            'border-color': ldnColors['color-input-border-disabled'],
+            'background-color': ldnColors['color-input-background-disabled']
+          }
+        },
+        '.form-radio': {
+          display: 'grid',
+          'place-content': 'center',
+          '&:checked': {
+            'background-image': 'none',
+            color: ldnColors['color-input-background'],
+            'background-color': ldnColors['color-input-background'],
+            'border-color': ldnColors['color-input-border-selected']
+          },
+          '&:checked:hover': {
+            'background-color': ldnColors['color-input-background-hover'],
+            'border-color': ldnColors['color-input-border-selected']
+          },
+          '&:checked:focus': {
+            'background-color': ldnColors['color-input-background'],
+            'border-color': ldnColors['color-input-border']
           }
         },
         '.form-label': {
-          color: ldnColors.core.grey[700],
-          'font-weight': '500'
+          color: ldnColors['color-input-label'],
+          'font-weight': 600
         },
         '.form-select': {
           'background-image': `url("${svgToDataUri(
-            `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${ldnColors.core.grey[700]}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
+            `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${ldnColors['color-input-icon']}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
           )}")`
         },
         '.form-range': {
-          'accent-color': ldnColors.core.blue[600]
-        },
-        '.dark': {
-          '.form-input, .form-textarea, .form-select, .form-multiselect, .form-checkbox, .form-radio':
-            {
-              'border-color': ldnColors.core.grey[600],
-              'background-color': ldnColors.core.grey[600],
-              color: ldnColors.core.grey[50],
-              '&:focus': {
-                '--tw-ring-offset-color': ldnColors.core.grey[800]
-              },
-              '&:disabled, &:disabled::placeholder': {
-                'background-color': ldnColors.core.grey[400],
-                color: ldnColors.core.grey[300]
-              }
-            },
-          '.form-input::placeholder, .form-textarea::placeholder': {
-            color: ldnColors.core.grey[300]
-          },
-          '.form-checkbox, .form-radio': {
-            color: ldnColors.core.blue[100]
-          },
-          '.form-checkbox:checked, .form-radio:checked': {
-            'background-color': ldnColors.core.blue[600]
-          },
-          '.form-label': { color: ldnColors.core.grey[50] },
-          '.form-select': {
-            'background-image': `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${ldnColors.core.grey[100]}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
-            )}")`
-          },
-          '.form-range': {
-            'accent-color': ldnColors.core.blue[600]
-          }
+          'accent-color': ldnColors['color-input-background-active']
         }
       });
     })

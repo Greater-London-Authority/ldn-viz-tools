@@ -29,7 +29,7 @@
 
 <Template let:args>
 	<CheckboxGroup options={optionsForGroup} bind:selectedOptions {...args} />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
+	<p class="mt-8 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Template>
@@ -38,16 +38,7 @@
 
 <Story name="Checkbox Group - disabled buttons">
 	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
-</Story>
-
-<Story name="Checkbox Group - externally updated">
-	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
-
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
+	<p class="mt-8 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Story>

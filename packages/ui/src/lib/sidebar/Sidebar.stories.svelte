@@ -236,25 +236,25 @@
 		</SidebarHeader>
 		<svelte:fragment slot="sections">
 			{#if selectedValue === 'markers'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Markers is selected, so we'd render a
 					<code> &lt;Marker /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'filters'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Filter is selected, so we'd render a
 					<code> &lt;Filters /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'analysis'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Analysis is selected, so we'd render a
 					<code> &lt;Analysis /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'layers'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Layers is selected, so we'd render a
 					<code> &lt;Layer /&gt;</code>
 					component

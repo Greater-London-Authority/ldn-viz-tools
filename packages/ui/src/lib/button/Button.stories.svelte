@@ -75,16 +75,18 @@
 <Story name="Text" source args={{ variant: 'text' }} />
 
 <Story name="Square" args={{ variant: 'square' }}>
-	<Button variant="square" title="Down" size="sm">
-		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
-	</Button>
-	<Button variant="square" title="Down" size="md">
-		<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
-	</Button>
-	<Button variant="square" title="Down" size="lg">
-		<Icon src={ArrowDownCircle} theme="solid" class="w-8 h-8" aria-hidden="true" />
-		Down
-	</Button>
+	<div class="space-y-2">
+		<Button variant="square" title="Down" size="sm">
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+		</Button>
+		<Button variant="square" title="Down" size="md">
+			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+		</Button>
+		<Button variant="square" title="Down" size="lg">
+			<Icon src={ArrowDownCircle} theme="solid" class="w-8 h-8" aria-hidden="true" />
+			Down
+		</Button>
+	</div>
 </Story>
 
 <Story name="Disabled">
@@ -100,7 +102,9 @@
 </Story>
 
 <Story name="With class prop">
-	<Button class="text-core-darkPink-500 border-core-pink-700 bg-yellow-500">
+	<Button
+		class="text-color-palette-pink-100 border-2 border-color-palette-pink-700 bg-color-palette-yellow-500"
+	>
 		Custom classes applied
 	</Button>
 </Story>
@@ -122,6 +126,8 @@
 </Story>
 
 <Story name="With Link">
-	<Button href="#">Link</Button>
-	<Button disabled href="#">Link</Button>
+	<div class="space-y-2">
+		<Button href="#">Link</Button>
+		<Button disabled href="#">Link</Button>
+	</div>
 </Story>
