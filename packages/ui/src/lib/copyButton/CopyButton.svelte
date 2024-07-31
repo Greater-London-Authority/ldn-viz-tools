@@ -35,9 +35,9 @@
 	 * @component
 	 */
 
-	import Button from '../button/Button.svelte';
-	import { DocumentDuplicate, ClipboardDocumentCheck } from '@steeze-ui/heroicons';
+	import { ClipboardDocumentCheck, DocumentDuplicate } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Button from '../button/Button.svelte';
 	import { randomId } from '../utils/randomId';
 
 	/**
@@ -68,13 +68,13 @@
 		<!-- Button text and icon before copy. -->
 		<slot name="before-copy">
 			{label}
-			<Icon src={DocumentDuplicate} class="w-6 h-6 pl-0.5 py-0.5 stroke-[0.1rem]" />
+			<Icon src={DocumentDuplicate} class="w-6 h-6 pl-0.5 py-0.5" />
 		</slot>
 	{:else}
 		<!-- Button text and icon after copy. -->
 		<slot name="after-copy">
 			{label}
-			<Icon src={ClipboardDocumentCheck} class="w-6 h-6 pl-0.5 py-0.5 stroke-[0.1rem]" />
+			<Icon src={ClipboardDocumentCheck} class="w-6 h-6 pl-0.5 py-0.5" />
 		</slot>
 	{/if}
 </Button>
