@@ -24,11 +24,15 @@
 <slot name="numRowsControlSlot" />
 
 <div class="table-container" bind:this={tableToCapture} id="captureElement">
-	{#if title}
-		<Title>{title}</Title>
-	{/if}
-	{#if subTitle}
-		<SubTitle>{subTitle}</SubTitle>
+	{#if title || subTitle}
+		<div class="mb-4">
+			{#if title}
+				<Title>{title}</Title>
+			{/if}
+			{#if subTitle}
+				<SubTitle>{subTitle}</SubTitle>
+			{/if}
+		</div>
 	{/if}
 
 	{#if alt}
