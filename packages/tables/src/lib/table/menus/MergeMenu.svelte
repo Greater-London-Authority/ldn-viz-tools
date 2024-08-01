@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { Popover } from '@ldn-viz/ui';
 	import GroupIcon from './GroupIcon.svelte';
-	import PopoverMenu from './PopoverMenu.svelte';
 	import Grouping from './Grouping.svelte';
 
 	export let table;
@@ -10,8 +10,8 @@
 	// TODO: position better
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
+<Popover>
+	<svelte:fragment slot="hint">
 		<GroupIcon class="w-[18px] h-[18px] ml-0.5" />
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
@@ -23,4 +23,4 @@
 		groups={col.groups}
 		onGroupingsChanged={() => table.setMerged()}
 	/>
-</PopoverMenu>
+</Popover>
