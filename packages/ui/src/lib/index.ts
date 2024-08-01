@@ -1,5 +1,7 @@
 // Reexport your entry components here
 export { default as Button } from './button/Button.svelte';
+export { default as AsyncButton } from './button/AsyncButton.svelte';
+
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';

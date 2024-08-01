@@ -170,7 +170,7 @@
 		text: '!text-core-grey-300 hover:bg-transparent'
 	};
 
-	const sizeClasses = {
+	$: sizeClasses = {
 		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-2',
 		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2',
 		lg: variant === 'square' ? 'w-16 h-16 text-xs flex-col space-y-4' : 'text-lg px-4 py-2'
