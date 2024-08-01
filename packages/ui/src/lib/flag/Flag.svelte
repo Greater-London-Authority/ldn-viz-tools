@@ -24,12 +24,12 @@
 	export let linkText = 'Please provide feedback here';
 
 	const colorClass: Record<flagCondition, string> = {
-		alpha: 'bg-core-glaPink-500',
-		beta: 'bg-core-blue-600',
-		alert: 'bg-core-red-500', // or 100, or 500
-		warning: 'bg-core-orange-500',
-		positive: 'bg-core-green-600',
-		notice: 'bg-core-blue-600'
+		alpha: 'bg-color-ui-alpha',
+		beta: 'bg-color-ui-beta',
+		alert: 'bg-color-ui-negative', // or 100, or 500
+		warning: 'bg-color-ui-warning',
+		positive: 'bg-color-ui-positive',
+		notice: 'bg-color-ui-notice'
 	};
 
 	const defaultMessage = {
@@ -41,7 +41,7 @@
 <div
 	class={classNames('w-full min-h-[24px] h-fit flex justify-between px-4', colorClass[condition])}
 >
-	<div class="text-white uppercase text-base">
+	<div class="text-color-static-white uppercase text-base">
 		<!-- The message to be displayed in the flag. -->
 		<slot>
 			{defaultMessage[condition]}
@@ -49,6 +49,6 @@
 	</div>
 
 	{#if link}
-		<a href={link} class="text-white underline">{linkText}</a>
+		<a href={link} class="text-color-static-white underline">{linkText}</a>
 	{/if}
 </div>
