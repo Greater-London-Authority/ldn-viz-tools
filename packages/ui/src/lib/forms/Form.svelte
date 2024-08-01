@@ -20,7 +20,6 @@
 		FormErrors,
 		FormValueStore,
 		FormErrorStore,
-		FormHasErrors,
 		FormActiveButtonStore
 	} from './types';
 
