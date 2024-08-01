@@ -160,7 +160,7 @@
 
 	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data}>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
-			<div class="border-t border-b border-color-border-primary" style:width={tableWidth}>
+			<div class="border-t border-b border-color-ui-border-primary" style:width={tableWidth}>
 				{#if tableSpec.colGroups}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
@@ -210,12 +210,12 @@
 	</TableContainer>
 {/if}
 
-<style>
+<style lang="postcss">
 	:global(.striped > div:nth-child(odd)) {
-		background-color: #f5f5f5; /* core-grey-50 */
+		@apply bg-color-ui-background-secondary;
 	}
 
 	:global(.stripedVirtual > div:first-child > div:first-child > div:nth-child(odd)) {
-		background-color: #f5f5f5; /* core-grey-50 */
+		@apply bg-color-ui-background-secondary;
 	}
 </style>

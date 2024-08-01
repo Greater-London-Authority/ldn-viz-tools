@@ -136,12 +136,12 @@
 
 <Story name="Paginated - page externally controlled" source>
 	<div class="flex flex-col gap-4 max-w-2xl">
-		<div class="border-color-border-secondary border p-2">
+		<div class="border-color-ui-border-secondary border p-2">
 			<span class="font-bold">Separate control</span>
 			<Input bind:value={page} label="Set page here"></Input>
 		</div>
 
-		<div class="border-color-border-secondary border p-2">
+		<div class="border-color-ui-border-secondary border p-2">
 			<span class="font-bold">Table component</span>
 
 			<Table {data} {tableSpec} paginate pageSize={5} bind:page />
