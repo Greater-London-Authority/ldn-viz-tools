@@ -167,7 +167,7 @@
 		{...$$restProps}
 	/>
 {:else if type === 'textarea'}
-	<div class="disabled:[&_.form-input]:text-core-grey-400">
+	<div class="disabled:[&_.form-input]:text-color-text-disabled">
 		<Input
 			{disabled}
 			optional={!required}
@@ -189,7 +189,7 @@
 		/>
 	</div>
 {:else}
-	<div class="disabled:[&_.form-input]:text-core-grey-400">
+	<div class="disabled:[&_.form-input]:text-color-text-disabled">
 		<Input
 			{disabled}
 			optional={!required}
