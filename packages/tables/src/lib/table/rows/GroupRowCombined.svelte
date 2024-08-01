@@ -1,4 +1,5 @@
 <script>
+	//TODO: background:white?
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
