@@ -190,7 +190,7 @@
 		<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 		{#if $tooltipStore && $tooltipData}
 			<div
-				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
+				class="absolute max-w-[200px] text-sm p-2 bg-color-container-background-level-1 shadow z-50 -translate-x-1/2 -translate-y-full"
 				style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 				style:left={`${$tooltipStore.layerX}px`}
 			>
@@ -199,15 +199,9 @@
 				</slot>
 
 				<div
-					class="absolute bg-core-grey-100 dark:bg-core-grey-700 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
+					class="absolute bg-color-container-background-level-1 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
 				/>
 			</div>
 		{/if}
 	</ChartContainer>
 {/key}
-
-<style>
-	:global(.defaultCcolorLegendLabel-swatch) {
-		font-size: 14px;
-	}
-</style>

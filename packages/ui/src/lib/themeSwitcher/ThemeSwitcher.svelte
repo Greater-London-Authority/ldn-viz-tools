@@ -8,8 +8,8 @@
 	 *
 	 * @component
 	 */
+	import { userThemeSelectionStore } from '@ldn-viz/themes/themeStore';
 	import { Select } from '@ldn-viz/ui';
-	import { userThemeSelectionStore } from './themeStore';
 	type Theme = 'light' | 'dark' | 'system';
 
 	const themes: Theme[] = ['light', 'dark', 'system'];

@@ -24,88 +24,145 @@
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
-	import { penguins } from './exampleData';
-
-	import { theme } from '../observablePlotFragments/observablePlotFragments';
-	// const theme: { [key: string]: any } = tokens.theme;
-
+	import { currentThemeMode } from '@ldn-viz/themes/themeStore';
 	import {
-		defaultAnnotationText,
-		defaultArea,
-		defaultColor,
-		defaultDot,
-		defaultLine,
-		defaultRule,
-		defaultSize,
-		defaultStyle,
-		defaultXAxis,
-		defaultXScale,
-		defaultYAxis,
-		defaultYScale,
+		getDefaultPlotStyles,
+		plotTheme,
 		preprocessOptions
 	} from '../observablePlotFragments/observablePlotFragments';
+	import { penguins } from './exampleData';
 
 	import {
 		areaPlotData,
 		areaPlotPointsToLabel,
 		educationLabelOffsets,
 		education_data,
-		lineChartData
+		lineChartData,
+		material_deprivation_data
 	} from './demo_data';
 
-	import { onMount } from 'svelte';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';
 	import type { Position } from './types';
 
-	let mode: 'light' | 'dark' = 'light';
-	const checkHtmlClass = () => {
-		return document.documentElement.classList.contains('dark');
-	};
-
-	const updateTheme = () => {
-		mode = checkHtmlClass() ? 'dark' : 'light';
-		return mode;
-	};
-
-	updateTheme();
-
-	onMount(() => {
-		const observer = new MutationObserver((mutationsList) => {
-			for (let mutation of mutationsList) {
-				if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-					updateTheme();
-				}
-			}
-		});
-		observer.observe(document.documentElement, { attributes: true });
-	});
-
-	// $: console.log(theme(mode));
+	$: ({
+		defaultArea,
+		defaultColor,
+		defaultDot,
+		defaultGridX,
+		defaultGridY,
+		defaultSize,
+		defaultStyle,
+		defaultTip,
+		defaultLine,
+		defaultXAxis,
+		defaultXScale,
+		defaultYAxis,
+		defaultYScale,
+		defaultRule,
+		defaultAnnotationText
+	} = getDefaultPlotStyles($currentThemeMode));
 
 	$: spec = {
 		style: {
-			...defaultStyle,
-			color: theme(mode).color.chart.label,
-			background: theme(mode).color.chart.background
+			...defaultStyle
 		},
 
 		...defaultSize,
 
-		x: {
-			...defaultXScale
-		},
+		x: { ...defaultXScale },
 
-		y: {
-			...defaultYScale
-		},
+		y: { ...defaultYScale },
 
 		marks: [
-			Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
-			Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
-			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+			Plot.gridX({ ...defaultGridX }),
+			Plot.gridY({ ...defaultGridY }),
+			Plot.ruleY([0], { ...defaultRule }),
+			Plot.ruleX([0], { ...defaultRule }),
+			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
+			Plot.axisX({ ...defaultXAxis }),
+			Plot.axisY({ ...defaultYAxis, label: 'culmen_depth_mm' }),
+			Plot.tip(
+				penguins,
+				Plot.pointerX({ ...defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+			)
 		]
 	};
+
+	$: mbBarSpec = {
+		y: {
+			...defaultYScale,
+			label: ''
+		},
+
+		x: {
+			...defaultXScale,
+			domain: [0, 20],
+			insetLeft: 0 // adjusting to fit y axis labels of this chart
+		},
+
+		color: {
+			...defaultColor,
+			range: [
+				plotTheme($currentThemeMode).color.data.primary,
+				plotTheme($currentThemeMode).color.data.context
+			]
+		},
+
+		style: {
+			...defaultStyle
+		},
+
+		...defaultSize,
+		marginLeft: 200,
+		marginRight: 60,
+
+		marks: [
+			// grid marks
+			Plot.gridX({ ...defaultGridX, ticks: 5 }),
+
+			Plot.barX(material_deprivation_data, {
+				x: 'Pensioners',
+				y: 'Region',
+				fill: 'Area',
+				sort: { y: 'x', reverse: true }
+			}),
+
+			Plot.textX(material_deprivation_data, {
+				x: 'Pensioners',
+				y: 'Region',
+				fill: 'Area',
+				dx: 4,
+				textAnchor: 'start',
+				text: (d) => `${d.Pensioners}%`,
+				sort: { y: 'x', reverse: true }
+			}),
+
+			// // axis x
+			Plot.axisX({
+				...defaultXAxis,
+				label: 'Percentage of Pensioners',
+				tickFormat: (d) => `${d}%`,
+				ticks: 5
+			}),
+
+			// 0 baseline
+			Plot.ruleX([0], { ...defaultRule }), // Q: Should we always place a 0 baseline in the default chart (if range is not starting at 0, it won't be shown anyway)
+
+			// data tool tip - last to display
+			Plot.tip(
+				material_deprivation_data,
+				Plot.pointerY({
+					...defaultTip,
+					x: 'Pensioners',
+					y: 'Region',
+					title: (d) => [d.Region, `${d.Pensioners}%`].join('\n')
+				})
+			)
+		]
+	};
+
+	$: console.log($currentThemeMode);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -140,7 +197,13 @@
 </Story>
 
 <Story name="With Aspect Ratio">
-	<ObservablePlot spec={{ ...spec, aspectRatio: 1 }} />
+	<ObservablePlot
+		spec={{
+			...spec,
+			height: undefined,
+			aspectRatio: 0.5
+		}}
+	/>
 </Story>
 
 <!--
@@ -154,8 +217,8 @@
 			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
-				Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 				Plot.dot(penguins, {
 					...defaultDot,
 					x: 'culmen_length_mm',
@@ -201,8 +264,8 @@
 		spec={{
 			...spec,
 			marks: [
-				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
-				Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 				Plot.dot(penguins, {
 					...defaultDot,
 					x: 'culmen_length_mm',
@@ -229,8 +292,8 @@
 			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
-				Plot.ruleX([0], { stroke: theme(mode).color.chart.axis }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 				Plot.dot(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
@@ -238,11 +301,11 @@
 						clickedIndex = d.index;
 						clickedValue = penguins[d.index];
 					}),
-					stroke: theme(mode).color.data.primary,
+					stroke: plotTheme($currentThemeMode).color.data.primary,
 					r: 5,
 					fill: (_d, i) => {
 						return clickedIndex !== undefined && i === clickedIndex
-							? theme(mode).color.data.secondary
+							? plotTheme($currentThemeMode).color.data.secondary
 							: 'white';
 					}
 				})
@@ -335,7 +398,7 @@
 					filter: (d) => areaPlotPointsToLabel.includes(d.Year)
 				}),
 
-				Plot.ruleY([0], { stroke: theme(mode).color.chart.axis }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 
 				Plot.axisX({ ...defaultXAxis, tickFormat: (d) => `${d}`, ticks: 12 }),
 				Plot.axisY({ ...defaultYAxis, tickFormat: (d) => `${d}%` })
@@ -361,7 +424,10 @@
 
 			color: {
 				...defaultColor,
-				range: [theme(mode).color.data.primary, theme(mode).color.data.neutral[0]]
+				range: [
+					plotTheme($currentThemeMode).color.data.primary,
+					plotTheme($currentThemeMode).color.data.neutral[0]
+				]
 			},
 
 			style: { ...defaultStyle },
@@ -491,7 +557,10 @@
 
 			color: {
 				...defaultColor,
-				range: [theme(mode).color.data.primary, theme(mode).color.data.secondary]
+				range: [
+					plotTheme($currentThemeMode).color.data.primary,
+					plotTheme($currentThemeMode).color.data.secondary
+				]
 			},
 			style: defaultStyle,
 
@@ -579,7 +648,10 @@
 
 				color: {
 					...defaultColor,
-					range: [theme(mode).color.data.primary, theme(mode).color.data.secondary]
+					range: [
+						plotTheme($currentThemeMode).color.data.primary,
+						plotTheme($currentThemeMode).color.data.secondary
+					]
 				},
 				style: defaultStyle,
 
@@ -652,7 +724,10 @@
 
 				color: {
 					...defaultColor,
-					range: [theme(mode).color.data.primary, theme(mode).color.data.secondary]
+					range: [
+						plotTheme($currentThemeMode).color.data.primary,
+						plotTheme($currentThemeMode).color.data.secondary
+					]
 				},
 				style: defaultStyle,
 
@@ -723,4 +798,21 @@
 			data={education_data}
 		/>
 	</div>
+</Story>
+
+<Story name="Examples / mbBar">
+	<ObservablePlot
+		title="Material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK"
+		subTitle="Percentage of pensioners in material deprivation by region (2020/21-2022/23)"
+		alt="Bar chart of levels of material deprivation amongst pensioners in UK regions. Bars show that material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK. For example Inner London is 20% compared to West Midlands 9%, and Northern Ireland 4%."
+		spec={{
+			...mbBarSpec
+		}}
+		footer={{
+			byline: 'GLA City Intelligence',
+			source: 'London Datastore',
+			note: 'Data for illustrative purpose only',
+			exportBtns: true
+		}}
+	/>
 </Story>
