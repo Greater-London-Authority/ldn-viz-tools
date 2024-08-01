@@ -29,7 +29,7 @@
 <Template let:args>
 	<Switch {checked} {...args} />
 
-	<div>Is checked?: {$checked}</div>
+	<div class="text-color-text-secondary">Is checked?: {$checked}</div>
 </Template>
 
 <Story name="Default" source />
