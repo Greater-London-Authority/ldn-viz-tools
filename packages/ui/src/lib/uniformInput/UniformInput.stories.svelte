@@ -117,7 +117,7 @@
 <Template let:args>
 	<UniformInput {...args} bind:value />
 	<div class="mt-8 flex flex-wrap gap-4 items-center">
-		<Button emphasis="secondary" condition="warning" on:click={() => reset(args)}>Reset</Button>
+		<Button condition="warning" on:click={() => reset(args)}>Reset</Button>
 		<p class="text-color-text-secondary italic">Value: {value}</p>
 	</div>
 </Template>
