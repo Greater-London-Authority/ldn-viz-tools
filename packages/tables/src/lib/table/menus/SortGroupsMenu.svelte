@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Button, Select } from '@ldn-viz/ui';
+	import { Button, Popover, Select } from '@ldn-viz/ui';
 	import { type GroupOrderCriterion } from '../../core/lib/types';
-	import PopoverMenu from './PopoverMenu.svelte';
 
 	export let table;
 
@@ -48,8 +47,8 @@
 	}
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
+<Popover>
+	<svelte:fragment slot="hint">
 		<Button variant="text" disabled={table.groupingFields.length === 0}>Sort groups</Button>
 
 		<span class="sr-only">Open Popover</span>
@@ -85,4 +84,4 @@
 
 		<span>order.</span>
 	</div>
-</PopoverMenu>
+</Popover>

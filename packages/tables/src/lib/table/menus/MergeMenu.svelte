@@ -1,8 +1,6 @@
 <script lang="ts">
-	import {MergeValuesControl} from "@ldn-viz/ui";
-
+	import { MergeValuesControl, Popover } from '@ldn-viz/ui';
 	import GroupIcon from './GroupIcon.svelte';
-	import PopoverMenu from './PopoverMenu.svelte';
 
 	export let table;
 	export let col;
@@ -11,8 +9,8 @@
 	// TODO: position better
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
+<Popover>
+	<svelte:fragment slot="hint">
 		<GroupIcon class="w-[18px] h-[18px] ml-0.5" />
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
@@ -23,4 +21,4 @@
 		groups={col.groups}
 		onGroupingsChanged={() => table.setMerged()}
 	/>
-</PopoverMenu>
+</Popover>
