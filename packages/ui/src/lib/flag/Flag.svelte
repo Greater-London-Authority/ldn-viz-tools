@@ -26,7 +26,7 @@
 	const colorClass: Record<flagCondition, string> = {
 		alpha: 'bg-color-ui-alpha',
 		beta: 'bg-color-ui-beta',
-		alert: 'bg-color-ui-negative', // or 100, or 500
+		alert: 'bg-color-ui-negative',
 		warning: 'bg-color-ui-warning',
 		positive: 'bg-color-ui-positive',
 		notice: 'bg-color-ui-notice'
@@ -34,7 +34,11 @@
 
 	const defaultMessage = {
 		alpha: 'Alpha Preview',
-		beta: 'Beta preview'
+		beta: 'Beta Preview',
+		alert: 'Alert',
+		warning: 'Warning',
+		positive: 'Positive',
+		notice: 'Notice'
 	};
 </script>
 
