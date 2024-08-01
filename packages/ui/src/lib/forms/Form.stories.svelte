@@ -1,12 +1,12 @@
 <script context="module" lang="ts">
-	import FormSubmitButton from './elements/formSubmitButton/FormSubmitButton.svelte';
 	import FormField from './elements/formField/FormField.svelte';
+	import FormSubmitButton from './elements/formSubmitButton/FormSubmitButton.svelte';
 	import Form from './Form.svelte';
 	import type {
-		FormValueStore,
+		FormActiveButtonStore,
 		FormErrorStore,
 		FormHasErrors,
-		FormActiveButtonStore
+		FormValueStore
 	} from './types';
 
 	const colorOptions = [
@@ -101,12 +101,10 @@
 		<FormField type="text" name="name" label="Name" required />
 		<FormField type="select" name="color" label="Colour" options={colorOptions} />
 		<FormField type="checkbox" name="been_to_venice" label="Have you been to Venice?" />
-		<Button slot="leftButtons" emphasis="secondary" condition="warning" on:click={clear}>
-			Clear
-		</Button>
+		<Button slot="leftButtons" variant="outline" on:click={clear}>Clear</Button>
 		<FormSubmitButton slot="rightButtons" {onSubmit} />
 	</Form>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
 		<pre>Errors: {JSON.stringify($errorStore, null, 2)}</pre>
 	</div>
@@ -128,12 +126,10 @@
 		<FormField type="text" name="name" label="Name" required />
 		<FormField type="select" name="color" label="Colour" options={colorOptions} />
 		<FormField type="checkbox" name="been_to_venice" label="Have you been to Venice?" />
-		<Button slot="leftButtons" emphasis="secondary" condition="warning" on:click={resetToInitial}>
-			Reset
-		</Button>
+		<Button slot="leftButtons" variant="outline" on:click={resetToInitial}>Reset</Button>
 		<FormSubmitButton slot="rightButtons" {onSubmit} />
 	</Form>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
 		<pre>Errors: {JSON.stringify($errorStore, null, 2)}</pre>
 	</div>
@@ -145,8 +141,7 @@
 		<FormField type="checkbox" name="checkbox" label="Checkbox" required />
 		<Button
 			slot="leftButtons"
-			emphasis="secondary"
-			condition="warning"
+			variant="outline"
 			on:click={() => {
 				$errorStore.message = '';
 			}}
@@ -160,7 +155,7 @@
 			}}
 		/>
 	</Form>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		{#key errorStore && $errorStore?.message}
 			<p>Has errors: {hasErrors && hasErrors()}</p>
 		{/key}
@@ -174,14 +169,14 @@
 				Custom input
 				<textarea
 					name="custom_input"
-					class="w-full border border-core-grey-800"
+					class="w-full form-input"
 					rows="3"
 					bind:value={$valueStore.custom_input}
 				/>
 			</label>
 		{/if}
 	</Form>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
 	</div>
 </Story>
@@ -203,7 +198,7 @@
 		/>
 		<FormSubmitButton slot="rightButtons" async onSubmit={waitTwoSeconds} />
 	</Form>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<p>Active button: {$activeButtonStore}</p>
 	</div>
 </Story>
