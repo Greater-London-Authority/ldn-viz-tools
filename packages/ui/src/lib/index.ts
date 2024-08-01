@@ -87,4 +87,6 @@ export { default as Form } from './forms/Form.svelte';
 export { default as SchemaForm } from './forms/SchemaForm.svelte';
 export * from './forms/types';
 
+export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+
 export { classNames } from './utils/classNames';
