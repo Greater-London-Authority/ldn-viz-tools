@@ -3,47 +3,47 @@
 	 * The `<AsyncButton>` component wraps the `<button>` and `<Spinner>`
 	 * components. The spinner is shown as the button label while the `onClick`
 	 * function is executing. The button is also disabled during this period.
-	 * 
+	 *
 	 * @component
 	 */
 
 	export type FormButtonhandler = (event: MouseEvent | TouchEvent) => void | Promise<unknown>;
 
-	const getConditionColorClasses = (condition) => { 
+	const getConditionColorClasses = (condition: string): string => {
 		const conditionClasses = {
 			default: 'stroke-core-blue-600',
 			success: 'stroke-core-green-500',
 			error: 'stroke-core-red-500',
 			warning: 'stroke-core-orange-500'
-		}
+		};
 
-		return conditionClasses[condition]
-	}
+		return conditionClasses[condition];
+	};
 
-	const getDynamicSpinnerClasses = (size, variant) => {
+	const getDynamicSpinnerClasses = (size: string, variant: string): string => {
 		switch (size) {
-		case 'sm':
-			return 'w-6 h-6 stroke-[24]'
-		case 'md':
-			return 'w-7 h-7 stroke-[20]'
-		case 'lg':
-			return variant === 'square' ? 'w-10 h-10 stroke-[20]' : 'w-8 h-8 stroke-[20]'
-		default:
-			return ''
+			case 'sm':
+				return 'w-6 h-6 stroke-[24]';
+			case 'md':
+				return 'w-7 h-7 stroke-[20]';
+			case 'lg':
+				return variant === 'square' ? 'w-10 h-10 stroke-[20]' : 'w-8 h-8 stroke-[20]';
+			default:
+				return '';
 		}
-	}
+	};
 </script>
 
 <script lang="ts">
 	import Button from '../button/Button.svelte';
 	import Spinner from '../spinners/Spinner.svelte';
-	import type { ButtonProps } from './Button.svelte'
+	import type { ButtonProps } from './Button.svelte';
 
 	export let onClick: FormButtonhandler;
 
 	/**
 	 * Is set to `true` when the `onClick` function is being executed.
-	 * 
+	 *
 	 * Bind to this property for reactive know when a `onClick` function is
 	 * executing. Working will be reset to `false` once the function has finished
 	 * executing.
@@ -63,7 +63,7 @@
 	/**
 	 * Selects which family of styles should be applied to the button.
 	 */
-	export let variant: ButtonProps['condition'] = 'solid'
+	export let variant: ButtonProps['variant'] = 'solid';
 
 	/**
 	 * Provides ability to modify appearance to represent success/error/warning
@@ -74,7 +74,7 @@
 	/**
 	 * Sets the size of the button.
 	 */
-	export let size: ButtonProps['size'] = 'md'
+	export let size: ButtonProps['size'] = 'md';
 
 	/**
 	 * If `true`, then the button cannot be interacted with (either by clicking,
@@ -82,8 +82,8 @@
 	 */
 	export let disabled: ButtonProps['disabled'] = false;
 
-	$: conditionColorClasses = getConditionColorClasses(condition)
-	$: dynamicSpinnerClasses = getDynamicSpinnerClasses(size, variant)
+	$: conditionColorClasses = getConditionColorClasses(condition);
+	$: dynamicSpinnerClasses = getDynamicSpinnerClasses(size, variant);
 
 	const doClick: FormButtonhandler = async (event) => {
 		if (working) {
@@ -102,23 +102,24 @@
 	};
 </script>
 
-<Button 
-		{type}
-		{emphasis}
-		{variant}
-		{condition}
-		{size}
-		disabled={disabled || working}
-		on:click={doClick}
-		on:change
-		on:keydown
-		on:keyup
-		on:touchstart
-		on:touchend
-		on:touchcancel
-		on:mouseenter
-		on:mouseleave
-		{...$$restProps}>
+<Button
+	{type}
+	{emphasis}
+	{variant}
+	{condition}
+	{size}
+	disabled={disabled || working}
+	on:click={doClick}
+	on:change
+	on:keydown
+	on:keyup
+	on:touchstart
+	on:touchend
+	on:touchcancel
+	on:mouseenter
+	on:mouseleave
+	{...$$restProps}
+>
 	{#if working}
 		<div class="relative">
 			<Spinner
