@@ -1,8 +1,9 @@
 <script lang="ts" context="module">
 	/**
-	 * The `<AsyncButton>` component wraps the `<button>` and `<Spinner>`
-	 * components. The spinner is shown as the button label while the `onClick`
-	 * function is executing. The button is also disabled during this period.
+	 * The `<AsyncButton>` component wraps the `<button>` component for slow
+	 * asynchronous operations such as _HTTP_ requests. A `<Spinner>` is shown
+	 * as the button label while the `onClick` function is executing. The button
+	 * is also disabled during this period.
 	 *
 	 * @component
 	 */
@@ -44,9 +45,7 @@
 	/**
 	 * Is set to `true` when the `onClick` function is being executed.
 	 *
-	 * Bind to this property for reactive know when a `onClick` function is
-	 * executing. Working will be reset to `false` once the function has finished
-	 * executing.
+	 * Bind to this property for reactive updates to button click state.
 	 */
 	export let working = false;
 
@@ -129,7 +128,7 @@
 			/>
 			<!-- This gives the outer div the correct size so the spinner is centered -->
 			<span class="invisible">
-				<!-- Button label and/or icon -->
+				<!-- Button label and/or icon. -->
 				<slot />
 			</span>
 		</div>
