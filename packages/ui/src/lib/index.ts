@@ -83,6 +83,7 @@ export * from './uniformInput/types';
 export { default as Form } from './forms/Form.svelte';
 export { default as FormField } from './forms/elements/formField/FormField.svelte';
 export { default as FormSubmitButton } from './forms/elements/formSubmitButton/FormSubmitButton.svelte';
+export { default as FormBackButton } from './forms/elements/formSubmitButton/FormBackButton.svelte';
 export { default as SchemaForm } from './forms/SchemaForm.svelte';
 export * from './forms/types';
 
