@@ -1,7 +1,8 @@
 <script lang="ts">
+	import {MergeValuesControl} from "@ldn-viz/ui";
+
 	import GroupIcon from './GroupIcon.svelte';
 	import PopoverMenu from './PopoverMenu.svelte';
-	import Grouping from './Grouping.svelte';
 
 	export let table;
 	export let col;
@@ -18,8 +19,7 @@
 
 	<h2 class="text-large font-bold">Aggregate Values</h2>
 
-	<Grouping
-		fieldName={col.short_label}
+	<MergeValuesControl
 		groups={col.groups}
 		onGroupingsChanged={() => table.setMerged()}
 	/>
