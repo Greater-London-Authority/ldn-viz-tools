@@ -27,12 +27,12 @@
 
 <Popover>
 	<svelte:fragment slot="hint">
-		<Button variant="text">Show/Hide Columns</Button>
+		<Button variant="text" size="sm">Show/Hide Columns</Button>
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
 
-	<h2 class="text-large font-bold">Select which columns to display:</h2>
+	<h2 class="font-bold">Select which columns to display:</h2>
 
 	<CheckboxGroup options={fields} bind:selectedOptions={fieldSelection} />
 </Popover>
