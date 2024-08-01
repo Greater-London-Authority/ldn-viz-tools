@@ -9,7 +9,7 @@
 
 	import { getContext } from 'svelte';
 	import Button from '../../../button/Button.svelte';
-	import AsyncButton from '../../AsyncButton.svelte';
+	import AsyncButton from '../../../button/AsyncButton.svelte';
 	import type { FormButtonhandler, FormActiveButtonStore } from '../../types';
 
 	const activeButtonStore: FormActiveButtonStore = getContext('formActiveButtonStore');
@@ -53,7 +53,6 @@
 
 {#if async}
 	<AsyncButton
-		disabled={$$props.disabled || $activeButtonStore}
 		type="submit"
 		variant="solid"
 		class="flex gap-2"

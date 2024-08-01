@@ -30,7 +30,6 @@
 		plotTheme,
 		preprocessOptions
 	} from '../observablePlotFragments/observablePlotFragments';
-	import { penguins } from './exampleData';
 
 	import {
 		areaPlotData,
@@ -38,8 +37,9 @@
 		educationLabelOffsets,
 		education_data,
 		lineChartData,
-		material_deprivation_data
-	} from './demo_data';
+		material_deprivation_data,
+		penguins
+	} from '../../data/demoData';
 
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';

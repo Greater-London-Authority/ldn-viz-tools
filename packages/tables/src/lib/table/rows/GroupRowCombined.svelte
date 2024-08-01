@@ -1,5 +1,6 @@
 <script>
-	import { ChevronRight, ChevronDown } from '@steeze-ui/heroicons';
+	//TODO: background:white?
+	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import GroupSizeBar from '../cells/GroupSizeBar.svelte';
@@ -61,7 +62,11 @@
 
 	<!-- padding for group size infor for lower group levels -->
 	{#each new Array(getGroupLevel(group.name)) as _, i}
-		<div style:width={table.widths.groupLabel} style:background="white" class="text-core-grey-200">
+		<div
+			style:width={table.widths.groupLabel}
+			style:background="white"
+			class="text-color-text-secondary"
+		>
 			{group.name.split(' ∩ ')[i]}
 		</div>
 		<div style:width={table.widths.groupSizeLabel} style:background="white"></div>

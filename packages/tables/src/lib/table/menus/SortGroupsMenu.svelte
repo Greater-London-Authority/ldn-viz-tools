@@ -49,7 +49,9 @@
 
 <Popover>
 	<svelte:fragment slot="hint">
-		<Button variant="text" disabled={table.groupingFields.length === 0}>Sort groups</Button>
+		<Button variant="text" size="sm" disabled={table.groupingFields.length === 0}
+			>Sort groups</Button
+		>
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
@@ -61,27 +63,12 @@
 			bind:value={aggregationSelection}
 			label="by the"
 			id="labelled-input"
-			placeholder="Placeholder text"
 		/>
 
 		{#if aggregationSelection?.value !== 'count'}
-			<Select
-				items={fields}
-				bind:value={fieldSelection}
-				label="of their "
-				id="labelled-input"
-				placeholder="Placeholder text"
-			/>
+			<Select items={fields} bind:value={fieldSelection} label="of their " id="labelled-input" />
 		{/if}
 
-		<Select
-			items={orderOptions}
-			bind:value={orderSelection}
-			label="in"
-			id="labelled-input"
-			placeholder="Placeholder text"
-		/>
-
-		<span>order.</span>
+		<Select items={orderOptions} bind:value={orderSelection} label="ordered" id="labelled-input" />
 	</div>
 </Popover>
