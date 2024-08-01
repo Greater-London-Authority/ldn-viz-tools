@@ -165,17 +165,36 @@
 
 	// respond to external change in justValue
 	const applyChangeFromjustValue = (newjustValue: any) => {
-		if (!value || newjustValue != value[itemValueField]) {
-			value = items.find((f) => f[itemValueField] === newjustValue);
+		if (multiple) {
+			// in this case, newjustValue and newValue are both arrays
+			if (
+				!value ||
+				JSON.stringify(newjustValue) != JSON.stringify(value.map((v) => v[itemValueField]))
+			) {
+				// check array cmp
+				value = items.filter((f) => (newjustValue ?? []).includes(f[itemValueField]));
+			}
+		} else {
+			if (!value || newjustValue != value[itemValueField]) {
+				value = items.find((f) => f[itemValueField] === newjustValue);
+			}
 		}
 	};
 	$: applyChangeFromjustValue(justValue);
 
 	// respond to changes in selection
 	const updatejustValueFromSelection = (newValue: { [key: string]: any }) => {
-		const newjustValue = newValue && newValue[itemValueField];
-		if (justValue !== newjustValue) {
-			justValue = newjustValue;
+		if (multiple) {
+			// in this case, newjustValue and newValue are both arrays
+			const newjustValue = newValue && newValue.map((v) => v[itemValueField]);
+			if (JSON.stringify(justValue) !== JSON.stringify(newjustValue)) {
+				justValue = newjustValue;
+			}
+		} else {
+			const newjustValue = newValue && newValue[itemValueField];
+			if (justValue !== newjustValue) {
+				justValue = newjustValue;
+			}
 		}
 	};
 	$: updatejustValueFromSelection(value);
