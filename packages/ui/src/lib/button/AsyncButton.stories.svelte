@@ -1,4 +1,5 @@
 <script context="module">
+	import { DocumentArrowUp } from '@steeze-ui/heroicons';
 	import AsyncButton from './AsyncButton.svelte';
 
 	export const meta = {
@@ -46,6 +47,7 @@
 </script>
 
 <script lang="ts">
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const waitThreeSeconds = () => {
@@ -73,7 +75,7 @@
 	</AsyncButton>
 	<div class="mt-4">
 		Working:
-		<span class:text-core-red-500={!working} class:text-core-green-500={working}>
+		<span class:text-color-ui-negative={!working} class:text-color-ui-positive={working}>
 			{working}
 		</span>
 	</div>
@@ -88,7 +90,7 @@
 				{#each variants as variant}
 					<AsyncButton {variant} {condition} onClick={waitFiveSeconds}>
 						{#if variant === 'square'}
-							<span class="leading-4">Squ are</span>
+							<Icon src={DocumentArrowUp} theme="solid" class="w-6 h-6" aria-hidden="true" />
 						{:else}
 							<span class="capitalize">{variant}</span>
 						{/if}

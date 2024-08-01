@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import { Button } from '@ldn-viz/ui';
 
@@ -40,22 +40,24 @@
 	};
 </script>
 
-<div class="border-t border-core-grey-800 flex justify-between items-center">
-	<div>
+<div
+	class="border-t border-color-ui-border-primary flex justify-between items-center text-sm text-color-text-secondary"
+>
+	<div class="">
 		Showing {firstRowNum} to {lastRowNum} of {numRows} entries.
 	</div>
 
 	<div class="flex items-center">
-		<Button variant="text" disabled={page === 1} on:click={() => page--}>
-			<Icon src={ChevronLeft} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+		<Button variant="text" size="sm" disabled={page === 1} on:click={() => page--}>
+			<Icon src={ChevronLeft} theme="mini" class="w-5 h-5" aria-hidden="true" />
 			Previous
 		</Button>
 		<div>
 			Page <input bind:value={inputPage} on:change={inputPageChanged} class="border w-12" /> of {numPages}
 		</div>
-		<Button variant="text" disabled={page === numPages} on:click={() => page++}>
+		<Button variant="text" size="sm" disabled={page === numPages} on:click={() => page++}>
 			Next
-			<Icon src={ChevronRight} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+			<Icon src={ChevronRight} theme="mini" class="w-5 h-5" aria-hidden="true" />
 		</Button>
 	</div>
 </div>

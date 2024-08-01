@@ -565,7 +565,7 @@
 		<svelte:fragment slot="unstyledContent">
 			{@const sections = [1]}
 			{#each sections as _section}
-				<div class="bg-core-grey-50 p-6 mt-4 h-full space-y-4">
+				<div class="bg-color-palette-grey-100 p-6 mt-4 h-full space-y-4">
 					<p>
 						This is totally unstyled content and so needs to have extra classes to ensure correct
 						padding etc. Use with extreme caution!

@@ -142,7 +142,7 @@
 	<div class="flex flex-col gap-1 w-96">
 		<span class="font-bold">Values not assigned to a category:</span>
 		<ul
-			class="list-none"
+			class="list-none border-2 border-transparent"
 			on:dragover={(ev) => dragOver(ev, '')}
 			on:dragleave={() => dragLeave()}
 			on:dragenter={(ev) => ev.preventDefault()}
@@ -151,7 +151,7 @@
 		>
 			{#each groups.ungrouped as val}
 				<li
-					class="pl-2 cursor-grab hover:bg-color-input-background-hover"
+					class="pl-2 py-1 cursor-grab hover:bg-color-input-background-hover"
 					draggable="true"
 					data-id={val}
 					on:dragstart={(ev) => dragStart(ev, '')}
@@ -166,7 +166,7 @@
 
 	<div class="flex flex-col gap-1 w-96">
 		<div
-			class="border-core-green-600 border-2 black p-2 flex items-center"
+			class="border-color-action-border-positive border-2 black p-2 flex items-center"
 			on:dragover={(ev) => dragOver(ev, newGroupName)}
 			on:dragleave={(ev) => dragLeave()}
 			on:dragenter={(ev) => ev.preventDefault()}
@@ -179,10 +179,10 @@
 		</div>
 	</div>
 
-	<ul class="list-none">
+	<ul class="list-none border-2 border-transparent">
 		{#each Object.keys(groups.grouped) as groupName}
 			<li
-				class="pt-4 pl-2"
+				class="pl-2 py-1"
 				on:dragover={(ev) => dragOver(ev, groupName)}
 				on:dragleave={() => dragLeave()}
 				on:dragenter={(ev) => ev.preventDefault()}
@@ -211,12 +211,12 @@
 					</div>
 				</div>
 
-				<ul class="list-none">
+				<ul class="list-none border-2 border-transparent">
 					{#each groups.grouped[groupName] as val}
 						<li
 							data-id={val}
 							draggable="true"
-							class="cursor-grab hover:bg-color-input-background-hover flex"
+							class="pl-2 py-1 cursor-grab hover:bg-color-input-background-hover flex"
 							on:dragstart={(ev) => dragStart(ev, groupName)}
 						>
 							<Button
@@ -240,6 +240,6 @@
 
 <style lang="postcss">
 	.currentDropTarget {
-		@apply border-2 border-dashed border-color-action-primary-active;
+		@apply border-2 border-dashed border-color-action-border-positive-active;
 	}
 </style>

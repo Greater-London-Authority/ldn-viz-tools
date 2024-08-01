@@ -14,7 +14,7 @@
 
 <section>
 	<div
-		class="border-b border-color-border-secondary space-y-2 pb-2 text-sm bg-color-container-background-level-1 text-color-text-primary"
+		class="border-b border-color-ui-border-secondary space-y-2 pb-2 text-sm bg-color-container-background-level-1 text-color-text-primary"
 	>
 		{#if $$slots.title}
 			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->

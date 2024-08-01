@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
-	import FormField from './FormField.svelte';
 	import Form from '../../Form.svelte';
-	import type { FormValueStore, FormErrorStore } from '../../types';
+	import type { FormErrorStore, FormValueStore } from '../../types';
+	import FormField from './FormField.svelte';
 
 	const dummyOptions = [
 		{ label: '一 (Ichi)', value: 'one' },
@@ -125,7 +125,7 @@
 		>
 			<FormField {...args} />
 		</Form>
-		<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+		<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 			{#if args.type === 'select'}
 				<Button
 					emphasis="secondary"
@@ -150,7 +150,7 @@
 	>
 		<FormField type="text" name="error_field" />
 	</Form>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<Button type="submit" emphasis="primary" on:click={validate}>Validate</Button>
 		<p>Value: {valueStore && $valueStore.error_field}</p>
 		<p>Error: {errorStore && $errorStore.error_field}</p>
