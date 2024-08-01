@@ -1,8 +1,9 @@
 <script lang="ts">
+	// TODO: DEPRECATE IN FAVOR OF GLOBAL POPOVER
 	import { createPopover } from '@melt-ui/svelte';
-	import { fade } from 'svelte/transition';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { XMark } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { fade } from 'svelte/transition';
 
 	const {
 		elements: { trigger, content, arrow, close },

@@ -1,4 +1,5 @@
 <script lang="ts">
+	// TODO: DELETE
 	// This is a generalised version of Grouping.svelte from the multivariate-census app
 
 	import { Button } from '@ldn-viz/ui';
