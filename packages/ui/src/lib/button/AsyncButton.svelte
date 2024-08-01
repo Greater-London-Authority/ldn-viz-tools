@@ -122,9 +122,8 @@
 	{#if working}
 		<div class="relative">
 			<Spinner
-				circleColorClass="stroke-core-grey-300/75"
 				arcColorClass={conditionColorClasses}
-				class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
+				class="absolute inset-0 mx-auto my-auto stroke-[10] {dynamicSpinnerClasses}"
 			/>
 			<!-- This gives the outer div the correct size so the spinner is centered -->
 			<span class="invisible">
