@@ -15,8 +15,8 @@
   },
   "scripts": {
     "build": "vite build",
-    "lint": "prettier --plugin-search-dir . --check . && eslint .",
-    "fmt": "prettier --plugin-search-dir . --check . --write",
+    "lint": "prettier --check . && eslint src",
+    "format": "prettier --check . --write",
     "test": "echo no tests",
     "test:unit": "echo no tests"
   },
