@@ -155,6 +155,11 @@
 	export let hideEmptyState = false;
 
 	/**
+	 * if `false`, then Chevron is not shown.
+	 */
+	export let showChevron = true;
+
+	/**
 	 * if `false` will ignore width of select
 	 */
 	export let listAutoWidth = true;
@@ -234,6 +239,7 @@
 			{floatingConfig}
 			{disabled}
 			{placeholder}
+			{showChevron}
 			on:change
 			on:input
 			on:focus
