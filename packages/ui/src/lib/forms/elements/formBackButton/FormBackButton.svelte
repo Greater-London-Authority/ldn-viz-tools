@@ -61,7 +61,7 @@
 		<!-- Text and icons slotted into the button, defaults to "<- Back". -->
 		<slot>
 			<div class="flex items-center">
-				<Icon src={ArrowLeft} class="stroke-[0.2rem] w-5 h-5 mr-1" />
+				<Icon src={ArrowLeft} theme="mini" class="stroke-[0.2rem] w-5 h-5 mr-1" />
 				{label}
 			</div>
 		</slot>
@@ -75,7 +75,7 @@
 		{...$$restProps}
 	>
 		<slot>
-			<Icon src={ArrowLeft} class="stroke-[0.2rem] w-5 h-5 mr-1" />
+			<Icon src={ArrowLeft} theme="mini" class="stroke-[0.2rem] w-5 h-5 mr-1" />
 			{label}
 		</slot>
 	</Button>
