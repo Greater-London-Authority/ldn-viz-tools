@@ -171,7 +171,6 @@
 				!value ||
 				JSON.stringify(newjustValue) != JSON.stringify(value.map((v) => v[itemValueField]))
 			) {
-				// check array cmp
 				value = items.filter((f) => (newjustValue ?? []).includes(f[itemValueField]));
 			}
 		} else {
