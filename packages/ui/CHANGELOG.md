@@ -23,6 +23,7 @@
 - 6ce827e: CHANGED: simplify the `MergeValuesControl` component.
 - 82b10d8: ADDED: `Flag` component for displaying banner messages (e.g. to indicate that a site is in beta)
 - 4da0c67: CHANGED: the `<SidebarSection>` component can now accept a `<SidebarSectionTitle>` component inside the `title` slot.
+- d24b4c4: CHANGED: `RadioButtons` now accept a `hint` and `hintLabel` prop (like the `Checkbox` component)
 
 ### Patch Changes
 
