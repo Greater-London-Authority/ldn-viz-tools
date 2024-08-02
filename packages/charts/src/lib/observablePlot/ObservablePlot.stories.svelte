@@ -426,9 +426,9 @@
 					y: 'Percent',
 					dy: -15,
 					textAnchor: 'end',
-					text: () => '(Index, 2019 Q4)',
+					text: (d) => '(Index, 2019 Q4)',
 					fontSize: '15px',
-					fill: () => 'black'
+					fill: (d) => 'black'
 				}),
 
 				Plot.dot(lineChartData, {
