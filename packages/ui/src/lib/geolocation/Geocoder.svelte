@@ -31,10 +31,14 @@
 		OnSuggestionListInteraction
 	} from './types';
 
-	// adapter to source location suggestions from.
+	/**
+	 * adapter to source location suggestions from.
+	 */
 	export let adapter: GeocoderAdapter;
 
-	// delay in ms after a key stroke to minimise redundant API requests.
+	/**
+	 * delay in ms after a key stroke to minimise redundant API requests.
+	 */
 	export let delay = 250;
 
 	/**
@@ -42,7 +46,9 @@
 	 */
 	export let onLocationSelected: undefined | OnGeolocationSearchResult;
 
-	// called when the adapter promise rejects a search request.
+	/**
+	 * called when the adapter promise rejects a search request.
+	 */
 	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	/**
@@ -50,6 +56,11 @@
 	 * changes to search results.
 	 */
 	export let suggestions: GeolocationNamed[] = [];
+
+	/**
+	 * The currently selected location.
+	 */
+	export let selected = null;
 
 	/**
 	 * a space-separated list of additional classes applied to the root container.
@@ -74,6 +85,7 @@
 	let container: HTMLElement;
 	let input: HTMLInputElement;
 	let query = '';
+	let silentQueryUpdate = false;
 	let showSuggestionList = false;
 
 	const updateSuggestionsNow = async () => {
@@ -109,6 +121,16 @@
 
 	const onSelect = (suggestion: Geolocation) => {
 		closeSuggestionsList();
+		selected = suggestion;
+
+		if (suggestion.address) {
+			query = suggestion.address;
+			silentQueryUpdate = true;
+		} else if (suggestion.name) {
+			query = suggestion.name;
+			silentQueryUpdate = true;
+		}
+
 		onLocationSelected && onLocationSelected(suggestion);
 	};
 
@@ -120,8 +142,7 @@
 		const clickEvent = event as PointerEvent;
 
 		if (pressEvent.key === 'Enter' || clickEvent.type === 'click') {
-			closeSuggestionsList();
-			onLocationSelected && onLocationSelected(suggestion);
+			onSelect(suggestion);
 			return;
 		}
 
@@ -243,13 +264,18 @@
 	const clearSearch = () => {
 		showClearButton = false;
 		query = '';
+		selected = null;
 		suggestions = [];
 		showSuggestionList = false;
 	};
 
 	$: {
 		query;
-		scheduleUpdate();
+		if (!silentQueryUpdate) {
+			scheduleUpdate();
+		} else {
+			silentQueryUpdate = false;
+		}
 	}
 </script>
 
