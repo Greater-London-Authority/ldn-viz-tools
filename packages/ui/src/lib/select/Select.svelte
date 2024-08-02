@@ -95,7 +95,7 @@
 	 */
 	export let placeholderAlwaysShow = false;
 
-	export let itemFilter = (label: string, filterText: string, option: any) =>
+	export let itemFilter = (label: string, filterText: string) =>
 		`${label}`.toLowerCase().includes(filterText.toLowerCase());
 	export let groupBy: any = undefined;
 	export let groupFilter = (groups: any) => groups;

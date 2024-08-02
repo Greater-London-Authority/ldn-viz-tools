@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import Button from '../button/Button.svelte';
 	import PlaceholderImage from './PlaceholderImage.svelte';
 
 	export const meta = {
