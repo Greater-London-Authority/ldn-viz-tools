@@ -2,4 +2,4 @@
 "@ldn-viz/ui": minor
 ---
 
-vertical spacing for input and checkbox groups
+FIXED: correct vertical spacing for `InputGroup` and `CheckboxGroup`
