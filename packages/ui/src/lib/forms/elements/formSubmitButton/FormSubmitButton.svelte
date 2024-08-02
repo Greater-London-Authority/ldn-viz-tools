@@ -9,7 +9,7 @@
 
 	import { getContext } from 'svelte';
 	import Button from '../../../button/Button.svelte';
-	import AsyncButton from '../../AsyncButton.svelte';
+	import AsyncButton from '../../../button/AsyncButton.svelte';
 	import type { FormButtonhandler, FormActiveButtonStore } from '../../types';
 
 	const activeButtonStore: FormActiveButtonStore = getContext('formActiveButtonStore');
@@ -27,11 +27,8 @@
 
 	/**
 	 * Is set to `true` when the `onSubmit` function is being executed.
-	 * THe intended use is to bind to it to reactively know when a submission is
-	 * in progress.
 	 *
-	 * Working will be reset to `false` once the function (possibly including a
-	 * returned promise) has finished executing.
+	 * Bind to this property for reactive updates to button click state.
 	 */
 	export let working = false;
 
@@ -53,7 +50,6 @@
 
 {#if async}
 	<AsyncButton
-		disabled={$$props.disabled || $activeButtonStore}
 		type="submit"
 		variant="solid"
 		class="flex gap-2"

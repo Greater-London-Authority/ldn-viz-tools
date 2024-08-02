@@ -1,12 +1,12 @@
 <script context="module" lang="ts">
-	import FormSubmitButton from './FormSubmitButton.svelte';
+	import FormBackButton from './FormBackButton.svelte';
 	import Form from '../../Form.svelte';
 
 	export const meta = {
-		title: 'Ui/Form/FormSubmitButton',
-		component: FormSubmitButton,
+		title: 'Ui/Form/FormBackButton',
+		component: FormBackButton,
 		argTypes: {
-			onSubmit: {
+			onBack: {
 				type: 'function',
 				control: 'none',
 				table: {
@@ -21,6 +21,10 @@
 			},
 			working: {
 				control: { type: 'none' }
+			},
+			label: {
+				type: 'text',
+				control: 'text'
 			}
 		}
 	};
@@ -28,19 +32,17 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { ArrowRight } from '@steeze-ui/heroicons';
+	import { ArrowLeft } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const waitTwoSeconds = () => {
-		return new Promise((r) => setTimeout(r, 2000));
+	const waitOneSeconds = () => {
+		return new Promise((r) => setTimeout(r, 1000));
 	};
-
-	const doNothing = () => {};
 </script>
 
 <Template let:args>
 	<Form>
-		<FormSubmitButton slot="leftButtons" {...args} onSubmit={waitTwoSeconds} />
+		<FormBackButton slot="leftButtons" {...args} onBack={waitOneSeconds} />
 	</Form>
 </Template>
 
@@ -48,29 +50,27 @@
 
 <Story name="Label">
 	<Form>
-		<FormSubmitButton slot="leftButtons" onSubmit={doNothing}>
-			Continue <Icon src={ArrowRight} class="ml-2 w-6 h-6" />
-		</FormSubmitButton>
+		<FormBackButton slot="leftButtons" label="Previous page" onBack={waitOneSeconds} />
 	</Form>
 </Story>
 
 <Story name="Async">
 	<Form>
-		<FormSubmitButton slot="leftButtons" async onSubmit={waitTwoSeconds} />
+		<FormBackButton slot="leftButtons" async onBack={waitOneSeconds} />
 	</Form>
 </Story>
 
 <Story name="Customise Button">
 	<Form>
-		<FormSubmitButton
+		<FormBackButton
 			slot="leftButtons"
-			emphasis="secondary"
 			condition="warning"
 			variant="square"
 			size="lg"
-			onSubmit={doNothing}
+			async
+			onBack={waitOneSeconds}
 		>
-			<Icon src={ArrowRight} class="w-10 h-10" />
-		</FormSubmitButton>
+			<Icon src={ArrowLeft} class="w-10 h-10" />
+		</FormBackButton>
 	</Form>
 </Story>
