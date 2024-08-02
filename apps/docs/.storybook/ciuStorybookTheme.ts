@@ -14,7 +14,7 @@ export default create({
 	brandTarget: '_self',
 
 	colorPrimary: colors.theme.dark.color.ui.primary,
-	colorSecondary: colors.theme.dark.color.ui.secondary,
+	colorSecondary: colors.theme.dark.color.palette.blue[700],
 
 	// UI
 	appBg: colors.theme.dark.color.container.background['level-1'],
@@ -52,7 +52,7 @@ export const docs = create({
 	fontCode: 'monospace',
 
 	colorPrimary: colors.theme.light.color.ui.primary,
-	colorSecondary: colors.theme.light.color.ui.secondary,
+	colorSecondary: colors.theme.light.color.palette.blue[700],
 
 	// Text colors
 	textColor: colors.theme.light.color.text.primary,
