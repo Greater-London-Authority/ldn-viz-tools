@@ -20,6 +20,7 @@
 	];
 
 	let justValue: number | null;
+	let justValueMulti: number[] | null;
 	let error = '';
 </script>
 
@@ -154,6 +155,22 @@
 		<Button on:click={() => (justValue = null)}>Clear</Button>
 
 		<Select {items} bind:justValue id="labelled-input" />
+	</div>
+</Story>
+
+<Story name="Binding to justValue - multi">
+	<div class="w-[500px] flex flex-col gap-2">
+		<p>
+			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
+			object including the <code>label</code> as well as <code>value</code>)
+		</p>
+
+		<div>Current value: <span class="font-bold">{justValueMulti}</span></div>
+
+		<Button on:click={() => (justValueMulti = [1, 3])}>Reset to 1 and 3</Button>
+		<Button on:click={() => (justValueMulti = null)}>Clear</Button>
+
+		<Select {items} bind:justValue={justValueMulti} id="labelled-input" multiple />
 	</div>
 </Story>
 
