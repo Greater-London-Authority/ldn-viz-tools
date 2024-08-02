@@ -24,11 +24,11 @@
 	const getDynamicSpinnerClasses = (size: string, variant: string): string => {
 		switch (size) {
 			case 'sm':
-				return 'w-6 h-6 stroke-[24]';
+				return 'w-6 h-6 stroke-[12]';
 			case 'md':
-				return 'w-7 h-7 stroke-[20]';
+				return 'w-7 h-7 stroke-[10]';
 			case 'lg':
-				return variant === 'square' ? 'w-10 h-10 stroke-[20]' : 'w-8 h-8 stroke-[20]';
+				return variant === 'square' ? 'w-10 h-10 stroke-[10]' : 'w-8 h-8 stroke-[10]';
 			default:
 				return '';
 		}

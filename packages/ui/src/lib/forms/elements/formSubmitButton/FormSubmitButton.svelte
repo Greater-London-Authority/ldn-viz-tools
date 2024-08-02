@@ -27,11 +27,8 @@
 
 	/**
 	 * Is set to `true` when the `onSubmit` function is being executed.
-	 * THe intended use is to bind to it to reactively know when a submission is
-	 * in progress.
 	 *
-	 * Working will be reset to `false` once the function (possibly including a
-	 * returned promise) has finished executing.
+	 * Bind to this property for reactive updates to button click state.
 	 */
 	export let working = false;
 
