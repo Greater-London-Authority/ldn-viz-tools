@@ -42,3 +42,14 @@
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Story>
+
+<Story name="Checkbox Group - externally updated">
+	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
+
+	<div class="my-4">
+		<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
+	</div>
+	<p class="text-color-text-secondary">
+		selectedOptions: {JSON.stringify(selectedOptions)}
+	</p>
+</Story>

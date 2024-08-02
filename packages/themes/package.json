@@ -1,10 +1,10 @@
 {
   "name": "@ldn-viz/themes",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "lint": "prettier --check . && eslint . && publint",
-    "fmt": "prettier --check . --write",
+    "format": "prettier --check . --write",
     "test": "echo no tests",
     "test:unit": "echo no tests",
     "build-tokens": "node ./build.js",

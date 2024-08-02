@@ -9,7 +9,6 @@
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import Button from '../../../button/Button.svelte';
 	import SidebarHint from '../sidebarHint/SidebarHint.svelte';
 </script>
 

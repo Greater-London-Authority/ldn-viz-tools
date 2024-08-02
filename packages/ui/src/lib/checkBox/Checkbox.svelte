@@ -96,7 +96,7 @@
 			: ''}
 		{...$$restProps}
 	/>
-	<span class="mx-2 form-label">{label}</span>
+	<span class="ml-2 form-label">{label}</span>
 	{#if hint}
 		<Tooltip {hintLabel}>
 			{hint}

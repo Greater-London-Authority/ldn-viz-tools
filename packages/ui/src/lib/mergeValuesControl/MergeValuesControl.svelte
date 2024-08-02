@@ -168,7 +168,7 @@
 		<div
 			class="border-color-action-border-positive border-2 black p-2 flex items-center"
 			on:dragover={(ev) => dragOver(ev, newGroupName)}
-			on:dragleave={(ev) => dragLeave()}
+			on:dragleave={() => dragLeave()}
 			on:dragenter={(ev) => ev.preventDefault()}
 			on:drop={(ev) => dragDrop(ev, newGroupName)}
 			class:currentDropTarget={draggedOverGroup === newGroupName}

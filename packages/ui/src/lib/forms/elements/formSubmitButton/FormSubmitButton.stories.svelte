@@ -31,11 +31,11 @@
 	import { ArrowRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const waitTwoSeconds = (event: MouseEvent | TouchEvent) => {
+	const waitTwoSeconds = () => {
 		return new Promise((r) => setTimeout(r, 2000));
 	};
 
-	const doNothing = (event: MouseEvent | TouchEvent) => {};
+	const doNothing = () => {};
 </script>
 
 <Template let:args>
