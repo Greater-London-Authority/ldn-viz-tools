@@ -11,6 +11,7 @@
 ### Minor Changes
 
 - ec1feea: FIXED: fix the rendering of wide tables
+- 66d62ad: ADDED: the visual encoding applied to cells can also depend on the values in other column(s)
 
 ### Patch Changes
 
