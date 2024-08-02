@@ -44,9 +44,9 @@
 	export let buttonsHidden = false;
 </script>
 
-<div>
+<div class="flex flex-col space-y-0.25">
 	{#if !buttonsHidden}
-		<Button variant="text" on:click={() => (selectedId = '')}>Clear</Button>
+		<Button variant="text" class="!px-0" on:click={() => (selectedId = '')}>Clear</Button>
 	{/if}
 	{#each options as option}
 		<RadioButton
