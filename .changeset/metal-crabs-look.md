@@ -2,4 +2,4 @@
 "@ldn-viz/ui": minor
 ---
 
-Reinstate select chevron
+FIXED: Reinstate select chevron
