@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 10.1.0
+
+### Minor Changes
+
+- 35eeb55: ADDED: adds `AsyncButton` that wraps `Button` for asynchronous operations.
+- af5c364: CHANGED: `Select` now correctly sets `justValue` prop when `multiple` is enabled
+- 1ce5711: ADDED: adds `FormBackButton` for consistent easy to use back button on multipage forms.
+- 773cbee: FIXED: Reinstate select chevron
+- b52a596: FIXED: correct vertical spacing for `InputGroup` and `CheckboxGroup`
+- 3ce331e: CHANGED: changes hint icons to be mini theme
+
 ## 10.0.0
 
 ### Major Changes
