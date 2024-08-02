@@ -47,29 +47,33 @@
 		promoteId: 'objectid' // 'gss_code' instead?
 	}}
 >
-	<MapLayerView
-		id="{sourceId}/line"
-		spec={{
-			type: 'line',
-			'source-layer': 'boroughs',
-			filter: ['==', '$type', 'Polygon'],
-			paint: {
-				'line-color': lineColor,
-				'line-width': Number(lineWidth),
-				'line-opacity': Number(lineOpacity)
-			}
-		}}
-	/>
-	<MapLayerView
-		id="{sourceId}/fill"
-		spec={{
-			type: 'fill',
-			'source-layer': 'boroughs',
-			filter: ['==', '$type', 'Polygon'],
-			paint: {
-				'fill-color': fillColor,
-				'fill-opacity': Number(fillOpacity)
-			}
-		}}
-	/>
+	{#key lineColor + lineWidth + lineOpacity}
+		<MapLayerView
+			id="{sourceId}/line"
+			spec={{
+				type: 'line',
+				'source-layer': 'boroughs',
+				filter: ['==', '$type', 'Polygon'],
+				paint: {
+					'line-color': lineColor,
+					'line-width': Number(lineWidth),
+					'line-opacity': Number(lineOpacity)
+				}
+			}}
+		/>
+	{/key}
+	{#key fillColor + fillOpacity}
+		<MapLayerView
+			id="{sourceId}/fill"
+			spec={{
+				type: 'fill',
+				'source-layer': 'boroughs',
+				filter: ['==', '$type', 'Polygon'],
+				paint: {
+					'fill-color': fillColor,
+					'fill-opacity': Number(fillOpacity)
+				}
+			}}
+		/>
+	{/key}
 </MapLayerSource>
