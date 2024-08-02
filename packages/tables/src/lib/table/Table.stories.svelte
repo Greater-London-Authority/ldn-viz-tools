@@ -34,6 +34,7 @@
 	];
 
 	const tableSpec = {
+		showColSummaries: false,
 		columns: [
 			{
 				short_label: 'first_name',
