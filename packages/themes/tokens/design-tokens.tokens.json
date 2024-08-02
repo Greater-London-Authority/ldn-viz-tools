@@ -2099,7 +2099,7 @@
           "chart": {
             "axis": {
               "type": "color",
-              "value": "{semantic.dark-mode.color.text.secondary}"
+              "value": "{semantic.dark-mode.color.text.primary}"
             },
             "grid": {
               "type": "color",
