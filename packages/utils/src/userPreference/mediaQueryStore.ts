@@ -20,7 +20,7 @@ export const mediaQueryStore = (mediaQueryString: string) => {
 
   const { subscribe, set } = writable(false, () => {
     if (BROWSER) {
-      let mql = window.matchMedia(mediaQueryString);
+      const mql = window.matchMedia(mediaQueryString);
 
       set(mql.matches);
       const onchange = () => set(mql.matches);
