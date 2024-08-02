@@ -155,7 +155,7 @@
 	export let hideEmptyState = false;
 
 	/**
-	 * if false Chevron is not shown.
+	 * if `false`, then Chevron is not shown.
 	 */
 	export let showChevron = true;
 
