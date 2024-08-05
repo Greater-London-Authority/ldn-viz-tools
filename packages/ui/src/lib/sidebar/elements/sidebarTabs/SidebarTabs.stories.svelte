@@ -38,21 +38,21 @@
 </Story>
 
 <Story name="Vertical with Icons">
-	<SidebarTabList bind:selectedValue orientation="vertical">
+	<SidebarTabList bind:selectedValue>
 		<SidebarTabLabel tabId="markers">
-			<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 			Data Markers
 		</SidebarTabLabel>
 		<SidebarTabLabel tabId="filters">
-			<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 			Filters
 		</SidebarTabLabel>
 		<SidebarTabLabel tabId="analysis">
-			<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 			Analysis
 		</SidebarTabLabel>
 		<SidebarTabLabel tabId="layers">
-			<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+			<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 			Layers
 		</SidebarTabLabel>
 	</SidebarTabList>

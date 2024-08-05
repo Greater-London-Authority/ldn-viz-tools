@@ -22,7 +22,7 @@
 	let classes = typeClasses[message.type];
 
 	if (!classes) {
-		classes = 'bg-background-color-ui-neutral';
+		classes = 'bg-color-ui-background-neutral';
 	}
 </script>
 
@@ -32,22 +32,22 @@
 	class="shadow-lg text-color-text-primary"
 	out:fade={{ duration: 100 }}
 >
-	<div class="border p-2 pl-4 pr-4 {classes}">
-		<div class="text-lg font-bold flex justify-between items-center">
+	<div class="border pl-4 pb-4 p-2 pr-2 {classes}">
+		<div class="text-lg font-bold flex justify-between items-center leading-none">
 			{message.type}
 			{#if message.closeButton}
 				<Button
 					title="Close"
 					emphasis="secondary"
 					variant="square"
-					class="w-6 h-6"
+					size="sm"
 					on:click={message.remove}
 				>
-					<Icon src={XMark} class="w-4 h-4" />
+					<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />
 				</Button>
 			{/if}
 		</div>
-		<div class="text-sm">{message.text}</div>
+		<div class="text-sm pr-2">{message.text}</div>
 	</div>
 </div>
 

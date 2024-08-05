@@ -49,7 +49,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef}>
-		Download as PNG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as PNG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -62,15 +62,15 @@
 	<div class="space-y-2">
 		<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="primary">
 			Primary
-			<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 		</ImageDownloadButton>
 		<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="secondary">
 			Secondary
-			<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 		</ImageDownloadButton>
 		<ImageDownloadButton svgNode={svgRef} filename="download" variant="text">
 			Text
-			<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 		</ImageDownloadButton>
 	</div>
 </Story>
@@ -82,7 +82,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef} disabled={true}>
-		Download as PNG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as PNG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -93,7 +93,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef2}>
-		Download as PNG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as PNG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -104,7 +104,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef3} format="SVG">
-		Download as SVG<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as SVG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -116,7 +116,7 @@
 	</div>
 
 	<ImageDownloadButton htmlNode={htmlRef} htmlId="divToSave" format="SVG">
-		Download as image<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -132,7 +132,7 @@
 	</div>
 
 	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave" format="SVG">
-		Download as image<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
@@ -148,7 +148,7 @@
 	</div>
 
 	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave" padding="100px" format="SVG">
-		Download as image<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
 
