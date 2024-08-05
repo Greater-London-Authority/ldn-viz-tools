@@ -29,23 +29,30 @@
 	 * text that appears in the tooltip target, next to the icon
 	 */
 	export let hintLabel = 'more info';
+
+	/**
+	 * text size for the tooltip target
+	 */
+	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 </script>
 
-<div {...$trigger} use:trigger class="w-fit h-fit inline-flex items-center">
-	{#if $$slots.hint}
-		<!-- if present, replaces the default `hintLabel` and icon  -->
-		<slot name="hint" />
-	{:else}
-		{hintLabel}
+<Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
+	<span {...$trigger} use:trigger class="inline-flex items-center">
+		{#if $$slots.hint}
+			<!-- if present, replaces the default `hintLabel` and icon  -->
+			<slot name="hint" />
+		{:else}
+			{hintLabel}
 
-		<Icon
-			src={InformationCircle}
-			theme="mini"
-			class="w-[18px] h-[18px] ml-0.5"
-			aria-hidden="true"
-		/>
-	{/if}
-</div>
+			<Icon
+				src={InformationCircle}
+				theme="mini"
+				class="w-[18px] h-[18px] ml-0.5"
+				aria-hidden="true"
+			/>
+		{/if}
+	</span>
+</Button>
 
 {#if $open}
 	<div
@@ -58,7 +65,7 @@
 
 		<div class="text-sm flex flex-col space-y-2 text-color-text-primary">
 			{#if $$slots.title}
-				<p class="font-bold">
+				<p class="font-medium">
 					<!-- Optional title for the popover -->
 					<slot name="title" />
 				</p>
