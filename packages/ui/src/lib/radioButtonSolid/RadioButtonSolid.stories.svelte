@@ -33,15 +33,15 @@
 <Story name="RadioGroup with Icons above">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
-			<Icon src={Funnel} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Funnel} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Bus
 		</RadioButtonSolid>
 		<RadioButtonSolid id="train" name="station-type-train">
-			<Icon src={Map} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Map} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Train
 		</RadioButtonSolid>
 		<RadioButtonSolid id="plane" name="station-type-plane">
-			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Plane
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
@@ -52,15 +52,15 @@
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
 			Bus
-			<Icon src={Funnel} theme="solid" class="w-6 h-6 mt-1" aria-hidden="true" />
+			<Icon src={Funnel} theme="mini" class="w-5 h-5 mt-1" aria-hidden="true" />
 		</RadioButtonSolid>
 		<RadioButtonSolid id="train" name="station-type-train">
 			Train
-			<Icon src={Map} theme="solid" class="w-6 h-6 mt-1" aria-hidden="true" />
+			<Icon src={Map} theme="mini" class="w-5 h-5 mt-1" aria-hidden="true" />
 		</RadioButtonSolid>
 		<RadioButtonSolid id="plane" name="station-type-plane">
 			Plane
-			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mt-1" aria-hidden="true" />
+			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mt-1" aria-hidden="true" />
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
@@ -69,11 +69,11 @@
 <Story name="With 2 options">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
-			<Icon src={Funnel} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Funnel} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Bus
 		</RadioButtonSolid>
 		<RadioButtonSolid id="train" name="station-type-train">
-			<Icon src={Map} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Map} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Train
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
@@ -83,19 +83,19 @@
 <Story name="With 4 options">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
-			<Icon src={Funnel} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Funnel} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Bus
 		</RadioButtonSolid>
 		<RadioButtonSolid id="train" name="station-type-train">
-			<Icon src={Map} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={Map} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Train
 		</RadioButtonSolid>
 		<RadioButtonSolid id="plane" name="station-type-plane">
-			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Plane
 		</RadioButtonSolid>
 		<RadioButtonSolid id="plane" name="station-type-plane">
-			<Icon src={PresentationChartLine} theme="solid" class="w-6 h-6 mb-1" aria-hidden="true" />
+			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			This_label_is_far_too_long
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>

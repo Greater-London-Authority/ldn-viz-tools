@@ -50,7 +50,7 @@
 		class={classNames(
 			disabled
 				? 'cursor-not-allowed bg-color-input-background-disabled !text-color-text-disabled hover:bg-color-input-background-disabled'
-				: 'cursor-pointer bg-color-action-background-secondary text-color-primary',
+				: 'cursor-pointer bg-color-action-background-secondary text-color-text-primary',
 			'form-label flex flex-col justify-center items-center p-2 w-full ring-1 ring-color-container-level-1 hover:bg-color-action-background-primary hover:text-color-static-white peer-checked:text-color-static-white peer-checked:bg-color-action-background-primary'
 		)}
 	>

@@ -18,7 +18,7 @@
 		sidebarIsOpen.update((isOpen) => !isOpen);
 	};
 
-	const themeClasses = ['!bg-color-container-level-1 !text-color-primary'];
+	const themeClasses = ['!bg-color-container-level-1 !text-color-text-primary'];
 
 	$: sidebarToggleClasses = classNames('cursor-pointer', ...themeClasses);
 </script>

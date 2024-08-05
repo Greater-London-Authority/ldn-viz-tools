@@ -24,7 +24,7 @@
 	{href}
 	target={newWindow ? '_blank' : '_self'}
 	rel={newWindow ? 'noopener noreferrer' : ''}
-	class="bg-color-action-secondary-100 group hover:bg-color-action-secondary-100-hover transition h-full flex flex-col text-color-primary"
+	class="bg-color-action-secondary-100 group hover:bg-color-action-secondary-100-hover transition h-full flex flex-col text-color-text-primary"
 >
 	<div class="p-4 h-full space-y-2">
 		{#if $$slots.title}
@@ -35,7 +35,7 @@
 		{/if}
 
 		{#if $$slots.body}
-			<div class="h-full text-color-primary prose leading-snug">
+			<div class="h-full text-color-text-primary prose leading-snug">
 				<!-- longer description text displayed below the title in smaller font -->
 				<slot name="body" />
 			</div>
