@@ -281,7 +281,7 @@
 			class="absolute top-1 right-1 flex items-center justify-center y-auto bg-color-input-background"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="w-8 h-8 text-color-input-icon" />
+			<Icon src={XMark} class="w-8 h-8 p-0.25 text-color-input-icon" />
 		</button>
 	{/if}
 

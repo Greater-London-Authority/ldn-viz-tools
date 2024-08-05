@@ -80,7 +80,7 @@
 		<div {...$close} use:close>
 			<Button variant="square" emphasis="secondary" size="sm" class="absolute right-1.5 top-1.5">
 				<span class="sr-only">Close</span>
-				<Icon src={XMark} theme="mini" class="w-6 h-6" aria-hidden="true" />
+				<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />
 			</Button>
 		</div>
 	</div>

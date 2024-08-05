@@ -90,7 +90,7 @@
 				{#each variants as variant}
 					<AsyncButton {variant} {condition} onClick={waitFiveSeconds}>
 						{#if variant === 'square'}
-							<Icon src={DocumentArrowUp} theme="solid" class="w-6 h-6" aria-hidden="true" />
+							<Icon src={DocumentArrowUp} theme="mini" class="w-5 h-5" aria-hidden="true" />
 						{:else}
 							<span class="capitalize">{variant}</span>
 						{/if}

@@ -77,7 +77,7 @@
 <Story name="Square" args={{ variant: 'square' }}>
 	<div class="space-y-2">
 		<Button variant="square" title="Down" size="sm">
-			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
+			<Icon src={ArrowDownCircle} theme="mini" class="w-5 h-5" aria-hidden="true" />
 		</Button>
 		<Button variant="square" title="Down" size="md">
 			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
@@ -121,7 +121,7 @@
 <Story name="With Icon">
 	<Button>
 		Download as PNG
-		<Icon src={Camera} theme="solid" class="ml-2 w-6 h-6" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</Button>
 </Story>
 

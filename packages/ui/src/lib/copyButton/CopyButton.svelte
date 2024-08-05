@@ -68,13 +68,13 @@
 		<!-- Button text and icon before copy. -->
 		<slot name="before-copy">
 			{label}
-			<Icon src={DocumentDuplicate} class="w-6 h-6 pl-0.5 py-0.5" />
+			<Icon src={DocumentDuplicate} class="w-5 h-5 ml-2" />
 		</slot>
 	{:else}
 		<!-- Button text and icon after copy. -->
 		<slot name="after-copy">
 			{label}
-			<Icon src={ClipboardDocumentCheck} class="w-6 h-6 pl-0.5 py-0.5" />
+			<Icon src={ClipboardDocumentCheck} class="w-5 h-5 ml-2" />
 		</slot>
 	{/if}
 </Button>

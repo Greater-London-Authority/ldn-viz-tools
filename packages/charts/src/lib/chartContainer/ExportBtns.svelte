@@ -21,7 +21,7 @@
 	>
 		Download as CSV <Icon
 			src={ArrowDownTray}
-			theme="solid"
+			theme="mini"
 			class="w-5 h-5 ml-2"
 			aria-hidden="true"
 		/>
@@ -36,7 +36,7 @@
 	>
 		Download as JSON<Icon
 			src={ArrowDownTray}
-			theme="solid"
+			theme="mini"
 			class="w-5 h-5 ml-2"
 			aria-hidden="true"
 		/>
@@ -49,6 +49,6 @@
 		emphasis="secondary"
 		size="sm"
 	>
-		Save as image<Icon src={Camera} theme="outline" class="w-5 h-5 ml-2" aria-hidden="true" />
+		Save as image<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
 	</ImageDownloadButton>
 </div>

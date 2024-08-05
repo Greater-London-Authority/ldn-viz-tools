@@ -161,7 +161,7 @@
 			aria-label="Clear location"
 			on:click={clearSearch}
 		>
-			<Icon src={XMark} class="w-8 h-8 p-0.25 stroke-white" />
+			<Icon src={XMark} class="w-8 h-8 p-0.25" />
 		</Button>
 	{:else}
 		<Button
@@ -172,10 +172,7 @@
 			aria-label={errorMessage ? errorMessage : 'Find my location'}
 			on:click={startSearch}
 		>
-			<TargetIcon
-				title={errorMessage ? errorMessage : 'Find my location'}
-				class="w-8 h-8 p-0.5 stroke-white"
-			/>
+			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="w-8 h-8 p-0.5" />
 		</Button>
 	{/if}
 </div>
