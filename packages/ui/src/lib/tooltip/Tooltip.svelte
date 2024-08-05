@@ -21,7 +21,7 @@
 	/**
 	 * text that appears in the tooltip target, next to the icon
 	 */
-	export let hintLabel = 'what is this?';
+	export let hintLabel = 'more info';
 
 	/**
 	 * text size for the tooltip target
