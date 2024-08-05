@@ -70,7 +70,7 @@
 	};
 
 	$: modalClass = classNames(
-		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-background-level-0 shadow-xl pointer-events-auto',
+		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
 </script>
@@ -82,7 +82,7 @@
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
-					class="bg-color-container-background-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand"
+					class="bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand"
 				>
 					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
 					<div {...$close} use:$close.action>

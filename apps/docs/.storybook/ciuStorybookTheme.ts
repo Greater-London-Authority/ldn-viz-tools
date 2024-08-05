@@ -17,8 +17,8 @@ export default create({
 	colorSecondary: colors.theme.dark.color.palette.blue[700],
 
 	// UI
-	appBg: colors.theme.dark.color.container.background['level-1'],
-	appContentBg: colors.theme.dark.color.container.background['level-0'],
+	appBg: colors.theme.dark.color.container['level-1'],
+	appContentBg: colors.theme.dark.color.container['level-0'],
 	appPreviewBg: '#ffffff',
 	appBorderColor: colors.theme.dark.color.ui.border.secondary,
 	appBorderRadius: 1,
@@ -32,7 +32,7 @@ export default create({
 	barTextColor: colors.theme.dark.color.text.primary,
 	barHoverColor: colors.theme.dark.color.action.primary,
 	barSelectedColor: colors.theme.dark.color.action['primary-active'],
-	barBg: colors.theme.dark.color.container.background['level-2'],
+	barBg: colors.theme.dark.color.container['level-2'],
 
 	// Form colors
 	buttonBg: colors.theme.dark.color.action.background.primary,

@@ -27,7 +27,7 @@
 	export let branded: 'true' | 'false' = 'true';
 
 	$: headerClasses = classNames(
-		'py-1 bg-color-container-background-level-1 text-color-text-primary',
+		'py-1 bg-color-container-level-1 text-color-text-primary',
 		brandClasses[branded]
 	);
 </script>

@@ -72,7 +72,7 @@
 
 <Story name="Outline" source args={{ variant: 'outline' }} />
 
-<Story name="Text" source args={{ variant: 'text' }} />
+<Story name="Text" source args={{ variant: 'text', emphasis: 'secondary' }} />
 
 <Story name="Square" args={{ variant: 'square' }}>
 	<div class="space-y-2">

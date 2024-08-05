@@ -33,7 +33,7 @@
 	};
 
 	$: tabListClasses = classNames(
-		'bg-color-container-background-level-0 text-color-text-primary',
+		'bg-color-container-level-0 text-color-text-primary',
 		orientationClasses[orientation],
 		$$props.class
 	);

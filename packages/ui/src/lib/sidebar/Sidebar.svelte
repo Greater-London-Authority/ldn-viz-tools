@@ -44,7 +44,7 @@
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
 
 	const wrapperClasses = `${position} z-30 ${theme}`;
-	const sidebarClasses = 'flex flex-col grow bg-color-container-background-level-1 pb-6'; // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = 'flex flex-col grow bg-color-container-level-1 pb-6'; // p-6 pad on container or elements (overflow position)
 
 	// If a context provides a reactive placement use that
 	$: placement = $sidebarPlacementFromContext ? $sidebarPlacementFromContext : placement;
@@ -61,7 +61,7 @@
 
 <div class={classNames(wrapperClasses, placementClasses)}>
 	{#if $$slots.tabs}
-		<div class={classNames('absolute bg-color-container-background-level-0', tabPlacementClasses)}>
+		<div class={classNames('absolute bg-color-container-level-0', tabPlacementClasses)}>
 			<!-- should contain a `<SidebarTabList>`, if the sidebar has tabs-->
 			<slot name="tabs" />
 		</div>

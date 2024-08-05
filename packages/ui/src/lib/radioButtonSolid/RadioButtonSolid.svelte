@@ -50,8 +50,8 @@
 		class={classNames(
 			disabled
 				? 'cursor-not-allowed bg-color-input-background-disabled !text-color-text-disabled hover:bg-color-input-background-disabled'
-				: 'cursor-pointer bg-color-action-background-secondary text-color-action-text-primary',
-			'form-label flex flex-col justify-center items-center p-2 w-full ring-1 ring-color-container-background-level-1 hover:bg-color-action-background-primary hover:text-color-static-white peer-checked:text-color-static-white peer-checked:bg-color-action-background-primary'
+				: 'cursor-pointer bg-color-action-background-secondary text-color-primary',
+			'form-label flex flex-col justify-center items-center p-2 w-full ring-1 ring-color-container-level-1 hover:bg-color-action-background-primary hover:text-color-static-white peer-checked:text-color-static-white peer-checked:bg-color-action-background-primary'
 		)}
 	>
 		<!-- contents of the radio button (name and/or icon) -->
