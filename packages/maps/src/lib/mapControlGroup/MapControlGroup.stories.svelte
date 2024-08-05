@@ -38,14 +38,14 @@
 		>
 			{#each Object.keys(MapControlGroupPositions) as position}
 				<MapControlGroup {position}>
-					<p class="bg-color-container-background-level-1 text-color-text-primary p-2">
+					<p class="bg-color-container-level-1 text-color-text-primary p-2">
 						{position}
 					</p>
 				</MapControlGroup>
 			{/each}
 
 			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-background-level-1 text-color-text-primary text-center p-4 space-y-4"
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
 			>
 				<p>
 					Group and position map controls using
@@ -83,7 +83,7 @@
 			{/each}
 
 			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-background-level-1 text-color-text-primary text-center p-4 space-y-4"
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
 			>
 				<p>
 					The alignment of elements within a <code>MapControlGroup</code> depends on its position.
@@ -102,7 +102,7 @@
 			}}
 		>
 			<div
-				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-background-level-1 text-color-text-primary p-4 space-y-8"
+				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary p-4 space-y-8"
 			>
 				<p class="w-52">⮜ Controls on the left are standard for every map</p>
 				<p class="ml-auto w-52">Those on the right are context or map dependent ⮞</p>
@@ -125,7 +125,7 @@
 
 			<MapControlGroup position="TopRight">
 				<p
-					class="bg-color-container-background-level-1 text-color-text-primary p-2 text-center pointer-events-auto"
+					class="bg-color-container-level-1 text-color-text-primary p-2 text-center pointer-events-auto"
 				>
 					Bespoke controls<br />E.g. Drawing
 				</p>

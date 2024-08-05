@@ -1,4 +1,4 @@
-<footer class="mt-auto pt-4 bg-color-container-background-level-1 text-color-text-primary">
+<footer class="mt-auto pt-4 bg-color-container-level-1 text-color-text-primary">
 	<!-- content to display above menu/links - typically a row of logos -->
 	<slot />
 	{#if $$slots.menu}

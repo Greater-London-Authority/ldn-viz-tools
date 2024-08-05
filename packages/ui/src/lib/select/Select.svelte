@@ -277,22 +277,22 @@
 			--icons-color: var(--theme-input-icon);
 			--input-color: var(--theme-input-valuetext);
 			--item-first-border-radius: 0;
-			--item-hover-bg: var(--theme-action-background-primary-100);
-			--item-is-active-bg: var(--theme-action-background-primary);
-			--item-is-active-color: var(--theme-action-background-static-white);
+			--item-hover-bg: var(--theme-input-background-hover);
+			--item-is-active-bg: var(--theme-input-background-selected);
+			--item-is-active-color: var(--theme-static-white);
 			--item-is-not-selectable-color: var(--theme-text-disabled);
 			--list-background: var(--theme-input-background);
 			--list-border: var(--theme-input-border) 1px solid;
 			--list-border-radius: 0;
 			--list-empty-color: var(--theme-ui-background-empty);
 			--list-z-index: 40;
-			--multi-item-active-outline: var(--theme-action-border-primary);
-			--multi-item-bg: var(--theme-action-background-primary-100);
+			--multi-item-active-outline: var(--theme-ui-border-secondary);
+			--multi-item-bg: var(--theme-input-background);
 			--multi-item-border-radius: 0;
-			--multi-item-clear-icon-color: var(--theme-action-text-primary);
-			--multi-item-color: var(--theme-action-text-primary);
-			--multi-item-disabled-hover-bg: var(--theme-action-background-disabled);
-			--multi-item-disabled-hover-color: var(--theme-action-disabled);
+			--multi-item-clear-icon-color: var(--theme-input-icon);
+			--multi-item-color: var(--theme-text-primary);
+			--multi-item-disabled-hover-bg: var(--theme-input-background-disabled);
+			--multi-item-disabled-hover-color: var(--theme-ui-disabled);
 		}
 	</style>
 {/if}

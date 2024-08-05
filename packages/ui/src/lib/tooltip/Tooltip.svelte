@@ -86,15 +86,12 @@
 
 {#if showTooltip}
 	<div
-		class="absolute max-w-[200px] text-sm p-2 bg-color-container-background-level-1 shadow z-50"
+		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50"
 		use:floatingContent={dynamicOptions}
 	>
 		<!-- the text that will be displayed in the tooltip -->
 		<slot />
 
-		<div
-			class="absolute bg-color-container-background-level-1 rotate-45 w-4 h-4"
-			bind:this={$arrowRef}
-		/>
+		<div class="absolute bg-color-container-level-1 rotate-45 w-4 h-4" bind:this={$arrowRef} />
 	</div>
 {/if}

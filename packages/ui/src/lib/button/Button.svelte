@@ -74,103 +74,104 @@
 		brand: {
 			primary: {
 				default:
-					'bg-color-ui-background-inverse-primary text-color-action-text-inverse pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-primary-hover',
+					'bg-color-ui-background-inverse-primary text-color-text-inverse-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-primary-hover',
 				success:
-					'bg-color-action-background-positive text-color-action-text-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-positive-hover',
+					'bg-color-action-background-positive text-color-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-positive-hover',
 				error:
-					'bg-color-action-background-negative text-color-action-text-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-negative-hover',
+					'bg-color-action-background-negative text-color-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-negative-hover',
 				warning:
-					'bg-color-action-background-warning text-color-action-text-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-warning-hover'
+					'bg-color-action-background-warning text-color-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-warning-hover'
 			},
 			secondary: {
 				default:
-					'bg-color-ui-background-secondary text-color-action-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-secondary-hover',
+					'bg-color-ui-background-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-secondary-hover',
 				success:
-					'bg-color-action-background-positive-secondary text-color-action-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-positive-secondary-hover',
+					'bg-color-action-background-positive-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-color-action-background-negative-secondary text-color-action-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-negative-secondary-hover',
+					'bg-color-action-background-negative-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-color-action-background-warning-secondary text-color-action-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-warning-secondary-hover'
+					'bg-color-action-background-warning-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		square: {
 			primary: {
 				default:
-					'bg-color-action-background-primary text-color-action-text-static-white hover:bg-color-action-background-primary-hover',
+					'bg-color-action-background-primary text-color-static-white hover:bg-color-action-background-primary-hover',
 				success:
-					'bg-color-action-background-positive text-color-action-text-static-white hover:bg-color-action-background-positive-hover',
+					'bg-color-action-background-positive text-color-static-white hover:bg-color-action-background-positive-hover',
 				error:
-					'bg-color-action-background-negative text-color-action-text-static-white hover:bg-color-action-background-negative-hover',
+					'bg-color-action-background-negative text-color-static-white hover:bg-color-action-background-negative-hover',
 				warning:
-					'bg-color-action-background-warning text-color-action-text-static-white hover:bg-color-action-background-warning-hover'
+					'bg-color-action-background-warning text-color-static-white hover:bg-color-action-background-warning-hover'
 			},
 			secondary: {
 				default:
-					'bg-color-action-background-secondary text-color-action-text-primary hover:bg-color-action-background-secondary-hover',
+					'bg-color-action-background-secondary text-color-text-primary hover:bg-color-action-background-secondary-hover',
 				success:
-					'bg-color-action-background-positive-secondary text-color-action-text-primary hover:bg-color-action-background-positive-secondary-hover',
+					'bg-color-action-background-positive-secondary text-color-text-primary hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-color-action-background-negative-secondary text-color-action-text-primary hover:bg-color-action-background-negative-secondary-hover',
+					'bg-color-action-background-negative-secondary text-color-text-primary hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-color-action-background-warning-secondary text-color-action-text-primary hover:bg-color-action-background-warning-secondary-hover'
+					'bg-color-action-background-warning-secondary text-color-text-primary hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		solid: {
 			primary: {
 				default:
-					'bg-color-action-background-primary text-color-action-text-static-white hover:bg-color-action-background-primary-hover',
+					'bg-color-action-background-primary text-color-static-white hover:bg-color-action-background-primary-hover',
 				success:
-					'bg-color-action-background-positive text-color-action-text-static-white hover:bg-color-action-background-positive-hover',
+					'bg-color-action-background-positive text-color-static-white hover:bg-color-action-background-positive-hover',
 				error:
-					'bg-color-action-background-negative text-color-action-text-static-white hover:bg-color-action-background-negative-hover',
+					'bg-color-action-background-negative text-color-static-white hover:bg-color-action-background-negative-hover',
 				warning:
-					'bg-color-action-background-warning text-color-action-text-static-white hover:bg-color-action-background-warning-hover'
+					'bg-color-action-background-warning text-color-static-white hover:bg-color-action-background-warning-hover'
 			},
 			secondary: {
 				default:
-					'bg-color-action-background-secondary text-color-action-text-primary hover:bg-color-action-background-secondary-hover',
+					'bg-color-action-background-secondary text-color-text-primary hover:bg-color-action-background-secondary-hover',
 				success:
-					'bg-color-action-background-positive-secondary text-color-action-text-primary hover:bg-color-action-background-positive-secondary-hover',
+					'bg-color-action-background-positive-secondary text-color-text-primary hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-color-action-background-negative-secondary text-color-action-text-primary hover:bg-color-action-background-negative-secondary-hover',
+					'bg-color-action-background-negative-secondary text-color-text-primary hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-color-action-background-warning-secondary text-color-action-text-primary hover:bg-color-action-background-warning-secondary-hover'
+					'bg-color-action-background-warning-secondary text-color-text-primary hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		outline: {
 			primary: {
 				default:
-					'bg-transparent text-color-action-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
 				success:
-					'bg-transparent text-color-action-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-transparent text-color-action-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-transparent text-color-action-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
 			},
 			secondary: {
 				default:
-					'bg-transparent text-color-action-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
 				success:
-					'bg-transparent text-color-action-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-transparent text-color-action-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-transparent text-color-action-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		text: {
 			primary: {
-				default: 'bg-transparent text-color-action-primary hover:text-color-action-primary-hover',
+				default:
+					'bg-transparent text-color-action-text-primary hover:text-color-action-text-primary-hover',
 				success: 'bg-transparent text-color-action-positive hover:text-color-action-positive-hover',
-				error: 'bg-transparent text-color-action-negarive hover:text-color-action-negative-hover',
+				error: 'bg-transparent text-color-action-negative hover:text-color-action-negative-hover',
 				warning: 'bg-transparent text-color-action-warning hover:text-color-action-warning-hover'
 			},
 			secondary: {
 				default:
-					'bg-transparent text-color-action-text-secondary hover:text-color-action-secondary-hover',
+					'bg-transparent text-color-action-text-secondary hover:text-color-action-text-secondary-hover',
 				success: 'bg-transparent text-color-action-positive hover:text-color-action-positive-hover',
-				error: 'bg-transparent text-color-action-negarive hover:text-color-action-negative-hover',
+				error: 'bg-transparent text-color-action-negative hover:text-color-action-negative-hover',
 				warning: 'bg-transparent text-color-action-warning hover:text-color-action-warning-hover'
 			}
 		}

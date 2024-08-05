@@ -61,11 +61,21 @@ StyleDictionary.registerParser({
     try {
       const jsonObj = JSON.parse(contents);
 
+      const replacements = [
+        ['global.mode 1.', 'global.'],
+        ['global.light-mode.', 'global.'],
+        ['global.dark-mode.', 'global.']
+      ];
+
+      const cleanedJson = replacements.reduce((result, [oldValue, newValue]) => {
+        return traverseAndReplace(result, oldValue, newValue);
+      }, jsonObj);
+
       // Replace the references to modes
       const lightParsed = replaceStringInMode(
-        jsonObj['variables'],
+        cleanedJson,
         'light-mode',
-        'semantic.dark-mode',
+        'semantic.light-mode',
         'theme.light'
       );
 

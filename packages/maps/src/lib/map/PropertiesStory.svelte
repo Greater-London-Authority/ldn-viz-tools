@@ -39,7 +39,7 @@
 		}}
 	>
 		<ul
-			class="absolute top-0 left-0 z-10 bg-color-container-background-level-1 text-color-text-primary text-sm m-2 p-2"
+			class="absolute top-0 left-0 z-10 bg-color-container-level-1 text-color-text-primary text-sm m-2 p-2"
 		>
 			{#each clickedLayerIDs as id (id)}
 				<li>{id}</li>

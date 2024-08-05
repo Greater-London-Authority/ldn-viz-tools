@@ -130,7 +130,7 @@
 		</Map>
 
 		<div
-			class="dark absolute top-0 left-0 w-full h-[16em] p-2 bg-color-container-background-level-1 bg-opacity-75 text-color-text-primary"
+			class="dark absolute top-0 left-0 w-full h-[16em] p-2 bg-color-container-level-1 bg-opacity-75 text-color-text-primary"
 		>
 			<table>
 				<tr class="font-medium">

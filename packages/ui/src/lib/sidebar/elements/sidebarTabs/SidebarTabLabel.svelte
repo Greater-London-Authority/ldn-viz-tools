@@ -44,7 +44,7 @@
 	};
 
 	const themeClasses = [
-		'bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-action-text-primary'
+		'bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-primary'
 	];
 
 	const orientationClasses = {
