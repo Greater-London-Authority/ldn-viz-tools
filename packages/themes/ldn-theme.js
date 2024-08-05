@@ -81,7 +81,7 @@ const config = {
         },
         '.form-label': {
           color: ldnColors['color-input-label'],
-          'font-weight': 600
+          'font-weight': 500
         },
         '.form-select': {
           'background-image': `url("${svgToDataUri(

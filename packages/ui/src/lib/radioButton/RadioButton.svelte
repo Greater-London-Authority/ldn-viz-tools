@@ -70,7 +70,7 @@
 			? `--theme-input-border: ${color}; --theme-input-border-selected: ${color}; --theme-input-background-active: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
-	<span class="form-label ml-2">{label}</span>
+	<span class="form-label ml-2 font-normal">{label}</span>
 	{#if hint}
 		<Tooltip {hintLabel}>
 			{hint}
