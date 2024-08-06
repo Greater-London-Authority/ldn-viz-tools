@@ -35,6 +35,13 @@
 	export let label = '';
 
 	/**
+	 * Whether the checbox is checked.
+	 */
+	export let checked = false;
+
+	const checkedStore = writable(checked);
+
+	/**
 	 * The size of the switch.
 	 */
 	export let size: 'md' | 'sm' = 'md';
@@ -44,16 +51,33 @@
 	 */
 	export let labelOn: 'left' | 'right' = 'right';
 
-	export let checked = writable(false);
-
 	const {
 		elements: { root, input },
 		options: { disabled: disabledStore, name: nameStore, required: requiredStore }
-	} = createSwitch({ disabled, checked });
+	} = createSwitch({ disabled, checked: checkedStore });
 
 	$: $disabledStore = disabled;
 	$: $nameStore = name;
 	$: $requiredStore = required;
+
+	$: toggledExternally(checked);
+	const toggledExternally = (newChecked: boolean) => {
+		console.log('Toggled externally:', $checkedStore, checked);
+
+		if ($checkedStore != newChecked) {
+			$checkedStore = newChecked;
+		}
+	};
+
+	$: console.log('checkedStore:', $checkedStore);
+	$: toggledInternally($checkedStore);
+	const toggledInternally = (newStoreValue: boolean) => {
+		console.log('Toggled internally:', $checkedStore, checked);
+		if (newStoreValue != checked) {
+			checked = newStoreValue;
+			console.log('Checked ins now:', checked);
+		}
+	};
 
 	const translation = { md: '20px', sm: '15px' };
 </script>
@@ -81,7 +105,7 @@
 				size === 'md' ? 'w-[22px] h-[22px]' : 'w-3.5 h-3.5 ',
 				disabled ? 'bg-core-grey-100' : 'bg-white'
 			)}
-			style:transform={$checked ? `translate(${translation[size]}, 0px)` : ''}
+			style:transform={checked ? `translate(${translation[size]}, 0px)` : ''}
 		/>
 	</button>
 	<input {...$input} use:input />
