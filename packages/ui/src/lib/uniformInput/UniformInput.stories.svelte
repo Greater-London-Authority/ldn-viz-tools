@@ -7,67 +7,59 @@
 		{ label: '三 (San)', value: 'three' }
 	];
 
-	const stringArg = {
+	const newStringArg = (defaultValue = '') => ({
 		control: { type: 'text' },
 		table: {
-			defaultValue: { summary: '' },
+			defaultValue: { summary: defaultValue },
 			type: { summary: 'string' }
 		}
-	};
+	});
 
-	const numberArg = {
-		control: { type: 'number' }
-	};
+	const newSelectedStringArg = (options, defaultValue = '') => ({
+		control: { type: 'select' },
+		options: options,
+		table: {
+			defaultValue: { summary: defaultValue },
+			type: { summary: 'string' }
+		}
+	});
 
-	const boolArg = {
-		control: { type: 'boolean' }
-	};
-
-	const immutableArg = {
-		control: { type: 'none' }
-	};
+	const newFunctionArg = (detail = '') => ({
+		type: 'function',
+		control: 'none',
+		table: {
+			type: {
+				summary: 'function',
+				detail: detail
+			}
+		}
+	});
 
 	export const meta = {
 		title: 'Ui/UniformInput',
 		component: UniformInput,
 		argTypes: {
-			type: {
-				control: { type: 'select' },
-				options: [
+			type: newSelectedStringArg(
+				[
+					'hidden',
 					'text',
 					'textarea',
-					'checkbox',
-					'select',
 					'number',
-					'email',
 					'email',
 					'password',
 					'search',
 					'tel',
-					'url'
-				]
-			},
-			id: stringArg,
-			name: stringArg,
-			label: stringArg,
-			disabled: boolArg,
-			required: boolArg,
-			description: stringArg,
-			descriptionAlignment: {
-				control: { type: 'select' },
-				options: ['left', 'right']
-			},
-			placeholder: stringArg,
-			color: stringArg,
-			rows: numberArg,
-			options: {
-				control: { type: 'none' }
-			},
-			hint: stringArg,
-			hintLabel: stringArg,
-			inputmode: {
-				control: { type: 'select' },
-				options: [
+					'url',
+					'time',
+					'date',
+					'datetime-local',
+					'file',
+					'range'
+				],
+				'text'
+			),
+			inputmode: newSelectedStringArg(
+				[
 					'none',
 					'text',
 					'decimal',
@@ -79,11 +71,40 @@
 					'search',
 					'tel',
 					'url'
-				]
+				],
+				'text'
+			),
+			id: newStringArg('// random ID'),
+			name: newStringArg("// 'id' prop"),
+			label: newStringArg(),
+			description: newStringArg(),
+			descriptionAlignment: {
+				control: { type: 'select' },
+				options: ['left', 'right']
 			},
-			format: immutableArg,
-			value: stringArg,
-			error: stringArg
+			placeholder: newStringArg(),
+			color: newStringArg(),
+			options: {
+				control: { type: 'none' },
+				table: {
+					type: {
+						summary: 'array',
+						detail: `array[{
+	value: string,
+	label: string,
+	id?: string;
+	name?: string;
+	disabled?: boolean;
+	color?: string;
+	hint?: string,
+	hintLabel?: string,
+}]`
+					}
+				}
+			},
+			format: newFunctionArg('(value: string) => string'),
+			value: newStringArg(),
+			error: newStringArg()
 		},
 		args: {
 			type: 'text',
@@ -115,7 +136,9 @@
 </script>
 
 <Template let:args>
-	<UniformInput {...args} bind:value />
+	{#key args}
+		<UniformInput {...args} bind:value />
+	{/key}
 	<div class="mt-8 flex flex-wrap gap-4 items-center">
 		<Button emphasis="secondary" condition="warning" on:click={() => reset(args)}>Reset</Button>
 		<p class="text-core-grey-500 dark:text-core-grey-200 italic">Value: {value}</p>

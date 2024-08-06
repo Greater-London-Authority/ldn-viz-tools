@@ -2,6 +2,34 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import Input from './Input.svelte';
 
+	const newStringArg = (defaultValue = '') => ({
+		control: { type: 'text' },
+		table: {
+			defaultValue: { summary: defaultValue },
+			type: { summary: 'string' }
+		}
+	});
+
+	const newSelectedStringArg = (options, defaultValue = '') => ({
+		control: { type: 'select' },
+		options: options,
+		table: {
+			defaultValue: { summary: defaultValue },
+			type: { summary: 'string' }
+		}
+	});
+
+	const newFunctionArg = (detail = '') => ({
+		type: 'function',
+		control: 'none',
+		table: {
+			type: {
+				summary: 'function',
+				detail: detail
+			}
+		}
+	});
+
 	export const meta = {
 		title: 'Ui/Input',
 		component: Input,
@@ -12,10 +40,47 @@
 					disable: true
 				}
 			},
+			id: newStringArg('// random ID'),
+			name: newStringArg("// 'id' prop"),
+			type: newSelectedStringArg(
+				[
+					'text',
+					'textarea',
+					'number',
+					'email',
+					'password',
+					'search',
+					'tel',
+					'url',
+					'time',
+					'date',
+					'datetime-local',
+					'file',
+					'range'
+				],
+				'text'
+			),
+			inputmode: newSelectedStringArg(
+				[
+					'none',
+					'text',
+					'decimal',
+					'numeric',
+					'tel',
+					'search',
+					'email',
+					'url',
+					'search',
+					'tel',
+					'url'
+				],
+				'text'
+			),
 			descriptionAlignment: {
-				options: ['left', 'right'],
-				control: { type: 'select' }
-			}
+				control: { type: 'select' },
+				options: ['left', 'right']
+			},
+			format: newFunctionArg('(value: string) => string')
 		}
 	};
 </script>
@@ -28,7 +93,9 @@
 
 <Template let:args>
 	<div class="w-96">
-		<Input {...args} />
+		{#key args}
+			<Input {...args} />
+		{/key}
 	</div>
 </Template>
 
@@ -54,6 +121,12 @@
 <Story name="With tooltip - default hintLabel">
 	<div class="w-96">
 		<Input label="Tooltip" name="tooltip-input" hintLabel="optional hint label" />
+	</div>
+</Story>
+
+<Story name="With placeholder">
+	<div class="w-96">
+		<Input label="Placeholder" name="placeholder-input" placeholder="This is placeholder text" />
 	</div>
 </Story>
 
