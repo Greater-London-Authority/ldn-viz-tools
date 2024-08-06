@@ -3,4 +3,5 @@
 ---
 
 CHANGED: `Geocoder` selected location now appears as query text on selection.
-ADDED: adds reactively updating `selected` property to `Geocoder` 
+CHANGED: adds reactively updating `selected` property to `Geocoder`. 
+CHANGED: `GeocoderSuggestionList` now highlights the currently selected item when the list is reopened.

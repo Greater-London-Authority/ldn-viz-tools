@@ -85,7 +85,7 @@
 	let container: HTMLElement;
 	let input: HTMLInputElement;
 	let query = '';
-	let silentQueryUpdate = false;
+	let silentQueryTextUpdate = false;
 	let showSuggestionList = false;
 
 	const updateSuggestionsNow = async () => {
@@ -123,12 +123,12 @@
 		closeSuggestionsList();
 		selected = suggestion;
 
-		if (suggestion.address) {
-			query = suggestion.address;
-			silentQueryUpdate = true;
-		} else if (suggestion.name) {
+		if (suggestion.name) {
 			query = suggestion.name;
-			silentQueryUpdate = true;
+			silentQueryTextUpdate = true;
+		} else if (suggestion.address) {
+			query = suggestion.address;
+			silentQueryTextUpdate = true;
 		}
 
 		onLocationSelected && onLocationSelected(suggestion);
@@ -271,10 +271,10 @@
 
 	$: {
 		query;
-		if (!silentQueryUpdate) {
+		if (!silentQueryTextUpdate) {
 			scheduleUpdate();
 		} else {
-			silentQueryUpdate = false;
+			silentQueryTextUpdate = false;
 		}
 	}
 </script>
@@ -315,6 +315,7 @@
 		<!-- component that will render the list of suggestions (e.g, `<GeocoderSuggestionList>`)-->
 		<slot
 			attribution={adapter?.attribution ? adapter.attribution() : undefined}
+			{selected}
 			{suggestions}
 			{onSuggestionEvent}
 		/>

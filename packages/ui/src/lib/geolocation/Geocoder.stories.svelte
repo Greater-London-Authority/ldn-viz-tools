@@ -136,6 +136,7 @@
 					{onSuggestionEvent}
 					{attribution}
 					{suggestions}
+					{selected}
 					maxSuggestions={5}
 				/>
 			{/if}
@@ -173,6 +174,7 @@
 					{onSuggestionEvent}
 					{attribution}
 					{suggestions}
+					{selected}
 					maxSuggestions={5}
 				/>
 			{/if}
