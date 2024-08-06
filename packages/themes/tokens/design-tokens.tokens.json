@@ -3840,7 +3840,7 @@
           },
           "secondary": {
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.grey.200}"
+            "value": "{semantic.dark-mode.color.palette.grey.400}"
           },
           "notice": {
             "type": "color",
