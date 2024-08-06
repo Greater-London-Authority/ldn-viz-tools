@@ -146,7 +146,7 @@
 	$: inputClasses = classNames(
 		'm-0',
 		error ? 'border-core-red-400 dark:border-core-red-400' : '',
-		$$restProps.disabled ? 'cursor-not-allowed ' : '',
+		disabled ? 'cursor-not-allowed text-core-grey-300 dark:text-core-grey-400' : '',
 		'dark:bg-core-grey-600',
 		'dark:text-white',
 		'placeholder-core-grey-400',
