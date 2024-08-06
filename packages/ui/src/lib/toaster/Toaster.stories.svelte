@@ -105,7 +105,7 @@
 </Story>
 
 <Story name="Position">
-	<div class="bg-white relative p-6 w-[100vw] h-[100vh]">
+	<div class="relative p-6 w-[100vw] h-[100vh]">
 		<Toaster {position} />
 		<div
 			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform flex flex-wrap justify-center gap-6 [&>*]:basis-3/12"

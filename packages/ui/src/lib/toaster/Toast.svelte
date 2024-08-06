@@ -33,7 +33,7 @@
 	out:fade={{ duration: 100 }}
 >
 	<div class="border pl-4 pb-4 p-2 pr-2 {classes}">
-		<div class="text-lg font-bold flex justify-between items-center leading-none">
+		<div class="text-lg font-bold flex justify-between items-center mb-1">
 			{message.type}
 			{#if message.closeButton}
 				<Button
