@@ -146,7 +146,7 @@
 	$: inputClasses = classNames(
 		'm-0',
 		error ? 'border-color-input-border-error' : '',
-		$$restProps.disabled ? 'cursor-not-allowed ' : '',
+		disabled ? 'cursor-not-allowed text-color-input-label-disabled' : '',
 		type === 'range' ? 'form-range' : 'form-input'
 	);
 </script>
