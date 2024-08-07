@@ -1,6 +1,6 @@
 <script lang="ts">
-	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
 	import type { GeocoderAttribution } from './GeocoderAdapter';
+	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
 	import type { GeolocationNamed, OnSuggestionListInteraction } from './types';
 
 	export let attribution: undefined | GeocoderAttribution = undefined;
@@ -27,7 +27,9 @@
 	$: highlightFirstSuggestion(suggestions);
 </script>
 
-<ul class="absolute top-10 left-0 bg-core-grey-600 text-white text-sm w-full z-40">
+<ul
+	class="absolute top-11 left-0 bg-color-input-background text-color-text-primary text-sm w-full shadow-lg z-40"
+>
 	{#if suggestions.length === 0}
 		<li class="w-full px-2.5 py-1.5">
 			<h1 class="pointer-events-none">No locations found</h1>
@@ -41,9 +43,9 @@
 	{/if}
 
 	{#if attribution && attribution.text}
-		<li class="w-full px-2.5 py-1.5 text-right text-core-grey-300">
+		<li class="w-full px-2.5 py-1.5 text-right text-color-text-secondary">
 			{#if attribution.link}
-				<a href={attribution.link} target="_blank" rel="noopener" class="text-core-blue-500">
+				<a href={attribution.link} target="_blank" rel="noopener" class="text-color-text-primary">
 					{attribution.text}
 				</a>
 			{:else}

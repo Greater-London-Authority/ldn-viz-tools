@@ -1,13 +1,18 @@
-<script context="module">
+<script context="module" lang="ts">
 	import BoroughsContextLayer from './BoroughsContextLayer.svelte';
-	import colors from '@ldn-viz/themes/colors.json';
+
+	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+
+	const theme = (mode: 'light' | 'dark' = 'light') => {
+		return tokens.theme[mode];
+	};
 
 	const color = {
 		type: 'string',
 		control: 'text',
 		table: {
 			defaultValue: {
-				summary: colors.core.grey[500]
+				summary: theme().color.ui.border.primary
 			},
 			type: {
 				summary: 'string'

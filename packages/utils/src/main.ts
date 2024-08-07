@@ -1,3 +1,6 @@
 export { getColorRamp, getThresholdBreaksColorsLabels } from './colors/scales';
-
-export { theme, ldnColors } from './colors/theme';
+export {
+  mediaQueryStore,
+  prefersDarkMode,
+  prefersReducedMotion
+} from './userPreference/mediaQueryStore';

@@ -27,17 +27,16 @@
 		orientation
 	});
 
-	const darkThemeClasses = 'dark:bg-core-grey-800 dark:text-white';
-	const lightThemeClasses = 'bg-white text-core-grey-700';
-
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
-
 	const orientationClasses = {
 		vertical: 'flex-col w-20 space-y-0.5 pb-0.5',
-		horizontal: 'flex border-b-4 border-b-core-blue-600 w-full pt-5 pb-0 space-x-0.5 items-end'
+		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
 	};
 
-	$: tabListClasses = classNames(...themeClasses, orientationClasses[orientation], $$props.class);
+	$: tabListClasses = classNames(
+		'bg-color-container-level-0 text-color-text-primary',
+		orientationClasses[orientation],
+		$$props.class
+	);
 </script>
 
 <div class={tabListClasses} role="tablist">

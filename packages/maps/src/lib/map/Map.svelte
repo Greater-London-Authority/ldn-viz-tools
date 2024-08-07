@@ -1,13 +1,13 @@
 <script context="module" lang="ts">
-	import { onMount, setContext } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
 	import maplibre_gl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	import { onMount, setContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
 
 	import {
-		theme_os_light_vts,
 		GREATER_LONDON_BOUNDS,
-		GREATER_LONDON_BOUNDS_MAX
+		GREATER_LONDON_BOUNDS_MAX,
+		theme_os_light_vts
 	} from '@ldn-viz/maps';
 	import MapCursor from './mapCursor/MapCursor';
 	import type { MapCursorStore } from './mapCursor/types';
@@ -149,7 +149,7 @@
 	bind:this={container}
 	bind:clientWidth
 	bind:clientHeight
-	class="w-full h-full relative overflow-hidden {classes}"
+	class="w-full h-full relative overflow-hidden dark {classes}"
 	{...$$restProps}
 >
 	<slot />

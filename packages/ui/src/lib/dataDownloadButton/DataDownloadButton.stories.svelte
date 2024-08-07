@@ -38,7 +38,7 @@
 
 <Template let:args>
 	<DataDownloadButton {...args}>
-		Download <Icon src={ArrowDownTray} theme="solid" class="ml-2 w-5 h-5" aria-hidden="true" />
+		Download <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</DataDownloadButton>
 </Template>
 
@@ -65,27 +65,29 @@
 </Story>
 
 <Story name="Button types">
-	<DataDownloadButton {data} filename="download" format="CSV" emphasis="primary">
-		Primary <Icon src={ArrowDownTray} theme="solid" class="ml-2 w-5 h-5" aria-hidden="true" />
-	</DataDownloadButton>
-	<DataDownloadButton {data} filename="download" format="CSV" emphasis="secondary">
-		Secondary <Icon src={ArrowDownTray} theme="solid" class="ml-2 w-5 h-5" aria-hidden="true" />
-	</DataDownloadButton>
-	<DataDownloadButton {data} filename="download" format="CSV" variant="text">
-		Text <Icon src={ArrowDownTray} theme="solid" class="ml-2 w-5 h-5" aria-hidden="true" />
-	</DataDownloadButton>
+	<div class="flex flex-col space-y-2">
+		<DataDownloadButton {data} filename="download" format="CSV" emphasis="primary">
+			Primary <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		</DataDownloadButton>
+		<DataDownloadButton {data} filename="download" format="CSV" emphasis="secondary">
+			Secondary <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		</DataDownloadButton>
+		<DataDownloadButton {data} filename="download" format="CSV" variant="text">
+			Text <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		</DataDownloadButton>
+	</div>
 </Story>
 
 <Story name="Download as JSON">
 	<DataDownloadButton {data} filename="download" format="JSON">
 		Download as JSON
-		<Icon src={ArrowDownTray} theme="solid" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
 
 <Story name="Disabled">
 	<DataDownloadButton {data} disabled={true} filename="download" format="CSV">
 		Download
-		<Icon src={ArrowDownTray} theme="solid" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</DataDownloadButton>
 </Story>
