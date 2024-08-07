@@ -17,11 +17,26 @@
 	// event occurs in the suggestion list, except when a suggestion is selected.
 	export let onSuggestionEvent: OnSuggestionListInteraction;
 
+	/**
+	 * The currently selected location in the parent `Geocoder`.
+	 */
+	export let selected: null | GeolocationNamed = null;
+
 	// Mouse highlight only
 	let highlighted: null | GeolocationNamed = null;
 
 	const highlightFirstSuggestion = (suggestions: GeolocationNamed[]) => {
-		highlighted = suggestions.length > 0 ? suggestions[0] : null;
+		const containsSelected =
+			selected &&
+			suggestions.find((s) => {
+				return s.id === selected.id;
+			});
+
+		if (containsSelected) {
+			highlighted = selected;
+		} else {
+			highlighted = suggestions.length > 0 ? suggestions[0] : null;
+		}
 	};
 
 	$: highlightFirstSuggestion(suggestions);
