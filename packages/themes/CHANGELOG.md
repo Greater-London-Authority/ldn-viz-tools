@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 2.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
 ## 1.0.0
 
 ### Major Changes
