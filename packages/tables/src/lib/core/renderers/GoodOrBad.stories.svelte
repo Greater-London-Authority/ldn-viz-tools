@@ -32,16 +32,15 @@
 
 <Story name="Multiple - good is n/a">
 	<div class="flex flex-col">
-		<GoodOrBad value={2} benchmarkValue={5} goodIs="n/a"/>
+		<GoodOrBad value={2} benchmarkValue={5} goodIs="n/a" />
 		<GoodOrBad value={5} benchmarkValue={5} goodIs="n/a" />
 		<GoodOrBad value={7} benchmarkValue={5} goodIs="n/a" />
 	</div>
 </Story>
 
-
 <Story name="Multiple - good is high">
 	<div class="flex flex-col">
-		<GoodOrBad value={2} benchmarkValue={5} goodIs="high"/>
+		<GoodOrBad value={2} benchmarkValue={5} goodIs="high" />
 		<GoodOrBad value={5} benchmarkValue={5} goodIs="high" />
 		<GoodOrBad value={7} benchmarkValue={5} goodIs="high" />
 	</div>
@@ -49,7 +48,7 @@
 
 <Story name="Multiple - good is low">
 	<div class="flex flex-col">
-		<GoodOrBad value={2} benchmarkValue={5} goodIs="low"/>
+		<GoodOrBad value={2} benchmarkValue={5} goodIs="low" />
 		<GoodOrBad value={5} benchmarkValue={5} goodIs="low" />
 		<GoodOrBad value={7} benchmarkValue={5} goodIs="low" />
 	</div>
