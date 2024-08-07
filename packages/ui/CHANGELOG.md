@@ -1,5 +1,19 @@
 # ldn-viz-tools-ui
 
+## 11.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
+### Minor Changes
+
+- 9f1adf7: ADDED: add `Theme` and `ThemeSwitcher` components
+
+### Patch Changes
+
+- 881aa44: fix text color of input when disabled
+
 ## 10.1.0
 
 ### Minor Changes
