@@ -414,7 +414,7 @@ const constructAnnotations = (
 	extraFields: Record<string, any> = {},
 	fieldsToMatchOn = undefined
 ) => {
-	let results = [];
+	const results = [];
 	for (const point of pointsToAnnotate) {
 		const datum = data.find((d) => matches(d, point, fieldsToMatchOn));
 		results.push({ ...datum, ...point, ...extraFields });
