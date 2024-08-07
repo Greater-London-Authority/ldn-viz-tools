@@ -18,10 +18,10 @@ export const togglePlacementLookup: PlacementLookup = {
 
 export const tabPlacementLookup: PlacementLookup = {
 	// left: '-end-[80px] inset-y-0',
-	left: 'inset-y-0 z-30 ',
-	right: '-start-[80px] inset-y-0',
-	top: '-bottom-[80px] inset-x-0',
-	bottom: '-top-[80px] inset-x-0'
+	left: 'inset-y-0 z-30 border-r border-color-ui-border-secondary',
+	right: '-start-[80px] inset-y-0 border-l border-color-ui-border-secondary',
+	top: '-bottom-[80px] inset-x-0 border-b border-color-ui-border-secondary',
+	bottom: '-top-[80px] inset-x-0 border-t border-color-ui-border-secondary'
 };
 
 export const tabLayoutOverride: PlacementLookup = {

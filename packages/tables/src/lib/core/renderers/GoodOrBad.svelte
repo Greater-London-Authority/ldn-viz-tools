@@ -6,10 +6,10 @@
 
 	import { format } from 'd3-format';
 
-	import type { ComparedBenchmark } from '../../types/benchmarks';
-	import { classNames } from '../../utils/utilityFns';
 	import { Check, Minus, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { ComparedBenchmark } from '../../types/benchmarks';
+	import { classNames } from '../../utils/utilityFns';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -58,9 +58,9 @@
 	};
 
 	const benchmarkComparisonClass = {
-		good: 'text-core-green-500',
-		bad: 'text-core-red-500',
-		equal: 'text-core-grey-400'
+		good: 'text-color-ui-positive',
+		bad: 'text-color-ui-negative',
+		equal: 'text-color-ui-neutral'
 	};
 
 	$: ragClasses = classNames(

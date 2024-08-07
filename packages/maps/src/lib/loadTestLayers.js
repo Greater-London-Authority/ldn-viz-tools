@@ -1,5 +1,9 @@
-import colors from '@ldn-viz/themes/colors.json';
+import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
 import testData from './testData.json';
+
+export const theme = (mode = 'light') => {
+	return tokens.theme[mode];
+};
 
 export default (map) => {
 	const sourceId = 'gla/ldn-viz-tools/test-data';
@@ -16,8 +20,8 @@ export default (map) => {
 		type: 'fill',
 		filter: ['==', '$type', 'Polygon'],
 		paint: {
-			'fill-color': colors.core.green['500'],
-			'fill-outline-color': colors.core.green['800'],
+			'fill-color': theme().color.palette.green['500'],
+			'fill-outline-color': theme().color.palette.green['800'],
 			'fill-opacity': 0.6
 		}
 	});
@@ -28,7 +32,7 @@ export default (map) => {
 		type: 'line',
 		filter: ['==', '$type', 'LineString'],
 		paint: {
-			'line-color': colors.core.darkPink['400'],
+			'line-color': theme().color.palette.darkpink['400'],
 			'line-width': 4,
 			'line-opacity': 0.8
 		},
@@ -44,7 +48,7 @@ export default (map) => {
 		type: 'circle',
 		filter: ['==', '$type', 'Point'],
 		paint: {
-			'circle-color': colors.core.blue['700'],
+			'circle-color': theme().color.palette.blue['700'],
 			'circle-radius': 6,
 			'circle-stroke-width': 1,
 			'circle-stroke-color': '#000'

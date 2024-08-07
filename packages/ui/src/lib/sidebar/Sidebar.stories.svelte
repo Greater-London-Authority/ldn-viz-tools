@@ -209,19 +209,19 @@
 		<svelte:fragment slot="tabs">
 			<SidebarTabList bind:selectedValue>
 				<SidebarTabLabel tabId="markers">
-					<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Data Markers
 				</SidebarTabLabel>
 				<SidebarTabLabel tabId="filters">
-					<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Filters
 				</SidebarTabLabel>
 				<SidebarTabLabel tabId="analysis">
-					<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Analysis
 				</SidebarTabLabel>
 				<SidebarTabLabel tabId="layers">
-					<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+					<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Layers
 				</SidebarTabLabel>
 			</SidebarTabList>
@@ -236,25 +236,25 @@
 		</SidebarHeader>
 		<svelte:fragment slot="sections">
 			{#if selectedValue === 'markers'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Markers is selected, so we'd render a
 					<code> &lt;Marker /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'filters'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Filter is selected, so we'd render a
 					<code> &lt;Filters /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'analysis'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Analysis is selected, so we'd render a
 					<code> &lt;Analysis /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'layers'}
-				<div class="text-core-grey-700 dark:text-white">
+				<div>
 					Layers is selected, so we'd render a
 					<code> &lt;Layer /&gt;</code>
 					component
@@ -565,7 +565,7 @@
 		<svelte:fragment slot="unstyledContent">
 			{@const sections = [1]}
 			{#each sections as _section}
-				<div class="bg-core-grey-50 p-6 mt-4 h-full space-y-4">
+				<div class="bg-color-palette-grey-100 p-6 mt-4 h-full space-y-4">
 					<p>
 						This is totally unstyled content and so needs to have extra classes to ensure correct
 						padding etc. Use with extreme caution!

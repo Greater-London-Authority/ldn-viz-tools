@@ -43,11 +43,9 @@
 		}
 	};
 
-	const darkThemeClasses = 'dark:bg-core-grey-900 dark:hover:bg-core-blue-700 dark:text-white';
-
-	const lightThemeClasses = 'bg-core-grey-100 hover:bg-core-grey-200 text-core-grey-800';
-
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
+	const themeClasses = [
+		'bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-text-primary'
+	];
 
 	const orientationClasses = {
 		vertical:
@@ -65,7 +63,9 @@
 	role="tab"
 	class={classNames(
 		tabLabelClasses,
-		tabId === $selectedValue ? '!bg-core-blue-600 cursor-default text-white' : 'cursor-pointer'
+		tabId === $selectedValue
+			? '!bg-color-action-background-primary cursor-default !text-color-static-white hover:!bg-color-action-background-primary-hover'
+			: 'cursor-pointer'
 	)}
 >
 	<!-- Label and/or icon -->

@@ -7,7 +7,7 @@
 </script>
 
 <a href={base || '/'}
-	><span class="mr-4 text-lg">
+	><span class="mr-4 text-lg font-semibold">
 		<!-- The app title, possibly including an icon. -->
 		<slot />
 	</span></a

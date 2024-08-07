@@ -26,17 +26,17 @@
 
 <Template let:args>
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId {...args} />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Template>
 
 <Story name="Default" source />
 
 <Story name="RadioGroup">
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="RadioGroup - no clear button">
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>

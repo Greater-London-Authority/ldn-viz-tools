@@ -2,7 +2,7 @@
 	import FormSubmitButton from './elements/formSubmitButton/FormSubmitButton.svelte';
 	import SchemaForm from './SchemaForm.svelte';
 
-	import type { FormValueStore, FormErrorStore } from './types';
+	import type { FormErrorStore, FormValueStore } from './types';
 
 	const stringArg = {
 		control: { type: 'text' },
@@ -109,7 +109,7 @@
 			}}
 		/>
 	</SchemaForm>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
 		<pre>Errors: {JSON.stringify($errorStore, null, 2)}</pre>
 	</div>
@@ -187,7 +187,7 @@
 			}}
 		/>
 	</SchemaForm>
-	<div class="mt-4 flex flex-col gap-4 text-core-grey-500 dark:text-core-grey-200 italic">
+	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
 		<pre>Errors: {JSON.stringify($errorStore, null, 2)}</pre>
 	</div>

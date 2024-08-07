@@ -28,7 +28,7 @@
 
 <Template let:args>
 	<div class="w-96">
-		<Input {...args} />
+		<Input {...args} id="1" />
 	</div>
 </Template>
 
@@ -36,7 +36,7 @@
 
 <Story name="Binding on value">
 	<div class="w-96 flex flex-col gap-4">
-		<Input name="bind-value-input" bind:value placeholder="Type here..." />
+		<Input name="bind-value-input" bind:value placeholder="Type here..." id="1" />
 		<div class="h-4">
 			<span class="font-medium dark:text-white">Value:</span>
 			{value}
@@ -47,13 +47,13 @@
 <Story name="With Label">
 	<div class="w-96 flex flex-col gap-4">
 		<Input name="labelled-input-required" label="Label" />
-		<Input name="labelled-input-optional" label="Label" optional />
+		<Input name="labelled-input-optional" label="Label" />
 	</div>
 </Story>
 
 <Story name="With tooltip - default hintLabel">
 	<div class="w-96">
-		<Input label="Tooltip" name="tooltip-input" hintLabel="optional hint label" />
+		<Input label="Tooltip" name="tooltip-input" />
 	</div>
 </Story>
 
@@ -64,6 +64,7 @@
 			name="tooltip-input"
 			hint="Contextual help text"
 			hintLabel="optional hint label"
+			id="1"
 		/>
 	</div>
 </Story>
@@ -74,19 +75,21 @@
 			label="Label"
 			name="left-aligned-description-input"
 			description="Left aligned descriptive text (default)."
+			id="1"
 		/>
 		<Input
 			label="Label"
 			name="right-aligned-description-input"
 			description="Right aligned descriptive text."
 			descriptionAlignment="right"
+			id="1"
 		/>
 	</div>
 </Story>
 
 <Story name="With error">
 	<div class="w-96">
-		<Input label="Description" name="description-input" error="Error text" />
+		<Input label="Description" name="description-input" error="Error text" id="1" />
 	</div>
 </Story>
 
@@ -98,13 +101,14 @@
 			inputmode="decimal"
 			name="input-mode-input"
 			hint="Using 'decimal' input mode here rather than 'numeric'"
+			id="1"
 		/>
 	</div>
 </Story>
 
 <Story name="Disabled">
 	<div class="w-96">
-		<Input label="Disabled" name="disabled-input" disabled />
+		<Input label="Disabled" name="disabled-input" disabled id="1" />
 	</div>
 </Story>
 
@@ -114,6 +118,7 @@
 			label="Type a number"
 			description="It will be rounded to 2 d.p. when the input loses focus"
 			format={round}
+			id="1"
 		/>
 	</div>
 </Story>
@@ -126,31 +131,42 @@
 			name="textarea-input"
 			rows="5"
 			hint="Three rows by default"
+			id="1"
 		/>
 		<Input
 			type="number"
 			label="Number"
 			name="number-input"
 			hint="Brings up the numeric keypad on touch screens"
+			id="1"
 		/>
-		<Input type="password" label="Password" name="password-input" hint="No formatting by default" />
+		<Input
+			type="password"
+			label="Password"
+			name="password-input"
+			hint="No formatting by default"
+			id="1"
+		/>
 		<Input
 			type="url"
 			label="URL"
 			name="url-input"
 			hint="Brings up the URL keypad on touch screens"
+			id="1"
 		/>
 		<Input
 			type="tel"
 			label="Phone"
 			name="tel-input"
 			hint="Brings up the telephone keypad on touch screens"
+			id="1"
 		/>
 		<Input
 			type="email"
 			label="Email"
 			name="email-input"
 			hint="Brings up the email keypad on touch screens"
+			id="1"
 		/>
 		<Input type="time" label="Time" name="time-input" />
 		<Input type="date" label="Date" name="date-input" />

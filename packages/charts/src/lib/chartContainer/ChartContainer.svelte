@@ -63,11 +63,15 @@
 </script>
 
 <div class={`chart-container ${chartWidth}`} bind:this={chartToCapture} id="captureElement">
-	{#if title}
-		<Title>{title}</Title>
-	{/if}
-	{#if subTitle}
-		<SubTitle>{subTitle}</SubTitle>
+	{#if title || subTitle}
+		<div class="mb-4">
+			{#if title}
+				<Title>{title}</Title>
+			{/if}
+			{#if subTitle}
+				<SubTitle>{subTitle}</SubTitle>
+			{/if}
+		</div>
 	{/if}
 
 	{#if alt}
