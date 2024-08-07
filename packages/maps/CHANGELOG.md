@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 4.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
 ## 3.2.0
 
 ### Minor Changes
