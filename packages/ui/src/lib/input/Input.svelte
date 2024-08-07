@@ -146,8 +146,11 @@
 	$: inputClasses = classNames(
 		'm-0',
 		error ? 'border-color-input-border-error' : '',
-		disabled ? 'cursor-not-allowed text-color-input-label-disabled' : '',
-		type === 'range' ? 'form-range' : 'form-input'
+		disabled
+			? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
+			: '',
+		type === 'range' ? 'form-range' : 'form-input',
+		'placeholder-color-input-placeholder'
 	);
 </script>
 
