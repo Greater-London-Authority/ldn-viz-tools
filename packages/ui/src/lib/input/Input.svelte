@@ -30,6 +30,8 @@
 
 	/**
 	 * The `type` of the `<input>` element (see [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)).
+	 *
+	 * Additionally, passing `textarea` will render a `<textarea>` instead of an `<input>`.
 	 */
 	export let type = 'text';
 
@@ -57,6 +59,11 @@
 	 * Text that appears below the `<input>` element, in smaller font than the `label`.
 	 */
 	export let description = '';
+
+	/**
+	 * Text that appears within the `<input>` element when no value is present.
+	 */
+	export let placeholder = '';
 
 	/**
 	 * Determines which edge of the `<input>` the description is aligned with.
@@ -180,6 +187,7 @@
 			{name}
 			{value}
 			{disabled}
+			{placeholder}
 			required={!optional}
 			aria-describedby={descriptionId}
 			aria-errormessage={errorId}
@@ -217,6 +225,7 @@
 			{name}
 			{value}
 			{disabled}
+			{placeholder}
 			required={!optional}
 			aria-describedby={descriptionId}
 			aria-errormessage={errorId}
