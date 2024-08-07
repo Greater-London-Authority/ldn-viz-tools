@@ -15,6 +15,7 @@
 				$currentThemeMode === 'dark' ? true : false
 			);
 		}
+		/*global globalThis*/
 		globalThis.localStorage?.setItem('theme', $userThemeSelectionStore);
 	};
 
