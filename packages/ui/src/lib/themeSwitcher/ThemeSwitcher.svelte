@@ -14,10 +14,10 @@
 
 	const themes: Theme[] = ['light', 'dark', 'system'];
 
-	function onChange(e: { detail: { [key: string]: string } }) {
+	const onChange = (e: { detail: { [key: string]: string } }) => {
 		const value = e.detail.value as Theme;
 		$userThemeSelectionStore = value;
-	}
+	};
 
 	const items = themes.map((theme) => ({ value: theme, label: theme }));
 	const initialItem = $userThemeSelectionStore;
