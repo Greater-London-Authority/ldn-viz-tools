@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 3.2.0
+
+### Minor Changes
+
+- cac8844: CHANGED: `BoroughsContextLayer` Storybook stories are now reactive to argument changes.
+
 ## 3.1.0
 
 ### Minor Changes

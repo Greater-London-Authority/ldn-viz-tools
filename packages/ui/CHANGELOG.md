@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 10.1.0
+
+### Minor Changes
+
+- 35eeb55: ADDED: adds `AsyncButton` that wraps `Button` for asynchronous operations.
+- af5c364: CHANGED: `Select` now correctly sets `justValue` prop when `multiple` is enabled
+- 1ce5711: ADDED: adds `FormBackButton` for consistent easy to use back button on multipage forms.
+- 773cbee: FIXED: Reinstate select chevron
+- b52a596: FIXED: correct vertical spacing for `InputGroup` and `CheckboxGroup`
+- 3ce331e: CHANGED: changes hint icons to be mini theme
+
 ## 10.0.0
 
 ### Major Changes
@@ -12,6 +23,7 @@
 - 6ce827e: CHANGED: simplify the `MergeValuesControl` component.
 - 82b10d8: ADDED: `Flag` component for displaying banner messages (e.g. to indicate that a site is in beta)
 - 4da0c67: CHANGED: the `<SidebarSection>` component can now accept a `<SidebarSectionTitle>` component inside the `title` slot.
+- d24b4c4: CHANGED: `RadioButtons` now accept a `hint` and `hintLabel` prop (like the `Checkbox` component)
 
 ### Patch Changes
 

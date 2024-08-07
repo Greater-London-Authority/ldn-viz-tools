@@ -1,6 +1,6 @@
 // Reexport your entry components here
-export { default as Button } from './button/Button.svelte';
 export { default as AsyncButton } from './button/AsyncButton.svelte';
+export { default as Button } from './button/Button.svelte';
 
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
@@ -83,6 +83,7 @@ export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
 export * from './uniformInput/types';
 export { default as UniformInput } from './uniformInput/UniformInput.svelte';
 
+export { default as FormBackButton } from './forms/elements/formBackButton/FormBackButton.svelte';
 export { default as FormField } from './forms/elements/formField/FormField.svelte';
 export { default as FormSubmitButton } from './forms/elements/formSubmitButton/FormSubmitButton.svelte';
 export { default as Form } from './forms/Form.svelte';

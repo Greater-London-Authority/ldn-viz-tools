@@ -129,7 +129,7 @@
 		value = format(value, {
 			name,
 			type,
-			disabled: !!$$restProps.disabled
+			disabled: !!disabled
 		});
 
 		// Protect from cyclic reactivity.
