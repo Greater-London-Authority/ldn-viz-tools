@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 2.0.1
+
+### Patch Changes
+
+- 2e26abb: FIXED: include the generated CSS in published package
+
 ## 2.0.0
 
 ### Major Changes
