@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 2.0.1
+
+### Patch Changes
+
+- ddbae5c: FIXED: export the exports from observablePlotFragments.ts from package
+
 ## 2.0.0
 
 ### Major Changes
