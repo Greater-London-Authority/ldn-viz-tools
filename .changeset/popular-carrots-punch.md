@@ -2,4 +2,4 @@
 "@ldn-viz/charts": patch
 ---
 
-update import path to theme package
+FIXED: update path used to import theme package
