@@ -60,6 +60,7 @@
 	"dependencies": {
 		"@ldn-viz/ui": "*",
 		"@observablehq/plot": "^0.6.14",
-		"layercake": "^8.1.1"
+		"layercake": "^8.1.1",
+		"@ldn-viz/utils": "*"
 	}
 }
