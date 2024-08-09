@@ -243,4 +243,4 @@ export const getThresholdBreaksColorsLabels = ({
   return thresholdObj;
 };
 
-console.log(getColorRamp());
+//console.log(getColorRamp());

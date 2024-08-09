@@ -1,5 +1,5 @@
+import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
 import type { AxisOptions } from '@observablehq/plot';
-import tokens from '../../../../../packages/themes/styles/js/theme-tokens';
 
 export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for inter
 
