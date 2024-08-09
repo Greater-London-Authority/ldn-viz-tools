@@ -1,10 +1,10 @@
-import { browser } from '$app/environment';
 import { prefersDarkMode } from '@ldn-viz/utils';
+import { BROWSER } from 'esm-env';
 import { derived, writable, type Readable } from 'svelte/store';
 
 const getLocalStorage = () => {
-  if (browser) {
-    return globalThis.localStorage?.getItem('theme') || 'light';
+  if (BROWSER) {
+    return globalThis.localStorage?.getItem('theme') || 'system';
   }
   return 'light';
 };
