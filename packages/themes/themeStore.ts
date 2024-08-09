@@ -14,13 +14,11 @@ export const userThemeSelectionStore = writable(getLocalStorage());
 export const currentThemeMode: Readable<'light' | 'dark'> = derived(
   [userThemeSelectionStore, prefersDarkMode],
   ([$userThemeSelectionStore, $prefersDarkMode]) => {
-    return $userThemeSelectionStore === 'dark'
-      ? 'dark'
-      : $prefersDarkMode
-        ? $userThemeSelectionStore === 'light'
-          ? 'light'
-          : 'dark'
-        : 'light';
+    if ($userThemeSelectionStore === 'system') {
+      return $prefersDarkMode ? 'dark' : 'light'
+    }
+
+    return $userThemeSelectionStore;
   },
   'light'
 );
