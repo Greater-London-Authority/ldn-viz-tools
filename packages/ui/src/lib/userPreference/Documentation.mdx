@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Utils/Media Query Stores" />
+<Meta title="Ui/Media Query Stores" />
 
 # Media Query Stores
 
-The `@ldn-viz/utils` package exposes three store factory functions.
+The `@ldn-viz/ui` package exposes three store factory functions.
 
 - `mediaQueryStore` accepts a CSS [media query](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries) (e.g. `'(prefers-reduced-motion)`) as an argument, and returns a Svelte store that is initialized to the value of the media query, and automatically updates if this changes
 
@@ -15,7 +15,7 @@ The `@ldn-viz/utils` package exposes three store factory functions.
 ## Example use
 
 ```js
-import { prefersDarkMode } from '@ldn-viz/utils';
+import { prefersDarkMode } from '@ldn-viz/ui';
 
 const darkMode = prefersDarkMode();
 
