@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 2.0.2
+
+### Patch Changes
+
+- 0353c42: CHANGED: set default theme selection to system
+
 ## 2.0.1
 
 ### Patch Changes

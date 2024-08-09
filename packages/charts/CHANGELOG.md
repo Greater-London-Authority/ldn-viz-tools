@@ -1,5 +1,14 @@
 # ldn-viz-tools-charts
 
+## 2.0.2
+
+### Patch Changes
+
+- 69686cf: FIXED: adds missing `@ldn-viz/util` dependency to `package.json` of `maps`, `ui`, and `charts` packages.
+- 4c860bc: FIXED: update path used to import theme package
+- Updated dependencies [69686cf]
+  - @ldn-viz/ui@11.0.1
+
 ## 2.0.1
 
 ### Patch Changes
