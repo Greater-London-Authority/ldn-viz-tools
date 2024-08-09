@@ -93,3 +93,9 @@ export * from './forms/types';
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
 
 export { classNames } from './utils/classNames';
+
+export {
+	mediaQueryStore,
+	prefersDarkMode,
+	prefersReducedMotion
+} from './userPreference/mediaQueryStore';

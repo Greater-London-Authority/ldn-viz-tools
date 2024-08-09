@@ -1,4 +1,4 @@
-import { prefersDarkMode } from '@ldn-viz/utils';
+import { prefersDarkMode } from '@ldn-viz/ui';
 import { BROWSER } from 'esm-env';
 import { derived, writable, type Readable } from 'svelte/store';
 
