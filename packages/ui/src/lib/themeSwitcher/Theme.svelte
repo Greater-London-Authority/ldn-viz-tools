@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	import { currentThemeMode, userThemeSelectionStore } from '@ldn-viz/themes/themeStore';
-	import { prefersDarkMode } from '@ldn-viz/utils';
+	import { prefersDarkMode } from '@ldn-viz/ui';
 
 	$: $prefersDarkMode, applyTheme();
 	$: $userThemeSelectionStore, applyTheme();
