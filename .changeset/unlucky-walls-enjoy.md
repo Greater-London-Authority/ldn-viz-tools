@@ -2,4 +2,4 @@
 "@ldn-viz/themes": patch
 ---
 
-set default theme selection to system
+CHANGED: set default theme selection to system
