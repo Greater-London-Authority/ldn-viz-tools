@@ -15,7 +15,7 @@ export const currentThemeMode: Readable<'light' | 'dark'> = derived(
   [userThemeSelectionStore, prefersDarkMode],
   ([$userThemeSelectionStore, $prefersDarkMode]) => {
     if ($userThemeSelectionStore === 'system') {
-      return $prefersDarkMode ? 'dark' : 'light'
+      return $prefersDarkMode ? 'dark' : 'light';
     }
 
     return $userThemeSelectionStore;
