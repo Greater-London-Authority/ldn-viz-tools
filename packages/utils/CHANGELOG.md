@@ -1,5 +1,11 @@
 # @ldn-viz/utils
 
+## 1.0.0
+
+### Major Changes
+
+- bfad1da: CHNAGED: Move `userPreference` from `utils` package to `ui` package
+
 ## 0.2.0
 
 ### Minor Changes

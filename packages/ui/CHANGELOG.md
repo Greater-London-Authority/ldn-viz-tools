@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 12.0.0
+
+### Major Changes
+
+- bfad1da: CHNAGED: Move `userPreference` from `utils` package to `ui` package
+
+### Patch Changes
+
+- Updated dependencies [bfad1da]
+  - @ldn-viz/utils@1.0.0
+
 ## 11.0.1
 
 ### Patch Changes
