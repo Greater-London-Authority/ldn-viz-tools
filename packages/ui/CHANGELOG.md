@@ -4,7 +4,7 @@
 
 ### Major Changes
 
-- bfad1da: CHNAGED: Move `userPreference` from `utils` package to `ui` package
+- bfad1da: CHANGED: Move `userPreference` from `utils` package to `ui` package
 
 ### Patch Changes
 
