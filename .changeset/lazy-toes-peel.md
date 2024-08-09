@@ -3,4 +3,4 @@
 "@ldn-viz/ui": major
 ---
 
-Move userPreference to ui package
+CHNAGED: Move `userPreference` from `utils` package to `ui` package
