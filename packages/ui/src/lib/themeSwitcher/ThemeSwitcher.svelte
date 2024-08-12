@@ -16,7 +16,6 @@
 
 	const onChange = (e: { detail: { [key: string]: string } }) => {
 		const value = e.detail.value as Theme;
-		const value = e.detail.value as Theme;
 		$userThemeSelectionStore = value;
 	};
 
