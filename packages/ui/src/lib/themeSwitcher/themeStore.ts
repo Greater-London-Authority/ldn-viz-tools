@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { prefersDarkMode } from '@ldn-viz/utils';
+import { prefersDarkMode } from '../userPreference/mediaQueryStore';
 import { derived, writable, type Readable } from 'svelte/store';
 
 const getLocalStorage = () => {
@@ -14,13 +14,11 @@ export const userThemeSelectionStore = writable(getLocalStorage());
 export const currentThemeMode: Readable<'light' | 'dark'> = derived(
 	[userThemeSelectionStore, prefersDarkMode],
 	([$userThemeSelectionStore, $prefersDarkMode]) => {
-		return $userThemeSelectionStore === 'dark'
-			? 'dark'
-			: $prefersDarkMode
-				? $userThemeSelectionStore === 'light'
-					? 'light'
-					: 'dark'
-				: 'light';
+		if ($userThemeSelectionStore === 'system') {
+			return $prefersDarkMode ? 'dark' : 'light';
+		}
+
+		return $userThemeSelectionStore;
 	},
 	'light'
 );
