@@ -1,5 +1,17 @@
 # @ldn-viz/themes
 
+## 3.0.0
+
+### Major Changes
+
+- 758d638: CHANGED: Move `userPreference` from `utils` package to `ui` package
+
+## 2.0.2
+
+### Patch Changes
+
+- 0353c42: CHANGED: set default theme selection to system
+
 ## 2.0.1
 
 ### Patch Changes

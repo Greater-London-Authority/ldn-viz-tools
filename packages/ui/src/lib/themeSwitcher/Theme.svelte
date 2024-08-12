@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { BROWSER } from 'esm-env';
 	import { onMount } from 'svelte';
 
+	import { prefersDarkMode } from '../userPreference/mediaQueryStore';
 	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
-	import { prefersDarkMode } from '@ldn-viz/utils';
 
 	$: $prefersDarkMode, applyTheme();
 	$: $userThemeSelectionStore, applyTheme();
 
 	const applyTheme = () => {
-		if (browser) {
+		if (BROWSER) {
 			document.documentElement.classList.toggle(
 				'dark',
 				$currentThemeMode === 'dark' ? true : false

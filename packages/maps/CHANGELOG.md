@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 4.0.1
+
+### Patch Changes
+
+- 69686cf: FIXED: adds missing `@ldn-viz/util` dependency to `package.json` of `maps`, `ui`, and `charts` packages.
+
 ## 4.0.0
 
 ### Major Changes

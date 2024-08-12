@@ -1,24 +1,30 @@
 {
   "name": "@ldn-viz/utils",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/ldn-viz-utils.umd.cjs",
-  "module": "./dist/ldn-viz-utils.js",
   "exports": {
     ".": {
       "import": "./dist/ldn-viz-utils.js",
       "require": "./dist/ldn-viz-utils.umd.cjs"
     }
   },
+  "main": "./dist/ldn-viz-utils.umd.cjs",
+  "module": "./dist/ldn-viz-utils.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite build",
-    "lint": "prettier --check . && eslint src",
     "format": "prettier --check . --write",
+    "lint": "prettier --check . && eslint src",
     "test": "echo no tests",
     "test:unit": "echo no tests"
+  },
+  "dependencies": {
+    "chroma-js": "^2.4.2",
+    "d3-array": "^3.2.4",
+    "d3-format": "^3.1.0",
+    "vite": "^5.1.6"
   },
   "devDependencies": {
     "@types/d3-array": "^3.2.1",
@@ -26,11 +32,5 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.5"
-  },
-  "dependencies": {
-    "chroma-js": "^2.4.2",
-    "d3-array": "^3.2.4",
-    "d3-format": "^3.1.0",
-    "vite": "^5.1.6"
   }
 }

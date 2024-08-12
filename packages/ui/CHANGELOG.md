@@ -1,5 +1,22 @@
 # ldn-viz-tools-ui
 
+## 12.0.0
+
+### Major Changes
+
+- bfad1da: CHANGED: Move `userPreference` from `utils` package to `ui` package
+
+### Patch Changes
+
+- Updated dependencies [bfad1da]
+  - @ldn-viz/utils@1.0.0
+
+## 11.0.1
+
+### Patch Changes
+
+- 69686cf: FIXED: adds missing `@ldn-viz/util` dependency to `package.json` of `maps`, `ui`, and `charts` packages.
+
 ## 11.0.0
 
 ### Major Changes
