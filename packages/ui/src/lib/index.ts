@@ -78,6 +78,7 @@ export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
 export { default as Theme } from './themeSwitcher/Theme.svelte';
+export * from './themeSwitcher/themeStore';
 export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
 
 export * from './uniformInput/types';

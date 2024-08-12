@@ -24,7 +24,7 @@
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
-	import { currentThemeMode } from '@ldn-viz/themes/themeStore';
+	import { currentThemeMode } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
 		plotTheme,

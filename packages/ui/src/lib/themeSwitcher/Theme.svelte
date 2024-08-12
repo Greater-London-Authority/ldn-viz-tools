@@ -2,7 +2,7 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 
-	import { currentThemeMode, userThemeSelectionStore } from '@ldn-viz/themes/themeStore';
+	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
 	import { prefersDarkMode } from '@ldn-viz/utils';
 
 	$: $prefersDarkMode, applyTheme();

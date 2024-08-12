@@ -8,13 +8,14 @@
 	 *
 	 * @component
 	 */
-	import { userThemeSelectionStore } from '@ldn-viz/themes/themeStore';
+	import { userThemeSelectionStore } from './themeStore';
 	import { Select } from '@ldn-viz/ui';
 	type Theme = 'light' | 'dark' | 'system';
 
 	const themes: Theme[] = ['light', 'dark', 'system'];
 
 	const onChange = (e: { detail: { [key: string]: string } }) => {
+		const value = e.detail.value as Theme;
 		const value = e.detail.value as Theme;
 		$userThemeSelectionStore = value;
 	};
