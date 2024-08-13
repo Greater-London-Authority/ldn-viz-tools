@@ -61,6 +61,9 @@
 		menuTitle="Select image format"
 		onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
 		{...args}
+		emphasis="secondary"
+		variant="text"
+		size="sm"
 	>
 		<svelte:fragment slot="beforeLabel">
 			<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 mr-2" aria-hidden="true" />
