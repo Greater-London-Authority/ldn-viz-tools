@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 13.0.0
+
+### Major Changes
+
+- b55dab9: CHANGED: moved `userThemeSelectionStore` and `currentThemeMode` from `theme` package to `ui` package
+
 ## 12.0.0
 
 ### Major Changes
