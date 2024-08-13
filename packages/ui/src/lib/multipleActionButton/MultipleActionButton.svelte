@@ -9,6 +9,7 @@
 
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Button from '../button/Button.svelte';
 
 	type Option = {
 		id: string;
@@ -25,7 +26,7 @@
 	export let onClick: (id: string) => void;
 
 	const {
-		elements: { trigger, menu, arrow, overlay },
+		elements: { trigger, menu, arrow },
 		states: { open }
 	} = createDropdownMenu({
 		forceVisible: true,
@@ -39,66 +40,51 @@
 </script>
 
 <div class="flex gap-0">
-	<button
-		on:click={() => onClick(state.id)}
-		class="border rounded-l-md p-2 hover:bg-color-action-background-primary-hover"
-	>
+	<Button on:click={() => onClick(state.id)}>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
 			{state.buttonLabel}
 			<slot name="afterLabel" />
 		</div>
-	</button>
+	</Button>
 
-	<button
-		type="button"
-		class="border rounded-r-md p-2 hover:bg-color-action-background-primary-hover"
-		use:$trigger.action
-		{...$trigger}
-		aria-label="Update dimensions"
-	>
-		<Icon src={ChevronDown} class="h-4 w-4 mr-2" />
-		<span class="sr-only">Open Popover</span>
-	</button>
+	<div use:$trigger.action {...$trigger} class="border-l border-color-ui-border-secondary">
+		<Button variant="square">
+			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
+			<span class="sr-only">Open Popover</span>
+		</Button>
+	</div>
 </div>
 
 {#if $open}
-	<div use:$overlay.action {...overlay} class="fixed inset-0 z-40" />
 	<div
-		class="bg-white z-40 max-w-sm"
+		class="bg-color-container-level-1 z-40 max-w-sm p-2 shadow flex flex-col space-y-2"
 		use:$menu.action
 		{...$menu}
 		transition:fly={{ duration: 150, y: -10 }}
 	>
+		<div {...$arrow} use:arrow />
 		{#if menuTitle}
-			<div class="text-sm text-color-ui-secondary">{menuTitle}</div>
+			<div class="text-sm text-color-text-secondary">{menuTitle}</div>
 		{/if}
 
-		{#each options as option}
-			<div
-				class="border-b hover:bg-color-action-background-primary-hover"
-				on:click={() => changeOption(option)}
-			>
-				<div class="flex items-center">
-					{#if state.id === option.id}
-						<Icon src={Check} class="h-4 w-4 mr-2" />
-					{:else}
-						<div class="h-4 w-4 mr-2" />
-					{/if}
-					<div class="text-lg font-bold">{option.menuLabel}</div>
-				</div>
+		<div class="divide-y divide-color-ui-border-secondary">
+			{#each options as option}
+				<button
+					class="text-left p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+					on:click={() => changeOption(option)}
+				>
+					<div class="flex items-center">
+						{#if state.id === option.id}
+							<Icon src={Check} theme="mini" class="h-5 w-5 mr-2" />
+						{/if}
+						<div class="font-medium">{option.menuLabel}</div>
+					</div>
 
-				<div>{option.menuDescription}</div>
-			</div>
-		{/each}
+					<div class="text-sm">{option.menuDescription}</div>
+				</button>
+			{/each}
+		</div>
 	</div>
 	<div use:$arrow.action {...$arrow} />
 {/if}
-
-<style lang="postcss">
-	.menu {
-		@apply z-40 flex max-h-[300px] min-w-[220px] flex-col shadow-lg;
-		@apply rounded-md bg-white p-1 shadow-neutral-900/30 lg:max-h-none;
-		@apply ring-0 !important;
-	}
-</style>

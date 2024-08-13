@@ -42,7 +42,7 @@
 
 <Story name="Default" source />
 
-<Story name="With icon" source let:args>
+<Story name="With icon After" source let:args>
 	<MultipleActionButton
 		{options}
 		menuTitle="Select image format"
@@ -51,6 +51,19 @@
 	>
 		<svelte:fragment slot="afterLabel">
 			<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
+		</svelte:fragment>
+	</MultipleActionButton>
+</Story>
+
+<Story name="With icon Before" source let:args>
+	<MultipleActionButton
+		{options}
+		menuTitle="Select image format"
+		onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+		{...args}
+	>
+		<svelte:fragment slot="beforeLabel">
+			<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 mr-2" aria-hidden="true" />
 		</svelte:fragment>
 	</MultipleActionButton>
 </Story>
