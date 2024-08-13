@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `MultipleActionButton` combines a button and popover menu, so that the use can select which action
+	 * The `MultipleActionButton` combines a button and popover menu, so that the user can select which action
 	 * (or variation on an action) will be performed when the button is pressed.
 	 * @component
 	 */
