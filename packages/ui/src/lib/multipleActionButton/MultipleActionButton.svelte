@@ -35,7 +35,7 @@
 	 */
 	export let state: Option | undefined = undefined;
 
-	if (!state){
+	if (!state) {
 		state = options.find((option) => option.default) ?? options[0];
 	}
 
