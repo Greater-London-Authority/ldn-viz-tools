@@ -46,7 +46,7 @@ export const withThemeByClassNameStore = <TRenderer extends Renderer = any>({
 				});
 
 			const newThemeClasses = classStringToArray(themes[selectedThemeName]);
-			userThemeSelectionStore.set(themes[selectedThemeName]);
+			userThemeSelectionStore.set(selectedThemeName);
 
 			if (newThemeClasses.length > 0) {
 				parentElement.classList.add(...newThemeClasses);
