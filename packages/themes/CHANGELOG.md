@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 4.0.0
+
+### Major Changes
+
+- b55dab9: CHANGED: moved `userThemeSelectionStore` and `currentThemeMode` from `theme` package to `ui` package
+
 ## 3.0.0
 
 ### Major Changes

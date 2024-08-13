@@ -1,5 +1,16 @@
 # ldn-viz-tools-charts
 
+## 3.0.0
+
+### Major Changes
+
+- b55dab9: CHANGED: moved `userThemeSelectionStore` and `currentThemeMode` from `theme` package to `ui` package
+
+### Patch Changes
+
+- Updated dependencies [b55dab9]
+  - @ldn-viz/ui@13.0.0
+
 ## 2.0.2
 
 ### Patch Changes
