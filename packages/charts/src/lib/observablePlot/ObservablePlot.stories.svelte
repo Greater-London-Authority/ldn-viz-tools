@@ -162,8 +162,6 @@
 		]
 	};
 
-	$: console.log($currentThemeMode);
-
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
 

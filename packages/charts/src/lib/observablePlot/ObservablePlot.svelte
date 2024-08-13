@@ -205,3 +205,9 @@
 		{/if}
 	</ChartContainer>
 {/key}
+
+<style>
+	:global(.defaultColorLegendLabel-swatch) {
+		font-size: 1rem;
+	}
+</style>
