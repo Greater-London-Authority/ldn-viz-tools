@@ -4,5 +4,5 @@
 '@ldn-viz/ui': major
 ---
 
-CHANGED: moved `themeStore.ts` from `theme` package to `ui` package
+CHANGED: moved `userThemeSelectionStore` and `currentThemeMode` from `theme` package to `ui` package
 
