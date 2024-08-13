@@ -20,10 +20,26 @@
 		default?: boolean;
 	};
 
+	/**
+	 * Array of options that appear in the drop-down menu. Each is defined by an object with the following properties:
+	 * * `id` (string)
+	 * * `buttonLabel` (string) - the label that appears in the button when this option is selected
+	 * * `menuLabel` (String) - the label that appears in the drop-down menu
+	 * * `menuDescription` (string) - description that appears below the label in the drop-down menu
+	 * * `default` (boolean) - if `true`, then this option will initially be selected
+	 */
 	export let options: Option[] = [];
 	let state = options.find((option) => option.default) ?? options[0];
 
+	/**
+	 * title that appears at the top ot the drop-down menu
+	 */
 	export let menuTitle = '';
+
+	/**
+	 * Function that will be called when the user clicks on the button.
+	 * The `id` of the currently selected option will be provided as an argument.
+	 */
 	export let onClick: (id: string) => void;
 
 	const {
