@@ -8,7 +8,7 @@
 	 *
 	 * @component
 	 */
-	import { userThemeSelectionStore } from '@ldn-viz/themes/themeStore';
+	import { userThemeSelectionStore } from './themeStore';
 	import { Select } from '@ldn-viz/ui';
 	type Theme = 'light' | 'dark' | 'system';
 

@@ -1,7 +1,7 @@
 import { useEffect } from '@storybook/preview-api';
 import type { DecoratorFunction, Renderer } from '@storybook/types';
 
-import { userThemeSelectionStore } from '@ldn-viz/themes/themeStore';
+import { userThemeSelectionStore } from '@ldn-viz/ui';
 import { DecoratorHelpers } from '@storybook/addon-themes';
 
 const { initializeThemeState, pluckThemeFromContext, useThemeParameters } = DecoratorHelpers;

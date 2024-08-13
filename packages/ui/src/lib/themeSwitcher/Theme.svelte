@@ -2,8 +2,8 @@
 	import { BROWSER } from 'esm-env';
 	import { onMount } from 'svelte';
 
-	import { currentThemeMode, userThemeSelectionStore } from '@ldn-viz/themes/themeStore';
-	import { prefersDarkMode } from '@ldn-viz/ui';
+	import { prefersDarkMode } from '../userPreference/mediaQueryStore';
+	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
 
 	$: $prefersDarkMode, applyTheme();
 	$: $userThemeSelectionStore, applyTheme();
