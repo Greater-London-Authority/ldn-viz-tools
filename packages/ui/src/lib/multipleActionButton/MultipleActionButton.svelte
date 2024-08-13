@@ -4,6 +4,9 @@
 	 * (or variation on an action) will be performed when the button is pressed.
 	 * @component
 	 */
+	import { createDropdownMenu } from '@melt-ui/svelte';
+	import { fly } from 'svelte/transition';
+
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -20,10 +23,6 @@
 
 	export let menuTitle = '';
 	export let onClick: (id: string) => void;
-
-	///
-	import { createDropdownMenu } from '@melt-ui/svelte';
-	import { fly } from 'svelte/transition';
 
 	const {
 		elements: { trigger, menu, arrow, overlay },
