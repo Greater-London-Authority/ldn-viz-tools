@@ -17,9 +17,7 @@
 
 	const width = 100;
 	const height = 30;
-	const marginTop = 0;
 	const marginRight = 10;
-	const marginBottom = 10;
 	const marginLeft = 0;
 
 	let x;

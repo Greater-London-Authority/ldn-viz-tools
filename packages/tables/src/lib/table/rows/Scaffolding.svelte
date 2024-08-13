@@ -11,7 +11,7 @@
 <div class="flex was-tr items-stretch">
 	<!-- controls for expanding/collapsing groups -->
 	<slot name="groupControl">
-		{#each table.groupingFields || [] as field, i}
+		{#each table.groupingFields || [] as _field}
 			<div style:width={table.widths.groupControl} id="groupControl"></div>
 		{/each}
 		<div style:width={table.widths.groupControl} id="groupControl"></div>
@@ -28,7 +28,7 @@
 			'px'}
 	>
 		<slot name="groupSizes">
-			{#each new Array(table.groupingFields.length) as i}
+			{#each new Array(table.groupingFields.length) as _i}
 				<div style:width={table.widths.groupLabel} id="groupLabel"></div>
 				<div style:width={table.widths.groupSizeLabel} id="groupSizeLabel"></div>
 				<div style:width={table.widths.groupSizeBar} id="groupSizeBar"></div>
