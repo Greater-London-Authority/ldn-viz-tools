@@ -37,7 +37,7 @@
 
 			addEventHandlerInner(
 				'mouseleave',
-				(ev: MouseEvent, d: any) => {
+				() => {
 					posStore.set(undefined); // can't use the $store syntax here
 				},
 				marks,
