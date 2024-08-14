@@ -97,13 +97,24 @@
 	</ImageDownloadButton>
 </Story>
 
-<Story name="Download as an SVG">
+<Story name="Download as an SVG - no option">
 	<svg bind:this={svgRef3} width="100" height="100">
 		<rect x="0" y="0" width="100" height="100" fill="red" />
 		<circle cx="10" cy="10" r="10" fill="blue" />
 	</svg>
 
-	<ImageDownloadButton svgNode={svgRef3} format="SVG">
+	<ImageDownloadButton svgNode={svgRef3} formats={['SVG']}>
+		Download as SVG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+	</ImageDownloadButton>
+</Story>
+
+<Story name="Download as an PNG - no option">
+	<svg bind:this={svgRef3} width="100" height="100">
+		<rect x="0" y="0" width="100" height="100" fill="red" />
+		<circle cx="10" cy="10" r="10" fill="blue" />
+	</svg>
+
+	<ImageDownloadButton svgNode={svgRef3} formats={['PNG']}>
 		Download as SVG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
@@ -115,7 +126,7 @@
 		<LogoByCiu class="w-80" />
 	</div>
 
-	<ImageDownloadButton htmlNode={htmlRef} htmlId="divToSave" format="SVG">
+	<ImageDownloadButton htmlNode={htmlRef} htmlId="divToSave">
 		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
@@ -131,7 +142,7 @@
 		<LogoByCiu class="w-80" />
 	</div>
 
-	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave" format="SVG">
+	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave">
 		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
@@ -147,7 +158,7 @@
 		<LogoByCiu class="w-80" />
 	</div>
 
-	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave" padding="100px" format="SVG">
+	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave" padding="100px">
 		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 	</ImageDownloadButton>
 </Story>
