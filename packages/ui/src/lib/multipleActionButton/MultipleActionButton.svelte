@@ -155,7 +155,7 @@
 			<div class="divide-y divide-color-ui-border-secondary">
 				{#each options as option}
 					<button
-						class="text-left p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
 						on:click={() => changeOption(option)}
 					>
 						<div class="flex items-center">
