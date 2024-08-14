@@ -92,7 +92,7 @@
 	export let title: ButtonProps['title'] = '';
 </script>
 
-<div class="flex items-center gap-0">
+{#if options.length === 1}
 	<Button
 		on:click={() => onClick(state.id)}
 		{variant}
@@ -104,52 +104,70 @@
 	>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
-			{state.buttonLabel}
+			{options[0].buttonLabel}
 			<slot name="afterLabel" />
 		</div>
 	</Button>
-
-	<div
-		use:$trigger.action
-		{...$trigger}
-		class={`${variant !== 'outline' && 'border-l border-color-action-border-secondary'}`}
-	>
-		<Button variant="square" {emphasis} {condition} {size} {disabled}>
-			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
-			<span class="sr-only">Open Popover</span>
+{:else}
+	<div class="flex items-center gap-0">
+		<Button
+			on:click={() => onClick(state.id)}
+			{variant}
+			{emphasis}
+			{condition}
+			{size}
+			{disabled}
+			{title}
+		>
+			<div class="flex items-center">
+				<slot name="beforeLabel" />
+				{state.buttonLabel}
+				<slot name="afterLabel" />
+			</div>
 		</Button>
-	</div>
-</div>
 
-{#if $open}
-	<div
-		class="bg-color-container-level-1 z-40 max-w-sm p-2 shadow flex flex-col space-y-2"
-		use:$menu.action
-		{...$menu}
-		transition:fly={{ duration: 150, y: -10 }}
-	>
-		<div {...$arrow} use:arrow />
-		{#if menuTitle}
-			<div class="text-sm text-color-text-secondary">{menuTitle}</div>
-		{/if}
-
-		<div class="divide-y divide-color-ui-border-secondary">
-			{#each options as option}
-				<button
-					class="text-left p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
-					on:click={() => changeOption(option)}
-				>
-					<div class="flex items-center">
-						{#if state.id === option.id}
-							<Icon src={Check} theme="mini" class="h-5 w-5 mr-2" />
-						{/if}
-						<div class="font-medium">{option.menuLabel}</div>
-					</div>
-
-					<div class="text-sm">{option.menuDescription}</div>
-				</button>
-			{/each}
+		<div
+			use:$trigger.action
+			{...$trigger}
+			class={`${variant !== 'outline' && 'border-l border-color-action-border-secondary'}`}
+		>
+			<Button variant="square" {emphasis} {condition} {size} {disabled}>
+				<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
+				<span class="sr-only">Open Popover</span>
+			</Button>
 		</div>
 	</div>
-	<div use:$arrow.action {...$arrow} />
+
+	{#if $open}
+		<div
+			class="bg-color-container-level-1 z-40 max-w-sm p-2 shadow flex flex-col space-y-2"
+			use:$menu.action
+			{...$menu}
+			transition:fly={{ duration: 150, y: -10 }}
+		>
+			<div {...$arrow} use:arrow />
+			{#if menuTitle}
+				<div class="text-sm text-color-text-secondary">{menuTitle}</div>
+			{/if}
+
+			<div class="divide-y divide-color-ui-border-secondary">
+				{#each options as option}
+					<button
+						class="text-left p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+						on:click={() => changeOption(option)}
+					>
+						<div class="flex items-center">
+							{#if state.id === option.id}
+								<Icon src={Check} theme="mini" class="h-5 w-5 mr-2" />
+							{/if}
+							<div class="font-medium">{option.menuLabel}</div>
+						</div>
+
+						<div class="text-sm">{option.menuDescription}</div>
+					</button>
+				{/each}
+			</div>
+		</div>
+		<div use:$arrow.action {...$arrow} />
+	{/if}
 {/if}
