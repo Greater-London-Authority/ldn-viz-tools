@@ -89,8 +89,7 @@
 	 */
 	export let allowSorting = false;
 
-	let rows = [];
-	const onRowsChange = (groups, rows) => {
+	const onRowsChange = () => {
 		table = table; // eslint-disable-line no-self-assign
 	};
 

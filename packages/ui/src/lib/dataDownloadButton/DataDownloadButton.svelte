@@ -4,14 +4,16 @@
 	 * @component
 	 */
 
-	import Button from '../button/Button.svelte';
+	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
+	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 
 	import { csvFormat } from 'd3-dsv';
 
 	/**
-	 * The data format of the downloaded file.
+	 * The available data formats for the downloaded file.
 	 */
-	export let format: 'CSV' | 'JSON' | undefined;
+	export let formats: ('CSV' | 'JSON')[] = ['CSV', 'JSON'];
+	let format = 'CSV';
 
 	/**
 	 * The data that will be encoded in the downloaded file (formatted as an array of objects).
@@ -72,10 +74,41 @@
 		});
 	};
 
-	const download = format === 'JSON' ? downloadJSON : downloadCSV;
+	$: download = format === 'JSON' ? downloadJSON : downloadCSV;
+
+	let options: Option[] = [];
+	$: {
+		if (formats.includes('CSV')) {
+			options.push({
+				id: 'CSV',
+				buttonLabel: 'Download as CSV',
+				menuLabel: 'CSV',
+				menuDescription: 'Can be opened in software such as Excel.',
+				default: true
+			});
+		}
+		if (formats.includes('JSON')) {
+			options.push({
+				id: 'JSON',
+				buttonLabel: 'Download as JSON',
+				menuLabel: 'JSON',
+				menuDescription: 'Sometimes more convenient for programmers.'
+			});
+		}
+	}
+
+	let selectedOption: Option;
+	$: format = selectedOption?.id ?? 'CSV';
 </script>
 
-<Button on:click={download} {disabled} {...$$restProps}>
+<MultipleActionButton
+	{options}
+	bind:state={selectedOption}
+	menuTitle="Select data format"
+	onClick={download}
+	{disabled}
+	{...$$restProps}
+>
 	<!-- contents of the button -->
 	<slot />
-</Button>
+</MultipleActionButton>
