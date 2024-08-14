@@ -35,11 +35,7 @@
 	/**
 	 * The currently selected `option`.
 	 */
-	export let state: Option | undefined = undefined;
-
-	if (!state) {
-		state = options.find((option) => option.default) ?? options[0];
-	}
+	export let state: Option = options.find((option) => option.default) ?? options[0];
 
 	/**
 	 * title that appears at the top ot the drop-down menu
