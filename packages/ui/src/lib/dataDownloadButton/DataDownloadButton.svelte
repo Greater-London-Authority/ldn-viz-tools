@@ -103,7 +103,7 @@
 <MultipleActionButton
 	{options}
 	bind:state={selectedOption}
-	menuTitle="Select image format"
+	menuTitle="Select data format"
 	onClick={download}
 	{disabled}
 	{...$$restProps}
