@@ -31,7 +31,7 @@
 		note="Be aware that you can provide a note if required"
 		dataDownloadButton={['JSON', 'CSV']}
 		data={[]}
-		imageDownloadButton={['PNG']}
+		imageDownloadButton
 	/>
 </Story>
 

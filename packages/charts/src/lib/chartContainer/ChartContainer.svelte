@@ -103,17 +103,16 @@
 	<div class={chartClass}>
 		<slot />
 	</div>
+
 	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
 		<Footer {source} {byline} {note}>
-			{#if (dataDownloadButton && data) || imageDownloadButton}
-				<ExportBtns
-					{chartToCapture}
-					dataForDownload={data}
-					{dataDownloadButton}
-					{imageDownloadButton}
-					slot="exportBtns"
-				/>
-			{/if}
+			<ExportBtns
+				{chartToCapture}
+				dataForDownload={data}
+				{dataDownloadButton}
+				{imageDownloadButton}
+				slot="exportBtns"
+			/>
 		</Footer>
 	{/if}
 </div>

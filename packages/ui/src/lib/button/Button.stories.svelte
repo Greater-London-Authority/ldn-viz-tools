@@ -98,6 +98,10 @@
 		<Button size="sm">sm</Button>
 		<Button size="md">md</Button>
 		<Button size="lg">lg</Button>
+		<Button variant="outline" title="Down" emphasis="primary">Down</Button>
+
+		<Button variant="outline" title="Down" emphasis="secondary">Down</Button>
+		<Button emphasis="secondary">Down</Button>
 	</div>
 </Story>
 

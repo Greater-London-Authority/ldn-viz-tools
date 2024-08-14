@@ -62,7 +62,7 @@
 		onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
 		{...args}
 		emphasis="secondary"
-		variant="text"
+		variant="outline"
 		size="sm"
 	>
 		<svelte:fragment slot="beforeLabel">
