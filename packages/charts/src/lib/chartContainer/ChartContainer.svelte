@@ -29,16 +29,42 @@
 	export let alt = '';
 
 	/**
-	 * Object specifying what appears in the footer:
+	 * What appears in the footer:
 	 *
 	 * * `byline` (string) - statement of who created the visualization
 	 * * `source` (string) - statement of where the data came from
 	 * * `note` (string) - any additional footnotes
-	 * * `exportBtns` (boolean) - if `false`, then data/image download buttons will be hidden
 	 */
-	export let footer:
-		| { byline?: string; source?: string; note?: string; exportBtns: boolean }
-		| undefined = { exportBtns: true };
+	export let source = '';
+
+	export let byline = '';
+
+	export let note = '';
+
+	/**
+	 * Data Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 *
+	 */
+	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
+
+	/**
+	 * The Data passed to the data Download Button(s) in the footer
+	 */
+	export let data: { [key: string]: any }[] | undefined = undefined;
+
+	/**
+	 * Image Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 *
+	 */
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
 	/**
 	 * Tailwind class to set chart area height
@@ -52,11 +78,6 @@
 	 * Tailwind class to set overall chart width
 	 */
 	export let chartWidth = 'w-full';
-
-	/**
-	 * Data being visualized (as an array of objects), to be used by data download button.
-	 */
-	export let data: { [key: string]: any }[] | undefined = undefined;
 
 	// For save as image
 	let chartToCapture: HTMLDivElement;
@@ -82,14 +103,22 @@
 	<div class={chartClass}>
 		<slot />
 	</div>
-	{#if footer}
-		<Footer {...footer}>
-			<ExportBtns {chartToCapture} data slot="exportBtns" />
+	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
+		<Footer {source} {byline} {note}>
+			{#if (dataDownloadButton && data) || imageDownloadButton}
+				<ExportBtns
+					{chartToCapture}
+					dataForDownload={data}
+					{dataDownloadButton}
+					{imageDownloadButton}
+					slot="exportBtns"
+				/>
+			{/if}
 		</Footer>
 	{/if}
 </div>
 
-<style>
+<style lang="postcss">
 	.chart-container {
 		@apply flex flex-col;
 	}

@@ -2,7 +2,6 @@
 	export let byline = '';
 	export let source = '';
 	export let note = '';
-	export let exportBtns = false;
 </script>
 
 <div class="w-full flex flex-col sm:flex-row justify-between mt-1">
@@ -13,7 +12,7 @@
 			{#if note}<li><span class="font-bold mr-1">Note:</span>{note}</li>{/if}
 		</ul>
 	{/if}
-	{#if $$slots.exportBtns && exportBtns}
+	{#if $$slots.exportBtns}
 		<slot name="exportBtns" />
 	{/if}
 </div>

@@ -26,12 +26,12 @@
 	<ChartContainer
 		title="This is the Chart Title"
 		subTitle="Subtitle provides extra context"
-		footer={{
-			source: 'The source of this chart data',
-			byline: 'A byline for the chart',
-			note: 'Be aware that you can provide a note if required',
-			exportBtns: true
-		}}
+		source="The source of this chart data"
+		byline="A byline for the chart"
+		note="Be aware that you can provide a note if required"
+		dataDownloadButton={['JSON', 'CSV']}
+		data={[]}
+		imageDownloadButton={['PNG']}
 	/>
 </Story>
 
@@ -45,11 +45,11 @@
 		overrideClass="bg-color-palette-red-500"
 		title="This is the Chart Title"
 		subTitle="Subtitle provides extra context"
-		footer={{
-			source: 'The source of this chart data',
-			byline: 'A byline for the chart',
-			note: 'Be aware that you can provide a note if required',
-			exportBtns: true
-		}}
+		source="The source of this chart data"
+		byline="A byline for the chart"
+		note="Be aware that you can provide a note if required"
+		dataDownloadButton={['JSON', 'CSV']}
+		data={[]}
+		imageDownloadButton={['PNG']}
 	/>
 </Story>
