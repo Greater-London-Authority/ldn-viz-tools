@@ -5,6 +5,7 @@
 	 */
 
 	import html2canvas from 'html2canvas';
+	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 
 	/**
@@ -165,7 +166,7 @@
 		}
 	};
 
-	let options = [];
+	let options: Option[] = [];
 	$: {
 		if (formats.includes('PNG')) {
 			options.push({
@@ -188,7 +189,7 @@
 		}
 	}
 
-	let selectedOption;
+	let selectedOption: Option;
 
 	$: format = selectedOption?.id ?? 'PNG';
 </script>

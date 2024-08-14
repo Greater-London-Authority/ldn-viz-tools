@@ -4,6 +4,7 @@
 	 * @component
 	 */
 
+	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 
 	import { csvFormat } from 'd3-dsv';
@@ -75,7 +76,7 @@
 
 	$: download = format === 'JSON' ? downloadJSON : downloadCSV;
 
-	let options = [];
+	let options: Option[] = [];
 	$: {
 		if (formats.includes('CSV')) {
 			options.push({
@@ -96,7 +97,7 @@
 		}
 	}
 
-	let selectedOption;
+	let selectedOption: Option;
 	$: format = selectedOption?.id ?? 'CSV';
 </script>
 

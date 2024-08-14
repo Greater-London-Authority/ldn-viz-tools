@@ -1,3 +1,13 @@
+<script lang="ts" context="module">
+	export type Option = {
+		id: string;
+		buttonLabel: string;
+		menuLabel: string;
+		menuDescription: string;
+		default?: boolean;
+	};
+</script>
+
 <script lang="ts">
 	/**
 	 * The `MultipleActionButton` combines a button and popover menu, so that the user can select which action
@@ -11,14 +21,6 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
-
-	type Option = {
-		id: string;
-		buttonLabel: string;
-		menuLabel: string;
-		menuDescription: string;
-		default?: boolean;
-	};
 
 	/**
 	 * Array of options that appear in the drop-down menu. Each is defined by an object with the following properties:
