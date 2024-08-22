@@ -16,7 +16,10 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.27.1",
-    "html2canvas": "^1.4.1"
+    "@svelte-plugins/datepicker": "^1.0.9",
+    "date-fns": "^3.6.0",
+    "html2canvas": "^1.4.1",
+    "svelte": "^4.2.18"
   },
   "devDependencies": {
     "@ldn-viz/eslint-config-custom": "*",
