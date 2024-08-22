@@ -81,7 +81,7 @@ export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage
 export { default as Theme } from './themeSwitcher/Theme.svelte';
 export * from './themeSwitcher/themeStore';
 export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
-export * from './themeSwitcher/ThemeUtil';
+export { default as ThemeUtil } from './themeSwitcher/ThemeUtil';
 
 export * from './uniformInput/types';
 export { default as UniformInput } from './uniformInput/UniformInput.svelte';
