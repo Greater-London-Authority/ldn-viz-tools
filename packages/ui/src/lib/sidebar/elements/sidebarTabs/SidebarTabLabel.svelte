@@ -1,3 +1,33 @@
+<script lang="ts" context="module">
+	import { get } from 'svelte/store';
+
+	/**
+	 * The default function called when a user clicks on a `TabLabel`.
+	 */
+	export const handleSelection = (
+		sidebarIsOpen: Writable<boolean>,
+		sidebarAlwaysOpen: Writable<'true' | 'false'>,
+		selectedValue: Writable<string>,
+		tabId: string
+	) => {
+		if (get(sidebarIsOpen) === false) {
+			// if we're collapsed, clicking any tab label will open that tab
+			sidebarIsOpen.set(true);
+			selectedValue.set(tabId);
+		} else if (get(selectedValue) === tabId) {
+			// The sidebarAlways open context is provided by the app shell
+			if (get(sidebarAlwaysOpen) === 'false' || get(sidebarAlwaysOpen) === undefined) {
+				// if we're expanded, clicking the currently selected tab label triggers collapse
+				sidebarIsOpen.set(false);
+				selectedValue.set('');
+			}
+		} else {
+			// if we're expanded, clicking a different tab label switched tab
+			selectedValue.set(tabId);
+		}
+	};
+</script>
+
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
@@ -19,27 +49,14 @@
 	// Context provided by wrapping component to force always open
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
 
-	const handleSelection = () => {
-		if ($sidebarIsOpen === false) {
-			// if we're collapsed, clicking any tab label will open that tab
-			$sidebarIsOpen = true;
-			$selectedValue = tabId;
-		} else if ($selectedValue === tabId) {
-			// The sidebarAlways open context is provided by the app shell
-			if ($sidebarAlwaysOpen === 'false' || $sidebarAlwaysOpen === undefined) {
-				// if we're expanded, clicking the currently selected tab label triggers collapse
-				$sidebarIsOpen = false;
-				$selectedValue = '';
-			}
-		} else {
-			// if we're expanded, clicking a different tab label switched tab
-			$selectedValue = tabId;
-		}
-	};
+	/**
+	 * Function called when user clicks on a tab label.
+	 */
+	export let selectionHandler = handleSelection;
 
 	const keydownHandler = (ev: KeyboardEvent) => {
 		if (ev.key === 'Enter' || ev.key === ' ') {
-			handleSelection();
+			selectionHandler(sidebarIsOpen, sidebarAlwaysOpen, selectedValue, tabId);
 		}
 	};
 
@@ -57,7 +74,7 @@
 </script>
 
 <div
-	on:click={handleSelection}
+	on:click={() => selectionHandler(sidebarIsOpen, sidebarAlwaysOpen, selectedValue, tabId)}
 	on:keydown={keydownHandler}
 	tabindex="0"
 	role="tab"

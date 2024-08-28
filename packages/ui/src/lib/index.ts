@@ -24,6 +24,7 @@ export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
 export { default as Modal } from './modal/Modal.svelte';
+export { default as MultipleActionButton } from './multipleActionButton/MultipleActionButton.svelte';
 export { default as NonIdealState } from './nonIdealState/NonIdealState.svelte';
 export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
 export { default as Popover } from './popover/Popover.svelte';

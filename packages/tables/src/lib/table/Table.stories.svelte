@@ -119,6 +119,15 @@
 	<Table {data} {tableSpec} exportBtns />
 </Story>
 
+<Story name="Export buttons - relabel columns" source>
+	<Table
+		{data}
+		{tableSpec}
+		exportBtns
+		columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
+	/>
+</Story>
+
 <Story name="Row Grouping" source>
 	<Table {data} {tableSpec} allowRowGrouping />
 </Story>

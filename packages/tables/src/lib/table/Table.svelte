@@ -89,8 +89,12 @@
 	 */
 	export let allowSorting = false;
 
-	let rows = [];
-	const onRowsChange = (groups, rows) => {
+	/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+	 */
+	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
+
+	const onRowsChange = () => {
 		table = table; // eslint-disable-line no-self-assign
 	};
 
@@ -158,7 +162,7 @@
 		{/if}
 	</div>
 
-	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data}>
+	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data} {columnMapping}>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
 			<div class="border-t border-b border-color-ui-border-primary" style:width={tableWidth}>
 				{#if tableSpec.colGroups}

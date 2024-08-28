@@ -1,10 +1,11 @@
 <script>
 	/**
 	 * The `<MapLayerSourceGeoJSON>` component is a specialised
-	 * `<MapLayerSource>` for local or remote GeoJSON data.
+	 * `<MapLayerSource>` for local or remote GeoJSON data. The GeoJSON data is
+	 * available and updatable by binding on the `dataStore` property.
 	 *
-	 * The mapped GeoJSON is available by binding on the `geojsonStore` property
-	 * and as an argument in the `onLoad` function.
+	 * If `url` is set, result of a data fetch will be passed to the
+	 * `onLoad` function, otherwise the value of `initialData` will be passed.
 	 * @component
 	 */
 
@@ -26,24 +27,25 @@
 	export let url = '';
 
 	/**
-	 * GeoJSON data. This data is used as the initial GeoJSON. It will be
-	 * overwritten by the results of a fetch via the provided url (if a url
-	 * is provided).
+	 * Initial GeoJSON data. It will be overwritten by the results of a fetch
+	 * via the provided url (if a url is provided).
 	 */
-	export let data = {
+	export let initialData = {
 		type: 'FeatureCollection',
 		features: []
 	};
 
 	/**
+	 * A store holding the mapped GeoJSON data. The store is updated when updated
+	 * via a remote source. The store is two way so data pushed into the store
+	 * is applied to the map.
+	 */
+	export const dataStore = writable(initialData);
+
+	/**
 	 * Applies any transformations to the GeoJSON before it's added to the map.
 	 */
 	export let transform = (geojson) => geojson;
-
-	/**
-	 * A readonly store holding the raw GeoJSON data.
-	 */
-	export const geojsonStore = writable(data);
 
 	/**
 	 * Called when the source is added to the map. The raw geojson can be
@@ -58,8 +60,8 @@
 	/**
 	 * Called when the source is removed from the map. The function accepts an
 	 * object with the following fields:
-	 * - id: ID of the layer source.
-	 * - spec: MapLibre specification used to initialise the layer.
+	 * - **id**: ID of the layer source.
+	 * - **spec**: MapLibre specification used to initialise the layer.
 	 */
 	export let onUnload = null;
 
@@ -72,9 +74,13 @@
 	 */
 	export let onError = null;
 
+	let loaded = false;
+
 	const internalLoad = (ctx) => {
+		loaded = true;
+
 		if (!url) {
-			onLoad && onLoad({ ...ctx, geojson: data });
+			onLoad && onLoad({ ...ctx, geojson: initialData });
 			return;
 		}
 
@@ -90,8 +96,7 @@
 				return transform ? transform(geojson) : geojson;
 			})
 			.then((geojson) => {
-				$mapStore.getSource(id).setData(geojson);
-				geojsonStore.set(geojson);
+				dataStore.set(geojson);
 				return geojson;
 			})
 			.then((geojson) => {
@@ -108,18 +113,30 @@
 	};
 
 	const internalUnload = (ctx) => {
-		geojsonStore.set(null);
+		loaded = false;
+		dataStore.set(null);
+
 		if (onUnload) {
 			onUnload(ctx);
 		}
 	};
+
+	const updateData = (geojson) => {
+		if (!loaded) {
+			return;
+		}
+
+		$mapStore.getSource(id).setData(geojson);
+	};
+
+	$: updateData($dataStore);
 </script>
 
 <MapLayerSource
 	{id}
 	spec={{
 		type: 'geojson',
-		data
+		data: initialData
 	}}
 	onLoad={internalLoad}
 	onUnload={internalUnload}

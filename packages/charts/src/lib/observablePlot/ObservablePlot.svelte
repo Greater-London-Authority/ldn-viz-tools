@@ -93,7 +93,7 @@
 	/**
 	 * Data being visualized (as an array of objects), to be used by data download button.
 	 */
-	export let data: any[] = [];
+	export let data: { [key: string]: any }[] = [];
 
 	/**
 	 * Title that is displayed in large text above the plot.
@@ -116,21 +116,37 @@
 	export let chartWidth = '';
 
 	/**
-	 * Object specifying what appears in the footer:
+	 * What appears in the footer:
 	 *
 	 * * `byline` (string) - statement of who created the visualization
 	 * * `source` (string) - statement of where the data came from
 	 * * `note` (string) - any additional footnotes
-	 * * `exportBtns` (boolean) - if `false`, then data/image download buttons will be hidden
 	 */
-	export let footer:
-		| {
-				byline?: string | undefined;
-				source?: string | undefined;
-				note?: string | undefined;
-				exportBtns: boolean;
-		  }
-		| undefined = undefined;
+	export let source = '';
+
+	export let byline = '';
+
+	export let note = '';
+
+	/**
+	 * Data Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 *
+	 */
+	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
+
+	/**
+	 * Image Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 *
+	 */
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
 	/**
 	 * Provides a way to access the DOM node into which the visualization is rendered.
@@ -180,7 +196,11 @@
 		{title}
 		{subTitle}
 		{alt}
-		{footer}
+		{source}
+		{note}
+		{byline}
+		{dataDownloadButton}
+		{imageDownloadButton}
 		{...$$restProps}
 		chartHeight={'h-fit'}
 		{chartWidth}
@@ -205,3 +225,9 @@
 		{/if}
 	</ChartContainer>
 {/key}
+
+<style>
+	:global(.defaultColorLegendLabel-swatch) {
+		font-size: 1rem;
+	}
+</style>
