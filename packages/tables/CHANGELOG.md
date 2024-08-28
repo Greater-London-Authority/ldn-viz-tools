@@ -1,5 +1,22 @@
 # @ldn-viz/tables
 
+## 1.1.0
+
+### Minor Changes
+
+- 2fb99f4: ADDED: added `columnMapping` prop to `Table` component, to allow columns to be renamed before data download
+
+### Patch Changes
+
+- Updated dependencies [f11222c]
+- Updated dependencies [2fb99f4]
+- Updated dependencies [38ac6b1]
+- Updated dependencies [fc08482]
+- Updated dependencies [09e55ec]
+- Updated dependencies [f11222c]
+  - @ldn-viz/charts@3.1.0
+  - @ldn-viz/ui@14.0.0
+
 ## 1.0.0
 
 ### Major Changes

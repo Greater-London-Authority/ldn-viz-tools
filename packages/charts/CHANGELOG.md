@@ -1,5 +1,20 @@
 # ldn-viz-tools-charts
 
+## 3.1.0
+
+### Minor Changes
+
+- f11222c: CHANGED: update design of `ChartContainer` component, and refactor props that specify the footer
+- 2fb99f4: ADDED: added `columnMapping` prop to `ExportBtns` component, to allow columns to be renamed before data download
+
+### Patch Changes
+
+- Updated dependencies [38ac6b1]
+- Updated dependencies [fc08482]
+- Updated dependencies [09e55ec]
+- Updated dependencies [f11222c]
+  - @ldn-viz/ui@14.0.0
+
 ## 3.0.0
 
 ### Major Changes
