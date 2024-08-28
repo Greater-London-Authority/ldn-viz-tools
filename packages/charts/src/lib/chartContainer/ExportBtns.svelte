@@ -5,36 +5,24 @@
 
 	export let chartToCapture: HTMLDivElement;
 	export let data: any;
+
+	/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
+	 */
+	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 </script>
 
 <div
-	class="flex flex-col sm:flex-row shrink-0 sm:ml-auto sm:self-end capture-ignore"
+	class="flex flex-col sm:flex-row shrink-0 sm:ml-auto sm:self-end capture-ignore gap-2"
 	data-html2canvas-ignore
 >
 	<DataDownloadButton
 		{data}
-		filename="download.csv"
-		format="CSV"
-		variant="text"
-		emphasis="secondary"
-		size="sm"
+		{columnMapping}
+		filename="download"
+		formats={["CSV", "JSON"]}
 	>
-		Download as CSV <Icon
-			src={ArrowDownTray}
-			theme="mini"
-			class="w-5 h-5 ml-2"
-			aria-hidden="true"
-		/>
-	</DataDownloadButton>
-	<DataDownloadButton
-		{data}
-		filename="download.json"
-		format="JSON"
-		variant="text"
-		emphasis="secondary"
-		size="sm"
-	>
-		Download as JSON<Icon
+		Download <Icon
 			src={ArrowDownTray}
 			theme="mini"
 			class="w-5 h-5 ml-2"
@@ -43,11 +31,8 @@
 	</DataDownloadButton>
 
 	<ImageDownloadButton
-		format="PNG"
+		formats={["PNG"]}
 		htmlNode={chartToCapture}
-		variant="text"
-		emphasis="secondary"
-		size="sm"
 	>
 		Save as image<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
 	</ImageDownloadButton>
