@@ -126,7 +126,7 @@
 			return;
 		}
 
-		$mapStore //
+		$mapStore
 			.getSource(id)
 			.setData(geojson);
 	};
