@@ -24,9 +24,12 @@
 	let alignmentClass;
 	$: alignmentClass = alignmentClasses[alignText ?? 'center'];
 
-	$: textColor = contextVals.length > 0 && !contextVals[0] ? 'rgb(134, 139, 142)' : 'black';
+	$: textColor =
+		contextVals.length > 0 && !contextVals[0]
+			? 'text-color-text-secondary'
+			: 'text-color-text-primary';
 </script>
 
 <div class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>
-	<span style:color={textColor}>{formatString ? f(value) : value}</span>
+	<span class={textColor}>{formatString ? f(value) : value}</span>
 </div>

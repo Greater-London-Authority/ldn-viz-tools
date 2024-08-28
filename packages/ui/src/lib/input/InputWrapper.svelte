@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Tooltip } from '@ldn-viz/ui';
+	import Tooltip from '../tooltip/Tooltip.svelte';
 	import { classNames } from '../utils/classNames';
 
 	export let label = '';
@@ -19,22 +19,22 @@
 	export let optional = false;
 
 	$: descriptionClass = classNames(
-		error ? 'text-core-red-400 dark:text-core-red-400' : '',
+		error ? '!text-color-input-label-error' : '',
+		disabled ? 'text-color-input-label-disabled' : '',
 		descriptionAlignment === 'left'
-			? 'text-core-grey-500 dark:text-core-grey-200'
-			: 'ml-auto text-core-grey-400 dark:text-core-grey-300',
+			? 'text-color-input-label-secondary'
+			: 'ml-auto text-color-input-label-secondary',
 		'text-sm'
 	);
 
 	$: labelClasses = classNames(
-		error ? 'text-core-red-400 dark:text-core-red-400' : '',
-		disabled ? 'text-core-grey-300 dark:text-core-grey-400' : '',
-		'form-label',
-		'font-medium'
+		error ? 'text-color-input-label-error' : '',
+		disabled ? 'text-color-input-label-disabled' : '',
+		'form-label'
 	);
 </script>
 
-<div class="flex flex-col space-y-2">
+<div class="flex flex-col space-y-1">
 	<div class="flex justify-between [&>div]:text-sm">
 		{#if label}
 			<label for={id} class={labelClasses}>

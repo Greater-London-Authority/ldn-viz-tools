@@ -12,10 +12,10 @@
 
 	const getConditionColorClasses = (condition: string): string => {
 		const conditionClasses = {
-			default: 'stroke-core-blue-600',
-			success: 'stroke-core-green-500',
-			error: 'stroke-core-red-500',
-			warning: 'stroke-core-orange-500'
+			default: 'stroke-color-ui-primary',
+			success: 'stroke-color-ui-positive',
+			error: 'stroke-color-ui-negative',
+			warning: 'stroke-color-ui-warning'
 		};
 
 		return conditionClasses[condition];
@@ -24,9 +24,9 @@
 	const getDynamicSpinnerClasses = (size: string, variant: string): string => {
 		switch (size) {
 			case 'sm':
-				return 'w-6 h-6 stroke-[12]';
+				return 'w-6 h-6 stroke-[10]';
 			case 'md':
-				return 'w-7 h-7 stroke-[10]';
+				return 'w-6 h-6 stroke-[10]';
 			case 'lg':
 				return variant === 'square' ? 'w-10 h-10 stroke-[10]' : 'w-8 h-8 stroke-[10]';
 			default:
@@ -123,7 +123,7 @@
 		<div class="relative">
 			<Spinner
 				arcColorClass={conditionColorClasses}
-				class="absolute inset-0 mx-auto my-auto stroke-[10] {dynamicSpinnerClasses}"
+				class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
 			/>
 			<!-- This gives the outer div the correct size so the spinner is centered -->
 			<span class="invisible">

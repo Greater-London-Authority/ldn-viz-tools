@@ -30,6 +30,8 @@
 
 	/**
 	 * The `type` of the `<input>` element (see [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)).
+	 *
+	 * Additionally, passing `textarea` will render a `<textarea>` instead of an `<input>`.
 	 */
 	export let type = 'text';
 
@@ -57,6 +59,11 @@
 	 * Text that appears below the `<input>` element, in smaller font than the `label`.
 	 */
 	export let description = '';
+
+	/**
+	 * Text that appears within the `<input>` element when no value is present.
+	 */
+	export let placeholder = '';
 
 	/**
 	 * Determines which edge of the `<input>` the description is aligned with.
@@ -129,7 +136,7 @@
 		value = format(value, {
 			name,
 			type,
-			disabled: !!$$restProps.disabled
+			disabled: !!disabled
 		});
 
 		// Protect from cyclic reactivity.
@@ -145,13 +152,12 @@
 
 	$: inputClasses = classNames(
 		'm-0',
-		error ? 'border-core-red-400 dark:border-core-red-400' : '',
-		$$restProps.disabled ? 'cursor-not-allowed ' : '',
-		'dark:bg-core-grey-600',
-		'dark:text-white',
-		'placeholder-core-grey-400',
-		'dark:placeholder-core-grey-300',
-		type === 'range' ? 'form-range' : 'form-input'
+		error ? 'border-color-input-border-error' : '',
+		disabled
+			? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
+			: '',
+		type === 'range' ? 'form-range' : 'form-input',
+		'placeholder-color-input-placeholder'
 	);
 </script>
 
@@ -180,6 +186,7 @@
 			{name}
 			{value}
 			{disabled}
+			{placeholder}
 			required={!optional}
 			aria-describedby={descriptionId}
 			aria-errormessage={errorId}
@@ -217,6 +224,7 @@
 			{name}
 			{value}
 			{disabled}
+			{placeholder}
 			required={!optional}
 			aria-describedby={descriptionId}
 			aria-errormessage={errorId}

@@ -89,7 +89,7 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import colors from '@ldn-viz/themes/colors.json';
@@ -98,6 +98,12 @@
 	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
 	import MapLayerView from '../../../mapLayerView/MapLayerView.svelte';
 	import testData from '../../../testData.json';
+
+	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+
+	const theme = (mode: 'light' | 'dark' = 'light') => {
+		return tokens.theme[mode];
+	};
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
@@ -196,8 +202,8 @@
 						type: 'fill',
 						filter: ['==', '$type', 'Polygon'],
 						paint: {
-							'fill-color': colors.core.green['500'],
-							'fill-outline-color': colors.core.green['800'],
+							'fill-color': theme().color.palette.green['500'],
+							'fill-outline-color': theme().color.palette.green['800'],
 							'fill-opacity': 0.6
 						}
 					}}
@@ -208,7 +214,7 @@
 						type: 'line',
 						filter: ['==', '$type', 'LineString'],
 						paint: {
-							'line-color': colors.core.darkPink['400'],
+							'line-color': theme().color.palette.darkpink['400'],
 							'line-width': 4,
 							'line-opacity': 0.8
 						},
@@ -224,7 +230,7 @@
 						type: 'circle',
 						filter: ['==', '$type', 'Point'],
 						paint: {
-							'circle-color': colors.core.blue['700'],
+							'circle-color': theme().color.palette.blue['700'],
 							'circle-radius': 6,
 							'circle-stroke-width': 1,
 							'circle-stroke-color': '#000'

@@ -19,7 +19,7 @@
 	import Summary from '../../core/aggregateRenderers/Summary.svelte';
 	import ViolinPlot from '../../core/aggregateRenderers/ViolinPlot.svelte';
 	import Histogram from '../../core/aggregateRenderers/Histogram.svelte';
-	import PopoverMenu from './PopoverMenu.svelte';
+	import { Popover } from '@ldn-viz/ui';
 
 	export let col;
 
@@ -118,8 +118,8 @@
 	$: setColumnEncoding(selectedColumnEncoding);
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
+<Popover>
+	<svelte:fragment slot="hint">
 		<Icon src={ChartBar} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
 
 		<span class="sr-only">Open Popover</span>
@@ -150,4 +150,4 @@
 		bind:selectedId={selectedColumnEncoding}
 		buttonsHidden
 	/>
-</PopoverMenu>
+</Popover>

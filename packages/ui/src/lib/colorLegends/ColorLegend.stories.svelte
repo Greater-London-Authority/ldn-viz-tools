@@ -62,7 +62,9 @@
 <Story name="Default" />
 
 <Story name="Sequential color scale">
-	<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
+	<div>
+		<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
+	</div>
 </Story>
 
 <Story name="Sequential color scale - highlighted value">

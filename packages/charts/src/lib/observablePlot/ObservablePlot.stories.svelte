@@ -17,28 +17,17 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
+	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
-	import { ldnColors, theme } from '@ldn-viz/utils';
-	import { penguins } from './exampleData';
-
+	import { currentThemeMode } from '@ldn-viz/ui';
 	import {
-		defaultAnnotationText,
-		defaultArea,
-		defaultColor,
-		defaultDot,
-		defaultLine,
-		defaultRule,
-		defaultSize,
-		defaultStyle,
-		defaultXAxis,
-		defaultXScale,
-		defaultYAxis,
-		defaultYScale,
+		getDefaultPlotStyles,
+		plotTheme,
 		preprocessOptions
 	} from '../observablePlotFragments/observablePlotFragments';
 
@@ -47,38 +36,136 @@
 		areaPlotPointsToLabel,
 		educationLabelOffsets,
 		education_data,
-		lineChartData
-	} from './demo_data';
+		lineChartData,
+		material_deprivation_data,
+		penguins
+	} from '../../data/demoData';
 
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';
+	import type { Position } from './types';
 
-	const spec = {
+	$: ({
+		defaultArea,
+		defaultColor,
+		defaultDot,
+		defaultGridX,
+		defaultGridY,
+		defaultSize,
+		defaultStyle,
+		defaultTip,
+		defaultLine,
+		defaultXAxis,
+		defaultXScale,
+		defaultYAxis,
+		defaultYScale,
+		defaultRule,
+		defaultAnnotationText
+	} = getDefaultPlotStyles($currentThemeMode));
+
+	$: spec = {
 		style: {
 			...defaultStyle
 		},
 
 		...defaultSize,
 
-		x: {
-			...defaultXScale
-		},
+		x: { ...defaultXScale },
 
-		y: {
-			...defaultYScale
-		},
+		y: { ...defaultYScale },
 
 		marks: [
-			Plot.ruleY([0], { stroke: '#666666' }),
-			Plot.ruleX([0], { stroke: '#666666' }),
-			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+			Plot.gridX({ ...defaultGridX }),
+			Plot.gridY({ ...defaultGridY }),
+			Plot.ruleY([0], { ...defaultRule }),
+			Plot.ruleX([0], { ...defaultRule }),
+			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
+			Plot.axisX({ ...defaultXAxis }),
+			Plot.axisY({ ...defaultYAxis, label: 'culmen_depth_mm' }),
+			Plot.tip(
+				penguins,
+				Plot.pointerX({ ...defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+			)
 		]
 	};
 
-	let clickedValue = undefined;
-	let clickedIndex = undefined;
+	$: mbBarSpec = {
+		y: {
+			...defaultYScale,
+			label: ''
+		},
 
-	const tooltipStore = writable();
+		x: {
+			...defaultXScale,
+			domain: [0, 20],
+			insetLeft: 0 // adjusting to fit y axis labels of this chart
+		},
+
+		color: {
+			...defaultColor,
+			range: [
+				plotTheme($currentThemeMode).color.data.primary,
+				plotTheme($currentThemeMode).color.data.context
+			]
+		},
+
+		style: {
+			...defaultStyle
+		},
+
+		...defaultSize,
+		marginLeft: 200,
+		marginRight: 60,
+
+		marks: [
+			// grid marks
+			Plot.gridX({ ...defaultGridX, ticks: 5 }),
+
+			Plot.barX(material_deprivation_data, {
+				x: 'Pensioners',
+				y: 'Region',
+				fill: 'Area',
+				sort: { y: 'x', reverse: true }
+			}),
+
+			Plot.textX(material_deprivation_data, {
+				x: 'Pensioners',
+				y: 'Region',
+				fill: 'Area',
+				dx: 4,
+				textAnchor: 'start',
+				text: (d) => `${d.Pensioners}%`,
+				sort: { y: 'x', reverse: true }
+			}),
+
+			// // axis x
+			Plot.axisX({
+				...defaultXAxis,
+				label: 'Percentage of Pensioners',
+				tickFormat: (d) => `${d}%`,
+				ticks: 5
+			}),
+
+			// 0 baseline
+			Plot.ruleX([0], { ...defaultRule }), // Q: Should we always place a 0 baseline in the default chart (if range is not starting at 0, it won't be shown anyway)
+
+			// data tool tip - last to display
+			Plot.tip(
+				material_deprivation_data,
+				Plot.pointerY({
+					...defaultTip,
+					x: 'Pensioners',
+					y: 'Region',
+					title: (d) => [d.Region, `${d.Pensioners}%`].join('\n')
+				})
+			)
+		]
+	};
+
+	let clickedValue: any | undefined = undefined;
+	let clickedIndex: any | undefined = undefined;
+
+	const tooltipStore: Writable<Position> = writable();
 </script>
 
 <Template let:args>
@@ -108,7 +195,13 @@
 </Story>
 
 <Story name="With Aspect Ratio">
-	<ObservablePlot spec={{ ...spec, aspectRatio: 1 }} />
+	<ObservablePlot
+		spec={{
+			...spec,
+			height: undefined,
+			aspectRatio: 0.5
+		}}
+	/>
 </Story>
 
 <!--
@@ -122,14 +215,12 @@
 			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: '#666666' }),
-				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 				Plot.dot(penguins, {
 					...defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					stroke: 'black',
-					fill: 'white',
 					render: registerTooltip(tooltipStore),
 
 					/* need to expose as a channel before including in tooltip */
@@ -171,15 +262,13 @@
 		spec={{
 			...spec,
 			marks: [
-				Plot.ruleY([0], { stroke: '#666666' }),
-				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 				Plot.dot(penguins, {
 					...defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: registerTooltip(tooltipStore),
-					stroke: 'black',
-					fill: 'white'
+					render: registerTooltip(tooltipStore)
 				})
 			]
 		}}
@@ -198,40 +287,24 @@
 <Story name="With custom click interaction">
 	<ObservablePlot
 		spec={{
-			style: {
-				fontFamily: 'Roboto',
-				fontSize: '12pt',
-				color: '#666666'
-			},
-
-			grid: true,
-			marginBottom: 50,
-
-			x: {
-				labelAnchor: 'center',
-				labelArrow: 'none',
-				label: 'Culmen length/mm'
-			},
-
-			y: {
-				insetTop: 20,
-				labelArrow: 'none'
-			},
+			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: '#666666' }),
-				Plot.ruleX([0], { stroke: '#666666' }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 				Plot.dot(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: addEventHandler('click', (ev, d) => {
+					render: addEventHandler('click', (_ev, d) => {
 						clickedIndex = d.index;
 						clickedValue = penguins[d.index];
 					}),
-					stroke: 'black',
+					stroke: plotTheme($currentThemeMode).color.data.primary,
 					r: 5,
-					fill: (d, i) => {
-						return clickedIndex !== undefined && i === clickedIndex ? 'red' : 'white';
+					fill: (_d, i) => {
+						return clickedIndex !== undefined && i === clickedIndex
+							? plotTheme($currentThemeMode).color.data.secondary
+							: 'white';
 					}
 				})
 			]
@@ -323,7 +396,7 @@
 					filter: (d) => areaPlotPointsToLabel.includes(d.Year)
 				}),
 
-				Plot.ruleY([0], { stroke: theme.light.axis }),
+				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 
 				Plot.axisX({ ...defaultXAxis, tickFormat: (d) => `${d}`, ticks: 12 }),
 				Plot.axisY({ ...defaultYAxis, tickFormat: (d) => `${d}%` })
@@ -349,7 +422,10 @@
 
 			color: {
 				...defaultColor,
-				range: [theme.light.primary, theme.light.neutral]
+				range: [
+					plotTheme($currentThemeMode).color.data.primary,
+					plotTheme($currentThemeMode).color.data.neutral[0]
+				]
 			},
 
 			style: { ...defaultStyle },
@@ -426,9 +502,9 @@
 					y: 'Percent',
 					dy: -15,
 					textAnchor: 'end',
-					text: (d) => '(Index, 2019 Q4)',
+					text: () => '(Index, 2019 Q4)',
 					fontSize: '15px',
-					fill: (d) => 'black'
+					fill: () => 'black'
 				}),
 
 				Plot.dot(lineChartData, {
@@ -479,7 +555,10 @@
 
 			color: {
 				...defaultColor,
-				range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+				range: [
+					plotTheme($currentThemeMode).color.data.primary,
+					plotTheme($currentThemeMode).color.data.secondary
+				]
 			},
 			style: defaultStyle,
 
@@ -567,7 +646,10 @@
 
 				color: {
 					...defaultColor,
-					range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+					range: [
+						plotTheme($currentThemeMode).color.data.primary,
+						plotTheme($currentThemeMode).color.data.secondary
+					]
 				},
 				style: defaultStyle,
 
@@ -640,7 +722,10 @@
 
 				color: {
 					...defaultColor,
-					range: [ldnColors.core.blue[500], ldnColors.core.darkPink[500]]
+					range: [
+						plotTheme($currentThemeMode).color.data.primary,
+						plotTheme($currentThemeMode).color.data.secondary
+					]
 				},
 				style: defaultStyle,
 
@@ -711,4 +796,21 @@
 			data={education_data}
 		/>
 	</div>
+</Story>
+
+<Story name="Examples / mbBar">
+	<ObservablePlot
+		title="Material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK"
+		subTitle="Percentage of pensioners in material deprivation by region (2020/21-2022/23)"
+		alt="Bar chart of levels of material deprivation amongst pensioners in UK regions. Bars show that material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK. For example Inner London is 20% compared to West Midlands 9%, and Northern Ireland 4%."
+		spec={{
+			...mbBarSpec
+		}}
+		footer={{
+			byline: 'GLA City Intelligence',
+			source: 'London Datastore',
+			note: 'Data for illustrative purpose only',
+			exportBtns: true
+		}}
+	/>
 </Story>

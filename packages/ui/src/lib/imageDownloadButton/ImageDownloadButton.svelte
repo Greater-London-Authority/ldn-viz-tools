@@ -5,7 +5,8 @@
 	 */
 
 	import html2canvas from 'html2canvas';
-	import Button from '../button/Button.svelte';
+	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
+	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 
 	/**
 	 * A `SVGElement` node to be converted.
@@ -43,9 +44,10 @@
 	export let disabled = false;
 
 	/**
-	 * The image format of the downloaded file.
+	 * The available file formats for the downloaded image.
 	 */
-	export let format: 'PNG' | 'SVG' | undefined = 'PNG';
+	export let formats: ('PNG' | 'SVG')[] = ['PNG', 'SVG'];
+	let format = 'PNG';
 
 	const downloadFromURL = (url: string) => {
 		if (!filename) {
@@ -163,9 +165,45 @@
 			console.log('CMust supply either an svgNode or htmlNode to be converted to image');
 		}
 	};
+
+	let options: Option[] = [];
+	$: {
+		if (formats.includes('PNG')) {
+			options.push({
+				id: 'PNG',
+				buttonLabel: 'Download as PNG',
+				menuLabel: 'PNG',
+				menuDescription:
+					'A raster image format that can be widely read, but more difficult to edit.',
+				default: true
+			});
+		}
+		if (formats.includes('SVG')) {
+			options.push({
+				id: 'SVG',
+				buttonLabel: 'Download as SVG',
+				menuLabel: 'SVG',
+				menuDescription:
+					'A vector image format that can be edited in software such as Adobe Illustrator.'
+			});
+		}
+	}
+
+	let selectedOption: Option;
+
+	$: format = selectedOption?.id ?? 'PNG';
 </script>
 
-<Button on:click={download} {disabled} {...$$restProps}>
+<MultipleActionButton
+	{options}
+	bind:state={selectedOption}
+	menuTitle="Select image format"
+	onClick={download}
+	{disabled}
+	{...$$restProps}
+>
 	<!-- contents of the button -->
+	<svelte:fragment slot="beforeLabel"><slot name="beforeLabel" /></svelte:fragment>
 	<slot />
-</Button>
+	<svelte:fragment slot="afterLabel"><slot name="afterLabel" /></svelte:fragment>
+</MultipleActionButton>

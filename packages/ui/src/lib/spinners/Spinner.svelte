@@ -9,19 +9,17 @@
 	import { classNames } from '../utils/classNames';
 
 	/**
-	 * A TailwindCSS class (e.g., `stroke-core-blue-200`) to set the color of the background circle.
+	 * A Stroke color token (e.g., `stroke-color-palette-blue-200`) to set the color of the background circle.
 	 */
 	export let circleColorClass = '';
 
 	/**
-	 * A TailwindCSS class (e.g., `stroke-core-glaPink-600`) to set the color of the arc whose movement is animated.
+	 * A Stroke color token (e.g., `stroke-color-palette-pink-500`) to set the color of the arc whose movement is animated.
 	 */
 	export let arcColorClass = '';
 
-	$: circleClasses = classNames(
-		circleColorClass || 'stroke-core-grey-200 dark:stroke-core-grey-500'
-	);
-	$: pathClasses = classNames(arcColorClass || 'stroke-core-blue-600');
+	$: circleClasses = classNames(circleColorClass || 'stroke-color-ui-empty');
+	$: pathClasses = classNames(arcColorClass || 'stroke-color-ui-primary');
 </script>
 
 <svg

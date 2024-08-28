@@ -1,18 +1,22 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `<BoroughsContextLayer>` component is slotted into a `<Map>` to show
 	 * boroughs and their boundaries.
 	 * @component
 	 */
 
-	import colors from '@ldn-viz/themes/colors.json';
+	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
 	import MapLayerSource from '../../mapLayerSource/MapLayerSource.svelte';
 	import MapLayerView from '../../mapLayerView/MapLayerView.svelte';
+
+	const theme = (mode: 'light' | 'dark' = 'light') => {
+		return tokens.theme[mode];
+	};
 
 	/**
 	 * Color of borough borders.
 	 */
-	export let lineColor = colors.core.grey['500'];
+	export let lineColor = theme().color.ui.border.primary;
 
 	/**
 	 * Opacity of borough borders between 0 and 1.
@@ -27,7 +31,7 @@
 	/**
 	 * Color of borough fill.
 	 */
-	export let fillColor = colors.core.grey['500'];
+	export let fillColor = theme().color.ui.border.primary;
 
 	/**
 	 * Opacity of borough fill between 0 and 1.
