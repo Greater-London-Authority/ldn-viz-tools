@@ -24,7 +24,7 @@
 	{href}
 	target={newWindow ? '_blank' : '_self'}
 	rel={newWindow ? 'noopener noreferrer' : ''}
-	class="bg-core-grey-700 group hover:bg-core-grey-800 transition h-full flex flex-col text-white"
+	class="bg-color-action-secondary-100 group hover:bg-color-action-secondary-100-hover transition h-full flex flex-col text-color-text-primary"
 >
 	<div class="p-4 h-full space-y-2">
 		{#if $$slots.title}
@@ -35,14 +35,14 @@
 		{/if}
 
 		{#if $$slots.body}
-			<div class="h-full text-core-grey-100 prose leading-snug">
+			<div class="h-full text-color-text-primary prose leading-snug">
 				<!-- longer description text displayed below the title in smaller font -->
 				<slot name="body" />
 			</div>
 		{/if}
 	</div>
 	<div
-		class="bg-core-grey-600 group-hover:bg-core-blue-600 dark:group-hover:bg-core-blue-600 p-4 mt-4 flex justify-between transition"
+		class="bg-color-action-background-secondary group-hover:bg-color-action-secondary-hover px-4 py-2 mt-4 flex justify-between transition"
 	>
 		<!-- text displayed at bottom of button, vertically aligned with icon-->
 		<slot name="footer" />

@@ -74,104 +74,121 @@
 		brand: {
 			primary: {
 				default:
-					'bg-core-grey-600 text-white pb-1 border-b-4 border-core-blue-500 hover:bg-core-grey-500 dark:bg-core-grey-50 dark:text-core-grey-800 dark:hover:bg-core-grey-200',
+					'bg-color-ui-background-inverse-primary text-color-text-inverse-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-primary-hover',
 				success:
-					'bg-core-green-500 text-white pb-1 border-b-4 border-core-green-800 hover:bg-core-green-700',
+					'bg-color-action-background-positive text-color-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-positive-hover',
 				error:
-					'bg-core-red-500 text-white pb-1 border-b-4 border-core-red-800 hover:bg-core-red-700',
+					'bg-color-action-background-negative text-color-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-negative-hover',
 				warning:
-					'bg-core-orange-500 text-white pb-1 border-b-4 border-core-orange-800 hover:bg-core-orange-700'
+					'bg-color-action-background-warning text-color-static-white pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-warning-hover'
 			},
 			secondary: {
 				default:
-					'bg-core-grey-50 core-text-grey-800 pb-1 border-b-4 border-core-blue-500 hover:bg-core-grey-100 dark:bg-core-grey-800 dark:text-white dark:hover:bg-core-grey-500',
+					'bg-color-ui-background-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-secondary-hover',
 				success:
-					'bg-core-green-50 core-text-grey-800 pb-1 border-b-4 border-core-green-500 hover:bg-core-green-100 dark:bg-core-green-800 dark:text-white dark:hover:bg-core-green-700',
+					'bg-color-action-background-positive-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-core-red-50 core-text-grey-800 pb-1 border-b-4 border-core-red-500 hover:bg-core-red-100 dark:bg-core-red-800 dark:text-white dark:hover:bg-core-red-700',
+					'bg-color-action-background-negative-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-core-orange-50 core-text-grey-800 pb-1 border-b-4 border-core-orange-500 hover:bg-core-orange-100 dark:bg-core-orange-800 dark:text-white dark:hover:bg-core-orange-700'
+					'bg-color-action-background-warning-secondary text-color-text-primary pb-1 border-b-4 border-color-static-brand hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		square: {
 			primary: {
 				default:
-					'bg-core-blue-600 text-white hover:bg-core-blue-700 dark:bg-core-grey-50 dark:text-core-grey-800 dark:hover:bg-core-grey-200',
-				success: 'bg-core-green-500 text-white hover:bg-core-green-700',
-				error: 'bg-core-red-500 text-white hover:bg-core-red-700',
-				warning: 'bg-core-orange-500 text-white hover:bg-core-orange-700'
+					'bg-color-action-background-primary text-color-static-white hover:bg-color-action-background-primary-hover',
+				success:
+					'bg-color-action-background-positive text-color-static-white hover:bg-color-action-background-positive-hover',
+				error:
+					'bg-color-action-background-negative text-color-static-white hover:bg-color-action-background-negative-hover',
+				warning:
+					'bg-color-action-background-warning text-color-static-white hover:bg-color-action-background-warning-hover'
 			},
 			secondary: {
 				default:
-					'bg-core-grey-800 text-white hover:bg-core-grey-500 dark:bg-core-grey-50 dark:text-core-grey-800 dark:hover:bg-core-grey-200',
-				success: 'bg-core-green-500 text-white hover:bg-core-green-700',
-				error: 'bg-core-red-500 text-white hover:bg-core-red-700',
-				warning: 'bg-core-orange-500 text-white hover:bg-core-orange-700'
+					'bg-color-action-background-secondary text-color-text-primary hover:bg-color-action-background-secondary-hover',
+				success:
+					'bg-color-action-background-positive-secondary text-color-text-primary hover:bg-color-action-background-positive-secondary-hover',
+				error:
+					'bg-color-action-background-negative-secondary text-color-text-primary hover:bg-color-action-background-negative-secondary-hover',
+				warning:
+					'bg-color-action-background-warning-secondary text-color-text-primary hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		solid: {
 			primary: {
-				default: ' bg-core-blue-600 text-white hover:bg-core-blue-700 ',
-				success: 'bg-core-green-500 text-white hover:bg-core-green-600',
-				error: 'bg-core-red-500 text-white hover:bg-core-red-600',
-				warning: 'bg-core-orange-500 text-white hover:bg-core-orange-600'
+				default:
+					'bg-color-action-background-primary text-color-static-white hover:bg-color-action-background-primary-hover',
+				success:
+					'bg-color-action-background-positive text-color-static-white hover:bg-color-action-background-positive-hover',
+				error:
+					'bg-color-action-background-negative text-color-static-white hover:bg-color-action-background-negative-hover',
+				warning:
+					'bg-color-action-background-warning text-color-static-white hover:bg-color-action-background-warning-hover'
 			},
 			secondary: {
 				default:
-					'bg-core-grey-100 text-core-grey-700 hover:bg-core-grey-200 dark:bg-core-grey-600 dark:text-white dark:hover:bg-core-grey-500',
-				success: 'bg-core-green-300 text-core-grey-700 hover:bg-core-green-400',
-				error: 'bg-core-red-300 text-core-grey-700 hover:bg-core-red-400',
-				warning: 'bg-core-orange-300 text-core-grey-700 hover:bg-core-orange-400'
+					'bg-color-action-background-secondary text-color-text-primary hover:bg-color-action-background-secondary-hover',
+				success:
+					'bg-color-action-background-positive-secondary text-color-text-primary hover:bg-color-action-background-positive-secondary-hover',
+				error:
+					'bg-color-action-background-negative-secondary text-color-text-primary hover:bg-color-action-background-negative-secondary-hover',
+				warning:
+					'bg-color-action-background-warning-secondary text-color-text-primary hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		outline: {
 			primary: {
 				default:
-					'bg-transparent text-core-grey-700 border-2 px-2 pt-1.5 pb-1.5 border-core-blue-600 hover:bg-core-blue-600 hover:text-white dark:text-white',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
 				success:
-					'bg-core-green-50 text-core-green-800 border-2 px-2 pt-1.5 pb-1.5 border-core-green-500 hover:bg-core-green-600 hover:text-white dark:text-white dark:bg-core-green-700 dark:hover:bg-core-green-600',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-core-red-50 text-core-red-800 border-2 px-2 pt-1.5 pb-1.5 border-core-red-500 hover:bg-core-red-600 hover:text-white dark:text-white dark:bg-core-red-700 dark:hover:bg-core-red-600',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-core-orange-50 text-core-orange-800 border-2 px-2 pt-1.5 pb-1.5 border-core-orange-500 hover:bg-core-orange-600 hover:text-white dark:text-white dark:bg-core-orange-700 dark:hover:bg-core-orange-600'
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
 			},
 			secondary: {
 				default:
-					'bg-transparent text-core-grey-700 border-2 px-2 pt-1.5 pb-1.5 border-core-grey-400 hover:bg-core-grey-400 hover:text-white dark:text-white',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-secondary hover:bg-color-action-secondary-100-hover',
 				success:
-					'bg-core-green-50 text-core-green-800 border-2 px-2 pt-1.5 pb-1.5 border-core-green-500 hover:bg-core-green-600 hover:text-white dark:text-white dark:bg-core-green-700 dark:hover:bg-core-green-600',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-core-red-50 text-core-red-800 border-2 px-2 pt-1.5 pb-1.5 border-core-red-500 hover:bg-core-red-600 hover:text-white dark:text-white dark:bg-core-red-700 dark:hover:bg-core-red-600',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-core-orange-50 text-core-orange-800 border-2 px-2 pt-1.5 pb-1.5 border-core-orange-500 hover:bg-core-orange-600 hover:text-white dark:text-white dark:bg-core-orange-700 dark:hover:bg-core-orange-600'
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		text: {
 			primary: {
-				default: 'bg-transparent text-core-grey-700 hover:text-core-blue-600 dark:text-white',
-				success: 'bg-transparent text-core-green-500 hover:text-core-green-600',
-				error: 'bg-transparent text-core-red-500 hover:text-core-red-600',
-				warning: 'bg-transparent text-core-orange-500 hover:text-core-orange-600'
+				default:
+					'bg-transparent text-color-action-text-primary hover:text-color-action-text-primary-hover',
+				success: 'bg-transparent text-color-action-positive hover:text-color-action-positive-hover',
+				error: 'bg-transparent text-color-action-negative hover:text-color-action-negative-hover',
+				warning: 'bg-transparent text-color-action-warning hover:text-color-action-warning-hover'
 			},
 			secondary: {
-				default: 'bg-transparent text-core-grey-500 hover:text-core-grey-300 dark:text-white',
-				success: 'bg-transparent text-core-green-500 hover:text-core-green-600',
-				error: 'bg-transparent text-core-red-500 hover:text-core-red-600',
-				warning: 'bg-transparent text-core-orange-500 hover:text-core-orange-600'
+				default:
+					'bg-transparent text-color-action-text-secondary hover:text-color-action-text-secondary-hover',
+				success: 'bg-transparent text-color-action-positive hover:text-color-action-positive-hover',
+				error: 'bg-transparent text-color-action-negative hover:text-color-action-negative-hover',
+				warning: 'bg-transparent text-color-action-warning hover:text-color-action-warning-hover'
 			}
 		}
 	};
 
 	const disabledClasses: DisabledStyle = {
-		brand: '!bg-core-grey-100 !border-core-grey-300 !text-core-grey-300',
-		square: '!bg-core-grey-100 !text-core-grey-300',
-		solid: '!bg-core-grey-100 !text-core-grey-300',
-		outline: '!bg-core-grey-100 !border-core-grey-300 !text-core-grey-300',
-		text: '!text-core-grey-300 hover:bg-transparent'
+		brand:
+			'!bg-color-action-background-disabled !border-color-action-border-disabled !text-color-action-disabled',
+		square: '!bg-color-action-background-disabled !text-color-action-disabled',
+		solid: '!bg-color-action-background-disabled !text-color-action-disabled',
+		outline:
+			'!bg-color-action-background-disabled !border-color-action-border-disabled !text-color-action-disabled',
+		text: '!text-color-action-disabled hover:bg-transparent'
 	};
 
 	$: sizeClasses = {
-		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-2',
+		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5',
 		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2',
 		lg: variant === 'square' ? 'w-16 h-16 text-xs flex-col space-y-4' : 'text-lg px-4 py-2'
 	};

@@ -54,8 +54,8 @@
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 	import loadTestLayers from '../loadTestLayers';
+	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	let init = false;
@@ -129,7 +129,9 @@
 			{/if}
 		</Map>
 
-		<div class="absolute top-0 left-0 w-full h-[16em] p-2 bg-core-grey-600/75 text-white">
+		<div
+			class="dark absolute top-0 left-0 w-full h-[16em] p-2 bg-color-container-level-1 bg-opacity-75 text-color-text-primary"
+		>
 			<table>
 				<tr class="font-medium">
 					<th>Event</th>

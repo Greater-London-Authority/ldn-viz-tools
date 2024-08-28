@@ -19,7 +19,7 @@
 
 			addEventHandlerInner(
 				'mouseenter',
-				(ev: MouseEvent, d) => {
+				(ev: MouseEvent, d: any) => {
 					posStore.set({
 						...d,
 						clientX: ev.clientX,
@@ -37,7 +37,7 @@
 
 			addEventHandlerInner(
 				'mouseleave',
-				(ev: MouseEvent, d) => {
+				() => {
 					posStore.set(undefined); // can't use the $store syntax here
 				},
 				marks,
@@ -79,7 +79,7 @@
 </script>
 
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { afterUpdate, onMount, setContext } from 'svelte';
 	import { derived, writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
@@ -93,7 +93,7 @@
 	/**
 	 * Data being visualized (as an array of objects), to be used by data download button.
 	 */
-	export let data: any[] = [];
+	export let data: { [key: string]: any }[] = [];
 
 	/**
 	 * Title that is displayed in large text above the plot.
@@ -116,21 +116,37 @@
 	export let chartWidth = '';
 
 	/**
-	 * Object specifying what appears in the footer:
+	 * What appears in the footer:
 	 *
 	 * * `byline` (string) - statement of who created the visualization
 	 * * `source` (string) - statement of where the data came from
 	 * * `note` (string) - any additional footnotes
-	 * * `exportBtns` (boolean) - if `false`, then data/image download buttons will be hidden
 	 */
-	export let footer:
-		| {
-				byline?: string | undefined;
-				source?: string | undefined;
-				note?: string | undefined;
-				exportBtns: boolean;
-		  }
-		| undefined = undefined;
+	export let source = '';
+
+	export let byline = '';
+
+	export let note = '';
+
+	/**
+	 * Data Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 *
+	 */
+	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
+
+	/**
+	 * Image Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 *
+	 */
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
 	/**
 	 * Provides a way to access the DOM node into which the visualization is rendered.
@@ -160,6 +176,10 @@
 		};
 	});
 
+	afterUpdate(() => {
+		updateDimensions();
+	});
+
 	const updateDimensions = () => {
 		spec.width = width;
 	};
@@ -176,7 +196,11 @@
 		{title}
 		{subTitle}
 		{alt}
-		{footer}
+		{source}
+		{note}
+		{byline}
+		{dataDownloadButton}
+		{imageDownloadButton}
 		{...$$restProps}
 		chartHeight={'h-fit'}
 		{chartWidth}
@@ -186,7 +210,7 @@
 		<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 		{#if $tooltipStore && $tooltipData}
 			<div
-				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
+				class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50 -translate-x-1/2 -translate-y-full"
 				style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 				style:left={`${$tooltipStore.layerX}px`}
 			>
@@ -195,7 +219,7 @@
 				</slot>
 
 				<div
-					class="absolute bg-core-grey-100 dark:bg-core-grey-700 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
+					class="absolute bg-color-container-level-1 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
 				/>
 			</div>
 		{/if}
@@ -203,7 +227,7 @@
 {/key}
 
 <style>
-	:global(.defaultCcolorLegendLabel-swatch) {
-		font-size: 14px;
+	:global(.defaultColorLegendLabel-swatch) {
+		font-size: 1rem;
 	}
 </style>

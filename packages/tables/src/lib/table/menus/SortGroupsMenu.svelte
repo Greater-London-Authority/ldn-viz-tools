@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Button, Select } from '@ldn-viz/ui';
+	import { Button, Popover, Select } from '@ldn-viz/ui';
 	import { type GroupOrderCriterion } from '../../core/lib/types';
-	import PopoverMenu from './PopoverMenu.svelte';
 
 	export let table;
 
@@ -48,9 +47,11 @@
 	}
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
-		<Button variant="text" disabled={table.groupingFields.length === 0}>Sort groups</Button>
+<Popover>
+	<svelte:fragment slot="hint">
+		<Button variant="text" size="sm" disabled={table.groupingFields.length === 0}
+			>Sort groups</Button
+		>
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
@@ -62,27 +63,12 @@
 			bind:value={aggregationSelection}
 			label="by the"
 			id="labelled-input"
-			placeholder="Placeholder text"
 		/>
 
 		{#if aggregationSelection?.value !== 'count'}
-			<Select
-				items={fields}
-				bind:value={fieldSelection}
-				label="of their "
-				id="labelled-input"
-				placeholder="Placeholder text"
-			/>
+			<Select items={fields} bind:value={fieldSelection} label="of their " id="labelled-input" />
 		{/if}
 
-		<Select
-			items={orderOptions}
-			bind:value={orderSelection}
-			label="in"
-			id="labelled-input"
-			placeholder="Placeholder text"
-		/>
-
-		<span>order.</span>
+		<Select items={orderOptions} bind:value={orderSelection} label="ordered" id="labelled-input" />
 	</div>
-</PopoverMenu>
+</Popover>

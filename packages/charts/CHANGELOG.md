@@ -1,5 +1,44 @@
 # ldn-viz-tools-charts
 
+## 3.0.0
+
+### Major Changes
+
+- b55dab9: CHANGED: moved `userThemeSelectionStore` and `currentThemeMode` from `theme` package to `ui` package
+
+### Patch Changes
+
+- Updated dependencies [b55dab9]
+  - @ldn-viz/ui@13.0.0
+
+## 2.0.2
+
+### Patch Changes
+
+- 69686cf: FIXED: adds missing `@ldn-viz/util` dependency to `package.json` of `maps`, `ui`, and `charts` packages.
+- 4c860bc: FIXED: update path used to import theme package
+- Updated dependencies [69686cf]
+  - @ldn-viz/ui@11.0.1
+
+## 2.0.1
+
+### Patch Changes
+
+- ddbae5c: FIXED: export the exports from observablePlotFragments.ts from package
+
+## 2.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
+### Patch Changes
+
+- Updated dependencies [9f1adf7]
+- Updated dependencies [881aa44]
+- Updated dependencies [9f1adf7]
+  - @ldn-viz/ui@11.0.0
+
 ## 1.5.0
 
 ### Minor Changes

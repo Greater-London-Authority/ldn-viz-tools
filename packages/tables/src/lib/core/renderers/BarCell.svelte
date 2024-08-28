@@ -42,7 +42,7 @@
 </script>
 
 <div class="p-1">
-	<div class="bg-core-grey-200 h-full flex relative text-xs">
+	<div class="bg-color-ui-neutral h-full flex relative text-xs">
 		<div
 			style={`width:${scale(+value)}%; background-color:${color}`}
 			class="h-full text-right absolute left-0"

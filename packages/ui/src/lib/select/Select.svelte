@@ -253,34 +253,46 @@
 	</div>
 </InputWrapper>
 
-{#if !!true}
+{#if true}
 	<style>
-		:root {
-			--bg-color-dark: #343434;
-		}
-		.form-select,
-		.dark .form-select {
-			--border-radius: 0px;
-			--placeholder-color: #aeb1b4;
-			--item-hover-bg: #3787d2;
-			--item-is-active-bg: #2566a2;
-			--item-hover-color: #ffffff;
-			--border-focused: #3787d2 1px solid;
-			--list-border-radius: 0px;
-			--item-first-border-radius: 0px;
-		}
-
-		.dark .form-select {
-			--border-radius: 0px;
-			--background: var(--bg-color-dark);
-			--border: 1px solid var(--bg-color-dark);
-			--border-hover: 1px solid #515a5e;
-			--error-background: var(--bg-color-dark);
-			--disabled-background: #868b8e;
-			--disabled-border-color: var(--bg-color-dark);
-			--disabled-placeholder-color: #aeb1b4;
-			--list-background: var(--bg-color-dark);
-			--multi-item-color: var(--bg-color-dark);
+		/* See: https://github.com/rob-balfre/svelte-select/blob/master/docs/theming_variables.md */
+		.form-select {
+			--border: var(--theme-input-border) 1px solid;
+			--border-focused: var(--theme-input-border-focussed) 1px solid;
+			--border-hover: var(--theme-input-border-hover) 1px solid;
+			--border-radius: 0;
+			--placeholder-color: var(--theme-input-placeholder);
+			--placeholder-opacity: 100%;
+			--background: var(--theme-input-background);
+			--chevron-color: var(--theme-input-icon);
+			--chevron-icon-colour: var(--theme-input-icon);
+			--clear-icon-color: var(--theme-input-icon);
+			--disabled-background: var(--theme-input-background-disabled);
+			--disabled-border-color: var(--theme-input-border-disabled);
+			--disabled-color: var(--theme-input-label-disabled);
+			--disabled-placeholder-color: var(--theme-ui-disabled);
+			--disabled-placeholder-opacity: 100%;
+			--error-background: var(--theme-input-background);
+			--error-border: var(--theme-input-border-error) 1px solid;
+			--icons-color: var(--theme-input-icon);
+			--input-color: var(--theme-input-valuetext);
+			--item-first-border-radius: 0;
+			--item-hover-bg: var(--theme-input-background-hover);
+			--item-is-active-bg: var(--theme-input-background-selected);
+			--item-is-active-color: var(--theme-static-white);
+			--item-is-not-selectable-color: var(--theme-text-disabled);
+			--list-background: var(--theme-input-background);
+			--list-border: var(--theme-input-border) 1px solid;
+			--list-border-radius: 0;
+			--list-empty-color: var(--theme-ui-background-empty);
+			--list-z-index: 40;
+			--multi-item-active-outline: var(--theme-ui-border-secondary);
+			--multi-item-bg: var(--theme-input-background);
+			--multi-item-border-radius: 0;
+			--multi-item-clear-icon-color: var(--theme-input-icon);
+			--multi-item-color: var(--theme-text-primary);
+			--multi-item-disabled-hover-bg: var(--theme-input-background-disabled);
+			--multi-item-disabled-hover-color: var(--theme-ui-disabled);
 		}
 	</style>
 {/if}

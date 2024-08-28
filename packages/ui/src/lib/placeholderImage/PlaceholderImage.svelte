@@ -14,6 +14,8 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 </script>
 
-<div class="bg-core-grey-200 text-core-grey-400 w-full h-full flex items-center justify-center">
+<div
+	class="bg-color-ui-background-empty text-color-text-secondary w-full h-full flex items-center justify-center"
+>
 	<Icon src={Photo} class="h-8 w-8" />
 </div>

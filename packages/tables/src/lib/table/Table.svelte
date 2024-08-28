@@ -1,18 +1,18 @@
 <script lang="ts">
+	import { sum } from 'd3-array';
+	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import { TableData } from '../core/lib/dataObj';
 	import TableContainer from './TableContainer.svelte';
-	import RowRenderer from './rows/RowRenderer.svelte';
-	import VirtualScroll from 'svelte-virtual-scroll-list';
-	import PaginationControls from './rows/PaginationControls.svelte';
-	import NumRowsControls from './rows/NumRowsControls.svelte';
-	import ControlRow from './rows/ControlRow.svelte';
-	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
-	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
-	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
-	import { sum } from 'd3-array';
+	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
+	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
+	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
+	import ControlRow from './rows/ControlRow.svelte';
+	import NumRowsControls from './rows/NumRowsControls.svelte';
+	import PaginationControls from './rows/PaginationControls.svelte';
+	import RowRenderer from './rows/RowRenderer.svelte';
 
 	/**
 	 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
@@ -89,8 +89,12 @@
 	 */
 	export let allowSorting = false;
 
-	let rows = [];
-	const onRowsChange = (groups, rows) => {
+	/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+	 */
+	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
+
+	const onRowsChange = () => {
 		table = table; // eslint-disable-line no-self-assign
 	};
 
@@ -158,9 +162,9 @@
 		{/if}
 	</div>
 
-	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data}>
-		<div class="table-auto text-sm w-full" slot="table">
-			<div class="border-t border-b" style="border-color: black" style:width={tableWidth}>
+	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data} {columnMapping}>
+		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
+			<div class="border-t border-b border-color-ui-border-primary" style:width={tableWidth}>
 				{#if tableSpec.colGroups}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
@@ -210,12 +214,12 @@
 	</TableContainer>
 {/if}
 
-<style>
+<style lang="postcss">
 	:global(.striped > div:nth-child(odd)) {
-		background-color: #f5f5f5; /* core-grey-50 */
+		@apply bg-color-ui-background-secondary;
 	}
 
 	:global(.stripedVirtual > div:first-child > div:first-child > div:nth-child(odd)) {
-		background-color: #f5f5f5; /* core-grey-50 */
+		@apply bg-color-ui-background-secondary;
 	}
 </style>

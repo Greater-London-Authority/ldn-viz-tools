@@ -18,7 +18,7 @@
 </script>
 
 <div class="flex was-tr">
-	{#each new Array(getGroupLevel(group.name)) as i}
+	{#each new Array(getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 
 		<div style:width={table.widths.groupControl}></div>
@@ -43,7 +43,7 @@
 	</div>
 
 	<!-- padding of equivalent siex to chevrons on other rows -->
-	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as i}
+	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 
 		<div style:width={table.widths.groupControl}></div>

@@ -1,8 +1,8 @@
 <script>
-	import { getContext } from 'svelte';
 	import { Button } from '@ldn-viz/ui';
-	import { PlusSmall, MinusSmall } from '@steeze-ui/heroicons';
+	import { MinusSmall, PlusSmall } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getContext } from 'svelte';
 	import { ZOOM_ANIMATION_OPTIONS } from '../themes/animations';
 
 	const mapStore = getContext('mapStore');
@@ -30,7 +30,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom in"
-		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500 pointer-events-auto"
+		class="pointer-events-auto"
 		on:click={newHandler(zoomIn)}
 	>
 		<Icon src={PlusSmall} class="w-8 h-8 p-0.5" />
@@ -39,7 +39,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom out"
-		class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500 pointer-events-auto"
+		class="pointer-events-auto"
 		on:click={newHandler(zoomOut)}
 	>
 		<Icon src={MinusSmall} class="w-8 h-8 p-0.5" />

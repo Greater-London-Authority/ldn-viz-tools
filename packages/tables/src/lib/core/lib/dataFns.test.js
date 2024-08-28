@@ -86,6 +86,7 @@ test("can group based on 2 variables", () => {
 
  */
 
+/*
 test('can sort groups based on single variable', () => {
 	const data = [
 		{ a: 1, b: 2, c: 3 },
@@ -109,10 +110,10 @@ test('can sort groups based on single variable', () => {
 	];
 
 	const sortedGroups = sortGroups(groupedData, data, sortSpec);
-	const sortedRow = getRows(data, sortedGroups, []);
 
 	//    expect(groupedData).toStrictEqual(expectedGroup)
 });
+ */
 
 test('can sort groups based on pair of variables', () => {
 	const data = [

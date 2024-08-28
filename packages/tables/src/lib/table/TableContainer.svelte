@@ -17,6 +17,11 @@
 	// export props for table
 	export let data;
 
+	/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
+	 */
+	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
+
 	// For save as image
 	let tableToCapture: HTMLDivElement;
 </script>
@@ -24,11 +29,15 @@
 <slot name="numRowsControlSlot" />
 
 <div class="table-container" bind:this={tableToCapture} id="captureElement">
-	{#if title}
-		<Title>{title}</Title>
-	{/if}
-	{#if subTitle}
-		<SubTitle>{subTitle}</SubTitle>
+	{#if title || subTitle}
+		<div class="mb-4">
+			{#if title}
+				<Title>{title}</Title>
+			{/if}
+			{#if subTitle}
+				<SubTitle>{subTitle}</SubTitle>
+			{/if}
+		</div>
 	{/if}
 
 	{#if alt}
@@ -47,7 +56,7 @@
 	<slot name="paginationControls" />
 
 	{#if exportBtns === true}
-		<ExportBtns chartToCapture={tableToCapture} {data} />
+		<ExportBtns chartToCapture={tableToCapture} {data} {columnMapping} />
 	{/if}
 </div>
 

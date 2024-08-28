@@ -1,5 +1,22 @@
 # @ldn-viz/tables
 
+## 1.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
+### Patch Changes
+
+- Updated dependencies [9f1adf7]
+- Updated dependencies [881aa44]
+- Updated dependencies [9f1adf7]
+- Updated dependencies [9f1adf7]
+  - @ldn-viz/charts@2.0.0
+  - @ldn-viz/themes@2.0.0
+  - @ldn-viz/ui@11.0.0
+  - @ldn-viz/utils@0.2.0
+
 ## 0.3.0
 
 ### Minor Changes

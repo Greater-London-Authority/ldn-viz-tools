@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Button, Select } from '@ldn-viz/ui';
-	import PopoverMenu from './PopoverMenu.svelte';
+	import { Button, Popover, Select } from '@ldn-viz/ui';
 
 	export let table;
 
@@ -43,9 +42,9 @@
 	$: applyGrouping(groupingSelection);
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
-		<Button variant="text">Group rows</Button>
+<Popover>
+	<svelte:fragment slot="hint">
+		<Button variant="text" size="sm">Group rows</Button>
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
@@ -55,7 +54,6 @@
 		bind:value={groupingSelection}
 		label="Group rows by"
 		id="labelled-input"
-		placeholder="Placeholder text"
 		multiple
 	/>
-</PopoverMenu>
+</Popover>

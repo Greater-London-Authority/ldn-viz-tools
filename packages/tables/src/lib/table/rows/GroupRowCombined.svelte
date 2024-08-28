@@ -1,5 +1,6 @@
 <script>
-	import { ChevronRight, ChevronDown } from '@steeze-ui/heroicons';
+	//TODO: background:white?
+	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import GroupSizeBar from '../cells/GroupSizeBar.svelte';
@@ -24,7 +25,7 @@
 </script>
 
 <div class="flex was-tr">
-	{#each new Array(getGroupLevel(group.name)) as i}
+	{#each new Array(getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 
 		<div style:width={table.widths.groupControl}></div>
@@ -53,7 +54,7 @@
     -->
 
 	<!-- padding of equivalent siex to chevrons on other rows -->
-	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as i}
+	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 
 		<div style:width={table.widths.groupControl}></div>
@@ -61,7 +62,11 @@
 
 	<!-- padding for group size infor for lower group levels -->
 	{#each new Array(getGroupLevel(group.name)) as _, i}
-		<div style:width={table.widths.groupLabel} style:background="white" class="text-core-grey-200">
+		<div
+			style:width={table.widths.groupLabel}
+			style:background="white"
+			class="text-color-text-secondary"
+		>
 			{group.name.split(' ∩ ')[i]}
 		</div>
 		<div style:width={table.widths.groupSizeLabel} style:background="white"></div>
@@ -94,7 +99,7 @@
 		val={group.name.split(' ∩ ')[getGroupLevel(group.name)]}
 	/>
 
-	{#each new Array(Math.max(table.groupingFields.length - getGroupLevel(group.name) - 1, 0)) as i}
+	{#each new Array(Math.max(table.groupingFields.length - getGroupLevel(group.name) - 1, 0)) as _i}
 		<div style:width={table.widths.groupLabel} style:background="white"></div>
 		<div style:width={table.widths.groupSizeLabel} style:background="white"></div>
 		<div style:width={table.widths.groupSizeBar} style:background="white"></div>

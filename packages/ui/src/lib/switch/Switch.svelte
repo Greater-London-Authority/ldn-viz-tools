@@ -55,12 +55,12 @@
 	$: $nameStore = name;
 	$: $requiredStore = required;
 
-	const translation = { md: '20px', sm: '15px' };
+	const translation = { md: '21px', sm: '15px' };
 </script>
 
 <div class="flex items-center">
 	{#if labelOn === 'left'}
-		<label class="pr-2 leading-none text-black dark:text-white" for={id} id={`${id}-label`}>
+		<label class="form-label pr-2 leading-none text-color-input-label" for={id} id={`${id}-label`}>
 			{label}
 		</label>
 	{/if}
@@ -69,25 +69,25 @@
 		{...$root}
 		use:root
 		class={classNames(
-			'relative cursor-default rounded-full bg-core-grey-200 transition-colors data-[state=checked]:bg-core-blue-600 ',
-			size === 'md' ? 'h-6 w-11 p-[1px]' : 'h-4 w-[30px] p-[1px]'
+			'relative h-6 cursor-default rounded-full bg-color-input-background-off transition-colors data-[state=checked]:bg-color-input-background-on',
+			size === 'md' ? 'h-[24px] w-[44px]' : 'h-[16px] w-[30px]'
 		)}
 		{id}
 		aria-labelledby={`${id}-label`}
 	>
 		<span
 			class={classNames(
-				'thumb block rounded-full transition border-core-grey-200 border',
-				size === 'md' ? 'w-[22px] h-[22px]' : 'w-3.5 h-3.5 ',
-				disabled ? 'bg-core-grey-100' : 'bg-white'
+				'thumb block rounded-full transition ',
+				size === 'md' ? 'w-[22px] h-[22px]' : 'w-[14px] h-[14px] ',
+				disabled ? 'bg-color-input-background-disabled' : 'bg-color-input-background'
 			)}
-			style:transform={$checked ? `translate(${translation[size]}, 0px)` : ''}
+			style:transform={$checked ? `translate(${translation[size]}, 0px)` : 'translate(1px, 0px)'}
 		/>
 	</button>
 	<input {...$input} use:input />
 
 	{#if labelOn === 'right'}
-		<label class="pl-2 leading-none text-black dark:text-white" for={id} id={`${id}-label`}>
+		<label class="form-label pl-2 leading-none text-color-input-label" for={id} id={`${id}-label`}>
 			{label}
 		</label>
 	{/if}

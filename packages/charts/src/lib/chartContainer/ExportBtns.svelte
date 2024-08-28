@@ -4,51 +4,50 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let chartToCapture: HTMLDivElement;
-	export let data: any;
+	export let dataForDownload: { [key: string]: any }[] | undefined;
+	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[];
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[];
+
+	/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
+	 */
+	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 </script>
 
+<!-- class="flex flex-col sm:flex-row shrink-0 sm:ml-auto sm:self-end sm:space-x-2 capture-ignore" -->
 <div
-	class="flex flex-col sm:flex-row shrink-0 sm:ml-auto sm:self-end capture-ignore"
+	class="flex flex-col space-y-2 mt-2 shrink-0 sm:flex-row sm:space-y-0 sm:space-x-2 sm:mt-0 sm:items-end sm:ml-auto"
 	data-html2canvas-ignore
 >
-	<DataDownloadButton
-		{data}
-		filename="download.csv"
-		format="CSV"
-		variant="text"
-		emphasis="secondary"
-		size="sm"
-	>
-		Download as CSV <Icon
-			src={ArrowDownTray}
-			theme="solid"
-			class="w-5 h-5 ml-2"
-			aria-hidden="true"
-		/>
-	</DataDownloadButton>
-	<DataDownloadButton
-		{data}
-		filename="download.json"
-		format="JSON"
-		variant="text"
-		emphasis="secondary"
-		size="sm"
-	>
-		Download as JSON<Icon
-			src={ArrowDownTray}
-			theme="solid"
-			class="w-5 h-5 ml-2"
-			aria-hidden="true"
-		/>
-	</DataDownloadButton>
+	{#if dataDownloadButton && dataForDownload}
+		<DataDownloadButton
+			data={dataForDownload}
+			{columnMapping}
+			filename="download"
+			formats={dataDownloadButton === true ? ['CSV', 'JSON'] : dataDownloadButton}
+			variant="outline"
+			emphasis="secondary"
+			size="sm"
+		>
+			Download as
+			<svelte:fragment slot="afterLabel">
+				<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
+			</svelte:fragment>
+		</DataDownloadButton>
+	{/if}
 
-	<ImageDownloadButton
-		format="PNG"
-		htmlNode={chartToCapture}
-		variant="text"
-		emphasis="secondary"
-		size="sm"
-	>
-		Save as image<Icon src={Camera} theme="outline" class="w-5 h-5 ml-2" aria-hidden="true" />
-	</ImageDownloadButton>
+	{#if imageDownloadButton}
+		<ImageDownloadButton
+			formats={imageDownloadButton === true ? ['PNG', 'SVG'] : imageDownloadButton}
+			htmlNode={chartToCapture}
+			variant="outline"
+			emphasis="secondary"
+			size="sm"
+		>
+			Save as image
+			<svelte:fragment slot="afterLabel">
+				<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
+			</svelte:fragment>
+		</ImageDownloadButton>
+	{/if}
 </div>

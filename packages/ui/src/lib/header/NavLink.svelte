@@ -26,9 +26,10 @@
 	export let target = '';
 
 	let classes: string;
-	const highlightedClasses = 'flex h-[50px] bg-core-blue-500 items-center px-4 py-2 items-center';
+	const highlightedClasses =
+		'flex h-[50px] bg-color-action-background-primary text-color-action-static-white items-center px-4 py-2 items-center';
 	const nonHighlightedClasses =
-		'flex h-[50px] bg-core-grey-700 items-center px-4 py-2 items-center';
+		'flex h-[50px] bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-text-primary  items-center px-4 py-2 items-center';
 	$: {
 		if (!page) {
 			// no page store provided - we don't know whether or not we're on the page this links points at

@@ -1,3 +1,3 @@
-<span class="text-gray-700 dark:text-core-grey-50 block text-sm font-medium">
+<span class="text-color-input-label-secondary block text-sm">
 	<slot />
 </span>

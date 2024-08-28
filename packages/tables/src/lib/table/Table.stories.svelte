@@ -8,8 +8,8 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { Input } from '@ldn-viz/ui';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const data = [
 		{ id: 1, first_name: 'Marilyn', last_name: 'Monroe', pet: 'dog' },
@@ -119,6 +119,15 @@
 	<Table {data} {tableSpec} exportBtns />
 </Story>
 
+<Story name="Export buttons - relabel columns" source>
+	<Table
+		{data}
+		{tableSpec}
+		exportBtns
+		columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
+	/>
+</Story>
+
 <Story name="Row Grouping" source>
 	<Table {data} {tableSpec} allowRowGrouping />
 </Story>
@@ -137,12 +146,12 @@
 
 <Story name="Paginated - page externally controlled" source>
 	<div class="flex flex-col gap-4 max-w-2xl">
-		<div class="border-core-grey-200 border-2 p-2">
+		<div class="border-color-ui-border-secondary border p-2">
 			<span class="font-bold">Separate control</span>
 			<Input bind:value={page} label="Set page here"></Input>
 		</div>
 
-		<div class="border-core-grey-200 border-2 p-2">
+		<div class="border-color-ui-border-secondary border p-2">
 			<span class="font-bold">Table component</span>
 
 			<Table {data} {tableSpec} paginate pageSize={5} bind:page />
