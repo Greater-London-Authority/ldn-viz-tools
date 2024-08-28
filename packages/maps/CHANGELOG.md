@@ -1,5 +1,12 @@
 # ldn-viz-tools-maps
 
+## 5.0.0
+
+### Major Changes
+
+- ae67f11: ADDED: `dataStore` prop to `GeoJSONMapLayerSource` for two way reactivity
+  CHANGED: rename `data` prop to `initialData` in `GeoJSONMapLayerSource`
+
 ## 4.0.1
 
 ### Patch Changes

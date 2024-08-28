@@ -1,5 +1,20 @@
 # ldn-viz-tools-ui
 
+## 14.0.0
+
+### Major Changes
+
+- 09e55ec: ADDED: added `MultipleActionButton` that allows user to select the nature of the operation that will be triggered when they click on the button
+  CHANGED: the `ImageDownloadButton` amd `DataDownloadButton` now use the `MultipleActionButton` - rather than accepting a single file format as a prop, they accept an array containing a list of file formats from which the user can choose
+
+### Minor Changes
+
+- 38ac6b1: CHANGED: `Geocoder` selected location now appears as query text on selection.
+  CHANGED: adds reactively updating `selected` property to `Geocoder`.
+  CHANGED: `GeocoderSuggestionList` now highlights the currently selected item when the list is reopened.
+- fc08482: CHANGED: `<Input>` to add explicit `placeholder` prop.
+- f11222c: CHANGED: Allows custom event to be passed to sidebarTabLabel
+
 ## 13.0.0
 
 ### Major Changes
