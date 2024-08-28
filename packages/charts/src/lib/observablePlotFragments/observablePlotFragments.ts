@@ -36,7 +36,7 @@ export const plotTheme = theme;
 
 const defaultStyle = (mode: ThemeMode) => ({
 	color: theme(mode).color.chart.label,
-	fontSize: '14px',
+	fontSize: '0.875rem',
 	fontFamily: fontStack,
 	background: theme(mode).color.chart.background
 });
@@ -62,7 +62,7 @@ const defaultSizeFacet = {
 const defaultColor = {
 	legend: true,
 	swatchSize: 16,
-	className: 'defaultCcolorLegendLabel',
+	className: 'defaultColorLegendLabel',
 	type: 'ordinal'
 };
 

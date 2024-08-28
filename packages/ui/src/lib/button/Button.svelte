@@ -140,23 +140,23 @@
 		outline: {
 			primary: {
 				default:
-					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
 				success:
-					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-transparent text-color-text-primary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
+					'bg-transparent text-color-text-primary border-2 px-2 pt-1 pb-1 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
 			},
 			secondary: {
 				default:
-					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-primary hover:bg-color-action-background-primary-100-hover',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-secondary hover:bg-color-action-secondary-100-hover',
 				success:
-					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-positive hover:bg-color-action-background-positive-secondary-hover',
 				error:
-					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-negative hover:bg-color-action-background-negative-secondary-hover',
 				warning:
-					'bg-transparent text-color-text-secondary border-2 px-2 pt-1.5 pb-1.5 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
+					'bg-transparent text-color-text-secondary border-2 px-2 pt-1 pb-1 border-color-action-border-warning hover:bg-color-action-background-warning-secondary-hover'
 			}
 		},
 		text: {
@@ -188,7 +188,7 @@
 	};
 
 	$: sizeClasses = {
-		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-2',
+		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5',
 		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2',
 		lg: variant === 'square' ? 'w-16 h-16 text-xs flex-col space-y-4' : 'text-lg px-4 py-2'
 	};

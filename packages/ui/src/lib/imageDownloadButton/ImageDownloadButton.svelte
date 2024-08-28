@@ -203,5 +203,7 @@
 	{...$$restProps}
 >
 	<!-- contents of the button -->
+	<svelte:fragment slot="beforeLabel"><slot name="beforeLabel" /></svelte:fragment>
 	<slot />
+	<svelte:fragment slot="afterLabel"><slot name="afterLabel" /></svelte:fragment>
 </MultipleActionButton>

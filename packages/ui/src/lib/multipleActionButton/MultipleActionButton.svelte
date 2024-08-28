@@ -116,6 +116,7 @@
 			{size}
 			{disabled}
 			{title}
+			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
 				<slot name="beforeLabel" />
@@ -127,7 +128,7 @@
 		<div
 			use:$trigger.action
 			{...$trigger}
-			class={`${variant !== 'outline' && 'border-l border-color-action-border-secondary'}`}
+			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
 		>
 			<Button variant="square" {emphasis} {condition} {size} {disabled}>
 				<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
