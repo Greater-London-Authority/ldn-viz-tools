@@ -2,4 +2,4 @@
 "@ldn-viz/ui": minor
 ---
 
-Allows custom event to be passed to sidebarTabLabel
+CHANGED: Allows custom event to be passed to sidebarTabLabel
