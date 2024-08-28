@@ -7,6 +7,11 @@
 	export let dataForDownload: { [key: string]: any }[] | undefined;
 	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[];
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[];
+
+	/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
+	 */
+	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 </script>
 
 <!-- class="flex flex-col sm:flex-row shrink-0 sm:ml-auto sm:self-end sm:space-x-2 capture-ignore" -->
@@ -17,6 +22,7 @@
 	{#if dataDownloadButton && dataForDownload}
 		<DataDownloadButton
 			data={dataForDownload}
+			{columnMapping}
 			filename="download"
 			formats={dataDownloadButton === true ? ['CSV', 'JSON'] : dataDownloadButton}
 			variant="outline"
