@@ -95,8 +95,8 @@
 	import colors from '@ldn-viz/themes/colors.json';
 	import { Button } from '@ldn-viz/ui';
 
-	import Map from '../map/Map.svelte';
-	import { appendOSKeyToUrl } from '../map/util';
+	import Map from '../../../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../../../map/util';
 	import MapLayerView from '../../../mapLayerView/MapLayerView.svelte';
 	import testData from '../../../testData.json';
 
