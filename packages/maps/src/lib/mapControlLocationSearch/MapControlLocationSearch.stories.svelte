@@ -13,9 +13,9 @@
 <script lang="ts">
 	import { Template, Story } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
 	import MapApp from '../map/MapApp.svelte';
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
@@ -40,7 +40,6 @@
 	<MapApp>
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
@@ -55,7 +54,6 @@
 	<MapApp>
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
