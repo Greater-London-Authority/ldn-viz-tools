@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { Input } from '@ldn-viz/ui';
+	import { Button, Input } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const data = [
@@ -89,6 +89,20 @@
 		wideTableData.push(row);
 	}
 
+	let dataSubset = [];
+	const randomlySelectRows = () => {
+		const selectedEntries = [];
+		const arrayCopy = [...data]; // Create a shallow copy of the input array
+
+		for (let i = 0; i < 10; i++) {
+			const randomIndex = Math.floor(Math.random() * arrayCopy.length);
+			selectedEntries.push(arrayCopy.splice(randomIndex, 1)[0]);
+		}
+
+		dataSubset = selectedEntries;
+	};
+	randomlySelectRows();
+
 	export let page = 1;
 </script>
 
@@ -97,6 +111,11 @@
 </Template>
 
 <Story name="Default" source />
+
+<Story name="Table updates when data changes" source>
+	<Button on:click={randomlySelectRows}>Update</Button>
+	<Table data={dataSubset} {tableSpec} allowSorting />
+</Story>
 
 <Story name="Sortable Rows" source>
 	<Table {data} {tableSpec} allowSorting />

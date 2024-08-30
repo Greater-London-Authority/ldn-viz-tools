@@ -105,6 +105,7 @@
 		table.setOnRowsChange(onRowsChange);
 
 		table.setData(data);
+		table.setColumnSpec(tableSpec.columns);
 		table.setRowOrder([
 			{
 				field: 'a',
