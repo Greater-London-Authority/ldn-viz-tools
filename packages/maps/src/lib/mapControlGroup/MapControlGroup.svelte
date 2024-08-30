@@ -1,30 +1,48 @@
 <script lang="ts" context="module">
-	export enum MapControlGroupPositions {
-		TopLeft = 'TopLeft',
-		TopCenter = 'TopCenter',
-		TopRight = 'TopRight',
-		TopRightOffset = 'TopRightOffset',
-		CenterRight = 'CenterRight',
-		BottomRight = 'BottomRight',
-		BottomCenter = 'BottomCenter',
-		BottomLeft = 'BottomLeft',
-		CenterLeft = 'CenterLeft'
-	}
+	export type MapControlGroupPositionX = 'left' | 'center' | 'right';
+	export type MapControlGroupPositionY = 'top' | 'center' | 'bottom';
+	export type MapControlGroupOffset = 'md' | 'lg';
 
-	type PositionClass = {
-		[key in keyof typeof MapControlGroupPositions]: string;
+	const xPositions = {
+		left: {
+			md: 'left-6',
+			lg: 'left-16'
+		},
+		center: {
+			md: 'left-1/2',
+			lg: 'left-1/2'
+		},
+		right: {
+			md: 'right-6',
+			lg: 'right-16'
+		}
 	};
 
-	const positionClasses: PositionClass = {
-		TopLeft: 'top-6 left-6',
-		TopCenter: 'top-6 left-1/2 -translate-x-1/2 transform items-center',
-		TopRight: 'top-6 right-6 items-end',
-		TopRightOffset: 'top-16 right-6 items-end',
-		CenterRight: 'top-1/2 -translate-y-1/2 right-6 transform items-end',
-		BottomRight: 'bottom-6 right-6 items-end',
-		BottomCenter: 'bottom-6 left-1/2 -translate-x-1/2 transform items-center',
-		BottomLeft: 'bottom-6 left-6',
-		CenterLeft: 'top-1/2 -translate-y-1/2 left-6 transform'
+	const xAlignments = {
+		left: '',
+		center: '-translate-x-1/2 transform items-center',
+		right: 'items-end'
+	};
+
+	const yPositions = {
+		top: {
+			md: 'top-6',
+			lg: 'top-16'
+		},
+		center: {
+			md: 'top-1/2',
+			lg: 'top-1/2'
+		},
+		bottom: {
+			md: 'bottom-6',
+			lg: 'bottom-16'
+		}
+	};
+
+	const yAlignments = {
+		top: '',
+		center: '-translate-y-1/2 transform',
+		bottom: ''
 	};
 </script>
 
@@ -36,19 +54,48 @@
 	 */
 
 	/**
-	 * Position of the group over the map. Avialable positions defined by
-	 * `MapControlGroupPositions` enum type.
+	 * Horizontal position.
 	 */
-	export let position: keyof typeof MapControlGroupPositions = MapControlGroupPositions.TopLeft;
+	export let x: MapControlGroupPositionX = 'left';
 
 	/**
-	 * Additional classes applied to the group's container element.
+	 * Horizontal offset from screen edge. Used to avoid overlap with overflow
+	 * elements from `<AppShell>` and `<Sidebar>`.
 	 */
-	export let classes = '';
+	export let xOffset: MapControlGroupOffset = 'md';
 
-	const positionClass = positionClasses[position];
+	/**
+	 * Vertical position.
+	 */
+	export let y: MapControlGroupPositionY = 'top';
+
+	/**
+	 * Vertical offset from screen edge. Used to avoid overlap with overflow
+	 * elements from `<AppShell>` and `<Sidebar>`.
+	 */
+	export let yOffset: MapControlGroupOffset = 'md';
+
+	$: classes = [
+		'absolute',
+		xPositions[x][xOffset],
+		xAlignments[x],
+		yPositions[y][yOffset],
+		yAlignments[y],
+		'z-10',
+		'flex',
+		'flex-col',
+		'space-y-2',
+		'pointer-events-none',
+		$$restProps.class || ''
+	]
+		.join(' ')
+		.trim();
+
+	const removeClassRestProp = () => delete $$restProps.class;
+	$: classes, removeClassRestProp();
 </script>
 
-<div class="absolute {positionClass} z-10 flex flex-col space-y-2 pointer-events-none {classes}">
+<div class={classes} {...$$restProps}>
+	<!-- Group content, usually map control buttons. -->
 	<slot />
 </div>

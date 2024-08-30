@@ -50,7 +50,7 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapControlGroup position="BottomRight">
+			<MapControlGroup y="bottom" x="right">
 				<MapControlPan />
 			</MapControlGroup>
 		</Map>

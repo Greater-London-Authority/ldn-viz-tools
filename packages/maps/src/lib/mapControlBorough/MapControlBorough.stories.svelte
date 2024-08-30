@@ -40,7 +40,7 @@
 			}}
 			bind:mapStore
 		>
-			<MapControlGroup position="TopLeft">
+			<MapControlGroup>
 				<MapControlBorough map={$mapStore} />
 			</MapControlGroup>
 

@@ -44,7 +44,7 @@
 				transformRequest
 			}}
 		>
-			<MapControlGroup position="TopLeft">
+			<MapControlGroup>
 				<MapControlLocationSearch {adapter} {onSearchError} />
 			</MapControlGroup>
 		</Map>
@@ -59,7 +59,7 @@
 				transformRequest
 			}}
 		>
-			<MapControlGroup position="TopLeft">
+			<MapControlGroup>
 				<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
 			</MapControlGroup>
 		</Map>
