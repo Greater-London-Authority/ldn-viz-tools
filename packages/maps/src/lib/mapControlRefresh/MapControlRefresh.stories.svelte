@@ -3,7 +3,6 @@
 
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
-	import MapApp from '../map/MapApp.svelte';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
@@ -24,7 +23,7 @@
 </Template>
 
 <Story name="Refresh Button">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
 				The refresh page button is usually positioned in the bottom left corner under the fullscreen
@@ -41,5 +40,5 @@
 				<MapControlRefresh />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

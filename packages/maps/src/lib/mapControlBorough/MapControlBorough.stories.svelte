@@ -12,9 +12,6 @@
 
 <script lang="ts">
 	import { Template, Story } from '@storybook/addon-svelte-csf';
-
-	import MapApp from '../map/MapApp.svelte';
-
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 	import type { MapLibreStore } from '../map/types';
@@ -33,7 +30,7 @@
 </Template>
 
 <Story name="Zooming to borough">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				transformRequest
@@ -46,5 +43,5 @@
 
 			<BoroughsContextLayer />
 		</Map>
-	</MapApp>
+	</div>
 </Story>

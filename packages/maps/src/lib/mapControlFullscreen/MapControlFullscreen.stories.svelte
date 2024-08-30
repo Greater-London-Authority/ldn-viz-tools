@@ -3,7 +3,6 @@
 
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
-	import MapApp from '../map/MapApp.svelte';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
@@ -25,7 +24,7 @@
 </Template>
 
 <Story name="Fullscreen Button">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
 				The fullscreen button is usually positioned in the bottom left corner above the refresh page
@@ -50,5 +49,5 @@
 				<MapControlFullscreen {map} />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

@@ -13,7 +13,6 @@
 <script lang="ts">
 	import { Template, Story } from '@storybook/addon-svelte-csf';
 
-	import MapApp from '../map/MapApp.svelte';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
@@ -37,7 +36,7 @@
 </Template>
 
 <Story name="Location Search">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				transformRequest
@@ -47,11 +46,11 @@
 				<MapControlLocationSearch {adapter} {onSearchError} />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
 <Story name="Hidden Geolocator">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				transformRequest
@@ -61,5 +60,5 @@
 				<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

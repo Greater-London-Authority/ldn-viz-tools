@@ -1,7 +1,6 @@
 // Map
-export * from './map/Map.svelte';
 export { default as Map } from './map/Map.svelte';
-export { default as MapApp } from './map/MapApp.svelte';
+export * from './map/Map.svelte';
 export * from './map/types';
 export * from './map/util';
 

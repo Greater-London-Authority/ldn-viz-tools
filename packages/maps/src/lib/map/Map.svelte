@@ -6,7 +6,7 @@
 	 *
 	 * It also:
 	 * - provides stores for `Map` and `MapCursor` instances;
-	 * - sets context for `Map` and `MapCursor` instances;
+	 * - sets context for `Map` and `MapCursor` instances.
 	 *
 	 * The map's container has a relative CSS position so slotted content can
 	 * position itself accordingly. Map controls and other overlay components

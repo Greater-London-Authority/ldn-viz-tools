@@ -3,7 +3,6 @@
 
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
-	import MapApp from '../map/MapApp.svelte';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 	import MapControlLocationSearch from '../mapControlLocationSearch/MapControlLocationSearch.svelte';
@@ -29,7 +28,7 @@
 </Template>
 
 <Story name="Positioning labels">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				transformRequest: appendOSKeyToUrl(OS_KEY)
@@ -57,11 +56,11 @@
 				</p>
 			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
 <Story name="Positioning controls">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				transformRequest: appendOSKeyToUrl(OS_KEY)
@@ -88,11 +87,11 @@
 				</p>
 			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
 <Story name="Standard Layout">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				transformRequest: appendOSKeyToUrl(OS_KEY)
@@ -132,5 +131,5 @@
 				<MapControlPan />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
