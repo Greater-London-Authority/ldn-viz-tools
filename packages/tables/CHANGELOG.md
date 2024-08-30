@@ -1,5 +1,16 @@
 # @ldn-viz/tables
 
+## 1.2.0
+
+### Minor Changes
+
+- 8ec03ca: FIXED: fix issue that caused two horizontal scrollbars to appear when embedding a wide table in a modal.
+
+### Patch Changes
+
+- a220cda: MINOR: update TableContainer to work with new export buttons.
+- 18bea73: FIXED: table now updates when `data` prop is updated.
+
 ## 1.1.0
 
 ### Minor Changes
