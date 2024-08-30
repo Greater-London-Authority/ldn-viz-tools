@@ -184,7 +184,6 @@
 				style:height={paginate ? '' : `${height - 100}px`}
 				class:striped={zebraStripe && paginate}
 				class:stripedVirtual={zebraStripe && !paginate}
-				style:width={tableWidth}
 			>
 				{#if paginate}
 					{#each visualRows as visualRow, i}
