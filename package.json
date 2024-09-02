@@ -10,6 +10,7 @@
     "docs": "npm run storybook -w apps/docs",
     "format": "prettier --write .",
     "lint": "turbo run lint",
+    "postinstall": "patch-package",
     "publish-packages": "turbo run build && changeset version && changeset publish",
     "test": "turbo run test",
     "test:unit": "turbo run test:unit"
@@ -22,6 +23,7 @@
     "@ldn-viz/eslint-config-custom": "*",
     "eslint": "^8.57.0",
     "eslint-plugin-turbo": "^1.12.5",
+    "patch-package": "^8.0.0",
     "prettier": "^3.2.5",
     "prettier-plugin-packagejson": "^2.5.1",
     "prettier-plugin-svelte": "^3.2.2",
