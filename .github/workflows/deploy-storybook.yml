@@ -28,7 +28,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
+        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu && npm run postinstall
         
       # if we don't do this, imports between packages will fail
       # (e.g., import of Button from @ldn-viz/ui into @ldn-viz/charts)
