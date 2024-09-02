@@ -4,10 +4,10 @@ import type { BoundsPoints } from './bounds';
 
 describe('centerOfBounds', () => {
 	test('correctly identifies center of bounds', () => {
-		const bounds = [
+		const bounds: BoundsPoints = [
 			[-12, 21],
 			[28, 33]
-		] as BoundsPoints;
+		];
 
 		const exp = [8, 27];
 
@@ -17,10 +17,10 @@ describe('centerOfBounds', () => {
 });
 
 describe('scaleBounds', () => {
-	const bounds = [
+	const bounds: BoundsPoints = [
 		[0, 0],
 		[10, 10]
-	] as BoundsPoints;
+	];
 
 	test('adjust width only', () => {
 		const exp = [
@@ -33,30 +33,30 @@ describe('scaleBounds', () => {
 	});
 
 	test('adjust height only', () => {
-		const exp = [
+		const exp: BoundsPoints = [
 			[0, -5],
 			[10, 15]
-		] as BoundsPoints;
+		];
 
 		const act = scaleBounds(bounds, { y: 2 });
 		expect(act).toEqual(exp);
 	});
 
 	test('quadruple size', () => {
-		const exp = [
+		const exp: BoundsPoints = [
 			[-15, -15],
 			[25, 25]
-		] as BoundsPoints;
+		];
 
 		const act = scaleBounds(bounds, { x: 4, y: 4 });
 		expect(act).toEqual(exp);
 	});
 
 	test('half size', () => {
-		const exp = [
+		const exp: BoundsPoints = [
 			[2.5, 2.5],
 			[7.5, 7.5]
-		] as BoundsPoints;
+		];
 
 		const act = scaleBounds(bounds, { x: 0.5, y: 0.5 });
 		expect(act).toEqual(exp);

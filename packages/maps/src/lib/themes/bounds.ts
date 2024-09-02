@@ -43,7 +43,7 @@ export const scaleBounds = (
 			center[0] + halfWidth,
 			center[1] + halfHeight
 		]
-	] as BoundsPoints;
+	];
 };
 
 export const GREATER_LONDON_ZOOM = 11;
