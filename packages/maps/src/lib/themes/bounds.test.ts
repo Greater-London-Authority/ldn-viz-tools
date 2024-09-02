@@ -1,9 +1,10 @@
 import { describe, test, expect } from 'vitest';
-import { centerOfBounds, scaleBounds } from './bounds.js';
+import { centerOfBounds, scaleBounds } from './bounds';
+import type { BoundsPoints } from './bounds';
 
 describe('centerOfBounds', () => {
 	test('correctly identifies center of bounds', () => {
-		const bounds = [
+		const bounds: BoundsPoints = [
 			[-12, 21],
 			[28, 33]
 		];
@@ -16,7 +17,7 @@ describe('centerOfBounds', () => {
 });
 
 describe('scaleBounds', () => {
-	const bounds = [
+	const bounds: BoundsPoints = [
 		[0, 0],
 		[10, 10]
 	];
@@ -32,7 +33,7 @@ describe('scaleBounds', () => {
 	});
 
 	test('adjust height only', () => {
-		const exp = [
+		const exp: BoundsPoints = [
 			[0, -5],
 			[10, 15]
 		];
@@ -42,7 +43,7 @@ describe('scaleBounds', () => {
 	});
 
 	test('quadruple size', () => {
-		const exp = [
+		const exp: BoundsPoints = [
 			[-15, -15],
 			[25, 25]
 		];
@@ -52,7 +53,7 @@ describe('scaleBounds', () => {
 	});
 
 	test('half size', () => {
-		const exp = [
+		const exp: BoundsPoints = [
 			[2.5, 2.5],
 			[7.5, 7.5]
 		];
