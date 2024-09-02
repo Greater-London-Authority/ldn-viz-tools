@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
@@ -50,7 +50,7 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapControlGroup position="TopLeft">
+			<MapControlGroup>
 				<MapControlZoom />
 			</MapControlGroup>
 		</Map>
