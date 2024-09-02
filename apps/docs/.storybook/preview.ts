@@ -15,7 +15,12 @@ const preview: Preview = {
 		},
 		docs: {
 			theme: docs
-		}
+		},
+		github: {
+			baseURL: "https://github.com",
+			repository: "Greater-London-Authority/ldn-viz-tools",
+			branch: "main",
+		},
 	},
 	decorators: [
 		withThemeByClassNameStore({
