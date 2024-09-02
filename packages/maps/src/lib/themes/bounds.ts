@@ -1,5 +1,11 @@
-export const centerOfBounds = (bounds) => {
-	const midpoint = (min, max) => max - (max - min) / 2;
+export type Point = [number, number];
+export type BoundsPoints = [Point, Point];
+export type BoundsArray = [number, number, number, number];
+export type ScaleFactor = { x?: number; y?: number };
+
+const midpoint = (min: number, max: number): number => max - (max - min) / 2;
+
+export const centerOfBounds = (bounds: BoundsPoints) => {
 	return [midpoint(bounds[0][0], bounds[1][0]), midpoint(bounds[0][1], bounds[1][1])];
 };
 
@@ -11,8 +17,11 @@ export const centerOfBounds = (bounds) => {
 // - { x: 0.5, y: 1 } then width will be 50% bigger and height left unchanged;
 // - { x: 2, y: 0 } then width will be twice as big and height as zero;
 // - etc.
-export const scaleBounds = (bounds, scaleFactor = { x: 1, y: 1 }) => {
-	const numberOrDefault = (n, elseDefault) => {
+export const scaleBounds = (
+	bounds: BoundsPoints,
+	scaleFactor: ScaleFactor = { x: 1, y: 1 }
+): BoundsPoints => {
+	const numberOrDefault = (n: number | undefined, elseDefault: number): number => {
 		return typeof n === 'number' ? n : elseDefault;
 	};
 
@@ -38,7 +47,7 @@ export const scaleBounds = (bounds, scaleFactor = { x: 1, y: 1 }) => {
 };
 
 export const GREATER_LONDON_ZOOM = 11;
-export const GREATER_LONDON_BOUNDS = [
+export const GREATER_LONDON_BOUNDS: BoundsPoints = [
 	[-0.517, 51.278],
 	[0.342, 51.698]
 ];

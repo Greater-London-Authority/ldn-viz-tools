@@ -56,7 +56,13 @@
 	<slot name="paginationControls" />
 
 	{#if exportBtns === true}
-		<ExportBtns chartToCapture={tableToCapture} {data} {columnMapping} />
+		<ExportBtns
+			chartToCapture={tableToCapture}
+			dataForDownload={data}
+			{columnMapping}
+			dataDownloadButton
+			imageDownloadButton={['PNG']}
+		/>
 	{/if}
 </div>
 
