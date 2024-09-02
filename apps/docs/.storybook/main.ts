@@ -24,6 +24,7 @@ const config: StorybookConfig = {
 		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
+		'@kemuridama/storybook-addon-github',
 		'@storybook/addon-svelte-csf',
 		getAbsolutePath('@storybook/addon-themes'),
 		getAbsolutePath('@storybook/addon-links'),
