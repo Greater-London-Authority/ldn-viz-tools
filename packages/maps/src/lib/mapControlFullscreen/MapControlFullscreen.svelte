@@ -1,6 +1,24 @@
-<script context="module">
+<script context="module" lang="ts">
 	import { ArrowsPointingIn, ArrowsPointingOut, ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
 	import { writable } from 'svelte/store';
+	import type { IconSource } from '@steeze-ui/heroicons';
+
+	interface HTMLFullscreenElement {
+		requestFullscreen?: () => Promise<void>;
+		exitFullscreen?: () => Promise<void>;
+		webkitRequestFullscreen?: () => Promise<void>;
+		webkitExitFullscreen?: () => Promise<void>;
+	}
+
+	interface FullscreenControlMode {
+		enterTitle: string;
+		enterIcon: IconSource;
+		enterFullscreen: () => void;
+
+		exitTitle?: string;
+		exitIcon?: IconSource;
+		exitFullscreen?: () => void;
+	}
 
 	const isFullscreen = writable(false);
 
@@ -10,19 +28,22 @@
 		return isPageEmbedded() || document.fullscreenEnabled;
 	};
 
-	const MODE_EMBED = {
-		titleOut: 'View as full page',
-		iconOut: ArrowTopRightOnSquare,
-		enterFullscreen: () => (window.top.location.href = window.location.href)
+	const MODE_EMBED: FullscreenControlMode = {
+		enterTitle: 'View as full page',
+		enterIcon: ArrowTopRightOnSquare,
+		enterFullscreen: () => {
+			if (window.top) {
+				window.top.location.href = window.location.href;
+			}
+		}
 	};
 
-	const MODE_API = {
-		titleOut: 'Enter fullscreen',
-		titleIn: 'Exit fullscreen',
-		iconOut: ArrowsPointingOut,
-		iconIn: ArrowsPointingIn,
-		enterFullscreen: (element = document.body) => {
+	const MODE_API: FullscreenControlMode = {
+		enterTitle: 'Enter fullscreen',
+		enterIcon: ArrowsPointingOut,
+		enterFullscreen: () => {
 			const updateState = () => isFullscreen.set(true);
+			const element = document.body as unknown as HTMLFullscreenElement;
 
 			if (element.requestFullscreen) {
 				element.requestFullscreen().then(updateState);
@@ -30,32 +51,40 @@
 			}
 
 			if (element.webkitRequestFullscreen) {
-				element.webkitRequestFullscreen().then(updateState); // Safari
+				element.webkitRequestFullscreen().then(updateState);
 			}
 		},
+
+		exitTitle: 'Exit fullscreen',
+		exitIcon: ArrowsPointingIn,
 		exitFullscreen: () => {
 			const updateState = () => isFullscreen.set(false);
+			const element = document as unknown as HTMLFullscreenElement;
 
-			if (document.exitFullscreen) {
-				document.exitFullscreen().then(updateState);
+			if (element.exitFullscreen) {
+				element.exitFullscreen().then(updateState);
 				return;
 			}
 
-			if (document.webkitExitFullscreen) {
-				document.webkitExitFullscreen().then(updateState); // Safari
+			if (element.webkitExitFullscreen) {
+				element.webkitExitFullscreen().then(updateState);
 			}
 		}
 	};
 </script>
 
-<script>
+<script lang="ts">
 	import { Button } from '@ldn-viz/ui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getContext, onMount } from 'svelte';
 
-	const mapStore = getContext('mapStore');
+	import type { MapStore } from '../map/Map.svelte';
 
-	let mode = null;
+	type ClickEvent = MouseEvent | TouchEvent;
+
+	const mapStore: MapStore = getContext('mapStore');
+
+	let mode: null | FullscreenControlMode = null;
 
 	onMount(() => {
 		if (isFullscreenAllowed()) {
@@ -63,15 +92,19 @@
 		}
 	});
 
-	const handle = (event) => {
+	const handle = (event: ClickEvent) => {
 		if (!$mapStore || !mode) {
 			return;
 		}
 
-		$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
+		if (!$isFullscreen) {
+			mode.enterFullscreen();
+		} else if (mode.exitFullscreen) {
+			mode.exitFullscreen();
+		}
 
 		if (event.detail > 0) {
-			$mapStore.getCanvas().focus();
+			$mapStore?.getCanvas().focus();
 		}
 	};
 </script>
@@ -81,11 +114,14 @@
 		<Button
 			variant="square"
 			emphasis="secondary"
-			title={$isFullscreen ? mode.titleIn : mode.titleOut}
+			title={$isFullscreen && mode.exitTitle ? mode.exitTitle : mode.enterTitle}
 			class="pointer-events-auto"
 			on:click={handle}
 		>
-			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="w-8 h-8 p-1" />
+			<Icon
+				src={$isFullscreen && mode.exitIcon ? mode.exitIcon : mode.enterIcon}
+				class="w-8 h-8 p-1"
+			/>
 		</Button>
 	</div>
 {/if}
