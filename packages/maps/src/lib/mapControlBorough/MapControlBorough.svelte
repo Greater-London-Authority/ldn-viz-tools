@@ -37,7 +37,7 @@
 			map.fitBounds(GREATER_LONDON_BOUNDS);
 		} else {
 			const bounds = boroughs.filter((f) => f.properties.borough === selectedBorough)[0].bounds;
-			map.fitBounds(bounds);
+			map.fitBounds(bounds as [number, number, number, number]);
 		}
 	}
 </script>
