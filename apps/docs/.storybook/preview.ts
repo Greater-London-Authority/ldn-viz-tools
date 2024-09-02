@@ -17,10 +17,10 @@ const preview: Preview = {
 			theme: docs
 		},
 		github: {
-			baseURL: "https://github.com",
-			repository: "Greater-London-Authority/ldn-viz-tools",
-			branch: "main",
-		},
+			baseURL: 'https://github.com',
+			repository: 'Greater-London-Authority/ldn-viz-tools',
+			branch: 'main'
+		}
 	},
 	decorators: [
 		withThemeByClassNameStore({

@@ -24,14 +24,14 @@ const config: StorybookConfig = {
 		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
-	 	'@kemuridama/storybook-addon-github',
+		'@kemuridama/storybook-addon-github',
 		'@storybook/addon-svelte-csf',
 		getAbsolutePath('@storybook/addon-themes'),
 		getAbsolutePath('@storybook/addon-links'),
 		getAbsolutePath('@storybook/addon-essentials'),
 		getAbsolutePath('@chromatic-com/storybook'),
 		getAbsolutePath('@storybook/addon-interactions'),
-		getAbsolutePath('@storybook/addon-a11y'),
+		getAbsolutePath('@storybook/addon-a11y')
 	],
 	framework: {
 		name: '@storybook/sveltekit',
