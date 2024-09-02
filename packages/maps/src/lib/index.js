@@ -2,6 +2,8 @@
 export * from './map/Map.svelte';
 export { default as Map } from './map/Map.svelte';
 export { default as MapApp } from './map/MapApp.svelte';
+export * from './map/types';
+export * from './map/util';
 
 // Controls
 export { default as MapControlFullscreen } from './mapControlFullscreen/MapControlFullscreen.svelte';

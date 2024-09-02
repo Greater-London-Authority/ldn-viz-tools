@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 	import MapApp from '../map/MapApp.svelte';
-	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
@@ -41,7 +41,6 @@
 
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
