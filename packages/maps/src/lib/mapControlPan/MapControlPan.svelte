@@ -1,14 +1,20 @@
-<script>
+<script lang="ts">
 	import { Button } from '@ldn-viz/ui';
 	import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getContext } from 'svelte';
 	import { FLY_ANIMATION_OPTIONS } from '../themes/animations';
+	import type { MapStore } from '../map/Map.svelte';
 
-	const mapStore = getContext('mapStore');
+	type ClickEvent = MouseEvent | TouchEvent;
+	type Handler = () => void;
+	type Direction = 'left' | 'right' | 'up' | 'down';
+	type MoveAmount = [number, number];
 
-	const newHandler = (handle) => {
-		return (event) => {
+	const mapStore: MapStore = getContext('mapStore');
+
+	const newHandler = (handle: Handler) => {
+		return (event: ClickEvent) => {
 			if (!$mapStore) {
 				return;
 			}
@@ -16,7 +22,7 @@
 			handle();
 
 			if (event.detail > 0) {
-				$mapStore.getCanvas().focus();
+				$mapStore?.getCanvas().focus();
 			}
 		};
 	};
@@ -26,14 +32,18 @@
 	const panLeft = () => panHandler('left');
 	const panRight = () => panHandler('right');
 
-	const panHandler = (direction) => {
-		const moveAmount = calcMoveAmount(direction);
-		$mapStore.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
+	const panHandler = (direction: Direction) => {
+		const moveAmount: MoveAmount = calcMoveAmount(direction);
+		$mapStore?.panBy(moveAmount, FLY_ANIMATION_OPTIONS);
 	};
 
-	const calcMoveAmount = (direction) => {
-		const rect = $mapStore.getContainer().getBoundingClientRect();
-		const calcDistance = (size) => size * 0.14;
+	const calcMoveAmount = (direction: Direction): MoveAmount => {
+		const rect = $mapStore?.getContainer().getBoundingClientRect();
+		if (!rect) {
+			return [0, 0];
+		}
+
+		const calcDistance = (size: number): number => size * 0.14;
 
 		switch (direction) {
 			case 'left':
@@ -45,6 +55,8 @@
 			case 'down':
 				return [0, calcDistance(rect.height)];
 		}
+
+		return [0, 0];
 	};
 </script>
 

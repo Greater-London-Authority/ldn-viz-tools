@@ -45,7 +45,7 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<MapControlGroup position="BottomLeft">
+			<MapControlGroup y="bottom">
 				<MapControlFullscreen />
 			</MapControlGroup>
 		</Map>
