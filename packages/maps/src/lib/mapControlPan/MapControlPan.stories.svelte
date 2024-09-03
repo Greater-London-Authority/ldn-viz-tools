@@ -23,27 +23,13 @@
 	<MapControlPan {...args} />
 </Template>
 
+<!--
+The pan buttons are usually positioned in the bottom right corner. They allow the user to pan up, down, left, and right by the same amount as the keyboard arrow buttons.
+
+They are not included on maps by default as the keyboard arrow buttons are easier, more natural, and seem to be sufficient usability.
+-->
 <Story name="Pan Buttons">
 	<MapApp>
-		<div class="text-color-text-primary space-y-4 m-2">
-			<p>
-				The zoom buttons are usually positioned in the top left corner under the location search.
-				They enable <a
-					class="underline"
-					href="https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#zoomin"
-				>
-					zoom in
-				</a>
-				and
-				<a
-					class="underline"
-					href="https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#zoomout"
-				>
-					zoom out
-				</a> by one zoom level per click.
-			</p>
-		</div>
-
 		<Map
 			options={{
 				style: os_light_vts,
