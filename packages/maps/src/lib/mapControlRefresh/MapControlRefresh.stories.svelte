@@ -22,15 +22,12 @@
 	<MapControlRefresh {...args} />
 </Template>
 
+<!--
+The refresh page button is usually positioned in the bottom left corner under the fullscreen
+button.
+-->
 <Story name="Refresh Button">
 	<div class="w-[100dvw] h-[100dvh]">
-		<div class="text-color-text-primary space-y-4 m-2">
-			<p>
-				The refresh page button is usually positioned in the bottom left corner under the fullscreen
-				button.
-			</p>
-		</div>
-
 		<Map
 			options={{
 				transformRequest: appendOSKeyToUrl(OS_KEY)
