@@ -12,9 +12,10 @@
 <script lang="ts">
 	import * as Plot from '@observablehq/plot';
 
-	import { exampleData, LDNSqrBoroughsGrid } from '$lib/tileMap/exampleData';
+	import { exampleData, LDNSqrBoroughsGrid } from './exampleData';
 
-	const barSpec = (datum) => {
+	const barSpec = (rawData) => {
+		const datum = rawData[0];
 		const data = [
 			{ type: 'A', value: datum.ValueA },
 			{ type: 'B', value: datum.ValueB }

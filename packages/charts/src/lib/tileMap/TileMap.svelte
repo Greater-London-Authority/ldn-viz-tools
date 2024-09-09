@@ -62,14 +62,34 @@
 	 */
 	export let domNode: any = undefined;
 
+	/**
+	 * Object specifying the tile layout.
+	 */
 	export let layout;
+
+	/**
+	 * Array of data entries containing one or more entry per tile. Each tile contains a filtered copy of this, containing only the relevant entries.
+	 */
 	export let data;
+
+	/**
+	 * Contextual data that can be used as a comparison in each tile. Each tile receives this whol object.
+	 */
 	export let contextData;
+
+	/**
+	 * The name of the field in the `layout` object which contains the id of the corresponding geography/area.
+	 */
 	export let idFieldLayout;
+
+	/**
+	 * The name of the field in the entries of the `data` object which contains the id of the corresponding geography/area.
+	 */
 	export let idFieldData;
 
-	// function that accepts a data object, and returns a spec
-	export let specFn;
+	/**
+	 * Function which receives `data` (fitlered to only include the entries relevant for particular tile)  and `contextData` as arguments, and returns an Observable Plot spec.
+	 */ export let specFn;
 </script>
 
 <!-- domNode ???-->
@@ -95,7 +115,7 @@
 			{#each Array.from({ length: layout.gridProperties.GRID_X }, (e, i) => i) as x}
 				{@const tile = layout.gridItems.find((t) => t.GRID_X === x && t.GRID_Y === y)}
 				{#if tile}
-					{@const tileData = data.find((d) => d[idFieldData] === tile[idFieldLayout])}
+					{@const tileData = data.filter((d) => d[idFieldData] === tile[idFieldLayout])}
 					<Tile data={tileData} {contextData} layout={tile} {specFn} label={tile.NAME} />
 				{:else}
 					<div />
