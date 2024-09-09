@@ -27,7 +27,7 @@
 	export let onClick = () => undefined;
 </script>
 
-<div style="overflow-y: auto; margin-bottom: 0;margin-top: auto;" on:click={onClick}>
+<div style="margin-top: auto;" class="overflow-y-auto mb-0 ml-2 mr-2" on:click={onClick}>
 	<h3 class="text-lg font-bold">{label}</h3>
 	<ObservablePlotInner {data} spec={specFn(data, contextData)} />
 </div>

@@ -101,6 +101,34 @@
 		};
 	};
 
+	const colorSpec = (rawData) => {
+		const datum = rawData[0];
+		const data = [{ type: 'B', value: datum.ValueA }];
+
+		return {
+			x: {
+				label: ''
+			},
+			y: {
+				label: ''
+			},
+			color: {
+				domain: [0, 4000]
+			},
+			marks: [
+				Plot.ruleY([0]),
+				Plot.dot(data, {
+					x: 0,
+					y: 0,
+					r: 1000,
+					fill: 'value'
+				}),
+				Plot.axisX({ ticks: [] }),
+				Plot.axisY({ ticks: [] })
+			]
+		};
+	};
+
 	import { max } from 'd3-array';
 	console.log(max(exampleTimeSeries.map((d) => d.value)));
 
@@ -140,6 +168,18 @@
 		idFieldData="GSS_CODE"
 		title="TileMap dots"
 		subTitle="A tile map encoding a pair of values for each borough as the areas of two circles"
+	/>
+</Story>
+
+<Story name="Color" source>
+	<TileMap
+		layout={LDNSqrBoroughsGrid}
+		data={exampleData}
+		specFn={colorSpec}
+		idFieldLayout="GSS_CODE"
+		idFieldData="GSS_CODE"
+		title="Colored tiles"
+		subTitle="A tile map encoding a value for each borough as the color of a rectangle"
 	/>
 </Story>
 
