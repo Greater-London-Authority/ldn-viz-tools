@@ -41,6 +41,39 @@
 		};
 	};
 
+	const proportionalSymbolSpec = (rawData) => {
+		const datum = rawData[0];
+		const data = [
+			{ type: 'A', value: datum.ValueA },
+			{ type: 'B', value: datum.ValueB }
+		];
+
+		return {
+			x: {
+				label: ''
+			},
+			y: {
+				label: ''
+			},
+			r: {
+				domain: [0, 4000],
+				range: [0, 40]
+			},
+			marks: [
+				Plot.ruleY([0]),
+				Plot.dot(data, {
+					// x: 'type',
+					x: 0,
+					y: 0,
+					r: 'value',
+					fill: 'type'
+				}),
+				Plot.axisX({ ticks: [] }),
+				Plot.axisY({ ticks: [] })
+			]
+		};
+	};
+
 	const lineChartSpec = (data) => {
 		console.log(data);
 		return {
@@ -95,6 +128,18 @@
 		idFieldData="gss_code"
 		title="TileMap line chart"
 		subTitle="A tile map showing a time series as a line-chart for each borough"
+	/>
+</Story>
+
+<Story name="Proportional symbols/Dots" source>
+	<TileMap
+		layout={LDNSqrBoroughsGrid}
+		data={exampleData}
+		specFn={proportionalSymbolSpec}
+		idFieldLayout="GSS_CODE"
+		idFieldData="GSS_CODE"
+		title="TileMap dots"
+		subTitle="A tile map encoding a pair of values for each borough as the areas of two circles"
 	/>
 </Story>
 
