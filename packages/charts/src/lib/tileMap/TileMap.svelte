@@ -1,19 +1,8 @@
 <script lang="ts">
-	import type { Position } from './types.ts';
-
+	import Tile from './Tile.svelte';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
-	import ObservablePlotInner from './ObservablePlotInner.svelte';
-	import { writable } from 'svelte/store';
 
-	/**
-	 * The Observable Plot specification for the visualization.
-	 */
-	export let spec;
-
-	/**
-	 * Data being visualized (as an array of objects), to be used by data download button.
-	 */
-	export let data: { [key: string]: any }[] = [];
+	// Standard chrome
 
 	/**
 	 * Title that is displayed in large text above the plot.
@@ -73,37 +62,45 @@
 	 */
 	export let domNode: any = undefined;
 
-	/**
-	 * A store that stores details of the moused-over point.
-	 * Used for custom tooltips.
-	 */
-	export let tooltipStore = writable<Position>();
+	export let layout;
+	export let data;
+	export let contextData;
+	export let idFieldLayout;
+	export let idFieldData;
 
-	/** A y-offset between data points and tooltips (pixels). */
-	export let tooltipOffset = -16;
+	// function that accepts a data object, and returns a spec
+	export let specFn;
 </script>
 
-{#key spec}
-	<ChartContainer
-		{data}
-		{title}
-		{subTitle}
-		{alt}
-		{source}
-		{note}
-		{byline}
-		{dataDownloadButton}
-		{imageDownloadButton}
-		{...$$restProps}
-		chartHeight={'h-fit'}
-		{chartWidth}
-	>
-		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} />
-	</ChartContainer>
-{/key}
+<!-- domNode ???-->
 
-<style>
-	:global(.defaultColorLegendLabel-swatch) {
-		font-size: 1rem;
-	}
-</style>
+<ChartContainer
+	{title}
+	{subTitle}
+	{alt}
+	{chartWidth}
+	{source}
+	{byline}
+	{note}
+	{dataDownloadButton}
+	{imageDownloadButton}
+	chartHeight="h-full"
+>
+	<div
+		class="grid grid-cols w-full h-full"
+		style="grid-template-columns: repeat({layout.gridProperties
+			.GRID_X}, 1fr); grid-template-rows: repeat({layout.gridProperties.GRID_Y}, auto); );"
+	>
+		{#each Array.from({ length: layout.gridProperties.GRID_Y }, (e, i) => i) as y}
+			{#each Array.from({ length: layout.gridProperties.GRID_X }, (e, i) => i) as x}
+				{@const tile = layout.gridItems.find((t) => t.GRID_X === x && t.GRID_Y === y)}
+				{#if tile}
+					{@const tileData = data.find((d) => d[idFieldData] === tile[idFieldLayout])}
+					<Tile data={tileData} {contextData} layout={tile} {specFn} label={tile.NAME} />
+				{:else}
+					<div />
+				{/if}
+			{/each}
+		{/each}
+	</div>
+</ChartContainer>
