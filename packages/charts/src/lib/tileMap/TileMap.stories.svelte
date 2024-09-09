@@ -22,9 +22,11 @@
 		];
 
 		return {
+			x: {
+				label: ''
+			},
 			y: {
-				grid: true,
-				percent: true
+				label: ''
 			},
 			marks: [
 				Plot.ruleY([0]),
@@ -32,7 +34,9 @@
 					x: 'type',
 					y: 'value',
 					fill: 'type'
-				})
+				}),
+				Plot.axisX({ ticks: [] }),
+				Plot.axisY({ ticks: [] })
 			]
 		};
 	};
@@ -40,9 +44,13 @@
 	const lineChartSpec = (data) => {
 		console.log(data);
 		return {
+			x: {
+				label: ''
+			},
 			y: {
 				grid: true,
-				domain: [0, 3300]
+				domain: [0, 3300],
+				label: ''
 			},
 			marks: [
 				Plot.ruleY([0]),
@@ -53,7 +61,9 @@
 				Plot.dot(data, {
 					x: 'year',
 					y: 'value'
-				})
+				}),
+				Plot.axisX({ ticks: [] }),
+				Plot.axisY({ ticks: [] })
 			]
 		};
 	};
