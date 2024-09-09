@@ -90,6 +90,11 @@
 	/**
 	 * Function which receives `data` (fitlered to only include the entries relevant for particular tile)  and `contextData` as arguments, and returns an Observable Plot spec.
 	 */ export let specFn;
+
+	/**
+	 * Function that will be called (passing the geography id as an argument) when the user clicks on a tile.
+	 */
+	export let onClick = (id) => undefined;
 </script>
 
 <!-- domNode ???-->
@@ -116,7 +121,14 @@
 				{@const tile = layout.gridItems.find((t) => t.GRID_X === x && t.GRID_Y === y)}
 				{#if tile}
 					{@const tileData = data.filter((d) => d[idFieldData] === tile[idFieldLayout])}
-					<Tile data={tileData} {contextData} layout={tile} {specFn} label={tile.NAME} />
+					<Tile
+						data={tileData}
+						{contextData}
+						layout={tile}
+						{specFn}
+						label={tile.NAME}
+						onClick={() => onClick(tile[idFieldLayout])}
+					/>
 				{:else}
 					<div />
 				{/if}

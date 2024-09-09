@@ -20,9 +20,14 @@
 	 * Label to be displayed at the top of each tile.
 	 */
 	export let label = '';
+
+	/**
+	 * Function that will be called (passing the geography id as an argument) when the user clicks on a tile.
+	 */
+	export let onClick = () => undefined;
 </script>
 
-<div style="overflow-y: auto; margin-bottom: 0;margin-top: auto">
+<div style="overflow-y: auto; margin-bottom: 0;margin-top: auto;" on:click={onClick}>
 	<h3 class="text-lg font-bold">{label}</h3>
 	<ObservablePlotInner {data} spec={specFn(data, contextData)} />
 </div>

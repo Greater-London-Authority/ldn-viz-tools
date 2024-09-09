@@ -60,6 +60,8 @@
 
 	import { max } from 'd3-array';
 	console.log(max(exampleTimeSeries.map((d) => d.value)));
+
+	let selectedBoroughId = '';
 </script>
 
 <Story name="Default" source>
@@ -83,5 +85,26 @@
 		idFieldData="gss_code"
 		title="TileMap line chart"
 		subTitle="A tile map showing a time series as a line-chart for each borough"
+	/>
+</Story>
+
+<Story name="Click handler on tile" source>
+	{#if selectedBoroughId}
+		<p>
+			Selected borough id: {selectedBoroughId}
+		</p>
+	{:else}
+		<p>Click on tile to select a borough.</p>
+	{/if}
+
+	<TileMap
+		layout={LDNSqrBoroughsGrid}
+		data={exampleTimeSeries}
+		specFn={lineChartSpec}
+		idFieldLayout="GSS_CODE"
+		idFieldData="gss_code"
+		title="TileMap line chart"
+		subTitle="A tile map showing a time series as a line-chart for each borough"
+		onClick={(id) => (selectedBoroughId = id)}
 	/>
 </Story>
