@@ -163,3 +163,16 @@
 		onClick={(id) => (selectedBoroughId = id)}
 	/>
 </Story>
+
+<Story name="Full names on tiles" source>
+	<TileMap
+		layout={LDNSqrBoroughsGrid}
+		data={exampleTimeSeries}
+		specFn={lineChartSpec}
+		idFieldLayout="GSS_CODE"
+		idFieldData="gss_code"
+		title="TileMap line chart"
+		subTitle="A tile map showing a time series as a line-chart for each borough"
+		useFullNames
+	/>
+</Story>

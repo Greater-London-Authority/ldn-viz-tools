@@ -95,6 +95,11 @@
 	 * Function that will be called (passing the geography id as an argument) when the user clicks on a tile.
 	 */
 	export let onClick = (id) => undefined;
+
+	/**
+	 * Determines whether to use the short or full name for each tile.
+	 */
+	export let useFullNames = false;
 </script>
 
 <!-- domNode ???-->
@@ -126,7 +131,7 @@
 						{contextData}
 						layout={tile}
 						{specFn}
-						label={tile.NAME}
+						label={useFullNames ? tile.NAME : tile.SHORT_NAME}
 						onClick={() => onClick(tile[idFieldLayout])}
 					/>
 				{:else}
