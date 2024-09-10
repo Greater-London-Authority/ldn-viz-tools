@@ -91,10 +91,6 @@
 					x: 'year',
 					y: 'value'
 				}),
-				Plot.dot(data, {
-					x: 'year',
-					y: 'value'
-				}),
 				Plot.axisX({ ticks: [] }),
 				Plot.axisY({ ticks: [] })
 			]
