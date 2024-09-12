@@ -1,5 +1,14 @@
 # ldn-viz-tools-charts
 
+## 3.1.1
+
+### Patch Changes
+
+- 9f5ab57: MINOR: fixed use of MultiActionButton props form ImageDownloadButton and DataDownloadButton.
+- Updated dependencies [9f5ab57]
+- Updated dependencies [40c49a5]
+  - @ldn-viz/ui@14.1.0
+
 ## 3.1.0
 
 ### Minor Changes
