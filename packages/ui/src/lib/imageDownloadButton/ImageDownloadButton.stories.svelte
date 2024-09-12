@@ -36,7 +36,7 @@
 	</svg>
 
 	<ImageDownloadButton {...args} svgNode={svgRef}>
-		I'm an image download button!
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Template>
 
@@ -49,7 +49,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef}>
-		Download as PNG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
 
@@ -61,16 +61,13 @@
 
 	<div class="space-y-2">
 		<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="primary">
-			Primary
-			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 		</ImageDownloadButton>
 		<ImageDownloadButton svgNode={svgRef} filename="download" emphasis="secondary">
-			Secondary
-			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 		</ImageDownloadButton>
-		<ImageDownloadButton svgNode={svgRef} filename="download" variant="text">
-			Text
-			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<ImageDownloadButton svgNode={svgRef} filename="download" variant="outline" size="sm">
+			<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 		</ImageDownloadButton>
 	</div>
 </Story>
@@ -82,7 +79,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef} disabled={true}>
-		Download as PNG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
 
@@ -93,7 +90,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef2}>
-		Download as PNG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
 
@@ -104,7 +101,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef3} formats={['SVG']}>
-		Download as SVG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
 
@@ -115,7 +112,7 @@
 	</svg>
 
 	<ImageDownloadButton svgNode={svgRef3} formats={['PNG']}>
-		Download as SVG<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
 
@@ -127,7 +124,7 @@
 	</div>
 
 	<ImageDownloadButton htmlNode={htmlRef} htmlId="divToSave">
-		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
 
@@ -143,7 +140,7 @@
 	</div>
 
 	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave">
-		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
 
@@ -159,7 +156,27 @@
 	</div>
 
 	<ImageDownloadButton htmlNode={htmlRef} idToPad="divToSave" padding="100px">
-		Download as image<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
+	</ImageDownloadButton>
+</Story>
+
+<Story name="With no icon">
+	<svg bind:this={svgRef} width="100" height="100">
+		<rect x="0" y="0" width="100" height="100" fill="red" />
+		<circle cx="10" cy="10" r="10" fill="blue" />
+	</svg>
+
+	<ImageDownloadButton svgNode={svgRef} />
+</Story>
+
+<Story name="With icon before label">
+	<svg bind:this={svgRef} width="100" height="100">
+		<rect x="0" y="0" width="100" height="100" fill="red" />
+		<circle cx="10" cy="10" r="10" fill="blue" />
+	</svg>
+
+	<ImageDownloadButton svgNode={svgRef}
+		><Icon src={Camera} theme="mini" class="mr-2 w-5 h-5" aria-hidden="true" slot="beforeLabel" />
 	</ImageDownloadButton>
 </Story>
 
