@@ -30,7 +30,13 @@
 
 <Template let:args>
 	<DataDownloadButton {data} {...args}>
-		Download <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon
+			src={ArrowDownTray}
+			theme="mini"
+			class="ml-2 w-5 h-5"
+			aria-hidden="true"
+			slot="afterLabel"
+		/>
 	</DataDownloadButton>
 </Template>
 
@@ -45,43 +51,90 @@
 	}}
 />
 
-<Story name="Rename Columns">
-	<DataDownloadButton {data} filename="download" columnMapping={{ A: 'foo', B: 'bar', C: 'baz' }}>
-		<Icon src={ArrowDownTray} theme="solid" class="w-6 h-6" aria-hidden="true" />
+<Story name="Without Icon">
+	<DataDownloadButton {data} filename="download" />
+</Story>
+
+<Story name="Wit Icon before label">
+	<DataDownloadButton {data} filename="download">
+		<Icon
+			src={ArrowDownTray}
+			theme="mini"
+			class="mr-2 w-5 h-5"
+			aria-hidden="true"
+			slot="beforeLabel"
+		/>
 	</DataDownloadButton>
+</Story>
+
+<Story name="Rename Columns">
+	<DataDownloadButton {data} filename="download" columnMapping={{ A: 'foo', B: 'bar', C: 'baz' }} />
 </Story>
 
 <Story name="Button types">
 	<div class="flex flex-col space-y-2">
 		<DataDownloadButton {data} filename="download" format="CSV" emphasis="primary">
-			Primary <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+			<Icon
+				src={ArrowDownTray}
+				theme="mini"
+				class="ml-2 w-5 h-5"
+				aria-hidden="true"
+				slot="afterLabel"
+			/>
 		</DataDownloadButton>
 		<DataDownloadButton {data} filename="download" format="CSV" emphasis="secondary">
-			Secondary <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+			<Icon
+				src={ArrowDownTray}
+				theme="mini"
+				class="ml-2 w-5 h-5"
+				aria-hidden="true"
+				slot="afterLabel"
+			/>
 		</DataDownloadButton>
-		<DataDownloadButton {data} filename="download" format="CSV" variant="text">
-			Text <Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<DataDownloadButton {data} filename="download" format="CSV" variant="outline" size="sm">
+			<Icon
+				src={ArrowDownTray}
+				theme="mini"
+				class="ml-2 w-5 h-5"
+				aria-hidden="true"
+				slot="afterLabel"
+			/>
 		</DataDownloadButton>
 	</div>
 </Story>
 
 <Story name="Download as JSON - no choice">
 	<DataDownloadButton {data} filename="download" formats={['JSON']}>
-		Download as JSON
-		<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon
+			src={ArrowDownTray}
+			theme="mini"
+			class="ml-2 w-5 h-5"
+			aria-hidden="true"
+			slot="afterLabel"
+		/>
 	</DataDownloadButton>
 </Story>
 
 <Story name="Download as CSV - no choice">
 	<DataDownloadButton {data} filename="download" formats={['CSV']}>
-		Download as JSON
-		<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon
+			src={ArrowDownTray}
+			theme="mini"
+			class="ml-2 w-5 h-5"
+			aria-hidden="true"
+			slot="afterLabel"
+		/>
 	</DataDownloadButton>
 </Story>
 
 <Story name="Disabled">
 	<DataDownloadButton {data} disabled={true} filename="download">
-		Download
-		<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
+		<Icon
+			src={ArrowDownTray}
+			theme="mini"
+			class="ml-2 w-5 h-5"
+			aria-hidden="true"
+			slot="afterLabel"
+		/>
 	</DataDownloadButton>
 </Story>
