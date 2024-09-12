@@ -3,4 +3,4 @@
 "@ldn-viz/docs": patch
 ---
 
-Header and Modal Header themed dark as default
+CHANGED: Header and Modal Header are now themed dark as default, but this can be overridden with a prop
