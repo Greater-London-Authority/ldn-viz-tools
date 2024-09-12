@@ -29,7 +29,6 @@
 			emphasis="secondary"
 			size="sm"
 		>
-			Download as
 			<svelte:fragment slot="afterLabel">
 				<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
 			</svelte:fragment>
@@ -44,7 +43,6 @@
 			emphasis="secondary"
 			size="sm"
 		>
-			Save as image
 			<svelte:fragment slot="afterLabel">
 				<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
 			</svelte:fragment>
