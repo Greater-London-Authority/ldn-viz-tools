@@ -1,5 +1,15 @@
 # ldn-viz-tools-ui
 
+## 14.1.0
+
+### Minor Changes
+
+- 40c49a5: CHANGED: Header and Modal Header are now themed dark as default, but this can be overridden with a prop
+
+### Patch Changes
+
+- 9f5ab57: MINOR: fixed use of MultiActionButton props form ImageDownloadButton and DataDownloadButton.
+
 ## 14.0.0
 
 ### Major Changes
