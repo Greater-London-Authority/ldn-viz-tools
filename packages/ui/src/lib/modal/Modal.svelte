@@ -36,6 +36,11 @@
 	export let description: string = '';
 
 	/**
+	 * Colour scheme to apply to the header, either `light` or `dark`. The modal will respect global theme settings.
+	 */
+	export let headerTheme: 'light' | 'dark' = 'dark';
+
+	/**
 	 * width of the modal
 	 */
 	export let width:
@@ -82,7 +87,7 @@
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
-					class="bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand"
+					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
 					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
 					<div {...$close} use:$close.action>
