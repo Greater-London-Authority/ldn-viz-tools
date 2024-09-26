@@ -30,7 +30,7 @@
 			>
 				<div role="cell" tabindex="0" class="flex flex-col">
 					<div class="flex items-end pt-2 mb-2">
-						<div class="text-center w-full"><span class="capitalize">{colGroup.label}</span></div>
+						<div class="text-center w-full"><span>{colGroup.label}</span></div>
 					</div>
 				</div>
 			</div>
