@@ -1,5 +1,11 @@
 # @ldn-viz/tables
 
+## 1.3.0
+
+### Minor Changes
+
+- 33a1934: CHANGED: remove `capitalization` class from header cells in Table
+
 ## 1.2.0
 
 ### Minor Changes
