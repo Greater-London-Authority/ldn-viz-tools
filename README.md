@@ -12,8 +12,10 @@ This is a mono-repo containing several components:
 
 - the [`@ldn-viz/charts`](https://www.npmjs.com/package/@ldn-viz/charts) package is in [`charts/`](./packages/charts) ([CHANGELOG](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/charts/CHANGELOG.md)); it contains components for visualizing data
 - the [`@ldn-viz/maps`](https://www.npmjs.com/package/@ldn-viz/maps) package is in [`maps/`](./packages/maps) ([CHANGELOG](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/maps/CHANGELOG.md)); it contains components for rendering maps
-- the [`@ldn-viz/ui`](https://www.npmjs.com/package/@ldn-viz/ui) package is in [`ui/`](./packages/ui) ([CHANGELOG](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/ui/CHANGELOG.md)); it contains general UI components like modals or sidebars
+- the [`@ldn-viz/tables`](https://www.npmjs.com/package/@ldn-viz/tables) package is in [`tables/`](./packages/tables) ([CHANGELOG](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/tables/CHANGELOG.md)); it contains components for rendering tables
 - the [`@ldn-viz/themes`](https://www.npmjs.com/package/@ldn-viz/themes) package is in [`theme/`](./packages/themes) ([CHANGELOG](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/themes/CHANGELOG.md)); it contains CSS and design tokens that are used by other components
+- the [`@ldn-viz/ui`](https://www.npmjs.com/package/@ldn-viz/ui) package is in [`ui/`](./packages/ui) ([CHANGELOG](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/ui/CHANGELOG.md)); it contains general UI components like modals or sidebars
+- the [`@ldn-viz/utils`](https://www.npmjs.com/package/@ldn-viz/utils) package is in [`utils/`](./packages/utils) ([CHANGELOG](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/utils/CHANGELOG.md)); it contains utils functions (such as for constructing color scales)
 
 These packages are intended primarily for use in projects created by [Greater London Authority](https://london.gov.uk/)'s [City Intelligence Unit](https://www.london.gov.uk/programmes-strategies/research-and-analysis).
 
