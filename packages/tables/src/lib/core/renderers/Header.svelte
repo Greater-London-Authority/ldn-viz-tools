@@ -47,11 +47,11 @@
 	tabindex={0}
 	class="flex flex-col cursor-pointer"
 >
-	<div class="flex items-center min-h-[55px] ml-2 py-2 capitalize select-none">
+	<div class="flex items-center min-h-[55px] ml-2 py-2 select-none">
 		{#if superscriptText}
 			<div class="text-left">
 				<span class="font-normal text-xs">{superscriptText}</span><br />
-				<span class="capitalize">{label}</span>
+				<span>{label}</span>
 			</div>
 		{:else}
 			{label}
