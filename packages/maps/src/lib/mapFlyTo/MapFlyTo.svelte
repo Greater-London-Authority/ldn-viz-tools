@@ -15,19 +15,29 @@
 
 	const mapStore: MapStore = getContext('mapStore');
 
+	type Data = {
+		[key: string]: any;
+	};
+
+	type GeoJSONData = {
+		id: number;
+		properties: Data;
+		geometry: Data;
+	};
+
 	/**
 	 * The last clicked item on `<Map>` or `<CardList>`, passed in as
 	 * a two-way bind. This is in the shape of an `esriData`
 	 * item, which should have `geometry` and `properties` keys.
 	 */
-	export let selectedItem;
+	export let selectedItem: GeoJSONData | Data;
 
 	/**
 	 * The last clicked item on `<Map>`, passed in as
 	 * a two-way bind. This is in the shape of a `GeoJSON`,
 	 * which should have `geometry` and `properties` keys.
 	 */
-	export let clickedMapItem;
+	export let clickedMapItem: GeoJSONData | Data;
 
 	/**
 	 * Sets the size of the flyTo zoom.
@@ -43,8 +53,8 @@
 	export let idField: string;
 
 	const flyToMapItem = (
-		lastMapItem: { properties: { [x: string]: any }; geometry: { [x: string]: any } },
-		activeItem: { properties: { [x: string]: any } },
+		lastMapItem: GeoJSONData | Data,
+		activeItem: GeoJSONData | Data,
 		idField: string,
 		mapZoom: number
 	) => {
