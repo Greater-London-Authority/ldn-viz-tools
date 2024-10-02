@@ -48,7 +48,8 @@
 	 * Takes an object of type `Data` and returns the id for
 	 * comparison between `selectedItem` and `clickedMapItem`.
 	 * You can pass in a custom function to fetch id if your object
-	 * doesn't have an `id` key.
+	 * doesn't have an `id` key. If item is undefined, it returns
+	 * `undefined`.
 	 */
 	export let getID = (item: Data) => (item ? item.id : undefined);
 
