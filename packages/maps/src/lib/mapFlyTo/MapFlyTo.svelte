@@ -45,17 +45,16 @@
 	export let mapZoom: number = 13;
 
 	/**
-	 * Sets the name of the key corresponding to an id value,
-	 * for comparison of `selectedItem` and `clickedMapItem`.
-	 * This name depends on the shape of the `GeoJSON` data,
-	 * e.g. `site_id`.
+	 * Takes an object of type `Data` and returns the id for
+	 * comparison between `selectedItem` and `clickedMapItem`.
+	 * You can pass in a custom function to fetch id if your object
+	 * doesn't have an `id` key.
 	 */
-	export let idField: string;
+	export let getID = (item: Data) => (item ? item.id : undefined);
 
 	const flyToMapItem = (
 		lastMapItem: GeoJSONData | Data,
 		activeItem: GeoJSONData | Data,
-		idField: string,
 		mapZoom: number
 	) => {
 		/**
@@ -63,7 +62,7 @@
 		 * if not, assign the value of activeItem to lastMapItem
 		 * and fly to the coordinates of activeItem
 		 */
-		if (lastMapItem?.properties[idField] !== activeItem?.properties[idField]) {
+		if (getID(lastMapItem) !== getID(activeItem)) {
 			lastMapItem = activeItem;
 			const { geometry } = lastMapItem;
 			$mapStore.flyTo({
@@ -73,5 +72,7 @@
 		}
 	};
 
-	$: flyToMapItem(clickedMapItem, selectedItem, idField, mapZoom);
+	$: flyToMapItem(clickedMapItem, selectedItem, mapZoom);
 </script>
+
+<slot />
