@@ -10,10 +10,12 @@
 	 * @component
 	 */
 
+	import { prefersReducedMotion } from '@ldn-viz/ui';
 	import { getContext } from 'svelte';
 	import type { MapStore } from '../map/Map.svelte';
 
 	const mapStore: MapStore = getContext('mapStore');
+	const reducedMotion = prefersReducedMotion;
 
 	type Data = {
 		[key: string]: any;
@@ -60,6 +62,11 @@
 		if (getID(lastMapItem) !== getID(activeItem)) {
 			lastMapItem = activeItem;
 			const { geometry } = lastMapItem;
+			if (reducedMotion) {
+				$mapStore.flyTo({
+					// Set different motion options for reducedMotion
+				});
+			}
 			$mapStore.flyTo({
 				center: geometry.coordinates,
 				zoom: mapZoom
