@@ -42,7 +42,7 @@
 	} from '../../data/demoData';
 
 	import DemoTooltip from './DemoTooltip.svelte';
-	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';
+	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
 
 	$: ({
