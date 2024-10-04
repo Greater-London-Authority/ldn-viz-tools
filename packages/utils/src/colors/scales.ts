@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 
-import { bin, extent, min, max } from 'd3-array';
+import { bin, extent, max, min } from 'd3-array';
 import { format } from 'd3-format';
 
 import ldnColors from '@ldn-viz/themes/colors.json';
@@ -31,6 +31,28 @@ export const getColorRamp = ({
   }
 
   return colorArray;
+};
+
+// A simple function wrapping around getColorRamp that calls
+// getColorRamp twice and concatenates the resulting arrays
+export const getSimpleDiverging = (
+  count: number,
+  lowColors: string[],
+  highColors: string[],
+  even: boolean
+) => {
+  const halfCount = Math.floor(count / 2);
+  const neutral = count % 2 !== 0 ? ldnColors.core.grey[100] : null;
+  return neutral
+    ? [
+        ...getColorRamp({ colors: lowColors, even, count: halfCount }),
+        neutral,
+        ...getColorRamp({ colors: highColors, even, count: halfCount })
+      ]
+    : [
+        ...getColorRamp({ colors: lowColors, even, count: halfCount }),
+        ...getColorRamp({ colors: highColors, even, count: halfCount })
+      ];
 };
 
 export const getThresholdBreaksColorsLabels = ({
