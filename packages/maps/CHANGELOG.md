@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 5.1.0
+
+### Minor Changes
+
+- 1f94ca5: FIXED: `GeoJSONFeature` to `GeoJSON.Feature` in `MapCursorEvent` for correct typing of `handlerArgTypes`
+
 ## 5.0.0
 
 ### Major Changes

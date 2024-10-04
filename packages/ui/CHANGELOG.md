@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 14.2.0
+
+### Minor Changes
+
+- 5472861: CHANGED: update highlighting of tab icons inside a `TabList` or `SidebarTabList` when the selected item is changed externally
+
 ## 14.1.0
 
 ### Minor Changes
