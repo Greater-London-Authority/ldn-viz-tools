@@ -1,6 +1,6 @@
 <script>
-	import LinkWrapper from '../cells/LinkWrapper.svelte';
 	import ColoredCell from '../../core/renderers/ColoredCell.svelte';
+	import LinkWrapper from '../cells/LinkWrapper.svelte';
 	import Scaffolding from './Scaffolding.svelte';
 
 	export let row;
