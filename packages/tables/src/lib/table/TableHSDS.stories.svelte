@@ -1,4 +1,6 @@
 <script context="module">
+	import DoubleBarCellAxis from '../core/renderers/DoubleBarCellAxis.svelte';
+	import PairArrowCellAxis from '../core/renderers/PairArrowCellAxis.svelte';
 	import Table from './Table.svelte';
 
 	export const meta = {
@@ -116,7 +118,9 @@
 					alignText: 'right',
 					contextFields: ['previous'],
 					extent: [0, 250],
-					width: '200px'
+					width: '200px',
+
+					axisRenderer: PairArrowCellAxis
 				},
 
 				column: { renderer: 'TextCell', value: '' }
@@ -131,7 +135,10 @@
 					renderer: 'DoubleBarCell',
 					formatString: ',.0f',
 					alignText: 'right',
-					extent: [-140, +140]
+					extent: [-140, +140],
+
+					axisRenderer: DoubleBarCellAxis,
+					numTicks: 5
 				},
 
 				column: { renderer: 'TextCell', value: '' }

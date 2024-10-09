@@ -17,14 +17,13 @@
 	export let contextVals: number[] = [0]; // value to be compared to
 
 	export let width;
-
 	$: {
 		if (width) {
 			widthInPixels = +width.replace('px', '');
 		}
 	}
 
-	export let widthInPixels = 100;
+	let widthInPixels = 100;
 	const height = 30;
 
 	const barEndPadding = 15;
