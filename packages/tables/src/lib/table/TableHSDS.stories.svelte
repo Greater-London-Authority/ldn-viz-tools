@@ -130,7 +130,8 @@
 				cell: {
 					renderer: 'DoubleBarCell',
 					formatString: ',.0f',
-					alignText: 'right'
+					alignText: 'right',
+					extent: [-140, +140]
 				},
 
 				column: { renderer: 'TextCell', value: '' }

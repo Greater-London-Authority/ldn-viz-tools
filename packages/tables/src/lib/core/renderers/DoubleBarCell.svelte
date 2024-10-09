@@ -5,12 +5,20 @@
 	 * @component
 	 */
 
+	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
 
 	/**
 	 * The value to be encoded in the cell.
 	 */
 	export let value: number;
+
+	/**
+	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
+	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
+	 * If set to a falsy value, then bars will not be labelled with a value.
+	 */
+	export let formatString = '0.0f';
 
 	export let extent = [0, 1]; // used to pass automatically extracted val
 
@@ -23,6 +31,16 @@
 
 	let x;
 	$: x = scaleLinear().domain(extent).range([0, width]);
+
+	const formatPercent = format('0.0f');
+	let f;
+	$: if (formatString) {
+		f = format(formatString);
+	}
+
+	$: textSize = 16; // height - 2 * barVerticalPadding;
+
+	const textPadding = 2;
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
@@ -44,6 +62,31 @@
 			height={height - 2 * barVerticalPadding}
 			fill="red"
 		/>
+
+		<!-- zero line -->
+		<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+
+		{#if formatString}
+			{#if value < extent[0] / 2}
+				<!-- text inside bar, which is pointing left -->
+				<text
+					text-anchor="start"
+					fill="white"
+					x={x(value) + textPadding}
+					y={height / 2 + textSize / 2}
+					font-size={`${textSize}px`}>{f(+value)}</text
+				>
+			{:else}
+				<!-- text to left of bar-->
+				<text
+					text-anchor="end"
+					fill="black"
+					x={x(value) - textPadding}
+					y={height / 2 + textSize / 2}
+					font-size={`${textSize}px`}>{f(+value)}</text
+				>
+			{/if}
+		{/if}
 	{:else}
 		<rect
 			x={x(0)}
@@ -52,8 +95,30 @@
 			height={height - 2 * barVerticalPadding}
 			fill="blue"
 		/>
-	{/if}
 
-	<!-- zero line -->
-	<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+		<!-- zero line -->
+		<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+
+		{#if formatString}
+			{#if value > extent[1] / 2}
+				<!-- text inside bar, which is pointing right -->
+				<text
+					text-anchor="end"
+					fill="white"
+					x={x(value) - textPadding}
+					y={height / 2 + textSize / 2}
+					font-size={`${textSize}px`}>{f(+value)}</text
+				>
+			{:else}
+				<!-- text to left of bar-->
+				<text
+					text-anchor="start"
+					fill="black"
+					x={x(value) + textPadding}
+					y={height / 2 + textSize / 2}
+					font-size={`${textSize}px`}>{f(+value)}</text
+				>
+			{/if}
+		{/if}
+	{/if}
 </svg>
