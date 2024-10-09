@@ -12,7 +12,7 @@ import ColorAndLabel from './renderers/ColorAndLabel.svelte';
 import ColoredCell from './renderers/ColoredCell.svelte';
 import DateCell from './renderers/DateCell.svelte';
 import Dot from './renderers/Dot.svelte';
-import DoubleBarCell from './renderers/DoubleBarCell.svelte';
+import BarDivergingCell from './renderers/BarDivergingCell.svelte';
 import GoodOrBad from './renderers/GoodOrBad.svelte';
 import Header from './renderers/Header.svelte';
 import PairArrow from './renderers/PairArrowCell.svelte';
@@ -27,7 +27,7 @@ export const renderer = {
 	ColoredCell,
 	DateCell,
 	Dot,
-	DoubleBarCell,
+	BarDivergingCell,
 	GoodOrBad,
 	Header, // ?
 	PairArrow,

@@ -1,9 +1,9 @@
 <script context="module">
-	import DoubleBarCell from './DoubleBarCell.svelte';
+	import BarDivergingCell from './BarDivergingCell.svelte';
 
 	export const meta = {
-		title: 'Tables/Encodings/DoubleBarCell',
-		component: DoubleBarCell,
+		title: 'Tables/Encodings/BarDivergingCell',
+		component: BarDivergingCell,
 
 		args: {
 			value: 0.5
@@ -16,7 +16,7 @@
 </script>
 
 <Template let:args>
-	<DoubleBarCell {...args} />
+	<BarDivergingCell {...args} />
 </Template>
 
 <Story name="Default" source />

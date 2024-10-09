@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `DoubleBarCellAxis` component renders an axis for the `DoubleBarCell` component.
+	 * The `PairArrowAxis` component rendersan axis for the `PairArrowCell` component.
 	 * @component
 	 */
 
@@ -16,18 +16,28 @@
 
 	export let extent = [0, 1]; // used to pass automatically extracted val
 
-	const width = 100;
-	const height = 30;
+	let widthInPixels = 100;
+	export let width;
+	$: {
+		if (width) {
+			widthInPixels = +width.replace('px', '');
+		}
+	}
 
-	let x;
-	$: x = scaleLinear().domain(extent).range([0, width]);
+	const height = 30;
 
 	let f;
 	$: if (formatString) {
 		f = format(formatString);
 	}
 
-	// TOOD: numTicks
+	const barEndPadding = 15;
+
+	let x;
+	$: x = scaleLinear()
+		.domain(extent)
+		.range([barEndPadding, widthInPixels - barEndPadding]);
+
 	export let numTicks = 4;
 	$: ticks = x.ticks(numTicks);
 
@@ -38,7 +48,7 @@
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<g transform={`translate(0, ${topPadding})`}>
-		<line x1={0} x2={width} y1={0} y2={0} stroke="black" />
+		<line x1={barEndPadding} x2={widthInPixels - barEndPadding} y1={0} y2={0} stroke="black" />
 
 		{#each ticks as tick}
 			<line x1={x(tick)} x2={x(tick)} y1={0} y2={-6} stroke="black" />

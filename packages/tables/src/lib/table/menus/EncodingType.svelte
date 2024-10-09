@@ -16,7 +16,7 @@
 	import ColoredCell from '../../core/renderers/ColoredCell.svelte';
 	import DateCell from '../../core/renderers/DateCell.svelte';
 	import Dot from '../../core/renderers/Dot.svelte';
-	import DoubleBarCell from '../../core/renderers/DoubleBarCell.svelte';
+	import BarDivergingCell from '../../core/renderers/BarDivergingCell.svelte';
 	import PairArrow from '../../core/renderers/PairArrowCell.svelte';
 	import ProportionalSymbol from '../../core/renderers/ProportionalSymbol.svelte';
 	import TextCell from '../../core/renderers/TextCell.svelte';
@@ -29,12 +29,12 @@
 
 	const unaggregatedOptions = [
 		{ label: 'Bar', id: 'BarCell' },
+		{ label: 'BarDivergingCell', id: 'BarDivergingCell' },
 		{ label: 'Categorical Tick', id: 'CategoricalTick' },
 		{ label: 'Color and Label', id: 'ColorAndLabel' },
 		{ label: 'Colored', id: 'ColoredCell' },
 		{ label: 'Date', id: 'DateCell' },
 		{ label: 'Dot', id: 'Dot' },
-		{ label: 'DoubleBarCell', id: 'DoubleBarCell' },
 		{ label: 'PairArrow', id: 'PairArrow' },
 		{ label: 'ProportionalSymbol', id: 'ProportionalSymbol' },
 		{ label: 'Text', id: 'TextCell' },
@@ -43,12 +43,12 @@
 
 	const unaggregatedRenderer = {
 		BarCell: BarCell,
+		BarDivergingCell,
 		CategoricalTick,
 		ColorAndLabel,
 		ColoredCell,
 		DateCell,
 		Dot,
-		DoubleBarCell,
 		PairArrow,
 		ProportionalSymbol,
 		TextCell,

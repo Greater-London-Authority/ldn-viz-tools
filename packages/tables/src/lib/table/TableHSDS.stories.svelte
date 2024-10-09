@@ -1,6 +1,6 @@
 <script context="module">
-	import DoubleBarCellAxis from '../core/renderers/DoubleBarCellAxis.svelte';
-	import PairArrowCellAxis from '../core/renderers/PairArrowCellAxis.svelte';
+	import BarDivergingAxis from '../core/renderers/BarDivergingAxis.svelte';
+	import PairArrowAxis from '../core/renderers/PairArrowAxis.svelte';
 	import Table from './Table.svelte';
 
 	export const meta = {
@@ -120,7 +120,7 @@
 					extent: [0, 250],
 					width: '200px',
 
-					axisRenderer: PairArrowCellAxis
+					axisRenderer: PairArrowAxis
 				},
 
 				column: { renderer: 'TextCell', value: '' }
@@ -132,12 +132,12 @@
 				domainType: 'MinToMax',
 
 				cell: {
-					renderer: 'DoubleBarCell',
+					renderer: 'BarDivergingCell',
 					formatString: ',.0f',
 					alignText: 'right',
 					extent: [-140, +140],
 
-					axisRenderer: DoubleBarCellAxis,
+					axisRenderer: BarDivergingAxis,
 					numTicks: 5
 				},
 
