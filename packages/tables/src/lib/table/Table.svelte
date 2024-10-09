@@ -6,6 +6,7 @@
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
+	import AxisRow from './rows/AxisRow.svelte';
 	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
 	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
 	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
@@ -179,10 +180,13 @@
 				{#if tableSpec.showColSummaries !== false}
 					<ColumnSummariesRow {table} {data} />
 				{/if}
+
+				<AxisRow {table} />
 			</div>
 
 			<div
 				style:height={paginate ? '' : `${height - 100}px`}
+				style:width={tableWidth}
 				class:striped={zebraStripe && paginate}
 				class:stripedVirtual={zebraStripe && !paginate}
 			>
