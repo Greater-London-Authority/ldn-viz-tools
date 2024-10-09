@@ -1,5 +1,15 @@
 # @ldn-viz/tables
 
+## 1.4.0
+
+### Minor Changes
+
+- aed4a52: ADDED: `BarDivergingCell` and `PairArrowCell` cell encodings
+
+  FIXED: mis-alignment of header and data rows
+
+  ADDED: ability to add an axis in the heading of tables
+
 ## 1.3.0
 
 ### Minor Changes
