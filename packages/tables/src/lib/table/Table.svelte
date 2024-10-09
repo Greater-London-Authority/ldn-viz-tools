@@ -183,6 +183,7 @@
 
 			<div
 				style:height={paginate ? '' : `${height - 100}px`}
+				style:width={tableWidth}
 				class:striped={zebraStripe && paginate}
 				class:stripedVirtual={zebraStripe && !paginate}
 			>
