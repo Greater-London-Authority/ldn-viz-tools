@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { sum } from 'd3-array';
 
 	import Header from '../../core/renderers/Header.svelte';
@@ -8,10 +8,11 @@
 
 	export let allowSorting;
 
-	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
+	const sumWidths = (widths: any[]) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
 
-	const getCol = (colName) => table.columnSpec.find((d) => d.short_label === colName);
-	const getLabel = (colName) => getCol(colName).label ?? colName;
+	const getCol = (colName: any) =>
+		table.columnSpec.find((d: { short_label: any }) => d.short_label === colName);
+	const getLabel = (colName: any) => getCol(colName).label ?? colName;
 </script>
 
 <Scaffolding {table}>

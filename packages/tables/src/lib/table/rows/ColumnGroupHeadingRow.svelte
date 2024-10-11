@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { sum } from 'd3-array';
+	import { sum, type Numeric } from 'd3-array';
 	import Scaffolding from './Scaffolding.svelte';
 
 	export let table;
 
-	let cellWidths;
+	let cellWidths: (Numeric | null | undefined)[];
 	$: {
 		cellWidths = table.columnSpec.map(
-			(col) => +(col.cell.width ?? table.widths.defaultCell).replace('px', '')
+			(col: { cell: { width: any } }) =>
+				+(col.cell.width ?? table.widths.defaultCell).replace('px', '')
 		);
 	}
 
-	const getWidth = (colGroup) => {
+	const getWidth = (colGroup: { endCol: number; startCol: number | undefined }) => {
 		if (colGroup.endCol < 0) {
 			return 0;
 		}

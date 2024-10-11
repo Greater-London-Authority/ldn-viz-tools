@@ -17,7 +17,7 @@
 	let numPages;
 	$: numPages = Math.ceil(numRows / pageSize);
 
-	const pageChanged = (val) => {
+	const pageChanged = (val: number) => {
 		inputPage = val;
 	};
 	$: pageChanged(page);

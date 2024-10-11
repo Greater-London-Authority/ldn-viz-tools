@@ -1,12 +1,12 @@
 // This is a wrapper around the pure functions in dataFns.ts
 
-import type { DataRow, Filter, Group, GroupOrderCriterion, LeafOrderCriterion } from './types';
 import { filterData, getRows, getSortedRows, group, mergeData, sortGroups } from './dataFns';
+import type { DataRow, Filter, Group, GroupOrderCriterion, LeafOrderCriterion } from './types';
 
 import { extent } from 'd3-array';
-import { scaleBand } from 'd3-scale';
+import { scaleBand, type ScaleBand } from 'd3-scale';
 
-import { getContinuousColorScale, getCategoricalColorScale } from './scales';
+import { getCategoricalColorScale, getContinuousColorScale } from './scales';
 
 import { axisRenderer, renderer } from '../renderers';
 
@@ -24,23 +24,30 @@ export class TableData {
 
 	maxRowsPerGroup: number | undefined;
 
-	columnSpec;
+	columnSpec!: any[];
 
 	// derived:
 	extents: any; // TODO: FIXME
-	scales;
-	posScales;
+	scales: any;
+	posScales!: { [x: string]: string[] & ScaleBand<string> };
 
 	groups: Group[];
 	rows: DataRow[];
 
-	visibleFields: string[];
+	visibleFields!: string[];
 
 	expansionState: boolean[] = [];
 
-	colGrups: any[];
+	widths: {
+		groupControl: string; // replaces GROUP_CONTROL_COLUMN_WIDTH
+		groupLabel: string;
+		groupSizeLabel: string;
+		groupSizeBar: string;
+		defaultCell: string; // replaces "DEFAULT_CELL_WIDTH
+	};
+	colGroups: any[];
 
-	constructor(tableSpec) {
+	constructor(tableSpec: { colGroups: any[]; maxRowsPerGroup: number | undefined }) {
 		this.data = [];
 		this.rawData = [];
 		this.groupingFields = [];
@@ -69,7 +76,7 @@ export class TableData {
 	}
 
 	// TOOD: would probably bebetter to not mutate the spec, and instead to perform function look-up at time of use
-	findRenderComponents(columnSpec) {
+	findRenderComponents(columnSpec: any[]) {
 		for (const col of columnSpec) {
 			// cell, column, group
 			if (col.cell && typeof col.cell.renderer === 'string') {
@@ -87,7 +94,7 @@ export class TableData {
 		}
 	}
 
-	setOnRowsChange(func) {
+	setOnRowsChange(func: () => void) {
 		this.onChangeFuncs.push(func);
 	}
 
@@ -104,7 +111,7 @@ export class TableData {
 		}
 	}
 
-	setMaxRowsForGroup(group, maxRows: number) {
+	setMaxRowsForGroup(group: { maxRows: number }, maxRows: number) {
 		group.maxRows = maxRows;
 	}
 
@@ -195,7 +202,7 @@ export class TableData {
 		this.notifyOfChanges();
 	}
 
-	setColumnSpec(columnSpec) {
+	setColumnSpec(columnSpec: any[]) {
 		this.columnSpec = columnSpec;
 		this.findRenderComponents(this.columnSpec);
 
@@ -225,7 +232,7 @@ export class TableData {
 		this.notifyOfChanges();
 	}
 
-	toggleSort(fieldName) {
+	toggleSort(fieldName: any) {
 		// TODO: implement
 
 		if (this.rowOrderSpec.length === 0) {
@@ -249,7 +256,15 @@ export class TableData {
 		this.notifyOfChanges();
 	}
 
-	fetchGroupContents(group) {
+	fetchGroupContents(group: {
+		name?: string;
+		color?: string | undefined;
+		order: any;
+		parentGroup?: Group | undefined;
+		childGroups?: Group[];
+		maxRows: any;
+		isExpanded?: boolean;
+	}) {
 		return getSortedRows(
 			group.order.slice(0, group.maxRows ?? group.order.length),
 			this.data,
@@ -277,11 +292,11 @@ export class TableData {
 			if (typeof values[0] === 'string') {
 				const uniqValues = [...new Set(values)];
 				const scale = getCategoricalColorScale(uniqValues);
-				this.scales[colSpec.short_label] = (val) =>
+				this.scales[colSpec.short_label] = (val: string | null | undefined) =>
 					val === undefined || val === null ? 'lightgrey' : scale(val);
 			} else if (typeof values[0] === 'number') {
 				const scale = getContinuousColorScale(colSpec.short_label, 'MinToMax', values); // TODO: pass actual domain type
-				this.scales[colSpec.short_label] = (val) =>
+				this.scales[colSpec.short_label] = (val: string | number | null | undefined) =>
 					val === undefined || val === null ? 'lightgrey' : scale(val);
 			} else if (values[0] instanceof Date) {
 				// TODO: implement
@@ -306,7 +321,7 @@ export class TableData {
 		}
 	}
 
-	getValsForGroup(group, colName) {
+	getValsForGroup(group: Group, colName: string | number) {
 		return getRows(this.data, [group], []).map((d) => d[colName]);
 	}
 }

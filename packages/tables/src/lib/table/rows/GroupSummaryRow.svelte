@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Scaffolding from './Scaffolding.svelte';
 
 	export let group;

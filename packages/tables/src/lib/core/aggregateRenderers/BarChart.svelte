@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `BarChart` component renders a set of values as a bar chart.
 	 * @component
 	 */
 
-	import { scaleLinear, scaleBand } from 'd3-scale';
 	import { max } from 'd3-array';
+	import { scaleBand, scaleLinear, type ScaleBand, type ScaleLinear } from 'd3-scale';
 
 	/**
 	 * Array of values to be displayed.
@@ -29,11 +29,11 @@
 	const marginBottom = 10;
 	const marginLeft = 0;
 
-	let sortedData;
-	let x;
-	let y;
+	let sortedData: any[];
+	let x: ScaleBand<string> | { (arg0: unknown): number; bandwidth: () => number };
+	let y: (number[] & ScaleLinear<number, number, never>) | ((arg0: unknown) => number);
 
-	const update = (data) => {
+	const update = (data: any[], posScale: any) => {
 		// count the values: produces a list of [value, count] pairs
 		const counts = Object.create(null);
 		data.forEach((val) => {
@@ -62,7 +62,7 @@
 			.range([height - marginBottom, marginTop]);
 	};
 
-	const truncateLabel = (str, maxLen) => {
+	const truncateLabel = (str: string, maxLen: number) => {
 		if (!str) {
 			return '';
 		} else if (str.length > maxLen) {

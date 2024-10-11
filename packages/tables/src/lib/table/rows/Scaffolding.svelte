@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import { sum } from 'd3-array';
 
 	export let table;
 
-	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', '')));
+	const sumWidths = (widths: any[]) => sum(widths.map((w) => +w.replace('px', '')));
 </script>
 
 <!-- items-center - came from DataRow -->

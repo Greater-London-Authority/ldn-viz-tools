@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { Select } from '@ldn-viz/ui';
 
-	export let pageSize;
+	export let pageSize: any;
 	export let page;
 
 	const numRowOptions = [
@@ -13,7 +13,7 @@
 
 	let numRowSelection = numRowOptions.find((d) => d.value === pageSize);
 
-	const changePageSize = (newVal) => {
+	const changePageSize = (newVal: number) => {
 		pageSize = newVal;
 		page = 1;
 	};
