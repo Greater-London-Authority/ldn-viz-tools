@@ -51,6 +51,11 @@
 	 */
 	export let inputClasses = '';
 
+	/**
+	 * Placeholder text to be dislayed in the input element.
+	 */
+	export let placeholder = 'Location search';
+
 	const mapStore: MapStore = getContext('mapStore');
 
 	const zoomLevel = 16;
@@ -81,6 +86,7 @@
 	onLocationSelected={onLocationSelectedGeocoder}
 	{classes}
 	{inputClasses}
+	{placeholder}
 	bind:showClearButton
 	bind:selected
 	let:onSuggestionEvent
