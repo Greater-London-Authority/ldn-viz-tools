@@ -1,6 +1,4 @@
 <script context="module">
-	import BarDivergingAxis from '../core/renderers/BarDivergingAxis.svelte';
-	import PairArrowAxis from '../core/renderers/PairArrowAxis.svelte';
 	import Table from './Table.svelte';
 
 	export const meta = {
@@ -120,7 +118,7 @@
 					extent: [0, 250],
 					width: '200px',
 
-					axisRenderer: PairArrowAxis
+					axisRenderer: 'PairArrowAxis'
 				},
 
 				column: { renderer: 'TextCell', value: '' }
@@ -137,7 +135,7 @@
 					alignText: 'right',
 					extent: [-140, +140],
 
-					axisRenderer: BarDivergingAxis,
+					axisRenderer: 'BarDivergingAxis',
 					numTicks: 5
 				},
 
