@@ -24,7 +24,6 @@ import Tick from './renderers/Tick.svelte';
 import BarDivergingAxis from '../core/renderers/BarDivergingAxis.svelte';
 import PairArrowAxis from '../core/renderers/PairArrowAxis.svelte';
 
-
 export const renderer = {
 	BarCell,
 	CategoricalTick,
@@ -51,8 +50,7 @@ export const renderer = {
 	ViolinPlot
 };
 
-
 export const axisRenderer = {
 	BarDivergingAxis,
-	PairArrowAxis,
-}
+	PairArrowAxis
+};
