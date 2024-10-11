@@ -177,7 +177,7 @@
 					<ControlRow {table} />
 				{/if}
 
-				{#if tableSpec.showColSummaries !== false}
+				{#if tableSpec.showColSummaries === true}
 					<ColumnSummariesRow {table} {data} />
 				{/if}
 
