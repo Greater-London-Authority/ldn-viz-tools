@@ -1,5 +1,16 @@
 # @ldn-viz/tables
 
+## 1.5.0
+
+### Minor Changes
+
+- 8424fed: CHANGED: allow axis renderers to be specified by name (as strings, rather than Svelte components) in table specifications
+
+### Patch Changes
+
+- Updated dependencies [e42e0fe]
+  - @ldn-viz/ui@14.3.0
+
 ## 1.4.0
 
 ### Minor Changes
