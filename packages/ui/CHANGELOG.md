@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 14.3.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
 ## 14.2.0
 
 ### Minor Changes
