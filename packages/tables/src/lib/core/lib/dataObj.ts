@@ -8,7 +8,7 @@ import { scaleBand } from 'd3-scale';
 
 import { getContinuousColorScale, getCategoricalColorScale } from './scales';
 
-import { renderer } from '../renderers';
+import { axisRenderer, renderer } from '../renderers';
 
 // TODO: convert data types?
 
@@ -80,6 +80,9 @@ export class TableData {
 			}
 			if (col.group && typeof col.group.renderer === 'string') {
 				col.group.renderer = renderer[col.group.renderer];
+			}
+			if (col.cell && typeof col.cell.axisRenderer === 'string') {
+				col.cell.axisRenderer = axisRenderer[col.cell.axisRenderer];
 			}
 		}
 	}

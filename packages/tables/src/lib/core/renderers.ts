@@ -7,18 +7,22 @@ import StackedBar from './aggregateRenderers/StackedBar.svelte';
 import Summary from './aggregateRenderers/Summary.svelte';
 import ViolinPlot from './aggregateRenderers/ViolinPlot.svelte';
 import BarCell from './renderers/BarCell.svelte';
+import BarDivergingCell from './renderers/BarDivergingCell.svelte';
 import CategoricalTick from './renderers/CategoricalTick.svelte';
 import ColorAndLabel from './renderers/ColorAndLabel.svelte';
 import ColoredCell from './renderers/ColoredCell.svelte';
 import DateCell from './renderers/DateCell.svelte';
 import Dot from './renderers/Dot.svelte';
-import BarDivergingCell from './renderers/BarDivergingCell.svelte';
 import GoodOrBad from './renderers/GoodOrBad.svelte';
 import Header from './renderers/Header.svelte';
 import PairArrow from './renderers/PairArrowCell.svelte';
 import ProportionalSymbol from './renderers/ProportionalSymbol.svelte';
 import TextCell from './renderers/TextCell.svelte';
 import Tick from './renderers/Tick.svelte';
+
+//
+import BarDivergingAxis from '../core/renderers/BarDivergingAxis.svelte';
+import PairArrowAxis from '../core/renderers/PairArrowAxis.svelte';
 
 export const renderer = {
 	BarCell,
@@ -44,4 +48,9 @@ export const renderer = {
 	StackedBar,
 	Summary,
 	ViolinPlot
+};
+
+export const axisRenderer = {
+	BarDivergingAxis,
+	PairArrowAxis
 };
