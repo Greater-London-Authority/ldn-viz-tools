@@ -51,6 +51,11 @@
 	 */
 	export let hideGeolocator = false;
 
+	/**
+	 * Placeholder text to be dislayed in the input element.
+	 */
+	export let placeholder = 'Location search';
+
 	let limitWidthClass = '';
 
 	if (hideGeolocator) {
@@ -71,6 +76,7 @@
 		{onSearchError}
 		{maxSuggestions}
 		inputClasses="w-72 {limitWidthClass}"
+		{placeholder}
 	/>
 	{#if !hideGeolocator}
 		<MapControlGeolocator {onLocationFound} {onSearchError} />

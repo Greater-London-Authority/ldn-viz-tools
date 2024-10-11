@@ -51,6 +51,25 @@
 	</MapApp>
 </Story>
 
+<Story name="Location Search - custom placeholder">
+	<MapApp>
+		<Map
+			options={{
+				style: os_light_vts,
+				transformRequest
+			}}
+		>
+			<MapControlGroup position="TopLeft">
+				<MapControlLocationSearch
+					{adapter}
+					{onSearchError}
+					placeholder="Type here to search for a place"
+				/>
+			</MapControlGroup>
+		</Map>
+	</MapApp>
+</Story>
+
 <Story name="Hidden Geolocator">
 	<MapApp>
 		<Map
