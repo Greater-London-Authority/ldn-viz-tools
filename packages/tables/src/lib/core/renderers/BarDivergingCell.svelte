@@ -85,7 +85,8 @@
 					text-anchor="start"
 					fill="white"
 					x={x(value) + textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{:else}
@@ -94,7 +95,8 @@
 					text-anchor="end"
 					fill="black"
 					x={x(value) - textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{/if}
@@ -118,7 +120,8 @@
 					text-anchor="end"
 					fill="white"
 					x={x(value) - textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{:else}
@@ -127,7 +130,8 @@
 					text-anchor="start"
 					fill="black"
 					x={x(value) + textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{/if}
