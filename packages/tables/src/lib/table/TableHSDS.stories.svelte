@@ -67,6 +67,7 @@
 	}));
 
 	const footfallTableSpec = {
+		showHeaderTopRule: false,
 		columns: [
 			{
 				short_label: 'metric',
