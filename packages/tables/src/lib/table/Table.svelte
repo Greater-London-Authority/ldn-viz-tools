@@ -8,6 +8,7 @@
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
 	import AxisRow from './rows/AxisRow.svelte';
 	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
+	import ColumnGroupHeadingRuleRow from './rows/ColumnGroupHeadingRuleRow.svelte';
 	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
 	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
 	import ControlRow from './rows/ControlRow.svelte';
@@ -144,12 +145,21 @@
 			}
 		}
 	}
-	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
+	const sumWidths = (widths) => {
+		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
+		const colGroupGaps = (table.colGroups || []).length * (table.colGroupGap ?? 0);
+		return colWidths + colGroupGaps + 'px';
+	};
 
 	$: tableWidth = sumWidths([
 		// TODO: may need to add some of the values from table.widths to account for chrome added when rows grouped
-		...table.columnSpec.map((c) => c.cell.width ?? table.widths.defaultCell)
+		...table.columnSpec.map(
+			(c) => c.cell.width ?? table.widths.defaultCell,
+			(table.colGroups || []).length * (table.colGroupGap ?? 0)
+		)
 	]);
+
+	const DEFAULT_CELL_WIDTH = '100px'; // TODO: don't duplicate
 </script>
 
 {#if table && table.extents}
@@ -166,8 +176,8 @@
 
 	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data} {columnMapping}>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
-			<div class="border-t border-b border-color-ui-border-primary" style:width={tableWidth}>
-				{#if tableSpec.colGroups}
+			<div class="border-t border-color-ui-border-primary" style:width={tableWidth}>
+				{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
 
@@ -182,6 +192,10 @@
 				{/if}
 
 				<AxisRow {table} />
+
+				{#if tableSpec.colGroups}
+					<ColumnGroupHeadingRuleRow {table} />
+				{/if}
 			</div>
 
 			<div
