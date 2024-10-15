@@ -36,9 +36,37 @@
 	export let subTitle = '';
 
 	/**
-	 * If `true`, there will be buttons to download the data or an image of the table.
+	 * What appears in the footer:
+	 *
+	 * * `byline` (string) - statement of who created the visualization
+	 * * `source` (string) - statement of where the data came from
+	 * * `note` (string) - any additional footnotes
 	 */
-	export let exportBtns = false;
+	export let source = '';
+
+	export let byline = '';
+
+	export let note = '';
+
+	/**
+	 * Data Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 *
+	 */
+	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
+
+	/**
+	 * Image Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 *
+	 */
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
 	/**
 	 * Height of the table (pixels).
@@ -48,7 +76,7 @@
 	/**
 	 * Exposes the internal table object, so that it can be programmatially manipulated.
 	 */
-	export let table;
+	export let table: TableData | undefined = undefined;
 
 	/**
 	 * If `ture`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
@@ -104,7 +132,7 @@
 		table = table; // eslint-disable-line no-self-assign
 	};
 
-	const createTable = (data) => {
+	const createTable = (data: any[]) => {
 		// create the data object
 		table = new TableData(tableSpec);
 
@@ -122,18 +150,18 @@
 
 	$: createTable(data);
 
-	const setColSpec = (tableSpec) => {
+	const setColSpec = (tableSpec: { columns: any }) => {
 		if (table) {
 			table.setColumnSpec(tableSpec.columns);
 		}
 	};
 	$: setColSpec(tableSpec);
 
-	let visualRows = [];
+	let visualRows: any[] = [];
 	$: {
 		visualRows = [];
 
-		for (let group of table.groups) {
+		for (let group of table!.groups) {
 			if (group.parentGroup && !group.parentGroup.isExpanded) {
 				continue;
 			}
@@ -143,17 +171,19 @@
 			}
 
 			if (group.isExpanded && (!group.childGroups || group.childGroups.length === 0)) {
-				for (let row of table.fetchGroupContents(group)) {
+				for (let row of table!.fetchGroupContents(group)) {
 					visualRows.push({ type: 'DataRow', row, uniqueKey: visualRows.length });
 				}
 			}
 		}
 	}
-	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
+	const sumWidths = (widths: any[]) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
 
 	$: tableWidth = sumWidths([
 		// TODO: may need to add some of the values from table.widths to account for chrome added when rows grouped
-		...table.columnSpec.map((c) => c.cell.width ?? table.widths.defaultCell)
+		...table!.columnSpec.map(
+			(c: { cell: { width: any } }) => c.cell.width ?? table!.widths.defaultCell
+		)
 	]);
 </script>
 
@@ -169,7 +199,17 @@
 		{/if}
 	</div>
 
-	<TableContainer {data} {title} {subTitle} {exportBtns} exportData={data} {columnMapping}>
+	<TableContainer
+		{data}
+		{title}
+		{subTitle}
+		{source}
+		{byline}
+		{note}
+		{dataDownloadButton}
+		{imageDownloadButton}
+		{columnMapping}
+	>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
 			<div class="border-t border-b border-color-ui-border-primary" style:width={tableWidth}>
 				{#if tableSpec.colGroups}
