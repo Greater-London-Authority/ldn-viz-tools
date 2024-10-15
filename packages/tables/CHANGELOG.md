@@ -1,5 +1,20 @@
 # @ldn-viz/tables
 
+## 1.6.0
+
+### Minor Changes
+
+- 510fa38: ADDED: `BarDivergingCell` renderer now accepts `textSize`/`positiveColor`/`negativeColor` props
+- 9b7462a: CHANGED: update table container to match new chart container api
+- 122ed51: CHANGED: `Table` now defaults to `showColSummaries` being `false`
+- f649103: CHANGED: table no longer sets a fixed height unless the `virtualise` prop is true
+- fcd3e47: CHANGED: in `Table` component, it is now possible to disable the horizontal rule above the header
+
+### Patch Changes
+
+- Updated dependencies [8aac39d]
+  - @ldn-viz/charts@3.2.0
+
 ## 1.5.0
 
 ### Minor Changes
