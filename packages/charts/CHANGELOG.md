@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 3.2.0
+
+### Minor Changes
+
+- 8aac39d: FIXED: export `addEventHandler` and `registerTooltip`
+
 ## 3.1.1
 
 ### Patch Changes
