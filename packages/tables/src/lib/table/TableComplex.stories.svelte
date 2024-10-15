@@ -14,6 +14,7 @@
 	import dataBenchmarks from './demoData/benchmarkData.json';
 
 	const tableSpecBenchmarks = {
+		showColSummaries: true,
 		columns: [
 			{
 				short_label: 'label',
@@ -128,7 +129,7 @@
 		.map((row) => ({ ...row, Salary: +row.Salary.slice(1).replace(/,/g, '') }));
 
 	const tableSpecPaginated = {
-		//  showColSummaries: false,
+		showColSummaries: true,
 		columns: [
 			{
 				short_label: 'Name',
@@ -174,6 +175,7 @@
 	import dataMetrics from './demoData/metricData.json';
 
 	const tableSpecMetrics = {
+		showColSummaries: true,
 		// this is a bt of a hack that won't survive re-ordering
 		colGroups: [
 			{
@@ -502,7 +504,21 @@ This example shows how the encoding used for a column can be influenced by the v
 </Story>
 
 <Story name="Metrics Example" source>
-	<Table data={dataMetrics} tableSpec={tableSpecMetrics} allowSorting allowRowGrouping />
+	<div class="w-[1500px]">
+		<Table data={dataMetrics} tableSpec={tableSpecMetrics} allowSorting allowRowGrouping />
+	</div>
+</Story>
+
+<Story name="Metrics Example - virtualised" source>
+	<div class="w-[1500px]">
+		<Table
+			data={dataMetrics}
+			tableSpec={tableSpecMetrics}
+			allowSorting
+			allowRowGrouping
+			virtualise
+		/>
+	</div>
 </Story>
 
 <!--

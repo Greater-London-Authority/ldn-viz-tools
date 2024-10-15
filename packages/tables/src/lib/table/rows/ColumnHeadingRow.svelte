@@ -3,6 +3,7 @@
 
 	import Header from '../../core/renderers/Header.svelte';
 	import Scaffolding from './Scaffolding.svelte';
+	import ColGroupGap from '../cells/ColGroupGap.svelte';
 
 	export let table;
 
@@ -25,7 +26,8 @@
 				style:width={sumWidths([
 					table.widths.groupLabel,
 					table.widths.groupSizeLabel,
-					table.widths.groupSizeBar
+					table.widths.groupSizeBar,
+					((table.colGroups || []).length * (table.colGroupGap ?? 0)).toString()
 				])}
 			>
 				{getLabel(colName)}
@@ -43,7 +45,7 @@
 	</div>
 
 	<svelte:fragment slot="dataColumns">
-		{#each table.columnSpec as col}
+		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div
 					class="flex font-bold was-th"
@@ -61,6 +63,7 @@
 					/>
 				</div>
 			{/if}
+			<ColGroupGap {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

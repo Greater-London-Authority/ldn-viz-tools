@@ -2,6 +2,7 @@
 	import ColoredCell from '../../core/renderers/ColoredCell.svelte';
 	import LinkWrapper from '../cells/LinkWrapper.svelte';
 	import Scaffolding from './Scaffolding.svelte';
+	import ColGroupGap from '../cells/ColGroupGap.svelte';
 
 	export let row;
 	export let table;
@@ -11,7 +12,7 @@
 
 <Scaffolding {table}>
 	<svelte:fragment slot="dataColumns">
-		{#each table.columnSpec as col}
+		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
 				<div
@@ -44,6 +45,7 @@
 					{/if}
 				</div>
 			{/if}
+			<ColGroupGap {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

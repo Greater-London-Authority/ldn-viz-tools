@@ -7,6 +7,7 @@
 	import FilterMenu from '../menus/FilterMenu.svelte';
 	import EncodingType from '../menus/EncodingType.svelte';
 	import MergeMenu from '../menus/MergeMenu.svelte';
+	import ColGroupGap from '../cells/ColGroupGap.svelte';
 
 	export let table;
 
@@ -45,7 +46,7 @@
     -->
 
 	<svelte:fragment slot="dataColumns">
-		{#each table.columnSpec as col}
+		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div
 					class="flex font-bold was-th"
@@ -62,6 +63,7 @@
 					{/if}
 				</div>
 			{/if}
+			<ColGroupGap {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

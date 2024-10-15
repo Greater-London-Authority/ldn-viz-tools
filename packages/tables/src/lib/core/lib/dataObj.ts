@@ -49,6 +49,7 @@ export class TableData {
 		this.filters = [];
 		this.rows = [];
 		this.colGroups = tableSpec.colGroups;
+		this.colGroupGap = tableSpec.colGroupGap;
 
 		this.widths = {
 			groupControl: '20px', // replaces GROUP_CONTROL_COLUMN_WIDTH

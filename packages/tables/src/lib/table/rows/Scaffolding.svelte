@@ -3,7 +3,11 @@
 
 	export let table;
 
-	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', '')));
+	const sumWidths = (widths) => {
+		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
+		const colGroupGaps = (table.colGroups || []).length * (table.colGroupGap ?? 0);
+		return colWidths + colGroupGaps + 'px';
+	};
 </script>
 
 <!-- items-center - came from DataRow -->
@@ -14,7 +18,6 @@
 		{#each table.groupingFields || [] as _field}
 			<div style:width={table.widths.groupControl} id="groupControl"></div>
 		{/each}
-		<div style:width={table.widths.groupControl} id="groupControl"></div>
 	</slot>
 
 	<div
