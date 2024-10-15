@@ -14,6 +14,7 @@
 	import NumRowsControls from './rows/NumRowsControls.svelte';
 	import PaginationControls from './rows/PaginationControls.svelte';
 	import RowRenderer from './rows/RowRenderer.svelte';
+	import { classNames } from '@ldn-viz/ui';
 
 	/**
 	 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
@@ -185,6 +186,8 @@
 			(c: { cell: { width: any } }) => c.cell.width ?? table!.widths.defaultCell
 		)
 	]);
+
+	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
 </script>
 
 {#if table && table.extents}
@@ -211,7 +214,10 @@
 		{columnMapping}
 	>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
-			<div class="border-t border-b border-color-ui-border-primary" style:width={tableWidth}>
+			<div
+				class={classNames(topRuleClass, 'border-b border-color-ui-border-primary')}
+				style:width={tableWidth}
+			>
 				{#if tableSpec.colGroups}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
