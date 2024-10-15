@@ -20,6 +20,21 @@
 	 */
 	export let formatString = '0.0f';
 
+	/**
+	 * Text size of labels (in pixels).
+	 */
+	export let textSize = 16;
+
+	/**
+	 * Color to be applied to bars corresponding to positive values.
+	 */
+	export let positiveColor = 'blue';
+
+	/**
+	 * Color to be applied to bars corresponding to negative values.
+	 */
+	export let negativeColor = 'red';
+
 	export let extent = [0, 1]; // used to pass automatically extracted val
 
 	// TODO: separate props for positiveColor/negativeColor ?
@@ -32,13 +47,10 @@
 	let x;
 	$: x = scaleLinear().domain(extent).range([0, width]);
 
-	const formatPercent = format('0.0f');
 	let f;
 	$: if (formatString) {
 		f = format(formatString);
 	}
-
-	$: textSize = 16; // height - 2 * barVerticalPadding;
 
 	const textPadding = 2;
 </script>
@@ -60,7 +72,7 @@
 			width={x(0) - x(value)}
 			y={barVerticalPadding}
 			height={height - 2 * barVerticalPadding}
-			fill="red"
+			fill={negativeColor}
 		/>
 
 		<!-- zero line -->
@@ -73,7 +85,8 @@
 					text-anchor="start"
 					fill="white"
 					x={x(value) + textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{:else}
@@ -82,7 +95,8 @@
 					text-anchor="end"
 					fill="black"
 					x={x(value) - textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{/if}
@@ -93,7 +107,7 @@
 			width={x(value) - x(0)}
 			y={barVerticalPadding}
 			height={height - 2 * barVerticalPadding}
-			fill="blue"
+			fill={positiveColor}
 		/>
 
 		<!-- zero line -->
@@ -106,7 +120,8 @@
 					text-anchor="end"
 					fill="white"
 					x={x(value) - textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{:else}
@@ -115,7 +130,8 @@
 					text-anchor="start"
 					fill="black"
 					x={x(value) + textPadding}
-					y={height / 2 + textSize / 2}
+					y={height / 2}
+					dominant-baseline="central"
 					font-size={`${textSize}px`}>{f(+value)}</text
 				>
 			{/if}
