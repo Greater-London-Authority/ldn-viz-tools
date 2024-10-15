@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 3.3.0
+
+### Minor Changes
+
+- e9a98b1: FIXED: support event handlers for marks that have `x1`/`x2`/`cx` attributes instead of `x`, and `y1`/`y2`/`cy` attributes instead of `y`
+
 ## 3.2.0
 
 ### Minor Changes

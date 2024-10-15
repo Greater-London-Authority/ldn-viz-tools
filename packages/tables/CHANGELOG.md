@@ -1,5 +1,13 @@
 # @ldn-viz/tables
 
+## 1.6.1
+
+### Patch Changes
+
+- 9dee938: FIXED: remove `border-b` class that should not have been applied to tabel header
+- Updated dependencies [e9a98b1]
+  - @ldn-viz/charts@3.3.0
+
 ## 1.6.0
 
 ### Minor Changes
