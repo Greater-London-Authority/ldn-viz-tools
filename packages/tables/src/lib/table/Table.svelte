@@ -180,7 +180,7 @@
 		}
 	}
 
-  const sumWidths = (widths) => {
+	const sumWidths = (widths) => {
 		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
 		const colGroupGaps = (table.colGroups || []).length * (table.colGroupGap ?? 0);
 		return colWidths + colGroupGaps + 'px';
@@ -223,9 +223,10 @@
 		{columnMapping}
 	>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
-			<div 
+			<div
 				class={classNames(topRuleClass, 'border-b border-color-ui-border-primary')}
-        style:width={tableWidth}>
+				style:width={tableWidth}
+			>
 				{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
