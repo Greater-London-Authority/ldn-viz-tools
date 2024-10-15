@@ -56,9 +56,14 @@
 	export let zebraStripe = false;
 
 	/**
-	 * If true, then the rows of the table will be split across multiple pages.
+	 * If true, then the rows of the table will be split across multiple pages. Cannot be used at the same time as `virtualise`.
 	 */
 	export let paginate = false;
+
+	/**
+	 * If true, then the rows of the table will be virtualised. Cannot be used at the same time as `paginate`.
+	 */
+	export let virtualise = false;
 
 	/**
 	 * The number of table rows to include on each page.
@@ -184,24 +189,31 @@
 				<AxisRow {table} />
 			</div>
 
-			<div
-				style:height={paginate ? '' : `${height - 100}px`}
-				style:width={tableWidth}
-				class:striped={zebraStripe && paginate}
-				class:stripedVirtual={zebraStripe && !paginate}
-			>
-				{#if paginate}
+			{#if paginate}
+				<div style:width={tableWidth} class:striped={zebraStripe}>
 					{#each visualRows as visualRow, i}
 						{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
 							<RowRenderer spec={visualRow} {table} {tableSpec} />
 						{/if}
 					{/each}
-				{:else}
+				</div>
+			{:else if virtualise}
+				<div
+					style:height={`${height - 100}px`}
+					style:width={tableWidth}
+					class:stripedVirtual={zebraStripe}
+				>
 					<VirtualScroll data={visualRows} key="uniqueKey" let:data>
 						<RowRenderer spec={data} {table} {tableSpec} />
 					</VirtualScroll>
-				{/if}
-			</div>
+				</div>
+			{:else}
+				<div style:width={tableWidth} class:striped={zebraStripe}>
+					{#each visualRows as visualRow}
+						<RowRenderer spec={visualRow} {table} {tableSpec} />
+					{/each}
+				</div>
+			{/if}
 		</div>
 
 		<div slot="paginationControls">

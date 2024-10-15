@@ -502,7 +502,21 @@ This example shows how the encoding used for a column can be influenced by the v
 </Story>
 
 <Story name="Metrics Example" source>
-	<Table data={dataMetrics} tableSpec={tableSpecMetrics} allowSorting allowRowGrouping />
+	<div class="w-[1500px]">
+		<Table data={dataMetrics} tableSpec={tableSpecMetrics} allowSorting allowRowGrouping />
+	</div>
+</Story>
+
+<Story name="Metrics Example - virtualised" source>
+	<div class="w-[1500px]">
+		<Table
+			data={dataMetrics}
+			tableSpec={tableSpecMetrics}
+			allowSorting
+			allowRowGrouping
+			virtualise
+		/>
+	</div>
 </Story>
 
 <!--
