@@ -67,7 +67,7 @@
 	}));
 
 	const footfallTableSpec = {
-		colGroupGap: 10, // 748 -> 778
+		colGroupGap: 10,
 		colGroups: [
 			{
 				label: '',
@@ -86,6 +86,7 @@
 			}
 		],
 
+		showHeaderTopRule: false,
 		columns: [
 			{
 				short_label: 'metric',
