@@ -69,8 +69,16 @@
 		for (let i = 0; i < marks.length; i++) {
 			const d = {
 				index: index[i],
-				x: values.channels.x.value[i],
-				y: values.channels.y.value[i]
+
+				x: values.channels.x?.value[i],
+				x1: values.channels.x1?.value[i],
+				x2: values.channels.x2?.value[i],
+				cx: values.channels.cx?.value[i],
+
+				y: values.channels.y?.value[i],
+				y1: values.channels.y1?.value[i],
+				y2: values.channels.y2?.value[i],
+				cy: values.channels.cy?.value[i]
 			};
 
 			marks[i].addEventListener(eventName, (ev: any) => eventHandler(ev, d));

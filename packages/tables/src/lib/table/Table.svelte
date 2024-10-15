@@ -224,7 +224,7 @@
 	>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
 			<div
-				class={classNames(topRuleClass, 'border-b border-color-ui-border-primary')}
+				class={classNames(topRuleClass, 'border-color-ui-border-primary')}
 				style:width={tableWidth}
 			>
 				{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
