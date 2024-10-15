@@ -209,7 +209,7 @@
 				</div>
 			{:else}
 				<div style:width={tableWidth} class:striped={zebraStripe}>
-					{#each visualRows as visualRow, i}
+					{#each visualRows as visualRow}
 						<RowRenderer spec={visualRow} {table} {tableSpec} />
 					{/each}
 				</div>
