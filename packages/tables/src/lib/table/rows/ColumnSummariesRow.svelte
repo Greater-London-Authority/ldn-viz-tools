@@ -1,6 +1,7 @@
 <script>
 	import Mean from '../../core/aggregateRenderers/Mean.svelte';
 	import Scaffolding from './Scaffolding.svelte';
+	import ColGroupGap from '../cells/ColGroupGap.svelte';
 
 	export let table;
 	export let data;
@@ -8,7 +9,7 @@
 
 <Scaffolding {table}>
 	<svelte:fragment slot="dataColumns">
-		{#each table.columnSpec as col}
+		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div
 					role="columnheader"
@@ -39,6 +40,8 @@
 					{/if}
 				</div>
 			{/if}
+
+			<ColGroupGap {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

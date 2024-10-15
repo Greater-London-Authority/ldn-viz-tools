@@ -8,6 +8,7 @@
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
 	import AxisRow from './rows/AxisRow.svelte';
 	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
+	import ColumnGroupHeadingRuleRow from './rows/ColumnGroupHeadingRuleRow.svelte';
 	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
 	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
 	import ControlRow from './rows/ControlRow.svelte';
@@ -178,14 +179,22 @@
 			}
 		}
 	}
-	const sumWidths = (widths: any[]) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
+
+	const sumWidths = (widths) => {
+		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
+		const colGroupGaps = (table.colGroups || []).length * (table.colGroupGap ?? 0);
+		return colWidths + colGroupGaps + 'px';
+	};
 
 	$: tableWidth = sumWidths([
 		// TODO: may need to add some of the values from table.widths to account for chrome added when rows grouped
-		...table!.columnSpec.map(
-			(c: { cell: { width: any } }) => c.cell.width ?? table!.widths.defaultCell
+		...table.columnSpec.map(
+			(c) => c.cell.width ?? table.widths.defaultCell,
+			(table.colGroups || []).length * (table.colGroupGap ?? 0)
 		)
 	]);
+
+	const DEFAULT_CELL_WIDTH = '100px'; // TODO: don't duplicate
 
 	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
 </script>
@@ -218,7 +227,7 @@
 				class={classNames(topRuleClass, 'border-b border-color-ui-border-primary')}
 				style:width={tableWidth}
 			>
-				{#if tableSpec.colGroups}
+				{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
 					<ColumnGroupHeadingRow {table} />
 				{/if}
 
@@ -233,6 +242,10 @@
 				{/if}
 
 				<AxisRow {table} />
+
+				{#if tableSpec.colGroups}
+					<ColumnGroupHeadingRuleRow {table} />
+				{/if}
 			</div>
 
 			{#if paginate}

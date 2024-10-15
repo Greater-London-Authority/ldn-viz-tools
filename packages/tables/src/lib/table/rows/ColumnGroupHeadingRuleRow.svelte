@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
 	import Scaffolding from './Scaffolding.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
 
 	export let table;
 
@@ -23,22 +22,26 @@
 
 <Scaffolding {table}>
 	<svelte:fragment slot="dataColumns">
-		{#each table.colGroups || [] as colGroup}
-			<div
-				class="flex flex-col font-bold was-th"
-				style:width={getWidth(colGroup)}
-				style="flex-shrink: 0"
-			>
-				<div role="cell" tabindex="0" class="flex flex-col">
-					<div class="flex items-end pt-2 mb-2">
-						<div class="text-center w-full"><span>{colGroup.label}</span></div>
-					</div>
-				</div>
-			</div>
+		{#if table.colGroups && table.colGroups.length > 0}
+			{#each table.colGroups || [] as colGroup}
+				<div
+					class="border-b border-color-ui-border-primary"
+					style:width={getWidth(colGroup)}
+					style:height="1px"
+					style="flex-shrink: 0"
+				></div>
 
-			{#if table.colGroupGap}
-				<div style:width={`${table.colGroupGap}px`} />
-			{/if}
-		{/each}
+				{#if table.colGroupGap}
+					<div style:width={`${table.colGroupGap}px`} />
+				{/if}
+			{/each}
+		{:else}
+			<div
+				class="border-b border-color-ui-border-primary"
+				style:width={'100%'}
+				style:height="1px"
+				style="flex-shrink: 0"
+			/>
+		{/if}
 	</svelte:fragment>
 </Scaffolding>
