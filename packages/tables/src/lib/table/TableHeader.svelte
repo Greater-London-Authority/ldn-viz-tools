@@ -15,9 +15,13 @@
 	export let tableWidth;
 
 	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
+	$: bottomRuleClass = tableSpec.colGroups ? '' : 'border-b';
 </script>
 
-<div class={classNames(topRuleClass, 'border-color-ui-border-primary')} style:width={tableWidth}>
+<div
+	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary')}
+	style:width={tableWidth}
+>
 	{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
 		<ColumnGroupHeadingRow {table} />
 	{/if}

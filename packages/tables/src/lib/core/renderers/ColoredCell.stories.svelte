@@ -2,7 +2,7 @@
 	import ColoredCell from './ColoredCell.svelte';
 
 	export const meta = {
-		title: 'Tables/Encodings/ColoredCell',
+		title: 'Tables/Renderers/ColoredCell',
 		component: ColoredCell
 	};
 </script>

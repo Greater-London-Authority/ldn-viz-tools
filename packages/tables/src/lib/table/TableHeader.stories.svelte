@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { Story } from '@storybook/addon-svelte-csf';
 
 	import { TableData } from '../core/lib/dataObj';
 
@@ -28,6 +28,7 @@
 		percentage_change: (100 * (d.current - d.previous)) / d.previous
 	}));
 
+	/********************/
 	const tableSpecBasic = {
 		showHeaderTopRule: false,
 
@@ -425,6 +426,90 @@
 	const tableColSummariesGroupHeadings = new TableData(tableSpecColSummariesGroupHeadings);
 	tableColSummariesGroupHeadings.setData(data);
 	tableColSummariesGroupHeadings.setColumnSpec(tableSpecColSummariesGroupHeadings.columns);
+
+	/*********************************/
+	const tableSpecControls = {
+		showHeaderTopRule: false,
+
+		showColumnControls: true,
+
+		columns: [
+			{
+				short_label: 'metric',
+				label: 'Metric',
+
+				cell: {
+					renderer: 'TextCell',
+					width: '248px'
+				},
+
+				column: { renderer: 'TextCell', value: '' }
+			},
+
+			{
+				short_label: 'previous',
+				label: 'Previous',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				},
+
+				column: { renderer: 'TextCell', value: '' }
+			},
+
+			{
+				short_label: 'current',
+				label: 'Current',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				},
+
+				column: { renderer: 'TextCell', value: '' }
+			},
+
+			{
+				short_label: 'current',
+				label: 'Actual',
+
+				cell: {
+					renderer: 'PairArrow',
+					formatString: ',.0f',
+					alignText: 'right',
+					contextFields: ['previous'],
+					extent: [0, 250],
+					width: '200px'
+				},
+
+				column: { renderer: 'TextCell', value: '' }
+			},
+
+			{
+				short_label: 'percentage_change',
+				label: '% Change',
+				domainType: 'MinToMax',
+
+				cell: {
+					renderer: 'BarDivergingCell',
+					formatString: ',.0f',
+					alignText: 'right',
+					extent: [-140, +140],
+
+					numTicks: 5
+				},
+
+				column: { renderer: 'TextCell', value: '' }
+			}
+		]
+	};
+
+	const tableControls = new TableData(tableSpecControls);
+	tableControls.setData(data);
+	tableControls.setColumnSpec(tableSpecControls.columns);
 </script>
 
 <Story name="Default">
@@ -435,12 +520,10 @@
 	<TableHeader {data} {tableSpec} {table} tableWidth={600} />
 </Story>
 
-<!-- With sorting enabled -->
 <Story name="With sorting enabled">
 	<TableHeader {data} {tableSpec} {table} allowSorting={true} tableWidth={600} />
 </Story>
 
-<!-- With column summaries -->
 <Story name="With column summaries">
 	<TableHeader
 		{data}
@@ -450,7 +533,6 @@
 	/>
 </Story>
 
-<!-- With column summaries -->
 <Story name="With column summaries and sorting">
 	<TableHeader
 		{data}
@@ -466,6 +548,16 @@
 		{data}
 		tableSpec={tableSpecColSummariesGroupHeadings}
 		table={tableColSummariesGroupHeadings}
+		tableWidth={600}
+		allowSorting={true}
+	/>
+</Story>
+
+<Story name="With column controls">
+	<TableHeader
+		{data}
+		tableSpec={tableSpecControls}
+		table={tableControls}
 		tableWidth={600}
 		allowSorting={true}
 	/>

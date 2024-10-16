@@ -1,7 +1,7 @@
 <script context="module">
 	import TextCell from './TextCell.svelte';
 	export const meta = {
-		title: 'Tables/Encodings/TextCell',
+		title: 'Tables/Renderers/TextCell',
 		component: TextCell,
 
 		argTypes: {

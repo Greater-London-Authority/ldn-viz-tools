@@ -2,7 +2,7 @@
 	import Table from './Table.svelte';
 
 	export const meta = {
-		title: 'Tables/Table - Visual Encodings',
+		title: 'Tables/Table - Visual Renderers',
 		component: Table
 	};
 </script>

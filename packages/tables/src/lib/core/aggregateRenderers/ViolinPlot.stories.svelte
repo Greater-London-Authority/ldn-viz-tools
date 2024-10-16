@@ -1,7 +1,7 @@
 <script context="module">
 	import ViolinPlot from './ViolinPlot.svelte';
 	export const meta = {
-		title: 'Tables/AggregateEncodings/ViolinPlot',
+		title: 'Tables/AggregateRenderers/ViolinPlot',
 		component: ViolinPlot,
 
 		args: {
