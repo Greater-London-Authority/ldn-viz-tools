@@ -3,8 +3,8 @@
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import GroupSizeBar from '../cells/GroupSizeBar.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import GroupSizeBar from '../../cells/GroupSizeBar.svelte';
 
 	export let group;
 	export let table;

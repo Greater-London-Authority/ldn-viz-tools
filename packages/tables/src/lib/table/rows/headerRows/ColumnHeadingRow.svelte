@@ -1,9 +1,9 @@
 <script>
 	import { sum } from 'd3-array';
 
-	import Header from '../../core/renderers/Header.svelte';
-	import Scaffolding from './Scaffolding.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import Header from '../../../core/renderers/Header.svelte';
+	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
 	export let table;
 

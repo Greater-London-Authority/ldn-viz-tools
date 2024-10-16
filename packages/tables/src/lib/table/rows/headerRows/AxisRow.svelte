@@ -1,10 +1,10 @@
-<script>
-	import Scaffolding from './Scaffolding.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+<script lang="ts">
+	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
-	export let group;
 	export let table;
-	export let tableSpec;
+
+	const DEFAULT_CELL_WIDTH = '100px';
 </script>
 
 <Scaffolding {table}>
@@ -12,21 +12,18 @@
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div
-					style:width={col.cell.width ?? table.widths.defaultCell}
+					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
 					class="was-td"
 					style="flex-shrink: 0"
 				>
-					{#if col.group && col.group.renderer}
+					{#if col.cell && col.cell.axisRenderer}
 						<svelte:component
-							this={col.group.renderer}
-							values={table.getValsForGroup(group, col.short_label)}
-							extent={table.extents[col.short_label]}
+							this={col.cell.axisRenderer}
 							colorScale={table.scales[col.short_label]}
 							posScale={table.posScales[col.short_label]}
-							{...col.group}
+							extent={table.extents[col.short_label]}
+							{...col.cell}
 						/>
-
-						<!-- <td>{row[col.short_label]}</td> -->
 					{/if}
 				</div>
 			{/if}

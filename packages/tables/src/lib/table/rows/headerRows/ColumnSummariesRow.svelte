@@ -1,7 +1,7 @@
 <script>
-	import Mean from '../../core/aggregateRenderers/Mean.svelte';
-	import Scaffolding from './Scaffolding.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import Mean from '../../../core/aggregateRenderers/Mean.svelte';
+	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
 	export let table;
 	export let data;

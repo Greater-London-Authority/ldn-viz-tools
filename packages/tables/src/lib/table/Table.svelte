@@ -6,8 +6,8 @@
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
-	import NumRowsControls from './rows/NumRowsControls.svelte';
-	import PaginationControls from './rows/PaginationControls.svelte';
+	import NumRowsControls from './paginationControls/NumRowsControls.svelte';
+	import PaginationControls from './paginationControls/PaginationControls.svelte';
 	import RowRenderer from './rows/RowRenderer.svelte';
 
 	import TableHeader from './TableHeader.svelte';

@@ -1,8 +1,8 @@
 <script>
-	import GroupHeadingRow from './GroupHeadingRow.svelte';
-	import GroupSummaryRow from './GroupSummaryRow.svelte';
 	import DataRow from './DataRow.svelte';
-	import GroupRowCombined from './GroupRowCombined.svelte';
+	import GroupHeadingRow from './groupRows/GroupHeadingRow.svelte';
+	import GroupRowCombined from './groupRows/GroupRowCombined.svelte';
+	import GroupSummaryRow from './groupRows/GroupSummaryRow.svelte';
 
 	export let spec;
 

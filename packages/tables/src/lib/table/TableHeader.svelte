@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { classNames } from '@ldn-viz/ui';
 
-	import AxisRow from './rows/AxisRow.svelte';
-	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
-	import ColumnGroupHeadingRuleRow from './rows/ColumnGroupHeadingRuleRow.svelte';
-	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
-	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
-	import ControlRow from './rows/ControlRow.svelte';
+	import AxisRow from './rows/headerRows/AxisRow.svelte';
+	import ColumnGroupHeadingRow from './rows/headerRows/ColumnGroupHeadingRow.svelte';
+	import ColumnGroupHeadingRuleRow from './rows/headerRows/ColumnGroupHeadingRuleRow.svelte';
+	import ColumnHeadingRow from './rows/headerRows/ColumnHeadingRow.svelte';
+	import ColumnSummariesRow from './rows/headerRows/ColumnSummariesRow.svelte';
+	import ControlRow from './rows/headerRows/ControlRow.svelte';
 
 	export let tableSpec;
 	export let table;

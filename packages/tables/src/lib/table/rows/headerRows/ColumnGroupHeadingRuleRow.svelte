@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
-	import Scaffolding from './Scaffolding.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
 	export let table;
 

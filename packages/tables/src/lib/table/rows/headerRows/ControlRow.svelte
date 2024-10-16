@@ -1,13 +1,13 @@
 <script>
-	import { ChevronRight, ChevronDown } from '@steeze-ui/heroicons';
+	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import Scaffolding from './Scaffolding.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
-	import FilterMenu from '../menus/FilterMenu.svelte';
-	import EncodingType from '../menus/EncodingType.svelte';
-	import MergeMenu from '../menus/MergeMenu.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import EncodingType from '../../menus/EncodingType.svelte';
+	import FilterMenu from '../../menus/FilterMenu.svelte';
+	import MergeMenu from '../../menus/MergeMenu.svelte';
 
 	export let table;
 

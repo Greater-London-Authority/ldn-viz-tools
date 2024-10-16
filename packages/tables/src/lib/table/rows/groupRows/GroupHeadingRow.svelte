@@ -1,8 +1,8 @@
 <script>
-	import { ChevronRight, ChevronDown } from '@steeze-ui/heroicons';
+	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import GroupSizeBar from '../cells/GroupSizeBar.svelte';
+	import GroupSizeBar from '../../cells/GroupSizeBar.svelte';
 
 	export let group;
 	export let table;
