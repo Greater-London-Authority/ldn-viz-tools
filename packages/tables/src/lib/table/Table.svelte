@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { classNames } from '@ldn-viz/ui';
 	import { sum } from 'd3-array';
 	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import { TableData } from '../core/lib/dataObj';
@@ -15,7 +16,8 @@
 	import NumRowsControls from './rows/NumRowsControls.svelte';
 	import PaginationControls from './rows/PaginationControls.svelte';
 	import RowRenderer from './rows/RowRenderer.svelte';
-	import { classNames } from '@ldn-viz/ui';
+
+	import TableHeader from './TableHeader.svelte';
 
 	/**
 	 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
@@ -195,8 +197,6 @@
 	]);
 
 	const DEFAULT_CELL_WIDTH = '100px'; // TODO: don't duplicate
-
-	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
 </script>
 
 {#if table && table.extents}
@@ -223,30 +223,7 @@
 		{columnMapping}
 	>
 		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
-			<div
-				class={classNames(topRuleClass, 'border-color-ui-border-primary')}
-				style:width={tableWidth}
-			>
-				{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
-					<ColumnGroupHeadingRow {table} />
-				{/if}
-
-				<ColumnHeadingRow {table} {allowSorting} />
-
-				{#if tableSpec.showColumnControls}
-					<ControlRow {table} />
-				{/if}
-
-				{#if tableSpec.showColSummaries === true}
-					<ColumnSummariesRow {table} {data} />
-				{/if}
-
-				<AxisRow {table} />
-
-				{#if tableSpec.colGroups}
-					<ColumnGroupHeadingRuleRow {table} />
-				{/if}
-			</div>
+			<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
 
 			{#if paginate}
 				<div style:width={tableWidth} class:striped={zebraStripe}>
