@@ -4,7 +4,7 @@
 
 	import Scaffolding from '../Scaffolding.svelte';
 
-	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import EncodingType from '../../menus/EncodingType.svelte';
 	import FilterMenu from '../../menus/FilterMenu.svelte';
 	import MergeMenu from '../../menus/MergeMenu.svelte';
@@ -63,7 +63,7 @@
 					{/if}
 				</div>
 			{/if}
-			<ColGroupGap {table} {i} />
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

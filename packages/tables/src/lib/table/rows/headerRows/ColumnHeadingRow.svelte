@@ -2,7 +2,7 @@
 	import { sum } from 'd3-array';
 
 	import Header from '../../../core/renderers/Header.svelte';
-	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import ColGroupGapSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
 	export let table;
@@ -27,7 +27,7 @@
 					table.widths.groupLabel,
 					table.widths.groupSizeLabel,
 					table.widths.groupSizeBar,
-					((table.colGroups || []).length * (table.colGroupGap ?? 0)).toString()
+					((table.colGroups || []).length * (table.colGroupGapSpacer ?? 0)).toString()
 				])}
 			>
 				{getLabel(colName)}
@@ -63,7 +63,7 @@
 					/>
 				</div>
 			{/if}
-			<ColGroupGap {table} {i} />
+			<ColGroupGapSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

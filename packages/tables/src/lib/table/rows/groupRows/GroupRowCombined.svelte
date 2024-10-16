@@ -3,8 +3,8 @@
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import ColGroupGap from '../../cells/ColGroupGap.svelte';
-	import GroupSizeBar from '../../cells/GroupSizeBar.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
+	import GroupSizeBar from './GroupSizeBar.svelte';
 
 	export let group;
 	export let table;
@@ -126,6 +126,6 @@
 				{/if}
 			</div>
 		{/if}
-		<ColGroupGap {table} {i} />
+		<ColGroupSpacer {table} {i} />
 	{/each}
 </div>

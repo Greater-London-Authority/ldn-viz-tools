@@ -1,5 +1,5 @@
 <script>
-	import ColGroupGap from '../../cells/ColGroupGap.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
 	export let group;
@@ -30,7 +30,7 @@
 					{/if}
 				</div>
 			{/if}
-			<ColGroupGap {table} {i} />
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

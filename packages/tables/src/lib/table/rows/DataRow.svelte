@@ -1,8 +1,8 @@
 <script>
 	import ColoredCell from '../../core/renderers/ColoredCell.svelte';
-	import LinkWrapper from '../cells/LinkWrapper.svelte';
+	import ColGroupSpacer from '../cells/ColGroupSpacer.svelte';
+	import DataCell from '../cells/DataCell.svelte';
 	import Scaffolding from './Scaffolding.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
 
 	export let row;
 	export let table;
@@ -21,7 +21,7 @@
 					style="flex-shrink: 0"
 				>
 					{#if col.cell && col.cell.renderer}
-						<LinkWrapper href={col.href} {row}>
+						<DataCell href={col.href} {row}>
 							<svelte:component
 								this={col.cell.renderer}
 								colorScale={table.scales[col.short_label]}
@@ -33,19 +33,19 @@
 								extent={table.extents[col.short_label]}
 								{...col.cell}
 							/>
-						</LinkWrapper>
+						</DataCell>
 					{:else}
-						<LinkWrapper href={col.href} {row}>
+						<DataCell href={col.href} {row}>
 							<ColoredCell
 								value={row[col.short_label]}
 								colorScale={table.scales[col.short_label]}
 								extent={table.extents[col.short_label]}
 							/>
-						</LinkWrapper>
+						</DataCell>
 					{/if}
 				</div>
 			{/if}
-			<ColGroupGap {table} {i} />
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>
