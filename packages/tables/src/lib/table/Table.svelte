@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { classNames } from '@ldn-viz/ui';
 	import { sum } from 'd3-array';
 	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import { TableData } from '../core/lib/dataObj';
@@ -7,12 +6,6 @@
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
-	import AxisRow from './rows/AxisRow.svelte';
-	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
-	import ColumnGroupHeadingRuleRow from './rows/ColumnGroupHeadingRuleRow.svelte';
-	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
-	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
-	import ControlRow from './rows/ControlRow.svelte';
 	import NumRowsControls from './rows/NumRowsControls.svelte';
 	import PaginationControls from './rows/PaginationControls.svelte';
 	import RowRenderer from './rows/RowRenderer.svelte';
