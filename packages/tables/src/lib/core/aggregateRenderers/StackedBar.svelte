@@ -15,7 +15,11 @@
 	 */
 	export let colorScale;
 
-	const width = 100;
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
+
 	const height = 30;
 	const marginRight = 10;
 	const marginLeft = 0;

@@ -17,6 +17,7 @@
 							posScale={table.posScales[col.short_label]}
 							extent={table.extents[col.short_label]}
 							{...col.cell}
+							width={col.computedWidth}
 						/>
 					{/if}
 				</div>

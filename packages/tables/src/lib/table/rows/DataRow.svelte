@@ -26,6 +26,7 @@
 									: []}
 								extent={table.extents[col.short_label]}
 								{...col.cell}
+								width={col.computedWidth}
 							/>
 						</DataCell>
 					{:else}
