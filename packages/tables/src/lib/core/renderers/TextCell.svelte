@@ -24,6 +24,6 @@
 	$$restProps;
 </script>
 
-<span class={classNames(`flex h-full py-2 items-center`, alignmentClass)}>
+<span class={classNames(`flex h-full items-center py-2`, alignmentClass)}>
 	{formatString ? f(+value) : value}
 </span>
