@@ -39,7 +39,7 @@
 		right: 'justify-end',
 		center: 'justify-center'
 	};
-	$: alignmentClass = alignmentClasses[alignHeader ?? 'center'];
+	$: alignmentClass = alignmentClasses[alignHeader ?? 'left'];
 
 	const icons = {
 		default: ChevronUpDown,
