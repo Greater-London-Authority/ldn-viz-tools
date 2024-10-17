@@ -20,7 +20,11 @@
 
 	// TODO: move labels to separate span so they don't get truncaed if max val is multiple digits
 
-	const width = 100;
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
+
 	const height = 30;
 	const marginTop = 0;
 	const marginRight = 10;

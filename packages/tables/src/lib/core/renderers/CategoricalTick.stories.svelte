@@ -3,7 +3,7 @@
 	import { scaleBand, scaleOrdinal } from 'd3-scale';
 
 	export const meta = {
-		title: 'Tables/Encodings/CategoricalTick',
+		title: 'Tables/Renderers/CategoricalTick',
 		component: CategoricalTick,
 
 		argTypes: {

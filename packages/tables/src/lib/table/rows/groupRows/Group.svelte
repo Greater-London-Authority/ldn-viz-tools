@@ -1,7 +1,7 @@
 <script>
+	import DataRow from '../DataRow.svelte';
 	import GroupHeadingRow from './GroupHeadingRow.svelte';
 	import GroupSummaryRow from './GroupSummaryRow.svelte';
-	import DataRow from './DataRow.svelte';
 
 	export let group;
 	export let table;

@@ -16,14 +16,11 @@
 
 	export let contextVals: number[] = [0]; // value to be compared to
 
-	export let width;
-	$: {
-		if (width) {
-			widthInPixels = +width.replace('px', '');
-		}
-	}
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
 
-	let widthInPixels = 100;
 	const height = 30;
 
 	const barEndPadding = 15;
@@ -31,10 +28,10 @@
 	let x;
 	$: x = scaleLinear()
 		.domain(extent)
-		.range([barEndPadding, widthInPixels - barEndPadding]);
+		.range([barEndPadding, width - barEndPadding]);
 </script>
 
-<svg viewBox={`0 0 ${widthInPixels} ${height}`} width={widthInPixels} {height}>
+<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<defs>
 		<!-- A marker to be used as an arrowhead -->
 		<marker

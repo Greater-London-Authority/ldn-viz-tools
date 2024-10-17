@@ -37,9 +37,11 @@
 
 	export let extent = [0, 1]; // used to pass automatically extracted val
 
-	// TODO: separate props for positiveColor/negativeColor ?
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
 
-	const width = 100;
 	const height = 30;
 
 	const barVerticalPadding = 5;

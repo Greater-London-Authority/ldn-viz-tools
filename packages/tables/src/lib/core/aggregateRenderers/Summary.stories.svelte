@@ -1,7 +1,7 @@
 <script context="module">
 	import Summary from './Summary.svelte';
 	export const meta = {
-		title: 'Tables/AggregateEncodings/Summary',
+		title: 'Tables/AggregateRenderers/Summary',
 		component: Summary,
 
 		args: {

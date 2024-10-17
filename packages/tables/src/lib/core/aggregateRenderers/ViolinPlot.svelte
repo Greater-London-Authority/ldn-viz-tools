@@ -15,8 +15,12 @@
 	export let values;
 	export let extent = [0, 1];
 
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
+
 	// Declare the chart dimensions and margins.
-	const width = 100;
 	const height = 30;
 	const marginTop = 0;
 	const marginRight = 10;

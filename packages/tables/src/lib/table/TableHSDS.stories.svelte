@@ -10,21 +10,6 @@
 <script lang="ts">
 	import { Story } from '@storybook/addon-svelte-csf';
 
-	const footfallDataDayOrNight = [
-		{
-			metric: 'Nighttime (total)',
-			previous: 300,
-			current: 500,
-			percentage_change: (100 * (500 - 300)) / 300
-		},
-		{
-			metric: 'Daytime (total)',
-			previous: 400,
-			current: 200,
-			percentage_change: (100 * (200 - 400)) / 400
-		}
-	];
-
 	const footfallData = [
 		{
 			metric: 'Monday (avg)',
@@ -95,9 +80,7 @@
 				cell: {
 					renderer: 'TextCell',
 					width: '248px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -108,9 +91,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -121,14 +102,13 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
 				short_label: 'current',
 				label: 'Actual',
+				relativeWidth: 4,
 
 				cell: {
 					renderer: 'PairArrow',
@@ -139,15 +119,14 @@
 					width: '200px',
 
 					axisRenderer: 'PairArrowAxis'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
 				short_label: 'percentage_change',
 				label: '% Change',
 				domainType: 'MinToMax',
+				relativeWidth: 3,
 
 				cell: {
 					renderer: 'BarDivergingCell',
@@ -157,9 +136,7 @@
 
 					axisRenderer: 'BarDivergingAxis',
 					numTicks: 5
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			}
 		]
 	};

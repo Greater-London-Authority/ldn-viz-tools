@@ -1,7 +1,7 @@
 <script>
-	import Mean from '../../core/aggregateRenderers/Mean.svelte';
-	import Scaffolding from './Scaffolding.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import Mean from '../../../core/aggregateRenderers/Mean.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
 	export let table;
 	export let data;
@@ -16,7 +16,7 @@
 					colspan="1"
 					class="flex font-bold was-th"
 					style="flex-shrink: 0"
-					style:width={col.cell.width ?? table.widths.defaultCell}
+					style:width={col.computedWidth + 'px'}
 				>
 					<!-- or 100 width -->
 					{#if col.column && col.column.renderer}
@@ -41,7 +41,7 @@
 				</div>
 			{/if}
 
-			<ColGroupGap {table} {i} />
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>
