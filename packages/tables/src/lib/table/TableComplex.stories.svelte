@@ -25,7 +25,7 @@
 					width: '248px',
 					href: (row) =>
 						`https://dev.ldn-gis.co.uk/hsds-hub/overview?loc=E09000003&area_type=highstreet&area_id=${row.id}`,
-					onClick: (row) => console.log('User clicked on High sTreet cell for row', row)
+					onClick: (row) => console.log('User clicked on High Street cell for row', row)
 				},
 
 				column: {
