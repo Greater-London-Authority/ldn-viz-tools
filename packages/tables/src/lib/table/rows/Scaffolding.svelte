@@ -20,23 +20,26 @@
 		{/each}
 	</slot>
 
-	<div
-		class="flex"
-		style:width={sumWidths([
-			table.widths.groupLabel,
-			table.widths.groupSizeLabel,
-			table.widths.groupSizeBar
-		]) *
-			table.groupingFields.length +
-			'px'}
-	>
-		<slot name="groupSizes">
-			{#each new Array(table.groupingFields.length) as _i}
-				<div style:width={table.widths.groupLabel} id="groupLabel"></div>
-				<div style:width={table.widths.groupSizeLabel} id="groupSizeLabel"></div>
-				<div style:width={table.widths.groupSizeBar} id="groupSizeBar"></div>
-			{/each}
-		</slot>
-	</div>
+	{#if table.groupingFields.length > 0}
+		<div
+			class="flex"
+			style:width={sumWidths([
+				table.widths.groupLabel,
+				table.widths.groupSizeLabel,
+				table.widths.groupSizeBar
+			]) *
+				table.groupingFields.length +
+				'px'}
+		>
+			<slot name="groupSizes">
+				{#each new Array(table.groupingFields.length) as _i}
+					<div style:width={table.widths.groupLabel} id="groupLabel"></div>
+					<div style:width={table.widths.groupSizeLabel} id="groupSizeLabel"></div>
+					<div style:width={table.widths.groupSizeBar} id="groupSizeBar"></div>
+				{/each}
+			</slot>
+		</div>
+	{/if}
+
 	<slot name="dataColumns" />
 </div>

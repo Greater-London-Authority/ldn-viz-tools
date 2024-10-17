@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `BarDivergingCell` component renders a table cell representing a numerical value as a bar, where the length of the bar encodes the value.
-	 * There is a vertical line at x=0, and the bar color indicaes whether the value is greater tha or less than 0.
+	 * There is a vertical line at x=0, and the bar color indicates whether the value is greater tha or less than 0.
 	 * @component
 	 */
 

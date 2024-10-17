@@ -21,3 +21,12 @@
 </Template>
 
 <Story name="Default" source />
+
+<Story name="Multiple - custom colors" source>
+	<div class="w-36 flex flex-col">
+		<PairArrowCell value={-2} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
+		<PairArrowCell value={-1} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
+		<PairArrowCell value={+1} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
+		<PairArrowCell value={+2} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
+	</div>
+</Story>

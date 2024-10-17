@@ -41,8 +41,7 @@
 				label: 'Metric',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
+					renderer: 'TextCell'
 				}
 			},
 
@@ -77,8 +76,7 @@
 					formatString: ',.0f',
 					alignText: 'right',
 					contextFields: ['previous'],
-					extent: [0, 250],
-					width: '200px'
+					extent: [0, 250]
 				}
 			},
 
@@ -179,8 +177,7 @@
 				label: 'Metric',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
+					renderer: 'TextCell'
 				}
 			},
 
@@ -216,7 +213,6 @@
 					alignText: 'right',
 					contextFields: ['previous'],
 					extent: [0, 250],
-					width: '200px',
 
 					axisRenderer: 'PairArrowAxis'
 				}
@@ -277,8 +273,7 @@
 				label: 'Metric',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
+					renderer: 'TextCell'
 				},
 
 				column: { renderer: 'TextCell', value: '' }
@@ -320,7 +315,6 @@
 					alignText: 'right',
 					contextFields: ['previous'],
 					extent: [0, 250],
-					width: '200px',
 
 					axisRenderer: 'PairArrowAxis'
 				},
@@ -385,8 +379,7 @@
 				label: 'Metric',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
+					renderer: 'TextCell'
 				},
 
 				column: { renderer: 'TextCell', value: '' }

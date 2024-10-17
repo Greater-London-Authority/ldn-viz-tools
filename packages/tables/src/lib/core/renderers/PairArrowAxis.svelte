@@ -38,19 +38,19 @@
 	export let numTicks = 4;
 	$: ticks = x.ticks(numTicks);
 
-	export let textSize = '8px';
+	export let textSize = 8;
 
 	const topPadding = height; // padding above the horiontal rule
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<g transform={`translate(0, ${topPadding})`}>
-		<line x1={barEndPadding} x2={width - barEndPadding} y1={0} y2={0} stroke="black" />
+		<line x1={0} x2={width} y1={0} y2={0} stroke="black" />
 
 		{#each ticks as tick}
 			<line x1={x(tick)} x2={x(tick)} y1={0} y2={-6} stroke="black" />
 
-			<text x={x(tick)} y="-9" fill="black" font-size={textSize} text-anchor="middle">
+			<text x={x(tick)} y="-9" fill="black" font-size={`${textSize}px`} text-anchor="middle">
 				{f(tick)}
 			</text>
 		{/each}

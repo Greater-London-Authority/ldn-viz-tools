@@ -21,7 +21,6 @@
 			<div
 				class="flex font-bold was-th"
 				role="columnheader"
-				colspan="1"
 				style:width={sumWidths([
 					table.widths.groupLabel,
 					table.widths.groupSizeLabel,
@@ -49,7 +48,6 @@
 				<div
 					class="flex font-bold was-th"
 					role="columnheader"
-					colspan="1"
 					style:width={col.computedWidth + 'px'}
 				>
 					<Header
