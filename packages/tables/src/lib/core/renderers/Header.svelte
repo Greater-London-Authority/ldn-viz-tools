@@ -48,7 +48,13 @@
 	};
 </script>
 
-<div on:click={toggle} on:keypress={toggle} role="cell" tabindex={0} class="">
+<div
+	on:click={toggle}
+	on:keypress={toggle}
+	role="cell"
+	tabindex={0}
+	class="font-bold py-0.5 w-full"
+>
 	<div class={classNames('flex items-center select-none', alignmentClass)}>
 		{#if superscriptText}
 			<div class="text-left">
@@ -66,7 +72,7 @@
 			<Icon
 				src={order ? icons[order] : icons['default']}
 				theme="mini"
-				class="ml-auto w-4 h-4"
+				class="ml-0.5 w-4 h-4"
 				aria-hidden="true"
 			/>
 		{/if}
