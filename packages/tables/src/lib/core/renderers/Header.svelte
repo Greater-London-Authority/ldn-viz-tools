@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ChevronDown, ChevronUp, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Tooltip } from '@ldn-viz/ui';
+	import { Tooltip, classNames } from '@ldn-viz/ui';
 
 	/**
 	 * Text of label/column heading.
@@ -33,6 +33,14 @@
 	 */
 	export let hintText = '';
 
+	export let alignHeader = 'left' | 'right' | 'center' | undefined;
+	const alignmentClasses = {
+		left: 'justify-start',
+		right: 'justify-end',
+		center: 'justify-center'
+	};
+	$: alignmentClass = alignmentClasses[alignHeader ?? 'center'];
+
 	const icons = {
 		default: ChevronUpDown,
 		asc: ChevronUp,
@@ -45,9 +53,9 @@
 	on:keypress={toggle}
 	role="cell"
 	tabindex={0}
-	class="flex flex-col cursor-pointer"
+	class="flex flex-col cursor-pointer w-full"
 >
-	<div class="flex items-center min-h-[55px] ml-2 py-2 select-none">
+	<div class={classNames('flex items-center min-h-[55px] ml-2 py-2 select-none', alignmentClass)}>
 		{#if superscriptText}
 			<div class="text-left">
 				<span class="font-normal text-xs">{superscriptText}</span><br />

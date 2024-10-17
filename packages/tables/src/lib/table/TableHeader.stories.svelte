@@ -104,6 +104,53 @@
 	tableBasic.setColumnSpec(tableSpecBasic.columns);
 	computeWidths(tableBasic, FIXED_WIDTH);
 
+	/********************/
+	const tableSpecAlignment = {
+		showHeaderTopRule: false,
+
+		columns: [
+			{
+				short_label: 'metric',
+				label: 'Left',
+				alignHeader: 'left',
+
+				cell: {
+					renderer: 'TextCell',
+					width: '248px'
+				}
+			},
+
+			{
+				short_label: 'previous',
+				label: 'Center',
+				alignHeader: 'center',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			},
+
+			{
+				short_label: 'current',
+				label: 'Right',
+				alignHeader: 'right',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			}
+		]
+	};
+
+	const tableAlignment = new TableData(tableSpecAlignment);
+	tableAlignment.setData(data);
+	tableAlignment.setColumnSpec(tableSpecAlignment.columns);
+	computeWidths(tableAlignment, FIXED_WIDTH);
+
 	/*************/
 	const tableSpec = {
 		colGroupGap: 10,
@@ -490,6 +537,17 @@
 
 <Story name="Default">
 	<TableHeader {data} tableSpec={tableSpecBasic} table={tableBasic} tableWidth={FIXED_WIDTH} />
+</Story>
+
+<Story name="Header Alignment">
+	<div style:width="600px">
+		<TableHeader
+			{data}
+			tableSpec={tableSpecAlignment}
+			table={tableAlignment}
+			tableWidth={FIXED_WIDTH}
+		/>
+	</div>
 </Story>
 
 <Story name="With axes and colGroup gaps">
