@@ -17,6 +17,16 @@
 	export let contextVals: number[] = [0]; // value to be compared to
 
 	/**
+	 * Color to be applied to bars corresponding to positive values.
+	 */
+	export let positiveColor = 'blue';
+
+	/**
+	 * Color to be applied to bars corresponding to negative values.
+	 */
+	export let negativeColor = 'red';
+
+	/**
 	 * Width of cell (in pixels).
 	 */
 	export let width = 100;
@@ -54,8 +64,8 @@
 		x2={x(value)}
 		y1={height / 2}
 		y2={height / 2}
-		stroke={value > contextVals[0] ? 'blue' : 'red'}
-		fill={value > contextVals[0] ? 'blue' : 'red'}
+		stroke={value > contextVals[0] ? positiveColor : negativeColor}
+		fill={value > contextVals[0] ? positiveColor : negativeColor}
 		marker-end="url(#arrow)"
 	/>
 </svg>
