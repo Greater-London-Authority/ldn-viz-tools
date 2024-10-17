@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { Tooltip, classNames } from '@ldn-viz/ui';
 	import { ChevronDown, ChevronUp, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Tooltip, classNames } from '@ldn-viz/ui';
 
 	/**
 	 * Text of label/column heading.
@@ -33,7 +33,7 @@
 	 */
 	export let hintText = '';
 
-	export let alignHeader = 'left' | 'right' | 'center' | undefined;
+	export let alignHeader: 'left' | 'right' | 'center' | undefined;
 	const alignmentClasses = {
 		left: 'justify-start',
 		right: 'justify-end',
