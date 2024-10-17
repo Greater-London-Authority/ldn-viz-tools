@@ -1,5 +1,17 @@
 # @ldn-viz/tables
 
+## 2.1.0
+
+### Minor Changes
+
+- 38c1ad5: CHANGED: the `textSize` prop of `BarDivergingAxis` and `PairAwrrowAxis` now accepts a number (in pixels) rather than string
+- 2bac145: CHANGED: the colors used in the `PairArrowCell` component can now be customized
+- ba7417c: ADDED: table headers can now be left/right/center aligned
+
+### Patch Changes
+
+- f49f50e: CHANGED: the baseline of the `PairArrowAxis` now extends for the full width of the cell, rather than being shortened by the padding
+
 ## 2.0.0
 
 ### Major Changes
