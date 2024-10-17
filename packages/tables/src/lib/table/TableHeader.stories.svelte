@@ -44,9 +44,7 @@
 				cell: {
 					renderer: 'TextCell',
 					width: '248px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -57,9 +55,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -70,9 +66,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -86,9 +80,7 @@
 					contextFields: ['previous'],
 					extent: [0, 250],
 					width: '200px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -103,9 +95,7 @@
 					extent: [-140, +140],
 
 					numTicks: 5
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			}
 		]
 	};
@@ -145,9 +135,7 @@
 				cell: {
 					renderer: 'TextCell',
 					width: '248px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -158,9 +146,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -171,9 +157,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -189,9 +173,7 @@
 					width: '200px',
 
 					axisRenderer: 'PairArrowAxis'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -207,9 +189,7 @@
 
 					axisRenderer: 'BarDivergingAxis',
 					numTicks: 5
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			}
 		]
 	};
@@ -447,11 +427,8 @@
 				label: 'Metric',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+					renderer: 'TextCell'
+				}
 			},
 
 			{
@@ -462,9 +439,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -475,9 +450,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -489,11 +462,8 @@
 					formatString: ',.0f',
 					alignText: 'right',
 					contextFields: ['previous'],
-					extent: [0, 250],
-					width: '200px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+					extent: [0, 250]
+				}
 			},
 
 			{
@@ -508,9 +478,7 @@
 					extent: [-140, +140],
 
 					numTicks: 5
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			}
 		]
 	};
@@ -518,6 +486,7 @@
 	const tableControls = new TableData(tableSpecControls);
 	tableControls.setData(data);
 	tableControls.setColumnSpec(tableSpecControls.columns);
+	computeWidths(tableControls, FIXED_WIDTH);
 </script>
 
 <Story name="Default">
