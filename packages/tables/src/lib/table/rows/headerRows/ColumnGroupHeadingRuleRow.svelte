@@ -23,7 +23,6 @@
 					class="border-b border-color-ui-border-primary"
 					style:width={getWidth(colGroup)}
 					style:height="1px"
-					style="flex-shrink: 0"
 				></div>
 
 				{#if table.colGroupGap}
@@ -35,7 +34,6 @@
 				class="border-b border-color-ui-border-primary"
 				style:width={'100%'}
 				style:height="1px"
-				style="flex-shrink: 0"
 			/>
 		{/if}
 	</svelte:fragment>

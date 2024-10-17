@@ -45,6 +45,4 @@ export const computeWidths = (table: any, width: number) => {
 			col.computedWidth = Math.floor(availableWidth * (relativeWidth / totalRelWidth));
 		}
 	}
-
-	console.log({ tableSpec: table });
 };

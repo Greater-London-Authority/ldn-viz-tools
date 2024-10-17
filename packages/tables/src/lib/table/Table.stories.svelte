@@ -41,25 +41,20 @@
 				label: 'First Name',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+					renderer: 'TextCell'
+				}
 			},
 
 			{
 				short_label: 'last_name',
 				label: 'Last Name',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			},
 
 			{
 				short_label: 'pet',
 				label: 'Pet',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			}
 		]
 	};

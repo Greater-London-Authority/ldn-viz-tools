@@ -18,11 +18,7 @@
 <Scaffolding {table}>
 	<svelte:fragment slot="dataColumns">
 		{#each table.colGroups || [] as colGroup}
-			<div
-				class="flex flex-col font-bold was-th"
-				style:width={getWidth(colGroup)}
-				style="flex-shrink: 0"
-			>
+			<div class="flex flex-col font-bold was-th" style:width={getWidth(colGroup)}>
 				<div role="cell" tabindex="0" class="flex flex-col">
 					<div class="flex items-end pt-2 mb-2">
 						<div class="text-center w-full"><span>{colGroup.label}</span></div>
