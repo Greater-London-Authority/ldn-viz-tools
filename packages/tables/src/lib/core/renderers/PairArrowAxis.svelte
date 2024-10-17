@@ -45,7 +45,7 @@
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<g transform={`translate(0, ${topPadding})`}>
-		<line x1={barEndPadding} x2={width - barEndPadding} y1={0} y2={0} stroke="black" />
+		<line x1={0} x2={width} y1={0} y2={0} stroke="black" />
 
 		{#each ticks as tick}
 			<line x1={x(tick)} x2={x(tick)} y1={0} y2={-6} stroke="black" />
