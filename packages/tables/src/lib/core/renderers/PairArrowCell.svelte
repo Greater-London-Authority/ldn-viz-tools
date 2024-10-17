@@ -64,7 +64,7 @@
 		x2={x(value)}
 		y1={height / 2}
 		y2={height / 2}
-		stroke={value > contextVals[0] ? positiveColor : negativeColor }
+		stroke={value > contextVals[0] ? positiveColor : negativeColor}
 		fill={value > contextVals[0] ? positiveColor : negativeColor}
 		marker-end="url(#arrow)"
 	/>
