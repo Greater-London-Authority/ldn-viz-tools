@@ -10,21 +10,6 @@
 <script lang="ts">
 	import { Story } from '@storybook/addon-svelte-csf';
 
-	const footfallDataDayOrNight = [
-		{
-			metric: 'Nighttime (total)',
-			previous: 300,
-			current: 500,
-			percentage_change: (100 * (500 - 300)) / 300
-		},
-		{
-			metric: 'Daytime (total)',
-			previous: 400,
-			current: 200,
-			percentage_change: (100 * (200 - 400)) / 400
-		}
-	];
-
 	const footfallData = [
 		{
 			metric: 'Monday (avg)',

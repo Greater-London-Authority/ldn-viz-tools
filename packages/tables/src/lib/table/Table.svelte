@@ -191,7 +191,7 @@
 	const updateTableWidths = (newWidth) => {
 		if (table && !fixedTableWidth) {
 			computeWidths(table, newWidth);
-			table = table;
+			table = table; // eslint-disable-line no-self-assign
 		}
 	};
 
