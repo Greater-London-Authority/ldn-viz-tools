@@ -14,7 +14,6 @@
 				<div
 					role="columnheader"
 					class="flex font-bold was-th"
-					style="flex-shrink: 0"
 					style:width={col.computedWidth + 'px'}
 				>
 					<!-- or 100 width -->
