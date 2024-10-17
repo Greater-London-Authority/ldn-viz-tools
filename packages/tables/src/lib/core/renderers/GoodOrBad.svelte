@@ -44,7 +44,6 @@
 
 	let compared: ComparedBenchmark;
 
-	let f;
 	$: f = format(formatString);
 
 	$: if (typeof benchmarkValue === 'number' && typeof value === 'number') {
@@ -111,6 +110,6 @@
 		{compared.vs}
 		{benchmarkLabel}
 		{typeof benchmarkValue === 'number' ? f(benchmarkValue) : benchmarkValue}
-		({f(value)})
+		({f(+value)})
 	{/if}
 </p>

@@ -49,94 +49,96 @@
 	let x;
 	$: x = scaleLinear().domain(extent).range([0, width]);
 
-	let f;
-	$: if (formatString) {
-		f = format(formatString);
-	}
+	$: f = format(formatString);
 
 	const textPadding = 2;
+
+	// Shhh
+	$$restProps;
 </script>
 
-<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
-	<!-- background bar -->
-	<rect
-		x="0"
-		{width}
-		y={barVerticalPadding}
-		height={height - 2 * barVerticalPadding}
-		fill="lightgrey"
-	/>
-
-	<!-- data bar -->
-	{#if value < 0}
+<div class="h-full flex items-center">
+	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
+		<!-- background bar -->
 		<rect
-			x={x(value)}
-			width={x(0) - x(value)}
+			x="0"
+			{width}
 			y={barVerticalPadding}
 			height={height - 2 * barVerticalPadding}
-			fill={negativeColor}
+			fill="lightgrey"
 		/>
 
-		<!-- zero line -->
-		<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+		<!-- data bar -->
+		{#if value < 0}
+			<rect
+				x={x(value)}
+				width={x(0) - x(value)}
+				y={barVerticalPadding}
+				height={height - 2 * barVerticalPadding}
+				fill={negativeColor}
+			/>
 
-		{#if formatString}
-			{#if value < extent[0] / 2}
-				<!-- text inside bar, which is pointing left -->
-				<text
-					text-anchor="start"
-					fill="white"
-					x={x(value) + textPadding}
-					y={height / 2}
-					dominant-baseline="central"
-					font-size={`${textSize}px`}>{f(+value)}</text
-				>
-			{:else}
-				<!-- text to left of bar-->
-				<text
-					text-anchor="end"
-					fill="black"
-					x={x(value) - textPadding}
-					y={height / 2}
-					dominant-baseline="central"
-					font-size={`${textSize}px`}>{f(+value)}</text
-				>
+			<!-- zero line -->
+			<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+
+			{#if formatString}
+				{#if value < extent[0] / 2}
+					<!-- text inside bar, which is pointing left -->
+					<text
+						text-anchor="start"
+						fill="white"
+						x={x(value) + textPadding}
+						y={height / 2}
+						dominant-baseline="central"
+						font-size={`${textSize}px`}>{f(+value)}</text
+					>
+				{:else}
+					<!-- text to left of bar-->
+					<text
+						text-anchor="end"
+						fill="black"
+						x={x(value) - textPadding}
+						y={height / 2}
+						dominant-baseline="central"
+						font-size={`${textSize}px`}>{f(+value)}</text
+					>
+				{/if}
+			{/if}
+		{:else}
+			<rect
+				x={x(0)}
+				width={x(value) - x(0)}
+				y={barVerticalPadding}
+				height={height - 2 * barVerticalPadding}
+				fill={positiveColor}
+			/>
+
+			<!-- zero line -->
+			<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+
+			{#if formatString}
+				{#if value > extent[1] / 2}
+					<!-- text inside bar, which is pointing right -->
+					<text
+						text-anchor="end"
+						fill="white"
+						x={x(value) - textPadding}
+						y={height / 2}
+						dominant-baseline="central"
+						font-size={`${textSize}px`}>{f(+value)}</text
+					>
+				{:else}
+					<!-- text to left of bar-->
+					<text
+						text-anchor="start"
+						fill="black"
+						x={x(value) + textPadding}
+						y={height / 2}
+						dominant-baseline="central"
+						font-size={`${textSize}px`}>{f(+value)}</text
+					>
+				{/if}
 			{/if}
 		{/if}
-	{:else}
-		<rect
-			x={x(0)}
-			width={x(value) - x(0)}
-			y={barVerticalPadding}
-			height={height - 2 * barVerticalPadding}
-			fill={positiveColor}
-		/>
-
-		<!-- zero line -->
-		<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
-
-		{#if formatString}
-			{#if value > extent[1] / 2}
-				<!-- text inside bar, which is pointing right -->
-				<text
-					text-anchor="end"
-					fill="white"
-					x={x(value) - textPadding}
-					y={height / 2}
-					dominant-baseline="central"
-					font-size={`${textSize}px`}>{f(+value)}</text
-				>
-			{:else}
-				<!-- text to left of bar-->
-				<text
-					text-anchor="start"
-					fill="black"
-					x={x(value) + textPadding}
-					y={height / 2}
-					dominant-baseline="central"
-					font-size={`${textSize}px`}>{f(+value)}</text
-				>
-			{/if}
-		{/if}
-	{/if}
-</svg>
+	</svg>
+</div>

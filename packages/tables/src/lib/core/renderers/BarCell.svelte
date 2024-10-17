@@ -41,8 +41,8 @@
 	}
 </script>
 
-<div class="p-1">
-	<div class="bg-color-ui-neutral h-full flex relative text-xs">
+<div class="py-1 flex items-center h-full">
+	<div class="bg-color-ui-neutral w-full flex relative text-xs">
 		<div
 			style={`width:${scale(+value)}%; background-color:${color}`}
 			class="h-full text-right absolute left-0"

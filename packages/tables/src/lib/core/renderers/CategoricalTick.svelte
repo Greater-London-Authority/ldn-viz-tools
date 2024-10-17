@@ -9,7 +9,6 @@
 	 * The value to be encoded in the cell.
 	 */
 	export let value;
-	export let extent;
 
 	const fPercentage = format('0.0%');
 

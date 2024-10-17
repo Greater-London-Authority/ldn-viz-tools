@@ -24,10 +24,7 @@
 	 */
 	export let colorScale: ScaleThreshold<string | number, string> | (() => string);
 
-	let f;
-	$: if (formatString) {
-		f = format(formatString);
-	}
+	$: f = format(formatString);
 </script>
 
 {#if !colorScale}

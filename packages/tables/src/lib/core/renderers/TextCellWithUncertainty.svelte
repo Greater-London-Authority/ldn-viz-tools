@@ -10,7 +10,7 @@
 	export let value: number | string;
 
 	export let contextVals: boolean[] = [false];
-	export let alignText = 'left' | 'right' | 'center' | undefined;
+	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
 
 	export let formatString;
 	$: f = format(formatString ?? '');
@@ -21,7 +21,6 @@
 		center: 'justify-center'
 	};
 
-	let alignmentClass;
 	$: alignmentClass = alignmentClasses[alignText ?? 'center'];
 
 	$: textColor =
@@ -31,5 +30,5 @@
 </script>
 
 <div class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>
-	<span class={textColor}>{formatString ? f(value) : value}</span>
+	<span class={textColor}>{formatString ? f(+value) : value}</span>
 </div>

@@ -25,8 +25,8 @@
 									? col.cell.contextFields.map((c) => row[c])
 									: []}
 								extent={table.extents[col.short_label]}
-								{...col.cell}
 								width={col.computedWidth}
+								{...col.cell}
 							/>
 						</DataCell>
 					{:else}
@@ -34,7 +34,6 @@
 							<ColoredCell
 								value={row[col.short_label]}
 								colorScale={table.scales[col.short_label]}
-								extent={table.extents[col.short_label]}
 							/>
 						</DataCell>
 					{/if}

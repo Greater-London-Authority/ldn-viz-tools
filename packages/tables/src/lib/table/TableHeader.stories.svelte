@@ -10,8 +10,8 @@
 <script lang="ts">
 	import { Story } from '@storybook/addon-svelte-csf';
 
-	import { TableData } from '../core/lib/dataObj';
 	import { computeWidths } from '../core/lib/computeWidths';
+	import { TableData } from '../core/lib/dataObj';
 
 	const FIXED_WIDTH = 600;
 

@@ -4,9 +4,9 @@
 
 	export let table;
 
-	$: cellWidths = table.columnSpec.map((c) => c.computedWidth);
+	$: cellWidths = table.columnSpec.map((c: { computedWidth: any }) => c.computedWidth);
 
-	const getWidth = (colGroup) => {
+	const getWidth = (colGroup: { endCol: number; startCol: any }) => {
 		if (colGroup.endCol < 0) {
 			return 0;
 		}

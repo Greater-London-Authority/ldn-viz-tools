@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { sum } from 'd3-array';
 
 	export let table;
