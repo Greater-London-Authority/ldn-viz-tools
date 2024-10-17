@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { sum } from 'd3-array';
-
 	import { computeWidths } from '../core/lib/computeWidths';
 
 	import VirtualScroll from 'svelte-virtual-scroll-list';

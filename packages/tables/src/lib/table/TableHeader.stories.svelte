@@ -1,5 +1,4 @@
 <script context="module">
-	import Table from './Table.svelte';
 	import TableHeader from './TableHeader.svelte';
 
 	export const meta = {
