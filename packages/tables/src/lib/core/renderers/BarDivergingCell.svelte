@@ -49,12 +49,12 @@
 	let x;
 	$: x = scaleLinear().domain(extent).range([0, width]);
 
-	let f;
-	$: if (formatString) {
-		f = format(formatString);
-	}
+	$: f = format(formatString);
 
 	const textPadding = 2;
+
+	// Shhh
+	$$restProps;
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>

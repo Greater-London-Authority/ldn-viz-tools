@@ -1,18 +1,19 @@
-<script>
+<script lang="ts">
 	import { sum } from 'd3-array';
 
 	import Header from '../../../core/renderers/Header.svelte';
-	import ColGroupGapSpacer from '../../cells/ColGroupSpacer.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
 	export let table;
 
 	export let allowSorting;
 
-	const sumWidths = (widths) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
+	const sumWidths = (widths: any[]) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
 
-	const getCol = (colName) => table.columnSpec.find((d) => d.short_label === colName);
-	const getLabel = (colName) => getCol(colName).label ?? colName;
+	const getCol = (colName: any) =>
+		table.columnSpec.find((d: { short_label: any }) => d.short_label === colName);
+	const getLabel = (colName: any) => getCol(colName).label ?? colName;
 </script>
 
 <Scaffolding {table}>
@@ -33,28 +34,27 @@
 		{/each}
 	</svelte:fragment>
 
-	<div class="flex font-bold was-th" role="columnheader" slot="groupSizeLabel">
+	<!-- This is a warn for unexpected slot -->
+	<!-- <div class="flex was-th" role="columnheader" slot="groupSizeLabel">
 		{table.groups.length > 1 ? 'Count' : ''}
-	</div>
+	</div> -->
 
 	<svelte:fragment slot="dataColumns">
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div
-					class="flex font-bold was-th"
-					role="columnheader"
-					style:width={col.computedWidth + 'px'}
-				>
+				<div class="flex was-th" role="columnheader" style:width={col.computedWidth + 'px'}>
 					<Header
 						label={col.label ?? col.short_label}
 						order={undefined}
 						toggle={() => allowSorting && table.toggleSort(col.short_label)}
 						{allowSorting}
-						{...col}
+						alignHeader={col.alignHeader}
+						superscriptText={col.superscriptText}
+						hintText={col.hintText}
 					/>
 				</div>
 			{/if}
-			<ColGroupGapSpacer {table} {i} />
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

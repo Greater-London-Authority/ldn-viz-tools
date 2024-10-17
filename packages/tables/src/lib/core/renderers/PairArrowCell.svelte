@@ -39,6 +39,9 @@
 	$: x = scaleLinear()
 		.domain(extent)
 		.range([barEndPadding, width - barEndPadding]);
+
+	// Shhh
+	$$restProps;
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>

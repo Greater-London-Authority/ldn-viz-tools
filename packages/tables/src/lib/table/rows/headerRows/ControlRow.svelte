@@ -25,7 +25,6 @@
 					theme="solid"
 					class="w-[18px] h-[18px] ml-0.5"
 					aria-hidden="true"
-					on:click={() => console.log('CLICKED')}
 				/>
 			</div>
 		{/each}
@@ -46,11 +45,7 @@
 	<svelte:fragment slot="dataColumns">
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div
-					class="flex font-bold was-th"
-					role="columnheader"
-					style:width={col.computedWidth + 'px'}
-				>
+				<div class="flex was-th" role="columnheader" style:width={col.computedWidth + 'px'}>
 					<FilterMenu {table} {col} />
 					<EncodingType {col} />
 

@@ -48,14 +48,8 @@
 	};
 </script>
 
-<div
-	on:click={toggle}
-	on:keypress={toggle}
-	role="cell"
-	tabindex={0}
-	class="flex flex-col cursor-pointer w-full"
->
-	<div class={classNames('flex items-center min-h-[55px] ml-2 py-2 select-none', alignmentClass)}>
+<div on:click={toggle} on:keypress={toggle} role="cell" tabindex={0} class="">
+	<div class={classNames('flex items-center select-none', alignmentClass)}>
 		{#if superscriptText}
 			<div class="text-left">
 				<span class="font-normal text-xs">{superscriptText}</span><br />

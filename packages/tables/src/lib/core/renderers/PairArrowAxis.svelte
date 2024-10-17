@@ -21,12 +21,9 @@
 	 */
 	export let width = 100;
 
-	const height = 30;
+	const height = 20;
 
-	let f;
-	$: if (formatString) {
-		f = format(formatString);
-	}
+	$: f = format(formatString);
 
 	const barEndPadding = 15;
 
@@ -41,16 +38,25 @@
 	export let textSize = 8;
 
 	const topPadding = height; // padding above the horiontal rule
+
+	// Shhh
+	$$restProps;
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<g transform={`translate(0, ${topPadding})`}>
-		<line x1={0} x2={width} y1={0} y2={0} stroke="black" />
+		<line x1={0} x2={width} y1={0} y2={0} stroke="currentColor" />
 
 		{#each ticks as tick}
-			<line x1={x(tick)} x2={x(tick)} y1={0} y2={-6} stroke="black" />
+			<line x1={x(tick)} x2={x(tick)} y1={0} y2={-6} stroke="currentColor" />
 
-			<text x={x(tick)} y="-9" fill="black" font-size={`${textSize}px`} text-anchor="middle">
+			<text
+				x={x(tick)}
+				y="-12"
+				fill="currentColor"
+				font-size={`${textSize}px`}
+				text-anchor="middle"
+			>
 				{f(tick)}
 			</text>
 		{/each}
