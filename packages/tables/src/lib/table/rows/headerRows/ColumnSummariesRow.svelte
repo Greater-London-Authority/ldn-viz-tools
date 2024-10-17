@@ -13,7 +13,6 @@
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div
 					role="columnheader"
-					colspan="1"
 					class="flex font-bold was-th"
 					style="flex-shrink: 0"
 					style:width={col.computedWidth + 'px'}
