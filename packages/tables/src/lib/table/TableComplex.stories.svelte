@@ -133,14 +133,13 @@
 		columns: [
 			{
 				short_label: 'Name',
-				cell: { renderer: 'TextCell', width: '160px' },
+				cell: { renderer: 'TextCell' },
 				column: { renderer: 'TextCell', value: '' }
 			},
 
 			{
 				short_label: 'Position',
-				//cell: {renderer: TextCell, width: "240px"},
-				cell: { renderer: 'ColorAndLabel', width: '240px' },
+				cell: { renderer: 'ColorAndLabel' },
 				column: { renderer: 'BarChart' }
 			},
 
@@ -215,10 +214,11 @@
 				cell: {
 					renderer: 'TextCell',
 					alignText: 'left',
-					width: '300px',
 					href: (row) =>
 						`https://dev.ldn-gis.co.uk/hsds-hub/overview?loc=E09000003&area_type=highstreet&area_id=${row.area_id}`
 				},
+
+				width: 300,
 
 				column: {
 					renderer: 'TextCell',
@@ -467,19 +467,19 @@
 			{
 				short_label: 'Name',
 				hintText: 'What this person is called.',
-				cell: { renderer: 'TextCell', width: '100px' }
+				cell: { renderer: 'TextCell' }
 			},
 
 			{
 				short_label: 'Age',
 				hintText: 'How old this person is, in years.',
-				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['age_known'] }
+				cell: { renderer: TextCellWithUncertainty, contextFields: ['age_known'] }
 			},
 
 			{
 				short_label: 'Sex',
 				hintText: 'Whether this person is male or female.',
-				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['sex_known'] }
+				cell: { renderer: TextCellWithUncertainty, contextFields: ['sex_known'] }
 			}
 		]
 	};

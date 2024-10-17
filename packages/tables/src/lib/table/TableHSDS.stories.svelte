@@ -78,8 +78,7 @@
 				label: 'Metric',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
+					renderer: 'TextCell'
 				}
 			},
 
@@ -116,7 +115,6 @@
 					alignText: 'right',
 					contextFields: ['previous'],
 					extent: [0, 250],
-					width: '200px',
 
 					axisRenderer: 'PairArrowAxis'
 				}

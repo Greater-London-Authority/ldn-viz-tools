@@ -41,23 +41,19 @@
 				label: 'First Name',
 				cell: {
 					renderer: 'TextCell'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
 				short_label: 'last_name',
 				label: 'Last Name',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			},
 
 			{
 				short_label: 'pet',
 				label: 'Pet',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			}
 		]
 	};
@@ -71,23 +67,19 @@
 				width: 248, // 248 px could also be used
 				cell: {
 					renderer: 'TextCell'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
 				short_label: 'last_name',
 				label: 'Last Name',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			},
 
 			{
 				short_label: 'pet',
 				label: 'Pet',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			}
 		]
 	};
@@ -101,24 +93,20 @@
 				relativeWidth: 3,
 				cell: {
 					renderer: 'TextCell'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
 				short_label: 'last_name',
 				label: 'Last Name',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			},
 
 			{
 				short_label: 'pet',
 				label: 'Pet',
 				relativeWidth: 2,
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			}
 		]
 	};
