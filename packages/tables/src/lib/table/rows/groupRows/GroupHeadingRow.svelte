@@ -38,7 +38,7 @@
 	</div>
 
 	<!-- label for group name -->
-	<div style:width={table.widths.groupLabel} class="was-td" style="flex-shrink: 0">
+	<div style:width={table.widths.groupLabel} class="was-td">
 		{constructLabel(group)}
 	</div>
 

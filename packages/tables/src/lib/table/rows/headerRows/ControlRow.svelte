@@ -49,7 +49,6 @@
 				<div
 					class="flex font-bold was-th"
 					role="columnheader"
-					style="flex-shrink: 0"
 					style:width={col.computedWidth + 'px'}
 				>
 					<FilterMenu {table} {col} />
