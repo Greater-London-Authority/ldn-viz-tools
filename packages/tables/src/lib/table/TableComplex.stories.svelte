@@ -2,7 +2,7 @@
 	import Table from './Table.svelte';
 
 	export const meta = {
-		title: 'Tables/Table - Visual Encodings',
+		title: 'Tables/Table - Visual Renderers',
 		component: Table
 	};
 </script>
@@ -504,21 +504,24 @@ This example shows how the encoding used for a column can be influenced by the v
 </Story>
 
 <Story name="Metrics Example" source>
-	<div class="w-[1500px]">
-		<Table data={dataMetrics} tableSpec={tableSpecMetrics} allowSorting allowRowGrouping />
-	</div>
+	<Table
+		data={dataMetrics}
+		tableSpec={tableSpecMetrics}
+		allowSorting
+		allowRowGrouping
+		fixedTableWidth={1500}
+	/>
 </Story>
 
 <Story name="Metrics Example - virtualised" source>
-	<div class="w-[1500px]">
-		<Table
-			data={dataMetrics}
-			tableSpec={tableSpecMetrics}
-			allowSorting
-			allowRowGrouping
-			virtualise
-		/>
-	</div>
+	<Table
+		data={dataMetrics}
+		tableSpec={tableSpecMetrics}
+		allowSorting
+		allowRowGrouping
+		virtualise
+		fixedTableWidth={1500}
+	/>
 </Story>
 
 <!--

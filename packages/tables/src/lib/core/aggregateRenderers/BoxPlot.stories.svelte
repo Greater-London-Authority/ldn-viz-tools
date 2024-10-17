@@ -1,7 +1,7 @@
 <script context="module">
 	import BoxPlot from './BoxPlot.svelte';
 	export const meta = {
-		title: 'Tables/AggregateEncodings/BoxPlot',
+		title: 'Tables/AggregateRenderers/BoxPlot',
 		component: BoxPlot,
 
 		args: {

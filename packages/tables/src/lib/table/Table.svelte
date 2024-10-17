@@ -1,21 +1,17 @@
 <script lang="ts">
-	import { sum } from 'd3-array';
+	import { computeWidths } from '../core/lib/computeWidths';
+
 	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import { TableData } from '../core/lib/dataObj';
 	import TableContainer from './TableContainer.svelte';
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
 	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
-	import AxisRow from './rows/AxisRow.svelte';
-	import ColumnGroupHeadingRow from './rows/ColumnGroupHeadingRow.svelte';
-	import ColumnGroupHeadingRuleRow from './rows/ColumnGroupHeadingRuleRow.svelte';
-	import ColumnHeadingRow from './rows/ColumnHeadingRow.svelte';
-	import ColumnSummariesRow from './rows/ColumnSummariesRow.svelte';
-	import ControlRow from './rows/ControlRow.svelte';
-	import NumRowsControls from './rows/NumRowsControls.svelte';
-	import PaginationControls from './rows/PaginationControls.svelte';
+	import NumRowsControls from './paginationControls/NumRowsControls.svelte';
+	import PaginationControls from './paginationControls/PaginationControls.svelte';
 	import RowRenderer from './rows/RowRenderer.svelte';
-	import { classNames } from '@ldn-viz/ui';
+
+	import TableHeader from './TableHeader.svelte';
 
 	/**
 	 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
@@ -130,6 +126,11 @@
 	 */
 	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 
+	/**
+	 * An (optional) fixed width in pixels. If not set, the table will expand to fill the width of its parent container.
+	 */
+	export let fixedTableWidth: number | undefined = undefined;
+
 	const onRowsChange = () => {
 		table = table; // eslint-disable-line no-self-assign
 	};
@@ -148,6 +149,11 @@
 				direction: 'ascending'
 			}
 		]);
+
+		if (fixedTableWidth) {
+			computeWidths(table, fixedTableWidth);
+			// TODO: should set tableWidth to match
+		}
 	};
 
 	$: createTable(data);
@@ -180,113 +186,89 @@
 		}
 	}
 
-	const sumWidths = (widths) => {
-		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
-		const colGroupGaps = (table.colGroups || []).length * (table.colGroupGap ?? 0);
-		return colWidths + colGroupGaps + 'px';
+	let tableWidth;
+
+	const updateTableWidths = (newWidth) => {
+		if (table && !fixedTableWidth) {
+			computeWidths(table, newWidth);
+			table = table; // eslint-disable-line no-self-assign
+		}
 	};
 
-	$: tableWidth = sumWidths([
-		// TODO: may need to add some of the values from table.widths to account for chrome added when rows grouped
-		...table.columnSpec.map(
-			(c) => c.cell.width ?? table.widths.defaultCell,
-			(table.colGroups || []).length * (table.colGroupGap ?? 0)
-		)
-	]);
-
-	const DEFAULT_CELL_WIDTH = '100px'; // TODO: don't duplicate
-
-	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
+	$: updateTableWidths(tableWidth);
 </script>
 
 {#if table && table.extents}
-	<div class="flex gap-2 ml-4 w-[430px]">
-		{#if allowRowGrouping}
-			<GroupRowsMenu {table} />
-			<SortGroupsMenu {table} />
-		{/if}
+	<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
+		<div class="flex gap-2 ml-4 w-[430px]">
+			{#if allowRowGrouping}
+				<GroupRowsMenu {table} />
+				<SortGroupsMenu {table} />
+			{/if}
 
-		{#if allowColumnHiding}
-			<ToggleColumnsMenu {table} />
-		{/if}
-	</div>
+			{#if allowColumnHiding}
+				<ToggleColumnsMenu {table} />
+			{/if}
+		</div>
 
-	<TableContainer
-		{data}
-		{title}
-		{subTitle}
-		{source}
-		{byline}
-		{note}
-		{dataDownloadButton}
-		{imageDownloadButton}
-		{columnMapping}
-	>
-		<div class="table-auto text-sm w-full text-color-text-primary" slot="table">
+		<TableContainer
+			{data}
+			{title}
+			{subTitle}
+			{source}
+			{byline}
+			{note}
+			{dataDownloadButton}
+			{imageDownloadButton}
+			{columnMapping}
+		>
 			<div
-				class={classNames(topRuleClass, 'border-color-ui-border-primary')}
-				style:width={tableWidth}
+				class="table-auto text-sm w-full text-color-text-primary"
+				slot="table"
+				bind:clientWidth={tableWidth}
 			>
-				{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
-					<ColumnGroupHeadingRow {table} />
-				{/if}
+				<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
 
-				<ColumnHeadingRow {table} {allowSorting} />
-
-				{#if tableSpec.showColumnControls}
-					<ControlRow {table} />
-				{/if}
-
-				{#if tableSpec.showColSummaries === true}
-					<ColumnSummariesRow {table} {data} />
-				{/if}
-
-				<AxisRow {table} />
-
-				{#if tableSpec.colGroups}
-					<ColumnGroupHeadingRuleRow {table} />
+				{#if paginate}
+					<div style:width={tableWidth} class:striped={zebraStripe}>
+						{#each visualRows as visualRow, i}
+							{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
+								<RowRenderer spec={visualRow} {table} {tableSpec} />
+							{/if}
+						{/each}
+					</div>
+				{:else if virtualise}
+					<div
+						style:height={`${height - 100}px`}
+						style:width={tableWidth}
+						class:stripedVirtual={zebraStripe}
+					>
+						<VirtualScroll data={visualRows} key="uniqueKey" let:data>
+							<RowRenderer spec={data} {table} {tableSpec} />
+						</VirtualScroll>
+					</div>
+				{:else}
+					<div style:width={tableWidth} class:striped={zebraStripe}>
+						{#each visualRows as visualRow}
+							<RowRenderer spec={visualRow} {table} {tableSpec} />
+						{/each}
+					</div>
 				{/if}
 			</div>
 
-			{#if paginate}
-				<div style:width={tableWidth} class:striped={zebraStripe}>
-					{#each visualRows as visualRow, i}
-						{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
-							<RowRenderer spec={visualRow} {table} {tableSpec} />
-						{/if}
-					{/each}
-				</div>
-			{:else if virtualise}
-				<div
-					style:height={`${height - 100}px`}
-					style:width={tableWidth}
-					class:stripedVirtual={zebraStripe}
-				>
-					<VirtualScroll data={visualRows} key="uniqueKey" let:data>
-						<RowRenderer spec={data} {table} {tableSpec} />
-					</VirtualScroll>
-				</div>
-			{:else}
-				<div style:width={tableWidth} class:striped={zebraStripe}>
-					{#each visualRows as visualRow}
-						<RowRenderer spec={visualRow} {table} {tableSpec} />
-					{/each}
-				</div>
-			{/if}
-		</div>
+			<div slot="paginationControls">
+				{#if paginate}
+					<PaginationControls {pageSize} numRows={data.length} bind:page />
+				{/if}
+			</div>
 
-		<div slot="paginationControls">
-			{#if paginate}
-				<PaginationControls {pageSize} numRows={data.length} bind:page />
-			{/if}
-		</div>
-
-		<div slot="numRowsControlSlot">
-			{#if paginate && allowPageSizeChanges}
-				<NumRowsControls bind:pageSize bind:page />
-			{/if}
-		</div>
-	</TableContainer>
+			<div slot="numRowsControlSlot">
+				{#if paginate && allowPageSizeChanges}
+					<NumRowsControls bind:pageSize bind:page />
+				{/if}
+			</div>
+		</TableContainer>
+	</div>
 {/if}
 
 <style lang="postcss">

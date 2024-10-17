@@ -2,7 +2,7 @@
 	/**
 	 * The `Dot` component renders a table cell representing a numerical value as a tick;
 	 * the horizontal position of the dot encodes the value.
-	 * See also: [Tick](./?path=/docs/tables-encodings-tick--documentation)
+	 * See also: [Tick](./?path=/docs/tables-renderers-tick--documentation)
 	 * @component
 	 */
 

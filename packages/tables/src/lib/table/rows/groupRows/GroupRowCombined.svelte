@@ -3,8 +3,8 @@
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import GroupSizeBar from '../cells/GroupSizeBar.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
+	import GroupSizeBar from './GroupSizeBar.svelte';
 
 	export let group;
 	export let table;
@@ -13,8 +13,6 @@
 		return group.name.split(' ∩ ').slice(-1);
 	};
 	const getGroupLevel = (name) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
-
-	const DEFAULT_CELL_WIDTH = '100px';
 
 	const getNthAncestor = (group, i, n) => {
 		while (n > 0) {
@@ -111,7 +109,7 @@
 	<!-- actual columns -->
 	{#each table.columnSpec as col, i}
 		{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-			<div style:width={col.cell.width ?? DEFAULT_CELL_WIDTH} class="was-td" style="flex-shrink: 0">
+			<div style:width={col.computedWidth + 'px'} class="was-td" style="flex-shrink: 0">
 				{#if col.group && col.group.renderer}
 					<svelte:component
 						this={col.group.renderer}
@@ -126,6 +124,6 @@
 				{/if}
 			</div>
 		{/if}
-		<ColGroupGap {table} {i} />
+		<ColGroupSpacer {table} {i} />
 	{/each}
 </div>

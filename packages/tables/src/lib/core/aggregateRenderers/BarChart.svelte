@@ -22,7 +22,11 @@
 	 */
 	export let posScale;
 
-	const width = 100;
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
+
 	const height = 30;
 	const marginTop = 0;
 	const marginRight = 10;

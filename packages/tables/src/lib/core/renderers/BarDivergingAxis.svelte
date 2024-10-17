@@ -16,7 +16,11 @@
 
 	export let extent = [0, 1]; // used to pass automatically extracted val
 
-	const width = 100;
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
+
 	const height = 30;
 
 	let x;
@@ -27,7 +31,6 @@
 		f = format(formatString);
 	}
 
-	// TOOD: numTicks
 	export let numTicks = 4;
 	$: ticks = x.ticks(numTicks);
 

@@ -1,17 +1,15 @@
 <script>
-	import { ChevronRight, ChevronDown } from '@steeze-ui/heroicons';
+	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import Scaffolding from './Scaffolding.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
-	import FilterMenu from '../menus/FilterMenu.svelte';
-	import EncodingType from '../menus/EncodingType.svelte';
-	import MergeMenu from '../menus/MergeMenu.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
+	import EncodingType from '../../menus/EncodingType.svelte';
+	import FilterMenu from '../../menus/FilterMenu.svelte';
+	import MergeMenu from '../../menus/MergeMenu.svelte';
 
 	export let table;
-
-	const DEFAULT_CELL_WIDTH = '100px';
 </script>
 
 <Scaffolding {table}>
@@ -53,7 +51,7 @@
 					role="columnheader"
 					colspan="1"
 					style="flex-shrink: 0"
-					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
+					style:width={col.computedWidth + 'px'}
 				>
 					<FilterMenu {table} {col} />
 					<EncodingType {col} />
@@ -63,7 +61,7 @@
 					{/if}
 				</div>
 			{/if}
-			<ColGroupGap {table} {i} />
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

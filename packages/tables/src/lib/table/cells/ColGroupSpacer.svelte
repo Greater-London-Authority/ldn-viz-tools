@@ -7,9 +7,6 @@
 	export let i: number;
 
 	const gapPositions: number[] = (table.colGroups || []).map((colGroup) => colGroup.endCol);
-
-	$: console.log('gapPositions', gapPositions, i);
-	$: console.log('gapWidth', table.colGroupGap);
 </script>
 
 {#if gapPositions.includes(i) && table.colGroupGap}

@@ -1,6 +1,6 @@
 <script>
-	import Scaffolding from './Scaffolding.svelte';
-	import ColGroupGap from '../cells/ColGroupGap.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
 	export let group;
 	export let table;
@@ -11,11 +11,7 @@
 	<svelte:fragment slot="dataColumns">
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div
-					style:width={col.cell.width ?? table.widths.defaultCell}
-					class="was-td"
-					style="flex-shrink: 0"
-				>
+				<div style:width={col.computedWidth + 'px'} class="was-td" style="flex-shrink: 0">
 					{#if col.group && col.group.renderer}
 						<svelte:component
 							this={col.group.renderer}
@@ -30,7 +26,7 @@
 					{/if}
 				</div>
 			{/if}
-			<ColGroupGap {table} {i} />
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>
