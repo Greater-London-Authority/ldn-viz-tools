@@ -14,8 +14,6 @@
 	};
 	const getGroupLevel = (name) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 
-	const DEFAULT_CELL_WIDTH = '100px';
-
 	const getNthAncestor = (group, i, n) => {
 		while (n > 0) {
 			group = group.parentGroup;
@@ -111,7 +109,7 @@
 	<!-- actual columns -->
 	{#each table.columnSpec as col, i}
 		{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-			<div style:width={col.cell.width ?? DEFAULT_CELL_WIDTH} class="was-td" style="flex-shrink: 0">
+			<div style:width={col.computedWidth + 'px'} class="was-td" style="flex-shrink: 0">
 				{#if col.group && col.group.renderer}
 					<svelte:component
 						this={col.group.renderer}

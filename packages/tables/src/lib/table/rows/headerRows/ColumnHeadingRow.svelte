@@ -52,7 +52,7 @@
 					role="columnheader"
 					colspan="1"
 					style="flex-shrink: 0"
-					style:width={col.cell.width ?? table.widths.defaultCell}
+					style:width={col.computedWidth + 'px'}
 				>
 					<Header
 						label={col.label ?? col.short_label}

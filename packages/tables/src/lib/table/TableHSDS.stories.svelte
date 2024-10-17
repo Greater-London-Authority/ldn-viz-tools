@@ -95,9 +95,7 @@
 				cell: {
 					renderer: 'TextCell',
 					width: '248px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -108,9 +106,7 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
@@ -121,14 +117,13 @@
 					renderer: 'TextCell',
 					formatString: ',.0f',
 					alignText: 'right'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
 				short_label: 'current',
 				label: 'Actual',
+				relativeWidth: 4,
 
 				cell: {
 					renderer: 'PairArrow',
@@ -139,15 +134,14 @@
 					width: '200px',
 
 					axisRenderer: 'PairArrowAxis'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			},
 
 			{
 				short_label: 'percentage_change',
 				label: '% Change',
 				domainType: 'MinToMax',
+				relativeWidth: 3,
 
 				cell: {
 					renderer: 'BarDivergingCell',
@@ -157,9 +151,7 @@
 
 					axisRenderer: 'BarDivergingAxis',
 					numTicks: 5
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+				}
 			}
 		]
 	};

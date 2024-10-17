@@ -179,7 +179,14 @@
 </Story>
 
 <!-- Example of a table that is wider than its parent and needs to be scrolled -->
-<Story name="Wide table">
-	<Table data={wideTableData} tableSpec={wideTableSpec} paginate pageSize={5} bind:page />
+<Story name="Wide table with fixed width">
+	<Table
+		data={wideTableData}
+		tableSpec={wideTableSpec}
+		paginate
+		pageSize={5}
+		fixedTableWidth={1200}
+		bind:page
+	/>
 </Story>
 <!-- TODO: add example of filtering -->

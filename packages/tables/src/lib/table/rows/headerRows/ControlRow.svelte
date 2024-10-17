@@ -10,8 +10,6 @@
 	import MergeMenu from '../../menus/MergeMenu.svelte';
 
 	export let table;
-
-	const DEFAULT_CELL_WIDTH = '100px';
 </script>
 
 <Scaffolding {table}>
@@ -53,7 +51,7 @@
 					role="columnheader"
 					colspan="1"
 					style="flex-shrink: 0"
-					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
+					style:width={col.computedWidth + 'px'}
 				>
 					<FilterMenu {table} {col} />
 					<EncodingType {col} />

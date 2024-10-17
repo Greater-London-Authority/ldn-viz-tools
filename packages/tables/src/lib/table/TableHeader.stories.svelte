@@ -1,4 +1,5 @@
 <script context="module">
+	import Table from './Table.svelte';
 	import TableHeader from './TableHeader.svelte';
 
 	export const meta = {
@@ -11,6 +12,9 @@
 	import { Story } from '@storybook/addon-svelte-csf';
 
 	import { TableData } from '../core/lib/dataObj';
+	import { computeWidths } from '../core/lib/computeWidths';
+
+	const FIXED_WIDTH = 600;
 
 	const data = [
 		{
@@ -109,6 +113,7 @@
 	const tableBasic = new TableData(tableSpecBasic);
 	tableBasic.setData(data);
 	tableBasic.setColumnSpec(tableSpecBasic.columns);
+	computeWidths(tableBasic, FIXED_WIDTH);
 
 	/*************/
 	const tableSpec = {
@@ -212,6 +217,7 @@
 	const table = new TableData(tableSpec);
 	table.setData(data);
 	table.setColumnSpec(tableSpec.columns);
+	computeWidths(table, FIXED_WIDTH);
 
 	/*************************/
 
@@ -319,6 +325,7 @@
 	const tableColSummaries = new TableData(tableSpecColSummaries);
 	tableColSummaries.setData(data);
 	tableColSummaries.setColumnSpec(tableSpecColSummaries.columns);
+	computeWidths(tableColSummaries, FIXED_WIDTH);
 
 	/**************/
 
@@ -426,6 +433,7 @@
 	const tableColSummariesGroupHeadings = new TableData(tableSpecColSummariesGroupHeadings);
 	tableColSummariesGroupHeadings.setData(data);
 	tableColSummariesGroupHeadings.setColumnSpec(tableSpecColSummariesGroupHeadings.columns);
+	computeWidths(tableColSummariesGroupHeadings, FIXED_WIDTH);
 
 	/*********************************/
 	const tableSpecControls = {
@@ -513,15 +521,15 @@
 </script>
 
 <Story name="Default">
-	<TableHeader {data} tableSpec={tableSpecBasic} table={tableBasic} tableWidth={600} />
+	<TableHeader {data} tableSpec={tableSpecBasic} table={tableBasic} tableWidth={FIXED_WIDTH} />
 </Story>
 
 <Story name="With axes and colGroup gaps">
-	<TableHeader {data} {tableSpec} {table} tableWidth={600} />
+	<TableHeader {data} {tableSpec} {table} tableWidth={FIXED_WIDTH} />
 </Story>
 
 <Story name="With sorting enabled">
-	<TableHeader {data} {tableSpec} {table} allowSorting={true} tableWidth={600} />
+	<TableHeader {data} {tableSpec} {table} allowSorting={true} tableWidth={FIXED_WIDTH} />
 </Story>
 
 <Story name="With column summaries">
@@ -529,7 +537,7 @@
 		{data}
 		tableSpec={tableSpecColSummaries}
 		table={tableColSummaries}
-		tableWidth={600}
+		tableWidth={FIXED_WIDTH}
 	/>
 </Story>
 
@@ -538,7 +546,7 @@
 		{data}
 		tableSpec={tableSpecColSummaries}
 		table={tableColSummaries}
-		tableWidth={600}
+		tableWidth={FIXED_WIDTH}
 		allowSorting={true}
 	/>
 </Story>
@@ -548,7 +556,7 @@
 		{data}
 		tableSpec={tableSpecColSummariesGroupHeadings}
 		table={tableColSummariesGroupHeadings}
-		tableWidth={600}
+		tableWidth={FIXED_WIDTH}
 		allowSorting={true}
 	/>
 </Story>
@@ -558,7 +566,7 @@
 		{data}
 		tableSpec={tableSpecControls}
 		table={tableControls}
-		tableWidth={600}
+		tableWidth={FIXED_WIDTH}
 		allowSorting={true}
 	/>
 </Story>
