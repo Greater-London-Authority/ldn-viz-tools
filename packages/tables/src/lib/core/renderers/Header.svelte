@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { Tooltip, classNames } from '@ldn-viz/ui';
 	import { ChevronDown, ChevronUp, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Tooltip, classNames } from '@ldn-viz/ui';
 
 	/**
 	 * Text of label/column heading.
@@ -33,13 +33,13 @@
 	 */
 	export let hintText = '';
 
-	export let alignHeader = 'left' | 'right' | 'center' | undefined;
+	export let alignHeader: 'left' | 'right' | 'center' | undefined;
 	const alignmentClasses = {
 		left: 'justify-start',
 		right: 'justify-end',
 		center: 'justify-center'
 	};
-	$: alignmentClass = alignmentClasses[alignHeader ?? 'center'];
+	$: alignmentClass = alignmentClasses[alignHeader ?? 'left'];
 
 	const icons = {
 		default: ChevronUpDown,
@@ -53,9 +53,9 @@
 	on:keypress={toggle}
 	role="cell"
 	tabindex={0}
-	class="flex flex-col cursor-pointer w-full"
+	class="font-bold py-0.5 w-full h-full"
 >
-	<div class={classNames('flex items-center min-h-[55px] ml-2 py-2 select-none', alignmentClass)}>
+	<div class={classNames('flex items-center select-none', alignmentClass)}>
 		{#if superscriptText}
 			<div class="text-left">
 				<span class="font-normal text-xs">{superscriptText}</span><br />
@@ -72,7 +72,7 @@
 			<Icon
 				src={order ? icons[order] : icons['default']}
 				theme="mini"
-				class="ml-auto w-4 h-4"
+				class="ml-0.5 w-4 h-4"
 				aria-hidden="true"
 			/>
 		{/if}

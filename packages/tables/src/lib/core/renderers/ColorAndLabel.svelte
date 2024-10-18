@@ -16,7 +16,7 @@
 	export let colorScale;
 </script>
 
-<div class="flex items-center">
+<div class="flex items-center h-full">
 	<div
 		class="flex-none w-4 h-4 mr-1"
 		style={`background-color: ${colorScale ? colorScale(value) : 'lightgrey'};`}

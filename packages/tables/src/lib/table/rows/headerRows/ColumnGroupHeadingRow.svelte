@@ -4,9 +4,9 @@
 
 	export let table;
 
-	$: cellWidths = table.columnSpec.map((c) => c.computedWidth);
+	$: cellWidths = table.columnSpec.map((c: { computedWidth: any }) => c.computedWidth);
 
-	const getWidth = (colGroup) => {
+	const getWidth = (colGroup: { endCol: number; startCol: any }) => {
 		if (colGroup.endCol < 0) {
 			return 0;
 		}
@@ -18,11 +18,9 @@
 <Scaffolding {table}>
 	<svelte:fragment slot="dataColumns">
 		{#each table.colGroups || [] as colGroup}
-			<div class="flex flex-col font-bold was-th" style:width={getWidth(colGroup)}>
-				<div role="cell" tabindex="0" class="flex flex-col">
-					<div class="flex items-end pt-2 mb-2">
-						<div class="text-center w-full"><span>{colGroup.label}</span></div>
-					</div>
+			<div class="was-th" style:width={getWidth(colGroup)}>
+				<div role="cell" tabindex="0" class="w-full">
+					<div class="text-center font-bold">{colGroup.label}</div>
 				</div>
 			</div>
 

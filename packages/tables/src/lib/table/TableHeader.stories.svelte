@@ -10,8 +10,8 @@
 <script lang="ts">
 	import { Story } from '@storybook/addon-svelte-csf';
 
-	import { TableData } from '../core/lib/dataObj';
 	import { computeWidths } from '../core/lib/computeWidths';
+	import { TableData } from '../core/lib/dataObj';
 
 	const FIXED_WIDTH = 600;
 
@@ -113,8 +113,7 @@
 				alignHeader: 'left',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
+					renderer: 'TextCell'
 				}
 			},
 
@@ -421,7 +420,6 @@
 					alignText: 'right',
 					contextFields: ['previous'],
 					extent: [0, 250],
-					width: '200px',
 
 					axisRenderer: 'PairArrowAxis'
 				},
