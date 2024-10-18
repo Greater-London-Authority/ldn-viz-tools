@@ -11,11 +11,7 @@
 	<svelte:fragment slot="dataColumns">
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div
-					role="columnheader"
-					class="flex font-bold was-th"
-					style:width={col.computedWidth + 'px'}
-				>
+				<div role="columnheader" class="flex was-th" style:width={col.computedWidth + 'px'}>
 					<!-- or 100 width -->
 					{#if col.column && col.column.renderer}
 						<svelte:component

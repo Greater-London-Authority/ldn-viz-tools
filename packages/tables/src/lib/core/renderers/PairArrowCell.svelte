@@ -39,33 +39,38 @@
 	$: x = scaleLinear()
 		.domain(extent)
 		.range([barEndPadding, width - barEndPadding]);
+
+	// Shhh
+	$$restProps;
 </script>
 
-<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
-	<defs>
-		<!-- A marker to be used as an arrowhead -->
-		<marker
-			id="arrow"
-			viewBox="0 0 10 10"
-			refX="5"
-			refY="5"
-			markerWidth="6"
-			markerHeight="6"
-			orient="auto-start-reverse"
-			stroke="context-stroke"
-			fill="context-fill"
-		>
-			<path d="M 0 0 L 10 5 L 0 10 z" />
-		</marker>
-	</defs>
+<div class="h-full flex items-center">
+	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
+		<defs>
+			<!-- A marker to be used as an arrowhead -->
+			<marker
+				id="arrow"
+				viewBox="0 0 10 10"
+				refX="5"
+				refY="5"
+				markerWidth="6"
+				markerHeight="6"
+				orient="auto-start-reverse"
+				stroke="context-stroke"
+				fill="context-fill"
+			>
+				<path d="M 0 0 L 10 5 L 0 10 z" />
+			</marker>
+		</defs>
 
-	<line
-		x1={x(contextVals[0])}
-		x2={x(value)}
-		y1={height / 2}
-		y2={height / 2}
-		stroke={value > contextVals[0] ? positiveColor : negativeColor}
-		fill={value > contextVals[0] ? positiveColor : negativeColor}
-		marker-end="url(#arrow)"
-	/>
-</svg>
+		<line
+			x1={x(contextVals[0])}
+			x2={x(value)}
+			y1={height / 2}
+			y2={height / 2}
+			stroke={value > contextVals[0] ? positiveColor : negativeColor}
+			fill={value > contextVals[0] ? positiveColor : negativeColor}
+			marker-end="url(#arrow)"
+		/>
+	</svg>
+</div>

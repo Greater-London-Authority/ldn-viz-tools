@@ -9,6 +9,7 @@
 	 * * Summaries of the values in each column (if `showColumnControls` is `true` in the spec)
 	 * * A labelled axis, if one exists for the column's cell renderer
 	 * * A horizontal rule delimiting the bottom of the header (if `colGroupGap` is set in the spec, then a gap of this size will be left between columns in different groups)
+	 * Font Sizie is inherited from the table
 	 * @component
 	 */
 
@@ -32,7 +33,7 @@
 </script>
 
 <div
-	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary')}
+	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary py-2')}
 	style:width={tableWidth}
 >
 	{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
