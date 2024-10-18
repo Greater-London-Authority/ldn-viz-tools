@@ -1,5 +1,11 @@
 # @ldn-viz/tables
 
+## 2.2.0
+
+### Minor Changes
+
+- 5df1150: CHANGED: tweak appearance of the Table by adjusting padding, defaulting to left-alignment of headers, using the mini variant of the filter icon, and vertically centering cell content
+
 ## 2.1.0
 
 ### Minor Changes
