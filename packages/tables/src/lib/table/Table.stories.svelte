@@ -67,7 +67,6 @@
 
 			cell: {
 				renderer: 'TextCell',
-				width: '125px',
 				alignText: 'left'
 			},
 
