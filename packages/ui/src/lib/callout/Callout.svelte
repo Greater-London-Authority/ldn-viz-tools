@@ -18,7 +18,6 @@
 </script>
 
 <aside class={calloutClasses}>
-
 	<!-- The title - displayed as large bold text. -->
 	{#if $$slots.title}
 		<h3 class="font-bold leading-tight text-xl mb-4">

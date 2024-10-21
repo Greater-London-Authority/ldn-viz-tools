@@ -8,14 +8,14 @@
 			status: {
 				options: ['note', 'caution', 'warning'],
 				control: { type: 'select' }
-			},
-		},
+			}
+		}
 	};
 </script>
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import Button from "../button/Button.svelte";
+	import Button from '../button/Button.svelte';
 </script>
 
 <Template let:args>
@@ -26,11 +26,7 @@
 	</Callout>
 </Template>
 
-<Story
-	name="Default"
-	source
-/>
-
+<Story name="Default" source />
 
 <Story name="With 'more'" source>
 	<Callout status="warning">
@@ -38,10 +34,10 @@
 
 		<div slot="body">
 			<p>
-					Click on the button to return home. If the error persistes please <a
-						href="mailto:some-email-address@example.com"
-						class="underline hover:no-underline">Report it here</a
-					>
+				Click on the button to return home. If the error persistes please <a
+					href="mailto:some-email-address@example.com"
+					class="underline hover:no-underline">Report it here</a
+				>
 			</p>
 		</div>
 
