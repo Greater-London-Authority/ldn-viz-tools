@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `PairArrowAxis` component rendersan axis for the `PairArrowCell` component.
+	 * The `PairArrowAxis` component renders an axis for the `PairArrowCell` component.
 	 * @component
 	 */
 
@@ -37,9 +37,9 @@
 
 	export let textSize = 8;
 
-	const topPadding = height; // padding above the horiontal rule
+	const topPadding = height; // padding above the horizontal rule
 
-	// Shhh
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
 	$$restProps;
 </script>
 

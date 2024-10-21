@@ -9,7 +9,7 @@
 	 * * Summaries of the values in each column (if `showColumnControls` is `true` in the spec)
 	 * * A labelled axis, if one exists for the column's cell renderer
 	 * * A horizontal rule delimiting the bottom of the header (if `colGroupGap` is set in the spec, then a gap of this size will be left between columns in different groups)
-	 * Font Sizie is inherited from the table
+	 * Font size is inherited from the table
 	 * @component
 	 */
 

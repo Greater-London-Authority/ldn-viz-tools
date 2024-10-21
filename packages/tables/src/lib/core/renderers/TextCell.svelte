@@ -20,7 +20,7 @@
 
 	$: alignmentClass = alignmentClasses[alignText ?? 'left'];
 
-	// Shhh
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
 	$$restProps;
 </script>
 

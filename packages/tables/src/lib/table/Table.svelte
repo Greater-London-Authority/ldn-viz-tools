@@ -72,7 +72,7 @@
 	export let height = 1000;
 
 	/**
-	 * Exposes the internal table object, so that it can be programmatially manipulated.
+	 * Exposes the internal table object, so that it can be programmatically manipulated.
 	 */
 	export let table: TableData | undefined = undefined;
 

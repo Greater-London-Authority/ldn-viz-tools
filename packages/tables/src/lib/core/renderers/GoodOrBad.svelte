@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `GoodOrBad` component renders a table cell comparing a single vlaue to a reference or benchmark value.
+	 * The `GoodOrBad` component renders a table cell comparing a single value to a reference or benchmark value.
 	 * @component
 	 */
 

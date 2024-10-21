@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls usch as data/image download buttons.
+	 * It also provides controls such as data/image download buttons.
 	 *
 	 * **Note** Similar in structure and functionality to the 'table Container'
 	 * 	@component

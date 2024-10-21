@@ -42,7 +42,7 @@
 		{constructLabel(group)}
 	</div>
 
-	<!-- padding of equivalent siex to chevrons on other rows -->
+	<!-- padding of equivalent size to chevrons on other rows -->
 	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 

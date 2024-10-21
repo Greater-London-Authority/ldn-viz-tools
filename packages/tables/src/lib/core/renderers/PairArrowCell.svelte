@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `PairArrow` component renders a table cell containing an arrow pointing from a context value to the cell's value.
-	 * The color of the arrow indicates whetehr it is increasing or decreasing
+	 * The color of the arrow indicates whether it is increasing or decreasing
 	 * @component
 	 */
 
@@ -40,7 +40,7 @@
 		.domain(extent)
 		.range([barEndPadding, width - barEndPadding]);
 
-	// Shhh
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
 	$$restProps;
 </script>
 

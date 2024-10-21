@@ -2,7 +2,7 @@
 	export let table;
 
 	/**
-	 * Index of column that preceeds this gap.
+	 * Index of column that precedes this gap.
 	 */
 	export let i: number;
 
