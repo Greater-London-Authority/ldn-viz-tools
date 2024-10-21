@@ -32,7 +32,7 @@
 	export let options: {
 		id: string;
 		label: string;
-		color: string;
+		color?: string;
 		disabled?: boolean;
 		hint?: string;
 		hintLabel: string;
