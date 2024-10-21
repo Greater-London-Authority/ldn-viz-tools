@@ -18,7 +18,7 @@
 	 */
 	export let color = 'steelblue';
 
-	// TODO: move labels to separate span so they don't get truncaed if max val is multiple digits
+	// TODO: move labels to separate span so they don't get truncated if max val is multiple digits
 
 	/**
 	 * Width of cell (in pixels).

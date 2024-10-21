@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `Mean` component renders the (arithemtic) mean of a set of values.
+	 * The `Mean` component renders the (arithmetic) mean of a set of values.
 	 * @component
 	 */
 
