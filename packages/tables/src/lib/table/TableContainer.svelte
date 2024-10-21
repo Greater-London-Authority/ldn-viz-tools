@@ -45,8 +45,8 @@
 	 * Data Download Button in the footer
 	 *
 	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
+	 * If set to `false`, then the button is hidden.
 	 *
 	 */
 	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
@@ -60,8 +60,8 @@
 	 * Image Download Button in the footer
 	 *
 	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
+	 * If set to `false`, then the button is hidden.
 	 *
 	 */
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
