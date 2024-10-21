@@ -46,7 +46,7 @@
 
 	$: f = format(formatString);
 
-	$: if (typeof benchmarkValue === 'number' && typeof value === 'number') {
+	$: if (true && typeof value === 'number') {
 		compared = compareToBenchmark(value, benchmarkValue, goodIs);
 	}
 

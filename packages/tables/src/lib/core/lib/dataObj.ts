@@ -38,8 +38,6 @@ export class TableData {
 
 	expansionState: boolean[] = [];
 
-	colGrups: any[];
-
 	constructor(tableSpec) {
 		this.data = [];
 		this.rawData = [];

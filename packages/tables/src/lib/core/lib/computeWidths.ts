@@ -5,7 +5,7 @@ import { sum } from 'd3-array';
 const parseWidth = (width: number | string) => {
 	if (typeof width === 'number') {
 		return width;
-	} else if (typeof width === 'string') {
+	} else {
 		return +width.replace('px', '').trim();
 	}
 };

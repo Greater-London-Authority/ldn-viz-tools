@@ -62,7 +62,7 @@
 			: defaultScale;
 
 		y = scaleLinear()
-			.domain([0, max(sortedData, (d) => d[1])])
+			.domain([0, +max(sortedData, (d) => d[1])])
 			.range([height - marginBottom, marginTop]);
 	};
 
