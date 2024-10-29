@@ -186,9 +186,9 @@
 		}
 	}
 
-	let tableWidth;
+	let tableWidth: number;
 
-	const updateTableWidths = (newWidth) => {
+	const updateTableWidths = (newWidth: number) => {
 		if (table && !fixedTableWidth) {
 			computeWidths(table, newWidth);
 			table = table; // eslint-disable-line no-self-assign
@@ -233,7 +233,7 @@
 					<div style:width={tableWidth} class:striped={zebraStripe}>
 						{#each visualRows as visualRow, i}
 							{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
-								<RowRenderer spec={visualRow} {table} {tableSpec} />
+								<RowRenderer spec={visualRow} {table} />
 							{/if}
 						{/each}
 					</div>
@@ -244,13 +244,13 @@
 						class:stripedVirtual={zebraStripe}
 					>
 						<VirtualScroll data={visualRows} key="uniqueKey" let:data>
-							<RowRenderer spec={data} {table} {tableSpec} />
+							<RowRenderer spec={data} {table} />
 						</VirtualScroll>
 					</div>
 				{:else}
 					<div style:width={tableWidth} class:striped={zebraStripe}>
 						{#each visualRows as visualRow}
-							<RowRenderer spec={visualRow} {table} {tableSpec} />
+							<RowRenderer spec={visualRow} {table} />
 						{/each}
 					</div>
 				{/if}

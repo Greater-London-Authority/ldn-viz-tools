@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { ColGroup } from '$lib/core/lib/types';
+
 	export let table;
 
 	/**
@@ -6,7 +8,9 @@
 	 */
 	export let i: number;
 
-	const gapPositions: number[] = (table.colGroups || []).map((colGroup) => colGroup.endCol);
+	const gapPositions: number[] = (table.colGroups || []).map(
+		(colGroup: ColGroup) => colGroup.endCol
+	);
 </script>
 
 {#if gapPositions.includes(i) && table.colGroupGap}

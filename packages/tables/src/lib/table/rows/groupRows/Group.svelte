@@ -5,16 +5,14 @@
 
 	export let group;
 	export let table;
-
-	export let tableSpec; // TODO: should be able to access col details directly from obj
 </script>
 
-<GroupHeadingRow {group} {table} {tableSpec} />
+<GroupHeadingRow {group} {table} />
 
-<GroupSummaryRow {group} {table} {tableSpec} />
+<GroupSummaryRow {group} {table} />
 
 {#if group.isExpanded}
 	{#each table.fetchGroupContents(group) as row}
-		<DataRow {row} {table} {tableSpec} />
+		<DataRow {row} {table} />
 	{/each}
 {/if}

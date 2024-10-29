@@ -1,11 +1,14 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `ViolinPlot` component renders a set of values as a violin plot.
 	 * @component
 	 */
 
-	import { scaleLinear } from 'd3-scale';
 	import { bin, max, mean, min, quantile } from 'd3-array';
+	import { scaleLinear } from 'd3-scale';
+
+	import { type Bin } from 'd3-array';
+	import type { ScaleLinear } from 'd3-scale';
 
 	import { area, curveCatmullRom } from 'd3-shape';
 
@@ -29,9 +32,9 @@
 
 	let box;
 	let bins = [];
-	let x;
-	let y;
-	const update = (values) => {
+	let x: ScaleLinear<number, number>;
+	let y: ScaleLinear<number, number>;
+	const update = (values: number[]) => {
 		bins = bin()(
 			//.value((d) => d.rate)
 			values
@@ -42,7 +45,7 @@
 			.range([marginLeft, width - marginRight]);
 
 		// Declare the y (vertical position) scale.
-		const m = max(bins, (d) => d.length);
+		const m = max(bins, (d) => d.length) ?? 0;
 		y = scaleLinear()
 			.domain([-m, +m])
 			.range([height - marginBottom, marginTop]);

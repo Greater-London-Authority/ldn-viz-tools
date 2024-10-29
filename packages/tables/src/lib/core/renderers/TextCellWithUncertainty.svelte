@@ -12,7 +12,7 @@
 	export let contextVals: boolean[] = [false];
 	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
 
-	export let formatString;
+	export let formatString = undefined;
 	$: f = format(formatString ?? '');
 
 	const alignmentClasses = {

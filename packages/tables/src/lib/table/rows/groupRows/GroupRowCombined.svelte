@@ -1,20 +1,21 @@
-<script>
+<script lang="ts">
 	//TODO: background:white?
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	import type { Group } from '../../../core/lib/types';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import GroupSizeBar from './GroupSizeBar.svelte';
 
 	export let group;
 	export let table;
 
-	const constructLabel = (group) => {
+	const constructLabel = (group: Group) => {
 		return group.name.split(' ∩ ').slice(-1);
 	};
-	const getGroupLevel = (name) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
+	const getGroupLevel = (name: string) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 
-	const getNthAncestor = (group, i, n) => {
+	const getNthAncestor = (group: Group, i: number, n: number) => {
 		while (n > 0) {
 			group = group.parentGroup;
 			n--;

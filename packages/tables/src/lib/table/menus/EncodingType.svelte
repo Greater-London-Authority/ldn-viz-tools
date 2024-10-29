@@ -1,7 +1,9 @@
 <script lang="ts">
+	import type { ColSpec } from '$lib/core/lib/types';
 	import { Popover, RadioButtonGroup } from '@ldn-viz/ui';
 	import { ChartBar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { SvelteComponent } from 'svelte';
 	import BarChart from '../../core/aggregateRenderers/BarChart.svelte';
 	import BoxPlot from '../../core/aggregateRenderers/BoxPlot.svelte';
 	import Dots from '../../core/aggregateRenderers/Dots.svelte';
@@ -11,12 +13,12 @@
 	import Summary from '../../core/aggregateRenderers/Summary.svelte';
 	import ViolinPlot from '../../core/aggregateRenderers/ViolinPlot.svelte';
 	import BarCell from '../../core/renderers/BarCell.svelte';
+	import BarDivergingCell from '../../core/renderers/BarDivergingCell.svelte';
 	import CategoricalTick from '../../core/renderers/CategoricalTick.svelte';
 	import ColorAndLabel from '../../core/renderers/ColorAndLabel.svelte';
 	import ColoredCell from '../../core/renderers/ColoredCell.svelte';
 	import DateCell from '../../core/renderers/DateCell.svelte';
 	import Dot from '../../core/renderers/Dot.svelte';
-	import BarDivergingCell from '../../core/renderers/BarDivergingCell.svelte';
 	import PairArrow from '../../core/renderers/PairArrowCell.svelte';
 	import ProportionalSymbol from '../../core/renderers/ProportionalSymbol.svelte';
 	import TextCell from '../../core/renderers/TextCell.svelte';
@@ -81,15 +83,15 @@
 	// TODO: set icon based on whether filter applied
 	// TODO: position better
 
-	const getRendererName = (col, type) => {
+	const getRendererName = (col: ColSpec, type: 'cell' | 'group' | 'column') => {
 		if (col[type] && col[type].renderer) {
-			const name = col[type].renderer.name; // something like 'Proxy<TextCell>'
+			const name = (col[type].renderer as SvelteComponent).name; // something like 'Proxy<TextCell>'. String will have bene replaced by svelte component at this point.
 			return name.slice(6, -1);
 		}
 		return undefined;
 	};
 
-	let selectedCellEncoding;
+	let selectedCellEncoding: string;
 	selectedCellEncoding = getRendererName(col, 'cell');
 
 	const setCellEncoding = () => {
@@ -100,7 +102,7 @@
 	};
 	$: setCellEncoding(selectedCellEncoding);
 
-	let selectedGroupEncoding;
+	let selectedGroupEncoding: string;
 	selectedGroupEncoding = getRendererName(col, 'group');
 
 	const setGroupEncoding = () => {
@@ -111,7 +113,7 @@
 	};
 	$: setGroupEncoding(selectedGroupEncoding);
 
-	let selectedColumnEncoding;
+	let selectedColumnEncoding: string;
 	selectedColumnEncoding = getRendererName(col, 'column');
 
 	const setColumnEncoding = () => {
@@ -120,7 +122,7 @@
 		}
 		col.column.renderer = aggregatedRenderer[selectedColumnEncoding];
 	};
-	$: setColumnEncoding(selectedColumnEncoding);
+	$: selectedColumnEncoding && setColumnEncoding();
 </script>
 
 <Popover>

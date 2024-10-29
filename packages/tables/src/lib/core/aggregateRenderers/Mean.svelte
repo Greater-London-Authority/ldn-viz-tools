@@ -15,7 +15,9 @@
 	$: meanVal = mean(values);
 
 	export let formatString = '0.0f';
+
+	let f = format(formatString);
 	$: f = format(formatString);
 </script>
 
-<span>{f(meanVal)}</span>
+<span>{meanVal === undefined ? 'undefined' : f(meanVal)}</span>
