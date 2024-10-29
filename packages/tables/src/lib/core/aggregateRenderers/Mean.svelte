@@ -10,7 +10,7 @@
 	/**
 	 * Array of values to be displayed.
 	 */
-	export let values;
+	export let values: number[];
 
 	$: meanVal = mean(values);
 

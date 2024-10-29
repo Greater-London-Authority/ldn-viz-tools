@@ -1,16 +1,16 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `Histogram` component renders a set of values as a histogram.
 	 * @component
 	 */
 
-	import { scaleLinear } from 'd3-scale';
-	import { bin, max } from 'd3-array';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import { type Bin, bin, max } from 'd3-array';
 
 	/**
 	 * Array of values to be displayed.
 	 */
-	export let values;
+	export let values: number[];
 	export let extent = [0, 1];
 
 	/**
@@ -31,26 +31,26 @@
 	const marginBottom = 10;
 	const marginLeft = 0;
 
-	let bins;
-	let hints;
-	let x;
-	let y;
+	let bins: Array<Bin<number, number>>;
+	let hints: [number, number];
+	let x: ScaleLinear<number, number>;
+	let y: ScaleLinear<number, number>;
 
-	const update = (data) => {
+	const update = (data: number[]) => {
 		// Bin the data.
 		bins = bin()(
 			//.value((d) => d.rate)
 			data
 		);
 
-		hints = [bins[0].x0, bins.slice(-1)[0].x1];
+		hints = [bins[0].x0 ?? 0, bins.slice(-1)[0].x1 ?? 0];
 
 		x = scaleLinear()
 			.domain(extent)
 			.range([marginLeft, width - marginRight]);
 
 		y = scaleLinear()
-			.domain([0, max(bins, (d) => d.length)])
+			.domain([0, max(bins, (d) => d.length) ?? 0])
 			.range([height - marginBottom, marginTop]);
 	};
 
@@ -63,14 +63,16 @@
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<g fill={color}>
 		{#each bins as d}
-			<rect
-				x={x(d.x0) + 1}
-				width={x(d.x1) - x(d.x0) - 1}
-				y={y(d.length)}
-				height={y(0) - y(d.length)}
-			>
-				<title>{`${d.x0} - ${d.x1}: ${d.length}`}</title>
-			</rect>
+			{#if d.x0 !== undefined && d.x1 !== undefined}
+				<rect
+					x={x(d.x0) + 1}
+					width={x(d.x1) - x(d.x0) - 1}
+					y={y(d.length)}
+					height={y(0) - y(d.length)}
+				>
+					<title>{`${d.x0} - ${d.x1}: ${d.length}`}</title>
+				</rect>
+			{/if}
 		{/each}
 	</g>
 
