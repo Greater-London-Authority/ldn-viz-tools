@@ -18,6 +18,9 @@
 
 	let f = format(formatString);
 	$: f = format(formatString);
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <span>{meanVal === undefined ? 'undefined' : f(meanVal)}</span>

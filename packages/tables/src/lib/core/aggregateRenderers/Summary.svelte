@@ -14,6 +14,9 @@
 
 	$: f = format(formatString);
 	$: f2 = (val: number | undefined) => (val === undefined ? 'undefined' : f(val));
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <span

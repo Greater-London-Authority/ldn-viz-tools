@@ -38,6 +38,9 @@
 	const fPercentage = format('0.0%');
 
 	// See the MDN docs on radial gradients: https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <div

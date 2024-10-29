@@ -106,6 +106,9 @@
 
 	$: update(values);
 	$: drawCanvas(box, showAllPoints, canvasRef);
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <canvas {width} {height} bind:this={canvasRef}></canvas>

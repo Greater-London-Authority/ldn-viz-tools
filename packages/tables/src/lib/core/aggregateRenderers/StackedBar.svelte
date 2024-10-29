@@ -53,6 +53,9 @@
 	};
 
 	$: update(values);
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>

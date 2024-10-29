@@ -31,6 +31,9 @@
 
 	let alignmentClass;
 	$: alignmentClass = alignmentClasses[alignText ?? 'left'];
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <span class={classNames(`flex h-full p-2`, alignmentClass)}>
