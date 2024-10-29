@@ -5,7 +5,7 @@
 	 */
 
 	import { format } from 'd3-format';
-	import { scaleLinear } from 'd3-scale';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
 	/**
 	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
@@ -27,7 +27,7 @@
 
 	const barEndPadding = 15;
 
-	let x;
+	let x: ScaleLinear<number, number>;
 	$: x = scaleLinear()
 		.domain(extent)
 		.range([barEndPadding, width - barEndPadding]);

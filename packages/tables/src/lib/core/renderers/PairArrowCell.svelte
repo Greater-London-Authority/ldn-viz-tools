@@ -5,7 +5,7 @@
 	 * @component
 	 */
 
-	import { scaleLinear } from 'd3-scale';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -35,7 +35,7 @@
 
 	const barEndPadding = 15;
 
-	let x;
+	let x: ScaleLinear<number, number>;
 	$: x = scaleLinear()
 		.domain(extent)
 		.range([barEndPadding, width - barEndPadding]);

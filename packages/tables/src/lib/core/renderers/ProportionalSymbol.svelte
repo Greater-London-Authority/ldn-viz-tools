@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `ProportionalSymbol` component renders a table cell encoding a single value as a circle, with the radius encoding the value.
 	 * @component
@@ -13,7 +13,7 @@
 	/**
 	 * The value to be encoded in the cell.
 	 */
-	export let value;
+	export let value: number;
 
 	/**
 	 * If `true`, then the numerical value will be displayed as text beside the symbol.
@@ -30,9 +30,8 @@
 	/**
 	 * Array containing the min and max values in the data; used ad domain for scale.
 	 */
-	export let extent;
+	export let extent: [number, number];
 
-	let r;
 	$: r = Math.sqrt((value - extent[0]) / (extent[1] - extent[0]));
 
 	const fPercentage = format('0.0%');
