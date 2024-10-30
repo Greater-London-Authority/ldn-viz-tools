@@ -21,6 +21,10 @@
 	import SidebarGroupTitle from '../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import SidebarTabLabel from '../sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
 	import SidebarTabList from '../sidebar/elements/sidebarTabs/SidebarTabList.svelte';
+	import Button from '../button/Button.svelte';
+	import { writable } from 'svelte/store';
+
+	const isOpen = writable(true);
 
 	let selectedValue = 'markers';
 </script>
@@ -32,6 +36,46 @@
 <Story name="Default positioning">
 	<AppShell>
 		<svelte:fragment slot="main">Some Content</svelte:fragment>
+		<Sidebar slot="sidebar">
+			<SidebarHeader title="Main sidebar title" slot="header">
+				<svelte:fragment slot="subTitle">
+					<p>
+						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+						venenatis sapien. Etiam venenatis felis.
+					</p>
+				</svelte:fragment>
+			</SidebarHeader>
+			<svelte:fragment slot="sections">
+				{@const sections = [1, 2]}
+				{#each sections as _section}
+					<SidebarSection title="Section Title">
+						Section Content
+						<div>
+							<SidebarGroupTitle>
+								Group Title
+								<SidebarHint slot="hint" hintType="tooltip">
+									<p class="mb-4">Any content you want can go here</p>
+									<p>
+										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
+										nec venenatis sapien. Etiam venenatis felis.
+									</p>
+								</SidebarHint>
+							</SidebarGroupTitle>
+							Grouped content
+						</div>
+					</SidebarSection>
+				{/each}
+			</svelte:fragment>
+		</Sidebar>
+	</AppShell>
+</Story>
+
+<Story name="External opening/closing of sidebar">
+	<AppShell {isOpen}>
+		<svelte:fragment slot="main">
+			<Button on:click={() => ($isOpen = !$isOpen)}>Toggle sidebar</Button>
+			Some Content
+		</svelte:fragment>
 		<Sidebar slot="sidebar">
 			<SidebarHeader title="Main sidebar title" slot="header">
 				<svelte:fragment slot="subTitle">
