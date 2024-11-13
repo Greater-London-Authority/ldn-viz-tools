@@ -17,6 +17,7 @@
 		size: 'sm' | 'md' | 'lg';
 		disabled: boolean;
 		href: string;
+		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
 	}
@@ -59,6 +60,11 @@
 	 * If this is set, the button is a link with the specified target.
 	 */
 	export let href: ButtonProps['href'] = '';
+
+	/**
+	 * If `true`, then clicking the button will open the link target in a new tab. Has no effect if `href` is not set.
+	 */
+	export let openInNewTab = false;
 
 	/**
 	 * If `submit`, then this is a submit button for use with a form.
@@ -209,6 +215,8 @@
 	<svelte:element
 		this={href ? 'a' : 'button'}
 		type={href ? undefined : type}
+		target={href && openInNewTab ? '_blank' : undefined}
+		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
 		{href}
 		{disabled}
 		{title}

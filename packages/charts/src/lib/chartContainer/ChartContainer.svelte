@@ -99,6 +99,9 @@
 		<h5 class="sr-only">{alt}</h5>
 	{/if}
 
+	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+	<slot name="controls" />
+
 	<!-- Visualisation goes here -->
 	<div class={chartClass}>
 		<slot />
