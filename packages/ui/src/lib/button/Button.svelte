@@ -17,7 +17,7 @@
 		size: 'sm' | 'md' | 'lg';
 		disabled: boolean;
 		href: string;
-		openInBackground: boolean;
+		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
 	}
@@ -64,7 +64,7 @@
 	/**
 	 * If `true`, then clicking the button will open the link target in a new tab. Has no effect if `href` is not set.
 	 */
-	export let openInBackground = false;
+	export let openInNewTab = false;
 
 	/**
 	 * If `submit`, then this is a submit button for use with a form.
@@ -215,8 +215,8 @@
 	<svelte:element
 		this={href ? 'a' : 'button'}
 		type={href ? undefined : type}
-		target={href && openInBackground ? '_blank' : undefined}
-		rel={href && openInBackground ? 'noopener noreferrer' : undefined}
+		target={href && openInNewTab ? '_blank' : undefined}
+		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
 		{href}
 		{disabled}
 		{title}

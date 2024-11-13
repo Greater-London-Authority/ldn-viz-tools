@@ -138,6 +138,6 @@
 
 <Story name="With Link, opening in new tab">
 	<div class="space-y-2">
-		<Button href="http://google.com" openInBackground>Link</Button>
+		<Button href="http://google.com" openInNewTab>Link</Button>
 	</div>
 </Story>
