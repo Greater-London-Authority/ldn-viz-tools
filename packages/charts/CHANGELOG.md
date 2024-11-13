@@ -1,5 +1,18 @@
 # ldn-viz-tools-charts
 
+## 3.4.0
+
+### Minor Changes
+
+- eff5d0e: ADDED: `ChartContainer` component now accepts a `controls` slot
+- 04e407a: Adjust reponisve layout of export buttons
+
+### Patch Changes
+
+- Updated dependencies [e4b3ff7]
+- Updated dependencies [e62fd68]
+  - @ldn-viz/ui@14.4.0
+
 ## 3.3.0
 
 ### Minor Changes
