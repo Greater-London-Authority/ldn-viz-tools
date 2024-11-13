@@ -47,7 +47,7 @@
 	/**
 	 * Store recording/controlling whether the sidebar is currently open.
 	 */
-	export const isOpen = writable(startOpen);
+	export let isOpen = writable(startOpen);
 
 	/**
 	 * Store recording/controlling whether the sidebar is set to be `alwaysOpen` at the current window size.
