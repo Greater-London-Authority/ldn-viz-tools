@@ -46,6 +46,18 @@
 	/>
 </Story>
 
+<Story name="Source, byline only">
+	<ChartContainer
+		title="This is the Chart Title"
+		subTitle="Subtitle provides extra context"
+		source="The source of this chart data"
+		byline="A byline for the chart"
+		dataDownloadButton={['JSON', 'CSV']}
+		data={[]}
+		imageDownloadButton
+	/>
+</Story>
+
 <!--
 	**For use only in emergency** - an overrideClass can be applied to the slot area within the chart container. 
 	This is primarily to fine tune the margins and padding around a Plot chart with a legend. (See the ObservablePlot / Examples / Line Chart) 
