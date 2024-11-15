@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 3.5.0
+
+### Minor Changes
+
+- d36a893: ADDED: `ObservablePlot` now applies a `ChartContainer` wrapper around a separate `ObservablePlotInner` components and accepts a `controls` slot
+
 ## 3.4.0
 
 ### Minor Changes
