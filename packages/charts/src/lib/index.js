@@ -5,6 +5,8 @@ export { default as SubTitle } from './chartContainer/SubTitle.svelte';
 export { default as Title } from './chartContainer/Title.svelte';
 
 export { default as ObservablePlot } from './observablePlot/ObservablePlot.svelte';
-export * from './observablePlot/ObservablePlot.svelte';
+
+export { default as ObservablePlotInner } from './observablePlot/ObservablePlotInner.svelte';
+export * from './observablePlot/ObservablePlotInner.svelte';
 
 export * from './observablePlotFragments/observablePlotFragments';
