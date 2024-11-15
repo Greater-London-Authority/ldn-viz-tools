@@ -105,6 +105,9 @@
 		chartHeight={'h-fit'}
 		{chartWidth}
 	>
+		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+		<slot name="controls" />
+
 		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} />
 	</ChartContainer>
 {/key}
