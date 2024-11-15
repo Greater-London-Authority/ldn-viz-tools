@@ -9,12 +9,7 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { fade, slide } from 'svelte/transition';
-	import {
-		heightLookup,
-		transitionAxis,
-		widthLookup,
-		wrapperFlowLookup
-	} from '../sidebar/sidebarUtils';
+	import { heightLookup, transitionAxis, widthLookup } from '../sidebar/sidebarUtils';
 	import { sidebarWidthStore } from '../sidebar/stores';
 	import type { AlwaysOpenType, SidebarPlacement } from '../sidebar/types';
 	import { classNames } from '../utils/classNames';
@@ -50,6 +45,11 @@
 	export let isOpen = writable(startOpen);
 
 	/**
+	 * A tailwind class or classes used to set or overide the height of the Appshell wrapper.
+	 */
+	export let heightClass = 'min-h-dvh';
+
+	/**
 	 * Store recording/controlling whether the sidebar is set to be `alwaysOpen` at the current window size.
 	 */
 	export const isAlwaysOpen = writable('false');
@@ -61,7 +61,7 @@
 
 	// Classes applied to the wrapper element
 	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
-	$: wrapperClasses = classNames('h-full min-h-dvh flex relative', wrapperFlowLookup[bpProp]);
+	$: wrapperClasses = classNames('h-full w-full flex relative overflow-hidden', heightClass);
 
 	$: sidebarWidthClasses = widthLookup[$sidebarWidthStore][bpProp];
 	$: sidebarHeightClasses = heightLookup[$sidebarWidthStore][bpProp];
@@ -78,13 +78,10 @@
 	$: bpProp = getSetting(sidebarPlacement, innerWidth);
 	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
-	$: if (aoProp === 'true') {
-		sidebarPush = true;
-		$isOpen = true;
-	}
-
 	$: $isAlwaysOpen = aoProp;
 	$: $sidebarPlacementStore = bpProp;
+
+	$: $isOpen = $isAlwaysOpen === 'true';
 
 	setContext('sidebarAlwaysOpen', isAlwaysOpen);
 	setContext('sidebarIsOpen', isOpen);
@@ -96,7 +93,7 @@
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
-	<main class={'grow'}>
+	<main class={classNames('w-full', bpProp === 'right' ? '' : 'order-1')}>
 		<!-- The main content of the page. -->
 		<slot name="main">
 			<p class="font-bold">
@@ -114,7 +111,7 @@
 	{/if}
 
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
-	{#if sidebarPush && $isOpen && $sidebarWidthStore}
+	{#if ($isAlwaysOpen === 'true' || (sidebarPush && $isOpen)) && $sidebarWidthStore}
 		<div
 			class={classNames('flex', sidebarHeightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
