@@ -1,97 +1,16 @@
 <script context="module" lang="ts">
 	/**
-	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapped in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
+	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
 	 *  @component
 	 */
-
-	import type {
-		AddEventHandlerFunction,
-		AddEventHandlerInnerFunction,
-		Position,
-		RegisterTooltipFunction
-	} from './types.ts';
-
-	export const registerTooltip: RegisterTooltipFunction =
-		(posStore, markShape = 'circle') =>
-		(index, scales, values, dimensions, context, next) => {
-			const el = next && next(index, scales, values, dimensions, context);
-			const marks = el?.querySelectorAll(markShape) || [];
-
-			addEventHandlerInner(
-				'mouseenter',
-				(ev: MouseEvent, d: any) => {
-					posStore.set({
-						...d,
-						clientX: ev.clientX,
-						clientY: ev.clientY,
-						pageX: ev.pageX,
-						pageY: ev.pageY,
-						layerX: ev.layerX,
-						layerY: ev.layerY
-					}); // can't use the $store syntax here
-				},
-				marks,
-				values,
-				index
-			);
-
-			addEventHandlerInner(
-				'mouseleave',
-				() => {
-					posStore.set(undefined); // can't use the $store syntax here
-				},
-				marks,
-				values,
-				index
-			);
-
-			return el ?? null;
-		};
-
-	export const addEventHandler: AddEventHandlerFunction =
-		(eventName, eventHandler, markShape = 'circle') =>
-		(index, scales, values, dimensions, context, next) => {
-			const el = next && next(index, scales, values, dimensions, context);
-			const marks = el?.querySelectorAll(markShape) || [];
-
-			addEventHandlerInner(eventName, eventHandler, marks, values, index);
-
-			return el ?? null;
-		};
-
-	const addEventHandlerInner: AddEventHandlerInnerFunction = (
-		eventName,
-		eventHandler,
-		marks,
-		values,
-		index
-	) => {
-		for (let i = 0; i < marks.length; i++) {
-			const d = {
-				index: index[i],
-
-				x: values.channels.x?.value[i],
-				x1: values.channels.x1?.value[i],
-				x2: values.channels.x2?.value[i],
-				cx: values.channels.cx?.value[i],
-
-				y: values.channels.y?.value[i],
-				y1: values.channels.y1?.value[i],
-				y2: values.channels.y2?.value[i],
-				cy: values.channels.cy?.value[i]
-			};
-
-			marks[i].addEventListener(eventName, (ev: any) => eventHandler(ev, d));
-		}
-	};
 </script>
 
 <script lang="ts">
-	import { afterUpdate, onMount, setContext } from 'svelte';
-	import { derived, writable } from 'svelte/store';
+	import type { Position } from './types.ts';
 
-	import * as Plot from '@observablehq/plot';
+	import { writable } from 'svelte/store';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
+	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
 	/**
 	 * The Observable Plot specification for the visualization.
@@ -169,33 +88,6 @@
 
 	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
-
-	const renderPlot = (node: HTMLDivElement) => {
-		node.appendChild(Plot.plot(spec));
-	};
-
-	let width: number;
-
-	onMount(() => {
-		updateDimensions();
-		window.addEventListener('resize', updateDimensions);
-		return () => {
-			window.removeEventListener('resize', updateDimensions);
-		};
-	});
-
-	afterUpdate(() => {
-		updateDimensions();
-	});
-
-	const updateDimensions = () => {
-		spec.width = width;
-	};
-
-	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
-		$tooltipStore ? data[$tooltipStore.index] : undefined
-	);
-	setContext('tooltipData', tooltipData);
 </script>
 
 {#key spec}
@@ -213,24 +105,7 @@
 		chartHeight={'h-fit'}
 		{chartWidth}
 	>
-		<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
-
-		<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
-		{#if $tooltipStore && $tooltipData}
-			<div
-				class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50 -translate-x-1/2 -translate-y-full"
-				style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
-				style:left={`${$tooltipStore.layerX}px`}
-			>
-				<slot name="tooltip">
-					<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
-				</slot>
-
-				<div
-					class="absolute bg-color-container-level-1 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
-				/>
-			</div>
-		{/if}
+		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} />
 	</ChartContainer>
 {/key}
 
