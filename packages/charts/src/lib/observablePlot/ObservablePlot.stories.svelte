@@ -24,7 +24,7 @@
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
-	import { currentThemeMode } from '@ldn-viz/ui';
+	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
 		plotTheme,
@@ -34,8 +34,8 @@
 	import {
 		areaPlotData,
 		areaPlotPointsToLabel,
-		educationLabelOffsets,
 		education_data,
+		educationLabelOffsets,
 		lineChartData,
 		material_deprivation_data,
 		penguins
@@ -321,6 +321,16 @@
 		Selected point:
 		<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
 	</div>
+</Story>
+
+<!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
+<Story name="With controls">
+	<ObservablePlot {spec} title="Penguin Culmens" subTitle="A scatterplot of depth against length">
+		<div slot="controls" class="flex gap-4 mb-4">
+			<Select label="An input affecting the chart" items={[]} />
+			<Select label="Another input" items={[]} />
+		</div>
+	</ObservablePlot>
 </Story>
 
 <!-- 
