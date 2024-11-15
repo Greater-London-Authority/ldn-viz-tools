@@ -1,11 +1,10 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	/**
 	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
-	 *  @component
+	 * If you do not require the extra chrome applied by the `ChartContainer`, or need to include several plots in the same container, then use the [ObservablePlotInner](./?path=/docs/charts-observableplotinner--documentation) component directly.
+	 * @component
 	 */
-</script>
 
-<script lang="ts">
 	import type { Position } from './types.ts';
 
 	import { writable } from 'svelte/store';
