@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 14.4.0
+
+### Minor Changes
+
+- e4b3ff7: ADDED: `Button` now has a prop to specify link should be opened in a new tab
+- e62fd68: CHANGED: when using the `RadioButtonGroup`, the `color` attribute for options is now optional
+
 ## 14.3.0
 
 ### Minor Changes
