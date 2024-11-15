@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 14.5.0
+
+### Minor Changes
+
+- ba7c31c: FIXED: fixed issue with content disappearing behind sidebar when screen size reduced
+
 ## 14.4.0
 
 ### Minor Changes
