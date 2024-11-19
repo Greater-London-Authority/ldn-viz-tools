@@ -1,5 +1,6 @@
 {
 	"name": "@ldn-viz/tables",
+	"license": "MIT",
 	"version": "2.2.0",
 	"type": "module",
 	"exports": {

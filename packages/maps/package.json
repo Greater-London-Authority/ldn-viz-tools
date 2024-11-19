@@ -1,5 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
+	"license": "MIT",
 	"version": "5.2.0",
 	"type": "module",
 	"exports": {
