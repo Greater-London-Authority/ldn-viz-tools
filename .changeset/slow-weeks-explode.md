@@ -2,4 +2,4 @@
 "@ldn-viz/charts": minor
 ---
 
-improve chart footer
+CHANGED: improve footer in `ChartContainer` component
