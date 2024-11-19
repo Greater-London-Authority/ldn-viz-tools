@@ -1,6 +1,7 @@
 {
   "name": "@ldn-viz/utils",
   "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
