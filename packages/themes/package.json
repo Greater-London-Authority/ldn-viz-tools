@@ -1,7 +1,7 @@
 {
   "name": "@ldn-viz/themes",
-  "license": "MIT",
   "version": "4.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "npm run build-tokens",
