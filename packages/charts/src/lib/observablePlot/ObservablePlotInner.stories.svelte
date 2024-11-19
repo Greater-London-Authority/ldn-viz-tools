@@ -26,21 +26,17 @@
 	import { penguins } from '../../data/demoData';
 
 	$: ({
-		defaultArea,
-		defaultColor,
 		defaultDot,
 		defaultGridX,
 		defaultGridY,
 		defaultSize,
 		defaultStyle,
 		defaultTip,
-		defaultLine,
 		defaultXAxis,
 		defaultXScale,
 		defaultYAxis,
 		defaultYScale,
-		defaultRule,
-		defaultAnnotationText
+		defaultRule
 	} = getDefaultPlotStyles($currentThemeMode));
 
 	$: spec = {
