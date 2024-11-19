@@ -1,5 +1,15 @@
 # ldn-viz-tools-charts
 
+## 3.6.0
+
+### Minor Changes
+
+- a8170bb: CHANGED: improve footer in `ChartContainer` component
+
+### Patch Changes
+
+- a581914: FIXED: fix regression that caused width of `ObservablePlot`/`ObservablePlotInner` to not respond to changes in width of parent container
+
 ## 3.5.0
 
 ### Minor Changes
