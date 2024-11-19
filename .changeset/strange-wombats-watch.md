@@ -1,5 +1,5 @@
 ---
-"@ldn-viz/charts": minor
+"@ldn-viz/charts": patch
 ---
 
-Fix chart width
+FIXED: fix regression that caused width of `ObservablePlot`/`ObservablePlotInner` to not respond to changes in width of parent container
