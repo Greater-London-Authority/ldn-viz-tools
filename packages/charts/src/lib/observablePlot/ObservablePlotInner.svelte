@@ -2,7 +2,7 @@
 	/**
 	 * The `ObservablePlotInner` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library.
 	 * It does *not* apply the  [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) as a wrapper:
-	 *  if you require this, use the [ObservablePlot](./?path=/docs/charts-observableplot--documentation) component instead.
+	 * if you require this, use the [ObservablePlot](./?path=/docs/charts-observableplot--documentation) component instead.
 	 *  @component
 	 */
 
@@ -138,21 +138,23 @@
 	setContext('tooltipData', tooltipData);
 </script>
 
-<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
+{#key spec}
+	<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
 
-<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
-{#if $tooltipStore && $tooltipData}
-	<div
-		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50 -translate-x-1/2 -translate-y-full"
-		style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
-		style:left={`${$tooltipStore.layerX}px`}
-	>
-		<slot name="tooltip">
-			<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
-		</slot>
-
+	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
+	{#if $tooltipStore && $tooltipData}
 		<div
-			class="absolute bg-color-container-level-1 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
-		/>
-	</div>
-{/if}
+			class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50 -translate-x-1/2 -translate-y-full"
+			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
+			style:left={`${$tooltipStore.layerX}px`}
+		>
+			<slot name="tooltip">
+				<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
+			</slot>
+
+			<div
+				class="absolute bg-color-container-level-1 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
+			/>
+		</div>
+	{/if}
+{/key}
