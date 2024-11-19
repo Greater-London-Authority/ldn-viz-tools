@@ -41,7 +41,6 @@
 				variant="outline"
 				emphasis="secondary"
 				size="sm"
-				class="shrink-0"
 			>
 				<svelte:fragment slot="afterLabel">
 					<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />

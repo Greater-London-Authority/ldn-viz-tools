@@ -37,9 +37,21 @@
 	<ChartContainer
 		title="This is the Chart Title"
 		subTitle="Subtitle provides extra context"
-		source="The source of this chart data"
+		source="GLA city intelligence"
 		byline="A byline for the chart"
 		note="Be aware that you can provide a note if required"
+		dataDownloadButton={['JSON', 'CSV']}
+		data={[]}
+		imageDownloadButton
+	/>
+</Story>
+
+<Story name="Source, byline only">
+	<ChartContainer
+		title="This is the Chart Title"
+		subTitle="Subtitle provides extra context"
+		source="The source of this chart data"
+		byline="A byline for the chart"
 		dataDownloadButton={['JSON', 'CSV']}
 		data={[]}
 		imageDownloadButton
