@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 14.6.0
+
+### Minor Changes
+
+- ebd6a57: ADDED: added a `LayerControl` component
+- 3d9026c: CHANGED: pinned the @steeze-ui/svelte-icon dependency to exactly 1.5.0, as subsequent versions are incompatible with Svelte 4
+
 ## 14.5.0
 
 ### Minor Changes
