@@ -35,10 +35,8 @@
 		}
 	};
 
-	let f;
-	$: if (formatString) {
-		f = format(formatString);
-	}
+	let f = format(formatString);
+	$: f = format(formatString);
 </script>
 
 <div class="py-1 flex items-center h-full">

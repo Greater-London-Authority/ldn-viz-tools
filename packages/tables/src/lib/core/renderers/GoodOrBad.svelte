@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `GoodOrBad` component renders a table cell comparing a single vlaue to a reference or benchmark value.
+	 * The `GoodOrBad` component renders a table cell comparing a single value to a reference or benchmark value.
 	 * @component
 	 */
 
@@ -46,7 +46,7 @@
 
 	$: f = format(formatString);
 
-	$: if (typeof benchmarkValue === 'number' && typeof value === 'number') {
+	$: if (true && typeof value === 'number') {
 		compared = compareToBenchmark(value, benchmarkValue, goodIs);
 	}
 
@@ -91,7 +91,8 @@
 		} as ComparedBenchmark;
 	};
 
-	//
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <p class={ragClasses}>

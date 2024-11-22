@@ -22,9 +22,10 @@
 
 				cell: {
 					renderer: 'TextCell',
-					href: (row) =>
+					href: (row: { id: string }) =>
 						`https://dev.ldn-gis.co.uk/hsds-hub/overview?loc=E09000003&area_type=highstreet&area_id=${row.id}`,
-					onClick: (row) => console.log('User clicked on High Street cell for row', row)
+					onClick: (row: { id: string }) =>
+						console.log('User clicked on High Street cell for row', row)
 				},
 
 				column: {
@@ -213,7 +214,7 @@
 				cell: {
 					renderer: 'TextCell',
 					alignText: 'left',
-					href: (row) =>
+					href: (row: { area_id: string }) =>
 						`https://dev.ldn-gis.co.uk/hsds-hub/overview?loc=E09000003&area_type=highstreet&area_id=${row.area_id}`
 				},
 
@@ -482,8 +483,6 @@
 			}
 		]
 	};
-
-	export let page = 1;
 </script>
 
 <Template let:args>

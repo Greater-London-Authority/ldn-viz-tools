@@ -7,13 +7,12 @@
 	export let spec;
 
 	export let table;
-	export let tableSpec;
 </script>
 
 {#if spec.type === 'GroupHeadingRow'}
 	<GroupHeadingRow {table} group={spec.group} />
 {:else if spec.type === 'GroupSummaryRow'}
-	<GroupSummaryRow {table} {tableSpec} group={spec.group} />
+	<GroupSummaryRow {table} group={spec.group} />
 {:else if spec.type === 'GroupRowCombined'}
 	<GroupRowCombined {table} group={spec.group} />
 {:else if spec.type === 'DataRow'}

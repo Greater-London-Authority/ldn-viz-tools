@@ -30,12 +30,14 @@
 	export let formatString = '0.0f';
 	$: f = format(formatString);
 
-	export let extent;
+	export let extent: [number, number];
 
-	let d;
 	$: d = (value - extent[0]) / (extent[1] - extent[0]);
 
 	const fPercentage = format('0.0%');
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <div

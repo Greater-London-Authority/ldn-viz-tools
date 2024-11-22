@@ -4,7 +4,6 @@
 
 	export let group;
 	export let table;
-	export let tableSpec;
 </script>
 
 <Scaffolding {table}>
