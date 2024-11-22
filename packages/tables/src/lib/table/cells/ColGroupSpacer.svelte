@@ -1,12 +1,16 @@
 <script lang="ts">
+	import type { ColGroup } from '$lib/core/lib/types';
+
 	export let table;
 
 	/**
-	 * Index of column that preceeds this gap.
+	 * Index of column that precedes this gap.
 	 */
 	export let i: number;
 
-	const gapPositions: number[] = (table.colGroups || []).map((colGroup) => colGroup.endCol);
+	const gapPositions: number[] = (table.colGroups || []).map(
+		(colGroup: ColGroup) => colGroup.endCol
+	);
 </script>
 
 {#if gapPositions.includes(i) && table.colGroupGap}

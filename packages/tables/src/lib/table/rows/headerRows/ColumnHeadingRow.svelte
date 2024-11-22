@@ -46,8 +46,9 @@
 					<Header
 						label={col.label ?? col.short_label}
 						order={undefined}
-						toggle={() => allowSorting && table.toggleSort(col.short_label)}
-						{allowSorting}
+						toggle={() =>
+							allowSorting && col.sortable !== false && table.toggleSort(col.short_label)}
+						allowSorting={allowSorting && col.sortable !== false}
 						alignHeader={col.alignHeader}
 						superscriptText={col.superscriptText}
 						hintText={col.hintText}
