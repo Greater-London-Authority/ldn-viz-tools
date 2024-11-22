@@ -1,5 +1,17 @@
 # @ldn-viz/tables
 
+## 2.3.0
+
+### Minor Changes
+
+- 6dffda1: CHANGED: individual columns can be specified as not sortable
+
+### Patch Changes
+
+- Updated dependencies [ebd6a57]
+- Updated dependencies [3d9026c]
+  - @ldn-viz/ui@14.6.0
+
 ## 2.2.0
 
 ### Minor Changes

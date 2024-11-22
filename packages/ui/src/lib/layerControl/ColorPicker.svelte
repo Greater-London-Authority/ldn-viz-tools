@@ -2,7 +2,8 @@
 	import { createPopover } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 
-	import CloseIcon from '../popover/CloseIcon.svelte';
+	import { XMark } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
 	const {
 		elements: { trigger, content, arrow, close },
@@ -64,7 +65,7 @@
 		</div>
 
 		<button class="close" {...$close} use:close>
-			<CloseIcon class="w-8 h-8" />
+			<Icon src={XMark} theme="solid" class="w-8 h-8" aria-hidden="true" />
 		</button>
 	</div>
 {/if}
