@@ -60,6 +60,34 @@
 		]
 	};
 
+	const tableSpecPartiallySortable = {
+		showColSummaries: false,
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
 	let wideTableSpec: { columns: ColSpec[] } = { columns: [] };
 	for (let i = 0; i < 25; i++) {
 		wideTableSpec.columns.push({
@@ -114,6 +142,10 @@
 
 <Story name="Sortable Rows" source>
 	<Table {data} {tableSpec} allowSorting />
+</Story>
+
+<Story name="Sortable - but only on some columns" source>
+	<Table {data} tableSpec={tableSpecPartiallySortable} allowSorting />
 </Story>
 
 <Story name="Title" source>
