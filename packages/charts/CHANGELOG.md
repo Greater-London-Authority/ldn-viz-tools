@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 3.7.0
+
+### Minor Changes
+
+- 72db5e6: FIXED: addEventHandlerInner no longer expects x and y values (fixes regression in 3.5.0)
+
 ## 3.6.0
 
 ### Minor Changes
