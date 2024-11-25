@@ -52,12 +52,11 @@
 
 	/**
 	 * Optional prop to change margin on the y-axis between elements.
-	 * Default is `space-y-0.25`.
 	 */
 	export let marginY = 'space-y-0.25';
 
 	/**
-	 * if `true`, then then `Clear` button is not displayed.
+	 * if `true`, then the `Clear` button is not displayed.
 	 */
 	export let buttonsHidden = false;
 </script>
