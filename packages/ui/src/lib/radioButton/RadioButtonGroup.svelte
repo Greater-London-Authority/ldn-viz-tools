@@ -39,12 +39,30 @@
 	}[] = [];
 
 	/**
+	 * Default `flex-direction` is `flex-col` but allows you to create horizontal radios
+	 * if you pass in an empty string (default `flex` behaviour is to display in row).
+	 */
+	export let flexDirection = 'flex-col';
+
+	/**
+	 * Optional prop to change margin on the x-axis between elements.
+	 * For example `space-x-4`.
+	 */
+	export let marginX = '';
+
+	/**
+	 * Optional prop to change margin on the y-axis between elements.
+	 * Default is `space-y-0.25`.
+	 */
+	export let marginY = 'space-y-0.25';
+
+	/**
 	 * if `true`, then then `Clear` button is not displayed.
 	 */
 	export let buttonsHidden = false;
 </script>
 
-<div class="flex flex-col space-y-0.25">
+<div class="flex {flexDirection} {marginX} {marginY}">
 	{#if !buttonsHidden}
 		<Button variant="text" class="!px-0" on:click={() => (selectedId = '')}>Clear</Button>
 	{/if}
