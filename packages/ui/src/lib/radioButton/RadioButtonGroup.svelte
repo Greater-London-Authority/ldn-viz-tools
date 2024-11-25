@@ -39,19 +39,19 @@
 	}[] = [];
 
 	/**
-	 * Default `flex-direction` is `flex-col` but allows you to create horizontal radios
-	 * if you pass in an empty string (default `flex` behaviour is to display in row).
+	 * Direction of the flexbox. Default direction is column but passing in `flex-row` or an
+	 * empty string will allow you to display radios in a row.
 	 */
 	export let flexDirection = 'flex-col';
 
 	/**
-	 * Optional prop to change margin on the x-axis between elements.
+	 * Optional prop to change margin between elements on the x-axis.
 	 * For example `space-x-4`.
 	 */
 	export let marginX = '';
 
 	/**
-	 * Optional prop to change margin on the y-axis between elements.
+	 * Optional prop to change margin between elements on the y-axis.
 	 */
 	export let marginY = 'space-y-0.25';
 
