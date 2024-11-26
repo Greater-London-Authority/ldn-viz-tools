@@ -46,9 +46,7 @@
 		options={optionsForGroup}
 		name="station-type"
 		bind:selectedId
-		flexDirection=""
-		marginX="space-x-4"
-		buttonsHidden
+		orientation="horizontal"
 	/>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
