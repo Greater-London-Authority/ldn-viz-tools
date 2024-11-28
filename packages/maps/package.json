@@ -31,6 +31,7 @@
 	},
 	"dependencies": {
 		"@deck.gl/core": "^8.9.35",
+		"@deck.gl/geo-layers": "^8.9.35",
 		"@deck.gl/layers": "^8.9.35",
 		"@deck.gl/mapbox": "^8.9.35",
 		"@ldn-viz/utils": "*",

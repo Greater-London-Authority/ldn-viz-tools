@@ -37,6 +37,9 @@ export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 // Context Layers
 export { default as BoroughsContextLayer } from './mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
 
+// Deck.gl
+export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
