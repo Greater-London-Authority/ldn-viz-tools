@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-ADDED story for horizontal alignment of radio buttons in RadioButtonGroup
+ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
