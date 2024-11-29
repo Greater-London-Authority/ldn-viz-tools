@@ -57,11 +57,7 @@
 	{#if !buttonsHidden}
 		<Button variant="text" class="!px-0" on:click={() => (selectedId = '')}>Clear</Button>
 	{/if}
-	<div
-		class={orientation === 'vertical'
-			? 'flex flex-col space-y-0.25'
-			: 'flex space-x-3' }
-	>
+	<div class={orientation === 'vertical' ? 'flex flex-col space-y-0.25' : 'flex space-x-3'}>
 		{#each options as option}
 			<RadioButton
 				id={option.id}
