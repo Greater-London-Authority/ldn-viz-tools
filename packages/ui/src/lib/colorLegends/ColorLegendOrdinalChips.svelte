@@ -34,7 +34,7 @@
 		<span class="font-semibold text-color-input-label mb-1">{title}</span>
 	{/if}
 
-	<div class={orientation === 'horizontal' ? 'flex gap-2' : 'flex flex-col'}>
+	<div class={orientation === 'horizontal' ? 'flex flex-wrap gap-2' : 'flex flex-col'}>
 		{#each scale.domain() as d}
 			<div class="flex items-center text-color-input-label">
 				<div

@@ -35,7 +35,7 @@
 		color?: string;
 		disabled?: boolean;
 		hint?: string;
-		hintLabel: string;
+		hintLabel?: string;
 	}[] = [];
 
 	/**
