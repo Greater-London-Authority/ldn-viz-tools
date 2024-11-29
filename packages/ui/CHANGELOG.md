@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 14.6.1
+
+### Patch Changes
+
+- 5d77717: CHANGED: wrap entries in the `CurrentLengendOrginalChips` when width of parent container is too narrow to fit them
+- 471c1cf: FIXED hintLabel prop is now optional
+
 ## 14.6.0
 
 ### Minor Changes
