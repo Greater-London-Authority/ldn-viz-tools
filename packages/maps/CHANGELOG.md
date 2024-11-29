@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 5.3.0
+
+### Minor Changes
+
+- 77d6d14: ADDED: added `MapDeckOverlay` component
+
 ## 5.2.0
 
 ### Minor Changes
