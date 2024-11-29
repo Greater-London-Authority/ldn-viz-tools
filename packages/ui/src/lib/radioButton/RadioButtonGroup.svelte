@@ -39,7 +39,16 @@
 	}[] = [];
 
 	/**
-	 * if `true`, then then `Clear` button is not displayed.
+	 * `orientation` (string, optional) determines whether radio buttons are vertically or horizontally aligned.
+	 * If `vertical`, radio buttons will display in a column. If `horizontal`, radio buttons will display in a row.
+	 */
+	export let orientation: 'vertical' | 'horizontal' = 'vertical';
+	// row with title,
+	// clear button
+	// title and hint~
+
+	/**
+	 * if `true`, then the `Clear` button is not displayed.
 	 */
 	export let buttonsHidden = false;
 </script>
@@ -48,16 +57,18 @@
 	{#if !buttonsHidden}
 		<Button variant="text" class="!px-0" on:click={() => (selectedId = '')}>Clear</Button>
 	{/if}
-	{#each options as option}
-		<RadioButton
-			id={option.id}
-			label={option.label}
-			color={option.color}
-			disabled={option.disabled}
-			hint={option.hint}
-			hintLabel={option.hintLabel}
-			bind:selectedId
-			{name}
-		/>
-	{/each}
+	<div class={orientation === 'vertical' ? 'flex flex-col space-y-0.25' : 'flex space-x-3'}>
+		{#each options as option}
+			<RadioButton
+				id={option.id}
+				label={option.label}
+				color={option.color}
+				disabled={option.disabled}
+				hint={option.hint}
+				hintLabel={option.hintLabel}
+				bind:selectedId
+				{name}
+			/>
+		{/each}
+	</div>
 </div>
