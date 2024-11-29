@@ -32,6 +32,7 @@
 
 - e4b3ff7: ADDED: `Button` now has a prop to specify link should be opened in a new tab
 - e62fd68: CHANGED: when using the `RadioButtonGroup`, the `color` attribute for options is now optional
+- 0050885: CHANGED: the `isOpen` store on the `AppShell` component can now be externally updated to open or close the sidebar
 
 ## 14.3.0
 
