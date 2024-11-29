@@ -60,9 +60,7 @@
 	<div
 		class={orientation === 'vertical'
 			? 'flex flex-col space-y-0.25'
-			: orientation === 'horizontal'
-				? 'flex space-x-3'
-				: ''}
+			: 'flex space-x-3' }
 	>
 		{#each options as option}
 			<RadioButton
