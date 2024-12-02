@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 14.8.0
+
+### Minor Changes
+
+- f51bc23: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
 ## 14.7.0
 
 ### Minor Changes

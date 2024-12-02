@@ -1,5 +1,18 @@
 # @ldn-viz/tables
 
+## 2.4.0
+
+### Minor Changes
+
+- f4e7e27: FIXED: add padding to images of charts or tables downloaded in png format using ImageDownloadButton
+
+### Patch Changes
+
+- Updated dependencies [f51bc23]
+- Updated dependencies [f4e7e27]
+  - @ldn-viz/ui@14.8.0
+  - @ldn-viz/charts@3.8.0
+
 ## 2.3.0
 
 ### Minor Changes
