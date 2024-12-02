@@ -3,4 +3,4 @@
 "@ldn-viz/tables": minor
 ---
 
-add padding to images downloaded by download png buttons
+FIXED: add padding to images of charts or tables downloaded in png format using ImageDownloadButton
