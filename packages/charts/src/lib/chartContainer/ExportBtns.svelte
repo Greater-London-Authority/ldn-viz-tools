@@ -4,6 +4,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let chartToCapture: HTMLDivElement;
+	export let idToPad = '';
 	export let dataForDownload: { [key: string]: any }[] | undefined;
 	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[];
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[];
@@ -41,6 +42,7 @@
 				variant="outline"
 				emphasis="secondary"
 				size="sm"
+				{idToPad}
 			>
 				<svelte:fragment slot="afterLabel">
 					<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
