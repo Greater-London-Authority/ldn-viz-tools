@@ -111,6 +111,7 @@
 		<Footer {source} {byline} {note}>
 			<ExportBtns
 				{chartToCapture}
+				idToPad="captureElement"
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}
