@@ -66,7 +66,7 @@
 	 */
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
-ç	export let filename = '';
+	export let filename = '';
 
 	/**
 	 * Tailwind class to set table area height
