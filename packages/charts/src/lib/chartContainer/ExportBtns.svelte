@@ -19,7 +19,7 @@
 	 */
 	export let dataForDownload: { [key: string]: any }[] | undefined;
 
-		/**
+	/**
 	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
 	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
 	 * If set to `false`, then the button is hidden.
