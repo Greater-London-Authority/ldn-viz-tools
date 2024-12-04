@@ -78,7 +78,7 @@
 	$: bpProp = getSetting(sidebarPlacement, innerWidth);
 	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
-	$: $isAlwaysOpen = (aoProp === 'true' || aoProp === true);
+	$: $isAlwaysOpen = aoProp === 'true' || aoProp === true;
 	$: $sidebarPlacementStore = bpProp;
 
 	$: $isOpen = $isAlwaysOpen === true;
