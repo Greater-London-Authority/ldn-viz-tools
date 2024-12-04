@@ -45,14 +45,14 @@
 	export let isOpen = writable(startOpen);
 
 	/**
-	 * A tailwind class or classes used to set or overide the height of the Appshell wrapper.
+	 * A tailwind class or classes used to set or override the height of the `AppShell` wrapper.
 	 */
 	export let heightClass = 'min-h-dvh';
 
 	/**
 	 * Store recording/controlling whether the sidebar is set to be `alwaysOpen` at the current window size.
 	 */
-	export const isAlwaysOpen = writable('false');
+	export const isAlwaysOpen = writable(false);
 
 	/**
 	 * Store recording/controlling the sidebar's current position.
@@ -78,10 +78,10 @@
 	$: bpProp = getSetting(sidebarPlacement, innerWidth);
 	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
-	$: $isAlwaysOpen = aoProp;
+	$: $isAlwaysOpen = (aoProp === 'true' || aoProp === true);
 	$: $sidebarPlacementStore = bpProp;
 
-	$: $isOpen = $isAlwaysOpen === 'true';
+	$: $isOpen = $isAlwaysOpen === true;
 
 	setContext('sidebarAlwaysOpen', isAlwaysOpen);
 	setContext('sidebarIsOpen', isOpen);
