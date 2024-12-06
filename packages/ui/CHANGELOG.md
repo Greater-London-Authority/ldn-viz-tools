@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 14.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+
 ## 14.8.0
 
 ### Minor Changes
