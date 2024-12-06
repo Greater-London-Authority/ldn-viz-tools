@@ -137,7 +137,7 @@
 
 <Story name="Table updates when data changes" source>
 	<Button on:click={randomlySelectRows}>Update</Button>
-	<Table data={dataSubset} {tableSpec} allowSorting />
+	<Table data={dataSubset} {tableSpec} allowSorting filename="My Table" />
 </Story>
 
 <Story name="Sortable Rows" source>
