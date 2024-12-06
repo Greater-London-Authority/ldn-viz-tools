@@ -75,6 +75,11 @@
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
 	/**
+	 * The file name to be used for the downloaded data or image file.
+	 */
+	export let filename = '';
+
+	/**
 	 * Provides a way to access the DOM node into which the visualization is rendered.
 	 */
 	export let domNode: any = undefined;
@@ -100,6 +105,7 @@
 		{byline}
 		{dataDownloadButton}
 		{imageDownloadButton}
+		{filename}
 		{...$$restProps}
 		chartHeight={'h-fit'}
 		{chartWidth}

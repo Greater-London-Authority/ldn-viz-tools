@@ -67,6 +67,11 @@
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
 	/**
+	 * The file name to be used for the downloaded data or image file.
+	 */
+	export let filename = '';
+
+	/**
 	 * Height of the table (pixels).
 	 */
 	export let height = 1000;
@@ -220,6 +225,7 @@
 			{note}
 			{dataDownloadButton}
 			{imageDownloadButton}
+			{filename}
 			{columnMapping}
 		>
 			<div
