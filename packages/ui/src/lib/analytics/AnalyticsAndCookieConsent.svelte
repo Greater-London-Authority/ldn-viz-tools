@@ -54,6 +54,7 @@
 		var ldnVizCivic = {
 			appName: window.ldnVizCivicAppName || 'Embedded app',
 			intervalId: null,
+			initialIntervalId: null,
 			config: {
 				apiKey: window.ldnVizCivicApiKey,
 				product: 'PRO_MULTISITE',
@@ -209,6 +210,12 @@
 		};
 
 		ldnVizCivic.init = function () {
+			if (CookieControl) {
+				clearInterval(ldnVizCivic.initialIntervalId);
+			} else {
+				return;
+			}
+
 			if (!ldnVizCivic.isCookieControlManagedByParent()) {
 				CookieControl.load(ldnVizCivic.config);
 				return;
@@ -220,7 +227,7 @@
 			}
 		};
 
-		ldnVizCivic.init();
+		ldnVizCivic.initialIntervalId = setInterval(ldnVizCivic.init, 500);
 	</script>
 
 	<script>
