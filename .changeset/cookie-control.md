@@ -3,4 +3,4 @@
 ---
 
 FIXED: updated `AnalyticsAndCookieConsent` and `CookieControlSettings` components to avoid errors if they are rendered
-before `ldnVizCivic` is initialized
+before `window.CookieControl` is initialized
