@@ -1,7 +1,7 @@
 {
 	"name": "@ldn-viz/ui",
 	"license": "MIT",
-	"version": "14.5.0",
+	"version": "14.8.1",
 	"type": "module",
 	"exports": {
 		".": {
@@ -36,7 +36,7 @@
 		"@ldn-viz/utils": "*",
 		"@melt-ui/svelte": "^0.76.0",
 		"@steeze-ui/heroicons": "^2.3.0",
-		"@steeze-ui/svelte-icon": "^1.5.0",
+		"@steeze-ui/svelte-icon": "1.5.0",
 		"@storybook/addon-svelte-csf": "^4.1.2",
 		"@types/d3-dsv": "^3.0.7",
 		"d3-array": "^3.2.4",

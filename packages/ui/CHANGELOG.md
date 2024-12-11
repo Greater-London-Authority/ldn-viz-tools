@@ -1,5 +1,37 @@
 # ldn-viz-tools-ui
 
+## 14.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+
+## 14.8.0
+
+### Minor Changes
+
+- f51bc23: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.7.0
+
+### Minor Changes
+
+- 3dea9ca: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.6.1
+
+### Patch Changes
+
+- 5d77717: CHANGED: wrap entries in the `CurrentLengendOrginalChips` when width of parent container is too narrow to fit them
+- 471c1cf: FIXED hintLabel prop is now optional
+
+## 14.6.0
+
+### Minor Changes
+
+- ebd6a57: ADDED: added a `LayerControl` component
+- 3d9026c: CHANGED: pinned the @steeze-ui/svelte-icon dependency to exactly 1.5.0, as subsequent versions are incompatible with Svelte 4
+
 ## 14.5.0
 
 ### Minor Changes
@@ -12,6 +44,7 @@
 
 - e4b3ff7: ADDED: `Button` now has a prop to specify link should be opened in a new tab
 - e62fd68: CHANGED: when using the `RadioButtonGroup`, the `color` attribute for options is now optional
+- 0050885: CHANGED: the `isOpen` store on the `AppShell` component can now be externally updated to open or close the sidebar
 
 ## 14.3.0
 

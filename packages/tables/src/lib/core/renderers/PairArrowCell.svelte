@@ -1,11 +1,11 @@
 <script lang="ts">
 	/**
 	 * The `PairArrow` component renders a table cell containing an arrow pointing from a context value to the cell's value.
-	 * The color of the arrow indicates whetehr it is increasing or decreasing
+	 * The color of the arrow indicates whether it is increasing or decreasing
 	 * @component
 	 */
 
-	import { scaleLinear } from 'd3-scale';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -35,12 +35,12 @@
 
 	const barEndPadding = 15;
 
-	let x;
+	let x: ScaleLinear<number, number>;
 	$: x = scaleLinear()
 		.domain(extent)
 		.range([barEndPadding, width - barEndPadding]);
 
-	// Shhh
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
 	$$restProps;
 </script>
 

@@ -22,10 +22,10 @@
 		{ label: 'range', value: 'range' }
 	];
 
-	let selectedFilterType: { label: string; value: string };
+	let selectedFilterType: { label: string; value: string } | undefined;
 
 	const applyFilter = () => {
-		if (!table) {
+		if (!table || !selectedFilterType) {
 			return;
 		}
 

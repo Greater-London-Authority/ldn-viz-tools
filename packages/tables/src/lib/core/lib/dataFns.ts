@@ -71,7 +71,7 @@ function getValuesForField(criterion: GroupOrderCriterion, groups: Group[], data
 	return aggregatedVals;
 }
 
-// TOOD: choosing ordering for categorical variables
+// TODO: choosing ordering for categorical variables
 
 export function getSortedRows(indexes: number[], data, orderingCriteria: LeafOrderCriterion[]) {
 	const compareFn = (a, b) => compareRows(a, b, orderingCriteria, data);
@@ -159,7 +159,7 @@ export function sortGroups(groups: Group[], data, orderingCriteria: GroupOrderCr
 	// then sort its children, recursively
 }
 
-// osrting values: ascending/descending
+// sorting values: ascending/descending
 
 // List out data in order
 // [ ] only show top n for each section
@@ -299,7 +299,7 @@ export function group(
 				group.parentGroup = parentItem;
 				parentItem.childGroups.push(group);
 
-				parentItem.order.push(...group.order); // TODO: check this is correct and we don't ever end up with entries beng added twice
+				parentItem.order.push(...group.order); // TODO: check this is correct and we don't ever end up with entries being added twice
 			}
 		}
 	}

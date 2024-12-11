@@ -1,11 +1,11 @@
 import { sum } from 'd3-array';
 
-// TOOD: call when gruping changes
+// TODO: call when grouping changes
 
 const parseWidth = (width: number | string) => {
 	if (typeof width === 'number') {
 		return width;
-	} else if (typeof width === 'string') {
+	} else {
 		return +width.replace('px', '').trim();
 	}
 };
@@ -26,7 +26,7 @@ export const computeWidths = (table: any, width: number) => {
 	// subtract fixed widths
 	const absoluteWidths = table.columnSpec
 		.filter((c) => c.width !== undefined)
-		.map((d) => parseWidth(d.width)); // TOOD: remove 'px' if ecessary?
+		.map((d) => parseWidth(d.width)); // TODO: remove 'px' if necessary?
 	availableWidth -= sum(absoluteWidths);
 
 	// determine scale factor

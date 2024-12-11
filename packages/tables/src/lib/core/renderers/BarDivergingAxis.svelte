@@ -33,9 +33,9 @@
 
 	export let textSize = 8;
 
-	const topPadding = height; // padding above the horiontal rule
+	const topPadding = height; // padding above the horizontal rule
 
-	// Shhh
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
 	$$restProps;
 </script>
 

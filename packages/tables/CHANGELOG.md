@@ -1,5 +1,39 @@
 # @ldn-viz/tables
 
+## 2.4.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+- Updated dependencies [89b89e0]
+  - @ldn-viz/charts@3.8.1
+  - @ldn-viz/ui@14.8.1
+
+## 2.4.0
+
+### Minor Changes
+
+- f4e7e27: FIXED: add padding to images of charts or tables downloaded in png format using ImageDownloadButton
+
+### Patch Changes
+
+- Updated dependencies [f51bc23]
+- Updated dependencies [f4e7e27]
+  - @ldn-viz/ui@14.8.0
+  - @ldn-viz/charts@3.8.0
+
+## 2.3.0
+
+### Minor Changes
+
+- 6dffda1: CHANGED: individual columns can be specified as not sortable
+
+### Patch Changes
+
+- Updated dependencies [ebd6a57]
+- Updated dependencies [3d9026c]
+  - @ldn-viz/ui@14.6.0
+
 ## 2.2.0
 
 ### Minor Changes

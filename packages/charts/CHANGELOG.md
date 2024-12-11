@@ -1,5 +1,30 @@
 # ldn-viz-tools-charts
 
+## 3.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+- Updated dependencies [89b89e0]
+  - @ldn-viz/ui@14.8.1
+
+## 3.8.0
+
+### Minor Changes
+
+- f4e7e27: FIXED: add padding to images of charts or tables downloaded in png format using ImageDownloadButton
+
+### Patch Changes
+
+- Updated dependencies [f51bc23]
+  - @ldn-viz/ui@14.8.0
+
+## 3.7.0
+
+### Minor Changes
+
+- 72db5e6: FIXED: addEventHandlerInner no longer expects x and y values (fixes regression in 3.5.0)
+
 ## 3.6.0
 
 ### Minor Changes

@@ -40,3 +40,13 @@
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId buttonsHidden />
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
+
+<Story name="RadioGroup - aligned in row">
+	<RadioButtonGroup
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		orientation="horizontal"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>

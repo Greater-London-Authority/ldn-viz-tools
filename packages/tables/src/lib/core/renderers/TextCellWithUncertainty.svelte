@@ -12,7 +12,7 @@
 	export let contextVals: boolean[] = [false];
 	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
 
-	export let formatString;
+	export let formatString: string | undefined = undefined;
 	$: f = format(formatString ?? '');
 
 	const alignmentClasses = {
@@ -27,6 +27,9 @@
 		contextVals.length > 0 && !contextVals[0]
 			? 'text-color-text-secondary'
 			: 'text-color-text-primary';
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <div class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>

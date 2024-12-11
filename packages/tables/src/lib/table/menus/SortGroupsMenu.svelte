@@ -1,10 +1,15 @@
 <script lang="ts">
+	import type { TableData } from '$lib/core/lib/dataObj';
 	import { Button, Popover, Select } from '@ldn-viz/ui';
-	import { type GroupOrderCriterion } from '../../core/lib/types';
+	import {
+		type Aggregation,
+		type GroupOrderCriterion,
+		type SortDirection
+	} from '../../core/lib/types';
 
-	export let table;
+	export let table: TableData;
 
-	let fields;
+	let fields: { label: string; id: string; value: string }[] = [];
 	$: if (table) {
 		const new_fields = table.columnSpec.map((f) => ({
 			label: f.label ?? f.short_label,
@@ -17,26 +22,33 @@
 		}
 	}
 
-	let fieldSelection; // TODO: set from table
+	let fieldSelection: string; // TODO: set from table
 
-	const orderOptions = ['ascending', 'descending'];
-	let orderSelection;
+	const orderOptions = ['ascending', 'descending'].map((o) => ({
+		label: o,
+		value: o
+	}));
 
-	const aggregationOptions = ['min', 'mean', 'median', 'max', 'q1', 'q3', 'count'];
-	let aggregationSelection;
+	let orderSelection: SortDirection;
+
+	const aggregationOptions = ['min', 'mean', 'median', 'max', 'q1', 'q3', 'count'].map((o) => ({
+		label: o,
+		value: o
+	}));
+	let aggregationSelection: Aggregation;
 
 	$: {
 		const incompleteState =
 			!orderSelection ||
 			!aggregationSelection ||
-			(aggregationSelection?.value !== 'count' && !fieldSelection);
+			(aggregationSelection !== 'count' && !fieldSelection);
 
 		if (!incompleteState) {
 			const newOrdering: GroupOrderCriterion[] = [
 				{
-					field: fieldSelection?.id,
-					direction: orderSelection?.value,
-					aggregation: aggregationSelection?.value
+					field: fieldSelection,
+					direction: orderSelection,
+					aggregation: aggregationSelection
 				}
 			];
 
@@ -60,15 +72,25 @@
 
 		<Select
 			items={aggregationOptions}
-			bind:value={aggregationSelection}
+			bind:justValue={aggregationSelection}
 			label="by the"
 			id="labelled-input"
 		/>
 
-		{#if aggregationSelection?.value !== 'count'}
-			<Select items={fields} bind:value={fieldSelection} label="of their " id="labelled-input" />
+		{#if aggregationSelection !== 'count'}
+			<Select
+				items={fields}
+				bind:justValue={fieldSelection}
+				label="of their "
+				id="labelled-input"
+			/>
 		{/if}
 
-		<Select items={orderOptions} bind:value={orderSelection} label="ordered" id="labelled-input" />
+		<Select
+			items={orderOptions}
+			bind:justValue={orderSelection}
+			label="ordered"
+			id="labelled-input"
+		/>
 	</div>
 </Popover>

@@ -52,6 +52,11 @@
 	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
 
 	/**
+	 * The file name to be used for the downloaded data or image file.
+	 */
+	export let filename: '';
+
+	/**
 	 * The Data passed to the data Download Button(s) in the footer
 	 */
 	export let data: { [key: string]: any }[] | undefined = undefined;
@@ -111,6 +116,8 @@
 		<Footer {source} {byline} {note}>
 			<ExportBtns
 				{chartToCapture}
+				{filename}
+				idToPad="captureElement"
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}

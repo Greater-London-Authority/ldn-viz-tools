@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls usch as data/image download buttons.
+	 * It also provides controls such as data/image download buttons.
 	 *
 	 * **Note** Similar in structure and functionality to the 'table Container'
 	 * 	@component
@@ -45,8 +45,8 @@
 	 * Data Download Button in the footer
 	 *
 	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
+	 * If set to `false`, then the button is hidden.
 	 *
 	 */
 	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
@@ -60,11 +60,13 @@
 	 * Image Download Button in the footer
 	 *
 	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
+	 * If set to `false`, then the button is hidden.
 	 *
 	 */
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
+
+	export let filename = '';
 
 	/**
 	 * Tailwind class to set table area height
@@ -118,9 +120,11 @@
 			<ExportBtns
 				chartToCapture={tableToCapture}
 				{columnMapping}
+				idToPad="captureElement"
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}
+				{filename}
 				slot="exportBtns"
 			/>
 		</Footer>

@@ -49,9 +49,9 @@
 	/**
 	 * Data Download Button in the footer
 	 *
-	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 * Defaults to `true` which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
+	 * If set to `false`, then the button is hidden.
 	 *
 	 */
 	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
@@ -60,11 +60,16 @@
 	 * Image Download Button in the footer
 	 *
 	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
+	 * If set to `false`, then the button is hidden.
 	 *
 	 */
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
+
+	/**
+	 * The file name to be used for the downloaded data or image file.
+	 */
+	export let filename = '';
 
 	/**
 	 * Height of the table (pixels).
@@ -72,7 +77,7 @@
 	export let height = 1000;
 
 	/**
-	 * Exposes the internal table object, so that it can be programmatially manipulated.
+	 * Exposes the internal table object, so that it can be programmatically manipulated.
 	 */
 	export let table: TableData | undefined = undefined;
 
@@ -186,9 +191,9 @@
 		}
 	}
 
-	let tableWidth;
+	let tableWidth: number;
 
-	const updateTableWidths = (newWidth) => {
+	const updateTableWidths = (newWidth: number) => {
 		if (table && !fixedTableWidth) {
 			computeWidths(table, newWidth);
 			table = table; // eslint-disable-line no-self-assign
@@ -220,6 +225,7 @@
 			{note}
 			{dataDownloadButton}
 			{imageDownloadButton}
+			{filename}
 			{columnMapping}
 		>
 			<div
@@ -233,7 +239,7 @@
 					<div style:width={tableWidth} class:striped={zebraStripe}>
 						{#each visualRows as visualRow, i}
 							{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
-								<RowRenderer spec={visualRow} {table} {tableSpec} />
+								<RowRenderer spec={visualRow} {table} />
 							{/if}
 						{/each}
 					</div>
@@ -244,13 +250,13 @@
 						class:stripedVirtual={zebraStripe}
 					>
 						<VirtualScroll data={visualRows} key="uniqueKey" let:data>
-							<RowRenderer spec={data} {table} {tableSpec} />
+							<RowRenderer spec={data} {table} />
 						</VirtualScroll>
 					</div>
 				{:else}
 					<div style:width={tableWidth} class:striped={zebraStripe}>
 						{#each visualRows as visualRow}
-							<RowRenderer spec={visualRow} {table} {tableSpec} />
+							<RowRenderer spec={visualRow} {table} />
 						{/each}
 					</div>
 				{/if}
