@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Ui/Icons/Icons" />
+
+# Icons
+
+Where possible we use the [Heroicons icon set](https://heroicons.com/).
+
+We import the icons from the
+[`@steeze-ui/heroicons` package](https://github.com/steeze-ui/icons/tree/main/packages/builders/heroicons-builder),
+and use them with the `Icon` component from the
+[`@steeze-ui/svelte-icon` package](https://github.com/steeze-ui/icons/tree/main/packages/components/svelte-icon).
+
+
+## Themes
+
+Each Heroicon icon is available in several different themes:
+
+* `outline`: 24x24, 1.5px stroke (corresponding to Tailwind classes `w-6 h-6`)
+* `solid`: 24x24, Solid fill (corresponding to Tailwind classes `w-6 h-6`)
+* `mini`: 20x20, Solid fill (corresponding to Tailwind classes `w-5 h-5`)
+* `micro`: 16x16, Solid fill (corresponding to Tailwind classes `w-4 h-4`)
+
+
+## Example usage:
+
+```
+<script>
+  import { Icon } from '@steeze-ui/svelte-icon'
+  import { PlusSmall } from '@steeze-ui/heroicons'
+</script>
+
+<!-- Set Icon Theme via the attribute -->
+<Icon src={PlusSmall} theme='solid' class='w-6 h-6'>
+```
