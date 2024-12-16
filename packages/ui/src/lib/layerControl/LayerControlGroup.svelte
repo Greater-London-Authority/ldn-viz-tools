@@ -62,6 +62,11 @@
 	 */
 	export let hideSizeControl = false;
 
+	/**
+	 * Message to be displayed next to the checkbox that toggles the visibility of all layers.
+	 */
+	export let showAllLabel = 'Show all';
+
 	let allCheckboxesCheckedOrDisabled: boolean;
 	$: allCheckboxesCheckedOrDisabled = options.every((o) => (o.disabled ? true : o.visible));
 
@@ -101,7 +106,7 @@
 		<Checkbox
 			id={randomId()}
 			form=""
-			label="Select all"
+			label={showAllLabel}
 			color="#3787D2"
 			checked={allCheckboxesCheckedOrDisabled}
 			indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
