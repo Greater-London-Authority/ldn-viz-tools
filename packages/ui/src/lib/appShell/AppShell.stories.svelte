@@ -508,6 +508,36 @@
 	</AppShell>
 </Story>
 
+<Story name="Start Open (default)">
+	<AppShell startOpen>
+		<Sidebar slot="sidebar">
+			<SidebarHeader title="Main sidebar title" slot="header">
+				<svelte:fragment slot="subTitle">
+					<p>
+						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+						venenatis sapien. Etiam venenatis felis.
+					</p>
+				</svelte:fragment>
+			</SidebarHeader>
+		</Sidebar>
+	</AppShell>
+</Story>
+
+<Story name="Start Closed">
+	<AppShell startOpen={false}>
+		<Sidebar slot="sidebar">
+			<SidebarHeader title="Main sidebar title" slot="header">
+				<svelte:fragment slot="subTitle">
+					<p>
+						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+						venenatis sapien. Etiam venenatis felis.
+					</p>
+				</svelte:fragment>
+			</SidebarHeader>
+		</Sidebar>
+	</AppShell>
+</Story>
+
 <Story name="Always Open">
 	<AppShell sidebarAlwaysOpen={{ initial: 'true' }}>
 		<Sidebar slot="sidebar">
@@ -523,6 +553,11 @@
 	</AppShell>
 </Story>
 
+<!--
+The sidebar is always open if the window is wider than the `md` breakpoint size.
+In the sidebar was closed when the browser window was small, then it will automatically open when
+the screen width increases past this threshold.
+ -->
 <Story name="Always Open Responsive changes">
 	<AppShell sidebarAlwaysOpen={{ initial: 'false', md: 'true' }}>
 		<Sidebar slot="sidebar">
