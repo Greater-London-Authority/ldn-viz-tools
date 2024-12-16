@@ -1,5 +1,17 @@
 # ldn-viz-tools-ui
 
+## 14.9.0
+
+### Minor Changes
+
+- aa341ff: ADDED: added `LayerControlGroup` component
+  CHANGED: `LayerControl` now supports a `disabled` state
+
+### Patch Changes
+
+- 7aeb3b0: FIXED: updated `AnalyticsAndCookieConsent` and `CookieControlSettings` components to avoid errors if they are rendered
+  before `window.CookieControl` is initialized
+
 ## 14.8.1
 
 ### Patch Changes
