@@ -3,3 +3,4 @@
 ---
 
 ADDED: added `LayerControlGroup` component
+CHANGED: `LayerControl` now supports a `disabled` state

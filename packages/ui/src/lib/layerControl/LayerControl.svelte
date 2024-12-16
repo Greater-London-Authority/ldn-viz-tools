@@ -34,6 +34,8 @@
 	 */
 	export let helpText = '';
 
+	export let disabled = false;
+
 	/**
 	 * object containing user-controlled properties of the layer:
 	 * * color (string)
@@ -61,7 +63,7 @@
 
 <div class="flex items-center content-center gap-2">
 	<div class="flex items-center content-center gap-0.5">
-		<Checkbox bind:checked={state.visible} label="" />
+		<Checkbox bind:checked={state.visible} label="" {disabled} />
 
 		{#if !hideColorControl}
 			<ColorPicker bind:color={state.color} />

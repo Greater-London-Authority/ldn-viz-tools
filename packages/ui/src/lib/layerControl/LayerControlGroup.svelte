@@ -113,6 +113,7 @@
 		{#each options as option (option.id)}
 			<LayerControl
 				label={option.label}
+				disabled={option.disabled}
 				bind:state={option}
 				helpText={option.helpText}
 				hideColorControl={hideColorControl || option.hideColorControl}
