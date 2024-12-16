@@ -39,6 +39,7 @@
 	 * * color (string)
 	 * * visibility (boolean)
 	 * * opacity (number between 0 and 1, inclusive)
+	 * * size (number)
 	 */
 	export let state = {
 		color: '#000000',
