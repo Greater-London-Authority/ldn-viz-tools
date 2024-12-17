@@ -559,7 +559,7 @@ In the sidebar was closed when the browser window was small, then it will automa
 the screen width increases past this threshold.
  -->
 <Story name="Always Open Responsive changes">
-	<AppShell sidebarAlwaysOpen={{ initial: 'false', md: 'true' }}>
+	<AppShell sidebarAlwaysOpen={{ initial: false, md: true }}>
 		<Sidebar slot="sidebar">
 			<SidebarHeader title="Main sidebar title" slot="header">
 				<svelte:fragment slot="subTitle">

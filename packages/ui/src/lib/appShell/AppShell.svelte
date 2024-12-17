@@ -8,6 +8,7 @@
 
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
 	import { fade, slide } from 'svelte/transition';
 	import { heightLookup, transitionAxis, widthLookup } from '../sidebar/sidebarUtils';
 	import { sidebarWidthStore } from '../sidebar/stores';
@@ -45,14 +46,14 @@
 	export let isOpen = writable(startOpen);
 
 	/**
-	 * A tailwind class or classes used to set or overide the height of the Appshell wrapper.
+	 * A tailwind class or classes used to set or override the height of the `AppShell` wrapper.
 	 */
 	export let heightClass = 'min-h-dvh';
 
 	/**
 	 * Store recording/controlling whether the sidebar is set to be `alwaysOpen` at the current window size.
 	 */
-	export const isAlwaysOpen = writable('false');
+	export const isAlwaysOpen: Writable<boolean | string> = writable(false);
 
 	/**
 	 * Store recording/controlling the sidebar's current position.
@@ -72,7 +73,7 @@
 		Below are settings for Breakpoint Prop and Always Open Prop.
 		This is the secret sauce that allows us to pass an object containing different props per breakpoint.
 		The breakpoints are configurable if required, but use defaults: Demo to follow.
-		See also appShell/utils/getSettingByScreenWidth 
+		See also appShell/utils/getSettingByScreenWidth
 	*/
 	// bpProp = breakpoint prop - better name?
 	$: bpProp = getSetting(sidebarPlacement, innerWidth);
@@ -83,7 +84,7 @@
 		$isAlwaysOpen = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
 		// if "alwaysOpen" at this size, then we are open at this size
-		if ($isAlwaysOpen === 'true') {
+		if ($isAlwaysOpen === true || $isAlwaysOpen === 'true') {
 			$isOpen = true;
 		}
 	};
@@ -120,7 +121,7 @@
 	{/if}
 
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
-	{#if ($isAlwaysOpen === 'true' || (sidebarPush && $isOpen)) && $sidebarWidthStore}
+	{#if ($isAlwaysOpen === 'true' || $isAlwaysOpen === true || (sidebarPush && $isOpen)) && $sidebarWidthStore}
 		<div
 			class={classNames('flex', sidebarHeightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
