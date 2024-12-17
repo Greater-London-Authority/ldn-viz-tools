@@ -14,7 +14,7 @@
 	 * Each element of this array defines the control for a layer, and is an object with the properties:
 	 * * `id` (string)
 	 * * `label` (string) - the text displayed next to the checkbox
-	 * * `helpText` (string, optional) - help text to be displayed in tooltip
+	 * * `hint` (string, optional) - help text to be displayed in tooltip
 	 *
 	 * * `hideColorControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
 	 * * `hideOpacityControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
@@ -29,7 +29,7 @@
 	export let options: {
 		id: string;
 		label: string;
-		helpText?: string;
+		hint?: string;
 
 		disabled?: boolean;
 		hideColorControl?: boolean;
@@ -128,7 +128,7 @@
 			<LayerControl
 				label={option.label}
 				disabled={option.disabled}
-				helpText={option.helpText}
+				hint={option.hint}
 				hideColorControl={hideColorControl || option.hideColorControl}
 				hideOpacityControl={hideOpacityControl || option.hideOpacityControl}
 				hideSizeControl={hideSizeControl || option.hideSizeControl}
