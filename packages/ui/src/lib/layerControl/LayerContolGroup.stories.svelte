@@ -10,36 +10,32 @@
 
 <script lang="ts">
 	let optionsForGroup = [
-		{ id: 'bus', name: 'bus', label: 'Bus stops', color: '#00AEEF' },
+		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
 		{
 			id: 'train',
-			name: 'train',
 			label: 'Train stations',
 			color: '#008D48',
 			hint: 'Excluding underground stations'
 		},
-		{ id: 'underground', name: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', name: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
+		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
+		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
 	];
 
 	let optionsForGroup2 = [
-		{ id: 'bus', name: 'bus', label: 'Bus stops' },
+		{ id: 'bus', label: 'Bus stops' },
 		{
 			id: 'train',
-			name: 'train',
 			label: 'Train stations',
 			hint: 'Excluding underground stations'
 		},
 		{
 			id: 'underground',
-			name: 'underground',
 			label: 'Underground stations',
 			hideOpacityControl: true,
 			hideSizeControl: true
 		},
 		{
 			id: 'taxi',
-			name: 'taxi',
 			label: 'Taxi ranks',
 			disabled: true,
 			hideOpacityControl: true,

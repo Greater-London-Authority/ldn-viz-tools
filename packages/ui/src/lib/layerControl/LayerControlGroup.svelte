@@ -28,7 +28,6 @@
 	 */
 	export let options: {
 		id: string;
-		name?: string;
 		label: string;
 		helpText?: string;
 
