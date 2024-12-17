@@ -121,7 +121,7 @@
 	{/if}
 
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
-	{#if ($isAlwaysOpen === 'true' || (sidebarPush && $isOpen)) && $sidebarWidthStore}
+	{#if ($isAlwaysOpen === 'true' || $isAlwaysOpen === true || (sidebarPush && $isOpen)) && $sidebarWidthStore}
 		<div
 			class={classNames('flex', sidebarHeightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
