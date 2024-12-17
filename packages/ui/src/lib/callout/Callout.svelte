@@ -20,9 +20,9 @@
 	};
 
 	const sizeClasses = {
-		sm: 'border shadow-sm text-core-grey-700 px-2 pt-2 ',
-		md: 'border-l-[5px] border shadow-sm text-core-grey-700 px-2 pt-2 ',
-		lg: 'border-l-[5px] border shadow-sm text-core-grey-700 px-4 pt-4'
+		sm: 'border shadow-sm text-color-text-primary px-2 pt-2 ',
+		md: 'border-l-[5px] border shadow-sm text-color-text-primary px-2 pt-2 ',
+		lg: 'border-l-[5px] border shadow-sm text-color-text-primary px-4 pt-4'
 	};
 
 	const titleClasses = {
