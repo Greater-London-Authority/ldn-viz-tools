@@ -37,6 +37,8 @@
 			cookieControlStore.set(window.CookieControl);
 		}
 	});
+
+	$: cookieControlStore.set(window.CookieControl);
 </script>
 
 {#if $cookieControlStore}

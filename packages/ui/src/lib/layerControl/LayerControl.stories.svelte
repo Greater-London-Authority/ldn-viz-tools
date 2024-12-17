@@ -42,7 +42,7 @@
 	<LayerControl
 		bind:state
 		label="Borough"
-		helpText="Boundaries of each of Greater London's 32 boroughs"
+		hint="Boundaries of each of Greater London's 32 boroughs"
 	/>
 
 	<div>
@@ -56,7 +56,7 @@
 	<LayerControl
 		bind:state
 		label="Borough"
-		helpText="Boundaries of each of Greater London's 32 boroughs"
+		hint="Boundaries of each of Greater London's 32 boroughs"
 		hideOpacityControl
 	/>
 </Story>
@@ -65,7 +65,7 @@
 	<LayerControl
 		bind:state
 		label="Borough"
-		helpText="Boundaries of each of Greater London's 32 boroughs"
+		hint="Boundaries of each of Greater London's 32 boroughs"
 		hideColorControl
 	/>
 </Story>
@@ -74,7 +74,7 @@
 	<LayerControl
 		bind:state
 		label="Borough"
-		helpText="Boundaries of each of Greater London's 32 boroughs"
+		hint="Boundaries of each of Greater London's 32 boroughs"
 		hideSizeControl
 	/>
 </Story>
@@ -83,7 +83,7 @@
 	<LayerControl
 		bind:state
 		label="Borough"
-		helpText="Boundaries of each of Greater London's 32 boroughs"
+		hint="Boundaries of each of Greater London's 32 boroughs"
 		hideOpacityControl
 		hideColorControl
 		hideSizeControl
@@ -94,13 +94,13 @@
 	<LayerControl
 		bind:state={layerStates.boroughs}
 		label="Borough"
-		helpText="Boundaries of each of Greater London's 32 boroughs"
+		hint="Boundaries of each of Greater London's 32 boroughs"
 	/>
-	<LayerControl bind:state={layerStates.imd} label="IMD" helpText="Index of Multiple Deprivation" />
+	<LayerControl bind:state={layerStates.imd} label="IMD" hint="Index of Multiple Deprivation" />
 	<LayerControl
 		bind:state={layerStates.fuel_poverty}
 		label="Fuel Poverty"
-		helpText="Percentage of households in fuel poverty"
+		hint="Percentage of households in fuel poverty"
 	/>
 
 	<div>

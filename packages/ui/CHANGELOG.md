@@ -1,5 +1,30 @@
 # ldn-viz-tools-ui
 
+## 15.0.0
+
+### Major Changes
+
+- a6dca7f: CHANGED: change the interface of the `LayerControlGroup` to separate the fixed configuration of the layers and their current state
+  CHANGED: rename the `helpText` prop on the `LayerControl` to `hint` for consistency with other components
+
+## 14.9.0
+
+### Minor Changes
+
+- aa341ff: ADDED: added `LayerControlGroup` component
+  CHANGED: `LayerControl` now supports a `disabled` state
+
+### Patch Changes
+
+- 7aeb3b0: FIXED: updated `AnalyticsAndCookieConsent` and `CookieControlSettings` components to avoid errors if they are rendered
+  before `window.CookieControl` is initialized
+
+## 14.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+
 ## 14.8.0
 
 ### Minor Changes

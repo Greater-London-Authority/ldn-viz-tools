@@ -66,6 +66,8 @@
 	 */
 	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
 
+	export let filename = '';
+
 	/**
 	 * Tailwind class to set table area height
 	 */
@@ -122,6 +124,7 @@
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}
+				{filename}
 				slot="exportBtns"
 			/>
 		</Footer>

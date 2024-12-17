@@ -36,7 +36,7 @@
 	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 
 	const enforceExtension = (name: string, extension: string) => {
-		return name.toLocaleLowerCase().endsWith(extension) ? name : `name${extension}`;
+		return name.toLocaleLowerCase().endsWith(extension) ? name : `${name}${extension}`;
 	};
 
 	const downloadFromURL = (url: string, name: string) => {

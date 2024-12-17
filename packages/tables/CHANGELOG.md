@@ -1,5 +1,14 @@
 # @ldn-viz/tables
 
+## 2.4.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+- Updated dependencies [89b89e0]
+  - @ldn-viz/charts@3.8.1
+  - @ldn-viz/ui@14.8.1
+
 ## 2.4.0
 
 ### Minor Changes
