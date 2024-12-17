@@ -99,10 +99,10 @@
 		hideOpacityControl
 		hideSizeControl
 	/>
-	<pre>{JSON.stringify(optionsForGroup, null, 2)}</pre>
+	<pre>{JSON.stringify(state1, null, 2)}</pre>
 </Story>
 
 <Story name="Hide controls size and opacity controls for some layers">
 	<LayerControlGroup bind:options={optionsForGroup2} bind:state={state2} />
-	<pre>{JSON.stringify(optionsForGroup2, null, 2)}</pre>
+	<pre>{JSON.stringify(state2, null, 2)}</pre>
 </Story>

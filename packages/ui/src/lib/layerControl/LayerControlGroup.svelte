@@ -79,7 +79,7 @@
 
 	let allCheckboxesCheckedOrDisabled: boolean;
 	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
-		o.disabled ? true : state[o.id].visible
+		o.disabled ? true : state[o.id]?.visible
 	);
 
 	let noCheckboxesChecked: boolean;
