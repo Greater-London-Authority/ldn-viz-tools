@@ -6,9 +6,17 @@
 		component: Callout,
 		argTypes: {
 			status: {
-				options: ['note', 'caution', 'warning'],
+				options: ['notice', 'success', 'warning', 'error'],
+				control: { type: 'select' }
+			},
+			size: {
+				options: ['sm', 'md', 'lg'],
 				control: { type: 'select' }
 			}
+		},
+		args: {
+			status: 'notice',
+			size: 'md'
 		}
 	};
 </script>
