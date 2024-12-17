@@ -23,19 +23,17 @@
 	];
 
 	let optionsForGroup2 = [
-		{ id: 'bus', name: 'bus', label: 'Bus stops', color: '#00AEEF' },
+		{ id: 'bus', name: 'bus', label: 'Bus stops' },
 		{
 			id: 'train',
 			name: 'train',
 			label: 'Train stations',
-			color: '#008D48',
 			hint: 'Excluding underground stations'
 		},
 		{
 			id: 'underground',
 			name: 'underground',
 			label: 'Underground stations',
-			color: '#9E0059',
 			hideOpacityControl: true,
 			hideSizeControl: true
 		},
@@ -43,27 +41,72 @@
 			id: 'taxi',
 			name: 'taxi',
 			label: 'Taxi ranks',
-			color: 'firebrick',
 			disabled: true,
 			hideOpacityControl: true,
 			hideSizeControl: true
 		}
 	];
+
+	let state1 = {
+		bus: {
+			color: '#00AEEF',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		underground: {
+			color: '#9E0059',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		taxi: {
+			color: 'firebrick',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		}
+	};
+	let state2 = {
+		bus: {
+			color: '#00AEEF',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		underground: {
+			color: '#9E0059',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		taxi: {
+			color: 'firebrick',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		}
+	};
 </script>
 
 <Template let:args>
-	<LayerControlGroup bind:options={optionsForGroup} {...args} />
-	<pre>{JSON.stringify(optionsForGroup, null, 2)}</pre>
+	<LayerControlGroup bind:options={optionsForGroup} bind:state={state1} {...args} />
+	<pre>{JSON.stringify(state1, null, 2)}</pre>
 </Template>
 
 <Story name="Default" source />
 
 <Story name="Hide controls size and opacity controls">
-	<LayerControlGroup bind:options={optionsForGroup} hideOpacityControl hideSizeControl />
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		hideOpacityControl
+		hideSizeControl
+	/>
 	<pre>{JSON.stringify(optionsForGroup, null, 2)}</pre>
 </Story>
 
 <Story name="Hide controls size and opacity controls for some layers">
-	<LayerControlGroup bind:options={optionsForGroup2} />
+	<LayerControlGroup bind:options={optionsForGroup2} bind:state={state2} />
 	<pre>{JSON.stringify(optionsForGroup2, null, 2)}</pre>
 </Story>
