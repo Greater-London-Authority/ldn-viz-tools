@@ -14,7 +14,7 @@
 	 * Each element of this array defines the control for a layer, and is an object with the properties:
 	 * * `id` (string)
 	 * * `label` (string) - the text displayed next to the checkbox
-	 * * `helpText` (string, optional) - help text to be displayed in tooltip
+	 * * `hint` (string, optional) - help text to be displayed in tooltip
 	 *
 	 * * `hideColorControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
 	 * * `hideOpacityControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
@@ -28,19 +28,29 @@
 	 */
 	export let options: {
 		id: string;
-		name?: string;
 		label: string;
+		hint?: string;
 
 		disabled?: boolean;
 		hideColorControl?: boolean;
 		hideOpacityControl?: boolean;
 		hideSizeControl?: boolean;
-
-		color: string;
-		visible?: boolean;
-		opacity?: number;
-		size?: number;
 	}[] = [];
+
+	type LayerControlGroupState = Record<
+		string,
+		{
+			color: string;
+			visible: boolean;
+			opacity: number;
+			size: number;
+		}
+	>;
+
+	/**
+	 * Object containing the state of the layers.
+	 */
+	export let state: LayerControlGroupState;
 
 	/**
 	 * if `true`, then the "Select all" control is not displayed.
@@ -68,24 +78,23 @@
 	export let showAllLabel = 'Show all';
 
 	let allCheckboxesCheckedOrDisabled: boolean;
-	$: allCheckboxesCheckedOrDisabled = options.every((o) => (o.disabled ? true : o.visible));
+	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
+		o.disabled ? true : state[o.id]?.visible
+	);
 
 	let noCheckboxesChecked: boolean;
-	$: noCheckboxesChecked = !Object.values(options).some((o) => o.visible);
+	$: noCheckboxesChecked = !Object.values(state).some((o) => o.visible);
 
 	const selectAll = () => {
-		options = options.map((o) => ({
-			...o,
-			visible: o.disabled ? o.visible : true
-		}));
+		for (const o of options) {
+			state[o.id].visible = o.disabled ? state[o.id].visible : true;
+		}
 	};
 
 	const clearAll = () => {
-		console.log('clearAll');
-		options = options.map((o) => ({
-			...o,
-			visible: o.disabled ? o.visible : false
-		}));
+		for (const o of options) {
+			state[o.id].visible = o.disabled ? state[o.id].visible : false;
+		}
 	};
 
 	const toggleAll = () => {
@@ -119,11 +128,11 @@
 			<LayerControl
 				label={option.label}
 				disabled={option.disabled}
-				bind:state={option}
-				helpText={option.helpText}
+				hint={option.hint}
 				hideColorControl={hideColorControl || option.hideColorControl}
 				hideOpacityControl={hideOpacityControl || option.hideOpacityControl}
 				hideSizeControl={hideSizeControl || option.hideSizeControl}
+				bind:state={state[option.id]}
 			/>
 		{/each}
 	</div>
