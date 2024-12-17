@@ -32,7 +32,7 @@
 	/**
 	 * (optional) explanatory help text to be displayed in tooltip
 	 */
-	export let helpText = '';
+	export let hint = '';
 
 	export let disabled = false;
 
@@ -80,8 +80,8 @@
 
 	<div class="flex items-center content-center gap-0.5">
 		{label}
-		{#if helpText}
-			<Tooltip hintLabel="">{helpText}</Tooltip>
+		{#if hint}
+			<Tooltip hintLabel="">{hint}</Tooltip>
 		{/if}
 	</div>
 </div>
