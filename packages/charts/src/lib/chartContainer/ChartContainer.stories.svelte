@@ -101,7 +101,7 @@ This story show how you can place two (or more) sites side-by-side, and ensure t
 			subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so wil wrap earlier."
 			source="The source of this chart data"
 			byline="A byline for the chart"
-			note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so wil wrap earlier. It's really unnecessarilt ong."
+			note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so wil wrap earlier. It's really excessively long."
 			dataDownloadButton={['JSON', 'CSV']}
 			data={[]}
 			imageDownloadButton={['PNG']}
