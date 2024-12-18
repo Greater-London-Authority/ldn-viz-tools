@@ -72,14 +72,14 @@
 	/**
 	 * Format string to apply to tick labels (see the [`d3-format` docs](https://d3js.org/d3-format#locale_format))
 	 */
-	export let tickFormat: (v: any) => string;
+	export let tickFormat: any = undefined;
 
-	export let tickValues: undefined | number[];
+	export let tickValues: undefined | number[] = undefined;
 
 	/**
 	 * Value to highlight on the scale with arrow.
 	 */
-	export let highlightedValue: undefined | string | number;
+	export let highlightedValue: undefined | string | number = undefined;
 
 	/**
 	 * Label displayed below legend, on the left.
@@ -93,7 +93,7 @@
 	 */
 	export let rightLabel = '';
 
-	const ramp = (color, n = 256) => {
+	const ramp = (color: any, n = 256) => {
 		const canvas = document.createElement('canvas');
 		canvas.width = n;
 		canvas.height = 1;
@@ -107,10 +107,11 @@
 		return canvas.toDataURL();
 	};
 
-	let x;
-	let n;
-	let tickF;
-	let tickAdjust = (g) => g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
+	let x: any;
+	let n: number;
+	let tickF: (n: any) => string | string | null | undefined;
+	let tickAdjust = (g: any) =>
+		g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
 	$: {
 		if (color.interpolate) {
 			// continuous scale
@@ -148,7 +149,7 @@
 
 			const thresholdFormat =
 				tickFormat === undefined
-					? (d) => d
+					? (d: any) => d
 					: typeof tickFormat === 'string'
 						? format(tickFormat)
 						: tickFormat;
@@ -158,7 +159,7 @@
 				.rangeRound([marginLeft, width - marginRight]);
 
 			tickValues = range(thresholds.length);
-			tickF = (i) => thresholdFormat(thresholds[i], i);
+			tickF = (i: string | number) => thresholdFormat(thresholds[i]);
 		} else {
 			// ordinal scale
 			x = scaleBand()
@@ -183,7 +184,7 @@
 				.tickValues(tickValues);
 
 			select(ticksRef)
-				.call(bottomAxis)
+				.call(bottomAxis as any, 0)
 				.call(tickAdjust)
 				.call((g: any) => g.select('.domain').remove())
 				.call((g: any) =>
