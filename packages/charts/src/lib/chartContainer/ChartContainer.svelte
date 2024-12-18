@@ -77,18 +77,31 @@
 	export let chartHeight = 'h-60';
 
 	export let overrideClass = '';
-	let chartClass = classNames('relative', chartHeight, overrideClass);
 
 	/**
 	 * Tailwind class to set overall chart width
 	 */
 	export let chartWidth = 'w-full';
 
+	/**
+	 * If set to `true`, set `display: contents` on the top-level `ChartContainer` div, so that a grid layout can be
+	 * be applied to align parts of charts across two columns
+	 */
+	export let alignMultiple = false;
+
 	// For save as image
 	let chartToCapture: HTMLDivElement;
+
+	let chartClass = classNames(
+		'relative',
+		chartHeight,
+		overrideClass,
+		alignMultiple ? 'min-w-0' : ''
+	);
+	$: classes = classNames(chartWidth, alignMultiple ? 'contents' : 'flex flex-col');
 </script>
 
-<div class={`chart-container ${chartWidth}`} bind:this={chartToCapture} id="captureElement">
+<div class={classes} bind:this={chartToCapture} id="captureElement">
 	{#if title || subTitle}
 		<div class="mb-4">
 			{#if title}
@@ -106,6 +119,9 @@
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 	<slot name="controls" />
+
+	<!-- separate slot for legend, so that main chart can be aligned if legends wrap over different number of lines-->
+	<slot name="legend" />
 
 	<!-- Visualisation goes here -->
 	<div class={chartClass}>
@@ -126,9 +142,3 @@
 		</Footer>
 	{/if}
 </div>
-
-<style lang="postcss">
-	.chart-container {
-		@apply flex flex-col;
-	}
-</style>
