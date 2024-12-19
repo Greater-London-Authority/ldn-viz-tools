@@ -48,14 +48,15 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
+	import type { MapStore } from '$lib/map/Map.svelte';
 	import { Button } from '@ldn-viz/ui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getContext, onMount } from 'svelte';
 
-	const mapStore = getContext('mapStore');
+	const mapStore: MapStore = getContext('mapStore');
 
-	let mode = null;
+	let mode: any = null;
 
 	onMount(() => {
 		if (isFullscreenAllowed()) {
@@ -63,7 +64,7 @@
 		}
 	});
 
-	const handle = (event) => {
+	const handle = (event: { detail: number }) => {
 		if (!$mapStore || !mode) {
 			return;
 		}

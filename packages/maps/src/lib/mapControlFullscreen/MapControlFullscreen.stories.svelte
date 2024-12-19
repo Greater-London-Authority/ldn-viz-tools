@@ -48,7 +48,7 @@
 			}}
 		>
 			<MapControlGroup position="BottomLeft">
-				<MapControlFullscreen {map} />
+				<MapControlFullscreen />
 			</MapControlGroup>
 		</Map>
 	</MapApp>
