@@ -24,6 +24,8 @@
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
+	import { addMultipleEventHandlers } from './ObservablePlotInner.svelte';
+
 	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
@@ -159,6 +161,49 @@
 					title: (d) => [d.Region, `${d.Pensioners}%`].join('\n')
 				})
 			)
+		]
+	};
+
+	$: multipleInteractionsSpec = {
+		y: {
+			...defaultYScale,
+			label: ''
+		},
+
+		x: {
+			...defaultXScale,
+			domain: [0, 20],
+			insetLeft: 0 // adjusting to fit y axis labels of this chart
+		},
+
+		style: {
+			...defaultStyle
+		},
+
+		...defaultSize,
+		marginLeft: 200,
+		marginRight: 60,
+
+		marks: [
+			Plot.barX(material_deprivation_data, {
+				x: 'Pensioners',
+				y: 'Region',
+				fill: 'Area',
+				sort: { y: 'x', reverse: true },
+
+				render: addMultipleEventHandlers([
+					{
+						markShape: 'rect',
+						type: 'click',
+						handler: (_, d) => console.log('Clicked on:', material_deprivation_data[d.index])
+					},
+					{
+						markShape: 'rect',
+						type: 'mouseenter',
+						handler: (_, d) => console.log('Cursor entered:', material_deprivation_data[d.index])
+					}
+				])
+			})
 		]
 	};
 
@@ -815,6 +860,23 @@
 		alt="Bar chart of levels of material deprivation amongst pensioners in UK regions. Bars show that material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK. For example Inner London is 20% compared to West Midlands 9%, and Northern Ireland 4%."
 		spec={{
 			...mbBarSpec
+		}}
+		footer={{
+			byline: 'GLA City Intelligence',
+			source: 'London Datastore',
+			note: 'Data for illustrative purpose only',
+			exportBtns: true
+		}}
+	/>
+</Story>
+
+<Story name="Examples / multiple interactions">
+	<ObservablePlot
+		title="Material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK"
+		subTitle="Percentage of pensioners in material deprivation by region (2020/21-2022/23)"
+		alt="Bar chart of levels of material deprivation amongst pensioners in UK regions. Bars show that material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK. For example Inner London is 20% compared to West Midlands 9%, and Northern Ireland 4%."
+		spec={{
+			...multipleInteractionsSpec
 		}}
 		footer={{
 			byline: 'GLA City Intelligence',
