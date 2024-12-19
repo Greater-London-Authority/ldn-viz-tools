@@ -42,6 +42,7 @@
 		penguins
 	} from '../../data/demoData';
 
+	import { glaPlot } from '../observablePlotFragments/glaPlot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
@@ -160,6 +161,22 @@
 			)
 		]
 	};
+
+	$: globalDefaultsMarks = [
+		Plot.gridX({ ...defaultGridX }),
+		Plot.gridY({ ...defaultGridY }),
+		Plot.ruleY([0], { ...defaultRule }),
+		Plot.ruleX([0], { ...defaultRule }),
+		Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
+		Plot.axisX({ ...defaultXAxis }),
+		Plot.axisY({ ...defaultYAxis, label: 'culmen_depth_mm' }),
+		Plot.tip(
+			penguins,
+			Plot.pointerX({ ...defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
+		)
+	];
+
+	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -821,5 +838,13 @@
 			note: 'Data for illustrative purpose only',
 			exportBtns: true
 		}}
+	/>
+</Story>
+
+<Story name="Examples / using global defaults">
+	<ObservablePlot
+		title="Penguin Culmens"
+		subTitle="A scatterplot of depth against length"
+		spec={{ ...globalDefaultsSpec }}
 	/>
 </Story>
