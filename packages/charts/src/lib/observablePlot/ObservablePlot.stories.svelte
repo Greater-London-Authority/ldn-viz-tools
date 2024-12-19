@@ -164,49 +164,6 @@
 		]
 	};
 
-	$: multipleInteractionsSpec = {
-		y: {
-			...defaultYScale,
-			label: ''
-		},
-
-		x: {
-			...defaultXScale,
-			domain: [0, 20],
-			insetLeft: 0 // adjusting to fit y axis labels of this chart
-		},
-
-		style: {
-			...defaultStyle
-		},
-
-		...defaultSize,
-		marginLeft: 200,
-		marginRight: 60,
-
-		marks: [
-			Plot.barX(material_deprivation_data, {
-				x: 'Pensioners',
-				y: 'Region',
-				fill: 'Area',
-				sort: { y: 'x', reverse: true },
-
-				render: addMultipleEventHandlers([
-					{
-						markShape: 'rect',
-						type: 'click',
-						handler: (_, d) => console.log('Clicked on:', material_deprivation_data[d.index])
-					},
-					{
-						markShape: 'rect',
-						type: 'mouseenter',
-						handler: (_, d) => console.log('Cursor entered:', material_deprivation_data[d.index])
-					}
-				])
-			})
-		]
-	};
-
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
 
@@ -366,6 +323,35 @@
 		Selected point:
 		<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
 	</div>
+</Story>
+
+<Story name="With multiple event handlers">
+	<ObservablePlot
+		spec={{
+			...mbBarSpec,
+			marks: [
+				Plot.barX(material_deprivation_data, {
+					x: 'Pensioners',
+					y: 'Region',
+					fill: 'Area',
+					sort: { y: 'x', reverse: true },
+
+					render: addMultipleEventHandlers([
+						{
+							markShape: 'rect',
+							type: 'click',
+							handler: (_, d) => console.log('Clicked on:', material_deprivation_data[d.index])
+						},
+						{
+							markShape: 'rect',
+							type: 'mouseenter',
+							handler: (_, d) => console.log('Cursor entered:', material_deprivation_data[d.index])
+						}
+					])
+				})
+			]
+		}}
+	/>
 </Story>
 
 <!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
@@ -860,23 +846,6 @@
 		alt="Bar chart of levels of material deprivation amongst pensioners in UK regions. Bars show that material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK. For example Inner London is 20% compared to West Midlands 9%, and Northern Ireland 4%."
 		spec={{
 			...mbBarSpec
-		}}
-		footer={{
-			byline: 'GLA City Intelligence',
-			source: 'London Datastore',
-			note: 'Data for illustrative purpose only',
-			exportBtns: true
-		}}
-	/>
-</Story>
-
-<Story name="Examples / multiple interactions">
-	<ObservablePlot
-		title="Material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK"
-		subTitle="Percentage of pensioners in material deprivation by region (2020/21-2022/23)"
-		alt="Bar chart of levels of material deprivation amongst pensioners in UK regions. Bars show that material deprivation is consistently more prevalent among London's pensioners than elsewhere in the UK. For example Inner London is 20% compared to West Midlands 9%, and Northern Ireland 4%."
-		spec={{
-			...multipleInteractionsSpec
 		}}
 		footer={{
 			byline: 'GLA City Intelligence',
