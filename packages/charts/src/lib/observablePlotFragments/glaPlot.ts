@@ -43,7 +43,7 @@ export const glaPlot = (
 			...defaultYScale,
 			...options.yScale
 		},
-		marks: { ...marks }
+		marks
 	};
 
 	const facetedSpec = {
