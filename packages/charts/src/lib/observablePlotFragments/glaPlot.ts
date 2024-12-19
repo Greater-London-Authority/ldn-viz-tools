@@ -28,7 +28,7 @@ import type {
 	Tip,
 	Vector
 } from '@observablehq/plot';
-import { fontStack, getDefaultPlotStyles, type ThemeMode } from './observablePlotFragments';
+import { getDefaultPlotStyles, type ThemeMode } from './observablePlotFragments';
 
 interface PlotOptions {
 	size?: {};
