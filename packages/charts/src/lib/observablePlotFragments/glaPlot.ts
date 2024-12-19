@@ -36,7 +36,7 @@ export const glaPlot = (
 			...options.color
 		},
 		x: {
-			defaultXScale,
+			...defaultXScale,
 			...options.xScale
 		},
 		y: {
