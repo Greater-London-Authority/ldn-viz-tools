@@ -9,7 +9,6 @@
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
-	let map = null;
 </script>
 
 <Meta
@@ -41,14 +40,13 @@
 		</div>
 
 		<Map
-			whenMapLoads={(m) => (map = m)}
 			options={{
 				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
 			<MapControlGroup position="BottomLeft">
-				<MapControlFullscreen {map} />
+				<MapControlFullscreen />
 			</MapControlGroup>
 		</Map>
 	</MapApp>

@@ -13,7 +13,6 @@
 	 * The available data formats for the downloaded file.
 	 */
 	export let formats: ('CSV' | 'JSON')[] = ['CSV', 'JSON'];
-	let format = 'CSV';
 
 	/**
 	 * The data that will be encoded in the downloaded file (formatted as an array of objects).

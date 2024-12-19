@@ -1,5 +1,61 @@
+<script context="module">
+	import Map from './Map.svelte';
+
+	export const meta = {
+		title: 'Maps/Map',
+		component: Map,
+		parameters: { layout: 'fullscreen' },
+		argTypes: {
+			appendOSKeyToUrl: {
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(osKey: string) => string'
+					}
+				}
+			},
+			mapStore: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'Svelte store',
+						detail: 'writable<null | maplibre_gl.Map>'
+					}
+				}
+			},
+			mapCursorStore: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'Svelte store',
+						detail: 'writable<null | MapCursor>'
+					}
+				}
+			},
+			whenMapLoads: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(map: maplibre_gl.Map) => void'
+					}
+				}
+			},
+			whenMapUnloads: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(map: maplibre_gl.Map) => void'
+					}
+				}
+			}
+		}
+	};
+</script>
+
 <script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import * as darkStyle from '../themes/os_dark.json';
 	import * as darkGreyMutedStyle from '../themes/os_dark_grey_muted_buildings.json';
@@ -7,65 +63,11 @@
 	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import loadTestLayers from '../loadTestLayers';
-	import Map, { appendOSKeyToUrl } from './Map.svelte';
+	import { appendOSKeyToUrl } from './Map.svelte';
 	import PropertiesStory from './PropertiesStory.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
-
-<Meta
-	title="Maps/Map"
-	component={Map}
-	parameters={{
-		layout: 'full'
-	}}
-	argTypes={{
-		appendOSKeyToUrl: {
-			table: {
-				type: {
-					summary: 'function',
-					detail: '(osKey: string) => string'
-				}
-			}
-		},
-		mapStore: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'Svelte store',
-					detail: 'writable<null | maplibre_gl.Map>'
-				}
-			}
-		},
-		mapCursorStore: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'Svelte store',
-					detail: 'writable<null | MapCursor>'
-				}
-			}
-		},
-		whenMapLoads: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'function',
-					detail: '(map: maplibre_gl.Map) => void'
-				}
-			}
-		},
-		whenMapUnloads: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'function',
-					detail: '(map: maplibre_gl.Map) => void'
-				}
-			}
-		}
-	}}
-/>
 
 <Template let:args>
 	<div class="w-[100dvw] h-[100dvh]">

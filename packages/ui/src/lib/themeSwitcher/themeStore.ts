@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import { prefersDarkMode } from '../userPreference/mediaQueryStore';
+import { BROWSER } from 'esm-env';
 import { derived, writable, type Readable } from 'svelte/store';
+import { prefersDarkMode } from '../userPreference/mediaQueryStore';
 
 const getLocalStorage = () => {
-	if (browser) {
+	if (BROWSER) {
 		return globalThis.localStorage?.getItem('theme') || 'light';
 	}
 	return 'light';
@@ -11,7 +11,7 @@ const getLocalStorage = () => {
 
 export const userThemeSelectionStore = writable(getLocalStorage());
 
-export const currentThemeMode: Readable<'light' | 'dark'> = derived(
+export const currentThemeMode: Readable<string> = derived(
 	[userThemeSelectionStore, prefersDarkMode],
 	([$userThemeSelectionStore, $prefersDarkMode]) => {
 		if ($userThemeSelectionStore === 'system') {

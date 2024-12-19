@@ -123,7 +123,7 @@
 		<LogoByCiu class="w-80" />
 	</div>
 
-	<ImageDownloadButton htmlNode={htmlRef} htmlId="divToSave">
+	<ImageDownloadButton htmlNode={htmlRef}>
 		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
