@@ -88,12 +88,7 @@
 
 <script lang="ts">
 	let value = '';
-
 	const round = (x: string) => Math.round(+x * 100) / 100;
-
-	const randomId = () => {
-		tick().then(() => Date.now().toString());
-	};
 </script>
 
 <Template let:args>
