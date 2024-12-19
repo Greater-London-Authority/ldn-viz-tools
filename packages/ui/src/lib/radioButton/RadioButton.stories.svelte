@@ -33,6 +33,9 @@
 					type: { summary: 'string' }
 				}
 			}
+		},
+		args: {
+			label: "Foo",
 		}
 	};
 </script>
