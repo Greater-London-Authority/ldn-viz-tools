@@ -3,7 +3,7 @@ import type { AxisOptions } from '@observablehq/plot';
 
 export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for inter
 
-type ThemeMode = 'light' | 'dark';
+export type ThemeMode = 'light' | 'dark';
 
 export const getDefaultPlotStyles = (mode: ThemeMode = 'light') => ({
 	defaultStyle: defaultStyle(mode),
@@ -11,7 +11,10 @@ export const getDefaultPlotStyles = (mode: ThemeMode = 'light') => ({
 	defaultSizeFacet,
 	defaultColor,
 	defaultXScale,
-	defaultYScale,
+	defaultYScale
+});
+
+export const getDefaultMarkStyles = (mode: ThemeMode = 'light') => ({
 	defaultGridX: defaultGridX(mode),
 	defaultGridY: defaultGridY(mode),
 	defaultXAxis,
