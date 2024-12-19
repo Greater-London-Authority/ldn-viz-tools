@@ -24,6 +24,8 @@
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
+	import { addMultipleEventHandlers } from './ObservablePlotInner.svelte';
+
 	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
@@ -321,6 +323,35 @@
 		Selected point:
 		<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
 	</div>
+</Story>
+
+<Story name="With multiple event handlers">
+	<ObservablePlot
+		spec={{
+			...mbBarSpec,
+			marks: [
+				Plot.barX(material_deprivation_data, {
+					x: 'Pensioners',
+					y: 'Region',
+					fill: 'Area',
+					sort: { y: 'x', reverse: true },
+
+					render: addMultipleEventHandlers([
+						{
+							markShape: 'rect',
+							type: 'click',
+							handler: (_, d) => console.log('Clicked on:', material_deprivation_data[d.index])
+						},
+						{
+							markShape: 'rect',
+							type: 'mouseenter',
+							handler: (_, d) => console.log('Cursor entered:', material_deprivation_data[d.index])
+						}
+					])
+				})
+			]
+		}}
+	/>
 </Story>
 
 <!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
