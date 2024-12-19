@@ -54,7 +54,7 @@
 	/**
 	 * The file name to be used for the downloaded data or image file.
 	 */
-	export let filename: '';
+	export let filename = '';
 
 	/**
 	 * The Data passed to the data Download Button(s) in the footer
