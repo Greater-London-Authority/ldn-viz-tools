@@ -70,7 +70,7 @@ type Marks =
 export const glaPlot = (
 	_data: any,
 	mode: ThemeMode,
-	marks: Marks,
+	marks: any[],
 	options: PlotOptions = {},
 	isFaceted: boolean = false
 ) => {
