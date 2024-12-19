@@ -26,6 +26,7 @@
 
 	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
+		getDefaultMarkStyles,
 		getDefaultPlotStyles,
 		plotTheme,
 		preprocessOptions
@@ -45,23 +46,21 @@
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
 
+	$: ({ defaultColor, defaultSize, defaultStyle, defaultXScale, defaultYScale } =
+		getDefaultPlotStyles($currentThemeMode));
+
 	$: ({
 		defaultArea,
-		defaultColor,
 		defaultDot,
 		defaultGridX,
 		defaultGridY,
-		defaultSize,
-		defaultStyle,
 		defaultTip,
 		defaultLine,
 		defaultXAxis,
-		defaultXScale,
 		defaultYAxis,
-		defaultYScale,
 		defaultRule,
 		defaultAnnotationText
-	} = getDefaultPlotStyles($currentThemeMode));
+	} = getDefaultMarkStyles($currentThemeMode));
 
 	$: spec = {
 		style: {
