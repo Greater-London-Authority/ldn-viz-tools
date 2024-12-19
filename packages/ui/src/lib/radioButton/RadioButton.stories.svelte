@@ -35,7 +35,7 @@
 			}
 		},
 		args: {
-			label: "Foo",
+			label: 'Foo'
 		}
 	};
 </script>
