@@ -6,7 +6,11 @@
 		component: RadioButton,
 		argTypes: {
 			color: {
-				control: { type: 'color' }
+				control: { type: 'color' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
 			},
 			label: {
 				control: { type: 'text' },
@@ -29,9 +33,6 @@
 					type: { summary: 'string' }
 				}
 			}
-		},
-		args: {
-			label: 'Label for Radio'
 		}
 	};
 </script>

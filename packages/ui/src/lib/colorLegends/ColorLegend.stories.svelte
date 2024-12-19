@@ -4,7 +4,12 @@
 
 	export const meta = {
 		title: 'Ui/Legends/ColorLegend',
-		component: ColorLegend
+		component: ColorLegend,
+		argTypes: {
+			color: {
+				control: false
+			}
+		}
 	};
 </script>
 
@@ -22,7 +27,9 @@
 		scaleSequentialQuantile,
 		scaleSequentialSqrt,
 		scaleSqrt,
-		scaleThreshold
+		scaleThreshold,
+		type ScaleSequentialQuantile,
+		type ScaleThreshold
 	} from 'd3-scale';
 
 	import {
@@ -47,8 +54,8 @@
 		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']
 	);
 
-	let scale;
-	let randomThresholdScale;
+	let scale: ScaleSequentialQuantile<string, never>;
+	let randomThresholdScale: ScaleThreshold<number, string, never>;
 </script>
 
 <Template let:args>
@@ -59,7 +66,7 @@
 	/>
 </Template>
 
-<Story name="Default" />
+<Story name="Default" source />
 
 <Story name="Sequential color scale">
 	<div>

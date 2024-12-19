@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Page } from '@sveltejs/kit';
 	/**
 	 * `<NavLink>` represents a single link.
 	 * The background color changes to indicate whether the target of the link is the current page.
@@ -18,7 +19,7 @@
 	/**
 	 * The current page store (typically imported from `$app/stores` then passed as prop).
 	 */
-	export let page: Readable<{ url?: { pathname: string } }>;
+	export let page: Readable<Page> | undefined = undefined;
 
 	/**
 	 * The target of the link.
@@ -34,10 +35,10 @@
 		if (!page) {
 			// no page store provided - we don't know whether or not we're on the page this links points at
 			classes = nonHighlightedClasses;
-		} else if (!target && $page.route?.id === '/') {
+		} else if (!target && $page!.route?.id === '/') {
 			// we're currently on the homepage, and that is what this link points at
 			classes = highlightedClasses;
-		} else if (!!target && ($page.url?.pathname || '').endsWith(target)) {
+		} else if (!!target && ($page!.url?.pathname || '').endsWith(target)) {
 			// we're currently on the page that this link points at
 			classes = highlightedClasses;
 		} else {

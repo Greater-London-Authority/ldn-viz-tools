@@ -1,9 +1,9 @@
 <script>
+	import { DEV } from 'esm-env';
 	import { onMount } from 'svelte';
 
 	export let classes = '';
 
-	const dev = import.meta.env.DEV;
 	let noscript = true;
 
 	onMount(() => {
@@ -21,7 +21,7 @@
 			<section
 				class="bg-color-container-level-1 w-full h-full flex justify-center items-center text-center ldn-viz-map-app-noscript-animation"
 			>
-				{#if dev}
+				{#if DEV}
 					<p>
 						<b>Dev mode:</b> Please wait as the initial load is the longest. Reloading may occur due
 						to dependency optimisation. Please ensure JavaScript is enabled.

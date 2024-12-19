@@ -6,7 +6,7 @@
 			type?: string;
 			disabled?: boolean;
 		}
-	) => string;
+	) => string | number;
 
 	export type InputMode =
 		| 'none'

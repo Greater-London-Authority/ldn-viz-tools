@@ -816,11 +816,8 @@
 		spec={{
 			...mbBarSpec
 		}}
-		footer={{
-			byline: 'GLA City Intelligence',
-			source: 'London Datastore',
-			note: 'Data for illustrative purpose only',
-			exportBtns: true
-		}}
+		byline="GLA City Intelligence"
+		source="London Datastore"
+		note="Data for illustrative purpose only"
 	/>
 </Story>

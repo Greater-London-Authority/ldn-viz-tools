@@ -33,7 +33,7 @@
 	/**
 	 * Name of group to which radio button is assigned.
 	 */
-	export let name: string | undefined;
+	export let name: string | undefined = undefined;
 
 	/**
 	 * Boolean indicating whether the radio button is *disabled*.

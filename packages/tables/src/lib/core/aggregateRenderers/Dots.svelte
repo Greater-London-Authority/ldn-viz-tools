@@ -24,7 +24,6 @@
 	const marginLeft = 0;
 
 	const radius = 1;
-	const padding = 1.5;
 
 	const dodge = (values: number[]) => {
 		return values.map((v) => ({
