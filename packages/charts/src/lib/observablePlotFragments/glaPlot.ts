@@ -13,7 +13,7 @@ interface PlotOptions {
 export const glaPlot = (
 	mode: ThemeMode,
 	marks: Mark,
-	options: PlotOptions,
+	options: PlotOptions = {},
 	isFaceted: boolean = false
 ) => {
 	const {
