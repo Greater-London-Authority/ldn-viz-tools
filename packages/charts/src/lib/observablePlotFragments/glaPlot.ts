@@ -66,7 +66,9 @@ type Marks =
 	| Tip
 	| Vector;
 
-// function that will take a marks prop and return a spec to be plotted
+// Function that handles default styles and takes data, mode and marks props.
+// It also optionally takes an options object which can handle overriding default styling
+// where needed, as well as a boolean to change styling for faceted charts
 export const glaPlot = (
 	_data: any,
 	mode: ThemeMode,
