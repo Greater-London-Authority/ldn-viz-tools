@@ -64,7 +64,7 @@
 		}
 	});
 
-	const handle = (event: { detail: number }) => {
+	const handle = (event: UIEvent) => {
 		if (!$mapStore || !mode) {
 			return;
 		}
