@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.27.1",
+    "esbuild": "^0.24.0",
     "html2canvas": "^1.4.1"
   },
   "devDependencies": {
