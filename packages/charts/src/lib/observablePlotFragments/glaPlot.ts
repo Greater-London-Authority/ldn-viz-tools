@@ -190,7 +190,10 @@ export const Plot = {
 	autoSpec: (data?: Data, options?: AutoOptions) => ObservablePlot.autoSpec(data, { ...options }),
 	barX: (data?: Data, options?: BarXOptions) => ObservablePlot.barX(data, { ...options }),
 	barY: (data?: Data, options?: BarYOptions) => ObservablePlot.barY(data, { ...options }),
-	pointer: (options?: PointerOptions) => ObservablePlot.pointer({ ...options }),
-	pointerX: (options?: PointerOptions) => ObservablePlot.pointerX({ ...options }),
-	pointerY: (options?: PointerOptions) => ObservablePlot.pointerY({ ...options })
+	pointer: <T>(options?: T & PointerOptions) => ObservablePlot.pointer({ ...options }),
+	pointerX: <T>(options?: T & PointerOptions) => ObservablePlot.pointerX({ ...options }),
+	pointerY: <T>(options?: T & PointerOptions) => ObservablePlot.pointerY({ ...options }),
+	text: (data?: Data, options?: TextOptions) => ObservablePlot.text(data, { ...options }),
+	textX: (data?: Data, options?: TextOptions) => ObservablePlot.textX(data, { ...options }),
+	textY: (data?: Data, options?: TextOptions) => ObservablePlot.textY(data, { ...options })
 };
