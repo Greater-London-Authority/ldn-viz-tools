@@ -53,9 +53,6 @@
 		"@storybook/manager-api": "^8.0.0",
 		"@storybook/theming": "^8.0.0"
 	},
-	"overrides": {
-		"esbuild": "0.24.0"
-	},
 	"type": "module",
 	"svelte": "./src/lib/index.ts",
 	"types": "./src/lib/index.d.ts",
