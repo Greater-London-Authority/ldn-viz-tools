@@ -46,8 +46,8 @@ const config = {
         },
         '.form-checkbox, .form-radio': {
           'border-width': '2px',
-          width: '1.25rem',
-          height: '1.25rem',
+          width: '1.25em',
+          height: '1.25em',
           color: ldnColors['color-input-background-active'],
           '&:hover': {
             'border-color': ldnColors['color-input-border-hover']
