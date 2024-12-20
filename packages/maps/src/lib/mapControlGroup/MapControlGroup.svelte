@@ -50,5 +50,6 @@
 </script>
 
 <div class="absolute {positionClass} z-10 flex flex-col space-y-2 pointer-events-none {classes}">
+	<!-- Group content, usually map control buttons. -->
 	<slot />
 </div>
