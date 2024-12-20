@@ -127,22 +127,24 @@ const {
 
 // Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
 export const Plot = {
-	gridX: (data?: Data, options?: GridXOptions) =>
-		data
-			? ObservablePlot.gridX(data, { ...defaultGridX, ...options })
-			: ObservablePlot.gridX({ ...defaultGridX, ...options }),
-	gridY: (data?: Data, options?: GridYOptions) =>
-		!data
-			? ObservablePlot.gridY({ ...defaultGridY, ...options })
-			: ObservablePlot.gridY(data, { ...defaultGridY, ...options }),
-	axisX: (data?: Data, options?: AxisXOptions) =>
-		data
-			? ObservablePlot.axisX(data, { ...defaultXAxis, ...options })
-			: ObservablePlot.axisX({ ...defaultXAxis, ...options }),
-	axisY: (data?: Data, options?: AxisYOptions) =>
-		data
-			? ObservablePlot.axisY(data, { ...defaultYAxis, ...options })
-			: ObservablePlot.axisY(data, { ...defaultYAxis, ...options }),
+	gridX: (...args: [data?: Data, options?: GridXOptions] | [options?: GridXOptions]) => {
+		args.length > 1
+			? ObservablePlot.gridX(args[0] as Data, { ...defaultGridX, ...args[1] })
+			: ObservablePlot.gridX({ ...defaultGridX, ...args[0] });
+	},
+	gridY: (...args: [data?: Data, options?: GridYOptions] | [options?: GridYOptions]) => {
+		args.length > 1
+			? ObservablePlot.gridY(args[0] as Data, { ...defaultGridY, ...args[1] })
+			: ObservablePlot.gridY({ ...defaultGridY, ...args[0] });
+	},
+	axisX: (...args: [data?: Data, options?: AxisXOptions] | [options?: AxisXOptions]) =>
+		args.length > 1
+			? ObservablePlot.axisX(args[0] as Data, { ...defaultXAxis, ...args[1] })
+			: ObservablePlot.axisX({ ...defaultXAxis, ...args[1] }),
+	axisY: (...args: [data?: Data, options?: AxisYOptions] | [options?: AxisYOptions]) =>
+		args.length > 1
+			? ObservablePlot.axisY(args[0] as Data, { ...defaultYAxis, ...args[1] })
+			: ObservablePlot.axisY({ ...defaultYAxis, ...args[1] }),
 	line: (data?: Data, options?: LineOptions) =>
 		ObservablePlot.line(data, { ...defaultLine, ...options }),
 	lineX: (data?: Data, options?: LineXOptions) =>
