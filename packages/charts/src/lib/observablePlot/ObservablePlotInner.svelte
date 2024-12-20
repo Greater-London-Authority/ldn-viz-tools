@@ -184,7 +184,9 @@
 	});
 
 	const updateDimensions = () => {
-		spec.width = width;
+		if (spec.width !== width) {
+			spec.width = width;
+		}
 	};
 
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
