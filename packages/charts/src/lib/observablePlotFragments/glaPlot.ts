@@ -37,33 +37,6 @@ interface PlotOptions {
 	xScale?: {};
 	yScale?: {};
 }
-// type Marks =
-// 	| Area
-// 	| Arrow
-// 	// | CompoundMark
-// 	| RuleX
-// 	| RuleY
-// 	| BarX
-// 	| BarY
-// 	| Cell
-// 	| Contour
-// 	| RenderableMark
-// 	| Density
-// 	| Difference
-// 	| Dot
-// 	| Frame
-// 	| Geo
-// 	| Hexgrid
-// 	| Image
-// 	| Line
-// 	| Link
-// 	| Raster
-// 	| Rect
-// 	| Text
-// 	| TickX
-// 	| TickY
-// 	| Tip
-// 	| Vector;
 
 // Function that handles default styles and takes data, mode and marks props.
 // It also optionally takes an options object which can handle overriding default styling
