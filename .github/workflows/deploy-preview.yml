@@ -2,7 +2,7 @@ name: Deploy branch preview of storybook site to Pages
 
 on:
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,9 +15,6 @@ jobs:
         with:
           node-version: '20'
           cache: npm
-
-      - name: Install dependencies
-        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
 
       # if we don't do this, imports between packages will fail
       # (e.g., import of Button from @ldn-viz/ui into @ldn-viz/charts)
