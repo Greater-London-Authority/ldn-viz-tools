@@ -26,7 +26,6 @@
 
 	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
-		getDefaultMarkStyles,
 		getDefaultPlotStyles,
 		plotTheme,
 		preprocessOptions
@@ -39,18 +38,18 @@
 		educationLabelOffsets,
 		lineChartData,
 		material_deprivation_data,
-		penguins
+		penguins,
+		visitors
 	} from '../../data/demoData';
 
+	import * as d3 from 'd3';
 	import { glaPlot } from '../observablePlotFragments/glaPlot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
 
-	$: ({ defaultColor, defaultSize, defaultStyle, defaultXScale, defaultYScale } =
-		getDefaultPlotStyles($currentThemeMode));
-
 	$: ({
+		defaultColor, defaultSize, defaultStyle, defaultXScale, defaultYScale,
 		defaultArea,
 		defaultDot,
 		defaultGridX,
@@ -61,7 +60,7 @@
 		defaultYAxis,
 		defaultRule,
 		defaultAnnotationText
-	} = getDefaultMarkStyles($currentThemeMode));
+	} = getDefaultPlotStyles($currentThemeMode));
 
 	$: spec = {
 		style: {
