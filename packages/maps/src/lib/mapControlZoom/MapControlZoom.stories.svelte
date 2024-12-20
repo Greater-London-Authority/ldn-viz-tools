@@ -28,7 +28,6 @@ They enable [zoomin](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#z
 [zoomout](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomout) by one zoom level per click.
 -->
 <Story name="Zoom Buttons">
-
 	<div class="w-[100dvw] h-[100dvh]">
 		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
