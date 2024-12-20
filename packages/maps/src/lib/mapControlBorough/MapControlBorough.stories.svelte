@@ -14,7 +14,6 @@
 	import { Template, Story } from '@storybook/addon-svelte-csf';
 
 	import * as os_light_vts from '../themes/os_light_vts.json';
-	import MapApp from '../map/MapApp.svelte';
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
@@ -32,7 +31,7 @@
 </Template>
 
 <Story name="Zooming to borough">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -46,5 +45,5 @@
 
 			<BoroughsContextLayer />
 		</Map>
-	</MapApp>
+	</div>
 </Story>
