@@ -8,6 +8,11 @@ import type {
 	AxisYOptions,
 	BarXOptions,
 	BarYOptions,
+	BollingerOptions,
+	BollingerXOptions,
+	BollingerYOptions,
+	BoxXOptions,
+	BoxYOptions,
 	Data,
 	DotOptions,
 	DotXOptions,
@@ -155,6 +160,13 @@ export const Plot = {
 			: ObservablePlot.axisY({ ...defaultYAxis, ...args[1] }),
 	barX: (data?: Data, options?: BarXOptions) => ObservablePlot.barX(data, { ...options }),
 	barY: (data?: Data, options?: BarYOptions) => ObservablePlot.barY(data, { ...options }),
+	bollinger: (options?: BollingerOptions) => ObservablePlot.bollinger({ ...options }),
+	bollingerX: (data?: Data, options?: BollingerXOptions) =>
+		ObservablePlot.bollingerX(data, { ...options }),
+	bollingerY: (data?: Data, options?: BollingerYOptions) =>
+		ObservablePlot.bollingerY(data, { ...options }),
+	boxX: (data?: Data, options?: BoxXOptions) => ObservablePlot.boxX(data, { ...options }),
+	boxY: (data?: Data, options?: BoxYOptions) => ObservablePlot.boxY(data, { ...options }),
 	dashedLine: (data?: Data, options?: LineOptions) => {
 		ObservablePlot.line(data, { ...defaultDashedLine, ...options });
 	},
