@@ -11,10 +11,7 @@ export const getDefaultPlotStyles = (mode: ThemeMode = 'light') => ({
 	defaultSizeFacet,
 	defaultColor,
 	defaultXScale,
-	defaultYScale
-});
-
-export const getDefaultMarkStyles = (mode: ThemeMode = 'light') => ({
+	defaultYScale,
 	defaultGridX: defaultGridX(mode),
 	defaultGridY: defaultGridY(mode),
 	defaultXAxis,
