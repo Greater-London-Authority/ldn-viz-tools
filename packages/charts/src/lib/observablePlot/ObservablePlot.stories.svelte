@@ -21,7 +21,6 @@
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
 
-	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
 	import { currentThemeMode, Select } from '@ldn-viz/ui';
@@ -43,13 +42,17 @@
 	} from '../../data/demoData';
 
 	import * as d3 from 'd3';
-	import { glaPlot } from '../observablePlotFragments/glaPlot';
+	import { glaPlot, Plot } from '../observablePlotFragments/glaPlot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
 
 	$: ({
-		defaultColor, defaultSize, defaultStyle, defaultXScale, defaultYScale,
+		defaultColor,
+		defaultSize,
+		defaultStyle,
+		defaultXScale,
+		defaultYScale,
 		defaultArea,
 		defaultDot,
 		defaultGridX,
@@ -176,6 +179,35 @@
 	];
 
 	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
+
+	$: visitorTestMarks = [
+		Plot.gridY({ ...defaultGridY }),
+		Plot.areaY(visitors, {
+			x: (d) => d3.utcDay(d.date),
+			sort: 'date',
+			// interval: 'month',
+			y: 'visitor_count',
+			fill: 'subregion',
+			channels: {
+				'Visitor count': (d) => d['visitor_count']?.toFixed(2)
+			},
+			tip: {
+				...defaultTip,
+				format: {
+					y: false,
+					z: false
+				}
+			},
+			order: (d: any) => d.subregion !== 'London'
+		}),
+		Plot.axisY({
+			...defaultYAxis,
+			label: 'count',
+			tickFormat: 's'
+		}),
+		Plot.ruleY([0], { ...defaultRule })
+	];
+	$: visitorTestSpec = glaPlot(visitors, $currentThemeMode, visitorTestMarks);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -846,4 +878,8 @@
 		subTitle="A scatterplot of depth against length"
 		spec={{ ...globalDefaultsSpec }}
 	/>
+</Story>
+
+<Story name="Examples / stacked area using global defaults">
+	<ObservablePlot title="Visitors" subTitle="A stacked area chart" spec={{ ...visitorTestSpec }} />
 </Story>
