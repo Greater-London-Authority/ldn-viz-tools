@@ -132,6 +132,7 @@ const {
 
 // Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
 export const Plot = {
+	...ObservablePlot,
 	annotationText: (data?: Data, options?: TextOptions) => {
 		ObservablePlot.text(data, { ...defaultAnnotationText, ...options });
 	},
@@ -147,9 +148,6 @@ export const Plot = {
 	areaY: (data?: Data, options?: AreaYOptions) => {
 		ObservablePlot.areaY(data, { ...defaultArea, ...options });
 	},
-	arrow: (data?: Data, options?: ArrowOptions) => ObservablePlot.arrow(data, { ...options }),
-	auto: (data?: Data, options?: AutoOptions) => ObservablePlot.auto(data, { ...options }),
-	autoSpec: (data?: Data, options?: AutoOptions) => ObservablePlot.autoSpec(data, { ...options }),
 	axisX: (...args: [data?: Data, options?: AxisXOptions] | [options?: AxisXOptions]) =>
 		args.length > 1
 			? ObservablePlot.axisX(args[0] as Data, { ...defaultXAxis, ...args[1] })
@@ -158,15 +156,6 @@ export const Plot = {
 		args.length > 1
 			? ObservablePlot.axisY(args[0] as Data, { ...defaultYAxis, ...args[1] })
 			: ObservablePlot.axisY({ ...defaultYAxis, ...args[1] }),
-	barX: (data?: Data, options?: BarXOptions) => ObservablePlot.barX(data, { ...options }),
-	barY: (data?: Data, options?: BarYOptions) => ObservablePlot.barY(data, { ...options }),
-	bollinger: (options?: BollingerOptions) => ObservablePlot.bollinger({ ...options }),
-	bollingerX: (data?: Data, options?: BollingerXOptions) =>
-		ObservablePlot.bollingerX(data, { ...options }),
-	bollingerY: (data?: Data, options?: BollingerYOptions) =>
-		ObservablePlot.bollingerY(data, { ...options }),
-	boxX: (data?: Data, options?: BoxXOptions) => ObservablePlot.boxX(data, { ...options }),
-	boxY: (data?: Data, options?: BoxYOptions) => ObservablePlot.boxY(data, { ...options }),
 	dashedLine: (data?: Data, options?: LineOptions) => {
 		ObservablePlot.line(data, { ...defaultDashedLine, ...options });
 	},
@@ -207,9 +196,6 @@ export const Plot = {
 	point: (data?: Data, options?: DotOptions) => {
 		ObservablePlot.dot(data, { ...defaultDot, ...options });
 	},
-	pointer: <T>(options?: T & PointerOptions) => ObservablePlot.pointer({ ...options }),
-	pointerX: <T>(options?: T & PointerOptions) => ObservablePlot.pointerX({ ...options }),
-	pointerY: <T>(options?: T & PointerOptions) => ObservablePlot.pointerY({ ...options }),
 	pointX: (data?: Data, options?: DotXOptions) => {
 		ObservablePlot.dotX(data, { ...defaultDot, ...options });
 	},
@@ -222,9 +208,6 @@ export const Plot = {
 	ruleY: (data?: Data, options?: RuleXOptions) => {
 		ObservablePlot.ruleY(data, { ...defaultRule, ...options });
 	},
-	text: (data?: Data, options?: TextOptions) => ObservablePlot.text(data, { ...options }),
-	textX: (data?: Data, options?: TextOptions) => ObservablePlot.textX(data, { ...options }),
-	textY: (data?: Data, options?: TextOptions) => ObservablePlot.textY(data, { ...options }),
 	tip: (data?: Data, options?: TipOptions) => {
 		ObservablePlot.tip(data, { ...defaultTip, ...options });
 	}
