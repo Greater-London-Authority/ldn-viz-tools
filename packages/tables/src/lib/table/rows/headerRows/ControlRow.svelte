@@ -21,7 +21,7 @@
 				on:click={() => table.openOrCloseLevel(i)}
 			>
 				<Icon
-					src={table.expansionState[i] ?? true ? ChevronDown : ChevronRight}
+					src={(table.expansionState[i] ?? true) ? ChevronDown : ChevronRight}
 					theme="solid"
 					class="w-[18px] h-[18px] ml-0.5"
 					aria-hidden="true"
