@@ -26,6 +26,9 @@
 					category: 'properties'
 				}
 			}
+		},
+		args: {
+			content: 'Thing To Copy'
 		}
 	};
 </script>

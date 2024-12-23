@@ -9,6 +9,7 @@
 	import type {
 		AddEventHandlerFunction,
 		AddEventHandlerInnerFunction,
+		EventHandler,
 		Position,
 		RegisterTooltipFunction
 	} from './types.ts';
@@ -60,6 +61,52 @@
 
 			return el ?? null;
 		};
+
+	export const addMultipleEventHandlers = (events: EventHandler[]) => {
+		return (index, scales, values, dimensions, context, next) => {
+			const el = next && next(index, scales, values, dimensions, context);
+
+			for (const event of events) {
+				const marks = el?.querySelectorAll(event.markShape ?? 'rect') || [];
+
+				if (event.type === 'tooltip') {
+					const mouseEnterHandler = (ev: MouseEvent, d: any) => {
+						event.store.set({
+							...d,
+							clientX: ev.clientX,
+							clientY: ev.clientY,
+							pageX: ev.pageX,
+							pageY: ev.pageY,
+							layerX: ev.layerX,
+							layerY: ev.layerY
+						}); // can't use the $store syntax here
+					};
+					addEventHandlerInner('mouseenter', mouseEnterHandler, marks, values, index);
+					const mouseMoveHandler = (ev: MouseEvent, d: any) => {
+						event.store.set({
+							...d,
+							clientX: ev.clientX,
+							clientY: ev.clientY,
+							pageX: ev.pageX,
+							pageY: ev.pageY,
+							layerX: ev.layerX,
+							layerY: ev.layerY
+						}); // can't use the $store syntax here
+					};
+					addEventHandlerInner('mousemove', mouseMoveHandler, marks, values, index);
+
+					const mouseLeaveHandler = () => {
+						event.store.set(undefined);
+					};
+					addEventHandlerInner('mouseout', mouseLeaveHandler, marks, values, index);
+				} else {
+					addEventHandlerInner(event.type, event.handler, marks, values, index);
+				}
+			}
+
+			return el ?? null;
+		};
+	};
 
 	const addEventHandlerInner: AddEventHandlerInnerFunction = (
 		eventName,
@@ -137,7 +184,9 @@
 	});
 
 	const updateDimensions = () => {
-		spec.width = width;
+		if (spec.width !== width) {
+			spec.width = width;
+		}
 	};
 
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>

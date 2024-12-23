@@ -76,12 +76,21 @@
 	*/
 	// bpProp = breakpoint prop - better name?
 	$: bpProp = getSetting(sidebarPlacement, innerWidth);
-	$: aoProp = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
-	$: $isAlwaysOpen = aoProp;
+	$isOpen = startOpen;
+
+	const respondToWidthChange = (innerWidth) => {
+		$isAlwaysOpen = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
+
+		// if "alwaysOpen" at this size, then we are open at this size
+		if ($isAlwaysOpen === 'true') {
+			$isOpen = true;
+		}
+	};
+
+	$: respondToWidthChange(innerWidth);
+
 	$: $sidebarPlacementStore = bpProp;
-
-	$: $isOpen = $isAlwaysOpen === 'true';
 
 	setContext('sidebarAlwaysOpen', isAlwaysOpen);
 	setContext('sidebarIsOpen', isOpen);

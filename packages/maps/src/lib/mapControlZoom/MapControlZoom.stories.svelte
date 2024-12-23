@@ -2,7 +2,6 @@
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import MapApp from '../map/MapApp.svelte';
 	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
@@ -23,8 +22,13 @@
 	<MapControlZoom {...args} />
 </Template>
 
+<!--
+The zoom buttons are usually positioned in the top left corner under the location search.
+They enable [zoomin](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomin) and
+[zoomout](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomout) by one zoom level per click.
+-->
 <Story name="Zoom Buttons">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
 				The zoom buttons are usually positioned in the top left corner under the location search.
@@ -54,5 +58,5 @@
 				<MapControlZoom />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
