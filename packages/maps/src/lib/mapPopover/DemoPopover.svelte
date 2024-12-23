@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { MapMarkerStyledContainer } from '@ldn-viz/maps';
+	import MapMarkerStyledContainer from '../mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
 	const feature = getContext('mapMarkerFeature');
 </script>
 
-<MapMarkerStyledContainer class="z-50">
+<MapMarkerStyledContainer>
 	<div>
 		<h1>{feature.properties.site_name}</h1>
 	</div>
