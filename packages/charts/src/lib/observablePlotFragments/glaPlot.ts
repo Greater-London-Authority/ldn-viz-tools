@@ -107,19 +107,19 @@ const {
 export const Plot = {
 	...ObservablePlot,
 	annotationText: (data?: Data, options?: TextOptions) => {
-		ObservablePlot.text(data, { ...defaultAnnotationText, ...options });
+		return ObservablePlot.text(data, { ...defaultAnnotationText, ...options });
 	},
 	annotationTip: (data?: Data, options?: TipOptions) => {
-		ObservablePlot.tip(data, { ...defaultAnnotationTip, ...options });
+		return ObservablePlot.tip(data, { ...defaultAnnotationTip, ...options });
 	},
 	area: (data?: Data, options?: AreaOptions) => {
-		ObservablePlot.area(data, { ...defaultArea, ...options });
+		return ObservablePlot.area(data, { ...defaultArea, ...options });
 	},
 	areaX: (data?: Data, options?: AreaXOptions) => {
-		ObservablePlot.areaX(data, { ...defaultArea, ...options });
+		return ObservablePlot.areaX(data, { ...defaultArea, ...options });
 	},
 	areaY: (data?: Data, options?: AreaYOptions) => {
-		ObservablePlot.areaY(data, { ...defaultArea, ...options });
+		return ObservablePlot.areaY(data, { ...defaultArea, ...options });
 	},
 	arrow: (data?: Data, options?: ArrowOptions) => ObservablePlot.arrow(data, { ...options }),
 	auto: (data?: Data, options?: AutoOptions) => ObservablePlot.auto(data, { ...options }),
@@ -142,22 +142,22 @@ export const Plot = {
 	boxX: (data?: Data, options?: BoxXOptions) => ObservablePlot.boxX(data, { ...options }),
 	boxY: (data?: Data, options?: BoxYOptions) => ObservablePlot.boxY(data, { ...options }),
 	dashedLine: (data?: Data, options?: LineOptions) => {
-		ObservablePlot.line(data, { ...defaultDashedLine, ...options });
+		return ObservablePlot.line(data, { ...defaultDashedLine, ...options });
 	},
 	dashedLineX: (data?: Data, options?: LineXOptions) => {
-		ObservablePlot.lineX(data, { ...defaultDashedLine, ...options });
+		return ObservablePlot.lineX(data, { ...defaultDashedLine, ...options });
 	},
 	dashedLineY: (data?: Data, options?: LineYOptions) => {
-		ObservablePlot.lineY(data, { ...defaultDashedLine, ...options });
+		return ObservablePlot.lineY(data, { ...defaultDashedLine, ...options });
 	},
 	dot: (data?: Data, options?: DotOptions) => {
-		ObservablePlot.dot(data, { ...defaultDot, ...options });
+		return ObservablePlot.dot(data, { ...defaultDot, ...options });
 	},
 	dotX: (data?: Data, options?: DotXOptions) => {
-		ObservablePlot.dotX(data, { ...defaultDot, ...options });
+		return ObservablePlot.dotX(data, { ...defaultDot, ...options });
 	},
 	dotY: (data?: Data, options?: DotYOptions) => {
-		ObservablePlot.dotY(data, { ...defaultDot, ...options });
+		return ObservablePlot.dotY(data, { ...defaultDot, ...options });
 	},
 	gridX: (...args: [data?: Data, options?: GridXOptions] | [options?: GridXOptions]) => {
 		args.length > 1
@@ -170,36 +170,36 @@ export const Plot = {
 			: ObservablePlot.gridY({ ...defaultGridY, ...args[0] });
 	},
 	line: (data?: Data, options?: LineOptions) => {
-		ObservablePlot.line(data, { ...defaultLine, ...options });
+		return ObservablePlot.line(data, { ...defaultLine, ...options });
 	},
 	lineX: (data?: Data, options?: LineXOptions) => {
-		ObservablePlot.lineX(data, { ...defaultLine, ...options });
+		return ObservablePlot.lineX(data, { ...defaultLine, ...options });
 	},
 	lineY: (data?: Data, options?: LineYOptions) => {
-		ObservablePlot.lineY(data, { ...defaultLine, ...options });
+		return ObservablePlot.lineY(data, { ...defaultLine, ...options });
 	},
 	point: (data?: Data, options?: DotOptions) => {
-		ObservablePlot.dot(data, { ...defaultDot, ...options });
+		return ObservablePlot.dot(data, { ...defaultDot, ...options });
 	},
 	pointer: <T>(options?: T & PointerOptions) => ObservablePlot.pointer({ ...options }),
 	pointerX: <T>(options?: T & PointerOptions) => ObservablePlot.pointerX({ ...options }),
 	pointerY: <T>(options?: T & PointerOptions) => ObservablePlot.pointerY({ ...options }),
 	pointX: (data?: Data, options?: DotXOptions) => {
-		ObservablePlot.dotX(data, { ...defaultDot, ...options });
+		return ObservablePlot.dotX(data, { ...defaultDot, ...options });
 	},
 	pointY: (data?: Data, options?: DotYOptions) => {
-		ObservablePlot.dotY(data, { ...defaultDot, ...options });
+		return ObservablePlot.dotY(data, { ...defaultDot, ...options });
 	},
 	ruleX: (data?: Data, options?: RuleYOptions) => {
-		ObservablePlot.ruleX(data, { ...defaultRule, ...options });
+		return ObservablePlot.ruleX(data, { ...defaultRule, ...options });
 	},
 	ruleY: (data?: Data, options?: RuleXOptions) => {
-		ObservablePlot.ruleY(data, { ...defaultRule, ...options });
+		return ObservablePlot.ruleY(data, { ...defaultRule, ...options });
 	},
 	text: (data?: Data, options?: TextOptions) => ObservablePlot.text(data, { ...options }),
 	textX: (data?: Data, options?: TextOptions) => ObservablePlot.textX(data, { ...options }),
 	textY: (data?: Data, options?: TextOptions) => ObservablePlot.textY(data, { ...options }),
 	tip: (data?: Data, options?: TipOptions) => {
-		ObservablePlot.tip(data, { ...defaultTip, ...options });
+		return ObservablePlot.tip(data, { ...defaultTip, ...options });
 	}
 };
