@@ -15,7 +15,7 @@
 	 * @component
 	 */
 
-	import { getAllContexts, onDestroy, onMount, tick } from 'svelte';
+	import { getAllContexts, onDestroy, onMount } from 'svelte';
 	import maplibre_gl from 'maplibre-gl';
 
 	import { centroid } from '@turf/centroid';
