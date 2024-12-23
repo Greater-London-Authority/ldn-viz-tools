@@ -914,7 +914,7 @@
 		spec={{ ...visitorTestSpec }}
 		data={visitorsData}
 	>
-		<div slot="controls" class="space-y-2 mb-4">
+		<div slot="controls" class="space-y-4 mb-8">
 			<div class="w-64">
 				<Select
 					items={visitors}
