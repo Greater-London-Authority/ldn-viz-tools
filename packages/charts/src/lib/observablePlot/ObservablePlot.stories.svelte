@@ -201,6 +201,7 @@
 			label: 'month'
 		}
 	};
+
 	$: visitorTestMarks = [
 		Plot.gridY({ ...defaultGridY }),
 		Plot.areaY(visitors, {
@@ -223,12 +224,12 @@
 		}),
 		Plot.axisY({
 			...defaultYAxis,
-			label: 'count',
-			tickFormat: 's'
+			label: 'count'
 		}),
 		Plot.ruleY([0], { ...defaultRule })
 	];
-	$: visitorTestSpec = glaPlot(visitors, $currentThemeMode, visitorTestMarks);
+
+	$: visitorTestSpec = glaPlot(visitors, $currentThemeMode, visitorTestMarks, visitorTestOptions);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -902,5 +903,10 @@
 </Story>
 
 <Story name="Examples / stacked area using global defaults">
-	<ObservablePlot title="Visitors" subTitle="A stacked area chart" spec={{ ...visitorTestSpec }} />
+	<ObservablePlot
+		title="Visitors"
+		subTitle="A stacked area chart"
+		spec={{ ...visitorTestSpec }}
+		data={visitors}
+	/>
 </Story>
