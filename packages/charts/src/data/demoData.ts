@@ -1,3 +1,7 @@
+import { plotTheme } from '@ldn-viz/charts';
+import { currentThemeMode } from '@ldn-viz/ui';
+import { get } from 'svelte/store';
+
 export const areaPlotData = [
 	{ Year: 2010, Percent: 0.41 },
 	{ Year: 2011, Percent: 0.42 },
@@ -979,7 +983,23 @@ export const penguins = [
 
 /*********************************************************/
 
+export const visitorColors = [
+	plotTheme(get(currentThemeMode)).color.data.categorical.blue,
+	plotTheme(get(currentThemeMode)).color.data.categorical.green,
+	plotTheme(get(currentThemeMode)).color.data.categorical.pink,
+	plotTheme(get(currentThemeMode)).color.data.categorical.darkpink
+];
+
+export const visitorTypes = ['England & Wales', 'Home counties', 'London', 'International'];
+
 export const visitors = [
+	{ label: 'England & Wales', value: 'England & Wales' },
+	{ label: 'Home counties', value: 'Home counties' },
+	{ label: 'London', value: 'London' },
+	{ label: 'International', value: 'International' }
+];
+
+export const visitorsData = [
 	{
 		area_name: 'Acton Lane, South Acton',
 		area_id: 305,
