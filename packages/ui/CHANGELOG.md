@@ -1,5 +1,21 @@
 # ldn-viz-tools-ui
 
+## 15.1.0
+
+### Minor Changes
+
+- 1c134d6: ADDED: add `Callout` component
+- a3726bf: FIXED: allow `value` of an option in the `Select` component to be an empty string.
+- 4e4f7c5: FIXED: increase z-index of popover controls in `LayerControl` component so that they do not open behind sidebars
+- 0313649: ADDED: add `addMultipleEventHandlers` function for registering multiple event handlers to the same Observable Plot mark(s)
+- 09fa609: FIXED: avoid unnecessary re-renders of the plot within `ObservablePlotInner`
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- e397e35: FIXED: fix spacing between `RadioButton`s and `Checkbox`es when inside a `SidebarSection`
+- 68780ea: FIXED: fix bug that caused `AppShell` to always acts as if the `startOpen` prop was `false`
+
 ## 15.0.0
 
 ### Major Changes
