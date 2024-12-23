@@ -31,6 +31,13 @@ import type {
 import * as ObservablePlot from '@observablehq/plot';
 import { getDefaultPlotStyles, type ThemeMode } from './observablePlotFragments';
 
+interface PlotOptions {
+	size?: {};
+	color?: {};
+	xScale?: {};
+	yScale?: {};
+}
+
 // Function that handles default styles and takes data, mode and marks props.
 // It also optionally takes an options object which can handle overriding default styling
 // where needed, as well as a boolean to change size for faceted charts
@@ -38,7 +45,7 @@ export const glaPlot = (
 	_data: any,
 	mode: ThemeMode,
 	marks: any[],
-	options = {},
+	options: PlotOptions = {},
 	isFaceted: boolean = false
 ) => {
 	const {
@@ -56,13 +63,16 @@ export const glaPlot = (
 		},
 		...defaultSize,
 		color: {
-			...defaultColor
+			...defaultColor,
+			...options.color
 		},
 		x: {
-			...defaultXScale
+			...defaultXScale,
+			...options.xScale
 		},
 		y: {
-			...defaultYScale
+			...defaultYScale,
+			...options.yScale
 		},
 		...options,
 		marks
