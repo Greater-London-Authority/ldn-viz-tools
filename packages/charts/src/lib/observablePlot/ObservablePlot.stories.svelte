@@ -23,7 +23,7 @@
 
 	import { format } from 'd3-format';
 
-	import { currentThemeMode, Select, Switch } from '@ldn-viz/ui';
+	import { currentThemeMode, Input, Select, Switch } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
 		plotTheme,
@@ -33,9 +33,12 @@
 	import {
 		areaPlotData,
 		areaPlotPointsToLabel,
+		boroughsGeoFromTopo,
 		education_data,
 		educationLabelOffsets,
+		hexbinData,
 		lineChartData,
+		mapVisitorMap,
 		material_deprivation_data,
 		penguins,
 		visitorColors,
@@ -188,9 +191,7 @@
 	$: selectedViewName = selectedView.split('_')[1];
 
 	$: visitorTestOptions = {
-		size: {
-			marginTop: 40
-		},
+		marginTop: 40,
 		color: {
 			range: visitorColors,
 			label: 'Visitor type',
@@ -235,6 +236,62 @@
 		visitorTestMarks,
 		visitorTestOptions
 	);
+
+	/* Hexbin Map */
+	let binWidth = '20';
+
+	$: hexbinOptions = {
+		size: {
+			marginTop: 40
+		},
+		color: {
+			type: 'quantile',
+			range: ['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'],
+			label: `England & Wales proportion`,
+			legend: true,
+			tickFormat: '.2%'
+		},
+		xScale: {
+			axis: null
+		},
+		args: {
+			projection: {
+				type: 'mercator',
+				domain: boroughsGeoFromTopo
+			}
+		}
+	};
+
+	const formatPercentage = d3.format('.2%');
+
+	$: hexbinMarks = [
+		Plot.geo(boroughsGeoFromTopo, { strokeOpacity: 0.5 }),
+		Plot.dot(
+			hexbinData,
+			Plot.hexbin(
+				{
+					r: 'count',
+					fill: 'mean', // mean proportion across number of highstreets in bin
+					title: (bin: any) => {
+						// Custom tooltip content
+						const proportion = formatPercentage(
+							d3.mean(bin, (d) => mapVisitorMap.get(d.properties['highstreet_id'])) as number
+						);
+						const frequency = bin.length;
+
+						return `England & Wales proportion: ${proportion}\nNumber of high streets: ${frequency}`;
+					}
+				},
+				Plot.centroid({
+					fill: (d) => mapVisitorMap.get(d.properties['highstreet_id']) as number,
+					fillOpacity: 1,
+					tip: {},
+					binWidth
+				})
+			)
+		)
+	];
+	$: hexbinSpec = glaPlot(hexbinData, $currentThemeMode, hexbinMarks, hexbinOptions);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -923,6 +980,22 @@
 				/>
 			</div>
 			<Switch label="Show actual count/proportion" labelOn="left" checked={showProportion} />
+		</div>
+	</ObservablePlot>
+</Story>
+
+<Story name="Examples / map hexbin">
+	<ObservablePlot spec={{ ...hexbinSpec }} title="Hexbin map">
+		<div slot="controls" class="w-40 mb-4">
+			<Input
+				type="range"
+				label={`Bin width: ${binWidth}`}
+				placeholder="20"
+				bind:value={binWidth}
+				min="0"
+				max="40"
+				step="1"
+			/>
 		</div>
 	</ObservablePlot>
 </Story>
