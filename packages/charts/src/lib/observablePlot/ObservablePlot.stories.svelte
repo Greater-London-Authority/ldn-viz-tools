@@ -19,7 +19,9 @@
 
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
-	import { writable } from 'svelte/store';
+	import { get, writable } from 'svelte/store';
+
+	import * as Plot from '@observablehq/plot';
 
 	import { format } from 'd3-format';
 
@@ -42,7 +44,7 @@
 	} from '../../data/demoData';
 
 	import * as d3 from 'd3';
-	import { glaPlot, Plot } from '../observablePlotFragments/glaPlot';
+	import { glaPlot } from '../observablePlotFragments/glaPlot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
@@ -180,6 +182,25 @@
 
 	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
 
+	$: visitorTestOptions = {
+		size: {
+			marginTop: 40
+		},
+		color: {
+			range: [
+				plotTheme(get(currentThemeMode)).color.data.categorical.blue,
+				plotTheme(get(currentThemeMode)).color.data.categorical.green,
+				plotTheme(get(currentThemeMode)).color.data.categorical.pink,
+				plotTheme(get(currentThemeMode)).color.data.categorical.darkpink
+			],
+			label: 'Visitor type',
+			domain: ['England & Wales', 'Home counties', 'London', 'International']
+		},
+		xScale: {
+			insetLeft: 40,
+			label: 'month'
+		}
+	};
 	$: visitorTestMarks = [
 		Plot.gridY({ ...defaultGridY }),
 		Plot.areaY(visitors, {
