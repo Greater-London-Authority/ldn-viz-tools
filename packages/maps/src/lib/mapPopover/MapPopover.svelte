@@ -5,14 +5,14 @@
 	 * or to a location on a basemap that has no associated marker at all.
 	 *
 	 * Note that each instance of the component renders only a single popover.
-   * If multiple popovers should be present simultaneously, you could create an array of features that should be labelled,
-   * and create the popovers using an `{#each}` block.
+	 * If multiple popovers should be present simultaneously, you could create an array of features that should be labelled,
+	 * and create the popovers using an `{#each}` block.
 	 *
-   * You can use the components defined in`mapMarker/elements` within the popover component.
-   *
+	 * You can use the components defined in`mapMarker/elements` within the popover component.
+	 *
 	 * **Alternatives**: if the popover is meant to be attached to a Maplibre marker, use the [MapMarker](./?path=/docs/maps-mapmarker--documentation) instead.
-   *
-   * @component
+	 *
+	 * @component
 	 */
 
 	import { getAllContexts, onDestroy, onMount, tick } from 'svelte';
@@ -23,15 +23,15 @@
 	const contexts = getAllContexts();
 	const mapStore = contexts.get('mapStore');
 
-  /**
-   * Svelte component used to render the tooltip.
-   */
+	/**
+	 * Svelte component used to render the tooltip.
+	 */
 	export let popup = null;
 
-  /**
-   * Feature to which the popover should be attached.
-   * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
-   */
+	/**
+	 * Feature to which the popover should be attached.
+	 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
+	 */
 	export let feature;
 
 	let popupMaplibrePopup = null;
