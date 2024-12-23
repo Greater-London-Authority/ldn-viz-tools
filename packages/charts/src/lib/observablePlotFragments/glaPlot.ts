@@ -2,17 +2,17 @@ import type {
 	AreaOptions,
 	AreaXOptions,
 	AreaYOptions,
-	ArrowOptions,
-	AutoOptions,
+	// ArrowOptions,
+	// AutoOptions,
 	AxisXOptions,
 	AxisYOptions,
-	BarXOptions,
-	BarYOptions,
-	BollingerOptions,
-	BollingerXOptions,
-	BollingerYOptions,
-	BoxXOptions,
-	BoxYOptions,
+	// BarXOptions,
+	// BarYOptions,
+	// BollingerOptions,
+	// BollingerXOptions,
+	// BollingerYOptions,
+	// BoxXOptions,
+	// BoxYOptions,
 	Data,
 	DotOptions,
 	DotXOptions,
@@ -22,7 +22,7 @@ import type {
 	LineOptions,
 	LineXOptions,
 	LineYOptions,
-	PointerOptions,
+	// PointerOptions,
 	RuleXOptions,
 	RuleYOptions,
 	TextOptions,
@@ -121,9 +121,9 @@ export const Plot = {
 	areaY: (data?: Data, options?: AreaYOptions) => {
 		return ObservablePlot.areaY(data, { ...defaultArea, ...options });
 	},
-	arrow: (data?: Data, options?: ArrowOptions) => ObservablePlot.arrow(data, { ...options }),
-	auto: (data?: Data, options?: AutoOptions) => ObservablePlot.auto(data, { ...options }),
-	autoSpec: (data?: Data, options?: AutoOptions) => ObservablePlot.autoSpec(data, { ...options }),
+	// arrow: (data?: Data, options?: ArrowOptions) => ObservablePlot.arrow(data, { ...options }),
+	// auto: (data?: Data, options?: AutoOptions) => ObservablePlot.auto(data, { ...options }),
+	// autoSpec: (data?: Data, options?: AutoOptions) => ObservablePlot.autoSpec(data, { ...options }),
 	axisX: (...args: [data?: Data, options?: AxisXOptions] | [options?: AxisXOptions]) =>
 		args.length > 1
 			? ObservablePlot.axisX(args[0] as Data, { ...defaultXAxis, ...args[1] })
@@ -132,15 +132,15 @@ export const Plot = {
 		args.length > 1
 			? ObservablePlot.axisY(args[0] as Data, { ...defaultYAxis, ...args[1] })
 			: ObservablePlot.axisY({ ...defaultYAxis, ...args[0] }),
-	barX: (data?: Data, options?: BarXOptions) => ObservablePlot.barX(data, { ...options }),
-	barY: (data?: Data, options?: BarYOptions) => ObservablePlot.barY(data, { ...options }),
-	bollinger: (options?: BollingerOptions) => ObservablePlot.bollinger({ ...options }),
-	bollingerX: (data?: Data, options?: BollingerXOptions) =>
-		ObservablePlot.bollingerX(data, { ...options }),
-	bollingerY: (data?: Data, options?: BollingerYOptions) =>
-		ObservablePlot.bollingerY(data, { ...options }),
-	boxX: (data?: Data, options?: BoxXOptions) => ObservablePlot.boxX(data, { ...options }),
-	boxY: (data?: Data, options?: BoxYOptions) => ObservablePlot.boxY(data, { ...options }),
+	// barX: (data?: Data, options?: BarXOptions) => ObservablePlot.barX(data, { ...options }),
+	// barY: (data?: Data, options?: BarYOptions) => ObservablePlot.barY(data, { ...options }),
+	// bollinger: (options?: BollingerOptions) => ObservablePlot.bollinger({ ...options }),
+	// bollingerX: (data?: Data, options?: BollingerXOptions) =>
+	// 	ObservablePlot.bollingerX(data, { ...options }),
+	// bollingerY: (data?: Data, options?: BollingerYOptions) =>
+	// 	ObservablePlot.bollingerY(data, { ...options }),
+	// boxX: (data?: Data, options?: BoxXOptions) => ObservablePlot.boxX(data, { ...options }),
+	// boxY: (data?: Data, options?: BoxYOptions) => ObservablePlot.boxY(data, { ...options }),
 	dashedLine: (data?: Data, options?: LineOptions) => {
 		return ObservablePlot.line(data, { ...defaultDashedLine, ...options });
 	},
@@ -181,9 +181,9 @@ export const Plot = {
 	point: (data?: Data, options?: DotOptions) => {
 		return ObservablePlot.dot(data, { ...defaultDot, ...options });
 	},
-	pointer: <T>(options?: T & PointerOptions) => ObservablePlot.pointer({ ...options }),
-	pointerX: <T>(options?: T & PointerOptions) => ObservablePlot.pointerX({ ...options }),
-	pointerY: <T>(options?: T & PointerOptions) => ObservablePlot.pointerY({ ...options }),
+	// pointer: <T>(options?: T & PointerOptions) => ObservablePlot.pointer({ ...options }),
+	// pointerX: <T>(options?: T & PointerOptions) => ObservablePlot.pointerX({ ...options }),
+	// pointerY: <T>(options?: T & PointerOptions) => ObservablePlot.pointerY({ ...options }),
 	pointX: (data?: Data, options?: DotXOptions) => {
 		return ObservablePlot.dotX(data, { ...defaultDot, ...options });
 	},
