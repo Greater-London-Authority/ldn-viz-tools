@@ -23,7 +23,7 @@
 
 	import { format } from 'd3-format';
 
-	import { currentThemeMode, Select } from '@ldn-viz/ui';
+	import { currentThemeMode, Select, Switch } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
 		plotTheme,
@@ -38,7 +38,10 @@
 		lineChartData,
 		material_deprivation_data,
 		penguins,
-		visitors
+		visitorColors,
+		visitors,
+		visitorsData,
+		visitorTypes
 	} from '../../data/demoData';
 
 	import * as d3 from 'd3';
@@ -164,50 +167,74 @@
 		]
 	};
 
+	/* Penguins scatter plot chart using global plot defaults */
 	$: globalDefaultsMarks = [
-		Plot.gridX({ ...defaultGridX }),
-		Plot.gridY({ ...defaultGridY }),
-		Plot.ruleY([0], { ...defaultRule }),
-		Plot.ruleX([0], { ...defaultRule }),
-		Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
-		Plot.axisX({ ...defaultXAxis }),
-		Plot.axisY({ ...defaultYAxis, label: 'culmen_depth_mm' }),
-		Plot.tip(
-			penguins,
-			Plot.pointerX({ ...defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
-		)
+		Plot.gridX(),
+		Plot.gridY(),
+		Plot.ruleY([0]),
+		Plot.ruleX([0]),
+		Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
+		Plot.axisX(),
+		Plot.axisY({ label: 'culmen_depth_mm' }),
+		Plot.tip(penguins, Plot.pointerX({ x: 'culmen_length_mm', y: 'culmen_depth_mm' }))
 	];
 
 	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
 
+	/* Visitor Stacked Area chart using global plot defaults */
+	let showProportion = writable<boolean>(false);
+	let selectedVisitor = 'London';
+	$: selectedView = $showProportion ? 'visitor_proportion' : 'visitor_count';
+	$: selectedViewName = selectedView.split('_')[1];
+
+	$: visitorTestOptions = {
+		size: {
+			marginTop: 40
+		},
+		color: {
+			range: visitorColors,
+			label: 'Visitor type',
+			domain: visitorTypes
+		},
+		xScale: {
+			insetLeft: 50,
+			label: 'month'
+		}
+	};
+
 	$: visitorTestMarks = [
-		Plot.gridY({ ...defaultGridY }),
-		Plot.areaY(visitors, {
-			x: (d) => d3.utcDay(d.date),
+		Plot.gridY(),
+		Plot.areaY(visitorsData, {
+			x: (d) => new Date(d.date),
 			sort: 'date',
-			// interval: 'month',
-			y: 'visitor_count',
+			y: selectedView,
 			fill: 'subregion',
+			opacity: 1,
 			channels: {
-				'Visitor count': (d) => d['visitor_count']?.toFixed(2)
+				[$showProportion ? 'Visitor proportion' : 'Visitor count']: (d) =>
+					d[selectedView]?.toFixed(2)
 			},
 			tip: {
-				...defaultTip,
 				format: {
 					y: false,
 					z: false
 				}
 			},
-			order: (d: any) => d.subregion !== 'London'
+			order: selectedVisitor ? (d: any) => d.subregion !== selectedVisitor : null
 		}),
 		Plot.axisY({
-			...defaultYAxis,
-			label: 'count',
-			tickFormat: 's'
+			label: $showProportion ? 'proportion' : 'count',
+			tickFormat: $showProportion ? '%' : null
 		}),
-		Plot.ruleY([0], { ...defaultRule })
+		Plot.ruleY([0])
 	];
-	$: visitorTestSpec = glaPlot(visitors, $currentThemeMode, visitorTestMarks);
+
+	$: visitorTestSpec = glaPlot(
+		visitorsData,
+		$currentThemeMode,
+		visitorTestMarks,
+		visitorTestOptions
+	);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -881,5 +908,21 @@
 </Story>
 
 <Story name="Examples / stacked area using global defaults">
-	<ObservablePlot title="Visitors" subTitle="A stacked area chart" spec={{ ...visitorTestSpec }} />
+	<ObservablePlot
+		title="Visitor {selectedViewName} over time for Acton Lane, South Acton on Wednesday AM from 2022 to 2024"
+		subTitle="Shows {selectedViewName} over time, split by visitor type. The area of each colour corresponds to the {selectedViewName} for that visitor type."
+		spec={{ ...visitorTestSpec }}
+		data={visitorsData}
+	>
+		<div slot="controls" class="space-y-2 mb-4">
+			<div class="w-64">
+				<Select
+					items={visitors}
+					label="Select a focus visitor type"
+					bind:justValue={selectedVisitor}
+				/>
+			</div>
+			<Switch label="Show actual count/proportion" labelOn="left" checked={showProportion} />
+		</div>
+	</ObservablePlot>
 </Story>
