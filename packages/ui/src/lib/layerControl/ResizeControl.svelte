@@ -29,7 +29,7 @@
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
-		class="z-10 w-64 bg-core-grey-50 p-4 shadow"
+		class="z-50 w-64 bg-core-grey-50 p-4 shadow"
 	>
 		<div {...$arrow} use:arrow />
 
