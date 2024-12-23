@@ -36,6 +36,7 @@ interface PlotOptions {
 	color?: {};
 	xScale?: {};
 	yScale?: {};
+	args?: {};
 }
 
 // Function that handles default styles and takes data, mode and marks props.
@@ -74,7 +75,7 @@ export const glaPlot = (
 			...defaultYScale,
 			...options.yScale
 		},
-		...options,
+		...options.args,
 		marks
 	};
 
