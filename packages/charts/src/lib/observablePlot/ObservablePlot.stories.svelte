@@ -19,13 +19,13 @@
 
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
-	import { get, writable } from 'svelte/store';
+	import { writable } from 'svelte/store';
 
 	import * as Plot from '@observablehq/plot';
 
 	import { format } from 'd3-format';
 
-	import { currentThemeMode, Select } from '@ldn-viz/ui';
+	import { currentThemeMode, Select, Switch } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
 		plotTheme,
@@ -40,7 +40,10 @@
 		lineChartData,
 		material_deprivation_data,
 		penguins,
-		visitors
+		visitorColors,
+		visitors,
+		visitorsData,
+		visitorTypes
 	} from '../../data/demoData';
 
 	import * as d3 from 'd3';
@@ -166,6 +169,7 @@
 		]
 	};
 
+	/* Penguins scatter plot chart using global plot defaults */
 	$: globalDefaultsMarks = [
 		Plot.gridX({ ...defaultGridX }),
 		Plot.gridY({ ...defaultGridY }),
@@ -182,36 +186,36 @@
 
 	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
 
+	/* Visitor Stacked Area chart using global plot defaults */
+	let showProportion = writable<boolean>(false);
+	let selectedVisitor = 'London';
+	$: selectedView = $showProportion ? 'visitor_proportion' : 'visitor_count';
+
 	$: visitorTestOptions = {
 		size: {
 			marginTop: 40
 		},
 		color: {
-			range: [
-				plotTheme(get(currentThemeMode)).color.data.categorical.blue,
-				plotTheme(get(currentThemeMode)).color.data.categorical.green,
-				plotTheme(get(currentThemeMode)).color.data.categorical.pink,
-				plotTheme(get(currentThemeMode)).color.data.categorical.darkpink
-			],
+			range: visitorColors,
 			label: 'Visitor type',
-			domain: ['England & Wales', 'Home counties', 'London', 'International']
+			domain: visitorTypes
 		},
 		xScale: {
-			insetLeft: 40,
+			insetLeft: 50,
 			label: 'month'
 		}
 	};
 
 	$: visitorTestMarks = [
 		Plot.gridY({ ...defaultGridY }),
-		Plot.areaY(visitors, {
-			x: (d) => d3.utcDay(d.date),
+		Plot.areaY(visitorsData, {
+			x: (d) => new Date(d.date),
 			sort: 'date',
-			// interval: 'month',
-			y: 'visitor_count',
+			y: selectedView,
 			fill: 'subregion',
 			channels: {
-				'Visitor count': (d) => d['visitor_count']?.toFixed(2)
+				[$showProportion ? 'Visitor proportion' : 'Visitor count']: (d) =>
+					d[selectedView]?.toFixed(2)
 			},
 			tip: {
 				...defaultTip,
@@ -220,16 +224,22 @@
 					z: false
 				}
 			},
-			order: (d: any) => d.subregion !== 'London'
+			order: selectedVisitor ? (d: any) => d.subregion !== selectedVisitor : null
 		}),
 		Plot.axisY({
 			...defaultYAxis,
-			label: 'count'
+			label: $showProportion ? 'proportion' : 'count',
+			tickFormat: $showProportion ? '%' : null
 		}),
 		Plot.ruleY([0], { ...defaultRule })
 	];
 
-	$: visitorTestSpec = glaPlot(visitors, $currentThemeMode, visitorTestMarks, visitorTestOptions);
+	$: visitorTestSpec = glaPlot(
+		visitorsData,
+		$currentThemeMode,
+		visitorTestMarks,
+		visitorTestOptions
+	);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -907,6 +917,17 @@
 		title="Visitors"
 		subTitle="A stacked area chart"
 		spec={{ ...visitorTestSpec }}
-		data={visitors}
-	/>
+		data={visitorsData}
+	>
+		<div slot="controls" class="space-y-2 mb-4">
+			<div class="w-64">
+				<Select
+					items={visitors}
+					label="Select a focus visitor type"
+					bind:justValue={selectedVisitor}
+				/>
+			</div>
+			<Switch label="Show actual count/proportion" labelOn="left" checked={showProportion} />
+		</div>
+	</ObservablePlot>
 </Story>
