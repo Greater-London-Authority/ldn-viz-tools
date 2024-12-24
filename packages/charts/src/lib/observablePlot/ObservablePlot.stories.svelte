@@ -23,7 +23,7 @@
 
 	import { format } from 'd3-format';
 
-	import { currentThemeMode, Input, Select, Switch } from '@ldn-viz/ui';
+	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
 		plotTheme,
@@ -33,18 +33,14 @@
 	import {
 		areaPlotData,
 		areaPlotPointsToLabel,
-		boroughsGeoFromTopo,
 		education_data,
 		educationLabelOffsets,
-		hexbinData,
 		lineChartData,
-		mapVisitorMap,
 		material_deprivation_data,
 		penguins
 	} from '../../data/demoData';
 
-	import * as d3 from 'd3';
-	import { glaPlot, Plot } from '../observablePlotFragments/glaPlot';
+	import { Plot } from '../observablePlotFragments/glaPlot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
@@ -165,76 +161,6 @@
 			)
 		]
 	};
-
-	/* Penguins scatter plot chart using global plot defaults */
-	$: globalDefaultsMarks = [
-		Plot.gridX(),
-		Plot.gridY(),
-		Plot.ruleY([0]),
-		Plot.ruleX([0]),
-		Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
-		Plot.axisX(),
-		Plot.axisY({ label: 'culmen_depth_mm' }),
-		Plot.tip(penguins, Plot.pointerX({ x: 'culmen_length_mm', y: 'culmen_depth_mm' }))
-	];
-
-	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
-
-	/* Hexbin Map */
-	let binWidth = '20';
-
-	$: hexbinOptions = {
-		size: {
-			marginTop: 40
-		},
-		color: {
-			type: 'quantile',
-			range: ['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'],
-			label: `England & Wales proportion`,
-			legend: true,
-			tickFormat: '.2%'
-		},
-		xScale: {
-			axis: null
-		},
-		other: {
-			projection: {
-				type: 'mercator',
-				domain: boroughsGeoFromTopo
-			}
-		}
-	};
-
-	const formatPercentage = d3.format('.2%');
-
-	$: hexbinMarks = [
-		Plot.geo(boroughsGeoFromTopo, { strokeOpacity: 0.5 }),
-		Plot.dot(
-			hexbinData,
-			Plot.hexbin(
-				{
-					r: 'count',
-					fill: 'mean', // mean proportion across number of highstreets in bin
-					title: (bin: any) => {
-						// Custom tooltip content
-						const proportion = formatPercentage(
-							d3.mean(bin, (d) => mapVisitorMap.get(d.properties['highstreet_id'])) as number
-						);
-						const frequency = bin.length;
-
-						return `England & Wales proportion: ${proportion}\nNumber of high streets: ${frequency}`;
-					}
-				},
-				Plot.centroid({
-					fill: (d) => mapVisitorMap.get(d.properties['highstreet_id']) as number,
-					fillOpacity: 1,
-					tip: {},
-					binWidth
-				})
-			)
-		)
-	];
-	$: hexbinSpec = glaPlot(hexbinData, $currentThemeMode, hexbinMarks, hexbinOptions);
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
@@ -897,28 +823,4 @@
 			exportBtns: true
 		}}
 	/>
-</Story>
-
-<Story name="Examples / using global defaults">
-	<ObservablePlot
-		title="Penguin Culmens"
-		subTitle="A scatterplot of depth against length"
-		spec={{ ...globalDefaultsSpec }}
-	/>
-</Story>
-
-<Story name="Examples / map hexbin">
-	<ObservablePlot spec={{ ...hexbinSpec }} title="Hexbin map">
-		<div slot="controls" class="w-40 mb-4">
-			<Input
-				type="range"
-				label={`Bin width: ${binWidth}`}
-				placeholder="20"
-				bind:value={binWidth}
-				min="0"
-				max="40"
-				step="1"
-			/>
-		</div>
-	</ObservablePlot>
 </Story>
