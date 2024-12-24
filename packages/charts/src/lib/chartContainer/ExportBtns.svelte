@@ -52,7 +52,7 @@
 	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 </script>
 
-<div class="flex flex-wrap mt-2 space-y-2 items-end" data-html2canvas-ignore>
+<div class="flex flex-wrap mt-2 space-y-2 items-end" data-capture-ignore>
 	{#if dataDownloadButton && dataForDownload}
 		<div class="mr-2 shrink-0">
 			<DataDownloadButton
@@ -76,7 +76,7 @@
 			<ImageDownloadButton
 				{filename}
 				formats={imageDownloadButton === true ? ['PNG', 'SVG'] : imageDownloadButton}
-				htmlNode={chartToCapture}
+				node={chartToCapture}
 				variant="outline"
 				emphasis="secondary"
 				size="sm"
