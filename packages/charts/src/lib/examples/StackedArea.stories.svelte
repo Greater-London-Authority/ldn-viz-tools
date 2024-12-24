@@ -1,7 +1,7 @@
 <script context="module">
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
-	/* Here is a description */
+	/* This is an example `StackedArea` chart using the default plot styles via `glaPlot` function. */
 
 	export const meta = {
 		title: 'Charts/Examples/StackedArea'
@@ -21,7 +21,7 @@
 	$: selectedView = $showProportion ? 'visitor_proportion' : 'visitor_count';
 	$: selectedViewName = selectedView.split('_')[1];
 
-	$: visitorTestOptions = {
+	$: visitorOptions = {
 		marginTop: 40,
 		color: {
 			range: visitorColors,
@@ -34,7 +34,7 @@
 		}
 	};
 
-	$: visitorTestMarks = [
+	$: visitorMarks = [
 		Plot.gridY(),
 		Plot.areaY(visitorsData, {
 			x: (d) => new Date(d.date),
@@ -61,12 +61,7 @@
 		Plot.ruleY([0])
 	];
 
-	$: visitorTestSpec = glaPlot(
-		visitorsData,
-		$currentThemeMode,
-		visitorTestMarks,
-		visitorTestOptions
-	);
+	$: visitorSpec = glaPlot(visitorsData, $currentThemeMode, visitorMarks, visitorOptions);
 </script>
 
 <Template let:args>
@@ -74,7 +69,7 @@
 		{...args}
 		title="Visitor {selectedViewName} over time for Acton Lane, South Acton on Wednesday AM from 2022 to 2024"
 		subTitle="Shows {selectedViewName} over time, split by visitor type. The area of each colour corresponds to the {selectedViewName} for that visitor type."
-		spec={{ ...visitorTestSpec }}
+		spec={{ ...visitorSpec }}
 		data={visitorsData}
 	>
 		<div slot="controls" class="space-y-4 mb-8">
