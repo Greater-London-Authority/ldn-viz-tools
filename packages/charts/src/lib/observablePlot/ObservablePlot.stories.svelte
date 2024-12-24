@@ -40,11 +40,7 @@
 		lineChartData,
 		mapVisitorMap,
 		material_deprivation_data,
-		penguins,
-		visitorColors,
-		visitors,
-		visitorsData,
-		visitorTypes
+		penguins
 	} from '../../data/demoData';
 
 	import * as d3 from 'd3';
@@ -184,59 +180,6 @@
 
 	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
 
-	/* Visitor Stacked Area chart using global plot defaults */
-	let showProportion = writable<boolean>(false);
-	let selectedVisitor = 'London';
-	$: selectedView = $showProportion ? 'visitor_proportion' : 'visitor_count';
-	$: selectedViewName = selectedView.split('_')[1];
-
-	$: visitorTestOptions = {
-		marginTop: 40,
-		color: {
-			range: visitorColors,
-			label: 'Visitor type',
-			domain: visitorTypes
-		},
-		xScale: {
-			insetLeft: 50,
-			label: 'month'
-		}
-	};
-
-	$: visitorTestMarks = [
-		Plot.gridY(),
-		Plot.areaY(visitorsData, {
-			x: (d) => new Date(d.date),
-			sort: 'date',
-			y: selectedView,
-			fill: 'subregion',
-			opacity: 1,
-			channels: {
-				[$showProportion ? 'Visitor proportion' : 'Visitor count']: (d) =>
-					d[selectedView]?.toFixed(2)
-			},
-			tip: {
-				format: {
-					y: false,
-					z: false
-				}
-			},
-			order: selectedVisitor ? (d: any) => d.subregion !== selectedVisitor : null
-		}),
-		Plot.axisY({
-			label: $showProportion ? 'proportion' : 'count',
-			tickFormat: $showProportion ? '%' : null
-		}),
-		Plot.ruleY([0])
-	];
-
-	$: visitorTestSpec = glaPlot(
-		visitorsData,
-		$currentThemeMode,
-		visitorTestMarks,
-		visitorTestOptions
-	);
-
 	/* Hexbin Map */
 	let binWidth = '20';
 
@@ -254,7 +197,7 @@
 		xScale: {
 			axis: null
 		},
-		args: {
+		other: {
 			projection: {
 				type: 'mercator',
 				domain: boroughsGeoFromTopo
@@ -962,26 +905,6 @@
 		subTitle="A scatterplot of depth against length"
 		spec={{ ...globalDefaultsSpec }}
 	/>
-</Story>
-
-<Story name="Examples / stacked area using global defaults">
-	<ObservablePlot
-		title="Visitor {selectedViewName} over time for Acton Lane, South Acton on Wednesday AM from 2022 to 2024"
-		subTitle="Shows {selectedViewName} over time, split by visitor type. The area of each colour corresponds to the {selectedViewName} for that visitor type."
-		spec={{ ...visitorTestSpec }}
-		data={visitorsData}
-	>
-		<div slot="controls" class="space-y-4 mb-8">
-			<div class="w-64">
-				<Select
-					items={visitors}
-					label="Select a focus visitor type"
-					bind:justValue={selectedVisitor}
-				/>
-			</div>
-			<Switch label="Show actual count/proportion" labelOn="left" checked={showProportion} />
-		</div>
-	</ObservablePlot>
 </Story>
 
 <Story name="Examples / map hexbin">
