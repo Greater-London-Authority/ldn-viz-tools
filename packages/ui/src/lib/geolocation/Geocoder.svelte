@@ -326,3 +326,9 @@
 		/>
 	{/if}
 </search>
+
+<style>
+	[type='search']::-webkit-search-cancel-button {
+		appearance: none;
+	}
+</style>
