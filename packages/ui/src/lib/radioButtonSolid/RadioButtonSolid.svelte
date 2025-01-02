@@ -30,7 +30,7 @@
 	 */
 	export let disabled = false;
 
-	let inputID = `input-${id}`;
+	let inputID = `input-${name || ''}-${id}`;
 
 	const { selectedId } = getContext<{ selectedId: Writable<string> }>('selectedId');
 </script>
