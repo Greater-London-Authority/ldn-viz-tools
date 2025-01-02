@@ -31,7 +31,7 @@
 		<div style:width={table.widths.groupControl}></div>
 	{/each}
 
-	<div
+	<button
 		style:width={table.widths.groupControl}
 		on:click={() => table.toggleGroupCollapsed(group, true)}
 	>
@@ -42,7 +42,7 @@
 			aria-hidden="true"
 			on:click={() => table.toggleGroupCollapsed(group, true)}
 		/>
-	</div>
+	</button>
 
 	<!-- label for group name -->
 	<!--
