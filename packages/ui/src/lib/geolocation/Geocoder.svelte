@@ -106,6 +106,8 @@
 				.then((res) => res || [])
 				.catch((err: unknown) => {
 					console.error('[Location Search] Search suggestions could not be retrieved.');
+
+					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 					onSearchError && onSearchError(err as GeolocationSearchError);
 					return [];
 				});
@@ -136,6 +138,7 @@
 			silentQueryTextUpdate = true;
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		onLocationSelected && onLocationSelected(suggestion);
 	};
 
@@ -275,6 +278,7 @@
 	};
 
 	$: {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		query;
 		if (!silentQueryTextUpdate) {
 			scheduleUpdate();
