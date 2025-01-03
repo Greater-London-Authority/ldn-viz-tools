@@ -35,7 +35,8 @@
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 	import loadTestLayers from '../loadTestLayers';
 	import TestTooltip from './TestTooltip.svelte';
 	import TestPopup from './TestPopup.svelte';
