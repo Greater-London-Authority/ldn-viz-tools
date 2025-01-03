@@ -93,6 +93,12 @@
 	 */
 	export let rightLabel = '';
 
+	/**
+	 * If `true`, then the legend will be reversed, so that it is drawn from left to right.
+	 * Note that you will need to swap the value sof the `leftLabel` and `rightLabel` props yourself.
+	 */
+	export let reverse = false;
+
 	const ramp = (color: any, n = 256) => {
 		const canvas = document.createElement('canvas');
 		canvas.width = n;
@@ -101,7 +107,9 @@
 		if (context) {
 			for (let i = 0; i < n; ++i) {
 				context.fillStyle = color(i / (n - 1));
-				context.fillRect(i, 0, 1, 1);
+
+				const xp = reverse ? n - i : i;
+				context.fillRect(xp, 0, 1, 1);
 			}
 		}
 		return canvas.toDataURL();
@@ -120,7 +128,13 @@
 		} else if (color.interpolator) {
 			// Sequential scale
 			x = Object.assign(
-				color.copy().interpolator(interpolateRound(marginLeft, width - marginRight)),
+				color
+					.copy()
+					.interpolator(
+						reverse
+							? interpolateRound(width - marginRight, marginLeft)
+							: interpolateRound(marginLeft, width - marginRight)
+					),
 				{
 					range() {
 						return [marginLeft, width - marginRight];
@@ -167,6 +181,18 @@
 				.rangeRound([marginLeft, width - marginRight]);
 
 			tickAdjust = () => {};
+		}
+
+		if (reverse) {
+			if (color.interpolator) {
+				// this isn't a real D3 scale: flipping the domain won't work, so we did the reversing above
+			} else if (x.domain()?.length > 2) {
+				x.domain(x.domain().reverse());
+			} else if (x.domain()) {
+				x.domain(x.domain().reverse());
+			} else {
+				x = x.reverse();
+			}
 		}
 
 		if (tickFormat && !tickF) {
@@ -237,9 +263,9 @@
 		<g>
 			{#each color.range() as d, i}
 				<rect
-					x={x(i - 1)}
+					x={reverse ? x(i) : x(i - 1)}
 					y={marginTop}
-					width={x(i) - x(i - 1)}
+					width={reverse ? x(i - 1) - x(i) : x(i) - x(i - 1)}
 					height={height - marginTop - marginBottom}
 					fill={d}
 				/>
