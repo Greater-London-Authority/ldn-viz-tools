@@ -67,7 +67,6 @@
 	</div>
 </Story>
 
-
 <Story name="Hidden Geolocator">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
