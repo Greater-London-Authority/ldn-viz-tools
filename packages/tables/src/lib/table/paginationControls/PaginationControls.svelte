@@ -27,7 +27,7 @@
 		const num = +inputPage;
 
 		if (isNaN(num) || num < 1) {
-			// need to handle carefully, so that if on page 1 we reset the inut box
+			// need to handle carefully, so that if on page 1 we reset the input box
 			inputPage = '1';
 			page = 1;
 			// page = 1;

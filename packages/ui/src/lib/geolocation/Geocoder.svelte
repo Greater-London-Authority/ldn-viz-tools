@@ -82,6 +82,11 @@
 	 */
 	export let showClearButton = false;
 
+	/**
+	 * Placeholder text to be dislayed in the input element.
+	 */
+	export let placeholder = 'Location search';
+
 	let container: HTMLElement;
 	let input: HTMLInputElement;
 	let query = '';
@@ -292,7 +297,7 @@
 	<input
 		bind:this={input}
 		type="search"
-		placeholder="Location search"
+		{placeholder}
 		class="form-input min-w-0 w-64 max-w-[100%] pl-10 grow shrink bg-color-input-background border border-color-input-border placeholder-color-input-placeholder h-full text-color-valuetext {inputClasses}"
 		class:pr-8={showClearButton}
 		bind:value={query}

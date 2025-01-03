@@ -2,7 +2,7 @@
 	/**
 	 * The `Dot` component renders a table cell representing a numerical value as a tick;
 	 * the horizontal position of the dot encodes the value.
-	 * See also: [Tick](./?path=/docs/tables-encodings-tick--documentation)
+	 * See also: [Tick](./?path=/docs/tables-renderers-tick--documentation)
 	 * @component
 	 */
 
@@ -36,6 +36,9 @@
 	$: d = (value - extent[0]) / (extent[1] - extent[0]);
 
 	const fPercentage = format('0.0%');
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <div

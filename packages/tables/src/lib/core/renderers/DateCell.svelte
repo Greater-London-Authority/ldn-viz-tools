@@ -14,7 +14,7 @@
 	/**
 	 * Alignment of the text within the cell.
 	 */
-	export let alignText = 'left' | 'right' | 'center' | undefined;
+	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
 
 	/**
 	 * Format string defining how the number should be formatted for display (expressed in `d3-time-format`'s [notation](https://d3js.org/d3-time-format#locale_format),
@@ -30,7 +30,10 @@
 	};
 
 	let alignmentClass;
-	$: alignmentClass = alignmentClasses[alignText ?? 'center'];
+	$: alignmentClass = alignmentClasses[alignText ?? 'left'];
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <span class={classNames(`flex h-full p-2`, alignmentClass)}>

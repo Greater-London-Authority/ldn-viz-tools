@@ -13,7 +13,6 @@
 	 * The available data formats for the downloaded file.
 	 */
 	export let formats: ('CSV' | 'JSON')[] = ['CSV', 'JSON'];
-	let format = 'CSV';
 
 	/**
 	 * The data that will be encoded in the downloaded file (formatted as an array of objects).
@@ -36,7 +35,7 @@
 	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 
 	const enforceExtension = (name: string, extension: string) => {
-		return name.toLocaleLowerCase().endsWith(extension) ? name : `name${extension}`;
+		return name.toLocaleLowerCase().endsWith(extension) ? name : `${name}${extension}`;
 	};
 
 	const downloadFromURL = (url: string, name: string) => {
@@ -111,6 +110,5 @@
 >
 	<!-- contents of the button -->
 	<svelte:fragment slot="beforeLabel"><slot name="beforeLabel" /></svelte:fragment>
-	<slot />
 	<svelte:fragment slot="afterLabel"><slot name="afterLabel" /></svelte:fragment>
 </MultipleActionButton>

@@ -22,7 +22,11 @@
 	 */
 	export let posScale;
 
-	const width = 100;
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
+
 	const height = 30;
 	const marginTop = 0;
 	const marginRight = 10;
@@ -58,7 +62,7 @@
 			: defaultScale;
 
 		y = scaleLinear()
-			.domain([0, max(sortedData, (d) => d[1])])
+			.domain([0, +max(sortedData, (d) => d[1])])
 			.range([height - marginBottom, marginTop]);
 	};
 
@@ -73,6 +77,9 @@
 	};
 
 	$: update(values, posScale);
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>

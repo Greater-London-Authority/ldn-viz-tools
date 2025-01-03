@@ -1,35 +1,39 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `StackedBar` component represents a set of values as a stacked bar chart.
 	 */
 
-	import { scaleLinear } from 'd3-scale';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
 	/**
 	 * Array of values to be displayed.
 	 */
-	export let values;
+	export let values: number[];
 
 	/**
 	 * A D3 color scale used to determine bar color.
 	 */
-	export let colorScale;
+	export let colorScale: (val: any) => string;
 
-	const width = 100;
+	/**
+	 * Width of cell (in pixels).
+	 */
+	export let width = 100;
+
 	const height = 30;
 	const marginRight = 10;
 	const marginLeft = 0;
 
-	let x;
+	let x: ScaleLinear<number, number>;
 	$: x = scaleLinear()
 		.range([marginLeft, width - marginRight])
 		.domain([0, values.length]);
 
 	let sortedData;
-	let bars = [];
-	const update = (values) => {
+	let bars: { start: number; end: number; val: number }[] = [];
+	const update = (values: number[]) => {
 		// count the values: produces a list of [value, count] pairs
-		const counts = Object.create(null);
+		const counts: Record<number, number> = Object.create(null);
 		values.forEach((val) => {
 			counts[val] = counts[val] ? counts[val] + 1 : 1;
 		});
@@ -40,7 +44,7 @@
 		bars = [];
 		let start = 0;
 		for (const d of sortedData) {
-			bars.push({ start, end: start + d[1], val: d[0] });
+			bars.push({ start, end: start + d[1], val: +d[0] });
 			start += d[1];
 		}
 
@@ -49,6 +53,9 @@
 	};
 
 	$: update(values);
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>

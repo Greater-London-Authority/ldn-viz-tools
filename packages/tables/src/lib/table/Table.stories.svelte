@@ -8,7 +8,8 @@
 </script>
 
 <script lang="ts">
-	import { Input } from '@ldn-viz/ui';
+	import type { ColSpec } from '$lib/core/lib/types';
+	import { Button, Input } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const data = [
@@ -41,30 +42,53 @@
 				label: 'First Name',
 
 				cell: {
-					renderer: 'TextCell',
-					width: '248px'
-				},
-
-				column: { renderer: 'TextCell', value: '' }
+					renderer: 'TextCell'
+				}
 			},
 
 			{
 				short_label: 'last_name',
 				label: 'Last Name',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			},
 
 			{
 				short_label: 'pet',
 				label: 'Pet',
-				cell: { renderer: 'TextCell' },
-				column: { renderer: 'TextCell', value: '' }
+				cell: { renderer: 'TextCell' }
 			}
 		]
 	};
 
-	let wideTableSpec = { columns: [] };
+	const tableSpecPartiallySortable = {
+		showColSummaries: false,
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
+	let wideTableSpec: { columns: ColSpec[] } = { columns: [] };
 	for (let i = 0; i < 25; i++) {
 		wideTableSpec.columns.push({
 			short_label: `field_${i}`,
@@ -72,7 +96,6 @@
 
 			cell: {
 				renderer: 'TextCell',
-				width: '125px',
 				alignText: 'left'
 			},
 
@@ -82,12 +105,26 @@
 
 	let wideTableData = [];
 	for (let j = 0; j < 100; j++) {
-		let row = {};
+		let row: Record<string, number> = {};
 		for (let i = 0; i < 25; i++) {
 			row[`field_${i}`] = Math.round(Math.random() * 100) / 100;
 		}
 		wideTableData.push(row);
 	}
+
+	let dataSubset: Record<string, string | number>[] = [];
+	const randomlySelectRows = () => {
+		const selectedEntries = [];
+		const arrayCopy = [...data]; // Create a shallow copy of the input array
+
+		for (let i = 0; i < 10; i++) {
+			const randomIndex = Math.floor(Math.random() * arrayCopy.length);
+			selectedEntries.push(arrayCopy.splice(randomIndex, 1)[0]);
+		}
+
+		dataSubset = selectedEntries;
+	};
+	randomlySelectRows();
 
 	export let page = 1;
 </script>
@@ -98,8 +135,17 @@
 
 <Story name="Default" source />
 
+<Story name="Table updates when data changes" source>
+	<Button on:click={randomlySelectRows}>Update</Button>
+	<Table data={dataSubset} {tableSpec} allowSorting filename="My Table" />
+</Story>
+
 <Story name="Sortable Rows" source>
 	<Table {data} {tableSpec} allowSorting />
+</Story>
+
+<Story name="Sortable - but only on some columns" source>
+	<Table {data} tableSpec={tableSpecPartiallySortable} allowSorting />
 </Story>
 
 <Story name="Title" source>
@@ -116,14 +162,15 @@
 </Story>
 
 <Story name="Export buttons" source>
-	<Table {data} {tableSpec} exportBtns />
+	<Table {data} {tableSpec} dataDownloadButton imageDownloadButton />
 </Story>
 
 <Story name="Export buttons - relabel columns" source>
 	<Table
 		{data}
 		{tableSpec}
-		exportBtns
+		dataDownloadButton
+		imageDownloadButton
 		columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
 	/>
 </Story>
@@ -160,7 +207,14 @@
 </Story>
 
 <!-- Example of a table that is wider than its parent and needs to be scrolled -->
-<Story name="Wide table">
-	<Table data={wideTableData} tableSpec={wideTableSpec} paginate pageSize={5} bind:page />
+<Story name="Wide table with fixed width">
+	<Table
+		data={wideTableData}
+		tableSpec={wideTableSpec}
+		paginate
+		pageSize={5}
+		fixedTableWidth={1200}
+		bind:page
+	/>
 </Story>
 <!-- TODO: add example of filtering -->

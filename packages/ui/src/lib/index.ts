@@ -2,6 +2,8 @@
 export { default as AsyncButton } from './button/AsyncButton.svelte';
 export { default as Button } from './button/Button.svelte';
 
+export { default as Callout } from './callout/Callout.svelte';
+
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
@@ -19,6 +21,8 @@ export { default as NavLinks } from './header/NavLinks.svelte';
 export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
 export { default as Input } from './input/Input.svelte';
 export { default as InputWrapper } from './input/InputWrapper.svelte';
+export { default as LayerControl } from './layerControl/LayerControl.svelte';
+export { default as LayerControlGroup } from './layerControl/LayerControlGroup.svelte';
 export { default as LogoByCIU } from './logos/LogoByCIU.svelte';
 export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';

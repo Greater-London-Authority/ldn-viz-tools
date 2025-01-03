@@ -8,13 +8,11 @@
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
-
-	// hack to make the "View cookie settings" link appear
-	window.CookieControl = writable(true);
+	import AnalyticsAndCookieConsent from './AnalyticsAndCookieConsent.svelte';
 </script>
 
 <Template let:args>
+	<AnalyticsAndCookieConsent />
 	<CookieControlSettings {...args} />
 </Template>
 

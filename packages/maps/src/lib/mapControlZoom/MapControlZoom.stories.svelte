@@ -3,7 +3,6 @@
 
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
-	import MapApp from '../map/MapApp.svelte';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
@@ -23,8 +22,13 @@
 	<MapControlZoom {...args} />
 </Template>
 
+<!--
+The zoom buttons are usually positioned in the top left corner under the location search.
+They enable [zoomin](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomin) and
+[zoomout](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomout) by one zoom level per click.
+-->
 <Story name="Zoom Buttons">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
 				The zoom buttons are usually positioned in the top left corner under the location search.
@@ -53,5 +57,5 @@
 				<MapControlZoom />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

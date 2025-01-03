@@ -25,6 +25,13 @@
 	const val: Writable<string | undefined> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
 
+	const respondToExternalChange = (newVal: string | undefined) => {
+		if ($val !== newVal) {
+			$val = newVal;
+		}
+	};
+	$: respondToExternalChange(selectedValue);
+
 	setContext('tabContext', {
 		selectedValue: val,
 		orientation

@@ -210,3 +210,42 @@
 		</pre>
 	</div>
 </Story>
+
+<Story name="Custom placeholder">
+	<div class="m-6 space-y-6">
+		<p class="dark:text-white">
+			A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
+			results are limited.
+		</p>
+		<p class="dark:text-white">
+			At least three characters are required before any suggestions are provided. This avoids
+			spamming the underlying Web APIs with excessively vague requests.
+		</p>
+		<p class="dark:text-white">
+			Try entering 'brick' or 'london' if you're having trouble finding any places.
+		</p>
+		<Geocoder
+			let:onSuggestionEvent
+			let:attribution
+			let:suggestions
+			adapter={listAdapter}
+			{onLocationSelected}
+			{onSearchError}
+			classes="w-72"
+			placeholder="Type here to search for a place "
+		>
+			{#if suggestions?.length > 0}
+				<GeocoderSuggestionList
+					{onSuggestionEvent}
+					{attribution}
+					{suggestions}
+					{selected}
+					maxSuggestions={5}
+				/>
+			{/if}
+		</Geocoder>
+		<pre class="dark:text-white whitespace-pre-wrap">
+			{selected ? formatResult(selected) : formatResult({})}
+		</pre>
+	</div>
+</Story>

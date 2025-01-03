@@ -1,16 +1,15 @@
 <script>
-	import { ChevronRight, ChevronDown } from '@steeze-ui/heroicons';
+	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import Scaffolding from './Scaffolding.svelte';
+	import Scaffolding from '../Scaffolding.svelte';
 
-	import FilterMenu from '../menus/FilterMenu.svelte';
-	import EncodingType from '../menus/EncodingType.svelte';
-	import MergeMenu from '../menus/MergeMenu.svelte';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
+	import EncodingType from '../../menus/EncodingType.svelte';
+	import FilterMenu from '../../menus/FilterMenu.svelte';
+	import MergeMenu from '../../menus/MergeMenu.svelte';
 
 	export let table;
-
-	const DEFAULT_CELL_WIDTH = '100px';
 </script>
 
 <Scaffolding {table}>
@@ -22,11 +21,10 @@
 				on:click={() => table.openOrCloseLevel(i)}
 			>
 				<Icon
-					src={table.expansionState[i] ?? true ? ChevronDown : ChevronRight}
+					src={(table.expansionState[i] ?? true) ? ChevronDown : ChevronRight}
 					theme="solid"
 					class="w-[18px] h-[18px] ml-0.5"
 					aria-hidden="true"
-					on:click={() => console.log('CLICKED')}
 				/>
 			</div>
 		{/each}
@@ -45,15 +43,9 @@
     -->
 
 	<svelte:fragment slot="dataColumns">
-		{#each table.columnSpec as col}
+		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div
-					class="flex font-bold was-th"
-					role="columnheader"
-					colspan="1"
-					style="flex-shrink: 0"
-					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
-				>
+				<div class="flex was-th" role="columnheader" style:width={col.computedWidth + 'px'}>
 					<FilterMenu {table} {col} />
 					<EncodingType {col} />
 
@@ -62,6 +54,7 @@
 					{/if}
 				</div>
 			{/if}
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

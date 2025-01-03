@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/blocks';
 
 import * as snippets from './observablePlotFragments.ts';
+import { getDefaultPlotStyles } from './observablePlotFragments.ts';
 
 <Meta title="Charts/ObservablePlot/Reusable Fragments" />
 
@@ -12,62 +13,120 @@ The library defines a number of reusable fragments of Observable Plot configurat
 
 `fontStack` is:
 
-<code>{snippets.fontStack}</code>
+<pre>{snippets.fontStack}</pre>
 
-`defaultStyle` is:
+In light mode, `defaultStyle` is:
 
-<code>{JSON.stringify(snippets.defaultStyle, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultStyle, null, 2)}</pre>
+
+In dark mode, `defaultStyle` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultStyle, null, 2)}</pre>
 
 `defaultSize` is:
 
-<code>{JSON.stringify(snippets.defaultSize, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultSize, null, 2)}</pre>
+
+`defaultSizeFacet` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultSizeFacet, null, 2)}</pre>
 
 `defaultColor` is:
 
-<code>{JSON.stringify(snippets.defaultColor, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultColor, null, 2)}</pre>
 
 ### Axis styles
 
 `defaultXAxis` is:
 
-<code>{JSON.stringify(snippets.defaultXAxis, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultXAxis, null, 2)}</pre>
 
 `defaultYAxis` is:
 
-<code>{JSON.stringify(snippets.defaultYAxis, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultYAxis, null, 2)}</pre>
 
 ### Line styles
 
-`defaultLine` is:
+In light mode, `defaultLine` is:
 
-<code>{JSON.stringify(snippets.defaultLine, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultLine, null, 2)}</pre>
+
+In dark mode, `defaultLine` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultLine, null, 2)}</pre>
 
 `defaultDashedLine` is:
 
-<code>{JSON.stringify(snippets.defaultDashedLine, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultDashedLine, null, 2)}</pre>
 
 ### Scales
 
 `defaultXScale` is:
 
-<code>{JSON.stringify(snippets.defaultXScale, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultXScale, null, 2)}</pre>
+
 `defaultYScale` is:
-<code>{JSON.stringify(snippets.defaultYScale, null, 2)}</code>
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultYScale, null, 2)}</pre>
+
+### Grid
+
+In light mode, `defaultGridX` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultGridX, null, 2)}</pre>
+
+In dark mode, `defaultGridX` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultGridX, null, 2)}</pre>
 
 ### Styles for other marks
 
-`defaultDot` is:
+In light mode, `defaultDot` is:
 
-<code>{JSON.stringify(snippets.defaultDot, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultDot, null, 2)}</pre>
 
-`defaultArea` is:
+In dark mode, `defaultDot` is:
 
-<code>{JSON.stringify(snippets.defaultArea, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultDot, null, 2)}</pre>
 
-`defaultRule` is:
+In light mode, `defaultArea` is:
 
-<code>{JSON.stringify(snippets.defaultRule, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultArea, null, 2)}</pre>
 
-`defaultAnnotationText` is:
+In dark mode, `defaultArea` is:
 
-<code>{JSON.stringify(snippets.defaultAnnotationText, null, 2)}</code>
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultArea, null, 2)}</pre>
+
+In light mode, `defaultRule` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultRule, null, 2)}</pre>
+
+In dark mode, `defaultRule` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultRule, null, 2)}</pre>
+
+### Annotations
+
+In light mode, `defaultAnnotationText` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultAnnotationText, null, 2)}</pre>
+
+In dark mode, `defaultAnnotationText` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultAnnotationText, null, 2)}</pre>
+
+In light mode, `defaultAnnotationTip` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultAnnotationTip, null, 2)}</pre>
+
+In dark mode, `defaultAnnotationTip` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultAnnotationTip, null, 2)}</pre>
+
+In light mode, `defaultAnnotationRange` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultAnnotationTip, null, 2)}</pre>
+
+In dark mode, `defaultAnnotationRange` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultAnnotationTip, null, 2)}</pre>

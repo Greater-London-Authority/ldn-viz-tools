@@ -12,6 +12,9 @@
 				options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', 'full'],
 				control: { type: 'select' }
 			}
+		},
+		args: {
+			title: 'Expects a title'
 		}
 	};
 </script>
@@ -114,5 +117,26 @@
 
 		<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
 		<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button>
+	</Modal>
+</Story>
+
+<Story name="Light Theme (Experimantal)">
+	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+
+	<Modal
+		bind:isOpen
+		title="A modal with a light header!"
+		description="This modal has a description..."
+		headerTheme="light"
+	>
+		<div class="pt-2">
+			...and contents!
+			<p>A list</p>
+			<ul class="list-disc list-inside">
+				<li>One</li>
+				<li>Two</li>
+				<li>Three</li>
+			</ul>
+		</div>
 	</Modal>
 </Story>

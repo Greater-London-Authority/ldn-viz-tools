@@ -1,5 +1,37 @@
 # ldn-viz-tools-maps
 
+## 6.0.0
+
+### Major Changes
+
+- 530d8de: REMOVED: removed `MappApp` component, which was replaced by `AppShell`
+
+### Minor Changes
+
+- 60ee6e5: CHANGED: add types to `MapControlZoom` component
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+
+## 5.3.0
+
+### Minor Changes
+
+- 77d6d14: ADDED: added `MapDeckOverlay` component
+
+## 5.2.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
+## 5.1.0
+
+### Minor Changes
+
+- 1f94ca5: FIXED: `GeoJSONFeature` to `GeoJSON.Feature` in `MapCursorEvent` for correct typing of `handlerArgTypes`
+
 ## 5.0.0
 
 ### Major Changes

@@ -1,5 +1,108 @@
 # ldn-viz-tools-ui
 
+## 15.1.0
+
+### Minor Changes
+
+- 1c134d6: ADDED: add `Callout` component
+- a3726bf: FIXED: allow `value` of an option in the `Select` component to be an empty string.
+- 4e4f7c5: FIXED: increase z-index of popover controls in `LayerControl` component so that they do not open behind sidebars
+- 0313649: ADDED: add `addMultipleEventHandlers` function for registering multiple event handlers to the same Observable Plot mark(s)
+- 09fa609: FIXED: avoid unnecessary re-renders of the plot within `ObservablePlotInner`
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- e397e35: FIXED: fix spacing between `RadioButton`s and `Checkbox`es when inside a `SidebarSection`
+- 68780ea: FIXED: fix bug that caused `AppShell` to always acts as if the `startOpen` prop was `false`
+
+## 15.0.0
+
+### Major Changes
+
+- a6dca7f: CHANGED: change the interface of the `LayerControlGroup` to separate the fixed configuration of the layers and their current state
+  CHANGED: rename the `helpText` prop on the `LayerControl` to `hint` for consistency with other components
+
+## 14.9.0
+
+### Minor Changes
+
+- aa341ff: ADDED: added `LayerControlGroup` component
+  CHANGED: `LayerControl` now supports a `disabled` state
+
+### Patch Changes
+
+- 7aeb3b0: FIXED: updated `AnalyticsAndCookieConsent` and `CookieControlSettings` components to avoid errors if they are rendered
+  before `window.CookieControl` is initialized
+
+## 14.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+
+## 14.8.0
+
+### Minor Changes
+
+- f51bc23: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.7.0
+
+### Minor Changes
+
+- 3dea9ca: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.6.1
+
+### Patch Changes
+
+- 5d77717: CHANGED: wrap entries in the `CurrentLengendOrginalChips` when width of parent container is too narrow to fit them
+- 471c1cf: FIXED hintLabel prop is now optional
+
+## 14.6.0
+
+### Minor Changes
+
+- ebd6a57: ADDED: added a `LayerControl` component
+- 3d9026c: CHANGED: pinned the @steeze-ui/svelte-icon dependency to exactly 1.5.0, as subsequent versions are incompatible with Svelte 4
+
+## 14.5.0
+
+### Minor Changes
+
+- ba7c31c: FIXED: fixed issue with content disappearing behind sidebar when screen size reduced
+
+## 14.4.0
+
+### Minor Changes
+
+- e4b3ff7: ADDED: `Button` now has a prop to specify link should be opened in a new tab
+- e62fd68: CHANGED: when using the `RadioButtonGroup`, the `color` attribute for options is now optional
+- 0050885: CHANGED: the `isOpen` store on the `AppShell` component can now be externally updated to open or close the sidebar
+
+## 14.3.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
+## 14.2.0
+
+### Minor Changes
+
+- 5472861: CHANGED: update highlighting of tab icons inside a `TabList` or `SidebarTabList` when the selected item is changed externally
+
+## 14.1.0
+
+### Minor Changes
+
+- 40c49a5: CHANGED: Header and Modal Header are now themed dark as default, but this can be overridden with a prop
+
+### Patch Changes
+
+- 9f5ab57: MINOR: fixed use of MultiActionButton props form ImageDownloadButton and DataDownloadButton.
+
 ## 14.0.0
 
 ### Major Changes

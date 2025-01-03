@@ -46,6 +46,7 @@
 
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Select from '../select/Select.svelte';
 	import SidebarHint from './elements/sidebarHint/SidebarHint.svelte';
 
 	let selectedValue = 'markers';
@@ -205,6 +206,85 @@
 </Story>
 
 <Story name="With Tabs" source>
+	<Sidebar>
+		<svelte:fragment slot="tabs">
+			<SidebarTabList bind:selectedValue>
+				<SidebarTabLabel tabId="markers">
+					<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Data Markers
+				</SidebarTabLabel>
+				<SidebarTabLabel tabId="filters">
+					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Filters
+				</SidebarTabLabel>
+				<SidebarTabLabel tabId="analysis">
+					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Analysis
+				</SidebarTabLabel>
+				<SidebarTabLabel tabId="layers">
+					<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Layers
+				</SidebarTabLabel>
+			</SidebarTabList>
+		</svelte:fragment>
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			{#if selectedValue === 'markers'}
+				<div>
+					Markers is selected, so we'd render a
+					<code> &lt;Marker /&gt;</code>
+					component
+				</div>
+			{:else if selectedValue === 'filters'}
+				<div>
+					Filter is selected, so we'd render a
+					<code> &lt;Filters /&gt;</code>
+					component
+				</div>
+			{:else if selectedValue === 'analysis'}
+				<div>
+					Analysis is selected, so we'd render a
+					<code> &lt;Analysis /&gt;</code>
+					component
+				</div>
+			{:else if selectedValue === 'layers'}
+				<div>
+					Layers is selected, so we'd render a
+					<code> &lt;Layer /&gt;</code>
+					component
+				</div>
+			{/if}
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<Story name="Externally controlling the open tabs" source>
+	<div class="w-96">
+		<Select
+			items={['markers', 'filters', 'analysis', 'layers'].map((d) => ({ value: d, label: d }))}
+			bind:justValue={selectedValue}
+		/>
+	</div>
+
 	<Sidebar>
 		<svelte:fragment slot="tabs">
 			<SidebarTabList bind:selectedValue>

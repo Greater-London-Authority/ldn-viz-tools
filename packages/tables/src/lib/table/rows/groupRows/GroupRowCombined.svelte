@@ -1,21 +1,21 @@
-<script>
+<script lang="ts">
 	//TODO: background:white?
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import GroupSizeBar from '../cells/GroupSizeBar.svelte';
+	import type { Group } from '../../../core/lib/types';
+	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
+	import GroupSizeBar from './GroupSizeBar.svelte';
 
 	export let group;
 	export let table;
 
-	const constructLabel = (group) => {
+	const constructLabel = (group: Group) => {
 		return group.name.split(' ∩ ').slice(-1);
 	};
-	const getGroupLevel = (name) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
+	const getGroupLevel = (name: string) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 
-	const DEFAULT_CELL_WIDTH = '100px';
-
-	const getNthAncestor = (group, i, n) => {
+	const getNthAncestor = (group: Group, i: number, n: number) => {
 		while (n > 0) {
 			group = group.parentGroup;
 			n--;
@@ -53,7 +53,7 @@
     </div>
     -->
 
-	<!-- padding of equivalent siex to chevrons on other rows -->
+	<!-- padding of equivalent size to chevrons on other rows -->
 	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 
@@ -82,7 +82,7 @@
 		/>
 	{/each}
 
-	<div style:width={table.widths.groupLabel} class="was-td" style="flex-shrink: 0">
+	<div style:width={table.widths.groupLabel} class="was-td">
 		{constructLabel(group)}
 	</div>
 
@@ -108,9 +108,9 @@
 	<!--     {#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as i} {/each} -->
 
 	<!-- actual columns -->
-	{#each table.columnSpec as col}
+	{#each table.columnSpec as col, i}
 		{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-			<div style:width={col.cell.width ?? DEFAULT_CELL_WIDTH} class="was-td" style="flex-shrink: 0">
+			<div style:width={col.computedWidth + 'px'} class="was-td">
 				{#if col.group && col.group.renderer}
 					<svelte:component
 						this={col.group.renderer}
@@ -125,5 +125,6 @@
 				{/if}
 			</div>
 		{/if}
+		<ColGroupSpacer {table} {i} />
 	{/each}
 </div>

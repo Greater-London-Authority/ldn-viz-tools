@@ -17,7 +17,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
+        run: npm install
 
       - name: Install turbo
         run: npm install turbo --global

@@ -8,7 +8,7 @@
 			type: {
 				summary: 'function',
 				detail:
-					'function(event: MouseEvent | TouchEvent, {\n  feature: GeoJSONFeature,\n  features: GeoJSONFeature[],\n  isTouchEvent: boolean\n}) => void'
+					'function(event: MouseEvent | TouchEvent, {\n  feature: GeoJSON.Feature,\n  features: GeoJSON.Feature[],\n  isTouchEvent: boolean\n}) => void'
 			}
 		}
 	};
@@ -20,7 +20,7 @@
 			type: {
 				summary: 'function',
 				detail:
-					'function(event: MouseEvent | TouchEvent, {\n  feature: null,\n  features: GeoJSONFeature[],\n  isTouchEvent: boolean\n}) => void'
+					'function(event: MouseEvent | TouchEvent, {\n  feature: null,\n  features: GeoJSON.Feature[],\n  isTouchEvent: boolean\n}) => void'
 			}
 		}
 	};

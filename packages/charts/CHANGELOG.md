@@ -1,5 +1,95 @@
 # ldn-viz-tools-charts
 
+## 3.8.2
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- Updated dependencies [1c134d6]
+- Updated dependencies [a3726bf]
+- Updated dependencies [4e4f7c5]
+- Updated dependencies [0313649]
+- Updated dependencies [09fa609]
+- Updated dependencies [6dc5105]
+- Updated dependencies [e397e35]
+- Updated dependencies [68780ea]
+  - @ldn-viz/ui@15.1.0
+
+## 3.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+- Updated dependencies [89b89e0]
+  - @ldn-viz/ui@14.8.1
+
+## 3.8.0
+
+### Minor Changes
+
+- f4e7e27: FIXED: add padding to images of charts or tables downloaded in png format using ImageDownloadButton
+
+### Patch Changes
+
+- Updated dependencies [f51bc23]
+  - @ldn-viz/ui@14.8.0
+
+## 3.7.0
+
+### Minor Changes
+
+- 72db5e6: FIXED: addEventHandlerInner no longer expects x and y values (fixes regression in 3.5.0)
+
+## 3.6.0
+
+### Minor Changes
+
+- a8170bb: CHANGED: improve footer in `ChartContainer` component
+
+### Patch Changes
+
+- a581914: FIXED: fix regression that caused width of `ObservablePlot`/`ObservablePlotInner` to not respond to changes in width of parent container
+
+## 3.5.0
+
+### Minor Changes
+
+- d36a893: ADDED: `ObservablePlot` now applies a `ChartContainer` wrapper around a separate `ObservablePlotInner` components and accepts a `controls` slot
+
+## 3.4.0
+
+### Minor Changes
+
+- eff5d0e: ADDED: `ChartContainer` component now accepts a `controls` slot
+- 04e407a: Adjust reponisve layout of export buttons
+
+### Patch Changes
+
+- Updated dependencies [e4b3ff7]
+- Updated dependencies [e62fd68]
+  - @ldn-viz/ui@14.4.0
+
+## 3.3.0
+
+### Minor Changes
+
+- e9a98b1: FIXED: support event handlers for marks that have `x1`/`x2`/`cx` attributes instead of `x`, and `y1`/`y2`/`cy` attributes instead of `y`
+
+## 3.2.0
+
+### Minor Changes
+
+- 8aac39d: FIXED: export `addEventHandler` and `registerTooltip`
+
+## 3.1.1
+
+### Patch Changes
+
+- 9f5ab57: MINOR: fixed use of MultiActionButton props form ImageDownloadButton and DataDownloadButton.
+- Updated dependencies [9f5ab57]
+- Updated dependencies [40c49a5]
+  - @ldn-viz/ui@14.1.0
+
 ## 3.1.0
 
 ### Minor Changes

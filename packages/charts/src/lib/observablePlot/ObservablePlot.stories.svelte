@@ -24,7 +24,9 @@
 	import * as Plot from '@observablehq/plot';
 	import { format } from 'd3-format';
 
-	import { currentThemeMode } from '@ldn-viz/ui';
+	import { addMultipleEventHandlers } from './ObservablePlotInner.svelte';
+
+	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
 		plotTheme,
@@ -34,15 +36,15 @@
 	import {
 		areaPlotData,
 		areaPlotPointsToLabel,
-		educationLabelOffsets,
 		education_data,
+		educationLabelOffsets,
 		lineChartData,
 		material_deprivation_data,
 		penguins
 	} from '../../data/demoData';
 
 	import DemoTooltip from './DemoTooltip.svelte';
-	import { addEventHandler, registerTooltip } from './ObservablePlot.svelte';
+	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
 
 	$: ({
@@ -321,6 +323,45 @@
 		Selected point:
 		<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
 	</div>
+</Story>
+
+<Story name="With multiple event handlers">
+	<ObservablePlot
+		spec={{
+			...mbBarSpec,
+			marks: [
+				Plot.barX(material_deprivation_data, {
+					x: 'Pensioners',
+					y: 'Region',
+					fill: 'Area',
+					sort: { y: 'x', reverse: true },
+
+					render: addMultipleEventHandlers([
+						{
+							markShape: 'rect',
+							type: 'click',
+							handler: (_, d) => console.log('Clicked on:', material_deprivation_data[d.index])
+						},
+						{
+							markShape: 'rect',
+							type: 'mouseenter',
+							handler: (_, d) => console.log('Cursor entered:', material_deprivation_data[d.index])
+						}
+					])
+				})
+			]
+		}}
+	/>
+</Story>
+
+<!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
+<Story name="With controls">
+	<ObservablePlot {spec} title="Penguin Culmens" subTitle="A scatterplot of depth against length">
+		<div slot="controls" class="flex gap-4 mb-4">
+			<Select label="An input affecting the chart" items={[]} />
+			<Select label="Another input" items={[]} />
+		</div>
+	</ObservablePlot>
 </Story>
 
 <!-- 
@@ -806,11 +847,8 @@
 		spec={{
 			...mbBarSpec
 		}}
-		footer={{
-			byline: 'GLA City Intelligence',
-			source: 'London Datastore',
-			note: 'Data for illustrative purpose only',
-			exportBtns: true
-		}}
+		byline="GLA City Intelligence"
+		source="London Datastore"
+		note="Data for illustrative purpose only"
 	/>
 </Story>

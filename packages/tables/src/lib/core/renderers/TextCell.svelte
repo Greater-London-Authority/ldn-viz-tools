@@ -7,9 +7,9 @@
 	import { classNames } from '../../utils/utilityFns.js';
 
 	export let value: number | string;
-	export let alignText = 'left' | 'right' | 'center' | undefined;
+	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
 
-	export let formatString;
+	export let formatString: string | undefined = undefined;
 	$: f = format(formatString ?? '');
 
 	const alignmentClasses = {
@@ -18,10 +18,12 @@
 		center: 'justify-center'
 	};
 
-	let alignmentClass;
-	$: alignmentClass = alignmentClasses[alignText ?? 'center'];
+	$: alignmentClass = alignmentClasses[alignText ?? 'left'];
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	$$restProps;
 </script>
 
-<span class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>
-	{formatString ? f(value) : value}
+<span class={classNames(`flex h-full items-center py-2`, alignmentClass)}>
+	{formatString ? f(+value) : value}
 </span>

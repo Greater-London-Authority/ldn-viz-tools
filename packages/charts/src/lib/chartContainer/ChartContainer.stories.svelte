@@ -2,6 +2,8 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import ChartContainer from './ChartContainer.svelte';
 
+	import { Select } from '@ldn-viz/ui';
+
 	export const meta = {
 		title: 'Charts/ChartContainer',
 		component: ChartContainer
@@ -22,13 +24,34 @@
 	<ChartContainer title="This is the Chart Title" subTitle="Subtitle provides extra context" />
 </Story>
 
+<Story name="With Title, Subtitle, and Controls">
+	<ChartContainer title="This is the Chart Title" subTitle="Subtitle provides extra context">
+		<div slot="controls" class="flex gap-4">
+			<Select label="An input affecting the chart" items={[]} />
+			<Select label="Another input" items={[]} />
+		</div>
+	</ChartContainer>
+</Story>
+
 <Story name="Source, byline and note (footer)">
+	<ChartContainer
+		title="This is the Chart Title"
+		subTitle="Subtitle provides extra context"
+		source="GLA city intelligence"
+		byline="A byline for the chart"
+		note="Be aware that you can provide a note if required"
+		dataDownloadButton={['JSON', 'CSV']}
+		data={[]}
+		imageDownloadButton
+	/>
+</Story>
+
+<Story name="Source, byline only">
 	<ChartContainer
 		title="This is the Chart Title"
 		subTitle="Subtitle provides extra context"
 		source="The source of this chart data"
 		byline="A byline for the chart"
-		note="Be aware that you can provide a note if required"
 		dataDownloadButton={['JSON', 'CSV']}
 		data={[]}
 		imageDownloadButton
