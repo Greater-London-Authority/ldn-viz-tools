@@ -21,7 +21,14 @@
 	export let isOpen = writable(false);
 
 	const {
-		elements: { portalled, overlay, content, title: meltTitle, description: meltDescription, close },
+		elements: {
+			portalled,
+			overlay,
+			content,
+			title: meltTitle,
+			description: meltDescription,
+			close
+		},
 		states: { open }
 	} = createDialog({ open: isOpen });
 
