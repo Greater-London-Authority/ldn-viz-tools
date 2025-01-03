@@ -403,7 +403,7 @@ const matches = (
  * Generates an array of annotation objects. This selects a subset of the `data` array by identifying elements for which certain fields (e.g. the 'area' and 'year') have specific values, and optionally adds additional fields.
  *
  * Arguments:
- * data - array of data objects, each correpsonding to one measurement/observation
+ * data - array of data objects, each corresponding to one measurement/observation
  * pointsToAnnotate - array of values to be annotated
  * extraFields (optional) - object containing fields to be added to each element
  * fieldsToMatchOn (optional) - list of fields to be used to match elements of `pointsToAnnotate` with elements of `data`. If empty, all fields of `pointsToAnnotate` will be used for comparison

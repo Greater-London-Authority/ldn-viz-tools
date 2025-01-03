@@ -120,7 +120,7 @@
 	</Modal>
 </Story>
 
-<Story name="Light Theme (Experimantal)">
+<Story name="Light Theme (Experimental)">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal

@@ -100,7 +100,7 @@
 		x: {
 			...defaultXScale,
 			domain: [0, 20],
-			insetLeft: 0 // adjusting to fit y axis labels of this chart
+			insetLeft: 0 // adjusting to fit y-axis labels of this chart
 		},
 
 		color: {
@@ -190,7 +190,7 @@
 </Story>
 
 <!-- 
-	The height of the chart remains the reponsibility of the contained instance of plot. It can be set to a specific pixel value: ie 300
+	The height of the chart remains the responsibility of the contained instance of plot. It can be set to a specific pixel value: ie 300
 -->
 <Story name="With Height">
 	<ObservablePlot spec={{ ...spec, height: 300 }} />
@@ -365,8 +365,8 @@
 </Story>
 
 <!-- 
-	The example stories show how defaults can be over-riden to achieve chart specific styling.
-	For example the tratment of the Y axis relys on an insetLeft property on the Plot.X and manipulation of the margin and Plot.axisY component
+	The example stories show how defaults can be over-ridden to achieve chart specific styling.
+	For example the treatment of the Y axis relies on an insetLeft property on the Plot.X and manipulation of the margin and Plot.axisY component
 -->
 <Story name="Examples / Area chart">
 	<ObservablePlot

@@ -31,7 +31,7 @@ export const tabLayoutOverride: PlacementLookup = {
 	bottom: '!w-auto !flex !flex-row !space-y-0 !pb-0 !float-left'
 };
 
-// The width and height classes are a bit complex to accomodate absolutely positioned nav trigger elements...
+// The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {
 	standard: {
 		left: 'max-w-[408px] min-[488px]:min-w-[408px] w-[calc(100vw-80px)]',
