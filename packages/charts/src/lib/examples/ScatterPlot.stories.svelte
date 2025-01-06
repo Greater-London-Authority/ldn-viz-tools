@@ -18,7 +18,7 @@
 		Plot.gridY(),
 		Plot.ruleY([0]),
 		Plot.ruleX([0]),
-		Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
+		Plot.dot(penguins, { x: 'culmen_length_mm', y: 'culmen_depth_mm' }),
 		Plot.axisX(),
 		Plot.axisY({ label: 'culmen_depth_mm' }),
 		Plot.tip(penguins, Plot.pointerX({ x: 'culmen_length_mm', y: 'culmen_depth_mm' }))
