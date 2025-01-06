@@ -14,7 +14,7 @@
 	import { penguins } from '../../data/demoData';
 	import { Plot, glaPlot } from '../observablePlotFragments/glaPlot';
 
-	$: globalDefaultsMarks = [
+	$: marks = [
 		Plot.gridX(),
 		Plot.gridY(),
 		Plot.ruleY([0]),
@@ -25,7 +25,7 @@
 		Plot.tip(penguins, Plot.pointerX({ x: 'culmen_length_mm', y: 'culmen_depth_mm' }))
 	];
 
-	$: globalDefaultsSpec = glaPlot(penguins, $currentThemeMode, globalDefaultsMarks);
+	$: spec = glaPlot(penguins, $currentThemeMode, marks);
 </script>
 
 <Template let:args>
@@ -33,9 +33,9 @@
 		{...args}
 		title="Penguin Culmens"
 		subTitle="A scatterplot of depth against length"
-		spec={{ ...globalDefaultsSpec }}
+		{spec}
 		data={penguins}
 	/>
 </Template>
 
-<Story name="Default" source />
+<Story name="Default" args={{ spec }} source />

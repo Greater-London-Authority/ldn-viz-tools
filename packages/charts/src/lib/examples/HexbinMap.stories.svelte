@@ -70,11 +70,11 @@
 			)
 		)
 	];
-	$: hexbinSpec = glaPlot(hexbinData, $currentThemeMode, hexbinMarks, hexbinOptions);
+	$: spec = glaPlot(hexbinData, $currentThemeMode, hexbinMarks, hexbinOptions);
 </script>
 
 <Template let:args>
-	<ObservablePlot {...args} spec={{ ...hexbinSpec }} title="Hexbin map" data={hexbinData}>
+	<ObservablePlot {...args} {spec} title="Hexbin map" data={hexbinData}>
 		<div slot="controls" class="w-40 mb-4">
 			<Input
 				type="range"
@@ -89,4 +89,4 @@
 	</ObservablePlot>
 </Template>
 
-<Story name="Default" source />
+<Story name="Default" args={{ spec }} source />

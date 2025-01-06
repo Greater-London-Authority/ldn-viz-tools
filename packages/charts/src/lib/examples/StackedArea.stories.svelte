@@ -21,8 +21,8 @@
 	$: selectedView = $showProportion ? 'visitor_proportion' : 'visitor_count';
 	$: selectedViewName = selectedView.split('_')[1];
 
-	$: visitorOptions = {
-		marginTop: 40,
+	$: options = {
+		other: { marginTop: 40 },
 		color: {
 			range: visitorColors,
 			label: 'Visitor type',
@@ -34,7 +34,7 @@
 		}
 	};
 
-	$: visitorMarks = [
+	$: marks = [
 		Plot.gridY(),
 		Plot.areaY(visitorsData, {
 			x: (d) => new Date(d.date),
@@ -61,7 +61,7 @@
 		Plot.ruleY([0])
 	];
 
-	$: visitorSpec = glaPlot(visitorsData, $currentThemeMode, visitorMarks, visitorOptions);
+	$: spec = glaPlot(visitorsData, $currentThemeMode, marks, options);
 </script>
 
 <Template let:args>
@@ -69,7 +69,7 @@
 		{...args}
 		title="Visitor {selectedViewName} over time for Acton Lane, South Acton on Wednesday AM from 2022 to 2024"
 		subTitle="Shows {selectedViewName} over time, split by visitor type. The area of each colour corresponds to the {selectedViewName} for that visitor type."
-		spec={{ ...visitorSpec }}
+		spec={{ ...spec }}
 		data={visitorsData}
 	>
 		<div slot="controls" class="space-y-4 mb-8">
@@ -85,4 +85,4 @@
 	</ObservablePlot>
 </Template>
 
-<Story name="Default" source />
+<Story name="Default" args={{ spec }} source />
