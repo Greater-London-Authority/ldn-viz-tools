@@ -292,7 +292,7 @@
 			marks: [
 				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
 				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
-				Plot.dot(penguins, {
+				Plot.point(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
 					render: addEventHandler('click', (_ev, d) => {
