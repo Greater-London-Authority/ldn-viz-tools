@@ -9,7 +9,6 @@
 </script>
 
 <script lang="ts">
-	import { currentThemeMode } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { penguins } from '../../data/demoData';
 	import { Plot, glaPlot } from '../observablePlotFragments/glaPlot';
@@ -26,7 +25,7 @@
 	];
 
 	$: spec = glaPlot(penguins, $currentThemeMode, marks);
-</script>
+	$: spec = glaPlot(penguins, marks);
 
 <Template let:args>
 	<ObservablePlot

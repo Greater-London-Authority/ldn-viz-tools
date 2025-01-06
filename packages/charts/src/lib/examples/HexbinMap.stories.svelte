@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-	import { Input, currentThemeMode } from '@ldn-viz/ui';
+	import { Input } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
 	import { boroughsGeoFromTopo } from '../../data/boroughsGeoFromTopo';
@@ -68,7 +68,7 @@
 			)
 		)
 	];
-	$: spec = glaPlot(hexbinData, $currentThemeMode, hexbinMarks, hexbinOptions);
+	$: spec = glaPlot(hexbinData, hexbinMarks, hexbinOptions);
 </script>
 
 <Template let:args>

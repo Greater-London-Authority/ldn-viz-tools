@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-	import { Select, Switch, currentThemeMode } from '@ldn-viz/ui';
+	import { Select, Switch } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import { visitorColors, visitorTypes, visitors, visitorsData } from '../../data/demoData';
@@ -61,7 +61,7 @@
 		Plot.ruleY([0])
 	];
 
-	$: spec = glaPlot(visitorsData, $currentThemeMode, marks, options);
+	$: spec = glaPlot(visitorsData, marks, options);
 </script>
 
 <Template let:args>
