@@ -1,7 +1,7 @@
 <script context="module">
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
-	/* This is an example `HexbinMap` chart using the default plot styles via `glaPlot` function. */
+	/* This is an example `HexbinMap` chart using default plot styles, through a spec created by the `glaPlot` function. */
 
 	export const meta = {
 		title: 'Charts/Examples/HexbinMap'
