@@ -22,11 +22,12 @@ import * as ObservablePlot from '@observablehq/plot';
 import { getDefaultPlotStyles, type ThemeMode } from './observablePlotFragments';
 
 interface PlotOptions {
-	size?: {};
+	size?: { height?: {}; marginLeft?: {}; marginRight?: {}; marginTop?: {}; marginBottom?: {} };
 	color?: {};
 	xScale?: {};
 	yScale?: {};
-	other?: {};
+	fx?: {};
+	fy?: {};
 }
 
 // Function that handles default styles and takes data, mode and marks props.
@@ -48,31 +49,34 @@ export const glaPlot = (
 		defaultYScale
 	} = getDefaultPlotStyles(mode);
 
+	const { color, xScale, yScale, size, ...other } = options;
+
 	const spec = {
 		style: {
 			...defaultStyle
 		},
 		...defaultSize,
+		...size,
 		color: {
 			...defaultColor,
-			...options.color
+			...color
 		},
 		x: {
 			...defaultXScale,
-			...options.xScale
+			...xScale
 		},
 		y: {
 			...defaultYScale,
-			...options.yScale
+			...yScale
 		},
-		...options.other,
+		...other,
 		marks
 	};
 
 	const facetedSpec = {
 		...spec,
 		...defaultSizeFacet,
-		...options.size
+		...size
 	};
 
 	return isFaceted ? facetedSpec : spec;
