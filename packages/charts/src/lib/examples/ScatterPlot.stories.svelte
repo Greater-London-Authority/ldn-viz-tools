@@ -24,8 +24,8 @@
 		Plot.tip(penguins, Plot.pointerX({ x: 'culmen_length_mm', y: 'culmen_depth_mm' }))
 	];
 
-	$: spec = glaPlot(penguins, $currentThemeMode, marks);
 	$: spec = glaPlot(penguins, marks);
+</script>
 
 <Template let:args>
 	<ObservablePlot
