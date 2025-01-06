@@ -22,7 +22,7 @@
 	$: selectedViewName = selectedView.split('_')[1];
 
 	$: options = {
-		other: { marginTop: 40 },
+		size: { marginTop: 40 },
 		color: {
 			range: visitorColors,
 			label: 'Visitor type',

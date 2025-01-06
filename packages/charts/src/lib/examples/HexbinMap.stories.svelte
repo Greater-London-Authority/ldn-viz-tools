@@ -33,11 +33,9 @@
 		xScale: {
 			axis: null
 		},
-		other: {
-			projection: {
-				type: 'mercator',
-				domain: boroughsGeoFromTopo
-			}
+		projection: {
+			type: 'mercator',
+			domain: boroughsGeoFromTopo
 		}
 	};
 
