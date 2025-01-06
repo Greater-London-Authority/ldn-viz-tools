@@ -21,9 +21,9 @@
 		TopRight: 'top-6 right-6 items-end',
 		TopRightOffset: 'top-16 right-6 items-end',
 		CenterRight: 'top-1/2 -translate-y-1/2 right-6 transform items-end',
-		BottomRight: 'bottom-6 right-6 items-end',
-		BottomCenter: 'bottom-6 left-1/2 -translate-x-1/2 transform items-center',
-		BottomLeft: 'bottom-6 left-6',
+		BottomRight: 'bottom-11 right-6 items-end',
+		BottomCenter: 'bottom-11 left-1/2 -translate-x-1/2 transform items-center',
+		BottomLeft: 'bottom-11 left-6',
 		CenterLeft: 'top-1/2 -translate-y-1/2 left-6 transform'
 	};
 </script>
