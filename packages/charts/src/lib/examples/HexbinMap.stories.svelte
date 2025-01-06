@@ -12,7 +12,9 @@
 	import { Input, currentThemeMode } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
-	import { boroughsGeoFromTopo, hexbinData, mapVisitorMap } from '../../data/demoData';
+	import { boroughsGeoFromTopo } from '../../data/boroughsGeoFromTopo';
+	import { mapVisitorMap } from '../../data/demoData';
+	import { hexbinData } from '../../data/hexbinData';
 	import { Plot, glaPlot } from '../observablePlotFragments/glaPlot';
 
 	let binWidth = '20';
