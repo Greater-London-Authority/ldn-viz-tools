@@ -94,7 +94,8 @@ const {
 	defaultRule,
 	defaultTip,
 	defaultAnnotationText,
-	defaultAnnotationTip
+	defaultAnnotationTip,
+	defaultPoint
 } = getDefaultPlotStyles();
 
 // Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
@@ -161,13 +162,13 @@ export const Plot = {
 		return ObservablePlot.lineY(data, { ...defaultLine, ...options });
 	},
 	point: (data?: Data, options?: DotOptions) => {
-		return ObservablePlot.dot(data, { ...defaultDot, ...options });
+		return ObservablePlot.dot(data, { ...defaultPoint, ...options });
 	},
 	pointX: (data?: Data, options?: DotXOptions) => {
-		return ObservablePlot.dotX(data, { ...defaultDot, ...options });
+		return ObservablePlot.dotX(data, { ...defaultPoint, ...options });
 	},
 	pointY: (data?: Data, options?: DotYOptions) => {
-		return ObservablePlot.dotY(data, { ...defaultDot, ...options });
+		return ObservablePlot.dotY(data, { ...defaultPoint, ...options });
 	},
 	ruleX: (data?: Data, options?: RuleYOptions) => {
 		return ObservablePlot.ruleX(data, { ...defaultRule, ...options });
