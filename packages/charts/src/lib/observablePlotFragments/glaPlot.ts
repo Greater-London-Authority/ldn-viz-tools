@@ -35,7 +35,6 @@ interface PlotOptions {
 // where needed, as well as a boolean to change size for faceted charts
 export const glaPlot = (
 	_data: any,
-	mode: ThemeMode,
 	marks: any[],
 	options: PlotOptions = {},
 	isFaceted: boolean = false
@@ -47,7 +46,7 @@ export const glaPlot = (
 		defaultColor,
 		defaultXScale,
 		defaultYScale
-	} = getDefaultPlotStyles(mode);
+	} = getDefaultPlotStyles();
 
 	const { color, xScale, yScale, size, ...other } = options;
 
