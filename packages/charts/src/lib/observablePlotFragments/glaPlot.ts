@@ -22,12 +22,18 @@ import * as ObservablePlot from '@observablehq/plot';
 import { getDefaultPlotStyles, type ThemeMode } from './observablePlotFragments';
 
 interface PlotOptions {
-	size?: { height?: {}; marginLeft?: {}; marginRight?: {}; marginTop?: {}; marginBottom?: {} };
+	size?: {
+		height?: {};
+		marginLeft?: {};
+		marginRight?: {};
+		marginTop?: {};
+		marginBottom?: {};
+		fx?: {};
+		fy?: {};
+	};
 	color?: {};
 	xScale?: {};
 	yScale?: {};
-	fx?: {};
-	fy?: {};
 }
 
 // Function that handles default styles and takes data, mode and marks props.
