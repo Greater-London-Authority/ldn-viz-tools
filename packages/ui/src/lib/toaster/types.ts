@@ -26,7 +26,7 @@ export interface ToastMessage {
 	// text is just the message text to be displayed to the end user.
 	text: string;
 
-	// id is used as the ToastMessage id. It is auto-generated if falsey after
+	// id is used as the ToastMessage id. It is auto-generated if falsy after
 	// string trimming.
 	id: string;
 

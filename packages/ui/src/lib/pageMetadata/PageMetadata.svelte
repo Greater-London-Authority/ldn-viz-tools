@@ -41,7 +41,7 @@
 	export let type = 'website';
 
 	/**
-	 * "If your object is part of a larger web site, the name which should be displayed for the overall site"
+	 * "If your object is part of a larger website, the name which should be displayed for the overall site"
 	 */
 	export let site = 'GLA Intelligence and Analysis Unit';
 

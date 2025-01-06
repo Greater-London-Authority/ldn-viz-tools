@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls usch as data/image download buttons.
+	 * It also provides controls such as data/image download buttons.
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 * 	@component

@@ -177,7 +177,7 @@
 	<div class="w-[400px]">
 		<p>
 			Flipping both the range and domain of the scale affects the direction in which the legend is
-			drawn, without affecitng the mapping from values to colors.
+			drawn, without affecting the mapping from values to colors.
 		</p>
 
 		<ColorLegend color={scaleSequential(interpolateBlues).domain([0, 10])} title="Original" />

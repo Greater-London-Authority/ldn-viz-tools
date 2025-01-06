@@ -128,7 +128,7 @@
 				}
 			);
 
-			// scaleSequentialQuantile doesn’t implement ticks or tickFormat.
+			// scaleSequentialQuantile doesn't implement ticks or tickFormat.
 			if (!x.ticks) {
 				if (tickValues === undefined) {
 					n = Math.round(ticks + 1);

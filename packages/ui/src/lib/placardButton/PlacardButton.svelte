@@ -15,7 +15,7 @@
 	export let href = '';
 
 	/**
-	 * If `true`, then the targer of the link will open in a new browser tab or window.
+	 * If `true`, then the target of the link will open in a new browser tab or window.
 	 */
 	export let newWindow = false;
 </script>

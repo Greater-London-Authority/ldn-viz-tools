@@ -1,6 +1,6 @@
 <script context="module">
 	/**
-	 * The `<AnalyticsAndCookieConsent>` component sets up Google analytics and uses [Civic Cookie Control](https://www.civicuk.com/cookie-control/) to get consent for the use of cookies.
+	 * The `<AnalyticsAndCookieConsent>` component sets up Google Analytics and uses [Civic Cookie Control](https://www.civicuk.com/cookie-control/) to get consent for the use of cookies.
 	 * As the cookie consent applies across the *.london.gov.uk domain, the cookie consent sidebar is styled to match the main london.gov.uk site rather than the CIU's apps.
 	 *
 	 * Define the API key and AppName before using this component (replace `\/` with `/` in the closing `<script>` tag):
@@ -26,7 +26,7 @@
 	
 		If the Digital team informs the City Data team of config changes make
 		sure to remove any '\r\n' characters from text fields and use only
-		the apps.london.gov.uk API key (different sub domains have different
+		the apps.london.gov.uk API key (different subdomains have different
 		keys).
 	
 		If the page is embedded within another london.gov.uk page then cookie
@@ -36,7 +36,7 @@
 	
 		Docs: https://www.civicuk.com/cookie-control/documentation/getting-started
 
-		If this page is embeded within a london.gov.uk webpage and a cookie
+		If this page is embedded within a london.gov.uk webpage and a cookie
 		consent has yet to be set then a periodic script will run that cancels
 		itself and reloads this page once the cookie is finally set. This
 		ensures analytics is disabled or enabled based on the users preference
