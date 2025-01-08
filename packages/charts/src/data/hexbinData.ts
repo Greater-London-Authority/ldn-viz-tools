@@ -1,4 +1,4 @@
-import { rewind } from '@turf/rewind';
+import rewind from '@turf/rewind';
 
 const buildEsriQueryUrl = (esriLayerUrl: string, endpointId: number, esriParams = {}) => {
 	const queryParams = {
@@ -30,7 +30,7 @@ const loadGeoData = async () => {
 	return res.json();
 };
 
-const data = await loadGeoData();
+const data = loadGeoData().then((res) => res);
 
 const rewindData = (data: GeoJSON.FeatureCollection) =>
 	data.features.map((feature) => rewind(feature, { reverse: true }));
