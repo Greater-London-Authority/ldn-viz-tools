@@ -144,8 +144,8 @@ export const plot = (options: PlotOptions = {}) => {
 		...rest
 	};
 
-	const { marks, ...restOfSpec } = specWithDefaultsApplied;
-	console.log(JSON.stringify(restOfSpec, null, 2));
+	// const { marks, ...restOfSpec } = specWithDefaultsApplied;
+	// console.log(JSON.stringify(restOfSpec, null, 2));
 
 	return ObservablePlot.plot(specWithDefaultsApplied as PlotOptions);
 };
