@@ -1,5 +1,6 @@
 <script context="module">
 	import { DocumentArrowUp } from '@steeze-ui/heroicons';
+	import { expect, userEvent, within } from '@storybook/test';
 	import AsyncButton from './AsyncButton.svelte';
 
 	export const meta = {
@@ -74,14 +75,29 @@
 		Click me!
 	</AsyncButton>
 	<div class="mt-4">
-		Working:
-		<span class:text-color-ui-negative={!working} class:text-color-ui-positive={working}>
-			{working}
-		</span>
+		<p data-testid="working-paragraph">
+			Working:
+			<span class:text-color-ui-negative={!working} class:text-color-ui-positive={working}>
+				{working}
+			</span>
+		</p>
 	</div>
 </Template>
 
-<Story name="Default" source />
+<Story
+	name="Default"
+	source
+	play={async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+
+		// See https://storybook.js.org/docs/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel
+		await userEvent.click(canvas.getByRole('button'));
+
+		// 👇 Assert DOM structure
+		const paragraph = canvas.getByTestId('working-paragraph');
+		expect(paragraph).toHaveTextContent('Working: true');
+	}}
+/>
 
 <Story name="Variants & Conditions">
 	<div class="flex flex-col gap-4">
