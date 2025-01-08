@@ -34,7 +34,8 @@ const rewindData = (data: GeoJSON.FeatureCollection) =>
 	data.features.map((feature) => rewind(feature, { reverse: true }));
 
 let hexbinData: any;
-loadGeoData().then((res) => (hexbinData = rewindData(res)));
-
-console.log(hexbinData);
-export default hexbinData;
+export default loadGeoData().then((res) => {
+	hexbinData = rewindData(res);
+	console.log(hexbinData);
+	return hexbinData;
+});
