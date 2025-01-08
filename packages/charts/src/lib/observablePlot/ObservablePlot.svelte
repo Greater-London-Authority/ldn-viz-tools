@@ -92,6 +92,12 @@
 
 	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
+
+	/**
+	 * If `false`, then use the Plot.plot function provided by  Observable Plot (rather than the wrapper provided by `@ldn-viz`),
+	 * so that default chart-level styling is not applied.
+	 */
+	export let applyDefaults = true;
 </script>
 
 {#key spec}
@@ -113,7 +119,7 @@
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 		<slot name="controls" />
 
-		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} />
+		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} {applyDefaults} />
 	</ChartContainer>
 {/key}
 
