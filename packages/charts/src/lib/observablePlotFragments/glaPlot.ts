@@ -13,28 +13,14 @@ import type {
 	LineOptions,
 	LineXOptions,
 	LineYOptions,
+	PlotOptions,
 	RuleXOptions,
 	RuleYOptions,
 	TextOptions,
 	TipOptions
 } from '@observablehq/plot';
 import * as ObservablePlot from '@observablehq/plot';
-import { getDefaultPlotStyles, type ThemeMode } from './observablePlotFragments';
-
-interface PlotOptions {
-	size?: {
-		height?: {};
-		marginLeft?: {};
-		marginRight?: {};
-		marginTop?: {};
-		marginBottom?: {};
-		fx?: {};
-		fy?: {};
-	};
-	color?: {};
-	xScale?: {};
-	yScale?: {};
-}
+import { getDefaultPlotStyles } from './observablePlotFragments';
 
 // Function that handles default styles and takes data, mode and marks props.
 // It also optionally takes an options object which can handle overriding default styling
@@ -54,7 +40,7 @@ export const glaPlot = (
 		defaultYScale
 	} = getDefaultPlotStyles();
 
-	const { color, xScale, yScale, size, ...other } = options;
+	const { color, x, y, size, ...rest } = options;
 
 	const spec = {
 		style: {
@@ -68,13 +54,13 @@ export const glaPlot = (
 		},
 		x: {
 			...defaultXScale,
-			...xScale
+			...x
 		},
 		y: {
 			...defaultYScale,
-			...yScale
+			...y
 		},
-		...other,
+		...rest,
 		marks
 	};
 
@@ -85,6 +71,83 @@ export const glaPlot = (
 	};
 
 	return isFaceted ? facetedSpec : spec;
+};
+
+export const plot = (options: PlotOptions = {}) => {
+	const {
+		defaultStyle,
+		defaultSize,
+		defaultSizeFacet,
+		defaultColor,
+		defaultXScale,
+		defaultYScale
+	} = getDefaultPlotStyles();
+
+	const {
+		style,
+		color,
+		x,
+		y,
+		height,
+		width,
+		marginTop,
+		marginBottom,
+		marginLeft,
+		marginRight,
+		...rest
+	} = options;
+
+	const sizeDefault = options.fx || options.fy ? defaultSizeFacet : defaultSize;
+	const defaultStyleString = Object.entries(defaultStyle)
+		.map(([k, v]) => `${k}:${v}`)
+		.join(';');
+	console.log(defaultStyleString);
+
+	const specWithDefaultsApplied = {
+		// style may be either a string or an object
+
+		style:
+			typeof style === 'string'
+				? defaultStyleString + style
+				: {
+						...defaultStyle,
+						...style
+					},
+
+		height: height ?? sizeDefault.height,
+		marginLeft: marginLeft ?? sizeDefault.marginLeft,
+		marginRight: marginRight ?? sizeDefault.marginRight,
+		marginTop: marginTop ?? sizeDefault.marginTop,
+		marginBottom: marginBottom ?? sizeDefault.marginBottom,
+
+		// height: sizeDefault.height,
+		// marginLeft: sizeDefault.marginLeft,
+		// marginRight: sizeDefault.marginRight,
+		// marginTop: sizeDefault.marginTop,
+		// marginBottom: sizeDefault.marginBottom,
+
+		color: color
+			? {
+					...defaultColor,
+					...color
+				}
+			: undefined,
+		x: {
+			...defaultXScale,
+			...x
+		},
+		y: {
+			...defaultYScale,
+			...y
+		},
+
+		...rest
+	};
+
+	const { marks, ...restOfSpec } = specWithDefaultsApplied;
+	console.log(JSON.stringify(restOfSpec, null, 2));
+
+	return ObservablePlot.plot(specWithDefaultsApplied as PlotOptions);
 };
 
 // Mark styles
@@ -107,6 +170,7 @@ const {
 // Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
 export const Plot = {
 	...ObservablePlot,
+	plot,
 	annotationText: (data?: Data, options?: TextOptions) => {
 		return ObservablePlot.text(data, { ...defaultAnnotationText, ...options });
 	},
@@ -149,12 +213,12 @@ export const Plot = {
 		return ObservablePlot.dotY(data, { ...defaultDot, ...options });
 	},
 	gridX: (...args: [data?: Data, options?: GridXOptions] | [options?: GridXOptions]) => {
-		args.length > 1
+		return args.length > 1
 			? ObservablePlot.gridX(args[0] as Data, { ...defaultGridX, ...args[1] })
 			: ObservablePlot.gridX({ ...defaultGridX, ...args[0] });
 	},
 	gridY: (...args: [data?: Data, options?: GridYOptions] | [options?: GridYOptions]) => {
-		args.length > 1
+		return args.length > 1
 			? ObservablePlot.gridY(args[0] as Data, { ...defaultGridY, ...args[1] })
 			: ObservablePlot.gridY({ ...defaultGridY, ...args[0] });
 	},
