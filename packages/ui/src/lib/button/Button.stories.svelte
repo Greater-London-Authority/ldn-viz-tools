@@ -147,3 +147,56 @@
 		<Button href="http://google.com" openInNewTab>Link</Button>
 	</div>
 </Story>
+
+<Story name="Variants">
+	<div class="space-y-2">
+		<div class="flex items-end space-x-2">
+			<Button variant="brand">Click here</Button>
+			<Button variant="solid">Click here</Button>
+			<Button variant="outline">Click here</Button>
+			<Button variant="text">Click here</Button>
+		</div>
+		<div class="flex items-end space-x-2">
+			<Button variant="brand" emphasis="secondary">Click here</Button>
+			<Button variant="solid" emphasis="secondary">Click here</Button>
+			<Button variant="outline" emphasis="secondary">Click here</Button>
+			<Button variant="text" emphasis="secondary">Click here</Button>
+		</div>
+		<div class="flex items-end space-x-2">
+			<Button variant="brand" condition="success">Click here</Button>
+			<Button variant="solid" condition="success">Click here</Button>
+			<Button variant="outline" condition="success">Click here</Button>
+			<Button variant="text" condition="success">Click here</Button>
+		</div>
+		<div class="flex items-end space-x-2">
+			<Button variant="brand" emphasis="secondary" condition="success">Click here</Button>
+			<Button variant="solid" emphasis="secondary" condition="success">Click here</Button>
+			<Button variant="outline" emphasis="secondary" condition="success">Click here</Button>
+			<Button variant="text" emphasis="secondary" condition="success">Click here</Button>
+		</div>
+		<div class="flex items-end space-x-2">
+			<Button variant="brand" condition="error">Click here</Button>
+			<Button variant="solid" condition="error">Click here</Button>
+			<Button variant="outline" condition="error">Click here</Button>
+			<Button variant="text" condition="error">Click here</Button>
+		</div>
+		<div class="flex items-end space-x-2">
+			<Button variant="brand" emphasis="secondary" condition="error">Click here</Button>
+			<Button variant="solid" emphasis="secondary" condition="error">Click here</Button>
+			<Button variant="outline" emphasis="secondary" condition="error">Click here</Button>
+			<Button variant="text" emphasis="secondary" condition="error">Click here</Button>
+		</div>
+		<div class="flex items-end space-x-2">
+			<Button variant="brand" condition="warning">Click here</Button>
+			<Button variant="solid" condition="warning">Click here</Button>
+			<Button variant="outline" condition="warning">Click here</Button>
+			<Button variant="text" condition="warning">Click here</Button>
+		</div>
+		<div class="flex items-end space-x-2">
+			<Button variant="brand" emphasis="secondary" condition="warning">Click here</Button>
+			<Button variant="solid" emphasis="secondary" condition="warning">Click here</Button>
+			<Button variant="outline" emphasis="secondary" condition="warning">Click here</Button>
+			<Button variant="text" emphasis="secondary" condition="warning">Click here</Button>
+		</div>
+	</div>
+</Story>
