@@ -11,7 +11,7 @@
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { penguins } from '../../data/demoData';
-	import { Plot, glaPlot } from '../observablePlotFragments/glaPlot';
+	import { Plot } from '../observablePlotFragments/glaPlot';
 
 	$: marks = [
 		Plot.gridX(),
@@ -24,7 +24,7 @@
 		Plot.tip(penguins, Plot.pointerX({ x: 'culmen_length_mm', y: 'culmen_depth_mm' }))
 	];
 
-	$: spec = glaPlot(penguins, marks);
+	$: spec = { marks };
 </script>
 
 <Template let:args>

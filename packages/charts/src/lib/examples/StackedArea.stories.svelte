@@ -14,7 +14,7 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import { visitorColors, visitorTypes, visitors, visitorsData } from '../../data/demoData';
-	import { Plot, glaPlot } from '../observablePlotFragments/glaPlot';
+	import { Plot } from '../observablePlotFragments/glaPlot';
 
 	let showProportion = writable<boolean>(false);
 	let selectedVisitor = 'London';
@@ -22,13 +22,13 @@
 	$: selectedViewName = selectedView.split('_')[1];
 
 	$: options = {
-		size: { marginTop: 40 },
+		marginTop: 40,
 		color: {
 			range: visitorColors,
 			label: 'Visitor type',
 			domain: visitorTypes
 		},
-		xScale: {
+		x: {
 			insetLeft: 50,
 			label: 'month'
 		}
@@ -61,7 +61,9 @@
 		Plot.ruleY([0])
 	];
 
-	$: spec = glaPlot(visitorsData, marks, options);
+	$: spec = { ...options, marks };
+
+	//$: spec = Plot.plot(visitorsData, marks, options);
 </script>
 
 <Template let:args>
@@ -71,6 +73,7 @@
 		subTitle="Shows {selectedViewName} over time, split by visitor type. The area of each colour corresponds to the {selectedViewName} for that visitor type."
 		spec={{ ...spec }}
 		data={visitorsData}
+		applyDefaults
 	>
 		<div slot="controls" class="space-y-4 mb-8">
 			<div class="w-64">

@@ -14,15 +14,14 @@
 	import * as d3 from 'd3';
 	import { boroughsGeoFromTopo } from '../../data/boroughsGeoFromTopo';
 	import { mapVisitorMap } from '../../data/demoData';
-	import { hexbinData } from '../../data/hexbinData';
-	import { Plot, glaPlot } from '../observablePlotFragments/glaPlot';
+	import hexbinData from '../../data/hexbinData';
+	import { Plot } from '../observablePlotFragments/glaPlot';
 
+	// console.log(hexbinData.length, 'length');
 	let binWidth = '20';
 
-	$: hexbinOptions = {
-		size: {
-			marginTop: 40
-		},
+	$: options = {
+		marginTop: 40,
 		color: {
 			type: 'quantile',
 			range: ['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'],
@@ -30,7 +29,7 @@
 			legend: true,
 			tickFormat: '.2%'
 		},
-		xScale: {
+		x: {
 			axis: null
 		},
 		projection: {
@@ -41,7 +40,7 @@
 
 	const formatPercentage = d3.format('.2%');
 
-	$: hexbinMarks = [
+	$: marks = [
 		Plot.geo(boroughsGeoFromTopo, { strokeOpacity: 0.5 }),
 		Plot.dot(
 			hexbinData,
@@ -68,7 +67,7 @@
 			)
 		)
 	];
-	$: spec = glaPlot(hexbinData, hexbinMarks, hexbinOptions);
+	$: spec = { ...options, marks };
 </script>
 
 <Template let:args>
@@ -86,5 +85,37 @@
 		</div>
 	</ObservablePlot>
 </Template>
+
+<!--
+```
+	$: marks = [
+		Plot.geo(boroughsGeoFromTopo, { strokeOpacity: 0.5 }),
+		Plot.dot(
+			hexbinData,
+			Plot.hexbin(
+				{
+					r: 'count',
+					fill: 'mean', // mean proportion across number of highstreets in bin
+					title: (bin: any) => {
+						// Custom tooltip content
+						const proportion = formatPercentage(
+							d3.mean(bin, (d) => mapVisitorMap.get(d.properties['highstreet_id'])) as number
+						);
+						const frequency = bin.length;
+
+						return `England & Wales proportion: ${proportion}\nNumber of high streets: ${frequency}`;
+					}
+				},
+				Plot.centroid({
+					fill: (d) => mapVisitorMap.get(d.properties['highstreet_id']) as number,
+					fillOpacity: 1,
+					tip: {},
+					binWidth
+				})
+			)
+		)
+	];
+```
+-->
 
 <Story name="Default" args={{ spec }} source />
