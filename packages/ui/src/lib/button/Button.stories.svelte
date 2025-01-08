@@ -36,6 +36,7 @@
 	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { userEvent, within } from '@storybook/test';
 
 	let count = 0;
 	const handleClick = () => {
@@ -56,6 +57,10 @@
 		options: {
 			showPanel: true
 		}
+	}}
+	play={async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		await userEvent.click(canvas.getByRole('button'));
 	}}
 />
 
