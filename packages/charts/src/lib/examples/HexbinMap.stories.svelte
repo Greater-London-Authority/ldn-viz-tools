@@ -14,7 +14,7 @@
 	import * as d3 from 'd3';
 	import { boroughsGeoFromTopo } from '../../data/boroughsGeoFromTopo';
 	import { mapVisitorMap } from '../../data/demoData';
-	import hexbinData from '../../data/hexbinData';
+	import * as hexbinData from '../../data/hexbinData';
 	import { Plot } from '../observablePlotFragments/glaPlot';
 
 	// console.log(hexbinData.length, 'length');
