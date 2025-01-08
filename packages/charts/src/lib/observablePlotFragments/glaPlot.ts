@@ -83,19 +83,8 @@ export const plot = (options: PlotOptions = {}) => {
 		defaultYScale
 	} = getDefaultPlotStyles();
 
-	const {
-		style,
-		color,
-		x,
-		y,
-		height,
-		width,
-		marginTop,
-		marginBottom,
-		marginLeft,
-		marginRight,
-		...rest
-	} = options;
+	const { style, color, x, y, height, marginTop, marginBottom, marginLeft, marginRight, ...rest } =
+		options;
 
 	const sizeDefault = options.fx || options.fy ? defaultSizeFacet : defaultSize;
 	const defaultStyleString = Object.entries(defaultStyle)
