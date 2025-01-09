@@ -88,6 +88,24 @@
 
 <!--
 ```
+$: options = {
+		marginTop: 40,
+		color: {
+			type: 'quantile',
+			range: ['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'],
+			label: `England & Wales proportion`,
+			legend: true,
+			tickFormat: '.2%'
+		},
+		x: {
+			axis: null
+		},
+		projection: {
+			type: 'mercator',
+			domain: boroughsGeoFromTopo
+		}
+	};
+
 	$: marks = [
 		Plot.geo(boroughsGeoFromTopo, { strokeOpacity: 0.5 }),
 		Plot.dot(
@@ -115,6 +133,8 @@
 			)
 		)
 	];
+
+	$: spec = { ...options, marks };
 ```
 -->
 

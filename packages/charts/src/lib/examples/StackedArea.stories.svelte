@@ -62,8 +62,6 @@
 	];
 
 	$: spec = { ...options, marks };
-
-	//$: spec = Plot.plot(visitorsData, marks, options);
 </script>
 
 <Template let:args>
@@ -87,5 +85,56 @@
 		</div>
 	</ObservablePlot>
 </Template>
+
+<!-- 
+```
+let showProportion = writable<boolean>(false);
+	let selectedVisitor = 'London';
+	$: selectedView = $showProportion ? 'visitor_proportion' : 'visitor_count';
+	$: selectedViewName = selectedView.split('_')[1];
+
+	$: options = {
+		marginTop: 40,
+		color: {
+			range: visitorColors,
+			label: 'Visitor type',
+			domain: visitorTypes
+		},
+		x: {
+			insetLeft: 50,
+			label: 'month'
+		}
+	};
+
+	$: marks = [
+		Plot.gridY(),
+		Plot.areaY(visitorsData, {
+			x: (d) => new Date(d.date),
+			sort: 'date',
+			y: selectedView,
+			fill: 'subregion',
+			opacity: 1,
+			channels: {
+				[$showProportion ? 'Visitor proportion' : 'Visitor count']: (d) =>
+					d[selectedView]?.toFixed(2)
+			},
+			tip: {
+				format: {
+					y: false,
+					z: false
+				}
+			},
+			order: selectedVisitor ? (d: any) => d.subregion !== selectedVisitor : null
+		}),
+		Plot.axisY({
+			label: $showProportion ? 'proportion' : 'count',
+			tickFormat: $showProportion ? '%' : null
+		}),
+		Plot.ruleY([0])
+	];
+
+	$: spec = { ...options, marks };
+```
+-->
 
 <Story name="Default" args={{ spec }} source />
