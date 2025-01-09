@@ -2,7 +2,6 @@
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import MapApp from '../map/MapApp.svelte';
 	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
@@ -29,7 +28,7 @@
 </Template>
 
 <Story name="Positioning labels">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -58,11 +57,11 @@
 				</p>
 			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
 <Story name="Positioning controls">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -90,11 +89,11 @@
 				</p>
 			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
 <Story name="Standard Layout">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -135,5 +134,5 @@
 				<MapControlPan />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

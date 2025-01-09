@@ -57,7 +57,7 @@
 
 			<div slot="body">
 				<p>
-					Click on the button to return home. If the error persistes please <a
+					Click on the button to return home. If the error persists please <a
 						href="mailto:some-email-address@example.com"
 						class="underline hover:no-underline">Report it here</a
 					>
@@ -73,7 +73,7 @@
 
 			<div slot="body">
 				<p>
-					<span class="font-bold">DO NOT</span> Click on the button!. If the error persistes please
+					<span class="font-bold">DO NOT</span> Click on the button!. If the error persists please
 					<a href="mailto:some-email-address@example.com" class="underline hover:no-underline"
 						>Report it here</a
 					>
@@ -93,7 +93,7 @@
 
 		<div slot="body">
 			<p>
-				Click on the button to return home. If the error persistes please <a
+				Click on the button to return home. If the error persists please <a
 					href="mailto:some-email-address@example.com"
 					class="underline hover:no-underline">Report it here</a
 				>

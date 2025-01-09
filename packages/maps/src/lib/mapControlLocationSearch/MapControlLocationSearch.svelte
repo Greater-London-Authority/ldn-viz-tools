@@ -30,7 +30,7 @@
 	/**
 	 * Depending on which search feature the user interacted with, called when a
 	 * user clicks a geocoder suggestion or when the browser geolocates the
-	 * users location.
+	 * user's location.
 	 */
 	export let onLocationFound: undefined | OnGeolocationSearchResult = undefined;
 

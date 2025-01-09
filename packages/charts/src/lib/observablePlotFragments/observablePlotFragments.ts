@@ -191,7 +191,7 @@ const defaultAnnotationRange = (mode: ThemeMode) => ({
  *
  * This is a pain when trying to do something like creating a set of text marks as annotations, and applying a different `dx`/`dy` offset to each.
  *
- * Our `preprocessOptions(data, config)` function aims to addresses the problem by creating a separate mark for each individual datum object in the data array.
+ * Our `preprocessOptions(data, config)` function aims to address the problem by creating a separate mark for each individual datum object in the data array.
  **/
 type generateAnnotationsConfig = {
 	/**
@@ -200,7 +200,7 @@ type generateAnnotationsConfig = {
 
 	/**
 	 *
-	 * @param data Function for the correpsonding Plot mark (e.g., `Plot.dot`)
+	 * @param data Function for the corresponding Plot mark (e.g., `Plot.dot`)
 	 */
 	type: (data: any[], options: any) => any;
 
@@ -214,8 +214,8 @@ type generateAnnotationsConfig = {
 	/**
 	 * Additional objects, expressed as functions that will be evaluated before Plot's mark function is called.
 	 * This lets you do things like `fill: (d) => (d.QuarterRev === '2019 Q4' ? 'black' : 'GDPType')`:
-	 * this will be pre-processed so that plot sees either `fill: 'black'` (specifying a color constant) or `fill: 'GDPType` (speficying a field to be encoded using a color scale).
-	 * If this was not pre-processed, Observable Plot would apply a color encoding to the string literatal `'GDPType'` rather than the value of the field with that name.
+	 * this will be pre-processed so that plot sees either `fill: 'black'` (specifying a color constant) or `fill: 'GDPType` (specifying a field to be encoded using a color scale).
+	 * If this was not pre-processed, Observable Plot would apply a color encoding to the string literal `'GDPType'` rather than the value of the field with that name.
 	 */
 	optionsToEval?: Record<string, (x: any) => any>;
 };

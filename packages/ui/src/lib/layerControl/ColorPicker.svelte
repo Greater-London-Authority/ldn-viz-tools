@@ -42,7 +42,7 @@
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
-		class="z-10 w-64 bg-core-grey-50 p-4 shadow"
+		class="z-50 w-64 bg-core-grey-50 p-4 shadow"
 	>
 		<div {...$arrow} use:arrow />
 
@@ -52,14 +52,14 @@
 
 			<div class="flex flex-wrap gap-2">
 				{#each colors as colorOption}
-					<div
+					<button
 						class="w-6 h-6 bg-white"
 						style:background={colorOption}
 						on:click={() => {
 							color = colorOption;
 						}}
 						use:close
-					></div>
+					></button>
 				{/each}
 			</div>
 		</div>

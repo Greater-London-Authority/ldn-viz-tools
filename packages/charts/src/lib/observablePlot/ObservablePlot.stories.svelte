@@ -23,6 +23,8 @@
 
 	import { format } from 'd3-format';
 
+	import { addMultipleEventHandlers } from './ObservablePlotInner.svelte';
+
 	import { currentThemeMode, Select } from '@ldn-viz/ui';
 	import {
 		getDefaultPlotStyles,
@@ -98,7 +100,7 @@
 		x: {
 			...defaultXScale,
 			domain: [0, 20],
-			insetLeft: 0 // adjusting to fit y axis labels of this chart
+			insetLeft: 0 // adjusting to fit y-axis labels of this chart
 		},
 
 		color: {
@@ -188,7 +190,7 @@
 </Story>
 
 <!-- 
-	The height of the chart remains the reponsibility of the contained instance of plot. It can be set to a specific pixel value: ie 300
+	The height of the chart remains the responsibility of the contained instance of plot. It can be set to a specific pixel value: ie 300
 -->
 <Story name="With Height">
 	<ObservablePlot spec={{ ...spec, height: 300 }} />
@@ -323,6 +325,35 @@
 	</div>
 </Story>
 
+<Story name="With multiple event handlers">
+	<ObservablePlot
+		spec={{
+			...mbBarSpec,
+			marks: [
+				Plot.barX(material_deprivation_data, {
+					x: 'Pensioners',
+					y: 'Region',
+					fill: 'Area',
+					sort: { y: 'x', reverse: true },
+
+					render: addMultipleEventHandlers([
+						{
+							markShape: 'rect',
+							type: 'click',
+							handler: (_, d) => console.log('Clicked on:', material_deprivation_data[d.index])
+						},
+						{
+							markShape: 'rect',
+							type: 'mouseenter',
+							handler: (_, d) => console.log('Cursor entered:', material_deprivation_data[d.index])
+						}
+					])
+				})
+			]
+		}}
+	/>
+</Story>
+
 <!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
 <Story name="With controls">
 	<ObservablePlot {spec} title="Penguin Culmens" subTitle="A scatterplot of depth against length">
@@ -334,8 +365,8 @@
 </Story>
 
 <!-- 
-	The example stories show how defaults can be over-riden to achieve chart specific styling.
-	For example the tratment of the Y axis relys on an insetLeft property on the Plot.X and manipulation of the margin and Plot.axisY component
+	The example stories show how defaults can be over-ridden to achieve chart specific styling.
+	For example the treatment of the Y axis relies on an insetLeft property on the Plot.X and manipulation of the margin and Plot.axisY component
 -->
 <Story name="Examples / Area chart">
 	<ObservablePlot
@@ -816,11 +847,8 @@
 		spec={{
 			...mbBarSpec
 		}}
-		footer={{
-			byline: 'GLA City Intelligence',
-			source: 'London Datastore',
-			note: 'Data for illustrative purpose only',
-			exportBtns: true
-		}}
+		byline="GLA City Intelligence"
+		source="London Datastore"
+		note="Data for illustrative purpose only"
 	/>
 </Story>

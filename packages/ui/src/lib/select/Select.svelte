@@ -179,7 +179,7 @@
 				value = items.filter((f) => (newjustValue ?? []).includes(f[itemValueField]));
 			}
 		} else {
-			if (!value || newjustValue != value[itemValueField]) {
+			if (value === null || value === undefined || newjustValue != value[itemValueField]) {
 				value = items.find((f) => f[itemValueField] === newjustValue);
 			}
 		}

@@ -36,7 +36,7 @@
 	 */
 
 	/**
-	 * Position of the group over the map. Avialable positions defined by
+	 * Position of the group over the map. Available positions defined by
 	 * `MapControlGroupPositions` enum type.
 	 */
 	export let position: keyof typeof MapControlGroupPositions = MapControlGroupPositions.TopLeft;
@@ -50,5 +50,6 @@
 </script>
 
 <div class="absolute {positionClass} z-10 flex flex-col space-y-2 pointer-events-none {classes}">
+	<!-- Group content, usually map control buttons. -->
 	<slot />
 </div>

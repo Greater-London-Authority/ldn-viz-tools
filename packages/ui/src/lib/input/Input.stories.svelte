@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+
 	import Input from './Input.svelte';
 
 	const newStringArg = (defaultValue = '') => ({
@@ -10,7 +11,7 @@
 		}
 	});
 
-	const newSelectedStringArg = (options, defaultValue = '') => ({
+	const newSelectedStringArg = (options: string[], defaultValue = '') => ({
 		control: { type: 'select' },
 		options: options,
 		table: {
@@ -87,14 +88,13 @@
 
 <script lang="ts">
 	let value = '';
-
 	const round = (x: string) => Math.round(+x * 100) / 100;
 </script>
 
 <Template let:args>
 	<div class="w-96">
 		{#key args}
-			<Input {...args} id="1" />
+			<Input {...args} />
 		{/key}
 	</div>
 </Template>
@@ -103,7 +103,7 @@
 
 <Story name="Binding on value">
 	<div class="w-96 flex flex-col gap-4">
-		<Input name="bind-value-input" bind:value placeholder="Type here..." id="1" />
+		<Input name="bind-value-input" bind:value placeholder="Type here..." />
 		<div class="h-4">
 			<span class="font-medium dark:text-white">Value:</span>
 			{value}
@@ -137,7 +137,6 @@
 			name="tooltip-input"
 			hint="Contextual help text"
 			hintLabel="optional hint label"
-			id="1"
 		/>
 	</div>
 </Story>
@@ -148,21 +147,19 @@
 			label="Label"
 			name="left-aligned-description-input"
 			description="Left aligned descriptive text (default)."
-			id="1"
 		/>
 		<Input
 			label="Label"
 			name="right-aligned-description-input"
 			description="Right aligned descriptive text."
 			descriptionAlignment="right"
-			id="1"
 		/>
 	</div>
 </Story>
 
 <Story name="With error">
 	<div class="w-96">
-		<Input label="Description" name="description-input" error="Error text" id="1" />
+		<Input label="Description" name="description-input" error="Error text" />
 	</div>
 </Story>
 
@@ -174,14 +171,13 @@
 			inputmode="decimal"
 			name="input-mode-input"
 			hint="Using 'decimal' input mode here rather than 'numeric'"
-			id="1"
 		/>
 	</div>
 </Story>
 
 <Story name="Disabled">
 	<div class="w-96">
-		<Input label="Disabled" name="disabled-input" disabled id="1" />
+		<Input label="Disabled" name="disabled-input" disabled />
 	</div>
 </Story>
 
@@ -191,7 +187,6 @@
 			label="Type a number"
 			description="It will be rounded to 2 d.p. when the input loses focus"
 			format={round}
-			id="1"
 		/>
 	</div>
 </Story>
@@ -204,47 +199,44 @@
 			name="textarea-input"
 			rows="5"
 			hint="Three rows by default"
-			id="1"
 		/>
 		<Input
 			type="number"
 			label="Number"
 			name="number-input"
 			hint="Brings up the numeric keypad on touch screens"
-			id="1"
 		/>
-		<Input
-			type="password"
-			label="Password"
-			name="password-input"
-			hint="No formatting by default"
-			id="1"
-		/>
+		<Input type="password" label="Password" name="password-input" hint="No formatting by default" />
 		<Input
 			type="url"
 			label="URL"
 			name="url-input"
 			hint="Brings up the URL keypad on touch screens"
-			id="1"
 		/>
 		<Input
 			type="tel"
 			label="Phone"
 			name="tel-input"
 			hint="Brings up the telephone keypad on touch screens"
-			id="1"
 		/>
 		<Input
 			type="email"
 			label="Email"
 			name="email-input"
 			hint="Brings up the email keypad on touch screens"
-			id="1"
 		/>
 		<Input type="time" label="Time" name="time-input" />
 		<Input type="date" label="Date" name="date-input" />
 		<Input type="datetime-local" label="Datetime local" name="datetime-local-input" />
 		<Input type="file" label="File" name="file-input" />
 		<Input type="range" label="Range" name="range" />
+	</div>
+</Story>
+
+<!-- You can facilitate autocompletion of input values by setting the `autocomplete` attribute
+([docs on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)).  -->
+<Story name="With autocomplete">
+	<div class="w-96">
+		<Input autocomplete="shipping street-address" />
 	</div>
 </Story>

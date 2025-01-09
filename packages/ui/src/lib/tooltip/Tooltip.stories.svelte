@@ -39,7 +39,7 @@
 <Story name="Custom hint icon">
 	<Tooltip>
 		<svelte:fragment slot="hint">
-			I have a diffent icon
+			I have a different icon
 			<Icon src={Cog6Tooth} theme="mini" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
 		</svelte:fragment>
 		But I still work the same

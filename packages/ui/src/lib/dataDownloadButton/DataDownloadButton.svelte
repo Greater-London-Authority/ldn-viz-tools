@@ -13,12 +13,17 @@
 	 * The available data formats for the downloaded file.
 	 */
 	export let formats: ('CSV' | 'JSON')[] = ['CSV', 'JSON'];
-	let format = 'CSV';
 
 	/**
 	 * The data that will be encoded in the downloaded file (formatted as an array of objects).
 	 */
 	export let data: Record<string, number | string>[];
+
+	/**
+	 * A function which, when called with no arguments, will return the data to be saved in the downloaded file.
+	 * If this is provided, then the `data` prop is ignored.
+	 */
+	export let dataFn: undefined | (() => any[]) = undefined;
 
 	/**
 	 * The name the downloaded file will be saved with.
@@ -60,7 +65,9 @@
 	};
 
 	const renameColumns = () => {
-		return data.map((datum) => {
+		const dataToSave = dataFn ? dataFn() : data;
+
+		return dataToSave.map((datum) => {
 			if (!columnMapping) {
 				return datum;
 			} else {
