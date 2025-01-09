@@ -39,7 +39,6 @@ export const plot = (options: PlotOptions = {}) => {
 	const defaultStyleString = Object.entries(defaultStyle)
 		.map(([k, v]) => `${k}:${v}`)
 		.join(';');
-	console.log(defaultStyleString);
 
 	const specWithDefaultsApplied = {
 		// style may be either a string or an object
