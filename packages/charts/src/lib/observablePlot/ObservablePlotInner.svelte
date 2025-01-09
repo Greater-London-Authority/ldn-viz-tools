@@ -137,7 +137,7 @@
 
 <script lang="ts">
 	import * as ObservablePlot from '@observablehq/plot';
-	import * as Plot from '../observablePlotFragments/glaPlot';
+	import * as Plot from '../observablePlotFragments/plot';
 
 	import { afterUpdate, onMount, setContext } from 'svelte';
 	import { derived, writable } from 'svelte/store';

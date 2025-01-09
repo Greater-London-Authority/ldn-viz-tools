@@ -22,57 +22,6 @@ import type {
 import * as ObservablePlot from '@observablehq/plot';
 import { getDefaultPlotStyles } from './observablePlotFragments';
 
-// Function that handles default styles and takes data, mode and marks props.
-// It also optionally takes an options object which can handle overriding default styling
-// where needed, as well as a boolean to change size for faceted charts
-export const glaPlot = (
-	_data: any,
-	marks: any[],
-	options: PlotOptions = {},
-	isFaceted: boolean = false
-) => {
-	const {
-		defaultStyle,
-		defaultSize,
-		defaultSizeFacet,
-		defaultColor,
-		defaultXScale,
-		defaultYScale
-	} = getDefaultPlotStyles();
-
-	const { color, x, y, size, ...rest } = options;
-
-	const spec = {
-		style: {
-			...defaultStyle
-		},
-		...defaultSize,
-		...size,
-		color: {
-			...defaultColor,
-			...color
-		},
-		x: {
-			...defaultXScale,
-			...x
-		},
-		y: {
-			...defaultYScale,
-			...y
-		},
-		...rest,
-		marks
-	};
-
-	const facetedSpec = {
-		...spec,
-		...defaultSizeFacet,
-		...size
-	};
-
-	return isFaceted ? facetedSpec : spec;
-};
-
 export const plot = (options: PlotOptions = {}) => {
 	const {
 		defaultStyle,
@@ -109,12 +58,6 @@ export const plot = (options: PlotOptions = {}) => {
 		marginTop: marginTop ?? sizeDefault.marginTop,
 		marginBottom: marginBottom ?? sizeDefault.marginBottom,
 
-		// height: sizeDefault.height,
-		// marginLeft: sizeDefault.marginLeft,
-		// marginRight: sizeDefault.marginRight,
-		// marginTop: sizeDefault.marginTop,
-		// marginBottom: sizeDefault.marginBottom,
-
 		color: color
 			? {
 					...defaultColor,
@@ -132,9 +75,6 @@ export const plot = (options: PlotOptions = {}) => {
 
 		...rest
 	};
-
-	// const { marks, ...restOfSpec } = specWithDefaultsApplied;
-	// console.log(JSON.stringify(restOfSpec, null, 2));
 
 	return ObservablePlot.plot(specWithDefaultsApplied as PlotOptions);
 };

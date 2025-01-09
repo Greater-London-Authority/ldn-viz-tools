@@ -42,7 +42,7 @@
 		penguins
 	} from '../../data/demoData';
 
-	import { Plot } from '../observablePlotFragments/glaPlot';
+	import { Plot } from '../observablePlotFragments/plot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
