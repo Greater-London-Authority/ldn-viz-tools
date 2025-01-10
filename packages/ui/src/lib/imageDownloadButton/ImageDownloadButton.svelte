@@ -44,9 +44,13 @@
 	export let scaleFactor = 2;
 
 	const downloadFromURL = (url: string) => {
-		const initialName = filename || "image";
-		const baseName = initialName.split('.')[0];
-		const fname =  format === 'SVG' ? `${baseName}.svg` : `${baseName}.png` ;
+		const initialName = filename || 'image';
+
+		let baseName = initialName;
+		if (initialName.toLowerCase().endsWith('.png') || initialName.toLowerCase().endsWith('.svg')) {
+			baseName = initialName.slice(0, -4);
+		}
+		const fname = format === 'SVG' ? `${baseName}.svg` : `${baseName}.png`;
 
 		const link = document.createElement('a');
 		link.setAttribute('href', url);
