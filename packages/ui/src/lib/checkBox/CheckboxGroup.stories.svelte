@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import Button from '../button/Button.svelte';
 	import CheckboxGroup from './CheckboxGroup.svelte';
 
 	export const meta = {
@@ -28,7 +29,7 @@
 
 <Template let:args>
 	<CheckboxGroup options={optionsForGroup} bind:selectedOptions {...args} />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
+	<p class="mt-8 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Template>
@@ -37,7 +38,18 @@
 
 <Story name="Checkbox Group - disabled buttons">
 	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">
+	<p class="mt-8 text-color-text-secondary">
+		selectedOptions: {JSON.stringify(selectedOptions)}
+	</p>
+</Story>
+
+<Story name="Checkbox Group - externally updated">
+	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
+
+	<div class="my-4">
+		<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
+	</div>
+	<p class="text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Story>

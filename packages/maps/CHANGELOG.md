@@ -1,5 +1,107 @@
 # ldn-viz-tools-maps
 
+## 6.0.0
+
+### Major Changes
+
+- 530d8de: REMOVED: removed `MappApp` component, which was replaced by `AppShell`
+
+### Minor Changes
+
+- 60ee6e5: CHANGED: add types to `MapControlZoom` component
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+
+## 5.3.0
+
+### Minor Changes
+
+- 77d6d14: ADDED: added `MapDeckOverlay` component
+
+## 5.2.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
+## 5.1.0
+
+### Minor Changes
+
+- 1f94ca5: FIXED: `GeoJSONFeature` to `GeoJSON.Feature` in `MapCursorEvent` for correct typing of `handlerArgTypes`
+
+## 5.0.0
+
+### Major Changes
+
+- ae67f11: ADDED: `dataStore` prop to `GeoJSONMapLayerSource` for two way reactivity
+  CHANGED: rename `data` prop to `initialData` in `GeoJSONMapLayerSource`
+
+## 4.0.1
+
+### Patch Changes
+
+- 69686cf: FIXED: adds missing `@ldn-viz/util` dependency to `package.json` of `maps`, `ui`, and `charts` packages.
+
+## 4.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
+## 3.2.0
+
+### Minor Changes
+
+- cac8844: CHANGED: `BoroughsContextLayer` Storybook stories are now reactive to argument changes.
+
+## 3.1.0
+
+### Minor Changes
+
+- edf2d78: ADDED: Add `MapControlBorough` component to zoom to a selected borough
+
+## 3.0.2
+
+### Patch Changes
+
+- b04b40f: FIXED: fix `<MapControlGeolocator>` so the pin can be cleared as intended
+- 9658b8c: CHANGED: Improved stories for `<MapControlGroup>` so they use the real `<MapControlLocationSearch>` rather than a dummy.
+
+## 3.0.1
+
+### Patch Changes
+
+- f9bdc5b: FIXED: include `@turf/turf` as a dependency (rather than devDependency) of `@ldn-viz/maps`, to resolve import error when package is used
+
+## 3.0.0
+
+### Major Changes
+
+- b9a6199: CHANGED: add TypeScript to `Map` component
+  CHANGED: rename `map` context to `mapStore` in `Map` component
+  CHANGED: add framework for map mouse and touch events to `Map` component (`MapCursor`)
+  CHANGED: add `mapCursorStore` context to `Map` component
+  CHANGED: add `mapStore` and `mapCursorStore` properties to `Map` component
+
+### Minor Changes
+
+- 1ef0fbb: ADDED: `BoroughsContextLayer` component as a context layer for borough boundaries.
+- 03e8fda: ADDED: add `MapCursorEvent` component
+- 76cfe28: ADDED: `MapLayerSource` component for specifying MapLibre data sources within a `<Map>`.
+  ADDED: `GeoJSONMapLayerSource` component for wrapping `MapLayerSource` for specifying local or remote GeoJSON sources.
+  ADDED: `MapLayerView` component for specifying MapLibre layers within a `<MapLayerSource>` or derived component.
+- 45ff3ad: ADDED: `MapPopup` component for creating map tooltips and markers.
+  ADDED: `MapPopupContainer` container component as the standard container for creating tooltips and markers.
+  ADDED: `MapPopupStyledContainer` container component provides standard styling for tooltips and markers.
+  ADDED: `MapPopupFlyToFeature` container component flys to a tooltip or marker and centers it on screen.
+  ADDED: `MapPopupPlacement` container component provides various ways to layout and position a tooltip or marker.
+  ADDED: `PlacementCenterAboveFeature` container component places a tooltip or marker such that the tip is in the center of the feature.
+  ADDED: `PlacementFollowMouse` container component places a tooltip or marker such that it follows the users mouse movement.
+- 03e8fda: CHANGED: add test data to map stories.
+
 ## 2.1.0
 
 ### Minor Changes

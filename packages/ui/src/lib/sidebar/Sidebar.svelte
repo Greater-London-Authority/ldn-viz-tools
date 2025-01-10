@@ -2,7 +2,10 @@
 	/**
 	 * The `<Sidebar>` component renders a sidebar that is typically used to display controls and textual explanation.
 	 *
-	 * It should generally be used inside an [AppShell](.//?path=/docs/app-appshell--documentation)
+	 * It should generally be used inside an [AppShell](.//?path=/docs/app-appshell--documentation).
+	 *
+	 * Note that when the sidebar is collapsed, it is removed by the `AppShell` (rather than merely being hidden).
+	 * Any state that should be restored when it is re-opened should be persisted in a Svelte Store.
 	 *
 	 * @component
 	 */
@@ -44,7 +47,7 @@
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
 
 	const wrapperClasses = `${position} z-30 ${theme}`;
-	const sidebarClasses = 'flex flex-col grow bg-core-grey-50 dark:bg-core-grey-800 pb-6'; // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = 'flex flex-col grow bg-color-container-level-1 pb-6'; // p-6 pad on container or elements (overflow position)
 
 	// If a context provides a reactive placement use that
 	$: placement = $sidebarPlacementFromContext ? $sidebarPlacementFromContext : placement;
@@ -61,7 +64,7 @@
 
 <div class={classNames(wrapperClasses, placementClasses)}>
 	{#if $$slots.tabs}
-		<div class={classNames('absolute bg-core-grey-100 dark:bg-core-grey-900', tabPlacementClasses)}>
+		<div class={classNames('absolute bg-color-container-level-0', tabPlacementClasses)}>
 			<!-- should contain a `<SidebarTabList>`, if the sidebar has tabs-->
 			<slot name="tabs" />
 		</div>
@@ -83,22 +86,29 @@
 					$$slots.tabs && placement === 'left' ? 'ml-[80px]' : ''
 				)}
 			>
-				{#if $$slots.header}
-					<div class="p-6 pb-0">
-						<!-- typically contains a `<SidebarHeader>` -->
-						<slot name="header" />
-					</div>
-				{/if}
-
 				{#if $$slots.unstyledContent}
+					{#if $$slots.header}
+						<div class="pb-4">
+							<!-- typically contains a `<SidebarHeader>` -->
+							<slot name="header" />
+						</div>
+					{/if}
+
 					<!-- can be used to display completely unstyled content - usually not required-->
 					<slot name="unstyledContent" />
 
 					<!-- usually contains a `<SidebarFooter>` -->
 					<slot name="footer" />
 				{:else}
-					<div class="overflow-y-auto flex flex-col h-full pt-6 px-6">
-						{#if $$slots.sections}
+					<div class="overflow-y-auto flex flex-col h-full pt-6 px-6 text-color-text-primary">
+						{#if $$slots.header}
+							<div class="pb-4">
+								<!-- typically contains a `<SidebarHeader>` -->
+								<slot name="header" />
+							</div>
+						{/if}
+
+						{#if $$slots.sections || $$slots.header}
 							<div class="space-y-4">
 								<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
 								<slot name="sections" />

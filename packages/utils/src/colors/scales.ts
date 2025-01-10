@@ -37,8 +37,8 @@ export const getThresholdBreaksColorsLabels = ({
   breakCount = 5, // breakCount is total target breaks in pos or neg direction (5?), so a diverging break count will have double (breakCountx2) (10?)
   extent = [0, 1], // (default min & max values in data (any order)
   anchorToZero = true, // should a pos or neg scale be anchored back to zero? So, [19,35], becomes [0,19,35], and generates a scale starting from zero
-  discreteZeroBin = true, // should we give 0 it's own discrete bin (because sometimes important to show as it's own cartegory)
-  offsetZeroVal = 0.001, // value to use to create artificial breaks around 0. Like -0.001, 0.001 alows 0 to fall in bin between -/+ value (no need to really change this unless using exceptionally low values in data)
+  discreteZeroBin = true, // should we give 0 it's own discrete bin (because sometimes important to show as its own category)
+  offsetZeroVal = 0.001, // value to use to create artificial breaks around 0. Like -0.001, 0.001 allows 0 to fall in bin between -/+ value (no need to really change this unless using exceptionally low values in data)
   labelFormat = '.0f', // d3 format syntax, like ".0f", ".2f", ".0%", ".2f", etc // see: https://observablehq.com/@d3/d3-format
   valueAppend = '', // if using d3.format doesn't work (usually because values are not suitable for % (already scaled by 100))
   valuePrepend = '', // if need to add char ahead of value like "~" or "x" etc
@@ -89,7 +89,7 @@ export const getThresholdBreaksColorsLabels = ({
     // the more balanced the divergence, the closer to doubling the number of breaks (5+5)
     // the more unbalanced (pos or neg) the closer to original breaks (1+5), or (5+1)
     const absMinMaxExtent = d3.extent([Math.abs(minVal), Math.abs(maxVal)]);
-    // calc pos/neg differnece ratio, but no lower than 0.5 (so granular enough to end up with some neg breaks)
+    // calc pos/neg difference ratio, but no lower than 0.5 (so granular enough to end up with some neg breaks)
     const minMaxRatio = Math.max(0.5, (absMinMaxExtent[0] ?? 0) / (absMinMaxExtent[1] ?? 0));
     breakCount = Math.round(breakCount + breakCount * minMaxRatio);
   }
@@ -114,7 +114,7 @@ export const getThresholdBreaksColorsLabels = ({
     const binX = binnedVals[b][binXType];
     // push in double offsetZeroVal in dvg+discreteZeroBin scale, or just regular push
     if (scaleType == 'dvg' && binX == 0 && discreteZeroBin) {
-      // need to create slighlty offset (from 0) break(s)
+      // need to create slightly offset (from 0) break(s)
       thresholdObj.breaks.push(-offsetZeroVal);
       thresholdObj.breaks.push(offsetZeroVal);
     } else {
@@ -243,4 +243,4 @@ export const getThresholdBreaksColorsLabels = ({
   return thresholdObj;
 };
 
-console.log(getColorRamp());
+//console.log(getColorRamp());

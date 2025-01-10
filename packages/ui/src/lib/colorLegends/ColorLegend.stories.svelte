@@ -4,7 +4,12 @@
 
 	export const meta = {
 		title: 'Ui/Legends/ColorLegend',
-		component: ColorLegend
+		component: ColorLegend,
+		argTypes: {
+			color: {
+				control: false
+			}
+		}
 	};
 </script>
 
@@ -22,7 +27,9 @@
 		scaleSequentialQuantile,
 		scaleSequentialSqrt,
 		scaleSqrt,
-		scaleThreshold
+		scaleThreshold,
+		type ScaleSequentialQuantile,
+		type ScaleThreshold
 	} from 'd3-scale';
 
 	import {
@@ -42,25 +49,13 @@
 
 	import Button from '../button/Button.svelte';
 
-	const continuousColorScale = scaleSequential(interpolateBlues).domain([0, 10]);
-
-	const continuousColorScaleFlipped = scaleSequential((d: number) =>
-		interpolateBlues(1 - d)
-	).domain([0, 10].reverse());
-
 	const bandColorScale = scaleThreshold(
 		[22, 35, 51, 72],
 		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']
 	);
 
-	const bandColorScaleFlipped = scaleThreshold(
-		[22, 35, 51, 72].reverse(),
-		[22, 35, 51, 72].reverse(),
-		['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'].reverse()
-	);
-
-	let scale;
-	let randomThresholdScale;
+	let scale: ScaleSequentialQuantile<string, never>;
+	let randomThresholdScale: ScaleThreshold<number, string, never>;
 </script>
 
 <Template let:args>
@@ -71,10 +66,12 @@
 	/>
 </Template>
 
-<Story name="Default" />
+<Story name="Default" source />
 
 <Story name="Sequential color scale">
-	<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
+	<div>
+		<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
+	</div>
 </Story>
 
 <Story name="Sequential color scale - highlighted value">
@@ -180,15 +177,18 @@
 	<div class="w-[400px]">
 		<p>
 			Flipping both the range and domain of the scale affects the direction in which the legend is
-			drawn, without affecitng the mapping from values to colors.
+			drawn, without affecting the mapping from values to colors.
 		</p>
 
-		<ColorLegend color={scaleSequential(interpolateBlues).domain([0, 10])} title="Original" />
+		<div class="flex gap-2">
+			<ColorLegend color={scaleSequential(interpolateBlues).domain([0, 10])} title="Original" />
 
-		<ColorLegend
-			color={scaleSequential((d) => interpolateBlues(1 - d)).domain([0, 10].reverse())}
-			title="Flipped"
-		/>
+			<ColorLegend
+				color={scaleSequential(interpolateBlues).domain([0, 10])}
+				title="Flipped"
+				reverse
+			/>
+		</div>
 	</div>
 </Story>
 

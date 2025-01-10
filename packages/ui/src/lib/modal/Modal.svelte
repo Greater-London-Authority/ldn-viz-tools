@@ -4,6 +4,7 @@
 	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
 	 *
 	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
+	 * To display messages that remain open until dismissed, but are displayed close to the element that triggered them, consider using a [Popover](./?path=/docs/ui-popover--documentation).
 	 * @component
 	 */
 
@@ -23,7 +24,14 @@
 	export let isOpen = writable(false);
 
 	const {
-		elements: { portalled, overlay, content, title: meltTitle, description: meltDescripton, close },
+		elements: {
+			portalled,
+			overlay,
+			content,
+			title: meltTitle,
+			description: meltDescription,
+			close
+		},
 		states: { open }
 	} = createDialog({ open: isOpen });
 
@@ -36,6 +44,11 @@
 	 * description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
 	 */
 	export let description: string = '';
+
+	/**
+	 * Colour scheme to apply to the header, either `light` or `dark`. The modal will respect global theme settings.
+	 */
+	export let headerTheme: 'light' | 'dark' = 'dark';
 
 	/**
 	 * width of the modal
@@ -75,7 +88,7 @@
 	};
 
 	$: modalClass = classNames(
-		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
+		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
 
@@ -105,14 +118,14 @@
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
-					class="bg-core-grey-700 text-white p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-core-blue-500"
+					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
 					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
 					<div {...$close} use:$close.action>
 						<Button
 							variant="square"
 							emphasis="secondary"
-							class="w-8 h-8 self-center dark:bg-core-grey-900 dark:text-white"
+							class="w-8 h-8 self-center"
 							on:click={() => ($isOpen = false)}
 						>
 							<span class="sr-only">Close</span>
@@ -124,7 +137,7 @@
 				<div class="overflow-y-auto">
 					<div class="p-4">
 						{#if description}
-							<div {...$meltDescripton} use:$meltDescripton.action>{description}</div>
+							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
 						{/if}
 
 						{#if hasChildren}

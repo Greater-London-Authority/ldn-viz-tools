@@ -1,21 +1,12 @@
 <script lang="ts">
 	/**
-	 * The `<SidebarGroupTitle>` component is used to display a subtitle to sub-divide a `<SidebarSection>`.
+	 * The `<SidebarGroupTitle>` component is used to display a subtitle to subdivide a `<SidebarSection>`.
 	 * @component
 	 */
-
-	import { classNames } from '../../../../utils/classNames';
-
-	const darkThemeClasses = 'dark:text-white';
-	const lightThemeClasses = 'text-core-grey-700';
-
-	const themeClasses = [darkThemeClasses, lightThemeClasses];
-
-	$: groupTitleClasses = classNames('flex justify-between items-end', ...themeClasses);
 </script>
 
-<div class={groupTitleClasses}>
-	<h3 class="font-bold text-sm">
+<div class="flex justify-between items-end text-color-text-primary">
+	<h3 class="font-semibold text-sm leading-snug">
 		<!-- The title. -->
 		<slot />
 	</h3>

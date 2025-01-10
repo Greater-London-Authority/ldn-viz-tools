@@ -5,17 +5,18 @@
 	 */
 
 	import html2canvas from 'html2canvas';
-	import Button from '../button/Button.svelte';
+	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
+	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 
 	/**
 	 * A `SVGElement` node to be converted.
 	 */
-	export let svgNode: SVGElement | undefined;
+	export let svgNode: SVGElement | undefined = undefined;
 
 	/**
 	 * An `HTMLElement` node to be converted.
 	 */
-	export let htmlNode: HTMLElement | undefined;
+	export let htmlNode: HTMLElement | undefined = undefined;
 
 	/**
 	 * `id` of element to add padding to
@@ -43,9 +44,10 @@
 	export let disabled = false;
 
 	/**
-	 * The image format of the downloaded file.
+	 * The available file formats for the downloaded image.
 	 */
-	export let format: 'PNG' | 'SVG' | undefined = 'PNG';
+	export let formats: ('PNG' | 'SVG')[] = ['PNG', 'SVG'];
+	let format = 'PNG';
 
 	const downloadFromURL = (url: string) => {
 		if (!filename) {
@@ -61,7 +63,7 @@
 	};
 
 	const createHTMLImageFromURL = async (url: string) => {
-		let img: HTMLImageElement;
+		let img: HTMLImageElement | undefined;
 
 		await new Promise((resolve) => {
 			img = new Image();
@@ -69,19 +71,24 @@
 			img.src = url;
 		});
 
+		// Ensure img is defined before returning
+		if (!img) {
+			throw new Error('Failed to load image');
+		}
+
 		return img;
 	};
 
 	// See https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
-	const bytesToBase64 = (bytes) => window.btoa(String.fromCodePoint(...bytes));
-	const stringToBase64 = (str) => bytesToBase64(new TextEncoder().encode(str));
+	const bytesToBase64 = (bytes: Uint8Array) => window.btoa(String.fromCodePoint(...bytes));
+	const stringToBase64 = (str: string | undefined) => bytesToBase64(new TextEncoder().encode(str));
 
 	const downloadFromSVG = async () => {
 		// This hack is necessary because .drawImage() doesn't work
 		// unless the SVG that is being copied has an explicitly-set size
-		const svgNodeClone = svgNode.cloneNode(true) as SVGElement;
-		svgNodeClone.setAttribute('width', svgNode.clientWidth.toString());
-		svgNodeClone.setAttribute('height', svgNode.clientHeight.toString());
+		const svgNodeClone = svgNode!.cloneNode(true) as SVGElement;
+		svgNodeClone.setAttribute('width', svgNode!.clientWidth.toString());
+		svgNodeClone.setAttribute('height', svgNode!.clientHeight.toString());
 
 		const svgString = new XMLSerializer().serializeToString(svgNodeClone);
 		const svgURL = 'data:image/svg+xml;base64,' + stringToBase64(svgString);
@@ -97,8 +104,8 @@
 		} else {
 			img.src = svgURL;
 
-			const w = svgNode.clientWidth * scaleFactor;
-			const h = svgNode.clientHeight * scaleFactor;
+			const w = svgNode!.clientWidth * scaleFactor;
+			const h = svgNode!.clientHeight * scaleFactor;
 
 			const canvas = new OffscreenCanvas(w, h);
 
@@ -113,11 +120,11 @@
 	///
 
 	const preserveDrawingBuffer = () => {
-		function wrapGetContext(ContextClass: any) {
+		function wrapGetContext(ContextClass: typeof HTMLCanvasElement | typeof OffscreenCanvas) {
 			const isWebGL = /webgl/i;
 
-			ContextClass.prototype.getContext = (function (origFn) {
-				return function (type: string, attributes: any) {
+			ContextClass.prototype.getContext = (function (origFn: (type: any, attributes?: any) => any) {
+				return function (this: HTMLCanvasElement | OffscreenCanvas, type: any, attributes: any) {
 					if (isWebGL.test(type)) {
 						attributes = Object.assign({}, attributes || {}, { preserveDrawingBuffer: true });
 					}
@@ -158,9 +165,44 @@
 			console.log('CMust supply either an svgNode or htmlNode to be converted to image');
 		}
 	};
+
+	let options: Option[] = [];
+	$: {
+		if (formats.includes('PNG')) {
+			options.push({
+				id: 'PNG',
+				buttonLabel: 'Download as PNG',
+				menuLabel: 'PNG',
+				menuDescription:
+					'A raster image format that can be widely read, but more difficult to edit.',
+				default: true
+			});
+		}
+		if (formats.includes('SVG')) {
+			options.push({
+				id: 'SVG',
+				buttonLabel: 'Download as SVG',
+				menuLabel: 'SVG',
+				menuDescription:
+					'A vector image format that can be edited in software such as Adobe Illustrator.'
+			});
+		}
+	}
+
+	let selectedOption: Option;
+
+	$: format = selectedOption?.id ?? 'PNG';
 </script>
 
-<Button on:click={download} {disabled} {...$$restProps}>
+<MultipleActionButton
+	{options}
+	bind:state={selectedOption}
+	menuTitle="Select image format"
+	onClick={download}
+	{disabled}
+	{...$$restProps}
+>
 	<!-- contents of the button -->
-	<slot />
-</Button>
+	<svelte:fragment slot="beforeLabel"><slot name="beforeLabel" /></svelte:fragment>
+	<svelte:fragment slot="afterLabel"><slot name="afterLabel" /></svelte:fragment>
+</MultipleActionButton>

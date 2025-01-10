@@ -1,50 +1,74 @@
 <script lang="ts">
+	/**
+	 * The `<MapControlGeocoder>` component wraps the UI package's `<Geocoder>`
+	 * component for use with MapLibre maps.
+	 * @component
+	 */
+
 	import { getContext } from 'svelte';
+	import mapgl from 'maplibre-gl';
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { setFeature, clearFeature } from './map-layer';
-	import type { MapStore, MapGLStore } from './map-types';
+	import type { MapStore } from './map-types';
 
 	import type {
 		Geolocation,
+		GeolocationNamed,
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError,
 		GeocoderAdapter
 	} from '@ldn-viz/ui';
 
-	// adapter to source location suggestions from.
+	/**
+	 * An adapter for sourcing location suggestions. All data fetching and
+	 * caching is delegated to the adapter.
+	 */
 	export let adapter: GeocoderAdapter;
 
-	// onLocationSelected is invoked when a user clicks a suggestion.
+	/**
+	 * Called when a user clicks a suggestion.
+	 */
 	export let onLocationSelected: undefined | OnGeolocationSearchResult = undefined;
 
-	// onSearchError is invoked when the adapter rejects a promise for a search.
+	/**
+	 * Called when the adapter rejects a promise for a search.
+	 */
 	export let onSearchError: undefined | OnGeolocationSearchError;
 
-	// maxSuggestions is the maximum number of suggestion to show. This does
-	// not limit the results array.
+	/**
+	 * Passed to the suggestions dropdown to limit the number of suggestions
+	 * shown at once.
+	 */
 	export let maxSuggestions: number = 5;
 
-	// classes is a string of additional CSS classes that are passed to the
-	// geocoder and applied to its root element.
+	/**
+	 * Additional classes applied to the root container element.
+	 */
 	export let classes = '';
 
-	// inputClasses is a string of additional CSS classes that are passed to the
-	// geocoder and applied specifically to the text input field.
+	/**
+	 * Additional classes applied to the geocoder search input element.
+	 */
 	export let inputClasses = '';
 
-	const map: MapStore = getContext('map');
-	const mapgl: MapGLStore = getContext('map_gl');
+	/**
+	 * Placeholder text to be displayed in the input element.
+	 */
+	export let placeholder = 'Location search';
+
+	const mapStore: MapStore = getContext('mapStore');
 
 	const zoomLevel = 16;
 	const delay = 500;
+	let selected: null | GeolocationNamed = null;
 
 	const onLocationSelectedGeocoder = (location: Geolocation) => {
-		if (!$map) {
+		if (!$mapStore) {
 			return;
 		}
 
 		showClearButton = true;
-		setFeature('geocoder', $map, $mapgl, location, { zoom: zoomLevel });
+		setFeature('geocoder', $mapStore, mapgl, location, { zoom: zoomLevel });
 
 		if (onLocationSelected) {
 			onLocationSelected(location);
@@ -52,7 +76,7 @@
 	};
 
 	let showClearButton = false;
-	$: !showClearButton && clearFeature('geocoder', $map);
+	$: !showClearButton && clearFeature('geocoder', $mapStore);
 </script>
 
 <Geocoder
@@ -62,13 +86,21 @@
 	onLocationSelected={onLocationSelectedGeocoder}
 	{classes}
 	{inputClasses}
+	{placeholder}
 	bind:showClearButton
+	bind:selected
 	let:onSuggestionEvent
 	let:attribution
 	let:suggestions
 	{...$$restProps}
 >
 	{#if suggestions.length > 0}
-		<GeocoderSuggestionList {onSuggestionEvent} {attribution} {suggestions} {maxSuggestions} />
+		<GeocoderSuggestionList
+			{onSuggestionEvent}
+			{attribution}
+			{suggestions}
+			{selected}
+			{maxSuggestions}
+		/>
 	{/if}
 </Geocoder>

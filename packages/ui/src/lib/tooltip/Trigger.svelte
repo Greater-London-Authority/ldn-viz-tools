@@ -20,7 +20,7 @@
 	let element;
 </script>
 
-<Button variant="text" size={hintSize} class="!p-0 !text-core-grey-400 dark:!text-core-grey-300">
+<Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
 	<span
 		use:floatingRef
 		bind:this={element}
@@ -38,7 +38,7 @@
 
 			<Icon
 				src={InformationCircle}
-				theme="solid"
+				theme="mini"
 				class="w-[18px] h-[18px] ml-0.5"
 				aria-hidden="true"
 			/>

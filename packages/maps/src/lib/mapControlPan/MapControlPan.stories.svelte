@@ -1,9 +1,8 @@
 <script>
-	import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import MapApp from '../map/MapApp.svelte';
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
@@ -12,7 +11,7 @@
 </script>
 
 <Meta
-	title="Maps/MapControlPan"
+	title="Maps/MapControls/MapControlPan"
 	component={MapControlPan}
 	parameters={{
 		layout: 'fullscreen'
@@ -24,8 +23,8 @@
 </Template>
 
 <Story name="Pan Buttons">
-	<MapApp>
-		<div class="text-white space-y-4 m-2">
+	<div class="w-[100dvw] h-[100dvh]">
+		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
 				The zoom buttons are usually positioned in the top left corner under the location search.
 				They enable <a
@@ -54,5 +53,5 @@
 				<MapControlPan />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

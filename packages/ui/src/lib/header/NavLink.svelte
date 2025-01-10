@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Page } from '@sveltejs/kit';
 	/**
 	 * `<NavLink>` represents a single link.
 	 * The background color changes to indicate whether the target of the link is the current page.
@@ -18,7 +19,7 @@
 	/**
 	 * The current page store (typically imported from `$app/stores` then passed as prop).
 	 */
-	export let page: Readable<{ url?: { pathname: string } }>;
+	export let page: Readable<Page> | undefined = undefined;
 
 	/**
 	 * The target of the link.
@@ -26,17 +27,18 @@
 	export let target = '';
 
 	let classes: string;
-	const highlightedClasses = 'flex h-[50px] bg-core-blue-500 items-center px-4 py-2 items-center';
+	const highlightedClasses =
+		'flex h-[50px] bg-color-action-background-primary text-color-action-static-white items-center px-4 py-2 items-center';
 	const nonHighlightedClasses =
-		'flex h-[50px] bg-core-grey-700 items-center px-4 py-2 items-center';
+		'flex h-[50px] bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-text-primary  items-center px-4 py-2 items-center';
 	$: {
 		if (!page) {
-			// no page store provided - we don't know whether or not we're on the page this links points at
+			// no page store provided - we don't know whether we're on the page this links points at
 			classes = nonHighlightedClasses;
-		} else if (!target && $page.url?.pathname === '/') {
+		} else if (!target && $page!.route?.id === '/') {
 			// we're currently on the homepage, and that is what this link points at
 			classes = highlightedClasses;
-		} else if (!!target && ($page.url?.pathname || '').endsWith(target)) {
+		} else if (!!target && ($page!.url?.pathname || '').endsWith(target)) {
 			// we're currently on the page that this link points at
 			classes = highlightedClasses;
 		} else {

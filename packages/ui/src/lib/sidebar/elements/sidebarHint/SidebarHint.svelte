@@ -5,8 +5,8 @@
 	 */
 
 	import Modal from '../../../modal/Modal.svelte';
+  import Popover from '../../../popover/Popover.svelte';
 	import Tooltip from '../../../tooltip/Tooltip.svelte';
-	import SidebarHintModal from './SidebarHintModal.svelte';
 
 	/**
 	 * Form in which the help text should be displayed.
@@ -53,10 +53,10 @@
 		<slot />
 	</Tooltip>
 {:else if hintType === 'popover'}
-	<Tooltip {hintLabel} hintSize="sm">
+	<Popover {hintLabel}>
 		<!-- The help message. -->
 		<slot />
-	</Tooltip>
+	</Popover>
 {:else if hintType === 'modal'}
 	<Modal title={modalTitle || ''} description={modalDescription} width={modalWidth} showTrigger>
 		<svelte:fragment slot="hintText">

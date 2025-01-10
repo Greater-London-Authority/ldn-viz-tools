@@ -18,10 +18,10 @@ export const togglePlacementLookup: PlacementLookup = {
 
 export const tabPlacementLookup: PlacementLookup = {
 	// left: '-end-[80px] inset-y-0',
-	left: 'inset-y-0 z-30 ',
-	right: '-start-[80px] inset-y-0',
-	top: '-bottom-[80px] inset-x-0',
-	bottom: '-top-[80px] inset-x-0'
+	left: 'inset-y-0 z-30 border-r border-color-ui-border-secondary',
+	right: '-start-[80px] inset-y-0 border-l border-color-ui-border-secondary',
+	top: '-bottom-[80px] inset-x-0 border-b border-color-ui-border-secondary',
+	bottom: '-top-[80px] inset-x-0 border-t border-color-ui-border-secondary'
 };
 
 export const tabLayoutOverride: PlacementLookup = {
@@ -31,7 +31,7 @@ export const tabLayoutOverride: PlacementLookup = {
 	bottom: '!w-auto !flex !flex-row !space-y-0 !pb-0 !float-left'
 };
 
-// The width and height classes are a bit complex to accomodate absolutely positioned nav trigger elements...
+// The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {
 	standard: {
 		left: 'max-w-[408px] min-[488px]:min-w-[408px] w-[calc(100vw-80px)]',

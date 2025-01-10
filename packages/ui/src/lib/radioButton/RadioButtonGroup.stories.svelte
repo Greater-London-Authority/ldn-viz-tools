@@ -13,7 +13,12 @@
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
-		{ id: 'train', label: 'Train stations', color: '#008D48' },
+		{
+			id: 'train',
+			label: 'Train stations',
+			color: '#008D48',
+			hint: 'Excluding underground stations'
+		},
 		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
 		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
 	];
@@ -21,17 +26,27 @@
 
 <Template let:args>
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId {...args} />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Template>
 
 <Story name="Default" source />
 
 <Story name="RadioGroup">
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
 <Story name="RadioGroup - no clear button">
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId buttonsHidden />
-	<p class="mt-8 text-core-grey-500 dark:text-core-grey-200 italic">Selected id: {selectedId}</p>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="RadioGroup - aligned in row">
+	<RadioButtonGroup
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		orientation="horizontal"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>

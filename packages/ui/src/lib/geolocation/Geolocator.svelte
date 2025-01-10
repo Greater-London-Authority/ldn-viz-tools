@@ -1,70 +1,97 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { Button, Spinner } from '@ldn-viz/ui';
+	/**
+	 * The `<Geolocator>` component uses the Geolocation API to identify the
+	 * users current location.
+	 *
+	 * Note that user settings and browser implementations of the Geolocation API
+	 * mean only simple usage is cross-platform. The problem mostly affects
+	 * the querying of, and listening for changes in, permissions.
+	 *
+	 * @component
+	 */
+
+	import { Button, Modal, Spinner } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import TargetIcon from './TargetIcon.svelte';
 
 	import type {
 		GeolocationCoords,
-		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnGeolocationSearchResult
 	} from './types';
 
+	/**
+	 * Called when a location is found.
+	 */
 	export let onLocationFound: OnGeolocationSearchResult | undefined;
+
+	/**
+	 * Called when a location could not be found.
+	 */
 	export let onSearchError: OnGeolocationSearchError | undefined;
+
+	/**
+	 * The last found location. This will be reset to `null` each time a new search
+	 * is started.
+	 */
+	export let location: GeolocationCoords[2] | null = null;
+
+	/**
+	 * Bind to be reactively informed when searching is in progress.
+	 */
+	export let isSearching = false;
+
+	/**
+	 * If `true`, the search button will be replaced by a clear button.
+	 */
+	export let allowClearButton = false;
+
+	/**
+	 * Bind to be reactively informed when the clear button is being shown.
+	 */
 	export let showClearButton = false;
 
-	let searchPermitted = false;
-	let allowsPermPrompt = false;
-	let isSearching = false;
-
-	const isGeolocatorAvailable = () => {
-		return 'geolocation' in navigator;
-	};
-
-	const updatePermission = (state: string) => {
-		searchPermitted = state === 'granted';
-		allowsPermPrompt = state === 'prompt';
-	};
-
-	const handleClick = () => {
-		if (!isGeolocatorAvailable() || (!searchPermitted && !allowsPermPrompt)) {
+	/**
+	 * When bound to, allows activation of the search to be started by an
+	 * external source. Behaves as if the geolocator button had been clicked.
+	 */
+	export const startSearch = () => {
+		if (!isGeolocatorAvailable() || isSearching) {
 			return;
 		}
 
-		if (showClearButton) {
-			showClearButton = false;
-			return;
-		}
-
-		startSearch();
-	};
-
-	const startSearch = () => {
+		clearSearch();
 		isSearching = true;
-		doSearch();
-	};
 
-	const doSearch = () => {
 		navigator.geolocation.getCurrentPosition(
 			apiFoundLocation, //
 			apiNotFoundLocation
 		);
 	};
 
+	let errorMessage = '';
+	let errorModalOpen;
+	$: errorModalOpen?.set(!!errorMessage);
+
+	const isGeolocatorAvailable = () => {
+		return 'geolocation' in navigator;
+	};
+
+	const clearSearch = () => {
+		showClearButton = false;
+		location = null;
+		errorMessage = '';
+	};
+
 	const apiFoundLocation = (result: GeolocationPosition) => {
 		// https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates
 		isSearching = false;
-		showClearButton = true;
+		showClearButton = allowClearButton;
+		location = extractCoords(result);
 
-		const coords: null | GeolocationCoords = extractCoords(result);
-		if (!coords) {
-			return;
-		}
-
-		if (onLocationFound) {
-			onLocationFound({ center: coords });
+		if (location && onLocationFound) {
+			onLocationFound({ center: location });
 		}
 	};
 
@@ -73,16 +100,17 @@
 		isSearching = false;
 
 		if (err.code === err.PERMISSION_DENIED) {
-			logError("Insufficient permissions to access user's location.");
-			if (navigator.userAgent.includes('Firefox/')) {
-				updatePermission('denied');
-			}
+			errorMessage =
+				'Location permission denied. To use geolocation, please ensure location feature is enabled in device settings and permission granted to the browser.';
 		} else if (err.code === err.TIMEOUT) {
-			logError('User location search timed out.');
+			errorMessage =
+				"Location search timed out. If you're using a mobile device, this may be due to inadequate signal.";
 		} else {
-			logError('User location unavailable.');
+			errorMessage =
+				'Could not find location or location permission denied. To use geolocation, please ensure location feature is enabled in device settings and permission granted to the browser.';
 		}
 
+		logError(errorMessage);
 		if (onSearchError) {
 			onSearchError(err);
 		}
@@ -113,31 +141,11 @@
 		// But there might be a case for no limit so better safe than sorry.
 		return (!!lng || lng === 0) && (!!lat || lat === 0);
 	};
-
-	onMount(() => {
-		navigator.permissions //
-			.query({ name: 'geolocation' }) //
-			.then((perm) => {
-				updatePermission(perm.state);
-
-				// Works in Chromium (Chrome, Edge, Vivaldi, etc) but not Firefox.
-				// No reliable workaround found for Firefox yet.
-				perm.onchange = () => updatePermission(perm.state);
-			});
-	});
 </script>
 
 <div class="pointer-events-auto w-10 h-10">
-	{#if !searchPermitted && !allowsPermPrompt}
-		<div class="!bg-core-grey-800 w-10 h-10 p-1">
-			<TargetIcon
-				disabled
-				class="w-8 h-8 p-0.5 stroke-core-grey-400"
-				title="Please enable browser geolocation permissions"
-			/>
-		</div>
-	{:else if isSearching}
-		<div class="!bg-core-grey-800 w-10 h-10 p-1">
+	{#if isSearching}
+		<div class="w-10 h-10 p-1">
 			<Spinner
 				title="Searching for location..."
 				alt="Spinning wheel indicating that location search is in progress"
@@ -148,25 +156,27 @@
 		<Button
 			variant="square"
 			emphasis="secondary"
-			title="Clear location marker"
+			title="Clear location"
 			role="search"
 			aria-label="Clear location"
-			class="!bg-core-grey-800"
-			on:click={handleClick}
+			on:click={clearSearch}
 		>
-			<Icon src={XMark} class="w-8 h-8 p-0.5 stroke-white" />
+			<Icon src={XMark} class="w-8 h-8 p-0.25" />
 		</Button>
 	{:else}
 		<Button
 			variant="square"
 			emphasis="secondary"
-			title="Find my location"
+			title={errorMessage ? errorMessage : 'Find my location'}
 			role="search"
-			aria-label="Find my location"
-			class="!bg-core-grey-800"
-			on:click={handleClick}
+			aria-label={errorMessage ? errorMessage : 'Find my location'}
+			on:click={startSearch}
 		>
-			<TargetIcon class="w-8 h-8 p-0.5 stroke-white" />
+			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="w-8 h-8 p-0.5" />
 		</Button>
 	{/if}
 </div>
+
+{#if errorMessage}
+	<Modal bind:isOpen={errorModalOpen} title="Unable to find location" description={errorMessage} />
+{/if}

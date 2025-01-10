@@ -2,7 +2,7 @@
 	import MapControlLocationSearch from './MapControlLocationSearch.svelte';
 
 	export const meta = {
-		title: 'Maps/MapControlLocationSearch',
+		title: 'Maps/MapControls/MapControlLocationSearch',
 		component: MapControlLocationSearch,
 		parameters: {
 			layout: 'fullscreen'
@@ -14,7 +14,6 @@
 	import { Template, Story } from '@storybook/addon-svelte-csf';
 
 	import * as os_light_vts from '../themes/os_light_vts.json';
-	import MapApp from '../map/MapApp.svelte';
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
@@ -37,7 +36,7 @@
 </Template>
 
 <Story name="Location Search">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -48,11 +47,30 @@
 				<MapControlLocationSearch {adapter} {onSearchError} />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
+</Story>
+
+<Story name="Location Search - custom placeholder">
+	<div class="w-[100dvw] h-[100dvh]">
+		<Map
+			options={{
+				style: os_light_vts,
+				transformRequest
+			}}
+		>
+			<MapControlGroup position="TopLeft">
+				<MapControlLocationSearch
+					{adapter}
+					{onSearchError}
+					placeholder="Type here to search for a place"
+				/>
+			</MapControlGroup>
+		</Map>
+	</div>
 </Story>
 
 <Story name="Hidden Geolocator">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -63,5 +81,5 @@
 				<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

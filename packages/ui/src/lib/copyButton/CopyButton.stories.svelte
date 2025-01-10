@@ -26,6 +26,9 @@
 					category: 'properties'
 				}
 			}
+		},
+		args: {
+			content: 'Thing To Copy'
 		}
 	};
 </script>
@@ -51,7 +54,7 @@
 	<CopyButton content="Text to be copied." label="Copy" variant="solid" emphasis="secondary" />
 </Story>
 
-<Story name="Indictor icon">
+<Story name="Indicator icon">
 	<CopyButton content="One." label="One" />
 	<CopyButton content="Two." label="Two" />
 	<CopyButton content="Three." label="Three" />
@@ -61,11 +64,11 @@
 	<CopyButton content="Content to copy.">
 		<svelte:fragment slot="before-copy">
 			Copy
-			<Icon src={ClipboardDocument} class="w-6 h-6 pl-0.5 py-0.5 stroke-[0.1rem]" />
+			<Icon src={ClipboardDocument} theme="outline" class="w-5 h-5 ml-1" />
 		</svelte:fragment>
 		<svelte:fragment slot="after-copy">
 			Copied
-			<Icon src={HandThumbUp} class="w-6 h-6 pl-0.5 py-0.5 stroke-[0.1rem]" />
+			<Icon src={HandThumbUp} theme="mini" class="w-5 h-5 ml-1" />
 		</svelte:fragment>
 	</CopyButton>
 </Story>

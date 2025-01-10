@@ -1,6 +1,35 @@
 <script context="module" lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+
 	import Input from './Input.svelte';
+
+	const newStringArg = (defaultValue = '') => ({
+		control: { type: 'text' },
+		table: {
+			defaultValue: { summary: defaultValue },
+			type: { summary: 'string' }
+		}
+	});
+
+	const newSelectedStringArg = (options: string[], defaultValue = '') => ({
+		control: { type: 'select' },
+		options: options,
+		table: {
+			defaultValue: { summary: defaultValue },
+			type: { summary: 'string' }
+		}
+	});
+
+	const newFunctionArg = (detail = '') => ({
+		type: 'function',
+		control: 'none',
+		table: {
+			type: {
+				summary: 'function',
+				detail: detail
+			}
+		}
+	});
 
 	export const meta = {
 		title: 'Ui/Input',
@@ -12,23 +41,61 @@
 					disable: true
 				}
 			},
+			id: newStringArg('// random ID'),
+			name: newStringArg("// 'id' prop"),
+			type: newSelectedStringArg(
+				[
+					'text',
+					'textarea',
+					'number',
+					'email',
+					'password',
+					'search',
+					'tel',
+					'url',
+					'time',
+					'date',
+					'datetime-local',
+					'file',
+					'range'
+				],
+				'text'
+			),
+			inputmode: newSelectedStringArg(
+				[
+					'none',
+					'text',
+					'decimal',
+					'numeric',
+					'tel',
+					'search',
+					'email',
+					'url',
+					'search',
+					'tel',
+					'url'
+				],
+				'text'
+			),
 			descriptionAlignment: {
-				options: ['left', 'right'],
-				control: { type: 'select' }
-			}
+				control: { type: 'select' },
+				options: ['left', 'right']
+			},
+			format: newFunctionArg('(value: string) => string')
 		}
 	};
 </script>
 
 <script lang="ts">
 	let value = '';
-
 	const round = (x: string) => Math.round(+x * 100) / 100;
 </script>
 
 <Template let:args>
 	<div class="w-96">
-		<Input {...args} />
+		{#key args}
+			<Input {...args} />
+		{/key}
 	</div>
 </Template>
 
@@ -47,11 +114,23 @@
 <Story name="With Label">
 	<div class="w-96 flex flex-col gap-4">
 		<Input name="labelled-input-required" label="Label" />
-		<Input name="labelled-input-optional" label="Label" optional />
+		<Input name="labelled-input-optional" label="Label" />
 	</div>
 </Story>
 
-<Story name="With tooltip">
+<Story name="With tooltip - default hintLabel">
+	<div class="w-96">
+		<Input label="Tooltip" name="tooltip-input" />
+	</div>
+</Story>
+
+<Story name="With placeholder">
+	<div class="w-96">
+		<Input label="Placeholder" name="placeholder-input" placeholder="This is placeholder text" />
+	</div>
+</Story>
+
+<Story name="With tooltip - custom hintLabel">
 	<div class="w-96">
 		<Input
 			label="Tooltip"
@@ -150,5 +229,14 @@
 		<Input type="date" label="Date" name="date-input" />
 		<Input type="datetime-local" label="Datetime local" name="datetime-local-input" />
 		<Input type="file" label="File" name="file-input" />
+		<Input type="range" label="Range" name="range" />
+	</div>
+</Story>
+
+<!-- You can facilitate autocompletion of input values by setting the `autocomplete` attribute
+([docs on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)).  -->
+<Story name="With autocomplete">
+	<div class="w-96">
+		<Input autocomplete="shipping street-address" />
 	</div>
 </Story>

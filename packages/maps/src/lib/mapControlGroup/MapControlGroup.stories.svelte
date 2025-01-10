@@ -1,21 +1,22 @@
 <script>
-	import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import MapApp from '../map/MapApp.svelte';
 	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
-	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
+	import MapControlLocationSearch from '../mapControlLocationSearch/MapControlLocationSearch.svelte';
+	import { MapGeocoderAdapterMapBox } from '../mapControlLocationSearch/MapGeocoderAdapterMapBox';
 	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
+	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
 
 <Meta
-	title="Maps/MapControlGroup"
+	title="Maps/MapControls/MapControlGroup"
 	component={MapControlGroup}
 	parameters={{
 		layout: 'fullscreen'
@@ -27,7 +28,7 @@
 </Template>
 
 <Story name="Positioning labels">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -36,12 +37,14 @@
 		>
 			{#each Object.keys(MapControlGroupPositions) as position}
 				<MapControlGroup {position}>
-					<p class="bg-core-grey-800 p-2 text-white">{position}</p>
+					<p class="bg-color-container-level-1 text-color-text-primary p-2">
+						{position}
+					</p>
 				</MapControlGroup>
 			{/each}
 
 			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white text-center p-4 space-y-4"
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
 			>
 				<p>
 					Group and position map controls using
@@ -54,11 +57,11 @@
 				</p>
 			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
 <Story name="Positioning controls">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -68,34 +71,29 @@
 			{#each Object.keys(MapControlGroupPositions) as position}
 				{#if position != 'TopRightOffset'}
 					<MapControlGroup {position}>
-						<div class="text-white w-80 flex pointer-events-auto">
-							<input
-								type="text"
-								class="grow bg-core-grey-500 placeholder-core-grey-200 p-2"
-								placeholder="Placeholder for the location search"
-							/>
-							<button title="Find my location" class="bg-core-grey-800 w-10 h-10 text-3xl">
-								◎
-							</button>
-						</div>
+						<MapControlLocationSearch
+							adapter={new MapGeocoderAdapterMapBox(
+								'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+							)}
+						/>
 						<MapControlZoom />
 					</MapControlGroup>
 				{/if}
 			{/each}
 
 			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white text-center p-4 space-y-4"
+				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
 			>
 				<p>
 					The alignment of elements within a <code>MapControlGroup</code> depends on its position.
 				</p>
 			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
 <Story name="Standard Layout">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
 				style: os_light_vts,
@@ -103,7 +101,7 @@
 			}}
 		>
 			<div
-				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-core-grey-800/[0.85] text-white p-4 space-y-8"
+				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary p-4 space-y-8"
 			>
 				<p class="w-52">⮜ Controls on the left are standard for every map</p>
 				<p class="ml-auto w-52">Those on the right are context or map dependent ⮞</p>
@@ -111,14 +109,11 @@
 			</div>
 
 			<MapControlGroup position="TopLeft">
-				<div class="text-white w-80 flex pointer-events-auto">
-					<input
-						type="text"
-						class="grow bg-core-grey-500 placeholder-core-grey-200 p-2"
-						placeholder="Placeholder for the location search"
-					/>
-					<button title="Find my location" class="bg-core-grey-800 w-10 h-10 text-3xl"> ◎ </button>
-				</div>
+				<MapControlLocationSearch
+					adapter={new MapGeocoderAdapterMapBox(
+						'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+					)}
+				/>
 				<MapControlZoom />
 			</MapControlGroup>
 
@@ -128,7 +123,9 @@
 			</MapControlGroup>
 
 			<MapControlGroup position="TopRight">
-				<p class="bg-core-grey-800 p-2 text-white text-center pointer-events-auto">
+				<p
+					class="bg-color-container-level-1 text-color-text-primary p-2 text-center pointer-events-auto"
+				>
 					Bespoke controls<br />E.g. Drawing
 				</p>
 			</MapControlGroup>
@@ -137,5 +134,5 @@
 				<MapControlPan />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

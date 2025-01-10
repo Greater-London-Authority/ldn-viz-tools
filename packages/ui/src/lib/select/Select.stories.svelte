@@ -19,7 +19,8 @@
 		{ label: 'Three', value: 3 }
 	];
 
-	let justValue: number;
+	let justValue: number | null;
+	let justValueMulti: number[] | null;
 	let error = '';
 </script>
 
@@ -27,7 +28,7 @@
 	<Select {...args} />
 </Template>
 
-<Story name="Default" args={{ items: items }} />
+<Story name="Default" args={{ items: items }} source />
 
 <Story name="Basic">
 	<div class="w-96">
@@ -103,7 +104,7 @@
 			on:change={() => console.log('Selection changed!')}
 		/>
 
-		<span class="mt-4 text-core-grey-700 dark:text-core-grey-200 block">
+		<span class="mt-4 text-color-text-secondary block">
 			Value is: {JSON.stringify(value)}
 		</span>
 	</div>
@@ -157,12 +158,26 @@
 	</div>
 </Story>
 
+<Story name="Binding to justValue - multi">
+	<div class="w-[500px] flex flex-col gap-2">
+		<p>
+			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
+			object including the <code>label</code> as well as <code>value</code>)
+		</p>
+
+		<div>Current value: <span class="font-bold">{justValueMulti}</span></div>
+
+		<Button on:click={() => (justValueMulti = [1, 3])}>Reset to 1 and 3</Button>
+		<Button on:click={() => (justValueMulti = null)}>Clear</Button>
+
+		<Select {items} bind:justValue={justValueMulti} id="labelled-input" multiple />
+	</div>
+</Story>
+
 <Story name="Setting and clearing error message">
 	<div class="w-[500px] flex flex-col gap-2">
-		<div>
-			<Button on:click={() => (error = 'OH NO')}>Set error</Button>
-			<Button on:click={() => (error = '')}>Clear error</Button>
-		</div>
+		<Button on:click={() => (error = 'OH NO')}>Set error</Button>
+		<Button on:click={() => (error = '')}>Clear error</Button>
 
 		<span><code>error is:</code> {error}</span>
 

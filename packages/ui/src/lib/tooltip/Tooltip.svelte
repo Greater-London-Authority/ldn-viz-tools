@@ -2,7 +2,8 @@
 	/**
 	 * The `<Tooltip>` component renders a tooltip target, and displays a message in a tooltip when a user mouses-over it.
 	 *
-	 * **Alternatives**: for longer messages, or messages that must persist until being dismissed, consider using a [Modal](./?path=/docs/ui-modal--documentation).
+	 * **Alternatives**: for longer messages, or messages that must persist until being dismissed, consider using a [Modal](./?path=/docs/ui-modal--documentation)
+	 * or [Popover](./?path=/docs/ui-popover--documentation).
 	 * @component
 	 */
 
@@ -17,7 +18,7 @@
 	/**
 	 * text that appears in the tooltip target, next to the icon
 	 */
-	export let hintLabel = 'what is this?';
+	export let hintLabel = 'more info';
 
 	/**
 	 * text size for the tooltip target
@@ -62,15 +63,12 @@
 
 {#if showTooltip}
 	<div
-		class="absolute max-w-[200px] text-sm p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md z-50"
+		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50"
 		use:floatingContent={dynamicOptions}
 	>
 		<!-- the text that will be displayed in the tooltip -->
 		<slot />
 
-		<div
-			class="absolute bg-core-grey-100 dark:bg-core-grey-700 rotate-45 w-4 h-4"
-			bind:this={$arrowRef}
-		/>
+		<div class="absolute bg-color-container-level-1 rotate-45 w-4 h-4" bind:this={$arrowRef} />
 	</div>
 {/if}

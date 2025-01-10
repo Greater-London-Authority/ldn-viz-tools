@@ -26,27 +26,49 @@
 	 * * `label` (string) - the text displayed next to the checkbox
 	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 	 * * `color` (string, optional) - CSS color of the checkbox
+	 * * `hint` (string, optional) - help text to be displayed in tooltip
+	 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
 	 */
-	export let options: { id: string; label: string; color: string; disabled?: boolean }[] = [];
+	export let options: {
+		id: string;
+		label: string;
+		color?: string;
+		disabled?: boolean;
+		hint?: string;
+		hintLabel?: string;
+	}[] = [];
 
 	/**
-	 * if `true`, then then `Clear` button is not displayed.
+	 * `orientation` (string, optional) determines whether radio buttons are vertically or horizontally aligned.
+	 * If `vertical`, radio buttons will display in a column. If `horizontal`, radio buttons will display in a row.
+	 */
+	export let orientation: 'vertical' | 'horizontal' = 'vertical';
+	// row with title,
+	// clear button
+	// title and hint~
+
+	/**
+	 * if `true`, then the `Clear` button is not displayed.
 	 */
 	export let buttonsHidden = false;
 </script>
 
-<div>
+<div class="flex flex-col space-y-0.25">
 	{#if !buttonsHidden}
-		<Button variant="text" on:click={() => (selectedId = '')}>Clear</Button>
+		<Button variant="text" class="!px-0" on:click={() => (selectedId = '')}>Clear</Button>
 	{/if}
-	{#each options as option}
-		<RadioButton
-			id={option.id}
-			label={option.label}
-			color={option.color}
-			disabled={option.disabled}
-			bind:selectedId
-			{name}
-		/>
-	{/each}
+	<div class={orientation === 'vertical' ? 'flex flex-col space-y-0.25' : 'flex space-x-3'}>
+		{#each options as option}
+			<RadioButton
+				id={option.id}
+				label={option.label}
+				color={option.color}
+				disabled={option.disabled}
+				hint={option.hint}
+				hintLabel={option.hintLabel}
+				bind:selectedId
+				{name}
+			/>
+		{/each}
+	</div>
 </div>

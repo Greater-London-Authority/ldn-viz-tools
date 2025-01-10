@@ -8,16 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup .npmrc file to publish to npm
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
+        run: npm install
 
       - name: Install turbo
         run: npm install turbo --global

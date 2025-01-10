@@ -6,8 +6,8 @@
 	 * @component
 	 */
 
-	import Checkbox from './Checkbox.svelte';
 	import { randomId } from '../utils/randomId';
+	import Checkbox from './Checkbox.svelte';
 
 	/**
 	 * Each element of this array defines a checkbox, and is an object with the properties:
@@ -40,9 +40,19 @@
 	export let selectedOptions: string[] = [];
 	$: selectedOptions = options.map((o) => o.id).filter((id) => selectionState[id]);
 
-	let selectionState = Object.fromEntries(
-		options.map((o) => [o.id, selectedOptions.includes(o.id)])
-	);
+	const updateSelectionStateFromSelectedOptions = (selectedOptions: string[]) => {
+		const so = options.map((o) => o.id).filter((id) => selectionState[id]);
+		if (JSON.stringify(selectedOptions) !== JSON.stringify(so)) {
+			selectionState = Object.fromEntries(
+				options.map((o) => [o.id, selectedOptions.includes(o.id)])
+			);
+		}
+	};
+
+	let selectionState: Record<string, boolean> = {};
+	updateSelectionStateFromSelectedOptions(selectedOptions);
+
+	$: updateSelectionStateFromSelectedOptions(selectedOptions);
 
 	let allCheckboxesCheckedOrDisabled;
 	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
@@ -73,7 +83,7 @@
 	};
 </script>
 
-<div>
+<div class="flex flex-col space-y-1">
 	{#if !buttonsHidden}
 		<!--
 			form="" should prevent this checkbox from being included in form
@@ -90,7 +100,7 @@
 		/>
 	{/if}
 
-	<div class={buttonsHidden ? '' : 'pl-[28px]'}>
+	<div class={`flex flex-col space-y-0.25 ${buttonsHidden ? '' : 'pl-5'}`}>
 		{#each options as option (option.id)}
 			<Checkbox
 				id={option.id}

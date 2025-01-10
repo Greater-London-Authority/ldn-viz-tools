@@ -38,7 +38,7 @@
 				<Icon
 					src={QuestionMarkCircle}
 					theme="solid"
-					class="w-12 h-12 stroke-core-grey-200"
+					class="w-6 h-6 text-color-ui-primary"
 					aria-hidden="true"
 				/>
 			</svelte:fragment>
@@ -67,12 +67,7 @@ Spinner"
 	<div class="w-full h-96">
 		<NonIdealState>
 			<svelte:fragment slot="icon">
-				<Icon
-					src={QuestionMarkCircle}
-					theme="solid"
-					class="w-12 h-12 stroke-core-grey-200"
-					aria-hidden="true"
-				/>
+				<Icon src={QuestionMarkCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
 			</svelte:fragment>
 
 			<svelte:fragment slot="title">Something has gone wrong</svelte:fragment>

@@ -9,7 +9,7 @@
 	import { getContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { tabLayoutOverride } from '../../../sidebar/sidebarUtils';
-	import type { PlacementType, SidebarPlacement } from '../../../sidebar/types';
+	import type { PlacementType } from '../../../sidebar/types';
 	import TabList from '../../../tabs/TabList.svelte';
 	import { classNames } from '../../../utils/classNames';
 
@@ -24,6 +24,13 @@
 
 	const val: Writable<string | undefined> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
+
+	const respondToExternalChange = (newVal: string | undefined) => {
+		if ($val !== newVal) {
+			$val = newVal;
+		}
+	};
+	$: respondToExternalChange(selectedValue);
 
 	setContext('tabContext', {
 		selectedValue: val,

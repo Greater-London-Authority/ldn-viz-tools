@@ -1,5 +1,252 @@
 # ldn-viz-tools-ui
 
+## 15.1.0
+
+### Minor Changes
+
+- 1c134d6: ADDED: add `Callout` component
+- a3726bf: FIXED: allow `value` of an option in the `Select` component to be an empty string.
+- 4e4f7c5: FIXED: increase z-index of popover controls in `LayerControl` component so that they do not open behind sidebars
+- 0313649: ADDED: add `addMultipleEventHandlers` function for registering multiple event handlers to the same Observable Plot mark(s)
+- 09fa609: FIXED: avoid unnecessary re-renders of the plot within `ObservablePlotInner`
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- e397e35: FIXED: fix spacing between `RadioButton`s and `Checkbox`es when inside a `SidebarSection`
+- 68780ea: FIXED: fix bug that caused `AppShell` to always acts as if the `startOpen` prop was `false`
+
+## 15.0.0
+
+### Major Changes
+
+- a6dca7f: CHANGED: change the interface of the `LayerControlGroup` to separate the fixed configuration of the layers and their current state
+  CHANGED: rename the `helpText` prop on the `LayerControl` to `hint` for consistency with other components
+
+## 14.9.0
+
+### Minor Changes
+
+- aa341ff: ADDED: added `LayerControlGroup` component
+  CHANGED: `LayerControl` now supports a `disabled` state
+
+### Patch Changes
+
+- 7aeb3b0: FIXED: updated `AnalyticsAndCookieConsent` and `CookieControlSettings` components to avoid errors if they are rendered
+  before `window.CookieControl` is initialized
+
+## 14.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+
+## 14.8.0
+
+### Minor Changes
+
+- f51bc23: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.7.0
+
+### Minor Changes
+
+- 3dea9ca: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.6.1
+
+### Patch Changes
+
+- 5d77717: CHANGED: wrap entries in the `CurrentLengendOrginalChips` when width of parent container is too narrow to fit them
+- 471c1cf: FIXED hintLabel prop is now optional
+
+## 14.6.0
+
+### Minor Changes
+
+- ebd6a57: ADDED: added a `LayerControl` component
+- 3d9026c: CHANGED: pinned the @steeze-ui/svelte-icon dependency to exactly 1.5.0, as subsequent versions are incompatible with Svelte 4
+
+## 14.5.0
+
+### Minor Changes
+
+- ba7c31c: FIXED: fixed issue with content disappearing behind sidebar when screen size reduced
+
+## 14.4.0
+
+### Minor Changes
+
+- e4b3ff7: ADDED: `Button` now has a prop to specify link should be opened in a new tab
+- e62fd68: CHANGED: when using the `RadioButtonGroup`, the `color` attribute for options is now optional
+- 0050885: CHANGED: the `isOpen` store on the `AppShell` component can now be externally updated to open or close the sidebar
+
+## 14.3.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
+## 14.2.0
+
+### Minor Changes
+
+- 5472861: CHANGED: update highlighting of tab icons inside a `TabList` or `SidebarTabList` when the selected item is changed externally
+
+## 14.1.0
+
+### Minor Changes
+
+- 40c49a5: CHANGED: Header and Modal Header are now themed dark as default, but this can be overridden with a prop
+
+### Patch Changes
+
+- 9f5ab57: MINOR: fixed use of MultiActionButton props form ImageDownloadButton and DataDownloadButton.
+
+## 14.0.0
+
+### Major Changes
+
+- 09e55ec: ADDED: added `MultipleActionButton` that allows user to select the nature of the operation that will be triggered when they click on the button
+  CHANGED: the `ImageDownloadButton` amd `DataDownloadButton` now use the `MultipleActionButton` - rather than accepting a single file format as a prop, they accept an array containing a list of file formats from which the user can choose
+
+### Minor Changes
+
+- 38ac6b1: CHANGED: `Geocoder` selected location now appears as query text on selection.
+  CHANGED: adds reactively updating `selected` property to `Geocoder`.
+  CHANGED: `GeocoderSuggestionList` now highlights the currently selected item when the list is reopened.
+- fc08482: CHANGED: `<Input>` to add explicit `placeholder` prop.
+- f11222c: CHANGED: Allows custom event to be passed to sidebarTabLabel
+
+## 13.0.0
+
+### Major Changes
+
+- b55dab9: CHANGED: moved `userThemeSelectionStore` and `currentThemeMode` from `theme` package to `ui` package
+
+## 12.0.0
+
+### Major Changes
+
+- bfad1da: CHANGED: Move `userPreference` from `utils` package to `ui` package
+
+### Patch Changes
+
+- Updated dependencies [bfad1da]
+  - @ldn-viz/utils@1.0.0
+
+## 11.0.1
+
+### Patch Changes
+
+- 69686cf: FIXED: adds missing `@ldn-viz/util` dependency to `package.json` of `maps`, `ui`, and `charts` packages.
+
+## 11.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
+### Minor Changes
+
+- 9f1adf7: ADDED: add `Theme` and `ThemeSwitcher` components
+
+### Patch Changes
+
+- 881aa44: fix text color of input when disabled
+
+## 10.1.0
+
+### Minor Changes
+
+- 35eeb55: ADDED: adds `AsyncButton` that wraps `Button` for asynchronous operations.
+- af5c364: CHANGED: `Select` now correctly sets `justValue` prop when `multiple` is enabled
+- 1ce5711: ADDED: adds `FormBackButton` for consistent easy to use back button on multipage forms.
+- 773cbee: FIXED: Reinstate select chevron
+- b52a596: FIXED: correct vertical spacing for `InputGroup` and `CheckboxGroup`
+- 3ce331e: CHANGED: changes hint icons to be mini theme
+
+## 10.0.0
+
+### Major Changes
+
+- 8fc59bf: CHANGEE: removed some props from the Select componennt, and renamed two: `labelField` -> `itemLabelField`, `itemId` -> `itemValueField`
+
+### Minor Changes
+
+- 56370a9: ADDED: add `CookieControlSettings` and `PrivacyPolicyLink` components
+- 6ce827e: CHANGED: simplify the `MergeValuesControl` component.
+- 82b10d8: ADDED: `Flag` component for displaying banner messages (e.g. to indicate that a site is in beta)
+- 4da0c67: CHANGED: the `<SidebarSection>` component can now accept a `<SidebarSectionTitle>` component inside the `title` slot.
+- d24b4c4: CHANGED: `RadioButtons` now accept a `hint` and `hintLabel` prop (like the `Checkbox` component)
+
+### Patch Changes
+
+- 09410e2: FIXED: fix alignment of tooltip trigger button
+- 281c4e0: CHANGED: the default hintLabel for an input is now "what is this?" (rather than an empty string)
+
+## 9.2.0
+
+### Minor Changes
+
+- c13d8c5: CHANGED: the `PlaceholderImage` component now contains a small fixed-size icon within a container. It no longer accepts props to control its styling.
+- 7472916: ADDED: Add `Form` component for creating forms containing fields and buttons.
+  ADDED: Add `FormField` component for slotted use exclusively within `Form`.
+  ADDED: Add `AsyncButton` component as a base for some async and slow processing form buttons.
+  ADDED: Add `FormSubmitButton` component for slotted use exclusively within `Form`.
+- 6fdd818: ADDED: Add `SchemaForm` component for creating a `Form` from schema.
+  ADDED: Add `SchemaFormField` (internal) used by `SchemaForm` that renders both library and custom input types.
+- 5ac83d9: ADDED: Add `UniformInput` component as a single component (API) encapsulating all input components.
+
+### Patch Changes
+
+- 4c430cd: FIXED: fix styling of `Input` element when `type='range'`
+- 5094d7d: CHANGED: fix errors that occured when using components in non-secure context without specifying an id
+- 1a37060: CHANGED: update `Switch` component to add control of size, and which size label is displayed on
+
+## 9.1.1
+
+### Patch Changes
+
+- 71f1f62: FIXED: `AnalyticsAndCookieConsent` component that when embedded due to tighter main website polices.
+
+## 9.1.0
+
+### Minor Changes
+
+- d23b8b7: FIXED: update visual appearance of `CheckboxGroup` component when bound `selectedOptions` prop is externally updated
+
+## 9.0.1
+
+### Patch Changes
+
+- 6493853: FIXED: include `@turf/turf` as a dependency (rather than devDependency) of `@ldn-viz/maps`, to resolve import error when package is used
+
+## 9.0.0
+
+### Major Changes
+
+- ffffac0: CHANGED: rename the `ColorLegendOrdinalHorizontal` component to `ColorLegendOrdinalChips`, and allos `orientation` to be set to `vertical`
+
+### Minor Changes
+
+- ae07a91: FIXED: fix highlighting in `NavLink` component.
+- bcf8773: FIXED: fix location searching on mobile devices in `Geolocator` component.
+  ADDED: add modal popup when `Geolocator` component error occurs.
+  ADDED: add reactive props to `Geolocator` component that communicate its changing state.
+- 129cf32: CHANGED: increased z-index for geolocation suggestions so it sits above sidebar.
+- 628ae2c: ADDED - add a `MergeValuesControl` that allows users to define how different values of a categorical variable should be merged into new categories
+- e4fc1dc: CHANGED: make text in `SidebarTabLabel` component non-selectable.
+- 8d57614: ADDED: added `Popover` component as an alternative to `Modal` and `Tooltip`
+- 7ded8e8: ADDED: add a new `<Switch>` component
+- 12f8b2a: CHANGED: unfix `SidebarHeader` component so it scrolls with other sidebar content.
+
+### Patch Changes
+
+- c0814a6: CHANGED: Fix an issue in `<AnalyticsAndCookieConsent>` where an application embedded in a non-london.gov.uk website wouldn't load cookie consent properly.
+  CHANGED: Move general comments in `<AnalyticsAndCookieConsent>` to Svelte module script as comments in head tag scripts are not stripped by the Svelte compiler.
+  CHANGED: Optimised code in `<AnalyticsAndCookieConsent>` to be more concise and readable.
+
 ## 8.0.0
 
 ### Major Changes

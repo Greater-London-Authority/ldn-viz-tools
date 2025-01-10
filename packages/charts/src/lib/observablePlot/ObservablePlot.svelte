@@ -1,80 +1,97 @@
-<script context="module">
-	export const addClick =
-		(posStore, markShape = 'circle') =>
-		(index, scales, values, dimensions, context, next) => {
-			const el = next(index, scales, values, dimensions, context);
-			const marks = el.querySelectorAll(markShape);
-			for (let i = 0; i < marks.length; i++) {
-				const d = { index: index[i], x: values.channels.x.value[i], y: values.channels.y.value[i] };
-				marks[i].addEventListener('mouseenter', (ev) => {
-					posStore.set({
-						...d,
-						clientX: ev.clientX,
-						clientY: ev.clientY,
-						pageX: ev.pageX,
-						pageY: ev.pageY,
-						layerX: ev.layerX,
-						layerY: ev.layerY
-					}); // can't use the $store syntax here
-				});
-
-				marks[i].addEventListener('mouseleave', () => {
-					posStore.set(undefined);
-				});
-			}
-			return el;
-		};
-</script>
-
 <script lang="ts">
-	import { setContext } from 'svelte';
-	import { derived, writable } from 'svelte/store';
+	/**
+	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
+	 * If you do not require the extra chrome applied by the `ChartContainer`, or need to include several plots in the same container, then use the [ObservablePlotInner](./?path=/docs/charts-observableplotinner--documentation) component directly.
+	 * @component
+	 */
 
-	import * as Plot from '@observablehq/plot';
+	import type { Position } from './types.ts';
+
+	import { writable } from 'svelte/store';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
+	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
+	/**
+	 * The Observable Plot specification for the visualization.
+	 */
 	export let spec;
 
-	export let responsiveWidth = false;
+	/**
+	 * Data being visualized (as an array of objects), to be used by data download button.
+	 */
+	export let data: { [key: string]: any }[] = [];
 
-	export let data = []; // for downlaod button only
+	/**
+	 * Title that is displayed in large text above the plot.
+	 */
+	export let title = '';
 
-	// for container
-	export let title;
-	export let subTitle;
-	export let alt;
-	export let footer;
-	export let exportBtns;
+	/**
+	 * Subtitle that is displayed below the title, but above the plot.
+	 */
+	export let subTitle = '';
 
-	export let domNode;
+	/**
+	 * Alt-text for the plot.
+	 */
+	export let alt = '';
 
-	export let tooltipStore = writable();
+	/**
+	 * Tailwind width class passed to Chart Container.
+	 */
+	export let chartWidth = '';
 
-	/** A y-offset from the hover point, in pixels. */
+	/**
+	 * What appears in the footer:
+	 *
+	 * * `byline` (string) - statement of who created the visualization
+	 * * `source` (string) - statement of where the data came from
+	 * * `note` (string) - any additional footnotes
+	 */
+	export let source = '';
+
+	export let byline = '';
+
+	export let note = '';
+
+	/**
+	 * Data Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 *
+	 */
+	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
+
+	/**
+	 * Image Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 *
+	 */
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
+
+	/**
+	 * The file name to be used for the downloaded data or image file.
+	 */
+	export let filename = '';
+
+	/**
+	 * Provides a way to access the DOM node into which the visualization is rendered.
+	 */
+	export let domNode: any = undefined;
+
+	/**
+	 * A store that stores details of the moused-over point.
+	 * Used for custom tooltips.
+	 */
+	export let tooltipStore = writable<Position>();
+
+	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
-
-	const renderPlot = (node) => node.appendChild(Plot.plot(spec));
-	let width: number;
-	let height: number;
-	let dimensions = { height: 0, width: 0 };
-	let updateDimensions;
-	$: {
-		clearTimeout(updateDimensions);
-		updateDimensions = setTimeout(() => {
-			dimensions = { height, width };
-		}, 200);
-	}
-
-	$: {
-		if (responsiveWidth) {
-			spec.width = dimensions.width;
-		}
-	}
-
-	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
-		$tooltipStore ? data[$tooltipStore.index] : undefined
-	);
-	setContext('tooltipData', tooltipData);
 </script>
 
 {#key spec}
@@ -83,36 +100,25 @@
 		{title}
 		{subTitle}
 		{alt}
-		{footer}
-		{exportBtns}
+		{source}
+		{note}
+		{byline}
+		{dataDownloadButton}
+		{imageDownloadButton}
+		{filename}
 		{...$$restProps}
 		chartHeight={'h-fit'}
+		{chartWidth}
 	>
-		<div
-			use:renderPlot
-			{...$$restProps}
-			bind:this={domNode}
-			bind:clientWidth={width}
-			bind:clientHeight={height}
-		/>
+		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+		<slot name="controls" />
 
-		<!-- todo: pass to slot data[i] -->
-		{#if $tooltipStore && $tooltipData}
-			<div
-				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
-				style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
-				style:left={`${$tooltipStore.layerX}px`}
-			>
-				<slot name="tooltip">
-					<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
-				</slot>
-			</div>
-		{/if}
+		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} />
 	</ChartContainer>
 {/key}
 
 <style>
-	:global(.defaultCcolorLegendLabel-swatch) {
-		font-size: 20px;
+	:global(.defaultColorLegendLabel-swatch) {
+		font-size: 1rem;
 	}
 </style>
