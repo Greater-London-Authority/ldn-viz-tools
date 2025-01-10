@@ -23,10 +23,6 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
-	// let svgRef;
-	// let svgRef2;
-	// let svgRef3;
-	// let htmlRef: HTMLElement;
 
 	let htmlNode: HTMLElement;
 </script>
