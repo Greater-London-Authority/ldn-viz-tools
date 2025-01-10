@@ -34,7 +34,7 @@
 	/**
 	 * Disables cursor style changes triggered on feature hover.
 	 *
-	 * By default the map cursor is a grab icon to indicate the map can be
+	 * By default, the map cursor is a grab icon to indicate the map can be
 	 * panned. Hovering a feature that has a clickable popup shows a pointer
 	 * (the pointer implying clickability) and tooltips will show the default OS
 	 * cursor icon.

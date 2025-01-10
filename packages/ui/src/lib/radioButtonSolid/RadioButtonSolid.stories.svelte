@@ -16,6 +16,7 @@
 	import { Story } from '@storybook/addon-svelte-csf';
 
 	let selectedId = 'bus';
+	let selectedId2 = 'train';
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops' },
@@ -28,6 +29,28 @@
 <Story name="RadioGroup">
 	<RadioButtonGroupSolid options={optionsForGroup} name="station-type" bind:selectedId />
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<!--
+You can create two or more independent instances of the `Two RadioButtonGroupSolid` -  just ensure that you provide
+different values as the `name` prop.
+-->
+<Story name="Using multiple instances">
+	<div class="flex flex-col gap-4">
+		<div class="flex flex-col gap-1">
+			<RadioButtonGroupSolid options={optionsForGroup} name="station-type-1" bind:selectedId />
+			<p class="text-color-text-secondary">Selected id: {selectedId}</p>
+		</div>
+
+		<div class="flex flex-col gap-1">
+			<RadioButtonGroupSolid
+				options={optionsForGroup}
+				name="station-type-2"
+				bind:selectedId={selectedId2}
+			/>
+			<p class="text-color-text-secondary">Selected id: {selectedId2}</p>
+		</div>
+	</div>
 </Story>
 
 <Story name="RadioGroup with Icons above">

@@ -34,14 +34,14 @@
 
 	<div class="flex flex-wrap gap-2">
 		{#each colors as colorOption}
-			<div
+			<button
 				class="w-6 h-6 bg-white"
 				style:background={colorOption}
 				on:click={() => {
 					color = colorOption;
 					$openStore = false;
 				}}
-			></div>
+			/>
 		{/each}
 	</div>
 </Popover>
