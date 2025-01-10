@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<SidebarGroupTitle>` component is used to display a subtitle to sub-divide a `<SidebarSection>`.
+	 * The `<SidebarGroupTitle>` component is used to display a subtitle to subdivide a `<SidebarSection>`.
 	 * @component
 	 */
 </script>

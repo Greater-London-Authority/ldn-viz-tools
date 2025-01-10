@@ -44,13 +44,13 @@
 	export let color: CheckboxProps['color'] = '';
 
 	/**
-	 * Boolean indicating whether or not the checkbox is currently *checked*.
+	 * Boolean indicating whether the checkbox is currently *checked*.
 	 * Can be bound to and modified from outside the component.
 	 */
 	export let checked: CheckboxProps['checked'] = false;
 
 	/**
-	 * Boolean indicating whether or not the checkbox is in an *indeterminate state*
+	 * Boolean indicating whether the checkbox is in an *indeterminate state*
 	 * (indicated by a horizontal line resembling a hyphen or minus sign, rather than a check or tick).
 	 * This usually indicates that a checkbox has several child checkboxes, of which some (but not all) are checked.
 	 * Can be bound to and modified from outside the component.
@@ -70,7 +70,7 @@
 
 	/**
 	 * Optional help text that appears in a tooltip when a user interacts with the tooltip trigger.
-	 * It provides additional information intended to help the user decide whether or not to check the checkbox.
+	 * It provides additional information intended to help the user decide whether to check the checkbox.
 	 */
 	export let hint: CheckboxProps['hint'] = '';
 

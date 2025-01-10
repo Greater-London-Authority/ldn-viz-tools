@@ -1,5 +1,20 @@
 # ldn-viz-tools-charts
 
+## 3.8.2
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- Updated dependencies [1c134d6]
+- Updated dependencies [a3726bf]
+- Updated dependencies [4e4f7c5]
+- Updated dependencies [0313649]
+- Updated dependencies [09fa609]
+- Updated dependencies [6dc5105]
+- Updated dependencies [e397e35]
+- Updated dependencies [68780ea]
+  - @ldn-viz/ui@15.1.0
+
 ## 3.8.1
 
 ### Patch Changes

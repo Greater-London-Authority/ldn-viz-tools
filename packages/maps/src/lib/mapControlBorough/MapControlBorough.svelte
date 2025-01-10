@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `MapControlBorough` component lets the user select a borough, and zooms the map to to the selected borough.
+	 * The `MapControlBorough` component lets the user select a borough, and zooms the map to the selected borough.
 	 * @component
 	 */
 

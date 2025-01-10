@@ -11,7 +11,7 @@
 	import MapMarkerStyledContainer from '../mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
 	/**
-	 * Method to layout and position the popup. Options are 'center', 'follow', or 'none'.
+	 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
 	 */
 	export let placement = 'center';
 

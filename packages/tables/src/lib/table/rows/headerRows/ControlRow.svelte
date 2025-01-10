@@ -15,7 +15,7 @@
 <Scaffolding {table}>
 	<svelte:fragment slot="groupControl">
 		{#each table.groupingFields || [] as _field, i}
-			<div
+			<button
 				style:width={table.widths.groupControl}
 				id="groupControl"
 				on:click={() => table.openOrCloseLevel(i)}
@@ -26,7 +26,7 @@
 					class="w-[18px] h-[18px] ml-0.5"
 					aria-hidden="true"
 				/>
-			</div>
+			</button>
 		{/each}
 		<div style:width={table.widths.groupControl} id="groupControl"></div>
 	</svelte:fragment>
