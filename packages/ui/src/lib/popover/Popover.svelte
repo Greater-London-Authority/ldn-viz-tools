@@ -39,10 +39,11 @@
 	/**
 	 * Store controlling whether popover is open.
 	 */
-	export let openStore: Writable<boolean>;
+	export let openStore: Writable<boolean> | undefined = undefined;
 	$: openStore = open;
 </script>
 
+<!-- TODO: as this button wraps the hint slot any slotted item inherits button styles (color etc) This should be refactored to be more generic -->
 <Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
 	<span {...$trigger} use:trigger class="inline-flex items-center">
 		{#if $$slots.hint}
