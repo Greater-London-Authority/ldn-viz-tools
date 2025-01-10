@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ResizeIcon from './ResizeIcon.svelte';
 	import Popover from '../popover/Popover.svelte';
+	import ResizeIcon from './ResizeIcon.svelte';
 
 	export let size = 1;
 
@@ -10,7 +10,10 @@
 
 <Popover>
 	<svelte:fragment slot="hint">
-		<ResizeIcon class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+		<ResizeIcon
+			class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
+			aria-hidden="true"
+		/>
 	</svelte:fragment>
 
 	<svelte:fragment slot="title">Marker size</svelte:fragment>

@@ -1,15 +1,18 @@
 <script lang="ts">
 	import Input from '../input/Input.svelte';
 
-	import TransparencyIcon from './TransparencyIcon.svelte';
 	import Popover from '../popover/Popover.svelte';
+	import OpacityIcon from './OpacityIcon.svelte';
 
 	export let opacity = 1;
 </script>
 
 <Popover>
 	<svelte:fragment slot="hint">
-		<TransparencyIcon class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+		<OpacityIcon
+			class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
+			aria-hidden="true"
+		/>
 	</svelte:fragment>
 
 	<svelte:fragment slot="title">Opacity</svelte:fragment>
