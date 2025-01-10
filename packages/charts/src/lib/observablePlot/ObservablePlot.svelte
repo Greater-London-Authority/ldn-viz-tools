@@ -94,7 +94,7 @@
 	export let tooltipOffset = -16;
 
 	/**
-	 * If `false`, then use the Plot.plot function provided by  Observable Plot (rather than the wrapper provided by `@ldn-viz`),
+	 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
 	 * so that default chart-level styling is not applied.
 	 */
 	export let applyDefaults = true;
