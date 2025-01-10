@@ -44,14 +44,17 @@
 	export let scaleFactor = 2;
 
 	const downloadFromURL = (url: string) => {
-		if (!filename) {
-			filename = format === 'SVG' ? 'image.svg' : 'image.png';
+		let fname;
+		if (filename) {
+			fname = filename;
+		} else {
+			fname = format === 'SVG' ? 'image.svg' : 'image.png';
 		}
 
 		const link = document.createElement('a');
 		link.setAttribute('href', url);
 		link.setAttribute('target', '_blank');
-		link.setAttribute('download', filename);
+		link.setAttribute('download', fname);
 		link.dispatchEvent(new MouseEvent('click'));
 		link.remove();
 	};
