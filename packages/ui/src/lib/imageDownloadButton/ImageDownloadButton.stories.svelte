@@ -23,7 +23,6 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
-
 	let htmlNode: HTMLElement;
 </script>
 
@@ -54,6 +53,12 @@
 
 <Story name="Download as an PNG - no option">
 	<ImageDownloadButton {htmlNode} formats={['PNG']}>
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
+	</ImageDownloadButton>
+</Story>
+
+<Story name="Scaled resolution">
+	<ImageDownloadButton {htmlNode} formats={['PNG']} scaleFactor={2}>
 		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>

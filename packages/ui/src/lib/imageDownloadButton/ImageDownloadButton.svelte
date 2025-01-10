@@ -14,7 +14,7 @@
 	/**
 	 * An `Element` node to be converted. When 'SVG' format is selected the largest child svg element will be targeted.
 	 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
-	 * If this does not yeild the desired results you may need to adjust your markup.
+	 * If this does not yield the desired results you may need to adjust your markup.
 	 */
 	export let htmlNode: HTMLElement;
 
@@ -37,6 +37,11 @@
 	 * If `true`, the user will not be able to interact with the button to download data.
 	 */
 	export let disabled = false;
+
+	/**
+	 * If converting an SVG to PNG, the resolution of the PNG will be `scaleFactor` times the size at which the SVG was displayed at.
+	 */
+	export let scaleFactor = 2;
 
 	const downloadFromURL = (url: string) => {
 		if (!filename) {
@@ -91,7 +96,9 @@
 				? toSvg(svgNode, captureOptions).then((dataUrl) => downloadFromURL(dataUrl))
 				: console.warn('No svgNode found');
 		} else if (format === 'PNG') {
-			toPng(htmlNode, captureOptions).then((dataUrl) => downloadFromURL(dataUrl));
+			toPng(htmlNode, { ...captureOptions, pixelRatio: scaleFactor }).then((dataUrl) =>
+				downloadFromURL(dataUrl)
+			);
 		} else {
 			console.warn('Must supply an htmlNode to be converted to image');
 		}
