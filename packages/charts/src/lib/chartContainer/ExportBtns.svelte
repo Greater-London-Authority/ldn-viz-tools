@@ -76,7 +76,7 @@
 			<ImageDownloadButton
 				{filename}
 				formats={imageDownloadButton === true ? ['PNG', 'SVG'] : imageDownloadButton}
-				node={chartToCapture}
+				htmlNode={chartToCapture}
 				variant="outline"
 				emphasis="secondary"
 				size="sm"
