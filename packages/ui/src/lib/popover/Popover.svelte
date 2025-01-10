@@ -34,6 +34,12 @@
 	 * text size for the tooltip target
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
+
+	/**
+	 * Store controlling whether popover is open.
+	 */
+	export let openStore;
+	$: openStore = open;
 </script>
 
 <Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
