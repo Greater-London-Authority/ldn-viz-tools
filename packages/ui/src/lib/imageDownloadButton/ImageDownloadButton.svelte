@@ -74,7 +74,7 @@
 		return largestSVG;
 	};
 
-	// Filter elemts to hide based on class
+	// Filter elements to hide based on class
 	const filter = (node: HTMLElement) => {
 		if (node instanceof HTMLElement) {
 			const ignoreAttributes = ['data-capture-ignore'];
