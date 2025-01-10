@@ -29,9 +29,9 @@
 	export let filename = '';
 
 	/**
-	 * Amount of padding to add, as a string including units.
+	 * Amount of padding to add, in pixels.
 	 */
-	export let padding = '30px';
+	export let padding = 30;
 
 	/**
 	 * If `true`, the user will not be able to interact with the button to download data.
@@ -89,7 +89,18 @@
 	};
 
 	const download = async () => {
-		const captureOptions = { style: { padding: padding }, filter };
+		const captureOptions = {
+			style: {
+				padding: padding + 'px'
+			},
+
+			// N.B. if we don't specify the width/height, then html-to-image will use the size of the HTML element before
+			// adjusting the style to add the padding. This would result in the content being truncated.
+			width: 2 * padding + htmlNode.clientWidth,
+			height: 2 * padding + htmlNode.clientHeight,
+
+			filter
+		};
 		if (format === 'SVG') {
 			const svgNode = findNearestChildSvg(htmlNode);
 			svgNode !== null
