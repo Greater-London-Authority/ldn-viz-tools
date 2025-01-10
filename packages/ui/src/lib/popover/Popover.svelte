@@ -15,6 +15,7 @@
 	import { InformationCircle, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	import type { Writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 
 	const {
@@ -38,7 +39,7 @@
 	/**
 	 * Store controlling whether popover is open.
 	 */
-	export let openStore;
+	export let openStore: Writable<boolean>;
 	$: openStore = open;
 </script>
 

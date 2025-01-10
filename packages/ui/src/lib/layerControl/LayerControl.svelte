@@ -3,9 +3,9 @@
 	 * The `LayerControl` component combines a checkbox with color and opacity controls.
 	 * @component
 	 */
-	import Tooltip from '../tooltip/Tooltip.svelte';
-	import OpacityControl from '../layerControl/OpacityControl.svelte';
 	import Checkbox from '../checkBox/Checkbox.svelte';
+	import OpacityControl from '../layerControl/OpacityControl.svelte';
+	import Tooltip from '../tooltip/Tooltip.svelte';
 	import ColorPicker from './ColorPicker.svelte';
 	import ResizeControl from './ResizeControl.svelte';
 
@@ -43,7 +43,7 @@
 	 * * opacity (number between 0 and 1, inclusive)
 	 * * size (number)
 	 */
-	export let state = {
+	export let state: { color: string; visible: boolean; opacity: number; size?: number } = {
 		color: '#000000',
 		visible: true,
 		opacity: 1.0,

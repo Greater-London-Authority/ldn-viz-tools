@@ -9,11 +9,9 @@
 </script>
 
 <script lang="ts">
-	let state;
-
 	let layerStates = {
 		boroughs: {
-			color: '#00AEEF',
+			color: '#ffcc00',
 			visible: true,
 			opacity: 1.0
 		},
@@ -28,6 +26,8 @@
 			opacity: 1.0
 		}
 	};
+
+	let state = layerStates.boroughs;
 </script>
 
 <Template let:args>
