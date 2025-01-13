@@ -9,11 +9,6 @@
 	export let chartToCapture: HTMLDivElement;
 
 	/**
-	 * The `id` of the element to which padding should be applied before converting to an image.
-	 */
-	export let idToPad = '';
-
-	/**
 	 * The data to be exported. This is an array of objects: each entry becomes a row in the generated
 	 * CSV file, and each attribute of the objects becomes a column.
 	 */
@@ -80,7 +75,6 @@
 				variant="outline"
 				emphasis="secondary"
 				size="sm"
-				{idToPad}
 			>
 				<svelte:fragment slot="afterLabel">
 					<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
