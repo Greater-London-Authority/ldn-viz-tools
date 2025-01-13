@@ -7,7 +7,7 @@
 	 * @component
 	 */
 
-	import { toPng, toSvg } from 'html-to-image';
+	import { toPng } from 'html-to-image';
 	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 
@@ -83,7 +83,7 @@
 		return largestSVG;
 	};
 
-	// Filter elements to hide based on class
+	// Filter elements to hide based on data attribute
 	const filter = (node: HTMLElement) => {
 		if (node instanceof HTMLElement) {
 			const ignoreAttributes = ['data-capture-ignore'];
@@ -105,15 +105,68 @@
 
 			filter
 		};
+
+		/**
+		 * Serialise function adapted from https://observablehq.com/@mbostock/saving-svg
+		 */
+		const serialize = (svgNode: SVGElement) => {
+			return new Promise<string>((resolve, reject) => {
+				try {
+					const xmlns = 'http://www.w3.org/2000/xmlns/';
+					const xlinkns = 'http://www.w3.org/1999/xlink';
+					const svgns = 'http://www.w3.org/2000/svg';
+
+					// Clone the SVG node to avoid mutating the original and cast type
+					const svg = svgNode.cloneNode(true) as SVGElement;
+
+					// Handle fragment identifiers (e.g., xlink:href)
+					const fragment = window.location.href + '#';
+					const walker = document.createTreeWalker(svg, NodeFilter.SHOW_ELEMENT);
+					while (walker.nextNode()) {
+						if (walker.currentNode instanceof Element) {
+							for (const attr of walker.currentNode.attributes) {
+								if (attr.value.includes(fragment)) {
+									attr.value = attr.value.replace(fragment, '#');
+								}
+							}
+						}
+					}
+
+					// Add proper namespaces
+					svg.setAttributeNS(xmlns, 'xmlns', svgns);
+					svg.setAttributeNS(xmlns, 'xmlns:xlink', xlinkns);
+
+					// Serialize the SVG
+					const serializer = new XMLSerializer();
+					const svgString = serializer.serializeToString(svg);
+
+					// Add XML declaration for better compatibility
+					const fullSvg = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+
+					// Convert to data URL
+					const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(fullSvg)}`;
+					resolve(dataUrl);
+				} catch (error) {
+					reject(error);
+				}
+			});
+		};
+
 		if (format === 'SVG') {
 			const svgNode = findNearestChildSvg(htmlNode);
 			svgNode !== null
-				? toSvg(svgNode, captureOptions).then((dataUrl) => downloadFromURL(dataUrl))
+				? serialize(svgNode)
+						.then((dataUrl: string) => downloadFromURL(dataUrl))
+						.catch((error: any) => {
+							console.error('Error serializing SVG:', error);
+						})
 				: console.warn('No svgNode found');
 		} else if (format === 'PNG') {
-			toPng(htmlNode, { ...captureOptions, pixelRatio: scaleFactor }).then((dataUrl) =>
-				downloadFromURL(dataUrl)
-			);
+			toPng(htmlNode, { ...captureOptions, pixelRatio: scaleFactor })
+				.then((dataUrl: string) => downloadFromURL(dataUrl))
+				.catch((error: any) => {
+					console.error('Error creating PNG:', error);
+				});
 		} else {
 			console.warn('Must supply an htmlNode to be converted to image');
 		}
