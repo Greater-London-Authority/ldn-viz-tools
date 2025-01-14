@@ -37,7 +37,7 @@
 
 	/**
 	 * A store holding the mapped GeoJSON data. The store is updated when updated
-	 * via a remote source. The store is two way so data pushed into the store
+	 * via a remote source. The store is two-way so data pushed into the store
 	 * is applied to the map.
 	 */
 	export const dataStore = writable(initialData);

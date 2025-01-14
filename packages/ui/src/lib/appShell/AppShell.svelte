@@ -45,7 +45,7 @@
 	export let isOpen = writable(startOpen);
 
 	/**
-	 * A tailwind class or classes used to set or overide the height of the Appshell wrapper.
+	 * A tailwind class or classes used to set or override the height of the Appshell wrapper.
 	 */
 	export let heightClass = 'min-h-dvh';
 

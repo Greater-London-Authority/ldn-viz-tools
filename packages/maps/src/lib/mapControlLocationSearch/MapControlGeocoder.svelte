@@ -52,7 +52,7 @@
 	export let inputClasses = '';
 
 	/**
-	 * Placeholder text to be dislayed in the input element.
+	 * Placeholder text to be displayed in the input element.
 	 */
 	export let placeholder = 'Location search';
 

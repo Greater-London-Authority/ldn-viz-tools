@@ -177,15 +177,18 @@
 	<div class="w-[400px]">
 		<p>
 			Flipping both the range and domain of the scale affects the direction in which the legend is
-			drawn, without affecitng the mapping from values to colors.
+			drawn, without affecting the mapping from values to colors.
 		</p>
 
-		<ColorLegend color={scaleSequential(interpolateBlues).domain([0, 10])} title="Original" />
+		<div class="flex gap-2">
+			<ColorLegend color={scaleSequential(interpolateBlues).domain([0, 10])} title="Original" />
 
-		<ColorLegend
-			color={scaleSequential((d) => interpolateBlues(1 - d)).domain([0, 10].reverse())}
-			title="Flipped"
-		/>
+			<ColorLegend
+				color={scaleSequential(interpolateBlues).domain([0, 10])}
+				title="Flipped"
+				reverse
+			/>
+		</div>
 	</div>
 </Story>
 

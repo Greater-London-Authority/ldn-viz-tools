@@ -2,7 +2,10 @@
 	/**
 	 * The `<Sidebar>` component renders a sidebar that is typically used to display controls and textual explanation.
 	 *
-	 * It should generally be used inside an [AppShell](.//?path=/docs/app-appshell--documentation)
+	 * It should generally be used inside an [AppShell](.//?path=/docs/app-appshell--documentation).
+	 *
+	 * Note that when the sidebar is collapsed, it is removed by the `AppShell` (rather than merely being hidden).
+	 * Any state that should be restored when it is re-opened should be persisted in a Svelte Store.
 	 *
 	 * @component
 	 */

@@ -123,7 +123,7 @@
 		/>
 	{/if}
 
-	<div class={`flex flex-col space-y-0.25 ${buttonsHidden ? '' : 'pl-5'}`}>
+	<div class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
 		{#each options as option (option.id)}
 			<LayerControl
 				label={option.label}

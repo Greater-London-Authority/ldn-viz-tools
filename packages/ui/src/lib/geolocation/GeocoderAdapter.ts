@@ -38,7 +38,7 @@ export interface GeocoderAdapter {
 	// authors or owners of the location data or hosting service and an optional
 	// link.
 	//
-	// This function is optional and should not be imlemented if attribution is
+	// This function is optional and should not be implemented if attribution is
 	// not needed. Alternatively, returning undefined will also omit attribution.
 	attribution?: () => undefined | GeocoderAttribution;
 }

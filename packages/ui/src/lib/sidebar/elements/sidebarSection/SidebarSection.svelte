@@ -7,7 +7,7 @@
 	import SidebarSectionTitle from './sidebarSectionTitle/SidebarSectionTitle.svelte';
 
 	/**
-	 * The title of this section. Note tat rather than supplying a title, you can supply a `<SidebarSectionTitle>` component in the `title` slot.
+	 * The title of this section. Note that rather than supplying a title, you can supply a `<SidebarSectionTitle>` component in the `title` slot.
 	 */
 	export let title = '';
 </script>

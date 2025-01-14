@@ -37,7 +37,7 @@
 	export let adapter: GeocoderAdapter;
 
 	/**
-	 * delay in ms after a key stroke to minimise redundant API requests.
+	 * delay in ms after a keystroke to minimise redundant API requests.
 	 */
 	export let delay = 250;
 
@@ -83,7 +83,7 @@
 	export let showClearButton = false;
 
 	/**
-	 * Placeholder text to be dislayed in the input element.
+	 * Placeholder text to be displayed in the input element.
 	 */
 	export let placeholder = 'Location search';
 
@@ -330,3 +330,9 @@
 		/>
 	{/if}
 </search>
+
+<style>
+	[type='search']::-webkit-search-cancel-button {
+		appearance: none;
+	}
+</style>
