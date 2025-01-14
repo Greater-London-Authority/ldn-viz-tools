@@ -259,7 +259,7 @@ const formatForDocumentation = (dictionary) => {
   const separator = '.'; // Separator for flattened keys
 
   // Check if a node is a token
-  const isToken = (node) => node.hasOwnProperty('value');
+  const isToken = (node) => Object.hasOwn(node, 'value');
 
   // Flatten keys starting from a certain depth
   const flattenKeys = (keyPath, separator) => keyPath.slice(maxDepth - 1).join(separator);
