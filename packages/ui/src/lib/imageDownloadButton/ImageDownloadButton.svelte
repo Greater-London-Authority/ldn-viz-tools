@@ -132,9 +132,13 @@
 						}
 					}
 
-					// Add proper namespaces
-					svg.setAttributeNS(xmlns, 'xmlns', svgns);
-					svg.setAttributeNS(xmlns, 'xmlns:xlink', xlinkns);
+					// Add proper namespaces, if they are not already set
+					if (!svg.getAttribute('xmlns')) {
+						svg.setAttributeNS(xmlns, 'xmlns', svgns);
+					}
+					if (!svg.getAttribute('xmlns:xlink')) {
+						svg.setAttributeNS(xmlns, 'xmlns:xlink', xlinkns);
+					}
 
 					// Serialize the SVG
 					const serializer = new XMLSerializer();
