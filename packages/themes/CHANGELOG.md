@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 4.0.1
+
+### Patch Changes
+
+- 25428ea: ADDED: add build task that creates JSON files to enable the auto-genereration of token documentation
+
 ## 4.0.0
 
 ### Major Changes
