@@ -5,6 +5,13 @@
 		title: 'Ui/Callout',
 		component: Callout,
 		argTypes: {
+			id: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
 			status: {
 				options: ['notice', 'success', 'warning', 'error'],
 				control: { type: 'select' }
