@@ -204,11 +204,11 @@
 	let buttonClass: string;
 
 	$: buttonClass = classNames(
-		'inline-flex justify-center items-center',
+		'inline-flex justify-center items-center disabled:cursor-not-allowed',
 		styleClasses[variant][emphasis][condition],
 		sizeClasses[size],
-		disabled === true ? 'cursor-not-allowed ' + disabledClasses[variant] : '',
-		// href && disabled === true ? 'pointer-events-none' : '',
+		disabled === true ? disabledClasses[variant] : '',
+		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
 </script>
@@ -220,7 +220,7 @@
 		target={href && openInNewTab ? '_blank' : undefined}
 		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
 		{href}
-		aria-disabled={disabled}
+		{disabled}
 		{title}
 		class={buttonClass}
 		on:click
