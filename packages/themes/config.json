@@ -55,10 +55,10 @@
     },
     "docs": {
       "transforms": ["attribute/cti", "name/cti/kebab", "color/hex"],
-      "buildPath": "./docs/tokens/color/",
+      "buildPath": "./docs/tokens/",
       "files": [
         {
-          "destination": "docs.json",
+          "destination": "color.json",
           "format": "documentation",
           "filter": "jsFilter"
         }
