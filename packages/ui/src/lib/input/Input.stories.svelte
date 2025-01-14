@@ -232,3 +232,11 @@
 		<Input type="range" label="Range" name="range" />
 	</div>
 </Story>
+
+<!-- You can facilitate autocompletion of input values by setting the `autocomplete` attribute
+([docs on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)).  -->
+<Story name="With autocomplete">
+	<div class="w-96">
+		<Input autocomplete="shipping street-address" />
+	</div>
+</Story>

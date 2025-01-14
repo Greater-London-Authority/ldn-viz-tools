@@ -51,7 +51,7 @@
 	import { messages } from './toaster';
 	import type { ToasterPosition } from './types';
 
-	// position is used to layout the Toaster. You can specify your own classes
+	// position of the `Toaster`. You can specify your own classes
 	// for positioning via the classes property if you want something bespoke.
 	export let position: keyof typeof ToasterPosition = 'TopCenter';
 
