@@ -236,6 +236,71 @@ StyleDictionary.registerFormat({
   }
 });
 
+/**
+ * Custom format that generates json object for export and documentation
+ */
+
+// format token name
+const formatTokenName = (name) => {
+  return transformString(name, 'color-', /.*-color-/);
+};
+
+// Format a single token object
+const formatToken = ({ name, value, type, description = '' }) => ({
+  name: formatTokenName(name),
+  hex: value,
+  value,
+  type,
+  description
+});
+
+const formatForDocumentation = (dictionary) => {
+  const maxDepth = 5; // Set the maximum nesting depth
+  const separator = '.'; // Separator for flattened keys
+
+  // Check if a node is a token
+  const isToken = (node) => node.hasOwnProperty('value');
+
+  // Flatten keys starting from a certain depth
+  const flattenKeys = (keyPath, separator) => keyPath.slice(maxDepth - 1).join(separator);
+
+  // Recursively process tokens
+  const processTokens = (tokens, currentDepth = 0, parentKeys = []) => {
+    return Object.entries(tokens).reduce((acc, [key, node]) => {
+      const currentPath = [...parentKeys, key];
+
+      if (isToken(node)) {
+        // Directly add tokens with flattened keys
+        const flatKey = flattenKeys(currentPath, separator);
+        acc[flatKey] = formatToken(node);
+      } else if (currentDepth < maxDepth - 1) {
+        // Recurse for nested nodes within allowed depth
+        acc[key] = processTokens(node, currentDepth + 1, currentPath);
+      } else {
+        // Hoist deeper tokens into the current level
+        Object.entries(node).forEach(([nestedKey, nestedNode]) => {
+          const flatKey = [key, nestedKey].join(separator);
+          if (isToken(nestedNode)) {
+            acc[flatKey] = formatToken(nestedNode);
+          } else {
+            acc[flatKey] = processTokens(nestedNode, currentDepth + 1, currentPath);
+          }
+        });
+      }
+      return acc;
+    }, {});
+  };
+
+  return processTokens(dictionary.tokens);
+};
+
+StyleDictionary.registerFormat({
+  name: 'documentation',
+  formatter({ dictionary }) {
+    return JSON.stringify(formatForDocumentation(dictionary), null, 2);
+  }
+});
+
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration

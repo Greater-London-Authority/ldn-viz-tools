@@ -52,6 +52,17 @@
           "filter": "jsFilter"
         }
       ]
+    },
+    "docs": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "color/hex"],
+      "buildPath": "./docs/tokens/color/",
+      "files": [
+        {
+          "destination": "docs.json",
+          "format": "documentation",
+          "filter": "jsFilter"
+        }
+      ]
     }
   }
 }
