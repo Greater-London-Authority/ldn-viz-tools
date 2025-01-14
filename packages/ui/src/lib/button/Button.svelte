@@ -237,6 +237,7 @@
 	>
 		<!-- contents of the button -->
 		<slot />
+		<!-- displays visual icon and screen reader info to let users know link will open in new tab -->
 		{#if openInNewTab}
 			<Icon
 				src={ArrowTopRightOnSquare}
