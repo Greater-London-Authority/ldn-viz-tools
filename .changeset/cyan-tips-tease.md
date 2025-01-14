@@ -2,4 +2,5 @@
 '@ldn-viz/themes': patch
 ---
 
-add build task for token docs
+ADDED: add build task that creates JSON files to enable the auto-genereration of token documentation
+ 
