@@ -172,7 +172,7 @@
 					console.error('Error creating PNG:', error);
 				});
 		} else {
-			console.warn('Must supply an htmlNode to be converted to image');
+			console.warn("Format must be either 'SVG' or 'PNG'");
 		}
 	};
 
