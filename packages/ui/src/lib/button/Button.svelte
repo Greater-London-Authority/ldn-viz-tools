@@ -204,10 +204,10 @@
 	let buttonClass: string;
 
 	$: buttonClass = classNames(
-		'inline-flex justify-center items-center disabled:cursor-not-allowed',
+		'inline-flex justify-center items-center',
 		styleClasses[variant][emphasis][condition],
 		sizeClasses[size],
-		disabled === true ? disabledClasses[variant] : '',
+		disabled === true ? 'cursor-not-allowed ' + disabledClasses[variant] : '',
 		// href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
