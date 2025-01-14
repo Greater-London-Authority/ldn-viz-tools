@@ -206,7 +206,7 @@
 		styleClasses[variant][emphasis][condition],
 		sizeClasses[size],
 		disabled === true ? disabledClasses[variant] : '',
-		href && disabled === true ? 'pointer-events-none' : '',
+		// href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
 </script>
