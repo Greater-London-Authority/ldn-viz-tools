@@ -218,7 +218,7 @@
 		target={href && openInNewTab ? '_blank' : undefined}
 		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
 		{href}
-		{disabled}
+		aria-disabled={disabled}
 		{title}
 		class={buttonClass}
 		on:click
