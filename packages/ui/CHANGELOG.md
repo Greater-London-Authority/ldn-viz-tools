@@ -1,5 +1,23 @@
 # ldn-viz-tools-ui
 
+## 15.2.0
+
+### Minor Changes
+
+- c145cf7: CHANGED: `ColorLegend` now accepts a `reverse` prop, allowing the direction of the legend to flipped left-right
+- c08ce0a: ADDED: as an alternative to providing `DataDownloadButton` with a prop containing `data`, you can provide a function
+  that returns an array of data
+- 5f566bc: CHANGED: switch from `html2canvas` to `html-to-image` in the `ImageDownloadButton`
+- c1d600c: CHANGED: changed the appearance of the `LayerControl` and its sub-controls (`OpacityControl`, `ColorPicker`, `ResizeControl`)
+- 0056c95: CHANGED: use `Popover` component in `ColorPicker`/`OpacityControl`/`ResizeControl`, rather than duplicating implementation
+
+### Patch Changes
+
+- 7d12227: FIXED: use `<button>` element rather than `<div>` for some clickable elements
+- 2e42c23: FIXED: prevent Chrome drawing a second clear icon in `Geocoder` when used in a map
+- 721774d: FIXED: include `name` in the `id` of `RadioButtonSolid`, preventing interference with different
+  `RadioButtonGroupSolid`s that include options with the same `id`.
+
 ## 15.1.0
 
 ### Minor Changes
