@@ -117,7 +117,6 @@
 			<ExportBtns
 				{chartToCapture}
 				{filename}
-				idToPad="captureElement"
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}

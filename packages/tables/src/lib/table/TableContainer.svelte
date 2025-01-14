@@ -120,7 +120,6 @@
 			<ExportBtns
 				chartToCapture={tableToCapture}
 				{columnMapping}
-				idToPad="captureElement"
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}
