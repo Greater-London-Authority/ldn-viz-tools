@@ -120,7 +120,7 @@
 	{...$$restProps}
 >
 	{#if working}
-		<div class="relative">
+		<div class="relative" aria-live="polite" role="status" title="Loading">
 			<Spinner
 				arcColorClass={conditionColorClasses}
 				class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
