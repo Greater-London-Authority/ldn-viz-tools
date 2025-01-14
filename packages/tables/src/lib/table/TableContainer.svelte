@@ -64,7 +64,7 @@
 	 * If set to `false`, then the button is hidden.
 	 *
 	 */
-	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = ['PNG'];
 
 	export let filename = '';
 
@@ -120,7 +120,6 @@
 			<ExportBtns
 				chartToCapture={tableToCapture}
 				{columnMapping}
-				idToPad="captureElement"
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}

@@ -1,5 +1,24 @@
 # @ldn-viz/tables
 
+## 2.4.2
+
+### Patch Changes
+
+- 7d12227: FIXED: use `<button>` element rather than `<div>` for some clickable elements
+- Updated dependencies [7d12227]
+- Updated dependencies [c145cf7]
+- Updated dependencies [25428ea]
+- Updated dependencies [c08ce0a]
+- Updated dependencies [2e42c23]
+- Updated dependencies [5f566bc]
+- Updated dependencies [c1d600c]
+- Updated dependencies [721774d]
+- Updated dependencies [8c31d1b]
+- Updated dependencies [0056c95]
+  - @ldn-viz/ui@15.2.0
+  - @ldn-viz/themes@4.0.1
+  - @ldn-viz/charts@4.0.0
+
 ## 2.4.1
 
 ### Patch Changes
