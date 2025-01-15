@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 15.2.1
+
+### Patch Changes
+
+- bcb194c: FIXED: increase z-index of Popover to ensure it renders above sidebar
+
 ## 15.2.0
 
 ### Minor Changes
