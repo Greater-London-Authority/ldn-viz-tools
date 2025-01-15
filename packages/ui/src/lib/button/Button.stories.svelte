@@ -33,7 +33,7 @@
 </script>
 
 <script lang="ts">
-	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
+	import { ArrowDownCircle, ArrowTopRightOnSquare, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
@@ -136,8 +136,19 @@
 	</div>
 </Story>
 
+<!-- For accessibility, keep opening links in new tabs to a minimum. For cases where it's necessary to do so, you must make the functionality clear visually and to screen readers. -->
 <Story name="With Link, opening in new tab">
 	<div class="space-y-2">
-		<Button href="http://google.com" openInNewTab>Link</Button>
+		<Button href="http://google.com" openInNewTab>
+			Link
+			<Icon
+				src={ArrowTopRightOnSquare}
+				theme="solid"
+				class="w-5 h-5 ml-2"
+				aria-hidden="false"
+				title="opens in new tab"
+			/>
+		</Button>
+		<Button href="http://google.com" openInNewTab>Link (opens in new tab)</Button>
 	</div>
 </Story>
