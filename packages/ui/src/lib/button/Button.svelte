@@ -74,8 +74,6 @@
 	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
 
-	import { ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {
@@ -237,15 +235,5 @@
 	>
 		<!-- contents of the button -->
 		<slot />
-		<!-- displays visual icon and screen reader info to let users know link will open in new tab -->
-		{#if openInNewTab}
-			<Icon
-				src={ArrowTopRightOnSquare}
-				theme="solid"
-				class="w-5 h-5 ml-2"
-				aria-hidden="false"
-				title="opens in new tab"
-			/>
-		{/if}
 	</svelte:element>
 </div>
