@@ -1,7 +1,10 @@
 <script context="module">
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
-	/* This is an example `LineChart` chart using default plot styles. */
+	/** This is an example `LineChart` chart using default plot styles.
+	 *
+	 * This incorporates `ariaHidden` and `ariaLabel` props inside the spec to ensure the screen reader ignores individual SVG elements for accessibility.
+	 */
 
 	export const meta = {
 		title: 'Charts/Examples/LineChart'
