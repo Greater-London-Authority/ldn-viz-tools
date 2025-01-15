@@ -219,7 +219,6 @@
 		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
 		{href}
 		{disabled}
-		aria-disabled={disabled}
 		{title}
 		class={buttonClass}
 		on:click
