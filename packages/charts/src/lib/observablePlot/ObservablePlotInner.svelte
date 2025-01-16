@@ -172,6 +172,12 @@
 	 */
 	export let applyDefaults = true;
 
+	/**
+	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
+	 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
+	 */
+	export let ariaHidden = true;
+
 	const renderPlot = (node: HTMLDivElement) => {
 		if (applyDefaults) {
 			node.appendChild(Plot.plot(spec));
@@ -207,7 +213,13 @@
 </script>
 
 {#key spec}
-	<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
+	<div
+		use:renderPlot
+		{...$$restProps}
+		bind:this={domNode}
+		bind:clientWidth={width}
+		aria-hidden={ariaHidden}
+	/>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
