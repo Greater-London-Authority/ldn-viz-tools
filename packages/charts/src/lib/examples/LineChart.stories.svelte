@@ -67,8 +67,9 @@
 	name="Default"
 	args={{
 		spec: defaultSpec,
-		title: 'Domestic Greenhouse Gas Emissions',
-		subTitle: 'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022',
+		title: 'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022',
+		subTitle:
+			'Line chart showing total domestic greenhouse gas emissions in London fell by almost 8,000 kilotons of carbon dioxide emissions from 2005 to 2022. In 2005, there were almost 17,000 kilotons of carbon dioxide emissions, falling to 9,066 kilotons of carbon dioxide emissions in 2022.',
 		data: { chartData }
 	}}
 	source
@@ -78,8 +79,9 @@
 	name="With Tooltip"
 	args={{
 		spec: specWithTooltip,
-		title: 'Domestic Greenhouse Gas Emissions',
-		subTitle: 'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022',
+		title: 'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022',
+		subTitle:
+			'Line chart showing total domestic greenhouse gas emissions in London fell by almost 8,000 kilotons of carbon dioxide emissions from 2005 to 2022. In 2005, there were almost 17,000 kilotons of carbon dioxide emissions, falling to 9,066 kilotons of carbon dioxide emissions in 2022.',
 		data: { chartData }
 	}}
 	source
