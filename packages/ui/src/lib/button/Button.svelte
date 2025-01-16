@@ -74,6 +74,8 @@
 	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
 
+	export let customAction;
+
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {
@@ -212,28 +214,56 @@
 </script>
 
 <div class="flex">
-	<svelte:element
-		this={href ? 'a' : 'button'}
-		type={href ? undefined : type}
-		target={href && openInNewTab ? '_blank' : undefined}
-		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
-		{href}
-		{disabled}
-		{title}
-		class={buttonClass}
-		on:click
-		on:change
-		on:keydown
-		on:keyup
-		on:touchstart
-		on:touchend
-		on:touchcancel
-		on:mouseenter
-		on:mouseleave
-		role="button"
-		tabindex="0"
-	>
-		<!-- contents of the button -->
-		<slot />
-	</svelte:element>
+	{#if customAction}
+		<svelte:element
+			this={href ? 'a' : 'button'}
+			type={href ? undefined : type}
+			target={href && openInNewTab ? '_blank' : undefined}
+			rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
+			{href}
+			{disabled}
+			{title}
+			class={buttonClass}
+			on:click
+			on:change
+			on:keydown
+			on:keyup
+			on:touchstart
+			on:touchend
+			on:touchcancel
+			on:mouseenter
+			on:mouseleave
+			role="button"
+			tabindex="0"
+			use:customAction
+		>
+			<!-- contents of the button -->
+			<slot />
+		</svelte:element>
+	{:else}
+		<svelte:element
+			this={href ? 'a' : 'button'}
+			type={href ? undefined : type}
+			target={href && openInNewTab ? '_blank' : undefined}
+			rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
+			{href}
+			{disabled}
+			{title}
+			class={buttonClass}
+			on:click
+			on:change
+			on:keydown
+			on:keyup
+			on:touchstart
+			on:touchend
+			on:touchcancel
+			on:mouseenter
+			on:mouseleave
+			role="button"
+			tabindex="0"
+		>
+			<!-- contents of the button -->
+			<slot />
+		</svelte:element>
+	{/if}
 </div>
