@@ -1,8 +1,6 @@
 <script context="module">
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
-	/* This is an example `LineChart` chart using default plot styles. */
-
 	export const meta = {
 		title: 'Charts/Examples/LineChart'
 	};
@@ -17,25 +15,62 @@
 		return { ...d, year: new Date(d.Year, 0) };
 	});
 
+	/**
+	 * Spec for default example
+	 */
+
 	$: defaultMarks = [
 		Plot.gridX({ interval: '2 years' }),
 		Plot.gridY(),
 		Plot.ruleY([0]),
 		Plot.line(chartData, { x: 'year', y: 'Domestic - Total' }),
 		Plot.axisX({ interval: '2 years' }),
-		Plot.axisY({ label: 'ktCO₂e' })
+		Plot.axisY({ label: 'ktCO₂e' }),
+		Plot.tip(
+			chartData,
+			Plot.pointerX({
+				x: 'year',
+				y: 'Domestic - Total',
+				channels: { Year: 'year', Value: 'Value' },
+				format: {
+					x: false,
+					Year: (d) => d.getFullYear()
+				}
+			})
+		)
 	];
 
 	$: defaultSpec = {
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: defaultMarks
 	};
+</script>
 
-	$: specWithTooltip = {
-		...defaultSpec,
-		marks: [
-			...defaultMarks,
-			Plot.tip(
+<Template let:args>
+	<ObservablePlot {...args} />
+</Template>
+
+<!--
+```html
+<script>
+	import { Plot, ObservablePlot } from '@ldn-vis/charts';
+
+	// Import data
+	import ghgLondonTotalByYear from '../../data/ghgLondonTotalByYear.json';
+
+	// Parse dates
+	$: chartData = ghgLondonTotalByYear.map((d) => {
+		return { ...d, year: new Date(d.Year, 0) };
+	});
+
+	$: marks = [
+		Plot.gridX({ interval: '2 years' }),
+		Plot.gridY(),
+		Plot.ruleY([0]),
+		Plot.line(chartData, { x: 'year', y: 'Domestic - Total' }),
+		Plot.axisX({ interval: '2 years' }),
+		Plot.axisY({ label: 'ktCO₂e' }),
+		Plot.tip(
 				chartData,
 				Plot.pointerX({
 					x: 'year',
@@ -47,32 +82,28 @@
 					}
 				})
 			)
-		]
+	];
+
+	$: spec = {
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: marks
 	};
 </script>
 
-<Template let:args>
-	<ObservablePlot {...args} />
-</Template>
-
-<Story
-	name="Default"
-	args={{
-		spec: defaultSpec,
-		title: 'Domestic Greenhouse Gas Emissions',
-		subTitle: 'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022',
-		data: { chartData }
-	}}
-	source
+<ObservablePlot
+	spec={spec}
+	title={'Domestic Greenhouse Gas Emissions'}
+	subTitle={'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022'}
+	data={ chartData }
 />
+```
+-->
 
-<Story
-	name="With Tooltip"
-	args={{
-		spec: specWithTooltip,
-		title: 'Domestic Greenhouse Gas Emissions',
-		subTitle: 'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022',
-		data: { chartData }
-	}}
-	source
-/>
+<Story name="Default" source>
+	<ObservablePlot
+		spec={defaultSpec}
+		title={'Domestic Greenhouse Gas Emissions'}
+		subTitle={'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022'}
+		data={chartData}
+	/>
+</Story>
