@@ -211,6 +211,8 @@
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
+
+	const action = customAction ? customAction : () => {};
 </script>
 
 <div class="flex">
