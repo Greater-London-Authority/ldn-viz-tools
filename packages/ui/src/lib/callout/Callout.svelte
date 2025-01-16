@@ -4,6 +4,9 @@
 	 * @component
 	 */
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
+
+	export let id = randomId();
 
 	/**
 	 * The status or message type, which determines the banner color.
@@ -48,9 +51,9 @@
 	$: calloutClasses = classNames(sizeClasses[size], statusClasses[status]);
 </script>
 
-<aside class={calloutClasses}>
+<aside class={calloutClasses} aria-labelledby="aside-label-{id}">
 	{#if $$slots.title}
-		<h3 class={classNames('font-bold leading-tight', titleClasses[size])}>
+		<h3 id="aside-label-{id}" class={classNames('font-bold leading-tight', titleClasses[size])}>
 			<slot name="title" />
 		</h3>
 	{/if}
