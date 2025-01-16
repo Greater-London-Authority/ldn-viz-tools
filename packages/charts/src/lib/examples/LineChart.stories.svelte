@@ -9,6 +9,7 @@
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import ghgLondonTotalByYear from '../../data/ghgLondonTotalByYear.json';
+	import { plotTheme } from '../observablePlotFragments/observablePlotFragments';
 	import { Plot } from '../observablePlotFragments/plot';
 
 	$: chartData = ghgLondonTotalByYear.map((d) => {
@@ -43,6 +44,63 @@
 	$: defaultSpec = {
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: defaultMarks
+	};
+
+	/**
+	 * Spec for multi-line example
+	 */
+
+	$: multiLineExampleMarks = [
+		Plot.gridX({ interval: '2 years' }),
+		Plot.gridY(),
+		Plot.ruleY([0]),
+		Plot.line(chartData, {
+			x: 'year',
+			y: 'Domestic - Electricity',
+			stroke: plotTheme().color.data.primary,
+			tip: 'x'
+		}),
+		Plot.line(chartData, {
+			x: 'year',
+			y: 'Domestic - Gas',
+			stroke: plotTheme().color.data.secondary,
+			tip: 'x'
+		}),
+		Plot.axisX({ interval: '2 years' }),
+		Plot.axisY({ label: 'ktCO₂e' }),
+		Plot.tip(
+			chartData,
+			Plot.pointerX({
+				x: 'year',
+				y: 'Domestic - Electricity',
+				channels: { Year: 'year', Value: 'Value' },
+				format: {
+					x: false,
+					Year: (d) => d.getFullYear()
+				}
+			})
+		),
+		Plot.tip(
+			chartData,
+			Plot.pointerX({
+				x: 'year',
+				y: 'Domestic - Gas',
+				channels: { Year: 'year', Value: 'Value' },
+				format: {
+					x: false,
+					Year: (d) => d.getFullYear()
+				}
+			})
+		)
+		// Plot.ruleX(
+		// 	chartData,
+		// 	Plot.pointerX({ x: 'year', py: 'Domestic - Gas', stroke: plotTheme().color.chart.label })
+		// )
+	];
+
+	$: multiLineSpec = {
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: multiLineExampleMarks
 	};
 </script>
 
@@ -102,6 +160,15 @@
 <Story name="Default" source>
 	<ObservablePlot
 		spec={defaultSpec}
+		title={'Domestic Greenhouse Gas Emissions'}
+		subTitle={'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022'}
+		data={chartData}
+	/>
+</Story>
+
+<Story name="Multiple lines" source>
+	<ObservablePlot
+		spec={multiLineSpec}
 		title={'Domestic Greenhouse Gas Emissions'}
 		subTitle={'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022'}
 		data={chartData}
