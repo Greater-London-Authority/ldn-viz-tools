@@ -33,6 +33,7 @@
 <script lang="ts">
 	import { ArrowLeft } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const waitOneSeconds = () => {
 		return new Promise((r) => setTimeout(r, 1000));
