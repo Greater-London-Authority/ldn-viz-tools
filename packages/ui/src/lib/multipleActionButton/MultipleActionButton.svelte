@@ -125,16 +125,25 @@
 			</div>
 		</Button>
 
-		<div
+		<!-- <div
 			use:$trigger.action
 			{...$trigger}
 			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
+		> -->
+		<Button
+			variant="square"
+			{emphasis}
+			{condition}
+			{size}
+			{disabled}
+			customAction={$trigger.action}
+			{...$trigger}
+			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
 		>
-			<Button variant="square" {emphasis} {condition} {size} {disabled}>
-				<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
-				<span class="sr-only">Open Popover</span>
-			</Button>
-		</div>
+			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
+			<span class="sr-only">Open Popover</span>
+		</Button>
+		<!-- </div> -->
 	</div>
 
 	{#if $open}
