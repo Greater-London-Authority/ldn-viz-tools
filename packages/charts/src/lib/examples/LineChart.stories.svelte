@@ -3,7 +3,7 @@
 
 	/** This is an example `LineChart` chart using default plot styles.
 	 *
-	 * This incorporates `ariaHidden` and `ariaLabel` props inside the spec to ensure the screen reader ignores individual SVG elements for accessibility.
+	 * By default, charts are hidden from screen readers to improve accessibility. Instead, use descriptive `title`, `subTitle` and surrounding text description so all users understand what the chart shows.
 	 */
 
 	export const meta = {
