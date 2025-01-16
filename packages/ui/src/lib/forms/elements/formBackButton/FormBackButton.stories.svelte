@@ -60,6 +60,8 @@
 	</Form>
 </Story>
 
+<!-- If the button has no visible `label`, ensure a `title` is added for screen reader use, as below. -->
+
 <Story name="Customise Button">
 	<Form>
 		<FormBackButton
@@ -69,6 +71,7 @@
 			size="lg"
 			async
 			onBack={waitOneSeconds}
+			title="Go back"
 		>
 			<Icon src={ArrowLeft} class="w-10 h-10" />
 		</FormBackButton>
