@@ -1,34 +1,46 @@
 import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+import { currentThemeMode } from '@ldn-viz/ui';
 import type { AxisOptions } from '@observablehq/plot';
+import { get } from 'svelte/store';
 
 export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for inter
 
 export type ThemeMode = 'light' | 'dark';
 
-export const getDefaultPlotStyles = (mode: ThemeMode = 'light') => ({
-	defaultStyle: defaultStyle(mode),
-	defaultSize,
-	defaultSizeFacet,
-	defaultColor,
-	defaultXScale,
-	defaultYScale,
-	defaultGridX: defaultGridX(mode),
-	defaultGridY: defaultGridY(mode),
-	defaultXAxis,
-	defaultYAxis,
-	defaultLine: defaultLine(mode),
-	defaultDashedLine,
-	defaultDot: defaultDot(mode),
-	defaultPoint: defaultPoint(mode),
-	defaultArea: defaultArea(mode),
-	defaultRule: defaultRule(mode),
-	defaultTip: defaultTip(mode),
-	defaultAnnotationTip: defaultAnnotationTip(mode),
-	defaultAnnotationText: defaultAnnotationText(mode),
-	defaultAnnotationRange: defaultAnnotationRange(mode)
-});
+type DeafultPlotStyleFunctions = {
+	[key: string]: ((mode: ThemeMode) => any) | (() => any);
+};
 
-const theme = (mode: ThemeMode = 'light') => {
+export const defaultPlotStyleFunctions: DeafultPlotStyleFunctions = {
+	defaultStyle: (mode) => defaultStyle(mode),
+	defaultSize: () => defaultSize,
+	defaultSizeFacet: () => defaultSizeFacet,
+	defaultColor: () => defaultColor,
+	defaultXScale: () => defaultXScale,
+	defaultYScale: () => defaultYScale,
+	defaultGridX: (mode) => defaultGridX(mode),
+	defaultGridY: (mode) => defaultGridY(mode),
+	defaultXAxis: () => defaultXAxis,
+	defaultYAxis: () => defaultYAxis,
+	defaultLine: (mode) => defaultLine(mode),
+	defaultDashedLine: () => defaultDashedLine,
+	defaultDot: (mode) => defaultDot(mode),
+	defaultPoint: (mode) => defaultPoint(mode),
+	defaultArea: (mode) => defaultArea(mode),
+	defaultRule: (mode) => defaultRule(mode),
+	defaultTip: (mode) => defaultTip(mode),
+	defaultAnnotationTip: (mode) => defaultAnnotationTip(mode),
+	defaultAnnotationText: (mode) => defaultAnnotationText(mode),
+	defaultAnnotationRange: (mode) => defaultAnnotationRange(mode)
+};
+
+export const getDefaultPlotStyles = (mode: ThemeMode = 'light') => {
+	return Object.fromEntries(
+		Object.entries(defaultPlotStyleFunctions).map(([key, val]) => [key, val(mode)])
+	);
+};
+
+const theme = (mode: ThemeMode = get(currentThemeMode) as ThemeMode) => {
 	return tokens.theme[mode];
 };
 
