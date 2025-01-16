@@ -21,26 +21,22 @@
 	});
 
 	$: defaultMarks = [
-		Plot.gridX({ interval: '2 years', ariaHidden: 'true' }),
-		Plot.gridY({ ariaHidden: 'true' }),
-		Plot.ruleY([0], { ariaHidden: 'true' }),
+		Plot.gridX({ interval: '2 years' }),
+		Plot.gridY({}),
+		Plot.ruleY([0], {}),
 		Plot.line(chartData, {
 			x: 'year',
-			y: 'Domestic - Total',
-			ariaHidden: 'true'
+			y: 'Domestic - Total'
 		}),
-		Plot.axisX({ interval: '2 years', ariaHidden: 'true' }),
+		Plot.axisX({ interval: '2 years' }),
 		Plot.axisY({
-			label: 'ktCO₂e',
-			ariaHidden: 'true'
+			label: 'ktCO₂e'
 		})
 	];
 
 	$: defaultSpec = {
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
-		marks: defaultMarks,
-		ariaLabel:
-			'Domestic Greenhouse Gas Emissions dropped from over 16,000 kilotons of carbon dioxide emissions in 2005, to below 10,000 kilotons in 2022'
+		marks: defaultMarks
 	};
 
 	$: specWithTooltip = {
