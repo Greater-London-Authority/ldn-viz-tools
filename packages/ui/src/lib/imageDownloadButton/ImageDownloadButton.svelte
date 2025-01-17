@@ -158,6 +158,8 @@
 
 		if (format === 'SVG') {
 			const svgNode = findNearestChildSvg(htmlNode);
+
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 			svgNode !== null
 				? serialize(svgNode)
 						.then((dataUrl: string) => downloadFromURL(dataUrl))

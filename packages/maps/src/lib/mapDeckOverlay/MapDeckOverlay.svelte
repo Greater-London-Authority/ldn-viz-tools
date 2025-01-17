@@ -26,6 +26,7 @@
 	let deckOverlay;
 
 	const removeOverlay = () => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		deckOverlay && $mapStore.removeControl(deckOverlay);
 	};
 
@@ -49,6 +50,7 @@
 	};
 
 	const updateLayers = (newLayers) => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		deckOverlay && deckOverlay.setProps({ layers: newLayers });
 	};
 

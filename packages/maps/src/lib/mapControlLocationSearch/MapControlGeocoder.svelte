@@ -76,6 +76,8 @@
 	};
 
 	let showClearButton = false;
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: !showClearButton && clearFeature('geocoder', $mapStore);
 </script>
 

@@ -45,6 +45,8 @@
 					bottom: 'top',
 					left: 'right'
 				}[placement.split('-')[0]];
+
+				// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 				$arrowRef &&
 					Object.assign($arrowRef.style, {
 						left: x != null ? `${x}px` : '',
