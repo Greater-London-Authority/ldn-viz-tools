@@ -11,10 +11,11 @@
 </script>
 
 <script>
+	import ThemeSwitcher from '$lib/themeSwitcher/ThemeSwitcher.svelte';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { writable } from 'svelte/store';
 	import LogoCIU from '../../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../../logos/LogoMayor.svelte';
-	import { writable } from 'svelte/store';
 
 	// hack to make the "View cookie settings" link appear
 	window.CookieControl = writable(true);
@@ -31,10 +32,13 @@
 			<div class="w-[165px]"><LogoCIU /></div>
 		</div>
 		<svelte:fragment slot="menu">
-			<ul class="flex space-x-2">
-				<li>View Cookie settings</li>
-				<li>Privacy Policy</li>
-			</ul>
+			<div class="flex justify-between">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+				<ThemeSwitcher />
+			</div>
 		</svelte:fragment>
 	</SidebarFooter>
 </Story>
@@ -74,10 +78,13 @@
 <Story name="With Menu" source>
 	<SidebarFooter>
 		<svelte:fragment slot="menu">
-			<ul class="flex space-x-2">
-				<li>View Cookie settings</li>
-				<li>Privacy Policy</li>
-			</ul>
+			<div class="flex justify-between">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+				<ThemeSwitcher />
+			</div>
 		</svelte:fragment>
 	</SidebarFooter>
 </Story>

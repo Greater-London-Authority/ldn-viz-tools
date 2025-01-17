@@ -36,8 +36,14 @@
 
 <div class="inline-flex">
 	<div use:trigger>
-		<Button {...$trigger} class="text-color-text-primary" variant="text">
-			<Icon src={themeIcon} theme="outline" class="w-6 h-6" aria-hidden="true" />
+		<Button
+			{...$trigger}
+			class={`text-color-text-primary rounded-full !p-1`}
+			variant="solid"
+			emphasis="secondary"
+			size="sm"
+		>
+			<Icon src={themeIcon} theme="mini" class="w-4 h-4" aria-hidden="true" />
 			<span class="sr-only">Theme Switch</span>
 		</Button>
 	</div>
