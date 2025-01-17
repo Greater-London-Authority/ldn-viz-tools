@@ -116,7 +116,6 @@
 			id={randomId()}
 			form=""
 			label={showAllLabel}
-			color="#3787D2"
 			checked={allCheckboxesCheckedOrDisabled}
 			indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
 			on:change={toggleAll}
