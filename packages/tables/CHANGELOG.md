@@ -1,5 +1,18 @@
 # @ldn-viz/tables
 
+## 2.5.0
+
+### Minor Changes
+
+- 3eb1836: ADDED: `Table` and `TableContainer` components now have a slot to accept content to be displayed between the title/subtitle and table
+
+### Patch Changes
+
+- aa611ef: CHANGED: change icons to indicate sort direction when table is sorted based on column
+- Updated dependencies [33ce5a9]
+- Updated dependencies [d588473]
+  - @ldn-viz/ui@15.2.2
+
 ## 2.4.2
 
 ### Patch Changes
