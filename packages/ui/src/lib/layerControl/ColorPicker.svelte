@@ -24,7 +24,7 @@
 
 <Popover bind:openStore>
 	<svelte:fragment slot="hint">
-		<div class="w-5 h-5 relative border" style:background={color}></div>
+		<div class="w-5 h-5 relative border rounded-full" style:background={color}></div>
 	</svelte:fragment>
 
 	<svelte:fragment slot="title">Color</svelte:fragment>
@@ -34,7 +34,7 @@
 	<div class="flex flex-wrap gap-2">
 		{#each colors as colorOption}
 			<button
-				class="w-6 h-6"
+				class="w-6 h-6 rounded-full"
 				style:background={colorOption}
 				on:click={() => {
 					color = colorOption;
