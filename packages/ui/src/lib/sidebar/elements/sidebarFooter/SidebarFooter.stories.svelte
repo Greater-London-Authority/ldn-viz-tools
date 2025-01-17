@@ -11,11 +11,11 @@
 </script>
 
 <script>
-	import ThemeSwitcher from '$lib/themeSwitcher/ThemeSwitcher.svelte';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import LogoCIU from '../../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../../logos/LogoMayor.svelte';
+	import ThemeSwitcher from '../../../themeSwitcher/ThemeSwitcher.svelte';
 
 	// hack to make the "View cookie settings" link appear
 	window.CookieControl = writable(true);
