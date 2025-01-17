@@ -60,6 +60,8 @@
 	</Form>
 </Story>
 
+<!-- If the button has no visible `label`, ensure a `title` is added for screen reader use, as below. -->
+
 <Story name="Customise Button">
 	<Form>
 		<FormSubmitButton
@@ -68,6 +70,7 @@
 			variant="square"
 			size="lg"
 			onSubmit={doNothing}
+			title="submit"
 		>
 			<Icon src={ArrowRight} class="w-8 h-8" />
 		</FormSubmitButton>
