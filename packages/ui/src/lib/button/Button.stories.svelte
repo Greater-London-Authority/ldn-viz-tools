@@ -143,7 +143,7 @@
 			Link
 			<Icon
 				src={ArrowTopRightOnSquare}
-				theme="solid"
+				theme="mini"
 				class="w-5 h-5 ml-2"
 				aria-hidden="false"
 				title="opens in new tab"
