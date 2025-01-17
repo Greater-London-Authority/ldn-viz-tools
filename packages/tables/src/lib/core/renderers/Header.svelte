@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tooltip, classNames } from '@ldn-viz/ui';
-	import { ChevronDown, ChevronUp, ChevronUpDown } from '@steeze-ui/heroicons';
+	import { BarsArrowDown, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	/**
@@ -21,7 +21,7 @@
 	/**
 	 * Current sort order (used to determine icons if `allowSorting` is `true`).
 	 */
-	export let order: 'asc' | 'desc' | undefined = undefined;
+	export let order: 'ascending' | 'descending' | undefined = undefined;
 
 	/**
 	 * Function called when user changes sort order.
@@ -40,12 +40,6 @@
 		center: 'justify-center'
 	};
 	$: alignmentClass = alignmentClasses[alignHeader ?? 'left'];
-
-	const icons = {
-		default: ChevronUpDown,
-		asc: ChevronUp,
-		desc: ChevronDown
-	};
 
 	// This suppresses warnings due to the RowRenderer providing props that aren't used.
 	$$restProps;
@@ -73,11 +67,17 @@
 
 		{#if allowSorting}
 			<Icon
-				src={order ? icons[order] : icons['default']}
+				src={order ? BarsArrowDown : ChevronUpDown}
 				theme="mini"
-				class="ml-0.5 w-4 h-4"
+				class={classNames('ml-0.5 w-4 h-4', order === 'ascending' ? 'flipY' : '')}
 				aria-hidden="true"
 			/>
 		{/if}
 	</div>
 </div>
+
+<style>
+	:global(.flipY) {
+		transform: scaleY(-1);
+	}
+</style>
