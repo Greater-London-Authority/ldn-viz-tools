@@ -1,18 +1,14 @@
 <script context="module">
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
-	/** This is an example `LineChart` chart using default plot styles.
-	 *
-	 * By default, charts are hidden from screen readers to improve accessibility. Instead, use descriptive `title`, `subTitle` and surrounding text description so all users understand what the chart shows.
-	 */
-
 	export const meta = {
-		title: 'Charts/Examples/LineChart'
+		title: 'Charts/Examples/LineChartAir'
 	};
 </script>
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import airQualityLondonMonthly2024 from '../../data/airQualityLondonMonthly2024.json';
 	import ghgLondonTotalByYear from '../../data/ghgLondonTotalByYear.json';
 	import { plotTheme } from '../observablePlotFragments/observablePlotFragments';
 	import { Plot } from '../observablePlotFragments/plot';
@@ -20,6 +16,12 @@
 	$: chartData = ghgLondonTotalByYear.map((d) => {
 		return { ...d, year: new Date(d.Year, 0) };
 	});
+
+	$: chartDataAir = airQualityLondonMonthly2024.map((d) => {
+		return { ...d, Month: new Date(d.Month) };
+	});
+
+	$: console.log(chartDataAir);
 
 	/**
 	 * Spec for default example
@@ -230,14 +232,9 @@
 
 <ObservablePlot
 	spec={spec}
-	data={chartData}
-	title="Domestic Greenhouse Gas Emissions in London have fallen steadily since 2005"
-	subTitle="London annual domestic greenhouse gas emissions, measured in kilotonnes of carbon dioxide equivalent (ktCO₂e), from 2005 to 2022"
-	alt="Line chart of London annual domestic greenhouse gas emissions"
-	note="This is for footnotes"
-	source="GLA Environment Team"
-	byline="GLA City Intelligence Unit"
-	chartDescription="The chart shows total domestic greenhouse gas emissions in London fell by almost 8,000 kilotonnes of carbon dioxide equivalent from 2005 to 2022. In 2005, there were 16,833 kilotonnes of carbon dioxide equivalent, which fell to 9,066 kilotonnes of carbon dioxide equivalent in 2022."
+	title={'Domestic Greenhouse Gas Emissions'}
+	subTitle={'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022'}
+	data={ chartData }
 />
 ```
 -->
@@ -245,10 +242,8 @@
 <Story name="Multiple lines" source>
 	<ObservablePlot
 		spec={multiLineSpec}
+		title={'Domestic Greenhouse Gas Emissions'}
+		subTitle={'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022'}
 		data={chartData}
-		title="Domestic Greenhouse Gas Emissions in London have fallen steadily since 2005"
-		subTitle="London annual domestic greenhouse gas emissions split by gas and electric energy, measured in kilotonnes of carbon dioxide equivalent (ktCO₂e), from 2005 to 2022"
-		alt="Line chart of London annual domestic greenhouse gas emissions"
-		chartDescription="The chart shows domestic greenhouse gas emissions in London fell by almost 8,000 kilotonnes of carbon dioxide equivalent from 2005 to 2022. There are two lines, one shows domestic gas emissions and the second shows domestic electricity emissions. In 2005, for gas, there were 9,748 kilotonnes of carbon dioxide equivalent which dropped to 6,343 kilotonnes in 2022. In 2005, for electricity, there were 6,986 kilotonnes of carbon dioxide equivalent which dropped to 2,632 kilotonnes in 2022."
 	/>
 </Story>
