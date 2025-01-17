@@ -45,7 +45,7 @@
 				<div class="flex was-th" role="columnheader" style:width={col.computedWidth + 'px'}>
 					<Header
 						label={col.label ?? col.short_label}
-						order={undefined}
+						order={table.rowOrderSpec.find((f) => f.field === col.short_label)?.direction}
 						toggle={() =>
 							allowSorting && col.sortable !== false && table.toggleSort(col.short_label)}
 						allowSorting={allowSorting && col.sortable !== false}

@@ -33,13 +33,6 @@
 			label: 'Underground stations',
 			hideOpacityControl: true,
 			hideSizeControl: true
-		},
-		{
-			id: 'taxi',
-			label: 'Taxi ranks',
-			disabled: true,
-			hideOpacityControl: true,
-			hideSizeControl: true
 		}
 	];
 
@@ -72,12 +65,6 @@
 		},
 		underground: {
 			color: '#9E0059',
-			visible: true,
-			opacity: 1.0,
-			size: 1
-		},
-		taxi: {
-			color: 'firebrick',
 			visible: true,
 			opacity: 1.0,
 			size: 1
