@@ -81,7 +81,7 @@
 	export let hintLabel: CheckboxProps['hintLabel'] = '';
 </script>
 
-<label class="flex items-center">
+<div class="flex items-center">
 	<input
 		{id}
 		{name}
@@ -97,11 +97,11 @@
 		{...$$restProps}
 	/>
 	{#if label}
-		<span class="ml-2 form-label font-normal">{label}</span>
+		<label class="ml-2 form-label font-normal" for={id}>{label}</label>
 	{/if}
 	{#if hint}
 		<Tooltip {hintLabel}>
 			{hint}
 		</Tooltip>
 	{/if}
-</label>
+</div>
