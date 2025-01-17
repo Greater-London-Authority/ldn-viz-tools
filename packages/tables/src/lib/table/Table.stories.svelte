@@ -157,6 +157,17 @@
 	/>
 </Story>
 
+<Story name="Content above table" source>
+	<Table
+		{data}
+		{tableSpec}
+		title="Some famous people, and a guess of their favourite pets"
+		subTitle="Note that these are only guesses!"
+	>
+		<div slot="beforeTable">This will appear before the table.</div>
+	</Table>
+</Story>
+
 <Story name="Zebra Striping" source>
 	<Table {data} {tableSpec} zebraStripe />
 </Story>
