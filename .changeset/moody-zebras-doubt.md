@@ -2,4 +2,4 @@
 '@ldn-viz/ui': patch
 ---
 
-Removed hard coded border color of layer control group parent
+CHANGED: removed hard-coded border color of "Show all" checkbox for `LayerControlGroup`
