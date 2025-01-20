@@ -49,7 +49,7 @@
 	export let onClick: (id: string) => void;
 
 	const {
-		elements: { trigger, menu, arrow },
+		elements: { trigger, menu, item, arrow },
 		states: { open }
 	} = createDropdownMenu({
 		forceVisible: true,
@@ -157,6 +157,7 @@
 					<button
 						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
 						on:click={() => changeOption(option)}
+						{...$item}
 					>
 						<div class="flex items-center">
 							{#if state.id === option.id}
