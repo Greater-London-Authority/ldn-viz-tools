@@ -178,6 +178,17 @@
 	 */
 	export let ariaHidden = true;
 
+	/**
+	 * This should be the ID for the simple plain text description of the chart. Defaults to empty string.
+	 */
+	export let ariaDescribedBy = '';
+
+	/**
+	 * The ID for the complex description of the chart. This should be used when the content contains a large amount of information,
+	 * useful semantics or has a complex structure requiring user navigation.
+	 */
+	export let ariaDetails = '';
+
 	const renderPlot = (node: HTMLDivElement) => {
 		if (applyDefaults) {
 			node.appendChild(Plot.plot(spec));
@@ -219,6 +230,8 @@
 		bind:this={domNode}
 		bind:clientWidth={width}
 		aria-hidden={ariaHidden}
+		aria-details={ariaDetails}
+		aria-describedby={ariaDescribedBy}
 	/>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
