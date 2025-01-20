@@ -134,7 +134,7 @@
 			customAction={$trigger.action}
 			actionProps={$trigger}
 			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
-			ariaLabel={'Open popover to ' + menuTitle}
+			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 		>
 			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
 		</Button>
