@@ -90,7 +90,7 @@
 	/**
 	 * Enables screen reader to describe contents of button
 	 */
-	export let ariaLabel = '';
+	export let ariaLabel = null;
 
 	import { classNames } from '../utils/classNames';
 
