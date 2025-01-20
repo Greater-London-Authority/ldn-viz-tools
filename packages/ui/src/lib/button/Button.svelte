@@ -31,6 +31,8 @@
 </script>
 
 <script lang="ts">
+	import type { MeltActionReturn } from '@melt-ui/svelte/internal/types';
+
 	/**
 	 * Selects which family of styles should be applied to the button.
 	 */
@@ -74,7 +76,9 @@
 	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
 
-	export let customAction = () => {};
+	export let customAction:
+		| ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>)
+		| undefined = undefined;
 
 	export let actionProps = {};
 
