@@ -49,23 +49,24 @@
 	 */
 	export let onClick: (id: string) => void;
 
+	/**
+	 * Value set as the `id` attribute of the action button element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
 	const {
 		elements: { trigger, menu, item, arrow },
 		states: { open }
 	} = createDropdownMenu({
 		forceVisible: true,
-		loop: true
+		loop: true,
+		closeFocus: id
 	});
 
 	const changeOption = (newOption: Option) => {
 		state = newOption;
 		$open = false;
 	};
-
-	/**
-	 * Value set as the `id` attribute of the action button element (defaults to randomly generated value).
-	 */
-	export let id = randomId();
 
 	/**
 	 * Selects which family of styles should be applied to the button.
