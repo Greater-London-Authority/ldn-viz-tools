@@ -92,7 +92,13 @@
 	 */
 	export let ariaLabel: string | null = null;
 
+	/**
+	 * Value set as the `id` attribute of the `<svelte:element>` element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 
 	const styleClasses: ButtonStyle = {
 		brand: {
@@ -241,6 +247,7 @@
 		{disabled}
 		{title}
 		class={buttonClass}
+		{id}
 		on:click
 		on:change
 		on:keydown

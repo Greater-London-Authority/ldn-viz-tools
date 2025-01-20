@@ -21,6 +21,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * Array of options that appear in the drop-down menu. Each is defined by an object with the following properties:
@@ -62,6 +63,11 @@
 	};
 
 	/**
+	 * Value set as the `id` attribute of the action button element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
+	/**
 	 * Selects which family of styles should be applied to the button.
 	 */
 	export let variant: ButtonProps['variant'] = 'solid';
@@ -99,6 +105,7 @@
 		{size}
 		{disabled}
 		{title}
+		{id}
 	>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
@@ -116,6 +123,7 @@
 			{size}
 			{disabled}
 			{title}
+			{id}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
