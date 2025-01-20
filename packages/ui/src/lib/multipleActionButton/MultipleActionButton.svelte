@@ -166,6 +166,7 @@
 					<button
 						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
 						on:click={() => changeOption(option)}
+						use:$item.action
 						{...$item}
 					>
 						<div class="flex items-center">
