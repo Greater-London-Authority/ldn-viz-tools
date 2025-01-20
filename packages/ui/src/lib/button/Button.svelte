@@ -247,6 +247,7 @@
 		{disabled}
 		{title}
 		class={buttonClass}
+		aria-label={ariaLabel}
 		{id}
 		on:click
 		on:change
@@ -261,7 +262,6 @@
 		tabindex="0"
 		use:action
 		{...actionProps}
-		aria-label={ariaLabel}
 	>
 		<!-- contents of the button -->
 		<slot />
