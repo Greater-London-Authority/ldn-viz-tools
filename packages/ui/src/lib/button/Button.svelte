@@ -74,7 +74,7 @@
 	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
 
-	export let customAction;
+	export let customAction = () => {};
 
 	export let actionProps = {};
 
