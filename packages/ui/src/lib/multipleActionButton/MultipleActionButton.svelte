@@ -137,7 +137,7 @@
 			{size}
 			{disabled}
 			customAction={$trigger.action}
-			{...$trigger}
+			actionProps={$trigger}
 			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
 		>
 			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />

@@ -76,6 +76,8 @@
 
 	export let customAction;
 
+	export let actionProps = {};
+
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {
@@ -237,6 +239,7 @@
 		role="button"
 		tabindex="0"
 		use:action
+		{...actionProps}
 	>
 		<!-- contents of the button -->
 		<slot />
