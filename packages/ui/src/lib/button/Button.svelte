@@ -20,6 +20,7 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
+		customAction: ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>) | undefined;
 	}
 
 	type ButtonStyle = Record<
@@ -76,10 +77,14 @@
 	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
 
-	export let customAction:
-		| ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>)
-		| undefined = undefined;
+	/**
+	 * MeltUI Action passed down from MultipleActionButton
+	 */
+	export let customAction: ButtonProps['customAction'] = undefined;
 
+	/**
+	 * MeltUI action props passed down from MultipleActionButton, which include ARIA attributes and tabindex.
+	 */
 	export let actionProps = {};
 
 	/**
