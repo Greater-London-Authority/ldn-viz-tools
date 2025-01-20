@@ -82,6 +82,11 @@
 
 	export let actionProps = {};
 
+	/**
+	 * Enables screen reader to describe contents of button
+	 */
+	export let ariaLabel = '';
+
 	import { classNames } from '../utils/classNames';
 
 	const styleClasses: ButtonStyle = {
@@ -244,6 +249,7 @@
 		tabindex="0"
 		use:action
 		{...actionProps}
+		aria-label={ariaLabel}
 	>
 		<!-- contents of the button -->
 		<slot />
