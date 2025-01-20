@@ -14,7 +14,7 @@
 	 * (or variation on an action) will be performed when the button is pressed.
 	 * @component
 	 */
-	import { createDropdownMenu } from '@melt-ui/svelte';
+	import { createDropdownMenu, type FocusProp } from '@melt-ui/svelte';
 	import { fly } from 'svelte/transition';
 
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
@@ -54,13 +54,21 @@
 	 */
 	export let id = randomId();
 
+	const customCloseFocus: FocusProp = (defaultEl) => {
+		const customElToFocus = document.getElementById(id);
+		if (!customElToFocus) {
+			return defaultEl;
+		}
+		return customElToFocus;
+	};
+
 	const {
 		elements: { trigger, menu, item, arrow },
 		states: { open }
 	} = createDropdownMenu({
 		forceVisible: true,
 		loop: true,
-		closeFocus: id
+		closeFocus: customCloseFocus
 	});
 
 	const changeOption = (newOption: Option) => {
