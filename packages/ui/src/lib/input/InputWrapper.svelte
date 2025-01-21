@@ -52,12 +52,12 @@
 	<slot />
 
 	{#if error}
-		<span class={descriptionClass} id={errorId}>
-			{@html error}
-		</span>
+		<p class={descriptionClass} id={errorId} role="alert">
+			<span class="sr-only">Error: </span>{@html error}
+		</p>
 	{:else if description}
-		<span class={descriptionClass} id={descriptionId}>
+		<p class={descriptionClass} id={descriptionId}>
 			{@html description}
-		</span>
+		</p>
 	{/if}
 </div>
