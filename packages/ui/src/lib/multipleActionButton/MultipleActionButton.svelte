@@ -166,7 +166,7 @@
 		>
 			<div {...$arrow} use:arrow />
 			{#if menuTitle}
-				<div class="text-sm text-color-text-secondary">{menuTitle}</div>
+				<p class="text-sm text-color-text-secondary">{menuTitle}</p>
 			{/if}
 
 			<div class="divide-y divide-color-ui-border-secondary">
@@ -181,10 +181,10 @@
 							{#if state.id === option.id}
 								<Icon src={Check} theme="mini" class="h-5 w-5 mr-2" />
 							{/if}
-							<div class="font-medium">{option.menuLabel}</div>
+							<p class="font-medium">{option.menuLabel}</p>
 						</div>
 
-						<div class="text-sm">{option.menuDescription}</div>
+						<p class="text-sm">{option.menuDescription}</p>
 					</button>
 				{/each}
 			</div>
