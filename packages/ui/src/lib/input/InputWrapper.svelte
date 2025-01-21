@@ -53,7 +53,8 @@
 
 	{#if error}
 		<p class={descriptionClass} id={errorId} role="alert">
-			<span class="sr-only">Error: </span>{@html error}
+			<span class="sr-only">Error: </span>
+			{@html error}
 		</p>
 	{:else if description}
 		<p class={descriptionClass} id={descriptionId}>
