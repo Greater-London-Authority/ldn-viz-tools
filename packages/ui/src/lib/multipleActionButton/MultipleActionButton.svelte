@@ -56,7 +56,7 @@
 
 	const customCloseFocus: FocusProp = (defaultEl) => {
 		const customElToFocus = document.getElementById(id);
-		if (!customElToFocus) {
+		if (!customElToFocus && defaultEl) {
 			return defaultEl;
 		}
 		return customElToFocus;
