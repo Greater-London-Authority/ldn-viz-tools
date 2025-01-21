@@ -136,7 +136,8 @@
 </script>
 
 <script lang="ts">
-	import * as Plot from '@observablehq/plot';
+	import * as ObservablePlot from '@observablehq/plot';
+	import * as Plot from '../observablePlotFragments/plot';
 
 	import { afterUpdate, onMount, setContext } from 'svelte';
 	import { derived, writable } from 'svelte/store';
@@ -165,8 +166,18 @@
 	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
 
+	/**
+	 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
+	 * so that default chart-level styling is not applied.
+	 */
+	export let applyDefaults = true;
+
 	const renderPlot = (node: HTMLDivElement) => {
-		node.appendChild(Plot.plot(spec));
+		if (applyDefaults) {
+			node.appendChild(Plot.plot(spec));
+		} else {
+			node.appendChild(ObservablePlot.plot(spec));
+		}
 	};
 
 	let width: number;

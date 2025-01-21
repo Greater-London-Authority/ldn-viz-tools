@@ -1,37 +1,27 @@
 <script lang="ts">
-	/**
-	 * The `<ImageDownloadButton>` component renders a button which, when clicked on, downloads an image file showing either an `HTML` or `SVG` element and its children.
+	/* The `<ImageDownloadButton>` component renders a button which, when clicked on, downloads an image file showing either an `HTML` or `SVG` element and its children.
+	 *
+	 * **Note**: This will not convert a non svg element into an svg, but will download an existing svg element as an svg file.
+	 *
+	 * To ignore elements apply a data attribute "data-capture-ignore" and they will not be included in the download
 	 * @component
 	 */
 
-	import html2canvas from 'html2canvas';
+	import { toPng } from 'html-to-image';
 	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 
 	/**
-	 * A `SVGElement` node to be converted.
+	 * An `Element` node to be converted. When 'SVG' format is selected the largest child svg element will be targeted.
+	 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
+	 * If this does not yield the desired results you may need to adjust your markup.
 	 */
-	export let svgNode: SVGElement | undefined = undefined;
+	export let htmlNode: HTMLElement;
 
 	/**
-	 * An `HTMLElement` node to be converted.
+	 * The available file formats for the downloaded image.
 	 */
-	export let htmlNode: HTMLElement | undefined = undefined;
-
-	/**
-	 * `id` of element to add padding to
-	 */
-	export let idToPad = '';
-
-	/**
-	 * Amount of padding to add, as a string including units.
-	 */
-	export let padding = '30px';
-
-	/**
-	 * If converting an SVG to PNG, the resolution of the PNG will be `scaleFactor` times the size at which the SVG was displayed at.
-	 */
-	export let scaleFactor = 2;
+	export let formats: ('PNG' | 'SVG')[] = ['PNG', 'SVG'];
 
 	/**
 	 * The name the downloaded file will be saved with.
@@ -39,130 +29,150 @@
 	export let filename = '';
 
 	/**
+	 * Amount of padding to add, in pixels.
+	 */
+	export let padding = 30;
+
+	/**
 	 * If `true`, the user will not be able to interact with the button to download data.
 	 */
 	export let disabled = false;
 
 	/**
-	 * The available file formats for the downloaded image.
+	 * If converting an SVG to PNG, the resolution of the PNG will be `scaleFactor` times the size at which the SVG was displayed at.
 	 */
-	export let formats: ('PNG' | 'SVG')[] = ['PNG', 'SVG'];
-	let format = 'PNG';
+	export let scaleFactor = 2;
 
 	const downloadFromURL = (url: string) => {
-		if (!filename) {
-			filename = format === 'SVG' ? 'Image.svg' : 'Image.png';
+		const initialName = filename || 'image';
+
+		let baseName = initialName;
+		if (initialName.toLowerCase().endsWith('.png') || initialName.toLowerCase().endsWith('.svg')) {
+			baseName = initialName.slice(0, -4);
 		}
+		const fname = format === 'SVG' ? `${baseName}.svg` : `${baseName}.png`;
 
 		const link = document.createElement('a');
 		link.setAttribute('href', url);
 		link.setAttribute('target', '_blank');
-		link.setAttribute('download', filename);
+		link.setAttribute('download', fname);
 		link.dispatchEvent(new MouseEvent('click'));
 		link.remove();
 	};
 
-	const createHTMLImageFromURL = async (url: string) => {
-		let img: HTMLImageElement | undefined;
+	const findNearestChildSvg = (htmlNode: HTMLElement) => {
+		if (!(htmlNode instanceof HTMLElement)) {
+			throw new Error('htmlNode must be an HTMLElement');
+		}
 
-		await new Promise((resolve) => {
-			img = new Image();
-			img.onload = resolve;
-			img.src = url;
+		const svgElements = htmlNode.querySelectorAll('svg');
+
+		let largestSVG = null;
+		let largestArea = 0;
+
+		svgElements.forEach((element) => {
+			const bbox = element.getBoundingClientRect();
+			const area = bbox.width * bbox.height;
+
+			if (area > largestArea) {
+				largestSVG = element;
+				largestArea = area;
+			}
 		});
 
-		// Ensure img is defined before returning
-		if (!img) {
-			throw new Error('Failed to load image');
-		}
-
-		return img;
+		return largestSVG;
 	};
 
-	// See https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
-	const bytesToBase64 = (bytes: Uint8Array) => window.btoa(String.fromCodePoint(...bytes));
-	const stringToBase64 = (str: string | undefined) => bytesToBase64(new TextEncoder().encode(str));
-
-	const downloadFromSVG = async () => {
-		// This hack is necessary because .drawImage() doesn't work
-		// unless the SVG that is being copied has an explicitly-set size
-		const svgNodeClone = svgNode!.cloneNode(true) as SVGElement;
-		svgNodeClone.setAttribute('width', svgNode!.clientWidth.toString());
-		svgNodeClone.setAttribute('height', svgNode!.clientHeight.toString());
-
-		const svgString = new XMLSerializer().serializeToString(svgNodeClone);
-		const svgURL = 'data:image/svg+xml;base64,' + stringToBase64(svgString);
-		// the non base-64 encoded URL would be: "data:image/svg+xml;utf8," + svgString;
-
-		// an alternative is:
-		// const svgURL = URL.createObjectURL(new Blob([svgNodeClone.outerHTML],{type:'image/svg+xml;charset=utf-8'}))
-
-		const img = await createHTMLImageFromURL(svgURL);
-
-		if (format === 'SVG') {
-			downloadFromURL(svgURL);
-		} else {
-			img.src = svgURL;
-
-			const w = svgNode!.clientWidth * scaleFactor;
-			const h = svgNode!.clientHeight * scaleFactor;
-
-			const canvas = new OffscreenCanvas(w, h);
-
-			canvas.getContext('2d')?.drawImage(img, 0, 0, w, h);
-
-			canvas.convertToBlob().then((blob) => {
-				downloadFromURL(URL.createObjectURL(blob));
-			});
+	// Filter elements to hide based on data attribute
+	const filter = (node: HTMLElement) => {
+		if (node instanceof HTMLElement) {
+			const ignoreAttributes = ['data-capture-ignore'];
+			return !ignoreAttributes.some((attribute) => node.hasAttribute(attribute));
 		}
-	};
-
-	///
-
-	const preserveDrawingBuffer = () => {
-		function wrapGetContext(ContextClass: typeof HTMLCanvasElement | typeof OffscreenCanvas) {
-			const isWebGL = /webgl/i;
-
-			ContextClass.prototype.getContext = (function (origFn: (type: any, attributes?: any) => any) {
-				return function (this: HTMLCanvasElement | OffscreenCanvas, type: any, attributes: any) {
-					if (isWebGL.test(type)) {
-						attributes = Object.assign({}, attributes || {}, { preserveDrawingBuffer: true });
-					}
-					return origFn.call(this, type, attributes);
-				};
-			})(ContextClass.prototype.getContext);
-		}
-
-		if (typeof HTMLCanvasElement !== 'undefined') {
-			wrapGetContext(HTMLCanvasElement);
-		}
-		if (typeof OffscreenCanvas !== 'undefined') {
-			wrapGetContext(OffscreenCanvas);
-		}
-	};
-
-	const downloadFromHTML = async (el: HTMLElement) => {
-		preserveDrawingBuffer();
-
-		const canvas = await html2canvas(el, {
-			onclone: (clone: Document) => {
-				if (idToPad) {
-					clone.getElementById(idToPad)!.style.padding = padding;
-				}
-			},
-			windowWidth: 1500
-		});
-		const image = canvas.toDataURL('image/png', 1.0);
-		downloadFromURL(image);
+		return node;
 	};
 
 	const download = async () => {
-		if (svgNode) {
-			downloadFromSVG();
-		} else if (htmlNode) {
-			downloadFromHTML(htmlNode);
+		const captureOptions = {
+			style: {
+				padding: padding + 'px'
+			},
+
+			// N.B. if we don't specify the width/height, then html-to-image will use the size of the HTML element before
+			// adjusting the style to add the padding. This would result in the content being truncated.
+			width: 2 * padding + htmlNode.clientWidth,
+			height: 2 * padding + htmlNode.clientHeight,
+
+			filter
+		};
+
+		/**
+		 * Serialise function adapted from https://observablehq.com/@mbostock/saving-svg
+		 */
+		const serialize = (svgNode: SVGElement) => {
+			return new Promise<string>((resolve, reject) => {
+				try {
+					const xmlns = 'http://www.w3.org/2000/xmlns/';
+					const xlinkns = 'http://www.w3.org/1999/xlink';
+					const svgns = 'http://www.w3.org/2000/svg';
+
+					// Clone the SVG node to avoid mutating the original and cast type
+					const svg = svgNode.cloneNode(true) as SVGElement;
+
+					// Handle fragment identifiers (e.g., xlink:href)
+					const fragment = window.location.href + '#';
+					const walker = document.createTreeWalker(svg, NodeFilter.SHOW_ELEMENT);
+					while (walker.nextNode()) {
+						if (walker.currentNode instanceof Element) {
+							for (const attr of walker.currentNode.attributes) {
+								if (attr.value.includes(fragment)) {
+									attr.value = attr.value.replace(fragment, '#');
+								}
+							}
+						}
+					}
+
+					// Add proper namespaces, if they are not already set
+					if (!svg.getAttribute('xmlns')) {
+						svg.setAttributeNS(xmlns, 'xmlns', svgns);
+					}
+					if (!svg.getAttribute('xmlns:xlink')) {
+						svg.setAttributeNS(xmlns, 'xmlns:xlink', xlinkns);
+					}
+
+					// Serialize the SVG
+					const serializer = new XMLSerializer();
+					const svgString = serializer.serializeToString(svg);
+
+					// Add XML declaration for better compatibility
+					const fullSvg = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+
+					// Convert to data URL
+					const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(fullSvg)}`;
+					resolve(dataUrl);
+				} catch (error) {
+					reject(error);
+				}
+			});
+		};
+
+		if (format === 'SVG') {
+			const svgNode = findNearestChildSvg(htmlNode);
+			svgNode !== null
+				? serialize(svgNode)
+						.then((dataUrl: string) => downloadFromURL(dataUrl))
+						.catch((error: any) => {
+							console.error('Error serializing SVG:', error);
+						})
+				: console.warn('No svgNode found');
+		} else if (format === 'PNG') {
+			toPng(htmlNode, { ...captureOptions, pixelRatio: scaleFactor })
+				.then((dataUrl: string) => downloadFromURL(dataUrl))
+				.catch((error: any) => {
+					console.error('Error creating PNG:', error);
+				});
 		} else {
-			console.log('CMust supply either an svgNode or htmlNode to be converted to image');
+			console.warn("Format must be either 'SVG' or 'PNG'");
 		}
 	};
 

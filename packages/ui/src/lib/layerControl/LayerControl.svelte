@@ -3,9 +3,9 @@
 	 * The `LayerControl` component combines a checkbox with color and opacity controls.
 	 * @component
 	 */
-	import Tooltip from '../tooltip/Tooltip.svelte';
-	import OpacityControl from '../layerControl/OpacityControl.svelte';
 	import Checkbox from '../checkBox/Checkbox.svelte';
+	import OpacityControl from '../layerControl/OpacityControl.svelte';
+	import Tooltip from '../tooltip/Tooltip.svelte';
 	import ColorPicker from './ColorPicker.svelte';
 	import ResizeControl from './ResizeControl.svelte';
 
@@ -43,7 +43,7 @@
 	 * * opacity (number between 0 and 1, inclusive)
 	 * * size (number)
 	 */
-	export let state = {
+	export let state: { color: string; visible: boolean; opacity: number; size?: number } = {
 		color: '#000000',
 		visible: true,
 		opacity: 1.0,
@@ -61,8 +61,34 @@
 	export let maxSize = 100;
 </script>
 
-<div class="flex items-center content-center gap-2">
-	<div class="flex items-center content-center gap-0.5">
+<div class="flex items-center space-x-1">
+	<div class="mr-1">
+		<Checkbox bind:checked={state.visible} label="" {disabled} />
+	</div>
+
+	{#if !hideColorControl}
+		<ColorPicker bind:color={state.color} />
+	{/if}
+
+	{#if !hideOpacityControl}
+		<OpacityControl bind:opacity={state.opacity} />
+	{/if}
+
+	{#if !hideSizeControl}
+		<ResizeControl bind:size={state.size} {minSize} {maxSize} />
+	{/if}
+	{#if label}
+		<span class="form-label font-normal leading-none">{label}</span>
+	{/if}
+	{#if hint}
+		<Tooltip hintLabel="">
+			{hint}
+		</Tooltip>
+	{/if}
+</div>
+
+<!-- <div class="flex items-center content-center space-x-1">
+	<div class="flex items-center content-center space-x-1">
 		<Checkbox bind:checked={state.visible} label="" {disabled} />
 
 		{#if !hideColorControl}
@@ -78,10 +104,10 @@
 		{/if}
 	</div>
 
-	<div class="flex items-center content-center gap-0.5">
+	<div class="flex pl-1">
 		{label}
 		{#if hint}
 			<Tooltip hintLabel="">{hint}</Tooltip>
 		{/if}
 	</div>
-</div>
+</div> -->

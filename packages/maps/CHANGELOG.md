@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 6.0.1
+
+### Patch Changes
+
+- 1184aa1: CHANGED: updated year in map copyright statement to 2025
+
 ## 6.0.0
 
 ### Major Changes

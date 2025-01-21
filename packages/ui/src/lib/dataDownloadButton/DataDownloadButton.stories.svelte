@@ -55,7 +55,7 @@
 	<DataDownloadButton {data} filename="download" />
 </Story>
 
-<Story name="Wit Icon before label">
+<Story name="With Icon before label">
 	<DataDownloadButton {data} filename="download">
 		<Icon
 			src={ArrowDownTray}

@@ -64,7 +64,7 @@
 	 * If set to `false`, then the button is hidden.
 	 *
 	 */
-	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = ['PNG'];
 
 	/**
 	 * The file name to be used for the downloaded data or image file.

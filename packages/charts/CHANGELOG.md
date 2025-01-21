@@ -1,5 +1,28 @@
 # ldn-viz-tools-charts
 
+## 4.0.0
+
+### Major Changes
+
+- 8c31d1b: CHANGED: `ObservablePlot` and `ObservablePlotInner` now default to using a wrapper about Observable Plot;s `Plot.plot()` that applies default chart styling
+  ADDED: wrapper functions that wrap Observable Plot's mark functions and apply default styling
+
+### Minor Changes
+
+- 5f566bc: CHANGED: switch from `html2canvas` to `html-to-image` in the `ImageDownloadButton`
+
+### Patch Changes
+
+- Updated dependencies [7d12227]
+- Updated dependencies [c145cf7]
+- Updated dependencies [c08ce0a]
+- Updated dependencies [2e42c23]
+- Updated dependencies [5f566bc]
+- Updated dependencies [c1d600c]
+- Updated dependencies [721774d]
+- Updated dependencies [0056c95]
+  - @ldn-viz/ui@15.2.0
+
 ## 3.8.2
 
 ### Patch Changes

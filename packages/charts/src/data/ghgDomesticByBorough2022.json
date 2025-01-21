@@ -1,0 +1,266 @@
+[
+	{
+		"Domestic - Gas": 121.367083594456,
+		"Domestic - Electricity": 52.8455878285889,
+		"Domestic - Coal": 0.700245698951596,
+		"Domestic - Oil": 0.661313090621927,
+		"Domestic - Bioenergy and waste": 0.566954336137453,
+		"Domestic - Total": 176.141184548756
+	},
+	{
+		"Domestic - Gas": 345.198547849224,
+		"Domestic - Electricity": 130.691699941431,
+		"Domestic - Coal": 1.16104603500233,
+		"Domestic - Oil": 2.20954913576804,
+		"Domestic - Bioenergy and waste": 0.685138552202431,
+		"Domestic - Total": 479.945981513628
+	},
+	{
+		"Domestic - Gas": 187.994811168606,
+		"Domestic - Electricity": 73.6151278041572,
+		"Domestic - Coal": 0.742601434720406,
+		"Domestic - Oil": 1.54485234982238,
+		"Domestic - Bioenergy and waste": 0.695746602690629,
+		"Domestic - Total": 264.593139359997
+	},
+	{
+		"Domestic - Gas": 245.099626001538,
+		"Domestic - Electricity": 89.8083933197943,
+		"Domestic - Coal": 0.504200386451857,
+		"Domestic - Oil": 1.31724725579882,
+		"Domestic - Bioenergy and waste": 0.472387799931999,
+		"Domestic - Total": 337.201854763515
+	},
+	{
+		"Domestic - Gas": 313.182488763868,
+		"Domestic - Electricity": 109.053990292072,
+		"Domestic - Coal": 2.51463892112549,
+		"Domestic - Oil": 3.52966018646153,
+		"Domestic - Bioenergy and waste": 0.970334241477102,
+		"Domestic - Total": 429.251112405004
+	},
+	{
+		"Domestic - Gas": 151.770261888612,
+		"Domestic - Electricity": 70.546096432597,
+		"Domestic - Coal": 0.141000798113662,
+		"Domestic - Oil": 2.45181267801533,
+		"Domestic - Bioenergy and waste": 0.13210575714524,
+		"Domestic - Total": 225.041277554483
+	},
+	{
+		"Domestic - Gas": 4.72345444432036,
+		"Domestic - Electricity": 5.7757497788241,
+		"Domestic - Coal": 0.00204464874109354,
+		"Domestic - Oil": 0.0888934446234128,
+		"Domestic - Bioenergy and waste": 0.00191567536771072,
+		"Domestic - Total": 10.5920579918767
+	},
+	{
+		"Domestic - Gas": 324.002753328405,
+		"Domestic - Electricity": 119.561585503685,
+		"Domestic - Coal": 4.66544744953871,
+		"Domestic - Oil": 2.26382316510023,
+		"Domestic - Bioenergy and waste": 1.01834361686098,
+		"Domestic - Total": 451.51195306359
+	},
+	{
+		"Domestic - Gas": 264.229803673414,
+		"Domestic - Electricity": 99.9492201308129,
+		"Domestic - Coal": 0.695039356702709,
+		"Domestic - Oil": 1.66055823495159,
+		"Domestic - Bioenergy and waste": 0.651187642095414,
+		"Domestic - Total": 367.185809037977
+	},
+	{
+		"Domestic - Gas": 248.440293387953,
+		"Domestic - Electricity": 97.7788586865502,
+		"Domestic - Coal": 1.22122763391749,
+		"Domestic - Oil": 1.60950987349719,
+		"Domestic - Bioenergy and waste": 0.8935865050382,
+		"Domestic - Total": 349.943476086957
+	},
+	{
+		"Domestic - Gas": 177.748815723102,
+		"Domestic - Electricity": 77.6617665315781,
+		"Domestic - Coal": 0.544194400932172,
+		"Domestic - Oil": 1.20781981306314,
+		"Domestic - Bioenergy and waste": 0.504183986232564,
+		"Domestic - Total": 257.666780454908
+	},
+	{
+		"Domestic - Gas": 154.158350049132,
+		"Domestic - Electricity": 71.412634986581,
+		"Domestic - Coal": 0.312409369398441,
+		"Domestic - Oil": 0.787931284288171,
+		"Domestic - Bioenergy and waste": 0.254396402797358,
+		"Domestic - Total": 226.925722092197
+	},
+	{
+		"Domestic - Gas": 138.811182084428,
+		"Domestic - Electricity": 59.290677804854,
+		"Domestic - Coal": 0.219377994545659,
+		"Domestic - Oil": 0.952871205554857,
+		"Domestic - Bioenergy and waste": 0.205539333015013,
+		"Domestic - Total": 199.479648422397
+	},
+	{
+		"Domestic - Gas": 198.342609724384,
+		"Domestic - Electricity": 74.0007540836382,
+		"Domestic - Coal": 0.406259955052797,
+		"Domestic - Oil": 0.801785589657445,
+		"Domestic - Bioenergy and waste": 0.380630482824656,
+		"Domestic - Total": 273.932039835557
+	},
+	{
+		"Domestic - Gas": 227.424756434431,
+		"Domestic - Electricity": 71.9224768343739,
+		"Domestic - Coal": 0.655524473677496,
+		"Domestic - Oil": 1.38946692030359,
+		"Domestic - Bioenergy and waste": 0.465863209301222,
+		"Domestic - Total": 301.858087872087
+	},
+	{
+		"Domestic - Gas": 208.281345985646,
+		"Domestic - Electricity": 79.0812104965047,
+		"Domestic - Coal": 0.932011235459964,
+		"Domestic - Oil": 1.95282177227783,
+		"Domestic - Bioenergy and waste": 0.742368767859533,
+		"Domestic - Total": 290.989758257748
+	},
+	{
+		"Domestic - Gas": 229.848633964564,
+		"Domestic - Electricity": 88.3122874788965,
+		"Domestic - Coal": 3.22722597534846,
+		"Domestic - Oil": 2.35657544473743,
+		"Domestic - Bioenergy and waste": 1.71056516204523,
+		"Domestic - Total": 325.455288025592
+	},
+	{
+		"Domestic - Gas": 187.342936242086,
+		"Domestic - Electricity": 80.3657356393195,
+		"Domestic - Coal": 0.516839594785051,
+		"Domestic - Oil": 1.82042216604121,
+		"Domestic - Bioenergy and waste": 0.484226925865505,
+		"Domestic - Total": 270.530160568097
+	},
+	{
+		"Domestic - Gas": 140.527597997187,
+		"Domestic - Electricity": 63.6094138948023,
+		"Domestic - Coal": 0.143185051678277,
+		"Domestic - Oil": 0.825110353358281,
+		"Domestic - Bioenergy and waste": 0.134152826072264,
+		"Domestic - Total": 205.239460123098
+	},
+	{
+		"Domestic - Gas": 142.253715553233,
+		"Domestic - Electricity": 72.5977265824961,
+		"Domestic - Coal": 0.129818775116567,
+		"Domestic - Oil": 2.10013346894684,
+		"Domestic - Bioenergy and waste": 0.121629986205216,
+		"Domestic - Total": 217.203024365997
+	},
+	{
+		"Domestic - Gas": 138.41112088277,
+		"Domestic - Electricity": 53.2009842569421,
+		"Domestic - Coal": 0.415257766936458,
+		"Domestic - Oil": 0.867309739477909,
+		"Domestic - Bioenergy and waste": 0.346351080507466,
+		"Domestic - Total": 193.241023726634
+	},
+	{
+		"Domestic - Gas": 214.208811975572,
+		"Domestic - Electricity": 89.3117000824553,
+		"Domestic - Coal": 0.395263063834148,
+		"Domestic - Oil": 1.57380612739707,
+		"Domestic - Bioenergy and waste": 0.370326205204439,
+		"Domestic - Total": 305.859907454463
+	},
+	{
+		"Domestic - Gas": 206.935401176252,
+		"Domestic - Electricity": 83.9724909303478,
+		"Domestic - Coal": 0.542370422321887,
+		"Domestic - Oil": 1.05570624274486,
+		"Domestic - Bioenergy and waste": 0.508150661600174,
+		"Domestic - Total": 293.014119433267
+	},
+	{
+		"Domestic - Gas": 168.792060467533,
+		"Domestic - Electricity": 63.9561794537602,
+		"Domestic - Coal": 0.567139572814858,
+		"Domestic - Oil": 1.1357647480502,
+		"Domestic - Bioenergy and waste": 0.531357294634394,
+		"Domestic - Total": 234.982501536793
+	},
+	{
+		"Domestic - Gas": 173.972438981858,
+		"Domestic - Electricity": 81.6005352154297,
+		"Domestic - Coal": 0.615542128811409,
+		"Domestic - Oil": 0.484841268240453,
+		"Domestic - Bioenergy and waste": 0.573152586990817,
+		"Domestic - Total": 257.246510181331
+	},
+	{
+		"Domestic - Gas": 229.629283211651,
+		"Domestic - Electricity": 80.8202413737325,
+		"Domestic - Coal": 0.639086097267797,
+		"Domestic - Oil": 1.22612721934134,
+		"Domestic - Bioenergy and waste": 0.55897275534469,
+		"Domestic - Total": 312.873710657338
+	},
+	{
+		"Domestic - Gas": 185.212821180692,
+		"Domestic - Electricity": 67.290202964321,
+		"Domestic - Coal": 0.400762818335012,
+		"Domestic - Oil": 1.65857545221588,
+		"Domestic - Bioenergy and waste": 0.375472372019435,
+		"Domestic - Total": 254.937834787583
+	},
+	{
+		"Domestic - Gas": 163.283147649833,
+		"Domestic - Electricity": 92.0833524995258,
+		"Domestic - Coal": 0.282670654110713,
+		"Domestic - Oil": 2.16332225735481,
+		"Domestic - Bioenergy and waste": 0.264836502995073,
+		"Domestic - Total": 258.077329563819
+	},
+	{
+		"Domestic - Gas": 160.872966117082,
+		"Domestic - Electricity": 64.6997641846718,
+		"Domestic - Coal": 0.438111192613334,
+		"Domestic - Oil": 1.31703467484183,
+		"Domestic - Bioenergy and waste": 0.410464695507888,
+		"Domestic - Total": 227.738340864717
+	},
+	{
+		"Domestic - Gas": 111.802362024785,
+		"Domestic - Electricity": 92.6381581944205,
+		"Domestic - Coal": 0.130977025230153,
+		"Domestic - Oil": 1.17995621026431,
+		"Domestic - Bioenergy and waste": 0.122714111040042,
+		"Domestic - Total": 205.87416756574
+	},
+	{
+		"Domestic - Gas": 185.679647756768,
+		"Domestic - Electricity": 70.0628870826136,
+		"Domestic - Coal": 0.656351500251627,
+		"Domestic - Oil": 0.762588193746428,
+		"Domestic - Bioenergy and waste": 0.548633712360501,
+		"Domestic - Total": 257.710108245741
+	},
+	{
+		"Domestic - Gas": 237.533425878675,
+		"Domestic - Electricity": 103.823438080284,
+		"Domestic - Coal": 0.435010849167341,
+		"Domestic - Oil": 1.45645654763136,
+		"Domestic - Bioenergy and waste": 0.407566769531459,
+		"Domestic - Total": 343.655898125289
+	},
+	{
+		"Domestic - Gas": 156.109850107738,
+		"Domestic - Electricity": 101.639436792334,
+		"Domestic - Coal": 0.098776840238866,
+		"Domestic - Oil": 3.06689599123477,
+		"Domestic - Bioenergy and waste": 0.0925456723007468,
+		"Domestic - Total": 261.007505403847
+	}
+]
