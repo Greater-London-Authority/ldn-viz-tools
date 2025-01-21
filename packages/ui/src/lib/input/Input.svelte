@@ -122,8 +122,8 @@
 		format = null;
 	}
 
-	const descriptionId = `${id}-description`;
-	const errorId = `${id}-error`;
+	const descriptionId = description ? `${id}-description` : undefined;
+	const errorId = error ? `${id}-error` : undefined;
 	let input: HTMLInputElement | HTMLTextAreaElement;
 
 	// Svelte does not allow bind:type and bind:value simultaneously so this
