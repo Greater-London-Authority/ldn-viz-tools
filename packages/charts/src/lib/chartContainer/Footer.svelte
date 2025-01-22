@@ -24,7 +24,7 @@
 					<Button
 						variant="text"
 						on:click={() => ($isOpen = true)}
-						class="font-bold space-y-0.5 text-xs m-0 py-0 px-0">View description</Button
+						class="font-bold text-xs !py-0 !px-0">View description</Button
 					>
 				</li>
 				<Modal bind:isOpen title="Description" description={chartDescription}></Modal>
