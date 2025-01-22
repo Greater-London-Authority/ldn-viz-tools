@@ -120,7 +120,7 @@
 	<!-- long description for screen readers -->
 	<slot name="description" />
 
-	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
+	{#if source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton}
 		<Footer {source} {byline} {note} {chartDescription}>
 			<ExportBtns
 				{chartToCapture}
