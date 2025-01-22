@@ -149,9 +149,9 @@
 			{id}
 		/>
 
-		<div slot="description" id="{id}-description">
+		<p slot="description" id="{id}-description">
 			{ariaChartDescription}
-		</div>
+		</p>
 	</ChartContainer>
 {/key}
 
