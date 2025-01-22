@@ -183,6 +183,11 @@
 	 */
 	export let ariaDescribedBy = '';
 
+	/**
+	 * Defaults to randomly generated id passed in by `ObservablePlot`
+	 */
+	export let id;
+
 	const renderPlot = (node: HTMLDivElement) => {
 		if (applyDefaults) {
 			node.appendChild(Plot.plot(spec));
@@ -225,6 +230,7 @@
 		bind:clientWidth={width}
 		aria-hidden={ariaHidden}
 		aria-describedby={ariaDescribedBy}
+		{id}
 	/>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
