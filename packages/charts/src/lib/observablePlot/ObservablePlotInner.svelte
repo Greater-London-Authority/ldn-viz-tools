@@ -183,12 +183,6 @@
 	 */
 	export let ariaDescribedBy = '';
 
-	/**
-	 * The ID for the complex description of the chart. This should be used when the content contains a large amount of information,
-	 * useful semantics or has a complex structure requiring user navigation.
-	 */
-	export let ariaDetails = '';
-
 	const renderPlot = (node: HTMLDivElement) => {
 		if (applyDefaults) {
 			node.appendChild(Plot.plot(spec));
