@@ -99,6 +99,7 @@ export * from './forms/types';
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
 
 export { classNames } from './utils/classNames';
+export { randomId } from './utils/randomId';
 
 export {
 	mediaQueryStore,
