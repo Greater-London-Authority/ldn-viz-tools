@@ -113,7 +113,7 @@
 	</div>
 
 	<!-- long description for screen readers -->
-	<slot name="description" class="sr-only" />
+	<slot name="description" />
 
 	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
 		<Footer {source} {byline} {note}>

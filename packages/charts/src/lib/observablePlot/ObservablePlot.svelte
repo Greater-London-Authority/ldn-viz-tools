@@ -149,7 +149,7 @@
 			{id}
 		/>
 
-		<p slot="description" id="{id}-description">
+		<p slot="description" class="sr-only" id="{id}-description">
 			{ariaChartDescription}
 		</p>
 	</ChartContainer>
