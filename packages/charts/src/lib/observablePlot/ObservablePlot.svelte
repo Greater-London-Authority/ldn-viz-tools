@@ -109,6 +109,13 @@
 	 * Description of the chart for use by screen readers and in a modal for sighted users.
 	 */
 	export let ariaChartDescription = '';
+
+	/**
+	 * Defaults to `true` inside `ObservablePlotInner` but exposed here in case you want to change to `false`.
+	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
+	 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
+	 */
+	export let ariaHidden: boolean;
 </script>
 
 {#key spec}
