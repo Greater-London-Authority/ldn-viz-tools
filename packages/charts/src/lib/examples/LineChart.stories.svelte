@@ -170,7 +170,7 @@
 ```
 -->
 
-<Story name="default" source>
+<Story name="Default" source>
 	<ObservablePlot
 		spec={defaultSpec}
 		data={chartData}
