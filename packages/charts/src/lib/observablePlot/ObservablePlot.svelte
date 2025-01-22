@@ -7,8 +7,8 @@
 
 	import type { Position } from './types.ts';
 
+	import { randomId } from '@ldn-viz/ui';
 	import { writable } from 'svelte/store';
-	import { randomId } from '../../../../ui/src/lib/utils/randomId.js';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
