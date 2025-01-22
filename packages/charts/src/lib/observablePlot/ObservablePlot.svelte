@@ -8,6 +8,7 @@
 	import type { Position } from './types.ts';
 
 	import { writable } from 'svelte/store';
+	import { randomId } from '../../../../ui/src/lib/utils/randomId.js';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
@@ -98,6 +99,16 @@
 	 * so that default chart-level styling is not applied.
 	 */
 	export let applyDefaults = true;
+
+	/**
+	 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
+	/**
+	 * Description of the chart for use by screen readers and in a modal for sighted users.
+	 */
+	export let ariaChartDescription = '';
 </script>
 
 {#key spec}
@@ -119,7 +130,21 @@
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 		<slot name="controls" />
 
-		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} {applyDefaults} />
+		<ObservablePlotInner
+			{data}
+			{domNode}
+			{tooltipStore}
+			{tooltipOffset}
+			{spec}
+			{applyDefaults}
+			{ariaHidden}
+			ariaDescribedBy="{id}-description"
+			{id}
+		/>
+
+		<div slot="description" id="{id}-description">
+			{ariaChartDescription}
+		</div>
 	</ChartContainer>
 {/key}
 
