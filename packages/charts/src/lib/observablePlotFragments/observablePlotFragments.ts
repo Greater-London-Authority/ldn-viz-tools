@@ -7,11 +7,11 @@ export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for int
 
 export type ThemeMode = 'light' | 'dark';
 
-type DeafultPlotStyleFunctions = {
+type DefaultPlotStyleFunctions = {
 	[key: string]: ((mode: ThemeMode) => any) | (() => any);
 };
 
-export const defaultPlotStyleFunctions: DeafultPlotStyleFunctions = {
+export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultStyle: (mode) => defaultStyle(mode),
 	defaultSize: () => defaultSize,
 	defaultSizeFacet: () => defaultSizeFacet,
