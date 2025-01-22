@@ -101,7 +101,7 @@
 	{/if}
 
 	{#if alt}
-		<h5 class="sr-only">{alt}</h5>
+		<p class="sr-only">{alt}</p>
 	{/if}
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
