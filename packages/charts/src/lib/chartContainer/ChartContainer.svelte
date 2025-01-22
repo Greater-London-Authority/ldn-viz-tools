@@ -86,6 +86,11 @@
 
 	// For save as image
 	let chartToCapture: HTMLDivElement;
+
+	/**
+	 * Description of the chart for use in a modal for sighted users.
+	 */
+	export let chartDescription = '';
 </script>
 
 <div class={`chart-container ${chartWidth}`} bind:this={chartToCapture} id="captureElement">
@@ -116,7 +121,7 @@
 	<slot name="description" />
 
 	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note}>
+		<Footer {source} {byline} {note} {chartDescription}>
 			<ExportBtns
 				{chartToCapture}
 				{filename}

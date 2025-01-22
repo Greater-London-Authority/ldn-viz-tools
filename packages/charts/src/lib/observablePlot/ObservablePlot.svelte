@@ -108,7 +108,7 @@
 	/**
 	 * Description of the chart for use by screen readers and in a modal for sighted users.
 	 */
-	export let ariaChartDescription = '';
+	export let chartDescription = '';
 
 	/**
 	 * Defaults to `true` inside `ObservablePlotInner` but exposed here in case you want to change to `false`.
@@ -133,6 +133,7 @@
 		{...$$restProps}
 		chartHeight={'h-fit'}
 		{chartWidth}
+		{chartDescription}
 	>
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 		<slot name="controls" />
@@ -150,7 +151,7 @@
 		/>
 
 		<p slot="description" class="sr-only" id="{id}-description">
-			{ariaChartDescription}
+			{chartDescription}
 		</p>
 	</ChartContainer>
 {/key}
