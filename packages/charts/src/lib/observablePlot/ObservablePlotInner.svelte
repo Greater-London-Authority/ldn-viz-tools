@@ -224,7 +224,6 @@
 		bind:this={domNode}
 		bind:clientWidth={width}
 		aria-hidden={ariaHidden}
-		aria-details={ariaDetails}
 		aria-describedby={ariaDescribedBy}
 	/>
 
