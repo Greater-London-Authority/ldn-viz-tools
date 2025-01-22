@@ -158,9 +158,14 @@
 
 <ObservablePlot
 	spec={spec}
-	title={'Domestic Greenhouse Gas Emissions'}
-	subTitle={'Total Domestic Greenhouse Gas Emissions in London have fallen between 2005 and 2022'}
-	data={ chartData }
+	data={chartData}
+	title="Domestic Greenhouse Gas Emissions in London have fallen steadily since 2005"
+	subTitle="London annual domestic greenhouse gas emissions, measured in kilotonnes of carbon dioxide equivalent (ktCO₂e), from 2005 to 2022"
+	alt="Line chart of London annual domestic greenhouse gas emissions"
+	note="This is for footnotes"
+	source="GLA Environment Team"
+	byline="GLA City Intelligence Unit"
+	chartDescription="The chart shows total domestic greenhouse gas emissions in London fell by almost 8,000 kilotonnes of carbon dioxide equivalent from 2005 to 2022. In 2005, there were 16,833 kilotonnes of carbon dioxide equivalent, which fell to 9,066 kilotonnes of carbon dioxide equivalent in 2022."
 />
 ```
 -->
