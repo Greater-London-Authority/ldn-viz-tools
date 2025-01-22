@@ -115,7 +115,7 @@
 	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
 	 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
 	 */
-	export let ariaHidden: boolean;
+	export let ariaHidden = 'true';
 </script>
 
 {#key spec}
