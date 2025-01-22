@@ -106,7 +106,7 @@
 	export let id = randomId();
 
 	/**
-	 * Description of the chart for use by screen readers and in a modal for sighted users.
+	 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
 	 */
 	export let chartDescription = '';
 
