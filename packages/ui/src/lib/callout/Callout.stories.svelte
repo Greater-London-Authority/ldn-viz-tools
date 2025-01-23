@@ -5,6 +5,13 @@
 		title: 'Ui/Callout',
 		component: Callout,
 		argTypes: {
+			id: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
 			status: {
 				options: ['notice', 'success', 'warning', 'error'],
 				control: { type: 'select' }
@@ -102,6 +109,33 @@
 
 		<div slot="more">
 			<Button href={`/`}>Take me home</Button>
+		</div>
+	</Callout>
+</Story>
+
+<!-- When there is no heading in the callout (that is, no title slot in use), you must define an
+`ariaTitle` for screen-reader use.
+
+```html
+	<Callout ariaTitle="Learn about chart methodology">
+		<div slot="body">
+			<p>
+				You can find out more about <a href="www.example.com" class="underline hover:no-underline"
+					>the chart methodology</a
+				>.
+			</p>
+		</div>
+	</Callout>
+```
+-->
+<Story name="No title" source>
+	<Callout ariaTitle="Learn about chart methodology">
+		<div slot="body">
+			<p>
+				You can find out more about <a href="www.example.com" class="underline hover:no-underline"
+					>the chart methodology</a
+				>.
+			</p>
 		</div>
 	</Callout>
 </Story>
