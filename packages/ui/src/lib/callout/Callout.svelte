@@ -6,7 +6,16 @@
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 
+	/**
+	 * Defaults to a random twelve-character string for use to identify the title by the screen reader.
+	 */
 	export let id = randomId();
+
+	/**
+	 * Required when `Callout` has no title, to ensure screen reader can identify it.
+	 * Defaults to empty string when there is a title inside `Callout`.
+	 */
+	export let ariaTitle = '';
 
 	/**
 	 * The status or message type, which determines the banner color.
@@ -51,11 +60,13 @@
 	$: calloutClasses = classNames(sizeClasses[size], statusClasses[status]);
 </script>
 
-<aside class={calloutClasses} aria-labelledby="aside-label-{id}">
+<aside class={calloutClasses} aria-describedby={id}>
 	{#if $$slots.title}
-		<h3 id="aside-label-{id}" class={classNames('font-bold leading-tight', titleClasses[size])}>
+		<h3 {id} class={classNames('font-bold leading-tight', titleClasses[size])}>
 			<slot name="title" />
 		</h3>
+	{:else}
+		<h3 {id} class="sr-only">{ariaTitle}</h3>
 	{/if}
 
 	{#if $$slots.body}
