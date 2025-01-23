@@ -175,7 +175,7 @@
 		{...args}
 		{spec}
 		title="Penguin Culmens"
-		subTitle="A scatterplot of depth against length"
+		subTitle="A scatter plot of depth against length"
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 		alt="Simple description of type of chart"
 	/>
@@ -257,7 +257,7 @@
 			]
 		}}
 		title="Penguin Culmens"
-		subTitle="A scatterplot of depth against length"
+		subTitle="A scatter plot of depth against length"
 		data={penguins}
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 		alt="Simple description of type of chart"
@@ -290,7 +290,7 @@
 			]
 		}}
 		title="Penguin Culmens"
-		subTitle="A scatterplot of depth against length"
+		subTitle="A scatter plot of depth against length"
 		data={penguins}
 		{tooltipStore}
 	>
@@ -327,7 +327,7 @@
 			]
 		}}
 		title="Penguin Culmens"
-		subTitle="A scatterplot of depth against length"
+		subTitle="A scatter plot of depth against length"
 		data={penguins}
 		{tooltipStore}
 	>
@@ -376,7 +376,7 @@
 	<ObservablePlot
 		{spec}
 		title="Penguin Culmens"
-		subTitle="A scatterplot of depth against length"
+		subTitle="A scatter plot of depth against length"
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 		alt="Simple description of type of chart"
 	>
