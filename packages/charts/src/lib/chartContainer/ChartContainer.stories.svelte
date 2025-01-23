@@ -11,21 +11,35 @@
 </script>
 
 <Template let:args>
-	<ChartContainer {...args} />
+	<ChartContainer
+		{...args}
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+	/>
 </Template>
 
 <Story name="Default" id="ChartcontainerDefault" />
 
 <Story name="With Title">
-	<ChartContainer title="This is the Chart Title" />
+	<ChartContainer
+		title="This is the Chart Title"
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+	/>
 </Story>
 
 <Story name="With Title and Subtitle">
-	<ChartContainer title="This is the Chart Title" subTitle="Subtitle provides extra context" />
+	<ChartContainer
+		title="This is the Chart Title"
+		subTitle="Subtitle provides extra context"
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+	/>
 </Story>
 
 <Story name="With Title, Subtitle, and Controls">
-	<ChartContainer title="This is the Chart Title" subTitle="Subtitle provides extra context">
+	<ChartContainer
+		title="This is the Chart Title"
+		subTitle="Subtitle provides extra context"
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+	>
 		<div slot="controls" class="flex gap-4">
 			<Select label="An input affecting the chart" items={[]} />
 			<Select label="Another input" items={[]} />
@@ -43,6 +57,7 @@
 		dataDownloadButton={['JSON', 'CSV']}
 		data={[]}
 		imageDownloadButton
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 	/>
 </Story>
 
@@ -55,6 +70,7 @@
 		dataDownloadButton={['JSON', 'CSV']}
 		data={[]}
 		imageDownloadButton
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 	/>
 </Story>
 
@@ -74,5 +90,6 @@
 		dataDownloadButton={['JSON', 'CSV']}
 		data={[]}
 		imageDownloadButton={['PNG']}
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 	/>
 </Story>
