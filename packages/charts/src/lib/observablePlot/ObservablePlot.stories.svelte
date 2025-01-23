@@ -176,6 +176,8 @@
 		{spec}
 		title="Penguin Culmens"
 		subTitle="A scatterplot of depth against length"
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Template>
 
@@ -186,14 +188,23 @@
 	Tailwind width classes can be used to control the width. Either fixed: ie 'w-[500px]' or responsive: ie 'w-1/2'
 -->
 <Story name="With Chart Width">
-	<ObservablePlot spec={{ ...spec }} chartWidth="w-1/2" />
+	<ObservablePlot
+		spec={{ ...spec }}
+		chartWidth="w-1/2"
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
+	/>
 </Story>
 
 <!-- 
 	The height of the chart remains the responsibility of the contained instance of plot. It can be set to a specific pixel value: ie 300
 -->
 <Story name="With Height">
-	<ObservablePlot spec={{ ...spec, height: 300 }} />
+	<ObservablePlot
+		spec={{ ...spec, height: 300 }}
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
+	/>
 </Story>
 
 <Story name="With Aspect Ratio">
@@ -203,6 +214,8 @@
 			height: undefined,
 			aspectRatio: 0.5
 		}}
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
 
@@ -246,6 +259,8 @@
 		title="Penguin Culmens"
 		subTitle="A scatterplot of depth against length"
 		data={penguins}
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
 
@@ -351,12 +366,20 @@
 				})
 			]
 		}}
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
 
 <!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
 <Story name="With controls">
-	<ObservablePlot {spec} title="Penguin Culmens" subTitle="A scatterplot of depth against length">
+	<ObservablePlot
+		{spec}
+		title="Penguin Culmens"
+		subTitle="A scatterplot of depth against length"
+		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
+	>
 		<div slot="controls" class="flex gap-4 mb-4">
 			<Select label="An input affecting the chart" items={[]} />
 			<Select label="Another input" items={[]} />

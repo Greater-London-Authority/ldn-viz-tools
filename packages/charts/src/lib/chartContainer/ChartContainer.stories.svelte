@@ -14,6 +14,7 @@
 	<ChartContainer
 		{...args}
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Template>
 
@@ -23,6 +24,7 @@
 	<ChartContainer
 		title="This is the Chart Title"
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
 
@@ -31,6 +33,7 @@
 		title="This is the Chart Title"
 		subTitle="Subtitle provides extra context"
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
 
@@ -39,6 +42,7 @@
 		title="This is the Chart Title"
 		subTitle="Subtitle provides extra context"
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	>
 		<div slot="controls" class="flex gap-4">
 			<Select label="An input affecting the chart" items={[]} />
@@ -58,6 +62,7 @@
 		data={[]}
 		imageDownloadButton
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
 
@@ -71,6 +76,7 @@
 		data={[]}
 		imageDownloadButton
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
 
@@ -91,5 +97,6 @@
 		data={[]}
 		imageDownloadButton={['PNG']}
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+		alt="Simple description of type of chart"
 	/>
 </Story>
