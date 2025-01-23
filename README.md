@@ -64,6 +64,18 @@ When writing changelog messages, consider the suggestions from [keep a changelog
 
 When a release is made, `changeset` will add these descriptions of changes to a `CHANGELONG.md` file in the directory of the appropriate package; the version numbers in `package.json` files will also be updated appropriately.
 
+
+### Storybook previews
+
+When a PR is created targeting the `dev` branch, then the `deploy-previews` workflow (defined in [this file](./.github/workflows/deploy-preview.yml)) should be triggered automatically.
+This will deploy an instance of storybook to `https://dev.ldn-gis.co.uk/storybook-<branch_name>`.
+
+The action should automatically re-run if you push additional commits to the source branch of the PR.
+
+Note that this action will immediately abort if there is a conflict that would prevent the PR from being automatically merged into the `dev` branch.
+The action will also not be automatically triggered for PRs targeting other branches, but it can still be manually triggered [through the GitHub web UI](https://github.com/Greater-London-Authority/ldn-viz-tools/actions/workflows/deploy-preview.yml).
+
+
 ### Making releases/publishing packages
 
 Rather than having a fixed release schedule, we make releases when someone wants to make use of unreleased code in the `main` branch.
