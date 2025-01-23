@@ -81,12 +81,16 @@
 
 		$mapStore.addLayer(safeSpec, beforeId);
 		loaded.set(true);
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		onLoad && onLoad({ id, spec: safeSpec });
 	};
 
 	const doUnload = () => {
 		loaded.set(false);
 		removeLayer();
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		onUnload && onUnload({ id, spec: safeSpec });
 	};
 
