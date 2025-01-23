@@ -7,6 +7,7 @@
 
 	import type { Position } from './types.ts';
 
+	import { randomId } from '@ldn-viz/ui';
 	import { writable } from 'svelte/store';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
@@ -98,6 +99,23 @@
 	 * so that default chart-level styling is not applied.
 	 */
 	export let applyDefaults = true;
+
+	/**
+	 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
+	/**
+	 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
+	 */
+	export let chartDescription = '';
+
+	/**
+	 * Defaults to `true` inside `ObservablePlotInner` but exposed here in case you want to change to `false`.
+	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
+	 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
+	 */
+	export let ariaHidden = true;
 </script>
 
 {#key spec}
@@ -115,11 +133,26 @@
 		{...$$restProps}
 		chartHeight={'h-fit'}
 		{chartWidth}
+		{chartDescription}
 	>
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 		<slot name="controls" />
 
-		<ObservablePlotInner {data} {domNode} {tooltipStore} {tooltipOffset} {spec} {applyDefaults} />
+		<ObservablePlotInner
+			{data}
+			{domNode}
+			{tooltipStore}
+			{tooltipOffset}
+			{spec}
+			{applyDefaults}
+			{ariaHidden}
+			ariaDescribedBy="{id}-description"
+			{id}
+		/>
+
+		<p slot="description" class="sr-only" id="{id}-description">
+			{chartDescription}
+		</p>
 	</ChartContainer>
 {/key}
 
