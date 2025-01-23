@@ -61,12 +61,16 @@
 
 		$mapStore.addSource(id, safeSpec);
 		loaded.set(true);
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		onLoad && onLoad({ id, spec: safeSpec });
 	};
 
 	const doUnload = () => {
 		loaded.set(false);
 		removeSource();
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		onUnload && onUnload({ id, spec: safeSpec });
 	};
 
