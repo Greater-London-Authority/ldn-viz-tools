@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-ADDED: ARIA label for accessibility
+ADDED: ARIA label to `Callout` component for accessibility
