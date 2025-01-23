@@ -1,5 +1,18 @@
 # ldn-viz-tools-ui
 
+## 15.2.2
+
+### Patch Changes
+
+- 33ce5a9: CHANGED: made color chip in `LayerControl` round by applying `rounded-full` class
+- d588473: CHANGED: removed hard-coded border color of "Show all" checkbox for `LayerControlGroup`
+
+## 15.2.1
+
+### Patch Changes
+
+- bcb194c: FIXED: increase z-index of Popover to ensure it renders above sidebar
+
 ## 15.2.0
 
 ### Minor Changes

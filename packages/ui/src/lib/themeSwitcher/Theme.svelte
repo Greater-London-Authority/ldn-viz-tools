@@ -5,7 +5,10 @@
 	import { prefersDarkMode } from '../userPreference/mediaQueryStore';
 	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: $prefersDarkMode, applyTheme();
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: $userThemeSelectionStore, applyTheme();
 
 	const applyTheme = () => {
