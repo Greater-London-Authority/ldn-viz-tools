@@ -108,6 +108,11 @@
 		<h5 class="sr-only">{alt}</h5>
 	{/if}
 
+	{#if $$slots.beforeTable}
+		<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
+		<slot name="beforeTable" />
+	{/if}
+
 	<!-- Viz element goes here -->
 	<div class={tableClass}>
 		<slot name="table" {data} />

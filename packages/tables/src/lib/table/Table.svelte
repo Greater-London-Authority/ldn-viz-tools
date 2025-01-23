@@ -228,6 +228,13 @@
 			{filename}
 			{columnMapping}
 		>
+			<svelte:fragment slot="beforeTable">
+				{#if $$slots.beforeTable}
+					<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
+					<slot name="beforeTable" />
+				{/if}
+			</svelte:fragment>
+
 			<div
 				class="table-auto text-sm w-full text-color-text-primary"
 				slot="table"
