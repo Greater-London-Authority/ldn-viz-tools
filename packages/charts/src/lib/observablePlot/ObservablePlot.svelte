@@ -113,7 +113,7 @@
 	/**
 	 * Defaults to `true` inside `ObservablePlotInner` but exposed here in case you want to change to `false`.
 	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
-	 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
+	 * Instead ensure the title, subtitle and chartDescription of the chart and/or surrounding text explains the key takeaways.
 	 */
 	export let ariaHidden = true;
 </script>
