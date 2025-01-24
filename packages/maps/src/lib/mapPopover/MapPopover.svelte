@@ -62,7 +62,7 @@
 
 		const container = document.createElement('div');
 		maplibrePopup.setDOMContent(container);
-		maplibrePopup.setLngLat(position);
+		maplibrePopup.setLngLat(position as [number, number]);
 
 		const instance = new component({
 			target: container,
@@ -91,6 +91,7 @@
 
 	onDestroy(() => removePopup());
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: $mapStore && renderComponent(feature, popup);
 </script>
 
