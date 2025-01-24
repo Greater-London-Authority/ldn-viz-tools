@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `MapTooltip` component allows the creation of a popover using MapLibre, without creating a MapLibre marker.
+	 * The `MapPopover` component allows the creation of a popover using MapLibre, without creating a MapLibre marker.
 	 * This can be useful if the popover corresponds to a point rendered using Deck.gl (rather than MapLibre),
 	 * or to a location on a basemap that has no associated marker at all.
 	 *
