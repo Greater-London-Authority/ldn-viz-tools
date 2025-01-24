@@ -32,6 +32,7 @@
 >
 	<h2 class="font-bold text-lg">A title</h2>
 	<p class="text-color-text-secondary" data-capture-ignore>A paragraph of text...</p>
+	<p data-capture-ignore>Something that will not be included in the downloaded image.</p>
 	<LogoByCiu class="w-80" />
 </div>
 
