@@ -91,7 +91,7 @@
 
 	onDestroy(() => removePopup());
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: $mapStore && renderComponent(feature, popup);
 </script>
 
