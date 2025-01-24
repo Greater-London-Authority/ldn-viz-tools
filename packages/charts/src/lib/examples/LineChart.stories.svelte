@@ -11,8 +11,26 @@
 	};
 </script>
 
+<!-- TODO:
+[x] Thicker line (for contrast) (done in fragments)
+[ ] Long data, not wide (wide data example elsewhere?
+[ ] Make data 'meaningless' to avoid distraction. So 'Variable 1, Variable 2, etc'
+[ ] Make date formats and ranges real, as transformations and formatting are important
+[ ] Change spec to use lomg data and set color domains (rather than wide data named fields.render. or both?)
+[ ] London vs Rest of UK (primary vs grey)
+[ ] Multi line
+[ ] Many multi Line (as grey context) 
+[ ] Points on lines (with label?)
+[ ] X & Y threshold line (and annotation)
+[ ] Range highlight 
+[ ] X axis label, Y axis label
+[ ] area chart, as simple addition to line? (not stacked)
+
+-->
+
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import demoMonthlyTimeseriesLong from '../../data/demoMonthlyTimeseriesLong.json';
 	import ghgLondonTotalByYear from '../../data/ghgLondonTotalByYear.json';
 	import { plotTheme } from '../observablePlotFragments/observablePlotFragments';
 	import { Plot } from '../observablePlotFragments/plot';
@@ -20,6 +38,15 @@
 	$: chartData = ghgLondonTotalByYear.map((d) => {
 		return { ...d, year: new Date(d.Year, 0) };
 	});
+
+	const getRandomArbitrary = function (min: number, max: number) {
+		return Math.random() * (max - min) + min;
+	};
+
+	$: chartDataMulti = demoMonthlyTimeseriesLong;
+	// .map((d) => {
+	// 	return { ...d, Value: d.Value * getRandomArbitrary(1, 1.025) * 1000 };
+	// });
 
 	/**
 	 * Spec for default example
@@ -53,52 +80,112 @@
 	 * Spec for multi-line example
 	 */
 
+	// $: multiLineSpec = {
+	// 	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+	// 	marks: [
+	// 		Plot.gridX({ interval: '2 years' }),
+	// 		Plot.gridY(),
+	// 		Plot.ruleY([0]),
+	// 		Plot.line(chartData, {
+	// 			x: 'year',
+	// 			y: 'Domestic - Electricity',
+	// 			stroke: plotTheme().color.data.primary
+	// 		}),
+	// 		Plot.line(chartData, {
+	// 			x: 'year',
+	// 			y: 'Domestic - Gas',
+	// 			stroke: plotTheme().color.data.secondary
+	// 		}),
+	// 		Plot.axisX({ interval: '2 years' }),
+	// 		Plot.axisY({ label: 'ktCO₂e' }),
+	// 		Plot.ruleX(
+	// 			chartData,
+	// 			Plot.pointerX({ x: 'year', py: 'Domestic - Gas', stroke: plotTheme().color.chart.label })
+	// 		),
+	// 		Plot.tip(
+	// 			chartData,
+	// 			Plot.pointerX({
+	// 				x: 'year',
+	// 				y: 'Domestic - Electricity',
+	// 				channels: { Value: 'Value' },
+	// 				format: {
+	// 					x: false,
+	// 					Year: (d) => d.getFullYear()
+	// 				}
+	// 			})
+	// 		),
+	// 		Plot.tip(
+	// 			chartData,
+	// 			Plot.pointerX({
+	// 				x: 'year',
+	// 				y: 'Domestic - Gas',
+	// 				channels: { Value: 'Value' },
+	// 				format: {
+	// 					x: false,
+	// 					Year: (d) => d.getFullYear()
+	// 				}
+	// 			})
+	// 		)
+	// 	]
+	// };
+
 	$: multiLineSpec = {
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		color: {
+			legend: true,
+			type: 'ordinal',
+			range: [
+				plotTheme().color.data.primary,
+				plotTheme().color.data.secondary,
+				plotTheme().color.data.tertiary
+			]
+		},
 		marks: [
 			Plot.gridX({ interval: '2 years' }),
 			Plot.gridY(),
+			Plot.axisX({ interval: '1 year' }),
+			Plot.axisY({ label: '£ GBP' }),
 			Plot.ruleY([0]),
-			Plot.line(chartData, {
-				x: 'year',
-				y: 'Domestic - Electricity',
-				stroke: plotTheme().color.data.primary
+			Plot.line(chartDataMulti, {
+				x: 'Month',
+				y: 'Value',
+				z: 'Variable',
+				stroke: 'Variable'
 			}),
-			Plot.line(chartData, {
-				x: 'year',
-				y: 'Domestic - Gas',
-				stroke: plotTheme().color.data.secondary
-			}),
-			Plot.axisX({ interval: '2 years' }),
-			Plot.axisY({ label: 'ktCO₂e' }),
+
 			Plot.ruleX(
-				chartData,
-				Plot.pointerX({ x: 'year', py: 'Domestic - Gas', stroke: plotTheme().color.chart.label })
+				chartDataMulti,
+				Plot.pointerX({ x: 'Month', stroke: plotTheme().color.chart.label })
+			),
+			Plot.point(
+				chartDataMulti,
+				Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
 			),
 			Plot.tip(
-				chartData,
-				Plot.pointerX({
-					x: 'year',
-					y: 'Domestic - Electricity',
-					channels: { Value: 'Value' },
+				chartDataMulti,
+				Plot.pointer({
+					x: 'Month',
+					y: 'Value',
+					z: 'Varaible',
+					channels: { Variable: 'Variable', Date: 'Month', 'GBP (£)': 'Value' },
 					format: {
 						x: false,
-						Year: (d) => d.getFullYear()
-					}
-				})
-			),
-			Plot.tip(
-				chartData,
-				Plot.pointerX({
-					x: 'year',
-					y: 'Domestic - Gas',
-					channels: { Value: 'Value' },
-					format: {
-						x: false,
-						Year: (d) => d.getFullYear()
+						y: false
 					}
 				})
 			)
+			// Plot.tip(
+			// 	chartData,
+			// 	Plot.pointerX({
+			// 		x: 'year',
+			// 		y: 'Domestic - Gas',
+			// 		channels: { Value: 'Value' },
+			// 		format: {
+			// 			x: false,
+			// 			Year: (d) => d.getFullYear()
+			// 		}
+			// 	})
+			// )
 		]
 	};
 </script>
@@ -232,23 +319,26 @@
 	spec={spec}
 	data={chartData}
 	title="Domestic Greenhouse Gas Emissions in London have fallen steadily since 2005"
-	subTitle="London annual domestic greenhouse gas emissions, measured in kilotonnes of carbon dioxide equivalent (ktCO₂e), from 2005 to 2022"
+	subTitle="London annual domestic greenhouse gas emissions split by gas and electric energy, measured in kilotonnes of carbon dioxide equivalent (ktCO₂e), from 2005 to 2022"
 	alt="Line chart of London annual domestic greenhouse gas emissions"
-	note="This is for footnotes"
-	source="GLA Environment Team"
-	byline="GLA City Intelligence Unit"
-	chartDescription="The chart shows total domestic greenhouse gas emissions in London fell by almost 8,000 kilotonnes of carbon dioxide equivalent from 2005 to 2022. In 2005, there were 16,833 kilotonnes of carbon dioxide equivalent, which fell to 9,066 kilotonnes of carbon dioxide equivalent in 2022."
-/>
+	byline="GLA City Intelligence"
+	source="LDN Viz Tools Demo Data"
+	note="Data for demonstration purposes only"
+	chartDescription="The chart shows domestic greenhouse gas emissions in London fell by almost 8,000 kilotonnes of carbon dioxide equivalent from 2005 to 2022. There are two lines, one shows domestic gas emissions and the second shows domestic electricity emissions. In 2005, for gas, there were 9,748 kilotonnes of carbon dioxide equivalent which dropped to 6,343 kilotonnes in 2022. In 2005, for electricity, there were 6,986 kilotonnes of carbon dioxide equivalent which dropped to 2,632 kilotonnes in 2022."
+	/>
 ```
 -->
 
 <Story name="Multiple lines" source>
 	<ObservablePlot
 		spec={multiLineSpec}
-		data={chartData}
-		title="Domestic Greenhouse Gas Emissions in London have fallen steadily since 2005"
-		subTitle="London annual domestic greenhouse gas emissions split by gas and electric energy, measured in kilotonnes of carbon dioxide equivalent (ktCO₂e), from 2005 to 2022"
-		alt="Line chart of London annual domestic greenhouse gas emissions"
-		chartDescription="The chart shows domestic greenhouse gas emissions in London fell by almost 8,000 kilotonnes of carbon dioxide equivalent from 2005 to 2022. There are two lines, one shows domestic gas emissions and the second shows domestic electricity emissions. In 2005, for gas, there were 9,748 kilotonnes of carbon dioxide equivalent which dropped to 6,343 kilotonnes in 2022. In 2005, for electricity, there were 6,986 kilotonnes of carbon dioxide equivalent which dropped to 2,632 kilotonnes in 2022."
+		data={chartDataMulti}
+		title="In London, all variable values have fallen steadily since 2017, with Variable A experiencing the most siginificant fall. "
+		subTitle="London monthly estimated variable values (GBP), January 2015 to March 2024"
+		alt="Line chart of London variable values"
+		byline="GLA City Intelligence"
+		source="LDN Viz Tools Demo Data"
+		note="Data for demonstration purposes only"
+		chartDescription="The line chart shows monthly time series data for Variable A, B and C, measured in GBP (Pounds Sterling), from January 2015 to March 2024.  "
 	/>
 </Story>
