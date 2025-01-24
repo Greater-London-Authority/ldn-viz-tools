@@ -160,7 +160,7 @@
 		byline={"GLA City Intelligence"}
 		source={"LDN Viz Tools Demo Data"}
 		note={"Data for demonstration only"}
-		chartDescription={"The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in Febraury 2015, it's lowest value was £11,667 in July 2023, (a change of around -£50,149) and it's mean average value was £30,758"}
+		chartDescription={"The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"}
 	/>
 ```
 -->
@@ -175,7 +175,7 @@
 		byline={'GLA City Intelligence'}
 		source={'LDN Viz Tools Demo Data'}
 		note={'Data for demonstration only'}
-		chartDescription={"The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in Febraury 2015, it's lowest value was £11,667 in July 2023, (a change of around -£50,149) and it's mean average value was £30,758"}
+		chartDescription={"The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"}
 	/>
 </Story>
 
@@ -249,13 +249,13 @@
 <ObservablePlot
 	spec={multiLineSpec}
 	data={multiLineData}
-	title={'In London, all variable values have fallen steadily since 2017, with Variable A experiencing the most siginificant fall'}
+	title={'In London, all variable values have fallen steadily since 2017, with Variable A experiencing the most significant fall'}
 	subTitle={'London monthly estimated variable values (GBP), January 2015 to March 2024'}
 	alt={'Line chart of London variable values'}
 	byline={'GLA City Intelligence'}
 	source={'LDN Viz Tools Demo Data'}
 	note={'Data for demonstration only'}
-	chartDescription={"The line chart shows monthly time series data for Variable A, B and C, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. All variable values have fallen steadily since around 2017, but Variable A has fallen the most. Variable A's highest value was £61,816 in Febraury 2015, it's lowest value was £11,667 in July 2023, (a change of around -£50,149) and it's mean average value was £30,758. Variable B and C follow a similar fall, with a mean average of £27,545 and £23,681 respectively."}
+	chartDescription={"The line chart shows monthly time series data for Variable A, B and C, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. All variable values have fallen steadily since around 2017, but Variable A has fallen the most. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758. Variable B and C follow a similar fall, with a mean average of £27,545 and £23,681 respectively."}
 />
 ```
 -->
@@ -264,12 +264,12 @@
 	<ObservablePlot
 		spec={multiLineSpec}
 		data={multiLineData}
-		title={'In London, all variable values have fallen steadily since 2017, with Variable A experiencing the most siginificant fall'}
+		title={'In London, all variable values have fallen steadily since 2017, with Variable A experiencing the most significant fall'}
 		subTitle={'London monthly estimated variable values (GBP), January 2015 to March 2024'}
 		alt={'Line chart of London variable values'}
 		byline={'GLA City Intelligence'}
 		source={'LDN Viz Tools Demo Data'}
 		note={'Data for demonstration only'}
-		chartDescription={"The line chart shows monthly time series data for Variable A, B and C, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. All variable values have fallen steadily since around 2017, but Variable A has fallen the most. Variable A's highest value was £61,816 in Febraury 2015, it's lowest value was £11,667 in July 2023, (a change of around -£50,149) and it's mean average value was £30,758. Variable B and C follow a similar fall, with a mean average of £27,545 and £23,681 respectively."}
+		chartDescription={"The line chart shows monthly time series data for Variable A, B and C, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. All variable values have fallen steadily since around 2017, but Variable A has fallen the most. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758. Variable B and C follow a similar fall, with a mean average of £27,545 and £23,681 respectively."}
 	/>
 </Story>
