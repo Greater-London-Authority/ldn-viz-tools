@@ -15,7 +15,10 @@
 	 * @component
 	 */
 
-	import { getAllContexts, onDestroy, onMount } from 'svelte';
+	import { getAllContexts, onDestroy, onMount, type SvelteComponent } from 'svelte';
+	import type { ComponentType } from 'svelte';
+	import type { Feature } from 'geojson';
+
 	import maplibre_gl from 'maplibre-gl';
 
 	import { centroid } from '@turf/centroid';
@@ -26,19 +29,19 @@
 	/**
 	 * Svelte component used to render the tooltip.
 	 */
-	export let popup = null;
+	export let popup: ComponentType | null = null;
 
 	/**
 	 * Feature to which the popover should be attached.
 	 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
 	 */
-	export let feature;
+	export let feature: Feature;
 
-	let popupMaplibrePopup = null;
-	let popupInstance = null;
+	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
+	let popupInstance: SvelteComponent | null = null;
 
-	const renderComponent = (feature, component) => {
-		if (!$mapStore) {
+	const renderComponent = (feature: Feature, component: ComponentType | null) => {
+		if (!$mapStore || !component) {
 			return;
 		}
 
