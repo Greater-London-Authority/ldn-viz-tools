@@ -11,13 +11,7 @@
 	import type { IconSource } from '@steeze-ui/heroicons/dist/types';
 	import { setContext, type ComponentType } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import {
-		LogoCIU,
-		LogoMayor,
-		SidebarFooter,
-		SidebarTabLabel,
-		SidebarTabList
-	} from '@ldn-viz/ui';
+	import { LogoCIU, LogoMayor, SidebarFooter, SidebarTabLabel, SidebarTabList } from '@ldn-viz/ui';
 
 	import Sidebar from './Sidebar.svelte';
 	import type { PlacementType } from '$lib/sidebar/types';
