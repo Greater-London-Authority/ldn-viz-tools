@@ -14,7 +14,6 @@
 	import {
 		LogoCIU,
 		LogoMayor,
-		//	Sidebar,
 		SidebarFooter,
 		SidebarTabLabel,
 		SidebarTabList
