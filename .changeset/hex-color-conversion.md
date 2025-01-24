@@ -2,4 +2,4 @@
 '@ldn-viz/utils': minor
 ---
 
-ADDED: added `convertColorToHex` function
+ADDED: added `colorToRGBArray` function
