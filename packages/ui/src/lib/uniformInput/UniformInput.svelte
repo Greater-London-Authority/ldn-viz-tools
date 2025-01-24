@@ -8,7 +8,7 @@
 	 * - `hidden` renders a simple `<input>`
 	 * - `select` renders a `<Select>`
 	 * - `checkbox` renders a `<Checkbox>`
-	 * - `text`, `textarea`, `number`, etc.. renders an `<Input>`
+	 * - `text`, `textarea`, `number`, etc. renders an `<Input>`
 	 *
 	 * Only applicable properties are passed to the underlying input components
 	 * and elements.

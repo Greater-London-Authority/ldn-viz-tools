@@ -33,7 +33,7 @@
 		'flex h-[50px] bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-text-primary  items-center px-4 py-2 items-center';
 	$: {
 		if (!page) {
-			// no page store provided - we don't know whether or not we're on the page this links points at
+			// no page store provided - we don't know whether we're on the page this links points at
 			classes = nonHighlightedClasses;
 		} else if (!target && $page!.route?.id === '/') {
 			// we're currently on the homepage, and that is what this link points at

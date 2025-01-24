@@ -52,7 +52,7 @@
 	export let inputClasses = '';
 
 	/**
-	 * Placeholder text to be dislayed in the input element.
+	 * Placeholder text to be displayed in the input element.
 	 */
 	export let placeholder = 'Location search';
 
@@ -76,6 +76,8 @@
 	};
 
 	let showClearButton = false;
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: !showClearButton && clearFeature('geocoder', $mapStore);
 </script>
 

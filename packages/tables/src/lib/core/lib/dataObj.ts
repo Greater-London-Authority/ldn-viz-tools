@@ -79,7 +79,7 @@ export class TableData {
 
 		this.maxRowsPerGroup = tableSpec.maxRowsPerGroup;
 
-		// TOOD: allow setting of data, grouping, and ordering
+		// TODO: allow setting of data, grouping, and ordering
 		this.computeExtents();
 
 		const unsortedGroups = group(this.data, this.groupingFields, this.maxRowsPerGroup);
@@ -87,7 +87,7 @@ export class TableData {
 		this.rows = getRows(this.data, this.groups, this.filters);
 	}
 
-	// TOOD: would probably bebetter to not mutate the spec, and instead to perform function look-up at time of use
+	// TODO: would probably be better to not mutate the spec, and instead to perform function look-up at time of use
 	findRenderComponents(columnSpec: ColSpec[]) {
 		for (const col of columnSpec) {
 			// cell, column, group

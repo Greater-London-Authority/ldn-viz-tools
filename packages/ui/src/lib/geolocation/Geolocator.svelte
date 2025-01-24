@@ -3,8 +3,8 @@
 	 * The `<Geolocator>` component uses the Geolocation API to identify the
 	 * users current location.
 	 *
-	 * Note that user settings and browser implementions of the Geolocation API
-	 * mean only simple usage is cross platform. The problem mostly affects
+	 * Note that user settings and browser implementations of the Geolocation API
+	 * mean only simple usage is cross-platform. The problem mostly affects
 	 * the querying of, and listening for changes in, permissions.
 	 *
 	 * @component
