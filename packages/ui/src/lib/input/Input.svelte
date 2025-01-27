@@ -122,8 +122,15 @@
 		format = null;
 	}
 
+	/**
+	 * Only generate `descriptionId` and/or `errorId` when `description` and/or `error` exist.
+	 */
 	const descriptionId = description ? `${id}-description` : undefined;
 	const errorId = error ? `${id}-error` : undefined;
+
+	// if error exists, description won't render so `aria-describedby` should equal `undefined`.
+	const descriptionIsVisible = !error;
+
 	let input: HTMLInputElement | HTMLTextAreaElement;
 
 	// Svelte does not allow bind:type and bind:value simultaneously so this
@@ -188,7 +195,7 @@
 			{disabled}
 			{placeholder}
 			required={!optional}
-			aria-describedby={descriptionId}
+			aria-describedby={descriptionIsVisible ? descriptionId : undefined}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
 			on:blur={formatAndUpdateValue}
@@ -226,7 +233,7 @@
 			{disabled}
 			{placeholder}
 			required={!optional}
-			aria-describedby={descriptionId}
+			aria-describedby={descriptionIsVisible ? descriptionId : undefined}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
 			on:blur={formatAndUpdateValue}
