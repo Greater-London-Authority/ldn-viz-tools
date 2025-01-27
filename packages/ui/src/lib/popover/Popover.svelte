@@ -44,22 +44,27 @@
 </script>
 
 <!-- TODO: as this button wraps the hint slot any slotted item inherits button styles (color etc) This should be refactored to be more generic -->
-<Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
-	<span {...$trigger} use:trigger class="inline-flex items-center">
-		{#if $$slots.hint}
-			<!-- if present, replaces the default `hintLabel` and icon  -->
-			<slot name="hint" />
-		{:else}
-			{hintLabel}
+<Button
+	variant="text"
+	size={hintSize}
+	class="!p-0"
+	emphasis="secondary"
+	customAction={$trigger.action}
+	actionProps={$trigger}
+>
+	{#if $$slots.hint}
+		<!-- if present, replaces the default `hintLabel` and icon  -->
+		<slot name="hint" />
+	{:else}
+		{hintLabel}
 
-			<Icon
-				src={InformationCircle}
-				theme="mini"
-				class="w-[18px] h-[18px] ml-0.5"
-				aria-hidden="true"
-			/>
-		{/if}
-	</span>
+		<Icon
+			src={InformationCircle}
+			theme="mini"
+			class="w-[18px] h-[18px] ml-0.5"
+			aria-hidden="true"
+		/>
+	{/if}
 </Button>
 
 {#if $open}
