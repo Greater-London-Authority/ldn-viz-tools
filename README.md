@@ -52,10 +52,10 @@ You can preview the storybook by running `npm run storybook -w apps/docs`.
 
 - Clone repository onto local machine
 - Switch to dev branch
-- Install dependencies - `npm i`
-- Create new local branch - `git checkout -B name-of-task`
-- Run build script to build the components - `npm run build`
-- Run docs script to set up local preview of storybook - `npm run docs`
+- Install dependencies: `npm i`
+- Create new local branch: `git checkout -B name-of-task`
+- Run build script to build the components: `npm run build`
+- Run docs script to set up local preview of storybook: `npm run docs`
 - Ready to start contributing.
 - Once changes have been made, update the change set log: `npx changeset` and push to git.
 
