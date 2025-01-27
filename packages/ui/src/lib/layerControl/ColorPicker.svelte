@@ -27,9 +27,9 @@
 		<div class="w-5 h-5 relative border rounded-full" style:background={color}></div>
 	</svelte:fragment>
 
-	<svelte:fragment slot="title">Color</svelte:fragment>
+	<svelte:fragment slot="title">Colour</svelte:fragment>
 
-	<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
+	<span class="text-xs mb-2 inline-block">Click to assign a colour to this layer.</span>
 
 	<div class="flex flex-wrap gap-2">
 		{#each colors as colorOption}
