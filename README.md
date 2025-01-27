@@ -57,6 +57,7 @@ You can preview the storybook by running `npm run storybook -w apps/docs`.
 - Run build script to build the components - `npm run build`
 - Run docs script to set up local preview of storybook - `npm run docs`
 - Ready to start contributing.
+- Once changes have been made, update the change set log: `npx changeset` and push to git.
 
 ## Contributing, and Publishing packages
 
@@ -72,15 +73,6 @@ For more details, see the [Adding a Changeset](https://github.com/changesets/cha
 When writing changelog messages, consider the suggestions from [keep a changelog](https://keepachangelog.com/).
 
 When a release is made, `changeset` will add these descriptions of changes to a `CHANGELONG.md` file in the directory of the appropriate package; the version numbers in `package.json` files will also be updated appropriately.
-
-#### Step-by-step Contribution
-
-- Create local branch from dev - `git checkout -B name-of-task`
-- Run docs script to set up local preview of storybook - `npm run docs`
-- Once changes have been made, update the change set log: `npx changeset`
-- Push branch to GitHub
-- Create pull request between the new branch and the dev branch for a member of the team to review.
-- Once merged, delete old branch.
 
 ### Making releases/publishing packages
 
