@@ -9,16 +9,18 @@ const getLocalStorage = () => {
 	return 'light';
 };
 
+export type ThemeMode = 'light' | 'dark';
+
 export const userThemeSelectionStore = writable(getLocalStorage());
 
-export const currentThemeMode: Readable<string> = derived(
+export const currentThemeMode: Readable<ThemeMode> = derived(
 	[userThemeSelectionStore, prefersDarkMode],
 	([$userThemeSelectionStore, $prefersDarkMode]) => {
 		if ($userThemeSelectionStore === 'system') {
 			return $prefersDarkMode ? 'dark' : 'light';
 		}
 
-		return $userThemeSelectionStore;
+		return $userThemeSelectionStore as ThemeMode;
 	},
 	'light'
 );
