@@ -150,3 +150,15 @@
 		formats={['JSON']}
 	></DataDownloadButton>
 </Story>
+
+<Story name="Data obtained from async function">
+	<DataDownloadButton
+		dataFn={async () =>
+			Array.from({ length: 10 }, () => ({
+				a: Math.floor(Math.random() * 100),
+				b: Math.floor(Math.random() * 100)
+			}))}
+		filename="random data"
+		formats={['JSON']}
+	></DataDownloadButton>
+</Story>
