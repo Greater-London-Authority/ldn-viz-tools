@@ -5,8 +5,7 @@
 [ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Ftables?label=%40ldn-viz%2Ftables%20version) ](https://www.npmjs.com/package/@ldn-viz/tables)
 [ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fthemes?label=%40ldn-viz%2Fthemes%20version) ](https://www.npmjs.com/package/@ldn-viz/themes)
 [ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fui?label=%40ldn-viz%2Fui%20version) ](https://www.npmjs.com/package/@ldn-viz/ui)
-[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Futils?label=%40ldn-viz%2Futils%20version)  ](https://www.npmjs.com/package/@ldn-viz/utils)
-
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Futils?label=%40ldn-viz%2Futils%20version) ](https://www.npmjs.com/package/@ldn-viz/utils)
 
 This is a mono-repo containing several components:
 
@@ -48,6 +47,17 @@ lib/
 Storybook needs to be restarted when adding a new story to allow it to index the new file.
 
 You can preview the storybook by running `npm run storybook -w apps/docs`.
+
+#### Step-by-step Set Up
+
+- Clone repository onto local machine
+- Switch to dev branch
+- Install dependencies: `npm i`
+- Create new local branch: `git checkout -B name-of-task`
+- Run build script to build the components: `npm run build`
+- Run docs script to set up local preview of storybook: `npm run docs`
+- Ready to start contributing.
+- Once changes have been made, update the change set log: `npx changeset` and push to git.
 
 ## Contributing, and Publishing packages
 
