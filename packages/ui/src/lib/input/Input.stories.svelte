@@ -89,6 +89,8 @@
 <script lang="ts">
 	let value = '';
 	const round = (x: string) => Math.round(+x * 100) / 100;
+
+	let age: string;
 </script>
 
 <Template let:args>
@@ -160,6 +162,24 @@
 <Story name="With error">
 	<div class="w-96">
 		<Input label="Description" name="description-input" error="Error text" />
+	</div>
+</Story>
+
+<Story name="With dynamic error">
+	<div class="w-96">
+		<Input
+			bind:value={age}
+			label="Enter your age"
+			name="age-input"
+			type="number"
+			optional={false}
+			description="Try entering a number below 18."
+			error={!age
+				? 'Please enter your age'
+				: parseInt(age) <= 18
+					? 'You must be over 18 to use this'
+					: ''}
+		/>
 	</div>
 </Story>
 
