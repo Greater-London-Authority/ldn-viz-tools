@@ -23,7 +23,7 @@
 	 * A function which, when called with no arguments, will return the data to be saved in the downloaded file.
 	 * If this is provided, then the `data` prop is ignored.
 	 */
-	export let dataFn: undefined | (() => any[]) = undefined;
+	export let dataFn: undefined | (() => any[]) | (() => Promise<any[]>) = undefined;
 
 	/**
 	 * The name the downloaded file will be saved with.
@@ -52,20 +52,20 @@
 		link.dispatchEvent(new MouseEvent('click'));
 	};
 
-	const downloadJSON = () => {
-		const dataString = JSON.stringify(renameColumns(), null, 4);
+	const downloadJSON = async () => {
+		const dataString = JSON.stringify(await renameColumns(), null, 4);
 		const dataURL = 'data:application/json;base64,' + window.btoa(dataString);
 		downloadFromURL(dataURL, enforceExtension(filename || 'data', '.json'));
 	};
 
-	const downloadCSV = () => {
-		const dataString = csvFormat(renameColumns());
+	const downloadCSV = async () => {
+		const dataString = csvFormat(await renameColumns());
 		const dataURL = 'data:application/csv;base64,' + window.btoa(dataString);
 		downloadFromURL(dataURL, enforceExtension(filename || 'data', '.csv'));
 	};
 
-	const renameColumns = () => {
-		const dataToSave = dataFn ? dataFn() : data;
+	const renameColumns = async () => {
+		const dataToSave = dataFn ? await Promise.resolve(dataFn()) : data;
 
 		return dataToSave.map((datum) => {
 			if (!columnMapping) {
