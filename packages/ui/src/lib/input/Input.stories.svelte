@@ -91,6 +91,17 @@
 	const round = (x: string) => Math.round(+x * 100) / 100;
 
 	let age: string;
+	const validateAge = (age: string) => {
+		const ageNum = parseInt(age);
+
+		if (!ageNum) {
+			return 'Please enter your age.';
+		} else if (ageNum < 0 || ageNum > 116) {
+			return 'Age must be between 0 and 116.';
+		} else if (ageNum <= 18) {
+			return 'You must be over 18 to use this.';
+		} else return undefined;
+	};
 </script>
 
 <Template let:args>
@@ -169,16 +180,14 @@
 	<div class="w-96">
 		<Input
 			bind:value={age}
-			label="Enter your age"
+			label="Enter your age (required)"
 			name="age-input"
 			type="number"
 			optional={false}
 			description="Try entering a number below 18."
-			error={!age
-				? 'Please enter your age'
-				: parseInt(age) <= 18
-					? 'You must be over 18 to use this'
-					: ''}
+			min="0"
+			max="116"
+			error={validateAge(age)}
 		/>
 	</div>
 </Story>
