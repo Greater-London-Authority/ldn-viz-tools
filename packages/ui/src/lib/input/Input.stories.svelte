@@ -94,7 +94,7 @@
 	const validateAge = (age: string) => {
 		const ageNum = parseInt(age);
 
-		if (!ageNum) {
+		if (!ageNum && ageNum !== 0) {
 			return 'Please enter your age.';
 		} else if (ageNum < 0 || ageNum > 116) {
 			return 'Age must be between 0 and 116.';
