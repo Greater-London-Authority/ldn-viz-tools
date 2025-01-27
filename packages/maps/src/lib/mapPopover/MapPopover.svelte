@@ -64,6 +64,9 @@
 		maplibrePopup.setDOMContent(container);
 		maplibrePopup.setLngLat(position as [number, number]);
 
+		// make hyperlinks clickable
+		container.style.pointerEvents = 'auto';
+
 		const instance = new component({
 			target: container,
 			context: new Map([
