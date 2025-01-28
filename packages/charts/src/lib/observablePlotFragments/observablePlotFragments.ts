@@ -1,56 +1,46 @@
-import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
-import { currentThemeMode } from '@ldn-viz/ui';
+import { currentTheme } from '@ldn-viz/ui';
 import type { AxisOptions } from '@observablehq/plot';
 import { get } from 'svelte/store';
 
 export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for inter
-
-export type ThemeMode = 'light' | 'dark';
-
 type DefaultPlotStyleFunctions = {
-	[key: string]: ((mode: ThemeMode) => any) | (() => any);
+	[key: string]: () => any;
 };
 
 export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
-	defaultStyle: (mode) => defaultStyle(mode),
+	defaultStyle: () => defaultStyle(),
 	defaultSize: () => defaultSize,
 	defaultSizeFacet: () => defaultSizeFacet,
 	defaultColor: () => defaultColor,
 	defaultXScale: () => defaultXScale,
 	defaultYScale: () => defaultYScale,
-	defaultGridX: (mode) => defaultGridX(mode),
-	defaultGridY: (mode) => defaultGridY(mode),
+	defaultGridX: () => defaultGridX(),
+	defaultGridY: () => defaultGridY(),
 	defaultXAxis: () => defaultXAxis,
 	defaultYAxis: () => defaultYAxis,
-	defaultLine: (mode) => defaultLine(mode),
+	defaultLine: () => defaultLine(),
 	defaultDashedLine: () => defaultDashedLine,
-	defaultDot: (mode) => defaultDot(mode),
-	defaultPoint: (mode) => defaultPoint(mode),
-	defaultArea: (mode) => defaultArea(mode),
-	defaultRule: (mode) => defaultRule(mode),
-	defaultTip: (mode) => defaultTip(mode),
-	defaultAnnotationTip: (mode) => defaultAnnotationTip(mode),
-	defaultAnnotationText: (mode) => defaultAnnotationText(mode),
-	defaultAnnotationRange: (mode) => defaultAnnotationRange(mode)
+	defaultDot: () => defaultDot(),
+	defaultPoint: () => defaultPoint(),
+	defaultArea: () => defaultArea(),
+	defaultRule: () => defaultRule(),
+	defaultTip: () => defaultTip(),
+	defaultAnnotationTip: () => defaultAnnotationTip(),
+	defaultAnnotationText: () => defaultAnnotationText(),
+	defaultAnnotationRange: () => defaultAnnotationRange()
 };
 
-export const getDefaultPlotStyles = (mode: ThemeMode = 'light') => {
+export const getDefaultPlotStyles = () => {
 	return Object.fromEntries(
-		Object.entries(defaultPlotStyleFunctions).map(([key, val]) => [key, val(mode)])
+		Object.entries(defaultPlotStyleFunctions).map(([key, val]) => [key, val()])
 	);
 };
 
-const theme = (mode: ThemeMode = get(currentThemeMode) as ThemeMode) => {
-	return tokens.theme[mode];
-};
-
-export const plotTheme = theme;
-
-const defaultStyle = (mode: ThemeMode) => ({
-	color: theme(mode).color.chart.label,
+const defaultStyle = () => ({
+	color: get(currentTheme).color.chart.label,
 	fontSize: '0.875rem',
 	fontFamily: fontStack,
-	background: theme(mode).color.chart.background
+	background: get(currentTheme).color.chart.background
 });
 
 const defaultSize = {
@@ -92,13 +82,13 @@ const defaultYScale = {
 	labelArrow: 'none'
 };
 
-const defaultGridX = (mode: ThemeMode) => ({
-	stroke: theme(mode).color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+const defaultGridX = () => ({
+	stroke: get(currentTheme).color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1
 });
 
-const defaultGridY = (mode: ThemeMode) => ({
-	stroke: theme(mode).color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+const defaultGridY = () => ({
+	stroke: get(currentTheme).color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1,
 	ticks: 4 // reasonable level to push nice breaks toward 3, 4 or 5
 });
@@ -122,8 +112,8 @@ const defaultYAxis = <AxisOptions>{
 	ticks: 4 // this should match the ticks property passed to yScale
 };
 
-const defaultLine = (mode: ThemeMode) => ({
-	stroke: theme(mode).color.data.primary,
+const defaultLine = () => ({
+	stroke: get(currentTheme).color.data.primary,
 	strokeWidth: 2
 });
 
@@ -132,37 +122,37 @@ const defaultDashedLine = {
 	strokeDasharray: '5,5'
 };
 
-const defaultDot = (mode: ThemeMode) => ({
+const defaultDot = () => ({
 	// simplest mark for dense scatterplots
 	stroke: null,
-	fill: theme(mode).color.data.primary,
+	fill: get(currentTheme).color.data.primary,
 	fillOpacity: 0.7,
 	strokeWidth: 0,
 	r: 2
 });
 
-const defaultPoint = (mode: ThemeMode) => ({
+const defaultPoint = () => ({
 	// larger data point mark, for highlighting a point on line etc.
-	stroke: theme(mode).color.data.primary,
-	fill: theme(mode).color.chart.background,
+	stroke: get(currentTheme).color.data.primary,
+	fill: get(currentTheme).color.chart.background,
 	strokeWidth: 2,
 	r: 4
 });
 
-const defaultArea = (mode: ThemeMode) => ({
-	stroke: theme(mode).color.data.primary,
+const defaultArea = () => ({
+	stroke: get(currentTheme).color.data.primary,
 	strokeWidth: 0,
-	fill: theme(mode).color.data.primary,
+	fill: get(currentTheme).color.data.primary,
 	opacity: 0.2
 });
 
-const defaultRule = (mode: ThemeMode) => ({
-	stroke: theme(mode).color.chart.axis
+const defaultRule = () => ({
+	stroke: get(currentTheme).color.chart.axis
 });
 
-const defaultTip = (mode: ThemeMode) => ({
-	stroke: theme(mode).color.chart.label,
-	fill: theme(mode).color.chart.background,
+const defaultTip = () => ({
+	stroke: get(currentTheme).color.chart.label,
+	fill: get(currentTheme).color.chart.background,
 	fillOpacity: 1,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -170,9 +160,9 @@ const defaultTip = (mode: ThemeMode) => ({
 	pointerSize: 12
 });
 
-const defaultAnnotationTip = (mode: ThemeMode) => ({
-	stroke: theme(mode).color.chart.label,
-	fill: theme(mode).color.chart.background,
+const defaultAnnotationTip = () => ({
+	stroke: get(currentTheme).color.chart.label,
+	fill: get(currentTheme).color.chart.background,
 	fillOpacity: 0.8,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -182,15 +172,15 @@ const defaultAnnotationTip = (mode: ThemeMode) => ({
 	dy: 0
 });
 
-const defaultAnnotationText = (mode: ThemeMode) => ({
+const defaultAnnotationText = () => ({
 	fontSize: 14,
-	fill: theme(mode).color.chart.label,
+	fill: get(currentTheme).color.chart.label,
 	dx: 8,
 	dy: 0
 });
 
-const defaultAnnotationRange = (mode: ThemeMode) => ({
-	fill: theme(mode).color.chart.label, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+const defaultAnnotationRange = () => ({
+	fill: get(currentTheme).color.chart.label, // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	opacity: 0.1
 });
 

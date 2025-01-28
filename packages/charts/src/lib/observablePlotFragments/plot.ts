@@ -20,14 +20,7 @@ import type {
 	TipOptions
 } from '@observablehq/plot';
 import * as ObservablePlot from '@observablehq/plot';
-import {
-	defaultPlotStyleFunctions,
-	getDefaultPlotStyles,
-	type ThemeMode
-} from './observablePlotFragments';
-
-import { currentThemeMode } from '@ldn-viz/ui';
-import { get } from 'svelte/store';
+import { defaultPlotStyleFunctions, getDefaultPlotStyles } from './observablePlotFragments';
 
 export const plot = (options: PlotOptions = {}) => {
 	const {
@@ -37,7 +30,7 @@ export const plot = (options: PlotOptions = {}) => {
 		defaultColor,
 		defaultXScale,
 		defaultYScale
-	} = getDefaultPlotStyles(get(currentThemeMode) as ThemeMode);
+	} = getDefaultPlotStyles();
 
 	const { style, color, x, y, height, marginTop, marginBottom, marginLeft, marginRight, ...rest } =
 		options;
@@ -85,25 +78,7 @@ export const plot = (options: PlotOptions = {}) => {
 	return ObservablePlot.plot(specWithDefaultsApplied as PlotOptions);
 };
 
-// Mark styles
-const {
-	defaultGridX,
-	defaultGridY,
-	defaultXAxis,
-	defaultYAxis,
-	defaultLine,
-	defaultDashedLine,
-	defaultDot,
-	defaultArea,
-	defaultRule,
-	defaultTip,
-	defaultAnnotationText,
-	defaultAnnotationTip,
-	defaultPoint
-} = getDefaultPlotStyles('dark');
-
-export const getDefault = (element: string) =>
-	defaultPlotStyleFunctions[element](get(currentThemeMode) as ThemeMode);
+export const getDefault = (element: any) => defaultPlotStyleFunctions[element]();
 
 // Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
 export const Plot = {

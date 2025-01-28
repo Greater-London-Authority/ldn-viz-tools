@@ -1,3 +1,4 @@
+import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
 import { BROWSER } from 'esm-env';
 import { derived, writable, type Readable } from 'svelte/store';
 import { prefersDarkMode } from '../userPreference/mediaQueryStore';
@@ -10,6 +11,9 @@ const getLocalStorage = () => {
 };
 
 export type ThemeMode = 'light' | 'dark';
+type ThemeObject<T> = {
+	[key: string]: T | ThemeObject<T>;
+};
 
 export const userThemeSelectionStore = writable(getLocalStorage());
 
@@ -23,4 +27,11 @@ export const currentThemeMode: Readable<ThemeMode> = derived(
 		return $userThemeSelectionStore as ThemeMode;
 	},
 	'light'
+);
+
+export const currentTheme: Readable<ThemeObject<any>> = derived(
+	currentThemeMode,
+	($currentThemeMode) => {
+		return tokens.theme[$currentThemeMode];
+	}
 );
