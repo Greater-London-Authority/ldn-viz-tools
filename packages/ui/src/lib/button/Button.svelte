@@ -20,7 +20,9 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
-		customAction: ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>) | undefined;
+		customAction:
+			| ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown' | 'click'>)
+			| undefined;
 	}
 
 	type ButtonStyle = Record<
@@ -78,12 +80,12 @@
 	export let title: ButtonProps['title'] = '';
 
 	/**
-	 * MeltUI Action passed down from MultipleActionButton
+	 * MeltUI actions passed down from MultipleActionButton and Popover
 	 */
 	export let customAction: ButtonProps['customAction'] = undefined;
 
 	/**
-	 * MeltUI action props passed down from MultipleActionButton, which include ARIA attributes and tabindex.
+	 * MeltUI action props passed down from MultipleActionButton and Popover, which include ARIA attributes and tabindex.
 	 */
 	export let actionProps = {};
 
