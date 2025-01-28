@@ -170,13 +170,9 @@
 	</div>
 </Story>
 
-<Story name="With error">
-	<div class="w-96">
-		<Input label="Description" name="description-input" error="Error text" />
-	</div>
-</Story>
+<!-- This demonstrates how an input behaves when error state changes. Try entering some numbers! -->
 
-<Story name="With dynamic error">
+<Story name="With error">
 	<div class="w-96">
 		<Input
 			bind:value={age}
