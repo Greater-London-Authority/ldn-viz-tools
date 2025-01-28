@@ -84,6 +84,8 @@
 	 * MeltUI actions passed down from MultipleActionButton and Popover
 	 */
 	export let customAction: ButtonProps['customAction'] = undefined;
+	// checks customAction exists, otherwise defaults to void action
+	const action = customAction ? customAction : () => {};
 
 	/**
 	 * MeltUI action props passed down from MultipleActionButton and Popover, which include ARIA attributes and tabindex.
@@ -236,8 +238,6 @@
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
-
-	const action = customAction ? customAction : () => {};
 </script>
 
 <div class="flex">
