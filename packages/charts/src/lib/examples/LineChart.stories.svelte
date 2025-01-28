@@ -29,10 +29,10 @@
 -->
 
 <script lang="ts">
+	import { currentTheme } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { format } from 'd3';
 	import demoMonthlyTimeseriesLong from '../../data/demoMonthlyTimeseriesLong.json';
-	import { plotTheme } from '../observablePlotFragments/observablePlotFragments';
 	import { Plot } from '../observablePlotFragments/plot';
 
 	const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
@@ -52,7 +52,7 @@
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
-				stroke: plotTheme().color.data.primary,
+				stroke: $currentTheme.color.data.primary,
 				tip: true
 			})
 		]
@@ -66,9 +66,9 @@
 			legend: true,
 			type: 'ordinal',
 			range: [
-				plotTheme().color.data.primary,
-				plotTheme().color.data.secondary,
-				plotTheme().color.data.tertiary
+				$currentTheme.color.data.primary,
+				$currentTheme.color.data.secondary,
+				$currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
@@ -86,7 +86,7 @@
 
 			Plot.ruleX(
 				multiLineData,
-				Plot.pointerX({ x: 'Month', stroke: plotTheme().color.chart.label })
+				Plot.pointerX({ x: 'Month', stroke: $currentTheme.color.chart.label })
 			),
 			Plot.point(
 				multiLineData,
@@ -143,7 +143,7 @@
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
-				stroke: plotTheme().color.data.primary,
+				stroke: $currentTheme.color.data.primary,
 				tip: true
 			})
 		]
@@ -196,9 +196,9 @@
 			legend: true,
 			type: 'ordinal',
 			range: [
-				plotTheme().color.data.primary,
-				plotTheme().color.data.secondary,
-				plotTheme().color.data.tertiary
+				$currentTheme.color.data.primary,
+				$currentTheme.color.data.secondary,
+				$currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
@@ -216,7 +216,7 @@
 
 			Plot.ruleX(
 				multiLineData,
-				Plot.pointerX({ x: 'Month', stroke: plotTheme().color.chart.label })
+				Plot.pointerX({ x: 'Month', stroke: $currentTheme.color.chart.label })
 			),
 			Plot.point(
 				multiLineData,
