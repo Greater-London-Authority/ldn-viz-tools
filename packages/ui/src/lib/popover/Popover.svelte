@@ -23,7 +23,8 @@
 		states: { open }
 	} = createPopover({
 		forceVisible: true,
-		positioning: { placement: 'top' }
+		positioning: { placement: 'top' },
+		disableFocusTrap: true
 	});
 
 	/**
