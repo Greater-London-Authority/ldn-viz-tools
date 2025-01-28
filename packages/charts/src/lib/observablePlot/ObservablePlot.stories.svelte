@@ -21,151 +21,52 @@
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
 
-	import { format } from 'd3-format';
-
 	import { addMultipleEventHandlers } from './ObservablePlotInner.svelte';
 
-	import { currentThemeMode, Select } from '@ldn-viz/ui';
-	import {
-		getDefaultPlotStyles,
-		plotTheme,
-		preprocessOptions
-	} from '../observablePlotFragments/observablePlotFragments';
+	import { currentTheme, Select } from '@ldn-viz/ui';
+	import { getDefaultPlotStyles } from '../observablePlotFragments/observablePlotFragments';
 
-	import {
-		areaPlotData,
-		areaPlotPointsToLabel,
-		education_data,
-		educationLabelOffsets,
-		lineChartData,
-		material_deprivation_data,
-		penguins
-	} from '../../data/demoData';
+	import { penguins } from '../../data/demoData';
 
 	import { Plot } from '../observablePlotFragments/plot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
 
-	$: ({
-		defaultColor,
-		defaultSize,
-		defaultStyle,
-		defaultXScale,
-		defaultYScale,
-		defaultArea,
-		defaultDot,
-		defaultGridX,
-		defaultGridY,
-		defaultTip,
-		defaultLine,
-		defaultXAxis,
-		defaultYAxis,
-		defaultRule,
-		defaultAnnotationText
-	} = getDefaultPlotStyles($currentThemeMode));
+	let theme = getDefaultPlotStyles();
+
+	$: updateTheme($currentTheme);
+	$: updateTheme = (_theme: any) => (theme = getDefaultPlotStyles());
 
 	$: spec = {
 		style: {
-			...defaultStyle
+			...theme.defaultStyle
 		},
 
-		...defaultSize,
+		...theme.defaultSize,
 
-		x: { ...defaultXScale },
+		x: { ...theme.defaultXScale },
 
-		y: { ...defaultYScale },
+		y: { ...theme.defaultYScale },
 
 		marks: [
-			Plot.gridX({ ...defaultGridX }),
-			Plot.gridY({ ...defaultGridY }),
-			Plot.ruleY([0], { ...defaultRule }),
-			Plot.ruleX([0], { ...defaultRule }),
-			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
-			Plot.axisX({ ...defaultXAxis }),
-			Plot.axisY({ ...defaultYAxis, label: 'culmen_depth_mm' }),
+			Plot.gridX({ ...theme.defaultGridX }),
+			Plot.gridY({ ...theme.defaultGridY }),
+			Plot.ruleY([0], { ...theme.defaultRule }),
+			Plot.ruleX([0], { ...theme.defaultRule }),
+			Plot.dot(penguins, { ...theme.defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
+			Plot.axisX({ ...theme.defaultXAxis }),
+			Plot.axisY({ ...theme.defaultYAxis, label: 'culmen_depth_mm' }),
 			Plot.tip(
 				penguins,
-				Plot.pointerX({ ...defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
-			)
-		]
-	};
-
-	$: mbBarSpec = {
-		y: {
-			...defaultYScale,
-			label: ''
-		},
-
-		x: {
-			...defaultXScale,
-			domain: [0, 20],
-			insetLeft: 0 // adjusting to fit y-axis labels of this chart
-		},
-
-		color: {
-			...defaultColor,
-			range: [
-				plotTheme($currentThemeMode).color.data.primary,
-				plotTheme($currentThemeMode).color.data.context
-			]
-		},
-
-		style: {
-			...defaultStyle
-		},
-
-		...defaultSize,
-		marginLeft: 200,
-		marginRight: 60,
-
-		marks: [
-			// grid marks
-			Plot.gridX({ ...defaultGridX, ticks: 5 }),
-
-			Plot.barX(material_deprivation_data, {
-				x: 'Pensioners',
-				y: 'Region',
-				fill: 'Area',
-				sort: { y: 'x', reverse: true }
-			}),
-
-			Plot.textX(material_deprivation_data, {
-				x: 'Pensioners',
-				y: 'Region',
-				fill: 'Area',
-				dx: 4,
-				textAnchor: 'start',
-				text: (d) => `${d.Pensioners}%`,
-				sort: { y: 'x', reverse: true }
-			}),
-
-			// // axis x
-			Plot.axisX({
-				...defaultXAxis,
-				label: 'Percentage of Pensioners',
-				tickFormat: (d) => `${d}%`,
-				ticks: 5
-			}),
-
-			// 0 baseline
-			Plot.ruleX([0], { ...defaultRule }), // Q: Should we always place a 0 baseline in the default chart (if range is not starting at 0, it won't be shown anyway)
-
-			// data tool tip - last to display
-			Plot.tip(
-				material_deprivation_data,
-				Plot.pointerY({
-					...defaultTip,
-					x: 'Pensioners',
-					y: 'Region',
-					title: (d) => [d.Region, `${d.Pensioners}%`].join('\n')
-				})
+				Plot.pointerX({ ...theme.defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
 			)
 		]
 	};
 
 	let clickedValue: any | undefined = undefined;
 	let clickedIndex: any | undefined = undefined;
+	let hoveredValue: any | undefined = undefined;
 
 	const tooltipStore: Writable<Position> = writable();
 </script>
@@ -230,10 +131,11 @@
 			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
-				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				...spec.marks,
+				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
 				Plot.dot(penguins, {
-					...defaultDot,
+					...theme.defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
 					render: registerTooltip(tooltipStore),
@@ -279,10 +181,11 @@
 		spec={{
 			...spec,
 			marks: [
-				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
-				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				...spec.marks,
+				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
 				Plot.dot(penguins, {
-					...defaultDot,
+					...theme.defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
 					render: registerTooltip(tooltipStore)
@@ -307,8 +210,9 @@
 			...spec,
 
 			marks: [
-				Plot.ruleY([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
-				Plot.ruleX([0], { stroke: plotTheme($currentThemeMode).color.chart.axis }),
+				...spec.marks,
+				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
 				Plot.point(penguins, {
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
@@ -316,11 +220,11 @@
 						clickedIndex = d.index;
 						clickedValue = penguins[d.index];
 					}),
-					stroke: plotTheme($currentThemeMode).color.data.primary,
+					stroke: $currentTheme.color.data.primary,
 					r: 5,
 					fill: (_d, i) => {
 						return clickedIndex !== undefined && i === clickedIndex
-							? plotTheme($currentThemeMode).color.data.secondary
+							? $currentTheme.color.data.secondary
 							: 'white';
 					}
 				})
@@ -343,32 +247,55 @@
 <Story name="With multiple event handlers">
 	<ObservablePlot
 		spec={{
-			...mbBarSpec,
-			marks: [
-				Plot.barX(material_deprivation_data, {
-					x: 'Pensioners',
-					y: 'Region',
-					fill: 'Area',
-					sort: { y: 'x', reverse: true },
+			...spec,
 
+			marks: [
+				...spec.marks,
+				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
+				Plot.point(penguins, {
+					x: 'culmen_length_mm',
+					y: 'culmen_depth_mm',
 					render: addMultipleEventHandlers([
 						{
-							markShape: 'rect',
+							markShape: 'circle',
 							type: 'click',
-							handler: (_, d) => console.log('Clicked on:', material_deprivation_data[d.index])
+							handler: (_, d) => {
+								clickedIndex = penguins[d.index];
+							}
 						},
 						{
-							markShape: 'rect',
+							markShape: 'circle',
 							type: 'mouseenter',
-							handler: (_, d) => console.log('Cursor entered:', material_deprivation_data[d.index])
+							handler: (_, d) => {
+								hoveredValue = penguins[d.index];
+							}
 						}
-					])
+					]),
+					stroke: $currentTheme.color.data.primary,
+					r: 5,
+					fill: (_d, i) => {
+						return clickedIndex !== undefined && i === clickedIndex
+							? $currentTheme.color.data.secondary
+							: 'white';
+					}
 				})
 			]
 		}}
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
+		title="Penguin Culmens"
+		subTitle="A scatter plot of depth against length"
+		data={penguins}
+		{tooltipStore}
+	>
+		<DemoTooltip slot="tooltip" />
+	</ObservablePlot>
+
+	<div>
+		Clicked point:
+		<pre>{JSON.stringify(clickedIndex, null, 2)}</pre>
+		Moused over point:
+		<pre>{JSON.stringify(hoveredValue, null, 2)}</pre>
+	</div>
 </Story>
 
 <!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
