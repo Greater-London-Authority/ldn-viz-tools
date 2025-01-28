@@ -124,12 +124,13 @@
 
 	/**
 	 * Only generate `descriptionId` and/or `errorId` when `description` and/or `error` exist.
+	 * `descriptionId` is static but `errorId` is reactive as error state could change.
 	 */
 	const descriptionId = description ? `${id}-description` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
+	$: errorId = error ? `${id}-error` : undefined;
 
 	// if error exists, description won't render so `aria-describedby` should equal `undefined`.
-	const descriptionIsVisible = !error;
+	$: descriptionIsVisible = !error;
 
 	let input: HTMLInputElement | HTMLTextAreaElement;
 
