@@ -42,6 +42,7 @@
 	$: alignmentClass = alignmentClasses[alignHeader ?? 'left'];
 
 	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$$restProps;
 </script>
 
