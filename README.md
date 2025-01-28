@@ -75,6 +75,10 @@ The action should automatically re-run if you push additional commits to the sou
 Note that this action will immediately abort if there is a conflict that would prevent the PR from being automatically merged into the `dev` branch.
 The action will also not be automatically triggered for PRs targeting other branches, but it can still be manually triggered [through the GitHub web UI](https://github.com/Greater-London-Authority/ldn-viz-tools/actions/workflows/deploy-preview.yml).
 
+An action also deploys:
+
+* the `dev` branch to [https://dev.ldn-gis.co.uk/storybook-dev/](https://dev.ldn-gis.co.uk/storybook-dev/)
+* the `main` branch (which should match the latest released version) to [https://greater-london-authority.github.io/ldn-viz-tools/](https://greater-london-authority.github.io/ldn-viz-tools/)
 
 ### Making releases/publishing packages
 
