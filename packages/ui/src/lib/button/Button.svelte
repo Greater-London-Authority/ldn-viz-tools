@@ -23,6 +23,7 @@
 		customAction:
 			| ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown' | 'click'>)
 			| undefined;
+		ariaLabel: string | undefined;
 	}
 
 	type ButtonStyle = Record<
@@ -92,7 +93,7 @@
 	/**
 	 * Enables screen reader to describe contents of button
 	 */
-	export let ariaLabel: string | null = null;
+	export let ariaLabel: ButtonProps['ariaLabel'] = undefined;
 
 	/**
 	 * Value set as the `id` attribute of the `<svelte:element>` element (defaults to randomly generated value).
