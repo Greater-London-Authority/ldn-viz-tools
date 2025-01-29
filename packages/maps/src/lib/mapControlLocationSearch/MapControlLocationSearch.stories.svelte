@@ -13,8 +13,8 @@
 <script lang="ts">
 	import { Template, Story } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
@@ -39,7 +39,6 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
@@ -54,7 +53,6 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
@@ -73,7 +71,6 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
