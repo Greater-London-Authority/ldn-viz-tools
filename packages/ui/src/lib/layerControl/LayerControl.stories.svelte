@@ -9,19 +9,25 @@
 </script>
 
 <script lang="ts">
+	import Theme from '../themeSwitcher/Theme.svelte';
+	import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher.svelte';
+
 	let layerStates = {
 		boroughs: {
-			color: '#ffcc00',
+			color: '#fff200',
+			colorName: 'data.categorical.yellow',
 			visible: true,
 			opacity: 1.0
 		},
 		imd: {
-			color: '#DCA000',
+			color: '#eb001b',
+			colorName: 'data.categorical.red',
 			visible: true,
 			opacity: 1.0
 		},
 		fuel_poverty: {
-			color: '#E0001B',
+			color: '#f36428',
+			colorName: 'data.categorical.orange',
 			visible: true,
 			opacity: 1.0
 		}
@@ -31,6 +37,9 @@
 </script>
 
 <Template let:args>
+	<Theme />
+	<ThemeSwitcher />
+
 	<div class="w-96">
 		<LayerControl bind:state {...args} />
 	</div>
