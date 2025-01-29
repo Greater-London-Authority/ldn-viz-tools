@@ -8,12 +8,12 @@
 - 4556f05: ADDED: ARIA label to `Callout` component for accessibility
 - f5de052: FIXED: updated `Checkbox` component to use explicit input labels to fix duplicate announcements by screen reader
 - 7487cd8: FIXED: accessibility issues in `MultipleActionButton` component
-  ADDED: pass Melt-UI actions down to `Button` component for proper ARIA semantics
-- 028ad2f: Add currentTheme store to ui package and use in chart examples. Implement accessibility improvements in charts and illustrate withc line chart example
+- 7487cd8: ADDED: pass Melt-UI actions down to `Button` component for proper ARIA semantics
+- 028ad2f: ADDED: `currentTheme` store to `ui` package and use in `chart` examples. Implement accessibility improvements in charts and illustrate with line chart example
 
 ### Patch Changes
 
-- 7dc2bfb: Added alt text to logo components
+- 7dc2bfb: ADDED: alt text to logo components
 - Updated dependencies [5c06c36]
 - Updated dependencies [0ea3bc4]
   - @ldn-viz/utils@1.1.0
@@ -61,7 +61,7 @@
 
 ### Patch Changes
 
-- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
 - e397e35: FIXED: fix spacing between `RadioButton`s and `Checkbox`es when inside a `SidebarSection`
 - 68780ea: FIXED: fix bug that caused `AppShell` to always acts as if the `startOpen` prop was `false`
 
