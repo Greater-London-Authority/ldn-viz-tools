@@ -20,6 +20,7 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
+		customAction: ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>) | undefined;
 	}
 
 	type ButtonStyle = Record<
@@ -31,6 +32,8 @@
 </script>
 
 <script lang="ts">
+	import type { MeltActionReturn } from '@melt-ui/svelte/internal/types';
+
 	/**
 	 * Selects which family of styles should be applied to the button.
 	 */
@@ -74,7 +77,28 @@
 	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
 
+	/**
+	 * MeltUI Action passed down from MultipleActionButton
+	 */
+	export let customAction: ButtonProps['customAction'] = undefined;
+
+	/**
+	 * MeltUI action props passed down from MultipleActionButton, which include ARIA attributes and tabindex.
+	 */
+	export let actionProps = {};
+
+	/**
+	 * Enables screen reader to describe contents of button
+	 */
+	export let ariaLabel: string | null = null;
+
+	/**
+	 * Value set as the `id` attribute of the `<svelte:element>` element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 
 	const styleClasses: ButtonStyle = {
 		brand: {
@@ -209,6 +233,8 @@
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
+
+	const action = customAction ? customAction : () => {};
 </script>
 
 <div class="flex">
@@ -221,6 +247,8 @@
 		{disabled}
 		{title}
 		class={buttonClass}
+		aria-label={ariaLabel}
+		{id}
 		on:click
 		on:change
 		on:keydown
@@ -232,6 +260,8 @@
 		on:mouseleave
 		role="button"
 		tabindex="0"
+		use:action
+		{...actionProps}
 	>
 		<!-- contents of the button -->
 		<slot />

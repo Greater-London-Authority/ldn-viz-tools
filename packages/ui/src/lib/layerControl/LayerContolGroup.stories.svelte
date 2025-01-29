@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-	import LayerControlGroup from './LayerControlGroup.svelte';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import LayerControlGroup from './LayerControlGroup.svelte';
 
 	export const meta = {
 		title: 'Ui/LayerControlGroup',
@@ -31,13 +31,6 @@
 		{
 			id: 'underground',
 			label: 'Underground stations',
-			hideOpacityControl: true,
-			hideSizeControl: true
-		},
-		{
-			id: 'taxi',
-			label: 'Taxi ranks',
-			disabled: true,
 			hideOpacityControl: true,
 			hideSizeControl: true
 		}
@@ -75,34 +68,41 @@
 			visible: true,
 			opacity: 1.0,
 			size: 1
-		},
-		taxi: {
-			color: 'firebrick',
-			visible: true,
-			opacity: 1.0,
-			size: 1
 		}
 	};
 </script>
 
 <Template let:args>
 	<LayerControlGroup bind:options={optionsForGroup} bind:state={state1} {...args} />
-	<pre>{JSON.stringify(state1, null, 2)}</pre>
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Template>
 
 <Story name="Default" source />
 
 <Story name="Hide controls size and opacity controls">
-	<LayerControlGroup
-		bind:options={optionsForGroup}
-		bind:state={state1}
-		hideOpacityControl
-		hideSizeControl
-	/>
-	<pre>{JSON.stringify(state1, null, 2)}</pre>
+	<div class="space-y-4">
+		<LayerControlGroup
+			bind:options={optionsForGroup}
+			bind:state={state1}
+			hideOpacityControl
+			hideSizeControl
+		/>
+	</div>
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Story>
 
 <Story name="Hide controls size and opacity controls for some layers">
 	<LayerControlGroup bind:options={optionsForGroup2} bind:state={state2} />
-	<pre>{JSON.stringify(state2, null, 2)}</pre>
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
+<Story name="In small text size context">
+	<div class="text-sm">
+		<LayerControlGroup
+			bind:options={optionsForGroup}
+			bind:state={state1}
+			hideOpacityControl
+			hideSizeControl
+		/>
+	</div>
 </Story>
