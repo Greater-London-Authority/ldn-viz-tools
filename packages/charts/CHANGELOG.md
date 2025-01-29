@@ -1,5 +1,29 @@
 # ldn-viz-tools-charts
 
+## 5.0.0
+
+### Major Changes
+
+- 028ad2f: Add currentTheme store to ui package and use in chart examples. Implement accessibility improvements in charts and illustrate withc line chart example
+
+### Minor Changes
+
+- 028ad2f: ADDED: ARIA attributes and global ariaHidden for accessibility
+  ADDED: chartDescription modal to Footer for use in chart and chartDescription for accessibility to ChartContainer
+
+### Patch Changes
+
+- Updated dependencies [028ad2f]
+- Updated dependencies [4556f05]
+- Updated dependencies [5c06c36]
+- Updated dependencies [f5de052]
+- Updated dependencies [7487cd8]
+- Updated dependencies [0ea3bc4]
+- Updated dependencies [7dc2bfb]
+- Updated dependencies [028ad2f]
+  - @ldn-viz/ui@15.3.0
+  - @ldn-viz/utils@1.1.0
+
 ## 4.0.0
 
 ### Major Changes
