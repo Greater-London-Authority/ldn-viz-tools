@@ -13,7 +13,7 @@
 	import { floatingContent, floatingRef } from './tooltip';
 
 	import { setContext } from 'svelte';
-	import Trigger from './Trigger.svelte';
+	import Trigger from '../trigger/Trigger.svelte';
 
 	/**
 	 * text that appears in the tooltip target, next to the icon

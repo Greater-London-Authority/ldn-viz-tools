@@ -15,7 +15,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
-	import Trigger from '../tooltip/Trigger.svelte';
+	import Trigger from '../trigger/Trigger.svelte';
 	import { classNames } from '../utils/classNames';
 
 	/**
