@@ -80,12 +80,13 @@
 	export let title: ButtonProps['title'] = '';
 
 	/**
-	 * MeltUI Action passed down from MultipleActionButton
+	 * MeltUI actions passed down from Trigger
 	 */
 	export let customAction: ButtonProps['customAction'] = undefined;
+	const action = customAction ? customAction : () => {};
 
 	/**
-	 * MeltUI action props passed down from MultipleActionButton, which include ARIA attributes and tabindex.
+	 * MeltUI action props passed down from Trigger, which include ARIA attributes and tabindex.
 	 */
 	export let actionProps = {};
 
@@ -235,8 +236,6 @@
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
-
-	const action = customAction ? customAction : () => {};
 </script>
 
 <div class="flex">
