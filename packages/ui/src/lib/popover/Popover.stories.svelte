@@ -23,13 +23,13 @@
 <Story name="Default" source />
 
 <Story name="No title" source>
-	<Popover>
+	<Popover triggerClass="!p-0">
 		<svelte:fragment>Some text explaining this metric...</svelte:fragment>
 	</Popover>
 </Story>
 
 <Story name="Custom hint text" source>
-	<Popover hintLabel="Click for more information!">
+	<Popover triggerClass="!p-0" hintLabel="Click for more information!">
 		<svelte:fragment slot="title">Metric note</svelte:fragment>
 
 		<svelte:fragment>Some text explaining this metric...</svelte:fragment>
@@ -37,13 +37,21 @@
 </Story>
 
 <Story name="Custom trigger" source>
-	<Popover hintLabel="Click for more information!">
-		<svelte:fragment slot="hint"
-			><Button>Click here to see popover contents</Button></svelte:fragment
-		>
+	<Popover triggerVariant="solid" triggerEmphasis="primary">
+		<svelte:fragment slot="hint">Click here to see popover contents</svelte:fragment>
 
 		<svelte:fragment slot="title">Metric note</svelte:fragment>
 
 		<svelte:fragment>Some text explaining this metric...</svelte:fragment>
 	</Popover>
+</Story>
+
+<Story name="With body text" source>
+	<div class="inline-flex">
+		<p>You can find&nbsp;</p>
+		<Popover triggerClass="!p-0">
+			<svelte:fragment slot="title">Metric note</svelte:fragment>
+			<svelte:fragment>Some text explaining this metric...</svelte:fragment>
+		</Popover>
+	</div>
 </Story>
