@@ -39,7 +39,7 @@
 	/**
 	 * object containing user-controlled properties of the layer:
 	 * * colorName (string) - the name of the color token in our design system (e,g, `data.categorical.yellow`)
-	 *  * color (string) - the actual color, as a hexstring (e.g., fff200)
+	 *  * color (string) - the actual color, as a hexstring (e.g., `#fff200`)
 	 * * visibility (boolean)
 	 * * opacity (number between 0 and 1, inclusive)
 	 * * size (number)
