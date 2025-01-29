@@ -67,7 +67,8 @@
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 	import MapLayerSource from '../mapLayerSource/MapLayerSource.svelte';
 	import testData from '../testData.json';
 
