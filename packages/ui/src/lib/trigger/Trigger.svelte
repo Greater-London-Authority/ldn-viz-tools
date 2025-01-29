@@ -2,9 +2,7 @@
 	import { InformationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { getContext } from 'svelte';
-	import Button from '../button/Button.svelte';
-	import { floatingRef } from '../tooltip/tooltip.js';
+	import Button, { type ButtonProps } from '../button/Button.svelte';
 
 	/**
 	 * text that appears in the tooltip target, next to the icon
@@ -16,32 +14,36 @@
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
-	const { triggerMouseEnter, triggerMouseLeave, triggerClick } = getContext('triggerFuncs');
-	let element;
+	/**
+	 * MeltUI action passed down from MultipleActionButton, Popover, Tooltip for use in `Button`.
+	 */
+	export let customAction: ButtonProps['customAction'];
+
+	/**
+	 * MeltUI action props passed down from MultipleActionButton, Popover, Tooltip, which include ARIA attributes and tabindex.
+	 */
+	export let actionProps;
 </script>
 
-<Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
-	<span
-		use:floatingRef
-		bind:this={element}
-		on:mouseenter={() => triggerMouseEnter(element)}
-		on:mouseleave|stopPropagation={triggerMouseLeave}
-		on:click={triggerClick}
-		role="tooltip"
-		class="inline-flex items-center"
-	>
-		{#if $$slots.hint}
-			<!-- if present, replaces the default `hintLabel` and icon  -->
-			<slot name="hint" />
-		{:else}
-			{hintLabel}
+<Button
+	variant="text"
+	size={hintSize}
+	class="!p-0"
+	emphasis="secondary"
+	{customAction}
+	{actionProps}
+>
+	{#if $$slots.hint}
+		<!-- if present, replaces the default `hintLabel` and icon  -->
+		<slot name="hint" />
+	{:else}
+		{hintLabel}
 
-			<Icon
-				src={InformationCircle}
-				theme="mini"
-				class="w-[18px] h-[18px] ml-0.5"
-				aria-hidden="true"
-			/>
-		{/if}
-	</span>
+		<Icon
+			src={InformationCircle}
+			theme="mini"
+			class="w-[18px] h-[18px] ml-0.5"
+			aria-hidden="true"
+		/>
+	{/if}
 </Button>
