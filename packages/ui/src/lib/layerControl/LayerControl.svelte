@@ -39,21 +39,16 @@
 	/**
 	 * object containing user-controlled properties of the layer:
 	 * * colorName (string) - the name of the color token in our design system (e,g, `data.categorical.yellow`)
-	 *  * color (string) - the actual color, as a hexstring (e.g., fff200)
 	 * * visibility (boolean)
 	 * * opacity (number between 0 and 1, inclusive)
 	 * * size (number)
-	 *
-	 * Note that the `color` is automatically derived from the `colorName`, and will update if the theme is switched between light and dark.
 	 */
 	export let state: {
-		color: string;
 		colorName: string;
 		visible: boolean;
 		opacity: number;
 		size?: number;
 	} = {
-		color: '#9e0059',
 		colorName: 'data.categorical.darkpink',
 		visible: true,
 		opacity: 1.0,
