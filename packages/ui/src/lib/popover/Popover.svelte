@@ -54,14 +54,23 @@
 	 */
 	export let openStore: Writable<boolean> | undefined = undefined;
 	$: openStore = open;
+
+	/**
+	 * Allows you to customise trigger button styling. Defaults to
+	 * styling trigger button as a text button without padding.
+	 * `triggerClass` exists to allow you to override
+	 */
+	export let triggerVariant: ButtonProps['variant'] = 'text';
+	export let triggerEmphasis: ButtonProps['emphasis'] = 'secondary';
+	export let triggerClass: string = '';
 </script>
 
 <!-- TODO: as this button wraps the hint slot any slotted item inherits button styles (color etc) This should be refactored to be more generic -->
 <Button
-	variant="text"
+	variant={triggerVariant}
 	size={hintSize}
-	class="!p-0"
-	emphasis="secondary"
+	class={triggerClass}
+	emphasis={triggerEmphasis}
 	customAction={$trigger.action}
 	actionProps={$trigger}
 >
