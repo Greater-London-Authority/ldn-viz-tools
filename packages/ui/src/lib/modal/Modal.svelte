@@ -21,7 +21,14 @@
 	export let isOpen = writable(false);
 
 	const {
-		elements: { portalled, overlay, content, title: meltTitle, description: meltDescripton, close },
+		elements: {
+			portalled,
+			overlay,
+			content,
+			title: meltTitle,
+			description: meltDescription,
+			close
+		},
 		states: { open }
 	} = createDialog({ open: isOpen });
 
@@ -106,7 +113,7 @@
 				<div class="overflow-y-auto">
 					<div class="p-4">
 						{#if description}
-							<div {...$meltDescripton} use:$meltDescripton.action>{description}</div>
+							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
 						{/if}
 
 						{#if hasChildren}

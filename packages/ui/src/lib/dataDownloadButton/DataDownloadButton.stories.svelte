@@ -55,7 +55,7 @@
 	<DataDownloadButton {data} filename="download" />
 </Story>
 
-<Story name="Wit Icon before label">
+<Story name="With Icon before label">
 	<DataDownloadButton {data} filename="download">
 		<Icon
 			src={ArrowDownTray}
@@ -137,4 +137,16 @@
 			slot="afterLabel"
 		/>
 	</DataDownloadButton>
+</Story>
+
+<Story name="Data obtained from function">
+	<DataDownloadButton
+		dataFn={() =>
+			Array.from({ length: 10 }, () => ({
+				a: Math.floor(Math.random() * 100),
+				b: Math.floor(Math.random() * 100)
+			}))}
+		filename="random data"
+		formats={['JSON']}
+	></DataDownloadButton>
 </Story>

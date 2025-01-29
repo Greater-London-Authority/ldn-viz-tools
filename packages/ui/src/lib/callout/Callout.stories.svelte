@@ -5,6 +5,13 @@
 		title: 'Ui/Callout',
 		component: Callout,
 		argTypes: {
+			id: {
+				control: { type: 'text' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
+			},
 			status: {
 				options: ['notice', 'success', 'warning', 'error'],
 				control: { type: 'select' }
@@ -57,7 +64,7 @@
 
 			<div slot="body">
 				<p>
-					Click on the button to return home. If the error persistes please <a
+					Click on the button to return home. If the error persists please <a
 						href="mailto:some-email-address@example.com"
 						class="underline hover:no-underline">Report it here</a
 					>
@@ -73,7 +80,7 @@
 
 			<div slot="body">
 				<p>
-					<span class="font-bold">DO NOT</span> Click on the button!. If the error persistes please
+					<span class="font-bold">DO NOT</span> Click on the button!. If the error persists please
 					<a href="mailto:some-email-address@example.com" class="underline hover:no-underline"
 						>Report it here</a
 					>
@@ -93,7 +100,7 @@
 
 		<div slot="body">
 			<p>
-				Click on the button to return home. If the error persistes please <a
+				Click on the button to return home. If the error persists please <a
 					href="mailto:some-email-address@example.com"
 					class="underline hover:no-underline">Report it here</a
 				>
@@ -102,6 +109,33 @@
 
 		<div slot="more">
 			<Button href={`/`}>Take me home</Button>
+		</div>
+	</Callout>
+</Story>
+
+<!-- When there is no heading in the callout (that is, no title slot in use), you must define an
+`ariaTitle` for screen-reader use.
+
+```html
+	<Callout ariaTitle="Learn about chart methodology">
+		<div slot="body">
+			<p>
+				You can find out more about <a href="www.example.com" class="underline hover:no-underline"
+					>the chart methodology</a
+				>.
+			</p>
+		</div>
+	</Callout>
+```
+-->
+<Story name="No title" source>
+	<Callout ariaTitle="Learn about chart methodology">
+		<div slot="body">
+			<p>
+				You can find out more about <a href="www.example.com" class="underline hover:no-underline"
+					>the chart methodology</a
+				>.
+			</p>
 		</div>
 	</Callout>
 </Story>

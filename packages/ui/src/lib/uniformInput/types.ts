@@ -25,7 +25,7 @@ export interface InputOption {
 }
 
 // It would be better to create types for each input type
-// and specify UniformInputProps as being oneof those types.
+// and specify UniformInputProps as being one of those types.
 // You might be able to specify some sets of types as a single
 // one, e.g. Text, URL, Email, etc.
 //

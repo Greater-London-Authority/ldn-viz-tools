@@ -15,6 +15,7 @@
 	import { InformationCircle, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	import type { Writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 
 	const {
@@ -34,8 +35,15 @@
 	 * text size for the tooltip target
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
+
+	/**
+	 * Store controlling whether popover is open.
+	 */
+	export let openStore: Writable<boolean> | undefined = undefined;
+	$: openStore = open;
 </script>
 
+<!-- TODO: as this button wraps the hint slot any slotted item inherits button styles (color etc) This should be refactored to be more generic -->
 <Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
 	<span {...$trigger} use:trigger class="inline-flex items-center">
 		{#if $$slots.hint}
@@ -59,7 +67,7 @@
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
-		class="z-10 w-60 bg-color-container-level-1 p-4 shadow"
+		class="z-50 w-60 bg-color-container-level-1 p-4 shadow"
 	>
 		<div {...$arrow} use:arrow />
 

@@ -164,7 +164,7 @@ It is very similar to the Ordnance Survey's [OS_VTS_3857_Greyscale.json](https:/
 
 <!--
 This was created by the Ordnance Survey, inspired by Mike Brondbjerg's dark gray theme with muted buildings.
-It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) sylesheet.
+It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet.
 -->
 <Story name="Dark OS Basemap">
 	<div class="w-[100dvw] h-[100dvh]">

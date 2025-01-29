@@ -27,6 +27,11 @@
 	<MapControlGroup {...args} />
 </Template>
 
+<!--
+Group and position map controls using `<MapControlGroup position="...">`.
+The named layout positions are shown around the edges of this map.
+If using typescript you can import the `MapControlGroupPositions`enum.
+-->
 <Story name="Positioning labels">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
@@ -41,24 +46,11 @@
 					</p>
 				</MapControlGroup>
 			{/each}
-
-			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
-			>
-				<p>
-					Group and position map controls using
-					<code>{'<MapControlGroup position="...">'}</code>.
-				</p>
-
-				<p>
-					The named layout positions are shown around the edges of this map. If using typescript you
-					can import the <code>MapControlGroupPositions</code> enum.
-				</p>
-			</div>
 		</Map>
 	</div>
 </Story>
 
+<!-- The alignment of elements within a `MapControlGroup` depends on its position. -->
 <Story name="Positioning controls">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
@@ -78,18 +70,14 @@
 					</MapControlGroup>
 				{/if}
 			{/each}
-
-			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
-			>
-				<p>
-					The alignment of elements within a <code>MapControlGroup</code> depends on its position.
-				</p>
-			</div>
 		</Map>
 	</div>
 </Story>
 
+<!--
+Typically, controls on the left are standard for every map, whereas controls on the right are context or map dependent.
+On small devices most controls will hide themselves.
+-->
 <Story name="Standard Layout">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
@@ -97,14 +85,6 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<div
-				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary p-4 space-y-8"
-			>
-				<p class="w-52">⮜ Controls on the left are standard for every map</p>
-				<p class="ml-auto w-52">Those on the right are context or map dependent ⮞</p>
-				<p class="text-center">On small devices most controls will hide themselves.</p>
-			</div>
-
 			<MapControlGroup position="TopLeft">
 				<MapControlLocationSearch
 					adapter={new MapGeocoderAdapterMapBox(

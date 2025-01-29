@@ -1,5 +1,54 @@
 # ldn-viz-tools-ui
 
+## 15.3.0
+
+### Minor Changes
+
+- 028ad2f: ADDED: `randomId` generator to `@ldn-viz/ui` exports
+- 4556f05: ADDED: ARIA label to `Callout` component for accessibility
+- f5de052: FIXED: updated `Checkbox` component to use explicit input labels to fix duplicate announcements by screen reader
+- 7487cd8: FIXED: accessibility issues in `MultipleActionButton` component
+- 7487cd8: ADDED: pass Melt-UI actions down to `Button` component for proper ARIA semantics
+- 028ad2f: ADDED: `currentTheme` store to `ui` package and use in `chart` examples. Implement accessibility improvements in charts and illustrate with line chart example
+
+### Patch Changes
+
+- 7dc2bfb: ADDED: alt text to logo components
+- Updated dependencies [5c06c36]
+- Updated dependencies [0ea3bc4]
+  - @ldn-viz/utils@1.1.0
+
+## 15.2.2
+
+### Patch Changes
+
+- 33ce5a9: CHANGED: made color chip in `LayerControl` round by applying `rounded-full` class
+- d588473: CHANGED: removed hard-coded border color of "Show all" checkbox for `LayerControlGroup`
+
+## 15.2.1
+
+### Patch Changes
+
+- bcb194c: FIXED: increase z-index of Popover to ensure it renders above sidebar
+
+## 15.2.0
+
+### Minor Changes
+
+- c145cf7: CHANGED: `ColorLegend` now accepts a `reverse` prop, allowing the direction of the legend to flipped left-right
+- c08ce0a: ADDED: as an alternative to providing `DataDownloadButton` with a prop containing `data`, you can provide a function
+  that returns an array of data
+- 5f566bc: CHANGED: switch from `html2canvas` to `html-to-image` in the `ImageDownloadButton`
+- c1d600c: CHANGED: changed the appearance of the `LayerControl` and its sub-controls (`OpacityControl`, `ColorPicker`, `ResizeControl`)
+- 0056c95: CHANGED: use `Popover` component in `ColorPicker`/`OpacityControl`/`ResizeControl`, rather than duplicating implementation
+
+### Patch Changes
+
+- 7d12227: FIXED: use `<button>` element rather than `<div>` for some clickable elements
+- 2e42c23: FIXED: prevent Chrome drawing a second clear icon in `Geocoder` when used in a map
+- 721774d: FIXED: include `name` in the `id` of `RadioButtonSolid`, preventing interference with different
+  `RadioButtonGroupSolid`s that include options with the same `id`.
+
 ## 15.1.0
 
 ### Minor Changes
@@ -12,7 +61,7 @@
 
 ### Patch Changes
 
-- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
 - e397e35: FIXED: fix spacing between `RadioButton`s and `Checkbox`es when inside a `SidebarSection`
 - 68780ea: FIXED: fix bug that caused `AppShell` to always acts as if the `startOpen` prop was `false`
 

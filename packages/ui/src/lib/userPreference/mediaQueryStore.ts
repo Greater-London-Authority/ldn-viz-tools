@@ -2,7 +2,7 @@ import { BROWSER } from 'esm-env';
 import { writable } from 'svelte/store';
 
 export const mediaQueryStore = (mediaQueryString: string) => {
-	const initialiseUserPrefListner = (mediaQuery: MediaQueryList, callback: () => void) => {
+	const initialiseUserPrefListener = (mediaQuery: MediaQueryList, callback: () => void) => {
 		if (mediaQuery.addEventListener) {
 			mediaQuery.addEventListener('change', callback);
 		} else {
@@ -10,7 +10,7 @@ export const mediaQueryStore = (mediaQueryString: string) => {
 		}
 	};
 
-	const destroyUserPrefListner = (mediaQuery: MediaQueryList, callback: () => void) => {
+	const destroyUserPrefListener = (mediaQuery: MediaQueryList, callback: () => void) => {
 		if (mediaQuery.removeEventListener) {
 			mediaQuery.removeEventListener('change', callback);
 		} else {
@@ -24,9 +24,9 @@ export const mediaQueryStore = (mediaQueryString: string) => {
 
 			set(mql.matches);
 			const onchange = () => set(mql.matches);
-			initialiseUserPrefListner(mql, onchange);
+			initialiseUserPrefListener(mql, onchange);
 			return () => {
-				destroyUserPrefListner(mql, onchange);
+				destroyUserPrefListener(mql, onchange);
 			};
 		}
 	});

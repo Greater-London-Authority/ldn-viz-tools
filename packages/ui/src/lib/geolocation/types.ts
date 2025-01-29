@@ -28,7 +28,7 @@ export interface GeolocationNamed extends GeolocationUnamed {
 // Geolocation represents either a named or unamed location.
 export type Geolocation = GeolocationUnamed | GeolocationNamed;
 
-// GeolocationSearchError represents an error thrown by a geolocation or
+// GeolocationSearchError represents an error thrown by a geolocation
 // or geolocator search.
 export type GeolocationSearchError = Error | GeolocationPositionError;
 

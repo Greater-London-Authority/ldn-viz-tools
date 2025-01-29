@@ -31,7 +31,7 @@
 
 	/**
 	 * Disables initialisation of the map on mount. This is most often used
-	 * to avoid uneeded map rendering during development of non-map application
+	 * to avoid un-needed map rendering during development of non-map application
 	 * elements.
 	 */
 	export let disabled = false;
@@ -129,6 +129,7 @@
 		style: identifyStyle()
 	};
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: $currentThemeMode, darkStyle, lightStyle, updateMapOptions();
 </script>
 

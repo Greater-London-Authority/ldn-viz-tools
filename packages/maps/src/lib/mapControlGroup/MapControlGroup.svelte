@@ -36,7 +36,7 @@
 	 */
 
 	/**
-	 * Position of the group over the map. Avialable positions defined by
+	 * Position of the group over the map. Available positions defined by
 	 * `MapControlGroupPositions` enum type.
 	 */
 	export let position: keyof typeof MapControlGroupPositions = MapControlGroupPositions.TopLeft;
