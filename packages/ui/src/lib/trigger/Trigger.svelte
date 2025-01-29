@@ -15,6 +15,16 @@
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
 	/**
+	 * Selects which family of styles should be applied to the Trigger button.
+	 */
+	export let variant: ButtonProps['variant'] = 'text';
+
+	/**
+	 * Determines how much visual emphasis is placed on the Trigger button.
+	 */
+	export let emphasis: ButtonProps['emphasis'] = 'secondary';
+
+	/**
 	 * MeltUI action passed down from MultipleActionButton, Popover, Tooltip for use in `Button`.
 	 */
 	export let customAction: ButtonProps['customAction'];
@@ -25,14 +35,7 @@
 	export let actionProps;
 </script>
 
-<Button
-	variant="text"
-	size={hintSize}
-	class="!p-0"
-	emphasis="secondary"
-	{customAction}
-	{actionProps}
->
+<Button size={hintSize} class={$$props.class} {variant} {emphasis} {customAction} {actionProps}>
 	{#if $$slots.hint}
 		<!-- if present, replaces the default `hintLabel` and icon  -->
 		<slot name="hint" />

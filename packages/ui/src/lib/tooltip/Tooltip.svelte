@@ -7,6 +7,8 @@
 	 * @component
 	 */
 
+	import type { ButtonProps } from '$lib/button/Button.svelte';
+	import type { PlacementOptions } from '$lib/utils/placementOptions';
 	import { createTooltip } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import Trigger from '../trigger/Trigger.svelte';
@@ -21,18 +23,48 @@
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
+	/**
+	 * Allows you to set custom styling on Trigger button, e.g. '!p-0' to remove all padding for an inline text button.
+	 */
+	export let triggerClass: string = '';
+
+	/**
+	 * Selects which family of styles should be applied to the Trigger button.
+	 */
+	export let triggerVariant: ButtonProps['variant'] = 'text';
+
+	/**
+	 * Determines how much visual emphasis is placed on the Trigger button.
+	 */
+	export let triggerEmphasis: ButtonProps['emphasis'] = 'secondary';
+
+	/**
+	 * Determines the placement of the tooltip, relative to Trigger
+	 */
+	export let placement: PlacementOptions = 'top';
+
 	const {
 		elements: { trigger, content, arrow },
 		states: { open }
 	} = createTooltip({
-		positioning: { placement: 'top' },
+		positioning: { placement },
 		openDelay: 0,
 		closeDelay: 0,
 		closeOnPointerDown: false
 	});
 </script>
 
-<Trigger {hintSize} {hintLabel} customAction={trigger} actionProps={$trigger} />
+<Trigger
+	{hintSize}
+	{hintLabel}
+	class={triggerClass}
+	variant={triggerVariant}
+	emphasis={triggerEmphasis}
+	customAction={trigger}
+	actionProps={$trigger}
+>
+	<slot name="hint" />
+</Trigger>
 
 {#if $open}
 	<div
