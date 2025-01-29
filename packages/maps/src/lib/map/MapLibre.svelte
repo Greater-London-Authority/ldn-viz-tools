@@ -95,6 +95,8 @@
 	// client width and height because on:resize won't always trigger refresh.
 	let clientWidth = 0;
 	let clientHeight = 0;
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: clientWidth && clientHeight && maplibre?.resize();
 </script>
 
