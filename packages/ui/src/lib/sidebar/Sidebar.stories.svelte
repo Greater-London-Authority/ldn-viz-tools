@@ -47,6 +47,7 @@
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Select from '../select/Select.svelte';
+	import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher.svelte';
 	import SidebarHint from './elements/sidebarHint/SidebarHint.svelte';
 
 	let selectedValue = 'markers';
@@ -94,10 +95,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
@@ -150,10 +154,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
@@ -347,10 +354,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
