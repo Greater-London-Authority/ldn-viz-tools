@@ -16,7 +16,19 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import type { Writable } from 'svelte/store';
-	import Button from '../button/Button.svelte';
+	import Button, { type ButtonProps } from '../button/Button.svelte';
+
+	/**
+	 * Defaults to false, so when Popover opens, the first interactive element is focused.
+	 *
+	 * For shorter content where the first interactive element is the close button, set to
+	 * true, to avoid screen readers skipping over the content completely.
+	 *
+	 * For longer content, where focusing the first interactive element means the beginning
+	 * of content scrolls out of view, a `tabindex='-1'` should be added to the title or
+	 * first paragraph to initially focus that element.
+	 */
+	export let disableFocusTrap: boolean = false;
 
 	const {
 		elements: { trigger, content, arrow, close },
@@ -24,7 +36,7 @@
 	} = createPopover({
 		forceVisible: true,
 		positioning: { placement: 'top' },
-		disableFocusTrap: true
+		disableFocusTrap
 	});
 
 	/**
