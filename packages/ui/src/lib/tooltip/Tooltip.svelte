@@ -7,12 +7,8 @@
 	 * @component
 	 */
 
-	import { arrow } from 'svelte-floating-ui';
-	import { flip, offset, shift } from 'svelte-floating-ui/dom';
-	import { writable, type Writable } from 'svelte/store';
-	import { floatingContent, floatingRef } from './tooltip';
-
-	import { setContext } from 'svelte';
+	import { createTooltip } from '@melt-ui/svelte';
+	import { fade } from 'svelte/transition';
 	import Trigger from '../trigger/Trigger.svelte';
 
 	/**
@@ -25,52 +21,29 @@
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
-	let showTooltip = false;
-
-	const arrowRef: Writable<HTMLElement> = writable();
-	let dynamicOptions = {};
-	$: if (showTooltip) {
-		dynamicOptions = {
-			middleware: [offset(10), flip(), shift(), arrow({ element: arrowRef })],
-			onComputed({ placement, middlewareData }: { placement: string; middlewareData: any }) {
-				const { x, y } = middlewareData.arrow || {};
-				const staticSide = {
-					top: 'bottom',
-					right: 'left',
-					bottom: 'top',
-					left: 'right'
-				}[placement.split('-')[0]];
-
-				// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-				$arrowRef &&
-					Object.assign($arrowRef.style, {
-						left: x != null ? `${x}px` : '',
-						top: y != null ? `${y}px` : '',
-						[staticSide!.toString()]: '-8px'
-					});
-			}
-		};
-	}
-
-	setContext('triggerFuncs', {
-		triggerMouseEnter: (element) => {
-			showTooltip = true;
-			floatingRef(element);
-		},
-		triggerMouseLeave: () => (showTooltip = false)
+	const {
+		elements: { trigger, content, arrow },
+		states: { open }
+	} = createTooltip({
+		positioning: { placement: 'top' },
+		openDelay: 0,
+		closeDelay: 0,
+		closeOnPointerDown: false
 	});
 </script>
 
-<Trigger {hintSize} {hintLabel} />
+<Trigger {hintSize} {hintLabel} customAction={trigger} actionProps={$trigger} />
 
-{#if showTooltip}
+{#if $open}
 	<div
+		{...$content}
+		use:content
+		transition:fade={{ duration: 100 }}
 		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50"
-		use:floatingContent={dynamicOptions}
 	>
 		<!-- the text that will be displayed in the tooltip -->
 		<slot />
 
-		<div class="absolute bg-color-container-level-1 rotate-45 w-4 h-4" bind:this={$arrowRef} />
+		<div {...$arrow} use:arrow />
 	</div>
 {/if}
