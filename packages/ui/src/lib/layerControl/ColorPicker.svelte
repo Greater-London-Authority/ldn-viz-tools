@@ -1,22 +1,44 @@
+<script lang="ts" context="module">
+	import { colorToRGBArray } from '@ldn-viz/utils';
+
+	import { currentThemeMode } from '../themeSwitcher/themeStore';
+	import { get } from 'svelte/store';
+
+	export const colorNameToColor = (colorName: string, theme: any) => {
+		let val = theme.color;
+		for (const part of colorName.split('.')) {
+			val = val[part];
+			if (!val) {
+				console.error(`Color name "${colorName}" not defined in theme "${get(currentThemeMode)}"`);
+			}
+		}
+		return val as unknown as string;
+	};
+
+	export const colorNameToRGBArray = (colorName: string, theme: any) =>
+		colorToRGBArray(colorNameToColor(colorName, theme));
+</script>
+
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 	import Popover from '../popover/Popover.svelte';
 
-	export let color = '#EE266D';
+	import { currentTheme } from '../themeSwitcher/themeStore';
 
-	const colors = [
-		'#EE266D',
-		'#00AEEF',
-		'#008D48',
-		'#FFF200',
-		'#00AEEF',
-		'#E0001B',
-		'#9E0059',
-		'#00577D',
-		'#DCA000',
-		'#792C89',
-		'#353D42',
-		'#000000'
+	export let colorName = 'data.categorical.darkpink';
+
+	const colorNames = [
+		'data.categorical.blue',
+		'data.categorical.darkpink',
+		'data.categorical.pink',
+		'data.categorical.red',
+		'data.categorical.yellow',
+		'data.categorical.green',
+		'data.categorical.purple',
+		'data.categorical.orange',
+		'data.categorical.turquoise',
+		'data.neutral.0',
+		'data.neutral.1'
 	];
 
 	let openStore: Writable<boolean>;
@@ -24,7 +46,10 @@
 
 <Popover bind:openStore>
 	<svelte:fragment slot="hint">
-		<div class="w-5 h-5 relative border rounded-full" style:background={color}></div>
+		<div
+			class="w-5 h-5 relative border rounded-full"
+			style:background={colorNameToColor(colorName, $currentTheme)}
+		></div>
 	</svelte:fragment>
 
 	<svelte:fragment slot="title">Color</svelte:fragment>
@@ -32,12 +57,12 @@
 	<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
 
 	<div class="flex flex-wrap gap-2">
-		{#each colors as colorOption}
+		{#each colorNames as colorOption}
 			<button
 				class="w-6 h-6 rounded-full"
-				style:background={colorOption}
+				style:background={colorNameToColor(colorOption, $currentTheme)}
 				on:click={() => {
-					color = colorOption;
+					colorName = colorOption;
 					$openStore = false;
 				}}
 			/>

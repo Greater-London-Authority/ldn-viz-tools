@@ -9,19 +9,25 @@
 </script>
 
 <script lang="ts">
+	import Theme from '../themeSwitcher/Theme.svelte';
+	import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher.svelte';
+	import { currentTheme } from '../themeSwitcher/themeStore';
+
+	import { colorNameToColor, colorNameToRGBArray } from './ColorPicker.svelte';
+
 	let layerStates = {
 		boroughs: {
-			color: '#ffcc00',
+			colorName: 'data.categorical.yellow',
 			visible: true,
 			opacity: 1.0
 		},
 		imd: {
-			color: '#DCA000',
+			colorName: 'data.categorical.red',
 			visible: true,
 			opacity: 1.0
 		},
 		fuel_poverty: {
-			color: '#E0001B',
+			colorName: 'data.categorical.orange',
 			visible: true,
 			opacity: 1.0
 		}
@@ -31,10 +37,20 @@
 </script>
 
 <Template let:args>
+	<Theme />
+	<ThemeSwitcher />
+
 	<div class="w-96">
 		<LayerControl bind:state {...args} />
 	</div>
 	<pre class="mt-4 text-xs">{JSON.stringify(state, null, 2)}</pre>
+
+	<p>
+		Color is: {colorNameToColor(state.colorName, $currentTheme)} or [{colorNameToRGBArray(
+			state.colorName,
+			$currentTheme
+		)}]
+	</p>
 </Template>
 
 <Story name="Default" source />
