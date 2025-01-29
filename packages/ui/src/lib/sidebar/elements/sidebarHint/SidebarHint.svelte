@@ -5,7 +5,7 @@
 	 */
 
 	import Modal from '../../../modal/Modal.svelte';
-  import Popover from '../../../popover/Popover.svelte';
+	import Popover from '../../../popover/Popover.svelte';
 	import Tooltip from '../../../tooltip/Tooltip.svelte';
 
 	/**
