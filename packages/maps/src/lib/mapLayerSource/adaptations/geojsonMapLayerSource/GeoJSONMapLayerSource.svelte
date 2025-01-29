@@ -80,6 +80,7 @@
 		loaded = true;
 
 		if (!url) {
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 			onLoad && onLoad({ ...ctx, geojson: initialData });
 			return;
 		}
@@ -100,6 +101,7 @@
 				return geojson;
 			})
 			.then((geojson) => {
+				// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 				onLoad && onLoad({ ...ctx, geojson });
 				return geojson;
 			})

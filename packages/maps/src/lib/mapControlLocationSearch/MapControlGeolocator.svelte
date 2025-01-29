@@ -43,6 +43,8 @@
 	};
 
 	let showClearButton = false;
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: !showClearButton && clearFeature('geolocator', $mapStore);
 </script>
 

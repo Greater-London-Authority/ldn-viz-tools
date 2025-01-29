@@ -122,6 +122,8 @@
 		}
 		col.column.renderer = aggregatedRenderer[selectedColumnEncoding];
 	};
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: selectedColumnEncoding && setColumnEncoding();
 </script>
 
