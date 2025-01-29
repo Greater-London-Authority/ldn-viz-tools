@@ -20,7 +20,9 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
-		customAction: ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>) | undefined;
+		customAction:
+			| ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown' | 'click'>)
+			| undefined;
 	}
 
 	type ButtonStyle = Record<
