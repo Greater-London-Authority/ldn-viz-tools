@@ -238,33 +238,31 @@
 	);
 </script>
 
-<div class="flex">
-	<svelte:element
-		this={href ? 'a' : 'button'}
-		type={href ? undefined : type}
-		target={href && openInNewTab ? '_blank' : undefined}
-		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
-		{href}
-		{disabled}
-		{title}
-		class={buttonClass}
-		aria-label={ariaLabel}
-		{id}
-		on:click
-		on:change
-		on:keydown
-		on:keyup
-		on:touchstart
-		on:touchend
-		on:touchcancel
-		on:mouseenter
-		on:mouseleave
-		role="button"
-		tabindex="0"
-		use:action
-		{...actionProps}
-	>
-		<!-- contents of the button -->
-		<slot />
-	</svelte:element>
-</div>
+<svelte:element
+	this={href ? 'a' : 'button'}
+	type={href ? undefined : type}
+	target={href && openInNewTab ? '_blank' : undefined}
+	rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
+	{href}
+	{disabled}
+	{title}
+	class={buttonClass}
+	aria-label={ariaLabel}
+	{id}
+	on:click
+	on:change
+	on:keydown
+	on:keyup
+	on:touchstart
+	on:touchend
+	on:touchcancel
+	on:mouseenter
+	on:mouseleave
+	role="button"
+	tabindex="0"
+	use:action
+	{...actionProps}
+>
+	<!-- contents of the button -->
+	<slot />
+</svelte:element>
