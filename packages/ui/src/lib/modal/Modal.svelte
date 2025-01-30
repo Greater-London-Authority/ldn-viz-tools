@@ -8,8 +8,7 @@
 	 * @component
 	 */
 
-
-	import { createDialog } from '@melt-ui/svelte';
+	import { createDialog, type FocusProp } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { writable } from 'svelte/store';
@@ -22,8 +21,14 @@
 	 */
 	export let isOpen = writable(false);
 
+	const customOpenFocus: FocusProp = () => {
+		const customElToFocus = document.getElementById($content.id);
+		return customElToFocus;
+	};
+
 	const {
 		elements: {
+			trigger,
 			portalled,
 			overlay,
 			content,
@@ -32,7 +37,7 @@
 			close
 		},
 		states: { open }
-	} = createDialog({ open: isOpen });
+	} = createDialog({ open: isOpen, openFocus: customOpenFocus });
 
 	/**
 	 * title that appears at the top of the modal
