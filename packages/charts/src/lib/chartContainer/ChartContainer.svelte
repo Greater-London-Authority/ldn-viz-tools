@@ -96,6 +96,10 @@
 </script>
 
 <div class={`chart-container ${chartWidth}`} bind:this={chartToCapture} id="captureElement">
+	{#if alt}
+		<p class="sr-only">{alt}</p>
+	{/if}
+
 	{#if title || subTitle}
 		<div class="mb-4">
 			{#if title}
@@ -105,10 +109,6 @@
 				<SubTitle>{subTitle}</SubTitle>
 			{/if}
 		</div>
-	{/if}
-
-	{#if alt}
-		<p class="sr-only">{alt}</p>
 	{/if}
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->

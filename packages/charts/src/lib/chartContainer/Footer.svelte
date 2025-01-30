@@ -23,7 +23,7 @@
 			{#if source}<li><span class="font-bold mr-1">Source:</span>{source}</li>{/if}
 			{#if note}<li><span class="font-bold mr-1">Note:</span>{note}</li>{/if}
 			{#if chartDescription}
-				<li>
+				<li data-capture-ignore>
 					<Button
 						variant="text"
 						on:click={() => ($isOpen = true)}
