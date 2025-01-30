@@ -52,6 +52,11 @@
 	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
+
+	/**
 	 * suggestions can be bound via 'bind:suggestions' to reactively receive
 	 * changes to search results.
 	 */
@@ -275,6 +280,8 @@
 		selected = null;
 		suggestions = [];
 		showSuggestionList = false;
+
+		onSearchClear();
 	};
 
 	$: {

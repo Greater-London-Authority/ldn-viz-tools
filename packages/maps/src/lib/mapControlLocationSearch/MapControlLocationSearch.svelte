@@ -41,6 +41,11 @@
 	export let onSearchError: undefined | OnGeolocationSearchError = undefined;
 
 	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
+
+	/**
 	 * Passed to the suggestions dropdown to limit the number of suggestions
 	 * shown at once.
 	 */
@@ -74,6 +79,7 @@
 		{adapter}
 		onLocationSelected={onLocationFound}
 		{onSearchError}
+		{onSearchClear}
 		{maxSuggestions}
 		inputClasses="w-72 {limitWidthClass}"
 		{placeholder}
