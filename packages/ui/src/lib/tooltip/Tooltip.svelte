@@ -63,7 +63,9 @@
 	customAction={trigger}
 	actionProps={$trigger}
 >
-	<slot name="hint" />
+	{#if $$slots.hint}
+		<slot name="hint">{$$slots.hint}</slot>
+	{/if}
 </Trigger>
 
 {#if $open}
