@@ -8,7 +8,6 @@
 	 * @component
 	 */
 
-	import { setContext } from 'svelte';
 
 	import { createDialog } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
@@ -91,12 +90,6 @@
 		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
-
-	setContext('triggerFuncs', {
-		triggerClick: (element) => {
-			$open = true;
-		}
-	});
 </script>
 
 {#if showTrigger}
