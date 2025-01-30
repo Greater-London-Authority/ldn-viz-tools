@@ -101,27 +101,28 @@
 
 {#if showTrigger}
 	{#if $$slots.hint}
-		<Trigger>
-			<svelte:fragment slot="hint">
-				<slot name="hint" />
-			</svelte:fragment>
+		<Trigger customAction={trigger} actionProps={$trigger}>
+			<slot name="hint" />
 		</Trigger>
 	{:else}
-		<Trigger {hintLabel} />
+		<Trigger {hintLabel} customAction={trigger} actionProps={$trigger} />
 	{/if}
 {/if}
 
-<div {...$portalled} use:$portalled.action>
+<div {...$portalled} use:portalled>
 	{#if $open}
-		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
+		<!-- The dim background that is behind the modal -->
+		<div {...$overlay} use:overlay class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
-			<div {...$content} use:$content.action class={modalClass}>
+			<!-- Modal content -->
+			<div {...$content} use:content class={modalClass}>
+				<!-- Header -->
 				<div
-					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
+					class="bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand {headerTheme}"
 				>
-					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
-					<div {...$close} use:$close.action>
+					<div class="text-lg font-medium" {...$meltTitle} use:meltTitle>{title}</div>
+					<div {...$close} use:close>
 						<Button
 							variant="square"
 							emphasis="secondary"
@@ -134,10 +135,11 @@
 					</div>
 				</div>
 
+				<!-- Modal body -->
 				<div class="overflow-y-auto">
 					<div class="p-4">
 						{#if description}
-							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
+							<div {...$meltDescription} use:meltDescription>{description}</div>
 						{/if}
 
 						{#if hasChildren}
