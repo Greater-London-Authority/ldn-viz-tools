@@ -20,7 +20,9 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
-		customAction: ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>) | undefined;
+		customAction:
+			| ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown' | 'click'>)
+			| undefined;
 	}
 
 	type ButtonStyle = Record<
@@ -78,12 +80,13 @@
 	export let title: ButtonProps['title'] = '';
 
 	/**
-	 * MeltUI Action passed down from MultipleActionButton
+	 * MeltUI actions passed down from Trigger
 	 */
 	export let customAction: ButtonProps['customAction'] = undefined;
+	const action = customAction ? customAction : () => {};
 
 	/**
-	 * MeltUI action props passed down from MultipleActionButton, which include ARIA attributes and tabindex.
+	 * MeltUI action props passed down from Trigger, which include ARIA attributes and tabindex.
 	 */
 	export let actionProps = {};
 
@@ -233,37 +236,33 @@
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
-
-	const action = customAction ? customAction : () => {};
 </script>
 
-<div class="flex">
-	<svelte:element
-		this={href ? 'a' : 'button'}
-		type={href ? undefined : type}
-		target={href && openInNewTab ? '_blank' : undefined}
-		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
-		{href}
-		{disabled}
-		{title}
-		class={buttonClass}
-		aria-label={ariaLabel}
-		{id}
-		on:click
-		on:change
-		on:keydown
-		on:keyup
-		on:touchstart
-		on:touchend
-		on:touchcancel
-		on:mouseenter
-		on:mouseleave
-		role="button"
-		tabindex="0"
-		use:action
-		{...actionProps}
-	>
-		<!-- contents of the button -->
-		<slot />
-	</svelte:element>
-</div>
+<svelte:element
+	this={href ? 'a' : 'button'}
+	type={href ? undefined : type}
+	target={href && openInNewTab ? '_blank' : undefined}
+	rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
+	{href}
+	{disabled}
+	{title}
+	class={buttonClass}
+	aria-label={ariaLabel}
+	{id}
+	on:click
+	on:change
+	on:keydown
+	on:keyup
+	on:touchstart
+	on:touchend
+	on:touchcancel
+	on:mouseenter
+	on:mouseleave
+	role="button"
+	tabindex="0"
+	use:action
+	{...actionProps}
+>
+	<!-- contents of the button -->
+	<slot />
+</svelte:element>

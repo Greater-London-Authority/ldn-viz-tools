@@ -8,11 +8,12 @@
 	 * @component
 	 */
 
-	import { createDialog } from '@melt-ui/svelte';
+	import { createDialog, type FocusProp } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
+	import Trigger from '../trigger/Trigger.svelte';
 	import { classNames } from '../utils/classNames';
 
 	/**
@@ -20,8 +21,14 @@
 	 */
 	export let isOpen = writable(false);
 
+	const customOpenFocus: FocusProp = () => {
+		const customElToFocus = document.getElementById($meltTitle.id);
+		return customElToFocus;
+	};
+
 	const {
 		elements: {
+			trigger,
 			portalled,
 			overlay,
 			content,
@@ -30,7 +37,7 @@
 			close
 		},
 		states: { open }
-	} = createDialog({ open: isOpen });
+	} = createDialog({ open: isOpen, openFocus: customOpenFocus });
 
 	/**
 	 * title that appears at the top of the modal
@@ -64,6 +71,9 @@
 		| '7xl'
 		| 'full' = 'md';
 
+	export let hintLabel = 'More info';
+	export let showTrigger = false;
+
 	const hasChildren = Object.keys($$slots).length > 0;
 
 	const widthClasses = {
@@ -87,17 +97,30 @@
 	);
 </script>
 
-<div {...$portalled} use:$portalled.action>
+{#if showTrigger}
+	{#if $$slots.hint}
+		<Trigger customAction={trigger} actionProps={$trigger}>
+			<slot name="hint" />
+		</Trigger>
+	{:else}
+		<Trigger {hintLabel} customAction={trigger} actionProps={$trigger} />
+	{/if}
+{/if}
+
+<div {...$portalled} use:portalled>
 	{#if $open}
-		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
+		<!-- The dim background that is behind the modal -->
+		<div {...$overlay} use:overlay class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
-			<div {...$content} use:$content.action class={modalClass}>
+			<!-- Modal content -->
+			<div {...$content} use:content class={modalClass}>
+				<!-- Header -->
 				<div
-					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
+					class="bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand {headerTheme}"
 				>
-					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
-					<div {...$close} use:$close.action>
+					<div class="text-lg font-medium" tabindex="-1" {...$meltTitle} use:meltTitle>{title}</div>
+					<div {...$close} use:close>
 						<Button
 							variant="square"
 							emphasis="secondary"
@@ -110,10 +133,11 @@
 					</div>
 				</div>
 
+				<!-- Modal body -->
 				<div class="overflow-y-auto">
 					<div class="p-4">
 						{#if description}
-							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
+							<div {...$meltDescription} use:meltDescription>{description}</div>
 						{/if}
 
 						{#if hasChildren}

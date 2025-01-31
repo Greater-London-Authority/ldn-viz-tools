@@ -7,16 +7,11 @@
 	 * @component
 	 */
 
-	import { arrow } from 'svelte-floating-ui';
-	import { flip, offset, shift } from 'svelte-floating-ui/dom';
-	import { writable, type Writable } from 'svelte/store';
-	import { floatingContent } from './tooltip';
-
-	import { InformationCircle } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-
-	import Button from '../button/Button.svelte';
-	import { floatingRef } from '../tooltip/tooltip.js';
+	import type { ButtonProps } from '$lib/button/Button.svelte';
+	import type { PlacementOptions } from '$lib/utils/placementOptions';
+	import { createTooltip } from '@melt-ui/svelte';
+	import { fade } from 'svelte/transition';
+	import Trigger from '../trigger/Trigger.svelte';
 
 	/**
 	 * text that appears in the tooltip target, next to the icon
@@ -28,72 +23,61 @@
 	 */
 	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
 
-	let showTooltip = false;
+	/**
+	 * Allows you to set custom styling on Trigger button, e.g. '!p-0' to remove all padding for an inline text button.
+	 */
+	export let triggerClass: string = '';
 
-	let element: HTMLSpanElement;
+	/**
+	 * Selects which family of styles should be applied to the Trigger button.
+	 */
+	export let triggerVariant: ButtonProps['variant'] = 'text';
 
-	const arrowRef: Writable<HTMLElement> = writable();
-	let dynamicOptions = {};
-	$: if (showTooltip) {
-		dynamicOptions = {
-			middleware: [offset(10), flip(), shift(), arrow({ element: arrowRef })],
-			onComputed({ placement, middlewareData }: { placement: string; middlewareData: any }) {
-				const { x, y } = middlewareData.arrow || {};
-				const staticSide = {
-					top: 'bottom',
-					right: 'left',
-					bottom: 'top',
-					left: 'right'
-				}[placement.split('-')[0]];
+	/**
+	 * Determines how much visual emphasis is placed on the Trigger button.
+	 */
+	export let triggerEmphasis: ButtonProps['emphasis'] = 'secondary';
 
-				// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-				$arrowRef &&
-					Object.assign($arrowRef.style, {
-						left: x != null ? `${x}px` : '',
-						top: y != null ? `${y}px` : '',
-						[staticSide!.toString()]: '-8px'
-					});
-			}
-		};
-	}
+	/**
+	 * Determines the placement of the tooltip, relative to Trigger
+	 */
+	export let placement: PlacementOptions = 'top';
+
+	const {
+		elements: { trigger, content, arrow },
+		states: { open }
+	} = createTooltip({
+		positioning: { placement },
+		openDelay: 0,
+		closeDelay: 0,
+		closeOnPointerDown: false
+	});
 </script>
 
-<Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
-	<span
-		use:floatingRef
-		bind:this={element}
-		on:mouseenter={() => {
-			showTooltip = true;
-			floatingRef(element);
-		}}
-		on:mouseleave|stopPropagation={() => (showTooltip = false)}
-		role="tooltip"
-		class="inline-flex items-center"
-	>
-		{#if $$slots.hint}
-			<!-- if present, replaces the default `hintLabel` and icon  -->
-			<slot name="hint" />
-		{:else}
-			{hintLabel}
+<Trigger
+	{hintSize}
+	{hintLabel}
+	class={triggerClass}
+	variant={triggerVariant}
+	emphasis={triggerEmphasis}
+	customAction={trigger}
+	actionProps={$trigger}
+>
+	{#if $$slots.hint}
+		<slot name="hint">{$$slots.hint}</slot>
+	{/if}
+</Trigger>
 
-			<Icon
-				src={InformationCircle}
-				theme="mini"
-				class="w-[18px] h-[18px] ml-0.5"
-				aria-hidden="true"
-			/>
-		{/if}
-	</span>
-</Button>
-
-{#if showTooltip}
+{#if $open}
 	<div
+		{...$content}
+		use:content
+		transition:fade={{ duration: 100 }}
 		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50"
-		use:floatingContent={dynamicOptions}
 	>
 		<!-- the text that will be displayed in the tooltip -->
 		<slot />
 
-		<div class="absolute bg-color-container-level-1 rotate-45 w-4 h-4" bind:this={$arrowRef} />
+		<div {...$arrow} use:arrow />
 	</div>
 {/if}
