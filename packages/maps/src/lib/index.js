@@ -30,6 +30,8 @@ export { default as MapMarkerFlyToFeature } from './mapMarker/elements/mapMarker
 export { default as MapMarkerPlacement } from './mapMarker/elements/mapMarkerPlacement/MapMarkerPlacement.svelte';
 export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
+export { default as MapPopover } from './mapPopover/MapPopover.svelte';
+
 // Layers
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
 export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptations/geojsonMapLayerSource/GeoJSONMapLayerSource.svelte';
