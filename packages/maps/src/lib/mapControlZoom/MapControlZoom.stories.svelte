@@ -1,8 +1,8 @@
 <script>
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import * as os_light_vts from '../themes/os_light_vts.json';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
@@ -50,7 +50,6 @@ They enable [zoomin](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#z
 
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
