@@ -21,6 +21,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
+	import Trigger from '../trigger/Trigger.svelte';
 	import { randomId } from '../utils/randomId';
 
 	/**
@@ -142,25 +143,25 @@
 			</div>
 		</Button>
 
-		<Button
+		<Trigger
 			variant="square"
 			{emphasis}
 			{condition}
 			{size}
 			{disabled}
-			customAction={$trigger.action}
+			customAction={trigger}
 			actionProps={$trigger}
 			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
 			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 		>
-			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
-		</Button>
+			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" slot="hint" />
+		</Trigger>
 	</div>
 
 	{#if $open}
 		<div
 			class="bg-color-container-level-1 z-40 max-w-sm p-2 shadow flex flex-col space-y-2"
-			use:$menu.action
+			use:menu
 			{...$menu}
 			transition:fly={{ duration: 150, y: -10 }}
 		>
@@ -174,7 +175,7 @@
 					<button
 						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
 						on:click={() => changeOption(option)}
-						use:$item.action
+						use:item
 						{...$item}
 					>
 						<div class="flex items-center">
@@ -189,6 +190,6 @@
 				{/each}
 			</div>
 		</div>
-		<div use:$arrow.action {...$arrow} />
+		<div use:arrow {...$arrow} />
 	{/if}
 {/if}
