@@ -104,6 +104,21 @@
 			clearAll();
 		}
 	};
+
+	// construct list of controls which are in use
+	let controlsInUse: ('color' | 'opacity' | 'size')[] = [];
+	$: {
+		controlsInUse = [];
+		if (!hideColorControl && !options.every((l) => l.hideColorControl)) {
+			controlsInUse.push('color');
+		}
+		if (!hideOpacityControl && !options.every((l) => l.hideOpacityControl)) {
+			controlsInUse.push('opacity');
+		}
+		if (!hideSizeControl && !options.every((l) => l.hideSizeControl)) {
+			controlsInUse.push('size');
+		}
+	}
 </script>
 
 <div class="flex flex-col space-y-1">
@@ -131,6 +146,7 @@
 				hideColorControl={hideColorControl || option.hideColorControl}
 				hideOpacityControl={hideOpacityControl || option.hideOpacityControl}
 				hideSizeControl={hideSizeControl || option.hideSizeControl}
+				{controlsInUse}
 				bind:state={state[option.id]}
 			/>
 		{/each}
