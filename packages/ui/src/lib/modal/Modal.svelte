@@ -22,7 +22,7 @@
 	export let isOpen = writable(false);
 
 	const customOpenFocus: FocusProp = () => {
-		const customElToFocus = document.getElementById($content.id);
+		const customElToFocus = document.getElementById($meltTitle.id);
 		return customElToFocus;
 	};
 
@@ -119,7 +119,7 @@
 				<div
 					class="bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand {headerTheme}"
 				>
-					<div class="text-lg font-medium" {...$meltTitle} use:meltTitle>{title}</div>
+					<div class="text-lg font-medium" tabindex="-1" {...$meltTitle} use:meltTitle>{title}</div>
 					<div {...$close} use:close>
 						<Button
 							variant="square"
