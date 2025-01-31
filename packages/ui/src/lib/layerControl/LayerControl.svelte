@@ -25,6 +25,12 @@
 	export let hideSizeControl = false;
 
 	/**
+	 * List of controls for which placeholder should be displayed in control is hidden.
+	 * This enables alignment of controls between different `LayerControl`s with different controls enabled,
+	 */
+	export let controlsInUse: ('color' | 'opacity' | 'size')[] = [];
+
+	/**
 	 * the name of the layer
 	 */
 	export let label = '';
@@ -66,17 +72,18 @@
 		<Checkbox bind:checked={state.visible} label="" {disabled} />
 	</div>
 
-	{#if !hideColorControl}
-		<ColorPicker bind:color={state.color} />
+	{#if !hideColorControl || controlsInUse.includes('color')}
+		<ColorPicker bind:color={state.color} hideControl={hideColorControl} />
 	{/if}
 
-	{#if !hideOpacityControl}
-		<OpacityControl bind:opacity={state.opacity} />
+	{#if !hideOpacityControl || controlsInUse.includes('opacity')}
+		<OpacityControl bind:opacity={state.opacity} hideControl={hideOpacityControl} />
 	{/if}
 
-	{#if !hideSizeControl}
-		<ResizeControl bind:size={state.size} {minSize} {maxSize} />
+	{#if !hideSizeControl || controlsInUse.includes('size')}
+		<ResizeControl bind:size={state.size} {minSize} {maxSize} hideControl={hideSizeControl} />
 	{/if}
+
 	{#if label}
 		<span class="form-label font-normal leading-none">{label}</span>
 	{/if}

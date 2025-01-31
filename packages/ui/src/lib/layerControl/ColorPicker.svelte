@@ -4,6 +4,8 @@
 
 	export let color = '#EE266D';
 
+	export let hideControl = false;
+
 	const colors = [
 		'#EE266D',
 		'#00AEEF',
@@ -22,25 +24,29 @@
 	let openStore: Writable<boolean>;
 </script>
 
-<Popover bind:openStore>
-	<svelte:fragment slot="hint">
-		<div class="w-5 h-5 relative border rounded-full" style:background={color}></div>
-	</svelte:fragment>
+{#if hideControl}
+	<div class="w-5 h-5 relative"></div>
+{:else}
+	<Popover bind:openStore>
+		<svelte:fragment slot="hint">
+			<div class="w-5 h-5 relative border rounded-full" style:background={color}></div>
+		</svelte:fragment>
 
-	<svelte:fragment slot="title">Color</svelte:fragment>
+		<svelte:fragment slot="title">Color</svelte:fragment>
 
-	<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
+		<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
 
-	<div class="flex flex-wrap gap-2">
-		{#each colors as colorOption}
-			<button
-				class="w-6 h-6 rounded-full"
-				style:background={colorOption}
-				on:click={() => {
-					color = colorOption;
-					$openStore = false;
-				}}
-			/>
-		{/each}
-	</div>
-</Popover>
+		<div class="flex flex-wrap gap-2">
+			{#each colors as colorOption}
+				<button
+					class="w-6 h-6 rounded-full"
+					style:background={colorOption}
+					on:click={() => {
+						color = colorOption;
+						$openStore = false;
+					}}
+				/>
+			{/each}
+		</div>
+	</Popover>
+{/if}

@@ -26,7 +26,8 @@
 		{
 			id: 'train',
 			label: 'Train stations',
-			hint: 'Excluding underground stations'
+			hint: 'Excluding underground stations',
+			hideColorControl: true
 		},
 		{
 			id: 'underground',
