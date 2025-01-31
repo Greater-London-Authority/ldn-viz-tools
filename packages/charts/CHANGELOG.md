@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 5.0.1
+
+### Patch Changes
+
+- 9c33886: ADDED: export the `plot` and `getDefault` functions, and `Plot` object
+
 ## 5.0.0
 
 ### Major Changes
