@@ -30,6 +30,10 @@ export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMar
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
+export { default as MapDeckPopovers } from './mapDeckTooltipsPopovers/MapDeckPopovers.svelte';
+export { default as MapDeckTooltips } from './mapDeckTooltipsPopovers/MapDeckTooltips.svelte';
+export * from './mapDeckTooltipsPopovers/stores';
+
 // Layers
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
 export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptations/geojsonMapLayerSource/GeoJSONMapLayerSource.svelte';
