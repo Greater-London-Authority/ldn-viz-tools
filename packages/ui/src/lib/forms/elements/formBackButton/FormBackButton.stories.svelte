@@ -66,14 +66,15 @@
 	<Form>
 		<FormBackButton
 			slot="leftButtons"
-			condition="warning"
+			emphasis="primary"
 			variant="square"
 			size="lg"
 			async
 			onBack={waitOneSeconds}
 			title="Go back"
 		>
-			<Icon src={ArrowLeft} class="w-10 h-10" />
+			<Icon src={ArrowLeft} class="w-6 h-6 mb-1" />
+			Go Back
 		</FormBackButton>
 	</Form>
 </Story>

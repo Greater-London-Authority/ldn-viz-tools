@@ -2298,10 +2298,10 @@
               "type": "color",
               "value": "{semantic.light-mode.color.ui.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.warning}"
+              "value": "{semantic.light-mode.color.ui.caution}"
             },
             "neutral": {
               "description": "",
@@ -2345,7 +2345,7 @@
               "type": "color",
               "value": "{semantic.light-mode.color.palette.green.100}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.100}"
@@ -2433,7 +2433,7 @@
             "type": "color",
             "value": "{semantic.light-mode.color.palette.green.700}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.orange.700}"
@@ -2506,12 +2506,12 @@
               "type": "color",
               "value": "{semantic.light-mode.color.palette.green.900}"
             },
-            "warning-hover": {
+            "caution-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.800}"
             },
-            "warning-active": {
+            "caution-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.900}"
@@ -2526,10 +2526,10 @@
               "type": "color",
               "value": "{semantic.light-mode.color.action.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.action.warning}"
+              "value": "{semantic.light-mode.color.action.caution}"
             },
             "disabled": {
               "description": "",
@@ -2546,10 +2546,10 @@
               "type": "color",
               "value": "{semantic.light-mode.color.ui.background.positive}"
             },
-            "warning-muted": {
+            "caution-muted": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.warning}"
+              "value": "{semantic.light-mode.color.ui.background.caution}"
             },
             "negative-muted-hover": {
               "description": "",
@@ -2571,12 +2571,12 @@
               "type": "color",
               "value": "{semantic.light-mode.color.palette.green.300}"
             },
-            "warning-muted-hover": {
+            "caution-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.200}"
             },
-            "warning-muted-active": {
+            "caution-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.300}"
@@ -2668,15 +2668,15 @@
               "type": "color",
               "value": "{semantic.light-mode.color.ui.border.positive}"
             },
-            "warning-hover": {
+            "caution-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.800}"
             },
-            "warning-active": {
+            "caution-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.warning}"
+              "value": "{semantic.light-mode.color.ui.border.caution}"
             },
             "primary": {
               "description": "",
@@ -2698,10 +2698,10 @@
               "type": "color",
               "value": "{semantic.light-mode.color.ui.border.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.warning}"
+              "value": "{semantic.light-mode.color.ui.border.caution}"
             }
           },
           "primary": {
@@ -2766,10 +2766,10 @@
             "type": "color",
             "value": "{semantic.light-mode.color.ui.positive}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.warning}"
+            "value": "{semantic.light-mode.color.ui.caution}"
           },
           "disabled": {
             "description": "",
@@ -2806,20 +2806,20 @@
             "type": "color",
             "value": "{semantic.light-mode.color.ui.primary}"
           },
-          "warning-hover": {
+          "caution-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.orange.800}"
           },
-          "warning-active": {
+          "caution-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.orange.900}"
           },
-          "warning-focussed": {
+          "caution-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.action.warning}"
+            "value": "{semantic.light-mode.color.action.caution}"
           },
           "negative-hover": {
             "description": "",
@@ -2886,25 +2886,25 @@
             "type": "color",
             "value": "{semantic.light-mode.color.palette.blue.800}"
           },
-          "warning-muted-hover": {
+          "caution-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.orange.200}"
           },
-          "warning-muted-active": {
+          "caution-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.orange.300}"
           },
-          "warning-muted-focussed": {
+          "caution-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.action.warning}"
+            "value": "{semantic.light-mode.color.action.caution}"
           },
-          "warning-muted": {
+          "caution-muted": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.warning}"
+            "value": "{semantic.light-mode.color.ui.background.caution}"
           },
           "negative-muted": {
             "description": "",
@@ -3917,10 +3917,10 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.warning}"
+              "value": "{semantic.dark-mode.color.ui.caution}"
             },
             "neutral": {
               "description": "",
@@ -3964,7 +3964,7 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.green.200}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.200}"
@@ -4052,7 +4052,7 @@
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.green.700}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.700}"
@@ -4125,12 +4125,12 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.green.900}"
             },
-            "warning-hover": {
+            "caution-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.800}"
             },
-            "warning-active": {
+            "caution-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.900}"
@@ -4145,10 +4145,10 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.action.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.warning}"
+              "value": "{semantic.dark-mode.color.action.caution}"
             },
             "disabled": {
               "description": "",
@@ -4165,10 +4165,10 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.background.positive}"
             },
-            "warning-muted": {
+            "caution-muted": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.warning}"
+              "value": "{semantic.dark-mode.color.ui.background.caution}"
             },
             "negative-muted-hover": {
               "description": "",
@@ -4190,12 +4190,12 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.green.300}"
             },
-            "warning-muted-hover": {
+            "caution-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.300}"
             },
-            "warning-muted-active": {
+            "caution-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.400}"
@@ -4287,15 +4287,15 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.border.positive}"
             },
-            "warning-hover": {
+            "caution-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.800}"
             },
-            "warning-active": {
+            "caution-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.warning}"
+              "value": "{semantic.dark-mode.color.ui.border.caution}"
             },
             "primary": {
               "description": "",
@@ -4317,10 +4317,10 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.border.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.warning}"
+              "value": "{semantic.dark-mode.color.ui.border.caution}"
             }
           },
           "primary": {
@@ -4385,10 +4385,10 @@
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.positive}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.warning}"
+            "value": "{semantic.dark-mode.color.ui.caution}"
           },
           "disabled": {
             "description": "",
@@ -4425,20 +4425,20 @@
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.primary}"
           },
-          "warning-hover": {
+          "caution-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.800}"
           },
-          "warning-active": {
+          "caution-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.900}"
           },
-          "warning-focussed": {
+          "caution-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.action.warning}"
+            "value": "{semantic.dark-mode.color.action.caution}"
           },
           "negative-hover": {
             "description": "",
@@ -4505,25 +4505,25 @@
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.blue.800}"
           },
-          "warning-muted-hover": {
+          "caution-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.300}"
           },
-          "warning-muted-active": {
+          "caution-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.400}"
           },
-          "warning-muted-focussed": {
+          "caution-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.action.warning}"
+            "value": "{semantic.dark-mode.color.action.caution}"
           },
-          "warning-muted": {
+          "caution-muted": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.warning}"
+            "value": "{semantic.dark-mode.color.ui.background.caution}"
           },
           "negative-muted": {
             "description": "",

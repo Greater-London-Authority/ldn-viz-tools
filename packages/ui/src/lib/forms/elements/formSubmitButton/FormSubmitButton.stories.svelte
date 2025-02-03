@@ -66,13 +66,13 @@
 	<Form>
 		<FormSubmitButton
 			slot="leftButtons"
-			condition="warning"
 			variant="square"
 			size="lg"
 			onSubmit={doNothing}
 			title="submit"
 		>
-			<Icon src={ArrowRight} class="w-8 h-8" />
+			<Icon src={ArrowRight} class="w-6 h-6" />
+			Custom Buttton
 		</FormSubmitButton>
 	</Form>
 </Story>

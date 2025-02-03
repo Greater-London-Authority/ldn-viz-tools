@@ -27,7 +27,7 @@
 	const statusClasses = {
 		notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
 		success: 'bg-color-ui-background-positive border-color-ui-border-positive',
-		warning: 'bg-color-ui-background-warning border-color-ui-border-warning',
+		warning: 'bg-color-ui-background-caution border-color-ui-border-caution',
 		error: 'bg-color-ui-background-negative border-color-ui-border-negative'
 	};
 
