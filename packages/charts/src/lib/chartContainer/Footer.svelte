@@ -23,11 +23,13 @@
 			{#if source}<li><span class="font-bold mr-1">Source:</span>{source}</li>{/if}
 			{#if note}<li><span class="font-bold mr-1">Note:</span>{note}</li>{/if}
 			{#if chartDescription}
-				<li>
+				<li data-capture-ignore>
 					<Button
 						variant="text"
-						on:click={() => ($isOpen = true)}
-						class="font-bold text-xs !py-0 !px-0">View description</Button
+						size="sm"
+						emphasis="secondary"
+						class="!p-0"
+						on:click={() => ($isOpen = true)}>View description</Button
 					>
 				</li>
 				<Modal bind:isOpen title="Description" description={chartDescription}></Modal>
