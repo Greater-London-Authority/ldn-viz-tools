@@ -36,7 +36,7 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map from '../map/Map.svelte';
-	import { appendOSKeyToUrl } from '../map/util.js';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import { Button } from '@ldn-viz/ui';
 
