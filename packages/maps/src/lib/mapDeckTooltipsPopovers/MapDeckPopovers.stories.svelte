@@ -15,7 +15,8 @@
 
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
 	import { Checkbox } from '@ldn-viz/ui';
