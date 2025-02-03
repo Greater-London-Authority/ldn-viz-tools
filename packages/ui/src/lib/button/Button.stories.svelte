@@ -6,15 +6,11 @@
 		component: Button,
 		argTypes: {
 			emphasis: {
-				options: ['primary', 'secondary'],
-				control: { type: 'radio' }
+				options: ['primary', 'secondary', 'caution', 'positive', 'negative'],
+				control: { type: 'select' }
 			},
 			variant: {
 				options: ['brand', 'solid', 'outline', 'text'], //square
-				control: { type: 'select' }
-			},
-			condition: {
-				options: ['default', 'success', 'error', 'warning'],
 				control: { type: 'select' }
 			},
 			size: {
@@ -98,10 +94,6 @@
 		<Button size="sm">sm</Button>
 		<Button size="md">md</Button>
 		<Button size="lg">lg</Button>
-		<Button variant="outline" title="Down" emphasis="primary">Down</Button>
-
-		<Button variant="outline" title="Down" emphasis="secondary">Down</Button>
-		<Button emphasis="secondary">Down</Button>
 	</div>
 </Story>
 
@@ -131,8 +123,7 @@
 
 <Story name="With Link">
 	<div class="space-y-2">
-		<Button href="#">Link</Button>
-		<Button disabled href="#">Link</Button>
+		<Button href="#" variant="text">Link</Button>
 	</div>
 </Story>
 

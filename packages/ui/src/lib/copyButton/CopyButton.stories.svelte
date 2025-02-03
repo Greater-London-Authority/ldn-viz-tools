@@ -55,9 +55,11 @@
 </Story>
 
 <Story name="Indicator icon">
-	<CopyButton content="One." label="One" />
-	<CopyButton content="Two." label="Two" />
-	<CopyButton content="Three." label="Three" />
+	<div class="space-y-4">
+		<CopyButton content="One." label="One" />
+		<CopyButton content="Two." label="Two" />
+		<CopyButton content="Three." label="Three" />
+	</div>
 </Story>
 
 <Story name="Custom label">
