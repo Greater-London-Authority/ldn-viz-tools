@@ -2,7 +2,7 @@
 	import MapDeckOverlay from './MapDeckOverlay.svelte';
 
 	export const meta = {
-		title: 'Maps/MapDeckOverlay',
+		title: 'Maps/DeckGL/DeckOverlay',
 		component: MapDeckOverlay
 	};
 </script>
