@@ -24,7 +24,7 @@
 	{href}
 	target={newWindow ? '_blank' : '_self'}
 	rel={newWindow ? 'noopener noreferrer' : ''}
-	class="bg-color-action-secondary-100 group hover:bg-color-action-secondary-100-hover transition h-full flex flex-col text-color-text-primary"
+	class="bg-color-action-secondary-muted group hover:bg-color-action-secondary-muted-hover transition h-full flex flex-col text-color-text-primary"
 >
 	<div class="p-4 h-full space-y-2">
 		{#if $$slots.title}
@@ -42,7 +42,7 @@
 		{/if}
 	</div>
 	<div
-		class="bg-color-action-background-secondary group-hover:bg-color-action-secondary-hover px-4 py-2 mt-4 flex justify-between transition"
+		class="bg-color-action-background-secondary-muted group-hover:bg-color-action-secondary-muted-active px-4 py-2 mt-4 flex justify-between transition"
 	>
 		<!-- text displayed at bottom of button, vertically aligned with icon-->
 		<slot name="footer" />
