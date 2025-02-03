@@ -9,11 +9,9 @@
 </script>
 
 <script lang="ts">
-	import Theme from '../themeSwitcher/Theme.svelte';
-	import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher.svelte';
-	import { currentTheme } from '../themeSwitcher/themeStore';
-
-	import { colorNameToColor, colorNameToRGBArray } from './ColorPicker.svelte';
+	import Theme from '../theme/Theme.svelte';
+	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
+	import { colorTokenNameToRGBArray, currentTheme, tokenNameToValue } from '../theme/themeStore';
 
 	let layerStates = {
 		boroughs: {
@@ -46,7 +44,7 @@
 	<pre class="mt-4 text-xs">{JSON.stringify(state, null, 2)}</pre>
 
 	<p>
-		Color is: {colorNameToColor(state.colorName, $currentTheme)} or [{colorNameToRGBArray(
+		Color is: {tokenNameToValue(state.colorName, $currentTheme)} or [{colorTokenNameToRGBArray(
 			state.colorName,
 			$currentTheme
 		)}]

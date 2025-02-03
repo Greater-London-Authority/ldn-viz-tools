@@ -1,29 +1,8 @@
-<script lang="ts" context="module">
-	import { colorToRGBArray } from '@ldn-viz/utils';
-
-	import { currentThemeMode } from '../themeSwitcher/themeStore';
-	import { get } from 'svelte/store';
-
-	export const colorNameToColor = (colorName: string, theme: any) => {
-		let val = theme.color;
-		for (const part of colorName.split('.')) {
-			val = val[part];
-			if (!val) {
-				console.error(`Color name "${colorName}" not defined in theme "${get(currentThemeMode)}"`);
-			}
-		}
-		return val as unknown as string;
-	};
-
-	export const colorNameToRGBArray = (colorName: string, theme: any) =>
-		colorToRGBArray(colorNameToColor(colorName, theme));
-</script>
-
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 	import Popover from '../popover/Popover.svelte';
 
-	import { currentTheme } from '../themeSwitcher/themeStore';
+	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
 
 	export let colorName = 'data.categorical.darkpink';
 
@@ -48,7 +27,7 @@
 	<svelte:fragment slot="hint">
 		<div
 			class="w-5 h-5 relative border rounded-full"
-			style:background={colorNameToColor(colorName, $currentTheme)}
+			style:background={tokenNameToValue(colorName, $currentTheme)}
 		></div>
 	</svelte:fragment>
 
@@ -60,7 +39,7 @@
 		{#each colorNames as colorOption}
 			<button
 				class="w-6 h-6 rounded-full"
-				style:background={colorNameToColor(colorOption, $currentTheme)}
+				style:background={tokenNameToValue(colorOption, $currentTheme)}
 				on:click={() => {
 					colorName = colorOption;
 					$openStore = false;
