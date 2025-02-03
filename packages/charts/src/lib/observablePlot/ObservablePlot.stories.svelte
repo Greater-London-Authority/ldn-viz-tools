@@ -69,6 +69,56 @@
 	let hoveredValue: any | undefined = undefined;
 
 	const tooltipStore: Writable<Position> = writable();
+
+			const barChartData = [
+    {
+        "chargepoint_provider": "A",
+        "count": 1,
+    },
+    {
+        "chargepoint_provider": "B",
+        "count": 133,
+    },
+    {
+        "chargepoint_provider": "C",
+        "count": 310,
+    },
+    {
+        "chargepoint_provider": "D",
+        "count": 2,
+    },
+    {
+        "chargepoint_provider": "E",
+        "count": 124,
+    },
+    {
+        "chargepoint_provider": "F",
+        "count": 463,
+    }
+]
+	const barChartSpec = spec = {
+        x: {
+            label: "Provider",
+            domain: ['F', 'C', 'B', 'E', 'D', 'A' ],
+        },
+        y: {
+            nice: true,
+            label: null,
+        },
+        marks: [
+            Plot.barY(barChartData , {
+                x: 'chargepoint_provider',
+                y: 'count',
+                fill: "darkgray"
+            }),
+            Plot.text(barChartData , {
+                x: 'chargepoint_provider',
+                y: 'count',
+                text: d => d.count,
+                dy: -10
+            })
+        ]
+    };
 </script>
 
 <Template let:args>
@@ -312,4 +362,12 @@
 			<Select label="Another input" items={[]} />
 		</div>
 	</ObservablePlot>
+</Story>
+
+<Story name="Bar chart"  source >
+		<ObservablePlot
+		spec={barChartSpec}
+		title="Bar Chart"
+		subTitle="The y-axis is in the DOM, but positioned so it is not visible"
+	/>
 </Story>
