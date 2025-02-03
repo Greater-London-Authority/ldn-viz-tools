@@ -18,6 +18,7 @@
 ### Patch Changes
 
 - 7d12227: FIXED: use `<button>` element rather than `<div>` for some clickable elements
+- 6ff6d1e: CHANGED: default to hide SVG option in image download button, as this will not give the exported result of downloading an image of the entire table
 - Updated dependencies [7d12227]
 - Updated dependencies [c145cf7]
 - Updated dependencies [25428ea]

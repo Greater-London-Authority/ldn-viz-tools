@@ -10,3 +10,4 @@ export { default as ObservablePlotInner } from './observablePlot/ObservablePlotI
 export * from './observablePlot/ObservablePlotInner.svelte';
 
 export * from './observablePlotFragments/observablePlotFragments';
+export * from './observablePlotFragments/plot.js';
