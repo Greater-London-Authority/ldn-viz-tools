@@ -91,7 +91,9 @@
 	setContext('triggerFuncs', { customAction: trigger, actionProps: $trigger });
 </script>
 
-<slot name="trigger" />
+{#if $$slots.trigger}
+	<slot name="trigger" />
+{/if}
 
 {#if $open}
 	<div {...$portalled} use:$portalled.action>

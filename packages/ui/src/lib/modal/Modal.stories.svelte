@@ -142,6 +142,8 @@
 	</Modal>
 </Story>
 
+<!-- When using the `<Trigger>` component, you don't need to pass `isOpen` as a prop. -->
+
 <Story name="With Trigger">
 	<Modal title="The modal title">
 		<Trigger slot="trigger" variant="solid" emphasis="primary" size="md">Open modal!</Trigger>

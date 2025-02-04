@@ -44,7 +44,7 @@
 
 <Story name="With Tooltip - custom trigger label">
 	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger">All the button stuff</Trigger>
+		<Trigger slot="trigger" hintLabel="All the button stuff" />
 
 		This is a tooltip.
 	</Overlay>
@@ -117,7 +117,7 @@
 
 <Story name="With Popover - custom trigger label">
 	<Overlay overlayType="popover">
-		<Trigger slot="trigger">All the button stuff</Trigger>
+		<Trigger slot="trigger" hintLabel="All the button stuff" />
 		<svelte:fragment slot="title">Popover Title</svelte:fragment>
 		This is a popover.
 	</Overlay>

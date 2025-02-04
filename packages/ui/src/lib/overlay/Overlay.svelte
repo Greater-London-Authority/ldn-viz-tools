@@ -1,6 +1,9 @@
 <script lang="ts">
 	/**
-	 * The `<sidebarHint>` component provides additional explanatory or help text when a user interacts with a trigger.
+	 * The `<Overlay>` component provides additional explanatory or help text when a user interacts with a trigger.
+	 * You can choose whether this is a modal, popover or tooltip, depending on your needs.
+	 *
+	 * The trigger can either be the built in `<Trigger>` component or a custom trigger passed into the relevant slot.
 	 * @component
 	 */
 
@@ -51,7 +54,6 @@
 {#if overlayType === 'tooltip'}
 	<Tooltip>
 		<slot slot="trigger" name="trigger">
-			<!-- TODO: set the props of trigger correctly-->
 			<Trigger {hintLabel} />
 		</slot>
 
@@ -61,7 +63,6 @@
 {:else if overlayType === 'popover'}
 	<Popover>
 		<slot slot="trigger" name="trigger">
-			<!-- TODO: set the props of trigger correctly-->
 			<Trigger {hintLabel} />
 		</slot>
 
@@ -73,11 +74,10 @@
 {:else if overlayType === 'modal'}
 	<Modal title={modalTitle || ''} description={modalDescription} width={modalWidth}>
 		<slot slot="trigger" name="trigger">
-			<!-- TODO: set the props of trigger correctly-->
 			<Trigger {hintLabel} />
 		</slot>
 
-		<!-- The help message. -->
+		<!-- The modal content (not including description). -->
 		<slot />
 	</Modal>
 {/if}
