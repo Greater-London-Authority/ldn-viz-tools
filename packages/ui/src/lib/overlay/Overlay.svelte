@@ -71,10 +71,11 @@
 		<slot />
 	</Popover>
 {:else if overlayType === 'modal'}
-	<Modal title={modalTitle || ''} description={modalDescription} width={modalWidth} showTrigger>
-		<svelte:fragment slot="hintText">
-			{hintLabel}
-		</svelte:fragment>
+	<Modal title={modalTitle || ''} description={modalDescription} width={modalWidth}>
+		<slot slot="trigger" name="trigger">
+			<!-- TODO: set the props of trigger correctly-->
+			<Trigger {hintLabel} />
+		</slot>
 
 		<!-- The help message. -->
 		<slot />

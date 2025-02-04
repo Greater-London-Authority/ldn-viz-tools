@@ -21,24 +21,6 @@
 	<Overlay {...args}></Overlay>
 </Template>
 
-<!-- 
-Trigger appearance cases:
-
-default icons, default text
-default icon, no text
-default icon, custom text
-
-no icon, default text
-no icon, custom text
-
-custom icon, default text
-custom icon, no text
-custom icon, custom text
-
-(and both orders of icon and text)
-(and with button emphasis, size, and variant - and customClass overrides (all the props of a button))
--->
-
 <Story name="Default" source />
 
 <Story name="With Tooltip">
@@ -52,9 +34,13 @@ custom icon, custom text
 	</Overlay>
 </Story>
 
-<!-- <Story name="With Modal" source>
-	<Overlay overlayType="modal">This is a modal.</Overlay>
-</Story> -->
+<Story name="With Modal" source>
+	<Overlay overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+</Story>
+
+<Story name="With Modal - custom width" source>
+	<Overlay overlayType="modal" modalTitle="Modal Title" modalWidth="3xl">This is a modal.</Overlay>
+</Story>
 
 <Story name="With Tooltip - custom trigger label">
 	<Overlay overlayType="tooltip">

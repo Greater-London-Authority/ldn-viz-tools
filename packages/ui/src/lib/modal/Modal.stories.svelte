@@ -23,6 +23,7 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 
 	let isOpen = writable(false);
 </script>
@@ -138,5 +139,11 @@
 				<li>Three</li>
 			</ul>
 		</div>
+	</Modal>
+</Story>
+
+<Story name="With Trigger">
+	<Modal title="The modal title">
+		<Trigger slot="trigger" variant="solid" emphasis="primary" size="md">Open modal!</Trigger>
 	</Modal>
 </Story>

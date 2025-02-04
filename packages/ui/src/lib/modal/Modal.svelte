@@ -11,6 +11,7 @@
 	import { createDialog } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
@@ -22,6 +23,7 @@
 
 	const {
 		elements: {
+			trigger,
 			portalled,
 			overlay,
 			content,
@@ -85,10 +87,14 @@
 		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
+
+	setContext('triggerFuncs', { customAction: trigger, actionProps: $trigger });
 </script>
 
-<div {...$portalled} use:$portalled.action>
-	{#if $open}
+<slot name="trigger" />
+
+{#if $open}
+	<div {...$portalled} use:$portalled.action>
 		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
@@ -124,5 +130,5 @@
 				</div>
 			</div>
 		</div>
-	{/if}
-</div>
+	</div>
+{/if}
