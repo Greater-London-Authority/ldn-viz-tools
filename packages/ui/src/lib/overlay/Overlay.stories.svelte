@@ -53,9 +53,7 @@ custom icon, custom text
 	<Overlay overlayType="modal">This is a modal.</Overlay>
 </Story> -->
 
-<!-- -->
-
-<Story name="With Tooltip - custom trigger contents">
+<Story name="With Tooltip - custom trigger label">
 	<Overlay overlayType="tooltip">
 		<Trigger slot="trigger">All the button stuff</Trigger>
 
@@ -65,7 +63,7 @@ custom icon, custom text
 
 <Story name="With Tooltip - custom variant">
 	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger" variant="solid">All the button stuff</Trigger>
+		<Trigger slot="trigger" variant="solid" />
 
 		This is a tooltip.
 	</Overlay>
@@ -73,7 +71,7 @@ custom icon, custom text
 
 <Story name="With Tooltip - custom emphasis">
 	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger" emphasis="primary">All the button stuff</Trigger>
+		<Trigger slot="trigger" emphasis="primary" />
 
 		This is a tooltip.
 	</Overlay>
@@ -81,7 +79,15 @@ custom icon, custom text
 
 <Story name="With Tooltip - custom size">
 	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger" size="lg">All the button stuff</Trigger>
+		<Trigger slot="trigger" size="lg" />
+
+		This is a tooltip.
+	</Overlay>
+</Story>
+
+<Story name="With Tooltip - no icon">
+	<Overlay overlayType="tooltip">
+		<Trigger slot="trigger">More Info</Trigger>
 
 		This is a tooltip.
 	</Overlay>
@@ -90,8 +96,7 @@ custom icon, custom text
 <Story name="With Tooltip - with Icon on right">
 	<Overlay overlayType="tooltip">
 		<Trigger slot="trigger">
-			All the button stuff
-
+			More Info
 			<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
 		</Trigger>
 
@@ -103,14 +108,13 @@ custom icon, custom text
 	<Overlay overlayType="tooltip">
 		<Trigger slot="trigger">
 			<Icon src={ArrowDownTray} theme="mini" class="mr-2 w-5 h-5" aria-hidden="true" />
-
-			All the button stuff
+			More Info
 		</Trigger>
 
 		This is a tooltip.
 	</Overlay>
 </Story>
 
-<Story name="Custom hint label, without Trigger component">
+<Story name="With Tooltip - custom hint label, without Trigger component">
 	<Overlay overlayType="tooltip" hintLabel="foo">This is a tooltip.</Overlay>
 </Story>
