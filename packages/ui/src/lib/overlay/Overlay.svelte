@@ -59,7 +59,14 @@
 		<slot />
 	</Tooltip>
 {:else if overlayType === 'popover'}
-	<Popover {hintLabel}>
+	<Popover>
+		<slot slot="trigger" name="trigger">
+			<!-- TODO: set the props of trigger correctly-->
+			<Trigger {hintLabel} />
+		</slot>
+
+		<slot slot="title" name="title" />
+
 		<!-- The help message. -->
 		<slot />
 	</Popover>
