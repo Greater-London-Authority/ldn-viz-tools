@@ -44,6 +44,9 @@
 		closeOnPointerDown: false
 	});
 
+	/**
+	 * Sets trigger actions and attributes (ARIA) for access by `Trigger` component
+	 */
 	setContext('triggerFuncs', { customAction: trigger, actionProps: $trigger });
 </script>
 
