@@ -13,17 +13,17 @@
 	/**
 	 * "The title of your object as it should appear within the graph, e.g., 'The Rock'."
 	 */
-	export let title;
+	export let title: string;
 
 	/**
 	 * "A one to two sentence description of your object."
 	 */
-	export let description;
+	export let description: string;
 
 	/**
 	 * "The canonical URL of your object that will be used as its permanent ID in the graph". Should include the scheme (`http://` or `https://`).
 	 */
-	export let url; // Must be full URL with scheme
+	export let url: string; // Must be full URL with scheme
 
 	if (!title || !description || !url) {
 		// Minimum requirement for SEO.
@@ -49,12 +49,12 @@
 	 * "An image URL which should represent your object within the graph".
 	 * If an `image` is provided, then `imageAlt` should be too.
 	 */
-	export let image = undefined;
+	export let image: string;
 
 	/**
 	 * "A description of what is in the image (not a caption)."
 	 */
-	export let imageAlt = undefined;
+	export let imageAlt: string;
 
 	/**
 	 * Image width in pixels. Recommended value is 1200.
