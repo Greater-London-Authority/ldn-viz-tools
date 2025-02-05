@@ -20,7 +20,7 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
-		customAction: (() => {}) | undefined;
+		customAction: (() => void) | undefined;
 	}
 
 	type ButtonStyle = Record<
