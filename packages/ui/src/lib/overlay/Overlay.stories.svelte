@@ -39,7 +39,9 @@
 </Story>
 
 <Story name="With Modal - custom width" source>
-	<Overlay overlayType="modal" modalTitle="Modal Title" modalWidth="3xl">This is a modal.</Overlay>
+	<Overlay overlayType="modal" modalTitle="Modal Title" modalWidth="3xl"
+		>This is a very wide modal.</Overlay
+	>
 </Story>
 
 <Story name="With Tooltip - custom trigger label">
