@@ -124,19 +124,34 @@
 	</div>
 </Story>
 
-<Story name="With tooltip - default hintLabel">
+<Story name="With hint tooltip - default hintLabel">
 	<div class="w-96">
 		<Input label="Tooltip" name="tooltip-input" hint="Contextual help text" />
 	</div>
 </Story>
 
-<Story name="With tooltip - custom hintLabel">
+<Story name="With hint tooltip - custom hintLabel">
 	<div class="w-96">
 		<Input
 			label="Tooltip"
-			name="tooltip-input"
+			name="custom-tooltip-input"
 			hint="Contextual help text"
 			hintLabel="optional hint label"
+		/>
+	</div>
+</Story>
+
+<Story name="With hint modal">
+	<div class="w-96">
+		<Input
+			label="Modal"
+			name="modal-input"
+			hint="Contextual help text"
+			hintLabel="optional hint label"
+			overlayType="modal"
+			modalTitle="It's a modal!"
+			modalDescription="Amodal that shows contextual help"
+			modalWidth="sm"
 		/>
 	</div>
 </Story>

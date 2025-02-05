@@ -81,6 +81,39 @@
 	export let hintLabel = 'more info';
 
 	/**
+	 * Form in which the help text should be displayed.
+	 */
+	export let overlayType: 'tooltip' | 'popover' | 'modal' = 'tooltip';
+
+	/**
+	 * Title of modal (if `overlayType` is `'modal'`)
+	 */
+	export let modalTitle: string | undefined = undefined;
+
+	/**
+	 * Description of modal (if `overlayType` is `'modal'`)
+	 */
+	export let modalDescription: string | undefined = undefined;
+
+	/**
+	 * Width of modal (if `overlayType` is `'modal'`)
+	 */
+	export let modalWidth:
+		| 'sm'
+		| 'md'
+		| 'lg'
+		| 'xs'
+		| 'xl'
+		| '2xl'
+		| '3xl'
+		| '4xl'
+		| '5xl'
+		| '6xl'
+		| '7xl'
+		| 'full'
+		| undefined = undefined;
+
+	/**
 	 * If `false`, then `required` attribute is applied to `<input>`.
 	 */
 	export let optional = false;
@@ -133,11 +166,11 @@
 			return;
 		}
 
-		value = format(value, {
+		value = `${format(value, {
 			name,
 			type,
 			disabled: !!disabled
-		});
+		})}`;
 
 		// Protect from cyclic reactivity.
 		if (input.value !== value) {
@@ -169,6 +202,10 @@
 	{descriptionAlignment}
 	{hintLabel}
 	{hint}
+	{overlayType}
+	{modalDescription}
+	{modalTitle}
+	{modalWidth}
 	{errorId}
 	{error}
 	{disabled}
