@@ -29,7 +29,7 @@
 	/**
 	 * Sets trigger actions and attributes (ARIA) for access by `Trigger` component
 	 */
-	setContext('triggerFuncs', { customAction: trigger, actionProps: $trigger });
+	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
 <!-- The trigger that opens the popover, usually `Trigger` button but allows customisation -->

@@ -26,10 +26,15 @@
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'secondary';
 
-	const { customAction, actionProps } = getContext('triggerFuncs');
+	interface TriggerFuncs {
+		action: (node: HTMLElement) => void;
+		actionProps: {};
+	}
+
+	const { action, actionProps } = getContext<TriggerFuncs>('triggerFuncs');
 </script>
 
-<Button {size} class={$$props.class} {variant} {emphasis} {customAction} {actionProps}>
+<Button {size} class={$$props.class} {variant} {emphasis} {action} {actionProps}>
 	<slot>
 		{hintLabel}
 

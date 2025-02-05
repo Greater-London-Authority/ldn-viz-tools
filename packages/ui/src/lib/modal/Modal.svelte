@@ -88,7 +88,7 @@
 		widthClasses[width]
 	);
 
-	setContext('triggerFuncs', { customAction: trigger, actionProps: $trigger });
+	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
 {#if $$slots.trigger}

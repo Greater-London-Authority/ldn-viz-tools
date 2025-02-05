@@ -20,7 +20,7 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
-		customAction: ((node?: HTMLElement) => void) | undefined;
+		action: (node: HTMLElement) => void;
 	}
 
 	type ButtonStyle = Record<
@@ -79,8 +79,7 @@
 	 * Custom button action, e.g. mouse/key events.
 	 * Primarily used by components using Melt UI triggers.
 	 */
-	export let customAction: ButtonProps['customAction'] = undefined;
-	const action = customAction ? customAction : () => {};
+	export let action: ButtonProps['action'] = () => {};
 
 	/**
 	 * Custom action props such as ARIA attributes and tabindex.

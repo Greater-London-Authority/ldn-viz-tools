@@ -148,7 +148,7 @@
 			{condition}
 			{size}
 			{disabled}
-			customAction={$trigger.action}
+			action={$trigger.action}
 			actionProps={$trigger}
 			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
 			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
