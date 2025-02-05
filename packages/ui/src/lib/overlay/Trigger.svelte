@@ -28,7 +28,7 @@
 
 	interface TriggerFuncs {
 		action: (node: HTMLElement) => void;
-		actionProps: {};
+		actionProps: { [key: string]: any };
 	}
 
 	const { action, actionProps } = getContext<TriggerFuncs>('triggerFuncs');
