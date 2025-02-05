@@ -118,15 +118,15 @@
 	</div>
 </Story>
 
-<Story name="With tooltip - default hintLabel">
-	<div class="w-96">
-		<Input label="Tooltip" name="tooltip-input" />
-	</div>
-</Story>
-
 <Story name="With placeholder">
 	<div class="w-96">
 		<Input label="Placeholder" name="placeholder-input" placeholder="This is placeholder text" />
+	</div>
+</Story>
+
+<Story name="With tooltip - default hintLabel">
+	<div class="w-96">
+		<Input label="Tooltip" name="tooltip-input" hint="Contextual help text" />
 	</div>
 </Story>
 

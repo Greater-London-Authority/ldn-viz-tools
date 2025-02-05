@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Tooltip from '../tooltip/Tooltip.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 	import { classNames } from '../utils/classNames';
 
 	export let label = '';
@@ -43,9 +43,9 @@
 		{/if}
 
 		{#if hint}
-			<Tooltip {hintLabel}>
+			<Overlay {hintLabel}>
 				{hint}
-			</Tooltip>
+			</Overlay>
 		{/if}
 	</div>
 
