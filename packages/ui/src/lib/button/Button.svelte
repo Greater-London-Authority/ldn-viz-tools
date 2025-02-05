@@ -20,7 +20,7 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
-		customAction: ((node: HTMLElement) => MeltActionReturn<'keydown' | 'pointerdown'>) | undefined;
+		action: (node: HTMLElement) => void;
 	}
 
 	type ButtonStyle = Record<
@@ -32,8 +32,6 @@
 </script>
 
 <script lang="ts">
-	import type { MeltActionReturn } from '@melt-ui/svelte/internal/types';
-
 	/**
 	 * Selects which family of styles should be applied to the button.
 	 */
@@ -78,12 +76,14 @@
 	export let title: ButtonProps['title'] = '';
 
 	/**
-	 * MeltUI Action passed down from MultipleActionButton
+	 * Custom button action, e.g. mouse/key events.
+	 * Primarily used by components using Melt UI triggers.
 	 */
-	export let customAction: ButtonProps['customAction'] = undefined;
+	export let action: ButtonProps['action'] = () => {};
 
 	/**
-	 * MeltUI action props passed down from MultipleActionButton, which include ARIA attributes and tabindex.
+	 * Custom action props such as ARIA attributes and tabindex.
+	 * Primarily used by components using Melt UI
 	 */
 	export let actionProps = {};
 
@@ -233,8 +233,6 @@
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
-
-	const action = customAction ? customAction : () => {};
 </script>
 
 <div class="flex">

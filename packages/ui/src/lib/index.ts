@@ -97,6 +97,7 @@ export { default as SchemaForm } from './forms/SchemaForm.svelte';
 export * from './forms/types';
 
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+export { default as Overlay } from './overlay/Overlay.svelte';
 
 export { classNames } from './utils/classNames';
 export { randomId } from './utils/randomId';
