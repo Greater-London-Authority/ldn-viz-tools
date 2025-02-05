@@ -20,7 +20,7 @@
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
-		customAction: ((node?: HTMLElement) => {}) | undefined;
+		customAction: ((node?: HTMLElement) => void) | undefined;
 	}
 
 	type ButtonStyle = Record<
@@ -80,6 +80,7 @@
 	 * Primarily used by components using Melt UI triggers.
 	 */
 	export let customAction: ButtonProps['customAction'] = undefined;
+	const action = customAction ? customAction : () => {};
 
 	/**
 	 * Custom action props such as ARIA attributes and tabindex.
@@ -233,8 +234,6 @@
 		href && disabled === true ? 'pointer-events-none' : '',
 		$$props.class
 	);
-
-	const action = customAction ? customAction : () => {};
 </script>
 
 <div class="flex">
