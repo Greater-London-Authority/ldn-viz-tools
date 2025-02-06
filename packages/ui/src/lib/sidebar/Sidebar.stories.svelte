@@ -47,7 +47,7 @@
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Select from '../select/Select.svelte';
-	import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher.svelte';
+	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
 	import SidebarHint from './elements/sidebarHint/SidebarHint.svelte';
 
 	let selectedValue = 'markers';
