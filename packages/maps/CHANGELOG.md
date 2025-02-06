@@ -1,5 +1,13 @@
 # ldn-viz-tools-maps
 
+## 7.0.0
+
+### Major Changes
+
+- 677ca8d: CHANGED: refactored `Map` by splitting out core MapLibre stuff to `MapLibre` internal component.
+  CHANGED: updated `Map` to accept light and dark base map styles and toggle them based on theme mode.
+  CHANGED: removed `classes` property from `map`, pass classes as `class` attribute instead.
+
 ## 6.0.1
 
 ### Patch Changes
