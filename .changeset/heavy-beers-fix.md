@@ -1,5 +1,6 @@
 ---
-'@ldn-viz/ui': minor
+'@ldn-viz/ui': major
 ---
 
-Deprectaed sidebarHint component and use universal overlay for hints - Intputs and Sidebar
+REMOVED: `SidebarHint` component 
+CHANGED: use `Overlay` component for hints in Inputs and Sidebar
