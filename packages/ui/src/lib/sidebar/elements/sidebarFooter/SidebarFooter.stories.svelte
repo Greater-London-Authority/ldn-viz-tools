@@ -15,7 +15,7 @@
 	import { writable } from 'svelte/store';
 	import LogoCIU from '../../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../../logos/LogoMayor.svelte';
-	import ThemeSwitcher from '../../../themeSwitcher/ThemeSwitcher.svelte';
+	import ThemeSwitcher from '../../../theme/ThemeSwitcher.svelte';
 
 	// hack to make the "View cookie settings" link appear
 	window.CookieControl = writable(true);
