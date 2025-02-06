@@ -38,7 +38,10 @@
 			</label>
 		{/if}
 
-		<slot name="hint" />
+		{#if $$slots.hint}
+			<!-- An optional `<Overlay>` component to provide additional explanation. -->
+			<slot name="hint" />
+		{/if}
 	</div>
 
 	<slot />
