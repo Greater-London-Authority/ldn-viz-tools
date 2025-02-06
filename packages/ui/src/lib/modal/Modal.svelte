@@ -22,24 +22,32 @@
 	export let isOpen = writable(false);
 
 	export let customOpenFocus = () => {
-		const customElToFocus = document.getElementById($description.id);
+		const customElToFocus = document.getElementById($meltDescription.id);
 		return customElToFocus;
 	};
 
 	const {
-		elements: { trigger, portalled, overlay, content, title, description, close },
+		elements: {
+			trigger,
+			portalled,
+			overlay,
+			content,
+			title: meltTitle,
+			description: meltDescription,
+			close
+		},
 		states: { open }
 	} = createDialog({ open: isOpen, openFocus: customOpenFocus });
 
 	/**
 	 * title that appears at the top of the modal
 	 */
-	export let modalTitle: string;
+	export let title: string;
 
 	/**
-	 * description that appears below the modalTitle (the `aria-describedby` for the modal points to the element containing this text)
+	 * meltDescription that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
 	 */
-	export let modalDescription: string = '';
+	export let description: string = '';
 
 	/**
 	 * Colour scheme to apply to the header, either `light` or `dark`. The modal will respect global theme settings.
@@ -101,8 +109,8 @@
 				<div
 					class={`bg-color-container-level-1 text-color-text-primary p-3 pr-4 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
-					<div class="text-lg font-medium" {...$title} use:$title.action tabindex="-1">
-						{modalTitle}
+					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action tabindex="-1">
+						{title}
 					</div>
 					<div {...$close} use:$close.action>
 						<Button
@@ -117,23 +125,23 @@
 					</div>
 				</div>
 
-				<div class="overflow-y-auto" aria-labelledby={$title.id}>
+				<div class="overflow-y-auto" aria-labelledby={$meltTitle.id}>
 					<div class="px-4 py-6">
-						<div {...$description} use:$description.action tabindex="-1">
-							{modalDescription}
+						<div {...$meltDescription} use:$meltDescription.action tabindex="-1">
+							{description}
 						</div>
 
 						{#if hasChildren}
-							<!-- content to display below the `modalDescription`-->
+							<!-- content to display below the `description`-->
 							<slot />
 						{/if}
 					</div>
-					{#if $$slots.buttons}
-						<div class="p-4">
-							<slot name="buttons" />
-						</div>
-					{/if}
 				</div>
+				{#if $$slots.buttons}
+					<div class="p-4 flex justify-end gap-2">
+						<slot name="buttons" />
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>

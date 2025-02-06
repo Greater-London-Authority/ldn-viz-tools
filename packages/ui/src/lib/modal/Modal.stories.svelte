@@ -6,16 +6,16 @@
 		component: Modal,
 		argTypes: {
 			isOpen: { options: ['true', 'false'], control: { type: 'radio' } },
-			modalTitle: { type: 'string', control: 'text' },
-			modalDescription: { type: 'string', control: 'text' },
+			title: { type: 'string', control: 'text' },
+			description: { type: 'string', control: 'text' },
 			width: {
 				options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', 'full'],
 				control: { type: 'select' }
 			}
 		},
 		args: {
-			modalTitle: 'Expects a title',
-			modalDescription: 'Expects a summarising description of modal for accessibility'
+			title: 'Expects a title',
+			description: 'Expects a summarising description of modal for accessibility'
 		}
 	};
 </script>
@@ -42,20 +42,16 @@
 
 	<Modal
 		bind:isOpen
-		modalTitle="A modal with description!"
-		modalDescription="This modal has a description, but no contents!"
+		title="A modal with description!"
+		description="This modal has a description, but no contents!"
 	/>
 </Story>
 
 <Story name="Description and Contents">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
-	<Modal
-		bind:isOpen
-		modalTitle="A modal with contents!"
-		modalDescription="This modal has a description..."
-	>
-		<div class="prose pt-4">
+	<Modal bind:isOpen title="A modal with contents!" description="This modal has a description...">
+		<div class="pt-4">
 			...and contents!
 			<p>A list</p>
 			<ul class="list-disc list-inside">
@@ -67,19 +63,19 @@
 	</Modal>
 </Story>
 
-<Story name="Modal with close button">
+<Story name="Modal with cancel and accept buttons">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
-		modalTitle="A modal with close button!"
-		modalDescription="In a real example, these buttons would perform some action in addition to closing the modal."
+		title="A modal with cancel and accept buttons!"
+		description="In a real example, these buttons would perform some action in addition to closing the modal."
 	>
-		<div slot="buttons" class="flex justify-end gap-4">
+		<svelte:fragment slot="buttons">
 			<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button
 			>
 			<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
-		</div>
+		</svelte:fragment>
 	</Modal>
 </Story>
 
@@ -89,8 +85,8 @@
 	<Modal
 		bind:isOpen
 		width="6xl"
-		modalTitle="A wider modal!"
-		modalDescription="We can use the width prop to set different max-widths from xs though 7xl and full. Default is md"
+		title="A wider modal!"
+		description="We can use the width prop to set different max-widths from xs though 7xl and full. Default is md"
 	/>
 </Story>
 
@@ -99,9 +95,9 @@
 
 	<Modal
 		bind:isOpen
-		modalTitle="Modal with very long content!"
-		modalDescription="An example of a modal with 10 paragraphs of dummy text content, to demonstrate the behaviour of a very long modal."
-		width="6xl"
+		title="Modal with very long content!"
+		description="An example of a modal with 10 paragraphs of dummy text content, to demonstrate the behaviour of a very long modal."
+		width="xl"
 	>
 		{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 
@@ -132,11 +128,11 @@
 
 	<Modal
 		bind:isOpen
-		modalTitle="A modal with a light header!"
-		modalDescription="This modal has a description..."
+		title="A modal with a light header!"
+		description="This modal has a description..."
 		headerTheme="light"
 	>
-		<div class="prose pt-4">
+		<div class="pt-4">
 			...and contents!
 			<p>A list</p>
 			<ul class="list-disc list-inside">
@@ -151,10 +147,7 @@
 <!-- When using the `<Trigger>` component, you don't need to pass `isOpen` as a prop. -->
 
 <Story name="With Trigger">
-	<Modal
-		modalTitle="The modal title"
-		modalDescription="This demonstrates how to use the Trigger component."
-	>
+	<Modal title="The modal title" description="This demonstrates how to use the Trigger component.">
 		<Trigger slot="trigger" variant="solid" emphasis="primary" size="md">Open modal!</Trigger>
 	</Modal>
 </Story>
