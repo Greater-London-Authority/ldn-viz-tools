@@ -59,6 +59,8 @@ export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSectio
 export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
 export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
 
+export { default as SidebarFromArray } from './sidebar/SidebarFromArray.svelte';
+
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
