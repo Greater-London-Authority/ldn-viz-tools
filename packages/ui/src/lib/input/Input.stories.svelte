@@ -132,6 +132,12 @@
 
 <!--Exposes a hint slot into which one can pass an overlay component to provide contextual help-->
 
+<Story name="With hint tooltip from props">
+	<div class="w-96">
+		<Input label="Tooltip" name="tooltip-input" hint="I am some hint text" />
+	</div>
+</Story>
+
 <Story name="With hint tooltip - default hintLabel">
 	<div class="w-96">
 		<Input label="Tooltip" name="tooltip-input">

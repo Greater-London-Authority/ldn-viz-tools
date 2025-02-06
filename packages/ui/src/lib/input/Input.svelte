@@ -71,6 +71,16 @@
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 
 	/**
+	 * Help text to be displayed in tooltip
+	 */
+	export let hint = '';
+
+	/**
+	 * Text to be displayed next to icon in tooltip trigger.
+	 */
+	export let hintLabel: undefined | string = undefined;
+
+	/**
 	 * If `false`, then `required` attribute is applied to `<input>`.
 	 */
 	export let optional = false;
@@ -157,6 +167,8 @@
 	{descriptionId}
 	{description}
 	{descriptionAlignment}
+	{hintLabel}
+	{hint}
 	{errorId}
 	{error}
 	{disabled}

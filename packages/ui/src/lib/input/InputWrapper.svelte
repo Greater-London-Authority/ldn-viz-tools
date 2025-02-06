@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Overlay from '../overlay/Overlay.svelte';
 	import { classNames } from '../utils/classNames';
 
 	export let label = '';
@@ -7,6 +8,9 @@
 	export let descriptionId: undefined | string = undefined;
 	export let description = '';
 	export let descriptionAlignment: 'left' | 'right' = 'left';
+
+	export let hint = '';
+	export let hintLabel: undefined | string = undefined;
 
 	export let errorId: undefined | string = undefined;
 	export let error = '';
@@ -41,6 +45,11 @@
 		{#if $$slots.hint}
 			<!-- An optional `<Overlay>` component to provide additional explanation. -->
 			<slot name="hint" />
+		{/if}
+		{#if hint}
+			<Overlay {hintLabel}>
+				{hint}
+			</Overlay>
 		{/if}
 	</div>
 
