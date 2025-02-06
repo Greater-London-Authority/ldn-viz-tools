@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Tooltip from '../tooltip/Tooltip.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 	import { classNames } from '../utils/classNames';
 
 	export let label = '';
@@ -9,8 +9,8 @@
 	export let description = '';
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 
-	export let hintLabel = '';
 	export let hint = '';
+	export let hintLabel: undefined | string = undefined;
 
 	export let errorId: undefined | string = undefined;
 	export let error = '';
@@ -42,10 +42,14 @@
 			</label>
 		{/if}
 
+		{#if $$slots.hint}
+			<!-- An optional `<Overlay>` component to provide additional explanation. -->
+			<slot name="hint" />
+		{/if}
 		{#if hint}
-			<Tooltip {hintLabel}>
+			<Overlay {hintLabel}>
 				{hint}
-			</Tooltip>
+			</Overlay>
 		{/if}
 	</div>
 

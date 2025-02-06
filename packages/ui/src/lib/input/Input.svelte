@@ -78,7 +78,7 @@
 	/**
 	 * Text to be displayed next to icon in tooltip trigger.
 	 */
-	export let hintLabel = 'more info';
+	export let hintLabel: undefined | string = undefined;
 
 	/**
 	 * If `false`, then `required` attribute is applied to `<input>`.
@@ -141,11 +141,11 @@
 			return;
 		}
 
-		value = format(value, {
+		value = `${format(value, {
 			name,
 			type,
 			disabled: !!disabled
-		});
+		})}`;
 
 		// Protect from cyclic reactivity.
 		if (input.value !== value) {
@@ -182,6 +182,7 @@
 	{disabled}
 	{optional}
 >
+	<slot name="hint" slot="hint" />
 	<!--
 		Svelte does not allow bind:text and bind:value on an input element at
 		the same time so an on change listener is required.
