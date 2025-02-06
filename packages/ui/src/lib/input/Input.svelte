@@ -71,49 +71,6 @@
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 
 	/**
-	 * Help text to be displayed in tooltip
-	 */
-	export let hint = '';
-
-	/**
-	 * Text to be displayed next to icon in tooltip trigger.
-	 */
-	export let hintLabel = 'more info';
-
-	/**
-	 * Form in which the help text should be displayed.
-	 */
-	export let overlayType: 'tooltip' | 'popover' | 'modal' = 'tooltip';
-
-	/**
-	 * Title of modal (if `overlayType` is `'modal'`)
-	 */
-	export let modalTitle: string | undefined = undefined;
-
-	/**
-	 * Description of modal (if `overlayType` is `'modal'`)
-	 */
-	export let modalDescription: string | undefined = undefined;
-
-	/**
-	 * Width of modal (if `overlayType` is `'modal'`)
-	 */
-	export let modalWidth:
-		| 'sm'
-		| 'md'
-		| 'lg'
-		| 'xs'
-		| 'xl'
-		| '2xl'
-		| '3xl'
-		| '4xl'
-		| '5xl'
-		| '6xl'
-		| '7xl'
-		| 'full'
-		| undefined = undefined;
-
-	/**
 	 * If `false`, then `required` attribute is applied to `<input>`.
 	 */
 	export let optional = false;
@@ -200,17 +157,12 @@
 	{descriptionId}
 	{description}
 	{descriptionAlignment}
-	{hintLabel}
-	{hint}
-	{overlayType}
-	{modalDescription}
-	{modalTitle}
-	{modalWidth}
 	{errorId}
 	{error}
 	{disabled}
 	{optional}
 >
+	<slot name="hint" slot="hint" />
 	<!--
 		Svelte does not allow bind:text and bind:value on an input element at
 		the same time so an on change listener is required.
