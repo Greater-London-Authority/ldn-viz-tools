@@ -38,13 +38,18 @@
 
 	/**
 	 * object containing user-controlled properties of the layer:
-	 * * color (string)
+	 * * colorName (string) - the name of the color token in our design system (e,g, `data.categorical.yellow`)
 	 * * visibility (boolean)
 	 * * opacity (number between 0 and 1, inclusive)
 	 * * size (number)
 	 */
-	export let state: { color: string; visible: boolean; opacity: number; size?: number } = {
-		color: '#000000',
+	export let state: {
+		colorName: string;
+		visible: boolean;
+		opacity: number;
+		size?: number;
+	} = {
+		colorName: 'data.categorical.darkpink',
 		visible: true,
 		opacity: 1.0,
 		size: 10
@@ -67,7 +72,7 @@
 	</div>
 
 	{#if !hideColorControl}
-		<ColorPicker bind:color={state.color} />
+		<ColorPicker bind:color={state.color} bind:colorName={state.colorName} />
 	{/if}
 
 	{#if !hideOpacityControl}

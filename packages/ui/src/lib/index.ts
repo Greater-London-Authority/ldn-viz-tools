@@ -84,9 +84,9 @@ export { default as CookieControlSettings } from './analytics/CookieControlSetti
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
-export { default as Theme } from './themeSwitcher/Theme.svelte';
-export * from './themeSwitcher/themeStore';
-export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
+export { default as Theme } from './theme/Theme.svelte';
+export * from './theme/themeStore';
+export { default as themeSwitcher } from './theme/ThemeSwitcher.svelte';
 
 export * from './uniformInput/types';
 export { default as UniformInput } from './uniformInput/UniformInput.svelte';
