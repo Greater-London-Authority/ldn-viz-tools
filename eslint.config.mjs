@@ -11,70 +11,70 @@ import { FlatCompat } from '@eslint/eslintrc';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-	baseDirectory: __dirname,
-	recommendedConfig: js.configs.recommended,
-	allConfig: js.configs.all
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all
 });
 
 export default [
-	{
-		ignores: [
-			'**/*.cjs',
-			'**/.DS_Store',
-			'**/node_modules',
-			'build',
-			'.svelte-kit',
-			'package',
-			'**/.env',
-			'**/.env.*',
-			'!**/.env.example',
-			'**/pnpm-lock.yaml',
-			'**/package-lock.json',
-			'**/yarn.lock'
-		]
-	},
-	...compat.extends('eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'),
-	{
-		plugins: {
-			svelte,
-			'@typescript-eslint': typescriptEslint
-		},
+  {
+    ignores: [
+      '**/*.cjs',
+      '**/.DS_Store',
+      '**/node_modules',
+      'build',
+      '.svelte-kit',
+      'package',
+      '**/.env',
+      '**/.env.*',
+      '!**/.env.example',
+      '**/pnpm-lock.yaml',
+      '**/package-lock.json',
+      '**/yarn.lock'
+    ]
+  },
+  ...compat.extends('eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'),
+  {
+    plugins: {
+      svelte,
+      '@typescript-eslint': typescriptEslint
+    },
 
-		languageOptions: {
-			globals: {
-				...globals.browser,
-				...globals.node
-			},
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node
+      },
 
-			parser: tsParser,
-			ecmaVersion: 2020,
-			sourceType: 'module'
-		},
+      parser: tsParser,
+      ecmaVersion: 2020,
+      sourceType: 'module'
+    },
 
-		settings: {},
+    settings: {},
 
-		rules: {
-			'@typescript-eslint/no-explicit-any': 'off',
-			'@typescript-eslint/no-unused-vars': [
-				'warn',
-				{
-					argsIgnorePattern: '^_',
-					varsIgnorePattern: '^_'
-				}
-			]
-		}
-	},
-	{
-		files: ['**/*.svelte'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_'
+        }
+      ]
+    }
+  },
+  {
+    files: ['**/*.svelte'],
 
-		languageOptions: {
-			parser: parser,
-			ecmaVersion: 5,
-			sourceType: 'script',
+    languageOptions: {
+      parser: parser,
+      ecmaVersion: 5,
+      sourceType: 'script',
 
-			parserOptions: {
-				parser: '@typescript-eslint/parser'
-			}
-		}
-	}
+      parserOptions: {
+        parser: '@typescript-eslint/parser'
+      }
+    }
+  }
 ];

@@ -5,6 +5,18 @@ import { docs } from './ciuStorybookTheme';
 import '../src/app.postcss';
 import { withThemeByClassNameStore } from './withThemeByClassNameStore';
 
+const isBroswer = () => {
+	if (typeof window === 'object') {
+		return true;
+	}
+};
+const getLocalStorage = () => {
+	if (isBroswer()) {
+		return globalThis.localStorage?.getItem('theme') || 'light';
+	}
+	return 'light';
+};
+
 const preview: Preview = {
 	parameters: {
 		controls: {
@@ -23,7 +35,7 @@ const preview: Preview = {
 				light: '',
 				dark: 'dark'
 			},
-			defaultTheme: 'light'
+			defaultTheme: getLocalStorage()
 		})
 	]
 };

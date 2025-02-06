@@ -1,11 +1,41 @@
 # ldn-viz-tools-charts
 
+## 5.0.1
+
+### Patch Changes
+
+- 9c33886: ADDED: export the `plot` and `getDefault` functions, and `Plot` object
+
+## 5.0.0
+
+### Major Changes
+
+- 028ad2f: ADDED: `currentTheme` store to `ui` package and use in `chart` examples. Implement accessibility improvements in charts and illustrate with line chart example
+
+### Minor Changes
+
+- 028ad2f: ADDED: ARIA attributes and global ariaHidden for accessibility
+- 028ad2f: ADDED: chartDescription modal to Footer for use in chart and chartDescription for accessibility to ChartContainer
+
+### Patch Changes
+
+- Updated dependencies [028ad2f]
+- Updated dependencies [4556f05]
+- Updated dependencies [5c06c36]
+- Updated dependencies [f5de052]
+- Updated dependencies [7487cd8]
+- Updated dependencies [0ea3bc4]
+- Updated dependencies [7dc2bfb]
+- Updated dependencies [028ad2f]
+  - @ldn-viz/ui@15.3.0
+  - @ldn-viz/utils@1.1.0
+
 ## 4.0.0
 
 ### Major Changes
 
 - 8c31d1b: CHANGED: `ObservablePlot` and `ObservablePlotInner` now default to using a wrapper about Observable Plot;s `Plot.plot()` that applies default chart styling
-  ADDED: wrapper functions that wrap Observable Plot's mark functions and apply default styling
+- 8c31d1b: ADDED: wrapper functions that wrap Observable Plot's mark functions and apply default styling
 
 ### Minor Changes
 
@@ -27,7 +57,7 @@
 
 ### Patch Changes
 
-- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
 - Updated dependencies [1c134d6]
 - Updated dependencies [a3726bf]
 - Updated dependencies [4e4f7c5]

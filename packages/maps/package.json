@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
-	"version": "6.0.1",
+	"version": "7.0.0",
 	"license": "MIT",
 	"type": "module",
 	"exports": {
@@ -36,7 +36,8 @@
 		"@deck.gl/layers": "^8.9.35",
 		"@deck.gl/mapbox": "^8.9.35",
 		"@ldn-viz/utils": "*",
-		"@turf/turf": "6.5.0",
+		"@turf/centroid": "^7.1.0",
+		"@turf/turf": "^7.2.0",
 		"maplibre-gl": "^4.1.0",
 		"svelte-maplibre": "^0.8.2"
 	},
