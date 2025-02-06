@@ -13,18 +13,17 @@
 <script lang="ts">
 	import { Template, Story } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import MapApp from '../map/MapApp.svelte';
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
+	import type { MapLibreStore } from '../map/types';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
-	import { type Writable, writable } from 'svelte/store';
-	import type { Map as MaplibreglMap } from 'maplibre-gl';
+	import { writable } from 'svelte/store';
 	import BoroughsContextLayer from '../mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 
-	let mapStore: Writable<MaplibreglMap> = writable();
+	let mapStore: MapLibreStore = writable();
 </script>
 
 <Template let:args>
@@ -32,10 +31,9 @@
 </Template>
 
 <Story name="Zooming to borough">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 			bind:mapStore
@@ -46,5 +44,5 @@
 
 			<BoroughsContextLayer />
 		</Map>
-	</MapApp>
+	</div>
 </Story>

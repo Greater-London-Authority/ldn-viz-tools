@@ -72,7 +72,7 @@
 			<Icon src={ChevronLeft} class="w-8 h-8 pr-1 pl-0.5" />
 		</Button>
 
-		<div class="w-10" />
+		<div class="w-11" />
 
 		<Button
 			variant="square"

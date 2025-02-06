@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<SidebarGroupTitle>` component is used to display a subtitle to sub-divide a `<SidebarSection>`.
+	 * The `<SidebarGroupTitle>` component is used to display a subtitle to subdivide a `<SidebarSection>`.
 	 * @component
 	 */
 </script>
@@ -12,7 +12,7 @@
 	</h3>
 
 	{#if $$slots.hint}
-		<!-- An optional `<SidebarHint>` component to provide additional explanation. -->
+		<!-- An optional `<Overlay>` component to provide additional explanation. -->
 		<slot name="hint" />
 	{/if}
 </div>

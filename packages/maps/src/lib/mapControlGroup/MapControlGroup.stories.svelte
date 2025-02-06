@@ -1,9 +1,8 @@
 <script>
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import MapApp from '../map/MapApp.svelte';
-	import * as os_light_vts from '../themes/os_light_vts.json';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 	import MapControlLocationSearch from '../mapControlLocationSearch/MapControlLocationSearch.svelte';
@@ -28,11 +27,15 @@
 	<MapControlGroup {...args} />
 </Template>
 
+<!--
+Group and position map controls using `<MapControlGroup position="...">`.
+The named layout positions are shown around the edges of this map.
+If using typescript you can import the `MapControlGroupPositions`enum.
+-->
 <Story name="Positioning labels">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
@@ -43,29 +46,15 @@
 					</p>
 				</MapControlGroup>
 			{/each}
-
-			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
-			>
-				<p>
-					Group and position map controls using
-					<code>{'<MapControlGroup position="...">'}</code>.
-				</p>
-
-				<p>
-					The named layout positions are shown around the edges of this map. If using typescript you
-					can import the <code>MapControlGroupPositions</code> enum.
-				</p>
-			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
+<!-- The alignment of elements within a `MapControlGroup` depends on its position. -->
 <Story name="Positioning controls">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
@@ -81,34 +70,21 @@
 					</MapControlGroup>
 				{/if}
 			{/each}
-
-			<div
-				class="max-w-sm absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary text-center p-4 space-y-4"
-			>
-				<p>
-					The alignment of elements within a <code>MapControlGroup</code> depends on its position.
-				</p>
-			</div>
 		</Map>
-	</MapApp>
+	</div>
 </Story>
 
+<!--
+Typically, controls on the left are standard for every map, whereas controls on the right are context or map dependent.
+On small devices most controls will hide themselves.
+-->
 <Story name="Standard Layout">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
-			<div
-				class="max-w-md absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 transform z-10 bg-color-container-level-1 text-color-text-primary p-4 space-y-8"
-			>
-				<p class="w-52">⮜ Controls on the left are standard for every map</p>
-				<p class="ml-auto w-52">Those on the right are context or map dependent ⮞</p>
-				<p class="text-center">On small devices most controls will hide themselves.</p>
-			</div>
-
 			<MapControlGroup position="TopLeft">
 				<MapControlLocationSearch
 					adapter={new MapGeocoderAdapterMapBox(
@@ -135,5 +111,5 @@
 				<MapControlPan />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

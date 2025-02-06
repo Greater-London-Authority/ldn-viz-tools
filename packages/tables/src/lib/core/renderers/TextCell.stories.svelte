@@ -26,3 +26,7 @@
 </Template>
 
 <Story name="Default" source />
+
+<Story name="Bold text" source>
+	<TextCell value={'500 cars'} colorScale={() => 'red'} fontWeight="bold" />
+</Story>

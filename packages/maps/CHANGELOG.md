@@ -1,5 +1,33 @@
 # ldn-viz-tools-maps
 
+## 7.0.0
+
+### Major Changes
+
+- 677ca8d: CHANGED: refactored `Map` by splitting out core MapLibre stuff to `MapLibre` internal component.
+  CHANGED: updated `Map` to accept light and dark base map styles and toggle them based on theme mode.
+  CHANGED: removed `classes` property from `map`, pass classes as `class` attribute instead.
+
+## 6.0.1
+
+### Patch Changes
+
+- 1184aa1: CHANGED: updated year in map copyright statement to 2025
+
+## 6.0.0
+
+### Major Changes
+
+- 530d8de: REMOVED: removed `MappApp` component, which was replaced by `AppShell`
+
+### Minor Changes
+
+- 60ee6e5: CHANGED: add types to `MapControlZoom` component
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
+
 ## 5.3.0
 
 ### Minor Changes

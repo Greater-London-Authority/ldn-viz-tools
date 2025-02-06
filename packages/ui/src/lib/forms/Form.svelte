@@ -1,13 +1,13 @@
 <script lang="ts">
 	/**
 	 * The `<Form>` component wraps the `<form>` element to provide standard
-	 * styling and an easy to use mechanism for accessing and setting
+	 * styling and an easy-to-use mechanism for accessing and setting
 	 * values and errors on fields.
 	 *
 	 * The `<FormField>` component is designed to make adding fields easier by
 	 * managing each field's value and error, and binding it to the `<Form>`'s
 	 * `valueStore` and `errorStore` (which it receives as context).
-	 * Users can slot in custom user input components or elements but they will
+	 * Users can slot in custom user input components or elements, but they will
 	 * need to manually bind the `value` and `error` properties to the form's
 	 * `valueStore` and `errorStore`.
 	 * @component

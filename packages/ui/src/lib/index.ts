@@ -2,6 +2,8 @@
 export { default as AsyncButton } from './button/AsyncButton.svelte';
 export { default as Button } from './button/Button.svelte';
 
+export { default as Callout } from './callout/Callout.svelte';
+
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
@@ -48,14 +50,14 @@ export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/P
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 
-export { default as SidebarHint } from './sidebar/elements/sidebarHint/SidebarHint.svelte';
-
 export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
 export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
 
 export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
 export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
+
+export { default as SidebarFromArray } from './sidebar/SidebarFromArray.svelte';
 
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
@@ -80,9 +82,9 @@ export { default as CookieControlSettings } from './analytics/CookieControlSetti
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
-export { default as Theme } from './themeSwitcher/Theme.svelte';
-export * from './themeSwitcher/themeStore';
-export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
+export { default as Theme } from './theme/Theme.svelte';
+export * from './theme/themeStore';
+export { default as themeSwitcher } from './theme/ThemeSwitcher.svelte';
 
 export * from './uniformInput/types';
 export { default as UniformInput } from './uniformInput/UniformInput.svelte';
@@ -95,8 +97,10 @@ export { default as SchemaForm } from './forms/SchemaForm.svelte';
 export * from './forms/types';
 
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+export { default as Overlay } from './overlay/Overlay.svelte';
 
 export { classNames } from './utils/classNames';
+export { randomId } from './utils/randomId';
 
 export {
 	mediaQueryStore,

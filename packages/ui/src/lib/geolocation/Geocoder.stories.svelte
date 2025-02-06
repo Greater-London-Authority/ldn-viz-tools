@@ -188,7 +188,7 @@
 <Story name="Disabled dropdown">
 	<div class="m-6 space-y-6">
 		<p class="dark:text-white">
-			I've disabled the dropdown in this story, intead, I'm accessing the results by binding on the
+			I've disabled the dropdown in this story, instead, I'm accessing the results by binding on the
 			result set. I'm manually displaying them below but you can do whatever you like with them.
 		</p>
 		<p class="dark:text-white">

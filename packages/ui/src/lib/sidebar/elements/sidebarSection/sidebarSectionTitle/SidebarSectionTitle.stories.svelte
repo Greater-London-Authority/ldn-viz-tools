@@ -1,5 +1,5 @@
 <script context="module">
-	import SidebarHint from '../../sidebarHint/SidebarHint.svelte';
+	import Overlay from '../../../../overlay/Overlay.svelte';
 	import SidebarSectionTitle from './SidebarSectionTitle.svelte';
 
 	export const meta = {
@@ -32,12 +32,12 @@
 <Story name="With Hint" source>
 	<SidebarSectionTitle>
 		Section Title
-		<SidebarHint slot="hint" hintType="tooltip">
+		<Overlay slot="hint">
 			<p class="mb-4">Any content you want can go here</p>
 			<p>
 				Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
 				venenatis sapien. Etiam venenatis felis.
 			</p>
-		</SidebarHint>
+		</Overlay>
 	</SidebarSectionTitle>
 </Story>

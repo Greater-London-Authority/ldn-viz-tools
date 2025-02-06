@@ -61,7 +61,7 @@
 	};
 
 	const themeClasses = [
-		'bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-text-primary'
+		'bg-color-container-level-0 hover:bg-color-action-background-secondary-muted-hover text-color-text-primary'
 	];
 
 	const orientationClasses = {
@@ -81,7 +81,7 @@
 	class={classNames(
 		tabLabelClasses,
 		tabId === $selectedValue
-			? '!bg-color-action-background-primary cursor-default !text-color-static-white hover:!bg-color-action-background-primary-hover'
+			? '!bg-color-action-background-primary cursor-default !text-color-static-white hover:!bg-color-action-background-primary-hover dark:hover:!text-color-text-inverse-primary'
 			: 'cursor-pointer'
 	)}
 >

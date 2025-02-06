@@ -22,7 +22,9 @@
 	import { writable } from 'svelte/store';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
+	import Map from '../../../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../../../map/util';
+
 	import loadTestLayers from '../../../loadTestLayers';
 	import MapMarker from '../../MapMarker.svelte';
 	import TestTooltipCenterAboveFeature from './TestTooltipCenterAboveFeature.svelte';

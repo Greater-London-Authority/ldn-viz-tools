@@ -12,6 +12,9 @@
 				options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', 'full'],
 				control: { type: 'select' }
 			}
+		},
+		args: {
+			title: 'Expects a title'
 		}
 	};
 </script>
@@ -20,6 +23,7 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 
 	let isOpen = writable(false);
 </script>
@@ -117,7 +121,7 @@
 	</Modal>
 </Story>
 
-<Story name="Light Theme (Experimantal)">
+<Story name="Light Theme (Experimental)">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
 	<Modal
@@ -135,5 +139,13 @@
 				<li>Three</li>
 			</ul>
 		</div>
+	</Modal>
+</Story>
+
+<!-- When using the `<Trigger>` component, you don't need to pass `isOpen` as a prop. -->
+
+<Story name="With Trigger">
+	<Modal title="The modal title">
+		<Trigger slot="trigger" variant="solid" emphasis="primary" size="md">Open modal!</Trigger>
 	</Modal>
 </Story>

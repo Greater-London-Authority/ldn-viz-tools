@@ -1,5 +1,12 @@
 # @ldn-viz/utils
 
+## 1.1.0
+
+### Minor Changes
+
+- 5c06c36: ADDED: added `colorToRGBArray` function
+- 0ea3bc4: ADDED: `colorWithBestContrast()` function to select which of two text colors has better contrast with given background color
+
 ## 1.0.0
 
 ### Major Changes

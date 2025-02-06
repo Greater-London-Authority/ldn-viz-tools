@@ -1,7 +1,9 @@
 <script lang="ts">
 	/**
 	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls usch as data/image download buttons.
+	 * It also provides controls such as data/image download buttons.
+	 *
+	 * **Note**: You must provide a `chartDescription` for accessibility.
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 * 	@component
@@ -54,7 +56,7 @@
 	/**
 	 * The file name to be used for the downloaded data or image file.
 	 */
-	export let filename: '';
+	export let filename = '';
 
 	/**
 	 * The Data passed to the data Download Button(s) in the footer
@@ -84,17 +86,23 @@
 	export let chartWidth = 'w-full';
 
 	/**
-	 * If set to `true`, set `display: contents` on the top-level `ChartContainer` div, so that a grid layout can be
-	 * be applied to align parts of charts across two columns
+	 * If set to `true`, set `display: contents` on the top-level `ChartContainer` div,
+	 * so that a grid layout can be applied to align parts of charts across two columns
 	 */
 	export let alignMultiple = false;
 
 	// For save as image
 	let chartToCapture: HTMLDivElement;
 
+	/**
+	 * Description of the chart for use in a modal for sighted users.
+	 */
+	export let chartDescription = '';
+
 	let chartClass = classNames(
 		'relative',
 		chartHeight,
+		chartWidth,
 		overrideClass,
 		alignMultiple ? 'min-w-0' : ''
 	);
@@ -102,6 +110,10 @@
 </script>
 
 <div class={classes} bind:this={chartToCapture} id="captureElement">
+	{#if alt}
+		<p class="sr-only">{alt}</p>
+	{/if}
+
 	{#if title || subTitle}
 		<div class="mb-4">
 			{#if title}
@@ -111,10 +123,6 @@
 				<SubTitle>{subTitle}</SubTitle>
 			{/if}
 		</div>
-	{/if}
-
-	{#if alt}
-		<h5 class="sr-only">{alt}</h5>
 	{/if}
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
@@ -128,12 +136,14 @@
 		<slot />
 	</div>
 
-	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note}>
+	<!-- long description for screen readers -->
+	<slot name="description" />
+
+	{#if source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton}
+		<Footer {source} {byline} {note} {chartDescription}>
 			<ExportBtns
 				{chartToCapture}
 				{filename}
-				idToPad="captureElement"
 				dataForDownload={data}
 				{dataDownloadButton}
 				{imageDownloadButton}

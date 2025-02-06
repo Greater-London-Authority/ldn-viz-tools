@@ -6,14 +6,14 @@
 	import Form from './Form.svelte';
 	import SchemaFormField from './SchemaFormField.svelte';
 	import type {
-		FormValues,
+		FormActiveButtonStore,
 		FormErrors,
-		FormValueStore,
 		FormErrorStore,
 		FormHasErrors,
-		FormActiveButtonStore,
-		SchemaFormFieldProps,
-		SchemaFormCustomTypes
+		FormValues,
+		FormValueStore,
+		SchemaFormCustomTypes,
+		SchemaFormFieldProps
 	} from './types';
 
 	/**

@@ -1,49 +1,12 @@
-<script context="module" lang="ts">
-	import maplibre_gl from 'maplibre-gl';
-	import 'maplibre-gl/dist/maplibre-gl.css';
-	import { onMount, setContext } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
-
-	import {
-		GREATER_LONDON_BOUNDS,
-		GREATER_LONDON_BOUNDS_MAX,
-		theme_os_light_vts
-	} from '@ldn-viz/maps';
-	import MapCursor from './mapCursor/MapCursor';
-	import type { MapCursorStore } from './mapCursor/types';
-
-	export type MapLibre = maplibre_gl.Map;
-	export type MapStore = Writable<null | maplibre_gl.Map>;
-	export type WhenMapLoads = (map: maplibre_gl.Map) => void;
-
-	/**
-	 * Applied as the MapLibre `transformRequest` option to append the OS key
-	 * to outgoing OS API requests.
-	 */
-	export const appendOSKeyToUrl = (osKey: string) => {
-		return (url: string) => {
-			const urlObj = new URL(url);
-
-			if (urlObj.hostname !== 'api.os.uk') {
-				return { url: urlObj.href };
-			}
-
-			const WEB_MERCATOR_EPSG = '3857';
-			urlObj.searchParams.set('srs', WEB_MERCATOR_EPSG);
-			urlObj.searchParams.set('key', osKey);
-
-			return { url: urlObj.href };
-		};
-	};
-</script>
-
 <script lang="ts">
 	/**
-	 * The `<Map>` component wraps a MapLibre `Map` to provide:
-	 * - access to the `Map` and `MapCursor` objects via context;
-	 * - notification of both map initialisation and destruction events;
-	 * - default map options suitable for mapping in London;
-	 * - default styling to HTML elements rendered by the map.
+	 * The `<Map>` component wraps a MapLibre map and manages the style (based
+	 * on the current theme mode) and cursor event handling for quicker and
+	 * easier map creation and management.
+	 *
+	 * It also:
+	 * - provides stores for `Map` and `MapCursor` instances;
+	 * - sets context for `Map` and `MapCursor` instances;
 	 *
 	 * The map's container has a relative CSS position so slotted content can
 	 * position itself accordingly. Map controls and other overlay components
@@ -53,26 +16,42 @@
 	 * @component
 	 */
 
-	/**
-	 * Store containing the MapLibre instance.
-	 */
-	export const mapStore: MapStore = writable(null);
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+	import maplibre_gl from 'maplibre-gl';
 
-	/**
-	 * Store containing the MapCursor instance.
-	 */
-	export const mapCursorStore: MapCursorStore = writable(null);
+	import { currentThemeMode } from '@ldn-viz/ui';
+	import { theme_os_light_vts, theme_os_dark } from '@ldn-viz/maps';
+
+	import MapCursor from './mapCursor/MapCursor';
+	import type { MapCursorType, MapCursorTypeStore } from './mapCursor/types';
+
+	import MapLibre from './MapLibre.svelte';
+	import type { MapLibreOptions, MapLibreStyle, MapStore, WhenMapLoads } from './types';
 
 	/**
 	 * Disables initialisation of the map on mount. This is most often used
-	 * to speed up development on non-map components.
+	 * to avoid un-needed map rendering during development of non-map application
+	 * elements.
 	 */
 	export let disabled = false;
 
 	/**
-	 * Custom MapLibre options (see [MapOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
+	 * Custom ([MapLibre `MapOptions`](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
 	 */
-	export let options = {};
+	export let options: MapLibreOptions = {};
+
+	/**
+	 * Store containing the MapLibre instance.
+	 */
+	export const mapStore: MapStore = writable(null);
+	setContext('mapStore', mapStore);
+
+	/**
+	 * Store containing the MapCursor instance.
+	 */
+	export const mapCursorStore: MapCursorTypeStore = writable(null);
+	setContext('mapCursorStore', mapCursorStore);
 
 	/**
 	 * Called when the map is finished loading and ready for use.
@@ -80,97 +59,82 @@
 	export let whenMapLoads: null | WhenMapLoads = null;
 
 	/**
-	 * Called when the map component is destroyed. Required when external resources need to be cleaned up.
+	 * Called when the map component is destroyed. Required when external
+	 * resources need to be cleaned up.
 	 */
 	export let whenMapUnloads: null | WhenMapLoads = null;
 
 	/**
-	 * Additional classes applied to the map's container element.
+	 * Light style base map. Defaults to `theme_os_light_vts`. Pass `null`
+	 * to disable light mode.
 	 */
-	export let classes = '';
+	export let lightStyle: null | MapLibreStyle = theme_os_light_vts as MapLibreStyle;
 
-	setContext('mapStore', mapStore);
-	setContext('mapCursorStore', mapCursorStore);
+	/**
+	 * Dark style base map. Defaults to `theme_os_dark`. Pass `null`
+	 * to disable dark mode.
+	 */
+	export let darkStyle: null | MapLibreStyle = theme_os_dark as MapLibreStyle;
 
-	const defaultOptions = {
-		style: theme_os_light_vts,
-		bounds: GREATER_LONDON_BOUNDS,
-		maxBounds: GREATER_LONDON_BOUNDS_MAX,
-		attributionControl: true,
-		clickTolerance: 6
-	};
-
-	let container: null | HTMLElement;
-
-	onMount(() => {
-		if (disabled) {
-			return;
-		}
-
-		const maplibre: maplibre_gl.Map = new maplibre_gl.Map({
-			...defaultOptions,
-			...options,
-			container: container as HTMLElement
-		} as maplibre_gl.MapOptions);
-
+	const whenMapCreated: WhenMapLoads = (maplibre) => {
 		maplibre.once('load', () => {
 			mapStore.set(maplibre);
-			mapCursorStore.set(new MapCursor(maplibre));
+
+			const mapCursor = MapCursor(maplibre) as MapCursorType;
+			mapCursorStore.set(mapCursor);
 
 			if (whenMapLoads) {
 				whenMapLoads(maplibre);
 			}
-
-			// When embedded the map has a tendency to not spread itself across its
-			// entire canvas. This might be a MapLibre issue but it is resolved by
-			// forcing a resize.
-			maplibre.resize();
 		});
+	};
 
-		return () => {
-			if (whenMapUnloads) {
-				whenMapUnloads(maplibre);
-			}
+	const whenMapDestroyed: WhenMapLoads = (maplibre) => {
+		if (whenMapUnloads) {
+			whenMapUnloads(maplibre);
+		}
 
-			$mapCursorStore?.destroy();
+		$mapCursorStore?.destroy();
 
-			mapStore.set(null);
-			mapCursorStore.set(null);
+		mapStore.set(null);
+		mapCursorStore.set(null);
+	};
+
+	const updateMapOptions = () => {
+		mapOptions = {
+			...options,
+			style: identifyStyle()
 		};
-	});
+	};
 
-	// client width and height because on:resize won't always trigger refresh.
-	let clientWidth = 0;
-	let clientHeight = 0;
-	$: clientWidth && clientHeight && $mapStore?.resize();
+	const identifyStyle = (): MapLibreStyle => {
+		if (!lightStyle && !darkStyle) {
+			return theme_os_light_vts as MapLibreStyle;
+		}
+
+		if (lightStyle && !darkStyle) {
+			return lightStyle as MapLibreStyle;
+		}
+
+		if (!lightStyle && darkStyle) {
+			return darkStyle as MapLibreStyle;
+		}
+
+		const style = $currentThemeMode === 'dark' ? darkStyle : lightStyle;
+		return style as MapLibreStyle;
+	};
+
+	let mapOptions: Omit<maplibre_gl.MapOptions, 'container'> = {
+		...options,
+		style: identifyStyle()
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$: $currentThemeMode, darkStyle, lightStyle, updateMapOptions();
 </script>
 
-<section
-	bind:this={container}
-	bind:clientWidth
-	bind:clientHeight
-	class="w-full h-full relative overflow-hidden dark {classes}"
-	{...$$restProps}
->
-	<slot />
-</section>
-
-<style global>
-	/*
-		Override top level MapLibre & MapBox styling with ldn-viz styling so we
-		don't have to do it separately within each map sub-component, e.g.
-		map controls, popups, etc.
-	*/
-	.mapboxgl-map,
-	.maplibregl-map {
-		font-size: inherit;
-		font-family: inherit;
-		font-style: inherit;
-		line-height: inherit;
-	}
-
-	.maplibregl-ctrl-attrib-inner,
-	.mapboxgl-ctrl-attrib-inner {
-		@apply text-sm;
-	}
-</style>
+{#key mapOptions}
+	<MapLibre {disabled} options={mapOptions} {whenMapCreated} {whenMapDestroyed} {...$$restProps}>
+		<slot />
+	</MapLibre>
+{/key}

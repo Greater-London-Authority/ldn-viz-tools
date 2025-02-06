@@ -98,9 +98,9 @@
 	<Toaster position="Center" />
 	<div class="flex gap-6">
 		<Button on:click={toastNotice}>Notice</Button>
-		<Button condition="success" on:click={toastSuccess}>Success</Button>
-		<Button condition="warning" on:click={toastWarning}>Warning</Button>
-		<Button condition="error" on:click={toastError}>Error</Button>
+		<Button emphasis="positive" on:click={toastSuccess}>Success</Button>
+		<Button emphasis="caution" on:click={toastWarning}>Warning</Button>
+		<Button emphasis="negative" on:click={toastError}>Error</Button>
 	</div>
 </Story>
 

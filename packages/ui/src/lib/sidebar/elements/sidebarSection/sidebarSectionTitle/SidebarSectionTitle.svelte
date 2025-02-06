@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<SidebarSectionTitle>` component is used to display a subtitle to sub-divide a sidebar into sections.
+	 * The `<SidebarSectionTitle>` component is used to display a subtitle to subdivide a sidebar into sections.
 	 * It is used by the `<SidebarSection>` component, which also groups together the content of a section in a `<div>`.
 	 * @component
 	 */
@@ -14,7 +14,7 @@
 		</h1>
 
 		{#if $$slots.hint}
-			<!-- An optional `<SidebarHint>` component to provide additional explanation. -->
+			<!-- An optional `<Overlay>` component to provide additional explanation. -->
 			<slot name="hint" />
 		{/if}
 	</div>

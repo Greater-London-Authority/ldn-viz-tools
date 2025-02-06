@@ -3,12 +3,15 @@
 	 * The `ObservablePlotInner` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library.
 	 * It does *not* apply the  [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) as a wrapper:
 	 * if you require this, use the [ObservablePlot](./?path=/docs/charts-observableplot--documentation) component instead.
+	 *
+	 * **Note**: if you use this instead of the `ObservablePlot` component, ensure you add a description of the chart somewhere on the page with an `id` equal to the value of `ariaDescribedBy` for screen reader use.
 	 *  @component
 	 */
 
 	import type {
 		AddEventHandlerFunction,
 		AddEventHandlerInnerFunction,
+		EventHandler,
 		Position,
 		RegisterTooltipFunction
 	} from './types.ts';
@@ -61,6 +64,52 @@
 			return el ?? null;
 		};
 
+	export const addMultipleEventHandlers = (events: EventHandler[]) => {
+		return (index, scales, values, dimensions, context, next) => {
+			const el = next && next(index, scales, values, dimensions, context);
+
+			for (const event of events) {
+				const marks = el?.querySelectorAll(event.markShape ?? 'rect') || [];
+
+				if (event.type === 'tooltip') {
+					const mouseEnterHandler = (ev: MouseEvent, d: any) => {
+						event.store.set({
+							...d,
+							clientX: ev.clientX,
+							clientY: ev.clientY,
+							pageX: ev.pageX,
+							pageY: ev.pageY,
+							layerX: ev.layerX,
+							layerY: ev.layerY
+						}); // can't use the $store syntax here
+					};
+					addEventHandlerInner('mouseenter', mouseEnterHandler, marks, values, index);
+					const mouseMoveHandler = (ev: MouseEvent, d: any) => {
+						event.store.set({
+							...d,
+							clientX: ev.clientX,
+							clientY: ev.clientY,
+							pageX: ev.pageX,
+							pageY: ev.pageY,
+							layerX: ev.layerX,
+							layerY: ev.layerY
+						}); // can't use the $store syntax here
+					};
+					addEventHandlerInner('mousemove', mouseMoveHandler, marks, values, index);
+
+					const mouseLeaveHandler = () => {
+						event.store.set(undefined);
+					};
+					addEventHandlerInner('mouseout', mouseLeaveHandler, marks, values, index);
+				} else {
+					addEventHandlerInner(event.type, event.handler, marks, values, index);
+				}
+			}
+
+			return el ?? null;
+		};
+	};
+
 	const addEventHandlerInner: AddEventHandlerInnerFunction = (
 		eventName,
 		eventHandler,
@@ -89,7 +138,8 @@
 </script>
 
 <script lang="ts">
-	import * as Plot from '@observablehq/plot';
+	import * as ObservablePlot from '@observablehq/plot';
+	import * as Plot from '../observablePlotFragments/plot';
 
 	import { afterUpdate, onMount, setContext } from 'svelte';
 	import { derived, writable } from 'svelte/store';
@@ -118,8 +168,34 @@
 	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
 
+	/**
+	 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
+	 * so that default chart-level styling is not applied.
+	 */
+	export let applyDefaults = true;
+
+	/**
+	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
+	 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
+	 */
+	export let ariaHidden = true;
+
+	/**
+	 * This should be the ID for the simple plain text description of the chart. Defaults to empty string.
+	 */
+	export let ariaDescribedBy = '';
+
+	/**
+	 * Defaults to randomly generated id passed in by `ObservablePlot`
+	 */
+	export let id;
+
 	const renderPlot = (node: HTMLDivElement) => {
-		node.appendChild(Plot.plot(spec));
+		if (applyDefaults) {
+			node.appendChild(Plot.plot(spec));
+		} else {
+			node.appendChild(ObservablePlot.plot(spec));
+		}
 	};
 
 	let width: number;
@@ -137,7 +213,9 @@
 	});
 
 	const updateDimensions = () => {
-		spec.width = width;
+		if (spec.width !== width) {
+			spec.width = width;
+		}
 	};
 
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
@@ -147,7 +225,15 @@
 </script>
 
 {#key spec}
-	<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
+	<div
+		use:renderPlot
+		{...$$restProps}
+		bind:this={domNode}
+		bind:clientWidth={width}
+		aria-hidden={ariaHidden}
+		aria-describedby={ariaDescribedBy}
+		{id}
+	/>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}

@@ -24,7 +24,6 @@
 	const marginLeft = 0;
 
 	const radius = 1;
-	const padding = 1.5;
 
 	const dodge = (values: number[]) => {
 		return values.map((v) => ({
@@ -70,6 +69,7 @@
 	$: drawCanvas(dodgedValues, canvasRef);
 
 	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$$restProps;
 </script>
 

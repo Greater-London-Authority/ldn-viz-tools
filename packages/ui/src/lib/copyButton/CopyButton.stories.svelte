@@ -26,6 +26,9 @@
 					category: 'properties'
 				}
 			}
+		},
+		args: {
+			content: 'Thing To Copy'
 		}
 	};
 </script>
@@ -51,10 +54,12 @@
 	<CopyButton content="Text to be copied." label="Copy" variant="solid" emphasis="secondary" />
 </Story>
 
-<Story name="Indictor icon">
-	<CopyButton content="One." label="One" />
-	<CopyButton content="Two." label="Two" />
-	<CopyButton content="Three." label="Three" />
+<Story name="Indicator icon">
+	<div class="space-y-4">
+		<CopyButton content="One." label="One" />
+		<CopyButton content="Two." label="Two" />
+		<CopyButton content="Three." label="Three" />
+	</div>
 </Story>
 
 <Story name="Custom label">

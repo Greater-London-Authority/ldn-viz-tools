@@ -1,7 +1,8 @@
 // Map
 export * from './map/Map.svelte';
 export { default as Map } from './map/Map.svelte';
-export { default as MapApp } from './map/MapApp.svelte';
+export * from './map/types';
+export * from './map/util';
 
 // Controls
 export { default as MapControlFullscreen } from './mapControlFullscreen/MapControlFullscreen.svelte';
@@ -28,6 +29,8 @@ export { default as MapMarkerContainer } from './mapMarker/elements/mapMarkerCon
 export { default as MapMarkerFlyToFeature } from './mapMarker/elements/mapMarkerFlyToFeature/MapMarkerFlyToFeature.svelte';
 export { default as MapMarkerPlacement } from './mapMarker/elements/mapMarkerPlacement/MapMarkerPlacement.svelte';
 export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
+
+export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
 // Layers
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';

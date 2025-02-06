@@ -16,7 +16,7 @@
 	export let selectedId = '';
 
 	/**
-	 * the `name` assiged to the group of radio buttons.
+	 * the `name` assigned to the group of radio buttons.
 	 */
 	export let name: string;
 
@@ -41,7 +41,7 @@
 	});
 
 	$: {
-		// update Id of store when Id of prop changes
+		// update id of store when id of prop changes
 		$val = selectedId;
 	}
 </script>

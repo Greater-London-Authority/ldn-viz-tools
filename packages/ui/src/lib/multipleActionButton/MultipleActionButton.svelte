@@ -14,13 +14,14 @@
 	 * (or variation on an action) will be performed when the button is pressed.
 	 * @component
 	 */
-	import { createDropdownMenu } from '@melt-ui/svelte';
+	import { createDropdownMenu, type FocusProp } from '@melt-ui/svelte';
 	import { fly } from 'svelte/transition';
 
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * Array of options that appear in the drop-down menu. Each is defined by an object with the following properties:
@@ -48,12 +49,26 @@
 	 */
 	export let onClick: (id: string) => void;
 
+	/**
+	 * Value set as the `id` attribute of the action button element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
+	const customCloseFocus: FocusProp = (defaultEl) => {
+		const customElToFocus = document.getElementById(id);
+		if (!customElToFocus && defaultEl) {
+			return defaultEl;
+		}
+		return customElToFocus;
+	};
+
 	const {
-		elements: { trigger, menu, arrow },
+		elements: { trigger, menu, item, arrow },
 		states: { open }
 	} = createDropdownMenu({
 		forceVisible: true,
-		loop: true
+		loop: true,
+		closeFocus: customCloseFocus
 	});
 
 	const changeOption = (newOption: Option) => {
@@ -67,14 +82,9 @@
 	export let variant: ButtonProps['variant'] = 'solid';
 
 	/**
-	 * Determines how much visual emphasis is placed on the button.
+	 * Determines the visual emphasis is placed on the button.
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
-
-	/**
-	 * Provides ability to modify appearance to represent success/error/warning conditions.
-	 */
-	export let condition: ButtonProps['condition'] = 'default';
 
 	/**
 	 * Sets the size of the button.
@@ -91,15 +101,7 @@
 </script>
 
 {#if options.length === 1}
-	<Button
-		on:click={() => onClick(state.id)}
-		{variant}
-		{emphasis}
-		{condition}
-		{size}
-		{disabled}
-		{title}
-	>
+	<Button on:click={() => onClick(state.id)} {variant} {emphasis} {size} {disabled} {title} {id}>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
 			{options[0].buttonLabel}
@@ -112,10 +114,10 @@
 			on:click={() => onClick(state.id)}
 			{variant}
 			{emphasis}
-			{condition}
 			{size}
 			{disabled}
 			{title}
+			{id}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
@@ -125,16 +127,18 @@
 			</div>
 		</Button>
 
-		<div
-			use:$trigger.action
-			{...$trigger}
-			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
+		<Button
+			variant="square"
+			{emphasis}
+			{size}
+			{disabled}
+			action={$trigger.action}
+			actionProps={$trigger}
+			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'}`}
+			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 		>
-			<Button variant="square" {emphasis} {condition} {size} {disabled}>
-				<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
-				<span class="sr-only">Open Popover</span>
-			</Button>
-		</div>
+			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
+		</Button>
 	</div>
 
 	{#if $open}
@@ -146,7 +150,7 @@
 		>
 			<div {...$arrow} use:arrow />
 			{#if menuTitle}
-				<div class="text-sm text-color-text-secondary">{menuTitle}</div>
+				<p class="text-sm text-color-text-secondary">{menuTitle}</p>
 			{/if}
 
 			<div class="divide-y divide-color-ui-border-secondary">
@@ -154,15 +158,17 @@
 					<button
 						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
 						on:click={() => changeOption(option)}
+						use:$item.action
+						{...$item}
 					>
 						<div class="flex items-center">
 							{#if state.id === option.id}
 								<Icon src={Check} theme="mini" class="h-5 w-5 mr-2" />
 							{/if}
-							<div class="font-medium">{option.menuLabel}</div>
+							<p class="font-medium">{option.menuLabel}</p>
 						</div>
 
-						<div class="text-sm">{option.menuDescription}</div>
+						<p class="text-sm">{option.menuDescription}</p>
 					</button>
 				{/each}
 			</div>

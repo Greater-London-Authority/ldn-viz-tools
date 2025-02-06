@@ -37,7 +37,7 @@
 	export let adapter: GeocoderAdapter;
 
 	/**
-	 * delay in ms after a key stroke to minimise redundant API requests.
+	 * delay in ms after a keystroke to minimise redundant API requests.
 	 */
 	export let delay = 250;
 
@@ -50,6 +50,11 @@
 	 * called when the adapter promise rejects a search request.
 	 */
 	export let onSearchError: undefined | OnGeolocationSearchError;
+
+	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
 
 	/**
 	 * suggestions can be bound via 'bind:suggestions' to reactively receive
@@ -83,7 +88,7 @@
 	export let showClearButton = false;
 
 	/**
-	 * Placeholder text to be dislayed in the input element.
+	 * Placeholder text to be displayed in the input element.
 	 */
 	export let placeholder = 'Location search';
 
@@ -106,6 +111,8 @@
 				.then((res) => res || [])
 				.catch((err: unknown) => {
 					console.error('[Location Search] Search suggestions could not be retrieved.');
+
+					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 					onSearchError && onSearchError(err as GeolocationSearchError);
 					return [];
 				});
@@ -136,6 +143,7 @@
 			silentQueryTextUpdate = true;
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		onLocationSelected && onLocationSelected(suggestion);
 	};
 
@@ -272,9 +280,12 @@
 		selected = null;
 		suggestions = [];
 		showSuggestionList = false;
+
+		onSearchClear();
 	};
 
 	$: {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		query;
 		if (!silentQueryTextUpdate) {
 			scheduleUpdate();
@@ -326,3 +337,9 @@
 		/>
 	{/if}
 </search>
+
+<style>
+	[type='search']::-webkit-search-cancel-button {
+		appearance: none;
+	}
+</style>

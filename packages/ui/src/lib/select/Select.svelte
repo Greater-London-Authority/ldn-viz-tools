@@ -174,12 +174,12 @@
 			// in this case, newjustValue and newValue are both arrays
 			if (
 				!value ||
-				JSON.stringify(newjustValue) != JSON.stringify(value.map((v) => v[itemValueField]))
+				JSON.stringify(newjustValue) != JSON.stringify(value.map((v: any) => v[itemValueField]))
 			) {
 				value = items.filter((f) => (newjustValue ?? []).includes(f[itemValueField]));
 			}
 		} else {
-			if (!value || newjustValue != value[itemValueField]) {
+			if (value === null || value === undefined || newjustValue != value[itemValueField]) {
 				value = items.find((f) => f[itemValueField] === newjustValue);
 			}
 		}
@@ -190,7 +190,7 @@
 	const updatejustValueFromSelection = (newValue: { [key: string]: any }) => {
 		if (multiple) {
 			// in this case, newjustValue and newValue are both arrays
-			const newjustValue = newValue && newValue.map((v) => v[itemValueField]);
+			const newjustValue = newValue && newValue.map((v: any) => v[itemValueField]);
 			if (JSON.stringify(justValue) !== JSON.stringify(newjustValue)) {
 				justValue = newjustValue;
 			}
@@ -205,6 +205,7 @@
 </script>
 
 <InputWrapper {...$$restProps} {id} {disabled} {error}>
+	<slot name="hint" slot="hint" />
 	<div>
 		<SvelteSelect
 			{name}
