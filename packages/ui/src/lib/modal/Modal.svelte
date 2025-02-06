@@ -21,28 +21,25 @@
 	 */
 	export let isOpen = writable(false);
 
+	export let customOpenFocus = () => {
+		const customElToFocus = document.getElementById($content.id);
+		return customElToFocus;
+	};
+
 	const {
-		elements: {
-			trigger,
-			portalled,
-			overlay,
-			content,
-			title: meltTitle,
-			description: meltDescription,
-			close
-		},
+		elements: { trigger, portalled, overlay, content, title, description, close },
 		states: { open }
-	} = createDialog({ open: isOpen });
+	} = createDialog({ open: isOpen, openFocus: customOpenFocus });
 
 	/**
 	 * title that appears at the top of the modal
 	 */
-	export let title: string;
+	export let modalTitle: string;
 
 	/**
-	 * description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
+	 * description that appears below the modalTitle (the `aria-describedby` for the modal points to the element containing this text)
 	 */
-	export let description: string = '';
+	export let modalDescription: string = '';
 
 	/**
 	 * Colour scheme to apply to the header, either `light` or `dark`. The modal will respect global theme settings.
@@ -104,7 +101,7 @@
 				<div
 					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
-					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
+					<div class="text-lg font-medium" {...$title} use:$title.action>{modalTitle}</div>
 					<div {...$close} use:$close.action>
 						<Button
 							variant="square"
@@ -119,14 +116,14 @@
 				</div>
 
 				<div class="overflow-y-auto">
-					<div class="p-4">
-						{#if description}
-							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
-						{/if}
+					<div class="p-4 space-y-2">
+						<div {...$description} use:$description.action>{modalDescription}</div>
 
 						{#if hasChildren}
-							<!-- content to display below the `description`-->
-							<slot />
+							<!-- content to display below the `modalDescription`-->
+							<div>
+								<slot />
+							</div>
 						{/if}
 					</div>
 				</div>

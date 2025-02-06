@@ -6,15 +6,16 @@
 		component: Modal,
 		argTypes: {
 			isOpen: { options: ['true', 'false'], control: { type: 'radio' } },
-			title: { type: 'string', control: 'text' },
-			description: { type: 'string', control: 'text' },
+			modalTitle: { type: 'string', control: 'text' },
+			modalDescription: { type: 'string', control: 'text' },
 			width: {
 				options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', 'full'],
 				control: { type: 'select' }
 			}
 		},
 		args: {
-			title: 'Expects a title'
+			modalTitle: 'Expects a title',
+			modalDescription: 'Expects a summarising description of modal for accessibility'
 		}
 	};
 </script>
@@ -41,31 +42,20 @@
 
 	<Modal
 		bind:isOpen
-		title="A modal with contents!"
-		description="This modal has a description, but no contents!"
+		modalTitle="A modal with description!"
+		modalDescription="This modal has a description, but no contents!"
 	/>
 </Story>
 
 <Story name="Description and Contents">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
-	<Modal bind:isOpen title="A modal with contents!" description="This modal has a description...">
-		<div class="pt-2">
-			...and contents!
-			<p>A list</p>
-			<ul class="list-disc list-inside">
-				<li>One</li>
-				<li>Two</li>
-				<li>Three</li>
-			</ul>
-		</div>
-	</Modal>
-</Story>
-
-<Story name="Contents without description">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
-
-	<Modal bind:isOpen title="A modal with contents!">
+	<Modal
+		bind:isOpen
+		modalTitle="A modal with contents!"
+		modalDescription="This modal has a description..."
+	>
+		...and contents!
 		<p>A list</p>
 		<ul class="list-disc list-inside">
 			<li>One</li>
@@ -78,13 +68,16 @@
 <Story name="Modal with close button">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
-	<Modal bind:isOpen title="A modal with close button!">
-		<div class="mb-4">
-			In a real example, these buttons would perform some action in addition to closing the modal.
+	<Modal
+		bind:isOpen
+		modalTitle="A modal with close button!"
+		modalDescription="In a real example, these buttons would perform some action in addition to closing the modal."
+	>
+		<div class="flex gap-2 mt-4">
+			<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
+			<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button
+			>
 		</div>
-
-		<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
-		<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button>
 	</Modal>
 </Story>
 
@@ -94,15 +87,20 @@
 	<Modal
 		bind:isOpen
 		width="6xl"
-		title="A wider modal!"
-		description="We can use the width prop to set different max-widths from xs though 7xl and full. Default is md"
+		modalTitle="A wider modal!"
+		modalDescription="We can use the width prop to set different max-widths from xs though 7xl and full. Default is md"
 	/>
 </Story>
 
 <Story name="Modal with very long content">
 	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
 
-	<Modal bind:isOpen title="Modal with very long content!" width="6xl">
+	<Modal
+		bind:isOpen
+		modalTitle="Modal with very long content!"
+		modalDescription="An example of a modal with 10 paragraphs of dummy text content, to demonstrate the behaviour of a very long modal."
+		width="6xl"
+	>
 		{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 
 		{#each sections as _section}
@@ -126,26 +124,27 @@
 
 	<Modal
 		bind:isOpen
-		title="A modal with a light header!"
-		description="This modal has a description..."
+		modalTitle="A modal with a light header!"
+		modalDescription="This modal has a description..."
 		headerTheme="light"
 	>
-		<div class="pt-2">
-			...and contents!
-			<p>A list</p>
-			<ul class="list-disc list-inside">
-				<li>One</li>
-				<li>Two</li>
-				<li>Three</li>
-			</ul>
-		</div>
+		...and contents!
+		<p>A list</p>
+		<ul class="list-disc list-inside">
+			<li>One</li>
+			<li>Two</li>
+			<li>Three</li>
+		</ul>
 	</Modal>
 </Story>
 
 <!-- When using the `<Trigger>` component, you don't need to pass `isOpen` as a prop. -->
 
 <Story name="With Trigger">
-	<Modal title="The modal title">
+	<Modal
+		modalTitle="The modal title"
+		modalDescription="This demonstrates how to use the Trigger component."
+	>
 		<Trigger slot="trigger" variant="solid" emphasis="primary" size="md">Open modal!</Trigger>
 	</Modal>
 </Story>
