@@ -82,14 +82,9 @@
 	export let variant: ButtonProps['variant'] = 'solid';
 
 	/**
-	 * Determines how much visual emphasis is placed on the button.
+	 * Determines the visual emphasis is placed on the button.
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
-
-	/**
-	 * Provides ability to modify appearance to represent success/error/warning conditions.
-	 */
-	export let condition: ButtonProps['condition'] = 'default';
 
 	/**
 	 * Sets the size of the button.
@@ -106,16 +101,7 @@
 </script>
 
 {#if options.length === 1}
-	<Button
-		on:click={() => onClick(state.id)}
-		{variant}
-		{emphasis}
-		{condition}
-		{size}
-		{disabled}
-		{title}
-		{id}
-	>
+	<Button on:click={() => onClick(state.id)} {variant} {emphasis} {size} {disabled} {title} {id}>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
 			{options[0].buttonLabel}
@@ -128,7 +114,6 @@
 			on:click={() => onClick(state.id)}
 			{variant}
 			{emphasis}
-			{condition}
 			{size}
 			{disabled}
 			{title}
@@ -145,12 +130,11 @@
 		<Button
 			variant="square"
 			{emphasis}
-			{condition}
 			{size}
 			{disabled}
 			action={$trigger.action}
 			actionProps={$trigger}
-			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
+			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'}`}
 			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 		>
 			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />

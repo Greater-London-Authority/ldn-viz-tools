@@ -10,15 +10,16 @@
 
 	export type FormButtonhandler = (event: MouseEvent | TouchEvent) => void | Promise<unknown>;
 
-	const getConditionColorClasses = (condition: string): string => {
-		const conditionClasses = {
-			default: 'stroke-color-ui-primary',
-			success: 'stroke-color-ui-positive',
-			error: 'stroke-color-ui-negative',
-			warning: 'stroke-color-ui-warning'
+	const getSpinnerColorClasses = (emphasis: string): string => {
+		const colorClasses = {
+			primary: 'stroke-color-ui-primary',
+			secondary: 'stroke-color-ui-primary',
+			positive: 'stroke-color-ui-positive',
+			negative: 'stroke-color-ui-negative',
+			caution: 'stroke-color-ui-caution'
 		};
 
-		return conditionClasses[condition];
+		return colorClasses[emphasis as keyof typeof colorClasses];
 	};
 
 	const getDynamicSpinnerClasses = (size: string, variant: string): string => {
@@ -55,7 +56,7 @@
 	export let type: ButtonProps['type'] = 'button';
 
 	/**
-	 * Determines how much visual emphasis is placed on the button.
+	 * Determines the visual emphasis is placed on the button.
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
 
@@ -63,12 +64,6 @@
 	 * Selects which family of styles should be applied to the button.
 	 */
 	export let variant: ButtonProps['variant'] = 'solid';
-
-	/**
-	 * Provides ability to modify appearance to represent success/error/warning
-	 * conditions.
-	 */
-	export let condition: ButtonProps['condition'] = 'default';
 
 	/**
 	 * Sets the size of the button.
@@ -81,7 +76,7 @@
 	 */
 	export let disabled: ButtonProps['disabled'] = false;
 
-	$: conditionColorClasses = getConditionColorClasses(condition);
+	$: spinnerColorClasses = getSpinnerColorClasses(emphasis);
 	$: dynamicSpinnerClasses = getDynamicSpinnerClasses(size, variant);
 
 	const doClick: FormButtonhandler = async (event) => {
@@ -105,7 +100,6 @@
 	{type}
 	{emphasis}
 	{variant}
-	{condition}
 	{size}
 	disabled={disabled || working}
 	on:click={doClick}
@@ -122,7 +116,7 @@
 	{#if working}
 		<div class="relative">
 			<Spinner
-				arcColorClass={conditionColorClasses}
+				arcColorClass={spinnerColorClasses}
 				class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
 			/>
 			<!-- This gives the outer div the correct size so the spinner is centered -->

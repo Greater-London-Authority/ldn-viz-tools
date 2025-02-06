@@ -81,33 +81,32 @@
 			}
 		]}
 	>
-		<Button
-			slot="leftButtons"
-			emphasis="secondary"
-			condition="warning"
-			on:click={() => {
-				$valueStore.name = '';
-				$valueStore.color = null;
-				$valueStore.been_to_venice = false;
-				errorStore.set({});
-			}}
-		>
-			Clear
-		</Button>
-		<FormSubmitButton
-			slot="rightButtons"
-			onSubmit={() => {
-				errorStore.set({});
+		<div slot="rightButtons" class="space-x-2 flex">
+			<Button
+				variant="outline"
+				on:click={() => {
+					$valueStore.name = '';
+					$valueStore.color = null;
+					$valueStore.been_to_venice = false;
+					errorStore.set({});
+				}}
+			>
+				Clear
+			</Button>
+			<FormSubmitButton
+				onSubmit={() => {
+					errorStore.set({});
 
-				if (!$valueStore.name) {
-					$errorStore.name = 'A name must be entered';
-				}
+					if (!$valueStore.name) {
+						$errorStore.name = 'A name must be entered';
+					}
 
-				if (!$valueStore.color) {
-					$errorStore.color = 'A color must be selected';
-				}
-			}}
-		/>
+					if (!$valueStore.color) {
+						$errorStore.color = 'A color must be selected';
+					}
+				}}
+			/>
+		</div>
 	</SchemaForm>
 	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
@@ -165,27 +164,26 @@
 			}
 		]}
 	>
-		<Button
-			slot="leftButtons"
-			emphasis="secondary"
-			condition="warning"
-			on:click={() => {
-				errorStore.set({});
-				$valueStore.age = 40;
-			}}
-		>
-			Clear
-		</Button>
-		<FormSubmitButton
-			slot="rightButtons"
-			onSubmit={() => {
-				errorStore.set({});
+		<div slot="rightButtons" class="space-x-2 flex">
+			<Button
+				variant="outline"
+				on:click={() => {
+					errorStore.set({});
+					$valueStore.age = 40;
+				}}
+			>
+				Clear
+			</Button>
+			<FormSubmitButton
+				onSubmit={() => {
+					errorStore.set({});
 
-				if (typeof $valueStore.age === 'number' && $valueStore.age > 122) {
-					$errorStore.age = 'No one has yet lived over the age of 122';
-				}
-			}}
-		/>
+					if (typeof $valueStore.age === 'number' && $valueStore.age > 122) {
+						$errorStore.age = 'No one has yet lived over the age of 122';
+					}
+				}}
+			/>
+		</div>
 	</SchemaForm>
 	<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 		<pre>Values: {JSON.stringify($valueStore, null, 2)}</pre>
