@@ -205,6 +205,7 @@
 </script>
 
 <InputWrapper {...$$restProps} {id} {disabled} {error}>
+	<slot name="hint" slot="hint" />
 	<div>
 		<SvelteSelect
 			{name}

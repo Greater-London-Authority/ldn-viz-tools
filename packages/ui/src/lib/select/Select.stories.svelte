@@ -10,6 +10,7 @@
 
 <script lang="ts">
 	import Button from '../button/Button.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 	type Item = { label: string; value: number };
 	let value: Item;
 
@@ -56,13 +57,9 @@
 
 <Story name="With Context Hint">
 	<div class="w-96">
-		<Select
-			{items}
-			label="Label"
-			id="labelled-input"
-			hintLabel="Tooltip text"
-			hint="A brief contextual help message"
-		/>
+		<Select {items} label="Label" id="labelled-input">
+			<Overlay slot="hint" hintLabel="optional hint label">Contextual help text</Overlay>
+		</Select>
 	</div>
 </Story>
 
@@ -79,8 +76,6 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hintLabel="Tooltip text"
-			hint="A brief contextual help message"
 			description="descriptive text"
 			descriptionAlignment="right"
 			optional
@@ -95,8 +90,6 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hintLabel="Tooltip text"
-			hint="A brief contextual help message"
 			description="descriptive text"
 			optional
 			multiple
@@ -117,8 +110,6 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hintLabel="Tooltip text"
-			hint="A brief contextual help message"
 			description="descriptive text"
 			optional
 			error="something has gone wrong here"
@@ -133,8 +124,6 @@
 			label="Label"
 			id="labelled-input"
 			placeholder="Placeholder text"
-			hintLabel="Tooltip text"
-			hint="A brief contextual help message"
 			description="descriptive text"
 			disabled
 			optional
