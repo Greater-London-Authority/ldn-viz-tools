@@ -36,6 +36,11 @@
 	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
+
+	/**
 	 * Passed to the suggestions dropdown to limit the number of suggestions
 	 * shown at once.
 	 */
@@ -86,6 +91,7 @@
 	{delay}
 	{onSearchError}
 	onLocationSelected={onLocationSelectedGeocoder}
+	{onSearchClear}
 	{classes}
 	{inputClasses}
 	{placeholder}

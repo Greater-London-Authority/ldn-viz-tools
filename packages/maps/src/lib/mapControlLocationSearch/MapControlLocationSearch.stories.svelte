@@ -80,3 +80,25 @@
 		</Map>
 	</div>
 </Story>
+
+<!--
+This story shows how you can provide callback functions to be called when the user selects a location from the search results, or clears the selection.
+-->
+<Story name="Location Search - callback functions">
+	<div class="w-[100dvw] h-[100dvh]">
+		<Map
+			options={{
+				transformRequest
+			}}
+		>
+			<MapControlGroup position="TopLeft">
+				<MapControlLocationSearch
+					{adapter}
+					{onSearchError}
+					onSearchClear={() => console.log('Cleared search')}
+					onLocationFound={(location) => console.log('Location selected:', location)}
+				/>
+			</MapControlGroup>
+		</Map>
+	</div>
+</Story>

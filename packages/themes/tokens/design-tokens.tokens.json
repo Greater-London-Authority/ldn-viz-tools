@@ -2230,7 +2230,7 @@
             "disabled": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.grey.800}"
+              "value": "{semantic.light-mode.color.palette.grey.500}"
             }
           },
           "secondary": {
@@ -2241,7 +2241,7 @@
           "disabled": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.grey.400}"
+            "value": "{semantic.light-mode.color.palette.grey.500}"
           }
         },
         "chart": {
@@ -2270,7 +2270,7 @@
           "primary": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.600}"
+            "value": "{semantic.light-mode.color.palette.blue.700}"
           },
           "border": {
             "primary": {
@@ -2298,10 +2298,10 @@
               "type": "color",
               "value": "{semantic.light-mode.color.ui.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.warning}"
+              "value": "{semantic.light-mode.color.ui.caution}"
             },
             "neutral": {
               "description": "",
@@ -2345,7 +2345,7 @@
               "type": "color",
               "value": "{semantic.light-mode.color.palette.green.100}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.100}"
@@ -2390,13 +2390,18 @@
                 "description": "",
                 "type": "color",
                 "value": "{semantic.light-mode.color.palette.grey.1100}"
+              },
+              "secondary": {
+                "description": "",
+                "type": "color",
+                "value": "{semantic.light-mode.color.palette.grey.900}"
               }
             }
           },
           "disabled": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.grey.400}"
+            "value": "{semantic.light-mode.color.palette.grey.500}"
           },
           "alpha": {
             "description": "",
@@ -2416,22 +2421,22 @@
           "notice": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.600}"
+            "value": "{semantic.light-mode.color.palette.blue.700}"
           },
           "negative": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.red.600}"
+            "value": "{semantic.light-mode.color.palette.red.700}"
           },
           "positive": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.green.600}"
+            "value": "{semantic.light-mode.color.palette.green.700}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.orange.500}"
+            "value": "{semantic.light-mode.color.palette.orange.700}"
           },
           "neutral": {
             "description": "",
@@ -2454,24 +2459,19 @@
             "primary-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.blue.700}"
+              "value": "{semantic.light-mode.color.action.primary-hover}"
             },
             "primary-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.blue.800}"
+              "value": "{semantic.light-mode.color.action.primary-active}"
             },
             "secondary": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.action.secondary}"
             },
-            "primary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "primary-error": {
+            "error": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.negative}"
@@ -2479,132 +2479,42 @@
             "secondary-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.grey.300}"
+              "value": "{semantic.light-mode.color.action.secondary-hover}"
             },
             "secondary-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.grey.400}"
-            },
-            "secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
-            },
-            "secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
-            },
-            "notice-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.palette.blue.700}"
-            },
-            "notice-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.palette.blue.800}"
-            },
-            "notice-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
-            },
-            "notice-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "notice-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
+              "value": "{semantic.light-mode.color.action.secondary-active}"
             },
             "negative-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.red.700}"
+              "value": "{semantic.light-mode.color.palette.red.800}"
             },
             "negative-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.red.800}"
-            },
-            "negative-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
-            },
-            "negative-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
-            },
-            "negative-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
+              "value": "{semantic.light-mode.color.palette.red.900}"
             },
             "positive-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.green.700}"
+              "value": "{semantic.light-mode.color.palette.green.800}"
             },
             "positive-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.green.800}"
+              "value": "{semantic.light-mode.color.palette.green.900}"
             },
-            "positive-disabled": {
+            "caution-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
+              "value": "{semantic.light-mode.color.palette.orange.800}"
             },
-            "positive-focussed": {
+            "caution-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.positive}"
-            },
-            "positive-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
-            },
-            "warning-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.palette.orange.600}"
-            },
-            "warning-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.palette.orange.700}"
-            },
-            "warning-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
-            },
-            "warning-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.warning}"
-            },
-            "warning-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
-            },
-            "notice": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice}"
+              "value": "{semantic.light-mode.color.palette.orange.900}"
             },
             "negative": {
               "description": "",
@@ -2616,155 +2526,95 @@
               "type": "color",
               "value": "{semantic.light-mode.color.action.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.action.warning}"
+              "value": "{semantic.light-mode.color.action.caution}"
             },
             "disabled": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.background.disabled}"
             },
-            "negative-secondary": {
+            "negative-muted": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.background.negative}"
             },
-            "positive-secondary": {
+            "positive-muted": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.background.positive}"
             },
-            "notice-secondary": {
+            "caution-muted": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-100}"
+              "value": "{semantic.light-mode.color.ui.background.caution}"
             },
-            "warning-secondary": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.warning}"
-            },
-            "notice-secondary-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-100-hover}"
-            },
-            "notice-secondary-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-100-active}"
-            },
-            "notice-secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-100-disabled}"
-            },
-            "notice-secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-100-focussed}"
-            },
-            "notice-secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-100-error}"
-            },
-            "negative-secondary-hover": {
+            "negative-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.red.200}"
             },
-            "negative-secondary-active": {
+            "negative-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.red.300}"
             },
-            "negative-secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
-            },
-            "negative-secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
-            },
-            "negative-secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
-            },
-            "positive-secondary-hover": {
+            "positive-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.green.200}"
             },
-            "positive-secondary-active": {
+            "positive-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.green.300}"
             },
-            "positive-secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
-            },
-            "positive-secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.positive}"
-            },
-            "positive-secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.negative}"
-            },
-            "warning-secondary-hover": {
+            "caution-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.200}"
             },
-            "warning-secondary-active": {
+            "caution-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.orange.300}"
             },
-            "warning-secondary-disabled": {
+            "primary-muted": {
+              "type": "color",
+              "value": "#e6f2fd00",
+              "blendMode": "normal"
+            },
+            "primary-muted-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
+              "value": "{semantic.light-mode.color.action.primary-muted}"
             },
-            "warning-secondary-focussed": {
+            "primary-muted-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.warning}"
+              "value": "{semantic.light-mode.color.action.primary-muted-hover}"
             },
-            "warning-secondary-error": {
+            "secondary-muted": {
+              "type": "color",
+              "value": "#f0f1f200",
+              "blendMode": "normal"
+            },
+            "secondary-muted-hover": {
+              "description": "",
+              "type": "color",
+              "value": "{semantic.light-mode.color.action.secondary-muted-hover}"
+            },
+            "secondary-muted-active": {
+              "description": "",
+              "type": "color",
+              "value": "{semantic.light-mode.color.action.secondary-muted-active}"
+            },
+            "error-muted": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.background.negative}"
-            },
-            "primary-100": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.primary-100}"
-            },
-            "primary-100-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.primary-100-hover}"
-            },
-            "primary-100-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.primary-100-active}"
-            },
-            "primary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.background.disabled}"
             }
           },
           "border": {
@@ -2778,17 +2628,12 @@
               "type": "color",
               "value": "{semantic.light-mode.color.action.primary-active}"
             },
-            "primary-disabled": {
+            "disabled": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.action.disabled}"
             },
-            "primary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "primary-error": {
+            "error": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.border.negative}"
@@ -2803,67 +2648,12 @@
               "type": "color",
               "value": "{semantic.light-mode.color.action.secondary-active}"
             },
-            "secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.disabled}"
-            },
-            "secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.negative}"
-            },
-            "notice-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-hover}"
-            },
-            "notice-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.notice-active}"
-            },
-            "notice-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.disabled}"
-            },
-            "notice-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "notice-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.negative}"
-            },
             "negative-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.red.700}"
+              "value": "{semantic.light-mode.color.palette.red.800}"
             },
             "negative-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.negative}"
-            },
-            "negative-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.disabled}"
-            },
-            "negative-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.negative}"
-            },
-            "negative-error": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.border.negative}"
@@ -2871,52 +2661,22 @@
             "positive-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.palette.green.700}"
+              "value": "{semantic.light-mode.color.palette.green.800}"
             },
             "positive-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.ui.border.positive}"
             },
-            "positive-disabled": {
+            "caution-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.disabled}"
+              "value": "{semantic.light-mode.color.palette.orange.800}"
             },
-            "positive-focussed": {
+            "caution-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "positive-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.negative}"
-            },
-            "warning-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.palette.orange.600}"
-            },
-            "warning-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.warning}"
-            },
-            "warning-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.disabled}"
-            },
-            "warning-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.primary}"
-            },
-            "warning-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.negative}"
+              "value": "{semantic.light-mode.color.ui.border.caution}"
             },
             "primary": {
               "description": "",
@@ -2926,12 +2686,7 @@
             "secondary": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.secondary}"
-            },
-            "notice": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.notice}"
+              "value": "{semantic.light-mode.color.action.secondary}"
             },
             "negative": {
               "description": "",
@@ -2943,10 +2698,10 @@
               "type": "color",
               "value": "{semantic.light-mode.color.ui.border.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.ui.border.warning}"
+              "value": "{semantic.light-mode.color.ui.border.caution}"
             }
           },
           "primary": {
@@ -2957,7 +2712,7 @@
           "secondary": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.secondary}"
+            "value": "{semantic.light-mode.color.palette.grey.700}"
           },
           "text": {
             "primary": {
@@ -2985,17 +2740,12 @@
               "type": "color",
               "value": "{semantic.light-mode.color.action.primary-active}"
             },
-            "primary-focussed": {
+            "error": {
               "description": "",
               "type": "color",
-              "value": "{semantic.light-mode.color.action.primary-focussed}"
+              "value": "{semantic.light-mode.color.action.error}"
             },
-            "primary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.primary-error}"
-            },
-            "primary-disabled": {
+            "disabled": {
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.action.disabled}"
@@ -3004,27 +2754,7 @@
               "description": "",
               "type": "color",
               "value": "{semantic.light-mode.color.palette.grey.900}"
-            },
-            "secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.secondary-focussed}"
-            },
-            "secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.secondary-error}"
-            },
-            "secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.light-mode.color.action.disabled}"
             }
-          },
-          "notice": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.notice}"
           },
           "negative": {
             "description": "",
@@ -3036,10 +2766,10 @@
             "type": "color",
             "value": "{semantic.light-mode.color.ui.positive}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.warning}"
+            "value": "{semantic.light-mode.color.ui.caution}"
           },
           "disabled": {
             "description": "",
@@ -3049,14 +2779,14 @@
           "primary-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.800}"
+            "value": "{semantic.light-mode.color.palette.blue.900}"
           },
           "primary-focussed": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.ui.primary}"
           },
-          "primary-error": {
+          "error": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.ui.negative}"
@@ -3064,149 +2794,89 @@
           "secondary-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.grey.300}"
+            "value": "{semantic.light-mode.color.palette.grey.800}"
           },
           "secondary-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.grey.400}"
+            "value": "{semantic.light-mode.color.palette.grey.900}"
           },
           "secondary-focussed": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.ui.primary}"
           },
-          "secondary-error": {
+          "caution-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
+            "value": "{semantic.light-mode.color.palette.orange.800}"
           },
-          "notice-hover": {
+          "caution-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.700}"
+            "value": "{semantic.light-mode.color.palette.orange.900}"
           },
-          "notice-active": {
+          "caution-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.800}"
-          },
-          "notice-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
-          },
-          "notice-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.500}"
-          },
-          "notice-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
-          },
-          "warning-hover": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.palette.orange.600}"
-          },
-          "warning-active": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.palette.orange.700}"
-          },
-          "warning-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
-          },
-          "warning-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.warning}"
-          },
-          "warning-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
+            "value": "{semantic.light-mode.color.action.caution}"
           },
           "negative-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.red.700}"
+            "value": "{semantic.light-mode.color.palette.red.800}"
           },
           "negative-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.red.800}"
-          },
-          "negative-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
+            "value": "{semantic.light-mode.color.palette.red.900}"
           },
           "negative-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
-          },
-          "negative-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
+            "value": "{semantic.light-mode.color.action.negative}"
           },
           "positive-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.green.700}"
+            "value": "{semantic.light-mode.color.palette.green.800}"
           },
           "positive-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.green.800}"
-          },
-          "positive-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
+            "value": "{semantic.light-mode.color.palette.green.900}"
           },
           "positive-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.positive}"
+            "value": "{semantic.light-mode.color.action.positive}"
           },
-          "positive-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
-          },
-          "primary-100": {
+          "primary-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.blue.100}"
           },
-          "primary-100-hover": {
+          "primary-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.blue.200}"
           },
-          "primary-100-active": {
+          "primary-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.blue.300}"
           },
-          "secondary-100": {
+          "secondary-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.grey.100}"
           },
-          "secondary-100-hover": {
+          "secondary-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.grey.200}"
           },
-          "secondary-100-active": {
+          "secondary-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.grey.300}"
@@ -3214,127 +2884,67 @@
           "primary-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.700}"
+            "value": "{semantic.light-mode.color.palette.blue.800}"
           },
-          "notice-100": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.notice}"
-          },
-          "notice-100-hover": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.200}"
-          },
-          "notice-100-active": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.palette.blue.300}"
-          },
-          "notice-100-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
-          },
-          "notice-100-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.primary}"
-          },
-          "notice-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.negative}"
-          },
-          "warning-100-hover": {
+          "caution-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.orange.200}"
           },
-          "warning-100-active": {
+          "caution-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.orange.300}"
           },
-          "warning-100-disabled": {
+          "caution-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
+            "value": "{semantic.light-mode.color.action.caution}"
           },
-          "warning-100-focussed": {
+          "caution-muted": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.warning}"
+            "value": "{semantic.light-mode.color.ui.background.caution}"
           },
-          "warning-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.negative}"
-          },
-          "warning-100": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.warning}"
-          },
-          "negative-100": {
+          "negative-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.ui.background.negative}"
           },
-          "negative-100-hover": {
+          "negative-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.red.200}"
           },
-          "negative-100-active": {
+          "negative-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.red.300}"
           },
-          "negative-100-disabled": {
+          "negative-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
+            "value": "{semantic.light-mode.color.action.negative}"
           },
-          "negative-100-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
-          },
-          "negative-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.negative}"
-          },
-          "positive-100": {
+          "positive-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.ui.background.positive}"
           },
-          "positive-100-hover": {
+          "positive-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.green.200}"
           },
-          "positive-100-active": {
+          "positive-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.light-mode.color.palette.green.300}"
           },
-          "positive-100-disabled": {
+          "positive-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.disabled}"
-          },
-          "positive-100-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.positive}"
-          },
-          "positive-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.light-mode.color.ui.background.negative}"
+            "value": "{semantic.light-mode.color.action.positive}"
           }
         },
         "input": {
@@ -4229,7 +3839,7 @@
             "primary": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.grey.300}"
+              "value": "{semantic.dark-mode.color.palette.grey.200}"
             },
             "secondary": {
               "description": "",
@@ -4239,7 +3849,7 @@
             "disabled": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.grey.800}"
+              "value": "{semantic.dark-mode.color.palette.grey.700}"
             }
           },
           "secondary": {
@@ -4250,7 +3860,7 @@
           "disabled": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.grey.400}"
+            "value": "{semantic.dark-mode.color.palette.grey.700}"
           }
         },
         "chart": {
@@ -4279,7 +3889,7 @@
           "primary": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.600}"
+            "value": "{semantic.dark-mode.color.palette.blue.500}"
           },
           "border": {
             "primary": {
@@ -4307,10 +3917,10 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.warning}"
+              "value": "{semantic.dark-mode.color.ui.caution}"
             },
             "neutral": {
               "description": "",
@@ -4354,7 +3964,7 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.green.200}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.200}"
@@ -4399,13 +4009,18 @@
                 "description": "",
                 "type": "color",
                 "value": "{semantic.dark-mode.color.palette.grey.1100}"
+              },
+              "secondary": {
+                "description": "",
+                "type": "color",
+                "value": "{semantic.dark-mode.color.palette.grey.1000}"
               }
             }
           },
           "disabled": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.grey.500}"
+            "value": "{semantic.dark-mode.color.palette.grey.700}"
           },
           "alpha": {
             "description": "",
@@ -4420,24 +4035,24 @@
           "secondary": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.grey.400}"
+            "value": "{semantic.dark-mode.color.palette.grey.300}"
           },
           "notice": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.600}"
+            "value": "{semantic.dark-mode.color.palette.blue.500}"
           },
           "negative": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.red.600}"
+            "value": "{semantic.dark-mode.color.palette.red.700}"
           },
           "positive": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.green.600}"
+            "value": "{semantic.dark-mode.color.palette.green.700}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.700}"
@@ -4458,29 +4073,24 @@
             "primary": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary}"
+              "value": "{semantic.dark-mode.color.palette.blue.500}"
             },
             "primary-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.blue.700}"
+              "value": "{semantic.dark-mode.color.palette.blue.900}"
             },
             "primary-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.blue.800}"
+              "value": "{semantic.dark-mode.color.palette.blue.1000}"
             },
             "secondary": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.action.secondary}"
             },
-            "primary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "primary-error": {
+            "error": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.negative}"
@@ -4488,132 +4098,42 @@
             "secondary-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.grey.300}"
+              "value": "{semantic.dark-mode.color.action.secondary-hover}"
             },
             "secondary-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.grey.400}"
-            },
-            "secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
-            },
-            "secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
-            },
-            "notice-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.palette.blue.700}"
-            },
-            "notice-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.palette.blue.800}"
-            },
-            "notice-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
-            },
-            "notice-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "notice-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
+              "value": "{semantic.dark-mode.color.action.secondary-active}"
             },
             "negative-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.red.700}"
+              "value": "{semantic.dark-mode.color.palette.red.800}"
             },
             "negative-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.red.800}"
-            },
-            "negative-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
-            },
-            "negative-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
-            },
-            "negative-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
+              "value": "{semantic.dark-mode.color.palette.red.900}"
             },
             "positive-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.green.700}"
+              "value": "{semantic.dark-mode.color.palette.green.800}"
             },
             "positive-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.green.800}"
+              "value": "{semantic.dark-mode.color.palette.green.900}"
             },
-            "positive-disabled": {
+            "caution-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
+              "value": "{semantic.dark-mode.color.palette.orange.800}"
             },
-            "positive-focussed": {
+            "caution-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.positive}"
-            },
-            "positive-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
-            },
-            "warning-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.palette.orange.600}"
-            },
-            "warning-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.palette.orange.700}"
-            },
-            "warning-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
-            },
-            "warning-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.warning}"
-            },
-            "warning-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
-            },
-            "notice": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice}"
+              "value": "{semantic.dark-mode.color.palette.orange.900}"
             },
             "negative": {
               "description": "",
@@ -4625,179 +4145,114 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.action.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.warning}"
+              "value": "{semantic.dark-mode.color.action.caution}"
             },
             "disabled": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.background.disabled}"
             },
-            "negative-secondary": {
+            "negative-muted": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.background.negative}"
             },
-            "positive-secondary": {
+            "positive-muted": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.background.positive}"
             },
-            "notice-secondary": {
+            "caution-muted": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-100}"
+              "value": "{semantic.dark-mode.color.ui.background.caution}"
             },
-            "warning-secondary": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.warning}"
-            },
-            "notice-secondary-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-100-hover}"
-            },
-            "notice-secondary-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-100-active}"
-            },
-            "notice-secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-100-disabled}"
-            },
-            "notice-secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-100-focussed}"
-            },
-            "notice-secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-100-error}"
-            },
-            "negative-secondary-hover": {
+            "negative-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.red.300}"
             },
-            "negative-secondary-active": {
+            "negative-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.red.400}"
             },
-            "negative-secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
-            },
-            "negative-secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
-            },
-            "negative-secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
-            },
-            "positive-secondary-hover": {
+            "positive-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.green.200}"
             },
-            "positive-secondary-active": {
+            "positive-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.green.300}"
             },
-            "positive-secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
-            },
-            "positive-secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.positive}"
-            },
-            "positive-secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.negative}"
-            },
-            "warning-secondary-hover": {
+            "caution-muted-hover": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.300}"
             },
-            "warning-secondary-active": {
+            "caution-muted-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.palette.orange.400}"
             },
-            "warning-secondary-disabled": {
+            "primary-muted": {
+              "type": "color",
+              "value": "#001f4200",
+              "blendMode": "normal"
+            },
+            "primary-muted-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
+              "value": "{semantic.dark-mode.color.action.primary-muted}"
             },
-            "warning-secondary-focussed": {
+            "primary-muted-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.warning}"
+              "value": "{semantic.dark-mode.color.action.primary-muted-hover}"
             },
-            "warning-secondary-error": {
+            "secondary-muted": {
+              "type": "color",
+              "value": "#19202300",
+              "blendMode": "normal"
+            },
+            "secondary-muted-hover": {
+              "description": "",
+              "type": "color",
+              "value": "{semantic.dark-mode.color.action.secondary-muted-hover}"
+            },
+            "secondary-muted-active": {
+              "description": "",
+              "type": "color",
+              "value": "{semantic.dark-mode.color.action.secondary-muted-active}"
+            },
+            "error-muted": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.background.negative}"
-            },
-            "primary-100": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary-100}"
-            },
-            "primary-100-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary-100-hover}"
-            },
-            "primary-100-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary-100-active}"
-            },
-            "primary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.background.disabled}"
             }
           },
           "border": {
             "primary-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary-hover}"
+              "value": "{semantic.dark-mode.color.palette.blue.900}"
             },
             "primary-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary-active}"
+              "value": "{semantic.dark-mode.color.palette.blue.1000}"
             },
-            "primary-disabled": {
+            "disabled": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.action.disabled}"
             },
-            "primary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "primary-error": {
+            "error": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.border.negative}"
@@ -4812,67 +4267,12 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.action.secondary-active}"
             },
-            "secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.disabled}"
-            },
-            "secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.negative}"
-            },
-            "notice-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-hover}"
-            },
-            "notice-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.notice-active}"
-            },
-            "notice-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.disabled}"
-            },
-            "notice-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "notice-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.negative}"
-            },
             "negative-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.red.700}"
+              "value": "{semantic.dark-mode.color.palette.red.800}"
             },
             "negative-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.negative}"
-            },
-            "negative-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.disabled}"
-            },
-            "negative-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.negative}"
-            },
-            "negative-error": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.border.negative}"
@@ -4880,67 +4280,32 @@
             "positive-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.green.700}"
+              "value": "{semantic.dark-mode.color.palette.green.800}"
             },
             "positive-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.border.positive}"
             },
-            "positive-disabled": {
+            "caution-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.disabled}"
+              "value": "{semantic.dark-mode.color.palette.orange.800}"
             },
-            "positive-focussed": {
+            "caution-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "positive-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.negative}"
-            },
-            "warning-hover": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.palette.orange.600}"
-            },
-            "warning-active": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.warning}"
-            },
-            "warning-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.disabled}"
-            },
-            "warning-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
-            },
-            "warning-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.negative}"
+              "value": "{semantic.dark-mode.color.ui.border.caution}"
             },
             "primary": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.primary}"
+              "value": "{semantic.dark-mode.color.palette.blue.500}"
             },
             "secondary": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.secondary}"
-            },
-            "notice": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.notice}"
+              "value": "{semantic.dark-mode.color.action.secondary}"
             },
             "negative": {
               "description": "",
@@ -4952,10 +4317,10 @@
               "type": "color",
               "value": "{semantic.dark-mode.color.ui.border.positive}"
             },
-            "warning": {
+            "caution": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.ui.border.warning}"
+              "value": "{semantic.dark-mode.color.ui.border.caution}"
             }
           },
           "primary": {
@@ -4966,18 +4331,18 @@
           "secondary": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.secondary}"
+            "value": "{semantic.dark-mode.color.palette.grey.500}"
           },
           "text": {
             "primary": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary}"
+              "value": "{semantic.dark-mode.color.palette.blue.700}"
             },
             "secondary": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.text.secondary}"
+              "value": "{semantic.dark-mode.color.palette.grey.800}"
             },
             "primary-hover": {
               "description": "",
@@ -4987,24 +4352,19 @@
             "secondary-hover": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.grey.1000}"
+              "value": "{semantic.dark-mode.color.palette.grey.900}"
             },
             "primary-active": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.action.primary-active}"
             },
-            "primary-focussed": {
+            "error": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary-focussed}"
+              "value": "{semantic.dark-mode.color.action.error}"
             },
-            "primary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.primary-error}"
-            },
-            "primary-disabled": {
+            "disabled": {
               "description": "",
               "type": "color",
               "value": "{semantic.dark-mode.color.action.disabled}"
@@ -5012,28 +4372,8 @@
             "secondary-active": {
               "description": "",
               "type": "color",
-              "value": "{semantic.dark-mode.color.palette.grey.900}"
-            },
-            "secondary-focussed": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.secondary-focussed}"
-            },
-            "secondary-error": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.secondary-error}"
-            },
-            "secondary-disabled": {
-              "description": "",
-              "type": "color",
-              "value": "{semantic.dark-mode.color.action.disabled}"
+              "value": "{semantic.dark-mode.color.palette.grey.1000}"
             }
-          },
-          "notice": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.notice}"
           },
           "negative": {
             "description": "",
@@ -5045,10 +4385,10 @@
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.positive}"
           },
-          "warning": {
+          "caution": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.warning}"
+            "value": "{semantic.dark-mode.color.ui.caution}"
           },
           "disabled": {
             "description": "",
@@ -5058,14 +4398,14 @@
           "primary-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.800}"
+            "value": "{semantic.dark-mode.color.palette.blue.900}"
           },
           "primary-focussed": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.primary}"
           },
-          "primary-error": {
+          "error": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.negative}"
@@ -5073,149 +4413,89 @@
           "secondary-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.grey.300}"
+            "value": "{semantic.dark-mode.color.palette.grey.900}"
           },
           "secondary-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.grey.400}"
+            "value": "{semantic.dark-mode.color.palette.grey.1000}"
           },
           "secondary-focussed": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.primary}"
           },
-          "secondary-error": {
+          "caution-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
+            "value": "{semantic.dark-mode.color.palette.orange.800}"
           },
-          "notice-hover": {
+          "caution-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.700}"
+            "value": "{semantic.dark-mode.color.palette.orange.900}"
           },
-          "notice-active": {
+          "caution-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.800}"
-          },
-          "notice-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
-          },
-          "notice-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.500}"
-          },
-          "notice-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
-          },
-          "warning-hover": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.palette.orange.600}"
-          },
-          "warning-active": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.palette.orange.700}"
-          },
-          "warning-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
-          },
-          "warning-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.warning}"
-          },
-          "warning-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
+            "value": "{semantic.dark-mode.color.action.caution}"
           },
           "negative-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.red.700}"
+            "value": "{semantic.dark-mode.color.palette.red.800}"
           },
           "negative-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.red.800}"
-          },
-          "negative-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
+            "value": "{semantic.dark-mode.color.palette.red.900}"
           },
           "negative-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
-          },
-          "negative-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
+            "value": "{semantic.dark-mode.color.action.negative}"
           },
           "positive-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.green.700}"
+            "value": "{semantic.dark-mode.color.palette.green.800}"
           },
           "positive-active": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.green.800}"
-          },
-          "positive-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
+            "value": "{semantic.dark-mode.color.palette.green.900}"
           },
           "positive-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.positive}"
+            "value": "{semantic.dark-mode.color.action.positive}"
           },
-          "positive-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
-          },
-          "primary-100": {
+          "primary-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.blue.100}"
           },
-          "primary-100-hover": {
+          "primary-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.blue.200}"
           },
-          "primary-100-active": {
+          "primary-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.blue.300}"
           },
-          "secondary-100": {
+          "secondary-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.grey.100}"
           },
-          "secondary-100-hover": {
+          "secondary-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.grey.200}"
           },
-          "secondary-100-active": {
+          "secondary-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.grey.300}"
@@ -5223,127 +4503,67 @@
           "primary-hover": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.700}"
+            "value": "{semantic.dark-mode.color.palette.blue.800}"
           },
-          "notice-100": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.notice}"
-          },
-          "notice-100-hover": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.300}"
-          },
-          "notice-100-active": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.400}"
-          },
-          "notice-100-disabled": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
-          },
-          "notice-100-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.primary}"
-          },
-          "notice-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.negative}"
-          },
-          "warning-100-hover": {
+          "caution-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.300}"
           },
-          "warning-100-active": {
+          "caution-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.orange.400}"
           },
-          "warning-100-disabled": {
+          "caution-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
+            "value": "{semantic.dark-mode.color.action.caution}"
           },
-          "warning-100-focussed": {
+          "caution-muted": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.warning}"
+            "value": "{semantic.dark-mode.color.ui.background.caution}"
           },
-          "warning-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.negative}"
-          },
-          "warning-100": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.warning}"
-          },
-          "negative-100": {
+          "negative-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.background.negative}"
           },
-          "negative-100-hover": {
+          "negative-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.red.300}"
           },
-          "negative-100-active": {
+          "negative-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.red.400}"
           },
-          "negative-100-disabled": {
+          "negative-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
+            "value": "{semantic.dark-mode.color.action.negative}"
           },
-          "negative-100-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
-          },
-          "negative-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.negative}"
-          },
-          "positive-100": {
+          "positive-muted": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.ui.background.positive}"
           },
-          "positive-100-hover": {
+          "positive-muted-hover": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.green.200}"
           },
-          "positive-100-active": {
+          "positive-muted-active": {
             "description": "",
             "type": "color",
             "value": "{semantic.dark-mode.color.palette.green.300}"
           },
-          "positive-100-disabled": {
+          "positive-muted-focussed": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.disabled}"
-          },
-          "positive-100-focussed": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.positive}"
-          },
-          "positive-100-error": {
-            "description": "",
-            "type": "color",
-            "value": "{semantic.dark-mode.color.ui.background.negative}"
+            "value": "{semantic.dark-mode.color.action.positive}"
           }
         },
         "input": {
@@ -5390,7 +4610,7 @@
           "border-dragged": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.blue.500}"
+            "value": "{semantic.dark-mode.color.palette.blue.700}"
           },
           "background-active": {
             "description": "",

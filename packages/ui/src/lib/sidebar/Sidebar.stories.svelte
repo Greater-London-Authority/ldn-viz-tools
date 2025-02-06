@@ -49,6 +49,8 @@
 	import Overlay from '../overlay/Overlay.svelte';
 	import Select from '../select/Select.svelte';
 
+	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
+
 	let selectedValue = 'markers';
 
 	// In order for the sidebar to open/ close a writable boolean store must be provided to context.
@@ -94,10 +96,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
@@ -150,10 +155,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
@@ -347,10 +355,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>

@@ -49,9 +49,9 @@
 		for={inputID}
 		class={classNames(
 			disabled
-				? 'cursor-not-allowed bg-color-input-background-disabled !text-color-text-disabled hover:bg-color-input-background-disabled'
-				: 'cursor-pointer bg-color-action-background-secondary text-color-text-primary',
-			'form-label flex flex-col justify-center items-center p-2 w-full ring-1 ring-color-container-level-1 hover:bg-color-action-background-primary hover:text-color-static-white peer-checked:text-color-static-white peer-checked:bg-color-action-background-primary'
+				? 'cursor-not-allowed !bg-color-input-background-disabled !text-color-text-disabled '
+				: 'cursor-pointer bg-color-input-background-off text-color-text-primary',
+			'form-label flex flex-col justify-center items-center p-2 min-h-11 w-full ring-1 ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on'
 		)}
 	>
 		<!-- contents of the radio button (name and/or icon) -->

@@ -17,7 +17,7 @@
 				}
 			},
 			emphasis: {
-				options: ['primary', 'secondary'],
+				options: ['primary', 'secondary', 'positive', 'negative', 'caution'],
 				control: { type: 'radio' }
 			},
 			working: {
@@ -28,7 +28,6 @@
 				control: { type: 'select' }
 			},
 			condition: {
-				options: ['default', 'success', 'error', 'warning'],
 				control: { type: 'select' }
 			},
 			size: {
@@ -60,8 +59,11 @@
 
 	let working = false;
 
-	const variants = ['solid', 'brand', 'outline', 'text', 'square'];
-	const conditions = ['default', 'success', 'warning', 'error'];
+	type Variant = 'brand' | 'square' | 'solid' | 'outline' | 'text' | undefined;
+	type Emphasis = 'primary' | 'secondary' | 'caution' | 'positive' | 'negative' | undefined;
+
+	const variants: Variant[] = ['solid', 'brand', 'outline', 'text', 'square'];
+	const emphasis: Emphasis[] = ['primary', 'secondary', 'positive', 'caution', 'negative'];
 </script>
 
 <Template let:args>
@@ -83,12 +85,12 @@
 
 <Story name="Default" source />
 
-<Story name="Variants & Conditions">
+<Story name="Variants & emphasis">
 	<div class="flex flex-col gap-4">
-		{#each conditions as condition}
+		{#each emphasis as emphasis}
 			<div class="flex gap-4">
 				{#each variants as variant}
-					<AsyncButton {variant} {condition} onClick={waitFiveSeconds}>
+					<AsyncButton {variant} {emphasis} onClick={waitFiveSeconds}>
 						{#if variant === 'square'}
 							<Icon src={DocumentArrowUp} theme="mini" class="w-5 h-5" aria-hidden="true" />
 						{:else}

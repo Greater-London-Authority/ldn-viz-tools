@@ -57,6 +57,8 @@ export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSectio
 export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
 export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
 
+export { default as SidebarFromArray } from './sidebar/SidebarFromArray.svelte';
+
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
@@ -80,9 +82,9 @@ export { default as CookieControlSettings } from './analytics/CookieControlSetti
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
-export { default as Theme } from './themeSwitcher/Theme.svelte';
-export * from './themeSwitcher/themeStore';
-export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
+export { default as Theme } from './theme/Theme.svelte';
+export * from './theme/themeStore';
+export { default as themeSwitcher } from './theme/ThemeSwitcher.svelte';
 
 export * from './uniformInput/types';
 export { default as UniformInput } from './uniformInput/UniformInput.svelte';

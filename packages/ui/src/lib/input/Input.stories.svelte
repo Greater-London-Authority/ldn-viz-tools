@@ -90,6 +90,19 @@
 <script lang="ts">
 	let value = '';
 	const round = (x: string) => Math.round(+x * 100) / 100;
+
+	let age: string;
+	const validateAge = (age: string) => {
+		const ageNum = parseInt(age);
+
+		if (!ageNum && ageNum !== 0) {
+			return 'Please enter your age.';
+		} else if (ageNum < 0 || ageNum > 116) {
+			return 'Age must be between 0 and 116.';
+		} else if (ageNum <= 18) {
+			return 'You must be over 18 to use this.';
+		} else return undefined;
+	};
 </script>
 
 <Template let:args>
@@ -187,9 +200,21 @@
 	</div>
 </Story>
 
+<!-- This demonstrates how an input behaves when error state changes. Try entering some numbers! -->
+
 <Story name="With error">
 	<div class="w-96">
-		<Input label="Description" name="description-input" error="Error text" />
+		<Input
+			bind:value={age}
+			label="Enter your age (required)"
+			name="age-input"
+			type="number"
+			optional={false}
+			description="Try entering a number below 18."
+			min="0"
+			max="116"
+			error={validateAge(age)}
+		/>
 	</div>
 </Story>
 
