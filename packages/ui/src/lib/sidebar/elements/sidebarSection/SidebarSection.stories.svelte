@@ -9,7 +9,7 @@
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import SidebarHint from '../sidebarHint/SidebarHint.svelte';
+	import Overlay from '../../../overlay/Overlay.svelte';
 	import SidebarGroupTitle from './sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import SidebarSectionTitle from './sidebarSectionTitle/SidebarSectionTitle.svelte';
 </script>
@@ -28,9 +28,7 @@
 		<div>
 			<SidebarGroupTitle>
 				Pay Attention to this group
-				<SidebarHint slot="hint" hintType="modal" hintLabel="why">
-					Beacuse it's Awesome!
-				</SidebarHint>
+				<Overlay slot="hint" hintLabel="why">Beacuse it's Awesome!</Overlay>
 			</SidebarGroupTitle>
 			Grouped content
 		</div>
@@ -46,9 +44,9 @@
 
 				<svelte:fragment slot="subTitle">The sub-title of ths section.</svelte:fragment>
 
-				<SidebarHint slot="hint" hintLabel="About">
+				<Overlay slot="hint" hintLabel="About">
 					This popover should provide some additional explanation about this section.
-				</SidebarHint>
+				</Overlay>
 			</SidebarSectionTitle>
 		</svelte:fragment>
 
@@ -61,9 +59,7 @@
 		<div>
 			<SidebarGroupTitle>
 				Pay Attention to this group
-				<SidebarHint slot="hint" hintType="modal" hintLabel="why">
-					Beacuse it's Awesome!
-				</SidebarHint>
+				<Overlay slot="hint" hintLabel="why">Beacuse it's Awesome!</Overlay>
 			</SidebarGroupTitle>
 			Grouped content
 		</div>

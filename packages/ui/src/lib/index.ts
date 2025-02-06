@@ -50,8 +50,6 @@ export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/P
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 
-export { default as SidebarHint } from './sidebar/elements/sidebarHint/SidebarHint.svelte';
-
 export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
 export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';

@@ -12,7 +12,7 @@
 	</h3>
 
 	{#if $$slots.hint}
-		<!-- An optional `<SidebarHint>` component to provide additional explanation. -->
+		<!-- An optional `<Overlay>` component to provide additional explanation. -->
 		<slot name="hint" />
 	{/if}
 </div>
