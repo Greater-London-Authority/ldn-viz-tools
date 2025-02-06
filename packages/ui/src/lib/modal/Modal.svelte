@@ -22,7 +22,7 @@
 	export let isOpen = writable(false);
 
 	export let customOpenFocus = () => {
-		const customElToFocus = document.getElementById($content.id);
+		const customElToFocus = document.getElementById($description.id);
 		return customElToFocus;
 	};
 
@@ -101,7 +101,9 @@
 				<div
 					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
-					<div class="text-lg font-medium" {...$title} use:$title.action>{modalTitle}</div>
+					<div class="text-lg font-medium" {...$title} use:$title.action tabindex="-1">
+						{modalTitle}
+					</div>
 					<div {...$close} use:$close.action>
 						<Button
 							variant="square"
@@ -115,17 +117,22 @@
 					</div>
 				</div>
 
-				<div class="overflow-y-auto">
-					<div class="p-4 space-y-2">
-						<div {...$description} use:$description.action>{modalDescription}</div>
+				<div class="overflow-y-auto" aria-labelledby={$title.id}>
+					<div class="px-4 py-6">
+						<div {...$description} use:$description.action tabindex="-1">
+							{modalDescription}
+						</div>
 
 						{#if hasChildren}
 							<!-- content to display below the `modalDescription`-->
-							<div>
-								<slot />
-							</div>
+							<slot />
 						{/if}
 					</div>
+					{#if $$slots.buttons}
+						<div class="p-4">
+							<slot name="buttons" />
+						</div>
+					{/if}
 				</div>
 			</div>
 		</div>

@@ -55,13 +55,15 @@
 		modalTitle="A modal with contents!"
 		modalDescription="This modal has a description..."
 	>
-		...and contents!
-		<p>A list</p>
-		<ul class="list-disc list-inside">
-			<li>One</li>
-			<li>Two</li>
-			<li>Three</li>
-		</ul>
+		<div class="prose pt-4">
+			...and contents!
+			<p>A list</p>
+			<ul class="list-disc list-inside">
+				<li>One</li>
+				<li>Two</li>
+				<li>Three</li>
+			</ul>
+		</div>
 	</Modal>
 </Story>
 
@@ -73,10 +75,10 @@
 		modalTitle="A modal with close button!"
 		modalDescription="In a real example, these buttons would perform some action in addition to closing the modal."
 	>
-		<div class="flex gap-2 mt-4">
-			<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
+		<div slot="buttons" class="flex justify-end gap-4">
 			<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button
 			>
+			<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
 		</div>
 	</Modal>
 </Story>
@@ -103,19 +105,25 @@
 	>
 		{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 
-		{#each sections as _section}
-			<div class="mb-4">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci leo, lacinia sed
-				nulla vel, eleifend bibendum magna. Suspendisse potenti. Suspendisse vestibulum consequat
-				maximus. Aenean nec odio pellentesque ligula fermentum tempor. Ut eu vulputate leo. Donec
-				viverra viverra tellus a convallis. Fusce diam lacus, semper eget pulvinar sed, mattis in
-				est. Cras vestibulum ultrices tortor et pulvinar. Maecenas id lorem et tellus ornare lacinia
-				non posuere est. Suspendisse molestie tortor erat, id pharetra nibh aliquet vitae.
-			</div>
-		{/each}
+		<div class="prose pt-4">
+			{#each sections as _section}
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci leo, lacinia
+					sed nulla vel, eleifend bibendum magna. Suspendisse potenti. Suspendisse vestibulum
+					consequat maximus. Aenean nec odio pellentesque ligula fermentum tempor. Ut eu vulputate
+					leo. Donec viverra viverra tellus a convallis. Fusce diam lacus, semper eget pulvinar sed,
+					mattis in est. Cras vestibulum ultrices tortor et pulvinar. Maecenas id lorem et tellus
+					ornare lacinia non posuere est. Suspendisse molestie tortor erat, id pharetra nibh aliquet
+					vitae.
+				</p>
+			{/each}
+		</div>
 
-		<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
-		<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button>
+		<div slot="buttons" class="flex justify-end gap-4">
+			<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button
+			>
+			<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
+		</div>
 	</Modal>
 </Story>
 
@@ -128,13 +136,15 @@
 		modalDescription="This modal has a description..."
 		headerTheme="light"
 	>
-		...and contents!
-		<p>A list</p>
-		<ul class="list-disc list-inside">
-			<li>One</li>
-			<li>Two</li>
-			<li>Three</li>
-		</ul>
+		<div class="prose pt-4">
+			...and contents!
+			<p>A list</p>
+			<ul class="list-disc list-inside">
+				<li>One</li>
+				<li>Two</li>
+				<li>Three</li>
+			</ul>
+		</div>
 	</Modal>
 </Story>
 
