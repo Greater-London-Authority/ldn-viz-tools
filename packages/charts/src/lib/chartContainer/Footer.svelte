@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Button, Modal } from '@ldn-viz/ui';
-	import { writable } from 'svelte/store';
 
 	export let byline = '';
 	export let source = '';
@@ -29,7 +28,7 @@
 						size="xs"
 						emphasis="secondary"
 						class="!p-0"
-						on:click={() => ($isOpen = true)}>View description</Button
+						on:click={() => (isOpen = true)}>View description</Button
 					>
 				</li>
 				<Modal bind:isOpen title="Description" description={chartDescription}></Modal>
