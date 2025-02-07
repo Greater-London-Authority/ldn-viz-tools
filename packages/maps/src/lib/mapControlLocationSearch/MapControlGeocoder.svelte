@@ -5,19 +5,20 @@
 	 * @component
 	 */
 
-	import { getContext } from 'svelte';
-	import mapgl from 'maplibre-gl';
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
-	import { setFeature, clearFeature } from './map-layer';
+	import mapgl from 'maplibre-gl';
+	import { getContext } from 'svelte';
+	import { clearFeature, setFeature } from './map-layer';
 	import type { MapStore } from './map-types';
 
 	import type {
+		GeocoderAdapter,
 		Geolocation,
 		GeolocationNamed,
-		OnGeolocationSearchResult,
 		OnGeolocationSearchError,
-		GeocoderAdapter
+		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
+	import { MapGeocoderAdapterMapBox } from './MapGeocoderAdapterMapBox';
 
 	/**
 	 * An adapter for sourcing location suggestions. All data fetching and
@@ -67,12 +68,21 @@
 			return;
 		}
 
-		showClearButton = true;
-		setFeature('geocoder', $mapStore, mapgl, location, { zoom: zoomLevel });
+		adapter
+			.retrieve(location.id)
+			.then((updatedLocation) => {
+				console.log('Updated location:', updatedLocation);
 
-		if (onLocationSelected) {
-			onLocationSelected(location);
-		}
+				showClearButton = true;
+				setFeature('geocoder', $mapStore, mapgl, updatedLocation, { zoom: zoomLevel });
+
+				if (onLocationSelected) {
+					onLocationSelected(updatedLocation);
+				}
+			})
+			.catch((error) => {
+				console.error('Error retrieving location:', error);
+			});
 	};
 
 	let showClearButton = false;
