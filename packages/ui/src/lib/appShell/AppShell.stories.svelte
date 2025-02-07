@@ -2,7 +2,7 @@
 	import AppShell from './AppShell.svelte';
 
 	export const meta = {
-		title: 'Ui/Components - App Layout/AppShell',
+		title: 'Ui/Components - Layout And ThemesAppShell',
 		component: AppShell,
 		parameters: {
 			layout: 'fullscreen'

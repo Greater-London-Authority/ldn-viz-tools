@@ -1,7 +1,7 @@
 <script context="module">
 	import CookieControlSettings from './CookieControlSettings.svelte';
 	export const meta = {
-		title: 'Ui/Components - App Layout/Meta, Analytics And Cookies/CookieControlSettings',
+		title: 'Ui/Components - Layout And ThemesMeta, Analytics And Cookies/CookieControlSettings',
 		component: CookieControlSettings
 	};
 </script>
