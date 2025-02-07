@@ -22,15 +22,14 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
 
-	let isOpen = writable(false);
+	let isOpen = false;
 </script>
 
 <Template let:args>
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen {...args}></Modal>
 </Template>
@@ -38,7 +37,7 @@
 <Story name="Default" source />
 
 <Story name="Description only">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -48,7 +47,7 @@
 </Story>
 
 <Story name="Description and Contents">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal bind:isOpen title="A modal with contents!" description="This modal has a description...">
 		<div class="pt-4">
@@ -64,7 +63,7 @@
 </Story>
 
 <Story name="Modal with cancel and accept buttons">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -72,15 +71,14 @@
 		description="In a real example, these buttons would perform some action in addition to closing the modal."
 	>
 		<svelte:fragment slot="buttons">
-			<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button
-			>
-			<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
+			<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button>
+			<Button variant="solid" on:click={() => (isOpen = false)}>Accept</Button>
 		</svelte:fragment>
 	</Modal>
 </Story>
 
 <Story name="Modal width">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -91,7 +89,7 @@
 </Story>
 
 <Story name="Modal with very long content">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen
@@ -116,15 +114,14 @@
 		</div>
 
 		<div slot="buttons" class="flex justify-end gap-4">
-			<Button variant="solid" emphasis="secondary" on:click={() => ($isOpen = false)}>Cancel</Button
-			>
-			<Button variant="solid" on:click={() => ($isOpen = false)}>Accept</Button>
+			<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button>
+			<Button variant="solid" on:click={() => (isOpen = false)}>Accept</Button>
 		</div>
 	</Modal>
 </Story>
 
 <Story name="Light Theme (Experimental)">
-	<Button on:click={() => ($isOpen = true)}>Open modal!</Button>
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
 	<Modal
 		bind:isOpen

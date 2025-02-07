@@ -17,9 +17,11 @@
 	import { classNames } from '../utils/classNames';
 
 	/**
-	 * boolean Svelte store that determines whether the modal is currently open.
+	 * Boolean that determines whether the modal is currently open.
 	 */
-	export let isOpen = writable(false);
+	export let isOpen = false;
+
+	const isOpenStore = writable(isOpen);
 
 	export let customOpenFocus = () => {
 		const customElToFocus = document.getElementById($meltDescription.id);
@@ -37,7 +39,7 @@
 			close
 		},
 		states: { open }
-	} = createDialog({ open: isOpen, openFocus: customOpenFocus });
+	} = createDialog({ open: isOpenStore, openFocus: customOpenFocus });
 
 	/**
 	 * Title that appears at the top of the modal
@@ -93,6 +95,20 @@
 		widthClasses[width]
 	);
 
+	$: toggledExternally(isOpen);
+	const toggledExternally = (newIsOpen: boolean) => {
+		if ($isOpenStore != newIsOpen) {
+			$isOpenStore = newIsOpen;
+		}
+	};
+
+	$: toggledInternally($isOpenStore);
+	const toggledInternally = (newStoreValue: boolean) => {
+		if (newStoreValue != isOpen) {
+			isOpen = newStoreValue;
+		}
+	};
+
 	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
@@ -117,7 +133,7 @@
 							variant="square"
 							emphasis="secondary"
 							class="w-8 h-8 self-center"
-							on:click={() => ($isOpen = false)}
+							on:click={() => ($isOpenStore = false)}
 						>
 							<span class="sr-only">Close</span>
 							<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />

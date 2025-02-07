@@ -1,5 +1,4 @@
 <script context="module">
-	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import Switch from './Switch.svelte';
 
@@ -17,28 +16,27 @@
 			}
 		}
 	};
-
-	let checked = writable(false);
 </script>
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	let disabled = false;
+	let checked = false;
 </script>
 
 <Template let:args>
-	<Switch {checked} {...args} />
+	<Switch bind:checked {...args} />
 
-	<div class="text-color-text-secondary">Is checked?: {$checked}</div>
+	<div class="text-color-text-secondary">Is checked?: {checked}</div>
 </Template>
 
 <Story name="Default" source />
 
 <Story name="With label" source>
-	<Switch label="Enable something" {checked} />
+	<Switch label="Enable something" bind:checked />
 </Story>
 
-<Story name="small" source>
+<Story name="Small" source>
 	<Switch label="Enable something" size="sm" {checked} />
 </Story>
 
@@ -52,6 +50,13 @@
 			Click to {disabled ? 'enable' : 'disable'}
 		</Button>
 
-		<Switch label="Enable something" {checked} {disabled} />
+		<Switch label="Enable something" bind:checked {disabled} />
+	</div>
+</Story>
+
+<Story name="Externally change" source>
+	<div class="flex flex-col space-y-4">
+		<Button on:click={() => (checked = !checked)}>Toggle</Button>
+		<Switch label="Enable something" bind:checked />
 	</div>
 </Story>
