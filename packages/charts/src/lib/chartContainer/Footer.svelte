@@ -10,7 +10,7 @@
 	/**
 	 * Controls whether the Modal is open or closed
 	 */
-	let isOpen = writable(false);
+	let isOpen = false;
 </script>
 
 <div class="w-full flex flex-wrap justify-between mt-1 items-end">
