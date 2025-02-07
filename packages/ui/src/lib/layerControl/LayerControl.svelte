@@ -5,7 +5,7 @@
 	 */
 	import Checkbox from '../checkBox/Checkbox.svelte';
 	import OpacityControl from '../layerControl/OpacityControl.svelte';
-	import Tooltip from '../tooltip/Tooltip.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 	import ColorPicker from './ColorPicker.svelte';
 	import ResizeControl from './ResizeControl.svelte';
 
@@ -30,9 +30,16 @@
 	export let label = '';
 
 	/**
-	 * (optional) explanatory help text to be displayed in tooltip
+	 * Optional help text that appears in a tooltip when a user interacts with the tooltip trigger.
+	 * It provides additional information intended to help the user decide whether to check the checkbox.
 	 */
 	export let hint = '';
+
+	/**
+	 * Optional text that appears next to the information icon (the letter "i" in a circle) in the tooltip trigger.
+	 * It provides additional clues that help text is available (e.g. "More information", "About", "Help")
+	 */
+	export let hintLabel = '';
 
 	export let disabled = false;
 
@@ -85,34 +92,13 @@
 	{#if label}
 		<span class="form-label font-normal leading-none">{label}</span>
 	{/if}
+	{#if $$slots.hint}
+		<!-- An optional `<Overlay>` component to provide additional explanation. -->
+		<slot name="hint" />
+	{/if}
 	{#if hint}
-		<Tooltip hintLabel="">
+		<Overlay {hintLabel}>
 			{hint}
-		</Tooltip>
+		</Overlay>
 	{/if}
 </div>
-
-<!-- <div class="flex items-center content-center space-x-1">
-	<div class="flex items-center content-center space-x-1">
-		<Checkbox bind:checked={state.visible} label="" {disabled} />
-
-		{#if !hideColorControl}
-			<ColorPicker bind:color={state.color} />
-		{/if}
-
-		{#if !hideOpacityControl}
-			<OpacityControl bind:opacity={state.opacity} />
-		{/if}
-
-		{#if !hideSizeControl}
-			<ResizeControl bind:size={state.size} {minSize} {maxSize} />
-		{/if}
-	</div>
-
-	<div class="flex pl-1">
-		{label}
-		{#if hint}
-			<Tooltip hintLabel="">{hint}</Tooltip>
-		{/if}
-	</div>
-</div> -->

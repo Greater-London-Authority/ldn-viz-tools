@@ -13,6 +13,8 @@
 </script>
 
 <script lang="ts">
+	import Overlay from '../overlay/Overlay.svelte';
+
 	/**
 	 * The `<Checkbox>` component provides a checkbox control as a Boolean input.
 	 * It creates an `<input type="checkbox">`HTML element ([MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)), but enhances this with the ability to easily change the checkbox color, and add tooltips providing explanatory text.
@@ -23,7 +25,6 @@
 	 * @component
 	 */
 
-	import Tooltip from '../tooltip/Tooltip.svelte';
 	import { randomId } from '../utils/randomId';
 
 	/**
@@ -99,9 +100,13 @@
 	{#if label}
 		<label class="ml-2 form-label font-normal" for={id}>{label}</label>
 	{/if}
+	{#if $$slots.hint}
+		<!-- An optional `<Overlay>` component to provide additional explanation. -->
+		<slot name="hint" />
+	{/if}
 	{#if hint}
-		<Tooltip {hintLabel}>
+		<Overlay {hintLabel}>
 			{hint}
-		</Tooltip>
+		</Overlay>
 	{/if}
 </div>
