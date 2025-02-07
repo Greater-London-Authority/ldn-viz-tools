@@ -2,7 +2,7 @@
 	import Button from './Button.svelte';
 
 	export const meta = {
-		title: 'Ui/Button',
+		title: 'Ui/Components/Buttons/Button',
 		component: Button,
 		argTypes: {
 			emphasis: {

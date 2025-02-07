@@ -2,7 +2,7 @@
 	/**
 	 * The `<ColorLegendOrdinalHorizontal>` component draws a legend for an ordinal D3 color scale.
 	 *
-	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
+	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-components-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
 	 * @component
 	 */
 	import { type ScaleLinear } from 'd3-scale';

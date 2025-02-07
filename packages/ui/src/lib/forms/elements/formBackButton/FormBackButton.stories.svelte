@@ -3,7 +3,7 @@
 	import FormBackButton from './FormBackButton.svelte';
 
 	export const meta = {
-		title: 'Ui/Form/FormBackButton',
+		title: 'Ui/Components/Form/FormBackButton',
 		component: FormBackButton,
 		argTypes: {
 			onBack: {

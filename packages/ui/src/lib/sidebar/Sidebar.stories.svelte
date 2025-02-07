@@ -3,7 +3,7 @@
 	import Sidebar from './Sidebar.svelte';
 
 	export const meta = {
-		title: 'Ui/Sidebar',
+		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
 		decorators: [() => RelativeWrapper],
 		parameters: {

@@ -17,7 +17,7 @@
 	};
 
 	export const meta = {
-		title: 'Ui/Form/SchemaForm',
+		title: 'Ui/Components/Form/SchemaForm',
 		component: SchemaForm,
 		argTypes: {
 			id: stringArg,

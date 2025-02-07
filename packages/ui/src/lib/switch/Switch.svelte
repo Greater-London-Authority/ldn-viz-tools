@@ -2,7 +2,7 @@
 	/**
 	 * The `<Switch>` component provides a toggle switch as a Boolean input.
 	 *
-	 * **Alternatives**: consider using a [Checkbox](./?path=/docs/ui-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-checkboxgroup--documentation), or a [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation) (for a set of mutually-exclusive options).
+	 * **Alternatives**: consider using a [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation), or a [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation) (for a set of mutually-exclusive options).
 	 *
 	 * @component
 	 */

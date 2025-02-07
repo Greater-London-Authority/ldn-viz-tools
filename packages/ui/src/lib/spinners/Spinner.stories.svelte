@@ -6,7 +6,7 @@
 	import Spinner from './Spinner.svelte';
 
 	export const meta = {
-		title: 'Ui/Spinner',
+		title: 'Ui/Components/Spinner',
 		component: Spinner
 	};
 </script>

@@ -3,7 +3,7 @@
 	import ColorLegendOrdinalHorizontalAlt from './ColorLegendOrdinalHorizontalAlt.svelte';
 
 	export const meta = {
-		title: 'Ui/Legends/ColorLegendOrdinalHorizontalAlt',
+		title: 'Ui/Components/Legends/ColorLegendOrdinalHorizontalAlt',
 		component: ColorLegendOrdinalHorizontalAlt
 	};
 </script>

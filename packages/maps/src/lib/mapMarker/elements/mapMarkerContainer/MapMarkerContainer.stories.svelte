@@ -2,7 +2,7 @@
 	import MapMarkerContainer from './MapMarkerContainer.svelte';
 
 	export const meta = {
-		title: 'Maps/MapMarker/elements/MapMarkerContainer',
+		title: 'Maps/Components/MapMarker/elements/MapMarkerContainer',
 		component: MapMarkerContainer,
 		parameters: {
 			layout: 'full'
@@ -30,17 +30,17 @@
 </script>
 
 <script>
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map from '../../../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../../../map/util';
 
 	import loadTestLayers from '../../../loadTestLayers';
 	import MapMarker from '../../MapMarker.svelte';
-	import TestTooltip from './TestTooltip.svelte';
 	import TestPopup from './TestPopup.svelte';
+	import TestTooltip from './TestTooltip.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 

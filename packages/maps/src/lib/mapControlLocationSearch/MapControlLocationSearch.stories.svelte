@@ -2,7 +2,7 @@
 	import MapControlLocationSearch from './MapControlLocationSearch.svelte';
 
 	export const meta = {
-		title: 'Maps/MapControls/MapControlLocationSearch',
+		title: 'Maps/Components/MapControls/MapControlLocationSearch',
 		component: MapControlLocationSearch,
 		parameters: {
 			layout: 'fullscreen'
@@ -11,15 +11,15 @@
 </script>
 
 <script lang="ts">
-	import { Template, Story } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
+	import type { GeolocationSearchError, OnGeolocationSearchError } from '@ldn-viz/ui';
 	import { MapGeocoderAdapterMapBox } from './MapGeocoderAdapterMapBox';
-	import type { OnGeolocationSearchError, GeolocationSearchError } from '@ldn-viz/ui';
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 	const adapter = new MapGeocoderAdapterMapBox(

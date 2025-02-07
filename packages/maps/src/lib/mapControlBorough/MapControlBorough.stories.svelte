@@ -2,7 +2,7 @@
 	import MapControlBorough from './MapControlBorough.svelte';
 
 	export const meta = {
-		title: 'Maps/MapControls/MapControlBorough',
+		title: 'Maps/Components/MapControls/MapControlBorough',
 		component: MapControlBorough,
 		parameters: {
 			layout: 'fullscreen'
@@ -11,15 +11,15 @@
 </script>
 
 <script lang="ts">
-	import { Template, Story } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map from '../map/Map.svelte';
-	import { appendOSKeyToUrl } from '../map/util';
 	import type { MapLibreStore } from '../map/types';
+	import { appendOSKeyToUrl } from '../map/util';
 
-	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import { writable } from 'svelte/store';
 	import BoroughsContextLayer from '../mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
+	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 

@@ -33,7 +33,7 @@
 	});
 
 	export const meta = {
-		title: 'Ui/Input',
+		title: 'Ui/Components/Input',
 		component: Input,
 		argTypes: {
 			// this is a module export, not a prop, so don't include it in table

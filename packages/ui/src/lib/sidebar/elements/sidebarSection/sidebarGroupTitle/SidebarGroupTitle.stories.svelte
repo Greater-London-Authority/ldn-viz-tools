@@ -2,7 +2,7 @@
 	import SidebarGroupTitle from './SidebarGroupTitle.svelte';
 
 	export const meta = {
-		title: 'Ui/Sidebar/elements/SidebarSection/Group Title',
+		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarSection/Group Title',
 		component: SidebarGroupTitle
 	};
 </script>

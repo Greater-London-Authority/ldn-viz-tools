@@ -3,7 +3,7 @@
 	import LayerControlGroup from './LayerControlGroup.svelte';
 
 	export const meta = {
-		title: 'Ui/LayerControlGroup',
+		title: 'Ui/Components/Layer Controls/LayerControlGroup',
 		component: LayerControlGroup
 	};
 </script>

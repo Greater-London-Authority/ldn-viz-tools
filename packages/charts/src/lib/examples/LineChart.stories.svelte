@@ -7,7 +7,7 @@
 	 */
 
 	export const meta = {
-		title: 'Charts/Examples/LineChart'
+		title: 'Charts/Example Charts/LineChart'
 	};
 </script>
 

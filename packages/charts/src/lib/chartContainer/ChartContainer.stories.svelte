@@ -5,7 +5,7 @@
 	import { Select } from '@ldn-viz/ui';
 
 	export const meta = {
-		title: 'Charts/ChartContainer',
+		title: 'Charts/Components/ChartContainer',
 		component: ChartContainer
 	};
 </script>
