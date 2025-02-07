@@ -13,12 +13,13 @@
 	export interface ButtonProps {
 		variant: 'brand' | 'square' | 'solid' | 'outline' | 'text';
 		emphasis: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
-		size: 'sm' | 'md' | 'lg';
+		size: 'xs' | 'sm' | 'md' | 'lg';
 		disabled: boolean;
 		href: string;
 		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
+		slim: boolean;
 		action: (node: HTMLElement) => void;
 	}
 
@@ -42,6 +43,11 @@
 	 * Sets the size of the button.
 	 */
 	export let size: ButtonProps['size'] = 'md';
+
+	/**
+	 * When true removes vertical padding and sets line height to 0 - useful for aligning buttons with text.
+	 */
+	export let slim: ButtonProps['slim'] = false;
 
 	/**
 	 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
@@ -165,6 +171,7 @@
 	};
 
 	$: sizeClasses = {
+		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'text-xs px-1 min-w-6 min-h-6',
 		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5 min-w-8 min-h-8',
 		md: variant === 'square' ? 'w-11 h-11 flex-col' : 'text-base px-4 py-2 min-w-11 min-h-11',
 		lg:
@@ -181,6 +188,7 @@
 		sizeClasses[size],
 		disabled === true ? disabledClasses[variant] : '',
 		href && disabled === true ? 'pointer-events-none' : '',
+		slim === true ? '!py-0 !px-0 !min-h-0 leading-none text-left' : '',
 		$$props.class
 	);
 </script>

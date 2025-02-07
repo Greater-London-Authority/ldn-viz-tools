@@ -91,9 +91,31 @@
 
 <Story name="Sizes">
 	<div class="flex items-end space-x-2">
+		<Button size="xs">xs</Button>
 		<Button size="sm">sm</Button>
 		<Button size="md">md</Button>
 		<Button size="lg">lg</Button>
+	</div>
+</Story>
+
+<Story name="Slim">
+	<div class="space-y-4">
+		<p class="flex flex-wrap">
+			sometime you may want a buttton to&nbsp;<Button slim variant="text">go with the flow</Button
+			>&nbsp;a bit more
+		</p>
+
+		<p class="flex flex-wrap text-lg">
+			sometime you may want a buttton to&nbsp<Button slim variant="text" size="lg">
+				go with the flow
+			</Button>&nbspa bit more
+		</p>
+
+		<p class="flex flex-wrap text-lg">
+			sometime you may want a buttton to&nbsp;<Button slim variant="solid" size="lg" class="!px-2">
+				go with the flow
+			</Button>&nbsp; a bit more
+		</p>
 	</div>
 </Story>
 
