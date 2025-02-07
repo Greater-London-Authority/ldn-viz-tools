@@ -7,7 +7,7 @@
 	import PlacardButton from './PlacardButton.svelte';
 
 	export const meta = {
-		title: 'Ui/Buttons/PlacardButton',
+		title: 'Ui/Components/Buttons/PlacardButton',
 		component: PlacardButton
 	};
 </script>

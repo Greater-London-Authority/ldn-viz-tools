@@ -3,7 +3,7 @@
 	import ColorLegendOrdinalChips from './ColorLegendOrdinalChips.svelte';
 
 	export const meta = {
-		title: 'Ui/Legends/ColorLegendOrdinalChips',
+		title: 'Ui/Components/Legends/ColorLegendOrdinalChips',
 		component: ColorLegendOrdinalChips,
 		argTypes: {
 			orientation: {

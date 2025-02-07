@@ -4,7 +4,7 @@
 	import Switch from './Switch.svelte';
 
 	export const meta = {
-		title: 'Ui/Switch',
+		title: 'Ui/Components/Switch',
 		component: Switch,
 		argTypes: {
 			size: {

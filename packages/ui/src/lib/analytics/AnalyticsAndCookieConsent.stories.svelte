@@ -2,7 +2,7 @@
 	import AnalyticsAndCookieConsent from './AnalyticsAndCookieConsent.svelte';
 
 	export const meta = {
-		title: 'Ui - App Layout/Meta, Analytics And Cookies/AnalyticsAndCookieConsent',
+		title: 'Ui/Components - App Layout/Meta, Analytics And Cookies/AnalyticsAndCookieConsent',
 		component: AnalyticsAndCookieConsent
 	};
 </script>

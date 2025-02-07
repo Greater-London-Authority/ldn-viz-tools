@@ -7,7 +7,7 @@
 	import NavLinks from './NavLinks.svelte';
 
 	export const meta = {
-		title: 'Ui - App Layout/Header',
+		title: 'Ui/Components - App Layout/Header',
 		component: Header,
 		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks }
 	};

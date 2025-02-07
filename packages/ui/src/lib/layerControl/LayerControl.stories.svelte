@@ -3,7 +3,7 @@
 	import LayerControl from './LayerControl.svelte';
 
 	export const meta = {
-		title: 'Ui/Layer Controls/LayerControl',
+		title: 'Ui/Components/Layer Controls/LayerControl',
 		component: LayerControl
 	};
 </script>

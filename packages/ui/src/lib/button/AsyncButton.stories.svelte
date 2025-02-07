@@ -3,7 +3,7 @@
 	import AsyncButton from './AsyncButton.svelte';
 
 	export const meta = {
-		title: 'Ui/Buttons/AsyncButton',
+		title: 'Ui/Components/Buttons/AsyncButton',
 		component: AsyncButton,
 		argTypes: {
 			onClick: {

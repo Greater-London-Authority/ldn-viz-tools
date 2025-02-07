@@ -26,7 +26,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapCursorEvent',
+		title: 'Maps/Components/MapCursorEvent',
 		component: MapCursorEvent,
 		parameters: {
 			layout: 'full'

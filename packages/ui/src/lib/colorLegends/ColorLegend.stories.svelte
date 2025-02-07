@@ -3,7 +3,7 @@
 	import ColorLegend from './ColorLegend.svelte';
 
 	export const meta = {
-		title: 'Ui/Legends/ColorLegend',
+		title: 'Ui/Components/Legends/ColorLegend',
 		component: ColorLegend,
 		argTypes: {
 			color: {

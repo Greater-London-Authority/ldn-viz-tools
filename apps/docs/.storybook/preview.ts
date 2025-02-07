@@ -25,32 +25,54 @@ const preview: Preview = {
 					'Ui',
 					[
 						'Introduction',
-						'Buttons',
-						'Input',
-						'Select',
-						'RadioButtons',
-						'Checkboxes',
-						'Overlays',
+						'Components',
+						[
+							'Buttons',
+							'Input',
+							'Select',
+							'RadioButtons',
+							'Checkboxes',
+							'Overlays',
+							'*',
+							'Datepicker',
+							'Icons'
+						],
 						'*',
-						'Datepicker',
-						'Icons'
-					],
-					'Ui - App Layout',
-					[
-						'Themes',
-						'AppShell',
-						'Sidebar',
-						'Header',
-						'*',
-						'Meta, Analytics And Cookies',
-						'Media Query Stores'
-					],
-					'Ui - App Layout Examples',
-					'Charts',
-					['Introduction', 'ChartContainer', '*'],
-					'Charts - Examples'
+						'Examples'
+					]
 				]
 			}
+			// storySort: {
+			// 	order: [
+			// 		'Ui',
+			// 		[
+			// 			'Introduction',
+			// 			'Buttons',
+			// 			'Input',
+			// 			'Select',
+			// 			'RadioButtons',
+			// 			'Checkboxes',
+			// 			'Overlays',
+			// 			'*',
+			// 			'Datepicker',
+			// 			'Icons'
+			// 		],
+			// 		'Ui - App Layout',
+			// 		[
+			// 			'Themes',
+			// 			'AppShell',
+			// 			'Sidebar',
+			// 			'Header',
+			// 			'*',
+			// 			'Meta, Analytics And Cookies',
+			// 			'Media Query Stores'
+			// 		],
+			// 		'Ui - App Layout Examples',
+			// 		'Charts',
+			// 		['Introduction', 'ChartContainer', '*'],
+			// 		'Charts - Examples'
+			// 	]
+			// }
 		},
 		controls: {
 			matchers: {

@@ -2,7 +2,7 @@
 	import Toaster from './Toaster.svelte';
 
 	export const meta = {
-		title: 'Ui/Toaster ',
+		title: 'Ui/Components/Toaster ',
 		component: Toaster,
 		argTypes: {
 			position: {

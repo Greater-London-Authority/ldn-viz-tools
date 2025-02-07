@@ -2,7 +2,7 @@
 	import Flag from './Flag.svelte';
 
 	export const meta = {
-		title: 'Ui - App Layout/Flag',
+		title: 'Ui/Components - App Layout/Flag',
 		component: Flag,
 
 		argTypes: {

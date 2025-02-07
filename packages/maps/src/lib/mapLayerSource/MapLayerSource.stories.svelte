@@ -13,7 +13,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapLayerSource',
+		title: 'Maps/Components/MapLayerSource',
 		component: MapLayerSource,
 		parameters: {
 			layout: 'full'

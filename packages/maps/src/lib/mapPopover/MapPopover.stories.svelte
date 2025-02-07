@@ -12,7 +12,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapPopover',
+		title: 'Maps/Components/MapPopover',
 		component: MapPopover,
 		parameters: {
 			layout: 'full'
@@ -35,9 +35,9 @@
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import { appendOSKeyToUrl } from '../map/util';
-	import Map from '../map/Map.svelte';
 	import { Button } from '@ldn-viz/ui';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import DemoPopover from './DemoPopover.svelte';
 

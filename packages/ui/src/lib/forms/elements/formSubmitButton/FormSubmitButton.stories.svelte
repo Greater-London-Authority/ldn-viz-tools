@@ -3,7 +3,7 @@
 	import FormSubmitButton from './FormSubmitButton.svelte';
 
 	export const meta = {
-		title: 'Ui/Form/FormSubmitButton',
+		title: 'Ui/Components/Form/FormSubmitButton',
 		component: FormSubmitButton,
 		argTypes: {
 			onSubmit: {

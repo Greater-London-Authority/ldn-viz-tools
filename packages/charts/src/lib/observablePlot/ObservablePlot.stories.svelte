@@ -3,7 +3,7 @@
 	import ObservablePlot from './ObservablePlot.svelte';
 
 	export const meta = {
-		title: 'Charts/ObservablePlot',
+		title: 'Charts/Components/ObservablePlot',
 		component: ObservablePlot,
 
 		argTypes: {

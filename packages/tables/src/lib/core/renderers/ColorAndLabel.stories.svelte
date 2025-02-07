@@ -2,7 +2,7 @@
 	import ColorAndLabel from './ColorAndLabel.svelte';
 
 	export const meta = {
-		title: 'Tables/Renderers/ColorAndLabel',
+		title: 'Tables/Components/Renderers/ColorAndLabel',
 		component: ColorAndLabel,
 
 		argTypes: {

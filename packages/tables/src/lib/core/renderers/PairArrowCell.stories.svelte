@@ -2,7 +2,7 @@
 	import PairArrowCell from './PairArrowCell.svelte';
 
 	export const meta = {
-		title: 'Tables/Renderers/PairArrowCell',
+		title: 'Tables/Components/Renderers/PairArrowCell',
 		component: PairArrowCell,
 
 		args: {

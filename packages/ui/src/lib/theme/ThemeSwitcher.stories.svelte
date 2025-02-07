@@ -3,7 +3,7 @@
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 
 	export const meta = {
-		title: 'Ui - App Layout/Themes/ThemeSwitcher',
+		title: 'Ui/Components - App Layout/Themes/ThemeSwitcher',
 		component: ThemeSwitcher
 	};
 </script>

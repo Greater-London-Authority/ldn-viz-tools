@@ -3,7 +3,7 @@
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
 	export const meta = {
-		title: 'Charts/ObservablePlot/ObservablePlotInner',
+		title: 'Charts/Components/ObservablePlotInner',
 		component: ObservablePlotInner,
 
 		argTypes: {

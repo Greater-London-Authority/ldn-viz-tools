@@ -3,7 +3,7 @@
 	import CheckboxGroup from './CheckboxGroup.svelte';
 
 	export const meta = {
-		title: 'Ui/Checkboxes/CheckboxGroup',
+		title: 'Ui/Components/Checkboxes/CheckboxGroup',
 		component: CheckboxGroup
 	};
 </script>

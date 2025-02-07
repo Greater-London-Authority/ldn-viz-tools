@@ -4,7 +4,7 @@
 	// possible names: overlay? contextual? info? - ContextualInformation?
 
 	export const meta = {
-		title: 'Ui/Overlays/Overlay',
+		title: 'Ui/Components/Overlays/Overlay',
 		component: Overlay
 	};
 </script>

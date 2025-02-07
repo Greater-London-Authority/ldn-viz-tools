@@ -2,7 +2,7 @@
 	import Table from './Table.svelte';
 
 	export const meta = {
-		title: 'Tables/Table -  Column Widths',
+		title: 'Tables/Examples/Column Widths',
 		component: Table,
 		args: []
 	};

@@ -5,7 +5,7 @@
 	import PrivacyPolicyLink from './PrivacyPolicyLink.svelte';
 
 	export const meta = {
-		title: 'Ui - App Layout/Sidebar/elements/SidebarFooter',
+		title: 'Ui/Components - App Layout/Sidebar/elements/SidebarFooter',
 		component: SidebarFooter
 	};
 </script>

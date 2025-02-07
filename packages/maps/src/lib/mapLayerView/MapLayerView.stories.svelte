@@ -23,7 +23,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapLayerView',
+		title: 'Maps/Components/MapLayerView',
 		component: MapLayerView,
 		parameters: {
 			layout: 'full'

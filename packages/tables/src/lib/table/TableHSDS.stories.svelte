@@ -2,7 +2,7 @@
 	import Table from './Table.svelte';
 
 	export const meta = {
-		title: 'Tables/Table - HSDS',
+		title: 'Tables/Examples/HSDS',
 		component: Table
 	};
 </script>

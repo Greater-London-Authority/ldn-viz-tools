@@ -3,7 +3,7 @@
 	import Select from './Select.svelte';
 
 	export const meta = {
-		title: 'Ui/Select',
+		title: 'Ui/Components/Select',
 		component: Select
 	};
 </script>

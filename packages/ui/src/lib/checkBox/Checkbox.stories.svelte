@@ -2,7 +2,7 @@
 	import Checkbox from './Checkbox.svelte';
 
 	export const meta = {
-		title: 'Ui/Checkboxes/Checkbox',
+		title: 'Ui/Components/Checkboxes/Checkbox',
 		component: Checkbox,
 		argTypes: {
 			color: {

@@ -1,6 +1,19 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
 
+	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+
+	export const meta = {
+		title: 'Maps/Components/MapControls/MapControlGroup',
+		component: MapControlGroup,
+		parameters: {
+			layout: 'full'
+		}
+	};
+</script>
+
+<script lang="ts">
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
@@ -10,18 +23,7 @@
 	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
-	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
-
-	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
-
-<Meta
-	title="Maps/MapControls/MapControlGroup"
-	component={MapControlGroup}
-	parameters={{
-		layout: 'fullscreen'
-	}}
-/>
 
 <Template let:args>
 	<MapControlGroup {...args} />

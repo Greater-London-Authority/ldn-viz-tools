@@ -3,7 +3,7 @@
 	import RadioButtonGroup from './RadioButtonGroup.svelte';
 
 	export const meta = {
-		title: 'Ui/RadioButtons/RadioButtonGroup',
+		title: 'Ui/Components/RadioButtons/RadioButtonGroup',
 		component: RadioButtonGroup
 	};
 </script>
