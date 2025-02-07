@@ -2,7 +2,7 @@
 	import SidebarHeader from './SidebarHeader.svelte';
 
 	export const meta = {
-		title: 'Ui/Components - Layout And ThemesSidebar/elements/SidebarHeader',
+		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarHeader',
 		component: SidebarHeader
 	};
 </script>

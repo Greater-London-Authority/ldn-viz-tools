@@ -2,7 +2,7 @@
 	import SidebarSection from './SidebarSection.svelte';
 
 	export const meta = {
-		title: 'Ui/Components - Layout And ThemesSidebar/elements/SidebarSection',
+		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarSection',
 		component: SidebarSection
 	};
 </script>

@@ -7,7 +7,7 @@
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 
 	export const meta = {
-		title: 'Ui/Components - Layout And ThemesSidebar/SidebarFromArray',
+		title: 'Ui/Components - Layout And Themes/Sidebar/SidebarFromArray',
 		component: SidebarFromArray,
 		decorators: [() => RelativeWrapper],
 		parameters: {
