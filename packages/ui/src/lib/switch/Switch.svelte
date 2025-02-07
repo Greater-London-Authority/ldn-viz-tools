@@ -62,20 +62,15 @@
 
 	$: toggledExternally(checked);
 	const toggledExternally = (newChecked: boolean) => {
-		console.log('Toggled externally:', $checkedStore, checked);
-
 		if ($checkedStore != newChecked) {
 			$checkedStore = newChecked;
 		}
 	};
 
-	$: console.log('checkedStore:', $checkedStore);
 	$: toggledInternally($checkedStore);
 	const toggledInternally = (newStoreValue: boolean) => {
-		console.log('Toggled internally:', $checkedStore, checked);
 		if (newStoreValue != checked) {
 			checked = newStoreValue;
-			console.log('Checked ins now:', checked);
 		}
 	};
 
