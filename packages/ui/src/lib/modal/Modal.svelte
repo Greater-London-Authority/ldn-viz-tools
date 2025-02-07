@@ -40,12 +40,12 @@
 	} = createDialog({ open: isOpen, openFocus: customOpenFocus });
 
 	/**
-	 * title that appears at the top of the modal
+	 * Title that appears at the top of the modal
 	 */
 	export let title: string;
 
 	/**
-	 * meltDescription that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
+	 * Description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
 	 */
 	export let description: string = '';
 
