@@ -89,6 +89,16 @@ In dark mode, `defaultDot` is:
 
 <pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultDot, null, 2)}</pre>
 
+In light mode, `defaultPoint` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('light').defaultPoint, null, 2)}</pre>
+
+In dark mode, `defaultPoint` is:
+
+<pre>{JSON.stringify(getDefaultPlotStyles('dark').defaultPoint, null, 2)}</pre>
+
+**Note:** in order to use `defaultPoint` styles, you should use our API, `Plot.point` which customises Observable's `Plot.dot` under the hood.
+
 In light mode, `defaultArea` is:
 
 <pre>{JSON.stringify(getDefaultPlotStyles('light').defaultArea, null, 2)}</pre>
