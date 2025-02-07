@@ -1,6 +1,6 @@
 <script context="module">
 	export const meta = {
-		title: 'Ui/Examples/Dashboards',
+		title: 'Ui/Example Layouts/Dashboards',
 		parameters: {
 			layout: 'fullscreen'
 		}
