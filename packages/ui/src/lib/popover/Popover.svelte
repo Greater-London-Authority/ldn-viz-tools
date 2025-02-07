@@ -4,8 +4,8 @@
 	 * However, like a modal, it remains open until it is dismissed by the user.
 	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
 	 *
-	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
-	 * To display longer messages centrally on the screen, consider using a [Modal](./?path=/docs/ui-modal--documentation).
+	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation).
+	 * To display longer messages centrally on the screen, consider using a [Modal](./?path=/docs/ui-components-overlays-modal--documentation).
 	 * @component
 	 */
 

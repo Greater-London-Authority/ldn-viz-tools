@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
-	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
-	 * If you do not require the extra chrome applied by the `ChartContainer`, or need to include several plots in the same container, then use the [ObservablePlotInner](./?path=/docs/charts-observableplotinner--documentation) component directly.
+	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation) wrapper.
+	 * If you do not require the extra chrome applied by the `ChartContainer`, or need to include several plots in the same container, then use the [ObservablePlotInner](./?path=/docs/charts-components-observableplotinner--documentation) component directly.
 	 * @component
 	 */
 

@@ -5,7 +5,7 @@
 	 *
 	 * **Note**: You must provide a `chartDescription` for accessibility.
 	 *
-	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
+	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 * 	@component
 	 */
 

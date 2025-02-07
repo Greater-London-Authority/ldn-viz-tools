@@ -3,9 +3,9 @@
 	 * The `<Button>` component creates an HTML `<button>` (or, if the `href` prop is set, an `<a>`) element.
 	 * Using it rather than the HTML element directly ensures that the button is styled consistently with our style-guide.
 	 * 
-	 * **Alternatives**: if clicking on the button should trigger the download of data or an image, consider using the [DataDownloadButton](./?path=/docs/ui-datadownloadbutton--documentation) or [ImageDownloadButton](./?path=/docs/ui-imagedownloadbutton--documentation) components.
-	 * If the button is intended to copy text to the clipboard, consider using the [CopyButton](./?path=/docs/ui-copybutton--documentation).
-	 * If the button is intended as a link for navigation, consider using the [PlacardButton](./?path=/docs/ui-placardbutton--documentation).
+	 * **Alternatives**: if clicking on the button should trigger the download of data or an image, consider using the [DataDownloadButton](./?path=/docs/ui-components-buttons-datadownloadbutton--documentation) or [ImageDownloadButton](./?path=/docs/ui-components-buttons-imagedownloadbutton--documentation) components.
+	 * If the button is intended to copy text to the clipboard, consider using the [CopyButton](./?path=/docs/ui-components-buttons-copybutton--documentation).
+	 * If the button is intended as a link for navigation, consider using the [PlacardButton](./?path=/docs/ui-components-buttons-placardbutton--documentation).
 
 	 * @component
 	 */

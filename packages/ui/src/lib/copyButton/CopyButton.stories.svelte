@@ -21,7 +21,7 @@
 			},
 			$$restprops: {
 				description:
-					'Any other props are passed through to [`<Button>` component](./?path=/docs/ui-button--documentation).',
+					'Any other props are passed through to [`<Button>` component](./?path=/docs/ui-components-buttons-button--documentation).',
 				table: {
 					category: 'properties'
 				}
@@ -49,7 +49,7 @@
 	<CopyButton content="Text to be copied." label="Copy to clipboard" />
 </Story>
 
-<!-- You can also provide any prop that is accepted by the [`<Button>` component](./?path=/docs/ui-button--documentation) -->
+<!-- You can also provide any prop that is accepted by the [`<Button>` component](./?path=/docs/ui-components-buttons-button--documentation) -->
 <Story name="Changing button style">
 	<CopyButton content="Text to be copied." label="Copy" variant="solid" emphasis="secondary" />
 </Story>

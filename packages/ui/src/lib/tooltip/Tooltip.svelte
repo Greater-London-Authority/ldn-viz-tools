@@ -2,8 +2,8 @@
 	/**
 	 * The `<Tooltip>` component renders a tooltip target, and displays a message in a tooltip when a user focuses it (mouseover and keyboard).
 	 *
-	 * **Alternatives**: for longer messages, or messages that must persist until being dismissed, consider using a [Modal](./?path=/docs/ui-modal--documentation)
-	 * or [Popover](./?path=/docs/ui-popover--documentation).
+	 * **Alternatives**: for longer messages, or messages that must persist until being dismissed, consider using a [Modal](./?path=/docs/ui-components-overlays-modal--documentation)
+	 * or [Popover](./?path=/docs/uicomponents-overlays-popover--documentation).
 	 * @component
 	 */
 

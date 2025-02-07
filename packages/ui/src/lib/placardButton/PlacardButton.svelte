@@ -2,7 +2,7 @@
 	/**
 	 * The `<PlacardButton>` component creates a call-to-action link that includes a title and description.
 	 *
-	 * **Alternatives**: if the button does not need to be as visually prominent or include a description, consider using the [Button](./?path=/docs/ui-button--documentation) component with the `href` prop.
+	 * **Alternatives**: if the button does not need to be as visually prominent or include a description, consider using the [Button](./?path=/docs/ui-components-buttons-button--documentation) component with the `href` prop.
 	 * @component
 	 */
 

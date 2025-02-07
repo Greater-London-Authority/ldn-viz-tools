@@ -2,7 +2,7 @@
 	/**
 	 * The `<TabList>` component allows users to select a tab from a list of options.
 	 *
-	 * **Alternatives**: if the user's choice doesn't replace what is rendered below (or, for vertical tabs, to the side of) the control then use the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation) or [RadioButtonSolid](./?path=/docs/ui-radiobuttongroupsolid--documentation).
+	 * **Alternatives**: if the user's choice doesn't replace what is rendered below (or, for vertical tabs, to the side of) the control then use the [RadioButton](./?path=/docs/uicomponents-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation) or [RadioButtonSolid](.-components-radiobuttons-radiobuttongroupsolid--documentation).
 	 * @component
 	 */
 
