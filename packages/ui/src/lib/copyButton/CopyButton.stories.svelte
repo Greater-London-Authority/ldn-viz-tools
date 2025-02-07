@@ -2,7 +2,7 @@
 	import CopyButton from './CopyButton.svelte';
 
 	export const meta = {
-		title: 'Ui/CopyButton',
+		title: 'Ui/Buttons/CopyButton',
 		component: CopyButton,
 		argTypes: {
 			content: {

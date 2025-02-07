@@ -2,7 +2,7 @@
 	import PageMetadata from './PageMetadata.svelte';
 
 	export const meta = {
-		title: 'Ui/PageMetadata',
+		title: 'Ui - App Layout/Meta, Analytics And Cookies/PageMetadata',
 		component: PageMetadata
 	};
 </script>

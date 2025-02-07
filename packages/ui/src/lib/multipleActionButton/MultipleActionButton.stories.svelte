@@ -2,7 +2,7 @@
 	import MultipleActionButton from './MultipleActionButton.svelte';
 
 	export const meta = {
-		title: 'Ui/MultipleActionButton',
+		title: 'Ui/Buttons/MultipleActionButton',
 		component: MultipleActionButton
 	};
 </script>

@@ -36,7 +36,7 @@
 	});
 
 	export const meta = {
-		title: 'Ui/UniformInput',
+		title: 'Ui/Form/UniformInput',
 		component: UniformInput,
 		argTypes: {
 			type: newSelectedStringArg(

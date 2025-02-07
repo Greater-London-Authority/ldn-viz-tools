@@ -2,7 +2,7 @@
 	import Modal from './Modal.svelte';
 
 	export const meta = {
-		title: 'Ui/Modal',
+		title: 'Ui/Overlays/Modal',
 		component: Modal,
 		argTypes: {
 			isOpen: { options: ['true', 'false'], control: { type: 'radio' } },

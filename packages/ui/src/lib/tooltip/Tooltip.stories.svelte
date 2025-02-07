@@ -3,7 +3,7 @@
 	import Tooltip from './Tooltip.svelte';
 
 	export const meta = {
-		title: 'Ui/Tooltip',
+		title: 'Ui/Overlays/Tooltip',
 		component: Tooltip,
 		argTypes: {
 			hintLabel: { type: 'string', control: 'text' },

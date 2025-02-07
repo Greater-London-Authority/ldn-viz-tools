@@ -7,7 +7,7 @@
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 
 	export const meta = {
-		title: 'Ui/Sidebar/SidebarFromArray',
+		title: 'Ui - App Layout/Sidebar/SidebarFromArray',
 		component: SidebarFromArray,
 		decorators: [() => RelativeWrapper],
 		parameters: {
@@ -49,8 +49,8 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import LogoCIU from '../logos/LogoCIU.svelte';
-	import SidebarFooter from './elements/sidebarFooter/SidebarFooter.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
+	import SidebarFooter from './elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from './elements/sidebarHeader/SidebarHeader.svelte';
 
 	import Button from '../button/Button.svelte';

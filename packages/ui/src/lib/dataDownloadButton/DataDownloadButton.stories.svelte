@@ -2,7 +2,7 @@
 	import DataDownloadButton from './DataDownloadButton.svelte';
 
 	export const meta = {
-		title: 'Ui/DataDownloadButton',
+		title: 'Ui/Buttons/DataDownloadButton',
 		component: DataDownloadButton,
 		argTypes: {
 			filename: {

@@ -2,7 +2,7 @@
 	import Popover from './Popover.svelte';
 
 	export const meta = {
-		title: 'Ui/Popover',
+		title: 'Ui/Overlays/Popover',
 		component: Popover
 	};
 </script>

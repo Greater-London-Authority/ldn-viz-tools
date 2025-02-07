@@ -4,7 +4,7 @@
 	import SidebarToggle from './SidebarToggle.svelte';
 
 	export const meta = {
-		title: 'Ui/Sidebar/elements/SidebarToggle',
+		title: 'Ui - App Layout/Sidebar/elements/SidebarToggle',
 		component: SidebarToggle
 	};
 </script>

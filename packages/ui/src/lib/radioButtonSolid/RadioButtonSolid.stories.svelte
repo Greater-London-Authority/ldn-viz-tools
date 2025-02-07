@@ -3,7 +3,7 @@
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
 
 	export const meta = {
-		title: 'Ui/RadioButtonGroupSolid',
+		title: 'Ui/RadioButtons/RadioButtonGroupSolid',
 		component: RadioButtonGroupSolid,
 		subcomponents: { RadioButtonSolid }
 	};
