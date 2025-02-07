@@ -71,8 +71,7 @@
 		description="In a real example, these buttons would perform some action in addition to closing the modal."
 	>
 		<svelte:fragment slot="buttons">
-			<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button
-			>
+			<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button>
 			<Button variant="solid" on:click={() => (isOpen = false)}>Accept</Button>
 		</svelte:fragment>
 	</Modal>
@@ -115,8 +114,7 @@
 		</div>
 
 		<div slot="buttons" class="flex justify-end gap-4">
-			<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button
-			>
+			<Button variant="solid" emphasis="secondary" on:click={() => (isOpen = false)}>Cancel</Button>
 			<Button variant="solid" on:click={() => (isOpen = false)}>Accept</Button>
 		</div>
 	</Modal>
