@@ -10,7 +10,7 @@
 	/**
 	 * Controls whether the Modal is open or closed
 	 */
-	let isOpen = writable(false);
+	let isOpen = false;
 </script>
 
 <div class="w-full flex flex-wrap justify-between mt-1 items-end">
@@ -26,7 +26,7 @@
 				<li data-capture-ignore>
 					<Button
 						variant="text"
-						size="sm"
+						size="xs"
 						emphasis="secondary"
 						class="!p-0"
 						on:click={() => ($isOpen = true)}>View description</Button
