@@ -12,10 +12,11 @@
 	import { createPopover } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 
-	import { InformationCircle } from '@steeze-ui/heroicons';
+	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import CloseIcon from './CloseIcon.svelte';
+	import { setContext } from 'svelte';
+	import Button from '../button/Button.svelte';
 
 	const {
 		elements: { trigger, content, arrow, close },
@@ -26,39 +27,26 @@
 	});
 
 	/**
-	 * text that appears in the tooltip target, next to the icon
+	 * Sets trigger actions and attributes (ARIA) for access by `Trigger` component
 	 */
-	export let hintLabel = 'what is this?';
+	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
-<div {...$trigger} use:trigger class="w-fit h-fit">
-	{#if $$slots.hint}
-		<!-- if present, replaces the default `hintLabel` and icon  -->
-		<slot name="hint" />
-	{:else}
-		{hintLabel}
-
-		<Icon
-			src={InformationCircle}
-			theme="solid"
-			class="w-[18px] h-[18px] ml-0.5"
-			aria-hidden="true"
-		/>
-	{/if}
-</div>
+<!-- The trigger that opens the popover, usually `Trigger` button but allows customisation -->
+<slot name="trigger" />
 
 {#if $open}
 	<div
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
-		class="z-10 w-60 bg-core-grey-50 p-4 shadow"
+		class="z-50 w-60 bg-color-container-level-1 p-4 shadow"
 	>
 		<div {...$arrow} use:arrow />
 
-		<div class="text-sm flex flex-col space-y-2 text-core-grey-800">
+		<div class="text-sm flex flex-col space-y-2 text-color-text-primary">
 			{#if $$slots.title}
-				<p class="font-bold">
+				<p class="font-medium">
 					<!-- Optional title for the popover -->
 					<slot name="title" />
 				</p>
@@ -70,17 +58,11 @@
 			</div>
 		</div>
 
-		<button class="close" {...$close} use:close>
-			<CloseIcon class="w-8 h-8" />
-		</button>
+		<div {...$close} use:close>
+			<Button variant="text" emphasis="secondary" size="sm" class="absolute right-1 top-1">
+				<span class="sr-only">Close</span>
+				<Icon src={XMark} theme="mini" class="w-5 h-5" aria-hidden="true" />
+			</Button>
+		</div>
 	</div>
 {/if}
-
-<style>
-	.close {
-		@apply absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center;
-		@apply text-white transition-colors hover:bg-core-grey-100 hover:text-core-grey-800;
-		@apply focus-visible:ring focus-visible:ring-core-blue-600 focus-visible:ring-offset-2;
-		@apply bg-core-grey-800 p-0 text-sm font-medium;
-	}
-</style>

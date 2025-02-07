@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Tooltip } from '@ldn-viz/ui';
+	import Overlay from '../overlay/Overlay.svelte';
 	import { classNames } from '../utils/classNames';
 
 	export let label = '';
@@ -9,8 +9,8 @@
 	export let description = '';
 	export let descriptionAlignment: 'left' | 'right' = 'left';
 
-	export let hintLabel = '';
 	export let hint = '';
+	export let hintLabel: undefined | string = undefined;
 
 	export let errorId: undefined | string = undefined;
 	export let error = '';
@@ -19,22 +19,22 @@
 	export let optional = false;
 
 	$: descriptionClass = classNames(
-		error ? 'text-core-red-400 dark:text-core-red-400' : '',
+		error ? '!text-color-input-label-error' : '',
+		disabled ? 'text-color-input-label-disabled' : '',
 		descriptionAlignment === 'left'
-			? 'text-core-grey-500 dark:text-core-grey-200'
-			: 'ml-auto text-core-grey-400 dark:text-core-grey-300',
+			? 'text-color-input-label-secondary'
+			: 'ml-auto text-color-input-label-secondary',
 		'text-sm'
 	);
 
 	$: labelClasses = classNames(
-		error ? 'text-core-red-400 dark:text-core-red-400' : '',
-		disabled ? 'text-core-grey-300 dark:text-core-grey-400' : '',
-		'form-label',
-		'font-medium'
+		error ? 'text-color-input-label-error' : '',
+		disabled ? 'text-color-input-label-disabled' : '',
+		'form-label'
 	);
 </script>
 
-<div class="flex flex-col space-y-2">
+<div class="flex flex-col space-y-1">
 	<div class="flex justify-between [&>div]:text-sm">
 		{#if label}
 			<label for={id} class={labelClasses}>
@@ -42,22 +42,27 @@
 			</label>
 		{/if}
 
+		{#if $$slots.hint}
+			<!-- An optional `<Overlay>` component to provide additional explanation. -->
+			<slot name="hint" />
+		{/if}
 		{#if hint}
-			<Tooltip {hintLabel}>
+			<Overlay {hintLabel}>
 				{hint}
-			</Tooltip>
+			</Overlay>
 		{/if}
 	</div>
 
 	<slot />
 
 	{#if error}
-		<span class={descriptionClass} id={errorId}>
+		<p class={descriptionClass} id={errorId} role="alert">
+			<span class="sr-only">Error: </span>
 			{@html error}
-		</span>
+		</p>
 	{:else if description}
-		<span class={descriptionClass} id={descriptionId}>
+		<p class={descriptionClass} id={descriptionId}>
 			{@html description}
-		</span>
+		</p>
 	{/if}
 </div>

@@ -30,7 +30,7 @@
 	/**
 	 * Depending on which search feature the user interacted with, called when a
 	 * user clicks a geocoder suggestion or when the browser geolocates the
-	 * users location.
+	 * user's location.
 	 */
 	export let onLocationFound: undefined | OnGeolocationSearchResult = undefined;
 
@@ -39,6 +39,11 @@
 	 * or an error occurs during geolocation.
 	 */
 	export let onSearchError: undefined | OnGeolocationSearchError = undefined;
+
+	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
 
 	/**
 	 * Passed to the suggestions dropdown to limit the number of suggestions
@@ -50,6 +55,11 @@
 	 * Hides the geolocator if true.
 	 */
 	export let hideGeolocator = false;
+
+	/**
+	 * Placeholder text to be dislayed in the input element.
+	 */
+	export let placeholder = 'Location search';
 
 	let limitWidthClass = '';
 
@@ -69,8 +79,10 @@
 		{adapter}
 		onLocationSelected={onLocationFound}
 		{onSearchError}
+		{onSearchClear}
 		{maxSuggestions}
 		inputClasses="w-72 {limitWidthClass}"
+		{placeholder}
 	/>
 	{#if !hideGeolocator}
 		<MapControlGeolocator {onLocationFound} {onSearchError} />

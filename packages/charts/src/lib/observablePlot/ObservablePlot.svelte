@@ -1,89 +1,16 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	/**
-	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapped in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
-	 *  @component
+	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-chartcontainer--documentation) wrapper.
+	 * If you do not require the extra chrome applied by the `ChartContainer`, or need to include several plots in the same container, then use the [ObservablePlotInner](./?path=/docs/charts-observableplotinner--documentation) component directly.
+	 * @component
 	 */
 
-	import type {
-		AddEventHandlerFunction,
-		AddEventHandlerInnerFunction,
-		Position,
-		RegisterTooltipFunction
-	} from './types.ts';
+	import type { Position } from './types.ts';
 
-	export const registerTooltip: RegisterTooltipFunction =
-		(posStore, markShape = 'circle') =>
-		(index, scales, values, dimensions, context, next) => {
-			const el = next && next(index, scales, values, dimensions, context);
-			const marks = el?.querySelectorAll(markShape) || [];
-
-			addEventHandlerInner(
-				'mouseenter',
-				(ev: MouseEvent, d) => {
-					posStore.set({
-						...d,
-						clientX: ev.clientX,
-						clientY: ev.clientY,
-						pageX: ev.pageX,
-						pageY: ev.pageY,
-						layerX: ev.layerX,
-						layerY: ev.layerY
-					}); // can't use the $store syntax here
-				},
-				marks,
-				values,
-				index
-			);
-
-			addEventHandlerInner(
-				'mouseleave',
-				(ev: MouseEvent, d) => {
-					posStore.set(undefined); // can't use the $store syntax here
-				},
-				marks,
-				values,
-				index
-			);
-
-			return el ?? null;
-		};
-
-	export const addEventHandler: AddEventHandlerFunction =
-		(eventName, eventHandler, markShape = 'circle') =>
-		(index, scales, values, dimensions, context, next) => {
-			const el = next && next(index, scales, values, dimensions, context);
-			const marks = el?.querySelectorAll(markShape) || [];
-
-			addEventHandlerInner(eventName, eventHandler, marks, values, index);
-
-			return el ?? null;
-		};
-
-	const addEventHandlerInner: AddEventHandlerInnerFunction = (
-		eventName,
-		eventHandler,
-		marks,
-		values,
-		index
-	) => {
-		for (let i = 0; i < marks.length; i++) {
-			const d = {
-				index: index[i],
-				x: values.channels.x.value[i],
-				y: values.channels.y.value[i]
-			};
-
-			marks[i].addEventListener(eventName, (ev: any) => eventHandler(ev, d));
-		}
-	};
-</script>
-
-<script lang="ts">
-	import { onMount, setContext } from 'svelte';
-	import { derived, writable } from 'svelte/store';
-
-	import * as Plot from '@observablehq/plot';
+	import { randomId } from '@ldn-viz/ui';
+	import { writable } from 'svelte/store';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
+	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
 	/**
 	 * The Observable Plot specification for the visualization.
@@ -93,7 +20,7 @@
 	/**
 	 * Data being visualized (as an array of objects), to be used by data download button.
 	 */
-	export let data: any[] = [];
+	export let data: { [key: string]: any }[] = [];
 
 	/**
 	 * Title that is displayed in large text above the plot.
@@ -116,21 +43,42 @@
 	export let chartWidth = '';
 
 	/**
-	 * Object specifying what appears in the footer:
+	 * What appears in the footer:
 	 *
 	 * * `byline` (string) - statement of who created the visualization
 	 * * `source` (string) - statement of where the data came from
 	 * * `note` (string) - any additional footnotes
-	 * * `exportBtns` (boolean) - if `false`, then data/image download buttons will be hidden
 	 */
-	export let footer:
-		| {
-				byline?: string | undefined;
-				source?: string | undefined;
-				note?: string | undefined;
-				exportBtns: boolean;
-		  }
-		| undefined = undefined;
+	export let source = '';
+
+	export let byline = '';
+
+	export let note = '';
+
+	/**
+	 * Data Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+	 *
+	 */
+	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
+
+	/**
+	 * Image Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+	 * Set to false to hide completely.
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+	 *
+	 */
+	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
+
+	/**
+	 * The file name to be used for the downloaded data or image file.
+	 */
+	export let filename = '';
 
 	/**
 	 * Provides a way to access the DOM node into which the visualization is rendered.
@@ -146,28 +94,28 @@
 	/** A y-offset between data points and tooltips (pixels). */
 	export let tooltipOffset = -16;
 
-	const renderPlot = (node: HTMLDivElement) => {
-		node.appendChild(Plot.plot(spec));
-	};
+	/**
+	 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
+	 * so that default chart-level styling is not applied.
+	 */
+	export let applyDefaults = true;
 
-	let width: number;
+	/**
+	 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
+	 */
+	export let id = randomId();
 
-	onMount(() => {
-		updateDimensions();
-		window.addEventListener('resize', updateDimensions);
-		return () => {
-			window.removeEventListener('resize', updateDimensions);
-		};
-	});
+	/**
+	 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
+	 */
+	export let chartDescription = '';
 
-	const updateDimensions = () => {
-		spec.width = width;
-	};
-
-	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
-		$tooltipStore ? data[$tooltipStore.index] : undefined
-	);
-	setContext('tooltipData', tooltipData);
+	/**
+	 * Defaults to `true` inside `ObservablePlotInner` but exposed here in case you want to change to `false`.
+	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
+	 * Instead ensure the title, subtitle and chartDescription of the chart and/or surrounding text explains the key takeaways.
+	 */
+	export let ariaHidden = true;
 </script>
 
 {#key spec}
@@ -176,34 +124,40 @@
 		{title}
 		{subTitle}
 		{alt}
-		{footer}
+		{source}
+		{note}
+		{byline}
+		{dataDownloadButton}
+		{imageDownloadButton}
+		{filename}
 		{...$$restProps}
 		chartHeight={'h-fit'}
 		{chartWidth}
+		{chartDescription}
 	>
-		<div use:renderPlot {...$$restProps} bind:this={domNode} bind:clientWidth={width} />
+		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+		<slot name="controls" />
 
-		<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
-		{#if $tooltipStore && $tooltipData}
-			<div
-				class="absolute max-w-[200px] text-xs text-center p-2 bg-core-grey-100 text-core-grey-700 dark:bg-core-grey-700 dark:text-core-grey-50 shadow-md -translate-x-1/2 -translate-y-full z-50"
-				style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
-				style:left={`${$tooltipStore.layerX}px`}
-			>
-				<slot name="tooltip">
-					<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
-				</slot>
+		<ObservablePlotInner
+			{data}
+			{domNode}
+			{tooltipStore}
+			{tooltipOffset}
+			{spec}
+			{applyDefaults}
+			{ariaHidden}
+			ariaDescribedBy="{id}-description"
+			{id}
+		/>
 
-				<div
-					class="absolute bg-core-grey-100 dark:bg-core-grey-700 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
-				/>
-			</div>
-		{/if}
+		<p slot="description" class="sr-only" id="{id}-description">
+			{chartDescription}
+		</p>
 	</ChartContainer>
 {/key}
 
 <style>
-	:global(.defaultCcolorLegendLabel-swatch) {
-		font-size: 14px;
+	:global(.defaultColorLegendLabel-swatch) {
+		font-size: 1rem;
 	}
 </style>

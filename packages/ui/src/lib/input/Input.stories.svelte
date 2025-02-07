@@ -1,6 +1,36 @@
 <script context="module" lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+
+	import Overlay from '../overlay/Overlay.svelte';
 	import Input from './Input.svelte';
+
+	const newStringArg = (defaultValue = '') => ({
+		control: { type: 'text' },
+		table: {
+			defaultValue: { summary: defaultValue },
+			type: { summary: 'string' }
+		}
+	});
+
+	const newSelectedStringArg = (options: string[], defaultValue = '') => ({
+		control: { type: 'select' },
+		options: options,
+		table: {
+			defaultValue: { summary: defaultValue },
+			type: { summary: 'string' }
+		}
+	});
+
+	const newFunctionArg = (detail = '') => ({
+		type: 'function',
+		control: 'none',
+		table: {
+			type: {
+				summary: 'function',
+				detail: detail
+			}
+		}
+	});
 
 	export const meta = {
 		title: 'Ui/Input',
@@ -12,23 +42,74 @@
 					disable: true
 				}
 			},
+			id: newStringArg('// random ID'),
+			name: newStringArg("// 'id' prop"),
+			type: newSelectedStringArg(
+				[
+					'text',
+					'textarea',
+					'number',
+					'email',
+					'password',
+					'search',
+					'tel',
+					'url',
+					'time',
+					'date',
+					'datetime-local',
+					'file',
+					'range'
+				],
+				'text'
+			),
+			inputmode: newSelectedStringArg(
+				[
+					'none',
+					'text',
+					'decimal',
+					'numeric',
+					'tel',
+					'search',
+					'email',
+					'url',
+					'search',
+					'tel',
+					'url'
+				],
+				'text'
+			),
 			descriptionAlignment: {
-				options: ['left', 'right'],
-				control: { type: 'select' }
-			}
+				control: { type: 'select' },
+				options: ['left', 'right']
+			},
+			format: newFunctionArg('(value: string) => string')
 		}
 	};
 </script>
 
 <script lang="ts">
 	let value = '';
-
 	const round = (x: string) => Math.round(+x * 100) / 100;
+
+	let age: string;
+	const validateAge = (age: string) => {
+		const ageNum = parseInt(age);
+
+		if (!ageNum && ageNum !== 0) {
+			return 'Please enter your age.';
+		} else if (ageNum < 0 || ageNum > 116) {
+			return 'Age must be between 0 and 116.';
+		} else if (ageNum <= 18) {
+			return 'You must be over 18 to use this.';
+		} else return undefined;
+	};
 </script>
 
 <Template let:args>
 	<div class="w-96">
-		<Input {...args} />
+		{#key args}
+			<Input {...args} />
+		{/key}
 	</div>
 </Template>
 
@@ -47,18 +128,59 @@
 <Story name="With Label">
 	<div class="w-96 flex flex-col gap-4">
 		<Input name="labelled-input-required" label="Label" />
+	</div>
+</Story>
+
+<Story name="With Label (As optional)">
+	<div class="w-96 flex flex-col gap-4">
 		<Input name="labelled-input-optional" label="Label" optional />
 	</div>
 </Story>
 
-<Story name="With tooltip">
+<Story name="With placeholder">
 	<div class="w-96">
-		<Input
-			label="Tooltip"
-			name="tooltip-input"
-			hint="Contextual help text"
-			hintLabel="optional hint label"
-		/>
+		<Input label="Placeholder" name="placeholder-input" placeholder="This is placeholder text" />
+	</div>
+</Story>
+
+<!--Exposes a hint slot into which one can pass an overlay component to provide contextual help-->
+
+<Story name="With hint tooltip from props">
+	<div class="w-96">
+		<Input label="Tooltip" name="tooltip-input" hint="I am some hint text" />
+	</div>
+</Story>
+
+<Story name="With hint tooltip - default hintLabel">
+	<div class="w-96">
+		<Input label="Tooltip" name="tooltip-input">
+			<Overlay slot="hint">Contextual help text</Overlay>
+		</Input>
+	</div>
+</Story>
+
+<Story name="With hint tooltip - custom hintLabel">
+	<div class="w-96">
+		<Input label="Tooltip" name="custom-tooltip-input">
+			<Overlay slot="hint" hintLabel="optional hint label">Contextual help text</Overlay>
+		</Input>
+	</div>
+</Story>
+
+<Story name="With hint modal">
+	<div class="w-96">
+		<Input label="Modal" name="modal-input">
+			<Overlay
+				slot="hint"
+				hintLabel="optional hint label"
+				overlayType="modal"
+				modalTitle="It's a modal!"
+				modalDescription="A modal that shows contextual help"
+				modalWidth="sm"
+			>
+				Contextual help text
+			</Overlay>
+		</Input>
 	</div>
 </Story>
 
@@ -78,9 +200,21 @@
 	</div>
 </Story>
 
+<!-- This demonstrates how an input behaves when error state changes. Try entering some numbers! -->
+
 <Story name="With error">
 	<div class="w-96">
-		<Input label="Description" name="description-input" error="Error text" />
+		<Input
+			bind:value={age}
+			label="Enter your age (required)"
+			name="age-input"
+			type="number"
+			optional={false}
+			description="Try entering a number below 18."
+			min="0"
+			max="116"
+			error={validateAge(age)}
+		/>
 	</div>
 </Story>
 
@@ -151,5 +285,13 @@
 		<Input type="datetime-local" label="Datetime local" name="datetime-local-input" />
 		<Input type="file" label="File" name="file-input" />
 		<Input type="range" label="Range" name="range" />
+	</div>
+</Story>
+
+<!-- You can facilitate autocompletion of input values by setting the `autocomplete` attribute
+([docs on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)).  -->
+<Story name="With autocomplete">
+	<div class="w-96">
+		<Input autocomplete="shipping street-address" />
 	</div>
 </Story>

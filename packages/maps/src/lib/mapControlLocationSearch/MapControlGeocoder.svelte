@@ -13,6 +13,7 @@
 
 	import type {
 		Geolocation,
+		GeolocationNamed,
 		OnGeolocationSearchResult,
 		OnGeolocationSearchError,
 		GeocoderAdapter
@@ -35,6 +36,11 @@
 	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
+
+	/**
 	 * Passed to the suggestions dropdown to limit the number of suggestions
 	 * shown at once.
 	 */
@@ -50,10 +56,16 @@
 	 */
 	export let inputClasses = '';
 
+	/**
+	 * Placeholder text to be displayed in the input element.
+	 */
+	export let placeholder = 'Location search';
+
 	const mapStore: MapStore = getContext('mapStore');
 
 	const zoomLevel = 16;
 	const delay = 500;
+	let selected: null | GeolocationNamed = null;
 
 	const onLocationSelectedGeocoder = (location: Geolocation) => {
 		if (!$mapStore) {
@@ -69,6 +81,8 @@
 	};
 
 	let showClearButton = false;
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: !showClearButton && clearFeature('geocoder', $mapStore);
 </script>
 
@@ -77,15 +91,24 @@
 	{delay}
 	{onSearchError}
 	onLocationSelected={onLocationSelectedGeocoder}
+	{onSearchClear}
 	{classes}
 	{inputClasses}
+	{placeholder}
 	bind:showClearButton
+	bind:selected
 	let:onSuggestionEvent
 	let:attribution
 	let:suggestions
 	{...$$restProps}
 >
 	{#if suggestions.length > 0}
-		<GeocoderSuggestionList {onSuggestionEvent} {attribution} {suggestions} {maxSuggestions} />
+		<GeocoderSuggestionList
+			{onSuggestionEvent}
+			{attribution}
+			{suggestions}
+			{selected}
+			{maxSuggestions}
+		/>
 	{/if}
 </Geocoder>

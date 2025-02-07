@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { ChevronDown, ChevronUp, ChevronUpDown } from '@steeze-ui/heroicons';
+	import { Tooltip, classNames } from '@ldn-viz/ui';
+	import { BarsArrowDown, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Tooltip } from '@ldn-viz/ui';
 
 	/**
 	 * Text of label/column heading.
@@ -21,7 +21,7 @@
 	/**
 	 * Current sort order (used to determine icons if `allowSorting` is `true`).
 	 */
-	export let order: 'asc' | 'desc' | undefined = undefined;
+	export let order: 'ascending' | 'descending' | undefined = undefined;
 
 	/**
 	 * Function called when user changes sort order.
@@ -33,11 +33,17 @@
 	 */
 	export let hintText = '';
 
-	const icons = {
-		default: ChevronUpDown,
-		asc: ChevronUp,
-		desc: ChevronDown
+	export let alignHeader: 'left' | 'right' | 'center' | undefined;
+	const alignmentClasses = {
+		left: 'justify-start',
+		right: 'justify-end',
+		center: 'justify-center'
 	};
+	$: alignmentClass = alignmentClasses[alignHeader ?? 'left'];
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$$restProps;
 </script>
 
 <div
@@ -45,13 +51,13 @@
 	on:keypress={toggle}
 	role="cell"
 	tabindex={0}
-	class="flex flex-col cursor-pointer"
+	class="font-bold py-0.5 w-full h-full"
 >
-	<div class="flex items-center min-h-[55px] ml-2 py-2 capitalize select-none">
+	<div class={classNames('flex items-center select-none', alignmentClass)}>
 		{#if superscriptText}
 			<div class="text-left">
 				<span class="font-normal text-xs">{superscriptText}</span><br />
-				<span class="capitalize">{label}</span>
+				<span>{label}</span>
 			</div>
 		{:else}
 			{label}
@@ -62,11 +68,17 @@
 
 		{#if allowSorting}
 			<Icon
-				src={order ? icons[order] : icons['default']}
+				src={order ? BarsArrowDown : ChevronUpDown}
 				theme="mini"
-				class="ml-auto w-4 h-4"
+				class={classNames('ml-0.5 w-4 h-4', order === 'ascending' ? 'flipY' : '')}
 				aria-hidden="true"
 			/>
 		{/if}
 	</div>
 </div>
+
+<style>
+	:global(.flipY) {
+		transform: scaleY(-1);
+	}
+</style>

@@ -57,19 +57,19 @@
 	<div class="flex">
 		<TabList bind:selectedValue orientation="vertical">
 			<TabLabel tabId="markers">
-				<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Data Markers
 			</TabLabel>
 			<TabLabel tabId="filters">
-				<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Filters
 			</TabLabel>
 			<TabLabel tabId="analysis">
-				<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Analysis
 			</TabLabel>
 			<TabLabel tabId="layers">
-				<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Layers
 			</TabLabel>
 		</TabList>

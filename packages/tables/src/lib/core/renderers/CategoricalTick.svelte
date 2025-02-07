@@ -9,7 +9,6 @@
 	 * The value to be encoded in the cell.
 	 */
 	export let value;
-	export let extent;
 
 	const fPercentage = format('0.0%');
 
@@ -33,6 +32,10 @@
 
 	let l;
 	$: l = posScale(value);
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$$restProps;
 </script>
 
 <div

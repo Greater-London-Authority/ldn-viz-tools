@@ -1,10 +1,16 @@
 <script lang="ts">
-	import { Button, CheckboxGroup } from '@ldn-viz/ui';
-	import PopoverMenu from './PopoverMenu.svelte';
+	import type { TableData } from '$lib/core/lib/dataObj';
+	import { Button, CheckboxGroup, Popover } from '@ldn-viz/ui';
 
-	export let table;
+	export let table: TableData;
 
-	let fields;
+	type Options = {
+		label: string;
+		id: string;
+		value: string;
+	};
+
+	let fields: Options[];
 	$: if (table) {
 		const new_fields = table.columnSpec.map((f) => ({
 			label: f.label ?? f.short_label,
@@ -26,14 +32,14 @@
 	}
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
-		<Button variant="text">Show/Hide Columns</Button>
+<Popover>
+	<svelte:fragment slot="hint">
+		<Button variant="text" size="sm">Show/Hide Columns</Button>
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
 
-	<h2 class="text-large font-bold">Select which columns to display:</h2>
+	<h2 class="font-bold">Select which columns to display:</h2>
 
 	<CheckboxGroup options={fields} bind:selectedOptions={fieldSelection} />
-</PopoverMenu>
+</Popover>

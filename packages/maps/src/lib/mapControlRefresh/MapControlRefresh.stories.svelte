@@ -1,9 +1,8 @@
 <script>
-	import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import MapApp from '../map/MapApp.svelte';
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
@@ -24,8 +23,8 @@
 </Template>
 
 <Story name="Refresh Button">
-	<MapApp>
-		<div class="text-white space-y-4 m-2">
+	<div class="w-[100dvw] h-[100dvh]">
+		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
 				The refresh page button is usually positioned in the bottom left corner under the fullscreen
 				button.
@@ -34,7 +33,6 @@
 
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
@@ -42,5 +40,5 @@
 				<MapControlRefresh />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

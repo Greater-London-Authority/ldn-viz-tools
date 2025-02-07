@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-	import FormSubmitButton from './FormSubmitButton.svelte';
 	import Form from '../../Form.svelte';
+	import FormSubmitButton from './FormSubmitButton.svelte';
 
 	export const meta = {
 		title: 'Ui/Form/FormSubmitButton',
@@ -27,15 +27,15 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { ArrowRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	const waitTwoSeconds = (event: MouseEvent | TouchEvent) => {
+	const waitTwoSeconds = () => {
 		return new Promise((r) => setTimeout(r, 2000));
 	};
 
-	const doNothing = (event: MouseEvent | TouchEvent) => {};
+	const doNothing = () => {};
 </script>
 
 <Template let:args>
@@ -49,7 +49,7 @@
 <Story name="Label">
 	<Form>
 		<FormSubmitButton slot="leftButtons" onSubmit={doNothing}>
-			Continue <Icon src={ArrowRight} class="ml-2 w-6 h-6" />
+			Continue <Icon src={ArrowRight} theme="mini" class="ml-2 w-5 h-5" />
 		</FormSubmitButton>
 	</Form>
 </Story>
@@ -60,17 +60,19 @@
 	</Form>
 </Story>
 
+<!-- If the button has no visible `label`, ensure a `title` is added for screen reader use, as below. -->
+
 <Story name="Customise Button">
 	<Form>
 		<FormSubmitButton
 			slot="leftButtons"
-			emphasis="secondary"
-			condition="warning"
 			variant="square"
 			size="lg"
 			onSubmit={doNothing}
+			title="submit"
 		>
-			<Icon src={ArrowRight} class="w-10 h-10" />
+			<Icon src={ArrowRight} class="w-6 h-6" />
+			Custom Buttton
 		</FormSubmitButton>
 	</Form>
 </Story>

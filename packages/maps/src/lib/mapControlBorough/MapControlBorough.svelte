@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `MapControlBorough` component lets the user select a borough, and zooms the map to to the selected borough.
+	 * The `MapControlBorough` component lets the user select a borough, and zooms the map to the selected borough.
 	 * @component
 	 */
 
@@ -14,7 +14,7 @@
 	/**
 	 * Name of the selected borough: can be bound to.
 	 */
-	export let selectedBorough: string | undefined;
+	export let selectedBorough: string | undefined = undefined;
 
 	/**
 	 * Maplibre map object, corresponding to the map that will be zoomed.
@@ -48,7 +48,6 @@
 		items={options}
 		label=""
 		placeholder="Select a Borough to zoom"
-		class="w-fit"
 	/>
 </div>
 

@@ -6,8 +6,8 @@
 	 * @component
 	 */
 
-	import Checkbox from './Checkbox.svelte';
 	import { randomId } from '../utils/randomId';
+	import Checkbox from './Checkbox.svelte';
 
 	/**
 	 * Each element of this array defines a checkbox, and is an object with the properties:
@@ -83,7 +83,7 @@
 	};
 </script>
 
-<div>
+<div class="flex flex-col space-y-1">
 	{#if !buttonsHidden}
 		<!--
 			form="" should prevent this checkbox from being included in form
@@ -100,7 +100,7 @@
 		/>
 	{/if}
 
-	<div class={buttonsHidden ? '' : 'pl-[28px]'}>
+	<div class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
 		{#each options as option (option.id)}
 			<Checkbox
 				id={option.id}

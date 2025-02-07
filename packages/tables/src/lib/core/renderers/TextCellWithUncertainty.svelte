@@ -10,9 +10,9 @@
 	export let value: number | string;
 
 	export let contextVals: boolean[] = [false];
-	export let alignText = 'left' | 'right' | 'center' | undefined;
+	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
 
-	export let formatString;
+	export let formatString: string | undefined = undefined;
 	$: f = format(formatString ?? '');
 
 	const alignmentClasses = {
@@ -21,12 +21,18 @@
 		center: 'justify-center'
 	};
 
-	let alignmentClass;
 	$: alignmentClass = alignmentClasses[alignText ?? 'center'];
 
-	$: textColor = contextVals.length > 0 && !contextVals[0] ? 'rgb(134, 139, 142)' : 'black';
+	$: textColor =
+		contextVals.length > 0 && !contextVals[0]
+			? 'text-color-text-secondary'
+			: 'text-color-text-primary';
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$$restProps;
 </script>
 
 <div class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>
-	<span style:color={textColor}>{formatString ? f(value) : value}</span>
+	<span class={textColor}>{formatString ? f(+value) : value}</span>
 </div>

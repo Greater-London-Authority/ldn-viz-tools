@@ -98,14 +98,14 @@
 	<Toaster position="Center" />
 	<div class="flex gap-6">
 		<Button on:click={toastNotice}>Notice</Button>
-		<Button condition="success" on:click={toastSuccess}>Success</Button>
-		<Button condition="warning" on:click={toastWarning}>Warning</Button>
-		<Button condition="error" on:click={toastError}>Error</Button>
+		<Button emphasis="positive" on:click={toastSuccess}>Success</Button>
+		<Button emphasis="caution" on:click={toastWarning}>Warning</Button>
+		<Button emphasis="negative" on:click={toastError}>Error</Button>
 	</div>
 </Story>
 
 <Story name="Position">
-	<div class="bg-white relative p-6 w-[100vw] h-[100vh]">
+	<div class="relative p-6 w-[100vw] h-[100vh]">
 		<Toaster {position} />
 		<div
 			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform flex flex-wrap justify-center gap-6 [&>*]:basis-3/12"

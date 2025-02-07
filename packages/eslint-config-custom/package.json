@@ -1,18 +1,18 @@
 {
   "name": "@ldn-viz/eslint-config-custom",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "main": "index.mjs",
   "scripts": {
     "test": "echo no tests",
     "test:unit": "echo no tests"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-config-turbo": "^1.12.5",
+    "eslint-config-turbo": "^2.3.3",
     "eslint-plugin-svelte": "^2.35.1"
   },
   "publishConfig": {

@@ -1,5 +1,4 @@
 <script context="module">
-	import SidebarHint from '../../sidebarHint/SidebarHint.svelte';
 	import SidebarGroupTitle from './SidebarGroupTitle.svelte';
 
 	export const meta = {
@@ -10,6 +9,7 @@
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import Overlay from '../../../../overlay/Overlay.svelte';
 </script>
 
 <Template let:args>
@@ -23,12 +23,12 @@
 <Story name="With Hint" source>
 	<SidebarGroupTitle>
 		Group Title
-		<SidebarHint slot="hint" hintType="tooltip">
+		<Overlay slot="hint">
 			<p class="mb-4">Any content you want can go here</p>
 			<p>
 				Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
 				venenatis sapien. Etiam venenatis felis.
 			</p>
-		</SidebarHint>
+		</Overlay>
 	</SidebarGroupTitle>
 </Story>

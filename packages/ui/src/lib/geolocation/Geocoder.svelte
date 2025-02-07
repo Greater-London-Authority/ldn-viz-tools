@@ -23,18 +23,22 @@
 
 	import type { GeocoderAdapter } from './GeocoderAdapter';
 	import type {
-		GeolocationNamed, //
 		Geolocation,
+		GeolocationNamed,
 		GeolocationSearchError,
-		OnGeolocationSearchResult,
 		OnGeolocationSearchError,
+		OnGeolocationSearchResult,
 		OnSuggestionListInteraction
 	} from './types';
 
-	// adapter to source location suggestions from.
+	/**
+	 * adapter to source location suggestions from.
+	 */
 	export let adapter: GeocoderAdapter;
 
-	// delay in ms after a key stroke to minimise redundant API requests.
+	/**
+	 * delay in ms after a keystroke to minimise redundant API requests.
+	 */
 	export let delay = 250;
 
 	/**
@@ -42,14 +46,26 @@
 	 */
 	export let onLocationSelected: undefined | OnGeolocationSearchResult;
 
-	// called when the adapter promise rejects a search request.
+	/**
+	 * called when the adapter promise rejects a search request.
+	 */
 	export let onSearchError: undefined | OnGeolocationSearchError;
+
+	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
 
 	/**
 	 * suggestions can be bound via 'bind:suggestions' to reactively receive
 	 * changes to search results.
 	 */
 	export let suggestions: GeolocationNamed[] = [];
+
+	/**
+	 * The currently selected location.
+	 */
+	export let selected = null;
 
 	/**
 	 * a space-separated list of additional classes applied to the root container.
@@ -71,9 +87,15 @@
 	 */
 	export let showClearButton = false;
 
+	/**
+	 * Placeholder text to be displayed in the input element.
+	 */
+	export let placeholder = 'Location search';
+
 	let container: HTMLElement;
 	let input: HTMLInputElement;
 	let query = '';
+	let silentQueryTextUpdate = false;
 	let showSuggestionList = false;
 
 	const updateSuggestionsNow = async () => {
@@ -89,6 +111,8 @@
 				.then((res) => res || [])
 				.catch((err: unknown) => {
 					console.error('[Location Search] Search suggestions could not be retrieved.');
+
+					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 					onSearchError && onSearchError(err as GeolocationSearchError);
 					return [];
 				});
@@ -109,6 +133,17 @@
 
 	const onSelect = (suggestion: Geolocation) => {
 		closeSuggestionsList();
+		selected = suggestion;
+
+		if (suggestion.name) {
+			query = suggestion.name;
+			silentQueryTextUpdate = true;
+		} else if (suggestion.address) {
+			query = suggestion.address;
+			silentQueryTextUpdate = true;
+		}
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		onLocationSelected && onLocationSelected(suggestion);
 	};
 
@@ -120,8 +155,7 @@
 		const clickEvent = event as PointerEvent;
 
 		if (pressEvent.key === 'Enter' || clickEvent.type === 'click') {
-			closeSuggestionsList();
-			onLocationSelected && onLocationSelected(suggestion);
+			onSelect(suggestion);
 			return;
 		}
 
@@ -243,13 +277,21 @@
 	const clearSearch = () => {
 		showClearButton = false;
 		query = '';
+		selected = null;
 		suggestions = [];
 		showSuggestionList = false;
+
+		onSearchClear();
 	};
 
 	$: {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		query;
-		scheduleUpdate();
+		if (!silentQueryTextUpdate) {
+			scheduleUpdate();
+		} else {
+			silentQueryTextUpdate = false;
+		}
 	}
 </script>
 
@@ -257,17 +299,17 @@
 
 <search
 	bind:this={container}
-	class="bg-core-grey-600 pointer-events-auto relative w-full h-10 flex {classes}"
+	class="bg-color-input-background pointer-events-auto relative w-full h-10 flex {classes}"
 >
-	<div class="absolute top-0 left-0 flex items-center justify-center">
-		<Icon src={MagnifyingGlass} class="w-10 h-10 py-1 p-2 stroke-white" />
+	<div class="absolute top-2 left-2 flex items-center justify-center">
+		<Icon src={MagnifyingGlass} class="w-6 h-6 text-color-input-icon" />
 	</div>
 
 	<input
 		bind:this={input}
 		type="search"
-		placeholder="Location search"
-		class="min-w-0 w-64 max-w-[100%] pl-10 grow shrink bg-core-grey-600 border-core-grey-600 placeholder-core-grey-300 h-full text-white {inputClasses}"
+		{placeholder}
+		class="form-input min-w-0 w-64 max-w-[100%] pl-10 grow shrink bg-color-input-background border border-color-input-border placeholder-color-input-placeholder h-full text-color-valuetext {inputClasses}"
 		class:pr-8={showClearButton}
 		bind:value={query}
 		on:focus={reshowSuggestionList}
@@ -278,10 +320,10 @@
 	{#if showClearButton || query?.length > 0}
 		<button
 			on:click={clearSearch}
-			class="absolute top-0 right-0 flex items-center justify-center"
+			class="absolute top-1 right-1 flex items-center justify-center y-auto bg-color-input-background"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="w-10 h-10 py-1 pl-2 pr-1 stroke-white" />
+			<Icon src={XMark} class="w-8 h-8 p-0.25 text-color-input-icon" />
 		</button>
 	{/if}
 
@@ -289,8 +331,15 @@
 		<!-- component that will render the list of suggestions (e.g, `<GeocoderSuggestionList>`)-->
 		<slot
 			attribution={adapter?.attribution ? adapter.attribution() : undefined}
+			{selected}
 			{suggestions}
 			{onSuggestionEvent}
 		/>
 	{/if}
 </search>
+
+<style>
+	[type='search']::-webkit-search-cancel-button {
+		appearance: none;
+	}
+</style>

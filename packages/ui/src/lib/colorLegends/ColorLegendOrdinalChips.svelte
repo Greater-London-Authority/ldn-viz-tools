@@ -6,6 +6,7 @@
 	 * @component
 	 */
 	import { type ScaleLinear } from 'd3-scale';
+	import { classNames } from '../utils/classNames';
 
 	/**
 	 * An ordinal d3 color scale.
@@ -30,14 +31,25 @@
 
 <div class="flex flex-col">
 	{#if title}
-		<span class="font-bold">{title}</span>
+		<span class="font-semibold text-color-input-label mb-1">{title}</span>
 	{/if}
 
-	<div class={orientation === 'horizontal' ? 'flex gap-2' : 'flex flex-col'}>
+	<div class={orientation === 'horizontal' ? 'flex flex-wrap gap-2' : 'flex flex-col'}>
 		{#each scale.domain() as d}
-			<div class="flex items-center">
-				<div class="flex-none w-4 h-4 mr-1" style:background-color={scale(d)} />
-				<span class=" items-center" style:font-weight={d === highlightedValue ? 'bold' : 'normal'}>
+			<div class="flex items-center text-color-input-label">
+				<div
+					class={classNames(
+						'flex-none w-4 h-4 mr-1',
+						d === highlightedValue ? 'ring-offset-2 ring-2 ring-color-input-border-focussed' : ''
+					)}
+					style:background-color={scale(d)}
+				/>
+				<span
+					class={classNames(
+						'items-center',
+						d === highlightedValue ? 'font-semibold' : 'font-normal'
+					)}
+				>
 					{d}
 				</span>
 			</div>

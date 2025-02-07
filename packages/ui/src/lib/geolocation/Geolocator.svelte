@@ -3,8 +3,8 @@
 	 * The `<Geolocator>` component uses the Geolocation API to identify the
 	 * users current location.
 	 *
-	 * Note that user settings and browser implementions of the Geolocation API
-	 * mean only simple usage is cross platform. The problem mostly affects
+	 * Note that user settings and browser implementations of the Geolocation API
+	 * mean only simple usage is cross-platform. The problem mostly affects
 	 * the querying of, and listening for changes in, permissions.
 	 *
 	 * @component
@@ -17,8 +17,8 @@
 
 	import type {
 		GeolocationCoords,
-		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnGeolocationSearchResult
 	} from './types';
 
 	/**
@@ -145,7 +145,7 @@
 
 <div class="pointer-events-auto w-10 h-10">
 	{#if isSearching}
-		<div class="!bg-core-grey-800 w-10 h-10 p-1">
+		<div class="w-10 h-10 p-1">
 			<Spinner
 				title="Searching for location..."
 				alt="Spinning wheel indicating that location search is in progress"
@@ -159,10 +159,9 @@
 			title="Clear location"
 			role="search"
 			aria-label="Clear location"
-			class="!bg-core-grey-800"
 			on:click={clearSearch}
 		>
-			<Icon src={XMark} class="w-8 h-8 p-0.25 stroke-white" />
+			<Icon src={XMark} class="w-8 h-8 p-0.25" />
 		</Button>
 	{:else}
 		<Button
@@ -171,13 +170,9 @@
 			title={errorMessage ? errorMessage : 'Find my location'}
 			role="search"
 			aria-label={errorMessage ? errorMessage : 'Find my location'}
-			class="!bg-core-grey-800"
 			on:click={startSearch}
 		>
-			<TargetIcon
-				title={errorMessage ? errorMessage : 'Find my location'}
-				class="w-8 h-8 p-0.5 stroke-white"
-			/>
+			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="w-8 h-8 p-0.5" />
 		</Button>
 	{/if}
 </div>

@@ -1,5 +1,82 @@
 # ldn-viz-tools-maps
 
+## 7.0.0
+
+### Major Changes
+
+- 677ca8d: CHANGED: refactored `Map` by splitting out core MapLibre stuff to `MapLibre` internal component.
+  CHANGED: updated `Map` to accept light and dark base map styles and toggle them based on theme mode.
+  CHANGED: removed `classes` property from `map`, pass classes as `class` attribute instead.
+
+## 6.0.1
+
+### Patch Changes
+
+- 1184aa1: CHANGED: updated year in map copyright statement to 2025
+
+## 6.0.0
+
+### Major Changes
+
+- 530d8de: REMOVED: removed `MappApp` component, which was replaced by `AppShell`
+
+### Minor Changes
+
+- 60ee6e5: CHANGED: add types to `MapControlZoom` component
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
+
+## 5.3.0
+
+### Minor Changes
+
+- 77d6d14: ADDED: added `MapDeckOverlay` component
+
+## 5.2.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
+## 5.1.0
+
+### Minor Changes
+
+- 1f94ca5: FIXED: `GeoJSONFeature` to `GeoJSON.Feature` in `MapCursorEvent` for correct typing of `handlerArgTypes`
+
+## 5.0.0
+
+### Major Changes
+
+- ae67f11: ADDED: `dataStore` prop to `GeoJSONMapLayerSource` for two way reactivity
+  CHANGED: rename `data` prop to `initialData` in `GeoJSONMapLayerSource`
+
+## 4.0.1
+
+### Patch Changes
+
+- 69686cf: FIXED: adds missing `@ldn-viz/util` dependency to `package.json` of `maps`, `ui`, and `charts` packages.
+
+## 4.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
+## 3.2.0
+
+### Minor Changes
+
+- cac8844: CHANGED: `BoroughsContextLayer` Storybook stories are now reactive to argument changes.
+
+## 3.1.0
+
+### Minor Changes
+
+- edf2d78: ADDED: Add `MapControlBorough` component to zoom to a selected borough
+
 ## 3.0.2
 
 ### Patch Changes

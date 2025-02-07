@@ -1,7 +1,7 @@
 <script context="module">
 	import Dots from './Dots.svelte';
 	export const meta = {
-		title: 'Tables/AggregateEncodings/Dots',
+		title: 'Tables/AggregateRenderers/Dots',
 		component: Dots,
 
 		args: {

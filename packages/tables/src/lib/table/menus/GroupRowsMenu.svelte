@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { Button, Select } from '@ldn-viz/ui';
-	import PopoverMenu from './PopoverMenu.svelte';
+	import type { TableData } from '$lib/core/lib/dataObj';
+	import { Button, Popover, Select } from '@ldn-viz/ui';
 
-	export let table;
+	export let table: TableData;
 
-	let fields;
+	type Options = { label: string; id: string; value: string }[];
+
+	let fields: Options;
 	$: if (table) {
 		const new_fields = table.columnSpec.map((f) => ({
 			label: f.label ?? f.short_label,
@@ -17,8 +19,8 @@
 		}
 	}
 
-	let groupingSelection = [];
-	const applyGrouping = (groupingSelection) => {
+	let groupingSelection: Options = [];
+	const applyGrouping = (groupingSelection: Options) => {
 		if (table) {
 			// re-order cols
 			// TODO: lift this to dataObj?
@@ -27,7 +29,7 @@
 				table.columnSpec.find((c) => c.short_label === f)
 			);
 			table.columnSpec = [
-				...sortingCols,
+				...sortingCols.filter((d) => !!d),
 				...table.columnSpec.filter((f) => !table.groupingFields.includes(f.short_label))
 			];
 			table.setColumnSpec(table.columnSpec);
@@ -43,9 +45,9 @@
 	$: applyGrouping(groupingSelection);
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
-		<Button variant="text">Group rows</Button>
+<Popover>
+	<svelte:fragment slot="hint">
+		<Button variant="text" size="sm">Group rows</Button>
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
@@ -55,7 +57,6 @@
 		bind:value={groupingSelection}
 		label="Group rows by"
 		id="labelled-input"
-		placeholder="Placeholder text"
 		multiple
 	/>
-</PopoverMenu>
+</Popover>

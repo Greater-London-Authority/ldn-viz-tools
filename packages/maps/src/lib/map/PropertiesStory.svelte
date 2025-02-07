@@ -1,29 +1,37 @@
-<script>
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import Map, { appendOSKeyToUrl } from './Map.svelte';
+<script lang="ts">
+	import Map from './Map.svelte';
+	import { appendOSKeyToUrl } from './util';
+	import type { MapLibre, MapLibrePoint, MapLibreMouseLikeEvent } from './types';
 
-	let clickedLayerIDs = ['Click a point on the map to list the vector layer IDs'];
-	let map = null;
+	const initialLayerIds = ['Click a point on the map to list the vector layer IDs'];
 
-	const updateClickedLayers = (event) => {
+	let clickedLayerIDs: string[] = initialLayerIds;
+	let map: null | MapLibre = null;
+
+	const updateClickedLayers = (event: MapLibreMouseLikeEvent) => {
 		if (map) {
-			clickedLayerIDs = removeDuplicates(queryVectorLayerIDs(event.point));
+			const ids = queryVectorLayerIDs(event.point);
+			clickedLayerIDs = removeDuplicateIds(ids);
 		}
 	};
 
-	const queryVectorLayerIDs = (point) => {
+	const queryVectorLayerIDs = (point: MapLibrePoint): string[] => {
+		if (!map) {
+			return initialLayerIds;
+		}
+
 		return map.queryRenderedFeatures(point).map((f) => f.layer.id);
 	};
 
-	const removeDuplicates = (array) => [...new Set(array)];
+	const removeDuplicateIds = (array: string[]): string[] => [...new Set(array)];
 
-	const registerClickHandler = (newMap) => {
+	const registerClickHandler = (newMap: MapLibre) => {
 		map = newMap;
 		newMap.getCanvas().style.cursor = 'pointer';
 		newMap.on('click', updateClickedLayers);
 	};
 
-	const unregisterClickHandler = (oldMap) => {
+	const unregisterClickHandler = (oldMap: MapLibre) => {
 		oldMap.off('click', updateClickedLayers);
 		map = null;
 	};
@@ -34,11 +42,12 @@
 		whenMapLoads={registerClickHandler}
 		whenMapUnloads={unregisterClickHandler}
 		options={{
-			style: os_light_vts,
 			transformRequest: appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP')
 		}}
 	>
-		<ul class="absolute top-0 left-0 z-10 bg-core-grey-800/[0.8] text-white text-sm m-2 p-2">
+		<ul
+			class="absolute top-0 left-0 z-10 bg-color-container-level-1 text-color-text-primary text-sm m-2 p-2"
+		>
 			{#each clickedLayerIDs as id (id)}
 				<li>{id}</li>
 			{/each}

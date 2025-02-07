@@ -12,6 +12,6 @@ export interface SidebarPlacement {
 }
 
 // Can maybe extend SidebarPlacement above
-export type PlacementLookup = { [key: string]: string }; // tighten first key to litterals
+export type PlacementLookup = { [key: string]: string }; // tighten first key to literals
 
-export type WidthLookup = { [key: string]: { [key: string]: string } }; // tighten first key to litterals
+export type WidthLookup = { [key: string]: { [key: string]: string } }; // tighten first key to literals

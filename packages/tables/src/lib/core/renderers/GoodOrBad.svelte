@@ -1,15 +1,15 @@
 <script lang="ts">
 	/**
-	 * The `GoodOrBad` component renders a table cell comparing a single vlaue to a reference or benchmark value.
+	 * The `GoodOrBad` component renders a table cell comparing a single value to a reference or benchmark value.
 	 * @component
 	 */
 
 	import { format } from 'd3-format';
 
-	import type { ComparedBenchmark } from '../../types/benchmarks';
-	import { classNames } from '../../utils/utilityFns';
 	import { Check, Minus, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { ComparedBenchmark } from '../../types/benchmarks';
+	import { classNames } from '../../utils/utilityFns';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -44,10 +44,9 @@
 
 	let compared: ComparedBenchmark;
 
-	let f;
 	$: f = format(formatString);
 
-	$: if (typeof benchmarkValue === 'number' && typeof value === 'number') {
+	$: if (typeof value === 'number') {
 		compared = compareToBenchmark(value, benchmarkValue, goodIs);
 	}
 
@@ -58,9 +57,9 @@
 	};
 
 	const benchmarkComparisonClass = {
-		good: 'text-core-green-500',
-		bad: 'text-core-red-500',
-		equal: 'text-core-grey-400'
+		good: 'text-color-ui-positive',
+		bad: 'text-color-ui-negative',
+		equal: 'text-color-ui-neutral'
 	};
 
 	$: ragClasses = classNames(
@@ -92,7 +91,9 @@
 		} as ComparedBenchmark;
 	};
 
-	//
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$$restProps;
 </script>
 
 <p class={ragClasses}>
@@ -111,6 +112,6 @@
 		{compared.vs}
 		{benchmarkLabel}
 		{typeof benchmarkValue === 'number' ? f(benchmarkValue) : benchmarkValue}
-		({f(value)})
+		({f(+value)})
 	{/if}
 </p>

@@ -33,7 +33,7 @@
 	/**
 	 * Name of group to which radio button is assigned.
 	 */
-	export let name: string | undefined;
+	export let name: string | undefined = undefined;
 
 	/**
 	 * Boolean indicating whether the radio button is *disabled*.
@@ -67,10 +67,10 @@
 		value={id}
 		{disabled}
 		style={color
-			? `--border-color: ${color}; --background-color: ${color}; --tw-ring-color: ${color}`
+			? `--theme-input-border: ${color}; --theme-input-border-selected: ${color}; --theme-input-background-active: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
-	<span class="form-label ml-2">{label}</span>
+	<span class="form-label ml-2 font-normal">{label}</span>
 	{#if hint}
 		<Tooltip {hintLabel}>
 			{hint}
@@ -78,21 +78,16 @@
 	{/if}
 </label>
 
-{#if color}
-	<style>
-		.form-radio,
-		.dark .form-radio {
-			color: var(--border-color);
-			border-color: var(--border-color);
-			border-width: 2px;
-		}
-
-		.dark .form-radio:checked {
-			background-color: var(--background-color);
-		}
-
-		.form-radio:disabled {
-			@apply border-core-grey-300 cursor-not-allowed;
-		}
-	</style>
-{/if}
+<style>
+	.form-radio:before {
+		content: '';
+		width: 0.65em;
+		height: 0.65em;
+		border-radius: 50%;
+		transform: scale(0);
+		box-shadow: inset 1em 1em var(--theme-input-background-active);
+	}
+	.form-radio:checked:before {
+		transform: scale(1);
+	}
+</style>

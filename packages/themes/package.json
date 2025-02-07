@@ -1,22 +1,29 @@
 {
   "name": "@ldn-viz/themes",
-  "version": "1.0.0",
+  "version": "4.0.1",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
+    "build": "npm run build-tokens",
+    "build-tokens": "node ./build.js",
+    "format": "prettier --check . --write",
     "lint": "prettier --check . && eslint . && publint",
-    "fmt": "prettier --check . --write",
     "test": "echo no tests",
     "test:unit": "echo no tests"
-  },
-  "devDependencies": {
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.2.5",
-    "publint": "^0.2.7",
-    "tailwindcss": "^3.4.1"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
+    "esm-env": "^1.0.0",
     "mini-svg-data-uri": "^1.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "publint": "^0.2.7",
+    "style-dictionary": "^3.9.2",
+    "style-dictionary-utils": "^2.4.1",
+    "tailwindcss": "^3.4.1"
   }
 }

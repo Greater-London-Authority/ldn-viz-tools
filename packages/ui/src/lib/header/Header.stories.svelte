@@ -65,3 +65,15 @@
 		</HeaderRight>
 	</Header>
 </Story>
+
+<Story name="Light Theme (Experimental)">
+	<Header theme="light">
+		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
+
+		<NavLinks>
+			<NavLink target="map">Map</NavLink>
+
+			<NavLink target="trends">Trends</NavLink>
+		</NavLinks>
+	</Header>
+</Story>

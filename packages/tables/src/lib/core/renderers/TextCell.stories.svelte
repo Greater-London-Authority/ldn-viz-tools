@@ -1,7 +1,7 @@
 <script context="module">
 	import TextCell from './TextCell.svelte';
 	export const meta = {
-		title: 'Tables/Encodings/TextCell',
+		title: 'Tables/Renderers/TextCell',
 		component: TextCell,
 
 		argTypes: {
@@ -26,3 +26,7 @@
 </Template>
 
 <Story name="Default" source />
+
+<Story name="Bold text" source>
+	<TextCell value={'500 cars'} colorScale={() => 'red'} fontWeight="bold" />
+</Story>

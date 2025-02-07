@@ -1,5 +1,41 @@
 # @ldn-viz/themes
 
+## 4.0.1
+
+### Patch Changes
+
+- 25428ea: ADDED: add build task that creates JSON files to enable the auto-genereration of token documentation
+
+## 4.0.0
+
+### Major Changes
+
+- b55dab9: CHANGED: moved `userThemeSelectionStore` and `currentThemeMode` from `theme` package to `ui` package
+
+## 3.0.0
+
+### Major Changes
+
+- 758d638: CHANGED: Move `userPreference` from `utils` package to `ui` package
+
+## 2.0.2
+
+### Patch Changes
+
+- 0353c42: CHANGED: set default theme selection to system
+
+## 2.0.1
+
+### Patch Changes
+
+- 2e26abb: FIXED: include the generated CSS in published package
+
+## 2.0.0
+
+### Major Changes
+
+- 9f1adf7: CHANGED: change how we handle color tokens
+
 ## 1.0.0
 
 ### Major Changes

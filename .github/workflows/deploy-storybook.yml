@@ -28,8 +28,8 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
-        
+        run: npm install
+
       # if we don't do this, imports between packages will fail
       # (e.g., import of Button from @ldn-viz/ui into @ldn-viz/charts)
       - name: Build everything
@@ -52,4 +52,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

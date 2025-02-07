@@ -27,7 +27,7 @@
 <Template let:args>
 	<Switch bind:checked {...args} />
 
-	<div>Is checked?: {checked}</div>
+	<div class="text-color-text-secondary">Is checked?: {checked}</div>
 </Template>
 
 <Story name="Default" source />
@@ -41,18 +41,22 @@
 </Story>
 
 <Story name="Label on left" source>
-	<Switch label="Enable something" size="sm" labelOn="left" {checked} />
+	<Switch label="Enable something" labelOn="left" {checked} />
 </Story>
 
 <Story name="Control whether disabled" source>
-	<Button on:click={() => (disabled = !disabled)}>
-		Click to {disabled ? 'enable' : 'disable'}
-	</Button>
+	<div class="flex flex-col space-y-4">
+		<Button on:click={() => (disabled = !disabled)}>
+			Click to {disabled ? 'enable' : 'disable'}
+		</Button>
 
-	<Switch label="Enable something" bind:checked {disabled} />
+		<Switch label="Enable something" bind:checked {disabled} />
+	</div>
 </Story>
 
 <Story name="Externally change" source>
-	<Button on:click={() => (checked = !checked)}>Toggle</Button>
-	<Switch label="Enable something" bind:checked />
+	<div class="flex flex-col space-y-4">
+		<Button on:click={() => (checked = !checked)}>Toggle</Button>
+		<Switch label="Enable something" bind:checked />
+	</div>
 </Story>

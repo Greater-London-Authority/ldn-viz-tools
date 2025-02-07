@@ -12,19 +12,17 @@
 
 	export interface ButtonProps {
 		variant: 'brand' | 'square' | 'solid' | 'outline' | 'text';
-		emphasis: 'primary' | 'secondary';
-		condition: 'default' | 'success' | 'error' | 'warning';
+		emphasis: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
 		size: 'sm' | 'md' | 'lg';
 		disabled: boolean;
 		href: string;
+		openInNewTab: boolean;
 		type: 'button' | 'submit';
 		title: string;
+		action: (node: HTMLElement) => void;
 	}
 
-	type ButtonStyle = Record<
-		ButtonProps['variant'],
-		Record<ButtonProps['emphasis'], Record<ButtonProps['condition'], string>>
-	>;
+	type ButtonStyle = Record<ButtonProps['variant'], Record<ButtonProps['emphasis'], string>>;
 
 	type DisabledStyle = Record<ButtonProps['variant'], string>;
 </script>
@@ -36,14 +34,9 @@
 	export let variant: ButtonProps['variant'] = 'solid';
 
 	/**
-	 * Determines how much visual emphasis is placed on the button.
+	 * Determines the visual emphasis is placed on the button.
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
-
-	/**
-	 * Provides ability to modify appearance to represent success/error/warning conditions.
-	 */
-	export let condition: ButtonProps['condition'] = 'default';
 
 	/**
 	 * Sets the size of the button.
@@ -61,6 +54,11 @@
 	export let href: ButtonProps['href'] = '';
 
 	/**
+	 * If `true`, then clicking the button will open the link target in a new tab. Has no effect if `href` is not set.
+	 */
+	export let openInNewTab = false;
+
+	/**
 	 * If `submit`, then this is a submit button for use with a form.
 	 */
 	export let type: ButtonProps['type'] = 'button';
@@ -68,119 +66,118 @@
 	/** Text that appears in tooltip on hover, */
 	export let title: ButtonProps['title'] = '';
 
+	/**
+	 * Custom button action, e.g. mouse/key events.
+	 * Primarily used by components using Melt UI triggers.
+	 */
+	export let action: ButtonProps['action'] = () => {};
+
+	/**
+	 * Custom action props such as ARIA attributes and tabindex.
+	 * Primarily used by components using Melt UI
+	 */
+	export let actionProps = {};
+
+	/**
+	 * Enables screen reader to describe contents of button
+	 */
+	export let ariaLabel: string | null = null;
+
+	/**
+	 * Value set as the `id` attribute of the `<svelte:element>` element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 
 	const styleClasses: ButtonStyle = {
-		brand: {
-			primary: {
-				default:
-					'bg-core-grey-600 text-white pb-1 border-b-4 border-core-blue-500 hover:bg-core-grey-500 dark:bg-core-grey-50 dark:text-core-grey-800 dark:hover:bg-core-grey-200',
-				success:
-					'bg-core-green-500 text-white pb-1 border-b-4 border-core-green-800 hover:bg-core-green-700',
-				error:
-					'bg-core-red-500 text-white pb-1 border-b-4 border-core-red-800 hover:bg-core-red-700',
-				warning:
-					'bg-core-orange-500 text-white pb-1 border-b-4 border-core-orange-800 hover:bg-core-orange-700'
-			},
-			secondary: {
-				default:
-					'bg-core-grey-50 core-text-grey-800 pb-1 border-b-4 border-core-blue-500 hover:bg-core-grey-100 dark:bg-core-grey-800 dark:text-white dark:hover:bg-core-grey-500',
-				success:
-					'bg-core-green-50 core-text-grey-800 pb-1 border-b-4 border-core-green-500 hover:bg-core-green-100 dark:bg-core-green-800 dark:text-white dark:hover:bg-core-green-700',
-				error:
-					'bg-core-red-50 core-text-grey-800 pb-1 border-b-4 border-core-red-500 hover:bg-core-red-100 dark:bg-core-red-800 dark:text-white dark:hover:bg-core-red-700',
-				warning:
-					'bg-core-orange-50 core-text-grey-800 pb-1 border-b-4 border-core-orange-500 hover:bg-core-orange-100 dark:bg-core-orange-800 dark:text-white dark:hover:bg-core-orange-700'
-			}
+		solid: {
+			primary:
+				'bg-color-action-background-primary text-color-static-white hover:bg-color-action-background-primary-hover active:bg-color-action-background-primary-active dark:hover:text-color-text-inverse-primary',
+			secondary:
+				'bg-color-action-background-secondary text-color-static-white hover:bg-color-action-background-secondary-hover active:bg-color-action-background-secondary-active dark:hover:text-color-text-inverse-primary',
+			positive:
+				'bg-color-action-background-positive text-color-static-white hover:bg-color-action-background-positive-hover focus:ring-color-action-positive-focussed active:bg-color-action-background-positive-active dark:text-color-text-inverse-primary',
+			negative:
+				'bg-color-action-background-negative text-color-static-white hover:bg-color-action-background-negative-hover focus:ring-color-action-negative-focussed active:bg-color-action-background-negative-active dark:text-color-text-inverse-primary',
+			caution:
+				'bg-color-action-background-caution text-color-static-white hover:bg-color-action-background-caution-hover focus:ring-color-action-caution-focussed active:bg-color-action-background-caution-active dark:text-color-text-inverse-primary'
 		},
 		square: {
-			primary: {
-				default:
-					'bg-core-blue-600 text-white hover:bg-core-blue-700 dark:bg-core-grey-50 dark:text-core-grey-800 dark:hover:bg-core-grey-200',
-				success: 'bg-core-green-500 text-white hover:bg-core-green-700',
-				error: 'bg-core-red-500 text-white hover:bg-core-red-700',
-				warning: 'bg-core-orange-500 text-white hover:bg-core-orange-700'
-			},
-			secondary: {
-				default:
-					'bg-core-grey-800 text-white hover:bg-core-grey-500 dark:bg-core-grey-50 dark:text-core-grey-800 dark:hover:bg-core-grey-200',
-				success: 'bg-core-green-500 text-white hover:bg-core-green-700',
-				error: 'bg-core-red-500 text-white hover:bg-core-red-700',
-				warning: 'bg-core-orange-500 text-white hover:bg-core-orange-700'
-			}
-		},
-		solid: {
-			primary: {
-				default: ' bg-core-blue-600 text-white hover:bg-core-blue-700 ',
-				success: 'bg-core-green-500 text-white hover:bg-core-green-600',
-				error: 'bg-core-red-500 text-white hover:bg-core-red-600',
-				warning: 'bg-core-orange-500 text-white hover:bg-core-orange-600'
-			},
-			secondary: {
-				default:
-					'bg-core-grey-100 text-core-grey-700 hover:bg-core-grey-200 dark:bg-core-grey-600 dark:text-white dark:hover:bg-core-grey-500',
-				success: 'bg-core-green-300 text-core-grey-700 hover:bg-core-green-400',
-				error: 'bg-core-red-300 text-core-grey-700 hover:bg-core-red-400',
-				warning: 'bg-core-orange-300 text-core-grey-700 hover:bg-core-orange-400'
-			}
+			primary:
+				'bg-color-action-background-primary text-color-static-white hover:bg-color-action-background-primary-hover active:bg-color-action-background-primary-active dark:hover:text-color-text-inverse-primary',
+			secondary:
+				'bg-color-action-background-secondary text-color-static-white hover:bg-color-action-background-secondary-hover active:bg-color-action-background-secondary-active dark:hover:text-color-text-inverse-primary',
+			positive:
+				'bg-color-action-background-positive text-color-static-white hover:bg-color-action-background-positive-hover focus:ring-color-action-positive-focussed active:bg-color-action-background-positive-active dark:text-color-text-inverse-primary',
+			negative:
+				'bg-color-action-background-negative text-color-static-white hover:bg-color-action-background-negative-hover focus:ring-color-action-negative-focussed active:bg-color-action-background-negative-active dark:text-color-text-inverse-primary',
+			caution:
+				'bg-color-action-background-caution text-color-static-white hover:bg-color-action-background-caution-hover focus:ring-color-action-caution-focussed active:bg-color-action-background-caution-active dark:text-color-text-inverse-primary'
 		},
 		outline: {
-			primary: {
-				default:
-					'bg-transparent text-core-grey-700 border-2 px-2 pt-1.5 pb-1.5 border-core-blue-600 hover:bg-core-blue-600 hover:text-white dark:text-white',
-				success:
-					'bg-core-green-50 text-core-green-800 border-2 px-2 pt-1.5 pb-1.5 border-core-green-500 hover:bg-core-green-600 hover:text-white dark:text-white dark:bg-core-green-700 dark:hover:bg-core-green-600',
-				error:
-					'bg-core-red-50 text-core-red-800 border-2 px-2 pt-1.5 pb-1.5 border-core-red-500 hover:bg-core-red-600 hover:text-white dark:text-white dark:bg-core-red-700 dark:hover:bg-core-red-600',
-				warning:
-					'bg-core-orange-50 text-core-orange-800 border-2 px-2 pt-1.5 pb-1.5 border-core-orange-500 hover:bg-core-orange-600 hover:text-white dark:text-white dark:bg-core-orange-700 dark:hover:bg-core-orange-600'
-			},
-			secondary: {
-				default:
-					'bg-transparent text-core-grey-700 border-2 px-2 pt-1.5 pb-1.5 border-core-grey-400 hover:bg-core-grey-400 hover:text-white dark:text-white',
-				success:
-					'bg-core-green-50 text-core-green-800 border-2 px-2 pt-1.5 pb-1.5 border-core-green-500 hover:bg-core-green-600 hover:text-white dark:text-white dark:bg-core-green-700 dark:hover:bg-core-green-600',
-				error:
-					'bg-core-red-50 text-core-red-800 border-2 px-2 pt-1.5 pb-1.5 border-core-red-500 hover:bg-core-red-600 hover:text-white dark:text-white dark:bg-core-red-700 dark:hover:bg-core-red-600',
-				warning:
-					'bg-core-orange-50 text-core-orange-800 border-2 px-2 pt-1.5 pb-1.5 border-core-orange-500 hover:bg-core-orange-600 hover:text-white dark:text-white dark:bg-core-orange-700 dark:hover:bg-core-orange-600'
-			}
+			primary:
+				'bg-transparent text-color-text-primary border px-2 pt-1 pb-1 border-color-action-border-primary hover:bg-color-action-background-primary-muted-hover hover:underline active:bg-color-action-background-primary-muted-active',
+			secondary:
+				'bg-transparent text-color-text-primary border px-2 pt-1 pb-1 border-color-action-border-secondary hover:bg-color-action-secondary-muted-hover hover:underline active:bg-color-action-secondary-muted-active',
+			positive:
+				'bg-transparent text-color-text-primary border px-2 pt-1 pb-1 border-color-action-border-positive hover:bg-color-action-background-positive-muted-hover hover:underline active:bg-color-action-background-positive-muted-active',
+			negative:
+				'bg-transparent text-color-text-primary border px-2 pt-1 pb-1 border-color-action-border-negative hover:bg-color-action-background-negative-muted-hover hover:underline active:bg-color-action-background-negative-muted-active',
+			caution:
+				'bg-transparent text-color-text-primary border px-2 pt-1 pb-1 border-color-action-border-caution hover:bg-color-action-background-caution-muted-hover hover:underline active:bg-color-action-background-caution-muted-active'
 		},
 		text: {
-			primary: {
-				default: 'bg-transparent text-core-grey-700 hover:text-core-blue-600 dark:text-white',
-				success: 'bg-transparent text-core-green-500 hover:text-core-green-600',
-				error: 'bg-transparent text-core-red-500 hover:text-core-red-600',
-				warning: 'bg-transparent text-core-orange-500 hover:text-core-orange-600'
-			},
-			secondary: {
-				default: 'bg-transparent text-core-grey-500 hover:text-core-grey-300 dark:text-white',
-				success: 'bg-transparent text-core-green-500 hover:text-core-green-600',
-				error: 'bg-transparent text-core-red-500 hover:text-core-red-600',
-				warning: 'bg-transparent text-core-orange-500 hover:text-core-orange-600'
-			}
+			primary:
+				'bg-transparent text-color-action-text-primary underline hover:text-color-action-text-primary-hover hover:no-underline active:text-color-action-text-primary-active',
+			secondary:
+				'bg-transparent text-color-action-text-secondary underline hover:text-color-action-text-secondary-hover hover:no-underline active:text-color-action-text-secondary-active',
+			positive:
+				'bg-transparent text-color-action-positive underline hover:text-color-action-positive-hover hover:no-underline active:text-color-action-text-positive-active',
+			negative:
+				'bg-transparent text-color-action-negative underline hover:text-color-action-negative-hover hover:no-underline active:text-color-action-text-negative-active',
+			caution:
+				'bg-transparent text-color-action-caution underline hover:text-color-action-caution-hover hover:no-underline active:text-color-action-text-caution-active'
+		},
+		brand: {
+			primary:
+				'bg-color-ui-background-inverse-primary text-color-text-inverse-primary border-b-4 border-color-static-brand hover:bg-color-action-background-primary-hover active:bg-color-action-background-primary-active',
+			secondary:
+				'bg-color-ui-background-secondary text-color-text-primary border-b-4 border-color-static-brand hover:bg-color-action-background-secondary-hover active:bg-color-action-background-secondary-active hover:text-color-text-inverse-primary',
+			positive:
+				'bg-color-action-background-positive text-color-static-white border-b-4 border-color-static-brand hover:bg-color-action-background-positive-hover focus:ring-color-action-positive-focussed active:bg-color-action-background-positive-active dark:text-color-text-inverse-primary',
+			negative:
+				'bg-color-action-background-negative text-color-static-white  border-b-4 border-color-static-brand hover:bg-color-action-background-negative-hover focus:ring-color-action-negative-focussed active:bg-color-action-background-negative-active dark:text-color-text-inverse-primary',
+			caution:
+				'bg-color-action-background-caution text-color-static-white border-b-4 border-color-static-brand hover:bg-color-action-background-caution-hover focus:ring-color-action-caution-focussed active:bg-color-action-background-caution-active dark:text-color-text-inverse-primary'
 		}
 	};
 
 	const disabledClasses: DisabledStyle = {
-		brand: '!bg-core-grey-100 !border-core-grey-300 !text-core-grey-300',
-		square: '!bg-core-grey-100 !text-core-grey-300',
-		solid: '!bg-core-grey-100 !text-core-grey-300',
-		outline: '!bg-core-grey-100 !border-core-grey-300 !text-core-grey-300',
-		text: '!text-core-grey-300 hover:bg-transparent'
+		brand:
+			'!bg-color-action-background-disabled !border-color-action-border-disabled !text-color-action-disabled',
+		square: '!bg-color-action-background-disabled !text-color-action-disabled',
+		solid: '!bg-color-action-background-disabled !text-color-action-disabled',
+		outline:
+			'!bg-color-action-background-disabled !border-color-action-border-disabled !text-color-action-disabled',
+		text: '!text-color-action-disabled hover:bg-transparent'
 	};
 
-	const sizeClasses = {
-		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-2',
-		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2',
-		lg: variant === 'square' ? 'w-16 h-16 text-xs flex-col space-y-4' : 'text-lg px-4 py-2'
+	$: sizeClasses = {
+		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5 min-w-8 min-h-8',
+		md: variant === 'square' ? 'w-11 h-11 flex-col' : 'text-base px-4 py-2 min-w-11 min-h-11',
+		lg:
+			variant === 'square'
+				? 'w-16 h-16 text-xs flex-col space-y-4'
+				: 'text-lg px-4 py-2 min-w-16 min-h-16'
 	};
 
 	let buttonClass: string;
 
 	$: buttonClass = classNames(
-		'inline-flex justify-center items-center disabled:cursor-not-allowed',
-		styleClasses[variant][emphasis][condition],
+		'inline-flex justify-center items-center disabled:cursor-not-allowed focus:ring-offset-2 focus:ring-offset-color-ui-background-primary focus:ring-2 focus:outline-none focus:ring-color-action-primary-focussed',
+		styleClasses[variant][emphasis],
 		sizeClasses[size],
 		disabled === true ? disabledClasses[variant] : '',
 		href && disabled === true ? 'pointer-events-none' : '',
@@ -192,10 +189,14 @@
 	<svelte:element
 		this={href ? 'a' : 'button'}
 		type={href ? undefined : type}
+		target={href && openInNewTab ? '_blank' : undefined}
+		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
 		{href}
 		{disabled}
 		{title}
 		class={buttonClass}
+		aria-label={ariaLabel}
+		{id}
 		on:click
 		on:change
 		on:keydown
@@ -207,6 +208,8 @@
 		on:mouseleave
 		role="button"
 		tabindex="0"
+		use:action
+		{...actionProps}
 	>
 		<!-- contents of the button -->
 		<slot />

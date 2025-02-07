@@ -1,8 +1,7 @@
 <script lang="ts">
+	import { Button, Popover, Select } from '@ldn-viz/ui';
 	import { Funnel } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Button, Select } from '@ldn-viz/ui';
-	import PopoverMenu from './PopoverMenu.svelte';
 
 	export let col;
 	export let table;
@@ -23,10 +22,10 @@
 		{ label: 'range', value: 'range' }
 	];
 
-	let selectedFilterType;
+	let selectedFilterType: { label: string; value: string } | undefined;
 
 	const applyFilter = () => {
-		if (!table) {
+		if (!table || !selectedFilterType) {
 			return;
 		}
 
@@ -49,13 +48,13 @@
 	// TODO: set icon based on whether filter applied
 	// TODO: position better
 
-	let val1;
-	let val2;
+	let val1: string;
+	let val2: string;
 </script>
 
-<PopoverMenu>
-	<svelte:fragment slot="trigger">
-		<Icon src={Funnel} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
+<Popover>
+	<svelte:fragment slot="hint">
+		<Icon src={Funnel} theme="mini" class="w-4 h-4" aria-hidden="true" />
 
 		<span class="sr-only">Open Popover</span>
 	</svelte:fragment>
@@ -78,4 +77,4 @@
 
 	<Button on:click={applyFilter}>Apply</Button>
 	<Button on:click={clearFilter}>Clear</Button>
-</PopoverMenu>
+</Popover>

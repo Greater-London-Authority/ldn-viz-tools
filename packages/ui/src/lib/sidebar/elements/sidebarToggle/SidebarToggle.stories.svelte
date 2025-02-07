@@ -20,7 +20,7 @@
 </script>
 
 <Template let:args>
-	<SidebarToggle bind:isOpen />
+	<SidebarToggle bind:isOpen {...args} />
 </Template>
 
 <Story name="Default" source>

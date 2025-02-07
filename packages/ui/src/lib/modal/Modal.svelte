@@ -11,6 +11,7 @@
 	import { createDialog } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
@@ -23,7 +24,15 @@
 	const isOpenStore = writable(isOpen);
 
 	const {
-		elements: { portalled, overlay, content, title: meltTitle, description: meltDescripton, close },
+		elements: {
+			trigger,
+			portalled,
+			overlay,
+			content,
+			title: meltTitle,
+			description: meltDescription,
+			close
+		},
 		states: { open }
 	} = createDialog({ open: isOpenStore });
 
@@ -36,6 +45,11 @@
 	 * description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
 	 */
 	export let description: string = '';
+
+	/**
+	 * Colour scheme to apply to the header, either `light` or `dark`. The modal will respect global theme settings.
+	 */
+	export let headerTheme: 'light' | 'dark' = 'dark';
 
 	/**
 	 * width of the modal
@@ -72,7 +86,7 @@
 	};
 
 	$: modalClass = classNames(
-		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl pointer-events-auto',
+		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
 
@@ -89,23 +103,29 @@
 			isOpen = newStoreValue;
 		}
 	};
+
+	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
-<div {...$portalled} use:$portalled.action>
-	{#if $open}
+{#if $$slots.trigger}
+	<slot name="trigger" />
+{/if}
+
+{#if $open}
+	<div {...$portalled} use:$portalled.action>
 		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
-					class="bg-core-grey-700 text-white p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-core-blue-500"
+					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
 					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
 					<div {...$close} use:$close.action>
 						<Button
 							variant="square"
 							emphasis="secondary"
-							class="w-8 h-8 self-center dark:bg-core-grey-900 dark:text-white"
+							class="w-8 h-8 self-center"
 							on:click={() => ($isOpenStore = false)}
 						>
 							<span class="sr-only">Close</span>
@@ -117,7 +137,7 @@
 				<div class="overflow-y-auto">
 					<div class="p-4">
 						{#if description}
-							<div {...$meltDescripton} use:$meltDescripton.action>{description}</div>
+							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
 						{/if}
 
 						{#if hasChildren}
@@ -128,5 +148,5 @@
 				</div>
 			</div>
 		</div>
-	{/if}
-</div>
+	</div>
+{/if}

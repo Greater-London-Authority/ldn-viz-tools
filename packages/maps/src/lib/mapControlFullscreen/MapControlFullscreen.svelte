@@ -1,6 +1,6 @@
 <script context="module">
-	import { writable } from 'svelte/store';
 	import { ArrowsPointingIn, ArrowsPointingOut, ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
+	import { writable } from 'svelte/store';
 
 	const isFullscreen = writable(false);
 
@@ -48,14 +48,15 @@
 	};
 </script>
 
-<script>
-	import { onMount, getContext } from 'svelte';
+<script lang="ts">
+	import type { MapStore } from '$lib/map/Map.svelte';
 	import { Button } from '@ldn-viz/ui';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getContext, onMount } from 'svelte';
 
-	const mapStore = getContext('mapStore');
+	const mapStore: MapStore = getContext('mapStore');
 
-	let mode = null;
+	let mode: any = null;
 
 	onMount(() => {
 		if (isFullscreenAllowed()) {
@@ -63,11 +64,12 @@
 		}
 	});
 
-	const handle = (event) => {
+	const handle = (event: UIEvent) => {
 		if (!$mapStore || !mode) {
 			return;
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
 
 		if (event.detail > 0) {
@@ -82,7 +84,7 @@
 			variant="square"
 			emphasis="secondary"
 			title={$isFullscreen ? mode.titleIn : mode.titleOut}
-			class="dark:bg-core-grey-800 dark:text-white hover:dark:bg-core-grey-500 pointer-events-auto"
+			class="pointer-events-auto"
 			on:click={handle}
 		>
 			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="w-8 h-8 p-1" />

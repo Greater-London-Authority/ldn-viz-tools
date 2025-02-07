@@ -6,7 +6,7 @@
 			type?: string;
 			disabled?: boolean;
 		}
-	) => string;
+	) => string | number;
 
 	export type InputMode =
 		| 'none'
@@ -30,6 +30,8 @@
 
 	/**
 	 * The `type` of the `<input>` element (see [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)).
+	 *
+	 * Additionally, passing `textarea` will render a `<textarea>` instead of an `<input>`.
 	 */
 	export let type = 'text';
 
@@ -59,6 +61,11 @@
 	export let description = '';
 
 	/**
+	 * Text that appears within the `<input>` element when no value is present.
+	 */
+	export let placeholder = '';
+
+	/**
 	 * Determines which edge of the `<input>` the description is aligned with.
 	 */
 	export let descriptionAlignment: 'left' | 'right' = 'left';
@@ -71,7 +78,7 @@
 	/**
 	 * Text to be displayed next to icon in tooltip trigger.
 	 */
-	export let hintLabel = '';
+	export let hintLabel: undefined | string = undefined;
 
 	/**
 	 * If `false`, then `required` attribute is applied to `<input>`.
@@ -115,8 +122,16 @@
 		format = null;
 	}
 
-	const descriptionId = `${id}-description`;
-	const errorId = `${id}-error`;
+	/**
+	 * Only generate `descriptionId` and/or `errorId` when `description` and/or `error` exist.
+	 * `descriptionId` is static but `errorId` is reactive as error state could change.
+	 */
+	const descriptionId = description ? `${id}-description` : undefined;
+	$: errorId = error ? `${id}-error` : undefined;
+
+	// if error exists, description won't render so `aria-describedby` should equal `undefined`.
+	$: descriptionIsVisible = !error;
+
 	let input: HTMLInputElement | HTMLTextAreaElement;
 
 	// Svelte does not allow bind:type and bind:value simultaneously so this
@@ -126,11 +141,11 @@
 			return;
 		}
 
-		value = format(value, {
+		value = `${format(value, {
 			name,
 			type,
-			disabled: !!$$restProps.disabled
-		});
+			disabled: !!disabled
+		})}`;
 
 		// Protect from cyclic reactivity.
 		if (input.value !== value) {
@@ -145,13 +160,12 @@
 
 	$: inputClasses = classNames(
 		'm-0',
-		error ? 'border-core-red-400 dark:border-core-red-400' : '',
-		$$restProps.disabled ? 'cursor-not-allowed ' : '',
-		'dark:bg-core-grey-600',
-		'dark:text-white',
-		'placeholder-core-grey-400',
-		'dark:placeholder-core-grey-300',
-		type === 'range' ? 'form-range' : 'form-input'
+		error ? 'border-color-input-border-error' : '',
+		disabled
+			? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
+			: '',
+		type === 'range' ? 'form-range' : 'form-input',
+		'placeholder-color-input-placeholder'
 	);
 </script>
 
@@ -168,6 +182,7 @@
 	{disabled}
 	{optional}
 >
+	<slot name="hint" slot="hint" />
 	<!--
 		Svelte does not allow bind:text and bind:value on an input element at
 		the same time so an on change listener is required.
@@ -180,8 +195,9 @@
 			{name}
 			{value}
 			{disabled}
+			{placeholder}
 			required={!optional}
-			aria-describedby={descriptionId}
+			aria-describedby={descriptionIsVisible ? descriptionId : undefined}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
 			on:blur={formatAndUpdateValue}
@@ -217,8 +233,9 @@
 			{name}
 			{value}
 			{disabled}
+			{placeholder}
 			required={!optional}
-			aria-describedby={descriptionId}
+			aria-describedby={descriptionIsVisible ? descriptionId : undefined}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
 			on:blur={formatAndUpdateValue}

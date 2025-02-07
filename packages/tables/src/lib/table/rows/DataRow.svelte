@@ -1,26 +1,21 @@
 <script>
-	import LinkWrapper from '../cells/LinkWrapper.svelte';
 	import ColoredCell from '../../core/renderers/ColoredCell.svelte';
+	import ColGroupSpacer from '../cells/ColGroupSpacer.svelte';
+	import DataCell from '../cells/DataCell.svelte';
 	import Scaffolding from './Scaffolding.svelte';
 
 	export let row;
 	export let table;
-
-	const DEFAULT_CELL_WIDTH = '100px';
 </script>
 
 <Scaffolding {table}>
 	<svelte:fragment slot="dataColumns">
-		{#each table.columnSpec as col}
+		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
-				<div
-					style:width={col.cell.width ?? DEFAULT_CELL_WIDTH}
-					class="was-td"
-					style="flex-shrink: 0"
-				>
+				<div style:width={col.computedWidth + 'px'} class="was-td">
 					{#if col.cell && col.cell.renderer}
-						<LinkWrapper href={col.href} {row}>
+						<DataCell href={col.href} {row}>
 							<svelte:component
 								this={col.cell.renderer}
 								colorScale={table.scales[col.short_label]}
@@ -30,20 +25,21 @@
 									? col.cell.contextFields.map((c) => row[c])
 									: []}
 								extent={table.extents[col.short_label]}
+								width={col.computedWidth}
 								{...col.cell}
 							/>
-						</LinkWrapper>
+						</DataCell>
 					{:else}
-						<LinkWrapper href={col.href} {row}>
+						<DataCell href={col.href} {row}>
 							<ColoredCell
 								value={row[col.short_label]}
 								colorScale={table.scales[col.short_label]}
-								extent={table.extents[col.short_label]}
 							/>
-						</LinkWrapper>
+						</DataCell>
 					{/if}
 				</div>
 			{/if}
+			<ColGroupSpacer {table} {i} />
 		{/each}
 	</svelte:fragment>
 </Scaffolding>

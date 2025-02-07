@@ -5,7 +5,7 @@
 	import Header from './Header.svelte';
 
 	export const meta = {
-		title: 'Tables/Encodings/Header',
+		title: 'Tables/Renderers/Header',
 		component: Header,
 
 		argTypes: {

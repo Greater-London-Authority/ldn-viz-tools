@@ -1,8 +1,21 @@
-import { withThemeByClassName } from '@storybook/addon-themes';
+// import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/svelte';
 import { docs } from './ciuStorybookTheme';
 
 import '../src/app.postcss';
+import { withThemeByClassNameStore } from './withThemeByClassNameStore';
+
+const isBroswer = () => {
+	if (typeof window === 'object') {
+		return true;
+	}
+};
+const getLocalStorage = () => {
+	if (isBroswer()) {
+		return globalThis.localStorage?.getItem('theme') || 'light';
+	}
+	return 'light';
+};
 
 const preview: Preview = {
 	parameters: {
@@ -17,52 +30,14 @@ const preview: Preview = {
 		}
 	},
 	decorators: [
-		withThemeByClassName({
+		withThemeByClassNameStore({
 			themes: {
 				light: '',
 				dark: 'dark'
 			},
-			defaultTheme: 'light'
+			defaultTheme: getLocalStorage()
 		})
 	]
 };
 
 export default preview;
-
-// const preview: Preview = {
-// 	parameters: {
-// 		layout: 'centered',
-// 		docs: {
-// 			toc: true,
-// 			page: () => (
-// 				<>
-// 					<Title />
-// 					<Subtitle />
-// 					<Description />
-// 					<Primary />
-// 					<Controls />
-// 					<Stories includePrimary={false} />
-// 				</>
-// 			)
-// 		},
-// 		backgrounds: { disable: true },
-// 		actions: { argTypesRegex: '^on[A-Z].*' },
-// 		options: {
-// 			showPanel: false
-// 		},
-// 		controls: {
-// 			expanded: true,
-// 			matchers: {
-// 				color: /(background|color)$/i,
-// 				date: /Date$/i
-// 			}
-// 		},
-// 		darkMode: {
-// 			classTarget: 'html',
-// 			stylePreview: true,
-// 			appContentBg: 'black'
-// 		}
-// 	}
-// };
-
-// export default preview;

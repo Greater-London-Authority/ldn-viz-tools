@@ -30,7 +30,7 @@
 	 */
 	export let disabled = false;
 
-	let inputID = `input-${id}`;
+	let inputID = `input-${name || ''}-${id}`;
 
 	const { selectedId } = getContext<{ selectedId: Writable<string> }>('selectedId');
 </script>
@@ -49,9 +49,9 @@
 		for={inputID}
 		class={classNames(
 			disabled
-				? 'cursor-not-allowed bg-core-grey-200 !text-core-grey-400'
-				: 'cursor-pointer bg-core-grey-100 hover:bg-core-grey-200 dark:bg-core-grey-700 dark:hover:bg-core-grey-600',
-			'form-label flex flex-col justify-center items-center p-2 w-full ring-1 ring-white peer-checked:bg-core-blue-600 hover:peer-checked:bg-core-blue-600 peer-checked:text-white  dark:ring-core-grey-800'
+				? 'cursor-not-allowed !bg-color-input-background-disabled !text-color-text-disabled '
+				: 'cursor-pointer bg-color-input-background-off text-color-text-primary',
+			'form-label flex flex-col justify-center items-center p-2 min-h-11 w-full ring-1 ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on'
 		)}
 	>
 		<!-- contents of the radio button (name and/or icon) -->
