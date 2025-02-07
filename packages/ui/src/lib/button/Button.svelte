@@ -188,7 +188,7 @@
 		sizeClasses[size],
 		disabled === true ? disabledClasses[variant] : '',
 		href && disabled === true ? 'pointer-events-none' : '',
-		slim === true ? '!py-0 !px-0 !min-h-0 leading-none text-left' : '',
+		slim === true ? '!py-0 !px-0 !min-h-0 leading-none text-left text-nowrap' : '',
 		$$props.class
 	);
 </script>
