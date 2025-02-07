@@ -108,13 +108,13 @@
 		<p class="flex flex-wrap text-lg">
 			sometime you may want a buttton to&nbsp<Button slim variant="text" size="lg">
 				go with the flow
-			</Button>&nbspa bit more
+			</Button>&nbsp;a bit more
 		</p>
 
 		<p class="flex flex-wrap text-lg">
 			sometime you may want a buttton to&nbsp;<Button slim variant="solid" size="lg" class="!px-2">
 				go with the flow
-			</Button>&nbsp; a bit more
+			</Button>&nbsp;a bit more
 		</p>
 	</div>
 </Story>
