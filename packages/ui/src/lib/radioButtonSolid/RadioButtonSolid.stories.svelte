@@ -124,3 +124,14 @@ different values as the `name` prop.
 	</RadioButtonGroupSolid>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
+
+<Story name="RadioGroup with wrapper">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup"
+		hint="Contextual Hint"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>

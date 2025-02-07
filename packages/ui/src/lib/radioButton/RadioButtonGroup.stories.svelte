@@ -32,7 +32,13 @@
 <Story name="Default" source />
 
 <Story name="RadioGroup">
-	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId />
+	<RadioButtonGroup
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="Radio"
+		hint="gaga"
+	/>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
