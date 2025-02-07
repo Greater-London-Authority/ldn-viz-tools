@@ -17,6 +17,11 @@
 	export let size: ButtonProps['size'] = 'sm';
 
 	/**
+	 * When true removes vertical padding and sets line height to 0 - useful for aligning buttons with text.
+	 */
+	export let slim: ButtonProps['slim'] = true;
+
+	/**
 	 * Selects which family of styles should be applied to the Trigger button.
 	 */
 	export let variant: ButtonProps['variant'] = 'text';
@@ -34,7 +39,7 @@
 	const { action, actionProps } = getContext<TriggerFuncs>('triggerFuncs');
 </script>
 
-<Button {size} class={$$props.class} {variant} {emphasis} {action} {actionProps}>
+<Button {size} class={$$props.class} {variant} {emphasis} {slim} {action} {actionProps}>
 	<slot>
 		{hintLabel}
 

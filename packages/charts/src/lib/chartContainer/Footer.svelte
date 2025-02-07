@@ -26,7 +26,7 @@
 				<li data-capture-ignore>
 					<Button
 						variant="text"
-						size="sm"
+						size="xs"
 						emphasis="secondary"
 						class="!p-0"
 						on:click={() => ($isOpen = true)}>View description</Button

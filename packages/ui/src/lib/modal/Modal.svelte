@@ -17,11 +17,16 @@
 	import { classNames } from '../utils/classNames';
 
 	/**
-	 * Boolean Svelte store that determines whether the modal is currently open.
+	 * Boolean that determines whether the modal is currently open.
 	 */
 	export let isOpen = false;
 
 	const isOpenStore = writable(isOpen);
+
+	export let customOpenFocus = () => {
+		const customElToFocus = document.getElementById($meltDescription.id);
+		return customElToFocus;
+	};
 
 	const {
 		elements: {
@@ -34,15 +39,15 @@
 			close
 		},
 		states: { open }
-	} = createDialog({ open: isOpenStore });
+	} = createDialog({ open: isOpenStore, openFocus: customOpenFocus });
 
 	/**
-	 * title that appears at the top of the modal
+	 * Title that appears at the top of the modal
 	 */
 	export let title: string;
 
 	/**
-	 * description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
+	 * Description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
 	 */
 	export let description: string = '';
 
@@ -118,9 +123,11 @@
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
-					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
+					class={`bg-color-container-level-1 text-color-text-primary p-3 pr-4 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
-					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
+					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action tabindex="-1">
+						{title}
+					</div>
 					<div {...$close} use:$close.action>
 						<Button
 							variant="square"
@@ -134,11 +141,11 @@
 					</div>
 				</div>
 
-				<div class="overflow-y-auto">
-					<div class="p-4">
-						{#if description}
-							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
-						{/if}
+				<div class="overflow-y-auto" aria-labelledby={$meltTitle.id}>
+					<div class="px-4 py-6">
+						<div {...$meltDescription} use:$meltDescription.action tabindex="-1">
+							{description}
+						</div>
 
 						{#if hasChildren}
 							<!-- content to display below the `description`-->
@@ -146,6 +153,11 @@
 						{/if}
 					</div>
 				</div>
+				{#if $$slots.buttons}
+					<div class="p-4 flex justify-end gap-2">
+						<slot name="buttons" />
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
