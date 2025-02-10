@@ -118,7 +118,12 @@
 	<div class="flex">
 		{#if options.length}
 			{#each options as option}
-				<RadioButtonSolid id={option.id} label={option.label} disabled={option.disabled} {name} />
+				<RadioButtonSolid
+					id={option.id}
+					label={option.label}
+					disabled={option.disabled || disabled}
+					{name}
+				/>
 			{/each}
 		{:else}
 			<!-- should contain a series of `<RadioButtonSolid>` components  -->
