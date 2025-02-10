@@ -27,9 +27,6 @@
 				options: ['brand', 'solid', 'outline', 'text', 'square'],
 				control: { type: 'select' }
 			},
-			condition: {
-				control: { type: 'select' }
-			},
 			size: {
 				options: ['sm', 'md', 'lg'],
 				control: { type: 'radio' }
@@ -88,13 +85,20 @@
 <Story name="Variants & emphasis">
 	<div class="flex flex-col gap-4">
 		{#each emphasis as emphasis}
-			<div class="flex gap-4">
+			<div class="flex items-center gap-4">
 				{#each variants as variant}
-					<AsyncButton {variant} {emphasis} onClick={waitFiveSeconds}>
+					<AsyncButton
+						{variant}
+						{emphasis}
+						size={variant === 'square' ? 'lg' : 'md'}
+						onClick={waitFiveSeconds}
+						class="capitalize"
+					>
 						{#if variant === 'square'}
-							<Icon src={DocumentArrowUp} theme="mini" class="w-5 h-5" aria-hidden="true" />
+							<Icon src={DocumentArrowUp} class="w-8 h-8 mb-0.5" aria-hidden="true" />
+							{variant}
 						{:else}
-							<span class="capitalize">{variant}</span>
+							{variant}
 						{/if}
 					</AsyncButton>
 				{/each}
