@@ -111,9 +111,8 @@
 
 	let selectedOptionId: string | undefined; // only used by radioButtons, if mutuallyExclusive
 	const updateStateFromCheckbox = (selectedId) => {
-		// For radioButtons, state is updated by group.
-		// For checkboxes, each LayerControl updates part of state directly.
-		console.log({ options, state });
+		// For Radio Buttons, state is updated by LayerControlGroup.
+		// For Checkboxes, each LayerControl updates part of state directly.
 		for (const o of options) {
 			state[o.id].visible = o.disabled ? state[o.id].visible : o.id === selectedId;
 		}
