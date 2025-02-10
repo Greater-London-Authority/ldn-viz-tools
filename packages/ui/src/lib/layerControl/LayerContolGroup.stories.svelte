@@ -10,15 +10,15 @@
 
 <script lang="ts">
 	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
+		{ id: 'bus', label: 'Bus stops', colorName: 'data.categorical.blue' },
 		{
 			id: 'train',
 			label: 'Train stations',
-			color: '#008D48',
+			colorName: 'data.categorical.green',
 			hint: 'Excluding underground stations'
 		},
-		{ id: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
+		{ id: 'underground', label: 'Underground stations', colorName: 'data.categorical.darkpink' },
+		{ id: 'taxi', label: 'Taxi ranks', colorName: 'data.categorical.orange', disabled: true }
 	];
 
 	let optionsForGroup2 = [
@@ -38,19 +38,26 @@
 
 	let state1 = {
 		bus: {
-			color: '#00AEEF',
+			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0,
 			size: 1
 		},
+		train: {
+			colorName: 'data.categorical.green',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+
 		underground: {
-			color: '#9E0059',
+			colorName: 'data.categorical.darkpink',
 			visible: true,
 			opacity: 1.0,
 			size: 1
 		},
 		taxi: {
-			color: 'firebrick',
+			colorName: 'data.categorical.orange',
 			visible: true,
 			opacity: 1.0,
 			size: 1
