@@ -3,17 +3,18 @@
 
 	import Popover from '../popover/Popover.svelte';
 	import OpacityIcon from './OpacityIcon.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 
 	export let opacity = 1;
 </script>
 
 <Popover>
-	<svelte:fragment slot="hint">
+	<Trigger slot="trigger">
 		<OpacityIcon
 			class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 			aria-hidden="true"
 		/>
-	</svelte:fragment>
+	</Trigger>
 
 	<svelte:fragment slot="title">Opacity</svelte:fragment>
 

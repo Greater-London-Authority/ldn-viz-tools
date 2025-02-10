@@ -3,6 +3,7 @@
 	import Popover from '../popover/Popover.svelte';
 
 	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
+	import Trigger from '../overlay/Trigger.svelte';
 
 	export let colorName = 'data.categorical.darkpink';
 
@@ -20,16 +21,16 @@
 		'data.neutral.1'
 	];
 
-	let openStore: Writable<boolean>;
+	let isOpen = false;
 </script>
 
-<Popover bind:openStore>
-	<svelte:fragment slot="hint">
+<Popover bind:isOpen>
+	<Trigger slot="trigger">
 		<div
 			class="w-5 h-5 relative border rounded-full"
 			style:background={tokenNameToValue(colorName, $currentTheme)}
 		></div>
-	</svelte:fragment>
+	</Trigger>
 
 	<svelte:fragment slot="title">Color</svelte:fragment>
 
@@ -42,7 +43,7 @@
 				style:background={tokenNameToValue(colorOption, $currentTheme)}
 				on:click={() => {
 					colorName = colorOption;
-					$openStore = false;
+					isOpen = false;
 				}}
 			/>
 		{/each}
