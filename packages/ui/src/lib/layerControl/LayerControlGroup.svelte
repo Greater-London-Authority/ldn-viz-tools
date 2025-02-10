@@ -121,6 +121,8 @@
 		clearAll();
 		selectedOptionId = undefined;
 	};
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: mutuallyExclusive && updateStateFromCheckbox(selectedOptionId);
 </script>
 

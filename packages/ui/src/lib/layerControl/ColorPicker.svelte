@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Writable } from 'svelte/store';
 	import Popover from '../popover/Popover.svelte';
 
 	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
