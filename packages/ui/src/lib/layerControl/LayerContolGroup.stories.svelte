@@ -113,3 +113,18 @@
 		/>
 	</div>
 </Story>
+
+<!--
+Sometimes a set of layers is mutually exclusive, as only one will be visible at any one time.
+For example, choropleth layers would cover each other.
+-->
+<Story name="Mutually exclusive layers">
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		mutuallyExclusive
+		name="mutually-exclusive-layers"
+	/>
+
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>

@@ -4,6 +4,7 @@
 	 * @component
 	 */
 	import Checkbox from '../checkBox/Checkbox.svelte';
+	import RadioButton from '../radioButton/RadioButton.svelte';
 	import OpacityControl from '../layerControl/OpacityControl.svelte';
 	import Tooltip from '../tooltip/Tooltip.svelte';
 	import ColorPicker from './ColorPicker.svelte';
@@ -64,11 +65,41 @@
 	 * maximum permitted value for the marker size
 	 */
 	export let maxSize = 100;
+
+	/**
+	 * If true, then control is rendered as a radio button rather than checkbox.
+	 */
+	export let mutuallyExclusive = false;
+
+	/**
+	 * Id of selected option (used only if `mutuallyExclusive` is true)
+	 */
+	export let selectedOptionId;
+	/**
+	 * Id of this option  (used only if `mutuallyExclusive` is true).
+	 */
+	export let optionId = '';
+
+	/**
+	 * Name of the radio button group  (used only if `mutuallyExclusive` is true)
+	 */
+	export let name = '';
 </script>
 
 <div class="flex items-center space-x-1">
 	<div class="mr-1">
-		<Checkbox bind:checked={state.visible} label="" {disabled} />
+		{#if mutuallyExclusive}
+			<RadioButton
+				id={optionId}
+				bind:selectedId={selectedOptionId}
+				label=""
+				{disabled}
+				{hint}
+				{name}
+			/>
+		{:else}
+			<Checkbox bind:checked={state.visible} label="" {disabled} />
+		{/if}
 	</div>
 
 	{#if !hideColorControl}
