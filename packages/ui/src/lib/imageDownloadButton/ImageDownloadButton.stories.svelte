@@ -63,3 +63,9 @@
 		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>
+
+<Story name="Full width button">
+	<ImageDownloadButton {htmlNode} scaleFactor={2} fullWidth>
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
+	</ImageDownloadButton>
+</Story>

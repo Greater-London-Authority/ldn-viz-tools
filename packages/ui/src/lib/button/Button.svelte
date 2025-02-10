@@ -13,7 +13,7 @@
 	export interface ButtonProps {
 		variant: 'brand' | 'square' | 'solid' | 'outline' | 'text';
 		emphasis: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
-		size: 'xs' | 'sm' | 'md' | 'lg';
+		size: 'xs' | 'sm' | 'md' | 'lg' | 'full';
 		disabled: boolean;
 		href: string;
 		openInNewTab: boolean;
@@ -93,6 +93,11 @@
 	 * Value set as the `id` attribute of the `<svelte:element>` element (defaults to randomly generated value).
 	 */
 	export let id = randomId();
+
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
 
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
@@ -193,7 +198,7 @@
 	);
 </script>
 
-<div class="flex">
+<div class={classNames('flex', fullWidth ? 'w-full' : '')}>
 	<svelte:element
 		this={href ? 'a' : 'button'}
 		type={href ? undefined : type}
@@ -202,7 +207,7 @@
 		{href}
 		{disabled}
 		{title}
-		class={buttonClass}
+		class={classNames(buttonClass, fullWidth ? 'w-full' : '')}
 		aria-label={ariaLabel}
 		{id}
 		on:click

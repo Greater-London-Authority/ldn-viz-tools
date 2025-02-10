@@ -19,6 +19,8 @@
 
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { classNames } from '../utils/classNames';
+
 	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
 	import { randomId } from '../utils/randomId';
@@ -92,6 +94,11 @@
 	export let size: ButtonProps['size'] = 'md';
 
 	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
+
+	/**
 	 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
 	 */
 	export let disabled: ButtonProps['disabled'] = false;
@@ -101,7 +108,16 @@
 </script>
 
 {#if options.length === 1}
-	<Button on:click={() => onClick(state.id)} {variant} {emphasis} {size} {disabled} {title} {id}>
+	<Button
+		on:click={() => onClick(state.id)}
+		{variant}
+		{emphasis}
+		{size}
+		{disabled}
+		{title}
+		{id}
+		{fullWidth}
+	>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
 			{options[0].buttonLabel}
@@ -109,12 +125,13 @@
 		</div>
 	</Button>
 {:else}
-	<div class="flex items-center gap-0">
+	<div class={classNames('flex items-center gap-0 w-full', fullWidth ? 'w-full' : '')}>
 		<Button
 			on:click={() => onClick(state.id)}
 			{variant}
 			{emphasis}
 			{size}
+			{fullWidth}
 			{disabled}
 			{title}
 			{id}
@@ -143,7 +160,10 @@
 
 	{#if $open}
 		<div
-			class="bg-color-container-level-1 z-40 max-w-sm p-2 shadow flex flex-col space-y-2"
+			class={classNames(
+				'bg-color-container-level-1 z-40 p-2 shadow flex flex-col space-y-2',
+				fullWidth ? 'w-full' : 'max-w-sm'
+			)}
 			use:$menu.action
 			{...$menu}
 			transition:fly={{ duration: 150, y: -10 }}
