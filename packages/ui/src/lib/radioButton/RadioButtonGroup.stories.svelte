@@ -10,7 +10,7 @@
 
 <script lang="ts">
 	let selectedId: string;
-	let selectedId2: undefined | string = undefined;
+	let selectedId2: string = '';
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
