@@ -123,15 +123,21 @@
 	<slot name="hint" slot="hint" />
 	<div class="flex flex-col space-y-0.5">
 		{#if !buttonsHidden}
-			<Button variant="text" class="!px-0" on:click={() => (selectedId = '')}>Clear</Button>
+			<Button {disabled} variant="text" class="!px-0" size="sm" on:click={() => (selectedId = '')}
+				>Clear</Button
+			>
 		{/if}
-		<div class={orientation === 'vertical' ? 'flex flex-col space-y-1' : 'flex space-x-3'}>
+		<div
+			class={orientation === 'vertical'
+				? 'flex flex-col space-y-1'
+				: 'flex gap-x-3 gap-y-1 flex-wrap'}
+		>
 			{#each options as option}
 				<RadioButton
 					id={option.id}
 					label={option.label}
 					color={option.color}
-					disabled={option.disabled}
+					disabled={option.disabled || disabled}
 					hint={option.hint}
 					hintLabel={option.hintLabel}
 					bind:selectedId
