@@ -17,6 +17,7 @@
 
 	let selectedId = 'bus';
 	let selectedId2 = 'train';
+	let selectedId3: undefined | string = undefined;
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops' },
@@ -146,6 +147,19 @@ different values as the `name` prop.
 		hint="Contextual Hint"
 		description="This is a description"
 		disabled
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="RadioGroup with error">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId={selectedId3}
+		label="Preferred mode of transport"
+		hint="Contextual Hint"
+		description="How you prefer to get around London."
+		error={!selectedId3 ? 'You must select an option' : undefined}
 	/>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
