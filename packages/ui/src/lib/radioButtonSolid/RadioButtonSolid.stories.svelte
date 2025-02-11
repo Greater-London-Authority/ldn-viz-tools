@@ -27,8 +27,41 @@
 	];
 </script>
 
-<Story name="RadioGroup">
+<Story name="Default">
 	<RadioButtonGroupSolid options={optionsForGroup} name="station-type" bind:selectedId />
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With title">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With description">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+		description="This is a description"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With hint">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+		hint="Contextual Hint"
+		description="This is a description"
+	/>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
@@ -54,7 +87,7 @@ different values as the `name` prop.
 	</div>
 </Story>
 
-<Story name="RadioGroup with Icons above">
+<Story name="With Icons above">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
 			<Icon src={Funnel} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
@@ -72,7 +105,7 @@ different values as the `name` prop.
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
-<Story name="RadioGroup with Icons below">
+<Story name="With Icons below">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
 			Bus
@@ -126,19 +159,7 @@ different values as the `name` prop.
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
-<Story name="RadioGroup with wrapper">
-	<RadioButtonGroupSolid
-		options={optionsForGroup}
-		name="station-type"
-		bind:selectedId
-		label="RadioGroup Label"
-		hint="Contextual Hint"
-		description="This is a description"
-	/>
-	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
-</Story>
-
-<Story name="RadioGroup with wrapper disabled">
+<Story name="Disabled (global)">
 	<RadioButtonGroupSolid
 		options={optionsForGroup}
 		name="station-type"
@@ -151,7 +172,7 @@ different values as the `name` prop.
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
-<Story name="RadioGroup with error">
+<Story name="With error">
 	<RadioButtonGroupSolid
 		options={optionsForGroup}
 		name="station-type"
