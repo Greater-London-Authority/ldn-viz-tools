@@ -92,11 +92,6 @@
 	 * Name of the radio button group  (used only if `mutuallyExclusive` is true)
 	 */
 	export let name = '';
-
-	/**
-	 * text that appears in the hint tooltip target, next to the icon
-	 */
-	export let hintLabel = '';
 </script>
 
 <div class="flex items-center space-x-1">

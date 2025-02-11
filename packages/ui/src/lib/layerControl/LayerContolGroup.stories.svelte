@@ -58,20 +58,20 @@
 		},
 		taxi: {
 			colorName: 'data.categorical.orange',
-			visible: true,
+			visible: false,
 			opacity: 1.0,
 			size: 1
 		}
 	};
 	let state2 = {
 		bus: {
-			color: '#00AEEF',
+			colorName: '#00AEEF',
 			visible: true,
 			opacity: 1.0,
 			size: 1
 		},
 		underground: {
-			color: '#9E0059',
+			colorName: '#9E0059',
 			visible: true,
 			opacity: 1.0,
 			size: 1
@@ -86,15 +86,53 @@
 
 <Story name="Default" source />
 
+<Story name="With label">
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		hideOpacityControl
+		hideSizeControl
+		label="Layer Control Group"
+	/>
+
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
+<Story name="With hint">
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		hideOpacityControl
+		hideSizeControl
+		label="Layer Control Group"
+		hint="Turn the layers of the map on and off"
+	/>
+
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
+<Story name="With description">
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		hideOpacityControl
+		hideSizeControl
+		label="Layer Control Group"
+		hint="Turn the layers of the map on and off"
+		description="Transport layers - Taxis disabled"
+	/>
+
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
 <Story name="Hide controls size and opacity controls">
-	<div class="space-y-4">
-		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
-			hideOpacityControl
-			hideSizeControl
-		/>
-	</div>
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		hideOpacityControl
+		hideSizeControl
+	/>
+
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Story>
 
@@ -124,6 +162,27 @@ For example, choropleth layers would cover each other.
 		bind:state={state1}
 		mutuallyExclusive
 		name="mutually-exclusive-layers"
+	/>
+
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
+<Story name="Disabled (global)">
+	<LayerControlGroup bind:options={optionsForGroup} bind:state={state1} disabled name="Disabled" />
+
+	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
+<Story name="With error">
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		label="Preferred mode of transport"
+		hint="Contextual Hint"
+		description="Deselect all to see an error state!"
+		error={Object.values(state1).every((layer) => layer.visible === false)
+			? 'You must select an option'
+			: undefined}
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
