@@ -1,7 +1,7 @@
 <script lang="ts">
+	import Trigger from '../overlay/Trigger.svelte';
 	import Popover from '../popover/Popover.svelte';
 	import ResizeIcon from './ResizeIcon.svelte';
-	import Trigger from '../overlay/Trigger.svelte';
 
 	export let size = 1;
 
@@ -10,7 +10,7 @@
 </script>
 
 <Popover>
-	<Trigger slot="trigger">
+	<Trigger slot="trigger" size="xs">
 		<ResizeIcon
 			class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 			aria-hidden="true"

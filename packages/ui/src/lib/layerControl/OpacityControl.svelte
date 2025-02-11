@@ -1,15 +1,15 @@
 <script lang="ts">
 	import Input from '../input/Input.svelte';
 
+	import Trigger from '../overlay/Trigger.svelte';
 	import Popover from '../popover/Popover.svelte';
 	import OpacityIcon from './OpacityIcon.svelte';
-	import Trigger from '../overlay/Trigger.svelte';
 
 	export let opacity = 1;
 </script>
 
 <Popover>
-	<Trigger slot="trigger">
+	<Trigger slot="trigger" size="xs">
 		<OpacityIcon
 			class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 			aria-hidden="true"

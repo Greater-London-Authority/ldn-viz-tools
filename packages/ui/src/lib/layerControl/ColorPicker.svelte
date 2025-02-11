@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Popover from '../popover/Popover.svelte';
 
-	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
 	import Trigger from '../overlay/Trigger.svelte';
+	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
 
 	export let colorName = 'data.categorical.darkpink';
 
@@ -24,9 +24,9 @@
 </script>
 
 <Popover bind:isOpen>
-	<Trigger slot="trigger">
+	<Trigger slot="trigger" size="xs">
 		<div
-			class="w-5 h-5 relative border rounded-full"
+			class="w-[22px] h-[22px] relative border rounded-full"
 			style:background={tokenNameToValue(colorName, $currentTheme)}
 		></div>
 	</Trigger>
