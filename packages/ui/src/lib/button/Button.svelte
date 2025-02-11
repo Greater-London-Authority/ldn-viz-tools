@@ -13,7 +13,7 @@
 	export interface ButtonProps {
 		variant: 'brand' | 'square' | 'solid' | 'outline' | 'text';
 		emphasis: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
-		size: 'xs' | 'sm' | 'md' | 'lg' | 'full';
+		size: 'xs' | 'sm' | 'md' | 'lg';
 		disabled: boolean;
 		href: string;
 		openInNewTab: boolean;
