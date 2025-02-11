@@ -36,7 +36,9 @@
 
 <Template let:args>
 	<Theme />
-	<ThemeSwitcher />
+	<div class="mb-4">
+		<ThemeSwitcher />
+	</div>
 
 	<div class="w-96">
 		<LayerControl bind:state {...args} />
@@ -94,77 +96,3 @@
 		<pre>{JSON.stringify(state, null, 2)}</pre>
 	</div>
 </Story>
-
-<!-- <Story name="More complete" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-	/>
-
-	<div>
-		Layer state is:
-
-		<pre>{JSON.stringify(state, null, 2)}</pre>
-	</div>
-</Story>
-
-<Story name="No opacity control" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideOpacityControl
-	/>
-</Story>
-
-<Story name="No color control" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideColorControl
-	/>
-</Story>
-
-<Story name="No size control" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideSizeControl
-	/>
-</Story>
-
-<Story name="No controls - just the checkbox and help text" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideOpacityControl
-		hideColorControl
-		hideSizeControl
-	/>
-</Story>
-
-<Story name="Multiple controls" source>
-	<div class="space-y-1">
-		<LayerControl
-			bind:state={layerStates.boroughs}
-			label="Borough"
-			hint="Boundaries of each of Greater London's 32 boroughs"
-		/>
-		<LayerControl bind:state={layerStates.imd} label="IMD" hint="Index of Multiple Deprivation" />
-		<LayerControl
-			bind:state={layerStates.fuel_poverty}
-			label="Fuel Poverty"
-			hint="Percentage of households in fuel poverty"
-		/>
-
-		<div>
-			Layer states are:
-
-			<pre>{JSON.stringify(layerStates, null, 2)}</pre>
-		</div>
-	</div>
-</Story> -->
