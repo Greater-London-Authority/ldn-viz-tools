@@ -71,9 +71,9 @@
 	 * * `label` (string) - the text displayed next to the checkbox
 	 * * `hint` (string, optional) - help text to be displayed in tooltip
 	 *
-	 * * `hideColorControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
-	 * * `hideOpacityControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
-	 * * `hideSizeControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
+	 * * `disableColorControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
+	 * * `disableOpacityControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
+	 * * `disableSizeControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
 	 *
 	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 	 * * `color` (string, optional) - color of the layer
@@ -87,9 +87,9 @@
 		hint?: string;
 
 		disabled?: boolean;
-		hideColorControl?: boolean;
-		hideOpacityControl?: boolean;
-		hideSizeControl?: boolean;
+		disableColorControl?: boolean;
+		disableOpacityControl?: boolean;
+		disableSizeControl?: boolean;
 	}[] = [];
 
 	type LayerControlGroupState = Record<
@@ -115,17 +115,17 @@
 	/**
 	 * if `true`, then the trigger to open the color picker is not displayed for any layers
 	 */
-	export let hideColorControl = false;
+	export let disableColorControl = false;
 
 	/**
 	 * if `true`, then the trigger to open the opacity control is not displayed for any layers
 	 */
-	export let hideOpacityControl = false;
+	export let disableOpacityControl = false;
 
 	/**
 	 * if `true`, then the trigger to open the size control is not displayed for any layers
 	 */
-	export let hideSizeControl = false;
+	export let disableSizeControl = false;
 
 	/**
 	 * Message to be displayed next to the checkbox that toggles the visibility of all layers.
@@ -178,6 +178,21 @@
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: mutuallyExclusive && updateStateFromCheckbox(selectedOptionId);
+
+	// construct list of controls which are in use
+	let controlsInUse: ('color' | 'opacity' | 'size')[] = [];
+	$: {
+		controlsInUse = [];
+		if (!disableColorControl && !options.every((l) => l.disableColorControl)) {
+			controlsInUse.push('color');
+		}
+		if (!disableOpacityControl && !options.every((l) => l.disableOpacityControl)) {
+			controlsInUse.push('opacity');
+		}
+		if (!disableSizeControl && !options.every((l) => l.disableSizeControl)) {
+			controlsInUse.push('size');
+		}
+	}
 </script>
 
 <InputWrapper
@@ -236,10 +251,11 @@
 						label={option.label}
 						disabled={option.disabled || disabled}
 						hint={option.hint}
-						hideColorControl={hideColorControl || option.hideColorControl}
-						hideOpacityControl={hideOpacityControl || option.hideOpacityControl}
-						hideSizeControl={hideSizeControl || option.hideSizeControl}
+						disableColorControl={disableColorControl || option.disableColorControl}
+						disableOpacityControl={disableOpacityControl || option.disableOpacityControl}
+						disableSizeControl={disableSizeControl || option.disableSizeControl}
 						bind:state={state[option.id]}
+						{controlsInUse}
 					/>
 				{/each}
 			</div>

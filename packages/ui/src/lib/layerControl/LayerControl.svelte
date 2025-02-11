@@ -11,20 +11,22 @@
 	import ColorPicker from './ColorPicker.svelte';
 	import ResizeControl from './ResizeControl.svelte';
 
+	import { randomId } from '../utils/randomId';
+
 	/**
 	 * if `true`, then the trigger to open the color picker is not displayed
 	 */
-	export let hideColorControl = false;
+	export let disableColorControl = false;
 
 	/**
 	 * if `true`, then the trigger to open the opacity control is not displayed
 	 */
-	export let hideOpacityControl = false;
+	export let disableOpacityControl = false;
 
 	/**
 	 * if `true`, then the trigger to open the size control is not displayed
 	 */
-	export let hideSizeControl = false;
+	export let disableSizeControl = false;
 
 	/**
 	 * the name of the layer
@@ -84,14 +86,20 @@
 	 */
 	export let selectedOptionId: string | undefined = undefined;
 	/**
-	 * Id of this option  (used only if `mutuallyExclusive` is true).
+	 * Id of this option.
 	 */
-	export let optionId = '';
+	export let optionId = randomId();
 
 	/**
 	 * Name of the radio button group  (used only if `mutuallyExclusive` is true)
 	 */
 	export let name = '';
+
+	/**
+	 * List of controls for which placeholder should be displayed in control is hidden.
+	 * This enables alignment of controls between different `LayerControl`s with different controls enabled,
+	 */
+	export let controlsInUse: ('color' | 'opacity' | 'size')[] = ['color', 'opacity', 'size'];
 </script>
 
 <div class="flex items-center space-x-1">
@@ -106,28 +114,36 @@
 				{name}
 			/>
 		{:else}
-			<Checkbox bind:checked={state.visible} label="" {disabled} />
+			<Checkbox bind:checked={state.visible} label="" {disabled} id={optionId} />
 		{/if}
 	</div>
 
-	{#if !hideColorControl}
-		<ColorPicker bind:colorName={state.colorName} />
+	{#if controlsInUse.includes('color')}
+		<ColorPicker bind:colorName={state.colorName} disabled={disabled || disableColorControl} />
 	{/if}
 
-	{#if !hideOpacityControl}
-		<OpacityControl bind:opacity={state.opacity} />
+	{#if controlsInUse.includes('opacity')}
+		<OpacityControl bind:opacity={state.opacity} disabled={disabled || disableOpacityControl} />
 	{/if}
 
-	{#if !hideSizeControl}
-		<ResizeControl bind:size={state.size} {minSize} {maxSize} />
+	{#if controlsInUse.includes('size')}
+		<ResizeControl
+			bind:size={state.size}
+			{minSize}
+			{maxSize}
+			disabled={disabled || disableSizeControl}
+		/>
 	{/if}
+
 	{#if label}
-		<span class="form-label font-normal leading-none">{label}</span>
+		<label class="form-label font-normal leading-none" for={optionId}>{label}</label>
 	{/if}
+
 	{#if $$slots.hint}
 		<!-- An optional `<Overlay>` component to provide additional explanation. -->
 		<slot name="hint" />
 	{/if}
+
 	{#if hint}
 		<Overlay>
 			<Trigger slot="trigger" size="xs" {hintLabel} />

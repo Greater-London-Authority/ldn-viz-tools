@@ -97,9 +97,11 @@
 			: ''}
 		{...$$restProps}
 	/>
+
 	{#if label}
 		<label class="ml-2 form-label font-normal" for={id}>{label}</label>
 	{/if}
+
 	{#if $$slots.hint}
 		<!-- An optional `<Overlay>` component to provide additional explanation. -->
 		<slot name="hint" />

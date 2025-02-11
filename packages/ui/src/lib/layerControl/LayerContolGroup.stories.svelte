@@ -10,15 +10,14 @@
 
 <script lang="ts">
 	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops', colorName: 'data.categorical.blue' },
+		{ id: 'bus', label: 'Bus stops' },
 		{
 			id: 'train',
 			label: 'Train stations',
-			colorName: 'data.categorical.green',
 			hint: 'Excluding underground stations'
 		},
-		{ id: 'underground', label: 'Underground stations', colorName: 'data.categorical.darkpink' },
-		{ id: 'taxi', label: 'Taxi ranks', colorName: 'data.categorical.orange', disabled: true }
+		{ id: 'underground', label: 'Underground stations' },
+		{ id: 'taxi', label: 'Taxi ranks', disabled: true }
 	];
 
 	let optionsForGroup2 = [
@@ -31,8 +30,8 @@
 		{
 			id: 'underground',
 			label: 'Underground stations',
-			hideOpacityControl: true,
-			hideSizeControl: true
+			disableOpacityControl: true,
+			disableSizeControl: true
 		}
 	];
 
@@ -65,13 +64,19 @@
 	};
 	let state2 = {
 		bus: {
-			colorName: '#00AEEF',
+			colorName: 'data.categorical.blue',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		train: {
+			colorName: 'data.categorical.green',
 			visible: true,
 			opacity: 1.0,
 			size: 1
 		},
 		underground: {
-			colorName: '#9E0059',
+			colorName: 'data.categorical.darkpink',
 			visible: true,
 			opacity: 1.0,
 			size: 1
@@ -90,8 +95,8 @@
 	<LayerControlGroup
 		bind:options={optionsForGroup}
 		bind:state={state1}
-		hideOpacityControl
-		hideSizeControl
+		disableOpacityControl
+		disableSizeControl
 		label="Layer Control Group"
 	/>
 
@@ -102,8 +107,8 @@
 	<LayerControlGroup
 		bind:options={optionsForGroup}
 		bind:state={state1}
-		hideOpacityControl
-		hideSizeControl
+		disableOpacityControl
+		disableSizeControl
 		label="Layer Control Group"
 		hint="Turn the layers of the map on and off"
 	/>
@@ -115,8 +120,8 @@
 	<LayerControlGroup
 		bind:options={optionsForGroup}
 		bind:state={state1}
-		hideOpacityControl
-		hideSizeControl
+		disableOpacityControl
+		disableSizeControl
 		label="Layer Control Group"
 		hint="Turn the layers of the map on and off"
 		description="Transport layers - Taxis disabled"
@@ -129,16 +134,16 @@
 	<LayerControlGroup
 		bind:options={optionsForGroup}
 		bind:state={state1}
-		hideOpacityControl
-		hideSizeControl
+		disableOpacityControl
+		disableSizeControl
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Story>
 
-<Story name="Hide controls size and opacity controls for some layers">
+<Story name="Disable controls size and opacity controls for some layers">
 	<LayerControlGroup bind:options={optionsForGroup2} bind:state={state2} />
-	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+	<pre class="mt-4 text-xs">{JSON.stringify(state2, null, 2)}</pre>
 </Story>
 
 <Story name="In small text size context">
@@ -146,8 +151,8 @@
 		<LayerControlGroup
 			bind:options={optionsForGroup}
 			bind:state={state1}
-			hideOpacityControl
-			hideSizeControl
+			disableOpacityControl
+			disableSizeControl
 		/>
 	</div>
 </Story>
