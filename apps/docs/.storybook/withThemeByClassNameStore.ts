@@ -3,6 +3,7 @@ import type { DecoratorFunction, Renderer } from '@storybook/types';
 
 import { userThemeSelectionStore } from '@ldn-viz/ui';
 import { DecoratorHelpers } from '@storybook/addon-themes';
+import { get } from 'svelte/store';
 
 const { initializeThemeState, pluckThemeFromContext } = DecoratorHelpers;
 
@@ -47,6 +48,8 @@ export const withThemeByClassNameStore = <TRenderer extends Renderer = any>({
 
 			const newThemeClasses = classStringToArray(themes[selectedThemeName]);
 			userThemeSelectionStore.set(selectedThemeName);
+
+			globalThis.localStorage?.setItem('theme', selectedThemeName);
 
 			if (newThemeClasses.length > 0) {
 				parentElement.classList.add(...newThemeClasses);
