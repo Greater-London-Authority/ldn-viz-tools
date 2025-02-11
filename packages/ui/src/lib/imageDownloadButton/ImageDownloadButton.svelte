@@ -48,6 +48,11 @@
 	 */
 	export let scaleFactor = 2;
 
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
+
 	const downloadFromURL = (url: string) => {
 		const initialName = filename || 'image';
 
@@ -217,6 +222,7 @@
 	menuTitle="Select image format"
 	onClick={download}
 	{disabled}
+	{fullWidth}
 	{...$$restProps}
 >
 	<!-- contents of the button -->
