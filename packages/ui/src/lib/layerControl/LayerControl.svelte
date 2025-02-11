@@ -6,6 +6,8 @@
 	import Checkbox from '../checkBox/Checkbox.svelte';
 	import OpacityControl from '../layerControl/OpacityControl.svelte';
 	import Overlay from '../overlay/Overlay.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
+	import RadioButton from '../radioButton/RadioButton.svelte';
 	import ColorPicker from './ColorPicker.svelte';
 	import ResizeControl from './ResizeControl.svelte';
 
@@ -71,15 +73,50 @@
 	 * maximum permitted value for the marker size
 	 */
 	export let maxSize = 100;
+
+	/**
+	 * If true, then control is rendered as a radio button rather than checkbox.
+	 */
+	export let mutuallyExclusive = false;
+
+	/**
+	 * Id of selected option (used only if `mutuallyExclusive` is true)
+	 */
+	export let selectedOptionId: string | undefined = undefined;
+	/**
+	 * Id of this option  (used only if `mutuallyExclusive` is true).
+	 */
+	export let optionId = '';
+
+	/**
+	 * Name of the radio button group  (used only if `mutuallyExclusive` is true)
+	 */
+	export let name = '';
+
+	/**
+	 * text that appears in the hint tooltip target, next to the icon
+	 */
+	export let hintLabel = '';
 </script>
 
 <div class="flex items-center space-x-1">
 	<div class="mr-1">
-		<Checkbox bind:checked={state.visible} label="" {disabled} />
+		{#if mutuallyExclusive}
+			<RadioButton
+				id={optionId}
+				bind:selectedId={selectedOptionId}
+				label=""
+				{disabled}
+				{hint}
+				{name}
+			/>
+		{:else}
+			<Checkbox bind:checked={state.visible} label="" {disabled} />
+		{/if}
 	</div>
 
 	{#if !hideColorControl}
-		<ColorPicker bind:color={state.color} bind:colorName={state.colorName} />
+		<ColorPicker bind:colorName={state.colorName} />
 	{/if}
 
 	{#if !hideOpacityControl}
@@ -97,7 +134,8 @@
 		<slot name="hint" />
 	{/if}
 	{#if hint}
-		<Overlay {hintLabel}>
+		<Overlay>
+			<Trigger slot="trigger" size="xs" {hintLabel} />
 			{hint}
 		</Overlay>
 	{/if}

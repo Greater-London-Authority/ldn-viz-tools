@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Trigger from '../overlay/Trigger.svelte';
 	import Popover from '../popover/Popover.svelte';
 	import ResizeIcon from './ResizeIcon.svelte';
 
@@ -9,12 +10,12 @@
 </script>
 
 <Popover>
-	<svelte:fragment slot="hint">
+	<Trigger slot="trigger" size="xs">
 		<ResizeIcon
 			class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 			aria-hidden="true"
 		/>
-	</svelte:fragment>
+	</Trigger>
 
 	<svelte:fragment slot="title">Marker size</svelte:fragment>
 

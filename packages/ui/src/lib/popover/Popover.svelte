@@ -17,14 +17,37 @@
 
 	import { setContext } from 'svelte';
 	import Button from '../button/Button.svelte';
+	import { writable } from 'svelte/store';
+
+	/**
+	 * Boolean that determines whether the Popover is currently open.
+	 */
+	export let isOpen = false;
+
+	const isOpenStore = writable(isOpen);
 
 	const {
 		elements: { trigger, content, arrow, close },
 		states: { open }
 	} = createPopover({
 		forceVisible: true,
+		open: isOpenStore,
 		positioning: { placement: 'top' }
 	});
+
+	$: toggledExternally(isOpen);
+	const toggledExternally = (newIsOpen: boolean) => {
+		if ($isOpenStore != newIsOpen) {
+			$isOpenStore = newIsOpen;
+		}
+	};
+
+	$: toggledInternally($isOpenStore);
+	const toggledInternally = (newStoreValue: boolean) => {
+		if (newStoreValue != isOpen) {
+			isOpen = newStoreValue;
+		}
+	};
 
 	/**
 	 * Sets trigger actions and attributes (ARIA) for access by `Trigger` component

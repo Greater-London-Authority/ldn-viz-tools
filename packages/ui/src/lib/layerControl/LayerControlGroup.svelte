@@ -9,6 +9,7 @@
 
 	import { randomId } from '../utils/randomId';
 	import LayerControl from './LayerControl.svelte';
+	import Button from '../button/Button.svelte';
 
 	/**
 	 * Each element of this array defines the control for a layer, and is an object with the properties:
@@ -40,7 +41,7 @@
 	type LayerControlGroupState = Record<
 		string,
 		{
-			color: string;
+			colorName: string;
 			visible: boolean;
 			opacity: number;
 			size: number;
@@ -77,6 +78,9 @@
 	 */
 	export let showAllLabel = 'Show all';
 
+	export let mutuallyExclusive = false;
+	export let name = '';
+
 	let allCheckboxesCheckedOrDisabled: boolean;
 	$: allCheckboxesCheckedOrDisabled = options.every((o) =>
 		o.disabled ? true : state[o.id]?.visible
@@ -104,35 +108,71 @@
 			clearAll();
 		}
 	};
+
+	let selectedOptionId: string | undefined; // only used by radioButtons, if mutuallyExclusive
+	const updateStateFromCheckbox = (selectedId) => {
+		// For Radio Buttons, state is updated by LayerControlGroup.
+		// For Checkboxes, each LayerControl updates part of state directly.
+		for (const o of options) {
+			state[o.id].visible = o.disabled ? state[o.id].visible : o.id === selectedId;
+		}
+	};
+	const clearRadioButtons = () => {
+		clearAll();
+		selectedOptionId = undefined;
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$: mutuallyExclusive && updateStateFromCheckbox(selectedOptionId);
 </script>
 
 <div class="flex flex-col space-y-1">
-	{#if !buttonsHidden}
-		<!--
-			form="" should prevent this checkbox from being included in form
-			submissions.
-		-->
-		<Checkbox
-			id={randomId()}
-			form=""
-			label={showAllLabel}
-			checked={allCheckboxesCheckedOrDisabled}
-			indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
-			on:change={toggleAll}
-		/>
-	{/if}
+	{#if mutuallyExclusive}
+		{#if !buttonsHidden}
+			<Button variant="text" class="!px-0" on:click={clearRadioButtons}>Clear</Button>
+		{/if}
 
-	<div class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
-		{#each options as option (option.id)}
-			<LayerControl
-				label={option.label}
-				disabled={option.disabled}
-				hint={option.hint}
-				hideColorControl={hideColorControl || option.hideColorControl}
-				hideOpacityControl={hideOpacityControl || option.hideOpacityControl}
-				hideSizeControl={hideSizeControl || option.hideSizeControl}
-				bind:state={state[option.id]}
+		<div class={'flex flex-col space-y-1'}>
+			{#each options as option}
+				<LayerControl
+					label={option.label}
+					{name}
+					bind:state={state[option.id]}
+					optionId={option.id}
+					disabled={option.disabled}
+					bind:selectedOptionId
+					mutuallyExclusive
+				/>
+			{/each}
+		</div>
+	{:else}
+		{#if !buttonsHidden}
+			<!--
+        form="" should prevent this checkbox from being included in form
+        submissions.
+      -->
+			<Checkbox
+				id={randomId()}
+				form=""
+				label={showAllLabel}
+				checked={allCheckboxesCheckedOrDisabled}
+				indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+				on:change={toggleAll}
 			/>
-		{/each}
-	</div>
+		{/if}
+
+		<div class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
+			{#each options as option (option.id)}
+				<LayerControl
+					label={option.label}
+					disabled={option.disabled}
+					hint={option.hint}
+					hideColorControl={hideColorControl || option.hideColorControl}
+					hideOpacityControl={hideOpacityControl || option.hideOpacityControl}
+					hideSizeControl={hideSizeControl || option.hideSizeControl}
+					bind:state={state[option.id]}
+				/>
+			{/each}
+		</div>
+	{/if}
 </div>
