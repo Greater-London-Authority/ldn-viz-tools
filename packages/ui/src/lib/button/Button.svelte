@@ -94,6 +94,11 @@
 	 */
 	export let id = randomId();
 
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
+
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 
@@ -193,7 +198,7 @@
 	);
 </script>
 
-<div class="flex">
+<div class={classNames('flex', fullWidth ? 'w-full' : '')}>
 	<svelte:element
 		this={href ? 'a' : 'button'}
 		type={href ? undefined : type}
@@ -202,7 +207,7 @@
 		{href}
 		{disabled}
 		{title}
-		class={buttonClass}
+		class={classNames(buttonClass, fullWidth ? 'w-full' : '')}
 		aria-label={ariaLabel}
 		{id}
 		on:click

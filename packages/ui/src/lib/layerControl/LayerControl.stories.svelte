@@ -15,7 +15,7 @@
 
 	let layerStates = {
 		boroughs: {
-			colorName: 'data.categorical.yellow',
+			colorName: 'data.primary',
 			visible: true,
 			opacity: 1.0
 		},
@@ -35,11 +35,6 @@
 </script>
 
 <Template let:args>
-	<Theme />
-	<div class="mb-4">
-		<ThemeSwitcher />
-	</div>
-
 	<div class="w-96">
 		<LayerControl bind:state {...args} />
 	</div>

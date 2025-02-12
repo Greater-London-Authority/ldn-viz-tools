@@ -2,6 +2,8 @@
 import type { Preview } from '@storybook/svelte';
 import { docs } from './ciuStorybookTheme';
 
+import { prefersDarkMode } from '@ldn-viz/ui';
+import { get } from 'svelte/store';
 import '../src/app.postcss';
 import { withThemeByClassNameStore } from './withThemeByClassNameStore';
 
@@ -88,7 +90,8 @@ const preview: Preview = {
 		withThemeByClassNameStore({
 			themes: {
 				light: '',
-				dark: 'dark'
+				dark: 'dark',
+				system: get(prefersDarkMode) ? 'dark' : 'light'
 			},
 			defaultTheme: getLocalStorage()
 		})

@@ -11,6 +11,8 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
+
+	let count = 0;
 </script>
 
 <Template let:args>
@@ -49,6 +51,16 @@
 		<svelte:fragment slot="title">Metric note</svelte:fragment>
 
 		<svelte:fragment>Some text explaining this metric...</svelte:fragment>
+	</Popover>
+</Story>
+
+<Story name="Contains clickable element" source>
+	<Popover>
+		<Trigger slot="trigger" />
+		<svelte:fragment slot="title">Click the button Below</svelte:fragment>
+		<svelte:fragment>
+			<Button on:click={() => count++}>You can click me {count}</Button>
+		</svelte:fragment>
 	</Popover>
 </Story>
 

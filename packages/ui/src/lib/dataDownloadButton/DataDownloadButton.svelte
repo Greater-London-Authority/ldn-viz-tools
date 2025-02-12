@@ -40,6 +40,11 @@
 	 */
 	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
+
 	const enforceExtension = (name: string, extension: string) => {
 		return name.toLocaleLowerCase().endsWith(extension) ? name : `${name}${extension}`;
 	};
@@ -114,6 +119,7 @@
 	menuTitle="Select data format"
 	onClick={download}
 	{disabled}
+	{fullWidth}
 	{...$$restProps}
 >
 	<!-- contents of the button -->

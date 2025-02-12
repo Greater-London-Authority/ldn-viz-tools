@@ -2406,7 +2406,7 @@
           "alpha": {
             "description": "",
             "type": "color",
-            "value": "{semantic.light-mode.color.palette.pink.600}"
+            "value": "{semantic.light-mode.color.palette.pink.700}"
           },
           "beta": {
             "description": "",
@@ -4025,7 +4025,7 @@
           "alpha": {
             "description": "",
             "type": "color",
-            "value": "{semantic.dark-mode.color.palette.pink.600}"
+            "value": "{semantic.dark-mode.color.palette.pink.500}"
           },
           "beta": {
             "description": "",
