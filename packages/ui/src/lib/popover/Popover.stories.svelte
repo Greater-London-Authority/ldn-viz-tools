@@ -9,6 +9,7 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
 </script>
 
@@ -48,5 +49,16 @@
 		<svelte:fragment slot="title">Metric note</svelte:fragment>
 
 		<svelte:fragment>Some text explaining this metric...</svelte:fragment>
+	</Popover>
+</Story>
+
+<!-- When the popover opens with `defaultOpenFocus` set to true, it will focus on the first interactive element in the popover. If the popover starts with an interactive element, set to `true`, else omit. -->
+<Story name="Using defaultOpenFocus" source>
+	<Popover defaultOpenFocus>
+		<Trigger slot="trigger" />
+		<div class="space-y-2">
+			<Button emphasis="secondary" size="sm" href="/">A button</Button>
+			<p>starts this content, so it should receive focus.</p>
+		</div>
 	</Popover>
 </Story>
