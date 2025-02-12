@@ -20,6 +20,11 @@
 	 */
 	export let orientation: 'vertical' | 'horizontal' = 'horizontal';
 
+	/**
+	 * Enables screen reader to describe purpose of tab list. Required.
+	 */
+	export let ariaLabel: string = '';
+
 	const val: Writable<string | undefined> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
 	setContext('tabContext', {
@@ -46,7 +51,7 @@
 	);
 </script>
 
-<div class={tabListClasses} role="tablist">
+<div class={tabListClasses} role="tablist" aria-label={ariaLabel} aria-orientation={orientation}>
 	<!-- should contain a series of `<TabLabel>` components  -->
 	<slot />
 </div>

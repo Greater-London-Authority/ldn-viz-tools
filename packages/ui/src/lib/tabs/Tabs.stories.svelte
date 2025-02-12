@@ -82,19 +82,19 @@
 
 <Story name="Horizontal with Icons">
 	<TabList bind:selectedValue>
-		<TabLabel tabId="markers">
+		<TabLabel tabId="markers" tabPanelId="markers-panel">
 			<Icon src={MapPin} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
 			Data Markers
 		</TabLabel>
-		<TabLabel tabId="filters">
+		<TabLabel tabId="filters" tabPanelId="filters-panel">
 			<Icon src={Funnel} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
 			Filters
 		</TabLabel>
-		<TabLabel tabId="analysis">
+		<TabLabel tabId="analysis" tabPanelId="analysis-panel">
 			<Icon src={ChartBar} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
 			Analysis
 		</TabLabel>
-		<TabLabel tabId="layers">
+		<TabLabel tabId="layers" tabPanelId="layers-panel">
 			<Icon src={Map} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
 			Layers
 		</TabLabel>
