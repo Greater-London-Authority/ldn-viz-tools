@@ -13,9 +13,6 @@
 	import Trigger from '../overlay/Trigger.svelte';
 
 	let count = 0;
-	const handleClick = () => {
-		count += 1;
-	};
 </script>
 
 <Template let:args>
@@ -61,8 +58,8 @@
 	<Popover>
 		<Trigger slot="trigger" />
 		<svelte:fragment slot="title">Click the button Below</svelte:fragment>
-		<svelte:fragment
-			><Button on:click={handleClick}>You can click me {count}</Button></svelte:fragment
-		>
+		<svelte:fragment>
+			<Button on:click={() => count++}>You can click me {count}</Button>
+		</svelte:fragment>
 	</Popover>
 </Story>
