@@ -27,6 +27,8 @@ const preview: Preview = {
 					'Ui',
 					[
 						'Introduction',
+						'Typography',
+						'Form Element Styling',
 						'Components',
 						[
 							'Buttons',
