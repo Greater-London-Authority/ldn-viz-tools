@@ -20,6 +20,10 @@
 		type: 'button' | 'submit';
 		title: string;
 		slim: boolean;
+		role: string;
+		tabindex: number;
+		ariaControls: string | undefined;
+		ariaSelected: boolean | undefined;
 		action: (node: HTMLElement) => void;
 	}
 
@@ -58,6 +62,26 @@
 	 * If this is set, the button is a link with the specified target.
 	 */
 	export let href: ButtonProps['href'] = '';
+
+	/**
+	 * Allows overriding default by `Tab` component
+	 */
+	export let role: ButtonProps['role'] = 'button';
+
+	/**
+	 * Allows overriding default by `Tab` component
+	 */
+	export let tabindex: ButtonProps['tabindex'] = 0;
+
+	/**
+	 * Allows connection between Tab and section it controls for screen reader
+	 */
+	export let ariaControls: ButtonProps['ariaControls'] = undefined;
+
+	/**
+	 * Used in `Tab` component to tell screen reader which tab is selected
+	 */
+	export let ariaSelected: ButtonProps['ariaSelected'] = undefined;
 
 	/**
 	 * If `true`, then clicking the button will open the link target in a new tab. Has no effect if `href` is not set.
@@ -219,8 +243,10 @@
 		on:touchcancel
 		on:mouseenter
 		on:mouseleave
-		role="button"
-		tabindex="0"
+		{role}
+		{tabindex}
+		aria-selected={ariaSelected}
+		aria-controls={ariaControls}
 		use:action
 		{...actionProps}
 	>
