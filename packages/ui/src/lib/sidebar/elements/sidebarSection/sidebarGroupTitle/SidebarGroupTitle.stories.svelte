@@ -20,6 +20,15 @@
 	<SidebarGroupTitle>Group Title</SidebarGroupTitle>
 </Story>
 
+<Story name="With Subtitle" source>
+	<SidebarGroupTitle>
+		Section Title
+		<svelte:fragment slot="subTitle">
+			<p>Maecenas ut libero vel nibh maximus feugiat non sed tortor.</p>
+		</svelte:fragment>
+	</SidebarGroupTitle>
+</Story>
+
 <Story name="With Hint" source>
 	<SidebarGroupTitle>
 		Group Title
