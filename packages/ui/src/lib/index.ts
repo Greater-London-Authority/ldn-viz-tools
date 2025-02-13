@@ -99,6 +99,12 @@ export * from './forms/types';
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
 export { default as Overlay } from './overlay/Overlay.svelte';
 
+export { default as AuthMenu } from './auth/AuthMenu.svelte';
+export { default as HandleRedirectFromAuth } from './auth/HandleRedirectFromAuth.svelte';
+export { default as LoginForm } from './auth/LoginForm.svelte';
+export { default as LoginLink } from './auth/LoginLink.svelte';
+export * from './auth/auth';
+
 export { classNames } from './utils/classNames';
 export { randomId } from './utils/randomId';
 
