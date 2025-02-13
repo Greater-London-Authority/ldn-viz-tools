@@ -1,5 +1,19 @@
 # @ldn-viz/themes
 
+## 5.0.0
+
+### Major Changes
+
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Minor Changes
+
+- 8c07d92: CHANGED: apply default colors to areas styled with tailwind typography prose class
+
+### Patch Changes
+
+- d9f2aca: CHANGED: alpha UI color token to improve contrast
+
 ## 4.0.1
 
 ### Patch Changes
