@@ -2,4 +2,4 @@
 '@ldn-viz/themes': patch
 ---
 
-Change alpha ui token color for contrast
+CHANGED: alpha UI color token to improve contrast
