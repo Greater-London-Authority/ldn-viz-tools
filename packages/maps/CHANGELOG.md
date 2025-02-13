@@ -1,5 +1,16 @@
 # ldn-viz-tools-maps
 
+## 7.1.0
+
+### Minor Changes
+
+- 1610465: CHANGED: `Geocoder`, `MapControlGeocoder`, and `MapControlLocationSearch` accept a callback function to call when the user clears the search box
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Patch Changes
+
+- ddb1dfc: CHANGED: shift position of `MapControlGroup` upwards if position is `BottomLeft`/`BottomCenter`/`BottomRight`, to avoid overlap with attribution statement
+
 ## 7.0.0
 
 ### Major Changes
