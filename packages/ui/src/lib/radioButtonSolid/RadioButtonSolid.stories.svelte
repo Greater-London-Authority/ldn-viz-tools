@@ -151,7 +151,7 @@ different values as the `name` prop.
 			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Plane
 		</RadioButtonSolid>
-		<RadioButtonSolid id="plane" name="station-type-plane">
+		<RadioButtonSolid id="long" name="station-type-long-label">
 			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			This_label_is_far_too_long
 		</RadioButtonSolid>

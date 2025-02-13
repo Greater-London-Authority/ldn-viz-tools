@@ -55,6 +55,10 @@
 	<DataDownloadButton {data} filename="download" />
 </Story>
 
+<Story name="Full width">
+	<DataDownloadButton {data} filename="download" fullWidth />
+</Story>
+
 <Story name="With Icon before label">
 	<DataDownloadButton {data} filename="download">
 		<Icon

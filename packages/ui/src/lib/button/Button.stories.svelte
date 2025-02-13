@@ -14,7 +14,7 @@
 				control: { type: 'select' }
 			},
 			size: {
-				options: ['sm', 'md', 'lg'],
+				options: ['xs', 'sm', 'md', 'lg'],
 				control: { type: 'radio' }
 			},
 			type: {
@@ -133,7 +133,11 @@
 		layout: 'fullscreen'
 	}}
 >
-	<Button class="w-full">Custom classes applied</Button>
+	<div class="py-4 space-y-4">
+		<Button class="w-full">Custom classes applied</Button>
+
+		<Button fullWidth>fullWidth prop applied</Button>
+	</div>
 </Story>
 
 <Story name="With Icon">
