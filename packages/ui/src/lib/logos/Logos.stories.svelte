@@ -7,7 +7,7 @@
 	import LogoMayor from './LogoMayor.svelte';
 
 	export const meta = {
-		title: 'Ui/Logos',
+		title: 'Ui/Components/Logos',
 		component: LogoLOTI
 	};
 </script>

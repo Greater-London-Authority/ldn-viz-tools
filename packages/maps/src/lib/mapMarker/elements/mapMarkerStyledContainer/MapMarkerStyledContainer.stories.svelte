@@ -2,7 +2,7 @@
 	import MapMarkerStyledContainer from './MapMarkerStyledContainer.svelte';
 
 	export const meta = {
-		title: 'Maps/MapMarker/elements/MapMarkerStyledContainer',
+		title: 'Maps/Components/MapMarker/elements/MapMarkerStyledContainer',
 		component: MapMarkerStyledContainer,
 		parameters: {
 			layout: 'full'
@@ -21,9 +21,9 @@
 </script>
 
 <script>
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import Map from '../../../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../../../map/util';

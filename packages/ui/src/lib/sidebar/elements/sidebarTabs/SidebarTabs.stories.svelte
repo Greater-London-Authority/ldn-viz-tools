@@ -3,7 +3,7 @@
 	import SidebarTabList from './SidebarTabList.svelte';
 
 	export const meta = {
-		title: 'Ui/Sidebar/elements/SidebarTabs',
+		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarTabs',
 		component: SidebarTabList,
 		decorators: [() => SidebarLeftContext],
 		subcomponents: { SidebarTabLabel }

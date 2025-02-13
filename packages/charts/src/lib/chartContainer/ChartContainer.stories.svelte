@@ -5,7 +5,7 @@
 	import { Select } from '@ldn-viz/ui';
 
 	export const meta = {
-		title: 'Charts/ChartContainer',
+		title: 'Charts/Components/ChartContainer',
 		component: ChartContainer
 	};
 </script>
@@ -99,4 +99,37 @@
 		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 		alt="Simple description of type of chart"
 	/>
+</Story>
+
+<!--
+This story show how you can place two (or more) sites side-by-side, and ensure that the titles/chart body/download buttons remain aligned as the window is shrunk.
+-->
+<Story name="Aligning 2 charts">
+	<div class="grid grid-flow-col grid-cols-2 gap-x-12" style="grid-template-rows: auto auto auto;">
+		<ChartContainer
+			overrideClass="bg-color-palette-red-500"
+			title="This is the Chart Title"
+			subTitle="Subtitle provides extra context"
+			source="The source of this chart data"
+			byline="A byline for the chart"
+			note="Be aware that you can provide a note if required"
+			dataDownloadButton={['JSON', 'CSV']}
+			data={[]}
+			imageDownloadButton={['PNG']}
+			alignMultiple
+		/>
+
+		<ChartContainer
+			overrideClass="bg-color-palette-red-500"
+			title="This is the Chart Title"
+			subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so wil wrap earlier."
+			source="The source of this chart data"
+			byline="A byline for the chart"
+			note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so wil wrap earlier. It's really excessively long."
+			dataDownloadButton={['JSON', 'CSV']}
+			data={[]}
+			imageDownloadButton={['PNG']}
+			alignMultiple
+		/>
+	</div>
 </Story>

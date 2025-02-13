@@ -2,7 +2,7 @@
 	import TableHeader from './TableHeader.svelte';
 
 	export const meta = {
-		title: 'Tables/TableHeader',
+		title: 'Tables/Components/TableHeader',
 		component: TableHeader
 	};
 </script>

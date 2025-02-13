@@ -3,7 +3,7 @@
 	import Sidebar from './Sidebar.svelte';
 
 	export const meta = {
-		title: 'Ui/Sidebar',
+		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
 		decorators: [() => RelativeWrapper],
 		parameters: {
@@ -46,8 +46,10 @@
 
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Overlay from '../overlay/Overlay.svelte';
 	import Select from '../select/Select.svelte';
-	import SidebarHint from './elements/sidebarHint/SidebarHint.svelte';
+
+	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
 
 	let selectedValue = 'markers';
 
@@ -75,13 +77,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -94,10 +96,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
@@ -131,13 +136,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -150,10 +155,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
@@ -177,13 +185,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -347,10 +355,13 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+					<ThemeSwitcher />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
@@ -374,13 +385,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -420,13 +431,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -466,13 +477,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -512,13 +523,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -558,13 +569,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -604,13 +615,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>
@@ -682,13 +693,13 @@
 					<div>
 						<SidebarGroupTitle>
 							Group Title
-							<SidebarHint slot="hint" hintType="tooltip">
+							<Overlay slot="hint">
 								<p class="mb-4">Any content you want can go here</p>
 								<p>
 									Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 									nec venenatis sapien. Etiam venenatis felis.
 								</p>
-							</SidebarHint>
+							</Overlay>
 						</SidebarGroupTitle>
 						Grouped content
 					</div>

@@ -30,7 +30,7 @@
 	};
 
 	export const meta = {
-		title: 'Ui/Form/FormField',
+		title: 'Ui/Components/Form/FormField',
 		component: FormField,
 		argTypes: {
 			type: {
@@ -127,10 +127,8 @@
 		</Form>
 		<div class="mt-4 flex flex-col gap-4 text-color-text-secondary italic">
 			{#if args.type === 'select'}
-				<Button
-					emphasis="secondary"
-					condition="warning"
-					on:click={() => ($valueStore[args.name] = null)}>Reset</Button
+				<Button variant="text" emphasis="secondary" on:click={() => ($valueStore[args.name] = null)}
+					>Reset</Button
 				>
 			{/if}
 			<p>Value: {valueStore && $valueStore[args.name]}</p>

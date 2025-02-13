@@ -2,7 +2,7 @@
 	import MapMarkerFlyToFeature from './MapMarkerFlyToFeature.svelte';
 
 	export const meta = {
-		title: 'Maps/MapMarker/elements/MapMarkerFlyToFeature',
+		title: 'Maps/Components/MapMarker/elements/MapMarkerFlyToFeature',
 		component: MapMarkerFlyToFeature,
 		parameters: {
 			layout: 'full'
@@ -17,8 +17,8 @@
 </script>
 
 <script>
-	import { setContext } from 'svelte';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { setContext } from 'svelte';
 
 	import Map from '../../../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../../../map/util';

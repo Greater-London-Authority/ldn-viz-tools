@@ -3,7 +3,7 @@
 	import TabList from './TabList.svelte';
 
 	export const meta = {
-		title: 'Ui/Tabs',
+		title: 'Ui/Components/Tabs',
 		component: TabList,
 		subcomponents: { TabLabel },
 

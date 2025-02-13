@@ -4,63 +4,59 @@
 	 * However, like a modal, it remains open until it is dismissed by the user.
 	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
 	 *
-	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
-	 * To display longer messages centrally on the screen, consider using a [Modal](./?path=/docs/ui-modal--documentation).
+	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation).
+	 * To display longer messages centrally on the screen, consider using a [Modal](./?path=/docs/ui-components-overlays-modal--documentation).
 	 * @component
 	 */
 
 	import { createPopover } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 
-	import { InformationCircle, XMark } from '@steeze-ui/heroicons';
+	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import type { Writable } from 'svelte/store';
+	import { setContext } from 'svelte';
 	import Button from '../button/Button.svelte';
+	import { writable } from 'svelte/store';
+
+	/**
+	 * Boolean that determines whether the Popover is currently open.
+	 */
+	export let isOpen = false;
+
+	const isOpenStore = writable(isOpen);
 
 	const {
 		elements: { trigger, content, arrow, close },
 		states: { open }
 	} = createPopover({
 		forceVisible: true,
+		open: isOpenStore,
 		positioning: { placement: 'top' }
 	});
 
-	/**
-	 * text that appears in the tooltip target, next to the icon
-	 */
-	export let hintLabel = 'more info';
+	$: toggledExternally(isOpen);
+	const toggledExternally = (newIsOpen: boolean) => {
+		if ($isOpenStore != newIsOpen) {
+			$isOpenStore = newIsOpen;
+		}
+	};
+
+	$: toggledInternally($isOpenStore);
+	const toggledInternally = (newStoreValue: boolean) => {
+		if (newStoreValue != isOpen) {
+			isOpen = newStoreValue;
+		}
+	};
 
 	/**
-	 * text size for the tooltip target
+	 * Sets trigger actions and attributes (ARIA) for access by `Trigger` component
 	 */
-	export let hintSize: 'sm' | 'md' | 'lg' | undefined = undefined;
-
-	/**
-	 * Store controlling whether popover is open.
-	 */
-	export let openStore: Writable<boolean> | undefined = undefined;
-	$: openStore = open;
+	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
-<!-- TODO: as this button wraps the hint slot any slotted item inherits button styles (color etc) This should be refactored to be more generic -->
-<Button variant="text" size={hintSize} class="!p-0" emphasis="secondary">
-	<span {...$trigger} use:trigger class="inline-flex items-center">
-		{#if $$slots.hint}
-			<!-- if present, replaces the default `hintLabel` and icon  -->
-			<slot name="hint" />
-		{:else}
-			{hintLabel}
-
-			<Icon
-				src={InformationCircle}
-				theme="mini"
-				class="w-[18px] h-[18px] ml-0.5"
-				aria-hidden="true"
-			/>
-		{/if}
-	</span>
-</Button>
+<!-- The trigger that opens the popover, usually `Trigger` button but allows customisation -->
+<slot name="trigger" />
 
 {#if $open}
 	<div
@@ -86,9 +82,9 @@
 		</div>
 
 		<div {...$close} use:close>
-			<Button variant="square" emphasis="secondary" size="sm" class="absolute right-1.5 top-1.5">
+			<Button variant="text" emphasis="secondary" size="sm" class="absolute right-1 top-1">
 				<span class="sr-only">Close</span>
-				<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />
+				<Icon src={XMark} theme="mini" class="w-5 h-5" aria-hidden="true" />
 			</Button>
 		</div>
 	</div>

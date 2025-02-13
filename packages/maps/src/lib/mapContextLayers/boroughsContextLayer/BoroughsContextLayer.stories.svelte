@@ -31,7 +31,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapContextLayers/BoroughsContextLayer',
+		title: 'Maps/Components/MapContextLayers/BoroughsContextLayer',
 		component: BoroughsContextLayer,
 		parameters: {
 			layout: 'full'

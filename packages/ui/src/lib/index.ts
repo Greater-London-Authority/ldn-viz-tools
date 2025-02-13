@@ -50,14 +50,14 @@ export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/P
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 
-export { default as SidebarHint } from './sidebar/elements/sidebarHint/SidebarHint.svelte';
-
 export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
 export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
 
 export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
 export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
+
+export { default as SidebarFromArray } from './sidebar/SidebarFromArray.svelte';
 
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
@@ -82,9 +82,9 @@ export { default as CookieControlSettings } from './analytics/CookieControlSetti
 export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 
-export { default as Theme } from './themeSwitcher/Theme.svelte';
-export * from './themeSwitcher/themeStore';
-export { default as themeSwitcher } from './themeSwitcher/ThemeSwitcher.svelte';
+export { default as Theme } from './theme/Theme.svelte';
+export * from './theme/themeStore';
+export { default as themeSwitcher } from './theme/ThemeSwitcher.svelte';
 
 export * from './uniformInput/types';
 export { default as UniformInput } from './uniformInput/UniformInput.svelte';
@@ -97,6 +97,13 @@ export { default as SchemaForm } from './forms/SchemaForm.svelte';
 export * from './forms/types';
 
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+export { default as Overlay } from './overlay/Overlay.svelte';
+
+export { default as AuthMenu } from './auth/AuthMenu.svelte';
+export { default as HandleRedirectFromAuth } from './auth/HandleRedirectFromAuth.svelte';
+export { default as LoginForm } from './auth/LoginForm.svelte';
+export { default as LoginLink } from './auth/LoginLink.svelte';
+export * from './auth/auth';
 
 export { classNames } from './utils/classNames';
 export { randomId } from './utils/randomId';

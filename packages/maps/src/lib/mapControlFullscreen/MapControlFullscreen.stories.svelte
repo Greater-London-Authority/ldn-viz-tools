@@ -1,22 +1,23 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
-	import Map from '../map/Map.svelte';
-	import { appendOSKeyToUrl } from '../map/util';
-
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
-	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+
+	export const meta = {
+		title: 'Maps/Components/MapControls/MapControlFullscreen',
+		component: MapControlFullscreen,
+		parameters: {
+			layout: 'full'
+		}
+	};
 </script>
 
-<Meta
-	title="Maps/MapControls/MapControlFullscreen"
-	component={MapControlFullscreen}
-	parameters={{
-		layout: 'fullscreen'
-	}}
-/>
+<script lang="ts">
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
+	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
+</script>
 
 <Template let:args>
 	<MapControlFullscreen {...args} />

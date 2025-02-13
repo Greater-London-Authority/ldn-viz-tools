@@ -2,7 +2,7 @@
 	import AppShell from './AppShell.svelte';
 
 	export const meta = {
-		title: 'App/AppShell',
+		title: 'Ui/Components - Layout And Themes/AppShell',
 		component: AppShell,
 		parameters: {
 			layout: 'fullscreen'
@@ -16,9 +16,9 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import SidebarHeader from '../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import SidebarHint from '../sidebar/elements/sidebarHint/SidebarHint.svelte';
 	import SidebarSection from '../sidebar/elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from '../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import SidebarTabLabel from '../sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
@@ -53,13 +53,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -93,13 +93,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -129,13 +129,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -165,13 +165,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -201,13 +201,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -237,13 +237,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -273,13 +273,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -329,13 +329,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -365,13 +365,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>
@@ -491,13 +491,13 @@
 						<div>
 							<SidebarGroupTitle>
 								Group Title
-								<SidebarHint slot="hint" hintType="tooltip">
+								<Overlay slot="hint">
 									<p class="mb-4">Any content you want can go here</p>
 									<p>
 										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
 										nec venenatis sapien. Etiam venenatis felis.
 									</p>
-								</SidebarHint>
+								</Overlay>
 							</SidebarGroupTitle>
 							Grouped content
 						</div>

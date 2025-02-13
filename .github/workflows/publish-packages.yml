@@ -37,6 +37,7 @@ jobs:
           git add -A .changeset
           git add packages/*/CHANGELOG.md
           git add packages/*/package.json
+          git add packages/*/package-lock.json
 
           git diff-index --quiet HEAD || git commit -m "Update CHANGELOG and package.json"
 

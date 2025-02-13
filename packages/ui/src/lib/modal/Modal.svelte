@@ -3,25 +3,34 @@
 	 * The `<Modal>` component provides content overlaid on the rest of the UI. It can provide the user with additional contextual information, or prompt for user interaction.
 	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
 	 *
-	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-tooltip--documentation).
-	 * To display messages that remain open until dismissed, but are displayed close to the element that triggered them, consider using a [Popover](./?path=/docs/ui-popover--documentation).
+	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation).
+	 * To display messages that remain open until dismissed, but are displayed close to the element that triggered them, consider using a [Popover](./?path=/docs/ui-components-overlays-popover--documentation).
 	 * @component
 	 */
 
 	import { createDialog } from '@melt-ui/svelte';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 
 	/**
-	 * boolean Svelte store that determines whether the modal is currently open.
+	 * Boolean that determines whether the modal is currently open.
 	 */
-	export let isOpen = writable(false);
+	export let isOpen = false;
+
+	const isOpenStore = writable(isOpen);
+
+	export let customOpenFocus = () => {
+		const customElToFocus = document.getElementById($meltDescription.id);
+		return customElToFocus;
+	};
 
 	const {
 		elements: {
+			trigger,
 			portalled,
 			overlay,
 			content,
@@ -30,15 +39,15 @@
 			close
 		},
 		states: { open }
-	} = createDialog({ open: isOpen });
+	} = createDialog({ open: isOpenStore, openFocus: customOpenFocus });
 
 	/**
-	 * title that appears at the top of the modal
+	 * Title that appears at the top of the modal
 	 */
 	export let title: string;
 
 	/**
-	 * description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
+	 * Description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
 	 */
 	export let description: string = '';
 
@@ -85,24 +94,46 @@
 		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
+
+	$: toggledExternally(isOpen);
+	const toggledExternally = (newIsOpen: boolean) => {
+		if ($isOpenStore != newIsOpen) {
+			$isOpenStore = newIsOpen;
+		}
+	};
+
+	$: toggledInternally($isOpenStore);
+	const toggledInternally = (newStoreValue: boolean) => {
+		if (newStoreValue != isOpen) {
+			isOpen = newStoreValue;
+		}
+	};
+
+	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
-<div {...$portalled} use:$portalled.action>
-	{#if $open}
+{#if $$slots.trigger}
+	<slot name="trigger" />
+{/if}
+
+{#if $open}
+	<div {...$portalled} use:$portalled.action>
 		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
-					class={`bg-color-container-level-1 text-color-text-primary p-2 pl-3 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
+					class={`bg-color-container-level-1 text-color-text-primary p-3 pr-4 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
 				>
-					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action>{title}</div>
+					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action tabindex="-1">
+						{title}
+					</div>
 					<div {...$close} use:$close.action>
 						<Button
 							variant="square"
 							emphasis="secondary"
 							class="w-8 h-8 self-center"
-							on:click={() => ($isOpen = false)}
+							on:click={() => ($isOpenStore = false)}
 						>
 							<span class="sr-only">Close</span>
 							<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />
@@ -110,11 +141,11 @@
 					</div>
 				</div>
 
-				<div class="overflow-y-auto">
-					<div class="p-4">
-						{#if description}
-							<div {...$meltDescription} use:$meltDescription.action>{description}</div>
-						{/if}
+				<div class="overflow-y-auto" aria-labelledby={$meltTitle.id}>
+					<div class="px-4 py-6">
+						<div {...$meltDescription} use:$meltDescription.action tabindex="-1">
+							{description}
+						</div>
 
 						{#if hasChildren}
 							<!-- content to display below the `description`-->
@@ -122,7 +153,12 @@
 						{/if}
 					</div>
 				</div>
+				{#if $$slots.buttons}
+					<div class="p-4 flex justify-end gap-2">
+						<slot name="buttons" />
+					</div>
+				{/if}
 			</div>
 		</div>
-	{/if}
-</div>
+	</div>
+{/if}

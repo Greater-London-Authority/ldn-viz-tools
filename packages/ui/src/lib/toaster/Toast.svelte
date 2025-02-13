@@ -6,7 +6,7 @@
 	const typeClasses: TypeClasses = {
 		Notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
 		Success: 'bg-color-ui-background-positive border-color-ui-border-positive',
-		Warning: 'bg-color-ui-background-warning border-color-ui-border-warning',
+		Warning: 'bg-color-ui-background-caution border-color-ui-border-caution',
 		Error: 'bg-color-ui-background-negative border-color-ui-border-negative'
 	};
 </script>

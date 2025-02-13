@@ -2,7 +2,7 @@
 	import GeoJSONMapLayerSource from './GeoJSONMapLayerSource.svelte';
 
 	export const meta = {
-		title: 'Maps/MapLayerSource/adaptations/GeoJSONMapLayerSource',
+		title: 'Maps/Components/MapLayerSource/adaptations/GeoJSONMapLayerSource',
 		component: GeoJSONMapLayerSource,
 		parameters: {
 			layout: 'full'

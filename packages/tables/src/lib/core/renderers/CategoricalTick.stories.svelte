@@ -1,9 +1,9 @@
 <script context="module">
-	import CategoricalTick from './CategoricalTick.svelte';
 	import { scaleBand, scaleOrdinal } from 'd3-scale';
+	import CategoricalTick from './CategoricalTick.svelte';
 
 	export const meta = {
-		title: 'Tables/Renderers/CategoricalTick',
+		title: 'Tables/Components/Renderers/CategoricalTick',
 		component: CategoricalTick,
 
 		argTypes: {

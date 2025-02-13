@@ -1,46 +1,68 @@
 <script lang="ts">
-	import type { Writable } from 'svelte/store';
+	import Trigger from '../overlay/Trigger.svelte';
 	import Popover from '../popover/Popover.svelte';
 
-	export let color = '#EE266D';
+	import { NoSymbol } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 
-	const colors = [
-		'#EE266D',
-		'#00AEEF',
-		'#008D48',
-		'#FFF200',
-		'#00AEEF',
-		'#E0001B',
-		'#9E0059',
-		'#00577D',
-		'#DCA000',
-		'#792C89',
-		'#353D42',
-		'#000000'
+	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
+
+	export let label;
+
+	export let colorName = 'data.primary';
+
+	export let disabled = false;
+
+	const colorNames = [
+		'data.categorical.blue',
+		'data.categorical.darkpink',
+		'data.categorical.pink',
+		'data.categorical.red',
+		'data.categorical.yellow',
+		'data.categorical.green',
+		'data.categorical.purple',
+		'data.categorical.orange',
+		'data.categorical.turquoise',
+		'data.neutral.0',
+		'data.neutral.1'
 	];
 
-	let openStore: Writable<boolean>;
+	let isOpen = false;
 </script>
 
-<Popover bind:openStore>
-	<svelte:fragment slot="hint">
-		<div class="w-5 h-5 relative border rounded-full" style:background={color}></div>
-	</svelte:fragment>
-
-	<svelte:fragment slot="title">Color</svelte:fragment>
-
-	<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
-
-	<div class="flex flex-wrap gap-2">
-		{#each colors as colorOption}
-			<button
-				class="w-6 h-6 rounded-full"
-				style:background={colorOption}
-				on:click={() => {
-					color = colorOption;
-					$openStore = false;
-				}}
+{#if disabled}
+	<Icon
+		src={NoSymbol}
+		theme="mini"
+		class="w-6 h-6 text-color-action-disabled cursor-not-allowed"
+		aria-hidden="true"
+	/>
+{:else}
+	<Popover bind:isOpen>
+		<Trigger slot="trigger" size="xs">
+			<div
+				class="w-[22px] h-[22px] relative border rounded-full"
+				aria-label="Click to open {label} layer color picker "
+				style:background={tokenNameToValue(colorName, $currentTheme)}
 			/>
-		{/each}
-	</div>
-</Popover>
+		</Trigger>
+
+		<svelte:fragment slot="title">Color</svelte:fragment>
+
+		<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
+
+		<div class="flex flex-wrap gap-2">
+			{#each colorNames as colorOption}
+				<button
+					class="w-6 h-6 rounded-full"
+					style:background={tokenNameToValue(colorOption, $currentTheme)}
+					aria-label="Color code: {colorOption}"
+					on:click={() => {
+						colorName = colorOption;
+						isOpen = false;
+					}}
+				/>
+			{/each}
+		</div>
+	</Popover>
+{/if}

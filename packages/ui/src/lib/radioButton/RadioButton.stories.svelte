@@ -2,7 +2,7 @@
 	import RadioButton from './RadioButton.svelte';
 
 	export const meta = {
-		title: 'Ui/RadioButton',
+		title: 'Ui/Components/RadioButtons/RadioButton',
 		component: RadioButton,
 		argTypes: {
 			color: {

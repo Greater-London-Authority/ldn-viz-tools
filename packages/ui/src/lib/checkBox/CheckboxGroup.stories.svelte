@@ -3,7 +3,7 @@
 	import CheckboxGroup from './CheckboxGroup.svelte';
 
 	export const meta = {
-		title: 'Ui/CheckboxGroup',
+		title: 'Ui/Components/Checkboxes/CheckboxGroup',
 		component: CheckboxGroup
 	};
 </script>
@@ -29,27 +29,89 @@
 
 <Template let:args>
 	<CheckboxGroup options={optionsForGroup} bind:selectedOptions {...args} />
-	<p class="mt-8 text-color-text-secondary">
+	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Template>
 
 <Story name="Default" source />
 
-<Story name="Checkbox Group - disabled buttons">
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
-	<p class="mt-8 text-color-text-secondary">
+<Story name="with title">
+	<CheckboxGroup options={optionsForGroup} bind:selectedOptions label="Transport method" />
+	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Story>
 
-<Story name="Checkbox Group - externally updated">
+<Story name="with hint">
+	<CheckboxGroup
+		options={optionsForGroup}
+		bind:selectedOptions
+		label="Transport method"
+		hint="contextual hint text"
+	/>
+	<p class="mt-4 text-color-text-secondary">
+		selectedOptions: {JSON.stringify(selectedOptions)}
+	</p>
+</Story>
+
+<Story name="with description">
+	<CheckboxGroup
+		options={optionsForGroup}
+		buttonsHidden
+		bind:selectedOptions
+		label="Transport method"
+		description="Pick you prefered method of transport - taxis are currently not available"
+	/>
+	<p class="mt-4 text-color-text-secondary">
+		selectedOptions: {JSON.stringify(selectedOptions)}
+	</p>
+</Story>
+
+<Story name="disabled buttons">
+	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
+	<p class="mt-4 text-color-text-secondary">
+		selectedOptions: {JSON.stringify(selectedOptions)}
+	</p>
+</Story>
+
+<Story name="externally updated">
 	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
 
 	<div class="my-4">
 		<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
 	</div>
-	<p class="text-color-text-secondary">
+	<p class="mt-4 text-color-text-secondary">
+		selectedOptions: {JSON.stringify(selectedOptions)}
+	</p>
+</Story>
+
+<Story name="Disabled (global)">
+	<CheckboxGroup
+		options={optionsForGroup}
+		bind:selectedOptions
+		buttonsHidden
+		label="Preferred mode of transport"
+		hint="Contextual Hint"
+		description="This is a description"
+		disabled
+	/>
+	<p class="mt-4 text-color-text-secondary">
+		selectedOptions: {JSON.stringify(selectedOptions)}
+	</p>
+</Story>
+
+<Story name="With error">
+	<CheckboxGroup
+		options={optionsForGroup}
+		bind:selectedOptions
+		buttonsHidden
+		label="Preferred mode of transport"
+		hint="Contextual Hint"
+		description="Deselect all to see an error state!"
+		error={!selectedOptions.length ? 'You must select an option' : undefined}
+	/>
+	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
 </Story>

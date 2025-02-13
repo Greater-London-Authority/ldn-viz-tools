@@ -1,22 +1,24 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 
+	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+
+	export const meta = {
+		title: 'Maps/Components/MapControls/MapControlZoom',
+		component: MapControlZoom,
+		parameters: {
+			layout: 'full'
+		}
+	};
+</script>
+
+<script>
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
-	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
-
-	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
-
-<Meta
-	title="Maps/MapControls/MapControlZoom"
-	component={MapControlZoom}
-	parameters={{
-		layout: 'fullscreen'
-	}}
-/>
 
 <Template let:args>
 	<MapControlZoom {...args} />
