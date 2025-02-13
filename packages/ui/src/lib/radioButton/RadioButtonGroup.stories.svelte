@@ -55,7 +55,7 @@
 		name="station-type"
 		bind:selectedId
 		label="Transport method"
-		description="Pick you prefered method of transport - taxis are currently not available"
+		description="Pick you preferred method of transport - taxis are currently not available"
 	/>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
