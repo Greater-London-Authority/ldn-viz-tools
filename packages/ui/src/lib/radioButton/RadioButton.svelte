@@ -70,7 +70,9 @@
 			? `--theme-input-border: ${color}; --theme-input-border-selected: ${color}; --theme-input-background-active: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
-	<span class="form-label ml-2 font-normal">{label}</span>
+	{#if label}
+		<span class="form-label ml-2 font-normal">{label}</span>
+	{/if}
 	{#if $$slots.hint}
 		<!-- An optional `<Overlay>` component to provide additional explanation. -->
 		<slot name="hint" />
