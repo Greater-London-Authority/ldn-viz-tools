@@ -8,6 +8,8 @@
 	import Popover from '../popover/Popover.svelte';
 	import OpacityIcon from './OpacityIcon.svelte';
 
+	export let label;
+
 	export let opacity = 1;
 	export let disabled = false;
 </script>
@@ -26,7 +28,7 @@
 				class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 				aria-hidden="true"
 			/>
-			<span class="sr-only">Click to open opacity control.</span>
+			<span class="sr-only">Click to open {label} opacity control.</span>
 		</Trigger>
 
 		<svelte:fragment slot="title">Opacity</svelte:fragment>

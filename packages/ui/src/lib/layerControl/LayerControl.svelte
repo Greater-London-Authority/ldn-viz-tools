@@ -119,11 +119,19 @@
 	</div>
 
 	{#if controlsInUse.includes('color')}
-		<ColorPicker bind:colorName={state.colorName} disabled={disabled || disableColorControl} />
+		<ColorPicker
+			bind:colorName={state.colorName}
+			disabled={disabled || disableColorControl}
+			{label}
+		/>
 	{/if}
 
 	{#if controlsInUse.includes('opacity')}
-		<OpacityControl bind:opacity={state.opacity} disabled={disabled || disableOpacityControl} />
+		<OpacityControl
+			bind:opacity={state.opacity}
+			disabled={disabled || disableOpacityControl}
+			{label}
+		/>
 	{/if}
 
 	{#if controlsInUse.includes('size')}
@@ -132,6 +140,7 @@
 			{minSize}
 			{maxSize}
 			disabled={disabled || disableSizeControl}
+			{label}
 		/>
 	{/if}
 

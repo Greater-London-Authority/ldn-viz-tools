@@ -7,7 +7,9 @@
 
 	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
 
-	export let colorName = 'data.categorical.darkpink';
+	export let label;
+
+	export let colorName = 'data.primary';
 
 	export let disabled = false;
 
@@ -40,9 +42,9 @@
 		<Trigger slot="trigger" size="xs">
 			<div
 				class="w-[22px] h-[22px] relative border rounded-full"
+				aria-label="Click to open {label} layer color picker "
 				style:background={tokenNameToValue(colorName, $currentTheme)}
-			></div>
-			<span class="sr-only">Click to open color picker.</span>
+			/>
 		</Trigger>
 
 		<svelte:fragment slot="title">Color</svelte:fragment>

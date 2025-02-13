@@ -7,6 +7,8 @@
 
 	import ResizeIcon from './ResizeIcon.svelte';
 
+	export let label;
+
 	export let size = 1;
 
 	export let minSize;
@@ -29,7 +31,7 @@
 				class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 				aria-hidden="true"
 			/>
-			<span class="sr-only">Click to open marker size control.</span>
+			<span class="sr-only">Click to open {label} marker size control</span>
 		</Trigger>
 
 		<svelte:fragment slot="title">Marker size</svelte:fragment>
