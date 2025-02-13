@@ -56,6 +56,7 @@
 				<button
 					class="w-6 h-6 rounded-full"
 					style:background={tokenNameToValue(colorOption, $currentTheme)}
+					aria-label="Color code: {colorOption}"
 					on:click={() => {
 						colorName = colorOption;
 						isOpen = false;
