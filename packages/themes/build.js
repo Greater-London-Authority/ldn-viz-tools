@@ -64,7 +64,12 @@ StyleDictionary.registerParser({
       const replacements = [
         ['global.mode 1.', 'global.'],
         ['global.light-mode.', 'global.'],
-        ['global.dark-mode.', 'global.']
+        ['global.dark-mode.', 'global.'],
+        ['typography.mode 1.', 'typography.'],
+        ['global.sm.', 'global.'],
+        ['global.md.', 'global.'],
+        ['global.lg.', 'global.'],
+        ['global.xl.', 'global.']
       ];
 
       const cleanedJson = replacements.reduce((result, [oldValue, newValue]) => {
@@ -113,20 +118,26 @@ const conditionsCssDarkTheme = [{ category: 'theme', type: 'dark' }];
 
 const conditionsCssGlobal = [
   { category: 'global', subitem: { not: ['seed'] } },
-  { category: 'spacing' }
+  { category: 'spacing' },
+  { category: 'typography' }
 ];
 
 const conditionsTw = [
   { category: 'theme', type: 'light' },
-  { category: 'global', subitem: { not: ['light', 'dark', 'seed'] } },
-  { category: 'spacing' }
+  {
+    category: 'global',
+    type: { not: ['spacing', 'typography'] },
+    subitem: { not: ['light', 'dark', 'seed', 'spacing', 'typography'] }
+  }
 ];
+
+const conditionsTwSpacing = [{ category: 'spacing' }];
 
 const conditionsJs = [
   { category: 'theme' },
   {
     category: 'global',
-    type: { not: ['spacing'] },
+    type: { not: ['spacing', 'typography'] },
     item: { not: ['mode'] },
     subitem: { not: ['seed'] }
   }
@@ -171,6 +182,11 @@ StyleDictionary.registerFilter({
 });
 
 StyleDictionary.registerFilter({
+  name: 'twSpacingFilter',
+  matcher: (token) => createMatcher(conditionsTwSpacing)(token)
+});
+
+StyleDictionary.registerFilter({
   name: 'jsFilter',
   matcher: (token) => createMatcher(conditionsJs)(token)
 });
@@ -186,19 +202,25 @@ const transformString = (str, replace = 'theme', regex = /.*-color/) => {
 const formatCSSVariable = (dictionary) => (token) => {
   let originalName = token.name;
 
-  let themedName =
-    token.path[0] === 'global'
-      ? originalName
-      : transformString(originalName, 'theme-', /.*-color-/);
+  let themedName = ['theme'].includes(token.path[0])
+    ? transformString(originalName, 'theme-', /.*-color-/)
+    : originalName;
+
+  const isSpacingOrTypography =
+    token.path.includes('spacing') ||
+    (token.path[0] === 'typography' && ['fontsize', 'lineheight'].includes(token.path.at(-1)));
 
   if (dictionary.usesReference(token.original.value)) {
     const reference = dictionary.getReferences(token.original.value);
     const referenceName =
       reference[0].path[0] === 'global' ? reference[0].name : transformString(reference[0].name);
-    return `  --${themedName}: var(--${referenceName}, ${token.value});`;
+
+    const valueSuffix = isSpacingOrTypography ? 'px' : '';
+    return `  --${themedName}: var(--${referenceName}, ${token.value}${valueSuffix});`;
   }
 
-  return `  --${themedName}: ${token.value};`;
+  const valueSuffix = isSpacingOrTypography ? 'px' : '';
+  return `  --${themedName}: ${token.value}${valueSuffix};`;
 };
 
 StyleDictionary.registerFormat({
@@ -232,6 +254,23 @@ StyleDictionary.registerFormat({
   formatter({ dictionary }) {
     return `module.exports = {
         ${dictionary.allTokens.map(formatTailwindColor).join(',\n')}
+      }`;
+  }
+});
+
+/**
+ * Custom format that generates tailwind spacing config based on css variables
+ */
+
+const formatTailwindSpacing = (token) => {
+  return `  "${token.attributes.type}": "var(--${token.name}, ${token.value}px)"`;
+};
+
+StyleDictionary.registerFormat({
+  name: 'tw/css-spacing-variables',
+  formatter({ dictionary }) {
+    return `module.exports = {
+        ${dictionary.allTokens.map(formatTailwindSpacing).join(',\n')}
       }`;
   }
 });
