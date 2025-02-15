@@ -4892,11 +4892,11 @@
         },
         "fontsize": {
           "type": "dimension",
-          "value": 18
+          "value": 16
         },
         "lineheight": {
           "type": "dimension",
-          "value": 28
+          "value": 20
         },
         "letterspacing": {
           "type": "dimension",
@@ -5138,11 +5138,11 @@
         },
         "fontsize": {
           "type": "dimension",
-          "value": 20
+          "value": 18
         },
         "lineheight": {
           "type": "dimension",
-          "value": 32
+          "value": 28
         },
         "letterspacing": {
           "type": "dimension",
@@ -5384,11 +5384,11 @@
         },
         "fontsize": {
           "type": "dimension",
-          "value": 24
+          "value": 20
         },
         "lineheight": {
           "type": "dimension",
-          "value": 36
+          "value": 32
         },
         "letterspacing": {
           "type": "dimension",
@@ -5630,11 +5630,11 @@
         },
         "fontsize": {
           "type": "dimension",
-          "value": 30
+          "value": 24
         },
         "lineheight": {
           "type": "dimension",
-          "value": 40
+          "value": 36
         },
         "letterspacing": {
           "type": "dimension",
