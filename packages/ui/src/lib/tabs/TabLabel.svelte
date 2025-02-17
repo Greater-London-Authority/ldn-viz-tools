@@ -15,7 +15,7 @@
 	const { selectedValue, orientation, tabs } = getContext<{
 		selectedValue: Writable<string>;
 		orientation: 'vertical' | 'horizontal';
-		tabs: NodeListOf<HTMLElement>;
+		tabs: Writable<NodeListOf<HTMLElement>>;
 	}>('tabContext');
 
 	const findIndexOfTab = (tabs: NodeListOf<HTMLElement>, currentId: string) => {
@@ -45,7 +45,6 @@
 	const moveFocusToNextTab = (currentTab: HTMLElement, tabs: NodeListOf<HTMLElement>) => {
 		let index: number;
 		const currentTabId = currentTab.id;
-		console.log('tabs', tabs);
 		const firstTab = tabs[0];
 		const lastTab = tabs[tabs.length - 1];
 
@@ -62,7 +61,6 @@
 	};
 	const keydownHandler = (ev: KeyboardEvent) => {
 		const target = ev.target;
-		console.log('target', target);
 
 		if (ev.key === 'Enter' || ev.key === ' ') {
 			handleSelection();
@@ -70,15 +68,15 @@
 
 		if (target instanceof HTMLElement) {
 			if (orientation === 'horizontal' && ev.key === 'ArrowLeft') {
-				moveFocusToPreviousTab(target, tabs);
+				moveFocusToPreviousTab(target, $tabs);
 			} else if (orientation === 'horizontal' && ev.key === 'ArrowRight') {
-				moveFocusToNextTab(target, tabs);
+				moveFocusToNextTab(target, $tabs);
 			} else if (orientation === 'vertical' && ev.key === 'ArrowUp') {
 				console.log('move to previous tab');
-				moveFocusToPreviousTab(target, tabs);
+				moveFocusToPreviousTab(target, $tabs);
 			} else if (orientation === 'vertical' && ev.key === 'ArrowDown') {
 				console.log('move to next tab');
-				moveFocusToNextTab(target, tabs);
+				moveFocusToNextTab(target, $tabs);
 			}
 		}
 	};

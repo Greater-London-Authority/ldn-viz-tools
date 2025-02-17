@@ -35,6 +35,34 @@
 	};
 	$: respondToExternalChange(selectedValue);
 
+	let tabs: NodeListOf<HTMLElement> | undefined = undefined;
+	const allTabs: Writable<NodeListOf<HTMLElement> | undefined> = writable(tabs);
+
+	const updateTabs = (newTabs: NodeListOf<HTMLElement> | undefined) => {
+		if ($allTabs !== newTabs) {
+			$allTabs = newTabs;
+		}
+	};
+	$: updateTabs(tabs);
+
+	const setCurrentTab = (tabs: NodeListOf<HTMLElement>) => {
+		if (!selectedValue) {
+			selectedValue = tabs[0].id;
+			tabs[0].focus();
+		}
+	};
+
+	onMount(() => {
+		tabs = document.querySelectorAll('[role=tab]');
+		setCurrentTab(tabs);
+	});
+
+	setContext('tabContext', {
+		selectedValue: val,
+		orientation,
+		tabs: allTabs
+	});
+
 	const orientationClasses = {
 		vertical: 'flex-col w-20 space-y-0.5 pb-0.5',
 		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
@@ -45,35 +73,6 @@
 		orientationClasses[orientation],
 		$$props.class
 	);
-
-	/**
-	 * Find the list of tabs .querySelectorAll('[role=tab]'),
-	 * identify currentTab and index to enable moving focus back and forth
-	 * moveFocusToTab, moveFocusToPreviousTab, moveFocusToNextTab
-	 * onKeyDown event should handle moving focus back and forth depending on arrow key
-	 * onClick event should setSelectedTab
-	 */
-
-	// let tabList: HTMLElement;
-	let tabs: Writable<NodeListOf<HTMLElement> | undefined>;
-
-	const setCurrentTab = (tabs: NodeListOf<HTMLElement>) => {
-		if (!selectedValue) {
-			selectedValue = tabs[0].id;
-			tabs[0].focus();
-		}
-	};
-
-	onMount(() => {
-		$tabs = document.querySelectorAll('[role=tab]');
-		setCurrentTab($tabs);
-	});
-
-	setContext('tabContext', {
-		selectedValue: val,
-		orientation,
-		tabs: $tabs
-	});
 </script>
 
 <div class={tabListClasses} role="tablist" aria-label={ariaLabel} aria-orientation={orientation}>
