@@ -3,7 +3,10 @@
 	import type { Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 
-	// unique identifier: will be used to set the value of `selectedValue` for the parent `TabList` when this item is selected
+	/**
+	 * Unique identifier: will be used to set the value of `selectedValue` for the parent `TabList` when this item is selected
+	 * Also connects TabLabel to relevant TabPanel
+	 */
 	export let tabId: string;
 
 	/**
@@ -16,6 +19,10 @@
 		orientation: 'vertical' | 'horizontal';
 		tabs: Writable<NodeListOf<HTMLElement>>;
 	}>('tabContext');
+
+	/**
+	 * Utility functions to handle changing focus on keypresses
+	 */
 
 	const findIndexOfTab = (tabs: NodeListOf<HTMLElement>, currentId: string) => {
 		const array = Array.from(tabs);
@@ -55,9 +62,13 @@
 		}
 	};
 
+	/**
+	 * Event handlers
+	 */
 	const handleSelection = () => {
 		$selectedValue = tabId;
 	};
+
 	const keydownHandler = (ev: KeyboardEvent) => {
 		const target = ev.target;
 
@@ -71,10 +82,8 @@
 			} else if (orientation === 'horizontal' && ev.key === 'ArrowRight') {
 				moveFocusToNextTab(target, $tabs);
 			} else if (orientation === 'vertical' && ev.key === 'ArrowUp') {
-				console.log('move to previous tab');
 				moveFocusToPreviousTab(target, $tabs);
 			} else if (orientation === 'vertical' && ev.key === 'ArrowDown') {
-				console.log('move to next tab');
 				moveFocusToNextTab(target, $tabs);
 			}
 		}

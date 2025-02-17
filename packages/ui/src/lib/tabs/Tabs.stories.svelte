@@ -35,25 +35,23 @@
 		>
 	</TabList>
 
-	<div>
-		{#if selectedValue === 'aggregates'}
-			<TabPanel tabPanelId="aggregates-panel" tabId="aggregates"
-				>You can see aggregated counts across London in this tab!</TabPanel
-			>
-		{:else if selectedValue === 'chargers'}
-			<TabPanel tabPanelId="chargers-panel" tabId="chargers"
-				>You can see details of chargers across London in this tab!</TabPanel
-			>
-		{:else if selectedValue === 'averages'}
-			<TabPanel tabPanelId="averages-panel" tabId="averages"
-				>You can see averages of charge events across London in this tab!</TabPanel
-			>
-		{:else if selectedValue === 'histograms'}
-			<TabPanel tabPanelId="histograms-panel" tabId="histograms"
-				>You can see histograms of charge events across London in this tab!</TabPanel
-			>
-		{/if}
-	</div>
+	{#if selectedValue === 'aggregates'}
+		<TabPanel tabPanelId="aggregates-panel" tabId="aggregates"
+			>You can see aggregated counts across London in this tab!</TabPanel
+		>
+	{:else if selectedValue === 'chargers'}
+		<TabPanel tabPanelId="chargers-panel" tabId="chargers"
+			>You can see details of chargers across London in this tab!</TabPanel
+		>
+	{:else if selectedValue === 'averages'}
+		<TabPanel tabPanelId="averages-panel" tabId="averages"
+			>You can see averages of charge events across London in this tab!</TabPanel
+		>
+	{:else if selectedValue === 'histograms'}
+		<TabPanel tabPanelId="histograms-panel" tabId="histograms"
+			>You can see histograms of charge events across London in this tab!</TabPanel
+		>
+	{/if}
 </Template>
 
 <Story name="Default" source />
@@ -71,25 +69,23 @@
 			>
 		</TabList>
 
-		<div>
-			{#if selectedValue === 'aggregates'}
-				<TabPanel tabPanelId="aggregates-panel-2" tabId="aggregates"
-					>You can see aggregated counts across London in this tab!</TabPanel
-				>
-			{:else if selectedValue === 'chargers'}
-				<TabPanel tabPanelId="chargers-panel-2" tabId="chargers"
-					>You can see details of chargers across London in this tab!</TabPanel
-				>
-			{:else if selectedValue === 'averages'}
-				<TabPanel tabPanelId="averages-panel-2" tabId="averages"
-					>You can see averages of charge events across London in this tab!</TabPanel
-				>
-			{:else if selectedValue === 'histograms'}
-				<TabPanel tabPanelId="histograms-panel-2" tabId="histograms"
-					>You can see histograms of charge events across London in this tab!</TabPanel
-				>
-			{/if}
-		</div>
+		{#if selectedValue === 'aggregates'}
+			<TabPanel tabPanelId="aggregates-panel-2" tabId="aggregates"
+				>You can see aggregated counts across London in this tab!</TabPanel
+			>
+		{:else if selectedValue === 'chargers'}
+			<TabPanel tabPanelId="chargers-panel-2" tabId="chargers"
+				>You can see details of chargers across London in this tab!</TabPanel
+			>
+		{:else if selectedValue === 'averages'}
+			<TabPanel tabPanelId="averages-panel-2" tabId="averages"
+				>You can see averages of charge events across London in this tab!</TabPanel
+			>
+		{:else if selectedValue === 'histograms'}
+			<TabPanel tabPanelId="histograms-panel-2" tabId="histograms"
+				>You can see histograms of charge events across London in this tab!</TabPanel
+			>
+		{/if}
 	</div>
 </Story>
 
@@ -114,25 +110,22 @@
 			</TabLabel>
 		</TabList>
 
-		<div>
-			{#if selectedValue === 'markers'}
-				<TabPanel tabPanelId="markers-panel-2" tabId="markers"
-					>You can see data markers in this tab!</TabPanel
-				>
-			{:else if selectedValue === 'filters'}
-				<TabPanel tabPanelId="filters-panel-2" tabId="filters"
-					>You can see filters in this tab!</TabPanel
-				>
-			{:else if selectedValue === 'analysis'}
-				<TabPanel tabPanelId="analysis-panel-2" tabId="analysis"
-					>You can see analysis in this tab!</TabPanel
-				>
-			{:else if selectedValue === 'layers'}
-				<TabPanel tabPanelId="layers-panel-2" tabId="layers"
-					>You can see layers in this tab!</TabPanel
-				>
-			{/if}
-		</div>
+		{#if selectedValue === 'markers'}
+			<TabPanel tabPanelId="markers-panel-2" tabId="markers"
+				>You can see data markers in this tab!</TabPanel
+			>
+		{:else if selectedValue === 'filters'}
+			<TabPanel tabPanelId="filters-panel-2" tabId="filters"
+				>You can see filters in this tab!</TabPanel
+			>
+		{:else if selectedValue === 'analysis'}
+			<TabPanel tabPanelId="analysis-panel-2" tabId="analysis"
+				>You can see analysis in this tab!</TabPanel
+			>
+		{:else if selectedValue === 'layers'}
+			<TabPanel tabPanelId="layers-panel-2" tabId="layers">You can see layers in this tab!</TabPanel
+			>
+		{/if}
 	</div>
 </Story>
 
@@ -156,21 +149,17 @@
 		</TabLabel>
 	</TabList>
 
-	<div>
-		{#if selectedValue === 'markers'}
-			<TabPanel tabPanelId="markers-panel" tabId="markers"
-				>You can see data markers in this tab!</TabPanel
-			>
-		{:else if selectedValue === 'filters'}
-			<TabPanel tabPanelId="filters-panel" tabId="filters"
-				>You can see filters in this tab!</TabPanel
-			>
-		{:else if selectedValue === 'analysis'}
-			<TabPanel tabPanelId="analysis-panel" tabId="analysis"
-				>You can see analysis in this tab!</TabPanel
-			>
-		{:else if selectedValue === 'layers'}
-			<TabPanel tabPanelId="layers-panel" tabId="layers">You can see layers in this tab!</TabPanel>
-		{/if}
-	</div>
+	{#if selectedValue === 'markers'}
+		<TabPanel tabPanelId="markers-panel" tabId="markers"
+			>You can see data markers in this tab!</TabPanel
+		>
+	{:else if selectedValue === 'filters'}
+		<TabPanel tabPanelId="filters-panel" tabId="filters">You can see filters in this tab!</TabPanel>
+	{:else if selectedValue === 'analysis'}
+		<TabPanel tabPanelId="analysis-panel" tabId="analysis"
+			>You can see analysis in this tab!</TabPanel
+		>
+	{:else if selectedValue === 'layers'}
+		<TabPanel tabPanelId="layers-panel" tabId="layers">You can see layers in this tab!</TabPanel>
+	{/if}
 </Story>
