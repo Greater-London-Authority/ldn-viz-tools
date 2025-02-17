@@ -25,7 +25,7 @@
 </script>
 
 <Template let:args>
-	<TabList bind:selectedValue {...args}>
+	<TabList bind:selectedValue ariaLabel="View information on EV chargers" {...args}>
 		<TabLabel tabPanelId="aggregates-panel" tabId="aggregates"
 			>Aggregated counts across London</TabLabel
 		>
@@ -58,7 +58,7 @@
 
 <Story name="Vertical">
 	<div class="flex">
-		<TabList bind:selectedValue orientation="vertical">
+		<TabList bind:selectedValue orientation="vertical" ariaLabel="View information on EV chargers">
 			<TabLabel tabPanelId="aggregates-panel-2" tabId="aggregates"
 				>Aggregated counts across London</TabLabel
 			>
@@ -91,7 +91,7 @@
 
 <Story name="Vertical with Icons">
 	<div class="flex">
-		<TabList bind:selectedValue orientation="vertical">
+		<TabList bind:selectedValue orientation="vertical" ariaLabel="View map controls">
 			<TabLabel tabPanelId="markers-panel-2" tabId="markers">
 				<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 				Data Markers
@@ -130,7 +130,7 @@
 </Story>
 
 <Story name="Horizontal with Icons">
-	<TabList bind:selectedValue>
+	<TabList bind:selectedValue ariaLabel="View map controls">
 		<TabLabel tabId="markers" tabPanelId="markers-panel">
 			<Icon src={MapPin} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
 			Data Markers
