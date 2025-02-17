@@ -35,17 +35,17 @@
 	};
 	$: respondToExternalChange(selectedValue);
 
-	let tabs: NodeListOf<HTMLElement> | undefined = undefined;
-	const allTabs: Writable<NodeListOf<HTMLElement> | undefined> = writable(tabs);
+	let tabs: HTMLElement[] | undefined = undefined;
+	const allTabs: Writable<HTMLElement[] | undefined> = writable(tabs);
 
-	const updateTabs = (newTabs: NodeListOf<HTMLElement> | undefined) => {
+	const updateTabs = (newTabs: HTMLElement[] | undefined) => {
 		if ($allTabs !== newTabs) {
 			$allTabs = newTabs;
 		}
 	};
 	$: updateTabs(tabs);
 
-	const setCurrentTab = (tabs: NodeListOf<HTMLElement>) => {
+	const setCurrentTab = (tabs: HTMLElement[]) => {
 		if (!selectedValue) {
 			selectedValue = tabs[0].id;
 			tabs[0].focus();

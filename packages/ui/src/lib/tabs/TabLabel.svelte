@@ -17,14 +17,14 @@
 	const { selectedValue, orientation, tabs } = getContext<{
 		selectedValue: Writable<string>;
 		orientation: 'vertical' | 'horizontal';
-		tabs: Writable<NodeListOf<HTMLElement>>;
+		tabs: Writable<HTMLElement[]>;
 	}>('tabContext');
 
 	/**
 	 * Utility functions to handle changing focus on keypresses
 	 */
 
-	const findIndexOfTab = (tabs: NodeListOf<HTMLElement>, currentId: string) => {
+	const findIndexOfTab = (tabs: HTMLElement[], currentId: string) => {
 		const array = Array.from(tabs);
 
 		return array.findIndex((tab: HTMLElement) => tab.id === currentId);
@@ -34,7 +34,7 @@
 		document.getElementById(id)?.focus();
 	};
 
-	const moveFocusToPreviousTab = (currentTab: HTMLElement, tabs: NodeListOf<HTMLElement>) => {
+	const moveFocusToPreviousTab = (currentTab: HTMLElement, tabs: HTMLElement[]) => {
 		let index: number;
 		const currentTabId = currentTab.id;
 		const firstTab = tabs[0];
@@ -48,7 +48,7 @@
 		}
 	};
 
-	const moveFocusToNextTab = (currentTab: HTMLElement, tabs: NodeListOf<HTMLElement>) => {
+	const moveFocusToNextTab = (currentTab: HTMLElement, tabs: HTMLElement[]) => {
 		let index: number;
 		const currentTabId = currentTab.id;
 		const firstTab = tabs[0];
