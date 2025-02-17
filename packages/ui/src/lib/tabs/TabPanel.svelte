@@ -6,6 +6,6 @@
 	export let tabPanelId = randomId();
 </script>
 
-<div id={tabPanelId} role="tabpanel" aria-labelledby={tabId}>
+<div id={tabPanelId} class={$$props.class} role="tabpanel" aria-labelledby={tabId}>
 	<slot />
 </div>
