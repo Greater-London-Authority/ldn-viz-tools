@@ -113,7 +113,7 @@
 	class={classNames(
 		tabLabelClasses,
 		orientationClasses[orientation],
-		tabId === $selectedValue
+		isSelected
 			? '!bg-color-input-background-active !text-color-static-white cursor-default no-underline'
 			: ''
 	)}
