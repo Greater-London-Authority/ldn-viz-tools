@@ -6,7 +6,7 @@
 	 * @component
 	 */
 
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 
@@ -27,10 +27,6 @@
 
 	const val: Writable<string | undefined> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
-	setContext('tabContext', {
-		selectedValue: val,
-		orientation
-	});
 
 	const respondToExternalChange = (newVal: string | undefined) => {
 		if ($val !== newVal) {
@@ -49,6 +45,35 @@
 		orientationClasses[orientation],
 		$$props.class
 	);
+
+	/**
+	 * Find the list of tabs .querySelectorAll('[role=tab]'),
+	 * identify currentTab and index to enable moving focus back and forth
+	 * moveFocusToTab, moveFocusToPreviousTab, moveFocusToNextTab
+	 * onKeyDown event should handle moving focus back and forth depending on arrow key
+	 * onClick event should setSelectedTab
+	 */
+
+	// let tabList: HTMLElement;
+	let tabs: Writable<NodeListOf<HTMLElement> | undefined>;
+
+	const setCurrentTab = (tabs: NodeListOf<HTMLElement>) => {
+		if (!selectedValue) {
+			selectedValue = tabs[0].id;
+			tabs[0].focus();
+		}
+	};
+
+	onMount(() => {
+		$tabs = document.querySelectorAll('[role=tab]');
+		setCurrentTab($tabs);
+	});
+
+	setContext('tabContext', {
+		selectedValue: val,
+		orientation,
+		tabs: $tabs
+	});
 </script>
 
 <div class={tabListClasses} role="tablist" aria-label={ariaLabel} aria-orientation={orientation}>
