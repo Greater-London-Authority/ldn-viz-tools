@@ -35,7 +35,7 @@
 		>
 	</TabList>
 
-	<div class="text-black dark:text-white p-4">
+	<div>
 		{#if selectedValue === 'aggregates'}
 			<TabPanel tabPanelId="aggregates-panel" tabId="aggregates"
 				>You can see aggregated counts across London in this tab!</TabPanel
@@ -71,7 +71,7 @@
 			>
 		</TabList>
 
-		<div class="text-black dark:text-white p-4">
+		<div>
 			{#if selectedValue === 'aggregates'}
 				<TabPanel tabPanelId="aggregates-panel-2" tabId="aggregates"
 					>You can see aggregated counts across London in this tab!</TabPanel
@@ -114,7 +114,7 @@
 			</TabLabel>
 		</TabList>
 
-		<div class="text-black dark:text-white p-4">
+		<div>
 			{#if selectedValue === 'markers'}
 				<TabPanel tabPanelId="markers-panel-2" tabId="markers"
 					>You can see data markers in this tab!</TabPanel
@@ -156,7 +156,7 @@
 		</TabLabel>
 	</TabList>
 
-	<div class="text-black dark:text-white p-4">
+	<div>
 		{#if selectedValue === 'markers'}
 			<TabPanel tabPanelId="markers-panel" tabId="markers"
 				>You can see data markers in this tab!</TabPanel
