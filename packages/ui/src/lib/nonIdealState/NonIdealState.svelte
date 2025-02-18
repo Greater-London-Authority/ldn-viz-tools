@@ -7,10 +7,11 @@
 	 * @component
 	 */
 
-	import { ExclamationTriangle } from '@steeze-ui/heroicons';
+	import { Clock, ExclamationTriangle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import Spinner from '../spinners/Spinner.svelte';
+	import { prefersReducedMotion } from '../userPreference/mediaQueryStore';
 
 	/**
 	 * If `true`, then a spinner is displayed in place of the icon.
@@ -21,8 +22,11 @@
 <div
 	class="flex flex-col items-center justify-center text-center text-color-text-secondary gap-2 bg-color-ui-background-neutral border border-color-ui-border-secondary px-2 py-2 w-full h-full"
 >
-	{#if spinner}
+	{#if spinner && !$prefersReducedMotion}
 		<Spinner class="w-12" />
+	{:else if spinner && $prefersReducedMotion}
+		<!-- TODO replace with hourglass -->
+		<Icon src={Clock} theme="solid" class="w-6 h-6" />
 	{:else}
 		<!-- contains the icon -->
 		<slot name="icon">

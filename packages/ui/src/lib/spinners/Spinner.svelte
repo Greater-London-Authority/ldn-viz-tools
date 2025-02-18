@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `<Spinner>` component displays an animation to show that an operation (such as data loading) is currently in progress.
 	 *
@@ -18,6 +18,14 @@
 	 */
 	export let arcColorClass = '';
 
+	/**
+	 * Describes purpose of `Spinner` for use cases where
+	 * there's no accompanying text to describe the state
+	 * change (e.g. AsyncButton). Required in this case but
+	 * otherwise undefined.
+	 */
+	export let title: string | undefined = undefined;
+
 	$: circleClasses = classNames(circleColorClass || 'stroke-color-ui-empty');
 	$: pathClasses = classNames(arcColorClass || 'stroke-color-ui-primary');
 </script>
@@ -29,6 +37,9 @@
 	stroke-width="8"
 	{...$$restProps}
 >
+	{#if title}
+		<title>{title}</title>
+	{/if}
 	<circle cx="50" cy="50" r="38" class={circleClasses} />
 	<path d="M 50,12 a 38,38 0 0,1 38,38" class={pathClasses}>
 		<animateTransform

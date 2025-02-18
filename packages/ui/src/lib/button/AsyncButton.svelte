@@ -37,6 +37,10 @@
 </script>
 
 <script lang="ts">
+	import { prefersReducedMotion } from '../userPreference/mediaQueryStore';
+
+	import { Clock } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
 	import Spinner from '../spinners/Spinner.svelte';
 	import type { ButtonProps } from './Button.svelte';
@@ -76,6 +80,11 @@
 	 */
 	export let disabled: ButtonProps['disabled'] = false;
 
+	/**
+	 * Describes the state change (i.e. appearance of Spinner or icon while loading) for screen reader users.
+	 */
+	export let title = 'Loading';
+
 	$: spinnerColorClasses = getSpinnerColorClasses(emphasis);
 	$: dynamicSpinnerClasses = getDynamicSpinnerClasses(size, variant);
 
@@ -96,36 +105,48 @@
 	};
 </script>
 
-<Button
-	{type}
-	{emphasis}
-	{variant}
-	{size}
-	disabled={disabled || working}
-	on:click={doClick}
-	on:change
-	on:keydown
-	on:keyup
-	on:touchstart
-	on:touchend
-	on:touchcancel
-	on:mouseenter
-	on:mouseleave
-	{...$$restProps}
->
-	{#if working}
-		<div class="relative">
-			<Spinner
-				arcColorClass={spinnerColorClasses}
-				class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
-			/>
-			<!-- This gives the outer div the correct size so the spinner is centered -->
-			<span class="invisible">
-				<!-- Button label and/or icon. -->
-				<slot />
-			</span>
-		</div>
-	{:else}
-		<slot />
-	{/if}
-</Button>
+<div aria-live="polite" role="status" aria-busy={working}>
+	<Button
+		{type}
+		{emphasis}
+		{variant}
+		{size}
+		disabled={disabled || working}
+		on:click={doClick}
+		on:change
+		on:keydown
+		on:keyup
+		on:touchstart
+		on:touchend
+		on:touchcancel
+		on:mouseenter
+		on:mouseleave
+		{...$$restProps}
+	>
+		{#if working}
+			<div class="relative">
+				{#if $prefersReducedMotion}
+					<Icon
+						src={Clock}
+						class="h-6 w-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+						{title}
+						aria-hidden="false"
+					/>
+				{:else}
+					<Spinner
+						arcColorClass={spinnerColorClasses}
+						class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
+						{title}
+					/>
+				{/if}
+				<!-- This gives the outer div the correct size so the spinner is centered -->
+				<span class="invisible">
+					<!-- Button label and/or icon. -->
+					<slot />
+				</span>
+			</div>
+		{:else}
+			<slot />
+		{/if}
+	</Button>
+</div>
