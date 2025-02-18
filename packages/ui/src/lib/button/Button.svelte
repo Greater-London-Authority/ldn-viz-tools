@@ -20,10 +20,6 @@
 		type: 'button' | 'submit';
 		title: string;
 		slim: boolean;
-		role: string;
-		tabindex: number;
-		ariaControls: string | undefined;
-		ariaSelected: boolean | undefined;
 		action: (node: HTMLElement) => void;
 	}
 
