@@ -41,7 +41,7 @@
 	 * Name of layer containing this feature.
 	 * This is passed to the popover component via the `mapMarkerLayer` context.
 	 */
-	export let layer: string;
+	export let layer = '';
 
 	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
 	let popupInstance: SvelteComponent | null = null;
