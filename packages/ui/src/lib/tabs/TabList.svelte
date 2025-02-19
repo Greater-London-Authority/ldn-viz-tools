@@ -6,7 +6,7 @@
 	 * @component
 	 */
 
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 
@@ -20,12 +20,13 @@
 	 */
 	export let orientation: 'vertical' | 'horizontal' = 'horizontal';
 
+	/**
+	 * Enables screen reader to describe purpose of tab list. Required.
+	 */
+	export let ariaLabel: string = '';
+
 	const val: Writable<string | undefined> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
-	setContext('tabContext', {
-		selectedValue: val,
-		orientation
-	});
 
 	const respondToExternalChange = (newVal: string | undefined) => {
 		if ($val !== newVal) {
@@ -33,6 +34,33 @@
 		}
 	};
 	$: respondToExternalChange(selectedValue);
+
+	let tabs: HTMLElement[] | undefined = undefined;
+	const allTabs: Writable<HTMLElement[] | undefined> = writable(tabs);
+
+	const updateTabs = (newTabs: HTMLElement[] | undefined) => {
+		if ($allTabs !== newTabs) {
+			$allTabs = newTabs;
+		}
+	};
+	$: updateTabs(tabs);
+
+	const setDefaultTab = (tabs: HTMLElement[] | undefined) => {
+		if (!selectedValue && tabs) {
+			selectedValue = tabs[0].id;
+		}
+	};
+
+	onMount(() => {
+		tabs = document.querySelectorAll('[role=tab]') as unknown as HTMLElement[];
+		setDefaultTab(tabs);
+	});
+
+	setContext('tabContext', {
+		selectedValue: val,
+		orientation,
+		tabs: allTabs
+	});
 
 	const orientationClasses = {
 		vertical: 'flex-col w-20 space-y-0.5 pb-0.5',
@@ -46,7 +74,7 @@
 	);
 </script>
 
-<div class={tabListClasses} role="tablist">
+<div class={tabListClasses} role="tablist" aria-label={ariaLabel} aria-orientation={orientation}>
 	<!-- should contain a series of `<TabLabel>` components  -->
 	<slot />
 </div>
