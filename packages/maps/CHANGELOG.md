@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 7.2.0
+
+### Minor Changes
+
+- 40410d8: CHANGED: the `MapPopover` now accept a `layer` prop
+
 ## 7.1.0
 
 ### Minor Changes
