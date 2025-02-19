@@ -84,7 +84,7 @@ export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage
 
 export { default as Theme } from './theme/Theme.svelte';
 export * from './theme/themeStore';
-export { default as themeSwitcher } from './theme/ThemeSwitcher.svelte';
+export { default as ThemeSwitcher } from './theme/ThemeSwitcher.svelte';
 
 export * from './uniformInput/types';
 export { default as UniformInput } from './uniformInput/UniformInput.svelte';
@@ -97,7 +97,9 @@ export { default as SchemaForm } from './forms/SchemaForm.svelte';
 export * from './forms/types';
 
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+
 export { default as Overlay } from './overlay/Overlay.svelte';
+export { default as Trigger } from './overlay/Trigger.svelte';
 
 export { default as AuthMenu } from './auth/AuthMenu.svelte';
 export { default as HandleRedirectFromAuth } from './auth/HandleRedirectFromAuth.svelte';
