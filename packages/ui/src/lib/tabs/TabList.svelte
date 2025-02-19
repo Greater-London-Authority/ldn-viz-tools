@@ -45,16 +45,15 @@
 	};
 	$: updateTabs(tabs);
 
-	const setCurrentTab = (tabs: HTMLElement[] | undefined) => {
+	const setDefaultTab = (tabs: HTMLElement[] | undefined) => {
 		if (!selectedValue && tabs) {
 			selectedValue = tabs[0].id;
-			tabs[0].focus();
 		}
 	};
 
 	onMount(() => {
 		tabs = document.querySelectorAll('[role=tab]') as unknown as HTMLElement[];
-		setCurrentTab(tabs);
+		setDefaultTab(tabs);
 	});
 
 	setContext('tabContext', {
