@@ -37,6 +37,12 @@
 	 */
 	export let feature: Feature;
 
+	/**
+	 * Name of layer containing this feature.
+	 * This is passed to the popover component via the `mapMarkerLayer` context.
+	 */
+	export let layer: string;
+
 	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
 	let popupInstance: SvelteComponent | null = null;
 
@@ -72,7 +78,8 @@
 			context: new Map([
 				...contexts,
 				['mapMarkerMaplibrePopup', maplibrePopup],
-				['mapMarkerFeature', feature]
+				['mapMarkerFeature', feature],
+				['mapMarkerLayer', layer]
 			])
 		});
 
