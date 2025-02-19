@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 16.0.1
+
+### Patch Changes
+
+- c135236: ADDED: correctly export `Trigger` and `ThemeSwitcher`
+
 ## 16.0.0
 
 ### Major Changes
