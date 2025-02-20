@@ -14,6 +14,10 @@
 	 */
 	export let tabPanelId: string;
 
+	export let setTabIndex = (isSelected: boolean) => {
+		return isSelected ? 0 : -1;
+	};
+
 	const { selectedValue, orientation, tabs } = getContext<{
 		selectedValue: Writable<string>;
 		orientation: 'vertical' | 'horizontal';
@@ -65,16 +69,12 @@
 	/**
 	 * Event handlers
 	 */
-	const handleSelection = () => {
+	export let handleSelection = () => {
 		$selectedValue = tabId;
 	};
 
 	const keydownHandler = (ev: KeyboardEvent) => {
 		const target = ev.target;
-
-		if (ev.key === 'Enter' || ev.key === ' ') {
-			handleSelection();
-		}
 
 		if (target instanceof HTMLElement) {
 			if (orientation === 'horizontal' && ev.key === 'ArrowLeft') {
@@ -96,7 +96,7 @@
 		horizontal: 'text-base py-2 px-4 flex items-center select-none'
 	};
 
-	$: tabLabelClasses = classNames(
+	export let tabLabelClasses = classNames(
 		'bg-color-input-background-off text-color-text-primary underline hover:bg-color-input-background-hover hover:no-underline',
 		orientationClasses[orientation]
 	);
@@ -109,7 +109,7 @@
 	role="tab"
 	aria-controls={tabPanelId}
 	aria-selected={isSelected}
-	tabindex={isSelected ? 0 : -1}
+	tabindex={setTabIndex(isSelected)}
 	class={classNames(
 		tabLabelClasses,
 		orientationClasses[orientation],

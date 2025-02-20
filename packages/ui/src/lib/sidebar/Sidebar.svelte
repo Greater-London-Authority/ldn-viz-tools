@@ -42,6 +42,8 @@
 	export let theme: 'light' | 'dark' = 'dark';
 	export let placement: PlacementType = 'right';
 
+	export let ariaLabel = '';
+
 	const sidebarPlacementFromContext = getContext<Writable<PlacementType>>('sidebarPlacement');
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
@@ -62,7 +64,7 @@
 	$: $sidebarWidthStore = width;
 </script>
 
-<div class={classNames(wrapperClasses, placementClasses)}>
+<div aria-label={ariaLabel} class={classNames(wrapperClasses, placementClasses)}>
 	{#if $$slots.tabs}
 		<div class={classNames('absolute bg-color-container-level-0', tabPlacementClasses)}>
 			<!-- should contain a `<SidebarTabList>`, if the sidebar has tabs-->
