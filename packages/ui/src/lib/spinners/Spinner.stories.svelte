@@ -35,3 +35,7 @@
 		<Spinner class="h-6 w-6" />
 	</Button>
 </Story>
+
+<Story name="With title">
+	<Spinner title="Loading" class="w-40" />
+</Story>
