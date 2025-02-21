@@ -15,6 +15,7 @@
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * Boolean that determines whether the modal is currently open.
@@ -22,6 +23,8 @@
 	export let isOpen = false;
 
 	const isOpenStore = writable(isOpen);
+
+	export let descriptionId: string = randomId();
 
 	export let customOpenFocus = () => {
 		const customElToFocus = document.getElementById($meltDescription.id);
@@ -39,7 +42,11 @@
 			close
 		},
 		states: { open }
-	} = createDialog({ open: isOpenStore, openFocus: customOpenFocus });
+	} = createDialog({
+		open: isOpenStore,
+		openFocus: customOpenFocus,
+		ids: { description: descriptionId }
+	});
 
 	/**
 	 * Title that appears at the top of the modal
@@ -143,9 +150,9 @@
 
 				<div class="overflow-y-auto" aria-labelledby={$meltTitle.id}>
 					<div class="px-4 py-6">
-						<div {...$meltDescription} use:$meltDescription.action tabindex="-1">
-							{description}
-						</div>
+						<p {...$meltDescription} use:$meltDescription.action tabindex="-1">
+							<slot name="description">{description}</slot>
+						</p>
 
 						{#if hasChildren}
 							<!-- content to display below the `description`-->

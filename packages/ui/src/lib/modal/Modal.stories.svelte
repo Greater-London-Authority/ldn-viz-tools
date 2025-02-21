@@ -62,6 +62,16 @@
 	</Modal>
 </Story>
 
+<Story name="External description">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal bind:isOpen title="A modal with contents!" descriptionId="description-1">
+		<svelte:fragment slot="description"
+			>This modal has an external description, with an id and tabindex.</svelte:fragment
+		>
+	</Modal>
+</Story>
+
 <Story name="Modal with cancel and accept buttons">
 	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
 
