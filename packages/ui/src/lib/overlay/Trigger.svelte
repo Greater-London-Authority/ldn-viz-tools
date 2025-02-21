@@ -12,9 +12,9 @@
 	export let hintLabel = 'More Info';
 
 	/**
-	 * Label for use by screen readers.
+	 * Enables screen reader to describe contents of button
 	 */
-	export let ariaLabel = '';
+	export let ariaLabel: string | null = null;
 
 	/**
 	 * text size for the tooltip target
