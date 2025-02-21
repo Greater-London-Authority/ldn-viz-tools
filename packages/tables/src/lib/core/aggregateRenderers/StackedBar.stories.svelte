@@ -2,7 +2,7 @@
 	import { scaleOrdinal } from 'd3-scale';
 	import StackedBar from './StackedBar.svelte';
 	export const meta = {
-		title: 'Tables/AggregateRenderers/StackedBar',
+		title: 'Tables/Components/AggregateRenderers/StackedBar',
 		component: StackedBar,
 
 		args: {

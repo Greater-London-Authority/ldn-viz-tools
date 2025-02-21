@@ -2,7 +2,7 @@
 	import DataDownloadButton from './DataDownloadButton.svelte';
 
 	export const meta = {
-		title: 'Ui/DataDownloadButton',
+		title: 'Ui/Components/Buttons/DataDownloadButton',
 		component: DataDownloadButton,
 		argTypes: {
 			filename: {
@@ -53,6 +53,10 @@
 
 <Story name="Without Icon">
 	<DataDownloadButton {data} filename="download" />
+</Story>
+
+<Story name="Full width">
+	<DataDownloadButton {data} filename="download" fullWidth />
 </Story>
 
 <Story name="With Icon before label">
@@ -142,6 +146,18 @@
 <Story name="Data obtained from function">
 	<DataDownloadButton
 		dataFn={() =>
+			Array.from({ length: 10 }, () => ({
+				a: Math.floor(Math.random() * 100),
+				b: Math.floor(Math.random() * 100)
+			}))}
+		filename="random data"
+		formats={['JSON']}
+	></DataDownloadButton>
+</Story>
+
+<Story name="Data obtained from async function">
+	<DataDownloadButton
+		dataFn={async () =>
 			Array.from({ length: 10 }, () => ({
 				a: Math.floor(Math.random() * 100),
 				b: Math.floor(Math.random() * 100)

@@ -2,7 +2,7 @@
 	import Callout from './Callout.svelte';
 
 	export const meta = {
-		title: 'Ui/Callout',
+		title: 'Ui/Components/Callout',
 		component: Callout,
 		argTypes: {
 			id: {

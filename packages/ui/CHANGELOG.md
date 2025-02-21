@@ -1,5 +1,60 @@
 # ldn-viz-tools-ui
 
+## 16.0.1
+
+### Patch Changes
+
+- c135236: ADDED: correctly export `Trigger` and `ThemeSwitcher`
+
+## 16.0.0
+
+### Major Changes
+
+- 4eac8b2: REMOVED: `SidebarHint` component
+  CHANGED: use `Overlay` component for hints in Inputs and Sidebar
+- adb7e59: CHANGED: change `isOpen` prop of `Modal` and `checked` prop of `Switch` from being a Sevelte store with a Boolean value to simply a Boolean.
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Minor Changes
+
+- dc63318: ADDED: components for OAuth authentication
+- fec8705: ADDED: update `ColorPicker` in `LayerControl` to use colors defined in our categorical color tokens
+  ADDED: `tokenNameToValue` and `colorTokenNameToRGBArray` functions to convert color token names to values for current theme
+- 824b681: CHANGED: `Modal` component to make description essential, set openFocus to description id and fixed styling of modal contents
+  CHANGED: added `<slot name="buttons">` to `Modal` to fix styling of buttons relative to modal content
+- 11e1f97: ADDED: `Overlay` component to allow choice of tooltip, modal or popover and implementation in Storybook
+  ADDED: `Trigger` component to handle opening tooltips, modals and popovers
+  CHANGED: `Button` customAction prop is now generic
+- 8321585: CHANGED: allow `Button`/`MultipleActionButton`/`DataDownloadButton`/`ImageDownloadButton`
+- 1610465: CHANGED: `Geocoder`, `MapControlGeocoder`, and `MapControlLocationSearch` accept a callback function to call when the user clears the search box
+- 978beb6: CHANGED: LayerControlGroup now accepts a `mutuallyExclusive` prop
+- ae6a3df: FIXED: accessibility issues in `Input` and `InputWrapper` components
+- 49fd045: ADDED: added `SidebarFromArray` component
+- 2557336: ADDEDL input wrapper to grouped inputs
+- bdbedf3: Adds xs button size and 'slim' prop
+
+### Patch Changes
+
+- a04846c: FIXED: set types of some props on PageMetadata
+
+## 15.3.0
+
+### Minor Changes
+
+- 028ad2f: ADDED: `randomId` generator to `@ldn-viz/ui` exports
+- 4556f05: ADDED: ARIA label to `Callout` component for accessibility
+- f5de052: FIXED: updated `Checkbox` component to use explicit input labels to fix duplicate announcements by screen reader
+- 7487cd8: FIXED: accessibility issues in `MultipleActionButton` component
+- 7487cd8: ADDED: pass Melt-UI actions down to `Button` component for proper ARIA semantics
+- 028ad2f: ADDED: `currentTheme` store to `ui` package and use in `chart` examples. Implement accessibility improvements in charts and illustrate with line chart example
+
+### Patch Changes
+
+- 7dc2bfb: ADDED: alt text to logo components
+- Updated dependencies [5c06c36]
+- Updated dependencies [0ea3bc4]
+  - @ldn-viz/utils@1.1.0
+
 ## 15.2.2
 
 ### Patch Changes
@@ -43,7 +98,7 @@
 
 ### Patch Changes
 
-- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
 - e397e35: FIXED: fix spacing between `RadioButton`s and `Checkbox`es when inside a `SidebarSection`
 - 68780ea: FIXED: fix bug that caused `AppShell` to always acts as if the `startOpen` prop was `false`
 

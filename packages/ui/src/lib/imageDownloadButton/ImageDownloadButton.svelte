@@ -3,7 +3,12 @@
 	 *
 	 * **Note**: This will not convert a non svg element into an svg, but will download an existing svg element as an svg file.
 	 *
-	 * To ignore elements apply a data attribute "data-capture-ignore" and they will not be included in the download
+	 * To hide elements, apply the attribute `data-capture-ignore` and they will not be included in the downloaded image.
+	 * Note that this will not work for elements within an SVG (e.g., `<rect>`, `<text>`, `<line>`).
+	 * To hide only part of an SVG, separate the content into two SVG elements, and superimpose them by
+	 * placing them inside a div and applying the classes `absolute inset-0 pointer-events-none` to the second.
+	 * You can then place the SVG that should be hidden into an SVG with the `data-capture-ignore` attribute applied.
+	 *
 	 * @component
 	 */
 
@@ -42,6 +47,11 @@
 	 * If converting an SVG to PNG, the resolution of the PNG will be `scaleFactor` times the size at which the SVG was displayed at.
 	 */
 	export let scaleFactor = 2;
+
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
 
 	const downloadFromURL = (url: string) => {
 		const initialName = filename || 'image';
@@ -92,6 +102,40 @@
 		return node;
 	};
 
+	const sum = (vals: number[]) => vals.reduce((total, current) => total + +current, 0);
+
+	const getHeight = (div: HTMLElement) => {
+		// N.B. wwe need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
+		const display = window.getComputedStyle(div).display;
+
+		if (display !== 'contents') {
+			return div.clientHeight;
+		}
+
+		const children: Element[] = Array.from(div.children);
+
+		const heights = children.map((c: Element) => +c.clientHeight);
+		const marginTop = children.map(
+			(c: Element) => +window.getComputedStyle(c).marginTop.replace('px', '')
+		);
+		const marginBottom = children.map(
+			(c: Element) => +window.getComputedStyle(c).marginBottom.replace('px', '')
+		);
+
+		return sum([...heights, ...marginTop, ...marginBottom]);
+	};
+
+	const getWidth = (div: HTMLElement) => {
+		// N.B. we need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
+		const display = window.getComputedStyle(div).display;
+
+		if (display !== 'contents') {
+			return div.clientWidth;
+		}
+
+		return Array.from(div.children)[0]?.clientWidth;
+	};
+
 	const download = async () => {
 		const captureOptions = {
 			style: {
@@ -100,8 +144,8 @@
 
 			// N.B. if we don't specify the width/height, then html-to-image will use the size of the HTML element before
 			// adjusting the style to add the padding. This would result in the content being truncated.
-			width: 2 * padding + htmlNode.clientWidth,
-			height: 2 * padding + htmlNode.clientHeight,
+			width: 2 * padding + getWidth(htmlNode),
+			height: 2 * padding + getHeight(htmlNode),
 
 			filter
 		};
@@ -212,6 +256,7 @@
 	menuTitle="Select image format"
 	onClick={download}
 	{disabled}
+	{fullWidth}
 	{...$$restProps}
 >
 	<!-- contents of the button -->

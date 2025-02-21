@@ -3,7 +3,7 @@
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
 	export const meta = {
-		title: 'Charts/ObservablePlotInner',
+		title: 'Charts/Components/ObservablePlotInner',
 		component: ObservablePlotInner,
 
 		argTypes: {
@@ -20,7 +20,6 @@
 <script lang="ts">
 	import * as Plot from '@observablehq/plot';
 
-	import { currentThemeMode } from '@ldn-viz/ui';
 	import { getDefaultPlotStyles } from '../observablePlotFragments/observablePlotFragments';
 
 	import { penguins } from '../../data/demoData';
@@ -37,7 +36,7 @@
 		defaultYAxis,
 		defaultYScale,
 		defaultRule
-	} = getDefaultPlotStyles($currentThemeMode));
+	} = getDefaultPlotStyles());
 
 	$: spec = {
 		style: {

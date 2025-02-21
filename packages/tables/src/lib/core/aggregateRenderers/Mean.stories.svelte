@@ -1,7 +1,7 @@
 <script context="module">
 	import Mean from './Mean.svelte';
 	export const meta = {
-		title: 'Tables/AggregateRenderers/Mean',
+		title: 'Tables/Components/AggregateRenderers/Mean',
 		component: Mean,
 
 		args: {

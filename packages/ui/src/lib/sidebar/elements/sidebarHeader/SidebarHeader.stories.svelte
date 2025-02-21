@@ -2,14 +2,14 @@
 	import SidebarHeader from './SidebarHeader.svelte';
 
 	export const meta = {
-		title: 'Ui/Sidebar/elements/SidebarHeader',
+		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarHeader',
 		component: SidebarHeader
 	};
 </script>
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import SidebarHint from '../sidebarHint/SidebarHint.svelte';
+	import Overlay from '../../../overlay/Overlay.svelte';
 </script>
 
 <Template let:args>
@@ -37,13 +37,19 @@
 
 <Story name="With Hint" source>
 	<SidebarHeader title="Main sidebar title">
-		<SidebarHint slot="hint" hintType="modal" modalTitle="About" modalWidth="5xl">
+		<Overlay
+			slot="hint"
+			overlayType="modal"
+			modalTitle="About"
+			modalDescription="This modal contains information about the application"
+			modalWidth="5xl"
+		>
 			<p class="mb-4">Any content you want can go here</p>
 			<p>
 				Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
 				venenatis sapien. Etiam venenatis felis.
 			</p>
-		</SidebarHint>
+		</Overlay>
 	</SidebarHeader>
 </Story>
 

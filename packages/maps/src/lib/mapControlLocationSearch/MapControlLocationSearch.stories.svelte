@@ -2,7 +2,7 @@
 	import MapControlLocationSearch from './MapControlLocationSearch.svelte';
 
 	export const meta = {
-		title: 'Maps/MapControls/MapControlLocationSearch',
+		title: 'Maps/Components/MapControls/MapControlLocationSearch',
 		component: MapControlLocationSearch,
 		parameters: {
 			layout: 'fullscreen'
@@ -11,15 +11,15 @@
 </script>
 
 <script lang="ts">
-	import { Template, Story } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
+	import type { GeolocationSearchError, OnGeolocationSearchError } from '@ldn-viz/ui';
 	import { MapGeocoderAdapterMapBox } from './MapGeocoderAdapterMapBox';
-	import type { OnGeolocationSearchError, GeolocationSearchError } from '@ldn-viz/ui';
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 	const adapter = new MapGeocoderAdapterMapBox(
@@ -39,7 +39,6 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
@@ -54,7 +53,6 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
@@ -73,12 +71,33 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 		>
 			<MapControlGroup position="TopLeft">
 				<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
+			</MapControlGroup>
+		</Map>
+	</div>
+</Story>
+
+<!--
+This story shows how you can provide callback functions to be called when the user selects a location from the search results, or clears the selection.
+-->
+<Story name="Location Search - callback functions">
+	<div class="w-[100dvw] h-[100dvh]">
+		<Map
+			options={{
+				transformRequest
+			}}
+		>
+			<MapControlGroup position="TopLeft">
+				<MapControlLocationSearch
+					{adapter}
+					{onSearchError}
+					onSearchClear={() => console.log('Cleared search')}
+					onLocationFound={(location) => console.log('Location selected:', location)}
+				/>
 			</MapControlGroup>
 		</Map>
 	</div>

@@ -2,7 +2,7 @@
 	import MapMarkerPlacement from './MapMarkerPlacement.svelte';
 
 	export const meta = {
-		title: 'Maps/MapMarker/elements/MapMarkerPlacement',
+		title: 'Maps/Components/MapMarker/elements/MapMarkerPlacement',
 		component: MapMarkerPlacement,
 		parameters: {
 			layout: 'full'
@@ -18,11 +18,13 @@
 </script>
 
 <script>
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../../../map/Map.svelte';
+	import Map from '../../../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../../../map/util';
+
 	import loadTestLayers from '../../../loadTestLayers';
 	import MapMarker from '../../MapMarker.svelte';
 	import TestTooltipCenterAboveFeature from './TestTooltipCenterAboveFeature.svelte';

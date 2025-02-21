@@ -1,7 +1,7 @@
 <script context="module">
 	import TextCellWithUncertainty from './TextCellWithUncertainty.svelte';
 	export const meta = {
-		title: 'Tables/Renderers/TextCellWithUncertainty',
+		title: 'Tables/Components/Renderers/TextCellWithUncertainty',
 		component: TextCellWithUncertainty,
 
 		argTypes: {

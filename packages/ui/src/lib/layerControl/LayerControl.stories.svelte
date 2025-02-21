@@ -3,25 +3,27 @@
 	import LayerControl from './LayerControl.svelte';
 
 	export const meta = {
-		title: 'Ui/LayerControl',
+		title: 'Ui/Components/Layer Controls/LayerControl',
 		component: LayerControl
 	};
 </script>
 
 <script lang="ts">
+	import { colorTokenNameToRGBArray, currentTheme, tokenNameToValue } from '../theme/themeStore';
+
 	let layerStates = {
 		boroughs: {
-			color: '#ffcc00',
+			colorName: 'data.primary',
 			visible: true,
 			opacity: 1.0
 		},
 		imd: {
-			color: '#DCA000',
+			colorName: 'data.categorical.red',
 			visible: true,
 			opacity: 1.0
 		},
 		fuel_poverty: {
-			color: '#E0001B',
+			colorName: 'data.categorical.orange',
 			visible: true,
 			opacity: 1.0
 		}
@@ -35,6 +37,13 @@
 		<LayerControl bind:state {...args} />
 	</div>
 	<pre class="mt-4 text-xs">{JSON.stringify(state, null, 2)}</pre>
+
+	<p>
+		Color is: {tokenNameToValue(state.colorName, $currentTheme)} or [{colorTokenNameToRGBArray(
+			state.colorName,
+			$currentTheme
+		)}]
+	</p>
 </Template>
 
 <Story name="Default" source />
@@ -52,19 +61,25 @@
 </Story>
 
 <Story name="Hide color control" source>
-	<LayerControl bind:state label="Borough" hideColorControl />
+	<LayerControl bind:state label="Borough" disableColorControl />
 </Story>
 
 <Story name="Hide opacity control" source>
-	<LayerControl bind:state label="Borough" hideOpacityControl />
+	<LayerControl bind:state label="Borough" disableOpacityControl />
 </Story>
 
 <Story name="Hide size control" source>
-	<LayerControl bind:state label="Borough" hideSizeControl />
+	<LayerControl bind:state label="Borough" disableSizeControl />
 </Story>
 
 <Story name="Checkbox only" source>
-	<LayerControl bind:state label="Borough" hideOpacityControl hideColorControl hideSizeControl />
+	<LayerControl
+		bind:state
+		label="Borough"
+		disableOpacityControl
+		disableColorControl
+		disableSizeControl
+	/>
 </Story>
 
 <Story name="Multiple control instances" source>
@@ -81,76 +96,12 @@
 	</div>
 </Story>
 
-<!-- <Story name="More complete" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-	/>
-
-	<div>
-		Layer state is:
-
-		<pre>{JSON.stringify(state, null, 2)}</pre>
-	</div>
+<Story name="Disabled (Color)" source>
+	<LayerControl bind:state label="Borough" disableColorControl />
 </Story>
-
-<Story name="No opacity control" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideOpacityControl
-	/>
+<Story name="Disabled (Opacity)" source>
+	<LayerControl bind:state label="Borough" disableOpacityControl />
 </Story>
-
-<Story name="No color control" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideColorControl
-	/>
+<Story name="Disabled (Size)" source>
+	<LayerControl bind:state label="Borough" disableSizeControl />
 </Story>
-
-<Story name="No size control" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideSizeControl
-	/>
-</Story>
-
-<Story name="No controls - just the checkbox and help text" source>
-	<LayerControl
-		bind:state
-		label="Borough"
-		hint="Boundaries of each of Greater London's 32 boroughs"
-		hideOpacityControl
-		hideColorControl
-		hideSizeControl
-	/>
-</Story>
-
-<Story name="Multiple controls" source>
-	<div class="space-y-1">
-		<LayerControl
-			bind:state={layerStates.boroughs}
-			label="Borough"
-			hint="Boundaries of each of Greater London's 32 boroughs"
-		/>
-		<LayerControl bind:state={layerStates.imd} label="IMD" hint="Index of Multiple Deprivation" />
-		<LayerControl
-			bind:state={layerStates.fuel_poverty}
-			label="Fuel Poverty"
-			hint="Percentage of households in fuel poverty"
-		/>
-
-		<div>
-			Layer states are:
-
-			<pre>{JSON.stringify(layerStates, null, 2)}</pre>
-		</div>
-	</div>
-</Story> -->

@@ -2,7 +2,7 @@
 	import NonIdealState from './NonIdealState.svelte';
 
 	export const meta = {
-		title: 'Ui/NonIdealState',
+		title: 'Ui/Components/NonIdealState',
 		component: NonIdealState
 	};
 </script>

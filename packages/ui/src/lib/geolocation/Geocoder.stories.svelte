@@ -3,7 +3,7 @@
 	import GeocoderSuggestionList from './GeocoderSuggestionList.svelte';
 
 	export const meta = {
-		title: 'Ui/Geocoder',
+		title: 'Ui/Components/Geocoder',
 		component: Geocoder,
 		parameters: {
 			layout: 'fullscreen'
@@ -15,11 +15,11 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { GeocoderAdapterList } from './GeocoderAdapterList';
 	import type {
+		Geolocation,
 		GeolocationCoords,
 		GeolocationNamed,
-		OnGeolocationSearchResult,
 		OnGeolocationSearchError,
-		Geolocation
+		OnGeolocationSearchResult
 	} from './types';
 
 	let suggestions: undefined | GeolocationNamed[];

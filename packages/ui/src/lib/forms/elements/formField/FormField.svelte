@@ -15,8 +15,7 @@
 
 	import { getContext } from 'svelte';
 	import UniformInput from '../../../uniformInput/UniformInput.svelte';
-	import type { FormValueStore, FormErrorStore } from '../../types';
-	import type { FormFieldProps } from '../../types';
+	import type { FormErrorStore, FormFieldProps, FormValueStore } from '../../types';
 
 	const valueStore: FormValueStore = getContext('formValueStore');
 	const errorStore: FormErrorStore = getContext('formErrorStore');
@@ -91,7 +90,6 @@
 	 * - `hintLabel` (string, optional) - if applicable, text to be displayed next to icon in tooltip trigger
 	 */
 	export let options: FormFieldProps['options'] = [];
-
 	/**
 	 * Help text to be displayed in tooltip
 	 */

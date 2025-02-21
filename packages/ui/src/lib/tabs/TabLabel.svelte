@@ -27,7 +27,7 @@
 	};
 
 	$: tabLabelClasses = classNames(
-		'bg-color-action-background-secondary hover:bg-color-action-background-secondary-hover text-color-text-primary',
+		'bg-color-input-background-off text-color-text-primary underline hover:bg-color-input-background-hover hover:no-underline',
 		orientationClasses[orientation]
 	);
 </script>
@@ -40,7 +40,7 @@
 	class={classNames(
 		tabLabelClasses,
 		tabId === $selectedValue
-			? '!bg-color-action-background-primary cursor-default text-color-static-white'
+			? '!bg-color-input-background-active cursor-default !text-color-static-white no-underline'
 			: 'cursor-pointer'
 	)}
 >

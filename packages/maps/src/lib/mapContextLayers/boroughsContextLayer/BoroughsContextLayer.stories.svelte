@@ -31,7 +31,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapContextLayers/BoroughsContextLayer',
+		title: 'Maps/Components/MapContextLayers/BoroughsContextLayer',
 		component: BoroughsContextLayer,
 		parameters: {
 			layout: 'full'
@@ -48,7 +48,8 @@
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import Map, { appendOSKeyToUrl } from '../../map/Map.svelte';
+	import Map from '../../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../../map/util';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>

@@ -2,7 +2,7 @@
 	import MapDeckOverlay from './MapDeckOverlay.svelte';
 
 	export const meta = {
-		title: 'Maps/MapDeckOverlay',
+		title: 'Maps/Components/MapDeckOverlay',
 		component: MapDeckOverlay
 	};
 </script>
@@ -12,8 +12,9 @@
 
 	import { Story } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 	import { Checkbox } from '@ldn-viz/ui';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 

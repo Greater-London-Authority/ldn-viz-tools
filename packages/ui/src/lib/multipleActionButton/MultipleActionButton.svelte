@@ -19,6 +19,8 @@
 
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { classNames } from '../utils/classNames';
+
 	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
 	import { randomId } from '../utils/randomId';
@@ -82,19 +84,19 @@
 	export let variant: ButtonProps['variant'] = 'solid';
 
 	/**
-	 * Determines how much visual emphasis is placed on the button.
+	 * Determines the visual emphasis is placed on the button.
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
-
-	/**
-	 * Provides ability to modify appearance to represent success/error/warning conditions.
-	 */
-	export let condition: ButtonProps['condition'] = 'default';
 
 	/**
 	 * Sets the size of the button.
 	 */
 	export let size: ButtonProps['size'] = 'md';
+
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
 
 	/**
 	 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
@@ -110,11 +112,11 @@
 		on:click={() => onClick(state.id)}
 		{variant}
 		{emphasis}
-		{condition}
 		{size}
 		{disabled}
 		{title}
 		{id}
+		{fullWidth}
 	>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
@@ -123,13 +125,13 @@
 		</div>
 	</Button>
 {:else}
-	<div class="flex items-center gap-0">
+	<div class={classNames('flex items-center gap-0 w-full', fullWidth ? 'w-full' : '')}>
 		<Button
 			on:click={() => onClick(state.id)}
 			{variant}
 			{emphasis}
-			{condition}
 			{size}
+			{fullWidth}
 			{disabled}
 			{title}
 			{id}
@@ -145,12 +147,11 @@
 		<Button
 			variant="square"
 			{emphasis}
-			{condition}
 			{size}
 			{disabled}
-			customAction={$trigger.action}
+			action={$trigger.action}
 			actionProps={$trigger}
-			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
+			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'}`}
 			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 		>
 			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />

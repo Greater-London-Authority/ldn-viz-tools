@@ -2,7 +2,7 @@
 	import MapControlBorough from './MapControlBorough.svelte';
 
 	export const meta = {
-		title: 'Maps/MapControls/MapControlBorough',
+		title: 'Maps/Components/MapControls/MapControlBorough',
 		component: MapControlBorough,
 		parameters: {
 			layout: 'fullscreen'
@@ -11,19 +11,19 @@
 </script>
 
 <script lang="ts">
-	import { Template, Story } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import * as os_light_vts from '../themes/os_light_vts.json';
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import type { MapLibreStore } from '../map/types';
+	import { appendOSKeyToUrl } from '../map/util';
 
-	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
-	import { type Writable, writable } from 'svelte/store';
-	import type { Map as MaplibreglMap } from 'maplibre-gl';
+	import { writable } from 'svelte/store';
 	import BoroughsContextLayer from '../mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
+	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 
-	let mapStore: Writable<MaplibreglMap> = writable();
+	let mapStore: MapLibreStore = writable();
 </script>
 
 <Template let:args>
@@ -34,7 +34,6 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest
 			}}
 			bind:mapStore

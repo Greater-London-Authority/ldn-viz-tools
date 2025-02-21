@@ -1,7 +1,7 @@
 <script context="module">
 	import DateCell from './DateCell.svelte';
 	export const meta = {
-		title: 'Tables/Renderers/DateCell',
+		title: 'Tables/Components/Renderers/DateCell',
 		component: DateCell,
 
 		argTypes: {

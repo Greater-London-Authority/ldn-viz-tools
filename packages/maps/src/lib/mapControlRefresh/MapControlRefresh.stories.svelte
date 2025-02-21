@@ -1,22 +1,24 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import * as os_light_vts from '../themes/os_light_vts.json';
-
-	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+
+	export const meta = {
+		title: 'Maps/Components/MapControls/MapControlRefresh',
+		component: MapControlRefresh,
+		parameters: {
+			layout: 'full'
+		}
+	};
 </script>
 
-<Meta
-	title="Maps/MapControls/MapControlRefresh"
-	component={MapControlRefresh}
-	parameters={{
-		layout: 'fullscreen'
-	}}
-/>
+<script>
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
+
+	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
+</script>
 
 <Template let:args>
 	<MapControlRefresh {...args} />
@@ -33,7 +35,6 @@
 
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>

@@ -2,7 +2,7 @@
 	import GoodOrBad from './GoodOrBad.svelte';
 
 	export const meta = {
-		title: 'Tables/Renderers/GoodOrBad',
+		title: 'Tables/Components/Renderers/GoodOrBad',
 		component: GoodOrBad,
 		argTypes: {
 			goodIs: {
