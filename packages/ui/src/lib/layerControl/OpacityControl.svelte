@@ -10,7 +10,7 @@
 
 	export let label;
 
-	export let opacity = 1;
+	export let opacity = '1';
 	export let disabled = false;
 </script>
 
@@ -23,12 +23,11 @@
 	/>
 {:else}
 	<Popover>
-		<Trigger slot="trigger" size="xs">
+		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} opacity control.">
 			<OpacityIcon
 				class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 				aria-hidden="true"
 			/>
-			<span class="sr-only">Click to open {label} opacity control.</span>
 		</Trigger>
 
 		<svelte:fragment slot="title">Opacity</svelte:fragment>

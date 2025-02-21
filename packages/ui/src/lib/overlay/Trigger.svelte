@@ -12,6 +12,11 @@
 	export let hintLabel = 'More Info';
 
 	/**
+	 * Label for use by screen readers.
+	 */
+	export let ariaLabel = '';
+
+	/**
 	 * text size for the tooltip target
 	 */
 	export let size: ButtonProps['size'] = 'sm';
@@ -39,7 +44,7 @@
 	const { action, actionProps } = getContext<TriggerFuncs>('triggerFuncs');
 </script>
 
-<Button {size} class={$$props.class} {variant} {emphasis} {slim} {action} {actionProps}>
+<Button {size} class={$$props.class} {variant} {emphasis} {slim} {ariaLabel} {action} {actionProps}>
 	<slot>
 		{hintLabel}
 

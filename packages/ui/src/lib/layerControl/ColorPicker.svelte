@@ -39,10 +39,9 @@
 	/>
 {:else}
 	<Popover bind:isOpen>
-		<Trigger slot="trigger" size="xs">
+		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} layer colour picker">
 			<div
 				class="w-[22px] h-[22px] relative border rounded-full"
-				aria-label="Click to open {label} layer color picker "
 				style:background={tokenNameToValue(colorName, $currentTheme)}
 			/>
 		</Trigger>

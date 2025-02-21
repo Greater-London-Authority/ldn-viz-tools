@@ -26,12 +26,12 @@
 	/>
 {:else}
 	<Popover>
-		<Trigger slot="trigger" size="xs">
+		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} marker size control">
 			<ResizeIcon
 				class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
 				aria-hidden="true"
 			/>
-			<span class="sr-only">Click to open {label} marker size control</span>
+			<!-- <span class="sr-only">Click to open {label} marker size control</span> -->
 		</Trigger>
 
 		<svelte:fragment slot="title">Marker size</svelte:fragment>
