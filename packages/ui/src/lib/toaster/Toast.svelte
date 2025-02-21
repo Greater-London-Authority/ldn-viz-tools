@@ -27,7 +27,7 @@
 </script>
 
 <div
-	role="dialog"
+	role="alert"
 	id={message.id}
 	class="shadow-lg text-color-text-primary"
 	out:fade={{ duration: 100 }}
