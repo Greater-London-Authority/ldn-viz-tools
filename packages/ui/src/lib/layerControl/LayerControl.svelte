@@ -155,7 +155,12 @@
 
 	{#if hint}
 		<Overlay>
-			<Trigger slot="trigger" size="xs" {hintLabel} />
+			<Trigger
+				slot="trigger"
+				size="xs"
+				{hintLabel}
+				ariaLabel={!hintLabel && label ? label : null}
+			/>
 			{hint}
 		</Overlay>
 	{/if}

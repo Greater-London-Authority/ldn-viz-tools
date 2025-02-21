@@ -77,6 +77,7 @@
 
 {#if $open}
 	<div
+		role="dialog"
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
