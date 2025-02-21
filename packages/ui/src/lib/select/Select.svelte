@@ -209,6 +209,7 @@
 	<div>
 		<SvelteSelect
 			{name}
+			{id}
 			label={itemLabelField}
 			class="form-select"
 			{items}
