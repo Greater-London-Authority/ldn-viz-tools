@@ -10,7 +10,7 @@
 
 	export let label;
 
-	export let opacity = '1';
+	export let opacity = 1;
 	export let disabled = false;
 </script>
 
