@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-FIXED `Toast` component accessibility
+FIXED: changed ARIA role of `Toast` from `dialog` to `alert`
