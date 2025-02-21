@@ -43,7 +43,7 @@
 </script>
 
 <ul
-	class="absolute top-11 left-0 bg-color-input-background text-color-text-primary text-sm w-full shadow-lg z-40"
+	class="absolute top-11 left-0 bg-color-input-background text-color-text-primary text-sm w-full shadow-lg z-40 overflow-y-scroll max-height-[60vh]"
 >
 	{#if suggestions.length === 0}
 		<li class="w-full px-2.5 py-1.5">
