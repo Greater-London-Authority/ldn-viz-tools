@@ -3,7 +3,6 @@ import type { DecoratorFunction, Renderer } from '@storybook/types';
 
 import { userThemeSelectionStore } from '@ldn-viz/ui';
 import { DecoratorHelpers } from '@storybook/addon-themes';
-import { get } from 'svelte/store';
 
 const { initializeThemeState, pluckThemeFromContext } = DecoratorHelpers;
 

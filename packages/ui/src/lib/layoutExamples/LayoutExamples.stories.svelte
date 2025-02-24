@@ -9,17 +9,12 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
 	import AppShell from '../appShell/AppShell.svelte';
 	import Overlay from '../overlay/Overlay.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import SidebarHeader from '../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 	import SidebarSection from '../sidebar/elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from '../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
-
-	const isOpen = writable(true);
-
-	let selectedValue = 'markers';
 </script>
 
 <Template let:args>

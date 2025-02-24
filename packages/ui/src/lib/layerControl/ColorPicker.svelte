@@ -39,17 +39,16 @@
 	/>
 {:else}
 	<Popover bind:isOpen>
-		<Trigger slot="trigger" size="xs">
+		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} layer colour picker">
 			<div
 				class="w-[22px] h-[22px] relative border rounded-full"
-				aria-label="Click to open {label} layer color picker "
 				style:background={tokenNameToValue(colorName, $currentTheme)}
 			/>
 		</Trigger>
 
-		<svelte:fragment slot="title">Color</svelte:fragment>
+		<svelte:fragment slot="title">Colour</svelte:fragment>
 
-		<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
+		<span class="text-xs mb-2 inline-block">Click to assign a colour to this layer.</span>
 
 		<div class="flex flex-wrap gap-2">
 			{#each colorNames as colorOption}

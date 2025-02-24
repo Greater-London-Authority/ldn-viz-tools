@@ -43,7 +43,7 @@
 	/**
 	 * "If your object is part of a larger website, the name which should be displayed for the overall site"
 	 */
-	export let site = 'GLA Intelligence and Analysis Unit';
+	export let site = 'GLA City Intelligence Unit';
 
 	/**
 	 * "An image URL which should represent your object within the graph".

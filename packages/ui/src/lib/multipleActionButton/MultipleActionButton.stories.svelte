@@ -12,6 +12,8 @@
 
 	import { ArrowDownTray } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Modal from '../modal/Modal.svelte';
+	import Button from '../button/Button.svelte';
 
 	const options = [
 		{
@@ -29,6 +31,8 @@
 				'A vector image format that can be edited in software such as Adobe Illustrator.'
 		}
 	];
+
+	let isOpen = false;
 </script>
 
 <Template let:args>
@@ -69,4 +73,18 @@
 			<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 mr-2" aria-hidden="true" />
 		</svelte:fragment>
 	</MultipleActionButton>
+</Story>
+
+<Story name="In modal">
+	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
+
+	<Modal title="A modal containing a DataDownloadButton" {isOpen}>
+		<div class="h-72">
+			<MultipleActionButton
+				{options}
+				menuTitle="Select image format"
+				onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+			/>
+		</div>
+	</Modal>
 </Story>
