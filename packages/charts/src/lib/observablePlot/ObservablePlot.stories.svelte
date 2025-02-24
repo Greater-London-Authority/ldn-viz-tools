@@ -56,7 +56,7 @@
 			Plot.ruleX([0], { ...theme.defaultRule }),
 			Plot.dot(penguins, { ...theme.defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
 			Plot.axisX({ ...theme.defaultXAxis }),
-			Plot.axisY({ ...theme.defaultYAxis, label: 'culmen_depth_mm' }),
+			Plot.axisY({ ...theme.defaultYAxis, label: 'culmen_depth_mm' })
 		]
 	};
 
