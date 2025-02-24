@@ -1,5 +1,21 @@
 # ldn-viz-tools-ui
 
+## 16.1.0
+
+### Minor Changes
+
+- 3d94c5d: FIXED: `Popover` component is now accessible to screen readers
+- 146ce20: FIXED: changed ARIA role of `Toast` from `dialog` to `alert`
+- 5d9a21b: CHANGED: set `overflow-y: scroll` on list of geocoder suggestions and limit height to enable scrolling if `maxSuggestions` is set to a large value
+- f672c83: ACCESSIBILITY: added `role="dialog"` to `Popover`
+- bfb3530: FIXED: adjust z-index of `MultipleActionButton` drop-down menu so it opens in front of modal
+- d15e1f3: ADDED: `id` to `SvelteSelect` inside `Select` component
+- f672c83: ACCESSIBILITY: added `ariaLabel` to `Trigger` component for use by `ColorPicker`, `ResizeControl`, `OpacityControl` and `LayerControl` components
+
+### Patch Changes
+
+- a15655b: ADDED: change default site name in `PageMetadata` from "GLA Intelligence and Analysis Unit" to "GLA City Intelligence Unit"
+
 ## 16.0.1
 
 ### Patch Changes
