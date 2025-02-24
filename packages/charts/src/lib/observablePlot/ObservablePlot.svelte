@@ -148,7 +148,12 @@
 			{ariaHidden}
 			ariaDescribedBy="{id}-description"
 			{id}
-		/>
+		>
+
+		<svelte:fragment slot="tooltip">
+			<slot name="tooltip" />
+		</svelte:fragment>
+		</ObservablePlotInner>
 
 		<p slot="description" class="sr-only" id="{id}-description">
 			{chartDescription}
