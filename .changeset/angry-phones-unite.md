@@ -2,4 +2,6 @@
 '@ldn-viz/ui': minor
 ---
 
-Accessibility: Updated `AsyncButton`, `NonIdealState` and `Spinner` components to announce state changes and implement reduced motion
+ADDED: `LoadingIndicator` component to wrap around `Spinner` and display static icon in place of spinner if user prefers reduced motion
+
+Accessibility: Updated `AsyncButton`, `NonIdealState` and `Geolocator` components to announce state changes and use `LoadingIndicator` to ensure correct implementation of reduced motion

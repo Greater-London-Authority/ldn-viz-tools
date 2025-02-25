@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	/**
 	 * The `<AsyncButton>` component wraps the `<button>` component for slow
-	 * asynchronous operations such as _HTTP_ requests. A `<Spinner>` is shown
+	 * asynchronous operations such as _HTTP_ requests. A `<LoadingIndicator>` is shown
 	 * as the button label while the `onClick` function is executing. The button
 	 * is also disabled during this period.
 	 *
@@ -37,12 +37,8 @@
 </script>
 
 <script lang="ts">
-	import { prefersReducedMotion } from '../userPreference/mediaQueryStore';
-
-	import { Clock } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
-	import Spinner from '../spinners/Spinner.svelte';
+	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 	import type { ButtonProps } from './Button.svelte';
 
 	export let onClick: FormButtonhandler;
@@ -125,20 +121,11 @@
 	>
 		{#if working}
 			<div class="relative">
-				{#if $prefersReducedMotion}
-					<Icon
-						src={Clock}
-						class="h-6 w-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-						{title}
-						aria-hidden="false"
-					/>
-				{:else}
-					<Spinner
-						arcColorClass={spinnerColorClasses}
-						class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
-						{title}
-					/>
-				{/if}
+				<LoadingIndicator
+					{title}
+					arcColorClass={spinnerColorClasses}
+					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
+				/>
 				<!-- This gives the outer div the correct size so the spinner is centered -->
 				<span class="invisible">
 					<!-- Button label and/or icon. -->

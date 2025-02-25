@@ -3,15 +3,13 @@
 	 * The `<NonIdealState>` component acts as a placeholder for when other components are not ready render, or are prevented from successfully rendering by an error.
 	 * It can include an icon or spinner, and explanatory text.
 	 *
-	 * **Alternatives**: if no explanatory text is required, and a placeholder is not needed to prevent content re-flows, then consider using the [Spinner](./?path=/docs/ui-components-spinner--documentation) component.
+	 * **Alternatives**: if no explanatory text is required, and a placeholder is not needed to prevent content re-flows, then consider using the [LoadingIndicator](./?path=/docs/ui-components-loadingindicator--documentation) component.
 	 * @component
 	 */
 
-	import { Clock, ExclamationTriangle } from '@steeze-ui/heroicons';
+	import { ExclamationTriangle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
-	import Spinner from '../spinners/Spinner.svelte';
-	import { prefersReducedMotion } from '../userPreference/mediaQueryStore';
+	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 
 	/**
 	 * If `true`, then a spinner is displayed in place of the icon.
@@ -22,11 +20,8 @@
 <div
 	class="flex flex-col items-center justify-center text-center text-color-text-secondary gap-2 bg-color-ui-background-neutral border border-color-ui-border-secondary px-2 py-2 w-full h-full"
 >
-	{#if spinner && !$prefersReducedMotion}
-		<Spinner class="w-12" />
-	{:else if spinner && $prefersReducedMotion}
-		<!-- TODO replace with hourglass -->
-		<Icon src={Clock} theme="solid" class="w-6 h-6" />
+	{#if spinner}
+		<LoadingIndicator class="w-12 h-12" />
 	{:else}
 		<!-- contains the icon -->
 		<slot name="icon">
