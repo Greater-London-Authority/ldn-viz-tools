@@ -7,7 +7,7 @@
 	 */
 
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 	import { tabFocus } from './actions';
@@ -27,7 +27,7 @@
 	/**
 	 * `id` of the currently selected tab
 	 */
-	export let selectedValue: string | undefined = undefined;
+	export let selectedValue: Tab['id'] = tabs[0].id;
 
 	/**
 	 * orientation of the list of tabs
@@ -37,27 +37,17 @@
 	/**
 	 * Enables screen reader to describe purpose of tab list. Required.
 	 */
-	export let ariaLabel: string = '';
+	export let ariaLabel: string;
 
-	const val: Writable<string | undefined> = writable(selectedValue);
+	const val: Writable<Tab['id']> = writable(selectedValue);
 	val.subscribe((newVal) => (selectedValue = newVal));
 
-	const respondToExternalChange = (newVal: string | undefined) => {
+	const respondToExternalChange = (newVal: Tab['id']) => {
 		if ($val !== newVal) {
 			$val = newVal;
 		}
 	};
 	$: respondToExternalChange(selectedValue);
-
-	const setDefaultTab = (tabs: { id: string | undefined }[]) => {
-		if (!selectedValue && tabs) {
-			selectedValue = tabs[0].id;
-		}
-	};
-
-	onMount(() => {
-		setDefaultTab(tabs);
-	});
 
 	setContext('tabContext', {
 		selectedValue: val,
@@ -75,7 +65,7 @@
 		$$props.class
 	);
 
-	const handleSelect = (id: string) => {
+	const handleSelect = (id: Tab['id']) => {
 		selectedValue = id;
 	};
 </script>
