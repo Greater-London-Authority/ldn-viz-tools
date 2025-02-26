@@ -21,19 +21,19 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import TabPanel from './TabPanel.svelte';
+
 	let selectedValue: string | undefined = undefined;
+
+	let tabs = [
+		{ id: 'aggregates', label: 'Aggregated counts across London', content: 'content' },
+		{ id: 'chargers', label: 'Details of chargers', content: 'content' },
+		{ id: 'averages', label: 'Averages of charge events', content: 'content' },
+		{ id: 'histograms', label: 'Histograms of charge events', content: 'content' }
+	];
 </script>
 
 <Template let:args>
-	<TabList bind:selectedValue ariaLabel="View information on EV chargers" {...args}>
-		<TabLabel tabPanelId="aggregates-panel" tabId="aggregates"
-			>Aggregated counts across London</TabLabel
-		>
-		<TabLabel tabPanelId="chargers-panel" tabId="chargers">Details of chargers</TabLabel>
-		<TabLabel tabPanelId="averages-panel" tabId="averages">Averages of charge events</TabLabel>
-		<TabLabel tabPanelId="histograms-panel" tabId="histograms">Histograms of charge events</TabLabel
-		>
-	</TabList>
+	<TabList bind:selectedValue ariaLabel="View information on EV chargers" {...args} />
 
 	{#if selectedValue === 'aggregates'}
 		<TabPanel tabPanelId="aggregates-panel" tabId="aggregates"
@@ -54,9 +54,9 @@
 	{/if}
 </Template>
 
-<Story name="Default" source />
+<Story name="Default" source args={{ tabs: tabs }} />
 
-<Story name="Vertical">
+<!-- <Story name="Vertical">
 	<div class="flex">
 		<TabList bind:selectedValue orientation="vertical" ariaLabel="View information on EV chargers">
 			<TabLabel tabPanelId="aggregates-panel-2" tabId="aggregates"
@@ -162,4 +162,4 @@
 	{:else if selectedValue === 'layers'}
 		<TabPanel tabPanelId="layers-panel" tabId="layers">You can see layers in this tab!</TabPanel>
 	{/if}
-</Story>
+</Story> -->
