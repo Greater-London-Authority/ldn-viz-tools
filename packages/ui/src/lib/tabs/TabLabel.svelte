@@ -27,9 +27,14 @@
 		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-action-primary-focussed focus:ring-2 focus:outline-none focus:ring-color-ui-background-primary',
 		orientationClasses[orientation]
 	);
+
+	const handleSelect = () => {
+		$selectedValue = tabId;
+	};
 </script>
 
 <button
+	on:click={() => handleSelect()}
 	id={tabId}
 	role="tab"
 	aria-controls={`${tabId}-panel`}
