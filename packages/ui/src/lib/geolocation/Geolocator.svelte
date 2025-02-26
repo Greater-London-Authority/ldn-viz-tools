@@ -10,7 +10,7 @@
 	 * @component
 	 */
 
-	import { Button, Modal, Spinner } from '@ldn-viz/ui';
+	import { Button, Modal } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';

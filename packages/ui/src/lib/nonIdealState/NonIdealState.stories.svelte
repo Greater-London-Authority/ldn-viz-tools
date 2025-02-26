@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { Clock, QuestionMarkCircle } from '@steeze-ui/heroicons';
+	import { QuestionMarkCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 </script>
@@ -62,7 +62,7 @@ Spinner"
 	</div>
 </Story>
 
-<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`.  -->
+<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this in Chrome, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`.  -->
 <Story name="Reduced motion">
 	<div class="w-96 h-96">
 		<NonIdealState spinner>

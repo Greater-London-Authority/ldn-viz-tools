@@ -107,7 +107,7 @@
 	</div>
 </Story>
 
-<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`.  -->
+<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this in Chrome, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`.  -->
 <Story name="Reduced motion">
 	<AsyncButton onClick={waitFiveSeconds} class="capitalize">Click me!</AsyncButton>
 </Story>
