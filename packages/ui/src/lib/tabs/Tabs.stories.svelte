@@ -1,11 +1,11 @@
 <script context="module">
-	import TabLabel from './TabLabel.svelte';
+	import TabPanel from './TabLabel.svelte';
 	import TabList from './TabList.svelte';
 
 	export const meta = {
 		title: 'Ui/Components/Tabs',
-		component: TabList,
-		subcomponents: { TabLabel },
+		component: Tabs,
+		subcomponents: { TabPanel, TabList },
 
 		argTypes: {
 			orientation: {
@@ -17,44 +17,39 @@
 </script>
 
 <script lang="ts">
-	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import TabPanel from './TabPanel.svelte';
+	import Tabs from './Tabs.svelte';
+	//Example components passed to panel In reality these would be contained in your app
+	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
+	import Button from '../button/Button.svelte';
+	import NonIdealState from '../nonIdealState/NonIdealState.svelte';
 
 	let selectedValue: string | undefined = undefined;
 
 	let tabs = [
-		{ id: 'aggregates', label: 'Aggregated counts across London', content: 'content' },
-		{ id: 'chargers', label: 'Details of chargers', content: 'content' },
-		{ id: 'averages', label: 'Averages of charge events', content: 'content' },
-		{ id: 'histograms', label: 'Histograms of charge events', content: 'content' }
+		{ id: 'aggregates', label: 'Aggregated counts across London', content: NonIdealState },
+		{ id: 'chargers', label: 'Details of chargers', content: Button },
+		{ id: 'averages', label: 'Averages of charge events', content: NonIdealState },
+		{ id: 'histograms', label: 'Histograms of charge events', content: Button }
+	];
+
+	let tabsWithIcons = [
+		{ id: 'aggregates', label: 'Aggregates', icon: Square3Stack3d, content: NonIdealState },
+		{ id: 'chargers', label: 'Details', icon: MapIcon, content: Button },
+		{ id: 'averages', label: 'Averages', icon: Square3Stack3d, content: NonIdealState },
+		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Button }
 	];
 </script>
 
 <Template let:args>
-	<TabList bind:selectedValue ariaLabel="View information on EV chargers" {...args} />
-
-	{#if selectedValue === 'aggregates'}
-		<TabPanel tabPanelId="aggregates-panel" tabId="aggregates"
-			>You can see aggregated counts across London in this tab!</TabPanel
-		>
-	{:else if selectedValue === 'chargers'}
-		<TabPanel tabPanelId="chargers-panel" tabId="chargers"
-			>You can see details of chargers across London in this tab!</TabPanel
-		>
-	{:else if selectedValue === 'averages'}
-		<TabPanel tabPanelId="averages-panel" tabId="averages"
-			>You can see averages of charge events across London in this tab!</TabPanel
-		>
-	{:else if selectedValue === 'histograms'}
-		<TabPanel tabPanelId="histograms-panel" tabId="histograms"
-			>You can see histograms of charge events across London in this tab!</TabPanel
-		>
-	{/if}
+	<Tabs {...args} bind:selectedValue ariaLabel="View information on EV chargers" />
 </Template>
 
 <Story name="Default" source args={{ tabs: tabs }} />
+
+<Story name="Vertical" source args={{ tabs: tabs, orientation: 'vertical' }} />
+
+<Story name="Vertical with Icons" source args={{ tabs: tabsWithIcons, orientation: 'vertical' }} />
 
 <!-- <Story name="Vertical">
 	<div class="flex">
