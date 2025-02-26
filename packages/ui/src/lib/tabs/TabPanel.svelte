@@ -18,7 +18,7 @@
 	 */
 	export let tabIndex = 0;
 
-	const tabPanelClasses = classNames('bg-color-container-level-0 w-full', $$props.class);
+	const tabPanelClasses = classNames('bg-color-container-level-0 w-full ', $$props.class);
 </script>
 
 <div

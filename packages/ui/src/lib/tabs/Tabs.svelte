@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ComponentType } from 'svelte';
 	/**
-	 * The `<Tabs>` component creates an accessible set uf tabs comprised of a '<TabList>'' containing a set of '<TabLabel>'. Selecting a tab will make the relevant content in the associated '<TabPanel>' visible.
+	 * The `<Tabs>` component creates an accessible set uf tabs comprised of a `<TabList>` containing a set of `<TabLabel>`. Selecting a tab will make the relevant content in the associated `<TabPanel>` visible.
 	 *
 	 * @component
 	 */
@@ -17,7 +17,7 @@
 	 * * `label` (string): the text that should be displayed in the tab label
 	 * * `icon` (optional): an icon component (imported from `@steeze-ui/heroicons`) that should be rendered in the tab label
 	 * * `rawIcon` (optional): a Svelte component that directly renders an SVG that should be displayed in the tab label
-	 * * `content`: a Svelte component that should be rendered in the sidebar when this tab is selected
+	 * * `content`: a Svelte component that should be rendered in the sidebar when this tab is selected.
 	 */
 	export let tabs: Tab[] = [];
 

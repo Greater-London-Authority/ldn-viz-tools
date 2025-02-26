@@ -8,13 +8,13 @@
 
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import type { IconSource } from '@steeze-ui/heroicons/dist/types';
+	import { LogoCIU, LogoMayor, SidebarFooter, SidebarTabLabel, SidebarTabList } from '@ldn-viz/ui';
+	import type { IconSource } from '@steeze-ui/heroicons';
 	import { setContext, type ComponentType } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import { LogoCIU, LogoMayor, SidebarFooter, SidebarTabLabel, SidebarTabList } from '@ldn-viz/ui';
 
-	import Sidebar from './Sidebar.svelte';
 	import type { PlacementType } from '$lib/sidebar/types';
+	import Sidebar from './Sidebar.svelte';
 
 	/**
 	 * List of tabs. An array, of which each entry is an object with the following properties:

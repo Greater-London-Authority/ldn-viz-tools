@@ -59,6 +59,11 @@
 		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
 	};
 
+	const iconOrientationClasses = {
+		vertical: 'h-5 w-5 mb-1',
+		horizontal: 'h-5 w-5 mr-1'
+	};
+
 	$: tabListClasses = classNames(
 		'bg-color-container-level-0 text-color-text-primary',
 		orientationClasses[orientation],
@@ -80,9 +85,18 @@
 	{#each tabs as tab}
 		<TabLabel tabId={tab.id} {handleSelect}>
 			{#if tab.icon}
-				<Icon src={tab.icon} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
+				<Icon
+					src={tab.icon}
+					theme="solid"
+					class={iconOrientationClasses[orientation]}
+					aria-hidden="true"
+				/>
 			{:else if tab.rawIcon}
-				<svelte:component this={tab.rawIcon} class="h-5 w-5 mb-1" aria-hidden="true" />
+				<svelte:component
+					this={tab.rawIcon}
+					class={iconOrientationClasses[orientation]}
+					aria-hidden="true"
+				/>
 			{/if}
 			{tab.label}
 		</TabLabel>
