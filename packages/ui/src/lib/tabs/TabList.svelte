@@ -66,7 +66,7 @@
 	);
 
 	const handleSelect = (id: Tab['id']) => {
-		selectedValue = id;
+		$val = id;
 	};
 </script>
 
@@ -78,7 +78,7 @@
 	use:tabFocus={{ handleSelect, orientation }}
 >
 	{#each tabs as tab}
-		<TabLabel tabId={tab.id}>
+		<TabLabel tabId={tab.id} {handleSelect}>
 			{#if tab.icon}
 				<Icon src={tab.icon} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
 			{:else if tab.rawIcon}
