@@ -1,4 +1,4 @@
-import type { Tab } from '$lib/tabs/TabLabel.svelte';
+import type { Tab } from './types';
 
 export const tabFocus = (
 	node: HTMLElement,
