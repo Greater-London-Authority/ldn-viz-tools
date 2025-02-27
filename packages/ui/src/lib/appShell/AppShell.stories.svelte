@@ -22,7 +22,7 @@
 	import SidebarSection from '../sidebar/elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from '../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 
-	import { Demo1, Leggi, Pop1, Sewers } from '$lib/layoutExamples/Dashboards/demoTabs';
+	import { Demo1, Leggi, Pop1, Sewers } from './../layoutExamples/Dashboards/demoTabs';
 
 	const isOpen = writable(true);
 
