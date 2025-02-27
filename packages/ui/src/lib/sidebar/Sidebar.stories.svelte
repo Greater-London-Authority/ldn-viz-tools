@@ -41,9 +41,6 @@
 	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 
-	import SidebarTabLabel from './elements/sidebarTabs/SidebarTabLabel.svelte';
-	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
-
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Overlay from '../overlay/Overlay.svelte';
@@ -51,12 +48,19 @@
 
 	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
 
-	let selectedValue = 'markers';
+	import { First, Fourth, Second, Third } from './../tabs/demoSections';
 
 	// In order for the sidebar to open/ close a writable boolean store must be provided to context.
 	// NB. This is provided by AppShell when using
 	const isOpen = writable(true);
 	setContext('sidebarIsOpen', isOpen);
+
+	let tabs = [
+		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
+		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
+		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
+		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
+	];
 </script>
 
 <Template let:args>
@@ -214,27 +218,7 @@
 </Story>
 
 <Story name="With Tabs" source>
-	<Sidebar>
-		<svelte:fragment slot="tabs">
-			<SidebarTabList bind:selectedValue>
-				<SidebarTabLabel tabId="markers">
-					<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Data Markers
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="filters">
-					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Filters
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="analysis">
-					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Analysis
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="layers">
-					<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Layers
-				</SidebarTabLabel>
-			</SidebarTabList>
-		</svelte:fragment>
+	<Sidebar {tabs}>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
 				<p>
@@ -243,33 +227,7 @@
 				</p>
 			</svelte:fragment>
 		</SidebarHeader>
-		<svelte:fragment slot="sections">
-			{#if selectedValue === 'markers'}
-				<div>
-					Markers is selected, so we'd render a
-					<code> &lt;Marker /&gt;</code>
-					component
-				</div>
-			{:else if selectedValue === 'filters'}
-				<div>
-					Filter is selected, so we'd render a
-					<code> &lt;Filters /&gt;</code>
-					component
-				</div>
-			{:else if selectedValue === 'analysis'}
-				<div>
-					Analysis is selected, so we'd render a
-					<code> &lt;Analysis /&gt;</code>
-					component
-				</div>
-			{:else if selectedValue === 'layers'}
-				<div>
-					Layers is selected, so we'd render a
-					<code> &lt;Layer /&gt;</code>
-					component
-				</div>
-			{/if}
-		</svelte:fragment>
+
 		<SidebarFooter slot="footer">
 			<div class="flex justify-between">
 				<div class="w-[165px]"><LogoMayor /></div>
@@ -284,7 +242,7 @@
 		</SidebarFooter>
 	</Sidebar>
 </Story>
-
+<!-- 
 <Story name="Externally controlling the open tabs" source>
 	<div class="w-96">
 		<Select
@@ -719,4 +677,4 @@
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
-</Story>
+</Story> -->

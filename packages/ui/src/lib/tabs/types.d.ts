@@ -1,7 +1,7 @@
 import type { IconSource } from '@steeze-ui/heroicons';
 import { type ComponentType } from 'svelte';
 
-export interface Tab extends HTMLElement {
+export interface Tab {
 	id: string;
 	label: string;
 	icon?: IconSource;

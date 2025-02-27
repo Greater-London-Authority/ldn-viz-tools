@@ -31,6 +31,13 @@ export const tabLayoutOverride: PlacementLookup = {
 	bottom: '!w-auto !flex !flex-row !space-y-0 !pb-0 !float-left'
 };
 
+export const tabThemeOverride = '[&>button]:bg-color-container-level-0 [&>button]:no-underline';
+
+// const orientationClasses =
+// 	'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center';
+
+// $: tabLabelClasses = classNames(...themeClasses, orientationClasses, 'select-none');
+
 // The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {
 	standard: {

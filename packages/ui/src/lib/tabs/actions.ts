@@ -1,21 +1,20 @@
 import type { Tab } from './types';
 
-export const tabFocus = (
-	node: HTMLElement,
-	props: { handleSelect: (id: Tab['id']) => void; orientation: 'vertical' | 'horizontal' }
-) => {
-	const tabs = Array.from(node.children) as Tab[];
-	const { handleSelect, orientation } = props;
+type TabElement = Tab & HTMLElement;
 
-	const findIndexOfTab = (tab: Tab) => {
+export const tabFocus = (node: HTMLElement, props: { orientation: 'vertical' | 'horizontal' }) => {
+	const tabs = Array.from(node.children) as TabElement[];
+	const { orientation } = props;
+
+	const findIndexOfTab = (tab: TabElement) => {
 		return tabs.findIndex((elem: Tab) => elem.id === tab.id);
 	};
 
-	const moveFocusToTab = (tab: Tab) => {
+	const moveFocusToTab = (tab: TabElement) => {
 		tab.focus();
 	};
 
-	const moveFocusToNextTab = (tab: Tab) => {
+	const moveFocusToNextTab = (tab: TabElement) => {
 		let index: number;
 		const firstTab = tabs[0];
 		const lastTab = tabs[tabs.length - 1];
@@ -28,7 +27,7 @@ export const tabFocus = (
 		}
 	};
 
-	const moveFocusToPreviousTab = (tab: Tab) => {
+	const moveFocusToPreviousTab = (tab: TabElement) => {
 		let index: number;
 		const firstTab = tabs[0];
 		const lastTab = tabs[tabs.length - 1];
@@ -44,15 +43,11 @@ export const tabFocus = (
 	const handleKeydown = (ev: KeyboardEvent) => {
 		const target = ev.target;
 
-		const isTab = (element: EventTarget | null): element is Tab => {
+		const isTab = (element: EventTarget | null): element is TabElement => {
 			return element instanceof HTMLElement && 'id' in element;
 		};
 
 		if (isTab(target)) {
-			if (ev.key === 'Enter' || ev.key === ' ') {
-				handleSelect(target.id);
-			}
-
 			if (orientation === 'horizontal' && ev.key === 'ArrowLeft') {
 				moveFocusToPreviousTab(target);
 			} else if (orientation === 'horizontal' && ev.key === 'ArrowRight') {

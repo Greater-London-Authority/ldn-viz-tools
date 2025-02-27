@@ -70,7 +70,10 @@
 		$$props.class
 	);
 
-	const handleSelect = (id: Tab['id']) => {
+	export let onChange = (_id: Tab['id']) => {};
+
+	export let handleSelect = (id: Tab['id']) => {
+		onChange(id);
 		$val = id;
 	};
 </script>
@@ -80,7 +83,7 @@
 	role="tablist"
 	aria-label={ariaLabel}
 	aria-orientation={orientation}
-	use:tabFocus={{ handleSelect, orientation }}
+	use:tabFocus={{ orientation }}
 >
 	{#each tabs as tab}
 		<TabLabel tabId={tab.id} {handleSelect}>

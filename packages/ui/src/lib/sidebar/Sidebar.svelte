@@ -9,10 +9,13 @@
 	 *
 	 * @component
 	 */
-	import { getContext } from 'svelte';
+	import { getContext, type ComponentType } from 'svelte';
 	import { type Writable } from 'svelte/store';
 	import { slide } from 'svelte/transition';
 	import { classNames } from '../utils/classNames';
+	import TabPanel from './../tabs/TabPanel.svelte';
+	import type { Tab } from './../tabs/types';
+	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
 	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';
 	import {
 		heightLookup,
@@ -42,6 +45,29 @@
 	export let theme: 'light' | 'dark' = 'dark';
 	export let placement: PlacementType = 'right';
 
+	/**
+	 * List of tabs. An array, of which each entry is an object with the following properties:
+	 * * `id` (string): the value that will be assigned to `selectedValue` when this tab is selected
+	 * * `label` (string): the text that should be displayed in the tab label
+	 * * `icon` (optional): an icon component (imported from `@steeze-ui/heroicons`) that should be rendered in the tab label
+	 * * `rawIcon` (optional): a Svelte component that directly renders an SVG that should be displayed in the tab label
+	 * * `content`: a Svelte component that should be rendered in the sidebar when this tab is selected.
+	 */
+	export let tabs: Tab[] = [];
+
+	/**
+	 * `id` of the currently selected tab - defaults to first in array
+	 */
+	export let selectedValue: Tab['id'] | undefined = undefined;
+
+	let component: ComponentType | undefined;
+	$: component = tabs.find((tab) => tab.id === selectedValue)?.content;
+
+	/**
+	 * Aria label applied to tabs list
+	 */
+	export let ariaLabel: string = 'Switch sidebar panel';
+
 	const sidebarPlacementFromContext = getContext<Writable<PlacementType>>('sidebarPlacement');
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
@@ -63,10 +89,10 @@
 </script>
 
 <div class={classNames(wrapperClasses, placementClasses)}>
-	{#if $$slots.tabs}
+	{#if tabs.length}
 		<div class={classNames('absolute bg-color-container-level-0', tabPlacementClasses)}>
-			<!-- should contain a `<SidebarTabList>`, if the sidebar has tabs-->
-			<slot name="tabs" />
+			<!-- A `<SidebarTabList>`, if the sidebar has tabs-->
+			<SidebarTabList {tabs} {ariaLabel} bind:selectedValue />
 		</div>
 	{:else if $sidebarAlwaysOpen !== 'true'}
 		<div class={classNames('absolute', togglePlacementClasses)}>
@@ -83,7 +109,7 @@
 				class={classNames(
 					sidebarClasses,
 					widthClasses,
-					$$slots.tabs && placement === 'left' ? 'ml-[80px]' : ''
+					tabs.length && placement === 'left' ? 'ml-[80px]' : ''
 				)}
 			>
 				{#if $$slots.unstyledContent}
@@ -106,6 +132,16 @@
 								<!-- typically contains a `<SidebarHeader>` -->
 								<slot name="header" />
 							</div>
+						{/if}
+
+						{#if tabs.length}
+							{#each tabs as tab}
+								{#if component && selectedValue === tab.id}
+									<TabPanel tabPanelId={`${tab.id}-panel`} tabId={tab.id}>
+										<svelte:component this={component} />
+									</TabPanel>
+								{/if}
+							{/each}
 						{/if}
 
 						{#if $$slots.sections || $$slots.header}
