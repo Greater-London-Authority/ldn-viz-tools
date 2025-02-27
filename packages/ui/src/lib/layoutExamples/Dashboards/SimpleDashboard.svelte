@@ -1,33 +1,17 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
 	import AppShell from '../../appShell/AppShell.svelte';
 	import LogoCIU from '../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../logos/LogoMayor.svelte';
-	import Overlay from '../../overlay/Overlay.svelte';
-	import RadioButtonGroupSolid from '../../radioButtonSolid/RadioButtonGroupSolid.svelte';
-	import Select from '../../select/Select.svelte';
 	import Sidebar from '../../sidebar/Sidebar.svelte';
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import SidebarGroup from '../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
-	import SidebarSection from '../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import SidebarGroupTitle from '../../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
-
-	/* Select Items */
-	type Item = { label: string; value: number };
-	const items: Item[] = [
-		{ label: 'One', value: 1 },
-		{ label: 'Two', value: 2 },
-		{ label: 'Three', value: 3 }
-	];
-
-	/* Radio Button Options */
-	let buttonGroupOptions = [
-		{ id: 'one', label: 'One' },
-		{ id: 'two', label: 'Two' },
-		{ id: 'three', label: 'Three' }
-	];
+	import Theme from '../../theme/Theme.svelte';
+	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
+	import { Demo1 } from './demoTabs';
 </script>
+
+<!--Only need the theme in a story in an app this will be in the layout-->
+<Theme />
 
 <AppShell>
 	<svelte:fragment slot="main">
@@ -51,23 +35,7 @@
 
 		<!-- SECTIONS -->
 		<svelte:fragment slot="sections">
-			<SidebarSection title="First Section Title">
-				<SidebarGroup title={'First Group Title'}>
-					<Select {items} label="Label" id="example-input-1" />
-					<Select {items} label="Label" id="example-input-2" />
-				</SidebarGroup>
-				<SidebarGroup title="Second Group Title">
-					<Select {items} label="Label" id="example-input-1" />
-					<Select {items} label="Label" id="example-input-2" />
-				</SidebarGroup>
-			</SidebarSection>
-
-			<SidebarSection title="Second Section Title">
-				<SidebarGroup>
-					<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group One" />
-					<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group Two" />
-				</SidebarGroup>
-			</SidebarSection>
+			<Demo1 />
 		</svelte:fragment>
 
 		<!-- FOOTER -->
@@ -77,10 +45,14 @@
 				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
 			<svelte:fragment slot="menu">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li>View Cookie settings</li>
+						<li>Privacy Policy</li>
+					</ul>
+
+					<ThemeSwitcher size="xs" />
+				</div>
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>

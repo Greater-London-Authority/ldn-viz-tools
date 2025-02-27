@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { Story } from '@storybook/addon-svelte-csf';
 
 	import LeggiExplorer from './Dashboards/LeggiExplorer.svelte';
 	import PopulationProjection from './Dashboards/PopulationProjection.svelte';

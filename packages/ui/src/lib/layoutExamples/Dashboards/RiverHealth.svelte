@@ -1,66 +1,28 @@
 <script lang="ts">
 	import { ArrowDownTray, ChartBar, Funnel, MapPin } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { writable } from 'svelte/store';
+
 	import AppShell from '../../appShell/AppShell.svelte';
-	import CheckboxGroup from '../../checkBox/CheckboxGroup.svelte';
-	import InputWrapper from '../../input/InputWrapper.svelte';
+
 	import LogoCIU from '../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../logos/LogoMayor.svelte';
 	import Overlay from '../../overlay/Overlay.svelte';
-	import RadioButtonGroupSolid from '../../radioButtonSolid/RadioButtonGroupSolid.svelte';
-	import Select from '../../select/Select.svelte';
+
 	import Sidebar from '../../sidebar/Sidebar.svelte';
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import SidebarGroup from '../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
-	import SidebarSection from '../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import SidebarGroupTitle from '../../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
-	import SidebarTabLabel from '../../sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
-	import SidebarTabList from '../../sidebar/elements/sidebarTabs/SidebarTabList.svelte';
 	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
-	import { currentTheme } from '../../theme/themeStore';
+	import { Demo1, Sewers } from './demoTabs';
 
-	const selectedSewerLayer = writable(['sewer-combined']);
-	const selectedSewerOverflowLayer = writable(['sewer_overflows_48hrs_yes']);
-	$: selectedTab = 'sewers';
-
-	// Color the checkboxes based on theme
-	$: theme = $currentTheme;
-
-	$: sewerGroup = [
-		{
-			id: 'sewer-combined',
-			label: 'Combined Sewer',
-			color: theme.color.data.categorical.orange
-		},
-		{
-			id: 'sewer-separate',
-			label: 'Separate Sewer',
-			color: theme.color.data.secondary
-		}
-	];
-
-	$: sewerOverflowGroup = [
-		{
-			id: 'sewer_overflows_48hrs_yes',
-			label: 'Yes (In past 48 hours)',
-			color: theme.color.data.categorical.red
-		},
-		{
-			id: 'sewer_overflows_48hrs_no',
-			label: 'No (In past 48 hours)',
-			color: theme.color.data.categorical.green
-		},
-		{
-			id: 'sewer_overflows_offline',
-			label: 'Offline',
-			color: theme.color.data.categorical.grey
-		}
+	let tabs = [
+		{ id: 'sewers', label: 'Sewers', icon: ChartBar, content: Sewers },
+		{ id: 'monitoring', label: 'Monitoring', icon: Funnel, content: Demo1 },
+		{ id: 'swimming', label: 'Swimming', icon: ArrowDownTray, content: Sewers },
+		{ id: 'context', label: 'Context', icon: MapPin, content: Demo1 }
 	];
 </script>
 
+<!--Only need the theme in a story in an app this will be in the layout-->
 <Theme />
 <AppShell
 	sidebarPlacement={{ initial: 'right' }}
@@ -76,7 +38,7 @@
 			</div>
 		</div>
 	</svelte:fragment>
-	<Sidebar slot="sidebar">
+	<Sidebar slot="sidebar" {tabs}>
 		<!-- HEADER -->
 		<SidebarHeader title="London's River Health" slot="header">
 			<svelte:fragment slot="subTitle">
@@ -84,59 +46,6 @@
 			</svelte:fragment>
 			<Overlay slot="hint" overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
 		</SidebarHeader>
-
-		<!-- TABS -->
-		<svelte:fragment slot="tabs">
-			<SidebarTabList bind:selectedValue={selectedTab}>
-				<SidebarTabLabel tabId="sewers">
-					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-2" aria-hidden="true" />
-					Sewers
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="monitoring">
-					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-2" aria-hidden="true" />
-					Monitoring
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="swimming">
-					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-2" aria-hidden="true" />
-					Swimming
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="context">
-					<Icon src={ArrowDownTray} theme="mini" class="h-5 w-5 mb-2" aria-hidden="true" />
-					Context
-				</SidebarTabLabel>
-			</SidebarTabList>
-		</svelte:fragment>
-
-		<!-- SECTIONS -->
-		<svelte:fragment slot="sections">
-			<SidebarSection title="This is the sewer section title">
-				Some further instructions
-				<SidebarGroup>
-					<SidebarGroupTitle>
-						Sewer Type group title
-						<Overlay slot="hint" overlayType="modal" modalTitle="Modal Title">
-							This is a modal.
-						</Overlay>
-					</SidebarGroupTitle>
-
-					<CheckboxGroup options={sewerGroup} bind:selectedOptions={$selectedSewerLayer} />
-				</SidebarGroup>
-			</SidebarSection>
-			<SidebarSection>
-				<SidebarGroup>
-					<SidebarGroupTitle>
-						Sewer Overflows
-						<Overlay slot="hint" overlayType="modal" modalTitle="Modal Title">
-							This is a modal.
-						</Overlay>
-					</SidebarGroupTitle>
-					<CheckboxGroup
-						options={sewerOverflowGroup}
-						bind:selectedOptions={$selectedSewerOverflowLayer}
-					/>
-				</SidebarGroup>
-			</SidebarSection>
-		</svelte:fragment>
 
 		<!-- FOOTER -->
 		<SidebarFooter slot="footer">
