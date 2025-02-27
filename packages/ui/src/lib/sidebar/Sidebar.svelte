@@ -137,7 +137,11 @@
 						{#if tabs.length}
 							{#each tabs as tab}
 								{#if component && selectedValue === tab.id}
-									<TabPanel tabPanelId={`${tab.id}-panel`} tabId={tab.id} class="space-y-4">
+									<TabPanel
+										tabPanelId={`${tab.id}-panel`}
+										tabId={tab.id}
+										class="space-y-4 bg-color-container-level-1"
+									>
 										<svelte:component this={component} />
 									</TabPanel>
 								{/if}
