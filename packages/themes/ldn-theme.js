@@ -14,7 +14,45 @@ const config = {
       colors: { ...oldLdnColors, ...ldnColors },
       fontFamily: {
         sans: ['"Inter"', ...defaultTheme.fontFamily.sans]
-      }
+      },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': 'var(--theme-text-primary)',
+            '--tw-prose-headings': 'var(--theme-text-primary)',
+            '--tw-prose-lead': 'var(--theme-text-secondary)',
+            '--tw-prose-links': 'var(--theme-action-primary)',
+            '--tw-prose-bold': 'var(--theme-text-primary)',
+            '--tw-prose-counters': 'var(--theme-text-secondary)',
+            '--tw-prose-bullets': 'var(--theme-text-secondary)',
+            '--tw-prose-hr': 'var(--theme-ui-border-secondary)',
+            '--tw-prose-quotes': 'var(--theme-text-secondary)',
+            '--tw-prose-quote-borders': 'var(--theme-ui-primary)',
+            '--tw-prose-captions': 'var(--theme-text-secondary)',
+            '--tw-prose-code': 'var(--theme-text-secondary)',
+            '--tw-prose-pre-code': 'var(--global-color-static-white)',
+            '--tw-prose-pre-bg': 'var(--global-color-static-black)',
+            '--tw-prose-th-borders': 'var(--theme-ui-border-primary)',
+            '--tw-prose-td-borders': 'var(--theme-ui-border-secondary)',
+            '--tw-prose-invert-body': 'var(--theme-text-inverse-primary)',
+            '--tw-prose-invert-headings': 'var(--theme-text-inverse-primary)',
+            '--tw-prose-invert-lead': 'var(--theme-text-inverse-secondary)',
+            '--tw-prose-invert-links': 'var(--theme-action-primary)',
+            '--tw-prose-invert-bold': 'var(--theme-text-inverse-primary)',
+            '--tw-prose-invert-counters': 'var(--theme-text-inverse-secondary)',
+            '--tw-prose-invert-bullets': 'var(--theme-text-inverse-secondary)',
+            '--tw-prose-invert-hr': 'var(--theme-ui-border-secondary)',
+            '--tw-prose-invert-quotes': 'var(--theme-text-inverse-secondary)',
+            '--tw-prose-invert-quote-borders': 'var(--theme-ui-primary)',
+            '--tw-prose-invert-captions': 'var(--theme-text-inverse-secondary)',
+            '--tw-prose-invert-code': 'var(--theme-text-inverse-secondary)',
+            '--tw-prose-invert-pre-code': 'var(--global-color-static-white)',
+            '--tw-prose-invert-pre-bg': 'var(--global-color-static-black)',
+            '--tw-prose-invert-th-borders': 'var(--theme-ui-border-primary)',
+            '--tw-prose-invert-td-borders': 'var(--theme-ui-border-secondary)'
+          }
+        }
+      })
     }
   },
 

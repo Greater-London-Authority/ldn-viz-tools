@@ -6,7 +6,7 @@
 	 * @component
 	 */
 
-	import Tooltip from '../tooltip/Tooltip.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 
 	/**
 	 * Color of the radio button, as a string in any CSS color format
@@ -70,11 +70,17 @@
 			? `--theme-input-border: ${color}; --theme-input-border-selected: ${color}; --theme-input-background-active: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
-	<span class="form-label ml-2 font-normal">{label}</span>
+	{#if label}
+		<span class="form-label ml-2 font-normal">{label}</span>
+	{/if}
+	{#if $$slots.hint}
+		<!-- An optional `<Overlay>` component to provide additional explanation. -->
+		<slot name="hint" />
+	{/if}
 	{#if hint}
-		<Tooltip {hintLabel}>
+		<Overlay {hintLabel}>
 			{hint}
-		</Tooltip>
+		</Overlay>
 	{/if}
 </label>
 

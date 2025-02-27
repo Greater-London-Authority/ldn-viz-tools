@@ -26,6 +26,9 @@ const preview: Preview = {
 					'Ui',
 					[
 						'Introduction',
+						'Typography',
+						'Form Element Styling',
+						'Auth',
 						'Components',
 						[
 							'Buttons',
@@ -38,6 +41,7 @@ const preview: Preview = {
 							'Datepicker',
 							'Icons'
 						],
+						'Components - Layout And Themes',
 						'*',
 						'Examples'
 					]

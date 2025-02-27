@@ -35,7 +35,7 @@
 	import demoMonthlyTimeseriesLong from '../../data/demoMonthlyTimeseriesLong.json';
 	import { Plot } from '../observablePlotFragments/plot';
 
-	const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
+	//const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 
 	// Spec and data for single line example (default)
