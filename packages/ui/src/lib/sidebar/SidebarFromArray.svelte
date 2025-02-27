@@ -18,7 +18,7 @@
 
 	/**
 	 * List of tabs. An array, of which each entry is an object with the following properties:
-	 * * `id` (string): the value that wil be assigned to `selectedValue` when this tab is selected
+	 * * `id` (string): the value that will be assigned to `selectedValue` when this tab is selected
 	 * * `label` (string): the text that should be displayed in the tab label
 	 * * `icon` (optional): an icon component (imported from `@steeze-ui/heroicons`) that should be rendered in the tab label
 	 * * `rawIcon` (optional): a Svelte component that directly renders an SVG that should be displayed in the tab label
