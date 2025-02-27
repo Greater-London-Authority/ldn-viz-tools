@@ -2,7 +2,7 @@ import type { Tab } from './types';
 
 export const tabFocus = (
 	node: HTMLElement,
-	props: { handleSelect: any; orientation: 'vertical' | 'horizontal' }
+	props: { handleSelect: (id: Tab['id']) => void; orientation: 'vertical' | 'horizontal' }
 ) => {
 	const tabs = Array.from(node.children) as Tab[];
 	const { handleSelect, orientation } = props;
