@@ -12,7 +12,6 @@
 
 <script lang="ts">
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
@@ -25,8 +24,6 @@
 	import { Demo1, Leggi, Pop1, Sewers } from './../layoutExamples/Dashboards/demoTabs';
 
 	const isOpen = writable(true);
-
-	let selectedValue = 'markers';
 
 	let tabs = [
 		{ id: 'markers', label: 'Markers', icon: ChartBar, content: Demo1 },

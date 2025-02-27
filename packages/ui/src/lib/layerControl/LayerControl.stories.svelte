@@ -9,8 +9,6 @@
 </script>
 
 <script lang="ts">
-	import Theme from '../theme/Theme.svelte';
-	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
 	import { colorTokenNameToRGBArray, currentTheme, tokenNameToValue } from '../theme/themeStore';
 
 	let layerStates = {

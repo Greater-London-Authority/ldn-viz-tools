@@ -79,7 +79,7 @@
 
 	$isOpen = startOpen;
 
-	const respondToWidthChange = (innerWidth) => {
+	const respondToWidthChange = (innerWidth: number) => {
 		$isAlwaysOpen = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
 		// if "alwaysOpen" at this size, then we are open at this size
