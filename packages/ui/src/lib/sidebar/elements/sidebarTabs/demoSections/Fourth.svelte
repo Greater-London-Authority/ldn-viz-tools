@@ -1,22 +1,39 @@
 <script lang="ts">
-	import { Map, appendOSKeyToUrl } from '@ldn-viz/maps';
+	import RadioButtonGroupSolid from './../../../../radioButtonSolid/RadioButtonGroupSolid.svelte';
+	import Select from './../../../../select/Select.svelte';
+	import SidebarGroup from './../../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
+	import SidebarSection from './../../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
 
-	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+	/* Select Items */
+	type Item = { label: string; value: number };
+	const items: Item[] = [
+		{ label: 'One', value: 1 },
+		{ label: 'Two', value: 2 },
+		{ label: 'Three', value: 3 }
+	];
+
+	/* Radio Button Options */
+	let buttonGroupOptions = [
+		{ id: 'one', label: 'One' },
+		{ id: 'two', label: 'Two' },
+		{ id: 'three', label: 'Three' }
+	];
 </script>
 
-<div class="prose dark:prose-invert px-4 py-6">
-	<h3>If you liked it...</h3>
-	<p class="lead">...then you should have put a map in it.</p>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat interdum quam faucibus
-		gravida. Nunc in odio nec eros sodales consequat. Donec id est sapien. Mauris sit amet semper
-		odio, commodo aliquam quam. Vestibulum volutpat efficitur varius.
-	</p>
-</div>
-<div class="w-full h-96">
-	<Map
-		options={{
-			transformRequest: appendOSKeyToUrl(OS_KEY)
-		}}
-	/>
-</div>
+<SidebarSection title="First Section Title">
+	<SidebarGroup title={'First Group Title'}>
+		<Select {items} label="Label" id="example-input-1" />
+		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group One" />
+	</SidebarGroup>
+
+	<SidebarGroup>
+		<Select {items} label="Label" id="example-input-2" />
+	</SidebarGroup>
+</SidebarSection>
+
+<SidebarSection title="Second Section Title">
+	<SidebarGroup>
+		<Select {items} label="Label" id="example-input-3" />
+		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group Two" />
+	</SidebarGroup>
+</SidebarSection>

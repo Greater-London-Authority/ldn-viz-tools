@@ -46,7 +46,10 @@
 
 	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
 
-	import { First, Fourth, Second, Third } from './../tabs/demoSections';
+	import Select from '../select/Select.svelte';
+	import { First, Fourth, Second, Third } from './elements/sidebarTabs/demoSections';
+
+	$: selectedValue = 'markers';
 
 	// In order for the sidebar to open/ close a writable boolean store must be provided to context.
 	// NB. This is provided by AppShell when using
@@ -103,7 +106,7 @@
 						<li>View Cookie settings</li>
 						<li>Privacy Policy</li>
 					</ul>
-					<ThemeSwitcher />
+					<ThemeSwitcher size="xs" />
 				</div>
 			</svelte:fragment>
 		</SidebarFooter>
@@ -162,7 +165,7 @@
 						<li>View Cookie settings</li>
 						<li>Privacy Policy</li>
 					</ul>
-					<ThemeSwitcher />
+					<ThemeSwitcher size="xs" />
 				</div>
 			</svelte:fragment>
 		</SidebarFooter>
@@ -240,7 +243,7 @@
 		</SidebarFooter>
 	</Sidebar>
 </Story>
-<!-- 
+
 <Story name="Externally controlling the open tabs" source>
 	<div class="w-96">
 		<Select
@@ -249,27 +252,7 @@
 		/>
 	</div>
 
-	<Sidebar>
-		<svelte:fragment slot="tabs">
-			<SidebarTabList bind:selectedValue>
-				<SidebarTabLabel tabId="markers">
-					<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Data Markers
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="filters">
-					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Filters
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="analysis">
-					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Analysis
-				</SidebarTabLabel>
-				<SidebarTabLabel tabId="layers">
-					<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-					Layers
-				</SidebarTabLabel>
-			</SidebarTabList>
-		</svelte:fragment>
+	<Sidebar {tabs}>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
 				<p>
@@ -278,33 +261,7 @@
 				</p>
 			</svelte:fragment>
 		</SidebarHeader>
-		<svelte:fragment slot="sections">
-			{#if selectedValue === 'markers'}
-				<div>
-					Markers is selected, so we'd render a
-					<code> &lt;Marker /&gt;</code>
-					component
-				</div>
-			{:else if selectedValue === 'filters'}
-				<div>
-					Filter is selected, so we'd render a
-					<code> &lt;Filters /&gt;</code>
-					component
-				</div>
-			{:else if selectedValue === 'analysis'}
-				<div>
-					Analysis is selected, so we'd render a
-					<code> &lt;Analysis /&gt;</code>
-					component
-				</div>
-			{:else if selectedValue === 'layers'}
-				<div>
-					Layers is selected, so we'd render a
-					<code> &lt;Layer /&gt;</code>
-					component
-				</div>
-			{/if}
-		</svelte:fragment>
+
 		<SidebarFooter slot="footer">
 			<div class="flex justify-between">
 				<div class="w-[165px]"><LogoMayor /></div>
@@ -316,7 +273,7 @@
 						<li>View Cookie settings</li>
 						<li>Privacy Policy</li>
 					</ul>
-					<ThemeSwitcher />
+					<ThemeSwitcher size="xs" />
 				</div>
 			</svelte:fragment>
 		</SidebarFooter>
@@ -675,4 +632,4 @@
 			</svelte:fragment>
 		</SidebarFooter>
 	</Sidebar>
-</Story> -->
+</Story>

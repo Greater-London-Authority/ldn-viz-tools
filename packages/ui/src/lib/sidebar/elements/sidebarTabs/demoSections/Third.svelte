@@ -1,15 +1,31 @@
 <script lang="ts">
-	import NonIdealState from '../../nonIdealState/NonIdealState.svelte';
+	import RadioButtonGroupSolid from './../../../../radioButtonSolid/RadioButtonGroupSolid.svelte';
+	import Select from './../../../../select/Select.svelte';
+	import SidebarGroup from './../../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
+	import SidebarSection from './../../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
+
+	/* Select Items */
+	type Item = { label: string; value: number };
+	const items: Item[] = [
+		{ label: 'One', value: 1 },
+		{ label: 'Two', value: 2 },
+		{ label: 'Three', value: 3 }
+	];
+
+	/* Radio Button Options */
+	let buttonGroupOptions = [
+		{ id: 'one', label: 'One' },
+		{ id: 'two', label: 'Two' },
+		{ id: 'three', label: 'Three' }
+	];
 </script>
 
-<div class="w-full h-96">
-	<NonIdealState>
-		<svelte:fragment slot="title">This tab contains another component</svelte:fragment>
-
-		Quisquam voluptatem qui velit qui pariatur ut. Rerum qui dolor nemo accusamus non quam
-		occaecati. Corrupti est ut sit eos et perspiciatis rerum ducimus. Excepturi blanditiis molestias
-		neque itaque quia ut. Fugiat rerum in quidem rerum esse assumenda nesciunt eum. Sit delectus sed
-		aut excepturi eos atque possimus. Iure vel delectus sequi enim. Est et ipsam totam labore esse
-		consectetur veniam rerum.
-	</NonIdealState>
-</div>
+<SidebarSection title="Section Title">
+	<SidebarGroup title={'First Group Title'}>
+		<Select {items} label="Label" id="example-input-1" />
+		<Select {items} label="Label" id="example-input-2" />
+	</SidebarGroup>
+	<SidebarGroup title="Second Group Title">
+		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group One" />
+	</SidebarGroup>
+</SidebarSection>
