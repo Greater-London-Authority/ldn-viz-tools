@@ -10,11 +10,11 @@
 	 * @component
 	 */
 
-	import { Button, Modal, Spinner } from '@ldn-viz/ui';
+	import { Button, Modal } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 	import TargetIcon from './TargetIcon.svelte';
-
 	import type {
 		GeolocationCoords,
 		OnGeolocationSearchError,
@@ -143,14 +143,10 @@
 	};
 </script>
 
-<div class="pointer-events-auto w-10 h-10">
+<div class="pointer-events-auto w-10 h-10" aria-live="polite" aria-busy={isSearching}>
 	{#if isSearching}
 		<div class="w-10 h-10 p-1">
-			<Spinner
-				title="Searching for location..."
-				alt="Spinning wheel indicating that location search is in progress"
-				class="w-8 h-8 p-0.5 stroke-[12]"
-			/>
+			<LoadingIndicator title="Searching for location..." class="w-8 h-8 p-0.5 stroke-[12]" />
 		</div>
 	{:else if showClearButton}
 		<Button

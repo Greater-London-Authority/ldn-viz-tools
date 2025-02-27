@@ -1,5 +1,36 @@
 # @ldn-viz/tables
 
+## 2.6.0
+
+### Minor Changes
+
+- efe6ad0: CHANGED: the `TextCell` now allows conditional control of fontWeight
+
+### Patch Changes
+
+- Updated dependencies [2321866]
+- Updated dependencies [dc63318]
+- Updated dependencies [fec8705]
+- Updated dependencies [8c07d92]
+- Updated dependencies [824b681]
+- Updated dependencies [11e1f97]
+- Updated dependencies [8321585]
+- Updated dependencies [1610465]
+- Updated dependencies [4eac8b2]
+- Updated dependencies [978beb6]
+- Updated dependencies [a04846c]
+- Updated dependencies [56718bf]
+- Updated dependencies [ae6a3df]
+- Updated dependencies [adb7e59]
+- Updated dependencies [49fd045]
+- Updated dependencies [d344f2c]
+- Updated dependencies [d9f2aca]
+- Updated dependencies [2557336]
+- Updated dependencies [bdbedf3]
+  - @ldn-viz/charts@5.1.0
+  - @ldn-viz/ui@16.0.0
+  - @ldn-viz/themes@5.0.0
+
 ## 2.5.0
 
 ### Minor Changes

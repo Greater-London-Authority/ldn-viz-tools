@@ -61,19 +61,25 @@
 </Story>
 
 <Story name="Hide color control" source>
-	<LayerControl bind:state label="Borough" hideColorControl />
+	<LayerControl bind:state label="Borough" disableColorControl />
 </Story>
 
 <Story name="Hide opacity control" source>
-	<LayerControl bind:state label="Borough" hideOpacityControl />
+	<LayerControl bind:state label="Borough" disableOpacityControl />
 </Story>
 
 <Story name="Hide size control" source>
-	<LayerControl bind:state label="Borough" hideSizeControl />
+	<LayerControl bind:state label="Borough" disableSizeControl />
 </Story>
 
 <Story name="Checkbox only" source>
-	<LayerControl bind:state label="Borough" hideOpacityControl hideColorControl hideSizeControl />
+	<LayerControl
+		bind:state
+		label="Borough"
+		disableOpacityControl
+		disableColorControl
+		disableSizeControl
+	/>
 </Story>
 
 <Story name="Multiple control instances" source>
@@ -88,4 +94,14 @@
 
 		<pre>{JSON.stringify(state, null, 2)}</pre>
 	</div>
+</Story>
+
+<Story name="Disabled (Color)" source>
+	<LayerControl bind:state label="Borough" disableColorControl />
+</Story>
+<Story name="Disabled (Opacity)" source>
+	<LayerControl bind:state label="Borough" disableOpacityControl />
+</Story>
+<Story name="Disabled (Size)" source>
+	<LayerControl bind:state label="Borough" disableSizeControl />
 </Story>

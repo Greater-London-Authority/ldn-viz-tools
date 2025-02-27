@@ -10,7 +10,6 @@
 <script lang="ts">
 	import { QuestionMarkCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 </script>
 
@@ -58,6 +57,16 @@ Spinner"
 		<NonIdealState spinner={true}>
 			<svelte:fragment slot="title">Something is loading</svelte:fragment>
 
+			Hopefully it will be ready soon.
+		</NonIdealState>
+	</div>
+</Story>
+
+<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this in Chrome, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`.  -->
+<Story name="Reduced motion">
+	<div class="w-96 h-96">
+		<NonIdealState spinner>
+			<svelte:fragment slot="title">Something is loading</svelte:fragment>
 			Hopefully it will be ready soon.
 		</NonIdealState>
 	</div>

@@ -160,7 +160,7 @@
 
 	{#if $open}
 		<div
-			class="bg-color-container-level-1 z-40 max-w-sm p-2 shadow flex flex-col space-y-2"
+			class="bg-color-container-level-1 z-[60] max-w-sm p-2 shadow flex flex-col space-y-2"
 			use:$menu.action
 			{...$menu}
 			transition:fly={{ duration: 150, y: -10 }}

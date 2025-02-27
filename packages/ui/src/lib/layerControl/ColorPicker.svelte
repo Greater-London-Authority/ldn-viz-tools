@@ -1,10 +1,17 @@
 <script lang="ts">
+	import Trigger from '../overlay/Trigger.svelte';
 	import Popover from '../popover/Popover.svelte';
 
-	import Trigger from '../overlay/Trigger.svelte';
+	import { NoSymbol } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+
 	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
 
-	export let colorName = 'data.categorical.darkpink';
+	export let label;
+
+	export let colorName = 'data.primary';
+
+	export let disabled = false;
 
 	const colorNames = [
 		'data.categorical.blue',
@@ -23,28 +30,38 @@
 	let isOpen = false;
 </script>
 
-<Popover bind:isOpen>
-	<Trigger slot="trigger" size="xs">
-		<div
-			class="w-[22px] h-[22px] relative border rounded-full"
-			style:background={tokenNameToValue(colorName, $currentTheme)}
-		></div>
-	</Trigger>
-
-	<svelte:fragment slot="title">Color</svelte:fragment>
-
-	<span class="text-xs mb-2 inline-block">Click to assign a color to this layer.</span>
-
-	<div class="flex flex-wrap gap-2">
-		{#each colorNames as colorOption}
-			<button
-				class="w-6 h-6 rounded-full"
-				style:background={tokenNameToValue(colorOption, $currentTheme)}
-				on:click={() => {
-					colorName = colorOption;
-					isOpen = false;
-				}}
+{#if disabled}
+	<Icon
+		src={NoSymbol}
+		theme="mini"
+		class="w-6 h-6 text-color-action-disabled cursor-not-allowed"
+		aria-hidden="true"
+	/>
+{:else}
+	<Popover bind:isOpen>
+		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} layer colour picker">
+			<div
+				class="w-[22px] h-[22px] relative border rounded-full"
+				style:background={tokenNameToValue(colorName, $currentTheme)}
 			/>
-		{/each}
-	</div>
-</Popover>
+		</Trigger>
+
+		<svelte:fragment slot="title">Colour</svelte:fragment>
+
+		<span class="text-xs mb-2 inline-block">Click to assign a colour to this layer.</span>
+
+		<div class="flex flex-wrap gap-2">
+			{#each colorNames as colorOption}
+				<button
+					class="w-6 h-6 rounded-full"
+					style:background={tokenNameToValue(colorOption, $currentTheme)}
+					aria-label="Color code: {colorOption}"
+					on:click={() => {
+						colorName = colorOption;
+						isOpen = false;
+					}}
+				/>
+			{/each}
+		</div>
+	</Popover>
+{/if}

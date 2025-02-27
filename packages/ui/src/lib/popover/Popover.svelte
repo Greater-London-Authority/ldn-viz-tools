@@ -16,8 +16,9 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	import { setContext } from 'svelte';
-	import Button from '../button/Button.svelte';
 	import { writable } from 'svelte/store';
+	import Button from '../button/Button.svelte';
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * Boolean that determines whether the Popover is currently open.
@@ -26,13 +27,29 @@
 
 	const isOpenStore = writable(isOpen);
 
+	/**
+	 * Value set as the `id` attribute of the title, for use in describing the popover by screen reader (defaults to randomly generated value).
+	 */
+	export let popoverTitleId = randomId();
+
+	/**
+	 * Value set as the `id` attribute of the content, to enable open focus to target the contents (defaults to randomly generated value).
+	 */
+	export let popoverContentId = randomId();
+
+	/**
+	 * In cases where the first element of the popover is interactive (e.g. button, link), set to true. Else defaults to false, to allow focus on the contents container.
+	 */
+	export let defaultOpenFocus: boolean = false;
+
 	const {
 		elements: { trigger, content, arrow, close },
 		states: { open }
 	} = createPopover({
 		forceVisible: true,
 		open: isOpenStore,
-		positioning: { placement: 'top' }
+		positioning: { placement: 'top' },
+		openFocus: defaultOpenFocus ? null : `#${popoverContentId}`
 	});
 
 	$: toggledExternally(isOpen);
@@ -60,22 +77,24 @@
 
 {#if $open}
 	<div
+		role="dialog"
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
 		class="z-50 w-60 bg-color-container-level-1 p-4 shadow"
+		aria-labelledby={popoverTitleId}
 	>
 		<div {...$arrow} use:arrow />
 
 		<div class="text-sm flex flex-col space-y-2 text-color-text-primary">
 			{#if $$slots.title}
-				<p class="font-medium">
+				<p class="font-medium" id={popoverTitleId}>
 					<!-- Optional title for the popover -->
 					<slot name="title" />
 				</p>
 			{/if}
 
-			<div>
+			<div id={popoverContentId} tabindex="-1">
 				<!-- Main content of the popover-->
 				<slot />
 			</div>

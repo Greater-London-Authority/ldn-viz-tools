@@ -1,5 +1,58 @@
 # ldn-viz-tools-ui
 
+## 16.1.0
+
+### Minor Changes
+
+- 3d94c5d: FIXED: `Popover` component is now accessible to screen readers
+- 146ce20: FIXED: changed ARIA role of `Toast` from `dialog` to `alert`
+- 5d9a21b: CHANGED: set `overflow-y: scroll` on list of geocoder suggestions and limit height to enable scrolling if `maxSuggestions` is set to a large value
+- f672c83: ACCESSIBILITY: added `role="dialog"` to `Popover`
+- bfb3530: FIXED: adjust z-index of `MultipleActionButton` drop-down menu so it opens in front of modal
+- d15e1f3: ADDED: `id` to `SvelteSelect` inside `Select` component
+- f672c83: ACCESSIBILITY: added `ariaLabel` to `Trigger` component for use by `ColorPicker`, `ResizeControl`, `OpacityControl` and `LayerControl` components
+
+### Patch Changes
+
+- a15655b: ADDED: change default site name in `PageMetadata` from "GLA Intelligence and Analysis Unit" to "GLA City Intelligence Unit"
+
+## 16.0.1
+
+### Patch Changes
+
+- c135236: ADDED: correctly export `Trigger` and `ThemeSwitcher`
+
+## 16.0.0
+
+### Major Changes
+
+- 4eac8b2: REMOVED: `SidebarHint` component
+  CHANGED: use `Overlay` component for hints in Inputs and Sidebar
+- adb7e59: CHANGED: change `isOpen` prop of `Modal` and `checked` prop of `Switch` from being a Sevelte store with a Boolean value to simply a Boolean.
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Minor Changes
+
+- dc63318: ADDED: components for OAuth authentication
+- fec8705: ADDED: update `ColorPicker` in `LayerControl` to use colors defined in our categorical color tokens
+  ADDED: `tokenNameToValue` and `colorTokenNameToRGBArray` functions to convert color token names to values for current theme
+- 824b681: CHANGED: `Modal` component to make description essential, set openFocus to description id and fixed styling of modal contents
+  CHANGED: added `<slot name="buttons">` to `Modal` to fix styling of buttons relative to modal content
+- 11e1f97: ADDED: `Overlay` component to allow choice of tooltip, modal or popover and implementation in Storybook
+  ADDED: `Trigger` component to handle opening tooltips, modals and popovers
+  CHANGED: `Button` customAction prop is now generic
+- 8321585: CHANGED: allow `Button`/`MultipleActionButton`/`DataDownloadButton`/`ImageDownloadButton`
+- 1610465: CHANGED: `Geocoder`, `MapControlGeocoder`, and `MapControlLocationSearch` accept a callback function to call when the user clears the search box
+- 978beb6: CHANGED: LayerControlGroup now accepts a `mutuallyExclusive` prop
+- ae6a3df: FIXED: accessibility issues in `Input` and `InputWrapper` components
+- 49fd045: ADDED: added `SidebarFromArray` component
+- 2557336: ADDEDL input wrapper to grouped inputs
+- bdbedf3: Adds xs button size and 'slim' prop
+
+### Patch Changes
+
+- a04846c: FIXED: set types of some props on PageMetadata
+
 ## 15.3.0
 
 ### Minor Changes

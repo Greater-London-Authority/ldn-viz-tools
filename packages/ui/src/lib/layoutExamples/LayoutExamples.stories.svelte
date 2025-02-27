@@ -9,12 +9,14 @@
 </script>
 
 <script lang="ts">
+
 	import { Story } from '@storybook/addon-svelte-csf';
 
 	import LeggiExplorer from './Dashboards/LeggiExplorer.svelte';
 	import PopulationProjection from './Dashboards/PopulationProjection.svelte';
 	import RiverHealth from './Dashboards/RiverHealth.svelte';
 	import SimpleDashboard from './Dashboards/SimpleDashboard.svelte';
+
 </script>
 
 <Story name="Simple Dashboard" id="SimpleDash">
