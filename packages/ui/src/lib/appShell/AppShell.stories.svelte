@@ -22,17 +22,17 @@
 	import SidebarSection from '../sidebar/elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from '../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 
-	import { First, Fourth, Second, Third } from './../tabs/demoSections';
+	import { Demo1, Leggi, Pop1, Sewers } from '$lib/layoutExamples/Dashboards/demoTabs';
 
 	const isOpen = writable(true);
 
 	let selectedValue = 'markers';
 
 	let tabs = [
-		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
-		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
-		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
-		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
+		{ id: 'markers', label: 'Markers', icon: ChartBar, content: Demo1 },
+		{ id: 'filters', label: 'Filters', icon: Funnel, content: Leggi },
+		{ id: 'analysis', label: 'Analysis', icon: Map, content: Pop1 },
+		{ id: 'layers', label: 'Layers', icon: MapPin, content: Sewers }
 	];
 </script>
 
