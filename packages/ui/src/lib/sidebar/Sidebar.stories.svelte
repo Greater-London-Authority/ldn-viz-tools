@@ -41,6 +41,7 @@
 	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 
+	import { SidebarBottomContext } from '@ldn-viz/docs';
 	import SidebarTabLabel from './elements/sidebarTabs/SidebarTabLabel.svelte';
 	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
 
@@ -72,7 +73,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="-section" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -131,7 +132,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -180,7 +181,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -217,19 +218,19 @@
 	<Sidebar>
 		<svelte:fragment slot="tabs">
 			<SidebarTabList bind:selectedValue>
-				<SidebarTabLabel tabId="markers">
+				<SidebarTabLabel sidebarSectionId="markers-section" tabId="markers">
 					<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Data Markers
 				</SidebarTabLabel>
-				<SidebarTabLabel tabId="filters">
+				<SidebarTabLabel sidebarSectionId="filters-section" tabId="filters">
 					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Filters
 				</SidebarTabLabel>
-				<SidebarTabLabel tabId="analysis">
+				<SidebarTabLabel sidebarSectionId="analysis-section" tabId="analysis">
 					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Analysis
 				</SidebarTabLabel>
-				<SidebarTabLabel tabId="layers">
+				<SidebarTabLabel sidebarSectionId="layers-section" tabId="layers">
 					<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Layers
 				</SidebarTabLabel>
@@ -245,29 +246,29 @@
 		</SidebarHeader>
 		<svelte:fragment slot="sections">
 			{#if selectedValue === 'markers'}
-				<div>
+				<SidebarSection id="markers-section">
 					Markers is selected, so we'd render a
 					<code> &lt;Marker /&gt;</code>
 					component
-				</div>
+				</SidebarSection>
 			{:else if selectedValue === 'filters'}
-				<div>
+				<SidebarSection id="filters-section">
 					Filter is selected, so we'd render a
 					<code> &lt;Filters /&gt;</code>
 					component
-				</div>
+				</SidebarSection>
 			{:else if selectedValue === 'analysis'}
-				<div>
+				<SidebarSection id="analysis-section">
 					Analysis is selected, so we'd render a
 					<code> &lt;Analysis /&gt;</code>
 					component
-				</div>
+				</SidebarSection>
 			{:else if selectedValue === 'layers'}
-				<div>
+				<SidebarSection id="layers-section">
 					Layers is selected, so we'd render a
 					<code> &lt;Layer /&gt;</code>
 					component
-				</div>
+				</SidebarSection>
 			{/if}
 		</svelte:fragment>
 		<SidebarFooter slot="footer">
@@ -296,19 +297,19 @@
 	<Sidebar>
 		<svelte:fragment slot="tabs">
 			<SidebarTabList bind:selectedValue>
-				<SidebarTabLabel tabId="markers">
+				<SidebarTabLabel sidebarSectionId="markers-section" tabId="markers">
 					<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Data Markers
 				</SidebarTabLabel>
-				<SidebarTabLabel tabId="filters">
+				<SidebarTabLabel sidebarSectionId="filters-section" tabId="filters">
 					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Filters
 				</SidebarTabLabel>
-				<SidebarTabLabel tabId="analysis">
+				<SidebarTabLabel sidebarSectionId="analysis-section" tabId="analysis">
 					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Analysis
 				</SidebarTabLabel>
-				<SidebarTabLabel tabId="layers">
+				<SidebarTabLabel sidebarSectionId="layers-section" tabId="layers">
 					<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
 					Layers
 				</SidebarTabLabel>
@@ -324,25 +325,25 @@
 		</SidebarHeader>
 		<svelte:fragment slot="sections">
 			{#if selectedValue === 'markers'}
-				<div>
+				<div id="markers-section">
 					Markers is selected, so we'd render a
 					<code> &lt;Marker /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'filters'}
-				<div>
+				<div id="filters-section">
 					Filter is selected, so we'd render a
 					<code> &lt;Filters /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'analysis'}
-				<div>
+				<div id="analysis-section">
 					Analysis is selected, so we'd render a
 					<code> &lt;Analysis /&gt;</code>
 					component
 				</div>
 			{:else if selectedValue === 'layers'}
-				<div>
+				<div id="layers-section">
 					Layers is selected, so we'd render a
 					<code> &lt;Layer /&gt;</code>
 					component
@@ -367,6 +368,78 @@
 	</Sidebar>
 </Story>
 
+<Story name="Bottom Placement with tabs" decorators={[() => SidebarBottomContext]} source>
+	<Sidebar placement="bottom">
+		<svelte:fragment slot="tabs">
+			<SidebarTabList orientation="horizontal" bind:selectedValue>
+				<SidebarTabLabel sidebarSectionId="markers-section" tabId="markers">
+					<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Data Markers
+				</SidebarTabLabel>
+				<SidebarTabLabel sidebarSectionId="filters-section" tabId="filters">
+					<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Filters
+				</SidebarTabLabel>
+				<SidebarTabLabel sidebarSectionId="analysis-section" tabId="analysis">
+					<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Analysis
+				</SidebarTabLabel>
+				<SidebarTabLabel sidebarSectionId="layers-section" tabId="layers">
+					<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
+					Layers
+				</SidebarTabLabel>
+			</SidebarTabList>
+		</svelte:fragment>
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<svelte:fragment slot="sections">
+			{#if selectedValue === 'markers'}
+				<SidebarSection id="markers-section">
+					Markers is selected, so we'd render a
+					<code> &lt;Marker /&gt;</code>
+					component
+				</SidebarSection>
+			{:else if selectedValue === 'filters'}
+				<SidebarSection id="filters-section">
+					Filter is selected, so we'd render a
+					<code> &lt;Filters /&gt;</code>
+					component
+				</SidebarSection>
+			{:else if selectedValue === 'analysis'}
+				<SidebarSection id="analysis-section">
+					Analysis is selected, so we'd render a
+					<code> &lt;Analysis /&gt;</code>
+					component
+				</SidebarSection>
+			{:else if selectedValue === 'layers'}
+				<SidebarSection id="layers-section">
+					Layers is selected, so we'd render a
+					<code> &lt;Layer /&gt;</code>
+					component
+				</SidebarSection>
+			{/if}
+		</svelte:fragment>
+		<SidebarFooter slot="footer">
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
 <Story name="Left Placement" source>
 	<Sidebar placement="left">
 		<SidebarHeader title="Main sidebar title" slot="header">
@@ -380,7 +453,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -426,7 +499,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -472,7 +545,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -518,7 +591,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2, 3, 4, 5, 6, 7, 8]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -564,7 +637,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -610,7 +683,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>
@@ -688,7 +761,7 @@
 		<svelte:fragment slot="sections">
 			{@const sections = [1, 2]}
 			{#each sections as _section}
-				<SidebarSection title="Section Title">
+				<SidebarSection id="section-{_section}" title="Section Title">
 					Section Content
 					<div>
 						<SidebarGroupTitle>

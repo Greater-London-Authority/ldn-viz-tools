@@ -31,6 +31,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
+	import TabLabel from '../../../tabs/TabLabel.svelte';
 	import { classNames } from '../../../utils/classNames';
 
 	/**
@@ -38,9 +39,13 @@
 	 */
 	export let tabId: string;
 
-	const { selectedValue, orientation } = getContext<{
+	/**
+	 * Value that corresponds to panel this tab opens
+	 */
+	export let sidebarSectionId: string;
+
+	const { selectedValue } = getContext<{
 		selectedValue: Writable<string>;
-		orientation: 'vertical' | 'horizontal';
 	}>('tabContext');
 
 	// Context required to make sidebar open/ close
@@ -52,39 +57,45 @@
 	/**
 	 * Function called when user clicks on a tab label.
 	 */
-	export let selectionHandler = handleSelection;
+	export let handler = (tabId: string) =>
+		handleSelection(sidebarIsOpen, sidebarAlwaysOpen, selectedValue, tabId);
 
-	const keydownHandler = (ev: KeyboardEvent) => {
-		if (ev.key === 'Enter' || ev.key === ' ') {
-			selectionHandler(sidebarIsOpen, sidebarAlwaysOpen, selectedValue, tabId);
+	$: isSelected = tabId === $selectedValue;
+
+	/**
+	 * Function called to set tabindex. When sidebar is closed, all TabLabels have tabindex="0".
+	 */
+	const setTabIndex = (isSelected: boolean, sidebarIsOpen: boolean) => {
+		if (sidebarIsOpen == undefined) {
+			return isSelected ? 0 : -1;
 		}
+
+		if (!sidebarIsOpen) {
+			return 0;
+		} else if (sidebarIsOpen && isSelected) {
+			return 0;
+		} else return -1;
 	};
 
 	const themeClasses = [
 		'bg-color-container-level-0 hover:bg-color-action-background-secondary-muted-hover text-color-text-primary'
 	];
 
-	const orientationClasses = {
-		vertical:
-			'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center cursor-pointer',
-		horizontal: 'text-base py-2 px-4 flex items-center select-none'
-	};
+	const orientationClasses =
+		'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center';
 
-	$: tabLabelClasses = classNames(...themeClasses, orientationClasses[orientation], 'select-none');
+	$: tabLabelClasses = classNames(...themeClasses, orientationClasses, 'select-none');
 </script>
 
-<div
-	on:click={() => selectionHandler(sidebarIsOpen, sidebarAlwaysOpen, selectedValue, tabId)}
-	on:keydown={keydownHandler}
-	tabindex="0"
-	role="tab"
-	class={classNames(
-		tabLabelClasses,
-		tabId === $selectedValue
-			? '!bg-color-action-background-primary cursor-default !text-color-static-white hover:!bg-color-action-background-primary-hover dark:hover:!text-color-text-inverse-primary'
-			: 'cursor-pointer'
-	)}
+<TabLabel
+	{tabId}
+	tabPanelId={sidebarSectionId}
+	handleSelection={() => {
+		handler(tabId);
+	}}
+	{tabLabelClasses}
+	setTabIndex={() => setTabIndex(isSelected, $sidebarIsOpen)}
 >
 	<!-- Label and/or icon -->
 	<slot />
-</div>
+</TabLabel>

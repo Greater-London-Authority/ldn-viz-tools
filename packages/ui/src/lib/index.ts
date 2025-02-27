@@ -63,6 +63,7 @@ export { default as LoadingIndicator } from './loadingIndicator/LoadingIndicator
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
+export { default as TabPanel } from './tabs/TabPanel.svelte';
 
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 
