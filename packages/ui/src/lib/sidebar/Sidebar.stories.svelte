@@ -228,7 +228,7 @@
 				</p>
 			</svelte:fragment>
 		</SidebarHeader>
-
+		<!-- COMPONENT PASSED AS CONTENT IN TABS ARRAY WILL RENDER HERE-->
 		<SidebarFooter slot="footer">
 			<div class="flex justify-between">
 				<div class="w-[165px]"><LogoMayor /></div>
@@ -252,7 +252,7 @@
 		/>
 	</div>
 
-	<Sidebar {tabs}>
+	<Sidebar {tabs} bind:selectedValue>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
 				<p>
@@ -261,7 +261,7 @@
 				</p>
 			</svelte:fragment>
 		</SidebarHeader>
-
+		<!-- COMPONENT PASSED AS CONTENT IN TABS ARRAY WILL RENDER HERE-->
 		<SidebarFooter slot="footer">
 			<div class="flex justify-between">
 				<div class="w-[165px]"><LogoMayor /></div>
