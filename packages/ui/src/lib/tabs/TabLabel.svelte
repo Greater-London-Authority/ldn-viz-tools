@@ -5,7 +5,7 @@
 	import type { Tab } from './types';
 
 	/**
-	 * Unique identifier: will be used to set the value of `selectedValue` for the parent `TabList` when this item is selected
+	 * Unique identifier that is used to set the value of `selectedValue` for the parent `TabList` when this item is selected.
 	 * Also connects TabLabel to relevant TabPanel
 	 */
 	export let tabId: Tab['id'];
