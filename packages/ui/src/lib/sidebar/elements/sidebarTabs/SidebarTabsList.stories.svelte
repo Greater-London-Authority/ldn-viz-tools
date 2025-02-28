@@ -16,7 +16,8 @@
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 
-	//Example component passed to panel In reality these would be contained in your app
+	// Example component passed to panel.
+	// In reality these would be be a component defined in your app, rather than a component imported from the UI library.
 	import NonIdealState from '../../../nonIdealState/NonIdealState.svelte';
 
 	let selectedValue: string | undefined = undefined;
