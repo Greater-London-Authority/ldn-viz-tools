@@ -44,8 +44,8 @@
 		<Select items={projectionItems} label="Projection" id="example-input-2" />
 	</SidebarGroup>
 	<SidebarGroup title="Projection Area">
-		<Select items={boroughItems} label="Borough" id="example-input-1" />
-		<Select items={wardItems} label="Ward" id="example-input-2" disabled />
+		<Select items={boroughItems} label="Borough" id="example-input-3" />
+		<Select items={wardItems} label="Ward" id="example-input-4" disabled />
 	</SidebarGroup>
 
 	<SidebarGroup title="Year">
