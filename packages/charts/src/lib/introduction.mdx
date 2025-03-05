@@ -5,15 +5,18 @@ import '../app.postcss';
 
 # Welcome to Storybook for ldn-viz-tools charts
 
-## A collection of chart components for rapid, consistent data visualisation design for London City Intelligence.
+## A collection of chart components for rapid, consistent data visualisation design for the City Intelligence Unit at the [Greater London Authority](https://www.london.gov.uk).
 
-Storybook helps you build UI components in isolation from your app's business logic, data, and context.
-That makes it easy to develop hard-to-reach states. Save these UI states as **stories** to revisit during development, testing, or QA.
+This package is published to npm as [@ldn-viz/charts](https://www.npmjs.com/package/@ldn-viz/ui).
 
-### ChartContainer
+This packaage primarily provides a wrapper around the [Observable Plot](https://observablehq.com/plot/) library.
 
-Each basic chart type is framed in the **chartContainer** component, which provides a consistent framework including Title, Subtitle, Screen-reader accessible alt-text, optional Footer-credits and Download/ export buttons.
+- `observablePlotFragments.ts` defines our default styling.
+- `plot.ts` exports a `Plot` object that wraps Observable Plot's `Plot` object, but applies our default styling
+- `ObservablePlotInner` is a Svelte component that renders an Observable Plot plot
+- `ObservablePlot` is a Svelte component that renders an Observable Plot plot, surrounded by a Title, Subtitle, Screen-reader accessible alt-text, optional Footer-credits and Download/ export buttons
 
-### Acknowledgements
+Note that to achieve the correct styling you should:
 
-This project is inspired by the [ONS Svelte Charts Library](https://onsvisual.github.io/svelte-charts/) - in turn largely based on the chart examples by [Michael Keller](https://twitter.com/mhkeller), the author of the Layer Cake charts/graphics framework for Svelte.
+- import `Plot` from `@ldn-viz/charts` rather than `@observablehq/plot`
+- explicitly render axes with `Plot.axisX()`/`Plot.axisY()` marks rather than relying on them being created implicitly (which will cause them to use the default styling defined by Observable Plot, rather than ldn-viz)
