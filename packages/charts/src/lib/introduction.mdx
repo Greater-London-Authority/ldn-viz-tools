@@ -14,10 +14,11 @@ This packaage primarily provides a wrapper around the [Observable Plot](https://
 - `observablePlotFragments.ts` defines our default styling.
 - `plot.ts` exports a `Plot` object that wraps Observable Plot's `Plot` object, but applies our default styling
 - `ObservablePlotInner` is a Svelte component that renders an Observable Plot plot
-- `ObservablePlot` is a Svelte component that renders an Observable Plot plot, surrounded by a Title, Subtitle, Screen-reader accessible alt-text, optional Footer-credits and Download/ export buttons
+- `ObservablePlot` is a Svelte component that renders an Observable Plot plot, surrounded by a Title, Subtitle, Screen-reader accessible alt-text, optional Footer-credits and download/export buttons
 
 Note that to achieve the correct styling you should:
 
-- import `Plot` from `@ldn-viz/charts`
-rather than `@observablehq/plot`
+- import `Plot` from `@ldn-viz/charts` (rather than `@observablehq/plot`
+)
+
 - explicitly render axes with `Plot.axisX()`/`Plot.axisY()` marks rather than relying on them being created implicitly (which will cause them to use the default styling defined by Observable Plot, rather than ldn-viz)
