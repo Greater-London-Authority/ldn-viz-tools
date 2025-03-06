@@ -21,7 +21,7 @@
 	 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
 	 * If this does not yield the desired results you may need to adjust your markup.
 	 */
-	export let htmlNode: HTMLElement;
+	export let htmlNode: HTMLElement | SVGElement;
 
 	/**
 	 * The available file formats for the downloaded image.
@@ -70,9 +70,13 @@
 		link.remove();
 	};
 
-	const findNearestChildSvg = (htmlNode: HTMLElement) => {
+	const findNearestChildSvg = (htmlNode: HTMLElement | SVGElement) => {
+		if (htmlNode instanceof SVGElement) {
+			return htmlNode;
+		}
+
 		if (!(htmlNode instanceof HTMLElement)) {
-			throw new Error('htmlNode must be an HTMLElement');
+			throw new Error('htmlNode must be an HTMLElement or SVGElement');
 		}
 
 		const svgElements = htmlNode.querySelectorAll('svg');
@@ -102,6 +106,40 @@
 		return node;
 	};
 
+	const sum = (vals: number[]) => vals.reduce((total, current) => total + +current, 0);
+
+	const getHeight = (div: HTMLElement) => {
+		// N.B. wwe need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
+		const display = window.getComputedStyle(div).display;
+
+		if (display !== 'contents') {
+			return div.clientHeight;
+		}
+
+		const children: Element[] = Array.from(div.children);
+
+		const heights = children.map((c: Element) => +c.clientHeight);
+		const marginTop = children.map(
+			(c: Element) => +window.getComputedStyle(c).marginTop.replace('px', '')
+		);
+		const marginBottom = children.map(
+			(c: Element) => +window.getComputedStyle(c).marginBottom.replace('px', '')
+		);
+
+		return sum([...heights, ...marginTop, ...marginBottom]);
+	};
+
+	const getWidth = (div: HTMLElement) => {
+		// N.B. we need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
+		const display = window.getComputedStyle(div).display;
+
+		if (display !== 'contents') {
+			return div.clientWidth;
+		}
+
+		return Array.from(div.children)[0]?.clientWidth;
+	};
+
 	const download = async () => {
 		const captureOptions = {
 			style: {
@@ -110,8 +148,8 @@
 
 			// N.B. if we don't specify the width/height, then html-to-image will use the size of the HTML element before
 			// adjusting the style to add the padding. This would result in the content being truncated.
-			width: 2 * padding + htmlNode.clientWidth,
-			height: 2 * padding + htmlNode.clientHeight,
+			width: 2 * padding + getWidth(htmlNode),
+			height: 2 * padding + getHeight(htmlNode),
 
 			filter
 		};

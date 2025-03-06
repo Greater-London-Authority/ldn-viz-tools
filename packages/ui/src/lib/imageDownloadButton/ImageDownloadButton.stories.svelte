@@ -24,6 +24,7 @@
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
 	let htmlNode: HTMLElement;
+	let svgRef: SVGElement;
 </script>
 
 <div
@@ -66,6 +67,18 @@
 
 <Story name="Full width button">
 	<ImageDownloadButton {htmlNode} scaleFactor={2} fullWidth>
+		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
+	</ImageDownloadButton>
+</Story>
+
+<!-- You can also provide an SVG element directly, rather than an HTML element that contains an SVG as a child. -->
+<Story name="Providing SVG element">
+	<svg bind:this={svgRef} width="100" height="100">
+		<rect x="0" y="0" width="100" height="100" fill="red" />
+		<circle cx="10" cy="10" r="10" fill="blue" />
+	</svg>
+
+	<ImageDownloadButton htmlNode={svgRef} scaleFactor={2} fullWidth>
 		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" slot="afterLabel" />
 	</ImageDownloadButton>
 </Story>

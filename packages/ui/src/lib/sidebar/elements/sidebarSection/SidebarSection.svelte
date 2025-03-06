@@ -12,14 +12,12 @@
 	export let title = '';
 </script>
 
-<section>
-	<div
-		class="border-b border-color-ui-border-secondary space-y-2 pb-2 text-sm bg-color-container-level-1 text-color-text-primary"
-	>
+<section class="border-b border-color-ui-border-secondary last-of-type:border-0">
+	<div class="space-y-4 pb-4 text-sm bg-color-container-level-1 text-color-text-primary">
 		{#if $$slots.title}
 			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->
 			<slot name="title" />
-		{:else}
+		{:else if title}
 			<SidebarSectionTitle>{title}</SidebarSectionTitle>
 		{/if}
 		<!-- The content to be displayed inside this section. -->

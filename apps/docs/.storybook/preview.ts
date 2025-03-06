@@ -1,4 +1,3 @@
-// import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/svelte';
 import { docs } from './ciuStorybookTheme';
 
@@ -29,6 +28,7 @@ const preview: Preview = {
 						'Introduction',
 						'Typography',
 						'Form Element Styling',
+						'Auth',
 						'Components',
 						[
 							'Buttons',
@@ -41,42 +41,12 @@ const preview: Preview = {
 							'Datepicker',
 							'Icons'
 						],
+						'Components - Layout And Themes',
 						'*',
 						'Examples'
 					]
 				]
 			}
-			// storySort: {
-			// 	order: [
-			// 		'Ui',
-			// 		[
-			// 			'Introduction',
-			// 			'Buttons',
-			// 			'Input',
-			// 			'Select',
-			// 			'RadioButtons',
-			// 			'Checkboxes',
-			// 			'Overlays',
-			// 			'*',
-			// 			'Datepicker',
-			// 			'Icons'
-			// 		],
-			// 		'Ui - App Layout',
-			// 		[
-			// 			'Themes',
-			// 			'AppShell',
-			// 			'Sidebar',
-			// 			'Header',
-			// 			'*',
-			// 			'Meta, Analytics And Cookies',
-			// 			'Media Query Stores'
-			// 		],
-			// 		'Ui - App Layout Examples',
-			// 		'Charts',
-			// 		['Introduction', 'ChartContainer', '*'],
-			// 		'Charts - Examples'
-			// 	]
-			// }
 		},
 		controls: {
 			matchers: {

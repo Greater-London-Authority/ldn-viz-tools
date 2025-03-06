@@ -1,5 +1,32 @@
 # ldn-viz-tools-charts
 
+## 5.1.0
+
+### Minor Changes
+
+- 2321866: CHANGED: add ability to align the sub-components of two or more `ChartContainers` placed side-by-side
+- 56718bf: FIXED: order of alt and description in `ChartContainer` component and removed 'View description' button from image capture on download
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Patch Changes
+
+- Updated dependencies [dc63318]
+- Updated dependencies [fec8705]
+- Updated dependencies [824b681]
+- Updated dependencies [11e1f97]
+- Updated dependencies [8321585]
+- Updated dependencies [1610465]
+- Updated dependencies [4eac8b2]
+- Updated dependencies [978beb6]
+- Updated dependencies [a04846c]
+- Updated dependencies [ae6a3df]
+- Updated dependencies [adb7e59]
+- Updated dependencies [49fd045]
+- Updated dependencies [d344f2c]
+- Updated dependencies [2557336]
+- Updated dependencies [bdbedf3]
+  - @ldn-viz/ui@16.0.0
+
 ## 5.0.1
 
 ### Patch Changes

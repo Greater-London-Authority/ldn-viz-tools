@@ -13,6 +13,8 @@
 	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
 	type Theme = 'light' | 'dark' | 'system';
 
+	export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+
 	const themes: Theme[] = ['light', 'dark', 'system'];
 
 	const onChange = (e: { value: string }) => {
@@ -36,14 +38,12 @@
 
 <div class="inline-flex">
 	<div use:trigger>
-		<Button
-			{...$trigger}
-			class={`rounded-full !p-1`}
-			variant="solid"
-			emphasis="secondary"
-			size="sm"
-		>
-			<Icon src={themeIcon} theme="mini" class="w-5 h-5" aria-hidden="true" />
+		<Button {...$trigger} class={`rounded-full !p-1`} variant="solid" emphasis="secondary" {size}>
+			{#if size === 'xs'}
+				<Icon src={themeIcon} theme="mini" class="w-4 h-4" aria-hidden="true" />
+			{:else}
+				<Icon src={themeIcon} theme="mini" class="w-5 h-5" aria-hidden="true" />
+			{/if}
 			<span class="sr-only">Theme Switch</span>
 		</Button>
 	</div>
