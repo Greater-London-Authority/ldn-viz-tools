@@ -21,7 +21,7 @@
 	 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
 	 * If this does not yield the desired results you may need to adjust your markup.
 	 */
-	export let htmlNode: HTMLElement;
+	export let htmlNode: HTMLElement | SVGElement;
 
 	/**
 	 * The available file formats for the downloaded image.
@@ -70,9 +70,13 @@
 		link.remove();
 	};
 
-	const findNearestChildSvg = (htmlNode: HTMLElement) => {
+	const findNearestChildSvg = (htmlNode: HTMLElement | SVGElement) => {
+		if (htmlNode instanceof SVGElement) {
+			return htmlNode;
+		}
+
 		if (!(htmlNode instanceof HTMLElement)) {
-			throw new Error('htmlNode must be an HTMLElement');
+			throw new Error('htmlNode must be an HTMLElement or SVGElement');
 		}
 
 		const svgElements = htmlNode.querySelectorAll('svg');

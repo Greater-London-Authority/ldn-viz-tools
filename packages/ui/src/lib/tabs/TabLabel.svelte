@@ -2,48 +2,50 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
+	import type { Tab } from './types';
 
-	// unique identifier: will be used to set the value of `selectedValue` for the parent `TabList` when this item is selected
-	export let tabId: string;
+	/**
+	 * Unique identifier that is used to set the value of `selectedValue` for the parent `TabList` when this item is selected.
+	 * Also connects TabLabel to relevant TabPanel
+	 */
+	export let tabId: Tab['id'];
+
+	export let handleSelect;
 
 	const { selectedValue, orientation } = getContext<{
 		selectedValue: Writable<string>;
 		orientation: 'vertical' | 'horizontal';
 	}>('tabContext');
 
-	const handleSelection = () => {
-		$selectedValue = tabId;
-	};
-	const keydownHandler = (ev: KeyboardEvent) => {
-		if (ev.key === 'Enter' || ev.key === ' ') {
-			handleSelection();
-		}
-	};
+	$: isSelected = tabId === $selectedValue;
 
 	const orientationClasses = {
-		vertical:
-			'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center cursor-pointer',
+		vertical: 'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center',
 		horizontal: 'text-base py-2 px-4 flex items-center select-none'
 	};
 
 	$: tabLabelClasses = classNames(
 		'bg-color-input-background-off text-color-text-primary underline hover:bg-color-input-background-hover hover:no-underline',
+		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-action-primary-focussed focus:ring-2 focus:outline-none focus:ring-color-ui-background-primary',
 		orientationClasses[orientation]
 	);
 </script>
 
-<div
-	on:click={handleSelection}
-	on:keydown={keydownHandler}
-	tabindex="0"
+<button
+	on:click={() => handleSelect(tabId)}
+	id={tabId}
 	role="tab"
+	aria-controls={`${tabId}-panel`}
+	aria-selected={isSelected}
+	tabindex={isSelected ? 0 : -1}
 	class={classNames(
 		tabLabelClasses,
-		tabId === $selectedValue
-			? '!bg-color-input-background-active cursor-default !text-color-static-white no-underline'
-			: 'cursor-pointer'
+		orientationClasses[orientation],
+		isSelected
+			? '!bg-color-input-background-active !text-color-static-white cursor-default no-underline'
+			: ''
 	)}
 >
 	<!-- contents of the tab label (name and/or icon) -->
 	<slot />
-</div>
+</button>

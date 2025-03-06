@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { Story } from '@storybook/addon-svelte-csf';
 </script>
 
 <!-- This story is empty, as we don't actually want to redirect from Storybook. -->
