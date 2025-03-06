@@ -563,26 +563,26 @@ module.exports = plugin(function ({ addComponents }) {
         Image, Picture, Video, Figure
     */
 
-    'img.format, .prose img:where(:not(.not-prose, .not-prose *)), .prose.responsive img:where(:not(.not-prose, .not-prose *))':
-      {
-        marginTop: 'var(--spacing-3xl-em)',
-        marginBottom: 'var(--spacing-3xl-em)',
-        maxWidth: '100%'
-      },
+    'img.format, .prose img, .prose.resonsive img': {
+      maxWidth: '100% !important'
+    },
+
+    'img.format, .prose img:where(:not(.not-prose, .not-prose *))': {
+      marginTop: 'var(--spacing-3xl-em)',
+      marginBottom: 'var(--spacing-3xl-em)'
+    },
 
     'picture.format, .prose picture:where(:not(.not-prose, .not-prose *)), .prose.responsive picture:where(:not(.not-prose, .not-prose *))':
       {
         display: 'block',
         marginTop: 'var(--spacing-3xl-em)',
-        marginBottom: 'var(--spacing-3xl-em)',
-        maxWidth: '100%'
+        marginBottom: 'var(--spacing-3xl-em)'
       },
 
     'video.format, .prose video:where(:not(.not-prose, .not-prose *)), .prose.responsive video:where(:not(.not-prose, .not-prose *))':
       {
         marginTop: 'var(--spacing-3xl-em)',
-        marginBottom: 'var(--spacing-3xl-em)',
-        maxWidth: '100%'
+        marginBottom: 'var(--spacing-3xl-em)'
       },
 
     'figure.format, .prose figure:where(:not(.not-prose, .not-prose *))': {
@@ -590,7 +590,7 @@ module.exports = plugin(function ({ addComponents }) {
       marginBottom: 'var(--spacing-3xl-em)'
     },
 
-    'figure.format > *, .prose figure > *:where(:not(.not-prose, .not-prose *))': {
+    'figure.format > *, .prose figure > *': {
       marginTop: 0,
       marginBottom: 0
     },
