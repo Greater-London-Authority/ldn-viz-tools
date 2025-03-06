@@ -7,9 +7,7 @@ const getMaxWidth = (ch, fontSize, baseFontSize = 16) => {
 
 module.exports = plugin(function ({ addComponents }) {
   addComponents({
-    '.prose, .format': {
-      color: 'var(--theme-text-primary)',
-
+    '.prose :where(:not(.not-prose, .not-prose *)), .format': {
       // set a base for em sized elements
       fontFamily: 'var(--typography-sm-body-md-font-family)',
       fontWeight: 'var(--typography-sm-body-md-fontweight)',
@@ -43,6 +41,14 @@ module.exports = plugin(function ({ addComponents }) {
 
         maxWidth: getMaxWidth(65, 20)
       }
+    },
+
+    '.prose :first-child': {
+      marginTop: 0
+    },
+
+    '.prose :last-child': {
+      marginBottom: 0
     },
 
     /*
@@ -531,11 +537,11 @@ module.exports = plugin(function ({ addComponents }) {
     */
 
     'a.format, .prose a:not(:where(:is(h2, h3, h4) *)):where(:not(.not-prose, .not-prose *))': {
-      color: 'var(--theme-action-primary)',
+      color: 'var(--theme-action-text-primary)',
       fontWeight: 'var(--font-weight-semibold)',
       textDecoration: 'underline',
       textUnderlineOffset: '2px',
-      textDecorationColor: 'var(--theme-action-primary)',
+      textDecorationColor: 'var(--theme-action-text-primary)',
       textDecorationThickness: '1px',
       '& code': {
         fontWeight: 'var(--font-weight-semibold)'
@@ -873,7 +879,7 @@ module.exports = plugin(function ({ addComponents }) {
       fontFamily: 'monospace',
       padding: 'var(--spacing-xxs-em) var(--spacing-xs-em)',
       fontSize: 'var(--typography-body-sm)',
-      backgroundColor: 'var(--theme-container-level-1)'
+      backgroundColor: 'rgba(229, 229, 229, 0.35)'
     },
 
     '.format code, .prose code:where(:not(.not-prose, .not-prose *)):before': {
