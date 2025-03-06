@@ -1,5 +1,29 @@
 # ldn-viz-tools-ui
 
+## 17.0.0
+
+### Major Changes
+
+- bc56cf5: FIXED: changes to `Tabs`/`TabList`/`TabPanel` to improve accessibility (ARIA attributes, more semantic markup, and keyboard interactions)
+
+  CHANGED: API of `Tabs` component now accepts a `tabs` prop rather than using slots
+
+  CHANGED: API of `Sidebar` component now accepts a `tabs` prop rather than using slots
+
+  CHANGED: API of `SidebarTabList` component now accepts a `tabs` prop rather than using slots
+
+  CHANGED: styling of `SidebarSection`/`SidebarGroupTitle`/`SidebarSectionTitle`
+
+  REMOVED: `SidebarFromArray` (the `Sidebar` component now uses the same API)
+
+### Minor Changes
+
+- f952670: ADDED: `LoadingIndicator` component to wrap around `Spinner` and display static icon in place of spinner if user prefers reduced motion
+
+  Accessibility: Updated `AsyncButton` and `NonIdealState` components to announce state changes and use `LoadingIndicator` to ensure correct implementation of reduced motion
+
+- bfd2c81: CHANGED: allow `htmlNode` prop of `ImageDownloadButton` to be an SVG element, rather than parent of an SVG element
+
 ## 16.1.0
 
 ### Minor Changes

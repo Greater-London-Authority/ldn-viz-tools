@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 7.3.0
+
+### Minor Changes
+
+- f952670: Accessibility: updated `Geolocator` component to announce state change and use `LoadingIndicator`
+
 ## 7.2.0
 
 ### Minor Changes
