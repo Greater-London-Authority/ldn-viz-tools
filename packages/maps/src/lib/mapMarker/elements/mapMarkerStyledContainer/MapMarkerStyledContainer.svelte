@@ -25,7 +25,7 @@
 		}
 	};
 
-	let classes = `shadow-[0_0_1px_0_white] absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container-level-1 overflow-y-auto`;
+	let classes = `shadow-lg border border-color-ui-border-secondary absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container-level-0 overflow-y-auto`;
 	classes += ' ' + ($$restProps.class || '');
 	delete $$restProps.class;
 </script>
@@ -54,7 +54,7 @@
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 150 100"
-			class="absolute bottom-0 left-1/2 w-8 h-4 transform -translate-x-1/2 stroke-color-container-level-1 fill-color-container-level-1"
+			class="absolute bottom-0 left-1/2 w-8 h-4 transform -translate-x-1/2 stroke-color-container-level-0 fill-color-container-level-0"
 		>
 			<line stroke="white" stroke-width="4" x1="0" y1="0" x2="75" y2="100" />
 			<line stroke="white" stroke-width="4" x1="75" y1="100" x2="150" y2="0" />

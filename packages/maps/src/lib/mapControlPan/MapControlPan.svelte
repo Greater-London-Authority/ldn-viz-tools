@@ -54,7 +54,7 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan up"
-			class="pointer-events-auto"
+			class="pointer-events-auto shadow"
 			on:click={newHandler(panUp)}
 		>
 			<Icon src={ChevronUp} class="w-8 h-8 pb-1 pt-0.5" />
@@ -66,7 +66,7 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan left"
-			class="pointer-events-auto"
+			class="pointer-events-auto shadow"
 			on:click={newHandler(panLeft)}
 		>
 			<Icon src={ChevronLeft} class="w-8 h-8 pr-1 pl-0.5" />
@@ -78,7 +78,7 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan right"
-			class="pointer-events-auto"
+			class="pointer-events-auto shadow"
 			on:click={newHandler(panRight)}
 		>
 			<Icon src={ChevronRight} class="w-8 h-8 pl-1 pr-0.5" />
@@ -90,7 +90,7 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan down"
-			class="pointer-events-auto"
+			class="pointer-events-auto shadow"
 			on:click={newHandler(panDown)}
 		>
 			<Icon src={ChevronDown} class="w-8 h-8 pt-1 pb-0.5" />

@@ -42,7 +42,7 @@
 	}
 </script>
 
-<div class="flex flex-col invisible sm:visible z-[999] w-64 pointer-events-auto">
+<div class="flex flex-col invisible sm:visible z-[999] w-64 pointer-events-auto shadow">
 	<Select
 		bind:justValue={selectedBorough}
 		items={options}
@@ -50,6 +50,3 @@
 		placeholder="Select a Borough to zoom"
 	/>
 </div>
-
-<style>
-</style>

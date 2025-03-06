@@ -79,7 +79,7 @@
 </script>
 
 {#if mode}
-	<div class="flex flex-col space-y-1 invisible sm:visible">
+	<div class="flex flex-col space-y-1 invisible sm:visible shadow">
 		<Button
 			variant="square"
 			emphasis="secondary"
