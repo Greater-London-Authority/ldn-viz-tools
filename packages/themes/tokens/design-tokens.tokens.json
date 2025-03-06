@@ -4882,11 +4882,11 @@
           },
           "fontsize": {
             "type": "dimension",
-            "value": 14
+            "value": 16
           },
           "lineheight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "letterspacing": {
             "type": "dimension",
@@ -4903,7 +4903,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.sm.typography.font.weight.medium}"
+          "value": "{global.sm.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
@@ -4956,11 +4956,11 @@
           },
           "fontsize": {
             "type": "dimension",
-            "value": 14
+            "value": 16
           },
           "lineheight": {
             "type": "dimension",
-            "value": 24
+            "value": 28
           },
           "letterspacing": {
             "type": "dimension",
@@ -4980,11 +4980,11 @@
           },
           "fontsize": {
             "type": "dimension",
-            "value": 12
+            "value": 14
           },
           "lineheight": {
             "type": "dimension",
-            "value": 20
+            "value": 24
           },
           "letterspacing": {
             "type": "dimension",
@@ -5025,7 +5025,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.sm.typography.font.weight.medium}"
+          "value": "{global.sm.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
@@ -5173,7 +5173,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.md.typography.font.weight.medium}"
+          "value": "{global.md.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
@@ -5295,7 +5295,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.md.typography.font.weight.medium}"
+          "value": "{global.md.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
@@ -5443,7 +5443,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.lg.typography.font.weight.medium}"
+          "value": "{global.lg.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
@@ -5565,7 +5565,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.lg.typography.font.weight.medium}"
+          "value": "{global.lg.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
@@ -5713,7 +5713,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.xl.typography.font.weight.medium}"
+          "value": "{global.xl.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
@@ -5815,11 +5815,11 @@
         },
         "fontsize": {
           "type": "dimension",
-          "value": 18
+          "value": 16
         },
         "lineheight": {
           "type": "dimension",
-          "value": 28
+          "value": 24
         },
         "letterspacing": {
           "type": "dimension",
@@ -5835,7 +5835,7 @@
         "fontweight": {
           "description": "",
           "type": "dimension",
-          "value": "{global.xl.typography.font.weight.medium}"
+          "value": "{global.xl.typography.font.weight.normal}"
         },
         "fontsize": {
           "type": "dimension",
