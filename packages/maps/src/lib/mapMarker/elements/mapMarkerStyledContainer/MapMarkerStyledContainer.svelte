@@ -54,10 +54,24 @@
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 150 100"
-			class="absolute bottom-0 left-1/2 w-8 h-4 transform -translate-x-1/2 stroke-color-container-level-0 fill-color-container-level-0"
+			class="absolute bottom-0 left-1/2 w-8 h-4 transform -translate-x-1/2 stroke-color-ui-border-secondary fill-color-container-level-0"
 		>
-			<line stroke="white" stroke-width="4" x1="0" y1="0" x2="75" y2="100" />
-			<line stroke="white" stroke-width="4" x1="75" y1="100" x2="150" y2="0" />
+			<line
+				class="stroke-color-ui-border-secondary"
+				stroke-width="4"
+				x1="0"
+				y1="0"
+				x2="75"
+				y2="100"
+			/>
+			<line
+				class="stroke-color-ui-border-secondary"
+				stroke-width="4"
+				x1="75"
+				y1="100"
+				x2="150"
+				y2="0"
+			/>
 			<polygon points="0,0 75,100 150,0" />
 		</svg>
 	{/if}
