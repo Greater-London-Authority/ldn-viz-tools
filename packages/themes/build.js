@@ -202,26 +202,117 @@ const transformString = (str, replace = 'theme', regex = /.*-color/) => {
 const formatCSSVariable = (dictionary) => (token) => {
   let originalName = token.name;
 
-  let themedName = ['theme'].includes(token.path[0])
-    ? transformString(originalName, 'theme-', /.*-color-/)
-    : originalName;
+  let themedName =
+    token.path[0] === 'theme' ? transformString(originalName, 'theme-', /.*-color-/) : originalName;
 
-  const isSpacingOrTypography =
-    token.path.includes('spacing') ||
-    (token.path[0] === 'typography' && ['fontsize', 'lineheight'].includes(token.path.at(-1)));
+  const isSpacing = token.path.includes('spacing');
+  const isFontSize = token.path[0] === 'typography' && token.path.at(-1) === 'fontsize';
+  const isLineHeight = token.path[0] === 'typography' && token.path.at(-1) === 'lineheight';
 
+  const getNestedTokenValue = (path) => {
+    return (
+      path.reduce((obj, key) => (obj && obj[key] ? obj[key] : null), dictionary.properties)
+        ?.value || null
+    );
+  };
+
+  // Get the corresponding font size for a line-height token
+  const getFontSizeForLineHeight = (token) => {
+    if (!isLineHeight) return null;
+
+    // Construct the correct font size path (replace 'lineheight' with 'fontsize')
+    const fontSizePath = [...token.path.slice(0, -1), 'fontsize'];
+
+    // Retrieve the font size token value
+    return getNestedTokenValue(fontSizePath);
+  };
+
+  // Apply correct CSS variable transformation
+  const applyCSSVariable = (value, referenceName = null) => {
+    const varPrefix = referenceName ? `var(--${referenceName}, ` : '';
+    const emReferencePrefix = referenceName ? `var(--${referenceName}-em, ` : '';
+    const varSuffix = referenceName ? ')' : '';
+
+    if (isSpacing) {
+      return `  --${themedName}: ${varPrefix}${value / 16}rem${varSuffix}; /* ${value}px */
+  --${themedName}-em: ${emReferencePrefix}${value / 16}em${varSuffix}; /* ${value}px */`;
+    }
+
+    if (isFontSize) {
+      return `  --${themedName}: ${varPrefix}${value / 16}rem${varSuffix}; /* ${value}px */`;
+    }
+
+    if (isLineHeight) {
+      const fontSize = getFontSizeForLineHeight(token);
+      const unitlessLineHeight = fontSize ? value / fontSize : value / 16;
+      return `  --${themedName}: ${varPrefix}${unitlessLineHeight.toFixed(4)}${varSuffix};`;
+    }
+
+    return `  --${themedName}: ${varPrefix}${value}${varSuffix};`;
+  };
+
+  // Handle tokens that reference other tokens
   if (dictionary.usesReference(token.original.value)) {
     const reference = dictionary.getReferences(token.original.value);
     const referenceName =
       reference[0].path[0] === 'global' ? reference[0].name : transformString(reference[0].name);
 
-    const valueSuffix = isSpacingOrTypography ? 'px' : '';
-    return `  --${themedName}: var(--${referenceName}, ${token.value}${valueSuffix});`;
+    return applyCSSVariable(token.value, referenceName);
   }
 
-  const valueSuffix = isSpacingOrTypography ? 'px' : '';
-  return `  --${themedName}: ${token.value}${valueSuffix};`;
+  // Handle standalone tokens
+  return applyCSSVariable(token.value);
 };
+
+// const formatCSSVariable = (dictionary) => (token) => {
+//   let originalName = token.name;
+
+//   let themedName = ['theme'].includes(token.path[0])
+//     ? transformString(originalName, 'theme-', /.*-color-/)
+//     : originalName;
+
+//   const isSpacing = token.path.includes('spacing');
+//   const isFontSize = token.path[0] === 'typography' && ['fontsize'].includes(token.path.at(-1));
+//   const isLineHeight = token.path[0] === 'typography' && ['lineheight'].includes(token.path.at(-1));
+
+//   if (dictionary.usesReference(token.original.value)) {
+//     const reference = dictionary.getReferences(token.original.value);
+//     const referenceName =
+//       reference[0].path[0] === 'global' ? reference[0].name : transformString(reference[0].name);
+
+//     // Apply correct units to tokens with references
+//     if (isSpacing) {
+//       return `  --${themedName}: var(--${referenceName}, ${token.value / 16}rem); /* ${token.value}px */
+//   --${themedName}-em: var(--${referenceName}-em, ${token.value / 16}em); /* ${token.value}px */`;
+//     }
+
+//     if (isFontSize) {
+//       return `  --${themedName}: var(--${referenceName}, ${token.value / 16}rem); /* ${token.value}px */`;
+//     }
+
+//     if (isLineHeight) {
+//       return `  --${themedName}: var(--${referenceName}, ${token.value / 16});`;
+//     }
+
+//     return `  --${themedName}: var(--${referenceName}, ${token.value});`;
+//   }
+
+//   // Apply correct units to tokens without references
+//   if (isSpacing) {
+//     return `  --${themedName}: ${token.value / 16}rem; /* ${token.value}px */
+//   --${themedName}-em: ${token.value / 16}em; /* ${token.value}px */`;
+//   }
+
+//   if (isFontSize) {
+//     return ` --${themedName}: ${token.value / 16}rem; /* ${token.value}px */`;
+//   }
+
+//   if (isLineHeight) {
+//     return ` --${themedName}: ${token.value / 16};`;
+//   }
+
+//   return `  --${themedName}: ${token.value};`;
+// };
 
 StyleDictionary.registerFormat({
   name: 'css/variables',
@@ -263,7 +354,8 @@ StyleDictionary.registerFormat({
  */
 
 const formatTailwindSpacing = (token) => {
-  return `  "${token.attributes.type}": "var(--${token.name}, ${token.value}px)"`;
+  return `  "spacing-${token.attributes.type}": "var(--${token.name}, ${token.value / 16}rem)", 
+  "typography-spacing-${token.attributes.type}": "var(--${token.name}-em, ${token.value / 16}em)" `;
 };
 
 StyleDictionary.registerFormat({

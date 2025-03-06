@@ -3,17 +3,17 @@
     "xxs": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.0․5}"
+      "value": "{global.mode 1.spacing.1}"
     },
     "xs": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.1}"
+      "value": "{global.mode 1.spacing.2}"
     },
     "sm": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.2}"
+      "value": "{global.mode 1.spacing.3}"
     },
     "md": {
       "description": "",
@@ -23,29 +23,44 @@
     "lg": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.8}"
+      "value": "{global.mode 1.spacing.5}"
     },
     "xl": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.10}"
+      "value": "{global.mode 1.spacing.6}"
     },
     "2xl": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.12}"
+      "value": "{global.mode 1.spacing.7}"
     },
     "3xl": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.14}"
+      "value": "{global.mode 1.spacing.8}"
     },
     "4xl": {
       "description": "",
       "type": "dimension",
-      "value": "{global.mode 1.spacing.16}"
+      "value": "{global.mode 1.spacing.10}"
     },
     "5xl": {
+      "description": "",
+      "type": "dimension",
+      "value": "{global.mode 1.spacing.12}"
+    },
+    "6xl": {
+      "description": "",
+      "type": "dimension",
+      "value": "{global.mode 1.spacing.14}"
+    },
+    "7xl": {
+      "description": "",
+      "type": "dimension",
+      "value": "{global.mode 1.spacing.16}"
+    },
+    "8xl": {
       "description": "",
       "type": "dimension",
       "value": "{global.mode 1.spacing.20}"
@@ -4896,7 +4911,7 @@
         },
         "lineheight": {
           "type": "dimension",
-          "value": 20
+          "value": 24
         },
         "letterspacing": {
           "type": "dimension",
@@ -4995,6 +5010,30 @@
         "lineheight": {
           "type": "dimension",
           "value": 20
+        },
+        "letterspacing": {
+          "type": "dimension",
+          "value": 0
+        }
+      },
+      "subhead": {
+        "fontfamily": {
+          "description": "",
+          "type": "string",
+          "value": "{global.sm.typography.font.family}"
+        },
+        "fontweight": {
+          "description": "",
+          "type": "dimension",
+          "value": "{global.sm.typography.font.weight.medium}"
+        },
+        "fontsize": {
+          "type": "dimension",
+          "value": 18
+        },
+        "lineheight": {
+          "type": "dimension",
+          "value": 28
         },
         "letterspacing": {
           "type": "dimension",
@@ -5246,6 +5285,30 @@
           "type": "dimension",
           "value": 0
         }
+      },
+      "subhead": {
+        "fontfamily": {
+          "description": "",
+          "type": "string",
+          "value": "{global.md.typography.font.family}"
+        },
+        "fontweight": {
+          "description": "",
+          "type": "dimension",
+          "value": "{global.md.typography.font.weight.medium}"
+        },
+        "fontsize": {
+          "type": "dimension",
+          "value": 20
+        },
+        "lineheight": {
+          "type": "dimension",
+          "value": 32
+        },
+        "letterspacing": {
+          "type": "dimension",
+          "value": 0
+        }
       }
     },
     "lg": {
@@ -5487,6 +5550,30 @@
         "lineheight": {
           "type": "dimension",
           "value": 24
+        },
+        "letterspacing": {
+          "type": "dimension",
+          "value": 0
+        }
+      },
+      "subhead": {
+        "fontfamily": {
+          "description": "",
+          "type": "string",
+          "value": "{global.lg.typography.font.family}"
+        },
+        "fontweight": {
+          "description": "",
+          "type": "dimension",
+          "value": "{global.lg.typography.font.weight.medium}"
+        },
+        "fontsize": {
+          "type": "dimension",
+          "value": 24
+        },
+        "lineheight": {
+          "type": "dimension",
+          "value": 36
         },
         "letterspacing": {
           "type": "dimension",
@@ -5737,6 +5824,412 @@
         "letterspacing": {
           "type": "dimension",
           "value": 0
+        }
+      },
+      "subhead": {
+        "fontfamily": {
+          "description": "",
+          "type": "string",
+          "value": "{global.xl.typography.font.family}"
+        },
+        "fontweight": {
+          "description": "",
+          "type": "dimension",
+          "value": "{global.xl.typography.font.weight.medium}"
+        },
+        "fontsize": {
+          "type": "dimension",
+          "value": 30
+        },
+        "lineheight": {
+          "type": "dimension",
+          "value": 40
+        },
+        "letterspacing": {
+          "type": "dimension",
+          "value": 0
+        }
+      }
+    }
+  },
+  "eightshapes specs": {
+    "light": {
+      "background": {
+        "type": "color",
+        "value": "#ffffffff",
+        "blendMode": "normal"
+      },
+      "text": {
+        "primary": {
+          "type": "color",
+          "value": "#000000ff",
+          "blendMode": "normal"
+        },
+        "secondary": {
+          "type": "color",
+          "value": "#6b6b6bff",
+          "blendMode": "normal"
+        }
+      },
+      "artwork background": {
+        "type": "color",
+        "value": "#f2f2f2ff",
+        "blendMode": "normal"
+      },
+      "change": {
+        "addition": {
+          "type": "color",
+          "value": "#097c33ff",
+          "blendMode": "normal"
+        },
+        "removal": {
+          "type": "color",
+          "value": "#d70936ff",
+          "blendMode": "normal"
+        },
+        "update": {
+          "type": "color",
+          "value": "#c54600ff",
+          "blendMode": "normal"
+        }
+      },
+      "artwork stroke": {
+        "type": "color",
+        "value": "#f2f2f2ff",
+        "blendMode": "normal"
+      },
+      "attributes": {
+        "icon stroke": {
+          "type": "color",
+          "value": "#6b6b6bff",
+          "blendMode": "normal"
+        },
+        "style fill": {
+          "type": "color",
+          "value": "#f2f2f2ff",
+          "blendMode": "normal"
+        },
+        "style stroke": {
+          "type": "color",
+          "value": "#e3e3e3ff",
+          "blendMode": "normal"
+        },
+        "style text": {
+          "type": "color",
+          "value": "#851f41ff",
+          "blendMode": "normal"
+        },
+        "variable stroke": {
+          "type": "color",
+          "value": "#e3e3e3ff",
+          "blendMode": "normal"
+        },
+        "variable fill": {
+          "type": "color",
+          "value": "#f2f2f2ff",
+          "blendMode": "normal"
+        },
+        "variable text": {
+          "type": "color",
+          "value": "#851f41ff",
+          "blendMode": "normal"
+        },
+        "raw value text": {
+          "type": "color",
+          "value": "#6b6b6bff",
+          "blendMode": "normal"
+        },
+        "token fill": {
+          "type": "color",
+          "value": "#f0f0f0ff",
+          "blendMode": "normal"
+        },
+        "token text": {
+          "type": "color",
+          "value": "#851f41ff",
+          "blendMode": "normal"
+        },
+        "dependency fill": {
+          "type": "color",
+          "value": "#f2f2f2ff",
+          "blendMode": "normal"
+        },
+        "dependency stroke": {
+          "type": "color",
+          "value": "#e3e3e3ff",
+          "blendMode": "normal"
+        },
+        "dependency text": {
+          "type": "color",
+          "value": "#000000ff",
+          "blendMode": "normal"
+        }
+      },
+      "annotation": {
+        "alignment grid": {
+          "type": "color",
+          "value": "#6b6b6bff",
+          "blendMode": "normal"
+        },
+        "direction arrow": {
+          "type": "color",
+          "value": "#6b6b6bff",
+          "blendMode": "normal"
+        },
+        "element outline": {
+          "type": "color",
+          "value": "#0d69d4ff",
+          "blendMode": "normal"
+        },
+        "element overlay": {
+          "type": "color",
+          "value": "#0d69d4ff",
+          "blendMode": "normal"
+        },
+        "item spacing overlay": {
+          "type": "color",
+          "value": "#c54600ff",
+          "blendMode": "normal"
+        },
+        "item size": {
+          "type": "color",
+          "value": "#c54600ff",
+          "blendMode": "normal"
+        },
+        "item spacing line": {
+          "type": "color",
+          "value": "#c54600ff",
+          "blendMode": "normal"
+        },
+        "padding overlay": {
+          "type": "color",
+          "value": "#007d00ff",
+          "blendMode": "normal"
+        },
+        "padding size": {
+          "type": "color",
+          "value": "#007d00ff",
+          "blendMode": "normal"
+        },
+        "padding line": {
+          "type": "color",
+          "value": "#007d00ff",
+          "blendMode": "normal"
+        },
+        "padding pill background": {
+          "type": "color",
+          "value": "#007d00ff",
+          "blendMode": "normal"
+        },
+        "gap pill background": {
+          "type": "color",
+          "value": "#c54600ff",
+          "blendMode": "normal"
+        },
+        "spacer pill text": {
+          "type": "color",
+          "value": "#ffffffff",
+          "blendMode": "normal"
+        },
+        "marker fill": {
+          "type": "color",
+          "value": "#c54600ff",
+          "blendMode": "normal"
+        },
+        "marker text": {
+          "type": "color",
+          "value": "#ffffffff",
+          "blendMode": "normal"
+        }
+      }
+    },
+    "dark": {
+      "background": {
+        "type": "color",
+        "value": "#212629ff",
+        "blendMode": "normal"
+      },
+      "text": {
+        "primary": {
+          "type": "color",
+          "value": "#ffffffff",
+          "blendMode": "normal"
+        },
+        "secondary": {
+          "type": "color",
+          "value": "#878f91ff",
+          "blendMode": "normal"
+        }
+      },
+      "artwork background": {
+        "type": "color",
+        "value": "#0d1214ff",
+        "blendMode": "normal"
+      },
+      "change": {
+        "addition": {
+          "type": "color",
+          "value": "#28a04bff",
+          "blendMode": "normal"
+        },
+        "removal": {
+          "type": "color",
+          "value": "#f65558ff",
+          "blendMode": "normal"
+        },
+        "update": {
+          "type": "color",
+          "value": "#f05c29ff",
+          "blendMode": "normal"
+        }
+      },
+      "artwork stroke": {
+        "type": "color",
+        "value": "#0d1214ff",
+        "blendMode": "normal"
+      },
+      "attributes": {
+        "icon stroke": {
+          "type": "color",
+          "value": "#878f91ff",
+          "blendMode": "normal"
+        },
+        "style fill": {
+          "type": "color",
+          "value": "#0d1214ff",
+          "blendMode": "normal"
+        },
+        "style stroke": {
+          "type": "color",
+          "value": "#2e363bff",
+          "blendMode": "normal"
+        },
+        "style text": {
+          "type": "color",
+          "value": "#f59694ff",
+          "blendMode": "normal"
+        },
+        "variable stroke": {
+          "type": "color",
+          "value": "#2e363bff",
+          "blendMode": "normal"
+        },
+        "variable fill": {
+          "type": "color",
+          "value": "#0d1214ff",
+          "blendMode": "normal"
+        },
+        "variable text": {
+          "type": "color",
+          "value": "#f59694ff",
+          "blendMode": "normal"
+        },
+        "raw value text": {
+          "type": "color",
+          "value": "#878f91ff",
+          "blendMode": "normal"
+        },
+        "token fill": {
+          "type": "color",
+          "value": "#0d1214ff",
+          "blendMode": "normal"
+        },
+        "token text": {
+          "type": "color",
+          "value": "#f59694ff",
+          "blendMode": "normal"
+        },
+        "dependency fill": {
+          "type": "color",
+          "value": "#0d1214ff",
+          "blendMode": "normal"
+        },
+        "dependency stroke": {
+          "type": "color",
+          "value": "#2e363bff",
+          "blendMode": "normal"
+        },
+        "dependency text": {
+          "type": "color",
+          "value": "#ffffffff",
+          "blendMode": "normal"
+        }
+      },
+      "annotation": {
+        "alignment grid": {
+          "type": "color",
+          "value": "#878f91ff",
+          "blendMode": "normal"
+        },
+        "direction arrow": {
+          "type": "color",
+          "value": "#878f91ff",
+          "blendMode": "normal"
+        },
+        "element outline": {
+          "type": "color",
+          "value": "#528af5ff",
+          "blendMode": "normal"
+        },
+        "element overlay": {
+          "type": "color",
+          "value": "#528af5ff",
+          "blendMode": "normal"
+        },
+        "item spacing overlay": {
+          "type": "color",
+          "value": "#f05c29ff",
+          "blendMode": "normal"
+        },
+        "item size": {
+          "type": "color",
+          "value": "#f05c29ff",
+          "blendMode": "normal"
+        },
+        "item spacing line": {
+          "type": "color",
+          "value": "#f05c29ff",
+          "blendMode": "normal"
+        },
+        "padding overlay": {
+          "type": "color",
+          "value": "#29a34aff",
+          "blendMode": "normal"
+        },
+        "padding size": {
+          "type": "color",
+          "value": "#29a34aff",
+          "blendMode": "normal"
+        },
+        "padding line": {
+          "type": "color",
+          "value": "#29a34aff",
+          "blendMode": "normal"
+        },
+        "padding pill background": {
+          "type": "color",
+          "value": "#007d00ff",
+          "blendMode": "normal"
+        },
+        "gap pill background": {
+          "type": "color",
+          "value": "#c54600ff",
+          "blendMode": "normal"
+        },
+        "spacer pill text": {
+          "type": "color",
+          "value": "#ffffffff",
+          "blendMode": "normal"
+        },
+        "marker fill": {
+          "type": "color",
+          "value": "#f05c29ff",
+          "blendMode": "normal"
+        },
+        "marker text": {
+          "type": "color",
+          "value": "#ffffffff",
+          "blendMode": "normal"
         }
       }
     }
