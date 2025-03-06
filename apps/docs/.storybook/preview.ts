@@ -1,4 +1,3 @@
-// import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/svelte';
 import { docs } from './ciuStorybookTheme';
 
@@ -48,37 +47,6 @@ const preview: Preview = {
 					]
 				]
 			}
-			// storySort: {
-			// 	order: [
-			// 		'Ui',
-			// 		[
-			// 			'Introduction',
-			// 			'Buttons',
-			// 			'Input',
-			// 			'Select',
-			// 			'RadioButtons',
-			// 			'Checkboxes',
-			// 			'Overlays',
-			// 			'*',
-			// 			'Datepicker',
-			// 			'Icons'
-			// 		],
-			// 		'Ui - App Layout',
-			// 		[
-			// 			'Themes',
-			// 			'AppShell',
-			// 			'Sidebar',
-			// 			'Header',
-			// 			'*',
-			// 			'Meta, Analytics And Cookies',
-			// 			'Media Query Stores'
-			// 		],
-			// 		'Ui - App Layout Examples',
-			// 		'Charts',
-			// 		['Introduction', 'ChartContainer', '*'],
-			// 		'Charts - Examples'
-			// 	]
-			// }
 		},
 		controls: {
 			matchers: {

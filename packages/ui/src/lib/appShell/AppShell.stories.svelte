@@ -12,7 +12,6 @@
 
 <script lang="ts">
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
@@ -21,12 +20,17 @@
 	import SidebarHeader from '../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 	import SidebarSection from '../sidebar/elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from '../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
-	import SidebarTabLabel from '../sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
-	import SidebarTabList from '../sidebar/elements/sidebarTabs/SidebarTabList.svelte';
+
+	import { Demo1, Leggi, Pop1, Sewers } from './../layoutExamples/Dashboards/demoTabs';
 
 	const isOpen = writable(true);
 
-	let selectedValue = 'markers';
+	let tabs = [
+		{ id: 'markers', label: 'Markers', icon: ChartBar, content: Demo1 },
+		{ id: 'filters', label: 'Filters', icon: Funnel, content: Leggi },
+		{ id: 'analysis', label: 'Analysis', icon: Map, content: Pop1 },
+		{ id: 'layers', label: 'Layers', icon: MapPin, content: Sewers }
+	];
 </script>
 
 <Template let:args>
@@ -292,27 +296,7 @@
 
 <Story name="Sidebar Placement Breakpoints with tabs Top/bottom/left/right">
 	<AppShell sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}>
-		<Sidebar slot="sidebar">
-			<svelte:fragment slot="tabs">
-				<SidebarTabList bind:selectedValue>
-					<SidebarTabLabel tabId="markers">
-						<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Data Markers
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="filters">
-						<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Filters
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="analysis">
-						<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Analysis
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="layers">
-						<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Layers
-					</SidebarTabLabel>
-				</SidebarTabList>
-			</svelte:fragment>
+		<Sidebar slot="sidebar" {tabs}>
 			<SidebarHeader title="Main sidebar title" slot="header">
 				<svelte:fragment slot="subTitle">
 					<p>
@@ -321,27 +305,6 @@
 					</p>
 				</svelte:fragment>
 			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2, 3, 4, 5]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
 		</Sidebar>
 	</AppShell>
 </Story>
@@ -414,27 +377,7 @@
 
 <Story name="Sidebar Push: left with tabs">
 	<AppShell sidebarPush sidebarPlacement={{ initial: 'left' }}>
-		<Sidebar slot="sidebar">
-			<svelte:fragment slot="tabs">
-				<SidebarTabList bind:selectedValue>
-					<SidebarTabLabel tabId="markers">
-						<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Data Markers
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="filters">
-						<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Filters
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="analysis">
-						<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Analysis
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="layers">
-						<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Layers
-					</SidebarTabLabel>
-				</SidebarTabList>
-			</svelte:fragment>
+		<Sidebar slot="sidebar" {tabs}>
 			<SidebarHeader title="Main sidebar title" slot="header">
 				<svelte:fragment slot="subTitle">
 					<p>
@@ -471,9 +414,6 @@
 		sidebarPush
 		sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
 	>
-		<!-- <svelte:fragment slot="main">
-			<div class="pl-10">Some Content</div>
-		</svelte:fragment> -->
 		<Sidebar slot="sidebar">
 			<SidebarHeader title="Main sidebar title" slot="header">
 				<svelte:fragment slot="subTitle">
@@ -575,27 +515,7 @@ the screen width increases past this threshold.
 
 <Story name="Always Open With Tabs">
 	<AppShell sidebarAlwaysOpen={{ initial: 'true' }}>
-		<Sidebar slot="sidebar">
-			<svelte:fragment slot="tabs">
-				<SidebarTabList bind:selectedValue>
-					<SidebarTabLabel tabId="markers">
-						<Icon src={MapPin} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Data Markers
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="filters">
-						<Icon src={Funnel} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Filters
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="analysis">
-						<Icon src={ChartBar} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Analysis
-					</SidebarTabLabel>
-					<SidebarTabLabel tabId="layers">
-						<Icon src={Map} theme="solid" class="h-5 w-5 mb-1" aria-hidden="true" />
-						Layers
-					</SidebarTabLabel>
-				</SidebarTabList>
-			</svelte:fragment>
+		<Sidebar slot="sidebar" {tabs}>
 			<SidebarHeader title="Main sidebar title" slot="header">
 				<svelte:fragment slot="subTitle">
 					<p>

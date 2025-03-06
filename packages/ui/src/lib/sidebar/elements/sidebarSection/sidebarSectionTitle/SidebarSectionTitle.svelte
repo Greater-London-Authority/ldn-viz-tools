@@ -8,10 +8,10 @@
 
 <header class="text-color-text-primary">
 	<div class="flex justify-between items-end">
-		<h1 class="font-semibold text-base leading-snug">
+		<h2 class="font-semibold text-base leading-snug">
 			<!-- The title of the section. -->
 			<slot />
-		</h1>
+		</h2>
 
 		{#if $$slots.hint}
 			<!-- An optional `<Overlay>` component to provide additional explanation. -->
@@ -20,7 +20,7 @@
 	</div>
 
 	{#if $$slots.subTitle}
-		<div class="text-xs leading-snug mb-2">
+		<div class="text-xs my-1">
 			<!-- Optional longer subtitle to display below the main title. -->
 			<slot name="subTitle" />
 		</div>

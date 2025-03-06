@@ -54,15 +54,14 @@ export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/
 export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
 export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
 
-export { default as SidebarTabLabel } from './sidebar/elements/sidebarTabs/SidebarTabLabel.svelte';
 export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
 
-export { default as SidebarFromArray } from './sidebar/SidebarFromArray.svelte';
-
 export { default as LoadingIndicator } from './loadingIndicator/LoadingIndicator.svelte';
+
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
+export { default as TabPanel } from './tabs/TabPanel.svelte';
 
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 
