@@ -4,7 +4,7 @@
 
 <MapMarkerPlacement placement="none">
 	<div
-		class="bg-color-container-level-1 p-4 w-fit text-color-text-primary shadow border border-color-ui-border-secondary"
+		class="bg-color-container-level-0 p-4 w-fit text-color-text-primary shadow border border-color-ui-border-secondary"
 	>
 		No placement.
 	</div>

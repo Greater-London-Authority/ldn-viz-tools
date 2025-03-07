@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Map from './Map.svelte';
+	import type { MapLibre, MapLibreMouseLikeEvent, MapLibrePoint } from './types';
 	import { appendOSKeyToUrl } from './util';
-	import type { MapLibre, MapLibrePoint, MapLibreMouseLikeEvent } from './types';
 
 	const initialLayerIds = ['Click a point on the map to list the vector layer IDs'];
 
@@ -46,7 +46,7 @@
 		}}
 	>
 		<ul
-			class="absolute top-0 left-0 z-10 bg-color-container-level-1 text-color-text-primary text-sm m-2 p-2"
+			class="absolute top-0 left-0 z-10 bg-color-container-level-0 text-color-text-primary text-sm m-2 p-2"
 		>
 			{#each clickedLayerIDs as id (id)}
 				<li>{id}</li>
