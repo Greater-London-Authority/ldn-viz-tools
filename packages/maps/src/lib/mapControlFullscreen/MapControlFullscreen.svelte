@@ -79,7 +79,9 @@
 </script>
 
 {#if mode}
-	<div class="flex flex-col space-y-1 invisible sm:visible shadow">
+	<div
+		class="flex flex-col space-y-1 invisible sm:visible shadow dark:border dark:border-color-ui-border-primary"
+	>
 		<Button
 			variant="square"
 			emphasis="secondary"

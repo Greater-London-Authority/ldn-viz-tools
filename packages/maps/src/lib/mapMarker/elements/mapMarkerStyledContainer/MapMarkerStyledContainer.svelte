@@ -58,7 +58,7 @@
 		>
 			<line
 				class="stroke-color-ui-border-secondary"
-				stroke-width="4"
+				stroke-width="14"
 				x1="0"
 				y1="0"
 				x2="75"
@@ -66,7 +66,7 @@
 			/>
 			<line
 				class="stroke-color-ui-border-secondary"
-				stroke-width="4"
+				stroke-width="14"
 				x1="75"
 				y1="100"
 				x2="150"

@@ -11,7 +11,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Refresh page"
-		class="pointer-events-auto shadow"
+		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
 		on:click={handle}
 	>
 		<Icon src={ArrowPath} class="w-8 h-8 p-1" />

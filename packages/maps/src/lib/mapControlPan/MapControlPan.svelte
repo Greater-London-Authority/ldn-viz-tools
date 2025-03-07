@@ -54,7 +54,7 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan up"
-			class="pointer-events-auto shadow"
+			class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
 			on:click={newHandler(panUp)}
 		>
 			<Icon src={ChevronUp} class="w-8 h-8 pb-1 pt-0.5" />
@@ -66,19 +66,19 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan left"
-			class="pointer-events-auto shadow"
+			class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
 			on:click={newHandler(panLeft)}
 		>
 			<Icon src={ChevronLeft} class="w-8 h-8 pr-1 pl-0.5" />
 		</Button>
 
-		<div class="w-10" />
+		<div class="w-[38px]" />
 
 		<Button
 			variant="square"
 			emphasis="secondary"
 			title="Pan right"
-			class="pointer-events-auto shadow"
+			class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
 			on:click={newHandler(panRight)}
 		>
 			<Icon src={ChevronRight} class="w-8 h-8 pl-1 pr-0.5" />
@@ -90,7 +90,7 @@
 			variant="square"
 			emphasis="secondary"
 			title="Pan down"
-			class="pointer-events-auto shadow"
+			class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
 			on:click={newHandler(panDown)}
 		>
 			<Icon src={ChevronDown} class="w-8 h-8 pt-1 pb-0.5" />
