@@ -233,6 +233,7 @@
 		aria-hidden={ariaHidden}
 		aria-describedby={ariaDescribedBy}
 		{id}
+		class="themed-chart"
 	/>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
@@ -252,3 +253,12 @@
 		</div>
 	{/if}
 {/key}
+
+<style>
+	:global(.themed-chart svg) {
+		--plot-background: var(--theme-chart-background) !important;
+	}
+	:global(.themed-chart [aria-label='tip']) {
+		stroke: var(--theme-ui-border-secondary) !important;
+	}
+</style>

@@ -100,7 +100,7 @@
 	export let chartDescription = '';
 
 	let chartClass = classNames(
-		'themed-chart relative',
+		'relative',
 		chartHeight,
 		chartWidth,
 		overrideClass,
@@ -152,12 +152,3 @@
 		</Footer>
 	{/if}
 </div>
-
-<style>
-	:global(.themed-chart svg) {
-		--plot-background: var(--theme-chart-background) !important;
-	}
-	:global(.themed-chart [aria-label='tip']) {
-		stroke: var(--theme-ui-border-secondary) !important;
-	}
-</style>
