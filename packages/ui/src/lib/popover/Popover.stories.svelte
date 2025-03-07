@@ -44,7 +44,7 @@
 
 <Story name="Custom trigger" source>
 	<Popover>
-		<Trigger slot="trigger" emphasis="primary" variant="solid">
+		<Trigger slot="trigger" emphasis="primary" variant="solid" size="md" slim={false}>
 			Click here to see popover contents
 		</Trigger>
 

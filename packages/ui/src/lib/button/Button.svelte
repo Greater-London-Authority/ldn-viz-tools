@@ -178,7 +178,7 @@
 	$: sizeClasses = {
 		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'text-xs px-1 min-w-6 min-h-6',
 		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5 min-w-8 min-h-8',
-		md: variant === 'square' ? 'w-11 h-11 flex-col' : 'text-base px-4 py-2 min-w-11 min-h-11',
+		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2 min-w-10 min-h-10',
 		lg:
 			variant === 'square'
 				? 'w-16 h-16 text-xs flex-col space-y-4'
@@ -188,7 +188,8 @@
 	let buttonClass: string;
 
 	$: buttonClass = classNames(
-		'inline-flex justify-center items-center disabled:cursor-not-allowed focus:ring-offset-2 focus:ring-offset-color-ui-background-primary focus:ring-2 focus:outline-none focus:ring-color-action-primary-focussed',
+		'inline-flex justify-center items-center disabled:cursor-not-allowed',
+		'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-action-primary-focussed focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-ui-background-primary',
 		styleClasses[variant][emphasis],
 		sizeClasses[size],
 		disabled === true ? disabledClasses[variant] : '',

@@ -69,7 +69,7 @@
 </Template>
 
 <Story name="Interactive Example">
-	<div class="flex gap-2">
+	<div class="flex gap-2 p-2">
 		<Button on:click={() => (selectedFeature = feature_1)}>Select point 1</Button>
 		<Button on:click={() => (selectedFeature = feature_2)}>Select point 2</Button>
 		<Button on:click={() => (selectedFeature = undefined)} disabled={!selectedFeature}>

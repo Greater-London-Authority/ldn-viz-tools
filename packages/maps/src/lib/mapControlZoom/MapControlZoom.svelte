@@ -35,7 +35,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom in"
-		class="pointer-events-auto"
+		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
 		on:click={newHandler(zoomIn)}
 	>
 		<Icon src={PlusSmall} class="w-8 h-8 p-0.5" />
@@ -44,7 +44,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Zoom out"
-		class="pointer-events-auto"
+		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
 		on:click={newHandler(zoomOut)}
 	>
 		<Icon src={MinusSmall} class="w-8 h-8 p-0.5" />
