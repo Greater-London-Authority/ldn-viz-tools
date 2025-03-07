@@ -160,32 +160,36 @@
 
 	{#if $open}
 		<div
-			class="bg-color-container-level-1 z-[60] max-w-sm p-2 shadow flex flex-col space-y-2"
+			class="bg-color-container-level-0 z-[60] max-w-sm p-1 shadow-lg flex flex-col border border-color-ui-border-secondary"
 			use:$menu.action
 			{...$menu}
 			transition:fly={{ duration: 150, y: -10 }}
 		>
-			<div {...$arrow} use:arrow />
+			<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
 			{#if menuTitle}
-				<p class="text-sm text-color-text-secondary">{menuTitle}</p>
+				<p class="text-sm p-1">{menuTitle}</p>
 			{/if}
 
 			<div class="divide-y divide-color-ui-border-secondary">
 				{#each options as option}
 					<button
-						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white group"
 						on:click={() => changeOption(option)}
 						use:$item.action
 						{...$item}
 					>
 						<div class="flex items-center">
 							{#if state.id === option.id}
-								<Icon src={Check} theme="mini" class="h-5 w-5 mr-2" />
+								<Icon src={Check} theme="mini" class="h-5 w-5 mr-1" />
 							{/if}
-							<p class="font-medium">{option.menuLabel}</p>
+							<p class="font-medium text-sm">{option.menuLabel}</p>
 						</div>
 
-						<p class="text-sm">{option.menuDescription}</p>
+						<p
+							class="text-xs leading-relaxed text-color-text-secondary group-hover:text-color-static-white"
+						>
+							{option.menuDescription}
+						</p>
 					</button>
 				{/each}
 			</div>
