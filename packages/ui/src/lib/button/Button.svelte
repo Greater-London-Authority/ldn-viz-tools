@@ -189,7 +189,7 @@
 
 	$: buttonClass = classNames(
 		'inline-flex justify-center items-center disabled:cursor-not-allowed',
-		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-action-primary-focussed focus:ring-2 focus:outline-none focus:ring-color-ui-background-primary',
+		'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-action-primary-focussed focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-ui-background-primary',
 		styleClasses[variant][emphasis],
 		sizeClasses[size],
 		disabled === true ? disabledClasses[variant] : '',
