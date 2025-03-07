@@ -1,5 +1,21 @@
 # ldn-viz-tools-charts
 
+## 5.2.0
+
+### Minor Changes
+
+- 885ecf1: FIXED: fixed custom tooltips in ObservablePlot component
+- 41d345f: CHANGED: Steps down mid button size (40px) to match height of input elements.
+  CHANGED: Adds borders and shadows to tooltips/popovers and improves contrast of overlay components - especially relevant in map context
+
+### Patch Changes
+
+- ceaaf7a: CHANGED: Replace typography plugin with custom plugin implemtation that uses token values from Figma
+- Updated dependencies [6e75123]
+- Updated dependencies [aae5771]
+- Updated dependencies [41d345f]
+  - @ldn-viz/ui@17.1.0
+
 ## 5.1.0
 
 ### Minor Changes

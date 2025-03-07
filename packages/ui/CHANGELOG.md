@@ -1,5 +1,18 @@
 # ldn-viz-tools-ui
 
+## 17.1.0
+
+### Minor Changes
+
+- aae5771: FIXED: style `Button` component using `:focus-visible` (rather than `:focus`) pseudo-selector. This prevents focus ring incorrectly appearing around overlay triggers after the overlay is closed with mouse
+- 41d345f: CHANGED: Steps down mid button size (40px) to match height of input elements.
+  CHANGED: Adds borders and shadows to tooltips/popovers and improves contrast of overlay components - especially relevant in map context
+
+### Patch Changes
+
+- 6e75123: CHANGED: changed focus state on buttons to inset style
+  CHANGED: added focus state to radio button solid
+
 ## 17.0.0
 
 ### Major Changes
