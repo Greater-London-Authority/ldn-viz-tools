@@ -56,11 +56,7 @@
 			Plot.ruleX([0], { ...theme.defaultRule }),
 			Plot.dot(penguins, { ...theme.defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
 			Plot.axisX({ ...theme.defaultXAxis }),
-			Plot.axisY({ ...theme.defaultYAxis, label: 'culmen_depth_mm' }),
-			Plot.tip(
-				penguins,
-				Plot.pointerX({ ...theme.defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
-			)
+			Plot.axisY({ ...theme.defaultYAxis, label: 'culmen_depth_mm' })
 		]
 	};
 
@@ -172,8 +168,8 @@
 	To add a custom tooltip:
 	
 	* create a `tooltipStore` writable store
-	* add `render: addClick(tooltipStore)` to the marks that will trigger the tooltip (if the mark is not a `dot` you will also need to provide the SVG node type as the second argument to `addClick`)
-	* give these marks a `fill` (otheriwse the tooltips will trigger only when the outline/stroke of the mark is moused-over)
+	* add `render: registerTooltip(tooltipStore)` to the marks that will trigger the tooltip (if the mark is not a `dot` you will also need to provide the SVG node type as the second argument to `addClick`)
+	* give these marks a `fill` (otherwise the tooltips will trigger only when the outline/stroke of the mark is moused-over)
 	* provide the custom tooltip component into the named `tooltip` slot
 -->
 <Story name="With custom tooltips">
@@ -188,7 +184,8 @@
 					...theme.defaultDot,
 					x: 'culmen_length_mm',
 					y: 'culmen_depth_mm',
-					render: registerTooltip(tooltipStore)
+					render: registerTooltip(tooltipStore),
+					tip: false
 				})
 			]
 		}}
