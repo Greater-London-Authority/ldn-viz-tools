@@ -57,6 +57,27 @@ const config = {
   },
 
   plugins: [
+    plugin(function ({ addBase }) {
+      addBase({
+        // sets a default focus style
+        ':where(*)': {
+          '--outline-size': 'max(2px, 0.08em)',
+          '--outline-style': 'solid',
+          '--outline-color': 'var(--theme-action-primary-focussed)'
+        },
+        ':where(*:focus)': {
+          outline: 'var(--outline-size) var(--outline-style) var(--outline-color)',
+          'outline-offset': 'var(--outline-offset, var(--outline-size))'
+        },
+        ':where(*:focus-visible)': {
+          outline: 'var(--outline-size) var(--outline-style) var(--outline-color)',
+          'outline-offset': 'var(--outline-offset, var(--outline-size))'
+        },
+        ':where(*:focus:not(:focus-visible))': {
+          outline: 'none'
+        }
+      });
+    }),
     require('@tailwindcss/typography'), // eslint-disable-line
     // provides form-element reset
     require('@tailwindcss/forms')({ strategy: 'class' }), // eslint-disable-line
