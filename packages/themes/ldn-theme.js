@@ -4,6 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme'); // eslint-disable-line
 const oldLdnColors = require('./colors.json'); // eslint-disable-line
 const ldnColors = require('./styles/tw-extend/color'); // eslint-disable-line
 const ldnSpacing = require('./styles/tw-extend/spacing'); // eslint-disable-line
+const plugin = require('tailwindcss/plugin'); // eslint-disable-line
 
 const customTypography = require('./tailwind-custom/typography'); // eslint-disable-line
 const customForms = require('./tailwind-custom/forms'); // eslint-disable-line
