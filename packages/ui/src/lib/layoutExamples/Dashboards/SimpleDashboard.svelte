@@ -17,8 +17,8 @@
 	<svelte:fragment slot="main">
 		<div class="bg-color-canvas-background-1 h-full p-6">
 			<div class="mb-4">
-				<h1 class="text-2xl text-color-text-primary font-bold">This is the main content area</h1>
-				<h2 class="text-xl text-color-text-secondary">
+				<h1 class="headline responsive">This is the main content area</h1>
+				<h2 class="subhead responsive font-normal">
 					Maecenas ut libero vel nibh maximus feugiat non sed tortor.
 				</h2>
 			</div>
