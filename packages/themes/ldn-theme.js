@@ -4,6 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme'); // eslint-disable-line
 const oldLdnColors = require('./colors.json'); // eslint-disable-line
 const ldnColors = require('./styles/tw-extend/color'); // eslint-disable-line
 const ldnSpacing = require('./styles/tw-extend/spacing'); // eslint-disable-line
+const plugin = require('tailwindcss/plugin'); // eslint-disable-line
 
 const customTypography = require('./tailwind-custom/typography'); // eslint-disable-line
 const customForms = require('./tailwind-custom/forms'); // eslint-disable-line
@@ -81,6 +82,27 @@ const config = {
   },
 
   plugins: [
+    plugin(function ({ addBase }) {
+      addBase({
+        // sets a default focus style
+        ':where(*)': {
+          '--outline-size': 'max(2px, 0.08em)',
+          '--outline-style': 'solid',
+          '--outline-color': 'var(--theme-action-primary-focussed)'
+        },
+        ':where(*:focus)': {
+          outline: 'var(--outline-size) var(--outline-style) var(--outline-color)',
+          'outline-offset': 'var(--outline-offset, var(--outline-size))'
+        },
+        ':where(*:focus-visible)': {
+          outline: 'var(--outline-size) var(--outline-style) var(--outline-color)',
+          'outline-offset': 'var(--outline-offset, var(--outline-size))'
+        },
+        ':where(*:focus:not(:focus-visible))': {
+          outline: 'none'
+        }
+      });
+    }),
     // LDN default form themeing check ui/src/lib/Typography.mdx for more
     customTypography,
     // provides form-element reset

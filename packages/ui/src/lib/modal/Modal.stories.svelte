@@ -145,6 +145,8 @@
 
 <Story name="With Trigger">
 	<Modal title="The modal title" description="This demonstrates how to use the Trigger component.">
-		<Trigger slot="trigger" variant="solid" emphasis="primary" size="md">Open modal!</Trigger>
+		<Trigger slot="trigger" variant="solid" emphasis="primary" size="md" slim={false}
+			>Open modal!</Trigger
+		>
 	</Modal>
 </Story>
