@@ -106,7 +106,10 @@
 		overrideClass,
 		alignMultiple ? 'min-w-0' : ''
 	);
-	$: classes = classNames(chartWidth, alignMultiple ? 'contents' : 'flex flex-col');
+	$: classes = classNames(
+		chartWidth,
+		alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose'
+	);
 </script>
 
 <div class={classes} bind:this={chartToCapture} id="captureElement">

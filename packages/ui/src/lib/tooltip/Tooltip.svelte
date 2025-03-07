@@ -58,11 +58,11 @@
 		{...$content}
 		use:content
 		transition:fade={{ duration: 100 }}
-		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50"
+		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-0 shadow-lg z-50 border border-color-ui-border-secondary"
 	>
 		<!-- The text that will be displayed in the tooltip -->
 		<slot />
 
-		<div {...$arrow} use:arrow />
+		<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
 	</div>
 {/if}

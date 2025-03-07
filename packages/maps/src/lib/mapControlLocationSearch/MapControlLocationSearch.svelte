@@ -12,12 +12,12 @@
 	import MapControlGeolocator from './MapControlGeolocator.svelte';
 	import { initMapLayer } from './map-layer';
 
-	import type { MapStore } from './map-types';
 	import type {
 		GeocoderAdapter,
-		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
+	import type { MapStore } from './map-types';
 
 	const mapStore: MapStore = getContext('mapStore');
 
@@ -74,7 +74,7 @@
 	$: initMapLayer($mapStore);
 </script>
 
-<div class="flex" {...$$restProps}>
+<div class="flex shadow" {...$$restProps}>
 	<MapControlGeocoder
 		{adapter}
 		onLocationSelected={onLocationFound}

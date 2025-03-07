@@ -151,7 +151,7 @@ const defaultRule = () => ({
 });
 
 const defaultTip = () => ({
-	stroke: get(currentTheme).color.chart.label,
+	stroke: get(currentTheme).color.ui.border.secondary,
 	fill: get(currentTheme).color.chart.background,
 	fillOpacity: 1,
 	strokeOpacity: 1,
@@ -161,7 +161,7 @@ const defaultTip = () => ({
 });
 
 const defaultAnnotationTip = () => ({
-	stroke: get(currentTheme).color.chart.label,
+	stroke: get(currentTheme).color.ui.border.secondary,
 	fill: get(currentTheme).color.chart.background,
 	fillOpacity: 0.8,
 	strokeOpacity: 1,

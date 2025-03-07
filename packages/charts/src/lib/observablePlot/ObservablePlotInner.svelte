@@ -233,12 +233,13 @@
 		aria-hidden={ariaHidden}
 		aria-describedby={ariaDescribedBy}
 		{id}
+		class="themed-chart"
 	/>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
 		<div
-			class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-1 shadow z-50 -translate-x-1/2 -translate-y-full"
+			class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-0 shadow z-50 -translate-x-1/2 -translate-y-full"
 			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 			style:left={`${$tooltipStore.layerX}px`}
 		>
@@ -247,8 +248,17 @@
 			</slot>
 
 			<div
-				class="absolute bg-color-container-level-1 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
+				class="absolute bg-color-container-level-0 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
 			/>
 		</div>
 	{/if}
 {/key}
+
+<style>
+	:global(.themed-chart svg) {
+		--plot-background: var(--theme-chart-background) !important;
+	}
+	:global(.themed-chart [aria-label='tip']) {
+		stroke: var(--theme-ui-border-secondary) !important;
+	}
+</style>
