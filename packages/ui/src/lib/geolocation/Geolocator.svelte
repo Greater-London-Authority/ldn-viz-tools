@@ -156,6 +156,7 @@
 			role="search"
 			aria-label="Clear location"
 			on:click={clearSearch}
+			class="dark:border dark:border-color-ui-border-primary"
 		>
 			<Icon src={XMark} class="w-8 h-8 p-0.25" />
 		</Button>
@@ -167,6 +168,7 @@
 			role="search"
 			aria-label={errorMessage ? errorMessage : 'Find my location'}
 			on:click={startSearch}
+			class="dark:border dark:border-color-ui-border-primary"
 		>
 			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="w-8 h-8 p-0.5" />
 		</Button>
