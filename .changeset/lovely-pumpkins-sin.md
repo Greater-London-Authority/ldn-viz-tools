@@ -2,7 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-FIXED:
-
-- Updates `focus` class to `focus-visible` for correct keyboard-focus styling in `Button` component
-- Fixes issue with focus appearing around overlay triggers on closing with mouse
+FIXED: style `Button` component using `:focus-visible` (rather than `:focus`) pseudo-selector. This prevents focus ring incorrectly appearing around overlay triggers after the overlay is closed with mouse
