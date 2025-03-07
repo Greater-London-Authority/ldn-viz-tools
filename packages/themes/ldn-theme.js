@@ -102,7 +102,6 @@ const config = {
         }
       });
     }),
-    require('@tailwindcss/typography'), // eslint-disable-line
     // LDN default form themeing check ui/src/lib/Typography.mdx for more
     customTypography,
     // provides form-element reset
