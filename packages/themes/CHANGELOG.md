@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 6.0.0
+
+### Major Changes
+
+- ceaaf7a: CHANGED: Replace typography plugin with custom plugin implemtation that uses token values from Figma
+
 ## 5.0.0
 
 ### Major Changes
