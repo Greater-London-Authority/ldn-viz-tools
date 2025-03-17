@@ -16,62 +16,62 @@
 	import type { ListMenuItem as Item } from './ListMenuItem.svelte';
 
 	let subMenu = [
-		{ label: 'Accessibility', link: '#accessibility', children: [] },
-		{ label: 'Brand', link: '/', children: [] },
-		{ label: 'Color', link: '/', children: [] },
-		{ label: 'Typography', link: '/', children: [] },
-		{ label: 'Spacing', link: '/', children: [] },
-		{ label: 'Design Tokens', link: '/', children: [] }
+		{ title: 'Accessibility', url: '#accessibility', children: [] },
+		{ title: 'Brand', url: '/', children: [] },
+		{ title: 'Color', url: '/', children: [] },
+		{ title: 'Typography', url: '/', children: [] },
+		{ title: 'Spacing', url: '/', children: [] },
+		{ title: 'Design Tokens', url: '/', children: [] }
 	];
 
 	let subMenuNoLinks = [
-		{ label: 'Accessibility', link: '', children: subMenu },
-		{ label: 'Brand', link: '', children: subMenu },
-		{ label: 'Color', link: '', children: subMenu },
-		{ label: 'Typography', link: '', children: subMenu },
-		{ label: 'Spacing', link: '', children: subMenu },
-		{ label: 'Design Tokens', link: '', children: subMenu }
+		{ title: 'Accessibility', url: '', children: subMenu },
+		{ title: 'Brand', url: '', children: subMenu },
+		{ title: 'Color', url: '', children: subMenu },
+		{ title: 'Typography', url: '', children: subMenu },
+		{ title: 'Spacing', url: '', children: subMenu },
+		{ title: 'Design Tokens', url: '', children: subMenu }
 	];
 
 	let items: Item[] = [
 		{
-			label: 'Foundations',
-			link: '/',
+			title: 'Foundations',
+			url: '/',
 			children: subMenu
 		},
 		{
-			label: 'Applications',
-			link: '/',
+			title: 'Applications',
+			url: '/',
 			children: [
 				{
-					label: 'Layout',
-					link: '/',
+					title: 'Layout',
+					url: '/',
 					children: [
-						{ label: 'Applications', link: '/', children: [] },
-						{ label: 'Maps', link: '/', children: [] }
+						{ title: 'Applications', url: '/', children: [] },
+						{ title: 'Maps', url: '/', children: [] }
 					]
 				},
-				{ label: 'User Interface', link: '/', children: [] }
+				{ title: 'User Interface', url: '/', children: [] }
 			]
 		},
 		{
-			label: 'Data Visualisation',
-			link: '/',
+			title: 'Data Visualisation',
+			url: '/',
 			children: [
-				{ label: 'Principles', link: '/', children: [] },
-				{ label: 'Accessibility', link: '/', children: [] },
+				{ title: 'Principles', url: '/', children: [] },
+				{ title: 'Accessibility', url: '/', children: [] },
 				{
-					label: 'Color',
-					link: '/',
+					title: 'Color',
+					url: '/',
 					children: [
-						{ label: 'Categorical', link: '/', children: [] },
-						{ label: 'Quantitative', link: '/', children: [] },
-						{ label: 'Maps', link: '/', children: [] }
+						{ title: 'Categorical', url: '/', children: [] },
+						{ title: 'Quantitative', url: '/', children: [] },
+						{ title: 'Maps', url: '/', children: [] }
 					]
 				},
-				{ label: 'Scaling Shapes', link: '/', children: [] },
-				{ label: 'Chart Themes', link: '/', children: [] },
-				{ label: 'Chart Examples', link: '/', children: [] }
+				{ title: 'Scaling Shapes', url: '/', children: [] },
+				{ title: 'Chart Themes', url: '/', children: [] },
+				{ title: 'Chart Examples', url: '/', children: [] }
 			]
 		}
 	];
@@ -82,19 +82,21 @@
 </Template>
 
 <Story name="Default">
-	<ListMenu ariaLabel="example-menu" {items} />
+	<div class="flex">
+		<ListMenu ariaLabel="example-menu" {items} />
+	</div>
 </Story>
 
 <!-- Menus that are single level take an array of `items`, which have no children.
  
 ```
 	let subMenu = [
-		{ label: 'Accessibility', link: '/', children: [] },
-		{ label: 'Brand', link: '/', children: [] },
-		{ label: 'Color', link: '/', children: [] },
-		{ label: 'Typography', link: '/', children: [] },
-		{ label: 'Spacing', link: '/', children: [] },
-		{ label: 'Design Tokens', link: '/', children: [] }
+		{ title: 'Accessibility', url: '/', children: [] },
+		{ title: 'Brand', url: '/', children: [] },
+		{ title: 'Color', url: '/', children: [] },
+		{ title: 'Typography', url: '/', children: [] },
+		{ title: 'Spacing', url: '/', children: [] },
+		{ title: 'Design Tokens', url: '/', children: [] }
 	];
 
  	<ListMenu ariaLabel="no children" items={subMenu} />
