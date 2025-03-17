@@ -1,5 +1,43 @@
 # ldn-viz-tools-maps
 
+## 7.4.0
+
+### Minor Changes
+
+- 41d345f: CHANGED: Steps down mid button size (40px) to match height of input elements.
+  CHANGED: Adds borders and shadows to tooltips/popovers and improves contrast of overlay components - especially relevant in map context
+
+## 7.3.0
+
+### Minor Changes
+
+- f952670: Accessibility: updated `Geolocator` component to announce state change and use `LoadingIndicator`
+
+## 7.2.0
+
+### Minor Changes
+
+- 40410d8: CHANGED: the `MapPopover` now accept a `layer` prop
+
+## 7.1.0
+
+### Minor Changes
+
+- 1610465: CHANGED: `Geocoder`, `MapControlGeocoder`, and `MapControlLocationSearch` accept a callback function to call when the user clears the search box
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Patch Changes
+
+- ddb1dfc: CHANGED: shift position of `MapControlGroup` upwards if position is `BottomLeft`/`BottomCenter`/`BottomRight`, to avoid overlap with attribution statement
+
+## 7.0.0
+
+### Major Changes
+
+- 677ca8d: CHANGED: refactored `Map` by splitting out core MapLibre stuff to `MapLibre` internal component.
+  CHANGED: updated `Map` to accept light and dark base map styles and toggle them based on theme mode.
+  CHANGED: removed `classes` property from `map`, pass classes as `class` attribute instead.
+
 ## 6.0.1
 
 ### Patch Changes
@@ -18,7 +56,7 @@
 
 ### Patch Changes
 
-- 6dc5105: Housekeeping: squash console warnongs in storybook from unsed props
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
 
 ## 5.3.0
 

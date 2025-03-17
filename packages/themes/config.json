@@ -39,6 +39,11 @@
           "destination": "tw-extend/color.js",
           "format": "tw/css-variables",
           "filter": "twFilter"
+        },
+        {
+          "destination": "tw-extend/spacing.js",
+          "format": "tw/css-spacing-variables",
+          "filter": "twSpacingFilter"
         }
       ]
     },

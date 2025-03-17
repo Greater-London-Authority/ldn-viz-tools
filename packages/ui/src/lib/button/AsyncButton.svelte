@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	/**
 	 * The `<AsyncButton>` component wraps the `<button>` component for slow
-	 * asynchronous operations such as _HTTP_ requests. A `<Spinner>` is shown
+	 * asynchronous operations such as _HTTP_ requests. A `<LoadingIndicator>` is shown
 	 * as the button label while the `onClick` function is executing. The button
 	 * is also disabled during this period.
 	 *
@@ -10,15 +10,16 @@
 
 	export type FormButtonhandler = (event: MouseEvent | TouchEvent) => void | Promise<unknown>;
 
-	const getConditionColorClasses = (condition: string): string => {
-		const conditionClasses = {
-			default: 'stroke-color-ui-primary',
-			success: 'stroke-color-ui-positive',
-			error: 'stroke-color-ui-negative',
-			warning: 'stroke-color-ui-warning'
+	const getSpinnerColorClasses = (emphasis: string): string => {
+		const colorClasses = {
+			primary: 'stroke-color-ui-primary',
+			secondary: 'stroke-color-ui-primary',
+			positive: 'stroke-color-ui-positive',
+			negative: 'stroke-color-ui-negative',
+			caution: 'stroke-color-ui-caution'
 		};
 
-		return conditionClasses[condition];
+		return colorClasses[emphasis as keyof typeof colorClasses];
 	};
 
 	const getDynamicSpinnerClasses = (size: string, variant: string): string => {
@@ -37,7 +38,7 @@
 
 <script lang="ts">
 	import Button from '../button/Button.svelte';
-	import Spinner from '../spinners/Spinner.svelte';
+	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 	import type { ButtonProps } from './Button.svelte';
 
 	export let onClick: FormButtonhandler;
@@ -55,7 +56,7 @@
 	export let type: ButtonProps['type'] = 'button';
 
 	/**
-	 * Determines how much visual emphasis is placed on the button.
+	 * Determines the visual emphasis is placed on the button.
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
 
@@ -63,12 +64,6 @@
 	 * Selects which family of styles should be applied to the button.
 	 */
 	export let variant: ButtonProps['variant'] = 'solid';
-
-	/**
-	 * Provides ability to modify appearance to represent success/error/warning
-	 * conditions.
-	 */
-	export let condition: ButtonProps['condition'] = 'default';
 
 	/**
 	 * Sets the size of the button.
@@ -81,7 +76,12 @@
 	 */
 	export let disabled: ButtonProps['disabled'] = false;
 
-	$: conditionColorClasses = getConditionColorClasses(condition);
+	/**
+	 * Describes the state change (i.e. appearance of Spinner or icon while loading) for screen reader users.
+	 */
+	export let title = 'Loading';
+
+	$: spinnerColorClasses = getSpinnerColorClasses(emphasis);
 	$: dynamicSpinnerClasses = getDynamicSpinnerClasses(size, variant);
 
 	const doClick: FormButtonhandler = async (event) => {
@@ -101,37 +101,39 @@
 	};
 </script>
 
-<Button
-	{type}
-	{emphasis}
-	{variant}
-	{condition}
-	{size}
-	disabled={disabled || working}
-	on:click={doClick}
-	on:change
-	on:keydown
-	on:keyup
-	on:touchstart
-	on:touchend
-	on:touchcancel
-	on:mouseenter
-	on:mouseleave
-	{...$$restProps}
->
-	{#if working}
-		<div class="relative">
-			<Spinner
-				arcColorClass={conditionColorClasses}
-				class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
-			/>
-			<!-- This gives the outer div the correct size so the spinner is centered -->
-			<span class="invisible">
-				<!-- Button label and/or icon. -->
-				<slot />
-			</span>
-		</div>
-	{:else}
-		<slot />
-	{/if}
-</Button>
+<div aria-live="polite" role="status" aria-busy={working}>
+	<Button
+		{type}
+		{emphasis}
+		{variant}
+		{size}
+		disabled={disabled || working}
+		on:click={doClick}
+		on:change
+		on:keydown
+		on:keyup
+		on:touchstart
+		on:touchend
+		on:touchcancel
+		on:mouseenter
+		on:mouseleave
+		{...$$restProps}
+	>
+		{#if working}
+			<div class="relative">
+				<LoadingIndicator
+					{title}
+					arcColorClass={spinnerColorClasses}
+					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-50 left-50 {dynamicSpinnerClasses}"
+				/>
+				<!-- This gives the outer div the correct size so the spinner is centered -->
+				<span class="invisible">
+					<!-- Button label and/or icon. -->
+					<slot />
+				</span>
+			</div>
+		{:else}
+			<slot />
+		{/if}
+	</Button>
+</div>

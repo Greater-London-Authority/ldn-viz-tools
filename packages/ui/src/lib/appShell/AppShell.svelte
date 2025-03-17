@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `<AppShell>` is responsible for positioning and orchestrating page content.
-	 * It currently mainly coordinate the [Sidebar](./?path=/docs/ui-sidebar--documentation) and the other page content.
+	 * It currently mainly coordinate the [Sidebar](./?path=/docs/ui-components-layout-and-themes-sidebar--documentation) and the other page content.
 	 *
 	 * @component
 	 */
@@ -79,7 +79,7 @@
 
 	$isOpen = startOpen;
 
-	const respondToWidthChange = (innerWidth) => {
+	const respondToWidthChange = (innerWidth: number) => {
 		$isAlwaysOpen = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
 
 		// if "alwaysOpen" at this size, then we are open at this size

@@ -27,7 +27,7 @@
 		alpha: 'bg-color-ui-alpha',
 		beta: 'bg-color-ui-beta',
 		alert: 'bg-color-ui-negative',
-		warning: 'bg-color-ui-warning',
+		warning: 'bg-color-ui-caution',
 		positive: 'bg-color-ui-positive',
 		notice: 'bg-color-ui-notice'
 	};

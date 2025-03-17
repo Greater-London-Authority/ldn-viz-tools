@@ -69,6 +69,7 @@
 			return;
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		$isFullscreen ? mode.exitFullscreen() : mode.enterFullscreen();
 
 		if (event.detail > 0) {
@@ -78,7 +79,9 @@
 </script>
 
 {#if mode}
-	<div class="flex flex-col space-y-1 invisible sm:visible">
+	<div
+		class="flex flex-col space-y-1 invisible sm:visible shadow dark:border dark:border-color-ui-border-primary"
+	>
 		<Button
 			variant="square"
 			emphasis="secondary"

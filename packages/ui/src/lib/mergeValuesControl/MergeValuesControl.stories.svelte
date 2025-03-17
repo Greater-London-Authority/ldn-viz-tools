@@ -17,7 +17,7 @@
 	let groupings = { ungrouped: values, grouped: {} };
 </script>
 
-<Meta title="Ui/MergeValuesControl" component={MergeValuesControl} />
+<Meta title="Ui/Components/MergeValuesControl" component={MergeValuesControl} />
 
 <Story name="Default">
 	<div class="w-96">

@@ -2,7 +2,7 @@
 	/**
 	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs or selecting one option from a small number of alternatives.
 	 *
-	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation).
+	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](.-components-radiobuttons-radiobuttongroup--documentation).
 	 * @component
 	 */
 
@@ -42,6 +42,7 @@
 		{name}
 		bind:group={$selectedId}
 		value={id}
+		aria-disabled={disabled}
 		{disabled}
 		class="peer absolute top-0 left-0 opacity-0"
 	/>
@@ -49,9 +50,10 @@
 		for={inputID}
 		class={classNames(
 			disabled
-				? 'cursor-not-allowed bg-color-input-background-disabled !text-color-text-disabled hover:bg-color-input-background-disabled'
-				: 'cursor-pointer bg-color-action-background-secondary text-color-text-primary',
-			'form-label flex flex-col justify-center items-center p-2 w-full ring-1 ring-color-container-level-1 hover:bg-color-action-background-primary hover:text-color-static-white peer-checked:text-color-static-white peer-checked:bg-color-action-background-primary'
+				? 'cursor-not-allowed !bg-color-input-background-disabled !text-color-text-disabled '
+				: 'cursor-pointer bg-color-input-background-off text-color-text-primary',
+			'form-label flex flex-col justify-center items-center text-center p-2 min-h-11 w-full ring-1 ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on',
+			'peer-focus:ring-inset peer-focus:ring-offset-2 peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-2 peer-focus:outline-none peer-focus:ring-color-ui-background-primary'
 		)}
 	>
 		<!-- contents of the radio button (name and/or icon) -->

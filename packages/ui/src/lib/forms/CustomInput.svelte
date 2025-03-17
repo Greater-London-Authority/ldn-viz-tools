@@ -1,18 +1,16 @@
 <script lang="ts">
 	import InputWrapper from '../input/InputWrapper.svelte';
-	import { randomId } from '../utils/randomId';
 	import type { UniformInputProps } from '../uniformInput/types';
+	import { randomId } from '../utils/randomId';
 
 	export let name: UniformInputProps['name'];
-	export let type: UniformInputProps['type'] = '';
+	// export let type: UniformInputProps['type'] = '';
 	export let required: UniformInputProps['required'] = false;
 	export let disabled: UniformInputProps['disabled'] = false;
 	export let id: UniformInputProps['id'] = randomId();
 	export let label: UniformInputProps['label'] = '';
 	export let description: UniformInputProps['description'] = '';
 	export let descriptionAlignment: UniformInputProps['descriptionAlignment'] = 'left';
-	export let hint: UniformInputProps['hint'] = '';
-	export let hintLabel: UniformInputProps['hintLabel'] = '';
 	export let value: UniformInputProps['value'] = undefined;
 	export let error: UniformInputProps['error'] = undefined;
 
@@ -30,13 +28,12 @@
 	{descriptionId}
 	{description}
 	{descriptionAlignment}
-	{hintLabel}
-	{hint}
 	{errorId}
 	{error}
 	{disabled}
 	optional={!required}
 >
+	<slot name="hint" slot="hint" />
 	<input
 		type="range"
 		{required}

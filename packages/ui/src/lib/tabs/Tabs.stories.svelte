@@ -1,11 +1,11 @@
 <script context="module">
-	import TabLabel from './TabLabel.svelte';
+	import TabPanel from './TabLabel.svelte';
 	import TabList from './TabList.svelte';
 
 	export const meta = {
-		title: 'Ui/Tabs',
-		component: TabList,
-		subcomponents: { TabLabel },
+		title: 'Ui/Components/Tabs',
+		component: Tabs,
+		subcomponents: { TabPanel, TabList },
 
 		argTypes: {
 			orientation: {
@@ -17,90 +17,39 @@
 </script>
 
 <script lang="ts">
-	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	let selectedValue = 'aggregates';
+	import Tabs from './Tabs.svelte';
+
+	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
+
+	//Example components passed to panel In reality these would be contained in your app
+	import { First, Fourth, Second, Third } from './demoSections';
+
+	let selectedValue: string | undefined = undefined;
+
+	let tabs = [
+		{ id: 'aggregates', label: 'Aggregated counts across London', content: First },
+		{ id: 'chargers', label: 'Details of chargers', content: Second },
+		{ id: 'averages', label: 'Averages of charge events', content: Third },
+		{ id: 'histograms', label: 'Histograms of charge events', content: Fourth }
+	];
+
+	let tabsWithIcons = [
+		{ id: 'aggregates', label: 'Aggregates', icon: Square3Stack3d, content: First },
+		{ id: 'chargers', label: 'Details', icon: MapIcon, content: Second },
+		{ id: 'averages', label: 'Averages', icon: Square3Stack3d, content: Third },
+		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
+	];
 </script>
 
 <Template let:args>
-	<TabList bind:selectedValue {...args}>
-		<TabLabel tabId="aggregates">Aggregated counts across London</TabLabel>
-		<TabLabel tabId="chargers">Details of chargers</TabLabel>
-		<TabLabel tabId="averages">Averages of charge events</TabLabel>
-		<TabLabel tabId="histograms">Histograms of charge events</TabLabel>
-	</TabList>
-
-	<div class="text-black dark:text-white p-4">
-		<p>Selected value is: <code>{selectedValue}</code></p>
-	</div>
+	<Tabs {...args} bind:selectedValue ariaLabel="View information on EV chargers" />
 </Template>
 
-<Story name="Default" source />
+<Story name="Default" source args={{ tabs: tabs }} />
 
-<Story name="Vertical">
-	<div class="flex">
-		<TabList bind:selectedValue orientation="vertical">
-			<TabLabel tabId="aggregates">Aggregated counts across London</TabLabel>
-			<TabLabel tabId="chargers">Details of chargers</TabLabel>
-			<TabLabel tabId="averages">Averages of charge events</TabLabel>
-			<TabLabel tabId="histograms">Histograms of charge events</TabLabel>
-		</TabList>
+<Story name="With Icons" source args={{ tabs: tabsWithIcons }} />
 
-		<div class="text-black dark:text-white p-4">
-			<p>Selected value is: <code>{selectedValue}</code></p>
-		</div>
-	</div>
-</Story>
+<Story name="Vertical" source args={{ tabs: tabs, orientation: 'vertical' }} />
 
-<Story name="Vertical with Icons">
-	<div class="flex">
-		<TabList bind:selectedValue orientation="vertical">
-			<TabLabel tabId="markers">
-				<Icon src={MapPin} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-				Data Markers
-			</TabLabel>
-			<TabLabel tabId="filters">
-				<Icon src={Funnel} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-				Filters
-			</TabLabel>
-			<TabLabel tabId="analysis">
-				<Icon src={ChartBar} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-				Analysis
-			</TabLabel>
-			<TabLabel tabId="layers">
-				<Icon src={Map} theme="mini" class="h-5 w-5 mb-1" aria-hidden="true" />
-				Layers
-			</TabLabel>
-		</TabList>
-
-		<div class="text-black dark:text-white p-4">
-			<p>Selected value is: <code>{selectedValue}</code></p>
-		</div>
-	</div>
-</Story>
-
-<Story name="Horizontal with Icons">
-	<TabList bind:selectedValue>
-		<TabLabel tabId="markers">
-			<Icon src={MapPin} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
-			Data Markers
-		</TabLabel>
-		<TabLabel tabId="filters">
-			<Icon src={Funnel} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
-			Filters
-		</TabLabel>
-		<TabLabel tabId="analysis">
-			<Icon src={ChartBar} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
-			Analysis
-		</TabLabel>
-		<TabLabel tabId="layers">
-			<Icon src={Map} theme="mini" class="h-5 w-5 mr-1" aria-hidden="true" />
-			Layers
-		</TabLabel>
-	</TabList>
-
-	<div class="text-black dark:text-white p-4">
-		<p>Selected value is: <code>{selectedValue}</code></p>
-	</div>
-</Story>
+<Story name="Vertical with Icons" source args={{ tabs: tabsWithIcons, orientation: 'vertical' }} />

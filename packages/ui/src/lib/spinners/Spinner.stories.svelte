@@ -6,7 +6,7 @@
 	import Spinner from './Spinner.svelte';
 
 	export const meta = {
-		title: 'Ui/Spinner',
+		title: 'Ui/Components/Spinner',
 		component: Spinner
 	};
 </script>
@@ -34,4 +34,8 @@
 		>I'm loading...
 		<Spinner class="h-6 w-6" />
 	</Button>
+</Story>
+
+<Story name="With title">
+	<Spinner title="Loading" class="w-40" />
 </Story>

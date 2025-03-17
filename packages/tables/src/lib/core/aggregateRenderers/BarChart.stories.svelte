@@ -2,7 +2,7 @@
 	import { scaleBand, scaleOrdinal } from 'd3-scale';
 	import BarChart from './BarChart.svelte';
 	export const meta = {
-		title: 'Tables/AggregateRenderers/BarChart',
+		title: 'Tables/Components/AggregateRenderers/BarChart',
 		component: BarChart,
 
 		args: {

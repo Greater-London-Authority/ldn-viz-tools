@@ -1,8 +1,21 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import * as os_light_vts from '../themes/os_light_vts.json';
+	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+
+	export const meta = {
+		title: 'Maps/Components/MapControls/MapControlGroup',
+		component: MapControlGroup,
+		parameters: {
+			layout: 'full'
+		}
+	};
+</script>
+
+<script lang="ts">
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
 	import MapControlLocationSearch from '../mapControlLocationSearch/MapControlLocationSearch.svelte';
@@ -10,18 +23,7 @@
 	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
-	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
-
-	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
-
-<Meta
-	title="Maps/MapControls/MapControlGroup"
-	component={MapControlGroup}
-	parameters={{
-		layout: 'fullscreen'
-	}}
-/>
 
 <Template let:args>
 	<MapControlGroup {...args} />
@@ -36,13 +38,14 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
 			{#each Object.keys(MapControlGroupPositions) as position}
 				<MapControlGroup {position}>
-					<p class="bg-color-container-level-1 text-color-text-primary p-2">
+					<p
+						class="bg-color-container-level-0 text-color-text-primary p-2 shadow border border-color-ui-border-secondary"
+					>
 						{position}
 					</p>
 				</MapControlGroup>
@@ -56,7 +59,6 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
@@ -84,7 +86,6 @@ On small devices most controls will hide themselves.
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
@@ -104,7 +105,7 @@ On small devices most controls will hide themselves.
 
 			<MapControlGroup position="TopRight">
 				<p
-					class="bg-color-container-level-1 text-color-text-primary p-2 text-center pointer-events-auto"
+					class="bg-color-container-level-0 text-color-text-primary p-2 text-center pointer-events-auto shadow border border-color-ui-border-secondary"
 				>
 					Bespoke controls<br />E.g. Drawing
 				</p>

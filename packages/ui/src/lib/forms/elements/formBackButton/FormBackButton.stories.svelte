@@ -1,9 +1,9 @@
 <script context="module" lang="ts">
-	import FormBackButton from './FormBackButton.svelte';
 	import Form from '../../Form.svelte';
+	import FormBackButton from './FormBackButton.svelte';
 
 	export const meta = {
-		title: 'Ui/Form/FormBackButton',
+		title: 'Ui/Components/Form/FormBackButton',
 		component: FormBackButton,
 		argTypes: {
 			onBack: {
@@ -31,9 +31,9 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { ArrowLeft } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const waitOneSeconds = () => {
 		return new Promise((r) => setTimeout(r, 1000));
@@ -60,17 +60,21 @@
 	</Form>
 </Story>
 
+<!-- If the button has no visible `label`, ensure a `title` is added for screen reader use, as below. -->
+
 <Story name="Customise Button">
 	<Form>
 		<FormBackButton
 			slot="leftButtons"
-			condition="warning"
+			emphasis="primary"
 			variant="square"
 			size="lg"
 			async
 			onBack={waitOneSeconds}
+			title="Go back"
 		>
-			<Icon src={ArrowLeft} class="w-10 h-10" />
+			<Icon src={ArrowLeft} class="w-6 h-6 mb-1" />
+			Go Back
 		</FormBackButton>
 	</Form>
 </Story>

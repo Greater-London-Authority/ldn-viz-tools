@@ -2,7 +2,7 @@
 	import Table from './Table.svelte';
 
 	export const meta = {
-		title: 'Tables/Table',
+		title: 'Tables/Components/Table',
 		component: Table
 	};
 </script>

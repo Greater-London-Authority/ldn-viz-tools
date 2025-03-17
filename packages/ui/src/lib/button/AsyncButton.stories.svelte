@@ -3,7 +3,7 @@
 	import AsyncButton from './AsyncButton.svelte';
 
 	export const meta = {
-		title: 'Ui/AsyncButton',
+		title: 'Ui/Components/Buttons/AsyncButton',
 		component: AsyncButton,
 		argTypes: {
 			onClick: {
@@ -17,7 +17,7 @@
 				}
 			},
 			emphasis: {
-				options: ['primary', 'secondary'],
+				options: ['primary', 'secondary', 'positive', 'negative', 'caution'],
 				control: { type: 'radio' }
 			},
 			working: {
@@ -25,10 +25,6 @@
 			},
 			variant: {
 				options: ['brand', 'solid', 'outline', 'text', 'square'],
-				control: { type: 'select' }
-			},
-			condition: {
-				options: ['default', 'success', 'error', 'warning'],
 				control: { type: 'select' }
 			},
 			size: {
@@ -60,8 +56,11 @@
 
 	let working = false;
 
-	const variants = ['solid', 'brand', 'outline', 'text', 'square'];
-	const conditions = ['default', 'success', 'warning', 'error'];
+	type Variant = 'brand' | 'square' | 'solid' | 'outline' | 'text' | undefined;
+	type Emphasis = 'primary' | 'secondary' | 'caution' | 'positive' | 'negative' | undefined;
+
+	const variants: Variant[] = ['solid', 'brand', 'outline', 'text', 'square'];
+	const emphasis: Emphasis[] = ['primary', 'secondary', 'positive', 'caution', 'negative'];
 </script>
 
 <Template let:args>
@@ -83,20 +82,32 @@
 
 <Story name="Default" source />
 
-<Story name="Variants & Conditions">
+<Story name="Variants & emphasis">
 	<div class="flex flex-col gap-4">
-		{#each conditions as condition}
-			<div class="flex gap-4">
+		{#each emphasis as emphasis}
+			<div class="flex items-center gap-4">
 				{#each variants as variant}
-					<AsyncButton {variant} {condition} onClick={waitFiveSeconds}>
+					<AsyncButton
+						{variant}
+						{emphasis}
+						size={variant === 'square' ? 'lg' : 'md'}
+						onClick={waitFiveSeconds}
+						class="capitalize"
+					>
 						{#if variant === 'square'}
-							<Icon src={DocumentArrowUp} theme="mini" class="w-5 h-5" aria-hidden="true" />
+							<Icon src={DocumentArrowUp} class="w-8 h-8 mb-0.5" aria-hidden="true" />
+							{variant}
 						{:else}
-							<span class="capitalize">{variant}</span>
+							{variant}
 						{/if}
 					</AsyncButton>
 				{/each}
 			</div>
 		{/each}
 	</div>
+</Story>
+
+<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this in Chrome, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`.  -->
+<Story name="Reduced motion">
+	<AsyncButton onClick={waitFiveSeconds} class="capitalize">Click me!</AsyncButton>
 </Story>

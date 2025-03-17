@@ -26,7 +26,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapCursorEvent',
+		title: 'Maps/Components/MapCursorEvent',
 		component: MapCursorEvent,
 		parameters: {
 			layout: 'full'
@@ -55,7 +55,9 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import loadTestLayers from '../loadTestLayers';
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
+
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	let init = false;
@@ -130,7 +132,7 @@
 		</Map>
 
 		<div
-			class="dark absolute top-0 left-0 w-full h-[16em] p-2 bg-color-container-level-1 bg-opacity-75 text-color-text-primary"
+			class="dark absolute top-0 left-0 w-full h-[16em] p-2 bg-color-container-level-0 bg-opacity-75 text-color-text-primary"
 		>
 			<table>
 				<tr class="font-medium">

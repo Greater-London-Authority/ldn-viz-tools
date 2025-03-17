@@ -2,7 +2,7 @@
 	/**
 	 * The `Dot` component renders a table cell representing a numerical value as a tick;
 	 * the horizontal position of the dot encodes the value.
-	 * See also: [Tick](./?path=/docs/tables-renderers-tick--documentation)
+	 * See also: [Tick](./?path=/docs/tables-components-renderers-tick--documentation)
 	 * @component
 	 */
 
@@ -38,6 +38,7 @@
 	const fPercentage = format('0.0%');
 
 	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$$restProps;
 </script>
 

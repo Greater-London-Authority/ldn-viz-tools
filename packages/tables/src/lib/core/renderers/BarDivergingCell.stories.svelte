@@ -2,7 +2,7 @@
 	import BarDivergingCell from './BarDivergingCell.svelte';
 
 	export const meta = {
-		title: 'Tables/Renderers/BarDivergingCell',
+		title: 'Tables/Components/Renderers/BarDivergingCell',
 		component: BarDivergingCell,
 
 		args: {

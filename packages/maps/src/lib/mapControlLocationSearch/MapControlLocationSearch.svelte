@@ -12,12 +12,12 @@
 	import MapControlGeolocator from './MapControlGeolocator.svelte';
 	import { initMapLayer } from './map-layer';
 
-	import type { MapStore } from './map-types';
 	import type {
 		GeocoderAdapter,
-		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
+	import type { MapStore } from './map-types';
 
 	const mapStore: MapStore = getContext('mapStore');
 
@@ -39,6 +39,11 @@
 	 * or an error occurs during geolocation.
 	 */
 	export let onSearchError: undefined | OnGeolocationSearchError = undefined;
+
+	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
 
 	/**
 	 * Passed to the suggestions dropdown to limit the number of suggestions
@@ -69,11 +74,12 @@
 	$: initMapLayer($mapStore);
 </script>
 
-<div class="flex" {...$$restProps}>
+<div class="flex shadow" {...$$restProps}>
 	<MapControlGeocoder
 		{adapter}
 		onLocationSelected={onLocationFound}
 		{onSearchError}
+		{onSearchClear}
 		{maxSuggestions}
 		inputClasses="w-72 {limitWidthClass}"
 		{placeholder}

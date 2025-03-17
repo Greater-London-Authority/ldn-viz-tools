@@ -2,7 +2,7 @@
 	import Dot from './Dot.svelte';
 
 	export const meta = {
-		title: 'Tables/Renderers/Dot',
+		title: 'Tables/Components/Renderers/Dot',
 		component: Dot,
 
 		argTypes: {
