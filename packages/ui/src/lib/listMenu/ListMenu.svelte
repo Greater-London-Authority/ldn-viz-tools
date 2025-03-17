@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { writable } from 'svelte/store';
 	import { classNames } from '../../../dist';
 	import { randomId } from '../utils/randomId';
 	import type { ListMenuItem as Item } from './ListMenuItem.svelte';
@@ -35,6 +36,16 @@
 	 */
 	export let orientation: 'vertical' | 'horizontal' = 'vertical';
 
+	/**
+	 * Exposes active menu item to parent container for modification.
+	 */
+	export let selectedMenuItemId = writable('');
+
+	/**
+	 * Assigns value of active menu item (if set) to `$selectedValue` internal store.
+	 */
+	$: $selectedValue = $selectedMenuItemId;
+
 	const orientationClasses = {
 		vertical: 'flex-col space-y-2',
 		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
@@ -42,15 +53,30 @@
 
 	$: menuClasses = classNames(orientationClasses[orientation]);
 
+	/**
+	 * Event handler to update value of $selectedMenuItemId when link is clicked.
+	 */
 	const onChange = (id: string) => {
-		$selectedValue = id;
+		if ($selectedMenuItemId !== id) {
+			$selectedMenuItemId = id;
+		}
 	};
+
+	// currentItem, activeChild
 </script>
 
 <nav aria-label={ariaLabel} class={width}>
 	<ul {id} class={menuClasses}>
-		{#each items as { title, url, children }}
-			<ListMenuItem href={url} {title} {children} {isAlwaysExpanded} {onChange} {orientation} />
+		{#each items as { title, url, children, id }}
+			<ListMenuItem
+				href={url}
+				{title}
+				{id}
+				{children}
+				{isAlwaysExpanded}
+				{onChange}
+				{orientation}
+			/>
 		{/each}
 	</ul>
 </nav>
