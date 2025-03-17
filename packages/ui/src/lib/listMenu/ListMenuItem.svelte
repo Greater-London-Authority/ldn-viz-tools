@@ -9,11 +9,12 @@
 <script lang="ts">
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	// import { getContext } from 'svelte';
+	// import type { Writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
+	import { selectedValue } from './listMenuStores.svelte';
 
 	export let id = randomId();
 	export let href: string;
@@ -22,20 +23,29 @@
 	export let children: ListMenuItem[] = [];
 	export let isExpanded: boolean = false;
 	export let isAlwaysExpanded: boolean = false;
+	export let orientation: 'vertical' | 'horizontal' = 'vertical';
 	export let onChange;
-
-	const { selectedValue } = getContext<{ selectedValue: Writable<string> }>('listMenu');
 
 	let hasChildren: boolean;
 	$: hasChildren = children.length > 0;
 
 	let itemClasses: string;
 	$: itemClasses = classNames(
+		`items-center level-${level}`,
 		$selectedValue === id
 			? 'text-color-text-secondary border-b-2 border-color-action-primary mx-4'
 			: 'text-color-text-primary hover:text-color-text-secondary border-b-2 border-color-container-level-0 hover:border-color-action-primary mx-4',
 		level == 1 && hasChildren ? 'font-semibold' : 'font-normal'
 		// level == 1 || (level == 2 && hasChildren) ? 'font-semibold' : 'font-normal'
+	);
+
+	const orientationClasses = {
+		vertical: '',
+		horizontal: 'py-2 absolute'
+	};
+
+	$: childrenClasses = classNames(
+		!isExpanded && !isAlwaysExpanded ? 'hidden' : orientationClasses[orientation]
 	);
 </script>
 
@@ -50,22 +60,15 @@
 	{#if hasChildren}
 		<div {id} class="flex items-center justify-between">
 			{#if href}
-				<a {href} class="{itemClasses} items-center level-{level}" on:click={() => onChange(id)}>
+				<a {href} class={itemClasses} on:click={() => onChange(id)}>
 					{title}
 				</a>
 			{:else}
-				<span class="{itemClasses} items-center level-{level}">
+				<span class={itemClasses}>
 					{title}
 				</span>
 			{/if}
-			<!-- <svelte:element
-				this={href ? 'a' : 'span'}
-				{href}
-				class="{itemClasses} items-center level-{level}"
-				on:click={onChange(id)}
-			>
-				{title}
-			</svelte:element> -->
+
 			{#if !isAlwaysExpanded}
 				<Button
 					on:click={() => (isExpanded = !isExpanded)}
@@ -92,13 +95,13 @@
 			{/if}
 		</div>
 	{:else}
-		<a {id} {href} class="{itemClasses} items-center level-{level}" on:click={() => onChange(id)}>
+		<a {id} {href} class={itemClasses} on:click={() => onChange(id)}>
 			{title}
 		</a>
 	{/if}
 
 	{#if hasChildren}
-		<ul id="{title}-menu" class={!isExpanded && !isAlwaysExpanded ? 'hidden' : ''}>
+		<ul id="{title}-menu" class={childrenClasses}>
 			{#each children as child}
 				<svelte:self
 					href={child.url}

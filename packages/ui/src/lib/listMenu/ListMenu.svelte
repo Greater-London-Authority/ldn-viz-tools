@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
+	import { classNames } from '../../../dist';
 	import { randomId } from '../utils/randomId';
 	import type { ListMenuItem as Item } from './ListMenuItem.svelte';
 	import ListMenuItem from './ListMenuItem.svelte';
+	import { selectedValue } from './listMenuStores.svelte';
 
 	/**
 	 * Label to describe what the nav menu is for.
@@ -31,30 +31,26 @@
 	export let isAlwaysExpanded = false;
 
 	/**
-	 * `id` of currently selected page
+	 * Optional prop to change orientation
 	 */
-	export let selectedValue: string = '';
+	export let orientation: 'vertical' | 'horizontal' = 'vertical';
 
-	const val: Writable<string> = writable(selectedValue);
-
-	const updatedValue = (newVal: string) => {
-		if ($val != newVal) {
-			$val = newVal;
-		}
+	const orientationClasses = {
+		vertical: 'flex-col space-y-2',
+		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
 	};
-	$: updatedValue(selectedValue);
+
+	$: menuClasses = classNames(orientationClasses[orientation]);
 
 	const onChange = (id: string) => {
-		$val = id;
+		$selectedValue = id;
 	};
-
-	setContext('listMenu', { selectedValue: val });
 </script>
 
 <nav aria-label={ariaLabel} class={width}>
-	<ul {id} class="overflow-auto space-y-2">
+	<ul {id} class={menuClasses}>
 		{#each items as { title, url, children }}
-			<ListMenuItem href={url} {title} {children} {isAlwaysExpanded} {onChange} />
+			<ListMenuItem href={url} {title} {children} {isAlwaysExpanded} {onChange} {orientation} />
 		{/each}
 	</ul>
 </nav>

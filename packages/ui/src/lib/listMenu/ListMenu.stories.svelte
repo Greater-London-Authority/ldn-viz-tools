@@ -118,3 +118,7 @@
 <Story name="Always expanded">
 	<ListMenu ariaLabel="always expanded menu" {items} isAlwaysExpanded />
 </Story>
+
+<Story name="Horizontal orientation">
+	<ListMenu ariaLabel="horizontally oriented menu" {items} orientation="horizontal" />
+</Story>
