@@ -14,6 +14,7 @@
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
+	import { menuFocus } from './actions';
 	import { selectedValue } from './listMenuStores.svelte';
 
 	export let id = randomId();
@@ -88,7 +89,7 @@
 
 <li>
 	{#if hasChildren}
-		<div {id} class="flex items-center justify-between">
+		<div {id} class="flex items-center justify-between" use:menuFocus={{ isExpanded }}>
 			{#if href}
 				<a {href} class={textClasses} {...currentPage} on:click={() => onChange(id)}>
 					{title}
@@ -123,7 +124,14 @@
 			{/if}
 		</div>
 	{:else}
-		<a {id} {href} class={textClasses} {...currentPage} on:click={() => onChange(id)}>
+		<a
+			{id}
+			{href}
+			class={textClasses}
+			{...currentPage}
+			on:click={() => onChange(id)}
+			use:menuFocus={{ isExpanded }}
+		>
 			{title}
 		</a>
 	{/if}
