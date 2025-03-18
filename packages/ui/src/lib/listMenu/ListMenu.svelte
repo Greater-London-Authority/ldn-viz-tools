@@ -62,14 +62,33 @@
 		}
 	};
 
-	// currentItem, activeChild
+	/**
+	 * Recursive function to handle applying `isExpanded` state, toggling expansion
+	 * of list when a child is selected
+	 */
+	const mapItems: any = (items: ListMenuItem[], targetId: string) => {
+		return items.map((item: ListMenuItem) => {
+			const hasMatchingChild = item.children?.some(
+				(child: ListMenuItem) =>
+					child.id === targetId ||
+					(child.children &&
+						mapItems(child.children, targetId).some((c: ListMenuItem) => c.isExpanded))
+			);
 
-	$: console.log({ items, $selectedMenuItemId });
+			return {
+				...item,
+				isExpanded: hasMatchingChild || item.id === targetId,
+				children: item.children ? mapItems(item.children, targetId) : undefined
+			};
+		});
+	};
+
+	$: menuState = !isAlwaysExpanded ? mapItems(items, $selectedMenuItemId) : items;
 </script>
 
 <nav aria-label={ariaLabel} class={width}>
 	<ul {id} class={menuClasses}>
-		{#each items as { title, url, children, id }}
+		{#each menuState as { title, url, children, id, isExpanded }}
 			<ListMenuItem
 				href={url}
 				{title}
@@ -78,6 +97,7 @@
 				{isAlwaysExpanded}
 				{onChange}
 				{orientation}
+				{isExpanded}
 			/>
 		{/each}
 	</ul>

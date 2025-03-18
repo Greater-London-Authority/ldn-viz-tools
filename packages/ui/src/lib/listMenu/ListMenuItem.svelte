@@ -4,6 +4,7 @@
 		id: string;
 		url: string;
 		children?: ListMenuItem[];
+		isExpanded?: boolean;
 	}
 </script>
 
@@ -13,7 +14,7 @@
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
-	import { collapseChild, selectedValue } from './listMenuStores.svelte';
+	import { selectedValue } from './listMenuStores.svelte';
 
 	export let id = randomId();
 	export let href: string;
@@ -27,7 +28,7 @@
 
 	let childMenuId = title.toLowerCase() + '-menu';
 
-	$: hasChildren = children.length > 0;
+	$: hasChildren = children?.length > 0;
 
 	$: isActive = $selectedValue === id;
 	$: if ((isActive && hasChildren) || isAlwaysExpanded) {
@@ -36,17 +37,7 @@
 
 	const toggleMenu = () => {
 		isExpanded = !isExpanded;
-		// console.log('isExpanded', isExpanded);
-		// if (!isExpanded && hasChildren) {
-		// 	$collapseChild = true;
-		// 	console.log('collapseChild', $collapseChild);
-		// }
 	};
-
-	// $: if ($collapseChild) {
-	// 	console.log('child should be collapsed');
-	// 	isExpanded = false;
-	// }
 
 	interface CurrentPage {
 		'aria-current': 'page' | undefined;
@@ -75,6 +66,24 @@
 	};
 
 	$: childClasses = classNames(!isExpanded ? 'hidden' : orientationClasses[orientation]);
+
+	/**
+	 * When the parent list collapses, any children that are expanded also collapse.
+	 * This means next time the parent list is expanded, the children aren't already expanded.
+	 */
+	const toggleChildren = (children: ListMenuItem[], expanded: boolean) => {
+		return children.map((child) => {
+			if (expanded === false && child.isExpanded === true) {
+				return {
+					...child,
+					isExpanded: false
+				};
+			} else return child;
+		});
+	};
+
+	$: toggledChildren =
+		!isAlwaysExpanded && hasChildren ? toggleChildren(children, isExpanded) : children;
 </script>
 
 <li
@@ -125,7 +134,7 @@
 
 	{#if hasChildren}
 		<ul id={childMenuId} class={childClasses}>
-			{#each children as child}
+			{#each toggledChildren as child}
 				<svelte:self
 					href={child.url}
 					title={child.title}
@@ -134,7 +143,7 @@
 					level={level + 1}
 					{isAlwaysExpanded}
 					{onChange}
-					{isExpanded}
+					isExpanded={child.isExpanded}
 				/>
 			{/each}
 		</ul>
