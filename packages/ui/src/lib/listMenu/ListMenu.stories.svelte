@@ -16,15 +16,15 @@
 	import { writable } from 'svelte/store';
 	import type { ListMenuItem as Item } from './ListMenuItem.svelte';
 
-	$: selectedMenuItemId = writable('foundations');
+	$: selectedMenuItemId = writable('layout');
 
 	let subMenu = [
-		{ title: 'Accessibility', id: 'accessibility', url: '#accessibility', children: [] },
-		{ title: 'Brand', id: 'brand', url: '/', children: [] },
-		{ title: 'Color', id: 'color2', url: '/', children: [] },
-		{ title: 'Typography', id: 'typography', url: '/', children: [] },
-		{ title: 'Spacing', id: 'spacing', url: '/', children: [] },
-		{ title: 'Design Tokens', id: 'design-tokens', url: '/', children: [] }
+		{ title: 'Accessibility', id: 'accessibility', url: '#accessibility' },
+		{ title: 'Brand', id: 'brand', url: '/' },
+		{ title: 'Color', id: 'color2', url: '/' },
+		{ title: 'Typography', id: 'typography', url: '/' },
+		{ title: 'Spacing', id: 'spacing', url: '/' },
+		{ title: 'Design Tokens', id: 'design-tokens', url: '/' }
 	];
 
 	let subMenuNoLinks = [
@@ -53,11 +53,11 @@
 					id: 'layout',
 					url: '/',
 					children: [
-						{ title: 'Applications', id: 'applications-child', url: '/', children: [] },
-						{ title: 'Maps', id: 'maps', url: '/', children: [] }
+						{ title: 'Applications', id: 'applications-child', url: '/' },
+						{ title: 'Maps', id: 'maps', url: '/' }
 					]
 				},
-				{ title: 'User Interface', id: 'userInterface', url: '/', children: [] }
+				{ title: 'User Interface', id: 'userInterface', url: '/' }
 			]
 		},
 		{
@@ -65,21 +65,21 @@
 			id: 'dataVisualisation',
 			url: '/',
 			children: [
-				{ title: 'Principles', id: 'principles', url: '/', children: [] },
-				{ title: 'Accessibility', id: 'accessibility2', url: '/', children: [] },
+				{ title: 'Principles', id: 'principles', url: '/' },
+				{ title: 'Accessibility', id: 'accessibility2', url: '/' },
 				{
 					title: 'Color',
 					id: 'color',
 					url: '/',
 					children: [
-						{ title: 'Categorical', id: 'categorical', url: '/', children: [] },
-						{ title: 'Quantitative', id: 'quantitative', url: '/', children: [] },
-						{ title: 'Maps', id: 'maps-child', url: '/', children: [] }
+						{ title: 'Categorical', id: 'categorical', url: '/' },
+						{ title: 'Quantitative', id: 'quantitative', url: '/' },
+						{ title: 'Maps', id: 'maps-child', url: '/' }
 					]
 				},
-				{ title: 'Scaling Shapes', id: 'shapes', url: '/', children: [] },
-				{ title: 'Chart Themes', id: 'chartThemes', url: '/', children: [] },
-				{ title: 'Chart Examples', id: 'chartExamples', url: '/', children: [] }
+				{ title: 'Scaling Shapes', id: 'shapes', url: '/' },
+				{ title: 'Chart Themes', id: 'chartThemes', url: '/' },
+				{ title: 'Chart Examples', id: 'chartExamples', url: '/' }
 			]
 		}
 	];
@@ -101,12 +101,12 @@
  
 ```
 	let subMenu = [
-		{ title: 'Accessibility', url: '/', children: [] },
-		{ title: 'Brand', url: '/', children: [] },
-		{ title: 'Color', url: '/', children: [] },
-		{ title: 'Typography', url: '/', children: [] },
-		{ title: 'Spacing', url: '/', children: [] },
-		{ title: 'Design Tokens', url: '/', children: [] }
+		{ title: 'Accessibility', url: '/',  },
+		{ title: 'Brand', url: '/',  },
+		{ title: 'Color', url: '/',  },
+		{ title: 'Typography', url: '/',  },
+		{ title: 'Spacing', url: '/',  },
+		{ title: 'Design Tokens', url: '/',  }
 	];
 
  	<ListMenu ariaLabel="no children" items={subMenu} />

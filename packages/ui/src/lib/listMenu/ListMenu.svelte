@@ -63,6 +63,8 @@
 	};
 
 	// currentItem, activeChild
+
+	$: console.log({ items, $selectedMenuItemId });
 </script>
 
 <nav aria-label={ariaLabel} class={width}>

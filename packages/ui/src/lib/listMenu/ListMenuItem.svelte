@@ -3,7 +3,7 @@
 		title: string;
 		id: string;
 		url: string;
-		children: ListMenuItem[];
+		children?: ListMenuItem[];
 	}
 </script>
 
@@ -13,7 +13,7 @@
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
-	import { selectedValue } from './listMenuStores.svelte';
+	import { collapseChild, selectedValue } from './listMenuStores.svelte';
 
 	export let id = randomId();
 	export let href: string;
@@ -33,6 +33,20 @@
 	$: if ((isActive && hasChildren) || isAlwaysExpanded) {
 		isExpanded = true;
 	}
+
+	const toggleMenu = () => {
+		isExpanded = !isExpanded;
+		// console.log('isExpanded', isExpanded);
+		// if (!isExpanded && hasChildren) {
+		// 	$collapseChild = true;
+		// 	console.log('collapseChild', $collapseChild);
+		// }
+	};
+
+	// $: if ($collapseChild) {
+	// 	console.log('child should be collapsed');
+	// 	isExpanded = false;
+	// }
 
 	interface CurrentPage {
 		'aria-current': 'page' | undefined;
@@ -63,8 +77,6 @@
 	$: childClasses = classNames(!isExpanded ? 'hidden' : orientationClasses[orientation]);
 </script>
 
-<!-- need an active state - if active, children are expanded -->
-
 <li
 	class={level !== 1
 		? 'font-normal text-color-action-text-secondary hover:text-color-action-primary-hover pl-4'
@@ -84,7 +96,7 @@
 
 			{#if !isAlwaysExpanded}
 				<Button
-					on:click={() => (isExpanded = !isExpanded)}
+					on:click={() => toggleMenu()}
 					slim={true}
 					emphasis="secondary"
 					variant="text"
@@ -96,7 +108,6 @@
 						'aria-controls': `${title}-menu`
 					}}
 				>
-					<!-- right aligned -->
 					<Icon
 						src={isExpanded ? ChevronDown : ChevronRight}
 						class="w-6 h-6"
@@ -123,7 +134,7 @@
 					level={level + 1}
 					{isAlwaysExpanded}
 					{onChange}
-					isExpanded={false}
+					{isExpanded}
 				/>
 			{/each}
 		</ul>
