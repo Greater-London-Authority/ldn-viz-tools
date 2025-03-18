@@ -83,8 +83,6 @@
 			]
 		}
 	];
-
-	// $: console.log($selectedMenuItemId);
 </script>
 
 <Template let:args>
@@ -116,13 +114,10 @@
 	<ListMenu ariaLabel="no children" items={subMenu} />
 </Story>
 
+<!-- Menu items with children don't have to be links. But items without children do. In this example, the top level items don't have links. -->
 <Story name="No Links">
 	<ListMenu ariaLabel="no links" items={subMenuNoLinks} />
 </Story>
-<!-- Expandable headings not links -->
-<!-- Expandable headings links -->
-<!-- Expandable headings vertically -->
-<!-- Expandable headings horizontally -->
 
 <!-- For menus that should always show all of the list items, you can set `isAlwaysExpanded` to true. -->
 <Story name="Always expanded">

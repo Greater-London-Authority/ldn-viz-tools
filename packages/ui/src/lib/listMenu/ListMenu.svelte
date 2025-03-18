@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
-	import { classNames } from '../../../dist';
+	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 	import type { ListMenuItem as Item } from './ListMenuItem.svelte';
 	import ListMenuItem from './ListMenuItem.svelte';

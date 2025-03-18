@@ -39,6 +39,24 @@
 		isExpanded = !isExpanded;
 	};
 
+	/**
+	 * When the parent list collapses, any children that are expanded also collapse.
+	 * This means next time the parent list is expanded, the children aren't already expanded.
+	 */
+	const toggleChildren = (children: ListMenuItem[], expanded: boolean) => {
+		return children.map((child) => {
+			if (expanded === false && child.isExpanded === true) {
+				return {
+					...child,
+					isExpanded: false
+				};
+			} else return child;
+		});
+	};
+
+	$: toggledChildren =
+		!isAlwaysExpanded && hasChildren ? toggleChildren(children, isExpanded) : children;
+
 	interface CurrentPage {
 		'aria-current': 'page' | undefined;
 	}
@@ -61,36 +79,14 @@
 	);
 
 	const orientationClasses = {
-		vertical: '',
+		vertical: 'pl-4',
 		horizontal: 'py-2 absolute'
 	};
 
 	$: childClasses = classNames(!isExpanded ? 'hidden' : orientationClasses[orientation]);
-
-	/**
-	 * When the parent list collapses, any children that are expanded also collapse.
-	 * This means next time the parent list is expanded, the children aren't already expanded.
-	 */
-	const toggleChildren = (children: ListMenuItem[], expanded: boolean) => {
-		return children.map((child) => {
-			if (expanded === false && child.isExpanded === true) {
-				return {
-					...child,
-					isExpanded: false
-				};
-			} else return child;
-		});
-	};
-
-	$: toggledChildren =
-		!isAlwaysExpanded && hasChildren ? toggleChildren(children, isExpanded) : children;
 </script>
 
-<li
-	class={level !== 1
-		? 'font-normal text-color-action-text-secondary hover:text-color-action-primary-hover pl-4'
-		: 'font-semibold text-color-text-primary hover:text-color-action-primary-hover'}
->
+<li>
 	{#if hasChildren}
 		<div {id} class="flex items-center justify-between">
 			{#if href}

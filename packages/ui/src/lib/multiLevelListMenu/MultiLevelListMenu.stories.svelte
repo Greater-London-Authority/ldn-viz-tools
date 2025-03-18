@@ -35,6 +35,6 @@
 	<MultiLevelListMenu {...args} />
 </Template>
 
-<Story name="default">
+<Story name="Default">
 	<MultiLevelListMenu {items} bind:selectedMenuItemId />
 </Story>

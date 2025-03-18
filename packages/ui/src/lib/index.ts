@@ -63,6 +63,9 @@ export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 export { default as TabPanel } from './tabs/TabPanel.svelte';
 
+export { default as ListMenu } from './listMenu/ListMenu.svelte';
+export { default as ListMenuItem } from './listMenu/ListMenuItem.svelte';
+
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 
 export * from './toaster/toaster';
