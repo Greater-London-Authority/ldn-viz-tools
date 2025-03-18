@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import MultiLevelListMenuItem from './MultiLevelListMenuItem.svelte';
 
@@ -15,27 +14,27 @@
 	// check the id of the item against its contextual state and apply styling as expanded/contracted
 	// as necessary
 
-	const mapItems = (obj, fn) => {
-		return Object.entries([key, val]).reduce((acc, [key, val]) => {
-			const value = obj[key];
-			acc[key] = typeof value === 'object' && value !== null ? mapItems(value, fn) : fn(value);
-			return acc;
-		}, {});
+	const mapItems: any = (items: any[], targetId: string) => {
+		return items.map((item) => {
+			const hasMatchingChild = item.children?.some(
+				(child: any) =>
+					child.id === targetId ||
+					(child.children && mapItems(child.children, targetId).some((c) => c.isExpanded))
+			);
+
+			return {
+				...item,
+				isExpanded: hasMatchingChild || item.id === targetId,
+				children: item.children ? mapItems(item.children, targetId) : undefined
+			};
+		});
 	};
 
-	const testFunc = (item) => {
-		return (item.yo = 'yo');
-	};
-
-	const menuState = mapItems(items, testFunc);
-
-	$: console.log({ menuState });
-
-	setContext('menuState', menuState);
+	$: menuState = mapItems(items, $selectedMenuItemId);
 </script>
 
 <ul>
-	{#each items as item}
+	{#each menuState as item}
 		<MultiLevelListMenuItem {item} />
 	{/each}
 </ul>
