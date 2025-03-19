@@ -16,14 +16,55 @@
 	import { randomId } from '../utils/randomId';
 	import { selectedValue } from './listMenuStores.svelte';
 
+	/**
+	 * Value set as the `id` attribute of the `<a>` or `<div>` element. Should be in the array of `items` but defaults to randomly generated value in case not.
+	 */
 	export let id = randomId();
+
+	/**
+	 * Url to navigate to when link is clicked.
+	 */
 	export let href: string;
+
+	/**
+	 * Link title which should correspond to the page title
+	 */
 	export let title: string;
+
+	/**
+	 * Value set to apply styling to text. Defaults to 1, as in base list but increases if the list is nested.
+	 */
 	export let level: number = 1;
+
+	/**
+	 * Optional list of children items, if they exist.
+	 */
 	export let children: ListMenuItem[] = [];
+
+	/**
+	 * Sets whether or not the list is expanded
+	 */
 	export let isExpanded: boolean = false;
+
+	/**
+	 * If all list items should be visible at all times, set this
+	 * to `true`.
+	 */
 	export let isAlwaysExpanded: boolean = false;
-	export let orientation: 'vertical' | 'horizontal' = 'vertical';
+
+	/**
+	 * Optional prop to change orientation. Default is vertical.
+	 */
+	export let orientation: 'vertical' | 'horizontal';
+
+	/**
+	 * Set whether to collapse children when parent is collapsed, or keep children open.
+	 */
+	export let collapseChildren: boolean;
+
+	/**
+	 * Event handler to handle what happens when links are clicked.
+	 */
 	export let onChange;
 
 	let childMenuId = title.toLowerCase() + '-menu';
@@ -35,6 +76,9 @@
 		isExpanded = true;
 	}
 
+	/**
+	 * Updates `isExpanded` when the Button is clicked.
+	 */
 	const toggleMenu = () => {
 		isExpanded = !isExpanded;
 	};
@@ -55,7 +99,9 @@
 	};
 
 	$: toggledChildren =
-		!isAlwaysExpanded && hasChildren ? toggleChildren(children, isExpanded) : children;
+		!isAlwaysExpanded && hasChildren && collapseChildren
+			? toggleChildren(children, isExpanded)
+			: children;
 
 	interface CurrentPage {
 		'aria-current': 'page' | undefined;
