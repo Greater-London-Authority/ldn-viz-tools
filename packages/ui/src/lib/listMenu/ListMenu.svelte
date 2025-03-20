@@ -42,12 +42,6 @@
 	export let selectedMenuItemId = writable('');
 
 	/**
-	 * Set whether to collapse children when parent is collapsed, or keep children open.
-	 * Defaults to `true` but can be changed if desired.
-	 */
-	export let collapseChildren: boolean = true;
-
-	/**
 	 * Assigns value of active menu item (if set) to `$selectedValue` internal store.
 	 */
 	$: $selectedValue = $selectedMenuItemId;
@@ -104,7 +98,6 @@
 				{onChange}
 				{orientation}
 				{isExpanded}
-				{collapseChildren}
 			/>
 		{/each}
 	</ul>

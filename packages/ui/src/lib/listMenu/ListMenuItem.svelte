@@ -58,11 +58,6 @@
 	export let orientation: 'vertical' | 'horizontal' = 'vertical';
 
 	/**
-	 * Set whether to collapse children when parent is collapsed, or keep children open.
-	 */
-	export let collapseChildren: boolean;
-
-	/**
 	 * Event handler to handle what happens when links are clicked.
 	 */
 	export let onChange;
@@ -99,9 +94,7 @@
 	};
 
 	$: toggledChildren =
-		!isAlwaysExpanded && hasChildren && collapseChildren
-			? toggleChildren(children, isExpanded)
-			: children;
+		!isAlwaysExpanded && hasChildren ? toggleChildren(children, isExpanded) : children;
 
 	interface CurrentPage {
 		'aria-current': 'page' | undefined;
