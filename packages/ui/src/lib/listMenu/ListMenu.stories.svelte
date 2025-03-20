@@ -13,10 +13,9 @@
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
-	import type { ListMenuItem as Item } from './ListMenuItem.svelte';
+	import type { ListMenuEntry } from './ListMenuItem.svelte';
 
-	$: selectedMenuItemId = writable('layout');
+	$: selectedMenuItemId = 'layout';
 
 	let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', url: '#accessibility' },
@@ -36,7 +35,7 @@
 		{ title: 'Design Tokens', id: 'tokens', url: '', children: subMenu }
 	];
 
-	let items: Item[] = [
+	let items: ListMenuEntry[] = [
 		{
 			title: 'Foundations',
 			id: 'foundations',

@@ -1,9 +1,9 @@
 <script context="module" lang="ts">
-	export interface ListMenuItem {
+	export interface ListMenuEntry {
 		title: string;
 		id: string;
 		url: string;
-		children?: ListMenuItem[];
+		children?: ListMenuEntry[];
 		isExpanded?: boolean;
 	}
 </script>
@@ -39,7 +39,7 @@
 	/**
 	 * Optional list of children items, if they exist.
 	 */
-	export let children: ListMenuItem[] = [];
+	export let children: ListMenuEntry[] = [];
 
 	/**
 	 * Sets whether or not the list is expanded
@@ -82,7 +82,7 @@
 	 * When the parent list collapses, any children that are expanded also collapse.
 	 * This means next time the parent list is expanded, the children aren't already expanded.
 	 */
-	const toggleChildren = (children: ListMenuItem[], expanded: boolean) => {
+	const toggleChildren = (children: ListMenuEntry[], expanded: boolean) => {
 		return children.map((child) => {
 			if (expanded === false && child.isExpanded === true) {
 				return {

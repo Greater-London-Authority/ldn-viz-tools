@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
-	import type { ListMenuItem as Item } from './ListMenuItem.svelte';
+	import type { ListMenuEntry } from './ListMenuItem.svelte';
 	import ListMenuItem from './ListMenuItem.svelte';
 	import { selectedValue } from './listMenuStores.svelte';
 
@@ -19,7 +18,7 @@
 	/**
 	 * Array of list items for rendering, that take a label and optional url and children.
 	 */
-	export let items: Item[];
+	export let items: ListMenuEntry[];
 
 	/**
 	 * Optional prop to customise width
@@ -39,12 +38,12 @@
 	/**
 	 * Exposes active menu item to parent container for modification.
 	 */
-	export let selectedMenuItemId = writable('');
+	export let selectedMenuItemId = '';
 
 	/**
 	 * Assigns value of active menu item (if set) to `$selectedValue` internal store.
 	 */
-	$: $selectedValue = $selectedMenuItemId;
+	$: $selectedValue = selectedMenuItemId;
 
 	const orientationClasses = {
 		vertical: 'flex-col space-y-2',
@@ -54,36 +53,34 @@
 	$: menuClasses = classNames(orientationClasses[orientation]);
 
 	/**
-	 * Event handler to update value of $selectedMenuItemId when link is clicked.
+	 * Event handler to update value of $selectedValue when link is clicked.
 	 */
 	const onChange = (id: string) => {
-		if ($selectedMenuItemId !== id) {
-			$selectedMenuItemId = id;
+		if ($selectedValue !== id) {
+			$selectedValue = id;
 		}
 	};
+
+	const hasMatchingChild = (item: ListMenuEntry, targetId: string) =>
+		item.children?.some(
+			(child: ListMenuEntry) =>
+				child.id === targetId ||
+				(child.children &&
+					mapItems(child.children, targetId).some((c: ListMenuEntry) => c.isExpanded))
+		);
 
 	/**
 	 * Recursive function to handle applying `isExpanded` state, toggling expansion
 	 * of list when a child is selected
 	 */
-	const mapItems: any = (items: ListMenuItem[], targetId: string) => {
-		return items.map((item: ListMenuItem) => {
-			const hasMatchingChild = item.children?.some(
-				(child: ListMenuItem) =>
-					child.id === targetId ||
-					(child.children &&
-						mapItems(child.children, targetId).some((c: ListMenuItem) => c.isExpanded))
-			);
+	const mapItems: any = (items: ListMenuEntry[], targetId: string) =>
+		items.map((item: ListMenuEntry) => ({
+			...item,
+			isExpanded: hasMatchingChild(item, targetId) || item.id === targetId,
+			children: item.children ? mapItems(item.children, targetId) : undefined
+		}));
 
-			return {
-				...item,
-				isExpanded: hasMatchingChild || item.id === targetId,
-				children: item.children ? mapItems(item.children, targetId) : undefined
-			};
-		});
-	};
-
-	$: menuState = !isAlwaysExpanded ? mapItems(items, $selectedMenuItemId) : items;
+	$: menuState = !isAlwaysExpanded ? mapItems(items, $selectedValue) : items;
 </script>
 
 <nav aria-label={ariaLabel} class={width}>
