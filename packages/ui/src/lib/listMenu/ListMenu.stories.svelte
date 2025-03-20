@@ -127,3 +127,7 @@
 <Story name="Horizontal orientation">
 	<ListMenu ariaLabel="horizontally oriented menu" {items} orientation="horizontal" />
 </Story>
+
+<Story name="Children don't collapse">
+	<ListMenu ariaLabel="collapseChildren menu" {items} collapseChildren={false} />
+</Story>

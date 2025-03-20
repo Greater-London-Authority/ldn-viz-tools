@@ -89,7 +89,9 @@
 	 */
 	const toggleChildren = (children: ListMenuItem[], expanded: boolean) => {
 		return children.map((child) => {
+			// console.log(child.children);
 			if (expanded === false && child.isExpanded === true) {
+				// console.log('child', child);
 				return {
 					...child,
 					isExpanded: false
@@ -98,10 +100,13 @@
 		});
 	};
 
-	$: toggledChildren =
-		!isAlwaysExpanded && hasChildren && collapseChildren
-			? toggleChildren(children, isExpanded)
-			: children;
+	let toggledChildren: ListMenuItem[];
+	// $: console.log(!isAlwaysExpanded && hasChildren && collapseChildren);
+	$: if (!isAlwaysExpanded && hasChildren && collapseChildren) {
+		toggledChildren = toggleChildren(children, isExpanded);
+	} else {
+		toggledChildren = children;
+	}
 
 	interface CurrentPage {
 		'aria-current': 'page' | undefined;
@@ -187,6 +192,7 @@
 					{isAlwaysExpanded}
 					{onChange}
 					isExpanded={child.isExpanded}
+					{collapseChildren}
 				/>
 			{/each}
 		</ul>

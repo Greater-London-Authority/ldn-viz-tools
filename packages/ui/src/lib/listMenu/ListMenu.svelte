@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
@@ -63,8 +64,8 @@
 	 * Event handler to update value of $selectedMenuItemId when link is clicked.
 	 */
 	const onChange = (id: string) => {
-		if ($selectedMenuItemId !== id) {
-			$selectedMenuItemId = id;
+		if ($selectedValue !== id) {
+			$selectedValue = id;
 		}
 	};
 
@@ -89,7 +90,16 @@
 		});
 	};
 
-	$: menuState = !isAlwaysExpanded ? mapItems(items, $selectedMenuItemId) : items;
+	$: menuState = !isAlwaysExpanded ? mapItems(items, $selectedValue) : items;
+
+	let expanded = writable<string[]>([]);
+	setContext('expanded', expanded);
+
+	$: if ($selectedMenuItemId) {
+		$expanded.push($selectedMenuItemId);
+	}
+
+	$: console.log('$expanded', $expanded);
 </script>
 
 <nav aria-label={ariaLabel} class={width}>
