@@ -55,7 +55,7 @@
 	/**
 	 * Optional prop to change orientation. Default is vertical.
 	 */
-	export let orientation: 'vertical' | 'horizontal';
+	export let orientation: 'vertical' | 'horizontal' = 'vertical';
 
 	/**
 	 * Set whether to collapse children when parent is collapsed, or keep children open.
@@ -183,6 +183,7 @@
 					id={child.id}
 					children={child.children}
 					level={level + 1}
+					{orientation}
 					{isAlwaysExpanded}
 					{onChange}
 					isExpanded={child.isExpanded}
