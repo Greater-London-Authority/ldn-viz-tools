@@ -46,8 +46,10 @@
 	$: $selectedValue = selectedMenuItemId;
 
 	const orientationClasses = {
-		vertical: 'flex-col space-y-2',
-		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
+		// vertical: 'flex-col space-y-2',
+		// horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
+		vertical: 'flex-col border-b border-color-ui-border-secondary',
+		horizontal: 'flex space-x-1'
 	};
 
 	$: menuClasses = classNames(orientationClasses[orientation]);
@@ -76,11 +78,13 @@
 	const mapItems: any = (items: ListMenuEntry[], targetId: string) =>
 		items.map((item: ListMenuEntry) => ({
 			...item,
-			isExpanded: hasMatchingChild(item, targetId) || item.id === targetId,
+			isExpanded: !isAlwaysExpanded
+				? hasMatchingChild(item, targetId) || item.id === targetId
+				: true,
 			children: item.children ? mapItems(item.children, targetId) : undefined
 		}));
 
-	$: menuState = !isAlwaysExpanded ? mapItems(items, $selectedValue) : items;
+	$: menuState = mapItems(items, $selectedValue);
 </script>
 
 <nav aria-label={ariaLabel} class={width}>

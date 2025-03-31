@@ -20,19 +20,49 @@
 	let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', url: '#accessibility' },
 		{ title: 'Brand', id: 'brand', url: '/' },
-		{ title: 'Color', id: 'color2', url: '/' },
+		{ title: 'Color', id: 'color', url: '/' },
 		{ title: 'Typography', id: 'typography', url: '/' },
 		{ title: 'Spacing', id: 'spacing', url: '/' },
 		{ title: 'Design Tokens', id: 'design-tokens', url: '/' }
 	];
 
 	let subMenuNoLinks = [
-		{ title: 'Accessibility', id: 'accessibility', url: '', children: subMenu },
-		{ title: 'Brand', id: 'brand', url: '', children: subMenu },
-		{ title: 'Color', id: 'color', url: '', children: subMenu },
-		{ title: 'Typography', id: 'typography', url: '', children: subMenu },
-		{ title: 'Spacing', id: 'spacing', url: '', children: subMenu },
-		{ title: 'Design Tokens', id: 'tokens', url: '', children: subMenu }
+		{
+			title: 'Accessibility',
+			id: 'accessibility-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `a-${i.id}` }))
+		},
+		{
+			title: 'Brand',
+			id: 'brand-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `b-${i.id}` }))
+		},
+		{
+			title: 'Color',
+			id: 'color-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `c-${i.id}` }))
+		},
+		{
+			title: 'Typography',
+			id: 'typography-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `d-${i.id}` }))
+		},
+		{
+			title: 'Spacing',
+			id: 'spacing-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `e-${i.id}` }))
+		},
+		{
+			title: 'Design Tokens',
+			id: 'tokens-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `f-${i.id}` }))
+		}
 	];
 
 	let items: ListMenuEntry[] = [
@@ -52,8 +82,8 @@
 					id: 'layout',
 					url: '/',
 					children: [
-						{ title: 'Applications', id: 'applications-child', url: '/' },
-						{ title: 'Maps', id: 'maps', url: '/' }
+						{ title: 'Applications', id: 'layout-applications', url: '/' },
+						{ title: 'Maps', id: 'layout-maps', url: '/' }
 					]
 				},
 				{ title: 'User Interface', id: 'userInterface', url: '/' }
@@ -64,21 +94,21 @@
 			id: 'dataVisualisation',
 			url: '/',
 			children: [
-				{ title: 'Principles', id: 'principles', url: '/' },
-				{ title: 'Accessibility', id: 'accessibility2', url: '/' },
+				{ title: 'Principles', id: 'dv-principles', url: '/' },
+				{ title: 'Accessibility', id: 'dv-accessibility', url: '/' },
 				{
 					title: 'Color',
-					id: 'color',
+					id: 'dv-color',
 					url: '/',
 					children: [
-						{ title: 'Categorical', id: 'categorical', url: '/' },
-						{ title: 'Quantitative', id: 'quantitative', url: '/' },
-						{ title: 'Maps', id: 'maps-child', url: '/' }
+						{ title: 'Categorical', id: 'dv-categorical', url: '/' },
+						{ title: 'Quantitative', id: 'dv-quantitative', url: '/' },
+						{ title: 'Maps', id: 'dv-maps', url: '/' }
 					]
 				},
-				{ title: 'Scaling Shapes', id: 'shapes', url: '/' },
-				{ title: 'Chart Themes', id: 'chartThemes', url: '/' },
-				{ title: 'Chart Examples', id: 'chartExamples', url: '/' }
+				{ title: 'Scaling Shapes', id: 'dv-shapes', url: '/' },
+				{ title: 'Chart Themes', id: 'dv-chartThemes', url: '/' },
+				{ title: 'Chart Examples', id: 'dv-chartExamples', url: '/' }
 			]
 		}
 	];
@@ -114,7 +144,7 @@
 </Story>
 
 <!-- Menu items with children don't have to be links. But items without children do. In this example, the top level items don't have links. -->
-<Story name="No Links">
+<Story name="NoLinks">
 	<ListMenu ariaLabel="no links" items={subMenuNoLinks} />
 </Story>
 
@@ -124,5 +154,9 @@
 </Story>
 
 <Story name="Horizontal orientation">
-	<ListMenu ariaLabel="horizontally oriented menu" {items} orientation="horizontal" />
+	<ListMenu
+		ariaLabel="horizontally oriented menu"
+		items={[...items, { title: 'No child items', id: 'no-child', url: '/' }]}
+		orientation="horizontal"
+	/>
 </Story>

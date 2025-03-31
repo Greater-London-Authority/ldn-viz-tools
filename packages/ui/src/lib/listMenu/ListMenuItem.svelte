@@ -110,22 +110,29 @@
 	}
 
 	$: textClasses = classNames(
-		`items-center level-${level}`,
-		isActive
-			? 'text-color-text-secondary border-b-2 border-color-action-primary mx-4'
-			: 'text-color-text-primary hover:text-color-text-secondary border-b-2 border-color-container-level-0 hover:border-color-action-primary mx-4',
-		level == 1 && hasChildren ? 'font-semibold' : 'font-normal'
+		`flex w-full items-center level-${level} p-1.5 hover:text-color-action-primary-hover `,
+		isActive ? 'text-color-action-primary-active' : '',
+		level === 1 ? 'text-color-text-primary text-base' : 'text-color-text-secondary text-sm'
 	);
 
 	const orientationClasses = {
-		vertical: 'pl-4',
-		horizontal: 'py-2 absolute'
+		vertical: '',
+		horizontal: `w-full ${level === 1 ? 'absolute' : 'relative'}`
 	};
 
-	$: childClasses = classNames(!isExpanded ? 'hidden' : orientationClasses[orientation]);
+	const listClasses = {
+		vertical: `${level === 1 ? 'border-t border-color-ui-border-secondary' : ''}`,
+		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
+	};
+
+	$: childClasses = classNames(
+		!isExpanded ? 'hidden' : `${level === 2 ? 'pl-4' : ''} mb-1`,
+		orientationClasses[orientation]
+	);
+	$: listItemClasses = classNames(listClasses[orientation]);
 </script>
 
-<li>
+<li class={listItemClasses}>
 	{#if hasChildren}
 		<div {id} class="flex items-center justify-between">
 			{#if href}
@@ -133,9 +140,9 @@
 					{title}
 				</a>
 			{:else}
-				<span class={textClasses}>
+				<button class={textClasses} on:click={() => toggleMenu()}>
 					{title}
-				</span>
+				</button>
 			{/if}
 
 			{#if !isAlwaysExpanded}
@@ -149,11 +156,11 @@
 					ariaLabel="More {title} pages"
 					actionProps={{
 						'aria-expanded': isExpanded,
-						'aria-controls': `${title}-menu`
+						'aria-controls': `${id}-menu`
 					}}
 				>
 					<Icon
-						src={isExpanded ? ChevronDown : ChevronRight}
+						src={isExpanded || orientation === 'horizontal' ? ChevronDown : ChevronRight}
 						class="w-6 h-6"
 						theme="mini"
 						aria-hidden="true"
