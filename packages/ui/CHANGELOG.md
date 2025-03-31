@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 17.1.1
+
+### Patch Changes
+
+- 2950252: FIXED: export `SidebarGroup`
+
 ## 17.1.0
 
 ### Minor Changes
