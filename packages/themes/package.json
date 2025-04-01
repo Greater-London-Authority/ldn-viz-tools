@@ -12,18 +12,18 @@
     "test:unit": "echo no tests"
   },
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.7",
-    "@tailwindcss/typography": "^0.5.10",
-    "esm-env": "^1.0.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "esm-env": "^1.2.2",
     "mini-svg-data-uri": "^1.4.4"
   },
   "devDependencies": {
-    "eslint": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.2.5",
-    "publint": "^0.2.7",
-    "style-dictionary": "^3.9.2",
-    "style-dictionary-utils": "^2.4.1",
-    "tailwindcss": "^3.4.1"
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "prettier": "^3.5.3",
+    "publint": "^0.3.9",
+    "style-dictionary": "^4.3.3",
+    "style-dictionary-utils": "^4.0.5",
+    "tailwindcss": "^4.0.17"
   }
 }
