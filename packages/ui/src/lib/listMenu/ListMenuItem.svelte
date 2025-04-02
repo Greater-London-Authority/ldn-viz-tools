@@ -162,7 +162,7 @@
 					<Icon
 						src={ChevronDown}
 						class={classNames(
-							'w-6 h-6 transition-transform',
+							'w-6 h-6 transition-transform motion-reduce:transition-none',
 							orientation === 'horizontal' || isExpanded ? '' : '-rotate-90'
 						)}
 						theme="mini"
