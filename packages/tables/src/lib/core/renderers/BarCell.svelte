@@ -48,7 +48,7 @@
 		<div
 			style={`width:${scale(+value)}%; background-color:${color}`}
 			class="h-full text-right absolute left-0"
-		/>
+		></div>
 
 		{#if +value <= 0.4}
 			<div class="relative p-1 ml-1" style={`padding-left:${scale(+value)}%`}>

@@ -24,7 +24,7 @@ const config: StorybookConfig = {
 		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
-		'@storybook/addon-svelte-csf',
+		{ name: '@storybook/addon-svelte-csf', options: { legacyTemplate: true } },
 		getAbsolutePath('@storybook/addon-themes'),
 		getAbsolutePath('@storybook/addon-links'),
 		getAbsolutePath('@storybook/addon-essentials'),

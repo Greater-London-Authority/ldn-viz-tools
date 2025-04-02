@@ -135,7 +135,7 @@
 </script>
 
 {#if type === 'hidden'}
-	<input aria-hidden type="hidden" {id} {name} bind:value {...$$restProps} />
+	<input aria-hidden={true} type="hidden" {id} {name} bind:value {...$$restProps} />
 {:else if type === 'checkbox'}
 	<Checkbox
 		{disabled}

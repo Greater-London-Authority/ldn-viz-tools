@@ -84,7 +84,7 @@
 		class="z-50 w-60 bg-color-container-level-0 p-4 shadow-lg border border-color-ui-border-secondary"
 		aria-labelledby={popoverTitleId}
 	>
-		<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
+		<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary"></div>
 
 		<div class="text-sm flex flex-col space-y-2 text-color-text-primary">
 			{#if $$slots.title}

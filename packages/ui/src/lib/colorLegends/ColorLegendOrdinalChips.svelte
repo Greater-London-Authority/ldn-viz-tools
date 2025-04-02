@@ -43,7 +43,7 @@
 						d === highlightedValue ? 'ring-offset-2 ring-2 ring-color-input-border-focussed' : ''
 					)}
 					style:background-color={scale(d)}
-				/>
+				></div>
 				<span
 					class={classNames(
 						'items-center',

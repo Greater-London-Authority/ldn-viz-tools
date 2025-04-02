@@ -25,7 +25,7 @@
 			</div>
 
 			{#if table.colGroupGap}
-				<div style:width={`${table.colGroupGap}px`} />
+				<div style:width={`${table.colGroupGap}px`}></div>
 			{/if}
 		{/each}
 	</svelte:fragment>

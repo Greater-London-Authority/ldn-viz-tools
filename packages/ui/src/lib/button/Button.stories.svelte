@@ -1,7 +1,9 @@
 <script context="module">
-	import Button from './Button.svelte';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	export const meta = {
+	import Button, { type ButtonProps } from './Button.svelte';
+
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/Button',
 		component: Button,
 		argTypes: {
@@ -25,13 +27,12 @@
 		args: {
 			title: 'storybook button'
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
 	import { ArrowDownCircle, ArrowTopRightOnSquare, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	let count = 0;
 	const handleClick = () => {
@@ -39,20 +40,20 @@
 	};
 </script>
 
-<Template let:args>
+{#snippet template(args: any)}
 	<Button {...args} on:click on:click={handleClick}>
 		You clicked: {count}
 	</Button>
-</Template>
+{/snippet}
 
 <Story
 	name="Default"
-	source
 	parameters={{
 		options: {
 			showPanel: true
 		}
 	}}
+	children={template}
 />
 
 <Story name="Emphasis">
@@ -62,13 +63,13 @@
 	</div>
 </Story>
 
-<Story name="Brand" source args={{ variant: 'brand' }} />
+<Story name="Brand" args={{ variant: 'brand' }} children={template} />
 
-<Story name="Solid" source args={{ variant: 'solid' }} />
+<Story name="Solid" args={{ variant: 'solid' }} children={template} />
 
-<Story name="Outline" source args={{ variant: 'outline' }} />
+<Story name="Outline" args={{ variant: 'outline' }} children={template} />
 
-<Story name="Text" source args={{ variant: 'text', emphasis: 'secondary' }} />
+<Story name="Text" args={{ variant: 'text', emphasis: 'secondary' }} children={template} />
 
 <Story name="Square" args={{ variant: 'square' }}>
 	<div class="space-y-2">

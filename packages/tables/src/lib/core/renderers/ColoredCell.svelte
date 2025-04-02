@@ -28,7 +28,7 @@
 </script>
 
 {#if !colorScale}
-	<span />
+	<span></span>
 {:else if value}
 	<span
 		class={`text-right flex h-full justify-end p-2 items-center`}

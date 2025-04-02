@@ -50,17 +50,3 @@
 		<div class="text-sm pr-2">{message.text}</div>
 	</div>
 </div>
-
-<style>
-	div[role='dialog'] {
-		width: clamp(200px, 24rem, calc(100vw - 1rem));
-		/* 
-			Because order is an integer with no intermediate values the transition
-			duration is meaningless; it will always jump from position to position
-			when in a flex box. The only way around is to calculate and absolutely
-			position each toast element.
-
-			transition: order 500ms ease-out;
-		*/
-	}
-</style>

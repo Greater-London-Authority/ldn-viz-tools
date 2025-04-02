@@ -234,7 +234,7 @@
 		aria-describedby={ariaDescribedBy}
 		{id}
 		class="themed-chart"
-	/>
+	></div>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
@@ -249,7 +249,7 @@
 
 			<div
 				class="absolute bg-color-container-level-0 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
-			/>
+			></div>
 		</div>
 	{/if}
 {/key}

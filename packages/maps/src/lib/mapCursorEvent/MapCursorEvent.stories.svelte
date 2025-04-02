@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
 	import MapCursorEvent from './MapCursorEvent.svelte';
 
 	const handlerArgType = {
@@ -62,14 +62,14 @@
 
 	let init = false;
 
-	const whenMapLoads = (map) => {
+	const whenMapLoads = (map: any) => {
 		loadTestLayers(map);
 		init = true;
 		map.getCanvas().style.cursor = 'pointer';
 	};
 
-	let eventLog = [];
-	const logEvent = (eventName, layerName, siteName = '') => {
+	let eventLog: any[] = [];
+	const logEvent = (eventName: string, layerName: string, siteName = '') => {
 		if (eventLog.length >= 8) {
 			eventLog.splice(0, 1);
 		}
@@ -81,8 +81,8 @@
 		eventLog = eventLog;
 	};
 
-	const newLogEvent = (eventName) => {
-		return (event, { feature }) => {
+	const newLogEvent = (eventName: string) => {
+		return (_event: any, { feature }: any) => {
 			logEvent(eventName, feature.layer.id, feature.properties.site_name);
 		};
 	};
@@ -135,18 +135,22 @@
 			class="dark absolute top-0 left-0 w-full h-[16em] p-2 bg-color-container-level-0 bg-opacity-75 text-color-text-primary"
 		>
 			<table>
-				<tr class="font-medium">
-					<th>Event</th>
-					<th class="px-4">Layer</th>
-					<th>Site</th>
-				</tr>
-				{#each eventLog as { eventName, layerName, siteName }, i (i)}
-					<tr>
-						<td>{eventName}</td>
-						<td class="px-4">{layerName}</td>
-						<td>{siteName}</td>
+				<thead>
+					<tr class="font-medium">
+						<th>Event</th>
+						<th class="px-4">Layer</th>
+						<th>Site</th>
 					</tr>
-				{/each}
+				</thead>
+				<tbody>
+					{#each eventLog as { eventName, layerName, siteName }, i (i)}
+						<tr>
+							<td>{eventName}</td>
+							<td class="px-4">{layerName}</td>
+							<td>{siteName}</td>
+						</tr>
+					{/each}
+				</tbody>
 			</table>
 		</div>
 	</div>

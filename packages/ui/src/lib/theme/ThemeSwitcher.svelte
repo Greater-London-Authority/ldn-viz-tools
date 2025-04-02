@@ -60,6 +60,6 @@
 				{menuItem.label}
 			</div>
 		{/each}
-		<div {...$arrow} use:arrow />
+		<div {...$arrow} use:arrow></div>
 	</div>
 </div>

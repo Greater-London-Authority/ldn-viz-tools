@@ -172,7 +172,7 @@
 					class="w-full form-input"
 					rows="3"
 					bind:value={$valueStore.custom_input}
-				/>
+				></textarea>
 			</label>
 		{/if}
 	</Form>

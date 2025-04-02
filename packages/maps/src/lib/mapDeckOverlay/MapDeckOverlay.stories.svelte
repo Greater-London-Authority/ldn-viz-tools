@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { MVTLayer } from '@deck.gl/geo-layers/typed';
+	import { MVTLayer } from '@deck.gl/geo-layers';
 
 	import { Story } from '@storybook/addon-svelte-csf';
 

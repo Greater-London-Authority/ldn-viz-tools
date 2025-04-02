@@ -222,7 +222,7 @@
 			on:touchmove
 			on:touchstart
 			{...$$restProps}
-		/>
+		></textarea>
 	{:else}
 		<input
 			bind:this={input}

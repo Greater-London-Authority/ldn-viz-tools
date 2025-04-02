@@ -14,5 +14,5 @@
 </script>
 
 {#if gapPositions.includes(i) && table.colGroupGap}
-	<div style:width={`${table.colGroupGap}px`} class="col-group-gap" />
+	<div style:width={`${table.colGroupGap}px`} class="col-group-gap"></div>
 {/if}

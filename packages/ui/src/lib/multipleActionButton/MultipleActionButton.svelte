@@ -165,7 +165,7 @@
 			{...$menu}
 			transition:fly={{ duration: 150, y: -10 }}
 		>
-			<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
+			<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary"></div>
 			{#if menuTitle}
 				<p class="text-sm p-1">{menuTitle}</p>
 			{/if}
@@ -194,6 +194,6 @@
 				{/each}
 			</div>
 		</div>
-		<div use:$arrow.action {...$arrow} />
+		<div use:$arrow.action {...$arrow}></div>
 	{/if}
 {/if}

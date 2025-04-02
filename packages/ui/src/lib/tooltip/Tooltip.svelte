@@ -63,6 +63,6 @@
 		<!-- The text that will be displayed in the tooltip -->
 		<slot />
 
-		<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
+		<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary"></div>
 	</div>
 {/if}

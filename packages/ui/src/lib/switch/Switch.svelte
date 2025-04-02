@@ -101,7 +101,7 @@
 				disabled ? 'bg-color-input-background-disabled' : 'bg-color-input-background'
 			)}
 			style:transform={checked ? `translate(${translation[size]}, 0px)` : 'translate(1px, 0px)'}
-		/>
+		></span>
 	</button>
 	<input {...$input} use:input />
 

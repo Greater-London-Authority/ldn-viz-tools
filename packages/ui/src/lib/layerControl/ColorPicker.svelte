@@ -43,7 +43,7 @@
 			<div
 				class="w-[22px] h-[22px] relative border rounded-full"
 				style:background={tokenNameToValue(colorName, $currentTheme)}
-			/>
+			></div>
 		</Trigger>
 
 		<svelte:fragment slot="title">Colour</svelte:fragment>
@@ -60,7 +60,7 @@
 						colorName = colorOption;
 						isOpen = false;
 					}}
-				/>
+				></button>
 			{/each}
 		</div>
 	</Popover>

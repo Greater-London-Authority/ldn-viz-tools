@@ -118,7 +118,7 @@
 
 {#if $open}
 	<div {...$portalled} use:$portalled.action>
-		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
+		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40"></div>
 
 		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>

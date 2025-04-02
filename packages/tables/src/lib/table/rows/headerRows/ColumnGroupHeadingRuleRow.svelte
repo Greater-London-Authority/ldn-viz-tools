@@ -26,7 +26,7 @@
 				></div>
 
 				{#if table.colGroupGap}
-					<div style:width={`${table.colGroupGap}px`} />
+					<div style:width={`${table.colGroupGap}px`}></div>
 				{/if}
 			{/each}
 		{:else}
@@ -34,7 +34,7 @@
 				class="border-b border-color-ui-border-primary"
 				style:width={'100%'}
 				style:height="1px"
-			/>
+			></div>
 		{/if}
 	</svelte:fragment>
 </Scaffolding>

@@ -125,7 +125,7 @@
 			class={classNames('flex', sidebarHeightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
 		>
-			<div class={classNames('shrink-0', sidebarWidthClasses)} />
+			<div class={classNames('shrink-0', sidebarWidthClasses)}></div>
 		</div>
 	{/if}
 </div>
