@@ -119,7 +119,17 @@
 </Template>
 
 <Story name="Default">
-	<div class="flex">
+	<ListMenu ariaLabel="example-menu" {items} bind:selectedMenuItemId />
+</Story>
+
+<!-- The component takes a width prop that can accept tailwind width classes -->
+<Story name="Width by class">
+	<ListMenu ariaLabel="example-menu-with-width" width="w-64" {items} bind:selectedMenuItemId />
+</Story>
+
+<!-- Width defaults to 100% of the parent container. You may wish to use the parent width to control the menu width -->
+<Story name="Width constrained by parent">
+	<div class="max-w-96">
 		<ListMenu ariaLabel="example-menu" {items} bind:selectedMenuItemId />
 	</div>
 </Story>
@@ -150,13 +160,21 @@
 
 <!-- For menus that should always show all of the list items, you can set `isAlwaysExpanded` to true. -->
 <Story name="Always expanded">
-	<ListMenu ariaLabel="always expanded menu" {items} isAlwaysExpanded />
+	<ListMenu ariaLabel="always expanded menu" {items} isAlwaysExpanded width="w-96" />
 </Story>
 
 <Story name="Horizontal orientation">
 	<ListMenu
 		ariaLabel="horizontally oriented menu"
 		items={[...items, { title: 'No child items', id: 'no-child', url: '/' }]}
+		orientation="horizontal"
+	/>
+</Story>
+
+<Story name="Horizontal no children">
+	<ListMenu
+		ariaLabel="horizontally oriented menu no children"
+		items={subMenu}
 		orientation="horizontal"
 	/>
 </Story>

@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
+	import { ChevronDown, ChevronRight, ChevronUp } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
@@ -110,18 +110,18 @@
 	}
 
 	$: textClasses = classNames(
-		`flex w-full items-center level-${level} p-1.5 hover:text-color-action-primary-hover `,
-		isActive ? 'text-color-action-primary-active' : '',
+		`flex w-full items-center level-${level} p-1.5 hover:text-color-action-primary-hover hover:underline `,
+		isActive ? 'text-color-action-text-primary-active underline' : '',
 		level === 1 ? 'text-color-text-primary text-base' : 'text-color-text-secondary text-sm'
 	);
 
 	const orientationClasses = {
 		vertical: '',
-		horizontal: `w-full ${level === 1 ? 'absolute' : 'relative'}`
+		horizontal: `w-full ${level === 1 ? 'absolute z-10' : 'relative'}`
 	};
 
 	const listClasses = {
-		vertical: `${level === 1 ? 'border-t border-color-ui-border-secondary' : ''}`,
+		vertical: `${level === 1 ? 'border-t border-color-ui-border-secondary' : ''} `,
 		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
 	};
 
@@ -160,8 +160,11 @@
 					}}
 				>
 					<Icon
-						src={isExpanded || orientation === 'horizontal' ? ChevronDown : ChevronRight}
-						class="w-6 h-6"
+						src={ChevronDown}
+						class={classNames(
+							'w-6 h-6 transition-transform',
+							orientation === 'horizontal' || isExpanded ? '' : '-rotate-90'
+						)}
 						theme="mini"
 						aria-hidden="true"
 					/>
