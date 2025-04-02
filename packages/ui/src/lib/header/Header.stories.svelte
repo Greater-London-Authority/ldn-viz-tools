@@ -21,12 +21,8 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	let subMenu = [
-		{ title: 'Accessibility', id: 'accessibility', url: '#accessibility' },
-		{ title: 'Brand', id: 'brand', url: '/' },
-		{ title: 'Color', id: 'color', url: '/' },
-		{ title: 'Typography', id: 'typography', url: '/' },
-		{ title: 'Spacing', id: 'spacing', url: '/' },
-		{ title: 'Design Tokens', id: 'design-tokens', url: '/' }
+		{ title: 'Map', id: 'map', url: '#map' },
+		{ title: 'Trend', id: 'trend', url: '#trend' }
 	];
 
 	let subMenuNoLinks = [
@@ -47,24 +43,6 @@
 			id: 'color-nl',
 			url: '',
 			children: subMenu.map((i) => ({ ...i, id: `c-${i.id}` }))
-		},
-		{
-			title: 'Typography',
-			id: 'typography-nl',
-			url: '',
-			children: subMenu.map((i) => ({ ...i, id: `d-${i.id}` }))
-		},
-		{
-			title: 'Spacing',
-			id: 'spacing-nl',
-			url: '',
-			children: subMenu.map((i) => ({ ...i, id: `e-${i.id}` }))
-		},
-		{
-			title: 'Design Tokens',
-			id: 'tokens-nl',
-			url: '',
-			children: subMenu.map((i) => ({ ...i, id: `f-${i.id}` }))
 		}
 	];
 </script>
@@ -73,31 +51,41 @@
 	<Header {...args} />
 </Template>
 
-<Story name="NavBar - title only">
+<Story name="Title only">
 	<Header>
 		<HeaderTitle>An interesting app</HeaderTitle>
 	</Header>
 </Story>
 
-<Story name="A NavBar - title and links to pages">
+<Story name="Title and menu-right">
 	<Header>
-		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
+		<HeaderTitle>An interesting app</HeaderTitle>
 		<HeaderRight>
 			<HeaderItem>
-				<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
+				<ListMenu ariaLabel="no links" items={subMenuNoLinks} orientation="horizontal" />
 			</HeaderItem>
 		</HeaderRight>
 	</Header>
 </Story>
 
-<Story name="A NavBar - title, links, and auth section">
+<Story name="Title and links to pages">
+	<Header>
+		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
+		<HeaderItem>
+			<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
+		</HeaderItem>
+	</Header>
+</Story>
+
+<Story name="Title, links, and auth section">
 	<Header>
 		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
 
+		<HeaderItem>
+			<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
+		</HeaderItem>
+
 		<HeaderRight>
-			<HeaderItem>
-				<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
-			</HeaderItem>
 			<HeaderItem>
 				<span class="text-xs">Logged in as <b>Bob Smith</b></span>
 			</HeaderItem>
@@ -115,7 +103,7 @@
 
 		<HeaderRight>
 			<HeaderItem>
-				<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
+				<ListMenu ariaLabel="no links" items={subMenuNoLinks} orientation="horizontal" />
 			</HeaderItem>
 		</HeaderRight>
 	</Header>
