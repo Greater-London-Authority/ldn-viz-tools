@@ -18,9 +18,8 @@
 		"!dist/**/*.spec.*"
 	],
 	"scripts": {
-		"build": "npm run build:sveltekit && npm run build:tailwind",
+		"build": "npm run build:sveltekit",
 		"build:sveltekit": "vite build && npm run package",
-		"build:tailwind": "postcss src/app.postcss -o dist/ldn-viz-ui.css",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"dev": "vite dev --port 3005 --open",
@@ -38,6 +37,7 @@
 		"@steeze-ui/heroicons": "^2.4.2",
 		"@steeze-ui/svelte-icon": "1.6.2",
 		"@storybook/addon-svelte-csf": "^5.0.0-next.28",
+		"@tailwindcss/postcss": "^4.0.17",
 		"@types/d3-dsv": "^3.0.7",
 		"d3-array": "^3.2.4",
 		"d3-axis": "^3.0.0",
@@ -57,6 +57,7 @@
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/package": "^2.3.10",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
+		"@tailwindcss/vite": "^4.0.17",
 		"@types/d3": "^7.4.3",
 		"@typescript-eslint/eslint-plugin": "^8.29.0",
 		"@typescript-eslint/parser": "^8.29.0",

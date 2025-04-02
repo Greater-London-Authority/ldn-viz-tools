@@ -285,6 +285,7 @@
 {/if}
 
 <style lang="postcss">
+	@reference "tailwindcss";
 	:global(.striped > div:nth-child(odd)) {
 		@apply bg-color-ui-background-secondary;
 	}

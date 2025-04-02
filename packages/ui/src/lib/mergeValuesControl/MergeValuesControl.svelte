@@ -239,7 +239,8 @@
 </div>
 
 <style lang="postcss">
+	/* @reference "tailwindcss";
 	.currentDropTarget {
 		@apply border-2 border-dashed border-color-action-border-positive-active;
-	}
+	} */
 </style>

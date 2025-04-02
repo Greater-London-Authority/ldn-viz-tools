@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
 	import MapCursorEvent from './MapCursorEvent.svelte';
 
 	const handlerArgType = {
@@ -150,4 +150,4 @@
 			</table>
 		</div>
 	</div>
-</Story>
+</Story> -->

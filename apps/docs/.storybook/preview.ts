@@ -3,7 +3,7 @@ import { docs } from './ciuStorybookTheme';
 
 import { prefersDarkMode } from '@ldn-viz/ui';
 import { get } from 'svelte/store';
-import '../src/app.postcss';
+import '../src/app.css';
 import { withThemeByClassNameStore } from './withThemeByClassNameStore';
 
 const isBroswer = () => {

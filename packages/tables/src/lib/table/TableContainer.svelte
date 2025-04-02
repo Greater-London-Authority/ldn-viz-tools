@@ -136,6 +136,7 @@
 </div>
 
 <style lang="postcss">
+	@reference "tailwindcss";
 	.table-container {
 		@apply flex flex-col;
 	}
