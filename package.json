@@ -11,6 +11,7 @@
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "publish-packages": "turbo run build && changeset version && changeset publish",
+    "publish-packages-svelte5": "turbo run build && changeset version && changeset publish --tag svelte5",
     "test": "turbo run test",
     "test:unit": "turbo run test:unit"
   },
