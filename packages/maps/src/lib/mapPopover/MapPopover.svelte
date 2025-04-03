@@ -43,8 +43,8 @@
 	 */
 	export let layer = '';
 
-	let popupMaplibrePopup: maplibre_gl.Popup;
-	let popupInstance: SvelteComponent;
+	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
+	let popupInstance: SvelteComponent | null = null;
 
 	const renderComponent = (feature: Feature, component: Component | null) => {
 		if (!$mapStore || !component) {
@@ -91,8 +91,10 @@
 
 	const removePopup = () => {
 		popupMaplibrePopup?.remove();
+		popupMaplibrePopup = null;
 
-		unmount(popupInstance);
+		!!popupInstance && unmount(popupInstance);
+		popupInstance = null;
 	};
 
 	onMount(() => renderComponent(feature, popup));
