@@ -16,8 +16,8 @@
 	 */
 
 	import type { Feature } from 'geojson';
-	import type { ComponentType } from 'svelte';
-	import { getAllContexts, onDestroy, onMount, type SvelteComponent } from 'svelte';
+	import type { Component } from 'svelte';
+	import { getAllContexts, mount, onDestroy, onMount, unmount, type SvelteComponent } from 'svelte';
 
 	import maplibre_gl from 'maplibre-gl';
 
@@ -29,7 +29,7 @@
 	/**
 	 * Svelte component used to render the tooltip.
 	 */
-	export let popup: ComponentType | null = null;
+	export let popup: Component;
 
 	/**
 	 * Feature to which the popover should be attached.
@@ -43,10 +43,10 @@
 	 */
 	export let layer = '';
 
-	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
-	let popupInstance: SvelteComponent | null = null;
+	let popupMaplibrePopup: maplibre_gl.Popup;
+	let popupInstance: SvelteComponent;
 
-	const renderComponent = (feature: Feature, component: ComponentType | null) => {
+	const renderComponent = (feature: Feature, component: Component | null) => {
 		if (!$mapStore || !component) {
 			return;
 		}
@@ -73,7 +73,7 @@
 		// make hyperlinks clickable
 		container.style.pointerEvents = 'auto';
 
-		const instance = new component({
+		const instance = mount(popup, {
 			target: container,
 			context: new Map([
 				...contexts,
@@ -86,15 +86,13 @@
 		maplibrePopup.addTo($mapStore);
 
 		popupMaplibrePopup = maplibrePopup;
-		popupInstance = instance;
+		popupInstance = instance as SvelteComponent;
 	};
 
 	const removePopup = () => {
 		popupMaplibrePopup?.remove();
-		popupMaplibrePopup = null;
 
-		popupInstance?.$destroy();
-		popupInstance = null;
+		unmount(popupInstance);
 	};
 
 	onMount(() => renderComponent(feature, popup));

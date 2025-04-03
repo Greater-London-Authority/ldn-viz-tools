@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
 	import MapPopover from './MapPopover.svelte';
 
 	const componentType = {
@@ -32,7 +32,7 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import { Button } from '@ldn-viz/ui';
@@ -61,7 +61,7 @@
 		}
 	};
 
-	let selectedFeature;
+	let selectedFeature: any;
 </script>
 
 <Template let:args>
