@@ -11,23 +11,6 @@
 	};
 </script>
 
-<!-- TODO:
-[x] Thicker line (for contrast)?
-[x] Long data, not wide (wide data example elsewhere?
-[x] Make data 'meaningless' to avoid distraction. So 'Variable 1, Variable 2, etc'
-[x] Make date formats and ranges real, as transformations and formatting are important
-[x] Change spec to use lomg data and set color domains (rather than wide data named fields.render. or both?)
-[ ] London vs Rest of UK (primary vs grey) (A <> B)
-[x] Multi line
-[ ] Many Multi line, focus vs context 
-[ ] Points on lines (with label?)
-[ ] X & Y threshold line (and annotation)
-[ ] Range highlight 
-[x] X axis label, Y axis label
-[ ] area chart, as simple addition to line? (not stacked)
-[ ] non zero baseline (small change)
--->
-
 <script lang="ts">
 	import { currentTheme } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';

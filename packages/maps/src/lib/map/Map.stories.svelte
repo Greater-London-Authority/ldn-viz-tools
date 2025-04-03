@@ -7,7 +7,7 @@
 		title: 'Maps/Components/Map',
 		component: Map,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			appendOSKeyToUrl: {

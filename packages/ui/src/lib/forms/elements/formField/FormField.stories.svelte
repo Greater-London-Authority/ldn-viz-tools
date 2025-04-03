@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	import Form from '../../Form.svelte';
-	import type { FormErrorStore, FormValueStore } from '../../types';
+	import type { FormErrorStore, FormValueStore } from '../../types.ts';
 	import FormField from './FormField.svelte';
 
 	const dummyOptions = [

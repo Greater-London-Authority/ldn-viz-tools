@@ -5,7 +5,7 @@
 		title: 'Maps/Components/MapMarker/elements/MapMarkerStyledContainer',
 		component: MapMarkerStyledContainer,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			noTip: {

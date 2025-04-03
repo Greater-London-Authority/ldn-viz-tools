@@ -34,7 +34,7 @@
 		title: 'Maps/Components/MapContextLayers/BoroughsContextLayer',
 		component: BoroughsContextLayer,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			lineColor: color,

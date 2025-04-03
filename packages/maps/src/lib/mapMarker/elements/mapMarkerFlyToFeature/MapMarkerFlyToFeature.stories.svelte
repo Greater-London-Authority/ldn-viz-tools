@@ -5,7 +5,7 @@
 		title: 'Maps/Components/MapMarker/elements/MapMarkerFlyToFeature',
 		component: MapMarkerFlyToFeature,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			disabled: {

@@ -8,7 +8,7 @@
 		title: 'Maps/Components/MapControls/MapControlPan',
 		component: MapControlPan,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		}
 	};
 </script>

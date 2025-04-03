@@ -29,7 +29,7 @@
 		title: 'Maps/Components/MapCursorEvent',
 		component: MapCursorEvent,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			layerId: {

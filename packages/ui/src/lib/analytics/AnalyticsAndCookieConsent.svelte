@@ -254,59 +254,61 @@
 	></iframe>
 </noscript>
 
-<style global>
-	/*
+<style>
+	:global {
+		/*
 		Sorry for the verbosity but pure CSS is needed so this can
 		easily be ported to older services and other teams.
-	*/
+		*/
 
-	#ccc #ccc-module.ccc-module--slideout {
-		max-width: 530px !important;
-	}
+		#ccc #ccc-module.ccc-module--slideout {
+			max-width: 530px !important;
+		}
 
-	#ccc button.ccc-notify-button {
-		font-weight: bold !important;
-	}
+		#ccc button.ccc-notify-button {
+			font-weight: bold !important;
+		}
 
-	#ccc button.ccc-notify-button:focus-within,
-	#ccc #ccc-content .checkbox-toggle:focus-within {
-		outline-color: #e7135d !important;
-		outline-style: solid !important;
-		outline-width: medium !important;
-		outline-offset: 2px !important;
-	}
+		#ccc button.ccc-notify-button:focus-within,
+		#ccc #ccc-content .checkbox-toggle:focus-within {
+			outline-color: #e7135d !important;
+			outline-style: solid !important;
+			outline-width: medium !important;
+			outline-offset: 2px !important;
+		}
 
-	#ccc #ccc-notify button#ccc-notify-accept,
-	#ccc #ccc-notify button#ccc-notify-reject,
-	#ccc #ccc-content button#ccc-recommended-settings,
-	#ccc #ccc-content button#ccc-reject-settings,
-	#ccc #ccc-content button#ccc-dismiss-button {
-		border-color: #e7135d !important;
-	}
+		#ccc #ccc-notify button#ccc-notify-accept,
+		#ccc #ccc-notify button#ccc-notify-reject,
+		#ccc #ccc-content button#ccc-recommended-settings,
+		#ccc #ccc-content button#ccc-reject-settings,
+		#ccc #ccc-content button#ccc-dismiss-button {
+			border-color: #e7135d !important;
+		}
 
-	#ccc #ccc-notify button#ccc-notify-accept:hover,
-	#ccc #ccc-notify button#ccc-notify-reject:hover,
-	#ccc #ccc-content button#ccc-recommended-settings:hover,
-	#ccc #ccc-content button#ccc-reject-settings:hover,
-	#ccc #ccc-content button#ccc-dismiss-button:hover {
-		background-color: #e7135d !important;
-	}
+		#ccc #ccc-notify button#ccc-notify-accept:hover,
+		#ccc #ccc-notify button#ccc-notify-reject:hover,
+		#ccc #ccc-content button#ccc-recommended-settings:hover,
+		#ccc #ccc-content button#ccc-reject-settings:hover,
+		#ccc #ccc-content button#ccc-dismiss-button:hover {
+			background-color: #e7135d !important;
+		}
 
-	#ccc #ccc-notify button#ccc-notify-accept:hover span,
-	#ccc #ccc-notify button#ccc-notify-reject:hover span,
-	#ccc #ccc-content button#ccc-recommended-settings:hover span,
-	#ccc #ccc-content button#ccc-reject-settings:hover span,
-	#ccc #ccc-content button#ccc-dismiss-button:hover span {
-		color: white !important;
-	}
+		#ccc #ccc-notify button#ccc-notify-accept:hover span,
+		#ccc #ccc-notify button#ccc-notify-reject:hover span,
+		#ccc #ccc-content button#ccc-recommended-settings:hover span,
+		#ccc #ccc-content button#ccc-reject-settings:hover span,
+		#ccc #ccc-content button#ccc-dismiss-button:hover span {
+			color: white !important;
+		}
 
-	#ccc #ccc-content button#ccc-dismiss-button:hover {
-		border-color: #9e0059 !important;
-		background-color: #9e0059 !important;
-	}
+		#ccc #ccc-content button#ccc-dismiss-button:hover {
+			border-color: #9e0059 !important;
+			background-color: #9e0059 !important;
+		}
 
-	#ccc #ccc-content button#ccc-dismiss-button:hover span {
-		background-color: #9e0059 !important;
-		text-decoration: underline !important;
+		#ccc #ccc-content button#ccc-dismiss-button:hover span {
+			background-color: #9e0059 !important;
+			text-decoration: underline !important;
+		}
 	}
 </style>

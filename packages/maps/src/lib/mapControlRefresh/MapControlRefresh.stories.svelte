@@ -8,7 +8,7 @@
 		title: 'Maps/Components/MapControls/MapControlRefresh',
 		component: MapControlRefresh,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		}
 	};
 </script>

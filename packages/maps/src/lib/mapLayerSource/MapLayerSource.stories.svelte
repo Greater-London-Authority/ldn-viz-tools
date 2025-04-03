@@ -16,7 +16,7 @@
 		title: 'Maps/Components/MapLayerSource',
 		component: MapLayerSource,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			id: {

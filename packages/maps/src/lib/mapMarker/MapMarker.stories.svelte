@@ -15,7 +15,7 @@
 		title: 'Maps/Components/MapMarker',
 		component: MapMarker,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			layerId: {

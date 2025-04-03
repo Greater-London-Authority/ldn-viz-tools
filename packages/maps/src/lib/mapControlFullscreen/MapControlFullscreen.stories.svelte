@@ -8,7 +8,7 @@
 		title: 'Maps/Components/MapControls/MapControlFullscreen',
 		component: MapControlFullscreen,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		}
 	};
 </script>

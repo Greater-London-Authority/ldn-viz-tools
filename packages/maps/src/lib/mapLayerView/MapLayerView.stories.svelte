@@ -26,7 +26,7 @@
 		title: 'Maps/Components/MapLayerView',
 		component: MapLayerView,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			id: {

@@ -7,7 +7,7 @@
 		FormErrorStore,
 		FormHasErrors,
 		FormValueStore
-	} from './types';
+	} from './types.ts';
 
 	const colorOptions = [
 		{ label: 'Red', value: '#FF0000' },
@@ -98,7 +98,7 @@
 
 <Story name="Simple Form">
 	<Form name="about_you" bind:valueStore bind:errorStore>
-		<FormField type="text" name="name" label="Name" required />
+		<FormField type="text" name="your_name" label="Name" required />
 		<FormField type="select" name="color" label="Colour" options={colorOptions} />
 		<FormField type="checkbox" name="been_to_venice" label="Have you been to Venice?" />
 		<Button slot="leftButtons" variant="outline" on:click={clear}>Clear</Button>
@@ -123,7 +123,7 @@
 			color: 'A color must be selected'
 		}}
 	>
-		<FormField type="text" name="name" label="Name" required />
+		<FormField type="text" name="your_name" label="Name" required />
 		<FormField type="select" name="color" label="Colour" options={colorOptions} />
 		<FormField type="checkbox" name="been_to_venice" label="Have you been to Venice?" />
 		<Button slot="leftButtons" variant="outline" on:click={resetToInitial}>Reset</Button>

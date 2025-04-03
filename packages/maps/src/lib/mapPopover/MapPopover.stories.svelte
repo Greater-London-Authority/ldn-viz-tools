@@ -15,7 +15,7 @@
 		title: 'Maps/Components/MapPopover',
 		component: MapPopover,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			layerId: {

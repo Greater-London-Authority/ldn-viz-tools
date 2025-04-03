@@ -5,7 +5,7 @@
 		title: 'Maps/Components/MapLayerSource/adaptations/GeoJSONMapLayerSource',
 		component: GeoJSONMapLayerSource,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			id: {

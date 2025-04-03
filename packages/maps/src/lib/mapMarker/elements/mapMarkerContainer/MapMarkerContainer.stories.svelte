@@ -5,7 +5,7 @@
 		title: 'Maps/Components/MapMarker/elements/MapMarkerContainer',
 		component: MapMarkerContainer,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		},
 		argTypes: {
 			placement: {

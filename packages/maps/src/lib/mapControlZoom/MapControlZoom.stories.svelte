@@ -8,7 +8,7 @@
 		title: 'Maps/Components/MapControls/MapControlZoom',
 		component: MapControlZoom,
 		parameters: {
-			layout: 'full'
+			layout: 'fullscreen'
 		}
 	};
 </script>

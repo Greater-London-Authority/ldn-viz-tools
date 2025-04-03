@@ -15,9 +15,9 @@
 	 * @component
 	 */
 
-	import { getAllContexts, onDestroy, onMount, type SvelteComponent } from 'svelte';
-	import type { ComponentType } from 'svelte';
 	import type { Feature } from 'geojson';
+	import type { ComponentType } from 'svelte';
+	import { getAllContexts, onDestroy, onMount, type SvelteComponent } from 'svelte';
 
 	import maplibre_gl from 'maplibre-gl';
 
@@ -107,7 +107,9 @@
 
 <style>
 	/** TODO: remove this hack **/
-	:global(.maplibregl-popup) {
-		z-index: 99;
+	:global {
+		.maplibregl-popup {
+			z-index: 99;
+		}
 	}
 </style>
