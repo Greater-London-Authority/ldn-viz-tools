@@ -1,5 +1,11 @@
 # @ldn-viz/utils
 
+## 1.1.1
+
+### Patch Changes
+
+- 1ec49d9: svelte5 compatability
+
 ## 1.1.0
 
 ### Minor Changes

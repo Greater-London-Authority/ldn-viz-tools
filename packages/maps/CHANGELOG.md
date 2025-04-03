@@ -1,5 +1,13 @@
 # ldn-viz-tools-maps
 
+## 7.4.1
+
+### Patch Changes
+
+- 1ec49d9: svelte5 compatability
+- Updated dependencies [1ec49d9]
+  - @ldn-viz/utils@1.1.1
+
 ## 7.4.0
 
 ### Minor Changes

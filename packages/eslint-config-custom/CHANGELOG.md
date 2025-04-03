@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 1.0.1
+
+### Patch Changes
+
+- 1ec49d9: svelte5 compatability
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,16 @@
 # @ldn-viz/tables
 
+## 2.6.1
+
+### Patch Changes
+
+- 1ec49d9: svelte5 compatability
+- Updated dependencies [1ec49d9]
+  - @ldn-viz/charts@5.2.1
+  - @ldn-viz/themes@6.0.1
+  - @ldn-viz/utils@1.1.1
+  - @ldn-viz/ui@17.1.2
+
 ## 2.6.0
 
 ### Minor Changes

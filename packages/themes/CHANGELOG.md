@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 6.0.1
+
+### Patch Changes
+
+- 1ec49d9: svelte5 compatability
+
 ## 6.0.0
 
 ### Major Changes

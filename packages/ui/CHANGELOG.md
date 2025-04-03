@@ -1,5 +1,13 @@
 # ldn-viz-tools-ui
 
+## 17.1.2
+
+### Patch Changes
+
+- 1ec49d9: svelte5 compatability
+- Updated dependencies [1ec49d9]
+  - @ldn-viz/utils@1.1.1
+
 ## 17.1.1
 
 ### Patch Changes
