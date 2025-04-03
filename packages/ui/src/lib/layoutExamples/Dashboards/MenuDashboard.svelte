@@ -1,19 +1,68 @@
 <script lang="ts">
 	import AppShell from '../../appShell/AppShell.svelte';
+	import ListMenu from '../../listMenu/ListMenu.svelte';
 	import LogoCIU from '../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../logos/LogoMayor.svelte';
 	import Sidebar from '../../sidebar/Sidebar.svelte';
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
+	import SidebarSection from '../../sidebar/elements/sidebarSection/SidebarSection.svelte';
 	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
-	import { Demo1 } from './demoTabs';
+
+	let subMenu = [
+		{ title: 'Accessibility', id: 'accessibility', url: '#accessibility' },
+		{ title: 'Brand', id: 'brand', url: '/' },
+		{ title: 'Color', id: 'color', url: '/' },
+		{ title: 'Typography', id: 'typography', url: '/' },
+		{ title: 'Spacing', id: 'spacing', url: '/' },
+		{ title: 'Design Tokens', id: 'design-tokens', url: '/' }
+	];
+
+	let subMenuNoLinks = [
+		{
+			title: 'Accessibility',
+			id: 'accessibility-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `a-${i.id}` }))
+		},
+		{
+			title: 'Brand',
+			id: 'brand-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `b-${i.id}` }))
+		},
+		{
+			title: 'Color',
+			id: 'color-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `c-${i.id}` }))
+		},
+		{
+			title: 'Typography',
+			id: 'typography-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `d-${i.id}` }))
+		},
+		{
+			title: 'Spacing',
+			id: 'spacing-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `e-${i.id}` }))
+		},
+		{
+			title: 'Design Tokens',
+			id: 'tokens-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `f-${i.id}` }))
+		}
+	];
 </script>
 
 <!--Only need the theme in a story in an app this will be in the layout-->
 <Theme />
 
-<AppShell>
+<AppShell sidebarPlacement={{ initial: 'left' }}>
 	<svelte:fragment slot="main">
 		<div class="bg-color-canvas-background-1 h-full p-6">
 			<div class="mb-4">
@@ -34,7 +83,9 @@
 
 		<!-- SECTIONS -->
 		<svelte:fragment slot="sections">
-			<Demo1 />
+			<SidebarSection>
+				<ListMenu ariaLabel="no links" items={subMenuNoLinks} />
+			</SidebarSection>
 		</svelte:fragment>
 
 		<!-- FOOTER -->

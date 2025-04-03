@@ -12,6 +12,7 @@
 	import { Story } from '@storybook/addon-svelte-csf';
 
 	import LeggiExplorer from './Dashboards/LeggiExplorer.svelte';
+	import MenuDashboard from './Dashboards/MenuDashboard.svelte';
 	import PopulationProjection from './Dashboards/PopulationProjection.svelte';
 	import RiverHealth from './Dashboards/RiverHealth.svelte';
 	import SimpleDashboard from './Dashboards/SimpleDashboard.svelte';
@@ -19,6 +20,10 @@
 
 <Story name="Simple Dashboard" id="SimpleDash">
 	<SimpleDashboard />
+</Story>
+
+<Story name="Menu Dashboard" id="MenuDash">
+	<MenuDashboard />
 </Story>
 
 <Story name="Population Projection" id="PopulationProjectionDash">
