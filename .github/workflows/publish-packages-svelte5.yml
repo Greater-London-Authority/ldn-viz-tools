@@ -1,0 +1,28 @@
+name: Publish Packages to NPM with @svelte5 tag
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the git repository
+        uses: actions/checkout@v4
+
+      - name: Setup .npmrc file to publish to npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install turbo
+        run: npm install turbo --global
+
+      - name: Publish packages
+        run: npm publish --tag svelte5
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
