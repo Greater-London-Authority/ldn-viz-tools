@@ -1,24 +1,21 @@
-<script context="module">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module" lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import ChartContainer from './ChartContainer.svelte';
 
 	import { Select } from '@ldn-viz/ui';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Charts/Components/ChartContainer',
-		component: ChartContainer
-	};
+		component: ChartContainer,
+		args: {
+			chartDescription:
+				'This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them.',
+			alt: 'Simple description of type of chart'
+		}
+	});
 </script>
 
-<Template let:args>
-	<ChartContainer
-		{...args}
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
-</Template>
-
-<Story name="Default" id="ChartcontainerDefault" />
+<Story name="Default" exportName="ChartcontainerDefault" />
 
 <Story name="With Title">
 	<ChartContainer

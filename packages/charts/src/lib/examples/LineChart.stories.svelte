@@ -1,4 +1,5 @@
 <script context="module">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 
 	/** This is an example `LineChart` chart using default plot styles.
@@ -6,14 +7,13 @@
 	 * By default, charts (and their inner details) are hidden from screen readers to improve the accessibility experience. Instead, it's crtitical we use a descriptive `title`, `subTitle`, `alt`, `chartDescription` and surrounding document text, so all users understand what the chart shows and gain the same insight. We should also link to the data where possible.
 	 */
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Charts/Example Charts/LineChart'
-	};
+	});
 </script>
 
 <script lang="ts">
 	import { currentTheme } from '@ldn-viz/ui';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { format } from 'd3';
 	import demoMonthlyTimeseriesLong from '../../data/demoMonthlyTimeseriesLong.json';
 	import { Plot } from '../observablePlotFragments/plot';
@@ -99,10 +99,6 @@
 	};
 </script>
 
-<Template let:args>
-	<ObservablePlot {...args} />
-</Template>
-
 <!--
 ```html
 <script>
@@ -148,7 +144,7 @@
 ```
 -->
 
-<Story name="Default" source>
+<Story name="Default">
 	<ObservablePlot
 		spec={singleLineSpec}
 		data={singleLineData}
@@ -243,7 +239,7 @@
 ```
 -->
 
-<Story name="Multiple lines (inc custom tool tips)" source>
+<Story name="Multiple lines (inc custom tool tips)">
 	<ObservablePlot
 		spec={multiLineSpec}
 		data={multiLineData}

@@ -1,20 +1,11 @@
-<script context="module">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import ObservablePlot from './ObservablePlot.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Charts/Components/ObservablePlot',
-		component: ObservablePlot,
-
-		argTypes: {
-			// this is a module export, not a prop, so don't include it in table
-			addClick: {
-				table: {
-					disable: true
-				}
-			}
-		}
-	};
+		component: ObservablePlot
+	});
 </script>
 
 <script lang="ts">
@@ -35,8 +26,8 @@
 
 	let theme = getDefaultPlotStyles();
 
+	const updateTheme = (_theme: any) => (theme = getDefaultPlotStyles());
 	$: updateTheme($currentTheme);
-	$: updateTheme = (_theme: any) => (theme = getDefaultPlotStyles());
 
 	$: spec = {
 		style: {
@@ -65,20 +56,120 @@
 	let hoveredValue: any | undefined = undefined;
 
 	const tooltipStore: Writable<Position> = writable();
+
+	$: defaultTooltipsSpec = {
+		...spec,
+
+		marks: [
+			...spec.marks,
+			Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.dot(penguins, {
+				...theme.defaultDot,
+				x: 'culmen_length_mm',
+				y: 'culmen_depth_mm',
+				render: registerTooltip(tooltipStore),
+
+				/* need to expose as a channel before including in tooltip */
+				channels: {
+					sex: 'sex',
+					culmen_length_mm: 'culmen_length_mm',
+					culmen_depth_mm: 'culmen_depth_mm'
+				},
+				tip: {
+					format: {
+						sex: true,
+						culmen_length_mm: (d) => `${d}mm`,
+						culmen_depth_mm: (d) => `${d}mm`,
+						x: undefined,
+						y: undefined
+					}
+				}
+			})
+		]
+	};
+
+	$: customTooltipSpec = {
+		...spec,
+		marks: [
+			...spec.marks,
+			Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.dot(penguins, {
+				...theme.defaultDot,
+				x: 'culmen_length_mm',
+				y: 'culmen_depth_mm',
+				render: registerTooltip(tooltipStore),
+				tip: false
+			})
+		]
+	};
+
+	$: customClickSpec = {
+		...spec,
+
+		marks: [
+			...spec.marks,
+			Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.point(penguins, {
+				x: 'culmen_length_mm',
+				y: 'culmen_depth_mm',
+				render: addEventHandler('click', (_ev: any, d: any) => {
+					clickedIndex = d.index;
+					clickedValue = penguins[d.index];
+				}),
+				stroke: $currentTheme.color.data.primary,
+				r: 5,
+				fill: (_d, i) => {
+					return clickedIndex !== undefined && i === clickedIndex
+						? $currentTheme.color.data.secondary
+						: 'white';
+				}
+			})
+		]
+	};
+
+	const colorMarkOnClick = (index: number, clickedIndex: number) =>
+		index === clickedIndex
+			? $currentTheme.color.data.secondary
+			: $currentTheme.color.chart.background;
+
+	$: multiEventSpec = {
+		...spec,
+
+		marks: [
+			...spec.marks,
+			Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
+			Plot.point(penguins, {
+				x: 'culmen_length_mm',
+				y: 'culmen_depth_mm',
+				render: addMultipleEventHandlers([
+					{
+						markShape: 'circle',
+						type: 'click',
+						handler: (_: any, d: any) => {
+							clickedIndex = penguins[d.index];
+						}
+					},
+					{
+						markShape: 'circle',
+						type: 'mouseenter',
+						handler: (_: any, d: any) => {
+							hoveredValue = penguins[d.index];
+						}
+					}
+				]),
+				stroke: $currentTheme.color.data.primary,
+				r: 5,
+				fill: (_, i) => colorMarkOnClick(i, clickedIndex)
+			})
+		]
+	};
 </script>
 
-<Template let:args>
-	<ObservablePlot
-		{...args}
-		{spec}
-		title="Penguin Culmens"
-		subTitle="A scatter plot of depth against length"
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
-</Template>
-
-<Story name="Default" args={{ spec }} source />
+<Story name="Default" args={{ spec }} />
 
 <!-- 
 	The width of the chart is contained within the wrapping chart container.
@@ -123,37 +214,7 @@
 
 <Story name="With default tooltips">
 	<ObservablePlot
-		spec={{
-			...spec,
-
-			marks: [
-				...spec.marks,
-				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.dot(penguins, {
-					...theme.defaultDot,
-					x: 'culmen_length_mm',
-					y: 'culmen_depth_mm',
-					render: registerTooltip(tooltipStore),
-
-					/* need to expose as a channel before including in tooltip */
-					channels: {
-						sex: 'sex',
-						culmen_length_mm: 'culmen_length_mm',
-						culmen_depth_mm: 'culmen_depth_mm'
-					},
-					tip: {
-						format: {
-							sex: true,
-							culmen_length_mm: (d) => `${d}mm`,
-							culmen_depth_mm: (d) => `${d}mm`,
-							x: undefined,
-							y: undefined
-						}
-					}
-				})
-			]
-		}}
+		spec={defaultTooltipsSpec}
 		title="Penguin Culmens"
 		subTitle="A scatter plot of depth against length"
 		data={penguins}
@@ -174,21 +235,7 @@
 -->
 <Story name="With custom tooltips">
 	<ObservablePlot
-		spec={{
-			...spec,
-			marks: [
-				...spec.marks,
-				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.dot(penguins, {
-					...theme.defaultDot,
-					x: 'culmen_length_mm',
-					y: 'culmen_depth_mm',
-					render: registerTooltip(tooltipStore),
-					tip: false
-				})
-			]
-		}}
+		spec={customTooltipSpec}
 		title="Penguin Culmens"
 		subTitle="A scatter plot of depth against length"
 		data={penguins}
@@ -203,30 +250,7 @@
 -->
 <Story name="With custom click interaction">
 	<ObservablePlot
-		spec={{
-			...spec,
-
-			marks: [
-				...spec.marks,
-				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.point(penguins, {
-					x: 'culmen_length_mm',
-					y: 'culmen_depth_mm',
-					render: addEventHandler('click', (_ev, d) => {
-						clickedIndex = d.index;
-						clickedValue = penguins[d.index];
-					}),
-					stroke: $currentTheme.color.data.primary,
-					r: 5,
-					fill: (_d, i) => {
-						return clickedIndex !== undefined && i === clickedIndex
-							? $currentTheme.color.data.secondary
-							: 'white';
-					}
-				})
-			]
-		}}
+		spec={customClickSpec}
 		title="Penguin Culmens"
 		subTitle="A scatter plot of depth against length"
 		data={penguins}
@@ -243,42 +267,7 @@
 
 <Story name="With multiple event handlers">
 	<ObservablePlot
-		spec={{
-			...spec,
-
-			marks: [
-				...spec.marks,
-				Plot.ruleY([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.ruleX([0], { stroke: $currentTheme.color.chart.axis }),
-				Plot.point(penguins, {
-					x: 'culmen_length_mm',
-					y: 'culmen_depth_mm',
-					render: addMultipleEventHandlers([
-						{
-							markShape: 'circle',
-							type: 'click',
-							handler: (_, d) => {
-								clickedIndex = penguins[d.index];
-							}
-						},
-						{
-							markShape: 'circle',
-							type: 'mouseenter',
-							handler: (_, d) => {
-								hoveredValue = penguins[d.index];
-							}
-						}
-					]),
-					stroke: $currentTheme.color.data.primary,
-					r: 5,
-					fill: (_d, i) => {
-						return clickedIndex !== undefined && i === clickedIndex
-							? $currentTheme.color.data.secondary
-							: 'white';
-					}
-				})
-			]
-		}}
+		spec={multiEventSpec}
 		title="Penguin Culmens"
 		subTitle="A scatter plot of depth against length"
 		data={penguins}

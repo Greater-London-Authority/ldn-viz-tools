@@ -65,7 +65,7 @@
 		};
 
 	export const addMultipleEventHandlers = (events: EventHandler[]) => {
-		return (index, scales, values, dimensions, context, next) => {
+		return (index: any, scales: any, values: any, dimensions: any, context: any, next: any) => {
 			const el = next && next(index, scales, values, dimensions, context);
 
 			for (const event of events) {
