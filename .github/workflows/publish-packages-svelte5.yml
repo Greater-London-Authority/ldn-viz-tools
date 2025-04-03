@@ -23,6 +23,6 @@ jobs:
         run: npm install turbo --global
 
       - name: Publish packages
-        run: npm publish --tag svelte5
+        run: turbo publish --tag svelte5
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
