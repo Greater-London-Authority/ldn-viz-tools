@@ -25,8 +25,10 @@
 	export let arcColorClass = '';
 </script>
 
-{#if $prefersReducedMotion}
-	<Icon src={Clock} theme="solid" class={$$props.class} {title} aria-hidden="false" />
-{:else}
-	<Spinner {arcColorClass} class={$$props.class} {title} />
-{/if}
+<div>
+	{#if $prefersReducedMotion}
+		<Icon src={Clock} theme="solid" class={$$props.class} {title} aria-hidden="false" />
+	{:else}
+		<Spinner {arcColorClass} class={$$props.class} {title} />
+	{/if}
+</div>

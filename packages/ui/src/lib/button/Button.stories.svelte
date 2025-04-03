@@ -1,7 +1,7 @@
-<script context="module">
+<script context="module" lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	import Button, { type ButtonProps } from './Button.svelte';
+	import Button from './Button.svelte';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/Button',
@@ -12,7 +12,7 @@
 				control: { type: 'select' }
 			},
 			variant: {
-				options: ['brand', 'solid', 'outline', 'text'], //square
+				options: ['brand', 'solid', 'outline', 'text'],
 				control: { type: 'select' }
 			},
 			size: {

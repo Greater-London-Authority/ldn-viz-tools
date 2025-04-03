@@ -51,7 +51,7 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import loadTestLayers from '../loadTestLayers';
