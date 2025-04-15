@@ -13,6 +13,7 @@
 	import { type Writable } from 'svelte/store';
 	import { slide } from 'svelte/transition';
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 	import TabPanel from './../tabs/TabPanel.svelte';
 	import type { Tab } from './../tabs/types';
 	import SidebarTabList from './elements/sidebarTabs/SidebarTabList.svelte';
@@ -68,6 +69,11 @@
 	 */
 	export let ariaLabel: string = 'Switch sidebar panel';
 
+	/**
+	 * Randomly generated id for sidebar container. Used by `SidebarToggle` to tell screen readers what the toggle controls.
+	 */
+	export let sidebarId: string = randomId();
+
 	const sidebarPlacementFromContext = getContext<Writable<PlacementType>>('sidebarPlacement');
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
@@ -96,12 +102,13 @@
 		</div>
 	{:else if $sidebarAlwaysOpen !== 'true'}
 		<div class={classNames('absolute', togglePlacementClasses)}>
-			<SidebarToggle />
+			<SidebarToggle {sidebarId} />
 		</div>
 	{/if}
 
 	{#if $sidebarIsOpen}
 		<div
+			id={sidebarId}
 			class={classNames('flex', heightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[placement] }}
 		>
