@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 18.0.0
+
+### Major Changes
+
+- 2bd195a: Bump the major version number to avoid conflicts due to the svelte5 preview being released as 17.1.2.
+
+### Minor Changes
+
+- dec3ed3: ADDED `ListMenu` and `ListMenuItem` components
+- 9f674ab: FIXED: `SidebarToggle` now has `aria-expanded` and `aria-controls` attributes for screen reader accessibility. `Sidebar` has a `sidebarId` for use by `SidebarToggle`.
+
 ## 17.1.1
 
 ### Patch Changes
