@@ -1,5 +1,11 @@
 # @ldn-viz/tables
 
+## 2.6.1
+
+### Patch Changes
+
+- b06d59e: FIXED: the first 2 rows are no longer missing when a `Table` is paginated
+
 ## 2.6.0
 
 ### Minor Changes
