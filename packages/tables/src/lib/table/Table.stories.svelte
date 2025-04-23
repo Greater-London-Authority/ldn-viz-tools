@@ -1,5 +1,6 @@
 <script context="module">
 	import Table from './Table.svelte';
+	import { Select } from '@ldn-viz/ui';
 
 	export const meta = {
 		title: 'Tables/Components/Table',
@@ -127,6 +128,8 @@
 	randomlySelectRows();
 
 	export let page = 1;
+
+	let selectedPet: undefined | string = undefined;
 </script>
 
 <Template let:args>
@@ -229,3 +232,22 @@
 	/>
 </Story>
 <!-- TODO: add example of filtering -->
+
+<Story name="Externally implemented filtering">
+	<Select
+		label="Show only people whose favourite pet is"
+		bind:justValue={selectedPet}
+		items={[
+			{ value: 'dog', label: 'Dog' },
+			{ value: 'cat', label: 'Cat' },
+			{ value: 'bird', label: 'Bird' }
+		]}
+	/>
+
+	<Table
+		data={data.filter((d) => !selectedPet || d.pet === selectedPet)}
+		{tableSpec}
+		allowSorting
+		filename="My Table"
+	/>
+</Story>

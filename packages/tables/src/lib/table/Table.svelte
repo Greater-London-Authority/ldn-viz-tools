@@ -107,7 +107,7 @@
 	export let allowPageSizeChanges = false;
 
 	/**
-	 * The current page.
+	 * The current page (1-indexed).
 	 */
 	export let page = 1;
 
@@ -245,7 +245,7 @@
 				{#if paginate}
 					<div style:width={tableWidth} class:striped={zebraStripe}>
 						{#each visualRows as visualRow, i}
-							{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
+							{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
 								<RowRenderer spec={visualRow} {table} />
 							{/if}
 						{/each}
