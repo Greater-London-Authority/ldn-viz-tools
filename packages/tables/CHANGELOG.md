@@ -4,9 +4,7 @@
 
 ### Major Changes
 
-- ee9b859: Major version bump to deal with fact that svetle5 tag was mistakenly published as 2.6.1.
-
-## 2.6.1
+- ee9b859: Major version bump to deal with fact that svelte5 tag was mistakenly published as 2.6.1.
 
 ### Patch Changes
 
