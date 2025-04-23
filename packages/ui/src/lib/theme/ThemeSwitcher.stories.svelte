@@ -1,20 +1,15 @@
 <script context="module">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Theme from './Theme.svelte';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Themes/ThemeSwitcher',
 		component: ThemeSwitcher
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
+<Story name="Default">
 	<Theme />
-	<ThemeSwitcher {...args} />
-</Template>
-
-<Story name="Default" source />
+	<ThemeSwitcher />
+</Story>

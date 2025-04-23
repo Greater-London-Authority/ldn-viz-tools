@@ -13,7 +13,11 @@
 	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
 	type Theme = 'light' | 'dark' | 'system';
 
-	export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+	interface Props {
+		size?: 'xs' | 'sm' | 'md' | 'lg';
+	}
+
+	let { size = 'sm' }: Props = $props();
 
 	const themes: Theme[] = ['light', 'dark', 'system'];
 
@@ -24,7 +28,7 @@
 
 	const menuItems = themes.map((theme) => ({ value: theme, label: theme }));
 
-	$: themeIcon = $currentThemeMode === 'light' ? Sun : Moon;
+	let themeIcon = $derived($currentThemeMode === 'light' ? Sun : Moon);
 
 	const {
 		elements: { menu, item, trigger, arrow }
