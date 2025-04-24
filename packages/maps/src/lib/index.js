@@ -32,6 +32,8 @@ export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMar
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
+export { default as MapArrow } from './mapArrow/MapArrow.svelte';
+
 // Layers
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
 export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptations/geojsonMapLayerSource/GeoJSONMapLayerSource.svelte';
