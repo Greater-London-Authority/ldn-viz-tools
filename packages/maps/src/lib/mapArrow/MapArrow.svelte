@@ -46,8 +46,6 @@
 	const mapStore: MapLibreStore = getContext('mapStore');
 	$: map = $mapStore;
 
-	$: console.log({ mapStore });
-
 	let pointPosPixels = { x: 0, y: 0 }; // what we're pointing at
 	let centerPosPixels = { x: 0, y: 0 }; // center of map
 
@@ -96,6 +94,7 @@
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: pointAt && updatePos();
 </script>
 
