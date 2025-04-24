@@ -48,7 +48,6 @@
 				{options}
 				bind:selectedId={location}
 			></RadioButtonGroupSolid>
-			{JSON.stringify(selectedPosition)}
 		</div>
 
 		<Map
