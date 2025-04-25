@@ -6,6 +6,7 @@
 	 */
 
 	import { format, hsl, type ScaleThreshold } from 'd3';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -22,18 +23,18 @@
 	/**
 	 * A D3 color scale used to determine cell background color.
 	 */
-	export let colorScale: ScaleThreshold<string | number, string> | (() => string);
+	export let color: ScaleThreshold<string | number, string> | (() => string) | string;
 
 	$: f = format(formatString);
 </script>
 
-{#if !colorScale}
+{#if !color}
 	<span />
 {:else if value}
 	<span
 		class={`text-right flex h-full justify-end p-2 items-center`}
-		style={`background-color: ${colorScale(value)}; color: ${
-			hsl(colorScale(value).toString()).l >= 0.6 ? '#000000' : '#FFFFFF'
+		style={`background-color: ${getVal(value, color)}; color: ${
+			hsl(getVal(value, color).toString()).l >= 0.6 ? '#000000' : '#FFFFFF'
 		}`}
 	>
 		{#if formatString}{f(+value)}{/if}

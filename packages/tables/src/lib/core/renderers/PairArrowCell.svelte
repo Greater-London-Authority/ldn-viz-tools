@@ -6,6 +6,7 @@
 	 */
 
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -19,12 +20,12 @@
 	/**
 	 * Color to be applied to bars corresponding to positive values.
 	 */
-	export let positiveColor = 'blue';
+	export let positiveColor: string | ((value: number) => string) = 'blue';
 
 	/**
 	 * Color to be applied to bars corresponding to negative values.
 	 */
-	export let negativeColor = 'red';
+	export let negativeColor: string | ((value: number) => string) = 'red';
 
 	/**
 	 * Width of cell (in pixels).
@@ -69,8 +70,8 @@
 			x2={x(value)}
 			y1={height / 2}
 			y2={height / 2}
-			stroke={value > contextVals[0] ? positiveColor : negativeColor}
-			fill={value > contextVals[0] ? positiveColor : negativeColor}
+			stroke={value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)}
+			fill={value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)}
 			marker-end="url(#arrow)"
 		/>
 	</svg>

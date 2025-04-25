@@ -13,7 +13,7 @@
 		},
 		args: {
 			value: 0.5,
-			colorScale: () => 'red'
+			color: () => 'red'
 		}
 	};
 </script>

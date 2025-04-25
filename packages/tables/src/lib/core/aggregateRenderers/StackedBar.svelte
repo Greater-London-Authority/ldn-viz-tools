@@ -4,6 +4,7 @@
 	 */
 
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * Array of values to be displayed.
@@ -13,7 +14,7 @@
 	/**
 	 * A D3 color scale used to determine bar color.
 	 */
-	export let colorScale: (val: any) => string;
+	export let color: string | ((val: any) => string) = 'lightgrey';
 
 	/**
 	 * Width of cell (in pixels).
@@ -66,7 +67,7 @@
 			width={x(bar.end) - x(bar.start)}
 			y={0}
 			{height}
-			fill={colorScale ? colorScale(bar.val) : 'lightgrey'}
+			fill={getVal(bar.val, color)}
 			stroke="black"
 		/>
 

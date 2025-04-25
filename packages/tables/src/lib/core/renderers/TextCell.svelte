@@ -5,6 +5,7 @@
 	 */
 	import { format } from 'd3-format';
 	import { classNames } from '@ldn-viz/ui';
+	import { getVal } from '../lib/getVal';
 
 	export let value: number | string;
 	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
@@ -23,9 +24,6 @@
 
 	$: alignmentClass = alignmentClasses[alignText ?? 'left'];
 
-	$: fontWeightValue = typeof fontWeight === 'function' ? fontWeight(value) : fontWeight;
-	$: visibilityValue = typeof visibility === 'function' ? visibility(value) : visibility;
-
 	// This suppresses warnings due to the RowRenderer providing props that aren't used.
 	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$$restProps;
@@ -33,8 +31,8 @@
 
 <span
 	class={classNames(`flex h-full items-center py-2`, alignmentClass)}
-	style:font-weight={fontWeightValue}
-	style:visibility={visibilityValue}
+	style:font-weight={getVal(value, fontWeight)}
+	style:visibility={getVal(value, visibility)}
 >
 	{formatString ? f(+value) : value}
 </span>

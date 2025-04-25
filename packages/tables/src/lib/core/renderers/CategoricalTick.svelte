@@ -1,21 +1,22 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `CategoricalTick` component encodes a single categorical value redundantly as both the position and color of a tick.
 	 * @component
 	 */
 	import { format } from 'd3-format';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * The value to be encoded in the cell.
 	 */
-	export let value;
+	export let value: number;
 
 	const fPercentage = format('0.0%');
 
 	/**
 	 * Scale used to determine color of tick.
 	 */
-	export let colorScale;
+	export let color: string | ((value: number) => string) = 'black';
 
 	/**
 	 * Categorical scale used to determine horizontal position of tick.
@@ -41,7 +42,7 @@
 <div
 	class="w-[3px] h-full top-0 transform -translate-x-1/2 z-[-1] relative"
 	style="width: 3px"
-	style:background={colorScale(value)}
+	style:background={getVal(value, color)}
 	style:left={fPercentage(l)}
 	style:width={fPercentage(w)}
 >
