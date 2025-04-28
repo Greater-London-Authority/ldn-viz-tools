@@ -239,6 +239,7 @@
 				class="table-auto text-sm w-full text-color-text-primary"
 				slot="table"
 				bind:clientWidth={tableWidth}
+				role="table"
 			>
 				<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
 

@@ -46,13 +46,7 @@
 	$$restProps;
 </script>
 
-<div
-	on:click={toggle}
-	on:keypress={toggle}
-	role="cell"
-	tabindex={0}
-	class="font-bold py-0.5 w-full h-full"
->
+<div on:click={toggle} on:keypress={toggle} tabindex={0} class="font-bold py-0.5 w-full h-full">
 	<div class={classNames('flex items-center select-none', alignmentClass)}>
 		{#if superscriptText}
 			<div class="text-left">
