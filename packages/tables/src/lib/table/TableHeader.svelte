@@ -51,7 +51,9 @@
 		<ColumnSummariesRow {table} {data} />
 	{/if}
 
-	<AxisRow {table} />
+	{#if table.columnSpec.some((c) => c.cell.axisRenderer)}
+		<AxisRow {table} />
+	{/if}
 
 	{#if tableSpec.colGroups}
 		<ColumnGroupHeadingRuleRow {table} />
