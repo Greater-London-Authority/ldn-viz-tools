@@ -35,6 +35,7 @@
 <div
 	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary py-2')}
 	style:width={tableWidth}
+	role="rowgroup"
 >
 	{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
 		<ColumnGroupHeadingRow {table} />

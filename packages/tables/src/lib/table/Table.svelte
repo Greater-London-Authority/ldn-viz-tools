@@ -244,7 +244,7 @@
 				<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
 
 				{#if paginate}
-					<div style:width={tableWidth} class:striped={zebraStripe}>
+					<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
 						{#each visualRows as visualRow, i}
 							{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
 								<RowRenderer spec={visualRow} {table} />
@@ -256,13 +256,14 @@
 						style:height={`${height - 100}px`}
 						style:width={tableWidth}
 						class:stripedVirtual={zebraStripe}
+						role="rowgroup"
 					>
 						<VirtualScroll data={visualRows} key="uniqueKey" let:data>
 							<RowRenderer spec={data} {table} />
 						</VirtualScroll>
 					</div>
 				{:else}
-					<div style:width={tableWidth} class:striped={zebraStripe}>
+					<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
 						{#each visualRows as visualRow}
 							<RowRenderer spec={visualRow} {table} />
 						{/each}
