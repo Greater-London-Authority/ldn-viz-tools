@@ -14,7 +14,7 @@
 
 <script lang="ts">
 	import Overlay from '../overlay/Overlay.svelte';
-
+	import Trigger from '../overlay/Trigger.svelte';
 	/**
 	 * The `<Checkbox>` component provides a checkbox control as a Boolean input.
 	 * It creates an `<input type="checkbox">`HTML element ([MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)), but enhances this with the ability to easily change the checkbox color, and add tooltips providing explanatory text.
@@ -107,7 +107,13 @@
 		<slot name="hint" />
 	{/if}
 	{#if hint}
-		<Overlay {hintLabel}>
+		<Overlay>
+			<Trigger
+				slot="trigger"
+				size="xs"
+				{hintLabel}
+				ariaLabel={!hintLabel && label ? label : null}
+			/>
 			{hint}
 		</Overlay>
 	{/if}
