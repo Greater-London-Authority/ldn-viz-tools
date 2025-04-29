@@ -21,7 +21,7 @@
 	export let label = '';
 
 	/**
-	 * Enables screen reader to describe group
+	 * Accessible name of group to be read by screen reader.
 	 */
 	export let ariaLabel = '';
 
