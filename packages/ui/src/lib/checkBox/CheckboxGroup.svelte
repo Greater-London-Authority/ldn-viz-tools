@@ -165,6 +165,7 @@
 			<Checkbox
 				id={randomId()}
 				form=""
+				name="all"
 				label="Select all"
 				color="#3787D2"
 				checked={allCheckboxesCheckedOrDisabled}

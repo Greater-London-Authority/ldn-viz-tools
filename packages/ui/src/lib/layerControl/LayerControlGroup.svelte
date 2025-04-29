@@ -244,6 +244,7 @@
 				<Checkbox
 					id={randomId()}
 					form=""
+					name="all"
 					label={showAllLabel}
 					checked={allCheckboxesCheckedOrDisabled}
 					indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
