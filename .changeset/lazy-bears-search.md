@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-FIXED: CSS selector changed from 'dialog' to 'alert'
+FIXED: CSS selector in `Toast` component (regression in 146ce20)
