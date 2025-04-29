@@ -42,12 +42,19 @@
 	<svelte:fragment slot="dataColumns">
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div class="flex was-th" role="columnheader" style:width={col.computedWidth + 'px'}>
+				{@const colIsSortable = allowSorting && col.sortable !== false}
+				{@const order = table.rowOrderSpec.find((f) => f.field === col.short_label)?.direction}
+
+				<div
+					class="flex was-th"
+					role="columnheader"
+					style:width={col.computedWidth + 'px'}
+					aria-sort={colIsSortable ? order : ''}
+				>
 					<Header
 						label={col.label ?? col.short_label}
-						order={table.rowOrderSpec.find((f) => f.field === col.short_label)?.direction}
-						toggle={() =>
-							allowSorting && col.sortable !== false && table.toggleSort(col.short_label)}
+						{order}
+						toggle={() => colIsSortable && table.toggleSort(col.short_label)}
 						allowSorting={allowSorting && col.sortable !== false}
 						alignHeader={col.alignHeader}
 						superscriptText={col.superscriptText}

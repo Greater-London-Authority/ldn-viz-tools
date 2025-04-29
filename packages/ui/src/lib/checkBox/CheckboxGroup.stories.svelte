@@ -25,10 +25,12 @@
 		{ id: 'underground', name: 'underground', label: 'Underground stations', color: '#9E0059' },
 		{ id: 'taxi', name: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
 	];
+
+	let ariaLabel = 'Select transport methods';
 </script>
 
 <Template let:args>
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions {...args} />
+	<CheckboxGroup options={optionsForGroup} bind:selectedOptions {...args} {ariaLabel} />
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
@@ -37,7 +39,12 @@
 <Story name="Default" source />
 
 <Story name="with title">
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions label="Transport method" />
+	<CheckboxGroup
+		options={optionsForGroup}
+		bind:selectedOptions
+		label="Transport method"
+		{ariaLabel}
+	/>
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
@@ -49,6 +56,7 @@
 		bind:selectedOptions
 		label="Transport method"
 		hint="contextual hint text"
+		{ariaLabel}
 	/>
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
@@ -62,6 +70,7 @@
 		bind:selectedOptions
 		label="Transport method"
 		description="Pick you prefered method of transport - taxis are currently not available"
+		{ariaLabel}
 	/>
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
@@ -69,7 +78,7 @@
 </Story>
 
 <Story name="disabled buttons">
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
+	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden {ariaLabel} />
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
 	</p>
@@ -79,7 +88,7 @@
 	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
 
 	<div class="my-4">
-		<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden />
+		<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden {ariaLabel} />
 	</div>
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
@@ -95,6 +104,7 @@
 		hint="Contextual Hint"
 		description="This is a description"
 		disabled
+		{ariaLabel}
 	/>
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}
@@ -110,6 +120,7 @@
 		hint="Contextual Hint"
 		description="Deselect all to see an error state!"
 		error={!selectedOptions.length ? 'You must select an option' : undefined}
+		{ariaLabel}
 	/>
 	<p class="mt-4 text-color-text-secondary">
 		selectedOptions: {JSON.stringify(selectedOptions)}

@@ -23,6 +23,11 @@
 	export let label = '';
 
 	/**
+	 * Enables screen reader to describe group
+	 */
+	export let ariaLabel = '';
+
+	/**
 	 * Text that appears below the `<input>` element, in smaller font than the `label`.
 	 */
 	export let description = '';
@@ -209,25 +214,27 @@
 	{optional}
 >
 	<slot name="hint" slot="hint" />
-	<div class="flex flex-col space-y-1">
+	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
 		{#if mutuallyExclusive}
 			{#if !buttonsHidden}
 				<Button {disabled} variant="text" class="!px-0" on:click={clearRadioButtons}>Clear</Button>
 			{/if}
 
-			<div class={'flex flex-col space-y-1'}>
+			<ul class={'flex flex-col space-y-1'}>
 				{#each options as option}
-					<LayerControl
-						label={option.label}
-						{name}
-						bind:state={state[option.id]}
-						optionId={option.id}
-						disabled={option.disabled || disabled}
-						bind:selectedOptionId
-						mutuallyExclusive
-					/>
+					<li>
+						<LayerControl
+							label={option.label}
+							{name}
+							bind:state={state[option.id]}
+							optionId={option.id}
+							disabled={option.disabled || disabled}
+							bind:selectedOptionId
+							mutuallyExclusive
+						/>
+					</li>
 				{/each}
-			</div>
+			</ul>
 		{:else}
 			{#if !buttonsHidden}
 				<!--
@@ -245,20 +252,22 @@
 				/>
 			{/if}
 
-			<div class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
+			<ul class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
 				{#each options as option (option.id)}
-					<LayerControl
-						label={option.label}
-						disabled={option.disabled || disabled}
-						hint={option.hint}
-						disableColorControl={disableColorControl || option.disableColorControl}
-						disableOpacityControl={disableOpacityControl || option.disableOpacityControl}
-						disableSizeControl={disableSizeControl || option.disableSizeControl}
-						bind:state={state[option.id]}
-						{controlsInUse}
-					/>
+					<li>
+						<LayerControl
+							label={option.label}
+							disabled={option.disabled || disabled}
+							hint={option.hint}
+							disableColorControl={disableColorControl || option.disableColorControl}
+							disableOpacityControl={disableOpacityControl || option.disableOpacityControl}
+							disableSizeControl={disableSizeControl || option.disableSizeControl}
+							bind:state={state[option.id]}
+							{controlsInUse}
+						/>
+					</li>
 				{/each}
-			</div>
+			</ul>
 		{/if}
 	</div>
 </InputWrapper>
