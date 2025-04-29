@@ -52,7 +52,7 @@
 </div>
 
 <style>
-	div[role='dialog'] {
+	div[role='alert'] {
 		width: clamp(200px, 24rem, calc(100vw - 1rem));
 		/* 
 			Because order is an integer with no intermediate values the transition
