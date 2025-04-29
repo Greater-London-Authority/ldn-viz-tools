@@ -1,5 +1,17 @@
 # @ldn-viz/tables
 
+## 3.1.0
+
+### Minor Changes
+
+- be4b0fa: CHANGED: improve ARIA for table component
+
+### Patch Changes
+
+- Updated dependencies [c66b03b]
+- Updated dependencies [de9b000]
+  - @ldn-viz/ui@18.1.0
+
 ## 3.0.0
 
 ### Major Changes
