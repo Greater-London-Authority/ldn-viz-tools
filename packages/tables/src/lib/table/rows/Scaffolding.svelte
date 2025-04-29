@@ -12,7 +12,7 @@
 
 <!-- items-center - came from DataRow -->
 <!-- controlRows added an m-2 -->
-<div class="flex was-tr items-stretch">
+<div class="flex was-tr items-stretch" role="row">
 	<!-- controls for expanding/collapsing groups -->
 	<slot name="groupControl">
 		{#each table.groupingFields || [] as _field}

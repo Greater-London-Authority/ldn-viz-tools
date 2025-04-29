@@ -239,11 +239,12 @@
 				class="table-auto text-sm w-full text-color-text-primary"
 				slot="table"
 				bind:clientWidth={tableWidth}
+				role="table"
 			>
 				<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
 
 				{#if paginate}
-					<div style:width={tableWidth} class:striped={zebraStripe}>
+					<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
 						{#each visualRows as visualRow, i}
 							{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
 								<RowRenderer spec={visualRow} {table} />
@@ -255,13 +256,14 @@
 						style:height={`${height - 100}px`}
 						style:width={tableWidth}
 						class:stripedVirtual={zebraStripe}
+						role="rowgroup"
 					>
 						<VirtualScroll data={visualRows} key="uniqueKey" let:data>
 							<RowRenderer spec={data} {table} />
 						</VirtualScroll>
 					</div>
 				{:else}
-					<div style:width={tableWidth} class:striped={zebraStripe}>
+					<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
 						{#each visualRows as visualRow}
 							<RowRenderer spec={visualRow} {table} />
 						{/each}

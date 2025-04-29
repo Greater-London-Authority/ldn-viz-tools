@@ -35,6 +35,7 @@
 <div
 	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary py-2')}
 	style:width={tableWidth}
+	role="rowgroup"
 >
 	{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
 		<ColumnGroupHeadingRow {table} />
@@ -50,7 +51,9 @@
 		<ColumnSummariesRow {table} {data} />
 	{/if}
 
-	<AxisRow {table} />
+	{#if table.columnSpec.some((c) => c.cell.axisRenderer)}
+		<AxisRow {table} />
+	{/if}
 
 	{#if tableSpec.colGroups}
 		<ColumnGroupHeadingRuleRow {table} />

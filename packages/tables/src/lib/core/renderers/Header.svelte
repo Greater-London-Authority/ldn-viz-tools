@@ -46,14 +46,12 @@
 	$$restProps;
 </script>
 
-<div
-	on:click={toggle}
-	on:keypress={toggle}
-	role="cell"
-	tabindex={0}
-	class="font-bold py-0.5 w-full h-full"
->
-	<div class={classNames('flex items-center select-none', alignmentClass)}>
+<div class="font-bold py-0.5 w-full h-full">
+	<svelte:element
+		this={allowSorting ? 'button' : 'div'}
+		class={classNames('flex items-center select-none', alignmentClass)}
+		on:click={allowSorting ? toggle : undefined}
+	>
 		{#if superscriptText}
 			<div class="text-left">
 				<span class="font-normal text-xs">{superscriptText}</span><br />
@@ -74,7 +72,7 @@
 				aria-hidden="true"
 			/>
 		{/if}
-	</div>
+	</svelte:element>
 </div>
 
 <style>
