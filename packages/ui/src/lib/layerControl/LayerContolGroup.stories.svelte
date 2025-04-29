@@ -10,25 +10,28 @@
 
 <script lang="ts">
 	let optionsForGroup = [
-		{ id: 'bus', label: 'Bus stops' },
+		{ id: 'bus', name: 'transport', label: 'Bus stops' },
 		{
 			id: 'train',
+			name: 'transport',
 			label: 'Train stations',
 			hint: 'Excluding underground stations'
 		},
-		{ id: 'underground', label: 'Underground stations' },
-		{ id: 'taxi', label: 'Taxi ranks', disabled: true }
+		{ id: 'underground', name: 'transport', label: 'Underground stations' },
+		{ id: 'taxi', name: 'transport', label: 'Taxi ranks', disabled: true }
 	];
 
 	let optionsForGroup2 = [
-		{ id: 'bus', label: 'Bus stops' },
+		{ id: 'bus', name: 'transport', label: 'Bus stops' },
 		{
 			id: 'train',
+			name: 'transport',
 			label: 'Train stations',
 			hint: 'Excluding underground stations'
 		},
 		{
 			id: 'underground',
+			name: 'transport',
 			label: 'Underground stations',
 			disableOpacityControl: true,
 			disableSizeControl: true

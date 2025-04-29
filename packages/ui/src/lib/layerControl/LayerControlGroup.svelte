@@ -74,6 +74,7 @@
 	 * Each element of this array defines the control for a layer, and is an object with the properties:
 	 * * `id` (string)
 	 * * `label` (string) - the text displayed next to the checkbox
+	 * * `name` (string, optional) - for use by radio or checkbox buttons
 	 * * `hint` (string, optional) - help text to be displayed in tooltip
 	 *
 	 * * `disableColorControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
@@ -89,8 +90,8 @@
 	export let options: {
 		id: string;
 		label: string;
+		name?: string;
 		hint?: string;
-
 		disabled?: boolean;
 		disableColorControl?: boolean;
 		disableOpacityControl?: boolean;
@@ -138,6 +139,10 @@
 	export let showAllLabel = 'Show all';
 
 	export let mutuallyExclusive = false;
+
+	/**
+	 * Name of the radio button group (used only if `mutuallyExclusive` is true)
+	 */
 	export let name = '';
 
 	let allCheckboxesCheckedOrDisabled: boolean;
@@ -167,6 +172,8 @@
 			clearAll();
 		}
 	};
+
+	let optionIds = options.map((o) => o.id).join(' ');
 
 	let selectedOptionId: string | undefined; // only used by radioButtons, if mutuallyExclusive
 	const updateStateFromCheckbox = (selectedId: string | undefined) => {
@@ -247,6 +254,7 @@
 					label={showAllLabel}
 					checked={allCheckboxesCheckedOrDisabled}
 					indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+					aria-controls={optionIds}
 					on:change={toggleAll}
 					{disabled}
 				/>
@@ -257,6 +265,7 @@
 					<li>
 						<LayerControl
 							label={option.label}
+							name={option.name}
 							disabled={option.disabled || disabled}
 							hint={option.hint}
 							disableColorControl={disableColorControl || option.disableColorControl}
