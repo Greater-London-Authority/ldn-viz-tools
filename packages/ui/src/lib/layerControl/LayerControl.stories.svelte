@@ -49,7 +49,7 @@
 <Story name="Default" source />
 
 <Story name="With Label" source>
-	<LayerControl bind:state label="Borough" name="label" />
+	<LayerControl bind:state label="Borough" />
 </Story>
 
 <Story name="With Label and hint" source>
@@ -57,20 +57,19 @@
 		bind:state
 		label="Borough"
 		hint="Boundaries of each of Greater London's 32 boroughs"
-		name="label and hint"
 	/>
 </Story>
 
 <Story name="Hide color control" source>
-	<LayerControl bind:state label="Borough" disableColorControl name="hide color" />
+	<LayerControl bind:state label="Borough" disableColorControl />
 </Story>
 
 <Story name="Hide opacity control" source>
-	<LayerControl bind:state label="Borough" disableOpacityControl name="hide opacity" />
+	<LayerControl bind:state label="Borough" disableOpacityControl />
 </Story>
 
 <Story name="Hide size control" source>
-	<LayerControl bind:state label="Borough" disableSizeControl name="hide size" />
+	<LayerControl bind:state label="Borough" disableSizeControl />
 </Story>
 
 <Story name="Checkbox only" source>
@@ -80,20 +79,14 @@
 		disableOpacityControl
 		disableColorControl
 		disableSizeControl
-		name="checkbox only"
 	/>
 </Story>
 
 <Story name="Multiple control instances" source>
 	<div class="space-y-1">
-		<LayerControl bind:state={layerStates.boroughs} label="Borough" name="borough" />
-		<LayerControl
-			bind:state={layerStates.imd}
-			label="IMD"
-			hint="Index of Multiple Deprivation"
-			name="IMD"
-		/>
-		<LayerControl bind:state={layerStates.fuel_poverty} label="Fuel Poverty" name="fuel poverty" />
+		<LayerControl bind:state={layerStates.boroughs} label="Borough" />
+		<LayerControl bind:state={layerStates.imd} label="IMD" hint="Index of Multiple Deprivation" />
+		<LayerControl bind:state={layerStates.fuel_poverty} label="Fuel Poverty" />
 	</div>
 
 	<div class="mt-4 text-xs">
@@ -104,11 +97,15 @@
 </Story>
 
 <Story name="Disabled (Color)" source>
-	<LayerControl bind:state label="Borough" disableColorControl name="disabled color" />
+	<LayerControl bind:state label="Borough" disableColorControl />
 </Story>
 <Story name="Disabled (Opacity)" source>
-	<LayerControl bind:state label="Borough" disableOpacityControl name="disabled opacity" />
+	<LayerControl bind:state label="Borough" disableOpacityControl />
 </Story>
 <Story name="Disabled (Size)" source>
-	<LayerControl bind:state label="Borough" disableSizeControl name="disabled size" />
+	<LayerControl bind:state label="Borough" disableSizeControl />
+</Story>
+
+<Story name="With name prop" source>
+	<LayerControl bind:state label="Borough" name="borough" />
 </Story>
