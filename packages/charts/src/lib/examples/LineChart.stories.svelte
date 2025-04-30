@@ -24,7 +24,7 @@
 [ ] X & Y threshold line (and annotation)
 [ ] Range highlight 
 [x] X axis label, Y axis label
-[ ] area chart, as simple addition to line? (not stacked)
+[x] area chart, as simple addition to line? (not stacked)
 [ ] non zero baseline (small change)
 -->
 
