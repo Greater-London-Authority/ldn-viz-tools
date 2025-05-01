@@ -27,7 +27,9 @@ export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultTip: () => defaultTip(),
 	defaultAnnotationTip: () => defaultAnnotationTip(),
 	defaultAnnotationText: () => defaultAnnotationText(),
-	defaultAnnotationRange: () => defaultAnnotationRange()
+	defaultAnnotationRange: () => defaultAnnotationRange(),
+	defaultBar: () => defaultBar(),
+	defaultRect: () => defaultRect()
 };
 
 export const getDefaultPlotStyles = () => {
@@ -182,6 +184,16 @@ const defaultAnnotationText = () => ({
 const defaultAnnotationRange = () => ({
 	fill: get(currentTheme).color.chart.label, // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	opacity: 0.1
+});
+
+const defaultRect = () => ({
+	fill: get(currentTheme).color.data.primary,
+	stroke: get(currentTheme).color.chart.background
+});
+
+const defaultBar = () => ({
+	fill: get(currentTheme).color.data.primary,
+	stroke: get(currentTheme).color.chart.background
 });
 
 /**
