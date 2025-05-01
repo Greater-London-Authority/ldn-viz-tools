@@ -184,6 +184,16 @@ const defaultAnnotationRange = () => ({
 	opacity: 0.1
 });
 
+const defaultRect = () => ({
+	fill: get(currentTheme).color.data.primary,
+	stroke: get(currentTheme).color.chart.background
+});
+
+const defaultBar = () => ({
+	fill: get(currentTheme).color.data.primary,
+	stroke: get(currentTheme).color.chart.background
+});
+
 /**
  * One limitation of Observable Plot is that  things that we would like to be channels are options.
  * The documentation states:
