@@ -27,7 +27,9 @@ export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultTip: () => defaultTip(),
 	defaultAnnotationTip: () => defaultAnnotationTip(),
 	defaultAnnotationText: () => defaultAnnotationText(),
-	defaultAnnotationRange: () => defaultAnnotationRange()
+	defaultAnnotationRange: () => defaultAnnotationRange(),
+	defaultBar: () => defaultBar(),
+	defaultRect: () => defaultRect()
 };
 
 export const getDefaultPlotStyles = () => {

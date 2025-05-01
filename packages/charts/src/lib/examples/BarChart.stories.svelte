@@ -36,8 +36,6 @@
 	// Spec and data for single variable bar example (default)
 	$: singleVariableData = demoData.filter((d) => d.Variable == 'Variable A');
 	$: barData = aggregateData(singleVariableData);
-	$: averaged = tidy(demoData, groupBy('Variable', summarize({ Average: mean('Value') })));
-	$: console.log(averaged);
 	let barSpec: any;
 	$: if ($currentTheme) {
 		barSpec = {
@@ -57,6 +55,7 @@
 		};
 	}
 
+	// Spec and data for multi variable stacked bar example
 	$: stackedBarData = aggregateData(demoData);
 	$: stackedBarSpec = {
 		x: { insetLeft: 80, interval: 'year', label: 'Year' },
@@ -84,6 +83,7 @@
 		]
 	};
 
+	// Spec and data for multi variable stacked rect example
 	$: rectData = demoData;
 	$: rectSpec = {
 		x: { insetLeft: 80, interval: 'year', label: 'Year' },
@@ -117,6 +117,7 @@
 		]
 	};
 
+	// Spec and data for multi variable faceted rect example
 	$: facetedRectData = demoData;
 	$: facetedRectSpec = {
 		x: { insetLeft: 80, interval: 'year', label: 'Year' },
