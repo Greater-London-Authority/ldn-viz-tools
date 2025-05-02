@@ -633,3 +633,29 @@
 		</SidebarFooter>
 	</Sidebar>
 </Story>
+
+<Story name="With Tabs and custom ariaLabels" source>
+	<Sidebar {tabs} sidebarAriaLabel="Sidebar for viewing controls to filter main page content">
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<!-- COMPONENT PASSED AS CONTENT IN TABS ARRAY WILL RENDER HERE-->
+		<SidebarFooter slot="footer">
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
+		</SidebarFooter>
+	</Sidebar>
+</Story>

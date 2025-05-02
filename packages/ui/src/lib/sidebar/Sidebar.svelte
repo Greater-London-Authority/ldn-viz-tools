@@ -65,9 +65,14 @@
 	$: component = tabs.find((tab) => tab.id === selectedValue)?.content;
 
 	/**
+	 * Aria label to describe purpose of sidebar
+	 */
+	export let sidebarAriaLabel: string = 'Sidebar with information and controls';
+
+	/**
 	 * Aria label applied to tabs list
 	 */
-	export let ariaLabel: string = 'Switch sidebar panel';
+	export let tabsAriaLabel: string = 'Switch sidebar panel';
 
 	/**
 	 * Randomly generated id for sidebar container. Used by `SidebarToggle` to tell screen readers what the toggle controls.
@@ -98,7 +103,7 @@
 	{#if tabs.length}
 		<div class={classNames('absolute bg-color-container-level-0', tabPlacementClasses)}>
 			<!-- A `<SidebarTabList>`, if the sidebar has tabs-->
-			<SidebarTabList {tabs} {ariaLabel} bind:selectedValue />
+			<SidebarTabList {tabs} ariaLabel={tabsAriaLabel} bind:selectedValue />
 		</div>
 	{:else if $sidebarAlwaysOpen !== 'true'}
 		<div class={classNames('absolute', togglePlacementClasses)}>
@@ -107,8 +112,9 @@
 	{/if}
 
 	{#if $sidebarIsOpen}
-		<div
+		<aside
 			id={sidebarId}
+			aria-label={sidebarAriaLabel}
 			class={classNames('flex', heightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[placement] }}
 		>
@@ -167,6 +173,6 @@
 					</div>
 				{/if}
 			</div>
-		</div>
+		</aside>
 	{/if}
 </div>
