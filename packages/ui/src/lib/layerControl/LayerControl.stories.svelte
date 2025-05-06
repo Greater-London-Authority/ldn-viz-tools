@@ -34,7 +34,7 @@
 
 <Template let:args>
 	<div class="w-96">
-		<LayerControl bind:state {...args} />
+		<LayerControl bind:state {...args} name="default" />
 	</div>
 	<pre class="mt-4 text-xs">{JSON.stringify(state, null, 2)}</pre>
 
@@ -104,4 +104,8 @@
 </Story>
 <Story name="Disabled (Size)" source>
 	<LayerControl bind:state label="Borough" disableSizeControl />
+</Story>
+
+<Story name="With name prop" source>
+	<LayerControl bind:state label="Borough" name="borough" />
 </Story>
