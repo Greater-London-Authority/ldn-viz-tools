@@ -140,6 +140,8 @@
 			clearAll();
 		}
 	};
+
+	let optionIds = options.map((o) => o.id).join(' ');
 </script>
 
 <InputWrapper
@@ -165,10 +167,12 @@
 			<Checkbox
 				id={randomId()}
 				form=""
+				name="all"
 				label="Select all"
 				color="#3787D2"
 				checked={allCheckboxesCheckedOrDisabled}
 				indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+				aria-controls={optionIds}
 				on:change={toggleAll}
 				{disabled}
 			/>

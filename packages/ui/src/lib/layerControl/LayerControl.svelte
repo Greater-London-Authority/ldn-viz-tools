@@ -91,7 +91,8 @@
 	export let optionId = randomId();
 
 	/**
-	 * Name of the radio button group  (used only if `mutuallyExclusive` is true)
+	 * Name of the radio/checkbox button group. If `mutuallyExclusive` is true,
+	 * this is required (should have the same value for all radio buttons in group).
 	 */
 	export let name = '';
 
@@ -114,7 +115,7 @@
 				{name}
 			/>
 		{:else}
-			<Checkbox bind:checked={state.visible} label="" {disabled} id={optionId} />
+			<Checkbox bind:checked={state.visible} label="" {disabled} id={optionId} {name} />
 		{/if}
 	</div>
 
