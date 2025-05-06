@@ -1,5 +1,19 @@
 # ldn-viz-tools-ui
 
+## 19.0.0
+
+### Major Changes
+
+- 84e5083: CHANGED: `Sidebar` is now an aside and takes `sidebarAriaLabel` and `tabsAriaLabel` optional props for better accessibility
+
+### Minor Changes
+
+- 671dffc: CHANGED: `CheckboxGroup`, `LayerControl` and `LayerControlGroup` components
+
+  - `LayerControlGroup` now passes `name` into `LayerControl`
+  - `LayerControl` now passes `name` into `Checkbox`, in addition to `Radio`
+  - For accessibility: `LayerControlGroup` and `CheckboxGroup` now have an `aria-controls` attribute on the checkbox that toggles all controls, with a value equal to the ids for all controls
+
 ## 18.1.0
 
 ### Minor Changes
