@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 7.5.0
+
+### Minor Changes
+
+- 96ef243: FIXED: reduced the z-index of the `MapPopover`, so it appears behind a modal or sidebar.
+
 ## 7.4.0
 
 ### Minor Changes
