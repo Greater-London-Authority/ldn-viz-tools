@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-	import { ChevronDown, ChevronRight, ChevronUp } from '@steeze-ui/heroicons';
+	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
