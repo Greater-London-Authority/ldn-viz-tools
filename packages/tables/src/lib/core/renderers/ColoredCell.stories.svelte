@@ -12,7 +12,7 @@
 </script>
 
 <Template let:args>
-	<ColoredCell value={0.5} colorScale={() => 'red'} {...args} />
+	<ColoredCell value={0.5} color={() => 'red'} {...args} />
 </Template>
 
 <Story name="Default" source />

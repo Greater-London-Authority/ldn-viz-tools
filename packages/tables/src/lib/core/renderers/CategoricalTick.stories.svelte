@@ -14,7 +14,7 @@
 		},
 		args: {
 			value: 0.5,
-			colorScale: scaleOrdinal()
+			color: scaleOrdinal()
 				.domain(['a', 'b', 'c', 'd'])
 				.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']),
 
