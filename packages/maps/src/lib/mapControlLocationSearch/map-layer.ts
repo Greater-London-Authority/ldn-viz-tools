@@ -1,13 +1,13 @@
 import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-import type { GeolocationCoords, GeolocationBounds, Geolocation } from '@ldn-viz/ui';
+import type { Geolocation, GeolocationBounds, GeolocationCoords } from '@ldn-viz/ui';
 
 import type {
+	FlyToOptions,
+	GeoJSONSource,
+	LayerSpecification,
 	Map,
 	Marker,
-	GeoJSONSource,
-	SourceSpecification,
-	LayerSpecification,
-	FlyToOptions
+	SourceSpecification
 } from 'maplibre-gl';
 
 import type { FeatureCollection } from 'geojson';
@@ -78,6 +78,7 @@ export const setFeature = (
 
 	(map.getSource(sourceId) as GeoJSONSource)?.setData(
 		createFeatureCollection(location) as FeatureCollection
+		//createFeatureGeometryPoint(location)
 	);
 
 	addMarkerAndFlyToLocation(ref, map, mapgl, location, flyOptions);
