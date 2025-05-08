@@ -134,6 +134,11 @@
 	export let disableSizeControl = false;
 
 	/**
+	 * Optional array of colour tokens for use by `ColorPicker`. Defaults to categorical colours.
+	 */
+	export let colorNames: string[] = [];
+
+	/**
 	 * Message to be displayed next to the checkbox that toggles the visibility of all layers.
 	 */
 	export let showAllLabel = 'Show all';
@@ -238,6 +243,7 @@
 							disabled={option.disabled || disabled}
 							bind:selectedOptionId
 							mutuallyExclusive
+							{colorNames}
 						/>
 					</li>
 				{/each}
@@ -274,6 +280,7 @@
 							disableSizeControl={disableSizeControl || option.disableSizeControl}
 							bind:state={state[option.id]}
 							{controlsInUse}
+							{colorNames}
 						/>
 					</li>
 				{/each}

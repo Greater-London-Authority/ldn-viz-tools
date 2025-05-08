@@ -10,6 +10,7 @@
 
 <script lang="ts">
 	import { colorTokenNameToRGBArray, currentTheme, tokenNameToValue } from '../theme/themeStore';
+	import { colorNames } from './layerControlUtils';
 
 	let layerStates = {
 		boroughs: {
@@ -24,6 +25,11 @@
 		},
 		fuel_poverty: {
 			colorName: 'data.categorical.orange',
+			visible: true,
+			opacity: 1.0
+		},
+		customColors: {
+			colorName: 'palette.blue.600',
 			visible: true,
 			opacity: 1.0
 		}
@@ -108,4 +114,9 @@
 
 <Story name="With name prop" source>
 	<LayerControl bind:state label="Borough" name="borough" />
+</Story>
+
+<!-- Note, this colour combination isn't accessible but is demonstrating potential for customising colours where necessary. -->
+<Story name="With custom colours" source>
+	<LayerControl bind:state={layerStates.customColors} label="Borough" {colorNames} />
 </Story>

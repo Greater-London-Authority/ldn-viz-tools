@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import LayerControlGroup from './LayerControlGroup.svelte';
+	import { colorNames } from './layerControlUtils';
 
 	export const meta = {
 		title: 'Ui/Components/Layer Controls/LayerControlGroup',
@@ -77,6 +78,26 @@
 		},
 		underground: {
 			colorName: 'data.categorical.darkpink',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		}
+	};
+	let state3 = {
+		bus: {
+			colorName: 'palette.blue.600',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		train: {
+			colorName: 'palette.green.600',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		underground: {
+			colorName: 'palette.darkpink.600',
 			visible: true,
 			opacity: 1.0,
 			size: 1
@@ -206,4 +227,10 @@ For example, choropleth layers would cover each other.
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
+<!-- Note, this colour combination isn't accessible but is demonstrating potential for customising colours where necessary. -->
+<Story name="With custom colours" source>
+	<LayerControlGroup bind:options={optionsForGroup} bind:state={state3} {ariaLabel} {colorNames} />
+	<pre class="mt-4 text-xs">{JSON.stringify(state3, null, 2)}</pre>
 </Story>
