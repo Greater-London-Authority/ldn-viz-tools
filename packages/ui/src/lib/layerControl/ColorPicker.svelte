@@ -13,7 +13,12 @@
 
 	export let disabled = false;
 
-	const colorNames = [
+	/**
+	 * Optional custom colours to choose from. If these don't exist, default to categoricalColors.
+	 */
+	export let colorNames;
+
+	const categoricalColors = [
 		'data.categorical.blue',
 		'data.categorical.darkpink',
 		'data.categorical.pink',
@@ -26,6 +31,10 @@
 		'data.neutral.0',
 		'data.neutral.1'
 	];
+
+	if (!colorNames.length) {
+		colorNames = categoricalColors;
+	}
 
 	let isOpen = false;
 </script>

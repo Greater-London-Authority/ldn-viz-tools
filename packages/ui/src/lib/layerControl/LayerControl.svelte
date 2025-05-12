@@ -29,6 +29,11 @@
 	export let disableSizeControl = false;
 
 	/**
+	 * Optional array of colour tokens for use by `ColorPicker`. Defaults to categorical colours.
+	 */
+	export let colorNames: string[] = [];
+
+	/**
 	 * the name of the layer
 	 */
 	export let label = '';
@@ -121,6 +126,7 @@
 
 	{#if controlsInUse.includes('color')}
 		<ColorPicker
+			{colorNames}
 			bind:colorName={state.colorName}
 			disabled={disabled || disableColorControl}
 			{label}
