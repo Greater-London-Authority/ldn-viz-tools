@@ -7,11 +7,12 @@
 	 */
 
 	import { format } from 'd3-format';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * Color of the tick, in any CSS format (color name, hex-string, `rgb()` notation, etc.).
 	 */
-	export let color = 'steelblue';
+	export let color: string | ((value: number) => string) = 'steelblue';
 
 	/**
 	 * If `true`, then the numerical value will be displayed as text beside the symbol.
@@ -44,7 +45,7 @@
 <div
 	class="w-[3px] h-full top-0 transform -translate-x-1/2 z-[-1] relative"
 	style="width: 3px"
-	style:background={color}
+	style:background={getVal(value, color)}
 	style:left={fPercentage(d)}
 >
 	{#if showValues}
