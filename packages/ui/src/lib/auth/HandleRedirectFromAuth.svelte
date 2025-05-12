@@ -32,7 +32,7 @@
 				// schedule to re-run
 				// Store the new access token in local storage or session storage
 
-				setTimeout(() => refreshAccessToken(), data.expires_in * 1000 * 0.8);
+				setTimeout(() => refreshAccessToken(oauth_config), data.expires_in * 1000 * 0.8);
 			})
 			.catch((error) => {
 				console.error('Error refreshing access token:', error);
@@ -75,7 +75,7 @@
 					accessToken.set(data.access_token);
 					refreshToken.set(data.refresh_token);
 
-					setTimeout(() => refreshAccessToken(), data.expires_in * 1000 * 0.8);
+					setTimeout(() => refreshAccessToken(oauth_config), data.expires_in * 1000 * 0.8);
 
 					const tokenObj = parseJwt(data.access_token);
 					userName.set(tokenObj.preferred_username);
