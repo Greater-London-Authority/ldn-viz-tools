@@ -1,5 +1,15 @@
 # ldn-viz-tools-ui
 
+## 19.1.0
+
+### Minor Changes
+
+- 50c7b8b: CHANGED: `LayerControl`, `LayerControlGroup` and `ColorPicker` take an optional array of `colorNames` to allow customisation of color picker
+
+### Patch Changes
+
+- b4a855d: FIXED: fixed refresh of OAuth tokens by `HandleRedirectFromAuth`
+
 ## 19.0.0
 
 ### Major Changes
