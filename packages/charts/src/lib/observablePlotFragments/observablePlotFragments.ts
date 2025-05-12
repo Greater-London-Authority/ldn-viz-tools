@@ -64,8 +64,7 @@ const defaultSizeFacet = {
 const defaultColor = {
 	legend: true,
 	swatchSize: 16,
-	className: 'defaultColorLegendLabel',
-	type: 'ordinal'
+	className: 'defaultColorLegendLabel'
 };
 
 const defaultXScale = {
