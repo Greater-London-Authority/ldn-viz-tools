@@ -143,7 +143,7 @@ const defaultArea = () => ({
 	stroke: get(currentTheme).color.data.primary,
 	strokeWidth: 0,
 	fill: get(currentTheme).color.data.primary,
-	opacity: 0.2
+	fillOpacity: 0.2
 });
 
 const defaultRule = () => ({
