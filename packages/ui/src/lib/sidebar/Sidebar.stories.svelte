@@ -1,5 +1,5 @@
 <script context="module">
-	import { RelativeWrapper } from '../../../../../apps/docs';
+	import { RelativeWrapper, SidebarTopContext } from '../../../../../apps/docs';
 	import Sidebar from './Sidebar.svelte';
 
 	export const meta = {
@@ -31,7 +31,7 @@
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { Story, Template, type DecoratorReturnType } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import LogoCIU from '../logos/LogoCIU.svelte';
@@ -62,6 +62,8 @@
 		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
 		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
 	];
+
+	const horizontalContext = SidebarTopContext as unknown as DecoratorReturnType;
 </script>
 
 <Template let:args>
@@ -636,6 +638,32 @@
 
 <Story name="With Tabs and custom ariaLabels" source>
 	<Sidebar {tabs} sidebarAriaLabel="Sidebar for viewing controls to filter main page content">
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+		<!-- COMPONENT PASSED AS CONTENT IN TABS ARRAY WILL RENDER HERE-->
+		<SidebarFooter slot="footer">
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
+<Story name="Top Placement with tabs" source decorators={[() => horizontalContext]}>
+	<Sidebar {tabs}>
 		<SidebarHeader title="Main sidebar title" slot="header">
 			<svelte:fragment slot="subTitle">
 				<p>

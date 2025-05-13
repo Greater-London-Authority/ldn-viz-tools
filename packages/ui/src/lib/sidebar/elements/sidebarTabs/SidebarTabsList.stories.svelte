@@ -11,8 +11,7 @@
 </script>
 
 <script lang="ts">
-	import { SidebarTopContext } from '@ldn-viz/docs';
-	import { Story, Template, type DecoratorReturnType } from '@storybook/addon-svelte-csf';
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 
@@ -28,8 +27,6 @@
 		{ id: 'averages', label: 'Averages', icon: Square3Stack3d, content: NonIdealState },
 		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: NonIdealState }
 	];
-
-	const horizontalContext = SidebarTopContext as unknown as DecoratorReturnType;
 </script>
 
 <Template let:args>
@@ -38,8 +35,8 @@
 
 <Story name="Default" source args={{ tabs: tabs }} />
 
-<Story name="Horizontal with Icons" decorators={[() => horizontalContext]}>
-	<SidebarTabList {tabs} bind:selectedValue />
+<Story name="Horizontal with Icons">
+	<SidebarTabList {tabs} placement="top" bind:selectedValue />
 </Story>
 
 <!-- A custom event can be passed to onChange -->

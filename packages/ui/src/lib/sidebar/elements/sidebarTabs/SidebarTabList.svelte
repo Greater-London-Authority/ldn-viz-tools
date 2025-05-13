@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import { get, type Writable } from 'svelte/store';
-	import { tabLayoutOverride, tabThemeOverride } from '../../../sidebar/sidebarUtils';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getContext, setContext } from 'svelte';
+	import { get, writable, type Writable } from 'svelte/store';
 	import type { PlacementType } from '../../../sidebar/types';
-	import TabList from '../../../tabs/TabList.svelte';
+	import { tabFocus } from '../../../tabs/actions';
 	import type { Tab } from '../../../tabs/types';
 	import { classNames } from '../../../utils/classNames';
-
-	// Get the sidebar placement prop from context and use that to apply classes that make the tabs run horizontal or vertical
-	const sidebarPlacementFromContext = getContext<Writable<PlacementType>>('sidebarPlacement');
+	import { tabLayoutOverride } from '../../sidebarUtils';
+	import SidebarTabLabel from './SidebarTabLabel.svelte';
 
 	/**
 	 * List of tabs. An array, of which each entry is an object with the following properties:
@@ -26,20 +25,49 @@
 	export let selectedValue: Tab['id'] = tabs[0].id;
 
 	/**
-	 * orientation of the list of tabs
-	 */
-	export let orientation: 'vertical' | 'horizontal' = 'vertical';
-
-	/**
 	 * Enables screen reader to describe purpose of tab list
 	 */
 	export let ariaLabel: string = 'Switch sidebar panel';
+
+	/**
+	 * Sidebar placement retrieved from context and passed down, to inform orientation of TabList
+	 */
+	export let placement: PlacementType = 'right';
+
+	/**
+	 * orientation of the list of tabs, used for screen reader and keyboard accessibility to move tabFocus correctly
+	 */
+	const getOrientationFromContext = (placement: PlacementType): 'vertical' | 'horizontal' => {
+		if (placement == 'right' || placement == 'left') {
+			return 'vertical';
+		} else return 'horizontal';
+	};
+
+	$: orientation = getOrientationFromContext(placement);
 
 	// Context required to make sidebar open/ close
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
 
 	// Context provided by wrapping component to force always open
 	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
+
+	const val: Writable<Tab['id']> = writable(selectedValue);
+	val.subscribe((newVal) => (selectedValue = newVal));
+
+	const respondToExternalChange = (newVal: Tab['id']) => {
+		if ($val !== newVal) {
+			$val = newVal;
+		}
+	};
+	$: respondToExternalChange(selectedValue);
+
+	setContext('sidebarTabContext', {
+		selectedValue: val
+	});
+
+	$: sidebarTabListClasses = classNames(tabLayoutOverride[placement]);
+
+	const iconClasses = classNames('h-5 w-5 mb-1');
 
 	export let onChange = (tabId: Tab['id']) => {
 		if (get(sidebarIsOpen) === false) {
@@ -58,13 +86,28 @@
 			selectedValue = tabId;
 		}
 	};
+
+	export let handleSelect = (id: Tab['id']) => {
+		onChange(id);
+		$val = id;
+	};
 </script>
 
-<TabList
-	bind:selectedValue
-	{ariaLabel}
-	{orientation}
-	{tabs}
-	class={classNames(tabLayoutOverride[$sidebarPlacementFromContext], tabThemeOverride)}
-	{onChange}
-/>
+<div
+	class={sidebarTabListClasses}
+	role="tablist"
+	aria-label={ariaLabel}
+	aria-orientation={orientation}
+	use:tabFocus={{ orientation }}
+>
+	{#each tabs as tab}
+		<SidebarTabLabel tabId={tab.id} {handleSelect}>
+			{#if tab.icon}
+				<Icon src={tab.icon} theme="solid" class={iconClasses} aria-hidden="true" />
+			{:else if tab.rawIcon}
+				<svelte:component this={tab.rawIcon} class={iconClasses} aria-hidden="true" />
+			{/if}
+			{tab.label}
+		</SidebarTabLabel>
+	{/each}
+</div>
