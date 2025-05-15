@@ -48,7 +48,9 @@
 	// add ring to currently selected colour
 	$: selectedClass = (colorOption: string) => {
 		return classNames(
-			colorName == colorOption ? 'ring-2 ring-offset-2 ring-color-text-primary' : ''
+			colorName == colorOption
+				? 'ring-2 ring-offset-2 ring-color-text-primary ring-offset-color-container-level-0'
+				: ''
 		);
 	};
 </script>
@@ -84,7 +86,7 @@
 							isOpen = false;
 						}}
 						class={classNames(
-							'rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-color-text-primary',
+							'rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-color-text-primary hover:ring-offset-color-container-level-0',
 							selectedClass(colorOption)
 						)}
 					>
