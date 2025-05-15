@@ -4,12 +4,13 @@
 
 	import { NoSymbol } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
 	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
+	import Tooltip from '../tooltip/Tooltip.svelte';
+	import { classNames } from '../utils/classNames';
 
 	export let label;
 
-	export let colorName = 'data.primary';
+	export let colorName = 'data.categorical.blue';
 
 	export let disabled = false;
 
@@ -37,6 +38,19 @@
 	}
 
 	let isOpen = false;
+
+	const trimTokenName = (token: string) => {
+		const array = token.split('.');
+		array.shift();
+		return array.join(' ');
+	};
+
+	// add ring to currently selected colour
+	$: selectedClass = (colorOption: string) => {
+		return classNames(
+			colorName == colorOption ? 'ring-2 ring-offset-2 ring-color-text-primary' : ''
+		);
+	};
 </script>
 
 {#if disabled}
@@ -61,15 +75,27 @@
 
 		<div class="flex flex-wrap gap-2">
 			{#each colorNames as colorOption}
-				<button
-					class="w-6 h-6 rounded-full"
-					style:background={tokenNameToValue(colorOption, $currentTheme)}
-					aria-label="Color code: {colorOption}"
-					on:click={() => {
-						colorName = colorOption;
-						isOpen = false;
-					}}
-				/>
+				<Tooltip>
+					<Trigger
+						slot="trigger"
+						size="xs"
+						on:click={() => {
+							colorName = colorOption;
+							isOpen = false;
+						}}
+						class={classNames(
+							'rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-color-text-primary',
+							selectedClass(colorOption)
+						)}
+					>
+						<div
+							class={classNames('w-6 h-6 rounded-full')}
+							style:background={tokenNameToValue(colorOption, $currentTheme)}
+						/>
+					</Trigger>
+					<span class="sr-only">Color code:</span>
+					{trimTokenName(colorOption)}
+				</Tooltip>
 			{/each}
 		</div>
 	</Popover>

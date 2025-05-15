@@ -14,7 +14,7 @@
 
 	let layerStates = {
 		boroughs: {
-			colorName: 'data.primary',
+			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0
 		},
