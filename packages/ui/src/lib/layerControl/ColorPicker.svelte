@@ -49,7 +49,7 @@
 	$: selectedClass = (colorOption: string) => {
 		return classNames(
 			colorName == colorOption
-				? 'ring-2 ring-offset-2 ring-color-text-primary ring-offset-color-container-level-0'
+				? 'ring-2 ring-offset-2 ring-color-ui-border-primary ring-offset-color-container-level-0'
 				: ''
 		);
 	};
@@ -86,7 +86,7 @@
 							isOpen = false;
 						}}
 						class={classNames(
-							'rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-color-text-primary hover:ring-offset-color-container-level-0',
+							'rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-color-ui-border-primary hover:ring-offset-color-container-level-0',
 							selectedClass(colorOption)
 						)}
 					>
