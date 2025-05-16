@@ -10,7 +10,7 @@
 
 	export let label;
 
-	export let colorName = 'data.categorical.blue';
+	export let activeColorName = 'data.categorical.blue';
 
 	export let disabled = false;
 
@@ -45,14 +45,11 @@
 		return array.join(' ');
 	};
 
-	// add ring to currently selected colour
-	$: selectedClass = (colorOption: string) => {
-		return classNames(
-			colorName == colorOption
-				? 'ring-2 ring-offset-2 ring-color-ui-border-primary ring-offset-color-container-level-0'
-				: ''
-		);
-	};
+	const activeOptionClasses =
+		'ring-inset ring-2 ring-offset-2 ring-color-ui-background-secondary hover:ring-offset-color-ui-border-primary focus-visible:ring-offset-color-ui-border-primary';
+
+	const optionClasses =
+		'rounded-full bg-color-container-level-0 hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-ui-border-secondary hover:ring-2 hover:ring-color-ui-background-secondary focus-visible:ring-offset-color-ui-border-secondary';
 </script>
 
 {#if disabled}
@@ -67,7 +64,7 @@
 		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} layer colour picker">
 			<div
 				class="w-[22px] h-[22px] relative border rounded-full"
-				style:background={tokenNameToValue(colorName, $currentTheme)}
+				style:background={tokenNameToValue(activeColorName, $currentTheme)}
 			/>
 		</Trigger>
 
@@ -75,23 +72,24 @@
 
 		<span class="text-xs mb-2 inline-block">Click to assign a colour to this layer.</span>
 
-		<div class="flex flex-wrap gap-2">
+		<div class="flex flex-wrap gap-0.5">
 			{#each colorNames as colorOption}
 				<Tooltip>
 					<Trigger
 						slot="trigger"
-						size="xs"
+						variant="square"
+						size="sm"
+						class={classNames(
+							activeColorName === colorOption ? activeOptionClasses : '',
+							optionClasses
+						)}
 						on:click={() => {
-							colorName = colorOption;
+							activeColorName = colorOption;
 							isOpen = false;
 						}}
-						class={classNames(
-							'rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-color-ui-border-primary hover:ring-offset-color-container-level-0',
-							selectedClass(colorOption)
-						)}
 					>
 						<div
-							class={classNames('w-6 h-6 rounded-full')}
+							class="w-6 h-6 rounded-full"
 							style:background={tokenNameToValue(colorOption, $currentTheme)}
 						/>
 					</Trigger>
