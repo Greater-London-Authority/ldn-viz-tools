@@ -127,7 +127,7 @@
 	{#if controlsInUse.includes('color')}
 		<ColorPicker
 			{colorNames}
-			bind:colorName={state.colorName}
+			bind:activeColorName={state.colorName}
 			disabled={disabled || disableColorControl}
 			{label}
 		/>

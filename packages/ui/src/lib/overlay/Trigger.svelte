@@ -44,7 +44,17 @@
 	const { action, actionProps } = getContext<TriggerFuncs>('triggerFuncs');
 </script>
 
-<Button {size} class={$$props.class} {variant} {emphasis} {slim} {ariaLabel} {action} {actionProps}>
+<Button
+	{size}
+	class={$$props.class}
+	{variant}
+	{emphasis}
+	{slim}
+	{ariaLabel}
+	{action}
+	{actionProps}
+	on:click
+>
 	<slot>
 		{hintLabel}
 

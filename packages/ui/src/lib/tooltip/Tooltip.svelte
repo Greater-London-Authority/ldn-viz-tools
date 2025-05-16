@@ -41,7 +41,8 @@
 		positioning: { placement },
 		openDelay: 0,
 		closeDelay: 0,
-		closeOnPointerDown: false
+		closeOnPointerDown: false,
+		disableHoverableContent: true
 	});
 
 	/**

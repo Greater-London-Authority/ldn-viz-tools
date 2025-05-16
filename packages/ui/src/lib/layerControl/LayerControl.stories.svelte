@@ -14,7 +14,7 @@
 
 	let layerStates = {
 		boroughs: {
-			colorName: 'data.primary',
+			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0
 		},
@@ -44,11 +44,11 @@
 	</div>
 	<pre class="mt-4 text-xs">{JSON.stringify(state, null, 2)}</pre>
 
-	<p>
-		Color is: {tokenNameToValue(state.colorName, $currentTheme)} or [{colorTokenNameToRGBArray(
-			state.colorName,
-			$currentTheme
-		)}]
+	<p class="mt-4 text-sm">
+		Active Color is: <span style={`color: ${tokenNameToValue(state.colorName, $currentTheme)}`}>
+			{tokenNameToValue(state.colorName, $currentTheme)}
+		</span>
+		or [{colorTokenNameToRGBArray(state.colorName, $currentTheme)}]
 	</p>
 </Template>
 
