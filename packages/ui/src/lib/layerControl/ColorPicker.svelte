@@ -49,7 +49,7 @@
 		'ring-inset ring-2 ring-offset-2 ring-color-ui-background-secondary ring-offset-color-ui-border-primary hover:ring-offset-color-ui-border-primary focus-visible:ring-offset-color-ui-border-primary';
 
 	const optionClasses =
-		'rounded-full bg-color-container-level-0 hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-ui-border-secondary hover:ring-2 hover:ring-color-ui-background-secondary focus-visible:ring-offset-color-ui-border-secondary';
+		'rounded-full bg-color-container-level-0 hover:bg-color-container-level-0 hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-ui-border-secondary hover:ring-2 hover:ring-color-ui-background-secondary focus-visible:ring-offset-color-ui-border-secondary';
 </script>
 
 {#if disabled}
