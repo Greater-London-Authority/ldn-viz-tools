@@ -25,13 +25,17 @@ export const tabPlacementLookup: PlacementLookup = {
 };
 
 export const tabLayoutOverride: PlacementLookup = {
-	left: '!w-20 !flex-col !space-y-0.5 !pb-0 !float-none',
-	right: '!w-20 !flex-col !space-y-0.5 !pb-0 !float-none',
-	top: '!w-auto !flex !flex-row !space-y-0 !pb-0 !float-left',
-	bottom: '!w-auto !flex !flex-row !space-y-0 !pb-0 !float-left'
+	vertical: '!w-20 !flex-col !space-y-0.5 !p-0 !float-none',
+	horizontal: '!w-auto !flex !flex-row !space-y-0 !p-0 !float-left !border-b-0'
 };
 
+// These classes overide the theme of default tabs in a sidebar context
 export const tabThemeOverride = '[&>button]:bg-color-container-level-0 [&>button]:no-underline';
+
+// These classes overide the 'horizontal' style of tablabels in a sidebar context
+export const tabLabelOverride =
+	'[&>button]:text-xs [&>button]:w-20 [&>button]:h-20 [&>button]:p-2 [&>button]:flex [&>button]:flex-col [&>button]:items-center [&>button]:justify-center [&>button]:text-center';
+
 // The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {
 	standard: {

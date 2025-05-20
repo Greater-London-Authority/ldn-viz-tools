@@ -12,9 +12,10 @@
 
 	export let handleSelect;
 
-	const { selectedValue, orientation } = getContext<{
+	export let orientation: 'vertical' | 'horizontal' = 'vertical';
+
+	const { selectedValue } = getContext<{
 		selectedValue: Writable<string>;
-		orientation: 'vertical' | 'horizontal';
 	}>('tabContext');
 
 	$: isSelected = tabId === $selectedValue;
@@ -24,10 +25,9 @@
 		horizontal: 'text-base py-2 px-4 flex items-center select-none'
 	};
 
-	$: tabLabelClasses = classNames(
+	const tabLabelClasses = classNames(
 		'bg-color-input-background-off text-color-text-primary underline hover:bg-color-input-background-hover hover:no-underline',
-		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-action-primary-focussed focus:ring-2 focus:outline-none focus:ring-color-ui-background-primary',
-		orientationClasses[orientation]
+		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-action-primary-focussed focus:ring-2 focus:outline-none focus:ring-color-ui-background-primary'
 	);
 </script>
 
