@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { get, type Writable } from 'svelte/store';
-	import { tabLayoutOverride, tabThemeOverride } from '../../../sidebar/sidebarUtils';
+	import {
+		tabLabelOverride,
+		tabLayoutOverride,
+		tabThemeOverride
+	} from '../../../sidebar/sidebarUtils';
 	import type { PlacementType } from '../../../sidebar/types';
 	import TabList from '../../../tabs/TabList.svelte';
 	import type { Tab } from '../../../tabs/types';
@@ -28,7 +32,11 @@
 	/**
 	 * orientation of the list of tabs
 	 */
-	export let orientation: 'vertical' | 'horizontal' = 'vertical';
+	let orientation: 'vertical' | 'horizontal';
+
+	$: orientation = ['top', 'bottom'].includes($sidebarPlacementFromContext)
+		? 'horizontal'
+		: 'vertical';
 
 	/**
 	 * Enables screen reader to describe purpose of tab list
@@ -65,6 +73,6 @@
 	{ariaLabel}
 	{orientation}
 	{tabs}
-	class={classNames(tabLayoutOverride[$sidebarPlacementFromContext], tabThemeOverride)}
 	{onChange}
+	class={classNames(tabLayoutOverride[orientation], tabThemeOverride, tabLabelOverride)}
 />
