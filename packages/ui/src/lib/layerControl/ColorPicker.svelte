@@ -4,12 +4,13 @@
 
 	import { NoSymbol } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-
 	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
+	import Tooltip from '../tooltip/Tooltip.svelte';
+	import { classNames } from '../utils/classNames';
 
 	export let label;
 
-	export let colorName = 'data.primary';
+	export let activeColorName = 'data.categorical.blue';
 
 	export let disabled = false;
 
@@ -37,6 +38,18 @@
 	}
 
 	let isOpen = false;
+
+	const trimTokenName = (token: string) => {
+		const array = token.split('.');
+		array.shift();
+		return array.join(' ');
+	};
+
+	const activeOptionClasses =
+		'ring-inset ring-2 ring-offset-2 ring-color-ui-background-primary ring-offset-color-ui-border-primary hover:ring-offset-color-ui-border-primary focus-visible:ring-offset-color-ui-border-primary';
+
+	const optionClasses =
+		'rounded-full bg-color-container-level-0 hover:bg-color-container-level-0 hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-ui-border-secondary hover:ring-2 hover:ring-color-ui-background-primary focus-visible:ring-offset-color-ui-border-secondary';
 </script>
 
 {#if disabled}
@@ -51,7 +64,7 @@
 		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} layer colour picker">
 			<div
 				class="w-[22px] h-[22px] relative border rounded-full"
-				style:background={tokenNameToValue(colorName, $currentTheme)}
+				style:background={tokenNameToValue(activeColorName, $currentTheme)}
 			/>
 		</Trigger>
 
@@ -59,17 +72,30 @@
 
 		<span class="text-xs mb-2 inline-block">Click to assign a colour to this layer.</span>
 
-		<div class="flex flex-wrap gap-2">
+		<div class="flex flex-wrap gap-0.5">
 			{#each colorNames as colorOption}
-				<button
-					class="w-6 h-6 rounded-full"
-					style:background={tokenNameToValue(colorOption, $currentTheme)}
-					aria-label="Color code: {colorOption}"
-					on:click={() => {
-						colorName = colorOption;
-						isOpen = false;
-					}}
-				/>
+				<Tooltip>
+					<Trigger
+						slot="trigger"
+						variant="square"
+						size="sm"
+						class={classNames(
+							activeColorName === colorOption ? activeOptionClasses : '',
+							optionClasses
+						)}
+						on:click={() => {
+							activeColorName = colorOption;
+							isOpen = false;
+						}}
+					>
+						<div
+							class="w-6 h-6 rounded-full"
+							style:background={tokenNameToValue(colorOption, $currentTheme)}
+						/>
+					</Trigger>
+					<span class="sr-only">Color code:</span>
+					{trimTokenName(colorOption)}
+				</Tooltip>
 			{/each}
 		</div>
 	</Popover>
