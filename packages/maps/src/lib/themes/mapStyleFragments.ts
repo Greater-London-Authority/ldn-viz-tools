@@ -51,5 +51,12 @@ export const mapStyles = {
       lineWidthScale: 2,
       lineWidthMinPixels: 1
     })
+  },
+
+  fill: {
+    transparent: {
+      filled: true,
+      getFillColor: [0, 0, 0, 0]
+    }
   }
 };

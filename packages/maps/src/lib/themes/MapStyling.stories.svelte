@@ -28,10 +28,7 @@
       id: 'boroughLayer',
       data: `${TILE_BASE_URL}/boroughs/{z}/{x}/{y}.mvt`,
 
-      filled: true,
-      getFillColor: () => [0, 0, 0, 0],
-      opacity: 1,
-
+      ...mapStyles.fill.transparent,
       ...mapStyles.border.primary($currentTheme)
     });
   };
@@ -40,11 +37,7 @@
     return new MVTLayer({
       id: 'wardLayer',
       data: `${TILE_BASE_URL}/wards-2022-clipped/{z}/{x}/{y}.mvt`,
-
-      filled: true,
-      getFillColor: () => [0, 0, 0, 0],
-      opacity: 1,
-
+      ...mapStyles.fill.transparent,
       ...mapStyles.border.secondary($currentTheme)
     });
   };
@@ -53,11 +46,7 @@
     return new MVTLayer({
       id: 'lsoaLayer',
       data: `${TILE_BASE_URL}/loac-2021/{z}/{x}/{y}.mvt`,
-
-      filled: true,
-      getFillColor: () => [0, 0, 0, 0],
-      opacity: 1,
-
+      ...mapStyles.fill.transparent,
       ...mapStyles.border.tertiary($currentTheme)
     });
   };
@@ -149,6 +138,26 @@
 
 <!--
 `mapstyles.outlines` defines line styles for the outlines of filled areas.
+-->
+<Story name="Outlines filled areas">
+  <Checkbox label="Show polygons (thin outlines)" bind:checked={showOpportunityAreasThin} />
+  <Checkbox label="Show polygons (thick outlines)" bind:checked={showOpportunityAreasThick} />
+
+
+  <div class="relative w-[100dvw] h-[100dvh]">
+    <Map
+      options={{
+				transformRequest: appendOSKeyToUrl(OS_KEY)
+			}}
+    >
+      <MapDeckOverlay layers={layers2} />
+    </Map>
+  </div>
+</Story>
+
+
+<!--
+`mapstyles.fill` defines fill styles.
 -->
 <Story name="Outlines filled areas">
   <Checkbox label="Show polygons (thin outlines)" bind:checked={showOpportunityAreasThin} />
