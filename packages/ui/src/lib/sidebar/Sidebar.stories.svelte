@@ -464,6 +464,32 @@
 	</Sidebar>
 </Story>
 
+<Story name="Top Placement with tabs" source>
+	<Sidebar placement="top" {tabs}>
+		<SidebarHeader title="Main sidebar title" slot="header">
+			<svelte:fragment slot="subTitle">
+				<p>
+					Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
+					venenatis sapien. Etiam venenatis felis.
+				</p>
+			</svelte:fragment>
+		</SidebarHeader>
+
+		<SidebarFooter slot="footer">
+			<div class="flex justify-between">
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+			<svelte:fragment slot="menu">
+				<ul class="flex space-x-2">
+					<li>View Cookie settings</li>
+					<li>Privacy Policy</li>
+				</ul>
+			</svelte:fragment>
+		</SidebarFooter>
+	</Sidebar>
+</Story>
+
 <Story name="Position Fixed" source>
 	<Sidebar position="fixed">
 		<SidebarHeader title="Main sidebar title" slot="header">
