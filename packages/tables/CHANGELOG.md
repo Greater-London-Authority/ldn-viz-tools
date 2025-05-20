@@ -1,5 +1,18 @@
 # @ldn-viz/tables
 
+## 3.2.0
+
+### Minor Changes
+
+- bf61efc: CHANGED: hints for Table columns can now be a component (rather than string), and can be rendered as a Tooltip, Overlap, or Modal
+
+### Patch Changes
+
+- Updated dependencies [212ff05]
+- Updated dependencies [f2f5f63]
+- Updated dependencies [bec155b]
+  - @ldn-viz/ui@19.2.0
+
 ## 3.1.0
 
 ### Minor Changes

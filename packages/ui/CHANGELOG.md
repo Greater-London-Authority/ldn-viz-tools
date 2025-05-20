@@ -1,5 +1,13 @@
 # ldn-viz-tools-ui
 
+## 19.2.0
+
+### Minor Changes
+
+- 212ff05: FIXED: export the `Tabs` component
+- f2f5f63: FIXED: `SidebarTabList` now correctly sets `aria-orientation` attribute, and responds to the correcct pair of up/down or left/right arrow keys based on orientation
+- bec155b: CHANGED: `ColorPicker` now has tooltip, hover and active states
+
 ## 19.1.0
 
 ### Minor Changes
