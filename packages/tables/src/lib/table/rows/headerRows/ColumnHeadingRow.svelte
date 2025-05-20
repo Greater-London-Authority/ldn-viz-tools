@@ -59,6 +59,8 @@
 						alignHeader={col.alignHeader}
 						superscriptText={col.superscriptText}
 						hintText={col.hintText}
+						hintComponent={col.hintComponent}
+						hintType={col.hintType ?? 'tooltip'}
 					/>
 				</div>
 			{/if}
