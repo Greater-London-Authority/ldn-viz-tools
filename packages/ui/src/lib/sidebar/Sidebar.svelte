@@ -103,7 +103,7 @@
 	{#if tabs.length}
 		<div class={classNames('absolute bg-color-container-level-0', tabPlacementClasses)}>
 			<!-- A `<SidebarTabList>`, if the sidebar has tabs-->
-			<SidebarTabList {tabs} ariaLabel={tabsAriaLabel} bind:selectedValue />
+			<SidebarTabList {tabs} {placement} ariaLabel={tabsAriaLabel} bind:selectedValue />
 		</div>
 	{:else if $sidebarAlwaysOpen !== 'true'}
 		<div class={classNames('absolute', togglePlacementClasses)}>
