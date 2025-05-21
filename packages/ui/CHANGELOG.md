@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 19.3.0
+
+### Minor Changes
+
+- 6e76a2f: FIXED: Sidebar tabs orient correctly when horizontal
+
 ## 19.2.0
 
 ### Minor Changes
