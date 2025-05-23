@@ -13,7 +13,13 @@ const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../../../packages/ui/src/**/*.mdx',
-		'../../../packages/ui/src/**/*.stories.@(js|ts|svelte)'
+		'../../../packages/ui/src/**/*.stories.@(js|ts|svelte)',
+		'../../../packages/charts/src/**/*.mdx',
+		'../../../packages/charts/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
+		'../../../packages/maps/src/**/*.mdx',
+		'../../../packages/maps/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
+		'../../../packages/tables/src/**/*.mdx',
+		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
 		getAbsolutePath('@storybook/addon-essentials'),
