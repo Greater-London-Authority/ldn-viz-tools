@@ -1,7 +1,7 @@
 {
 	"name": "@ldn-viz/charts",
 	"license": "MIT",
-	"version": "19.3.0",
+	"version": "6.0.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
