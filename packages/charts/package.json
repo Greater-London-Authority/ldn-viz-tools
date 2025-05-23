@@ -33,6 +33,7 @@
 		"@ldn-viz/ui": "*",
 		"@ldn-viz/utils": "*",
 		"@observablehq/plot": "^0.6.16",
+		"@tidyjs/tidy": "^2.5.2",
 		"layercake": "^8.1.1"
 	},
 	"devDependencies": {
