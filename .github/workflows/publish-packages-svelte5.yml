@@ -22,7 +22,33 @@ jobs:
       - name: Install turbo
         run: npm install turbo --global
 
+      - name: Build packages
+        run: npm run build
+
       - name: Publish packages
-        run: turbo publish --tag svelte5
+        run: |
+          changeset pre enter svelte5
+          changeset version
+          changeset publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git checkout -b release-msg-svelte5
+
+          git add -A .changeset
+          git add packages/*/CHANGELOG.md
+          git add packages/*/package.json
+          git add package-lock.json
+
+          git diff-index --quiet HEAD || git commit -m "Update CHANGELOG and package.json"
+
+      - name: Push committed changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release-msg-svelte5
