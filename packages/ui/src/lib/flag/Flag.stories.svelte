@@ -21,7 +21,7 @@
 
 <Story name="Default Messages" asChild>
 	<div class="flex flex-col gap-4">
-		{#each conditions.filter((d) => d === 'alpha' || d === 'beta') as condition}
+		{#each conditions.filter((d) => d === 'alpha' || d === 'beta') as condition (condition)}
 			<Flag {condition} />
 		{/each}
 	</div>
@@ -29,7 +29,7 @@
 
 <Story name="Levels" asChild>
 	<div class="flex flex-col gap-4">
-		{#each conditions as condition}
+		{#each conditions as condition (condition)}
 			<Flag {condition}>
 				{condition}
 			</Flag>

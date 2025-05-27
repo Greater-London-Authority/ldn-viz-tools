@@ -5,5 +5,5 @@
 </script>
 
 <div class="container mx-auto">
-{@render children()}
+	{@render children()}
 </div>

@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config}*/
-const defaultTheme = require('tailwindcss/defaultTheme');
+const _defaultTheme = require('tailwindcss/defaultTheme');
 
 const config = {
 	presets: [require('@ldn-viz/themes/ldn-theme')],

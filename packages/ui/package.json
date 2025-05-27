@@ -1,31 +1,13 @@
 {
 	"name": "@ldn-viz/ui",
-	"license": "MIT",
 	"version": "20.0.0",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build && npm run prepack",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"prepack": "svelte-kit sync && svelte-package && publint",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint .",
-		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"test:e2e": "playwright test"
-	},
-	"files": [
-		"dist",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
+	"keywords": [
+		"svelte"
 	],
+	"license": "MIT",
 	"sideEffects": [
 		"**/*.css"
 	],
-	"svelte": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"type": "module",
 	"exports": {
 		".": {
@@ -33,8 +15,26 @@
 			"svelte": "./dist/index.js"
 		}
 	},
-	"peerDependencies": {
-		"svelte": "^5.0.0"
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"scripts": {
+		"build": "vite build && npm run prepack",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"dev": "vite dev",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"prepack": "svelte-kit sync && svelte-package && publint",
+		"prepare": "svelte-kit sync || echo ''",
+		"preview": "vite preview",
+		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:e2e": "playwright test",
+		"test:unit": "vitest"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -64,7 +64,7 @@
 		"vite": "^6.2.6",
 		"vitest": "^3.0.0"
 	},
-	"keywords": [
-		"svelte"
-	]
+	"peerDependencies": {
+		"svelte": "^5.0.0"
+	}
 }
