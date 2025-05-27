@@ -1,1 +1,1 @@
-<h1 class="text-red-400">London Viz Tools Ui Package</h1>
+<h1>London Viz Tools Charts Package</h1>
