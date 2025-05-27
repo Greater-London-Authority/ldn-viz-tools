@@ -18,7 +18,8 @@
     "prettier-plugin-packagejson": "^2.5.14",
     "prettier-plugin-svelte": "^3.4.0",
     "turbo": "^2.5.3",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "@storybook/addon-svelte-csf": "^5.0.1"
   },
   "engines": {
     "node": ">=18"
