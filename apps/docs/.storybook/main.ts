@@ -22,6 +22,7 @@ const config: StorybookConfig = {
 		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
+		getAbsolutePath('@storybook/addon-themes'),
 		getAbsolutePath('@storybook/addon-essentials'),
 		getAbsolutePath('@storybook/addon-svelte-csf'),
 		getAbsolutePath('@chromatic-com/storybook')
@@ -29,6 +30,14 @@ const config: StorybookConfig = {
 	framework: {
 		name: getAbsolutePath('@storybook/sveltekit'),
 		options: {}
-	}
+	},
+	features: {
+		backgroundsStoryGlobals: true
+	},
+	docs: {
+		autodocs: true,
+		defaultName: 'Documentation'
+	},
+	staticDirs: ['../static']
 };
 export default config;
