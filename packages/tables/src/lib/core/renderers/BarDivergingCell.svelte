@@ -7,6 +7,7 @@
 
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -28,12 +29,12 @@
 	/**
 	 * Color to be applied to bars corresponding to positive values.
 	 */
-	export let positiveColor = 'blue';
+	export let positiveColor: string | ((value: number) => string) = 'blue';
 
 	/**
 	 * Color to be applied to bars corresponding to negative values.
 	 */
-	export let negativeColor = 'red';
+	export let negativeColor: string | ((value: number) => string) = 'red';
 
 	export let extent = [0, 1]; // used to pass automatically extracted val
 
@@ -76,7 +77,7 @@
 				width={x(0) - x(value)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={negativeColor}
+				fill={getVal(value, negativeColor)}
 			/>
 
 			<!-- zero line -->
@@ -111,7 +112,7 @@
 				width={x(value) - x(0)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={positiveColor}
+				fill={getVal(value, positiveColor)}
 			/>
 
 			<!-- zero line -->

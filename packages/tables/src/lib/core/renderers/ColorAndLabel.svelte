@@ -5,6 +5,8 @@
 	 * @component
 	 */
 
+	import { getVal } from '../lib/getVal';
+
 	/**
 	 * The value to be encoded in the cell.
 	 */
@@ -13,13 +15,10 @@
 	/**
 	 * A D3 color scale used to determine cell background color.
 	 */
-	export let colorScale;
+	export let color: string | ((value: number) => string) = 'lightgrey';
 </script>
 
 <div class="flex items-center h-full">
-	<div
-		class="flex-none w-4 h-4 mr-1"
-		style={`background-color: ${colorScale ? colorScale(value) : 'lightgrey'};`}
-	></div>
+	<div class="flex-none w-4 h-4 mr-1" style={`background-color: ${getVal(value, color)};`}></div>
 	<div class="w-0 flex-auto overflow-hidden truncate items-center">{value}</div>
 </div>
