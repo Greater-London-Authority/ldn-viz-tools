@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           rm package-lock.json
-          npm install
+          npm install --force
           npm install @rollup/rollup-linux-x64-gnu
           npm install lightningcss
 
