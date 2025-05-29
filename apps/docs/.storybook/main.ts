@@ -22,11 +22,11 @@ const config: StorybookConfig = {
 		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
-		getAbsolutePath('@storybook/addon-themes'),
-		getAbsolutePath('@storybook/addon-essentials'),
-		getAbsolutePath('@storybook/addon-svelte-csf'),
-		getAbsolutePath('@chromatic-com/storybook')
-	],
+        getAbsolutePath('@storybook/addon-themes'),
+        getAbsolutePath('@storybook/addon-essentials'),
+        getAbsolutePath('@storybook/addon-svelte-csf'),
+        getAbsolutePath('@storybook/addon-a11y')
+    ],
 	framework: {
 		name: getAbsolutePath('@storybook/sveltekit'),
 		options: {}

@@ -2,6 +2,10 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Flag, { type FlagCondition } from './Flag.svelte';
 
+	/**
+	 * The `<Flag>` component displays a message at the top of a page (e.g., to indicate that it is in Beta release).
+	 */
+
 	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Flag',
 		component: Flag,
