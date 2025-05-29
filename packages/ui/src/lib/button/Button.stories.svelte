@@ -110,7 +110,7 @@
 	{#snippet template(args)}
 		<Button
 			{...args}
-			class="text-color-palette-pink-100 border-color-palette-pink-700 bg-color-palette-yellow-500 border-4 !p-8"
+			class="border-4 border-color-palette-pink-700 bg-color-palette-yellow-500 !p-8 text-color-palette-pink-100"
 		>
 			Custom classes applied
 		</Button>
