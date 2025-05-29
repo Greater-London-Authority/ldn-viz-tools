@@ -25,6 +25,7 @@ jobs:
         run: |
           npm install
           npm install @rollup/rollup-linux-x64-gnu
+          npm install lightningcss
 
       - name: Build
         run: npm run build
