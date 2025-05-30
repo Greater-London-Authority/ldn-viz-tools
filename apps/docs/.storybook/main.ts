@@ -26,19 +26,16 @@ const config: StorybookConfig = {
 	],
 	addons: [
 		getAbsolutePath('@storybook/addon-themes'),
-		getAbsolutePath('@storybook/addon-essentials'),
 		getAbsolutePath('@storybook/addon-svelte-csf'),
-		getAbsolutePath('@storybook/addon-a11y')
+		getAbsolutePath('@storybook/addon-a11y'),
+		getAbsolutePath('@storybook/addon-docs'),
+		getAbsolutePath('@storybook/addon-vitest')
 	],
 	framework: {
 		name: getAbsolutePath('@storybook/sveltekit'),
 		options: {}
 	},
-	features: {
-		backgroundsStoryGlobals: true
-	},
 	docs: {
-		autodocs: true,
 		defaultName: 'Documentation'
 	},
 	staticDirs: ['../static']

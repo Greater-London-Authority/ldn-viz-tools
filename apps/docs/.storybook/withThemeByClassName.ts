@@ -1,5 +1,5 @@
 import type { DecoratorFunction, Renderer } from 'storybook/internal/types';
-import { useEffect } from '@storybook/preview-api';
+import { useEffect } from 'storybook/preview-api';
 import { DecoratorHelpers } from '@storybook/addon-themes';
 import { mode, setMode } from 'mode-watcher';
 
