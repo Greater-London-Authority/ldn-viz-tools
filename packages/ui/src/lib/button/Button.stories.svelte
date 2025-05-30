@@ -3,6 +3,7 @@
 	import Button from './Button.svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
+	import type { ButtonProps } from './types.js';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/Button',
@@ -17,7 +18,7 @@
 	};
 </script>
 
-{#snippet defaultTemplate(args: {})}
+{#snippet defaultTemplate(args: ButtonProps)}
 	<Button {...args} onclick={handleClick}>
 		You clicked: {count}
 	</Button>

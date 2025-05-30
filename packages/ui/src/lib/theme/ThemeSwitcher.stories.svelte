@@ -16,7 +16,7 @@
 	});
 </script>
 
-{#snippet defaultTemplate(args: {})}
+{#snippet defaultTemplate(args: { [key: string]: any })}
 	<ThemeSwitcher {...args} />
 {/snippet}
 
