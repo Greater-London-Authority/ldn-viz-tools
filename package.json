@@ -9,7 +9,7 @@
 		"check-types": "turbo run check-types",
 		"dev": "turbo run dev",
 		"docs": "npm run storybook -w apps/docs",
-		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"format": "prettier --write .",
 		"lint": "turbo run lint",
 		"publish-packages": "turbo run build && changeset version && changeset publish",
 		"test": "turbo run test",

@@ -9,7 +9,25 @@
 		title: 'Ui/Components/Buttons/Button',
 		component: Button,
 		tags: ['autodocs'],
-		render: defaultTemplate
+		render: defaultTemplate,
+		argTypes: {
+			emphasis: {
+				options: ['primary', 'secondary', 'caution', 'positive', 'negative'],
+				control: { type: 'select' }
+			},
+			variant: {
+				options: ['brand', 'solid', 'outline', 'text'], //square
+				control: { type: 'select' }
+			},
+			size: {
+				options: ['xs', 'sm', 'md', 'lg'],
+				control: { type: 'radio' }
+			},
+			type: {
+				options: ['button', 'submit'],
+				control: { type: 'radio' }
+			}
+		}
 	});
 
 	let count = $state(0);
