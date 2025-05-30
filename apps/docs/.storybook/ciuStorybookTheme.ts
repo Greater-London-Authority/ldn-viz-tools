@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming/create';
 // import colors from '../../../packages/themes/colors.json';
 import colors from '@ldn-viz/themes/styles/js/theme-tokens';
 
