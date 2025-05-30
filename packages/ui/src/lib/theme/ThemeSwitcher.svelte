@@ -6,60 +6,64 @@
 	 *
 	 * @component
 	 */
+
 	import { Button } from '@ldn-viz/ui';
-	import { createDropdownMenu } from '@melt-ui/svelte';
 	import { Moon, Sun } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
-	type Theme = 'light' | 'dark' | 'system';
+	import { DropdownMenu } from 'bits-ui';
+	import { mode, setMode } from 'mode-watcher';
 
-	export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+	const modes = ['light', 'dark', 'system'] as const;
 
-	const themes: Theme[] = ['light', 'dark', 'system'];
+	let themeIcon = $derived(mode.current === 'light' ? Sun : Moon);
 
-	const onChange = (e: { value: string }) => {
-		const value = e.value as Theme;
-		$userThemeSelectionStore = value;
-	};
+	interface Props {
+		/**
+		 * The size of the menu trigger
+		 */
+		size?: 'xs' | 'sm' | 'md';
+	}
 
-	const menuItems = themes.map((theme) => ({ value: theme, label: theme }));
-
-	$: themeIcon = $currentThemeMode === 'light' ? Sun : Moon;
-
-	const {
-		elements: { menu, item, trigger, arrow }
-	} = createDropdownMenu();
+	let { size = 'sm' }: Props = $props();
 
 	const highlightedClasses =
 		'bg-color-input-background-active text-color-static-white py-1 px-2 cursor-pointer';
 	const nonHighlightedClasses =
-		'text-color-input-valueText hover:bg-color-input-background-hover py-1 px-2 cursor-pointer';
+		'text-color-input-value hover:bg-color-input-background-hover py-1 px-2 cursor-pointer';
+	const buttonClasses =
+		'rounded-full text-xs p-1 min-w-6 min-h-6 bg-color-action-background-secondary text-color-static-white hover:bg-color-action-background-secondary-hover active:bg-color-action-background-secondary-active dark:hover:text-color-text-inverse-primary';
 </script>
 
-<div class="inline-flex">
-	<div use:trigger>
-		<Button {...$trigger} class={`rounded-full !p-1`} variant="solid" emphasis="secondary" {size}>
-			{#if size === 'xs'}
-				<Icon src={themeIcon} theme="mini" class="w-4 h-4" aria-hidden="true" />
-			{:else}
-				<Icon src={themeIcon} theme="mini" class="w-5 h-5" aria-hidden="true" />
-			{/if}
-			<span class="sr-only">Theme Switch</span>
-		</Button>
-	</div>
-	<div {...$menu} use:menu class="bg-color-input-background capitalize shadow pt-2 z-40">
-		{#each menuItems as menuItem}
-			<div
-				{...$item}
-				use:item
-				on:m-click={() => onChange({ value: menuItem.value })}
-				class={menuItem.value === $userThemeSelectionStore
-					? highlightedClasses
-					: nonHighlightedClasses}
-			>
-				{menuItem.label}
-			</div>
-		{/each}
-		<div {...$arrow} use:arrow />
-	</div>
-</div>
+<DropdownMenu.Root>
+	<DropdownMenu.Trigger aria-label="Theme mode switcher">
+		{#snippet child({ props })}
+			<!-- {console.log(props)}
+			<Button {...props}>Open menu</Button> -->
+			<Button {...props} class={buttonClasses} variant="square" emphasis="secondary" {size}>
+				{#if size === 'xs'}
+					<Icon src={themeIcon} theme="mini" class="h-4 w-4" aria-hidden="true" />
+				{:else}
+					<Icon src={themeIcon} theme="mini" class="h-5 w-5" aria-hidden="true" />
+				{/if}
+			</Button>
+		{/snippet}
+	</DropdownMenu.Trigger>
+	<DropdownMenu.Portal>
+		<DropdownMenu.Content
+			class="z-40 border border-color-input-border bg-color-input-background capitalize shadow "
+			preventScroll={false}
+			aria-label="Select current theme mode"
+		>
+			{#each modes as themeMode (themeMode)}
+				<DropdownMenu.Item
+					onSelect={() => setMode(themeMode)}
+					class={themeMode === mode.current ? highlightedClasses : nonHighlightedClasses}
+				>
+					{themeMode}
+				</DropdownMenu.Item>
+			{/each}
+			<DropdownMenu.Separator />
+			<DropdownMenu.Arrow class="text-color-input-border" />
+		</DropdownMenu.Content>
+	</DropdownMenu.Portal>
+</DropdownMenu.Root>

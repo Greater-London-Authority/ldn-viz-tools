@@ -1,36 +1,9 @@
 <script lang="ts">
-	import { BROWSER } from 'esm-env';
-	import { onMount } from 'svelte';
-
-	import { prefersDarkMode } from '../userPreference/mediaQueryStore';
-	import { currentThemeMode, userThemeSelectionStore } from './themeStore';
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: $prefersDarkMode, applyTheme();
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: $userThemeSelectionStore, applyTheme();
-
-	const applyTheme = () => {
-		if (BROWSER) {
-			document.documentElement.classList.toggle(
-				'dark',
-				$currentThemeMode === 'dark' ? true : false
-			);
-		}
-		/*global globalThis*/
-		globalThis.localStorage?.setItem('theme', $userThemeSelectionStore);
-	};
-
-	onMount(() => {
-		applyTheme();
-	});
+	import { ModeWatcher } from 'mode-watcher';
 </script>
 
-<!-- Prevent FOUC (Flash of Unstyled Content) -->
-<svelte:head>
-	<script>
-		var userPref = globalThis.localStorage?.getItem('theme');
-		document.documentElement.classList.toggle('dark', userPref === 'dark' ? true : false);
-	</script>
-</svelte:head>
+<ModeWatcher
+	modeStorageKey="ldn-viz-theme-mode"
+	themeStorageKey="ldn-viz-theme"
+	defaultTheme="ldn-viz"
+/>

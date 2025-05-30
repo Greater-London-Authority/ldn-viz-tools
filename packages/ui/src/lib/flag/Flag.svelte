@@ -1,29 +1,37 @@
 <script lang="ts">
+	import { classNames } from '../utils/classNames.js';
+
 	/**
 	 * The `<Flag>` component displays a message at the top of a page (e.g., to indicate that it is in Beta release).
 	 * @component
 	 */
 
-	import { classNames } from '../utils/classNames';
+	export type FlagCondition = 'alpha' | 'beta' | 'alert' | 'warning' | 'positive' | 'notice';
 
-	type flagCondition = 'alpha' | 'beta' | 'alert' | 'warning' | 'positive' | 'notice';
+	interface Props {
+		/**
+		 * Provides ability to modify appearance to represent condition or status.
+		 */
+		condition?: FlagCondition;
+		/**
+		 * URL to link to (optional). Can be a `mailto://` URL.
+		 */
+		link?: string;
+		/**
+		 * Text to be displayed as the body of the link.
+		 */
+		linkText?: string;
+		children?: import('svelte').Snippet;
+	}
 
-	/**
-	 * Provides ability to modify appearance to represent condition or status.
-	 */
-	export let condition: flagCondition = 'alpha';
+	let {
+		condition = 'alpha',
+		link = '',
+		linkText = 'Please provide feedback here',
+		children
+	}: Props = $props();
 
-	/**
-	 * URL to link to (optional). Can be a `mailto://` URL.
-	 */
-	export let link = '';
-
-	/**
-	 * Text to be displayed as the body of the link.
-	 */
-	export let linkText = 'Please provide feedback here';
-
-	const colorClass: Record<flagCondition, string> = {
+	const colorClass: Record<FlagCondition, string> = {
 		alpha: 'bg-color-ui-alpha',
 		beta: 'bg-color-ui-beta',
 		alert: 'bg-color-ui-negative',
@@ -43,13 +51,15 @@
 </script>
 
 <div
-	class={classNames('w-full min-h-[24px] h-fit flex justify-between px-4', colorClass[condition])}
+	class={classNames('flex h-fit min-h-[24px] w-full justify-between px-4', colorClass[condition])}
 >
-	<div class="text-color-static-white uppercase text-base">
+	<div class="text-base uppercase text-color-static-white">
 		<!-- The message to be displayed in the flag. -->
-		<slot>
+		{#if children}
+			{@render children()}
+		{:else}
 			{defaultMessage[condition]}
-		</slot>
+		{/if}
 	</div>
 
 	{#if link}

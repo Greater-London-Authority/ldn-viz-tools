@@ -1,108 +1,65 @@
-<script context="module" lang="ts">
-	/**
-	 * The `<Button>` component creates an HTML `<button>` (or, if the `href` prop is set, an `<a>`) element.
-	 * Using it rather than the HTML element directly ensures that the button is styled consistently with our style-guide.
-	 * 
-	 * **Alternatives**: if clicking on the button should trigger the download of data or an image, consider using the [DataDownloadButton](./?path=/docs/ui-components-buttons-datadownloadbutton--documentation) or [ImageDownloadButton](./?path=/docs/ui-components-buttons-imagedownloadbutton--documentation) components.
-	 * If the button is intended to copy text to the clipboard, consider using the [CopyButton](./?path=/docs/ui-components-buttons-copybutton--documentation).
-	 * If the button is intended as a link for navigation, consider using the [PlacardButton](./?path=/docs/ui-components-buttons-placardbutton--documentation).
-
-	 * @component
-	 */
-
-	export interface ButtonProps {
-		variant: 'brand' | 'square' | 'solid' | 'outline' | 'text';
-		emphasis: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
-		size: 'xs' | 'sm' | 'md' | 'lg';
-		disabled: boolean;
-		href: string;
-		openInNewTab: boolean;
-		type: 'button' | 'submit';
-		title: string;
-		slim: boolean;
-		action: (node: HTMLElement) => void;
-	}
-
-	type ButtonStyle = Record<ButtonProps['variant'], Record<ButtonProps['emphasis'], string>>;
-
-	type DisabledStyle = Record<ButtonProps['variant'], string>;
-</script>
-
 <script lang="ts">
-	/**
-	 * Selects which family of styles should be applied to the button.
-	 */
-	export let variant: ButtonProps['variant'] = 'solid';
+	import { classNames } from '../utils/classNames.js';
+	import type { ButtonProps } from './types.js';
 
-	/**
-	 * Determines the visual emphasis is placed on the button.
-	 */
-	export let emphasis: ButtonProps['emphasis'] = 'primary';
+	let {
+		/**
+		 * Selects which family of styles should be applied to the button.
+		 */
+		variant = 'solid',
 
-	/**
-	 * Sets the size of the button.
-	 */
-	export let size: ButtonProps['size'] = 'md';
+		/**
+		 * Determines the visual emphasis is placed on the button.
+		 */
+		emphasis = 'primary',
 
-	/**
-	 * When true removes vertical padding and sets line height to 0 - useful for aligning buttons with text.
-	 */
-	export let slim: ButtonProps['slim'] = false;
+		/**
+		 * Sets the size of the button.
+		 */
+		size = 'md',
 
-	/**
-	 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
-	 */
-	export let disabled: ButtonProps['disabled'] = false;
+		/**
+		 * When true removes vertical padding and sets line height to 0 - useful for aligning buttons with text.
+		 */
+		slim = false,
 
-	/**
-	 * If this is set, the button is a link with the specified target.
-	 */
-	export let href: ButtonProps['href'] = '';
+		/**
+		 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
+		 */
+		disabled = false,
 
-	/**
-	 * If `true`, then clicking the button will open the link target in a new tab. Has no effect if `href` is not set.
-	 */
-	export let openInNewTab = false;
+		/**
+		 * If this is set, the button is a link with the specified target.
+		 */
+		href = '',
 
-	/**
-	 * If `submit`, then this is a submit button for use with a form.
-	 */
-	export let type: ButtonProps['type'] = 'button';
+		/**
+		 * If `submit`, then this is a submit button for use with a form.
+		 */
+		type = 'button',
 
-	/** Text that appears in tooltip on hover, */
-	export let title: ButtonProps['title'] = '';
+		/** Text that appears in tooltip on hover, */
+		title = '',
 
-	/**
-	 * Custom button action, e.g. mouse/key events.
-	 * Primarily used by components using Melt UI triggers.
-	 */
-	export let action: ButtonProps['action'] = () => {};
+		/**
+		 * If `true`, then button will fill full width of parent.
+		 */
+		fullWidth = false,
 
-	/**
-	 * Custom action props such as ARIA attributes and tabindex.
-	 * Primarily used by components using Melt UI
-	 */
-	export let actionProps = {};
+		/**
+		 * Css classes passed to override defaults - may need !prefix.
+		 */
+		class: classes,
 
-	/**
-	 * Enables screen reader to describe contents of button
-	 */
-	export let ariaLabel: string | null = null;
+		/**
+		 * *$bindable* The underlying DOM element being rendered. You can bind to this to get a reference to the element.
+		 */
+		ref = $bindable(null),
+		children,
+		...restProps
+	}: ButtonProps = $props();
 
-	/**
-	 * Value set as the `id` attribute of the `<svelte:element>` element (defaults to randomly generated value).
-	 */
-	export let id = randomId();
-
-	/**
-	 * If `true`, then button will fill full width of parent.
-	 */
-	export let fullWidth = false;
-
-	import { classNames } from '../utils/classNames';
-	import { randomId } from '../utils/randomId';
-
-	const styleClasses: ButtonStyle = {
+	const styleClasses = {
 		solid: {
 			primary:
 				'bg-color-action-background-primary text-color-static-white hover:bg-color-action-background-primary-hover active:bg-color-action-background-primary-active dark:hover:text-color-text-inverse-primary',
@@ -165,7 +122,7 @@
 		}
 	};
 
-	const disabledClasses: DisabledStyle = {
+	const disabledClasses = {
 		brand:
 			'!bg-color-action-background-disabled !border-color-action-border-disabled !text-color-action-disabled',
 		square: '!bg-color-action-background-disabled !text-color-action-disabled',
@@ -175,7 +132,7 @@
 		text: '!text-color-action-disabled hover:bg-transparent'
 	};
 
-	$: sizeClasses = {
+	const sizeClasses = {
 		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'text-xs px-1 min-w-6 min-h-6',
 		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5 min-w-8 min-h-8',
 		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2 min-w-10 min-h-10',
@@ -185,47 +142,33 @@
 				: 'text-lg px-4 py-2 min-w-16 min-h-16'
 	};
 
-	let buttonClass: string;
-
-	$: buttonClass = classNames(
-		'inline-flex justify-center items-center disabled:cursor-not-allowed',
-		'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-action-primary-focussed focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-ui-background-primary',
-		styleClasses[variant][emphasis],
-		sizeClasses[size],
-		disabled === true ? disabledClasses[variant] : '',
-		href && disabled === true ? 'pointer-events-none' : '',
-		slim === true ? '!py-0 !px-0 !min-h-0 leading-none text-left text-nowrap' : '',
-		$$props.class
+	const buttonClass = $derived(
+		classNames(
+			'inline-flex justify-center items-center disabled:cursor-not-allowed',
+			'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-action-primary-focussed focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-ui-background-primary',
+			styleClasses[variant][emphasis],
+			sizeClasses[size],
+			disabled === true ? disabledClasses[variant] : '',
+			href && disabled === true ? 'pointer-events-none' : '',
+			slim === true ? '!py-0 !px-0 !min-h-0 leading-none text-left text-nowrap' : '',
+			classes ?? '',
+			fullWidth ? 'w-full' : ''
+		)
 	);
 </script>
 
-<div class={classNames('flex', fullWidth ? 'w-full' : '')}>
-	<svelte:element
-		this={href ? 'a' : 'button'}
-		type={href ? undefined : type}
-		target={href && openInNewTab ? '_blank' : undefined}
-		rel={href && openInNewTab ? 'noopener noreferrer' : undefined}
-		{href}
-		{disabled}
-		{title}
-		class={classNames(buttonClass, fullWidth ? 'w-full' : '')}
-		aria-label={ariaLabel}
-		{id}
-		on:click
-		on:change
-		on:keydown
-		on:keyup
-		on:touchstart
-		on:touchend
-		on:touchcancel
-		on:mouseenter
-		on:mouseleave
-		role="button"
-		tabindex="0"
-		use:action
-		{...actionProps}
-	>
-		<!-- contents of the button -->
-		<slot />
-	</svelte:element>
-</div>
+<svelte:element
+	this={href ? 'a' : 'button'}
+	type={href ? undefined : type}
+	href={href && !disabled ? href : undefined}
+	disabled={href ? undefined : disabled}
+	aria-disabled={href ? disabled : undefined}
+	role={href && disabled ? 'link' : 'button'}
+	tabindex={href && disabled ? -1 : 0}
+	{title}
+	class={buttonClass}
+	bind:this={ref}
+	{...restProps}
+>
+	{@render children?.()}
+</svelte:element>

@@ -1,11 +1,9 @@
-<script lang="ts" context="module">
-	import { get, writable } from 'svelte/store';
-
+<script lang="ts" module>
 	export type CopyContent = string; //Exclude<undefined, null>
 	type TimerId = ReturnType<typeof setTimeout>;
 
-	const lastButtonId = writable('');
-	const resetTimerId = writable<null | TimerId>(null);
+	let lastButtonId = $state('');
+	let resetTimerId = $state<null | TimerId>(null);
 
 	const doCopy = (id: string, content: string) => {
 		navigator.clipboard
@@ -15,13 +13,13 @@
 	};
 
 	const onCopy = (id: string) => {
-		lastButtonId.set(id);
+		lastButtonId = id;
 
-		const currTimerId = get(resetTimerId) as TimerId;
+		const currTimerId = resetTimerId as TimerId;
 		clearTimeout(currTimerId);
-		const newTimerId = setTimeout(() => lastButtonId.set(''), 4000);
+		const newTimerId = setTimeout(() => (lastButtonId = ''), 4000);
 
-		resetTimerId.set(newTimerId);
+		resetTimerId = newTimerId;
 	};
 </script>
 
@@ -38,18 +36,24 @@
 	import { ClipboardDocumentCheck, DocumentDuplicate } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
-	import { randomId } from '../utils/randomId';
+	import { randomId } from '../utils/randomId.js';
 
-	/**
-	 * The content to copy. Due to browser compatibility, only text is currently
-	 * allowed.
-	 */
-	export let content: CopyContent;
+	interface Props {
+		/**
+		 * The content to copy. Due to browser compatibility, only text is currently
+		 * allowed.
+		 */
+		content: CopyContent;
+		/**
+		 * Button text when default slot content is used.
+		 */
+		label?: string;
+		beforeCopy?: import('svelte').Snippet;
+		afterCopy?: import('svelte').Snippet;
+		[key: string]: any;
+	}
 
-	/**
-	 * Button text when default slot content is used.
-	 */
-	export let label = 'Copy';
+	let { content, label = 'Copy', beforeCopy, afterCopy, ...rest }: Props = $props();
 
 	const id = randomId();
 
@@ -63,18 +67,18 @@
 	};
 </script>
 
-<Button {...$$restProps} on:click={copyToClipboard}>
-	{#if $lastButtonId !== id}
+<Button {...rest} onclick={copyToClipboard}>
+	{#if lastButtonId !== id}
 		<!-- Button text and icon before copy. -->
-		<slot name="before-copy">
+		{#if beforeCopy}{@render beforeCopy()}{:else}
 			{label}
-			<Icon src={DocumentDuplicate} class="w-5 h-5 ml-2" />
-		</slot>
+			<Icon src={DocumentDuplicate} class="ml-2 h-5 w-5" />
+		{/if}
 	{:else}
 		<!-- Button text and icon after copy. -->
-		<slot name="after-copy">
+		{#if afterCopy}{@render afterCopy()}{:else}
 			{label}
-			<Icon src={ClipboardDocumentCheck} class="w-5 h-5 ml-2" />
-		</slot>
+			<Icon src={ClipboardDocumentCheck} class="ml-2 h-5 w-5" />
+		{/if}
 	{/if}
 </Button>
