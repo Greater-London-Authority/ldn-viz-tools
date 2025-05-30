@@ -22,6 +22,10 @@
 		 * The status or message type, which determines the banner color.
 		 */
 		status?: 'notice' | 'positive' | 'caution' | 'negative';
+
+		/**
+		 * The size of the callout, affects font size and spacing.
+		 */
 		size?: 'sm' | 'md' | 'lg';
 		title?: import('svelte').Snippet;
 		body?: import('svelte').Snippet;
@@ -74,7 +78,7 @@
 
 <aside class={calloutClasses} aria-labelledby={id}>
 	{#if title}
-		<h3 {id} class={classNames('font-bold leading-tight', titleClasses[size])}>
+		<h3 {id} class={classNames('leading-tight font-bold', titleClasses[size])}>
 			{@render title?.()}
 		</h3>
 	{:else}
