@@ -78,7 +78,7 @@
 
 <aside class={calloutClasses} aria-labelledby={id}>
 	{#if title}
-		<h3 {id} class={classNames('leading-tight font-bold', titleClasses[size])}>
+		<h3 {id} class={classNames('font-bold leading-tight', titleClasses[size])}>
 			{@render title?.()}
 		</h3>
 	{:else}
