@@ -42,12 +42,12 @@
 	{#snippet template(args)}
 		<div class="flex flex-col space-y-4">
 			<div class="flex">
-				<Button onclick={() => (disabled = !disabled)}
-					>Click to {disabled ? 'enable' : 'disable'}
+				<Button onclick={() => (disabled = !disabled)} aria-controls="disabled-control">
+					Click to {disabled ? 'enable' : 'disable'}
 				</Button>
 			</div>
 
-			<Switch {...args} bind:checked {disabled} />
+			<Switch {...args} bind:checked {disabled} id="disabled-control" />
 		</div>
 	{/snippet}
 </Story>
@@ -56,9 +56,11 @@
 	{#snippet template(args)}
 		<div class="flex flex-col space-y-4">
 			<div class="flex">
-				<Button onclick={() => (checked = !checked)}>Toggle</Button>
+				<Button onclick={() => (checked = !checked)} aria-controls="external-toggle">
+					Toggle {checked ? 'off' : 'on'}
+				</Button>
 			</div>
-			<Switch {...args} bind:checked />
+			<Switch {...args} bind:checked id="external-toggle" />
 		</div>
 	{/snippet}
 </Story>
