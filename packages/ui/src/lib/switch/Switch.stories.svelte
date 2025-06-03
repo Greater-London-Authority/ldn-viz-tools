@@ -1,0 +1,64 @@
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Switch from './Switch.svelte';
+	import Button from '../button/Button.svelte';
+	import type { SwitchProps } from './types.js';
+
+	const { Story } = defineMeta({
+		title: 'Ui/Components/Switch',
+		component: Switch,
+		tags: ['autodocs'],
+		render: defaultTemplate,
+		argTypes: {
+			size: {
+				options: ['md', 'sm'],
+				control: { type: 'select' }
+			},
+			labelOn: {
+				options: ['left', 'right'],
+				control: { type: 'select' }
+			}
+		}
+	});
+
+	let checked = $state(false);
+	let disabled = $state(false);
+</script>
+
+{#snippet defaultTemplate(args: SwitchProps)}
+	<Switch {...args} bind:checked />
+	<p class="text-color-text-secondary pt-2">Is checked?: {checked}</p>
+{/snippet}
+
+<Story name="Default" />
+
+<Story name="With label" args={{ label: 'Enable something' }} />
+
+<Story name="Small" args={{ label: 'Enable something', size: 'sm' }} />
+
+<Story name="Label on left" args={{ label: 'Enable something', labelOn: 'left' }} />
+
+<Story name="Control whether disabled" args={{ label: 'Enable something' }}>
+	{#snippet template(args)}
+		<div class="flex flex-col space-y-4">
+			<div class="flex">
+				<Button onclick={() => (disabled = !disabled)}
+					>Click to {disabled ? 'enable' : 'disable'}
+				</Button>
+			</div>
+
+			<Switch {...args} bind:checked {disabled} />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Externally change" args={{ label: 'Enable something' }}>
+	{#snippet template(args)}
+		<div class="flex flex-col space-y-4">
+			<div class="flex">
+				<Button onclick={() => (checked = !checked)}>Toggle</Button>
+			</div>
+			<Switch {...args} bind:checked />
+		</div>
+	{/snippet}
+</Story>
