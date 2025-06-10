@@ -13,7 +13,8 @@
 		"lint": "turbo run lint",
 		"publish-packages": "turbo run build && changeset version && changeset publish",
 		"test": "turbo run test",
-		"test:unit": "turbo run test:unit"
+		"test:unit": "turbo run test:unit",
+		"web": "npm run dev -w apps/web"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.27.1",
