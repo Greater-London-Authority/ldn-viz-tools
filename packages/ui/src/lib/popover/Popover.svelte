@@ -15,7 +15,6 @@
 <Popover.Root>
 	<Popover.Trigger>
 		{#snippet child({ props })}
-			<!-- {console.log(props)} -->
 			<Button {...props}>{buttonText}</Button>
 		{/snippet}
 	</Popover.Trigger>
