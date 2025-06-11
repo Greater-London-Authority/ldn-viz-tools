@@ -1,14 +1,26 @@
-.DS_Store
+test-results
 node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
 /build
 /dist
-/.svelte-kit
-!/.svelte-kit/types
-!/.svelte-kit/ambient.d.ts
-!/.svelte-kit/tsconfig.json
 /package
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
 .env
 .env.*
 !.env.example
+!.env.test
+
+# Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

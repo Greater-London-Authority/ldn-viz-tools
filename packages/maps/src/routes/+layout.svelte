@@ -1,5 +1,9 @@
-<script>
+<script lang="ts">
 	import '../app.postcss';
+
+	let { children } = $props();
 </script>
 
-<slot />
+<div class="container mx-auto">
+	{@render children()}
+</div>

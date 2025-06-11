@@ -7,18 +7,18 @@ import { colorParsley } from 'colorparsley'; // optional string parsing
  *
  */
 export const colorWithBestContrast = (
-  backgroundColor: string,
-  textColorOne: string,
-  textColorTwo: string
+	backgroundColor: string,
+	textColorOne: string,
+	textColorTwo: string
 ) => {
-  const contrastOne = APCAcontrast(
-    sRGBtoY(colorParsley(textColorOne)),
-    sRGBtoY(colorParsley(backgroundColor))
-  );
-  const contrastTwo = APCAcontrast(
-    sRGBtoY(colorParsley(textColorTwo)),
-    sRGBtoY(colorParsley(backgroundColor))
-  );
+	const contrastOne = APCAcontrast(
+		sRGBtoY(colorParsley(textColorOne)),
+		sRGBtoY(colorParsley(backgroundColor))
+	);
+	const contrastTwo = APCAcontrast(
+		sRGBtoY(colorParsley(textColorTwo)),
+		sRGBtoY(colorParsley(backgroundColor))
+	);
 
-  return Math.abs(contrastOne) > Math.abs(contrastTwo) ? textColorOne : textColorTwo;
+	return Math.abs(contrastOne) > Math.abs(contrastTwo) ? textColorOne : textColorTwo;
 };

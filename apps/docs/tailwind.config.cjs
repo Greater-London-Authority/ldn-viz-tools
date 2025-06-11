@@ -1,5 +1,4 @@
 const config = {
-	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	presets: [require('../../packages/themes/ldn-theme')],
 	content: [
 		'./src/**/*.{html,js,svelte,ts,mdx}',
