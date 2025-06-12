@@ -9,17 +9,23 @@
 	type Props = Popover.RootProps & {
 		buttonText?: string;
 		title?: Snippet;
+		trigger?: Snippet;
 	};
 
-	let { buttonText = 'Click for popover', title, children }: Props = $props();
+	let { buttonText = 'Click for popover', title, trigger, children }: Props = $props();
 </script>
 
 <Popover.Root>
-	<Popover.Trigger>
-		{#snippet child({ props })}
-			<Button {...props}>{buttonText}</Button>
-		{/snippet}
-	</Popover.Trigger>
+	{#if trigger}
+		{@render trigger()}
+	{:else}
+		<Popover.Trigger>
+			{#snippet child({ props })}
+				<Button {...props}>{buttonText}</Button>
+			{/snippet}
+		</Popover.Trigger>
+	{/if}
+
 	<Popover.Content
 		class="bg-color-container-level-0 border-color-ui-border-secondary z-50 w-60 border p-2 text-sm shadow-lg"
 	>

@@ -10,7 +10,7 @@
 		buttonText?: string;
 		title?: Snippet;
 		description?: Snippet;
-		trigger?: Snippet<[DialogTriggerProps]>;
+		trigger?: Snippet;
 
 		width?:
 			| 'xs'
@@ -84,23 +84,15 @@
 </script>
 
 <Dialog.Root bind:open {...restProps}>
-	<!-- {#if trigger}
+	{#if trigger}
 		{@render trigger()}
 	{:else}
 		<Dialog.Trigger>
 			{#snippet child({ props })}
-
 				<Button {...props}>{buttonText}</Button>
 			{/snippet}
 		</Dialog.Trigger>
-	{/if} -->
-
-	<Dialog.Trigger>
-		{#snippet child({ props })}
-			<!-- {console.log(props)} -->
-			<Button {...props}>{buttonText}</Button>
-		{/snippet}
-	</Dialog.Trigger>
+	{/if}
 
 	<Dialog.Portal>
 		<Dialog.Overlay class="fixed inset-0 z-40 bg-black/60" />

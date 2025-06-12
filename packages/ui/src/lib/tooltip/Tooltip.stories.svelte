@@ -12,11 +12,12 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<Tooltip {...args}>
-			{#snippet trigger()}
-				<Button>TOOLTIP</Button>
-			{/snippet}
-			The contents of the Tooltip...
-		</Tooltip>
+		<Tooltip {...args}>The contents of the Tooltip...</Tooltip>
+	{/snippet}
+</Story>
+
+<Story name="Button Text">
+	{#snippet template(args)}
+		<Tooltip {...args} buttonText="I'm a little tooltip">The contents of the Tooltip...</Tooltip>
 	{/snippet}
 </Story>

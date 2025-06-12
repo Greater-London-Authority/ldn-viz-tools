@@ -67,33 +67,17 @@
 </script>
 
 {#if overlayType === 'tooltip'}
-	<Tooltip>
-		{#if trigger}
-			{#snippet trigger()}
-				{@render trigger?.()}
-				<Trigger {hintLabel} />
-			{/snippet}
-		{/if}
-		<!-- <Trigger {hintLabel} /> -->
-
+	<Tooltip {trigger}>
 		<!-- The help message. -->
 		{@render children()}
 	</Tooltip>
 {:else if overlayType === 'popover'}
-	<Popover>
-		<!-- {#snippet trigger()}...
-			<Trigger {hintLabel} />
-		{/snippet} -->
-
+	<Popover {trigger}>
 		<!-- The help message. -->
 		{@render children()}
 	</Popover>
 {:else if overlayType === 'modal'}
-	<Modal width={modalWidth}>
-		{#snippet trigger()}...
-			<Trigger {hintLabel} />
-		{/snippet}
-
+	<Modal width={modalWidth} {trigger}>
 		{#snippet title()}
 			{modalTitle}
 		{/snippet}
