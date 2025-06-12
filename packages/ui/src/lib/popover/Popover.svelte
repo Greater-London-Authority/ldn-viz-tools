@@ -1,15 +1,17 @@
 <script lang="ts">
-	import { Popover } from 'bits-ui';
+	import { Popover, type PopoverTriggerProps } from 'bits-ui';
 	import Button from '../button/Button.svelte';
 
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { Snippet } from 'svelte';
 
 	type Props = Popover.RootProps & {
 		buttonText?: string;
+		title?: Snippet;
 	};
 
-	let { buttonText, children }: Props = $props();
+	let { buttonText = 'Click for popover', title, children }: Props = $props();
 </script>
 
 <Popover.Root>
@@ -19,15 +21,24 @@
 		{/snippet}
 	</Popover.Trigger>
 	<Popover.Content
-		class="bg-color-container-level-0 border-color-ui-border-secondary z-50 w-60 border p-4 shadow-lg"
+		class="bg-color-container-level-0 border-color-ui-border-secondary z-50 w-60 border p-2 text-sm shadow-lg"
 	>
+		{#if title}
+			<p class="font-medium">
+				<!-- Optional title for the popover -->
+				{@render title()}
+			</p>
+		{/if}
+
 		{@render children?.()}
+
 		<Popover.Close>
 			{#snippet child({ props })}
 				<Button
 					{...props}
 					variant="text"
 					emphasis="secondary"
+					slim
 					size="sm"
 					class="absolute top-1 right-1"
 				>

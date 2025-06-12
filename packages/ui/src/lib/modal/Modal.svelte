@@ -7,12 +7,12 @@
 	import { XMark } from '@steeze-ui/heroicons';
 
 	type Props = Dialog.RootProps & {
-		buttonText: string;
-		title: Snippet;
-		description: Snippet;
-		trigger: Snippet<[DialogTriggerProps]>;
+		buttonText?: string;
+		title?: Snippet;
+		description?: Snippet;
+		trigger?: Snippet<[DialogTriggerProps]>;
 
-		width:
+		width?:
 			| 'xs'
 			| 'sm'
 			| 'md'
@@ -26,7 +26,7 @@
 			| '7xl'
 			| 'full';
 
-		headerTheme: 'light' | 'dark';
+		headerTheme?: 'light' | 'dark';
 
 		contentProps?: WithoutChild<Dialog.ContentProps>;
 		// ...other component props if you wish to pass them
@@ -110,7 +110,7 @@
 					class={`bg-color-container-level-1 text-color-text-primary border-color-static-brand relative flex items-center justify-between border-l-[5px] p-3 pr-4 ${headerTheme}`}
 				>
 					<Dialog.Title class="font-medium">
-						{@render title()}
+						{@render title?.()}
 					</Dialog.Title>
 					<Dialog.Close>
 						{#snippet child({ props })}
@@ -125,7 +125,7 @@
 				<div class="overflow-y-auto">
 					<div class="px-4 py-6">
 						<Dialog.Description>
-							{@render description()}
+							{@render description?.()}
 						</Dialog.Description>
 						{@render children?.()}
 					</div>

@@ -4,7 +4,7 @@
 	import Button from '../button/Button.svelte';
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components/Modal',
+		title: 'Ui/Components/Overlays/Modal',
 		component: Modal,
 		tags: ['autodocs']
 		// argTypes: {
