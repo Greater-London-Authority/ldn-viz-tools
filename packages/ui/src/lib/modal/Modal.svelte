@@ -1,16 +1,18 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { Dialog, type DialogTriggerProps, type WithoutChild } from 'bits-ui';
+	import { Dialog, type WithoutChild } from 'bits-ui';
 	import { classNames } from '../utils/classNames.js';
 	import Button from '../button/Button.svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { XMark } from '@steeze-ui/heroicons';
+	import Trigger from '../overlay/Trigger.svelte';
 
 	type Props = Dialog.RootProps & {
-		buttonText?: string;
+		hintLabel?: string;
 		title?: Snippet;
 		description?: Snippet;
-		trigger?: Snippet;
+		trigger?: Snippet<[Record<string, any>]>;
+		buttons?: Snippet;
 
 		width?:
 			| 'xs'
@@ -35,7 +37,7 @@
 	let {
 		open = $bindable(false),
 		children,
-		buttonText,
+		hintLabel,
 		contentProps,
 		/**
 		 * Title that appears at the top of the modal
@@ -49,6 +51,7 @@
 
 		trigger,
 
+		buttons,
 		/**
 		 * width of the modal
 		 */
@@ -83,16 +86,24 @@
 	);
 </script>
 
-<Dialog.Root bind:open {...restProps}>
+{#snippet modalTrigger()}
 	{#if trigger}
-		{@render trigger()}
+		<Dialog.Trigger>
+			{#snippet child({ props })}
+				{@render trigger({ ...props })}
+			{/snippet}
+		</Dialog.Trigger>
 	{:else}
 		<Dialog.Trigger>
 			{#snippet child({ props })}
-				<Button {...props}>{buttonText}</Button>
+				<Trigger {...props} {hintLabel} />
 			{/snippet}
 		</Dialog.Trigger>
 	{/if}
+{/snippet}
+
+<Dialog.Root bind:open {...restProps}>
+	{@render modalTrigger()}
 
 	<Dialog.Portal>
 		<Dialog.Overlay class="fixed inset-0 z-40 bg-black/60" />
@@ -122,6 +133,11 @@
 						{@render children?.()}
 					</div>
 				</div>
+				{#if buttons}
+					<div class="flex justify-end gap-2 p-4">
+						{@render buttons?.()}
+					</div>
+				{/if}
 			</Dialog.Content>
 		</div>
 	</Dialog.Portal>

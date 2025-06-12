@@ -11,7 +11,6 @@
 	import Modal from '../modal/Modal.svelte';
 	import Popover from '../popover/Popover.svelte';
 	import Tooltip from '../tooltip/Tooltip.svelte';
-	import Trigger from './Trigger.svelte';
 
 	interface Props {
 		overlayType?: 'tooltip' | 'popover' | 'modal';
@@ -32,7 +31,7 @@
 			| '7xl'
 			| 'full';
 		children: Snippet;
-		trigger?: Snippet;
+		trigger?: Snippet<[Record<string, any>]>;
 	}
 
 	let {
@@ -67,17 +66,17 @@
 </script>
 
 {#if overlayType === 'tooltip'}
-	<Tooltip {trigger}>
+	<Tooltip {trigger} {hintLabel}>
 		<!-- The help message. -->
 		{@render children()}
 	</Tooltip>
 {:else if overlayType === 'popover'}
-	<Popover {trigger}>
+	<Popover {trigger} {hintLabel}>
 		<!-- The help message. -->
 		{@render children()}
 	</Popover>
 {:else if overlayType === 'modal'}
-	<Modal width={modalWidth} {trigger}>
+	<Modal width={modalWidth} {trigger} {hintLabel}>
 		{#snippet title()}
 			{modalTitle}
 		{/snippet}

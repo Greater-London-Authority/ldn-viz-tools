@@ -1,23 +1,27 @@
 <script lang="ts">
-	import { Tooltip, type TooltipTriggerProps } from 'bits-ui';
-	import Button from '../button/Button.svelte';
+	import { Tooltip } from 'bits-ui';
 	import type { Snippet } from 'svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 
 	type Props = Tooltip.RootProps & {
-		buttonText?: string;
-		trigger?: Snippet;
+		hintLabel?: string;
+		trigger?: Snippet<[Record<string, any>]>;
 	};
 
-	let { buttonText = 'Hover for tooltip', trigger, children }: Props = $props();
+	let { hintLabel = 'Hover for tooltip', trigger, children }: Props = $props();
 </script>
 
 {#snippet tooltipTrigger()}
 	{#if trigger}
-		{@render trigger()}
+		<Tooltip.Trigger>
+			{#snippet child({ props })}
+				{@render trigger({ ...props })}
+			{/snippet}
+		</Tooltip.Trigger>
 	{:else}
 		<Tooltip.Trigger>
 			{#snippet child({ props })}
-				<Button {...props}>{buttonText}</Button>
+				<Trigger {...props} {hintLabel} />
 			{/snippet}
 		</Tooltip.Trigger>
 	{/if}

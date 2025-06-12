@@ -1,30 +1,39 @@
 <script lang="ts">
-	import { Popover, type PopoverTriggerProps } from 'bits-ui';
+	import { Popover } from 'bits-ui';
 	import Button from '../button/Button.svelte';
 
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Snippet } from 'svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 
 	type Props = Popover.RootProps & {
-		buttonText?: string;
+		hintLabel?: string;
 		title?: Snippet;
-		trigger?: Snippet;
+		trigger?: Snippet<[Record<string, any>]>;
 	};
 
-	let { buttonText = 'Click for popover', title, trigger, children }: Props = $props();
+	let { hintLabel = 'Click for popover', title, trigger, children }: Props = $props();
 </script>
 
-<Popover.Root>
+{#snippet popoverTrigger()}
 	{#if trigger}
-		{@render trigger()}
+		<Popover.Trigger>
+			{#snippet child({ props })}
+				{@render trigger({ ...props })}
+			{/snippet}
+		</Popover.Trigger>
 	{:else}
 		<Popover.Trigger>
 			{#snippet child({ props })}
-				<Button {...props}>{buttonText}</Button>
+				<Trigger {...props} {hintLabel} />
 			{/snippet}
 		</Popover.Trigger>
 	{/if}
+{/snippet}
+
+<Popover.Root>
+	{@render popoverTrigger()}
 
 	<Popover.Content
 		class="bg-color-container-level-0 border-color-ui-border-secondary z-50 w-60 border p-2 text-sm shadow-lg"
