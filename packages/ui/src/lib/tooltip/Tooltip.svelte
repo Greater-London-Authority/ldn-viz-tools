@@ -33,7 +33,7 @@
 
 		<Tooltip.Portal>
 			<Tooltip.Content
-				class="bg-color-container-level-0 border-color-ui-border-secondary z-50 max-w-[200px] border p-2 text-sm shadow-lg"
+				class="z-50 max-w-[200px] border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-sm shadow-lg"
 			>
 				{@render children?.()}
 

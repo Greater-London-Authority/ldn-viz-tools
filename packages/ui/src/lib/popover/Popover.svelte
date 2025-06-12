@@ -36,7 +36,7 @@
 	{@render popoverTrigger()}
 
 	<Popover.Content
-		class="bg-color-container-level-0 border-color-ui-border-secondary z-50 w-60 border p-2 text-sm shadow-lg"
+		class="z-50 w-60 border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-sm shadow-lg"
 	>
 		{#if title}
 			<p class="font-medium">
@@ -55,7 +55,7 @@
 					emphasis="secondary"
 					slim
 					size="sm"
-					class="absolute top-1 right-1"
+					class="absolute right-1 top-1"
 				>
 					<span class="sr-only">Close</span>
 					<Icon src={XMark} theme="mini" class="h-5 w-5" aria-hidden="true" />
