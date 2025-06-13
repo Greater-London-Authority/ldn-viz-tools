@@ -24,7 +24,10 @@
 		// }
 	});
 
-	let isOpen = $state(false);
+	let isOpenLongModal = $state(false);
+	let isOpenLightTheme = $state(false);
+	let isOpenWide = $state(false);
+	let isOpenButtons = $state(false);
 </script>
 
 <Story name="Default">
@@ -125,7 +128,7 @@
 
 <Story name="Modal with cancel and accept buttons">
 	{#snippet template(args)}
-		<Modal {...args} bind:open={isOpen}>
+		<Modal {...args} bind:open={isOpenButtons}>
 			{#snippet title()}
 				A modal with cancel and accept buttons!
 			{/snippet}
@@ -135,10 +138,10 @@
 			{/snippet}
 
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="secondary" onclick={() => (isOpen = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenButtons = false)}>
 					Cancel
 				</Button>
-				<Button variant="solid" onclick={() => (isOpen = false)}>Accept</Button>
+				<Button variant="solid" onclick={() => (isOpenButtons = false)}>Accept</Button>
 			{/snippet}
 		</Modal>
 	{/snippet}
@@ -146,7 +149,7 @@
 
 <Story name="Modal width">
 	{#snippet template(args)}
-		<Modal {...args} width="5xl" bind:open={isOpen}>
+		<Modal {...args} width="5xl" bind:open={isOpenWide}>
 			{#snippet title()}
 				A wider modal!
 			{/snippet}
@@ -157,10 +160,10 @@
 			{/snippet}
 
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="secondary" onclick={() => (isOpen = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenWide = false)}>
 					Cancel
 				</Button>
-				<Button variant="solid" onclick={() => (isOpen = false)}>Accept</Button>
+				<Button variant="solid" onclick={() => (isOpenWide = false)}>Accept</Button>
 			{/snippet}
 		</Modal>
 	{/snippet}
@@ -172,7 +175,7 @@
 			<Button {...props}>Open Dialog</Button>
 		{/snippet}
 
-		<Modal {...args} trigger={customTrigger} width="xl" bind:open={isOpen}>
+		<Modal {...args} trigger={customTrigger} width="xl" bind:open={isOpenLongModal}>
 			{#snippet title()}
 				Modal with very long content!
 			{/snippet}
@@ -198,10 +201,10 @@
 				{/each}
 			</div>
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="secondary" onclick={() => (isOpen = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenLongModal = false)}>
 					Cancel
 				</Button>
-				<Button variant="solid" onclick={() => (isOpen = false)}>Accept</Button>
+				<Button variant="solid" onclick={() => (isOpenLongModal = false)}>Accept</Button>
 			{/snippet}
 		</Modal>
 	{/snippet}
@@ -209,7 +212,7 @@
 
 <Story name="Light Theme (Experimental)">
 	{#snippet template(args)}
-		<Modal {...args} width="5xl" bind:open={isOpen} headerTheme="light">
+		<Modal {...args} width="5xl" bind:open={isOpenLightTheme} headerTheme="light">
 			{#snippet title()}
 				A modal with a light header!
 			{/snippet}
@@ -228,10 +231,10 @@
 				</ul>
 			</div>
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="secondary" onclick={() => (isOpen = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenLightTheme = false)}>
 					Cancel
 				</Button>
-				<Button variant="solid" onclick={() => (isOpen = false)}>Accept</Button>
+				<Button variant="solid" onclick={() => (isOpenLightTheme = false)}>Accept</Button>
 			{/snippet}
 		</Modal>
 	{/snippet}
