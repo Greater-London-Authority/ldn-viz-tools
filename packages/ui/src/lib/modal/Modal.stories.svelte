@@ -8,20 +8,14 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Modal',
 		component: Modal,
-		tags: ['autodocs']
-		// argTypes: {
-		// 	isOpen: { options: ['true', 'false'], control: { type: 'radio' } },
-		// 	title: { type: 'string', control: 'text' },
-		// 	description: { type: 'string', control: 'text' },
-		// 	width: {
-		// 		options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', 'full'],
-		// 		control: { type: 'select' }
-		// 	}
-		// },
-		// args: {
-		// 	title: 'Expects a title',
-		// 	description: 'Expects a summarising description of modal for accessibility'
-		// }
+		tags: ['autodocs'],
+		argTypes: {
+			open: { options: ['true', 'false'], control: { type: 'radio' } },
+			width: {
+				options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', 'full'],
+				control: { type: 'select' }
+			}
+		}
 	});
 
 	let isOpenLongModal = $state(false);
@@ -240,7 +234,7 @@
 	{/snippet}
 </Story>
 
-<!-- When using the `<Trigger>` component, you don't need to pass `isOpen` as a prop. -->
+<!-- When using the `<Trigger>` component, you don't need to bind to 'open' or pass `open` as a prop. -->
 
 <Story name="With Trigger component">
 	{#snippet template(args)}
