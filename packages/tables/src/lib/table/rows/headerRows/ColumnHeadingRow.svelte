@@ -53,7 +53,6 @@
 				>
 					<svelte:component
 						this={col.header?.renderer || Header}
-
 						label={col.label ?? col.short_label}
 						{order}
 						toggle={() => colIsSortable && table.toggleSort(col.short_label)}
@@ -63,7 +62,7 @@
 						hintText={col.hintText}
 						hintComponent={col.hintComponent}
 						hintType={col.hintType ?? 'tooltip'}
-						{...(col.header || {})}
+						{...col.header || {}}
 					/>
 				</div>
 			{/if}

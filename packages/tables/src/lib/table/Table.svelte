@@ -241,7 +241,6 @@
 				bind:clientWidth={tableWidth}
 				role="table"
 			>
-
 				{#if tableSpec.showTableHeader !== false}
 					<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
 				{/if}

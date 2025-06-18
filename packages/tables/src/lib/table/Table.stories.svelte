@@ -120,8 +120,6 @@
 		]
 	};
 
-
-
 	const tableSpecCustomHeaderColors = {
 		showColSummaries: false,
 
@@ -186,8 +184,6 @@
 			}
 		]
 	};
-
-
 
 	let wideTableSpec: { columns: ColSpec[] } = { columns: [] };
 	for (let i = 0; i < 25; i++) {
@@ -354,24 +350,10 @@
 
 <!-- If required, the table header can be removed entirely-->
 <Story name="No header">
-	<Table
-		data={data}
-		tableSpec={tableSpecNoHeader}
-		fixedTableWidth={1200}
-		bind:page
-	/>
+	<Table {data} tableSpec={tableSpecNoHeader} fixedTableWidth={1200} bind:page />
 </Story>
-
 
 <!-- tableSpecCustomHeaderColors -->
 <Story name="Coloured headers">
-	<Table
-		data={data}
-		tableSpec={tableSpecCustomHeaderColors}
-		fixedTableWidth={500}
-		bind:page
-	/>
+	<Table {data} tableSpec={tableSpecCustomHeaderColors} fixedTableWidth={500} bind:page />
 </Story>
-
-
-

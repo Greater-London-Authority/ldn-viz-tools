@@ -29,7 +29,8 @@
 	export let tableWidth;
 
 	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
-	$: bottomRuleClass = (tableSpec.showHeaderBottomRule === false || tableSpec.colGroups) ? '' : 'border-b';
+	$: bottomRuleClass =
+		tableSpec.showHeaderBottomRule === false || tableSpec.colGroups ? '' : 'border-b';
 </script>
 
 <div
