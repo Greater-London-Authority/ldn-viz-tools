@@ -44,6 +44,11 @@
 	 */
 	export let hintType: 'tooltip' | 'popover' | 'modal' = 'tooltip';
 
+	/**
+	 * The text color.
+	 */
+	export let color = '';
+
 	export let alignHeader: 'left' | 'right' | 'center' | undefined = 'left';
 	const alignmentClasses = {
 		left: 'justify-start',
@@ -57,7 +62,7 @@
 	$$restProps;
 </script>
 
-<div class="font-bold py-0.5 w-full h-full">
+<div class="font-bold py-0.5 w-full h-full" style:color={color}>
 	<svelte:element
 		this={allowSorting ? 'button' : 'div'}
 		class={classNames('flex items-center select-none', alignmentClass)}

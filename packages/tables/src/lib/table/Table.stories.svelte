@@ -121,6 +121,74 @@
 	};
 
 
+
+	const tableSpecCustomHeaderColors = {
+		showColSummaries: false,
+
+		showHeaderTopRule: false,
+		showHeaderBottomRule: false,
+
+		colGroups: [
+			{
+				label: 'Name',
+				startCol: 0,
+				endCol: 1,
+				color: 'red'
+			},
+			{
+				label: 'Pet',
+				startCol: 2,
+				endCol: 2,
+				color: 'blue'
+			}
+		],
+
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				alignHeader: 'center',
+
+				header: {
+					color: 'red'
+				},
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				alignHeader: 'center',
+
+				header: {
+					color: 'green'
+				},
+
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				alignHeader: 'center',
+
+				header: {
+					color: 'blue'
+				},
+
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
+
+
 	let wideTableSpec: { columns: ColSpec[] } = { columns: [] };
 	for (let i = 0; i < 25; i++) {
 		wideTableSpec.columns.push({
@@ -293,3 +361,17 @@
 		bind:page
 	/>
 </Story>
+
+
+<!-- tableSpecCustomHeaderColors -->
+<Story name="Coloured headers">
+	<Table
+		data={data}
+		tableSpec={tableSpecCustomHeaderColors}
+		fixedTableWidth={500}
+		bind:page
+	/>
+</Story>
+
+
+
