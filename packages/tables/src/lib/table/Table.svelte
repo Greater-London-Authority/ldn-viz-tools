@@ -241,7 +241,10 @@
 				bind:clientWidth={tableWidth}
 				role="table"
 			>
-				<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
+
+				{#if tableSpec.showTableHeader !== false}
+					<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
+				{/if}
 
 				{#if paginate}
 					<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">

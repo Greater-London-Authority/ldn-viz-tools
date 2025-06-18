@@ -89,6 +89,38 @@
 		]
 	};
 
+	const tableSpecNoHeader = {
+		showTableHeader: false,
+
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				column: {},
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
+
 	let wideTableSpec: { columns: ColSpec[] } = { columns: [] };
 	for (let i = 0; i < 25; i++) {
 		wideTableSpec.columns.push({
@@ -249,5 +281,15 @@
 		{tableSpec}
 		allowSorting
 		filename="My Table"
+	/>
+</Story>
+
+<!-- If required, the table header can be removed entirely-->
+<Story name="No header">
+	<Table
+		data={data}
+		tableSpec={tableSpecNoHeader}
+		fixedTableWidth={1200}
+		bind:page
 	/>
 </Story>
