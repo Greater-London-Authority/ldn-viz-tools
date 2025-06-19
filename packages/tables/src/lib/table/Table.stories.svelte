@@ -124,7 +124,7 @@
 		showColSummaries: false,
 
 		showHeaderTopRule: false,
-		showHeaderBottomRule: false,
+		// showHeaderBottomRule: false,
 
 		colGroups: [
 			{

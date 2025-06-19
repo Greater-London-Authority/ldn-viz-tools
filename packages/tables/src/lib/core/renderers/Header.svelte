@@ -62,7 +62,7 @@
 	$$restProps;
 </script>
 
-<div class="font-bold py-0.5 w-full h-full" style:color>
+<div class="font-semibold py-0.5 w-full h-full" style:color>
 	<svelte:element
 		this={allowSorting ? 'button' : 'div'}
 		class={classNames('flex items-center select-none', alignmentClass)}
