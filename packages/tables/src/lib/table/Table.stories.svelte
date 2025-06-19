@@ -10,7 +10,7 @@
 
 <script lang="ts">
 	import type { ColSpec } from '$lib/core/lib/types';
-	import { Button, Input } from '@ldn-viz/ui';
+	import { Button, currentTheme, Input, tokenNameToValue } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const data = [
@@ -84,6 +84,102 @@
 				short_label: 'pet',
 				label: 'Pet',
 				sortable: false,
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
+	const tableSpecNoHeader = {
+		showTableHeader: false,
+
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				column: {},
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
+	const tableSpecCustomHeaderColors = {
+		showColSummaries: false,
+
+		showHeaderTopRule: false,
+		// showHeaderBottomRule: false,
+
+		colGroups: [
+			{
+				label: 'Name',
+				startCol: 0,
+				endCol: 1,
+				color: tokenNameToValue('data.categorical.red', $currentTheme)
+			},
+			{
+				label: 'Pet',
+				startCol: 2,
+				endCol: 2,
+				color: tokenNameToValue('data.categorical.blue', $currentTheme)
+			}
+		],
+
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				alignHeader: 'center',
+
+				header: {
+					color: tokenNameToValue('data.categorical.red', $currentTheme)
+				},
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				alignHeader: 'center',
+
+				header: {
+					color: tokenNameToValue('data.categorical.red', $currentTheme)
+				},
+
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				alignHeader: 'center',
+
+				header: {
+					color: tokenNameToValue('data.categorical.blue', $currentTheme)
+				},
+
 				cell: { renderer: 'TextCell' }
 			}
 		]
@@ -250,4 +346,14 @@
 		allowSorting
 		filename="My Table"
 	/>
+</Story>
+
+<!-- If required, the table header can be removed entirely-->
+<Story name="No header">
+	<Table {data} tableSpec={tableSpecNoHeader} fixedTableWidth={1200} bind:page />
+</Story>
+
+<!-- tableSpecCustomHeaderColors -->
+<Story name="Coloured headers">
+	<Table {data} tableSpec={tableSpecCustomHeaderColors} fixedTableWidth={500} bind:page />
 </Story>

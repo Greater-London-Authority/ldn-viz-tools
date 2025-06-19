@@ -29,7 +29,8 @@
 	export let tableWidth;
 
 	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
-	$: bottomRuleClass = tableSpec.colGroups ? '' : 'border-b';
+	$: bottomRuleClass =
+		tableSpec.showHeaderBottomRule === false || tableSpec.colGroups ? '' : 'border-b';
 </script>
 
 <div
@@ -55,7 +56,7 @@
 		<AxisRow {table} />
 	{/if}
 
-	{#if tableSpec.colGroups}
+	{#if tableSpec.colGroups && tableSpec.showHeaderBottomRule !== false}
 		<ColumnGroupHeadingRuleRow {table} />
 	{/if}
 </div>
