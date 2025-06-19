@@ -10,7 +10,7 @@
 
 <script lang="ts">
 	import type { ColSpec } from '$lib/core/lib/types';
-	import { Button, Input } from '@ldn-viz/ui';
+	import { Button, currentTheme, Input, tokenNameToValue } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const data = [
@@ -131,13 +131,13 @@
 				label: 'Name',
 				startCol: 0,
 				endCol: 1,
-				color: 'red'
+				color: tokenNameToValue('data.categorical.red', $currentTheme)
 			},
 			{
 				label: 'Pet',
 				startCol: 2,
 				endCol: 2,
-				color: 'blue'
+				color: tokenNameToValue('data.categorical.blue', $currentTheme)
 			}
 		],
 
@@ -149,7 +149,7 @@
 				alignHeader: 'center',
 
 				header: {
-					color: 'red'
+					color: tokenNameToValue('data.categorical.red', $currentTheme)
 				},
 
 				cell: {
@@ -164,7 +164,7 @@
 				alignHeader: 'center',
 
 				header: {
-					color: 'green'
+					color: tokenNameToValue('data.categorical.red', $currentTheme)
 				},
 
 				cell: { renderer: 'TextCell' }
@@ -177,7 +177,7 @@
 				alignHeader: 'center',
 
 				header: {
-					color: 'blue'
+					color: tokenNameToValue('data.categorical.blue', $currentTheme)
 				},
 
 				cell: { renderer: 'TextCell' }
