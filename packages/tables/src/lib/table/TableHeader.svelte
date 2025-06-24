@@ -55,8 +55,8 @@
 	{#if table.columnSpec.some((c) => c.cell.axisRenderer)}
 		<AxisRow {table} />
 	{/if}
-
-	{#if tableSpec.colGroups && tableSpec.showHeaderBottomRule !== false}
-		<ColumnGroupHeadingRuleRow {table} />
-	{/if}
 </div>
+
+{#if tableSpec.colGroups && tableSpec.showHeaderBottomRule !== false}
+	<ColumnGroupHeadingRuleRow {table} />
+{/if}
