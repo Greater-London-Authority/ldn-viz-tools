@@ -32,6 +32,11 @@
 	export let popup: ComponentType | null = null;
 
 	/**
+	 * Optional message to be passed to child popop component via `mapMarkerString` context.
+	 */
+	export let msgString: string | null = null;
+
+	/**
 	 * Feature to which the popover should be attached.
 	 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
 	 */
@@ -79,7 +84,8 @@
 				...contexts,
 				['mapMarkerMaplibrePopup', maplibrePopup],
 				['mapMarkerFeature', feature],
-				['mapMarkerLayer', layer]
+				['mapMarkerLayer', layer],
+				['mapMarkerString', msgString]
 			])
 		});
 
