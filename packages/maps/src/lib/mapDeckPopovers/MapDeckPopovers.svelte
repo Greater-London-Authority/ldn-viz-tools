@@ -5,19 +5,20 @@
 	 * For each layer, the output can be specified as a string constant, a function that is passed a feature and returns a string, or a custom Svelte component.
 	 * @component
 	 */
+	import type { Layer } from '@deck.gl/core/typed';
 	import { clickedFeature, clickedLayer } from './stores';
 	import DefaultPopover from './DefaultPopover.svelte';
 	import MapPopover from '../mapPopover/MapPopover.svelte';
-	export let spec = {};
+	export let spec: Record<string, any> = {};
 	/**
 	 * List of layers, as provided to deck.gl.
 	 */
-	export let layers = [];
+	export let layers: Layer[] = [];
 	let tooltipSpec: any;
 	$: {
 		tooltipSpec = spec[$clickedLayer];
 	}
-	function isConstructor(obj) {
+	function isConstructor(obj: any) {
 		return !!obj.prototype && !!obj.prototype.constructor.name;
 	}
 	$: layerObj = layers.find((l) => l.id === $clickedLayer);
@@ -32,7 +33,7 @@
 	});
 </script>
 
-{#if layerObj && layerObj.visible !== false}
+{#if layerObj && layerObj.visible !== false && $clickedFeature && $clickedLayer}
 	{#if typeof tooltipSpec === 'string'}
 		<MapPopover
 			feature={$clickedFeature}

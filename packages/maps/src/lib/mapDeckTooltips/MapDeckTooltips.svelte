@@ -7,6 +7,7 @@
 	 */
 
 	import { mousedOverObject } from './stores';
+	import type { Layer } from '@deck.gl/core/typed';
 
 	import { arrow } from 'svelte-floating-ui';
 	import type { ClientRectObject } from 'svelte-floating-ui/core';
@@ -73,14 +74,14 @@
 	/**
 	 * List of layers. We need this so that we can remove a popover when the correpsodning layer is removed.
 	 */
-	export let layers = [];
+	export let layers: Layer[] = [];
 
-	export let spec = {};
+	export let spec: Record<string, any> = {};
 
 	let tooltipSpec: any;
 	let layerObj: any;
 	$: {
-		if ($mousedOverObject && $mousedOverObject.feature) {
+		if ($mousedOverObject && $mousedOverObject.feature && $mousedOverObject.layer) {
 			tooltipSpec = spec[$mousedOverObject.layer.id];
 			layerObj = layers.find((l) => l.id === $mousedOverObject?.layer?.id);
 		} else {
@@ -92,8 +93,6 @@
 	function isConstructor(obj: any) {
 		return !!obj.prototype && !!obj.prototype.constructor.name;
 	}
-
-	$: console.log({ layerObj, layers, feat: $mousedOverObject });
 </script>
 
 <svelte:window on:mousemove={mousemove} />

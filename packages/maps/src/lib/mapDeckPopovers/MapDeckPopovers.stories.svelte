@@ -18,6 +18,8 @@
 	import { Checkbox } from '@ldn-viz/ui';
 	import { onClickPopoverHandler } from './stores';
 	import DemoPopoverComponent from './demo/DemoPopoverComponent.svelte';
+	import type { Layer } from '@deck.gl/core/typed';
+	import type { Feature } from 'geojson';
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const TILE_BASE_URL = 'https://d1lfm2zniswzpu.cloudfront.net';
 	const getBoroughLayer = () => {
@@ -53,7 +55,7 @@
 
 	let showWards = false;
 	let showBoroughs = true;
-	let layers = [];
+	let layers: Layer[] = [];
 	$: {
 		layers = [];
 		if (showWards) {
@@ -109,8 +111,8 @@
 			<MapDeckPopovers
 				{layers}
 				spec={{
-					wardLayer: (feature) => feature.properties.wd22nm,
-					boroughLayer: (feature) => feature.properties.name
+					wardLayer: (feature: Feature) => feature.properties.wd22nm,
+					boroughLayer: (feature: Feature) => feature.properties.name
 				}}
 			/>
 		</Map>
