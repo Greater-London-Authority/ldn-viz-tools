@@ -1,6 +1,12 @@
 import type { StorybookConfig } from '@storybook/sveltekit';
 
+import { createRequire } from 'node:module';
 import { dirname, join } from 'path';
+
+/**
+ * Define Node `require` to fix storybook compatibility issues with Node v24
+ */
+const require = createRequire(import.meta.url);
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -32,14 +38,8 @@ const config: StorybookConfig = {
 		getAbsolutePath('@storybook/addon-interactions'),
 		getAbsolutePath('@storybook/addon-a11y')
 	],
-	framework: {
-		name: '@storybook/sveltekit',
-		options: {}
-	},
-	docs: {
-		autodocs: true,
-		defaultName: 'Documentation'
-	},
+	framework: { name: '@storybook/sveltekit', options: {} },
+	docs: { autodocs: true, defaultName: 'Documentation' },
 	staticDirs: ['../static']
 };
 export default config;
