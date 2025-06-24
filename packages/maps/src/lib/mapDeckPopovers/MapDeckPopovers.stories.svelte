@@ -19,7 +19,6 @@
 	import { onClickPopoverHandler } from './stores';
 	import DemoPopoverComponent from './demo/DemoPopoverComponent.svelte';
 	import type { Layer } from '@deck.gl/core/typed';
-	import type { Feature } from 'geojson';
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const TILE_BASE_URL = 'https://d1lfm2zniswzpu.cloudfront.net';
 	const getBoroughLayer = () => {
