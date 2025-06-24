@@ -111,8 +111,8 @@
 			<MapDeckPopovers
 				{layers}
 				spec={{
-					wardLayer: (feature: Feature) => feature.properties.wd22nm,
-					boroughLayer: (feature: Feature) => feature.properties.name
+					wardLayer: (feature) => feature.properties.wd22nm,
+					boroughLayer: (feature) => feature.properties.name
 				}}
 			/>
 		</Map>
