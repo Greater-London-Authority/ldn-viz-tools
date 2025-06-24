@@ -1,5 +1,18 @@
 # @ldn-viz/tables
 
+## 3.3.0
+
+### Minor Changes
+
+- b9c85da: ADDED: it is now possible to customize the color of column headers and column group headers.
+  Where more customization is needed, it is also possible to specify a custom renderer component (as was already possible for the cell and column summary renderers)
+  CHANGED: column headings are now semi-bold (rather than bold)
+
+### Patch Changes
+
+- Updated dependencies [8bde3bc]
+  - @ldn-viz/charts@5.3.0
+
 ## 3.2.0
 
 ### Minor Changes
