@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 7.6.1
+
+### Patch Changes
+
+- f9d211e: FIXED: export functions needed to use `MapDeckPopovers` and `MapDeckTooltips` components
+
 ## 7.6.0
 
 ### Minor Changes
