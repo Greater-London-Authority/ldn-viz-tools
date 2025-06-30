@@ -16,6 +16,8 @@ export { default as Theme } from './theme/Theme.svelte';
 export { theme } from './theme/themeState.svelte.js';
 export { default as ThemeSwitcher } from './theme/ThemeSwitcher.svelte';
 
+export { default as Switch } from './switch/Switch.svelte';
+
 export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPreference.js';
 
 export { classNames } from './utils/classNames.js';
