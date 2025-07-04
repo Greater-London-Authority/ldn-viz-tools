@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '@ldn-viz/ui';
+	import { Button } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
