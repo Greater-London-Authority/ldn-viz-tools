@@ -10,10 +10,9 @@
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
+	import { ColorLegend, currentThemeMode } from '@ldn-viz/ui';
 	import { scaleSequential } from 'd3-scale';
 	import { interpolateViridis } from 'd3-scale-chromatic';
-	import ColorLegend from '../../../../ui/src/lib/colorLegends/ColorLegend.svelte';
-	import { currentThemeMode } from '../../../../ui/src/lib/theme/themeStore';
 
 	import Map from '../map/Map.svelte';
 	import type { MapLibreStore } from '../map/types';
