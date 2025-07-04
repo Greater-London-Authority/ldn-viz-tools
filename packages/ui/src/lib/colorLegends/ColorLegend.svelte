@@ -220,7 +220,8 @@
 						.attr('y', marginTop + marginBottom - height - 6)
 						.attr('fill', 'currentColor')
 						.attr('text-anchor', 'start')
-						.attr('font-weight', 'bold')
+						.attr('font-weight', '500')
+						.attr('font-size', '12px')
 						.attr('class', 'title')
 						.text(title)
 				);
