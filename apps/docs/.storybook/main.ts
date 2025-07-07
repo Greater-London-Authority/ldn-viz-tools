@@ -38,14 +38,8 @@ const config: StorybookConfig = {
 		getAbsolutePath('@storybook/addon-interactions'),
 		getAbsolutePath('@storybook/addon-a11y')
 	],
-	framework: {
-		name: '@storybook/sveltekit',
-		options: {}
-	},
-	docs: {
-		autodocs: true,
-		defaultName: 'Documentation'
-	},
+	framework: { name: '@storybook/sveltekit', options: {} },
+	docs: { autodocs: true, defaultName: 'Documentation' },
 	staticDirs: ['../static']
 };
 export default config;
