@@ -4,7 +4,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	/**
-	 * The `<MapLegend>` component wraps around a `Legend` for display on maps.
+	 * The `<MapLegend>` component provides a container inside which a `Legend` can be inserted for display on maps.
 	 */
 
 	/**
