@@ -47,7 +47,7 @@ export default defineConfig({
 					// See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
 					storybookTest({
 						configDir: path.join(dirname, '.storybook'),
-						storybookScript: 'npm run storybook --ci',
+						storybookScript: 'npm run storybook --ci'
 					})
 				],
 				test: {
@@ -63,7 +63,7 @@ export default defineConfig({
 						]
 					},
 					setupFiles: ['.storybook/vitest.setup.ts'],
-					exclude: ['**/*.mdx', '../../packages/**/*.mdx', '../../apps/**/*.mdx'],
+					exclude: ['**/*.mdx', '../../packages/**/*.mdx', '../../apps/**/*.mdx']
 				}
 			}
 		]
