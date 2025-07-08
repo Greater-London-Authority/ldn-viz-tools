@@ -1,4 +1,3 @@
-// packages/config/vitest.config.ts
 import { defineConfig } from 'vitest/config';
 
 export const sveltekitConfig = defineConfig({
@@ -19,7 +18,7 @@ export const sveltekitConfig = defineConfig({
 						]
 					},
 					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
-					exclude: ['src/lib/server/**'],
+					exclude: ['src/lib/server/**', '**/*.mdx'],
 					setupFiles: ['./vitest-setup-client.ts']
 				}
 			},
@@ -29,7 +28,7 @@ export const sveltekitConfig = defineConfig({
 					name: 'server',
 					environment: 'node',
 					include: ['src/**/*.{test,spec}.{js,ts}'],
-					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}']
+					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}', '**/*.mdx']
 				}
 			}
 		]

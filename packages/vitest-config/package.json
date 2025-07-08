@@ -4,7 +4,7 @@
 	"exports": {
 		".": "./dist/index.js",
 		"./base": "./dist/configs/base-config.js",
-		"./ui": "./dist/configs/ui-config.js"
+		"./sveltekit": "./dist/configs/sveltekit-config.js"
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",

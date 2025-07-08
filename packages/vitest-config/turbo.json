@@ -1,6 +1,10 @@
 {
 	"extends": ["//"],
 	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": [".dist/**"]
+		},
 		"collect-json-reports": {
 			"cache": false
 		},

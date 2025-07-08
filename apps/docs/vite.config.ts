@@ -4,18 +4,42 @@ import { defineConfig } from 'vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
-import { sveltekitConfig } from '@ldn-viz/vitest-config';
 const dirname =
 	typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
-
-console.log({ dirname });
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		projects: [
-			...sveltekitConfig.test!.projects!,
+			{
+				extends: './vite.config.ts',
+				test: {
+					name: 'client',
+					environment: 'browser',
+					browser: {
+						enabled: true,
+						provider: 'playwright',
+						instances: [
+							{
+								browser: 'chromium'
+							}
+						]
+					},
+					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+					exclude: ['src/lib/server/**'],
+					setupFiles: ['./vitest-setup-client.ts']
+				}
+			},
+			{
+				extends: './vite.config.ts',
+				test: {
+					name: 'server',
+					environment: 'node',
+					include: ['src/**/*.{test,spec}.{js,ts}'],
+					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}']
+				}
+			},
 			{
 				extends: true,
 				plugins: [
@@ -23,7 +47,7 @@ export default defineConfig({
 					// See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
 					storybookTest({
 						configDir: path.join(dirname, '.storybook'),
-						storybookScript: 'npm run storybook --ci'
+						storybookScript: 'npm run storybook --ci',
 					})
 				],
 				test: {
@@ -38,8 +62,8 @@ export default defineConfig({
 							}
 						]
 					},
+					setupFiles: ['.storybook/vitest.setup.ts'],
 					exclude: ['**/*.mdx', '../../packages/**/*.mdx', '../../apps/**/*.mdx'],
-					setupFiles: ['.storybook/vitest.setup.ts']
 				}
 			}
 		]
