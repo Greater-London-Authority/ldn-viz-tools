@@ -11,6 +11,5 @@
 				"parser": "svelte"
 			}
 		}
-	],
-	"tailwindConfig": "../../packages/themes/ldn-theme.js"
+	]
 }
