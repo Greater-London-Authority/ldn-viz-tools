@@ -1,5 +1,5 @@
 {
-	"name": "@ldn-viz/eslint-config",
+	"name": "@ldn-viz/config-eslint",
 	"version": "1.0.0",
 	"private": true,
 	"type": "module",

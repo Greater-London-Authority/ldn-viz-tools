@@ -18,7 +18,7 @@
 			"persistent": true
 		},
 		"test": {
-			"dependsOn": ["transit", "@ldn-viz/vitest-config#build"],
+			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"],
 			"outputs": ["coverage.json"]
 		},
 		"transit": {

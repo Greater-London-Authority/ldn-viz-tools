@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.27.1",
-		"@ldn-viz/vitest-config": "*",
+		"@ldn-viz/config-vitest": "*",
 		"@storybook/addon-svelte-csf": "^5.0.3",
 		"@tailwindcss/node": "^4.1.8",
 		"@types/node": "^24.0.10",

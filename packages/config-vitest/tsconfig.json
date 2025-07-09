@@ -1,5 +1,5 @@
 {
-	"extends": "@ldn-viz/typescript-config/base.json",
+	"extends": "@ldn-viz/config-typescript/base.json",
 	"compilerOptions": {
 		"outDir": "dist",
 		"rootDir": "src"
