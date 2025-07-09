@@ -14,25 +14,25 @@
 </script>
 
 <Story name="Default">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay>This is a tooltip.</Overlay>
 	{/snippet}
 </Story>
 
 <Story name="With Tooltip">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="tooltip">This is a tooltip.</Overlay>
 	{/snippet}
 </Story>
 
 <Story name="With Popover">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="popover">This is a Popover.</Overlay>
 	{/snippet}
 </Story>
 
 <Story name="With Modal">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay
 			overlayType="modal"
 			modalTitle="Modal title"
@@ -44,7 +44,7 @@
 </Story>
 
 <Story name="With Modal - custom width">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay
 			overlayType="modal"
 			modalTitle="Modal title"
@@ -57,13 +57,13 @@
 </Story>
 
 <Story name="Custom hint label">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="tooltip" hintLabel="Custom label">This is a tooltip.</Overlay>
 	{/snippet}
 </Story>
 
 <Story name="Custom variant">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="tooltip" hintLabel="Custom label">
 			{#snippet trigger(props)}
 				<Trigger {...props} variant="solid" slim={false} />
@@ -74,7 +74,7 @@
 </Story>
 
 <Story name="Custom size">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="tooltip" hintLabel="Custom label">
 			{#snippet trigger(props)}
 				<Trigger {...props} size="lg" />
@@ -85,7 +85,7 @@
 </Story>
 
 <Story name="No icon">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="tooltip">
 			{#snippet trigger(props)}
 				<Trigger {...props}>No icons here</Trigger>
@@ -96,7 +96,7 @@
 </Story>
 
 <Story name="With Icon on right">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="tooltip">
 			{#snippet trigger(props)}
 				<Trigger {...props}>
@@ -110,7 +110,7 @@
 </Story>
 
 <Story name="With Icon on left">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="tooltip">
 			{#snippet trigger(props)}
 				<Trigger {...props}>
@@ -124,7 +124,7 @@
 </Story>
 
 <Story name="With custom trigger component">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Overlay overlayType="popover">
 			{#snippet trigger(props)}
 				<Button {...props}>Custom trigger component (click)</Button>
