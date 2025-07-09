@@ -5,7 +5,7 @@
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
-			"outputs": [".svelte-kit/**", ".vercel/**"]
+			"outputs": [".svelte-kit/**", "dist/**", "docs/**", "styles/**"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"]
@@ -17,7 +17,12 @@
 			"cache": false,
 			"persistent": true
 		},
-		"test": {},
-		"test:unit": {}
+		"test": {
+			"dependsOn": ["transit", "@ldn-viz/config-vitest#build"],
+			"outputs": ["coverage.json"]
+		},
+		"transit": {
+			"dependsOn": ["^transit"]
+		}
 	}
 }
