@@ -1,18 +1,13 @@
-import { defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
 export const baseConfig = defineConfig({
 	test: {
+		globals: true,
 		coverage: {
-			provider: 'istanbul',
-			reporter: [
-				[
-					'json',
-					{
-						file: `../coverage.json`
-					}
-				]
-			],
-			enabled: true
+			provider: 'v8',
+			reportsDirectory: './coverage/raw',
+			exclude: ['**/build', '**/*.config', ...coverageConfigDefaults.exclude],
+			reporter: [['json', { file: 'coverage.json' }]]
 		}
 	}
 });
