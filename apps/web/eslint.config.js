@@ -1,4 +1,4 @@
-import { config } from '@ldn-viz/eslint-config/index.js';
+import { config } from '@ldn-viz/config-eslint/index.js';
 
 export default [
 	...config,
