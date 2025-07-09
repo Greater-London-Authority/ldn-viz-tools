@@ -1,5 +1,5 @@
 const config = {
-	presets: [require('../../packages/themes/ldn-theme')],
+	presets: [require('@ldn-viz/themes/ldn-theme')],
 	content: [
 		'./src/**/*.{html,js,svelte,ts,mdx}',
 		'../../packages/ui/src/**/*.{html,js,svelte,ts,mdx}',

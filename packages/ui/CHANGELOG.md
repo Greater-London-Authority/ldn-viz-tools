@@ -33,7 +33,6 @@
 ### Minor Changes
 
 - 671dffc: CHANGED: `CheckboxGroup`, `LayerControl` and `LayerControlGroup` components
-
   - `LayerControlGroup` now passes `name` into `LayerControl`
   - `LayerControl` now passes `name` into `Checkbox`, in addition to `Radio`
   - For accessibility: `LayerControlGroup` and `CheckboxGroup` now have an `aria-controls` attribute on the checkbox that toggles all controls, with a value equal to the ids for all controls
@@ -46,7 +45,6 @@
 - de9b000: Refactored `LayerControlGroup`, `CheckboxGroup` and `Checkbox` components for accessibility.
 
   `LayerControlGroup` and `CheckboxGroup` now have:
-
   - `id` and `role="group"` attributes on the div that wraps around the `LayerControl` or `Checkbox` inputs
   - `ariaLabel` prop to describe the purpose of the components to screen reader users
   - `<ul>` element surrounding the options, with each option nested in an `<li>` element so screen reader users know the options are connected

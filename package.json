@@ -13,19 +13,26 @@
 		"lint": "turbo run lint",
 		"publish-packages": "turbo run build && changeset version && changeset publish",
 		"test": "turbo run test",
-		"test:unit": "turbo run test:unit"
+		"test-storybook": "npm run test-storybook -w apps/docs",
+		"test:coverage": "turbo run test:coverage",
+		"test:unit": "turbo run test:unit",
+		"view-report": "turbo run view-report",
+		"web": "npm run dev -w apps/web"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.27.1",
+		"@ldn-viz/config-vitest": "*",
 		"@storybook/addon-svelte-csf": "^5.0.3",
 		"@tailwindcss/node": "^4.1.8",
+		"@types/node": "^24.0.10",
 		"autoprefixer": "^10.4.21",
 		"prettier": "^3.5.3",
 		"prettier-plugin-packagejson": "^2.5.14",
 		"prettier-plugin-svelte": "^3.4.0",
 		"turbo": "^2.5.3",
 		"typescript": "5.8.2",
-		"vitest": "^3.0.0"
+		"vite": "^6.3.5",
+		"vitest": "^3.2.4"
 	},
 	"packageManager": "npm@11.3.0",
 	"engines": {

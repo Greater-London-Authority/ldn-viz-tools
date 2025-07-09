@@ -9,5 +9,6 @@
 		// "source.sortImports": "explicit"
 	},
 	"prettier.configPath": ".prettierrc",
-	"prettier.bracketSameLine": false
+	"prettier.bracketSameLine": false,
+	"vitest.disableWorkspaceWarning": true
 }
