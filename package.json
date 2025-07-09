@@ -14,6 +14,7 @@
 		"publish-packages": "turbo run build && changeset version && changeset publish",
 		"test": "turbo run test",
 		"test-storybook": "npm run test-storybook -w apps/docs",
+		"test:coverage": "turbo run test:coverage",
 		"test:unit": "turbo run test:unit",
 		"view-report": "turbo run view-report"
 	},
