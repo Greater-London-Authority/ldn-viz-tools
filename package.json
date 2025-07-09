@@ -16,7 +16,8 @@
 		"test-storybook": "npm run test-storybook -w apps/docs",
 		"test:coverage": "turbo run test:coverage",
 		"test:unit": "turbo run test:unit",
-		"view-report": "turbo run view-report"
+		"view-report": "turbo run view-report",
+		"web": "npm run dev -w apps/web"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.27.1",
