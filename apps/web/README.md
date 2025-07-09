@@ -1,8 +1,3 @@
-# @ldn-viz
-
-This contains documentation for the `@ldn-viz/maps`,`@ldn-viz/charts`, `@ldn-viz/ui` packages.
-
-
 ## Architecture
 
 This app uses [Velite](https://velite.js.org/) as an application data layer.
@@ -16,6 +11,3 @@ The [`vite.config.ts`](./vite.config.ts) config file allows file-system access t
 
 The [`src/lib/utils.ts`](./src/lib/utils.ts) file imports the index file from `$content/index.js` and exports functions that return documents and/or their metadata.
 These can be used within the [`load()` functions of `+page.ts` files](https://svelte.dev/docs/kit/load#Page-data); SvelteKit provides whatever this function returns to the corresponding `+page.svelte` file as the `data` prop.
-
-
-

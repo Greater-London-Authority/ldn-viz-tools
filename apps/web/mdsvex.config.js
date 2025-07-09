@@ -1,45 +1,45 @@
-import { defineMDSveXConfig } from "mdsvex";
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { defineMDSveXConfig } from 'mdsvex';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeSlug from "rehype-slug";
-import remarkGfm from "remark-gfm";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { createHighlighter } from "shiki";
-import { visit } from "unist-util-visit";
+import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { createHighlighter } from 'shiki';
+import { visit } from 'unist-util-visit';
 
 const prettyCodeOptions = {
 	theme: {
-		light: "github-light",
-		dark: "github-dark",
+		light: 'github-light',
+		dark: 'github-dark'
 	},
 	createHighlighter: (options) =>
 		createHighlighter({
 			...options,
 			langs: [
-				"plaintext",
-				import("shiki/langs/javascript.mjs"),
-				import("shiki/langs/typescript.mjs"),
-				import("shiki/langs/css.mjs"),
-				import("shiki/langs/svelte.mjs"),
-				import("shiki/langs/shellscript.mjs"),
-				import("shiki/langs/markdown.mjs"),
-			],
+				'plaintext',
+				import('shiki/langs/javascript.mjs'),
+				import('shiki/langs/typescript.mjs'),
+				import('shiki/langs/css.mjs'),
+				import('shiki/langs/svelte.mjs'),
+				import('shiki/langs/shellscript.mjs'),
+				import('shiki/langs/markdown.mjs')
+			]
 		}),
 	keepBackground: false,
 	onVisitLine(node) {
 		if (node.children.length === 0) {
 			// @ts-expect-error - we're changing the node type
-			node.children = { type: "text", value: " " };
+			node.children = { type: 'text', value: ' ' };
 		}
 	},
 	onVisitHighlightedLine(node) {
-		node.properties.className = ["line--highlighted"];
+		node.properties.className = ['line--highlighted'];
 	},
 	onVisitHighlightedChars(node) {
-		node.properties.className = ["chars--highlighted"];
-	},
+		node.properties.className = ['chars--highlighted'];
+	}
 };
 
 export const baseRemarkPlugins = [remarkGfm, remarkRemovePrettierIgnore];
@@ -47,7 +47,7 @@ export const baseRehypePlugins = [
 	rehypeSlug,
 	[rehypePrettyCode, prettyCodeOptions],
 	rehypeAutolinkHeadings,
-	rehypeHandleMetadata,
+	rehypeHandleMetadata
 ];
 
 /**
@@ -65,10 +65,10 @@ export const baseRehypePlugins = [
  */
 function remarkRemovePrettierIgnore() {
 	return async (tree) => {
-		visit(tree, "code", (node) => {
+		visit(tree, 'code', (node) => {
 			node.value = node.value
-				.replaceAll("<!-- prettier-ignore -->\n", "")
-				.replaceAll("// prettier-ignore\n", "");
+				.replaceAll('<!-- prettier-ignore -->\n', '')
+				.replaceAll('// prettier-ignore\n', '');
 		});
 	};
 }
@@ -81,23 +81,23 @@ function remarkRemovePrettierIgnore() {
 function rehypeHandleMetadata() {
 	return async (tree) => {
 		visit(tree, (node) => {
-			if (node?.type === "element" && node?.tagName === "figure") {
-				if (!("data-rehype-pretty-code-figure" in node.properties)) {
+			if (node?.type === 'element' && node?.tagName === 'figure') {
+				if (!('data-rehype-pretty-code-figure' in node.properties)) {
 					return;
 				}
 
 				const preElement = node.children.at(-1);
-				if (preElement && "tagName" in preElement && preElement.tagName !== "pre") {
+				if (preElement && 'tagName' in preElement && preElement.tagName !== 'pre') {
 					return;
 				}
 
 				const firstChild = node.children.at(0);
 
-				if (firstChild && "tagName" in firstChild && firstChild.tagName === "figcaption") {
-					node.properties["data-metadata"] = "";
+				if (firstChild && 'tagName' in firstChild && firstChild.tagName === 'figcaption') {
+					node.properties['data-metadata'] = '';
 					const lastChild = node.children.at(-1);
-					if (lastChild && "properties" in lastChild) {
-						lastChild.properties["data-metadata"] = "";
+					if (lastChild && 'properties' in lastChild) {
+						lastChild.properties['data-metadata'] = '';
 					}
 				}
 			}
@@ -105,13 +105,13 @@ function rehypeHandleMetadata() {
 	};
 }
 
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineMDSveXConfig({
 	extensions: ['.md'],
 	layout: {
-		_: resolve(__dirname, "./src/lib/layouts/docs.svelte")
+		_: resolve(__dirname, './src/lib/layouts/docs.svelte')
 	},
 	remarkPlugins: [...baseRemarkPlugins],
-	rehypePlugins: [...baseRehypePlugins],
+	rehypePlugins: [...baseRehypePlugins]
 });

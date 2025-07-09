@@ -1,19 +1,19 @@
 [
-  {
-    "title": "Introduction",
-    "description": "What exactly are we doing here?",
-    "path": "index",
-    "content": "<h1>Hello there!</h1>",
-    "raw": "# Hello there!",
-    "toc": [
-      {
-        "title": "Hello there!",
-        "url": "#hello-there",
-        "items": []
-      }
-    ],
-    "section": "Overview",
-    "slug": "index",
-    "slugFull": "/index"
-  }
+	{
+		"title": "Introduction",
+		"description": "What exactly are we doing here?",
+		"path": "index",
+		"content": "<h1>Hello there!</h1>",
+		"raw": "# Hello there!",
+		"toc": [
+			{
+				"title": "Hello there!",
+				"url": "#hello-there",
+				"items": []
+			}
+		],
+		"section": "Overview",
+		"slug": "index",
+		"slugFull": "/index"
+	}
 ]
