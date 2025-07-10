@@ -12,8 +12,16 @@
 	import Checkbox from './Checkbox.svelte';
 
 	interface CheckboxGroupProps extends InputProps {
-		ariaLabel?: string;
-
+		/**
+		 * Each element of this array defines a checkbox, and is an object with the properties:
+		 * * `id` (string)
+		 * * `name` (string, optional) - used to set the `name` attribute of the `<input>` element
+		 * * `label` (string) - the text displayed next to the checkbox
+		 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
+		 * * `color` (string, optional) - CSS color of the checkbox
+		 * * `hint` (string, optional) - help text to be displayed in tooltip
+		 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
+		 */
 		options: {
 			id: string;
 			name?: string;
@@ -24,8 +32,21 @@
 			hintLabel?: string;
 			customOverlay?: () => ReturnType<import('svelte').Snippet>;
 		}[];
+
+		/**
+		 * An array containing the `id` of each entry in the `options` array for which the corresponding checkbox is selected.
+		 */
 		selectedOptions?: string[];
+
+		/**
+		 * if `true`, then the "Select all" control is not displayed.
+		 */
 		hideSelectAll?: boolean;
+
+		/**
+		 * Accessible name of group to be read by screen reader.
+		 */
+		ariaLabel?: string;
 	}
 
 	let {
