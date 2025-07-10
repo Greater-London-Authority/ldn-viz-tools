@@ -4,7 +4,7 @@
 	const PageComponent = $derived(data.component);
 </script>
 
-<h1 class="headline responsive">{data.metadata.title}</h1>
-<p class="subhead responsive mb-typography-spacing-xl">{data.metadata.description}</p>
+<h1 class="responsive headline">{data.metadata.title}</h1>
+<p class="responsive subhead mb-typography-spacing-xl">{data.metadata.description}</p>
 
 <PageComponent />
