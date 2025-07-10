@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Overlay from '../overlay/Overlay.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
-	import type { CheckboxProps } from './types.js';
 	import { randomId } from '../utils/randomId';
+	import type { CheckboxProps } from './types.js';
 
 	/**
 	 * The `<Checkbox>` component provides a checkbox control as a Boolean input.
@@ -71,7 +71,7 @@
 
 		/**
 		 * Optional help snippet passed as an overlay component when a user interacts with the overlay trigger.
-		 * hint and hintLabel props are superceeded if customOverly is supplied
+		 * hint and hintLabel props are superceeded if customOverlay is supplied
 		 * It provides additional information intended to help the user decide whether to check the checkbox.
 		 */
 		customOverlay = undefined,

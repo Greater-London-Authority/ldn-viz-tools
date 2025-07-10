@@ -1,14 +1,11 @@
-import type { Snippet } from 'svelte';
+import type { InputProps } from '$lib/input/types';
 
-export type CheckboxProps = {
-	id: string;
-	name: string;
-	color: string;
+export interface CheckboxProps extends InputProps {
+	name?: string;
+	color?: string;
 	checked: boolean;
-	indeterminate: boolean;
-	label: string;
-	disabled: boolean;
-	hint: string;
-	hintLabel: string;
-	customOverlay?: Snippet;
-};
+	indeterminate?: boolean;
+
+	form?: string;
+	'aria-controls'?: string;
+}
