@@ -3,12 +3,16 @@
 		"editor.defaultFormatter": "svelte.svelte-vscode"
 	},
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
+
 	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"editor.formatOnType": true,
+
+	"prettier.requireConfig": true,
+	"editor.codeActions.triggerOnFocusChange": true,
 	"editor.codeActionsOnSave": {
-		// "source.fixAll": "explicit",
-		// "source.sortImports": "explicit"
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "explicit"
 	},
-	"prettier.configPath": ".prettierrc",
-	"prettier.bracketSameLine": false,
 	"vitest.disableWorkspaceWarning": true
 }
