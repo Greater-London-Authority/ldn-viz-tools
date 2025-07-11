@@ -52,7 +52,6 @@
 	let {
 		label,
 		id,
-		descriptionId,
 		description,
 		descriptionAlignment = 'left',
 		hintLabel,
@@ -68,6 +67,7 @@
 	}: CheckboxGroupProps = $props();
 
 	let errorId = $derived(error ? `${id}-error` : undefined);
+	let descriptionId = $derived(description ? `${id}-description` : undefined);
 
 	let selectionState = $derived.by(() =>
 		Object.fromEntries(options.map((o) => [o.id, selectedOptions.includes(o.id)]))
@@ -104,8 +104,6 @@
 			selectedOptions = [...selectedOptions, optionId];
 		}
 	};
-
-	// $inspect(customOverlay);
 </script>
 
 <InputWrapper

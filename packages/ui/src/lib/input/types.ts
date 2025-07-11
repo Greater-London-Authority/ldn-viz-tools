@@ -37,9 +37,6 @@ export interface InputProps {
 	 */
 	hintLabel?: string;
 
-	errorId?: string;
-	descriptionId?: string;
-
 	/**
 	 * Message to be displayed below `<input>` in red text (replacing description).
 	 * If set, then the border of the `<input>` is also red.
