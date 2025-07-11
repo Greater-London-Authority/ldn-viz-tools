@@ -1,9 +1,10 @@
 import chroma from 'chroma-js';
 
-import { bin, extent, min, max } from 'd3-array';
+import { bin, extent, max, min } from 'd3-array';
 import { format } from 'd3-format';
 
-import ldnColors from '@ldn-viz/themes/colors.json';
+import ldnColors from '@ldn-viz/themes/styles/js/theme-tokens';
+const defaultColor = ldnColors.theme.light.color.palette;
 
 const d3 = {
 	bin,
@@ -17,7 +18,7 @@ const d3 = {
 
 export const getColorRamp = ({
 	count = 5,
-	colors = [ldnColors.core.blue[500], ldnColors.core.blue[200]],
+	colors = [defaultColor.blue[600], defaultColor.blue[200]],
 	even = false
 } = {}) => {
 	let colorArray = [];
@@ -44,14 +45,14 @@ export const getThresholdBreaksColorsLabels = ({
 	valuePrepend = '', // if need to add char ahead of value like "~" or "x" etc
 	colors = {
 		pos: {
-			low: ldnColors.core.blue[200],
-			high: ldnColors.core.blue[800]
+			low: defaultColor.blue[200],
+			high: defaultColor.blue[800]
 		},
 		neg: {
-			low: ldnColors.core.red[200],
-			high: ldnColors.core.red[800]
+			low: defaultColor.red[200],
+			high: defaultColor.red[800]
 		},
-		neutral: ldnColors.core.grey[100]
+		neutral: defaultColor.grey[200]
 	},
 	even = true // chromas.js perceptually even scales
 } = {}) => {

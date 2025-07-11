@@ -36,6 +36,10 @@ module.exports = plugin(function ({ addComponents }) {
 			'&:disabled': {
 				'border-color': 'var(--theme-input-border-disabled)',
 				'background-color': 'var(--theme-input-background-disabled)'
+			},
+			'&:disabled:hover': {
+				'border-color': 'var(--theme-input-border-disabled)',
+				'background-color': 'var(--theme-input-background-disabled)'
 			}
 		},
 		'.form-radio': {

@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
 const defaultTheme = require('tailwindcss/defaultTheme');
-const oldLdnColors = require('./colors.json');
 const ldnColors = require('./styles/tw-extend/color');
 const ldnSpacing = require('./styles/tw-extend/spacing');
 const plugin = require('tailwindcss/plugin');
@@ -23,7 +22,7 @@ const config = {
 			}
 		},
 		extend: {
-			colors: { ...oldLdnColors, ...ldnColors },
+			colors: { ...ldnColors },
 			spacing: {
 				...ldnSpacing
 			},
