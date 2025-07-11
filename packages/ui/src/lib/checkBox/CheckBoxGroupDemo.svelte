@@ -1,3 +1,5 @@
+// N.B. This story has been extracted into a separate component because each Story is wrapped by a snippet; this would capture the `customOverlay()` snippet, preventing it from being accessed in the `<script>` section and added to the  objects in the `optionsWithCustomOverlay` array.
+
 <script lang="ts">
 	import Overlay from '../overlay/Overlay.svelte';
 	import CheckboxGroup from './CheckboxGroup.svelte';
