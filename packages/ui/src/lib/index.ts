@@ -9,6 +9,7 @@ export { default as Popover } from './popover/Popover.svelte';
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
 export { default as Switch } from './switch/Switch.svelte';
+export { default as Checkbox } from './checkBox/Checkbox.svelte';
 
 export { default as Theme } from './theme/Theme.svelte';
 export { theme } from './theme/themeState.svelte.js';
