@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { InformationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { Snippet } from 'svelte';
 	import Button from '../button/Button.svelte';
 	import type { ButtonProps } from '../button/types.js';
-	import type { Snippet } from 'svelte';
 
 	type Props = {
 		/**
@@ -35,7 +35,7 @@
 
 	let {
 		hintLabel = 'More Info',
-		size = 'sm',
+		size = 'xs',
 		emphasis = 'secondary',
 		variant = 'text',
 		slim = true,

@@ -1,6 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Overlay from '../overlay/Overlay.svelte';
+	import { theme } from '../theme/themeState.svelte';
 	import Checkbox from './Checkbox.svelte';
 
 	/**
@@ -68,7 +69,7 @@
 
 <Story name="Colored checkbox">
 	{#snippet template(args)}
-		<Checkbox {...args} color="#008D48" />
+		<Checkbox {...args} color={theme.tokenNameToValue('data.categorical.orange')} />
 		<p class="text-color-text-secondary mt-8">Checked: {checked}</p>
 	{/snippet}
 </Story>

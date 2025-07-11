@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Overlay from '../overlay/Overlay.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
+
 	import { randomId } from '../utils/randomId';
 	import type { CheckboxProps } from './types.js';
 
