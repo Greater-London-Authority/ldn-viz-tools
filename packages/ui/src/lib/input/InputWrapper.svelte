@@ -4,6 +4,11 @@
 	import { classNames } from '../utils/classNames';
 	import type { InputProps } from './types';
 
+	interface InputWrapperProps extends InputProps {
+		errorId?: string;
+		descriptionId?: string;
+	}
+
 	let {
 		label = '',
 		id = undefined,
@@ -18,7 +23,7 @@
 		optional = false,
 		customOverlay = undefined,
 		children
-	}: InputProps = $props();
+	}: InputWrapperProps = $props();
 
 	let descriptionClass = $derived(
 		classNames(
