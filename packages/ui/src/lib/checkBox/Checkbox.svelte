@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Overlay from '../overlay/Overlay.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
-	import type { CheckboxProps } from './types.js';
+
 	import { randomId } from '../utils/randomId';
+	import type { CheckboxProps } from './types.js';
 
 	/**
 	 * The `<Checkbox>` component provides a checkbox control as a Boolean input.
@@ -15,67 +16,16 @@
 	 */
 
 	let {
-		/**
-		 * Value set as the `id` attribute of the `<input>` element (defaults to randomly generated value).
-		 */
 		id = randomId(),
-
-		/**
-		 * Value set as the `name` attribute of the `<input>` element (optional, but required if providing value with a form submission)
-		 */
 		name = '',
-
-		/**
-		 * Color of the checkbox, as a string in any CSS color format
-		 * (e.g., "LightCoral", "#FFA500", "hsl(120, 100%, 25%)", "rgb(255, 0, 0)").
-		 *  The color should be selected from the design system.
-		 */
 		color = '',
-
-		/**
-		 * Boolean indicating whether the checkbox is currently *checked*.
-		 * Can be bound to and modified from outside the component.
-		 */
 		checked = $bindable(false),
-
-		/**
-		 * Boolean indicating whether the checkbox is in an *indeterminate state*
-		 * (indicated by a horizontal line resembling a hyphen or minus sign, rather than a check or tick).
-		 * This usually indicates that a checkbox has several child checkboxes, of which some (but not all) are checked.
-		 * Can be bound to and modified from outside the component.
-		 */
 		indeterminate = false,
-
-		/**
-		 * String appearing next to the checkbox.
-		 */
-		label,
-
-		/**
-		 * Boolean indicating whether the checkbox is *disabled*.
-		 * If it is disabled, then the user cannot change whether it is *checked* (either using the mouse or keyboard).
-		 */
+		label = '',
 		disabled = false,
-
-		/**
-		 * Optional help text that appears in a tooltip when a user interacts with the tooltip trigger.
-		 * It provides additional information intended to help the user decide whether to check the checkbox.
-		 */
 		hint = '',
-
-		/**
-		 * Optional text that appears next to the information icon (the letter "i" in a circle) in the tooltip trigger.
-		 * It provides additional clues that help text is available (e.g. "More information", "About", "Help")
-		 */
 		hintLabel = '',
-
-		/**
-		 * Optional help snippet passed as an overlay component when a user interacts with the overlay trigger.
-		 * hint and hintLabel props are superceeded if customOverly is supplied
-		 * It provides additional information intended to help the user decide whether to check the checkbox.
-		 */
 		customOverlay = undefined,
-
 		...restProps
 	}: CheckboxProps = $props();
 </script>
