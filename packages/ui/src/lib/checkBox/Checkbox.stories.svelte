@@ -1,7 +1,8 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Checkbox from './Checkbox.svelte';
 	import Overlay from '../overlay/Overlay.svelte';
+	import { theme } from '../theme/themeState.svelte';
+	import Checkbox from './Checkbox.svelte';
 
 	/**
 	 * The `<Checkbox>` component provides a checkbox control as a Boolean input.
@@ -34,7 +35,7 @@
 	{#snippet template(args)}
 		<Checkbox {...args} bind:checked />
 
-		<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
+		<p class="text-color-text-secondary mt-8">Checked: {checked}</p>
 	{/snippet}
 </Story>
 
@@ -68,7 +69,7 @@
 
 <Story name="Colored checkbox">
 	{#snippet template(args)}
-		<Checkbox {...args} color="#008D48" />
-		<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
+		<Checkbox {...args} color={theme.tokenNameToValue('data.categorical.orange')} />
+		<p class="text-color-text-secondary mt-8">Checked: {checked}</p>
 	{/snippet}
 </Story>
