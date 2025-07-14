@@ -3,24 +3,37 @@
 	import NavigationMenu from './NavigationMenu.svelte';
 
 	/**
-	 * The `NavigationMenu` component is used to display a short message in a coloured banner.
+	 * Primarily intended to be used in vertical orientation in a sidebar or horizontal in the header,
+	 * The `NavigationMenu` component is used to display navigation that can be one to many layers deep.
 	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/NavigationMenu',
 		component: NavigationMenu,
-		tags: ['autodocs']
+		tags: ['autodocs'],
+		parameters: {
+			sveltekit_experimental: {
+				hrefs: {
+					'/root.*': {
+						callback: (to: string, event: MouseEvent) => {
+							console.log(to, event);
+						},
+						asRegex: true
+					}
+				}
+			}
+		}
 	});
 
 	let selectedMenuItemId = $state('layout');
 
 	let subMenu = [
-		{ title: 'Accessibility', id: 'accessibility', url: '#accessibility' },
-		{ title: 'Brand', id: 'brand', url: '/' },
-		{ title: 'Color', id: 'color', url: '/' },
-		{ title: 'Typography', id: 'typography', url: '/' },
-		{ title: 'Spacing', id: 'spacing', url: '/' },
-		{ title: 'Design Tokens', id: 'design-tokens', url: '/' }
+		{ title: 'Accessibility', id: 'accessibility', url: '/accessibility' },
+		{ title: 'Brand', id: 'brand', url: '/brand' },
+		{ title: 'Color', id: 'color', url: '/color' },
+		{ title: 'Typography', id: 'typography', url: '/typography' },
+		{ title: 'Spacing', id: 'spacing', url: '/spacing' },
+		{ title: 'Design Tokens', id: 'design-tokens', url: '/design-tokens' }
 	];
 
 	let subMenuNoLinks = [
@@ -66,46 +79,46 @@
 		{
 			title: 'Foundations',
 			id: 'foundations',
-			url: '/',
+			url: '/foundations',
 			children: subMenu
 		},
 		{
 			title: 'Applications',
 			id: 'applications',
-			url: '/',
+			url: '/applications',
 			children: [
 				{
 					title: 'Layout',
 					id: 'layout',
-					url: '/',
+					url: '/layout',
 					children: [
-						{ title: 'Applications', id: 'layout-applications', url: '/' },
-						{ title: 'Maps', id: 'layout-maps', url: '/' }
+						{ title: 'Applications', id: 'layout-applications', url: '/layout-applications' },
+						{ title: 'Maps', id: 'layout-maps', url: '/layout-maps' }
 					]
 				},
-				{ title: 'User Interface', id: 'userInterface', url: '/' }
+				{ title: 'User Interface', id: 'userInterface', url: '/userInterface' }
 			]
 		},
 		{
 			title: 'Data Visualisation',
 			id: 'dataVisualisation',
-			url: '/',
+			url: '/dataVisualisation',
 			children: [
-				{ title: 'Principles', id: 'dv-principles', url: '/' },
-				{ title: 'Accessibility', id: 'dv-accessibility', url: '/' },
+				{ title: 'Principles', id: 'dv-principles', url: '/dv-principles' },
+				{ title: 'Accessibility', id: 'dv-accessibility', url: '/dv-accessibility' },
 				{
 					title: 'Color',
 					id: 'dv-color',
-					url: '/',
+					url: '/dv-color',
 					children: [
-						{ title: 'Categorical', id: 'dv-categorical', url: '/' },
-						{ title: 'Quantitative', id: 'dv-quantitative', url: '/' },
-						{ title: 'Maps', id: 'dv-maps', url: '/' }
+						{ title: 'Categorical', id: 'dv-categorical', url: '/dv-categorical' },
+						{ title: 'Quantitative', id: 'dv-quantitative', url: '/dv-quantitative' },
+						{ title: 'Maps', id: 'dv-maps', url: '/dv-maps' }
 					]
 				},
-				{ title: 'Scaling Shapes', id: 'dv-shapes', url: '/' },
-				{ title: 'Chart Themes', id: 'dv-chartThemes', url: '/' },
-				{ title: 'Chart Examples', id: 'dv-chartExamples', url: '/' }
+				{ title: 'Scaling Shapes', id: 'dv-shapes', url: '/dv-shapes' },
+				{ title: 'Chart Themes', id: 'dv-chartThemes', url: '/dv-chartThemes' },
+				{ title: 'Chart Examples', id: 'dv-chartExamples', url: '/dv-chartExamples' }
 			]
 		}
 	];
