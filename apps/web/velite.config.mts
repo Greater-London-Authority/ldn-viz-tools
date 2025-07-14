@@ -1,4 +1,4 @@
-import { defineConfig, s } from 'velite';
+import { defineConfig, s, type UserConfig } from 'velite';
 
 const baseSchema = s.object({
 	title: s.string(),
@@ -28,4 +28,4 @@ export default defineConfig({
 			schema: docSchema
 		}
 	}
-});
+}) as UserConfig;
