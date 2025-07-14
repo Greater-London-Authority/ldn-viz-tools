@@ -28,49 +28,49 @@
 	let selectedMenuItemId = $state('layout');
 
 	let subMenu = [
-		{ title: 'Accessibility', id: 'accessibility', url: '/accessibility' },
-		{ title: 'Brand', id: 'brand', url: '/brand' },
-		{ title: 'Color', id: 'color', url: '/color' },
-		{ title: 'Typography', id: 'typography', url: '/typography' },
-		{ title: 'Spacing', id: 'spacing', url: '/spacing' },
-		{ title: 'Design Tokens', id: 'design-tokens', url: '/design-tokens' }
+		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
+		{ title: 'Brand', id: 'brand', href: '/brand' },
+		{ title: 'Color', id: 'color', href: '/color' },
+		{ title: 'Typography', id: 'typography', href: '/typography' },
+		{ title: 'Spacing', id: 'spacing', href: '/spacing' },
+		{ title: 'Design Tokens', id: 'design-tokens', href: '/design-tokens' }
 	];
 
 	let subMenuNoLinks = [
 		{
 			title: 'Accessibility',
 			id: 'accessibility-nl',
-			url: '',
+			href: '',
 			children: subMenu.map((i) => ({ ...i, id: `a-${i.id}` }))
 		},
 		{
 			title: 'Brand',
 			id: 'brand-nl',
-			url: '',
+			href: '',
 			children: subMenu.map((i) => ({ ...i, id: `b-${i.id}` }))
 		},
 		{
 			title: 'Color',
 			id: 'color-nl',
-			url: '',
+			href: '',
 			children: subMenu.map((i) => ({ ...i, id: `c-${i.id}` }))
 		},
 		{
 			title: 'Typography',
 			id: 'typography-nl',
-			url: '',
+			href: '',
 			children: subMenu.map((i) => ({ ...i, id: `d-${i.id}` }))
 		},
 		{
 			title: 'Spacing',
 			id: 'spacing-nl',
-			url: '',
+			href: '',
 			children: subMenu.map((i) => ({ ...i, id: `e-${i.id}` }))
 		},
 		{
 			title: 'Design Tokens',
 			id: 'tokens-nl',
-			url: '',
+			href: '',
 			children: subMenu.map((i) => ({ ...i, id: `f-${i.id}` }))
 		}
 	];
@@ -79,46 +79,46 @@
 		{
 			title: 'Foundations',
 			id: 'foundations',
-			url: '/foundations',
+			href: '/foundations',
 			children: subMenu
 		},
 		{
 			title: 'Applications',
 			id: 'applications',
-			url: '/applications',
+			href: '/applications',
 			children: [
 				{
 					title: 'Layout',
 					id: 'layout',
-					url: '/layout',
+					href: '/layout',
 					children: [
-						{ title: 'Applications', id: 'layout-applications', url: '/layout-applications' },
-						{ title: 'Maps', id: 'layout-maps', url: '/layout-maps' }
+						{ title: 'Applications', id: 'layout-applications', href: '/layout-applications' },
+						{ title: 'Maps', id: 'layout-maps', href: '/layout-maps' }
 					]
 				},
-				{ title: 'User Interface', id: 'userInterface', url: '/userInterface' }
+				{ title: 'User Interface', id: 'userInterface', href: '/userInterface' }
 			]
 		},
 		{
 			title: 'Data Visualisation',
 			id: 'dataVisualisation',
-			url: '/dataVisualisation',
+			href: '/dataVisualisation',
 			children: [
-				{ title: 'Principles', id: 'dv-principles', url: '/dv-principles' },
-				{ title: 'Accessibility', id: 'dv-accessibility', url: '/dv-accessibility' },
+				{ title: 'Principles', id: 'dv-principles', href: '/dv-principles' },
+				{ title: 'Accessibility', id: 'dv-accessibility', href: '/dv-accessibility' },
 				{
 					title: 'Color',
 					id: 'dv-color',
-					url: '/dv-color',
+					href: '/dv-color',
 					children: [
-						{ title: 'Categorical', id: 'dv-categorical', url: '/dv-categorical' },
-						{ title: 'Quantitative', id: 'dv-quantitative', url: '/dv-quantitative' },
-						{ title: 'Maps', id: 'dv-maps', url: '/dv-maps' }
+						{ title: 'Categorical', id: 'dv-categorical', href: '/dv-categorical' },
+						{ title: 'Quantitative', id: 'dv-quantitative', href: '/dv-quantitative' },
+						{ title: 'Maps', id: 'dv-maps', href: '/dv-maps' }
 					]
 				},
-				{ title: 'Scaling Shapes', id: 'dv-shapes', url: '/dv-shapes' },
-				{ title: 'Chart Themes', id: 'dv-chartThemes', url: '/dv-chartThemes' },
-				{ title: 'Chart Examples', id: 'dv-chartExamples', url: '/dv-chartExamples' }
+				{ title: 'Scaling Shapes', id: 'dv-shapes', href: '/dv-shapes' },
+				{ title: 'Chart Themes', id: 'dv-chartThemes', href: '/dv-chartThemes' },
+				{ title: 'Chart Examples', id: 'dv-chartExamples', href: '/dv-chartExamples' }
 			]
 		}
 	];
@@ -204,7 +204,7 @@
 		<NavigationMenu
 			{...args}
 			ariaLabel="horizontally oriented menu"
-			items={[...items, { title: 'No child items', id: 'no-child', url: '/' }]}
+			items={[...items, { title: 'No child items', id: 'no-child', href: '/' }]}
 			orientation="horizontal"
 		/>
 	{/snippet}

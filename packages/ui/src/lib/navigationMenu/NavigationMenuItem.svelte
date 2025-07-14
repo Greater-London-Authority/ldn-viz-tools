@@ -1,62 +1,14 @@
-<script module lang="ts">
-	export interface NavigationMenuEntry {
-		title: string;
-		id: string;
-		url: string;
-		children?: NavigationMenuEntry[];
-		isExpanded?: boolean;
-	}
-</script>
-
 <script lang="ts">
 	import NavigationMenuItem from './NavigationMenuItem.svelte';
+	import { type NavigationMenuItemProps, type NavigationMenuProps } from './types';
 
 	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getContext } from 'svelte';
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 	import { selected } from './navigationMenuState.svelte';
-
-	interface Props {
-		/**
-		 * Value set as the `id` attribute of the `<a>` or `<div>` element. Should be in the array of `items` but defaults to randomly generated value in case not.
-		 */
-		id?: any;
-		/**
-		 * Url to navigate to when link is clicked.
-		 */
-		href: string;
-		/**
-		 * Link title which should correspond to the page title
-		 */
-		title: string;
-		/**
-		 * Value set to apply styling to text. Defaults to 1, as in base list but increases if the list is nested.
-		 */
-		level?: number;
-		/**
-		 * Optional list of children items, if they exist.
-		 */
-		children?: NavigationMenuEntry[];
-		/**
-		 * Sets whether or not the list is expanded
-		 */
-		isExpanded?: boolean;
-		/**
-		 * If all list items should be visible at all times, set this
-		 * to `true`.
-		 */
-		isAlwaysExpanded?: boolean;
-		/**
-		 * Optional prop to change orientation. Default is vertical.
-		 */
-		orientation?: 'vertical' | 'horizontal';
-		/**
-		 * Event handler to handle what happens when links are clicked.
-		 */
-		onChange: any;
-	}
 
 	let {
 		id = randomId(),
@@ -65,10 +17,14 @@
 		level = 1,
 		children = [],
 		isExpanded = $bindable(false),
-		isAlwaysExpanded = false,
-		orientation = 'vertical',
 		onChange
-	}: Props = $props();
+	}: NavigationMenuItemProps = $props();
+
+	const navContext: Record<keyof NavigationMenuProps, any> = getContext('navContext');
+
+	let isAlwaysExpanded = navContext.isAlwaysExpanded as boolean;
+
+	let orientation = navContext.orientation as NavigationMenuProps['orientation'];
 
 	let childMenuId = title.toLowerCase() + '-menu';
 
@@ -93,7 +49,7 @@
 	 * When the parent list collapses, any children that are expanded also collapse.
 	 * This means next time the parent list is expanded, the children aren't already expanded.
 	 */
-	const toggleChildren = (children: NavigationMenuEntry[], expanded: boolean) => {
+	const toggleChildren = (children: NavigationMenuItemProps[], expanded: boolean) => {
 		return children.map((child) => {
 			if (expanded === false && child.isExpanded === true) {
 				return {
@@ -131,12 +87,12 @@
 		)
 	);
 
-	const orientationClasses = {
+	const orientationClasses: Record<'vertical' | 'horizontal', string> = {
 		vertical: '',
 		horizontal: `w-full ${level === 1 ? 'absolute z-10' : 'relative'}`
 	};
 
-	const listClasses = {
+	const listClasses: Record<'vertical' | 'horizontal', string> = {
 		vertical: `${level === 1 ? 'border-t border-color-ui-border-secondary' : ''} `,
 		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
 	};
@@ -144,10 +100,10 @@
 	let childClasses = $derived(
 		classNames(
 			!isExpanded ? 'hidden' : `${level === 2 ? 'pl-4' : ''} mb-1`,
-			orientationClasses[orientation]
+			orientationClasses[orientation!]
 		)
 	);
-	let listItemClasses = $derived(classNames(listClasses[orientation]));
+	let listItemClasses = $derived(classNames(listClasses[orientation!]));
 </script>
 
 <li class={listItemClasses}>
@@ -163,7 +119,7 @@
 				</button>
 			{/if}
 
-			{#if !isAlwaysExpanded}
+			{#if !navContext.isAlwaysExpanded}
 				<Button
 					onclick={() => toggleMenu()}
 					slim={true}
@@ -197,13 +153,11 @@
 		<ul id={childMenuId} class={childClasses}>
 			{#each toggledChildren as child}
 				<NavigationMenuItem
-					href={child.url}
+					href={child.href}
 					title={child.title}
 					id={child.id}
 					children={child.children}
 					level={level + 1}
-					{orientation}
-					{isAlwaysExpanded}
 					{onChange}
 					isExpanded={child.isExpanded}
 				/>

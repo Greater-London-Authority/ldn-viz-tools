@@ -6,6 +6,7 @@ export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as Flag } from './flag/Flag.svelte';
 export { default as Modal } from './modal/Modal.svelte';
+export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelte';
 export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
 export { default as Popover } from './popover/Popover.svelte';

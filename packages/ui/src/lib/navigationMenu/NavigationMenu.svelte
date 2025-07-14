@@ -1,40 +1,10 @@
 <script lang="ts">
+	import { setContext } from 'svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
-	import type { NavigationMenuEntry } from './NavigationMenuItem.svelte';
 	import NavigationMenuItem from './NavigationMenuItem.svelte';
 	import { selected } from './navigationMenuState.svelte';
-
-	interface Props {
-		/**
-		 * Label to describe what the nav menu is for.
-		 */
-		ariaLabel: string;
-		/**
-		 * Value for the `id` attribute of the nav list
-		 */
-		id?: string;
-		/**
-		 * Array of list items for rendering, that take a label and optional url and children.
-		 */
-		items: NavigationMenuEntry[];
-		/**
-		 * Optional prop to customise width
-		 */
-		width?: string;
-		/**
-		 * Optional prop to disable collapsing and expanding sections and make all list items visible.
-		 */
-		isAlwaysExpanded?: boolean;
-		/**
-		 * Optional prop to change orientation
-		 */
-		orientation?: 'vertical' | 'horizontal';
-		/**
-		 * Exposes active menu item to parent container for modification.
-		 */
-		selectedMenuItemId?: string;
-	}
+	import type { NavigationMenuItemProps, NavigationMenuProps } from './types';
 
 	let {
 		ariaLabel,
@@ -44,12 +14,17 @@
 		isAlwaysExpanded = false,
 		orientation = 'vertical',
 		selectedMenuItemId = $bindable('')
-	}: Props = $props();
+	}: NavigationMenuProps = $props();
 
 	/**
-	 * Assigns value of active menu item (if set) to `$selected` internal store.
+	 * Assigns value of active menu item (if set) to `selected` internal state.
 	 */
 	selected.value = selectedMenuItemId;
+
+	/**
+	 * Set props as context for retieval by items.
+	 */
+	setContext('navContext', { orientation, isAlwaysExpanded });
 
 	const orientationClasses = {
 		vertical: 'flex-col border-b border-color-ui-border-secondary',
@@ -67,20 +42,20 @@
 		}
 	};
 
-	const hasMatchingChild = (item: NavigationMenuEntry, targetId: string) =>
+	const hasMatchingChild = (item: NavigationMenuItemProps, targetId: string) =>
 		item.children?.some(
-			(child: NavigationMenuEntry) =>
+			(child: NavigationMenuItemProps) =>
 				child.id === targetId ||
 				(child.children &&
-					mapItems(child.children, targetId).some((c: NavigationMenuEntry) => c.isExpanded))
+					mapItems(child.children, targetId).some((c: NavigationMenuItemProps) => c.isExpanded))
 		);
 
 	/**
 	 * Recursive function to handle applying `isExpanded` state, toggling expansion
 	 * of list when a child is selected
 	 */
-	const mapItems: any = (items: NavigationMenuEntry[], targetId: string) =>
-		items.map((item: NavigationMenuEntry) => ({
+	const mapItems: any = (items: NavigationMenuItemProps[], targetId: string) =>
+		items.map((item: NavigationMenuItemProps) => ({
 			...item,
 			isExpanded: !isAlwaysExpanded
 				? hasMatchingChild(item, targetId) || item.id === targetId
@@ -93,17 +68,8 @@
 
 <nav aria-label={ariaLabel} class={width}>
 	<ul {id} class={menuClasses}>
-		{#each menuState as { title, url, children, id, isExpanded }}
-			<NavigationMenuItem
-				href={url}
-				{title}
-				{id}
-				{children}
-				{isAlwaysExpanded}
-				{onChange}
-				{orientation}
-				{isExpanded}
-			/>
+		{#each menuState as { title, href, children, id, isExpanded }}
+			<NavigationMenuItem {href} {title} {id} {children} {onChange} {isExpanded} />
 		{/each}
 	</ul>
 </nav>
