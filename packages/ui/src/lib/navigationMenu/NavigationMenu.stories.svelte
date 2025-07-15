@@ -149,7 +149,7 @@
 	{/snippet}
 </Story>
 
-<!-- Width defaults to 100% of the parent container. You may wish to use the parent width to control the menu width -->
+<!-- Width defaults to 100% of the parent container. You may wish to use the parent width to control the menu width. -->
 <Story name="Width constrained by parent">
 	{#snippet template(args)}
 		<div class="max-w-96">
