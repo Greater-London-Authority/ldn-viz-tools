@@ -39,7 +39,7 @@ export interface NavigationMenuItemProps {
 	 */
 	id?: any;
 	/**
-	 * Url to navigate to when link is clicked.
+	 * URL to navigate to when link is clicked.
 	 */
 	href: string;
 	/**
