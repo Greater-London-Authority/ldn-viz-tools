@@ -52,7 +52,7 @@
 
 	/**
 	 * Recursive function to handle applying `isExpanded` state, toggling expansion
-	 * of list when a child is selected
+	 * of list when a child is selected.
 	 */
 	const mapItems: any = (items: NavigationMenuItemProps[], targetId: string) =>
 		items.map((item: NavigationMenuItemProps) => ({
