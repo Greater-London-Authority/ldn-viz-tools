@@ -7,7 +7,7 @@
 			const { Story } = defineMeta({
 		title: 'Maps/Components/Map',
 		component: Map,
-						tags: ['autodocs'],
+		tags: ['autodocs'],
 		render: defaultTemplate,
 
 		parameters: {
