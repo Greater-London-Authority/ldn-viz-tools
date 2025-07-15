@@ -136,7 +136,7 @@
 	{/snippet}
 </Story>
 
-<!-- The component takes a width prop that can accept tailwind width classes -->
+<!-- The component takes a width prop that can accept Tailwind width classes -->
 <Story name="Width by class">
 	{#snippet template(args)}
 		<NavigationMenu
