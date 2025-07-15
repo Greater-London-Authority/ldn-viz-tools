@@ -47,7 +47,7 @@ export interface NavigationMenuItemProps {
 	 */
 	children?: NavigationMenuItemProps[];
 	/**
-	 * Sets whether or not the list is expanded
+	 * Sets whether or not the list is expanded.
 	 */
 	isExpanded?: boolean;
 	/**
