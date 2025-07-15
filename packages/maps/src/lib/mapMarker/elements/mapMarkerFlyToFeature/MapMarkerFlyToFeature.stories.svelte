@@ -1,9 +1,13 @@
-<script module>
+<script context="module" lang="ts">
+		import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerFlyToFeature from './MapMarkerFlyToFeature.svelte';
 
-	export const meta = {
+			const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerFlyToFeature',
 		component: MapMarkerFlyToFeature,
+		tags: ['autodocs'],
+		render: defaultTemplate,
+
 		parameters: {
 			layout: 'full'
 		},
@@ -13,11 +17,10 @@
 				control: 'none'
 			}
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 
 	import Map from '../../../map/Map.svelte';
@@ -31,13 +34,12 @@
 	setContext('mapMarkerFeature', {});
 </script>
 
-<Template >
-	{#snippet children({ args })}
+{#snippet defaultTemplate({ args })}
 		<MapMarkerFlyToFeature {...args} />
-	{/snippet}
-</Template>
+{/snippet}
 
 <Story name="Interactive Example">
+		{#snippet template(args)}
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
@@ -50,4 +52,5 @@
 			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" popup={MapMarkerFlyToFeature} />
 		</Map>
 	</div>
+	{/snippet}
 </Story>

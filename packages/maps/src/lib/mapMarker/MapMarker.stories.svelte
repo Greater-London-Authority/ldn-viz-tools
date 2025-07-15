@@ -1,4 +1,5 @@
-<script module>
+<script context="module" lang="ts">
+		import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarker from './MapMarker.svelte';
 
 	const componentType = {
@@ -11,9 +12,12 @@
 		}
 	};
 
-	export const meta = {
+			const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker',
 		component: MapMarker,
+		tags: ['autodocs'],
+		render: defaultTemplate,
+
 		parameters: {
 			layout: 'full'
 		},
@@ -29,12 +33,10 @@
 			tooltip: componentType,
 			popup: componentType
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	import loadTestLayers from '../loadTestLayers';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
@@ -44,13 +46,12 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
 
-<Template >
-	{#snippet children({ args })}
+{#snippet defaultTemplate({ args })}
 		<MapMarker {...args} />
-	{/snippet}
-</Template>
+{/snippet}
 
 <Story name="Interactive Example">
+		{#snippet template(args)}
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
@@ -75,4 +76,5 @@
 			/>
 		</Map>
 	</div>
+	{/snippet}
 </Story>

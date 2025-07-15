@@ -1,7 +1,8 @@
-<script module>
+<script context="module" lang="ts">
+		import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerPlacement from './MapMarkerPlacement.svelte';
 
-	export const meta = {
+			const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerPlacement',
 		component: MapMarkerPlacement,
 		parameters: {
@@ -14,11 +15,10 @@
 				control: 'none'
 			}
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -37,13 +37,12 @@
 	setContext('mapStore', writable(null));
 </script>
 
-<Template >
-	{#snippet children({ args })}
+{#snippet defaultTemplate({ args })}
 		<MapMarkerPlacement {...args} />
-	{/snippet}
-</Template>
+{/snippet}
 
 <Story name="Default">
+		{#snippet template(args)}
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
@@ -59,9 +58,11 @@
 			/>
 		</Map>
 	</div>
+	{/snippet}
 </Story>
 
 <Story name="Center above feature">
+		{#snippet template(args)}
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
@@ -83,10 +84,12 @@
 			/>
 		</Map>
 	</div>
+	{/snippet}
 </Story>
 
 <!-- To see how this differs from centering on a feature, try moving your mouse across an area feature. -->
 <Story name="Follow mouse">
+		{#snippet template(args)}
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
@@ -99,9 +102,12 @@
 			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipFollowMouse} />
 		</Map>
 	</div>
+	{/snippet}
 </Story>
 
 <Story name="No placement">
+		{#snippet template(args)}
+
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
@@ -114,4 +120,5 @@
 			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipNone} />
 		</Map>
 	</div>
+	{/snippet}
 </Story>

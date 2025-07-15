@@ -17,7 +17,7 @@
 	 * @component
 	 */
 
-	import { getAllContexts } from 'svelte';
+	import { getAllContexts, mount, unmount } from 'svelte';
 	import maplibre_gl from 'maplibre-gl';
 	import MapCursorEvent from '../mapCursorEvent/MapCursorEvent.svelte';
 
@@ -153,14 +153,14 @@
 	const removeTooltip = () => {
 		tooltipMaplibrePopup?.remove();
 		tooltipMaplibrePopup = null;
-		tooltipInstance?.$destroy();
+		tooltipInstance && unmount(tooltipInstance);
 		tooltipInstance = null;
 	};
 
 	const removePopup = () => {
 		popupMaplibrePopup?.remove();
 		popupMaplibrePopup = null;
-		popupInstance?.$destroy();
+		popupInstance && unmount(popupInstance);
 		popupInstance = null;
 		popupFeature = null;
 	};
@@ -182,7 +182,7 @@
 		// If a new property from the event is required in component context, pass
 		// (and maybe clone) the specific event property and pass it into the
 		// function below to be set directly in the context.
-		const instance = new component({
+		const instance = mount(component, {
 			target: container,
 			context: new Map([
 				...contexts,

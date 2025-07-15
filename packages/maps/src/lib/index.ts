@@ -12,8 +12,25 @@ export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefr
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 
 
+// TODD - Location Search
+
+// TODO - Borough Selector
+
 // Events
 export { default as MapCursorEvent } from './mapCursorEvent/MapCursorEvent.svelte';
+
+// Popups
+export { default as MapMarker } from './mapMarker/MapMarker.svelte';
+export { default as MapMarkerContainer } from './mapMarker/elements/mapMarkerContainer/MapMarkerContainer.svelte';
+export { default as MapMarkerFlyToFeature } from './mapMarker/elements/mapMarkerFlyToFeature/MapMarkerFlyToFeature.svelte';
+export { default as MapMarkerPlacement } from './mapMarker/elements/mapMarkerPlacement/MapMarkerPlacement.svelte';
+export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
+
+// export { default as MapDeckPopovers } from './mapDeckPopovers/MapDeckPopovers.svelte';
+// export { default as MapDeckTooltips } from './mapDeckTooltips/MapDeckTooltips.svelte';
+
+export { default as MapPopover } from './mapPopover/MapPopover.svelte';
+
 
 // Layers
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
