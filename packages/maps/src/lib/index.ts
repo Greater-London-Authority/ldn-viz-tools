@@ -25,8 +25,8 @@ export { default as MapMarkerFlyToFeature } from './mapMarker/elements/mapMarker
 export { default as MapMarkerPlacement } from './mapMarker/elements/mapMarkerPlacement/MapMarkerPlacement.svelte';
 export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
-// export { default as MapDeckPopovers } from './mapDeckPopovers/MapDeckPopovers.svelte';
-// export { default as MapDeckTooltips } from './mapDeckTooltips/MapDeckTooltips.svelte';
+export { default as MapDeckPopovers } from './mapDeckPopovers/MapDeckPopovers.svelte';
+export { default as MapDeckTooltips } from './mapDeckTooltips/MapDeckTooltips.svelte';
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
@@ -37,6 +37,9 @@ export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
 // Context Layers
 export { default as BoroughsContextLayer } from './mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
+
+// Deck.gl
+export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelte';
 
 // themes
 export * from './themes/animations';
