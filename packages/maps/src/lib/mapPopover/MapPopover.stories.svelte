@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-		import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapPopover from './MapPopover.svelte';
 
 	const componentType = {
@@ -12,10 +12,10 @@
 		}
 	};
 
-			const { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapPopover',
 		component: MapPopover,
-						tags: ['autodocs'],
+		tags: ['autodocs'],
 		render: defaultTemplate,
 
 		parameters: {
@@ -67,27 +67,27 @@
 </script>
 
 {#snippet defaultTemplate({ args })}
-		<MapPopover {...args} />
+	<MapPopover {...args} />
 {/snippet}
 
 <Story name="Interactive Example">
-		{#snippet template(args)}
-	<div class="flex gap-2 p-2">
-		<Button onclick={() => (selectedFeature = feature_1)}>Select point 1</Button>
-		<Button onclick={() => (selectedFeature = feature_2)}>Select point 2</Button>
-		<Button onclick={() => (selectedFeature = undefined)} disabled={!selectedFeature}>
-			Unselect point
-		</Button>
-	</div>
+	{#snippet template(args)}
+		<div class="flex gap-2 p-2">
+			<Button onclick={() => (selectedFeature = feature_1)}>Select point 1</Button>
+			<Button onclick={() => (selectedFeature = feature_2)}>Select point 2</Button>
+			<Button onclick={() => (selectedFeature = undefined)} disabled={!selectedFeature}>
+				Unselect point
+			</Button>
+		</div>
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapPopover feature={selectedFeature} popup={DemoPopover} />
-		</Map>
-	</div>
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapPopover feature={selectedFeature} popup={DemoPopover} />
+			</Map>
+		</div>
 	{/snippet}
 </Story>

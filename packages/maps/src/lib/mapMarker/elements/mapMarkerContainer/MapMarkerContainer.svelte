@@ -10,29 +10,22 @@
 	import MapMarkerPlacement from '../mapMarkerPlacement/MapMarkerPlacement.svelte';
 	import MapMarkerStyledContainer from '../mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
-	 */
+		 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
+		 */
 		placement?: string;
 		/**
-	 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
-	 */
+		 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
+		 */
 		noTip?: boolean;
 		/**
-	 * If `true`, then the standard container padding is not applied.
-	 */
+		 * If `true`, then the standard container padding is not applied.
+		 */
 		noPad?: boolean;
 		/**
-	 * If `true`, then the map will fly to the feature after the component is mounted.
-	 */
+		 * If `true`, then the map will fly to the feature after the component is mounted.
+		 */
 		flyToFeature?: boolean;
 		children?: import('svelte').Snippet;
 	}

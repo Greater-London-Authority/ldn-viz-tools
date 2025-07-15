@@ -8,20 +8,17 @@
 	 * @component
 	 */
 
-	
-
-	
 	interface Props {
 		/**
-	 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
-	 */
+		 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
+		 */
 		noTip?: boolean;
 		/**
-	 * If `true`, then the standard container padding is not applied.
-	 */
+		 * If `true`, then the standard container padding is not applied.
+		 */
 		noPad?: boolean;
 		children?: import('svelte').Snippet;
-		[key: string]: any
+		[key: string]: any;
 	}
 
 	let { noTip = false, noPad = false, children, ...rest }: Props = $props();
@@ -35,7 +32,9 @@
 		}
 	};
 
-	let classes = $state(`shadow-lg border border-color-ui-border-secondary absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container-level-0 overflow-y-auto`);
+	let classes = $state(
+		`shadow-lg border border-color-ui-border-secondary absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container-level-0 overflow-y-auto`
+	);
 	classes += ' ' + (rest.class || '');
 	delete rest.class;
 </script>
@@ -47,7 +46,7 @@
 	The stopImmediatePropagation on mousemove prevents tooltips below this
 	marker from being shown when mouseover.	
 -->
-<div class="relative text-color-text-primary text-sm">
+<div class="text-color-text-primary relative text-sm">
 	<div
 		role="tooltip"
 		bind:this={container}
@@ -64,7 +63,7 @@
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 150 100"
-			class="absolute bottom-0 left-1/2 w-8 h-4 transform -translate-x-1/2 stroke-color-ui-border-secondary fill-color-container-level-0"
+			class="stroke-color-ui-border-secondary fill-color-container-level-0 absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform"
 		>
 			<line
 				class="stroke-color-ui-border-secondary"

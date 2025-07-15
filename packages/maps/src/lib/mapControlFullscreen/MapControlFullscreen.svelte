@@ -80,7 +80,7 @@
 
 {#if mode}
 	<div
-		class="flex flex-col space-y-1 invisible sm:visible shadow dark:border dark:border-color-ui-border-primary"
+		class="dark:border-color-ui-border-primary invisible flex flex-col space-y-1 shadow sm:visible dark:border"
 	>
 		<Button
 			variant="square"
@@ -89,7 +89,7 @@
 			class="pointer-events-auto"
 			onclick={handle}
 		>
-			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="w-8 h-8 p-1" />
+			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="h-8 w-8 p-1" />
 		</Button>
 	</div>
 {/if}

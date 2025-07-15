@@ -35,18 +35,15 @@
 	 * @component
 	 */
 
-	
-
-	
 	interface Props {
 		/**
-	 * Position of the group over the map. Available positions defined by
-	 * `MapControlGroupPositions` enum type.
-	 */
+		 * Position of the group over the map. Available positions defined by
+		 * `MapControlGroupPositions` enum type.
+		 */
 		position?: keyof typeof MapControlGroupPositions;
 		/**
-	 * Additional classes applied to the group's container element.
-	 */
+		 * Additional classes applied to the group's container element.
+		 */
 		classes?: string;
 		children?: import('svelte').Snippet;
 	}
@@ -56,7 +53,7 @@
 	const positionClass = positionClasses[position];
 </script>
 
-<div class="absolute {positionClass} z-10 flex flex-col space-y-2 pointer-events-none {classes} ">
+<div class="absolute {positionClass} pointer-events-none z-10 flex flex-col space-y-2 {classes} ">
 	<!-- Group content, usually map control buttons. -->
 	{@render children?.()}
 </div>

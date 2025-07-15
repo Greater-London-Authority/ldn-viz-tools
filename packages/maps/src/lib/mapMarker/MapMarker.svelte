@@ -25,35 +25,28 @@
 	const mapStore = contexts.get('mapStore');
 	const ctxLayerId = contexts.get('mapLayerId');
 
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * ID of the target layer. Defaults to using the value of 'mapLayerId'
-	 * context if it exists.
-	 */
+		 * ID of the target layer. Defaults to using the value of 'mapLayerId'
+		 * context if it exists.
+		 */
 		layerId?: any;
 		/**
-	 * Disables cursor style changes triggered on feature hover.
-	 *
-	 * By default, the map cursor is a grab icon to indicate the map can be
-	 * panned. Hovering a feature that has a clickable popup shows a pointer
-	 * (the pointer implying clickability) and tooltips will show the default OS
-	 * cursor icon.
-	 */
+		 * Disables cursor style changes triggered on feature hover.
+		 *
+		 * By default, the map cursor is a grab icon to indicate the map can be
+		 * panned. Hovering a feature that has a clickable popup shows a pointer
+		 * (the pointer implying clickability) and tooltips will show the default OS
+		 * cursor icon.
+		 */
 		noCursorStyle?: boolean;
 		/**
-	 * Component to render when the user's mouse hovers over a feature.
-	 */
+		 * Component to render when the user's mouse hovers over a feature.
+		 */
 		tooltip?: any;
 		/**
-	 * Component to render when the user clicks on a feature.
-	 */
+		 * Component to render when the user clicks on a feature.
+		 */
 		popup?: any;
 		children?: import('svelte').Snippet;
 	}

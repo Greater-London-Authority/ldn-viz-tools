@@ -11,7 +11,6 @@ export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 
-
 // TODD - Location Search
 
 // TODO - Borough Selector
@@ -31,7 +30,6 @@ export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMar
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
-
 // Layers
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
 export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptations/geojsonMapLayerSource/GeoJSONMapLayerSource.svelte';
@@ -39,7 +37,6 @@ export { default as MapLayerView } from './mapLayerView/MapLayerView.svelte';
 
 // Context Layers
 export { default as BoroughsContextLayer } from './mapContextLayers/boroughsContextLayer/BoroughsContextLayer.svelte';
-
 
 // themes
 export * from './themes/animations';
@@ -49,4 +46,3 @@ export * as theme_os_dark_grey_muted_buildings from './themes/os_dark_grey_muted
 export * as theme_os_dark from './themes/os_dark.json';
 export * as theme_os_greyscale from './themes/os_greyscale.json';
 export * as theme_os_light_vts from './themes/os_light_vts.json';
-

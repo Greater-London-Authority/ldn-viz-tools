@@ -9,11 +9,10 @@
 	import PlacementCenterAboveFeature from './PlacementCenterAboveFeature.svelte';
 	import PlacementFollowMouse from './PlacementFollowMouse.svelte';
 
-	
 	interface Props {
 		/**
-	 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
-	 */
+		 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
+		 */
 		placement?: string;
 		children?: import('svelte').Snippet;
 	}

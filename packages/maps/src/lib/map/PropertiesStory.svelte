@@ -37,7 +37,7 @@
 	};
 </script>
 
-<div class="w-[100dvw] h-[100dvh]">
+<div class="h-[100dvh] w-[100dvw]">
 	<Map
 		whenMapLoads={registerClickHandler}
 		whenMapUnloads={unregisterClickHandler}
@@ -46,7 +46,7 @@
 		}}
 	>
 		<ul
-			class="absolute top-0 left-0 z-10 bg-color-container-level-0 text-color-text-primary text-sm m-2 p-2"
+			class="bg-color-container-level-0 text-color-text-primary absolute left-0 top-0 z-10 m-2 p-2 text-sm"
 		>
 			{#each clickedLayerIDs as id (id)}
 				<li>{id}</li>

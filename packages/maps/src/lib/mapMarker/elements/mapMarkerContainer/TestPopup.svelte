@@ -7,7 +7,7 @@
 </script>
 
 <MapMarkerContainer flyToFeature>
-	<h1 class="text-lg font-medium text-center">
+	<h1 class="text-center text-lg font-medium">
 		{props.site_name}
 	</h1>
 	<div>

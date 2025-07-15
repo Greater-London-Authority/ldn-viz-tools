@@ -26,40 +26,28 @@
 	const contexts = getAllContexts();
 	const mapStore = contexts.get('mapStore');
 
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * Svelte component used to render the tooltip.
-	 */
+		 * Svelte component used to render the tooltip.
+		 */
 		popup?: ComponentType | null;
 		/**
-	 * Optional message to be passed to child popop component via `mapMarkerString` context.
-	 */
+		 * Optional message to be passed to child popop component via `mapMarkerString` context.
+		 */
 		msgString?: string | null;
 		/**
-	 * Feature to which the popover should be attached.
-	 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
-	 */
+		 * Feature to which the popover should be attached.
+		 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
+		 */
 		feature: Feature;
 		/**
-	 * Name of layer containing this feature.
-	 * This is passed to the popover component via the `mapMarkerLayer` context.
-	 */
+		 * Name of layer containing this feature.
+		 * This is passed to the popover component via the `mapMarkerLayer` context.
+		 */
 		layer?: string;
 	}
 
-	let {
-		popup = null,
-		msgString = null,
-		feature,
-		layer = ''
-	}: Props = $props();
+	let { popup = null, msgString = null, feature, layer = '' }: Props = $props();
 
 	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
 	let popupInstance: SvelteComponent | null = null;

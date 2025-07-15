@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-		import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarker from './MapMarker.svelte';
 
 	const componentType = {
@@ -12,7 +12,7 @@
 		}
 	};
 
-			const { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker',
 		component: MapMarker,
 		tags: ['autodocs'],
@@ -47,34 +47,34 @@
 </script>
 
 {#snippet defaultTemplate({ args })}
-		<MapMarker {...args} />
+	<MapMarker {...args} />
 {/snippet}
 
 <Story name="Interactive Example">
-		{#snippet template(args)}
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/polygon"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/line"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/point"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-		</Map>
-	</div>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/polygon"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/line"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/point"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+			</Map>
+		</div>
 	{/snippet}
 </Story>

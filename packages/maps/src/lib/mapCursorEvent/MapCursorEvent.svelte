@@ -31,51 +31,38 @@
 	const mapCursorStore: MapCursorStore = getContext('mapCursorStore');
 	const ctxLayerId: undefined | string = getContext('mapLayerId');
 
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * ID of the target layer. Defaults to using the value of the `mapLayerId`
-	 * context if it exists.
-	 */
+		 * ID of the target layer. Defaults to using the value of the `mapLayerId`
+		 * context if it exists.
+		 */
 		layerId?: any;
 		/**
-	 * Called when the mouse cursor enters a feature. This will be called
-	 * separately for each feature in the layer.
-	 */
+		 * Called when the mouse cursor enters a feature. This will be called
+		 * separately for each feature in the layer.
+		 */
 		enterFeature?: MaybeMapCursorFeatureHandler;
 		/**
-	 * Called when the mouse cursor leaves a feature. This will be called
-	 * separately for each feature in the layer.
-	 */
+		 * Called when the mouse cursor leaves a feature. This will be called
+		 * separately for each feature in the layer.
+		 */
 		leaveFeature?: MaybeMapCursorFeatureHandler;
 		/**
-	 * Called when the mouse cursor enters a feature and the feature is ordered
-	 * above all others.
-	 */
+		 * Called when the mouse cursor enters a feature and the feature is ordered
+		 * above all others.
+		 */
 		enterTopFeature?: MaybeMapCursorFeatureHandler;
 		/**
-	 * Called when the mouse cursor leaves a feature the top feature.
-	 */
+		 * Called when the mouse cursor leaves a feature the top feature.
+		 */
 		leaveTopFeature?: MaybeMapCursorFeatureHandler;
 		/**
-	 * Called when any part of the map is clicked.
-	 */
+		 * Called when any part of the map is clicked.
+		 */
 		clickMap?: MaybeMapCursorFeatureHandler;
 		/**
-	 * Called when a feature is clicked.
-	 */
+		 * Called when a feature is clicked.
+		 */
 		clickFeature?: MaybeMapCursorFeatureHandler;
 		children?: import('svelte').Snippet;
 	}

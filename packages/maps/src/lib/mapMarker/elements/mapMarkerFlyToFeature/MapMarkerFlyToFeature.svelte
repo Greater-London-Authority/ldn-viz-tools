@@ -46,11 +46,10 @@
 </script>
 
 <script lang="ts">
-	
 	interface Props {
 		/**
-	 * If `true`, then all fly events are disabled.
-	 */
+		 * If `true`, then all fly events are disabled.
+		 */
 		disabled?: boolean;
 		children?: import('svelte').Snippet;
 	}

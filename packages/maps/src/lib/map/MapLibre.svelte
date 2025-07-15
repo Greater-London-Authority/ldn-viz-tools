@@ -29,39 +29,32 @@
 		clickTolerance: 6
 	};
 
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * Disables initialisation of the map on mount. This is most often used
-	 * to avoid uneeded map rendering during development of non-map application
-	 * elements.
-	 */
+		 * Disables initialisation of the map on mount. This is most often used
+		 * to avoid uneeded map rendering during development of non-map application
+		 * elements.
+		 */
 		disabled?: boolean;
 		/**
-	 * Custom MapLibre options (see [MapOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
-	 */
+		 * Custom MapLibre options (see [MapOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
+		 */
 		options?: MapLibreOptions;
 		/**
-	 * Called during component mounting after the map has been created but
-	 * before it has loaded.
-	 *
-	 * This allows custom `load` functions to be added to the map instance
-	 * before loading occurs.
-	 */
+		 * Called during component mounting after the map has been created but
+		 * before it has loaded.
+		 *
+		 * This allows custom `load` functions to be added to the map instance
+		 * before loading occurs.
+		 */
 		whenMapCreated?: null | WhenMapLoads;
 		/**
-	 * Called during component unmounting just before the map and component are
-	 * destroyed.
-	 */
+		 * Called during component unmounting just before the map and component are
+		 * destroyed.
+		 */
 		whenMapDestroyed?: null | WhenMapLoads;
 		children?: import('svelte').Snippet;
-		[key: string]: any
+		[key: string]: any;
 	}
 
 	let {

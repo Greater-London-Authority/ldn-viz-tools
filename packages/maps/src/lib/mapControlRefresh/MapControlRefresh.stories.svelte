@@ -4,7 +4,7 @@
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
-			const { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlRefresh',
 		component: MapControlRefresh,
 		tags: ['autodocs'],
@@ -29,26 +29,25 @@
 	{/snippet}
 {/snippet}
 
-
 <Story name="Refresh Button">
 	{#snippet template(args)}
-	<div class="w-[100dvw] h-[100dvh]">
-		<div class="text-color-text-primary space-y-4 m-2">
-			<p>
-				The refresh page button is usually positioned in the bottom left corner under the fullscreen
-				button.
-			</p>
-		</div>
+		<div class="h-[100dvh] w-[100dvw]">
+			<div class="text-color-text-primary m-2 space-y-4">
+				<p>
+					The refresh page button is usually positioned in the bottom left corner under the
+					fullscreen button.
+				</p>
+			</div>
 
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapControlGroup position="BottomLeft">
-				<MapControlRefresh />
-			</MapControlGroup>
-		</Map>
-	</div>
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="BottomLeft">
+					<MapControlRefresh />
+				</MapControlGroup>
+			</Map>
+		</div>
 	{/snippet}
 </Story>

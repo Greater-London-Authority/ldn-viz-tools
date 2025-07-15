@@ -13,35 +13,26 @@
 		return tokens.theme[mode];
 	};
 
-	
-
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * Color of borough borders.
-	 */
+		 * Color of borough borders.
+		 */
 		lineColor?: any;
 		/**
-	 * Opacity of borough borders between 0 and 1.
-	 */
+		 * Opacity of borough borders between 0 and 1.
+		 */
 		lineOpacity?: number;
 		/**
-	 * Width of the borough borders.
-	 */
+		 * Width of the borough borders.
+		 */
 		lineWidth?: number;
 		/**
-	 * Color of borough fill.
-	 */
+		 * Color of borough fill.
+		 */
 		fillColor?: any;
 		/**
-	 * Opacity of borough fill between 0 and 1.
-	 */
+		 * Opacity of borough fill between 0 and 1.
+		 */
 		fillOpacity?: number;
 	}
 

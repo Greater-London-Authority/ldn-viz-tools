@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-		import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerStyledContainer from './MapMarkerStyledContainer.svelte';
 
 	const { Story } = defineMeta({
@@ -42,35 +42,35 @@
 </script>
 
 {#snippet defaultTemplate({ args })}
-		<div class="flex justify-center items-center mt-32 mb-4">
-			<MapMarkerStyledContainer {...args}>
-				<div class="w-auto max-w-44">
-					{#if args?.noPad} <!-- TODO: args is undefined? -->
-						<p>Suitable for edge-to-edge images. Any padding will need to be applied manually.</p>
-					{:else}
-						<p>Content goes here. Content goes here. Content goes here. Content goes here.</p>
-					{/if}
-				</div>
-			</MapMarkerStyledContainer>
-		</div>
-	{/snippet}
-
+	<div class="mb-4 mt-32 flex items-center justify-center">
+		<MapMarkerStyledContainer {...args}>
+			<div class="w-auto max-w-44">
+				{#if args?.noPad}
+					<!-- TODO: args is undefined? -->
+					<p>Suitable for edge-to-edge images. Any padding will need to be applied manually.</p>
+				{:else}
+					<p>Content goes here. Content goes here. Content goes here. Content goes here.</p>
+				{/if}
+			</div>
+		</MapMarkerStyledContainer>
+	</div>
+{/snippet}
 
 <Story name="Default" source />
 
 <Story name="Mapping Context">
-		{#snippet template(args)}
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltip} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltip} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltip} />
-		</Map>
-	</div>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltip} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltip} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltip} />
+			</Map>
+		</div>
 	{/snippet}
 </Story>

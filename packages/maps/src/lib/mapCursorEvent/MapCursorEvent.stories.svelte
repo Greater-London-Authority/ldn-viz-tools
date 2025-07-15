@@ -26,7 +26,7 @@
 		}
 	};
 
-			const { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapCursorEvent',
 		component: MapCursorEvent,
 		tags: ['autodocs'],
@@ -90,74 +90,70 @@
 	};
 </script>
 
-
 {#snippet defaultTemplate({ args })}
 	<MapCursorEvent {...args} />
 {/snippet}
 
-
-
 <Story name="Default">
-		{#snippet template(args)}
+	{#snippet template(args)}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				{whenMapLoads}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				{#if init}
+					<MapCursorEvent
+						layerId="gla/ldn-viz-tools/test-data/polygon"
+						enterFeature={newLogEvent('enterFeature')}
+						leaveFeature={newLogEvent('leaveFeature')}
+						enterTopFeature={newLogEvent('enterTopFeature')}
+						leaveTopFeature={newLogEvent('leaveTopFeature')}
+						clickFeature={newLogEvent('clickFeature')}
+						clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/polygon')}
+					/>
+					<MapCursorEvent
+						layerId="gla/ldn-viz-tools/test-data/line"
+						enterFeature={newLogEvent('enterFeature')}
+						leaveFeature={newLogEvent('leaveFeature')}
+						enterTopFeature={newLogEvent('enterTopFeature')}
+						leaveTopFeature={newLogEvent('leaveTopFeature')}
+						clickFeature={newLogEvent('clickFeature')}
+						clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/line')}
+					/>
+					<MapCursorEvent
+						layerId="gla/ldn-viz-tools/test-data/point"
+						enterFeature={newLogEvent('enterFeature')}
+						leaveFeature={newLogEvent('leaveFeature')}
+						enterTopFeature={newLogEvent('enterTopFeature')}
+						leaveTopFeature={newLogEvent('leaveTopFeature')}
+						clickFeature={newLogEvent('clickFeature')}
+						clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/point')}
+					/>
+				{/if}
+			</Map>
 
-	<div class="relative w-[100dvw] h-[100dvh]">
-		<Map
-			{whenMapLoads}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			{#if init}
-				<MapCursorEvent
-					layerId="gla/ldn-viz-tools/test-data/polygon"
-					enterFeature={newLogEvent('enterFeature')}
-					leaveFeature={newLogEvent('leaveFeature')}
-					enterTopFeature={newLogEvent('enterTopFeature')}
-					leaveTopFeature={newLogEvent('leaveTopFeature')}
-					clickFeature={newLogEvent('clickFeature')}
-					clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/polygon')}
-				/>
-				<MapCursorEvent
-					layerId="gla/ldn-viz-tools/test-data/line"
-					enterFeature={newLogEvent('enterFeature')}
-					leaveFeature={newLogEvent('leaveFeature')}
-					enterTopFeature={newLogEvent('enterTopFeature')}
-					leaveTopFeature={newLogEvent('leaveTopFeature')}
-					clickFeature={newLogEvent('clickFeature')}
-					clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/line')}
-				/>
-				<MapCursorEvent
-					layerId="gla/ldn-viz-tools/test-data/point"
-					enterFeature={newLogEvent('enterFeature')}
-					leaveFeature={newLogEvent('leaveFeature')}
-					enterTopFeature={newLogEvent('enterTopFeature')}
-					leaveTopFeature={newLogEvent('leaveTopFeature')}
-					clickFeature={newLogEvent('clickFeature')}
-					clickMap={() => logEvent('clickMap', 'gla/ldn-viz-tools/test-data/point')}
-				/>
-			{/if}
-		</Map>
-
-		<div
-			class="dark absolute top-0 left-0 w-full h-[16em] p-2 bg-color-container-level-0 bg-opacity-75 text-color-text-primary"
-		>
-			<table>
-				<tbody>
-					<tr class="font-medium">
-						<th>Event</th>
-						<th class="px-4">Layer</th>
-						<th>Site</th>
-					</tr>
-					{#each eventLog as { eventName, layerName, siteName }, i (i)}
-						<tr>
-							<td>{eventName}</td>
-							<td class="px-4">{layerName}</td>
-							<td>{siteName}</td>
+			<div
+				class="bg-color-container-level-0 text-color-text-primary dark absolute left-0 top-0 h-[16em] w-full bg-opacity-75 p-2"
+			>
+				<table>
+					<tbody>
+						<tr class="font-medium">
+							<th>Event</th>
+							<th class="px-4">Layer</th>
+							<th>Site</th>
 						</tr>
-					{/each}
-				</tbody>
-			</table>
+						{#each eventLog as { eventName, layerName, siteName }, i (i)}
+							<tr>
+								<td>{eventName}</td>
+								<td class="px-4">{layerName}</td>
+								<td>{siteName}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</div>
 	{/snippet}
 </Story>

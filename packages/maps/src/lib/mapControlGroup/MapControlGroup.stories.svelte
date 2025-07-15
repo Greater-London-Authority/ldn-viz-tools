@@ -29,7 +29,7 @@
 </script>
 
 {#snippet defaultTemplate({ args })}
-		<MapControlGroup {...args} />
+	<MapControlGroup {...args} />
 {/snippet}
 
 <!--
@@ -38,40 +38,40 @@ The named layout positions are shown around the edges of this map.
 If using typescript you can import the `MapControlGroupPositions`enum.
 -->
 <Story name="Positioning labels">
-		{#snippet template(args)}
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			{#each Object.keys(MapControlGroupPositions) as position}
-				<MapControlGroup {position}>
-					<p
-						class="bg-color-container-level-0 text-color-text-primary p-2 shadow border border-color-ui-border-secondary"
-					>
-						{position}
-					</p>
-				</MapControlGroup>
-			{/each}
-		</Map>
-	</div>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				{#each Object.keys(MapControlGroupPositions) as position}
+					<MapControlGroup {position}>
+						<p
+							class="bg-color-container-level-0 text-color-text-primary border-color-ui-border-secondary border p-2 shadow"
+						>
+							{position}
+						</p>
+					</MapControlGroup>
+				{/each}
+			</Map>
+		</div>
 	{/snippet}
 </Story>
 
 <!-- The alignment of elements within a `MapControlGroup` depends on its position. -->
 <Story name="Positioning controls">
-		{#snippet template(args)}
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			{#each Object.keys(MapControlGroupPositions) as position}
-				{#if position != 'TopRightOffset'}
-					<MapControlGroup {position}>
-						<!--
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				{#each Object.keys(MapControlGroupPositions) as position}
+					{#if position != 'TopRightOffset'}
+						<MapControlGroup {position}>
+							<!--
 						TODO: re-enable
 						<MapControlLocationSearch
 							adapter={new MapGeocoderAdapterMapBox(
@@ -79,12 +79,12 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 							)}
 						/>
 						-->
-						<MapControlZoom />
-					</MapControlGroup>
-				{/if}
-			{/each}
-		</Map>
-	</div>
+							<MapControlZoom />
+						</MapControlGroup>
+					{/if}
+				{/each}
+			</Map>
+		</div>
 	{/snippet}
 </Story>
 
@@ -93,15 +93,15 @@ Typically, controls on the left are standard for every map, whereas controls on 
 On small devices most controls will hide themselves.
 -->
 <Story name="Standard Layout">
-		{#snippet template(args)}
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<!--
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<!--
 				TODO: re-enable once componenet is migrated
 				<MapControlLocationSearch
 					adapter={new MapGeocoderAdapterMapBox(
@@ -109,26 +109,26 @@ On small devices most controls will hide themselves.
 					)}
 				/>
 				-->
-				<MapControlZoom />
-			</MapControlGroup>
+					<MapControlZoom />
+				</MapControlGroup>
 
-			<MapControlGroup position="BottomLeft">
-				<MapControlFullscreen />
-				<MapControlRefresh />
-			</MapControlGroup>
+				<MapControlGroup position="BottomLeft">
+					<MapControlFullscreen />
+					<MapControlRefresh />
+				</MapControlGroup>
 
-			<MapControlGroup position="TopRight">
-				<p
-					class="bg-color-container-level-0 text-color-text-primary p-2 text-center pointer-events-auto shadow border border-color-ui-border-secondary"
-				>
-					Bespoke controls<br />E.g. Drawing
-				</p>
-			</MapControlGroup>
+				<MapControlGroup position="TopRight">
+					<p
+						class="bg-color-container-level-0 text-color-text-primary border-color-ui-border-secondary pointer-events-auto border p-2 text-center shadow"
+					>
+						Bespoke controls<br />E.g. Drawing
+					</p>
+				</MapControlGroup>
 
-			<MapControlGroup position="BottomRight">
-				<MapControlPan />
-			</MapControlGroup>
-		</Map>
-	</div>
+				<MapControlGroup position="BottomRight">
+					<MapControlPan />
+				</MapControlGroup>
+			</Map>
+		</div>
 	{/snippet}
 </Story>

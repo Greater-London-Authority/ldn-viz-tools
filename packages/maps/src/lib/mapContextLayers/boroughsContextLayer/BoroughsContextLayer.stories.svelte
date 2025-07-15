@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-		import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import BoroughsContextLayer from './BoroughsContextLayer.svelte';
 
 	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
@@ -31,10 +31,10 @@
 		}
 	};
 
-			const { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapContextLayers/BoroughsContextLayer',
 		component: BoroughsContextLayer,
-						tags: ['autodocs'],
+		tags: ['autodocs'],
 		//render: defaultTemplate,
 
 		parameters: {
@@ -58,7 +58,20 @@
 </script>
 
 {#snippet defaultTemplate({ args })}
-		<div class="relative w-[100dvw] h-[100dvh]">
+	<div class="relative h-[100dvh] w-[100dvw]">
+		<Map
+			options={{
+				transformRequest: appendOSKeyToUrl(OS_KEY)
+			}}
+		>
+			<BoroughsContextLayer {...args} />
+		</Map>
+	</div>
+{/snippet}
+
+<Story name="Default" source>
+	{#snippet template(args)}
+		<div class="relative h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
 					transformRequest: appendOSKeyToUrl(OS_KEY)
@@ -68,19 +81,4 @@
 			</Map>
 		</div>
 	{/snippet}
-
-<Story name="Default" source >
-		{#snippet template(args)}
-		<div class="relative w-[100dvw] h-[100dvh]">
-			<Map
-				options={{
-					transformRequest: appendOSKeyToUrl(OS_KEY)
-				}}
-			>
-				<BoroughsContextLayer {...args} />
-			</Map>
-		</div>
-	{/snippet}
-
 </Story>
-

@@ -16,47 +16,47 @@
 
 	interface Props {
 		/**
-	 * A unique ID to reference the source in the map. Provided to slotted
-	 * component as context via the key `mapLayerSourceId`.
-	 */
+		 * A unique ID to reference the source in the map. Provided to slotted
+		 * component as context via the key `mapLayerSourceId`.
+		 */
 		id: any;
 		/**
-	 * URL to fetch the GeoJSON from.
-	 */
+		 * URL to fetch the GeoJSON from.
+		 */
 		url?: string;
 		/**
-	 * Initial GeoJSON data. It will be overwritten by the results of a fetch
-	 * via the provided url (if a url is provided).
-	 */
+		 * Initial GeoJSON data. It will be overwritten by the results of a fetch
+		 * via the provided url (if a url is provided).
+		 */
 		initialData?: any;
 
-	 /**
-	 * Applies any transformations to the GeoJSON before it's added to the map.
-	 */
+		/**
+		 * Applies any transformations to the GeoJSON before it's added to the map.
+		 */
 		transform?: any;
 		/**
-	 * Called when the source is added to the map. The raw geojson can be
-	 * accessed within this callback.  The function accepts an object with the
-	 * following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 * - **geojson**: transformed GeoJSON data.
-	 */
+		 * Called when the source is added to the map. The raw geojson can be
+		 * accessed within this callback.  The function accepts an object with the
+		 * following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 * - **geojson**: transformed GeoJSON data.
+		 */
 		onLoad?: any;
 		/**
-	 * Called when the source is removed from the map. The function accepts an
-	 * object with the following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
+		 * Called when the source is removed from the map. The function accepts an
+		 * object with the following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
 		onUnload?: any;
 		/**
-	 * Called when there is an error fetching the data or passing it to the map.
-	 * The function accepts an error followed by an object with the following
-	 * fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
+		 * Called when there is an error fetching the data or passing it to the map.
+		 * The function accepts an error followed by an object with the following
+		 * fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
 		onError?: any;
 		children?: import('svelte').Snippet;
 	}
@@ -65,9 +65,9 @@
 		id,
 		url = '',
 		initialData = {
-		type: 'FeatureCollection',
-		features: []
-	},
+			type: 'FeatureCollection',
+			features: []
+		},
 		transform = (geojson) => geojson,
 		onLoad = null,
 		onUnload = null,
@@ -88,7 +88,7 @@
 
 	$effect(() => {
 		$dataStore = initialData;
-	})
+	});
 
 	const internalLoad = (ctx) => {
 		loaded = true;
@@ -144,7 +144,6 @@
 
 		$mapStore.getSource(id).setData(geojson);
 	};
-
 
 	$effect(() => {
 		updateData($dataStore);

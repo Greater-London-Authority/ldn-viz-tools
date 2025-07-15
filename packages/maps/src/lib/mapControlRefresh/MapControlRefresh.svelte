@@ -6,14 +6,14 @@
 	const handle = () => window.location.reload();
 </script>
 
-<div class="flex flex-col space-y-1 invisible sm:visible">
+<div class="invisible flex flex-col space-y-1 sm:visible">
 	<Button
 		variant="square"
 		emphasis="secondary"
 		title="Refresh page"
-		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
+		class="dark:border-color-ui-border-primary pointer-events-auto shadow dark:border"
 		onclick={handle}
 	>
-		<Icon src={ArrowPath} class="w-8 h-8 p-1" />
+		<Icon src={ArrowPath} class="h-8 w-8 p-1" />
 	</Button>
 </div>

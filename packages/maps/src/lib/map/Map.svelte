@@ -22,7 +22,6 @@
 
 	// import { currentThemeMode } from '@ldn-viz/ui';
 
-
 	import { theme_os_light_vts, theme_os_dark } from '@ldn-viz/maps';
 
 	import MapCursor from './mapCursor/MapCursor';
@@ -33,8 +32,6 @@
 
 	import { mode, type SystemModeValue } from 'mode-watcher';
 	let currentThemeMode: SystemModeValue = $derived(mode.current);
-
-	
 
 	/**
 	 * Store containing the MapLibre instance.
@@ -48,45 +45,38 @@
 	export const mapCursorStore: MapCursorTypeStore = writable(null);
 	setContext('mapCursorStore', mapCursorStore);
 
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * Disables initialisation of the map on mount. This is most often used
-	 * to avoid un-needed map rendering during development of non-map application
-	 * elements.
-	 */
+		 * Disables initialisation of the map on mount. This is most often used
+		 * to avoid un-needed map rendering during development of non-map application
+		 * elements.
+		 */
 		disabled?: boolean;
 		/**
-	 * Custom ([MapLibre `MapOptions`](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
-	 */
+		 * Custom ([MapLibre `MapOptions`](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
+		 */
 		options?: MapLibreOptions;
 		/**
-	 * Called when the map is finished loading and ready for use.
-	 */
+		 * Called when the map is finished loading and ready for use.
+		 */
 		whenMapLoads?: null | WhenMapLoads;
 		/**
-	 * Called when the map component is destroyed. Required when external
-	 * resources need to be cleaned up.
-	 */
+		 * Called when the map component is destroyed. Required when external
+		 * resources need to be cleaned up.
+		 */
 		whenMapUnloads?: null | WhenMapLoads;
 		/**
-	 * Light style base map. Defaults to `theme_os_light_vts`. Pass `null`
-	 * to disable light mode.
-	 */
+		 * Light style base map. Defaults to `theme_os_light_vts`. Pass `null`
+		 * to disable light mode.
+		 */
 		lightStyle?: null | MapLibreStyle;
 		/**
-	 * Dark style base map. Defaults to `theme_os_dark`. Pass `null`
-	 * to disable dark mode.
-	 */
+		 * Dark style base map. Defaults to `theme_os_dark`. Pass `null`
+		 * to disable dark mode.
+		 */
 		darkStyle?: null | MapLibreStyle;
 		children?: import('svelte').Snippet;
-		[key: string]: any
+		[key: string]: any;
 	}
 
 	let {
@@ -124,7 +114,11 @@
 		mapCursorStore.set(null);
 	};
 
-	const identifyStyle = (currentThemeMode: SystemModeValue, darkStyle, lightStyle): MapLibreStyle => {
+	const identifyStyle = (
+		currentThemeMode: SystemModeValue,
+		darkStyle,
+		lightStyle
+	): MapLibreStyle => {
 		if (!lightStyle && !darkStyle) {
 			return theme_os_light_vts as MapLibreStyle;
 		}

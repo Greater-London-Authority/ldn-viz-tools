@@ -20,56 +20,43 @@
 	const mapSourceId = getContext('mapLayerSourceId');
 	const mapSourceLoaded = getContext('mapLayerSourceLoaded');
 
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * A unique ID to reference the layer in the map. Provided to slotted
-	 * component as context via the key `mapLayerViewId`.
-	 */
+		 * A unique ID to reference the layer in the map. Provided to slotted
+		 * component as context via the key `mapLayerViewId`.
+		 */
 		id: any;
 		/**
-	 * The ID of the layer to insert this layer before. If no ID is provided this
-	 * layer will be inserted above all existing layers.
-	 */
+		 * The ID of the layer to insert this layer before. If no ID is provided this
+		 * layer will be inserted above all existing layers.
+		 */
 		beforeId?: any;
 		/**
-	 * A MapLibre layer specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/layers/).
-	 * Provided to slotted component as context via the key `mapLayerViewSpec`.
-	 */
+		 * A MapLibre layer specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/layers/).
+		 * Provided to slotted component as context via the key `mapLayerViewSpec`.
+		 */
 		spec: any;
 		/**
-	 * Component to render as a tooltip on mouse over.
-	 */
+		 * Component to render as a tooltip on mouse over.
+		 */
 		tooltip?: any;
 		/**
-	 * Component to render as a popup on mouse click.
-	 */
+		 * Component to render as a popup on mouse click.
+		 */
 		popup?: any;
 		/**
-	 * Called when the layer is added to the map. The function accepts an
-	 * object with the following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
+		 * Called when the layer is added to the map. The function accepts an
+		 * object with the following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
 		onLoad?: any;
 		/**
-	 * Called when the layer is removed from the map. The function accepts an
-	 * object with the following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
+		 * Called when the layer is removed from the map. The function accepts an
+		 * object with the following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
 		onUnload?: any;
 		children?: import('svelte').Snippet;
 	}
