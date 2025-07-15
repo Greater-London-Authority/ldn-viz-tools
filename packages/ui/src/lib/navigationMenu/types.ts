@@ -4,7 +4,7 @@ export type NavigationMenuProps = {
 	 */
 	ariaLabel: string;
 	/**
-	 * Value for the `id` attribute of the nav list
+	 * Value for the `id` attribute of the nav list.
 	 */
 	id?: string;
 	/**
