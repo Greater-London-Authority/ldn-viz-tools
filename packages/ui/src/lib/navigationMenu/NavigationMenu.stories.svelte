@@ -179,7 +179,7 @@
 	{/snippet}
 </Story>
 
-<!-- Menu items with children don't have to be links. But items without children do. In this example, the top level items don't have links. -->
+<!-- Menu items with children don't have to be links, but items without children do. In this example, the top level items don't have links. -->
 <Story name="NoLinks">
 	{#snippet template(args)}
 		<NavigationMenu {...args} ariaLabel="no links" items={subMenuNoLinks} />
