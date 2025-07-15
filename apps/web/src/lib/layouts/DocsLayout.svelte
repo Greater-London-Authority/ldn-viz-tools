@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DocsSidebar from './docs-sidebar.svelte';
+	import DocsSidebar from './DocsSidebar.svelte';
 
 	let { children, navigation } = $props();
 </script>
