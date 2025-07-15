@@ -162,12 +162,12 @@
  
 ```
 	let subMenu = [
-		{ title: 'Accessibility', url: '/',  },
-		{ title: 'Brand', url: '/',  },
-		{ title: 'Color', url: '/',  },
-		{ title: 'Typography', url: '/',  },
-		{ title: 'Spacing', url: '/',  },
-		{ title: 'Design Tokens', url: '/',  }
+		{ title: 'Accessibility', url: '/' },
+		{ title: 'Brand', url: '/' },
+		{ title: 'Color', url: '/' },
+		{ title: 'Typography', url: '/' },
+		{ title: 'Spacing', url: '/' },
+		{ title: 'Design Tokens', url: '/' }
 	];
 
  	<NavigationMenu ariaLabel="no children" items={subMenu} />
