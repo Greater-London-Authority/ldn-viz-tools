@@ -65,7 +65,7 @@
 	);
 
 	/**
-	 * Tells the screen reader if the link is the current page or not
+	 * Tells the screen reader whether or not the link is the current page.
 	 */
 	interface CurrentPage {
 		'aria-current': 'page' | undefined;
