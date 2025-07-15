@@ -133,8 +133,8 @@
 				<MapDeckTooltips
 					{layers}
 					spec={{
-						wardLayer: (feature) => feature.properties.wd22nm,
-						boroughLayer: (feature) => feature.properties.name
+						wardLayer: (feature) => feature?.properties?.wd22nm,
+						boroughLayer: (feature) => feature?.properties?.name
 					}}
 				/>
 			</Map>
