@@ -12,7 +12,7 @@ export type NavigationMenuProps = {
 	 */
 	items: NavigationMenuItemProps[];
 	/**
-	 * Optional prop to customise width
+	 * Optional prop to customise width.
 	 */
 	width?: string;
 	/**
