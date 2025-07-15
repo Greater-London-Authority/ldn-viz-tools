@@ -20,7 +20,7 @@ export type NavigationMenuProps = {
 	 */
 	isAlwaysExpanded?: boolean;
 	/**
-	 * Optional prop to change orientation
+	 * Optional prop to change orientation.
 	 */
 	orientation?: 'vertical' | 'horizontal';
 	/**
