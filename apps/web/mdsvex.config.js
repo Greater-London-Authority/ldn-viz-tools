@@ -1,11 +1,10 @@
 import { defineMDSveXConfig } from 'mdsvex';
-import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { createHighlighter } from 'shiki';
 import { visit } from 'unist-util-visit';
 
@@ -109,9 +108,9 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineMDSveXConfig({
 	extensions: ['.md'],
-	layout: {
-		_: resolve(__dirname, './src/lib/layouts/docs.svelte')
-	},
+	// layout: {
+	// 	_: resolve(__dirname, './src/lib/layouts/docs-layout.svelte')
+	// },
 	remarkPlugins: [...baseRemarkPlugins],
 	rehypePlugins: [...baseRehypePlugins]
 });

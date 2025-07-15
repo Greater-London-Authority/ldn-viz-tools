@@ -4,6 +4,8 @@
 	let { children } = $props();
 </script>
 
-<div class="container mx-auto">
+<div class="">HEADER</div>
+<div class="">
 	{@render children()}
 </div>
+<div class="">FOOTER</div>
