@@ -141,20 +141,14 @@
 		return style as MapLibreStyle;
 	};
 
-	$inspect({options})
-
 	let mapOptions: Omit<maplibre_gl.MapOptions, 'container'> = $derived({
 		...options,
 		style: identifyStyle(currentThemeMode, darkStyle, lightStyle)
 	});
-
-	$inspect(mapOptions)
 </script>
 
 {#key mapOptions}
-	{#if true || mapOptions.transformRequest}
 	<MapLibre {disabled} options={mapOptions} {whenMapCreated} {whenMapDestroyed} {...rest}>
 		{@render children?.()}
 	</MapLibre>
-		{/if}
 {/key}
