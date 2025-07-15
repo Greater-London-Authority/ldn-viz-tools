@@ -4,7 +4,7 @@
 
 	/**
 	 * Primarily intended to be used in vertical orientation in a sidebar or horizontal in the header,
-	 * The `NavigationMenu` component is used to display navigation that can be one to many layers deep.
+	 * The `NavigationMenu` component is used to display navigation that can be one or more layers deep.
 	 */
 
 	const { Story } = defineMeta({
