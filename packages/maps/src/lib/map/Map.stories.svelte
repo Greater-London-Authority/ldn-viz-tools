@@ -124,7 +124,6 @@
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map {...args}></Map>
 	</div>
-
 	{/snippet}
 </Story>
 
