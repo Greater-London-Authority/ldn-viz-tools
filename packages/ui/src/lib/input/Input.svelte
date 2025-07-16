@@ -1,68 +1,17 @@
-<script lang="ts" module>
-	export type FormatFunction = (
-		value: string,
-		details?: {
-			name?: string;
-			type?: string;
-			disabled?: boolean;
-		}
-	) => string | number;
-
-	export type InputMode =
-		| 'none'
-		| 'search'
-		| 'text'
-		| 'tel'
-		| 'url'
-		| 'email'
-		| 'numeric'
-		| 'decimal'
-		| null
-		| undefined;
+<script lang="ts" context="module">
+	import type { FormatFunction } from '$lib/input/types';
 
 	export const trimInput: FormatFunction = (value) => value.trim();
 </script>
 
 <script lang="ts">
-	import type { HTMLInputAttributes, HTMLTextareaAttributes } from 'svelte/elements';
+	import type { ChangeEventHandler, HTMLInputAttributes, HTMLTextareaAttributes, HTMLInputTypeAttribute } from 'svelte/elements';
 
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 	import InputWrapper from './InputWrapper.svelte';
-	import { type InputProps } from './types';
+	import { type InputAsNonTextArea, type InputAsTextArea, type InputProps, type Props } from './types';
 
-	interface Props extends InputProps {
-		/**
-		 * The `type` of the `<input>` element (see [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)).
-		 *
-		 * Additionally, passing `textarea` will render a `<textarea>` instead of an `<input>`.
-		 */
-		type: string;
-
-		/**
-		 * The value of the input. Can be bound to and externally modified.
-		 */
-		value?: string;
-
-		/**
-		 * The `inputmode` of the `<input>` element, which provides a hint about what type of virtual keyboard to display.
-		 */
-		inputmode?: InputMode;
-
-		/**
-		 * Text that appears within the `<input>` element when no value is present.
-		 */
-		placeholder?: string;
-
-		/**
-		 * Function that will be applied to transform the value when the input element loses focus.
-		 * By default, it trims leading and trailing whitespace (but does nothing if `type` is `password`).
-		 */
-		format: null | FormatFunction;
-
-		// TODO: Correct below?
-		restProps: HTMLInputAttributes | HTMLTextareaAttributes;
-	}
 
 	let {
 		type = 'text',
@@ -109,7 +58,7 @@
 	// if error exists, description won't render so `aria-describedby` should equal `undefined`.
 	let descriptionIsVisible = $derived(!error);
 
-	let input: HTMLInputElement | HTMLTextAreaElement | undefined = $state();
+	let input: HTMLInputElement | HTMLTextAreaElement | undefined = undefined;
 
 	// Svelte does not allow bind:type and bind:value simultaneously so this
 	// function acts as the input change handler.
@@ -146,6 +95,10 @@
 			'placeholder-color-input-placeholder'
 		)
 	);
+
+	// type assertions can't go in the Svelte template section, so are here instead
+	let textAreaRestProps = $derived(restProps as InputAsTextArea);
+	let nonTextAreaRestProps = $derived(restProps as InputAsNonTextArea);
 </script>
 
 <InputWrapper
@@ -163,7 +116,6 @@
 	{customOverlay}
 >
 	<!--
-    TODO: CLARIFY
 		Svelte does not allow bind:text and bind:value on an input element at
 		the same time so an on change listener is required.
 	-->
@@ -182,6 +134,7 @@
 			aria-invalid={!!error}
 			onblur={formatAndUpdateValue}
 			oninput={updateValue}
+			{...textAreaRestProps}
 		></textarea>
 	{:else}
 		<input
@@ -200,7 +153,7 @@
 			aria-invalid={!!error}
 			onblur={formatAndUpdateValue}
 			oninput={updateValue}
-			{...restProps}
+			{...nonTextAreaRestProps}
 		/>
 	{/if}
 </InputWrapper>
