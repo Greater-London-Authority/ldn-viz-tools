@@ -41,6 +41,7 @@
 		"@steeze-ui/heroicons": "^2.4.2",
 		"@steeze-ui/svelte-icon": "^1.6.2",
 		"bits-ui": "^2.2.0",
+		"d3-dsv": "^3.0.1",
 		"mode-watcher": "^1.0.7"
 	},
 	"devDependencies": {
@@ -55,12 +56,15 @@
 		"@sveltejs/package": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/vite": "^4.0.0",
+		"@types/d3-dsv": "^3.0.7",
 		"@types/node": "^22",
 		"@vitest/browser": "^3.2.3",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
 		"globals": "^16.0.0",
+		"i": "^0.3.7",
+		"npm": "^11.4.2",
 		"playwright": "^1.53.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",

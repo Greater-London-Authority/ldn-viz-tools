@@ -57,7 +57,7 @@
 
 	let {
 		options = [],
-		state = options.find((option) => option.default) ?? options[0],
+		state = $bindable(options.find((option) => option.default) ?? options[0]),
 		menuTitle = '',
 		size,
 		variant,
