@@ -1,5 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 	import Select from './Select.svelte';
 
 	const options: Option[] = [
@@ -21,8 +23,8 @@
 	type Option = { label: string; value: number };
 	let value: Option | undefined = $state();
 
-	// let justValue: number | null = $state();
-	// let justValueMulti: number[] | null = $state();
+	let selectedValue: number | null = $state(null);
+	let selectedValueMulti: number[] | null = $state(null);
 	let error = $state('');
 </script>
 
@@ -34,59 +36,60 @@
 	{/snippet}
 </Story>
 
-<!--
-<Template>
-	{#snippet children({ args })}
-		<Select {...args} />
-	{/snippet}
-</Template>
-
-<Story name="Default" args={{ options: options }} source />
--->
-
-<!--
-<Story name="Basic">
-	<div class="w-96">
-		<Select {options} id="labelled-input" />
-	</div>
-</Story>
-
 <Story name="With Label">
-	<div class="w-96">
-		<Select {options} label="Label" id="labelled-input" />
-	</div>
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {options} label="Pick a number" id="labelled-input" />
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Optional">
-	<div class="w-96">
-		<Select {options} label="Label" id="labelled-input" optional />
-	</div>
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {options} label="Pick a number" id="labelled-input" optional />
+		</div>
+	{/snippet}
 </Story>
 
-<Story name="Custom Placeholder">
-	<div class="w-96">
-		<Select {options} label="Label" id="labelled-input" placeholder="Custom Placeholder text" />
-	</div>
+<Story name="Custom placeholder">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {options} label="Label" id="labelled-input" placeholder="Pick a number!" />
+		</div>
+	{/snippet}
 </Story>
 
-<Story name="With Context Hint">
-	<div class="w-96">
-		<Select {options} label="Label" id="labelled-input">
-			{#snippet hint()}
-				<Overlay hintLabel="optional hint label">Contextual help text</Overlay>
-			{/snippet}
-		</Select>
-	</div>
+<Story name="With Contextual Hint">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {options} label="Label" id="labelled-input" hint="Contextual help text" />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="With contextual hint in cusotm overlay">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {options} label="Label" id="labelled-input">
+				{#snippet customOverlay()}
+					<Overlay hintLabel="optional hint label">Contextual help text</Overlay>
+				{/snippet}
+			</Select>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Description">
-	<div class="w-96">
-		<Select {options} label="Label" id="labelled-input" description="descriptive text" />
-	</div>
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {options} label="Label" id="labelled-input" description="descriptive text" />
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Description alignment">
-	<div class="w-96">
+	{#snippet template(args)}
 		<Select
 			{options}
 			label="Label"
@@ -96,31 +99,32 @@
 			descriptionAlignment="right"
 			optional
 		/>
-	</div>
+	{/snippet}
 </Story>
 
 <Story name="Multiple selects">
-	<div class="w-96">
-		<Select
-			{options}
-			label="Label"
-			id="labelled-input"
-			placeholder="Placeholder text"
-			description="descriptive text"
-			optional
-			multiple
-			bind:value
-			on:change={() => console.log('Selection changed!')}
-		/>
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select
+				{options}
+				label="Label"
+				id="labelled-input"
+				placeholder="Placeholder text"
+				description="descriptive text"
+				optional
+				multiple
+				bind:value
+			/>
 
-		<span class="text-color-text-secondary mt-4 block">
-			Value is: {JSON.stringify(value)}
-		</span>
-	</div>
+			<span class="text-color-text-secondary mt-4 block">
+				Value is: {JSON.stringify(value)}
+			</span>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Error">
-	<div class="w-96">
+	{#snippet template(args)}
 		<Select
 			{options}
 			label="Label"
@@ -130,11 +134,11 @@
 			optional
 			error="something has gone wrong here"
 		/>
-	</div>
+	{/snippet}
 </Story>
 
 <Story name="Disabled">
-	<div class="w-96">
+	{#snippet template(args)}
 		<Select
 			{options}
 			label="Label"
@@ -144,49 +148,44 @@
 			disabled
 			optional
 		/>
-	</div>
+	{/snippet}
 </Story>
 
-<Story name="Binding to justValue">
-	<div class="flex w-[500px] flex-col gap-2">
-		<p>
-			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
-			object including the <code>label</code> as well as <code>value</code>)
-		</p>
+<Story name="Binding to value">
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<div>Current value: <span class="font-bold">{selectedValue}</span></div>
 
-		<div>Current value: <span class="font-bold">{justValue}</span></div>
+			<Button onclick={() => (selectedValue = 2)}>Reset to 2</Button>
+			<Button onclick={() => (selectedValue = null)}>Clear</Button>
 
-		<Button on:click={() => (justValue = 2)}>Reset to 2</Button>
-		<Button on:click={() => (justValue = null)}>Clear</Button>
-
-		<Select {options} bind:justValue id="labelled-input" />
-	</div>
+			<Select {options} bind:value={selectedValue} id="labelled-input" />
+		</div>
+	{/snippet}
 </Story>
 
-<Story name="Binding to justValue - multi">
-	<div class="flex w-[500px] flex-col gap-2">
-		<p>
-			You can bind directly to <code>justValue</code>, rather than <code>value</code> (which is an
-			object including the <code>label</code> as well as <code>value</code>)
-		</p>
+<Story name="Binding to value - multiple selections">
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<div>Current value: <span class="font-bold">{selectedValueMulti}</span></div>
 
-		<div>Current value: <span class="font-bold">{justValueMulti}</span></div>
+			<Button onclick={() => (selectedValueMulti = [1, 3])}>Reset to 1 and 3</Button>
+			<Button onclick={() => (selectedValueMulti = null)}>Clear</Button>
 
-		<Button on:click={() => (justValueMulti = [1, 3])}>Reset to 1 and 3</Button>
-		<Button on:click={() => (justValueMulti = null)}>Clear</Button>
-
-		<Select {options} bind:justValue={justValueMulti} id="labelled-input" multiple />
-	</div>
+			<Select {options} bind:value={selectedValueMulti} id="labelled-input" multiple />
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Setting and clearing error message">
-	<div class="flex w-[500px] flex-col gap-2">
-		<Button on:click={() => (error = 'OH NO')}>Set error</Button>
-		<Button on:click={() => (error = '')}>Clear error</Button>
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<Button onclick={() => (error = 'OH NO')}>Set error</Button>
+			<Button onclick={() => (error = '')}>Clear error</Button>
 
-		<span><code>error is:</code> {error}</span>
+			<span><code>error is:</code> {error}</span>
 
-		<Select {options} id="labelled-input" {error} />
-	</div>
+			<Select {options} id="labelled-input" {error} />
+		</div>
+	{/snippet}
 </Story>
--->

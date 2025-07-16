@@ -41,7 +41,7 @@
 		groupLabelField,
 		groupItemsField,
 		disabledField,
-		//placeholder,
+		placeholder,
 		searchable,
 		clearable,
 		renderer,
@@ -108,9 +108,9 @@
 
 	*/
 
-	type f = keyof InputProps;
+	// type f = keyof InputProps;
 
-	console.log();
+	// console.log();
 </script>
 
 <InputWrapper {...restProps} {id} {disabled} {error}>
@@ -142,6 +142,7 @@
 			{groupLabelField}
 			{groupItemsField}
 			{disabledField}
+			{placeholder}
 			{searchable}
 			{clearable}
 			{renderer}
@@ -185,5 +186,3 @@
 		/>
 	</div>
 </InputWrapper>
-
-{#if true}{/if}
