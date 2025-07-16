@@ -20,7 +20,7 @@
 	import { DropdownMenu } from 'bits-ui';
 	import { classNames } from '../utils/classNames';
 
-	import type { Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import Button from '../button/Button.svelte';
 	import type { ButtonProps } from '../button/types';
 
@@ -57,7 +57,7 @@
 
 	let {
 		options = [],
-		state = $bindable(options.find((option) => option.default) ?? options[0]),
+		state = $bindable(),
 		menuTitle = '',
 		size,
 		variant,
@@ -67,6 +67,13 @@
 		afterLabel,
 		...restProps
 	}: MultipleActionButtonProps = $props();
+
+	$effect(() => {
+		// apply fallback value to state if not defined
+		if (!state) {
+			state = options.find((option) => option.default) ?? options[0];
+		}
+	});
 
 	const changeOption = (newOption: MultipleActionButtonOption) => {
 		state = newOption;
@@ -95,7 +102,7 @@
 		>
 			<div class="flex items-center">
 				{@render beforeLabel?.()}
-				{state.buttonLabel}
+				{state?.buttonLabel}
 				{@render afterLabel?.()}
 			</div>
 		</Button>
