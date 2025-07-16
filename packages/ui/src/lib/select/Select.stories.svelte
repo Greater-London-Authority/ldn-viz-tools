@@ -10,6 +10,41 @@
 		{ label: 'Three', value: 3 }
 	];
 
+	const optionsAltFieldNames = [
+		{ word: 'One', number: 1 },
+		{ word: 'Two', number: 2 },
+		{ word: 'Three', number: 3 }
+	];
+
+	const groupedOptions = [
+		{
+			label: 'B',
+			options: [
+				{ text: 'Barking and Dagenham', value: 'Barking and Dagenham' },
+				{ text: 'Barnet', value: 'Barnet' },
+				{ text: 'Bexley', value: 'Bexley' },
+				{ text: 'Brent', value: 'Brent' },
+				{ text: 'Bromley', value: 'Bromley' }
+			]
+		},
+
+		{
+			label: 'C',
+			options: [
+				{ text: 'Camden', value: 'Camden' },
+				{ text: 'Croydon', value: 'Croydon' }
+			]
+		},
+
+		{
+			label: 'E',
+			options: [
+				{ text: 'Ealing', value: 'Ealing' },
+				{ text: 'Enfield', value: 'Enfield' }
+			]
+		}
+	];
+
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Select',
 		component: Select,
@@ -186,6 +221,35 @@
 			<span><code>error is:</code> {error}</span>
 
 			<Select {options} id="labelled-input" {error} />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Grouped options">
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<Select options={groupedOptions} id="labelled-input" />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Options with different field names">
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<Select
+				options={optionsAltFieldNames}
+				labelField="word"
+				valueField="number"
+				id="labelled-input"
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Re-orderable selection">
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<Select {options} bind:value={selectedValueMulti} id="labelled-input" multiple reorderable />
 		</div>
 	{/snippet}
 </Story>

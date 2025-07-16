@@ -26,7 +26,7 @@
 		/**
 		 * If `true`, then selected items can be re-ordered by drag-and-drop.
 		 */
-		reorderable: boolean;
+		reorderable?: boolean;
 	}
 
 	// TODO: chek events forwared
