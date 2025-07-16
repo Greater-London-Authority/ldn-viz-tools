@@ -42,7 +42,8 @@
 		"@steeze-ui/svelte-icon": "^1.6.2",
 		"bits-ui": "^2.2.0",
 		"mode-watcher": "^1.0.7",
-		"svelecte": "^5.2.0"
+		"svelecte": "^5.2.0",
+		"svelte-dnd-action": "^0.9.63"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
