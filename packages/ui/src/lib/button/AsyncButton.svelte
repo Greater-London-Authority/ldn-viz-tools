@@ -43,38 +43,6 @@
 		}
 	};
 
-	// /**
-	//  * Is set to `true` when the `onClick` function is being executed.
-	//  *
-	//  * Bind to this property for reactive updates to button click state.
-	//  */
-	// export let working = false;
-
-	// /**
-	//  * If `submit`, then this is a submit button for use with a form.
-	//  */
-	// export let type: ButtonProps['type'] = 'button';
-
-	// /**
-	//  * Determines the visual emphasis is placed on the button.
-	//  */
-	// export let emphasis: ButtonProps['emphasis'] = 'primary';
-
-	// /**
-	//  * Selects which family of styles should be applied to the button.
-	//  */
-	// export let variant: ButtonProps['variant'] = 'solid';
-
-	// /**
-	//  * Sets the size of the button.
-	//  */
-	// export let size: ButtonProps['size'] = 'md';
-
-	// /**
-	//  * If `true`, then the button cannot be interacted with (either by clicking,
-	//  * or by using the keyboard).
-	//  */
-	// export let disabled: ButtonProps['disabled'] = false;
 
 	/**
 	 * Describes the state change (i.e. appearance of Spinner or icon while loading) for screen reader users.
