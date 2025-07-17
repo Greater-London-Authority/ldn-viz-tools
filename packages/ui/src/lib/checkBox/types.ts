@@ -1,4 +1,5 @@
 import type { InputProps } from '$lib/input/types';
+import type { ChangeEventHandler } from 'svelte/elements';
 
 export interface CheckboxProps extends InputProps {
 	/**
@@ -24,4 +25,6 @@ export interface CheckboxProps extends InputProps {
 	indeterminate?: boolean;
 
 	'aria-controls'?: string;
+
+	onchange?: ChangeEventHandler<HTMLInputElement>;
 }
