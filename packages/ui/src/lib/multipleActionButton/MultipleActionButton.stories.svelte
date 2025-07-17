@@ -59,16 +59,14 @@
 	{/snippet}
 </Story>
 
-<Story name="Externally change options">
+<Story name="Externally change available options">
 	{#snippet template(args)}
 		<div class="flex flex-col gap-2">
 			<div class="flex gap-2">
 				<Button onclick={() => (opts = options)}>Allow both</Button>
-				<Button onclick={() => (opts = [options[0]])}>Allow PNG</Button>
-				<Button onclick={() => (opts = [options[1]])}>Allow SVG</Button>
+				<Button onclick={() => (opts = [options[0]])}>Allow PNG only</Button>
+				<Button onclick={() => (opts = [options[1]])}>Allow SVG only</Button>
 			</div>
-
-			{JSON.stringify(opts)}
 
 			<MultipleActionButton options={opts} menuTitle="Select image format" onClick={handleClick} />
 		</div>
