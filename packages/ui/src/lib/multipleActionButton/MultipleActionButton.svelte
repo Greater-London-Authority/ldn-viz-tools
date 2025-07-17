@@ -70,10 +70,19 @@
 
 	$effect(() => {
 		// apply fallback value to state if not defined
-		if (!state) {
-			state = options.find((option) => option.default) ?? options[0];
+		if (!state || !options.map((d) => d.id).includes(state.id)) {
+			const newState = options.find((option) => option.default) ?? options[0];
+
+			if (newState.id !== state.id) {
+				state = newState;
+			}
 		}
 	});
+
+	// apply fallback value when first rendering - effect doesn't firre, as state not changed
+	if (!state) {
+		state = options.find((option) => option.default) ?? options[0];
+	}
 
 	const changeOption = (newOption: MultipleActionButtonOption) => {
 		state = newOption;
