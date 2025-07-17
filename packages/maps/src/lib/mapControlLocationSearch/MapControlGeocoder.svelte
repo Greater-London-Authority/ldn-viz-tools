@@ -91,7 +91,9 @@
 	let showClearButton = $state(false);
 
 	$effect(() => {
-		!showClearButton && clearFeature('geocoder', $mapStore);
+		if (!showClearButton) {
+			clearFeature('geocoder', $mapStore);
+		}
 	});
 </script>
 

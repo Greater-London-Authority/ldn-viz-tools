@@ -48,7 +48,9 @@
 	let showClearButton = $state(false);
 
 	$effect(() => {
-		!showClearButton && clearFeature('geolocator', $mapStore);
+		if (!showClearButton) {
+			clearFeature('geolocator', $mapStore);
+		}
 	});
 </script>
 

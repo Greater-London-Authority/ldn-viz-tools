@@ -45,7 +45,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{#each Object.keys(MapControlGroupPositions) as position}
+				{#each Object.keys(MapControlGroupPositions) as position (position)}
 					<MapControlGroup {position}>
 						<p
 							class="bg-color-container-level-0 text-color-text-primary border-color-ui-border-secondary border p-2 shadow"
@@ -68,7 +68,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{#each Object.keys(MapControlGroupPositions) as position}
+				{#each Object.keys(MapControlGroupPositions) as position (position)}
 					{#if position != 'TopRightOffset'}
 						<MapControlGroup {position}>
 							<MapControlLocationSearch

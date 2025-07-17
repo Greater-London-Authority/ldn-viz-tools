@@ -109,7 +109,9 @@
 	onDestroy(() => removePopup());
 
 	$effect(() => {
-		$mapStore && renderComponent(feature, popup);
+		if ($mapStore) {
+			renderComponent(feature, popup);
+		}
 	});
 </script>
 

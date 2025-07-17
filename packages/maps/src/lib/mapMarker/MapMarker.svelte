@@ -146,14 +146,18 @@
 	const removeTooltip = () => {
 		tooltipMaplibrePopup?.remove();
 		tooltipMaplibrePopup = null;
-		tooltipInstance && unmount(tooltipInstance);
+		if (tooltipInstance) {
+			unmount(tooltipInstance);
+		}
 		tooltipInstance = null;
 	};
 
 	const removePopup = () => {
 		popupMaplibrePopup?.remove();
 		popupMaplibrePopup = null;
-		popupInstance && unmount(popupInstance);
+		if (popupInstance) {
+			unmount(popupInstance);
+		}
 		popupInstance = null;
 		popupFeature = null;
 	};
