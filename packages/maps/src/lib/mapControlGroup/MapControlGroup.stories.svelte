@@ -21,8 +21,8 @@
 	import { appendOSKeyToUrl } from '../map/util';
 
 	import MapControlFullscreen from '../mapControlFullscreen/MapControlFullscreen.svelte';
-	// import MapControlLocationSearch from '../mapControlLocationSearch/MapControlLocationSearch.svelte';
-	// import { MapGeocoderAdapterMapBox } from '../mapControlLocationSearch/MapGeocoderAdapterMapBox';
+	import MapControlLocationSearch from '../mapControlLocationSearch/MapControlLocationSearch.svelte';
+	import { MapGeocoderAdapterMapBox } from '../mapControlLocationSearch/MapGeocoderAdapterMapBox';
 	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
 	import MapControlRefresh from '../mapControlRefresh/MapControlRefresh.svelte';
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
@@ -71,14 +71,11 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 				{#each Object.keys(MapControlGroupPositions) as position}
 					{#if position != 'TopRightOffset'}
 						<MapControlGroup {position}>
-							<!--
-						TODO: re-enable
 						<MapControlLocationSearch
 							adapter={new MapGeocoderAdapterMapBox(
 								'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
 							)}
 						/>
-						-->
 							<MapControlZoom />
 						</MapControlGroup>
 					{/if}
@@ -101,14 +98,11 @@ On small devices most controls will hide themselves.
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<!--
-				TODO: re-enable once componenet is migrated
 				<MapControlLocationSearch
 					adapter={new MapGeocoderAdapterMapBox(
 						'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
 					)}
 				/>
-				-->
 					<MapControlZoom />
 				</MapControlGroup>
 

@@ -6,13 +6,12 @@
 	 * @component
 	 */
 
-	import { mousedOverObject } from './stores';
 	import type { Layer } from '@deck.gl/core/typed';
+	import { mousedOverObject } from './stores';
 
-	import { arrow } from 'svelte-floating-ui';
+	import { arrow, createFloatingActions } from 'svelte-floating-ui';
 	import type { ClientRectObject } from 'svelte-floating-ui/core';
-	import { offset, flip, shift } from 'svelte-floating-ui/dom';
-	import { createFloatingActions } from 'svelte-floating-ui';
+	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { type Writable, writable } from 'svelte/store';
 
 	const [floatingRef, floatingContent] = createFloatingActions({
@@ -84,19 +83,17 @@
 
 	let { layers = [], spec = {} }: Props = $props();
 
-	let tooltipSpec: any = $state();
-	let layerObj: any = $state();
+	let tooltipSpec: any = $derived(
+		$mousedOverObject && $mousedOverObject.feature && $mousedOverObject.layer
+			? spec[$mousedOverObject.layer.id]
+			: undefined
+	);
 
-	// TODO: this should probably be two derived runes rather than an effect rune
-	$effect(() => {
-		if ($mousedOverObject && $mousedOverObject.feature && $mousedOverObject.layer) {
-			tooltipSpec = spec[$mousedOverObject.layer.id];
-			layerObj = layers.find((l) => l.id === $mousedOverObject?.layer?.id);
-		} else {
-			tooltipSpec = undefined;
-			layerObj = undefined;
-		}
-	});
+	let layerObj: any = $derived(
+		$mousedOverObject && $mousedOverObject.feature && $mousedOverObject.layer
+			? layers.find((l) => l.id === $mousedOverObject?.layer?.id)
+			: undefined
+	);
 
 	function isConstructor(obj: any) {
 		return !!obj.prototype && !!obj.prototype.constructor.name;
