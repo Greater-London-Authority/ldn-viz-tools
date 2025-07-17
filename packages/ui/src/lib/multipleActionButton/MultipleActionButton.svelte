@@ -75,6 +75,7 @@
 		<Button
 			onclick={() => onClick(state.id)}
 			{size}
+			{fullWidth}
 			{...restProps}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
