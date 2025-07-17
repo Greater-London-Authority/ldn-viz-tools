@@ -3,30 +3,41 @@
 
 	/**
 	 * The `Select` component allows users to select an option form a drop-down list of alternatives.
-	 * Our select element is a wrapper around ['Svelte Select'](https://github.com/rob-balfre/svelte-select).
-	 * Many of the props exposed by this component are provided by `svelte-select`, so you may find it helpful to consult its documentation and [list of examples](https://svelte-select-examples.vercel.app/examples).
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelte-select`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
 	 *
-	 * Notably, this wrapper implements a `justValues` prop that can be bound to, and the `InputWrapper` chrome (label, description, tooltip, error, etc.)
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
 	 * @component
 	 */
 
 	import Svelecte from 'svelecte';
+
+	import {
+		dndzone as dnd,
+		overrideItemIdKeyNameBeforeInitialisingDndZones
+	} from 'svelte-dnd-action';
 
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import type { InputProps } from '../input/types';
 
 	type SvelectComponentPropsType = ComponentProps<typeof Svelecte>;
 
-	interface Props extends InputProps, SvelectComponentPropsType {}
+	interface Props extends InputProps, SvelectComponentPropsType {
+		/**
+		 * If `true`, then selected items can be re-ordered by drag-and-drop.
+		 */
+		reorderable?: boolean;
+	}
 
 	// TODO: check events forwared
+	// TODO: check relationship between inputID and id (wrapper) prop
 
 	let {
 		value = $bindable(undefined),
 
-		//svelect stuff
+		//svelecte stuff
 		options,
-
+		reorderable,
 		name,
 		inputId,
 		required,
@@ -74,7 +85,6 @@
 		searchProps,
 		class: classes,
 		i18n,
-		dndzone,
 		anchor_element,
 		controlClass,
 		dropdownClass,
@@ -85,13 +95,11 @@
 		disabled,
 		error,
 
-		// overlays
-		hint,
-		hintLabel,
-		customOverlay,
-
 		...restProps
 	}: Props = $props();
+
+	let dndzone = $derived(reorderable ? dnd : undefined);
+	overrideItemIdKeyNameBeforeInitialisingDndZones(valueField ?? 'value');
 </script>
 
 <InputWrapper {...restProps} {id} {disabled} {error}>
@@ -109,6 +117,7 @@
 		{groupLabelField}
 		{groupItemsField}
 		{disabledField}
+		{placeholder}
 		{searchable}
 		{clearable}
 		{renderer}
@@ -150,7 +159,6 @@
 		{dropdownClass}
 		{optionClass}
 		{disabled}
-		{placeholder}
 	/>
 </InputWrapper>
 
@@ -197,45 +205,6 @@
 			--sv-create-kbd-bg: var(--theme-input-background);
 			--sv-create-disabled-bg: var(--theme-input-background-disabled);
 			--sv-loader-border: var(--theme-ui-border-secondary) 2px solid;
-
-			/* OLD */
-			/* 
-			--border: var(--theme-input-border) 1px solid;
-			--border-focused: var(--theme-input-border-focussed) 1px solid;
-			--border-hover: var(--theme-input-border-hover) 1px solid;
-			--border-radius: 0;
-			--placeholder-color: var(--theme-input-placeholder);
-			--placeholder-opacity: 100%;
-			--background: var(--theme-input-background);
-			--chevron-color: var(--theme-input-icon);
-			--chevron-icon-colour: var(--theme-input-icon);
-			--clear-icon-color: var(--theme-input-icon);
-			--disabled-background: var(--theme-input-background-disabled);
-			--disabled-border-color: var(--theme-input-border-disabled);
-			--disabled-color: var(--theme-input-label-disabled);
-			--disabled-placeholder-color: var(--theme-ui-disabled);
-			--disabled-placeholder-opacity: 100%;
-			--error-background: var(--theme-input-background);
-			--error-border: var(--theme-input-border-error) 1px solid;
-			--icons-color: var(--theme-input-icon);
-			--input-color: var(--theme-input-valuetext);
-			--item-first-border-radius: 0;
-			--item-hover-bg: var(--theme-input-background-hover);
-			--item-is-active-bg: var(--theme-input-background-selected);
-			--item-is-active-color: var(--theme-static-white);
-			--item-is-not-selectable-color: var(--theme-text-disabled);
-			--list-background: var(--theme-input-background);
-			--list-border: var(--theme-input-border) 1px solid;
-			--list-border-radius: 0;
-			--list-empty-color: var(--theme-ui-background-empty);
-			--list-z-index: 40;
-			--multi-item-active-outline: var(--theme-ui-border-secondary);
-			--multi-item-bg: var(--theme-input-background);
-			--multi-item-border-radius: 0;
-			--multi-item-clear-icon-color: var(--theme-input-icon);
-			--multi-item-color: var(--theme-text-primary);
-			--multi-item-disabled-hover-bg: var(--theme-input-background-disabled);
-			--multi-item-disabled-hover-color: var(--theme-ui-disabled); */
 		}
 
 		/* Reset allows use of form-select class elsehwere if needed */
@@ -261,6 +230,21 @@
 		.form-select.svelecte .sv-input--sizer:after,
 		.form-select.svelecte .sv-input--text {
 			padding: 0px;
+		}
+
+		/* multiple selected items */
+		.form-select.svelecte .sv-item--container > .sv-item--wrap.is-multi {
+			border: var(--theme-input-border) 1px solid;
+			border-right: none;
+			padding-right: var(--spacing-xs);
+		}
+
+		.form-select.svelecte .sv-item--container .sv-item--btn {
+			border: var(--theme-input-border) 1px solid;
+		}
+
+		.form-select.svelecte .sv-item--wrap.is-multi {
+			background-color: var(--theme-input-background);
 		}
 	</style>
 {/if}
