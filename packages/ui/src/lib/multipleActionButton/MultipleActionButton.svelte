@@ -20,40 +20,9 @@
 	import { DropdownMenu } from 'bits-ui';
 	import { classNames } from '../utils/classNames';
 
-	import { type Snippet } from 'svelte';
 	import Button from '../button/Button.svelte';
-	import type { ButtonProps } from '../button/types';
 
-	type MultipleActionButtonProps = ButtonProps & {
-		/**
-		 * Array of options that appear in the drop-down menu. Each is defined by an object with the following properties:
-		 * * `id` (string)
-		 * * `buttonLabel` (string) - the label that appears in the button when this option is selected
-		 * * `menuLabel` (String) - the label that appears in the drop-down menu
-		 * * `menuDescription` (string) - description that appears below the label in the drop-down menu
-		 * * `default` (boolean) - if `true`, then this option will initially be selected
-		 */
-		options: MultipleActionButtonOption[];
-
-		/**
-		 * The currently selected `option`.
-		 */
-		state: MultipleActionButtonOption;
-
-		/**
-		 * title that appears at the top ot the drop-down menu
-		 */
-		menuTitle: string;
-
-		/**
-		 * Function that will be called when the user clicks on the button.
-		 * The `id` of the currently selected option will be provided as an argument.
-		 */
-		onClick: (id: string) => void;
-
-		beforeLabel?: Snippet;
-		afterLabel?: Snippet;
-	};
+	import type { MultipleActionButtonProps } from './types';
 
 	let {
 		options = [],
@@ -70,10 +39,19 @@
 
 	$effect(() => {
 		// apply fallback value to state if not defined
-		if (!state) {
-			state = options.find((option) => option.default) ?? options[0];
+		if (!state || !options.map((d) => d.id).includes(state.id)) {
+			const newState = options.find((option) => option.default) ?? options[0];
+
+			if (newState.id !== state.id) {
+				state = newState;
+			}
 		}
 	});
+
+	// apply fallback value when first rendering - effect doesn't firre, as state not changed
+	if (!state) {
+		state = options.find((option) => option.default) ?? options[0];
+	}
 
 	const changeOption = (newOption: MultipleActionButtonOption) => {
 		state = newOption;
@@ -97,6 +75,7 @@
 		<Button
 			onclick={() => onClick(state.id)}
 			{size}
+			{fullWidth}
 			{...restProps}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>

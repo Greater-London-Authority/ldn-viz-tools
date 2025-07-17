@@ -2,6 +2,7 @@
 	import { ArrowDownTray } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
 	import MultipleActionButton, {
 		type MultipleActionButtonOption
 	} from './MultipleActionButton.svelte';
@@ -48,9 +49,27 @@
 		console.log('Clicked on button in state:', selectedOption);
 </script>
 
+<script>
+	let opts = options;
+</script>
+
 <Story name="Default">
 	{#snippet template(args)}
 		<MultipleActionButton {...args} menuTitle="Select image format" onClick={handleClick} />
+	{/snippet}
+</Story>
+
+<Story name="Externally change available options">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-2">
+			<div class="flex gap-2">
+				<Button onclick={() => (opts = options)}>Allow both</Button>
+				<Button onclick={() => (opts = [options[0]])}>Allow PNG only</Button>
+				<Button onclick={() => (opts = [options[1]])}>Allow SVG only</Button>
+			</div>
+
+			<MultipleActionButton options={opts} menuTitle="Select image format" onClick={handleClick} />
+		</div>
 	{/snippet}
 </Story>
 
@@ -79,6 +98,17 @@
 				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
 			{/snippet}
 		</MultipleActionButton>
+	{/snippet}
+</Story>
+
+<Story name="Full Width">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			menuTitle="Select image format"
+			onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+			fullWidth
+		></MultipleActionButton>
 	{/snippet}
 </Story>
 
