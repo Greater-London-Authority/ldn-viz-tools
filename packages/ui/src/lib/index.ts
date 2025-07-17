@@ -12,6 +12,7 @@ export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelt
 export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
 export { default as Popover } from './popover/Popover.svelte';
+export { default as Select } from './select/Select.svelte';
 export { default as Switch } from './switch/Switch.svelte';
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 
