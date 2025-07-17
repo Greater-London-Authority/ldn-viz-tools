@@ -33,62 +33,59 @@
 	};
 </script>
 
-	{#snippet defaultTemplate({ args })}
-		<MapControlLocationSearch {...args} />
-	{/snippet}
+{#snippet defaultTemplate({ args })}
+	<MapControlLocationSearch {...args} />
+{/snippet}
 
 <Story name="Location Search">
-		{#snippet template(args)}
-
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapControlLocationSearch {adapter} {onSearchError} />
-			</MapControlGroup>
-		</Map>
-	</div>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch {adapter} {onSearchError} />
+				</MapControlGroup>
+			</Map>
+		</div>
 	{/snippet}
 </Story>
 
 <Story name="Location Search - custom placeholder">
-		{#snippet template(args)}
-
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapControlLocationSearch
-					{adapter}
-					{onSearchError}
-					placeholder="Type here to search for a place"
-				/>
-			</MapControlGroup>
-		</Map>
-	</div>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch
+						{adapter}
+						{onSearchError}
+						placeholder="Type here to search for a place"
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
 	{/snippet}
 </Story>
 
 <Story name="Hidden Geolocator">
-		{#snippet template(args)}
-
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
-			</MapControlGroup>
-		</Map>
-	</div>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
+				</MapControlGroup>
+			</Map>
+		</div>
 	{/snippet}
 </Story>
 
@@ -96,23 +93,22 @@
 This story shows how you can provide callback functions to be called when the user selects a location from the search results, or clears the selection.
 -->
 <Story name="Location Search - callback functions">
-		{#snippet template(args)}
-
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapControlLocationSearch
-					{adapter}
-					{onSearchError}
-					onSearchClear={() => console.log('Cleared search')}
-					onLocationFound={(location) => console.log('Location selected:', location)}
-				/>
-			</MapControlGroup>
-		</Map>
-	</div>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch
+						{adapter}
+						{onSearchError}
+						onSearchClear={() => console.log('Cleared search')}
+						onLocationFound={(location) => console.log('Location selected:', location)}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
 	{/snippet}
 </Story>

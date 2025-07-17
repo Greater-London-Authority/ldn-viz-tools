@@ -71,11 +71,11 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 				{#each Object.keys(MapControlGroupPositions) as position}
 					{#if position != 'TopRightOffset'}
 						<MapControlGroup {position}>
-						<MapControlLocationSearch
-							adapter={new MapGeocoderAdapterMapBox(
-								'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
-							)}
-						/>
+							<MapControlLocationSearch
+								adapter={new MapGeocoderAdapterMapBox(
+									'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+								)}
+							/>
 							<MapControlZoom />
 						</MapControlGroup>
 					{/if}
@@ -98,11 +98,11 @@ On small devices most controls will hide themselves.
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-				<MapControlLocationSearch
-					adapter={new MapGeocoderAdapterMapBox(
-						'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
-					)}
-				/>
+					<MapControlLocationSearch
+						adapter={new MapGeocoderAdapterMapBox(
+							'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+						)}
+					/>
 					<MapControlZoom />
 				</MapControlGroup>
 

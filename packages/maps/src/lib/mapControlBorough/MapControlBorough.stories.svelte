@@ -28,25 +28,25 @@
 	let mapStore: MapLibreStore = $state(writable());
 </script>
 
-	{#snippet defaultTemplate({ args })}
-		<MapControlBorough {...args} />
-	{/snippet}
+{#snippet defaultTemplate({ args })}
+	<MapControlBorough {...args} />
+{/snippet}
 
 <Story name="Zooming to borough">
-		{#snippet template(args)}
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest
-			}}
-			bind:mapStore
-		>
-			<MapControlGroup position="TopLeft">
-				<MapControlBorough map={$mapStore} />
-			</MapControlGroup>
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+				bind:mapStore
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlBorough map={$mapStore} />
+				</MapControlGroup>
 
-			<BoroughsContextLayer />
-		</Map>
-	</div>
+				<BoroughsContextLayer />
+			</Map>
+		</div>
 	{/snippet}
 </Story>
