@@ -101,6 +101,17 @@
 	{/snippet}
 </Story>
 
+<Story name="Full Width">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			menuTitle="Select image format"
+			onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+			fullWidth
+		></MultipleActionButton>
+	{/snippet}
+</Story>
+
 <Story name="With size">
 	{#snippet template(args)}
 		<div class="space-y-4">
