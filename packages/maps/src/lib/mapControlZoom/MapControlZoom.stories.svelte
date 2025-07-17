@@ -7,6 +7,9 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlZoom',
 		component: MapControlZoom,
+		render: defaultTemplate,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		}
@@ -30,7 +33,7 @@ They enable [zoomin](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#z
 [zoomout](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomout) by one zoom level per click.
 -->
 <Story name="Zoom Buttons">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<div class="text-color-text-primary m-2 space-y-4">
 				<p>

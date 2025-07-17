@@ -7,6 +7,9 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlPan',
 		component: MapControlPan,
+		render: defaultTemplate,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		}
@@ -25,7 +28,7 @@
 {/snippet}
 
 <Story name="Pan Buttons">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<div class="text-color-text-primary m-2 space-y-4">
 				<p>

@@ -6,6 +6,7 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlBorough',
 		component: MapControlBorough,
+		render: defaultTemplate,
 		tags: ['autodocs'],
 
 		parameters: {
@@ -33,7 +34,7 @@
 {/snippet}
 
 <Story name="Zooming to borough">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{

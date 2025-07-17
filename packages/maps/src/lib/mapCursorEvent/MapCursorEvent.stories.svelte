@@ -95,7 +95,7 @@
 {/snippet}
 
 <Story name="Default">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="relative h-[100dvh] w-[100dvw]">
 			<Map
 				{whenMapLoads}

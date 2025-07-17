@@ -24,13 +24,11 @@
 </script>
 
 {#snippet defaultTemplate({ args })}
-	{#snippet children({ args })}
-		<MapControlRefresh {...args} />
-	{/snippet}
+	<MapControlRefresh {...args} />
 {/snippet}
 
 <Story name="Refresh Button">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<div class="text-color-text-primary m-2 space-y-4">
 				<p>

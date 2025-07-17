@@ -38,7 +38,7 @@ The named layout positions are shown around the edges of this map.
 If using typescript you can import the `MapControlGroupPositions`enum.
 -->
 <Story name="Positioning labels">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
@@ -61,7 +61,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 
 <!-- The alignment of elements within a `MapControlGroup` depends on its position. -->
 <Story name="Positioning controls">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
@@ -90,7 +90,7 @@ Typically, controls on the left are standard for every map, whereas controls on 
 On small devices most controls will hide themselves.
 -->
 <Story name="Standard Layout">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{

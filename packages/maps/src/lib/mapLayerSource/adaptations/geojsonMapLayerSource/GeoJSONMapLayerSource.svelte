@@ -8,8 +8,8 @@
 	 * @component
 	 */
 
-	import { getContext, onMount } from 'svelte';
-	import { type Writable, writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+	import { writable } from 'svelte/store';
 	import MapLayerSource from '../../MapLayerSource.svelte';
 
 	const mapStore = getContext('mapStore');

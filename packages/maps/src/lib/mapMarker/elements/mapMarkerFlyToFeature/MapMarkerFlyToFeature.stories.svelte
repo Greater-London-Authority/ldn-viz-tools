@@ -39,7 +39,7 @@
 {/snippet}
 
 <Story name="Interactive Example">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}

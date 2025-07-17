@@ -71,7 +71,7 @@
 {/snippet}
 
 <Story name="Interactive Example">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="flex gap-2 p-2">
 			<Button onclick={() => (selectedFeature = feature_1)}>Select point 1</Button>
 			<Button onclick={() => (selectedFeature = feature_2)}>Select point 2</Button>

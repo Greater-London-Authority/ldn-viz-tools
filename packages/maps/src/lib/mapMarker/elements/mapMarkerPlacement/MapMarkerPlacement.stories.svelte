@@ -5,6 +5,9 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerPlacement',
 		component: MapMarkerPlacement,
+		redner: defaultTemplate,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		},
@@ -42,7 +45,7 @@
 {/snippet}
 
 <Story name="Default">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -62,7 +65,7 @@
 </Story>
 
 <Story name="Center above feature">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -89,7 +92,7 @@
 
 <!-- To see how this differs from centering on a feature, try moving your mouse across an area feature. -->
 <Story name="Follow mouse">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -106,7 +109,7 @@
 </Story>
 
 <Story name="No placement">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}

@@ -6,6 +6,7 @@
 		title: 'Maps/Components/DeckGL/MapDeckTooltips',
 		component: MapDeckTooltips,
 		tags: ['autodocs'],
+		rener: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -92,7 +93,7 @@
 
 <!-- Here every feature in a layer is assigned the same string as a Tooltip. -->
 <Story name="Example - spec as string">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Checkbox label="Show wards" bind:checked={showWards} />
 		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
@@ -118,7 +119,7 @@
 
 <!-- Here the Tooltip contents are given by applying a function (which is the same for all features in a layer, but may be different between layers) to the feature. -->
 <Story name="Example - spec as function">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Checkbox label="Show wards" bind:checked={showWards} />
 		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
@@ -146,7 +147,7 @@
   Each layer can use a separate component to render the Tooltips for its features.
   -->
 <Story name="Example - spec as components">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Checkbox label="Show wards" bind:checked={showWards} />
 		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 

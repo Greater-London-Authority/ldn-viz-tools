@@ -131,7 +131,7 @@ This is our default light basemap.
 It uses the Ordnance Survey's [OS_VTS_3857_Light.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet.
 -->
 <Story name="Light OS Basemap">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -150,7 +150,7 @@ This is the greyscale basemap used on the Cool Spaces map.
 It is very similar to the Ordnance Survey's [OS_VTS_3857_Greyscale.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet, with a few tweaks.
  -->
 <Story name="Greyscale OS Basemap">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -166,7 +166,7 @@ It is very similar to the Ordnance Survey's [OS_VTS_3857_Greyscale.json](https:/
 
 <!-- This was created by Mike Brondbjerg based on the Ordnance Survey's greyscale theme. -->
 <Story name="Dark Grey, muted buildings">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -185,7 +185,7 @@ This was created by the Ordnance Survey, inspired by Mike Brondbjerg's dark gray
 It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet.
 -->
 <Story name="Dark OS Basemap">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}
@@ -201,7 +201,7 @@ It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/Ordnanc
 
 <!-- This story registers event handlers to identify the layers underneath the point where the user clicks. -->
 <Story name="Properties">
-	{#snippet template(args)}
+	{#snippet template()}
 		<PropertiesStory />
 	{/snippet}
 </Story>

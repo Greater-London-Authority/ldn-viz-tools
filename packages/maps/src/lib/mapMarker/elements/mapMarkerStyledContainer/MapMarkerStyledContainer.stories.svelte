@@ -59,7 +59,7 @@
 <Story name="Default" source />
 
 <Story name="Mapping Context">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}

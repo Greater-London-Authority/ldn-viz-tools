@@ -7,6 +7,7 @@
 		title: 'Maps/Components/MapControls/MapControlLocationSearch',
 		component: MapControlLocationSearch,
 		tags: ['autodocs'],
+		render: defaultTemplate,
 
 		parameters: {
 			layout: 'fullscreen'
@@ -38,7 +39,7 @@
 {/snippet}
 
 <Story name="Location Search">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
@@ -54,7 +55,7 @@
 </Story>
 
 <Story name="Location Search - custom placeholder">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
@@ -74,7 +75,7 @@
 </Story>
 
 <Story name="Hidden Geolocator">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
@@ -93,7 +94,7 @@
 This story shows how you can provide callback functions to be called when the user selects a location from the search results, or clears the selection.
 -->
 <Story name="Location Search - callback functions">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{

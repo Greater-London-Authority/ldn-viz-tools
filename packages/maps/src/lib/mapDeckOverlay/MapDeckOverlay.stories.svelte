@@ -78,7 +78,7 @@
  -->
 
 <Story name="Changing layers">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Checkbox label="Show wards" bind:checked={showWards} />
 		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 

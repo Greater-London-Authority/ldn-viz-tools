@@ -57,18 +57,6 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<div class="relative h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<BoroughsContextLayer {...args} />
-		</Map>
-	</div>
-{/snippet}
-
 <Story name="Default" source>
 	{#snippet template(args)}
 		<div class="relative h-[100dvh] w-[100dvw]">

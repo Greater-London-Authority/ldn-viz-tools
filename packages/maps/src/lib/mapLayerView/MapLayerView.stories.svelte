@@ -27,6 +27,7 @@
 		title: 'Maps/Components/MapLayerView',
 		component: MapLayerView,
 		tags: ['autodocs'],
+		render: defaultTemplate,
 		parameters: {
 			layout: 'full'
 		},
@@ -87,7 +88,7 @@
 {/snippet}
 
 <Story name="Default">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="relative h-[100dvh] w-[100dvw]">
 			<Map
 				options={{

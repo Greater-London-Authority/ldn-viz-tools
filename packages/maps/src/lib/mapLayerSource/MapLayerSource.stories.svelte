@@ -2,6 +2,7 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapLayerSource from './MapLayerSource.svelte';
 
+	/*
 	const loadHandlerArgType = {
 		type: 'function',
 		control: 'none',
@@ -13,11 +14,13 @@
 		}
 	};
 
+	 */
+
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapLayerSource',
 		component: MapLayerSource,
 		tags: ['autodocs'],
-		//render: defaultTemplate,
+		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -68,7 +71,7 @@
 {/snippet}
 
 <Story name="Default">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="relative h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
