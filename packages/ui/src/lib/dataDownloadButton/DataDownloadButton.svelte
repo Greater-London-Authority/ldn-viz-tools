@@ -4,12 +4,15 @@
 	 * @component
 	 */
 
-	import type { MultipleActionButtonOption } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
+	import type {
+		MultipleActionButtonOption,
+		MultipleActionButtonProps
+	} from '../multipleActionButton/types.ts';
 
 	import { csvFormat } from 'd3-dsv';
 
-	interface Props {
+	type DataDownloadButtonProps = MultipleActionButtonProps & {
 		/**
 		 * The available data formats for the downloaded file.
 		 */
@@ -39,10 +42,7 @@
 		 * If `true`, then button will fill full width of parent.
 		 */
 		fullWidth?: boolean;
-		beforeLabel?: import('svelte').Snippet;
-		afterLabel?: import('svelte').Snippet;
-		[key: string]: any;
-	}
+	};
 
 	let {
 		formats = ['CSV', 'JSON'],
@@ -52,10 +52,8 @@
 		disabled = false,
 		columnMapping = undefined,
 		fullWidth = false,
-		beforeLabel,
-		afterLabel,
 		...rest
-	}: Props = $props();
+	}: DataDownloadButtonProps = $props();
 
 	const enforceExtension = (name: string, extension: string) => {
 		return name.toLocaleLowerCase().endsWith(extension) ? name : `${name}${extension}`;
@@ -98,14 +96,10 @@
 		});
 	};
 
-	let options: MultipleActionButtonOption[] = [];
-
-	let selectedOption: MultipleActionButtonOption = $state(options[0]);
-	let format = $derived(selectedOption?.id ?? 'CSV');
-	let download = $derived(format === 'JSON' ? downloadJSON : downloadCSV);
-	$effect(() => {
+	let options: MultipleActionButtonOption[] = $derived.by(() => {
+		const opts = [];
 		if (formats.includes('CSV')) {
-			options.push({
+			opts.push({
 				id: 'CSV',
 				buttonLabel: 'Download as CSV',
 				menuLabel: 'CSV',
@@ -114,17 +108,19 @@
 			});
 		}
 		if (formats.includes('JSON')) {
-			options.push({
+			opts.push({
 				id: 'JSON',
 				buttonLabel: 'Download as JSON',
 				menuLabel: 'JSON',
 				menuDescription: 'Sometimes more convenient for programmers.'
 			});
 		}
+		return opts;
 	});
 
-	const beforeLabel_render = $derived(beforeLabel);
-	const afterLabel_render = $derived(afterLabel);
+	let selectedOption: MultipleActionButtonOption = $state(options[0]);
+	let format = $derived(selectedOption?.id ?? 'CSV');
+	let download = $derived(format === 'JSON' ? downloadJSON : downloadCSV);
 </script>
 
 <MultipleActionButton
@@ -135,12 +131,4 @@
 	{disabled}
 	{fullWidth}
 	{...rest}
->
-	<!-- contents of the button -->
-	{#snippet beforeLabel()}
-		{@render beforeLabel_render?.()}
-	{/snippet}
-	{#snippet afterLabel()}
-		{@render afterLabel_render?.()}
-	{/snippet}
-</MultipleActionButton>
+></MultipleActionButton>

@@ -13,10 +13,13 @@
 	 */
 
 	import { toPng } from 'html-to-image';
-	import type { MultipleActionButtonOption } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
+	import type {
+		MultipleActionButtonOption,
+		MultipleActionButtonProps
+	} from '../multipleActionButton/types.ts';
 
-	interface Props {
+	type ImageDownloadButtonProps = MultipleActionButtonProps & {
 		/**
 		 * An `Element` node to be converted. When 'SVG' format is selected the largest child svg element will be targeted.
 		 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
@@ -47,10 +50,7 @@
 		 * If `true`, then button will fill full width of parent.
 		 */
 		fullWidth?: boolean;
-		beforeLabel?: import('svelte').Snippet;
-		afterLabel?: import('svelte').Snippet;
-		[key: string]: any;
-	}
+	};
 
 	let {
 		htmlNode,
@@ -60,10 +60,8 @@
 		disabled = false,
 		scaleFactor = 2,
 		fullWidth = false,
-		beforeLabel,
-		afterLabel,
 		...rest
-	}: Props = $props();
+	}: ImageDownloadButtonProps = $props();
 
 	const downloadFromURL = (url: string) => {
 		const initialName = filename || 'image';
@@ -266,9 +264,6 @@
 
 	let format = $derived(selectedOption?.id ?? 'PNG');
 
-	const beforeLabel_render = $derived(beforeLabel);
-	const afterLabel_render = $derived(afterLabel);
-
 	$inspect({ options, selectedOption });
 </script>
 
@@ -280,12 +275,4 @@
 	{disabled}
 	{fullWidth}
 	{...rest}
->
-	<!-- contents of the button -->
-	{#snippet beforeLabel()}
-		{@render beforeLabel_render?.()}
-	{/snippet}
-	{#snippet afterLabel()}
-		{@render afterLabel_render?.()}
-	{/snippet}
-</MultipleActionButton>
+></MultipleActionButton>
