@@ -9,13 +9,7 @@
 		exportBtns?: import('svelte').Snippet;
 	}
 
-	let {
-		byline = '',
-		source = '',
-		note = '',
-		chartDescription = '',
-		exportBtns
-	}: Props = $props();
+	let { byline = '', source = '', note = '', chartDescription = '', exportBtns }: Props = $props();
 
 	/**
 	 * Controls whether the Modal is open or closed
@@ -23,15 +17,15 @@
 	let isOpen = $state(false);
 </script>
 
-<div class="w-full flex flex-wrap justify-between mt-1 items-end">
+<div class="mt-1 flex w-full flex-wrap items-end justify-between">
 	{#if byline || source || note || chartDescription}
 		<ul
 			title="Chart footnotes and description"
-			class="flex flex-col space-y-0.5 text-color-text-secondary text-xs min-w-40 max-w-xl mr-4"
+			class="text-color-text-secondary mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs"
 		>
 			{#if byline}<li>{byline}</li>{/if}
-			{#if source}<li><span class="font-bold mr-1">Source:</span>{source}</li>{/if}
-			{#if note}<li><span class="font-bold mr-1">Note:</span>{note}</li>{/if}
+			{#if source}<li><span class="mr-1 font-bold">Source:</span>{source}</li>{/if}
+			{#if note}<li><span class="mr-1 font-bold">Note:</span>{note}</li>{/if}
 			{#if chartDescription}
 				<li data-capture-ignore>
 					<Button

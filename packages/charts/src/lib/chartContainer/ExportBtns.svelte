@@ -3,54 +3,42 @@
 	import { ArrowDownTray, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	
-
-	
-
-	
-
-
-	
-
-	
-
-	
 	interface Props {
 		/**
-	 * Reference to the HTML Element to be converted to an image.
-	 */
+		 * Reference to the HTML Element to be converted to an image.
+		 */
 		chartToCapture: HTMLDivElement;
 		/**
-	 * The data to be exported. This is an array of objects: each entry becomes a row in the generated
-	 * CSV file, and each attribute of the objects becomes a column.
-	 */
+		 * The data to be exported. This is an array of objects: each entry becomes a row in the generated
+		 * CSV file, and each attribute of the objects becomes a column.
+		 */
 		dataForDownload: { [key: string]: any }[] | undefined;
 		/**
-	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
-	 * If set to `false`, then the button is hidden.
-	 *
-	 */
+		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
+		 * If set to `false`, then the button is hidden.
+		 *
+		 */
 		dataDownloadButton: true | false | ('CSV' | 'JSON')[];
 		/**
-	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
-	 * If set to `false`, then the button is hidden.
-	 *
-	 */
+		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
+		 * If set to `false`, then the button is hidden.
+		 *
+		 */
 		imageDownloadButton: true | false | ('PNG' | 'SVG')[];
 		/**
-	 * Image Download Button in the footer
-	 *
-	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
-	 * If set to `false`, then the button is hidden.
-	 *
-	 */
+		 * Image Download Button in the footer
+		 *
+		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
+		 * If set to `false`, then the button is hidden.
+		 *
+		 */
 		filename?: string;
 		/**
-	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
-	 */
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
+		 */
 		columnMapping?: undefined | { [oldName: string]: string };
 	}
 
@@ -64,7 +52,7 @@
 	}: Props = $props();
 </script>
 
-<div class="flex flex-wrap mt-2 space-y-2 items-end" data-capture-ignore>
+<div class="mt-2 flex flex-wrap items-end space-y-2" data-capture-ignore>
 	{#if dataDownloadButton && dataForDownload}
 		<div class="mr-2 shrink-0">
 			<DataDownloadButton
@@ -77,10 +65,8 @@
 				size="sm"
 			>
 				{#snippet afterLabel()}
-							
-						<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
-					
-							{/snippet}
+					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
+				{/snippet}
 			</DataDownloadButton>
 		</div>
 	{/if}
@@ -96,10 +82,8 @@
 				size="sm"
 			>
 				{#snippet afterLabel()}
-							
-						<Icon src={Camera} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
-					
-							{/snippet}
+					<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
+				{/snippet}
 			</ImageDownloadButton>
 		</div>
 	{/if}
