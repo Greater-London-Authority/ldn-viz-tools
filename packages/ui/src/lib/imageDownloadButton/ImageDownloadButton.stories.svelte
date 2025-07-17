@@ -40,14 +40,6 @@
 	<LogoByCiu class="w-80" />
 </div>
 
-{#snippet defaultTemplate({ args })}
-	<ImageDownloadButton {...args} {htmlNode}>
-		{#snippet afterLabel()}
-			<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-		{/snippet}
-	</ImageDownloadButton>
-{/snippet}
-
 <Story name="Default">
 	{#snippet template(args)}
 		<ImageDownloadButton {...args} {htmlNode}>
