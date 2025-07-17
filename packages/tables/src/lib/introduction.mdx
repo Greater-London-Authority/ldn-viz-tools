@@ -1,9 +1,30 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+//import { Meta } from '@storybook/blocks';
 import '../app.postcss';
 
-<Meta title="Tables/Introduction" />
+//<Meta title="Tables/Introduction" />
 
 # Welcome to Storybook for ldn-viz-tools tables
 
 This provides a component for rendering tables.
 It includes support for rendering visualizations inside table cells, and for rendering summary visualizations for columns.
+
+## Code structure
+
+1. `core/`
+
+- `core/lib`: these _functions_ manipulate tabular data, and create scales used by the renderers
+- `core/aggregateRenderers`: these _components_ render a visual encoding of an _array of values_ corresponding to the values of a particular column for multiple rows (provided as the `values` prop).
+- `core/renderers`: these _components_ render a visual encoding of a _single value_ corresponding to a single table cell (provided as the `value` prop).
+  If requested by the specification, the value of additional columns for the same row will be provided as the `contextVals` prop.
+
+2. `table/`
+
+- `table/Table.svelte`: this is the main component used by users of the library
+- `table/TableContainer.svelte`: this is a wrapper that adds the title/subtitle/download buttons around a `Table`
+- `table/cells`: these components represent particular special cell types
+- `table/menus`: these components allow the user to interact with the table to change what is displayed and how
+- `table/rows`: these components are used to render table rows and cells, but not the data cells or column/group summary visualizations
+
+3. `types/`: contains type definitions
+
+4. `utils/`: contains util functions
