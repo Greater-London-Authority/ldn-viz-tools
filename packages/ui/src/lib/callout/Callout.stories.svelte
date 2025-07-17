@@ -1,14 +1,14 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Callout from './Callout.svelte';
 	import Button from '../button/Button.svelte';
+	import Callout from './Callout.svelte';
 
 	/**
 	 * The `Callout` component is used to display a short message in a coloured banner.
 	 */
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components/Callout/Callout',
+		title: 'Ui/Components/Callout',
 		component: Callout,
 		tags: ['autodocs']
 	});
