@@ -1,10 +1,12 @@
 <script module>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Charts/Components/ObservablePlotInner',
 		component: ObservablePlotInner,
+		tags: ['autodocs'],
 
 		argTypes: {
 			// this is a module export, not a prop, so don't include it in table
@@ -14,7 +16,7 @@
 				}
 			}
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
@@ -65,8 +67,8 @@
 	});
 </script>
 
-<Template >
-	{#snippet children({ args })}
+<Story name="Default" source>
+	{#snippet template(args)}
 		<ObservablePlotInner
 			{...args}
 			{spec}
@@ -74,6 +76,4 @@
 			subTitle="A scatterplot of depth against length"
 		/>
 	{/snippet}
-</Template>
-
-<Story name="Default" args={{ spec }} source />
+</Story>
