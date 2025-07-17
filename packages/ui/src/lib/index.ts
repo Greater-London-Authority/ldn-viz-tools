@@ -6,6 +6,8 @@ export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as Flag } from './flag/Flag.svelte';
+export { default as Input } from './input/Input.svelte';
+export { default as InputWrapper } from './input/InputWrapper.svelte';
 export { default as Modal } from './modal/Modal.svelte';
 export { default as MultipleActionButton } from './multipleActionButton/MultipleActionButton.svelte';
 export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelte';
