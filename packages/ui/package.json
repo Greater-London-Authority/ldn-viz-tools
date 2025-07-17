@@ -42,7 +42,7 @@
 		"@steeze-ui/svelte-icon": "^1.6.2",
 		"bits-ui": "^2.2.0",
 		"d3-dsv": "^3.0.1",
-		"mode-watcher": "^1.0.7"
+		"mode-watcher": "^1.0.7",
 		"svelecte": "^5.2.0",
 		"svelte-dnd-action": "^0.9.63"
 	},
