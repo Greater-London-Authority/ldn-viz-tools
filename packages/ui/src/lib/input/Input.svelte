@@ -1,23 +1,20 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { FormatFunction } from '$lib/input/types';
 
 	export const trimInput: FormatFunction = (value) => value.trim();
 </script>
 
 <script lang="ts">
-	import type { ChangeEventHandler, HTMLInputAttributes, HTMLTextareaAttributes, HTMLInputTypeAttribute } from 'svelte/elements';
-
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 	import InputWrapper from './InputWrapper.svelte';
-	import { type InputAsNonTextArea, type InputAsTextArea, type InputProps, type Props } from './types';
-
+	import { type InputAsNonTextArea, type InputAsTextArea, type InputComponentProps } from './types';
 
 	let {
 		type = 'text',
 		inputmode = undefined,
 		id = randomId(),
-		label = '',
+		label,
 		format = trimInput,
 		description = '',
 		error = '',
@@ -31,7 +28,7 @@
 		placeholder,
 		name = id,
 		...restProps
-	}: Props = $props();
+	}: InputComponentProps = $props();
 
 	let inputType = $derived(type);
 
@@ -58,7 +55,7 @@
 	// if error exists, description won't render so `aria-describedby` should equal `undefined`.
 	let descriptionIsVisible = $derived(!error);
 
-	let input: HTMLInputElement | HTMLTextAreaElement | undefined = undefined;
+	let input: HTMLInputElement | HTMLTextAreaElement | undefined = $state(undefined);
 
 	// Svelte does not allow bind:type and bind:value simultaneously so this
 	// function acts as the input change handler.
@@ -140,7 +137,6 @@
 		<input
 			bind:this={input}
 			class={inputClasses}
-			type={inputType}
 			{inputmode}
 			{id}
 			{name}
@@ -154,6 +150,7 @@
 			onblur={formatAndUpdateValue}
 			oninput={updateValue}
 			{...nonTextAreaRestProps}
+			type={inputType}
 		/>
 	{/if}
 </InputWrapper>

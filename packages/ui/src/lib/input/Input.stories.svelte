@@ -7,7 +7,10 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Input',
 		component: Input,
-		tags: ['autodocs']
+		tags: ['autodocs'],
+		args: {
+			label: 'A Label is required'
+		}
 	});
 
 	let value = $state('');
@@ -155,7 +158,6 @@
 	{#snippet template(args)}
 		<div class="w-96">
 			<Input
-				{...args}
 				bind:value={age}
 				label="Enter your age (required)"
 				name="age-input"
@@ -214,7 +216,7 @@
 				type="textarea"
 				label="Textarea"
 				name="textarea-input"
-				rows="5"
+				rows={5}
 				hint="Three rows by default"
 			/>
 			<Input

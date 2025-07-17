@@ -2,7 +2,6 @@ import type { Snippet } from 'svelte';
 
 import type {
 	ChangeEventHandler,
-	HTMLInputAttributes,
 	HTMLInputTypeAttribute,
 	HTMLTextareaAttributes
 } from 'svelte/elements';
@@ -27,6 +26,7 @@ export type InputMode =
 	| 'decimal'
 	| null
 	| undefined;
+
 export interface InputProps {
 	/**
 	 * String that labels the input.
@@ -89,11 +89,9 @@ export interface InputProps {
 	 */
 	customOverlay?: Snippet;
 	children?: Snippet;
-	onchange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 interface InputPropsBase {
-
 	/**
 	 * The value of the input. Can be bound to and externally modified.
 	 */
@@ -113,19 +111,28 @@ interface InputPropsBase {
 	 * Function that will be applied to transform the value when the input element loses focus.
 	 * By default, it trims leading and trailing whitespace (but does nothing if `type` is `password`).
 	 */
-	format: null | FormatFunction;
+	format?: null | FormatFunction;
+
+	/**
+	 * The HTML autocomplete attribute lets web developers specify what if any permission the user agent has to provide automated assistance in filling out form field values, as well as guidance to the browser as to the type of information expected in the field.
+	 *
+	 * It is available on <input> elements that take a text or numeric value as input, <textarea> elements, <select> elements, and <form> elements.
+	 */
+	autocomplete?: 'on' | 'off' | AutoFill | null | undefined;
 }
 
-export interface InputAsTextArea extends InputPropsBase, Omit<InputProps, 'onchange'> {
+export interface InputAsTextArea
+	extends Pick<HTMLTextareaAttributes, 'cols' | 'rows' | 'wrap'>,
+		InputPropsBase,
+		Omit<InputProps, 'onchange'> {
 	/**
 	 * The `type` of the `<input>` element (see [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)).
 	 *
 	 * Additionally, passing `textarea` will render a `<textarea>` instead of an `<input>`.
 	 */
 
-	type: 'textarea',
-	restProps: HTMLTextareaAttributes;
-	onchange: ChangeEventHandler<HTMLTextAreaElement>;
+	type: 'textarea';
+	onchange?: ChangeEventHandler<HTMLTextAreaElement>;
 }
 
 export interface InputAsNonTextArea extends InputPropsBase, InputProps {
@@ -134,9 +141,10 @@ export interface InputAsNonTextArea extends InputPropsBase, InputProps {
 	 *
 	 * Additionally, passing `textarea` will render a `<textarea>` instead of an `<input>`.
 	 */
-	type: Exclude<HTMLInputTypeAttribute, 'textarea'>,
-	restProps: HTMLInputAttributes;
+	type: Exclude<HTMLInputTypeAttribute, 'textarea'>;
+
+	min?: string;
+	max?: string;
 }
 
-export type Props = InputAsTextArea | InputAsNonTextArea;
-
+export type InputComponentProps = InputAsTextArea | InputAsNonTextArea;
