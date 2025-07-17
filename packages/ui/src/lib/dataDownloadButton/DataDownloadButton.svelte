@@ -52,7 +52,7 @@
 		disabled = false,
 		columnMapping = undefined,
 		fullWidth = false,
-		...rest
+		...restProps
 	}: DataDownloadButtonProps = $props();
 
 	const enforceExtension = (name: string, extension: string) => {
@@ -130,5 +130,5 @@
 	onClick={download}
 	{disabled}
 	{fullWidth}
-	{...rest}
+	{...restProps}
 ></MultipleActionButton>

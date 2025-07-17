@@ -60,7 +60,7 @@
 		disabled = false,
 		scaleFactor = 2,
 		fullWidth = false,
-		...rest
+		...restProps
 	}: ImageDownloadButtonProps = $props();
 
 	const downloadFromURL = (url: string) => {
@@ -274,5 +274,5 @@
 	onClick={download}
 	{disabled}
 	{fullWidth}
-	{...rest}
+	{...restProps}
 ></MultipleActionButton>
