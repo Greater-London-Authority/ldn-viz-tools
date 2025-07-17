@@ -17,6 +17,7 @@ export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
 export { default as Popover } from './popover/Popover.svelte';
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
+export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
 export { default as Select } from './select/Select.svelte';
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as Switch } from './switch/Switch.svelte';

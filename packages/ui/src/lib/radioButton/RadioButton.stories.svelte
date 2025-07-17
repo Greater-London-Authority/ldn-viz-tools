@@ -1,5 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Overlay from '../overlay/Overlay.svelte';
 	import { theme } from '../theme/themeState.svelte';
 	import RadioButton from './RadioButton.svelte';
 
@@ -18,7 +19,7 @@
 		}
 	});
 
-	let selectedId: string = '';
+	let selectedId: string = $state('');
 </script>
 
 <Story name="Default">
@@ -35,6 +36,28 @@
 <Story name="Single RadioButton (disabled)">
 	{#snippet template(args)}
 		<RadioButton {...args} label="Foo" id="foo" name="isolated" disabled />
+	{/snippet}
+</Story>
+
+<Story name="With hint">
+	{#snippet template(args)}
+		<RadioButton {...args} label="Foo" id="foo" name="isolated" hint="Radio Ga Ga" />
+	{/snippet}
+</Story>
+
+<Story name="With custom overlay">
+	{#snippet template(args)}
+		{#snippet customOverlay()}
+			<Overlay
+				overlayType="modal"
+				modalTitle="Modal title"
+				modalDescription="This is a modal description"
+				hintLabel=""
+			>
+				This is the modal content
+			</Overlay>
+		{/snippet}
+		<RadioButton {...args} label="Foo" id="foo" name="isolated" {customOverlay} />
 	{/snippet}
 </Story>
 
