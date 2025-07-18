@@ -33,7 +33,7 @@
 	// TODO: check relationship between inputID and id (wrapper) prop
 
 	let {
-		value = $bindable(undefined),
+		value = $bindable(),
 
 		//svelecte stuff
 		options,
@@ -44,8 +44,8 @@
 		optionResolver,
 		valueAsObject,
 		parentValue,
-		valueField,
-		labelField,
+		valueField = 'value',
+		labelField = 'label',
 		groupLabelField,
 		groupItemsField,
 		disabledField,
