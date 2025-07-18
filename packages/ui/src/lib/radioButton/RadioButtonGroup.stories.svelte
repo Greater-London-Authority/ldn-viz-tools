@@ -19,7 +19,15 @@
 		}
 	});
 
+	// N.B Seperate selectedIds required when bound
 	let selectedId: string = $state('');
+	let selectedId2: string = $state('');
+	let selectedId3: string = $state('');
+	let selectedId4: string = $state('');
+	let selectedId5: string = $state('');
+	let selectedId6: string = $state('');
+	let selectedId7: string = $state('');
+	let selectedId8: string = $state('');
 	let selectedIdForError: string = $state('');
 
 	let optionsForGroup = [
@@ -60,18 +68,23 @@
 				{...args}
 				options={optionsForGroup}
 				name="station-type"
-				bind:selectedId
+				bind:selectedId={selectedId2}
 				hint="Radio ga ga"
 			/>
 		</div>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId2}</p>
 	{/snippet}
 </Story>
 
 <Story name="With custom overlay">
 	{#snippet template(args)}
 		<div class="w-96">
-			<RadioButtonGroup {...args} options={optionsForGroup} name="station-type" bind:selectedId>
+			<RadioButtonGroup
+				{...args}
+				options={optionsForGroup}
+				name="station-type"
+				bind:selectedId={selectedId3}
+			>
 				{#snippet customOverlay()}
 					<Overlay
 						overlayType="modal"
@@ -83,7 +96,7 @@
 				{/snippet}</RadioButtonGroup
 			>
 		</div>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId3}</p>
 	{/snippet}
 </Story>
 
@@ -93,11 +106,11 @@
 			{...args}
 			options={optionsForGroup}
 			name="station-type"
-			bind:selectedId
+			bind:selectedId={selectedId4}
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId4}</p>
 	{/snippet}
 </Story>
 
@@ -107,11 +120,11 @@
 			{...args}
 			options={optionsWithColor}
 			name="station-type"
-			bind:selectedId
+			bind:selectedId={selectedId5}
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId5}</p>
 	{/snippet}
 </Story>
 
@@ -121,12 +134,12 @@
 			{...args}
 			options={optionsForGroup}
 			name="station-type"
-			bind:selectedId
+			bind:selectedId={selectedId6}
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
 			allowClear={false}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId6}</p>
 	{/snippet}
 </Story>
 
@@ -136,12 +149,12 @@
 			{...args}
 			options={optionsForGroup}
 			name="station-type"
-			bind:selectedId
+			bind:selectedId={selectedId7}
 			label="Transport method"
 			allowClear={false}
 			orientation="horizontal"
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId7}</p>
 	{/snippet}
 </Story>
 
@@ -151,12 +164,12 @@
 			{...args}
 			options={optionsForGroup}
 			name="station-type"
-			bind:selectedId
+			bind:selectedId={selectedId8}
 			label="Transport method"
 			allowClear={false}
 			disabled
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId8}</p>
 	{/snippet}
 </Story>
 
