@@ -38,6 +38,14 @@ export { default as Theme } from './theme/Theme.svelte';
 export { theme } from './theme/themeState.svelte.js';
 export { default as ThemeSwitcher } from './theme/ThemeSwitcher.svelte';
 
+export { default as Geocoder } from './geolocation/Geocoder.svelte';
+export * from './geolocation/GeocoderAdapter';
+export * from './geolocation/GeocoderAdapterList';
+export * from './geolocation/GeocoderAdapterOSPlaces';
+export { default as GeocoderSuggestionList } from './geolocation/GeocoderSuggestionList.svelte';
+export { default as Geolocator } from './geolocation/Geolocator.svelte';
+export * from './geolocation/types';
+
 export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPreference.js';
 
 export { classNames } from './utils/classNames.js';
