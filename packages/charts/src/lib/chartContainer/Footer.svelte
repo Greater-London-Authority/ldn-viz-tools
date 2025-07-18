@@ -27,16 +27,27 @@
 			{#if source}<li><span class="mr-1 font-bold">Source:</span>{source}</li>{/if}
 			{#if note}<li><span class="mr-1 font-bold">Note:</span>{note}</li>{/if}
 			{#if chartDescription}
-				<li data-capture-ignore>
-					<Button
-						variant="text"
-						size="xs"
-						emphasis="secondary"
-						class="!p-0"
-						on:click={() => (isOpen = true)}>View description</Button
-					>
-				</li>
-				<Modal bind:isOpen title="Description" description={chartDescription}></Modal>
+				<Modal bind:open={isOpen}>
+					{#snippet trigger()}
+						<li data-capture-ignore>
+							<Button
+								variant="text"
+								size="xs"
+								emphasis="secondary"
+								class="!p-0"
+								onclick={() => (isOpen = true)}>View description</Button
+							>
+						</li>
+					{/snippet}
+
+					{#snippet title()}
+						Description
+					{/snippet}
+
+					{#snippet description()}
+						{chartDescription}
+					{/snippet}
+				</Modal>
 			{/if}
 		</ul>
 	{/if}
