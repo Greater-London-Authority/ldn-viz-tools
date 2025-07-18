@@ -211,7 +211,6 @@
 	};
 
 	let width = $state(0);
-	$inspect(width);
 
 	onMount(() => {
 		// updateDimensions();
