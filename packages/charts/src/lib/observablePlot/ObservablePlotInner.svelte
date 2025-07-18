@@ -201,6 +201,8 @@
 	}: Props = $props();
 
 	const renderPlot = (node: HTMLDivElement) => {
+		node.innerHTML = '';
+
 		if (applyDefaults) {
 			node.appendChild(Plot.plot(spec));
 		} else {
@@ -209,6 +211,7 @@
 	};
 
 	let width = $state(0);
+	$inspect(width);
 
 	onMount(() => {
 		// updateDimensions();
@@ -224,9 +227,13 @@
 	});
 	*/
 
+	let unclean = false;
 	const updateDimensions = () => {
 		if (spec.width !== width) {
 			spec.width = width;
+
+			// the #key block is no longer triggering a re-render when spec.width changes
+			renderPlot(domNode);
 		}
 	};
 
