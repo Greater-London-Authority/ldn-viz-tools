@@ -18,7 +18,7 @@
 
 	import maplibre_gl from 'maplibre-gl';
 	import { setContext } from 'svelte';
-	import { writable, type Writable } from 'svelte/store';
+	import { writable } from 'svelte/store';
 	// import { currentThemeMode } from '@ldn-viz/ui';
 
 	import { theme_os_dark, theme_os_light_vts } from '@ldn-viz/maps';
@@ -68,13 +68,13 @@
 		/**
 		 * Store containing the MapLibre instance.
 		 */
-		mapStore: MapStore;
+		mapStore?: MapStore;
 
 		/**
 		 * Store containing the MapCursor instance.
 		 */
 
-		mapCursorStore: MapCursorTypeStore;
+		mapCursorStore?: MapCursorTypeStore;
 	}
 
 	let {
