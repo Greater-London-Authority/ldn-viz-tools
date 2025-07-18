@@ -13,7 +13,7 @@ type ButtonAsLink = Omit<HTMLAnchorAttributes, 'href' | 'type'> & {
 	disabled?: HTMLButtonAttributes['disabled'];
 };
 
-type LdnButtonProps = {
+export type LdnButtonProps = {
 	variant?: 'brand' | 'square' | 'solid' | 'outline' | 'text';
 	emphasis?: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
 	size?: 'xs' | 'sm' | 'md' | 'lg';
