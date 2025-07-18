@@ -16,7 +16,6 @@
 		title: 'Maps/Components/MapMarker',
 		component: MapMarker,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -45,10 +44,6 @@
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapMarker {...args} />
-{/snippet}
 
 <Story name="Interactive Example">
 	{#snippet template()}

@@ -7,7 +7,6 @@
 		title: 'Maps/Components/MapControls/MapControlLocationSearch',
 		component: MapControlLocationSearch,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'fullscreen'
@@ -34,12 +33,8 @@
 	};
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<MapControlLocationSearch {...args} />
-{/snippet}
-
 <Story name="Location Search">
-	{#snippet template()}
+	{#snippet template(args)}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				options={{
@@ -47,7 +42,7 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch {adapter} {onSearchError} />
+					<MapControlLocationSearch {adapter} {onSearchError} {...args} />
 				</MapControlGroup>
 			</Map>
 		</div>

@@ -7,7 +7,6 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlZoom',
 		component: MapControlZoom,
-		render: defaultTemplate,
 		tags: ['autodocs'],
 
 		parameters: {
@@ -23,10 +22,6 @@
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<MapControlZoom {...args} />
-{/snippet}
-
 <!--
 The zoom buttons are usually positioned in the top left corner under the location search.
 They enable [zoomin](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomin) and
@@ -35,25 +30,6 @@ They enable [zoomin](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#z
 <Story name="Zoom Buttons">
 	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
-			<div class="text-color-text-primary m-2 space-y-4">
-				<p>
-					The zoom buttons are usually positioned in the top left corner under the location search.
-					They enable <a
-						class="underline"
-						href="https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#zoomin"
-					>
-						zoom in
-					</a>
-					and
-					<a
-						class="underline"
-						href="https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/#zoomout"
-					>
-						zoom out
-					</a> by one zoom level per click.
-				</p>
-			</div>
-
 			<Map
 				options={{
 					transformRequest: appendOSKeyToUrl(OS_KEY)

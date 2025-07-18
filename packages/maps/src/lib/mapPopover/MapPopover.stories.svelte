@@ -16,7 +16,6 @@
 		title: 'Maps/Components/MapPopover',
 		component: MapPopover,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -65,10 +64,6 @@
 
 	let selectedFeature = $state();
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapPopover {...args} />
-{/snippet}
 
 <Story name="Interactive Example">
 	{#snippet template()}

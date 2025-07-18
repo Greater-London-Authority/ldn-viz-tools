@@ -20,7 +20,6 @@
 		title: 'Maps/Components/MapLayerSource',
 		component: MapLayerSource,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -65,10 +64,6 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
 </script>
-
-{#snippet defaultTemplate({ args })}q
-	<MapLayerSource {...args} />
-{/snippet}
 
 <Story name="Default">
 	{#snippet template()}

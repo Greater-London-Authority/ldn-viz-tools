@@ -6,7 +6,6 @@
 		title: 'Maps/Components/DeckGL/MapDeckTooltips',
 		component: MapDeckTooltips,
 		tags: ['autodocs'],
-		rener: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -20,11 +19,11 @@
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
-	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
-	import { Checkbox } from '@ldn-viz/ui';
-	import { onMouseOverTooltipHandler } from './stores';
-	import DemoTooltipComponent from './demo/DemoTooltipComponent.svelte';
 	import type { Layer } from '@deck.gl/core/typed';
+	import { Checkbox } from '@ldn-viz/ui';
+	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
+	import DemoTooltipComponent from './demo/DemoTooltipComponent.svelte';
+	import { onMouseOverTooltipHandler } from './stores';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
@@ -86,10 +85,6 @@
 		return l;
 	});
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapDeckTooltips {...args} />
-{/snippet}
 
 <!-- Here every feature in a layer is assigned the same string as a Tooltip. -->
 <Story name="Example - spec as string">

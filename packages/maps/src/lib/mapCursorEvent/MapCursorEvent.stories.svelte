@@ -30,7 +30,6 @@
 		title: 'Maps/Components/MapCursorEvent',
 		component: MapCursorEvent,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -89,10 +88,6 @@
 		};
 	};
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapCursorEvent {...args} />
-{/snippet}
 
 <Story name="Default">
 	{#snippet template()}

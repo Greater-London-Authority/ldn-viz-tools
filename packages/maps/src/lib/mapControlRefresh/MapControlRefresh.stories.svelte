@@ -8,7 +8,6 @@
 		title: 'Maps/Components/MapControls/MapControlRefresh',
 		component: MapControlRefresh,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -23,20 +22,13 @@
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<MapControlRefresh {...args} />
-{/snippet}
-
+<!--
+The refresh page button is usually positioned in the bottom left corner under the
+					fullscreen button.
+-->
 <Story name="Refresh Button">
 	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
-			<div class="text-color-text-primary m-2 space-y-4">
-				<p>
-					The refresh page button is usually positioned in the bottom left corner under the
-					fullscreen button.
-				</p>
-			</div>
-
 			<Map
 				options={{
 					transformRequest: appendOSKeyToUrl(OS_KEY)

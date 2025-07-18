@@ -5,7 +5,6 @@
 		title: 'Maps/Components/DeckGL/MapDeckPopovers',
 		component: MapDeckPopovers,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -14,14 +13,14 @@
 </script>
 
 <script lang="ts">
+	import type { Layer } from '@deck.gl/core/typed';
 	import { MVTLayer } from '@deck.gl/geo-layers/typed';
+	import { Checkbox } from '@ldn-viz/ui';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
-	import { Checkbox } from '@ldn-viz/ui';
-	import { onClickPopoverHandler } from './stores';
 	import DemoPopoverComponent from './demo/DemoPopoverComponent.svelte';
-	import type { Layer } from '@deck.gl/core/typed';
+	import { onClickPopoverHandler } from './stores';
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const TILE_BASE_URL = 'https://d1lfm2zniswzpu.cloudfront.net';
 	const getBoroughLayer = () => {
@@ -68,10 +67,6 @@
 		return l;
 	});
 </script>
-
-{#snippet defaultTemplate({ args })}
-	<MapDeckPopovers {...args} />
-{/snippet}
 
 <!-- Here every feature in a layer is assigned the same string as a popover. -->
 <Story name="Example - spec as string">
