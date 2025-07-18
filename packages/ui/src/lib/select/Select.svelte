@@ -151,7 +151,7 @@
 		{virtualList}
 		{vlItemSize}
 		{searchProps}
-		class={`form-select ${classes}`}
+		class={`form-select ${classes} ${error ? 'has-error' : ''}`}
 		{i18n}
 		{dndzone}
 		{anchor_element}
@@ -198,7 +198,7 @@
 			--sv-dropdown-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 			--sv-dropdown-height: 320px;
 
-			--sv-dropdown-active-bg: var(--theme-input-background-active);
+			--sv-dropdown-active-bg: var(--theme-input-background-hover);
 			--sv-dropdown-selected-bg: var(--theme-input-background-selected);
 
 			--sv-create-kbd-border: var(--theme-input-border) 1px solid;
@@ -217,8 +217,9 @@
 			background-color: var(--theme-input-background-hover);
 		}
 
-		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active,
-		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active:hover {
+		/* Stop active and selected having same color */
+		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected,
+		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected:hover {
 			background-color: var(--theme-input-background-active);
 			color: #fff;
 		}
@@ -245,6 +246,19 @@
 
 		.form-select.svelecte .sv-item--wrap.is-multi {
 			background-color: var(--theme-input-background);
+		}
+
+		/* States */
+		.form-select.svelecte.has-error {
+			border: var(--theme-input-border-error) 1px solid;
+		}
+
+		.form-select.svelecte:hover {
+			border: var(--theme-input-border-hover) 1px solid;
+		}
+
+		.form-select.svelecte:hover {
+			border: var(--theme-input-border-focussed) 1px solid;
 		}
 	</style>
 {/if}
