@@ -63,7 +63,7 @@
 </script>
 
 {#if options.length === 1}
-	<Button onclick={() => onClick(state.id)} {size} {fullWidth} {...restProps}>
+	<Button onclick={() => onClick(state.id)} {size} {variant} {fullWidth} {...restProps}>
 		<div class="flex items-center">
 			{@render beforeLabel?.()}
 			{state.buttonLabel}
@@ -75,6 +75,7 @@
 		<Button
 			onclick={() => onClick(state.id)}
 			{size}
+			{variant}
 			{fullWidth}
 			{...restProps}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
