@@ -107,7 +107,7 @@
 	let clientHeight = $state(0);
 
 	$effect(() => {
-		if (clientWidth && clientHeight){
+		if (clientWidth && clientHeight) {
 			maplibre?.resize();
 		}
 	});
