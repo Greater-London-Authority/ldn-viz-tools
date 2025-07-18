@@ -14,5 +14,8 @@
 		"source.fixAll.eslint": "explicit",
 		"source.organizeImports": "explicit"
 	},
-	"vitest.disableWorkspaceWarning": true
+	"vitest.disableWorkspaceWarning": true,
+	"svelte.plugin.svelte.compilerWarnings": {
+		"css_unused_selector": "ignore"
+	}
 }
