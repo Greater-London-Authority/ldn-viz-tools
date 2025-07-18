@@ -16,13 +16,12 @@
 	 * @component
 	 */
 
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
 	import maplibre_gl from 'maplibre-gl';
-
+	import { setContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
 	// import { currentThemeMode } from '@ldn-viz/ui';
 
-	import { theme_os_light_vts, theme_os_dark } from '@ldn-viz/maps';
+	import { theme_os_dark, theme_os_light_vts } from '@ldn-viz/maps';
 
 	import MapCursor from './mapCursor/MapCursor';
 	import type { MapCursorType, MapCursorTypeStore } from './mapCursor/types';
@@ -32,18 +31,6 @@
 
 	import { mode, type SystemModeValue } from 'mode-watcher';
 	let currentThemeMode: SystemModeValue = $derived(mode.current);
-
-	/**
-	 * Store containing the MapLibre instance.
-	 */
-	export const mapStore: MapStore = writable(null);
-	setContext('mapStore', mapStore);
-
-	/**
-	 * Store containing the MapCursor instance.
-	 */
-	export const mapCursorStore: MapCursorTypeStore = writable(null);
-	setContext('mapCursorStore', mapCursorStore);
 
 	interface Props {
 		/**
@@ -77,6 +64,17 @@
 		darkStyle?: null | MapLibreStyle;
 		children?: import('svelte').Snippet;
 		[key: string]: any;
+
+		/**
+		 * Store containing the MapLibre instance.
+		 */
+		mapStore: MapStore;
+
+		/**
+		 * Store containing the MapCursor instance.
+		 */
+
+		mapCursorStore: MapCursorTypeStore;
 	}
 
 	let {
@@ -87,8 +85,22 @@
 		lightStyle = theme_os_light_vts as MapLibreStyle,
 		darkStyle = theme_os_dark as MapLibreStyle,
 		children,
+
+		mapStore = $bindable(),
+		mapCursorStore = $bindable(),
+
 		...rest
 	}: Props = $props();
+
+	if (!mapStore) {
+		mapStore = writable(null);
+	}
+	if (!mapCursorStore) {
+		mapCursorStore = writable(null);
+	}
+
+	setContext('mapStore', mapStore);
+	setContext('mapCursorStore', mapCursorStore);
 
 	const whenMapCreated: WhenMapLoads = (maplibre) => {
 		maplibre.once('load', () => {

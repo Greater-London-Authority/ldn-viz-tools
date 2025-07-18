@@ -22,13 +22,14 @@
 		map?: MaplibreglMap | undefined;
 	}
 
-	let { selectedBorough = $bindable(undefined), map = undefined }: Props = $props();
+	let { selectedBorough = $bindable('London Borough of Barnet'), map = undefined }: Props =
+		$props();
 
 	let options = $derived([
 		{ id: '', label: 'Show all of Greater London', value: 'GREATER LONDON' },
 		...boroughs
 			.map((b) => ({
-				id: b.properties.borough,
+				//id: b.properties.borough,
 				label: b.properties.name,
 				value: b.properties.borough
 			}))
@@ -48,10 +49,5 @@
 </script>
 
 <div class="pointer-events-auto invisible z-[999] flex w-64 flex-col shadow sm:visible">
-	<Select
-		bind:justValue={selectedBorough}
-		items={options}
-		label=""
-		placeholder="Select a Borough to zoom"
-	/>
+	<Select bind:value={selectedBorough} {options} label="" placeholder="Select a Borough to zoom" />
 </div>
