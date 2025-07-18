@@ -8,12 +8,12 @@
 	let { children, hint, subTitle }: Props = $props();
 </script>
 
-<div class=" text-color-text-primary">
+<header class="text-color-text-primary">
 	<div class="flex items-end justify-between">
-		<h3 class="text-sm font-semibold leading-snug">
-			<!-- The title. -->
+		<h2 class="text-base font-semibold leading-snug">
+			<!-- The title of the section. -->
 			{@render children?.()}
-		</h3>
+		</h2>
 
 		{#if hint}
 			<!-- An optional `<Overlay>` component to provide additional explanation. -->
@@ -27,4 +27,4 @@
 			{@render subTitle?.()}
 		</div>
 	{/if}
-</div>
+</header>
