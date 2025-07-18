@@ -21,6 +21,7 @@
 		 * * `color` (string, optional) - CSS color of the checkbox
 		 * * `hint` (string, optional) - help text to be displayed in tooltip
 		 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
+		 * * `customOverlay` (Snippet, optional) - a custom overlay component
 		 */
 		options: {
 			id: string;
@@ -63,7 +64,8 @@
 		ariaLabel,
 		options = [],
 		selectedOptions = $bindable([]),
-		hideSelectAll = false
+		hideSelectAll = false,
+		customOverlay = undefined
 	}: CheckboxGroupProps = $props();
 
 	let errorId = $derived(error ? `${id}-error` : undefined);
@@ -118,6 +120,7 @@
 	{error}
 	{disabled}
 	{optional}
+	{customOverlay}
 >
 	<!-- <slot name="hint" slot="hint" /> -->
 	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
