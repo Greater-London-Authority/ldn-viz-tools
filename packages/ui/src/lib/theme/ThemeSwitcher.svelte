@@ -37,8 +37,6 @@
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger aria-label="Theme mode switcher">
 		{#snippet child({ props })}
-			<!-- {console.log(props)}
-			<Button {...props}>Open menu</Button> -->
 			<Button {...props} class={buttonClasses} variant="square" emphasis="secondary" {size}>
 				{#if size === 'xs'}
 					<Icon src={themeIcon} theme="mini" class="h-4 w-4" aria-hidden="true" />
