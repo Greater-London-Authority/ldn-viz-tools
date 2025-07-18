@@ -1,0 +1,370 @@
+<script lang="ts">
+	import { run } from 'svelte/legacy';
+
+	import { computeWidths } from '../core/lib/computeWidths';
+
+	import VirtualScroll from 'svelte-virtual-scroll-list';
+	import { TableData } from '../core/lib/dataObj';
+	import TableContainer from './TableContainer.svelte';
+	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
+	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
+	import ToggleColumnsMenu from './menus/ToggleColumnsMenu.svelte';
+	import NumRowsControls from './paginationControls/NumRowsControls.svelte';
+	import PaginationControls from './paginationControls/PaginationControls.svelte';
+	import RowRenderer from './rows/RowRenderer.svelte';
+
+	import TableHeader from './TableHeader.svelte';
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	interface Props {
+		/**
+	 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
+	 */
+		data: any[];
+		/**
+	 * Specification for how the table should be displayed.
+	 */
+		tableSpec: any;
+		/**
+	 * Title to be displayed above the chart (optional).
+	 */
+		title?: string;
+		/**
+	 * Subtitle to be displayed above the chart, below the main title (optional).
+	 */
+		subTitle?: string;
+		/**
+	 * What appears in the footer:
+	 *
+	 * * `byline` (string) - statement of who created the visualization
+	 * * `source` (string) - statement of where the data came from
+	 * * `note` (string) - any additional footnotes
+	 */
+		source?: string;
+		byline?: string;
+		note?: string;
+		/**
+	 * Data Download Button in the footer
+	 *
+	 * Defaults to `true` which allows user to select download in either 'CSV' or 'JSON' format.
+	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
+	 * If set to `false`, then the button is hidden.
+	 *
+	 */
+		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		/**
+	 * Image Download Button in the footer
+	 *
+	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
+	 * If set to `false`, then the button is hidden.
+	 *
+	 */
+		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		/**
+	 * The file name to be used for the downloaded data or image file.
+	 */
+		filename?: string;
+		/**
+	 * Height of the table (pixels).
+	 */
+		height?: number;
+		/**
+	 * Exposes the internal table object, so that it can be programmatically manipulated.
+	 */
+		table?: TableData | undefined;
+		/**
+	 * If `ture`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
+	 */
+		zebraStripe?: boolean;
+		/**
+	 * If true, then the rows of the table will be split across multiple pages. Cannot be used at the same time as `virtualise`.
+	 */
+		paginate?: boolean;
+		/**
+	 * If true, then the rows of the table will be virtualised. Cannot be used at the same time as `paginate`.
+	 */
+		virtualise?: boolean;
+		/**
+	 * The number of table rows to include on each page.
+	 */
+		pageSize?: number;
+		/**
+	 * If `true`, then user can control the number of rows per page.
+	 */
+		allowPageSizeChanges?: boolean;
+		/**
+	 * The current page (1-indexed).
+	 */
+		page?: number;
+		/**
+	 * If `true`, then display controls allowing user to group rows (and order groups).
+	 */
+		allowRowGrouping?: boolean;
+		/**
+	 * If `true`, then display controls allowing user to select which columns are displayed.
+	 */
+		allowColumnHiding?: boolean;
+		/**
+	 * If `true`, then allow user to sort rows by interacting with column headings.
+	 */
+		allowSorting?: boolean;
+		/**
+	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+	 */
+		columnMapping?: undefined | { [oldName: string]: string };
+		/**
+	 * An (optional) fixed width in pixels. If not set, the table will expand to fill the width of its parent container.
+	 */
+		fixedTableWidth?: number | undefined;
+		beforeTable?: import('svelte').Snippet;
+	}
+
+	let {
+		data,
+		tableSpec,
+		title = '',
+		subTitle = '',
+		source = '',
+		byline = '',
+		note = '',
+		dataDownloadButton = true,
+		imageDownloadButton = ['PNG'],
+		filename = '',
+		height = 1000,
+		table = $bindable(undefined),
+		zebraStripe = false,
+		paginate = false,
+		virtualise = false,
+		pageSize = $bindable(10),
+		allowPageSizeChanges = false,
+		page = $bindable(1),
+		allowRowGrouping = false,
+		allowColumnHiding = false,
+		allowSorting = false,
+		columnMapping = undefined,
+		fixedTableWidth = undefined,
+		beforeTable
+	}: Props = $props();
+
+	const onRowsChange = () => {
+		table = table; // eslint-disable-line no-self-assign
+	};
+
+	const createTable = (data: any[]) => {
+		// create the data object
+		table = new TableData(tableSpec);
+
+		table.setOnRowsChange(onRowsChange);
+
+		table.setData(data);
+		table.setColumnSpec(tableSpec.columns);
+		table.setRowOrder([
+			{
+				field: 'a',
+				direction: 'ascending'
+			}
+		]);
+
+		if (fixedTableWidth) {
+			computeWidths(table, fixedTableWidth);
+			// TODO: should set tableWidth to match
+		}
+	};
+
+	run(() => {
+		createTable(data);
+	});
+
+	const setColSpec = (tableSpec: { columns: any }) => {
+		if (table) {
+			table.setColumnSpec(tableSpec.columns);
+		}
+	};
+	run(() => {
+		setColSpec(tableSpec);
+	});
+
+	let visualRows: any[] = $state([]);
+	run(() => {
+		visualRows = [];
+
+		for (let group of table!.groups) {
+			if (group.parentGroup && !group.parentGroup.isExpanded) {
+				continue;
+			}
+
+			if (group.name !== 'Default') {
+				visualRows.push({ type: 'GroupRowCombined', group, uniqueKey: visualRows.length });
+			}
+
+			if (group.isExpanded && (!group.childGroups || group.childGroups.length === 0)) {
+				for (let row of table!.fetchGroupContents(group)) {
+					visualRows.push({ type: 'DataRow', row, uniqueKey: visualRows.length });
+				}
+			}
+		}
+	});
+
+	let tableWidth: number = $state();
+
+	const updateTableWidths = (newWidth: number) => {
+		if (table && !fixedTableWidth) {
+			computeWidths(table, newWidth);
+			table = table; // eslint-disable-line no-self-assign
+		}
+	};
+
+	run(() => {
+		updateTableWidths(tableWidth);
+	});
+
+	const beforeTable_render = $derived(beforeTable);
+</script>
+
+{#if table && table.extents}
+	<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
+		<div class="flex gap-2 ml-4 w-[430px]">
+			{#if allowRowGrouping}
+				<GroupRowsMenu {table} />
+				<SortGroupsMenu {table} />
+			{/if}
+
+			{#if allowColumnHiding}
+				<ToggleColumnsMenu {table} />
+			{/if}
+		</div>
+
+		<TableContainer
+			{data}
+			{title}
+			{subTitle}
+			{source}
+			{byline}
+			{note}
+			{dataDownloadButton}
+			{imageDownloadButton}
+			{filename}
+			{columnMapping}
+		>
+			{#snippet beforeTable()}
+					
+					{#if beforeTable}
+						<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
+						{@render beforeTable_render?.()}
+					{/if}
+				
+					{/snippet}
+
+			{#snippet table()}
+						<div
+					class="table-auto text-sm w-full text-color-text-primary"
+					
+					bind:clientWidth={tableWidth}
+					role="table"
+				>
+					{#if tableSpec.showTableHeader !== false}
+						<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
+					{/if}
+
+					{#if paginate}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow, i}
+								{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
+									<RowRenderer spec={visualRow} {table} />
+								{/if}
+							{/each}
+						</div>
+					{:else if virtualise}
+						<div
+							style:height={`${height - 100}px`}
+							style:width={tableWidth}
+							class:stripedVirtual={zebraStripe}
+							role="rowgroup"
+						>
+							<VirtualScroll data={visualRows} key="uniqueKey" >
+								{#snippet children({ data })}
+																<RowRenderer spec={data} {table} />
+																							{/snippet}
+														</VirtualScroll>
+						</div>
+					{:else}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow}
+								<RowRenderer spec={visualRow} {table} />
+							{/each}
+						</div>
+					{/if}
+				</div>
+					{/snippet}
+
+			{#snippet paginationControls()}
+						<div >
+					{#if paginate}
+						<PaginationControls {pageSize} numRows={data.length} bind:page />
+					{/if}
+				</div>
+					{/snippet}
+
+			{#snippet numRowsControlSlot()}
+						<div >
+					{#if paginate && allowPageSizeChanges}
+						<NumRowsControls bind:pageSize bind:page />
+					{/if}
+				</div>
+					{/snippet}
+		</TableContainer>
+	</div>
+{/if}
+
+<style lang="postcss">
+	:global(.striped > div:nth-child(odd)) {
+		@apply bg-color-ui-background-secondary;
+	}
+
+	:global(.stripedVirtual > div:first-child > div:first-child > div:nth-child(odd)) {
+		@apply bg-color-ui-background-secondary;
+	}
+</style>
