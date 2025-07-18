@@ -7,7 +7,8 @@
 
 	const { Story } = defineMeta({
 		title: 'Charts/Components/ChartContainer',
-		component: ChartContainer
+		component: ChartContainer,
+		tags: ['autodocs']
 	});
 </script>
 
