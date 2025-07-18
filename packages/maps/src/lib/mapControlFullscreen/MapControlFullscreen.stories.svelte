@@ -8,7 +8,6 @@
 		title: 'Maps/Components/MapControls/MapControlFullscreen',
 		component: MapControlFullscreen,
 		tags: ['autodocs'],
-		render: defaultTemplate,
 
 		parameters: {
 			layout: 'full'
@@ -22,27 +21,19 @@
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<MapControlFullscreen {...args} />
-{/snippet}
+
+
+<!--
+The fullscreen button is usually positioned in the bottom left corner above the refresh page button.
+
+If this page is embedded then clicking the button takes the user to the map page else the
+[Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API) is invoked.
+The button icon will change depending on the mode.
+-->
 
 <Story name="Fullscreen Button">
 	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
-			<div class="text-color-text-primary m-2 space-y-4">
-				<p>
-					The fullscreen button is usually positioned in the bottom left corner above the refresh
-					page button.
-				</p>
-
-				<p>
-					If this page is embedded then clicking the button takes the user to the map page else the <a
-						class="underline"
-						href="https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API">Fullscreen API</a
-					> is invoked. The button icon will change depending on the mode.
-				</p>
-			</div>
-
 			<Map
 				options={{
 					transformRequest: appendOSKeyToUrl(OS_KEY)
