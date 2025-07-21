@@ -24,6 +24,7 @@ export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelt
 export { default as NonIdealState } from './nonIdealState/NonIdealState.svelte';
 export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
+export { default as PlaceholderImage } from './placeholderImage/PlaceholderImage.svelte';
 export { default as Popover } from './popover/Popover.svelte';
 
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
@@ -53,4 +54,3 @@ export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPref
 
 export { classNames } from './utils/classNames.js';
 export { randomId } from './utils/randomId.js';
-
