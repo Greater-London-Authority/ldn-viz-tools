@@ -1,8 +1,17 @@
 {
-	"name": "docs",
+	"name": "@ldn-viz/docs",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",
+	"exports": {
+		".": {
+			"types": "./src/lib/index.d.ts",
+			"svelte": "./src/lib/index.ts"
+		}
+	},
+	"main": "./src/lib/index.ts",
+	"svelte": "./src/lib/index.ts",
+	"types": "./src/lib/index.d.ts",
 	"scripts": {
 		"build": "vite build",
 		"build-storybook": "storybook build",
