@@ -7,7 +7,7 @@
 		/**
 		 * The title of this section. Note that rather than supplying a title, you can supply a `<SidebarGroupTitle>` component as a`title` snippet.
 		 */
-		title: Snippet | string;
+		title?: Snippet | string;
 		children?: Snippet;
 	}
 
