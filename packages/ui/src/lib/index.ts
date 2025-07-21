@@ -25,6 +25,7 @@ export { default as MultipleActionButton } from './multipleActionButton/Multiple
 export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelte';
 export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
+export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
 export { default as Popover } from './popover/Popover.svelte';
 
 export { default as Spinner } from './spinners/Spinner.svelte';
