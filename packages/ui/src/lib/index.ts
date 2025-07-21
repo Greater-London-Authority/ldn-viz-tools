@@ -27,6 +27,8 @@ export { default as Popover } from './popover/Popover.svelte';
 
 export { default as RadioButton } from './radioButton/RadioButton.svelte';
 export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svelte';
+export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';
+export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 
 export { default as Select } from './select/Select.svelte';
 export { default as Spinner } from './spinners/Spinner.svelte';
@@ -52,4 +54,3 @@ export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPref
 
 export { classNames } from './utils/classNames.js';
 export { randomId } from './utils/randomId.js';
-
