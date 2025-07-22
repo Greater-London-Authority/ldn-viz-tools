@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import type { TableData } from '$lib/core/lib/dataObj';
-	import { Button, Popover, Select } from '@ldn-viz/ui';
+	import { Overlay, Select } from '@ldn-viz/ui';
 	import {
 		type Aggregation,
 		type GroupOrderCriterion,
@@ -11,41 +9,43 @@
 
 	interface Props {
 		table: TableData;
+		onChange: () => void;
 	}
 
-	let { table }: Props = $props();
+	let { table, onChange }: Props = $props();
 
-	let fields: { label: string; id: string; value: string }[] = $state([]);
-	run(() => {
+	let fields: Options[] = $derived.by(() => {
+		let new_fields: any[] = [];
+
 		if (table) {
-			const new_fields = table.columnSpec.map((f) => ({
+			new_fields = table.columnSpec.map((f) => ({
 				label: f.label ?? f.short_label,
 				id: f.short_label,
 				value: f.short_label
 			}));
-
-			if (JSON.stringify(new_fields) !== JSON.stringify(fields)) {
-				fields = new_fields;
-			}
 		}
+
+		return new_fields;
 	});
 
-	let fieldSelection: string = $state(); // TODO: set from table
+	console.log(table.groupingOrderSpec);
+
+	let fieldSelection: string = $state(table.groupingOrderSpec[0]?.field); // TODO: set from table
 
 	const orderOptions = ['ascending', 'descending'].map((o) => ({
 		label: o,
 		value: o
 	}));
 
-	let orderSelection: SortDirection = $state();
+	let orderSelection: SortDirection = $state(table.groupingOrderSpec[0]?.direction);
 
 	const aggregationOptions = ['min', 'mean', 'median', 'max', 'q1', 'q3', 'count'].map((o) => ({
 		label: o,
 		value: o
 	}));
-	let aggregationSelection: Aggregation = $state();
+	let aggregationSelection: Aggregation = $state(table.groupingOrderSpec[0]?.aggregation);
 
-	run(() => {
+	const updateIfAppropriate = () => {
 		const incompleteState =
 			!orderSelection ||
 			!aggregationSelection ||
@@ -62,45 +62,40 @@
 
 			if (JSON.stringify(table.groupingOrderSpec) !== JSON.stringify(newOrdering)) {
 				table.setGroupOrdering(newOrdering);
+				onChange();
 			}
 		}
-	});
+	};
 </script>
 
-<Popover>
-	{#snippet hint()}
-	
-			<Button variant="text" size="sm" disabled={table.groupingFields.length === 0}
-				>Sort groups</Button
-			>
-
-			<span class="sr-only">Open Popover</span>
-		
-	{/snippet}
+<Overlay hintLabel="Sort groups" overlayType="popover">
 	<div class="flex flex-col gap-2">
 		<h2 class="text-large font-bold">Sort groups</h2>
 
 		<Select
-			items={aggregationOptions}
-			bind:justValue={aggregationSelection}
+			options={aggregationOptions}
+			bind:value={aggregationSelection}
 			label="by the"
 			id="labelled-input"
+			onChange={updateIfAppropriate}
 		/>
 
 		{#if aggregationSelection !== 'count'}
 			<Select
-				items={fields}
-				bind:justValue={fieldSelection}
+				options={fields}
+				bind:value={fieldSelection}
 				label="of their "
 				id="labelled-input"
+				onChange={updateIfAppropriate}
 			/>
 		{/if}
 
 		<Select
-			items={orderOptions}
-			bind:justValue={orderSelection}
+			options={orderOptions}
+			bind:value={orderSelection}
 			label="ordered"
 			id="labelled-input"
+			onChange={updateIfAppropriate}
 		/>
 	</div>
-</Popover>
+</Overlay>
