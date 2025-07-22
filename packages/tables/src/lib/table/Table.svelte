@@ -223,8 +223,7 @@
 	const beforeTable_render = $derived(beforeTable);
 </script>
 
-{updateTrigger}
-{#key (colWidths, updateTrigger)}
+{#key [colWidths, updateTrigger]}
 	{#if tableObj && tableObj.extents}
 		<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
 			<div class="ml-4 flex w-[430px] gap-2">
