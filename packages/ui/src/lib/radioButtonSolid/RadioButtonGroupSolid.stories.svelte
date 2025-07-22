@@ -6,10 +6,15 @@
 	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
 
+	/**
+	 * The `RadioButtonGroupSolid` component contains a set of `RadioButtonSolid` buttons for switching between tabs or selecting one option from a small number of alternatives.
+	 *
+	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation).
+	 */
+
 	const { Story } = defineMeta({
 		title: 'Ui/Components/RadioButtons/RadioButtonGroupSolid',
 		component: RadioButtonGroupSolid,
-		subcomponents: { RadioButtonSolid },
 		tags: ['autodocs']
 	});
 
@@ -122,15 +127,15 @@ different values as the `name` prop.
 <Story name="With Icons above">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId7} {...args}>
-			<RadioButtonSolid id="bus" name="station-type" bind:selectedId={selectedId7}>
+			<RadioButtonSolid id="bus" name="station-type">
 				<Icon src={Funnel} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Bus
 			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type" bind:selectedId={selectedId7}>
+			<RadioButtonSolid id="train" name="station-type">
 				<Icon src={Map} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Train
 			</RadioButtonSolid>
-			<RadioButtonSolid id="plane" name="station-type" bind:selectedId={selectedId7}>
+			<RadioButtonSolid id="plane" name="station-type">
 				<Icon src={PresentationChartLine} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Plane
 			</RadioButtonSolid>
@@ -142,15 +147,15 @@ different values as the `name` prop.
 <Story name="With Icons below">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId8} {...args}>
-			<RadioButtonSolid id="bus" name="station-type" bind:selectedId={selectedId8}>
+			<RadioButtonSolid id="bus" name="station-type">
 				Bus
 				<Icon src={Funnel} theme="mini" class="mt-1 h-5 w-5" aria-hidden="true" />
 			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type" bind:selectedId={selectedId8}>
+			<RadioButtonSolid id="train" name="station-type">
 				Train
 				<Icon src={Map} theme="mini" class="mt-1 h-5 w-5" aria-hidden="true" />
 			</RadioButtonSolid>
-			<RadioButtonSolid id="plane" name="station-type" bind:selectedId={selectedId8}>
+			<RadioButtonSolid id="plane" name="station-type">
 				Plane
 				<Icon src={PresentationChartLine} theme="mini" class="mt-1 h-5 w-5" aria-hidden="true" />
 			</RadioButtonSolid>
@@ -162,11 +167,11 @@ different values as the `name` prop.
 <Story name="With 2 options">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId9} {...args}>
-			<RadioButtonSolid id="bus" name="station-type" bind:selectedId={selectedId9}>
+			<RadioButtonSolid id="bus" name="station-type">
 				<Icon src={Funnel} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Bus
 			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type" bind:selectedId={selectedId9}>
+			<RadioButtonSolid id="train" name="station-type">
 				<Icon src={Map} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Train
 			</RadioButtonSolid>
@@ -178,19 +183,19 @@ different values as the `name` prop.
 <Story name="With 4 options">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId10} {...args}>
-			<RadioButtonSolid id="bus" name="station-type" bind:selectedId={selectedId10}>
+			<RadioButtonSolid id="bus" name="station-type">
 				<Icon src={Funnel} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Bus
 			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type" bind:selectedId={selectedId10}>
+			<RadioButtonSolid id="train" name="station-type">
 				<Icon src={Map} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Train
 			</RadioButtonSolid>
-			<RadioButtonSolid id="plane" name="station-type" bind:selectedId={selectedId10}>
+			<RadioButtonSolid id="plane" name="station-type">
 				<Icon src={PresentationChartLine} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				Plane
 			</RadioButtonSolid>
-			<RadioButtonSolid id="long" name="station-type" bind:selectedId={selectedId10}>
+			<RadioButtonSolid id="long" name="station-type">
 				<Icon src={PresentationChartLine} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
 				This_label_is_far_too_long
 			</RadioButtonSolid>

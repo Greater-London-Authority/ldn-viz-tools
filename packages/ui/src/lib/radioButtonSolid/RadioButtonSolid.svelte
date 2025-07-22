@@ -7,27 +7,18 @@
 	 */
 
 	import type { InputProps } from '$lib/input/types';
-	import { type Snippet } from 'svelte';
+	import { getContext, type Snippet } from 'svelte';
 	import { classNames } from '../utils/classNames';
 
 	interface Props extends Omit<InputProps, 'children'> {
 		children?: Snippet;
-		/**
-		 * `id` of the selected radio button in group.
-		 */
-		selectedId?: string;
 	}
 
-	let {
-		label = '',
-		id,
-		name,
-		disabled = false,
-		children,
-		selectedId = $bindable('')
-	}: Props = $props();
+	let { label = '', id, name, disabled = false, children }: Props = $props();
 
 	let inputID = `input-${name || ''}-${id}`;
+
+	let selectedId = $state(getContext('selectedId'));
 
 	const labelClasses = $derived(
 		classNames(

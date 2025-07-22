@@ -7,7 +7,7 @@
 	 */
 
 	import type { InputProps } from '$lib/input/types';
-	import { type Snippet } from 'svelte';
+	import { setContext, type Snippet } from 'svelte';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
@@ -54,21 +54,7 @@
 	const descriptionId = description ? `${id}-description` : undefined;
 	let errorId = error ? `${id}-error` : undefined;
 
-	// const val = $derived(selectedId);
-
-	// const val: Writable<string> = writable(selectedId);
-	// val.subscribe((newVal) => (selectedId = newVal));
-
-	// setContext('selectedId', {
-	// 	selectedId: val
-	// });
-
-	// setContext('selectedId', () => val);
-
-	// run(() => {
-	// 	// update id of store when id of prop changes
-	// 	$val = selectedId;
-	// });
+	setContext('selectedId', selectedId);
 </script>
 
 <InputWrapper
@@ -84,7 +70,13 @@
 	{disabled}
 	{optional}
 >
-	<div class="flex">
+	<div
+		class="flex"
+		onchange={(e: Event) => {
+			const target = e.target as HTMLInputElement;
+			selectedId = target.value;
+		}}
+	>
 		{#if options.length}
 			{#each options as option}
 				<RadioButtonSolid
@@ -92,7 +84,6 @@
 					label={option.label}
 					disabled={option.disabled || disabled}
 					{name}
-					bind:selectedId
 				/>
 			{/each}
 		{:else}
