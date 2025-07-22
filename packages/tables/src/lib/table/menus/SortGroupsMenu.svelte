@@ -28,8 +28,6 @@
 		return new_fields;
 	});
 
-	console.log(table.groupingOrderSpec);
-
 	let fieldSelection: string = $state(table.groupingOrderSpec[0]?.field); // TODO: set from table
 
 	const orderOptions = ['ascending', 'descending'].map((o) => ({

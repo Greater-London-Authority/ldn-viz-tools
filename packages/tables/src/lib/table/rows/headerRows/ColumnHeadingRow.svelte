@@ -56,7 +56,6 @@
 						toggle={() => {
 							if (colIsSortable) {
 								table.toggleSort(col.short_label);
-								console.log({ table });
 								onChange();
 							}
 						}}
