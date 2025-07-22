@@ -28,19 +28,15 @@
 		data: any;
 		allowSorting?: boolean;
 		tableWidth: any;
+		onChange: () => void;
 	}
 
-	let {
-		tableSpec,
-		table,
-		data,
-		allowSorting = false,
-		tableWidth
-	}: Props = $props();
+	let { tableSpec, table, data, allowSorting = false, tableWidth, onChange }: Props = $props();
 
 	let topRuleClass = $derived(tableSpec.showHeaderTopRule === false ? '' : 'border-t');
-	let bottomRuleClass =
-		$derived(tableSpec.showHeaderBottomRule === false || tableSpec.colGroups ? '' : 'border-b');
+	let bottomRuleClass = $derived(
+		tableSpec.showHeaderBottomRule === false || tableSpec.colGroups ? '' : 'border-b'
+	);
 </script>
 
 <div
@@ -52,7 +48,7 @@
 		<ColumnGroupHeadingRow {table} />
 	{/if}
 
-	<ColumnHeadingRow {table} {allowSorting} />
+	<ColumnHeadingRow {table} {allowSorting} {onChange} />
 
 	{#if tableSpec.showColumnControls}
 		<ControlRow {table} />

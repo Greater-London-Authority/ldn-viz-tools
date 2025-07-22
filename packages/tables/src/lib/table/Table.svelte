@@ -183,6 +183,8 @@
 	});
 
 	let visualRows: any[] = $derived.by(() => {
+		updateTrigger; // run when grouping or ordering changes
+
 		const vr = [];
 
 		for (let group of tableObj!.groups) {
@@ -217,7 +219,7 @@
 		updateTableWidths(tableObj, tableWidth);
 	});
 
-	let visibleFields = $derived(tableObj.visibleFields);
+	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
 	let updateTrigger = $state(0);
 
 	const beforeTable_render = $derived(beforeTable);
@@ -228,8 +230,8 @@
 		<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
 			<div class="ml-4 flex w-[430px] gap-2">
 				{#if allowRowGrouping}
-					<GroupRowsMenu table={tableObj} />
-					<SortGroupsMenu table={tableObj} />
+					<GroupRowsMenu table={tableObj} onChange={() => updateTrigger++} />
+					<SortGroupsMenu table={tableObj} onChange={() => updateTrigger++} />
 				{/if}
 
 				{#if allowColumnHiding}
@@ -263,7 +265,14 @@
 						role="table"
 					>
 						{#if tableSpec.showTableHeader !== false}
-							<TableHeader {tableSpec} table={tableObj} {data} {allowSorting} {tableWidth} />
+							<TableHeader
+								{tableSpec}
+								table={tableObj}
+								{data}
+								{allowSorting}
+								{tableWidth}
+								onChange={() => updateTrigger++}
+							/>
 						{/if}
 
 						{#if paginate}
