@@ -369,8 +369,8 @@
 	{#snippet template()}
 		<Select
 			label="Show only people whose favourite pet is"
-			bind:justValue={selectedPet}
-			items={[
+			bind:value={selectedPet}
+			options={[
 				{ value: 'dog', label: 'Dog' },
 				{ value: 'cat', label: 'Cat' },
 				{ value: 'bird', label: 'Bird' }
