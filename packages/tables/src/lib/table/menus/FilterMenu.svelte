@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Popover, Select } from '@ldn-viz/ui';
+	import { Button, Overlay, Popover, Select } from '@ldn-viz/ui';
 	import { Funnel } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -51,15 +51,8 @@
 	let val2: string = $state();
 </script>
 
-<Popover>
-	{#snippet hint()}
-	
-			<Icon src={Funnel} theme="mini" class="w-4 h-4" aria-hidden="true" />
-
-			<span class="sr-only">Open Popover</span>
-		
-	{/snippet}
-
+<!-- TODO: funnel-->
+<Overlay hintLabel="Filter" overlayType="popover">
 	<h2 class="text-large font-bold">Filter</h2>
 
 	<Select
@@ -78,4 +71,4 @@
 
 	<Button on:click={applyFilter}>Apply</Button>
 	<Button on:click={clearFilter}>Clear</Button>
-</Popover>
+</Overlay>

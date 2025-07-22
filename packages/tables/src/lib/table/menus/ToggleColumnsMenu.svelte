@@ -31,12 +31,8 @@
 
 	let fieldSelection = $state(table.visibleFields);
 	const updateVisibility = (newFields) => {
-		console.log('Update visibility,', { newFields });
-
 		table.setVisibleFields(newFields);
 		onChange();
-
-		console.log(table.visibleFields);
 	};
 </script>
 
