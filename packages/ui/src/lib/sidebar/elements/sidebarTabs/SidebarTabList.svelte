@@ -1,27 +1,23 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import { type Writable } from 'svelte/store';
 	import {
 		tabLabelOverride,
 		tabLayoutOverride,
 		tabThemeOverride
 	} from '../../../sidebar/sidebarUtils';
-	import type { PlacementType } from '../../../sidebar/types';
 	import TabList from '../../../tabs/TabList.svelte';
-	import { getTabState, setTabState } from '../../../tabs/tabState.svelte';
 	import type { Tab } from '../../../tabs/types';
 	import { classNames } from '../../../utils/classNames';
+	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
+	import Button from '../../../button/Button.svelte';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { XCircle, XMark } from '@steeze-ui/heroicons';
 
-	// Context required to make sidebar open/ close
-	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
-
-	// Context provided by wrapping component to force always open
-	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
+	let sidebarState = getSidebarState();
 
 	interface Props {
 		/**
 		 * List of tabs. An array, of which each entry is an object with the following properties:
-		 * * `id` (string): the value that will be assigned to `selectedValue` when this tab is selected
+		 * * `id` (string): the value that will be assigned to `selectedTabId` when this tab is selected
 		 * * `label` (string): the text that should be displayed in the tab label
 		 * * `icon` (optional): an icon component (imported from `@steeze-ui/heroicons`) that should be rendered in the tab label
 		 * * `rawIcon` (optional): a Svelte component that directly renders an SVG that should be displayed in the tab label
@@ -31,11 +27,8 @@
 		/**
 		 * `id` of the currently selected tab
 		 */
-		selectedValue?: Tab['id'];
-		/**
-		 * Sidebar placement
-		 */
-		placement?: PlacementType;
+		selectedTabId?: Tab['id'];
+
 		/**
 		 * Enables screen reader to describe purpose of tab list
 		 */
@@ -45,29 +38,49 @@
 
 	let {
 		tabs = [],
-		selectedValue = $bindable(),
-		placement = 'right',
+		selectedTabId = $bindable(),
 		ariaLabel = 'Switch sidebar panel',
-		onChange
+		onChange = (tabId: Tab['id']) => {
+			if (sidebarState.isOpen === false) {
+				// if we're collapsed, clicking any tab label will open that tab
+				sidebarState.isOpen = true;
+				selectedTabId = tabId;
+			} else if (selectedTabId === tabId) {
+				// The sidebarAlways open context is provided by the app shell
+				if (sidebarState.isAlwaysOpen === false || sidebarState.isAlwaysOpen === undefined) {
+					// if we're expanded, clicking the currently selected tab label triggers collapse
+					sidebarState.isOpen = !sidebarState.isOpen;
+					selectedTabId = '';
+				}
+			} else {
+				// if we're expanded, clicking a different tab label switched tab
+				selectedTabId = tabId;
+			}
+		}
 	}: Props = $props();
-
-	/**
-	 * orientation of the list of tabs
-	 */
-	let orientation: 'vertical' | 'horizontal' = $derived(
-		['top', 'bottom'].includes(placement) ? 'horizontal' : 'vertical'
-	);
-
-	setTabState();
-	let tabState = getTabState();
-	tabState.current = selectedValue ? selectedValue : tabs[0].id;
 </script>
 
-<TabList
-	bind:selectedValue
-	{ariaLabel}
-	{orientation}
-	{tabs}
-	{onChange}
-	class={classNames(tabLayoutOverride[orientation], tabThemeOverride, tabLabelOverride)}
-/>
+<div class="flex justify-between {tabLayoutOverride[sidebarState.orientation]}">
+	<TabList
+		bind:selectedTabId
+		{ariaLabel}
+		orientation={sidebarState.orientation}
+		{tabs}
+		{onChange}
+		class={classNames(
+			tabLayoutOverride[sidebarState.orientation],
+			tabThemeOverride,
+			tabLabelOverride
+		)}
+	/>
+	{#if sidebarState.isOpen}
+		<div
+			class={`text-color-text-secondary hover:bg-color-action-secondary-muted-hover ${tabLabelOverride}`}
+		>
+			<button onclick={() => (sidebarState.isOpen = !sidebarState.isOpen)}>
+				<Icon src={XCircle} theme="outline" class="mb-1 h-7 w-7" aria-hidden="true" />
+				Close
+			</button>
+		</div>
+	{/if}
+</div>

@@ -1,7 +1,7 @@
 import { getContext, setContext } from 'svelte';
 
 export class TabState {
-	current = $state();
+	current? = $state('');
 }
 
 const TAB_KEY = Symbol('TABS');

@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { SidebarLeftContext, SidebarTopContext } from '@ldn-viz/docs';
+	import { SidebarLeftContext, SidebarTopContext } from '../../../../../../../apps/docs';
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
@@ -17,27 +17,25 @@
 		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
 	];
 
-	let selectedValue: string | undefined = undefined;
-
-	// const horizontalContext = SidebarTopContext as unknown as DecoratorReturnType;
-
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarTabs',
 		component: SidebarTabList,
-		decorators: [() => SidebarLeftContext],
+		decorators: [() => SidebarLeftContext as any],
 		args: { tabs: tabs }
 	});
+
+	let selectedTabId = $state('aggregates');
 </script>
 
 <Story name="Default">
 	{#snippet template(args)}
-		<SidebarTabList {...args} bind:selectedValue />
+		<SidebarTabList {...args} bind:selectedTabId />
 	{/snippet}
 </Story>
 
-<Story name="Horizontal with Icons" decorators={[() => SidebarTopContext]}>
+<Story name="Horizontal with Icons" decorators={[() => SidebarTopContext as any]}>
 	{#snippet template(args)}
-		<SidebarTabList {...args} bind:selectedValue placement="top" />
+		<SidebarTabList {...args} bind:selectedTabId />
 	{/snippet}
 </Story>
 
@@ -46,7 +44,7 @@
 	{#snippet template(args)}
 		<SidebarTabList
 			{...args}
-			bind:selectedValue
+			bind:selectedTabId
 			onChange={() => {
 				alert('Clicked on Markers tab!');
 			}}

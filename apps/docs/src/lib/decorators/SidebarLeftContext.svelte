@@ -1,9 +1,14 @@
 <script>
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
+	import {
+		setSidebarState,
+		getSidebarState
+	} from '../../../../../packages/ui/src/lib/sidebar/sidebarState.svelte';
 
-	const sidebarPlacementStore = writable('left');
-	setContext('sidebarPlacement', sidebarPlacementStore);
+	setSidebarState();
+	let sidebarState = getSidebarState();
+
+	sidebarState.placement = 'left';
+
 	let { children } = $props();
 </script>
 

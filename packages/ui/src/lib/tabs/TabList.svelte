@@ -10,7 +10,6 @@
 	import { classNames } from '../utils/classNames';
 	import { tabFocus } from './actions';
 	import TabLabel from './TabLabel.svelte';
-	import { getTabState } from './tabState.svelte';
 	import type { Tab } from './types';
 
 	const orientationClasses = {
@@ -26,7 +25,7 @@
 	interface Props {
 		/**
 		 * List of tabs. An array, of which each entry is an object with the following properties:
-		 * * `id` (string): the value that will be assigned to `selectedValue` when this tab is selected
+		 * * `id` (string): the value that will be assigned to `selectedTabId` when this tab is selected
 		 * * `label` (string): the text that should be displayed in the tab label
 		 * * `icon` (optional): an icon component (imported from `@steeze-ui/heroicons`) that should be rendered in the tab label
 		 * * `rawIcon` (optional): a Svelte component that directly renders an SVG that should be displayed in the tab label
@@ -36,7 +35,7 @@
 		/**
 		 * `id` of the currently selected tab
 		 */
-		selectedValue?: Tab['id'];
+		selectedTabId?: Tab['id'];
 		/**
 		 * orientation of the list of tabs
 		 */
@@ -52,13 +51,13 @@
 
 	let {
 		tabs = [],
-		selectedValue = $bindable(),
+		selectedTabId = $bindable(),
 		orientation = 'horizontal',
 		ariaLabel,
 		onChange = (_id: Tab['id']) => {},
 		handleSelect = (id: Tab['id']) => {
 			onChange(id);
-			tabState.current = id;
+			selectedTabId = id;
 		},
 		class: classes = ''
 	}: Props = $props();
@@ -70,8 +69,6 @@
 			classes
 		)
 	);
-
-	let tabState = getTabState();
 </script>
 
 {#key orientation}
@@ -83,7 +80,7 @@
 		use:tabFocus={{ orientation }}
 	>
 		{#each tabs as tab}
-			<TabLabel tabId={tab.id} {handleSelect} {orientation}>
+			<TabLabel tabId={tab.id} {handleSelect} {orientation} bind:selectedTabId>
 				{#if tab.icon}
 					<Icon
 						src={tab.icon}

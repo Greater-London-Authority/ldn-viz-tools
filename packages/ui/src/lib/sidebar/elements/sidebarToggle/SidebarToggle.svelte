@@ -6,9 +6,8 @@
 
 	import { Bars3, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import Button from '../../../button/Button.svelte';
+	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
 
 	interface Props {
 		// `id` for sidebar container, to point to for screen readers
@@ -19,11 +18,10 @@
 
 	let { sidebarId, icon, ...rest }: Props = $props();
 
-	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
-	let isOpen = $derived($sidebarIsOpen);
+	let sidebarState = getSidebarState();
 
 	const toggleOpen = () => {
-		sidebarIsOpen.update((isOpen) => !isOpen);
+		sidebarState.isOpen = !sidebarState.isOpen;
 	};
 </script>
 
@@ -32,12 +30,12 @@
 		title="Toggle sidebar"
 		variant="square"
 		emphasis="secondary"
-		class={'bg-color-container-level-1 text-color-text-primary cursor-pointer'}
+		class={'!bg-color-container-level-1 !text-color-text-primary hover:!text-color-action-text-secondary-hover cursor-pointer'}
 		onclick={toggleOpen}
 		aria-controls={sidebarId}
-		aria-expanded={isOpen}
+		aria-expanded={sidebarState.isOpen}
 	>
-		{#if isOpen === false}
+		{#if sidebarState.isOpen === false}
 			{#if icon}
 				<!-- Custom icon to use instead of the 'hamburger' menu icon-->
 				{@render icon?.()}

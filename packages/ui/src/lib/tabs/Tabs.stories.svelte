@@ -36,12 +36,12 @@
 		// { id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
 	];
 
-	let selectedValue = 'aggregates';
+	let selectedTabId = 'aggregates';
 </script>
 
 <Story name="Default">
 	{#snippet template(args)}
-		<Tabs {...args} {tabs} bind:selectedValue ariaLabel="View information on EV chargers" />
+		<Tabs {...args} {tabs} bind:selectedTabId ariaLabel="View information on EV chargers" />
 	{/snippet}
 </Story>
 
@@ -50,7 +50,7 @@
 		<Tabs
 			{...args}
 			tabs={tabsWithIcons}
-			bind:selectedValue
+			bind:selectedTabId
 			ariaLabel="View information on EV chargers"
 		/>
 	{/snippet}
@@ -61,7 +61,7 @@
 		<Tabs
 			{...args}
 			{tabs}
-			bind:selectedValue
+			bind:selectedTabId
 			ariaLabel="View information on EV chargers"
 			orientation="vertical"
 		/>
