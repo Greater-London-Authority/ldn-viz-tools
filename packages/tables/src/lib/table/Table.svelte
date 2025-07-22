@@ -186,9 +186,8 @@
 		setColSpec(tableSpec);
 	});
 
-	let visualRows: any[] = $state([]);
-	run(() => {
-		visualRows = [];
+	let visualRows: any[] = $derived.by(() => {
+		const vr = [];
 
 		for (let group of tableObj!.groups) {
 			if (group.parentGroup && !group.parentGroup.isExpanded) {
@@ -196,15 +195,17 @@
 			}
 
 			if (group.name !== 'Default') {
-				visualRows.push({ type: 'GroupRowCombined', group, uniqueKey: visualRows.length });
+				vr.push({ type: 'GroupRowCombined', group, uniqueKey: vr.length });
 			}
 
 			if (group.isExpanded && (!group.childGroups || group.childGroups.length === 0)) {
 				for (let row of tableObj!.fetchGroupContents(group)) {
-					visualRows.push({ type: 'DataRow', row, uniqueKey: visualRows.length });
+					vr.push({ type: 'DataRow', row, uniqueKey: vr.length });
 				}
 			}
 		}
+
+		return vr;
 	});
 
 	let tableWidth: number = $state();
