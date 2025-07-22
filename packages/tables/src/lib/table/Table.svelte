@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { computeWidths } from '../core/lib/computeWidths';
 
 	import VirtualScroll from 'svelte-virtual-scroll-list';
@@ -71,7 +69,7 @@
 		/**
 		 * Exposes the internal table object, so that it can be programmatically manipulated.
 		 */
-		tableObj?: TableData | undefined;
+		// tableObj?: TableData | undefined;
 		/**
 		 * If `ture`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
 		 */
@@ -131,7 +129,7 @@
 		imageDownloadButton = ['PNG'],
 		filename = '',
 		height = 1000,
-		tableObj = $bindable(undefined),
+		// tableObj = $bindable(undefined),
 		zebraStripe = false,
 		paginate = false,
 		virtualise = false,
@@ -148,19 +146,14 @@
 
 	let colWidths = $state([]);
 
-	const onRowsChange = () => {
-		tableObj = tableObj; // eslint-disable-line no-self-assign
-	};
-
 	const createTable = (data: any[]) => {
-		// create the data object
-		tableObj = new TableData(tableSpec);
+		const to = new TableData(tableSpec);
 
-		tableObj.setOnRowsChange(onRowsChange);
+		// to.setOnRowsChange(() => tableObj = tableObj));
 
-		tableObj.setData(data);
-		tableObj.setColumnSpec(tableSpec.columns);
-		tableObj.setRowOrder([
+		to.setData(data);
+		to.setColumnSpec(tableSpec.columns);
+		to.setRowOrder([
 			{
 				field: 'a',
 				direction: 'ascending'
@@ -168,22 +161,25 @@
 		]);
 
 		if (fixedTableWidth) {
-			computeWidths(tableObj, fixedTableWidth);
+			computeWidths(to, fixedTableWidth);
 			// TODO: should set tableWidth to match
 		}
+
+		return to;
 	};
 
-	run(() => {
-		createTable(data);
-	});
-
-	const setColSpec = (tableSpec: { columns: any }) => {
+	const setColSpec = (tableObj: TableData, tableSpec: { columns: any }) => {
 		if (tableObj) {
 			tableObj.setColumnSpec(tableSpec.columns);
 		}
 	};
-	run(() => {
-		setColSpec(tableSpec);
+
+	let tableObj = $derived.by(() => {
+		const to = createTable(data);
+
+		setColSpec(to, tableSpec);
+
+		return to;
 	});
 
 	let visualRows: any[] = $derived.by(() => {
@@ -210,21 +206,25 @@
 
 	let tableWidth: number = $state();
 
-	const updateTableWidths = (newWidth: number) => {
+	const updateTableWidths = (tableObj, newWidth: number) => {
 		if (tableObj && !fixedTableWidth) {
 			computeWidths(tableObj, newWidth);
 			colWidths = tableObj.columnSpec.map((col) => col.computedWidth);
 		}
 	};
 
-	run(() => {
-		updateTableWidths(tableWidth);
+	$effect(() => {
+		updateTableWidths(tableObj, tableWidth);
 	});
+
+	let visibleFields = $derived(tableObj.visibleFields);
+	let updateTrigger = $state(0);
 
 	const beforeTable_render = $derived(beforeTable);
 </script>
 
-{#key colWidths}
+{updateTrigger}
+{#key (colWidths, updateTrigger)}
 	{#if tableObj && tableObj.extents}
 		<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
 			<div class="ml-4 flex w-[430px] gap-2">
@@ -234,7 +234,7 @@
 				{/if}
 
 				{#if allowColumnHiding}
-					<ToggleColumnsMenu table={tableObj} />
+					<ToggleColumnsMenu table={tableObj} onChange={() => updateTrigger++} />
 				{/if}
 			</div>
 

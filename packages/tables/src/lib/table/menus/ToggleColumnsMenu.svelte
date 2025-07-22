@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import type { TableData } from '$lib/core/lib/dataObj';
-	import { Button, CheckboxGroup, Popover } from '@ldn-viz/ui';
+	import { CheckboxGroup, Overlay } from '@ldn-viz/ui';
 
 	interface Props {
 		table: TableData;
+		onChange: () => void;
 	}
 
-	let { table }: Props = $props();
+	let { table, onChange }: Props = $props();
 
 	type Options = {
 		label: string;
@@ -16,40 +15,37 @@
 		value: string;
 	};
 
-	let fields: Options[] = $state();
-	run(() => {
+	let fields: Options[] = $derived.by(() => {
+		let new_fields: any[] = [];
+
 		if (table) {
-			const new_fields = table.columnSpec.map((f) => ({
+			new_fields = table.columnSpec.map((f) => ({
 				label: f.label ?? f.short_label,
 				id: f.short_label,
 				value: f.short_label
 			}));
-
-			if (JSON.stringify(new_fields) !== JSON.stringify(fields)) {
-				fields = new_fields;
-			}
 		}
+
+		return new_fields;
 	});
 
 	let fieldSelection = $state(table.visibleFields);
-	const updateVisibility = () => table.setVisibleFields(fieldSelection);
-	run(() => {
-		if (JSON.stringify(table.visibleFields) !== JSON.stringify(fieldSelection)) {
-			updateVisibility();
-		}
-	});
+	const updateVisibility = (newFields) => {
+		console.log('Update visibility,', { newFields });
+
+		table.setVisibleFields(newFields);
+		onChange();
+
+		console.log(table.visibleFields);
+	};
 </script>
 
-<Popover>
-	{#snippet hint()}
-	
-			<Button variant="text" size="sm">Show/Hide Columns</Button>
-
-			<span class="sr-only">Open Popover</span>
-		
-	{/snippet}
-
+<Overlay overlayType="popover" hintLabel="Show/Hide Columns">
 	<h2 class="font-bold">Select which columns to display:</h2>
 
-	<CheckboxGroup options={fields} bind:selectedOptions={fieldSelection} />
-</Popover>
+	<CheckboxGroup
+		options={fields}
+		bind:selectedOptions={fieldSelection}
+		onChange={updateVisibility}
+	/>
+</Overlay>

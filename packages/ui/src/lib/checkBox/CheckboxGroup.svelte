@@ -48,6 +48,8 @@
 		 * Accessible name of group to be read by screen reader.
 		 */
 		ariaLabel?: string;
+
+		onChange: (selectedOptions: string[]) => void;
 	}
 
 	let {
@@ -65,7 +67,8 @@
 		options = [],
 		selectedOptions = $bindable([]),
 		hideSelectAll = false,
-		customOverlay = undefined
+		customOverlay = undefined,
+		onChange
 	}: CheckboxGroupProps = $props();
 
 	let errorId = $derived(error ? `${id}-error` : undefined);
@@ -83,10 +86,12 @@
 
 	const selectAll = () => {
 		selectedOptions = options.filter((o) => !o.disabled).map((o) => o.id);
+		onChange(selectedOptions);
 	};
 
 	const clearAll = () => {
 		selectedOptions = [];
+		onChange(selectedOptions);
 	};
 
 	const toggleAll = () => {
@@ -105,6 +110,8 @@
 		} else {
 			selectedOptions = [...selectedOptions, optionId];
 		}
+
+		onChange(selectedOptions);
 	};
 </script>
 

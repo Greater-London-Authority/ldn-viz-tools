@@ -1,6 +1,4 @@
 <script>
-	import { run } from 'svelte/legacy';
-
 	import { Select } from '@ldn-viz/ui';
 
 	let { pageSize = $bindable(), page = $bindable() } = $props();
@@ -12,19 +10,19 @@
 		{ value: 100, label: '100' }
 	];
 
-	let numRowSelection = $state(numRowOptions.find((d) => d.value === pageSize));
+	let numRowSelection = $state(pageSize.toString());
 
-	const changePageSize = (newVal) => {
-		pageSize = newVal;
+	const changePageSize = (ev) => {
+		pageSize = ev.value;
 		page = 1;
 	};
-	run(() => {
-		if (numRowSelection) {
-			changePageSize(numRowSelection.value);
-		}
-	});
 </script>
 
 <div class="mb-4" style="width: 192px">
-	<Select bind:value={numRowSelection} items={numRowOptions} label="Entries per page"></Select>
+	<Select
+		onChange={changePageSize}
+		bind:value={numRowSelection}
+		options={numRowOptions}
+		label="Entries per page"
+	></Select>
 </div>
