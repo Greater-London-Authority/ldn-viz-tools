@@ -66,7 +66,7 @@
 <Story name="Basic">
 	{#snippet template(args)}
 		<div class="w-96">
-			<Select {...args} {...args} {options} name="A Name" />
+			<Select {...args} {options} name="A Name" />
 		</div>
 	{/snippet}
 </Story>
@@ -74,7 +74,7 @@
 <Story name="With Label">
 	{#snippet template(args)}
 		<div class="w-96">
-			<Select {...args} {...args} {options} label="Pick a number" />
+			<Select {...args} {options} label="Pick a number" />
 		</div>
 	{/snippet}
 </Story>

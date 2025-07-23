@@ -10,21 +10,21 @@
 	 * @component
 	 */
 
-	import Spinner from '../spinners/Spinner.svelte';
-	import { prefersReducedMotion } from '../userPreference/userPreference';
 	import { Clock } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Spinner from '../spinners/Spinner.svelte';
+	import { prefersReducedMotion } from '../userPreference/userPreference';
 
 	interface Props {
 		/**
 		 * Describes the state change (i.e. appearance of Spinner or icon while loading) for screen reader users.
 		 */
-		title: string;
+		title?: string;
 
 		/**
 		 * Customise the styling of the `<Spinner>` arc.
 		 */
-		arcColorClass: string;
+		arcColorClass?: string;
 
 		/**
 		 * Customise the styling by passing tailwind classes.
