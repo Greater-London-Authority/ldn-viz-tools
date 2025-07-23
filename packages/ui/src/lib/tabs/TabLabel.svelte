@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { Booleanish } from 'svelte/elements';
 	import { classNames } from '../utils/classNames';
-	import { getTabState } from './tabState.svelte';
 	import type { Tab } from './types';
 
 	interface Props {
