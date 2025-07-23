@@ -43,7 +43,6 @@
 		}
 	};
 
-
 	/**
 	 * Describes the state change (i.e. appearance of Spinner or icon while loading) for screen reader users.
 	 */
