@@ -17,7 +17,7 @@
 
 <Story name="No Brand">
 	{#snippet template(args)}
-		<SidebarHeader {...args} title="Main sidebar title" branded={'false'} />
+		<SidebarHeader {...args} title="Main sidebar title" branded="false" />
 	{/snippet}
 </Story>
 
@@ -59,7 +59,7 @@
 	{#snippet template(args)}
 		<SidebarHeader
 			{...args}
-			title={`Main sidebar title which is<br /> unfortunately very long and so<br /> needs some breaks inserting`}
+			title="Main sidebar title which is<br /> unfortunately very long and so<br /> needs some breaks inserting"
 		></SidebarHeader>
 	{/snippet}
 </Story>

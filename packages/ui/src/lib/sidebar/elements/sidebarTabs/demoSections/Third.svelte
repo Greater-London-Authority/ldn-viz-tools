@@ -21,7 +21,7 @@
 </script>
 
 <SidebarSection title="Section Title">
-	<SidebarGroup title={'First Group Title'}>
+	<SidebarGroup title="First Group Title">
 		<Select {options} label="Label" id="example-input-1" />
 		<Select {options} label="Label" id="example-input-2" />
 	</SidebarGroup>
