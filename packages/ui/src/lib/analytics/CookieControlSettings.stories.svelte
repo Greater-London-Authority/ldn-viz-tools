@@ -19,14 +19,12 @@
 <!-- The modal doesn't actually open in this story, as the Storybook site isn't using the Civic Cookie Control.-->
 <Story name="Default">
 	{#snippet template()}
-		<!-- <AnalyticsAndCookieConsent /> -->
 		<CookieControlSettings />
 	{/snippet}
 </Story>
 
 <Story name="With Button props">
 	{#snippet template()}
-		<!-- <AnalyticsAndCookieConsent /> -->
 		<CookieControlSettings variant="solid" slim={false} />
 	{/snippet}
 </Story>
