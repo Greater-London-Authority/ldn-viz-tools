@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { SidebarLeftContext } from '../../../../../../../apps/docs';
+	import { SidebarLeftContext } from '../../../../../../../apps/docs/src/lib';
 
 	import { AdjustmentsHorizontal } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
