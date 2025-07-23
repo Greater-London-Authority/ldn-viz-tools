@@ -108,3 +108,23 @@
 		</div>
 	{/snippet}
 </Story>
+
+<Story name="Custom Colorway">
+	{#snippet template(args)}
+		<div class="max-w-xl">
+			<PlacardButton {...args} colorWay={'blue'}>
+				{#snippet title()}
+					Getting the Data.
+				{/snippet}
+				{#snippet body()}
+					The full dataset that this explorer is based on is available for download from the London
+					Datastore, along with other documents like the Technical Report, which contains the
+					questionnaires from the survey.
+				{/snippet}
+				{#snippet footer()}
+					The Survey of Londoners on London Datastore
+				{/snippet}
+			</PlacardButton>
+		</div>
+	{/snippet}
+</Story>
