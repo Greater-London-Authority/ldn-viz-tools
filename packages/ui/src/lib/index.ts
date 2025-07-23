@@ -76,5 +76,11 @@ export * from './geolocation/types';
 
 export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPreference.js';
 
+export * from './auth/auth';
+export { default as AuthMenu } from './auth/AuthMenu.svelte';
+export { default as HandleRedirectFromAuth } from './auth/HandleRedirectFromAuth.svelte';
+export { default as LoginForm } from './auth/LoginForm.svelte';
+export { default as LoginLink } from './auth/LoginLink.svelte';
+
 export { classNames } from './utils/classNames.js';
 export { randomId } from './utils/randomId.js';
