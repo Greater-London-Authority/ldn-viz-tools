@@ -19,7 +19,7 @@
 <div class="dark flex items-center">
 	{#if $accessToken}
 		<span>Logged in as: <span class="font-bold">{$userName}</span></span>
-		<Button variant="text" size="sm" on:click={() => logout(config)}>Log Out</Button>
+		<Button variant="text" size="sm" onclick={() => logout(config)}>Log Out</Button>
 	{:else}
 		<LoginLink {config} />
 	{/if}
