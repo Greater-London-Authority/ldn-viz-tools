@@ -1,0 +1,282 @@
+[
+	{
+		"id": 124,
+		"label": "Bittacy Hill, Dollis Road, Mill Hill East",
+		"avg_night_foot": 397.93,
+		"non-caz": -470.09,
+		"caz": -1658.4399999999998,
+		"Inner": -977.5799999999999,
+		"Outer": -258.84999999999997,
+		"london": -560.23
+	},
+	{
+		"id": 171,
+		"label": "The Broadway, Hendon.",
+		"avg_night_foot": 653.0314285714285,
+		"non-caz": -214.9885714285715,
+		"caz": -1403.3385714285714,
+		"Inner": -722.4785714285715,
+		"Outer": -3.748571428571495,
+		"london": -305.1285714285715
+	},
+	{
+		"id": 311,
+		"label": "High Road, East Finchley.",
+		"avg_night_foot": 716.8871428571429,
+		"non-caz": -151.13285714285712,
+		"caz": -1339.482857142857,
+		"Inner": -658.6228571428571,
+		"Outer": 60.10714285714289,
+		"london": -241.2728571428571
+	},
+	{
+		"id": 315,
+		"label": "Falloden Way, East Finchley.",
+		"avg_night_foot": 376.15,
+		"non-caz": -491.87,
+		"caz": -1680.2199999999998,
+		"Inner": -999.36,
+		"Outer": -280.63,
+		"london": -582.01
+	},
+	{
+		"id": 322,
+		"label": "Cricklewood Broadway, Cricklewood.",
+		"avg_night_foot": 1048.24,
+		"non-caz": 180.22000000000003,
+		"caz": -1008.1299999999999,
+		"Inner": -327.27,
+		"Outer": 391.46000000000004,
+		"london": 90.08000000000004
+	},
+	{
+		"id": 323,
+		"label": "Brent Street, Hendon.",
+		"avg_night_foot": 755.5242857142857,
+		"non-caz": -112.49571428571426,
+		"caz": -1300.8457142857142,
+		"Inner": -619.9857142857143,
+		"Outer": 98.74428571428575,
+		"london": -202.63571428571424
+	},
+	{
+		"id": 326,
+		"label": "Golders Green Road, Golders Green.",
+		"avg_night_foot": 731.6379999999999,
+		"non-caz": -136.38200000000006,
+		"caz": -1324.732,
+		"Inner": -643.8720000000001,
+		"Outer": 74.85799999999995,
+		"london": -226.52200000000005
+	},
+	{
+		"id": 327,
+		"label": "Finchley Road, Golders Green",
+		"avg_night_foot": 598.45,
+		"non-caz": -269.56999999999994,
+		"caz": -1457.9199999999998,
+		"Inner": -777.06,
+		"Outer": -58.32999999999993,
+		"london": -359.7099999999999
+	},
+	{
+		"id": 329,
+		"label": "Cat Hill & East Barnet Road, East Barnet.",
+		"avg_night_foot": 519.7166666666667,
+		"non-caz": -348.3033333333333,
+		"caz": -1536.6533333333332,
+		"Inner": -855.7933333333333,
+		"Outer": -137.06333333333328,
+		"london": -438.44333333333327
+	},
+	{
+		"id": 330,
+		"label": "Watford Way, Hendon.",
+		"avg_night_foot": 682.9525,
+		"non-caz": -185.0675,
+		"caz": -1373.4175,
+		"Inner": -692.5575,
+		"Outer": 26.172500000000014,
+		"london": -275.2075
+	},
+	{
+		"id": 338,
+		"label": "High Street + Station Road, Edgware.",
+		"avg_night_foot": 637.414,
+		"non-caz": -230.606,
+		"caz": -1418.956,
+		"Inner": -738.096,
+		"Outer": -19.365999999999985,
+		"london": -320.746
+	},
+	{
+		"id": 342,
+		"label": "Colney Hatch, Muswell Hill.",
+		"avg_night_foot": 722.525,
+		"non-caz": -145.495,
+		"caz": -1333.8449999999998,
+		"Inner": -652.985,
+		"Outer": 65.745,
+		"london": -235.635
+	},
+	{
+		"id": 345,
+		"label": "Friern Barnet Road, Friern Barnet.",
+		"avg_night_foot": 638.4680000000001,
+		"non-caz": -229.5519999999999,
+		"caz": -1417.9019999999998,
+		"Inner": -737.0419999999999,
+		"Outer": -18.311999999999898,
+		"london": -319.6919999999999
+	},
+	{
+		"id": 351,
+		"label": "Bowes Road (Ravenscraig Road, Arnos Road), Arnos Grove.",
+		"avg_night_foot": 863.975,
+		"non-caz": -4.044999999999959,
+		"caz": -1192.395,
+		"Inner": -511.53499999999997,
+		"Outer": 207.19500000000005,
+		"london": -94.18499999999995
+	},
+	{
+		"id": 352,
+		"label": "Friern Barnet Road, New Southgate.",
+		"avg_night_foot": 727.3199999999999,
+		"non-caz": -140.70000000000005,
+		"caz": -1329.05,
+		"Inner": -648.19,
+		"Outer": 70.53999999999996,
+		"london": -230.84000000000003
+	},
+	{
+		"id": 361,
+		"label": "Cockfosters Road, Cockfosters.",
+		"avg_night_foot": 420.30000000000007,
+		"non-caz": -447.7199999999999,
+		"caz": -1636.0699999999997,
+		"Inner": -955.2099999999999,
+		"Outer": -236.4799999999999,
+		"london": -537.8599999999999
+	},
+	{
+		"id": 370,
+		"label": "High Street, Southgate.",
+		"avg_night_foot": 608.0516666666667,
+		"non-caz": -259.96833333333325,
+		"caz": -1448.3183333333332,
+		"Inner": -767.4583333333333,
+		"Outer": -48.72833333333324,
+		"london": -350.10833333333323
+	},
+	{
+		"id": 374,
+		"label": "Finchley Road, Childs Hill",
+		"avg_night_foot": 758.0300000000001,
+		"non-caz": -109.9899999999999,
+		"caz": -1298.3399999999997,
+		"Inner": -617.4799999999999,
+		"Outer": 101.25000000000011,
+		"london": -200.12999999999988
+	},
+	{
+		"id": 377,
+		"label": "The Broadway, Mill Hill.",
+		"avg_night_foot": 353.605,
+		"non-caz": -514.415,
+		"caz": -1702.7649999999999,
+		"Inner": -1021.905,
+		"Outer": -303.17499999999995,
+		"london": -604.555
+	},
+	{
+		"id": 379,
+		"label": "Northway Circus, Barnet.",
+		"avg_night_foot": 442.88000000000005,
+		"non-caz": -425.13999999999993,
+		"caz": -1613.4899999999998,
+		"Inner": -932.6299999999999,
+		"Outer": -213.89999999999992,
+		"london": -515.28
+	},
+	{
+		"id": 380,
+		"label": "Potter's Road, Barnet.",
+		"avg_night_foot": 610.3399999999999,
+		"non-caz": -257.68000000000006,
+		"caz": -1446.03,
+		"Inner": -765.1700000000001,
+		"Outer": -46.440000000000055,
+		"london": -347.82000000000005
+	},
+	{
+		"id": 382,
+		"label": "Barnet Hill, High Barnet.",
+		"avg_night_foot": 485.7633333333333,
+		"non-caz": -382.25666666666666,
+		"caz": -1570.6066666666666,
+		"Inner": -889.7466666666667,
+		"Outer": -171.01666666666665,
+		"london": -472.39666666666665
+	},
+	{
+		"id": 418,
+		"label": "Station Road & East Barnet Road, New Barnet.",
+		"avg_night_foot": 610.6357142857142,
+		"non-caz": -257.38428571428574,
+		"caz": -1445.7342857142858,
+		"Inner": -764.8742857142857,
+		"Outer": -46.14428571428573,
+		"london": -347.5242857142857
+	},
+	{
+		"id": 470,
+		"label": "High Street, Barnet.",
+		"avg_night_foot": 441.87000000000006,
+		"non-caz": -426.1499999999999,
+		"caz": -1614.4999999999998,
+		"Inner": -933.6399999999999,
+		"Outer": -214.9099999999999,
+		"london": -516.29
+	},
+	{
+		"id": 471,
+		"label": "High Road, Totteridge and Whetstone.",
+		"avg_night_foot": 496.45624999999995,
+		"non-caz": -371.56375,
+		"caz": -1559.91375,
+		"Inner": -879.05375,
+		"Outer": -160.32375000000002,
+		"london": -461.70375
+	},
+	{
+		"id": 523,
+		"label": "Burnt Oak Broadway & Watling Avenue, Burnt Oak",
+		"avg_night_foot": 844.5675000000001,
+		"non-caz": -23.452499999999873,
+		"caz": -1211.8024999999998,
+		"Inner": -530.9424999999999,
+		"Outer": 187.78750000000014,
+		"london": -113.59249999999986
+	},
+	{
+		"id": 561,
+		"label": "High Road, Woodside Park.",
+		"avg_night_foot": 884.9011111111112,
+		"non-caz": 16.88111111111118,
+		"caz": -1171.4688888888886,
+		"Inner": -490.6088888888888,
+		"Outer": 228.1211111111112,
+		"london": -73.2588888888888
+	},
+	{
+		"id": 562,
+		"label": "Ballards Lane, Finchley.",
+		"avg_night_foot": 702.1071428571429,
+		"non-caz": -165.9128571428571,
+		"caz": -1354.262857142857,
+		"Inner": -673.4028571428571,
+		"Outer": 45.32714285714292,
+		"london": -256.0528571428571
+	}
+]

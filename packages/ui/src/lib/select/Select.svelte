@@ -90,6 +90,17 @@
 		dropdownClass,
 		optionClass,
 
+		onChange,
+		onFocus,
+		onBlur,
+		onCreateOption,
+		onCreateFail,
+		onEnterKey,
+		onFetch,
+		onFetchError,
+		onInvalidValue,
+		readSelection,
+
 		// input wrapper stuff
 		id,
 		disabled,
@@ -159,6 +170,16 @@
 		{dropdownClass}
 		{optionClass}
 		{disabled}
+		{readSelection}
+		{onChange}
+		{onFocus}
+		{onBlur}
+		{onCreateOption}
+		{onCreateFail}
+		{onEnterKey}
+		{onFetch}
+		{onFetchError}
+		{onInvalidValue}
 	/>
 </InputWrapper>
 
