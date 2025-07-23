@@ -25,7 +25,7 @@
 
 	let {
 		color = undefined,
-		selectedId = $bindable(''),
+		selectedId = $bindable(),
 		label,
 		id,
 		name = undefined,
