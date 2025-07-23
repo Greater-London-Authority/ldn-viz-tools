@@ -32,7 +32,12 @@
 	import { onMount } from 'svelte';
 	import Button from '../button/Button.svelte';
 
-	let { slim = true, variant = 'text', ...restProps }: ButtonProps = $props();
+	let {
+		slim = true,
+		variant = 'text',
+		emphasis = 'secondary',
+		...restProps
+	}: ButtonProps = $props();
 
 	let cookieControlStore = $state(window.CookieControl);
 
@@ -47,6 +52,7 @@
 	<Button
 		{slim}
 		{variant}
+		{emphasis}
 		aria-label="View cookie settings"
 		onclick={cookieControlStore.open}
 		{...restProps}

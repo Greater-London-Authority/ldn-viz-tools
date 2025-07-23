@@ -27,7 +27,7 @@
 
 	let selectedMenuItemId = $state('layout');
 
-	let subMenu = [
+	export let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
 		{ title: 'Brand', id: 'brand', href: '/brand' },
 		{ title: 'Color', id: 'color', href: '/color' },

@@ -53,6 +53,7 @@
 		"@ldn-viz/config-eslint": "*",
 		"@ldn-viz/config-typescript": "*",
 		"@ldn-viz/config-vitest": "*",
+		"@ldn-viz/docs": "*",
 		"@playwright/test": "^1.49.1",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.16.0",
