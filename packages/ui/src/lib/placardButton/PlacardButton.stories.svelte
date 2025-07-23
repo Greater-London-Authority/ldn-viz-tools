@@ -112,7 +112,7 @@
 <Story name="Custom Colorway">
 	{#snippet template(args)}
 		<div class="max-w-xl">
-			<PlacardButton {...args} colorWay={'blue'}>
+			<PlacardButton {...args} colorWay="blue">
 				{#snippet title()}
 					Getting the Data.
 				{/snippet}

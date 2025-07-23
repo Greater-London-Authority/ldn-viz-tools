@@ -68,7 +68,12 @@
 				<Button onclick={() => (opts = [options[1]])}>Allow SVG only</Button>
 			</div>
 
-			<MultipleActionButton options={opts} menuTitle="Select image format" onClick={handleClick} />
+			<MultipleActionButton
+				{...args}
+				options={opts}
+				menuTitle="Select image format"
+				onClick={handleClick}
+			/>
 		</div>
 	{/snippet}
 </Story>

@@ -263,8 +263,6 @@
 	let selectedOption: MultipleActionButtonOption = $state();
 
 	let format = $derived(selectedOption?.id ?? 'PNG');
-
-	$inspect({ options, selectedOption });
 </script>
 
 <MultipleActionButton

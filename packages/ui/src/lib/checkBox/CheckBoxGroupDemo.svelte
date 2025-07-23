@@ -18,7 +18,7 @@
 		{ id: 'taxi', name: 'taxi', label: 'Taxi ranks', disabled: true }
 	];
 
-	let optionsWithCustomOverlay = optionsForGroup.map(({ hint, ...option }) => ({
+	let optionsWithCustomOverlay = optionsForGroup.map(({ _hint, ...option }) => ({
 		...option,
 		customOverlay: customOverlay
 	}));

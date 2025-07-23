@@ -158,6 +158,7 @@
 	{#snippet template(args)}
 		<div class="w-96">
 			<Input
+				{...args}
 				bind:value={age}
 				label="Enter your age (required)"
 				name="age-input"

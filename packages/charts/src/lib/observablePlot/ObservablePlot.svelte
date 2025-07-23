@@ -145,7 +145,7 @@
 		{imageDownloadButton}
 		{filename}
 		{...rest}
-		chartHeight={'h-fit'}
+		chartHeight="h-fit"
 		{chartWidth}
 		{chartDescription}
 	>

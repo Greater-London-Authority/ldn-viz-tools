@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { XCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
 	import {
 		tabLabelOverride,
 		tabLayoutOverride,
@@ -7,10 +10,6 @@
 	import TabList from '../../../tabs/TabList.svelte';
 	import type { Tab } from '../../../tabs/types';
 	import { classNames } from '../../../utils/classNames';
-	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
-	import Button from '../../../button/Button.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { XCircle, XMark } from '@steeze-ui/heroicons';
 
 	let sidebarState = getSidebarState();
 
