@@ -11,11 +11,11 @@ export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 
-// TODD - Location Search
-// export * from './mapControlLocationSearch/MapGeocoderAdapterMapBox';
-// export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
-// export { default as MapControlGeolocator } from './mapControlLocationSearch/MapControlGeolocator.svelte';
-// export { default as MapControlLocationSearch } from './mapControlLocationSearch/MapControlLocationSearch.svelte';
+// Location Search
+export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
+export { default as MapControlGeolocator } from './mapControlLocationSearch/MapControlGeolocator.svelte';
+export { default as MapControlLocationSearch } from './mapControlLocationSearch/MapControlLocationSearch.svelte';
+export * from './mapControlLocationSearch/MapGeocoderAdapterMapBox';
 
 // Borough Selector
 export { default as MapControlBorough } from './mapControlBorough/MapControlBorough.svelte';
