@@ -1,8 +1,5 @@
 <script>
-	import {
-		setSidebarState,
-		getSidebarState
-	} from '../../../../../packages/ui/src/lib/sidebar/sidebarState.svelte';
+	import { getSidebarState, setSidebarState } from '@ldn-viz/ui';
 
 	setSidebarState();
 	let sidebarState = getSidebarState();
