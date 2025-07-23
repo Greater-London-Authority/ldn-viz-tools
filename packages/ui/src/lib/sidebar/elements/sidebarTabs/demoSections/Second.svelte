@@ -1,4 +1,5 @@
 <script lang="ts">
+	import RadioButtonGroupSolid from './../../../../radioButtonSolid/RadioButtonGroupSolid.svelte';
 	import Select from './../../../../select/Select.svelte';
 	import SidebarGroup from './../../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
 	import SidebarSection from './../../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
@@ -22,6 +23,6 @@
 <SidebarSection title="Section Title">
 	<SidebarGroup>
 		<Select {options} label="Label" id="example-input-3" />
-		<!-- <RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group Two" /> -->
+		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group Two" />
 	</SidebarGroup>
 </SidebarSection>
