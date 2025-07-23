@@ -7,7 +7,6 @@
 	 */
 
 	import type { InputProps } from '$lib/input/types';
-	import { setContext, type Snippet } from 'svelte';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
@@ -28,7 +27,6 @@
 			label: string;
 			disabled?: boolean;
 		}[];
-		children?: Snippet;
 	}
 
 	let {
@@ -44,17 +42,12 @@
 		selectedId = $bindable(''),
 		name,
 		options = [],
-		children
+		children,
+		customOverlay = undefined
 	}: RadioButtonGroupSolidProps = $props();
 
-	/**
-	 * Only generate `descriptionId` and/or `errorId` when `description` and/or `error` exist.
-	 * `descriptionId` is static but `errorId` is reactive as error state could change.
-	 */
-	const descriptionId = description ? `${id}-description` : undefined;
-	let errorId = error ? `${id}-error` : undefined;
-
-	setContext('selectedId', selectedId);
+	let errorId = $derived(error ? `${id}-error` : undefined);
+	let descriptionId = $derived(description ? `${id}-description` : undefined);
 </script>
 
 <InputWrapper
@@ -69,25 +62,21 @@
 	{error}
 	{disabled}
 	{optional}
+	{customOverlay}
 >
-	<div
-		class="flex"
-		onchange={(e: Event) => {
-			const target = e.target as HTMLInputElement;
-			selectedId = target.value;
-		}}
-	>
+	<div class="flex">
 		{#if options.length}
 			{#each options as option}
 				<RadioButtonSolid
 					id={option.id}
 					label={option.label}
 					disabled={option.disabled || disabled}
+					bind:selectedId
 					{name}
 				/>
 			{/each}
 		{:else}
-			<!-- should contain a series of `<RadioButtonSolid>` components  -->
+			<!-- should contain a series of `<RadioButtonSolid>` components, included to allow for icons  -->
 			{@render children?.()}
 		{/if}
 	</div>

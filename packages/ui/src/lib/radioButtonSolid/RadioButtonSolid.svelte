@@ -7,18 +7,18 @@
 	 */
 
 	import type { InputProps } from '$lib/input/types';
-	import { getContext, type Snippet } from 'svelte';
 	import { classNames } from '../utils/classNames';
 
-	interface Props extends Omit<InputProps, 'children'> {
-		children?: Snippet;
+	interface Props extends InputProps {
+		/**
+		 * `id` of the selected radio button in group.
+		 */
+		selectedId?: string;
 	}
 
-	let { label = '', id, name, disabled = false, children }: Props = $props();
+	let { selectedId = $bindable(''), label, id, name, disabled = false, children }: Props = $props();
 
 	let inputID = `input-${name || ''}-${id}`;
-
-	let selectedId = $state(getContext('selectedId'));
 
 	const labelClasses = $derived(
 		classNames(
@@ -35,8 +35,8 @@
 	<input
 		id={inputID}
 		type="radio"
-		{name}
 		bind:group={selectedId}
+		{name}
 		value={id}
 		aria-disabled={disabled}
 		{disabled}

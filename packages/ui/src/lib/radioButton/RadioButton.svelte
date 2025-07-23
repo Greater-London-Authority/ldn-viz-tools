@@ -46,6 +46,7 @@
 		bind:group={selectedId}
 		{name}
 		value={id}
+		aria-disabled={disabled}
 		{disabled}
 		style={color
 			? `--theme-input-border: ${color}; --theme-input-border-selected: ${color}; --theme-input-background-active: ${color}; --tw-ring-color: ${color};`
