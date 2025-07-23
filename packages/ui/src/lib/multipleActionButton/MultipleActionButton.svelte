@@ -29,10 +29,10 @@
 
 	$effect(() => {
 		// apply fallback value to state if not defined
-		if (!state || !options.map((d) => d.id).includes(state.id)) {
+		if (!state || !options.map((d) => d.id).includes(state?.id)) {
 			const newState = options.find((option) => option.default) ?? options[0];
 
-			if (newState.id !== state.id) {
+			if (newState?.id !== state?.id) {
 				state = newState;
 			}
 		}

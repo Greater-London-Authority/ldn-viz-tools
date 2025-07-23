@@ -30,7 +30,7 @@
 	const radius = 1;
 
 	const dodge = (values: number[], x: ScaleLinear<number, number>) => {
-		return values.map((v) => ({
+		return (values || []).map((v) => ({
 			x: x(v),
 			y: Math.random(),
 			data: v

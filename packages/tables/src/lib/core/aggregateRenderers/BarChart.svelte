@@ -35,11 +35,7 @@
 	const marginBottom = 10;
 	const marginLeft = 0;
 
-	let sortedData = $state();
-	let x = $state();
-	let y = $state();
-
-	const update = (data) => {
+	let sortedData = $derived.by(() => {
 		// count the values: produces a list of [value, count] pairs
 		const counts = Object.create(null);
 		data.forEach((val) => {
@@ -47,26 +43,30 @@
 		});
 
 		// sort by descending frequency: see https://stackoverflow.com/a/1069840
-		sortedData = Object.entries(counts).sort(([, a], [, b]) => b - a);
+		let sorted_data = Object.entries(counts).sort(([, a], [, b]) => b - a);
 
 		// null will have been converted to the string "null" by the above
-		sortedData = sortedData.map((d) => [d[0] === 'null' ? null : d[0], d[1]]);
+		return sorted_data.map((d) => [d[0] === 'null' ? null : d[0], d[1]]);
+	});
 
+	let x = $derived.by(() => {
 		const defaultScale = scaleBand()
 			.domain(sortedData.map((d) => d[0])) // descending frequency
 			.range([marginLeft, width - marginRight])
 			.padding(0.1);
 
-		x = posScale
+		return posScale
 			? scaleBand()
 					.domain(posScale.domain())
 					.range([marginLeft, width - marginRight])
 			: defaultScale;
+	});
 
-		y = scaleLinear()
+	let y = $derived(
+		scaleLinear()
 			.domain([0, +max(sortedData, (d) => d[1])])
-			.range([height - marginBottom, marginTop]);
-	};
+			.range([height - marginBottom, marginTop])
+	);
 
 	const truncateLabel = (str, maxLen) => {
 		if (!str) {
@@ -77,10 +77,6 @@
 			return str;
 		}
 	};
-
-	$effect(() => {
-		update(values, posScale);
-	});
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
