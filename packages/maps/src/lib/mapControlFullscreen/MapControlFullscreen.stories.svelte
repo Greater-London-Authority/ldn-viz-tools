@@ -21,8 +21,6 @@
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 </script>
 
-
-
 <!--
 The fullscreen button is usually positioned in the bottom left corner above the refresh page button.
 
