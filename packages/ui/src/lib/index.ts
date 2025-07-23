@@ -9,6 +9,8 @@ export { default as DataDownloadButton } from './dataDownloadButton/DataDownload
 export { default as Flag } from './flag/Flag.svelte';
 export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
 
+export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
+
 export { default as Input } from './input/Input.svelte';
 export { default as InputWrapper } from './input/InputWrapper.svelte';
 export { default as LoadingIndicator } from './loadingIndicator/LoadingIndicator.svelte';
