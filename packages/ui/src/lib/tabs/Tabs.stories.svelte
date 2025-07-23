@@ -7,7 +7,7 @@
 
 	//Example components passed to panel In reality these would be contained in your app
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { First, Second, Third } from './demoSections';
+	import { First, Second, Third, Fourth } from './demoSections';
 	import type { Tab } from './types';
 
 	const { Story } = defineMeta({
@@ -25,15 +25,15 @@
 	let tabs: Tab[] = [
 		{ id: 'aggregates', label: 'Aggregated counts across London', content: First },
 		{ id: 'chargers', label: 'Details of chargers', content: Second },
-		{ id: 'averages', label: 'Averages of charge events', content: Third }
-		// { id: 'histograms', label: 'Histograms of charge events', content: Fourth }
+		{ id: 'averages', label: 'Averages of charge events', content: Third },
+		{ id: 'histograms', label: 'Histograms of charge events', content: Fourth }
 	];
 
 	let tabsWithIcons: Tab[] = [
 		{ id: 'aggregates', label: 'Aggregates', icon: Square3Stack3d, content: First },
 		{ id: 'chargers', label: 'Details', icon: MapIcon, content: Second },
-		{ id: 'averages', label: 'Averages', icon: Square3Stack3d, content: Third }
-		// { id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
+		{ id: 'averages', label: 'Averages', icon: Square3Stack3d, content: Third },
+		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
 	];
 
 	let selectedTabId = 'aggregates';
