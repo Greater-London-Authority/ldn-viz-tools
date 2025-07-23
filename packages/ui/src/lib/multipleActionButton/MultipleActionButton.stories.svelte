@@ -3,9 +3,8 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
-	import MultipleActionButton, {
-		type MultipleActionButtonOption
-	} from './MultipleActionButton.svelte';
+	import MultipleActionButton from './MultipleActionButton.svelte';
+	import type { MultipleActionButtonOption } from './types';
 
 	/**
 	 * The `MultipleActionButton` combines a button and popover menu, so that the user can select which action
@@ -68,7 +67,12 @@
 				<Button onclick={() => (opts = [options[1]])}>Allow SVG only</Button>
 			</div>
 
-			<MultipleActionButton options={opts} menuTitle="Select image format" onClick={handleClick} />
+			<MultipleActionButton
+				{...args}
+				options={opts}
+				menuTitle="Select image format"
+				onClick={handleClick}
+			/>
 		</div>
 	{/snippet}
 </Story>

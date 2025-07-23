@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
+	import type { ButtonProps } from '../button/types';
 	/**
 	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.
 	 * @component
@@ -12,7 +14,7 @@
 
 	import { csvFormat } from 'd3-dsv';
 
-	type DataDownloadButtonProps = MultipleActionButtonProps & {
+	type DataDownloadButtonProps = ButtonProps & {
 		/**
 		 * The available data formats for the downloaded file.
 		 */
@@ -20,7 +22,7 @@
 		/**
 		 * The data that will be encoded in the downloaded file (formatted as an array of objects).
 		 */
-		data: Record<string, number | string>[];
+		data?: Record<string, number | string>[];
 		/**
 		 * A function which, when called with no arguments, will return the data to be saved in the downloaded file.
 		 * If this is provided, then the `data` prop is ignored.
@@ -42,6 +44,9 @@
 		 * If `true`, then button will fill full width of parent.
 		 */
 		fullWidth?: boolean;
+
+		beforeLabel?: Snippet;
+		afterLabel?: Snippet;
 	};
 
 	let {
@@ -82,7 +87,7 @@
 	const renameColumns = async () => {
 		const dataToSave = dataFn ? await Promise.resolve(dataFn()) : data;
 
-		return dataToSave.map((datum) => {
+		return dataToSave!.map((datum) => {
 			if (!columnMapping) {
 				return datum;
 			} else {

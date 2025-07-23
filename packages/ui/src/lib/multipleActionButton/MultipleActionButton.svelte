@@ -1,13 +1,3 @@
-<script lang="ts" module>
-	export type MultipleActionButtonOption = {
-		id: string;
-		buttonLabel: string;
-		menuLabel: string;
-		menuDescription: string;
-		default?: boolean;
-	};
-</script>
-
 <script lang="ts">
 	/**
 	 * The `MultipleActionButton` combines a button and popover menu, so that the user can select which action
@@ -22,7 +12,7 @@
 
 	import Button from '../button/Button.svelte';
 
-	import type { MultipleActionButtonProps } from './types';
+	import type { MultipleActionButtonOption, MultipleActionButtonProps } from './types';
 
 	let {
 		options = [],

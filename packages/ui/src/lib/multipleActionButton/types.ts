@@ -28,7 +28,7 @@ export type MultipleActionButtonProps = ButtonProps & {
 	/**
 	 * title that appears at the top ot the drop-down menu
 	 */
-	menuTitle: string;
+	menuTitle?: string;
 
 	/**
 	 * Function that will be called when the user clicks on the button.

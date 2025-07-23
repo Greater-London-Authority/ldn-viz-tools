@@ -8,7 +8,7 @@ type ButtonAsButton = Omit<HTMLButtonAttributes, 'href' | 'type'> & {
 };
 
 type ButtonAsLink = Omit<HTMLAnchorAttributes, 'href' | 'type'> & {
-	href: HTMLAnchorAttributes['href'];
+	href?: HTMLAnchorAttributes['href'];
 	type?: never;
 	disabled?: HTMLButtonAttributes['disabled'];
 };

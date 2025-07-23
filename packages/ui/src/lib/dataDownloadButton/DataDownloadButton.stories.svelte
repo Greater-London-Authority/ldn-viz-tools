@@ -38,34 +38,30 @@
 >
 	{#snippet template(args)}
 		<DataDownloadButton {...args}>
-			<Icon
-				src={ArrowDownTray}
-				theme="mini"
-				class="ml-2 h-5 w-5"
-				aria-hidden="true"
-				slot="afterLabel"
-			/>
+			{#snippet afterLabel()}
+				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
 		</DataDownloadButton>
 	{/snippet}
 </Story>
 
 <Story name="Without Icon">
-	{#snippet template()}
-		<DataDownloadButton {data} filename="download" />
+	{#snippet template(args)}
+		<DataDownloadButton {...args} {data} filename="download" />
 	{/snippet}
 </Story>
 
 <Story name="Full width">
-	{#snippet template()}
+	{#snippet template(args)}
 		<div class="w-full">
-			<DataDownloadButton {data} filename="download" fullWidth />
+			<DataDownloadButton {...args} {data} filename="download" fullWidth />
 		</div>
 	{/snippet}
 </Story>
 
 <Story name="With Icon before label">
-	{#snippet template()}
-		<DataDownloadButton {data} filename="download">
+	{#snippet template(args)}
+		<DataDownloadButton {...args} {data} filename="download">
 			{#snippet beforeLabel()}
 				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
 			{/snippet}
@@ -74,8 +70,9 @@
 </Story>
 
 <Story name="Rename Columns">
-	{#snippet template()}
+	{#snippet template(args)}
 		<DataDownloadButton
+			{...args}
 			{data}
 			filename="download"
 			columnMapping={{ A: 'foo', B: 'bar', C: 'baz' }}
@@ -84,84 +81,61 @@
 </Story>
 
 <Story name="Button types">
-	{#snippet template()}
+	{#snippet template(args)}
 		<div class="flex flex-col space-y-2">
-			<DataDownloadButton {data} filename="download" emphasis="primary">
-				<Icon
-					src={ArrowDownTray}
-					theme="mini"
-					class="ml-2 h-5 w-5"
-					aria-hidden="true"
-					slot="afterLabel"
-				/>
+			<DataDownloadButton {...args} {data} filename="download" emphasis="primary">
+				{#snippet afterLabel()}
+					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+				{/snippet}
 			</DataDownloadButton>
-			<DataDownloadButton {data} filename="download" emphasis="secondary">
-				<Icon
-					src={ArrowDownTray}
-					theme="mini"
-					class="ml-2 h-5 w-5"
-					aria-hidden="true"
-					slot="afterLabel"
-				/>
+			<DataDownloadButton {...args} {data} filename="download" emphasis="secondary">
+				{#snippet afterLabel()}
+					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+				{/snippet}
 			</DataDownloadButton>
-			<DataDownloadButton {data} filename="download" variant="outline" size="sm">
-				<Icon
-					src={ArrowDownTray}
-					theme="mini"
-					class="ml-2 h-5 w-5"
-					aria-hidden="true"
-					slot="afterLabel"
-				/>
+			<DataDownloadButton {...args} {data} filename="download" variant="outline" size="sm">
+				{#snippet afterLabel()}
+					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+				{/snippet}
 			</DataDownloadButton>
 		</div>
 	{/snippet}
 </Story>
 
 <Story name="Download as JSON - no choice">
-	{#snippet template()}
-		<DataDownloadButton {data} filename="download" formats={['JSON']}>
-			<Icon
-				src={ArrowDownTray}
-				theme="mini"
-				class="ml-2 h-5 w-5"
-				aria-hidden="true"
-				slot="afterLabel"
-			/>
+	{#snippet template(args)}
+		<DataDownloadButton {...args} {data} filename="download" formats={['JSON']}>
+			{#snippet afterLabel()}
+				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
 		</DataDownloadButton>
 	{/snippet}
 </Story>
 
 <Story name="Download as CSV - no choice">
-	{#snippet template()}
-		<DataDownloadButton {data} filename="download" formats={['CSV']}>
-			<Icon
-				src={ArrowDownTray}
-				theme="mini"
-				class="ml-2 h-5 w-5"
-				aria-hidden="true"
-				slot="afterLabel"
-			/>
+	{#snippet template(args)}
+		<DataDownloadButton {...args} {data} filename="download" formats={['CSV']}>
+			{#snippet afterLabel()}
+				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
 		</DataDownloadButton>
 	{/snippet}
 </Story>
 
 <Story name="Disabled">
-	{#snippet template()}
-		<DataDownloadButton {data} disabled={true} filename="download">
-			<Icon
-				src={ArrowDownTray}
-				theme="mini"
-				class="ml-2 h-5 w-5"
-				aria-hidden="true"
-				slot="afterLabel"
-			/>
+	{#snippet template(args)}
+		<DataDownloadButton {...args} {data} disabled={true} filename="download">
+			{#snippet afterLabel()}
+				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
 		</DataDownloadButton>
 	{/snippet}
 </Story>
 
 <Story name="Data obtained from function">
-	{#snippet template()}
+	{#snippet template(args)}
 		<DataDownloadButton
+			{...args}
 			dataFn={() =>
 				Array.from({ length: 10 }, () => ({
 					a: Math.floor(Math.random() * 100),
@@ -174,8 +148,9 @@
 </Story>
 
 <Story name="Data obtained from async function">
-	{#snippet template()}
+	{#snippet template(args)}
 		<DataDownloadButton
+			{...args}
 			dataFn={async () =>
 				Array.from({ length: 10 }, () => ({
 					a: Math.floor(Math.random() * 100),

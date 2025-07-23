@@ -9,7 +9,7 @@
 		tags: ['autodocs'],
 
 		argTypes: {
-			format: {
+			formats: {
 				options: ['PNG', 'SVG'],
 				control: { type: 'radio' },
 				table: {
@@ -26,8 +26,8 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
-	let htmlNode: HTMLElement = $state();
-	let svgRef: SVGElement = $state();
+	let htmlNode: HTMLElement = $state() as HTMLElement;
+	let svgRef: SVGElement = $state() as SVGElement;
 </script>
 
 <div
@@ -50,7 +50,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Disabled" source args={{ disabled: true }} />
+<Story name="Disabled" args={{ disabled: true }} />
 
 <Story name="Download as an SVG - no option">
 	{#snippet template()}

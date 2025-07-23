@@ -14,12 +14,11 @@
 
 	import { toPng } from 'html-to-image';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
-	import type {
-		MultipleActionButtonOption,
-		MultipleActionButtonProps
-	} from '../multipleActionButton/types.ts';
+	import type { MultipleActionButtonOption } from '../multipleActionButton/types.ts';
+	import type { ButtonProps } from '../button/types';
+	import type { Snippet } from 'svelte';
 
-	type ImageDownloadButtonProps = MultipleActionButtonProps & {
+	type ImageDownloadButtonProps = ButtonProps & {
 		/**
 		 * An `Element` node to be converted. When 'SVG' format is selected the largest child svg element will be targeted.
 		 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
@@ -50,6 +49,9 @@
 		 * If `true`, then button will fill full width of parent.
 		 */
 		fullWidth?: boolean;
+
+		beforeLabel?: Snippet;
+		afterLabel?: Snippet;
 	};
 
 	let {
@@ -158,8 +160,8 @@
 
 			// N.B. if we don't specify the width/height, then html-to-image will use the size of the HTML element before
 			// adjusting the style to add the padding. This would result in the content being truncated.
-			width: 2 * padding + getWidth(htmlNode),
-			height: 2 * padding + getHeight(htmlNode),
+			width: 2 * padding + getWidth(htmlNode as HTMLElement),
+			height: 2 * padding + getHeight(htmlNode as HTMLElement),
 
 			filter
 		};
@@ -226,7 +228,7 @@
 						})
 				: console.warn('No svgNode found');
 		} else if (format === 'PNG') {
-			toPng(htmlNode, { ...captureOptions, pixelRatio: scaleFactor })
+			toPng(htmlNode as HTMLElement, { ...captureOptions, pixelRatio: scaleFactor })
 				.then((dataUrl: string) => downloadFromURL(dataUrl))
 				.catch((error: any) => {
 					console.error('Error creating PNG:', error);
@@ -260,11 +262,9 @@
 		return opts;
 	});
 
-	let selectedOption: MultipleActionButtonOption = $state();
+	let selectedOption: MultipleActionButtonOption = $derived(options[0]);
 
 	let format = $derived(selectedOption?.id ?? 'PNG');
-
-	$inspect({ options, selectedOption });
 </script>
 
 <MultipleActionButton
