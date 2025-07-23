@@ -27,9 +27,9 @@
 <Story name="With Custom Icon">
 	{#snippet template()}
 		<SidebarToggle>
-			<svelte:fragment slot="icon">
+			{#snippet icon()}
 				<Icon src={AdjustmentsHorizontal} class="p-1" aria-hidden="true" />
-			</svelte:fragment>
+			{/snippet}
 		</SidebarToggle>
 	{/snippet}
 </Story>
