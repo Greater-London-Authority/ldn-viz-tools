@@ -1,7 +1,7 @@
 <script lang="ts">
 	interface Props {
 		title?: string;
-		[key: string]: any
+		[key: string]: any;
 	}
 
 	let { title = '', ...rest }: Props = $props();
