@@ -13,6 +13,10 @@ export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 
 export { default as Input } from './input/Input.svelte';
 export { default as InputWrapper } from './input/InputWrapper.svelte';
+
+export { default as LayerControl } from './layerControl/LayerControl.svelte';
+export { default as LayerControlGroup } from './layerControl/LayerControlGroup.svelte';
+
 export { default as LoadingIndicator } from './loadingIndicator/LoadingIndicator.svelte';
 
 export { default as LogoByCIU } from './logos/LogoByCIU.svelte';
