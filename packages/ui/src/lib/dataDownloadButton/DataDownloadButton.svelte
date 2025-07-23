@@ -118,17 +118,17 @@
 		return opts;
 	});
 
-	let selectedOption: MultipleActionButtonOption = $state(options[0]);
+	let selectedOption: MultipleActionButtonOption = $derived(options[0]);
 	let format = $derived(selectedOption?.id ?? 'CSV');
 	let download = $derived(format === 'JSON' ? downloadJSON : downloadCSV);
 </script>
 
 <MultipleActionButton
+	{...restProps}
 	{options}
 	bind:state={selectedOption}
 	menuTitle="Select data format"
 	onClick={download}
 	{disabled}
 	{fullWidth}
-	{...restProps}
 ></MultipleActionButton>
