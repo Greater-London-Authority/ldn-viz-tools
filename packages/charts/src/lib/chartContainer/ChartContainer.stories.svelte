@@ -25,6 +25,7 @@
 <Story name="With Title">
 	{#snippet template(args)}
 		<ChartContainer
+			{...args}
 			title="This is the Chart Title"
 			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
@@ -35,6 +36,7 @@
 <Story name="With Title and Subtitle">
 	{#snippet template(args)}
 		<ChartContainer
+			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
 			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
@@ -46,6 +48,7 @@
 <Story name="With Title, Subtitle, and Controls">
 	{#snippet template(args)}
 		<ChartContainer
+			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
 			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
@@ -64,6 +67,7 @@
 <Story name="Source, byline and note (footer)">
 	{#snippet template(args)}
 		<ChartContainer
+			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
 			source="GLA city intelligence"
@@ -81,6 +85,7 @@
 <Story name="Source, byline only">
 	{#snippet template(args)}
 		<ChartContainer
+			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
 			source="The source of this chart data"
@@ -102,6 +107,7 @@
 <Story name="With Override Class">
 	{#snippet template(args)}
 		<ChartContainer
+			{...args}
 			overrideClass="bg-color-palette-red-500"
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
@@ -127,6 +133,7 @@ This story show how you can place two (or more) sites side-by-side, and ensure t
 			style="grid-template-rows: auto auto auto;"
 		>
 			<ChartContainer
+				{...args}
 				overrideClass="bg-color-palette-red-500"
 				title="This is the Chart Title"
 				subTitle="Subtitle provides extra context"
@@ -140,6 +147,7 @@ This story show how you can place two (or more) sites side-by-side, and ensure t
 			/>
 
 			<ChartContainer
+				{...args}
 				overrideClass="bg-color-palette-red-500"
 				title="This is the Chart Title"
 				subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so wil wrap earlier."

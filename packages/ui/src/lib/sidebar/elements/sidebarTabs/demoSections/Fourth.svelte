@@ -21,7 +21,7 @@
 </script>
 
 <SidebarSection title="First Section Title">
-	<SidebarGroup title={'First Group Title'}>
+	<SidebarGroup title="First Group Title">
 		<Select {options} label="Label" id="example-input-1" />
 		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group One" />
 	</SidebarGroup>

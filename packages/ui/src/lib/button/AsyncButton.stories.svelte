@@ -3,7 +3,7 @@
 	import { DocumentArrowUp } from '@steeze-ui/heroicons';
 	import AsyncButton from './AsyncButton.svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { type AsyncButtonProps, type ButtonProps } from './types';
+	import { type AsyncButtonProps } from './types';
 
 	/**
 	 * The `<AsyncButton>` component wraps the `<button>` component for slow

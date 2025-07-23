@@ -115,7 +115,7 @@
 </Story>
 
 <Story name="Suggestions dropdown">
-	{#snippet template({})}
+	{#snippet template()}
 		<div class="m-6 space-y-6">
 			<p class="dark:text-white">
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
@@ -149,7 +149,7 @@
 </Story>
 
 <Story name="Selected">
-	{#snippet template({})}
+	{#snippet template()}
 		<div class="m-6 space-y-6">
 			<p class="dark:text-white">
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
@@ -183,7 +183,7 @@
 </Story>
 
 <Story name="Disabled dropdown">
-	{#snippet template({})}
+	{#snippet template()}
 		<div class="m-6 space-y-6">
 			<p class="dark:text-white">
 				I've disabled the dropdown in this story, instead, I'm accessing the results by binding on
@@ -212,7 +212,7 @@
 </Story>
 
 <Story name="Custom placeholder">
-	{#snippet template({})}
+	{#snippet template()}
 		<div class="m-6 space-y-6">
 			<p class="dark:text-white">
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so

@@ -159,7 +159,7 @@
 
 <Story name="Disabled">
 	{#snippet template(args)}
-		<Select {options} label="Label" description="descriptive text" disabled />
+		<Select {...args} {options} label="Label" description="descriptive text" disabled />
 	{/snippet}
 </Story>
 
@@ -219,7 +219,7 @@
 <Story name="Options with different field names">
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
-			<Select options={optionsAltFieldNames} labelField="word" valueField="number" />
+			<Select {...args} options={optionsAltFieldNames} labelField="word" valueField="number" />
 		</div>
 	{/snippet}
 </Story>
