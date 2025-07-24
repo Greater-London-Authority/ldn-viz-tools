@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { Button, Overlay, Popover, Select } from '@ldn-viz/ui';
-	import { Funnel } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Button, Overlay, Select } from '@ldn-viz/ui';
 
 	let { col, table } = $props();
 
@@ -69,6 +67,6 @@
 	{/if}
 	<span>TODO: These should be proper Input components...</span>
 
-	<Button on:click={applyFilter}>Apply</Button>
-	<Button on:click={clearFilter}>Clear</Button>
+	<Button onclick={applyFilter}>Apply</Button>
+	<Button onclick={clearFilter}>Clear</Button>
 </Overlay>

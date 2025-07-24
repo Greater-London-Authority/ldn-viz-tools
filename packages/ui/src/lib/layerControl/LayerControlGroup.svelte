@@ -237,7 +237,7 @@
 	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
 		{#if mutuallyExclusive}
 			{#if !buttonsHidden}
-				<Button {disabled} variant="text" class="!px-0" on:click={clearRadioButtons}>Clear</Button>
+				<Button {disabled} variant="text" class="!px-0" onclick={clearRadioButtons}>Clear</Button>
 			{/if}
 
 			<ul class="flex flex-col space-y-1">

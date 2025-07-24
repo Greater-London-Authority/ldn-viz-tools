@@ -39,7 +39,7 @@
 			theme="solid"
 			class="ml-0.5 h-[18px] w-[18px]"
 			aria-hidden="true"
-			on:click={() => table.toggleGroupCollapsed(group, true)}
+			onclick={() => table.toggleGroupCollapsed(group, true)}
 		/>
 	</button>
 

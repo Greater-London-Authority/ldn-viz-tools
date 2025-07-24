@@ -242,7 +242,7 @@
 
 <Story name="Table updates when data changes" source>
 	{#snippet template()}
-		<Button on:click={randomlySelectRows}>Update</Button>
+		<Button onclick={randomlySelectRows}>Update</Button>
 		<Table data={dataSubset} {tableSpec} allowSorting filename="My Table" />
 	{/snippet}
 </Story>

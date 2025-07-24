@@ -209,7 +209,7 @@
 							class="padding-0 width-fit border-0 font-bold"
 						/>
 						<Button
-							on:click={() => deleteCat(groupName)}
+							onclick={() => deleteCat(groupName)}
 							variant="text"
 							size="sm"
 							title="Click to delete this category."
@@ -228,7 +228,7 @@
 							ondragstart={(ev) => dragStart(ev, groupName)}
 						>
 							<Button
-								on:click={() => removeFromCat(groupName, val)}
+								onclick={() => removeFromCat(groupName, val)}
 								variant="text"
 								size="sm"
 								class="h-5 py-0 leading-5"
