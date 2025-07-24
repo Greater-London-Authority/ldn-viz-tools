@@ -44,8 +44,6 @@
 
 	let errorId = $derived(error ? `${id}-error` : undefined);
 	let descriptionId = $derived(description ? `${id}-description` : undefined);
-
-	$inspect(options);
 </script>
 
 <InputWrapper
