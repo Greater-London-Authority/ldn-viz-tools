@@ -68,6 +68,7 @@ export { default as ThemeSwitcher } from './theme/ThemeSwitcher.svelte';
 
 export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCookieConsent.svelte';
 export { default as CookieControlSettings } from './analytics/CookieControlSettings.svelte';
+export { default as PageMetadata } from './pageMetadata/PageMetadata.svelte';
 
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
 export * from './geolocation/GeocoderAdapter';
