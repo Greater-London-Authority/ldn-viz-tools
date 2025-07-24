@@ -184,6 +184,6 @@
 			allowClear={false}
 			error={!selectedIdForError ? 'You must select an option' : undefined}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedIdForError}</p>
 	{/snippet}
 </Story>
