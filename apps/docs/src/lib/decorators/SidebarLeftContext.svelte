@@ -1,5 +1,8 @@
 <script>
-	import { getSidebarState, setSidebarState } from '@ldn-viz/ui';
+	import {
+		getSidebarState,
+		setSidebarState
+	} from '../../../../../packages/ui/src/lib/sidebar/sidebarState.svelte';
 
 	setSidebarState();
 	let sidebarState = getSidebarState();
@@ -9,6 +12,6 @@
 	let { children } = $props();
 </script>
 
-<div>
+<div class="relative min-h-dvh">
 	{@render children?.()}
 </div>

@@ -50,7 +50,7 @@ export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSectio
 export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
 export { default as SidebarToggle } from './sidebar/elements/sidebarToggle/SidebarToggle.svelte';
 export { default as Sidebar } from './sidebar/Sidebar.svelte';
-export * from './sidebar/sidebarState.svelte';
+export { getSidebarState, setSidebarState } from './sidebar/sidebarState.svelte';
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as Switch } from './switch/Switch.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';

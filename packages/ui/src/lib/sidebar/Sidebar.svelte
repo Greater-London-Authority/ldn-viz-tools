@@ -14,10 +14,9 @@
 		widthLookup
 	} from './sidebarUtils';
 
-	import { getSidebarState, setSidebarState } from './sidebarState.svelte';
+	import { getSidebarState } from './sidebarState.svelte';
 	import type { SidebarProps } from './types';
 
-	setSidebarState();
 	let sidebarState = getSidebarState();
 
 	let {
@@ -51,6 +50,8 @@
 	let tabPlacementClasses = $derived(tabPlacementLookup[sidebarState.placement]);
 	let widthClasses = $derived(widthLookup[sidebarState.width][sidebarState.placement]);
 	let heightClasses = $derived(heightLookup[sidebarState.width][sidebarState.placement]);
+
+	$inspect(sidebarState.isOpen);
 </script>
 
 <div class={classNames(wrapperClasses, placementClasses)}>

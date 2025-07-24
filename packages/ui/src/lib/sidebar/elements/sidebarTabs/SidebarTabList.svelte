@@ -72,7 +72,7 @@
 			tabLabelOverride
 		)}
 	/>
-	{#if sidebarState.isOpen}
+	{#if sidebarState.isOpen && !sidebarState.isAlwaysOpen}
 		<div
 			class={`text-color-text-secondary hover:bg-color-action-secondary-muted-hover ${tabLabelOverride}`}
 		>
