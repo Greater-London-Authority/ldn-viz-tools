@@ -21,7 +21,13 @@
 		[key: string]: any;
 	}
 
-	let { values, extent, showAllPoints = false, width = 100, ...rest }: Props = $props();
+	let {
+		values = [],
+		extent = [0, 1],
+		showAllPoints = false,
+		width = 100,
+		...rest
+	}: Props = $props();
 
 	const height = 30;
 	const marginRight = 10;
@@ -136,7 +142,7 @@
 	};
 
 	$effect(() => {
-		update(values);
+		update(values || []);
 	});
 	$effect(() => {
 		drawCanvas(box, showAllPoints, canvasRef);

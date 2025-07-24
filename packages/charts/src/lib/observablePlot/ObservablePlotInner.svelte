@@ -228,7 +228,7 @@
 
 	let unclean = false;
 	const updateDimensions = () => {
-		if (spec.width !== width) {
+		if (spec && spec.width !== width) {
 			spec.width = width;
 
 			// the #key block is no longer triggering a re-render when spec.width changes
