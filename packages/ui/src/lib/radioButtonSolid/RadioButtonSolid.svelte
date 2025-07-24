@@ -6,17 +6,20 @@
 	 * @component
 	 */
 
-	import type { InputProps } from '$lib/input/types';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { classNames } from '../utils/classNames';
+	import type { RadioButtonSolidProps } from './types';
 
-	interface Props extends InputProps {
-		/**
-		 * `id` of the selected radio button in group.
-		 */
-		selectedId?: string;
-	}
-
-	let { selectedId = $bindable(''), label, id, name, disabled = false, children }: Props = $props();
+	let {
+		selectedId = $bindable(''),
+		label,
+		id,
+		name,
+		disabled = false,
+		icon,
+		rawIcon,
+		iconPlacement = 'above'
+	}: RadioButtonSolidProps = $props();
 
 	let inputID = `input-${name || ''}-${id}`;
 
@@ -29,6 +32,11 @@
 			'peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-color-ui-background-primary peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-inset peer-focus:ring-offset-2'
 		)
 	);
+
+	const iconOrientationClasses = {
+		above: 'h-5 w-5 mb-1',
+		below: 'h-5 w-5 mt-1'
+	};
 </script>
 
 <div class="flex w-full">
@@ -44,10 +52,17 @@
 	/>
 	<label for={inputID} class={labelClasses}>
 		<!-- contents of the radio button (name and/or icon) -->
-		{#if children}
-			{@render children()}
-		{:else}
-			{label}
+		{#if icon}
+			<Icon
+				src={icon}
+				theme="mini"
+				class={iconOrientationClasses[iconPlacement]}
+				aria-hidden="true"
+			/>
+		{:else if rawIcon}
+			<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></rawIcon>
 		{/if}
+
+		{label}
 	</label>
 </div>
