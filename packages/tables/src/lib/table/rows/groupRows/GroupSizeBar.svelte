@@ -20,7 +20,7 @@
 	<div
 		class="relative top-0 z-[-1]"
 		style:margin-top={stretchUp ? '-5px' : ''}
-		style:height={'100%'}
+		style:height="100%"
 		style:background={table.scales ? table.scales[fieldName](val) : 'lightgrey'}
 		style:left={fPercentage(0)}
 		style:width={fPercentage(group.order.length / table.data.length)}

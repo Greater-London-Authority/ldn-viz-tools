@@ -18,7 +18,7 @@
 </script>
 
 <Story name="Default">
-	{#snippet template(args)}
+	{#snippet template()}
 		<Header></Header>
 	{/snippet}
 </Story>

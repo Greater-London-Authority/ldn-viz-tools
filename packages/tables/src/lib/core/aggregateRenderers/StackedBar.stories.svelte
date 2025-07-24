@@ -19,8 +19,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<StackedBar {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<StackedBar {...args} />
+	{/snippet}
+</Story>

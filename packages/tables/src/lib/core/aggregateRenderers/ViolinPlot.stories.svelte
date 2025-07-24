@@ -13,8 +13,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<ViolinPlot {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet tmplate(args)}
+		<ViolinPlot {...args} />
+	{/snippet}
+</Story>

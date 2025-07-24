@@ -14,11 +14,11 @@
 	});
 </script>
 
-{#snippet defaultTemplate(args)}
-	<BarDivergingCell {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<BarDivergingCell {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Custom colors">
 	{#snippet template({ args })}

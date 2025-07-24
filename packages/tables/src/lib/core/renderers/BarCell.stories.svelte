@@ -14,8 +14,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<BarCell {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<BarCell {...args} />
+	{/snippet}
+</Story>

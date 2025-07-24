@@ -21,15 +21,15 @@
 	});
 </script>
 
-{#snippet defaultTemplate(args)}
-	<BarChart {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<BarChart {...args} />
+	{/snippet}
+</Story>
 
 <!-- Bars are labelled if there are 3 or fewer bars. -->
 <Story name="Few labels">
-	{#snippet template(args)}
+	{#snippet template()}
 		<BarChart
 			values={['a', 'a', 'b', 'b', 'b', 'b', 'c', 'c']}
 			colorScale={scaleOrdinal()
