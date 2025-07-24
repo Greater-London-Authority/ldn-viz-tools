@@ -14,10 +14,9 @@
 		widthLookup
 	} from './sidebarUtils';
 
-	import { getSidebarState, setSidebarState } from './sidebarState.svelte';
+	import { getSidebarState } from './sidebarState.svelte';
 	import type { SidebarProps } from './types';
 
-	setSidebarState();
 	let sidebarState = getSidebarState();
 
 	let {

@@ -1,4 +1,7 @@
 // Reexport your entry components here
+export { default as AppShell } from './appShell/AppShell.svelte';
+export * from './appShell/utils/getSettingByScreenWidth';
+
 export { default as AsyncButton } from './button/AsyncButton.svelte';
 export { default as Button } from './button/Button.svelte';
 export { default as Callout } from './callout/Callout.svelte';
@@ -50,7 +53,7 @@ export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSectio
 export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/SidebarTabList.svelte';
 export { default as SidebarToggle } from './sidebar/elements/sidebarToggle/SidebarToggle.svelte';
 export { default as Sidebar } from './sidebar/Sidebar.svelte';
-export * from './sidebar/sidebarState.svelte';
+export { getSidebarState, setSidebarState } from './sidebar/sidebarState.svelte';
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as Switch } from './switch/Switch.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';

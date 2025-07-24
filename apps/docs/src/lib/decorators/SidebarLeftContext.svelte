@@ -1,5 +1,6 @@
 <script>
 	// import { getSidebarState, setSidebarState } from '@ldn-viz/ui';
+
 	import {
 		getSidebarState,
 		setSidebarState
@@ -13,6 +14,6 @@
 	let { children } = $props();
 </script>
 
-<div>
+<div class="relative min-h-dvh">
 	{@render children?.()}
 </div>

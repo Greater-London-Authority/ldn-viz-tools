@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { RelativeWrapper } from '../../../../../apps/docs';
+	import { SidebarLeftContext } from '../../../../../apps/docs/src/lib';
 	import LogoCIU from '../logos/LogoCIU.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
 	import Sidebar from './Sidebar.svelte';
@@ -29,7 +29,7 @@
 	 * @component
 	 */
 
-	let tabs = [
+	export let tabs = [
 		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
 		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
 		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
@@ -39,7 +39,7 @@
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
-		decorators: [() => RelativeWrapper as any],
+		decorators: [() => SidebarLeftContext as any],
 		render: defaultTemplate,
 		parameters: {
 			layout: 'fullscreen',
@@ -80,6 +80,10 @@
 	});
 
 	let selectedTabId = $state('markers');
+
+	// The sidebar component relies on contesxt from setSidebarState()
+	// This is usually defined in a parent appShell, so you dont need to worry about setting it manually.
+	// If you ARE using a sidebar outside an appShell the you need to include setSidebarState() in you layout or page (higest level)
 </script>
 
 <!-- Snippets for stories. Defaults defined as args, overridden per story as needed  -->
