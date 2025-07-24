@@ -49,7 +49,7 @@
 		 */
 		ariaLabel?: string;
 
-		onChange: (selectedOptions: string[]) => void;
+		onChange?: (selectedOptions: string[]) => void;
 	}
 
 	let {
@@ -68,7 +68,7 @@
 		selectedOptions = $bindable([]),
 		hideSelectAll = false,
 		customOverlay = undefined,
-		onChange
+		onChange = () => {}
 	}: CheckboxGroupProps = $props();
 
 	let errorId = $derived(error ? `${id}-error` : undefined);
