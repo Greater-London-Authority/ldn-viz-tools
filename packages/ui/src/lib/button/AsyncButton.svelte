@@ -1,11 +1,12 @@
 <script lang="ts">
-	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 	import Button from '../button/Button.svelte';
+	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 	import type { AsyncButtonProps } from './types.ts';
 
 	let {
 		children,
 		onclick,
+		onDone = () => null,
 		working = $bindable(),
 		emphasis,
 		size,
@@ -66,6 +67,7 @@
 			console.error(err);
 		} finally {
 			working = false;
+			onDone();
 		}
 	};
 </script>
