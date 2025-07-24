@@ -39,6 +39,19 @@
 	};
 </script>
 
+{#snippet iconComponent()}
+    {#if icon}
+	<Icon
+            src={icon}
+            theme="mini"
+            class={iconOrientationClasses[iconPlacement]}
+            aria-hidden="true"
+	/>
+    {:else if rawIcon}
+        <rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true" />
+    {/if}
+{/snippet}
+
 <div class="flex w-full">
 	<input
 		id={inputID}
