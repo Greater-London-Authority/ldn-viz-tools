@@ -15,8 +15,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate(args)}
-	<BoxPlot {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<BoxPlot {...args} />
+	{/snippet}
+</Story>
