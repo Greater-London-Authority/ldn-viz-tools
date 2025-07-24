@@ -23,11 +23,8 @@
 	}
 
 	let { message }: Props = $props();
-	let classes = $state(typeClasses[message.type]);
 
-	if (!classes) {
-		classes = 'bg-color-ui-background-neutral';
-	}
+	let classes = $derived(typeClasses[message.type] ?? 'bg-color-ui-background-neutral');
 </script>
 
 <div

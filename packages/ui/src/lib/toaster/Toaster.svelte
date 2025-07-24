@@ -51,21 +51,19 @@
 	import { messages } from './toaster';
 	import type { ToasterPosition } from './types';
 
-	// position of the `Toaster`. You can specify your own classes
-
-	// classes for applying additional classes. These are appended to the class
-
 	interface Props {
-		// for positioning via the classes property if you want something bespoke.
+		/** position of the `Toaster`. You can specify your own classes
+		for positioning via the classes property if you want something bespoke.*/
 		position?: keyof typeof ToasterPosition;
-		// string so they have implicit but weak priority over other styles.
+		/** classes for applying additional classes. These are appended to the class
+		string so they have implicit but weak priority over other styles.*/
 		classes?: string;
+
+		/** other props applied to the top-level `<div>` that contains the toast messages.*/
 		[key: string]: any;
 	}
 
 	let { position = 'TopCenter', classes = '', ...rest }: Props = $props();
-
-	// ...$$restProps applied to the top-level `<div>` that contains the toast messages.
 
 	let posClasses = $derived(positionClasses[position] || '');
 </script>
