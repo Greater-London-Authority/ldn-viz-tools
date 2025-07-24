@@ -54,7 +54,7 @@
 		sidebarAlwaysOpen = { initial: false },
 		sidebarPush = false,
 		startOpen = true,
-		sidebarIsOpen = $bindable(false),
+		sidebarIsOpen = $bindable(startOpen),
 		heightClass = 'min-h-dvh',
 		main,
 		sidebar
