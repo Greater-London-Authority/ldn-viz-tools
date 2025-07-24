@@ -7,7 +7,6 @@
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 	import SidebarSection from '../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 
 	let subMenu = [
@@ -58,9 +57,6 @@
 		}
 	];
 </script>
-
-<!--Only need the theme in a story in an app this will be in the layout-->
-<Theme />
 
 <AppShell sidebarPlacement={{ initial: 'left' }}>
 	{#snippet main()}

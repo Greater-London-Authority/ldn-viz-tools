@@ -5,13 +5,9 @@
 	import Sidebar from '../../sidebar/Sidebar.svelte';
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 	import { Demo1 } from './demoTabs';
 </script>
-
-<!--Only need the theme in a story in an app this will be in the layout-->
-<Theme />
 
 <AppShell>
 	{#snippet main()}

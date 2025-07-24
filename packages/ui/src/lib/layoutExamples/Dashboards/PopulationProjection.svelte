@@ -11,7 +11,6 @@
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 
-	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 	import { Demo1, Pop1, Sewers } from './demoTabs';
 
@@ -22,8 +21,6 @@
 	];
 </script>
 
-<!--Only need the theme in a story in an app this will be in the layout-->
-<Theme />
 <AppShell sidebarPlacement={{ initial: 'left' }} sidebarAlwaysOpen={{ initial: false, md: true }}>
 	{#snippet main()}
 		<div class="bg-color-canvas-background-1 h-full p-6 pl-24">
