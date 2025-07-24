@@ -50,8 +50,6 @@
 	let tabPlacementClasses = $derived(tabPlacementLookup[sidebarState.placement]);
 	let widthClasses = $derived(widthLookup[sidebarState.width][sidebarState.placement]);
 	let heightClasses = $derived(heightLookup[sidebarState.width][sidebarState.placement]);
-
-	$inspect(sidebarState.isOpen);
 </script>
 
 <div class={classNames(wrapperClasses, placementClasses)}>
