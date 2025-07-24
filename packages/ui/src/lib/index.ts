@@ -28,6 +28,9 @@ export { default as Modal } from './modal/Modal.svelte';
 export { default as MultipleActionButton } from './multipleActionButton/MultipleActionButton.svelte';
 export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelte';
 export { default as NonIdealState } from './nonIdealState/NonIdealState.svelte';
+
+export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+
 export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';
 export { default as PlacardButton } from './placardButton/PlacardButton.svelte';
