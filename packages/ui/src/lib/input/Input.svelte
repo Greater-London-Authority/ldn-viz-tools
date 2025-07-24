@@ -18,7 +18,7 @@
 		format = trimInput,
 		description = '',
 		error = '',
-		value = $bindable(''),
+		value = $bindable(),
 		disabled = false,
 		descriptionAlignment = 'left',
 		hint,
@@ -64,7 +64,7 @@
 			return;
 		}
 
-		value = `${format(value, {
+		value = `${format(value || '', {
 			name,
 			type,
 			disabled: !!disabled

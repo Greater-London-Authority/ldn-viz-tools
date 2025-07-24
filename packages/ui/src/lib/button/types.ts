@@ -35,4 +35,10 @@ export type AsyncButtonProps = ButtonAsButton &
 		 * Bind to this property for reactive updates to button click state.
 		 */
 		working?: boolean;
+
+		/**
+		 *
+		 * Function to be called when the `onClick` function has completed.
+		 */
+		onDone?: () => void;
 	};
