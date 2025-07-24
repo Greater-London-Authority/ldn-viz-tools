@@ -65,6 +65,10 @@ export { default as TabPanel } from './tabs/TabPanel.svelte';
 export { default as Tabs } from './tabs/Tabs.svelte';
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 
+export * from './toaster/toaster';
+export { default as Toaster } from './toaster/Toaster.svelte';
+export * from './toaster/types';
+
 export { default as Theme } from './theme/Theme.svelte';
 export { theme } from './theme/themeState.svelte.js';
 export { default as ThemeSwitcher } from './theme/ThemeSwitcher.svelte';
