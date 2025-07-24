@@ -10,8 +10,9 @@
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
+	import type { RadioButtonSolidProps } from './types';
 
-	export interface RadioButtonGroupSolidProps extends InputProps {
+	export interface RadioButtonGroupSolidProps extends Omit<InputProps, 'children'> {
 		/**
 		 * the `id` of the entry in the `options` array that is currently selected.
 		 */
@@ -22,11 +23,7 @@
 		 * * `label` (string) - the text displayed within the button
 		 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
 		 */
-		options?: {
-			id: string;
-			label: string;
-			disabled?: boolean;
-		}[];
+		options?: RadioButtonSolidProps[];
 	}
 
 	let {
@@ -42,7 +39,6 @@
 		selectedId = $bindable(''),
 		name,
 		options = [],
-		children,
 		customOverlay = undefined
 	}: RadioButtonGroupSolidProps = $props();
 
@@ -73,11 +69,11 @@
 					disabled={option.disabled || disabled}
 					bind:selectedId
 					{name}
+					icon={option.icon}
+					rawIcon={option.rawIcon}
+					iconPlacement={option.iconPlacement}
 				/>
 			{/each}
-		{:else}
-			<!-- should contain a series of `<RadioButtonSolid>` components, included to allow for icons  -->
-			{@render children?.()}
 		{/if}
 	</div>
 </InputWrapper>

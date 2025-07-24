@@ -1,10 +1,9 @@
 <script module lang="ts">
 	import { Funnel, Map, PresentationChartLine } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
-	import RadioButtonSolid from './RadioButtonSolid.svelte';
+	import type { RadioButtonSolidProps } from './types';
 
 	/**
 	 * The `RadioButtonGroupSolid` component contains a set of `RadioButtonSolid` buttons for switching between tabs or selecting one option from a small number of alternatives.
@@ -32,11 +31,28 @@
 	let selectedId11: string = $state('');
 	let selectedIdForError: string = $state('');
 
-	let optionsForGroup = [
+	let optionsForGroup: RadioButtonSolidProps[] = [
 		{ id: 'bus', label: 'Bus stops' },
 		{ id: 'train', label: 'Train stations' },
 		{ id: 'underground', label: 'Underground stations' },
 		{ id: 'taxi', label: 'Taxi ranks', disabled: true }
+	];
+
+	let optionsForGroupIconsAbove: RadioButtonSolidProps[] = [
+		{ id: 'bus', label: 'Bus stops', icon: Funnel },
+		{ id: 'train', label: 'Train stations', icon: Map },
+		{ id: 'underground', label: 'Underground stations', icon: PresentationChartLine }
+	];
+
+	let optionsForGroupIconsBelow: RadioButtonSolidProps[] = [
+		{ id: 'bus', label: 'Bus stops', icon: Funnel, iconPlacement: 'below' },
+		{ id: 'train', label: 'Train stations', icon: Map, iconPlacement: 'below' },
+		{
+			id: 'underground',
+			label: 'Underground stations',
+			icon: PresentationChartLine,
+			iconPlacement: 'below'
+		}
 	];
 </script>
 
@@ -126,81 +142,37 @@ different values as the `name` prop.
 
 <Story name="With Icons above">
 	{#snippet template(args)}
-		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId7} {...args}>
-			<RadioButtonSolid id="bus" name="station-type">
-				<Icon src={Funnel} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Bus
-			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type">
-				<Icon src={Map} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Train
-			</RadioButtonSolid>
-			<RadioButtonSolid id="plane" name="station-type">
-				<Icon src={PresentationChartLine} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Plane
-			</RadioButtonSolid>
-		</RadioButtonGroupSolid>
+		<RadioButtonGroupSolid
+			name="station-type"
+			options={optionsForGroupIconsAbove}
+			bind:selectedId={selectedId7}
+			{...args}
+		></RadioButtonGroupSolid>
 		<p class="text-color-text-secondary mt-8">Selected id: {selectedId7}</p>
 	{/snippet}
 </Story>
 
 <Story name="With Icons below">
 	{#snippet template(args)}
-		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId8} {...args}>
-			<RadioButtonSolid id="bus" name="station-type">
-				Bus
-				<Icon src={Funnel} theme="mini" class="mt-1 h-5 w-5" aria-hidden="true" />
-			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type">
-				Train
-				<Icon src={Map} theme="mini" class="mt-1 h-5 w-5" aria-hidden="true" />
-			</RadioButtonSolid>
-			<RadioButtonSolid id="plane" name="station-type">
-				Plane
-				<Icon src={PresentationChartLine} theme="mini" class="mt-1 h-5 w-5" aria-hidden="true" />
-			</RadioButtonSolid>
-		</RadioButtonGroupSolid>
+		<RadioButtonGroupSolid
+			name="station-type"
+			options={optionsForGroupIconsBelow}
+			bind:selectedId={selectedId8}
+			{...args}
+		></RadioButtonGroupSolid>
 		<p class="text-color-text-secondary mt-8">Selected id: {selectedId8}</p>
 	{/snippet}
 </Story>
 
 <Story name="With 2 options">
 	{#snippet template(args)}
-		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId9} {...args}>
-			<RadioButtonSolid id="bus" name="station-type">
-				<Icon src={Funnel} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Bus
-			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type">
-				<Icon src={Map} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Train
-			</RadioButtonSolid>
-		</RadioButtonGroupSolid>
+		<RadioButtonGroupSolid
+			name="station-type"
+			options={[optionsForGroup[0], optionsForGroup[1]]}
+			bind:selectedId={selectedId9}
+			{...args}
+		></RadioButtonGroupSolid>
 		<p class="text-color-text-secondary mt-8">Selected id: {selectedId9}</p>
-	{/snippet}
-</Story>
-
-<Story name="With 4 options">
-	{#snippet template(args)}
-		<RadioButtonGroupSolid name="station-type" bind:selectedId={selectedId10} {...args}>
-			<RadioButtonSolid id="bus" name="station-type">
-				<Icon src={Funnel} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Bus
-			</RadioButtonSolid>
-			<RadioButtonSolid id="train" name="station-type">
-				<Icon src={Map} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Train
-			</RadioButtonSolid>
-			<RadioButtonSolid id="plane" name="station-type">
-				<Icon src={PresentationChartLine} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				Plane
-			</RadioButtonSolid>
-			<RadioButtonSolid id="long" name="station-type">
-				<Icon src={PresentationChartLine} theme="mini" class="mb-1 h-5 w-5" aria-hidden="true" />
-				This_label_is_far_too_long
-			</RadioButtonSolid>
-		</RadioButtonGroupSolid>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId10}</p>
 	{/snippet}
 </Story>
 
