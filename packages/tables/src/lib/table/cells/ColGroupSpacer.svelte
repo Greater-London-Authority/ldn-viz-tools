@@ -1,13 +1,11 @@
 <script lang="ts">
 	import type { ColGroup } from '$lib/core/lib/types';
 
-
-	
 	interface Props {
 		table: any;
 		/**
-	 * Index of column that precedes this gap.
-	 */
+		 * Index of column that precedes this gap.
+		 */
 		i: number;
 	}
 

@@ -4,7 +4,6 @@
 	import GroupRowCombined from './groupRows/GroupRowCombined.svelte';
 	import GroupSummaryRow from './groupRows/GroupSummaryRow.svelte';
 
-
 	let { spec, table } = $props();
 </script>
 

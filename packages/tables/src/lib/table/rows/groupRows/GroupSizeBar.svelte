@@ -11,20 +11,14 @@
 	 */
 
 	/** @type {Props} */
-	let {
-		table,
-		group,
-		stretchUp = false,
-		fieldName,
-		val
-	} = $props();
+	let { table, group, stretchUp = false, fieldName, val } = $props();
 
 	const fPercentage = format('0.0%');
 </script>
 
 <div style:width={table.widths.groupSizeBar}>
 	<div
-		class="top-0 z-[-1] relative"
+		class="relative top-0 z-[-1]"
 		style:margin-top={stretchUp ? '-5px' : ''}
 		style:height={'100%'}
 		style:background={table.scales ? table.scales[fieldName](val) : 'lightgrey'}

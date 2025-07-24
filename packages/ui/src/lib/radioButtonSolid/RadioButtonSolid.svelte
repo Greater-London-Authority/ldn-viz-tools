@@ -40,16 +40,16 @@
 </script>
 
 {#snippet iconComponent()}
-    {#if icon}
-	<Icon
-            src={icon}
-            theme="mini"
-            class={iconOrientationClasses[iconPlacement]}
-            aria-hidden="true"
-	/>
-    {:else if rawIcon}
-        <rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true" />
-    {/if}
+	{#if icon}
+		<Icon
+			src={icon}
+			theme="mini"
+			class={iconOrientationClasses[iconPlacement]}
+			aria-hidden="true"
+		/>
+	{:else if rawIcon}
+		<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true" />
+	{/if}
 {/snippet}
 
 <div class="flex w-full">
@@ -66,11 +66,11 @@
 	<label for={inputID} class={labelClasses}>
 		<!-- contents of the radio button (name and/or icon) -->
 		{#if (icon || rawIcon) && iconPlacement === 'above'}
-                    {@render iconComponent()}
-                    {label}
-                {:else if (icon || rawIcon) && iconPlacement === 'below'}
-                    {label}
-                    {@render iconComponent()}
-                {/if}
+			{@render iconComponent()}
+			{label}
+		{:else if (icon || rawIcon) && iconPlacement === 'below'}
+			{label}
+			{@render iconComponent()}
+		{/if}
 	</label>
 </div>
