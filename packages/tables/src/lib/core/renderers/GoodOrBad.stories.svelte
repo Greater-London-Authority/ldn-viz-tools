@@ -24,14 +24,14 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<GoodOrBad {...args} value={2} benchmarkValue={5} colorScale={() => 'red'} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<GoodOrBad {...args} value={2} benchmarkValue={5} colorScale={() => 'red'} />
+	{/snippet}
+</Story>
 
 <Story name="Multiple - good is n/a">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="flex flex-col">
 			<GoodOrBad value={2} benchmarkValue={5} goodIs="n/a" />
 			<GoodOrBad value={5} benchmarkValue={5} goodIs="n/a" />
@@ -41,7 +41,7 @@
 </Story>
 
 <Story name="Multiple - good is high">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="flex flex-col">
 			<GoodOrBad value={2} benchmarkValue={5} goodIs="high" />
 			<GoodOrBad value={5} benchmarkValue={5} goodIs="high" />
@@ -51,7 +51,7 @@
 </Story>
 
 <Story name="Multiple - good is low">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="flex flex-col">
 			<GoodOrBad value={2} benchmarkValue={5} goodIs="low" />
 			<GoodOrBad value={5} benchmarkValue={5} goodIs="low" />

@@ -226,7 +226,6 @@
 	});
 	*/
 
-	let unclean = false;
 	const updateDimensions = () => {
 		if (spec && spec.width !== width) {
 			spec.width = width;

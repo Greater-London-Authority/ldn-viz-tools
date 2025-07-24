@@ -14,8 +14,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<Histogram {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<Histogram {...args} />
+	{/snippet}
+</Story>

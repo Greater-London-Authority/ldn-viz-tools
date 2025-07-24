@@ -32,7 +32,7 @@
 		{:else}
 			<div
 				class="border-color-ui-border-primary border-b"
-				style:width={'100%'}
+				style:width="100%"
 				style:height="1px"
 			></div>
 		{/if}

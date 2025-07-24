@@ -21,15 +21,15 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<TextCellWithUncertainty value={'500 cars'} colorScale={() => 'red'} {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<TextCellWithUncertainty value="500 cars" colorScale={() => 'red'} {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Example" source>
-	{#snippet template(args)}
-		<TextCellWithUncertainty value={'Value that is known'} contextVals={[true]} />
-		<TextCellWithUncertainty value={'Value that is merely estimated'} contextVals={[false]} />
+	{#snippet template()}
+		<TextCellWithUncertainty value="Value that is known" contextVals={[true]} />
+		<TextCellWithUncertainty value="Value that is merely estimated" contextVals={[false]} />
 	{/snippet}
 </Story>

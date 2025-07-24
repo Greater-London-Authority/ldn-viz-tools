@@ -7,10 +7,7 @@
 	 */
 
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
-	import type {
-		MultipleActionButtonOption,
-		MultipleActionButtonProps
-	} from '../multipleActionButton/types.ts';
+	import type { MultipleActionButtonOption } from '../multipleActionButton/types.ts';
 
 	import { csvFormat } from 'd3-dsv';
 

@@ -15,8 +15,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<Mean {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<Mean {...args} />
+	{/snippet}
+</Story>

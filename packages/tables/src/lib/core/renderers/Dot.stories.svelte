@@ -21,11 +21,11 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<Dot {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<Dot {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Multiple">
 	{#snippet template()}

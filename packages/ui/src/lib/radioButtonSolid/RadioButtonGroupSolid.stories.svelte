@@ -28,7 +28,6 @@
 	let selectedId8: string = $state('');
 	let selectedId9: string = $state('');
 	let selectedId10: string = $state('');
-	let selectedId11: string = $state('');
 	let selectedIdForError: string = $state('');
 
 	let optionsForGroup: RadioButtonSolidProps[] = [
@@ -181,14 +180,14 @@ different values as the `name` prop.
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
 			name="station-type"
-			bind:selectedId={selectedId11}
+			bind:selectedId={selectedId10}
 			label="RadioGroup Label"
 			hint="Contextual Hint"
 			description="This is a description"
 			disabled
 			{...args}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId11}</p>
+		<p class="text-color-text-secondary mt-8">Selected id: {selectedId10}</p>
 	{/snippet}
 </Story>
 

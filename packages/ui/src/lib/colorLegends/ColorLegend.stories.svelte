@@ -62,7 +62,7 @@
 </script>
 
 <Story name="Default" source>
-	{#snippet template({ args })}
+	{#snippet template()}
 		<ColorLegend
 			color={scaleSequential([0, 100], interpolateViridis)}
 			title="Temperature (°F)"
@@ -72,7 +72,7 @@
 </Story>
 
 <Story name="Sequential color scale">
-	{#snippet template({ args })}
+	{#snippet template()}
 		<div>
 			<ColorLegend color={scaleSequential([0, 100], interpolateViridis)} title="Temperature (°F)" />
 		</div>
@@ -80,7 +80,7 @@
 </Story>
 
 <Story name="Sequential color scale - highlighted value">
-	{#snippet template({ args })}
+	{#snippet template()}
 		<ColorLegend
 			color={scaleSequential([0, 100], interpolateViridis)}
 			title="Temperature (°F)"
@@ -90,13 +90,13 @@
 </Story>
 
 <Story name="Sequential color scale with square root">
-	{#snippet template({ args })}
+	{#snippet template()}
 		<ColorLegend color={scaleSequentialSqrt([0, 1], interpolateTurbo)} title="Speed (kts)" />
 	{/snippet}
 </Story>
 
 <Story name="Diverging color scale">
-	{#snippet template({ args })}
+	{#snippet template()}
 		<ColorLegend
 			color={scaleDiverging([-0.1, 0, 0.1], interpolatePiYG)}
 			title="Daily change"
@@ -106,7 +106,7 @@
 </Story>
 
 <Story name="Diverging color scale with square root">
-	{#snippet template({ args })}
+	{#snippet template()}
 		<ColorLegend
 			color={scaleDivergingSqrt([-0.1, 0, 0.1], interpolateRdBu)}
 			title="Daily change"
@@ -116,7 +116,7 @@
 </Story>
 
 <Story name="Sequential color scale with log">
-	{#snippet template({ args })}
+	{#snippet template()}
 		<ColorLegend
 			color={scaleSequentialLog([1, 100], interpolateBlues)}
 			title="Energy (joules)"

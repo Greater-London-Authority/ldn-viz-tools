@@ -21,8 +21,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<ColoredCell {...args} />
-{/snippet}
-
-<Story name="Default" />
+<Story name="Default">
+	{#snippet template(args)}
+		<ColoredCell {...args} />
+	{/snippet}
+</Story>
