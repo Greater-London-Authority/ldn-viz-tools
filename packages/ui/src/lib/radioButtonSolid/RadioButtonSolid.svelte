@@ -65,17 +65,12 @@
 	/>
 	<label for={inputID} class={labelClasses}>
 		<!-- contents of the radio button (name and/or icon) -->
-		{#if icon}
-			<Icon
-				src={icon}
-				theme="mini"
-				class={iconOrientationClasses[iconPlacement]}
-				aria-hidden="true"
-			/>
-		{:else if rawIcon}
-			<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></rawIcon>
-		{/if}
-
-		{label}
+		{#if (icon || rawIcon) && iconPlacement === 'above'}
+                    {@render iconComponent()}
+                    {label}
+                {:else if (icon || rawIcon) && iconPlacement === 'below'}
+                    {label}
+                    {@render iconComponent()}
+                {/if}
 	</label>
 </div>
