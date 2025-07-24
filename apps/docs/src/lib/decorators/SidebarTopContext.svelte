@@ -1,4 +1,6 @@
 <script>
+	// import { getSidebarState, setSidebarState } from '@ldn-viz/ui';
+
 	import {
 		getSidebarState,
 		setSidebarState

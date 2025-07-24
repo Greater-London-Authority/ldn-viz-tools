@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { SidebarLeftContext, SidebarTopContext } from '../../../../../../../apps/docs';
+	import { SidebarLeftContext, SidebarTopContext } from '../../../../../../../apps/docs/src/lib/';
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
@@ -21,6 +21,7 @@
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarTabs',
 		component: SidebarTabList,
 		decorators: [() => SidebarLeftContext as any],
+		tags: ['autodocs'],
 		args: { tabs: tabs }
 	});
 
@@ -30,12 +31,20 @@
 <Story name="Default">
 	{#snippet template(args)}
 		<SidebarTabList {...args} bind:selectedTabId />
+
+		{#each tabs as tabPanel}
+			<div id={`${tabPanel.id}-panel`} role="tabpanel" aria-labelledby={tabPanel.id}></div>
+		{/each}
 	{/snippet}
 </Story>
 
 <Story name="Horizontal with Icons" decorators={[() => SidebarTopContext as any]}>
 	{#snippet template(args)}
 		<SidebarTabList {...args} bind:selectedTabId />
+
+		{#each tabs as tabPanel}
+			<div id={`${tabPanel.id}-panel`} role="tabpanel" aria-labelledby={tabPanel.id}></div>
+		{/each}
 	{/snippet}
 </Story>
 
@@ -49,5 +58,9 @@
 				alert('Clicked on Markers tab!');
 			}}
 		/>
+
+		{#each tabs as tabPanel}
+			<div id={`${tabPanel.id}-panel`} role="tabpanel" aria-labelledby={tabPanel.id}></div>
+		{/each}
 	{/snippet}
 </Story>
