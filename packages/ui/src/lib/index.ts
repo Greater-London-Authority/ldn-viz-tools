@@ -1,4 +1,7 @@
 // Reexport your entry components here
+export { default as AppShell } from './appShell/AppShell.svelte';
+export * from './appShell/utils/getSettingByScreenWidth';
+
 export { default as AsyncButton } from './button/AsyncButton.svelte';
 export { default as Button } from './button/Button.svelte';
 export { default as Callout } from './callout/Callout.svelte';
