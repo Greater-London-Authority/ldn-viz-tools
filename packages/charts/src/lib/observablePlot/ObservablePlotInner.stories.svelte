@@ -67,7 +67,7 @@
 	});
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<ObservablePlotInner
 			{...args}

@@ -28,43 +28,43 @@
 	import HeaderModalDemo from './HeaderModalDemo.svelte';
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<Header {...args} />
 	{/snippet}
 </Story>
 
-<Story name="With a hint string - tooltip" source>
+<Story name="With a hint string - tooltip">
 	{#snippet template()}
 		<Header label="A column" hintText="An explanation" />
 	{/snippet}
 </Story>
 
-<Story name="With a hint string - popover" source>
+<Story name="With a hint string - popover">
 	{#snippet template()}
 		<Header label="A column" hintText="An explanation" hintType="popover" />
 	{/snippet}
 </Story>
 
-<Story name="With a hint string - modal" source>
+<Story name="With a hint string - modal">
 	{#snippet template()}
 		<Header label="A column" hintText="An explanation" hintType="modal" />
 	{/snippet}
 </Story>
 
-<Story name="With a hint component - tooltip" source>
+<Story name="With a hint component - tooltip">
 	{#snippet template()}
 		<Header label="A column" hintComponent={HeaderModalDemo} />
 	{/snippet}
 </Story>
 
-<Story name="With a hint component - popover" source>
+<Story name="With a hint component - popover">
 	{#snippet template()}
 		<Header label="A column" hintComponent={HeaderModalDemo} hintType="popover" />
 	{/snippet}
 </Story>
 
-<Story name="With a hint component - modal" source>
+<Story name="With a hint component - modal">
 	{#snippet template()}
 		<Header label="A column" hintComponent={HeaderModalDemo} hintType="modal" />
 	{/snippet}

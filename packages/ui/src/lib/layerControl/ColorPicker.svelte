@@ -68,10 +68,12 @@
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
-			<Trigger {...props} size="xs" ariaLabel="Click to open {label} layer colour picker">
+			<Trigger {...props} size="xs" aria-label="Click to open {label} layer colour picker">
 				<div
 					class="relative h-[22px] w-[22px] rounded-full border"
-					style:background={theme.tokenNameToValue(activeColorName, theme.currentTheme)}
+					style:background={activeColorName
+						? theme.tokenNameToValue(activeColorName, theme.currentTheme)
+						: ''}
 				></div>
 			</Trigger>
 		{/snippet}

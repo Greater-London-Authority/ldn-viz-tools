@@ -61,12 +61,12 @@
 	let randomThresholdScale: ScaleThreshold<number, string, never> = $state();
 </script>
 
-<Story name="Default" source>
-	{#snippet template()}
+<Story name="Default">
+	{#snippet template(args)}
 		<ColorLegend
+			{...args}
 			color={scaleSequential([0, 100], interpolateViridis)}
 			title="Temperature (°F)"
-			{...args}
 		/>
 	{/snippet}
 </Story>

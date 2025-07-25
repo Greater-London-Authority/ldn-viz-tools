@@ -15,9 +15,9 @@
 	 * @component
 	 */
 
-	import { getAllContexts, mount, unmount, onDestroy, onMount, type SvelteComponent } from 'svelte';
-	import type { ComponentType } from 'svelte';
 	import type { Feature } from 'geojson';
+	import type { Component } from 'svelte';
+	import { getAllContexts, mount, onDestroy, onMount, unmount, type SvelteComponent } from 'svelte';
 
 	import maplibre_gl from 'maplibre-gl';
 
@@ -30,7 +30,7 @@
 		/**
 		 * Svelte component used to render the tooltip.
 		 */
-		popup?: ComponentType | null;
+		popup?: Component | null;
 		/**
 		 * Optional message to be passed to child popop component via `mapMarkerString` context.
 		 */
@@ -52,7 +52,7 @@
 	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
 	let popupInstance: SvelteComponent | null = null;
 
-	const renderComponent = (feature: Feature, component: ComponentType | null) => {
+	const renderComponent = (feature: Feature, component: Component | null) => {
 		if (!$mapStore || !component) {
 			return;
 		}

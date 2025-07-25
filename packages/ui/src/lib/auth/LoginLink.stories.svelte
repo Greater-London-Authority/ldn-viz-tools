@@ -14,8 +14,8 @@
 	import { oauth_config } from './demo_config';
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
-		<LoginLink config={oauth_config} {...args} />
+		<LoginLink {...args} config={oauth_config} />
 	{/snippet}
 </Story>

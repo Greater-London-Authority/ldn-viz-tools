@@ -24,7 +24,7 @@
 	});
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<GoodOrBad {...args} value={2} benchmarkValue={5} colorScale={() => 'red'} />
 	{/snippet}

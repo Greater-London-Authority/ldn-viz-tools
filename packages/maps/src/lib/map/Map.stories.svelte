@@ -118,7 +118,7 @@
 	</div>
 {/snippet}
 
-<Story name="Responsive to theme" source>
+<Story name="Responsive to theme">
 	{#snippet template(args)}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map {...args}></Map>

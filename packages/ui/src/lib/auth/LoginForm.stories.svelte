@@ -14,10 +14,10 @@
 	import { oauth_config } from './demo_config';
 </script>
 
-<Story name="Default" source>
-	{#snippet template({ args })}
+<Story name="Default">
+	{#snippet template(args)}
 		<div class="h-96">
-			<LoginForm config={oauth_config} {...args} />
+			<LoginForm {...args} config={oauth_config} />
 		</div>
 	{/snippet}
 </Story>

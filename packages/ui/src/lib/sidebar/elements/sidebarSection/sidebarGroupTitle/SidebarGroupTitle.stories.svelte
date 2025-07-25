@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Overlay from '../../../../overlay/Overlay.svelte';
 	import SidebarGroupTitle from './SidebarGroupTitle.svelte';

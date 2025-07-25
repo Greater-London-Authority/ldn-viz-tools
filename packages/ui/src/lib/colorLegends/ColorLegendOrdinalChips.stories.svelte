@@ -34,7 +34,7 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
+	{#snippet template(args)}
 		<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" {...args} />
 	{/snippet}
 </Story>
