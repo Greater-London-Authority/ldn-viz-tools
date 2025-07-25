@@ -1,5 +1,24 @@
 # @ldn-viz/tables
 
+## 5.0.0-svelte5.0
+
+### Major Changes
+
+- 628016d: CHANGED: update to use Svelte 5 and runes.
+
+### Patch Changes
+
+- Updated dependencies [7962ee6]
+- Updated dependencies [953d10c]
+- Updated dependencies [a81fb27]
+- Updated dependencies [4f1111a]
+- Updated dependencies [4046add]
+- Updated dependencies [0879ce9]
+- Updated dependencies [628016d]
+- Updated dependencies [7962ee6]
+  - @ldn-viz/ui@21.0.0-svelte5.0
+  - @ldn-viz/charts@7.0.0-svelte5.0
+
 ## 3.2.0
 
 ### Minor Changes
