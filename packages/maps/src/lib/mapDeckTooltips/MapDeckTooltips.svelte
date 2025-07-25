@@ -9,10 +9,9 @@
 	import type { Layer } from '@deck.gl/core/typed';
 	import { mousedOverObject } from './stores';
 
-	import { arrow, createFloatingActions } from 'svelte-floating-ui';
-	import type { ClientRectObject } from 'svelte-floating-ui/core';
-	import { flip, offset, shift } from 'svelte-floating-ui/dom';
-	import { type Writable, writable } from 'svelte/store';
+	import { arrow, createFloatingActions, createVirtualElement } from 'svelte-floating-ui';
+	import { flip, offset, shift, type ClientRectObject } from 'svelte-floating-ui/dom';
+	import { writable, type Writable } from 'svelte/store';
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		strategy: 'fixed', //or absolute
@@ -27,23 +26,22 @@
 		y = ev.clientY;
 	};
 
-	let getBoundingClientRect = $derived((): ClientRectObject => {
-		return {
-			x,
-			y,
-			top: y,
-			left: x,
-			bottom: y,
-			right: x,
-			width: 0,
-			height: 0
-		};
+	let getBoundingClientRect: ClientRectObject = $derived({
+		x,
+		y,
+		top: y,
+		left: x,
+		bottom: y,
+		right: x,
+		width: 0,
+		height: 0
 	});
 
-	const virtualElement = writable({ getBoundingClientRect });
+	// svelte-ignore state_referenced_locally
+	const virtualElement = createVirtualElement({ getBoundingClientRect });
 
 	$effect(() => {
-		virtualElement.set({ getBoundingClientRect });
+		virtualElement.update({ getBoundingClientRect });
 	});
 
 	floatingRef(virtualElement);

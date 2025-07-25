@@ -23,6 +23,8 @@
 
 	import { centroid } from '@turf/centroid';
 
+	import './mapPopover.css';
+
 	const contexts = getAllContexts();
 	const mapStore = contexts.get('mapStore');
 
@@ -114,13 +116,3 @@
 		}
 	});
 </script>
-
-<style>
-	/** TODO: remove this hack **/
-	/* N.B. The applied z-index is equivalent to the z-10 index applied to the MapControlGroup.
-   It will display the popover above the map, but below the sidebar or a modal (if one is open).
-   */
-	:global(.maplibregl-popup) {
-		z-index: 10;
-	}
-</style>
