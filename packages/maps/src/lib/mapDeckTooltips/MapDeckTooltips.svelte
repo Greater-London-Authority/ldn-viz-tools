@@ -107,7 +107,7 @@
 		use:floatingContent={dynamicOptions}
 		class:width={'100px'}
 		style:z-index={9999}
-		class="bg-core-grey-800 pointer-events-none p-3.5 text-white"
+		class="border-color-ui-border-secondary bg-color-container-level-0 pointer-events-none border p-2 text-sm shadow-lg"
 	>
 		{#if typeof tooltipSpec === 'string'}
 			{tooltipSpec}
