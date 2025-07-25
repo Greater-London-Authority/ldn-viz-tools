@@ -15,8 +15,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate(args)}
-	<Dots {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<Dots {...args} />
+	{/snippet}
+</Story>

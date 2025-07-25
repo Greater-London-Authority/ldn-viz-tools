@@ -5,7 +5,7 @@
 	 * @component
 	 */
 
-	import { color, hsl } from 'd3-color';
+	import { hsl } from 'd3-color';
 	import { format } from 'd3-format';
 	import { type ScaleThreshold } from 'd3-scale';
 
@@ -35,7 +35,7 @@
 	<span></span>
 {:else if value}
 	<span
-		class={`flex h-full items-center justify-end p-2 text-right`}
+		class="flex h-full items-center justify-end p-2 text-right"
 		style={`background-color: ${colorScale(value)}; color: ${
 			hsl(colorScale(value).toString()).l >= 0.6 ? '#000000' : '#FFFFFF'
 		}`}

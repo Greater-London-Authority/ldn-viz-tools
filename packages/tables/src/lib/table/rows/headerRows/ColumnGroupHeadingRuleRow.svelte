@@ -17,26 +17,24 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-	
-			{#if table.colGroups && table.colGroups.length > 0}
-				{#each table.colGroups || [] as colGroup}
-					<div
-						class="border-b border-color-ui-border-primary"
-						style:width={getWidth(colGroup)}
-						style:height="1px"
-					></div>
-
-					{#if table.colGroupGap}
-						<div style:width={`${table.colGroupGap}px`}></div>
-					{/if}
-				{/each}
-			{:else}
+		{#if table.colGroups && table.colGroups.length > 0}
+			{#each table.colGroups || [] as colGroup}
 				<div
-					class="border-b border-color-ui-border-primary"
-					style:width={'100%'}
+					class="border-color-ui-border-primary border-b"
+					style:width={getWidth(colGroup)}
 					style:height="1px"
 				></div>
-			{/if}
-		
+
+				{#if table.colGroupGap}
+					<div style:width={`${table.colGroupGap}px`}></div>
+				{/if}
+			{/each}
+		{:else}
+			<div
+				class="border-color-ui-border-primary border-b"
+				style:width="100%"
+				style:height="1px"
+			></div>
+		{/if}
 	{/snippet}
 </Scaffolding>

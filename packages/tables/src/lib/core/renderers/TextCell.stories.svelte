@@ -21,14 +21,14 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<TextCell value={'500 cars'} {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<TextCell value="500 cars" {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Bold text" source>
-	{#snippet template(args)}
-		<TextCell value={'500 cars'} fontWeight="bold" />
+	{#snippet template()}
+		<TextCell value="500 cars" fontWeight="bold" />
 	{/snippet}
 </Story>

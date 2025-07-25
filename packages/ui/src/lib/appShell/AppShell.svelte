@@ -37,10 +37,7 @@
 		 * If `true`, then the sidebar will be open when the page first loads.
 		 */
 		startOpen?: boolean;
-		/**
-		 * Store recording/controlling whether the sidebar is currently open.
-		 */
-		sidebarIsOpen?: boolean;
+
 		/**
 		 * A tailwind class or classes used to set or override the height of the Appshell wrapper.
 		 */
@@ -54,7 +51,6 @@
 		sidebarAlwaysOpen = { initial: false },
 		sidebarPush = false,
 		startOpen = true,
-		sidebarIsOpen = $bindable(startOpen),
 		heightClass = 'min-h-dvh',
 		main,
 		sidebar
@@ -62,11 +58,19 @@
 
 	let innerWidth = $state(0);
 
-	const respondToWidthChange = (innerWidth: number, sidebarIsOpen: boolean) => {
+	(() => {
+		if (getSetting(sidebarAlwaysOpen, innerWidth)) {
+			sidebarState.isOpen = true;
+		} else {
+			sidebarState.isOpen = startOpen;
+		}
+	})();
+
+	const respondToWidthChange = (innerWidth: number) => {
 		// if "sidebarAlwaysOpen" at this size, then we are open at this size
 		sidebarState.isAlwaysOpen = getSetting(sidebarAlwaysOpen, innerWidth);
 
-		return sidebarState.isAlwaysOpen ? sidebarState.isAlwaysOpen : sidebarIsOpen;
+		return sidebarState.isAlwaysOpen ? sidebarState.isAlwaysOpen : sidebarState.isOpen;
 	};
 
 	// Classes applied to the wrapper element
@@ -86,7 +90,7 @@
 	let sidebarHeightClasses = $derived(heightLookup[sidebarState.width][breakPointProp]);
 
 	$effect(() => {
-		sidebarState.isOpen = respondToWidthChange(innerWidth, sidebarIsOpen);
+		sidebarState.isOpen = respondToWidthChange(innerWidth);
 		sidebarState.placement = breakPointProp;
 	});
 </script>
@@ -113,7 +117,7 @@
 	{/if}
 
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
-	{#if (sidebarAlwaysOpen || (sidebarPush && sidebarState.isOpen)) && sidebarState.width}
+	{#if (sidebarState.isAlwaysOpen || (sidebarPush && sidebarState.isOpen)) && sidebarState.width}
 		<div
 			class={classNames('flex', sidebarHeightClasses)}
 			transition:slide={{ duration: 300, axis: transitionAxis[breakPointProp] }}

@@ -183,6 +183,7 @@
 	});
 
 	let visualRows: any[] = $derived.by(() => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		updateTrigger; // run when grouping or ordering changes
 
 		const vr = [];

@@ -486,7 +486,7 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
+	{#snippet template(args)}
 		<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} {...args} />
 	{/snippet}
 </Story>
@@ -496,19 +496,19 @@ This example shows how the encoding used for a column can be influenced by the v
  In this case, some fields also have associated fields that record whether the value is known or merely estimated.
  -->
 <Story name="Table with uncertain values in columns">
-	{#snippet template({})}
+	{#snippet template()}
 		<Table data={dataUncertain} tableSpec={tableSpecUncertain} allowSorting />
 	{/snippet}
 </Story>
 
 <Story name="High Streets Benchmark Table" source>
-	{#snippet template({})}
+	{#snippet template()}
 		<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} allowSorting />
 	{/snippet}
 </Story>
 
 <Story name="Metrics Example" source>
-	{#snippet template({})}
+	{#snippet template()}
 		<Table
 			data={dataMetrics}
 			tableSpec={tableSpecMetrics}
@@ -520,7 +520,7 @@ This example shows how the encoding used for a column can be influenced by the v
 </Story>
 
 <Story name="Metrics Example - virtualised" source>
-	{#snippet template({})}
+	{#snippet template()}
 		<Table
 			data={dataMetrics}
 			tableSpec={tableSpecMetrics}
@@ -537,7 +537,7 @@ This example shows how the encoding used for a column can be influenced by the v
  This example dataset is from the [DataTables project](https://datatables.net/examples/data_sources/js_array.html)
  -->
 <Story name="Salary Example" source>
-	{#snippet template({})}
+	{#snippet template()}
 		<Table data={dataPaginated} tableSpec={tableSpecPaginated} allowSorting allowRowGrouping />
 	{/snippet}
 </Story>

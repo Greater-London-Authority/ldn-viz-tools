@@ -2,8 +2,8 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import AppShell from './AppShell.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
-	import Button from '../button/Button.svelte';
 	import { tabs } from '../sidebar/Sidebar.stories.svelte';
+	import DemoSidebarOpener from './DemoSidebarOpener.svelte';
 
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/AppShell',
@@ -15,8 +15,6 @@
 			sidebar
 		}
 	});
-
-	let sidebarIsOpen = $state(true);
 </script>
 
 {#snippet sidebar()}
@@ -32,8 +30,7 @@
 {/snippet}
 
 {#snippet mainWithControl()}
-	<Button onclick={() => (sidebarIsOpen = !sidebarIsOpen)}>Toggle sidebar</Button>
-	<div class="p-4">Main Content</div>
+	<DemoSidebarOpener />
 {/snippet}
 
 <Story name="default">
@@ -44,7 +41,7 @@
 
 <Story name="External opening/closing of sidebar">
 	{#snippet template(args)}
-		<AppShell {...args} main={mainWithControl} bind:sidebarIsOpen></AppShell>
+		<AppShell {...args} main={mainWithControl}></AppShell>
 	{/snippet}
 </Story>
 

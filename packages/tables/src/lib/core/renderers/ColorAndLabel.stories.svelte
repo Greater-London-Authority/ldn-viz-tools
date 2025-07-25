@@ -21,8 +21,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<ColorAndLabel {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<ColorAndLabel {...args} />
+	{/snippet}
+</Story>

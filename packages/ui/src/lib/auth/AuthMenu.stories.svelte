@@ -1,24 +1,23 @@
 <script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import AuthMenu from './AuthMenu.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Auth/Auth Menu',
-		component: AuthMenu
-	};
+		component: AuthMenu,
+		tags: ['autodocs']
+	});
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	import { oauth_config } from './demo_config';
 </script>
 
-<Template>
-	{#snippet children({ args })}
+<Story name="Default" source>
+	{#snippet template(args)}
 		<div class="h-96">
-			<AuthMenu config={oauth_config} {...args} />
+			<AuthMenu {...args} config={oauth_config} />
 		</div>
 	{/snippet}
-</Template>
-
-<Story name="Default" source />
+</Story>

@@ -5,27 +5,24 @@
 	 * @component
 	 */
 
-	
-
-	
 	interface Props {
 		/**
-	 * The value to be encoded in the cell.
-	 */
+		 * The value to be encoded in the cell.
+		 */
 		value: number;
 		/**
-	 * A D3 color scale used to determine cell background color.
-	 */
+		 * A D3 color scale used to determine cell background color.
+		 */
 		colorScale: any;
 	}
 
 	let { value, colorScale }: Props = $props();
 </script>
 
-<div class="flex items-center h-full">
+<div class="flex h-full items-center">
 	<div
-		class="flex-none w-4 h-4 mr-1"
+		class="mr-1 h-4 w-4 flex-none"
 		style={`background-color: ${colorScale ? colorScale(value) : 'lightgrey'};`}
 	></div>
-	<div class="w-0 flex-auto overflow-hidden truncate items-center">{value}</div>
+	<div class="w-0 flex-auto items-center overflow-hidden truncate">{value}</div>
 </div>

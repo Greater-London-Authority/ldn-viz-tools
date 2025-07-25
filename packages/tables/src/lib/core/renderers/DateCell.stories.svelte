@@ -20,8 +20,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<DateCell {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default" source>
+	{#snippet template(args)}
+		<DateCell {...args} />
+	{/snippet}
+</Story>

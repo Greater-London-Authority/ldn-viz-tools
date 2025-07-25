@@ -17,20 +17,18 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-	
-			{#each table.colGroups || [] as colGroup}
-				<div class="was-th" style:width={getWidth(colGroup)}>
-					<div role="cell" tabindex="0" class="w-full">
-						<div class="text-center font-bold" style:color={colGroup.color ?? 'currentColor'}>
-							{colGroup.label}
-						</div>
+		{#each table.colGroups || [] as colGroup}
+			<div class="was-th" style:width={getWidth(colGroup)}>
+				<div role="cell" tabindex="0" class="w-full">
+					<div class="text-center font-bold" style:color={colGroup.color ?? 'currentColor'}>
+						{colGroup.label}
 					</div>
 				</div>
+			</div>
 
-				{#if table.colGroupGap}
-					<div style:width={`${table.colGroupGap}px`}></div>
-				{/if}
-			{/each}
-		
+			{#if table.colGroupGap}
+				<div style:width={`${table.colGroupGap}px`}></div>
+			{/if}
+		{/each}
 	{/snippet}
 </Scaffolding>

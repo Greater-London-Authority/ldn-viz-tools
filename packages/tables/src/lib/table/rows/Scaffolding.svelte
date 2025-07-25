@@ -1,12 +1,7 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
 
-	let {
-		table,
-		groupControl,
-		groupSizes,
-		dataColumns
-	} = $props();
+	let { table, groupControl, groupSizes, dataColumns } = $props();
 
 	const sumWidths = (widths) => {
 		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
@@ -17,7 +12,7 @@
 
 <!-- items-center - came from DataRow -->
 <!-- controlRows added an m-2 -->
-<div class="flex was-tr items-stretch" role="row">
+<div class="was-tr flex items-stretch" role="row">
 	<!-- controls for expanding/collapsing groups -->
 	{#if groupControl}{@render groupControl()}{:else}
 		{#each table.groupingFields || [] as _field}

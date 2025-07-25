@@ -109,8 +109,8 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
-		<LayerControlGroup bind:options={optionsForGroup} bind:state={state1} {...args} {ariaLabel} />
+	{#snippet template(args)}
+		<LayerControlGroup options={optionsForGroup} bind:layersState={state1} {...args} {ariaLabel} />
 		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
@@ -118,8 +118,8 @@
 <Story name="With label">
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
+			options={optionsForGroup}
+			bind:layersState={state1}
 			disableOpacityControl
 			disableSizeControl
 			label="Layer Control Group"
@@ -133,8 +133,8 @@
 <Story name="With hint">
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
+			options={optionsForGroup}
+			bind:layersState={state1}
 			disableOpacityControl
 			disableSizeControl
 			label="Layer Control Group"
@@ -149,8 +149,8 @@
 <Story name="With description">
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
+			options={optionsForGroup}
+			bind:layersState={state1}
 			disableOpacityControl
 			disableSizeControl
 			label="Layer Control Group"
@@ -166,8 +166,8 @@
 <Story name="Hide controls size and opacity controls">
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
+			options={optionsForGroup}
+			bind:layersState={state1}
 			disableOpacityControl
 			disableSizeControl
 			{ariaLabel}
@@ -179,7 +179,7 @@
 
 <Story name="Disable controls size and opacity controls for some layers">
 	{#snippet template()}
-		<LayerControlGroup bind:options={optionsForGroup2} bind:state={state2} {ariaLabel} />
+		<LayerControlGroup options={optionsForGroup2} bind:layersState={state2} {ariaLabel} />
 		<pre class="mt-4 text-xs">{JSON.stringify(state2, null, 2)}</pre>
 	{/snippet}
 </Story>
@@ -188,8 +188,8 @@
 	{#snippet template()}
 		<div class="text-sm">
 			<LayerControlGroup
-				bind:options={optionsForGroup}
-				bind:state={state1}
+				options={optionsForGroup}
+				bind:layersState={state1}
 				disableOpacityControl
 				disableSizeControl
 				{ariaLabel}
@@ -205,8 +205,8 @@ For example, choropleth layers would cover each other.
 <Story name="Mutually exclusive layers">
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
+			options={optionsForGroup}
+			bind:layersState={state1}
 			mutuallyExclusive
 			name="mutually-exclusive-layers"
 			{ariaLabel}
@@ -219,8 +219,8 @@ For example, choropleth layers would cover each other.
 <Story name="Disabled (global)">
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
+			options={optionsForGroup}
+			bind:layersState={state1}
 			disabled
 			name="Disabled"
 			{ariaLabel}
@@ -233,8 +233,8 @@ For example, choropleth layers would cover each other.
 <Story name="With error">
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state1}
+			options={optionsForGroup}
+			bind:layersState={state1}
 			label="Preferred mode of transport"
 			hint="Contextual Hint"
 			description="Deselect all to see an error state!"
@@ -252,8 +252,8 @@ For example, choropleth layers would cover each other.
 <Story name="With custom colours" source>
 	{#snippet template()}
 		<LayerControlGroup
-			bind:options={optionsForGroup}
-			bind:state={state3}
+			options={optionsForGroup2}
+			bind:layersState={state3}
 			{ariaLabel}
 			{colorNames}
 		/>

@@ -38,7 +38,7 @@
 	let sortedData = $derived.by(() => {
 		// count the values: produces a list of [value, count] pairs
 		const counts = Object.create(null);
-		data.forEach((val) => {
+		values.forEach((val) => {
 			counts[val] = counts[val] ? counts[val] + 1 : 1;
 		});
 
