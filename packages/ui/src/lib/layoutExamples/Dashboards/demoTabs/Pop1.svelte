@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
 	import InputWrapper from '../../../input/InputWrapper.svelte';
 	import Select from '../../../select/Select.svelte';
 	import SidebarGroup from '../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
@@ -35,7 +34,7 @@
 		{ label: 'Ward 2', value: 3 }
 	];
 
-	$: selectedYear = writable(2024);
+	let selectedYear = $state(2024);
 </script>
 
 <SidebarSection>
@@ -49,7 +48,7 @@
 	</SidebarGroup>
 
 	<SidebarGroup title="Year">
-		<InputWrapper label={`${$selectedYear}`} id="yearSlider">
+		<InputWrapper label={`${selectedYear}`} id="yearSlider">
 			<input
 				type="range"
 				id="yearSlider"
@@ -58,7 +57,7 @@
 				max="2050"
 				style="width: 100%;"
 				class="form-range"
-				bind:value={$selectedYear}
+				bind:value={selectedYear}
 			/>
 		</InputWrapper>
 	</SidebarGroup>
