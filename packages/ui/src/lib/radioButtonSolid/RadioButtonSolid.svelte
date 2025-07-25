@@ -71,6 +71,8 @@
 		{:else if (icon || rawIcon) && iconPlacement === 'below'}
 			{label}
 			{@render iconComponent()}
+		{:else}
+			{label}
 		{/if}
 	</label>
 </div>
