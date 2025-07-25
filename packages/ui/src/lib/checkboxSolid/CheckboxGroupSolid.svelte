@@ -1,17 +1,21 @@
 <script lang="ts">
 	/**
-	 * The `<CheckboxGroup>` component provides a way to create a set of `<Checkbox>` components defined by an array of objects.
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
 	 *
-	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation) component rather than the [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
+	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
 	 * @component
 	 */
 
 	import type { InputProps } from '$lib/input/types';
+	import type { Snippet } from 'svelte';
+	import Checkbox from '../checkBox/Checkbox.svelte';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
-	import Checkbox from './Checkbox.svelte';
+	import CheckboxSolid from './CheckboxSolid.svelte';
+	import type { CheckboxSolidProps } from './types';
 
-	interface CheckboxGroupProps extends InputProps {
+	interface CheckboxGroupSolidProps extends InputProps {
 		/**
 		 * Each element of this array defines a checkbox, and is an object with the properties:
 		 * * `id` (string)
@@ -23,16 +27,7 @@
 		 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
 		 * * `customOverlay` (Snippet, optional) - a custom overlay component
 		 */
-		options: {
-			id: string;
-			name?: string;
-			label: string;
-			disabled?: boolean;
-			color?: string;
-			hint?: string;
-			hintLabel?: string;
-			customOverlay?: () => ReturnType<import('svelte').Snippet>;
-		}[];
+		options: Omit<CheckboxSolidProps, 'checked'>[];
 
 		/**
 		 * An array containing the `id` of each entry in the `options` array for which the corresponding checkbox is selected.
@@ -50,6 +45,7 @@
 		ariaLabel?: string;
 
 		onChange?: (selectedOptions: string[]) => void;
+		customOverlay?: () => ReturnType<Snippet>;
 	}
 
 	let {
@@ -59,17 +55,16 @@
 		descriptionAlignment = 'left',
 		hintLabel,
 		hint,
-		error,
+		error = '',
 		disabled = false,
 		optional,
-
 		ariaLabel,
 		options = [],
 		selectedOptions = $bindable([]),
 		hideSelectAll = false,
 		customOverlay = undefined,
 		onChange = () => {}
-	}: CheckboxGroupProps = $props();
+	}: CheckboxGroupSolidProps = $props();
 
 	let errorId = $derived(error ? `${id}-error` : undefined);
 	let descriptionId = $derived(description ? `${id}-description` : undefined);
@@ -129,7 +124,6 @@
 	{optional}
 	{customOverlay}
 >
-	<!-- <slot name="hint" slot="hint" /> -->
 	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
 		{#if !hideSelectAll}
 			<!--
@@ -148,21 +142,19 @@
 				{disabled}
 			/>
 		{/if}
-
-		<ul class={`flex flex-col space-y-1 ${hideSelectAll ? '' : 'pl-5'}`}>
+		<ul class="flex">
 			{#each options as option (option.id)}
-				<li>
-					<Checkbox
+				<li class="flex w-full">
+					<CheckboxSolid
 						id={option.id}
 						name={option.name}
 						label={option.label}
-						color={option.color}
 						disabled={option.disabled || disabled}
-						hint={option.hint}
-						hintLabel={option.hintLabel}
 						checked={selectionState[option.id]}
+						icon={option.icon}
+						rawIcon={option.rawIcon}
+						iconPlacement={option.iconPlacement}
 						onchange={() => updateSelectedOptions(option.id)}
-						customOverlay={option.customOverlay}
 					/>
 				</li>
 			{/each}
