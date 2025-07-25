@@ -62,7 +62,7 @@
 
 	let innerWidth = $state(0);
 
-	const respondToWidthChange = (innerWidth: number) => {
+	const respondToWidthChange = (innerWidth: number, sidebarIsOpen: boolean) => {
 		// if "sidebarAlwaysOpen" at this size, then we are open at this size
 		sidebarState.isAlwaysOpen = getSetting(sidebarAlwaysOpen, innerWidth);
 
@@ -86,7 +86,7 @@
 	let sidebarHeightClasses = $derived(heightLookup[sidebarState.width][breakPointProp]);
 
 	$effect(() => {
-		sidebarState.isOpen = respondToWidthChange(innerWidth);
+		sidebarState.isOpen = respondToWidthChange(innerWidth, sidebarIsOpen);
 		sidebarState.placement = breakPointProp;
 	});
 </script>
