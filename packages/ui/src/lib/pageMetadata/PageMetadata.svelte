@@ -10,11 +10,6 @@
 	 * @component
 	 */
 
-	if (!title || !description || !url) {
-		// Minimum requirement for SEO.
-		throw new Error('Metadata component is missing either a title, description, or full URL');
-	}
-
 	interface Props {
 		/**
 		 * "The title of your object as it should appear within the graph, e.g., 'The Rock'."
@@ -63,7 +58,7 @@
 		title,
 		description,
 		url,
-		favicon = url.replace(/\/?$/, '/favicon.ico'),
+		favicon = url?.replace(/\/?$/, '/favicon.ico'),
 		type = 'website',
 		site = 'GLA City Intelligence Unit',
 		image = '',
