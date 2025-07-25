@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { type ScaleLinear } from 'd3-scale';
+	import { type ScaleOrdinal } from 'd3-scale';
 
 	interface Props {
 		/**
 		 * An ordinal d3 color scale.
 		 */
-		scale: ScaleLinear<number | string, string>;
+		scale: ScaleOrdinal<string, unknown, never>;
 		/**
 		 * Title to display above the legend.
 		 */
@@ -32,7 +32,7 @@
 				width={width / scale.domain().length}
 				y={0}
 				{height}
-				fill={scale(val)}
+				fill={scale(val) as string}
 			/>
 			<text
 				x={(width * (i + 0.5)) / scale.domain().length}

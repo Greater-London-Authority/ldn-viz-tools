@@ -50,7 +50,7 @@
 		ariaLabel
 	}: Props = $props();
 
-	tabState.current = selectedTabId ? selectedTabId : tabs[0].id;
+	tabState.current = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;
 
 	let component = $derived(tabs.find((tab) => tab.id === tabState.current)?.content);
 
