@@ -15,6 +15,8 @@
 
 	let selectedOptions: string[] = $state(['bus', 'underground']);
 	let selectedOptions2: string[] = $state([]);
+	let selectedOptions3: string[] = $state([]);
+	let selectedOptions4: string[] = $state([]);
 	let selectedOptionsDisabled: string[] = $state([]);
 
 	let optionsForGroup = [
@@ -141,6 +143,30 @@
 		<p class="text-color-text-secondary mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
+	{/snippet}
+</Story>
+
+<Story name="Using multiple instances">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			<div class="flex flex-col gap-1">
+				<CheckboxGroupSolid
+					name="station-type-1"
+					bind:selectedOptions={selectedOptions3}
+					{...args}
+				/>
+				<p class="text-color-text-secondary">Selected id: {selectedOptions3}</p>
+			</div>
+
+			<div class="flex flex-col gap-1">
+				<CheckboxGroupSolid
+					name="station-type-2"
+					bind:selectedOptions={selectedOptions4}
+					{...args}
+				/>
+				<p class="text-color-text-secondary">Selected id: {selectedOptions4}</p>
+			</div>
+		</div>
 	{/snippet}
 </Story>
 

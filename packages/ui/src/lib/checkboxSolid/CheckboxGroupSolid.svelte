@@ -146,7 +146,7 @@
 			{#each options as option (option.id)}
 				<li class="flex w-full">
 					<CheckboxSolid
-						id={option.id}
+						id={`${id}-${option.id}`}
 						name={option.name}
 						label={option.label}
 						disabled={option.disabled || disabled}
