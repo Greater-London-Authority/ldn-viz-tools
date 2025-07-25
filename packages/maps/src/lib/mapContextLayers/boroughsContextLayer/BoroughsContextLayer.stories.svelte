@@ -57,7 +57,7 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<div class="relative h-[100dvh] w-[100dvw]">
 			<Map

@@ -14,7 +14,7 @@
 	import { oauth_config } from './demo_config';
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<div class="h-96">
 			<AuthMenu {...args} config={oauth_config} />

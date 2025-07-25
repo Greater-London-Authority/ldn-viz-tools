@@ -28,6 +28,9 @@
 		 * if `true`, then the trigger to open the size control is not displayed
 		 */
 		disableSizeControl?: boolean;
+		/**
+		 * if `true`, then the trigger to open the fill control is not displayed
+		 */
 		disableFillControl?: boolean;
 		/**
 		 * Optional array of colour tokens for use by `ColorPicker`. Defaults to categorical colours.
@@ -62,7 +65,7 @@
 		 * * opacity (number between 0 and 1, inclusive)
 		 * * size (number)
 		 */
-		layerState?: {
+		layerState: {
 			colorName: string;
 			visible: boolean;
 			opacity: number;
@@ -112,13 +115,13 @@
 		hintLabel = '',
 		customOverlay = undefined,
 		disabled = false,
-		layerState = $bindable(/*{
+		layerState = $bindable({
 			colorName: 'data.categorical.darkpink',
 			visible: true,
 			opacity: 1.0,
 			size: 10,
 			fillType: 'solid-fill'
-		}*/),
+		}),
 		minSize = 1,
 		maxSize = 100,
 		mutuallyExclusive = false,

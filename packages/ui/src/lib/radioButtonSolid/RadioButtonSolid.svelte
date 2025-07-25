@@ -48,7 +48,7 @@
 			aria-hidden="true"
 		/>
 	{:else if rawIcon}
-		<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true" />
+		<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></rawIcon>
 	{/if}
 {/snippet}
 

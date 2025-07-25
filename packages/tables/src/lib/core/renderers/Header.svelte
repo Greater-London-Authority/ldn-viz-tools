@@ -2,7 +2,7 @@
 	import { classNames, Overlay } from '@ldn-viz/ui';
 	import { BarsArrowDown, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { ComponentType } from 'svelte';
+	import type { Component } from 'svelte';
 
 	interface Props {
 		/**
@@ -32,7 +32,7 @@
 		/**
 		 * A Svelte component to be displayed instead of hintText.
 		 */
-		hintComponent?: undefined | ComponentType;
+		hintComponent?: undefined | Component;
 		/**
 		 * The type of overlay in which the hint will be displayed.
 		 */
@@ -67,6 +67,7 @@
 </script>
 
 <div class="h-full w-full py-0.5 font-semibold" style:color>
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<svelte:element
 		this={allowSorting ? 'button' : 'div'}
 		class={classNames('flex select-none items-center', alignmentClass)}

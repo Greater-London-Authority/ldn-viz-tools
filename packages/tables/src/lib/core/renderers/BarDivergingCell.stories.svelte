@@ -14,14 +14,14 @@
 	});
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<BarDivergingCell {...args} />
 	{/snippet}
 </Story>
 
 <Story name="Custom colors">
-	{#snippet template({ args })}
+	{#snippet template(args)}
 		<div class="flex w-36 flex-col">
 			<BarDivergingCell
 				{...args}

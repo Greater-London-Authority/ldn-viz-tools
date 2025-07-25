@@ -3,8 +3,8 @@
 	import MapLayerView from './MapLayerView.svelte';
 
 	const loadHandlerArgType = {
-		type: 'function',
-		control: 'none',
+		type: 'function' as 'function',
+		control: undefined,
 		table: {
 			type: {
 				summary: 'function',
@@ -14,8 +14,7 @@
 	};
 
 	const componentType = {
-		type: 'object',
-		control: 'none',
+		control: undefined,
 		table: {
 			type: {
 				summary: 'Svelte component'
@@ -33,7 +32,7 @@
 		argTypes: {
 			id: {
 				type: 'string',
-				control: 'none',
+				control: undefined,
 				table: {
 					type: {
 						summary: 'string'
@@ -42,7 +41,7 @@
 			},
 			beforeId: {
 				type: 'string',
-				control: 'none',
+				control: undefined,
 				table: {
 					type: {
 						summary: 'string'
@@ -50,8 +49,7 @@
 				}
 			},
 			spec: {
-				type: 'object',
-				control: 'none',
+				control: undefined,
 				table: {
 					type: {
 						summary: 'LayerSpecification'

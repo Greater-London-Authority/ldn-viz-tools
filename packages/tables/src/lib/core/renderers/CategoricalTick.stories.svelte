@@ -28,13 +28,13 @@
 	});
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<CategoricalTick {...args} />
 	{/snippet}
 </Story>
 
-<Story name="Multiple" source>
+<Story name="Multiple">
 	{#snippet template(args)}
 		<div class="flex w-36 flex-col">
 			<CategoricalTick {...args} value="a" />

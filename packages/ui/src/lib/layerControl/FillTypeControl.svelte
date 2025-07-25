@@ -77,13 +77,8 @@
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
-			<Trigger {...props} size="xs" ariaLabel="Click to open {label} layer fill control">
-				<Icon
-					src={AdjustmentsHorizontal}
-					theme="mini"
-					class="text-color-action-disabled h-6 w-6 cursor-not-allowed"
-					aria-hidden="true"
-				/>
+			<Trigger {...props} size="xs" aria-label="Click to open {label} layer fill control">
+				<Icon src={AdjustmentsHorizontal} theme="mini" class="h-6 w-6" aria-hidden="true" />
 			</Trigger>
 		{/snippet}
 
@@ -98,14 +93,14 @@
 				<RadioButtonGroup
 					options={fillOptions}
 					name="station-type"
-					bind:selectedId={fillType}
-					buttonsHidden
+					bind:selectedId={fillType!}
+					allowClear
 				/>
 			</div>
 
 			<div class="flex flex-wrap gap-2">
 				{#each Object.keys(patterns.atlas) as patternName}
-					{@const pattern = patterns.atlas[patternName]}
+					{@const pattern = patterns.atlas[patternName as keyof typeof patterns.atlas]}
 
 					<!--
           The approach here is to set the background-size to scale the image such that the region for each pattern is scaled to fit in a (swatchWidth x swatchWidth) sized box
@@ -117,14 +112,15 @@
 						style:outline={patternName === fillType ? '2px solid var(--theme-ui-primary)' : ''}
 					>
 						{#each [1, 2, 3, 4] as _}
-							<div
+							<button
+								aria-label={`Select fill type ${patternName}`}
 								onclick={() => clickPattern(patternName)}
 								style:width={`${swatchWidth}px`}
 								style:height={`${swatchWidth}px`}
 								style:background-image={`url(${patterns.patternURL})`}
 								style:background-size={`${(patterns.patternImageWidth * swatchWidth) / pattern.width}px ${(patterns.patternImageHeight * swatchWidth) / pattern.height}px`}
 								style:background-position={`-${pattern.x / (pattern.width / swatchWidth)}px -${pattern.y / (pattern.width / swatchWidth)}px`}
-							></div>
+							></button>
 						{/each}
 					</div>
 				{/each}

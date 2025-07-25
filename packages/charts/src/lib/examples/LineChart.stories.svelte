@@ -203,7 +203,7 @@
 ```
 -->
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template()}
 		<ObservablePlot
 			spec={singleLineSpec}
@@ -300,7 +300,7 @@
 						```
 					-->
 
-<Story name="Multiple lines (inc custom tool tips)" source>
+<Story name="Multiple lines (inc custom tool tips)">
 	{#snippet template()}
 		<ObservablePlot
 			spec={multiLineSpec}
@@ -365,7 +365,7 @@
 	```
 -->
 
-<Story name="Area chart" source>
+<Story name="Area chart">
 	{#snippet template()}
 		<ObservablePlot
 			spec={areaSpec}
@@ -441,7 +441,7 @@
 	```
 -->
 
-<Story name="Area chart with custom fill opacity" source>
+<Story name="Area chart with custom fill opacity">
 	{#snippet template()}
 		<ObservablePlot
 			spec={areaOpacitySpec}

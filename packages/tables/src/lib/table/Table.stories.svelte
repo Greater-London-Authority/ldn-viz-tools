@@ -235,31 +235,31 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
+	{#snippet template(args)}
 		<Table {data} {tableSpec} {...args} />
 	{/snippet}
 </Story>
 
-<Story name="Table updates when data changes" source>
+<Story name="Table updates when data changes">
 	{#snippet template()}
 		<Button onclick={randomlySelectRows}>Update</Button>
 		<Table data={dataSubset} {tableSpec} allowSorting filename="My Table" />
 	{/snippet}
 </Story>
 
-<Story name="Sortable Rows" source>
+<Story name="Sortable Rows">
 	{#snippet template()}
 		<Table {data} {tableSpec} allowSorting />
 	{/snippet}
 </Story>
 
-<Story name="Sortable - but only on some columns" source>
+<Story name="Sortable - but only on some columns">
 	{#snippet template()}
 		<Table {data} tableSpec={tableSpecPartiallySortable} allowSorting />
 	{/snippet}
 </Story>
 
-<Story name="Title" source>
+<Story name="Title">
 	{#snippet template()}
 		<Table
 			{data}
@@ -270,7 +270,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Content above table" source>
+<Story name="Content above table">
 	{#snippet template()}
 		<Table
 			{data}
@@ -285,19 +285,19 @@
 	{/snippet}
 </Story>
 
-<Story name="Zebra Striping" source>
+<Story name="Zebra Striping">
 	{#snippet template()}
 		<Table {data} {tableSpec} zebraStripe />
 	{/snippet}
 </Story>
 
-<Story name="Export buttons" source>
+<Story name="Export buttons">
 	{#snippet template()}
 		<Table {data} {tableSpec} dataDownloadButton imageDownloadButton />
 	{/snippet}
 </Story>
 
-<Story name="Export buttons - relabel columns" source>
+<Story name="Export buttons - relabel columns">
 	{#snippet template()}
 		<Table
 			{data}
@@ -309,31 +309,31 @@
 	{/snippet}
 </Story>
 
-<Story name="Row Grouping" source>
+<Story name="Row Grouping">
 	{#snippet template()}
 		<Table {data} {tableSpec} allowRowGrouping />
 	{/snippet}
 </Story>
 
-<Story name="User selection of columns to show" source>
+<Story name="User selection of columns to show">
 	{#snippet template()}
 		<Table {data} {tableSpec} allowColumnHiding />
 	{/snippet}
 </Story>
 
-<Story name="Paginated" source>
+<Story name="Paginated">
 	{#snippet template()}
 		<Table {data} {tableSpec} paginate pageSize={5} />
 	{/snippet}
 </Story>
 
-<Story name="Paginated - page size control" source>
+<Story name="Paginated - page size control">
 	{#snippet template()}
 		<Table {data} {tableSpec} paginate allowPageSizeChanges />
 	{/snippet}
 </Story>
 
-<Story name="Paginated - page externally controlled" source>
+<Story name="Paginated - page externally controlled">
 	{#snippet template()}
 		<div class="flex max-w-2xl flex-col gap-4">
 			<div class="border-color-ui-border-secondary border p-2">
