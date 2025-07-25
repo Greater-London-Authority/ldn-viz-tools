@@ -126,7 +126,7 @@
 		let n = 0;
 		let tv = tickValues;
 
-		let tickF: (n: any) => string | string | null | undefined = undefined;
+		let tickF: string | ((n: any) => string | null | undefined) | undefined = undefined;
 
 		let tickAdjust = (g: any) =>
 			g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
@@ -156,7 +156,7 @@
 			if (!x.ticks) {
 				if (tv === undefined) {
 					n = Math.round(ticks + 1);
-					tv = range(n).map((i) => quantile(color.domain(), i / (n - 1)));
+					tv = range(n).map((i) => quantile(color.domain(), i / (n - 1))!);
 				}
 				if (typeof tickFormat !== 'function') {
 					tickF = format(tickFormat === undefined ? ',f' : tickFormat);
@@ -218,9 +218,16 @@
 		if (ticksRef) {
 			const bottomAxis = axisBottom(axisState.x)
 				.ticks(ticks, typeof axisState.tickF === 'string' ? axisState.tickF : undefined)
-				.tickFormat(typeof axisState.tickF === 'function' ? axisState.tickF : undefined)
 				.tickSize(tickSize)
-				.tickValues(axisState.tickValues);
+				.tickValues(axisState.tickValues!);
+
+			if (typeof axisState.tickF === 'function') {
+				const formatter = axisState.tickF;
+				bottomAxis.tickFormat((d, i) => {
+					const value = formatter(d);
+					return value ?? '';
+				});
+			}
 
 			select(ticksRef)
 				.call(bottomAxis as any, 0)
