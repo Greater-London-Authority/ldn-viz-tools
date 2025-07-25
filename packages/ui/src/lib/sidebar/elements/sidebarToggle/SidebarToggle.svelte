@@ -33,9 +33,9 @@
 		class="!bg-color-container-level-1 !text-color-text-primary hover:!text-color-action-text-secondary-hover cursor-pointer"
 		onclick={toggleOpen}
 		aria-controls={sidebarId}
-		aria-expanded={sidebarState.isOpen}
+		aria-expanded={sidebarState?.isOpen}
 	>
-		{#if sidebarState.isOpen === false}
+		{#if sidebarState?.isOpen === false}
 			{#if icon}
 				<!-- Custom icon to use instead of the 'hamburger' menu icon-->
 				{@render icon?.()}

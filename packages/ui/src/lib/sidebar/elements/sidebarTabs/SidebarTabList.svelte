@@ -40,15 +40,15 @@
 		selectedTabId = $bindable(),
 		ariaLabel = 'Switch sidebar panel',
 		onChange = (tabId: Tab['id']) => {
-			if (sidebarState.isOpen === false) {
+			if (sidebarState?.isOpen === false) {
 				// if we're collapsed, clicking any tab label will open that tab
 				sidebarState.isOpen = true;
 				selectedTabId = tabId;
 			} else if (selectedTabId === tabId) {
 				// The sidebarAlways open context is provided by the app shell
-				if (sidebarState.isAlwaysOpen === false || sidebarState.isAlwaysOpen === undefined) {
+				if (sidebarState?.isAlwaysOpen === false || sidebarState?.isAlwaysOpen === undefined) {
 					// if we're expanded, clicking the currently selected tab label triggers collapse
-					sidebarState.isOpen = !sidebarState.isOpen;
+					sidebarState.isOpen = !sidebarState?.isOpen;
 					selectedTabId = '';
 				}
 			} else {
@@ -59,24 +59,24 @@
 	}: Props = $props();
 </script>
 
-<div class="flex justify-between {tabLayoutOverride[sidebarState.orientation]}">
+<div class="flex justify-between {tabLayoutOverride[sidebarState?.orientation]}">
 	<TabList
 		bind:selectedTabId
 		{ariaLabel}
-		orientation={sidebarState.orientation}
+		orientation={sidebarState?.orientation}
 		{tabs}
 		{onChange}
 		class={classNames(
-			tabLayoutOverride[sidebarState.orientation],
+			tabLayoutOverride[sidebarState?.orientation],
 			tabThemeOverride,
 			tabLabelOverride
 		)}
 	/>
-	{#if sidebarState.isOpen && !sidebarState.isAlwaysOpen}
+	{#if sidebarState?.isOpen && !sidebarState?.isAlwaysOpen}
 		<div
 			class={`text-color-text-secondary hover:bg-color-action-secondary-muted-hover ${tabLabelOverride}`}
 		>
-			<button onclick={() => (sidebarState.isOpen = !sidebarState.isOpen)}>
+			<button onclick={() => (sidebarState.isOpen = !sidebarState?.isOpen)}>
 				<Icon src={XCircle} theme="outline" class="mb-1 h-7 w-7" aria-hidden="true" />
 				Close
 			</button>
