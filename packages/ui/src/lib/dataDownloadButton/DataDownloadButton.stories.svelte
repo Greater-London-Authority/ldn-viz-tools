@@ -13,6 +13,7 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/DataDownloadButton',
 		component: DataDownloadButton,
+		tags: ['autodocs'],
 		argTypes: {
 			filename: {
 				table: {

@@ -5,7 +5,7 @@
 	import Button from '../button/Button.svelte';
 	import type { ButtonProps } from '../button/types.js';
 
-	type Props = {
+	type Props = ButtonProps & {
 		/**
 		 * text that appears in the tooltip target, next to the icon
 		 */

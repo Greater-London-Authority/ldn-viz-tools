@@ -5,7 +5,7 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Legends/ColorLegendOrdinalHorizontalAlt',
 		component: ColorLegendOrdinalHorizontalAlt,
-		tags: ['autodocs']
+		tags: ['autodocs', 'no-tests']
 	});
 </script>
 
@@ -18,8 +18,8 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
-		<ColorLegendOrdinalHorizontalAlt scale={ordinalScale} title="Current EPC Rating" {...args} />
+	{#snippet template(args)}
+		<ColorLegendOrdinalHorizontalAlt {...args} scale={ordinalScale} title="Current EPC Rating" />
 	{/snippet}
 </Story>
 

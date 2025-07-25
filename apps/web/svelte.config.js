@@ -12,6 +12,11 @@ const config = {
 		adapter: adapter(),
 		prerender: { entries: ['*', ...contentIndex.map((d) => d.slugFull)] }
 	},
+	onwarn: (warning, handler) => {
+		const { code } = warning;
+		if (code === 'css_unused_selector') return;
+		handler(warning);
+	},
 	extensions: ['.svelte', '.svx', '.md']
 };
 

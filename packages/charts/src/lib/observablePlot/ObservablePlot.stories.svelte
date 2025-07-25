@@ -73,8 +73,8 @@
 	});
 </script>
 
-<Story name="Default" source>
-	{#snippet template({ args })}
+<Story name="Default">
+	{#snippet template(args)}
 		<ObservablePlot
 			{...args}
 			{spec}

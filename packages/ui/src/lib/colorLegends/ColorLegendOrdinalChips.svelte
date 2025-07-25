@@ -5,14 +5,14 @@
 	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-components-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
 	 * @component
 	 */
-	import { type ScaleLinear } from 'd3-scale';
+	import { type ScaleOrdinal } from 'd3-scale';
 	import { classNames } from '../utils/classNames';
 
 	interface Props {
 		/**
 		 * An ordinal d3 color scale.
 		 */
-		scale: ScaleLinear<number | string, string>;
+		scale: ScaleOrdinal<string, unknown, never>;
 		/**
 		 * Title to display above the legend.
 		 */
@@ -48,7 +48,7 @@
 						'mr-1 h-4 w-4 flex-none',
 						d === highlightedValue ? 'ring-color-input-border-focussed ring-2 ring-offset-2' : ''
 					)}
-					style:background-color={scale(d)}
+					style:background-color={scale(d) as string}
 				></div>
 				<span
 					class={classNames(

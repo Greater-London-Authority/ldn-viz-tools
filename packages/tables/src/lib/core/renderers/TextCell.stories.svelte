@@ -21,13 +21,13 @@
 	});
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<TextCell value="500 cars" {...args} />
 	{/snippet}
 </Story>
 
-<Story name="Bold text" source>
+<Story name="Bold text">
 	{#snippet template()}
 		<TextCell value="500 cars" fontWeight="bold" />
 	{/snippet}

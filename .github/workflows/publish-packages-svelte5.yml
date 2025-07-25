@@ -26,10 +26,7 @@ jobs:
         run: npm run build
 
       - name: Publish packages
-        run: |
-          changeset pre enter svelte5
-          changeset version
-          changeset publish
+        run: npm run publish-packages-svelte5
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

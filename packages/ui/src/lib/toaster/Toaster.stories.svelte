@@ -89,7 +89,7 @@
 	};
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<Button onclick={toastNotice}>Notice</Button>
 
@@ -128,7 +128,7 @@
 				<Button onclick={setToaster} variant={position === 'CenterLeft' ? 'solid' : 'outline'}>
 					CenterLeft
 				</Button>
-				<Button condition="warning" onclick={toastNotice}>Add Toast!</Button>
+				<Button onclick={toastNotice}>Add Toast!</Button>
 				<Button onclick={setToaster} variant={position === 'CenterRight' ? 'solid' : 'outline'}>
 					CenterRight
 				</Button>

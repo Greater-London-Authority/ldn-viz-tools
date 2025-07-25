@@ -113,7 +113,7 @@
 </script>
 
 <!-- This is the default behaviour: equally sized columns, which respond to changes in the width of the parent container. -->
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template()}
 		<Table {data} {tableSpec} />
 	{/snippet}
@@ -127,14 +127,14 @@
 </Story>
 
 <!-- Here the first column has a fixed width. -->
-<Story name="One column with fixed size" source>
+<Story name="One column with fixed size">
 	{#snippet template()}
 		<Table {data} tableSpec={tableSpecFixedCol} />
 	{/snippet}
 </Story>
 
 <!-- Here the column sizes are set to 3, 1, and 2 (in relative units). -->
-<Story name="Relative column sizes" source>
+<Story name="Relative column sizes">
 	{#snippet template()}
 		<Table {data} tableSpec={tableSpecRelativeColSizes} />
 	{/snippet}

@@ -13,7 +13,7 @@
 	});
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet tmplate(args)}
 		<ViolinPlot {...args} />
 	{/snippet}

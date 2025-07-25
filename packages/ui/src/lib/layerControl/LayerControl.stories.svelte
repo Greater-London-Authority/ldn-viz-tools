@@ -1,18 +1,14 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { theme } from '../theme/themeState.svelte';
 	import LayerControl from './LayerControl.svelte';
+	import { colorNames } from './layerControlUtils';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Layer Controls/LayerControl',
 		component: LayerControl,
 		tags: ['autodocs']
 	});
-</script>
-
-<script lang="ts">
-	import { theme } from '../theme/themeState.svelte';
-	//import { colorTokenNameToRGBArray, currentTheme, tokenNameToValue } from '../theme/themeStore';
-	import { colorNames } from './layerControlUtils';
 
 	let layerStates = $state({
 		boroughs: {
@@ -41,9 +37,9 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
+	{#snippet template(args)}
 		<div class="w-96">
-			<LayerControl bind:layerState {...args} name="default" />
+			<LayerControl {...args} bind:layerState name="default" />
 		</div>
 		<pre class="mt-4 text-xs">{JSON.stringify(layerState, null, 2)}</pre>
 
@@ -58,13 +54,13 @@
 	{/snippet}
 </Story>
 
-<Story name="With Label" source>
+<Story name="With Label">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" />
 	{/snippet}
 </Story>
 
-<Story name="With Label and hint" source>
+<Story name="With Label and hint">
 	{#snippet template()}
 		<LayerControl
 			bind:layerState
@@ -74,25 +70,25 @@
 	{/snippet}
 </Story>
 
-<Story name="Hide color control" source>
+<Story name="Hide color control">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" disableColorControl />
 	{/snippet}
 </Story>
 
-<Story name="Hide opacity control" source>
+<Story name="Hide opacity control">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" disableOpacityControl />
 	{/snippet}
 </Story>
 
-<Story name="Hide size control" source>
+<Story name="Hide size control">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" disableSizeControl />
 	{/snippet}
 </Story>
 
-<Story name="Checkbox only" source>
+<Story name="Checkbox only">
 	{#snippet template()}
 		<LayerControl
 			bind:layerState
@@ -104,7 +100,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Multiple control instances" source>
+<Story name="Multiple control instances">
 	{#snippet template()}
 		<div class="space-y-1">
 			<LayerControl bind:layerState={layerStates.boroughs} label="Borough" />
@@ -124,31 +120,31 @@
 	{/snippet}
 </Story>
 
-<Story name="Disabled (Color)" source>
+<Story name="Disabled (Color)">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" disableColorControl />
 	{/snippet}
 </Story>
 
-<Story name="Disabled (Opacity)" source>
+<Story name="Disabled (Opacity)">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" disableOpacityControl />
 	{/snippet}
 </Story>
-<Story name="Disabled (Size)" source>
+<Story name="Disabled (Size)">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" disableSizeControl />
 	{/snippet}
 </Story>
 
-<Story name="With name prop" source>
+<Story name="With name prop">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" name="borough" />
 	{/snippet}
 </Story>
 
 <!-- Note, this colour combination isn't accessible but is demonstrating potential for customising colours where necessary. -->
-<Story name="With custom colours" source>
+<Story name="With custom colours">
 	{#snippet template()}
 		<LayerControl bind:layerState={layerStates.customColors} label="Borough" {colorNames} />
 	{/snippet}

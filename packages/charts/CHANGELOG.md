@@ -1,5 +1,25 @@
 # ldn-viz-tools-charts
 
+## 7.0.0-svelte5.0
+
+### Major Changes
+
+- 4f1111a: CHANGED: update to use Svelte 5 and runes.
+
+### Minor Changes
+
+- 953d10c: CHANGED: defaultArea plot fragment uses fillOpacity instead of opacity for consistency with other plot fragments
+- 628016d: CHANGED: added `onChange` event handler prop to `CheckboxGroup`.
+
+### Patch Changes
+
+- Updated dependencies [7962ee6]
+- Updated dependencies [a81fb27]
+- Updated dependencies [4046add]
+- Updated dependencies [0879ce9]
+- Updated dependencies [7962ee6]
+  - @ldn-viz/ui@21.0.0-svelte5.0
+
 ## 5.2.0
 
 ### Minor Changes

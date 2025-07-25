@@ -27,7 +27,7 @@
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
-			<Trigger {...props} size="xs" ariaLabel="Click to open {label} opacity control.">
+			<Trigger {...props} size="xs" aria-label="Click to open {label} opacity control.">
 				<OpacityIcon
 					class="text-color-text-primary hover:text-color-action-text-secondary-hover h-6 w-6"
 					aria-hidden="true"
@@ -41,9 +41,23 @@
 
 		<div class="flex items-center gap-4">
 			<div class="w-32">
-				<input type="range" class="w-32" bind:value={opacity} min="0" max="1" step="0.01" />
+				<input
+					type="range"
+					class="w-32"
+					bind:value={() => opacity.toString(), (v) => (opacity = +v)}
+					min="0"
+					max="1"
+					step="0.01"
+				/>
 			</div>
-			<div class="w-16"><Input bind:value={opacity} type="number" min="0" max="1"></Input></div>
+			<div class="w-16">
+				<Input
+					bind:value={() => opacity.toString(), (v) => (opacity = +v)}
+					type="number"
+					min="0"
+					max="1"
+				></Input>
+			</div>
 		</div>
 	</Popover>
 {/if}

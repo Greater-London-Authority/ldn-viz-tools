@@ -1,5 +1,18 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.0
+
+### Major Changes
+
+- 4046add: CHANGED: `LayerControl` now uses a prop called `layerState` (rather than `state`); `LayerControlGroup` now uses a prop called `layersState` (rather than `state`)
+- 0879ce9: CHANGED: `Select` component is now a wrapper around `svelecte` (rather than `svelte-select`); there are amny changes to its props.
+
+### Minor Changes
+
+- 7962ee6: CHANGED: LoadingIndicator component title and arcColorClass are now correctly typed as optional props
+- a81fb27: FIXED: RadioButtonGroups show labels if icons don't exist
+- 7962ee6: ADDED: NonIdealState component
+
 ## 19.3.0
 
 ### Minor Changes

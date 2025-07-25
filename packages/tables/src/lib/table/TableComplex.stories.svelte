@@ -487,7 +487,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} {...args} />
+		<Table {...args} data={dataBenchmarks} tableSpec={tableSpecBenchmarks} />
 	{/snippet}
 </Story>
 
@@ -501,13 +501,13 @@ This example shows how the encoding used for a column can be influenced by the v
 	{/snippet}
 </Story>
 
-<Story name="High Streets Benchmark Table" source>
+<Story name="High Streets Benchmark Table">
 	{#snippet template()}
 		<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} allowSorting />
 	{/snippet}
 </Story>
 
-<Story name="Metrics Example" source>
+<Story name="Metrics Example">
 	{#snippet template()}
 		<Table
 			data={dataMetrics}
@@ -519,7 +519,7 @@ This example shows how the encoding used for a column can be influenced by the v
 	{/snippet}
 </Story>
 
-<Story name="Metrics Example - virtualised" source>
+<Story name="Metrics Example - virtualised">
 	{#snippet template()}
 		<Table
 			data={dataMetrics}
@@ -536,7 +536,7 @@ This example shows how the encoding used for a column can be influenced by the v
  Try sorting by Salary, or **Group Rows** by *Position* then **Sort groups** by *Mean Salary*.
  This example dataset is from the [DataTables project](https://datatables.net/examples/data_sources/js_array.html)
  -->
-<Story name="Salary Example" source>
+<Story name="Salary Example">
 	{#snippet template()}
 		<Table data={dataPaginated} tableSpec={tableSpecPaginated} allowSorting allowRowGrouping />
 	{/snippet}

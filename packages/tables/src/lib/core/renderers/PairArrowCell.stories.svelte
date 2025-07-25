@@ -15,13 +15,13 @@
 	});
 </script>
 
-<Story name="Default" source>
+<Story name="Default">
 	{#snippet template(args)}
 		<PairArrowCell {...args} />
 	{/snippet}
 </Story>
 
-<Story name="Multiple - custom colors" source>
+<Story name="Multiple - custom colors">
 	{#snippet template()}
 		<div class="flex w-36 flex-col">
 			<PairArrowCell value={-2} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />

@@ -13,7 +13,8 @@
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/PlaceholderImage',
-		component: PlaceholderImage
+		component: PlaceholderImage,
+		tags: ['autodocs']
 	});
 </script>
 

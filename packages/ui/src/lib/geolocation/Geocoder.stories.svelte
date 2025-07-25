@@ -109,7 +109,7 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
+	{#snippet template(args)}
 		<Geocoder {...args} />
 	{/snippet}
 </Story>

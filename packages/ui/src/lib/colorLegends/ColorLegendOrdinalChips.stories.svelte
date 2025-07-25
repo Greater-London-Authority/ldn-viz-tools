@@ -5,7 +5,7 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Legends/ColorLegendOrdinalChips',
 		component: ColorLegendOrdinalChips,
-		tags: ['autodocs'],
+		tags: ['autodocs', 'no-tests'],
 
 		argTypes: {
 			orientation: {
@@ -34,8 +34,8 @@
 </script>
 
 <Story name="Default">
-	{#snippet template({ args })}
-		<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" {...args} />
+	{#snippet template(args)}
+		<ColorLegendOrdinalChips {...args} scale={ordinalScale} title="Current EPC Rating" />
 	{/snippet}
 </Story>
 

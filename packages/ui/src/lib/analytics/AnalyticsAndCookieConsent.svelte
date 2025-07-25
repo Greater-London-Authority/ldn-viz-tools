@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
 	/*
 		The majority of this Civic config is replicated across london.gov.uk.
 		Please check any needed changes with the Digital team before applying

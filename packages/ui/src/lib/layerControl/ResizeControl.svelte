@@ -28,7 +28,7 @@
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
-			<Trigger {...props} size="xs" ariaLabel="Click to open {label} marker size control">
+			<Trigger {...props} size="xs" aria-label="Click to open {label} marker size control">
 				<ResizeIcon
 					class="text-color-text-primary hover:text-color-action-text-secondary-hover h-6 w-6"
 					aria-hidden="true"

@@ -207,17 +207,17 @@
 		return vr;
 	});
 
-	let tableWidth: number = $state();
+	let tableWidth: number | undefined = $state();
 
-	const updateTableWidths = (tableObj, newWidth: number) => {
+	const updateTableWidths = (tableObj: any, newWidth: number) => {
 		if (tableObj && !fixedTableWidth) {
 			computeWidths(tableObj, newWidth);
-			colWidths = tableObj.columnSpec.map((col) => col.computedWidth);
+			colWidths = tableObj.columnSpec.map((col: { computedWidth: any }) => col.computedWidth);
 		}
 	};
 
 	$effect(() => {
-		updateTableWidths(tableObj, tableWidth);
+		if (tableWidth) updateTableWidths(tableObj, tableWidth);
 	});
 
 	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
@@ -292,7 +292,7 @@
 								role="rowgroup"
 							>
 								<VirtualScroll data={visualRows} key="uniqueKey">
-									{#snippet children({ data })}
+									{#snippet children({ data }: any)}
 										<RowRenderer spec={data} table={tableObj} />
 									{/snippet}
 								</VirtualScroll>

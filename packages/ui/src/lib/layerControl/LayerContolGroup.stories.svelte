@@ -110,7 +110,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<LayerControlGroup options={optionsForGroup} bind:layersState={state1} {...args} {ariaLabel} />
+		<LayerControlGroup {...args} options={optionsForGroup} bind:layersState={state1} {ariaLabel} />
 		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
@@ -249,7 +249,7 @@ For example, choropleth layers would cover each other.
 </Story>
 
 <!-- Note, this colour combination isn't accessible but is demonstrating potential for customising colours where necessary. -->
-<Story name="With custom colours" source>
+<Story name="With custom colours">
 	{#snippet template()}
 		<LayerControlGroup
 			options={optionsForGroup2}

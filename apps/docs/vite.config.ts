@@ -1,9 +1,9 @@
 /// <reference types="vitest/config" />
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+import { defineConfig } from 'vite';
 const dirname =
 	typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
@@ -47,7 +47,10 @@ export default defineConfig({
 					// See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
 					storybookTest({
 						configDir: path.join(dirname, '.storybook'),
-						storybookScript: 'npm run storybook --ci'
+						storybookScript: 'npm run storybook --ci',
+						tags: {
+							exclude: ['no-tests']
+						}
 					})
 				],
 				test: {

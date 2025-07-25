@@ -97,9 +97,13 @@
 		 */
 		layersState: LayerControlGroupState;
 		/**
+		 * if `true`, then the "Clear" control is not displayed (when mutually exclusive).
+		 */
+		allowClear?: boolean;
+		/**
 		 * if `true`, then the "Select all" control is not displayed.
 		 */
-		buttonsHidden?: boolean;
+		hideSelectAll?: boolean;
 		/**
 		 * if `true`, then the trigger to open the color picker is not displayed for any layers
 		 */
@@ -112,6 +116,9 @@
 		 * if `true`, then the trigger to open the size control is not displayed for any layers
 		 */
 		disableSizeControl?: boolean;
+		/**
+		 * if `true`, then the trigger to open the fill control is not displayed
+		 */
 		disableFillControl?: boolean;
 		/**
 		 * Optional array of colour tokens for use by `ColorPicker`. Defaults to categorical colours.
@@ -141,7 +148,8 @@
 		error = '',
 		options = [],
 		layersState = $bindable(),
-		buttonsHidden = false,
+		allowClear = true,
+		hideSelectAll = false,
 		disableColorControl = false,
 		disableOpacityControl = false,
 		disableSizeControl = false,
@@ -242,8 +250,10 @@
 
 	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
 		{#if mutuallyExclusive}
-			{#if !buttonsHidden}
-				<Button {disabled} variant="text" class="!px-0" onclick={clearRadioButtons}>Clear</Button>
+			{#if allowClear}
+				<Button {disabled} variant="text" class="!justify-start  !px-0" onclick={clearRadioButtons}>
+					Clear
+				</Button>
 			{/if}
 
 			<ul class="flex flex-col space-y-1">
@@ -263,7 +273,7 @@
 				{/each}
 			</ul>
 		{:else}
-			{#if !buttonsHidden}
+			{#if !hideSelectAll}
 				<!--
         form="" should prevent this checkbox from being included in form
         submissions.
@@ -281,7 +291,7 @@
 				/>
 			{/if}
 
-			<ul class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
+			<ul class={`flex flex-col space-y-1 ${allowClear ? '' : 'pl-5'}`}>
 				{#each options as option (option.id)}
 					<li>
 						<LayerControl
