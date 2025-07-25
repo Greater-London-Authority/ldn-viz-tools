@@ -8,6 +8,7 @@
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/AppShell',
 		component: AppShell,
+		tags: ['autodocs'],
 		parameters: {
 			layout: 'fullscreen'
 		},
