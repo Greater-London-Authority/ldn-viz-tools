@@ -39,6 +39,7 @@
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
+		tags: ['autodocs'],
 		decorators: [() => SidebarLeftContext as any],
 		render: defaultTemplate,
 		parameters: {
