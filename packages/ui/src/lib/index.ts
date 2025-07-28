@@ -13,6 +13,8 @@ export { default as Button } from './button/Button.svelte';
 export { default as Callout } from './callout/Callout.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
+export { default as CheckboxGroupSolid } from './checkboxSolid/CheckboxGroupSolid.svelte';
+export { default as CheckboxSolid } from './checkboxSolid/CheckboxSolid.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
