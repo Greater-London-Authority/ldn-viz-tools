@@ -31,14 +31,14 @@
 			disabled
 				? '!bg-color-input-background-disabled !text-color-text-disabled cursor-not-allowed'
 				: 'bg-color-input-background-off text-color-text-primary cursor-pointer',
-			'form-label ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
+			'form-label leading-tight ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
 			'peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-color-ui-background-primary peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-inset peer-focus:ring-offset-2'
 		)
 	);
 
 	const iconOrientationClasses = {
-		above: 'h-5 w-5 mb-1',
-		below: 'h-5 w-5 mt-1'
+		above: 'h-5 w-5 mb-0.5',
+		below: 'h-5 w-5 mt-0.5'
 	};
 </script>
 
