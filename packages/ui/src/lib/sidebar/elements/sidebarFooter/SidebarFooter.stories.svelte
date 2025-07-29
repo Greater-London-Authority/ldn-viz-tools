@@ -4,7 +4,7 @@
 	import LogoCIU from '../../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../../logos/LogoMayor.svelte';
 	import ThemeSwitcher from '../../../theme/ThemeSwitcher.svelte';
-	import PrivacyPolicyLink from './PrivacyPolicyLink.svelte';
+	import PrivacyPolicyLink from '../../../analytics/PrivacyPolicyLink.svelte';
 	import SidebarFooter from './SidebarFooter.svelte';
 
 	// hack to make the "View cookie settings" link appear
