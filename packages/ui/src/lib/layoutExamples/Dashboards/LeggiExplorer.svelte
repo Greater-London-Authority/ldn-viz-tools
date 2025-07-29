@@ -9,7 +9,7 @@
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 
 	import CookieControlSettings from '../../analytics/CookieControlSettings.svelte';
-	import PrivacyPolicyLink from '../../sidebar/elements/sidebarFooter/PrivacyPolicyLink.svelte';
+	import PrivacyPolicyLink from '../../analytics/PrivacyPolicyLink.svelte';
 	import { Demo1, Leggi, Sewers } from './demoTabs';
 
 	const tabs = [

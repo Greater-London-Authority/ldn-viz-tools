@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '../../../button/Button.svelte';
-	import type { LdnButtonProps } from '../../../button/types';
+	import Button from '../button/Button.svelte';
+	import type { LdnButtonProps } from '../button/types';
 
 	let {
 		slim = true,

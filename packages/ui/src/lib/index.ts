@@ -19,6 +19,7 @@ export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as Flag } from './flag/Flag.svelte';
+export { default as Footer } from './footer/Footer.svelte';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
 export * from './geolocation/GeocoderAdapter';
 export * from './geolocation/GeocoderAdapterList';
@@ -56,7 +57,7 @@ export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svel
 export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as Select } from './select/Select.svelte';
-export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/PrivacyPolicyLink.svelte';
+export { default as PrivacyPolicyLink } from './analytics/PrivacyPolicyLink.svelte';
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 export { default as SidebarGroup } from './sidebar/elements/sidebarSection/SidebarGroup.svelte';
