@@ -32,19 +32,16 @@
 
 <script lang="ts">
 	import { format } from 'd3';
-	import demoMonthlyTimeseriesLong from '../../data/demoMonthlyTimeseriesLong.json';
 	import { Plot } from '../observablePlotFragments/plot';
 
 	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import { multiVariableData, singleVariableData } from '../../data/demoData';
 	let currentTheme = $derived(currentThemeObj.currentTheme);
 
 	//const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 
 	// Spec and data for single line example (default)
-	let singleLineData = $derived(
-		demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A')
-	);
 	let singleLineSpec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: [
@@ -53,18 +50,17 @@
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
 			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 			Plot.ruleY([0]),
-			Plot.line(singleLineData, {
+			Plot.line(singleVariableData, {
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
-				stroke: currentTheme.color.data.primary,
+				// stroke: currentTheme.color.data.primary,
 				tip: true
 			})
 		]
 	});
 
 	// Spec and data for multi-line example
-	let multiLineData = $derived(demoMonthlyTimeseriesLong);
 	let multiLineSpec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		color: {
@@ -82,7 +78,7 @@
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
 			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 			Plot.ruleY([0]),
-			Plot.line(multiLineData, {
+			Plot.line(multiVariableData, {
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
@@ -90,15 +86,15 @@
 			}),
 
 			Plot.ruleX(
-				multiLineData,
+				multiVariableData,
 				Plot.pointerX({ x: 'Month', stroke: currentTheme.color.chart.label })
 			),
 			Plot.point(
-				multiLineData,
+				multiVariableData,
 				Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
 			),
 			Plot.tip(
-				multiLineData,
+				multiVariableData,
 				Plot.pointer({
 					x: 'Month',
 					y: 'Value',
@@ -121,7 +117,6 @@
 	});
 
 	// Spec and data for area example
-	let areaData = $derived(demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A'));
 	let areaSpec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: [
@@ -130,11 +125,11 @@
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
 			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 			Plot.ruleY([0]),
-			Plot.areaY(areaData, {
+			Plot.areaY(singleVariableData, {
 				x: 'Month',
 				y: 'Value'
 			}),
-			Plot.line(areaData, {
+			Plot.line(singleVariableData, {
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
@@ -149,7 +144,7 @@
 		...areaSpec,
 		marks: [
 			...areaSpec.marks,
-			Plot.areaY(areaData, {
+			Plot.areaY(singleVariableData, {
 				x: 'Month',
 				y: 'Value',
 				fillOpacity: 0.8
@@ -168,7 +163,7 @@
 	const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 
-	$: singleLineData = demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A');
+	$: singleVariableData = demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A');
 	$: singleLineSpec = {
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: [
@@ -177,7 +172,7 @@
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
 			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 			Plot.ruleY([0]),
-			Plot.line(singleLineData, {
+			Plot.line(singleVariableData, {
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
@@ -191,7 +186,7 @@
 
 <ObservablePlot
 		spec={singleLineSpec}
-		data={singleLineData}
+		data={singleVariableData}
 		title={"In London, Variable A's value has fallen steadily since 2017"}
 		subTitle={"London monthly estimated variable value (GBP), January 2015 to March 2024"}
 		alt={"Line chart of London's variable A values"}
@@ -207,7 +202,7 @@
 	{#snippet template()}
 		<ObservablePlot
 			spec={singleLineSpec}
-			data={singleLineData}
+			data={singleVariableData}
 			title="In London, Variable A's value has fallen steadily since 2017"
 			subTitle="London monthly estimated variable value (GBP), January 2015 to March 2024"
 			alt="Line chart of London's variable A values"
@@ -229,7 +224,7 @@
 		const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 		const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 		
-		$: multiLineData = demoMonthlyTimeseriesLong; // using demo data directly, without parsing
+		$: multiVariableData = demoMonthlyTimeseriesLong; // using demo data directly, without parsing
 		$: multiLineSpec = {
 			x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 			color: {
@@ -247,7 +242,7 @@
 					Plot.axisX({ interval: '1 year' }),
 					Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 					Plot.ruleY([0]),
-					Plot.line(multiLineData, {
+					Plot.line(multiVariableData, {
 						x: 'Month',
 						y: 'Value',
 						z: 'Variable',
@@ -255,15 +250,15 @@
 					}),
 					
 					Plot.ruleX(
-						multiLineData,
+						multiVariableData,
 						Plot.pointerX({ x: 'Month', stroke: currentTheme.color.chart.label })
 						),
 						Plot.point(
-							multiLineData,
+							multiVariableData,
 							Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
 							),
 							Plot.tip(
-								multiLineData,
+								multiVariableData,
 								Plot.pointer({
 									x: 'Month',
 									y: 'Value',
@@ -288,7 +283,7 @@
 						
 						<ObservablePlot
 						spec={multiLineSpec}
-						data={multiLineData}
+						data={multiVariableData}
 						title={'In London, all variable values have fallen steadily since 2017, with Variable A experiencing the most significant fall'}
 						subTitle={'London monthly estimated variable values (GBP), January 2015 to March 2024'}
 						alt={'Line chart of London variable values'}
@@ -304,7 +299,7 @@
 	{#snippet template()}
 		<ObservablePlot
 			spec={multiLineSpec}
-			data={multiLineData}
+			data={multiVariableData}
 			title="In London, all variable values have fallen steadily since 2017, with Variable A experiencing the most significant fall"
 			subTitle="London monthly estimated variable values (GBP), January 2015 to March 2024"
 			alt="Line chart of London variable values"
@@ -326,7 +321,7 @@
 		const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 		const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 	
-		$: areaData = demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A');
+		$: singleVariableData = demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A');
 		$: areaSpec = {
 			x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 			marks: [
@@ -335,11 +330,11 @@
 				Plot.axisX({ label: 'Year', interval: '1 year' }),
 				Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 				Plot.ruleY([0]),
-				Plot.areaY(areaData, {
+				Plot.areaY(singleVariableData, {
 					x: 'Month',
 					y: 'Value'
 				}),
-				Plot.line(areaData, {
+				Plot.line(singleVariableData, {
 					x: 'Month',
 					y: 'Value',
 					z: 'Variable',
@@ -353,7 +348,7 @@
 	
 	<ObservablePlot
 			spec={areaSpec}
-			data={areaData}
+			data={singleVariableData}
 			title={"In London, Variable A's value has fallen steadily since 2017"}
 			subTitle={"London monthly estimated variable value (GBP), January 2015 to March 2024"}
 			alt={"Area chart of London's variable A values"}
@@ -369,7 +364,7 @@
 	{#snippet template()}
 		<ObservablePlot
 			spec={areaSpec}
-			data={areaData}
+			data={singleVariableData}
 			title="In London, Variable A's value has fallen steadily since 2017"
 			subTitle="London monthly estimated variable value (GBP), January 2015 to March 2024"
 			alt="Area chart of London's variable A values"
@@ -391,7 +386,7 @@
 		const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 		const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 	
-		$: areaData = demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A');
+		$: singleVariableData = demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A');
 		$: areaSpec = {
 			x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 			marks: [
@@ -400,11 +395,11 @@
 				Plot.axisX({ label: 'Year', interval: '1 year' }),
 				Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 				Plot.ruleY([0]),
-				Plot.areaY(areaData, {
+				Plot.areaY(singleVariableData, {
 					x: 'Month',
 					y: 'Value'
 				}),
-				Plot.line(areaData, {
+				Plot.line(singleVariableData, {
 					x: 'Month',
 					y: 'Value',
 					z: 'Variable',
@@ -418,7 +413,7 @@
 			...areaSpec,
 			marks: [
 				...areaSpec.marks,
-				Plot.areaY(areaData, {
+				Plot.areaY(singleVariableData, {
 					x: 'Month',
 					y: 'Value',
 					fillOpacity: 0.8
@@ -429,7 +424,7 @@
 	
 	<ObservablePlot
 			spec={areaOpacitySpec}
-			data={areaData}
+			data={singleVariableData}
 			title={"In London, Variable A's value has fallen steadily since 2017"}
 			subTitle={"London monthly estimated variable value (GBP), January 2015 to March 2024"}
 			alt={"Area chart of London's variable A values"}
@@ -445,7 +440,7 @@
 	{#snippet template()}
 		<ObservablePlot
 			spec={areaOpacitySpec}
-			data={areaData}
+			data={singleVariableData}
 			title="In London, Variable A's value has fallen steadily since 2017"
 			subTitle="London monthly estimated variable value (GBP), January 2015 to March 2024"
 			alt="Area chart of London's variable A values"
