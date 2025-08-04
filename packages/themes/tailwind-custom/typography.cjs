@@ -449,16 +449,16 @@ module.exports = plugin(function ({ addComponents }) {
 			lineHeight: 'var(--typography-sm-body-sm-lineheight)',
 
 			'@screen md': {
-				fontSize: 'var(--typography-md-body-md-fontsize)',
-				lineHeight: 'var(--typography-md-body-md-lineheight)'
+				fontSize: 'var(--typography-md-body-sm-fontsize)',
+				lineHeight: 'var(--typography-md-body-sm-lineheight)'
 			},
 			'@screen lg': {
-				fontSize: 'var(--typography-lg-body-md-fontsize)',
-				lineHeight: 'var(--typography-lg-body-md-lineheight)'
+				fontSize: 'var(--typography-lg-body-sm-fontsize)',
+				lineHeight: 'var(--typography-lg-body-sm-lineheight)'
 			},
 			'@screen xl': {
-				fontSize: 'var(--typography-xl-body-md-fontsize)',
-				lineHeight: 'var(--typography-xl-body-md-lineheight)'
+				fontSize: 'var(--typography-xl-body-sm-fontsize)',
+				lineHeight: 'var(--typography-xl-body-sm-lineheight)'
 			}
 		},
 

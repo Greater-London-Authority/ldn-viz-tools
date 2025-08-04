@@ -92,6 +92,9 @@ const config = {
 	plugins: [
 		plugin(function ({ addBase }) {
 			addBase({
+				body: {
+					color: 'var(--theme-text-primary)'
+				},
 				// sets a default focus style
 				':where(*)': {
 					'--outline-size': 'max(2px, 0.08em)',
