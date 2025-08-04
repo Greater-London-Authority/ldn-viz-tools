@@ -102,7 +102,7 @@
 	);
 </script>
 
-<p class={ragClasses}>
+<div class={ragClasses}>
 	{#if goodIs !== 'n/a'}
 		<div
 			class={`flex shrink-0 grow-0 items-center justify-center rounded-full bg-current ${
@@ -120,4 +120,4 @@
 		{typeof benchmarkValue === 'number' ? f(benchmarkValue) : benchmarkValue}
 		({f(+value)})
 	{/if}
-</p>
+</div>

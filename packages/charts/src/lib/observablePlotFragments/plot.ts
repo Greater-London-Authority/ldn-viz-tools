@@ -4,6 +4,8 @@ import type {
 	AreaYOptions,
 	AxisXOptions,
 	AxisYOptions,
+	BarXOptions,
+	BarYOptions,
 	Data,
 	DotOptions,
 	DotXOptions,
@@ -14,6 +16,9 @@ import type {
 	LineXOptions,
 	LineYOptions,
 	PlotOptions,
+	RectOptions,
+	RectXOptions,
+	RectYOptions,
 	RuleXOptions,
 	RuleYOptions,
 	TextOptions,
@@ -35,7 +40,7 @@ export const plot = (options: PlotOptions = {}) => {
 	const { style, color, x, y, height, marginTop, marginBottom, marginLeft, marginRight, ...rest } =
 		options;
 
-	const sizeDefault = options.fx || options.fy ? defaultSizeFacet : defaultSize;
+	const sizeDefault = options.fx || options.fy || options.facet ? defaultSizeFacet : defaultSize;
 	const defaultStyleString = Object.entries(defaultStyle)
 		.map(([k, v]) => `${k}:${v}`)
 		.join(';');
@@ -167,5 +172,18 @@ export const Plot = {
 	textY: (data?: Data, options?: TextOptions) => ObservablePlot.textY(data, { ...options }),
 	tip: (data?: Data, options?: TipOptions) => {
 		return ObservablePlot.tip(data, { ...getDefault('defaultTip'), ...options });
+	},
+	barX: (data?: Data, options?: BarXOptions) =>
+		ObservablePlot.barX(data, { ...getDefault('defaultBar'), ...options }),
+	barY: (data?: Data, options?: BarYOptions) =>
+		ObservablePlot.barY(data, { ...getDefault('defaultBar'), ...options }),
+	rect: (data?: Data, options?: RectOptions) => {
+		return ObservablePlot.rect(data, { ...getDefault('defaultRect'), ...options });
+	},
+	rectX: (data?: Data, options?: RectXOptions) => {
+		return ObservablePlot.rectX(data, { ...getDefault('defaultRect'), ...options });
+	},
+	rectY: (data?: Data, options?: RectYOptions) => {
+		return ObservablePlot.rectY(data, { ...getDefault('defaultRect'), ...options });
 	}
 };
