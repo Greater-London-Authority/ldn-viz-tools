@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.1
+
+### Major Changes
+
+- 46b4fab: CHANGED: the `ListMenu` has been renamed to `NavigationMenu`
+- 6b37511: CHANGED: the `buttonsHidden` prop on the `CheckboxGroup` and `LayerControlGroup` been renamed to `hideSelectAll`
+
+### Minor Changes
+
+- dc25586: CREATED: CheckboxSolid and CheckboxGroupSolid components
+
 ## 21.0.0-svelte5.0
 
 ### Major Changes

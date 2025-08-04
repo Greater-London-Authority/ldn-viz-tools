@@ -15,9 +15,13 @@
     "@ldn-viz/utils": "1.1.0"
   },
   "changesets": [
+    "angry-pens-sort",
     "forty-cases-rest",
     "gold-deers-end",
+    "listMenu-to-navigationMenu",
     "pretty-phones-brake",
+    "rename-buttonsHidden-prop",
+    "shy-foxes-design",
     "sv5-charts",
     "sv5-layer-control",
     "sv5-maps",
