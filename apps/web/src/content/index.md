@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: What exactly are we doing here?
+description: A Design System for London's City Data.
 section: Overview
 ---
 
@@ -8,8 +8,4 @@ section: Overview
 	import { Button } from '@ldn-viz/ui'
 </script>
 
-# Hello there!
-
-Hows it going?
-
-<Button>I am button</Button>
+<Button href="/overview">Read the docs</Button>
