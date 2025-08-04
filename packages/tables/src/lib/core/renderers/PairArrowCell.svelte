@@ -6,28 +6,7 @@
 	 */
 
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
-
-	interface Props {
-		/**
-		 * The value to be encoded in the cell.
-		 */
-		value: number;
-		extent?: any; // used to pass automatically extracted val
-		contextVals?: number[]; // value to be compared to
-		/**
-		 * Color to be applied to bars corresponding to positive values.
-		 */
-		positiveColor?: string;
-		/**
-		 * Color to be applied to bars corresponding to negative values.
-		 */
-		negativeColor?: string;
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		[key: string]: any;
-	}
+	import type { PairArrowCellProps } from '$lib/core/renderers/PairArrowCellProps';
 
 	let {
 		value,
@@ -37,7 +16,7 @@
 		negativeColor = 'red',
 		width = 100,
 		...rest
-	}: Props = $props();
+	}: PairArrowCellProps = $props();
 
 	const height = 30;
 

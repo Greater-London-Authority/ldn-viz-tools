@@ -4,17 +4,9 @@
 	 */
 	import { max, mean, median, min } from 'd3-array';
 	import { format } from 'd3-format';
+	import type { SummaryProps } from '$lib/core/aggregateRenderers/SummaryProps';
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: number[];
-		formatString?: string;
-		[key: string]: any;
-	}
-
-	let { values, formatString = '0.0f', ...rest }: Props = $props();
+	let { values, formatString = '0.0f', ...rest }: SummaryProps = $props();
 
 	let f = $derived(format(formatString));
 	let f2 = $derived((val: number | undefined) => (val === undefined ? 'undefined' : f(val)));

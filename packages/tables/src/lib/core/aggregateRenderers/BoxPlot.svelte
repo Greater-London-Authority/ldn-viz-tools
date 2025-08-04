@@ -4,30 +4,17 @@
 	 * @component
 	 */
 
-	import { max, mean, min, quantile } from 'd3-array';
-	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+  import { max, mean, min, quantile } from 'd3-array';
+  import { type ScaleLinear, scaleLinear } from 'd3-scale';
+  import type { BoxPlotProps } from '$lib/core/aggregateRenderers/BoxPlotProps';
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: number[];
-		extent: number[];
-		showAllPoints?: boolean;
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		[key: string]: any;
-	}
-
-	let {
+  let {
 		values = [],
 		extent = [0, 1],
 		showAllPoints = false,
 		width = 100,
 		...rest
-	}: Props = $props();
+	}: BoxPlotProps = $props();
 
 	const height = 30;
 	const marginRight = 10;

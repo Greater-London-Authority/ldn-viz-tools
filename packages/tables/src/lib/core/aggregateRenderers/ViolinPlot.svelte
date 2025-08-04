@@ -4,28 +4,14 @@
 	 * @component
 	 */
 
-	import { bin, max, mean, min, quantile } from 'd3-array';
+	import { bin, type Bin, max, mean, min, quantile } from 'd3-array';
+	import type { ScaleLinear } from 'd3-scale';
 	import { scaleLinear } from 'd3-scale';
 
-	import { type Bin } from 'd3-array';
-	import type { ScaleLinear } from 'd3-scale';
-
 	import { area, curveCatmullRom } from 'd3-shape';
+	import type { ViolinProps } from '$lib/core/aggregateRenderers/ViolinProps';
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: number[];
-		extent?: any;
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		[key: string]: any;
-	}
-
-	let { values, extent = [0, 1], width = 100, ...rest }: Props = $props();
+	let { values, extent = [0, 1], width = 100, ...rest }: ViolinProps = $props();
 
 	// Declare the chart dimensions and margins.
 	const height = 30;

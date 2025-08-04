@@ -6,27 +6,11 @@
 
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
+	import type { BarDivergingAxisProps } from '$lib/core/renderers/BarDivergingAxisProps';
 
 	const height = 20;
 
 	let x = $derived(scaleLinear().domain(extent).range([0, width]));
-
-	interface Props {
-		/**
-		 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
-		 * which is based on Python 3’s format specification mini-language (PEP 3101)).
-		 * If set to a falsy value, then bars will not be labelled with a value.
-		 */
-		formatString?: string;
-		extent?: any; // used to pass automatically extracted val
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		numTicks?: number;
-		textSize?: number;
-		[key: string]: any;
-	}
 
 	let {
 		formatString = '0.0f',
@@ -35,7 +19,7 @@
 		numTicks = 4,
 		textSize = 8,
 		...rest
-	}: Props = $props();
+	}: BarDivergingAxisProps = $props();
 
 	const topPadding = height; // padding above the horizontal rule
 

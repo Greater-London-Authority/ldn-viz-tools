@@ -4,24 +4,9 @@
 	 */
 
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import type { StackedBarProps } from '$lib/core/aggregateRenderers/StackedBarProps';
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: number[];
-		/**
-		 * A D3 color scale used to determine bar color.
-		 */
-		colorScale: (val: any) => string;
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		[key: string]: any;
-	}
-
-	let { values, colorScale, width = 100, ...rest }: Props = $props();
+	let { values, colorScale, width = 100, ...rest }: StackedBarProps = $props();
 
 	const height = 30;
 	const marginRight = 10;
