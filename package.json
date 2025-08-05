@@ -12,7 +12,7 @@
 		"format": "prettier --write .",
 		"lint": "turbo run lint",
 		"publish-packages": "turbo run build && changeset version && changeset publish",
-		"publish-packages-svelte5": "turbo run build && changeset pre enter svelte5 && changeset version && changeset publish",
+		"publish-packages-svelte5": "turbo run build && changeset version && changeset publish",
 		"test": "turbo run test",
 		"test-storybook": "npm run test-storybook -w apps/docs",
 		"test:coverage": "turbo run test:coverage",
