@@ -15,15 +15,13 @@
 </script>
 
 <script lang="ts">
-	import * as d3 from 'd3';
-	import { Plot } from '../observablePlotFragments/plot';
-
 	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import * as d3 from 'd3';
 	import { dualVariableData, multiVariableData, singleVariableData } from '../../data/demoData';
-	let currentTheme = $derived(currentThemeObj.currentTheme);
+	import { Plot } from '../observablePlotFragments/plot';
+	import { formatHigh } from './utils';
 
-	//const formatLow = d3.format(',.0f'); // for lower than 10000, format commas and not dp
-	const formatHigh = d3.format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
+	let currentTheme = $derived(currentThemeObj.currentTheme);
 
 	// Spec and data for single line example (default)
 	let singleLineSpec = $derived({
