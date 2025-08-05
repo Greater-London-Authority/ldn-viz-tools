@@ -62,7 +62,6 @@
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
 			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
-			Plot.ruleY([0]),
 			Plot.line(multiVariableData, {
 				x: 'Month',
 				y: 'Value',
@@ -97,7 +96,9 @@
 						y: false
 					}
 				})
-			)
+			),
+			// baseline last
+			Plot.ruleY([0])
 		]
 	});
 
@@ -137,6 +138,7 @@
 				rotate: 90,
 				textAnchor: 'start'
 			}),
+			// baseline last
 			Plot.ruleY([0])
 		]
 	});
@@ -149,7 +151,6 @@
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
 			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
-			Plot.ruleY([0]),
 			Plot.areaY(singleVariableData, {
 				x: 'Month',
 				y: 'Value'
@@ -157,15 +158,15 @@
 			Plot.line(singleVariableData, {
 				x: 'Month',
 				y: 'Value',
-				z: 'Variable',
-				stroke: currentTheme.color.data.primary,
 				tip: {
 					format: {
 						x: true,
 						y: (d) => '£' + formatHigh(d)
 					}
 				}
-			})
+			}),
+			// baseline last
+			Plot.ruleY([0])
 		]
 	});
 
