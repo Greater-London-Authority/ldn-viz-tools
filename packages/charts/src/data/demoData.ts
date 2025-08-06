@@ -213,3 +213,7 @@ export const singleVarAggregatedByYear = demoAggregatedByYearTimeseriesLong.filt
 export const multiVarSingleYearAggregatedByYear = demoAggregatedByYearTimeseriesLong.filter(
 	(d) => d.Year === '2024'
 );
+
+export const multiVarDualYearAggregatedByYear = demoAggregatedByYearTimeseriesLong.filter(
+	(d) => d.Year === '2015' || d.Year === '2021'
+);
