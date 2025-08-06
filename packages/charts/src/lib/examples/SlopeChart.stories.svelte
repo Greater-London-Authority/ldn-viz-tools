@@ -217,13 +217,13 @@
 <ObservablePlot
 			spec={singleSlopeSpec}
 			data={multiVarDualYearAggregatedByYear}
-			title="In London, yearly average across all variables has dropped significantly from 2015 to 2021"
+			title="In London, the yearly average across all variables has dropped significantly from 2015 to 2021"
 			subTitle="London yearly average variable values combined (GBP), 2015 vs 2021"
-			alt="Slope chart of London's variable A values"
+			alt="Slope chart of London's variable values"
 			byline="GLA City Intelligence"
 			source="LDN Viz Tools Demo Data"
 			note="Data for demonstration only"
-			chartDescription="The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"
+			chartDescription="The slope chart shows yearly average data in 2015 vs 2021 for Variable A, B and C, measured in GBP (Pounds Sterling). The x axis ranges shows 2015 and 2021. The y axis ranges from £0 to £45,000. Variable A had the most significant change of -£19,328 in 2021 vs 2015 from £43.47k in 2015 to £24.15k in 2021. Variable B fell -£12.9k from £35.16k in 2015 to £22.26k in 2021. Variable C had the smallest change of -£6.45k from £26.87k in 2015 to £20.42k in 2021."
 		/>
 ```
 -->
@@ -233,7 +233,7 @@
 		<ObservablePlot
 			spec={singleSlopeSpec}
 			data={multiVarDualYearAggregatedByYear}
-			title="In London, yearly average across all variables has dropped significantly from 2015 to 2021"
+			title="In London, the yearly average across all variables has dropped significantly from 2015 to 2021"
 			subTitle="London yearly average variable values combined (GBP), 2015 vs 2021"
 			alt="Slope chart of London's variable values"
 			byline="GLA City Intelligence"
