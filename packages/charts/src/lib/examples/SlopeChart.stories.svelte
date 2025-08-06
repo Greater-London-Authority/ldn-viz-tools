@@ -52,7 +52,7 @@
 			}
 		);
 
-	// Spec and data for single line example (default)
+	// Spec and data for slope example (default)
 	let singleSlopeSpec = $derived({
 		height: 300,
 		marginBottom: 30,
@@ -153,7 +153,7 @@
 			}
 		);
 
-	// Spec and data for single line example (default)
+	// Spec and data for slope example (default)
 	let singleSlopeSpec = $derived({
 		height: 300,
 		marginBottom: 30,
