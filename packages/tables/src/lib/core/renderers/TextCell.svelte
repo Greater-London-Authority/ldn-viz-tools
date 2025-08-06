@@ -5,15 +5,7 @@
 	 */
 	import { classNames } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
-
-	interface Props {
-		value: number | string;
-		alignText?: 'left' | 'right' | 'center' | undefined;
-		fontWeight?: string | ((value: number | string) => string);
-		visibility?: string | ((value: number | string) => string);
-		formatString?: string | undefined;
-		[key: string]: any;
-	}
+	import type { TextCellProps } from '$lib/core/renderers/TextCellProps';
 
 	let {
 		value,
@@ -22,7 +14,7 @@
 		visibility = 'visible',
 		formatString = undefined,
 		...rest
-	}: Props = $props();
+	}: TextCellProps = $props();
 	let f = $derived(format(formatString ?? ''));
 
 	const alignmentClasses = {

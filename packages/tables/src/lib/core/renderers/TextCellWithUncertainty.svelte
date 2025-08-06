@@ -6,14 +6,7 @@
 	 */
 	import { format } from 'd3-format';
 	import { classNames } from '../../utils/utilityFns.js';
-
-	interface Props {
-		value: number | string;
-		contextVals?: boolean[];
-		alignText?: 'left' | 'right' | 'center' | undefined;
-		formatString?: string | undefined;
-		[key: string]: any;
-	}
+	import type { TextCellWithUncertaintyProps } from '$lib/core/renderers/TextCellWithUncertaintyProps';
 
 	let {
 		value,
@@ -21,7 +14,7 @@
 		alignText = undefined,
 		formatString = undefined,
 		...rest
-	}: Props = $props();
+	}: TextCellWithUncertaintyProps = $props();
 	let f = $derived(format(formatString ?? ''));
 
 	const alignmentClasses = {

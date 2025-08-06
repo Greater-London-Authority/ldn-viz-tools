@@ -5,30 +5,14 @@
 	 */
 	import { utcFormat } from 'd3-time-format';
 	import { classNames } from '../../utils/utilityFns.js';
-
-	interface Props {
-		/**
-		 * The value to be encoded in the cell.
-		 */
-		value: Date;
-		/**
-		 * Alignment of the text within the cell.
-		 */
-		alignText?: 'left' | 'right' | 'center' | undefined;
-		/**
-		 * Format string defining how the number should be formatted for display (expressed in `d3-time-format`'s [notation](https://d3js.org/d3-time-format#locale_format),
-		 * which is based on "the venerable strptime and strftime functions from the C standard library")
-		 */
-		formatString?: string;
-		[key: string]: any;
-	}
+	import type { DateCellProps } from '$lib/core/renderers/DateCellProps';
 
 	let {
 		value,
 		alignText = undefined,
 		formatString = '%Y-%m-%dT%H:%M:%S.%LZ',
 		...rest
-	}: Props = $props();
+	}: DateCellProps = $props();
 	let f = $derived(utcFormat(formatString ?? ''));
 
 	const alignmentClasses = {

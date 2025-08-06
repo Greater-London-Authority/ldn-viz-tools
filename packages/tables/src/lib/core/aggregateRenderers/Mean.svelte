@@ -4,19 +4,11 @@
 	 * @component
 	 */
 
-	import { mean } from 'd3-array';
-	import { format } from 'd3-format';
+  import { mean } from 'd3-array';
+  import { format } from 'd3-format';
+  import type { MeanProps } from '$lib/core/aggregateRenderers/MeanProps';
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: number[];
-		formatString?: string;
-		[key: string]: any;
-	}
-
-	let { values, formatString = '0.0f', ...rest }: Props = $props();
+  let { values, formatString = '0.0f', ...rest }: MeanProps = $props();
 
 	let f = $derived(format(formatString));
 
