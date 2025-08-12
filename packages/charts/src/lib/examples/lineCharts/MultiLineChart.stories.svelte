@@ -7,7 +7,7 @@
 	import { formatHigh } from '../utils';
 
 	const { Story } = defineMeta({
-		title: 'Charts/Example Charts/LineChart'
+		title: 'Charts/Examples/Line Charts'
 	});
 
 	let currentTheme = $derived(currentThemeObj.currentTheme);

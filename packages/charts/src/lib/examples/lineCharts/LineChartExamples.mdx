@@ -15,32 +15,38 @@ These are example `LineChart` charts using default plot styles.
 
 <Canvas of={SingleLine.SingleLine} />
 
-```javascript
-let spec = $derived({
-	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
-	marks: [
-		Plot.gridX({ interval: '2 years' }),
-		Plot.gridY(),
-		Plot.axisX({ label: 'Year', interval: '1 year' }),
-		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
-		Plot.ruleY([0]),
-		Plot.line(chartData, {
-			x: 'Month',
-			y: 'Value',
-			tip: {
-				format: {
-					x: true,
-					y: (d) => '£' + formatHigh(d)
+<details>
+	<summary>Spec</summary>
+	```javascript
+	let spec = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.ruleY([0]),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + formatHigh(d)
+					}
 				}
-			}
-		})
-	]
-});
-```
+			})
+		]
+	});
+	```
+</details>
 
 ## Multiple lines
 
 <Canvas of={MultiLine.MultipleLines} />
+
+<details>
+	<summary>Spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -97,9 +103,14 @@ let spec = $derived({
 });
 ```
 
+</details>
+
 ## Dual line
 
 <Canvas of={DualLine.DualLine} />
+
+<details>
+	<summary>Spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -143,9 +154,14 @@ let spec = $derived({
 });
 ```
 
+</details>
+
 ## Area chart
 
 <Canvas of={Area.AreaChart} />
+
+<details>
+	<summary>Spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -174,11 +190,15 @@ let spec = $derived({
 	]
 });
 ```
+
+</details>
 
 ## Area chart with custom fill opacity
 
 <Canvas of={AreaCustom.AreaOpacity} />
 
+<details>
+	<summary>Spec</summary>
 ```javascript
 let spec = $derived({
 	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
@@ -206,3 +226,4 @@ let spec = $derived({
 	]
 });
 ```
+</details>

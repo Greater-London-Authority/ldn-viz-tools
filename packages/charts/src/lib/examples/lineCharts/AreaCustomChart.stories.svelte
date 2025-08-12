@@ -6,7 +6,7 @@
 	import { formatHigh } from '../utils';
 
 	const { Story } = defineMeta({
-		title: 'Charts/Example Charts/LineChart'
+		title: 'Charts/Examples/Line Charts'
 	});
 
 	// Spec and data for area example
