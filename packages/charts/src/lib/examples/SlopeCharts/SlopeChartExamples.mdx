@@ -1,0 +1,118 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as SlopeChart from './SlopeChart.stories.svelte';
+
+<Meta title="Charts/Examples/Slope Charts" />
+
+# Slope Charts
+
+These are example `SlopeChart` charts using default plot styles.
+
+## Default
+
+<Canvas of={SlopeChart.Default} />
+
+<details>
+    <summary>chartData</summary>
+
+    ```json
+    [
+        {
+            "Year": "2015",
+            "Variable": "Variable A",
+            "Average": 43472.99032944677
+        },
+        {
+            "Year": "2015",
+            "Variable": "Variable B",
+            "Average": 35163.57588710289
+        },
+        {
+            "Year": "2015",
+            "Variable": "Variable C",
+            "Average": 26866.239745493527
+        },
+        {
+            "Year": "2021",
+            "Variable": "Variable A",
+            "Average": 24145.24057001651
+        },
+        {
+            "Year": "2021",
+            "Variable": "Variable B",
+            "Average": 22256.24442741557
+        },
+        {
+            "Year": "2021",
+            "Variable": "Variable C",
+            "Average": 20418.877644859735
+        }
+    ]
+    ```
+
+</details>
+
+<details>
+    <summary>Spec</summary>
+
+    ```javascript
+        let spec = $derived({
+    	height: 300,
+    	marginBottom: 30,
+    	x: { axis: null, type: 'ordinal', insetLeft: 90, insetRight: 90 },
+    	y: { axis: null, inset: 20 },
+    	color: {
+    		legend: true,
+    		range: [
+    			currentTheme.color.data.primary,
+    			currentTheme.color.data.secondary,
+    			currentTheme.color.data.tertiary
+    		]
+    	},
+    	marks: [
+    		Plot.line(chartData, {
+    			x: 'Year',
+    			y: 'Average',
+    			z: 'Variable',
+    			stroke: 'Variable',
+    			tip: true
+    		}),
+    		Plot.tickX(chartData, {
+    			x: 'Year',
+    			stroke: currentTheme.color.chart.grid
+    		}),
+    		Plot.textX(
+    			chartData.filter((d) => d.Variable === 'Variable A'),
+    			{
+    				dy: 135,
+    				text: (d) => d.Year
+    			}
+    		),
+    		Plot.dot(chartData, {
+    			r: 4,
+    			x: 'Year',
+    			y: 'Average',
+    			stroke: 'Variable',
+    			strokeWidth: 2,
+    			fill: currentTheme.color.chart.background,
+    			fillOpacity: 1
+    		}),
+    		d3
+    			.groups(chartData, (d) => d.Year === '2015')
+    			.map(([left, data]) =>
+    				Plot.text(
+    					data,
+    					occlusionY({
+    						x: 'Year',
+    						y: 'Average',
+    						text: (d) => '£' + formatHigh(d.Average),
+    						textAnchor: left ? 'end' : 'start',
+    						dx: left ? -8 : 8,
+    						radius: 8.5
+    					})
+    				)
+    			)
+    	]
+    });
+    ```
+
+</details>
