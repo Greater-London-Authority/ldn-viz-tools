@@ -1,0 +1,214 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as DefaultBar from './DefaultBar.stories.svelte';
+import * as FacetedBar from './FacetedBar.stories.svelte';
+import * as HorizontalBar from './HorizontalBar.stories.svelte';
+import * as HorizontalStackedBar from './HorizontalStackedBar.stories.svelte';
+import * as StackedBar from './StackedBar.stories.svelte';
+
+<Meta title="Charts/Examples/Bar Charts" />
+
+# Bar Charts
+
+These are example `BarChart` charts using default plot styles.
+
+## **Single variable**
+
+<Canvas of={DefaultBar.Default} />
+
+<details>
+    <summary>Spec</summary>
+    ```javascript
+    let spec = $derived({
+        x: { insetLeft: 80, insetRight: 20, type: 'band' },
+        marks: [
+            Plot.gridY(),
+            Plot.axisX({ label: 'Year' }),
+            Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
+            Plot.barY(chartData, {
+                x: 'Year',
+                y: 'Average',
+                tip: {
+                    format: {
+                        x: true,
+                        y: (d) => '£' + formatHigh(d)
+                    }
+                }
+            }),
+            // baseline last
+            Plot.ruleY([0])
+        ]
+    });
+    ```
+</details>
+
+## **Stacked Bar**
+
+<Canvas of={StackedBar.Stacked} />
+
+<details>
+    <summary>Spec</summary>
+    ```javascript
+    let spec = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'band' },
+		color: {
+			legend: true,
+			range: [
+				currentTheme.color.data.primary,
+				currentTheme.color.data.secondary,
+				currentTheme.color.data.tertiary
+			]
+		},
+		marks: [
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year' }),
+			Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.barY(chartData, {
+				x: 'Year',
+				y: 'Average',
+				fill: 'Variable',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + formatHigh(d)
+					}
+				}
+			}),
+			// baseline last
+			Plot.ruleY([0])
+		]
+	});
+    ```
+</details>
+
+## **Faceted Bar**
+
+<Canvas of={FacetedBar.Faceted} />
+
+<details>
+    <summary>Spec</summary>
+    ```javascript
+    let spec = $derived({
+		marginRight: 120, // adjust margin right to suit your label length
+		marginTop: 20, // adjust top margin to better suit facetY,
+		x: { insetLeft: 80, insetRight: 20, type: 'band' },
+		fy: { padding: 0.2 }, // add options or true to ensure defaultSizeFacet is applied
+		color: {
+			legend: true,
+			range: [
+				currentTheme.color.data.primary,
+				currentTheme.color.data.secondary,
+				currentTheme.color.data.tertiary
+			]
+		},
+		marks: [
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year' }),
+			Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.barY(chartData, {
+				x: 'Year',
+				y: 'Average',
+				fy: 'Variable',
+				fill: 'Variable',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + formatHigh(d)
+					}
+				}
+			}),
+			// baseline last
+			Plot.ruleY([0])
+		]
+	});
+    ```
+</details>
+
+## **Horizontal Bar**
+
+<Canvas of={HorizontalBar.Horizontal} />
+
+<details>
+    <summary>Spec</summary>
+    ```javascript
+    let spec = $derived({
+		height: 300, // height set outside of default
+		marginLeft: 80, // adjust margin left to suit label length,
+		// reset insetLeft to 0, push domain to padded max value, insetRight to prevent label clipping on x axis
+		x: {
+			insetLeft: 0,
+			insetRight: 16,
+			domain: [0, d3.min(chartData, (d) => d.Average * 1.15)]
+		},
+		marks: [
+			Plot.gridX(),
+			Plot.axisX({ label: null, tickFormat: (d) => '£' + formatHigh(d) }),
+			// change text & line anchors and reset dx & dy
+			Plot.axisY({ textAnchor: 'end', lineAnchor: 'middle', dx: 0, dy: 0 }),
+			Plot.barX(chartData, {
+				insetTop: 5,
+				insetBottom: 5,
+				x: 'Average',
+				y: 'Variable',
+				tip: {
+					format: {
+						x: (d) => '£' + formatHigh(d),
+						y: false
+					}
+				}
+			}),
+			// baseline last
+			Plot.ruleX([0])
+		]
+	});
+    ```
+</details>
+
+## **Horizontal Stacked Bar**
+
+<Canvas of={HorizontalStackedBar.HorizontalStacked} />
+
+<details>
+    <summary>Spec</summary>
+    ```javascript
+    let spec = $derived({
+		height: 300, // height set outside of default
+		marginLeft: 80, // adjust margin left to suit label length,
+		// reset insetLeft to 0, push domain to padded max value, insetRight to prevent label clipping on x axis
+		x: {
+			insetLeft: 0,
+			insetRight: 16
+		},
+		y: { type: 'band' },
+		color: {
+			legend: true,
+			range: [
+				currentTheme.color.data.primary,
+				currentTheme.color.data.secondary,
+				currentTheme.color.data.tertiary
+			]
+		},
+		marks: [
+			Plot.gridX(),
+			Plot.axisX({ label: null, tickFormat: (d) => '£' + formatHigh(d) }),
+			// change text & line anchors and reset dx & dy
+			Plot.axisY({ textAnchor: 'end', lineAnchor: 'middle', dx: 0, dy: 0 }),
+			Plot.barX(chartData, {
+				insetTop: 5,
+				insetBottom: 5,
+				x: 'Average',
+				y: 'Year',
+				fill: 'Variable',
+				tip: {
+					format: {
+						x: (d) => '£' + formatHigh(d),
+						y: false,
+						fill: false
+					}
+				}
+			}),
+			// baseline last
+			Plot.ruleX([0])
+		]
+	});
+    ```
+</details>
