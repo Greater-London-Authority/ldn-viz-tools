@@ -1,0 +1,41 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as Histogram from './Histogram.stories.svelte';
+
+<Meta title="Charts/Examples/Histogram Charts" />
+
+# Histogram Charts
+
+## Default
+
+<Canvas of={Histogram.Default} />
+
+<details>
+    <summary>Spec</summary>
+    ```javascript
+        let spec = $derived({
+		marginTop: 48, // adjust for y label
+		x: { insetLeft: 80, insetRight: 20 },
+		marks: [
+			Plot.gridX(),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Random Value Range' }),
+			Plot.axisY({ label: 'Frequency of value' }),
+			Plot.rectY(chartData, {
+				x1: 'x0',
+				x2: 'x1',
+				y: 'length',
+				tip: {
+					channels: {
+						Frequency: 'length'
+					},
+					format: {
+						y: false
+					}
+				}
+			}),
+			// baseline last
+			Plot.ruleY([0])
+		]
+	});
+    ```
+</details>
