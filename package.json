@@ -24,6 +24,7 @@
 		"@changesets/cli": "^2.27.1",
 		"@ldn-viz/config-vitest": "*",
 		"@ldn-viz/docs": "*",
+		"@observablehq/sample-datasets": "^1.0.1",
 		"@storybook/addon-svelte-csf": "^5.0.3",
 		"@tailwindcss/node": "^4.1.8",
 		"@tidyjs/tidy": "^2.5.2",

@@ -1,7 +1,8 @@
 <script module lang="ts">
 	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import * as penguins from '@observablehq/sample-datasets/penguins.csv';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import penguins from '../../../data/demoPenguins.json';
+	// import penguins from '../../../data/demoPenguins.json';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
 
