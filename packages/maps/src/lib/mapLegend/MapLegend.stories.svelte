@@ -217,11 +217,10 @@
 		}
 	];```
 -->
-<Story name="Toggle visibility" let:args>
+<Story name="Toggle layer visibility" let:args>
 	<div class="flex flex-col space-y-2 mb-4">
 		<p class="font-bold">Layers</p>
 		<LayerControlGroup bind:state {options} buttonsHidden />
-		<pre class="text-color-text-secondary">{JSON.stringify(state, null, 2)}</pre>
 	</div>
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
