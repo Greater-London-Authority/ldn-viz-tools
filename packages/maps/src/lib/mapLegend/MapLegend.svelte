@@ -10,7 +10,7 @@
 	/**
 	 * Boolean to display or hide legend
 	 */
-	export let isOpen: boolean = false;
+	export let isOpen: boolean = true;
 
 	/**
 	 * Value for width to pass into `ColorLegend` component
