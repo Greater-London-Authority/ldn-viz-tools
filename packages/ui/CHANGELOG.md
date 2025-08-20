@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 19.4.0
+
+### Minor Changes
+
+- e8c3af7: CHANGED: ColorLegend label now has a font-size of 12px
+
 ## 19.3.0
 
 ### Minor Changes

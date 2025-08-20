@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.0.0
+
+### Major Changes
+
+- e8c3af7: ADDED: `MapLegend` component
+
 ## 7.6.1
 
 ### Patch Changes
