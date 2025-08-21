@@ -29,7 +29,7 @@
 	/**
 	 * Function to be called when user clicks 'Done' button.
 	 */
-	export let onDone = (features: Feature[]) => null;
+	export let onDone = (_features: Feature[]) => null;
 
 	/**
 	 * Controls will be displayed unless this is `false`.
