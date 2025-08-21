@@ -2,7 +2,7 @@
 	import Table from './Table.svelte';
 
 	export const meta = {
-		title: 'Tables/Table - Visual Encodings',
+		title: 'Tables/Example Tables/Visual Renderers',
 		component: Table
 	};
 </script>
@@ -14,6 +14,7 @@
 	import dataBenchmarks from './demoData/benchmarkData.json';
 
 	const tableSpecBenchmarks = {
+		showColSummaries: true,
 		columns: [
 			{
 				short_label: 'label',
@@ -21,10 +22,10 @@
 
 				cell: {
 					renderer: 'TextCell',
-					width: '248px',
-					href: (row) =>
+					href: (row: { id: string }) =>
 						`https://dev.ldn-gis.co.uk/hsds-hub/overview?loc=E09000003&area_type=highstreet&area_id=${row.id}`,
-					onClick: (row) => console.log('User clicked on High sTreet cell for row', row)
+					onClick: (row: { id: string }) =>
+						console.log('User clicked on High Street cell for row', row)
 				},
 
 				column: {
@@ -128,18 +129,17 @@
 		.map((row) => ({ ...row, Salary: +row.Salary.slice(1).replace(/,/g, '') }));
 
 	const tableSpecPaginated = {
-		//  showColSummaries: false,
+		showColSummaries: true,
 		columns: [
 			{
 				short_label: 'Name',
-				cell: { renderer: 'TextCell', width: '160px' },
+				cell: { renderer: 'TextCell' },
 				column: { renderer: 'TextCell', value: '' }
 			},
 
 			{
 				short_label: 'Position',
-				//cell: {renderer: TextCell, width: "240px"},
-				cell: { renderer: 'ColorAndLabel', width: '240px' },
+				cell: { renderer: 'ColorAndLabel' },
 				column: { renderer: 'BarChart' }
 			},
 
@@ -174,6 +174,7 @@
 	import dataMetrics from './demoData/metricData.json';
 
 	const tableSpecMetrics = {
+		showColSummaries: true,
 		// this is a bt of a hack that won't survive re-ordering
 		colGroups: [
 			{
@@ -213,10 +214,11 @@
 				cell: {
 					renderer: 'TextCell',
 					alignText: 'left',
-					width: '300px',
-					href: (row) =>
+					href: (row: { area_id: string }) =>
 						`https://dev.ldn-gis.co.uk/hsds-hub/overview?loc=E09000003&area_type=highstreet&area_id=${row.area_id}`
 				},
+
+				width: 300,
 
 				column: {
 					renderer: 'TextCell',
@@ -465,24 +467,22 @@
 			{
 				short_label: 'Name',
 				hintText: 'What this person is called.',
-				cell: { renderer: 'TextCell', width: '100px' }
+				cell: { renderer: 'TextCell' }
 			},
 
 			{
 				short_label: 'Age',
 				hintText: 'How old this person is, in years.',
-				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['age_known'] }
+				cell: { renderer: TextCellWithUncertainty, contextFields: ['age_known'] }
 			},
 
 			{
 				short_label: 'Sex',
 				hintText: 'Whether this person is male or female.',
-				cell: { renderer: TextCellWithUncertainty, width: '100px', contextFields: ['sex_known'] }
+				cell: { renderer: TextCellWithUncertainty, contextFields: ['sex_known'] }
 			}
 		]
 	};
-
-	export let page = 1;
 </script>
 
 <Template let:args>
@@ -502,7 +502,24 @@ This example shows how the encoding used for a column can be influenced by the v
 </Story>
 
 <Story name="Metrics Example" source>
-	<Table data={dataMetrics} tableSpec={tableSpecMetrics} allowSorting allowRowGrouping />
+	<Table
+		data={dataMetrics}
+		tableSpec={tableSpecMetrics}
+		allowSorting
+		allowRowGrouping
+		fixedTableWidth={1500}
+	/>
+</Story>
+
+<Story name="Metrics Example - virtualised" source>
+	<Table
+		data={dataMetrics}
+		tableSpec={tableSpecMetrics}
+		allowSorting
+		allowRowGrouping
+		virtualise
+		fixedTableWidth={1500}
+	/>
 </Story>
 
 <!--

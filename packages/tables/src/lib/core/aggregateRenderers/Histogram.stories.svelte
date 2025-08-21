@@ -1,7 +1,7 @@
 <script context="module">
 	import Histogram from './Histogram.svelte';
 	export const meta = {
-		title: 'Tables/AggregateEncodings/Histogram',
+		title: 'Tables/Components/AggregateRenderers/Histogram',
 		component: Histogram,
 
 		args: {

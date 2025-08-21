@@ -3,7 +3,7 @@
 	import PlaceholderImage from './PlaceholderImage.svelte';
 
 	export const meta = {
-		title: 'Ui/PlaceholderImage',
+		title: 'Ui/Components/PlaceholderImage',
 		component: PlaceholderImage,
 		args: {}
 	};

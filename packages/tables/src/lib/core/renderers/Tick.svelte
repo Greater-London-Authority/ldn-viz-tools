@@ -2,7 +2,7 @@
 	/**
 	 * The `Tick` component renders a table cell representing a numerical value as a tick;
 	 * the horizontal position of the tick encodes the value.
-	 * See also: [Dot](./?path=/docs/tables-encodings-dot--documentation)
+	 * See also: [Dot](./?path=/docs/tables-components-encodings-dot--documentation)
 	 * @component
 	 */
 
@@ -30,12 +30,15 @@
 	export let formatString = '0.0f';
 	$: f = format(formatString);
 
-	export let extent;
+	export let extent: [number, number];
 
-	let d;
 	$: d = (value - extent[0]) / (extent[1] - extent[0]);
 
 	const fPercentage = format('0.0%');
+
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$$restProps;
 </script>
 
 <div

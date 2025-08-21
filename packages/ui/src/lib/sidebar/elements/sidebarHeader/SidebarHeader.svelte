@@ -37,7 +37,7 @@
 		<h1 class="text-xl font-bold">{@html title}</h1>
 
 		{#if $$slots.hint}
-			<!-- Help text to display when user clicks on "More info". -->
+			<!-- An optional `<Overlay>` component to provide additional explanation. -->
 			<slot name="hint" />
 		{/if}
 	</div>

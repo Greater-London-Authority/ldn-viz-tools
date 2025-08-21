@@ -1,5 +1,188 @@
 # ldn-viz-tools-charts
 
+## 5.3.0
+
+### Minor Changes
+
+- 8bde3bc: CHANGED: defaultArea plot fragment uses fillOpacity instead of opacity for consistency with other plot fragments
+
+## 5.2.0
+
+### Minor Changes
+
+- 885ecf1: FIXED: fixed custom tooltips in ObservablePlot component
+- 41d345f: CHANGED: Steps down mid button size (40px) to match height of input elements.
+  CHANGED: Adds borders and shadows to tooltips/popovers and improves contrast of overlay components - especially relevant in map context
+
+### Patch Changes
+
+- ceaaf7a: CHANGED: Replace typography plugin with custom plugin implemtation that uses token values from Figma
+- Updated dependencies [6e75123]
+- Updated dependencies [aae5771]
+- Updated dependencies [41d345f]
+  - @ldn-viz/ui@17.1.0
+
+## 5.1.0
+
+### Minor Changes
+
+- 2321866: CHANGED: add ability to align the sub-components of two or more `ChartContainers` placed side-by-side
+- 56718bf: FIXED: order of alt and description in `ChartContainer` component and removed 'View description' button from image capture on download
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Patch Changes
+
+- Updated dependencies [dc63318]
+- Updated dependencies [fec8705]
+- Updated dependencies [824b681]
+- Updated dependencies [11e1f97]
+- Updated dependencies [8321585]
+- Updated dependencies [1610465]
+- Updated dependencies [4eac8b2]
+- Updated dependencies [978beb6]
+- Updated dependencies [a04846c]
+- Updated dependencies [ae6a3df]
+- Updated dependencies [adb7e59]
+- Updated dependencies [49fd045]
+- Updated dependencies [d344f2c]
+- Updated dependencies [2557336]
+- Updated dependencies [bdbedf3]
+  - @ldn-viz/ui@16.0.0
+
+## 5.0.1
+
+### Patch Changes
+
+- 9c33886: ADDED: export the `plot` and `getDefault` functions, and `Plot` object
+
+## 5.0.0
+
+### Major Changes
+
+- 028ad2f: ADDED: `currentTheme` store to `ui` package and use in `chart` examples. Implement accessibility improvements in charts and illustrate with line chart example
+
+### Minor Changes
+
+- 028ad2f: ADDED: ARIA attributes and global ariaHidden for accessibility
+- 028ad2f: ADDED: chartDescription modal to Footer for use in chart and chartDescription for accessibility to ChartContainer
+
+### Patch Changes
+
+- Updated dependencies [028ad2f]
+- Updated dependencies [4556f05]
+- Updated dependencies [5c06c36]
+- Updated dependencies [f5de052]
+- Updated dependencies [7487cd8]
+- Updated dependencies [0ea3bc4]
+- Updated dependencies [7dc2bfb]
+- Updated dependencies [028ad2f]
+  - @ldn-viz/ui@15.3.0
+  - @ldn-viz/utils@1.1.0
+
+## 4.0.0
+
+### Major Changes
+
+- 8c31d1b: CHANGED: `ObservablePlot` and `ObservablePlotInner` now default to using a wrapper about Observable Plot;s `Plot.plot()` that applies default chart styling
+- 8c31d1b: ADDED: wrapper functions that wrap Observable Plot's mark functions and apply default styling
+
+### Minor Changes
+
+- 5f566bc: CHANGED: switch from `html2canvas` to `html-to-image` in the `ImageDownloadButton`
+
+### Patch Changes
+
+- Updated dependencies [7d12227]
+- Updated dependencies [c145cf7]
+- Updated dependencies [c08ce0a]
+- Updated dependencies [2e42c23]
+- Updated dependencies [5f566bc]
+- Updated dependencies [c1d600c]
+- Updated dependencies [721774d]
+- Updated dependencies [0056c95]
+  - @ldn-viz/ui@15.2.0
+
+## 3.8.2
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
+- Updated dependencies [1c134d6]
+- Updated dependencies [a3726bf]
+- Updated dependencies [4e4f7c5]
+- Updated dependencies [0313649]
+- Updated dependencies [09fa609]
+- Updated dependencies [6dc5105]
+- Updated dependencies [e397e35]
+- Updated dependencies [68780ea]
+  - @ldn-viz/ui@15.1.0
+
+## 3.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+- Updated dependencies [89b89e0]
+  - @ldn-viz/ui@14.8.1
+
+## 3.8.0
+
+### Minor Changes
+
+- f4e7e27: FIXED: add padding to images of charts or tables downloaded in png format using ImageDownloadButton
+
+### Patch Changes
+
+- Updated dependencies [f51bc23]
+  - @ldn-viz/ui@14.8.0
+
+## 3.7.0
+
+### Minor Changes
+
+- 72db5e6: FIXED: addEventHandlerInner no longer expects x and y values (fixes regression in 3.5.0)
+
+## 3.6.0
+
+### Minor Changes
+
+- a8170bb: CHANGED: improve footer in `ChartContainer` component
+
+### Patch Changes
+
+- a581914: FIXED: fix regression that caused width of `ObservablePlot`/`ObservablePlotInner` to not respond to changes in width of parent container
+
+## 3.5.0
+
+### Minor Changes
+
+- d36a893: ADDED: `ObservablePlot` now applies a `ChartContainer` wrapper around a separate `ObservablePlotInner` components and accepts a `controls` slot
+
+## 3.4.0
+
+### Minor Changes
+
+- eff5d0e: ADDED: `ChartContainer` component now accepts a `controls` slot
+- 04e407a: Adjust reponisve layout of export buttons
+
+### Patch Changes
+
+- Updated dependencies [e4b3ff7]
+- Updated dependencies [e62fd68]
+  - @ldn-viz/ui@14.4.0
+
+## 3.3.0
+
+### Minor Changes
+
+- e9a98b1: FIXED: support event handlers for marks that have `x1`/`x2`/`cx` attributes instead of `x`, and `y1`/`y2`/`cy` attributes instead of `y`
+
+## 3.2.0
+
+### Minor Changes
+
+- 8aac39d: FIXED: export `addEventHandler` and `registerTooltip`
+
 ## 3.1.1
 
 ### Patch Changes

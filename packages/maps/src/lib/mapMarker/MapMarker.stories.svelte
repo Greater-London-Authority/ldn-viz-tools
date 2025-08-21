@@ -12,7 +12,7 @@
 	};
 
 	export const meta = {
-		title: 'Maps/MapMarker',
+		title: 'Maps/Components/MapMarker',
 		component: MapMarker,
 		parameters: {
 			layout: 'full'
@@ -35,10 +35,11 @@
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
 	import loadTestLayers from '../loadTestLayers';
-	import TestTooltip from './TestTooltip.svelte';
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
 	import TestPopup from './TestPopup.svelte';
+	import TestTooltip from './TestTooltip.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>

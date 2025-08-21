@@ -16,7 +16,7 @@
 			}
 
 			return false;
-		} catch (err) {
+		} catch (_err) {
 			return false;
 		}
 	};
@@ -37,6 +37,8 @@
 			cookieControlStore.set(window.CookieControl);
 		}
 	});
+
+	$: cookieControlStore.set(window.CookieControl);
 </script>
 
 {#if $cookieControlStore}

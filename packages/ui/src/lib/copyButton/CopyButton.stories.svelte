@@ -2,7 +2,7 @@
 	import CopyButton from './CopyButton.svelte';
 
 	export const meta = {
-		title: 'Ui/CopyButton',
+		title: 'Ui/Components/Buttons/CopyButton',
 		component: CopyButton,
 		argTypes: {
 			content: {
@@ -21,11 +21,14 @@
 			},
 			$$restprops: {
 				description:
-					'Any other props are passed through to [`<Button>` component](./?path=/docs/ui-button--documentation).',
+					'Any other props are passed through to [`<Button>` component](./?path=/docs/ui-components-buttons-button--documentation).',
 				table: {
 					category: 'properties'
 				}
 			}
+		},
+		args: {
+			content: 'Thing To Copy'
 		}
 	};
 </script>
@@ -46,15 +49,17 @@
 	<CopyButton content="Text to be copied." label="Copy to clipboard" />
 </Story>
 
-<!-- You can also provide any prop that is accepted by the [`<Button>` component](./?path=/docs/ui-button--documentation) -->
+<!-- You can also provide any prop that is accepted by the [`<Button>` component](./?path=/docs/ui-components-buttons-button--documentation) -->
 <Story name="Changing button style">
 	<CopyButton content="Text to be copied." label="Copy" variant="solid" emphasis="secondary" />
 </Story>
 
-<Story name="Indictor icon">
-	<CopyButton content="One." label="One" />
-	<CopyButton content="Two." label="Two" />
-	<CopyButton content="Three." label="Three" />
+<Story name="Indicator icon">
+	<div class="space-y-4">
+		<CopyButton content="One." label="One" />
+		<CopyButton content="Two." label="Two" />
+		<CopyButton content="Three." label="Three" />
+	</div>
 </Story>
 
 <Story name="Custom label">

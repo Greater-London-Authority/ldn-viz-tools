@@ -1,5 +1,311 @@
 # ldn-viz-tools-ui
 
+## 19.4.0
+
+### Minor Changes
+
+- e8c3af7: CHANGED: ColorLegend label now has a font-size of 12px
+
+## 19.3.0
+
+### Minor Changes
+
+- 6e76a2f: FIXED: Sidebar tabs orient correctly when horizontal
+
+## 19.2.0
+
+### Minor Changes
+
+- 212ff05: FIXED: export the `Tabs` component
+- f2f5f63: FIXED: `SidebarTabList` now correctly sets `aria-orientation` attribute, and responds to the correcct pair of up/down or left/right arrow keys based on orientation
+- bec155b: CHANGED: `ColorPicker` now has tooltip, hover and active states
+
+## 19.1.0
+
+### Minor Changes
+
+- 50c7b8b: CHANGED: `LayerControl`, `LayerControlGroup` and `ColorPicker` take an optional array of `colorNames` to allow customisation of color picker
+
+### Patch Changes
+
+- b4a855d: FIXED: fixed refresh of OAuth tokens by `HandleRedirectFromAuth`
+
+## 19.0.0
+
+### Major Changes
+
+- 84e5083: CHANGED: `Sidebar` is now an aside and takes `sidebarAriaLabel` and `tabsAriaLabel` optional props for better accessibility
+
+### Minor Changes
+
+- 671dffc: CHANGED: `CheckboxGroup`, `LayerControl` and `LayerControlGroup` components
+
+  - `LayerControlGroup` now passes `name` into `LayerControl`
+  - `LayerControl` now passes `name` into `Checkbox`, in addition to `Radio`
+  - For accessibility: `LayerControlGroup` and `CheckboxGroup` now have an `aria-controls` attribute on the checkbox that toggles all controls, with a value equal to the ids for all controls
+
+## 18.1.0
+
+### Minor Changes
+
+- c66b03b: FIXED: CSS selector in `Toast` component (regression in 146ce20)
+- de9b000: Refactored `LayerControlGroup`, `CheckboxGroup` and `Checkbox` components for accessibility.
+
+  `LayerControlGroup` and `CheckboxGroup` now have:
+
+  - `id` and `role="group"` attributes on the div that wraps around the `LayerControl` or `Checkbox` inputs
+  - `ariaLabel` prop to describe the purpose of the components to screen reader users
+  - `<ul>` element surrounding the options, with each option nested in an `<li>` element so screen reader users know the options are connected
+
+## 18.0.0
+
+### Major Changes
+
+- 2bd195a: Bump the major version number to avoid conflicts due to the svelte5 preview being released as 17.1.2.
+
+### Minor Changes
+
+- dec3ed3: ADDED `ListMenu` and `ListMenuItem` components
+- 9f674ab: FIXED: `SidebarToggle` now has `aria-expanded` and `aria-controls` attributes for screen reader accessibility. `Sidebar` has a `sidebarId` for use by `SidebarToggle`.
+
+## 17.1.1
+
+### Patch Changes
+
+- 2950252: FIXED: export `SidebarGroup`
+
+## 17.1.0
+
+### Minor Changes
+
+- aae5771: FIXED: style `Button` component using `:focus-visible` (rather than `:focus`) pseudo-selector. This prevents focus ring incorrectly appearing around overlay triggers after the overlay is closed with mouse
+- 41d345f: CHANGED: Steps down mid button size (40px) to match height of input elements.
+  CHANGED: Adds borders and shadows to tooltips/popovers and improves contrast of overlay components - especially relevant in map context
+
+### Patch Changes
+
+- 6e75123: CHANGED: changed focus state on buttons to inset style
+  CHANGED: added focus state to radio button solid
+
+## 17.0.0
+
+### Major Changes
+
+- bc56cf5: FIXED: changes to `Tabs`/`TabList`/`TabPanel` to improve accessibility (ARIA attributes, more semantic markup, and keyboard interactions)
+
+  CHANGED: API of `Tabs` component now accepts a `tabs` prop rather than using slots
+
+  CHANGED: API of `Sidebar` component now accepts a `tabs` prop rather than using slots
+
+  CHANGED: API of `SidebarTabList` component now accepts a `tabs` prop rather than using slots
+
+  CHANGED: styling of `SidebarSection`/`SidebarGroupTitle`/`SidebarSectionTitle`
+
+  REMOVED: `SidebarFromArray` (the `Sidebar` component now uses the same API)
+
+### Minor Changes
+
+- f952670: ADDED: `LoadingIndicator` component to wrap around `Spinner` and display static icon in place of spinner if user prefers reduced motion
+
+  Accessibility: Updated `AsyncButton` and `NonIdealState` components to announce state changes and use `LoadingIndicator` to ensure correct implementation of reduced motion
+
+- bfd2c81: CHANGED: allow `htmlNode` prop of `ImageDownloadButton` to be an SVG element, rather than parent of an SVG element
+
+## 16.1.0
+
+### Minor Changes
+
+- 3d94c5d: FIXED: `Popover` component is now accessible to screen readers
+- 146ce20: FIXED: changed ARIA role of `Toast` from `dialog` to `alert`
+- 5d9a21b: CHANGED: set `overflow-y: scroll` on list of geocoder suggestions and limit height to enable scrolling if `maxSuggestions` is set to a large value
+- f672c83: ACCESSIBILITY: added `role="dialog"` to `Popover`
+- bfb3530: FIXED: adjust z-index of `MultipleActionButton` drop-down menu so it opens in front of modal
+- d15e1f3: ADDED: `id` to `SvelteSelect` inside `Select` component
+- f672c83: ACCESSIBILITY: added `ariaLabel` to `Trigger` component for use by `ColorPicker`, `ResizeControl`, `OpacityControl` and `LayerControl` components
+
+### Patch Changes
+
+- a15655b: ADDED: change default site name in `PageMetadata` from "GLA Intelligence and Analysis Unit" to "GLA City Intelligence Unit"
+
+## 16.0.1
+
+### Patch Changes
+
+- c135236: ADDED: correctly export `Trigger` and `ThemeSwitcher`
+
+## 16.0.0
+
+### Major Changes
+
+- 4eac8b2: REMOVED: `SidebarHint` component
+  CHANGED: use `Overlay` component for hints in Inputs and Sidebar
+- adb7e59: CHANGED: change `isOpen` prop of `Modal` and `checked` prop of `Switch` from being a Sevelte store with a Boolean value to simply a Boolean.
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Minor Changes
+
+- dc63318: ADDED: components for OAuth authentication
+- fec8705: ADDED: update `ColorPicker` in `LayerControl` to use colors defined in our categorical color tokens
+  ADDED: `tokenNameToValue` and `colorTokenNameToRGBArray` functions to convert color token names to values for current theme
+- 824b681: CHANGED: `Modal` component to make description essential, set openFocus to description id and fixed styling of modal contents
+  CHANGED: added `<slot name="buttons">` to `Modal` to fix styling of buttons relative to modal content
+- 11e1f97: ADDED: `Overlay` component to allow choice of tooltip, modal or popover and implementation in Storybook
+  ADDED: `Trigger` component to handle opening tooltips, modals and popovers
+  CHANGED: `Button` customAction prop is now generic
+- 8321585: CHANGED: allow `Button`/`MultipleActionButton`/`DataDownloadButton`/`ImageDownloadButton`
+- 1610465: CHANGED: `Geocoder`, `MapControlGeocoder`, and `MapControlLocationSearch` accept a callback function to call when the user clears the search box
+- 978beb6: CHANGED: LayerControlGroup now accepts a `mutuallyExclusive` prop
+- ae6a3df: FIXED: accessibility issues in `Input` and `InputWrapper` components
+- 49fd045: ADDED: added `SidebarFromArray` component
+- 2557336: ADDEDL input wrapper to grouped inputs
+- bdbedf3: Adds xs button size and 'slim' prop
+
+### Patch Changes
+
+- a04846c: FIXED: set types of some props on PageMetadata
+
+## 15.3.0
+
+### Minor Changes
+
+- 028ad2f: ADDED: `randomId` generator to `@ldn-viz/ui` exports
+- 4556f05: ADDED: ARIA label to `Callout` component for accessibility
+- f5de052: FIXED: updated `Checkbox` component to use explicit input labels to fix duplicate announcements by screen reader
+- 7487cd8: FIXED: accessibility issues in `MultipleActionButton` component
+- 7487cd8: ADDED: pass Melt-UI actions down to `Button` component for proper ARIA semantics
+- 028ad2f: ADDED: `currentTheme` store to `ui` package and use in `chart` examples. Implement accessibility improvements in charts and illustrate with line chart example
+
+### Patch Changes
+
+- 7dc2bfb: ADDED: alt text to logo components
+- Updated dependencies [5c06c36]
+- Updated dependencies [0ea3bc4]
+  - @ldn-viz/utils@1.1.0
+
+## 15.2.2
+
+### Patch Changes
+
+- 33ce5a9: CHANGED: made color chip in `LayerControl` round by applying `rounded-full` class
+- d588473: CHANGED: removed hard-coded border color of "Show all" checkbox for `LayerControlGroup`
+
+## 15.2.1
+
+### Patch Changes
+
+- bcb194c: FIXED: increase z-index of Popover to ensure it renders above sidebar
+
+## 15.2.0
+
+### Minor Changes
+
+- c145cf7: CHANGED: `ColorLegend` now accepts a `reverse` prop, allowing the direction of the legend to flipped left-right
+- c08ce0a: ADDED: as an alternative to providing `DataDownloadButton` with a prop containing `data`, you can provide a function
+  that returns an array of data
+- 5f566bc: CHANGED: switch from `html2canvas` to `html-to-image` in the `ImageDownloadButton`
+- c1d600c: CHANGED: changed the appearance of the `LayerControl` and its sub-controls (`OpacityControl`, `ColorPicker`, `ResizeControl`)
+- 0056c95: CHANGED: use `Popover` component in `ColorPicker`/`OpacityControl`/`ResizeControl`, rather than duplicating implementation
+
+### Patch Changes
+
+- 7d12227: FIXED: use `<button>` element rather than `<div>` for some clickable elements
+- 2e42c23: FIXED: prevent Chrome drawing a second clear icon in `Geocoder` when used in a map
+- 721774d: FIXED: include `name` in the `id` of `RadioButtonSolid`, preventing interference with different
+  `RadioButtonGroupSolid`s that include options with the same `id`.
+
+## 15.1.0
+
+### Minor Changes
+
+- 1c134d6: ADDED: add `Callout` component
+- a3726bf: FIXED: allow `value` of an option in the `Select` component to be an empty string.
+- 4e4f7c5: FIXED: increase z-index of popover controls in `LayerControl` component so that they do not open behind sidebars
+- 0313649: ADDED: add `addMultipleEventHandlers` function for registering multiple event handlers to the same Observable Plot mark(s)
+- 09fa609: FIXED: avoid unnecessary re-renders of the plot within `ObservablePlotInner`
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
+- e397e35: FIXED: fix spacing between `RadioButton`s and `Checkbox`es when inside a `SidebarSection`
+- 68780ea: FIXED: fix bug that caused `AppShell` to always acts as if the `startOpen` prop was `false`
+
+## 15.0.0
+
+### Major Changes
+
+- a6dca7f: CHANGED: change the interface of the `LayerControlGroup` to separate the fixed configuration of the layers and their current state
+  CHANGED: rename the `helpText` prop on the `LayerControl` to `hint` for consistency with other components
+
+## 14.9.0
+
+### Minor Changes
+
+- aa341ff: ADDED: added `LayerControlGroup` component
+  CHANGED: `LayerControl` now supports a `disabled` state
+
+### Patch Changes
+
+- 7aeb3b0: FIXED: updated `AnalyticsAndCookieConsent` and `CookieControlSettings` components to avoid errors if they are rendered
+  before `window.CookieControl` is initialized
+
+## 14.8.1
+
+### Patch Changes
+
+- 89b89e0: FIXED: correctly set file names of downloaded data and image files
+
+## 14.8.0
+
+### Minor Changes
+
+- f51bc23: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.7.0
+
+### Minor Changes
+
+- 3dea9ca: ADDED: `RadioButtonGroup` component now accepts an `orientation` prop
+
+## 14.6.1
+
+### Patch Changes
+
+- 5d77717: CHANGED: wrap entries in the `CurrentLengendOrginalChips` when width of parent container is too narrow to fit them
+- 471c1cf: FIXED hintLabel prop is now optional
+
+## 14.6.0
+
+### Minor Changes
+
+- ebd6a57: ADDED: added a `LayerControl` component
+- 3d9026c: CHANGED: pinned the @steeze-ui/svelte-icon dependency to exactly 1.5.0, as subsequent versions are incompatible with Svelte 4
+
+## 14.5.0
+
+### Minor Changes
+
+- ba7c31c: FIXED: fixed issue with content disappearing behind sidebar when screen size reduced
+
+## 14.4.0
+
+### Minor Changes
+
+- e4b3ff7: ADDED: `Button` now has a prop to specify link should be opened in a new tab
+- e62fd68: CHANGED: when using the `RadioButtonGroup`, the `color` attribute for options is now optional
+- 0050885: CHANGED: the `isOpen` store on the `AppShell` component can now be externally updated to open or close the sidebar
+
+## 14.3.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
+## 14.2.0
+
+### Minor Changes
+
+- 5472861: CHANGED: update highlighting of tab icons inside a `TabList` or `SidebarTabList` when the selected item is changed externally
+
 ## 14.1.0
 
 ### Minor Changes

@@ -3,7 +3,7 @@
 	import RadioButtonSolid from './RadioButtonSolid.svelte';
 
 	export const meta = {
-		title: 'Ui/RadioButtonGroupSolid',
+		title: 'Ui/Components/RadioButtons/RadioButtonGroupSolid',
 		component: RadioButtonGroupSolid,
 		subcomponents: { RadioButtonSolid }
 	};
@@ -16,6 +16,8 @@
 	import { Story } from '@storybook/addon-svelte-csf';
 
 	let selectedId = 'bus';
+	let selectedId2 = 'train';
+	let selectedId3: undefined | string = undefined;
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops' },
@@ -25,12 +27,67 @@
 	];
 </script>
 
-<Story name="RadioGroup">
+<Story name="Default">
 	<RadioButtonGroupSolid options={optionsForGroup} name="station-type" bind:selectedId />
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
-<Story name="RadioGroup with Icons above">
+<Story name="With title">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With description">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+		description="This is a description"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With hint">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+		hint="Contextual Hint"
+		description="This is a description"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<!--
+You can create two or more independent instances of the `Two RadioButtonGroupSolid` -  just ensure that you provide
+different values as the `name` prop.
+-->
+<Story name="Using multiple instances">
+	<div class="flex flex-col gap-4">
+		<div class="flex flex-col gap-1">
+			<RadioButtonGroupSolid options={optionsForGroup} name="station-type-1" bind:selectedId />
+			<p class="text-color-text-secondary">Selected id: {selectedId}</p>
+		</div>
+
+		<div class="flex flex-col gap-1">
+			<RadioButtonGroupSolid
+				options={optionsForGroup}
+				name="station-type-2"
+				bind:selectedId={selectedId2}
+			/>
+			<p class="text-color-text-secondary">Selected id: {selectedId2}</p>
+		</div>
+	</div>
+</Story>
+
+<Story name="With Icons above">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
 			<Icon src={Funnel} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
@@ -48,7 +105,7 @@
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
-<Story name="RadioGroup with Icons below">
+<Story name="With Icons below">
 	<RadioButtonGroupSolid name="station-type" bind:selectedId>
 		<RadioButtonSolid id="bus" name="station-type-bus">
 			Bus
@@ -94,10 +151,36 @@
 			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			Plane
 		</RadioButtonSolid>
-		<RadioButtonSolid id="plane" name="station-type-plane">
+		<RadioButtonSolid id="long" name="station-type-long-label">
 			<Icon src={PresentationChartLine} theme="mini" class="w-5 h-5 mb-1" aria-hidden="true" />
 			This_label_is_far_too_long
 		</RadioButtonSolid>
 	</RadioButtonGroupSolid>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="Disabled (global)">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+		hint="Contextual Hint"
+		description="This is a description"
+		disabled
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With error">
+	<RadioButtonGroupSolid
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId={selectedId3}
+		label="Preferred mode of transport"
+		hint="Contextual Hint"
+		description="How you prefer to get around London."
+		error={!selectedId3 ? 'You must select an option' : undefined}
+	/>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>

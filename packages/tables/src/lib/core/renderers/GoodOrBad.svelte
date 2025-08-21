@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `GoodOrBad` component renders a table cell comparing a single vlaue to a reference or benchmark value.
+	 * The `GoodOrBad` component renders a table cell comparing a single value to a reference or benchmark value.
 	 * @component
 	 */
 
@@ -44,10 +44,9 @@
 
 	let compared: ComparedBenchmark;
 
-	let f;
 	$: f = format(formatString);
 
-	$: if (typeof benchmarkValue === 'number' && typeof value === 'number') {
+	$: if (typeof value === 'number') {
 		compared = compareToBenchmark(value, benchmarkValue, goodIs);
 	}
 
@@ -92,7 +91,9 @@
 		} as ComparedBenchmark;
 	};
 
-	//
+	// This suppresses warnings due to the RowRenderer providing props that aren't used.
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	$$restProps;
 </script>
 
 <p class={ragClasses}>
@@ -111,6 +112,6 @@
 		{compared.vs}
 		{benchmarkLabel}
 		{typeof benchmarkValue === 'number' ? f(benchmarkValue) : benchmarkValue}
-		({f(value)})
+		({f(+value)})
 	{/if}
 </p>

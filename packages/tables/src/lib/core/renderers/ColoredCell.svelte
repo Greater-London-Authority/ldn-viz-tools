@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `ColoredCell` component renders a table cell representing a numerical value as a label, with the background color encoding the value.
-	 * See also [ColorAndLabel](./?path=/docs/tables-encodings-colorandlabel--documentation).
+	 * See also [ColorAndLabel](./?path=/docs/tables-components-renderers-colorandlabel--documentation).
 	 * @component
 	 */
 
@@ -24,10 +24,7 @@
 	 */
 	export let colorScale: ScaleThreshold<string | number, string> | (() => string);
 
-	let f;
-	$: if (formatString) {
-		f = format(formatString);
-	}
+	$: f = format(formatString);
 </script>
 
 {#if !colorScale}

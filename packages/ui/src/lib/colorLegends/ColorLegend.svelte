@@ -72,14 +72,14 @@
 	/**
 	 * Format string to apply to tick labels (see the [`d3-format` docs](https://d3js.org/d3-format#locale_format))
 	 */
-	export let tickFormat: (v: any) => string;
+	export let tickFormat: any = undefined;
 
-	export let tickValues: undefined | number[];
+	export let tickValues: undefined | number[] = undefined;
 
 	/**
 	 * Value to highlight on the scale with arrow.
 	 */
-	export let highlightedValue: undefined | string | number;
+	export let highlightedValue: undefined | string | number = undefined;
 
 	/**
 	 * Label displayed below legend, on the left.
@@ -93,7 +93,13 @@
 	 */
 	export let rightLabel = '';
 
-	const ramp = (color, n = 256) => {
+	/**
+	 * If `true`, then the legend will be reversed, so that it is drawn from left to right.
+	 * Note that you will need to swap the value sof the `leftLabel` and `rightLabel` props yourself.
+	 */
+	export let reverse = false;
+
+	const ramp = (color: any, n = 256) => {
 		const canvas = document.createElement('canvas');
 		canvas.width = n;
 		canvas.height = 1;
@@ -101,16 +107,19 @@
 		if (context) {
 			for (let i = 0; i < n; ++i) {
 				context.fillStyle = color(i / (n - 1));
-				context.fillRect(i, 0, 1, 1);
+
+				const xp = reverse ? n - i : i;
+				context.fillRect(xp, 0, 1, 1);
 			}
 		}
 		return canvas.toDataURL();
 	};
 
-	let x;
-	let n;
-	let tickF;
-	let tickAdjust = (g) => g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
+	let x: any;
+	let n: number;
+	let tickF: (n: any) => string | string | null | undefined;
+	let tickAdjust = (g: any) =>
+		g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
 	$: {
 		if (color.interpolate) {
 			// continuous scale
@@ -119,7 +128,13 @@
 		} else if (color.interpolator) {
 			// Sequential scale
 			x = Object.assign(
-				color.copy().interpolator(interpolateRound(marginLeft, width - marginRight)),
+				color
+					.copy()
+					.interpolator(
+						reverse
+							? interpolateRound(width - marginRight, marginLeft)
+							: interpolateRound(marginLeft, width - marginRight)
+					),
 				{
 					range() {
 						return [marginLeft, width - marginRight];
@@ -127,7 +142,7 @@
 				}
 			);
 
-			// scaleSequentialQuantile doesn’t implement ticks or tickFormat.
+			// scaleSequentialQuantile doesn't implement ticks or tickFormat.
 			if (!x.ticks) {
 				if (tickValues === undefined) {
 					n = Math.round(ticks + 1);
@@ -148,7 +163,7 @@
 
 			const thresholdFormat =
 				tickFormat === undefined
-					? (d) => d
+					? (d: any) => d
 					: typeof tickFormat === 'string'
 						? format(tickFormat)
 						: tickFormat;
@@ -158,7 +173,7 @@
 				.rangeRound([marginLeft, width - marginRight]);
 
 			tickValues = range(thresholds.length);
-			tickF = (i) => thresholdFormat(thresholds[i], i);
+			tickF = (i: string | number) => thresholdFormat(thresholds[i]);
 		} else {
 			// ordinal scale
 			x = scaleBand()
@@ -166,6 +181,18 @@
 				.rangeRound([marginLeft, width - marginRight]);
 
 			tickAdjust = () => {};
+		}
+
+		if (reverse) {
+			if (color.interpolator) {
+				// this isn't a real D3 scale: flipping the domain won't work, so we did the reversing above
+			} else if (x.domain()?.length > 2) {
+				x.domain(x.domain().reverse());
+			} else if (x.domain()) {
+				x.domain(x.domain().reverse());
+			} else {
+				x = x.reverse();
+			}
 		}
 
 		if (tickFormat && !tickF) {
@@ -183,7 +210,7 @@
 				.tickValues(tickValues);
 
 			select(ticksRef)
-				.call(bottomAxis)
+				.call(bottomAxis as any, 0)
 				.call(tickAdjust)
 				.call((g: any) => g.select('.domain').remove())
 				.call((g: any) =>
@@ -193,7 +220,8 @@
 						.attr('y', marginTop + marginBottom - height - 6)
 						.attr('fill', 'currentColor')
 						.attr('text-anchor', 'start')
-						.attr('font-weight', 'bold')
+						.attr('font-weight', '500')
+						.attr('font-size', '12px')
 						.attr('class', 'title')
 						.text(title)
 				);
@@ -236,9 +264,9 @@
 		<g>
 			{#each color.range() as d, i}
 				<rect
-					x={x(i - 1)}
+					x={reverse ? x(i) : x(i - 1)}
 					y={marginTop}
-					width={x(i) - x(i - 1)}
+					width={reverse ? x(i - 1) - x(i) : x(i) - x(i - 1)}
 					height={height - marginTop - marginBottom}
 					fill={d}
 				/>

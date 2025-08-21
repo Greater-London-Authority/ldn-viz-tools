@@ -2,7 +2,7 @@
 	import Tick from './Tick.svelte';
 
 	export const meta = {
-		title: 'Tables/Encodings/Tick',
+		title: 'Tables/Components/Renderers/Tick',
 		component: Tick,
 
 		argTypes: {

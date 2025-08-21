@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import ListMenu from '../listMenu/ListMenu.svelte';
 	import Header from './Header.svelte';
 	import HeaderItem from './HeaderItem.svelte';
 	import HeaderRight from './HeaderRight.svelte';
@@ -7,60 +8,90 @@
 	import NavLinks from './NavLinks.svelte';
 
 	export const meta = {
-		title: 'Ui/Header',
+		title: 'Ui/Components - Layout And Themes/Header',
 		component: Header,
-		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks }
+		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks },
+		parameters: {
+			layout: 'fullscreen'
+		}
 	};
 </script>
 
 <script lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
+
+	let subMenu = [
+		{ title: 'Map', id: 'map', url: '#map' },
+		{ title: 'Trend', id: 'trend', url: '#trend' }
+	];
+
+	let subMenuNoLinks = [
+		{
+			title: 'Accessibility',
+			id: 'accessibility-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `a-${i.id}` }))
+		},
+		{
+			title: 'Brand',
+			id: 'brand-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `b-${i.id}` }))
+		},
+		{
+			title: 'Color',
+			id: 'color-nl',
+			url: '',
+			children: subMenu.map((i) => ({ ...i, id: `c-${i.id}` }))
+		}
+	];
 </script>
 
 <Template let:args>
 	<Header {...args} />
 </Template>
 
-<Story
-	name="NavBar - title only"
-	parameters={{
-		layout: 'fullscreen'
-	}}
->
+<Story name="Title only">
 	<Header>
 		<HeaderTitle>An interesting app</HeaderTitle>
 	</Header>
 </Story>
 
-<Story name="A NavBar - title and links to pages">
+<Story name="Title and menu-right">
 	<Header>
-		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
-
-		<NavLinks>
-			<NavLink target="map">Map</NavLink>
-
-			<NavLink target="trends">Trends</NavLink>
-		</NavLinks>
+		<HeaderTitle>An interesting app</HeaderTitle>
+		<HeaderRight>
+			<HeaderItem>
+				<ListMenu ariaLabel="no links" items={subMenuNoLinks} orientation="horizontal" />
+			</HeaderItem>
+		</HeaderRight>
 	</Header>
 </Story>
 
-<Story name="A NavBar - title, links, and auth section">
+<Story name="Title and links to pages">
+	<Header>
+		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
+		<HeaderItem>
+			<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
+		</HeaderItem>
+	</Header>
+</Story>
+
+<Story name="Title, links, and auth section">
 	<Header>
 		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
 
-		<NavLinks>
-			<NavLink target="map">Map</NavLink>
-
-			<NavLink target="trends">Trends</NavLink>
-		</NavLinks>
+		<HeaderItem>
+			<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
+		</HeaderItem>
 
 		<HeaderRight>
 			<HeaderItem>
-				<span>Logged in as <b>Bob Smith</b></span>
+				<span class="text-xs">Logged in as <b>Bob Smith</b></span>
 			</HeaderItem>
 
 			<HeaderItem>
-				<a href="/#">Log Out</a>
+				<a class="text-xs" href="/#">Log Out</a>
 			</HeaderItem>
 		</HeaderRight>
 	</Header>
@@ -70,10 +101,10 @@
 	<Header theme="light">
 		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
 
-		<NavLinks>
-			<NavLink target="map">Map</NavLink>
-
-			<NavLink target="trends">Trends</NavLink>
-		</NavLinks>
+		<HeaderRight>
+			<HeaderItem>
+				<ListMenu ariaLabel="no links" items={subMenuNoLinks} orientation="horizontal" />
+			</HeaderItem>
+		</HeaderRight>
 	</Header>
 </Story>

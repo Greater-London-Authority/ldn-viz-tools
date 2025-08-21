@@ -1,20 +1,18 @@
 <script context="module">
 	import CookieControlSettings from './CookieControlSettings.svelte';
 	export const meta = {
-		title: 'Ui/AnalyticsAndCookieConsent/CookieControlSettings',
+		title: 'Ui/Components - Layout And Themes/Meta, Analytics And Cookies/CookieControlSettings',
 		component: CookieControlSettings
 	};
 </script>
 
 <script>
 	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
-
-	// hack to make the "View cookie settings" link appear
-	window.CookieControl = writable(true);
+	import AnalyticsAndCookieConsent from './AnalyticsAndCookieConsent.svelte';
 </script>
 
 <Template let:args>
+	<AnalyticsAndCookieConsent />
 	<CookieControlSettings {...args} />
 </Template>
 

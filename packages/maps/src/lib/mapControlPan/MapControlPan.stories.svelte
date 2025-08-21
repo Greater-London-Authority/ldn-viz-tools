@@ -1,30 +1,31 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
-
-	import Map, { appendOSKeyToUrl } from '../map/Map.svelte';
-	import MapApp from '../map/MapApp.svelte';
-	import * as os_light_vts from '../themes/os_light_vts.json';
-
-	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import MapControlPan from '../mapControlPan/MapControlPan.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+
+	export const meta = {
+		title: 'Maps/Components/MapControls/MapControlPan',
+		component: MapControlPan,
+		parameters: {
+			layout: 'full'
+		}
+	};
 </script>
 
-<Meta
-	title="Maps/MapControls/MapControlPan"
-	component={MapControlPan}
-	parameters={{
-		layout: 'fullscreen'
-	}}
-/>
+<script>
+	import Map from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
+
+	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
+</script>
 
 <Template let:args>
 	<MapControlPan {...args} />
 </Template>
 
 <Story name="Pan Buttons">
-	<MapApp>
+	<div class="w-[100dvw] h-[100dvh]">
 		<div class="text-color-text-primary space-y-4 m-2">
 			<p>
 				The zoom buttons are usually positioned in the top left corner under the location search.
@@ -46,7 +47,6 @@
 
 		<Map
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		>
@@ -54,5 +54,5 @@
 				<MapControlPan />
 			</MapControlGroup>
 		</Map>
-	</MapApp>
+	</div>
 </Story>

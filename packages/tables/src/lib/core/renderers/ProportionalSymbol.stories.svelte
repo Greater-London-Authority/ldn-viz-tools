@@ -2,7 +2,7 @@
 	import ProportionalSymbol from './ProportionalSymbol.svelte';
 
 	export const meta = {
-		title: 'Tables/Encodings/ProportionalSymbol',
+		title: 'Tables/Components/Renderers/ProportionalSymbol',
 		component: ProportionalSymbol,
 
 		argTypes: {

@@ -2,7 +2,7 @@
 	import BarCell from './BarCell.svelte';
 
 	export const meta = {
-		title: 'Tables/Encodings/BarCell',
+		title: 'Tables/Components/Renderers/BarCell',
 		component: BarCell,
 
 		args: {

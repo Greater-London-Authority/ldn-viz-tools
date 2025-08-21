@@ -2,11 +2,11 @@
 	/**
 	 * This provides a (round) radio-button component that can also be coloured and act as both a categorical color legend, and a control for which categories of things are displayed on a map or visualization.
 	 *
-	 * **Alternatives**: if representing a set of options that are not mutually exclusive, use the [Checkbox](./?path=/docs/ui-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-checkboxgroup--documentation) rather than the [RadioButton](./?path=/docs/ui-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-radiobuttongroup--documentation).
+	 * **Alternatives**: if representing a set of options that are not mutually exclusive, use the [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation) rather than the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation).
 	 * @component
 	 */
 
-	import Tooltip from '../tooltip/Tooltip.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 
 	/**
 	 * Color of the radio button, as a string in any CSS color format
@@ -33,7 +33,7 @@
 	/**
 	 * Name of group to which radio button is assigned.
 	 */
-	export let name: string | undefined;
+	export let name: string | undefined = undefined;
 
 	/**
 	 * Boolean indicating whether the radio button is *disabled*.
@@ -70,11 +70,17 @@
 			? `--theme-input-border: ${color}; --theme-input-border-selected: ${color}; --theme-input-background-active: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
-	<span class="form-label ml-2 font-normal">{label}</span>
+	{#if label}
+		<span class="form-label ml-2 font-normal">{label}</span>
+	{/if}
+	{#if $$slots.hint}
+		<!-- An optional `<Overlay>` component to provide additional explanation. -->
+		<slot name="hint" />
+	{/if}
 	{#if hint}
-		<Tooltip {hintLabel}>
+		<Overlay {hintLabel}>
 			{hint}
-		</Tooltip>
+		</Overlay>
 	{/if}
 </label>
 

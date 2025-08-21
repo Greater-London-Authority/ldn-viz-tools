@@ -1,5 +1,105 @@
 # ldn-viz-tools-maps
 
+## 8.0.0
+
+### Major Changes
+
+- e8c3af7: ADDED: `MapLegend` component
+
+## 7.6.1
+
+### Patch Changes
+
+- f9d211e: FIXED: export functions needed to use `MapDeckPopovers` and `MapDeckTooltips` components
+
+## 7.6.0
+
+### Minor Changes
+
+- f8f4708: ADDED: `MapDeckPopovers` and `MapDeckTooltips` to easily add popovers or tooltips to multiple Deck.gl layers
+
+## 7.5.0
+
+### Minor Changes
+
+- 96ef243: FIXED: reduced the z-index of the `MapPopover`, so it appears behind a modal or sidebar.
+
+## 7.4.0
+
+### Minor Changes
+
+- 41d345f: CHANGED: Steps down mid button size (40px) to match height of input elements.
+  CHANGED: Adds borders and shadows to tooltips/popovers and improves contrast of overlay components - especially relevant in map context
+
+## 7.3.0
+
+### Minor Changes
+
+- f952670: Accessibility: updated `Geolocator` component to announce state change and use `LoadingIndicator`
+
+## 7.2.0
+
+### Minor Changes
+
+- 40410d8: CHANGED: the `MapPopover` now accept a `layer` prop
+
+## 7.1.0
+
+### Minor Changes
+
+- 1610465: CHANGED: `Geocoder`, `MapControlGeocoder`, and `MapControlLocationSearch` accept a callback function to call when the user clears the search box
+- d344f2c: CHANGED: Update to design tokens for color A11y. Component classes updated where neccesary. Button component api deprected 'condition' prop - now uses extended 'emphasis' options. Changes also reflected in Figma file
+
+### Patch Changes
+
+- ddb1dfc: CHANGED: shift position of `MapControlGroup` upwards if position is `BottomLeft`/`BottomCenter`/`BottomRight`, to avoid overlap with attribution statement
+
+## 7.0.0
+
+### Major Changes
+
+- 677ca8d: CHANGED: refactored `Map` by splitting out core MapLibre stuff to `MapLibre` internal component.
+  CHANGED: updated `Map` to accept light and dark base map styles and toggle them based on theme mode.
+  CHANGED: removed `classes` property from `map`, pass classes as `class` attribute instead.
+
+## 6.0.1
+
+### Patch Changes
+
+- 1184aa1: CHANGED: updated year in map copyright statement to 2025
+
+## 6.0.0
+
+### Major Changes
+
+- 530d8de: REMOVED: removed `MappApp` component, which was replaced by `AppShell`
+
+### Minor Changes
+
+- 60ee6e5: CHANGED: add types to `MapControlZoom` component
+
+### Patch Changes
+
+- 6dc5105: Housekeeping: squash console warnings in storybook from unused props
+
+## 5.3.0
+
+### Minor Changes
+
+- 77d6d14: ADDED: added `MapDeckOverlay` component
+
+## 5.2.0
+
+### Minor Changes
+
+- e42e0fe: CHANGED: allow custom placeholder text in `Geocoder`, `MapControlGeocoder` and `MapControlLocationSearch` components
+
+## 5.1.0
+
+### Minor Changes
+
+- 1f94ca5: FIXED: `GeoJSONFeature` to `GeoJSON.Feature` in `MapCursorEvent` for correct typing of `handlerArgTypes`
+
 ## 5.0.0
 
 ### Major Changes

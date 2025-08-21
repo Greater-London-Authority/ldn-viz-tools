@@ -2,7 +2,7 @@
 	import DataDownloadButton from './DataDownloadButton.svelte';
 
 	export const meta = {
-		title: 'Ui/DataDownloadButton',
+		title: 'Ui/Components/Buttons/DataDownloadButton',
 		component: DataDownloadButton,
 		argTypes: {
 			filename: {
@@ -55,7 +55,11 @@
 	<DataDownloadButton {data} filename="download" />
 </Story>
 
-<Story name="Wit Icon before label">
+<Story name="Full width">
+	<DataDownloadButton {data} filename="download" fullWidth />
+</Story>
+
+<Story name="With Icon before label">
 	<DataDownloadButton {data} filename="download">
 		<Icon
 			src={ArrowDownTray}
@@ -73,7 +77,7 @@
 
 <Story name="Button types">
 	<div class="flex flex-col space-y-2">
-		<DataDownloadButton {data} filename="download" format="CSV" emphasis="primary">
+		<DataDownloadButton {data} filename="download" emphasis="primary">
 			<Icon
 				src={ArrowDownTray}
 				theme="mini"
@@ -82,7 +86,7 @@
 				slot="afterLabel"
 			/>
 		</DataDownloadButton>
-		<DataDownloadButton {data} filename="download" format="CSV" emphasis="secondary">
+		<DataDownloadButton {data} filename="download" emphasis="secondary">
 			<Icon
 				src={ArrowDownTray}
 				theme="mini"
@@ -91,7 +95,7 @@
 				slot="afterLabel"
 			/>
 		</DataDownloadButton>
-		<DataDownloadButton {data} filename="download" format="CSV" variant="outline" size="sm">
+		<DataDownloadButton {data} filename="download" variant="outline" size="sm">
 			<Icon
 				src={ArrowDownTray}
 				theme="mini"
@@ -137,4 +141,28 @@
 			slot="afterLabel"
 		/>
 	</DataDownloadButton>
+</Story>
+
+<Story name="Data obtained from function">
+	<DataDownloadButton
+		dataFn={() =>
+			Array.from({ length: 10 }, () => ({
+				a: Math.floor(Math.random() * 100),
+				b: Math.floor(Math.random() * 100)
+			}))}
+		filename="random data"
+		formats={['JSON']}
+	></DataDownloadButton>
+</Story>
+
+<Story name="Data obtained from async function">
+	<DataDownloadButton
+		dataFn={async () =>
+			Array.from({ length: 10 }, () => ({
+				a: Math.floor(Math.random() * 100),
+				b: Math.floor(Math.random() * 100)
+			}))}
+		filename="random data"
+		formats={['JSON']}
+	></DataDownloadButton>
 </Story>

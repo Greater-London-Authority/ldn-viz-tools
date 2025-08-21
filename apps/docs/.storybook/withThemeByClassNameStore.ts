@@ -4,7 +4,7 @@ import type { DecoratorFunction, Renderer } from '@storybook/types';
 import { userThemeSelectionStore } from '@ldn-viz/ui';
 import { DecoratorHelpers } from '@storybook/addon-themes';
 
-const { initializeThemeState, pluckThemeFromContext, useThemeParameters } = DecoratorHelpers;
+const { initializeThemeState, pluckThemeFromContext } = DecoratorHelpers;
 
 export interface ClassNameStrategyConfiguration {
 	themes: Record<string, string>;
@@ -25,7 +25,7 @@ export const withThemeByClassNameStore = <TRenderer extends Renderer = any>({
 	initializeThemeState(Object.keys(themes), defaultTheme);
 
 	return (storyFn, context) => {
-		const { themeOverride } = useThemeParameters();
+		const { themeOverride } = context.globals.theme ?? {};
 		const selected = pluckThemeFromContext(context);
 
 		useEffect(() => {
@@ -47,6 +47,7 @@ export const withThemeByClassNameStore = <TRenderer extends Renderer = any>({
 
 			const newThemeClasses = classStringToArray(themes[selectedThemeName]);
 			userThemeSelectionStore.set(selectedThemeName);
+			localStorage.setItem('theme', selectedThemeName);
 
 			if (newThemeClasses.length > 0) {
 				parentElement.classList.add(...newThemeClasses);

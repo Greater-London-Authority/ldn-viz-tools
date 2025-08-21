@@ -2,7 +2,7 @@
 	/**
 	 * The `<ColorLegendOrdinalHorizontal>` component draws a legend for an ordinal D3 color scale.
 	 *
-	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
+	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-components-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
 	 * @component
 	 */
 	import { type ScaleLinear } from 'd3-scale';
@@ -34,7 +34,7 @@
 		<span class="font-semibold text-color-input-label mb-1">{title}</span>
 	{/if}
 
-	<div class={orientation === 'horizontal' ? 'flex gap-2' : 'flex flex-col'}>
+	<div class={orientation === 'horizontal' ? 'flex flex-wrap gap-2' : 'flex flex-col'}>
 		{#each scale.domain() as d}
 			<div class="flex items-center text-color-input-label">
 				<div

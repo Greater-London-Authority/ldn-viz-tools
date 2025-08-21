@@ -17,7 +17,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: npm install --ignore-scripts esbuild && npm install @rollup/rollup-linux-x64-gnu
+        run: npm install
 
       - name: Install turbo
         run: npm install turbo --global
@@ -37,6 +37,7 @@ jobs:
           git add -A .changeset
           git add packages/*/CHANGELOG.md
           git add packages/*/package.json
+          git add package-lock.json
 
           git diff-index --quiet HEAD || git commit -m "Update CHANGELOG and package.json"
 

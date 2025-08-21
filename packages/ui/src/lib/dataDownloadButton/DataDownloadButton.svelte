@@ -13,12 +13,17 @@
 	 * The available data formats for the downloaded file.
 	 */
 	export let formats: ('CSV' | 'JSON')[] = ['CSV', 'JSON'];
-	let format = 'CSV';
 
 	/**
 	 * The data that will be encoded in the downloaded file (formatted as an array of objects).
 	 */
 	export let data: Record<string, number | string>[];
+
+	/**
+	 * A function which, when called with no arguments, will return the data to be saved in the downloaded file.
+	 * If this is provided, then the `data` prop is ignored.
+	 */
+	export let dataFn: undefined | (() => any[]) | (() => Promise<any[]>) = undefined;
 
 	/**
 	 * The name the downloaded file will be saved with.
@@ -35,8 +40,13 @@
 	 */
 	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
 
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
+
 	const enforceExtension = (name: string, extension: string) => {
-		return name.toLocaleLowerCase().endsWith(extension) ? name : `name${extension}`;
+		return name.toLocaleLowerCase().endsWith(extension) ? name : `${name}${extension}`;
 	};
 
 	const downloadFromURL = (url: string, name: string) => {
@@ -47,20 +57,22 @@
 		link.dispatchEvent(new MouseEvent('click'));
 	};
 
-	const downloadJSON = () => {
-		const dataString = JSON.stringify(renameColumns(), null, 4);
+	const downloadJSON = async () => {
+		const dataString = JSON.stringify(await renameColumns(), null, 4);
 		const dataURL = 'data:application/json;base64,' + window.btoa(dataString);
 		downloadFromURL(dataURL, enforceExtension(filename || 'data', '.json'));
 	};
 
-	const downloadCSV = () => {
-		const dataString = csvFormat(renameColumns());
+	const downloadCSV = async () => {
+		const dataString = csvFormat(await renameColumns());
 		const dataURL = 'data:application/csv;base64,' + window.btoa(dataString);
 		downloadFromURL(dataURL, enforceExtension(filename || 'data', '.csv'));
 	};
 
-	const renameColumns = () => {
-		return data.map((datum) => {
+	const renameColumns = async () => {
+		const dataToSave = dataFn ? await Promise.resolve(dataFn()) : data;
+
+		return dataToSave.map((datum) => {
 			if (!columnMapping) {
 				return datum;
 			} else {
@@ -107,6 +119,7 @@
 	menuTitle="Select data format"
 	onClick={download}
 	{disabled}
+	{fullWidth}
 	{...$$restProps}
 >
 	<!-- contents of the button -->

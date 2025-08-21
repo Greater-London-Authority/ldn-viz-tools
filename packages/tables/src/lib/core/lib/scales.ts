@@ -5,13 +5,13 @@ import { schemeCategory10 } from 'd3-scale-chromatic';
 import { getThresholdBreaksColorsLabels } from '@ldn-viz/utils';
 import type { ColorScale } from './types';
 
-export const getCategoricalColorScale = (values) => {
+export const getCategoricalColorScale = (values: string[]) => {
 	return scaleOrdinal(schemeCategory10).domain(values);
 };
 
 export const getContinuousColorScale = (
 	columnName: string,
-	domainType: string,
+	domainType: string | [number, number],
 	columnValues: number[]
 ) => {
 	let domain: Iterable<any>;

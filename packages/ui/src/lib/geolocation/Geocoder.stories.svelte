@@ -3,7 +3,7 @@
 	import GeocoderSuggestionList from './GeocoderSuggestionList.svelte';
 
 	export const meta = {
-		title: 'Ui/Geocoder',
+		title: 'Ui/Components/Geocoder',
 		component: Geocoder,
 		parameters: {
 			layout: 'fullscreen'
@@ -15,11 +15,11 @@
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { GeocoderAdapterList } from './GeocoderAdapterList';
 	import type {
+		Geolocation,
 		GeolocationCoords,
 		GeolocationNamed,
-		OnGeolocationSearchResult,
 		OnGeolocationSearchError,
-		Geolocation
+		OnGeolocationSearchResult
 	} from './types';
 
 	let suggestions: undefined | GeolocationNamed[];
@@ -188,7 +188,7 @@
 <Story name="Disabled dropdown">
 	<div class="m-6 space-y-6">
 		<p class="dark:text-white">
-			I've disabled the dropdown in this story, intead, I'm accessing the results by binding on the
+			I've disabled the dropdown in this story, instead, I'm accessing the results by binding on the
 			result set. I'm manually displaying them below but you can do whatever you like with them.
 		</p>
 		<p class="dark:text-white">
@@ -207,6 +207,45 @@
 					{formatResult(location)}<br />
 				{/each}
 			{/if}
+		</pre>
+	</div>
+</Story>
+
+<Story name="Custom placeholder">
+	<div class="m-6 space-y-6">
+		<p class="dark:text-white">
+			A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
+			results are limited.
+		</p>
+		<p class="dark:text-white">
+			At least three characters are required before any suggestions are provided. This avoids
+			spamming the underlying Web APIs with excessively vague requests.
+		</p>
+		<p class="dark:text-white">
+			Try entering 'brick' or 'london' if you're having trouble finding any places.
+		</p>
+		<Geocoder
+			let:onSuggestionEvent
+			let:attribution
+			let:suggestions
+			adapter={listAdapter}
+			{onLocationSelected}
+			{onSearchError}
+			classes="w-72"
+			placeholder="Type here to search for a place "
+		>
+			{#if suggestions?.length > 0}
+				<GeocoderSuggestionList
+					{onSuggestionEvent}
+					{attribution}
+					{suggestions}
+					{selected}
+					maxSuggestions={5}
+				/>
+			{/if}
+		</Geocoder>
+		<pre class="dark:text-white whitespace-pre-wrap">
+			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 	</div>
 </Story>

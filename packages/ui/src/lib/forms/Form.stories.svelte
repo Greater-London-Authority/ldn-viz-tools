@@ -28,7 +28,7 @@
 	};
 
 	export const meta = {
-		title: 'Ui/Form',
+		title: 'Ui/Components/Form',
 		component: Form,
 		argTypes: {
 			id: stringArg,

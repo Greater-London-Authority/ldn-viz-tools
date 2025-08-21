@@ -8,7 +8,7 @@
 	 * - `hidden` renders a simple `<input>`
 	 * - `select` renders a `<Select>`
 	 * - `checkbox` renders a `<Checkbox>`
-	 * - `text`, `textarea`, `number`, etc.. renders an `<Input>`
+	 * - `text`, `textarea`, `number`, etc. renders an `<Input>`
 	 *
 	 * Only applicable properties are passed to the underlying input components
 	 * and elements.
@@ -158,14 +158,16 @@
 		{label}
 		{description}
 		{descriptionAlignment}
-		{placeholder}
 		{hint}
 		{hintLabel}
+		{placeholder}
 		items={options}
 		bind:justValue={value}
 		bind:error
 		{...$$restProps}
-	/>
+	>
+		<slot name="hint" slot="hint" />
+	</Select>
 {:else if type === 'textarea'}
 	<div class="disabled:[&_.form-input]:text-color-text-disabled">
 		<Input
@@ -177,16 +179,18 @@
 			{label}
 			{description}
 			{descriptionAlignment}
-			{placeholder}
-			{rows}
 			{hint}
 			{hintLabel}
+			{placeholder}
+			{rows}
 			{inputmode}
 			{format}
 			bind:value
 			bind:error
 			{...$$restProps}
-		/>
+		>
+			<slot name="hint" slot="hint" />
+		</Input>
 	</div>
 {:else}
 	<div class="disabled:[&_.form-input]:text-color-text-disabled">
@@ -198,14 +202,16 @@
 			{label}
 			{description}
 			{descriptionAlignment}
-			{placeholder}
 			{hint}
 			{hintLabel}
+			{placeholder}
 			{inputmode}
 			{format}
 			bind:value
 			bind:error
 			{...$$restProps}
-		/>
+		>
+			<slot name="hint" slot="hint" />
+		</Input>
 	</div>
 {/if}

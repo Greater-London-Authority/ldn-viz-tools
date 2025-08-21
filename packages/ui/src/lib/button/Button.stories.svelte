@@ -2,23 +2,19 @@
 	import Button from './Button.svelte';
 
 	export const meta = {
-		title: 'Ui/Button',
+		title: 'Ui/Components/Buttons/Button',
 		component: Button,
 		argTypes: {
 			emphasis: {
-				options: ['primary', 'secondary'],
-				control: { type: 'radio' }
+				options: ['primary', 'secondary', 'caution', 'positive', 'negative'],
+				control: { type: 'select' }
 			},
 			variant: {
 				options: ['brand', 'solid', 'outline', 'text'], //square
 				control: { type: 'select' }
 			},
-			condition: {
-				options: ['default', 'success', 'error', 'warning'],
-				control: { type: 'select' }
-			},
 			size: {
-				options: ['sm', 'md', 'lg'],
+				options: ['xs', 'sm', 'md', 'lg'],
 				control: { type: 'radio' }
 			},
 			type: {
@@ -33,7 +29,7 @@
 </script>
 
 <script lang="ts">
-	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
+	import { ArrowDownCircle, ArrowTopRightOnSquare, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
@@ -95,13 +91,31 @@
 
 <Story name="Sizes">
 	<div class="flex items-end space-x-2">
+		<Button size="xs">xs</Button>
 		<Button size="sm">sm</Button>
 		<Button size="md">md</Button>
 		<Button size="lg">lg</Button>
-		<Button variant="outline" title="Down" emphasis="primary">Down</Button>
+	</div>
+</Story>
 
-		<Button variant="outline" title="Down" emphasis="secondary">Down</Button>
-		<Button emphasis="secondary">Down</Button>
+<Story name="Slim">
+	<div class="space-y-4">
+		<p class="flex flex-wrap">
+			sometime you may want a buttton to&nbsp;<Button slim variant="text">go with the flow</Button
+			>&nbsp;a bit more
+		</p>
+
+		<p class="flex flex-wrap text-lg">
+			sometime you may want a buttton to&nbsp<Button slim variant="text" size="lg">
+				go with the flow
+			</Button>&nbsp;a bit more
+		</p>
+
+		<p class="flex flex-wrap text-lg">
+			sometime you may want a buttton to&nbsp;<Button slim variant="solid" size="lg" class="!px-2">
+				go with the flow
+			</Button>&nbsp;a bit more
+		</p>
 	</div>
 </Story>
 
@@ -119,7 +133,11 @@
 		layout: 'fullscreen'
 	}}
 >
-	<Button class="w-full">Custom classes applied</Button>
+	<div class="py-4 space-y-4">
+		<Button class="w-full">Custom classes applied</Button>
+
+		<Button fullWidth>fullWidth prop applied</Button>
+	</div>
 </Story>
 
 <Story name="With Icon">
@@ -131,7 +149,23 @@
 
 <Story name="With Link">
 	<div class="space-y-2">
-		<Button href="#">Link</Button>
-		<Button disabled href="#">Link</Button>
+		<Button href="#" variant="text">Link</Button>
+	</div>
+</Story>
+
+<!-- For accessibility, keep opening links in new tabs to a minimum. For cases where it's necessary to do so, you must make the functionality clear visually and to screen readers. -->
+<Story name="With Link, opening in new tab">
+	<div class="space-y-2">
+		<Button href="http://google.com" openInNewTab>
+			Link
+			<Icon
+				src={ArrowTopRightOnSquare}
+				theme="mini"
+				class="w-5 h-5 ml-2"
+				aria-hidden="false"
+				title="opens in new tab"
+			/>
+		</Button>
+		<Button href="http://google.com" openInNewTab>Link (opens in new tab)</Button>
 	</div>
 </Story>

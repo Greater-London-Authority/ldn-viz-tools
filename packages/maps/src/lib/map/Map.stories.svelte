@@ -1,77 +1,119 @@
-<script>
-	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
+<script context="module">
+	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import Map from './Map.svelte';
+	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
+	export const meta = {
+		title: 'Maps/Components/Map',
+		component: Map,
+		parameters: {
+			layout: 'full'
+		},
+		argTypes: {
+			appendOSKeyToUrl: {
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(osKey: string) => maplibre_gl.TransformRequestFunction'
+					}
+				}
+			},
+			options: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'object',
+						detail: 'MapLibreOptions'
+					}
+				}
+			},
+			mapStore: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'Svelte store',
+						detail: 'writable<null | MapLibre>'
+					}
+				}
+			},
+			mapCursorStore: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'Svelte store',
+						detail: 'writable<null | MapCursorType>'
+					}
+				}
+			},
+			whenMapLoads: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(map: MapLibre) => void'
+					}
+				}
+			},
+			whenMapUnloads: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'function',
+						detail: '(map: MapLibre) => void'
+					}
+				}
+			},
+			lightStyle: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'object',
+						detail: 'MapLibreStyle'
+					}
+				}
+			},
+			darkStyle: {
+				control: 'none',
+				table: {
+					type: {
+						summary: 'object',
+						detail: 'MapLibreStyle'
+					}
+				}
+			}
+		},
+		args: {
+			options: {
+				transformRequest: appendOSKeyToUrl(OS_KEY)
+			}
+		}
+	};
+</script>
+
+<script lang="ts">
 	import * as darkStyle from '../themes/os_dark.json';
 	import * as darkGreyMutedStyle from '../themes/os_dark_grey_muted_buildings.json';
 	import * as greyStyle from '../themes/os_greyscale.json';
 	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import loadTestLayers from '../loadTestLayers';
-	import Map, { appendOSKeyToUrl } from './Map.svelte';
+	import type { MapLibreStyle } from './types';
+	import { appendOSKeyToUrl } from './util';
+
 	import PropertiesStory from './PropertiesStory.svelte';
 
-	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
+	const castAsMapLibreStyle = (style: unknown): MapLibreStyle => {
+		return style as MapLibreStyle;
+	};
 </script>
-
-<Meta
-	title="Maps/Map"
-	component={Map}
-	parameters={{
-		layout: 'full'
-	}}
-	argTypes={{
-		appendOSKeyToUrl: {
-			table: {
-				type: {
-					summary: 'function',
-					detail: '(osKey: string) => string'
-				}
-			}
-		},
-		mapStore: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'Svelte store',
-					detail: 'writable<null | maplibre_gl.Map>'
-				}
-			}
-		},
-		mapCursorStore: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'Svelte store',
-					detail: 'writable<null | MapCursor>'
-				}
-			}
-		},
-		whenMapLoads: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'function',
-					detail: '(map: maplibre_gl.Map) => void'
-				}
-			}
-		},
-		whenMapUnloads: {
-			control: 'none',
-			table: {
-				type: {
-					summary: 'function',
-					detail: '(map: maplibre_gl.Map) => void'
-				}
-			}
-		}
-	}}
-/>
 
 <Template let:args>
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map {...args}>I'm a map!</Map>
 	</div>
 </Template>
+
+<Story name="Responsive to theme" source />
 
 <!--
 This is our default light basemap.
@@ -81,8 +123,9 @@ It uses the Ordnance Survey's [OS_VTS_3857_Light.json](https://github.com/Ordnan
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
+			lightStyle={castAsMapLibreStyle(os_light_vts)}
+			darkStyle={null}
 			options={{
-				style: os_light_vts,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		/>
@@ -97,8 +140,9 @@ It is very similar to the Ordnance Survey's [OS_VTS_3857_Greyscale.json](https:/
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
+			lightStyle={castAsMapLibreStyle(greyStyle)}
+			darkStyle={null}
 			options={{
-				style: greyStyle,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		/>
@@ -110,8 +154,9 @@ It is very similar to the Ordnance Survey's [OS_VTS_3857_Greyscale.json](https:/
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
+			lightStyle={null}
+			darkStyle={castAsMapLibreStyle(darkGreyMutedStyle)}
 			options={{
-				style: darkGreyMutedStyle,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		/>
@@ -120,14 +165,15 @@ It is very similar to the Ordnance Survey's [OS_VTS_3857_Greyscale.json](https:/
 
 <!--
 This was created by the Ordnance Survey, inspired by Mike Brondbjerg's dark gray theme with muted buildings.
-It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) sylesheet.
+It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet.
 -->
 <Story name="Dark OS Basemap">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			whenMapLoads={loadTestLayers}
+			lightStyle={null}
+			darkStyle={castAsMapLibreStyle(darkStyle)}
 			options={{
-				style: darkStyle,
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}}
 		/>

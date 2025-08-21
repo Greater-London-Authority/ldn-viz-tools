@@ -11,6 +11,9 @@
 	import Button from '../../../button/Button.svelte';
 	import { classNames } from '../../../utils/classNames';
 
+	// `id` for sidebar container, to point to for screen readers
+	export let sidebarId: string;
+
 	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
 	$: isOpen = $sidebarIsOpen;
 
@@ -30,6 +33,7 @@
 		emphasis="secondary"
 		class={sidebarToggleClasses}
 		on:click={toggleOpen}
+		actionProps={{ 'aria-controls': sidebarId, 'aria-expanded': isOpen }}
 	>
 		{#if isOpen === false}
 			{#if $$slots.icon === true}

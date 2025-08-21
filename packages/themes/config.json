@@ -39,6 +39,11 @@
           "destination": "tw-extend/color.js",
           "format": "tw/css-variables",
           "filter": "twFilter"
+        },
+        {
+          "destination": "tw-extend/spacing.js",
+          "format": "tw/css-spacing-variables",
+          "filter": "twSpacingFilter"
         }
       ]
     },
@@ -49,6 +54,17 @@
         {
           "destination": "js/theme-tokens.js",
           "format": "javascript/esm",
+          "filter": "jsFilter"
+        }
+      ]
+    },
+    "docs": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "color/hex"],
+      "buildPath": "./docs/tokens/",
+      "files": [
+        {
+          "destination": "color.json",
+          "format": "documentation",
           "filter": "jsFilter"
         }
       ]

@@ -36,6 +36,11 @@
 	export let onSearchError: undefined | OnGeolocationSearchError;
 
 	/**
+	 * Called when the user clears the search box.
+	 */
+	export let onSearchClear = () => {};
+
+	/**
 	 * Passed to the suggestions dropdown to limit the number of suggestions
 	 * shown at once.
 	 */
@@ -50,6 +55,11 @@
 	 * Additional classes applied to the geocoder search input element.
 	 */
 	export let inputClasses = '';
+
+	/**
+	 * Placeholder text to be displayed in the input element.
+	 */
+	export let placeholder = 'Location search';
 
 	const mapStore: MapStore = getContext('mapStore');
 
@@ -71,6 +81,8 @@
 	};
 
 	let showClearButton = false;
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$: !showClearButton && clearFeature('geocoder', $mapStore);
 </script>
 
@@ -79,8 +91,10 @@
 	{delay}
 	{onSearchError}
 	onLocationSelected={onLocationSelectedGeocoder}
+	{onSearchClear}
 	{classes}
 	{inputClasses}
+	{placeholder}
 	bind:showClearButton
 	bind:selected
 	let:onSuggestionEvent

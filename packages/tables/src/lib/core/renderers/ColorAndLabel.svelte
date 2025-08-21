@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `ColorAndLabel` component renders a table cell representing a numerical value as a label, next to a small square with a background color encoding the value.
-	 * See also [ColoredCell](./?path=/docs/tables-encodings-coloredcell--documentation).
+	 * See also [ColoredCell](./?path=/docs/tables-components-renderers-coloredcell--documentation).
 	 * @component
 	 */
 
@@ -16,7 +16,7 @@
 	export let colorScale;
 </script>
 
-<div class="flex items-center">
+<div class="flex items-center h-full">
 	<div
 		class="flex-none w-4 h-4 mr-1"
 		style={`background-color: ${colorScale ? colorScale(value) : 'lightgrey'};`}

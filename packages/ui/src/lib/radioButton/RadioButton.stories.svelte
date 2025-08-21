@@ -2,11 +2,15 @@
 	import RadioButton from './RadioButton.svelte';
 
 	export const meta = {
-		title: 'Ui/RadioButton',
+		title: 'Ui/Components/RadioButtons/RadioButton',
 		component: RadioButton,
 		argTypes: {
 			color: {
-				control: { type: 'color' }
+				control: { type: 'color' },
+				table: {
+					defaultValue: { summary: '' },
+					type: { summary: 'string' }
+				}
 			},
 			label: {
 				control: { type: 'text' },
@@ -31,7 +35,7 @@
 			}
 		},
 		args: {
-			label: 'Label for Radio'
+			label: 'Foo'
 		}
 	};
 </script>

@@ -3,13 +3,14 @@
 	import RadioButtonGroup from './RadioButtonGroup.svelte';
 
 	export const meta = {
-		title: 'Ui/RadioButtonGroup',
+		title: 'Ui/Components/RadioButtons/RadioButtonGroup',
 		component: RadioButtonGroup
 	};
 </script>
 
 <script lang="ts">
 	let selectedId: string;
+	let selectedId2: string = '';
 
 	let optionsForGroup = [
 		{ id: 'bus', label: 'Bus stops', color: '#00AEEF' },
@@ -31,12 +32,71 @@
 
 <Story name="Default" source />
 
-<Story name="RadioGroup">
-	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId />
+<Story name="With title">
+	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId label="Radio" />
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>
 
-<Story name="RadioGroup - no clear button">
+<Story name="With hint">
+	<RadioButtonGroup
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="Radio"
+		hint="gaga"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With description">
+	<RadioButtonGroup
+		options={optionsForGroup}
+		buttonsHidden
+		name="station-type"
+		bind:selectedId
+		label="Transport method"
+		description="Pick you preferred method of transport - taxis are currently not available"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="No clear button">
 	<RadioButtonGroup options={optionsForGroup} name="station-type" bind:selectedId buttonsHidden />
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="Aligned in row">
+	<RadioButtonGroup
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		orientation="horizontal"
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="Disabled (global)">
+	<RadioButtonGroup
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId
+		label="RadioGroup Label"
+		hint="Contextual Hint"
+		description="This is a description"
+		disabled
+	/>
+	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+</Story>
+
+<Story name="With error">
+	<RadioButtonGroup
+		options={optionsForGroup}
+		name="station-type"
+		bind:selectedId={selectedId2}
+		label="Preferred mode of transport"
+		hint="Contextual Hint"
+		description="How you prefer to get around London."
+		error={!selectedId2 ? 'You must select an option' : undefined}
+	/>
 	<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 </Story>

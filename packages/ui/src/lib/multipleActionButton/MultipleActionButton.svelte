@@ -14,13 +14,16 @@
 	 * (or variation on an action) will be performed when the button is pressed.
 	 * @component
 	 */
-	import { createDropdownMenu } from '@melt-ui/svelte';
+	import { createDropdownMenu, type FocusProp } from '@melt-ui/svelte';
 	import { fly } from 'svelte/transition';
 
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { classNames } from '../utils/classNames';
+
 	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
+	import { randomId } from '../utils/randomId';
 
 	/**
 	 * Array of options that appear in the drop-down menu. Each is defined by an object with the following properties:
@@ -48,12 +51,26 @@
 	 */
 	export let onClick: (id: string) => void;
 
+	/**
+	 * Value set as the `id` attribute of the action button element (defaults to randomly generated value).
+	 */
+	export let id = randomId();
+
+	const customCloseFocus: FocusProp = (defaultEl) => {
+		const customElToFocus = document.getElementById(id);
+		if (!customElToFocus && defaultEl) {
+			return defaultEl;
+		}
+		return customElToFocus;
+	};
+
 	const {
-		elements: { trigger, menu, arrow },
+		elements: { trigger, menu, item, arrow },
 		states: { open }
 	} = createDropdownMenu({
 		forceVisible: true,
-		loop: true
+		loop: true,
+		closeFocus: customCloseFocus
 	});
 
 	const changeOption = (newOption: Option) => {
@@ -67,19 +84,19 @@
 	export let variant: ButtonProps['variant'] = 'solid';
 
 	/**
-	 * Determines how much visual emphasis is placed on the button.
+	 * Determines the visual emphasis is placed on the button.
 	 */
 	export let emphasis: ButtonProps['emphasis'] = 'primary';
-
-	/**
-	 * Provides ability to modify appearance to represent success/error/warning conditions.
-	 */
-	export let condition: ButtonProps['condition'] = 'default';
 
 	/**
 	 * Sets the size of the button.
 	 */
 	export let size: ButtonProps['size'] = 'md';
+
+	/**
+	 * If `true`, then button will fill full width of parent.
+	 */
+	export let fullWidth = false;
 
 	/**
 	 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
@@ -95,10 +112,11 @@
 		on:click={() => onClick(state.id)}
 		{variant}
 		{emphasis}
-		{condition}
 		{size}
 		{disabled}
 		{title}
+		{id}
+		{fullWidth}
 	>
 		<div class="flex items-center">
 			<slot name="beforeLabel" />
@@ -107,15 +125,16 @@
 		</div>
 	</Button>
 {:else}
-	<div class="flex items-center gap-0">
+	<div class={classNames('flex items-center gap-0 w-full', fullWidth ? 'w-full' : '')}>
 		<Button
 			on:click={() => onClick(state.id)}
 			{variant}
 			{emphasis}
-			{condition}
 			{size}
+			{fullWidth}
 			{disabled}
 			{title}
+			{id}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
@@ -125,44 +144,52 @@
 			</div>
 		</Button>
 
-		<div
-			use:$trigger.action
-			{...$trigger}
-			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-border-secondary'}`}
+		<Button
+			variant="square"
+			{emphasis}
+			{size}
+			{disabled}
+			action={$trigger.action}
+			actionProps={$trigger}
+			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'}`}
+			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 		>
-			<Button variant="square" {emphasis} {condition} {size} {disabled}>
-				<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
-				<span class="sr-only">Open Popover</span>
-			</Button>
-		</div>
+			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
+		</Button>
 	</div>
 
 	{#if $open}
 		<div
-			class="bg-color-container-level-1 z-40 max-w-sm p-2 shadow flex flex-col space-y-2"
+			class="bg-color-container-level-0 z-[60] max-w-sm p-1 shadow-lg flex flex-col border border-color-ui-border-secondary"
 			use:$menu.action
 			{...$menu}
 			transition:fly={{ duration: 150, y: -10 }}
 		>
-			<div {...$arrow} use:arrow />
+			<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
 			{#if menuTitle}
-				<div class="text-sm text-color-text-secondary">{menuTitle}</div>
+				<p class="text-sm p-1">{menuTitle}</p>
 			{/if}
 
 			<div class="divide-y divide-color-ui-border-secondary">
 				{#each options as option}
 					<button
-						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white group"
 						on:click={() => changeOption(option)}
+						use:$item.action
+						{...$item}
 					>
 						<div class="flex items-center">
 							{#if state.id === option.id}
-								<Icon src={Check} theme="mini" class="h-5 w-5 mr-2" />
+								<Icon src={Check} theme="mini" class="h-5 w-5 mr-1" />
 							{/if}
-							<div class="font-medium">{option.menuLabel}</div>
+							<p class="font-medium text-sm">{option.menuLabel}</p>
 						</div>
 
-						<div class="text-sm">{option.menuDescription}</div>
+						<p
+							class="text-xs leading-relaxed text-color-text-secondary group-hover:text-color-static-white"
+						>
+							{option.menuDescription}
+						</p>
 					</button>
 				{/each}
 			</div>
