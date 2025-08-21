@@ -7,13 +7,14 @@
 		TerraDrawCircleMode,
 		TerraDrawFreehandMode,
 		TerraDrawLineStringMode,
-		TerraDrawMapLibreGLAdapter,
 		TerraDrawPointMode,
 		TerraDrawPolygonMode,
 		TerraDrawRectangleMode,
 		TerraDrawSectorMode,
 		TerraDrawSelectMode
 	} from 'terra-draw';
+
+  import {TerraDrawMapLibreGLAdapter} from 'terra-draw-maplibre-gl-adapter';
 
 	import type { MapStore } from '../map/Map.svelte';
 	import MapDrawControls from './MapDrawControls.svelte';
