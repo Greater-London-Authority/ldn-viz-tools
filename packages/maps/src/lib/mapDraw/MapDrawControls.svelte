@@ -1,42 +1,92 @@
 <script lang="ts">
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { Check, Pencil, XMark } from '@steeze-ui/heroicons';
+	import { Check, Pencil, Trash, XMark } from '@steeze-ui/heroicons';
 
 	import { Button, RadioButtonGroupSolid } from '@ldn-viz/ui';
+	import type { Feature } from 'geojson';
 
-	export let enabledModes = [];
+	/**
+	The modes/tools available for selection.
+	 **/
+	export let enabledModes: string[] = [];
 
-	export let currentMode;
+	/**
+	 * The currently active mode.
+	 */
+	export let currentMode: string | undefined;
 
-	export let onDone = () => null;
+	/**
+	 * GeoJSON features that have been drawn.
+	 */
+	export let features: Feature[];
 
+	/**
+	 * The TerraDraw object.
+	 */
+	export let terraDraw;
+
+	/**
+	 * Function to be called when user clicks 'Done' button.
+	 */
+	export let onDone = (features: Feature[]) => null;
+
+	/**
+	 * Controls will be displayed unless this is `false`.
+	 */
 	export let showControls = false;
 
-	let options;
+	let options: { id: string; label: string }[];
 
-	$: options = enabledModes.map((m) => ({
+	$: options = [...enabledModes, 'select'].map((m) => ({
 		id: m,
 		label: m[0].toUpperCase() + m.slice(1)
 	}));
 
+	let previousFeatures: Feature[] = [];
+	const clickEdit = () => {
+		showControls = true;
+		previousFeatures = JSON.stringify(features);
+		console.log('previousFeatures is now:', { previousFeatures });
+	};
+
 	const clickClear = () => {
-		currentMode = 'CLEAR';
+		//	currentMode = 'CLEAR';
+
+		terraDraw.clear();
+		terraDraw.getSnapshot();
+
+		//showControls = false;
+	};
+
+	const clickCancel = () => {
+		features = JSON.parse(previousFeatures);
+
+		terraDraw.clear();
+		terraDraw.addFeatures(features);
+
 		showControls = false;
 	};
 
 	const clickDone = () => {
 		currentMode = undefined;
 		showControls = false;
-		onDone();
+		onDone(features);
 	};
 </script>
 
-<div class="flex gap-2 pointer-events-auto">
+<div class="flex gap-2">
 	{#if showControls}
-		<RadioButtonGroupSolid label="Selection tool" name="" {options} bind:selectedId={currentMode} />
+		<div class="pointer-events-auto h-fit">
+			<RadioButtonGroupSolid
+				label="Selection tool"
+				name=""
+				{options}
+				bind:selectedId={currentMode}
+			/>
+		</div>
 
-		<div class="flex flex-col gap-1">
+		<div class="flex flex-col gap-1 pointer-events-auto">
 			<Button
 				variant="square"
 				size="lg"
@@ -44,8 +94,19 @@
 				on:click={clickClear}
 				class="pointer-events-auto"
 			>
-				<Icon src={XMark} theme="mini" class="w-8 h-8 ml-2" aria-hidden="true" />
+				<Icon src={Trash} theme="mini" class="w-8 h-8 ml-2" aria-hidden="true" />
 				Clear
+			</Button>
+
+			<Button
+				variant="square"
+				size="lg"
+				emphasis="negative"
+				on:click={clickCancel}
+				class="pointer-events-auto"
+			>
+				<Icon src={XMark} theme="mini" class="w-8 h-8 ml-2" aria-hidden="true" />
+				Cancel
 			</Button>
 
 			<Button
@@ -60,9 +121,11 @@
 			</Button>
 		</div>
 	{:else}
-		<Button variant="square" size="lg" on:click={() => (showControls = true)}>
-			<Icon src={Pencil} class="w-8 h-8 ml-2" aria-hidden="true" />
-			Edit area
-		</Button>
+		<div class="pointer-events-auto">
+			<Button variant="square" size="lg" on:click={clickEdit}>
+				<Icon src={Pencil} class="w-8 h-8 ml-2" aria-hidden="true" />
+				Edit area
+			</Button>
+		</div>
 	{/if}
 </div>

@@ -18,10 +18,14 @@
 </script>
 
 <script lang="ts">
-	let features = [];
+	import type { Feature } from 'geojson';
+
+	let features: Feature[] = [];
+
+	const logShapeToConsole = (features: Feature[]) => console.log('User drew shape: ', features);
 </script>
 
-<Story name="Default" >
+<Story name="Default">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
@@ -30,7 +34,7 @@
 			}}
 		>
 			<MapControlGroup position="TopLeft">
-				<MapDraw bind:features enabledModes={['rectangle', 'circle']} />
+				<MapDraw bind:features onDone={logShapeToConsole} />
 			</MapControlGroup>
 		</Map>
 	</div>
@@ -38,9 +42,7 @@
 	<pre>{JSON.stringify(features, null, 4)}</pre>
 </Story>
 
-
-
-<Story name="Only allow specific modes/tools" >
+<Story name="Only allow specific modes/tools">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{

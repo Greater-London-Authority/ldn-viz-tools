@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	import { MapLibreGL as lib } from 'maplibre-gl';
 	import {
 		TerraDraw,
 		TerraDrawCircleMode,
@@ -14,21 +13,46 @@
 		TerraDrawSelectMode
 	} from 'terra-draw';
 
-  import {TerraDrawMapLibreGLAdapter} from 'terra-draw-maplibre-gl-adapter';
+	import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
 
-	import type { MapStore } from '../map/Map.svelte';
+	import type { Feature } from 'geojson';
+	import type { MapLibreStore } from '../map/types';
 	import MapDrawControls from './MapDrawControls.svelte';
 
-	const mapStore: MapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 
-	export let enabledModes = ['point', 'polygon', 'linestring', 'freehand', 'circle', 'rectangle'];
-	export let features; // can't control externally yet
-	export let currentMode;
+	/**
+	The modes/tools available for selection.
+	 **/
+	export let enabledModes = [
+		'point',
+		'polygon',
+		'linestring',
+		'freehand',
+		'circle',
+		'rectangle',
+		'sector'
+	];
+
+	/**
+	 * The currently active mode.
+	 */
+	export let currentMode: string;
+
+	/**
+	 * GeoJSON features that have been drawn.
+	 */
+	export let features: Feature[]; // can't control externally yet
+
+	/**
+	 * Function to be called when user clicks 'Done' button.
+	 */
+	export let onDone = (_features: Feature[]) => null;
 
 	const modeMapping = {
 		circle: TerraDrawCircleMode,
 		freehand: TerraDrawFreehandMode,
-		line: TerraDrawLineStringMode,
+		linestring: TerraDrawLineStringMode,
 		point: TerraDrawPointMode,
 		polygon: TerraDrawPolygonMode,
 		rectangle: TerraDrawRectangleMode,
@@ -86,7 +110,6 @@
 
 			circle: {
 				feature: {
-					deletable: true,
 					draggable: true,
 					coordinates: {
 						midpoints: true,
@@ -105,6 +128,17 @@
 						deletable: true
 					}
 				}
+			},
+
+			sector: {
+				feature: {
+					draggable: true,
+					coordinates: {
+						midpoints: true,
+						draggable: true,
+						deletable: true
+					}
+				}
 			}
 		}
 	});
@@ -115,13 +149,12 @@
 			const modes = [...enabledModes.map((modeName) => new modeMapping[modeName]()), selectMode];
 
 			draw = new TerraDraw({
-				adapter: new TerraDrawMapLibreGLAdapter({ map: $mapStore, lib }),
+				adapter: new TerraDrawMapLibreGLAdapter({ map: $mapStore }),
 				modes
 			});
 
 			draw.on('change', () => {
 				features = draw.getSnapshot();
-				console.log('UPDATED TO:', features);
 			});
 
 			draw.start();
@@ -130,13 +163,10 @@
 	};
 	$: createTerraDraw($mapStore, enabledModes);
 
-	const setMode = (newMode) => {
+	const setMode = (newMode: string) => {
 		if (!draw) return;
 
-		if (newMode === 'CLEAR') {
-			draw.clear();
-			features = draw.getSnapshot();
-		} else if (newMode) {
+		if (newMode) {
 			draw.setMode(newMode);
 		} else {
 			draw.setMode('select');
@@ -146,4 +176,4 @@
 	$: setMode(currentMode);
 </script>
 
-<MapDrawControls {enabledModes} bind:currentMode />
+<MapDrawControls {enabledModes} {features} bind:currentMode {onDone} terraDraw={draw} />
