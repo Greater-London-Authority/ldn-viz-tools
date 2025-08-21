@@ -3,7 +3,9 @@
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 
-	import { appendOSKeyToUrl, default as Map } from '../map/Map.svelte';
+	import { default as Map } from '../map/Map.svelte';
+	import { appendOSKeyToUrl } from '../map/util';
+
 	import * as os_light_vts from '../themes/os_light_vts.json';
 	import MapDraw from './MapDraw.svelte';
 
