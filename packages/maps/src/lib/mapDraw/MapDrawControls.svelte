@@ -34,34 +34,34 @@
 
 <div class="flex gap-2 pointer-events-auto">
 	{#if showControls}
-		<RadioButtonGroupSolid name="" {options} bind:selectedId={currentMode} />
+		<RadioButtonGroupSolid label="Selection tool" name="" {options} bind:selectedId={currentMode} />
 
-		<div class="flex">
+		<div class="flex flex-col gap-1">
 			<Button
 				variant="square"
 				size="lg"
-				condition="error"
+				emphasis="negative"
 				on:click={clickClear}
 				class="pointer-events-auto"
 			>
-				<Icon src={XMark} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
+				<Icon src={XMark} theme="mini" class="w-8 h-8 ml-2" aria-hidden="true" />
 				Clear
 			</Button>
 
 			<Button
 				variant="square"
 				size="lg"
-				condition="success"
+				emphasis="positive"
 				on:click={clickDone}
 				class="pointer-events-auto"
 			>
-				<Icon src={Check} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
+				<Icon src={Check} theme="mini" class="w-8 h-8 mb-2" aria-hidden="true" />
 				Done
 			</Button>
 		</div>
 	{:else}
 		<Button variant="square" size="lg" on:click={() => (showControls = true)}>
-			<Icon src={Pencil} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
+			<Icon src={Pencil} class="w-8 h-8 ml-2" aria-hidden="true" />
 			Edit area
 		</Button>
 	{/if}
