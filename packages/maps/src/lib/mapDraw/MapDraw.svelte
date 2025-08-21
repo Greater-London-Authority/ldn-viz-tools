@@ -21,7 +21,7 @@
 
 	const mapStore: MapStore = getContext('mapStore');
 
-	export let enabledModes = ['rectangle'];
+	export let enabledModes = ['point', 'polygon', 'linestring', 'freehand', 'circle', 'rectangle'];
 	export let features; // can't control externally yet
 	export let currentMode;
 

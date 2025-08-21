@@ -21,7 +21,26 @@
 	let features = [];
 </script>
 
-<Story name="Default" id="ChartcontainerDefault">
+<Story name="Default" >
+	<div class="w-[100dvw] h-[100dvh]">
+		<Map
+			options={{
+				style: os_light_vts,
+				transformRequest: appendOSKeyToUrl(OS_KEY)
+			}}
+		>
+			<MapControlGroup position="TopLeft">
+				<MapDraw bind:features enabledModes={['rectangle', 'circle']} />
+			</MapControlGroup>
+		</Map>
+	</div>
+
+	<pre>{JSON.stringify(features, null, 4)}</pre>
+</Story>
+
+
+
+<Story name="Only allow specific modes/tools" >
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
