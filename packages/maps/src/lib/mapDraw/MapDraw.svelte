@@ -67,6 +67,14 @@
 		// Allow manual deselection of features
 		allowManualDeselection: true, // allows users to deselect by clicking on the map
 
+    // we override the default key bindings so that features are deleted with Backspace rather than Delete
+    keyEvents: {
+      deselect: 'Escape',
+      delete: 'Backspace',
+      rotate: ['Control', 'r'],
+      scale: ['Control', 's']
+    },
+
 		// Enable editing tools by Feature
 		flags: {
 			point: {
