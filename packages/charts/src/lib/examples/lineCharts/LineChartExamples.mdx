@@ -9,14 +9,10 @@ import * as SingleLine from './SingleLineChart.stories.svelte';
 
 # Line Charts
 
-These are example `LineChart` charts using default plot styles.
-
-## Single line
-
-<Canvas of={SingleLine.SingleLine} />
+### Single line
 
 <details>
-	<summary>Spec</summary>
+	<summary class="cursor-pointer">Show spec</summary>
 	```javascript
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
@@ -41,12 +37,12 @@ These are example `LineChart` charts using default plot styles.
 	```
 </details>
 
-## Multiple lines
+<Canvas of={SingleLine.SingleLine} />
 
-<Canvas of={MultiLine.MultipleLines} />
+### Multiple lines
 
 <details>
-	<summary>Spec</summary>
+	<summary class="cursor-pointer">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -105,12 +101,12 @@ let spec = $derived({
 
 </details>
 
-## Dual line
+<Canvas of={MultiLine.MultipleLines} />
 
-<Canvas of={DualLine.DualLine} />
+### Dual line
 
 <details>
-	<summary>Spec</summary>
+	<summary class="cursor-pointer">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -156,13 +152,49 @@ let spec = $derived({
 
 </details>
 
-## Area chart
+<Canvas of={DualLine.DualLine} />
+
+### Area chart
+
+<details>
+	<summary class="cursor-pointer">Show spec</summary>
+
+```javascript
+let spec = $derived({
+	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+	marks: [
+		Plot.gridX({ interval: '2 years' }),
+		Plot.gridY(),
+		Plot.axisX({ label: 'Year', interval: '1 year' }),
+		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+		Plot.areaY(chartData, {
+			x: 'Month',
+			y: 'Value'
+		}),
+		Plot.line(chartData, {
+			x: 'Month',
+			y: 'Value',
+			tip: {
+				format: {
+					x: true,
+					y: (d) => '£' + formatHigh(d)
+				}
+			}
+		}),
+		// baseline last
+		Plot.ruleY([0])
+	]
+});
+```
+
+</details>
 
 <Canvas of={Area.AreaChart} />
 
-<details>
-	<summary>Spec</summary>
+### Area chart with custom fill opacity
 
+<details>
+	<summary class="cursor-pointer">Show spec</summary>
 ```javascript
 let spec = $derived({
 	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
@@ -173,7 +205,8 @@ let spec = $derived({
 		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
 		Plot.areaY(chartData, {
 			x: 'Month',
-			y: 'Value'
+			y: 'Value',
+			fillOpacity: 0.8
 		}),
 		Plot.line(chartData, {
 			x: 'Month',
@@ -190,40 +223,6 @@ let spec = $derived({
 	]
 });
 ```
-
 </details>
-
-## Area chart with custom fill opacity
 
 <Canvas of={AreaCustom.AreaOpacity} />
-
-<details>
-	<summary>Spec</summary>
-```javascript
-let spec = $derived({
-	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
-	marks: [
-		Plot.gridX({ interval: '2 years' }),
-		Plot.gridY(),
-		Plot.axisX({ label: 'Year', interval: '1 year' }),
-		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
-		Plot.areaY(chartData, {
-			x: 'Month',
-			y: 'Value'
-		}),
-		Plot.line(chartData, {
-			x: 'Month',
-			y: 'Value',
-			tip: {
-				format: {
-					x: true,
-					y: (d) => '£' + formatHigh(d)
-				}
-			}
-		}),
-		// baseline last
-		Plot.ruleY([0])
-	]
-});
-```
-</details>
