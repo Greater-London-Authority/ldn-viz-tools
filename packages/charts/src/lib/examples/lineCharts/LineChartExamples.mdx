@@ -1,9 +1,9 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as Area from './AreaChart.stories.svelte';
-import * as AreaCustom from './AreaCustomChart.stories.svelte';
 import * as DualLine from './DualLineChart.stories.svelte';
 import * as MultiLine from './MultiLineChart.stories.svelte';
 import * as SingleLine from './SingleLineChart.stories.svelte';
+import { multiVariableData, singleVariableData, dualVariableData } from '../../../data/demoData';
 
 <Meta title="Charts/Examples/Line Charts" />
 
@@ -20,7 +20,7 @@ import * as SingleLine from './SingleLineChart.stories.svelte';
 			Plot.gridX({ interval: '2 years' }),
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
-			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.ruleY([0]),
 			Plot.line(chartData, {
 				x: 'Month',
@@ -28,13 +28,18 @@ import * as SingleLine from './SingleLineChart.stories.svelte';
 				tip: {
 					format: {
 						x: true,
-						y: (d) => '£' + formatHigh(d)
+						y: (d) => '£' + format(',.4~s')(d)
 					}
 				}
 			})
 		]
 	});
 	```
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(singleVariableData, null, 2)}</pre>
 </details>
 
 <Canvas of={SingleLine.SingleLine} />
@@ -60,7 +65,7 @@ let spec = $derived({
 		Plot.gridX({ interval: '2 years' }),
 		Plot.gridY(),
 		Plot.axisX({ label: 'Year', interval: '1 year' }),
-		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+		Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 		Plot.line(chartData, {
 			x: 'Month',
 			y: 'Value',
@@ -87,7 +92,7 @@ let spec = $derived({
 				format: {
 					Variable: true,
 					Month: true,
-					Value: (d) => '£' + formatHigh(d),
+					Value: (d) => '£' + format(',.4~s')(d),
 					x: false,
 					y: false
 				}
@@ -99,6 +104,11 @@ let spec = $derived({
 });
 ```
 
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(multiVariableData, null, 2)}</pre>
 </details>
 
 <Canvas of={MultiLine.MultipleLines} />
@@ -120,7 +130,7 @@ let spec = $derived({
 		Plot.gridX({ interval: '2 years' }),
 		Plot.gridY(),
 		Plot.axisX({ label: 'Year', interval: '1 year' }),
-		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+		Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 		Plot.line(chartData, {
 			x: 'Month',
 			y: 'Value',
@@ -130,7 +140,7 @@ let spec = $derived({
 			tip: {
 				format: {
 					x: true,
-					y: (d) => '£' + formatHigh(d)
+					y: (d) => '£' + format(',.4~s')(d)
 				}
 			}
 		}),
@@ -152,6 +162,11 @@ let spec = $derived({
 
 </details>
 
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(dualVariableData, null, 2)}</pre>
+</details>
+
 <Canvas of={DualLine.DualLine} />
 
 ### Area chart
@@ -166,7 +181,7 @@ let spec = $derived({
 		Plot.gridX({ interval: '2 years' }),
 		Plot.gridY(),
 		Plot.axisX({ label: 'Year', interval: '1 year' }),
-		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+		Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 		Plot.areaY(chartData, {
 			x: 'Month',
 			y: 'Value'
@@ -177,7 +192,7 @@ let spec = $derived({
 			tip: {
 				format: {
 					x: true,
-					y: (d) => '£' + formatHigh(d)
+					y: (d) => '£' + format(',.4~s')(d)
 				}
 			}
 		}),
@@ -187,42 +202,11 @@ let spec = $derived({
 });
 ```
 
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(singleVariableData, null, 2)}</pre>
 </details>
 
 <Canvas of={Area.AreaChart} />
-
-### Area chart with custom fill opacity
-
-<details>
-	<summary class="cursor-pointer">Show spec</summary>
-```javascript
-let spec = $derived({
-	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
-	marks: [
-		Plot.gridX({ interval: '2 years' }),
-		Plot.gridY(),
-		Plot.axisX({ label: 'Year', interval: '1 year' }),
-		Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
-		Plot.areaY(chartData, {
-			x: 'Month',
-			y: 'Value',
-			fillOpacity: 0.8
-		}),
-		Plot.line(chartData, {
-			x: 'Month',
-			y: 'Value',
-			tip: {
-				format: {
-					x: true,
-					y: (d) => '£' + formatHigh(d)
-				}
-			}
-		}),
-		// baseline last
-		Plot.ruleY([0])
-	]
-});
-```
-</details>
-
-<Canvas of={AreaCustom.AreaOpacity} />

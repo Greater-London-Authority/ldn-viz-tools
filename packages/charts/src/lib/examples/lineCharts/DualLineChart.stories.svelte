@@ -5,7 +5,7 @@
 	import { dualVariableData as chartData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { formatHigh } from '../utils';
+	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Line Charts'
@@ -25,7 +25,7 @@
 			Plot.gridX({ interval: '2 years' }),
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
-			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.line(chartData, {
 				x: 'Month',
 				y: 'Value',
@@ -35,7 +35,7 @@
 				tip: {
 					format: {
 						x: true,
-						y: (d) => '£' + formatHigh(d)
+						y: (d) => '£' + format(',.4~s')(d)
 					}
 				}
 			}),
