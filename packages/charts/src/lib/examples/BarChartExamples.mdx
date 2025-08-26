@@ -9,14 +9,10 @@ import * as StackedBar from './StackedBar.stories.svelte';
 
 # Bar Charts
 
-These are example `BarChart` charts using default plot styles.
-
-## **Single variable**
-
-<Canvas of={DefaultBar.Default} />
+### Single variable
 
 <details>
-    <summary>Spec</summary>
+    <summary class="cursor-pointer">Show spec</summary>
     ```javascript
     let spec = $derived({
         x: { insetLeft: 80, insetRight: 20, type: 'band' },
@@ -41,12 +37,12 @@ These are example `BarChart` charts using default plot styles.
     ```
 </details>
 
-## **Stacked Bar**
+<Canvas of={DefaultBar.Default} />
 
-<Canvas of={StackedBar.Stacked} />
+### Stacked Bar
 
 <details>
-    <summary>Spec</summary>
+    <summary class="cursor-pointer">Show spec</summary>
     ```javascript
     let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'band' },
@@ -80,12 +76,12 @@ These are example `BarChart` charts using default plot styles.
     ```
 </details>
 
-## **Faceted Bar**
+<Canvas of={StackedBar.Stacked} />
 
-<Canvas of={FacetedBar.Faceted} />
+### Faceted Bar
 
 <details>
-    <summary>Spec</summary>
+    <summary class="cursor-pointer">Show spec</summary>
     ```javascript
     let spec = $derived({
 		marginRight: 120, // adjust margin right to suit your label length
@@ -123,12 +119,12 @@ These are example `BarChart` charts using default plot styles.
     ```
 </details>
 
-## **Horizontal Bar**
+<Canvas of={FacetedBar.Faceted} />
 
-<Canvas of={HorizontalBar.Horizontal} />
+### Horizontal Bar
 
 <details>
-    <summary>Spec</summary>
+    <summary class="cursor-pointer">Show spec</summary>
     ```javascript
     let spec = $derived({
 		height: 300, // height set outside of default
@@ -163,12 +159,12 @@ These are example `BarChart` charts using default plot styles.
     ```
 </details>
 
-## **Horizontal Stacked Bar**
+<Canvas of={HorizontalBar.Horizontal} />
 
-<Canvas of={HorizontalStackedBar.HorizontalStacked} />
+### Horizontal Stacked Bar
 
 <details>
-    <summary>Spec</summary>
+    <summary class="cursor-pointer">Show spec</summary>
     ```javascript
     let spec = $derived({
 		height: 300, // height set outside of default
@@ -212,3 +208,5 @@ These are example `BarChart` charts using default plot styles.
 	});
     ```
 </details>
+
+<Canvas of={HorizontalStackedBar.HorizontalStacked} />
