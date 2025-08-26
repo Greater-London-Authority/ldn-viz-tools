@@ -5,14 +5,10 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
 
 # Slope Charts
 
-These are example `SlopeChart` charts using default plot styles.
-
-## Default
-
-<Canvas of={SlopeChart.Default} />
+### Default
 
 <details>
-    <summary>chartData</summary>
+    <summary class="cursor-pointer">Show data structure</summary>
 
     ```json
     [
@@ -52,7 +48,7 @@ These are example `SlopeChart` charts using default plot styles.
 </details>
 
 <details>
-    <summary>Spec</summary>
+   <summary class="cursor-pointer">Show spec</summary>
 
     ```javascript
         let spec = $derived({
@@ -116,3 +112,5 @@ These are example `SlopeChart` charts using default plot styles.
     ```
 
 </details>
+
+<Canvas of={SlopeChart.Default} />
