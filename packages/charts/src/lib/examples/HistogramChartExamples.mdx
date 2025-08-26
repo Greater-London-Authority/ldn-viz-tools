@@ -5,12 +5,10 @@ import * as Histogram from './Histogram.stories.svelte';
 
 # Histogram Charts
 
-## Default
-
-<Canvas of={Histogram.Default} />
+### Default
 
 <details>
-    <summary>Spec</summary>
+<summary class="cursor-pointer">Show spec</summary>
     ```javascript
         let spec = $derived({
 		marginTop: 48, // adjust for y label
@@ -39,3 +37,5 @@ import * as Histogram from './Histogram.stories.svelte';
 	});
     ```
 </details>
+
+<Canvas of={Histogram.Default} />
