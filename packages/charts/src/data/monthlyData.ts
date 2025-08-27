@@ -1,9 +1,569 @@
 // Add year and parse JSON to real date object
 export const monthlyData = [
 	{
-		Month: '2018-01-01',
+		Month: '2015-01-01',
 		Variable: 'Variable A',
 		Value: 53623.9185728035
+	},
+	{
+		Month: '2015-01-01',
+		Variable: 'Variable B',
+		Value: 41627.53448294776
+	},
+	{
+		Month: '2015-01-01',
+		Variable: 'Variable C',
+		Value: 32645.187756972697
+	},
+	{
+		Month: '2015-02-01',
+		Variable: 'Variable A',
+		Value: 61815.97694332815
+	},
+	{
+		Month: '2015-02-01',
+		Variable: 'Variable B',
+		Value: 41897.56633424687
+	},
+	{
+		Month: '2015-02-01',
+		Variable: 'Variable C',
+		Value: 35353.896164140104
+	},
+	{
+		Month: '2015-03-01',
+		Variable: 'Variable A',
+		Value: 49785.31840163168
+	},
+	{
+		Month: '2015-03-01',
+		Variable: 'Variable B',
+		Value: 38270.76020082295
+	},
+	{
+		Month: '2015-03-01',
+		Variable: 'Variable C',
+		Value: 28805.9263334262
+	},
+	{
+		Month: '2015-04-01',
+		Variable: 'Variable A',
+		Value: 47263.331234181336
+	},
+	{
+		Month: '2015-04-01',
+		Variable: 'Variable B',
+		Value: 36155.422000403574
+	},
+	{
+		Month: '2015-04-01',
+		Variable: 'Variable C',
+		Value: 31267.710582031206
+	},
+	{
+		Month: '2015-05-01',
+		Variable: 'Variable A',
+		Value: 37027.51354813481
+	},
+	{
+		Month: '2015-05-01',
+		Variable: 'Variable B',
+		Value: 29877.19994034623
+	},
+	{
+		Month: '2015-05-01',
+		Variable: 'Variable C',
+		Value: 21523.228990117077
+	},
+	{
+		Month: '2015-06-01',
+		Variable: 'Variable A',
+		Value: 39063.29389001231
+	},
+	{
+		Month: '2015-06-01',
+		Variable: 'Variable B',
+		Value: 30228.692087401687
+	},
+	{
+		Month: '2015-06-01',
+		Variable: 'Variable C',
+		Value: 20545.061469653316
+	},
+	{
+		Month: '2015-07-01',
+		Variable: 'Variable A',
+		Value: 35603.53506769197
+	},
+	{
+		Month: '2015-07-01',
+		Variable: 'Variable B',
+		Value: 29482.54561518058
+	},
+	{
+		Month: '2015-07-01',
+		Variable: 'Variable C',
+		Value: 19614.569577470076
+	},
+	{
+		Month: '2015-08-01',
+		Variable: 'Variable A',
+		Value: 36096.875364933265
+	},
+	{
+		Month: '2015-08-01',
+		Variable: 'Variable B',
+		Value: 32207.639881542626
+	},
+	{
+		Month: '2015-08-01',
+		Variable: 'Variable C',
+		Value: 21906.170505389848
+	},
+	{
+		Month: '2015-09-01',
+		Variable: 'Variable A',
+		Value: 42708.43980296205
+	},
+	{
+		Month: '2015-09-01',
+		Variable: 'Variable B',
+		Value: 37453.96875398762
+	},
+	{
+		Month: '2015-09-01',
+		Variable: 'Variable C',
+		Value: 28587.750266070394
+	},
+	{
+		Month: '2015-10-01',
+		Variable: 'Variable A',
+		Value: 44838.96732431083
+	},
+	{
+		Month: '2015-10-01',
+		Variable: 'Variable B',
+		Value: 41254.89898739179
+	},
+	{
+		Month: '2015-10-01',
+		Variable: 'Variable C',
+		Value: 30705.157903827174
+	},
+	{
+		Month: '2015-11-01',
+		Variable: 'Variable A',
+		Value: 40441.07235369233
+	},
+	{
+		Month: '2015-11-01',
+		Variable: 'Variable B',
+		Value: 35390.89884083254
+	},
+	{
+		Month: '2015-11-01',
+		Variable: 'Variable C',
+		Value: 27649.276851862138
+	},
+	{
+		Month: '2015-12-01',
+		Variable: 'Variable A',
+		Value: 33407.641449679075
+	},
+	{
+		Month: '2015-12-01',
+		Variable: 'Variable B',
+		Value: 28115.783520130466
+	},
+	{
+		Month: '2015-12-01',
+		Variable: 'Variable C',
+		Value: 23790.940544962115
+	},
+	{
+		Month: '2016-01-01',
+		Variable: 'Variable A',
+		Value: 49686.98219707606
+	},
+	{
+		Month: '2016-01-01',
+		Variable: 'Variable B',
+		Value: 43597.54554934365
+	},
+	{
+		Month: '2016-01-01',
+		Variable: 'Variable C',
+		Value: 37457.10905755349
+	},
+	{
+		Month: '2016-02-01',
+		Variable: 'Variable A',
+		Value: 46303.192700824555
+	},
+	{
+		Month: '2016-02-01',
+		Variable: 'Variable B',
+		Value: 41478.12910063927
+	},
+	{
+		Month: '2016-02-01',
+		Variable: 'Variable C',
+		Value: 35480.67654123638
+	},
+	{
+		Month: '2016-03-01',
+		Variable: 'Variable A',
+		Value: 45145.44183178492
+	},
+	{
+		Month: '2016-03-01',
+		Variable: 'Variable B',
+		Value: 38987.866557667425
+	},
+	{
+		Month: '2016-03-01',
+		Variable: 'Variable C',
+		Value: 32704.620390440476
+	},
+	{
+		Month: '2016-04-01',
+		Variable: 'Variable A',
+		Value: 41583.872593674685
+	},
+	{
+		Month: '2016-04-01',
+		Variable: 'Variable B',
+		Value: 37852.494737030145
+	},
+	{
+		Month: '2016-04-01',
+		Variable: 'Variable C',
+		Value: 28274.63861325627
+	},
+	{
+		Month: '2016-05-01',
+		Variable: 'Variable A',
+		Value: 37052.234468334515
+	},
+	{
+		Month: '2016-05-01',
+		Variable: 'Variable B',
+		Value: 30461.833646200954
+	},
+	{
+		Month: '2016-05-01',
+		Variable: 'Variable C',
+		Value: 25926.00435840324
+	},
+	{
+		Month: '2016-06-01',
+		Variable: 'Variable A',
+		Value: 31559.82637053524
+	},
+	{
+		Month: '2016-06-01',
+		Variable: 'Variable B',
+		Value: 28387.461713010594
+	},
+	{
+		Month: '2016-06-01',
+		Variable: 'Variable C',
+		Value: 23700.867720933526
+	},
+	{
+		Month: '2016-07-01',
+		Variable: 'Variable A',
+		Value: 27309.488578806944
+	},
+	{
+		Month: '2016-07-01',
+		Variable: 'Variable B',
+		Value: 23925.774427083423
+	},
+	{
+		Month: '2016-07-01',
+		Variable: 'Variable C',
+		Value: 22034.616602432754
+	},
+	{
+		Month: '2016-08-01',
+		Variable: 'Variable A',
+		Value: 28852.144943275776
+	},
+	{
+		Month: '2016-08-01',
+		Variable: 'Variable B',
+		Value: 27727.31117149817
+	},
+	{
+		Month: '2016-08-01',
+		Variable: 'Variable C',
+		Value: 22766.249032897806
+	},
+	{
+		Month: '2016-09-01',
+		Variable: 'Variable A',
+		Value: 33140.48757269905
+	},
+	{
+		Month: '2016-09-01',
+		Variable: 'Variable B',
+		Value: 31676.190390499512
+	},
+	{
+		Month: '2016-09-01',
+		Variable: 'Variable C',
+		Value: 27240.628068381608
+	},
+	{
+		Month: '2016-10-01',
+		Variable: 'Variable A',
+		Value: 38472.42424591342
+	},
+	{
+		Month: '2016-10-01',
+		Variable: 'Variable B',
+		Value: 39438.001771425734
+	},
+	{
+		Month: '2016-10-01',
+		Variable: 'Variable C',
+		Value: 31710.088631485913
+	},
+	{
+		Month: '2016-11-01',
+		Variable: 'Variable A',
+		Value: 46726.70125254883
+	},
+	{
+		Month: '2016-11-01',
+		Variable: 'Variable B',
+		Value: 46360.63046669238
+	},
+	{
+		Month: '2016-11-01',
+		Variable: 'Variable C',
+		Value: 36596.299389410604
+	},
+	{
+		Month: '2016-12-01',
+		Variable: 'Variable A',
+		Value: 53561.405512267214
+	},
+	{
+		Month: '2016-12-01',
+		Variable: 'Variable B',
+		Value: 53420.070550569435
+	},
+	{
+		Month: '2016-12-01',
+		Variable: 'Variable C',
+		Value: 44683.83146329957
+	},
+	{
+		Month: '2017-01-01',
+		Variable: 'Variable A',
+		Value: 50167.00805640933
+	},
+	{
+		Month: '2017-01-01',
+		Variable: 'Variable B',
+		Value: 57392.540415003015
+	},
+	{
+		Month: '2017-01-01',
+		Variable: 'Variable C',
+		Value: 47335.64757377509
+	},
+	{
+		Month: '2017-02-01',
+		Variable: 'Variable A',
+		Value: 39520.299782426366
+	},
+	{
+		Month: '2017-02-01',
+		Variable: 'Variable B',
+		Value: 37759.502350338036
+	},
+	{
+		Month: '2017-02-01',
+		Variable: 'Variable C',
+		Value: 28795.54862821251
+	},
+	{
+		Month: '2017-03-01',
+		Variable: 'Variable A',
+		Value: 38682.798553223656
+	},
+	{
+		Month: '2017-03-01',
+		Variable: 'Variable B',
+		Value: 34222.46786492288
+	},
+	{
+		Month: '2017-03-01',
+		Variable: 'Variable C',
+		Value: 27588.849571583578
+	},
+	{
+		Month: '2017-04-01',
+		Variable: 'Variable A',
+		Value: 38187.860290260294
+	},
+	{
+		Month: '2017-04-01',
+		Variable: 'Variable B',
+		Value: 31966.37587386645
+	},
+	{
+		Month: '2017-04-01',
+		Variable: 'Variable C',
+		Value: 25748.350319995687
+	},
+	{
+		Month: '2017-05-01',
+		Variable: 'Variable A',
+		Value: 35801.645557832235
+	},
+	{
+		Month: '2017-05-01',
+		Variable: 'Variable B',
+		Value: 32173.134907632055
+	},
+	{
+		Month: '2017-05-01',
+		Variable: 'Variable C',
+		Value: 23916.457178413457
+	},
+	{
+		Month: '2017-06-01',
+		Variable: 'Variable A',
+		Value: 28731.77015195876
+	},
+	{
+		Month: '2017-06-01',
+		Variable: 'Variable B',
+		Value: 26805.77363875266
+	},
+	{
+		Month: '2017-06-01',
+		Variable: 'Variable C',
+		Value: 19449.572658209527
+	},
+	{
+		Month: '2017-07-01',
+		Variable: 'Variable A',
+		Value: 26311.365120548955
+	},
+	{
+		Month: '2017-07-01',
+		Variable: 'Variable B',
+		Value: 24426.12513475122
+	},
+	{
+		Month: '2017-07-01',
+		Variable: 'Variable C',
+		Value: 17324.74555272943
+	},
+	{
+		Month: '2017-08-01',
+		Variable: 'Variable A',
+		Value: 28460.077907382198
+	},
+	{
+		Month: '2017-08-01',
+		Variable: 'Variable B',
+		Value: 27982.16996270777
+	},
+	{
+		Month: '2017-08-01',
+		Variable: 'Variable C',
+		Value: 19491.008827283247
+	},
+	{
+		Month: '2017-09-01',
+		Variable: 'Variable A',
+		Value: 31931.031772914754
+	},
+	{
+		Month: '2017-09-01',
+		Variable: 'Variable B',
+		Value: 32312.746872671694
+	},
+	{
+		Month: '2017-09-01',
+		Variable: 'Variable C',
+		Value: 23686.965152879242
+	},
+	{
+		Month: '2017-10-01',
+		Variable: 'Variable A',
+		Value: 32413.547851573065
+	},
+	{
+		Month: '2017-10-01',
+		Variable: 'Variable B',
+		Value: 32195.82425946765
+	},
+	{
+		Month: '2017-10-01',
+		Variable: 'Variable C',
+		Value: 24872.306292934794
+	},
+	{
+		Month: '2017-11-01',
+		Variable: 'Variable A',
+		Value: 45016.179077126646
+	},
+	{
+		Month: '2017-11-01',
+		Variable: 'Variable B',
+		Value: 41570.58015598988
+	},
+	{
+		Month: '2017-11-01',
+		Variable: 'Variable C',
+		Value: 32796.20383923505
+	},
+	{
+		Month: '2017-12-01',
+		Variable: 'Variable A',
+		Value: 42763.82625887296
+	},
+	{
+		Month: '2017-12-01',
+		Variable: 'Variable B',
+		Value: 38251.89082985407
+	},
+	{
+		Month: '2017-12-01',
+		Variable: 'Variable C',
+		Value: 30926.775615057202
+	},
+	{
+		Month: '2018-01-01',
+		Variable: 'Variable A',
+		Value: 37834.6709829641
+	},
+	{
+		Month: '2018-01-01',
+		Variable: 'Variable B',
+		Value: 34204.71800340465
+	},
+	{
+		Month: '2018-01-01',
+		Variable: 'Variable C',
+		Value: 28651.586733823682
+	},
+	{
+		Month: '2018-02-01',
+		Variable: 'Variable A',
+		Value: 40402.97541697318
+	},
+	{
+		Month: '2018-02-01',
+		Variable: 'Variable B',
+		Value: 36987.92026519636
 	},
 	{
 		Month: '2018-02-01',
