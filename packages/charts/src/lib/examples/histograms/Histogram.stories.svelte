@@ -1,12 +1,15 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { demoBins as chartData } from '../../data/demoData';
-	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
-	import { Plot } from '../observablePlotFragments/plot';
+	import { randomVals } from '../../../data/demoData';
+	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
+	import { Plot } from '../../observablePlotFragments/plot';
+	import { bin } from 'd3';
 
 	const { Story } = defineMeta({
-		title: 'Charts/Examples/Histogram Charts'
+		title: 'Charts/Examples/Histograms'
 	});
+
+	const chartData = bin()(randomVals);
 
 	// Spec and data for histogram example (default)
 	let spec = $derived({
