@@ -25,7 +25,7 @@
 			Plot.gridX({ interval: '2 years' }),
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
-			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.ruleY([0]),
 			Plot.line(singleLineData, {
 				x: 'Month',
