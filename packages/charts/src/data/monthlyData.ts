@@ -1,7 +1,7 @@
 // Add year and parse JSON to real date object
 export const monthlyData = [
 	{
-		Month: '2015-01-01',
+		Month: '2018-01-01',
 		Variable: 'Variable A',
 		Value: 53623.9185728035
 	},
