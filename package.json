@@ -27,7 +27,6 @@
 		"@observablehq/sample-datasets": "^1.0.1",
 		"@storybook/addon-svelte-csf": "^5.0.3",
 		"@tailwindcss/node": "^4.1.8",
-		"@tidyjs/tidy": "^2.5.2",
 		"@types/node": "^24.0.10",
 		"autoprefixer": "^10.4.21",
 		"prettier": "^3.5.3",
