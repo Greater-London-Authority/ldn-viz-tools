@@ -1,37 +1,36 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as FacetedScatterPlot from './FacetedScatterPlot.stories.svelte';
 import * as ScatterPlot from './ScatterPlot.stories.svelte';
+import { penguins } from '../../../data/demoData';
 
-<Meta title="Charts/Examples/Scatter Plot Charts" />
+<Meta title="Charts/Examples/Scatter Plot" />
 
 # Scatter Plot Charts
 
-## Default
-
-<Canvas of={ScatterPlot.Default} />
+### Default
 
 <details>
-    <summary>Spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
     ```javascript
-        let spec = $derived({
+	let spec = $derived({
 		x: { insetLeft: 100, domain: [30, 65] },
 		y: { domain: [7, 23] },
 		color: {
 			legend: true,
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
 			Plot.gridX(),
 			Plot.gridY(),
-			Plot.axisX({ label: 'bill_length_mm', labelArrow: true }),
-			Plot.axisY({ label: 'bill_depth_mm', labelArrow: true }),
+			Plot.axisX({ label: 'culmen_length_mm', labelArrow: true }),
+			Plot.axisY({ label: 'culmen_depth_mm', labelArrow: true }),
 			Plot.dot(penguins, {
-				x: 'bill_length',
-				y: 'bill_depth',
+				x: 'culmen_length_mm',
+				y: 'culmen_depth_mm',
 				fill: 'species',
 				tip: true
 			})
@@ -40,41 +39,57 @@ import * as ScatterPlot from './ScatterPlot.stories.svelte';
     ```
 </details>
 
-## Faceted
+<details class="dark:text-color-text-inverse-primary max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(penguins, null, 2)}</pre>
+</details>
 
-<Canvas of={FacetedScatterPlot.Faceted} />
+<Canvas of={ScatterPlot.Default} />
+
+### Faceted
 
 <details>
-    <summary>Spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
     ```javascript
-        let spec = $derived({
-		fy: true, // set fy to true or object to ensure defaultSizeFacet is applied
-		marginTop: 60,
-		marginRight: 120,
-		x: { insetLeft: 50, insetRight: 20, domain: [30, 65] }, // adjust xscale inset to feel good with grid lines
-		y: { domain: [7, 24] },
-		color: {
-			legend: true,
-			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
-			]
-		},
-		marks: [
-			Plot.gridX(),
-			Plot.gridY(),
-			Plot.axisX({ label: 'bill_length_mm', labelArrow: true }),
-			Plot.axisY({ label: 'bill_depth_mm', labelArrow: true }),
-			Plot.dot(penguins, {
-				x: 'bill_length',
-				y: 'bill_depth',
-				fx: 'sex',
-				fy: 'island',
-				fill: 'species',
-				tip: { ...defaultTip } // apply default styling
-			})
-		]
-	});
+     	const { defaultTip } = $derived(getDefaultPlotStyles());
+
+    let spec = $derived({
+    	marginTop: 60,
+    	marginRight: 120,
+    	x: { insetLeft: 50, insetRight: 20, domain: [30, 65] }, // adjust xscale inset to feel good with grid lines
+    	y: { domain: [7, 24] },
+    	facet: { data: penguins, x: 'sex', y: 'island' },
+    	fx: { domain: ['MALE', 'FEMALE', ''] }, //Set order of facets
+    	color: {
+    		legend: true,
+    		range: [
+    			theme.currentTheme.color.data.primary,
+    			theme.currentTheme.color.data.secondary,
+    			theme.currentTheme.color.data.tertiary
+    		]
+    	},
+    	marks: [
+    		Plot.gridX(),
+    		Plot.gridY(),
+    		Plot.axisX({ label: 'culmen_length_mm', labelArrow: true }),
+    		Plot.axisY({ label: 'culmen_depth_mm', labelArrow: true }),
+    		Plot.dot(penguins, {
+    			x: 'culmen_length_mm',
+    			y: 'culmen_depth_mm',
+    			fill: 'species',
+    			tip: { ...defaultTip } // apply default styling
+    		})
+    		// As alternative to spreading the defaultTip you could supply a tip mark
+    		// Plot.tip(penguins, Plot.pointer({ x: 'culmen_length_mm', y: 'culmen_depth_mm' })) // apply default styling
+    	]
+    });
     ```
+
 </details>
+
+<details class="dark:text-color-text-inverse-primary max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(penguins, null, 2)}</pre>
+</details>
+
+<Canvas of={FacetedScatterPlot.Faceted} />

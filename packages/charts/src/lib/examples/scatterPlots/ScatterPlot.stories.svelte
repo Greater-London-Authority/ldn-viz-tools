@@ -1,20 +1,13 @@
 <script module lang="ts">
-	import { theme as currentThemeObj } from '@ldn-viz/ui';
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	import penguinCSV from '@observablehq/sample-datasets/penguins.csv?raw';
+	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { csvParse } from 'd3-dsv';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
+	import { penguins } from '../../../data/demoData';
 
 	const { Story } = defineMeta({
-		title: 'Charts/Examples/Scatter Plot Charts'
+		title: 'Charts/Examples/Scatter Plot'
 	});
-
-	let currentTheme = $derived(currentThemeObj.currentTheme);
-
-	const penguins = csvParse(penguinCSV);
 
 	let spec = $derived({
 		x: { insetLeft: 100, domain: [30, 65] },
@@ -22,9 +15,9 @@
 		color: {
 			legend: true,
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
