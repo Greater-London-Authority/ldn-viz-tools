@@ -1,28 +1,27 @@
 <script module lang="ts">
-	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
-	import { multiVarDualYearAggregatedByYear as chartData } from '../../../data/demoData';
+	import { yearlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { formatHigh } from '../utils';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Slope Charts'
 	});
 
-	let currentTheme = $derived(currentThemeObj.currentTheme);
+	const chartData = yearlyData.filter((d) => d.Year === '2015' || d.Year === '2021');
 
 	// OcclusionY adds an initializer that shifts nodes vertically with a tiny force simulation.
-	const occlusionY = ({ radius = 6.5, ...options } = {}) =>
+	const occlusionY = ({ radius = 6.5, ...options }: { [key: string]: any } = {}) =>
 		Plot.initializer(
 			options,
-			(data, facets, { y: { value: Y }, text: { value: T } }, { y: sy }, dimensions, context) => {
+			(data, facets, { y: { value: Y }, text: { value: T } }, { y: sy }) => {
 				for (const index of facets) {
 					const unique = new Set();
 					const nodes = Array.from(index, (i) => ({
 						fx: 0,
-						y: sy(Y[i]),
+						y: sy!(Y[i]),
 						visible: unique.has(T[i]) // remove duplicate labels
 							? false
 							: !!unique.add(T[i]),
@@ -36,7 +35,7 @@
 						.force('collide', d3.forceCollide().radius(radius)) // collide
 						.stop()
 						.tick(20);
-					for (const { y, node, i, visible } of nodes) Y[i] = !visible ? NaN : y;
+					for (const { y, i, visible } of nodes) Y[i] = !visible ? NaN : y;
 				}
 				return { data, facets, channels: { y: { value: Y } } };
 			}
@@ -51,9 +50,9 @@
 		color: {
 			legend: true,
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
@@ -66,7 +65,7 @@
 			}),
 			Plot.tickX(chartData, {
 				x: 'Year',
-				stroke: currentTheme.color.chart.grid
+				stroke: theme.currentTheme.color.chart.grid
 			}),
 			Plot.textX(
 				chartData.filter((d) => d.Variable === 'Variable A'),
@@ -81,7 +80,7 @@
 				y: 'Average',
 				stroke: 'Variable',
 				strokeWidth: 2,
-				fill: currentTheme.color.chart.background,
+				fill: theme.currentTheme.color.chart.background,
 				fillOpacity: 1
 			}),
 			d3
@@ -92,7 +91,8 @@
 						occlusionY({
 							x: 'Year',
 							y: 'Average',
-							text: (d) => '£' + formatHigh(d.Average),
+							text: (d: { Average: number | { valueOf(): number } }) =>
+								'£' + d3.format(',.4~s')(d.Average),
 							textAnchor: left ? 'end' : 'start',
 							dx: left ? -8 : 8,
 							radius: 8.5

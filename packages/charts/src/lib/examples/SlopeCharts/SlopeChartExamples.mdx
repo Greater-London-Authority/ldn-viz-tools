@@ -1,5 +1,6 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as SlopeChart from './SlopeChart.stories.svelte';
+import { yearlyData } from '../../../data/demoData';
 
 <Meta title="Charts/Examples/Slope Charts" />
 
@@ -8,50 +9,40 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
 ### Default
 
 <details>
-    <summary class="cursor-pointer">Show data structure</summary>
-
-    ```json
-    [
-        {
-            "Year": "2015",
-            "Variable": "Variable A",
-            "Average": 43472.99032944677
-        },
-        {
-            "Year": "2015",
-            "Variable": "Variable B",
-            "Average": 35163.57588710289
-        },
-        {
-            "Year": "2015",
-            "Variable": "Variable C",
-            "Average": 26866.239745493527
-        },
-        {
-            "Year": "2021",
-            "Variable": "Variable A",
-            "Average": 24145.24057001651
-        },
-        {
-            "Year": "2021",
-            "Variable": "Variable B",
-            "Average": 22256.24442741557
-        },
-        {
-            "Year": "2021",
-            "Variable": "Variable C",
-            "Average": 20418.877644859735
-        }
-    ]
-    ```
-
-</details>
-
-<details>
-   <summary class="cursor-pointer">Show spec</summary>
+	<summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
 
     ```javascript
-        let spec = $derived({
+        // OcclusionY adds an initializer that shifts nodes vertically with a tiny force simulation.
+    const occlusionY = ({ radius = 6.5, ...options }: { [key: string]: any } = {}) =>
+    	Plot.initializer(
+    		options,
+    		(data, facets, { y: { value: Y }, text: { value: T } }, { y: sy }) => {
+    			for (const index of facets) {
+    				const unique = new Set();
+    				const nodes = Array.from(index, (i) => ({
+    					fx: 0,
+    					y: sy!(Y[i]),
+    					visible: unique.has(T[i]) // remove duplicate labels
+    						? false
+    						: !!unique.add(T[i]),
+    					i
+    				}));
+    				d3.forceSimulation(nodes.filter((d) => d.visible))
+    					.force(
+    						'y',
+    						d3.forceY(({ y }) => y)
+    					) // gravitate towards the original y
+    					.force('collide', d3.forceCollide().radius(radius)) // collide
+    					.stop()
+    					.tick(20);
+    				for (const { y, i, visible } of nodes) Y[i] = !visible ? NaN : y;
+    			}
+    			return { data, facets, channels: { y: { value: Y } } };
+    		}
+    	);
+
+    // Spec and data for slope example (default)
+    let spec = $derived({
     	height: 300,
     	marginBottom: 30,
     	x: { axis: null, type: 'ordinal', insetLeft: 90, insetRight: 90 },
@@ -59,9 +50,9 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
     	color: {
     		legend: true,
     		range: [
-    			currentTheme.color.data.primary,
-    			currentTheme.color.data.secondary,
-    			currentTheme.color.data.tertiary
+    			theme.currentTheme.color.data.primary,
+    			theme.currentTheme.color.data.secondary,
+    			theme.currentTheme.color.data.tertiary
     		]
     	},
     	marks: [
@@ -74,7 +65,7 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
     		}),
     		Plot.tickX(chartData, {
     			x: 'Year',
-    			stroke: currentTheme.color.chart.grid
+    			stroke: theme.currentTheme.color.chart.grid
     		}),
     		Plot.textX(
     			chartData.filter((d) => d.Variable === 'Variable A'),
@@ -89,7 +80,7 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
     			y: 'Average',
     			stroke: 'Variable',
     			strokeWidth: 2,
-    			fill: currentTheme.color.chart.background,
+    			fill: theme.currentTheme.color.chart.background,
     			fillOpacity: 1
     		}),
     		d3
@@ -100,7 +91,8 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
     					occlusionY({
     						x: 'Year',
     						y: 'Average',
-    						text: (d) => '£' + formatHigh(d.Average),
+    						text: (d: { Average: number | { valueOf(): number } }) =>
+    							'£' + d3.format(',.4~s')(d.Average),
     						textAnchor: left ? 'end' : 'start',
     						dx: left ? -8 : 8,
     						radius: 8.5
@@ -110,6 +102,18 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
     	]
     });
     ```
+
+</details>
+
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+    <summary class="cursor-pointer">Show data</summary>
+    <pre>
+    	{JSON.stringify(
+    		yearlyData.filter((d) => d.Year === '2015' || d.Year === '2021'),
+    		null,
+    		2
+    	)}
+    </pre>
 
 </details>
 
