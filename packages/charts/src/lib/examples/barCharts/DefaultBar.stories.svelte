@@ -1,8 +1,8 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { yearlyData } from '../../data/demoData';
-	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
-	import { Plot } from '../observablePlotFragments/plot';
+	import { yearlyData } from '../../../data/demoData';
+	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
+	import { Plot } from '../../observablePlotFragments/plot';
 	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
