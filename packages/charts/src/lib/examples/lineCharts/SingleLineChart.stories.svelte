@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { singleVariableData as chartData } from '../../../data/demoData';
+	import { monthlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
 	import { format } from 'd3-format';
@@ -8,6 +8,8 @@
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Line Charts'
 	});
+
+	const chartData = monthlyData.filter((d) => d.Variable === 'Variable A');
 
 	// Spec and data for single line example (default)
 	let spec = $derived({

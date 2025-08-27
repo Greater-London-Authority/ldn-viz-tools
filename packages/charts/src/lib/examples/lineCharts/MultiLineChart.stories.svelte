@@ -1,7 +1,7 @@
 <script module lang="ts">
-	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { multiVariableData as chartData } from '../../../data/demoData';
+	import { monthlyData as chartData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
 	import { format } from 'd3-format';
@@ -10,8 +10,6 @@
 		title: 'Charts/Examples/Line Charts'
 	});
 
-	let currentTheme = $derived(currentThemeObj.currentTheme);
-
 	// Spec and data for multi-line example
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
@@ -19,9 +17,9 @@
 			legend: true,
 			type: 'ordinal',
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
@@ -36,7 +34,10 @@
 				stroke: 'Variable'
 			}),
 
-			Plot.ruleX(chartData, Plot.pointerX({ x: 'Month', stroke: currentTheme.color.chart.label })),
+			Plot.ruleX(
+				chartData,
+				Plot.pointerX({ x: 'Month', stroke: theme.currentTheme.color.chart.label })
+			),
 			Plot.point(
 				chartData,
 				Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })

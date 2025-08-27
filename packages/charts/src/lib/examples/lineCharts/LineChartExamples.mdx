@@ -3,7 +3,7 @@ import * as Area from './AreaChart.stories.svelte';
 import * as DualLine from './DualLineChart.stories.svelte';
 import * as MultiLine from './MultiLineChart.stories.svelte';
 import * as SingleLine from './SingleLineChart.stories.svelte';
-import { multiVariableData, singleVariableData, dualVariableData } from '../../../data/demoData';
+import { monthlyData } from '../../../data/demoData';
 
 <Meta title="Charts/Examples/Line Charts" />
 
@@ -12,7 +12,7 @@ import { multiVariableData, singleVariableData, dualVariableData } from '../../.
 ### Single line
 
 <details>
-	<summary class="cursor-pointer">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
 	```javascript
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
@@ -37,9 +37,16 @@ import { multiVariableData, singleVariableData, dualVariableData } from '../../.
 	```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto">
-	<summary class="cursor-pointer">Show data</summary>
-	<pre>{JSON.stringify(singleVariableData, null, 2)}</pre>
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show data</summary>
+    <pre>
+    	{JSON.stringify(
+    		monthlyData.filter((d) => d.Variable === 'Variable A'),
+    		null,
+    		2
+    	)}
+    </pre>
+
 </details>
 
 <Canvas of={SingleLine.SingleLine} />
@@ -47,7 +54,7 @@ import { multiVariableData, singleVariableData, dualVariableData } from '../../.
 ### Multiple lines
 
 <details>
-	<summary class="cursor-pointer">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -56,9 +63,9 @@ let spec = $derived({
 		legend: true,
 		type: 'ordinal',
 		range: [
-			currentTheme.color.data.primary,
-			currentTheme.color.data.secondary,
-			currentTheme.color.data.tertiary
+			theme.currentTheme.color.data.primary,
+			theme.currentTheme.color.data.secondary,
+			theme.currentTheme.color.data.tertiary
 		]
 	},
 	marks: [
@@ -73,7 +80,10 @@ let spec = $derived({
 			stroke: 'Variable'
 		}),
 
-		Plot.ruleX(chartData, Plot.pointerX({ x: 'Month', stroke: currentTheme.color.chart.label })),
+		Plot.ruleX(
+			chartData,
+			Plot.pointerX({ x: 'Month', stroke: theme.currentTheme.color.chart.label })
+		),
 		Plot.point(
 			chartData,
 			Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
@@ -106,9 +116,10 @@ let spec = $derived({
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto">
-	<summary class="cursor-pointer">Show data</summary>
-	<pre>{JSON.stringify(multiVariableData, null, 2)}</pre>
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+    <summary class="cursor-pointer ">Show data</summary>
+    <pre>{JSON.stringify(monthlyData, null, 2)}</pre>
+
 </details>
 
 <Canvas of={MultiLine.MultipleLines} />
@@ -116,7 +127,7 @@ let spec = $derived({
 ### Dual line
 
 <details>
-	<summary class="cursor-pointer">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -124,7 +135,7 @@ let spec = $derived({
 	color: {
 		legend: true,
 		type: 'ordinal',
-		range: [currentTheme.color.data.primary, currentTheme.color.data.context]
+		range: [theme.currentTheme.color.data.primary, theme.currentTheme.color.data.context]
 	},
 	marks: [
 		Plot.gridX({ interval: '2 years' }),
@@ -162,9 +173,16 @@ let spec = $derived({
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto">
-	<summary class="cursor-pointer">Show data</summary>
-	<pre>{JSON.stringify(dualVariableData, null, 2)}</pre>
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+    <summary class="cursor-pointer">Show data</summary>
+    <pre>
+    	{JSON.stringify(
+    		monthlyData.filter((d) => d.Variable != 'Variable C'),
+    		null,
+    		2
+    	)}
+    </pre>
+
 </details>
 
 <Canvas of={DualLine.DualLine} />
@@ -172,7 +190,7 @@ let spec = $derived({
 ### Area chart
 
 <details>
-	<summary class="cursor-pointer">Show spec</summary>
+	<summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -204,9 +222,16 @@ let spec = $derived({
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto">
-	<summary class="cursor-pointer">Show data</summary>
-	<pre>{JSON.stringify(singleVariableData, null, 2)}</pre>
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show data</summary>
+    <pre>
+    	{JSON.stringify(
+    		monthlyData.filter((d) => d.Variable === 'Variable A'),
+    		null,
+    		2
+    	)}
+    </pre>
+
 </details>
 
 <Canvas of={Area.AreaChart} />

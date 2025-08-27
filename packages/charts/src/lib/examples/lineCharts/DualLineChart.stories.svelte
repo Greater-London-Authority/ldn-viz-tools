@@ -1,8 +1,8 @@
 <script module lang="ts">
-	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
-	import { dualVariableData as chartData } from '../../../data/demoData';
+	import { monthlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
 	import { format } from 'd3-format';
@@ -11,7 +11,7 @@
 		title: 'Charts/Examples/Line Charts'
 	});
 
-	let currentTheme = $derived(currentThemeObj.currentTheme);
+	const chartData = monthlyData.filter((d) => d.Variable != 'Variable C');
 
 	// Spec and data for dual line example
 	let spec = $derived({
@@ -19,7 +19,7 @@
 		color: {
 			legend: true,
 			type: 'ordinal',
-			range: [currentTheme.color.data.primary, currentTheme.color.data.context]
+			range: [theme.currentTheme.color.data.primary, theme.currentTheme.color.data.context]
 		},
 		marks: [
 			Plot.gridX({ interval: '2 years' }),
