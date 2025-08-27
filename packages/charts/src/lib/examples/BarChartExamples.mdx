@@ -4,6 +4,7 @@ import * as FacetedBar from './FacetedBar.stories.svelte';
 import * as HorizontalBar from './HorizontalBar.stories.svelte';
 import * as HorizontalStackedBar from './HorizontalStackedBar.stories.svelte';
 import * as StackedBar from './StackedBar.stories.svelte';
+import { yearlyData } from '../../data/demoData';
 
 <Meta title="Charts/Examples/Bar Charts" />
 
@@ -12,60 +13,21 @@ import * as StackedBar from './StackedBar.stories.svelte';
 ### Single variable
 
 <details>
-    <summary class="cursor-pointer">Show spec</summary>
-    ```javascript
-    let spec = $derived({
-        x: { insetLeft: 80, insetRight: 20, type: 'band' },
-        marks: [
-            Plot.gridY(),
-            Plot.axisX({ label: 'Year' }),
-            Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
-            Plot.barY(chartData, {
-                x: 'Year',
-                y: 'Average',
-                tip: {
-                    format: {
-                        x: true,
-                        y: (d) => '£' + formatHigh(d)
-                    }
-                }
-            }),
-            // baseline last
-            Plot.ruleY([0])
-        ]
-    });
-    ```
-</details>
-
-<Canvas of={DefaultBar.Default} />
-
-### Stacked Bar
-
-<details>
-    <summary class="cursor-pointer">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
     ```javascript
     let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'band' },
-		color: {
-			legend: true,
-			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
-			]
-		},
 		marks: [
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year' }),
-			Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.barY(chartData, {
 				x: 'Year',
 				y: 'Average',
-				fill: 'Variable',
 				tip: {
 					format: {
 						x: true,
-						y: (d) => '£' + formatHigh(d)
+						y: (d) => '£' + format(',.4~s')(d)
 					}
 				}
 			}),
@@ -76,14 +38,69 @@ import * as StackedBar from './StackedBar.stories.svelte';
     ```
 </details>
 
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="dark:text-color-text-inverse-primary cursor-pointer">Show data</summary>
+	<pre>
+		{JSON.stringify(
+			yearlyData.filter((d) => d.Variable === 'Variable A'),
+			null,
+			2
+		)}
+	</pre>
+</details>
+
+<Canvas of={DefaultBar.Default} />
+
+### Stacked Bar
+
+<details>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    ```javascript
+    	let spec = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'band' },
+		color: {
+			legend: true,
+			range: [
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
+			]
+		},
+		marks: [
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year' }),
+			Plot.axisY({ tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.barY(chartData, {
+				x: 'Year',
+				y: 'Average',
+				fill: 'Variable',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			}),
+			// baseline last
+			Plot.ruleY([0])
+		]
+	});
+    ```
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="dark:text-color-text-inverse-primary cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(yearlyData, null, 2)}</pre>
+</details>
+
 <Canvas of={StackedBar.Stacked} />
 
 ### Faceted Bar
 
 <details>
-    <summary class="cursor-pointer">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
     ```javascript
-    let spec = $derived({
+    	let spec = $derived({
 		marginRight: 120, // adjust margin right to suit your label length
 		marginTop: 20, // adjust top margin to better suit facetY,
 		x: { insetLeft: 80, insetRight: 20, type: 'band' },
@@ -91,15 +108,15 @@ import * as StackedBar from './StackedBar.stories.svelte';
 		color: {
 			legend: true,
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year' }),
-			Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.barY(chartData, {
 				x: 'Year',
 				y: 'Average',
@@ -108,7 +125,7 @@ import * as StackedBar from './StackedBar.stories.svelte';
 				tip: {
 					format: {
 						x: true,
-						y: (d) => '£' + formatHigh(d)
+						y: (d) => '£' + format(',.4~s')(d)
 					}
 				}
 			}),
@@ -119,14 +136,19 @@ import * as StackedBar from './StackedBar.stories.svelte';
     ```
 </details>
 
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="dark:text-color-text-inverse-primary cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(yearlyData, null, 2)}</pre>
+</details>
+
 <Canvas of={FacetedBar.Faceted} />
 
 ### Horizontal Bar
 
 <details>
-    <summary class="cursor-pointer">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
     ```javascript
-    let spec = $derived({
+	let spec = $derived({
 		height: 300, // height set outside of default
 		marginLeft: 80, // adjust margin left to suit label length,
 		// reset insetLeft to 0, push domain to padded max value, insetRight to prevent label clipping on x axis
@@ -137,7 +159,7 @@ import * as StackedBar from './StackedBar.stories.svelte';
 		},
 		marks: [
 			Plot.gridX(),
-			Plot.axisX({ label: null, tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisX({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			// change text & line anchors and reset dx & dy
 			Plot.axisY({ textAnchor: 'end', lineAnchor: 'middle', dx: 0, dy: 0 }),
 			Plot.barX(chartData, {
@@ -147,7 +169,7 @@ import * as StackedBar from './StackedBar.stories.svelte';
 				y: 'Variable',
 				tip: {
 					format: {
-						x: (d) => '£' + formatHigh(d),
+						x: (d) => '£' + format(',.4~s')(d),
 						y: false
 					}
 				}
@@ -159,14 +181,25 @@ import * as StackedBar from './StackedBar.stories.svelte';
     ```
 </details>
 
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="dark:text-color-text-inverse-primary cursor-pointer">Show data</summary>
+	<pre>
+		{JSON.stringify(
+			yearlyData.filter((d) => d.Year === '2024'),
+			null,
+			2
+		)}
+	</pre>
+</details>
+
 <Canvas of={HorizontalBar.Horizontal} />
 
 ### Horizontal Stacked Bar
 
 <details>
-    <summary class="cursor-pointer">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
     ```javascript
-    let spec = $derived({
+	let spec = $derived({
 		height: 300, // height set outside of default
 		marginLeft: 80, // adjust margin left to suit label length,
 		// reset insetLeft to 0, push domain to padded max value, insetRight to prevent label clipping on x axis
@@ -178,14 +211,14 @@ import * as StackedBar from './StackedBar.stories.svelte';
 		color: {
 			legend: true,
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
 			Plot.gridX(),
-			Plot.axisX({ label: null, tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisX({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			// change text & line anchors and reset dx & dy
 			Plot.axisY({ textAnchor: 'end', lineAnchor: 'middle', dx: 0, dy: 0 }),
 			Plot.barX(chartData, {
@@ -196,7 +229,7 @@ import * as StackedBar from './StackedBar.stories.svelte';
 				fill: 'Variable',
 				tip: {
 					format: {
-						x: (d) => '£' + formatHigh(d),
+						x: (d) => '£' + format(',.4~s')(d),
 						y: false,
 						fill: false
 					}
@@ -207,6 +240,17 @@ import * as StackedBar from './StackedBar.stories.svelte';
 		]
 	});
     ```
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="dark:text-color-text-inverse-primary cursor-pointer">Show data</summary>
+	<pre>
+		{JSON.stringify(
+			yearlyData.filter((d) => d.Year === '2015' || d.Year === '2021'),
+			null,
+			2
+		)}
+	</pre>
 </details>
 
 <Canvas of={HorizontalStackedBar.HorizontalStacked} />

@@ -1,14 +1,16 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
-	import { multiVarSingleYearAggregatedByYear as chartData } from '../../data/demoData';
+	import { yearlyData } from '../../data/demoData';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../observablePlotFragments/plot';
-	import { formatHigh } from './utils';
+	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Bar Charts'
 	});
+
+	const chartData = yearlyData.filter((d) => d.Year === '2024');
 
 	let spec = $derived({
 		height: 300, // height set outside of default
@@ -21,7 +23,7 @@
 		},
 		marks: [
 			Plot.gridX(),
-			Plot.axisX({ label: null, tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisX({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			// change text & line anchors and reset dx & dy
 			Plot.axisY({ textAnchor: 'end', lineAnchor: 'middle', dx: 0, dy: 0 }),
 			Plot.barX(chartData, {
@@ -31,7 +33,7 @@
 				y: 'Variable',
 				tip: {
 					format: {
-						x: (d) => '£' + formatHigh(d),
+						x: (d) => '£' + format(',.4~s')(d),
 						y: false
 					}
 				}

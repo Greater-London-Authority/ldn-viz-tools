@@ -1,31 +1,29 @@
 <script module lang="ts">
-	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { demoAggregatedByYearTimeseriesLong as chartData } from '../../data/demoData';
+	import { yearlyData as chartData } from '../../data/demoData';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../observablePlotFragments/plot';
-	import { formatHigh } from './utils';
+	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Bar Charts'
 	});
-
-	let currentTheme = $derived(currentThemeObj.currentTheme);
 
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'band' },
 		color: {
 			legend: true,
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year' }),
-			Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.barY(chartData, {
 				x: 'Year',
 				y: 'Average',
@@ -33,7 +31,7 @@
 				tip: {
 					format: {
 						x: true,
-						y: (d) => '£' + formatHigh(d)
+						y: (d) => '£' + format(',.4~s')(d)
 					}
 				}
 			}),

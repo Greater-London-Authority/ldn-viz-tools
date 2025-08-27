@@ -1,27 +1,29 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { singleVarAggregatedByYear as chartData } from '../../data/demoData';
+	import { yearlyData } from '../../data/demoData';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../observablePlotFragments/plot';
-	import { formatHigh } from './utils';
+	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Bar Charts'
 	});
+
+	const chartData = yearlyData.filter((d) => d.Variable === 'Variable A');
 
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'band' },
 		marks: [
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year' }),
-			Plot.axisY({ tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.barY(chartData, {
 				x: 'Year',
 				y: 'Average',
 				tip: {
 					format: {
 						x: true,
-						y: (d) => '£' + formatHigh(d)
+						y: (d) => '£' + format(',.4~s')(d)
 					}
 				}
 			}),

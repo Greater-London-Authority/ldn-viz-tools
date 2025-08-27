@@ -1,16 +1,16 @@
 <script module lang="ts">
-	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { multiVarDualYearAggregatedByYear as chartData } from '../../data/demoData';
+	import { yearlyData } from '../../data/demoData';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../observablePlotFragments/plot';
-	import { formatHigh } from './utils';
-
-	let currentTheme = $derived(currentThemeObj.currentTheme);
+	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Bar Charts'
 	});
+
+	let chartData = yearlyData.filter((d) => d.Year === '2015' || d.Year === '2021');
 
 	let spec = $derived({
 		height: 300, // height set outside of default
@@ -24,14 +24,14 @@
 		color: {
 			legend: true,
 			range: [
-				currentTheme.color.data.primary,
-				currentTheme.color.data.secondary,
-				currentTheme.color.data.tertiary
+				theme.currentTheme.color.data.primary,
+				theme.currentTheme.color.data.secondary,
+				theme.currentTheme.color.data.tertiary
 			]
 		},
 		marks: [
 			Plot.gridX(),
-			Plot.axisX({ label: null, tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisX({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			// change text & line anchors and reset dx & dy
 			Plot.axisY({ textAnchor: 'end', lineAnchor: 'middle', dx: 0, dy: 0 }),
 			Plot.barX(chartData, {
@@ -42,7 +42,7 @@
 				fill: 'Variable',
 				tip: {
 					format: {
-						x: (d) => '£' + formatHigh(d),
+						x: (d) => '£' + format(',.4~s')(d),
 						y: false,
 						fill: false
 					}
