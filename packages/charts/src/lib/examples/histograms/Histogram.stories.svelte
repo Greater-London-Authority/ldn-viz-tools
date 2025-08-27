@@ -1,15 +1,12 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { randomVals } from '../../../data/demoData';
+	import { randomVals as chartData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { bin } from 'd3';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Histograms'
 	});
-
-	const chartData = bin()(randomVals);
 
 	// Spec and data for histogram example (default)
 	let spec = $derived({
@@ -20,19 +17,7 @@
 			Plot.gridY(),
 			Plot.axisX({ label: 'Random Value Range' }),
 			Plot.axisY({ label: 'Frequency of value' }),
-			Plot.rectY(chartData, {
-				x1: 'x0',
-				x2: 'x1',
-				y: 'length',
-				tip: {
-					channels: {
-						Frequency: 'length'
-					},
-					format: {
-						y: false
-					}
-				}
-			}),
+			Plot.rectY(chartData, Plot.binX({ y: 'count' }, { x: 'x', tip: true })),
 			// baseline last
 			Plot.ruleY([0])
 		]
@@ -44,13 +29,13 @@
 		<ObservablePlot
 			{spec}
 			data={chartData}
-			title="Using the RectY mark to create a histogram that shows random values conform to a normal distribution"
+			title="Using the RectY mark to create a histogram that shows Math.random samples from a uniform distribution"
 			subTitle="1000 randomly generated and binned values"
 			alt="Histogram chart of 1000 randomly generated values"
 			byline="GLA City Intelligence"
 			source="LDN Viz Tools Demo Data"
 			note="Data for demonstration only"
-			chartDescription="The histogram chart shows 1000 randomly generated and binned values in a normal distribution. The x axis ranges in value from -3.0 to 4.0 and the y axis ranges in frequency from 0 to 150. Values between 0 and 0.5 occur 193 times (highest frequency)."
+			chartDescription="The histogram chart shows 1000 randomly generated and binned values in a uniform distribution. The x axis ranges in value from 0 to 1.0 and the y axis ranges in frequency from 0 to a randomly defined number."
 		/>
 	{/snippet}
 </Story>
