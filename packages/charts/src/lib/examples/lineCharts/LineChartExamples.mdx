@@ -1,0 +1,212 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as Area from './AreaChart.stories.svelte';
+import * as DualLine from './DualLineChart.stories.svelte';
+import * as MultiLine from './MultiLineChart.stories.svelte';
+import * as SingleLine from './SingleLineChart.stories.svelte';
+import { multiVariableData, singleVariableData, dualVariableData } from '../../../data/demoData';
+
+<Meta title="Charts/Examples/Line Charts" />
+
+# Line Charts
+
+### Single line
+
+<details>
+	<summary class="cursor-pointer">Show spec</summary>
+	```javascript
+	let spec = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			})
+		]
+	});
+	```
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(singleVariableData, null, 2)}</pre>
+</details>
+
+<Canvas of={SingleLine.SingleLine} />
+
+### Multiple lines
+
+<details>
+	<summary class="cursor-pointer">Show spec</summary>
+
+```javascript
+let spec = $derived({
+	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+	color: {
+		legend: true,
+		type: 'ordinal',
+		range: [
+			currentTheme.color.data.primary,
+			currentTheme.color.data.secondary,
+			currentTheme.color.data.tertiary
+		]
+	},
+	marks: [
+		Plot.gridX({ interval: '2 years' }),
+		Plot.gridY(),
+		Plot.axisX({ label: 'Year', interval: '1 year' }),
+		Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+		Plot.line(chartData, {
+			x: 'Month',
+			y: 'Value',
+			z: 'Variable',
+			stroke: 'Variable'
+		}),
+
+		Plot.ruleX(chartData, Plot.pointerX({ x: 'Month', stroke: currentTheme.color.chart.label })),
+		Plot.point(
+			chartData,
+			Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
+		),
+		Plot.tip(
+			chartData,
+			Plot.pointer({
+				x: 'Month',
+				y: 'Value',
+				z: 'Variable',
+				channels: {
+					Variable: 'Variable',
+					Month: { value: 'Month', label: 'Date' },
+					Value: { value: 'Value', label: 'GBP' }
+				},
+				format: {
+					Variable: true,
+					Month: true,
+					Value: (d) => '£' + format(',.4~s')(d),
+					x: false,
+					y: false
+				}
+			})
+		),
+		// baseline last
+		Plot.ruleY([0])
+	]
+});
+```
+
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(multiVariableData, null, 2)}</pre>
+</details>
+
+<Canvas of={MultiLine.MultipleLines} />
+
+### Dual line
+
+<details>
+	<summary class="cursor-pointer">Show spec</summary>
+
+```javascript
+let spec = $derived({
+	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+	color: {
+		legend: true,
+		type: 'ordinal',
+		range: [currentTheme.color.data.primary, currentTheme.color.data.context]
+	},
+	marks: [
+		Plot.gridX({ interval: '2 years' }),
+		Plot.gridY(),
+		Plot.axisX({ label: 'Year', interval: '1 year' }),
+		Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+		Plot.line(chartData, {
+			x: 'Month',
+			y: 'Value',
+			z: 'Variable',
+			stroke: 'Variable',
+			reverse: true, // draw in reverse to get Var A on top
+			tip: {
+				format: {
+					x: true,
+					y: (d) => '£' + format(',.4~s')(d)
+				}
+			}
+		}),
+		Plot.ruleX([new Date('2016-01-01T00:00:01')]),
+		Plot.text([0], {
+			x: new Date('2016-01-01T00:00:01'),
+			y: d3.max(chartData, (d) => d.Value),
+			text: ['2016'],
+			dy: 0,
+			dx: 13,
+			rotate: 90,
+			textAnchor: 'start'
+		}),
+		// baseline last
+		Plot.ruleY([0])
+	]
+});
+```
+
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(dualVariableData, null, 2)}</pre>
+</details>
+
+<Canvas of={DualLine.DualLine} />
+
+### Area chart
+
+<details>
+	<summary class="cursor-pointer">Show spec</summary>
+
+```javascript
+let spec = $derived({
+	x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+	marks: [
+		Plot.gridX({ interval: '2 years' }),
+		Plot.gridY(),
+		Plot.axisX({ label: 'Year', interval: '1 year' }),
+		Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+		Plot.areaY(chartData, {
+			x: 'Month',
+			y: 'Value'
+		}),
+		Plot.line(chartData, {
+			x: 'Month',
+			y: 'Value',
+			tip: {
+				format: {
+					x: true,
+					y: (d) => '£' + format(',.4~s')(d)
+				}
+			}
+		}),
+		// baseline last
+		Plot.ruleY([0])
+	]
+});
+```
+
+</details>
+
+<details class="max-h-[300px] overflow-y-auto">
+	<summary class="cursor-pointer">Show data</summary>
+	<pre>{JSON.stringify(singleVariableData, null, 2)}</pre>
+</details>
+
+<Canvas of={Area.AreaChart} />
