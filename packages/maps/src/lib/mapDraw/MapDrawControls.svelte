@@ -38,7 +38,7 @@
 	export let allowUploadAndDownload = true;
 
 	// this is the mode of the MapDrawControls component, rather than of the TerraDraw component
-	let metaMode: 'default' | 'edit' | 'upload' = 'default'
+	let metaMode: 'default' | 'edit' | 'upload' = 'default';
 
 	let options: { id: string; label: string }[];
 
@@ -49,7 +49,7 @@
 
 	let previousFeatures: Feature[] = [];
 	const clickEdit = () => {
-		metaMode = 'edit'
+		metaMode = 'edit';
 		previousFeatures = JSON.stringify(features);
 		console.log('previousFeatures is now:', { previousFeatures });
 	};
@@ -78,9 +78,9 @@
 		metaMode = 'default';
 		terraDraw.clear();
 		terraDraw.addFeatures(geoJSON.features);
-	}
+	};
 
-		const downloadFromURL = (url: string, name: string) => {
+	const downloadFromURL = (url: string, name: string) => {
 		const link = document.createElement('a');
 		link.setAttribute('href', url);
 		link.setAttribute('target', '_blank');
@@ -90,14 +90,14 @@
 
 	const downloadData = () => {
 		const geoJson = {
-			type: "FeatureCollection",
+			type: 'FeatureCollection',
 			features: features
 		};
 		const dataString = JSON.stringify(geoJson, null, 4);
 		const dataURL = 'data:application/json;base64,' + window.btoa(dataString);
 
 		downloadFromURL(dataURL, 'shape.geojson');
-	}
+	};
 </script>
 
 <div class="flex gap-2">
@@ -146,28 +146,30 @@
 			</Button>
 		</div>
 	{:else if metaMode === 'upload'}
-			<FileUpload
-				onCancel={() => metaMode = 'default'}
-				onLoad={clickLoad}
-			/>
+		<FileUpload onCancel={() => (metaMode = 'default')} onLoad={clickLoad} />
 	{:else}
-		<div class="flex flex-col gap-1  pointer-events-auto">
+		<div class="flex flex-col gap-1 pointer-events-auto">
 			<Button variant="square" size="lg" on:click={clickEdit}>
 				<Icon src={Pencil} class="w-8 h-8 ml-2" aria-hidden="true" />
 				Edit area
 			</Button>
 
 			{#if allowUploadAndDownload}
-			<Button variant="square" size="lg" emphasis="secondary" on:click={downloadData}>
-				<Icon src={ArrowDownTray} class="w-8 h-8 ml-2" aria-hidden="true" />
-				Download area
-			</Button>
+				<Button variant="square" size="lg" emphasis="secondary" on:click={downloadData}>
+					<Icon src={ArrowDownTray} class="w-8 h-8 ml-2" aria-hidden="true" />
+					Download area
+				</Button>
 
-			<Button variant="square" size="lg" emphasis="secondary" on:click={() => metaMode = 'upload'}>
-				<Icon src={ArrowUpTray} class="w-8 h-8 ml-2" aria-hidden="true" />
-				Upload area
-			</Button>
-				{/if}
+				<Button
+					variant="square"
+					size="lg"
+					emphasis="secondary"
+					on:click={() => (metaMode = 'upload')}
+				>
+					<Icon src={ArrowUpTray} class="w-8 h-8 ml-2" aria-hidden="true" />
+					Upload area
+				</Button>
+			{/if}
 		</div>
 	{/if}
 </div>

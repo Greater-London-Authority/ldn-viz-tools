@@ -1,104 +1,105 @@
 <script lang="ts">
-  import { Button, classNames } from '@ldn-viz/ui';
-  import type { FeatureCollection } from 'geojson';
-  import type { ChangeEventHandler } from 'svelte/elements';
+	import { Button, classNames } from '@ldn-viz/ui';
+	import type { FeatureCollection } from 'geojson';
+	import type { ChangeEventHandler } from 'svelte/elements';
 
-  export let onCancel: () => void;
-  export let onLoad: (data: FeatureCollection) => void;
+	export let onCancel: () => void;
+	export let onLoad: (data: FeatureCollection) => void;
 
-  let isDragging = false;
+	let isDragging = false;
 
-  async function readFile(file) {
-    try {
-      const text = await file.text();
-      const parsedJson = JSON.parse(text);
-      onLoad(parsedJson);
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
-    }
-  }
+	async function readFile(file) {
+		try {
+			const text = await file.text();
+			const parsedJson = JSON.parse(text);
+			onLoad(parsedJson);
+		} catch (error) {
+			console.error('Error parsing JSON:', error);
+		}
+	}
 
-  function handleDrag(e: DragEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
+	function handleDrag(e: DragEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
 
-  function handleDragIn(e: DragEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      isDragging = true;
-    }
-  }
+	function handleDragIn(e: DragEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+			isDragging = true;
+		}
+	}
 
-  function handleDragOut(e: DragEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    isDragging = false;
-  }
+	function handleDragOut(e: DragEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		isDragging = false;
+	}
 
-  function handleDrop(e: DragEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    isDragging = false;
+	function handleDrop(e: DragEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		isDragging = false;
 
-    const items = [...e.dataTransfer.items];
-    const file = items.find(item => item.kind === 'file')?.getAsFile();
+		const items = [...e.dataTransfer.items];
+		const file = items.find((item) => item.kind === 'file')?.getAsFile();
 
-    if (file && file.name.endsWith('.geojson')) {
-      readFile(file);
-    }
-  }
+		if (file && file.name.endsWith('.geojson')) {
+			readFile(file);
+		}
+	}
 
-  function handleFileSelect(e: ChangeEventHandler<HTMLInputElement>) {
-    const file = e.target.files[0];
-    if (file && file.name.endsWith('.geojson')) {
-      readFile(file);
-    }
-  }
+	function handleFileSelect(e: ChangeEventHandler<HTMLInputElement>) {
+		const file = e.target.files[0];
+		if (file && file.name.endsWith('.geojson')) {
+			readFile(file);
+		}
+	}
 
-  let inputRef: HTMLInputElement;
+	let inputRef: HTMLInputElement;
 </script>
 
 <div class="p-4 bg-color-container-level-1 pointer-events-auto">
+	<span class="text-lg font-bold pb-2">Upload GeoJSON</span>
 
-  <span class="text-lg font-bold pb-2">Upload GeoJSON</span>
+	<div
+		class={classNames(
+			'border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-[200px] hover:border-color-ui-border-notice',
+			isDragging ? '!bg-core-blue-600' : ''
+		)}
+		on:dragenter={handleDragIn}
+		on:dragleave={handleDragOut}
+		on:dragover={handleDrag}
+		on:drop={handleDrop}
+		on:keydown={(e) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				inputRef.click();
+			}
+		}}
+		role="button"
+		tabindex="0"
+		aria-label="GeoJSON file drop zone"
+		aria-describedby="dropZoneDescription"
+	>
+		<span id="dropZoneDescription" class="sr-only">
+			Drop a JSON file here or press Enter to select a file
+		</span>
 
-  <div
-    class={classNames("border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-[200px] hover:border-color-ui-border-notice", isDragging ? '!bg-core-blue-600' : '' )}
-    on:dragenter={handleDragIn}
-    on:dragleave={handleDragOut}
-    on:dragover={handleDrag}
-    on:drop={handleDrop}
-    on:keydown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            inputRef.click();
-        }
-    }}
-    role="button"
-    tabindex="0"
-    aria-label="GeoJSON file drop zone"
-    aria-describedby="dropZoneDescription"
-  >
+		<div class="absolute inset-0 w-full h-full z-10 cursor-pointer">
+			<input
+				bind:this={inputRef}
+				type="file"
+				accept=".geojson"
+				on:change={handleFileSelect}
+				class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+			/>
+		</div>
 
-    <span id="dropZoneDescription" class="sr-only">
-        Drop a JSON file here or press Enter to select a file
-    </span>
+		<div class="relative z-0 text-center">
+			<p class="mb-4 text-gray-600">Drag & drop JSON files here or click to select</p>
+		</div>
+	</div>
 
-    <div class="absolute inset-0 w-full h-full z-10 cursor-pointer">
-      <input
-        bind:this={inputRef}
-        type="file"
-        accept=".geojson"
-        on:change={handleFileSelect}
-        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-      />
-    </div>
-
-    <div class="relative z-0 text-center">
-      <p class="mb-4 text-gray-600">Drag & drop JSON files here or click to select</p>
-    </div>
-  </div>
-
-  <Button on:click={onCancel}>Cancel</Button>
+	<Button on:click={onCancel}>Cancel</Button>
 </div>
