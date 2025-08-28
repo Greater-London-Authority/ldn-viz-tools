@@ -3,11 +3,25 @@
 
 	import ObservablePlot from './ObservablePlot.svelte';
 
+	/**
+	 * The `ObservablePlot` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library, wrapping an `ObservablePlotInner` component in a [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation) wrapper.
+	 * If you do not require the extra chrome applied by the `ChartContainer`, or need to include several plots in the same container, then use the [ObservablePlotInner](./?path=/docs/charts-components-observableplotinner--documentation) component directly.
+	 */
+
 	const { Story } = defineMeta({
 		title: 'Charts/Components/ObservablePlot',
 		component: ObservablePlot,
 		tags: ['autodocs'],
-
+		args: {
+			title: "In London, Variable A's value has fallen steadily since 2017",
+			subTitle: 'London monthly estimated variable value (GBP), January 2015 to March 2024',
+			alt: "Line chart of London's variable A values",
+			byline: 'GLA City Intelligence',
+			source: 'LDN Viz Tools Demo Data',
+			note: 'Data for demonstration only',
+			chartDescription:
+				"The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"
+		},
 		argTypes: {
 			// this is a module export, not a prop, so don't include it in table
 			addClick: {
@@ -22,67 +36,49 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
-
 	import { addMultipleEventHandlers } from './ObservablePlotInner.svelte';
-
-	import { theme as currentThemeObj, Select } from '@ldn-viz/ui';
-	import { getDefaultPlotStyles } from '../observablePlotFragments/observablePlotFragments';
-
-	import { penguins } from '../../data/demoData';
-
+	import { theme, Select } from '@ldn-viz/ui';
+	import { format } from 'd3-format';
 	import { Plot } from '../observablePlotFragments/plot';
 	import DemoTooltip from './DemoTooltip.svelte';
 	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
-
-	let theme = $state(getDefaultPlotStyles());
+	import { monthlyData } from '../../data/demoData';
 
 	let clickedValue: any | undefined = $state(undefined);
 	let clickedIndex: any | undefined = $state(undefined);
 	let hoveredValue: any | undefined = $state(undefined);
 
 	const tooltipStore: Writable<Position> = writable();
-	let updateTheme = $derived((_theme: any) => (theme = getDefaultPlotStyles()));
 
-	let currentTheme = $derived(currentThemeObj.currentTheme);
+	const chartData = monthlyData.filter((d) => d.Variable === 'Variable A');
 
-	$effect(() => {
-		updateTheme(currentThemeObj.currentTheme);
-	});
-
+	// Spec and data for single line example (default)
 	let spec = $derived({
-		style: {
-			...theme.defaultStyle
-		},
-
-		...theme.defaultSize,
-
-		x: { ...theme.defaultXScale },
-
-		y: { ...theme.defaultYScale },
-
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: [
-			Plot.gridX({ ...theme.defaultGridX }),
-			Plot.gridY({ ...theme.defaultGridY }),
-			Plot.ruleY([0], { ...theme.defaultRule }),
-			Plot.ruleX([0], { ...theme.defaultRule }),
-			Plot.dot(penguins, { ...theme.defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
-			Plot.axisX({ ...theme.defaultXAxis }),
-			Plot.axisY({ ...theme.defaultYAxis, label: 'culmen_depth_mm' })
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			})
 		]
 	});
 </script>
 
 <Story name="Default">
 	{#snippet template(args)}
-		<ObservablePlot
-			{...args}
-			{spec}
-			title="Penguin Culmens"
-			subTitle="A scatter plot of depth against length"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-			alt="Simple description of type of chart"
-		/>
+		<ObservablePlot {...args} {spec} data={chartData} />
 	{/snippet}
 </Story>
 <!-- 
@@ -90,13 +86,8 @@
 	Tailwind width classes can be used to control the width. Either fixed: (e.g. `w-[500px]`) or responsive: (e.g. `w-1/2`)
 -->
 <Story name="With Chart Width">
-	{#snippet template()}
-		<ObservablePlot
-			spec={{ ...spec }}
-			chartWidth="w-1/2"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-			alt="Simple description of type of chart"
-		/>
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData} chartWidth="w-1/2" />
 	{/snippet}
 </Story>
 
@@ -104,26 +95,8 @@
 	The height of the chart remains the responsibility of the contained instance of plot. It can be set to a specific pixel value: ie 300
 -->
 <Story name="With Height">
-	{#snippet template()}
-		<ObservablePlot
-			spec={{ ...spec, height: 300 }}
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-			alt="Simple description of type of chart"
-		/>
-	{/snippet}
-</Story>
-
-<Story name="With Aspect Ratio">
-	{#snippet template()}
-		<ObservablePlot
-			spec={{
-				...spec,
-				height: undefined,
-				aspectRatio: 0.5
-			}}
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-			alt="Simple description of type of chart"
-		/>
+	{#snippet template(args)}
+		<ObservablePlot {...args} spec={{ ...spec, height: 300 }} data={chartData} />
 	{/snippet}
 </Story>
 
@@ -133,45 +106,8 @@
 -->
 
 <Story name="With default tooltips">
-	{#snippet template()}
-		<ObservablePlot
-			spec={{
-				...spec,
-
-				marks: [
-					...spec.marks,
-					Plot.ruleY([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.ruleX([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.dot(penguins, {
-						...theme.defaultDot,
-						x: 'culmen_length_mm',
-						y: 'culmen_depth_mm',
-						render: registerTooltip(tooltipStore),
-
-						/* need to expose as a channel before including in tooltip */
-						channels: {
-							sex: 'sex',
-							culmen_length_mm: 'culmen_length_mm',
-							culmen_depth_mm: 'culmen_depth_mm'
-						},
-						tip: {
-							format: {
-								sex: true,
-								culmen_length_mm: (d) => `${d}mm`,
-								culmen_depth_mm: (d) => `${d}mm`,
-								x: undefined,
-								y: undefined
-							}
-						}
-					})
-				]
-			}}
-			title="Penguin Culmens"
-			subTitle="A scatter plot of depth against length"
-			data={penguins}
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-			alt="Simple description of type of chart"
-		/>
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData} />
 	{/snippet}
 </Story>
 
@@ -181,31 +117,31 @@
 	To add a custom tooltip:
 	
 	* create a `tooltipStore` writable store
-	* add `render: registerTooltip(tooltipStore)` to the marks that will trigger the tooltip (if the mark is not a `dot` you will also need to provide the SVG node type as the second argument to `addClick`)
+	* add `render: registerTooltip(tooltipStore)` to the marks that will trigger the tooltip (if the mark is not a `dot` you will also need to provide the SVG node type as the second argument to `registerToolTip`)
 	* give these marks a `fill` (otherwise the tooltips will trigger only when the outline/stroke of the mark is moused-over)
 	* provide the custom tooltip component into the named `tooltip` slot
 -->
+
 <Story name="With custom tooltips">
-	{#snippet template()}
+	{#snippet template(args)}
 		<ObservablePlot
+			{...args}
 			spec={{
-				...spec,
+				x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 				marks: [
-					...spec.marks,
-					Plot.ruleY([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.ruleX([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.dot(penguins, {
-						...theme.defaultDot,
-						x: 'culmen_length_mm',
-						y: 'culmen_depth_mm',
-						render: registerTooltip(tooltipStore),
-						tip: false
+					Plot.gridX({ interval: '2 years' }),
+					Plot.gridY(),
+					Plot.axisX({ label: 'Year', interval: '1 year' }),
+					Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+					Plot.ruleY([0]),
+					Plot.line(chartData, {
+						x: 'Month',
+						y: 'Value',
+						render: registerTooltip(tooltipStore, 'Path')
 					})
 				]
 			}}
-			title="Penguin Culmens"
-			subTitle="A scatter plot of depth against length"
-			data={penguins}
+			data={chartData}
 			{tooltipStore}
 		>
 			{#snippet tooltip()}
@@ -219,35 +155,32 @@
 	Using the `addEventHandler` function we can register an event handler for events (e.g, `click`, `mouseenter`, `mouseleave`) triggered by user interaction with an SVG mark.
 -->
 <Story name="With custom click interaction">
-	{#snippet template()}
+	{#snippet template(args)}
 		<ObservablePlot
+			{...args}
 			spec={{
-				...spec,
-
+				x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 				marks: [
-					...spec.marks,
-					Plot.ruleY([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.ruleX([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.point(penguins, {
-						x: 'culmen_length_mm',
-						y: 'culmen_depth_mm',
-						render: addEventHandler('click', (_ev, d) => {
-							clickedIndex = d.index;
-							clickedValue = penguins[d.index];
-						}),
-						stroke: currentTheme.color.data.primary,
-						r: 5,
-						fill: (_d, i) => {
-							return clickedIndex !== undefined && i === clickedIndex
-								? currentTheme.color.data.secondary
-								: 'white';
-						}
+					Plot.gridX({ interval: '2 years' }),
+					Plot.gridY(),
+					Plot.axisX({ label: 'Year', interval: '1 year' }),
+					Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+					Plot.ruleY([0]),
+					Plot.line(chartData, {
+						x: 'Month',
+						y: 'Value',
+						render: addEventHandler(
+							'click',
+							(_ev: any, d: { index: number }) => {
+								clickedIndex = d.index;
+								clickedValue = chartData[d.index];
+							},
+							'Path'
+						)
 					})
 				]
 			}}
-			title="Penguin Culmens"
-			subTitle="A scatter plot of depth against length"
-			data={penguins}
+			data={chartData}
 			{tooltipStore}
 		>
 			{#snippet tooltip()}
@@ -256,54 +189,59 @@
 		</ObservablePlot>
 
 		<div>
-			Selected point:
+			First datapoint of selected:
 			<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
 		</div>
 	{/snippet}
 </Story>
 
 <Story name="With multiple event handlers">
-	{#snippet template()}
+	{#snippet template(args)}
 		<ObservablePlot
+			{...args}
 			spec={{
-				...spec,
-
+				x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 				marks: [
-					...spec.marks,
-					Plot.ruleY([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.ruleX([0], { stroke: currentTheme.color.chart.axis }),
-					Plot.point(penguins, {
-						x: 'culmen_length_mm',
-						y: 'culmen_depth_mm',
+					Plot.gridX({ interval: '2 years' }),
+					Plot.gridY(),
+					Plot.axisX({ label: 'Year', interval: '1 year' }),
+					Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+					Plot.ruleY([0]),
+					Plot.line(chartData, {
+						x: 'Month',
+						y: 'Value',
 						render: addMultipleEventHandlers([
 							{
-								markShape: 'circle',
+								markShape: 'Path',
 								type: 'click',
-								handler: (_, d) => {
-									clickedIndex = penguins[d.index];
+								handler: (_: any, d: { index: number }) => {
+									clickedIndex = chartData[d.index];
 								}
 							},
 							{
-								markShape: 'circle',
+								markShape: 'Path',
 								type: 'mouseenter',
-								handler: (_, d) => {
-									hoveredValue = penguins[d.index];
+								handler: (_: any, d: { index: number }) => {
+									hoveredValue = chartData[d.index];
+								}
+							},
+							{
+								markShape: 'Path',
+								type: 'mouseleave',
+								handler: () => {
+									hoveredValue = undefined;
 								}
 							}
 						]),
-						stroke: currentTheme.color.data.primary,
-						r: 5,
-						fill: (_d, i) => {
-							return clickedIndex !== undefined && i === clickedIndex
-								? currentTheme.color.data.secondary
-								: 'white';
+						stroke: (_d, i) => {
+							return hoveredValue
+								? theme.currentTheme.color.data.secondary
+								: theme.currentTheme.color.data.primary;
 						}
 					})
 				]
 			}}
-			title="Penguin Culmens"
-			subTitle="A scatter plot of depth against length"
-			data={penguins}
+			data={chartData}
 			{tooltipStore}
 		>
 			{#snippet tooltip()}
@@ -312,9 +250,9 @@
 		</ObservablePlot>
 
 		<div>
-			Clicked point:
+			Clicked:
 			<pre>{JSON.stringify(clickedIndex, null, 2)}</pre>
-			Moused over point:
+			Moused over:
 			<pre>{JSON.stringify(hoveredValue, null, 2)}</pre>
 		</div>
 	{/snippet}
@@ -322,21 +260,15 @@
 
 <!-- Some charts have filters to update displayed information. In order to make the interaction clearer, you can slot in controls underneath the `title` and `subTitle` and above the actual chart. -->
 <Story name="With controls">
-	{#snippet template()}
-		<ObservablePlot
-			{spec}
-			title="Penguin Culmens"
-			subTitle="A scatter plot of depth against length"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-			alt="Simple description of type of chart"
-		>
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData}>
 			{#snippet controls()}
 				<div class="mb-4 flex gap-4">
 					<div class="w-56">
-						<Select label="An input affecting the chart" items={[]} />
+						<Select label="An input affecting the chart" options={[]} />
 					</div>
 					<div class="w-52">
-						<Select label="Another input" items={[]} />
+						<Select label="Another input" options={[]} />
 					</div>
 				</div>
 			{/snippet}

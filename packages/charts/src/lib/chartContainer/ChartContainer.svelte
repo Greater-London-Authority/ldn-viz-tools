@@ -16,7 +16,7 @@
 	import Title from './Title.svelte';
 
 	// For save as image
-	let chartToCapture: HTMLDivElement = $state();
+	let chartToCapture: HTMLDivElement = $state() as HTMLDivElement;
 
 	interface Props {
 		/**
@@ -116,7 +116,6 @@
 	let chartClass = classNames(
 		'relative',
 		chartHeight,
-		chartWidth,
 		overrideClass,
 		alignMultiple ? 'min-w-0' : ''
 	);
