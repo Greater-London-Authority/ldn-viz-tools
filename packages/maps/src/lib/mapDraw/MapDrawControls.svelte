@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import { Check, Pencil, Trash, XMark } from '@steeze-ui/heroicons';
+	import { ArrowDownTray, ArrowUpTray, Check, Pencil, Trash, XMark } from '@steeze-ui/heroicons';
 
 	import { Button, RadioButtonGroupSolid } from '@ldn-viz/ui';
 	import type { Feature } from 'geojson';
+	import FileUpload from './FileUpload.svelte';
 
 	/**
 	The modes/tools available for selection.
@@ -32,9 +33,12 @@
 	export let onDone = (_features: Feature[]) => null;
 
 	/**
-	 * Controls will be displayed unless this is `false`.
+	 * If `true`, then the drawn shape can be downloaded as a GeoJSON file, then re-uploaded to restore state.
 	 */
-	export let showControls = false;
+	export let allowUploadAndDownload = true;
+
+	// this is the mode of the MapDrawControls component, rather than of the TerraDraw component
+	let metaMode: 'default' | 'edit' | 'upload' = 'default'
 
 	let options: { id: string; label: string }[];
 
@@ -45,18 +49,14 @@
 
 	let previousFeatures: Feature[] = [];
 	const clickEdit = () => {
-		showControls = true;
+		metaMode = 'edit'
 		previousFeatures = JSON.stringify(features);
 		console.log('previousFeatures is now:', { previousFeatures });
 	};
 
 	const clickClear = () => {
-		//	currentMode = 'CLEAR';
-
 		terraDraw.clear();
 		terraDraw.getSnapshot();
-
-		//showControls = false;
 	};
 
 	const clickCancel = () => {
@@ -65,18 +65,43 @@
 		terraDraw.clear();
 		terraDraw.addFeatures(features);
 
-		showControls = false;
+		metaMode = 'default';
 	};
 
 	const clickDone = () => {
 		currentMode = undefined;
-		showControls = false;
+		metaMode = 'default';
 		onDone(features);
 	};
+
+	const clickLoad = (geoJSON) => {
+		metaMode = 'default';
+		terraDraw.clear();
+		terraDraw.addFeatures(geoJSON.features);
+	}
+
+		const downloadFromURL = (url: string, name: string) => {
+		const link = document.createElement('a');
+		link.setAttribute('href', url);
+		link.setAttribute('target', '_blank');
+		link.setAttribute('download', name);
+		link.dispatchEvent(new MouseEvent('click'));
+	};
+
+	const downloadData = () => {
+		const geoJson = {
+			type: "FeatureCollection",
+			features: features
+		};
+		const dataString = JSON.stringify(geoJson, null, 4);
+		const dataURL = 'data:application/json;base64,' + window.btoa(dataString);
+
+		downloadFromURL(dataURL, 'shape.geojson');
+	}
 </script>
 
 <div class="flex gap-2">
-	{#if showControls}
+	{#if metaMode === 'edit'}
 		<div class="pointer-events-auto h-fit">
 			<RadioButtonGroupSolid
 				label="Selection tool"
@@ -120,12 +145,29 @@
 				Done
 			</Button>
 		</div>
+	{:else if metaMode === 'upload'}
+			<FileUpload
+				onCancel={() => metaMode = 'default'}
+				onLoad={clickLoad}
+			/>
 	{:else}
-		<div class="pointer-events-auto">
+		<div class="flex flex-col gap-1  pointer-events-auto">
 			<Button variant="square" size="lg" on:click={clickEdit}>
 				<Icon src={Pencil} class="w-8 h-8 ml-2" aria-hidden="true" />
 				Edit area
 			</Button>
+
+			{#if allowUploadAndDownload}
+			<Button variant="square" size="lg" emphasis="secondary" on:click={downloadData}>
+				<Icon src={ArrowDownTray} class="w-8 h-8 ml-2" aria-hidden="true" />
+				Download area
+			</Button>
+
+			<Button variant="square" size="lg" emphasis="secondary" on:click={() => metaMode = 'upload'}>
+				<Icon src={ArrowUpTray} class="w-8 h-8 ml-2" aria-hidden="true" />
+				Upload area
+			</Button>
+				{/if}
 		</div>
 	{/if}
 </div>
