@@ -30,7 +30,9 @@ const preview: Preview = {
 						'Components - Layout And Themes',
 						'*',
 						'Examples'
-					]
+					],
+					'Charts',
+					['Introduction', 'Components', ['ChartContainer']]
 				]
 			}
 		},

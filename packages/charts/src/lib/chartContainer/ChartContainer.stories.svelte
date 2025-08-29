@@ -55,9 +55,13 @@
 			alt="Simple description of type of chart"
 		>
 			{#snippet controls()}
-				<div class="flex gap-4">
-					<Select label="An input affecting the chart" items={[]} />
-					<Select label="Another input" items={[]} />
+				<div class="mb-4 flex gap-4">
+					<div class="w-56">
+						<Select label="An input affecting the chart" options={[]} />
+					</div>
+					<div class="w-52">
+						<Select label="Another input" options={[]} />
+					</div>
 				</div>
 			{/snippet}
 		</ChartContainer>

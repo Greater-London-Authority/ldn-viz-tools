@@ -5,8 +5,7 @@
 
 {#if $tooltipData}
 	<div class="flex flex-col">
-		<div>Sex: {$tooltipData.sex}</div>
-		<div>Culmen length: {$tooltipData.culmen_length_mm}mm</div>
-		<div>Culmen depth: {$tooltipData.culmen_depth_mm}mm</div>
+		<p class="text-xl">Custom</p>
+		<div>Value from Data: {$tooltipData.Value}</div>
 	</div>
 {/if}
