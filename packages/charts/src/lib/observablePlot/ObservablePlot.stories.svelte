@@ -53,6 +53,50 @@
 
 	const chartData = monthlyData.filter((d) => d.Variable === 'Variable A');
 
+	let multipleEventSpec = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				render: addMultipleEventHandlers([
+					{
+						markShape: 'Path',
+						type: 'click',
+						handler: (_: any, d: { index: number }) => {
+							clickedIndex = chartData[d.index];
+						}
+					},
+					{
+						markShape: 'Path',
+						type: 'mouseenter',
+						handler: (_: any, d: { index: number }) => {
+							// this prevents an endless loop of updating hoveredValue, which triggers a re-render of the plot, which casues a new mouseEnter event
+							if (hoveredValue?.Year != chartData[d.index].Year) {
+								hoveredValue = chartData[d.index];
+							}
+						}
+					},
+					{
+						markShape: 'Path',
+						type: 'mouseleave',
+						handler: () => {
+							hoveredValue = undefined;
+						}
+					}
+				]),
+				stroke: hoveredValue
+					? theme.currentTheme.color.data.secondary
+					: theme.currentTheme.color.data.primary
+			})
+		]
+	});
+
 	// Spec and data for single line example (default)
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
@@ -197,53 +241,8 @@
 
 <Story name="With multiple event handlers">
 	{#snippet template(args)}
-		<ObservablePlot
-			{...args}
-			spec={{
-				x: { insetLeft: 80, insetRight: 20, type: 'utc' },
-				marks: [
-					Plot.gridX({ interval: '2 years' }),
-					Plot.gridY(),
-					Plot.axisX({ label: 'Year', interval: '1 year' }),
-					Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
-					Plot.ruleY([0]),
-					Plot.line(chartData, {
-						x: 'Month',
-						y: 'Value',
-						render: addMultipleEventHandlers([
-							{
-								markShape: 'Path',
-								type: 'click',
-								handler: (_: any, d: { index: number }) => {
-									clickedIndex = chartData[d.index];
-								}
-							},
-							{
-								markShape: 'Path',
-								type: 'mouseenter',
-								handler: (_: any, d: { index: number }) => {
-									hoveredValue = chartData[d.index];
-								}
-							},
-							{
-								markShape: 'Path',
-								type: 'mouseleave',
-								handler: () => {
-									hoveredValue = undefined;
-								}
-							}
-						]),
-						stroke: (_d, i) => {
-							return hoveredValue
-								? theme.currentTheme.color.data.secondary
-								: theme.currentTheme.color.data.primary;
-						}
-					})
-				]
-			}}
-			data={chartData}
-			{tooltipStore}
-		>
+		<!-- {#key hoveredValue} -->
+		<ObservablePlot {...args} spec={multipleEventSpec} data={chartData} {tooltipStore}>
 			{#snippet tooltip()}
 				<DemoTooltip />
 			{/snippet}
@@ -255,6 +254,7 @@
 			Moused over:
 			<pre>{JSON.stringify(hoveredValue, null, 2)}</pre>
 		</div>
+		<!-- {/key} -->
 	{/snippet}
 </Story>
 
