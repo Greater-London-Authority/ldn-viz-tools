@@ -120,7 +120,7 @@
 	<div {...$portalled} use:$portalled.action>
 		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
 
-		<div class="fixed inset-8 flex items-center justify-center pointer-events-none z-50">
+		<div class="fixed inset-2 sm:inset-8 flex items-center justify-center pointer-events-none z-50">
 			<div {...$content} use:$content.action class={modalClass}>
 				<div
 					class={`bg-color-container-level-1 text-color-text-primary p-3 pr-4 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
