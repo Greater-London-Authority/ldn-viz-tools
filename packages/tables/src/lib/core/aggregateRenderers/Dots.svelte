@@ -6,21 +6,9 @@
 	 */
 
 	import { scaleLinear, type ScaleLinear } from 'd3-scale';
+	import type { DotsProps } from '$lib/core/aggregateRenderers/DotsProps';
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: number[];
-		extent?: any;
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		[key: string]: any;
-	}
-
-	let { values, extent = [0, 1], width = 100, ...rest }: Props = $props();
+	let { values, extent = [0, 1], width = 100, ...rest }: DotsProps = $props();
 
 	const height = 30;
 	const marginRight = 10;

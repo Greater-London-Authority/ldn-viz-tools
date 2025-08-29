@@ -1,22 +1,29 @@
 <script module lang="ts">
+	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { SidebarLeftContext } from '../../../../../apps/docs/src/lib';
 	import LogoCIU from '../logos/LogoCIU.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
+	import Select from '../select/Select.svelte';
+	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
 	import Sidebar from './Sidebar.svelte';
 	import SidebarFooter from './elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from './elements/sidebarHeader/SidebarHeader.svelte';
-	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
-	import ThemeSwitcher from '../theme/ThemeSwitcher.svelte';
-	import Overlay from '../overlay/Overlay.svelte';
 	import SidebarSection from './elements/sidebarSection/SidebarSection.svelte';
 	import SidebarGroupTitle from './elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import { First, Fourth, Second, Third } from './elements/sidebarTabs/demoSections';
 	import type { SidebarProps } from './types';
-	import Select from '../select/Select.svelte';
 
-	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
+	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
+
+	let tabs = [
+		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
+		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
+		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
+		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
+	];
 
 	/**
 	 * The `<Sidebar>` component renders a sidebar that is typically used to display controls and textual explanation.
@@ -26,16 +33,7 @@
 	 * Note that when the sidebar is collapsed, it is removed by the `AppShell` (rather than merely being hidden).
 	 * Any state that should be restored when it is re-opened should be persisted in a Svelte Store.
 	 *
-	 * @component
 	 */
-
-	export let tabs = [
-		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
-		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
-		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
-		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
-	];
-
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
@@ -82,13 +80,12 @@
 
 	let selectedTabId = $state('markers');
 
-	// The sidebar component relies on contesxt from setSidebarState()
-	// This is usually defined in a parent appShell, so you dont need to worry about setting it manually.
-	// If you ARE using a sidebar outside an appShell the you need to include setSidebarState() in you layout or page (higest level)
+	// Snippets for stories. Defaults defined as args, overridden per story as needed
 </script>
 
-<!-- Snippets for stories. Defaults defined as args, overridden per story as needed  -->
-
+<!-- The sidebar component relies on context from setSidebarState()
+	This is usually defined in a parent appShell, so you dont need to worry about setting it manually.
+	If you ARE using a sidebar outside an appShell then you need to include setSidebarState() in you layout or page (higest level) -->
 {#snippet header()}
 	<SidebarHeader title="Main sidebar title">
 		{#snippet subTitle()}

@@ -65,7 +65,7 @@
 		};
 
 	export const addMultipleEventHandlers = (events: EventHandler[]) => {
-		return (index, scales, values, dimensions, context, next) => {
+		return (index: any, scales: any, values: any, dimensions: any, context: any, next: any) => {
 			const el = next && next(index, scales, values, dimensions, context);
 
 			for (const event of events) {
@@ -142,7 +142,7 @@
 	import * as Plot from '../observablePlotFragments/plot';
 
 	import { onMount, setContext } from 'svelte';
-	import { derived, writable } from 'svelte/store';
+	import { derived, writable, type Writable } from 'svelte/store';
 
 	interface Props {
 		/**
@@ -150,7 +150,7 @@
 		 */
 		spec: any;
 		/**
-		 * Data being visualized (as an array of objects), to be used by data download button.
+		 * Data being visualized (as an array of objects), to be used by custom tooltips.
 		 */
 		data?: { [key: string]: any }[];
 		/**
@@ -161,7 +161,7 @@
 		 * A store that stores details of the moused-over point.
 		 * Used for custom tooltips.
 		 */
-		tooltipStore?: any;
+		tooltipStore?: Writable<{ [key: string]: any }>;
 		/** A y-offset between data points and tooltips (pixels). */
 		tooltipOffset?: any;
 		/**

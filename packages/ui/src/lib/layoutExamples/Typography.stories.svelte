@@ -3,7 +3,7 @@
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { format } from 'd3-format';
-	import demoMonthlyTimeseriesLong from '../../../../charts/src/data/demoMonthlyTimeseriesLong.json';
+	import { monthlyData } from '../../../../charts/src/data/demoData';
 
 	let { Story } = defineMeta({
 		title: 'Ui/Example Layouts/Typography',
@@ -13,19 +13,16 @@
 		tags: ['!autodocs']
 	});
 
-	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
-
 	// Spec and data for single line example (default)
-	let singleLineData = $derived(
-		demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A')
-	);
+	let singleLineData = monthlyData.filter((d) => d.Variable == 'Variable A');
+
 	let singleLineSpec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: [
 			Plot.gridX({ interval: '2 years' }),
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
-			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.ruleY([0]),
 			Plot.line(singleLineData, {
 				x: 'Month',

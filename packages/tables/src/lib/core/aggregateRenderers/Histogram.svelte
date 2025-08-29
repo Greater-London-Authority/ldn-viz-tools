@@ -6,27 +6,11 @@
 
 	import { type Bin, bin, max } from 'd3-array';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import type { HistogramProps } from '$lib/core/aggregateRenderers/HistogramProps';
 
 	// TODO: move labels to separate span so they don't get truncated if max val is multiple digits
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: number[];
-		extent?: any;
-		/**
-		 * Color of bars.
-		 */
-		color?: string;
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		[key: string]: any;
-	}
-
-	let { values, extent = [0, 1], color = 'steelblue', width = 100, ...rest }: Props = $props();
+	let { values, extent = [0, 1], color = 'steelblue', width = 100, ...rest }: HistogramProps = $props();
 
 	const height = 30;
 	const marginTop = 0;

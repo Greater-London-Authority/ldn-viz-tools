@@ -6,28 +6,9 @@
 
 	import { max } from 'd3-array';
 	import { scaleBand, scaleLinear } from 'd3-scale';
+	import type { BarChartProps } from '$lib/core/aggregateRenderers/BarChartProps';
 
-	interface Props {
-		/**
-		 * Array of values to be displayed.
-		 */
-		values: any;
-		/**
-		 * A D3 color scale used to determine bar color.
-		 */
-		colorScale: any;
-		/**
-		 * Categorical scale used to determine horizontal position of bar.
-		 */
-		posScale: any;
-		/**
-		 * Width of cell (in pixels).
-		 */
-		width?: number;
-		[key: string]: any;
-	}
-
-	let { values, colorScale, posScale, width = 100, ...rest }: Props = $props();
+	let { values, colorScale, posScale, width = 100, ...rest }: BarChartProps = $props();
 
 	const height = 30;
 	const marginTop = 0;
