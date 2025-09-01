@@ -65,7 +65,7 @@
 
 	<div
 		class={classNames(
-			'border-2 border-dashed border-color-input-border rounded-lg p-2 min-h-[200px] hover:border-color-input-border-focussed',
+			'relative border-2 border-dashed border-color-input-border rounded-lg p-2 min-h-[200px] hover:border-color-input-border-focussed',
 			isDragging ? '!bg-color-action-background-primary-muted-hover' : ''
 		)}
 		on:dragenter={handleDragIn}
@@ -97,11 +97,11 @@
 		</div>
 
 		<div class="relative z-0 text-center">
-			<p class="mb-4 text-gray-600">
+			<p class="mb-4 text-color-text-secondary">
 				Drag & drop a GeoJSON file here or click to open file picker.
 			</p>
 		</div>
 	</div>
 
-	<Button on:click={onCancel}>Cancel</Button>
+	<Button on:click={onCancel} emphasis="secondary" class="mt-2">Cancel</Button>
 </div>
