@@ -42,7 +42,7 @@
 	<pre>{JSON.stringify(features, null, 4)}</pre>
 </Story>
 
-<Story name="Only allow specific modes/tools">
+<Story name="Allow all specific modes/tools">
 	<div class="w-[100dvw] h-[100dvh]">
 		<Map
 			options={{
@@ -51,7 +51,18 @@
 			}}
 		>
 			<MapControlGroup position="TopLeft">
-				<MapDraw bind:features enabledModes={['rectangle', 'circle']} />
+				<MapDraw
+					bind:features
+					enabledModes={[
+						'point',
+						'polygon',
+						'linestring',
+						'freehand',
+						'circle',
+						'rectangle',
+						'sector'
+					]}
+				/>
 			</MapControlGroup>
 		</Map>
 	</div>

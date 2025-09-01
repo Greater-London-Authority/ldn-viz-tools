@@ -60,13 +60,13 @@
 	let inputRef: HTMLInputElement;
 </script>
 
-<div class="p-4 bg-color-container-level-1 pointer-events-auto">
+<div class="p-4 bg-color-container-level-1 pointer-events-auto flex flex-col gap-2">
 	<span class="text-lg font-bold pb-2">Upload GeoJSON</span>
 
 	<div
 		class={classNames(
-			'border-2 border-dashed border-gray-300 rounded-lg p-6 min-h-[200px] hover:border-color-ui-border-notice',
-			isDragging ? '!bg-core-blue-600' : ''
+			'border-2 border-dashed border-color-input-border rounded-lg p-2 min-h-[200px] hover:border-color-input-border-focussed',
+			isDragging ? '!bg-color-action-background-primary-muted-hover' : ''
 		)}
 		on:dragenter={handleDragIn}
 		on:dragleave={handleDragOut}
@@ -83,7 +83,7 @@
 		aria-describedby="dropZoneDescription"
 	>
 		<span id="dropZoneDescription" class="sr-only">
-			Drop a JSON file here or press Enter to select a file
+			Drop a GeoJSON file here or press Enter to select a file
 		</span>
 
 		<div class="absolute inset-0 w-full h-full z-10 cursor-pointer">
@@ -97,7 +97,9 @@
 		</div>
 
 		<div class="relative z-0 text-center">
-			<p class="mb-4 text-gray-600">Drag & drop JSON files here or click to select</p>
+			<p class="mb-4 text-gray-600">
+				Drag & drop a GeoJSON file here or click to open file picker.
+			</p>
 		</div>
 	</div>
 

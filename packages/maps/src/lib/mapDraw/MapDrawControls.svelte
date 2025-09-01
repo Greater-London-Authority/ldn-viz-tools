@@ -102,25 +102,16 @@
 
 <div class="flex gap-2">
 	{#if metaMode === 'edit'}
-		<div class="pointer-events-auto h-fit">
-			<RadioButtonGroupSolid
-				label="Selection tool"
-				name=""
-				{options}
-				bind:selectedId={currentMode}
-			/>
-		</div>
-
 		<div class="flex flex-col gap-1 pointer-events-auto">
 			<Button
 				variant="square"
 				size="lg"
-				emphasis="negative"
-				on:click={clickClear}
+				emphasis="positive"
+				on:click={clickDone}
 				class="pointer-events-auto"
 			>
-				<Icon src={Trash} theme="mini" class="w-8 h-8 ml-2" aria-hidden="true" />
-				Clear
+				<Icon src={Check} class="w-8 h-8 pb-1 pt-0.5" aria-hidden="true" />
+				Done
 			</Button>
 
 			<Button
@@ -130,34 +121,38 @@
 				on:click={clickCancel}
 				class="pointer-events-auto"
 			>
-				<Icon src={XMark} theme="mini" class="w-8 h-8 ml-2" aria-hidden="true" />
+				<Icon src={XMark} class="w-8 h-8 pb-1 pt-0.5" aria-hidden="true" />
 				Cancel
 			</Button>
 
 			<Button
 				variant="square"
 				size="lg"
-				emphasis="positive"
-				on:click={clickDone}
+				emphasis="secondary"
+				on:click={clickClear}
 				class="pointer-events-auto"
 			>
-				<Icon src={Check} theme="mini" class="w-8 h-8 mb-2" aria-hidden="true" />
-				Done
+				<Icon src={Trash} class="w-8 h-8 pb-1 pt-0.5" aria-hidden="true" />
+				Clear
 			</Button>
+		</div>
+
+		<div class="pointer-events-auto h-fit">
+			<RadioButtonGroupSolid label="Drawing tool" name="" {options} bind:selectedId={currentMode} />
 		</div>
 	{:else if metaMode === 'upload'}
 		<FileUpload onCancel={() => (metaMode = 'default')} onLoad={clickLoad} />
 	{:else}
 		<div class="flex flex-col gap-1 pointer-events-auto">
 			<Button variant="square" size="lg" on:click={clickEdit}>
-				<Icon src={Pencil} class="w-8 h-8 ml-2" aria-hidden="true" />
+				<Icon src={Pencil} class="w-8 h-8 pb-1 pt-0.5" aria-hidden="true" />
 				Edit area
 			</Button>
 
 			{#if allowUploadAndDownload}
 				<Button variant="square" size="lg" emphasis="secondary" on:click={downloadData}>
-					<Icon src={ArrowDownTray} class="w-8 h-8 ml-2" aria-hidden="true" />
-					Download area
+					<Icon src={ArrowDownTray} class="w-8 h-8 pb-1 pt-0.5" aria-hidden="true" />
+					Download
 				</Button>
 
 				<Button
@@ -166,8 +161,8 @@
 					emphasis="secondary"
 					on:click={() => (metaMode = 'upload')}
 				>
-					<Icon src={ArrowUpTray} class="w-8 h-8 ml-2" aria-hidden="true" />
-					Upload area
+					<Icon src={ArrowUpTray} class="w-8 h-8 pb-1 pt-0.5" aria-hidden="true" />
+					Upload
 				</Button>
 			{/if}
 		</div>

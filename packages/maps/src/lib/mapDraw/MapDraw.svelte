@@ -12,10 +12,12 @@
 		TerraDrawSectorMode,
 		TerraDrawSelectMode
 	} from 'terra-draw';
+	//import type { HexColorStyling } from 'terra-draw';
 
 	import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
 
 	import type { Feature } from 'geojson';
+	import { currentTheme, tokenNameToValue } from '../../../../ui/dist/theme/themeStore';
 	import type { MapLibreStore } from '../map/types';
 	import MapDrawControls from './MapDrawControls.svelte';
 
@@ -24,15 +26,7 @@
 	/**
 	The modes/tools available for selection.
 	 **/
-	export let enabledModes = [
-		'point',
-		'polygon',
-		'linestring',
-		'freehand',
-		'circle',
-		'rectangle',
-		'sector'
-	];
+	export let enabledModes = ['polygon'];
 
 	/**
 	 * The currently active mode.
@@ -49,16 +43,37 @@
 	 */
 	export let onDone = (_features: Feature[]) => null;
 
-	const modeMapping = {
-		circle: TerraDrawCircleMode,
-		freehand: TerraDrawFreehandMode,
-		linestring: TerraDrawLineStringMode,
-		point: TerraDrawPointMode,
-		polygon: TerraDrawPolygonMode,
-		rectangle: TerraDrawRectangleMode,
-		sector: TerraDrawSectorMode,
+	const lightThemeStyle = {
+		fillColor: tokenNameToValue('ui.primary', $currentTheme), // as HexColorStyling,
+		fillOpacity: 0.5,
+		outlineColor: tokenNameToValue('ui.primary', $currentTheme),
+		outlineWidth: 1
+	};
 
-		select: TerraDrawSelectMode
+	const modeMapping = {
+		circle: new TerraDrawCircleMode({
+			styles: lightThemeStyle
+		}),
+		freehand: new TerraDrawFreehandMode({
+			styles: lightThemeStyle
+		}),
+		linestring: new TerraDrawLineStringMode({
+			styles: lightThemeStyle
+		}),
+		point: new TerraDrawPointMode({
+			styles: lightThemeStyle
+		}),
+		polygon: new TerraDrawPolygonMode({
+			styles: lightThemeStyle
+		}),
+		rectangle: new TerraDrawRectangleMode({
+			styles: lightThemeStyle
+		}),
+		sector: new TerraDrawSectorMode({
+			styles: lightThemeStyle
+		}),
+
+		select: new TerraDrawSelectMode()
 	};
 
 	$: console.log($mapStore);
@@ -154,7 +169,7 @@
 	let draw: TerraDraw;
 	const createTerraDraw = () => {
 		if ($mapStore) {
-			const modes = [...enabledModes.map((modeName) => new modeMapping[modeName]()), selectMode];
+			const modes = [...enabledModes.map((modeName) => modeMapping[modeName]), selectMode];
 
 			draw = new TerraDraw({
 				adapter: new TerraDrawMapLibreGLAdapter({ map: $mapStore }),
