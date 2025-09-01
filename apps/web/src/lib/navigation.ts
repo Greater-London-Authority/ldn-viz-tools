@@ -33,24 +33,24 @@ export const navigation = [
 	{
 		title: 'Overview',
 		id: 'overview',
-		href: '/overview'
+		href: '/design-system'
 	},
 	{
 		title: 'Foundations',
 		id: 'foundations-intro',
-		href: '/foundations',
+		href: '/design-system/foundations',
 		children: foundations
 	},
 	{
 		title: 'Application Design',
 		id: 'application-design-intro',
-		href: '/application-design',
+		href: '/design-system/application-design',
 		children: applicationDesign
 	},
 	{
 		title: 'Data Visualisation',
 		id: 'data-visualisation-intro',
-		href: '/data-visualisation',
+		href: '/design-system/data-visualisation',
 		children: dataVisualisation
 	}
 ];

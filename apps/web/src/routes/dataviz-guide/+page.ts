@@ -1,5 +1,5 @@
 import { getContent } from '$lib/utils';
 
 export async function load() {
-	return getContent();
+	return getContent('dataviz-guide');
 }

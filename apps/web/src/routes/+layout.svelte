@@ -14,9 +14,11 @@
 
 	//TMP
 	let mainMenu = [
-		{ title: 'Docs', id: 'docs', href: '/overview' },
-		{ title: 'Tools', id: 'tools', href: '/overview' },
-		{ title: 'Team', id: 'team', href: '/overview' }
+		{ title: 'Dataviz Guide', id: 'dataviz-guide', href: '/dataviz-guide' },
+		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' },
+		// { title: 'Tools', id: 'tools', href: '/overview' },
+		// { title: 'Team', id: 'team', href: '/overview' },
+		{ title: 'Contact', id: 'contact', href: '/' }
 	];
 
 	let { children } = $props();
@@ -26,7 +28,7 @@
 
 <div class="flex min-h-dvh flex-col overflow-x-hidden">
 	<Header>
-		<HeaderTitle>Ldn-viz design system</HeaderTitle>
+		<HeaderTitle>London City Data</HeaderTitle>
 		<HeaderRight>
 			<HeaderItem>
 				<NavigationMenu items={mainMenu} orientation="horizontal" ariaLabel="main menu" />
