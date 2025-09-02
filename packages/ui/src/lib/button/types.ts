@@ -8,12 +8,12 @@ type ButtonAsButton = Omit<HTMLButtonAttributes, 'href' | 'type'> & {
 };
 
 type ButtonAsLink = Omit<HTMLAnchorAttributes, 'href' | 'type'> & {
-	href: HTMLAnchorAttributes['href'];
+	href?: HTMLAnchorAttributes['href'];
 	type?: never;
 	disabled?: HTMLButtonAttributes['disabled'];
 };
 
-export type ButtonProps = (ButtonAsButton | ButtonAsLink) & {
+export type LdnButtonProps = {
 	variant?: 'brand' | 'square' | 'solid' | 'outline' | 'text';
 	emphasis?: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
 	size?: 'xs' | 'sm' | 'md' | 'lg';
@@ -24,3 +24,15 @@ export type ButtonProps = (ButtonAsButton | ButtonAsLink) & {
 	ref?: HTMLElement | null;
 	children?: Snippet;
 };
+
+export type ButtonProps = (ButtonAsButton | ButtonAsLink) & LdnButtonProps;
+
+export type AsyncButtonProps = ButtonAsButton &
+	LdnButtonProps & {
+		/**
+		 * Is set to `true` when the `onClick` function is being executed.
+		 *
+		 * Bind to this property for reactive updates to button click state.
+		 */
+		working?: boolean;
+	};

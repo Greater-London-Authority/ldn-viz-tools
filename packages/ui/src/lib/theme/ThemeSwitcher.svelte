@@ -37,8 +37,6 @@
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger aria-label="Theme mode switcher">
 		{#snippet child({ props })}
-			<!-- {console.log(props)}
-			<Button {...props}>Open menu</Button> -->
 			<Button {...props} class={buttonClasses} variant="square" emphasis="secondary" {size}>
 				{#if size === 'xs'}
 					<Icon src={themeIcon} theme="mini" class="h-4 w-4" aria-hidden="true" />
@@ -50,7 +48,7 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Portal>
 		<DropdownMenu.Content
-			class="z-40 border border-color-input-border bg-color-input-background capitalize shadow "
+			class="border-color-input-border bg-color-input-background z-40 border capitalize shadow "
 			preventScroll={false}
 			aria-label="Select current theme mode"
 		>

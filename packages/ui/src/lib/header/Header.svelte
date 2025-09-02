@@ -1,0 +1,25 @@
+<script lang="ts">
+	/**
+	 * The `<Header>` component appears at the top of a page.
+	 * It typically includes the app name, links to other pages (if the app has multiple pages), and a login/logout control (if the app requires authentication).
+	 *
+	 * @component
+	 */
+
+	interface Props {
+		/**
+		 * Colour scheme to use, either `light` or `dark`.
+		 */
+		theme?: 'light' | 'dark';
+		children?: import('svelte').Snippet;
+	}
+
+	let { theme = 'dark', children }: Props = $props();
+</script>
+
+<header
+	class={`bg-color-container-level-0 text-color-text-primary border-color-static-brand flex h-[50px] w-screen items-center border-l-[5px] px-4 py-[.5rem] text-left ${theme}`}
+>
+	<!-- Contents of the header (typically a combination of `<HeaderTitle>`, `<HeaderRight>`, `<NavLinks>`, and `<HeaderItem>` components) -->
+	{@render children?.()}
+</header>

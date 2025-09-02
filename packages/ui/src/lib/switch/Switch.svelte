@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { Label, Switch } from 'bits-ui';
 	import { classNames } from '../utils/classNames.js';
 	import { randomId } from '../utils/randomId.js';
-	import { Label, Switch } from 'bits-ui';
 
-	interface Props {
+	export interface SwitchProps {
 		/**
 		 * If `true`, the user will not be able to interact with the Switch to download data.
 		 */
@@ -44,7 +44,7 @@
 		checked = $bindable(false),
 		size = 'md',
 		labelOn = 'right'
-	}: Props = $props();
+	}: SwitchProps = $props();
 
 	const switchRootClass = $derived(
 		classNames(

@@ -1,9 +1,9 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Switch from './Switch.svelte';
-	import Button from '../button/Button.svelte';
-	import type { SwitchProps } from './types.js';
 	import { expect } from 'storybook/test';
+	import Button from '../button/Button.svelte';
+	import Switch from './Switch.svelte';
+	import type { SwitchProps } from './types.js';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Switch',

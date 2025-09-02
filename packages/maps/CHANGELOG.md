@@ -1,5 +1,13 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.0
+
+### Major Changes
+
+- a955822: CHANGED: update to use Svelte 5 and runes.
+
+  CHANGED: `GeoJSONMapLayerSource` no longer has a `dataStore` prop.
+
 ## 7.5.0
 
 ### Minor Changes

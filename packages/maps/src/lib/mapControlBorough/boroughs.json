@@ -1,0 +1,299 @@
+[
+	{
+		"properties": {
+			"name": "Greenwich",
+			"borough": "Royal Borough of Greenwich"
+		},
+		"bounds": [-0.026408663, 51.423734984, 0.124160812, 51.513584469],
+		"visualCenter": [0.048876074500000005, 51.4686597265],
+		"centroid": [0.04241686142520264, 51.469458701666845]
+	},
+	{
+		"properties": {
+			"name": "Waltham Forest",
+			"borough": "London Borough of Waltham Forest"
+		},
+		"bounds": [-0.06227458, 51.549925386, 0.02571239, 51.646526606],
+		"visualCenter": [-0.012640093257354474, 51.59403285100979],
+		"centroid": [-0.018299240555135463, 51.59467112260046]
+	},
+	{
+		"properties": {
+			"name": "Bexley",
+			"borough": "London Borough of Bexley"
+		},
+		"bounds": [0.07465269, 51.408483468, 0.223675838, 51.515542242],
+		"visualCenter": [0.149164264, 51.462012855],
+		"centroid": [0.14756713761968987, 51.45329610040591]
+	},
+	{
+		"properties": {
+			"name": "Enfield",
+			"borough": "London Borough of Enfield"
+		},
+		"bounds": [-0.185891042, 51.605634578, -0.008948491, 51.69187411],
+		"visualCenter": [-0.08727164064785005, 51.650995420148405],
+		"centroid": [-0.08087794325417579, 51.64761482518298]
+	},
+	{
+		"properties": {
+			"name": "Richmond upon Thames",
+			"borough": "London Borough of Richmond upon Thames"
+		},
+		"bounds": [-0.392906269, 51.391431566, -0.221733869, 51.489693367],
+		"visualCenter": [-0.3437753685000002, 51.4405624665],
+		"centroid": [-0.31523421116820144, 51.447354041440725]
+	},
+	{
+		"properties": {
+			"name": "Wandsworth",
+			"borough": "London Borough of Wandsworth"
+		},
+		"bounds": [-0.259113039, 51.417752, -0.12636366, 51.485892592],
+		"visualCenter": [-0.22504274300000054, 51.451822296],
+		"centroid": [-0.1808822781848813, 51.45224269978688]
+	},
+	{
+		"properties": {
+			"name": "Croydon",
+			"borough": "London Borough of Croydon"
+		},
+		"bounds": [-0.161905469, 51.286760157, 0.003281848, 51.423244204],
+		"visualCenter": [-0.0793118105, 51.3550021805],
+		"centroid": [-0.08439971462874865, 51.35721271717999]
+	},
+	{
+		"properties": {
+			"name": "Hounslow",
+			"borough": "London Borough of Hounslow"
+		},
+		"bounds": [-0.461502267, 51.420739266, -0.243443028, 51.502850531],
+		"visualCenter": [-0.36613440867550373, 51.46849473128516],
+		"centroid": [-0.3535814046155008, 51.46753554632932]
+	},
+	{
+		"properties": {
+			"name": "Ealing",
+			"borough": "London Borough of Ealing"
+		},
+		"bounds": [-0.41962163, 51.490470384, -0.24508677, 51.559683648],
+		"visualCenter": [-0.33235420000000004, 51.525077016],
+		"centroid": [-0.331254806334399, 51.522316577528755]
+	},
+	{
+		"properties": {
+			"name": "Merton",
+			"borough": "London Borough of Merton"
+		},
+		"bounds": [-0.254247736, 51.380150458, -0.124151407, 51.44147463],
+		"visualCenter": [-0.22358565000000047, 51.410812544],
+		"centroid": [-0.1926308330205653, 51.40981181984231]
+	},
+	{
+		"properties": {
+			"name": "Bromley",
+			"borough": "London Borough of Bromley"
+		},
+		"bounds": [-0.081111977, 51.289355058, 0.162357995, 51.444317068],
+		"visualCenter": [0.0515241760618618, 51.371999397886306],
+		"centroid": [0.05558566974207019, 51.36753727373297]
+	},
+	{
+		"properties": {
+			"name": "Kingston upon Thames",
+			"borough": "Royal Borough of Kingston upon Thames"
+		},
+		"bounds": [-0.330756432, 51.326319634, -0.238744586, 51.437290692],
+		"visualCenter": [-0.2869004476770368, 51.387906145682905],
+		"centroid": [-0.28356275106614165, 51.38673647930157]
+	},
+	{
+		"properties": {
+			"name": "Havering",
+			"borough": "London Borough of Havering"
+		},
+		"bounds": [0.138156948, 51.484150044, 0.334015564, 51.631734458],
+		"visualCenter": [0.22041962679659144, 51.56312094348251],
+		"centroid": [0.22477585372961895, 51.55734788518401]
+	},
+	{
+		"properties": {
+			"name": "Brent",
+			"borough": "London Borough of Brent"
+		},
+		"bounds": [-0.33558442, 51.527654005, -0.19148348, 51.600370342],
+		"visualCenter": [-0.2678206567044363, 51.55855616610058],
+		"centroid": [-0.258656793906786, 51.55823360960548]
+	},
+	{
+		"properties": {
+			"name": "Barnet",
+			"borough": "London Borough of Barnet"
+		},
+		"bounds": [-0.305597635, 51.555186106, -0.129147235, 51.670166852],
+		"visualCenter": [-0.21001710613196503, 51.61602713400429],
+		"centroid": [-0.20902613691407135, 51.60366102201905]
+	},
+	{
+		"properties": {
+			"name": "Haringey",
+			"borough": "London Borough of Haringey"
+		},
+		"bounds": [-0.171285248, 51.564635155, -0.041447834, 51.611214789],
+		"visualCenter": [-0.10746959175293457, 51.59037219168233],
+		"centroid": [-0.10215984823155431, 51.587449660294325]
+	},
+	{
+		"properties": {
+			"name": "Hillingdon",
+			"borough": "London Borough of Hillingdon"
+		},
+		"bounds": [-0.510375069, 51.453266677, -0.375929149, 51.63175902],
+		"visualCenter": [-0.443152109, 51.520489637000004],
+		"centroid": [-0.46523533190424676, 51.5363778473514]
+	},
+	{
+		"properties": {
+			"name": "Lewisham",
+			"borough": "London Borough of Lewisham"
+		},
+		"bounds": [-0.075093302, 51.413549961, 0.039045295, 51.493563534],
+		"visualCenter": [-0.020289648064869943, 51.44828392149203],
+		"centroid": [-0.019910391647020718, 51.45166846031215]
+	},
+	{
+		"properties": {
+			"name": "Hammersmith and Fulham",
+			"borough": "London Borough of Hammersmith & Fulham"
+		},
+		"bounds": [-0.255090332, 51.463897762, -0.177627245, 51.532752394],
+		"visualCenter": [-0.2207889401715128, 51.49501036478919],
+		"centroid": [-0.22372185355555557, 51.49975636620686]
+	},
+	{
+		"properties": {
+			"name": "Lambeth",
+			"borough": "London Borough of Lambeth"
+		},
+		"bounds": [-0.151231399, 51.410991086, -0.078306682, 51.509871173],
+		"visualCenter": [-0.11830890196027065, 51.45383893215107],
+		"centroid": [-0.11715259118957345, 51.452587924767855]
+	},
+	{
+		"properties": {
+			"name": "Redbridge",
+			"borough": "London Borough of Redbridge"
+		},
+		"bounds": [0.008678455, 51.543568889, 0.149485043, 51.629022486],
+		"visualCenter": [0.05140525349999861, 51.5862956875],
+		"centroid": [0.0659031129638629, 51.58876556468288]
+	},
+	{
+		"properties": {
+			"name": "Southwark",
+			"borough": "London Borough of Southwark"
+		},
+		"bounds": [-0.111442547, 51.420609131, -0.029372569, 51.509909389],
+		"visualCenter": [-0.07040755800000001, 51.465259259999996],
+		"centroid": [-0.07121641816712583, 51.47348150281631]
+	},
+	{
+		"properties": {
+			"name": "Kensington and Chelsea",
+			"borough": "Royal Borough of Kensington and Chelsea"
+		},
+		"bounds": [-0.228727695, 51.477221604, -0.149843877, 51.530352734],
+		"visualCenter": [-0.2021621300000015, 51.503787169],
+		"centroid": [-0.19754116225773186, 51.50347759987116]
+	},
+	{
+		"properties": {
+			"name": "City of London",
+			"borough": "City of London"
+		},
+		"bounds": [-0.11382103, 51.506869565, -0.072749284, 51.523321268],
+		"visualCenter": [-0.09328515700000001, 51.5150954165],
+		"centroid": [-0.09175301665976328, 51.513910951766285]
+	},
+	{
+		"properties": {
+			"name": "Westminster",
+			"borough": "City of Westminster"
+		},
+		"bounds": [-0.216088485, 51.48381637, -0.111101485, 51.539793303],
+		"visualCenter": [-0.16046704994270594, 51.51344419013372],
+		"centroid": [-0.16472073810839682, 51.515691401621446]
+	},
+	{
+		"properties": {
+			"name": "Sutton",
+			"borough": "London Borough of Sutton"
+		},
+		"bounds": [-0.245429184, 51.321510587, -0.11691909, 51.393418531],
+		"visualCenter": [-0.17757299655089342, 51.36209028396944],
+		"centroid": [-0.1790372729249117, 51.362933237150216]
+	},
+	{
+		"properties": {
+			"name": "Camden",
+			"borough": "London Borough of Camden"
+		},
+		"bounds": [-0.213501321, 51.512652129, -0.105349881, 51.5729787],
+		"visualCenter": [-0.15742358986294236, 51.546394482299604],
+		"centroid": [-0.1603601784232615, 51.54930569276982]
+	},
+	{
+		"properties": {
+			"name": "Tower Hamlets",
+			"borough": "London Borough of Tower Hamlets"
+		},
+		"bounds": [-0.080189853, 51.484503083, 0.009863919, 51.544685896],
+		"visualCenter": [-0.050098446500001365, 51.5145944895],
+		"centroid": [-0.03172583713793105, 51.5172264339226]
+	},
+	{
+		"properties": {
+			"name": "Islington",
+			"borough": "London Borough of Islington"
+		},
+		"bounds": [-0.14253645, 51.518540989, -0.076357638, 51.575508315],
+		"visualCenter": [-0.11025070118702135, 51.548486647442516],
+		"centroid": [-0.1097936891630616, 51.547418443643956]
+	},
+	{
+		"properties": {
+			"name": "Hackney",
+			"borough": "London Borough of Hackney"
+		},
+		"bounds": [-0.104510704, 51.519814403, -0.016527214, 51.577784276],
+		"visualCenter": [-0.06331613273722997, 51.55226667139209],
+		"centroid": [-0.06249410742960655, 51.55428331664498]
+	},
+	{
+		"properties": {
+			"name": "Barking and Dagenham",
+			"borough": "London Borough of Barking and Dagenham"
+		},
+		"bounds": [0.06664905, 51.508768449, 0.190189877, 51.599436476],
+		"visualCenter": [0.13316999745449468, 51.543959801230436],
+		"centroid": [0.13537447589911636, 51.54788149685422]
+	},
+	{
+		"properties": {
+			"name": "Newham",
+			"borough": "London Borough of Newham"
+		},
+		"bounds": [-0.021264143, 51.496003696, 0.099797705, 51.563988987],
+		"visualCenter": [0.03753714201613376, 51.5268898781863],
+		"centroid": [0.03395939615775158, 51.533528463136]
+	},
+	{
+		"properties": {
+			"name": "Harrow",
+			"borough": "London Borough of Harrow"
+		},
+		"bounds": [-0.404071931, 51.55306134, -0.26715587, 51.640531755],
+		"visualCenter": [-0.36033672350000073, 51.5967965475],
+		"centroid": [-0.34162362588626105, 51.59492573724881]
+	}
+]

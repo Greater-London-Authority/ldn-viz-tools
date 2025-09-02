@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Theme from '../../../../../packages/ui/src/lib/theme/Theme.svelte';
+	import { Theme } from '@ldn-viz/ui';
 
 	import type { Snippet } from 'svelte';
 

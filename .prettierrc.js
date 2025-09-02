@@ -1,0 +1,17 @@
+const config = {
+	useTabs: true,
+	singleQuote: true,
+	trailingComma: 'none',
+	printWidth: 100,
+	plugins: ['prettier-plugin-packagejson', 'prettier-plugin-svelte', 'prettier-plugin-tailwindcss'],
+	overrides: [
+		{
+			files: '*.svelte',
+			options: {
+				parser: 'svelte'
+			}
+		}
+	]
+};
+
+module.exports = config;
