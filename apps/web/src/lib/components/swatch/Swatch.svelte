@@ -1,0 +1,24 @@
+<script lang="ts">
+	interface ColorChip {
+		name: string;
+		hex: string;
+		value: string;
+		type: string;
+		description: string;
+	}
+
+	let { name, hex, value, type, description }: ColorChip = $props();
+</script>
+
+<div
+	class="border-color-ui-border-secondary bg-color-container-level-0 flex-col justify-between border p-4 shadow-sm"
+>
+	<div class="aspect-video" style:background-color={hex}></div>
+	<div class="pt-2">
+		<p class="text-color-text-secondary">{name}</p>
+		<p>{value}</p>
+		{#if description}
+			<p>Description: {description}</p>
+		{/if}
+	</div>
+</div>
