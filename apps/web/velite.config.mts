@@ -9,15 +9,18 @@ const baseSchema = s.object({
 	raw: s.raw()
 });
 
-const docSchema = baseSchema.transform((data) => {
-	return {
-		...data,
-		slug: data.path,
-		slugFull: `/${data.path}`,
+const docSchema = baseSchema
+	.extend({
 		toc: s.toc(),
 		section: s.enum(['Overview', 'Foundations', 'Application design', 'Data visualisation'])
-	};
-});
+	})
+	.transform((data) => {
+		return {
+			...data,
+			slug: data.path,
+			slugFull: `/${data.path}`
+		};
+	});
 
 const guideSchema = baseSchema.transform((data) => {
 	return {

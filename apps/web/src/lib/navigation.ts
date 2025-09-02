@@ -4,7 +4,7 @@ const allDocs = getAllDocs();
 
 const foundations = allDocs
 	.filter((doc) => doc.section === 'Foundations')
-	.filter((doc) => doc.slugFull !== '/foundations')
+	.filter((doc) => doc.slugFull !== '/design-system/foundations')
 	.map((doc) => ({
 		title: doc.navLabel,
 		id: `${doc.title.toLowerCase()}-foundations`,
@@ -13,7 +13,7 @@ const foundations = allDocs
 
 const applicationDesign = allDocs
 	.filter((doc) => doc.section === 'Application design')
-	.filter((doc) => doc.slugFull !== '/application-design')
+	.filter((doc) => doc.slugFull !== '/design-system/application-design')
 	.map((doc) => ({
 		title: doc.navLabel,
 		id: `${doc.title.toLowerCase()}-application-design`,
@@ -22,7 +22,7 @@ const applicationDesign = allDocs
 
 const dataVisualisation = allDocs
 	.filter((doc) => doc.section === 'Data visualisation')
-	.filter((doc) => doc.slugFull !== '/data-visualisation')
+	.filter((doc) => doc.slugFull !== '/design-system/data-visualisation')
 	.map((doc) => ({
 		title: doc.navLabel,
 		id: `${doc.title.toLowerCase()}-data-visualisation`,
