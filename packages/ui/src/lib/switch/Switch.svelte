@@ -3,7 +3,7 @@
 	import { randomId } from '../utils/randomId.js';
 	import { Label, Switch } from 'bits-ui';
 
-	export interface SwitchProps {
+	interface Props {
 		/**
 		 * If `true`, the user will not be able to interact with the Switch to download data.
 		 */
@@ -44,7 +44,7 @@
 		checked = $bindable(false),
 		size = 'md',
 		labelOn = 'right'
-	}: SwitchProps = $props();
+	}: Props = $props();
 
 	const switchRootClass = $derived(
 		classNames(
