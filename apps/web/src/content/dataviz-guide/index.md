@@ -5,6 +5,7 @@ description: Guiding principles for consistent presentation
 
 <script>
     import {theme} from '@ldn-viz/ui'
+    import TypographyTable from '$lib/components/typography/TypographyTable.svelte'
     import DataTokenTable from '$lib/components/tables/colorTokenTables/DataTokenTable.svelte'
     import ChartAnatomy from '$lib/components/charts/chartAnatomy/ChartAnatomy.svelte'
     import tokens from '@ldn-viz/themes/docs/tokens/color.json';
@@ -38,6 +39,20 @@ description: Guiding principles for consistent presentation
     let textTokenData = $derived(
 		Object.values(tokens.theme[theme.currentMode ? theme.currentMode : 'light'].color.text)
 	);
+
+    const typographyExamples = [
+        {text: 'Display', usage: 'Banner displays', class: 'display'},
+        {text: 'Headline', usage: 'Main page headline', class: 'headline'},
+        {text: 'Subhead', usage: 'Text under main page headline', class: 'subhead'},
+        {text: 'Title large', usage: '', class: 'title-lg'},
+        {text: 'Title medium', usage: 'Used for chart titles', class: 'title-md'},
+        {text: 'Title small', usage: '', class: 'title-sm'},
+        {text: 'Subtitle', usage: 'Text under a title (medium or large only)', class: 'subtitle'},
+        {text: 'Body large', usage: '', class: 'body-lg'},
+        {text: 'Body medium', usage: '', class: 'body-md'},
+        {text: 'Body small', usage: '', class: 'body-sm'},
+        {text: 'Caption', usage: '', class: 'caption'}
+        ]
 </script>
 
 ## Data Visualisation Guidelines
@@ -64,7 +79,8 @@ Typography is the art and technique of arranging type to make written language l
 For data visualisation we recommend the sans serif font Inter. Inter is a variable font family carefully crafted & designed for computer screens. Inter is available via Google Fonts under the Open Font License.
 
 <div class="not-prose">
-<SwatchGrid tokenData={textTokenData} title='Colours for typography'/>
+    <TypographyTable items={typographyExamples} />
+    <SwatchGrid tokenData={textTokenData} title='Colours for typography'/>
 </div>
 
 ### Chart Elements
@@ -73,7 +89,7 @@ Chart elemets should be sized and colored as the below. Further detailed informa
 
 <div class="not-prose">
     <!-- <SwatchGrid tokenData={chartTokenData} /> -->
-    <div class="w-screen max-w-[1548px]">
+    <div class="w-screen mx-auto max-w-[1548px]">
         <ChartAnatomy />
     </div>
 </div>

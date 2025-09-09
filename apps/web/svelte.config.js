@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
-import contentIndex from './.velite/docs.json' with { type: 'json' };
+import contentIndex from './.velite/docs.json' with { type: 'json' }; //TODO - other content beyond docs
 import mdsvexConfig from './mdsvex.config.js';
 const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)],
