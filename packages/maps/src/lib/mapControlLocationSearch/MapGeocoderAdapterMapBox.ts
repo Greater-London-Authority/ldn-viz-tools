@@ -55,7 +55,6 @@ export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 
 	search(text: string) {
 		const url = buildSuggestionUrl(text, this._token, this._resultCount, this._sessionToken);
-		console.log('Suggestion link: ' + url);
 		return fetch(url)
 			.then((res) => res.json())
 			.then(transformSuggestGeoJSONToNamedGeolocations);
@@ -63,7 +62,6 @@ export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 
 	retrieve(id: string) {
 		const url = buildRetrieveUrl(id, this._token, this._sessionToken);
-		console.log('Retrieve link: ' + url);
 		return fetch(url)
 			.then((res) => res.json())
 			.then(transformRetrieveGeoJSONToNamedGeolocations) as Promise<GeolocationNamed>;

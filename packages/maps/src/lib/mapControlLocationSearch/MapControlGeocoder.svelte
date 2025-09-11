@@ -75,8 +75,6 @@
 			adapter
 				.retrieve(location.id)
 				.then((updatedLocation: Geolocation) => {
-					console.log('Updated location:', updatedLocation);
-
 					showClearButton = true;
 					setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
 
