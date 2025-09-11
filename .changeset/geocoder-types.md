@@ -2,6 +2,6 @@
 '@ldn-viz/ui': patch
 ---
 
-Changed: Change type of GeocoderAdapter to accomodate changes in MApControlGeocoder due to MapBox API changes.
+Changed: Change type of GeocoderAdapter to accommodate changes in MapControlGeocoder due to MapBox API changes.
 
 
