@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 19.4.1
+
+### Patch Changes
+
+- 24cc3ad: Changed: Change type of GeocoderAdapter to accommodate changes in MapControlGeocoder due to MapBox API changes.
+
 ## 19.4.0
 
 ### Minor Changes
