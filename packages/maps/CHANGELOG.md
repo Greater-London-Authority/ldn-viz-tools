@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.0.1
+
+### Patch Changes
+
+- 24cc3ad: Changed: Update geocoder from MapBox API to Searchbox API. This means that Points of Interest again appear in the results.
+
 ## 8.0.0
 
 ### Major Changes
