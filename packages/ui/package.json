@@ -1,7 +1,7 @@
 {
 	"name": "@ldn-viz/ui",
 	"license": "MIT",
-	"version": "19.4.0",
+	"version": "19.4.1",
 	"type": "module",
 	"exports": {
 		".": {
