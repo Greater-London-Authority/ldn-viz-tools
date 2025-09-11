@@ -65,7 +65,7 @@
 	/**
 	 * The currently selected location.
 	 */
-	export let selected = null;
+	export let selected: null | Geolocation = null;
 
 	/**
 	 * a space-separated list of additional classes applied to the root container.
