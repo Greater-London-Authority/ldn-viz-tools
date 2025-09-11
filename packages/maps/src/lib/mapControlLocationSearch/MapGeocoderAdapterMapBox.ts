@@ -1,11 +1,5 @@
 import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
-import type {
-	GeocoderAdapter,
-	GeolocationBounds,
-	GeolocationCoords,
-	GeolocationNamed,
-	Geolocation
-} from '@ldn-viz/ui';
+import type { GeocoderAdapter, GeolocationNamed } from '@ldn-viz/ui';
 
 interface RetrieveFeatureCollection {
 	features: Array<{
