@@ -1,5 +1,6 @@
 <script context="module">
 	import Table from './Table.svelte';
+	import { Select } from '@ldn-viz/ui';
 
 	export const meta = {
 		title: 'Tables/Components/Table',
@@ -9,7 +10,7 @@
 
 <script lang="ts">
 	import type { ColSpec } from '$lib/core/lib/types';
-	import { Button, Input } from '@ldn-viz/ui';
+	import { Button, currentTheme, Input, tokenNameToValue } from '@ldn-viz/ui';
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 
 	const data = [
@@ -88,6 +89,102 @@
 		]
 	};
 
+	const tableSpecNoHeader = {
+		showTableHeader: false,
+
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				column: {},
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
+	const tableSpecCustomHeaderColors = {
+		showColSummaries: false,
+
+		showHeaderTopRule: false,
+		// showHeaderBottomRule: false,
+
+		colGroups: [
+			{
+				label: 'Name',
+				startCol: 0,
+				endCol: 1,
+				color: tokenNameToValue('data.categorical.red', $currentTheme)
+			},
+			{
+				label: 'Pet',
+				startCol: 2,
+				endCol: 2,
+				color: tokenNameToValue('data.categorical.blue', $currentTheme)
+			}
+		],
+
+		columns: [
+			{
+				short_label: 'first_name',
+				label: 'First Name',
+
+				alignHeader: 'center',
+
+				header: {
+					color: tokenNameToValue('data.categorical.red', $currentTheme)
+				},
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'last_name',
+				label: 'Last Name',
+				sortable: false,
+				alignHeader: 'center',
+
+				header: {
+					color: tokenNameToValue('data.categorical.red', $currentTheme)
+				},
+
+				cell: { renderer: 'TextCell' }
+			},
+
+			{
+				short_label: 'pet',
+				label: 'Pet',
+				sortable: false,
+				alignHeader: 'center',
+
+				header: {
+					color: tokenNameToValue('data.categorical.blue', $currentTheme)
+				},
+
+				cell: { renderer: 'TextCell' }
+			}
+		]
+	};
+
 	let wideTableSpec: { columns: ColSpec[] } = { columns: [] };
 	for (let i = 0; i < 25; i++) {
 		wideTableSpec.columns.push({
@@ -127,6 +224,8 @@
 	randomlySelectRows();
 
 	export let page = 1;
+
+	let selectedPet: undefined | string = undefined;
 </script>
 
 <Template let:args>
@@ -229,3 +328,32 @@
 	/>
 </Story>
 <!-- TODO: add example of filtering -->
+
+<Story name="Externally implemented filtering">
+	<Select
+		label="Show only people whose favourite pet is"
+		bind:justValue={selectedPet}
+		items={[
+			{ value: 'dog', label: 'Dog' },
+			{ value: 'cat', label: 'Cat' },
+			{ value: 'bird', label: 'Bird' }
+		]}
+	/>
+
+	<Table
+		data={data.filter((d) => !selectedPet || d.pet === selectedPet)}
+		{tableSpec}
+		allowSorting
+		filename="My Table"
+	/>
+</Story>
+
+<!-- If required, the table header can be removed entirely-->
+<Story name="No header">
+	<Table {data} tableSpec={tableSpecNoHeader} fixedTableWidth={1200} bind:page />
+</Story>
+
+<!-- tableSpecCustomHeaderColors -->
+<Story name="Coloured headers">
+	<Table {data} tableSpec={tableSpecCustomHeaderColors} fixedTableWidth={500} bind:page />
+</Story>

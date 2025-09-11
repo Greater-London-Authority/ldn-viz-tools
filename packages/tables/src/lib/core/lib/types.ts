@@ -81,6 +81,11 @@ export type ColSpec = {
 		renderer?: string | SvelteComponent;
 		[other: string]: any;
 	};
+
+	header?: {
+		renderer?: string | SvelteComponent;
+		[other: string]: any;
+	};
 };
 
 // TODO: check

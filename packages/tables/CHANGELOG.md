@@ -1,5 +1,53 @@
 # @ldn-viz/tables
 
+## 3.3.0
+
+### Minor Changes
+
+- b9c85da: ADDED: it is now possible to customize the color of column headers and column group headers.
+  Where more customization is needed, it is also possible to specify a custom renderer component (as was already possible for the cell and column summary renderers)
+  CHANGED: column headings are now semi-bold (rather than bold)
+
+### Patch Changes
+
+- Updated dependencies [8bde3bc]
+  - @ldn-viz/charts@5.3.0
+
+## 3.2.0
+
+### Minor Changes
+
+- bf61efc: CHANGED: hints for Table columns can now be a component (rather than string), and can be rendered as a Tooltip, Overlap, or Modal
+
+### Patch Changes
+
+- Updated dependencies [212ff05]
+- Updated dependencies [f2f5f63]
+- Updated dependencies [bec155b]
+  - @ldn-viz/ui@19.2.0
+
+## 3.1.0
+
+### Minor Changes
+
+- be4b0fa: CHANGED: improve ARIA for table component
+
+### Patch Changes
+
+- Updated dependencies [c66b03b]
+- Updated dependencies [de9b000]
+  - @ldn-viz/ui@18.1.0
+
+## 3.0.0
+
+### Major Changes
+
+- ee9b859: Major version bump to deal with fact that svelte5 tag was mistakenly published as 2.6.1.
+
+### Patch Changes
+
+- b06d59e: FIXED: the first 2 rows are no longer missing when a `Table` is paginated
+
 ## 2.6.0
 
 ### Minor Changes

@@ -1,5 +1,29 @@
 # ldn-viz-tools-maps
 
+## 8.0.0
+
+### Major Changes
+
+- e8c3af7: ADDED: `MapLegend` component
+
+## 7.6.1
+
+### Patch Changes
+
+- f9d211e: FIXED: export functions needed to use `MapDeckPopovers` and `MapDeckTooltips` components
+
+## 7.6.0
+
+### Minor Changes
+
+- f8f4708: ADDED: `MapDeckPopovers` and `MapDeckTooltips` to easily add popovers or tooltips to multiple Deck.gl layers
+
+## 7.5.0
+
+### Minor Changes
+
+- 96ef243: FIXED: reduced the z-index of the `MapPopover`, so it appears behind a modal or sidebar.
+
 ## 7.4.0
 
 ### Minor Changes

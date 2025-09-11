@@ -13,7 +13,7 @@
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
-				<div style:width={col.computedWidth + 'px'} class="was-td">
+				<div style:width={col.computedWidth + 'px'} class="was-td" role="cell">
 					{#if col.cell && col.cell.renderer}
 						<DataCell href={col.href} {row}>
 							<svelte:component

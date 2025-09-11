@@ -29,12 +29,14 @@
 	export let tableWidth;
 
 	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
-	$: bottomRuleClass = tableSpec.colGroups ? '' : 'border-b';
+	$: bottomRuleClass =
+		tableSpec.showHeaderBottomRule === false || tableSpec.colGroups ? '' : 'border-b';
 </script>
 
 <div
 	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary py-2')}
 	style:width={tableWidth}
+	role="rowgroup"
 >
 	{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
 		<ColumnGroupHeadingRow {table} />
@@ -50,9 +52,11 @@
 		<ColumnSummariesRow {table} {data} />
 	{/if}
 
-	<AxisRow {table} />
-
-	{#if tableSpec.colGroups}
-		<ColumnGroupHeadingRuleRow {table} />
+	{#if table.columnSpec.some((c) => c.cell.axisRenderer)}
+		<AxisRow {table} />
 	{/if}
 </div>
+
+{#if tableSpec.colGroups && tableSpec.showHeaderBottomRule !== false}
+	<ColumnGroupHeadingRuleRow {table} />
+{/if}

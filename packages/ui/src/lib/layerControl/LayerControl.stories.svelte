@@ -10,10 +10,11 @@
 
 <script lang="ts">
 	import { colorTokenNameToRGBArray, currentTheme, tokenNameToValue } from '../theme/themeStore';
+	import { colorNames } from './layerControlUtils';
 
 	let layerStates = {
 		boroughs: {
-			colorName: 'data.primary',
+			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0
 		},
@@ -26,6 +27,11 @@
 			colorName: 'data.categorical.orange',
 			visible: true,
 			opacity: 1.0
+		},
+		customColors: {
+			colorName: 'palette.blue.600',
+			visible: true,
+			opacity: 1.0
 		}
 	};
 
@@ -34,15 +40,15 @@
 
 <Template let:args>
 	<div class="w-96">
-		<LayerControl bind:state {...args} />
+		<LayerControl bind:state {...args} name="default" />
 	</div>
 	<pre class="mt-4 text-xs">{JSON.stringify(state, null, 2)}</pre>
 
-	<p>
-		Color is: {tokenNameToValue(state.colorName, $currentTheme)} or [{colorTokenNameToRGBArray(
-			state.colorName,
-			$currentTheme
-		)}]
+	<p class="mt-4 text-sm">
+		Active Color is: <span style={`color: ${tokenNameToValue(state.colorName, $currentTheme)}`}>
+			{tokenNameToValue(state.colorName, $currentTheme)}
+		</span>
+		or [{colorTokenNameToRGBArray(state.colorName, $currentTheme)}]
 	</p>
 </Template>
 
@@ -104,4 +110,13 @@
 </Story>
 <Story name="Disabled (Size)" source>
 	<LayerControl bind:state label="Borough" disableSizeControl />
+</Story>
+
+<Story name="With name prop" source>
+	<LayerControl bind:state label="Borough" name="borough" />
+</Story>
+
+<!-- Note, this colour combination isn't accessible but is demonstrating potential for customising colours where necessary. -->
+<Story name="With custom colours" source>
+	<LayerControl bind:state={layerStates.customColors} label="Borough" {colorNames} />
 </Story>

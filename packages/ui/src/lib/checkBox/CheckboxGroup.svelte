@@ -21,6 +21,11 @@
 	export let label = '';
 
 	/**
+	 * Accessible name of group to be read by screen reader.
+	 */
+	export let ariaLabel = '';
+
+	/**
 	 * Text that appears below the `<input>` element, in smaller font than the `label`.
 	 */
 	export let description = '';
@@ -135,6 +140,8 @@
 			clearAll();
 		}
 	};
+
+	let optionIds = options.map((o) => o.id).join(' ');
 </script>
 
 <InputWrapper
@@ -151,7 +158,7 @@
 	{optional}
 >
 	<slot name="hint" slot="hint" />
-	<div class="flex flex-col space-y-1">
+	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
 		{#if !buttonsHidden}
 			<!--
 			form="" should prevent this checkbox from being included in form
@@ -160,28 +167,32 @@
 			<Checkbox
 				id={randomId()}
 				form=""
+				name="all"
 				label="Select all"
 				color="#3787D2"
 				checked={allCheckboxesCheckedOrDisabled}
 				indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+				aria-controls={optionIds}
 				on:change={toggleAll}
 				{disabled}
 			/>
 		{/if}
 
-		<div class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
+		<ul class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
 			{#each options as option (option.id)}
-				<Checkbox
-					id={option.id}
-					name={option.name}
-					label={option.label}
-					color={option.color}
-					disabled={option.disabled || disabled}
-					hint={option.hint}
-					hintLabel={option.hintLabel}
-					bind:checked={selectionState[option.id]}
-				/>
+				<li>
+					<Checkbox
+						id={option.id}
+						name={option.name}
+						label={option.label}
+						color={option.color}
+						disabled={option.disabled || disabled}
+						hint={option.hint}
+						hintLabel={option.hintLabel}
+						bind:checked={selectionState[option.id]}
+					/>
+				</li>
 			{/each}
-		</div>
+		</ul>
 	</div>
 </InputWrapper>

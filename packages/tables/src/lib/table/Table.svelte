@@ -107,7 +107,7 @@
 	export let allowPageSizeChanges = false;
 
 	/**
-	 * The current page.
+	 * The current page (1-indexed).
 	 */
 	export let page = 1;
 
@@ -239,13 +239,16 @@
 				class="table-auto text-sm w-full text-color-text-primary"
 				slot="table"
 				bind:clientWidth={tableWidth}
+				role="table"
 			>
-				<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
+				{#if tableSpec.showTableHeader !== false}
+					<TableHeader {tableSpec} {table} {data} {allowSorting} {tableWidth} />
+				{/if}
 
 				{#if paginate}
-					<div style:width={tableWidth} class:striped={zebraStripe}>
+					<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
 						{#each visualRows as visualRow, i}
-							{#if i > (page - 1) * pageSize + 1 && i <= page * pageSize + 1}
+							{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
 								<RowRenderer spec={visualRow} {table} />
 							{/if}
 						{/each}
@@ -255,13 +258,14 @@
 						style:height={`${height - 100}px`}
 						style:width={tableWidth}
 						class:stripedVirtual={zebraStripe}
+						role="rowgroup"
 					>
 						<VirtualScroll data={visualRows} key="uniqueKey" let:data>
 							<RowRenderer spec={data} {table} />
 						</VirtualScroll>
 					</div>
 				{:else}
-					<div style:width={tableWidth} class:striped={zebraStripe}>
+					<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
 						{#each visualRows as visualRow}
 							<RowRenderer spec={visualRow} {table} />
 						{/each}

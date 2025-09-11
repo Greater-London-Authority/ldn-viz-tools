@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import LayerControlGroup from './LayerControlGroup.svelte';
+	import { colorNames } from './layerControlUtils';
 
 	export const meta = {
 		title: 'Ui/Components/Layer Controls/LayerControlGroup',
@@ -82,10 +83,32 @@
 			size: 1
 		}
 	};
+	let state3 = {
+		bus: {
+			colorName: 'palette.blue.600',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		train: {
+			colorName: 'palette.green.600',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		underground: {
+			colorName: 'palette.darkpink.600',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		}
+	};
+
+	let ariaLabel = 'Customise layers';
 </script>
 
 <Template let:args>
-	<LayerControlGroup bind:options={optionsForGroup} bind:state={state1} {...args} />
+	<LayerControlGroup bind:options={optionsForGroup} bind:state={state1} {...args} {ariaLabel} />
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Template>
 
@@ -98,6 +121,7 @@
 		disableOpacityControl
 		disableSizeControl
 		label="Layer Control Group"
+		{ariaLabel}
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
@@ -111,6 +135,7 @@
 		disableSizeControl
 		label="Layer Control Group"
 		hint="Turn the layers of the map on and off"
+		{ariaLabel}
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
@@ -125,6 +150,7 @@
 		label="Layer Control Group"
 		hint="Turn the layers of the map on and off"
 		description="Transport layers - Taxis disabled"
+		{ariaLabel}
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
@@ -136,13 +162,14 @@
 		bind:state={state1}
 		disableOpacityControl
 		disableSizeControl
+		{ariaLabel}
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Story>
 
 <Story name="Disable controls size and opacity controls for some layers">
-	<LayerControlGroup bind:options={optionsForGroup2} bind:state={state2} />
+	<LayerControlGroup bind:options={optionsForGroup2} bind:state={state2} {ariaLabel} />
 	<pre class="mt-4 text-xs">{JSON.stringify(state2, null, 2)}</pre>
 </Story>
 
@@ -153,6 +180,7 @@
 			bind:state={state1}
 			disableOpacityControl
 			disableSizeControl
+			{ariaLabel}
 		/>
 	</div>
 </Story>
@@ -167,13 +195,20 @@ For example, choropleth layers would cover each other.
 		bind:state={state1}
 		mutuallyExclusive
 		name="mutually-exclusive-layers"
+		{ariaLabel}
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Story>
 
 <Story name="Disabled (global)">
-	<LayerControlGroup bind:options={optionsForGroup} bind:state={state1} disabled name="Disabled" />
+	<LayerControlGroup
+		bind:options={optionsForGroup}
+		bind:state={state1}
+		disabled
+		name="Disabled"
+		{ariaLabel}
+	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 </Story>
@@ -188,7 +223,14 @@ For example, choropleth layers would cover each other.
 		error={Object.values(state1).every((layer) => layer.visible === false)
 			? 'You must select an option'
 			: undefined}
+		{ariaLabel}
 	/>
 
 	<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+</Story>
+
+<!-- Note, this colour combination isn't accessible but is demonstrating potential for customising colours where necessary. -->
+<Story name="With custom colours" source>
+	<LayerControlGroup bind:options={optionsForGroup} bind:state={state3} {ariaLabel} {colorNames} />
+	<pre class="mt-4 text-xs">{JSON.stringify(state3, null, 2)}</pre>
 </Story>

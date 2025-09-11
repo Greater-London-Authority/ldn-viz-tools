@@ -29,6 +29,11 @@
 	export let disableSizeControl = false;
 
 	/**
+	 * Optional array of colour tokens for use by `ColorPicker`. Defaults to categorical colours.
+	 */
+	export let colorNames: string[] = [];
+
+	/**
 	 * the name of the layer
 	 */
 	export let label = '';
@@ -91,7 +96,8 @@
 	export let optionId = randomId();
 
 	/**
-	 * Name of the radio button group  (used only if `mutuallyExclusive` is true)
+	 * Name of the radio/checkbox button group. If `mutuallyExclusive` is true,
+	 * this is required (should have the same value for all radio buttons in group).
 	 */
 	export let name = '';
 
@@ -114,13 +120,14 @@
 				{name}
 			/>
 		{:else}
-			<Checkbox bind:checked={state.visible} label="" {disabled} id={optionId} />
+			<Checkbox bind:checked={state.visible} label="" {disabled} id={optionId} {name} />
 		{/if}
 	</div>
 
 	{#if controlsInUse.includes('color')}
 		<ColorPicker
-			bind:colorName={state.colorName}
+			{colorNames}
+			bind:activeColorName={state.colorName}
 			disabled={disabled || disableColorControl}
 			{label}
 		/>

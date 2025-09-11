@@ -50,6 +50,7 @@ export { default as PrivacyPolicyLink } from './sidebar/elements/sidebarFooter/P
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 
+export { default as SidebarGroup } from './sidebar/elements/sidebarSection/SidebarGroup.svelte';
 export { default as SidebarGroupTitle } from './sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 export { default as SidebarSection } from './sidebar/elements/sidebarSection/SidebarSection.svelte';
 export { default as SidebarSectionTitle } from './sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
@@ -59,9 +60,14 @@ export { default as SidebarTabList } from './sidebar/elements/sidebarTabs/Sideba
 export { default as LoadingIndicator } from './loadingIndicator/LoadingIndicator.svelte';
 
 export { default as Spinner } from './spinners/Spinner.svelte';
+
+export { default as Tabs } from './tabs/Tabs.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 export { default as TabPanel } from './tabs/TabPanel.svelte';
+
+export { default as ListMenu } from './listMenu/ListMenu.svelte';
+export { default as ListMenuItem } from './listMenu/ListMenuItem.svelte';
 
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 

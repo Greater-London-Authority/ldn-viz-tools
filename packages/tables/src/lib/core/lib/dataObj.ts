@@ -103,6 +103,9 @@ export class TableData {
 			if (col.cell && typeof col.cell.axisRenderer === 'string') {
 				col.cell.axisRenderer = axisRenderer[col.cell.axisRenderer];
 			}
+			if (col.header && typeof col.header.renderer === 'string') {
+				col.header.renderer = renderer[col.header.renderer];
+			}
 		}
 	}
 

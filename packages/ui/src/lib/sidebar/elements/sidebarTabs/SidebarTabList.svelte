@@ -1,14 +1,15 @@
 <script lang="ts">
+	import type { PlacementType } from '$lib/sidebar/types';
 	import { getContext } from 'svelte';
 	import { get, type Writable } from 'svelte/store';
-	import { tabLayoutOverride, tabThemeOverride } from '../../../sidebar/sidebarUtils';
-	import type { PlacementType } from '../../../sidebar/types';
+	import {
+		tabLabelOverride,
+		tabLayoutOverride,
+		tabThemeOverride
+	} from '../../../sidebar/sidebarUtils';
 	import TabList from '../../../tabs/TabList.svelte';
 	import type { Tab } from '../../../tabs/types';
 	import { classNames } from '../../../utils/classNames';
-
-	// Get the sidebar placement prop from context and use that to apply classes that make the tabs run horizontal or vertical
-	const sidebarPlacementFromContext = getContext<Writable<PlacementType>>('sidebarPlacement');
 
 	/**
 	 * List of tabs. An array, of which each entry is an object with the following properties:
@@ -26,9 +27,16 @@
 	export let selectedValue: Tab['id'] = tabs[0].id;
 
 	/**
+	 * Sidebar placement
+	 */
+	export let placement: PlacementType = 'right';
+
+	/**
 	 * orientation of the list of tabs
 	 */
-	export let orientation: 'vertical' | 'horizontal' = 'vertical';
+	let orientation: 'vertical' | 'horizontal';
+
+	$: orientation = ['top', 'bottom'].includes(placement) ? 'horizontal' : 'vertical';
 
 	/**
 	 * Enables screen reader to describe purpose of tab list
@@ -65,6 +73,6 @@
 	{ariaLabel}
 	{orientation}
 	{tabs}
-	class={classNames(tabLayoutOverride[$sidebarPlacementFromContext], tabThemeOverride)}
 	{onChange}
+	class={classNames(tabLayoutOverride[orientation], tabThemeOverride, tabLabelOverride)}
 />

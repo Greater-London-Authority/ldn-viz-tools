@@ -32,6 +32,11 @@
 	export let popup: ComponentType | null = null;
 
 	/**
+	 * Optional message to be passed to child popop component via `mapMarkerString` context.
+	 */
+	export let msgString: string | null = null;
+
+	/**
 	 * Feature to which the popover should be attached.
 	 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
 	 */
@@ -79,7 +84,8 @@
 				...contexts,
 				['mapMarkerMaplibrePopup', maplibrePopup],
 				['mapMarkerFeature', feature],
-				['mapMarkerLayer', layer]
+				['mapMarkerLayer', layer],
+				['mapMarkerString', msgString]
 			])
 		});
 
@@ -107,7 +113,10 @@
 
 <style>
 	/** TODO: remove this hack **/
+	/* N.B. The applied z-index is equivalent to the z-10 index applied to the MapControlGroup.
+   It will display the popover above the map, but below the sidebar or a modal (if one is open).
+   */
 	:global(.maplibregl-popup) {
-		z-index: 99;
+		z-index: 10;
 	}
 </style>

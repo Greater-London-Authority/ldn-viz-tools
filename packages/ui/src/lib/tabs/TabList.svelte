@@ -50,8 +50,7 @@
 	$: respondToExternalChange(selectedValue);
 
 	setContext('tabContext', {
-		selectedValue: val,
-		orientation
+		selectedValue: val
 	});
 
 	const orientationClasses = {
@@ -78,30 +77,32 @@
 	};
 </script>
 
-<div
-	class={tabListClasses}
-	role="tablist"
-	aria-label={ariaLabel}
-	aria-orientation={orientation}
-	use:tabFocus={{ orientation }}
->
-	{#each tabs as tab}
-		<TabLabel tabId={tab.id} {handleSelect}>
-			{#if tab.icon}
-				<Icon
-					src={tab.icon}
-					theme="solid"
-					class={iconOrientationClasses[orientation]}
-					aria-hidden="true"
-				/>
-			{:else if tab.rawIcon}
-				<svelte:component
-					this={tab.rawIcon}
-					class={iconOrientationClasses[orientation]}
-					aria-hidden="true"
-				/>
-			{/if}
-			{tab.label}
-		</TabLabel>
-	{/each}
-</div>
+{#key orientation}
+	<div
+		class={tabListClasses}
+		role="tablist"
+		aria-label={ariaLabel}
+		aria-orientation={orientation}
+		use:tabFocus={{ orientation }}
+	>
+		{#each tabs as tab}
+			<TabLabel tabId={tab.id} {handleSelect} {orientation}>
+				{#if tab.icon}
+					<Icon
+						src={tab.icon}
+						theme="solid"
+						class={iconOrientationClasses[orientation]}
+						aria-hidden="true"
+					/>
+				{:else if tab.rawIcon}
+					<svelte:component
+						this={tab.rawIcon}
+						class={iconOrientationClasses[orientation]}
+						aria-hidden="true"
+					/>
+				{/if}
+				{tab.label}
+			</TabLabel>
+		{/each}
+	</div>
+{/key}

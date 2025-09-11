@@ -1,5 +1,79 @@
 # ldn-viz-tools-ui
 
+## 19.4.0
+
+### Minor Changes
+
+- e8c3af7: CHANGED: ColorLegend label now has a font-size of 12px
+
+## 19.3.0
+
+### Minor Changes
+
+- 6e76a2f: FIXED: Sidebar tabs orient correctly when horizontal
+
+## 19.2.0
+
+### Minor Changes
+
+- 212ff05: FIXED: export the `Tabs` component
+- f2f5f63: FIXED: `SidebarTabList` now correctly sets `aria-orientation` attribute, and responds to the correcct pair of up/down or left/right arrow keys based on orientation
+- bec155b: CHANGED: `ColorPicker` now has tooltip, hover and active states
+
+## 19.1.0
+
+### Minor Changes
+
+- 50c7b8b: CHANGED: `LayerControl`, `LayerControlGroup` and `ColorPicker` take an optional array of `colorNames` to allow customisation of color picker
+
+### Patch Changes
+
+- b4a855d: FIXED: fixed refresh of OAuth tokens by `HandleRedirectFromAuth`
+
+## 19.0.0
+
+### Major Changes
+
+- 84e5083: CHANGED: `Sidebar` is now an aside and takes `sidebarAriaLabel` and `tabsAriaLabel` optional props for better accessibility
+
+### Minor Changes
+
+- 671dffc: CHANGED: `CheckboxGroup`, `LayerControl` and `LayerControlGroup` components
+
+  - `LayerControlGroup` now passes `name` into `LayerControl`
+  - `LayerControl` now passes `name` into `Checkbox`, in addition to `Radio`
+  - For accessibility: `LayerControlGroup` and `CheckboxGroup` now have an `aria-controls` attribute on the checkbox that toggles all controls, with a value equal to the ids for all controls
+
+## 18.1.0
+
+### Minor Changes
+
+- c66b03b: FIXED: CSS selector in `Toast` component (regression in 146ce20)
+- de9b000: Refactored `LayerControlGroup`, `CheckboxGroup` and `Checkbox` components for accessibility.
+
+  `LayerControlGroup` and `CheckboxGroup` now have:
+
+  - `id` and `role="group"` attributes on the div that wraps around the `LayerControl` or `Checkbox` inputs
+  - `ariaLabel` prop to describe the purpose of the components to screen reader users
+  - `<ul>` element surrounding the options, with each option nested in an `<li>` element so screen reader users know the options are connected
+
+## 18.0.0
+
+### Major Changes
+
+- 2bd195a: Bump the major version number to avoid conflicts due to the svelte5 preview being released as 17.1.2.
+
+### Minor Changes
+
+- dec3ed3: ADDED `ListMenu` and `ListMenuItem` components
+- 9f674ab: FIXED: `SidebarToggle` now has `aria-expanded` and `aria-controls` attributes for screen reader accessibility. `Sidebar` has a `sidebarId` for use by `SidebarToggle`.
+
+## 17.1.1
+
+### Patch Changes
+
+- 2950252: FIXED: export `SidebarGroup`
+
 ## 17.1.0
 
 ### Minor Changes

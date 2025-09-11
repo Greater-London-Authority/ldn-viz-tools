@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 5.3.0
+
+### Minor Changes
+
+- 8bde3bc: CHANGED: defaultArea plot fragment uses fillOpacity instead of opacity for consistency with other plot fragments
+
 ## 5.2.0
 
 ### Minor Changes

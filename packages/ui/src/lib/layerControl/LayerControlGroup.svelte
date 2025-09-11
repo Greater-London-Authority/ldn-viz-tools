@@ -23,6 +23,11 @@
 	export let label = '';
 
 	/**
+	 * Enables screen reader to describe group
+	 */
+	export let ariaLabel = '';
+
+	/**
 	 * Text that appears below the `<input>` element, in smaller font than the `label`.
 	 */
 	export let description = '';
@@ -69,6 +74,7 @@
 	 * Each element of this array defines the control for a layer, and is an object with the properties:
 	 * * `id` (string)
 	 * * `label` (string) - the text displayed next to the checkbox
+	 * * `name` (string, optional) - for use by radio or checkbox buttons
 	 * * `hint` (string, optional) - help text to be displayed in tooltip
 	 *
 	 * * `disableColorControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
@@ -84,8 +90,8 @@
 	export let options: {
 		id: string;
 		label: string;
+		name?: string;
 		hint?: string;
-
 		disabled?: boolean;
 		disableColorControl?: boolean;
 		disableOpacityControl?: boolean;
@@ -128,11 +134,20 @@
 	export let disableSizeControl = false;
 
 	/**
+	 * Optional array of colour tokens for use by `ColorPicker`. Defaults to categorical colours.
+	 */
+	export let colorNames: string[] = [];
+
+	/**
 	 * Message to be displayed next to the checkbox that toggles the visibility of all layers.
 	 */
 	export let showAllLabel = 'Show all';
 
 	export let mutuallyExclusive = false;
+
+	/**
+	 * Name of the radio button group (used only if `mutuallyExclusive` is true)
+	 */
 	export let name = '';
 
 	let allCheckboxesCheckedOrDisabled: boolean;
@@ -162,6 +177,8 @@
 			clearAll();
 		}
 	};
+
+	let optionIds = options.map((o) => o.id).join(' ');
 
 	let selectedOptionId: string | undefined; // only used by radioButtons, if mutuallyExclusive
 	const updateStateFromCheckbox = (selectedId: string | undefined) => {
@@ -209,25 +226,28 @@
 	{optional}
 >
 	<slot name="hint" slot="hint" />
-	<div class="flex flex-col space-y-1">
+	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
 		{#if mutuallyExclusive}
 			{#if !buttonsHidden}
 				<Button {disabled} variant="text" class="!px-0" on:click={clearRadioButtons}>Clear</Button>
 			{/if}
 
-			<div class={'flex flex-col space-y-1'}>
+			<ul class={'flex flex-col space-y-1'}>
 				{#each options as option}
-					<LayerControl
-						label={option.label}
-						{name}
-						bind:state={state[option.id]}
-						optionId={option.id}
-						disabled={option.disabled || disabled}
-						bind:selectedOptionId
-						mutuallyExclusive
-					/>
+					<li>
+						<LayerControl
+							label={option.label}
+							{name}
+							bind:state={state[option.id]}
+							optionId={option.id}
+							disabled={option.disabled || disabled}
+							bind:selectedOptionId
+							mutuallyExclusive
+							{colorNames}
+						/>
+					</li>
 				{/each}
-			</div>
+			</ul>
 		{:else}
 			{#if !buttonsHidden}
 				<!--
@@ -237,28 +257,34 @@
 				<Checkbox
 					id={randomId()}
 					form=""
+					name="all"
 					label={showAllLabel}
 					checked={allCheckboxesCheckedOrDisabled}
 					indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+					aria-controls={optionIds}
 					on:change={toggleAll}
 					{disabled}
 				/>
 			{/if}
 
-			<div class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
+			<ul class={`flex flex-col space-y-1 ${buttonsHidden ? '' : 'pl-5'}`}>
 				{#each options as option (option.id)}
-					<LayerControl
-						label={option.label}
-						disabled={option.disabled || disabled}
-						hint={option.hint}
-						disableColorControl={disableColorControl || option.disableColorControl}
-						disableOpacityControl={disableOpacityControl || option.disableOpacityControl}
-						disableSizeControl={disableSizeControl || option.disableSizeControl}
-						bind:state={state[option.id]}
-						{controlsInUse}
-					/>
+					<li>
+						<LayerControl
+							label={option.label}
+							name={option.name}
+							disabled={option.disabled || disabled}
+							hint={option.hint}
+							disableColorControl={disableColorControl || option.disableColorControl}
+							disableOpacityControl={disableOpacityControl || option.disableOpacityControl}
+							disableSizeControl={disableSizeControl || option.disableSizeControl}
+							bind:state={state[option.id]}
+							{controlsInUse}
+							{colorNames}
+						/>
+					</li>
 				{/each}
-			</div>
+			</ul>
 		{/if}
 	</div>
 </InputWrapper>
