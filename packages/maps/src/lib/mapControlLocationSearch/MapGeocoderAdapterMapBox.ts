@@ -3,7 +3,8 @@ import type {
 	GeocoderAdapter,
 	GeolocationBounds,
 	GeolocationCoords,
-	GeolocationNamed
+	GeolocationNamed,
+	Geolocation
 } from '@ldn-viz/ui';
 
 interface RetrieveFeatureCollection {

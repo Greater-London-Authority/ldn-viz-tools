@@ -68,24 +68,24 @@
 	const delay = 500;
 	let selected: null | GeolocationNamed = null;
 
-	const onLocationSelectedGeocoder = (location: Geolocation) => {
+	const onLocationSelectedGeocoder = (location: GeolocationNamed) => {
 		if (!$mapStore) {
 			return;
 		}
 
 		adapter
 			.retrieve(location.id)
-			.then((updatedLocation) => {
+			.then((updatedLocation: Geolocation) => {
 				console.log('Updated location:', updatedLocation);
 
 				showClearButton = true;
-				setFeature('geocoder', $mapStore, mapgl, updatedLocation, { zoom: zoomLevel });
+				setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
 
 				if (onLocationSelected) {
 					onLocationSelected(updatedLocation);
 				}
 			})
-			.catch((error) => {
+			.catch((error: any) => {
 				console.error('Error retrieving location:', error);
 			});
 	};
