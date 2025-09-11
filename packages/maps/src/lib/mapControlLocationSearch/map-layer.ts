@@ -12,7 +12,7 @@ import type {
 
 import type { FeatureCollection } from 'geojson';
 
-	import maplibre_gl from 'maplibre-gl';
+import maplibre_gl from 'maplibre-gl';
 
 const markers: { [keys: string]: Marker } = {};
 const sourceId = 'gla/context/location-search';

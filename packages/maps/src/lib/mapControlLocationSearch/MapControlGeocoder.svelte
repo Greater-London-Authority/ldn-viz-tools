@@ -71,7 +71,7 @@
 			return;
 		}
 
-		if (adapter.retrieve && "id" in location){
+		if (adapter.retrieve && 'id' in location) {
 			adapter
 				.retrieve(location.id)
 				.then((updatedLocation: Geolocation) => {
@@ -86,7 +86,6 @@
 					console.error('Error retrieving location:', error);
 				});
 		}
-
 	};
 
 	let showClearButton = false;
