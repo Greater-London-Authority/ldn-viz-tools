@@ -1,4 +1,4 @@
-import type { GeolocationNamed } from './types';
+import type { Geolocation, GeolocationNamed } from './types';
 
 // GeocoderAttribution specifies the attribution text and optional link
 // returned by an adapter.
@@ -41,4 +41,7 @@ export interface GeocoderAdapter {
 	// This function is optional and should not be implemented if attribution is
 	// not needed. Alternatively, returning undefined will also omit attribution.
 	attribution?: () => undefined | GeocoderAttribution;
+
+	// Retrieve details of a specific search result.
+	retrieve?: (id: string) => Promise<Geolocation>;
 }

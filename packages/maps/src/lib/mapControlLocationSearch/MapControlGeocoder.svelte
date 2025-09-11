@@ -6,7 +6,6 @@
 	 */
 
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
-	import mapgl from 'maplibre-gl';
 	import { getContext } from 'svelte';
 	import { clearFeature, setFeature } from './map-layer';
 	import type { MapStore } from './map-types';
@@ -18,7 +17,6 @@
 		OnGeolocationSearchError,
 		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
-	import { MapGeocoderAdapterMapBox } from './MapGeocoderAdapterMapBox';
 
 	/**
 	 * An adapter for sourcing location suggestions. All data fetching and
@@ -68,26 +66,29 @@
 	const delay = 500;
 	let selected: null | GeolocationNamed = null;
 
-	const onLocationSelectedGeocoder = (location: GeolocationNamed) => {
+	const onLocationSelectedGeocoder = (location: Geolocation) => {
 		if (!$mapStore) {
 			return;
 		}
 
-		adapter
-			.retrieve(location.id)
-			.then((updatedLocation: Geolocation) => {
-				console.log('Updated location:', updatedLocation);
+		if (adapter.retrieve && "id" in location){
+			adapter
+				.retrieve(location.id)
+				.then((updatedLocation: Geolocation) => {
+					console.log('Updated location:', updatedLocation);
 
-				showClearButton = true;
-				setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
+					showClearButton = true;
+					setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
 
-				if (onLocationSelected) {
-					onLocationSelected(updatedLocation);
-				}
-			})
-			.catch((error: any) => {
-				console.error('Error retrieving location:', error);
-			});
+					if (onLocationSelected) {
+						onLocationSelected(updatedLocation);
+					}
+				})
+				.catch((error: any) => {
+					console.error('Error retrieving location:', error);
+				});
+		}
+
 	};
 
 	let showClearButton = false;

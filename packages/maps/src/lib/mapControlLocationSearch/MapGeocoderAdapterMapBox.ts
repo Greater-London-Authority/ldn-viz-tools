@@ -66,7 +66,7 @@ export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 		console.log('Retrieve link: ' + url);
 		return fetch(url)
 			.then((res) => res.json())
-			.then(transformRetrieveGeoJSONToNamedGeolocations);
+			.then(transformRetrieveGeoJSONToNamedGeolocations) as Promise<GeolocationNamed>;
 	}
 
 	attribution() {
@@ -133,7 +133,7 @@ const transformSuggestGeoJSONToNamedGeolocations = (geojson: SuggestFeatureColle
 			id: loc.mapbox_id,
 			name: loc.name,
 			address: loc.place_formatted
-		};
+		} as GeolocationNamed;
 	});
 };
 
