@@ -1,24 +1,24 @@
 // ToastType is a collection of valid toast message types.
-export enum ToastType {
-	Notice = 'Notice',
-	Success = 'Success',
-	Warning = 'Warning',
-	Error = 'Error'
-}
+export const ToastType = {
+	Notice: 'Notice',
+	Success: 'Success',
+	Warning: 'Warning',
+	Error: 'Error'
+};
 
 // ToasterPosition is an enumeration of valid positions that can be passed to
 // the Toaster component via the 'position' property.
-export enum ToasterPosition {
-	TopLeft = 'TopLeft',
-	TopCenter = 'TopCenter',
-	TopRight = 'TopRight',
-	CenterRight = 'CenterRight',
-	BottomRight = 'BottomRight',
-	BottomCenter = 'BottomCenter',
-	BottomLeft = 'BottomLeft',
-	CenterLeft = 'CenterLeft',
-	Center = 'Center'
-}
+export const ToasterPosition = {
+	TopLeft: 'TopLeft',
+	TopCenter: 'TopCenter',
+	TopRight: 'TopRight',
+	CenterRight: 'CenterRight',
+	BottomRight: 'BottomRight',
+	BottomCenter: 'BottomCenter',
+	BottomLeft: 'BottomLeft',
+	CenterLeft: 'CenterLeft',
+	Center: 'Center'
+};
 
 // ToastMessage represents a message with functionality for posting, removing
 // and refreshing itself.
@@ -38,7 +38,7 @@ export interface ToastMessage {
 
 	// type is the ToastType that controls styling and indicates urgency of the
 	// message to the end user. By default this will be ToastType.Notice.
-	type: ToastType;
+	type: keyof typeof ToastType;
 
 	// closeButton is true if a close button should be displayed.
 	closeButton: boolean;
@@ -55,7 +55,7 @@ export interface ToastMessage {
 // postToastMessage.
 export interface ToastMessageOptions {
 	id?: string;
-	type?: ToastType;
+	type?: keyof typeof ToastType;
 	timeToLive?: number;
 	closeButton?: boolean;
 }
