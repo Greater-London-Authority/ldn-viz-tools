@@ -75,5 +75,10 @@
 	{orientation}
 	{tabs}
 	{onChange}
-	class={classNames(tabLayoutOverride[orientation], tabThemeOverride, tabLabelOverride, tabIconOverride)}
+	class={classNames(
+		tabLayoutOverride[orientation],
+		tabThemeOverride,
+		tabLabelOverride,
+		tabIconOverride
+	)}
 />
