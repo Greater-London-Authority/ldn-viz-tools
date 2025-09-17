@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.1.1
+
+### Patch Changes
+
+- 5478a0f: FIXED: fixed path for an import from `@ldn-viz/ui` by `MapDraw` that only works in monorepo, not in projects
+
 ## 8.1.0
 
 ### Minor Changes
