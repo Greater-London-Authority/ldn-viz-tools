@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.1.2
+
+### Patch Changes
+
+- b4dace5: FIXED: MapDraw component can load initial state
+
 ## 8.1.1
 
 ### Patch Changes
