@@ -52,6 +52,10 @@ export { default as BoroughsContextLayer } from './mapContextLayers/boroughsCont
 // Deck.gl
 export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelte';
 
+
+// Drawing
+export { default as MapDraw } from './mapDraw/MapDraw.svelte';
+
 // themes
 export * from './themes/animations';
 export * from './themes/bounds';
