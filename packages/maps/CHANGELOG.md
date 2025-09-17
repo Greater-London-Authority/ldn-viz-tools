@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.1.0
+
+### Minor Changes
+
+- b1f6fc7: Added: MapDraw component
+
 ## 8.0.1
 
 ### Patch Changes
