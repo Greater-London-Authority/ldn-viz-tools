@@ -18,9 +18,14 @@
 	export let currentMode: string | undefined;
 
 	/**
-	 * GeoJSON features that have been drawn.
+	 * GeoJSON features that have been drawn (continuously updates).
 	 */
 	export let features: Feature[];
+
+	/**
+	 * GeoJSON features that have been drawn (updates on Save or Clear).
+	 */
+	export let savedFeatures: Feature[];
 
 	/**
 	 * The TerraDraw object.
@@ -57,6 +62,8 @@
 	const clickClear = () => {
 		terraDraw.clear();
 		terraDraw.getSnapshot();
+
+		savedFeatures = [];
 	};
 
 	const clickCancel = () => {
@@ -72,6 +79,8 @@
 		currentMode = undefined;
 		metaMode = 'default';
 		onDone(features);
+
+		savedFeatures = features;
 	};
 
 	const clickLoad = (geoJSON) => {

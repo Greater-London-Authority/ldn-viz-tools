@@ -20,9 +20,10 @@
 <script lang="ts">
 	import type { Feature } from 'geojson';
 
-	let features: Feature[] = [];
+	let savedFeatures: Feature[] = [];
 
-	const logShapeToConsole = (features: Feature[]) => console.log('User drew shape: ', features);
+	const logShapeToConsole = (savedFeatures: Feature[]) =>
+		console.log('User drew shape: ', savedFeatures);
 </script>
 
 <Story name="Default">
@@ -34,12 +35,12 @@
 			}}
 		>
 			<MapControlGroup position="TopLeft">
-				<MapDraw bind:features onDone={logShapeToConsole} />
+				<MapDraw bind:savedFeatures onDone={logShapeToConsole} />
 			</MapControlGroup>
 		</Map>
 	</div>
 
-	<pre>{JSON.stringify(features, null, 4)}</pre>
+	<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
 </Story>
 
 <Story name="Allow all specific modes/tools">
@@ -52,7 +53,7 @@
 		>
 			<MapControlGroup position="TopLeft">
 				<MapDraw
-					bind:features
+					bind:savedFeatures
 					enabledModes={[
 						'point',
 						'polygon',
@@ -67,5 +68,5 @@
 		</Map>
 	</div>
 
-	<pre>{JSON.stringify(features, null, 4)}</pre>
+	<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
 </Story>

@@ -35,9 +35,14 @@
 	export let currentMode: string;
 
 	/**
-	 * GeoJSON features that have been drawn.
+	 * GeoJSON features that have been drawn (continuously updates).
 	 */
 	export let features: Feature[]; // can't control externally yet
+
+	/**
+	 * GeoJSON features that have been drawn (updates on Save or Clear).
+	 */
+	export let savedFeatures: Feature[];
 
 	/**
 	 * Function to be called when user clicks 'Done' button.
@@ -166,13 +171,13 @@
 	});
 
 	let draw: TerraDraw;
-  let adapter: TerraDrawBaseAdapter;
+	let adapter: TerraDrawBaseAdapter;
 
 	const createTerraDraw = () => {
 		if ($mapStore) {
 			const modes = [...enabledModes.map((modeName) => modeMapping[modeName]), selectMode];
 
-      adapter = new TerraDrawMapLibreGLAdapter({ map: $mapStore });
+			adapter = new TerraDrawMapLibreGLAdapter({ map: $mapStore });
 
 			draw = new TerraDraw({
 				adapter,
@@ -186,6 +191,11 @@
 				if (context.action === 'draw') {
 					currentMode = 'select';
 				}
+			});
+
+			// continuously update features
+			draw.on('change', () => {
+				features = draw.getSnapshot();
 			});
 		}
 	};
@@ -203,15 +213,22 @@
 
 	$: setMode(currentMode);
 
-  onDestroy(() => {
-    // if we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
-    if (draw){
-      draw.clear();
-    }
-    if (adapter){
-       adapter.unregister()
-    }
-  })
+	onDestroy(() => {
+		// if we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
+		if (draw) {
+			draw.clear();
+		}
+		if (adapter) {
+			adapter.unregister();
+		}
+	});
 </script>
 
-<MapDrawControls {enabledModes} {features} bind:currentMode {onDone} terraDraw={draw} />
+<MapDrawControls
+	{enabledModes}
+	{features}
+	bind:savedFeatures
+	bind:currentMode
+	{onDone}
+	terraDraw={draw}
+/>
