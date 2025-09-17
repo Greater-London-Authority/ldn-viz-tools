@@ -62,8 +62,6 @@
 	const clickClear = () => {
 		terraDraw.clear();
 		terraDraw.getSnapshot();
-
-		savedFeatures = [];
 	};
 
 	const clickCancel = () => {
