@@ -186,6 +186,10 @@
 
 			draw.start();
 
+			if (savedFeatures.length > 0) {
+				draw.addFeatures(savedFeatures);
+			}
+
 			// once a user has finished creating a shape, reset to select tool
 			draw.on('finish', (id: string, context: { action: string; mode: string }) => {
 				if (context.action === 'draw') {

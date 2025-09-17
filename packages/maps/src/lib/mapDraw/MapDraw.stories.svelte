@@ -22,6 +22,27 @@
 
 	let savedFeatures: Feature[] = [];
 
+	let savedFeatures2 = [
+		{
+			id: 'eda554be-53a7-402d-9e4f-d17eb74a5f8e',
+			type: 'Feature',
+			geometry: {
+				type: 'Polygon',
+				coordinates: [
+					[
+						[-0.336512108, 51.720280543],
+						[-0.260034188, 51.575641207],
+						[-0.088723647, 51.670600962],
+						[-0.336512108, 51.720280543]
+					]
+				]
+			},
+			properties: {
+				mode: 'polygon'
+			}
+		}
+	];
+
 	const logShapeToConsole = (savedFeatures: Feature[]) =>
 		console.log('User drew shape: ', savedFeatures);
 </script>
@@ -69,4 +90,20 @@
 	</div>
 
 	<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
+</Story>
+
+<Story name="Load saved feature">
+	<div class="w-[100dvw] h-[100dvh]">
+		<Map
+			options={{
+				style: os_light_vts,
+				transformRequest: appendOSKeyToUrl(OS_KEY)
+			}}
+		>
+			<MapControlGroup position="TopLeft">
+				<MapDraw bind:savedFeatures={savedFeatures2} />
+			</MapControlGroup>
+		</Map>
+	</div>
+	<pre>{JSON.stringify(savedFeatures2, null, 4)}</pre>
 </Story>
