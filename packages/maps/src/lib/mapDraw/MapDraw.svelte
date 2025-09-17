@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 
 	import {
 		TerraDraw,
@@ -15,6 +15,7 @@
 	//import type { HexColorStyling } from 'terra-draw';
 
 	import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
+	import type { TerraDrawBaseAdapter } from 'terra-draw/dist/common/base.adapter';
 
 	import type { Feature } from 'geojson';
 	import { currentTheme, tokenNameToValue } from '../../../../ui/dist/theme/themeStore';
@@ -75,8 +76,6 @@
 
 		select: new TerraDrawSelectMode()
 	};
-
-	$: console.log($mapStore);
 
 	const selectMode = new TerraDrawSelectMode({
 		// Allow manual deselection of features
@@ -167,12 +166,16 @@
 	});
 
 	let draw: TerraDraw;
+  let adapter: TerraDrawBaseAdapter;
+
 	const createTerraDraw = () => {
 		if ($mapStore) {
 			const modes = [...enabledModes.map((modeName) => modeMapping[modeName]), selectMode];
 
+      adapter = new TerraDrawMapLibreGLAdapter({ map: $mapStore });
+
 			draw = new TerraDraw({
-				adapter: new TerraDrawMapLibreGLAdapter({ map: $mapStore }),
+				adapter,
 				modes
 			});
 
@@ -199,6 +202,16 @@
 	};
 
 	$: setMode(currentMode);
+
+  onDestroy(() => {
+    // if we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
+    if (draw){
+      draw.clear();
+    }
+    if (adapter){
+       adapter.unregister()
+    }
+  })
 </script>
 
 <MapDrawControls {enabledModes} {features} bind:currentMode {onDone} terraDraw={draw} />
