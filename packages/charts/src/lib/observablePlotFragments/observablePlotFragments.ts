@@ -2,7 +2,7 @@ import { theme } from '@ldn-viz/ui';
 
 import type { AxisOptions } from '@observablehq/plot';
 
-export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for inter
+export const fontStack = "'Inter', system-ui, sans-serif";
 type DefaultPlotStyleFunctions = {
 	[key: string]: () => any;
 };
