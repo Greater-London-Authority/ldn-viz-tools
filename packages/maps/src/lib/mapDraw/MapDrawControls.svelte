@@ -102,7 +102,7 @@
 
 <div class="flex gap-2">
 	{#if metaMode === 'edit'}
-		<div class="flex flex-col gap-1 pointer-events-auto">
+		<div class="flex flex-col gap-1 pointer-events-auto pt-1">
 			<Button
 				variant="square"
 				size="lg"
@@ -138,7 +138,7 @@
 		</div>
 
 		<div class="pointer-events-auto h-fit">
-			<RadioButtonGroupSolid label="Drawing tool" name="" {options} bind:selectedId={currentMode} />
+			<RadioButtonGroupSolid name="" {options} bind:selectedId={currentMode} />
 		</div>
 	{:else if metaMode === 'upload'}
 		<FileUpload onCancel={() => (metaMode = 'default')} onLoad={clickLoad} />
