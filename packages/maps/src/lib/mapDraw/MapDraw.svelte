@@ -18,7 +18,7 @@
 	import type { TerraDrawBaseAdapter } from 'terra-draw/dist/common/base.adapter';
 
 	import type { Feature } from 'geojson';
-	import { currentTheme, tokenNameToValue } from '../../../../ui/dist/theme/themeStore';
+	import { currentTheme, tokenNameToValue } from '@ldn-viz/ui';
 	import type { MapLibreStore } from '../map/types';
 	import MapDrawControls from './MapDrawControls.svelte';
 
