@@ -34,6 +34,9 @@ export const tabThemeOverride = '[&>button]:bg-color-container-level-0 [&>button
 export const tabLabelOverride =
 	'[&>button]:text-xs [&>button]:w-20 [&>button]:h-20 [&>button]:p-2 [&>button]:flex [&>button]:flex-col [&>button]:items-center [&>button]:justify-center [&>button]:text-center';
 
+// These classes override the margin-right on icons in 'horizontal' style tabLabels in a sidebar context
+export const tabIconOverride = '[&>button>svg]:mr-0 [&>button>svg]:mb-1';
+
 // The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {
 	standard: {
