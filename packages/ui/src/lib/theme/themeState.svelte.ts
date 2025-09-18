@@ -1,6 +1,6 @@
-import { mode, type SystemModeValue } from 'mode-watcher';
-import { colorToRGBArray } from '@ldn-viz/utils';
 import tokens from '@ldn-viz/themes/styles/js/theme-tokens.js';
+import { colorToRGBArray } from '@ldn-viz/utils';
+import { mode, type SystemModeValue } from 'mode-watcher';
 
 type ThemeObject<T> = {
 	[key: string]: T | ThemeObject<T>;
@@ -8,7 +8,9 @@ type ThemeObject<T> = {
 
 class ThemeState {
 	currentMode: SystemModeValue = $derived(mode.current);
-	currentTheme: ThemeObject<any> = $derived.by(() => tokens.theme[mode.current ? mode.current : 'light']);
+	currentTheme: ThemeObject<any> = $derived.by(
+		() => tokens.theme[mode.current ? mode.current : 'light']
+	);
 
 	tokenNameToValue = (colorName: string, theme: ThemeObject<any> = this.currentTheme) => {
 		let val = theme.color;
