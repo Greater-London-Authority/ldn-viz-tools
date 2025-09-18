@@ -87,7 +87,7 @@
 	<MapLegend {...args} />
 {/snippet}
 
-<Story name="Legend on map">
+<Story name="Default">
 	{#snippet template({ args })}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
