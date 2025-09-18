@@ -3,6 +3,7 @@
 	import { getContext } from 'svelte';
 	import { get, type Writable } from 'svelte/store';
 	import {
+		tabIconOverride,
 		tabLabelOverride,
 		tabLayoutOverride,
 		tabThemeOverride
@@ -74,5 +75,10 @@
 	{orientation}
 	{tabs}
 	{onChange}
-	class={classNames(tabLayoutOverride[orientation], tabThemeOverride, tabLabelOverride)}
+	class={classNames(
+		tabLayoutOverride[orientation],
+		tabThemeOverride,
+		tabLabelOverride,
+		tabIconOverride
+	)}
 />
