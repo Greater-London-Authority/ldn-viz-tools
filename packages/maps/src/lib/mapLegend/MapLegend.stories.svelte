@@ -25,17 +25,11 @@
 	let options = [
 		{
 			id: 'sequential-layer',
-			label: 'Sequential',
-			disableSizeControl: true,
-			disableOpacityControl: true,
-			disableColorControl: true
+			label: 'Sequential'
 		},
 		{
 			id: 'diverging-layer',
-			label: 'Diverging',
-			disableSizeControl: true,
-			disableOpacityControl: true,
-			disableColorControl: true
+			label: 'Diverging'
 		}
 	];
 
@@ -270,6 +264,30 @@
 								<p class="text-color-text-primary text-sm">Please choose a layer.</p>
 							{/if}
 						{/key}
+					</MapLegend>
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="With layer control group">
+	{#snippet template({ args })}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+				bind:mapStore
+			>
+				<MapControlGroup position="BottomRight" classes="bottom-16 left-6 sm:bottom-11">
+					<MapLegend {...args} bind:width>
+						<LayerControlGroup
+							bind:layersState={layerState}
+							{options}
+							disableOpacityControl
+							disableFillControl
+						/>
 					</MapLegend>
 				</MapControlGroup>
 			</Map>
