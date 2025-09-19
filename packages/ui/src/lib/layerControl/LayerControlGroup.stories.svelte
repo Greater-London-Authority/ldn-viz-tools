@@ -108,9 +108,13 @@
 	let ariaLabel = 'Customise layers';
 </script>
 
-<Story name="Default">
+<Story
+	exportName="LayerControlGroupStory"
+	name="Default"
+	args={{ options: optionsForGroup, layersState: state1, ariaLabel: ariaLabel }}
+>
 	{#snippet template(args)}
-		<LayerControlGroup {...args} options={optionsForGroup} bind:layersState={state1} {ariaLabel} />
+		<LayerControlGroup {...args} />
 		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
