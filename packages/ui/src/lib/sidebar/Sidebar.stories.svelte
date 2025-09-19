@@ -18,7 +18,7 @@
 	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 
-	let tabs = [
+	export let tabs = [
 		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
 		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
 		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },

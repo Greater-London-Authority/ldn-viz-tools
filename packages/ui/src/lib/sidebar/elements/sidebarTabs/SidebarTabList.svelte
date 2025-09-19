@@ -3,6 +3,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
 	import {
+		tabIconOverride,
 		tabLabelOverride,
 		tabLayoutOverride,
 		tabThemeOverride
@@ -69,7 +70,8 @@
 		class={classNames(
 			tabLayoutOverride[sidebarState?.orientation],
 			tabThemeOverride,
-			tabLabelOverride
+			tabLabelOverride,
+			tabIconOverride
 		)}
 	/>
 	{#if sidebarState?.isOpen && !sidebarState?.isAlwaysOpen}
