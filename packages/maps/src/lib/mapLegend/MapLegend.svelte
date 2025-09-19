@@ -43,7 +43,7 @@
 			</Button>
 		</div>
 		<!-- Pass in `ColorLegend` or other components in the default slot -->
-		{@render children?.()}
+		<div class="text-sm">{@render children?.()}</div>
 	</div>
 {:else}
 	<Button
