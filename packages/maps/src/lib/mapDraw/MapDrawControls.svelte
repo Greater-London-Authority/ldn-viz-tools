@@ -55,7 +55,7 @@
 	let previousFeatures: Feature[] = [];
 	const clickEdit = () => {
 		metaMode = 'edit';
-		previousFeatures = JSON.stringify(features);
+		previousFeatures = JSON.stringify(features || []);
 		console.log('previousFeatures is now:', { previousFeatures });
 	};
 
