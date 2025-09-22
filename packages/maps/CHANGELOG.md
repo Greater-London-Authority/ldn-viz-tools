@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.1.3
+
+### Patch Changes
+
+- 500256c: FIXED: fixes to the MapDraw component
+
 ## 8.1.2
 
 ### Patch Changes

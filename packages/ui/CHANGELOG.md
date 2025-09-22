@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 19.5.0
+
+### Minor Changes
+
+- 8171084: FIXED: Added tabIconOverride classes to SidebarTabList to ensure icons in sidebar tabs correctly have a margin-bottom instead of margin-right
+
 ## 19.4.1
 
 ### Patch Changes
