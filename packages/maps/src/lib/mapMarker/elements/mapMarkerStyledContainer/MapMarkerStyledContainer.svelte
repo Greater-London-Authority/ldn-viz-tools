@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { stopImmediatePropagation } from 'svelte/legacy';
-
 	/**
 	 * The `<MapMarkerStyledContainer>` component is a wrapping container for use
 	 * within marker components. It provides standardised styling that is
@@ -52,7 +50,7 @@
 		bind:this={container}
 		onwheel={preventZoom}
 		ontouchmove={preventZoom}
-		onmousemove={stopImmediatePropagation(() => {})}
+		onmousemove={(ev) => ev.stopImmediatePropagation()}
 		class={classes}
 		class:p-4={!noPad}
 		{...rest}
