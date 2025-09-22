@@ -12,7 +12,7 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	export const meta = {
-		title: 'Maps/MapDraw',
+		title: 'Maps/Components/MapDraw',
 		component: MapDraw
 	};
 </script>
