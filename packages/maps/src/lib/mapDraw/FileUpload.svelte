@@ -6,12 +6,19 @@
 	export let onCancel: () => void;
 	export let onLoad: (data: FeatureCollection) => void;
 
+	export let features;
+	export let savedFeatures;
+
 	let isDragging = false;
 
 	async function readFile(file) {
 		try {
 			const text = await file.text();
 			const parsedJson = JSON.parse(text);
+
+			features = parsedJson;
+			savedFeatures = parsedJson;
+
 			onLoad(parsedJson);
 		} catch (error) {
 			console.error('Error parsing JSON:', error);
