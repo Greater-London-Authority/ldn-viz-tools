@@ -9,6 +9,7 @@
 		TerraDrawPointMode,
 		TerraDrawPolygonMode,
 		TerraDrawRectangleMode,
+		TerraDrawRenderMode,
 		TerraDrawSectorMode,
 		TerraDrawSelectMode
 	} from 'terra-draw';
@@ -170,12 +171,17 @@
 		}
 	});
 
+	const renderMode = new TerraDrawRenderMode({
+			modeName: 'render',
+			styles: lightThemeStyle
+		});
+
 	let draw: TerraDraw;
 	let adapter: TerraDrawBaseAdapter;
 
 	const createTerraDraw = () => {
 		if ($mapStore) {
-			const modes = [...enabledModes.map((modeName) => modeMapping[modeName]), selectMode];
+			const modes = [...enabledModes.map((modeName) => modeMapping[modeName]), selectMode, renderMode];
 
 			adapter = new TerraDrawMapLibreGLAdapter({ map: $mapStore });
 
