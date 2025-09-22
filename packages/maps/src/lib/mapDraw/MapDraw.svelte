@@ -172,16 +172,20 @@
 	});
 
 	const renderMode = new TerraDrawRenderMode({
-			modeName: 'render',
-			styles: lightThemeStyle
-		});
+		modeName: 'render',
+		styles: lightThemeStyle
+	});
 
 	let draw: TerraDraw;
 	let adapter: TerraDrawBaseAdapter;
 
 	const createTerraDraw = () => {
 		if ($mapStore) {
-			const modes = [...enabledModes.map((modeName) => modeMapping[modeName]), selectMode, renderMode];
+			const modes = [
+				...enabledModes.map((modeName) => modeMapping[modeName]),
+				selectMode,
+				renderMode
+			];
 
 			adapter = new TerraDrawMapLibreGLAdapter({ map: $mapStore });
 
