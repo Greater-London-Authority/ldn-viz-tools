@@ -148,7 +148,12 @@
 			<RadioButtonGroupSolid name="" {options} bind:selectedId={currentMode} />
 		</div>
 	{:else if metaMode === 'upload'}
-		<FileUpload onCancel={() => (metaMode = 'default')} onLoad={clickLoad} bind:features bind:savedFeatures />
+		<FileUpload
+			onCancel={() => (metaMode = 'default')}
+			onLoad={clickLoad}
+			bind:features
+			bind:savedFeatures
+		/>
 	{:else}
 		<div class="flex flex-col gap-1 pointer-events-auto">
 			<Button variant="square" size="lg" on:click={clickEdit}>
