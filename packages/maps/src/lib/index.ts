@@ -32,6 +32,7 @@ export { default as MapMarker } from './mapMarker/MapMarker.svelte';
 
 export { default as MapDeckPopovers } from './mapDeckPopovers/MapDeckPopovers.svelte';
 export { default as MapDeckTooltips } from './mapDeckTooltips/MapDeckTooltips.svelte';
+export * from './mapDeckTooltips/stores';
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
