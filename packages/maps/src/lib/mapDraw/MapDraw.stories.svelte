@@ -44,7 +44,6 @@
 	];
 
 	const logShapeToConsole = (savedFeatures: Feature[]) =>
-		console.log('User drew shape: ', savedFeatures);
 </script>
 
 <Story name="Default">
