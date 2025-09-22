@@ -13,6 +13,7 @@
 	import type { ClientRectObject } from 'svelte-floating-ui/core';
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { type Writable, writable } from 'svelte/store';
+	import MapMarkerStyledContainer from '../mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		strategy: 'fixed', //or absolute
@@ -28,14 +29,14 @@
 	};
 
 	let getBoundingClientRect: ClientRectObject = $derived({
-			x,
-			y,
-			top: y,
-			left: x,
-			bottom: y,
-			right: x,
-			width: 0,
-			height: 0
+		x,
+		y,
+		top: y,
+		left: x,
+		bottom: y,
+		right: x,
+		width: 0,
+		height: 0
 	});
 
 	// we can ignore the state_referenced_locally warning, since an $effect block responds to changes in the state
@@ -106,15 +107,17 @@
 		use:floatingContent={dynamicOptions}
 		class:width={'100px'}
 		style:z-index={9999}
-		class="border-color-ui-border-secondary bg-color-container-level-0 pointer-events-none border p-2 text-sm shadow-lg"
+		class="pointer-events-none"
 	>
-		{#if typeof tooltipSpec === 'string'}
-			{tooltipSpec}
-		{:else if tooltipSpec && isConstructor(tooltipSpec)}
-			{@const SvelteComponent = tooltipSpec}
-			<SvelteComponent feature={$mousedOverObject.feature} />
-		{:else if typeof tooltipSpec === 'function'}
-			{tooltipSpec($mousedOverObject.feature)}
-		{/if}
+		<MapMarkerStyledContainer>
+			{#if typeof tooltipSpec === 'string'}
+				{tooltipSpec}
+			{:else if tooltipSpec && isConstructor(tooltipSpec)}
+				{@const SvelteComponent = tooltipSpec}
+				<SvelteComponent feature={$mousedOverObject.feature} layer={$mousedOverObject.layer} />
+			{:else if typeof tooltipSpec === 'function'}
+				{tooltipSpec($mousedOverObject.feature, $mousedOverObject.layer)}
+			{/if}
+		</MapMarkerStyledContainer>
 	</div>
 {/if}
