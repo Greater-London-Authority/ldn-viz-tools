@@ -74,7 +74,8 @@
 	};
 
 	const clickDone = () => {
-		currentMode = undefined;
+		currentMode = 'render';
+
 		metaMode = 'default';
 		onDone(features);
 
