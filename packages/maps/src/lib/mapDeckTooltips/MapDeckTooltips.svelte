@@ -9,7 +9,7 @@
 	import type { Layer } from '@deck.gl/core/typed';
 	import { mousedOverObject } from './stores';
 
-	import { arrow, createFloatingActions } from 'svelte-floating-ui';
+	import { arrow, createFloatingActions, createVirtualElement } from 'svelte-floating-ui';
 	import type { ClientRectObject } from 'svelte-floating-ui/core';
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { type Writable, writable } from 'svelte/store';
@@ -27,8 +27,7 @@
 		y = ev.clientY;
 	};
 
-	let getBoundingClientRect = $derived((): ClientRectObject => {
-		return {
+	let getBoundingClientRect: ClientRectObject = $derived({
 			x,
 			y,
 			top: y,
@@ -37,13 +36,13 @@
 			right: x,
 			width: 0,
 			height: 0
-		};
 	});
 
-	const virtualElement = writable({ getBoundingClientRect });
+	// we can ignore the state_referenced_locally warning, since an $effect block responds to changes in the state
+	const virtualElement = createVirtualElement({ getBoundingClientRect });
 
 	$effect(() => {
-		virtualElement.set({ getBoundingClientRect });
+		virtualElement.update({ getBoundingClientRect });
 	});
 
 	floatingRef(virtualElement);
