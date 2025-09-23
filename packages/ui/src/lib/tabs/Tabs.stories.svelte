@@ -7,7 +7,7 @@
 
 	//Example components passed to panel In reality these would be contained in your app
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { First, Second, Third, Fourth } from './demoSections';
+	import { First, Fourth, Second, Third } from './demoSections';
 	import type { Tab } from './types';
 
 	const { Story } = defineMeta({
@@ -36,7 +36,13 @@
 		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
 	];
 
-	let selectedTabId = 'aggregates';
+	// updated this to use $state rune, so it updates correctly
+	let selectedTabId = $state('aggregates');
+</script>
+
+<script>
+	// added a console log here to demonstrate that state is now accessible externally
+	$inspect(selectedTabId);
 </script>
 
 <Story name="Default">
