@@ -1,6 +1,4 @@
 <script lang="ts">
-	//TODO: RESTRUCTURE TABS USING REACTIVE CONTECT INSTEAD OF BINDING TO PASS STATE
-
 	/**
 	 * The `<Tabs>` component creates an accessible set uf tabs comprised of a `<TabList>` containing a set of `<TabLabel>`. Selecting a tab will make the relevant content in the associated `<TabPanel>` visible.
 	 *
@@ -41,19 +39,20 @@
 		 * Enables screen reader to describe purpose of tab list. Required.
 		 */
 		ariaLabel: string;
+
+		onChange?: any;
 	}
 
 	let {
 		tabs = [],
 		selectedTabId = $bindable(),
 		orientation = 'horizontal',
-		ariaLabel
+		ariaLabel,
+		onChange = (tabId: Tab['id']) => {
+			selectedTabId = tabId;
+		}
 	}: Props = $props();
 
-	// stores currently selected tab inside `tabState`, in an external file to persist even if tabs are unmounted
-	// if selectedTabId exists, tabState.current is initialised with that value
-	// from then on, tabState.current is passed down into children
-	// selectedTabId is never reassigned, even when tabState.current changes
 	tabState.current = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;
 
 	let component = $derived(tabs.find((tab) => tab.id === tabState.current)?.content);
@@ -64,13 +63,6 @@
 	};
 
 	let tabClasses = $derived(classNames(orientationClasses[orientation]));
-
-	// I pass down an event listener to TabList to update selectedTabId here when the tab changes.
-	// This successfully allows selectedTabId state to be accessed outside of Tabs, in a parent component.
-	// try removing the onChange and see what is console logged in the story
-	const onChange = (id: string) => {
-		selectedTabId = id;
-	};
 </script>
 
 <div class={tabClasses}>

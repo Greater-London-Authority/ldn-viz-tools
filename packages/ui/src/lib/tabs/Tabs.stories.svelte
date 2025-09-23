@@ -36,13 +36,7 @@
 		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
 	];
 
-	// updated this to use $state rune, so it updates correctly
 	let selectedTabId = $state('aggregates');
-</script>
-
-<script>
-	// added a console log here to demonstrate that state is now accessible externally
-	$inspect(selectedTabId);
 </script>
 
 <Story name="Default">
