@@ -1,7 +1,4 @@
-import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
-
-import type { GeocoderAdapter } from './GeocoderAdapter';
-import type { GeolocationNamed } from './types';
+import type { GeocoderAdapter, GeolocationNamed } from '@ldn-viz/ui';
 
 // LocalCustodianCode represents a mapping between a custodian code and its
 // readable label.
@@ -172,21 +169,21 @@ interface OSPlaces {
 // represents the borough or borough sized geographical area.
 //
 // OS Places now provides a way to add a bounding box to the query url
-export class GeocoderAdapterOSPlaces implements GeocoderAdapter {
+export class MapGeocoderAdapterOSPlaces implements GeocoderAdapter {
 	private _key: string = '';
-	private _lcc: number = -1;
+	//private _lcc: number = -1;
 	private _resultCount: number = 5;
 
-	constructor(key: string, localCustodianCode: number, resultCount = 5) {
+	constructor(key: string, resultCount = 5) {
 		this._key = key;
-		this._lcc = localCustodianCode;
-		this._resultCount = resultCount;
+		//this.setLocalCustodianCode(localCustodianCode);
+		this.setResultCount(resultCount);
 	}
 
 	// GeocoderAdapter functions.
 
 	search(text: string) {
-		const url = buildUrl(text, this._key, this._lcc, this._resultCount);
+		const url = buildUrl(text, this._key, this._resultCount);
 		return fetch(url)
 			.then((res) => res.json())
 			.then(transformResultsToGeolocationNameds);
@@ -201,26 +198,26 @@ export class GeocoderAdapterOSPlaces implements GeocoderAdapter {
 
 	// GeocoderAdapterOSPlaces functions.
 
-	setLocalCustodianCode(_lcc: number): GeocoderAdapterOSPlaces {
-		this._lcc = _lcc;
-		return this;
-	}
+	// setLocalCustodianCode(_lcc: number): MapGeocoderAdapterOSPlaces {
+	// 	this._lcc = _lcc;
+	// 	return this;
+	// }
 
-	setResultCount(resultCount: number): GeocoderAdapterOSPlaces {
+	setResultCount(resultCount: number): MapGeocoderAdapterOSPlaces {
 		this._resultCount = resultCount;
 		return this;
 	}
 }
 
-const buildUrl = (text: string, key: string, lcc: number, resultCount: number): string => {
+const buildUrl = (text: string, key: string, resultCount: number): string => {
 	const queryString = new URLSearchParams({
 		query: encodeURIComponent(text),
 		key: key,
 		output_srs: 'WGS84',
 		format: 'JSON',
 		maxresults: resultCount.toString(),
-		fq: `LOCAL_CUSTODIAN_CODE:${lcc}`,
-		bbox: GREATER_LONDON_BOUNDS_PADDED.flat().toString()
+		//fq: `LOCAL_CUSTODIAN_CODE:${lcc}`,
+		bbox: GREATER_LONDON_BOUNDS_BNG_PADDED.flat().toString()
 	});
 
 	return `https://api.os.uk/search/places/v1/find?${queryString}`;
@@ -237,5 +234,3 @@ const transformResultsToGeolocationNameds = (data: OSPlaces): GeolocationNamed[]
 		center: [loc.DPA.LNG, loc.DPA.LAT]
 	}));
 };
-
-export default GeocoderAdapterOSPlaces;

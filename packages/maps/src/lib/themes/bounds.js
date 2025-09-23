@@ -42,10 +42,22 @@ export const GREATER_LONDON_BOUNDS = [
 	[-0.517, 51.278],
 	[0.342, 51.698]
 ];
+
+export const GREATER_LONDON_BOUNDS_BNG = [
+	[498542, 155836],
+	[561095, 200263]
+];
+
 export const GREATER_LONDON_BOUNDS_PADDED = scaleBounds(GREATER_LONDON_BOUNDS, {
 	x: 1.05,
 	y: 1.05
 });
+
+export const GREATER_LONDON_BOUNDS_BNG_PADDED = scaleBounds(GREATER_LONDON_BOUNDS_BNG, {
+	x: 1.05,
+	y: 1.05
+});
+
 export const GREATER_LONDON_BOUNDS_MAX = scaleBounds(
 	GREATER_LONDON_BOUNDS,
 	{ x: 2.5, y: 2.8 } // Tuned to fit both tall and wide devices
@@ -57,6 +69,8 @@ export default {
 	GREATER_LONDON_CENTER,
 	GREATER_LONDON_BOUNDS,
 	GREATER_LONDON_BOUNDS_PADDED,
+	GREATER_LONDON_BOUNDS_BNG,
+	GREATER_LONDON_BOUNDS_BNG_PADDED,
 	GREATER_LONDON_BOUNDS_MAX,
 	centerOfBounds,
 	scaleBounds
