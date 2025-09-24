@@ -8,7 +8,6 @@
 	import { classNames } from './../utils/classNames';
 	import TabList from './TabList.svelte';
 	import TabPanel from './TabPanel.svelte';
-	import { tabState } from './tabState.svelte';
 	import type { Tab } from './types';
 
 	interface Props {
@@ -37,7 +36,7 @@
 		 */
 		ariaLabel: string;
 
-		onChange?: (args: any) => void;
+		onChange?: any;
 	}
 
 	let {
@@ -48,9 +47,9 @@
 		onChange
 	}: Props = $props();
 
-	tabState.current = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;
+	selectedTabId = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;
 
-	let component = $derived(tabs.find((tab) => tab.id === tabState.current)?.content);
+	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
 
 	const orientationClasses = {
 		vertical: 'flex w-full',
@@ -61,10 +60,10 @@
 </script>
 
 <div class={tabClasses}>
-	<TabList {ariaLabel} {orientation} {tabs} {onChange} bind:selectedTabId={tabState.current} />
+	<TabList {ariaLabel} {orientation} {tabs} {onChange} bind:selectedTabId />
 
 	{#each tabs as tab}
-		{#if component && tabState.current === tab.id}
+		{#if component && selectedTabId === tab.id}
 			<TabPanel tabPanelId={`${tab.id}-panel`} tabId={tab.id}>
 				{@const SvelteComponent = component}
 				<SvelteComponent />

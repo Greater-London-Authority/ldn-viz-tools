@@ -7,5 +7,4 @@ export interface Tab {
 	icon?: IconSource;
 	rawIcon?: Component;
 	content: Component;
-	description?: string;
 }
