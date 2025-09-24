@@ -37,7 +37,7 @@
 		 */
 		ariaLabel: string;
 
-		onChange?: () => void;
+		onChange?: (args: any) => void;
 	}
 
 	let {

@@ -1,6 +1,6 @@
 <script module lang="ts">
-	import TabPanel from './TabLabel.svelte';
 	import TabList from './TabList.svelte';
+	import TabPanel from './TabPanel.svelte';
 	import Tabs from './Tabs.svelte';
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
