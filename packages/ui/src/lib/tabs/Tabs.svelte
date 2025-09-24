@@ -1,6 +1,4 @@
 <script lang="ts">
-	//TODO: RESTRUCTURE TABS USING REACTIVE CONTECT INSTEAD OF BINDING TO PASS STATE
-
 	/**
 	 * The `<Tabs>` component creates an accessible set uf tabs comprised of a `<TabList>` containing a set of `<TabLabel>`. Selecting a tab will make the relevant content in the associated `<TabPanel>` visible.
 	 *
@@ -10,11 +8,7 @@
 	import { classNames } from './../utils/classNames';
 	import TabList from './TabList.svelte';
 	import TabPanel from './TabPanel.svelte';
-	import { getTabState, setTabState } from './tabState.svelte';
 	import type { Tab } from './types';
-
-	setTabState();
-	let tabState = getTabState();
 
 	interface Props {
 		/**
@@ -41,18 +35,21 @@
 		 * Enables screen reader to describe purpose of tab list. Required.
 		 */
 		ariaLabel: string;
+
+		onChange?: any;
 	}
 
 	let {
 		tabs = [],
 		selectedTabId = $bindable(),
 		orientation = 'horizontal',
-		ariaLabel
+		ariaLabel,
+		onChange
 	}: Props = $props();
 
-	tabState.current = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;
+	selectedTabId = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;
 
-	let component = $derived(tabs.find((tab) => tab.id === tabState.current)?.content);
+	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
 
 	const orientationClasses = {
 		vertical: 'flex w-full',
@@ -63,10 +60,10 @@
 </script>
 
 <div class={tabClasses}>
-	<TabList {ariaLabel} {orientation} {tabs} bind:selectedTabId={tabState.current} />
+	<TabList {ariaLabel} {orientation} {tabs} {onChange} bind:selectedTabId />
 
 	{#each tabs as tab}
-		{#if component && tabState.current === tab.id}
+		{#if component && selectedTabId === tab.id}
 			<TabPanel tabPanelId={`${tab.id}-panel`} tabId={tab.id}>
 				{@const SvelteComponent = component}
 				<SvelteComponent />
