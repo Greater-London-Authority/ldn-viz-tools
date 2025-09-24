@@ -7,6 +7,7 @@
 
 	//Example components passed to panel In reality these would be contained in your app
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
 	import { First, Fourth, Second, Third } from './demoSections';
 	import type { Tab } from './types';
 
@@ -23,10 +24,34 @@
 	});
 
 	let tabs: Tab[] = [
-		{ id: 'aggregates', label: 'Aggregated counts across London', content: First },
-		{ id: 'chargers', label: 'Details of chargers', content: Second },
-		{ id: 'averages', label: 'Averages of charge events', content: Third },
-		{ id: 'histograms', label: 'Histograms of charge events', content: Fourth }
+		{
+			id: 'aggregates',
+			label: 'Aggregated counts across London',
+			content: First,
+			description:
+				'You may want a responsive description preceding the Tabs based on the selected tab. The selected tab is: Aggregated counts across London'
+		},
+		{
+			id: 'chargers',
+			label: 'Details of chargers',
+			content: Second,
+			description:
+				'You may want a responsive description preceding the Tabs based on the selected tab. The selected tab is: Details of chargers'
+		},
+		{
+			id: 'averages',
+			label: 'Averages of charge events',
+			content: Third,
+			description:
+				'You may want a responsive description preceding the Tabs based on the selected tab. The selected tab is: Averages of charge events'
+		},
+		{
+			id: 'histograms',
+			label: 'Histograms of charge events',
+			content: Fourth,
+			description:
+				'You may want a responsive description preceding the Tabs based on the selected tab. The selected tab is: Histograms of charge events'
+		}
 	];
 
 	let tabsWithIcons: Tab[] = [
@@ -37,6 +62,8 @@
 	];
 
 	let selectedTabId = $state('chargers');
+
+	let description = $derived(tabs.find((t) => t.id === selectedTabId)!.description);
 </script>
 
 <Story name="Default">
@@ -75,6 +102,32 @@
 			tabs={tabsWithIcons}
 			ariaLabel="View information on EV chargers"
 			orientation="vertical"
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Externally update selected tab">
+	{#snippet template(args)}
+		<Button onclick={() => (selectedTabId = 'histograms')}>Select histograms tab</Button>
+		<Tabs
+			{...args}
+			{tabs}
+			onChange={(id: string) => (selectedTabId = id)}
+			bind:selectedTabId
+			ariaLabel="View information on EV chargers"
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Update external description">
+	{#snippet template(args)}
+		<p>{description}</p>
+		<Tabs
+			{...args}
+			{tabs}
+			onChange={(id: string) => (selectedTabId = id)}
+			bind:selectedTabId
+			ariaLabel="View information on EV chargers"
 		/>
 	{/snippet}
 </Story>
