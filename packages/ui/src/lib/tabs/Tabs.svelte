@@ -8,11 +8,8 @@
 	import { classNames } from './../utils/classNames';
 	import TabList from './TabList.svelte';
 	import TabPanel from './TabPanel.svelte';
-	import { getTabState, setTabState } from './tabState.svelte';
+	import { tabState } from './tabState.svelte';
 	import type { Tab } from './types';
-
-	setTabState();
-	let tabState = getTabState();
 
 	interface Props {
 		/**
@@ -40,7 +37,7 @@
 		 */
 		ariaLabel: string;
 
-		onChange?: any;
+		onChange?: () => void;
 	}
 
 	let {
@@ -48,9 +45,7 @@
 		selectedTabId = $bindable(),
 		orientation = 'horizontal',
 		ariaLabel,
-		onChange = (tabId: Tab['id']) => {
-			selectedTabId = tabId;
-		}
+		onChange
 	}: Props = $props();
 
 	tabState.current = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;

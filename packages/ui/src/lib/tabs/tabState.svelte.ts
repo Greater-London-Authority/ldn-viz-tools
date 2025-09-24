@@ -1,15 +1,5 @@
-import { getContext, setContext } from 'svelte';
+type TabState = { current: string | undefined };
 
-export class TabState {
-	current? = $state('');
-}
-
-const TAB_KEY = Symbol('TABS');
-
-export function setTabState() {
-	return setContext(TAB_KEY, new TabState());
-}
-
-export function getTabState() {
-	return getContext<ReturnType<typeof setTabState>>(TAB_KEY);
-}
+export const tabState: TabState = $state({
+	current: undefined
+});

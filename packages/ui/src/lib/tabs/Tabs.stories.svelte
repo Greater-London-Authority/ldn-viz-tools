@@ -36,7 +36,7 @@
 		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
 	];
 
-	let selectedTabId = $state('aggregates');
+	let selectedTabId = $state('chargers');
 </script>
 
 <Story name="Default">
