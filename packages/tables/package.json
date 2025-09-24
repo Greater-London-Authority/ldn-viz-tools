@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/tables",
-	"version": "5.0.0-svelte5.1",
+	"version": "5.0.0-svelte5.2",
 	"keywords": [
 		"svelte"
 	],
@@ -38,9 +38,9 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@ldn-viz/charts": "7.0.0-svelte5.1",
+		"@ldn-viz/charts": "7.0.0-svelte5.2",
 		"@ldn-viz/themes": "*",
-		"@ldn-viz/ui": "21.0.0-svelte5.1",
+		"@ldn-viz/ui": "21.0.0-svelte5.2",
 		"@ldn-viz/utils": "*",
 		"@melt-ui/svelte": "^0.86.0",
 		"@tailwindcss/typography": "^0.5.10",
