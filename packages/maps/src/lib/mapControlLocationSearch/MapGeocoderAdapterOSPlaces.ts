@@ -1,4 +1,5 @@
 import type { GeocoderAdapter, GeolocationNamed } from '@ldn-viz/ui';
+import { GREATER_LONDON_BOUNDS_BNG_PADDED } from '../themes/bounds';
 
 // LocalCustodianCode represents a mapping between a custodian code and its
 // readable label.
@@ -188,6 +189,8 @@ export class MapGeocoderAdapterOSPlaces implements GeocoderAdapter {
 			.then((res) => res.json())
 			.then(transformResultsToGeolocationNameds);
 	}
+
+	retrieve(id: string) {}
 
 	attribution() {
 		return {
