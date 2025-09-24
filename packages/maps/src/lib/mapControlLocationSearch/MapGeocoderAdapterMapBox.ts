@@ -1,22 +1,27 @@
 import { GREATER_LONDON_BOUNDS_PADDED } from '@ldn-viz/maps';
-import type {
-	GeolocationCoords,
-	GeolocationBounds,
-	GeolocationNamed,
-	GeocoderAdapter
-} from '@ldn-viz/ui';
+import type { GeocoderAdapter, GeolocationNamed } from '@ldn-viz/ui';
 
-type MapBoxFeature = {
-	id: string;
-	text: string; // name
-	place_name: string; // address
-	center: [number, number];
-	bbox?: [number, number, number, number]; // bounds
-	[otherOptions: string]: unknown;
+interface RetrieveFeatureCollection {
+	features: Array<{
+		properties: {
+			mapbox_id: string;
+			name: string;
+			place_formatted: string;
+		};
+		geometry: {
+			coordinates: number[]; // e.g., [longitude, latitude]
+		};
+	}>;
+}
+
+type SearchBoxFeature = {
+	mapbox_id: string;
+	name: string; // name
+	place_formatted: string; // address
 };
 
-type MapBoxFeatureCollection = {
-	features: MapBoxFeature[];
+type SuggestFeatureCollection = {
+	suggestions: SearchBoxFeature[];
 	[otherOptions: string]: unknown;
 };
 
@@ -27,19 +32,33 @@ type MapBoxFeatureCollection = {
 export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 	private _token: string = '';
 	private _resultCount: number = 5;
+	private _sessionToken: string = '';
+	static retrieveLocation: any;
 
 	constructor(token: string, resultCount = 5) {
 		this._token = token;
 		this.setResultCount(resultCount);
+		this.resetSessionToken(); // Initialize session token
+	}
+
+	private resetSessionToken() {
+		this._sessionToken = crypto.randomUUID(); // Generate a new session token
 	}
 
 	// GeocoderAdapter functions.
 
 	search(text: string) {
-		const url = buildUrl(text, this._token, this._resultCount);
+		const url = buildSuggestionUrl(text, this._token, this._resultCount, this._sessionToken);
 		return fetch(url)
 			.then((res) => res.json())
-			.then(transformGeoJSONToNamedGeolocations);
+			.then(transformSuggestGeoJSONToNamedGeolocations);
+	}
+
+	retrieve(id: string) {
+		const url = buildRetrieveUrl(id, this._token, this._sessionToken);
+		return fetch(url)
+			.then((res) => res.json())
+			.then(transformRetrieveGeoJSONToNamedGeolocations) as Promise<GeolocationNamed>;
 	}
 
 	attribution() {
@@ -69,55 +88,56 @@ export class MapGeocoderAdapterMapBox implements GeocoderAdapter {
 	}
 }
 
-const buildUrl = (text: string, token: string, resultCount: number): string => {
+// Searchbox api 'suggest' endpoint to return a list of a suggestions based off of users input
+const buildSuggestionUrl = (
+	text: string,
+	token: string,
+	resultCount: number,
+	session_token: string
+): string => {
 	text = encodeURIComponent(text);
 
 	const queryString = new URLSearchParams({
 		access_token: token,
 		bbox: GREATER_LONDON_BOUNDS_PADDED.flat().toString(),
-		autocomplete: true.toString(),
-		limit: resultCount.toString()
+		//autocomplete: true.toString(),
+		limit: resultCount.toString(),
+		session_token: session_token
 	});
 
-	return `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${queryString}`;
+	return `https://api.mapbox.com/search/searchbox/v1/suggest?q=${text}&${queryString}`;
 };
 
-const transformGeoJSONToNamedGeolocations = (
-	geojson: MapBoxFeatureCollection
-): GeolocationNamed[] => {
-	return geojson.features.map((loc) => {
+// Searchbox api 'retrieve' endpoint to return the geometry of selected value from sugestion list
+const buildRetrieveUrl = (suggestionId: string, token: string, session_token: string): string => {
+	suggestionId = encodeURIComponent(suggestionId);
+	const queryString = new URLSearchParams({
+		access_token: token,
+		session_token: session_token
+	});
+
+	return `https://api.mapbox.com/search/searchbox/v1/retrieve/${suggestionId}?${queryString}`;
+};
+
+const transformSuggestGeoJSONToNamedGeolocations = (geojson: SuggestFeatureCollection) => {
+	return geojson.suggestions.map((loc) => {
 		return {
-			id: loc.id,
-			name: loc.text,
-			address: removeNameFromAddress(loc.place_name, loc.text),
-			// loc.center isn't always the center of the bbox
-			center: calcBoundingBoxCenter(loc.bbox, loc.center),
-			bounds: loc.bbox
-		};
+			id: loc.mapbox_id,
+			name: loc.name,
+			address: loc.place_formatted
+		} as GeolocationNamed;
 	});
 };
 
-const removeNameFromAddress = (address: string, name: string) => {
-	if (!address.startsWith(name)) {
-		return address;
-	}
+const transformRetrieveGeoJSONToNamedGeolocations = (geojson: RetrieveFeatureCollection) => {
+	// Return only the first transformed feature
+	const firstFeature = geojson.features[0];
 
-	address = address.slice(name.length).trim();
-
-	if (address.startsWith(',')) {
-		return address.slice(1).trim();
-	}
-
-	return address;
-};
-
-const calcBoundingBoxCenter = (
-	bbox: undefined | GeolocationBounds,
-	center: GeolocationCoords
-): GeolocationCoords => {
-	if (!bbox) {
-		return center;
-	}
-
-	return [(bbox[0] + bbox[2]) / 2, (bbox[1] + bbox[3]) / 2];
+	// Transform and return the first feature only
+	return {
+		id: firstFeature.properties.mapbox_id,
+		name: firstFeature.properties.name,
+		address: firstFeature.properties.place_formatted,
+		center: [firstFeature.geometry.coordinates[0], firstFeature.geometry.coordinates[1]]
+	};
 };

@@ -10,6 +10,7 @@ export { default as MapControlGroup } from './mapControlGroup/MapControlGroup.sv
 export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
+export { default as MapLegend } from './mapLegend/MapLegend.svelte';
 
 // Location Search
 export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
@@ -32,6 +33,7 @@ export { default as MapMarker } from './mapMarker/MapMarker.svelte';
 
 export { default as MapDeckPopovers } from './mapDeckPopovers/MapDeckPopovers.svelte';
 export { default as MapDeckTooltips } from './mapDeckTooltips/MapDeckTooltips.svelte';
+export * from './mapDeckTooltips/stores';
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
