@@ -14,6 +14,7 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Tabs',
 		component: Tabs,
+		tags: ['autodocs'],
 		subcomponents: { TabPanel, TabList },
 		argTypes: {
 			orientation: {
