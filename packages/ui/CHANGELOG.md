@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: update `selectedTabId` when tab is changed
+
 ## 21.0.0-svelte5.1
 
 ### Major Changes

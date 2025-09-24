@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: apply styling to MapDeckTooltips
+
 ## 9.0.0-svelte5.1
 
 ### Patch Changes
