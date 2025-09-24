@@ -15,15 +15,21 @@
     "@ldn-viz/utils": "1.1.0"
   },
   "changesets": [
+    "angry-pens-sort",
+    "famous-boxes-hope",
     "forty-cases-rest",
     "gold-deers-end",
+    "listMenu-to-navigationMenu",
     "pretty-phones-brake",
+    "rename-buttonsHidden-prop",
+    "shy-foxes-design",
     "sv5-charts",
     "sv5-layer-control",
     "sv5-maps",
     "sv5-select",
     "sv5-tables-ui",
     "sv5-tables",
+    "table-good-or-bad",
     "three-planes-serve"
   ]
 }
