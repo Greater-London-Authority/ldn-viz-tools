@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.3
+
+### Minor Changes
+
+- 7018a1a: FIXED: fix bug that would cause `MapDeckOverlay` to replace the `DeckOverlay` object whenever layers were updated
+
 ## 9.0.0-svelte5.2
 
 ### Minor Changes

@@ -16,6 +16,7 @@
   },
   "changesets": [
     "angry-pens-sort",
+    "deckgl-overlay",
     "famous-boxes-hope",
     "forty-cases-rest",
     "gold-deers-end",
