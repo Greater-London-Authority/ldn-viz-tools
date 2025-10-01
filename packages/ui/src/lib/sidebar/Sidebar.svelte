@@ -25,23 +25,24 @@
 		theme = 'dark',
 		placement = 'right',
 		tabs = [],
-		isOpen = $bindable(sidebarState.isOpen),
 		selectedTabId = $bindable(undefined),
+		state = $bindable(),
 		sidebarAriaLabel = 'Sidebar with information and controls',
 		tabsAriaLabel = 'Switch sidebar panel',
 		sidebarId = randomId(),
 		unstyledContent,
 		header,
 		footer,
-		sections
+		sections,
+		icon,
+		class: classes
 	}: SidebarProps = $props();
 
 	const wrapperClasses = `${position} z-30 ${theme}`;
-	const sidebarClasses = 'flex flex-col grow bg-color-container-level-1 pb-6'; // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = `flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`; // p-6 pad on container or elements (overflow position)
 
-	$effect(() => {
-		sidebarState.isOpen = isOpen;
-	});
+	// expose internal state to parent component
+	state = sidebarState;
 
 	// If a context provides a reactive placement use that
 	sidebarState.placement = placement;
@@ -65,7 +66,7 @@
 		</div>
 	{:else if sidebarState.isAlwaysOpen !== true}
 		<div class={classNames('absolute', togglePlacementClasses)}>
-			<SidebarToggle {sidebarId} />
+			<SidebarToggle {sidebarId} {icon} />
 		</div>
 	{/if}
 

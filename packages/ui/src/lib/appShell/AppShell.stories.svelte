@@ -19,6 +19,8 @@
 	});
 
 	let isOpen = $state(true);
+
+	let state = $state();
 </script>
 
 {#snippet sidebar()}
@@ -27,7 +29,7 @@
 
 {#snippet boundSidebar()}
 	<!-- So bound state doesn't effect other stories -->
-	<Sidebar bind:isOpen />
+	<Sidebar bind:state />
 {/snippet}
 
 {#snippet sidebarWide()}
@@ -51,7 +53,7 @@
 <Story name="Component outside context opening/closing of sidebar">
 	{#snippet template(args)}
 		<div class="w-96">
-			<Button onclick={() => (isOpen = !isOpen)}>Click</Button>
+			<Button onclick={() => (state.isOpen = !state.isOpen)}>Click</Button>
 		</div>
 		<AppShell {...args} sidebar={boundSidebar}></AppShell>
 	{/snippet}

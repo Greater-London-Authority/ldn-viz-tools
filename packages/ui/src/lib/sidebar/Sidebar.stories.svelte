@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
+	import { AdjustmentsHorizontal, ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { SidebarLeftContext } from '../../../../../apps/docs/src/lib';
 	import LogoCIU from '../logos/LogoCIU.svelte';
@@ -15,6 +15,7 @@
 	import { First, Fourth, Second, Third } from './elements/sidebarTabs/demoSections';
 	import type { SidebarProps } from './types';
 
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
 	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
@@ -81,7 +82,9 @@
 
 	let selectedTabId = $state('markers');
 
-	let isOpen = $state(true);
+	let setOpenState = $state();
+
+	let state = $state();
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed
 </script>
@@ -181,10 +184,11 @@
 <Story name="Externally Controlled">
 	{#snippet template(args: SidebarProps)}
 		<div class="w-96">
-			<Button onclick={() => (isOpen = !isOpen)}>Click</Button>
+			<Button onclick={() => (state.isOpen = true)}>Open</Button>
+			<Button onclick={() => (state.isOpen = false)}>Close</Button>
 		</div>
 
-		<Sidebar {...args} bind:isOpen></Sidebar>
+		<Sidebar {...args} bind:state></Sidebar>
 	{/snippet}
 </Story>
 
@@ -244,3 +248,11 @@
 {/snippet}
 
 <Story name="As navigation" args={{ header: undefined, footer: undefined, sections: navigation }} />
+
+{#snippet icon()}
+	<Icon src={AdjustmentsHorizontal} class="p-1" aria-hidden="true" />
+{/snippet}
+
+<Story name="With custom trigger icon" args={{ icon }} />
+
+<Story name="With custom classes" args={{ class: '[&_*]:!bg-color-ui-primary !pb-0' }} />
