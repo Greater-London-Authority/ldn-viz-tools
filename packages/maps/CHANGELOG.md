@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.6
+
+### Minor Changes
+
+- a12ef0c: ADDED: export onClickPopoverHandler
+
 ## 9.0.0-svelte5.5
 
 ### Minor Changes
