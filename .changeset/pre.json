@@ -16,6 +16,7 @@
   },
   "changesets": [
     "angry-pens-sort",
+    "change-basemap-theme",
     "deckgl-overlay",
     "famous-boxes-hope",
     "forty-cases-rest",
