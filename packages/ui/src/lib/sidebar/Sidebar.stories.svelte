@@ -84,7 +84,7 @@
 
 	let setOpenState = $state();
 
-	let state = $state();
+	let sidebarState = $state();
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed
 </script>
@@ -184,11 +184,11 @@
 <Story name="Externally Controlled">
 	{#snippet template(args: SidebarProps)}
 		<div class="w-96">
-			<Button onclick={() => (state.isOpen = true)}>Open</Button>
-			<Button onclick={() => (state.isOpen = false)}>Close</Button>
+			<Button onclick={() => (sidebarState.isOpen = true)}>Open</Button>
+			<Button onclick={() => (sidebarState.isOpen = false)}>Close</Button>
 		</div>
 
-		<Sidebar {...args} bind:state></Sidebar>
+		<Sidebar {...args} bind:state={sidebarState}></Sidebar>
 	{/snippet}
 </Story>
 
