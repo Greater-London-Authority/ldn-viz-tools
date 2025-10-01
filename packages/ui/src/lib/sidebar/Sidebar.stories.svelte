@@ -15,6 +15,7 @@
 	import { First, Fourth, Second, Third } from './elements/sidebarTabs/demoSections';
 	import type { SidebarProps } from './types';
 
+	import Button from '../button/Button.svelte';
 	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 
@@ -79,6 +80,8 @@
 	});
 
 	let selectedTabId = $state('markers');
+
+	let isOpen = $state(true);
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed
 </script>
@@ -174,6 +177,16 @@
 <Story name="With long content" args={{ sections: longcontent }} />
 
 <Story name="With tabs" args={{ tabs }} />
+
+<Story name="Externally Controlled">
+	{#snippet template(args: SidebarProps)}
+		<div class="w-96">
+			<Button onclick={() => (isOpen = !isOpen)}>Click</Button>
+		</div>
+
+		<Sidebar {...args} bind:isOpen></Sidebar>
+	{/snippet}
+</Story>
 
 <Story name="Externally controlling the open tabs">
 	{#snippet template(args: SidebarProps)}

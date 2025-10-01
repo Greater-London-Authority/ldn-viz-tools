@@ -1,8 +1,9 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import AppShell from './AppShell.svelte';
-	import Sidebar from '../sidebar/Sidebar.svelte';
+	import Button from '../button/Button.svelte';
 	import { tabs } from '../sidebar/Sidebar.stories.svelte';
+	import Sidebar from '../sidebar/Sidebar.svelte';
+	import AppShell from './AppShell.svelte';
 	import DemoSidebarOpener from './DemoSidebarOpener.svelte';
 
 	let { Story } = defineMeta({
@@ -16,10 +17,17 @@
 			sidebar
 		}
 	});
+
+	let isOpen = $state(true);
 </script>
 
 {#snippet sidebar()}
 	<Sidebar />
+{/snippet}
+
+{#snippet boundSidebar()}
+	<!-- So bound state doesn't effect other stories -->
+	<Sidebar bind:isOpen />
 {/snippet}
 
 {#snippet sidebarWide()}
@@ -40,7 +48,16 @@
 	{/snippet}
 </Story>
 
-<Story name="External opening/closing of sidebar">
+<Story name="Component outside context opening/closing of sidebar">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Button onclick={() => (isOpen = !isOpen)}>Click</Button>
+		</div>
+		<AppShell {...args} sidebar={boundSidebar}></AppShell>
+	{/snippet}
+</Story>
+
+<Story name="Component within context opening/closing of sidebar">
 	{#snippet template(args)}
 		<AppShell {...args} main={mainWithControl}></AppShell>
 	{/snippet}
@@ -138,7 +155,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Start Open (default)">
+<Story name="Start Open">
 	{#snippet template(args)}
 		<AppShell {...args} startOpen></AppShell>
 	{/snippet}

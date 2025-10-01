@@ -25,6 +25,7 @@
 		theme = 'dark',
 		placement = 'right',
 		tabs = [],
+		isOpen = $bindable(sidebarState.isOpen),
 		selectedTabId = $bindable(undefined),
 		sidebarAriaLabel = 'Sidebar with information and controls',
 		tabsAriaLabel = 'Switch sidebar panel',
@@ -37,6 +38,10 @@
 
 	const wrapperClasses = `${position} z-30 ${theme}`;
 	const sidebarClasses = 'flex flex-col grow bg-color-container-level-1 pb-6'; // p-6 pad on container or elements (overflow position)
+
+	$effect(() => {
+		sidebarState.isOpen = isOpen;
+	});
 
 	// If a context provides a reactive placement use that
 	sidebarState.placement = placement;

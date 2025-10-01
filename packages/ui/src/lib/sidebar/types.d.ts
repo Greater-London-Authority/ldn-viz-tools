@@ -78,4 +78,9 @@ export interface SidebarProps {
 	footer?: Snippet;
 
 	sections?: Snippet;
+
+	/**
+	 * Optional bindable prop that allows binding of state
+	 */
+	isOpen?: boolean;
 }
