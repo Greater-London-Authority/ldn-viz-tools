@@ -1,7 +1,5 @@
 ---
-'@ldn-viz/charts': minor
+'@ldn-viz/maps': minor
 ---
 
-ADDED: defaultRect and defaultBar plot fragments
-
-CHANGED: plot function now checks for options.facet to apply defaultSizeFacet fragment
+CHANGED: when theme is changed, update basemap style with MapLibre's `setStyle()` method, rather than re-creating map

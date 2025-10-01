@@ -16,10 +16,8 @@
 	 * @component
 	 */
 
-	import maplibre_gl from 'maplibre-gl';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	// import { currentThemeMode } from '@ldn-viz/ui';
 
 	import { theme_os_dark, theme_os_light_vts } from '@ldn-viz/maps';
 
@@ -147,14 +145,11 @@
 		return style as MapLibreStyle;
 	};
 
-	let mapOptions: Omit<maplibre_gl.MapOptions, 'container'> = $derived({
-		...options,
-		style: identifyStyle(currentThemeMode, darkStyle, lightStyle)
-	});
+	let style = $derived(identifyStyle(currentThemeMode, darkStyle, lightStyle));
 </script>
 
-{#key mapOptions}
-	<MapLibre {disabled} options={mapOptions} {whenMapCreated} {whenMapDestroyed} {...rest}>
+{#key options}
+	<MapLibre {disabled} {options} {style} {whenMapCreated} {whenMapDestroyed} {...rest}>
 		{@render children?.()}
 	</MapLibre>
 {/key}
