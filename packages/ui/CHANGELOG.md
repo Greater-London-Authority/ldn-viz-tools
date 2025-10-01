@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.3
+
+### Minor Changes
+
+- 31020f3: Expoxe sidebar state and allow custom classes and icons
+
 ## 21.0.0-svelte5.2
 
 ### Minor Changes

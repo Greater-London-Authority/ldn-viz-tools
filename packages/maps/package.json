@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
-	"version": "9.0.0-svelte5.3",
+	"version": "9.0.0-svelte5.4",
 	"keywords": [
 		"svelte"
 	],
@@ -42,7 +42,7 @@
 		"@deck.gl/geo-layers": "8.9.35",
 		"@deck.gl/layers": "8.9.35",
 		"@deck.gl/mapbox": "8.9.35",
-		"@ldn-viz/utils": "*",
+		"@ldn-viz/utils": "1.1.1-svelte5.0",
 		"@turf/centroid": "^7.1.0",
 		"@turf/turf": "^7.2.0",
 		"maplibre-gl": "^4.1.0",

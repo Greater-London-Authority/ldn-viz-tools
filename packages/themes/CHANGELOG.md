@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 6.1.0-svelte5.0
+
+### Minor Changes
+
+- 0998f50: Updated defaults for container class padding
+
 ## 6.0.0
 
 ### Major Changes

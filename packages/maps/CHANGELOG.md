@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.4
+
+### Patch Changes
+
+- @ldn-viz/utils@1.1.1-svelte5.0
+
 ## 9.0.0-svelte5.3
 
 ### Minor Changes
