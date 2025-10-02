@@ -8,9 +8,9 @@
 	 * @component
 	 */
 
-	import { onMount, onDestroy } from 'svelte';
 	import maplibre_gl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	import { onDestroy, onMount } from 'svelte';
 
 	import {
 		GREATER_LONDON_BOUNDS,
@@ -18,7 +18,7 @@
 		theme_os_light_vts
 	} from '@ldn-viz/maps';
 
-	import type { MapLibre, MapLibreStyle, WhenMapLoads, MapLibreBounds } from './types';
+	import type { MapLibre, MapLibreBounds, MapLibreStyle, WhenMapLoads } from './types';
 
 	type MapLibreOptions = Omit<maplibre_gl.MapOptions, 'container'>;
 
@@ -109,27 +109,15 @@
 		};
 	});
 
-	// client width and height because on:resize won't always trigger refresh.
-	let clientWidth = $state(0);
-	let clientHeight = $state(0);
-
 	$effect(() => {
-		if (clientWidth && clientHeight) {
-			maplibre?.resize();
-		}
-	});
-
-	$effect(() => {
-		if (maplibre){
+		if (maplibre) {
 			maplibre.setStyle(style);
 		}
-	})
+	});
 </script>
 
 <section
 	bind:this={container}
-	bind:clientWidth
-	bind:clientHeight
 	class:w-full={true}
 	class:h-full={true}
 	class:relative={true}
