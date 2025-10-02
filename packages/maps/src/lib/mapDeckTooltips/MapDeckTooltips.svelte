@@ -39,8 +39,8 @@
 		height: 0
 	});
 
-	// we can ignore the state_referenced_locally warning, since an $effect block responds to changes in the state
-	const virtualElement = createVirtualElement({ getBoundingClientRect });
+	// Called in an IFFE to avoid the state_referenced_locally warning, an $effect block responds to changes in the state
+	const virtualElement = (() => createVirtualElement({ getBoundingClientRect }))();
 
 	$effect(() => {
 		virtualElement.update({ getBoundingClientRect });
