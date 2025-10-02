@@ -116,8 +116,6 @@
 	});
 </script>
 
-<svelte:window onresize={() => maplibre?.resize()} />
-
 <section
 	bind:this={container}
 	class:w-full={true}

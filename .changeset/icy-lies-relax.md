@@ -2,4 +2,4 @@
 '@ldn-viz/maps': minor
 ---
 
-FIXED: update MapLibre.svelte, replacing side effect with onresize event listener to stop map flickering on window resize
+FIXED: update MapLibre.svelte, removed side effect resizing to fix map flicker
