@@ -106,7 +106,7 @@
 	<div
 		use:floatingContent={dynamicOptions}
 		class:width={'100px'}
-		style:z-index={9999}
+		style:z-index={40}
 		class="pointer-events-none"
 	>
 		<MapMarkerStyledContainer>
