@@ -28,6 +28,8 @@
 	import type { MapLibreOptions, MapLibreStyle, MapStore, WhenMapLoads } from './types';
 
 	import { mode, type SystemModeValue } from 'mode-watcher';
+	import './map.css';
+
 	let currentThemeMode: SystemModeValue = $derived(mode.current);
 
 	interface Props {
