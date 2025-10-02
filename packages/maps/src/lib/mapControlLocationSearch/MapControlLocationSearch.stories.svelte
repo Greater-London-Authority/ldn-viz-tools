@@ -22,11 +22,15 @@
 
 	import type { GeolocationSearchError, OnGeolocationSearchError } from '@ldn-viz/ui';
 	import { MapGeocoderAdapterMapBox } from './MapGeocoderAdapterMapBox';
+	import { MapGeocoderAdapterOSPlaces } from './MapGeocoderAdapterOSPlaces';
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
-	const adapter = new MapGeocoderAdapterMapBox(
+
+	const adapterMapBox = new MapGeocoderAdapterMapBox(
 		'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
 	);
+
+	const adapterOSPlaces = new MapGeocoderAdapterOSPlaces('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 
 	const onSearchError: OnGeolocationSearchError = (err: GeolocationSearchError) => {
 		console.error(err);
@@ -42,7 +46,7 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch {adapter} {onSearchError} {...args} />
+					<MapControlLocationSearch adapter={adapterOSPlaces} {onSearchError} {...args} />
 				</MapControlGroup>
 			</Map>
 		</div>
@@ -59,7 +63,7 @@
 			>
 				<MapControlGroup position="TopLeft">
 					<MapControlLocationSearch
-						{adapter}
+						adapter={adapterOSPlaces}
 						{onSearchError}
 						placeholder="Type here to search for a place"
 					/>
@@ -78,7 +82,7 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch {adapter} {onSearchError} hideGeolocator />
+					<MapControlLocationSearch adapter={adapterOSPlaces} {onSearchError} hideGeolocator />
 				</MapControlGroup>
 			</Map>
 		</div>
@@ -98,7 +102,7 @@ This story shows how you can provide callback functions to be called when the us
 			>
 				<MapControlGroup position="TopLeft">
 					<MapControlLocationSearch
-						{adapter}
+						adapter={adapterOSPlaces}
 						{onSearchError}
 						onSearchClear={() => console.log('Cleared search')}
 						onLocationFound={(location) => console.log('Location selected:', location)}

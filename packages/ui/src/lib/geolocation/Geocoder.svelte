@@ -153,6 +153,9 @@
 		} else if (suggestion.address) {
 			query = suggestion.address;
 			silentQueryTextUpdate = true;
+		} else if (suggestion.id) {
+			query = suggestion.id;
+			silentQueryTextUpdate = true;
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
