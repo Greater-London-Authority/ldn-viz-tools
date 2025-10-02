@@ -41,6 +41,8 @@ export { onMouseOverTooltipHandler, mousedOverObject } from './mapDeckTooltips/s
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
+export { default as MapArrow } from './mapArrow/MapArrow.svelte';
+
 // Layers
 export { default as GeoJSONMapLayerSource } from './mapLayerSource/adaptations/geojsonMapLayerSource/GeoJSONMapLayerSource.svelte';
 export { default as MapLayerSource } from './mapLayerSource/MapLayerSource.svelte';
