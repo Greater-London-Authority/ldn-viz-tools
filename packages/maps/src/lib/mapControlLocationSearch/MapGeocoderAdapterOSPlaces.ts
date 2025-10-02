@@ -145,7 +145,7 @@ export const OS_LONDON_LOCAL_CUSTODIAN_CODES: LocalCustodianCode[] = [
 	}
 ];
 
-interface DPAFeature {
+interface OSFeature {
 	UPRN: string;
 	ADDRESS: string;
 	CENTER: [number, number];
@@ -154,8 +154,19 @@ interface DPAFeature {
 	[otherOptions: string]: unknown;
 }
 
+// DPA and LPI are the two data sets within the OS PLaces API.
+// DPA: A Delivery Point Address (DPA) is one that Ordnance Survey has matched against a Royal Mail PAF address
+// LPI: A Land Property Identifier (LPI) address is a structured text entry that identifies properties not need to receive deliveries from the Royal Mail to exist.
+// This means that some non-postal objects (for example, a church) can be included.
+//
+// Update using just LPI dataset as after running some tests seems to be the most complete list of places
+// Using both causes problems like duplicate IDs in the results
+interface DPAFeature extends OSFeature {}
+interface LPIFeature extends OSFeature {}
+
 interface OSPlacesResult {
-	DPA: DPAFeature;
+	DPA?: DPAFeature;
+	LPI?: LPIFeature;
 }
 
 interface OSPlaces {
@@ -174,6 +185,7 @@ export class MapGeocoderAdapterOSPlaces implements GeocoderAdapter {
 	private _key: string = '';
 	//private _lcc: number = -1;
 	private _resultCount: number = 5;
+	private _lastResults: GeolocationNamed[] = [];
 
 	constructor(key: string, resultCount = 5) {
 		this._key = key;
@@ -187,10 +199,20 @@ export class MapGeocoderAdapterOSPlaces implements GeocoderAdapter {
 		const url = buildUrl(text, this._key, this._resultCount);
 		return fetch(url)
 			.then((res) => res.json())
-			.then(transformResultsToGeolocationNameds);
+			.then((data) => {
+				const results = transformResultsToGeolocationNameds(data);
+				this._lastResults = results; // Store for later use
+				return results;
+			});
 	}
 
-	retrieve(id: string) {}
+	retrieve(id: string) {
+		const match = this._lastResults.find((loc) => loc.id === id);
+		// if (!match) {
+		// 	return Promise.reject(new Error(`Location with id ${id} not found.`));
+		// }
+		return Promise.resolve(match); // Return the full object with center
+	}
 
 	attribution() {
 		return {
@@ -214,11 +236,12 @@ export class MapGeocoderAdapterOSPlaces implements GeocoderAdapter {
 
 const buildUrl = (text: string, key: string, resultCount: number): string => {
 	const queryString = new URLSearchParams({
-		query: encodeURIComponent(text),
+		query: text,
 		key: key,
 		output_srs: 'WGS84',
 		format: 'JSON',
 		maxresults: resultCount.toString(),
+		dataset: 'LPI', // Update using just LPI as after running some tests seems to be the most complete list of places. Using both LPI & DPA causes problems like duplicate IDs in the results
 		//fq: `LOCAL_CUSTODIAN_CODE:${lcc}`,
 		bbox: GREATER_LONDON_BOUNDS_BNG_PADDED.flat().toString()
 	});
@@ -231,9 +254,13 @@ const transformResultsToGeolocationNameds = (data: OSPlaces): GeolocationNamed[]
 		return [];
 	}
 
-	return data.results.map((loc) => ({
-		id: loc.DPA.UPRN,
-		address: loc.DPA.ADDRESS,
-		center: [loc.DPA.LNG, loc.DPA.LAT]
-	}));
+	return data.results.map((loc) => {
+		const record = loc.DPA || loc.LPI;
+
+		return {
+			id: record!.UPRN,
+			address: record!.ADDRESS,
+			center: [record!.LNG, record!.LAT]
+		};
+	});
 };
