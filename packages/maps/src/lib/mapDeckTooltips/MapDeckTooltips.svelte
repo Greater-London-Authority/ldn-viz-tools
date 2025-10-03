@@ -106,8 +106,7 @@
 	<div
 		use:floatingContent={dynamicOptions}
 		class:width={'100px'}
-		style:z-index={9999}
-		class="pointer-events-none"
+		class="maplibregl-popup pointer-events-none"
 	>
 		<MapMarkerStyledContainer>
 			{#if typeof tooltipSpec === 'string'}
