@@ -1,9 +1,10 @@
 import { describe, test, expect } from 'vitest';
-import { centerOfBounds, scaleBounds } from './bounds.js';
+import { centerOfBounds, scaleBounds } from './bounds';
+import type { BoundsPoints } from './bounds';
 
 describe('centerOfBounds', () => {
 	test('correctly identifies center of bounds', () => {
-		const bounds = [
+		const bounds: BoundsPoints = [
 			[-12, 21],
 			[28, 33]
 		];
@@ -16,7 +17,7 @@ describe('centerOfBounds', () => {
 });
 
 describe('scaleBounds', () => {
-	const bounds = [
+	const bounds: BoundsPoints  = [
 		[0, 0],
 		[10, 10]
 	];
