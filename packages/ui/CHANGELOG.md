@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.4
+
+### Patch Changes
+
+- 253b9b9: Adapter added for OS Places API
+
 ## 21.0.0-svelte5.3
 
 ### Minor Changes
