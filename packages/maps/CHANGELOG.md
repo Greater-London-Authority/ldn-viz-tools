@@ -1,5 +1,16 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.7
+
+### Minor Changes
+
+- 1f698ea: FIXED: update MapLibre.svelte, removed side effect resizing to fix map flicker
+- 2e5d5d0: CHANGED: Removed custom z-index and applied `.maplibregl-popup` class to `MapDeckTooltips` to make z-index consistent with other popups.
+
+### Patch Changes
+
+- 253b9b9: Adapter added for OS Places API
+
 ## 9.0.0-svelte5.6
 
 ### Minor Changes
