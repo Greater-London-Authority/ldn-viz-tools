@@ -46,12 +46,30 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} {...args} />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- This story shows the result sof using the Ordnance Survey's [Places API](https://docs.os.uk/os-apis/accessing-os-apis/os-places-api/technical-specification/find), rather than MapBox.  -->
+<Story name="Location Search using OS Places API">
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
 					<MapControlLocationSearch adapter={adapterOSPlaces} {onSearchError} {...args} />
 				</MapControlGroup>
 			</Map>
 		</div>
 	{/snippet}
 </Story>
+
 
 <Story name="Location Search - custom placeholder">
 	{#snippet template()}
@@ -63,7 +81,7 @@
 			>
 				<MapControlGroup position="TopLeft">
 					<MapControlLocationSearch
-						adapter={adapterOSPlaces}
+						adapter={adapterMapBox}
 						{onSearchError}
 						placeholder="Type here to search for a place"
 					/>
@@ -82,7 +100,7 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapControlLocationSearch adapter={adapterOSPlaces} {onSearchError} hideGeolocator />
+					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} hideGeolocator />
 				</MapControlGroup>
 			</Map>
 		</div>
@@ -102,7 +120,7 @@ This story shows how you can provide callback functions to be called when the us
 			>
 				<MapControlGroup position="TopLeft">
 					<MapControlLocationSearch
-						adapter={adapterOSPlaces}
+						adapter={adapterMapBox}
 						{onSearchError}
 						onSearchClear={() => console.log('Cleared search')}
 						onLocationFound={(location) => console.log('Location selected:', location)}
