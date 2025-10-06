@@ -23,7 +23,6 @@
 	type MapLibreOptions = Omit<maplibre_gl.MapOptions, 'container'>;
 
 	const defaultOptions: MapLibreOptions = {
-		style: theme_os_light_vts as MapLibreStyle,
 		bounds: GREATER_LONDON_BOUNDS as MapLibreBounds,
 		maxBounds: GREATER_LONDON_BOUNDS_MAX as MapLibreBounds,
 		clickTolerance: 6
@@ -53,6 +52,12 @@
 		 * destroyed.
 		 */
 		whenMapDestroyed?: null | WhenMapLoads;
+
+		/**
+		 * MapLibre style for basemap.
+		 */
+		style?: MapLibreStyle;
+
 		children?: import('svelte').Snippet;
 		[key: string]: any;
 	}
@@ -62,6 +67,7 @@
 		options = defaultOptions,
 		whenMapCreated = null,
 		whenMapDestroyed = null,
+		style = theme_os_light_vts as MapLibreStyle,
 		children,
 		...rest
 	}: Props = $props();
@@ -77,6 +83,7 @@
 		maplibre = new maplibre_gl.Map({
 			...defaultOptions,
 			...options,
+			style,
 			container: container as HTMLElement
 		} as maplibre_gl.MapOptions);
 
@@ -111,6 +118,12 @@
 			maplibre?.resize();
 		}
 	});
+
+	$effect(() => {
+		if (maplibre){
+			maplibre.setStyle(style);
+		}
+	})
 </script>
 
 <section

@@ -1,5 +1,32 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.3
+
+### Minor Changes
+
+- 31020f3: Expoxe sidebar state and allow custom classes and icons
+
+## 21.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: update `selectedTabId` when tab is changed
+
+## 21.0.0-svelte5.1
+
+### Major Changes
+
+- 46b4fab: CHANGED: the `ListMenu` has been renamed to `NavigationMenu`
+- 6b37511: CHANGED: the `buttonsHidden` prop on the `CheckboxGroup` and `LayerControlGroup` been renamed to `hideSelectAll`
+
+### Minor Changes
+
+- dc25586: CREATED: CheckboxSolid and CheckboxGroupSolid components
+
+### Patch Changes
+
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
+
 ## 21.0.0-svelte5.0
 
 ### Major Changes

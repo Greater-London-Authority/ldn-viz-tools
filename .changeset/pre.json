@@ -15,15 +15,28 @@
     "@ldn-viz/utils": "1.1.0"
   },
   "changesets": [
+    "angry-pens-sort",
+    "change-basemap-theme",
+    "deckgl-overlay",
+    "export-onClickPopoverHandler",
+    "famous-boxes-hope",
     "forty-cases-rest",
     "gold-deers-end",
+    "listMenu-to-navigationMenu",
+    "mapdekc-tooltips",
     "pretty-phones-brake",
+    "rename-buttonsHidden-prop",
+    "shy-foxes-design",
+    "sixty-plums-jump",
     "sv5-charts",
     "sv5-layer-control",
     "sv5-maps",
     "sv5-select",
     "sv5-tables-ui",
     "sv5-tables",
-    "three-planes-serve"
+    "table-good-or-bad",
+    "tabs",
+    "three-planes-serve",
+    "true-hornets-shave"
   ]
 }

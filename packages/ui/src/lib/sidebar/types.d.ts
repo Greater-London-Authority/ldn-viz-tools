@@ -57,6 +57,11 @@ export interface SidebarProps {
 	selectedTabId?: Tab['id'];
 
 	/**
+	 * Optional bindable prop that allows binding of state (e.g., to externally open or close the Sidebar).
+	 */
+	state?: SidebarState;
+
+	/**
 	 * Aria label to describe purpose of sidebar
 	 */
 	sidebarAriaLabel?: string;
@@ -71,6 +76,11 @@ export interface SidebarProps {
 	 */
 	sidebarId?: string;
 
+	/**
+	 * Optional Css classes to override defaults: to be used sparingly
+	 */
+	class?: string;
+
 	unstyledContent?: Snippet;
 
 	header?: Snippet;
@@ -78,4 +88,6 @@ export interface SidebarProps {
 	footer?: Snippet;
 
 	sections?: Snippet;
+
+	icon?: import('svelte').Snippet;
 }

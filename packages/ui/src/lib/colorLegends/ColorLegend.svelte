@@ -18,6 +18,7 @@
 	import { interpolate, interpolateRound, quantize } from 'd3-interpolate';
 	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { select } from 'd3-selection';
+	import { theme } from '../theme/themeState.svelte';
 
 	interface Props {
 		/**
@@ -129,7 +130,10 @@
 		let tickF: string | ((n: any) => string | null | undefined) | undefined = undefined;
 
 		let tickAdjust = (g: any) =>
-			g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
+			g
+				.selectAll('.tick line')
+				.attr('y1', marginTop + marginBottom - height)
+				.attr('stroke', theme.tokenNameToValue('text.secondary'));
 
 		if (color.interpolate) {
 			// continuous scale
@@ -214,7 +218,10 @@
 
 	let ticksRef: SVGElement | undefined = $state();
 
-	$effect(() => {
+	const updateLegend = (
+		axisState: { x: any; n?: number; tickF: any; tickAdjust: any; tickValues: any },
+		ticksRef?: SVGElement
+	) => {
 		if (ticksRef) {
 			const bottomAxis = axisBottom(axisState.x)
 				.ticks(ticks, typeof axisState.tickF === 'string' ? axisState.tickF : undefined)
@@ -232,19 +239,12 @@
 			select(ticksRef)
 				.call(bottomAxis as any, 0)
 				.call(axisState.tickAdjust)
-				.call((g: any) => g.select('.domain').remove())
-				.call((g: any) =>
-					g
-						.append('text')
-						.attr('x', marginLeft)
-						.attr('y', marginTop + marginBottom - height - 6)
-						.attr('fill', 'currentColor')
-						.attr('text-anchor', 'start')
-						.attr('font-weight', 'bold')
-						.attr('class', 'title')
-						.text(title)
-				);
+				.call((g: any) => g.select('.domain').remove());
 		}
+	};
+
+	$effect(() => {
+		updateLegend(axisState, ticksRef);
 	});
 </script>
 
@@ -307,6 +307,15 @@
 			{/each}
 		</g>
 	{/if}
+
+	<text
+		x={marginLeft}
+		y={marginTop - 6}
+		font-size="10px"
+		text-anchor="start"
+		font-weight="bold"
+		fill="currentColor">{title}</text
+	>
 
 	<g id="ticks" bind:this={ticksRef} transform={`translate(0,${height - marginBottom})`} />
 

@@ -1,5 +1,40 @@
 # @ldn-viz/tables
 
+## 5.0.0-svelte5.3
+
+### Patch Changes
+
+- Updated dependencies [0998f50]
+- Updated dependencies [31020f3]
+  - @ldn-viz/themes@6.1.0-svelte5.0
+  - @ldn-viz/ui@21.0.0-svelte5.3
+  - @ldn-viz/utils@1.1.1-svelte5.0
+  - @ldn-viz/charts@7.0.0-svelte5.3
+
+## 5.0.0-svelte5.2
+
+### Patch Changes
+
+- Updated dependencies [5e5408a]
+  - @ldn-viz/ui@21.0.0-svelte5.2
+  - @ldn-viz/charts@7.0.0-svelte5.2
+
+## 5.0.0-svelte5.1
+
+### Minor Changes
+
+- 20fdf21: CHANGED: replace a <p> tag with a <div> tag
+
+### Patch Changes
+
+- Updated dependencies [0954da1]
+- Updated dependencies [289e9be]
+- Updated dependencies [46b4fab]
+- Updated dependencies [6b37511]
+- Updated dependencies [dc25586]
+  - @ldn-viz/charts@7.0.0-svelte5.1
+  - @ldn-viz/ui@21.0.0-svelte5.1
+
 ## 5.0.0-svelte5.0
 
 ### Major Changes

@@ -1,5 +1,41 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.6
+
+### Minor Changes
+
+- a12ef0c: ADDED: export onClickPopoverHandler
+
+## 9.0.0-svelte5.5
+
+### Minor Changes
+
+- ee28e46: CHANGED: when theme is changed, update basemap style with MapLibre's `setStyle()` method, rather than re-creating map
+
+## 9.0.0-svelte5.4
+
+### Patch Changes
+
+- @ldn-viz/utils@1.1.1-svelte5.0
+
+## 9.0.0-svelte5.3
+
+### Minor Changes
+
+- 7018a1a: FIXED: fix bug that would cause `MapDeckOverlay` to replace the `DeckOverlay` object whenever layers were updated
+
+## 9.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: apply styling to MapDeckTooltips
+
+## 9.0.0-svelte5.1
+
+### Patch Changes
+
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
+
 ## 9.0.0-svelte5.0
 
 ### Major Changes
