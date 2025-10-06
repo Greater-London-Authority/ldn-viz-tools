@@ -53,7 +53,11 @@
 	{/snippet}
 </Story>
 
-<!-- This story shows the result sof using the Ordnance Survey's [Places API](https://docs.os.uk/os-apis/accessing-os-apis/os-places-api/technical-specification/find), rather than MapBox.  -->
+<!--
+This story shows the results of using the Ordnance Survey's [Places API](https://docs.os.uk/os-apis/accessing-os-apis/os-places-api/technical-specification/find), rather than MapBox.
+Note that this API allows searches for "specific address accurately using a full or partial address, a postcode or a UPRN", but not "general areas" (e.g. "Kilburn"), for which the
+[OS Places API](https://docs.os.uk/os-apis/accessing-os-apis/os-places-api) would be needed instead.
+ -->
 <Story name="Location Search using OS Places API">
 	{#snippet template(args)}
 		<div class="h-[100dvh] w-[100dvw]">
@@ -69,7 +73,6 @@
 		</div>
 	{/snippet}
 </Story>
-
 
 <Story name="Location Search - custom placeholder">
 	{#snippet template()}
