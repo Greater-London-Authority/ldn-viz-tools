@@ -7,11 +7,12 @@
 	 */
 
 	import { format } from 'd3-format';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * Color of the dot, in any CSS format (color name, hex-string, `rgb()` notation, etc.).
 	 */
-	export let color = 'steelblue';
+	export let color: string | ((value: number) => string) = 'steelblue';
 
 	/**
 	 * If `true`, then the numerical value will be displayed as text beside the symbol.
@@ -45,7 +46,7 @@
 <div
 	class="opacity-100 rounded-sm w-[7px] h-[7px] mt-[-3.5px] ml-[-3.5px] relative"
 	style="width: 7px; height: 7px;"
-	style:background-color={color}
+	style:background-color={getVal(value, color)}
 	style:left={fPercentage(d)}
 >
 	{#if showValues}

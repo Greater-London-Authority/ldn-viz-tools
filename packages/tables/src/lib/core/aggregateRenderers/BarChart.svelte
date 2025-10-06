@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `BarChart` component renders a set of values as a bar chart.
 	 * @component
@@ -6,6 +6,7 @@
 
 	import { scaleLinear, scaleBand } from 'd3-scale';
 	import { max } from 'd3-array';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * Array of values to be displayed.
@@ -15,7 +16,7 @@
 	/**
 	 * A D3 color scale used to determine bar color.
 	 */
-	export let colorScale;
+	export let color: string | ((value: number) => string) = 'lightgrey';
 
 	/**
 	 * Categorical scale used to determine horizontal position of bar.
@@ -87,7 +88,7 @@
 	<g>
 		{#each sortedData as d}
 			<rect
-				fill={colorScale ? colorScale(d[0]) : 'lightgrey'}
+				fill={getVal(d[0], color)}
 				x={x(d[0])}
 				width={x.bandwidth()}
 				y={y(d[1])}

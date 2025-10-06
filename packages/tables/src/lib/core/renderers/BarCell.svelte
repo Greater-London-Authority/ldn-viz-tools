@@ -5,6 +5,7 @@
 	 */
 
 	import { format } from 'd3-format';
+	import { getVal } from '../lib/getVal';
 
 	/**
 	 * The value to be encoded in the cell.
@@ -14,7 +15,7 @@
 	/**
 	 * Color of the bar, in any CSS format (color name, hex-string, `rgb()` notation, etc.).
 	 */
-	export let color: string | undefined = 'red';
+	export let color: string | ((val: number) => string) = 'red';
 
 	/**
 	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
@@ -46,7 +47,7 @@
 <div class="py-1 flex items-center h-full">
 	<div class="bg-color-ui-neutral w-full flex relative text-xs">
 		<div
-			style={`width:${scale(+value)}%; background-color:${color}`}
+			style={`width:${scale(+value)}%; background-color:${getVal(value, color)}`}
 			class="h-full text-right absolute left-0"
 		/>
 
