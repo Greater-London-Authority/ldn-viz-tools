@@ -1,6 +1,7 @@
 // Reexport your entry components here
 export { default as AnalyticsAndCookieConsent } from './analytics/AnalyticsAndCookieConsent.svelte';
 export { default as CookieControlSettings } from './analytics/CookieControlSettings.svelte';
+export { default as PrivacyPolicyLink } from './analytics/PrivacyPolicyLink.svelte';
 export { default as AppShell } from './appShell/AppShell.svelte';
 export * from './appShell/utils/getSettingByScreenWidth';
 export * from './auth/auth';
@@ -23,7 +24,6 @@ export { default as Footer } from './footer/Footer.svelte';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
 export * from './geolocation/GeocoderAdapter';
 export * from './geolocation/GeocoderAdapterList';
-export * from './geolocation/GeocoderAdapterOSPlaces';
 export { default as GeocoderSuggestionList } from './geolocation/GeocoderSuggestionList.svelte';
 export { default as Geolocator } from './geolocation/Geolocator.svelte';
 export * from './geolocation/types';
@@ -57,7 +57,6 @@ export { default as RadioButtonGroup } from './radioButton/RadioButtonGroup.svel
 export { default as RadioButtonGroupSolid } from './radioButtonSolid/RadioButtonGroupSolid.svelte';
 export { default as RadioButtonSolid } from './radioButtonSolid/RadioButtonSolid.svelte';
 export { default as Select } from './select/Select.svelte';
-export { default as PrivacyPolicyLink } from './analytics/PrivacyPolicyLink.svelte';
 export { default as SidebarFooter } from './sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 export { default as SidebarHeader } from './sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 export { default as SidebarGroup } from './sidebar/elements/sidebarSection/SidebarGroup.svelte';
