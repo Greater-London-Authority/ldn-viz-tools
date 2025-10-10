@@ -14,12 +14,12 @@
 </script>
 
 <script lang="ts">
-	import { MVTLayer } from '@deck.gl/geo-layers/typed';
+	import { MVTLayer } from '@deck.gl/geo-layers';
 
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
-	import type { Layer } from '@deck.gl/core/typed';
+	import type { Layer } from '@deck.gl/core';
 	import { Checkbox } from '@ldn-viz/ui';
 	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
 	import DemoTooltipComponent from './demo/DemoTooltipComponent.svelte';

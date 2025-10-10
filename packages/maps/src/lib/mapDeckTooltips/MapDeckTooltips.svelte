@@ -6,7 +6,7 @@
 	 * @component
 	 */
 
-	import type { Layer } from '@deck.gl/core/typed';
+	import type { Layer } from '@deck.gl/core';
 	import { mousedOverObject } from './stores';
 
 	import { arrow, createFloatingActions, createVirtualElement } from 'svelte-floating-ui';
