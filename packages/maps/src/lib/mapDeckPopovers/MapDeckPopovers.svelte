@@ -5,7 +5,7 @@
 	 * For each layer, the output can be specified as a string constant, a function that is passed a feature and returns a string, or a custom Svelte component.
 	 * @component
 	 */
-	import type { Layer } from '@deck.gl/core/typed';
+	import type { Layer } from '@deck.gl/core';
 	import { clickedFeature, clickedLayer } from './stores';
 	import DefaultPopover from './DefaultPopover.svelte';
 	import MapPopover from '../mapPopover/MapPopover.svelte';
