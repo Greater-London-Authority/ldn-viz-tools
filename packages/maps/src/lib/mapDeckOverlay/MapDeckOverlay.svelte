@@ -4,7 +4,7 @@
 	 * It must be used inside a `Map` component, so that it can access the MapLibre map object from the `mapStore` context.
 	 * @component
 	 */
-	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox/typed';
+	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox';
 	import { getContext } from 'svelte';
 
 	const mapStore = getContext('mapStore');
@@ -49,7 +49,7 @@
 
 	const doUnload = () => {
 		removeOverlay();
-    loaded = false;
+		loaded = false;
 	};
 
 	const updateLayers = (newLayers) => {
