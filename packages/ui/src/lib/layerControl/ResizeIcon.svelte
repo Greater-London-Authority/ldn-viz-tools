@@ -7,4 +7,5 @@
 		stroke-linejoin="round"
 		fill="none"
 	/>
+	<title>Click to change size of features in layer.</title>
 </svg>

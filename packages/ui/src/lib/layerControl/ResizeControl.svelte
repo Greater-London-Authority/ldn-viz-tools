@@ -23,6 +23,7 @@
 		theme="mini"
 		class="w-6 h-6 text-color-action-disabled cursor-not-allowed"
 		aria-hidden="true"
+		title="Cannot change size of features in layer."
 	/>
 {:else}
 	<Popover>
