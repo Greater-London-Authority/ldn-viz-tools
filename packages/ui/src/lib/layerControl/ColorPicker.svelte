@@ -58,6 +58,7 @@
 		theme="mini"
 		class="w-6 h-6 text-color-action-disabled cursor-not-allowed"
 		aria-hidden="true"
+		title="Cannot change color."
 	/>
 {:else}
 	<Popover bind:isOpen>
@@ -65,6 +66,7 @@
 			<div
 				class="w-[22px] h-[22px] relative border rounded-full"
 				style:background={tokenNameToValue(activeColorName, $currentTheme)}
+				title="Click to change color of features in layer."
 			/>
 		</Trigger>
 

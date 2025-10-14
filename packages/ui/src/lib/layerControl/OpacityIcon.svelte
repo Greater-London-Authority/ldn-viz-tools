@@ -10,4 +10,5 @@
 		stroke-linecap="round"
 		stroke-linejoin="round"
 	/>
+	<title>Click to change layer opacity.</title>
 </svg>
