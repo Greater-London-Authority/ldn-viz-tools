@@ -60,7 +60,7 @@
 
 	const clickClear = () => {
 		terraDraw.clear();
-		terraDraw.getSnapshot();
+		features = terraDraw.getSnapshot();
 	};
 
 	const clickCancel = () => {
@@ -158,7 +158,7 @@
 		<div class="flex flex-col gap-1 pointer-events-auto">
 			<Button variant="square" size="lg" on:click={clickEdit}>
 				<Icon src={Pencil} class="w-8 h-8 pb-1 pt-0.5" aria-hidden="true" />
-				Edit area
+				{!savedFeatures || savedFeatures.length === 0 ? 'Add' : 'Edit'} area
 			</Button>
 
 			{#if allowUploadAndDownload}
