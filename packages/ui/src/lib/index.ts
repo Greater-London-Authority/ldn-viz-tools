@@ -6,6 +6,8 @@ export { default as Callout } from './callout/Callout.svelte';
 
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
+export { default as CheckboxGroupSolid } from './checkboxSolid/CheckboxGroupSolid.svelte';
+export { default as CheckboxSolid } from './checkboxSolid/CheckboxSolid.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOrdinalChips.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
@@ -61,10 +63,10 @@ export { default as LoadingIndicator } from './loadingIndicator/LoadingIndicator
 
 export { default as Spinner } from './spinners/Spinner.svelte';
 
-export { default as Tabs } from './tabs/Tabs.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 export { default as TabPanel } from './tabs/TabPanel.svelte';
+export { default as Tabs } from './tabs/Tabs.svelte';
 
 export { default as ListMenu } from './listMenu/ListMenu.svelte';
 export { default as ListMenuItem } from './listMenu/ListMenuItem.svelte';
