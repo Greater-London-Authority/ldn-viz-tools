@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 19.6.0
+
+### Minor Changes
+
+- 5dd276b: CHANGED: reduced `Modal` inset from 2rem to 0.5rem on small screens
+- 39ba3ad: ADDED: `CheckboxSolid` and `CheckboxGroupSolid` components
+
 ## 19.5.0
 
 ### Minor Changes
