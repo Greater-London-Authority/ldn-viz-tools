@@ -1,5 +1,17 @@
 # ldn-viz-tools-charts
 
+## 5.4.0
+
+### Minor Changes
+
+- 48e057c: CHANGED: observable plot fragments to no longer set color scales to `ordinal` by default
+
+### Patch Changes
+
+- Updated dependencies [5dd276b]
+- Updated dependencies [39ba3ad]
+  - @ldn-viz/ui@19.6.0
+
 ## 5.3.0
 
 ### Minor Changes

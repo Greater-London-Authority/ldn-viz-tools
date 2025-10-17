@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.2.0
+
+### Minor Changes
+
+- c3f760c: CHANGED: 'Edit area' button says 'Add area' if no areas have been drawn
+
 ## 8.1.3
 
 ### Patch Changes
