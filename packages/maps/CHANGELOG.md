@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 8.2.1
+
+### Patch Changes
+
+- 8a8fa96: CHANGED: be more permissive in loading GeoJSON that wasn't created with TerraDRaw or the MapDrawing component, by defaulting tool to be polygon and replacing feature ids with a UUID4 (if they aren't already)
+
 ## 8.2.0
 
 ### Minor Changes
