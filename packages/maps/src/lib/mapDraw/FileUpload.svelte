@@ -3,6 +3,7 @@
 	import type { FeatureCollection } from 'geojson';
 	import type { ChangeEventHandler } from 'svelte/elements';
 
+	import uuid4 from 'uuid4';
 	export let onCancel: () => void;
 	export let onLoad: (data: FeatureCollection) => void;
 
@@ -15,6 +16,21 @@
 		try {
 			const text = await file.text();
 			const parsedJson = JSON.parse(text);
+
+			// modify features to please TerraDrw
+			// see e.g. https://github.com/JamesLMilner/terra-draw/issues/177
+			for (const feature of parsedJson.features) {
+				if (!uuid4.valid(feature.id)) {
+					feature.id = uuid4();
+				}
+
+				if (!feature.properties) {
+					feature.properties = {};
+				}
+				if (!feature.properties.mode) {
+					feature.properties.mode = 'polygon';
+				}
+			}
 
 			features = parsedJson;
 			savedFeatures = parsedJson;
