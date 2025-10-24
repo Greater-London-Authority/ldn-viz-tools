@@ -39,7 +39,8 @@
 		"@turf/centroid": "^7.1.0",
 		"@turf/turf": "^7.2.0",
 		"maplibre-gl": "^4.1.0",
-		"svelte-maplibre": "^0.8.2"
+		"svelte-maplibre": "^0.8.2",
+		"uuid4": "^2.0.3"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.42.1",
