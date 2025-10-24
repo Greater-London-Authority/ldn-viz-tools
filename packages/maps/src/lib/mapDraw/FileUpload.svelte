@@ -18,7 +18,7 @@ import uuid4 from "uuid4";
 			const parsedJson = JSON.parse(text);
 
 			// modify features to please TerraDrw
-			// 9see e.g. https://github.com/JamesLMilner/terra-draw/issues/177
+			// see e.g. https://github.com/JamesLMilner/terra-draw/issues/177
 			for (const feature of parsedJson.features) {
 				if (!uuid4.valid(feature.id)){
 					feature.id = uuid4();
