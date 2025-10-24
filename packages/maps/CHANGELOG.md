@@ -1,5 +1,12 @@
 # ldn-viz-tools-maps
 
+## 8.2.2
+
+### Patch Changes
+
+- 4e84ad2: FIXED: when uploading GeoJSON file, set list of features to just the uploaded features, rather than whole GeoJSON document
+- 4e84ad2: CHANGED: be more permissive in loading GeoJSON that wasn't created with TerraDRaw or the MapDrawing component, by defaulting tool to be polygon and replacing feature ids with a UUID4 (if they aren't already)
+
 ## 8.2.1
 
 ### Patch Changes
