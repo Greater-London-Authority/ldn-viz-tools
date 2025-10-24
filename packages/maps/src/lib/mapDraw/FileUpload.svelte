@@ -32,8 +32,8 @@
 				}
 			}
 
-			features = parsedJson;
-			savedFeatures = parsedJson;
+			features = parsedJson.features;
+			savedFeatures = parsedJson.features;
 
 			onLoad(parsedJson);
 		} catch (error) {
