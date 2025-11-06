@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.9
+
+### Minor Changes
+
+- c4a34fa: add mapdraw
+
 ## 9.0.0-svelte5.8
 
 ### Major Changes
