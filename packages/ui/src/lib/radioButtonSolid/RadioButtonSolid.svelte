@@ -11,7 +11,7 @@
 	import type { RadioButtonSolidProps } from './types';
 
 	let {
-		selectedId = $bindable(''),
+		selectedId = $bindable(),
 		label,
 		id,
 		name,
