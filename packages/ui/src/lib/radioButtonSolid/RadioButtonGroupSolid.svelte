@@ -36,7 +36,7 @@
 		optional = false,
 		disabled = false,
 		error = '',
-		selectedId = $bindable(''),
+		selectedId = $bindable(),
 		name,
 		options = [],
 		customOverlay = undefined
