@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
@@ -19,9 +19,9 @@
 <script lang="ts">
 	import type { Feature } from 'geojson';
 
-	let savedFeatures: Feature[] = [];
+	let savedFeatures: Feature[] = $state([]);
 
-	let savedFeatures2 = [
+	let savedFeatures2: Feature[] = $state([
 		{
 			id: 'eda554be-53a7-402d-9e4f-d17eb74a5f8e',
 			type: 'Feature',
@@ -40,66 +40,72 @@
 				mode: 'polygon'
 			}
 		}
-	];
+	]);
 
 	const logShapeToConsole = (savedFeatures: Feature[]) =>
 		console.log('User drew shape: ', savedFeatures);
 </script>
 
 <Story name="Default">
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapDraw bind:savedFeatures onDone={logShapeToConsole} />
-			</MapControlGroup>
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw bind:savedFeatures onDone={logShapeToConsole} />
+				</MapControlGroup>
+			</Map>
+		</div>
 
-	<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
+		<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
+	{/snippet}
 </Story>
 
 <Story name="Allow all specific modes/tools">
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapDraw
-					bind:savedFeatures
-					enabledModes={[
-						'point',
-						'polygon',
-						'linestring',
-						'freehand',
-						'circle',
-						'rectangle',
-						'sector'
-					]}
-				/>
-			</MapControlGroup>
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw
+						bind:savedFeatures
+						enabledModes={[
+							'point',
+							'polygon',
+							'linestring',
+							'freehand',
+							'circle',
+							'rectangle',
+							'sector'
+						]}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
 
-	<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
+		<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
+	{/snippet}
 </Story>
 
 <Story name="Load saved feature">
-	<div class="h-[100dvh] w-[100dvw]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapDraw bind:savedFeatures={savedFeatures2} />
-			</MapControlGroup>
-		</Map>
-	</div>
-	<pre>{JSON.stringify(savedFeatures2, null, 4)}</pre>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw bind:savedFeatures={savedFeatures2} />
+				</MapControlGroup>
+			</Map>
+		</div>
+		<pre>{JSON.stringify(savedFeatures2, null, 4)}</pre>
+	{/snippet}
 </Story>

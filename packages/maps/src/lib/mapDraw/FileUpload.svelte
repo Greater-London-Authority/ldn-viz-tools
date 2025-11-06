@@ -4,13 +4,22 @@
 	import type { ChangeEventHandler } from 'svelte/elements';
 
 	import uuid4 from 'uuid4';
-	export let onCancel: () => void;
-	export let onLoad: (data: FeatureCollection) => void;
 
-	export let features;
-	export let savedFeatures;
+	interface Props {
+		onCancel: () => void;
+		onLoad: (data: FeatureCollection) => void;
+		features: any;
+		savedFeatures: any;
+	}
 
-	let isDragging = false;
+	let {
+		onCancel,
+		onLoad,
+		features = $bindable(),
+		savedFeatures = $bindable()
+	}: Props = $props();
+
+	let isDragging = $state(false);
 
 	async function readFile(file) {
 		try {
@@ -80,7 +89,7 @@
 		}
 	}
 
-	let inputRef: HTMLInputElement;
+	let inputRef: HTMLInputElement = $state();
 </script>
 
 <div class="bg-color-container-level-1 pointer-events-auto flex flex-col gap-2 p-4">
@@ -91,11 +100,11 @@
 			'border-color-input-border hover:border-color-input-border-focussed relative min-h-[200px] rounded-lg border-2 border-dashed p-2',
 			isDragging ? '!bg-color-action-background-primary-muted-hover' : ''
 		)}
-		on:dragenter={handleDragIn}
-		on:dragleave={handleDragOut}
-		on:dragover={handleDrag}
-		on:drop={handleDrop}
-		on:keydown={(e) => {
+		ondragenter={handleDragIn}
+		ondragleave={handleDragOut}
+		ondragover={handleDrag}
+		ondrop={handleDrop}
+		onkeydown={(e) => {
 			if (e.key === 'Enter' || e.key === ' ') {
 				inputRef.click();
 			}
@@ -115,7 +124,7 @@
 				bind:this={inputRef}
 				type="file"
 				accept=".geojson"
-				on:change={handleFileSelect}
+				onchange={handleFileSelect}
 				class="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
 			/>
 		</div>

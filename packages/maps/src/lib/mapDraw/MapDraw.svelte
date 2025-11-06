@@ -11,49 +11,59 @@
 		TerraDrawRectangleMode,
 		TerraDrawRenderMode,
 		TerraDrawSectorMode,
-		TerraDrawSelectMode
+		TerraDrawSelectMode,
+		type GeoJSONStoreFeatures
 	} from 'terra-draw';
 	//import type { HexColorStyling } from 'terra-draw';
 
 	import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
-	import type { TerraDrawBaseAdapter } from 'terra-draw/dist/common/base.adapter';
 
+	import { theme } from '@ldn-viz/ui';
 	import type { Feature } from 'geojson';
-	import { currentTheme, tokenNameToValue } from '@ldn-viz/ui';
 	import type { MapLibreStore } from '../map/types';
 	import MapDrawControls from './MapDrawControls.svelte';
 
 	const mapStore: MapLibreStore = getContext('mapStore');
 
-	/**
+	export type HexColor = `#${string}`;
+
+	export type HexColorStyling = HexColor | ((feature: GeoJSONStoreFeatures) => HexColor);
+
+	interface Props {
+		/**
 	The modes/tools available for selection.
 	 **/
-	export let enabledModes = ['polygon'];
+		enabledModes?: any;
+		/**
+		 * The currently active mode.
+		 */
+		currentMode: string;
+		/**
+		 * GeoJSON features that have been drawn (continuously updates).
+		 */
+		features?: Feature[]; // can't control externally yet
+		/**
+		 * GeoJSON features that have been drawn (updates on Save or Clear).
+		 */
+		savedFeatures: Feature[];
+		/**
+		 * Function to be called when user clicks 'Done' button.
+		 */
+		onDone?: any;
+	}
 
-	/**
-	 * The currently active mode.
-	 */
-	export let currentMode: string;
-
-	/**
-	 * GeoJSON features that have been drawn (continuously updates).
-	 */
-	export let features: Feature[]; // can't control externally yet
-
-	/**
-	 * GeoJSON features that have been drawn (updates on Save or Clear).
-	 */
-	export let savedFeatures: Feature[];
-
-	/**
-	 * Function to be called when user clicks 'Done' button.
-	 */
-	export let onDone = (_features: Feature[]) => null;
+	let {
+		enabledModes = ['polygon'],
+		currentMode = $bindable(), // default to initially selecting first enabled
+		features = $bindable(),
+		savedFeatures = $bindable(),
+		onDone = (_features: Feature[]) => null
+	}: Props = $props();
 
 	const lightThemeStyle = {
-		fillColor: tokenNameToValue('ui.primary', $currentTheme), // as HexColorStyling,
+		fillColor: theme.tokenNameToValue('ui.primary', theme.currentTheme) as HexColorStyling,
 		fillOpacity: 0.5,
-		outlineColor: tokenNameToValue('ui.primary', $currentTheme),
+		outlineColor: theme.tokenNameToValue('ui.primary', theme.currentTheme) as HexColorStyling,
 		outlineWidth: 1
 	};
 
@@ -65,10 +75,10 @@
 			styles: lightThemeStyle
 		}),
 		linestring: new TerraDrawLineStringMode({
-			styles: lightThemeStyle
+			styles: lightThemeStyle as any
 		}),
 		point: new TerraDrawPointMode({
-			styles: lightThemeStyle
+			styles: lightThemeStyle as any
 		}),
 		polygon: new TerraDrawPolygonMode({
 			styles: lightThemeStyle
@@ -173,21 +183,26 @@
 
 	const renderMode = new TerraDrawRenderMode({
 		modeName: 'render',
-		styles: lightThemeStyle
+		styles: lightThemeStyle as any
 	});
 
-	let draw: TerraDraw;
-	let adapter: TerraDrawBaseAdapter;
+	let draw: TerraDraw | undefined = $state();
+	let adapter: any; //TerraDrawBaseAdapter;
 
-	const createTerraDraw = () => {
-		if ($mapStore) {
+	const createTerraDraw = (mapStore: unknown, enabledModes: any) => {
+		if (draw) {
+			// setup has already occured
+			return;
+		}
+
+		if (mapStore) {
 			const modes = [
-				...enabledModes.map((modeName) => modeMapping[modeName]),
+				...enabledModes.map((modeName: keyof typeof modeMapping) => modeMapping[modeName]),
 				selectMode,
 				renderMode
 			];
 
-			adapter = new TerraDrawMapLibreGLAdapter({ map: $mapStore });
+			adapter = new TerraDrawMapLibreGLAdapter({ map: mapStore });
 
 			draw = new TerraDraw({
 				adapter,
@@ -197,11 +212,11 @@
 			draw.start();
 
 			if (savedFeatures.length > 0) {
-				draw.addFeatures(savedFeatures);
+				draw.addFeatures(savedFeatures as any);
 			}
 
 			// once a user has finished creating a shape, reset to select tool
-			draw.on('finish', (id: string, context: { action: string; mode: string }) => {
+			draw.on('finish', (context: any) => {
 				if (context.action === 'draw') {
 					currentMode = 'select';
 				}
@@ -209,13 +224,16 @@
 
 			// continuously update features
 			draw.on('change', () => {
-				features = draw.getSnapshot();
+				features = draw!.getSnapshot();
 			});
 		}
 	};
-	$: createTerraDraw($mapStore, enabledModes);
 
-	const setMode = (newMode: string) => {
+	$effect(() => {
+		createTerraDraw($mapStore, enabledModes);
+	});
+
+	const setMode = (newMode?: string) => {
 		if (!draw) return;
 
 		if (newMode) {
@@ -225,7 +243,7 @@
 		}
 	};
 
-	$: setMode(currentMode);
+	$effect(() => setMode(currentMode));
 
 	onDestroy(() => {
 		// if we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist

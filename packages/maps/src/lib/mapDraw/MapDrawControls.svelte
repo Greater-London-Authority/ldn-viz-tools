@@ -7,52 +7,59 @@
 	import type { Feature } from 'geojson';
 	import FileUpload from './FileUpload.svelte';
 
-	/**
+	interface Props {
+		/**
 	The modes/tools available for selection.
 	 **/
-	export let enabledModes: string[] = [];
+		enabledModes?: string[];
+		/**
+		 * The currently active mode.
+		 */
+		currentMode: string | undefined;
+		/**
+		 * GeoJSON features that have been drawn (continuously updates).
+		 */
+		features: Feature[];
+		/**
+		 * GeoJSON features that have been drawn (updates on Save or Clear).
+		 */
+		savedFeatures: Feature[];
+		/**
+		 * The TerraDraw object.
+		 */
+		terraDraw: any;
+		/**
+		 * Function to be called when user clicks 'Done' button.
+		 */
+		onDone?: any;
+		/**
+		 * If `true`, then the drawn shape can be downloaded as a GeoJSON file, then re-uploaded to restore state.
+		 */
+		allowUploadAndDownload?: boolean;
+	}
 
-	/**
-	 * The currently active mode.
-	 */
-	export let currentMode: string | undefined;
-
-	/**
-	 * GeoJSON features that have been drawn (continuously updates).
-	 */
-	export let features: Feature[];
-
-	/**
-	 * GeoJSON features that have been drawn (updates on Save or Clear).
-	 */
-	export let savedFeatures: Feature[];
-
-	/**
-	 * The TerraDraw object.
-	 */
-	export let terraDraw;
-
-	/**
-	 * Function to be called when user clicks 'Done' button.
-	 */
-	export let onDone = (_features: Feature[]) => null;
-
-	/**
-	 * If `true`, then the drawn shape can be downloaded as a GeoJSON file, then re-uploaded to restore state.
-	 */
-	export let allowUploadAndDownload = true;
+	let {
+		enabledModes = [],
+		currentMode = $bindable(),
+		features,
+		savedFeatures = $bindable(),
+		terraDraw,
+		onDone = (_features: Feature[]) => null,
+		allowUploadAndDownload = true
+	}: Props = $props();
 
 	// this is the mode of the MapDrawControls component, rather than of the TerraDraw component
-	let metaMode: 'default' | 'edit' | 'upload' = 'default';
+	let metaMode: 'default' | 'edit' | 'upload' = $state('default');
 
-	let options: { id: string; label: string }[];
+	let options: { id: string; label: string }[] = $derived(
+		[...enabledModes, 'select'].map((m) => ({
+			id: m,
+			label: m[0].toUpperCase() + m.slice(1)
+		}))
+	);
 
-	$: options = [...enabledModes, 'select'].map((m) => ({
-		id: m,
-		label: m[0].toUpperCase() + m.slice(1)
-	}));
+	let previousFeatures: Feature[] | string = [];
 
-	let previousFeatures: Feature[] = [];
 	const clickEdit = () => {
 		metaMode = 'edit';
 		previousFeatures = JSON.stringify(features || []);
@@ -64,7 +71,7 @@
 	};
 
 	const clickCancel = () => {
-		features = JSON.parse(previousFeatures);
+		features = JSON.parse(previousFeatures as string);
 
 		terraDraw.clear();
 		terraDraw.addFeatures(features);
@@ -81,7 +88,7 @@
 		savedFeatures = features;
 	};
 
-	const clickLoad = (geoJSON) => {
+	const clickLoad = (geoJSON: { features: any }) => {
 		metaMode = 'default';
 		terraDraw.clear();
 		terraDraw.addFeatures(geoJSON.features);
