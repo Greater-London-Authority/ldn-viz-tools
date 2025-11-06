@@ -2,6 +2,8 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Map from './Map.svelte';
 
+	import * as os_light_vts from '../themes/os_light_vts.json';
+
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	const { Story } = defineMeta({
@@ -99,7 +101,6 @@
 	import * as darkStyle from '../themes/os_dark.json';
 	import * as darkGreyMutedStyle from '../themes/os_dark_grey_muted_buildings.json';
 	import * as greyStyle from '../themes/os_greyscale.json';
-	import * as os_light_vts from '../themes/os_light_vts.json';
 
 	import loadTestLayers from '../loadTestLayers';
 	import type { MapLibreStyle } from './types';
