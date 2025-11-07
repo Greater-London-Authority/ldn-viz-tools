@@ -116,7 +116,7 @@
 
 <div class="flex gap-2">
 	{#if metaMode === 'edit'}
-		<div class="pointer-events-auto flex flex-col gap-1 pt-1">
+		<div class="pointer-events-auto flex flex-col gap-1">
 			<Button
 				variant="square"
 				size="lg"
