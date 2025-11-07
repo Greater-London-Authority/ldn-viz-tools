@@ -1,5 +1,12 @@
 # ldn-viz-tools-charts
 
+## 7.0.0-svelte5.5
+
+### Patch Changes
+
+- Updated dependencies [c4a34fa]
+  - @ldn-viz/ui@21.0.0-svelte5.5
+
 ## 7.0.0-svelte5.4
 
 ### Patch Changes
