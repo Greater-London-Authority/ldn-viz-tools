@@ -178,6 +178,19 @@
 					}
 				}
 			}
+		},
+
+		styles: {
+			selectedPolygonColor: theme.tokenNameToValue(
+				'action.primary.focus',
+				theme.currentTheme
+			) as HexColorStyling,
+			selectedPolygonFillOpacity: 0.5,
+			selectedPolygonOutlineColor: theme.tokenNameToValue(
+				'action.primary',
+				theme.currentTheme
+			) as HexColorStyling,
+			selectedPolygonOutlineWidth: 1
 		}
 	});
 
