@@ -54,6 +54,7 @@ export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelt
 
 // Drawing
 export { default as MapDraw } from './mapDraw/MapDraw.svelte';
+export * from './mapDraw/utils.js';
 
 // themes
 export * from './themes/animations';
