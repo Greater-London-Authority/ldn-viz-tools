@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.11
+
+### Minor Changes
+
+- 64c9de0: FIXED: allow the features in `MapDraw` to be updated by value passe din as prop
+
 ## 9.0.0-svelte5.10
 
 ### Minor Changes
