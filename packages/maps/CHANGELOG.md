@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.10
+
+### Minor Changes
+
+- ee2e9b5: CHANGED: updated design of `MapDraw` component
+
 ## 9.0.0-svelte5.9
 
 ### Minor Changes
