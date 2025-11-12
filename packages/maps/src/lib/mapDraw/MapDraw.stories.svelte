@@ -1,4 +1,4 @@
-<script module>
+<script lang="ts" module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
@@ -6,6 +6,7 @@
 	import { default as Map } from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
+	import type { Feature } from 'geojson';
 	import MapDraw from './MapDraw.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
@@ -14,37 +15,16 @@
 		title: 'Maps/Components/MapDraw',
 		component: MapDraw
 	});
+
+	let features1: Feature[] = $state([]);
+	let features2: Feature[] = $state([]);
+
+	let features3: Feature[] = $state([]);
 </script>
 
-<script lang="ts">
-	import type { Feature } from 'geojson';
-
-	let savedFeatures: Feature[] = $state([]);
-
-	let savedFeatures2: Feature[] = $state([
-		{
-			id: 'eda554be-53a7-402d-9e4f-d17eb74a5f8e',
-			type: 'Feature',
-			geometry: {
-				type: 'Polygon',
-				coordinates: [
-					[
-						[-0.336512108, 51.720280543],
-						[-0.260034188, 51.575641207],
-						[-0.088723647, 51.670600962],
-						[-0.336512108, 51.720280543]
-					]
-				]
-			},
-			properties: {
-				mode: 'polygon'
-			}
-		}
-	]);
-
-	const logShapeToConsole = (savedFeatures: Feature[]) =>
-		console.log('User drew shape: ', savedFeatures);
-</script>
+<!-- <script lang="ts">
+	import { mapDraw } from './MapDrawState.svelte';
+</script> -->
 
 <Story name="Default">
 	{#snippet template()}
@@ -55,12 +35,12 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapDraw bind:savedFeatures onDone={logShapeToConsole} />
+					<MapDraw onDone={(features) => (features1 = features)} />
 				</MapControlGroup>
 			</Map>
 		</div>
 
-		<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
+		<pre>{JSON.stringify(features1, null, 4)}</pre>
 	{/snippet}
 </Story>
 
@@ -74,26 +54,18 @@
 			>
 				<MapControlGroup position="TopLeft">
 					<MapDraw
-						bind:savedFeatures
-						enabledModes={[
-							'point',
-							'polygon',
-							'linestring',
-							'freehand',
-							'circle',
-							'rectangle',
-							'sector'
-						]}
+						modes={['point', 'polygon', 'linestring', 'freehand', 'circle', 'rectangle', 'sector']}
+						onDone={(features) => (features2 = features)}
 					/>
 				</MapControlGroup>
 			</Map>
 		</div>
 
-		<pre>{JSON.stringify(savedFeatures, null, 4)}</pre>
+		<pre>{JSON.stringify(features2, null, 4)}</pre>
 	{/snippet}
 </Story>
 
-<Story name="Load saved feature">
+<Story name="Allow upload but not download">
 	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
@@ -102,10 +74,11 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapDraw bind:savedFeatures={savedFeatures2} />
+					<MapDraw uploadDownload={[true, false]} onDone={(features) => (features3 = features)} />
 				</MapControlGroup>
 			</Map>
 		</div>
-		<pre>{JSON.stringify(savedFeatures2, null, 4)}</pre>
+
+		<pre>{JSON.stringify(features3, null, 4)}</pre>
 	{/snippet}
 </Story>
