@@ -65,7 +65,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Allow Upload only">
+<Story name="Allow upload but not download">
 	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
