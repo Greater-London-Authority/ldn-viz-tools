@@ -6,6 +6,8 @@
 	import { default as Map } from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
+	import { Button } from '@ldn-viz/ui';
+
 	import type { Feature } from 'geojson';
 	import MapDraw from './MapDraw.svelte';
 
@@ -18,13 +20,30 @@
 
 	let features1: Feature[] = $state([]);
 	let features2: Feature[] = $state([]);
-
 	let features3: Feature[] = $state([]);
-</script>
+	let features4: Feature[] = $state([]);
 
-<!-- <script lang="ts">
-	import { mapDraw } from './MapDrawState.svelte';
-</script> -->
+	const newFeatures = [
+		{
+			id: 'cdb20d21-a866-4e4e-819a-4397da10f988',
+			type: 'Feature',
+			geometry: {
+				type: 'Polygon',
+				coordinates: [
+					[
+						[-0.098955242, 51.544672657],
+						[-0.219235288, 51.480301072],
+						[-0.059872651, 51.470018362],
+						[-0.098955242, 51.544672657]
+					]
+				]
+			},
+			properties: {
+				mode: 'polygon'
+			}
+		}
+	];
+</script>
 
 <Story name="Default">
 	{#snippet template()}
@@ -80,5 +99,29 @@
 		</div>
 
 		<pre>{JSON.stringify(features3, null, 4)}</pre>
+	{/snippet}
+</Story>
+
+<Story name="Externally update">
+	{#snippet template()}
+		<Button onclick={() => (features4 = newFeatures)}>Update</Button>
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw
+						uploadDownload={[false, false]}
+						onDone={(features) => (features4 = features)}
+						features={features4}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
+
+		<pre>{JSON.stringify(features4, null, 4)}</pre>
 	{/snippet}
 </Story>
