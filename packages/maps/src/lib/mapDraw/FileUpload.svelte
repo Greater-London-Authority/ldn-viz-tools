@@ -3,7 +3,6 @@
 	import { CheckCircle, XCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { GeoJSONStoreFeatures, TerraDraw } from 'terra-draw';
-	import { mapDraw } from './MapDrawState.svelte';
 	import { fixImportedGeoJSON } from './utils';
 
 	interface Props {
@@ -11,9 +10,11 @@
 		 * The TerraDraw object.
 		 */
 		terraDraw: TerraDraw;
+
+		mapDraw: any;
 	}
 
-	let { terraDraw }: Props = $props();
+	let { terraDraw, mapDraw }: Props = $props();
 
 	let upload: {
 		state: 'pending' | 'success' | 'error';

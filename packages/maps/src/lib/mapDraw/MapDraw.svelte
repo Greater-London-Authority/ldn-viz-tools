@@ -4,9 +4,9 @@
 	import { TerraDraw, type GeoJSONStoreFeatures } from 'terra-draw';
 	import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
 	import MapDrawControls from './MapDrawControls.svelte';
-	import { drawModes, mapDraw } from './MapDrawState.svelte';
+	import { MapDraw, Modes } from './MapDrawState.svelte';
 
-	type Modes =
+	type Mode =
 		| 'circle'
 		| 'freehand'
 		| 'linestring'
@@ -20,7 +20,7 @@
 		/**
 		The modes/tools available for selection.
 	 	**/
-		modes?: Modes[];
+		modes?: Mode[];
 
 		/**
 		 * Function to be called when user clicks 'Done' button.
@@ -43,47 +43,59 @@
 
 	const mapStore: MapLibreStore = getContext('mapStore');
 
-	const adapter = $derived.by(
-		() => $mapStore && new TerraDrawMapLibreGLAdapter({ map: $mapStore })
-	);
+	let drawModes = new Modes();
+	let mapDraw = new MapDraw();
 
-	drawModes.enabled = modes;
+	let terraDraw: TerraDraw | undefined = $state(undefined);
+	let adapter: any = $state();
 
-	const terraDraw = $derived.by(() => {
-		if (adapter) {
-			const td = new TerraDraw({
+	const createTerraDraw = (mapStore: unknown) => {
+		if (terraDraw) {
+			// setup has already occured
+			return;
+		}
+
+		if (mapStore) {
+			adapter = mapStore && new TerraDrawMapLibreGLAdapter({ map: mapStore });
+
+			drawModes.enabled = modes;
+
+			terraDraw = new TerraDraw({
 				adapter,
 				modes: drawModes.modes
 			});
 
-			td.on('finish', () => {
+			terraDraw.start();
+
+			terraDraw.on('finish', () => {
 				if (mapDraw.controlMode.current === 'edit') {
 					drawModes.mode.selected = 'select';
-					td.setMode('select');
+					terraDraw!.setMode('select');
 				}
 			});
 
-			td.on('change', () => {
-				mapDraw.features.current = td.getSnapshot();
+			terraDraw.on('change', () => {
+				mapDraw.features.current = terraDraw!.getSnapshot();
 			});
-
-			td.start();
-
-			return td;
 		}
-		return undefined;
-	});
+	};
 
+	$effect(() => createTerraDraw($mapStore));
+
+	/**
+	 * If we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
+	 */
 	onDestroy(() => {
-		/**
-		 * If we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
-		 */
-		adapter?.unregister();
-		terraDraw?.clear();
-		terraDraw?.stop();
+		if (adapter) {
+			adapter?.unregister();
+		}
+
+		if (terraDraw) {
+			terraDraw?.clear();
+		}
 	});
 </script>
 
 {#if terraDraw}
-	<MapDrawControls {terraDraw} {uploadDownload} {onDone} />
+	<MapDrawControls {terraDraw} {uploadDownload} {onDone} {drawModes} {mapDraw} />
 {/if}

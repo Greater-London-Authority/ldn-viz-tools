@@ -21,9 +21,7 @@ const themeStyle = $state({
 	outlineWidth: 1
 });
 
-type TerraDrawModes = (typeof modeMapping)[keyof typeof modeMapping][];
-
-const selectMode = new TerraDrawSelectMode({
+const selectModeOptions = {
 	allowManualDeselection: true, // allows users to deselect by clicking on the map
 
 	// we override the default key bindings so that features are deleted with Backspace rather than Delete
@@ -121,40 +119,57 @@ const selectMode = new TerraDrawSelectMode({
 		) as HexColorStyling,
 		selectedPolygonOutlineWidth: 1
 	}
-});
-
-const modeMapping = {
-	circle: new TerraDrawCircleMode({
-		styles: themeStyle
-	}),
-	freehand: new TerraDrawFreehandMode({
-		styles: themeStyle
-	}),
-	linestring: new TerraDrawLineStringMode({
-		styles: themeStyle as any
-	}),
-	point: new TerraDrawPointMode({
-		styles: themeStyle as any
-	}),
-	polygon: new TerraDrawPolygonMode({
-		styles: themeStyle
-	}),
-	rectangle: new TerraDrawRectangleMode({
-		styles: themeStyle
-	}),
-	sector: new TerraDrawSectorMode({
-		styles: themeStyle
-	}),
-
-	select: selectMode, // Defined Above
-
-	render: new TerraDrawRenderMode({
-		modeName: 'render',
-		styles: themeStyle as any
-	})
 };
 
-class Modes {
+export class Modes {
+	modeMapping = {
+		circle: new TerraDrawCircleMode(),
+		freehand: new TerraDrawFreehandMode(),
+		linestring: new TerraDrawLineStringMode(),
+		point: new TerraDrawPointMode(),
+		polygon: new TerraDrawPolygonMode(),
+		rectangle: new TerraDrawRectangleMode(),
+		sector: new TerraDrawSectorMode(),
+		select: new TerraDrawSelectMode(),
+		render: new TerraDrawRenderMode({ modeName: 'render', styles: {} })
+	};
+
+	/**
+	 * Create new mode objects, as they cannot be re-used in different TerraDraw instance
+	 */
+	constructor() {
+		this.modeMapping = {
+			circle: new TerraDrawCircleMode({
+				styles: themeStyle
+			}),
+			freehand: new TerraDrawFreehandMode({
+				styles: themeStyle
+			}),
+			linestring: new TerraDrawLineStringMode({
+				styles: themeStyle as any
+			}),
+			point: new TerraDrawPointMode({
+				styles: themeStyle as any
+			}),
+			polygon: new TerraDrawPolygonMode({
+				styles: themeStyle
+			}),
+			rectangle: new TerraDrawRectangleMode({
+				styles: themeStyle
+			}),
+			sector: new TerraDrawSectorMode({
+				styles: themeStyle
+			}),
+
+			select: new TerraDrawSelectMode(selectModeOptions), // Defined Above
+
+			render: new TerraDrawRenderMode({
+				modeName: 'render',
+				styles: themeStyle as any
+			})
+		};
+	}
+
 	/**
 	 * List of the drawing tools that are enabled.
 	 */
@@ -183,10 +198,10 @@ class Modes {
 	/**
 	 * List of TerraDraw modes (the enabled drawing modes, plus select and render modes).
 	 */
-	#modes: TerraDrawModes = $derived([
-		...this.enabled.map((modeName) => modeMapping[modeName as keyof typeof modeMapping]),
-		modeMapping['select'],
-		modeMapping['render']
+	#modes = $derived([
+		...this.enabled.map((modeName) => this.modeMapping[modeName as keyof typeof this.modeMapping]),
+		this.modeMapping['select'],
+		this.modeMapping['render']
 	]);
 	mode = $state({ selected: '', previous: '' });
 
@@ -195,9 +210,7 @@ class Modes {
 	}
 }
 
-export const drawModes = new Modes();
-
-class MapDraw {
+export class MapDraw {
 	controlMode: { current: 'default' | 'edit' | 'upload' } = $state({ current: 'default' });
 	features: {
 		/**
@@ -223,5 +236,3 @@ class MapDraw {
 		previous: ''
 	});
 }
-
-export const mapDraw = new MapDraw();

@@ -16,7 +16,6 @@
 	import { fly } from 'svelte/transition';
 	import type { GeoJSONStoreFeatures, TerraDraw } from 'terra-draw';
 	import FileUpload from './FileUpload.svelte';
-	import { drawModes, mapDraw } from './MapDrawState.svelte';
 
 	interface Props {
 		/**
@@ -35,9 +34,12 @@
 		 * If [true, true], then upload and download are enabled
 		 */
 		uploadDownload: [boolean, boolean];
+
+		drawModes: any;
+		mapDraw: any;
 	}
 
-	let { terraDraw, onDone, uploadDownload }: Props = $props();
+	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw }: Props = $props();
 
 	/**
 	 * Icon lookup for mode selection buttons
@@ -64,7 +66,7 @@
 		mapDraw.features.previous = JSON.stringify(mapDraw.features.current || []);
 	};
 
-	let showOptions = $state(false);
+	let showOptions = $state(true);
 
 	terraDraw.on('change', () => {
 		showOptions = false;
@@ -121,6 +123,9 @@
 		drawModes.mode.selected = 'render';
 
 		mapDraw.controlMode.current = 'default';
+
+		terraDraw.setMode('render');
+
 		onDone(mapDraw.features.current);
 
 		mapDraw.features.saved = mapDraw.features.current;
@@ -268,5 +273,5 @@
 		</div>
 	{/if}
 {:else if mapDraw.controlMode.current === 'upload'}
-	<FileUpload {terraDraw} />
+	<FileUpload {terraDraw} {mapDraw} />
 {/if}
