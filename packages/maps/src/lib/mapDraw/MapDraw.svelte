@@ -33,12 +33,16 @@
 		 * If [true, true], then upload and download are enabled
 		 */
 		uploadDownload?: [boolean, boolean];
+
+		features?: GeoJSONStoreFeatures[];
 	}
 
 	let {
 		modes = ['polygon'],
 		onDone = (_features: GeoJSONStoreFeatures[]) => null,
-		uploadDownload = [true, true]
+		uploadDownload = [true, true],
+
+		features: externalFeatures = []
 	}: Props = $props();
 
 	const mapStore: MapLibreStore = getContext('mapStore');
@@ -81,6 +85,13 @@
 	};
 
 	$effect(() => createTerraDraw($mapStore));
+
+	$effect(() => {
+		mapDraw.features.saved = externalFeatures;
+		terraDraw?.clear();
+		terraDraw?.addFeatures(externalFeatures);
+		mapDraw.controlMode.current = 'default';
+	});
 
 	/**
 	 * If we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
