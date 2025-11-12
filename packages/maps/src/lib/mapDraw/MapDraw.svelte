@@ -18,8 +18,8 @@
 
 	interface Props {
 		/**
-		The modes/tools available for selection.
-	 	**/
+		 * The modes/tools available for selection.
+		 **/
 		modes?: Mode[];
 
 		/**
@@ -34,6 +34,9 @@
 		 */
 		uploadDownload?: [boolean, boolean];
 
+		/**
+		 * Eternally uploaded features
+		 **/
 		features?: GeoJSONStoreFeatures[];
 	}
 
@@ -41,7 +44,6 @@
 		modes = ['polygon'],
 		onDone = (_features: GeoJSONStoreFeatures[]) => null,
 		uploadDownload = [true, true],
-
 		features: externalFeatures = []
 	}: Props = $props();
 
