@@ -85,11 +85,6 @@
 			showOptions = false;
 		}
 
-		if (mode != 'select') {
-			// re-order modes.options
-			drawModes.reorderOptions(mode);
-		}
-
 		drawModes.mode.selected = mode;
 		drawModes.mode.previous = drawModes.mode.selected;
 		terraDraw.setMode(mode);
@@ -164,25 +159,29 @@
 	</Button>
 {:else if mapDraw.controlMode.current === 'edit'}
 	<div class="pointer-events-auto flex h-fit">
+		<Button
+			variant="square"
+			emphasis={drawModes.mode.selected !== 'select' ? 'primary' : 'secondary'}
+			class="pointer-events-auto"
+			size="lg"
+			onclick={() => {
+				showOptions = true;
+			}}
+		>
+			<Icon src={Pencil} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+			Draw
+		</Button>
+
 		{#each drawModes.options as mode, i (mode)}
-			{#if i === 0}
-				<Button
-					variant="square"
-					emphasis={drawModes.mode.selected === mode ? 'primary' : 'secondary'}
-					class="pointer-events-auto capitalize"
-					size="lg"
-					onclick={() => clickMode(mode)}
-				>
-					<Icon src={icons[mode]} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
-					{mode}
-				</Button>
-			{:else if showOptions}
+			{#if showOptions}
 				<!-- These options hidden in the ribbon -->
 				<div in:fly>
 					<Button
 						variant="square"
 						emphasis={'secondary'}
-						class="pointer-events-auto capitalize"
+						class="{drawModes.mode.selected === mode
+							? '!bg-color-action-background-secondary-active'
+							: null} pointer-events-auto capitalize"
 						size="lg"
 						onclick={() => clickMode(mode)}
 					>

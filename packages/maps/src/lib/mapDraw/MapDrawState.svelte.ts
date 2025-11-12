@@ -183,17 +183,10 @@ export class Modes {
 	}
 
 	/**
-	 * List of the drawing tools that are enabled, in the order they will be displayed in the shelf of tools.
+	 * List of the drawing tools that are enabled.
 	 */
 
 	options: string[] = $state([]);
-
-	/**
-	 * Re-order options so selected drawing tool is listed first.
-	 */
-	reorderOptions(selectedMode: string) {
-		this.options = [selectedMode, ...this.enabled.filter((option) => option !== selectedMode)];
-	}
 
 	/**
 	 * List of TerraDraw modes (the enabled drawing modes, plus select and render modes).
