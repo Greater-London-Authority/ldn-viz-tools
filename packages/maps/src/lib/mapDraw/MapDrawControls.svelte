@@ -1,97 +1,135 @@
 <script lang="ts">
-	import { Icon } from '@steeze-ui/svelte-icon';
-
+	import { Button } from '@ldn-viz/ui';
 	import { ArrowDownTray, ArrowUpTray, Check, Pencil, Trash, XMark } from '@steeze-ui/heroicons';
-
-	import { Button, RadioButtonGroupSolid } from '@ldn-viz/ui';
-	import type { Feature } from 'geojson';
+	import {
+		Angle,
+		BoundingBox,
+		Circle,
+		Cursor,
+		LineSegments,
+		MapPinSimpleArea,
+		Polygon,
+		Scribble,
+		type IconSource
+	} from '@steeze-ui/phosphor-icons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { fly } from 'svelte/transition';
+	import type { GeoJSONStoreFeatures, TerraDraw } from 'terra-draw';
 	import FileUpload from './FileUpload.svelte';
 
 	interface Props {
 		/**
-	The modes/tools available for selection.
-	 **/
-		enabledModes?: string[];
-		/**
-		 * The currently active mode.
-		 */
-		currentMode: string | undefined;
-		/**
-		 * GeoJSON features that have been drawn (continuously updates).
-		 */
-		features: Feature[];
-		/**
-		 * GeoJSON features that have been drawn (updates on Save or Clear).
-		 */
-		savedFeatures: Feature[];
-		/**
 		 * The TerraDraw object.
 		 */
-		terraDraw: any;
+		terraDraw: TerraDraw;
+
 		/**
 		 * Function to be called when user clicks 'Done' button.
 		 */
-		onDone?: any;
+		onDone: (_features: GeoJSONStoreFeatures[]) => any;
+
 		/**
-		 * If `true`, then the drawn shape can be downloaded as a GeoJSON file, then re-uploaded to restore state.
+		 * If [true, false], then Geojson upload only is enabled.
+		 * If [false, true], then the drawn shape can be downloaded as a GeoJSON file.
+		 * If [true, true], then upload and download are enabled
 		 */
-		allowUploadAndDownload?: boolean;
+		uploadDownload: [boolean, boolean];
+
+		drawModes: any;
+		mapDraw: any;
 	}
 
-	let {
-		enabledModes = [],
-		currentMode = $bindable(),
-		features,
-		savedFeatures = $bindable(),
-		terraDraw,
-		onDone = (_features: Feature[]) => null,
-		allowUploadAndDownload = true
-	}: Props = $props();
+	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw }: Props = $props();
 
-	// this is the mode of the MapDrawControls component, rather than of the TerraDraw component
-	let metaMode: 'default' | 'edit' | 'upload' = $state('default');
-
-	let options: { id: string; label: string }[] = $derived(
-		[...enabledModes, 'select'].map((m) => ({
-			id: m,
-			label: m[0].toUpperCase() + m.slice(1)
-		}))
-	);
-
-	let previousFeatures: Feature[] | string = [];
+	/**
+	 * Icon lookup for mode selection buttons
+	 */
+	const icons: { [key: string]: IconSource } = {
+		circle: Circle,
+		freehand: Scribble,
+		linestring: LineSegments,
+		point: MapPinSimpleArea,
+		polygon: Polygon,
+		rectangle: BoundingBox,
+		sector: Angle,
+		select: Cursor
+	};
 
 	const clickEdit = () => {
-		metaMode = 'edit';
-		previousFeatures = JSON.stringify(features || []);
+		// Set default mode
+		drawModes.mode.selected = drawModes.mode.previous
+			? drawModes.mode.previous
+			: drawModes.enabled[0];
+		terraDraw.setMode(drawModes.mode.selected);
+
+		mapDraw.controlMode.current = 'edit';
+		mapDraw.features.previous = JSON.stringify(mapDraw.features.current || []);
+	};
+
+	let showOptions = $state(true);
+
+	terraDraw.on('change', () => {
+		showOptions = false;
+	});
+
+	const toggleOptions = () => {
+		showOptions = !showOptions;
+	};
+
+	const clickMode = (mode: string) => {
+		if (drawModes.mode.selected !== 'select') {
+			if (mode !== 'select') {
+				toggleOptions();
+			}
+		} else {
+			showOptions = false;
+		}
+
+		drawModes.mode.selected = mode;
+		drawModes.mode.previous = drawModes.mode.selected;
+		terraDraw.setMode(mode);
+	};
+
+	const clickSelect = () => {
+		showOptions = false;
+		drawModes.mode.selected = 'select';
+		terraDraw.setMode('select');
 	};
 
 	const clickClear = () => {
 		terraDraw.clear();
-		features = terraDraw.getSnapshot();
+		drawModes.mode.selected = drawModes.mode.previous;
+		mapDraw.features.current = terraDraw.getSnapshot();
+		showOptions = false;
 	};
 
 	const clickCancel = () => {
-		features = JSON.parse(previousFeatures as string);
+		mapDraw.features.current = JSON.parse(mapDraw.features.previous as string);
 
 		terraDraw.clear();
-		terraDraw.addFeatures(features);
+		terraDraw.addFeatures(mapDraw.features.current);
 
-		metaMode = 'default';
+		drawModes.mode.previous = drawModes.mode.selected;
+		mapDraw.controlMode.current = 'default';
+		showOptions = false;
 	};
 
 	const clickDone = () => {
-		currentMode = 'render';
+		drawModes.mode.selected = 'render';
 
-		metaMode = 'default';
-		onDone(features);
+		mapDraw.controlMode.current = 'default';
 
-		savedFeatures = features;
+		terraDraw.setMode('render');
+
+		onDone(mapDraw.features.current);
+
+		mapDraw.features.saved = mapDraw.features.current;
 	};
 
-	const clickLoad = (geoJSON: { features: any }) => {
-		metaMode = 'default';
-		terraDraw.clear();
-		terraDraw.addFeatures(geoJSON.features);
+	const clickUpload = () => {
+		drawModes.mode.selected = 'select';
+		terraDraw.setMode('select');
+		mapDraw.controlMode.current = 'upload';
 	};
 
 	const downloadFromURL = (url: string, name: string) => {
@@ -105,7 +143,7 @@
 	const downloadData = () => {
 		const geoJson = {
 			type: 'FeatureCollection',
-			features: features
+			features: mapDraw.features.current
 		};
 		const dataString = JSON.stringify(geoJson, null, 4);
 		const dataURL = 'data:application/json;base64,' + window.btoa(dataString);
@@ -114,76 +152,125 @@
 	};
 </script>
 
-<div class="flex gap-2">
-	{#if metaMode === 'edit'}
-		<div class="pointer-events-auto flex flex-col gap-1 pt-1">
-			<Button
-				variant="square"
-				size="lg"
-				emphasis="positive"
-				onclick={clickDone}
-				class="pointer-events-auto"
-			>
-				<Icon src={Check} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
-				Done
-			</Button>
+{#if mapDraw.controlMode.current === 'default'}
+	<Button variant="square" class="pointer-events-auto" size="lg" onclick={clickEdit}>
+		<Icon src={Pencil} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+		{mapDraw.features.saved.length === 0 ? 'Add' : 'Edit'} area
+	</Button>
+{:else if mapDraw.controlMode.current === 'edit'}
+	<div class="pointer-events-auto flex h-fit">
+		<Button
+			variant="square"
+			emphasis={drawModes.mode.selected !== 'select' ? 'primary' : 'secondary'}
+			class="pointer-events-auto"
+			size="lg"
+			onclick={() => {
+				showOptions = true;
+			}}
+		>
+			<Icon src={Pencil} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+			Draw
+		</Button>
 
-			<Button
-				variant="square"
-				size="lg"
-				emphasis="negative"
-				onclick={clickCancel}
-				class="pointer-events-auto"
-			>
-				<Icon src={XMark} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
-				Cancel
-			</Button>
+		{#each drawModes.options as mode, i (mode)}
+			{#if showOptions}
+				<!-- These options hidden in the ribbon -->
+				<div in:fly>
+					<Button
+						variant="square"
+						emphasis={'secondary'}
+						class="{drawModes.mode.selected === mode
+							? '!bg-color-action-background-secondary-active'
+							: null} pointer-events-auto capitalize"
+						size="lg"
+						onclick={() => clickMode(mode)}
+					>
+						<Icon src={icons[mode]} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+						{mode}
+					</Button>
+				</div>
+			{/if}
+		{/each}
+	</div>
 
-			<Button
-				variant="square"
-				size="lg"
-				emphasis="secondary"
-				onclick={clickClear}
-				class="pointer-events-auto"
-			>
-				<Icon src={Trash} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
-				Clear
-			</Button>
-		</div>
+	<div class="flex flex-col">
+		<Button
+			variant="square"
+			emphasis={drawModes.mode.selected === 'select' ? 'primary' : 'secondary'}
+			class="pointer-events-auto"
+			size="lg"
+			onclick={() => clickSelect()}
+			disabled={mapDraw.features.current.length ? false : true}
+		>
+			<Icon src={icons['select']} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+			Select
+		</Button>
+		<Button
+			variant="square"
+			class="pointer-events-auto"
+			size="lg"
+			emphasis="secondary"
+			onclick={clickClear}
+			disabled={mapDraw.features.current.length ? false : true}
+		>
+			<Icon src={Trash} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+			Clear all
+		</Button>
+	</div>
 
-		<div class="pointer-events-auto h-fit">
-			<RadioButtonGroupSolid name="" {options} bind:selectedId={currentMode} />
-		</div>
-	{:else if metaMode === 'upload'}
-		<FileUpload
-			onCancel={() => (metaMode = 'default')}
-			onLoad={clickLoad}
-			bind:features
-			bind:savedFeatures
-		/>
-	{:else}
-		<div class="pointer-events-auto flex flex-col gap-1">
-			<Button variant="square" size="lg" onclick={clickEdit}>
-				<Icon src={Pencil} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
-				{!savedFeatures || savedFeatures.length === 0 ? 'Add' : 'Edit'} area
-			</Button>
+	<div class="flex flex-col">
+		<Button
+			variant="square"
+			class="pointer-events-auto"
+			size="lg"
+			emphasis="negative"
+			onclick={clickCancel}
+		>
+			<Icon src={XMark} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+			Cancel
+		</Button>
+		<Button
+			variant="square"
+			class="pointer-events-auto"
+			size="lg"
+			emphasis="positive"
+			onclick={clickDone}
+		>
+			<Icon src={Check} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+			Done
+		</Button>
+	</div>
 
-			{#if allowUploadAndDownload}
-				<Button variant="square" size="lg" emphasis="secondary" onclick={downloadData}>
-					<Icon src={ArrowDownTray} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
-					Download
-				</Button>
-
+	{#if uploadDownload.some((v) => v === true)}
+		<div class="flex flex-col">
+			{#if uploadDownload[0]}
 				<Button
 					variant="square"
+					class="pointer-events-auto"
 					size="lg"
 					emphasis="secondary"
-					onclick={() => (metaMode = 'upload')}
+					onclick={clickUpload}
 				>
 					<Icon src={ArrowUpTray} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
 					Upload
 				</Button>
 			{/if}
+
+			{#if uploadDownload[1]}
+				<Button
+					variant="square"
+					class="pointer-events-auto"
+					size="lg"
+					emphasis="secondary"
+					onclick={downloadData}
+					disabled={mapDraw.features.current.length ? false : true}
+				>
+					<Icon src={ArrowDownTray} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
+					Download
+				</Button>
+			{/if}
 		</div>
 	{/if}
-</div>
+{:else if mapDraw.controlMode.current === 'upload'}
+	<FileUpload {terraDraw} {mapDraw} />
+{/if}
