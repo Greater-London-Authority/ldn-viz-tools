@@ -29,6 +29,16 @@
 		onDone: (_features: GeoJSONStoreFeatures[]) => any;
 
 		/**
+		 * Function to be called when user clicks 'Edit' button.
+		 */
+		onStart: () => any;
+
+		/**
+		 * Function to be called when user clicks 'Cancel' button.
+		 */
+		onCancel: () => any;
+
+		/**
 		 * If [true, false], then Geojson upload only is enabled.
 		 * If [false, true], then the drawn shape can be downloaded as a GeoJSON file.
 		 * If [true, true], then upload and download are enabled
@@ -39,7 +49,7 @@
 		mapDraw: any;
 	}
 
-	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw }: Props = $props();
+	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw, onStart, onCancel }: Props = $props();
 
 	/**
 	 * Icon lookup for mode selection buttons
@@ -64,6 +74,8 @@
 
 		mapDraw.controlMode.current = 'edit';
 		mapDraw.features.previous = JSON.stringify(mapDraw.features.current || []);
+
+		onStart();
 	};
 
 	let showOptions = $state(true);
@@ -112,6 +124,8 @@
 		drawModes.mode.previous = drawModes.mode.selected;
 		mapDraw.controlMode.current = 'default';
 		showOptions = false;
+
+		onCancel();
 	};
 
 	const clickDone = () => {

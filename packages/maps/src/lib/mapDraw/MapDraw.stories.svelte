@@ -43,6 +43,8 @@
 			}
 		}
 	];
+
+	let isEditing = $state(false);
 </script>
 
 <Story name="Default">
@@ -123,5 +125,29 @@
 		</div>
 
 		<pre>{JSON.stringify(features4, null, 4)}</pre>
+	{/snippet}
+</Story>
+
+
+<Story name="Externally track whether editing is in progress">
+	{#snippet template()}
+
+		<span>isEditing: {isEditing}</span>
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw
+						uploadDownload={[false, false]}
+						onStart={() => isEditing = true}
+						onDone={() => isEditing = false}
+						onCancel={() => isEditing = false}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
 	{/snippet}
 </Story>
