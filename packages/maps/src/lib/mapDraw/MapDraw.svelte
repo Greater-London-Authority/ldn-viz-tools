@@ -27,6 +27,18 @@
 		 */
 		onDone?: (_args: any) => any;
 
+
+		/**
+		 * Function to be called when user clicks 'Edit' button.
+		 */
+		onStart?: () => any;
+
+		/**
+		 * Function to be called when user clicks 'Cancel' button.
+		 */
+		onCancel?: () => any;
+
+
 		/**
 		 * If [true, false], then Geojson upload only is enabled.
 		 * If [false, true], then the drawn shape can be downloaded as a GeoJSON file.
@@ -44,7 +56,9 @@
 		modes = ['polygon'],
 		onDone = (_features: GeoJSONStoreFeatures[]) => null,
 		uploadDownload = [true, true],
-		features: externalFeatures = []
+		features: externalFeatures = [],
+		onStart = () => null,
+		onCancel = () => null
 	}: Props = $props();
 
 	const mapStore: MapLibreStore = getContext('mapStore');
@@ -110,5 +124,5 @@
 </script>
 
 {#if terraDraw}
-	<MapDrawControls {terraDraw} {uploadDownload} {onDone} {drawModes} {mapDraw} />
+	<MapDrawControls {terraDraw} {uploadDownload} {onStart} {onCancel} {onDone} {drawModes} {mapDraw} />
 {/if}
