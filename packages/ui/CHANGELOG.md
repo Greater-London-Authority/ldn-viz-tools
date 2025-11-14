@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.6
+
+### Minor Changes
+
+- d0c388f: CHANGED: reduced `Modal` inset from 2rem to 0.5rem on small screens
+
 ## 21.0.0-svelte5.5
 
 ### Minor Changes

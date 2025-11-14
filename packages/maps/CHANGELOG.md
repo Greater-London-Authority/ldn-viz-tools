@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.12
+
+### Minor Changes
+
+- 10ea351: ADDED: `MapDraw` component now has `onStart` and `onCancel` callback functions (as well as `onDone`)
+
 ## 9.0.0-svelte5.11
 
 ### Minor Changes
