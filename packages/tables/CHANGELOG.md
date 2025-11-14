@@ -1,5 +1,13 @@
 # @ldn-viz/tables
 
+## 5.0.0-svelte5.6
+
+### Patch Changes
+
+- Updated dependencies [d0c388f]
+  - @ldn-viz/ui@21.0.0-svelte5.6
+  - @ldn-viz/charts@7.0.0-svelte5.6
+
 ## 5.0.0-svelte5.5
 
 ### Patch Changes
