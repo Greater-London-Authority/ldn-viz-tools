@@ -18,9 +18,8 @@
 		}
 	});
 
-	let isOpen = $state(true);
-
-	let state = $state();
+	let state = $state({ isOpen: true });
+	let selectedTabId = $state('markers');
 </script>
 
 {#snippet sidebar()}
@@ -37,7 +36,7 @@
 {/snippet}
 
 {#snippet sidebarWithTabs()}
-	<Sidebar {tabs} />
+	<Sidebar {tabs} {selectedTabId} />
 {/snippet}
 
 {#snippet mainWithControl()}

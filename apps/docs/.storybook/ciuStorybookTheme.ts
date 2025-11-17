@@ -16,8 +16,8 @@ export default create({
 	colorSecondary: colors.theme.dark.color.palette.blue[700],
 
 	// UI
-	appBg: colors.theme.dark.color.container['level-1'],
-	appContentBg: colors.theme.dark.color.container['level-0'],
+	appBg: colors.theme.dark.color.container['level-0'],
+	appContentBg: colors.theme.dark.color.canvas.background['1'],
 	appPreviewBg: '#ffffff',
 	appBorderColor: colors.theme.dark.color.ui.border.secondary,
 	appBorderRadius: 1,
