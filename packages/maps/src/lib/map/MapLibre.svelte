@@ -127,23 +127,31 @@
 	{@render children?.()}
 </section>
 
-<style global>
+<style lang="postcss">
 	/*
 		Override top level MapLibre & MapBox styling with ldn-viz styling so we
 		don't have to do it separately within each map sub-component, e.g.
 		map controls, popups, etc.
 	*/
+	:global {
+		.mapboxgl-map,
+		.maplibregl-map {
+			font-size: inherit;
+			font-family: inherit;
+			font-style: inherit;
+			line-height: inherit;
+		}
 
-	.mapboxgl-map,
-	.maplibregl-map {
-		font-size: inherit;
-		font-family: inherit;
-		font-style: inherit;
-		line-height: inherit;
-	}
+		.maplibregl-ctrl-attrib-inner,
+		.mapboxgl-ctrl-attrib-inner {
+			@apply text-xs;
+			@apply align-middle;
+			@apply text-color-text-primary;
+			@apply pt-0.5;
+		}
 
-	.maplibregl-ctrl-attrib-inner,
-	.mapboxgl-ctrl-attrib-inner {
-		@apply text-sm;
+		.maplibregl-ctrl-attrib.maplibregl-compact {
+			background-color: hsla(0, 0%, 100%, 0.8);
+		}
 	}
 </style>
