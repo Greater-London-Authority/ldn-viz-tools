@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.14
+
+### Patch Changes
+
+- 0efd817: FIXED: fix dependencies
+
 ## 9.0.0-svelte5.13
 
 ### Minor Changes
