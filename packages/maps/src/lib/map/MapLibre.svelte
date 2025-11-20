@@ -72,8 +72,8 @@
 		...rest
 	}: Props = $props();
 
-	let container: null | HTMLElement = $state();
-	let maplibre: null | MapLibre = $state();
+	let container: null | HTMLElement = $state(null);
+	let maplibre: null | MapLibre = $state(null);
 
 	onMount(() => {
 		if (disabled) {
