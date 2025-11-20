@@ -1,5 +1,13 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.7
+
+### Minor Changes
+
+- 0abe727: CHANGED: add keyline to Header and Sidebar
+- 6ea18e9: CHANGED: remove `overflow-hidden` class from `Modal`
+- 3789872: ADDED: `@steeze-ui/phosphor-icons` is now a dependency
+
 ## 21.0.0-svelte5.6
 
 ### Minor Changes
