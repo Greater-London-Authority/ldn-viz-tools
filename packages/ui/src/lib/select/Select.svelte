@@ -281,5 +281,14 @@
 		.form-select.svelecte:hover {
 			border: var(--theme-input-border-focussed) 1px solid;
 		}
+
+		.form-select.svelecte.is-disabled {
+			--sv-placeholder-color: var(--theme-input-label-disabled);
+		}
+
+		.form-select.svelecte.is-disabled:hover {
+			cursor: not-allowed;
+			border: var(--theme-input-border) 1px solid;
+		}
 	</style>
 {/if}
