@@ -21,7 +21,7 @@ export const fixImportedGeoJSON = (parsedJson: FeatureCollection) => {
 			// terradraw doesn't handle holes, so for a polygon the geometry will be array containing one element (the exterior ring)
 			const coords = feature.geometry.coordinates[0];
 
-			for (let i in coords) {
+			for (const i in coords) {
 				coords[i] = [Math.round(coords[i][0] * 1e9) / 1e9, Math.round(coords[i][1] * 1e9) / 1e9];
 			}
 		}
