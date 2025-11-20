@@ -7,6 +7,7 @@
 	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';
 	import {
 		heightLookup,
+		keylineLookup,
 		placementLookup,
 		tabPlacementLookup,
 		togglePlacementLookup,
@@ -56,11 +57,43 @@
 	let tabPlacementClasses = $derived(tabPlacementLookup[sidebarState.placement]);
 	let widthClasses = $derived(widthLookup[sidebarState.width][sidebarState.placement]);
 	let heightClasses = $derived(heightLookup[sidebarState.width][sidebarState.placement]);
+
+	const tabKeylineClasses = (placement: string, open: boolean) => {
+		let classes = keylineLookup[placement];
+		if (placement === 'left') {
+			if (open) {
+				classes = '!border-0';
+			} else {
+				classes = keylineLookup[placement];
+			}
+		}
+
+		return classes;
+	};
+
+	const sidebarKeylineClasses = (placement: string, tabs: boolean) => {
+		let classes = keylineLookup[placement];
+		if (tabs) {
+			if (placement === 'left') {
+				classes = `border-r border-color-ui-border-secondary`;
+			} else {
+				classes = `!border-0`;
+			}
+		}
+
+		return classes;
+	};
 </script>
 
 <div class={classNames(wrapperClasses, placementClasses)}>
 	{#if tabs.length}
-		<div class={classNames('bg-color-container-level-0 absolute', tabPlacementClasses)}>
+		<div
+			class={classNames(
+				'bg-color-container-level-0 absolute',
+				tabPlacementClasses,
+				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
+			)}
+		>
 			<!-- A `<SidebarTabList>`, if the sidebar has tabs-->
 			<SidebarTabList {tabs} ariaLabel={tabsAriaLabel} bind:selectedTabId />
 		</div>
@@ -74,7 +107,11 @@
 		<aside
 			id={sidebarId}
 			aria-label={sidebarAriaLabel}
-			class={classNames('flex', heightClasses)}
+			class={classNames(
+				'flex',
+				heightClasses,
+				sidebarKeylineClasses(sidebarState.placement, !!tabs.length)
+			)}
 			transition:slide={{ duration: 300, axis: transitionAxis[sidebarState.placement] }}
 		>
 			<div
