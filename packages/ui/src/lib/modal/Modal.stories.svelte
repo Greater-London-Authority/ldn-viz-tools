@@ -1,9 +1,9 @@
 <script module lang="ts">
-	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Modal from './Modal.svelte';
-	import Button from '../button/Button.svelte';
 	import type { ButtonProps } from '$lib/button/types.js';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
+	import Modal from './Modal.svelte';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Modal',
@@ -244,7 +244,7 @@
 			{/snippet}
 
 			{#snippet title()}
-				A modal with a light header!
+				Trigger warning!
 			{/snippet}
 
 			{#snippet description()}
