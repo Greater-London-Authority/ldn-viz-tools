@@ -40,8 +40,5 @@
 	"packageManager": "npm@11.3.0",
 	"engines": {
 		"node": ">=18"
-	},
-	"dependencies": {
-		"@steeze-ui/phosphor-icons": "^2.1.1"
 	}
 }
