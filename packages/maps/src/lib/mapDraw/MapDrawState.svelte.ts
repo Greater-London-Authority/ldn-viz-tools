@@ -14,10 +14,12 @@ import {
 import type { HexColorStyling } from './types';
 
 // TODO: check these tokens
-const themeStyle = $state({
-	fillColor: theme.tokenNameToValue('ui.primary', theme.currentTheme) as HexColorStyling,
+const themeStyle = $derived({
+	fillColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
+		'#0067B4') as HexColorStyling,
 	fillOpacity: 0.5,
-	outlineColor: theme.tokenNameToValue('ui.primary', theme.currentTheme) as HexColorStyling,
+	outlineColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
+		'#0067B4') as HexColorStyling,
 	outlineWidth: 1
 });
 
