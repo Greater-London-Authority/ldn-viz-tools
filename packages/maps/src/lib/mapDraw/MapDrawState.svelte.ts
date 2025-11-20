@@ -110,15 +110,11 @@ const selectModeOptions = {
 	},
 
 	styles: {
-		selectedPolygonColor: theme.tokenNameToValue(
-			'ui.primary',
-			theme.currentTheme
-		) as HexColorStyling,
+		selectedPolygonColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
+			'#0067B4') as HexColorStyling,
 		selectedPolygonFillOpacity: 0.5,
-		selectedPolygonOutlineColor: theme.tokenNameToValue(
-			'ui.primary',
-			theme.currentTheme
-		) as HexColorStyling,
+		selectedPolygonOutlineColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
+			'#0067B4') as HexColorStyling,
 		selectedPolygonOutlineWidth: 1
 	}
 };

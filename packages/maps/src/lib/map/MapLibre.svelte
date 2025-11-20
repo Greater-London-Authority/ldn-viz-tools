@@ -150,8 +150,17 @@
 			@apply pt-0.5;
 		}
 
+		.maplibregl-ctrl-attrib-inner a {
+			@apply text-color-text-primary;
+		}
+
+		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button {
+			@apply bg-color-text-primary;
+		}
+
 		.maplibregl-ctrl-attrib.maplibregl-compact {
-			background-color: hsla(0, 0%, 100%, 0.8);
+			/* background-color: hsla(0, 0%, 100%, 0.8); */
+			@apply bg-color-container-level-0;
 		}
 	}
 </style>
