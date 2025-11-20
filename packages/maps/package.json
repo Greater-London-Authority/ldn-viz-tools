@@ -82,6 +82,7 @@
 		"vitest-browser-svelte": "^0.1.0"
 	},
 	"peerDependencies": {
+		"@ldn-viz/ui": "^21.0.0-svelte5.7",
 		"svelte": "^5.33.0"
 	}
 }
