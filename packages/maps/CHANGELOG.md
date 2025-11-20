@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.13
+
+### Minor Changes
+
+- 5558524: CHANGED: reduce text size of attribution text on map
+
 ## 9.0.0-svelte5.12
 
 ### Minor Changes
