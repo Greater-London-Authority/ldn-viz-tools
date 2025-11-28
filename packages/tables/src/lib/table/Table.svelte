@@ -146,6 +146,9 @@
 
 	let colWidths = $state([]);
 
+	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
+	let updateTrigger = $state(0);
+
 	const createTable = (data: any[]) => {
 		const to = new TableData(tableSpec);
 
@@ -219,9 +222,6 @@
 	$effect(() => {
 		if (tableWidth) updateTableWidths(tableObj, tableWidth);
 	});
-
-	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
-	let updateTrigger = $state(0);
 
 	const beforeTable_render = $derived(beforeTable);
 </script>
