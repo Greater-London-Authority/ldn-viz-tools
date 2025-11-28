@@ -1,5 +1,11 @@
 # @ldn-viz/tables
 
+## 5.0.0-svelte5.8
+
+### Minor Changes
+
+- 6b7999a: FIXED: fix "ReferenceError: Cannot access 'updateTrigger' before initialization" error that sometimes occurs when rendering table
+
 ## 5.0.0-svelte5.7
 
 ### Patch Changes
