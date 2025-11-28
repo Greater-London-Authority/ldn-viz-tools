@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.15
+
+### Patch Changes
+
+- b4e23ec: fix dependency on theme
+
 ## 9.0.0-svelte5.14
 
 ### Patch Changes
