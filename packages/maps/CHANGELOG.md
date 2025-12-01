@@ -1,5 +1,12 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.16
+
+### Patch Changes
+
+- Updated dependencies [8dca04b]
+  - @ldn-viz/ui@21.0.0-svelte5.8
+
 ## 9.0.0-svelte5.15
 
 ### Patch Changes

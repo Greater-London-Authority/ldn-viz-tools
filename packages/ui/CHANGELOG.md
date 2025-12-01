@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.8
+
+### Minor Changes
+
+- 8dca04b: FIXED: CookieControl component should now work with SSR
+
 ## 21.0.0-svelte5.7
 
 ### Minor Changes
