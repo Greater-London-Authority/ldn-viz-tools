@@ -1,5 +1,11 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.17
+
+### Minor Changes
+
+- 95e5c08: FIXED: fix contrast of MapLibre info button
+
 ## 9.0.0-svelte5.16
 
 ### Patch Changes
