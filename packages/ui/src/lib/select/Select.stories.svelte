@@ -91,7 +91,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Dont highlight first option">
+<Story name="Don't highlight first option">
 	{#snippet template(args)}
 		<div class="w-96">
 			<Select {...args} {options} highlightFirstItem={false} label="Pick a number" />
