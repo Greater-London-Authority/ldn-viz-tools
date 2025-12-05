@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.9
+
+### Patch Changes
+
+- ce87f14: update select stories and contrast
+
 ## 21.0.0-svelte5.8
 
 ### Minor Changes
