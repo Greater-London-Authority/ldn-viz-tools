@@ -20,30 +20,34 @@
 		{
 			label: 'B',
 			options: [
-				{ text: 'Barking and Dagenham', value: 'Barking and Dagenham' },
-				{ text: 'Barnet', value: 'Barnet' },
-				{ text: 'Bexley', value: 'Bexley' },
-				{ text: 'Brent', value: 'Brent' },
-				{ text: 'Bromley', value: 'Bromley' }
+				{ label: 'Barking and Dagenham', value: 'Barking and Dagenham' },
+				{ label: 'Barnet', value: 'Barnet' },
+				{ label: 'Bexley', value: 'Bexley' },
+				{ label: 'Brent', value: 'Brent' },
+				{ label: 'Bromley', value: 'Bromley' }
 			]
 		},
 
 		{
 			label: 'C',
 			options: [
-				{ text: 'Camden', value: 'Camden' },
-				{ text: 'Croydon', value: 'Croydon' }
+				{ label: 'Camden', value: 'Camden' },
+				{ label: 'Croydon', value: 'Croydon' }
 			]
 		},
 
 		{
 			label: 'E',
 			options: [
-				{ text: 'Ealing', value: 'Ealing' },
-				{ text: 'Enfield', value: 'Enfield' }
+				{ label: 'Ealing', value: 'Ealing' },
+				{ label: 'Enfield', value: 'Enfield' }
 			]
 		}
 	];
+
+	/**
+	 * The `<Select>` component wraps a 'Svelecte' instance. Check the documentation: [here](https://svelecte.vercel.app).
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Select',
@@ -83,6 +87,14 @@
 	{#snippet template(args)}
 		<div class="w-96">
 			<Select {...args} {options} label="Label" optional />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Dont highlight first option">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {...args} {options} highlightFirstItem={false} label="Pick a number" />
 		</div>
 	{/snippet}
 </Story>
@@ -143,6 +155,18 @@
 	{#snippet template(args)}
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple bind:value />
+
+			<span class="text-color-text-secondary mt-4 block">
+				Value is: {JSON.stringify(value)}
+			</span>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Multiple selects keep selection in list">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {...args} {options} label="Label" multiple keepSelectionInList bind:value />
 
 			<span class="text-color-text-secondary mt-4 block">
 				Value is: {JSON.stringify(value)}
