@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
-	"version": "9.0.0-svelte5.15",
+	"version": "9.0.0-svelte5.17",
 	"keywords": [
 		"svelte"
 	],
@@ -82,7 +82,7 @@
 		"vitest-browser-svelte": "^0.1.0"
 	},
 	"peerDependencies": {
-		"@ldn-viz/ui": "^21.0.0-svelte5.7",
+		"@ldn-viz/ui": "^21.0.0-svelte5.8",
 		"svelte": "^5.33.0"
 	}
 }
