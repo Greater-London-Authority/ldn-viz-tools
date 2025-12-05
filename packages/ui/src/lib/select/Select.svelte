@@ -245,6 +245,12 @@
 			color: #fff;
 		}
 
+		.form-select.svelecte .in-dropdown.is-selected,
+		.form-select.svelecte .in-dropdown.is-selected:hover {
+			background-color: var(--theme-input-background-active);
+			color: #fff;
+		}
+
 		.form-select.svelecte .sv-dropdown-scroll.has-items {
 			padding: 0px;
 		}
