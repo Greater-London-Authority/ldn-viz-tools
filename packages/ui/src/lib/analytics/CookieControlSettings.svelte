@@ -39,9 +39,14 @@
 		...restProps
 	}: ButtonProps = $props();
 
-	let cookieControlStore = $state(window.CookieControl);
+	let cookieControlStore = $state(undefined);
 
 	onMount(() => {
+		if (typeof window !== 'object'){
+			// in SSR context rather than in browser
+			return;
+		}
+
 		if (!isCookieControlManagedByParent()) {
 			cookieControlStore = window.CookieControl;
 		}
