@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-	import { MVTLayer } from '@deck.gl/geo-layers/typed';
+	import { MVTLayer } from '@deck.gl/geo-layers';
 
 	import { Checkbox } from '@ldn-viz/ui';
 	import Map from '../map/Map.svelte';

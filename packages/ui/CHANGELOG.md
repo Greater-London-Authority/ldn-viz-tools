@@ -1,5 +1,58 @@
 # ldn-viz-tools-ui
 
+## 21.0.0-svelte5.7
+
+### Minor Changes
+
+- 0abe727: CHANGED: add keyline to Header and Sidebar
+- 6ea18e9: CHANGED: remove `overflow-hidden` class from `Modal`
+- 3789872: ADDED: `@steeze-ui/phosphor-icons` is now a dependency
+
+## 21.0.0-svelte5.6
+
+### Minor Changes
+
+- d0c388f: CHANGED: reduced `Modal` inset from 2rem to 0.5rem on small screens
+
+## 21.0.0-svelte5.5
+
+### Minor Changes
+
+- c4a34fa: add mapdraw
+
+## 21.0.0-svelte5.4
+
+### Patch Changes
+
+- 253b9b9: Adapter added for OS Places API
+
+## 21.0.0-svelte5.3
+
+### Minor Changes
+
+- 31020f3: Expoxe sidebar state and allow custom classes and icons
+
+## 21.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: update `selectedTabId` when tab is changed
+
+## 21.0.0-svelte5.1
+
+### Major Changes
+
+- 46b4fab: CHANGED: the `ListMenu` has been renamed to `NavigationMenu`
+- 6b37511: CHANGED: the `buttonsHidden` prop on the `CheckboxGroup` and `LayerControlGroup` been renamed to `hideSelectAll`
+
+### Minor Changes
+
+- dc25586: CREATED: CheckboxSolid and CheckboxGroupSolid components
+
+### Patch Changes
+
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
+
 ## 21.0.0-svelte5.0
 
 ### Major Changes

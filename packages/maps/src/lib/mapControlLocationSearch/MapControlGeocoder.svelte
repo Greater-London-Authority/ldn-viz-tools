@@ -6,7 +6,6 @@
 	 */
 
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
-	import mapgl from 'maplibre-gl';
 	import { getContext } from 'svelte';
 	import { clearFeature, setFeature } from './map-layer';
 	import type { MapStore } from './map-types';
@@ -80,11 +79,20 @@
 			return;
 		}
 
-		showClearButton = true;
-		setFeature('geocoder', $mapStore, mapgl, location, { zoom: zoomLevel });
+		if (adapter.retrieve && 'id' in location) {
+			adapter
+				.retrieve(location.id)
+				.then((updatedLocation: Geolocation) => {
+					showClearButton = true;
+					setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
 
-		if (onLocationSelected) {
-			onLocationSelected(location);
+					if (onLocationSelected) {
+						onLocationSelected(updatedLocation);
+					}
+				})
+				.catch((error: any) => {
+					console.error('Error retrieving location:', error);
+				});
 		}
 	};
 

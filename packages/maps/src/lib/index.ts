@@ -10,6 +10,7 @@ export { default as MapControlGroup } from './mapControlGroup/MapControlGroup.sv
 export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
+export { default as MapLegend } from './mapLegend/MapLegend.svelte';
 
 // Location Search
 export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
@@ -31,7 +32,9 @@ export { default as MapMarkerStyledContainer } from './mapMarker/elements/mapMar
 export { default as MapMarker } from './mapMarker/MapMarker.svelte';
 
 export { default as MapDeckPopovers } from './mapDeckPopovers/MapDeckPopovers.svelte';
+export { onClickPopoverHandler } from './mapDeckPopovers/stores';
 export { default as MapDeckTooltips } from './mapDeckTooltips/MapDeckTooltips.svelte';
+export * from './mapDeckTooltips/stores';
 
 export { default as MapPopover } from './mapPopover/MapPopover.svelte';
 
@@ -45,6 +48,10 @@ export { default as BoroughsContextLayer } from './mapContextLayers/boroughsCont
 
 // Deck.gl
 export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelte';
+
+// Drawing
+export { default as MapDraw } from './mapDraw/MapDraw.svelte';
+export * from './mapDraw/utils';
 
 // themes
 export * from './themes/animations';

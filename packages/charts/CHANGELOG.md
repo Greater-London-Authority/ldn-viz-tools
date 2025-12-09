@@ -1,5 +1,66 @@
 # ldn-viz-tools-charts
 
+## 7.0.0-svelte5.7
+
+### Patch Changes
+
+- Updated dependencies [0abe727]
+- Updated dependencies [6ea18e9]
+- Updated dependencies [3789872]
+  - @ldn-viz/ui@21.0.0-svelte5.7
+
+## 7.0.0-svelte5.6
+
+### Patch Changes
+
+- Updated dependencies [d0c388f]
+  - @ldn-viz/ui@21.0.0-svelte5.6
+
+## 7.0.0-svelte5.5
+
+### Patch Changes
+
+- Updated dependencies [c4a34fa]
+  - @ldn-viz/ui@21.0.0-svelte5.5
+
+## 7.0.0-svelte5.4
+
+### Patch Changes
+
+- Updated dependencies [253b9b9]
+  - @ldn-viz/ui@21.0.0-svelte5.4
+
+## 7.0.0-svelte5.3
+
+### Patch Changes
+
+- Updated dependencies [31020f3]
+  - @ldn-viz/ui@21.0.0-svelte5.3
+  - @ldn-viz/utils@1.1.1-svelte5.0
+
+## 7.0.0-svelte5.2
+
+### Patch Changes
+
+- Updated dependencies [5e5408a]
+  - @ldn-viz/ui@21.0.0-svelte5.2
+
+## 7.0.0-svelte5.1
+
+### Minor Changes
+
+- 0954da1: ADDED: defaultRect and defaultBar plot fragments
+
+  CHANGED: plot function now checks for options.facet to apply defaultSizeFacet fragment
+
+### Patch Changes
+
+- Updated dependencies [289e9be]
+- Updated dependencies [46b4fab]
+- Updated dependencies [6b37511]
+- Updated dependencies [dc25586]
+  - @ldn-viz/ui@21.0.0-svelte5.1
+
 ## 7.0.0-svelte5.0
 
 ### Major Changes

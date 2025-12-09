@@ -34,16 +34,19 @@
 </script>
 
 <script lang="ts">
+	import { Select, theme } from '@ldn-viz/ui';
+	import { format } from 'd3-format';
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
-	import { addMultipleEventHandlers } from './ObservablePlotInner.svelte';
-	import { theme, Select } from '@ldn-viz/ui';
-	import { format } from 'd3-format';
+	import { monthlyData } from '../../data/demoData';
 	import { Plot } from '../observablePlotFragments/plot';
 	import DemoTooltip from './DemoTooltip.svelte';
-	import { addEventHandler, registerTooltip } from './ObservablePlotInner.svelte';
+	import {
+		addEventHandler,
+		addMultipleEventHandlers,
+		registerTooltip
+	} from './ObservablePlotInner.svelte';
 	import type { Position } from './types';
-	import { monthlyData } from '../../data/demoData';
 
 	let clickedValue: any | undefined = $state(undefined);
 	let clickedIndex: any | undefined = $state(undefined);

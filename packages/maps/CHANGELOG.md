@@ -1,5 +1,100 @@
 # ldn-viz-tools-maps
 
+## 9.0.0-svelte5.15
+
+### Patch Changes
+
+- b4e23ec: fix dependency on theme
+
+## 9.0.0-svelte5.14
+
+### Patch Changes
+
+- 0efd817: FIXED: fix dependencies
+
+## 9.0.0-svelte5.13
+
+### Minor Changes
+
+- 5558524: CHANGED: reduce text size of attribution text on map
+
+## 9.0.0-svelte5.12
+
+### Minor Changes
+
+- 10ea351: ADDED: `MapDraw` component now has `onStart` and `onCancel` callback functions (as well as `onDone`)
+
+## 9.0.0-svelte5.11
+
+### Minor Changes
+
+- 64c9de0: FIXED: allow the features in `MapDraw` to be updated by value passe din as prop
+
+## 9.0.0-svelte5.10
+
+### Minor Changes
+
+- ee2e9b5: CHANGED: updated design of `MapDraw` component
+
+## 9.0.0-svelte5.9
+
+### Minor Changes
+
+- c4a34fa: add mapdraw
+
+## 9.0.0-svelte5.8
+
+### Major Changes
+
+- bdbdcfa: CHANGED: bump version of deck.gl packages. This means that SSR can be enabled, but means that imports must be updated to remove the `/typed` suffix
+
+## 9.0.0-svelte5.7
+
+### Minor Changes
+
+- 1f698ea: FIXED: update MapLibre.svelte, removed side effect resizing to fix map flicker
+- 2e5d5d0: CHANGED: Removed custom z-index and applied `.maplibregl-popup` class to `MapDeckTooltips` to make z-index consistent with other popups.
+
+### Patch Changes
+
+- 253b9b9: Adapter added for OS Places API
+
+## 9.0.0-svelte5.6
+
+### Minor Changes
+
+- a12ef0c: ADDED: export onClickPopoverHandler
+
+## 9.0.0-svelte5.5
+
+### Minor Changes
+
+- ee28e46: CHANGED: when theme is changed, update basemap style with MapLibre's `setStyle()` method, rather than re-creating map
+
+## 9.0.0-svelte5.4
+
+### Patch Changes
+
+- @ldn-viz/utils@1.1.1-svelte5.0
+
+## 9.0.0-svelte5.3
+
+### Minor Changes
+
+- 7018a1a: FIXED: fix bug that would cause `MapDeckOverlay` to replace the `DeckOverlay` object whenever layers were updated
+
+## 9.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: apply styling to MapDeckTooltips
+
+## 9.0.0-svelte5.1
+
+### Patch Changes
+
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
+
 ## 9.0.0-svelte5.0
 
 ### Major Changes

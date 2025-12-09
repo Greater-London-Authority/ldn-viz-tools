@@ -1,15 +1,15 @@
 <script module lang="ts">
-	export enum MapControlGroupPositions {
-		TopLeft = 'TopLeft',
-		TopCenter = 'TopCenter',
-		TopRight = 'TopRight',
-		TopRightOffset = 'TopRightOffset',
-		CenterRight = 'CenterRight',
-		BottomRight = 'BottomRight',
-		BottomCenter = 'BottomCenter',
-		BottomLeft = 'BottomLeft',
-		CenterLeft = 'CenterLeft'
-	}
+	export const MapControlGroupPositions = {
+		TopLeft: 'TopLeft',
+		TopCenter: 'TopCenter',
+		TopRight: 'TopRight',
+		TopRightOffset: 'TopRightOffset',
+		CenterRight: 'CenterRight',
+		BottomRight: 'BottomRight',
+		BottomCenter: 'BottomCenter',
+		BottomLeft: 'BottomLeft',
+		CenterLeft: 'CenterLeft'
+	};
 
 	type PositionClass = {
 		[key in keyof typeof MapControlGroupPositions]: string;
@@ -38,7 +38,7 @@
 	interface Props {
 		/**
 		 * Position of the group over the map. Available positions defined by
-		 * `MapControlGroupPositions` enum type.
+		 * `MapControlGroupPositions` enum.
 		 */
 		position?: keyof typeof MapControlGroupPositions;
 		/**
@@ -48,7 +48,11 @@
 		children?: import('svelte').Snippet;
 	}
 
-	let { position = MapControlGroupPositions.TopLeft, classes = '', children }: Props = $props();
+	let {
+		position = MapControlGroupPositions.TopLeft as keyof typeof MapControlGroupPositions,
+		classes = '',
+		children
+	}: Props = $props();
 
 	const positionClass = positionClasses[position];
 </script>

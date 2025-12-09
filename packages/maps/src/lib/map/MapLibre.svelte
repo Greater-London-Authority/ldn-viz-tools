@@ -8,9 +8,9 @@
 	 * @component
 	 */
 
-	import { onMount, onDestroy } from 'svelte';
 	import maplibre_gl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	import { onDestroy, onMount } from 'svelte';
 
 	import {
 		GREATER_LONDON_BOUNDS,
@@ -18,12 +18,11 @@
 		theme_os_light_vts
 	} from '@ldn-viz/maps';
 
-	import type { MapLibre, MapLibreStyle, WhenMapLoads, MapLibreBounds } from './types';
+	import type { MapLibre, MapLibreBounds, MapLibreStyle, WhenMapLoads } from './types';
 
 	type MapLibreOptions = Omit<maplibre_gl.MapOptions, 'container'>;
 
 	const defaultOptions: MapLibreOptions = {
-		style: theme_os_light_vts as MapLibreStyle,
 		bounds: GREATER_LONDON_BOUNDS as MapLibreBounds,
 		maxBounds: GREATER_LONDON_BOUNDS_MAX as MapLibreBounds,
 		clickTolerance: 6
@@ -53,6 +52,12 @@
 		 * destroyed.
 		 */
 		whenMapDestroyed?: null | WhenMapLoads;
+
+		/**
+		 * MapLibre style for basemap.
+		 */
+		style?: MapLibreStyle;
+
 		children?: import('svelte').Snippet;
 		[key: string]: any;
 	}
@@ -62,12 +67,13 @@
 		options = defaultOptions,
 		whenMapCreated = null,
 		whenMapDestroyed = null,
+		style = theme_os_light_vts as MapLibreStyle,
 		children,
 		...rest
 	}: Props = $props();
 
-	let container: null | HTMLElement = $state();
-	let maplibre: null | MapLibre = $state();
+	let container: null | HTMLElement = $state(null);
+	let maplibre: null | MapLibre = $state(null);
 
 	onMount(() => {
 		if (disabled) {
@@ -77,6 +83,7 @@
 		maplibre = new maplibre_gl.Map({
 			...defaultOptions,
 			...options,
+			style,
 			container: container as HTMLElement
 		} as maplibre_gl.MapOptions);
 
@@ -102,21 +109,15 @@
 		};
 	});
 
-	// client width and height because on:resize won't always trigger refresh.
-	let clientWidth = $state(0);
-	let clientHeight = $state(0);
-
 	$effect(() => {
-		if (clientWidth && clientHeight) {
-			maplibre?.resize();
+		if (maplibre) {
+			maplibre.setStyle(style);
 		}
 	});
 </script>
 
 <section
 	bind:this={container}
-	bind:clientWidth
-	bind:clientHeight
 	class:w-full={true}
 	class:h-full={true}
 	class:relative={true}
@@ -126,23 +127,40 @@
 	{@render children?.()}
 </section>
 
-<style global>
+<style lang="postcss">
 	/*
 		Override top level MapLibre & MapBox styling with ldn-viz styling so we
 		don't have to do it separately within each map sub-component, e.g.
 		map controls, popups, etc.
 	*/
+	:global {
+		.mapboxgl-map,
+		.maplibregl-map {
+			font-size: inherit;
+			font-family: inherit;
+			font-style: inherit;
+			line-height: inherit;
+		}
 
-	.mapboxgl-map,
-	.maplibregl-map {
-		font-size: inherit;
-		font-family: inherit;
-		font-style: inherit;
-		line-height: inherit;
-	}
+		.maplibregl-ctrl-attrib-inner,
+		.mapboxgl-ctrl-attrib-inner {
+			@apply text-xs;
+			@apply align-middle;
+			@apply text-color-text-primary;
+			@apply pt-0.5;
+		}
 
-	.maplibregl-ctrl-attrib-inner,
-	.mapboxgl-ctrl-attrib-inner {
-		@apply text-sm;
+		.maplibregl-ctrl-attrib-inner a {
+			@apply text-color-text-primary;
+		}
+
+		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button {
+			@apply bg-color-text-primary;
+		}
+
+		.maplibregl-ctrl-attrib.maplibregl-compact {
+			/* background-color: hsla(0, 0%, 100%, 0.8); */
+			@apply bg-color-container-level-0;
+		}
 	}
 </style>

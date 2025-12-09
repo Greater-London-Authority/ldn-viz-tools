@@ -1,17 +1,18 @@
 import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
-import type { GeolocationCoords, GeolocationBounds, Geolocation } from '@ldn-viz/ui';
+import type { Geolocation, GeolocationBounds, GeolocationCoords } from '@ldn-viz/ui';
 
 import type {
+	FlyToOptions,
+	GeoJSONSource,
+	LayerSpecification,
 	Map,
 	Marker,
-	GeoJSONSource,
-	SourceSpecification,
-	LayerSpecification,
-	FlyToOptions
+	SourceSpecification
 } from 'maplibre-gl';
 
 import type { FeatureCollection } from 'geojson';
-import type { MapGL } from './map-types';
+
+import maplibre_gl from 'maplibre-gl';
 
 const markers: { [keys: string]: Marker } = {};
 const sourceId = 'gla/context/location-search';
@@ -68,7 +69,6 @@ const addLayers = (map: Map) => {
 export const setFeature = (
 	ref: string,
 	map: Map,
-	mapgl: MapGL,
 	location: Geolocation,
 	flyOptions: FlyToOptions = {}
 ) => {
@@ -78,19 +78,19 @@ export const setFeature = (
 
 	(map.getSource(sourceId) as GeoJSONSource)?.setData(
 		createFeatureCollection(location) as FeatureCollection
+		//createFeatureGeometryPoint(location)
 	);
 
-	addMarkerAndFlyToLocation(ref, map, mapgl, location, flyOptions);
+	addMarkerAndFlyToLocation(ref, map, location, flyOptions);
 };
 
 const addMarkerAndFlyToLocation = (
 	ref: string,
 	map: Map,
-	mapgl: MapGL,
 	location: Geolocation,
 	flyOptions: FlyToOptions
 ) => {
-	setMarker(ref, map, mapgl, location.center);
+	setMarker(ref, map, location.center);
 
 	if (location.bounds) {
 		flyToBounds(map, location.bounds);
@@ -99,12 +99,12 @@ const addMarkerAndFlyToLocation = (
 	}
 };
 
-const setMarker = (ref: string, map: Map, mapgl: MapGL, coords: GeolocationCoords) => {
+const setMarker = (ref: string, map: Map, coords: GeolocationCoords) => {
 	clearMarker(ref);
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	markers[ref] = new mapgl.Marker().setLngLat(coords).addTo(map);
+	markers[ref] = new maplibre_gl.Marker().setLngLat(coords).addTo(map);
 };
 
 const clearMarker = (ref: string) => {

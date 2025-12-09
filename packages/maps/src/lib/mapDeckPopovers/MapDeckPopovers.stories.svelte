@@ -13,8 +13,8 @@
 </script>
 
 <script lang="ts">
-	import type { Layer } from '@deck.gl/core/typed';
-	import { MVTLayer } from '@deck.gl/geo-layers/typed';
+	import type { Layer } from '@deck.gl/core';
+	import { MVTLayer } from '@deck.gl/geo-layers';
 	import { Checkbox } from '@ldn-viz/ui';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';

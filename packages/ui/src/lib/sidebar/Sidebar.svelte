@@ -7,6 +7,7 @@
 	import SidebarToggle from './elements/sidebarToggle/SidebarToggle.svelte';
 	import {
 		heightLookup,
+		keylineLookup,
 		placementLookup,
 		tabPlacementLookup,
 		togglePlacementLookup,
@@ -26,17 +27,23 @@
 		placement = 'right',
 		tabs = [],
 		selectedTabId = $bindable(undefined),
+		state = $bindable(),
 		sidebarAriaLabel = 'Sidebar with information and controls',
 		tabsAriaLabel = 'Switch sidebar panel',
 		sidebarId = randomId(),
 		unstyledContent,
 		header,
 		footer,
-		sections
+		sections,
+		icon,
+		class: classes
 	}: SidebarProps = $props();
 
 	const wrapperClasses = `${position} z-30 ${theme}`;
-	const sidebarClasses = 'flex flex-col grow bg-color-container-level-1 pb-6'; // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = `flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`; // p-6 pad on container or elements (overflow position)
+
+	// expose internal state to parent component
+	state = sidebarState;
 
 	// If a context provides a reactive placement use that
 	sidebarState.placement = placement;
@@ -50,17 +57,49 @@
 	let tabPlacementClasses = $derived(tabPlacementLookup[sidebarState.placement]);
 	let widthClasses = $derived(widthLookup[sidebarState.width][sidebarState.placement]);
 	let heightClasses = $derived(heightLookup[sidebarState.width][sidebarState.placement]);
+
+	const tabKeylineClasses = (placement: string, open: boolean) => {
+		let classes = keylineLookup[placement];
+		if (placement === 'left') {
+			if (open) {
+				classes = '!border-0';
+			} else {
+				classes = keylineLookup[placement];
+			}
+		}
+
+		return classes;
+	};
+
+	const sidebarKeylineClasses = (placement: string, tabs: boolean) => {
+		let classes = keylineLookup[placement];
+		if (tabs) {
+			if (placement === 'left') {
+				classes = `border-r border-color-ui-border-secondary`;
+			} else {
+				classes = `!border-0`;
+			}
+		}
+
+		return classes;
+	};
 </script>
 
 <div class={classNames(wrapperClasses, placementClasses)}>
 	{#if tabs.length}
-		<div class={classNames('bg-color-container-level-0 absolute', tabPlacementClasses)}>
+		<div
+			class={classNames(
+				'bg-color-container-level-0 absolute',
+				tabPlacementClasses,
+				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
+			)}
+		>
 			<!-- A `<SidebarTabList>`, if the sidebar has tabs-->
 			<SidebarTabList {tabs} ariaLabel={tabsAriaLabel} bind:selectedTabId />
 		</div>
 	{:else if sidebarState.isAlwaysOpen !== true}
 		<div class={classNames('absolute', togglePlacementClasses)}>
-			<SidebarToggle {sidebarId} />
+			<SidebarToggle {sidebarId} {icon} />
 		</div>
 	{/if}
 
@@ -68,7 +107,11 @@
 		<aside
 			id={sidebarId}
 			aria-label={sidebarAriaLabel}
-			class={classNames('flex', heightClasses)}
+			class={classNames(
+				'flex',
+				heightClasses,
+				sidebarKeylineClasses(sidebarState.placement, !!tabs.length)
+			)}
 			transition:slide={{ duration: 300, axis: transitionAxis[sidebarState.placement] }}
 		>
 			<div

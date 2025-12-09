@@ -15,11 +15,17 @@ export const togglePlacementLookup: PlacementLookup = {
 };
 
 export const tabPlacementLookup: PlacementLookup = {
-	// left: '-end-[80px] inset-y-0',
-	left: 'inset-y-0 z-30 border-r border-color-ui-border-secondary',
-	right: '-start-[81px] inset-y-0 border-l border-color-ui-border-secondary',
-	top: '-bottom-[81px] inset-x-0 border-b border-color-ui-border-secondary',
-	bottom: '-top-[81px] inset-x-0 border-t border-color-ui-border-secondary'
+	left: 'inset-y-0 z-30',
+	right: '-start-[81px] inset-y-0',
+	top: '-bottom-[81px] inset-x-0',
+	bottom: '-top-[81px] inset-x-0'
+};
+
+export const keylineLookup: PlacementLookup = {
+	left: 'border-r border-color-ui-border-secondary',
+	right: 'border-l border-color-ui-border-secondary',
+	top: 'border-b border-color-ui-border-secondary',
+	bottom: 'border-t border-color-ui-border-secondary'
 };
 
 export const tabLayoutOverride: PlacementLookup = {
@@ -33,6 +39,9 @@ export const tabThemeOverride = '[&>button]:bg-color-container-level-0 [&>button
 // These classes overide the 'horizontal' style of tablabels in a sidebar context
 export const tabLabelOverride =
 	'[&>button]:text-xs [&>button]:w-20 [&>button]:h-20 [&>button]:p-2 [&>button]:flex [&>button]:flex-col [&>button]:items-center [&>button]:justify-center [&>button]:text-center';
+
+// These classes override the margin-right on icons in 'horizontal' style tabLabels in a sidebar context
+export const tabIconOverride = '[&>button>svg]:mr-0 [&>button>svg]:mb-1';
 
 // The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {

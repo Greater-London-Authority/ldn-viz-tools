@@ -4,9 +4,8 @@
 	 * It must be used inside a `Map` component, so that it can access the MapLibre map object from the `mapStore` context.
 	 * @component
 	 */
-	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox/typed';
+	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox';
 	import { getContext } from 'svelte';
-	import { writable } from 'svelte/store';
 
 	const mapStore = getContext('mapStore');
 
@@ -25,7 +24,7 @@
 
 	let { layers = [], options = {} }: Props = $props();
 
-	const loaded = writable(false);
+	let loaded = $state(false);
 	let deckOverlay;
 
 	const removeOverlay = () => {
@@ -34,7 +33,7 @@
 	};
 
 	const doLoad = () => {
-		loaded.set(false);
+		loaded = false;
 		removeOverlay();
 
 		deckOverlay = new DeckOverlay({
@@ -45,11 +44,12 @@
 
 		$mapStore.addControl(deckOverlay, 'top-left');
 
-		loaded.set(true);
+		loaded = true;
 	};
 
 	const doUnload = () => {
 		removeOverlay();
+		loaded = false;
 	};
 
 	const updateLayers = (newLayers) => {
@@ -58,13 +58,13 @@
 	};
 
 	$effect(() => {
-		if ($mapStore) {
+		if (!loaded && $mapStore) {
 			doLoad();
 		}
 	});
 
 	$effect(() => {
-		if ($loaded && !$mapStore) {
+		if (loaded && !$mapStore) {
 			doUnload();
 		}
 	});

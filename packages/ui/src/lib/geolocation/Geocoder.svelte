@@ -23,7 +23,6 @@
 
 	import type { GeocoderAdapter } from './GeocoderAdapter';
 	import type {
-		Geolocation,
 		GeolocationNamed,
 		GeolocationSearchError,
 		OnGeolocationSearchError,
@@ -100,8 +99,8 @@
 		children
 	}: Props = $props();
 
-	let container: HTMLElement = $state();
-	let input: HTMLInputElement = $state();
+	let container: HTMLElement | undefined = $state();
+	let input: HTMLInputElement | undefined = $state();
 	let query = $state('');
 	let silentQueryTextUpdate = $state(false);
 	let showSuggestionList = $state(false);
@@ -144,7 +143,7 @@
 		showSuggestionList = false;
 	};
 
-	const onSelect = (suggestion: Geolocation) => {
+	const onSelect = (suggestion: GeolocationNamed) => {
 		closeSuggestionsList();
 		selected = suggestion;
 
@@ -153,6 +152,9 @@
 			silentQueryTextUpdate = true;
 		} else if (suggestion.address) {
 			query = suggestion.address;
+			silentQueryTextUpdate = true;
+		} else if (suggestion.id) {
+			query = suggestion.id;
 			silentQueryTextUpdate = true;
 		}
 
@@ -213,7 +215,7 @@
 	const focusOnPrevSuggestion = (suggestion: GeolocationNamed) => {
 		const i = findSuggestionIndex(suggestion);
 		if (i >= 0) {
-			const prev = i - 1 >= 0 ? suggestions[i - 1] : undefined;
+			const prev = i - 1 >= 0 ? suggestions![i - 1] : undefined;
 			focusOnLocation(prev);
 		}
 	};
@@ -221,7 +223,7 @@
 	const focusOnNextSuggestion = (suggestion: GeolocationNamed) => {
 		const i = findSuggestionIndex(suggestion);
 		if (i >= 0) {
-			const next = i + 1 < suggestions.length ? suggestions[i + 1] : undefined;
+			const next = i + 1 < suggestions!.length ? suggestions![i + 1] : undefined;
 			focusOnLocation(next);
 		}
 	};
@@ -238,10 +240,10 @@
 	};
 
 	const focusOnInput = () => {
-		input.focus();
+		input!.focus();
 		setTimeout(() => {
-			const end = input.value.length;
-			input.setSelectionRange(end, end);
+			const end = input!.value.length;
+			input!.setSelectionRange(end, end);
 		}, 0);
 	};
 

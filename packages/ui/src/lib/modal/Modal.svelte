@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-	import { Dialog, type WithoutChild } from 'bits-ui';
-	import { classNames } from '../utils/classNames.js';
-	import Button from '../button/Button.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { XMark } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Dialog, type WithoutChild } from 'bits-ui';
+	import type { Snippet } from 'svelte';
+	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
+	import { classNames } from '../utils/classNames.js';
 
 	type Props = Dialog.RootProps & {
 		hintLabel?: string;
@@ -81,7 +81,7 @@
 	};
 
 	const modalClass = classNames(
-		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
+		'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
 </script>
@@ -107,7 +107,7 @@
 
 	<Dialog.Portal>
 		<Dialog.Overlay class="fixed inset-0 z-40 bg-black/60" />
-		<div class="pointer-events-none fixed inset-8 z-50 flex items-center justify-center">
+		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
 			<Dialog.Content {...contentProps} class={modalClass}>
 				<div
 					class={`border-color-static-brand bg-color-container-level-1 text-color-text-primary relative flex items-center justify-between border-l-[5px] p-3 pr-4 ${headerTheme}`}
