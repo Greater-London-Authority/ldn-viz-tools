@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: A unified approach to UI design, typography, data presentation and mapping.
+description: A unified approach to UI design, data presentation and mapping.
 section: Overview
 ---
 

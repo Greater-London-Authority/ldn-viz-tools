@@ -1,21 +1,20 @@
 <script lang="ts">
 	import {
-		Header,
-		HeaderTitle,
 		Footer,
-		AnalyticsAndCookieConsent,
-		ThemeSwitcher,
-		Theme,
+		Header,
+		HeaderItem,
 		HeaderRight,
+		HeaderTitle,
 		NavigationMenu,
-		HeaderItem
+		Theme,
+		ThemeSwitcher
 	} from '@ldn-viz/ui';
 	import '../app.postcss';
 
 	//TMP
 	let mainMenu = [
-		{ title: 'Dataviz Guide', id: 'dataviz-guide', href: '/dataviz-guide' },
 		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' },
+		// { title: 'Dataviz Guide', id: 'dataviz-guide', href: '/dataviz-guide' },
 		// { title: 'Tools', id: 'tools', href: '/overview' },
 		// { title: 'Team', id: 'team', href: '/overview' },
 		{ title: 'Contact', id: 'contact', href: '/' }

@@ -2,6 +2,15 @@ import { getAllDocs } from './utils.js';
 
 const allDocs = getAllDocs();
 
+const introduction = allDocs
+	.filter((doc) => doc.section === 'Introduction')
+	.filter((doc) => doc.slugFull !== '/design-system/introduction')
+	.map((doc) => ({
+		title: doc.navLabel,
+		id: `${doc.title.toLowerCase()}-introduction`,
+		href: `/${doc.slug}`
+	}));
+
 const foundations = allDocs
 	.filter((doc) => doc.section === 'Foundations')
 	.filter((doc) => doc.slugFull !== '/design-system/foundations')
@@ -34,6 +43,12 @@ export const navigation = [
 		title: 'Overview',
 		id: 'overview',
 		href: '/design-system'
+	},
+	{
+		title: 'Introduction',
+		id: 'introduction',
+		href: '/design-system/introduction',
+		children: introduction
 	},
 	{
 		title: 'Foundations',
