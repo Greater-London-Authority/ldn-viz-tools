@@ -13,7 +13,7 @@ You can choose to install one or many of the packages, or you may only require t
 
 <div class="not-prose">
 
-```css {1-2}
+```css title="Gloabl styles from a cdn" showLineNumbers
 <link
 	href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes@6.0.0/styles/global.min.css"
 	rel="stylesheet"
@@ -45,3 +45,18 @@ The system is availiable as node modules for installation using your favourite p
 <p><code>npm i @ldn-viz/tables</code> - components for rendering tables</p>
 <p><code>npm i @ldn-viz/themes</code> - CSS and design tokens</p>
 <p><code>npm i @ldn-viz/utils</code> - utility functions (such as for constructing color scales)</p>
+
+```ts ln
+import { defineSiteConfig } from '@svecodocs/kit';
+
+export const siteConfig = defineSiteConfig({
+	title: 'Svecodocs',
+	description: 'A SvelteKit docs starter template',
+	keywords: 'sveltekit, docs, starter, template',
+	ogImage: {
+		url: 'https://docs.sveco.dev/og.png',
+		height: 630,
+		width: 1200
+	}
+});
+```

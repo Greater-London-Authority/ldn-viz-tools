@@ -34,9 +34,9 @@
 			</HeaderItem>
 		</HeaderRight>
 	</Header>
-	<div class="border-color-ui-border-secondary border-t">
-		{@render children()}
-	</div>
+
+	{@render children()}
+
 	<Footer showCiuLogo>
 		<!-- TODO: cookies + privacy etc? -->
 		{#snippet footerCookieMenu()}

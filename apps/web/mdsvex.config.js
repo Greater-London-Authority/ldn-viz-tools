@@ -5,7 +5,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
-import { createHighlighter } from 'shiki';
 import { visit } from 'unist-util-visit';
 
 const prettyCodeOptions = {
@@ -13,8 +12,8 @@ const prettyCodeOptions = {
 		light: 'github-light',
 		dark: 'github-dark'
 	},
-	createHighlighter: (options) =>
-		createHighlighter({
+	getHighlighter: (options) =>
+		getHighlighter({
 			...options,
 			langs: [
 				'plaintext',
@@ -111,6 +110,7 @@ export default defineMDSveXConfig({
 	// layout: {
 	// 	_: resolve(__dirname, './src/lib/layouts/docs-layout.svelte')
 	// },
+	highlight: false,
 	remarkPlugins: [...baseRemarkPlugins],
 	rehypePlugins: [...baseRehypePlugins]
 });
