@@ -12,8 +12,8 @@ const prettyCodeOptions = {
 		light: 'github-light',
 		dark: 'github-dark'
 	},
-	getHighlighter: (options) =>
-		getHighlighter({
+	createHighlighter: (options) =>
+		createHighlighter({
 			...options,
 			langs: [
 				'plaintext',
