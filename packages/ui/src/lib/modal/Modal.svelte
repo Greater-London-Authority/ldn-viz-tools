@@ -87,7 +87,7 @@
 		)
 	);
 
-	let descriptionEl;
+	let descriptionEl: Element;
 </script>
 
 {#snippet modalTrigger()}
