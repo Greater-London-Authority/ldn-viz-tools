@@ -32,7 +32,7 @@
 		 */
 		popup?: Component | null;
 		/**
-		 * Optional message to be passed to child popop component via `mapMarkerString` context.
+		 * Optional message to be passed to child popover component via `mapMarkerString` context.
 		 */
 		msgString?: string | null;
 		/**

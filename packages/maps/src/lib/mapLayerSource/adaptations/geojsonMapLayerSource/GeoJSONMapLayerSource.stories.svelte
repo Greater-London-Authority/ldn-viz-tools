@@ -192,7 +192,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Updating via dataStore">
+<Story name="Updating data by externally updating store">
 	{#snippet template()}
 		<div class="pointer-events-auto relative h-[100dvh] w-[100dvw]">
 			<div class="pointer-events-auto absolute left-4 top-4 z-40 flex gap-2">
