@@ -4,6 +4,10 @@
 	 * `<MapControlGeocoder>` and `<MapControlGeolocator>` components to create
 	 * single and easy to use map search control. It is typically placed in the
 	 * top left hand corner.
+	 *
+	 * The selected location is indicated by a MapLibre layer of type `symbol`,
+	 * with id `gla/context/location-search/map-point-symbol`, created by `initMapLayer`.
+	 *
 	 * @component
 	 */
 
