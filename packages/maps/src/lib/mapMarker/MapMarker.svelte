@@ -7,6 +7,8 @@
 	 * To ensure the correct behaviour for overlapping tooltips that aren't
 	 * sourced via ESRI servers, set `generateId` to true in your
 	 * [MapLibre Source Specifications](https://maplibre.org/maplibre-style-spec/sources/).
+	 * This will set the value of the `feature.id` property to be equal to the
+	 * index of the corresponding feature, rather than leaving it undefined.
 	 *
 	 * The `tooltip` and `popup` components are client side rendered. This
 	 * component's context is passed to them along with three additional
