@@ -4,11 +4,9 @@
 	const PageComponent = $derived(data.component);
 </script>
 
-<div class="py-typography-spacing-xl">
-	<h2 class="responsive headline not-prose">{data.metadata.title}</h2>
-	<p class="responsive subtitle mb-typography-spacing-sm not-prose max-w-prose">
-		{data.metadata.description}
-	</p>
+<h2 class="title-lg format">{data.metadata.title}</h2>
+<p class="subtitle format">
+	{data.metadata.description}
+</p>
 
-	<PageComponent />
-</div>
+<PageComponent />
