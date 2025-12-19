@@ -212,7 +212,7 @@
 			>
 				<GeoJSONMapLayerSource id={sourceId} {initialData} bind:dataStore>
 					<MapLayerView
-						id="{sourceId}/polygon"
+						id={`${sourceId}/polygon`}
 						spec={{
 							type: 'fill',
 							filter: ['==', '$type', 'Polygon'],
@@ -224,7 +224,7 @@
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/line"
+						id={`${sourceId}/line`}
 						spec={{
 							type: 'line',
 							filter: ['==', '$type', 'LineString'],
@@ -240,7 +240,7 @@
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/point"
+						id={`${sourceId}/point`}
 						spec={{
 							type: 'circle',
 							filter: ['==', '$type', 'Point'],
