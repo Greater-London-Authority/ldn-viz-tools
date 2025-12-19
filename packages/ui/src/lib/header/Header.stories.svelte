@@ -11,6 +11,7 @@
 		title: 'Ui/Components - Layout And Themes/Header',
 		component: Header as any,
 		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavigationMenu },
+		tags: ['autodocs'],
 		parameters: {
 			layout: 'fullscreen'
 		}
@@ -25,34 +26,19 @@
 
 <Story name="Title only">
 	{#snippet template()}
-		<Header>
-			<HeaderTitle>App title</HeaderTitle>
-		</Header>
+		<Header title="App Title"></Header>
 	{/snippet}
 </Story>
 
 <Story name="Title and menu-right">
 	{#snippet template()}
-		<Header>
-			<HeaderTitle>App title</HeaderTitle>
-			<HeaderRight>
-				<HeaderItem>
-					<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
-				</HeaderItem>
-			</HeaderRight>
-		</Header>
+		<Header title="App Title" navMenu={subMenu}></Header>
 	{/snippet}
 </Story>
 
 <Story name="Title, links, and auth section">
 	{#snippet template()}
-		<Header>
-			<HeaderTitle>App title</HeaderTitle>
-
-			<HeaderItem>
-				<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
-			</HeaderItem>
-
+		<Header title="App Title" navMenu={subMenu}>
 			<HeaderRight>
 				<!-- This would come from your auth menu Component in your app -->
 				<HeaderItem>
@@ -64,6 +50,34 @@
 				</HeaderItem>
 			</HeaderRight>
 		</Header>
+	{/snippet}
+</Story>
+
+<Story name="Title, links, and auth section - adaptive title length">
+	{#snippet template()}
+		<div class="w-96">
+			<Header
+				titleFn={(width) =>
+					width >= 640
+						? 'A very very long title'
+						: width >= 500
+							? 'A very long title'
+							: 'Short title'}
+				menuFoldingBreakpoint={1050}
+				navMenu={subMenu}
+			>
+				<HeaderRight>
+					<!-- This would come from your auth menu Component in your app -->
+					<HeaderItem>
+						<span class="text-xs">Logged in as <b>Bob Smith</b></span>
+					</HeaderItem>
+
+					<HeaderItem>
+						<a class="text-xs" href="/#">Log Out</a>
+					</HeaderItem>
+				</HeaderRight>
+			</Header>
+		</div>
 	{/snippet}
 </Story>
 
