@@ -274,7 +274,7 @@ The type sets contain elements designed to work together such as <code>.headline
 ```html
 <div class="prose responsive">
 	<h2 class="title-lg format">Title</h2>
-	<p class="subtitle">Title Large</p>
+	<p class="subtitle">Subtitle</p>
 </div>
 ```
 
@@ -282,7 +282,7 @@ The type sets contain elements designed to work together such as <code>.headline
 
 <div class="border border-secondary p-4 my-4">
     <h2 class="title-lg format">Title</h2>
-    <p class="subtitle">Title Large</p>
+    <p class="subtitle">Subtitle</p>
 </div>
 
 ### Escaping the prose context

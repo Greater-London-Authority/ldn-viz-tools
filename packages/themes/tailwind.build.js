@@ -1,3 +1,5 @@
+// TODO Experimental: run with npx tailwindcss -c tailwind.build.js -o dist/typography.css
+// to build external css stylesheet containing typography classes
 module.exports = {
 	content: [],
 	safelist: [
