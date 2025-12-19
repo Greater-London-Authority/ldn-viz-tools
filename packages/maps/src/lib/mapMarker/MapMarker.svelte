@@ -23,12 +23,10 @@
 
 	const contexts = getAllContexts();
 	const mapStore = contexts.get('mapStore');
-	const ctxLayerId = contexts.get('mapLayerId');
 
 	interface Props {
 		/**
-		 * ID of the target layer. Defaults to using the value of 'mapLayerId'
-		 * context if it exists.
+		 * ID of the target layer.
 		 */
 		layerId?: any;
 		/**
@@ -52,7 +50,7 @@
 	}
 
 	let {
-		layerId = ctxLayerId,
+		layerId = undefined,
 		noCursorStyle = false,
 		tooltip = null,
 		popup = null,
