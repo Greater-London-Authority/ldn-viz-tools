@@ -21,9 +21,9 @@
 		OnGeolocationSearchError,
 		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
-	import type { MapStore } from './map-types';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore: MapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 
 	interface Props {
 		/**
@@ -84,7 +84,9 @@
 	}
 
 	$effect(() => {
-		initMapLayer($mapStore);
+		if ($mapStore){
+			initMapLayer($mapStore);
+		}
 	});
 </script>
 
