@@ -47,8 +47,10 @@
 	import { newToastMessage } from './toaster';
 	import { ToastType, ToasterPosition } from './types';
 
+	let noticeNumber = 0;
 	const toastNotice = () => {
-		newToastMessage('A notice!').post();
+		noticeNumber++;
+		newToastMessage(`A notice! Number ${noticeNumber}`).post();
 	};
 
 	const toastSuccess = () => {
@@ -120,6 +122,9 @@
 	};
 </script>
 
+<!--
+Note that MAX_MESSAGES=3; pressing the 'Notice' button quickly to create more messages shows that the older messages are pushed down and hidden.
+-->
 <Story name="Default">
 	{#snippet template(args)}
 		<Button onclick={toastNotice}>Notice</Button>
