@@ -87,6 +87,13 @@
 			position = target.textContent as keyof typeof ToasterPosition;
 		}
 	};
+
+	let clickCount = $state(0);
+	const refreshableMessage = newToastMessage('This message will refresh, not duplicate!', {
+		id: 'refreshable-toast',
+		timeToLive: 10000,
+		closeButton: true
+	});
 </script>
 
 <Story name="Default">
@@ -152,6 +159,45 @@
 			<Toaster position="Center" />
 			<div class="flex gap-6">
 				<Button onclick={toastClosable}>Toast!</Button>
+			</div>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+Calling `.post()` repeatedly on same toast object will refresh it, rather than creating duplicate toasts.
+-->
+
+<Story name="Refreshing instead of duplicating">
+	{#snippet template()}
+		<div class="h-[100vh] w-[100vw] p-6">
+			<Toaster position="TopCenter" />
+			<div class="flex gap-4">
+				<Button
+					onclick={() => {
+						refreshableMessage.post();
+						clickCount++;
+					}}
+				>
+					Post Toast (Count: {clickCount})
+				</Button>
+				<Button
+					onclick={() => {
+						refreshableMessage.remove();
+						clickCount++;
+					}}
+				>
+					Remove Toast
+				</Button>
+				<Button
+					emphasis="secondary"
+					variant="outline"
+					onclick={() => {
+						clickCount = 0;
+					}}
+				>
+					Reset Count
+				</Button>
 			</div>
 		</div>
 	{/snippet}
