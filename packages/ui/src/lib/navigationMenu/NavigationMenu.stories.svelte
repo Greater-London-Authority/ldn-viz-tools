@@ -1,5 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
 	import NavigationMenu from './NavigationMenu.svelte';
 
 	/**
@@ -226,5 +227,47 @@
 			items={subMenu}
 			orientation="horizontal"
 		/>
+	{/snippet}
+</Story>
+
+<Story name="Programmatically change selected item">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			<div class="flex flex-wrap gap-2">
+				<span>Select:</span>
+				<Button onclick={() => (selectedMenuItemId = 'applications')} size="sm">
+					Applications (level 1)
+				</Button>
+				<Button onclick={() => (selectedMenuItemId = 'layout')} size="sm">Layout (level 2)</Button>
+			</div>
+
+			<div class="flex flex-wrap gap-2">
+				<span>Select:</span>
+
+				<Button onclick={() => (selectedMenuItemId = 'dataVisualisation')} size="sm">
+					DV (level 1)
+				</Button>
+
+				<Button onclick={() => (selectedMenuItemId = 'dv-color')} size="sm">
+					DV Color (level 2)
+				</Button>
+				<Button onclick={() => (selectedMenuItemId = 'dv-maps')} size="sm">
+					DV Maps (level 3)
+				</Button>
+			</div>
+		</div>
+
+		<div class="text-color-text-secondary text-sm">
+			Current selected ID: <strong>{selectedMenuItemId}</strong>
+		</div>
+
+		<div class="max-w-96">
+			<NavigationMenu
+				{...args}
+				ariaLabel="programmatic selection menu"
+				{items}
+				bind:selectedMenuItemId
+			/>
+		</div>
 	{/snippet}
 </Story>

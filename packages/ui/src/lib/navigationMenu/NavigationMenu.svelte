@@ -39,6 +39,7 @@
 	const onChange = (id: string) => {
 		if (selected.value !== id) {
 			selected.value = id;
+			selectedMenuItemId = id;
 		}
 	};
 
@@ -64,6 +65,12 @@
 		}));
 
 	let menuState = $derived(mapItems(items, selected.value));
+
+	$effect(() => {
+		if (selected.value != selectedMenuItemId) {
+			selected.value = selectedMenuItemId;
+		}
+	});
 </script>
 
 <nav aria-label={ariaLabel} class={width}>
