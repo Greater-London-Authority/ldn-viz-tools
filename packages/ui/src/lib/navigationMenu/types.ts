@@ -41,7 +41,7 @@ export interface NavigationMenuItemProps {
 	/**
 	 * URL to navigate to when link is clicked.
 	 */
-	href: string;
+	href?: string;
 	/**
 	 * Optional list of children items, if they exist.
 	 */
