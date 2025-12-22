@@ -1,8 +1,8 @@
 <script module lang="ts">
+	import { ClipboardDocument, HandThumbUp } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import CopyButton from './CopyButton.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ClipboardDocument, HandThumbUp } from '@steeze-ui/heroicons';
 
 	/**
 	 * The `<CopyButton>` component is a button enabling quick copy to clipboard
@@ -59,6 +59,16 @@
 <Story name="Changing button style">
 	{#snippet template(args)}
 		<CopyButton {...args} variant="outline" emphasis="secondary" />
+	{/snippet}
+</Story>
+
+<!-- After clicking on a button, clicking on a second button will immediately reset the state of the first;
+ it would otherwise reset after a few seconds.-->
+<Story name="Multiple copy button">
+	{#snippet template(args)}
+		<CopyButton {...args} label="Copy to clipboard" />
+		<CopyButton {...args} label="Copy to clipboard" />
+		<CopyButton {...args} label="Copy to clipboard" />
 	{/snippet}
 </Story>
 
