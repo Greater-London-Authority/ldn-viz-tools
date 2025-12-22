@@ -79,7 +79,7 @@
 						markShape: 'Path',
 						type: 'mouseenter',
 						handler: (_: any, d: { index: number }) => {
-							// this prevents an endless loop of updating hoveredValue, which triggers a re-render of the plot, which casues a new mouseEnter event
+							// this prevents an endless loop of updating hoveredValue, which triggers a re-render of the plot, which causes a new mouseEnter event
 							if (hoveredValue?.Year != chartData[d.index].Year) {
 								hoveredValue = chartData[d.index];
 							}
