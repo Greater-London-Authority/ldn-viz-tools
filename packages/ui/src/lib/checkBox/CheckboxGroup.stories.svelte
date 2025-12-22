@@ -88,7 +88,7 @@
 			bind:selectedOptions
 			label="Transport method"
 			hint="contextual hint text"
-			description="Pick your prefered method of transport - taxis are currently not available"
+			description="Pick your preferred method of transport - taxis are currently not available"
 		/>
 		<p class="text-color-text-secondary mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}

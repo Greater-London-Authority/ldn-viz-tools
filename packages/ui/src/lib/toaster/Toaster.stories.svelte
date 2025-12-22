@@ -4,7 +4,7 @@
 	import Toaster from './Toaster.svelte';
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components/Toaster ',
+		title: 'Ui/Components/Toaster',
 		component: Toaster,
 		tags: ['autodocs'],
 

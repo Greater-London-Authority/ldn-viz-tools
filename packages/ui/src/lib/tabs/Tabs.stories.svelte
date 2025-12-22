@@ -63,7 +63,7 @@
 		{
 			id: 'chargers',
 			value:
-				'The selected tab is: Chargers. You can make this description more or less programtically...'
+				'The selected tab is: Chargers. You can make this description more or less programmatically...'
 		},
 		{
 			id: 'averages',
