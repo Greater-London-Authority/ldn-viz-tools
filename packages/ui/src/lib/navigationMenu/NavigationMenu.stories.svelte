@@ -93,7 +93,15 @@
 					href: '/layout',
 					children: [
 						{ title: 'Applications', id: 'layout-applications', href: '/layout-applications' },
-						{ title: 'Maps', id: 'layout-maps', href: '/layout-maps' }
+						{
+							title: 'Maps',
+							id: 'layout-maps',
+							href: '/layout-maps',
+							children: [
+								{ title: 'Maps with sidebars', id: 'maps-sidebars', href: '/sidebar-maps' },
+								{ title: 'Maps in dashboards', id: 'maps-dashbaords', href: '/dashboard-maps' }
+							]
+						}
 					]
 				},
 				{ title: 'User Interface', id: 'userInterface', href: '/userInterface' }
