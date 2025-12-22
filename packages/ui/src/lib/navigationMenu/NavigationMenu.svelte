@@ -3,7 +3,6 @@
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 	import NavigationMenuItem from './NavigationMenuItem.svelte';
-	import { selected } from './navigationMenuState.svelte';
 	import type { NavigationMenuItemProps, NavigationMenuProps } from './types';
 
 	let {
@@ -15,6 +14,8 @@
 		orientation = 'vertical',
 		selectedMenuItemId = $bindable('')
 	}: NavigationMenuProps = $props();
+
+	const selected = $state({ value: '' });
 
 	/**
 	 * Assigns value of active menu item (if set) to `selected` internal state.
@@ -76,7 +77,7 @@
 <nav aria-label={ariaLabel} class={width}>
 	<ul {id} class={menuClasses}>
 		{#each menuState as { title, href, children, id, isExpanded }}
-			<NavigationMenuItem {href} {title} {id} {children} {onChange} {isExpanded} />
+			<NavigationMenuItem {href} {title} {id} {children} {onChange} {isExpanded} {selected} />
 		{/each}
 	</ul>
 </nav>

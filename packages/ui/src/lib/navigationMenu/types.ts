@@ -59,4 +59,9 @@ export interface NavigationMenuItemProps {
 	 * Event handler to handle what happens when links are clicked.
 	 */
 	onChange?: any;
+
+	/**
+	 * Id of the curently selected item.
+	 */
+	selected: { value: string };
 }

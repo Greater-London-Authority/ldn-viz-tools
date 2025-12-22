@@ -27,6 +27,7 @@
 	});
 
 	let selectedMenuItemId = $state('layout');
+	let selectedMenuItemId2 = $state('applications');
 
 	export let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
@@ -268,6 +269,32 @@
 				{items}
 				bind:selectedMenuItemId
 			/>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Two menus on page">
+	{#snippet template(args)}
+		<div class="flex w-full gap-6">
+			<div>
+				<div class="text-color-text-secondary text-sm">
+					Current selected ID: <strong>{selectedMenuItemId}</strong>
+				</div>
+
+				<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:selectedMenuItemId />
+			</div>
+			<div>
+				<div class="text-color-text-secondary text-sm">
+					Current selected ID: <strong>{selectedMenuItemId2}</strong>
+				</div>
+
+				<NavigationMenu
+					{...args}
+					ariaLabel="example-menu"
+					{items}
+					bind:selectedMenuItemId={selectedMenuItemId2}
+				/>
+			</div>
 		</div>
 	{/snippet}
 </Story>
