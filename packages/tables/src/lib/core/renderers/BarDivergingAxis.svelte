@@ -4,13 +4,11 @@
 	 * @component
 	 */
 
+	import type { BarDivergingAxisProps } from '$lib/core/renderers/BarDivergingAxisProps';
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
-	import type { BarDivergingAxisProps } from '$lib/core/renderers/BarDivergingAxisProps';
 
 	const height = 20;
-
-	let x = $derived(scaleLinear().domain(extent).range([0, width]));
 
 	let {
 		formatString = '0.0f',
@@ -23,6 +21,7 @@
 
 	const topPadding = height; // padding above the horizontal rule
 
+	let x = $derived(scaleLinear().domain(extent).range([0, width]));
 	let f = $derived(format(formatString));
 	let ticks = $derived(x.ticks(numTicks));
 </script>

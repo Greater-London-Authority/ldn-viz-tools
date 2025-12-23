@@ -3,9 +3,10 @@
 	 * The `TextCell` component formats a single value as text and displays it in a table cell.
 	 * @component
 	 */
+	import type { TextCellProps } from '$lib/core/renderers/TextCellProps';
 	import { classNames } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
-	import type { TextCellProps } from '$lib/core/renderers/TextCellProps';
+	import { getVal } from '../../getVal';
 
 	let {
 		value,
@@ -24,15 +25,12 @@
 	};
 
 	let alignmentClass = $derived(alignmentClasses[alignText ?? 'left']);
-
-	let fontWeightValue = $derived(typeof fontWeight === 'function' ? fontWeight(value) : fontWeight);
-	let visibilityValue = $derived(typeof visibility === 'function' ? visibility(value) : visibility);
 </script>
 
 <span
 	class={classNames(`flex h-full items-center py-2`, alignmentClass)}
-	style:font-weight={fontWeightValue}
-	style:visibility={visibilityValue}
+	style:font-weight={getVal(value, fontWeight)}
+	style:visibility={getVal(value, visibility)}
 >
 	{formatString ? f(+value) : value}
 </span>
