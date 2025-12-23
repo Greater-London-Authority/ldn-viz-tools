@@ -4,11 +4,12 @@
 	 * @component
 	 */
 
+	import type { BarChartProps } from '$lib/core/aggregateRenderers/BarChartProps';
 	import { max } from 'd3-array';
 	import { scaleBand, scaleLinear } from 'd3-scale';
-	import type { BarChartProps } from '$lib/core/aggregateRenderers/BarChartProps';
+	import { getVal } from '../../getVal';
 
-	let { values, colorScale, posScale, width = 100, ...rest }: BarChartProps = $props();
+	let { values, color = 'lightgrey', posScale, width = 100, ...rest }: BarChartProps = $props();
 
 	const height = 30;
 	const marginTop = 0;
@@ -64,7 +65,7 @@
 	<g>
 		{#each sortedData as d}
 			<rect
-				fill={colorScale ? colorScale(d[0]) : 'lightgrey'}
+				fill={getVal(d[0], color)}
 				x={x(d[0])}
 				width={x.bandwidth()}
 				y={y(d[1])}

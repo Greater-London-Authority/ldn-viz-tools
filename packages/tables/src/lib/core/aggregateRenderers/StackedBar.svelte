@@ -3,10 +3,11 @@
 	 * The `StackedBar` component represents a set of values as a stacked bar chart.
 	 */
 
-	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import type { StackedBarProps } from '$lib/core/aggregateRenderers/StackedBarProps';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import { getVal } from '../../getVal';
 
-	let { values, colorScale, width = 100, ...rest }: StackedBarProps = $props();
+	let { values, color = 'red', width = 100, ...rest }: StackedBarProps = $props();
 
 	const height = 30;
 	const marginRight = 10;
@@ -20,7 +21,7 @@
 
 	let sortedData;
 
-	let bars: { start: number; end: number; val: number }[] = $derived.by(() => {
+	let bars: { start: number; end: number; val: string }[] = $derived.by(() => {
 		// count the values: produces a list of [value, count] pairs
 
 		const counts: Record<number, number> = Object.create(null);
@@ -50,7 +51,7 @@
 			width={x(bar.end) - x(bar.start)}
 			y={0}
 			{height}
-			fill={colorScale ? colorScale(bar.val) : 'lightgrey'}
+			fill={getVal(bar.val, color) as string}
 			stroke="black"
 		/>
 

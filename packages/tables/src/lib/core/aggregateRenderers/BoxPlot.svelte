@@ -4,11 +4,11 @@
 	 * @component
 	 */
 
-  import { max, mean, min, quantile } from 'd3-array';
-  import { type ScaleLinear, scaleLinear } from 'd3-scale';
-  import type { BoxPlotProps } from '$lib/core/aggregateRenderers/BoxPlotProps';
+	import type { BoxPlotProps } from '$lib/core/aggregateRenderers/BoxPlotProps';
+	import { max, mean, min, quantile } from 'd3-array';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
-  let {
+	let {
 		values = [],
 		extent = [0, 1],
 		showAllPoints = false,
@@ -20,7 +20,7 @@
 	const marginRight = 10;
 	const marginLeft = 0;
 
-	let canvasRef: HTMLCanvasElement = $state();
+	let canvasRef: HTMLCanvasElement | undefined = $state();
 
 	type Box = {
 		min: number | undefined;
@@ -32,7 +32,7 @@
 	};
 
 	let x: ScaleLinear<number, number>;
-	let box: Box = $state();
+	let box: Box | undefined = $state();
 
 	const update = (values: number[]) => {
 		x = scaleLinear()
@@ -132,7 +132,9 @@
 		update(values || []);
 	});
 	$effect(() => {
-		drawCanvas(box, showAllPoints, canvasRef);
+		if (box && canvasRef) {
+			drawCanvas(box, showAllPoints, canvasRef);
+		}
 	});
 </script>
 

@@ -5,12 +5,12 @@
  */
 
 export interface ColorAndLabelProps {
-  /**
-   * The value to be encoded in the cell.
-   */
-  value: number;
-  /**
-   * A D3 color scale used to determine cell background color.
-   */
-  colorScale: any;
+	/**
+	 * The value to be encoded in the cell.
+	 */
+	value: number;
+	/**
+	 * A D3 color scale used to determine cell background color.
+	 */
+	color: string | ((value: number) => string);
 }

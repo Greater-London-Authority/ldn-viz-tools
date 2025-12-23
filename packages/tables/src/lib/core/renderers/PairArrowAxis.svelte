@@ -4,19 +4,13 @@
 	 * @component
 	 */
 
+	import type { PairArrowAxisProps } from '$lib/core/renderers/PairArrowAxisProps';
 	import { format } from 'd3-format';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
-	import type { PairArrowAxisProps } from '$lib/core/renderers/PairArrowAxisProps';
 
 	const height = 20;
 
 	const barEndPadding = 15;
-
-	let x: ScaleLinear<number, number> = $derived(
-		scaleLinear()
-			.domain(extent)
-			.range([barEndPadding, width - barEndPadding])
-	);
 
 	let {
 		formatString = '0.0f',
@@ -26,6 +20,12 @@
 		textSize = 8,
 		...rest
 	}: PairArrowAxisProps = $props();
+
+	let x: ScaleLinear<number, number> = $derived(
+		scaleLinear()
+			.domain(extent)
+			.range([barEndPadding, width - barEndPadding])
+	);
 
 	const topPadding = height; // padding above the horizontal rule
 

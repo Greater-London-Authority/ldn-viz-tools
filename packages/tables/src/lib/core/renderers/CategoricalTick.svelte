@@ -3,12 +3,19 @@
 	 * The `CategoricalTick` component encodes a single categorical value redundantly as both the position and color of a tick.
 	 * @component
 	 */
-	import { format } from 'd3-format';
 	import type { CategoricalTickProps } from '$lib/core/renderers/CategoricalTickProps';
+	import { format } from 'd3-format';
+	import { getVal } from '../../getVal';
 
 	const fPercentage = format('0.0%');
 
-	let { value, colorScale, posScale, showValues = true, ...rest }: CategoricalTickProps = $props();
+	let {
+		value,
+		color = 'black',
+		posScale,
+		showValues = true,
+		...rest
+	}: CategoricalTickProps = $props();
 
 	let w = $derived(1 / posScale.domain().length);
 
@@ -18,7 +25,7 @@
 <div
 	class="relative top-0 z-[-1] h-full w-[3px] -translate-x-1/2 transform"
 	style="width: 3px"
-	style:background={colorScale(value)}
+	style:background={getVal(value, color)}
 	style:left={fPercentage(l)}
 	style:width={fPercentage(w)}
 >

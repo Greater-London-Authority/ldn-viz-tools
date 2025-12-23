@@ -6,11 +6,11 @@
 
 	import { format } from 'd3-format';
 
+	import type { GoodOrBadProps } from '$lib/core/renderers/GoodOrBadProps';
 	import { Check, Minus, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { ComparedBenchmark } from '../../types/benchmarks';
 	import { classNames } from '../../utils/utilityFns';
-	import type { GoodOrBadProps } from '$lib/core/renderers/GoodOrBadProps';
 
 	let {
 		value,
@@ -75,7 +75,7 @@
 </script>
 
 <div class={ragClasses}>
-	{#if goodIs !== 'n/a'}
+	{#if goodIs !== 'n/a' && compared}
 		<div
 			class={`flex shrink-0 grow-0 items-center justify-center rounded-full bg-current ${
 				iconOnly ? 'mt-0.5 h-4 w-4' : 'mb-0.5 mr-1 h-5 w-5'
@@ -85,7 +85,7 @@
 		</div>
 	{/if}
 
-	{#if !iconOnly}
+	{#if !iconOnly && compared}
 		{f(Math.abs(compared.value))}
 		{compared.vs}
 		{benchmarkLabel}
