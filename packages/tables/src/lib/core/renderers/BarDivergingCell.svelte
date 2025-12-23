@@ -50,7 +50,7 @@
 				width={x(0) - x(value)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={getVal(value, negativeColor)}
+				fill={getVal(value, negativeColor) as string}
 			/>
 
 			<!-- zero line -->
@@ -85,7 +85,7 @@
 				width={x(value) - x(0)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={getVal(value, positiveColor)}
+				fill={getVal(value, positiveColor) as string}
 			/>
 
 			<!-- zero line -->

@@ -21,7 +21,7 @@
 
 	let sortedData;
 
-	let bars: { start: number; end: number; val: number }[] = $derived.by(() => {
+	let bars: { start: number; end: number; val: string }[] = $derived.by(() => {
 		// count the values: produces a list of [value, count] pairs
 
 		const counts: Record<number, number> = Object.create(null);
@@ -51,7 +51,7 @@
 			width={x(bar.end) - x(bar.start)}
 			y={0}
 			{height}
-			fill={getVal(bar.val, color)}
+			fill={getVal(bar.val, color) as string}
 			stroke="black"
 		/>
 
