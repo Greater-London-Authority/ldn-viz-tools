@@ -1,12 +1,12 @@
 <script lang="ts">
 	/**
-	 * The `PairArrow` component renders a table cell containing an arrow pointing from a context value to the cell's value.
+	 * The `PairArrowCell` component renders a table cell containing an arrow pointing from a context value to the cell's value.
 	 * The color of the arrow indicates whether it is increasing or decreasing
 	 * @component
 	 */
 
-	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import type { PairArrowCellProps } from '$lib/core/renderers/PairArrowCellProps';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
 	let {
 		value,

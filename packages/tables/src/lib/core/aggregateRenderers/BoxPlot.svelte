@@ -1,14 +1,14 @@
 <script lang="ts">
 	/**
-	 * The `ViolinPlot` component renders a set of values as a BoxPlot.
+	 * The `BoxPlot` component renders a set of values as a BoxPlot.
 	 * @component
 	 */
 
-  import { max, mean, min, quantile } from 'd3-array';
-  import { type ScaleLinear, scaleLinear } from 'd3-scale';
-  import type { BoxPlotProps } from '$lib/core/aggregateRenderers/BoxPlotProps';
+	import type { BoxPlotProps } from '$lib/core/aggregateRenderers/BoxPlotProps';
+	import { max, mean, min, quantile } from 'd3-array';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
-  let {
+	let {
 		values = [],
 		extent = [0, 1],
 		showAllPoints = false,

@@ -2,12 +2,12 @@
 	/**
 	 * The `Tick` component renders a table cell representing a numerical value as a tick;
 	 * the horizontal position of the tick encodes the value.
-	 * See also: [Dot](./?path=/docs/tables-components-encodings-dot--documentation)
+	 * See also: [Dot](./?path=/docs/tables-components-renderers-dot--documentation)
 	 * @component
 	 */
 
-	import { format } from 'd3-format';
 	import type { TickProps } from '$lib/core/renderers/TickProps';
+	import { format } from 'd3-format';
 
 	let {
 		color = 'steelblue',
