@@ -4,8 +4,9 @@
 	 * @component
 	 */
 
-	import { format } from 'd3-format';
 	import type { BarCellProps } from '$lib/core/renderers/BarCellProps';
+	import { format } from 'd3-format';
+	import { getVal } from '../../getVal';
 
 	let {
 		value,
@@ -31,7 +32,7 @@
 <div class="flex h-full items-center py-1">
 	<div class="bg-color-ui-neutral relative flex w-full text-xs">
 		<div
-			style={`width:${scale(+value)}%; background-color:${color}`}
+			style={`width:${scale(+value)}%; background-color:${getVal(value, color)}`}
 			class="absolute left-0 h-full text-right"
 		></div>
 

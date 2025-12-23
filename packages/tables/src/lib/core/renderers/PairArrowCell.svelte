@@ -5,8 +5,9 @@
 	 * @component
 	 */
 
-	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import type { PairArrowCellProps } from '$lib/core/renderers/PairArrowCellProps';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import { getVal } from '../../getVal';
 
 	let {
 		value,
@@ -53,8 +54,8 @@
 			x2={x(value)}
 			y1={height / 2}
 			y2={height / 2}
-			stroke={value > contextVals[0] ? positiveColor : negativeColor}
-			fill={value > contextVals[0] ? positiveColor : negativeColor}
+			stroke={value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)}
+			fill={value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)}
 			marker-end="url(#arrow)"
 		/>
 	</svg>
