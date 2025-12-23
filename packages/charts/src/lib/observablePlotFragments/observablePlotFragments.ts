@@ -208,12 +208,12 @@ const defaultRect = () => ({
  **/
 type generateAnnotationsConfig = {
 	/**
-	 * @param val An optional filter/predicate function that can be used to ignore some data points.
+	 * An optional filter/predicate function that can be used to ignore some data points.
 	 */ filter?: (val: any) => boolean;
 
 	/**
 	 *
-	 * @param data Function for the corresponding Plot mark (e.g., `Plot.dot`)
+	 * Function for the corresponding Plot mark (e.g., `Plot.dot`)
 	 */
 	type: (data: any[], options: any) => any;
 
