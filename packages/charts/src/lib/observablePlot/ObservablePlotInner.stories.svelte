@@ -154,30 +154,30 @@
 			value: 61816,
 			label: 'Peak',
 			dx: 0,
-			dy: -20,
+			dy: -15,
 			textAnchor: 'middle'
 		},
 		{
 			date: new Date('2016-12-01'),
 			value: 53560,
 			label: 'Decline begins',
-			dx: 10,
-			dy: 0,
-			textAnchor: 'start'
-		},
-		{
-			date: new Date('2019-11-01'),
-			value: 41090,
-			label: 'Sharp drop',
 			dx: -10,
 			dy: 0,
 			textAnchor: 'end'
 		},
 		{
+			date: new Date('2019-11-01'),
+			value: 41090,
+			label: 'Sharp drop',
+			dx: +10,
+			dy: 0,
+			textAnchor: 'start'
+		},
+		{
 			date: new Date('2022-07-01'),
 			value: 15020,
 			label: 'Near bottom',
-			dx: 10,
+			dx: 0,
 			dy: 10,
 			textAnchor: 'start'
 		},
@@ -186,7 +186,7 @@
 			value: 11667,
 			label: 'Lowest point',
 			dx: 0,
-			dy: 20,
+			dy: 15,
 			textAnchor: 'middle'
 		}
 	];
