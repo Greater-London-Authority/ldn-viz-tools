@@ -26,10 +26,10 @@
 </script>
 
 <script lang="ts">
-	import { Plot } from '../observablePlotFragments/plot';
 	import * as UnstyledPlot from '@observablehq/plot';
-	import { monthlyData } from '../../data/demoData';
 	import { format } from 'd3-format';
+	import { monthlyData } from '../../data/demoData';
+	import { Plot } from '../observablePlotFragments/plot';
 
 	const chartData = monthlyData.filter((d) => d.Variable === 'Variable A');
 
@@ -39,6 +39,101 @@
 		marks: [
 			Plot.axisX({ label: null, interval: '1 year' }),
 			Plot.axisY({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			})
+		]
+	});
+
+	let specDashed = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.line(
+				chartData.filter((d) => d.Month <= new Date('2022-12-31')),
+				{
+					x: 'Month',
+					y: 'Value',
+					tip: {
+						format: {
+							x: true,
+							y: (d) => '£' + format(',.4~s')(d)
+						}
+					}
+				}
+			),
+
+			Plot.dashedLine(
+				chartData.filter((d) => d.Month >= new Date('2022-12-31')),
+				{
+					x: 'Month',
+					y: 'Value',
+					tip: {
+						format: {
+							x: true,
+							y: (d) => '£' + format(',.4~s')(d)
+						}
+					}
+				}
+			)
+		]
+	});
+
+	let specPointsAndDots = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.dot(
+				chartData.filter((d) => d.Month <= new Date('2022-12-31')),
+				{
+					x: 'Month',
+					y: 'Value',
+					tip: {
+						format: {
+							x: true,
+							y: (d) => '£' + format(',.4~s')(d)
+						}
+					}
+				}
+			),
+
+			Plot.point(
+				chartData.filter((d) => d.Month >= new Date('2022-12-31')),
+				{
+					x: 'Month',
+					y: 'Value',
+					tip: {
+						format: {
+							x: true,
+							y: (d) => '£' + format(',.4~s')(d)
+						}
+					}
+				}
+			)
+		]
+	});
+
+	let specImplicitAxes = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			//Plot.axisX({ label: null, interval: '1 year' }),
+			//Plot.axisY({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.ruleY([0]),
 			Plot.line(chartData, {
 				x: 'Month',
@@ -90,5 +185,35 @@
 				]
 			}}
 		/>
+	{/snippet}
+</Story>
+
+<!--
+This chart uses implicitly created axes, rather than explicitly creating them with `Plot.axisX()` / `Plot.axisY()`.
+Note that this styles the axes with the default styling defined by Observable Plot, rather than ldn-viz;
+due to other styling, this pushes the y-axis ticks and labels to the left, outside the visible area.
+-->
+<Story name="Incorrect styling due to implicit axes">
+	{#snippet template(args)}
+		<ObservablePlotInner {...args} spec={specImplicitAxes} data={chartData} />
+	{/snippet}
+</Story>
+
+<!--
+The wrapper also provides `dashedLine`/`dashedLineX`/`dashedLineY` marks as wrappers around the `line`/`lineX`/`lineY` mark provided by Observable Plot.
+-->
+<Story name="dashedLine mark">
+	{#snippet template(args)}
+		<ObservablePlotInner {...args} spec={specDashed} data={chartData} />
+	{/snippet}
+</Story>
+
+<!--
+The wrapper also provides `point`/`pointX`/`pointY` marks as wrappers around the `dot`/`dotX`/`dotY` mark provided by Observable Plot.
+In this plot, the `dot` mark is used on the left and the `point` mark on the right.
+-->
+<Story name="point mark">
+	{#snippet template(args)}
+		<ObservablePlotInner {...args} spec={specPointsAndDots} data={chartData} />
 	{/snippet}
 </Story>
