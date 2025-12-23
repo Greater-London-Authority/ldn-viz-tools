@@ -34,7 +34,7 @@
 </script>
 
 <script lang="ts">
-	import { Select, theme } from '@ldn-viz/ui';
+	import { Button, Select, theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
@@ -121,6 +121,8 @@
 			})
 		]
 	});
+
+	let width = $state('w-96');
 </script>
 
 <Story name="Default">
@@ -313,6 +315,30 @@
 			imageDownloadButton={['PNG']}
 			dataDownloadButton={false}
 		/>
+	{/snippet}
+</Story>
+
+<Story name="Responsive resizing">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			<div>
+				<span>Set width to:</span>
+				<Button onclick={() => (width = 'w-96')}>384px</Button>
+				<Button onclick={() => (width = 'w-1/2')}>Half-width</Button>
+
+				<Button onclick={() => (width = 'w-full')}>Full-width</Button>
+			</div>
+
+			<div class={width}>
+				<ObservablePlot
+					{...args}
+					{spec}
+					data={chartData}
+					imageDownloadButton={['PNG']}
+					dataDownloadButton={false}
+				/>
+			</div>
+		</div>
 	{/snippet}
 </Story>
 
