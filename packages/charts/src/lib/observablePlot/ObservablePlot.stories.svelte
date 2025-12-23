@@ -128,6 +128,7 @@
 		<ObservablePlot {...args} {spec} data={chartData} />
 	{/snippet}
 </Story>
+
 <!-- 
 	The width of the chart is contained within the wrapping chart container.
 	Tailwind width classes can be used to control the width. Either fixed: (e.g. `w-[500px]`) or responsive: (e.g. `w-1/2`)
@@ -276,6 +277,42 @@
 				</div>
 			{/snippet}
 		</ObservablePlot>
+	{/snippet}
+</Story>
+
+<Story name="No downloads">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			dataDownloadButton={false}
+			imageDownloadButton={false}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Only (CSV) data downloads">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			imageDownloadButton={false}
+			dataDownloadButton={['CSV']}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Only (PNG) image downloads">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			imageDownloadButton={['PNG']}
+			dataDownloadButton={false}
+		/>
 	{/snippet}
 </Story>
 
