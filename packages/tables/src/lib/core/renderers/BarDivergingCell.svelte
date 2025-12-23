@@ -5,9 +5,10 @@
 	 * @component
 	 */
 
+	import type { BarDivergingCellProps } from '$lib/core/renderers/BarDivergingCellProps';
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
-	import type { BarDivergingCellProps } from '$lib/core/renderers/BarDivergingCellProps';
+	import { getVal } from '../../getVal';
 
 	let {
 		value,
@@ -49,7 +50,7 @@
 				width={x(0) - x(value)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={negativeColor}
+				fill={getVal(value, negativeColor)}
 			/>
 
 			<!-- zero line -->
@@ -84,7 +85,7 @@
 				width={x(value) - x(0)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={positiveColor}
+				fill={getVal(value, positiveColor)}
 			/>
 
 			<!-- zero line -->
