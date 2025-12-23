@@ -353,3 +353,14 @@ This story shows how these marks are styled.
 		/>
 	{/snippet}
 </Story>
+
+<!--
+	With `ariaHidden=false`, screen readers will read the contents on the chart itself.
+	Usually this is undesirable - we usuallly want them to read the title, subtitle, and surrounding text.
+	(Note that to test screen-readers, it is best to click the arrw-right/external link in the bar above the story to open it in a new tab.)
+-->
+<Story name="With ariaHidden false">
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData} ariaHidden={false} />
+	{/snippet}
+</Story>
