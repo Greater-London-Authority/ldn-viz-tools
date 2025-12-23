@@ -121,6 +121,65 @@
 			})
 		]
 	});
+
+	let specAnnotated = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		y: { insetTop: 20 },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			}),
+
+			Plot.annotationText(
+				[
+					{
+						x: new Date('2020-06-01'),
+						y: 15000,
+						label: 'A dip',
+						textAnchor: 'middle'
+					}
+				],
+				{
+					x: 'x',
+					y: 'y',
+					text: 'label',
+					dy: +10,
+					fontSize: 12,
+					fontWeight: 'bold'
+				}
+			),
+
+			Plot.annotationTip(
+				[
+					{
+						x: new Date('2015-02-01'),
+						y: 61820,
+						title: 'Peak value - over £60k'
+					}
+				],
+				{
+					x: 'x',
+					y: 'y',
+					title: (d) => d.title,
+					anchor: 'bottom',
+					dy: -5
+				}
+			)
+		]
+	});
 </script>
 
 <Story name="Default">
@@ -276,5 +335,21 @@
 				</div>
 			{/snippet}
 		</ObservablePlot>
+	{/snippet}
+</Story>
+
+<!--
+Observable Plot provides `annotationText`/`anotationTip` annotation marks that can be used to highlight specific data points or add explanatory text to charts.
+This story shows how these marks are styled.
+-->
+<Story name="With annotations">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			title="Variable A with key events and periods highlighted"
+			subTitle="London monthly estimated variable value (GBP), January 2015 to March 2024"
+			spec={specAnnotated}
+			data={chartData}
+		/>
 	{/snippet}
 </Story>
