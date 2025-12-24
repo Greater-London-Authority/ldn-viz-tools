@@ -66,6 +66,11 @@ export type ColSpec = {
 
 	allowGrouping?: boolean;
 
+	groups?: {
+		ungrouped: any[];
+		grouped: Record<string, any[]>;
+	};
+
 	cell?: {
 		renderer?: string | SvelteComponent;
 		axisRenderer?: string | SvelteComponent;
