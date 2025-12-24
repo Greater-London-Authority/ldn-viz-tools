@@ -23,7 +23,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<TextCellWithUncertainty colorScale={() => 'red'} {...args} value={args.value ?? '500 cars'} />
+		<TextCellWithUncertainty color={() => 'red'} {...args} value={args.value ?? '500 cars'} />
 	{/snippet}
 </Story>
 

@@ -13,6 +13,7 @@
 <script lang="ts">
 	import { computeWidths } from '../core/lib/computeWidths';
 	import { TableData } from '../core/lib/dataObj';
+	import type { TableSpec } from '../core/lib/types';
 
 	const FIXED_WIDTH = 600;
 
@@ -104,7 +105,7 @@
 	computeWidths(tableBasic, FIXED_WIDTH);
 
 	/********************/
-	const tableSpecAlignment = {
+	const tableSpecAlignment: TableSpec = {
 		showHeaderTopRule: false,
 
 		columns: [
