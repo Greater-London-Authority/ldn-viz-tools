@@ -16,7 +16,7 @@ export interface DotProps {
 	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
 	 */
 	formatString?: string;
-	extent: any;
+	extent?: any;
 
 	[key: string]: any;
 }

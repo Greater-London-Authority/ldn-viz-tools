@@ -12,8 +12,6 @@
 	let { value, formatString = '.2f', color = 'steelblue' }: ColoredCellProps = $props();
 
 	let f = $derived(format(formatString));
-
-	$inspect(color, value, getVal(value, color));
 </script>
 
 {#if !color}

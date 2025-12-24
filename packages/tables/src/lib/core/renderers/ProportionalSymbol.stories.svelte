@@ -25,6 +25,6 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<ProportionalSymbol {...args} />
+		<ProportionalSymbol {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>

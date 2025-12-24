@@ -23,6 +23,6 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<ColoredCell {...args} />
+		<ColoredCell {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>

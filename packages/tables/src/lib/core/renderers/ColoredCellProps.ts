@@ -14,5 +14,5 @@ export interface ColoredCellProps {
 	/**
 	 * A D3 color scale used to determine cell background color.
 	 */
-	color: ScaleThreshold<string | number, string> | (() => string) | string;
+	color?: ScaleThreshold<string | number, string> | (() => string) | string;
 }

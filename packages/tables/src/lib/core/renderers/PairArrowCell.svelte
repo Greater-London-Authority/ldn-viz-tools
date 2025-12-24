@@ -54,8 +54,12 @@
 			x2={x(value)}
 			y1={height / 2}
 			y2={height / 2}
-			stroke={value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)}
-			fill={value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)}
+			stroke={String(
+				value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)
+			)}
+			fill={String(
+				value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)
+			)}
 			marker-end="url(#arrow)"
 		/>
 	</svg>

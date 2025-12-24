@@ -21,6 +21,6 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<StackedBar {...args} />
+		<StackedBar {...args} values={args.values ?? ['a', 'a', 'b', 'b', 'b', 'b', 'c', 'c', 'd']} />
 	{/snippet}
 </Story>
