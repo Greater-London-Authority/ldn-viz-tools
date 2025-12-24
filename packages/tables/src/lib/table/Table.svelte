@@ -15,7 +15,7 @@
 
 	interface Props {
 		/**
-		 * The data to be displayed in the table. An array of objects: one object per row, and one field per columns.
+		 * The data to be displayed in the table. An array of objects: one object per row, and one field per column.
 		 */
 		data: any[];
 		/**
@@ -23,11 +23,11 @@
 		 */
 		tableSpec: any;
 		/**
-		 * Title to be displayed above the chart (optional).
+		 * Title to be displayed above the table (optional).
 		 */
 		title?: string;
 		/**
-		 * Subtitle to be displayed above the chart, below the main title (optional).
+		 * Subtitle to be displayed above the table, below the main title (optional).
 		 */
 		subTitle?: string;
 		/**
@@ -71,7 +71,7 @@
 		 */
 		// tableObj?: TableData | undefined;
 		/**
-		 * If `ture`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
+		 * If `true`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
 		 */
 		zebraStripe?: boolean;
 		/**
