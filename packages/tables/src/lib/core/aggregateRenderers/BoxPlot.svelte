@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `ViolinPlot` component renders a set of values as a BoxPlot.
+	 * The `BoxPlot` component renders a set of values as a BoxPlot.
 	 * @component
 	 */
 

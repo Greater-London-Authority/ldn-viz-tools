@@ -8,8 +8,8 @@
 	import type { ScaleLinear } from 'd3-scale';
 	import { scaleLinear } from 'd3-scale';
 
-	import { area, curveCatmullRom } from 'd3-shape';
 	import type { ViolinProps } from '$lib/core/aggregateRenderers/ViolinProps';
+	import { area, curveCatmullRom } from 'd3-shape';
 
 	let { values, extent = [0, 1], width = 100, ...rest }: ViolinProps = $props();
 
@@ -64,7 +64,7 @@
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<path d={areaGenerator(bins)} fill="lightgrey" />
 
-	<!-- line fr0m q1 to q3 -->
+	<!-- line from q1 to q3 -->
 	{#if box.q1 !== undefined && box.q3 !== undefined}
 		<line x1={x(box.q1)} x2={x(box.q3)} y1={height / 2} y2={height / 2} stroke="black" />
 	{/if}

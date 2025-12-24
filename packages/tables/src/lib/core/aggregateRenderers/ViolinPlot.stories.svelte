@@ -5,6 +5,7 @@
 	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/ViolinPlot',
 		component: ViolinPlot,
+		tags: ['autodocs'],
 
 		args: {
 			values: [0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.8],
@@ -14,7 +15,7 @@
 </script>
 
 <Story name="Default">
-	{#snippet tmplate(args)}
+	{#snippet template(args)}
 		<ViolinPlot {...args} />
 	{/snippet}
 </Story>
