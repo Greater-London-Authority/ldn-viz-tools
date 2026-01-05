@@ -42,26 +42,30 @@
 			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		train: {
 			colorName: 'data.categorical.green',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 
 		underground: {
 			colorName: 'data.categorical.darkpink',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		taxi: {
 			colorName: 'data.categorical.orange',
 			visible: false,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		}
 	});
 	let state2 = $state({
@@ -69,19 +73,22 @@
 			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		train: {
 			colorName: 'data.categorical.green',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		underground: {
 			colorName: 'data.categorical.darkpink',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		}
 	});
 	let state3 = $state({
@@ -89,19 +96,22 @@
 			colorName: 'palette.blue.600',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		train: {
 			colorName: 'palette.green.600',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		underground: {
 			colorName: 'palette.darkpink.600',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		}
 	});
 
@@ -114,7 +124,7 @@
 	args={{ options: optionsForGroup, layersState: state1, ariaLabel: ariaLabel }}
 >
 	{#snippet template(args)}
-		<LayerControlGroup {...args} />
+		<LayerControlGroup {...args} bind:layersState={state1} />
 		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
