@@ -8,7 +8,6 @@
 
 <div class="flex space-x-24 p-4">
 	<DocsSidebar {navigation} />
-	<div class="prose responsive">
-		{@render children?.()}
-	</div>
+
+	{@render children?.()}
 </div>
