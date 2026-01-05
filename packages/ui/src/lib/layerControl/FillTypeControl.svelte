@@ -5,7 +5,8 @@
 
 	import { patterns as defaultPatterns, type PatternDefinitions } from './patterns';
 
-	import { AdjustmentsHorizontal, NoSymbol } from '@steeze-ui/heroicons';
+	import { NoSymbol } from '@steeze-ui/heroicons';
+	import { Notches } from '@steeze-ui/phosphor-icons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	let fillOptions = [
@@ -45,7 +46,7 @@
 	<Popover>
 		{#snippet trigger(props)}
 			<Trigger {...props} size="xs" aria-label="Click to open {label} layer fill control">
-				<Icon src={AdjustmentsHorizontal} theme="mini" class="h-6 w-6" aria-hidden="true" />
+				<Icon src={Notches} theme="mini" class="h-6 w-6" aria-hidden="true" />
 			</Trigger>
 		{/snippet}
 
