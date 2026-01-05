@@ -41,12 +41,19 @@
 		theme="mini"
 		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
 		aria-hidden="true"
+		title="Cannot change fill type."
 	/>
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
 			<Trigger {...props} size="xs" aria-label="Click to open {label} layer fill control">
-				<Icon src={Notches} theme="mini" class="h-6 w-6" aria-hidden="true" />
+				<Icon
+					src={Notches}
+					theme="mini"
+					class="h-6 w-6"
+					aria-hidden="true"
+					title="Click to change fill type for this layer."
+				/>
 			</Trigger>
 		{/snippet}
 
