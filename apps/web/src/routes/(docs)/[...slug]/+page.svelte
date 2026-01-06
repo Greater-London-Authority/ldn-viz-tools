@@ -8,14 +8,17 @@
 </script>
 
 <div class="prose responsive">
-	<h2 class="title-lg format">{data.metadata.title}</h2>
-	<p class="subtitle format">
-		{data.metadata.description}
-	</p>
-
+	<div class="my-typography-spacing-xl">
+		<h1 class="headline format">{data.metadata.title}</h1>
+		<p class="subhead format">
+			{data.metadata.description}
+		</p>
+	</div>
 	<PageComponent />
 </div>
 
-<aside class="sticky top-0 self-start">
-	<Toc toc={{ items: tocItems }} />
-</aside>
+<div class="hidden min-w-[186px] 2xl:block">
+	<aside class="sticky top-0">
+		<Toc toc={{ items: tocItems }} />
+	</aside>
+</div>

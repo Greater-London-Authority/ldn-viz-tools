@@ -1,13 +1,18 @@
 <script lang="ts">
+	import { AppShell } from '@ldn-viz/ui';
 	import DocsSidebar from './DocsSidebar.svelte';
 
 	let { children, navigation } = $props();
 </script>
 
-<!-- TODO: This should be handled by app shell? -->
+<AppShell sidebarPlacement={{ initial: 'left' }} sidebarAlwaysOpen={{ initial: false, md: true }}>
+	{#snippet sidebar()}
+		<DocsSidebar {navigation} />
+	{/snippet}
 
-<div class="flex space-x-24 p-4">
-	<DocsSidebar {navigation} />
-
-	{@render children?.()}
-</div>
+	{#snippet main()}
+		<div class="flex space-x-24 p-4 lg:p-8">
+			{@render children?.()}
+		</div>
+	{/snippet}
+</AppShell>

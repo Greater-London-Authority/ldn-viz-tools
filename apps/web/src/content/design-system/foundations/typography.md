@@ -57,6 +57,8 @@ navLabel: Typography
         ]
 </script>
 
+## Principles
+
 Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. We have developed a typographic system to unify our apps, charts and graphical output. When combined with our spacing rules our designs and interfaces should achieve balance and harmony.
 
 ### Font
