@@ -44,7 +44,16 @@ export const baseRemarkPlugins = [remarkGfm, remarkRemovePrettierIgnore];
 export const baseRehypePlugins = [
 	rehypeSlug,
 	[rehypePrettyCode, prettyCodeOptions],
-	rehypeAutolinkHeadings,
+	[
+		rehypeAutolinkHeadings,
+		{
+			behavior: `append`,
+			properties: {
+				ariaHidden: true,
+				tabIndex: -1
+			}
+		}
+	],
 	rehypeHandleMetadata
 ];
 

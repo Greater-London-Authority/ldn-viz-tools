@@ -68,8 +68,8 @@
 
 <nav aria-label={ariaLabel} class={width}>
 	<ul {id} class={menuClasses}>
-		{#each menuState as { title, href, children, id, isExpanded }}
-			<NavigationMenuItem {href} {title} {id} {children} {onChange} {isExpanded} />
+		{#each menuState as { title, href, children, id, isExpanded }, index (index)}
+			<NavigationMenuItem {href} {title} {id} {children} {index} {onChange} {isExpanded} />
 		{/each}
 	</ul>
 </nav>

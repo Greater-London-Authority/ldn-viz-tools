@@ -3,8 +3,8 @@
 	const PageComponent = $derived(data.component);
 </script>
 
-<h2 class="responsive headline not-prose !mb-0">{data.metadata.title}</h2>
-<p class="responsive subtitle mb-typography-spacing-sm not-prose max-w-prose">
+<h2 class="responsive headline format">{data.metadata.title}</h2>
+<p class="responsive subtitle">
 	{data.metadata.description}
 </p>
 

@@ -25,7 +25,7 @@
 
 <Theme />
 
-<div class="flex min-h-dvh flex-col overflow-x-hidden">
+<div class="flex min-h-dvh flex-col">
 	<Header>
 		<HeaderTitle>London City Data</HeaderTitle>
 		<HeaderRight>
@@ -38,7 +38,6 @@
 	{@render children()}
 
 	<Footer showCiuLogo>
-		<!-- TODO: cookies + privacy etc? -->
 		{#snippet footerCookieMenu()}
 			<div class="flex justify-end">
 				<ThemeSwitcher size="xs" />
