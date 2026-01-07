@@ -17,6 +17,7 @@
 		children = [],
 		isExpanded = $bindable(false),
 		onChange,
+		index,
 		selected
 	}: NavigationMenuItemProps = $props();
 
@@ -93,7 +94,8 @@
 	};
 
 	const listClasses: Record<'vertical' | 'horizontal', string> = {
-		vertical: `${level === 1 ? 'border-t border-color-ui-border-secondary' : ''} `,
+		vertical:
+			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-ui-border-secondary') : '',
 		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
 	};
 

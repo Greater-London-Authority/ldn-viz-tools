@@ -64,4 +64,9 @@ export interface NavigationMenuItemProps {
 	 * Id of the curently selected item.
 	 */
 	selected: { value: string };
+
+	/**
+	 * The indexed number of the menu item position
+	 */
+	index?: number;
 }
