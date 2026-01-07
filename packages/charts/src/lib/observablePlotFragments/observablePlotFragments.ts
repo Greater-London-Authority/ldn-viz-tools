@@ -208,12 +208,12 @@ const defaultRect = () => ({
  **/
 type generateAnnotationsConfig = {
 	/**
-	 * @param val An optional filter/predicate function that can be used to ignore some data points.
+	 * An optional filter/predicate function that can be used to ignore some data points.
 	 */ filter?: (val: any) => boolean;
 
 	/**
 	 *
-	 * @param data Function for the corresponding Plot mark (e.g., `Plot.dot`)
+	 * Function for the corresponding Plot mark (e.g., `Plot.dot`)
 	 */
 	type: (data: any[], options: any) => any;
 
@@ -222,7 +222,7 @@ type generateAnnotationsConfig = {
 	 * However, if a mark is an `option` rather than `channel`, but the specified value is a function, then the function will be evaluated for the datum.
 	 * This means that you can specify `dx` as a function, without worrying about the fact the Observable Plot doesn't (currently) support this.
 	 */
-	options?: Record<string, number | string | ((x: any) => any)>; // any; // object with ket
+	options?: Record<string, number | string | ((x: any) => any)>; // any; // object with key
 
 	/**
 	 * Additional objects, expressed as functions that will be evaluated before Plot's mark function is called.

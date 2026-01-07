@@ -23,7 +23,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<Dot {...args} />
+		<Dot {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>
 

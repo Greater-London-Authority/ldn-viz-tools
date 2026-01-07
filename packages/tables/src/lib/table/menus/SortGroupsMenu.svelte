@@ -14,7 +14,13 @@
 
 	let { table, onChange }: Props = $props();
 
-	let fields: Options[] = $derived.by(() => {
+	type Options = {
+		label: string;
+		id: string;
+		value: string;
+	}[];
+
+	let fields: Options = $derived.by(() => {
 		let new_fields: any[] = [];
 
 		if (table) {

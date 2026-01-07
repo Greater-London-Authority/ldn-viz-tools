@@ -31,7 +31,7 @@
 	interface Props {
 		/**
 		 * Disables initialisation of the map on mount. This is most often used
-		 * to avoid uneeded map rendering during development of non-map application
+		 * to avoid unneeded map rendering during development of non-map application
 		 * elements.
 		 */
 		disabled?: boolean;

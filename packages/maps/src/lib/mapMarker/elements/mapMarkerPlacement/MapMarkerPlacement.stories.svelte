@@ -5,7 +5,7 @@
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerPlacement',
 		component: MapMarkerPlacement,
-		redner: defaultTemplate,
+		render: defaultTemplate,
 		tags: ['autodocs'],
 
 		parameters: {

@@ -17,6 +17,6 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<BoxPlot {...args} />
+		<BoxPlot {...args} values={args.values ?? [0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.8]} />
 	{/snippet}
 </Story>

@@ -25,7 +25,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<Tick {...args} />
+		<Tick {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>
 

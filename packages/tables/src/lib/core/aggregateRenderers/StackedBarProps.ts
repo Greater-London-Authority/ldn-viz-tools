@@ -6,7 +6,7 @@ export interface StackedBarProps {
 	/**
 	 * A D3 color scale used to determine bar color.
 	 */
-	color: string | ((val: any) => string);
+	color?: string | ((val: any) => string);
 	/**
 	 * Width of cell (in pixels).
 	 */

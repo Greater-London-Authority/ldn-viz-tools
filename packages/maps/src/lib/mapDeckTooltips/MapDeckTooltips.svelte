@@ -39,7 +39,7 @@
 		height: 0
 	});
 
-	// Called in an IFFE to avoid the state_referenced_locally warning, an $effect block responds to changes in the state
+	// Called in an IIFE to avoid the state_referenced_locally warning, an $effect block responds to changes in the state
 	const virtualElement = (() => createVirtualElement({ getBoundingClientRect }))();
 
 	$effect(() => {
@@ -75,7 +75,7 @@
 
 	interface Props {
 		/**
-		 * List of layers. We need this so that we can remove a popover when the correpsodning layer is removed.
+		 * List of layers. We need this so that we can remove a popover when the corresponding layer is removed.
 		 */
 		layers?: Layer[];
 		spec?: Record<string, any>;

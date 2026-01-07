@@ -14,6 +14,6 @@ export interface BarCellProps {
 	 */
 	formatString?: string;
 	extent?: any; // used to pass automatically extracted val
-	domain: any; // allows extent to be over-ridden
+	domain?: any; // allows extent to be over-ridden
 	[key: string]: any;
 }

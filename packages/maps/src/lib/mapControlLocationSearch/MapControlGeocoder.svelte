@@ -8,7 +8,7 @@
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { getContext } from 'svelte';
 	import { clearFeature, setFeature } from './map-layer';
-	import type { MapStore } from './map-types';
+	import type { MapLibreStore } from '../map/types';
 
 	import type {
 		GeocoderAdapter,
@@ -68,7 +68,7 @@
 		...rest
 	}: Props = $props();
 
-	const mapStore: MapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 
 	const zoomLevel = 16;
 	const delay = 500;
@@ -84,7 +84,10 @@
 				.retrieve(location.id)
 				.then((updatedLocation: Geolocation) => {
 					showClearButton = true;
-					setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
+
+					if ($mapStore){
+						setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
+					}
 
 					if (onLocationSelected) {
 						onLocationSelected(updatedLocation);
@@ -99,7 +102,7 @@
 	let showClearButton = $state(false);
 
 	$effect(() => {
-		if (!showClearButton) {
+		if (!showClearButton && $mapStore) {
 			clearFeature('geocoder', $mapStore);
 		}
 	});

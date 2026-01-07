@@ -15,7 +15,7 @@
 		showValues = true,
 		value,
 		formatString = '0.0f',
-		extent,
+		extent = [0, 1],
 		...rest
 	}: DotProps = $props();
 

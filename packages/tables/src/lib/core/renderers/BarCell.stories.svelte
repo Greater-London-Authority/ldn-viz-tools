@@ -16,6 +16,6 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<BarCell {...args} />
+		<BarCell {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>

@@ -1,4 +1,4 @@
-import type { SvelteComponent } from 'svelte';
+import type { Component } from 'svelte';
 
 export type DataRow = Record<string, string | number>;
 
@@ -65,25 +65,40 @@ export type ColSpec = {
 	type?: ColumnType;
 
 	allowGrouping?: boolean;
+	sortable?: boolean;
+	alignHeader?: 'left' | 'right' | 'center';
+	superscriptText?: string;
+	hintText?: string;
+	hintComponent?: Component;
+	hintType?: 'tooltip' | 'popover' | 'modal';
+
+	groups?: {
+		ungrouped: any[];
+		grouped: Record<string, any[]>;
+	};
+
+	computedWidth?: number;
+	href?: string;
 
 	cell?: {
-		renderer?: string | SvelteComponent;
-		axisRenderer?: string | SvelteComponent;
+		renderer?: string | Component;
+		axisRenderer?: string | Component;
+		contextFields?: string[];
 		[other: string]: any;
 	};
 
 	group?: {
-		renderer?: string | SvelteComponent;
+		renderer?: string | Component;
 		[other: string]: any;
 	};
 
 	column?: {
-		renderer?: string | SvelteComponent;
+		renderer?: string | Component;
 		[other: string]: any;
 	};
 
 	header?: {
-		renderer?: string | SvelteComponent;
+		renderer?: string | Component;
 		[other: string]: any;
 	};
 };
@@ -102,4 +117,6 @@ export type TableSpec = {
 	rowOrderSpec?: LeafOrderCriterion[];
 	groupOrderSpec?: GroupOrderCriterion[];
 	filters?: Filter[];
+
+	showHeaderTopRule?: boolean;
 };

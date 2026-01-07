@@ -16,7 +16,7 @@ export interface TickProps {
 	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
 	 */
 	formatString?: string;
-	extent: [number, number];
+	extent?: [number, number];
 
 	[key: string]: any;
 }

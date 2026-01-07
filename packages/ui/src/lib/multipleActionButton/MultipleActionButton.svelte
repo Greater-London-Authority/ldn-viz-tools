@@ -38,7 +38,7 @@
 		}
 	});
 
-	// apply fallback value when first rendering - effect doesn't firre, as state not changed
+	// apply fallback value when first rendering - effect doesn't fire, as state not changed
 	if (!state) {
 		state = options.find((option) => option.default) ?? options[0];
 	}

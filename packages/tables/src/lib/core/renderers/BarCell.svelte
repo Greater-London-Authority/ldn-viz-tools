@@ -32,7 +32,8 @@
 <div class="flex h-full items-center py-1">
 	<div class="bg-color-ui-neutral relative flex w-full text-xs">
 		<div
-			style={`width:${scale(+value)}%; background-color:${getVal(value, color)}`}
+			style:width={scale(+value) + 'px'}
+			style:background-color={getVal(value, color)}
 			class="absolute left-0 h-full text-right"
 		></div>
 

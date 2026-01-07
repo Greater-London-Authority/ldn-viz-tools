@@ -4,25 +4,23 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Welcome to Storybook for ldn-viz-tools maps
 
-The`maps` package currently provides two things:
+The `maps` package several things:
 
 - a set of useful constants (such as a bounding box for Greater London)
-- a set of maplibre style files for commonly-used basemaps
+- a set of maplibre style files for basemaps that we use frequently in our projects
+- a collection of components for rendering maps, map layers, and map-related controls
 
-### Geocoding
 
-When geocoding using the [mapbox-gl-geocoder](https://github.com/mapbox/mapbox-gl-geocoder), you can specify a bounding box to restrict searches to.
-This prevents users form being annoyed or distracted by irrelevant suggestions.
-For example:
+## Architecture
 
-```js
-import { GREATER_LONDON_BOUNDS_FLAT } from '@ldn-viz/maps';
+The `<Map>` component creates a MapLibre ([API docs](https://maplibre.org/maplibre-gl-js/docs/), [Style Specification](https://maplibre.org/maplibre-style-spec/) ) map object, and provides it to child components via a context.
+In our maps, this component almost always displays a basemap created by the Ordnance Survey.
 
-const geocoder = new MapboxGeocoder({
-	accessToken: mapboxgl_accessToken,
-	mapboxgl: maplibregl,
-	bbox: GREATER_LONDON_BOUNDS_FLAT
-});
+A `<MapControlGroup>` component is used a child of a `<Map>`, and positions its child components correctly relative to the map.
 
-map.addControl(geocoder);
-```
+Commonly data layers are rendered using [Deck.gl](https://deck.gl/), using the `<MapDeckOverlay>` component.
+
+Less commonly, data layers are rendered directly by MapLibre: this can be done by using `<MapLayerSource>` to create a MapLibre source (responsible for data loading), and `<MapLayerView>` to create a MapLibre layer (responsible for data display).
+
+The `MapDraw` component is a wrapper around teh [Terra Draw](https://terradraw.io/) library that allows users to draw custom areas on a map.
+

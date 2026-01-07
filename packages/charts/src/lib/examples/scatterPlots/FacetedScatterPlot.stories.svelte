@@ -1,10 +1,10 @@
 <script module lang="ts">
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
-	import { Plot } from '../../observablePlotFragments/plot';
 	import { penguins } from '../../../data/demoData';
+	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { getDefaultPlotStyles } from '../../observablePlotFragments/observablePlotFragments';
+	import { Plot } from '../../observablePlotFragments/plot';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Scatter Plot'
@@ -50,7 +50,7 @@
 			{spec}
 			data={penguins}
 			title="Adelie penguins live on all islands, and have a shorter culmen length than other species"
-			subTitle="Penguin data from the islands of Biscoe, Dream and Torgensen"
+			subTitle="Penguin data from the islands of Biscoe, Dream and Torgersen"
 			alt="Faceted scatter plot chart of Penguin data"
 			byline="GLA City Intelligence"
 			source="Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data."
