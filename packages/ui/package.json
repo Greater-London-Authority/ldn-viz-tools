@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/ui",
-	"version": "21.0.0-svelte5.9",
+	"version": "21.0.0",
 	"keywords": [
 		"svelte"
 	],

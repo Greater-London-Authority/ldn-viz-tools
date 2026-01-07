@@ -1,5 +1,48 @@
 # ldn-viz-tools-maps
 
+## 9.0.0
+
+### Major Changes
+
+- b90879e: CHANGED: bump version of deck.gl packages. This means that SSR can be enabled, but means that imports must be updated to remove the `/typed` suffix
+- a01e1a5: CHANGED: update to use Svelte 5 and runes.
+
+  CHANGED: `GeoJSONMapLayerSource` no longer has a `dataStore` prop.
+
+### Minor Changes
+
+- a01e1a5: CHANGED: when theme is changed, update basemap style with MapLibre's `setStyle()` method, rather than re-creating map
+- a01e1a5: FIXED: fix bug that would cause `MapDeckOverlay` to replace the `DeckOverlay` object whenever layers were updated
+- a01e1a5: ADDED: export onClickPopoverHandler
+- b264ead: CHANGED: reduce text size of attribution text on map
+- dd74e6d: ADDED: MapDraw component
+- 71fc3e2: CHANGED: Removed custom z-index and applied `.maplibregl-popup` class to `MapDeckTooltips` to make z-index consistent with other popups.
+
+### Patch Changes
+
+- b2cae11: Adapter added for OS Places API
+- Updated dependencies [b2cae11]
+- Updated dependencies [5dc637b]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [598dd04]
+- Updated dependencies [3743366]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [590fbf7]
+- Updated dependencies [2d797e0]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [dd74e6d]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [e422408]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [09ba55a]
+- Updated dependencies [09ba55a]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+  - @ldn-viz/ui@21.0.0
+  - @ldn-viz/utils@2.0.0
+
 ## 9.0.0-svelte5.17
 
 ### Minor Changes

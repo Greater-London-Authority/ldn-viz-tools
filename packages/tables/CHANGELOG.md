@@ -1,5 +1,48 @@
 # @ldn-viz/tables
 
+## 5.0.0
+
+### Major Changes
+
+- a01e1a5: CHANGED: update to use Svelte 5 and runes.
+- 1a68b12: CHANGED: many channels of renderers can now accept either functions or literal values (allowing marks for different datums to be rendered differently). The `colorScale` channel has been renamed to `color` for consistency.
+
+### Minor Changes
+
+- a01e1a5: CHANGED: replace a <p> tag with a <div> tag
+
+### Patch Changes
+
+- Updated dependencies [a01e1a5]
+- Updated dependencies [b2cae11]
+- Updated dependencies [5dc637b]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [598dd04]
+- Updated dependencies [3743366]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [590fbf7]
+- Updated dependencies [2d797e0]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [dd74e6d]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [e422408]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [09ba55a]
+- Updated dependencies [09ba55a]
+- Updated dependencies [09ba55a]
+- Updated dependencies [a01e1a5]
+- Updated dependencies [a01e1a5]
+  - @ldn-viz/charts@7.0.0
+  - @ldn-viz/ui@21.0.0
+  - @ldn-viz/themes@7.0.0
+  - @ldn-viz/utils@2.0.0
+
 ## 5.0.0-svelte5.10
 
 ### Patch Changes

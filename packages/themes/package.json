@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/themes",
-	"version": "6.1.0-svelte5.0",
+	"version": "7.0.0",
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
