@@ -33,20 +33,20 @@ export class TableData {
 
 	maxRowsPerGroup: number | undefined;
 
-	columnSpec: ColSpec[];
+	columnSpec: ColSpec[] = [];
 
 	colGroups: ColGroup[];
 	colGroupGap: number;
 
 	// derived:
 	extents: any; // TODO: FIXME
-	scales;
-	posScales;
+	scales: any;
+	posScales: any;
 
 	groups: Group[];
 	rows: DataRow[];
 
-	visibleFields: string[];
+	visibleFields: string[] = [];
 
 	expansionState: boolean[] = [];
 
@@ -92,24 +92,24 @@ export class TableData {
 		for (const col of columnSpec) {
 			// cell, column, group
 			if (col.cell && typeof col.cell.renderer === 'string') {
-				col.cell.renderer = renderer[col.cell.renderer];
+				col.cell.renderer = (renderer as any)[col.cell.renderer];
 			}
 			if (col.column && typeof col.column.renderer === 'string') {
-				col.column.renderer = renderer[col.column.renderer];
+				col.column.renderer = (renderer as any)[col.column.renderer];
 			}
 			if (col.group && typeof col.group.renderer === 'string') {
-				col.group.renderer = renderer[col.group.renderer];
+				col.group.renderer = (renderer as any)[col.group.renderer];
 			}
 			if (col.cell && typeof col.cell.axisRenderer === 'string') {
-				col.cell.axisRenderer = axisRenderer[col.cell.axisRenderer];
+				col.cell.axisRenderer = (axisRenderer as any)[col.cell.axisRenderer];
 			}
 			if (col.header && typeof col.header.renderer === 'string') {
-				col.header.renderer = renderer[col.header.renderer];
+				col.header.renderer = (renderer as any)[col.header.renderer];
 			}
 		}
 	}
 
-	setOnRowsChange(func) {
+	setOnRowsChange(func: any) {
 		this.onChangeFuncs.push(func);
 	}
 
@@ -164,7 +164,7 @@ export class TableData {
 	}
 
 	resetMergedValues() {
-		if (!this.columnSpec) {
+		if (!this.columnSpec || this.columnSpec.length === 0) {
 			return;
 		}
 		for (const col of this.columnSpec) {
@@ -293,19 +293,21 @@ export class TableData {
 			// TODO: switch based on recorded column types
 			if (colSpec.type === 'categorical') {
 				const uniqValues = [...new Set(values)].sort();
-				this.posScales[colSpec.short_label] = scaleBand().range([0, 1]).domain(uniqValues);
+				this.posScales[colSpec.short_label] = scaleBand()
+					.range([0, 1])
+					.domain(uniqValues.map(String));
 			}
 
 			if (typeof values[0] === 'string') {
 				const uniqValues = [...new Set(values)];
-				const scale = getCategoricalColorScale(uniqValues);
+				const scale = getCategoricalColorScale(uniqValues.map(String));
 				this.scales[colSpec.short_label] = (val: string) =>
 					val === undefined || val === null ? 'lightgrey' : scale(val);
 			} else if (typeof values[0] === 'number') {
 				const scale = getContinuousColorScale(colSpec.short_label, 'MinToMax', values as number[]); // TODO: pass actual domain type
 				this.scales[colSpec.short_label] = (val: number) =>
 					val === undefined || val === null ? 'lightgrey' : scale(val);
-			} else if (values[0] instanceof Date) {
+			} else if (values[0] && (values[0] as any) instanceof Date) {
 				// TODO: implement
 			}
 
@@ -324,7 +326,7 @@ export class TableData {
 
 		// TODO: work with column definitions instead
 		for (const colName of Object.keys(this.data[0])) {
-			this.extents[colName] = extent(this.data.map((d) => d[colName]));
+			this.extents[colName] = extent(this.data.map((d) => d[colName]) as any);
 		}
 	}
 

@@ -4,10 +4,14 @@ export const getVal = (
 		| string
 		| number
 		| ((val: string | number) => string)
+		| ((val: string) => string)
+		| ((val: number) => string)
 		| ((val: string | number) => number)
-) => {
+		| ((val: string) => number)
+		| ((val: number) => number)
+): string | number => {
 	if (typeof selector === 'function') {
-		return selector(value);
+		return (selector as (val: string | number) => string | number)(value);
 	}
 	return selector;
 };

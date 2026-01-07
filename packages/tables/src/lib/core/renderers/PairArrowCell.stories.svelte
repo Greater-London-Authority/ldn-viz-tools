@@ -17,7 +17,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<PairArrowCell {...args} />
+		<PairArrowCell {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>
 

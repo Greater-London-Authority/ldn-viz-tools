@@ -3,15 +3,15 @@
 	 * The `ProportionalSymbol` component renders a table cell encoding a single value as a circle, with the radius encoding the value.
 	 * @component
 	 */
-	import { format } from 'd3-format';
 	import type { ProportionalSymbolProps } from '$lib/core/renderers/ProportionalSymbolProps';
+	import { format } from 'd3-format';
 
 	let {
 		color = 'steelblue',
 		value,
 		showValues = false,
 		formatString = '0.0f',
-		extent,
+		extent = [0, 1],
 		...rest
 	}: ProportionalSymbolProps = $props();
 

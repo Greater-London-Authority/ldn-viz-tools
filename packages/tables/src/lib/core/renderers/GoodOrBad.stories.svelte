@@ -26,7 +26,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<GoodOrBad {...args} value={2} benchmarkValue={5} colorScale={() => 'red'} />
+		<GoodOrBad {...args} value={2} benchmarkValue={5} color={() => 'red'} />
 	{/snippet}
 </Story>
 

@@ -105,7 +105,7 @@
 	let tableClass = $derived(classNames('relative', tableHeight, overrideClass));
 
 	// For save as image
-	let tableToCapture: HTMLDivElement = $state();
+	let tableToCapture: HTMLDivElement | undefined = $state();
 </script>
 
 {@render numRowsControlSlot?.()}
@@ -141,14 +141,16 @@
 	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
 		<Footer {source} {byline} {note}>
 			{#snippet exportBtns()}
-				<ExportBtns
-					chartToCapture={tableToCapture}
-					{columnMapping}
-					dataForDownload={data}
-					{dataDownloadButton}
-					{imageDownloadButton}
-					{filename}
-				/>
+				{#if tableToCapture}
+					<ExportBtns
+						chartToCapture={tableToCapture}
+						{columnMapping}
+						dataForDownload={data}
+						{dataDownloadButton}
+						{imageDownloadButton}
+						{filename}
+					/>
+				{/if}
 			{/snippet}
 		</Footer>
 	{/if}

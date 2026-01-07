@@ -25,7 +25,7 @@
 		return new_fields;
 	});
 
-	let groupingSelection: Options = $state(table.groupingFields);
+	let groupingSelection: string[] = $state(table.groupingFields);
 	const applyGrouping = (groupingSelection: any[]) => {
 		if (table) {
 			// re-order cols

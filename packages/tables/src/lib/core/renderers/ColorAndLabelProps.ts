@@ -12,5 +12,5 @@ export interface ColorAndLabelProps {
 	/**
 	 * A D3 color scale used to determine cell background color.
 	 */
-	color: string | ((value: number) => string);
+	color?: string | ((value: number) => string);
 }

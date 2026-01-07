@@ -28,10 +28,17 @@
 		data: any;
 		allowSorting?: boolean;
 		tableWidth: any;
-		onChange: () => void;
+		onChange?: () => void;
 	}
 
-	let { tableSpec, table, data, allowSorting = false, tableWidth, onChange }: Props = $props();
+	let {
+		tableSpec,
+		table,
+		data,
+		allowSorting = false,
+		tableWidth,
+		onChange = () => undefined
+	}: Props = $props();
 
 	let topRuleClass = $derived(tableSpec.showHeaderTopRule === false ? '' : 'border-t');
 	let bottomRuleClass = $derived(
@@ -44,7 +51,7 @@
 	style:width={tableWidth}
 	role="rowgroup"
 >
-	{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
+	{#if tableSpec.colGroups && tableSpec.colGroups.some((c: any) => c.label)}
 		<ColumnGroupHeadingRow {table} />
 	{/if}
 
@@ -58,7 +65,7 @@
 		<ColumnSummariesRow {table} {data} />
 	{/if}
 
-	{#if table.columnSpec.some((c) => c.cell.axisRenderer)}
+	{#if table.columnSpec.some((c: any) => c.cell.axisRenderer)}
 		<AxisRow {table} />
 	{/if}
 </div>

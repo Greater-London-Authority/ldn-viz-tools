@@ -30,17 +30,17 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<CategoricalTick {...args} />
+		<CategoricalTick {...args} value={args.value} color={args.color} posScale={args.posScale} />
 	{/snippet}
 </Story>
 
 <Story name="Multiple">
 	{#snippet template(args)}
 		<div class="flex w-36 flex-col">
-			<CategoricalTick {...args} value="a" />
-			<CategoricalTick {...args} value="b" />
-			<CategoricalTick {...args} value="c" />
-			<CategoricalTick {...args} value="d" />
+			<CategoricalTick {...args} value="a" color={args.color} posScale={args.posScale} />
+			<CategoricalTick {...args} value="b" color={args.color} posScale={args.posScale} />
+			<CategoricalTick {...args} value="c" color={args.color} posScale={args.posScale} />
+			<CategoricalTick {...args} value="d" color={args.color} posScale={args.posScale} />
 		</div>
 	{/snippet}
 </Story>

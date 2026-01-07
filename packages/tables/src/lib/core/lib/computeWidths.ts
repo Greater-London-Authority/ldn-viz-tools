@@ -25,15 +25,15 @@ export const computeWidths = (table: any, width: number) => {
 
 	// subtract fixed widths
 	const absoluteWidths = table.columnSpec
-		.filter((c) => c.width !== undefined)
-		.map((d) => parseWidth(d.width)); // TODO: remove 'px' if necessary?
+		.filter((c: any) => c.width !== undefined)
+		.map((d: any) => parseWidth(d.width)); // TODO: remove 'px' if necessary?
 	availableWidth -= sum(absoluteWidths);
 
 	// determine scale factor
 	const relativeWidths = table.columnSpec
-		.filter((c) => c.width === undefined)
-		.map((c) => c.relativeWidth || 1)
-		.filter((d) => d);
+		.filter((c: any) => c.width === undefined)
+		.map((c: any) => c.relativeWidth || 1)
+		.filter((d: any) => d);
 	const totalRelWidth = sum(relativeWidths);
 
 	// set widths
