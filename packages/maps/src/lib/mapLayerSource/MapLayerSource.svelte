@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `<MapLayerSource>` component is slotted within a `<Map>` component to
 	 * specify a data source. The slot primarily accepts one or many
@@ -18,33 +18,35 @@
 
 	const mapStore = getContext('mapStore');
 
-	/**
-	 * A unique ID to reference the source in the map. Provided to slotted
-	 * component as context via the key `mapLayerSourceId`.
-	 */
-	export let id;
+	interface Props {
+		/**
+		 * A unique ID to reference the source in the map. Provided to slotted
+		 * component as context via the key `mapLayerSourceId`.
+		 */
+		id: any;
+		/**
+		 * A MapLibre source specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/sources/).
+		 * Provided to slotted component as context via the key `mapLayerSourceSpec`.
+		 */
+		spec: any;
+		/**
+		 * Called when the source is added to the map. The function accepts an
+		 * object with the following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
+		onLoad?: any;
+		/**
+		 * Called when the source is removed from the map. The function accepts an
+		 * object with the following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
+		onUnload?: any;
+		children?: import('svelte').Snippet;
+	}
 
-	/**
-	 * A MapLibre source specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/sources/).
-	 * Provided to slotted component as context via the key `mapLayerSourceSpec`.
-	 */
-	export let spec;
-
-	/**
-	 * Called when the source is added to the map. The function accepts an
-	 * object with the following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
-	export let onLoad = null;
-
-	/**
-	 * Called when the source is removed from the map. The function accepts an
-	 * object with the following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
-	export let onUnload = null;
+	let { id, spec = $bindable(), onLoad = null, onUnload = null, children }: Props = $props();
 
 	const loaded = writable(false);
 	let safeSpec = structuredClone(spec);
@@ -91,15 +93,19 @@
 
 	onDestroy(doUnload);
 
-	$: if ($mapStore) {
-		doLoad();
-	}
+	$effect(() => {
+		if ($mapStore) {
+			doLoad();
+		}
+	});
 
-	$: if ($loaded && !$mapStore) {
-		doUnload();
-	}
+	$effect(() => {
+		if ($loaded && !$mapStore) {
+			doUnload();
+		}
+	});
 </script>
 
 {#if $loaded}
-	<slot />
+	{@render children?.()}
 {/if}

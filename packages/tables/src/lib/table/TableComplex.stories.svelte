@@ -1,15 +1,15 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Table from './Table.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Example Tables/Visual Renderers',
 		component: Table
-	};
+	});
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	/******************************************************************************************************************/
 	import dataBenchmarks from './demoData/benchmarkData.json';
 
@@ -485,49 +485,61 @@
 	};
 </script>
 
-<Template let:args>
-	<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} {...args} />
-</Template>
+<Story name="Default">
+	{#snippet template(args)}
+		<Table {...args} data={dataBenchmarks} tableSpec={tableSpecBenchmarks} />
+	{/snippet}
+</Story>
 
 <!--
 This example shows how the encoding used for a column can be influenced by the value of a second column.
  In this case, some fields also have associated fields that record whether the value is known or merely estimated.
  -->
 <Story name="Table with uncertain values in columns">
-	<Table data={dataUncertain} tableSpec={tableSpecUncertain} allowSorting />
+	{#snippet template()}
+		<Table data={dataUncertain} tableSpec={tableSpecUncertain} allowSorting />
+	{/snippet}
 </Story>
 
-<Story name="High Streets Benchmark Table" source>
-	<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} allowSorting />
+<Story name="High Streets Benchmark Table">
+	{#snippet template()}
+		<Table data={dataBenchmarks} tableSpec={tableSpecBenchmarks} allowSorting />
+	{/snippet}
 </Story>
 
-<Story name="Metrics Example" source>
-	<Table
-		data={dataMetrics}
-		tableSpec={tableSpecMetrics}
-		allowSorting
-		allowRowGrouping
-		fixedTableWidth={1500}
-	/>
+<Story name="Metrics Example">
+	{#snippet template()}
+		<Table
+			data={dataMetrics}
+			tableSpec={tableSpecMetrics}
+			allowSorting
+			allowRowGrouping
+			fixedTableWidth={1500}
+		/>
+	{/snippet}
 </Story>
 
-<Story name="Metrics Example - virtualised" source>
-	<Table
-		data={dataMetrics}
-		tableSpec={tableSpecMetrics}
-		allowSorting
-		allowRowGrouping
-		virtualise
-		fixedTableWidth={1500}
-	/>
+<Story name="Metrics Example - virtualised">
+	{#snippet template()}
+		<Table
+			data={dataMetrics}
+			tableSpec={tableSpecMetrics}
+			allowSorting
+			allowRowGrouping
+			virtualise
+			fixedTableWidth={1500}
+		/>
+	{/snippet}
 </Story>
 
 <!--
  Try sorting by Salary, or **Group Rows** by *Position* then **Sort groups** by *Mean Salary*.
  This example dataset is from the [DataTables project](https://datatables.net/examples/data_sources/js_array.html)
  -->
-<Story name="Salary Example" source>
-	<Table data={dataPaginated} tableSpec={tableSpecPaginated} allowSorting allowRowGrouping />
+<Story name="Salary Example">
+	{#snippet template()}
+		<Table data={dataPaginated} tableSpec={tableSpecPaginated} allowSorting allowRowGrouping />
+	{/snippet}
 </Story>
 
 <!-- TODO: add example of filtering -->

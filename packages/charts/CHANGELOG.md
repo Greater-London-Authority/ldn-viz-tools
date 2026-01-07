@@ -1,22 +1,99 @@
 # ldn-viz-tools-charts
 
-## 5.4.0
-
-### Minor Changes
-
-- 48e057c: CHANGED: observable plot fragments to no longer set color scales to `ordinal` by default
+## 7.0.0-svelte5.9
 
 ### Patch Changes
 
-- Updated dependencies [5dd276b]
-- Updated dependencies [39ba3ad]
-  - @ldn-viz/ui@19.6.0
+- Updated dependencies [ce87f14]
+  - @ldn-viz/ui@21.0.0-svelte5.9
 
-## 5.3.0
+## 7.0.0-svelte5.8
+
+### Patch Changes
+
+- Updated dependencies [8dca04b]
+  - @ldn-viz/ui@21.0.0-svelte5.8
+
+## 7.0.0-svelte5.7
+
+### Patch Changes
+
+- Updated dependencies [0abe727]
+- Updated dependencies [6ea18e9]
+- Updated dependencies [3789872]
+  - @ldn-viz/ui@21.0.0-svelte5.7
+
+## 7.0.0-svelte5.6
+
+### Patch Changes
+
+- Updated dependencies [d0c388f]
+  - @ldn-viz/ui@21.0.0-svelte5.6
+
+## 7.0.0-svelte5.5
+
+### Patch Changes
+
+- Updated dependencies [c4a34fa]
+  - @ldn-viz/ui@21.0.0-svelte5.5
+
+## 7.0.0-svelte5.4
+
+### Patch Changes
+
+- Updated dependencies [253b9b9]
+  - @ldn-viz/ui@21.0.0-svelte5.4
+
+## 7.0.0-svelte5.3
+
+### Patch Changes
+
+- Updated dependencies [31020f3]
+  - @ldn-viz/ui@21.0.0-svelte5.3
+  - @ldn-viz/utils@1.1.1-svelte5.0
+
+## 7.0.0-svelte5.2
+
+### Patch Changes
+
+- Updated dependencies [5e5408a]
+  - @ldn-viz/ui@21.0.0-svelte5.2
+
+## 7.0.0-svelte5.1
 
 ### Minor Changes
 
-- 8bde3bc: CHANGED: defaultArea plot fragment uses fillOpacity instead of opacity for consistency with other plot fragments
+- 0954da1: ADDED: defaultRect and defaultBar plot fragments
+
+  CHANGED: plot function now checks for options.facet to apply defaultSizeFacet fragment
+
+### Patch Changes
+
+- Updated dependencies [289e9be]
+- Updated dependencies [46b4fab]
+- Updated dependencies [6b37511]
+- Updated dependencies [dc25586]
+  - @ldn-viz/ui@21.0.0-svelte5.1
+
+## 7.0.0-svelte5.0
+
+### Major Changes
+
+- 4f1111a: CHANGED: update to use Svelte 5 and runes.
+
+### Minor Changes
+
+- 953d10c: CHANGED: defaultArea plot fragment uses fillOpacity instead of opacity for consistency with other plot fragments
+- 628016d: CHANGED: added `onChange` event handler prop to `CheckboxGroup`.
+
+### Patch Changes
+
+- Updated dependencies [7962ee6]
+- Updated dependencies [a81fb27]
+- Updated dependencies [4046add]
+- Updated dependencies [0879ce9]
+- Updated dependencies [7962ee6]
+  - @ldn-viz/ui@21.0.0-svelte5.0
 
 ## 5.2.0
 

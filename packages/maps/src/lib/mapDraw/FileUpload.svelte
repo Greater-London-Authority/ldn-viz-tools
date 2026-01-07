@@ -1,45 +1,63 @@
 <script lang="ts">
-	import { Button, classNames } from '@ldn-viz/ui';
-	import type { FeatureCollection } from 'geojson';
-	import type { ChangeEventHandler } from 'svelte/elements';
+	import { Button, Callout, classNames } from '@ldn-viz/ui';
+	import { CheckCircle, XCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { GeoJSONStoreFeatures, TerraDraw } from 'terra-draw';
+	import { fixImportedGeoJSON } from './utils';
 
-	import uuid4 from 'uuid4';
-	export let onCancel: () => void;
-	export let onLoad: (data: FeatureCollection) => void;
+	interface Props {
+		/**
+		 * The TerraDraw object.
+		 */
+		terraDraw: TerraDraw;
 
-	export let features;
-	export let savedFeatures;
+		mapDraw: any;
+	}
 
-	let isDragging = false;
+	let { terraDraw, mapDraw }: Props = $props();
 
-	async function readFile(file) {
+	let upload: {
+		state: 'pending' | 'success' | 'error';
+		features: GeoJSONStoreFeatures[];
+		previousFeatures: string;
+	} = $state({
+		state: 'pending',
+		features: [],
+		previousFeatures: '[]'
+	});
+
+	const onLoad = () => {
+		mapDraw.controlMode.current = 'edit';
+	};
+
+	const onCancel = () => {
+		mapDraw.features.current = JSON.parse(upload.previousFeatures);
+
+		terraDraw.clear();
+		terraDraw.addFeatures(mapDraw.features.current);
+
+		mapDraw.controlMode.current = 'edit';
+	};
+
+	async function readFile(file: any) {
 		try {
 			const text = await file.text();
 			const parsedJson = JSON.parse(text);
 
-			// modify features to please TerraDrw
-			// see e.g. https://github.com/JamesLMilner/terra-draw/issues/177
-			for (const feature of parsedJson.features) {
-				if (!uuid4.valid(feature.id)) {
-					feature.id = uuid4();
-				}
+			fixImportedGeoJSON(parsedJson);
 
-				if (!feature.properties) {
-					feature.properties = {};
-				}
-				if (!feature.properties.mode) {
-					feature.properties.mode = 'polygon';
-				}
-			}
+			upload.previousFeatures = JSON.stringify(mapDraw.features.current);
 
-			features = parsedJson.features;
-			savedFeatures = parsedJson.features;
-
-			onLoad(parsedJson);
+			upload.features = parsedJson.features;
+			terraDraw.addFeatures(parsedJson.features);
+			upload.state = 'success';
 		} catch (error) {
+			upload.state = 'error';
 			console.error('Error parsing JSON:', error);
 		}
 	}
+
+	let isDragging = $state(false);
 
 	function handleDrag(e: DragEvent) {
 		e.preventDefault();
@@ -49,7 +67,7 @@
 	function handleDragIn(e: DragEvent) {
 		e.preventDefault();
 		e.stopPropagation();
-		if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+		if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
 			isDragging = true;
 		}
 	}
@@ -65,7 +83,7 @@
 		e.stopPropagation();
 		isDragging = false;
 
-		const items = [...e.dataTransfer.items];
+		const items = [...e.dataTransfer!.items];
 		const file = items.find((item) => item.kind === 'file')?.getAsFile();
 
 		if (file && file.name.endsWith('.geojson')) {
@@ -73,58 +91,84 @@
 		}
 	}
 
-	function handleFileSelect(e: ChangeEventHandler<HTMLInputElement>) {
+	function handleFileSelect(e: any) {
 		const file = e.target.files[0];
 		if (file && file.name.endsWith('.geojson')) {
 			readFile(file);
 		}
+		return;
 	}
 
-	let inputRef: HTMLInputElement;
+	let inputRef: HTMLInputElement | undefined = $state();
 </script>
 
-<div class="p-4 bg-color-container-level-1 pointer-events-auto flex flex-col gap-2">
-	<span class="text-lg font-bold pb-2">Upload GeoJSON</span>
+<div
+	class="pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-container-level-1 p-4 shadow"
+>
+	<p class="form-label text-sm">Upload</p>
 
-	<div
-		class={classNames(
-			'relative border-2 border-dashed border-color-input-border rounded-lg p-2 min-h-[200px] hover:border-color-input-border-focussed',
-			isDragging ? '!bg-color-action-background-primary-muted-hover' : ''
-		)}
-		on:dragenter={handleDragIn}
-		on:dragleave={handleDragOut}
-		on:dragover={handleDrag}
-		on:drop={handleDrop}
-		on:keydown={(e) => {
-			if (e.key === 'Enter' || e.key === ' ') {
-				inputRef.click();
-			}
-		}}
-		role="button"
-		tabindex="0"
-		aria-label="GeoJSON file drop zone"
-		aria-describedby="dropZoneDescription"
-	>
-		<span id="dropZoneDescription" class="sr-only">
-			Drop a GeoJSON file here or press Enter to select a file
-		</span>
+	{#if upload.state === 'pending'}
+		<div
+			class={classNames(
+				'relative flex min-h-[180px] items-center rounded-lg  border-2 border-dashed border-color-input-border p-2 hover:border-color-input-border-focussed',
+				isDragging ? '!bg-color-action-background-primary-muted-hover' : ''
+			)}
+			ondragenter={handleDragIn}
+			ondragleave={handleDragOut}
+			ondragover={handleDrag}
+			ondrop={handleDrop}
+			onkeydown={(e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					inputRef?.click();
+				}
+			}}
+			role="button"
+			tabindex="0"
+			aria-label="GeoJSON file drop zone"
+			aria-describedby="dropZoneDescription"
+		>
+			<span id="dropZoneDescription" class="sr-only">
+				Drop a GeoJSON file here or press Enter to select a file
+			</span>
 
-		<div class="absolute inset-0 w-full h-full z-10 cursor-pointer">
-			<input
-				bind:this={inputRef}
-				type="file"
-				accept=".geojson"
-				on:change={handleFileSelect}
-				class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-			/>
+			<div class="absolute inset-0 z-10 h-full w-full cursor-pointer">
+				<input
+					bind:this={inputRef}
+					type="file"
+					accept=".geojson"
+					onchange={handleFileSelect}
+					class="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
+				/>
+			</div>
+
+			<div class="relative z-0 text-center">
+				<p class="text-sm text-color-text-secondary">
+					Drag & drop a GeoJSON file here or click to open file picker.
+				</p>
+			</div>
 		</div>
+	{:else if upload.state === 'error'}
+		<Callout status="negative" size="sm" ariaTitle="File upload successful">
+			{#snippet body()}
+				<Icon src={XCircle} />
+				<p>File upload error. Please check and try again.</p>
+			{/snippet}
+		</Callout>
+	{:else if upload.state === 'success'}
+		<Callout status="positive" size="sm" ariaTitle="File upload successful">
+			{#snippet body()}
+				<div class="mb-2 flex items-center">
+					<Icon src={CheckCircle} theme="mini" class="mr-2 h-6 w-6 text-color-ui-positive" />
+					<p>File upload successful</p>
+				</div>
+			{/snippet}
+		</Callout>
+	{/if}
 
-		<div class="relative z-0 text-center">
-			<p class="mb-4 text-color-text-secondary">
-				Drag & drop a GeoJSON file here or click to open file picker.
-			</p>
-		</div>
+	<div class="mt-2 flex justify-end gap-2">
+		<Button onclick={onCancel} emphasis="secondary" variant="outline">Cancel</Button>
+		<Button onclick={onLoad} emphasis="primary" disabled={upload.state !== 'success'}>
+			Add area
+		</Button>
 	</div>
-
-	<Button on:click={onCancel} emphasis="secondary" class="mt-2">Cancel</Button>
 </div>

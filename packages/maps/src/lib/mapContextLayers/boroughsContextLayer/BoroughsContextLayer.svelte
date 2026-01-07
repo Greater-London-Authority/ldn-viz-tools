@@ -13,30 +13,36 @@
 		return tokens.theme[mode];
 	};
 
-	/**
-	 * Color of borough borders.
-	 */
-	export let lineColor = theme().color.ui.border.primary;
+	interface Props {
+		/**
+		 * Color of borough borders.
+		 */
+		lineColor?: any;
+		/**
+		 * Opacity of borough borders between 0 and 1.
+		 */
+		lineOpacity?: number;
+		/**
+		 * Width of the borough borders.
+		 */
+		lineWidth?: number;
+		/**
+		 * Color of borough fill.
+		 */
+		fillColor?: any;
+		/**
+		 * Opacity of borough fill between 0 and 1.
+		 */
+		fillOpacity?: number;
+	}
 
-	/**
-	 * Opacity of borough borders between 0 and 1.
-	 */
-	export let lineOpacity = 0.5;
-
-	/**
-	 * Width of the borough borders.
-	 */
-	export let lineWidth = 2;
-
-	/**
-	 * Color of borough fill.
-	 */
-	export let fillColor = theme().color.ui.border.primary;
-
-	/**
-	 * Opacity of borough fill between 0 and 1.
-	 */
-	export let fillOpacity = 0.08;
+	let {
+		lineColor = theme().color.ui.border.primary,
+		lineOpacity = 0.5,
+		lineWidth = 2,
+		fillColor = theme().color.ui.border.primary,
+		fillOpacity = 0.08
+	}: Props = $props();
 
 	const sourceId = 'gla/context/boroughs';
 </script>
@@ -53,7 +59,7 @@
 >
 	{#key lineColor + lineWidth + lineOpacity}
 		<MapLayerView
-			id="{sourceId}/line"
+			id={`${sourceId}/line`}
 			spec={{
 				type: 'line',
 				'source-layer': 'boroughs',
@@ -68,7 +74,7 @@
 	{/key}
 	{#key fillColor + fillOpacity}
 		<MapLayerView
-			id="{sourceId}/fill"
+			id={`${sourceId}/fill`}
 			spec={{
 				type: 'fill',
 				'source-layer': 'boroughs',

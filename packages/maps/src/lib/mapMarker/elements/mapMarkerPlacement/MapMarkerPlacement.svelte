@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `<MapMarkerPlacement>` component is a wrapping container for use
 	 * within marker components. It determines how a map marker is placed
@@ -9,10 +9,15 @@
 	import PlacementCenterAboveFeature from './PlacementCenterAboveFeature.svelte';
 	import PlacementFollowMouse from './PlacementFollowMouse.svelte';
 
-	/**
-	 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
-	 */
-	export let placement = 'center';
+	interface Props {
+		/**
+		 * Method used to position the popup. Options are 'center', 'follow', or 'none'.
+		 */
+		placement?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let { placement = 'center', children }: Props = $props();
 
 	if (placement !== 'center' && placement !== 'follow' && placement !== 'none') {
 		console.error(`[MapMarkerPlacement] Unknown placement type '${placement}'`);
@@ -21,12 +26,12 @@
 
 {#if placement === 'center'}
 	<PlacementCenterAboveFeature>
-		<slot />
+		{@render children?.()}
 	</PlacementCenterAboveFeature>
 {:else if placement === 'follow'}
 	<PlacementFollowMouse>
-		<slot />
+		{@render children?.()}
 	</PlacementFollowMouse>
 {:else}
-	<slot />
+	{@render children?.()}
 {/if}

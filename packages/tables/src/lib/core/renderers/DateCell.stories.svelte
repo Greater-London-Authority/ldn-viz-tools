@@ -1,8 +1,11 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import DateCell from './DateCell.svelte';
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/DateCell',
 		component: DateCell,
+		tags: ['autodocs'],
 
 		argTypes: {
 			alignText: {
@@ -11,17 +14,14 @@
 			}
 		},
 		args: {
-			alignText: 'left'
+			alignText: 'left',
+			value: new Date()
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<DateCell value={new Date()} colorScale={() => 'red'} {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<DateCell {...args} value={args.value ?? new Date()} />
+	{/snippet}
+</Story>

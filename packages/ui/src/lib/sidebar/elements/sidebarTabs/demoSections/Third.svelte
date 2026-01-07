@@ -4,9 +4,9 @@
 	import SidebarGroup from './../../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
 	import SidebarSection from './../../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
 
-	/* Select Items */
-	type Item = { label: string; value: number };
-	const items: Item[] = [
+	/* Select Options */
+	type Option = { label: string; value: number };
+	const options: Option[] = [
 		{ label: 'One', value: 1 },
 		{ label: 'Two', value: 2 },
 		{ label: 'Three', value: 3 }
@@ -21,9 +21,9 @@
 </script>
 
 <SidebarSection title="Section Title">
-	<SidebarGroup title={'First Group Title'}>
-		<Select {items} label="Label" id="example-input-1" />
-		<Select {items} label="Label" id="example-input-2" />
+	<SidebarGroup title="First Group Title">
+		<Select {options} label="Label" id="example-input-1" />
+		<Select {options} label="Label" id="example-input-2" />
 	</SidebarGroup>
 	<SidebarGroup title="Second Group Title">
 		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group One" />

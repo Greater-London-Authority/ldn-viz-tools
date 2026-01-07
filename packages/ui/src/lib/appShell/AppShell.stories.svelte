@@ -1,496 +1,177 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
+	import { tabs } from '../sidebar/Sidebar.stories.svelte';
+	import Sidebar from '../sidebar/Sidebar.svelte';
 	import AppShell from './AppShell.svelte';
+	import DemoSidebarOpener from './DemoSidebarOpener.svelte';
 
-	export const meta = {
+	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/AppShell',
 		component: AppShell,
+		tags: ['autodocs'],
 		parameters: {
 			layout: 'fullscreen'
+		},
+		args: {
+			sidebar
 		}
-	};
+	});
+
+	let state = $state({ isOpen: true });
+	let selectedTabId = $state('markers');
 </script>
 
-<script lang="ts">
-	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
-	import Button from '../button/Button.svelte';
-	import Overlay from '../overlay/Overlay.svelte';
-	import Sidebar from '../sidebar/Sidebar.svelte';
-	import SidebarHeader from '../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import SidebarSection from '../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import SidebarGroupTitle from '../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
+{#snippet sidebar()}
+	<Sidebar />
+{/snippet}
 
-	import { Demo1, Leggi, Pop1, Sewers } from './../layoutExamples/Dashboards/demoTabs';
+{#snippet boundSidebar()}
+	<!-- So bound state doesn't effect other stories -->
+	<Sidebar bind:state />
+{/snippet}
 
-	const isOpen = writable(true);
+{#snippet sidebarWide()}
+	<Sidebar width="wide" />
+{/snippet}
 
-	let tabs = [
-		{ id: 'markers', label: 'Markers', icon: ChartBar, content: Demo1 },
-		{ id: 'filters', label: 'Filters', icon: Funnel, content: Leggi },
-		{ id: 'analysis', label: 'Analysis', icon: Map, content: Pop1 },
-		{ id: 'layers', label: 'Layers', icon: MapPin, content: Sewers }
-	];
-</script>
+{#snippet sidebarWithTabs()}
+	<Sidebar {tabs} {selectedTabId} />
+{/snippet}
 
-<Template let:args>
-	<AppShell {...args} />
-</Template>
+{#snippet mainWithControl()}
+	<DemoSidebarOpener />
+{/snippet}
 
-<Story name="Default positioning">
-	<AppShell>
-		<svelte:fragment slot="main">Some Content</svelte:fragment>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+<Story name="default">
+	{#snippet template(args)}
+		<AppShell {...args}></AppShell>
+	{/snippet}
 </Story>
 
-<Story name="External opening/closing of sidebar">
-	<AppShell {isOpen}>
-		<svelte:fragment slot="main">
-			<Button on:click={() => ($isOpen = !$isOpen)}>Toggle sidebar</Button>
-			Some Content
-		</svelte:fragment>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+<Story name="Component outside context opening/closing of sidebar">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Button onclick={() => (state.isOpen = !state.isOpen)}>Click</Button>
+		</div>
+		<AppShell {...args} sidebar={boundSidebar}></AppShell>
+	{/snippet}
+</Story>
+
+<Story name="Component within context opening/closing of sidebar">
+	{#snippet template(args)}
+		<AppShell {...args} main={mainWithControl}></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Placement Right">
-	<AppShell sidebarPlacement={{ initial: 'right' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarPlacement={{ initial: 'right' }}></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Placement Left">
-	<AppShell sidebarPlacement={{ initial: 'left' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarPlacement={{ initial: 'left' }}></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Placement Bottom">
-	<AppShell sidebarPlacement={{ initial: 'bottom' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarPlacement={{ initial: 'bottom' }}></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Placement Top">
-	<AppShell sidebarPlacement={{ initial: 'top' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2, 3, 4, 5]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarPlacement={{ initial: 'top' }}></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Placement Breakpoints Top/bottom/left/right">
-	<AppShell sidebarPlacement={{ xl: 'right', initial: 'top', lg: 'left', md: 'bottom' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2, 3, 4, 5]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarPlacement={{ xl: 'right', initial: 'top', lg: 'left', md: 'bottom' }}
+		></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Placement Breakpoints with tabs Top/bottom/left/right">
-	<AppShell sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}>
-		<Sidebar slot="sidebar" {tabs}>
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell
+			{...args}
+			sidebar={sidebarWithTabs}
+			sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
+		></AppShell>
+	{/snippet}
 </Story>
 
-<Story name="Wide Sidebar">
-	<AppShell>
-		<Sidebar slot="sidebar" width="wide">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+<Story name="Wide sidebar">
+	{#snippet template(args)}
+		<AppShell
+			{...args}
+			sidebar={sidebarWide}
+			sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
+		></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Push: right">
-	<AppShell sidebarPush>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarPush></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Push: left">
-	<AppShell sidebarPush sidebarPlacement={{ initial: 'left' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarPush sidebarPlacement={{ initial: 'left' }}></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Sidebar Push: left with tabs">
-	<AppShell sidebarPush sidebarPlacement={{ initial: 'left' }}>
-		<Sidebar slot="sidebar" {tabs}>
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-
-		<svelte:fragment slot="main">
-			<div class="pl-24 py-4">Some Content</div>
-		</svelte:fragment>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebar={sidebarWithTabs} sidebarPush sidebarPlacement={{ initial: 'left' }}
+		></AppShell>
+	{/snippet}
 </Story>
 
-<Story name="Wide Sidebar Push">
-	<AppShell sidebarPush>
-		<Sidebar slot="sidebar" width="wide">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+<Story name="Wide sidebar push">
+	{#snippet template(args)}
+		<AppShell
+			{...args}
+			sidebarPush
+			sidebar={sidebarWide}
+			sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
+		></AppShell>
+	{/snippet}
 </Story>
 
-<Story name="Sidebar Push Position Breakpoints Top/bottom/left/right">
-	<AppShell
-		sidebarPush
-		sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
-	>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-			<svelte:fragment slot="sections">
-				{@const sections = [1, 2, 3, 4, 5, 6]}
-				{#each sections as _section}
-					<SidebarSection title="Section Title">
-						Section Content
-						<div>
-							<SidebarGroupTitle>
-								Group Title
-								<Overlay slot="hint">
-									<p class="mb-4">Any content you want can go here</p>
-									<p>
-										Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui,
-										nec venenatis sapien. Etiam venenatis felis.
-									</p>
-								</Overlay>
-							</SidebarGroupTitle>
-							Grouped content
-						</div>
-					</SidebarSection>
-				{/each}
-			</svelte:fragment>
-		</Sidebar>
-	</AppShell>
+<Story name="Sidebar Push Placement Breakpoints with tabs Top/bottom/left/right">
+	{#snippet template(args)}
+		<AppShell
+			{...args}
+			sidebarPush
+			sidebar={sidebarWithTabs}
+			sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
+		></AppShell>
+	{/snippet}
 </Story>
 
-<Story name="Start Open (default)">
-	<AppShell startOpen>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+<Story name="Start Open">
+	{#snippet template(args)}
+		<AppShell {...args} startOpen></AppShell>
+	{/snippet}
 </Story>
 
-<Story name="Start Closed">
-	<AppShell startOpen={false}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+<Story name="Start Closed (default)">
+	{#snippet template(args)}
+		<AppShell {...args} startOpen={false}></AppShell>
+	{/snippet}
 </Story>
 
 <Story name="Always Open">
-	<AppShell sidebarAlwaysOpen={{ initial: 'true' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarAlwaysOpen={{ initial: true }}></AppShell>
+	{/snippet}
 </Story>
 
 <!--
@@ -499,46 +180,19 @@ In the sidebar was closed when the browser window was small, then it will automa
 the screen width increases past this threshold.
  -->
 <Story name="Always Open Responsive changes">
-	<AppShell sidebarAlwaysOpen={{ initial: 'false', md: 'true' }}>
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebarAlwaysOpen={{ initial: false, md: true }} />
+	{/snippet}
 </Story>
 
 <Story name="Always Open With Tabs">
-	<AppShell sidebarAlwaysOpen={{ initial: 'true' }}>
-		<Sidebar slot="sidebar" {tabs}>
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} sidebar={sidebarWithTabs} sidebarAlwaysOpen={{ initial: true }} />
+	{/snippet}
 </Story>
 
 <Story name="With custom height class">
-	<AppShell sidebarPush heightClass="h-[200px]">
-		<Sidebar slot="sidebar">
-			<SidebarHeader title="Main sidebar title" slot="header">
-				<svelte:fragment slot="subTitle">
-					<p>
-						Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
-						venenatis sapien. Etiam venenatis felis.
-					</p>
-				</svelte:fragment>
-			</SidebarHeader>
-		</Sidebar>
-	</AppShell>
+	{#snippet template(args)}
+		<AppShell {...args} heightClass="h-[200px]" />
+	{/snippet}
 </Story>

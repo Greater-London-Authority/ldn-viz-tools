@@ -1,5 +1,3 @@
-// import type { PositionLookup, WidthLookup } from './types';
-
 import type { PlacementLookup, WidthLookup } from './types';
 
 export const placementLookup: PlacementLookup = {
@@ -17,16 +15,22 @@ export const togglePlacementLookup: PlacementLookup = {
 };
 
 export const tabPlacementLookup: PlacementLookup = {
-	// left: '-end-[80px] inset-y-0',
-	left: 'inset-y-0 z-30 border-r border-color-ui-border-secondary',
-	right: '-start-[80px] inset-y-0 border-l border-color-ui-border-secondary',
-	top: '-bottom-[80px] inset-x-0 border-b border-color-ui-border-secondary',
-	bottom: '-top-[80px] inset-x-0 border-t border-color-ui-border-secondary'
+	left: 'inset-y-0 z-30',
+	right: '-start-[81px] inset-y-0',
+	top: '-bottom-[81px] inset-x-0',
+	bottom: '-top-[81px] inset-x-0'
+};
+
+export const keylineLookup: PlacementLookup = {
+	left: 'border-r border-color-ui-border-secondary',
+	right: 'border-l border-color-ui-border-secondary',
+	top: 'border-b border-color-ui-border-secondary',
+	bottom: 'border-t border-color-ui-border-secondary'
 };
 
 export const tabLayoutOverride: PlacementLookup = {
-	vertical: '!w-20 !flex-col !space-y-0.5 !p-0 !float-none',
-	horizontal: '!w-auto !flex !flex-row !space-y-0 !p-0 !float-left !border-b-0'
+	vertical: '!w-20 !h-full !flex-col !space-y-0.5 !p-0 !float-none',
+	horizontal: '!w-full !h-auto !flex !flex-row !space-y-0 !p-0 !float-left !border-b-0'
 };
 
 // These classes overide the theme of default tabs in a sidebar context

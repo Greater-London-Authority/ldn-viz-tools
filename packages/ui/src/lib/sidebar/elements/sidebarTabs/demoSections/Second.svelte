@@ -4,9 +4,9 @@
 	import SidebarGroup from './../../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
 	import SidebarSection from './../../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
 
-	/* Select Items */
-	type Item = { label: string; value: number };
-	const items: Item[] = [
+	/* Select Options */
+	type Option = { label: string; value: number };
+	const options: Option[] = [
 		{ label: 'One', value: 1 },
 		{ label: 'Two', value: 2 },
 		{ label: 'Three', value: 3 }
@@ -22,7 +22,7 @@
 
 <SidebarSection title="Section Title">
 	<SidebarGroup>
-		<Select {items} label="Label" id="example-input-3" />
+		<Select {options} label="Label" id="example-input-3" />
 		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group Two" />
 	</SidebarGroup>
 </SidebarSection>

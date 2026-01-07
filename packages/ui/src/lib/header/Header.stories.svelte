@@ -1,110 +1,86 @@
-<script context="module" lang="ts">
-	import ListMenu from '../listMenu/ListMenu.svelte';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
+	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 	import Header from './Header.svelte';
 	import HeaderItem from './HeaderItem.svelte';
 	import HeaderRight from './HeaderRight.svelte';
 	import HeaderTitle from './HeaderTitle.svelte';
-	import NavLink from './NavLink.svelte';
-	import NavLinks from './NavLinks.svelte';
 
-	export const meta = {
+	/**
+	 * The `<Header>` component appears at the top of a page.
+	 * It typically includes the app name, links to other pages (if the app has multiple pages), and a login/logout control (if the app requires authentication).
+	 */
+	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Header',
-		component: Header,
-		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavLink, NavLinks },
+		component: Header as any,
+		tags: ['autodocs'],
+		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavigationMenu },
 		parameters: {
 			layout: 'fullscreen'
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
-	let subMenu = [
-		{ title: 'Map', id: 'map', url: '#map' },
-		{ title: 'Trend', id: 'trend', url: '#trend' }
-	];
-
-	let subMenuNoLinks = [
-		{
-			title: 'Accessibility',
-			id: 'accessibility-nl',
-			url: '',
-			children: subMenu.map((i) => ({ ...i, id: `a-${i.id}` }))
-		},
-		{
-			title: 'Brand',
-			id: 'brand-nl',
-			url: '',
-			children: subMenu.map((i) => ({ ...i, id: `b-${i.id}` }))
-		},
-		{
-			title: 'Color',
-			id: 'color-nl',
-			url: '',
-			children: subMenu.map((i) => ({ ...i, id: `c-${i.id}` }))
-		}
-	];
-</script>
-
-<Template let:args>
-	<Header {...args} />
-</Template>
+<Story name="Default">
+	{#snippet template()}
+		<Header></Header>
+	{/snippet}
+</Story>
 
 <Story name="Title only">
-	<Header>
-		<HeaderTitle>An interesting app</HeaderTitle>
-	</Header>
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>App title</HeaderTitle>
+		</Header>
+	{/snippet}
 </Story>
 
 <Story name="Title and menu-right">
-	<Header>
-		<HeaderTitle>An interesting app</HeaderTitle>
-		<HeaderRight>
-			<HeaderItem>
-				<ListMenu ariaLabel="no links" items={subMenuNoLinks} orientation="horizontal" />
-			</HeaderItem>
-		</HeaderRight>
-	</Header>
-</Story>
-
-<Story name="Title and links to pages">
-	<Header>
-		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
-		<HeaderItem>
-			<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
-		</HeaderItem>
-	</Header>
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>App title</HeaderTitle>
+			<HeaderRight>
+				<HeaderItem>
+					<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
+				</HeaderItem>
+			</HeaderRight>
+		</Header>
+	{/snippet}
 </Story>
 
 <Story name="Title, links, and auth section">
-	<Header>
-		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
-
-		<HeaderItem>
-			<ListMenu ariaLabel="no links" items={subMenu} orientation="horizontal" />
-		</HeaderItem>
-
-		<HeaderRight>
-			<HeaderItem>
-				<span class="text-xs">Logged in as <b>Bob Smith</b></span>
-			</HeaderItem>
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>App title</HeaderTitle>
 
 			<HeaderItem>
-				<a class="text-xs" href="/#">Log Out</a>
+				<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
 			</HeaderItem>
-		</HeaderRight>
-	</Header>
+
+			<HeaderRight>
+				<!-- This would come from your auth menu Component in your app -->
+				<HeaderItem>
+					<span class="text-xs">Logged in as <b>Bob Smith</b></span>
+				</HeaderItem>
+
+				<HeaderItem>
+					<a class="text-xs" href="/#">Log Out</a>
+				</HeaderItem>
+			</HeaderRight>
+		</Header>
+	{/snippet}
 </Story>
 
-<Story name="Light Theme (Experimental)">
-	<Header theme="light">
-		<HeaderTitle>EV Charger Dashboard</HeaderTitle>
-
-		<HeaderRight>
-			<HeaderItem>
-				<ListMenu ariaLabel="no links" items={subMenuNoLinks} orientation="horizontal" />
-			</HeaderItem>
-		</HeaderRight>
-	</Header>
+<Story name="Light Theme">
+	{#snippet template()}
+		<Header theme="light">
+			<HeaderTitle>App title</HeaderTitle>
+			<HeaderRight>
+				<HeaderItem>
+					<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
+				</HeaderItem>
+			</HeaderRight>
+		</Header>
+	{/snippet}
 </Story>

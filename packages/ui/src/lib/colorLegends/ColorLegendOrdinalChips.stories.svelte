@@ -1,17 +1,19 @@
-<script context="module" lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import ColorLegendOrdinalChips from './ColorLegendOrdinalChips.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Legends/ColorLegendOrdinalChips',
 		component: ColorLegendOrdinalChips,
+		tags: ['autodocs', 'no-tests'],
+
 		argTypes: {
 			orientation: {
 				options: ['horizontal', 'vertical'],
 				control: { type: 'radio' }
 			}
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
@@ -31,37 +33,49 @@
 		.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']);
 </script>
 
-<Template let:args>
-	<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" {...args} />
-</Template>
-
-<Story name="Default" />
+<Story name="Default">
+	{#snippet template(args)}
+		<ColorLegendOrdinalChips {...args} scale={ordinalScale} title="Current EPC Rating" />
+	{/snippet}
+</Story>
 
 <Story name="Categorical color scale">
-	<div class="w-[400px]">
-		<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" />
-	</div>
+	{#snippet template()}
+		<div class="w-[400px]">
+			<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" />
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Categorical color scale - highlighted value">
-	<div class="w-[400px]">
-		<ColorLegendOrdinalChips scale={ordinalScale} title="Current EPC Rating" highlightedValue="B" />
-	</div>
+	{#snippet template()}
+		<div class="w-[400px]">
+			<ColorLegendOrdinalChips
+				scale={ordinalScale}
+				title="Current EPC Rating"
+				highlightedValue="B"
+			/>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Categorical color scale - wrapping">
-	<div class="w-[600px] border border-gray-200">
-		<ColorLegendOrdinalChips scale={ordinalScaleLong} />
-	</div>
+	{#snippet template()}
+		<div class="w-[600px] border border-gray-200">
+			<ColorLegendOrdinalChips scale={ordinalScaleLong} />
+		</div>
+	{/snippet}
 </Story>
 
 <!-- If there are a large number of color options to include in the legend, it may be necessarily to spread them out vertically rather than horizontally. -->
 <Story name="Categorical color scale - vertical">
-	<div class="w-[400px]">
-		<ColorLegendOrdinalChips
-			scale={ordinalScale}
-			title="Current EPC Rating"
-			orientation="vertical"
-		/>
-	</div>
+	{#snippet template()}
+		<div class="w-[400px]">
+			<ColorLegendOrdinalChips
+				scale={ordinalScale}
+				title="Current EPC Rating"
+				orientation="vertical"
+			/>
+		</div>
+	{/snippet}
 </Story>

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `<MapLayerView>` component is slotted within a `<MapLayerSource>`
 	 * component, or derived version, to specify how to present data on the
@@ -20,49 +20,57 @@
 	const mapSourceId = getContext('mapLayerSourceId');
 	const mapSourceLoaded = getContext('mapLayerSourceLoaded');
 
-	/**
-	 * A unique ID to reference the layer in the map. Provided to slotted
-	 * component as context via the key `mapLayerViewId`.
-	 */
-	export let id;
+	interface Props {
+		/**
+		 * A unique ID to reference the layer in the map. Provided to slotted
+		 * component as context via the key `mapLayerViewId`.
+		 */
+		id: any;
+		/**
+		 * The ID of the layer to insert this layer before. If no ID is provided this
+		 * layer will be inserted above all existing layers.
+		 */
+		beforeId?: any;
+		/**
+		 * A MapLibre layer specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/layers/).
+		 * Provided to slotted component as context via the key `mapLayerViewSpec`.
+		 */
+		spec: any;
+		/**
+		 * Component to render as a tooltip on mouse over.
+		 */
+		tooltip?: any;
+		/**
+		 * Component to render as a popup on mouse click.
+		 */
+		popup?: any;
+		/**
+		 * Called when the layer is added to the map. The function accepts an
+		 * object with the following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
+		onLoad?: any;
+		/**
+		 * Called when the layer is removed from the map. The function accepts an
+		 * object with the following fields:
+		 * - **id**: ID of the layer source.
+		 * - **spec**: MapLibre specification used to initialise the layer.
+		 */
+		onUnload?: any;
+		children?: import('svelte').Snippet;
+	}
 
-	/**
-	 * The ID of the layer to insert this layer before. If no ID is provided this
-	 * layer will be inserted above all existing layers.
-	 */
-	export let beforeId = undefined;
-
-	/**
-	 * A MapLibre layer specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/layers/).
-	 * Provided to slotted component as context via the key `mapLayerViewSpec`.
-	 */
-	export let spec;
-
-	/**
-	 * Component to render as a tooltip on mouse over.
-	 */
-	export let tooltip = null;
-
-	/**
-	 * Component to render as a popup on mouse click.
-	 */
-	export let popup = null;
-
-	/**
-	 * Called when the layer is added to the map. The function accepts an
-	 * object with the following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
-	export let onLoad = null;
-
-	/**
-	 * Called when the layer is removed from the map. The function accepts an
-	 * object with the following fields:
-	 * - **id**: ID of the layer source.
-	 * - **spec**: MapLibre specification used to initialise the layer.
-	 */
-	export let onUnload = null;
+	let {
+		id,
+		beforeId = undefined,
+		spec,
+		tooltip = null,
+		popup = null,
+		onLoad = null,
+		onUnload = null,
+		children
+	}: Props = $props();
 
 	const loaded = writable(false);
 
@@ -102,18 +110,22 @@
 
 	onDestroy(doUnload);
 
-	$: if ($mapSourceLoaded) {
-		doLoad();
-	}
+	$effect(() => {
+		if ($mapSourceLoaded) {
+			doLoad();
+		}
+	});
 
-	$: if ($loaded && !$mapSourceLoaded) {
-		doUnload();
-	}
+	$effect(() => {
+		if ($loaded && !$mapSourceLoaded) {
+			doUnload();
+		}
+	});
 </script>
 
 {#if $loaded}
 	{#if tooltip || popup}
 		<MapMarker layerId={id} {tooltip} {popup} />
 	{/if}
-	<slot />
+	{@render children?.()}
 {/if}

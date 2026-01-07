@@ -1,23 +1,26 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { prefersDarkMode } from '@ldn-viz/ui';
 
-<Meta title="Ui/Components - Layout And Themes/Media Query Stores" />
+export function Log() {
+	return console.log('Dark mode is', prefersDarkMode.current ? 'enabled' : 'disabled');
+}
 
-# Media Query Stores
+<Meta title="Ui/Components - Layout And Themes/userPreference" />
 
-The `@ldn-viz/ui` package exposes three store factory functions.
+# User Preference
 
-- `mediaQueryStore` accepts a CSS [media query](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries) (e.g. `'(prefers-reduced-motion)`) as an argument, and returns a Svelte store that is initialized to the value of the media query, and automatically updates if this changes
+The `@ldn-viz/ui` package exposes wrappers around MediaQuery from [svelte/reactivity](https://svelte.dev/docs/svelte/svelte-reactivity#MediaQuery).
 
-- `prefersDarkMode()` is a convenience wrapper around `mediaQueryStore`: it returns a store that records whether the user has set [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) to `dark`
+- `prefersDarkMode()` is a convenience wrapper around `mediaQuery`: it returns a 'current' property that reflects whether the user has set [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) to `dark`
 
-- `prefersReducedMotion()` is a convenience wrapper around `mediaQueryStore`: it returns a store that records whether the user has enabled the [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting
+- `prefersReducedMotion()` is a convenience wrapper around `mediaQuery`: it returns a 'current' property that reflects whether the user has enabled the [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting
 
 ## Example use
 
 ```js
 import { prefersDarkMode } from '@ldn-viz/ui';
 
-const darkMode = prefersDarkMode();
-
-$: console.log('Dark mode is ', $darkMode ? 'enabled' : 'disabled');
+$inspect('Dark mode is', prefersDarkMode.current ? 'enabled' : 'disabled');
 ```
+
+<Log />

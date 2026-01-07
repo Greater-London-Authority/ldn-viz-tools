@@ -10,26 +10,29 @@
 
 	import { classNames } from '../utils/classNames';
 
-	/**
-	 * A Stroke color token (e.g., `stroke-color-palette-blue-200`) to set the color of the background circle.
-	 */
-	export let circleColorClass = '';
+	interface Props {
+		/**
+		 * A Stroke color token (e.g., `stroke-color-palette-blue-200`) to set the color of the background circle.
+		 */
+		circleColorClass?: string;
+		/**
+		 * A Stroke color token (e.g., `stroke-color-palette-pink-500`) to set the color of the arc whose movement is animated.
+		 */
+		arcColorClass?: string;
+		/**
+		 * Describes purpose of `Spinner` for use cases where
+		 * there's no accompanying text to describe the state
+		 * change (e.g. AsyncButton). Required in this case but
+		 * otherwise undefined.
+		 */
+		title?: string | undefined;
+		[key: string]: any;
+	}
 
-	/**
-	 * A Stroke color token (e.g., `stroke-color-palette-pink-500`) to set the color of the arc whose movement is animated.
-	 */
-	export let arcColorClass = '';
+	let { circleColorClass = '', arcColorClass = '', title = undefined, ...rest }: Props = $props();
 
-	/**
-	 * Describes purpose of `Spinner` for use cases where
-	 * there's no accompanying text to describe the state
-	 * change (e.g. AsyncButton). Required in this case but
-	 * otherwise undefined.
-	 */
-	export let title: string | undefined = undefined;
-
-	$: circleClasses = classNames(circleColorClass || 'stroke-color-ui-empty');
-	$: pathClasses = classNames(arcColorClass || 'stroke-color-ui-primary');
+	let circleClasses = $derived(classNames(circleColorClass || 'stroke-color-ui-empty'));
+	let pathClasses = $derived(classNames(arcColorClass || 'stroke-color-action-primary-active'));
 </script>
 
 <svg
@@ -37,7 +40,7 @@
 	viewBox="0 0 100 100"
 	fill="none"
 	stroke-width="8"
-	{...$$restProps}
+	{...rest}
 >
 	{#if title}
 		<title>{title}</title>

@@ -1,5 +1,5 @@
 import { max, mean, median, min, quantile } from 'd3-array';
-import type { DataFns, Filter, Group, GroupOrderCriterion, LeafOrderCriterion } from './types';
+import type { Filter, Group, GroupOrderCriterion, LeafOrderCriterion } from './types';
 
 // raw data is a list of data rows
 
@@ -41,7 +41,7 @@ function getMemberIds(group: Group, groups: Group[]): number[] {
 	return members;
 }
 
-function getValuesForField(criterion: GroupOrderCriterion, groups: Group[], data) {
+function getValuesForField(criterion: GroupOrderCriterion, groups: Group[], data: any[]) {
 	const aggregatedVals: Record<string, number> = {};
 
 	for (const group of groups) {
@@ -49,17 +49,17 @@ function getValuesForField(criterion: GroupOrderCriterion, groups: Group[], data
 
 		let aggregate: number = 0;
 		if (criterion.aggregation === 'min') {
-			aggregate = min(values);
+			aggregate = min(values) ?? 0;
 		} else if (criterion.aggregation === 'max') {
-			aggregate = max(values);
+			aggregate = max(values) ?? 0;
 		} else if (criterion.aggregation === 'median') {
-			aggregate = median(values);
+			aggregate = median(values) ?? 0;
 		} else if (criterion.aggregation === 'mean') {
-			aggregate = mean(values);
+			aggregate = mean(values) ?? 0;
 		} else if (criterion.aggregation === 'q1') {
-			aggregate = quantile(values, 0.25);
+			aggregate = quantile(values, 0.25) ?? 0;
 		} else if (criterion.aggregation === 'q3') {
-			aggregate = quantile(values, 0.75);
+			aggregate = quantile(values, 0.75) ?? 0;
 		} else if (criterion.aggregation === 'count') {
 			aggregate = values.length;
 		}
@@ -73,12 +73,16 @@ function getValuesForField(criterion: GroupOrderCriterion, groups: Group[], data
 
 // TODO: choosing ordering for categorical variables
 
-export function getSortedRows(indexes: number[], data, orderingCriteria: LeafOrderCriterion[]) {
-	const compareFn = (a, b) => compareRows(a, b, orderingCriteria, data);
+export function getSortedRows(
+	indexes: number[],
+	data: any[],
+	orderingCriteria: LeafOrderCriterion[]
+) {
+	const compareFn = (a: any, b: any) => compareRows(a, b, orderingCriteria);
 	return indexes.map((ind) => data[ind]).sort(compareFn);
 }
 
-function compareRows(a, b, orderingCriteria: LeafOrderCriterion[]) {
+function compareRows(a: any, b: any, orderingCriteria: LeafOrderCriterion[]) {
 	for (let i = 0; i < orderingCriteria.length; i++) {
 		const criterion = orderingCriteria[i];
 		const valA = a[criterion.field];
@@ -98,7 +102,7 @@ function compareGroups(
 	a: Group,
 	b: Group,
 	orderingCriteria: GroupOrderCriterion[],
-	aggregatedVals
+	aggregatedVals: any
 ) {
 	for (let i = 0; i < orderingCriteria.length; i++) {
 		const criterion = orderingCriteria[i];
@@ -115,7 +119,7 @@ function compareGroups(
 	return 0;
 }
 
-function sortAndFlattenChildren(group: Group, aggregatedVals, orderingCriteria): Group[] {
+function sortAndFlattenChildren(group: Group, aggregatedVals: any, orderingCriteria: any): Group[] {
 	if (!group.childGroups || group.childGroups.length === 0) {
 		return [group];
 	} else {
@@ -134,9 +138,9 @@ function sortAndFlattenChildren(group: Group, aggregatedVals, orderingCriteria):
 	}
 }
 
-export function sortGroups(groups: Group[], data, orderingCriteria: GroupOrderCriterion[]) {
+export function sortGroups(groups: Group[], data: any[], orderingCriteria: GroupOrderCriterion[]) {
 	// first, compute the required metrics for each group
-	const aggregatedVals = [];
+	const aggregatedVals: any[] = [];
 	for (const criterion of orderingCriteria) {
 		aggregatedVals.push(getValuesForField(criterion, groups, data));
 	}
@@ -174,7 +178,7 @@ const doFiltersApply = (row: any, filters: Filter[]) => {
 		} else if (filter.type === 'isOneOf') {
 			let valueIsValid = false;
 			for (const val of filter.value) {
-				if (row[filter.value] === val) {
+				if (row[filter.field] === val) {
 					valueIsValid = true;
 				}
 			}
@@ -199,7 +203,7 @@ const doFiltersApply = (row: any, filters: Filter[]) => {
 	return true;
 };
 
-export function getRows(data: DataFns, groups: Group[], filters: Filter[]) {
+export function getRows(data: any[], groups: Group[], filters: Filter[]) {
 	// TODO: consider which groups are expanded, and how many entries to show for each group
 	const results = [];
 	for (const group of groups) {
@@ -214,19 +218,7 @@ export function getRows(data: DataFns, groups: Group[], filters: Filter[]) {
 }
 
 // Construct a grouping
-export function group(
-	data: DataFns,
-	fieldsToGroupBy: string[],
-	maxRowsPerGroup?: number
-): {
-	maxRows: number | undefined;
-	color: string;
-	name: string;
-	childGroups: any[];
-	parentGroup: undefined;
-	order: number[];
-	isExpanded: boolean;
-}[] {
+export function group(data: any[], fieldsToGroupBy: string[], maxRowsPerGroup?: number): Group[] {
 	const groups: Group[] = [];
 
 	if (fieldsToGroupBy.length === 0) {
@@ -319,7 +311,7 @@ export function filterData(data: any[], filters: Filter[]) {
 			} else if (filter.type === 'isDefined') {
 				isOk = !(val === null || val === undefined);
 			} else if (filter.type === 'isOneOf') {
-				isOk = filter.value.includes(val); // TODO: string/number conversions
+				isOk = (filter.value as any[]).includes(val); // TODO: string/number conversions
 			} else if (filter.type === 'lt') {
 				isOk = val < filter.value;
 			} else if (filter.type === 'lte') {
@@ -344,12 +336,12 @@ export function filterData(data: any[], filters: Filter[]) {
 }
 
 export function mergeData(data: any[], columns: any[]) {
-	if (!columns) {
+	if (!columns || columns.length === 0) {
 		return data;
 	}
 
 	return data.map((d) => {
-		const newRow = {};
+		const newRow: Record<string, any> = {};
 		for (const col of columns) {
 			const fieldName = col.short_label;
 

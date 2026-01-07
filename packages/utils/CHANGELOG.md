@@ -1,5 +1,12 @@
 # @ldn-viz/utils
 
+## 1.1.1-svelte5.0
+
+### Patch Changes
+
+- Updated dependencies [0998f50]
+  - @ldn-viz/themes@6.1.0-svelte5.0
+
 ## 1.1.0
 
 ### Minor Changes

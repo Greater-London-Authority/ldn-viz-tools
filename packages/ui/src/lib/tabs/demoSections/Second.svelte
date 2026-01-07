@@ -1,4 +1,4 @@
-<div class="prose dark:prose-invert px-4 py-6">
+<div class="dark:prose-invert prose px-4 py-6">
 	<h3>Details of chargers</h3>
 	<p class="lead">This is demo content, showing how to construct tabs.</p>
 	<p>

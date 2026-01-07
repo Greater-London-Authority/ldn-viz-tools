@@ -1,248 +1,134 @@
 <script lang="ts">
+	import type { MapLibreStore } from '$lib/map/types';
 	import { getContext, onDestroy } from 'svelte';
-
-	import {
-		TerraDraw,
-		TerraDrawCircleMode,
-		TerraDrawFreehandMode,
-		TerraDrawLineStringMode,
-		TerraDrawPointMode,
-		TerraDrawPolygonMode,
-		TerraDrawRectangleMode,
-		TerraDrawRenderMode,
-		TerraDrawSectorMode,
-		TerraDrawSelectMode
-	} from 'terra-draw';
-	//import type { HexColorStyling } from 'terra-draw';
-
+	import { TerraDraw, type GeoJSONStoreFeatures } from 'terra-draw';
 	import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
-	import type { TerraDrawBaseAdapter } from 'terra-draw/dist/common/base.adapter';
-
-	import type { Feature } from 'geojson';
-	import { currentTheme, tokenNameToValue } from '@ldn-viz/ui';
-	import type { MapLibreStore } from '../map/types';
 	import MapDrawControls from './MapDrawControls.svelte';
+	import { MapDraw, Modes } from './MapDrawState.svelte';
+
+	type Mode =
+		| 'circle'
+		| 'freehand'
+		| 'linestring'
+		| 'point'
+		| 'polygon'
+		| 'rectangle'
+		| 'sector'
+		| 'select';
+
+	interface Props {
+		/**
+		 * The modes/tools available for selection.
+		 **/
+		modes?: Mode[];
+
+		/**
+		 * Function to be called when user clicks 'Done' button.
+		 */
+		onDone?: (_args: any) => any;
+
+		/**
+		 * Function to be called when user clicks 'Edit' button.
+		 */
+		onStart?: () => any;
+
+		/**
+		 * Function to be called when user clicks 'Cancel' button.
+		 */
+		onCancel?: () => any;
+
+		/**
+		 * If [true, false], then Geojson upload only is enabled.
+		 * If [false, true], then the drawn shape can be downloaded as a GeoJSON file.
+		 * If [true, true], then upload and download are enabled
+		 */
+		uploadDownload?: [boolean, boolean];
+
+		/**
+		 * Externally uploaded features
+		 **/
+		features?: GeoJSONStoreFeatures[];
+	}
+
+	let {
+		modes = ['polygon'],
+		onDone = (_features: GeoJSONStoreFeatures[]) => null,
+		uploadDownload = [true, true],
+		features: externalFeatures = [],
+		onStart = () => null,
+		onCancel = () => null
+	}: Props = $props();
 
 	const mapStore: MapLibreStore = getContext('mapStore');
 
-	/**
-	The modes/tools available for selection.
-	 **/
-	export let enabledModes = ['polygon'];
+	let drawModes = new Modes();
+	let mapDraw = new MapDraw();
 
-	/**
-	 * The currently active mode.
-	 */
-	export let currentMode: string;
+	let terraDraw: TerraDraw | undefined = $state(undefined);
+	let adapter: any = $state();
 
-	/**
-	 * GeoJSON features that have been drawn (continuously updates).
-	 */
-	export let features: Feature[]; // can't control externally yet
-
-	/**
-	 * GeoJSON features that have been drawn (updates on Save or Clear).
-	 */
-	export let savedFeatures: Feature[];
-
-	/**
-	 * Function to be called when user clicks 'Done' button.
-	 */
-	export let onDone = (_features: Feature[]) => null;
-
-	const lightThemeStyle = {
-		fillColor: tokenNameToValue('ui.primary', $currentTheme), // as HexColorStyling,
-		fillOpacity: 0.5,
-		outlineColor: tokenNameToValue('ui.primary', $currentTheme),
-		outlineWidth: 1
-	};
-
-	const modeMapping = {
-		circle: new TerraDrawCircleMode({
-			styles: lightThemeStyle
-		}),
-		freehand: new TerraDrawFreehandMode({
-			styles: lightThemeStyle
-		}),
-		linestring: new TerraDrawLineStringMode({
-			styles: lightThemeStyle
-		}),
-		point: new TerraDrawPointMode({
-			styles: lightThemeStyle
-		}),
-		polygon: new TerraDrawPolygonMode({
-			styles: lightThemeStyle
-		}),
-		rectangle: new TerraDrawRectangleMode({
-			styles: lightThemeStyle
-		}),
-		sector: new TerraDrawSectorMode({
-			styles: lightThemeStyle
-		}),
-
-		select: new TerraDrawSelectMode()
-	};
-
-	const selectMode = new TerraDrawSelectMode({
-		// Allow manual deselection of features
-		allowManualDeselection: true, // allows users to deselect by clicking on the map
-
-		// we override the default key bindings so that features are deleted with Backspace rather than Delete
-		keyEvents: {
-			deselect: 'Escape',
-			delete: 'Backspace',
-			rotate: ['Control', 'r'],
-			scale: ['Control', 's']
-		},
-
-		// Enable editing tools by Feature
-		flags: {
-			point: {
-				feature: {
-					draggable: true
-				}
-			},
-
-			polygon: {
-				feature: {
-					draggable: true,
-					coordinates: {
-						midpoints: true,
-						draggable: true,
-						deletable: true
-					}
-				}
-			},
-
-			linestring: {
-				feature: {
-					draggable: true,
-					coordinates: {
-						midpoints: true,
-						draggable: true,
-						deletable: true
-					}
-				}
-			},
-
-			freehand: {
-				feature: {
-					draggable: true,
-					coordinates: {
-						midpoints: true,
-						draggable: true,
-						deletable: true
-					}
-				}
-			},
-
-			circle: {
-				feature: {
-					draggable: true,
-					coordinates: {
-						midpoints: true,
-						draggable: true,
-						deletable: true
-					}
-				}
-			},
-
-			rectangle: {
-				feature: {
-					draggable: true,
-					coordinates: {
-						midpoints: true,
-						draggable: true,
-						deletable: true
-					}
-				}
-			},
-
-			sector: {
-				feature: {
-					draggable: true,
-					coordinates: {
-						midpoints: true,
-						draggable: true,
-						deletable: true
-					}
-				}
-			}
+	const createTerraDraw = (mapStore: unknown) => {
+		if (terraDraw) {
+			// setup has already occurred
+			return;
 		}
-	});
 
-	const renderMode = new TerraDrawRenderMode({
-		modeName: 'render',
-		styles: lightThemeStyle
-	});
+		if (mapStore) {
+			adapter = mapStore && new TerraDrawMapLibreGLAdapter({ map: mapStore });
 
-	let draw: TerraDraw;
-	let adapter: TerraDrawBaseAdapter;
+			drawModes.enabled = modes;
 
-	const createTerraDraw = () => {
-		if ($mapStore) {
-			const modes = [
-				...enabledModes.map((modeName) => modeMapping[modeName]),
-				selectMode,
-				renderMode
-			];
-
-			adapter = new TerraDrawMapLibreGLAdapter({ map: $mapStore });
-
-			draw = new TerraDraw({
+			terraDraw = new TerraDraw({
 				adapter,
-				modes
+				modes: drawModes.modes
 			});
 
-			draw.start();
+			terraDraw.start();
 
-			if (savedFeatures.length > 0) {
-				draw.addFeatures(savedFeatures);
-			}
-
-			// once a user has finished creating a shape, reset to select tool
-			draw.on('finish', (id: string, context: { action: string; mode: string }) => {
-				if (context.action === 'draw') {
-					currentMode = 'select';
+			terraDraw.on('finish', () => {
+				if (mapDraw.controlMode.current === 'edit') {
+					drawModes.mode.selected = 'select';
+					terraDraw!.setMode('select');
 				}
 			});
 
-			// continuously update features
-			draw.on('change', () => {
-				features = draw.getSnapshot();
+			terraDraw.on('change', () => {
+				mapDraw.features.current = terraDraw!.getSnapshot();
 			});
 		}
 	};
-	$: createTerraDraw($mapStore, enabledModes);
 
-	const setMode = (newMode: string) => {
-		if (!draw) return;
+	$effect(() => createTerraDraw($mapStore));
 
-		if (newMode) {
-			draw.setMode(newMode);
-		} else {
-			draw.setMode('select');
-		}
-	};
+	$effect(() => {
+		mapDraw.features.saved = externalFeatures;
+		terraDraw?.clear();
+		terraDraw?.addFeatures(externalFeatures);
+		mapDraw.controlMode.current = 'default';
+	});
 
-	$: setMode(currentMode);
-
+	/**
+	 * If we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
+	 */
 	onDestroy(() => {
-		// if we don't tidy up, then re-creating MapDraw component will fail as its map layers will already exist
-		if (draw) {
-			draw.clear();
-		}
 		if (adapter) {
-			adapter.unregister();
+			adapter?.unregister();
+		}
+
+		if (terraDraw) {
+			terraDraw?.clear();
 		}
 	});
 </script>
 
-<MapDrawControls
-	{enabledModes}
-	{features}
-	bind:savedFeatures
-	bind:currentMode
-	{onDone}
-	terraDraw={draw}
-/>
+{#if terraDraw}
+	<MapDrawControls
+		{terraDraw}
+		{uploadDownload}
+		{onStart}
+		{onCancel}
+		{onDone}
+		{drawModes}
+		{mapDraw}
+	/>
+{/if}

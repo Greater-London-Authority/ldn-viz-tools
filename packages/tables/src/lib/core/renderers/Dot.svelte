@@ -6,46 +6,30 @@
 	 * @component
 	 */
 
+	import type { DotProps } from '$lib/core/renderers/DotProps';
 	import { format } from 'd3-format';
+	import { getVal } from '../../getVal';
 
-	/**
-	 * Color of the dot, in any CSS format (color name, hex-string, `rgb()` notation, etc.).
-	 */
-	export let color = 'steelblue';
+	let {
+		color = 'steelblue',
+		showValues = true,
+		value,
+		formatString = '0.0f',
+		extent = [0, 1],
+		...rest
+	}: DotProps = $props();
 
-	/**
-	 * If `true`, then the numerical value will be displayed as text beside the symbol.
-	 */
-	export let showValues = true;
-
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value: number;
-
-	/**
-	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
-	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
-	 */
-	export let formatString = '0.0f';
-	$: f = format(formatString);
-
-	export let extent;
-
-	let d;
-	$: d = (value - extent[0]) / (extent[1] - extent[0]);
+	let d = $derived((value - extent[0]) / (extent[1] - extent[0]));
 
 	const fPercentage = format('0.0%');
 
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let f = $derived(format(formatString));
 </script>
 
 <div
-	class="opacity-100 rounded-sm w-[7px] h-[7px] mt-[-3.5px] ml-[-3.5px] relative"
+	class="relative ml-[-3.5px] mt-[-3.5px] h-[7px] w-[7px] rounded-sm opacity-100"
 	style="width: 7px; height: 7px;"
-	style:background-color={color}
+	style:background-color={getVal(value, color)}
 	style:left={fPercentage(d)}
 >
 	{#if showValues}

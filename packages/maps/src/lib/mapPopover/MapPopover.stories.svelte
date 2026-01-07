@@ -1,4 +1,5 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapPopover from './MapPopover.svelte';
 
 	const componentType = {
@@ -11,9 +12,11 @@
 		}
 	};
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapPopover',
 		component: MapPopover,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		},
@@ -29,12 +32,10 @@
 			tooltip: componentType,
 			popup: componentType
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	import { Button } from '@ldn-viz/ui';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
@@ -61,29 +62,27 @@
 		}
 	};
 
-	let selectedFeature;
+	let selectedFeature = $state();
 </script>
 
-<Template let:args>
-	<MapPopover {...args} />
-</Template>
-
 <Story name="Interactive Example">
-	<div class="flex gap-2 p-2">
-		<Button on:click={() => (selectedFeature = feature_1)}>Select point 1</Button>
-		<Button on:click={() => (selectedFeature = feature_2)}>Select point 2</Button>
-		<Button on:click={() => (selectedFeature = undefined)} disabled={!selectedFeature}>
-			Unselect point
-		</Button>
-	</div>
+	{#snippet template()}
+		<div class="flex gap-2 p-2">
+			<Button onclick={() => (selectedFeature = feature_1)}>Select point 1</Button>
+			<Button onclick={() => (selectedFeature = feature_2)}>Select point 2</Button>
+			<Button onclick={() => (selectedFeature = undefined)} disabled={!selectedFeature}>
+				Unselect point
+			</Button>
+		</div>
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapPopover feature={selectedFeature} popup={DemoPopover} />
-		</Map>
-	</div>
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapPopover feature={selectedFeature} popup={DemoPopover} />
+			</Map>
+		</div>
+	{/snippet}
 </Story>

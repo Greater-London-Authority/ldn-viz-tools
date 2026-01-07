@@ -1,9 +1,12 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import ColorAndLabel from './ColorAndLabel.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/ColorAndLabel',
 		component: ColorAndLabel,
+		tags: ['autodocs'],
 
 		argTypes: {
 			value: {
@@ -15,15 +18,11 @@
 			value: 0.5,
 			colorScale: () => 'red'
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<ColorAndLabel {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<ColorAndLabel {...args} value={args.value ?? 0.5} />
+	{/snippet}
+</Story>

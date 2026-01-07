@@ -13,45 +13,57 @@
 	 */
 
 	import { toPng } from 'html-to-image';
-	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
+	import type { MultipleActionButtonOption } from '../multipleActionButton/types.ts';
+	import type { ButtonProps } from '../button/types';
+	import type { Snippet } from 'svelte';
 
-	/**
-	 * An `Element` node to be converted. When 'SVG' format is selected the largest child svg element will be targeted.
-	 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
-	 * If this does not yield the desired results you may need to adjust your markup.
-	 */
-	export let htmlNode: HTMLElement | SVGElement;
+	type ImageDownloadButtonProps = ButtonProps & {
+		/**
+		 * An `Element` node to be converted. When 'SVG' format is selected the largest child svg element will be targeted.
+		 * This is primarily for use with charts where the chart element needs to be compatible with Figma/ illustrator.
+		 * If this does not yield the desired results you may need to adjust your markup.
+		 */
+		htmlNode: HTMLElement | SVGElement;
+		/**
+		 * The available file formats for the downloaded image.
+		 */
+		formats?: ('PNG' | 'SVG')[];
+		/**
+		 * The name the downloaded file will be saved with.
+		 */
+		filename?: string;
+		/**
+		 * Amount of padding to add, in pixels.
+		 */
+		padding?: number;
+		/**
+		 * If `true`, the user will not be able to interact with the button to download data.
+		 */
+		disabled?: boolean;
+		/**
+		 * If converting an SVG to PNG, the resolution of the PNG will be `scaleFactor` times the size at which the SVG was displayed at.
+		 */
+		scaleFactor?: number;
+		/**
+		 * If `true`, then button will fill full width of parent.
+		 */
+		fullWidth?: boolean;
 
-	/**
-	 * The available file formats for the downloaded image.
-	 */
-	export let formats: ('PNG' | 'SVG')[] = ['PNG', 'SVG'];
+		beforeLabel?: Snippet;
+		afterLabel?: Snippet;
+	};
 
-	/**
-	 * The name the downloaded file will be saved with.
-	 */
-	export let filename = '';
-
-	/**
-	 * Amount of padding to add, in pixels.
-	 */
-	export let padding = 30;
-
-	/**
-	 * If `true`, the user will not be able to interact with the button to download data.
-	 */
-	export let disabled = false;
-
-	/**
-	 * If converting an SVG to PNG, the resolution of the PNG will be `scaleFactor` times the size at which the SVG was displayed at.
-	 */
-	export let scaleFactor = 2;
-
-	/**
-	 * If `true`, then button will fill full width of parent.
-	 */
-	export let fullWidth = false;
+	let {
+		htmlNode,
+		formats = ['PNG', 'SVG'],
+		filename = '',
+		padding = 30,
+		disabled = false,
+		scaleFactor = 2,
+		fullWidth = false,
+		...restProps
+	}: ImageDownloadButtonProps = $props();
 
 	const downloadFromURL = (url: string) => {
 		const initialName = filename || 'image';
@@ -109,7 +121,7 @@
 	const sum = (vals: number[]) => vals.reduce((total, current) => total + +current, 0);
 
 	const getHeight = (div: HTMLElement) => {
-		// N.B. wwe need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
+		// N.B. we need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
 		const display = window.getComputedStyle(div).display;
 
 		if (display !== 'contents') {
@@ -148,8 +160,8 @@
 
 			// N.B. if we don't specify the width/height, then html-to-image will use the size of the HTML element before
 			// adjusting the style to add the padding. This would result in the content being truncated.
-			width: 2 * padding + getWidth(htmlNode),
-			height: 2 * padding + getHeight(htmlNode),
+			width: 2 * padding + getWidth(htmlNode as HTMLElement),
+			height: 2 * padding + getHeight(htmlNode as HTMLElement),
 
 			filter
 		};
@@ -216,7 +228,7 @@
 						})
 				: console.warn('No svgNode found');
 		} else if (format === 'PNG') {
-			toPng(htmlNode, { ...captureOptions, pixelRatio: scaleFactor })
+			toPng(htmlNode as HTMLElement, { ...captureOptions, pixelRatio: scaleFactor })
 				.then((dataUrl: string) => downloadFromURL(dataUrl))
 				.catch((error: any) => {
 					console.error('Error creating PNG:', error);
@@ -226,10 +238,10 @@
 		}
 	};
 
-	let options: Option[] = [];
-	$: {
+	let options: MultipleActionButtonOption[] = $derived.by(() => {
+		const opts = [];
 		if (formats.includes('PNG')) {
-			options.push({
+			opts.push({
 				id: 'PNG',
 				buttonLabel: 'Download as PNG',
 				menuLabel: 'PNG',
@@ -239,7 +251,7 @@
 			});
 		}
 		if (formats.includes('SVG')) {
-			options.push({
+			opts.push({
 				id: 'SVG',
 				buttonLabel: 'Download as SVG',
 				menuLabel: 'SVG',
@@ -247,11 +259,12 @@
 					'A vector image format that can be edited in software such as Adobe Illustrator.'
 			});
 		}
-	}
+		return opts;
+	});
 
-	let selectedOption: Option;
+	let selectedOption: MultipleActionButtonOption = $derived(options[0]);
 
-	$: format = selectedOption?.id ?? 'PNG';
+	let format = $derived(selectedOption?.id ?? 'PNG');
 </script>
 
 <MultipleActionButton
@@ -261,9 +274,5 @@
 	onClick={download}
 	{disabled}
 	{fullWidth}
-	{...$$restProps}
->
-	<!-- contents of the button -->
-	<svelte:fragment slot="beforeLabel"><slot name="beforeLabel" /></svelte:fragment>
-	<svelte:fragment slot="afterLabel"><slot name="afterLabel" /></svelte:fragment>
-</MultipleActionButton>
+	{...restProps}
+></MultipleActionButton>

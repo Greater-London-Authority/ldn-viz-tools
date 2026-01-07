@@ -1,63 +1,81 @@
 <script lang="ts">
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
+	import type { CheckboxSolidProps } from './types.ts';
+
 	/**
-	 * The `CheckboxSolid` component provides a set of buttons for selecting multiple options from a small list.
+	 * The `<CheckboxSolid>` component provides a checkbox control as a Boolean input, styled as a button. It is intended to be used for selecting multiple options from a small list.
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
+	 *
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
+	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 * Consider using a [Switch](./?path=/docs/ui-components-switch--documentation).
 	 * @component
 	 */
 
-	import { classNames } from '../utils/classNames';
-	import { randomId } from '../utils/randomId';
+	let {
+		id = randomId(),
+		name = '',
+		checked = $bindable(false),
+		label = '',
+		disabled = false,
+		icon,
+		rawIcon,
+		iconPlacement = 'above',
+		...restProps
+	}: CheckboxSolidProps = $props();
 
-	/**
-	 * String appearing next to checkbox.
-	 */
-	export let label: string;
+	const labelClasses = $derived(
+		classNames(
+			disabled
+				? '!bg-color-input-background-disabled !text-color-text-disabled cursor-not-allowed'
+				: 'bg-color-input-background-off text-color-text-primary cursor-pointer',
+			'form-label leading-tight ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
+			'peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-color-ui-background-primary peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-inset peer-focus:ring-offset-2'
+		)
+	);
 
-	/**
-	 * Value set as the `id` attribute of the `<input>` element (defaults to randomly generated value).
-	 */
-	export let id = randomId();
-
-	/**
-	 * Value set as the `name` attribute of the `<input>` element (optional, but required if providing value with a form submission)
-	 */
-	export let name: string | undefined;
-
-	/**
-	 * If true, then the user cannot interact with this button to change whether it is *checked*.
-	 */
-	export let disabled = false;
-
-	/**
-	 * Boolean indicating whether the checkbox is currently *checked*.
-	 * Can be bound to and modified from outside the component.
-	 */
-	export let checked = false;
+	const iconOrientationClasses = {
+		above: 'h-5 w-5 mb-0.5',
+		below: 'h-5 w-5 mt-0.5'
+	};
 </script>
 
-<div class="w-full flex">
+{#snippet iconComponent()}
+	{#if icon}
+		<Icon
+			src={icon}
+			theme="mini"
+			class={iconOrientationClasses[iconPlacement]}
+			aria-hidden="true"
+		/>
+	{:else if rawIcon}
+		<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></rawIcon>
+	{/if}
+{/snippet}
+
+<div class="flex w-full">
 	<input
 		{id}
 		{name}
 		type="checkbox"
 		bind:checked
-		aria-disabled={disabled}
 		{disabled}
-		on:change
-		class="peer absolute top-0 left-0 opacity-0"
-		{...$$restProps}
+		aria-disabled={disabled}
+		class="peer absolute left-0 top-0 opacity-0"
+		{...restProps}
 	/>
 
-	<label
-		for={id}
-		class={classNames(
-			disabled
-				? 'cursor-not-allowed !bg-color-input-background-disabled !text-color-text-disabled '
-				: 'cursor-pointer bg-color-input-background-off text-color-text-primary',
-			'form-label flex flex-col justify-center items-center text-center p-2 min-h-11 w-full ring-1 ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on',
-			'peer-focus:ring-inset peer-focus:ring-offset-2 peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-2 peer-focus:outline-none peer-focus:ring-color-ui-background-primary'
-		)}
-	>
-		<!-- contents of the checkbox button (name and/or icon) -->
-		<slot>{label}</slot>
+	<label for={id} class={labelClasses}>
+		{#if (icon || rawIcon) && iconPlacement === 'above'}
+			{@render iconComponent()}
+			{label}
+		{:else if (icon || rawIcon) && iconPlacement === 'below'}
+			{label}
+			{@render iconComponent()}
+		{:else}
+			{label}
+		{/if}
 	</label>
 </div>

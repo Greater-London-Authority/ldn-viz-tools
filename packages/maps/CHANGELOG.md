@@ -1,71 +1,120 @@
 # ldn-viz-tools-maps
 
-## 8.2.2
-
-### Patch Changes
-
-- 4e84ad2: FIXED: when uploading GeoJSON file, set list of features to just the uploaded features, rather than whole GeoJSON document
-- 4e84ad2: CHANGED: be more permissive in loading GeoJSON that wasn't created with TerraDRaw or the MapDrawing component, by defaulting tool to be polygon and replacing feature ids with a UUID4 (if they aren't already)
-
-## 8.2.1
-
-### Patch Changes
-
-- 8a8fa96: CHANGED: be more permissive in loading GeoJSON that wasn't created with TerraDRaw or the MapDrawing component, by defaulting tool to be polygon and replacing feature ids with a UUID4 (if they aren't already)
-
-## 8.2.0
+## 9.0.0-svelte5.17
 
 ### Minor Changes
 
-- c3f760c: CHANGED: 'Edit area' button says 'Add area' if no areas have been drawn
+- 95e5c08: FIXED: fix contrast of MapLibre info button
 
-## 8.1.3
-
-### Patch Changes
-
-- 500256c: FIXED: fixes to the MapDraw component
-
-## 8.1.2
+## 9.0.0-svelte5.16
 
 ### Patch Changes
 
-- b4dace5: FIXED: MapDraw component can load initial state
+- Updated dependencies [8dca04b]
+  - @ldn-viz/ui@21.0.0-svelte5.8
 
-## 8.1.1
+## 9.0.0-svelte5.15
 
 ### Patch Changes
 
-- 5478a0f: FIXED: fixed path for an import from `@ldn-viz/ui` by `MapDraw` that only works in monorepo, not in projects
+- b4e23ec: fix dependency on theme
 
-## 8.1.0
+## 9.0.0-svelte5.14
+
+### Patch Changes
+
+- 0efd817: FIXED: fix dependencies
+
+## 9.0.0-svelte5.13
 
 ### Minor Changes
 
-- b1f6fc7: Added: MapDraw component
+- 5558524: CHANGED: reduce text size of attribution text on map
 
-## 8.0.1
+## 9.0.0-svelte5.12
 
-### Patch Changes
+### Minor Changes
 
-- 24cc3ad: Changed: Update geocoder from MapBox API to Searchbox API. This means that Points of Interest again appear in the results.
+- 10ea351: ADDED: `MapDraw` component now has `onStart` and `onCancel` callback functions (as well as `onDone`)
 
-## 8.0.0
+## 9.0.0-svelte5.11
+
+### Minor Changes
+
+- 64c9de0: FIXED: allow the features in `MapDraw` to be updated by value passe din as prop
+
+## 9.0.0-svelte5.10
+
+### Minor Changes
+
+- ee2e9b5: CHANGED: updated design of `MapDraw` component
+
+## 9.0.0-svelte5.9
+
+### Minor Changes
+
+- c4a34fa: add mapdraw
+
+## 9.0.0-svelte5.8
 
 ### Major Changes
 
-- e8c3af7: ADDED: `MapLegend` component
+- bdbdcfa: CHANGED: bump version of deck.gl packages. This means that SSR can be enabled, but means that imports must be updated to remove the `/typed` suffix
 
-## 7.6.1
-
-### Patch Changes
-
-- f9d211e: FIXED: export functions needed to use `MapDeckPopovers` and `MapDeckTooltips` components
-
-## 7.6.0
+## 9.0.0-svelte5.7
 
 ### Minor Changes
 
-- f8f4708: ADDED: `MapDeckPopovers` and `MapDeckTooltips` to easily add popovers or tooltips to multiple Deck.gl layers
+- 1f698ea: FIXED: update MapLibre.svelte, removed side effect resizing to fix map flicker
+- 2e5d5d0: CHANGED: Removed custom z-index and applied `.maplibregl-popup` class to `MapDeckTooltips` to make z-index consistent with other popups.
+
+### Patch Changes
+
+- 253b9b9: Adapter added for OS Places API
+
+## 9.0.0-svelte5.6
+
+### Minor Changes
+
+- a12ef0c: ADDED: export onClickPopoverHandler
+
+## 9.0.0-svelte5.5
+
+### Minor Changes
+
+- ee28e46: CHANGED: when theme is changed, update basemap style with MapLibre's `setStyle()` method, rather than re-creating map
+
+## 9.0.0-svelte5.4
+
+### Patch Changes
+
+- @ldn-viz/utils@1.1.1-svelte5.0
+
+## 9.0.0-svelte5.3
+
+### Minor Changes
+
+- 7018a1a: FIXED: fix bug that would cause `MapDeckOverlay` to replace the `DeckOverlay` object whenever layers were updated
+
+## 9.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: apply styling to MapDeckTooltips
+
+## 9.0.0-svelte5.1
+
+### Patch Changes
+
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
+
+## 9.0.0-svelte5.0
+
+### Major Changes
+
+- a955822: CHANGED: update to use Svelte 5 and runes.
+
+  CHANGED: `GeoJSONMapLayerSource` no longer has a `dataStore` prop.
 
 ## 7.5.0
 

@@ -1,55 +1,65 @@
-<script context="module">
-	import Trigger from '../overlay/Trigger.svelte';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Tooltip from './Tooltip.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Cog6Tooth } from '@steeze-ui/heroicons';
+	import Button from '../button/Button.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Tooltip',
 		component: Tooltip,
-		argTypes: {
-			hintLabel: { type: 'string', control: 'text' },
-			hintSize: {
-				options: ['sm', 'md', 'lg'],
-				control: { type: 'select' }
-			}
-		}
-	};
+		tags: ['autodocs']
+	});
 </script>
 
-<script lang="ts">
-	import { Cog6Tooth } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<Tooltip {...args}>
-		<Trigger slot="trigger" />
-		This is some text
-	</Tooltip>
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<Tooltip {...args}>The contents of the Tooltip...</Tooltip>
+	{/snippet}
+</Story>
 
 <Story name="Custom size">
-	<Tooltip>
-		<Trigger slot="trigger" size="lg" />
-		This is some text inside a bigger button
-	</Tooltip>
+	{#snippet template(args)}
+		<Tooltip {...args}>
+			{#snippet trigger(props)}
+				<Trigger {...props} size="lg" />
+			{/snippet}
+			The contents of the Tooltip...
+		</Tooltip>
+	{/snippet}
 </Story>
 
 <Story name="Custom hint label">
-	<Tooltip>
-		<Trigger slot="trigger" hintLabel="Hover over me!" />
-		This is some text
-	</Tooltip>
+	{#snippet template(args)}
+		<Tooltip {...args} hintLabel="I'm a little tooltip">The contents of the Tooltip...</Tooltip>
+	{/snippet}
 </Story>
 
 <Story name="Custom hint icon">
-	<Tooltip>
-		<Trigger slot="trigger">
-			I have a different icon
-			<Icon src={Cog6Tooth} theme="mini" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
-		</Trigger>
-		But I still work the same
-	</Tooltip>
+	{#snippet template(args)}
+		<Tooltip {...args}>
+			{#snippet trigger(props)}
+				<Trigger {...props}>
+					I have a different icon
+					<Icon src={Cog6Tooth} theme="mini" class="ml-0.5 h-[18px] w-[18px]" aria-hidden="true" />
+				</Trigger>
+			{/snippet}
+			The contents of the Tooltip...
+		</Tooltip>
+	{/snippet}
+</Story>
+
+<Story name="Custom trigger">
+	{#snippet template(args)}
+		<Tooltip {...args}>
+			{#snippet trigger(props)}
+				<Button {...props}>
+					I have a different trigger component
+					<Icon src={Cog6Tooth} theme="mini" class="ml-0.5 h-[18px] w-[18px]" aria-hidden="true" />
+				</Button>
+			{/snippet}
+			The contents of the Tooltip...
+		</Tooltip>
+	{/snippet}
 </Story>

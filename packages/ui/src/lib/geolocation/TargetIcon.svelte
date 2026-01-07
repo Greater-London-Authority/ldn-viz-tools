@@ -1,5 +1,10 @@
-<script>
-	export let title = '';
+<script lang="ts">
+	interface Props {
+		title?: string;
+		[key: string]: any;
+	}
+
+	let { title = '', ...rest }: Props = $props();
 </script>
 
 <svg
@@ -9,7 +14,7 @@
 	stroke-width="1.5"
 	stroke="currentColor"
 	fill="none"
-	{...$$restProps}
+	{...rest}
 >
 	<title>{title}</title>
 	<circle cx="12" cy="12" r="3.5" />

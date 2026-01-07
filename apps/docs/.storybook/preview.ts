@@ -1,22 +1,8 @@
+import { withThemeByClassName } from './withThemeByClassName';
 import type { Preview } from '@storybook/svelte';
-import { docs } from './ciuStorybookTheme';
-
-import { prefersDarkMode } from '@ldn-viz/ui';
-import { get } from 'svelte/store';
 import '../src/app.postcss';
-import { withThemeByClassNameStore } from './withThemeByClassNameStore';
-
-const isBroswer = () => {
-	if (typeof window === 'object') {
-		return true;
-	}
-};
-const getLocalStorage = () => {
-	if (isBroswer()) {
-		return globalThis.localStorage?.getItem('theme') || 'light';
-	}
-	return 'light';
-};
+import { docs } from './ciuStorybookTheme';
+import ThemeContext from '../src/lib/decorators/ThemeContext.svelte';
 
 const preview: Preview = {
 	parameters: {
@@ -44,7 +30,9 @@ const preview: Preview = {
 						'Components - Layout And Themes',
 						'*',
 						'Examples'
-					]
+					],
+					'Charts',
+					['Introduction', 'Components', ['ChartContainer']]
 				]
 			}
 		},
@@ -54,18 +42,28 @@ const preview: Preview = {
 				date: /Date$/i
 			}
 		},
+		a11y: {
+			// 'todo' - show a11y violations in the test UI only
+			// 'error' - fail CI on a11y violations
+			// 'off' - skip a11y checks entirely
+			test: 'todo'
+		},
+		backgrounds: {
+			options: {}
+		},
 		docs: {
 			theme: docs
 		}
 	},
 	decorators: [
-		withThemeByClassNameStore({
+		() => ThemeContext as any,
+		withThemeByClassName({
 			themes: {
 				light: '',
 				dark: 'dark',
-				system: get(prefersDarkMode) ? 'dark' : 'light'
+				system: 'system'
 			},
-			defaultTheme: getLocalStorage()
+			defaultTheme: 'light'
 		})
 	]
 };

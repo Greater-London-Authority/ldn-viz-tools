@@ -1,54 +1,66 @@
-<script context="module">
-	import { SidebarLeftContext } from '@ldn-viz/docs';
-
-	import SidebarTabList from './SidebarTabList.svelte';
-
-	export const meta = {
-		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarTabs',
-		component: SidebarTabList,
-		decorators: [() => SidebarLeftContext]
-	};
-</script>
-
-<script lang="ts">
-	import { SidebarTopContext } from '@ldn-viz/docs';
-	import { Story, Template, type DecoratorReturnType } from '@storybook/addon-svelte-csf';
+<script module lang="ts">
+	import { SidebarLeftContext, SidebarTopContext } from '../../../../../../../apps/docs/src/lib/';
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	// Example component passed to panel.
-	// In reality these would be be a component defined in your app, rather than a component imported from the UI library.
-	import NonIdealState from '../../../nonIdealState/NonIdealState.svelte';
-
-	let selectedValue: string | undefined = undefined;
+	import SidebarTabList from './SidebarTabList.svelte';
+	import First from './demoSections/First.svelte';
+	import Fourth from './demoSections/Fourth.svelte';
+	import Second from './demoSections/Second.svelte';
+	import Third from './demoSections/Third.svelte';
 
 	let tabs = [
-		{ id: 'aggregates', label: 'Aggregates', icon: Square3Stack3d, content: NonIdealState },
-		{ id: 'chargers', label: 'Details', icon: MapIcon, content: NonIdealState },
-		{ id: 'averages', label: 'Averages', icon: Square3Stack3d, content: NonIdealState },
-		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: NonIdealState }
+		{ id: 'aggregates', label: 'Aggregates', icon: Square3Stack3d, content: First },
+		{ id: 'chargers', label: 'Details', icon: MapIcon, content: Second },
+		{ id: 'averages', label: 'Averages', icon: Square3Stack3d, content: Third },
+		{ id: 'histograms', label: 'Histograms', icon: MapIcon, content: Fourth }
 	];
 
-	const horizontalContext = SidebarTopContext as unknown as DecoratorReturnType;
+	let { Story } = defineMeta({
+		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarTabs',
+		component: SidebarTabList,
+		decorators: [() => SidebarLeftContext as any],
+		tags: ['autodocs'],
+		args: { tabs: tabs }
+	});
+
+	let selectedTabId = $state('aggregates');
 </script>
 
-<Template let:args>
-	<SidebarTabList {...args} bind:selectedValue />
-</Template>
+<Story name="Default">
+	{#snippet template(args)}
+		<SidebarTabList {...args} bind:selectedTabId />
 
-<Story name="Default" source args={{ tabs: tabs }} />
+		{#each tabs as tabPanel}
+			<div id={`${tabPanel.id}-panel`} role="tabpanel" aria-labelledby={tabPanel.id}></div>
+		{/each}
+	{/snippet}
+</Story>
 
-<Story name="Horizontal with Icons" decorators={[() => horizontalContext]}>
-	<SidebarTabList {tabs} bind:selectedValue />
+<Story name="Horizontal with Icons" decorators={[() => SidebarTopContext as any]}>
+	{#snippet template(args)}
+		<SidebarTabList {...args} bind:selectedTabId />
+
+		{#each tabs as tabPanel}
+			<div id={`${tabPanel.id}-panel`} role="tabpanel" aria-labelledby={tabPanel.id}></div>
+		{/each}
+	{/snippet}
 </Story>
 
 <!-- A custom event can be passed to onChange -->
 <Story name="With Custom Selection Handler">
-	<SidebarTabList
-		{tabs}
-		bind:selectedValue
-		onChange={() => {
-			alert('Clicked on Markers tab!');
-		}}
-	/>
+	{#snippet template(args)}
+		<SidebarTabList
+			{...args}
+			bind:selectedTabId
+			onChange={() => {
+				alert('Clicked on Markers tab!');
+			}}
+		/>
+
+		{#each tabs as tabPanel}
+			<div id={`${tabPanel.id}-panel`} role="tabpanel" aria-labelledby={tabPanel.id}></div>
+		{/each}
+	{/snippet}
 </Story>

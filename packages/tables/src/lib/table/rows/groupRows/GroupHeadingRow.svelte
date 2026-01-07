@@ -5,8 +5,7 @@
 	import type { Group } from '../../../core/lib/types';
 	import GroupSizeBar from './GroupSizeBar.svelte';
 
-	export let group;
-	export let table;
+	let { group, table } = $props();
 
 	const constructLabel = (group: Group) => {
 		if (typeof group.maxRows !== 'undefined' && group.order.length > group.maxRows) {
@@ -18,7 +17,7 @@
 	const getGroupLevel = (name: string) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 </script>
 
-<div class="flex was-tr">
+<div class="was-tr flex">
 	{#each new Array(getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 
@@ -27,14 +26,14 @@
 
 	<button
 		style:width={table.widths.groupControl}
-		on:click={() => table.toggleGroupCollapsed(group, true)}
+		onclick={() => table.toggleGroupCollapsed(group, true)}
 	>
 		<Icon
 			src={group.isExpanded ? ChevronDown : ChevronRight}
 			theme="solid"
-			class="w-[18px] h-[18px] ml-0.5"
+			class="ml-0.5 h-[18px] w-[18px]"
 			aria-hidden="true"
-			on:click={() => table.toggleGroupCollapsed(group, true)}
+			onclick={() => table.toggleGroupCollapsed(group, true)}
 		/>
 	</button>
 

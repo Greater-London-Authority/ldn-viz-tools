@@ -1,17 +1,19 @@
-<script context="module">
-	import Table from './Table.svelte';
-	import { Select } from '@ldn-viz/ui';
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	export const meta = {
+	import { Select } from '@ldn-viz/ui';
+	import Table from './Table.svelte';
+
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Table',
-		component: Table
-	};
+		component: Table,
+		tags: ['autodocs']
+	});
 </script>
 
 <script lang="ts">
 	import type { ColSpec } from '$lib/core/lib/types';
-	import { Button, currentTheme, Input, tokenNameToValue } from '@ldn-viz/ui';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { Button, Input, theme } from '@ldn-viz/ui';
 
 	const data = [
 		{ id: 1, first_name: 'Marilyn', last_name: 'Monroe', pet: 'dog' },
@@ -131,13 +133,13 @@
 				label: 'Name',
 				startCol: 0,
 				endCol: 1,
-				color: tokenNameToValue('data.categorical.red', $currentTheme)
+				color: theme.tokenNameToValue('data.categorical.red', theme.currentTheme)
 			},
 			{
 				label: 'Pet',
 				startCol: 2,
 				endCol: 2,
-				color: tokenNameToValue('data.categorical.blue', $currentTheme)
+				color: theme.tokenNameToValue('data.categorical.blue', theme.currentTheme)
 			}
 		],
 
@@ -149,7 +151,7 @@
 				alignHeader: 'center',
 
 				header: {
-					color: tokenNameToValue('data.categorical.red', $currentTheme)
+					color: theme.tokenNameToValue('data.categorical.red', theme.currentTheme)
 				},
 
 				cell: {
@@ -164,7 +166,7 @@
 				alignHeader: 'center',
 
 				header: {
-					color: tokenNameToValue('data.categorical.red', $currentTheme)
+					color: theme.tokenNameToValue('data.categorical.red', theme.currentTheme)
 				},
 
 				cell: { renderer: 'TextCell' }
@@ -177,7 +179,7 @@
 				alignHeader: 'center',
 
 				header: {
-					color: tokenNameToValue('data.categorical.blue', $currentTheme)
+					color: theme.tokenNameToValue('data.categorical.blue', theme.currentTheme)
 				},
 
 				cell: { renderer: 'TextCell' }
@@ -209,7 +211,7 @@
 		wideTableData.push(row);
 	}
 
-	let dataSubset: Record<string, string | number>[] = [];
+	let dataSubset: Record<string, string | number>[] = $state([]);
 	const randomlySelectRows = () => {
 		const selectedEntries = [];
 		const arrayCopy = [...data]; // Create a shallow copy of the input array
@@ -223,137 +225,186 @@
 	};
 	randomlySelectRows();
 
-	export let page = 1;
+	interface Props {
+		page?: number;
+	}
 
-	let selectedPet: undefined | string = undefined;
+	let { page = $bindable(1) }: Props = $props();
+
+	let pageInput = {
+		get value() {
+			return String(page);
+		},
+		set value(val: string) {
+			page = parseInt(val) || 1;
+		}
+	};
+
+	let selectedPet: undefined | string = $state(undefined);
 </script>
 
-<Template let:args>
-	<Table {data} {tableSpec} {...args} />
-</Template>
-
-<Story name="Default" source />
-
-<Story name="Table updates when data changes" source>
-	<Button on:click={randomlySelectRows}>Update</Button>
-	<Table data={dataSubset} {tableSpec} allowSorting filename="My Table" />
+<Story name="Default">
+	{#snippet template(args)}
+		<Table {...args} {tableSpec} {data} />
+	{/snippet}
 </Story>
 
-<Story name="Sortable Rows" source>
-	<Table {data} {tableSpec} allowSorting />
+<Story name="Table updates when data changes">
+	{#snippet template()}
+		<Button onclick={randomlySelectRows}>Update</Button>
+		<Table data={dataSubset} {tableSpec} allowSorting filename="My Table" />
+	{/snippet}
 </Story>
 
-<Story name="Sortable - but only on some columns" source>
-	<Table {data} tableSpec={tableSpecPartiallySortable} allowSorting />
+<Story name="Sortable Rows">
+	{#snippet template()}
+		<Table {data} {tableSpec} allowSorting />
+	{/snippet}
 </Story>
 
-<Story name="Title" source>
-	<Table
-		{data}
-		{tableSpec}
-		title="Some famous people, and a guess of their favourite pets"
-		subTitle="Note that these are only guesses!"
-	/>
+<Story name="Sortable - but only on some columns">
+	{#snippet template()}
+		<Table {data} tableSpec={tableSpecPartiallySortable} allowSorting />
+	{/snippet}
 </Story>
 
-<Story name="Content above table" source>
-	<Table
-		{data}
-		{tableSpec}
-		title="Some famous people, and a guess of their favourite pets"
-		subTitle="Note that these are only guesses!"
-	>
-		<div slot="beforeTable">This will appear before the table.</div>
-	</Table>
+<Story name="Title">
+	{#snippet template()}
+		<Table
+			{data}
+			{tableSpec}
+			title="Some famous people, and a guess of their favourite pets"
+			subTitle="Note that these are only guesses!"
+		/>
+	{/snippet}
 </Story>
 
-<Story name="Zebra Striping" source>
-	<Table {data} {tableSpec} zebraStripe />
+<Story name="Content above table">
+	{#snippet template()}
+		<Table
+			{data}
+			{tableSpec}
+			title="Some famous people, and a guess of their favourite pets"
+			subTitle="Note that these are only guesses!"
+		>
+			{#snippet beforeTable()}
+				<div>This will appear before the table.</div>
+			{/snippet}
+		</Table>
+	{/snippet}
 </Story>
 
-<Story name="Export buttons" source>
-	<Table {data} {tableSpec} dataDownloadButton imageDownloadButton />
+<Story name="Zebra Striping">
+	{#snippet template()}
+		<Table {data} {tableSpec} zebraStripe />
+	{/snippet}
 </Story>
 
-<Story name="Export buttons - relabel columns" source>
-	<Table
-		{data}
-		{tableSpec}
-		dataDownloadButton
-		imageDownloadButton
-		columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
-	/>
+<Story name="Export buttons">
+	{#snippet template()}
+		<Table {data} {tableSpec} dataDownloadButton imageDownloadButton />
+	{/snippet}
 </Story>
 
-<Story name="Row Grouping" source>
-	<Table {data} {tableSpec} allowRowGrouping />
+<Story name="Export buttons - relabel columns">
+	{#snippet template()}
+		<Table
+			{data}
+			{tableSpec}
+			dataDownloadButton
+			imageDownloadButton
+			columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
+		/>
+	{/snippet}
 </Story>
 
-<Story name="User selection of columns to show" source>
-	<Table {data} {tableSpec} allowColumnHiding />
+<Story name="Row Grouping">
+	{#snippet template()}
+		<Table {data} {tableSpec} allowRowGrouping />
+	{/snippet}
 </Story>
 
-<Story name="Paginated" source>
-	<Table {data} {tableSpec} paginate pageSize={5} />
+<Story name="User selection of columns to show">
+	{#snippet template()}
+		<Table {data} {tableSpec} allowColumnHiding />
+	{/snippet}
 </Story>
 
-<Story name="Paginated - page size control" source>
-	<Table {data} {tableSpec} paginate allowPageSizeChanges />
+<Story name="Paginated">
+	{#snippet template()}
+		<Table {data} {tableSpec} paginate pageSize={5} />
+	{/snippet}
 </Story>
 
-<Story name="Paginated - page externally controlled" source>
-	<div class="flex flex-col gap-4 max-w-2xl">
-		<div class="border-color-ui-border-secondary border p-2">
-			<span class="font-bold">Separate control</span>
-			<Input bind:value={page} label="Set page here"></Input>
+<Story name="Paginated - page size control">
+	{#snippet template()}
+		<Table {data} {tableSpec} paginate allowPageSizeChanges />
+	{/snippet}
+</Story>
+
+<Story name="Paginated - page externally controlled">
+	{#snippet template()}
+		<div class="flex max-w-2xl flex-col gap-4">
+			<div class="border border-color-ui-border-secondary p-2">
+				<span class="font-bold">Separate control</span>
+				<Input bind:value={pageInput.value} type="text" label="Set page here"></Input>
+			</div>
+
+			<div class="border border-color-ui-border-secondary p-2">
+				<span class="font-bold">Table component</span>
+
+				<Table {data} {tableSpec} paginate pageSize={5} bind:page />
+			</div>
 		</div>
-
-		<div class="border-color-ui-border-secondary border p-2">
-			<span class="font-bold">Table component</span>
-
-			<Table {data} {tableSpec} paginate pageSize={5} bind:page />
-		</div>
-	</div>
+	{/snippet}
 </Story>
 
 <!-- Example of a table that is wider than its parent and needs to be scrolled -->
 <Story name="Wide table with fixed width">
-	<Table
-		data={wideTableData}
-		tableSpec={wideTableSpec}
-		paginate
-		pageSize={5}
-		fixedTableWidth={1200}
-		bind:page
-	/>
+	{#snippet template()}
+		<Table
+			data={wideTableData}
+			tableSpec={wideTableSpec}
+			paginate
+			pageSize={5}
+			fixedTableWidth={1200}
+			bind:page
+		/>
+	{/snippet}
 </Story>
 <!-- TODO: add example of filtering -->
 
 <Story name="Externally implemented filtering">
-	<Select
-		label="Show only people whose favourite pet is"
-		bind:justValue={selectedPet}
-		items={[
-			{ value: 'dog', label: 'Dog' },
-			{ value: 'cat', label: 'Cat' },
-			{ value: 'bird', label: 'Bird' }
-		]}
-	/>
+	{#snippet template()}
+		<Select
+			label="Show only people whose favourite pet is"
+			bind:value={selectedPet}
+			options={[
+				{ value: 'dog', label: 'Dog' },
+				{ value: 'cat', label: 'Cat' },
+				{ value: 'bird', label: 'Bird' }
+			]}
+		/>
 
-	<Table
-		data={data.filter((d) => !selectedPet || d.pet === selectedPet)}
-		{tableSpec}
-		allowSorting
-		filename="My Table"
-	/>
+		<Table
+			data={data.filter((d) => !selectedPet || d.pet === selectedPet)}
+			{tableSpec}
+			allowSorting
+			filename="My Table"
+		/>
+	{/snippet}
 </Story>
 
 <!-- If required, the table header can be removed entirely-->
 <Story name="No header">
-	<Table {data} tableSpec={tableSpecNoHeader} fixedTableWidth={1200} bind:page />
+	{#snippet template()}
+		<Table {data} tableSpec={tableSpecNoHeader} fixedTableWidth={1200} bind:page />
+	{/snippet}
 </Story>
 
 <!-- tableSpecCustomHeaderColors -->
 <Story name="Coloured headers">
-	<Table {data} tableSpec={tableSpecCustomHeaderColors} fixedTableWidth={500} bind:page />
+	{#snippet template()}
+		<Table {data} tableSpec={tableSpecCustomHeaderColors} fixedTableWidth={500} bind:page />
+	{/snippet}
 </Story>

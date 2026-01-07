@@ -1,6 +1,11 @@
-<script>
+<script lang="ts">
 	import { getContext } from 'svelte';
 	import { pointOnFeature } from '@turf/turf';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const feature = getContext('mapMarkerFeature');
 	const maplibrePopup = getContext('mapMarkerMaplibrePopup');
@@ -11,4 +16,4 @@
 	}
 </script>
 
-<slot />
+{@render children?.()}

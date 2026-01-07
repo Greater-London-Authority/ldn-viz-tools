@@ -2,49 +2,33 @@
 	/**
 	 * The `Tick` component renders a table cell representing a numerical value as a tick;
 	 * the horizontal position of the tick encodes the value.
-	 * See also: [Dot](./?path=/docs/tables-components-encodings-dot--documentation)
+	 * See also: [Dot](./?path=/docs/tables-components-renderers-dot--documentation)
 	 * @component
 	 */
 
+	import type { TickProps } from '$lib/core/renderers/TickProps';
 	import { format } from 'd3-format';
+	import { getVal } from '../../getVal';
 
-	/**
-	 * Color of the tick, in any CSS format (color name, hex-string, `rgb()` notation, etc.).
-	 */
-	export let color = 'steelblue';
-
-	/**
-	 * If `true`, then the numerical value will be displayed as text beside the symbol.
-	 */
-	export let showValues = true;
-
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value: number;
-
-	/**
-	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
-	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
-	 */
-	export let formatString = '0.0f';
-	$: f = format(formatString);
-
-	export let extent: [number, number];
-
-	$: d = (value - extent[0]) / (extent[1] - extent[0]);
+	let {
+		color = 'steelblue',
+		showValues = true,
+		value,
+		formatString = '0.0f',
+		extent = [0, 1],
+		...rest
+	}: TickProps = $props();
 
 	const fPercentage = format('0.0%');
 
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let f = $derived(format(formatString));
+	let d = $derived((value - extent[0]) / (extent[1] - extent[0]));
 </script>
 
 <div
-	class="w-[3px] h-full top-0 transform -translate-x-1/2 z-[-1] relative"
+	class="relative top-0 z-[-1] h-full w-[3px] -translate-x-1/2 transform"
 	style="width: 3px"
-	style:background={color}
+	style:background={getVal(value, color)}
 	style:left={fPercentage(d)}
 >
 	{#if showValues}

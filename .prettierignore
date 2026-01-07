@@ -1,12 +1,16 @@
 .DS_Store
 .svelte-kit
 node_modules
-/build
-/package
+**/build
+**/package
+**/dist
 .env
 .env.*
 !.env.example
 vite.config.js*
+
+**/*.d.ts
+**/.velite
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml

@@ -1,5 +1,10 @@
+<script>
+	/** @type {{ [key: string]: any }} */
+	let { ...rest } = $props();
+</script>
+
 <!-- based on IcoMoon make group icon -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" {...$$restProps} fill="currentColor">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" {...rest} fill="currentColor">
 	<path
 		fill="#000000"
 		d="M5 2h-2c-0.55 0-1 0.45-1 1v2c0 0.55 0.45 1 1 1h2c0.55 0 1-0.45 1-1v-2c0-0.55-0.45-1-1-1z"

@@ -1,24 +1,4 @@
-<script context="module">
-	/**
-	 * The `<AnalyticsAndCookieConsent>` component sets up Google Analytics and uses [Civic Cookie Control](https://www.civicuk.com/cookie-control/) to get consent for the use of cookies.
-	 * As the cookie consent applies across the *.london.gov.uk domain, the cookie consent sidebar is styled to match the main london.gov.uk site rather than the CIU's apps.
-	 *
-	 * Define the API key and AppName before using this component (replace `\/` with `/` in the closing `<script>` tag):
-	 *
-	 * ```js
-	 * <svelte:head>
-	 * <script>
-	 *     window.ldnVizCivicApiKey = 'civic-api-key';
-	 *     window.ldnVizCivicAppName = 'name-used-for-logging';
-	 * <\/script>
-	 * </svelte:head>
-	 *
-	 * <AnalyticsAndCookieConsent />
-	 *```
-	 *
-	 * @component
-	 */
-
+<script module>
 	/*
 		The majority of this Civic config is replicated across london.gov.uk.
 		Please check any needed changes with the Digital team before applying
@@ -251,7 +231,7 @@
 		height="0"
 		width="0"
 		style="display:none;visibility:hidden"
-	/>
+	></iframe>
 </noscript>
 
 <style global>

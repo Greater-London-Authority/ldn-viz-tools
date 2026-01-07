@@ -1,10 +1,13 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import { scaleBand, scaleOrdinal } from 'd3-scale';
 	import CategoricalTick from './CategoricalTick.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/CategoricalTick',
 		component: CategoricalTick,
+		tags: ['autodocs'],
 
 		argTypes: {
 			value: {
@@ -14,7 +17,7 @@
 		},
 		args: {
 			value: 0.5,
-			colorScale: scaleOrdinal()
+			color: scaleOrdinal()
 				.domain(['a', 'b', 'c', 'd'])
 				.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']),
 
@@ -22,24 +25,22 @@
 
 			posScale: scaleBand().range([0, 1]).domain(['a', 'b', 'c', 'd'])
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
+<Story name="Default">
+	{#snippet template(args)}
+		<CategoricalTick {...args} value={args.value} color={args.color} posScale={args.posScale} />
+	{/snippet}
+</Story>
 
-<Template let:args>
-	<CategoricalTick {...args} />
-</Template>
-
-<Story name="Default" source />
-
-<Story name="Multiple" source let:args>
-	<div class="w-36 flex flex-col">
-		<CategoricalTick {...args} value="a" />
-		<CategoricalTick {...args} value="b" />
-		<CategoricalTick {...args} value="c" />
-		<CategoricalTick {...args} value="d" />
-	</div>
+<Story name="Multiple">
+	{#snippet template(args)}
+		<div class="flex w-36 flex-col">
+			<CategoricalTick {...args} value="a" color={args.color} posScale={args.posScale} />
+			<CategoricalTick {...args} value="b" color={args.color} posScale={args.posScale} />
+			<CategoricalTick {...args} value="c" color={args.color} posScale={args.posScale} />
+			<CategoricalTick {...args} value="d" color={args.color} posScale={args.posScale} />
+		</div>
+	{/snippet}
 </Story>

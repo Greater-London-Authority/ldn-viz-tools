@@ -1,44 +1,41 @@
-<script context="module">
-	export const meta = {
+<script module lang="ts">
+	import { ObservablePlot, Plot } from '@ldn-viz/charts';
+	import { theme } from '@ldn-viz/ui';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { format } from 'd3-format';
+	import { monthlyData } from '../../../../charts/src/data/demoData';
+
+	let { Story } = defineMeta({
 		title: 'Ui/Example Layouts/Typography',
 		parameters: {
 			layout: 'fullscreen'
 		},
 		tags: ['!autodocs']
-	};
-</script>
-
-<script lang="ts">
-	import { Story } from '@storybook/addon-svelte-csf';
-
-	import { ObservablePlot, Plot } from '@ldn-viz/charts';
-	import { format } from 'd3-format';
-	import demoMonthlyTimeseriesLong from '../../../../charts/src/data/demoMonthlyTimeseriesLong.json';
-	import { currentTheme } from '../theme/themeStore';
-	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
+	});
 
 	// Spec and data for single line example (default)
-	$: singleLineData = demoMonthlyTimeseriesLong.filter((d) => d.Variable == 'Variable A');
-	$: singleLineSpec = {
+	let singleLineData = monthlyData.filter((d) => d.Variable == 'Variable A');
+
+	let singleLineSpec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: [
 			Plot.gridX({ interval: '2 years' }),
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', interval: '1 year' }),
-			Plot.axisY({ label: '', tickFormat: (d) => '£' + formatHigh(d) }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
 			Plot.ruleY([0]),
 			Plot.line(singleLineData, {
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
-				stroke: $currentTheme.color.data.primary,
+				stroke: theme.currentTheme.color.data.primary,
 				tip: true
 			})
 		]
-	};
+	});
 </script>
 
-<Story name="Typography" id="type">
+<Story name="Typography">
 	<div class="prose responsive p-4">
 		<h1>Prose Headline</h1>
 		<h2>Prose Large Title</h2>
@@ -69,8 +66,8 @@
 		<p>We get lots of complaints about it actually, with people regularly asking us things like:</p>
 		<blockquote>
 			<p>
-				Why is Tailwind removing the default styles on my <code>h1</code> elements? How do I disable
-				this? What do you mean I lose all the other base styles too?
+				Why is Tailwind removing the default styles on my <code>h1</code> elements? How do I disable this?
+				What do you mean I lose all the other base styles too?
 			</p>
 		</blockquote>
 		<p>
@@ -337,8 +334,8 @@
 			Another thing I've done in the past is put a <code>code</code> tag inside of a link, like if I
 			wanted to tell you about the
 			<a href="https://github.com/tailwindcss/docs"><code>tailwindcss/docs</code></a> repository. I don't
-			love that there is an underline below the backticks but it is absolutely not worth the madness
-			it would require to avoid it.
+			love that there is an underline below the backticks but it is absolutely not worth the madness it
+			would require to avoid it.
 		</p>
 		<h4>We haven't used an <code>h4</code> yet</h4>
 		<p>

@@ -10,61 +10,62 @@
 	 * @component
 	 */
 
-	/**
-	 * "The title of your object as it should appear within the graph, e.g., 'The Rock'."
-	 */
-	export let title: string;
-
-	/**
-	 * "A one to two sentence description of your object."
-	 */
-	export let description: string;
-
-	/**
-	 * "The canonical URL of your object that will be used as its permanent ID in the graph". Should include the scheme (`http://` or `https://`).
-	 */
-	export let url: string; // Must be full URL with scheme
-
-	if (!title || !description || !url) {
-		// Minimum requirement for SEO.
-		throw new Error('Metadata component is missing either a title, description, or full URL');
+	interface Props {
+		/**
+		 * "The title of your object as it should appear within the graph, e.g., 'The Rock'."
+		 */
+		title: string;
+		/**
+		 * "A one to two sentence description of your object."
+		 */
+		description: string;
+		/**
+		 * "The canonical URL of your object that will be used as its permanent ID in the graph". Should include the scheme (`http://` or `https://`).
+		 */
+		url: string; // Must be full URL with scheme
+		/**
+		 * URL of the favicon. By default, assumes there is a favicon.ico file in the static folder.
+		 */
+		favicon?: any;
+		/**
+		 * The object type - see [this documentation](https://ogp.me/#types)
+		 */
+		type?: string;
+		/**
+		 * "If your object is part of a larger website, the name which should be displayed for the overall site"
+		 */
+		site?: string;
+		/**
+		 * "An image URL which should represent your object within the graph".
+		 * If an `image` is provided, then `imageAlt` should be too.
+		 */
+		image?: string;
+		/**
+		 * "A description of what is in the image (not a caption)."
+		 */
+		imageAlt?: string;
+		/**
+		 * Image width in pixels. Recommended value is 1200.
+		 */
+		imageWidth?: number;
+		/**
+		 * Image height in pixels. Recommended value is 630.
+		 */
+		imageHeight?: number;
 	}
 
-	/**
-	 * URL of the favicon. By default, assumes there is a favicon.ico file in the static folder.
-	 */
-	export let favicon = url.replace(/\/?$/, '/favicon.ico');
-
-	/**
-	 * The object type - see [this documentation](https://ogp.me/#types)
-	 */
-	export let type = 'website';
-
-	/**
-	 * "If your object is part of a larger website, the name which should be displayed for the overall site"
-	 */
-	export let site = 'GLA City Intelligence Unit';
-
-	/**
-	 * "An image URL which should represent your object within the graph".
-	 * If an `image` is provided, then `imageAlt` should be too.
-	 */
-	export let image = '';
-
-	/**
-	 * "A description of what is in the image (not a caption)."
-	 */
-	export let imageAlt = '';
-
-	/**
-	 * Image width in pixels. Recommended value is 1200.
-	 */
-	export let imageWidth = 1200;
-
-	/**
-	 * Image height in pixels. Recommended value is 630.
-	 */
-	export let imageHeight = 630;
+	let {
+		title,
+		description,
+		url,
+		favicon = url?.replace(/\/?$/, '/favicon.ico'),
+		type = 'website',
+		site = 'GLA City Intelligence Unit',
+		image = '',
+		imageAlt = '',
+		imageWidth = 1200,
+		imageHeight = 630
+	}: Props = $props();
 </script>
 
 <svelte:head>

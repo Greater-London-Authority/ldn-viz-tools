@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `<MapMarkerStyledContainer>` component is a wrapping container for use
 	 * within marker components. It provides standardised styling that is
@@ -6,17 +6,22 @@
 	 * @component
 	 */
 
-	/**
-	 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
-	 */
-	export let noTip = false;
+	interface Props {
+		/**
+		 * If `true`, then a styled tip/arrow is not drawn at the bottom of the container.
+		 */
+		noTip?: boolean;
+		/**
+		 * If `true`, then the standard container padding is not applied.
+		 */
+		noPad?: boolean;
+		children?: import('svelte').Snippet;
+		[key: string]: any;
+	}
 
-	/**
-	 * If `true`, then the standard container padding is not applied.
-	 */
-	export let noPad = false;
+	let { noTip = false, noPad = false, children, ...rest }: Props = $props();
 
-	let container;
+	let container = $state();
 
 	const preventZoom = (e) => {
 		const hasVerticalScroll = container.scrollHeight > container.clientHeight;
@@ -25,9 +30,11 @@
 		}
 	};
 
-	let classes = `shadow-lg border border-color-ui-border-secondary absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container-level-0 overflow-y-auto`;
-	classes += ' ' + ($$restProps.class || '');
-	delete $$restProps.class;
+	let classes = $state(
+		`shadow-lg border border-color-ui-border-secondary absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container-level-0 overflow-y-auto`
+	);
+	classes += ' ' + (rest.class || '');
+	delete rest.class;
 </script>
 
 <!--
@@ -37,24 +44,24 @@
 	The stopImmediatePropagation on mousemove prevents tooltips below this
 	marker from being shown when mouseover.	
 -->
-<div class="relative text-color-text-primary text-sm">
+<div class="relative text-sm text-color-text-primary">
 	<div
 		role="tooltip"
 		bind:this={container}
-		on:wheel={preventZoom}
-		on:touchmove={preventZoom}
-		on:mousemove|stopImmediatePropagation={() => {}}
+		onwheel={preventZoom}
+		ontouchmove={preventZoom}
+		onmousemove={(ev) => ev.stopImmediatePropagation()}
 		class={classes}
 		class:p-4={!noPad}
-		{...$$restProps}
+		{...rest}
 	>
-		<slot />
+		{@render children?.()}
 	</div>
 	{#if !noTip}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 150 100"
-			class="absolute bottom-0 left-1/2 w-8 h-4 transform -translate-x-1/2 stroke-color-ui-border-secondary fill-color-container-level-0"
+			class="absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform fill-color-container-level-0 stroke-color-ui-border-secondary"
 		>
 			<line
 				class="stroke-color-ui-border-secondary"
@@ -76,16 +83,3 @@
 		</svg>
 	{/if}
 </div>
-
-<style>
-	:global(.maplibregl-popup > *) {
-		pointer-events: none;
-		border-radius: 0;
-		margin: 0;
-		padding: 0;
-	}
-
-	:global(.maplibregl-popup-tip) {
-		display: none;
-	}
-</style>

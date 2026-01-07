@@ -4,6 +4,10 @@
 	 * `<MapControlGeocoder>` and `<MapControlGeolocator>` components to create
 	 * single and easy to use map search control. It is typically placed in the
 	 * top left hand corner.
+	 *
+	 * The selected location is indicated by a MapLibre layer of type `symbol`,
+	 * with id `gla/context/location-search/map-point-symbol`, created by `initMapLayer`.
+	 *
 	 * @component
 	 */
 
@@ -17,51 +21,59 @@
 		OnGeolocationSearchError,
 		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
-	import type { MapStore } from './map-types';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore: MapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 
-	/**
-	 * An adapter for sourcing location suggestions. All data fetching and
-	 * caching is delegated to the adapter.
-	 */
-	export let adapter: GeocoderAdapter;
+	interface Props {
+		/**
+		 * An adapter for sourcing location suggestions. All data fetching and
+		 * caching is delegated to the adapter.
+		 */
+		adapter: GeocoderAdapter;
+		/**
+		 * Depending on which search feature the user interacted with, called when a
+		 * user clicks a geocoder suggestion or when the browser geolocates the
+		 * user's location.
+		 */
+		onLocationFound?: undefined | OnGeolocationSearchResult;
+		/**
+		 * Called when the adapter rejects a promise for a geocoder suggestion search
+		 * or an error occurs during geolocation.
+		 */
+		onSearchError?: undefined | OnGeolocationSearchError;
+		/**
+		 * Called when the user clears the search box.
+		 */
+		onSearchClear?: any;
+		/**
+		 * Passed to the suggestions dropdown to limit the number of suggestions
+		 * shown at once.
+		 */
+		maxSuggestions?: number;
+		/**
+		 * Hides the geolocator if true.
+		 */
+		hideGeolocator?: boolean;
+		/**
+		 * Placeholder text to be displayed in the input element.
+		 */
+		placeholder?: string;
+		[key: string]: any;
+	}
 
-	/**
-	 * Depending on which search feature the user interacted with, called when a
-	 * user clicks a geocoder suggestion or when the browser geolocates the
-	 * user's location.
-	 */
-	export let onLocationFound: undefined | OnGeolocationSearchResult = undefined;
+	let {
+		adapter,
+		onLocationFound = undefined,
+		onSearchError = undefined,
+		onSearchClear = () => {},
+		maxSuggestions = 5,
+		hideGeolocator = false,
+		placeholder = 'Location search',
+		...rest
+	}: Props = $props();
 
-	/**
-	 * Called when the adapter rejects a promise for a geocoder suggestion search
-	 * or an error occurs during geolocation.
-	 */
-	export let onSearchError: undefined | OnGeolocationSearchError = undefined;
-
-	/**
-	 * Called when the user clears the search box.
-	 */
-	export let onSearchClear = () => {};
-
-	/**
-	 * Passed to the suggestions dropdown to limit the number of suggestions
-	 * shown at once.
-	 */
-	export let maxSuggestions: number = 5;
-
-	/**
-	 * Hides the geolocator if true.
-	 */
-	export let hideGeolocator = false;
-
-	/**
-	 * Placeholder text to be dislayed in the input element.
-	 */
-	export let placeholder = 'Location search';
-
-	let limitWidthClass = '';
+	let limitWidthClass = $state('');
 
 	if (hideGeolocator) {
 		// 100% - left margin - right margin
@@ -71,10 +83,14 @@
 		limitWidthClass = 'max-w-[calc(100dvw-2.5rem-1.5rem-1.5rem)]';
 	}
 
-	$: initMapLayer($mapStore);
+	$effect(() => {
+		if ($mapStore) {
+			initMapLayer($mapStore);
+		}
+	});
 </script>
 
-<div class="flex shadow" {...$$restProps}>
+<div class="flex shadow" {...rest}>
 	<MapControlGeocoder
 		{adapter}
 		onLocationSelected={onLocationFound}

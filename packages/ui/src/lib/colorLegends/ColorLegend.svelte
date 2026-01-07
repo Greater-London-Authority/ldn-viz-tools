@@ -18,86 +18,93 @@
 	import { interpolate, interpolateRound, quantize } from 'd3-interpolate';
 	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { select } from 'd3-selection';
+	import { theme } from '../theme/themeState.svelte';
 
-	/**
-	 * A d3 color scale object
-	 */
-	export let color: any;
+	interface Props {
+		/**
+		 * A d3 color scale object
+		 */
+		color: any;
+		/**
+		 * Title to display above the colors.
+		 */
+		title?: string;
+		/**
+		 * Height of the axis ticks (pixels).
+		 */
+		tickSize?: number;
+		/**
+		 * Width of the legend (pixels).
+		 */
+		width?: number;
+		/**
+		 * Height of the legend (pixels).
+		 */
+		height?: any;
+		/**
+		 * Top margin size (pixels).
+		 */
+		marginTop?: number;
+		/**
+		 * Right margin size (pixels).
+		 */
+		marginRight?: number;
+		/**
+		 * Bottom margin size (pixels).
+		 */
+		marginBottom?: any;
+		/**
+		 * Left margin size (pixels).
+		 */
+		marginLeft?: number;
+		/**
+		 * Suggested number of ticks (the number of ticks is not guaranteed to be the same as this)
+		 */
+		ticks?: any;
+		/**
+		 * Format string to apply to tick labels (see the [`d3-format` docs](https://d3js.org/d3-format#locale_format))
+		 */
+		tickFormat?: any;
+		tickValues?: undefined | number[];
+		/**
+		 * Value to highlight on the scale with arrow.
+		 */
+		highlightedValue?: undefined | string | number;
+		/**
+		 * Label displayed below legend, on the left.
+		 * Intended to describe the meaning of values at this end of the scale (e.g. "Younger" or "Less deprivation")
+		 */
+		leftLabel?: string;
+		/**
+		 * Label displayed below legend, on the right.
+		 * Intended to describe the meaning of values at this end of the scale (e.g. "Older" or "More deprivation")
+		 */
+		rightLabel?: string;
+		/**
+		 * If `true`, then the legend will be reversed, so that it is drawn from left to right.
+		 * Note that you will need to swap the value sof the `leftLabel` and `rightLabel` props yourself.
+		 */
+		reverse?: boolean;
+	}
 
-	/**
-	 * Title to display above the colors.
-	 */
-	export let title = '';
-
-	/**
-	 * Height of the axis ticks (pixels).
-	 */
-	export let tickSize = 6;
-
-	/**
-	 * Width of the legend (pixels).
-	 */
-	export let width = 320;
-
-	/**
-	 * Height of the legend (pixels).
-	 */
-	export let height = 44 + tickSize;
-
-	/**
-	 * Top margin size (pixels).
-	 */
-	export let marginTop = 18;
-
-	/**
-	 * Right margin size (pixels).
-	 */
-	export let marginRight = 0;
-
-	/**
-	 * Bottom margin size (pixels).
-	 */
-	export let marginBottom = 16 + tickSize;
-
-	/**
-	 * Left margin size (pixels).
-	 */
-	export let marginLeft = 0;
-
-	/**
-	 * Suggested number of ticks (the number of ticks is not guaranteed to be the same as this)
-	 */
-	export let ticks = width / 64;
-
-	/**
-	 * Format string to apply to tick labels (see the [`d3-format` docs](https://d3js.org/d3-format#locale_format))
-	 */
-	export let tickFormat: any = undefined;
-
-	export let tickValues: undefined | number[] = undefined;
-
-	/**
-	 * Value to highlight on the scale with arrow.
-	 */
-	export let highlightedValue: undefined | string | number = undefined;
-
-	/**
-	 * Label displayed below legend, on the left.
-	 * Intended to describe the meaning of values at this end of the scale (e.g. "Younger" or "Less deprivation")
-	 */
-	export let leftLabel = '';
-
-	/**
-	 * Label displayed below legend, on the right.
-	 * Intended to describe the meaning of values at this end of the scale (e.g. "Older" or "More deprivation")
-	 */
-	export let rightLabel = '';
-
-	/**
-	 * If `true`, then the legend will be reversed, so that it is drawn from left to right.
-	 * Note that you will need to swap the value sof the `leftLabel` and `rightLabel` props yourself.
-	 */
-	export let reverse = false;
+	let {
+		color,
+		title = '',
+		tickSize = 6,
+		width = 320,
+		height = 44 + tickSize,
+		marginTop = 18,
+		marginRight = 0,
+		marginBottom = 16 + tickSize,
+		marginLeft = 0,
+		ticks = width / 64,
+		tickFormat = undefined,
+		tickValues = $bindable(undefined),
+		highlightedValue = undefined,
+		leftLabel = '',
+		rightLabel = '',
+		reverse = false
+	}: Props = $props();
 
 	const ramp = (color: any, n = 256) => {
 		const canvas = document.createElement('canvas');
@@ -115,12 +122,19 @@
 		return canvas.toDataURL();
 	};
 
-	let x: any;
-	let n: number;
-	let tickF: (n: any) => string | string | null | undefined;
-	let tickAdjust = (g: any) =>
-		g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
-	$: {
+	let axisState = $derived.by(() => {
+		let x;
+		let n = 0;
+		let tv = tickValues;
+
+		let tickF: string | ((n: any) => string | null | undefined) | undefined = undefined;
+
+		let tickAdjust = (g: any) =>
+			g
+				.selectAll('.tick line')
+				.attr('y1', marginTop + marginBottom - height)
+				.attr('stroke', theme.tokenNameToValue('text.secondary'));
+
 		if (color.interpolate) {
 			// continuous scale
 			n = Math.min(color.domain().length, color.range().length);
@@ -144,9 +158,9 @@
 
 			// scaleSequentialQuantile doesn't implement ticks or tickFormat.
 			if (!x.ticks) {
-				if (tickValues === undefined) {
+				if (tv === undefined) {
 					n = Math.round(ticks + 1);
-					tickValues = range(n).map((i) => quantile(color.domain(), i / (n - 1)));
+					tv = range(n).map((i) => quantile(color.domain(), i / (n - 1))!);
 				}
 				if (typeof tickFormat !== 'function') {
 					tickF = format(tickFormat === undefined ? ',f' : tickFormat);
@@ -172,7 +186,7 @@
 				.domain([-1, color.range().length - 1])
 				.rangeRound([marginLeft, width - marginRight]);
 
-			tickValues = range(thresholds.length);
+			tv = range(thresholds.length);
 			tickF = (i: string | number) => thresholdFormat(thresholds[i]);
 		} else {
 			// ordinal scale
@@ -198,35 +212,40 @@
 		if (tickFormat && !tickF) {
 			tickF = tickFormat;
 		}
-	}
 
-	let ticksRef: SVGElement;
-	$: {
+		return { x, n, tickF, tickAdjust, tickValues: tv };
+	});
+
+	let ticksRef: SVGElement | undefined = $state();
+
+	const updateLegend = (
+		axisState: { x: any; n?: number; tickF: any; tickAdjust: any; tickValues: any },
+		ticksRef?: SVGElement
+	) => {
 		if (ticksRef) {
-			const bottomAxis = axisBottom(x)
-				.ticks(ticks, typeof tickF === 'string' ? tickF : undefined)
-				.tickFormat(typeof tickF === 'function' ? tickF : undefined)
+			const bottomAxis = axisBottom(axisState.x)
+				.ticks(ticks, typeof axisState.tickF === 'string' ? axisState.tickF : undefined)
 				.tickSize(tickSize)
-				.tickValues(tickValues);
+				.tickValues(axisState.tickValues!);
+
+			if (typeof axisState.tickF === 'function') {
+				const formatter = axisState.tickF;
+				bottomAxis.tickFormat((d, i) => {
+					const value = formatter(d);
+					return value ?? '';
+				});
+			}
 
 			select(ticksRef)
 				.call(bottomAxis as any, 0)
-				.call(tickAdjust)
-				.call((g: any) => g.select('.domain').remove())
-				.call((g: any) =>
-					g
-						.append('text')
-						.attr('x', marginLeft)
-						.attr('y', marginTop + marginBottom - height - 6)
-						.attr('fill', 'currentColor')
-						.attr('text-anchor', 'start')
-						.attr('font-weight', '500')
-						.attr('font-size', '12px')
-						.attr('class', 'title')
-						.text(title)
-				);
+				.call(axisState.tickAdjust)
+				.call((g: any) => g.select('.domain').remove());
 		}
-	}
+	};
+
+	$effect(() => {
+		updateLegend(axisState, ticksRef);
+	});
 </script>
 
 <svg
@@ -246,7 +265,7 @@
 			width={width - marginLeft - marginRight}
 			height={height - marginTop - marginBottom}
 			preserveAspectRatio="none"
-			xlink:href={ramp(color.copy().domain(quantize(interpolate(0, 1), n)))}
+			xlink:href={ramp(color.copy().domain(quantize(interpolate(0, 1), axisState.n)))}
 		/>
 	{:else if color.interpolator}
 		<!-- sequential -->
@@ -264,9 +283,11 @@
 		<g>
 			{#each color.range() as d, i}
 				<rect
-					x={reverse ? x(i) : x(i - 1)}
+					x={reverse ? axisState.x(i) : axisState.x(i - 1)}
 					y={marginTop}
-					width={reverse ? x(i - 1) - x(i) : x(i) - x(i - 1)}
+					width={reverse
+						? axisState.x(i - 1) - axisState.x(i)
+						: axisState.x(i) - axisState.x(i - 1)}
 					height={height - marginTop - marginBottom}
 					fill={d}
 				/>
@@ -277,15 +298,24 @@
 		<g>
 			{#each color.domain() as d}
 				<rect
-					x={x(d)}
+					x={axisState.x(d)}
 					y={marginTop}
-					width={Math.max(0, x.bandwidth() - 1)}
+					width={Math.max(0, axisState.x.bandwidth() - 1)}
 					height={height - marginTop - marginBottom}
 					fill={color(d)}
 				/>
 			{/each}
 		</g>
 	{/if}
+
+	<text
+		x={marginLeft}
+		y={marginTop - 6}
+		font-size="10px"
+		text-anchor="start"
+		font-weight="bold"
+		fill="currentColor">{title}</text
+	>
 
 	<g id="ticks" bind:this={ticksRef} transform={`translate(0,${height - marginBottom})`} />
 
@@ -298,7 +328,9 @@
 	</text>
 
 	{#if highlightedValue}
-		<g transform={`translate(${x(highlightedValue)}, ${height - marginBottom + 10} ) scale(10) `}>
+		<g
+			transform={`translate(${axisState.x(highlightedValue)}, ${height - marginBottom + 10} ) scale(10) `}
+		>
 			<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="black" />
 		</g>
 	{/if}

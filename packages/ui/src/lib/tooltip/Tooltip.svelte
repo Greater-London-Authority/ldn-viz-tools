@@ -1,69 +1,44 @@
 <script lang="ts">
-	/**
-	 * The `<Tooltip>` component renders a tooltip target, and displays a message in a tooltip when a user focuses it (mouseover and keyboard).
-	 *
-	 * **Alternatives**: for longer messages, or messages that must persist until being dismissed, consider using a [Modal](./?path=/docs/ui-components-overlays-modal--documentation)
-	 * or [Popover](./?path=/docs/uicomponents-overlays-popover--documentation).
-	 * @component
-	 */
+	import { Tooltip } from 'bits-ui';
+	import type { Snippet } from 'svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 
-	import { createTooltip } from '@melt-ui/svelte';
-	import { setContext } from 'svelte';
-	import { fade } from 'svelte/transition';
+	type Props = Tooltip.RootProps & {
+		hintLabel?: string;
+		trigger?: Snippet<[Record<string, any>]>;
+	};
 
-	/**
-	 * Options for position of tooltip
-	 */
-	type PlacementOptions =
-		| 'top'
-		| 'top-start'
-		| 'top-end'
-		| 'right'
-		| 'right-start'
-		| 'right-end'
-		| 'bottom'
-		| 'bottom-start'
-		| 'bottom-end'
-		| 'left'
-		| 'left-start'
-		| 'left-end';
-
-	// TODO: Check whether placement updates responsively
-	/**
-	 * Determines the placement of the tooltip, relative to Trigger
-	 */
-	export let placement: PlacementOptions = 'top';
-
-	const {
-		elements: { trigger, content, arrow },
-		states: { open }
-	} = createTooltip({
-		positioning: { placement },
-		openDelay: 0,
-		closeDelay: 0,
-		closeOnPointerDown: false,
-		disableHoverableContent: true
-	});
-
-	/**
-	 * Sets trigger actions and attributes (ARIA) for access by `Trigger` component
-	 */
-	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
+	let { hintLabel = 'Hover for tooltip', trigger, children }: Props = $props();
 </script>
 
-<!-- The trigger that opens the tooltip, usually `Trigger` button but allows customisation -->
-<slot name="trigger" />
+{#snippet tooltipTrigger()}
+	{#if trigger}
+		<Tooltip.Trigger>
+			{#snippet child({ props })}
+				{@render trigger({ ...props })}
+			{/snippet}
+		</Tooltip.Trigger>
+	{:else}
+		<Tooltip.Trigger>
+			{#snippet child({ props })}
+				<Trigger {...props} {hintLabel} />
+			{/snippet}
+		</Tooltip.Trigger>
+	{/if}
+{/snippet}
 
-{#if $open}
-	<div
-		{...$content}
-		use:content
-		transition:fade={{ duration: 100 }}
-		class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-0 shadow-lg z-50 border border-color-ui-border-secondary"
-	>
-		<!-- The text that will be displayed in the tooltip -->
-		<slot />
+<Tooltip.Provider delayDuration={100}>
+	<Tooltip.Root disableCloseOnTriggerClick disableHoverableContent>
+		{@render tooltipTrigger()}
 
-		<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
-	</div>
-{/if}
+		<Tooltip.Portal>
+			<Tooltip.Content
+				class="z-50 max-w-[200px] border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-sm shadow-lg"
+			>
+				{@render children?.()}
+
+				<Tooltip.Arrow class="text-color-ui-border-secondary" />
+			</Tooltip.Content>
+		</Tooltip.Portal>
+	</Tooltip.Root>
+</Tooltip.Provider>

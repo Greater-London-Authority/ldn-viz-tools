@@ -4,22 +4,12 @@
 	 * See also [ColoredCell](./?path=/docs/tables-components-renderers-coloredcell--documentation).
 	 * @component
 	 */
-
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value: number;
-
-	/**
-	 * A D3 color scale used to determine cell background color.
-	 */
-	export let colorScale;
+	import type { ColorAndLabelProps } from '$lib/core/renderers/ColorAndLabelProps';
+	import { getVal } from '../../getVal';
+	let { value, color = 'lightgrey' }: ColorAndLabelProps = $props();
 </script>
 
-<div class="flex items-center h-full">
-	<div
-		class="flex-none w-4 h-4 mr-1"
-		style={`background-color: ${colorScale ? colorScale(value) : 'lightgrey'};`}
-	></div>
-	<div class="w-0 flex-auto overflow-hidden truncate items-center">{value}</div>
+<div class="flex h-full items-center">
+	<div class="mr-1 h-4 w-4 flex-none" style={`background-color: ${getVal(value, color)};`}></div>
+	<div class="w-0 flex-auto items-center overflow-hidden truncate">{value}</div>
 </div>

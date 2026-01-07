@@ -1,24 +1,5 @@
-<script lang="ts" context="module">
-	export type FormatFunction = (
-		value: string,
-		details?: {
-			name?: string;
-			type?: string;
-			disabled?: boolean;
-		}
-	) => string | number;
-
-	export type InputMode =
-		| 'none'
-		| 'search'
-		| 'text'
-		| 'tel'
-		| 'url'
-		| 'email'
-		| 'numeric'
-		| 'decimal'
-		| null
-		| undefined;
+<script lang="ts" module>
+	import type { FormatFunction } from '$lib/input/types';
 
 	export const trimInput: FormatFunction = (value) => value.trim();
 </script>
@@ -27,87 +8,29 @@
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
 	import InputWrapper from './InputWrapper.svelte';
+	import { type InputAsNonTextArea, type InputAsTextArea, type InputComponentProps } from './types';
 
-	/**
-	 * The `type` of the `<input>` element (see [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)).
-	 *
-	 * Additionally, passing `textarea` will render a `<textarea>` instead of an `<input>`.
-	 */
-	export let type = 'text';
+	let {
+		type = 'text',
+		inputmode = undefined,
+		id = randomId(),
+		label,
+		format = trimInput,
+		description = '',
+		error = '',
+		value = $bindable(''),
+		disabled = false,
+		descriptionAlignment = 'left',
+		hint,
+		hintLabel,
+		optional,
+		customOverlay,
+		placeholder,
+		name = id,
+		...restProps
+	}: InputComponentProps = $props();
 
-	/**
-	 * The `inputmode` of the `<input>` element, which provides a hint about what type of virtual keyboard to display.
-	 */
-	export let inputmode: InputMode = undefined;
-
-	/**
-	 * The `id` of the `<input>` element: defaults to a randomly-generated value.
-	 */
-	export let id = randomId();
-
-	/**
-	 * Text displayed above the `<input>` element.
-	 */
-	export let label = '';
-
-	/**
-	 * The `name` of the `<input>` element. Defaults to same value as `id`. Optional, unless value of the input needs to be included with a form submission.
-	 */
-	export let name = id;
-
-	/**
-	 * Text that appears below the `<input>` element, in smaller font than the `label`.
-	 */
-	export let description = '';
-
-	/**
-	 * Text that appears within the `<input>` element when no value is present.
-	 */
-	export let placeholder = '';
-
-	/**
-	 * Determines which edge of the `<input>` the description is aligned with.
-	 */
-	export let descriptionAlignment: 'left' | 'right' = 'left';
-
-	/**
-	 * Help text to be displayed in tooltip
-	 */
-	export let hint = '';
-
-	/**
-	 * Text to be displayed next to icon in tooltip trigger.
-	 */
-	export let hintLabel: undefined | string = undefined;
-
-	/**
-	 * If `false`, then `required` attribute is applied to `<input>`.
-	 */
-	export let optional = false;
-
-	/**
-	 * If `true`, then user is prevented from interacting with the `<input>`.
-	 */
-	export let disabled = false;
-
-	/**
-	 * Function that will be applied to transform the value when the input element loses focus.
-	 * By default, it trims leading and trailing whitespace (but does nothing if `type` is `password`).
-	 */
-	export let format: null | FormatFunction = trimInput;
-
-	/**
-	 * The value of the input. Can be bound to and externally modified.
-	 */
-	export let value = '';
-
-	/**
-	 * Message to be displayed below `<input>` in red text (replacing description).
-	 * If set, then the border of the `<input>` is also red.
-	 */
-	export let error = '';
-
-	let inputType = type;
+	let inputType = $derived(type);
 
 	if (type === 'number') {
 		// Don't use type number. Advised by both MDN and GDS.
@@ -126,13 +49,13 @@
 	 * Only generate `descriptionId` and/or `errorId` when `description` and/or `error` exist.
 	 * `descriptionId` is static but `errorId` is reactive as error state could change.
 	 */
-	const descriptionId = description ? `${id}-description` : undefined;
-	$: errorId = error ? `${id}-error` : undefined;
+	let errorId = $derived(error ? `${id}-error` : undefined);
+	let descriptionId = $derived(description ? `${id}-description` : undefined);
 
 	// if error exists, description won't render so `aria-describedby` should equal `undefined`.
-	$: descriptionIsVisible = !error;
+	let descriptionIsVisible = $derived(!error);
 
-	let input: HTMLInputElement | HTMLTextAreaElement;
+	let input: HTMLInputElement | HTMLTextAreaElement | undefined = $state(undefined);
 
 	// Svelte does not allow bind:type and bind:value simultaneously so this
 	// function acts as the input change handler.
@@ -148,25 +71,31 @@
 		})}`;
 
 		// Protect from cyclic reactivity.
-		if (input.value !== value) {
+		if (input && input.value !== value) {
 			input.value = value;
 		}
 	};
 
 	const updateValue = () => {
 		// input.value will be an empty string if the value is invalid.
-		value = input.value;
+		value = input ? input.value : '';
 	};
 
-	$: inputClasses = classNames(
-		'm-0',
-		error ? 'border-color-input-border-error' : '',
-		disabled
-			? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
-			: '',
-		type === 'range' ? 'form-range' : 'form-input',
-		'placeholder-color-input-placeholder'
+	let inputClasses = $derived(
+		classNames(
+			'm-0',
+			error ? 'border-color-input-border-error' : '',
+			disabled
+				? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
+				: '',
+			type === 'range' ? 'form-range' : 'form-input',
+			'placeholder-color-input-placeholder'
+		)
 	);
+
+	// type assertions can't go in the Svelte template section, so are here instead
+	let textAreaRestProps = $derived(restProps as InputAsTextArea);
+	let nonTextAreaRestProps = $derived(restProps as InputAsNonTextArea);
 </script>
 
 <InputWrapper
@@ -181,8 +110,8 @@
 	{error}
 	{disabled}
 	{optional}
+	{customOverlay}
 >
-	<slot name="hint" slot="hint" />
 	<!--
 		Svelte does not allow bind:text and bind:value on an input element at
 		the same time so an on change listener is required.
@@ -200,34 +129,14 @@
 			aria-describedby={descriptionIsVisible ? descriptionId : undefined}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
-			on:blur={formatAndUpdateValue}
-			on:input={updateValue}
-			on:input
-			on:blur
-			on:focus
-			on:focusin
-			on:focusout
-			on:keydown
-			on:keypress
-			on:keyup
-			on:click
-			on:mousedown
-			on:mouseenter
-			on:mouseleave
-			on:mouseout
-			on:mouseover
-			on:mouseup
-			on:touchcancel
-			on:touchend
-			on:touchmove
-			on:touchstart
-			{...$$restProps}
-		/>
+			onblur={formatAndUpdateValue}
+			oninput={updateValue}
+			{...textAreaRestProps}
+		></textarea>
 	{:else}
 		<input
 			bind:this={input}
 			class={inputClasses}
-			type={inputType}
 			{inputmode}
 			{id}
 			{name}
@@ -238,28 +147,10 @@
 			aria-describedby={descriptionIsVisible ? descriptionId : undefined}
 			aria-errormessage={errorId}
 			aria-invalid={!!error}
-			on:blur={formatAndUpdateValue}
-			on:input={updateValue}
-			on:input
-			on:blur
-			on:focus
-			on:focusin
-			on:focusout
-			on:keydown
-			on:keypress
-			on:keyup
-			on:click
-			on:mousedown
-			on:mouseenter
-			on:mouseleave
-			on:mouseout
-			on:mouseover
-			on:mouseup
-			on:touchcancel
-			on:touchend
-			on:touchmove
-			on:touchstart
-			{...$$restProps}
+			onblur={formatAndUpdateValue}
+			oninput={updateValue}
+			{...nonTextAreaRestProps}
+			type={inputType}
 		/>
 	{/if}
 </InputWrapper>

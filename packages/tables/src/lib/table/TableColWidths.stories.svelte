@@ -1,16 +1,16 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Table from './Table.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Example Tables/Column Widths',
 		component: Table,
-		args: []
-	};
+		args: {}
+	});
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	const data = [
 		{ id: 1, first_name: 'Marilyn', last_name: 'Monroe', pet: 'dog' },
 		{ id: 2, first_name: 'Abraham', last_name: 'Lincoln', pet: 'dog' },
@@ -112,24 +112,30 @@
 	};
 </script>
 
-<Template let:args>
-	<Table {data} {tableSpec} {...args} />
-</Template>
-
 <!-- This is the default behaviour: equally sized columns, which respond to changes in the width of the parent container. -->
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template()}
+		<Table {data} {tableSpec} />
+	{/snippet}
+</Story>
 
 <!-- Here the table has a fixed width. -->
 <Story name="Fixed-width table">
-	<Table {data} {tableSpec} fixedTableWidth={600} />
+	{#snippet template()}
+		<Table {data} {tableSpec} fixedTableWidth={600} />
+	{/snippet}
 </Story>
 
 <!-- Here the first column has a fixed width. -->
-<Story name="One column with fixed size" source>
-	<Table {data} tableSpec={tableSpecFixedCol} />
+<Story name="One column with fixed size">
+	{#snippet template()}
+		<Table {data} tableSpec={tableSpecFixedCol} />
+	{/snippet}
 </Story>
 
 <!-- Here the column sizes are set to 3, 1, and 2 (in relative units). -->
-<Story name="Relative column sizes" source>
-	<Table {data} tableSpec={tableSpecRelativeColSizes} />
+<Story name="Relative column sizes">
+	{#snippet template()}
+		<Table {data} tableSpec={tableSpecRelativeColSizes} />
+	{/snippet}
 </Story>

@@ -12,110 +12,124 @@
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
-	/**
-	 * The Observable Plot specification for the visualization.
-	 */
-	export let spec;
+	interface Props {
+		/**
+		 * The Observable Plot specification for the visualization.
+		 */
+		spec: any;
+		/**
+		 * Data being visualized (as an array of objects), to be used by data download button.
+		 */
+		data?: { [key: string]: any }[];
+		/**
+		 * Title that is displayed in large text above the plot.
+		 */
+		title?: string;
+		/**
+		 * Subtitle that is displayed below the title, but above the plot.
+		 */
+		subTitle?: string;
+		/**
+		 * Alt-text for the plot.
+		 */
+		alt?: string;
+		/**
+		 * Tailwind width class passed to Chart Container.
+		 */
+		chartWidth?: string;
+		/**
+		 * What appears in the footer:
+		 *
+		 * * `byline` (string) - statement of who created the visualization
+		 * * `source` (string) - statement of where the data came from
+		 * * `note` (string) - any additional footnotes
+		 */
+		source?: string;
+		byline?: string;
+		note?: string;
+		/**
+		 * Data Download Button in the footer
+		 *
+		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+		 * Set to false to hide completely.
+		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+		 *
+		 */
+		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		/**
+		 * Image Download Button in the footer
+		 *
+		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+		 * Set to false to hide completely.
+		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+		 *
+		 */
+		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		/**
+		 * The file name to be used for the downloaded data or image file.
+		 */
+		filename?: string;
+		/**
+		 * Provides a way to access the DOM node into which the visualization is rendered.
+		 */
+		domNode?: any;
+		/**
+		 * A store that stores details of the moused-over point.
+		 * Used for custom tooltips.
+		 */
+		tooltipStore?: any;
+		/** A y-offset between data points and tooltips (pixels). */
+		tooltipOffset?: any;
+		/**
+		 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
+		 * so that default chart-level styling is not applied.
+		 */
+		applyDefaults?: boolean;
+		/**
+		 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
+		 */
+		id?: any;
+		/**
+		 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
+		 */
+		chartDescription?: string;
+		/**
+		 * Defaults to `true` inside `ObservablePlotInner` but exposed here in case you want to change to `false`.
+		 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
+		 * Instead ensure the title, subtitle and chartDescription of the chart and/or surrounding text explains the key takeaways.
+		 */
+		ariaHidden?: boolean;
+		controls?: import('svelte').Snippet;
+		tooltip?: import('svelte').Snippet;
+		[key: string]: any;
+	}
 
-	/**
-	 * Data being visualized (as an array of objects), to be used by data download button.
-	 */
-	export let data: { [key: string]: any }[] = [];
+	let {
+		spec,
+		data = [],
+		title = '',
+		subTitle = '',
+		alt = '',
+		chartWidth = '',
+		source = '',
+		byline = '',
+		note = '',
+		dataDownloadButton = true,
+		imageDownloadButton = true,
+		filename = '',
+		domNode = undefined,
+		tooltipStore = writable<Position>(),
+		tooltipOffset = -16,
+		applyDefaults = true,
+		id = randomId(),
+		chartDescription = '',
+		ariaHidden = true,
+		controls,
+		tooltip,
+		...rest
+	}: Props = $props();
 
-	/**
-	 * Title that is displayed in large text above the plot.
-	 */
-	export let title = '';
-
-	/**
-	 * Subtitle that is displayed below the title, but above the plot.
-	 */
-	export let subTitle = '';
-
-	/**
-	 * Alt-text for the plot.
-	 */
-	export let alt = '';
-
-	/**
-	 * Tailwind width class passed to Chart Container.
-	 */
-	export let chartWidth = '';
-
-	/**
-	 * What appears in the footer:
-	 *
-	 * * `byline` (string) - statement of who created the visualization
-	 * * `source` (string) - statement of where the data came from
-	 * * `note` (string) - any additional footnotes
-	 */
-	export let source = '';
-
-	export let byline = '';
-
-	export let note = '';
-
-	/**
-	 * Data Download Button in the footer
-	 *
-	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
-	 *
-	 */
-	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
-
-	/**
-	 * Image Download Button in the footer
-	 *
-	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
-	 *
-	 */
-	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
-
-	/**
-	 * The file name to be used for the downloaded data or image file.
-	 */
-	export let filename = '';
-
-	/**
-	 * Provides a way to access the DOM node into which the visualization is rendered.
-	 */
-	export let domNode: any = undefined;
-
-	/**
-	 * A store that stores details of the moused-over point.
-	 * Used for custom tooltips.
-	 */
-	export let tooltipStore = writable<Position>();
-
-	/** A y-offset between data points and tooltips (pixels). */
-	export let tooltipOffset = -16;
-
-	/**
-	 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
-	 * so that default chart-level styling is not applied.
-	 */
-	export let applyDefaults = true;
-
-	/**
-	 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
-	 */
-	export let id = randomId();
-
-	/**
-	 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
-	 */
-	export let chartDescription = '';
-
-	/**
-	 * Defaults to `true` inside `ObservablePlotInner` but exposed here in case you want to change to `false`.
-	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
-	 * Instead ensure the title, subtitle and chartDescription of the chart and/or surrounding text explains the key takeaways.
-	 */
-	export let ariaHidden = true;
+	const tooltip_render = $derived(tooltip);
 </script>
 
 {#key spec}
@@ -130,13 +144,13 @@
 		{dataDownloadButton}
 		{imageDownloadButton}
 		{filename}
-		{...$$restProps}
-		chartHeight={'h-fit'}
+		{...rest}
+		chartHeight="h-fit"
 		{chartWidth}
 		{chartDescription}
 	>
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
-		<slot name="controls" />
+		{@render controls?.()}
 
 		<ObservablePlotInner
 			{data}
@@ -149,14 +163,16 @@
 			ariaDescribedBy="{id}-description"
 			{id}
 		>
-			<svelte:fragment slot="tooltip">
-				<slot name="tooltip" />
-			</svelte:fragment>
+			{#snippet tooltip()}
+				{@render tooltip_render?.()}
+			{/snippet}
 		</ObservablePlotInner>
 
-		<p slot="description" class="sr-only" id="{id}-description">
-			{chartDescription}
-		</p>
+		{#snippet description()}
+			<p class="sr-only" id="{id}-description">
+				{chartDescription}
+			</p>
+		{/snippet}
 	</ChartContainer>
 {/key}
 

@@ -5,44 +5,41 @@
 	import SidebarGroup from '../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
 	import SidebarGroupTitle from '../../../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import SidebarSection from '../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import { currentTheme } from '../../../theme/themeStore';
+	import { theme } from '../../../theme/themeState.svelte';
 
 	const selectedSewerLayer = writable(['sewer-combined']);
 	const selectedSewerOverflowLayer = writable(['sewer_overflows_48hrs_yes']);
 
-	// Color the checkboxes based on theme
-	$: theme = $currentTheme;
-
-	$: sewerGroup = [
+	let sewerGroup = $derived([
 		{
 			id: 'sewer-combined',
 			label: 'Combined Sewer',
-			color: theme.color.data.categorical.orange
+			color: theme.currentTheme.color.data.categorical.orange
 		},
 		{
 			id: 'sewer-separate',
 			label: 'Separate Sewer',
-			color: theme.color.data.secondary
+			color: theme.currentTheme.color.data.secondary
 		}
-	];
+	]);
 
-	$: sewerOverflowGroup = [
+	let sewerOverflowGroup = $derived([
 		{
 			id: 'sewer_overflows_48hrs_yes',
 			label: 'Yes (In past 48 hours)',
-			color: theme.color.data.categorical.red
+			color: theme.currentTheme.color.data.categorical.red
 		},
 		{
 			id: 'sewer_overflows_48hrs_no',
 			label: 'No (In past 48 hours)',
-			color: theme.color.data.categorical.green
+			color: theme.currentTheme.color.data.categorical.green
 		},
 		{
 			id: 'sewer_overflows_offline',
 			label: 'Offline',
-			color: theme.color.data.categorical.grey
+			color: theme.currentTheme.color.data.categorical.grey
 		}
-	];
+	]);
 </script>
 
 <SidebarSection title="This is the sewer section title">
@@ -50,7 +47,9 @@
 	<SidebarGroup>
 		<SidebarGroupTitle>
 			Sewer Type group title
-			<Overlay slot="hint" overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+			{#snippet hint()}
+				<Overlay overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+			{/snippet}
 		</SidebarGroupTitle>
 
 		<CheckboxGroup options={sewerGroup} bind:selectedOptions={$selectedSewerLayer} />
@@ -60,7 +59,9 @@
 	<SidebarGroup>
 		<SidebarGroupTitle>
 			Sewer Overflows
-			<Overlay slot="hint" overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+			{#snippet hint()}
+				<Overlay overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+			{/snippet}
 		</SidebarGroupTitle>
 		<CheckboxGroup
 			options={sewerOverflowGroup}

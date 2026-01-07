@@ -1,8 +1,11 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import TextCell from './TextCell.svelte';
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/TextCell',
 		component: TextCell,
+		tags: ['autodocs'],
 
 		argTypes: {
 			alignText: {
@@ -12,21 +15,20 @@
 		},
 
 		args: {
-			alignText: 'left'
+			alignText: 'left',
+			value: '500 cars'
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
+<Story name="Default">
+	{#snippet template(args)}
+		<TextCell {...args} value={args.value} />
+	{/snippet}
+</Story>
 
-<Template let:args>
-	<TextCell value={'500 cars'} colorScale={() => 'red'} {...args} />
-</Template>
-
-<Story name="Default" source />
-
-<Story name="Bold text" source>
-	<TextCell value={'500 cars'} colorScale={() => 'red'} fontWeight="bold" />
+<Story name="Bold text">
+	{#snippet template(args)}
+		<TextCell {...args} value={args.value} fontWeight="bold" />
+	{/snippet}
 </Story>

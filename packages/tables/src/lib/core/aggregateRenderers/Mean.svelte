@@ -6,22 +6,13 @@
 
 	import { mean } from 'd3-array';
 	import { format } from 'd3-format';
+	import type { MeanProps } from '$lib/core/aggregateRenderers/MeanProps';
 
-	/**
-	 * Array of values to be displayed.
-	 */
-	export let values: number[];
+	let { values, formatString = '0.0f', ...rest }: MeanProps = $props();
 
-	$: meanVal = mean(values);
+	let f = $derived(format(formatString));
 
-	export let formatString = '0.0f';
-
-	let f = format(formatString);
-	$: f = format(formatString);
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let meanVal = $derived(mean(values));
 </script>
 
 <span>{meanVal === undefined ? 'undefined' : f(meanVal)}</span>

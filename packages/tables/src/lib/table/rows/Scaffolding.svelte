@@ -1,24 +1,34 @@
 <script lang="ts">
+	import type { TableData } from '$lib/core/lib/dataObj';
 	import { sum } from 'd3-array';
+	import type { Snippet } from 'svelte';
 
-	export let table;
+	interface ScaffoldingProps {
+		table: TableData;
+		groupControl?: Snippet;
+		groupSizes?: Snippet;
+		dataColumns?: Snippet;
+	}
 
-	const sumWidths = (widths) => {
+	let { table, groupControl, groupSizes, dataColumns }: ScaffoldingProps = $props();
+
+	const sumWidths = (widths: string[]) => {
 		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
 		const colGroupGaps = (table.colGroups || []).length * (table.colGroupGap ?? 0);
-		return colWidths + colGroupGaps + 'px';
+		// return colWidths + colGroupGaps + 'px';
+		return colWidths + colGroupGaps;
 	};
 </script>
 
 <!-- items-center - came from DataRow -->
 <!-- controlRows added an m-2 -->
-<div class="flex was-tr items-stretch" role="row">
+<div class="was-tr flex items-stretch" role="row">
 	<!-- controls for expanding/collapsing groups -->
-	<slot name="groupControl">
+	{#if groupControl}{@render groupControl()}{:else}
 		{#each table.groupingFields || [] as _field}
 			<div style:width={table.widths.groupControl} id="groupControl"></div>
 		{/each}
-	</slot>
+	{/if}
 
 	{#if table.groupingFields.length > 0}
 		<div
@@ -31,15 +41,15 @@
 				table.groupingFields.length +
 				'px'}
 		>
-			<slot name="groupSizes">
+			{#if groupSizes}{@render groupSizes()}{:else}
 				{#each new Array(table.groupingFields.length) as _i}
 					<div style:width={table.widths.groupLabel} id="groupLabel"></div>
 					<div style:width={table.widths.groupSizeLabel} id="groupSizeLabel"></div>
 					<div style:width={table.widths.groupSizeBar} id="groupSizeBar"></div>
 				{/each}
-			</slot>
+			{/if}
 		</div>
 	{/if}
 
-	<slot name="dataColumns" />
+	{@render dataColumns?.()}
 </div>

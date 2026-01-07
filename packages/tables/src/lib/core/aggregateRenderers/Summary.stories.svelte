@@ -1,23 +1,22 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Summary from './Summary.svelte';
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/Summary',
 		component: Summary,
+		tags: ['autodocs'],
 
 		args: {
 			values: [0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.8],
 			extent: [0, 1],
 			formatString: '0.2f'
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<Summary {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<Summary {...args} values={args.values ?? [0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.8]} />
+	{/snippet}
+</Story>

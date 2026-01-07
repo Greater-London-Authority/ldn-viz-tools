@@ -1,76 +1,73 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Popover from './Popover.svelte';
-
-	export const meta = {
-		title: 'Ui/Components/Overlays/Popover',
-		component: Popover
-	};
-</script>
-
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Cog6Tooth } from '@steeze-ui/heroicons';
 	import Button from '../button/Button.svelte';
-	import Trigger from '../overlay/Trigger.svelte';
 
-	let count = 0;
+	const { Story } = defineMeta({
+		title: 'Ui/Components/Overlays/Popover',
+		component: Popover,
+		tags: ['autodocs']
+	});
+
+	let count = $state(0);
 </script>
 
-<Template let:args>
-	<Popover {...args}>
-		<Trigger slot="trigger" />
-		<svelte:fragment slot="title">Metric note</svelte:fragment>
-
-		The contents of the popover...
-	</Popover>
-</Template>
-
-<Story name="Default" source />
-
-<Story name="No title" source>
-	<Popover>
-		<Trigger slot="trigger" />
-		<svelte:fragment>Some text explaining this metric...</svelte:fragment>
-	</Popover>
+<Story name="Default">
+	{#snippet template()}
+		<Popover>
+			{#snippet title()}
+				Account settings
+			{/snippet}
+			The contents of the popover...
+		</Popover>
+	{/snippet}
 </Story>
 
-<Story name="Custom hint text" source>
-	<Popover>
-		<Trigger slot="trigger" hintLabel="Click for more information!" />
-		<svelte:fragment slot="title">Metric note</svelte:fragment>
-
-		<p>Some text explaining this metric...</p>
-	</Popover>
+<Story name="No title">
+	{#snippet template()}
+		<Popover>The contents of the popover...</Popover>
+	{/snippet}
 </Story>
 
-<Story name="Custom trigger" source>
-	<Popover>
-		<Trigger slot="trigger" emphasis="primary" variant="solid" size="md" slim={false}>
-			Click here to see popover contents
-		</Trigger>
-
-		<svelte:fragment slot="title">Metric note</svelte:fragment>
-
-		<svelte:fragment>Some text explaining this metric...</svelte:fragment>
-	</Popover>
+<Story name="Custom hint label">
+	{#snippet template()}
+		<Popover hintLabel="Click for more information!">
+			{#snippet title()}
+				Account settings
+			{/snippet}
+			The contents of the popover...
+		</Popover>
+	{/snippet}
 </Story>
 
-<Story name="Contains clickable element" source>
-	<Popover>
-		<Trigger slot="trigger" />
-		<svelte:fragment slot="title">Click the button Below</svelte:fragment>
-		<svelte:fragment>
-			<Button on:click={() => count++}>You can click me {count}</Button>
-		</svelte:fragment>
-	</Popover>
+<Story name="Custom trigger">
+	{#snippet template()}
+		<Popover>
+			{#snippet trigger(props)}
+				<Button {...props}>
+					I have a different trigger component
+					<Icon src={Cog6Tooth} theme="mini" class="ml-0.5 h-[18px] w-[18px]" aria-hidden="true" />
+				</Button>
+			{/snippet}
+			{#snippet title()}
+				Account settings
+			{/snippet}
+			The contents of the popover...
+		</Popover>
+	{/snippet}
 </Story>
 
-<!-- When the popover opens with `defaultOpenFocus` set to true, it will focus on the first interactive element in the popover. If the popover starts with an interactive element, set to `true`, else omit. -->
-<Story name="Using defaultOpenFocus" source>
-	<Popover defaultOpenFocus>
-		<Trigger slot="trigger" />
-		<div class="space-y-2">
-			<Button emphasis="secondary" size="sm" href="/">A button</Button>
-			<p>starts this content, so it should receive focus.</p>
-		</div>
-	</Popover>
+<Story name="Contains clickable element">
+	{#snippet template()}
+		<Popover>
+			{#snippet title()}
+				Account settings
+			{/snippet}
+			The contents of the popover...
+
+			<Button onclick={() => count++}>You can click me {count}</Button>
+		</Popover>
+	{/snippet}
 </Story>

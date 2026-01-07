@@ -1,11 +1,7 @@
 import type { StorybookConfig } from '@storybook/sveltekit';
-
-import { createRequire } from 'node:module';
 import { dirname, join } from 'path';
 
-/**
- * Define Node `require` to fix storybook compatibility issues with Node v24
- */
+import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 
 /**
@@ -15,13 +11,12 @@ const require = createRequire(import.meta.url);
 function getAbsolutePath(value: string): any {
 	return dirname(require.resolve(join(value, 'package.json')));
 }
+
 const config: StorybookConfig = {
 	stories: [
 		'../src/**/*.mdx',
 		'../../../packages/ui/src/**/*.mdx',
 		'../../../packages/ui/src/**/*.stories.@(js|ts|svelte)',
-		// '../../../packages/utils/src/**/*.mdx',
-		// '../../../packages/utils/src/**/*.stories.@(js|ts|svelte)',
 		'../../../packages/charts/src/**/*.mdx',
 		'../../../packages/charts/src/**/*.stories.@(js|jsx|ts|tsx|svelte)',
 		'../../../packages/maps/src/**/*.mdx',
@@ -30,16 +25,19 @@ const config: StorybookConfig = {
 		'../../../packages/tables/src/**/*.stories.@(js|jsx|ts|tsx|svelte)'
 	],
 	addons: [
-		'@storybook/addon-svelte-csf',
 		getAbsolutePath('@storybook/addon-themes'),
-		getAbsolutePath('@storybook/addon-links'),
-		getAbsolutePath('@storybook/addon-essentials'),
-		getAbsolutePath('@chromatic-com/storybook'),
-		getAbsolutePath('@storybook/addon-interactions'),
-		getAbsolutePath('@storybook/addon-a11y')
+		getAbsolutePath('@storybook/addon-svelte-csf'),
+		getAbsolutePath('@storybook/addon-a11y'),
+		getAbsolutePath('@storybook/addon-docs'),
+		getAbsolutePath('@storybook/addon-vitest')
 	],
-	framework: { name: '@storybook/sveltekit', options: {} },
-	docs: { autodocs: true, defaultName: 'Documentation' },
+	framework: {
+		name: getAbsolutePath('@storybook/sveltekit'),
+		options: {}
+	},
+	docs: {
+		defaultName: 'Documentation'
+	},
 	staticDirs: ['../static']
 };
 export default config;

@@ -1,49 +1,61 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
+	import type { ButtonProps } from '../button/types';
 	/**
 	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.
 	 * @component
 	 */
 
-	import type { Option } from '../multipleActionButton/MultipleActionButton.svelte';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
+	import type { MultipleActionButtonOption } from '../multipleActionButton/types.ts';
 
 	import { csvFormat } from 'd3-dsv';
 
-	/**
-	 * The available data formats for the downloaded file.
-	 */
-	export let formats: ('CSV' | 'JSON')[] = ['CSV', 'JSON'];
+	type DataDownloadButtonProps = ButtonProps & {
+		/**
+		 * The available data formats for the downloaded file.
+		 */
+		formats?: ('CSV' | 'JSON')[];
+		/**
+		 * The data that will be encoded in the downloaded file (formatted as an array of objects).
+		 */
+		data?: Record<string, number | string>[];
+		/**
+		 * A function which, when called with no arguments, will return the data to be saved in the downloaded file.
+		 * If this is provided, then the `data` prop is ignored.
+		 */
+		dataFn?: undefined | (() => any[]) | (() => Promise<any[]>);
+		/**
+		 * The name the downloaded file will be saved with.
+		 */
+		filename: string;
+		/**
+		 * If `true`, the user will not be able to interact with the button to download data.
+		 */
+		disabled?: boolean;
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
+		 */
+		columnMapping?: undefined | { [oldName: string]: string };
+		/**
+		 * If `true`, then button will fill full width of parent.
+		 */
+		fullWidth?: boolean;
 
-	/**
-	 * The data that will be encoded in the downloaded file (formatted as an array of objects).
-	 */
-	export let data: Record<string, number | string>[];
+		beforeLabel?: Snippet;
+		afterLabel?: Snippet;
+	};
 
-	/**
-	 * A function which, when called with no arguments, will return the data to be saved in the downloaded file.
-	 * If this is provided, then the `data` prop is ignored.
-	 */
-	export let dataFn: undefined | (() => any[]) | (() => Promise<any[]>) = undefined;
-
-	/**
-	 * The name the downloaded file will be saved with.
-	 */
-	export let filename: string;
-
-	/**
-	 * If `true`, the user will not be able to interact with the button to download data.
-	 */
-	export let disabled = false;
-
-	/**
-	 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
-	 */
-	export let columnMapping: undefined | { [oldName: string]: string } = undefined;
-
-	/**
-	 * If `true`, then button will fill full width of parent.
-	 */
-	export let fullWidth = false;
+	let {
+		formats = ['CSV', 'JSON'],
+		data,
+		dataFn = undefined,
+		filename,
+		disabled = false,
+		columnMapping = undefined,
+		fullWidth = false,
+		...restProps
+	}: DataDownloadButtonProps = $props();
 
 	const enforceExtension = (name: string, extension: string) => {
 		return name.toLocaleLowerCase().endsWith(extension) ? name : `${name}${extension}`;
@@ -72,7 +84,7 @@
 	const renameColumns = async () => {
 		const dataToSave = dataFn ? await Promise.resolve(dataFn()) : data;
 
-		return dataToSave.map((datum) => {
+		return dataToSave!.map((datum) => {
 			if (!columnMapping) {
 				return datum;
 			} else {
@@ -86,12 +98,10 @@
 		});
 	};
 
-	$: download = format === 'JSON' ? downloadJSON : downloadCSV;
-
-	let options: Option[] = [];
-	$: {
+	let options: MultipleActionButtonOption[] = $derived.by(() => {
+		const opts = [];
 		if (formats.includes('CSV')) {
-			options.push({
+			opts.push({
 				id: 'CSV',
 				buttonLabel: 'Download as CSV',
 				menuLabel: 'CSV',
@@ -100,29 +110,27 @@
 			});
 		}
 		if (formats.includes('JSON')) {
-			options.push({
+			opts.push({
 				id: 'JSON',
 				buttonLabel: 'Download as JSON',
 				menuLabel: 'JSON',
 				menuDescription: 'Sometimes more convenient for programmers.'
 			});
 		}
-	}
+		return opts;
+	});
 
-	let selectedOption: Option;
-	$: format = selectedOption?.id ?? 'CSV';
+	let selectedOption: MultipleActionButtonOption = $derived(options[0]);
+	let format = $derived(selectedOption?.id ?? 'CSV');
+	let download = $derived(format === 'JSON' ? downloadJSON : downloadCSV);
 </script>
 
 <MultipleActionButton
+	{...restProps}
 	{options}
 	bind:state={selectedOption}
 	menuTitle="Select data format"
 	onClick={download}
 	{disabled}
 	{fullWidth}
-	{...$$restProps}
->
-	<!-- contents of the button -->
-	<svelte:fragment slot="beforeLabel"><slot name="beforeLabel" /></svelte:fragment>
-	<svelte:fragment slot="afterLabel"><slot name="afterLabel" /></svelte:fragment>
-</MultipleActionButton>
+></MultipleActionButton>

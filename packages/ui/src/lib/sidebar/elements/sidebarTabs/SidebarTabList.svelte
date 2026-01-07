@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { PlacementType } from '$lib/sidebar/types';
-	import { getContext } from 'svelte';
-	import { get, type Writable } from 'svelte/store';
+	import { XCircle } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
 	import {
 		tabIconOverride,
 		tabLabelOverride,
@@ -12,73 +12,76 @@
 	import type { Tab } from '../../../tabs/types';
 	import { classNames } from '../../../utils/classNames';
 
-	/**
-	 * List of tabs. An array, of which each entry is an object with the following properties:
-	 * * `id` (string): the value that will be assigned to `selectedValue` when this tab is selected
-	 * * `label` (string): the text that should be displayed in the tab label
-	 * * `icon` (optional): an icon component (imported from `@steeze-ui/heroicons`) that should be rendered in the tab label
-	 * * `rawIcon` (optional): a Svelte component that directly renders an SVG that should be displayed in the tab label
-	 * * `content`: a Svelte component that should be rendered in the sidebar when this tab is selected
-	 */
-	export let tabs: Tab[] = [];
+	let sidebarState = getSidebarState();
 
-	/**
-	 * `id` of the currently selected tab
-	 */
-	export let selectedValue: Tab['id'] = tabs[0].id;
+	interface Props {
+		/**
+		 * List of tabs. An array, of which each entry is an object with the following properties:
+		 * * `id` (string): the value that will be assigned to `selectedTabId` when this tab is selected
+		 * * `label` (string): the text that should be displayed in the tab label
+		 * * `icon` (optional): an icon component (imported from `@steeze-ui/heroicons`) that should be rendered in the tab label
+		 * * `rawIcon` (optional): a Svelte component that directly renders an SVG that should be displayed in the tab label
+		 * * `content`: a Svelte component that should be rendered in the sidebar when this tab is selected
+		 */
+		tabs?: Tab[];
+		/**
+		 * `id` of the currently selected tab
+		 */
+		selectedTabId?: Tab['id'];
 
-	/**
-	 * Sidebar placement
-	 */
-	export let placement: PlacementType = 'right';
+		/**
+		 * Enables screen reader to describe purpose of tab list
+		 */
+		ariaLabel?: string;
+		onChange?: any;
+	}
 
-	/**
-	 * orientation of the list of tabs
-	 */
-	let orientation: 'vertical' | 'horizontal';
-
-	$: orientation = ['top', 'bottom'].includes(placement) ? 'horizontal' : 'vertical';
-
-	/**
-	 * Enables screen reader to describe purpose of tab list
-	 */
-	export let ariaLabel: string = 'Switch sidebar panel';
-
-	// Context required to make sidebar open/ close
-	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
-
-	// Context provided by wrapping component to force always open
-	const sidebarAlwaysOpen = getContext<Writable<'true' | 'false'>>('sidebarAlwaysOpen');
-
-	export let onChange = (tabId: Tab['id']) => {
-		if (get(sidebarIsOpen) === false) {
-			// if we're collapsed, clicking any tab label will open that tab
-			sidebarIsOpen.set(true);
-			selectedValue = tabId;
-		} else if (selectedValue === tabId) {
-			// The sidebarAlways open context is provided by the app shell
-			if (get(sidebarAlwaysOpen) === 'false' || get(sidebarAlwaysOpen) === undefined) {
-				// if we're expanded, clicking the currently selected tab label triggers collapse
-				sidebarIsOpen.set(false);
-				selectedValue = '';
+	let {
+		tabs = [],
+		selectedTabId = $bindable(),
+		ariaLabel = 'Switch sidebar panel',
+		onChange = (tabId: Tab['id']) => {
+			if (sidebarState?.isOpen === false) {
+				// if we're collapsed, clicking any tab label will open that tab
+				sidebarState.isOpen = true;
+				selectedTabId = tabId;
+			} else if (selectedTabId === tabId) {
+				// The sidebarAlways open context is provided by the app shell
+				if (sidebarState?.isAlwaysOpen === false || sidebarState?.isAlwaysOpen === undefined) {
+					// if we're expanded, clicking the currently selected tab label triggers collapse
+					sidebarState.isOpen = !sidebarState?.isOpen;
+					selectedTabId = '';
+				}
+			} else {
+				// if we're expanded, clicking a different tab label switched tab
+				selectedTabId = tabId;
 			}
-		} else {
-			// if we're expanded, clicking a different tab label switched tab
-			selectedValue = tabId;
 		}
-	};
+	}: Props = $props();
 </script>
 
-<TabList
-	bind:selectedValue
-	{ariaLabel}
-	{orientation}
-	{tabs}
-	{onChange}
-	class={classNames(
-		tabLayoutOverride[orientation],
-		tabThemeOverride,
-		tabLabelOverride,
-		tabIconOverride
-	)}
-/>
+<div class="flex justify-between {tabLayoutOverride[sidebarState?.orientation]}">
+	<TabList
+		bind:selectedTabId
+		{ariaLabel}
+		orientation={sidebarState?.orientation}
+		{tabs}
+		{onChange}
+		class={classNames(
+			tabLayoutOverride[sidebarState?.orientation],
+			tabThemeOverride,
+			tabLabelOverride,
+			tabIconOverride
+		)}
+	/>
+	{#if sidebarState?.isOpen && !sidebarState?.isAlwaysOpen}
+		<div
+			class={`text-color-text-secondary hover:bg-color-action-secondary-muted-hover ${tabLabelOverride}`}
+		>
+			<button onclick={() => (sidebarState.isOpen = !sidebarState?.isOpen)}>
+				<Icon src={XCircle} theme="outline" class="mb-1 h-7 w-7" aria-hidden="true" />
+				Close
+			</button>
+		</div>
+	{/if}
+</div>

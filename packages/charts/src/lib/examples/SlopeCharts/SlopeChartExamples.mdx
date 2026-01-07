@@ -1,0 +1,120 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as SlopeChart from './SlopeChart.stories.svelte';
+import { yearlyData } from '../../../data/demoData';
+
+<Meta title="Charts/Examples/Slope Charts" />
+
+# Slope Charts
+
+### Default
+
+<details>
+	<summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+
+    ```javascript
+        // OcclusionY adds an initializer that shifts nodes vertically with a tiny force simulation.
+    const occlusionY = ({ radius = 6.5, ...options }: { [key: string]: any } = {}) =>
+    	Plot.initializer(
+    		options,
+    		(data, facets, { y: { value: Y }, text: { value: T } }, { y: sy }) => {
+    			for (const index of facets) {
+    				const unique = new Set();
+    				const nodes = Array.from(index, (i) => ({
+    					fx: 0,
+    					y: sy!(Y[i]),
+    					visible: unique.has(T[i]) // remove duplicate labels
+    						? false
+    						: !!unique.add(T[i]),
+    					i
+    				}));
+    				d3.forceSimulation(nodes.filter((d) => d.visible))
+    					.force(
+    						'y',
+    						d3.forceY(({ y }) => y)
+    					) // gravitate towards the original y
+    					.force('collide', d3.forceCollide().radius(radius)) // collide
+    					.stop()
+    					.tick(20);
+    				for (const { y, i, visible } of nodes) Y[i] = !visible ? NaN : y;
+    			}
+    			return { data, facets, channels: { y: { value: Y } } };
+    		}
+    	);
+
+    // Spec and data for slope example (default)
+    let spec = $derived({
+    	height: 300,
+    	marginBottom: 30,
+    	x: { axis: null, type: 'ordinal', insetLeft: 90, insetRight: 90 },
+    	y: { axis: null, inset: 20 },
+    	color: {
+    		legend: true,
+    		range: [
+    			theme.currentTheme.color.data.primary,
+    			theme.currentTheme.color.data.secondary,
+    			theme.currentTheme.color.data.tertiary
+    		]
+    	},
+    	marks: [
+    		Plot.line(chartData, {
+    			x: 'Year',
+    			y: 'Average',
+    			z: 'Variable',
+    			stroke: 'Variable',
+    			tip: true
+    		}),
+    		Plot.tickX(chartData, {
+    			x: 'Year',
+    			stroke: theme.currentTheme.color.chart.grid
+    		}),
+    		Plot.textX(
+    			chartData.filter((d) => d.Variable === 'Variable A'),
+    			{
+    				dy: 135,
+    				text: (d) => d.Year
+    			}
+    		),
+    		Plot.dot(chartData, {
+    			r: 4,
+    			x: 'Year',
+    			y: 'Average',
+    			stroke: 'Variable',
+    			strokeWidth: 2,
+    			fill: theme.currentTheme.color.chart.background,
+    			fillOpacity: 1
+    		}),
+    		d3
+    			.groups(chartData, (d) => d.Year === '2015')
+    			.map(([left, data]) =>
+    				Plot.text(
+    					data,
+    					occlusionY({
+    						x: 'Year',
+    						y: 'Average',
+    						text: (d: { Average: number | { valueOf(): number } }) =>
+    							'£' + d3.format(',.4~s')(d.Average),
+    						textAnchor: left ? 'end' : 'start',
+    						dx: left ? -8 : 8,
+    						radius: 8.5
+    					})
+    				)
+    			)
+    	]
+    });
+    ```
+
+</details>
+
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+    <summary class="cursor-pointer">Show data</summary>
+    <pre>
+    	{JSON.stringify(
+    		yearlyData.filter((d) => d.Year === '2015' || d.Year === '2021'),
+    		null,
+    		2
+    	)}
+    </pre>
+
+</details>
+
+<Canvas of={SlopeChart.Default} />

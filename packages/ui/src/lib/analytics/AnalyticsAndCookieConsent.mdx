@@ -1,0 +1,21 @@
+import { Markdown, Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Ui/Components - Layout And Themes/Meta, Analytics And Cookies/AnalyticsAndCookieConsent" />
+
+# AnalyticsAndCookieConsent
+
+The `<AnalyticsAndCookieConsent>` component sets up Google Analytics and uses [Civic Cookie Control](https://www.civicuk.com/cookie-control/) to get consent for the use of cookies.
+As the cookie consent applies across the .london.gov.uk domain, the cookie consent sidebar is styled to match the main london.gov.uk site rather than the CIU's apps.
+
+Edit the `routes/+layout.svelte` file to the following code, which defines the API key and AppName before using this component:
+
+```js
+<svelte:head>
+	<script>
+		window.ldnVizCivicApiKey = 'civic-api-key';
+		window.ldnVizCivicAppName = 'name-used-for-logging';
+	</script>
+</svelte:head>
+
+<AnalyticsAndCookieConsent />
+```

@@ -4,60 +4,40 @@
 
 	import { Button } from '@ldn-viz/ui';
 
-	export let numRows = 0;
-	export let page = 1;
-	export let pageSize = 10;
+	interface Props {
+		numRows?: number;
+		page?: number;
+		pageSize?: number;
+	}
 
-	let firstRowNum;
-	$: firstRowNum = (page - 1) * pageSize + 1;
+	let { numRows = 0, page = $bindable(1), pageSize = 10 }: Props = $props();
 
-	let lastRowNum;
-	$: lastRowNum = Math.min(page * pageSize, numRows);
+	let firstRowNum = $derived((page - 1) * pageSize + 1);
 
-	let numPages;
-	$: numPages = Math.ceil(numRows / pageSize);
+	let lastRowNum = $derived(Math.min(page * pageSize, numRows));
 
-	const pageChanged = (val) => {
-		inputPage = val;
-	};
-	$: pageChanged(page);
-
-	let inputPage = page;
-	const inputPageChanged = () => {
-		const num = +inputPage;
-
-		if (isNaN(num) || num < 1) {
-			// need to handle carefully, so that if on page 1 we reset the input box
-			inputPage = '1';
-			page = 1;
-			// page = 1;
-		} else if (num > numPages) {
-			page = numPages;
-			//  inputPage = numPages.toString();
-		} else if (page !== num) {
-			page = num;
-		}
-	};
+	let numPages = $derived(Math.ceil(numRows / pageSize));
 </script>
 
 <div
-	class="border-t border-color-ui-border-primary flex justify-between items-center text-sm text-color-text-secondary"
+	class="flex items-center justify-between border-t border-color-ui-border-primary text-sm text-color-text-secondary"
 >
 	<div class="">
 		Showing {firstRowNum} to {lastRowNum} of {numRows} entries.
 	</div>
 
 	<div class="flex items-center">
-		<Button variant="text" size="sm" disabled={page === 1} on:click={() => page--}>
-			<Icon src={ChevronLeft} theme="mini" class="w-5 h-5" aria-hidden="true" />
+		<Button variant="text" size="sm" disabled={page === 1} onclick={() => page--}>
+			<Icon src={ChevronLeft} theme="mini" class="h-5 w-5" aria-hidden="true" />
 			Previous
 		</Button>
 		<div>
-			Page <input bind:value={inputPage} on:change={inputPageChanged} class="border w-12" /> of {numPages}
+			Page <input bind:value={() => page.toString(), (v) => (page = +v)} class="w-12 border" />
+			of {numPages}
 		</div>
-		<Button variant="text" size="sm" disabled={page === numPages} on:click={() => page++}>
+		<Button variant="text" size="sm" disabled={page === numPages} onclick={() => page++}>
 			Next
-			<Icon src={ChevronRight} theme="mini" class="w-5 h-5" aria-hidden="true" />
+			<Icon src={ChevronRight} theme="mini" class="h-5 w-5" aria-hidden="true" />
 		</Button>
 	</div>
 </div>

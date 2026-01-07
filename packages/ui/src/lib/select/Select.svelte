@@ -1,300 +1,300 @@
 <script lang="ts">
+	import type { ComponentProps } from 'svelte';
+
 	/**
-	 * The `Select` component allows users to select an option form a drop-down list of alternatives.
-	 * Our select element is a wrapper around ['Svelte Select'](https://github.com/rob-balfre/svelte-select).
-	 * Many of the props exposed by this component are provided by `svelte-select`, so you may find it helpful to consult its documentation and [list of examples](https://svelte-select-examples.vercel.app/examples).
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
 	 *
-	 * Notably, this wrapper implements a `justValues` prop that can be bound to, and the `InputWrapper` chrome (label, description, tooltip, error, etc.)
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
 	 * @component
 	 */
 
-	import { randomId } from '../utils/randomId';
+	import Svelecte from 'svelecte';
 
-	import SvelteSelect from 'svelte-select';
+	import {
+		dndzone as dnd,
+		overrideItemIdKeyNameBeforeInitialisingDndZones
+	} from 'svelte-dnd-action';
+
 	import InputWrapper from '../input/InputWrapper.svelte';
+	import type { InputProps } from '../input/types';
 
-	/**
-	 * Each element of this array represents an available option, and is an object with the properties:
-	 * * `value` (string) - the value that is stored in `justValue` if this item is selected
-	 * * `label` (string) - the text displayed in the drop-down list of options
-	 *
-	 * Note that a different field can be used in place of `label`, if this name is provided as the `itemLabelField` prop.
-	 */
-	export let items: { [key: string]: any }[];
+	type SvelectComponentPropsType = ComponentProps<typeof Svelecte>;
 
-	/**
-	 * Name of the field of entries in `items` that should be used as the *label*.
-	 */
-	export let itemLabelField = 'label';
+	interface Props extends InputProps, SvelectComponentPropsType {
+		/**
+		 * If `true`, then selected items can be re-ordered by drag-and-drop.
+		 */
+		reorderable?: boolean;
+	}
 
-	/**
-	 * Name of the field of entries in `items` that should be used as the *value* recorded in `justValue`.
-	 */
-	export let itemValueField = 'value';
+	// TODO: check events forwared
+	// TODO: check relationship between inputID and id (wrapper) prop
 
-	/**
-	 * if `true`, then multiple items can be selected.
-	 */
-	export let multiple = false;
+	let {
+		value = $bindable(),
 
-	/**
-	 * Array containing the entries of `items` array that are currently selected. An array of just values is available as `justValues`.
-	 */
-	export let value: any = null;
+		//svelecte stuff
+		options,
+		reorderable,
+		name,
+		inputId,
+		required,
+		optionResolver,
+		valueAsObject,
+		parentValue,
+		valueField = 'value',
+		labelField = 'label',
+		groupLabelField,
+		groupItemsField,
+		disabledField,
+		placeholder = 'Select an option',
+		searchable,
+		clearable,
+		renderer,
+		disableHighlight,
+		highlightFirstItem,
+		selectOnTab,
+		resetOnBlur,
+		resetOnSelect,
+		closeAfterSelect,
+		deselectMode,
+		strictMode,
+		multiple,
+		max,
+		collapseSelection,
+		keepSelectionInList,
+		creatable,
+		creatablePrefix,
+		allowEditing,
+		keepCreated,
+		delimiter,
+		createFilter,
+		createHandler,
+		fetch,
+		fetchProps,
+		fetchCallback,
+		fetchResetOnBlur,
+		fetchDebounceTime,
+		minQuery,
+		lazyDropdown,
+		positionResolver,
+		virtualList,
+		vlItemSize,
+		searchProps,
+		class: classes,
+		i18n,
+		anchor_element,
+		controlClass,
+		dropdownClass,
+		optionClass,
 
-	/**
-	 * array containing the `value`s of selected items; unlike the prop exposed by the `svelte-select` component it is writable
-	 */
-	export let justValue: any = undefined;
+		onChange,
+		onFocus,
+		onBlur,
+		onCreateOption,
+		onCreateFail,
+		onEnterKey,
+		onFetch,
+		onFetchError,
+		onInvalidValue,
+		readSelection,
 
-	/**
-	 * The `id` of the `<input>` element: defaults to a randomly-generated value.
-	 */
-	export let id = randomId();
+		// input wrapper stuff
+		id,
+		disabled,
+		error,
 
-	/**
-	 * `name` attribute assigned to hidden input, used in form submissions
-	 */
-	export let name = '';
+		...restProps
+	}: Props = $props();
 
-	/**
-	 * Placeholder text displayed before any options are selected.
-	 */
-	export let placeholder = 'Select an option';
-
-	/**
-	 * If `true`, then users are prevented from interacting with the control.
-	 */
-	export let disabled = false;
-
-	/**
-	 * Message to be displayed below the control in red text (replacing description).
-	 * If set, then the border of the control` is also red.
-	 */
-	export let error = '';
-
-	// svelte-select options
-
-	/**
-	 * if `false`, there is a cross-shaped symbol on each selected item to un-select it; if `true`, there is no cross symbol, and clicking anywhere on item un-selects it.
-	 */
-	export let multiFullItemClearable = false;
-
-	/**
-	 * if `true` element has focus.
-	 */
-	export let focused = false;
-
-	/**
-	 * text used to filter `items`
-	 */
-	export let filterText = '';
-
-	/**
-	 * If `true` and `multiple` is also `true`, then the placeholder text is always displayed, rather than disappearing when first item is selected.
-	 */
-	export let placeholderAlwaysShow = false;
-
-	export let itemFilter = (label: string, filterText: string) =>
-		`${label}`.toLowerCase().includes(filterText.toLowerCase());
-	export let groupBy: any = undefined;
-	export let groupFilter = (groups: any) => groups;
-
-	/**
-	 * determines whether header items in `items` are selectable.
-	 */
-	export let groupHeaderSelectable = false;
-
-	/**
-	 * function that can be used to asynchronously load items.
-	 */
-	export let loadOptions: any = undefined;
-
-	/**
-	 * determines whether field is required.
-	 */
-	export let required = false;
-
-	/**
-	 * if `true`, then the list of options will close when `on:change` event fires.
-	 */
-	export let closeListOnChange = true;
-
-	export let createGroupHeaderItem: any = undefined; // ?
-
-	/**
-	 * if `false` then filtering of options list is disabled.
-	 */
-	export let searchable = true;
-
-	/**
-	 * determines whether selected values can be cleared.
-	 */
-	export let clearable = false;
-
-	/**
-	 * if `true` then loading icon is displayed.
-	 */
-	export let loading = false;
-
-	/**
-	 * controls whether list of options is currently open.
-	 */
-	export let listOpen = false;
-
-	export let debounce: any = undefined;
-
-	/**
-	 * debounce wait in milliseconds.
-	 */
-	export let debounceWait = 300;
-
-	/**
-	 * if `true`, then hide list of options when it is empty.
-	 */
-	export let hideEmptyState = false;
-
-	/**
-	 * if `false`, then Chevron is not shown.
-	 */
-	export let showChevron = true;
-
-	/**
-	 * if `false` will ignore width of select
-	 */
-	export let listAutoWidth = true;
-
-	export let listOffset = 5;
-
-	export let floatingConfig = {};
-
-	// respond to external change in justValue
-	const applyChangeFromjustValue = (newjustValue: any) => {
-		if (multiple) {
-			// in this case, newjustValue and newValue are both arrays
-			if (
-				!value ||
-				JSON.stringify(newjustValue) != JSON.stringify(value.map((v: any) => v[itemValueField]))
-			) {
-				value = items.filter((f) => (newjustValue ?? []).includes(f[itemValueField]));
-			}
-		} else {
-			if (value === null || value === undefined || newjustValue != value[itemValueField]) {
-				value = items.find((f) => f[itemValueField] === newjustValue);
-			}
-		}
-	};
-	$: applyChangeFromjustValue(justValue);
-
-	// respond to changes in selection
-	const updatejustValueFromSelection = (newValue: { [key: string]: any }) => {
-		if (multiple) {
-			// in this case, newjustValue and newValue are both arrays
-			const newjustValue = newValue && newValue.map((v: any) => v[itemValueField]);
-			if (JSON.stringify(justValue) !== JSON.stringify(newjustValue)) {
-				justValue = newjustValue;
-			}
-		} else {
-			const newjustValue = newValue && newValue[itemValueField];
-			if (justValue !== newjustValue) {
-				justValue = newjustValue;
-			}
-		}
-	};
-	$: updatejustValueFromSelection(value);
+	let dndzone = $derived(reorderable ? dnd : undefined);
+	overrideItemIdKeyNameBeforeInitialisingDndZones(valueField ?? 'value');
 </script>
 
-<InputWrapper {...$$restProps} {id} {disabled} {error}>
-	<slot name="hint" slot="hint" />
-	<div>
-		<SvelteSelect
-			{name}
-			{id}
-			label={itemLabelField}
-			class="form-select"
-			{items}
-			{multiple}
-			{multiFullItemClearable}
-			{focused}
-			bind:value
-			{filterText}
-			{placeholderAlwaysShow}
-			{itemFilter}
-			{groupBy}
-			{groupFilter}
-			{groupHeaderSelectable}
-			itemId={itemValueField}
-			{loadOptions}
-			hasError={!!error}
-			{required}
-			{closeListOnChange}
-			{createGroupHeaderItem}
-			{searchable}
-			{clearable}
-			{loading}
-			{listOpen}
-			{debounce}
-			{debounceWait}
-			{hideEmptyState}
-			{listAutoWidth}
-			{listOffset}
-			{floatingConfig}
-			{disabled}
-			{placeholder}
-			{showChevron}
-			on:change
-			on:input
-			on:focus
-			on:blur
-			on:clear
-			on:loaded
-			on:error
-			on:filter
-			on:hoverItem
-		/>
-	</div>
+<InputWrapper {...restProps} {id} {disabled} {error}>
+	<Svelecte
+		bind:value
+		{options}
+		{name}
+		{inputId}
+		{required}
+		{optionResolver}
+		{valueAsObject}
+		{parentValue}
+		{valueField}
+		{labelField}
+		{groupLabelField}
+		{groupItemsField}
+		{disabledField}
+		{placeholder}
+		{searchable}
+		{clearable}
+		{renderer}
+		{disableHighlight}
+		{highlightFirstItem}
+		{selectOnTab}
+		{resetOnBlur}
+		{resetOnSelect}
+		{closeAfterSelect}
+		{deselectMode}
+		{strictMode}
+		{multiple}
+		{max}
+		{collapseSelection}
+		{keepSelectionInList}
+		{creatable}
+		{creatablePrefix}
+		{allowEditing}
+		{keepCreated}
+		{delimiter}
+		{createFilter}
+		{createHandler}
+		{fetch}
+		{fetchProps}
+		{fetchCallback}
+		{fetchResetOnBlur}
+		{fetchDebounceTime}
+		{minQuery}
+		{lazyDropdown}
+		{positionResolver}
+		{virtualList}
+		{vlItemSize}
+		{searchProps}
+		class={`form-select ${classes} ${error ? 'has-error' : ''}`}
+		{i18n}
+		{dndzone}
+		{anchor_element}
+		{controlClass}
+		{dropdownClass}
+		{optionClass}
+		{disabled}
+		{readSelection}
+		{onChange}
+		{onFocus}
+		{onBlur}
+		{onCreateOption}
+		{onCreateFail}
+		{onEnterKey}
+		{onFetch}
+		{onFetchError}
+		{onInvalidValue}
+	/>
 </InputWrapper>
 
 {#if true}
 	<style>
-		/* See: https://github.com/rob-balfre/svelte-select/blob/master/docs/theming_variables.md */
-		.form-select {
-			--border: var(--theme-input-border) 1px solid;
-			--border-focused: var(--theme-input-border-focussed) 1px solid;
-			--border-hover: var(--theme-input-border-hover) 1px solid;
-			--border-radius: 0;
-			--placeholder-color: var(--theme-input-placeholder);
-			--placeholder-opacity: 100%;
-			--background: var(--theme-input-background);
-			--chevron-color: var(--theme-input-icon);
-			--chevron-icon-colour: var(--theme-input-icon);
-			--clear-icon-color: var(--theme-input-icon);
-			--disabled-background: var(--theme-input-background-disabled);
-			--disabled-border-color: var(--theme-input-border-disabled);
-			--disabled-color: var(--theme-input-label-disabled);
-			--disabled-placeholder-color: var(--theme-ui-disabled);
-			--disabled-placeholder-opacity: 100%;
-			--error-background: var(--theme-input-background);
-			--error-border: var(--theme-input-border-error) 1px solid;
-			--icons-color: var(--theme-input-icon);
-			--input-color: var(--theme-input-valuetext);
-			--item-first-border-radius: 0;
-			--item-hover-bg: var(--theme-input-background-hover);
-			--item-is-active-bg: var(--theme-input-background-selected);
-			--item-is-active-color: var(--theme-static-white);
-			--item-is-not-selectable-color: var(--theme-text-disabled);
-			--list-background: var(--theme-input-background);
-			--list-border: var(--theme-input-border) 1px solid;
-			--list-border-radius: 0;
-			--list-empty-color: var(--theme-ui-background-empty);
-			--list-z-index: 40;
-			--multi-item-active-outline: var(--theme-ui-border-secondary);
-			--multi-item-bg: var(--theme-input-background);
-			--multi-item-border-radius: 0;
-			--multi-item-clear-icon-color: var(--theme-input-icon);
-			--multi-item-color: var(--theme-text-primary);
-			--multi-item-disabled-hover-bg: var(--theme-input-background-disabled);
-			--multi-item-disabled-hover-color: var(--theme-ui-disabled);
+		/* See: https://svelecte.vercel.app/theme */
+		.form-select.svelecte {
+			/** Custom css varibales **/
+			--sv-min-height: 42px;
+			--sv-bg: var(--theme-input-background);
+			--sv-color: var(--theme-input-valuetext);
+			--sv-disabled-bg: var(--theme-input-background-disabled);
+			--sv-border: var(--theme-input-border) 0px solid;
+			--sv-border-radius: 0px;
+			--sv-general-padding: var(--spacing-xs) var(--spacing-sm);
+			--sv-control-bg: var(--sv-bg);
+
+			--sv-item-wrap-padding: var(--spacing-sm) var(--spacing-xs);
+			--sv-item-selected-bg: var(--theme-input-background-selected);
+			--sv-item-btn-color: #000;
+			--sv-item-btn-color-hover: #777;
+			--sv-item-btn-bg: #efefef;
+			--sv-item-btn-bg-hover: #ddd;
+
+			--sv-icon-color: var(--theme-input-icon);
+			--sv-icon-color-hover: #777;
+			--sv-icon-bg: transparent;
+			--sv-icon-size: 20px;
+			--sv-separator-bg: var(--theme-ui-border-secondary);
+			--sv-btn-border: 0;
+			--sv-placeholder-color: var(--theme-input-placeholder);
+
+			--sv-dropdown-bg: var(--sv-bg);
+			--sv-dropdown-offset: var(--spacing-xs);
+			--sv-dropdown-border: var(--theme-input-border) 1px solid;
+			--sv-dropdown-width: auto;
+			--sv-dropdown-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			--sv-dropdown-height: 320px;
+
+			--sv-dropdown-active-bg: var(--theme-input-background-hover);
+			--sv-dropdown-selected-bg: var(--theme-input-background-selected);
+
+			--sv-create-kbd-border: var(--theme-input-border) 1px solid;
+			--sv-create-kbd-bg: var(--theme-input-background);
+			--sv-create-disabled-bg: var(--theme-input-background-disabled);
+			--sv-loader-border: var(--theme-ui-border-secondary) 2px solid;
+		}
+
+		/* Reset allows use of form-select class elsehwere if needed */
+		.form-select.svelecte {
+			padding: 0;
+		}
+
+		/* Override svelecte */
+		.form-select.svelecte .sv-item--wrap.in-dropdown:hover {
+			background-color: var(--theme-input-background-hover);
+		}
+
+		/* Stop active and selected having same color */
+		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected,
+		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected:hover {
+			background-color: var(--theme-input-background-active);
+			color: #fff;
+		}
+
+		.form-select.svelecte .in-dropdown.is-selected,
+		.form-select.svelecte .in-dropdown.is-selected:hover {
+			background-color: var(--theme-input-background-active);
+			color: #fff;
+		}
+
+		.form-select.svelecte .sv-dropdown-scroll.has-items {
+			padding: 0px;
+		}
+
+		.form-select.svelecte .sv-input--sizer:after,
+		.form-select.svelecte .sv-input--text {
+			padding: 0px;
+		}
+
+		/* multiple selected items */
+		.form-select.svelecte .sv-item--container > .sv-item--wrap.is-multi {
+			border: var(--theme-input-border) 1px solid;
+			border-right: none;
+			padding-right: var(--spacing-xs);
+		}
+
+		.form-select.svelecte .sv-item--container .sv-item--btn {
+			border: var(--theme-input-border) 1px solid;
+		}
+
+		.form-select.svelecte .sv-item--wrap.is-multi {
+			background-color: var(--theme-input-background);
+		}
+
+		/* States */
+		.form-select.svelecte.has-error {
+			border: var(--theme-input-border-error) 1px solid;
+		}
+
+		.form-select.svelecte:hover {
+			border: var(--theme-input-border-hover) 1px solid;
+		}
+
+		.form-select.svelecte:hover {
+			border: var(--theme-input-border-focussed) 1px solid;
+		}
+
+		.form-select.svelecte.is-disabled {
+			--sv-placeholder-color: var(--theme-input-label-disabled);
+		}
+
+		.form-select.svelecte.is-disabled:hover {
+			cursor: not-allowed;
+			border: var(--theme-input-border) 1px solid;
 		}
 	</style>
 {/if}

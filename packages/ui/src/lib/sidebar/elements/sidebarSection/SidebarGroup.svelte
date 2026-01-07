@@ -1,28 +1,30 @@
 <script lang="ts">
-	/**
-	 * The `<SidebarGroup>` component is used to group together a 'section' of content within a `<Sidebar>`.
-	 * As well as accepting a section title as a prop (which it displays as a `<SidebarGroupTitle>`), it accepts the section content as a slot.
-	 * @component
-	 */
+	import type { Snippet } from 'svelte';
+
 	import SidebarGroupTitle from './sidebarGroupTitle/SidebarGroupTitle.svelte';
 
-	/**
-	 * The title of this section. Note that rather than supplying a title, you can supply a `<SidebarGroupTitle>` component in the `title` slot.
-	 */
-	export let title = '';
+	interface Props {
+		/**
+		 * The title of this section. Note that rather than supplying a title, you can supply a `<SidebarGroupTitle>` component as a`title` snippet.
+		 */
+		title?: Snippet | string;
+		children?: Snippet;
+	}
+
+	let { title = '', children }: Props = $props();
 </script>
 
 <section>
 	<div
-		class="space-y-2 pb-2 last-of-type:pb-0 text-sm bg-color-container-level-1 text-color-text-primary"
+		class="space-y-2 bg-color-container-level-1 pb-2 text-sm text-color-text-primary last-of-type:pb-0"
 	>
-		{#if $$slots.title}
-			<!-- An optional `<SidebarGroupTitle>` component, which can accept a subtitle. -->
-			<slot name="title" />
+		{#if typeof title != 'string'}
+			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->
+			{@render title()}
 		{:else if title}
 			<SidebarGroupTitle>{title}</SidebarGroupTitle>
 		{/if}
 		<!-- The content to be displayed inside this section. -->
-		<slot />
+		{@render children?.()}
 	</div>
 </section>

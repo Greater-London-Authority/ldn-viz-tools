@@ -9,33 +9,47 @@
 
 	import { ExclamationTriangle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { Snippet } from 'svelte';
 	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 
-	/**
-	 * If `true`, then a spinner is displayed in place of the icon.
-	 */
-	export let spinner = false;
+	export interface NonIdealStateProps {
+		/**
+		 * If `true`, then a spinner is displayed in place of the icon.
+		 */
+		spinner?: boolean;
+		icon?: Snippet;
+		title?: Snippet;
+		children?: Snippet;
+	}
+
+	let { spinner = false, icon, title, children }: NonIdealStateProps = $props();
 </script>
 
 <div
-	class="flex flex-col items-center justify-center text-center text-color-text-secondary gap-2 bg-color-ui-background-neutral border border-color-ui-border-secondary px-2 py-2 w-full h-full"
+	class="flex h-full w-full flex-col items-center justify-center gap-2 border border-color-ui-border-secondary bg-color-ui-background-neutral px-2 py-2 text-center text-color-text-secondary"
 >
 	{#if spinner}
-		<LoadingIndicator class="w-12 h-12" />
+		<LoadingIndicator class="h-12 w-12" />
 	{:else}
 		<!-- contains the icon -->
-		<slot name="icon">
-			<Icon src={ExclamationTriangle} theme="solid" class="w-6 h-6" aria-hidden="true" />
-		</slot>
+		{#if icon}
+			{@render icon()}
+		{:else}
+			<Icon src={ExclamationTriangle} theme="solid" class="h-6 w-6" aria-hidden="true" />
+		{/if}
 	{/if}
 
-	<span class="text-lg font-bold max-w-xl">
+	<span class="max-w-xl text-lg font-bold">
 		<!-- contains the title text, displayed below the icon -->
-		<slot name="title">Nothing to display</slot>
+		{#if title}
+			{@render title()}
+		{:else}
+			Nothing to display
+		{/if}
 	</span>
 
 	<div class="max-w-xl">
 		<!-- inserted into a `<div>` below the description -->
-		<slot />
+		{@render children?.()}
 	</div>
 </div>

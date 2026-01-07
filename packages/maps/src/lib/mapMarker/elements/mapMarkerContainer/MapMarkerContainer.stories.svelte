@@ -1,9 +1,13 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerContainer from './MapMarkerContainer.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerContainer',
 		component: MapMarkerContainer,
+		tags: ['autodocs'],
+		render: defaultTemplate,
+
 		parameters: {
 			layout: 'full'
 		},
@@ -26,11 +30,10 @@
 				control: 'none'
 			}
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -48,33 +51,35 @@
 	setContext('mapStore', writable(null));
 </script>
 
-<Template let:args>
+{#snippet defaultTemplate({ args })}
 	<MapMarkerContainer {...args} />
-</Template>
+{/snippet}
 
 <Story name="Interactive Example">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/polygon"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/line"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/point"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/polygon"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/line"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/point"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>

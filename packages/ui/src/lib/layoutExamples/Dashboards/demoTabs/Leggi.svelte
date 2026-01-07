@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
 	import Button from '../../../button/Button.svelte';
 	import InputWrapper from '../../../input/InputWrapper.svelte';
 	import Select from '../../../select/Select.svelte';
@@ -23,21 +22,21 @@
 		{ label: 'Sector 2', value: 3 }
 	];
 
-	$: selectedYear = writable(2022);
+	let selectedYear = $state(2022);
 </script>
 
 <SidebarSection>
 	<SidebarSectionTitle>
 		Controls
-		<svelte:fragment slot="subTitle">
+		{#snippet subTitle()}
 			Use the selections below to explore and filter the data
-		</svelte:fragment>
+		{/snippet}
 	</SidebarSectionTitle>
 
 	<SidebarGroup>
-		<Select items={boroughItems} label="Borough" id="example-input-1" />
-		<Select items={sectorItems} label="Sector" id="example-input-2" />
-		<InputWrapper label={`Year: ${$selectedYear}`} id="yearSlider">
+		<Select options={boroughItems} label="Borough" id="example-input-1" />
+		<Select options={sectorItems} label="Sector" id="example-input-2" />
+		<InputWrapper label={`Year: ${selectedYear}`} id="yearSlider">
 			<input
 				type="range"
 				id="yearSlider"
@@ -46,7 +45,7 @@
 				max="2022"
 				style="width: 100%;"
 				class="form-range"
-				bind:value={$selectedYear}
+				bind:value={() => selectedYear.toString(), (v) => (selectedYear = +v)}
 			/>
 		</InputWrapper>
 	</SidebarGroup>

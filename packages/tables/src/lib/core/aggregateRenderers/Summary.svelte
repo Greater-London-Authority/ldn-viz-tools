@@ -4,20 +4,12 @@
 	 */
 	import { max, mean, median, min } from 'd3-array';
 	import { format } from 'd3-format';
+	import type { SummaryProps } from '$lib/core/aggregateRenderers/SummaryProps';
 
-	/**
-	 * Array of values to be displayed.
-	 */
-	export let values: number[];
+	let { values, formatString = '0.0f', ...rest }: SummaryProps = $props();
 
-	export let formatString = '0.0f';
-
-	$: f = format(formatString);
-	$: f2 = (val: number | undefined) => (val === undefined ? 'undefined' : f(val));
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let f = $derived(format(formatString));
+	let f2 = $derived((val: number | undefined) => (val === undefined ? 'undefined' : f(val)));
 </script>
 
 <span

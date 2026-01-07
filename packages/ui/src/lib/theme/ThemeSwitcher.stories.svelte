@@ -1,20 +1,25 @@
-<script context="module">
-	import Theme from './Theme.svelte';
+<script context="module" lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 
-	export const meta = {
-		title: 'Ui/Components - Layout And Themes/Themes/ThemeSwitcher',
-		component: ThemeSwitcher
-	};
+	/**
+	 * The `<ThemeSwitcher>` component provides a select for the current theme - light, dark or system.
+	 *
+	 * **Important**: Requires the inclusion of the sibling "Theme" component. This should be implemented in the top level Layout component of the app. The theme switcher can then live at any level(s)
+	 */
+
+	const { Story } = defineMeta({
+		title: 'Ui/Components - Layout And Themes/Theme Switcher',
+		component: ThemeSwitcher,
+		tags: ['autodocs'],
+		render: defaultTemplate
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<Theme />
+{#snippet defaultTemplate(args: { [key: string]: any })}
 	<ThemeSwitcher {...args} />
-</Template>
+{/snippet}
 
-<Story name="Default" source />
+<Story name="Default" />
+
+<Story name="With size" args={{ size: 'xs' }} />

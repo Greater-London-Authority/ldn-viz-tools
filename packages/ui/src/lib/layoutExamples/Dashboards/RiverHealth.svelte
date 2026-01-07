@@ -10,7 +10,6 @@
 	import Sidebar from '../../sidebar/Sidebar.svelte';
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 	import { Demo1, Sewers } from './demoTabs';
 
@@ -22,47 +21,52 @@
 	];
 </script>
 
-<!--Only need the theme in a story in an app this will be in the layout-->
-<Theme />
-<AppShell
-	sidebarPlacement={{ initial: 'right' }}
-	sidebarAlwaysOpen={{ initial: 'false', md: 'true' }}
->
-	<svelte:fragment slot="main">
-		<div class="bg-color-canvas-background-1 h-full p-6 pr-24">
+<AppShell sidebarPlacement={{ initial: 'right' }} sidebarAlwaysOpen={{ initial: false, md: true }}>
+	{#snippet main()}
+		<div class="h-full bg-color-canvas-background-1 p-6 pr-24">
 			<div class="mb-4">
-				<h1 class="text-2xl text-color-text-primary font-bold">This is the main content area</h1>
+				<h1 class="text-2xl font-bold text-color-text-primary">This is the main content area</h1>
 				<h2 class="text-xl text-color-text-secondary">
 					Maecenas ut libero vel nibh maximus feugiat non sed tortor.
 				</h2>
 			</div>
 		</div>
-	</svelte:fragment>
-	<Sidebar slot="sidebar" {tabs}>
-		<!-- HEADER -->
-		<SidebarHeader title="London's River Health" slot="header">
-			<svelte:fragment slot="subTitle">
-				<p>How healthy is your local river?</p>
-			</svelte:fragment>
-			<Overlay slot="hint" overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
-		</SidebarHeader>
+	{/snippet}
 
-		<!-- FOOTER -->
-		<SidebarFooter slot="footer">
-			<div class="flex justify-between">
-				<div class="w-[165px]"><LogoMayor /></div>
-				<div class="w-[165px]"><LogoCIU /></div>
-			</div>
-			<svelte:fragment slot="menu">
-				<div class="flex justify-between">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
+	{#snippet sidebar()}
+		<Sidebar {tabs}>
+			<!-- HEADER -->
+			{#snippet header()}
+				<SidebarHeader title="London's River Health">
+					{#snippet subTitle()}
+						<p>How healthy is your local river?</p>
+					{/snippet}
 
-					<ThemeSwitcher size="xs" />
-				</div>
-			</svelte:fragment>
-		</SidebarFooter>
-	</Sidebar>
+					{#snippet hint()}
+						<Overlay overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+					{/snippet}
+				</SidebarHeader>
+			{/snippet}
+
+			<!-- FOOTER -->
+			{#snippet footer()}
+				<SidebarFooter>
+					<div class="flex justify-between">
+						<div class="w-[165px]"><LogoMayor /></div>
+						<div class="w-[165px]"><LogoCIU /></div>
+					</div>
+					{#snippet menu()}
+						<div class="flex justify-between">
+							<ul class="flex space-x-2">
+								<li>View Cookie settings</li>
+								<li>Privacy Policy</li>
+							</ul>
+
+							<ThemeSwitcher size="xs" />
+						</div>
+					{/snippet}
+				</SidebarFooter>
+			{/snippet}
+		</Sidebar>
+	{/snippet}
 </AppShell>

@@ -11,42 +11,43 @@
 
 	import boroughs from './boroughs.json';
 
-	/**
-	 * Name of the selected borough: can be bound to.
-	 */
-	export let selectedBorough: string | undefined = undefined;
+	interface Props {
+		/**
+		 * Name of the selected borough: can be bound to.
+		 */
+		selectedBorough?: string | undefined;
+		/**
+		 * Maplibre map object, corresponding to the map that will be zoomed.
+		 */
+		map?: MaplibreglMap | undefined;
+	}
 
-	/**
-	 * Maplibre map object, corresponding to the map that will be zoomed.
-	 */
-	export let map: MaplibreglMap | undefined = undefined;
+	let { selectedBorough = $bindable('London Borough of Barnet'), map = undefined }: Props =
+		$props();
 
-	$: options = [
+	let options = $derived([
 		{ id: '', label: 'Show all of Greater London', value: 'GREATER LONDON' },
 		...boroughs
 			.map((b) => ({
-				id: b.properties.borough,
+				//id: b.properties.borough,
 				label: b.properties.name,
 				value: b.properties.borough
 			}))
 			.sort((a, b) => (a.label > b.label ? 1 : b.label > a.label ? -1 : 0))
-	];
+	]);
 
-	$: if (selectedBorough && boroughs.length > 0 && map) {
-		if (selectedBorough === 'GREATER LONDON') {
-			map.fitBounds(GREATER_LONDON_BOUNDS);
-		} else {
-			const bounds = boroughs.filter((f) => f.properties.borough === selectedBorough)[0].bounds;
-			map.fitBounds(bounds);
+	$effect(() => {
+		if (selectedBorough && boroughs.length > 0 && map) {
+			if (selectedBorough === 'GREATER LONDON') {
+				map.fitBounds(GREATER_LONDON_BOUNDS);
+			} else {
+				const bounds = boroughs.filter((f) => f.properties.borough === selectedBorough)[0].bounds;
+				map.fitBounds(bounds);
+			}
 		}
-	}
+	});
 </script>
 
-<div class="flex flex-col invisible sm:visible z-[999] w-64 pointer-events-auto shadow">
-	<Select
-		bind:justValue={selectedBorough}
-		items={options}
-		label=""
-		placeholder="Select a Borough to zoom"
-	/>
+<div class="pointer-events-auto invisible z-[999] flex w-64 flex-col shadow sm:visible">
+	<Select bind:value={selectedBorough} {options} label="" placeholder="Select a Borough to zoom" />
 </div>

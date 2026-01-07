@@ -1,24 +1,26 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import { classNames } from '../utils/classNames';
 	import type { Tab } from './types';
 
-	/**
-	 * Unique identifier that is used to set the value of `selectedValue` for the parent `TabList` when this item is selected.
-	 * Also connects TabLabel to relevant TabPanel
-	 */
-	export let tabId: Tab['id'];
+	interface Props {
+		/**
+		 * Unique identifier that is used to set the value of `selectedTabId` for the parent `TabList` when this item is selected.
+		 * Also connects TabLabel to relevant TabPanel
+		 */
+		tabId: Tab['id'];
+		handleSelect: any;
+		orientation?: 'vertical' | 'horizontal';
+		selectedTabId?: Tab['id'];
+		children?: import('svelte').Snippet;
+	}
 
-	export let handleSelect;
-
-	export let orientation: 'vertical' | 'horizontal' = 'vertical';
-
-	const { selectedValue } = getContext<{
-		selectedValue: Writable<string>;
-	}>('tabContext');
-
-	$: isSelected = tabId === $selectedValue;
+	let {
+		tabId,
+		handleSelect,
+		orientation = 'vertical',
+		selectedTabId = $bindable(),
+		children
+	}: Props = $props();
 
 	const orientationClasses = {
 		vertical: 'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center',
@@ -29,10 +31,13 @@
 		'bg-color-input-background-off text-color-text-primary underline hover:bg-color-input-background-hover hover:no-underline',
 		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-action-primary-focussed focus:ring-2 focus:outline-none focus:ring-color-ui-background-primary'
 	);
+
+	let isSelected = $derived(tabId === selectedTabId);
 </script>
 
+<!-- TODO: Why isn't this a Button? -->
 <button
-	on:click={() => handleSelect(tabId)}
+	onclick={() => handleSelect(tabId)}
 	id={tabId}
 	role="tab"
 	aria-controls={`${tabId}-panel`}
@@ -42,10 +47,10 @@
 		tabLabelClasses,
 		orientationClasses[orientation],
 		isSelected
-			? '!bg-color-input-background-active !text-color-static-white cursor-default no-underline'
+			? 'cursor-default !bg-color-input-background-active !text-color-static-white no-underline'
 			: ''
 	)}
 >
 	<!-- contents of the tab label (name and/or icon) -->
-	<slot />
+	{@render children?.()}
 </button>
