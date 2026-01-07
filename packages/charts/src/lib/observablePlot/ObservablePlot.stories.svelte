@@ -34,7 +34,7 @@
 </script>
 
 <script lang="ts">
-	import { Select, theme } from '@ldn-viz/ui';
+	import { Button, Select, theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
@@ -79,7 +79,7 @@
 						markShape: 'Path',
 						type: 'mouseenter',
 						handler: (_: any, d: { index: number }) => {
-							// this prevents an endless loop of updating hoveredValue, which triggers a re-render of the plot, which casues a new mouseEnter event
+							// this prevents an endless loop of updating hoveredValue, which triggers a re-render of the plot, which causes a new mouseEnter event
 							if (hoveredValue?.Year != chartData[d.index].Year) {
 								hoveredValue = chartData[d.index];
 							}
@@ -121,6 +121,8 @@
 			})
 		]
 	});
+
+	let width = $state('w-96');
 </script>
 
 <Story name="Default">
@@ -128,6 +130,7 @@
 		<ObservablePlot {...args} {spec} data={chartData} />
 	{/snippet}
 </Story>
+
 <!-- 
 	The width of the chart is contained within the wrapping chart container.
 	Tailwind width classes can be used to control the width. Either fixed: (e.g. `w-[500px]`) or responsive: (e.g. `w-1/2`)
@@ -276,5 +279,76 @@
 				</div>
 			{/snippet}
 		</ObservablePlot>
+	{/snippet}
+</Story>
+
+<Story name="No downloads">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			dataDownloadButton={false}
+			imageDownloadButton={false}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Only (CSV) data downloads">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			imageDownloadButton={false}
+			dataDownloadButton={['CSV']}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Only (PNG) image downloads">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			imageDownloadButton={['PNG']}
+			dataDownloadButton={false}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Responsive resizing">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			<div>
+				<span>Set width to:</span>
+				<Button onclick={() => (width = 'w-96')}>384px</Button>
+				<Button onclick={() => (width = 'w-1/2')}>Half-width</Button>
+
+				<Button onclick={() => (width = 'w-full')}>Full-width</Button>
+			</div>
+
+			<div class={width}>
+				<ObservablePlot
+					{...args}
+					{spec}
+					data={chartData}
+					imageDownloadButton={['PNG']}
+					dataDownloadButton={false}
+				/>
+			</div>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+	With `ariaHidden=false`, screen readers will read the contents on the chart itself.
+	Usually this is undesirable - we usuallly want them to read the title, subtitle, and surrounding text.
+	(Note that to test screen-readers, it is best to click the arrw-right/external link in the bar above the story to open it in a new tab.)
+-->
+<Story name="With ariaHidden false">
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData} ariaHidden={false} />
 	{/snippet}
 </Story>
