@@ -4,7 +4,7 @@
 	import Toaster from './Toaster.svelte';
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components/Toaster ',
+		title: 'Ui/Components/Toaster',
 		component: Toaster,
 		tags: ['autodocs'],
 
@@ -47,8 +47,10 @@
 	import { newToastMessage } from './toaster';
 	import { ToastType, ToasterPosition } from './types';
 
+	let noticeNumber = 0;
 	const toastNotice = () => {
-		newToastMessage('A notice!').post();
+		noticeNumber++;
+		newToastMessage(`A notice! Number ${noticeNumber}`).post();
 	};
 
 	const toastSuccess = () => {
@@ -87,8 +89,42 @@
 			position = target.textContent as keyof typeof ToasterPosition;
 		}
 	};
+
+	// Functions for story showing refreshing toast
+	let clickCount = $state(0);
+	const refreshableMessage = newToastMessage('This message will refresh, not duplicate!', {
+		id: 'refreshable-toast',
+		timeToLive: 10000,
+		closeButton: true
+	});
+
+	let secondsRemaining = $state(0);
+	let timerInterval: ReturnType<typeof setInterval> | null = null;
+
+	const startTimer = () => {
+		if (timerInterval) {
+			clearInterval(timerInterval);
+		}
+
+		secondsRemaining = 10;
+
+		// Update every 100ms (=0.1s) for smooth countdown
+		timerInterval = setInterval(() => {
+			secondsRemaining -= 0.1;
+			if (secondsRemaining <= 0) {
+				secondsRemaining = 0;
+				if (timerInterval) {
+					clearInterval(timerInterval);
+					timerInterval = null;
+				}
+			}
+		}, 100);
+	};
 </script>
 
+<!--
+Note that MAX_MESSAGES=3; pressing the 'Notice' button quickly to create more messages shows that the older messages are pushed down and hidden.
+-->
 <Story name="Default">
 	{#snippet template(args)}
 		<Button onclick={toastNotice}>Notice</Button>
@@ -152,6 +188,61 @@
 			<Toaster position="Center" />
 			<div class="flex gap-6">
 				<Button onclick={toastClosable}>Toast!</Button>
+			</div>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+Calling `.post()` repeatedly on same toast object will refresh it, rather than creating duplicate toasts.
+-->
+
+<Story name="Refreshing instead of duplicating">
+	{#snippet template()}
+		<div class="h-[100vh] w-[100vw] p-6">
+			<Toaster position="TopCenter" />
+			<div class="flex flex-col gap-4">
+				<div class="flex gap-4">
+					<Button
+						onclick={() => {
+							startTimer();
+							refreshableMessage.post();
+							clickCount++;
+						}}
+					>
+						Post Toast (Count: {clickCount})
+					</Button>
+
+					<Button
+						onclick={() => {
+							refreshableMessage.remove();
+							clickCount++;
+							if (timerInterval) {
+								clearInterval(timerInterval);
+								timerInterval = null;
+							}
+							secondsRemaining = 0;
+						}}
+					>
+						Remove Toast
+					</Button>
+
+					<Button
+						emphasis="secondary"
+						variant="outline"
+						onclick={() => {
+							clickCount = 0;
+						}}
+					>
+						Reset Count
+					</Button>
+				</div>
+
+				{#if secondsRemaining > 0}
+					<div class="text-color-text-secondary">
+						Toast will remain visible for <strong>{secondsRemaining.toFixed(1)}s</strong>
+					</div>
+				{/if}
 			</div>
 		</div>
 	{/snippet}

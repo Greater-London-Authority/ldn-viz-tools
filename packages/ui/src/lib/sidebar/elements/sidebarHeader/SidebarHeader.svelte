@@ -24,7 +24,7 @@
 		/**
 		 * If `true`, then a blue ribbon is added to the left of the title.
 		 */
-		branded?: 'true' | 'false';
+		branded?: boolean;
 		hint?: import('svelte').Snippet;
 		subTitle?: import('svelte').Snippet;
 	}
@@ -32,7 +32,10 @@
 	let { title, branded = 'true', hint, subTitle }: Props = $props();
 
 	let headerClasses = $derived(
-		classNames('py-1 bg-color-container-level-1 text-color-text-primary', brandClasses[branded])
+		classNames(
+			'py-1 bg-color-container-level-1 text-color-text-primary',
+			brandClasses[branded.toString()]
+		)
 	);
 </script>
 

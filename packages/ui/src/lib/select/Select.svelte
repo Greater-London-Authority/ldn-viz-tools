@@ -2,9 +2,9 @@
 	import type { ComponentProps } from 'svelte';
 
 	/**
-	 * The `Select` component allows users to select an option form a drop-down list of alternatives.
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
 	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
-	 * Many of the props exposed by this component are provided by `svelte-select`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
 	 *
 	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
 	 * @component
