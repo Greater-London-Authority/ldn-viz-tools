@@ -106,7 +106,6 @@ module.exports = {
 		'--subtitle-letter-spacing': 'var(--typography-md-product-subtitle-letterspacing)',
 		'--subtitle-font-size': 'var(--typography-md-product-subtitle-fontsize)',
 		'--subtitle-line-height': 'var(--typography-md-product-subtitle-lineheight)',
-		'--subhead-line-height': 'var(--typography-md-product-subhead-lineheight)',
 		//body-lg
 		'--body-lg-font-weight': 'var(--typography-md-product-body-lg-fontweight)',
 		'--body-lg-letter-spacing': 'var(--typography-md-product-body-lg-letterspacing)',
