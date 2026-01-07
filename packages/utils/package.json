@@ -16,8 +16,8 @@
 	],
 	"scripts": {
 		"build": "vite build",
-		"format": "prettier --check . --write",
-		"lint": "prettier --check . && eslint src",
+		"format": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --write .",
+		"lint": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore  --check . && eslint .",
 		"test": "echo no tests",
 		"test:unit": "vitest run"
 	},
