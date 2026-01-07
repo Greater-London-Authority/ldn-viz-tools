@@ -91,7 +91,7 @@
 
 <!-- The sidebar component relies on context from setSidebarState()
 	This is usually defined in a parent appShell, so you dont need to worry about setting it manually.
-	If you ARE using a sidebar outside an appShell then you need to include setSidebarState() in you layout or page (higest level) -->
+	If you ARE using a sidebar outside an appShell then you need to include setSidebarState() in you layout or page (highest level) -->
 {#snippet header()}
 	<SidebarHeader title="Main sidebar title">
 		{#snippet subTitle()}

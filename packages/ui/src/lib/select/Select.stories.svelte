@@ -64,6 +64,8 @@
 
 	let selectedValue: number | null = $state(null);
 	let selectedValueMulti: number[] | null = $state(null);
+	let selectedBorough: string | null = $state(null);
+
 	let error = $state('');
 </script>
 
@@ -252,6 +254,33 @@
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
 			<Select {...args} {options} bind:value={selectedValueMulti} multiple reorderable />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Loading options from API">
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<Select
+				{...args}
+				label="London Borough"
+				placeholder="Select a borough..."
+				fetch="https://api2.ldn-gis.co.uk/tables/geographies/core_london_borough?select=name,gss_code"
+				fetchCallback={(response) => {
+					return response.map((item) => ({
+						label: item.name,
+						value: item.gss_code
+					}));
+				}}
+				labelField="label"
+				valueField="value"
+				bind:value={selectedBorough}
+			/>
+
+			<div class="text-color-text-secondary mt-4">
+				<strong>Selected:</strong>
+				{selectedBorough ?? 'None'}
+			</div>
 		</div>
 	{/snippet}
 </Story>
