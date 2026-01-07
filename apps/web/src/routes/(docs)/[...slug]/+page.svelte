@@ -17,8 +17,4 @@
 	<PageComponent />
 </div>
 
-<div class="hidden min-w-[186px] 2xl:block">
-	<aside class="sticky top-0">
-		<Toc toc={{ items: tocItems }} />
-	</aside>
-</div>
+<Toc toc={{ items: tocItems }} />

@@ -1,7 +1,7 @@
 ---
 title: Themeing
 description: Accessible themes respecting user preference
-section: Introduction
+section: Foundations
 navLabel: Themeing
 ---
 

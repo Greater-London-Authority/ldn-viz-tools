@@ -1,6 +1,7 @@
 import { dataVizGuide, docs, index, type Doc, type Guide } from '$content/index';
 import { error } from '@sveltejs/kit';
 import type { Component } from 'svelte';
+import type { Attachment } from 'svelte/attachments';
 
 const allContent = [...dataVizGuide, ...docs, index];
 
@@ -40,5 +41,39 @@ export const getContent = async (slug: string = 'index') => {
 	return {
 		component: content.default,
 		metadata
+	};
+};
+
+/** Utility Functions */
+
+// Action that copies details to clipboard
+export const clickToCopy: Attachment = (node: HTMLElement, target: any) => {
+	async function copyText() {
+		let text = target ? document.querySelector(target).innerText : node.innerText;
+
+		try {
+			await navigator.clipboard.writeText(text);
+
+			node.dispatchEvent(
+				new CustomEvent('copysuccess', {
+					bubbles: true
+				})
+			);
+		} catch (error) {
+			node.dispatchEvent(
+				new CustomEvent('copyerror', {
+					bubbles: true,
+					detail: error
+				})
+			);
+		}
+	}
+
+	node.addEventListener('click', copyText);
+
+	return {
+		destroy() {
+			node.removeEventListener('click', copyText);
+		}
 	};
 };

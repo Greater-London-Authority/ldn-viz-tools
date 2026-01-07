@@ -4,12 +4,49 @@ description: A unified approach to UI design, data presentation and mapping.
 section: Overview
 ---
 
+<script>
+	import { Button, PlaceholderImage } from '@ldn-viz/ui'
+</script>
+
 The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.
 
-<!-- Our design system builds on years of previous work creating data tools for London, and unifies our approach to UI design, typography, data presentation and mapping.
+<div class="space-y-4 text-center mb-8">
+    <a href="/design-system/introduction" class="h-60 block">
+        <PlaceholderImage />
+    </a>
+    <Button href="/design-system/foundations">Get started</Button>
+</div>
 
-Importantly, our design system creates a new color system, expanded from the GLA brand colors, that works functionally as well as aesthetically, across all of our tools and visualisations.
+<div class="grid grid-cols-3 grid-rows-[auto] gap-4 product">
+    <div>
+        <a href="/design-system/foundations">
+    <div class="h-60">
+        <PlaceholderImage />
+    </div>
+        </a>
+        <h3 class="title-sm mt-2">Foundations</h3>
+        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system/foundations" variant="outline">Read more</Button>
+    </div>
+    <div>
+        <a href="/design-system/application-design" >
+    <div class="h-60">
+        <PlaceholderImage />
+    </div>
+        </a>
+        <h3 class="title-sm mt-2">Application Design</h3>
+        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system/application-design" variant="outline">Read more</Button>
+    </div>
+    <div>
+        <a href="/design-system/data-visualisation">
+    <div class="h-60">
+        <PlaceholderImage />
+    </div>
+        </a>
+        <h3 class="title-sm mt-2">Data Visualisation</h3>
+        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system/data-visualisation" variant="outline">Read more</Button>
+    </div>
 
-Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.
-
-That’s why we have produced this guide, and accompanying suite of digital assets, tools and components focused on making our data visualisations clearer, more consistent, and easier to understand. -->
+</div>
