@@ -1,9 +1,7 @@
 <script lang="ts">
 	/**
 	 * The `<MapCursorEvent>` component exposes the map cursor capability, for a
-	 * specific map layer, as a Svelte component. It's designed to be slotted
-	 * into a `<MapLayer>` component where the `layerId` property is auto
-	 * populated by `mapLayerId` context.
+	 * specific map layer, as a Svelte component.
 	 *
 	 * However, this component maybe slotted anywhere within `<Map>` providing
 	 * a layer ID is passed and guards are put in place so the layer is added to
@@ -29,12 +27,10 @@
 
 	const mapStore: MapStore = getContext('mapStore');
 	const mapCursorStore: MapCursorStore = getContext('mapCursorStore');
-	const ctxLayerId: undefined | string = getContext('mapLayerId');
 
 	interface Props {
 		/**
-		 * ID of the target layer. Defaults to using the value of the `mapLayerId`
-		 * context if it exists.
+		 * ID of the target layer.
 		 */
 		layerId?: any;
 		/**
@@ -68,7 +64,7 @@
 	}
 
 	let {
-		layerId = ctxLayerId,
+		layerId = undefined,
 		enterFeature = null,
 		leaveFeature = null,
 		enterTopFeature = null,

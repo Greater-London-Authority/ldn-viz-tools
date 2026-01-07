@@ -9,7 +9,7 @@
 	import mapgl from 'maplibre-gl';
 	import { getContext } from 'svelte';
 	import { clearFeature, setFeature } from './map-layer';
-	import type { MapStore } from './map-types';
+	import type { MapLibreStore } from '../map/types';
 
 	import type {
 		GeolocationUnamed,
@@ -30,7 +30,7 @@
 
 	let { onLocationFound = undefined, onSearchError = undefined }: Props = $props();
 
-	const mapStore: MapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 	const zoomLevel = 16;
 
 	const flyToLocation = (location: GeolocationUnamed) => {
@@ -48,7 +48,7 @@
 	let showClearButton = $state(false);
 
 	$effect(() => {
-		if (!showClearButton) {
+		if (!showClearButton && $mapStore) {
 			clearFeature('geolocator', $mapStore);
 		}
 	});

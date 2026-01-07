@@ -4,6 +4,10 @@
 	 * `<MapControlGeocoder>` and `<MapControlGeolocator>` components to create
 	 * single and easy to use map search control. It is typically placed in the
 	 * top left hand corner.
+	 *
+	 * The selected location is indicated by a MapLibre layer of type `symbol`,
+	 * with id `gla/context/location-search/map-point-symbol`, created by `initMapLayer`.
+	 *
 	 * @component
 	 */
 
@@ -17,9 +21,9 @@
 		OnGeolocationSearchError,
 		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
-	import type { MapStore } from './map-types';
+	import type { MapLibreStore } from '../map/types';
 
-	const mapStore: MapStore = getContext('mapStore');
+	const mapStore: MapLibreStore = getContext('mapStore');
 
 	interface Props {
 		/**
@@ -52,7 +56,7 @@
 		 */
 		hideGeolocator?: boolean;
 		/**
-		 * Placeholder text to be dislayed in the input element.
+		 * Placeholder text to be displayed in the input element.
 		 */
 		placeholder?: string;
 		[key: string]: any;
@@ -80,7 +84,9 @@
 	}
 
 	$effect(() => {
-		initMapLayer($mapStore);
+		if ($mapStore){
+			initMapLayer($mapStore);
+		}
 	});
 </script>
 

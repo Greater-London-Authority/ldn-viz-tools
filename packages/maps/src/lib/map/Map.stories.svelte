@@ -95,9 +95,13 @@
 			}
 		}
 	});
+
+	let map = $state();
 </script>
 
 <script lang="ts">
+	import { Button } from '@ldn-viz/ui';
+
 	import * as darkStyle from '../themes/os_dark.json';
 	import * as darkGreyMutedStyle from '../themes/os_dark_grey_muted_buildings.json';
 	import * as greyStyle from '../themes/os_greyscale.json';
@@ -204,5 +208,25 @@ It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/Ordnanc
 <Story name="Properties">
 	{#snippet template()}
 		<PropertiesStory />
+	{/snippet}
+</Story>
+
+<!--
+This demonstrates how you can bind to the maplibre `map` object.
+-->
+<Story name="Accessing map object">
+	{#snippet template()}
+	  <Button onclick={() => $map.flyTo({center: [-0.124, 51.5], zoom: 15})}>Fly!</Button>
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				lightStyle={null}
+				darkStyle={castAsMapLibreStyle(darkStyle)}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+				bind:mapStore={map}
+			/>
+		</div>
 	{/snippet}
 </Story>
