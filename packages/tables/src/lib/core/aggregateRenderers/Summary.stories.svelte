@@ -15,8 +15,8 @@
 	});
 </script>
 
-{#snippet defaultTemplate({ args })}
-	<Summary {...args} />
-{/snippet}
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<Summary {...args} values={args.values ?? [0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.8]} />
+	{/snippet}
+</Story>

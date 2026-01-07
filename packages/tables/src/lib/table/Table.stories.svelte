@@ -231,12 +231,21 @@
 
 	let { page = $bindable(1) }: Props = $props();
 
+	let pageInput = {
+		get value() {
+			return String(page);
+		},
+		set value(val: string) {
+			page = parseInt(val) || 1;
+		}
+	};
+
 	let selectedPet: undefined | string = $state(undefined);
 </script>
 
 <Story name="Default">
 	{#snippet template(args)}
-		<Table {data} {tableSpec} {...args} />
+		<Table {...args} {tableSpec} {data} />
 	{/snippet}
 </Story>
 
@@ -338,7 +347,7 @@
 		<div class="flex max-w-2xl flex-col gap-4">
 			<div class="border-color-ui-border-secondary border p-2">
 				<span class="font-bold">Separate control</span>
-				<Input bind:value={page} label="Set page here"></Input>
+				<Input bind:value={pageInput.value} type="text" label="Set page here"></Input>
 			</div>
 
 			<div class="border-color-ui-border-secondary border p-2">

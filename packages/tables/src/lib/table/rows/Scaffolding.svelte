@@ -1,12 +1,22 @@
 <script lang="ts">
+	import type { TableData } from '$lib/core/lib/dataObj';
 	import { sum } from 'd3-array';
+	import type { Snippet } from 'svelte';
 
-	let { table, groupControl, groupSizes, dataColumns } = $props();
+	interface ScaffoldingProps {
+		table: TableData;
+		groupControl?: Snippet;
+		groupSizes?: Snippet;
+		dataColumns?: Snippet;
+	}
 
-	const sumWidths = (widths) => {
+	let { table, groupControl, groupSizes, dataColumns }: ScaffoldingProps = $props();
+
+	const sumWidths = (widths: string[]) => {
 		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
 		const colGroupGaps = (table.colGroups || []).length * (table.colGroupGap ?? 0);
-		return colWidths + colGroupGaps + 'px';
+		// return colWidths + colGroupGaps + 'px';
+		return colWidths + colGroupGaps;
 	};
 </script>
 

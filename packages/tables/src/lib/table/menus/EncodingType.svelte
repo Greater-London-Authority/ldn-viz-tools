@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ColSpec } from '$lib/core/lib/types';
 	import { Overlay, RadioButtonGroup } from '@ldn-viz/ui';
-	import type { SvelteComponent } from 'svelte';
+	import type { Component } from 'svelte';
 	import BarChart from '../../core/aggregateRenderers/BarChart.svelte';
 	import BoxPlot from '../../core/aggregateRenderers/BoxPlot.svelte';
 	import Dots from '../../core/aggregateRenderers/Dots.svelte';
@@ -41,7 +41,7 @@
 		{ label: 'Tick', id: 'Tick' }
 	];
 
-	const unaggregatedRenderer = {
+	const unaggregatedRenderer: Record<string, any> = {
 		BarCell: BarCell,
 		BarDivergingCell,
 		CategoricalTick,
@@ -67,7 +67,7 @@
 		{ label: 'ViolinPlot', id: 'ViolinPlot' }
 	];
 
-	const aggregatedRenderer = {
+	const aggregatedRenderer: Record<string, any> = {
 		BarChart,
 		BoxPlot,
 		Dots,
@@ -83,39 +83,47 @@
 
 	const getRendererName = (col: ColSpec, type: 'cell' | 'group' | 'column') => {
 		if (col[type] && col[type].renderer) {
-			const name = (col[type].renderer as SvelteComponent).name; // something like 'Proxy<TextCell>'. String will have bene replaced by svelte component at this point.
+			const name = (col[type].renderer as Component).name; // something like 'Proxy<TextCell>'. String will have been replaced by svelte component at this point.
 			return name.slice(6, -1);
 		}
 		return undefined;
 	};
 
-	let selectedCellEncoding: string = $state(getRendererName(col, 'cell'));
+	let selectedCellEncoding: string | undefined = $state(getRendererName(col, 'cell'));
 
 	const setCellEncoding = () => {
 		if (!col.cell) {
 			col.cell = {};
 		}
-		col.cell.renderer = unaggregatedRenderer[selectedCellEncoding];
+
+		if (selectedCellEncoding) {
+			col.cell.renderer = unaggregatedRenderer[selectedCellEncoding];
+		}
 	};
 
-	let selectedGroupEncoding: string = $state();
+	let selectedGroupEncoding: string | undefined = $state();
 	selectedGroupEncoding = getRendererName(col, 'group');
 
 	const setGroupEncoding = () => {
 		if (!col.group) {
 			col.group = {};
 		}
-		col.group.renderer = aggregatedRenderer[selectedGroupEncoding];
+
+		if (selectedGroupEncoding) {
+			col.group.renderer = aggregatedRenderer[selectedGroupEncoding];
+		}
 	};
 
-	let selectedColumnEncoding: string = $state();
+	let selectedColumnEncoding: string | undefined = $state();
 	selectedColumnEncoding = getRendererName(col, 'column');
 
 	const setColumnEncoding = () => {
 		if (!col.column) {
 			col.column = {};
 		}
-		col.column.renderer = aggregatedRenderer[selectedColumnEncoding];
+		if (selectedColumnEncoding) {
+			col.column.renderer = aggregatedRenderer[selectedColumnEncoding];
+		}
 	};
 </script>
 

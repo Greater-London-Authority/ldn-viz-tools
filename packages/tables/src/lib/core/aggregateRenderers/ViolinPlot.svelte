@@ -53,8 +53,8 @@
 			.range([height - marginBottom, marginTop]);
 	});
 
-	const areaGenerator = area()
-		.x0((d) => (x(d.x0) + x(d.x1)) / 2)
+	const areaGenerator = area<Bin<number, number>>()
+		.x0((d) => (x(d.x0 ?? 0) + x(d.x1 ?? 0)) / 2)
 		.y0((d) => y(-d.length))
 		.y1((d) => y(d.length))
 		.curve(curveCatmullRom);

@@ -14,7 +14,7 @@
 						<col.group.renderer
 							values={table.getValsForGroup(group, col.short_label)}
 							extent={table.extents[col.short_label]}
-							colorScale={table.scales[col.short_label]}
+							color={table.scales[col.short_label]}
 							posScale={table.posScales[col.short_label]}
 							{...col.group}
 						/>

@@ -1,9 +1,16 @@
-<script>
+<script lang="ts">
+	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { DataRow } from '$lib/core/lib/types';
 	import Mean from '../../../core/aggregateRenderers/Mean.svelte';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
-	let { table, data } = $props();
+	interface ColumnSummariesRowProps {
+		table: TableData;
+		data: DataRow[];
+	}
+
+	let { table, data }: ColumnSummariesRowProps = $props();
 </script>
 
 <Scaffolding {table}>
@@ -12,12 +19,12 @@
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div role="columnheader" class="was-th flex" style:width={col.computedWidth + 'px'}>
 					<!-- or 100 width -->
-					{#if col.column && col.column.renderer}
+					{#if col.column && col.column.renderer && typeof col.column.renderer !== 'string'}
 						<col.column.renderer
 							{table}
-							values={data.map((d) => d[col.short_label])}
+							values={data.map((d: DataRow) => d[col.short_label])}
 							extent={table.extents[col.short_label]}
-							colorScale={table.scales[col.short_label]}
+							color={table.scales[col.short_label]}
 							posScale={table.posScales[col.short_label]}
 							colSpec={col}
 							{...col.column}
@@ -25,7 +32,7 @@
 					{:else}
 						<Mean
 							{data}
-							values={data.map((d) => d[col.short_label])}
+							values={data.map((d: DataRow) => d[col.short_label]) as any}
 							colSpec={col}
 							{...col.column}
 						/>

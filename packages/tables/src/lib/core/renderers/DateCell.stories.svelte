@@ -22,6 +22,6 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<DateCell {...args} />
+		<DateCell {...args} value={args.value ?? new Date()} />
 	{/snippet}
 </Story>
