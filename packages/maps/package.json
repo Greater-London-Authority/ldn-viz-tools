@@ -42,7 +42,7 @@
 		"@deck.gl/geo-layers": "^9.0.0",
 		"@deck.gl/layers": "^9.0.0",
 		"@deck.gl/mapbox": "^9.0.0",
-		"@ldn-viz/utils": "1.1.1-svelte5.0",
+		"@ldn-viz/utils": "*",
 		"@turf/centroid": "^7.1.0",
 		"@turf/turf": "^7.2.0",
 		"maplibre-gl": "^4.1.0",
@@ -82,7 +82,7 @@
 		"vitest-browser-svelte": "^2.0.1"
 	},
 	"peerDependencies": {
-		"@ldn-viz/ui": "^21.0.0-svelte5.8",
+		"@ldn-viz/ui": "*",
 		"svelte": "^5.33.0"
 	}
 }
