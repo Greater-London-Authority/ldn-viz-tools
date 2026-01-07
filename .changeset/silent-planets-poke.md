@@ -3,4 +3,4 @@
 '@ldn-viz/ui': minor
 ---
 
-add mapdraw
+ADDED: MapDraw component
