@@ -1,5 +1,5 @@
-import { getDoc } from '$lib/utils';
+import { getContent } from '$lib/utils';
 
 export async function load() {
-	return getDoc();
+	return getContent();
 }

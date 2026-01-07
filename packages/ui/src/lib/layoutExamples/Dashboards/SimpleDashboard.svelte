@@ -13,7 +13,7 @@
 	import { Demo1 } from './demoTabs';
 
 	import NavigationMenu from '../../navigationMenu/NavigationMenu.svelte';
-	//TMP
+
 	let mainMenu = [
 		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' },
 		{ title: 'Contact', id: 'contact', href: '/' }

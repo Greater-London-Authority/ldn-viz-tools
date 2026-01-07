@@ -5,7 +5,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
-import { createHighlighter } from 'shiki';
 import { visit } from 'unist-util-visit';
 
 const prettyCodeOptions = {
@@ -45,7 +44,16 @@ export const baseRemarkPlugins = [remarkGfm, remarkRemovePrettierIgnore];
 export const baseRehypePlugins = [
 	rehypeSlug,
 	[rehypePrettyCode, prettyCodeOptions],
-	rehypeAutolinkHeadings,
+	[
+		rehypeAutolinkHeadings,
+		{
+			behavior: `append`,
+			properties: {
+				ariaHidden: true,
+				tabIndex: -1
+			}
+		}
+	],
 	rehypeHandleMetadata
 ];
 
@@ -111,6 +119,7 @@ export default defineMDSveXConfig({
 	// layout: {
 	// 	_: resolve(__dirname, './src/lib/layouts/docs-layout.svelte')
 	// },
+	highlight: false,
 	remarkPlugins: [...baseRemarkPlugins],
 	rehypePlugins: [...baseRehypePlugins]
 });

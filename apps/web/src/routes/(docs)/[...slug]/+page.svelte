@@ -1,10 +1,20 @@
 <script lang="ts">
+	import Toc from '$lib/components/toc/Toc.svelte';
+
 	let { data } = $props();
 
 	const PageComponent = $derived(data.component);
+	const tocItems = $derived(data.metadata.toc);
 </script>
 
-<h1 class="responsive headline !mb-0">{data.metadata.title}</h1>
-<p class="responsive subhead mb-typography-spacing-xl">{data.metadata.description}</p>
+<div class="prose responsive">
+	<div class="my-typography-spacing-xl">
+		<h1 class="headline format">{data.metadata.title}</h1>
+		<p class="subhead format">
+			{data.metadata.description}
+		</p>
+	</div>
+	<PageComponent />
+</div>
 
-<PageComponent />
+<Toc toc={{ items: tocItems }} />

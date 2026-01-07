@@ -1,40 +1,79 @@
-import { docs, type Doc } from '$content/index.js';
+import { dataVizGuide, docs, index, type Doc, type Guide } from '$content/index';
 import { error } from '@sveltejs/kit';
 import type { Component } from 'svelte';
+import type { Attachment } from 'svelte/attachments';
 
-export function getDocMetadata(slug: string = 'index') {
-	return docs.find((doc) => doc.slug === slug);
-}
+const allContent = [...dataVizGuide, ...docs, index];
 
-export function getAllDocs() {
+export type ContentResolver = () => Promise<{ default: Component; metadata: Doc | Guide }>;
+
+export const generateMetadata = (slug: string = 'index') => {
+	return allContent.find((data) => data.slug === slug);
+};
+
+export const getAllDocs = () => {
 	return docs;
-}
+};
 
 function slugFromPath(path: string) {
-	return path.replace('/src/content/', '').replace('.md', '');
+	return path.replaceAll(/\/src\/content\/|\/index|\.md$/g, '');
 }
 
-export type DocResolver = () => Promise<{ default: Component; metadata: Doc }>;
-
-export async function getDoc(slug: string = 'index') {
+export const getContent = async (slug: string = 'index') => {
 	const modules = import.meta.glob('/src/content/**/*.md');
 
-	let match: { path?: string; resolver?: DocResolver } = {};
+	let match: { path?: string; resolver?: ContentResolver } = {};
 
 	for (const [path, resolver] of Object.entries(modules)) {
 		if (slugFromPath(path) === slug) {
-			match = { path, resolver: resolver as unknown as DocResolver };
+			match = { path, resolver: resolver as unknown as ContentResolver };
 			break;
 		}
 	}
-	const doc = await match?.resolver?.();
-	const metadata = getDocMetadata(slug);
-	if (!doc || !metadata) {
+
+	const content = await match?.resolver?.();
+	const metadata = generateMetadata(slug);
+
+	if (!content || !metadata) {
 		error(404, 'Could not find the document.');
 	}
 
 	return {
-		component: doc.default,
+		component: content.default,
 		metadata
 	};
-}
+};
+
+/** Utility Functions */
+
+// Action that copies details to clipboard
+export const clickToCopy: Attachment = (node: HTMLElement, target: any) => {
+	async function copyText() {
+		let text = target ? document.querySelector(target).innerText : node.innerText;
+
+		try {
+			await navigator.clipboard.writeText(text);
+
+			node.dispatchEvent(
+				new CustomEvent('copysuccess', {
+					bubbles: true
+				})
+			);
+		} catch (error) {
+			node.dispatchEvent(
+				new CustomEvent('copyerror', {
+					bubbles: true,
+					detail: error
+				})
+			);
+		}
+	}
+
+	node.addEventListener('click', copyText);
+
+	return {
+		destroy() {
+			node.removeEventListener('click', copyText);
+		}
+	};
+};
