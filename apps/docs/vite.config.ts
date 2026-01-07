@@ -1,6 +1,7 @@
 /// <reference types="vitest/config" />
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { playwright } from '@vitest/browser-playwright';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
@@ -16,10 +17,10 @@ export default defineConfig({
 				extends: './vite.config.ts',
 				test: {
 					name: 'client',
-					environment: 'browser',
+					//environment: 'browser',
 					browser: {
 						enabled: true,
-						provider: 'playwright',
+						provider: playwright(),
 						instances: [
 							{
 								browser: 'chromium'
@@ -58,7 +59,7 @@ export default defineConfig({
 					browser: {
 						enabled: true,
 						headless: true,
-						provider: 'playwright',
+						provider: playwright(),
 						instances: [
 							{
 								browser: 'chromium'
