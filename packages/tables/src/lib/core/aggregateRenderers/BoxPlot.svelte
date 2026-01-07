@@ -1,30 +1,26 @@
 <script lang="ts">
 	/**
-	 * The `ViolinPlot` component renders a set of values as a BoxPlot.
+	 * The `BoxPlot` component renders a set of values as a BoxPlot.
 	 * @component
 	 */
 
+	import type { BoxPlotProps } from '$lib/core/aggregateRenderers/BoxPlotProps';
 	import { max, mean, min, quantile } from 'd3-array';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
-	/**
-	 * Array of values to be displayed.
-	 */
-	export let values: number[];
-	export let extent: number[];
-
-	export let showAllPoints = false;
-
-	/**
-	 * Width of cell (in pixels).
-	 */
-	export let width = 100;
+	let {
+		values = [],
+		extent = [0, 1],
+		showAllPoints = false,
+		width = 100,
+		...rest
+	}: BoxPlotProps = $props();
 
 	const height = 30;
 	const marginRight = 10;
 	const marginLeft = 0;
 
-	let canvasRef: HTMLCanvasElement;
+	let canvasRef: HTMLCanvasElement | undefined = $state();
 
 	type Box = {
 		min: number | undefined;
@@ -36,7 +32,7 @@
 	};
 
 	let x: ScaleLinear<number, number>;
-	let box: Box;
+	let box: Box | undefined = $state();
 
 	const update = (values: number[]) => {
 		x = scaleLinear()
@@ -132,12 +128,14 @@
 		}
 	};
 
-	$: update(values);
-	$: drawCanvas(box, showAllPoints, canvasRef);
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	$effect(() => {
+		update(values || []);
+	});
+	$effect(() => {
+		if (box && canvasRef) {
+			drawCanvas(box, showAllPoints, canvasRef);
+		}
+	});
 </script>
 
 <canvas {width} {height} bind:this={canvasRef}></canvas>

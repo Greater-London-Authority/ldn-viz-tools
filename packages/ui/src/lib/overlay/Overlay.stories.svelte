@@ -1,194 +1,135 @@
-<script context="module" lang="ts">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Overlay from './Overlay.svelte';
-
-	// possible names: overlay? contextual? info? - ContextualInformation?
-
-	export const meta = {
-		title: 'Ui/Components/Overlays/Overlay',
-		component: Overlay
-	};
-</script>
-
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import Trigger from './Trigger.svelte';
-
-	import { ArrowDownTray } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Cog6Tooth } from '@steeze-ui/heroicons';
+	import Button from '../button/Button.svelte';
+
+	const { Story } = defineMeta({
+		title: 'Ui/Components/Overlays/Overlay',
+		component: Overlay,
+		tags: ['autodocs']
+	});
 </script>
 
-<Template let:args>
-	<Overlay {...args}></Overlay>
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template()}
+		<Overlay>This is a tooltip.</Overlay>
+	{/snippet}
+</Story>
 
 <Story name="With Tooltip">
-	<Overlay overlayType="tooltip">This is a tooltip.</Overlay>
+	{#snippet template()}
+		<Overlay overlayType="tooltip">This is a tooltip.</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Popover" source>
-	<Overlay overlayType="popover">
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
+<Story name="With Popover">
+	{#snippet template()}
+		<Overlay overlayType="popover">This is a Popover.</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Modal" source>
-	<Overlay overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+<Story name="With Modal">
+	{#snippet template()}
+		<Overlay
+			overlayType="modal"
+			modalTitle="Modal title"
+			modalDescription="This is a modal description"
+		>
+			This is the modal content
+		</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Modal - custom width" source>
-	<Overlay overlayType="modal" modalTitle="Modal Title" modalWidth="3xl">
-		This is a very wide modal.
-	</Overlay>
+<Story name="With Modal - custom width">
+	{#snippet template()}
+		<Overlay
+			overlayType="modal"
+			modalTitle="Modal title"
+			modalDescription="This is a modal description"
+			modalWidth="3xl"
+		>
+			This is the modal content
+		</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Tooltip - custom trigger label">
-	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger" hintLabel="All the button stuff" />
-
-		This is a tooltip.
-	</Overlay>
+<Story name="Custom hint label">
+	{#snippet template()}
+		<Overlay overlayType="tooltip" hintLabel="Custom label">This is a tooltip.</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Tooltip - custom variant">
-	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger" variant="solid" />
-
-		This is a tooltip.
-	</Overlay>
+<Story name="Custom variant">
+	{#snippet template()}
+		<Overlay overlayType="tooltip" hintLabel="Custom label">
+			{#snippet trigger(props)}
+				<Trigger {...props} variant="solid" slim={false} />
+			{/snippet}
+			This is a tooltip.
+		</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Tooltip - custom emphasis">
-	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger" emphasis="primary" />
-
-		This is a tooltip.
-	</Overlay>
+<Story name="Custom size">
+	{#snippet template()}
+		<Overlay overlayType="tooltip" hintLabel="Custom label">
+			{#snippet trigger(props)}
+				<Trigger {...props} size="lg" />
+			{/snippet}
+			This is a tooltip.
+		</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Tooltip - custom size">
-	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger" size="lg" />
-
-		This is a tooltip.
-	</Overlay>
+<Story name="No icon">
+	{#snippet template()}
+		<Overlay overlayType="tooltip">
+			{#snippet trigger(props)}
+				<Trigger {...props}>No icons here</Trigger>
+			{/snippet}
+			This is a tooltip.
+		</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Tooltip - no icon">
-	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger">More Info</Trigger>
-
-		This is a tooltip.
-	</Overlay>
+<Story name="With Icon on right">
+	{#snippet template()}
+		<Overlay overlayType="tooltip">
+			{#snippet trigger(props)}
+				<Trigger {...props}>
+					Icon on right
+					<Icon src={Cog6Tooth} theme="mini" class="ml-0.5 h-[18px] w-[18px]" aria-hidden="true" />
+				</Trigger>
+			{/snippet}
+			This is a tooltip.
+		</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Tooltip - with Icon on right">
-	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger">
-			More Info
-			<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
-		</Trigger>
-
-		This is a tooltip.
-	</Overlay>
+<Story name="With Icon on left">
+	{#snippet template()}
+		<Overlay overlayType="tooltip">
+			{#snippet trigger(props)}
+				<Trigger {...props}>
+					<Icon src={Cog6Tooth} theme="mini" class="mr-0.5 h-[18px] w-[18px]" aria-hidden="true" />
+					Icon on left
+				</Trigger>
+			{/snippet}
+			This is a tooltip.
+		</Overlay>
+	{/snippet}
 </Story>
 
-<Story name="With Tooltip - with Icon on left ">
-	<Overlay overlayType="tooltip">
-		<Trigger slot="trigger">
-			<Icon src={ArrowDownTray} theme="mini" class="mr-2 w-5 h-5" aria-hidden="true" />
-			More Info
-		</Trigger>
-
-		This is a tooltip.
-	</Overlay>
-</Story>
-
-<Story name="With Tooltip - custom hint label, without Trigger component">
-	<Overlay overlayType="tooltip" hintLabel="foo">This is a tooltip.</Overlay>
-</Story>
-
-<Story name="With Popover - no title">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger" />
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - custom trigger label">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger" hintLabel="All the button stuff" />
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - custom variant">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger" variant="solid" />
-
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - custom emphasis">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger" emphasis="primary" />
-
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - custom size">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger" size="lg" />
-
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - no icon">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger">More Info</Trigger>
-
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - with Icon on right">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger">
-			More Info
-
-			<Icon src={ArrowDownTray} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
-		</Trigger>
-
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - with Icon on left ">
-	<Overlay overlayType="popover">
-		<Trigger slot="trigger">
-			<Icon src={ArrowDownTray} theme="mini" class="mr-2 w-5 h-5" aria-hidden="true" />
-
-			More Info
-		</Trigger>
-
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
-</Story>
-
-<Story name="With Popover - custom hint label, without Trigger component">
-	<Overlay overlayType="popover" hintLabel="foo">
-		<svelte:fragment slot="title">Popover Title</svelte:fragment>
-		This is a popover.
-	</Overlay>
+<Story name="With custom trigger component">
+	{#snippet template()}
+		<Overlay overlayType="popover">
+			{#snippet trigger(props)}
+				<Button {...props}>Custom trigger component (click)</Button>
+			{/snippet}
+			This is a popover.
+		</Overlay>
+	{/snippet}
 </Story>

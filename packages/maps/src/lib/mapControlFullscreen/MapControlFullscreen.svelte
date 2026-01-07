@@ -1,4 +1,4 @@
-<script context="module">
+<script module lang="ts">
 	import { ArrowsPointingIn, ArrowsPointingOut, ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
 	import { writable } from 'svelte/store';
 
@@ -56,7 +56,7 @@
 
 	const mapStore: MapStore = getContext('mapStore');
 
-	let mode: any = null;
+	let mode: any = $state(null);
 
 	onMount(() => {
 		if (isFullscreenAllowed()) {
@@ -80,16 +80,16 @@
 
 {#if mode}
 	<div
-		class="flex flex-col space-y-1 invisible sm:visible shadow dark:border dark:border-color-ui-border-primary"
+		class="invisible flex flex-col space-y-1 shadow dark:border dark:border-color-ui-border-primary sm:visible"
 	>
 		<Button
 			variant="square"
 			emphasis="secondary"
 			title={$isFullscreen ? mode.titleIn : mode.titleOut}
 			class="pointer-events-auto"
-			on:click={handle}
+			onclick={handle}
 		>
-			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="w-8 h-8 p-1" />
+			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="h-8 w-8 p-1" />
 		</Button>
 	</div>
 {/if}

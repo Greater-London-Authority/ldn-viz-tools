@@ -2,27 +2,32 @@
 	import { Button } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { Snippet } from 'svelte';
 
 	/**
 	 * The `<MapLegend>` component provides a container inside which a `Legend` can be inserted for display on maps.
 	 */
 
-	/**
-	 * Boolean to display or hide legend
-	 */
-	export let isOpen: boolean = true;
+	interface Props {
+		/**
+		 * Boolean to display or hide legend
+		 */
+		isOpen?: boolean;
+		/**
+		 * Value for width to pass into `ColorLegend` component
+		 */
+		width: number;
+		children?: Snippet;
+	}
 
-	/**
-	 * Value for width to pass into `ColorLegend` component
-	 */
-	export let width: number;
+	let { isOpen = $bindable(true), width = $bindable(), children }: Props = $props();
 
 	const handleClick = () => (isOpen = !isOpen);
 </script>
 
 {#if isOpen}
 	<div
-		class="w-full sm:max-w-96 flex flex-col gap-3 py-3 px-4 bg-color-container-level-0 pointer-events-auto"
+		class="pointer-events-auto flex w-full flex-col gap-3 bg-color-container-level-0 px-4 py-3 sm:max-w-96"
 		bind:clientWidth={width}
 	>
 		<div class="flex justify-between align-middle">
@@ -30,23 +35,23 @@
 			<Button
 				variant="text"
 				size="sm"
-				class="bg-color-container-level-0 text-color-text-primary cursor-pointer absolute right-1 top-1"
-				on:click={handleClick}
-				ariaLabel="Close legend"
+				class="absolute right-1 top-1 cursor-pointer bg-color-container-level-0 text-color-text-primary"
+				onclick={handleClick}
+				aria-label="Close legend"
 			>
-				<Icon src={XMark} theme="mini" class="w-5 h-5" />
+				<Icon src={XMark} theme="mini" class="h-5 w-5" />
 			</Button>
 		</div>
 		<!-- Pass in `ColorLegend` or other components in the default slot -->
-		<slot />
+		<div class="text-sm">{@render children?.()}</div>
 	</div>
 {:else}
 	<Button
 		size="md"
 		emphasis="secondary"
 		class="pointer-events-auto h-8"
-		on:click={handleClick}
-		ariaLabel="Show legend"
+		onclick={handleClick}
+		aria-label="Show legend"
 	>
 		Legend
 	</Button>

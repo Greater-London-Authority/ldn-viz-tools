@@ -1,16 +1,16 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapDeckOverlay from './MapDeckOverlay.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/MapDeckOverlay',
-		component: MapDeckOverlay
-	};
+		component: MapDeckOverlay,
+		tags: ['autodocs']
+	});
 </script>
 
 <script lang="ts">
-	import { MVTLayer } from '@deck.gl/geo-layers/typed';
-
-	import { Story } from '@storybook/addon-svelte-csf';
+	import { MVTLayer } from '@deck.gl/geo-layers';
 
 	import { Checkbox } from '@ldn-viz/ui';
 	import Map from '../map/Map.svelte';
@@ -54,32 +54,20 @@
 		});
 	};
 
-	let showWards = false;
-	let showBoroughs = false;
+	let showWards = $state(false);
+	let showBoroughs = $state(false);
 
-	let layers: any[] = [];
-	$: {
-		layers = [];
+	let layers = $derived.by(() => {
+		const l = [];
 		if (showWards) {
-			layers.push(getWardsLayer());
+			l.push(getWardsLayer());
 		}
 		if (showBoroughs) {
-			layers.push(getBoroughLayer());
+			l.push(getBoroughLayer());
 		}
-	}
+		return l;
+	});
 </script>
-
-<Story name="Default">
-	<div class="relative w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay layers={[getWardsLayer()]} />
-		</Map>
-	</div>
-</Story>
 
 <!--
  Example of updating the layers.
@@ -90,16 +78,18 @@
  -->
 
 <Story name="Changing layers">
-	<Checkbox label="Show wards" bind:checked={showWards} />
-	<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
-	<div class="relative w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay {layers} />
-		</Map>
-	</div>
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+			</Map>
+		</div>
+	{/snippet}
 </Story>

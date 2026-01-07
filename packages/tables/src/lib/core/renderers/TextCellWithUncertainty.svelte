@@ -6,14 +6,16 @@
 	 */
 	import { format } from 'd3-format';
 	import { classNames } from '../../utils/utilityFns.js';
+	import type { TextCellWithUncertaintyProps } from '$lib/core/renderers/TextCellWithUncertaintyProps';
 
-	export let value: number | string;
-
-	export let contextVals: boolean[] = [false];
-	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
-
-	export let formatString: string | undefined = undefined;
-	$: f = format(formatString ?? '');
+	let {
+		value,
+		contextVals = [false],
+		alignText = undefined,
+		formatString = undefined,
+		...rest
+	}: TextCellWithUncertaintyProps = $props();
+	let f = $derived(format(formatString ?? ''));
 
 	const alignmentClasses = {
 		left: 'justify-start',
@@ -21,18 +23,15 @@
 		center: 'justify-center'
 	};
 
-	$: alignmentClass = alignmentClasses[alignText ?? 'center'];
+	let alignmentClass = $derived(alignmentClasses[alignText ?? 'center']);
 
-	$: textColor =
+	let textColor = $derived(
 		contextVals.length > 0 && !contextVals[0]
 			? 'text-color-text-secondary'
-			: 'text-color-text-primary';
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+			: 'text-color-text-primary'
+	);
 </script>
 
-<div class={classNames(`flex h-full p-2 items-center`, alignmentClass)}>
+<div class={classNames(`flex h-full items-center p-2`, alignmentClass)}>
 	<span class={textColor}>{formatString ? f(+value) : value}</span>
 </div>

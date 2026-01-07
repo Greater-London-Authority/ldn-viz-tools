@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	/**
 	 * The `ObservablePlotInner` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library.
 	 * It does *not* apply the  [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation) as a wrapper:
@@ -65,7 +65,7 @@
 		};
 
 	export const addMultipleEventHandlers = (events: EventHandler[]) => {
-		return (index, scales, values, dimensions, context, next) => {
+		return (index: any, scales: any, values: any, dimensions: any, context: any, next: any) => {
 			const el = next && next(index, scales, values, dimensions, context);
 
 			for (const event of events) {
@@ -141,56 +141,68 @@
 	import * as ObservablePlot from '@observablehq/plot';
 	import * as Plot from '../observablePlotFragments/plot';
 
-	import { afterUpdate, onMount, setContext } from 'svelte';
-	import { derived, writable } from 'svelte/store';
+	import { onMount, setContext } from 'svelte';
+	import { derived, writable, type Writable } from 'svelte/store';
 
-	/**
-	 * The Observable Plot specification for the visualization.
-	 */
-	export let spec;
+	interface Props {
+		/**
+		 * The Observable Plot specification for the visualization.
+		 */
+		spec: any;
+		/**
+		 * Data being visualized (as an array of objects), to be used by custom tooltips.
+		 */
+		data?: { [key: string]: any }[];
+		/**
+		 * Provides a way to access the DOM node into which the visualization is rendered.
+		 */
+		domNode?: any;
+		/**
+		 * A store that stores details of the moused-over point.
+		 * Used for custom tooltips.
+		 */
+		tooltipStore?: Writable<{ [key: string]: any }>;
+		/** A y-offset between data points and tooltips (pixels). */
+		tooltipOffset?: any;
+		/**
+		 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
+		 * so that default chart-level styling is not applied.
+		 */
+		applyDefaults?: boolean;
+		/**
+		 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
+		 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
+		 */
+		ariaHidden?: boolean;
+		/**
+		 * This should be the ID for the simple plain text description of the chart. Defaults to empty string.
+		 */
+		ariaDescribedBy?: string;
+		/**
+		 * Defaults to randomly generated id passed in by `ObservablePlot`
+		 */
+		id: any;
+		tooltip?: import('svelte').Snippet;
+		[key: string]: any;
+	}
 
-	/**
-	 * Data being visualized (as an array of objects), to be used by data download button.
-	 */
-	export let data: { [key: string]: any }[] = [];
-
-	/**
-	 * Provides a way to access the DOM node into which the visualization is rendered.
-	 */
-	export let domNode: any = undefined;
-
-	/**
-	 * A store that stores details of the moused-over point.
-	 * Used for custom tooltips.
-	 */
-	export let tooltipStore = writable<Position>();
-
-	/** A y-offset between data points and tooltips (pixels). */
-	export let tooltipOffset = -16;
-
-	/**
-	 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
-	 * so that default chart-level styling is not applied.
-	 */
-	export let applyDefaults = true;
-
-	/**
-	 * If `false`, screen readers will dictate the content of the charts, which is largely undesirable.
-	 * Instead ensure the title and subtitle of the chart and/or surrounding text explains the key takeaways.
-	 */
-	export let ariaHidden = true;
-
-	/**
-	 * This should be the ID for the simple plain text description of the chart. Defaults to empty string.
-	 */
-	export let ariaDescribedBy = '';
-
-	/**
-	 * Defaults to randomly generated id passed in by `ObservablePlot`
-	 */
-	export let id;
+	let {
+		spec = $bindable(),
+		data = [],
+		domNode = $bindable(undefined),
+		tooltipStore = writable<Position>(),
+		tooltipOffset = -16,
+		applyDefaults = true,
+		ariaHidden = true,
+		ariaDescribedBy = '',
+		id,
+		tooltip,
+		...rest
+	}: Props = $props();
 
 	const renderPlot = (node: HTMLDivElement) => {
+		node.innerHTML = '';
+
 		if (applyDefaults) {
 			node.appendChild(Plot.plot(spec));
 		} else {
@@ -198,25 +210,36 @@
 		}
 	};
 
-	let width: number;
+	let width = $state(0);
 
 	onMount(() => {
-		updateDimensions();
+		// updateDimensions();
 		window.addEventListener('resize', updateDimensions);
 		return () => {
 			window.removeEventListener('resize', updateDimensions);
 		};
 	});
 
+	/*
 	afterUpdate(() => {
 		updateDimensions();
 	});
+	*/
 
 	const updateDimensions = () => {
-		if (spec.width !== width) {
+		if (spec && spec.width !== width) {
 			spec.width = width;
+
+			// the #key block is no longer triggering a re-render when spec.width changes
+			renderPlot(domNode);
 		}
 	};
+
+	$effect(() => {
+		if (width) {
+			updateDimensions();
+		}
+	});
 
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
 		$tooltipStore ? data[$tooltipStore.index] : undefined
@@ -227,29 +250,29 @@
 {#key spec}
 	<div
 		use:renderPlot
-		{...$$restProps}
+		{...rest}
 		bind:this={domNode}
 		bind:clientWidth={width}
 		aria-hidden={ariaHidden}
 		aria-describedby={ariaDescribedBy}
 		{id}
 		class="themed-chart"
-	/>
+	></div>
 
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
 		<div
-			class="absolute max-w-[200px] text-sm p-2 bg-color-container-level-0 shadow z-50 -translate-x-1/2 -translate-y-full"
+			class="absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container-level-0 p-2 text-sm shadow"
 			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 			style:left={`${$tooltipStore.layerX}px`}
 		>
-			<slot name="tooltip">
+			{#if tooltip}{@render tooltip()}{:else}
 				<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
-			</slot>
+			{/if}
 
 			<div
-				class="absolute bg-color-container-level-0 rotate-45 w-4 h-4 -translate-x-1/2 inset-x-1/2"
-			/>
+				class="absolute inset-x-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-color-container-level-0"
+			></div>
 		</div>
 	{/if}
 {/key}

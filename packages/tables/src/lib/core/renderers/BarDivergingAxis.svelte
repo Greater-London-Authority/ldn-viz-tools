@@ -4,40 +4,26 @@
 	 * @component
 	 */
 
+	import type { BarDivergingAxisProps } from '$lib/core/renderers/BarDivergingAxisProps';
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
 
-	/**
-	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
-	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
-	 * If set to a falsy value, then bars will not be labelled with a value.
-	 */
-	export let formatString = '0.0f';
-
-	export let extent = [0, 1]; // used to pass automatically extracted val
-
-	/**
-	 * Width of cell (in pixels).
-	 */
-	export let width = 100;
-
 	const height = 20;
 
-	let x;
-	$: x = scaleLinear().domain(extent).range([0, width]);
-
-	$: f = format(formatString);
-
-	export let numTicks = 4;
-	$: ticks = x.ticks(numTicks);
-
-	export let textSize = 8;
+	let {
+		formatString = '0.0f',
+		extent = [0, 1],
+		width = 100,
+		numTicks = 4,
+		textSize = 8,
+		...rest
+	}: BarDivergingAxisProps = $props();
 
 	const topPadding = height; // padding above the horizontal rule
 
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let x = $derived(scaleLinear().domain(extent).range([0, width]));
+	let f = $derived(format(formatString));
+	let ticks = $derived(x.ticks(numTicks));
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>

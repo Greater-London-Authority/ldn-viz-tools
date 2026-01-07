@@ -4,12 +4,16 @@
 	 *
 	 * @component
 	 */
-	import { type OAuthConfig, redirectToAuthorizationEndpoint } from './auth';
 	import { Button } from '@ldn-viz/ui';
+	import { type OAuthConfig, redirectToAuthorizationEndpoint } from './auth';
 
-	export let config: OAuthConfig;
+	interface Props {
+		config: OAuthConfig;
+	}
+
+	let { config }: Props = $props();
 </script>
 
-<Button variant="text" size="sm" on:click={() => redirectToAuthorizationEndpoint(config)}>
+<Button variant="text" size="sm" onclick={() => redirectToAuthorizationEndpoint(config)}>
 	Log in
 </Button>

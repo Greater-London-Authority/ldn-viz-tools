@@ -4,7 +4,7 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
 
-<div class="prose dark:prose-invert px-4 py-6">
+<div class="dark:prose-invert prose px-4 py-6">
 	<h3>If you liked it...</h3>
 	<p class="lead">...then you should have put a map in it.</p>
 	<p>
@@ -13,7 +13,7 @@
 		odio, commodo aliquam quam. Vestibulum volutpat efficitur varius.
 	</p>
 </div>
-<div class="w-full h-96">
+<div class="h-96 w-full">
 	<Map
 		options={{
 			transformRequest: appendOSKeyToUrl(OS_KEY)

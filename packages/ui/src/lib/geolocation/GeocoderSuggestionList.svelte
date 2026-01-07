@@ -3,29 +3,36 @@
 	import GeocoderSuggestion from './GeocoderSuggestion.svelte';
 	import type { GeolocationNamed, OnSuggestionListInteraction } from './types';
 
-	export let attribution: undefined | GeocoderAttribution = undefined;
-
 	// suggestions is an array of named geolocations. The suggestions will be
-	// presented in order and limited by maxSuggestions.
-	export let suggestions: GeolocationNamed[];
 
 	// maxSuggestions is the maximum number of suggestion to show. This does
-	// not limit the results array.
-	export let maxSuggestions: number = 5;
 
 	// onSuggestionEvent is invoked when a keyboard, mouse, or touch
-	// event occurs in the suggestion list, except when a suggestion is selected.
-	export let onSuggestionEvent: OnSuggestionListInteraction;
 
-	/**
-	 * The currently selected location in the parent `Geocoder`.
-	 */
-	export let selected: null | GeolocationNamed = null;
+	interface Props {
+		attribution?: undefined | GeocoderAttribution;
+		// presented in order and limited by maxSuggestions.
+		suggestions: GeolocationNamed[];
+		// not limit the results array.
+		maxSuggestions?: number;
+		// event occurs in the suggestion list, except when a suggestion is selected.
+		onSuggestionEvent: OnSuggestionListInteraction;
+		/**
+		 * The currently selected location in the parent `Geocoder`.
+		 */
+		selected?: null | GeolocationNamed;
+	}
+
+	let {
+		attribution = undefined,
+		suggestions,
+		maxSuggestions = 5,
+		onSuggestionEvent,
+		selected = null
+	}: Props = $props();
 
 	// Mouse highlight only
-	let highlighted: null | GeolocationNamed = null;
-
-	const highlightFirstSuggestion = (suggestions: GeolocationNamed[]) => {
+	let highlighted: null | GeolocationNamed = $derived.by(() => {
 		const containsSelected =
 			selected &&
 			suggestions.find((s) => {
@@ -33,17 +40,15 @@
 			});
 
 		if (containsSelected) {
-			highlighted = selected;
+			return selected;
 		} else {
-			highlighted = suggestions.length > 0 ? suggestions[0] : null;
+			return suggestions.length > 0 ? suggestions[0] : null;
 		}
-	};
-
-	$: highlightFirstSuggestion(suggestions);
+	});
 </script>
 
 <ul
-	class="absolute top-11 left-0 bg-color-input-background text-color-text-primary text-sm w-full shadow-lg z-40 overflow-y-scroll max-height-[60vh]"
+	class="max-height-[60vh] absolute left-0 top-11 z-40 w-full overflow-y-scroll bg-color-input-background text-sm text-color-text-primary shadow-lg"
 >
 	{#if suggestions.length === 0}
 		<li class="w-full px-2.5 py-1.5">

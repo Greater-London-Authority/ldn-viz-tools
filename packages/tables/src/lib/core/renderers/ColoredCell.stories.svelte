@@ -1,18 +1,28 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import ColoredCell from './ColoredCell.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/ColoredCell',
-		component: ColoredCell
-	};
+		component: ColoredCell,
+		tags: ['autodocs'],
+
+		argTypes: {
+			value: {
+				type: 'number',
+				inputType: 'number'
+			}
+		},
+		args: {
+			value: 0.5,
+			color: () => 'red'
+		}
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<ColoredCell value={0.5} colorScale={() => 'red'} {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<ColoredCell {...args} value={args.value ?? 0.5} />
+	{/snippet}
+</Story>

@@ -1,8 +1,7 @@
-<script>
+<script lang="ts">
 	import { Select } from '@ldn-viz/ui';
 
-	export let pageSize;
-	export let page;
+	let { pageSize = $bindable(), page = $bindable() } = $props();
 
 	const numRowOptions = [
 		{ value: 10, label: '10' },
@@ -11,19 +10,19 @@
 		{ value: 100, label: '100' }
 	];
 
-	let numRowSelection = numRowOptions.find((d) => d.value === pageSize);
+	let numRowSelection = $state(pageSize.toString());
 
-	const changePageSize = (newVal) => {
-		pageSize = newVal;
+	const changePageSize = (ev: any) => {
+		pageSize = ev.value;
 		page = 1;
 	};
-	$: {
-		if (numRowSelection) {
-			changePageSize(numRowSelection.value);
-		}
-	}
 </script>
 
 <div class="mb-4" style="width: 192px">
-	<Select bind:value={numRowSelection} items={numRowOptions} label="Entries per page"></Select>
+	<Select
+		onChange={changePageSize}
+		bind:value={numRowSelection}
+		options={numRowOptions}
+		label="Entries per page"
+	></Select>
 </div>

@@ -3,17 +3,20 @@
 	 * The `TextCell` component formats a single value as text and displays it in a table cell.
 	 * @component
 	 */
-	import { format } from 'd3-format';
+	import type { TextCellProps } from '$lib/core/renderers/TextCellProps';
 	import { classNames } from '@ldn-viz/ui';
+	import { format } from 'd3-format';
+	import { getVal } from '../../getVal';
 
-	export let value: number | string;
-	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
-
-	export let fontWeight: string | ((value: number | string) => string) = 'normal';
-	export let visibility: string | ((value: number | string) => string) = 'visible';
-
-	export let formatString: string | undefined = undefined;
-	$: f = format(formatString ?? '');
+	let {
+		value,
+		alignText = undefined,
+		fontWeight = 'normal',
+		visibility = 'visible',
+		formatString = undefined,
+		...rest
+	}: TextCellProps = $props();
+	let f = $derived(format(formatString ?? ''));
 
 	const alignmentClasses = {
 		left: 'justify-start',
@@ -21,20 +24,13 @@
 		center: 'justify-center'
 	};
 
-	$: alignmentClass = alignmentClasses[alignText ?? 'left'];
-
-	$: fontWeightValue = typeof fontWeight === 'function' ? fontWeight(value) : fontWeight;
-	$: visibilityValue = typeof visibility === 'function' ? visibility(value) : visibility;
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let alignmentClass = $derived(alignmentClasses[alignText ?? 'left']);
 </script>
 
 <span
 	class={classNames(`flex h-full items-center py-2`, alignmentClass)}
-	style:font-weight={fontWeightValue}
-	style:visibility={visibilityValue}
+	style:font-weight={getVal(value, fontWeight)}
+	style:visibility={getVal(value, visibility)}
 >
 	{formatString ? f(+value) : value}
 </span>

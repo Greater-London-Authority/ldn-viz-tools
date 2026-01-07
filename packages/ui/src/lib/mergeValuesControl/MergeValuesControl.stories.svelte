@@ -1,5 +1,5 @@
-<script>
-	import { Meta, Story } from '@storybook/addon-svelte-csf';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import MergeValuesControl from './MergeValuesControl.svelte';
 
@@ -14,27 +14,35 @@
 		'Other household types'
 	];
 
-	let groupings = { ungrouped: values, grouped: {} };
+	let groupings = $state({ ungrouped: values, grouped: {} });
+
+	const { Story } = defineMeta({
+		title: 'Ui/Components/MergeValuesControl',
+		component: MergeValuesControl,
+		tags: ['autodocs']
+	});
 </script>
 
-<Meta title="Ui/Components/MergeValuesControl" component={MergeValuesControl} />
-
 <Story name="Default">
-	<div class="w-96">
-		<MergeValuesControl bind:groups={groupings} />
-	</div>
+	{#snippet template()}
+		<div class="w-96">
+			<MergeValuesControl bind:groups={groupings} />
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Showing output">
-	<div class="flex flex-col gap-8">
-		<div class="w-96">
-			<h2 class="text-large font-bold">Control</h2>
-			<MergeValuesControl bind:groups={groupings} />
-		</div>
+	{#snippet template()}
+		<div class="flex flex-col gap-8">
+			<div class="w-96">
+				<h2 class="text-large font-bold">Control</h2>
+				<MergeValuesControl bind:groups={groupings} />
+			</div>
 
-		<div>
-			<h2 class="text-large font-bold">Group object</h2>
-			<pre>{JSON.stringify(groupings, null, 2)}</pre>
+			<div>
+				<h2 class="text-large font-bold">Group object</h2>
+				<pre>{JSON.stringify(groupings, null, 2)}</pre>
+			</div>
 		</div>
-	</div>
+	{/snippet}
 </Story>

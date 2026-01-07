@@ -1,12 +1,11 @@
 <script>
-	export let href;
-	export let row;
+	let { href, row, children } = $props();
 </script>
 
 {#if href}
 	<a href={href(row)}>
-		<slot />
+		{@render children?.()}
 	</a>
 {:else}
-	<slot />
+	{@render children?.()}
 {/if}

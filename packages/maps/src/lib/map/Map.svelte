@@ -18,10 +18,8 @@
 
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import maplibre_gl from 'maplibre-gl';
 
-	import { currentThemeMode } from '@ldn-viz/ui';
-	import { theme_os_light_vts, theme_os_dark } from '@ldn-viz/maps';
+	import { theme_os_dark, theme_os_light_vts } from '@ldn-viz/maps';
 
 	import MapCursor from './mapCursor/MapCursor';
 	import type { MapCursorType, MapCursorTypeStore } from './mapCursor/types';
@@ -29,52 +27,80 @@
 	import MapLibre from './MapLibre.svelte';
 	import type { MapLibreOptions, MapLibreStyle, MapStore, WhenMapLoads } from './types';
 
-	/**
-	 * Disables initialisation of the map on mount. This is most often used
-	 * to avoid un-needed map rendering during development of non-map application
-	 * elements.
-	 */
-	export let disabled = false;
+	import { mode, type SystemModeValue } from 'mode-watcher';
+	import './map.css';
 
-	/**
-	 * Custom ([MapLibre `MapOptions`](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
-	 */
-	export let options: MapLibreOptions = {};
+	let currentThemeMode: SystemModeValue = $derived(mode.current);
 
-	/**
-	 * Store containing the MapLibre instance.
-	 */
-	export const mapStore: MapStore = writable(null);
+	interface Props {
+		/**
+		 * Disables initialisation of the map on mount. This is most often used
+		 * to avoid un-needed map rendering during development of non-map application
+		 * elements.
+		 */
+		disabled?: boolean;
+		/**
+		 * Custom ([MapLibre `MapOptions`](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
+		 */
+		options?: MapLibreOptions;
+		/**
+		 * Called when the map is finished loading and ready for use.
+		 */
+		whenMapLoads?: null | WhenMapLoads;
+		/**
+		 * Called when the map component is destroyed. Required when external
+		 * resources need to be cleaned up.
+		 */
+		whenMapUnloads?: null | WhenMapLoads;
+		/**
+		 * Light style base map. Defaults to `theme_os_light_vts`. Pass `null`
+		 * to disable light mode.
+		 */
+		lightStyle?: null | MapLibreStyle;
+		/**
+		 * Dark style base map. Defaults to `theme_os_dark`. Pass `null`
+		 * to disable dark mode.
+		 */
+		darkStyle?: null | MapLibreStyle;
+		children?: import('svelte').Snippet;
+		[key: string]: any;
+
+		/**
+		 * Store containing the MapLibre instance.
+		 */
+		mapStore?: MapStore;
+
+		/**
+		 * Store containing the MapCursor instance.
+		 */
+
+		mapCursorStore?: MapCursorTypeStore;
+	}
+
+	let {
+		disabled = false,
+		options = {},
+		whenMapLoads = null,
+		whenMapUnloads = null,
+		lightStyle = theme_os_light_vts as MapLibreStyle,
+		darkStyle = theme_os_dark as MapLibreStyle,
+		children,
+
+		mapStore = $bindable(),
+		mapCursorStore = $bindable(),
+
+		...rest
+	}: Props = $props();
+
+	if (!mapStore) {
+		mapStore = writable(null);
+	}
+	if (!mapCursorStore) {
+		mapCursorStore = writable(null);
+	}
+
 	setContext('mapStore', mapStore);
-
-	/**
-	 * Store containing the MapCursor instance.
-	 */
-	export const mapCursorStore: MapCursorTypeStore = writable(null);
 	setContext('mapCursorStore', mapCursorStore);
-
-	/**
-	 * Called when the map is finished loading and ready for use.
-	 */
-	export let whenMapLoads: null | WhenMapLoads = null;
-
-	/**
-	 * Called when the map component is destroyed. Required when external
-	 * resources need to be cleaned up.
-	 */
-	export let whenMapUnloads: null | WhenMapLoads = null;
-
-	/**
-	 * Light style base map. Defaults to `theme_os_light_vts`. Pass `null`
-	 * to disable light mode.
-	 */
-	export let lightStyle: null | MapLibreStyle = theme_os_light_vts as MapLibreStyle;
-
-	/**
-	 * Dark style base map. Defaults to `theme_os_dark`. Pass `null`
-	 * to disable dark mode.
-	 */
-	export let darkStyle: null | MapLibreStyle = theme_os_dark as MapLibreStyle;
 
 	const whenMapCreated: WhenMapLoads = (maplibre) => {
 		maplibre.once('load', () => {
@@ -100,14 +126,11 @@
 		mapCursorStore.set(null);
 	};
 
-	const updateMapOptions = () => {
-		mapOptions = {
-			...options,
-			style: identifyStyle()
-		};
-	};
-
-	const identifyStyle = (): MapLibreStyle => {
+	const identifyStyle = (
+		currentThemeMode: SystemModeValue,
+		darkStyle,
+		lightStyle
+	): MapLibreStyle => {
 		if (!lightStyle && !darkStyle) {
 			return theme_os_light_vts as MapLibreStyle;
 		}
@@ -120,21 +143,15 @@
 			return darkStyle as MapLibreStyle;
 		}
 
-		const style = $currentThemeMode === 'dark' ? darkStyle : lightStyle;
+		const style = currentThemeMode === 'dark' ? darkStyle : lightStyle;
 		return style as MapLibreStyle;
 	};
 
-	let mapOptions: Omit<maplibre_gl.MapOptions, 'container'> = {
-		...options,
-		style: identifyStyle()
-	};
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: $currentThemeMode, darkStyle, lightStyle, updateMapOptions();
+	let style = $derived(identifyStyle(currentThemeMode, darkStyle, lightStyle));
 </script>
 
-{#key mapOptions}
-	<MapLibre {disabled} options={mapOptions} {whenMapCreated} {whenMapDestroyed} {...$$restProps}>
-		<slot />
+{#key options}
+	<MapLibre {disabled} {options} {style} {whenMapCreated} {whenMapDestroyed} {...rest}>
+		{@render children?.()}
 	</MapLibre>
 {/key}

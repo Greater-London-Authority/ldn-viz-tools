@@ -1,27 +1,29 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapDeckTooltips from './MapDeckTooltips.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/MapDeckTooltips',
 		component: MapDeckTooltips,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
-	import { MVTLayer } from '@deck.gl/geo-layers/typed';
-
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { MVTLayer } from '@deck.gl/geo-layers';
 
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 
-	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
+	import type { Layer } from '@deck.gl/core';
 	import { Checkbox } from '@ldn-viz/ui';
-	import { onMouseOverTooltipHandler } from './stores';
+	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
 	import DemoTooltipComponent from './demo/DemoTooltipComponent.svelte';
+	import { onMouseOverTooltipHandler } from './stores';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
@@ -69,95 +71,97 @@
 		});
 	};
 
-	let showWards = false;
-	let showBoroughs = true;
+	let showWards = $state(false);
+	let showBoroughs = $state(true);
 
-	let layers = [];
-	$: {
-		layers = [];
+	let layers: Layer[] = $derived.by(() => {
+		const l = [];
 		if (showWards) {
-			layers.push(getWardsLayer());
+			l.push(getWardsLayer());
 		}
 		if (showBoroughs) {
-			layers.push(getBoroughLayer());
+			l.push(getBoroughLayer());
 		}
-	}
+		return l;
+	});
 </script>
-
-<Template let:args>
-	<MapDeckTooltips {...args} />
-</Template>
 
 <!-- Here every feature in a layer is assigned the same string as a Tooltip. -->
 <Story name="Example - spec as string">
-	<Checkbox label="Show wards" bind:checked={showWards} />
-	<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay {layers} />
-
-			<MapDeckTooltips
-				{layers}
-				spec={{
-					wardLayer: 'This is one of the Wards',
-					boroughLayer: 'This is one of the Boroughs'
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
-			/>
-		</Map>
-	</div>
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckTooltips
+					{layers}
+					spec={{
+						wardLayer: 'This is one of the Wards',
+						boroughLayer: 'This is one of the Boroughs'
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- Here the Tooltip contents are given by applying a function (which is the same for all features in a layer, but may be different between layers) to the feature. -->
 <Story name="Example - spec as function">
-	<Checkbox label="Show wards" bind:checked={showWards} />
-	<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay {layers} />
-
-			<MapDeckTooltips
-				{layers}
-				spec={{
-					wardLayer: (feature) => feature.properties.wd22nm,
-					boroughLayer: (feature) => feature.properties.name
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
-			/>
-		</Map>
-	</div>
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckTooltips
+					{layers}
+					spec={{
+						wardLayer: (feature) => feature?.properties?.wd22nm,
+						boroughLayer: (feature) => feature?.properties?.name
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- Here the Tooltip is rendered by a custom component, which ahs access to the feature object.
   Each layer can use a separate component to render the Tooltips for its features.
   -->
 <Story name="Example - spec as components">
-	<Checkbox label="Show wards" bind:checked={showWards} />
-	<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay {layers} />
-
-			<MapDeckTooltips
-				{layers}
-				spec={{
-					wardLayer: DemoTooltipComponent,
-					boroughLayer: DemoTooltipComponent
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
-			/>
-		</Map>
-	</div>
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckTooltips
+					{layers}
+					spec={{
+						wardLayer: DemoTooltipComponent,
+						boroughLayer: DemoTooltipComponent
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>

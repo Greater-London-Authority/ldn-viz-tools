@@ -1,64 +1,38 @@
 <script lang="ts">
 	/**
 	 * The `BarDivergingCell` component renders a table cell representing a numerical value as a bar, where the length of the bar encodes the value.
-	 * There is a vertical line at x=0, and the bar color indicates whether the value is greater tha or less than 0.
+	 * There is a vertical line at x=0, and the bar color indicates whether the value is greater than or less than 0.
 	 * @component
 	 */
 
+	import type { BarDivergingCellProps } from '$lib/core/renderers/BarDivergingCellProps';
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
+	import { getVal } from '../../getVal';
 
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value: number;
-
-	/**
-	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
-	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
-	 * If set to a falsy value, then bars will not be labelled with a value.
-	 */
-	export let formatString = '0.0f';
-
-	/**
-	 * Text size of labels (in pixels).
-	 */
-	export let textSize = 16;
-
-	/**
-	 * Color to be applied to bars corresponding to positive values.
-	 */
-	export let positiveColor = 'blue';
-
-	/**
-	 * Color to be applied to bars corresponding to negative values.
-	 */
-	export let negativeColor = 'red';
-
-	export let extent = [0, 1]; // used to pass automatically extracted val
-
-	/**
-	 * Width of cell (in pixels).
-	 */
-	export let width = 100;
+	let {
+		value,
+		formatString = '0.0f',
+		textSize = 16,
+		positiveColor = 'blue',
+		negativeColor = 'red',
+		extent = [0, 1],
+		width = 100,
+		...rest
+	}: BarDivergingCellProps = $props();
 
 	const height = 30;
 
 	const barVerticalPadding = 5;
 
-	let x;
-	$: x = scaleLinear().domain(extent).range([0, width]);
+	let x = $derived(scaleLinear().domain(extent).range([0, width]));
 
-	$: f = format(formatString);
+	let f = $derived(format(formatString));
 
 	const textPadding = 2;
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
 </script>
 
-<div class="h-full flex items-center">
+<div class="flex h-full items-center">
 	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 		<!-- background bar -->
 		<rect
@@ -76,7 +50,7 @@
 				width={x(0) - x(value)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={negativeColor}
+				fill={getVal(value, negativeColor) as string}
 			/>
 
 			<!-- zero line -->
@@ -111,7 +85,7 @@
 				width={x(value) - x(0)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={positiveColor}
+				fill={getVal(value, positiveColor) as string}
 			/>
 
 			<!-- zero line -->

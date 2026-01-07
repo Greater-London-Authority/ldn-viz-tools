@@ -7,35 +7,40 @@
 
 	import ResizeIcon from './ResizeIcon.svelte';
 
-	export let label;
+	interface Props {
+		label: any;
+		size?: number;
+		minSize: any;
+		maxSize: any;
+		disabled?: boolean;
+	}
 
-	export let size = 1;
-
-	export let minSize;
-	export let maxSize;
-
-	export let disabled = false;
+	let { label, size = $bindable(), minSize, maxSize, disabled = false }: Props = $props();
 </script>
 
 {#if disabled}
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="w-6 h-6 text-color-action-disabled cursor-not-allowed"
+		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
 		aria-hidden="true"
 	/>
 {:else}
 	<Popover>
-		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} marker size control">
-			<ResizeIcon
-				class="w-6 h-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
-				aria-hidden="true"
-			/>
-		</Trigger>
+		{#snippet trigger(props)}
+			<Trigger {...props} size="xs" aria-label="Click to open {label} marker size control">
+				<ResizeIcon
+					class="h-6 w-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
+					aria-hidden="true"
+				/>
+			</Trigger>
+		{/snippet}
 
-		<svelte:fragment slot="title">Marker size</svelte:fragment>
+		{#snippet title()}
+			Marker size
+		{/snippet}
 
-		<div class="flex gap-4 items-center pt-2">
+		<div class="flex items-center gap-4 pt-2">
 			<div class="w-40">
 				<input type="range" bind:value={size} min={minSize} max={maxSize} step="0.01" />
 			</div>

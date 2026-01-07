@@ -1,199 +1,127 @@
-<script lang="ts" context="module">
-	export type Option = {
-		id: string;
-		buttonLabel: string;
-		menuLabel: string;
-		menuDescription: string;
-		default?: boolean;
-	};
-</script>
-
 <script lang="ts">
 	/**
 	 * The `MultipleActionButton` combines a button and popover menu, so that the user can select which action
 	 * (or variation on an action) will be performed when the button is pressed.
 	 * @component
 	 */
-	import { createDropdownMenu, type FocusProp } from '@melt-ui/svelte';
-	import { fly } from 'svelte/transition';
 
 	import { Check, ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { DropdownMenu } from 'bits-ui';
 	import { classNames } from '../utils/classNames';
 
-	import type { ButtonProps } from '../button/Button.svelte';
 	import Button from '../button/Button.svelte';
-	import { randomId } from '../utils/randomId';
 
-	/**
-	 * Array of options that appear in the drop-down menu. Each is defined by an object with the following properties:
-	 * * `id` (string)
-	 * * `buttonLabel` (string) - the label that appears in the button when this option is selected
-	 * * `menuLabel` (String) - the label that appears in the drop-down menu
-	 * * `menuDescription` (string) - description that appears below the label in the drop-down menu
-	 * * `default` (boolean) - if `true`, then this option will initially be selected
-	 */
-	export let options: Option[] = [];
+	import type { MultipleActionButtonOption, MultipleActionButtonProps } from './types';
 
-	/**
-	 * The currently selected `option`.
-	 */
-	export let state: Option = options.find((option) => option.default) ?? options[0];
+	let {
+		options = [],
+		state = $bindable(),
+		menuTitle = '',
+		size,
+		variant,
+		fullWidth,
+		onClick,
+		beforeLabel,
+		afterLabel,
+		...restProps
+	}: MultipleActionButtonProps = $props();
 
-	/**
-	 * title that appears at the top ot the drop-down menu
-	 */
-	export let menuTitle = '';
+	$effect(() => {
+		// apply fallback value to state if not defined
+		if (!state || !options.map((d) => d.id).includes(state?.id)) {
+			const newState = options.find((option) => option.default) ?? options[0];
 
-	/**
-	 * Function that will be called when the user clicks on the button.
-	 * The `id` of the currently selected option will be provided as an argument.
-	 */
-	export let onClick: (id: string) => void;
-
-	/**
-	 * Value set as the `id` attribute of the action button element (defaults to randomly generated value).
-	 */
-	export let id = randomId();
-
-	const customCloseFocus: FocusProp = (defaultEl) => {
-		const customElToFocus = document.getElementById(id);
-		if (!customElToFocus && defaultEl) {
-			return defaultEl;
+			if (newState?.id !== state?.id) {
+				state = newState;
+			}
 		}
-		return customElToFocus;
-	};
-
-	const {
-		elements: { trigger, menu, item, arrow },
-		states: { open }
-	} = createDropdownMenu({
-		forceVisible: true,
-		loop: true,
-		closeFocus: customCloseFocus
 	});
 
-	const changeOption = (newOption: Option) => {
+	// apply fallback value when first rendering - effect doesn't fire, as state not changed
+	if (!state) {
+		state = options.find((option) => option.default) ?? options[0];
+	}
+
+	const changeOption = (newOption: MultipleActionButtonOption) => {
 		state = newOption;
-		$open = false;
 	};
 
-	/**
-	 * Selects which family of styles should be applied to the button.
-	 */
-	export let variant: ButtonProps['variant'] = 'solid';
-
-	/**
-	 * Determines the visual emphasis is placed on the button.
-	 */
-	export let emphasis: ButtonProps['emphasis'] = 'primary';
-
-	/**
-	 * Sets the size of the button.
-	 */
-	export let size: ButtonProps['size'] = 'md';
-
-	/**
-	 * If `true`, then button will fill full width of parent.
-	 */
-	export let fullWidth = false;
-
-	/**
-	 * If `true`, then the button cannot be interacted with (either by clicking, or by using the keyboard).
-	 */
-	export let disabled: ButtonProps['disabled'] = false;
-
-	/** Text that appears in tooltip on hover, */
-	export let title: ButtonProps['title'] = '';
+	let triggerClasses = $derived(
+		variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'
+	);
 </script>
 
 {#if options.length === 1}
-	<Button
-		on:click={() => onClick(state.id)}
-		{variant}
-		{emphasis}
-		{size}
-		{disabled}
-		{title}
-		{id}
-		{fullWidth}
-	>
+	<Button onclick={() => onClick(state.id)} {size} {variant} {fullWidth} {...restProps}>
 		<div class="flex items-center">
-			<slot name="beforeLabel" />
-			{options[0].buttonLabel}
-			<slot name="afterLabel" />
+			{@render beforeLabel?.()}
+			{state.buttonLabel}
+			{@render afterLabel?.()}
 		</div>
 	</Button>
 {:else}
-	<div class={classNames('flex items-center gap-0 w-full', fullWidth ? 'w-full' : '')}>
+	<div class={classNames('flex items-center gap-0', fullWidth ? 'w-full' : '')}>
 		<Button
-			on:click={() => onClick(state.id)}
-			{variant}
-			{emphasis}
+			onclick={() => onClick(state.id)}
 			{size}
+			{variant}
 			{fullWidth}
-			{disabled}
-			{title}
-			{id}
+			{...restProps}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
-				<slot name="beforeLabel" />
-				{state.buttonLabel}
-				<slot name="afterLabel" />
+				{@render beforeLabel?.()}
+				{state?.buttonLabel}
+				{@render afterLabel?.()}
 			</div>
 		</Button>
 
-		<Button
-			variant="square"
-			{emphasis}
-			{size}
-			{disabled}
-			action={$trigger.action}
-			actionProps={$trigger}
-			class={`${variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'}`}
-			ariaLabel={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
-		>
-			<Icon src={ChevronDown} theme="mini" class="h-5 w-5" />
-		</Button>
-	</div>
+		<DropdownMenu.Root>
+			<DropdownMenu.Trigger
+				aria-label={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
+			>
+				{#snippet child({ props })}
+					<Button {...props} class={triggerClasses} variant="square" {size} {...restProps}>
+						{#if size === 'xs'}
+							<Icon src={ChevronDown} theme="mini" class="h-4 w-4" aria-hidden="true" />
+						{:else}
+							<Icon src={ChevronDown} theme="mini" class="h-5 w-5" aria-hidden="true" />
+						{/if}
+					</Button>
+				{/snippet}
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Portal>
+				<DropdownMenu.Content
+					class="z-[60] flex max-w-sm flex-col border border-color-input-border bg-color-input-background p-1 shadow"
+					preventScroll={false}
+				>
+					<DropdownMenu.Group>
+						<DropdownMenu.GroupHeading class="p-1 text-sm">{menuTitle}</DropdownMenu.GroupHeading>
 
-	{#if $open}
-		<div
-			class="bg-color-container-level-0 z-[60] max-w-sm p-1 shadow-lg flex flex-col border border-color-ui-border-secondary"
-			use:$menu.action
-			{...$menu}
-			transition:fly={{ duration: 150, y: -10 }}
-		>
-			<div {...$arrow} use:arrow class="border-l border-t border-color-ui-border-secondary" />
-			{#if menuTitle}
-				<p class="text-sm p-1">{menuTitle}</p>
-			{/if}
-
-			<div class="divide-y divide-color-ui-border-secondary">
-				{#each options as option}
-					<button
-						class="text-left w-full p-2 hover:bg-color-action-background-primary-hover hover:text-color-static-white group"
-						on:click={() => changeOption(option)}
-						use:$item.action
-						{...$item}
-					>
-						<div class="flex items-center">
-							{#if state.id === option.id}
-								<Icon src={Check} theme="mini" class="h-5 w-5 mr-1" />
-							{/if}
-							<p class="font-medium text-sm">{option.menuLabel}</p>
+						<div class="divide-y divide-color-ui-border-secondary">
+							{#each options as option (option.id)}
+								<DropdownMenu.Item
+									class="group w-full cursor-pointer p-2 text-left hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+									onSelect={() => changeOption(option)}
+								>
+									<div class="flex items-center">
+										{#if state.id === option.id}
+											<Icon src={Check} theme="mini" class="mr-1 h-5 w-5" />
+										{/if}
+										<p class="text-sm font-medium">{option.menuLabel}</p>
+									</div>
+									<p class="text-xs text-color-text-secondary group-hover:text-color-static-white">
+										{option.menuDescription}
+									</p>
+								</DropdownMenu.Item>
+							{/each}
 						</div>
-
-						<p
-							class="text-xs leading-relaxed text-color-text-secondary group-hover:text-color-static-white"
-						>
-							{option.menuDescription}
-						</p>
-					</button>
-				{/each}
-			</div>
-		</div>
-		<div use:$arrow.action {...$arrow} />
-	{/if}
+					</DropdownMenu.Group>
+					<DropdownMenu.Separator />
+					<DropdownMenu.Arrow class="text-color-input-border" />
+				</DropdownMenu.Content>
+			</DropdownMenu.Portal>
+		</DropdownMenu.Root>
+	</div>
 {/if}

@@ -1,14 +1,26 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { DocumentArrowUp } from '@steeze-ui/heroicons';
 	import AsyncButton from './AsyncButton.svelte';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { type AsyncButtonProps } from './types';
 
-	export const meta = {
+	/**
+	 * The `<AsyncButton>` component wraps the `<button>` component for slow
+	 * asynchronous operations such as _HTTP_ requests. A `<LoadingIndicator>` is shown
+	 * as the button label while the `onClick` function is executing. The button
+	 * is also disabled during this period.
+	 */
+
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/AsyncButton',
 		component: AsyncButton,
+		tags: ['autodocs'],
+		render: defaultTemplate,
 		argTypes: {
-			onClick: {
+			onclick: {
 				type: 'function',
-				control: 'none',
+				control: undefined,
 				table: {
 					type: {
 						summary: 'function',
@@ -21,7 +33,7 @@
 				control: { type: 'radio' }
 			},
 			working: {
-				control: 'none'
+				control: undefined
 			},
 			variant: {
 				options: ['brand', 'solid', 'outline', 'text', 'square'],
@@ -39,75 +51,67 @@
 		args: {
 			variant: 'solid'
 		}
-	};
-</script>
-
-<script lang="ts">
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	});
 
 	const waitThreeSeconds = () => {
 		return new Promise((r) => setTimeout(r, 3000));
 	};
 
-	const waitFiveSeconds = () => {
-		return new Promise((r) => setTimeout(r, 5000));
-	};
+	let working = $state(false);
 
-	let working = false;
-
-	type Variant = 'brand' | 'square' | 'solid' | 'outline' | 'text' | undefined;
-	type Emphasis = 'primary' | 'secondary' | 'caution' | 'positive' | 'negative' | undefined;
-
-	const variants: Variant[] = ['solid', 'brand', 'outline', 'text', 'square'];
-	const emphasis: Emphasis[] = ['primary', 'secondary', 'positive', 'caution', 'negative'];
+	const variants: AsyncButtonProps['variant'][] = ['solid', 'brand', 'outline', 'text', 'square'];
+	const emphasis: AsyncButtonProps['emphasis'][] = [
+		'primary',
+		'secondary',
+		'positive',
+		'caution',
+		'negative'
+	];
 </script>
 
-<Template let:args>
-	<AsyncButton
-		{...args}
-		bind:working
-		title="Simulates a three second operation"
-		onClick={waitThreeSeconds}
-	>
-		Click me!
-	</AsyncButton>
+{#snippet defaultTemplate(args: AsyncButtonProps)}
+	<AsyncButton {...args} bind:working onclick={waitThreeSeconds}>Click me!</AsyncButton>
 	<div class="mt-4">
 		Working:
 		<span class:text-color-ui-negative={!working} class:text-color-ui-positive={working}>
 			{working}
 		</span>
 	</div>
-</Template>
+{/snippet}
 
-<Story name="Default" source />
+<Story name="Default" />
 
 <Story name="Variants & emphasis">
-	<div class="flex flex-col gap-4">
-		{#each emphasis as emphasis}
-			<div class="flex items-center gap-4">
-				{#each variants as variant}
-					<AsyncButton
-						{variant}
-						{emphasis}
-						size={variant === 'square' ? 'lg' : 'md'}
-						onClick={waitFiveSeconds}
-						class="capitalize"
-					>
-						{#if variant === 'square'}
-							<Icon src={DocumentArrowUp} class="w-8 h-8 mb-0.5" aria-hidden="true" />
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			{#each emphasis as emphasis}
+				<div class="flex items-center gap-4">
+					{#each variants as variant}
+						<AsyncButton
+							{...args}
 							{variant}
-						{:else}
-							{variant}
-						{/if}
-					</AsyncButton>
-				{/each}
-			</div>
-		{/each}
-	</div>
+							{emphasis}
+							size={variant === 'square' ? 'lg' : 'md'}
+							onclick={waitThreeSeconds}
+							class="capitalize"
+						>
+							{#if variant === 'square'}
+								<Icon src={DocumentArrowUp} class="mb-1 h-6 w-6" aria-hidden="true" />
+								{variant}
+							{:else}
+								{variant}
+							{/if}
+						</AsyncButton>
+					{/each}
+				</div>
+			{/each}
+		</div>
+	{/snippet}
 </Story>
 
-<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this in Chrome, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`.  -->
+<!-- When `prefersReducedMotion` is true and `spinner` is true, a static clock icon will be rendered instead of `Spinner`. To test this in Chrome, open DevTools (`Command+Option+I`), open Commands drawer (`Command+Shift+P`), type `reduce` and press `Enter`. -->
 <Story name="Reduced motion">
-	<AsyncButton onClick={waitFiveSeconds} class="capitalize">Click me!</AsyncButton>
+	{#snippet template(args)}
+		<AsyncButton {...args} onclick={waitThreeSeconds} class="capitalize">Click me!</AsyncButton>
+	{/snippet}
 </Story>

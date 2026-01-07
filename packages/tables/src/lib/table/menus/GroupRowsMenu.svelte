@@ -1,26 +1,32 @@
 <script lang="ts">
 	import type { TableData } from '$lib/core/lib/dataObj';
-	import { Button, Popover, Select } from '@ldn-viz/ui';
+	import { Overlay, Select } from '@ldn-viz/ui';
 
-	export let table: TableData;
+	interface Props {
+		table: TableData;
+		onChange: () => void;
+	}
+
+	let { table = $bindable(), onChange }: Props = $props();
 
 	type Options = { label: string; id: string; value: string }[];
 
-	let fields: Options;
-	$: if (table) {
-		const new_fields = table.columnSpec.map((f) => ({
-			label: f.label ?? f.short_label,
-			id: f.short_label,
-			value: f.short_label
-		}));
+	let fields: Options[] = $derived.by(() => {
+		let new_fields: any[] = [];
 
-		if (JSON.stringify(new_fields) !== JSON.stringify(fields)) {
-			fields = new_fields;
+		if (table) {
+			new_fields = table.columnSpec.map((f) => ({
+				label: f.label ?? f.short_label,
+				id: f.short_label,
+				value: f.short_label
+			}));
 		}
-	}
 
-	let groupingSelection: Options = [];
-	const applyGrouping = (groupingSelection: Options) => {
+		return new_fields;
+	});
+
+	let groupingSelection: string[] = $state(table.groupingFields);
+	const applyGrouping = (groupingSelection: any[]) => {
 		if (table) {
 			// re-order cols
 			// TODO: lift this to dataObj?
@@ -39,24 +45,19 @@
 
 			if (JSON.stringify(table.groupingFields) !== JSON.stringify(cols)) {
 				table.setGrouping(cols);
+				onChange();
 			}
 		}
 	};
-	$: applyGrouping(groupingSelection);
 </script>
 
-<Popover>
-	<svelte:fragment slot="hint">
-		<Button variant="text" size="sm">Group rows</Button>
-
-		<span class="sr-only">Open Popover</span>
-	</svelte:fragment>
-
+<Overlay hintLabel="Group rows by" overlayType="popover">
 	<Select
-		items={fields}
+		options={fields}
 		bind:value={groupingSelection}
 		label="Group rows by"
 		id="labelled-input"
 		multiple
+		onChange={applyGrouping}
 	/>
-</Popover>
+</Overlay>

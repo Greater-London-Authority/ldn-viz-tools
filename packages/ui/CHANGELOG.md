@@ -1,29 +1,82 @@
 # ldn-viz-tools-ui
 
-## 19.6.0
-
-### Minor Changes
-
-- 5dd276b: CHANGED: reduced `Modal` inset from 2rem to 0.5rem on small screens
-- 39ba3ad: ADDED: `CheckboxSolid` and `CheckboxGroupSolid` components
-
-## 19.5.0
-
-### Minor Changes
-
-- 8171084: FIXED: Added tabIconOverride classes to SidebarTabList to ensure icons in sidebar tabs correctly have a margin-bottom instead of margin-right
-
-## 19.4.1
+## 21.0.0-svelte5.9
 
 ### Patch Changes
 
-- 24cc3ad: Changed: Change type of GeocoderAdapter to accommodate changes in MapControlGeocoder due to MapBox API changes.
+- ce87f14: update select stories and contrast
 
-## 19.4.0
+## 21.0.0-svelte5.8
 
 ### Minor Changes
 
-- e8c3af7: CHANGED: ColorLegend label now has a font-size of 12px
+- 8dca04b: FIXED: CookieControl component should now work with SSR
+
+## 21.0.0-svelte5.7
+
+### Minor Changes
+
+- 0abe727: CHANGED: add keyline to Header and Sidebar
+- 6ea18e9: CHANGED: remove `overflow-hidden` class from `Modal`
+- 3789872: ADDED: `@steeze-ui/phosphor-icons` is now a dependency
+
+## 21.0.0-svelte5.6
+
+### Minor Changes
+
+- d0c388f: CHANGED: reduced `Modal` inset from 2rem to 0.5rem on small screens
+
+## 21.0.0-svelte5.5
+
+### Minor Changes
+
+- c4a34fa: add mapdraw
+
+## 21.0.0-svelte5.4
+
+### Patch Changes
+
+- 253b9b9: Adapter added for OS Places API
+
+## 21.0.0-svelte5.3
+
+### Minor Changes
+
+- 31020f3: Expoxe sidebar state and allow custom classes and icons
+
+## 21.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: update `selectedTabId` when tab is changed
+
+## 21.0.0-svelte5.1
+
+### Major Changes
+
+- 46b4fab: CHANGED: the `ListMenu` has been renamed to `NavigationMenu`
+- 6b37511: CHANGED: the `buttonsHidden` prop on the `CheckboxGroup` and `LayerControlGroup` been renamed to `hideSelectAll`
+
+### Minor Changes
+
+- dc25586: CREATED: CheckboxSolid and CheckboxGroupSolid components
+
+### Patch Changes
+
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
+
+## 21.0.0-svelte5.0
+
+### Major Changes
+
+- 4046add: CHANGED: `LayerControl` now uses a prop called `layerState` (rather than `state`); `LayerControlGroup` now uses a prop called `layersState` (rather than `state`)
+- 0879ce9: CHANGED: `Select` component is now a wrapper around `svelecte` (rather than `svelte-select`); there are amny changes to its props.
+
+### Minor Changes
+
+- 7962ee6: CHANGED: LoadingIndicator component title and arcColorClass are now correctly typed as optional props
+- a81fb27: FIXED: RadioButtonGroups show labels if icons don't exist
+- 7962ee6: ADDED: NonIdealState component
 
 ## 19.3.0
 
@@ -58,7 +111,6 @@
 ### Minor Changes
 
 - 671dffc: CHANGED: `CheckboxGroup`, `LayerControl` and `LayerControlGroup` components
-
   - `LayerControlGroup` now passes `name` into `LayerControl`
   - `LayerControl` now passes `name` into `Checkbox`, in addition to `Radio`
   - For accessibility: `LayerControlGroup` and `CheckboxGroup` now have an `aria-controls` attribute on the checkbox that toggles all controls, with a value equal to the ids for all controls
@@ -71,7 +123,6 @@
 - de9b000: Refactored `LayerControlGroup`, `CheckboxGroup` and `Checkbox` components for accessibility.
 
   `LayerControlGroup` and `CheckboxGroup` now have:
-
   - `id` and `role="group"` attributes on the div that wraps around the `LayerControl` or `Checkbox` inputs
   - `ariaLabel` prop to describe the purpose of the components to screen reader users
   - `<ul>` element surrounding the options, with each option nested in an `<li>` element so screen reader users know the options are connected

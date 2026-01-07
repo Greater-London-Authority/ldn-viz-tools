@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	type ToasterPositionClass = {
 		[key: string]: string;
 	};
@@ -51,23 +51,27 @@
 	import { messages } from './toaster';
 	import type { ToasterPosition } from './types';
 
-	// position of the `Toaster`. You can specify your own classes
-	// for positioning via the classes property if you want something bespoke.
-	export let position: keyof typeof ToasterPosition = 'TopCenter';
+	interface Props {
+		/** position of the `Toaster`. You can specify your own classes
+		for positioning via the classes property if you want something bespoke.*/
+		position?: keyof typeof ToasterPosition;
+		/** classes for applying additional classes. These are appended to the class
+		string so they have implicit but weak priority over other styles.*/
+		classes?: string;
 
-	// classes for applying additional classes. These are appended to the class
-	// string so they have implicit but weak priority over other styles.
-	export let classes = '';
+		/** other props applied to the top-level `<div>` that contains the toast messages.*/
+		[key: string]: any;
+	}
 
-	// ...$$restProps applied to the top-level `<div>` that contains the toast messages.
+	let { position = 'TopCenter', classes = '', ...rest }: Props = $props();
 
-	$: posClasses = positionClasses[position] || '';
+	let posClasses = $derived(positionClasses[position] || '');
 </script>
 
 <div
 	style:display={$messages.length === 0 ? 'none' : 'block'}
-	class="fixed flex flex-col space-y-1 z-[50] w-fit {posClasses} {classes}"
-	{...$$restProps}
+	class="fixed z-[50] flex w-fit flex-col space-y-1 {posClasses} {classes}"
+	{...rest}
 >
 	{#each $messages as message (message.id)}
 		<Toast {message} />

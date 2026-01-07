@@ -1,6 +1,5 @@
-import { create } from '@storybook/theming/create';
-// import colors from '../../../packages/themes/colors.json';
-import colors from '../../../packages/themes/styles/js/theme-tokens';
+import colors from '@ldn-viz/themes/styles/js/theme-tokens';
+import { create } from 'storybook/theming/create';
 
 export default create({
 	base: 'dark',
@@ -17,8 +16,8 @@ export default create({
 	colorSecondary: colors.theme.dark.color.palette.blue[700],
 
 	// UI
-	appBg: colors.theme.dark.color.container['level-1'],
-	appContentBg: colors.theme.dark.color.container['level-0'],
+	appBg: colors.theme.dark.color.container['level-0'],
+	appContentBg: colors.theme.dark.color.canvas.background['1'],
 	appPreviewBg: '#ffffff',
 	appBorderColor: colors.theme.dark.color.ui.border.secondary,
 	appBorderRadius: 1,

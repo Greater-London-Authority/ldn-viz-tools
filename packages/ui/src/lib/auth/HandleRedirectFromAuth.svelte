@@ -115,6 +115,10 @@
 		return JSON.parse(jsonPayload);
 	};
 
-	export let config: OAuthConfig;
+	interface Props {
+		config: OAuthConfig;
+	}
+
+	let { config }: Props = $props();
 	onMount(() => getAccessToken(config));
 </script>

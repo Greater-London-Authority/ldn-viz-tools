@@ -13,7 +13,7 @@ jobs:
       - name: Setup .npmrc file to publish to npm
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24.0.2'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
@@ -22,7 +22,30 @@ jobs:
       - name: Install turbo
         run: npm install turbo --global
 
+      - name: Build packages
+        run: npm run build
+
       - name: Publish packages
-        run: turbo publish --tag svelte5
+        run: npm run publish-packages-svelte5
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git checkout -b release-msg-svelte5
+
+          git add -A .changeset
+          git add packages/*/CHANGELOG.md
+          git add packages/*/package.json
+          git add package-lock.json
+
+          git diff-index --quiet HEAD || git commit -m "Update CHANGELOG and package.json"
+
+      - name: Push committed changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release-msg-svelte5

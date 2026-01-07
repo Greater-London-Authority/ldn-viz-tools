@@ -6,39 +6,39 @@
 
 	import { Bars3, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import Button from '../../../button/Button.svelte';
-	import { classNames } from '../../../utils/classNames';
+	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
 
-	// `id` for sidebar container, to point to for screen readers
-	export let sidebarId: string;
+	interface Props {
+		// `id` for sidebar container, to point to for screen readers
+		sidebarId?: string; //FROM STATE
+		icon?: import('svelte').Snippet;
+		[key: string]: any;
+	}
 
-	const sidebarIsOpen = getContext<Writable<boolean>>('sidebarIsOpen');
-	$: isOpen = $sidebarIsOpen;
+	let { sidebarId, icon, ...rest }: Props = $props();
+
+	let sidebarState = getSidebarState();
 
 	const toggleOpen = () => {
-		sidebarIsOpen.update((isOpen) => !isOpen);
+		sidebarState.isOpen = !sidebarState.isOpen;
 	};
-
-	const themeClasses = ['!bg-color-container-level-1 !text-color-text-primary'];
-
-	$: sidebarToggleClasses = classNames('cursor-pointer', ...themeClasses);
 </script>
 
-<div class:ldn-viz-sidebar-toggle={true} {...$$restProps}>
+<div class:ldn-viz-sidebar-toggle={true} {...rest}>
 	<Button
 		title="Toggle sidebar"
 		variant="square"
 		emphasis="secondary"
-		class={sidebarToggleClasses}
-		on:click={toggleOpen}
-		actionProps={{ 'aria-controls': sidebarId, 'aria-expanded': isOpen }}
+		class="cursor-pointer !bg-color-container-level-1 !text-color-text-primary hover:!text-color-action-text-secondary-hover"
+		onclick={toggleOpen}
+		aria-controls={sidebarId}
+		aria-expanded={sidebarState?.isOpen}
 	>
-		{#if isOpen === false}
-			{#if $$slots.icon === true}
+		{#if sidebarState?.isOpen === false}
+			{#if icon}
 				<!-- Custom icon to use instead of the 'hamburger' menu icon-->
-				<slot name="icon" />
+				{@render icon?.()}
 			{:else}
 				<Icon src={Bars3} class="p-1" aria-hidden="true" />
 			{/if}

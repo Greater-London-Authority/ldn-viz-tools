@@ -3,8 +3,7 @@
 	import GroupHeadingRow from './GroupHeadingRow.svelte';
 	import GroupSummaryRow from './GroupSummaryRow.svelte';
 
-	export let group;
-	export let table;
+	let { group, table } = $props();
 </script>
 
 <GroupHeadingRow {group} {table} />

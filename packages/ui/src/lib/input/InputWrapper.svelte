@@ -1,36 +1,47 @@
 <script lang="ts">
 	import Overlay from '../overlay/Overlay.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 	import { classNames } from '../utils/classNames';
+	import type { InputProps } from './types';
 
-	export let label = '';
-	export let id: undefined | string = undefined;
+	interface InputWrapperProps extends InputProps {
+		errorId?: string;
+		descriptionId?: string;
+	}
 
-	export let descriptionId: undefined | string = undefined;
-	export let description = '';
-	export let descriptionAlignment: 'left' | 'right' = 'left';
+	let {
+		label = '',
+		id = undefined,
+		descriptionId = undefined,
+		description = '',
+		descriptionAlignment = 'left',
+		hint = '',
+		hintLabel = undefined,
+		errorId = undefined,
+		error = '',
+		disabled = false,
+		optional = false,
+		customOverlay = undefined,
+		children
+	}: InputWrapperProps = $props();
 
-	export let hint = '';
-	export let hintLabel: undefined | string = undefined;
-
-	export let errorId: undefined | string = undefined;
-	export let error = '';
-
-	export let disabled = false;
-	export let optional = false;
-
-	$: descriptionClass = classNames(
-		error ? '!text-color-input-label-error' : '',
-		disabled ? 'text-color-input-label-disabled' : '',
-		descriptionAlignment === 'left'
-			? 'text-color-input-label-secondary'
-			: 'ml-auto text-color-input-label-secondary',
-		'text-sm'
+	let descriptionClass = $derived(
+		classNames(
+			error ? '!text-color-input-label-error' : '',
+			disabled ? 'text-color-input-label-disabled' : '',
+			descriptionAlignment === 'left'
+				? 'text-color-input-label-secondary'
+				: 'ml-auto text-color-input-label-secondary',
+			'text-sm'
+		)
 	);
 
-	$: labelClasses = classNames(
-		error ? 'text-color-input-label-error' : '',
-		disabled ? 'text-color-input-label-disabled' : '',
-		'form-label'
+	let labelClasses = $derived(
+		classNames(
+			error ? 'text-color-input-label-error' : '',
+			disabled ? 'text-color-input-label-disabled' : '',
+			'form-label'
+		)
 	);
 </script>
 
@@ -42,18 +53,21 @@
 			</label>
 		{/if}
 
-		{#if $$slots.hint}
-			<!-- An optional `<Overlay>` component to provide additional explanation. -->
-			<slot name="hint" />
-		{/if}
 		{#if hint}
-			<Overlay {hintLabel}>
+			<Overlay>
+				{#snippet trigger(props)}
+					<Trigger {...props} size="xs" {hintLabel} />
+				{/snippet}
 				{hint}
 			</Overlay>
 		{/if}
+
+		{#if customOverlay}
+			{@render customOverlay()}
+		{/if}
 	</div>
 
-	<slot />
+	{@render children?.()}
 
 	{#if error}
 		<p class={descriptionClass} id={errorId} role="alert">

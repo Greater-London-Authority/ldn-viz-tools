@@ -1,170 +1,257 @@
-<script context="module">
+<script module lang="ts">
+	import { Funnel, Map, PresentationChartLine } from '@steeze-ui/heroicons';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 	import CheckboxGroupSolid from './CheckboxGroupSolid.svelte';
-	import CheckboxSolid from './CheckboxSolid.svelte';
+	import CheckboxGroupSolidDemo from './CheckboxGroupSolidDemo.svelte';
+	import type { CheckboxSolidProps } from './types';
 
-	export const meta = {
-		title: 'Ui/Components/Checkboxes/CheckboxGroupSolid',
-		component: CheckboxGroupSolid,
-		subcomponents: { CheckboxSolid }
-	};
-</script>
+	/**
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
+	 *
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [CheckboxSolid](./?path=/docs/ui-components-Checkboxs-Checkboxgroupsolid--documentation).
+	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroupSolid](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 */
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
-	let selectedOptions: string[] = ['bus', 'underground'];
+	let selectedOptions: string[] = $state(['bus', 'underground']);
+	let selectedOptions2: string[] = $state([]);
+	let selectedOptions3: string[] = $state([]);
+	let selectedOptions4: string[] = $state([]);
+	let selectedOptionsDisabled: string[] = $state([]);
 
 	let optionsForGroup = [
-		{ id: 'bus', name: 'bus', label: 'Bus stops', color: '#00AEEF' },
+		{ id: 'bus', name: 'transport-1', label: 'Bus stops' },
 		{
 			id: 'train',
-			name: 'train',
-			label: 'Train stations',
-			color: '#008D48',
-			hint: 'Excluding underground stations'
+			name: 'transport-1',
+			label: 'Train stations'
 		},
-		{ id: 'underground', name: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', name: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
+		{ id: 'underground', name: 'transport-1', label: 'Underground stations' },
+		{ id: 'taxi', name: 'transport-1', label: 'Taxi ranks', disabled: true }
 	];
 
-	let ariaLabel = 'Select transport methods';
+	let optionsForGroupIconsAbove: Omit<CheckboxSolidProps, 'checked'>[] = [
+		{ id: 'bus', name: 'transport-2', label: 'Bus stops', icon: Funnel },
+		{ id: 'train', name: 'transport-2', label: 'Train stations', icon: Map },
+		{
+			id: 'underground',
+			name: 'transport-2',
+			label: 'Underground stations',
+			icon: PresentationChartLine
+		}
+	];
+
+	let optionsForGroupIconsBelow: Omit<CheckboxSolidProps, 'checked'>[] = [
+		{ id: 'bus', name: 'transport-3', label: 'Bus stops', icon: Funnel, iconPlacement: 'below' },
+		{
+			id: 'train',
+			name: 'transport-3',
+			label: 'Train stations',
+			icon: Map,
+			iconPlacement: 'below'
+		},
+		{
+			id: 'underground',
+			name: 'transport-3',
+			label: 'Underground stations',
+			icon: PresentationChartLine,
+			iconPlacement: 'below'
+		}
+	];
+
+	const { Story } = defineMeta({
+		title: 'Ui/Components/Checkboxes/CheckboxGroupSolid',
+		component: CheckboxGroupSolid,
+		tags: ['autodocs'],
+		args: {
+			options: optionsForGroup,
+			ariaLabel: 'Select transport methods'
+		}
+	});
 
 	// Variables to show correct filtering functionality
-	let selectedFilters: string[] = [];
-
-	const data = ['bus', 'train', 'underground', 'taxi'];
-
+	let selectedFilters: string[] = $state([]);
+	const data = ['bus', 'train', 'underground'];
 	const filterData = (filters: string[], data: string[]) => {
 		return filters.length ? data.filter((x) => filters.includes(x)) : data;
 	};
-
-	$: filteredData = filterData(selectedFilters, data);
+	let filteredData = $derived(filterData(selectedFilters, data));
 </script>
 
-<Template let:args>
-	<CheckboxGroupSolid options={optionsForGroup} bind:selectedOptions {...args} {ariaLabel} />
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
-</Template>
+<Story name="Default">
+	{#snippet template(args)}
+		<CheckboxGroupSolid {...args} bind:selectedOptions />
 
-<Story name="Default" source />
-
-<Story name="with title">
-	<CheckboxGroupSolid
-		options={optionsForGroup}
-		bind:selectedOptions
-		label="Transport method"
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="with hint">
-	<CheckboxGroupSolid
-		options={optionsForGroup}
-		bind:selectedOptions
-		label="Transport method"
-		hint="contextual hint text"
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="With title">
+	{#snippet template(args)}
+		<CheckboxGroupSolid {...args} bind:selectedOptions label="Transport method" />
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="with description">
-	<CheckboxGroupSolid
-		options={optionsForGroup}
-		bind:selectedOptions
-		label="Transport method"
-		description="Pick your preferred method of transport - taxis are currently not available"
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="With hint">
+	{#snippet template(args)}
+		<CheckboxGroupSolid
+			{...args}
+			bind:selectedOptions
+			label="Transport method"
+			hint="contextual hint text"
+		/>
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="disabled buttons">
-	<CheckboxGroupSolid options={optionsForGroup} bind:selectedOptions {ariaLabel} />
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="With description">
+	{#snippet template(args)}
+		<CheckboxGroupSolid
+			{...args}
+			bind:selectedOptions
+			label="Transport method"
+			hint="contextual hint text"
+			description="Pick your preferred method of transport - taxis are currently not available"
+		/>
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="externally updated">
-	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
+<Story name="Hide select all">
+	{#snippet template(args)}
+		<CheckboxGroupSolid {...args} bind:selectedOptions hideSelectAll />
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
 
-	<div class="my-4">
-		<CheckboxGroupSolid options={optionsForGroup} bind:selectedOptions {ariaLabel} />
-	</div>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="Externally updated">
+	{#snippet template(args)}
+		<Button onclick={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
+
+		<CheckboxGroupSolid {...args} bind:selectedOptions />
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
+
+<Story name="Using multiple instances">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			<div class="flex flex-col gap-1">
+				<CheckboxGroupSolid
+					name="station-type-1"
+					bind:selectedOptions={selectedOptions3}
+					{...args}
+				/>
+				<p class="text-color-text-secondary">Selected id: {selectedOptions3}</p>
+			</div>
+
+			<div class="flex flex-col gap-1">
+				<CheckboxGroupSolid
+					name="station-type-2"
+					bind:selectedOptions={selectedOptions4}
+					{...args}
+				/>
+				<p class="text-color-text-secondary">Selected id: {selectedOptions4}</p>
+			</div>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="With Icons above">
+	{#snippet template(args)}
+		<CheckboxGroupSolid
+			name="station-type"
+			bind:selectedOptions
+			{...args}
+			options={optionsForGroupIconsAbove}
+		></CheckboxGroupSolid>
+		<p class="mt-8 text-color-text-secondary">
+			Selected options: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
+
+<Story name="With Icons below">
+	{#snippet template(args)}
+		<CheckboxGroupSolid
+			name="station-type"
+			bind:selectedOptions
+			{...args}
+			options={optionsForGroupIconsBelow}
+		></CheckboxGroupSolid>
+		<p class="mt-8 text-color-text-secondary">
+			Selected options: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
+
+<Story name="With 2 options">
+	{#snippet template(args)}
+		<CheckboxGroupSolid
+			name="station-type"
+			bind:selectedOptions={selectedOptions2}
+			{...args}
+			options={[optionsForGroup[0], optionsForGroup[1]]}
+		></CheckboxGroupSolid>
+		<p class="mt-8 text-color-text-secondary">
+			Selected options: {JSON.stringify(selectedOptions2)}
+		</p>
+	{/snippet}
 </Story>
 
 <Story name="Disabled (global)">
-	<CheckboxGroupSolid
-		options={optionsForGroup}
-		bind:selectedOptions
-		label="Preferred mode of transport"
-		hint="Contextual Hint"
-		description="This is a description"
-		disabled
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+	{#snippet template(args)}
+		<CheckboxGroupSolid {...args} bind:selectedOptions={selectedOptionsDisabled} disabled />
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptionsDisabled)}
+		</p>
+	{/snippet}
 </Story>
 
 <Story name="With error">
-	<CheckboxGroupSolid
-		options={optionsForGroup}
-		bind:selectedOptions
-		label="Preferred mode of transport"
-		hint="Contextual Hint"
-		description="Deselect all to see an error state!"
-		error={!selectedOptions.length ? 'You must select an option' : undefined}
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+	{#snippet template(args)}
+		<CheckboxGroupSolid
+			{...args}
+			bind:selectedOptions
+			error={!selectedOptions.length ? 'You must select an option' : undefined}
+		/>
+		<p class="mt-4 text-color-text-secondary">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+		<Button onclick={() => (selectedOptions = [])}>Clear</Button>
+	{/snippet}
 </Story>
 
-<!--
-When `CheckboxGroupSolid` is used as a filter and nothing is selected, all options should be visible.
-
-```
-	let selectedFilters: string[] = [];
-	
-	const data = ['bus', 'train', 'underground', 'taxi'];
-
-	const filterOptions = (filters: string[], data: string[]) => {
-		return filters.length ? data.filter((x) => filters.includes(x)) : data;
-	};
-
-	$: filteredData = filterOptions(selectedFilters, data);
-```
--->
 <Story name="As filter">
-	<CheckboxGroupSolid
-		options={optionsForGroup}
-		bind:selectedOptions={selectedFilters}
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedFilters: {JSON.stringify(selectedFilters)}
-	</p>
-	<div class="pt-2">
-		<p class="font-semibold">Visible data:</p>
-		{#each filteredData as d}
-			<p>{d}</p>
-		{/each}
-	</div>
+	{#snippet template(args)}
+		<CheckboxGroupSolid {...args} bind:selectedOptions={selectedFilters} />
+		<p class="mt-4 text-color-text-secondary">
+			selectedFilters: {JSON.stringify(selectedFilters)}
+		</p>
+		<div class="pt-2">
+			<p class="font-semibold">Visible data:</p>
+			{#each filteredData as d}
+				<p>{d}</p>
+			{/each}
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="With custom overlay">
+	{#snippet template()}
+		<CheckboxGroupSolidDemo />
+	{/snippet}
 </Story>

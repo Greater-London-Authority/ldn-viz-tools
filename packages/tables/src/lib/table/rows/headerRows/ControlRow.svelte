@@ -5,31 +5,31 @@
 	import Scaffolding from '../Scaffolding.svelte';
 
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
-	import EncodingType from '../../menus/EncodingType.svelte';
+	// import EncodingType from '../../menus/EncodingType.svelte';
 	import FilterMenu from '../../menus/FilterMenu.svelte';
 	import MergeMenu from '../../menus/MergeMenu.svelte';
 
-	export let table;
+	let { table } = $props();
 </script>
 
 <Scaffolding {table}>
-	<svelte:fragment slot="groupControl">
+	{#snippet groupControl()}
 		{#each table.groupingFields || [] as _field, i}
 			<button
 				style:width={table.widths.groupControl}
 				id="groupControl"
-				on:click={() => table.openOrCloseLevel(i)}
+				onclick={() => table.openOrCloseLevel(i)}
 			>
 				<Icon
 					src={(table.expansionState[i] ?? true) ? ChevronDown : ChevronRight}
 					theme="solid"
-					class="w-[18px] h-[18px] ml-0.5"
+					class="ml-0.5 h-[18px] w-[18px]"
 					aria-hidden="true"
 				/>
 			</button>
 		{/each}
 		<div style:width={table.widths.groupControl} id="groupControl"></div>
-	</svelte:fragment>
+	{/snippet}
 
 	<!-- TODO: re-add somewhere else -->
 	<!--
@@ -42,12 +42,12 @@
     </svelte:fragment>
     -->
 
-	<svelte:fragment slot="dataColumns">
+	{#snippet dataColumns()}
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div class="flex was-th" role="columnheader" style:width={col.computedWidth + 'px'}>
+				<div class="was-th flex" role="columnheader" style:width={col.computedWidth + 'px'}>
 					<FilterMenu {table} {col} />
-					<EncodingType {col} />
+					<!-- <EncodingType {col} /> -->
 
 					{#if col.allowGrouping}
 						<MergeMenu {table} {col} />
@@ -56,5 +56,5 @@
 			{/if}
 			<ColGroupSpacer {table} {i} />
 		{/each}
-	</svelte:fragment>
+	{/snippet}
 </Scaffolding>

@@ -1,21 +1,36 @@
 <script lang="ts">
 	import AppShell from '../../appShell/AppShell.svelte';
+	import Header from '../../header/Header.svelte';
+	import HeaderItem from '../../header/HeaderItem.svelte';
+	import HeaderRight from '../../header/HeaderRight.svelte';
+	import HeaderTitle from '../../header/HeaderTitle.svelte';
 	import LogoCIU from '../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../logos/LogoMayor.svelte';
 	import Sidebar from '../../sidebar/Sidebar.svelte';
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 	import { Demo1 } from './demoTabs';
+
+	import NavigationMenu from '../../navigationMenu/NavigationMenu.svelte';
+
+	let mainMenu = [
+		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' },
+		{ title: 'Contact', id: 'contact', href: '/' }
+	];
 </script>
 
-<!--Only need the theme in a story in an app this will be in the layout-->
-<Theme />
-
+<Header>
+	<HeaderTitle>Simple Header</HeaderTitle>
+	<HeaderRight>
+		<HeaderItem>
+			<NavigationMenu items={mainMenu} orientation="horizontal" ariaLabel="main menu" />
+		</HeaderItem>
+	</HeaderRight>
+</Header>
 <AppShell>
-	<svelte:fragment slot="main">
-		<div class="bg-color-canvas-background-1 h-full p-6">
+	{#snippet main()}
+		<div class="h-full bg-color-canvas-background-1 p-6">
 			<div class="mb-4">
 				<h1 class="title-lg responsive">This is the main content area</h1>
 				<h2 class="subtitle responsive font-normal">
@@ -23,36 +38,43 @@
 				</h2>
 			</div>
 		</div>
-	</svelte:fragment>
-	<Sidebar slot="sidebar">
-		<!-- HEADER -->
-		<SidebarHeader title="Main sidebar title" slot="header">
-			<svelte:fragment slot="subTitle">
-				<p>Maecenas ut libero vel nibh maximus feugiat non sed tortor.</p>
-			</svelte:fragment>
-		</SidebarHeader>
+	{/snippet}
 
-		<!-- SECTIONS -->
-		<svelte:fragment slot="sections">
-			<Demo1 />
-		</svelte:fragment>
+	{#snippet sidebar()}
+		<Sidebar>
+			<!-- HEADER -->
+			{#snippet header()}
+				<SidebarHeader title="Main sidebar title">
+					{#snippet subTitle()}
+						<p>Maecenas ut libero vel nibh maximus feugiat non sed tortor.</p>
+					{/snippet}
+				</SidebarHeader>
+			{/snippet}
 
-		<!-- FOOTER -->
-		<SidebarFooter slot="footer">
-			<div class="flex justify-between">
-				<div class="w-[165px]"><LogoMayor /></div>
-				<div class="w-[165px]"><LogoCIU /></div>
-			</div>
-			<svelte:fragment slot="menu">
-				<div class="flex justify-between">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
+			<!-- SECTIONS -->
+			{#snippet sections()}
+				<Demo1 />
+			{/snippet}
 
-					<ThemeSwitcher size="xs" />
-				</div>
-			</svelte:fragment>
-		</SidebarFooter>
-	</Sidebar>
+			<!-- FOOTER -->
+			{#snippet footer()}
+				<SidebarFooter>
+					<div class="flex justify-between">
+						<div class="w-[165px]"><LogoMayor /></div>
+						<div class="w-[165px]"><LogoCIU /></div>
+					</div>
+					{#snippet menu()}
+						<div class="flex justify-between">
+							<ul class="flex space-x-2">
+								<li>View Cookie settings</li>
+								<li>Privacy Policy</li>
+							</ul>
+
+							<ThemeSwitcher size="xs" />
+						</div>
+					{/snippet}
+				</SidebarFooter>
+			{/snippet}
+		</Sidebar>
+	{/snippet}
 </AppShell>

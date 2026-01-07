@@ -1,3 +1,7 @@
+<script>
+	let { children } = $props();
+</script>
+
 <div class="relative min-h-dvh">
-	<slot />
+	{@render children?.()}
 </div>

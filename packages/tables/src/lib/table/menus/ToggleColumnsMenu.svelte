@@ -1,8 +1,13 @@
 <script lang="ts">
 	import type { TableData } from '$lib/core/lib/dataObj';
-	import { Button, CheckboxGroup, Popover } from '@ldn-viz/ui';
+	import { CheckboxGroup, Overlay } from '@ldn-viz/ui';
 
-	export let table: TableData;
+	interface Props {
+		table: TableData;
+		onChange: () => void;
+	}
+
+	let { table, onChange }: Props = $props();
 
 	type Options = {
 		label: string;
@@ -10,36 +15,33 @@
 		value: string;
 	};
 
-	let fields: Options[];
-	$: if (table) {
-		const new_fields = table.columnSpec.map((f) => ({
-			label: f.label ?? f.short_label,
-			id: f.short_label,
-			value: f.short_label
-		}));
+	let fields: Options[] = $derived.by(() => {
+		let new_fields: any[] = [];
 
-		if (JSON.stringify(new_fields) !== JSON.stringify(fields)) {
-			fields = new_fields;
+		if (table) {
+			new_fields = table.columnSpec.map((f) => ({
+				label: f.label ?? f.short_label,
+				id: f.short_label,
+				value: f.short_label
+			}));
 		}
-	}
 
-	let fieldSelection = table.visibleFields;
-	const updateVisibility = () => table.setVisibleFields(fieldSelection);
-	$: {
-		if (JSON.stringify(table.visibleFields) !== JSON.stringify(fieldSelection)) {
-			updateVisibility();
-		}
-	}
+		return new_fields;
+	});
+
+	let fieldSelection = $state(table.visibleFields);
+	const updateVisibility = (newFields) => {
+		table.setVisibleFields(newFields);
+		onChange();
+	};
 </script>
 
-<Popover>
-	<svelte:fragment slot="hint">
-		<Button variant="text" size="sm">Show/Hide Columns</Button>
-
-		<span class="sr-only">Open Popover</span>
-	</svelte:fragment>
-
+<Overlay overlayType="popover" hintLabel="Show/Hide Columns">
 	<h2 class="font-bold">Select which columns to display:</h2>
 
-	<CheckboxGroup options={fields} bind:selectedOptions={fieldSelection} />
-</Popover>
+	<CheckboxGroup
+		options={fields}
+		bind:selectedOptions={fieldSelection}
+		onChange={updateVisibility}
+	/>
+</Overlay>

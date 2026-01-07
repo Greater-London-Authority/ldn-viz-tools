@@ -1,21 +1,17 @@
-<script context="module" lang="ts">
-	import MultipleActionButton from './MultipleActionButton.svelte';
-
-	export const meta = {
-		title: 'Ui/Components/Buttons/MultipleActionButton',
-		component: MultipleActionButton
-	};
-</script>
-
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
+<script module lang="ts">
 	import { ArrowDownTray } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import Modal from '../modal/Modal.svelte';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import MultipleActionButton from './MultipleActionButton.svelte';
+	import type { MultipleActionButtonOption } from './types';
 
-	const options = [
+	/**
+	 * The `MultipleActionButton` combines a button and popover menu, so that the user can select which action
+	 * (or variation on an action) will be performed when the button is pressed.
+	 */
+
+	const options: MultipleActionButtonOption[] = [
 		{
 			id: 'PNG',
 			buttonLabel: 'Download as PNG',
@@ -32,59 +28,124 @@
 		}
 	];
 
-	let isOpen = false;
+	const { Story } = defineMeta({
+		title: 'Ui/Components/Buttons/MultipleActionButton',
+		component: MultipleActionButton,
+		tags: ['autodocs'],
+		argTypes: {
+			menuTitle: {
+				control: { type: 'text' }
+			}
+		},
+		args: {
+			options: options
+		}
+	});
+
+	// let isOpen = $state(false);
+
+	const handleClick = (selectedOption: string) =>
+		console.log('Clicked on button in state:', selectedOption);
 </script>
 
-<Template let:args>
-	<MultipleActionButton
-		{options}
-		menuTitle="Select image format"
-		onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
-		{...args}
-	/>
-</Template>
+<script>
+	let opts = options;
+</script>
 
-<Story name="Default" source />
-
-<Story name="With icon After" source let:args>
-	<MultipleActionButton
-		{options}
-		menuTitle="Select image format"
-		onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
-		{...args}
-	>
-		<svelte:fragment slot="afterLabel">
-			<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 ml-2" aria-hidden="true" />
-		</svelte:fragment>
-	</MultipleActionButton>
+<Story name="Default">
+	{#snippet template(args)}
+		<MultipleActionButton {...args} menuTitle="Select image format" onClick={handleClick} />
+	{/snippet}
 </Story>
 
-<Story name="With icon Before" source let:args>
-	<MultipleActionButton
-		{options}
-		menuTitle="Select image format"
-		onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
-		{...args}
-		emphasis="secondary"
-		variant="outline"
-		size="sm"
-	>
-		<svelte:fragment slot="beforeLabel">
-			<Icon src={ArrowDownTray} theme="mini" class="w-5 h-5 mr-2" aria-hidden="true" />
-		</svelte:fragment>
-	</MultipleActionButton>
-</Story>
+<Story name="Externally change available options">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-2">
+			<div class="flex gap-2">
+				<Button onclick={() => (opts = options)}>Allow both</Button>
+				<Button onclick={() => (opts = [options[0]])}>Allow PNG only</Button>
+				<Button onclick={() => (opts = [options[1]])}>Allow SVG only</Button>
+			</div>
 
-<Story name="In modal">
-	<Button on:click={() => (isOpen = true)}>Open modal!</Button>
-
-	<Modal title="A modal containing a DataDownloadButton" {isOpen}>
-		<div class="h-72">
 			<MultipleActionButton
-				{options}
+				{...args}
+				options={opts}
+				menuTitle="Select image format"
+				onClick={handleClick}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="With icon After">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			menuTitle="Select image format"
+			onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+		>
+			{#snippet afterLabel()}
+				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
+		</MultipleActionButton>
+	{/snippet}
+</Story>
+
+<Story name="With icon Before">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			menuTitle="Select image format"
+			onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+		>
+			{#snippet beforeLabel()}
+				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
+		</MultipleActionButton>
+	{/snippet}
+</Story>
+
+<Story name="Full Width">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			menuTitle="Select image format"
+			onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+			fullWidth
+		></MultipleActionButton>
+	{/snippet}
+</Story>
+
+<Story name="With size">
+	{#snippet template(args)}
+		<div class="space-y-4">
+			<MultipleActionButton
+				{...args}
+				size="xs"
+				menuTitle="Select image format"
+				onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+			/>
+
+			<MultipleActionButton
+				{...args}
+				size="sm"
+				menuTitle="Select image format"
+				onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+			/>
+
+			<MultipleActionButton
+				{...args}
+				size="md"
+				menuTitle="Select image format"
+				onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
+			/>
+
+			<MultipleActionButton
+				{...args}
+				size="lg"
 				menuTitle="Select image format"
 				onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
 			/>
 		</div>
-	</Modal>
+	{/snippet}
 </Story>

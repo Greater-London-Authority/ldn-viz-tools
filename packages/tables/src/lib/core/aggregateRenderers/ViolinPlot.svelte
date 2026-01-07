@@ -4,24 +4,14 @@
 	 * @component
 	 */
 
-	import { bin, max, mean, min, quantile } from 'd3-array';
+	import { bin, type Bin, max, mean, min, quantile } from 'd3-array';
+	import type { ScaleLinear } from 'd3-scale';
 	import { scaleLinear } from 'd3-scale';
 
-	import { type Bin } from 'd3-array';
-	import type { ScaleLinear } from 'd3-scale';
-
+	import type { ViolinProps } from '$lib/core/aggregateRenderers/ViolinProps';
 	import { area, curveCatmullRom } from 'd3-shape';
 
-	/**
-	 * Array of values to be displayed.
-	 */
-	export let values: number[];
-	export let extent = [0, 1];
-
-	/**
-	 * Width of cell (in pixels).
-	 */
-	export let width = 100;
+	let { values, extent = [0, 1], width = 100, ...rest }: ViolinProps = $props();
 
 	// Declare the chart dimensions and margins.
 	const height = 30;
@@ -39,55 +29,42 @@
 		q3: number | undefined;
 	};
 
-	let box: Box;
-	let bins: Array<Bin<number, number>>;
+	let box: Box = $derived({
+		min: min(values),
+		max: max(values),
+		q1: quantile(values, 0.25),
+		mean: mean(values),
+		q2: quantile(values, 0.5),
+		q3: quantile(values, 0.75)
+	});
 
-	let x: ScaleLinear<number, number>;
-	let y: ScaleLinear<number, number>;
-	const update = (values: number[]) => {
-		bins = bin()(
-			//.value((d) => d.rate)
-			values
-		);
+	let bins: Array<Bin<number, number>> = $derived(bin()(values));
 
-		x = scaleLinear()
+	let x: ScaleLinear<number, number> = $derived(
+		scaleLinear()
 			.domain(extent)
-			.range([marginLeft, width - marginRight]);
+			.range([marginLeft, width - marginRight])
+	);
 
-		// Declare the y (vertical position) scale.
+	let y: ScaleLinear<number, number> = $derived.by(() => {
 		const m = max(bins, (d) => d.length) ?? 0;
-		y = scaleLinear()
+		return scaleLinear()
 			.domain([-m, +m])
 			.range([height - marginBottom, marginTop]);
+	});
 
-		box = {
-			min: min(values),
-			max: max(values),
-			q1: quantile(values, 0.25),
-			mean: mean(values),
-			q2: quantile(values, 0.5),
-			q3: quantile(values, 0.75)
-		};
-	};
-
-	const areaGenerator = area()
-		.x0((d) => (x(d.x0) + x(d.x1)) / 2)
+	const areaGenerator = area<Bin<number, number>>()
+		.x0((d) => (x(d.x0 ?? 0) + x(d.x1 ?? 0)) / 2)
 		.y0((d) => y(-d.length))
 		.y1((d) => y(d.length))
 		.curve(curveCatmullRom);
-
-	$: update(values);
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
 </script>
 
 <!-- TODO: tooltips -->
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<path d={areaGenerator(bins)} fill="lightgrey" />
 
-	<!-- line fr0m q1 to q3 -->
+	<!-- line from q1 to q3 -->
 	{#if box.q1 !== undefined && box.q3 !== undefined}
 		<line x1={x(box.q1)} x2={x(box.q3)} y1={height / 2} y2={height / 2} stroke="black" />
 	{/if}

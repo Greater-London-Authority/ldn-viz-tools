@@ -1,83 +1,106 @@
-<script context="module">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import ChartContainer from './ChartContainer.svelte';
 
 	import { Select } from '@ldn-viz/ui';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Charts/Components/ChartContainer',
-		component: ChartContainer
-	};
+		component: ChartContainer,
+		tags: ['autodocs']
+	});
 </script>
 
-<Template let:args>
-	<ChartContainer
-		{...args}
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
-</Template>
-
-<Story name="Default" id="ChartcontainerDefault" />
+<Story name="Default">
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		/>
+	{/snippet}
+</Story>
 
 <Story name="With Title">
-	<ChartContainer
-		title="This is the Chart Title"
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart Title"
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		/>
+	{/snippet}
 </Story>
 
 <Story name="With Title and Subtitle">
-	<ChartContainer
-		title="This is the Chart Title"
-		subTitle="Subtitle provides extra context"
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart Title"
+			subTitle="Subtitle provides extra context"
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		/>
+	{/snippet}
 </Story>
 
 <Story name="With Title, Subtitle, and Controls">
-	<ChartContainer
-		title="This is the Chart Title"
-		subTitle="Subtitle provides extra context"
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	>
-		<div slot="controls" class="flex gap-4">
-			<Select label="An input affecting the chart" items={[]} />
-			<Select label="Another input" items={[]} />
-		</div>
-	</ChartContainer>
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart Title"
+			subTitle="Subtitle provides extra context"
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		>
+			{#snippet controls()}
+				<div class="mb-4 flex gap-4">
+					<div class="w-56">
+						<Select label="An input affecting the chart" options={[]} />
+					</div>
+					<div class="w-52">
+						<Select label="Another input" options={[]} />
+					</div>
+				</div>
+			{/snippet}
+		</ChartContainer>
+	{/snippet}
 </Story>
 
 <Story name="Source, byline and note (footer)">
-	<ChartContainer
-		title="This is the Chart Title"
-		subTitle="Subtitle provides extra context"
-		source="GLA city intelligence"
-		byline="A byline for the chart"
-		note="Be aware that you can provide a note if required"
-		dataDownloadButton={['JSON', 'CSV']}
-		data={[]}
-		imageDownloadButton
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart Title"
+			subTitle="Subtitle provides extra context"
+			source="GLA city intelligence"
+			byline="A byline for the chart"
+			note="Be aware that you can provide a note if required"
+			dataDownloadButton={['JSON', 'CSV']}
+			data={[]}
+			imageDownloadButton
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		/>
+	{/snippet}
 </Story>
 
 <Story name="Source, byline only">
-	<ChartContainer
-		title="This is the Chart Title"
-		subTitle="Subtitle provides extra context"
-		source="The source of this chart data"
-		byline="A byline for the chart"
-		dataDownloadButton={['JSON', 'CSV']}
-		data={[]}
-		imageDownloadButton
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart Title"
+			subTitle="Subtitle provides extra context"
+			source="The source of this chart data"
+			byline="A byline for the chart"
+			dataDownloadButton={['JSON', 'CSV']}
+			data={[]}
+			imageDownloadButton
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		/>
+	{/snippet}
 </Story>
 
 <!--
@@ -86,27 +109,9 @@
 -->
 
 <Story name="With Override Class">
-	<ChartContainer
-		overrideClass="bg-color-palette-red-500"
-		title="This is the Chart Title"
-		subTitle="Subtitle provides extra context"
-		source="The source of this chart data"
-		byline="A byline for the chart"
-		note="Be aware that you can provide a note if required"
-		dataDownloadButton={['JSON', 'CSV']}
-		data={[]}
-		imageDownloadButton={['PNG']}
-		chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
-		alt="Simple description of type of chart"
-	/>
-</Story>
-
-<!--
-This story show how you can place two (or more) sites side-by-side, and ensure that the titles/chart body/download buttons remain aligned as the window is shrunk.
--->
-<Story name="Aligning 2 charts">
-	<div class="grid grid-flow-col grid-cols-2 gap-x-12" style="grid-template-rows: auto auto auto;">
+	{#snippet template(args)}
 		<ChartContainer
+			{...args}
 			overrideClass="bg-color-palette-red-500"
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
@@ -116,20 +121,48 @@ This story show how you can place two (or more) sites side-by-side, and ensure t
 			dataDownloadButton={['JSON', 'CSV']}
 			data={[]}
 			imageDownloadButton={['PNG']}
-			alignMultiple
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
 		/>
+	{/snippet}
+</Story>
 
-		<ChartContainer
-			overrideClass="bg-color-palette-red-500"
-			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so wil wrap earlier."
-			source="The source of this chart data"
-			byline="A byline for the chart"
-			note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so wil wrap earlier. It's really excessively long."
-			dataDownloadButton={['JSON', 'CSV']}
-			data={[]}
-			imageDownloadButton={['PNG']}
-			alignMultiple
-		/>
-	</div>
+<!--
+This story show how you can place two (or more) charts side-by-side, and ensure that the titles/chart body/download buttons remain aligned as the window is shrunk.
+-->
+<Story name="Aligning 2 charts">
+	{#snippet template(args)}
+		<div
+			class="grid grid-flow-col grid-cols-2 gap-x-12"
+			style="grid-template-rows: auto auto auto;"
+		>
+			<ChartContainer
+				{...args}
+				overrideClass="bg-color-palette-red-500"
+				title="This is the Chart Title"
+				subTitle="Subtitle provides extra context"
+				source="The source of this chart data"
+				byline="A byline for the chart"
+				note="Be aware that you can provide a note if required"
+				dataDownloadButton={['JSON', 'CSV']}
+				data={[]}
+				imageDownloadButton={['PNG']}
+				alignMultiple
+			/>
+
+			<ChartContainer
+				{...args}
+				overrideClass="bg-color-palette-red-500"
+				title="This is the Chart Title"
+				subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so will wrap earlier."
+				source="The source of this chart data"
+				byline="A byline for the chart"
+				note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so will wrap earlier. It's really excessively long."
+				dataDownloadButton={['JSON', 'CSV']}
+				data={[]}
+				imageDownloadButton={['PNG']}
+				alignMultiple
+			/>
+		</div>
+	{/snippet}
 </Story>

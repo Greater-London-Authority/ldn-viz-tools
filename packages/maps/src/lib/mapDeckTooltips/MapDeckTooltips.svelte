@@ -6,44 +6,45 @@
 	 * @component
 	 */
 
+	import type { Layer } from '@deck.gl/core';
 	import { mousedOverObject } from './stores';
-	import type { Layer } from '@deck.gl/core/typed';
 
-	import { arrow } from 'svelte-floating-ui';
+	import { arrow, createFloatingActions, createVirtualElement } from 'svelte-floating-ui';
 	import type { ClientRectObject } from 'svelte-floating-ui/core';
-	import { offset, flip, shift } from 'svelte-floating-ui/dom';
-	import { createFloatingActions } from 'svelte-floating-ui';
+	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { type Writable, writable } from 'svelte/store';
+	import MapMarkerStyledContainer from '../mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		strategy: 'fixed', //or absolute
 		middleware: [offset(0), flip(), shift()]
 	});
 
-	let x = 0;
-	let y = 0;
+	let x = $state(0);
+	let y = $state(0);
 
 	const mousemove = (ev: MouseEvent) => {
 		x = ev.clientX;
 		y = ev.clientY;
 	};
 
-	$: getBoundingClientRect = (): ClientRectObject => {
-		return {
-			x,
-			y,
-			top: y,
-			left: x,
-			bottom: y,
-			right: x,
-			width: 0,
-			height: 0
-		};
-	};
+	let getBoundingClientRect: ClientRectObject = $derived({
+		x,
+		y,
+		top: y,
+		left: x,
+		bottom: y,
+		right: x,
+		width: 0,
+		height: 0
+	});
 
-	const virtualElement = writable({ getBoundingClientRect });
+	// Called in an IIFE to avoid the state_referenced_locally warning, an $effect block responds to changes in the state
+	const virtualElement = (() => createVirtualElement({ getBoundingClientRect }))();
 
-	$: virtualElement.set({ getBoundingClientRect });
+	$effect(() => {
+		virtualElement.update({ getBoundingClientRect });
+	});
 
 	floatingRef(virtualElement);
 
@@ -71,45 +72,51 @@
 	};
 
 	///
-	/**
-	 * List of layers. We need this so that we can remove a popover when the correpsodning layer is removed.
-	 */
-	export let layers: Layer[] = [];
 
-	export let spec: Record<string, any> = {};
-
-	let tooltipSpec: any;
-	let layerObj: any;
-	$: {
-		if ($mousedOverObject && $mousedOverObject.feature && $mousedOverObject.layer) {
-			tooltipSpec = spec[$mousedOverObject.layer.id];
-			layerObj = layers.find((l) => l.id === $mousedOverObject?.layer?.id);
-		} else {
-			tooltipSpec = undefined;
-			layerObj = undefined;
-		}
+	interface Props {
+		/**
+		 * List of layers. We need this so that we can remove a popover when the corresponding layer is removed.
+		 */
+		layers?: Layer[];
+		spec?: Record<string, any>;
 	}
+
+	let { layers = [], spec = {} }: Props = $props();
+
+	let tooltipSpec: any = $derived(
+		$mousedOverObject && $mousedOverObject.feature && $mousedOverObject.layer
+			? spec[$mousedOverObject.layer.id]
+			: undefined
+	);
+
+	let layerObj: any = $derived(
+		$mousedOverObject && $mousedOverObject.feature && $mousedOverObject.layer
+			? layers.find((l) => l.id === $mousedOverObject?.layer?.id)
+			: undefined
+	);
 
 	function isConstructor(obj: any) {
 		return !!obj.prototype && !!obj.prototype.constructor.name;
 	}
 </script>
 
-<svelte:window on:mousemove={mousemove} />
+<svelte:window onmousemove={mousemove} />
 
 {#if layerObj && layerObj.visible !== false && $mousedOverObject && tooltipSpec}
 	<div
 		use:floatingContent={dynamicOptions}
 		class:width={'100px'}
-		style:z-index={9999}
-		class="bg-core-grey-800 text-white p-3.5 pointer-events-none"
+		class="maplibregl-popup pointer-events-none"
 	>
-		{#if typeof tooltipSpec === 'string'}
-			{tooltipSpec}
-		{:else if tooltipSpec && isConstructor(tooltipSpec)}
-			<svelte:component this={tooltipSpec} feature={$mousedOverObject.feature} />
-		{:else if typeof tooltipSpec === 'function'}
-			{tooltipSpec($mousedOverObject.feature)}
-		{/if}
+		<MapMarkerStyledContainer>
+			{#if typeof tooltipSpec === 'string'}
+				{tooltipSpec}
+			{:else if tooltipSpec && isConstructor(tooltipSpec)}
+				{@const SvelteComponent = tooltipSpec}
+				<SvelteComponent feature={$mousedOverObject.feature} layer={$mousedOverObject.layer} />
+			{:else if typeof tooltipSpec === 'function'}
+				{tooltipSpec($mousedOverObject.feature, $mousedOverObject.layer)}
+			{/if}
+		</MapMarkerStyledContainer>
 	</div>
 {/if}

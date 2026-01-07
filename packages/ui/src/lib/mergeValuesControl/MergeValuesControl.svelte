@@ -12,8 +12,15 @@
 		ungrouped: string[];
 	};
 
-	export let groups: Grouping = { ungrouped: [], grouped: {} };
-	export let onGroupingsChanged = () => null;
+	interface Props {
+		groups?: Grouping;
+		onGroupingsChanged?: any;
+	}
+
+	let {
+		groups = $bindable({ ungrouped: [], grouped: {} }),
+		onGroupingsChanged = () => null
+	}: Props = $props();
 
 	const deleteCat = (catName: string) => {
 		groups.ungrouped = [...groups.ungrouped, ...groups.grouped[catName]];
@@ -64,7 +71,7 @@
 		}
 	};
 
-	let draggedOverGroup: string | undefined;
+	let draggedOverGroup: string | undefined = $state();
 
 	const dragOver = (ev: DragEvent, groupName: string) => {
 		ev.preventDefault();
@@ -121,16 +128,17 @@
 		draggedOverGroup = undefined;
 	};
 
-	let newGroupName = 'Unnamed Category';
-	$: {
+	let newGroupName = $derived.by(() => {
+		let name = 'Unnamed Category';
 		let i = 0;
 		const allGroupNames = Object.keys(groups.grouped);
 
-		while (allGroupNames.includes(newGroupName)) {
+		while (allGroupNames.includes(name)) {
 			i++;
-			newGroupName = `Unnamed Category ${i}`;
+			name = `Unnamed Category ${i}`;
 		}
-	}
+		return name;
+	});
 </script>
 
 <div class="flex flex-col gap-4 text-color-text-primary">
@@ -139,22 +147,22 @@
 		Click on category name to edit.
 	</HelpText>
 
-	<div class="flex flex-col gap-1 w-96">
+	<div class="flex w-96 flex-col gap-1">
 		<span class="font-bold">Values not assigned to a category:</span>
 		<ul
 			class="list-none border-2 border-transparent"
-			on:dragover={(ev) => dragOver(ev, '')}
-			on:dragleave={() => dragLeave()}
-			on:dragenter={(ev) => ev.preventDefault()}
-			on:drop={dropOutOfGroup}
+			ondragover={(ev) => dragOver(ev, '')}
+			ondragleave={() => dragLeave()}
+			ondragenter={(ev) => ev.preventDefault()}
+			ondrop={dropOutOfGroup}
 			class:currentDropTarget={draggedOverGroup === ''}
 		>
 			{#each groups.ungrouped as val}
 				<li
-					class="pl-2 py-1 cursor-grab hover:bg-color-input-background-hover"
+					class="cursor-grab py-1 pl-2 hover:bg-color-input-background-hover"
 					draggable="true"
 					data-id={val}
-					on:dragstart={(ev) => dragStart(ev, '')}
+					ondragstart={(ev) => dragStart(ev, '')}
 					aria-grabbed="true"
 					aria-dropeffect="move"
 				>
@@ -164,17 +172,17 @@
 		</ul>
 	</div>
 
-	<div class="flex flex-col gap-1 w-96">
+	<div class="flex w-96 flex-col gap-1">
 		<div
-			class="border-color-action-border-positive border-2 black p-2 flex items-center"
-			on:dragover={(ev) => dragOver(ev, newGroupName)}
-			on:dragleave={() => dragLeave()}
-			on:dragenter={(ev) => ev.preventDefault()}
-			on:drop={(ev) => dragDrop(ev, newGroupName)}
+			class="black flex items-center border-2 border-color-action-border-positive p-2"
+			ondragover={(ev) => dragOver(ev, newGroupName)}
+			ondragleave={() => dragLeave()}
+			ondragenter={(ev) => ev.preventDefault()}
+			ondrop={(ev) => dragDrop(ev, newGroupName)}
 			class:currentDropTarget={draggedOverGroup === newGroupName}
 			role="none"
 		>
-			<Icon src={Plus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
+			<Icon src={Plus} theme="solid" class="mr-2 h-4 w-4" aria-hidden="true" />
 			New category
 		</div>
 	</div>
@@ -182,31 +190,31 @@
 	<ul class="list-none border-2 border-transparent">
 		{#each Object.keys(groups.grouped) as groupName}
 			<li
-				class="pl-2 py-1"
-				on:dragover={(ev) => dragOver(ev, groupName)}
-				on:dragleave={() => dragLeave()}
-				on:dragenter={(ev) => ev.preventDefault()}
-				on:drop={(ev) => dragDrop(ev, groupName)}
+				class="py-1 pl-2"
+				ondragover={(ev) => dragOver(ev, groupName)}
+				ondragleave={() => dragLeave()}
+				ondragenter={(ev) => ev.preventDefault()}
+				ondrop={(ev) => dragDrop(ev, groupName)}
 				class:currentDropTarget={draggedOverGroup === groupName}
 			>
 				<div class="flex flex-col gap-1">
 					<div class="flex">
 						<input
-							on:change={(ev) => {
+							onchange={(ev) => {
 								if (ev.target && !renameGroup(groupName, ev.target.value)) {
 									ev.target.value = groupName;
 								}
 							}}
 							value={groupName}
-							class="border-0 padding-0 font-bold width-fit"
+							class="padding-0 width-fit border-0 font-bold"
 						/>
 						<Button
-							on:click={() => deleteCat(groupName)}
+							onclick={() => deleteCat(groupName)}
 							variant="text"
 							size="sm"
 							title="Click to delete this category."
 						>
-							<Icon src={Trash} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
+							<Icon src={Trash} theme="solid" class="mr-2 h-4 w-4" aria-hidden="true" />
 						</Button>
 					</div>
 				</div>
@@ -216,17 +224,17 @@
 						<li
 							data-id={val}
 							draggable="true"
-							class="pl-2 py-1 cursor-grab hover:bg-color-input-background-hover flex"
-							on:dragstart={(ev) => dragStart(ev, groupName)}
+							class="flex cursor-grab py-1 pl-2 hover:bg-color-input-background-hover"
+							ondragstart={(ev) => dragStart(ev, groupName)}
 						>
 							<Button
-								on:click={() => removeFromCat(groupName, val)}
+								onclick={() => removeFromCat(groupName, val)}
 								variant="text"
 								size="sm"
-								class="h-5 leading-5 py-0"
+								class="h-5 py-0 leading-5"
 								title="Click to remove value from category"
 							>
-								<Icon src={Minus} theme="solid" class="w-4 h-4 mr-2" aria-hidden="true" />
+								<Icon src={Minus} theme="solid" class="mr-2 h-4 w-4" aria-hidden="true" />
 							</Button>
 
 							{val}

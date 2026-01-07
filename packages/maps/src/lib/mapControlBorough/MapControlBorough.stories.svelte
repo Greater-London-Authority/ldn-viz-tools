@@ -1,18 +1,21 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import MapControlBorough from './MapControlBorough.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlBorough',
 		component: MapControlBorough,
+		render: defaultTemplate,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'fullscreen'
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	import Map from '../map/Map.svelte';
 	import type { MapLibreStore } from '../map/types';
 	import { appendOSKeyToUrl } from '../map/util';
@@ -23,26 +26,28 @@
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 
-	let mapStore: MapLibreStore = writable();
+	let mapStore: MapLibreStore = $state(writable());
 </script>
 
-<Template let:args>
+{#snippet defaultTemplate({ args })}
 	<MapControlBorough {...args} />
-</Template>
+{/snippet}
 
 <Story name="Zooming to borough">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest
-			}}
-			bind:mapStore
-		>
-			<MapControlGroup position="TopLeft">
-				<MapControlBorough map={$mapStore} />
-			</MapControlGroup>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+				bind:mapStore
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlBorough map={$mapStore} />
+				</MapControlGroup>
 
-			<BoroughsContextLayer />
-		</Map>
-	</div>
+				<BoroughsContextLayer />
+			</Map>
+		</div>
+	{/snippet}
 </Story>

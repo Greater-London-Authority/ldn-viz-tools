@@ -21,36 +21,42 @@
 		OnGeolocationSearchResult
 	} from './types';
 
-	/**
-	 * Called when a location is found.
-	 */
-	export let onLocationFound: OnGeolocationSearchResult | undefined;
+	interface Props {
+		/**
+		 * Called when a location is found.
+		 */
+		onLocationFound: OnGeolocationSearchResult | undefined;
+		/**
+		 * Called when a location could not be found.
+		 */
+		onSearchError: OnGeolocationSearchError | undefined;
+		/**
+		 * The last found location. This will be reset to `null` each time a new search
+		 * is started.
+		 */
+		location?: GeolocationCoords[2] | null;
+		/**
+		 * Bind to be reactively informed when searching is in progress.
+		 */
+		isSearching?: boolean;
+		/**
+		 * If `true`, the search button will be replaced by a clear button.
+		 */
+		allowClearButton?: boolean;
+		/**
+		 * Bind to be reactively informed when the clear button is being shown.
+		 */
+		showClearButton?: boolean;
+	}
 
-	/**
-	 * Called when a location could not be found.
-	 */
-	export let onSearchError: OnGeolocationSearchError | undefined;
-
-	/**
-	 * The last found location. This will be reset to `null` each time a new search
-	 * is started.
-	 */
-	export let location: GeolocationCoords[2] | null = null;
-
-	/**
-	 * Bind to be reactively informed when searching is in progress.
-	 */
-	export let isSearching = false;
-
-	/**
-	 * If `true`, the search button will be replaced by a clear button.
-	 */
-	export let allowClearButton = false;
-
-	/**
-	 * Bind to be reactively informed when the clear button is being shown.
-	 */
-	export let showClearButton = false;
+	let {
+		onLocationFound,
+		onSearchError,
+		location = $bindable(null),
+		isSearching = $bindable(false),
+		allowClearButton = false,
+		showClearButton = $bindable(false)
+	}: Props = $props();
 
 	/**
 	 * When bound to, allows activation of the search to be started by an
@@ -70,9 +76,8 @@
 		);
 	};
 
-	let errorMessage = '';
-	let errorModalOpen;
-	$: errorModalOpen?.set(!!errorMessage);
+	let errorMessage = $state('');
+	let errorModalOpen = $derived(!!errorMessage);
 
 	const isGeolocatorAvailable = () => {
 		return 'geolocation' in navigator;
@@ -143,10 +148,10 @@
 	};
 </script>
 
-<div class="pointer-events-auto w-10 h-10" aria-live="polite" aria-busy={isSearching}>
+<div class="pointer-events-auto h-10 w-10" aria-live="polite" aria-busy={isSearching}>
 	{#if isSearching}
-		<div class="w-10 h-10 p-1">
-			<LoadingIndicator title="Searching for location..." class="w-8 h-8 p-0.5 stroke-[12]" />
+		<div class="h-10 w-10 p-1">
+			<LoadingIndicator title="Searching for location..." class="h-8 w-8 stroke-[12] p-0.5" />
 		</div>
 	{:else if showClearButton}
 		<Button
@@ -155,10 +160,10 @@
 			title="Clear location"
 			role="search"
 			aria-label="Clear location"
-			on:click={clearSearch}
+			onclick={clearSearch}
 			class="dark:border dark:border-color-ui-border-primary"
 		>
-			<Icon src={XMark} class="w-8 h-8 p-0.25" />
+			<Icon src={XMark} class="p-0.25 h-8 w-8" />
 		</Button>
 	{:else}
 		<Button
@@ -167,14 +172,22 @@
 			title={errorMessage ? errorMessage : 'Find my location'}
 			role="search"
 			aria-label={errorMessage ? errorMessage : 'Find my location'}
-			on:click={startSearch}
+			onclick={startSearch}
 			class="dark:border dark:border-color-ui-border-primary"
 		>
-			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="w-8 h-8 p-0.5" />
+			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="h-8 w-8 p-0.5" />
 		</Button>
 	{/if}
 </div>
 
 {#if errorMessage}
-	<Modal bind:isOpen={errorModalOpen} title="Unable to find location" description={errorMessage} />
+	<Modal bind:open={errorModalOpen}>
+		{#snippet title()}
+			Unable to find location.
+		{/snippet}
+
+		{#snippet description()}
+			{errorMessage}
+		{/snippet}
+	</Modal>
 {/if}

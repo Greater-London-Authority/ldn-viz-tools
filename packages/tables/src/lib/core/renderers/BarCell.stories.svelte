@@ -1,22 +1,21 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import BarCell from './BarCell.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/BarCell',
 		component: BarCell,
+		tags: ['autodocs'],
 
 		args: {
 			value: 0.5
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<BarCell {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<BarCell {...args} value={args.value ?? 0.5} />
+	{/snippet}
+</Story>

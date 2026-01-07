@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	interface TypeClasses {
 		[key: string]: string;
 	}
@@ -12,28 +12,29 @@
 </script>
 
 <script lang="ts">
-	import { Button } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { fade } from 'svelte/transition';
+	import Button from '../button/Button.svelte';
 	import type { ToastMessage } from './types';
 
-	export let message: ToastMessage;
-	let classes = typeClasses[message.type];
-
-	if (!classes) {
-		classes = 'bg-color-ui-background-neutral';
+	interface Props {
+		message: ToastMessage;
 	}
+
+	let { message }: Props = $props();
+
+	let classes = $derived(typeClasses[message.type] ?? 'bg-color-ui-background-neutral');
 </script>
 
 <div
 	role="alert"
 	id={message.id}
-	class="shadow-lg text-color-text-primary"
+	class="text-color-text-primary shadow-lg"
 	out:fade={{ duration: 100 }}
 >
-	<div class="border pl-4 pb-4 p-2 pr-2 {classes}">
-		<div class="text-lg font-bold flex justify-between items-center mb-1">
+	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
+		<div class="mb-1 flex items-center justify-between text-lg font-bold">
 			{message.type}
 			{#if message.closeButton}
 				<Button
@@ -41,13 +42,13 @@
 					emphasis="secondary"
 					variant="square"
 					size="sm"
-					on:click={message.remove}
+					onclick={message.remove}
 				>
-					<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />
+					<Icon src={XMark} theme="solid" class="h-6 w-6" aria-hidden="true" />
 				</Button>
 			{/if}
 		</div>
-		<div class="text-sm pr-2">{message.text}</div>
+		<div class="pr-2 text-sm">{message.text}</div>
 	</div>
 </div>
 

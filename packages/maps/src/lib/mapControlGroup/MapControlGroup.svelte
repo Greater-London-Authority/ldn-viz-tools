@@ -1,15 +1,15 @@
-<script lang="ts" context="module">
-	export enum MapControlGroupPositions {
-		TopLeft = 'TopLeft',
-		TopCenter = 'TopCenter',
-		TopRight = 'TopRight',
-		TopRightOffset = 'TopRightOffset',
-		CenterRight = 'CenterRight',
-		BottomRight = 'BottomRight',
-		BottomCenter = 'BottomCenter',
-		BottomLeft = 'BottomLeft',
-		CenterLeft = 'CenterLeft'
-	}
+<script module lang="ts">
+	export const MapControlGroupPositions = {
+		TopLeft: 'TopLeft',
+		TopCenter: 'TopCenter',
+		TopRight: 'TopRight',
+		TopRightOffset: 'TopRightOffset',
+		CenterRight: 'CenterRight',
+		BottomRight: 'BottomRight',
+		BottomCenter: 'BottomCenter',
+		BottomLeft: 'BottomLeft',
+		CenterLeft: 'CenterLeft'
+	};
 
 	type PositionClass = {
 		[key in keyof typeof MapControlGroupPositions]: string;
@@ -35,21 +35,29 @@
 	 * @component
 	 */
 
-	/**
-	 * Position of the group over the map. Available positions defined by
-	 * `MapControlGroupPositions` enum type.
-	 */
-	export let position: keyof typeof MapControlGroupPositions = MapControlGroupPositions.TopLeft;
+	interface Props {
+		/**
+		 * Position of the group over the map. Available positions defined by
+		 * `MapControlGroupPositions` enum.
+		 */
+		position?: keyof typeof MapControlGroupPositions;
+		/**
+		 * Additional classes applied to the group's container element.
+		 */
+		classes?: string;
+		children?: import('svelte').Snippet;
+	}
 
-	/**
-	 * Additional classes applied to the group's container element.
-	 */
-	export let classes = '';
+	let {
+		position = MapControlGroupPositions.TopLeft as keyof typeof MapControlGroupPositions,
+		classes = '',
+		children
+	}: Props = $props();
 
 	const positionClass = positionClasses[position];
 </script>
 
-<div class="absolute {positionClass} z-10 flex flex-col space-y-2 pointer-events-none {classes} ">
+<div class="absolute {positionClass} pointer-events-none z-10 flex flex-col space-y-2 {classes} ">
 	<!-- Group content, usually map control buttons. -->
-	<slot />
+	{@render children?.()}
 </div>

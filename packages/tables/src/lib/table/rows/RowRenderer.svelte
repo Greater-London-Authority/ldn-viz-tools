@@ -4,9 +4,7 @@
 	import GroupRowCombined from './groupRows/GroupRowCombined.svelte';
 	import GroupSummaryRow from './groupRows/GroupSummaryRow.svelte';
 
-	export let spec;
-
-	export let table;
+	let { spec, table } = $props();
 </script>
 
 {#if spec.type === 'GroupHeadingRow'}

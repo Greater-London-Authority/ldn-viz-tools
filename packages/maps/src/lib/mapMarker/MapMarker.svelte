@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `<MapMarker>` component allows tooltips and popups to easily be added
 	 * for feature hover and clicks respectively. This component may be slotted
@@ -7,6 +7,8 @@
 	 * To ensure the correct behaviour for overlapping tooltips that aren't
 	 * sourced via ESRI servers, set `generateId` to true in your
 	 * [MapLibre Source Specifications](https://maplibre.org/maplibre-style-spec/sources/).
+	 * This will set the value of the `feature.id` property to be equal to the
+	 * index of the corresponding feature, rather than leaving it undefined.
 	 *
 	 * The `tooltip` and `popup` components are client side rendered. This
 	 * component's context is passed to them along with three additional
@@ -17,39 +19,45 @@
 	 * @component
 	 */
 
-	import { getAllContexts } from 'svelte';
+	import { getAllContexts, mount, unmount } from 'svelte';
 	import maplibre_gl from 'maplibre-gl';
 	import MapCursorEvent from '../mapCursorEvent/MapCursorEvent.svelte';
 
 	const contexts = getAllContexts();
 	const mapStore = contexts.get('mapStore');
-	const ctxLayerId = contexts.get('mapLayerId');
 
-	/**
-	 * ID of the target layer. Defaults to using the value of 'mapLayerId'
-	 * context if it exists.
-	 */
-	export let layerId = ctxLayerId;
+	interface Props {
+		/**
+		 * ID of the target layer.
+		 */
+		layerId?: any;
+		/**
+		 * Disables cursor style changes triggered on feature hover.
+		 *
+		 * By default, the map cursor is a grab icon to indicate the map can be
+		 * panned. Hovering a feature that has a clickable popup shows a pointer
+		 * (the pointer implying clickability) and tooltips will show the default OS
+		 * cursor icon.
+		 */
+		noCursorStyle?: boolean;
+		/**
+		 * Component to render when the user's mouse hovers over a feature.
+		 */
+		tooltip?: any;
+		/**
+		 * Component to render when the user clicks on a feature.
+		 */
+		popup?: any;
+		children?: import('svelte').Snippet;
+	}
 
-	/**
-	 * Disables cursor style changes triggered on feature hover.
-	 *
-	 * By default, the map cursor is a grab icon to indicate the map can be
-	 * panned. Hovering a feature that has a clickable popup shows a pointer
-	 * (the pointer implying clickability) and tooltips will show the default OS
-	 * cursor icon.
-	 */
-	export let noCursorStyle = false;
-
-	/**
-	 * Component to render when the user's mouse hovers over a feature.
-	 */
-	export let tooltip = null;
-
-	/**
-	 * Component to render when the user clicks on a feature.
-	 */
-	export let popup = null;
+	let {
+		layerId = undefined,
+		noCursorStyle = false,
+		tooltip = null,
+		popup = null,
+		children
+	}: Props = $props();
 
 	let tooltipMaplibrePopup = null;
 	let tooltipInstance = null;
@@ -138,14 +146,18 @@
 	const removeTooltip = () => {
 		tooltipMaplibrePopup?.remove();
 		tooltipMaplibrePopup = null;
-		tooltipInstance?.$destroy();
+		if (tooltipInstance) {
+			unmount(tooltipInstance);
+		}
 		tooltipInstance = null;
 	};
 
 	const removePopup = () => {
 		popupMaplibrePopup?.remove();
 		popupMaplibrePopup = null;
-		popupInstance?.$destroy();
+		if (popupInstance) {
+			unmount(popupInstance);
+		}
 		popupInstance = null;
 		popupFeature = null;
 	};
@@ -167,7 +179,7 @@
 		// If a new property from the event is required in component context, pass
 		// (and maybe clone) the specific event property and pass it into the
 		// function below to be set directly in the context.
-		const instance = new component({
+		const instance = mount(component, {
 			target: container,
 			context: new Map([
 				...contexts,
@@ -184,5 +196,5 @@
 </script>
 
 <MapCursorEvent {layerId} {enterTopFeature} {leaveTopFeature} {clickFeature} {clickMap}>
-	<slot />
+	{@render children?.()}
 </MapCursorEvent>
