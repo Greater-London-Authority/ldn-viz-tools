@@ -1,13 +1,14 @@
 <script lang="ts">
 	/**
 	 * The `BarDivergingCell` component renders a table cell representing a numerical value as a bar, where the length of the bar encodes the value.
-	 * There is a vertical line at x=0, and the bar color indicates whether the value is greater tha or less than 0.
+	 * There is a vertical line at x=0, and the bar color indicates whether the value is greater than or less than 0.
 	 * @component
 	 */
 
+	import type { BarDivergingCellProps } from '$lib/core/renderers/BarDivergingCellProps';
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
-	import type { BarDivergingCellProps } from '$lib/core/renderers/BarDivergingCellProps';
+	import { getVal } from '../../getVal';
 
 	let {
 		value,
@@ -49,7 +50,7 @@
 				width={x(0) - x(value)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={negativeColor}
+				fill={getVal(value, negativeColor) as string}
 			/>
 
 			<!-- zero line -->
@@ -84,7 +85,7 @@
 				width={x(value) - x(0)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={positiveColor}
+				fill={getVal(value, positiveColor) as string}
 			/>
 
 			<!-- zero line -->

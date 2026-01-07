@@ -121,7 +121,7 @@
 	const sum = (vals: number[]) => vals.reduce((total, current) => total + +current, 0);
 
 	const getHeight = (div: HTMLElement) => {
-		// N.B. wwe need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
+		// N.B. we need to check computed style, rather than .style on element, as display is likely to be set by a Tailwind class
 		const display = window.getComputedStyle(div).display;
 
 		if (display !== 'contents') {

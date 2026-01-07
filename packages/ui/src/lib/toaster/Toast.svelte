@@ -12,10 +12,10 @@
 </script>
 
 <script lang="ts">
-	import { Button } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { fade } from 'svelte/transition';
+	import Button from '../button/Button.svelte';
 	import type { ToastMessage } from './types';
 
 	interface Props {

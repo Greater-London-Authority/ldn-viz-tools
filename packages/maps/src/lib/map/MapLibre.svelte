@@ -31,7 +31,7 @@
 	interface Props {
 		/**
 		 * Disables initialisation of the map on mount. This is most often used
-		 * to avoid uneeded map rendering during development of non-map application
+		 * to avoid unneeded map rendering during development of non-map application
 		 * elements.
 		 */
 		disabled?: boolean;
@@ -148,6 +148,20 @@
 			@apply align-middle;
 			@apply text-color-text-primary;
 			@apply pt-0.5;
+			@apply bg-color-container-level-0;
+		}
+
+		.maplibregl-ctrl-attrib-inner a {
+			@apply text-color-text-primary;
+		}
+
+		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button,
+		.maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button {
+			@apply bg-color-static-white;
+		}
+
+		.maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button:hover {
+			background-color: #bdc0c2;
 		}
 
 		.maplibregl-ctrl-attrib-inner a {

@@ -19,7 +19,7 @@
 		{ label: 'range', value: 'range' }
 	];
 
-	let selectedFilterType: { label: string; value: string } | undefined = $state();
+	let selectedFilterType: string | undefined = $state();
 
 	const applyFilter = () => {
 		if (!table || !selectedFilterType) {
@@ -28,9 +28,9 @@
 
 		table.setFilters([
 			{
-				type: selectedFilterType.value,
+				type: selectedFilterType,
 				field: col.short_label,
-				value: selectedFilterType.value === 'isOneOf' ? val1.split(',') : val1,
+				value: selectedFilterType === 'isOneOf' ? val1?.split(',') : val1,
 				value2: val2
 			}
 		]);
@@ -45,24 +45,19 @@
 	// TODO: set icon based on whether filter applied
 	// TODO: position better
 
-	let val1: string = $state();
-	let val2: string = $state();
+	let val1: string | undefined = $state();
+	let val2: string | undefined = $state();
 </script>
 
 <!-- TODO: funnel-->
 <Overlay hintLabel="Filter" overlayType="popover">
 	<h2 class="text-large font-bold">Filter</h2>
 
-	<Select
-		items={filterTypes}
-		bind:value={selectedFilterType}
-		{filterTypes}
-		label="Show only rows that are:"
-	/>
+	<Select options={filterTypes} bind:value={selectedFilterType} label="Show only rows that are:" />
 
 	<input type="text" bind:value={val1} />
 
-	{#if selectedFilterType && selectedFilterType.value === 'range'}
+	{#if selectedFilterType === 'range'}
 		<input type="text" bind:value={val2} />
 	{/if}
 	<span>TODO: These should be proper Input components...</span>

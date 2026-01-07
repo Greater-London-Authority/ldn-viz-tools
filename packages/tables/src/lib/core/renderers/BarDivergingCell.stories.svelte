@@ -16,7 +16,7 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<BarDivergingCell {...args} />
+		<BarDivergingCell {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>
 
@@ -56,7 +56,7 @@
 </Story>
 
 <Story name="Custom text size">
-	{#snippet children({ args })}
+	{#snippet template({ args })}
 		<div class="flex w-36 flex-col">
 			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} textSize={8} />
 			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} textSize={10} />

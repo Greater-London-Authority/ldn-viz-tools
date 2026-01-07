@@ -6,15 +6,16 @@
 	 * @component
 	 */
 
-	import { format } from 'd3-format';
 	import type { DotProps } from '$lib/core/renderers/DotProps';
+	import { format } from 'd3-format';
+	import { getVal } from '../../getVal';
 
 	let {
 		color = 'steelblue',
 		showValues = true,
 		value,
 		formatString = '0.0f',
-		extent,
+		extent = [0, 1],
 		...rest
 	}: DotProps = $props();
 
@@ -28,7 +29,7 @@
 <div
 	class="relative ml-[-3.5px] mt-[-3.5px] h-[7px] w-[7px] rounded-sm opacity-100"
 	style="width: 7px; height: 7px;"
-	style:background-color={color}
+	style:background-color={getVal(value, color)}
 	style:left={fPercentage(d)}
 >
 	{#if showValues}

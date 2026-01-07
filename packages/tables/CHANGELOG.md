@@ -1,5 +1,21 @@
 # @ldn-viz/tables
 
+## 5.0.0-svelte5.10
+
+### Patch Changes
+
+- Updated dependencies [ce87f14]
+  - @ldn-viz/ui@21.0.0-svelte5.9
+  - @ldn-viz/charts@7.0.0-svelte5.9
+
+## 5.0.0-svelte5.9
+
+### Patch Changes
+
+- Updated dependencies [8dca04b]
+  - @ldn-viz/ui@21.0.0-svelte5.8
+  - @ldn-viz/charts@7.0.0-svelte5.8
+
 ## 5.0.0-svelte5.8
 
 ### Minor Changes

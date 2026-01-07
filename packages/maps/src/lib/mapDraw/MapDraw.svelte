@@ -47,7 +47,7 @@
 		uploadDownload?: [boolean, boolean];
 
 		/**
-		 * Eternally uploaded features
+		 * Externally uploaded features
 		 **/
 		features?: GeoJSONStoreFeatures[];
 	}
@@ -71,7 +71,7 @@
 
 	const createTerraDraw = (mapStore: unknown) => {
 		if (terraDraw) {
-			// setup has already occured
+			// setup has already occurred
 			return;
 		}
 

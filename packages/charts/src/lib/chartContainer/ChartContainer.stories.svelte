@@ -128,7 +128,7 @@
 </Story>
 
 <!--
-This story show how you can place two (or more) sites side-by-side, and ensure that the titles/chart body/download buttons remain aligned as the window is shrunk.
+This story show how you can place two (or more) charts side-by-side, and ensure that the titles/chart body/download buttons remain aligned as the window is shrunk.
 -->
 <Story name="Aligning 2 charts">
 	{#snippet template(args)}
@@ -154,10 +154,10 @@ This story show how you can place two (or more) sites side-by-side, and ensure t
 				{...args}
 				overrideClass="bg-color-palette-red-500"
 				title="This is the Chart Title"
-				subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so wil wrap earlier."
+				subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so will wrap earlier."
 				source="The source of this chart data"
 				byline="A byline for the chart"
-				note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so wil wrap earlier. It's really excessively long."
+				note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so will wrap earlier. It's really excessively long."
 				dataDownloadButton={['JSON', 'CSV']}
 				data={[]}
 				imageDownloadButton={['PNG']}

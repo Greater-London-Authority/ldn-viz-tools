@@ -15,11 +15,12 @@
 	const getGroupLevel = (name: string) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 
 	const getNthAncestor = (group: Group, i: number, n: number) => {
+		let g: Group | undefined = group;
 		while (n > 0) {
-			group = group.parentGroup;
+			g = g?.parentGroup;
 			n--;
 		}
-		return group;
+		return g;
 	};
 </script>
 
@@ -114,7 +115,7 @@
 					<col.group.renderer
 						values={table.getValsForGroup(group, col.short_label)}
 						extent={table.extents[col.short_label]}
-						colorScale={table.scales[col.short_label]}
+						color={table.scales[col.short_label]}
 						posScale={table.posScales[col.short_label]}
 						{...col.group}
 					/>

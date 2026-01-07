@@ -20,30 +20,34 @@
 		{
 			label: 'B',
 			options: [
-				{ text: 'Barking and Dagenham', value: 'Barking and Dagenham' },
-				{ text: 'Barnet', value: 'Barnet' },
-				{ text: 'Bexley', value: 'Bexley' },
-				{ text: 'Brent', value: 'Brent' },
-				{ text: 'Bromley', value: 'Bromley' }
+				{ label: 'Barking and Dagenham', value: 'Barking and Dagenham' },
+				{ label: 'Barnet', value: 'Barnet' },
+				{ label: 'Bexley', value: 'Bexley' },
+				{ label: 'Brent', value: 'Brent' },
+				{ label: 'Bromley', value: 'Bromley' }
 			]
 		},
 
 		{
 			label: 'C',
 			options: [
-				{ text: 'Camden', value: 'Camden' },
-				{ text: 'Croydon', value: 'Croydon' }
+				{ label: 'Camden', value: 'Camden' },
+				{ label: 'Croydon', value: 'Croydon' }
 			]
 		},
 
 		{
 			label: 'E',
 			options: [
-				{ text: 'Ealing', value: 'Ealing' },
-				{ text: 'Enfield', value: 'Enfield' }
+				{ label: 'Ealing', value: 'Ealing' },
+				{ label: 'Enfield', value: 'Enfield' }
 			]
 		}
 	];
+
+	/**
+	 * The `<Select>` component wraps a 'Svelecte' instance. Check the documentation: [here](https://svelecte.vercel.app).
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Select',
@@ -60,6 +64,8 @@
 
 	let selectedValue: number | null = $state(null);
 	let selectedValueMulti: number[] | null = $state(null);
+	let selectedBorough: string | null = $state(null);
+
 	let error = $state('');
 </script>
 
@@ -83,6 +89,14 @@
 	{#snippet template(args)}
 		<div class="w-96">
 			<Select {...args} {options} label="Label" optional />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Don't highlight first option">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {...args} {options} highlightFirstItem={false} label="Pick a number" />
 		</div>
 	{/snippet}
 </Story>
@@ -143,6 +157,18 @@
 	{#snippet template(args)}
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple bind:value />
+
+			<span class="text-color-text-secondary mt-4 block">
+				Value is: {JSON.stringify(value)}
+			</span>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Multiple selects keep selection in list">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {...args} {options} label="Label" multiple keepSelectionInList bind:value />
 
 			<span class="text-color-text-secondary mt-4 block">
 				Value is: {JSON.stringify(value)}
@@ -228,6 +254,33 @@
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
 			<Select {...args} {options} bind:value={selectedValueMulti} multiple reorderable />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Loading options from API">
+	{#snippet template(args)}
+		<div class="flex w-[500px] flex-col gap-2">
+			<Select
+				{...args}
+				label="London Borough"
+				placeholder="Select a borough..."
+				fetch="https://api2.ldn-gis.co.uk/tables/geographies/core_london_borough?select=name,gss_code"
+				fetchCallback={(response) => {
+					return response.map((item) => ({
+						label: item.name,
+						value: item.gss_code
+					}));
+				}}
+				labelField="label"
+				valueField="value"
+				bind:value={selectedBorough}
+			/>
+
+			<div class="text-color-text-secondary mt-4">
+				<strong>Selected:</strong>
+				{selectedBorough ?? 'None'}
+			</div>
 		</div>
 	{/snippet}
 </Story>

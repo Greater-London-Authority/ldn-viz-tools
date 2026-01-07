@@ -41,7 +41,7 @@ export interface NavigationMenuItemProps {
 	/**
 	 * URL to navigate to when link is clicked.
 	 */
-	href: string;
+	href?: string;
 	/**
 	 * Optional list of children items, if they exist.
 	 */
@@ -59,6 +59,11 @@ export interface NavigationMenuItemProps {
 	 * Event handler to handle what happens when links are clicked.
 	 */
 	onChange?: any;
+
+	/**
+	 * Id of the curently selected item.
+	 */
+	selected: { value: string };
 
 	/**
 	 * The indexed number of the menu item position

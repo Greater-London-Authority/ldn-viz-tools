@@ -27,6 +27,8 @@
 	import LogoByCiu from '../logos/LogoByCIU.svelte';
 
 	let htmlNode: HTMLElement = $state() as HTMLElement;
+	let htmlNode2: HTMLElement = $state() as HTMLElement;
+
 	let svgRef: SVGElement = $state() as SVGElement;
 </script>
 
@@ -101,6 +103,32 @@
 		</svg>
 
 		<ImageDownloadButton htmlNode={svgRef} scaleFactor={2} fullWidth>
+			{#snippet afterLabel()}
+				<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
+		</ImageDownloadButton>
+	{/snippet}
+</Story>
+
+<!-- Here the circle and rectangle are separated into superimposed SVGs;
+  because the `data-capture-ignore` atribtue has been applied to the second,
+  it will not be included in the exported image . -->
+<Story name="Hiding part of an SVG">
+	{#snippet template()}
+		<div bind:this={htmlNode2} class="relative">
+			<svg width="100" height="100">
+				<rect x="0" y="0" width="100" height="100" fill="red" />
+			</svg>
+			<svg
+				width="100"
+				height="100"
+				class="pointer-events-none absolute inset-0"
+				data-capture-ignore
+			>
+				<circle cx="10" cy="10" r="10" fill="blue" />
+			</svg>
+		</div>
+		<ImageDownloadButton htmlNode={htmlNode2} scaleFactor={2} fullWidth formats={['SVG']}>
 			{#snippet afterLabel()}
 				<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 			{/snippet}

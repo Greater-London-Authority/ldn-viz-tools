@@ -5,23 +5,22 @@
 	 * @component
 	 */
 
+	import type { ColoredCellProps } from '$lib/core/renderers/ColoredCellProps';
 	import { hsl } from 'd3-color';
 	import { format } from 'd3-format';
-	import type { ColoredCellProps } from '$lib/core/renderers/ColoredCellProps';
-
-	let { value, formatString = '.2f', colorScale }: ColoredCellProps = $props();
+	import { getVal } from '../../getVal';
+	let { value, formatString = '.2f', color = 'steelblue' }: ColoredCellProps = $props();
 
 	let f = $derived(format(formatString));
 </script>
 
-{#if !colorScale}
+{#if !color}
 	<span></span>
 {:else if value}
 	<span
 		class="flex h-full items-center justify-end p-2 text-right"
-		style={`background-color: ${colorScale(value)}; color: ${
-			hsl(colorScale(value).toString()).l >= 0.6 ? '#000000' : '#FFFFFF'
-		}`}
+		style:background-color={getVal(value, color)}
+		style:color={hsl(getVal(value, color).toString()).l >= 0.6 ? '#000000' : '#FFFFFF'}
 	>
 		{#if formatString}{f(+value)}{/if}
 	</span>

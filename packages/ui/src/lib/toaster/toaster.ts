@@ -1,4 +1,5 @@
 import { writable, type Writable } from 'svelte/store';
+import { randomId } from '../utils/randomId';
 import type { ToastMessage, ToastMessageOptions } from './types';
 import { ToastType } from './types';
 
@@ -13,7 +14,7 @@ export const messages: Writable<ToastMessage[]> = writable([]);
 // Often there is no need to store and reuse a toast. You can simple fire and
 // forget: newToastMessage("This is a notice!").post().
 export const newToastMessage = (text: string, options: ToastMessageOptions = {}) => {
-	const id = options.id ? options.id : crypto.randomUUID();
+	const id = options.id ? options.id : randomId();
 	const type = options.type ? options.type : ToastType.Notice;
 	const timeToLive = options.timeToLive ? options.timeToLive : DEFAULT_TIME_TO_LIVE;
 

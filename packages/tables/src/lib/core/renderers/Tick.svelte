@@ -2,19 +2,20 @@
 	/**
 	 * The `Tick` component renders a table cell representing a numerical value as a tick;
 	 * the horizontal position of the tick encodes the value.
-	 * See also: [Dot](./?path=/docs/tables-components-encodings-dot--documentation)
+	 * See also: [Dot](./?path=/docs/tables-components-renderers-dot--documentation)
 	 * @component
 	 */
 
-	import { format } from 'd3-format';
 	import type { TickProps } from '$lib/core/renderers/TickProps';
+	import { format } from 'd3-format';
+	import { getVal } from '../../getVal';
 
 	let {
 		color = 'steelblue',
 		showValues = true,
 		value,
 		formatString = '0.0f',
-		extent,
+		extent = [0, 1],
 		...rest
 	}: TickProps = $props();
 
@@ -27,7 +28,7 @@
 <div
 	class="relative top-0 z-[-1] h-full w-[3px] -translate-x-1/2 transform"
 	style="width: 3px"
-	style:background={color}
+	style:background={getVal(value, color)}
 	style:left={fPercentage(d)}
 >
 	{#if showValues}

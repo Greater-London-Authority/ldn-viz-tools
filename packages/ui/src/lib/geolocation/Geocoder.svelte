@@ -299,16 +299,17 @@
 		onSearchClear();
 	};
 
-	// TODO: check this state change inside effect is ok
-	$effect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		query;
+	const updateQuery = (ev: KeyboardEvent) => {
+		query = ev.target?.value;
+
 		if (!silentQueryTextUpdate) {
 			scheduleUpdate();
 		} else {
 			silentQueryTextUpdate = false;
 		}
-	});
+
+		reshowSuggestionList(ev)
+	}
 </script>
 
 <svelte:window onmousedown={hideSuggestionList} onkeyup={hideSuggestionList} />
@@ -327,10 +328,10 @@
 		{placeholder}
 		class="form-input bg-color-input-background border-color-input-border placeholder-color-input-placeholder text-color-valuetext h-full w-64 min-w-0 max-w-[100%] shrink grow border pl-10 {inputClasses}"
 		class:pr-8={showClearButton}
-		bind:value={query}
+		value={query}
 		onfocus={reshowSuggestionList}
 		onclick={reshowSuggestionList}
-		onkeyup={reshowSuggestionList}
+		onkeyup={updateQuery}
 	/>
 
 	{#if showClearButton || query?.length > 0}

@@ -6,7 +6,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 **Important**: Working with themes requires the inclusion of the `Theme` component at the top-level `Layout` component of the app. (In Storybook this is provided by a default decorator so it should _just work_ when developing in Storybook)
 
-The `@ldn-viz/ui` package exposes two theme 'modes' within a default theme. Though we tend to use 'theme' and 'mode' interchangably we actually only have one theme with two modes:
+The `@ldn-viz/ui` package exposes two theme 'modes' within a default theme. Though we tend to use 'theme' and 'mode' interchangeably we actually only have one theme with two modes:
 
 - `'light'`
 - `'dark'`
@@ -42,4 +42,4 @@ $inspect(theme.tokenNameToValue('data.primary'));
 $inspect(theme.colorTokenNameToRGBArray('data.primary'));
 ```
 
-The utility functions default to using the current theme, but can take a second argument of a Theme Object in case you neet to retrieve a value outside of the currently selected theme
+The utility functions default to using the current theme, but can take a second argument of a Theme Object in case you need to retrieve a value outside of the currently selected theme

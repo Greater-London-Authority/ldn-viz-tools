@@ -120,7 +120,7 @@
 	{/snippet}
 </Story>
 
-<!-- Here the popover is rendered by a custom component, which ahs access to the feature object.
+<!-- Here the popover is rendered by a custom component, which has access to the feature object.
   Each layer can use a separate component to render the popovers for its features.
   -->
 <Story name="Example - spec as components">

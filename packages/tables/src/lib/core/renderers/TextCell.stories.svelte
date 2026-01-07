@@ -23,12 +23,12 @@
 
 <Story name="Default">
 	{#snippet template(args)}
-		<TextCell value="500 cars" {...args} />
+		<TextCell {...args} value={args.value} />
 	{/snippet}
 </Story>
 
 <Story name="Bold text">
-	{#snippet template()}
-		<TextCell value="500 cars" fontWeight="bold" />
+	{#snippet template(args)}
+		<TextCell {...args} value={args.value} fontWeight="bold" />
 	{/snippet}
 </Story>

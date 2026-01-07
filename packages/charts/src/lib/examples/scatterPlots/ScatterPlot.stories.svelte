@@ -1,9 +1,9 @@
 <script module lang="ts">
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { penguins } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { penguins } from '../../../data/demoData';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Scatter Plot'
@@ -41,7 +41,7 @@
 			{spec}
 			data={penguins}
 			title="Adelie penguins have shortest culmen length, but similar depth to Chinstraps"
-			subTitle="Penguin data from the islands of Biscoe, Dream and Torgensen"
+			subTitle="Penguin data from the islands of Biscoe, Dream and Torgersen"
 			alt="Scatter plot chart of Penguin data"
 			byline="GLA City Intelligence"
 			source="Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data."

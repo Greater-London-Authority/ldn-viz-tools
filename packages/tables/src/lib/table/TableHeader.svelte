@@ -6,7 +6,7 @@
 	 * * Labels for column groups (if these are defined in the `colGroups` section of the spec)
 	 * * The headings for each column (determined by the value of the `label` for each entry of `column` in the spec)
 	 * * Controls for filtering and changing the visual encoding (if `showColumnControls` is `true` in the spec)
-	 * * Summaries of the values in each column (if `showColumnControls` is `true` in the spec)
+	 * * Summaries of the values in each column (if `showColSummaries` is `true` in the spec)
 	 * * A labelled axis, if one exists for the column's cell renderer
 	 * * A horizontal rule delimiting the bottom of the header (if `colGroupGap` is set in the spec, then a gap of this size will be left between columns in different groups)
 	 * Font size is inherited from the table
@@ -28,10 +28,17 @@
 		data: any;
 		allowSorting?: boolean;
 		tableWidth: any;
-		onChange: () => void;
+		onChange?: () => void;
 	}
 
-	let { tableSpec, table, data, allowSorting = false, tableWidth, onChange }: Props = $props();
+	let {
+		tableSpec,
+		table,
+		data,
+		allowSorting = false,
+		tableWidth,
+		onChange = () => undefined
+	}: Props = $props();
 
 	let topRuleClass = $derived(tableSpec.showHeaderTopRule === false ? '' : 'border-t');
 	let bottomRuleClass = $derived(
@@ -44,7 +51,7 @@
 	style:width={tableWidth}
 	role="rowgroup"
 >
-	{#if tableSpec.colGroups && tableSpec.colGroups.some((c) => c.label)}
+	{#if tableSpec.colGroups && tableSpec.colGroups.some((c: any) => c.label)}
 		<ColumnGroupHeadingRow {table} />
 	{/if}
 
@@ -58,7 +65,7 @@
 		<ColumnSummariesRow {table} {data} />
 	{/if}
 
-	{#if table.columnSpec.some((c) => c.cell.axisRenderer)}
+	{#if table.columnSpec.some((c: any) => c.cell.axisRenderer)}
 		<AxisRow {table} />
 	{/if}
 </div>

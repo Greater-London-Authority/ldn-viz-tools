@@ -23,7 +23,7 @@
 </script>
 
 <!--
-The refresh page button is usually positioned in the bottom right corner.
+The pan controls are usually positioned in the bottom right corner.
 -->
 
 <Story name="Pan Buttons">

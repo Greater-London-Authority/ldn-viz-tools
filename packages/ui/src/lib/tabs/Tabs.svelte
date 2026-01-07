@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<Tabs>` component creates an accessible set uf tabs comprised of a `<TabList>` containing a set of `<TabLabel>`. Selecting a tab will make the relevant content in the associated `<TabPanel>` visible.
+	 * The `<Tabs>` component creates an accessible set of tabs comprised of a `<TabList>` containing a set of `<TabLabel>`. Selecting a tab will make the relevant content in the associated `<TabPanel>` visible.
 	 *
 	 * @component
 	 */

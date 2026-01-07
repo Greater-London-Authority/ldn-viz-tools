@@ -8,7 +8,6 @@
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
-	import { selected } from './navigationMenuState.svelte';
 
 	let {
 		id = randomId(),
@@ -18,7 +17,8 @@
 		children = [],
 		isExpanded = $bindable(false),
 		onChange,
-		index
+		index,
+		selected
 	}: NavigationMenuItemProps = $props();
 
 	const navContext: Record<keyof NavigationMenuProps, any> = getContext('navContext');
@@ -162,6 +162,7 @@
 					level={level + 1}
 					{onChange}
 					isExpanded={child.isExpanded}
+					{selected}
 				/>
 			{/each}
 		</ul>

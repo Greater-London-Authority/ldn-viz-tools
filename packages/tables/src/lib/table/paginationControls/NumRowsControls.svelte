@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Select } from '@ldn-viz/ui';
 
 	let { pageSize = $bindable(), page = $bindable() } = $props();
@@ -12,7 +12,7 @@
 
 	let numRowSelection = $state(pageSize.toString());
 
-	const changePageSize = (ev) => {
+	const changePageSize = (ev: any) => {
 		pageSize = ev.value;
 		page = 1;
 	};

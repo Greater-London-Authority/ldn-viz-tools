@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<LayerControlGroup>` component provides a way to create a set of `<LayerControlGroup>` components defined by an array of objects.
+	 * The `<LayerControlGroup>` component provides a way to create a set of `<LayerControl>` components defined by an array of objects.
 	 *
 	 * @component
 	 */

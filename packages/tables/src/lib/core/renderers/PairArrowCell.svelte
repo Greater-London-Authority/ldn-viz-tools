@@ -1,12 +1,13 @@
 <script lang="ts">
 	/**
-	 * The `PairArrow` component renders a table cell containing an arrow pointing from a context value to the cell's value.
+	 * The `PairArrowCell` component renders a table cell containing an arrow pointing from a context value to the cell's value.
 	 * The color of the arrow indicates whether it is increasing or decreasing
 	 * @component
 	 */
 
-	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import type { PairArrowCellProps } from '$lib/core/renderers/PairArrowCellProps';
+	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import { getVal } from '../../getVal';
 
 	let {
 		value,
@@ -53,8 +54,12 @@
 			x2={x(value)}
 			y1={height / 2}
 			y2={height / 2}
-			stroke={value > contextVals[0] ? positiveColor : negativeColor}
-			fill={value > contextVals[0] ? positiveColor : negativeColor}
+			stroke={String(
+				value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)
+			)}
+			fill={String(
+				value > contextVals[0] ? getVal(value, positiveColor) : getVal(value, negativeColor)
+			)}
 			marker-end="url(#arrow)"
 		/>
 	</svg>

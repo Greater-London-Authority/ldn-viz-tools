@@ -6,7 +6,7 @@
 	const { Story } = defineMeta({
 		title: 'Tables/Example Tables/Column Widths',
 		component: Table,
-		args: []
+		args: {}
 	});
 </script>
 

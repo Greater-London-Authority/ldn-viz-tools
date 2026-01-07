@@ -3,7 +3,7 @@
 	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and description.
 	 * It also provides controls such as data/image download buttons.
 	 *
-	 * **Note** Similar in structure and functionality to the 'table Container'
+	 * **Note** Similar in structure and functionality to the ChartContainer in @ldn-viz/charts.
 	 * 	@component
 	 */
 
@@ -18,11 +18,11 @@
 
 	interface Props {
 		/**
-		 * Title that is displayed in large text above the plot.
+		 * Title that is displayed in large text above the table.
 		 */
 		title?: string;
 		/**
-		 * Subtitle that is displayed below the title, but above the plot.
+		 * Subtitle that is displayed below the title, but above the table.
 		 */
 		subTitle?: string;
 		/**
@@ -105,7 +105,7 @@
 	let tableClass = $derived(classNames('relative', tableHeight, overrideClass));
 
 	// For save as image
-	let tableToCapture: HTMLDivElement = $state();
+	let tableToCapture: HTMLDivElement | undefined = $state();
 </script>
 
 {@render numRowsControlSlot?.()}
@@ -141,14 +141,16 @@
 	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
 		<Footer {source} {byline} {note}>
 			{#snippet exportBtns()}
-				<ExportBtns
-					chartToCapture={tableToCapture}
-					{columnMapping}
-					dataForDownload={data}
-					{dataDownloadButton}
-					{imageDownloadButton}
-					{filename}
-				/>
+				{#if tableToCapture}
+					<ExportBtns
+						chartToCapture={tableToCapture}
+						{columnMapping}
+						dataForDownload={data}
+						{dataDownloadButton}
+						{imageDownloadButton}
+						{filename}
+					/>
+				{/if}
 			{/snippet}
 		</Footer>
 	{/if}

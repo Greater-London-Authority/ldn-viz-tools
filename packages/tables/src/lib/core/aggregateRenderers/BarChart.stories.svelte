@@ -12,7 +12,7 @@
 		args: {
 			values: ['a', 'a', 'b', 'b', 'b', 'b', 'c', 'c', 'd'],
 
-			colorScale: scaleOrdinal()
+			color: scaleOrdinal<string, string>()
 				.domain(['a', 'b', 'c', 'd'])
 				.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']),
 
@@ -32,7 +32,7 @@
 	{#snippet template()}
 		<BarChart
 			values={['a', 'a', 'b', 'b', 'b', 'b', 'c', 'c']}
-			colorScale={scaleOrdinal()
+			color={scaleOrdinal<string, string>()
 				.domain(['a', 'b', 'c'])
 				.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894'])}
 			posScale={scaleBand().range([0, 1]).domain(['a', 'b', 'c'])}

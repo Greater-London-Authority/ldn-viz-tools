@@ -31,7 +31,7 @@
 				<SidebarGroupTitle>
 					Pay Attention to this group
 					{#snippet hint()}
-						<Overlay hintLabel="why">Beacuse it's Awesome!</Overlay>
+						<Overlay hintLabel="why">Because it's Awesome!</Overlay>
 					{/snippet}
 				</SidebarGroupTitle>
 				Grouped content
@@ -48,7 +48,7 @@
 				<SidebarSectionTitle>
 					The title of this section
 
-					{#snippet subTitle()}The sub-title of ths section.{/snippet}
+					{#snippet subTitle()}The sub-title of this section.{/snippet}
 
 					{#snippet hint()}<Overlay hintLabel="About">
 							This popover should provide some additional explanation about this section.
@@ -66,7 +66,7 @@
 			<div>
 				<SidebarGroupTitle>
 					Pay Attention to this group
-					{#snippet hint()}<Overlay hintLabel="why">Beacuse it's Awesome!</Overlay>{/snippet}
+					{#snippet hint()}<Overlay hintLabel="why">Because it's Awesome!</Overlay>{/snippet}
 				</SidebarGroupTitle>
 				Grouped content
 			</div>

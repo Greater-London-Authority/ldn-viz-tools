@@ -16,13 +16,13 @@
 		},
 		args: {
 			value: 0.5,
-			colorScale: () => 'red'
+			color: () => 'red'
 		}
 	});
 </script>
 
 <Story name="Default">
 	{#snippet template(args)}
-		<ColoredCell {...args} />
+		<ColoredCell {...args} value={args.value ?? 0.5} />
 	{/snippet}
 </Story>
