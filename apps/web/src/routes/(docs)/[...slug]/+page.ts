@@ -1,5 +1,5 @@
-import { getDoc } from '$lib/utils';
+import { getContent } from '$lib/utils';
 
 export async function load({ params }) {
-	return getDoc(params.slug);
+	return getContent(params.slug);
 }

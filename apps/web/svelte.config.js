@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
-import contentIndex from './.velite/docs.json' with { type: 'json' };
+import contentIndex from './.velite/docs.json' with { type: 'json' }; //TODO - other content beyond docs
 import mdsvexConfig from './mdsvex.config.js';
 const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)],
@@ -15,6 +15,10 @@ const config = {
 	onwarn: (warning, handler) => {
 		const { code } = warning;
 		if (code === 'css_unused_selector') return;
+		if (warning.code === 'a11y_no_noninteractive_tabindex') return;
+		if (warning.code === 'vite-plugin-svelte-preprocess-many-dependencies') {
+			return; // suppress it
+		}
 		handler(warning);
 	},
 	extensions: ['.svelte', '.svx', '.md']
