@@ -6,67 +6,78 @@
 	 * @component
 	 */
 
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
 	import { fade, slide } from 'svelte/transition';
+	import { getSidebarState, setSidebarState } from '../sidebar/sidebarState.svelte';
 	import { heightLookup, transitionAxis, widthLookup } from '../sidebar/sidebarUtils';
-	import { sidebarWidthStore } from '../sidebar/stores';
-	import type { AlwaysOpenType, SidebarPlacement } from '../sidebar/types';
+	import type { SidebarPlacement } from '../sidebar/types';
 	import { classNames } from '../utils/classNames';
 	import { getSetting } from './utils/getSettingByScreenWidth';
 
-	/**
-	 * Object expressing the sidebar position (`top`, `bottom`, `left`, `right`) at different screen sizes.
-	 * The keys are size breakpoints: for very small browser windows, the `initial` position will be used; for larger windows, the position corresponding to the largest breakpoint that is smaller than the window will be used.
-	 * Breakpoints should be ordered in ascending order of size.
-	 */
-	export let sidebarPlacement: SidebarPlacement = { initial: 'bottom', md: 'right' };
+	setSidebarState();
+	let sidebarState = getSidebarState();
 
-	/**
-	 * If the sidebar is `alwaysOpen`, the sidebar will always be open and the close control will not be displayed.
-	 * As for the position, this can be responsive to the browser window size.
-	 * `sidebarAlwaysOpen` is an object where the keys are size breakpoints (or `initial`, corresponding to 0 pixels) and the values are Booleans indicating whether the sidebar is always open at that size.
-	 */
-	export let sidebarAlwaysOpen: { [key: string]: AlwaysOpenType } | undefined = undefined;
+	interface Props {
+		/**
+		 * Object expressing the sidebar position (`top`, `bottom`, `left`, `right`) at different screen sizes.
+		 * The keys are size breakpoints: for very small browser windows, the `initial` position will be used; for larger windows, the position corresponding to the largest breakpoint that is smaller than the window will be used.
+		 * Breakpoints should be ordered in ascending order of size.
+		 */
+		sidebarPlacement?: SidebarPlacement;
+		/**
+		 * If the sidebar is `alwaysOpen`, the sidebar will always be open and the close control will not be displayed.
+		 * As for the position, this can be responsive to the browser window size.
+		 * `sidebarAlwaysOpen` is an object where the keys are size breakpoints (or `initial`, corresponding to 0 pixels) and the values are Booleans indicating whether the sidebar is always open at that size.
+		 */
+		sidebarAlwaysOpen?: { [key: string]: boolean };
+		/**
+		 * If `true`, then opening the sidebar will push other content to the side (or up/down, depending on the sidebar position), rather than the sidebar being superimposed on the content.
+		 */
+		sidebarPush?: boolean;
+		/**
+		 * If `true`, then the sidebar will be open when the page first loads.
+		 */
+		startOpen?: boolean;
 
-	/**
-	 * If `true`, then opening the sidebar will push other content to the side (or up/down, depending on the sidebar position), rather than the sidebar being superimposed on the content.
-	 */
-	export let sidebarPush = false;
+		/**
+		 * A tailwind class or classes used to set or override the height of the Appshell wrapper.
+		 */
+		heightClass?: string;
+		main?: import('svelte').Snippet;
+		sidebar?: import('svelte').Snippet;
+	}
 
-	/**
-	 * If `true`, then the sidebar will be open when the page first loads.
-	 */
-	export let startOpen = true;
+	let {
+		sidebarPlacement = { initial: 'bottom', md: 'right' },
+		sidebarAlwaysOpen = { initial: false },
+		sidebarPush = false,
+		startOpen = true,
+		heightClass = 'min-h-dvh',
+		main,
+		sidebar
+	}: Props = $props();
 
-	/**
-	 * Store recording/controlling whether the sidebar is currently open.
-	 */
-	export let isOpen = writable(startOpen);
+	let innerWidth = $state(0);
 
-	/**
-	 * A tailwind class or classes used to set or override the height of the Appshell wrapper.
-	 */
-	export let heightClass = 'min-h-dvh';
+	(() => {
+		if (getSetting(sidebarAlwaysOpen, innerWidth)) {
+			sidebarState.isOpen = true;
+		} else {
+			sidebarState.isOpen = startOpen;
+		}
+	})();
 
-	/**
-	 * Store recording/controlling whether the sidebar is set to be `alwaysOpen` at the current window size.
-	 */
-	export const isAlwaysOpen = writable('false');
+	const respondToWidthChange = (innerWidth: number) => {
+		// if "sidebarAlwaysOpen" at this size, then we are open at this size
+		sidebarState.isAlwaysOpen = getSetting(sidebarAlwaysOpen, innerWidth);
 
-	/**
-	 * Store recording/controlling the sidebar's current position.
-	 */
-	export const sidebarPlacementStore = writable('bottom');
+		return sidebarState.isAlwaysOpen ? sidebarState.isAlwaysOpen : sidebarState.isOpen;
+	};
 
 	// Classes applied to the wrapper element
 	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
-	$: wrapperClasses = classNames('h-full w-full flex relative overflow-hidden', heightClass);
-
-	$: sidebarWidthClasses = widthLookup[$sidebarWidthStore][bpProp];
-	$: sidebarHeightClasses = heightLookup[$sidebarWidthStore][bpProp];
-
-	$: innerWidth = 0;
+	let wrapperClasses = $derived(
+		classNames('h-full w-full flex relative overflow-hidden', heightClass)
+	);
 
 	/*
 		Below are settings for Breakpoint Prop and Always Open Prop.
@@ -74,58 +85,44 @@
 		The breakpoints are configurable if required, but use defaults: Demo to follow.
 		See also appShell/utils/getSettingByScreenWidth 
 	*/
-	// bpProp = breakpoint prop - better name?
-	$: bpProp = getSetting(sidebarPlacement, innerWidth);
+	let breakPointProp = $derived(getSetting(sidebarPlacement, innerWidth));
+	let sidebarWidthClasses = $derived(widthLookup[sidebarState.width][breakPointProp]);
+	let sidebarHeightClasses = $derived(heightLookup[sidebarState.width][breakPointProp]);
 
-	$isOpen = startOpen;
-
-	const respondToWidthChange = (innerWidth: number) => {
-		$isAlwaysOpen = sidebarAlwaysOpen ? getSetting(sidebarAlwaysOpen, innerWidth) : undefined;
-
-		// if "alwaysOpen" at this size, then we are open at this size
-		if ($isAlwaysOpen === 'true') {
-			$isOpen = true;
-		}
-	};
-
-	$: respondToWidthChange(innerWidth);
-
-	$: $sidebarPlacementStore = bpProp;
-
-	setContext('sidebarAlwaysOpen', isAlwaysOpen);
-	setContext('sidebarIsOpen', isOpen);
-	setContext('sidebarPush', sidebarPush);
-	setContext('sidebarPlacement', sidebarPlacementStore);
+	$effect(() => {
+		sidebarState.isOpen = respondToWidthChange(innerWidth);
+		sidebarState.placement = breakPointProp;
+	});
 </script>
 
 <!-- In order to get consistent width between code and css we need to use the innerWidth of the window -->
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
-	<main class={classNames('w-full', bpProp === 'right' ? '' : 'order-1')}>
+	<main class={classNames('w-full', breakPointProp === 'right' ? '' : 'order-1')}>
 		<!-- The main content of the page. -->
-		<slot name="main">
+		{#if main}{@render main()}{:else}
 			<p class="font-bold">
 				Provide some main content. The main content you provide should have appropriate padding
 				applied...
 			</p>
-		</slot>
+		{/if}
 	</main>
 
 	{#if innerWidth !== 0}
 		<div transition:fade={{ duration: 200 }}>
 			<!-- a `<Sidebar>` component -->
-			<slot name="sidebar">Sidebar</slot>
+			{#if sidebar}{@render sidebar()}{:else}Provide a snippet to render a Sidebar{/if}
 		</div>
 	{/if}
 
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
-	{#if ($isAlwaysOpen === 'true' || (sidebarPush && $isOpen)) && $sidebarWidthStore}
+	{#if (sidebarState.isAlwaysOpen || (sidebarPush && sidebarState.isOpen)) && sidebarState.width}
 		<div
 			class={classNames('flex', sidebarHeightClasses)}
-			transition:slide={{ duration: 300, axis: transitionAxis[bpProp] }}
+			transition:slide={{ duration: 300, axis: transitionAxis[breakPointProp] }}
 		>
-			<div class={classNames('shrink-0', sidebarWidthClasses)} />
+			<div class={classNames('shrink-0', sidebarWidthClasses)}></div>
 		</div>
 	{/if}
 </div>

@@ -5,27 +5,30 @@
 	 * @component
 	 */
 
-	import { getContext } from 'svelte';
-	import mapgl from 'maplibre-gl';
-	import { setFeature, clearFeature } from './map-layer';
 	import { Geolocator } from '@ldn-viz/ui';
+	import mapgl from 'maplibre-gl';
+	import { getContext } from 'svelte';
+	import { clearFeature, setFeature } from './map-layer';
 	import type { MapStore } from './map-types';
 
 	import type {
 		GeolocationUnamed,
-		OnGeolocationSearchResult,
-		OnGeolocationSearchError
+		OnGeolocationSearchError,
+		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
 
-	/**
-	 * Called when the browser finds a location.
-	 */
-	export let onLocationFound: undefined | OnGeolocationSearchResult = undefined;
+	interface Props {
+		/**
+		 * Called when the browser finds a location.
+		 */
+		onLocationFound?: undefined | OnGeolocationSearchResult;
+		/**
+		 * Called when an error occurs while searching.
+		 */
+		onSearchError?: undefined | OnGeolocationSearchError;
+	}
 
-	/**
-	 * Called when an error occurs while searching.
-	 */
-	export let onSearchError: undefined | OnGeolocationSearchError = undefined;
+	let { onLocationFound = undefined, onSearchError = undefined }: Props = $props();
 
 	const mapStore: MapStore = getContext('mapStore');
 	const zoomLevel = 16;
@@ -42,10 +45,13 @@
 		}
 	};
 
-	let showClearButton = false;
+	let showClearButton = $state(false);
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: !showClearButton && clearFeature('geolocator', $mapStore);
+	$effect(() => {
+		if (!showClearButton) {
+			clearFeature('geolocator', $mapStore);
+		}
+	});
 </script>
 
 <Geolocator allowClearButton onLocationFound={flyToLocation} {onSearchError} bind:showClearButton />

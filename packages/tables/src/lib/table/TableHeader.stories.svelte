@@ -1,15 +1,16 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import TableHeader from './TableHeader.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/TableHeader',
-		component: TableHeader
-	};
+		component: TableHeader,
+		tags: ['autodocs']
+	});
 </script>
 
 <script lang="ts">
-	import { Story } from '@storybook/addon-svelte-csf';
-
 	import { computeWidths } from '../core/lib/computeWidths';
 	import { TableData } from '../core/lib/dataObj';
 
@@ -527,63 +528,79 @@
 </script>
 
 <Story name="Default">
-	<TableHeader {data} tableSpec={tableSpecBasic} table={tableBasic} tableWidth={FIXED_WIDTH} />
+	{#snippet template()}
+		<TableHeader {data} tableSpec={tableSpecBasic} table={tableBasic} tableWidth={FIXED_WIDTH} />
+	{/snippet}
 </Story>
 
 <Story name="Header Alignment">
-	<div style:width="600px">
-		<TableHeader
-			{data}
-			tableSpec={tableSpecAlignment}
-			table={tableAlignment}
-			tableWidth={FIXED_WIDTH}
-		/>
-	</div>
+	{#snippet template()}
+		<div style:width="600px">
+			<TableHeader
+				{data}
+				tableSpec={tableSpecAlignment}
+				table={tableAlignment}
+				tableWidth={FIXED_WIDTH}
+			/>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="With axes and colGroup gaps">
-	<TableHeader {data} {tableSpec} {table} tableWidth={FIXED_WIDTH} />
+	{#snippet template()}
+		<TableHeader {data} {tableSpec} {table} tableWidth={FIXED_WIDTH} />
+	{/snippet}
 </Story>
 
 <Story name="With sorting enabled">
-	<TableHeader {data} {tableSpec} {table} allowSorting={true} tableWidth={FIXED_WIDTH} />
+	{#snippet template()}
+		<TableHeader {data} {tableSpec} {table} allowSorting={true} tableWidth={FIXED_WIDTH} />
+	{/snippet}
 </Story>
 
 <Story name="With column summaries">
-	<TableHeader
-		{data}
-		tableSpec={tableSpecColSummaries}
-		table={tableColSummaries}
-		tableWidth={FIXED_WIDTH}
-	/>
+	{#snippet template()}
+		<TableHeader
+			{data}
+			tableSpec={tableSpecColSummaries}
+			table={tableColSummaries}
+			tableWidth={FIXED_WIDTH}
+		/>
+	{/snippet}
 </Story>
 
 <Story name="With column summaries and sorting">
-	<TableHeader
-		{data}
-		tableSpec={tableSpecColSummaries}
-		table={tableColSummaries}
-		tableWidth={FIXED_WIDTH}
-		allowSorting={true}
-	/>
+	{#snippet template()}
+		<TableHeader
+			{data}
+			tableSpec={tableSpecColSummaries}
+			table={tableColSummaries}
+			tableWidth={FIXED_WIDTH}
+			allowSorting={true}
+		/>
+	{/snippet}
 </Story>
 
 <Story name="With column summaries, sorting, and col group labels">
-	<TableHeader
-		{data}
-		tableSpec={tableSpecColSummariesGroupHeadings}
-		table={tableColSummariesGroupHeadings}
-		tableWidth={FIXED_WIDTH}
-		allowSorting={true}
-	/>
+	{#snippet template()}
+		<TableHeader
+			{data}
+			tableSpec={tableSpecColSummariesGroupHeadings}
+			table={tableColSummariesGroupHeadings}
+			tableWidth={FIXED_WIDTH}
+			allowSorting={true}
+		/>
+	{/snippet}
 </Story>
 
 <Story name="With column controls">
-	<TableHeader
-		{data}
-		tableSpec={tableSpecControls}
-		table={tableControls}
-		tableWidth={FIXED_WIDTH}
-		allowSorting={true}
-	/>
+	{#snippet template()}
+		<TableHeader
+			{data}
+			tableSpec={tableSpecControls}
+			table={tableControls}
+			tableWidth={FIXED_WIDTH}
+			allowSorting={true}
+		/>
+	{/snippet}
 </Story>

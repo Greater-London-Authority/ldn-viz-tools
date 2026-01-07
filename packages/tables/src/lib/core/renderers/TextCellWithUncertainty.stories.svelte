@@ -1,8 +1,11 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import TextCellWithUncertainty from './TextCellWithUncertainty.svelte';
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/TextCellWithUncertainty',
 		component: TextCellWithUncertainty,
+		tags: ['autodocs'],
 
 		argTypes: {
 			alignText: {
@@ -12,22 +15,21 @@
 		},
 
 		args: {
-			alignText: 'left'
+			alignText: 'left',
+			value: '500 cars'
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
+<Story name="Default">
+	{#snippet template(args)}
+		<TextCellWithUncertainty value="500 cars" colorScale={() => 'red'} {...args} />
+	{/snippet}
+</Story>
 
-<Template let:args>
-	<TextCellWithUncertainty value={'500 cars'} colorScale={() => 'red'} {...args} />
-</Template>
-
-<Story name="Default" source />
-
-<Story name="Example" source>
-	<TextCellWithUncertainty value={'Value that is known'} contextVals={[true]} />
-	<TextCellWithUncertainty value={'Value that is merely estimated'} contextVals={[false]} />
+<Story name="Example">
+	{#snippet template()}
+		<TextCellWithUncertainty value="Value that is known" contextVals={[true]} />
+		<TextCellWithUncertainty value="Value that is merely estimated" contextVals={[false]} />
+	{/snippet}
 </Story>

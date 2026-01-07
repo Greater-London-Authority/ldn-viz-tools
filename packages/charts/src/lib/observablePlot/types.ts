@@ -46,3 +46,5 @@ export type RegisterTooltipFunction = (
 	posStore: any,
 	markShape?: string
 ) => (index: any, scales: any, values: any, dimensions: any, context: any, next: any) => any;
+
+export type EventHandler = any;

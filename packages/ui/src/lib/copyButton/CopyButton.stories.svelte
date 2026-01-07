@@ -1,9 +1,20 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import CopyButton from './CopyButton.svelte';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ClipboardDocument, HandThumbUp } from '@steeze-ui/heroicons';
 
-	export const meta = {
+	/**
+	 * The `<CopyButton>` component is a button enabling quick copy to clipboard
+	 * for specific content. The button has a copied state to indicate the copy
+	 * was successful. The button will revert back to an uncopied state if
+	 * another copy button is clicked or after several seconds.
+	 */
+
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/CopyButton',
 		component: CopyButton,
+		tags: ['autodocs'],
 		argTypes: {
 			content: {
 				control: { type: 'text' },
@@ -19,7 +30,7 @@
 					type: { summary: 'string' }
 				}
 			},
-			$$restprops: {
+			'...rest': {
 				description:
 					'Any other props are passed through to [`<Button>` component](./?path=/docs/ui-components-buttons-button--documentation).',
 				table: {
@@ -30,47 +41,41 @@
 		args: {
 			content: 'Thing To Copy'
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { ClipboardDocument, HandThumbUp } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<CopyButton {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<CopyButton {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Label">
-	<CopyButton content="Text to be copied." label="Copy to clipboard" />
+	{#snippet template(args)}
+		<CopyButton {...args} label="Copy to clipboard" />
+	{/snippet}
 </Story>
 
-<!-- You can also provide any prop that is accepted by the [`<Button>` component](./?path=/docs/ui-components-buttons-button--documentation) -->
 <Story name="Changing button style">
-	<CopyButton content="Text to be copied." label="Copy" variant="solid" emphasis="secondary" />
+	{#snippet template(args)}
+		<CopyButton {...args} variant="outline" emphasis="secondary" />
+	{/snippet}
 </Story>
 
-<Story name="Indicator icon">
-	<div class="space-y-4">
-		<CopyButton content="One." label="One" />
-		<CopyButton content="Two." label="Two" />
-		<CopyButton content="Three." label="Three" />
-	</div>
-</Story>
+<Story name="Custom Icon">
+	{#snippet template(args)}
+		<div class="space-y-4">
+			<CopyButton {...args}>
+				{#snippet beforeCopy()}
+					Before Copy
+					<Icon src={ClipboardDocument} theme="mini" class="ml-1 h-5 w-5" />
+				{/snippet}
 
-<Story name="Custom label">
-	<CopyButton content="Content to copy.">
-		<svelte:fragment slot="before-copy">
-			Copy
-			<Icon src={ClipboardDocument} theme="outline" class="w-5 h-5 ml-1" />
-		</svelte:fragment>
-		<svelte:fragment slot="after-copy">
-			Copied
-			<Icon src={HandThumbUp} theme="mini" class="w-5 h-5 ml-1" />
-		</svelte:fragment>
-	</CopyButton>
+				{#snippet afterCopy()}
+					After Copy
+					<Icon src={HandThumbUp} theme="mini" class="ml-1 h-5 w-5" />
+				{/snippet}
+			</CopyButton>
+		</div>
+	{/snippet}
 </Story>

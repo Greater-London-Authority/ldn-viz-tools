@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
 	/**
 	 * The `<MapMarkerFlyToFeature>` component is a wrapping container for use
 	 * within tooltip and marker components. It moves the map so it centers
@@ -45,17 +45,22 @@
 	};
 </script>
 
-<script>
-	/**
-	 * If `true`, then all fly events are disabled.
-	 */
-	export let disabled = false;
+<script lang="ts">
+	interface Props {
+		/**
+		 * If `true`, then all fly events are disabled.
+		 */
+		disabled?: boolean;
+		children?: import('svelte').Snippet;
+	}
+
+	let { disabled = false, children }: Props = $props();
 
 	const mapStore = getContext('mapStore');
 	const feature = getContext('mapMarkerFeature');
 	const point = feature.geometry ? pointOnFeature(feature) : null;
 
-	let container;
+	let container = $state();
 
 	const flyToFeature = () => {
 		$mapStore.easeTo({
@@ -74,5 +79,5 @@
 </script>
 
 <div bind:this={container}>
-	<slot />
+	{@render children?.()}
 </div>

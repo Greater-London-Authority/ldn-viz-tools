@@ -1,29 +1,44 @@
 # ldn-viz-tools-ui
 
-## 19.6.0
+## 21.0.0-svelte5.3
 
 ### Minor Changes
 
-- 5dd276b: CHANGED: reduced `Modal` inset from 2rem to 0.5rem on small screens
-- 39ba3ad: ADDED: `CheckboxSolid` and `CheckboxGroupSolid` components
+- 31020f3: Expoxe sidebar state and allow custom classes and icons
 
-## 19.5.0
+## 21.0.0-svelte5.2
 
 ### Minor Changes
 
-- 8171084: FIXED: Added tabIconOverride classes to SidebarTabList to ensure icons in sidebar tabs correctly have a margin-bottom instead of margin-right
+- 5e5408a: CHANGED: update `selectedTabId` when tab is changed
 
-## 19.4.1
+## 21.0.0-svelte5.1
+
+### Major Changes
+
+- 46b4fab: CHANGED: the `ListMenu` has been renamed to `NavigationMenu`
+- 6b37511: CHANGED: the `buttonsHidden` prop on the `CheckboxGroup` and `LayerControlGroup` been renamed to `hideSelectAll`
+
+### Minor Changes
+
+- dc25586: CREATED: CheckboxSolid and CheckboxGroupSolid components
 
 ### Patch Changes
 
-- 24cc3ad: Changed: Change type of GeocoderAdapter to accommodate changes in MapControlGeocoder due to MapBox API changes.
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
 
-## 19.4.0
+## 21.0.0-svelte5.0
+
+### Major Changes
+
+- 4046add: CHANGED: `LayerControl` now uses a prop called `layerState` (rather than `state`); `LayerControlGroup` now uses a prop called `layersState` (rather than `state`)
+- 0879ce9: CHANGED: `Select` component is now a wrapper around `svelecte` (rather than `svelte-select`); there are amny changes to its props.
 
 ### Minor Changes
 
-- e8c3af7: CHANGED: ColorLegend label now has a font-size of 12px
+- 7962ee6: CHANGED: LoadingIndicator component title and arcColorClass are now correctly typed as optional props
+- a81fb27: FIXED: RadioButtonGroups show labels if icons don't exist
+- 7962ee6: ADDED: NonIdealState component
 
 ## 19.3.0
 
@@ -58,7 +73,6 @@
 ### Minor Changes
 
 - 671dffc: CHANGED: `CheckboxGroup`, `LayerControl` and `LayerControlGroup` components
-
   - `LayerControlGroup` now passes `name` into `LayerControl`
   - `LayerControl` now passes `name` into `Checkbox`, in addition to `Radio`
   - For accessibility: `LayerControlGroup` and `CheckboxGroup` now have an `aria-controls` attribute on the checkbox that toggles all controls, with a value equal to the ids for all controls
@@ -71,7 +85,6 @@
 - de9b000: Refactored `LayerControlGroup`, `CheckboxGroup` and `Checkbox` components for accessibility.
 
   `LayerControlGroup` and `CheckboxGroup` now have:
-
   - `id` and `role="group"` attributes on the div that wraps around the `LayerControl` or `Checkbox` inputs
   - `ariaLabel` prop to describe the purpose of the components to screen reader users
   - `<ul>` element surrounding the options, with each option nested in an `<li>` element so screen reader users know the options are connected

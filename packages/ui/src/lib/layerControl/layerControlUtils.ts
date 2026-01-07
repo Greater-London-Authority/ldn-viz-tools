@@ -7,5 +7,6 @@ export const colorNames = [
 	'palette.pink.600',
 	'palette.darkpink.600',
 	'palette.purple.600',
-	'palette.turquoise.600'
+	'palette.turquoise.600',
+	'data.categorical.green'
 ];

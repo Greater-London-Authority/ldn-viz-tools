@@ -1,9 +1,13 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Toaster from './Toaster.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Toaster ',
 		component: Toaster,
+		tags: ['autodocs'],
+
 		argTypes: {
 			position: {
 				description:
@@ -34,11 +38,10 @@
 				}
 			}
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 
 	import { newToastMessage } from './toaster';
@@ -77,7 +80,7 @@
 		longLivedMessage.post();
 	};
 
-	let position: keyof typeof ToasterPosition = 'TopLeft';
+	let position: keyof typeof ToasterPosition = $state('TopLeft');
 	const setToaster = (event: MouseEvent) => {
 		const target = event.target as HTMLButtonElement;
 		if (target && target.textContent) {
@@ -86,64 +89,70 @@
 	};
 </script>
 
-<Template let:args>
-	<Button on:click={toastNotice}>Notice</Button>
+<Story name="Default">
+	{#snippet template(args)}
+		<Button onclick={toastNotice}>Notice</Button>
 
-	<Toaster {...args} />
-</Template>
-
-<Story name="Default" source />
+		<Toaster {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Types">
-	<Toaster position="Center" />
-	<div class="flex gap-6">
-		<Button on:click={toastNotice}>Notice</Button>
-		<Button emphasis="positive" on:click={toastSuccess}>Success</Button>
-		<Button emphasis="caution" on:click={toastWarning}>Warning</Button>
-		<Button emphasis="negative" on:click={toastError}>Error</Button>
-	</div>
+	{#snippet template()}
+		<Toaster position="Center" />
+		<div class="flex gap-6">
+			<Button onclick={toastNotice}>Notice</Button>
+			<Button emphasis="positive" onclick={toastSuccess}>Success</Button>
+			<Button emphasis="caution" onclick={toastWarning}>Warning</Button>
+			<Button emphasis="negative" onclick={toastError}>Error</Button>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Position">
-	<div class="relative p-6 w-[100vw] h-[100vh]">
-		<Toaster {position} />
-		<div
-			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform flex flex-wrap justify-center gap-6 [&>*]:basis-3/12"
-		>
-			<Button on:click={setToaster} variant={position === 'TopLeft' ? 'solid' : 'outline'}>
-				TopLeft
-			</Button>
-			<Button on:click={setToaster} variant={position === 'TopCenter' ? 'solid' : 'outline'}>
-				TopCenter
-			</Button>
-			<Button on:click={setToaster} variant={position === 'TopRight' ? 'solid' : 'outline'}>
-				TopRight
-			</Button>
-			<Button on:click={setToaster} variant={position === 'CenterLeft' ? 'solid' : 'outline'}>
-				CenterLeft
-			</Button>
-			<Button condition="warning" on:click={toastNotice}>Add Toast!</Button>
-			<Button on:click={setToaster} variant={position === 'CenterRight' ? 'solid' : 'outline'}>
-				CenterRight
-			</Button>
-			<Button on:click={setToaster} variant={position === 'BottomLeft' ? 'solid' : 'outline'}>
-				BottomLeft
-			</Button>
-			<Button on:click={setToaster} variant={position === 'BottomCenter' ? 'solid' : 'outline'}>
-				BottomCenter
-			</Button>
-			<Button on:click={setToaster} variant={position === 'BottomRight' ? 'solid' : 'outline'}>
-				BottomRight
-			</Button>
+	{#snippet template()}
+		<div class="relative h-[100vh] w-[100vw] p-6">
+			<Toaster {position} />
+			<div
+				class="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 transform flex-wrap justify-center gap-6 [&>*]:basis-3/12"
+			>
+				<Button onclick={setToaster} variant={position === 'TopLeft' ? 'solid' : 'outline'}>
+					TopLeft
+				</Button>
+				<Button onclick={setToaster} variant={position === 'TopCenter' ? 'solid' : 'outline'}>
+					TopCenter
+				</Button>
+				<Button onclick={setToaster} variant={position === 'TopRight' ? 'solid' : 'outline'}>
+					TopRight
+				</Button>
+				<Button onclick={setToaster} variant={position === 'CenterLeft' ? 'solid' : 'outline'}>
+					CenterLeft
+				</Button>
+				<Button onclick={toastNotice}>Add Toast!</Button>
+				<Button onclick={setToaster} variant={position === 'CenterRight' ? 'solid' : 'outline'}>
+					CenterRight
+				</Button>
+				<Button onclick={setToaster} variant={position === 'BottomLeft' ? 'solid' : 'outline'}>
+					BottomLeft
+				</Button>
+				<Button onclick={setToaster} variant={position === 'BottomCenter' ? 'solid' : 'outline'}>
+					BottomCenter
+				</Button>
+				<Button onclick={setToaster} variant={position === 'BottomRight' ? 'solid' : 'outline'}>
+					BottomRight
+				</Button>
+			</div>
 		</div>
-	</div>
+	{/snippet}
 </Story>
 
 <Story name="Close Button">
-	<div class="p-6 w-[100vw] h-[100vh]">
-		<Toaster position="Center" />
-		<div class="flex gap-6">
-			<Button on:click={toastClosable}>Toast!</Button>
+	{#snippet template()}
+		<div class="h-[100vh] w-[100vw] p-6">
+			<Toaster position="Center" />
+			<div class="flex gap-6">
+				<Button onclick={toastClosable}>Toast!</Button>
+			</div>
 		</div>
-	</div>
+	{/snippet}
 </Story>

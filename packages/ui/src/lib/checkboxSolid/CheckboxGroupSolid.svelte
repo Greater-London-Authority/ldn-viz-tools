@@ -2,112 +2,112 @@
 	/**
 	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
 	 *
-	 * This should only be used when the number of options is small. Alternatively, use [CheckboxGroup](?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
+	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
 	 * @component
 	 */
 
+	import type { InputProps } from '$lib/input/types';
+	import type { Snippet } from 'svelte';
+	import Checkbox from '../checkBox/Checkbox.svelte';
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import { randomId } from '../utils/randomId';
 	import CheckboxSolid from './CheckboxSolid.svelte';
+	import type { CheckboxSolidProps } from './types';
 
-	/**
-	 * The `id` of the `<input>` element: defaults to a randomly-generated value.
-	 */
-	export let id = randomId();
+	interface CheckboxGroupSolidProps extends InputProps {
+		/**
+		 * Each element of this array defines a checkbox, and is an object with the properties:
+		 * * `id` (string)
+		 * * `name` (string, optional) - used to set the `name` attribute of the `<input>` element
+		 * * `label` (string) - the text displayed next to the checkbox
+		 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
+		 * * `color` (string, optional) - CSS color of the checkbox
+		 * * `hint` (string, optional) - help text to be displayed in tooltip
+		 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
+		 * * `customOverlay` (Snippet, optional) - a custom overlay component
+		 */
+		options: Omit<CheckboxSolidProps, 'checked'>[];
 
-	/**
-	 * Text displayed above the `<input>` element.
-	 */
-	export let label = '';
+		/**
+		 * An array containing the `id` of each entry in the `options` array for which the corresponding checkbox is selected.
+		 */
+		selectedOptions?: string[];
 
-	/**
-	 * Accessible name of group to be read by screen reader.
-	 */
-	export let ariaLabel = '';
+		/**
+		 * if `true`, then the "Select all" control is not displayed.
+		 */
+		hideSelectAll?: boolean;
 
-	/**
-	 * Text that appears below the `<input>` element, in smaller font than the `label`.
-	 */
-	export let description = '';
+		/**
+		 * Accessible name of group to be read by screen reader.
+		 */
+		ariaLabel?: string;
 
-	/**
-	 * Determines which edge of the `<input>` the description is aligned with.
-	 */
-	export let descriptionAlignment: 'left' | 'right' = 'left';
+		onChange?: (selectedOptions: string[]) => void;
+		customOverlay?: () => ReturnType<Snippet>;
+	}
 
-	/**
-	 * Help text to be displayed in tooltip
-	 */
-	export let hint = '';
+	let {
+		label,
+		id = randomId(),
+		description,
+		descriptionAlignment = 'left',
+		hintLabel,
+		hint,
+		error = '',
+		disabled = false,
+		optional,
+		ariaLabel,
+		options = [],
+		selectedOptions = $bindable([]),
+		hideSelectAll = false,
+		customOverlay = undefined,
+		onChange = () => {}
+	}: CheckboxGroupSolidProps = $props();
 
-	/**
-	 * Text to be displayed next to icon in tooltip trigger.
-	 */
-	export let hintLabel: undefined | string = undefined;
+	let errorId = $derived(error ? `${id}-error` : undefined);
+	let descriptionId = $derived(description ? `${id}-description` : undefined);
 
-	/**
-	 * If `false`, then `required` attribute is applied to `<input>`.
-	 */
-	export let optional = false;
+	let selectionState = $derived.by(() =>
+		Object.fromEntries(options.map((o) => [o.id, selectedOptions.includes(o.id)]))
+	);
 
-	/**
-	 * If `true`, then user is prevented from interacting with the `<input>`.
-	 */
-	export let disabled = false;
+	let allCheckboxesCheckedOrDisabled = $derived(
+		options.filter((o) => !o.disabled).every((o) => selectedOptions.includes(o.id))
+	);
 
-	/**
-	 * Message to be displayed below `<input>` in red text (replacing description).
-	 * If set, then the border of the `<input>` is also red.
-	 */
-	export let error = '';
+	let noCheckboxesChecked = $derived(selectedOptions.length === 0);
 
-	/**
-	 * Only generate `descriptionId` and/or `errorId` when `description` and/or `error` exist.
-	 * `descriptionId` is static but `errorId` is reactive as error state could change.
-	 */
-	const descriptionId = description ? `${id}-description` : undefined;
-	$: errorId = error ? `${id}-error` : undefined;
+	const selectAll = () => {
+		selectedOptions = options.filter((o) => !o.disabled).map((o) => o.id);
+		onChange(selectedOptions);
+	};
 
-	/**
-	 * Each element of this array defines a checkbox, and is an object with the properties:
-	 * * `id` (string)
-	 * * `name` (string, optional) - used to set the `name` attribute of the `<input>` element
-	 * * `label` (string) - the text displayed next to the checkbox
-	 * * `disabled` (boolean, optional) - if `true`, users cannot change whether the checkbox is checked
-	 * * `color` (string, optional) - CSS color of the checkbox
-	 * * `hint` (string, optional) - help text to be displayed in tooltip
-	 * * `hintLabel` (string, optional) - text to be displayed next to icon in tooltip trigger
-	 */
-	export let options: {
-		id: string;
-		name?: string;
-		label: string;
-		disabled?: boolean;
-		color?: string;
-		hint?: string;
-		hintLabel?: string;
-	}[] = [];
+	const clearAll = () => {
+		selectedOptions = [];
+		onChange(selectedOptions);
+	};
 
-	/**
-	 * An array containing the `id` of each entry in the `options` array for which the corresponding checkbox is selected.
-	 */
-	export let selectedOptions: string[] = [];
-	let selectionState: Record<string, boolean> = {};
-
-	$: selectedOptions = options.map((o) => o.id).filter((id) => selectionState[id]);
-
-	const updateSelectionStateFromSelectedOptions = (selectedOptions: string[]) => {
-		const so = options.map((o) => o.id).filter((id) => selectionState[id]);
-		if (JSON.stringify(selectedOptions) !== JSON.stringify(so)) {
-			selectionState = Object.fromEntries(
-				options.map((o) => [o.id, selectedOptions.includes(o.id)])
-			);
+	const toggleAll = () => {
+		if (!allCheckboxesCheckedOrDisabled) {
+			selectAll();
+		} else {
+			clearAll();
 		}
 	};
 
-	updateSelectionStateFromSelectedOptions(selectedOptions);
+	let optionIds = options.map((o) => o.id).join(' ');
 
-	$: updateSelectionStateFromSelectedOptions(selectedOptions);
+	const updateSelectedOptions = (optionId: string) => {
+		if (selectedOptions.includes(optionId)) {
+			selectedOptions = selectedOptions.filter((id) => id !== optionId);
+		} else {
+			selectedOptions = [...selectedOptions, optionId];
+		}
+
+		onChange(selectedOptions);
+	};
 </script>
 
 <InputWrapper
@@ -122,21 +122,42 @@
 	{error}
 	{disabled}
 	{optional}
+	{customOverlay}
 >
-	{#if $$slots.hint}
-		<slot name="hint" />
-	{/if}
-	<ul {id} role="group" aria-label={ariaLabel} class="flex gap-[2px]">
-		{#each options as option (option.id)}
-			<li class="w-full flex">
-				<CheckboxSolid
-					id={`${id}-${option.id}`}
-					name={option.name}
-					label={option.label}
-					disabled={option.disabled || disabled}
-					bind:checked={selectionState[option.id]}
-				/>
-			</li>
-		{/each}
-	</ul>
+	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
+		{#if !hideSelectAll}
+			<!--
+			form="" should prevent this checkbox from being included in form
+			submissions.
+		-->
+			<Checkbox
+				id={randomId()}
+				form=""
+				name="all"
+				label="Select all"
+				checked={allCheckboxesCheckedOrDisabled}
+				indeterminate={!allCheckboxesCheckedOrDisabled && !noCheckboxesChecked}
+				aria-controls={optionIds}
+				onchange={toggleAll}
+				{disabled}
+			/>
+		{/if}
+		<ul class="flex">
+			{#each options as option (option.id)}
+				<li class="flex w-full">
+					<CheckboxSolid
+						id={`${id}-${option.id}`}
+						name={option.name}
+						label={option.label}
+						disabled={option.disabled || disabled}
+						checked={selectionState[option.id]}
+						icon={option.icon}
+						rawIcon={option.rawIcon}
+						iconPlacement={option.iconPlacement}
+						onchange={() => updateSelectedOptions(option.id)}
+					/>
+				</li>
+			{/each}
+		</ul>
+	</div>
 </InputWrapper>

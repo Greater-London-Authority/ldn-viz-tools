@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { ColSpec } from '$lib/core/lib/types';
-	import { Popover, RadioButtonGroup } from '@ldn-viz/ui';
-	import { ChartBar } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import { Overlay, RadioButtonGroup } from '@ldn-viz/ui';
 	import type { SvelteComponent } from 'svelte';
 	import BarChart from '../../core/aggregateRenderers/BarChart.svelte';
 	import BoxPlot from '../../core/aggregateRenderers/BoxPlot.svelte';
@@ -24,7 +22,7 @@
 	import TextCell from '../../core/renderers/TextCell.svelte';
 	import Tick from '../../core/renderers/Tick.svelte';
 
-	export let col;
+	let { col = $bindable() } = $props();
 
 	// TODO: filter basd on data type
 	// TODO: options
@@ -91,8 +89,7 @@
 		return undefined;
 	};
 
-	let selectedCellEncoding: string;
-	selectedCellEncoding = getRendererName(col, 'cell');
+	let selectedCellEncoding: string = $state(getRendererName(col, 'cell'));
 
 	const setCellEncoding = () => {
 		if (!col.cell) {
@@ -100,9 +97,8 @@
 		}
 		col.cell.renderer = unaggregatedRenderer[selectedCellEncoding];
 	};
-	$: setCellEncoding(selectedCellEncoding);
 
-	let selectedGroupEncoding: string;
+	let selectedGroupEncoding: string = $state();
 	selectedGroupEncoding = getRendererName(col, 'group');
 
 	const setGroupEncoding = () => {
@@ -111,9 +107,8 @@
 		}
 		col.group.renderer = aggregatedRenderer[selectedGroupEncoding];
 	};
-	$: setGroupEncoding(selectedGroupEncoding);
 
-	let selectedColumnEncoding: string;
+	let selectedColumnEncoding: string = $state();
 	selectedColumnEncoding = getRendererName(col, 'column');
 
 	const setColumnEncoding = () => {
@@ -122,18 +117,9 @@
 		}
 		col.column.renderer = aggregatedRenderer[selectedColumnEncoding];
 	};
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: selectedColumnEncoding && setColumnEncoding();
 </script>
 
-<Popover>
-	<svelte:fragment slot="hint">
-		<Icon src={ChartBar} theme="solid" class="w-[18px] h-[18px] ml-0.5" aria-hidden="true" />
-
-		<span class="sr-only">Open Popover</span>
-	</svelte:fragment>
-
+<Overlay overlayType="popover" hintLabel="Encoding">
 	<h2 class="text-large font-bold">Visual Encoding</h2>
 
 	<h3 class="text-large font-bold">Rows</h3>
@@ -141,7 +127,7 @@
 		options={unaggregatedOptions}
 		name="cell-encoding"
 		bind:selectedId={selectedCellEncoding}
-		buttonsHidden
+		onChange={setCellEncoding}
 	/>
 
 	<h3 class="text-large font-bold">Groups</h3>
@@ -149,7 +135,7 @@
 		options={aggregatedOptions}
 		name="group-encoding"
 		bind:selectedId={selectedGroupEncoding}
-		buttonsHidden
+		onChange={setGroupEncoding}
 	/>
 
 	<h3 class="text-large font-bold">Column Summary</h3>
@@ -157,6 +143,6 @@
 		options={aggregatedOptions}
 		name="column-encoding"
 		bind:selectedId={selectedColumnEncoding}
-		buttonsHidden
+		onChange={() => selectedColumnEncoding && setColumnEncoding()}
 	/>
-</Popover>
+</Overlay>

@@ -1,6 +1,5 @@
-import { create } from '@storybook/theming/create';
-// import colors from '../../../packages/themes/colors.json';
-import colors from '../../../packages/themes/styles/js/theme-tokens';
+import colors from '@ldn-viz/themes/styles/js/theme-tokens';
+import { create } from 'storybook/theming/create';
 
 export default create({
 	base: 'dark',

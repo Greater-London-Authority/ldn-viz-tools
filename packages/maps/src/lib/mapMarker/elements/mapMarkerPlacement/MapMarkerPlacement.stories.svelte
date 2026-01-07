@@ -1,9 +1,13 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerPlacement from './MapMarkerPlacement.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerPlacement',
 		component: MapMarkerPlacement,
+		redner: defaultTemplate,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		},
@@ -14,11 +18,10 @@
 				control: 'none'
 			}
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -37,79 +40,87 @@
 	setContext('mapStore', writable(null));
 </script>
 
-<Template let:args>
+{#snippet defaultTemplate({ args })}
 	<MapMarkerPlacement {...args} />
-</Template>
+{/snippet}
 
 <Story name="Default">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/point"
-				tooltip={TestTooltipCenterAboveFeature}
-			/>
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/point"
+					tooltip={TestTooltipCenterAboveFeature}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Center above feature">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/polygon"
-				tooltip={TestTooltipCenterAboveFeature}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/line"
-				tooltip={TestTooltipCenterAboveFeature}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/point"
-				tooltip={TestTooltipCenterAboveFeature}
-			/>
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/polygon"
+					tooltip={TestTooltipCenterAboveFeature}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/line"
+					tooltip={TestTooltipCenterAboveFeature}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/point"
+					tooltip={TestTooltipCenterAboveFeature}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- To see how this differs from centering on a feature, try moving your mouse across an area feature. -->
 <Story name="Follow mouse">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipFollowMouse} />
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipFollowMouse} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipFollowMouse} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipFollowMouse} />
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="No placement">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipNone} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipNone} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipNone} />
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" tooltip={TestTooltipNone} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" tooltip={TestTooltipNone} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" tooltip={TestTooltipNone} />
+			</Map>
+		</div>
+	{/snippet}
 </Story>

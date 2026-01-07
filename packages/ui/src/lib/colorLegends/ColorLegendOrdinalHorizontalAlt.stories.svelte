@@ -1,11 +1,12 @@
-<script context="module" lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import ColorLegendOrdinalHorizontalAlt from './ColorLegendOrdinalHorizontalAlt.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Legends/ColorLegendOrdinalHorizontalAlt',
-		component: ColorLegendOrdinalHorizontalAlt
-	};
+		component: ColorLegendOrdinalHorizontalAlt,
+		tags: ['autodocs', 'no-tests']
+	});
 </script>
 
 <script lang="ts">
@@ -16,24 +17,28 @@
 		.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']);
 </script>
 
-<Template let:args>
-	<ColorLegendOrdinalHorizontalAlt scale={ordinalScale} title="Current EPC Rating" {...args} />
-</Template>
-
-<Story name="Default" />
+<Story name="Default">
+	{#snippet template(args)}
+		<ColorLegendOrdinalHorizontalAlt {...args} scale={ordinalScale} title="Current EPC Rating" />
+	{/snippet}
+</Story>
 
 <Story name="Categorical color scale">
-	<div class="w-[400px]">
-		<ColorLegendOrdinalHorizontalAlt scale={ordinalScale} title="Current EPC Rating" />
-	</div>
+	{#snippet template()}
+		<div class="w-[400px]">
+			<ColorLegendOrdinalHorizontalAlt scale={ordinalScale} title="Current EPC Rating" />
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Categorical color scale - highlighted value">
-	<div class="w-[400px]">
-		<ColorLegendOrdinalHorizontalAlt
-			scale={ordinalScale}
-			title="Current EPC Rating"
-			highlightedValue="B"
-		/>
-	</div>
+	{#snippet template()}
+		<div class="w-[400px]">
+			<ColorLegendOrdinalHorizontalAlt
+				scale={ordinalScale}
+				title="Current EPC Rating"
+				highlightedValue="B"
+			/>
+		</div>
+	{/snippet}
 </Story>

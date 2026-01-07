@@ -1,4 +1,5 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarker from './MapMarker.svelte';
 
 	const componentType = {
@@ -11,9 +12,11 @@
 		}
 	};
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker',
 		component: MapMarker,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		},
@@ -29,12 +32,10 @@
 			tooltip: componentType,
 			popup: componentType
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
 	import loadTestLayers from '../loadTestLayers';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
@@ -44,33 +45,31 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
 
-<Template let:args>
-	<MapMarker {...args} />
-</Template>
-
 <Story name="Interactive Example">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/polygon"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/line"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-			<MapMarker
-				layerId="gla/ldn-viz-tools/test-data/point"
-				tooltip={TestTooltip}
-				popup={TestPopup}
-			/>
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/polygon"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/line"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+				<MapMarker
+					layerId="gla/ldn-viz-tools/test-data/point"
+					tooltip={TestTooltip}
+					popup={TestPopup}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>

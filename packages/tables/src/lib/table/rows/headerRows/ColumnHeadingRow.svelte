@@ -5,9 +5,7 @@
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
-	export let table;
-
-	export let allowSorting;
+	let { table, allowSorting, onChange } = $props();
 
 	const sumWidths = (widths: any[]) => sum(widths.map((w) => +w.replace('px', ''))) + 'px';
 
@@ -17,10 +15,10 @@
 </script>
 
 <Scaffolding {table}>
-	<svelte:fragment slot="groupSizes">
+	{#snippet groupSizes()}
 		{#each table.groupingFields as colName}
 			<div
-				class="flex font-bold was-th"
+				class="was-th flex font-bold"
 				role="columnheader"
 				style:width={sumWidths([
 					table.widths.groupLabel,
@@ -32,30 +30,35 @@
 				{getLabel(colName)}
 			</div>
 		{/each}
-	</svelte:fragment>
+	{/snippet}
 
 	<!-- This is a warn for unexpected slot -->
 	<!-- <div class="flex was-th" role="columnheader" slot="groupSizeLabel">
 		{table.groups.length > 1 ? 'Count' : ''}
 	</div> -->
 
-	<svelte:fragment slot="dataColumns">
+	{#snippet dataColumns()}
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				{@const colIsSortable = allowSorting && col.sortable !== false}
 				{@const order = table.rowOrderSpec.find((f) => f.field === col.short_label)?.direction}
 
+				{@const SvelteComponent = col.header?.renderer || Header}
 				<div
-					class="flex was-th"
+					class="was-th flex"
 					role="columnheader"
 					style:width={col.computedWidth + 'px'}
 					aria-sort={colIsSortable ? order : ''}
 				>
-					<svelte:component
-						this={col.header?.renderer || Header}
+					<SvelteComponent
 						label={col.label ?? col.short_label}
 						{order}
-						toggle={() => colIsSortable && table.toggleSort(col.short_label)}
+						toggle={() => {
+							if (colIsSortable) {
+								table.toggleSort(col.short_label);
+								onChange();
+							}
+						}}
 						allowSorting={allowSorting && col.sortable !== false}
 						alignHeader={col.alignHeader}
 						superscriptText={col.superscriptText}
@@ -68,5 +71,5 @@
 			{/if}
 			<ColGroupSpacer {table} {i} />
 		{/each}
-	</svelte:fragment>
+	{/snippet}
 </Scaffolding>

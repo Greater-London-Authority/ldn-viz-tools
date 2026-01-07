@@ -1,20 +1,26 @@
 <script>
 	import { format } from 'd3-format';
 
-	export let table;
-	export let group;
-	export let stretchUp = false;
-	export let fieldName;
-	export let val;
+	/**
+	 * @typedef {Object} Props
+	 * @property {any} table
+	 * @property {any} group
+	 * @property {boolean} [stretchUp]
+	 * @property {any} fieldName
+	 * @property {any} val
+	 */
+
+	/** @type {Props} */
+	let { table, group, stretchUp = false, fieldName, val } = $props();
 
 	const fPercentage = format('0.0%');
 </script>
 
 <div style:width={table.widths.groupSizeBar}>
 	<div
-		class="top-0 z-[-1] relative"
+		class="relative top-0 z-[-1]"
 		style:margin-top={stretchUp ? '-5px' : ''}
-		style:height={'100%'}
+		style:height="100%"
 		style:background={table.scales ? table.scales[fieldName](val) : 'lightgrey'}
 		style:left={fPercentage(0)}
 		style:width={fPercentage(group.order.length / table.data.length)}

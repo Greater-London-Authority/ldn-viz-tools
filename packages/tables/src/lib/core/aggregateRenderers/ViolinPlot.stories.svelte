@@ -1,6 +1,8 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import ViolinPlot from './ViolinPlot.svelte';
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/ViolinPlot',
 		component: ViolinPlot,
 
@@ -8,15 +10,11 @@
 			values: [0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.8],
 			extent: [0, 1]
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<ViolinPlot {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet tmplate(args)}
+		<ViolinPlot {...args} />
+	{/snippet}
+</Story>

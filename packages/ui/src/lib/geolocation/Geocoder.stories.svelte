@@ -1,18 +1,21 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Geocoder from './Geocoder.svelte';
 	import GeocoderSuggestionList from './GeocoderSuggestionList.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Geocoder',
 		component: Geocoder,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'fullscreen'
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { GeocoderAdapterList } from './GeocoderAdapterList';
 	import type {
 		Geolocation,
@@ -22,8 +25,8 @@
 		OnGeolocationSearchResult
 	} from './types';
 
-	let suggestions: undefined | GeolocationNamed[];
-	let selected = {};
+	let suggestions: undefined | GeolocationNamed[] = $state();
+	let selected = $state({});
 
 	const formatResult = (location: Geolocation): string => {
 		return '\n' + JSON.stringify(location, null, 2);
@@ -105,147 +108,145 @@
 	]);
 </script>
 
-<Template let:args>
-	<Geocoder {...args} />
-</Template>
+<Story name="Default">
+	{#snippet template(args)}
+		<Geocoder {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Suggestions dropdown">
-	<div class="m-6 space-y-6">
-		<p class="dark:text-white">
-			A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
-			results are limited.
-		</p>
-		<p class="dark:text-white">
-			At least three characters are required before any suggestions are provided. This avoids
-			spamming the underlying Web APIs with excessively vague requests.
-		</p>
-		<p class="dark:text-white">
-			Try entering 'brick' or 'london' if you're having trouble finding any places.
-		</p>
-		<Geocoder
-			let:onSuggestionEvent
-			let:attribution
-			let:suggestions
-			adapter={listAdapter}
-			{onLocationSelected}
-			{onSearchError}
-			classes="w-72"
-		>
-			{#if suggestions?.length > 0}
-				<GeocoderSuggestionList
-					{onSuggestionEvent}
-					{attribution}
-					{suggestions}
-					{selected}
-					maxSuggestions={5}
-				/>
-			{/if}
-		</Geocoder>
-		<pre class="dark:text-white whitespace-pre-wrap">
+	{#snippet template()}
+		<div class="m-6 space-y-6">
+			<p class="dark:text-white">
+				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
+				results are limited.
+			</p>
+			<p class="dark:text-white">
+				At least three characters are required before any suggestions are provided. This avoids
+				spamming the underlying Web APIs with excessively vague requests.
+			</p>
+			<p class="dark:text-white">
+				Try entering 'brick' or 'london' if you're having trouble finding any places.
+			</p>
+			<Geocoder adapter={listAdapter} {onLocationSelected} {onSearchError} classes="w-72">
+				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
+					{#if suggestions?.length > 0}
+						<GeocoderSuggestionList
+							{onSuggestionEvent}
+							{attribution}
+							{suggestions}
+							{selected}
+							maxSuggestions={5}
+						/>
+					{/if}
+				{/snippet}
+			</Geocoder>
+			<pre class="whitespace-pre-wrap dark:text-white">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
-	</div>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Selected">
-	<div class="m-6 space-y-6">
-		<p class="dark:text-white">
-			A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
-			results are limited.
-		</p>
-		<p class="dark:text-white">
-			At least three characters are required before any suggestions are provided. This avoids
-			spamming the underlying Web APIs with excessively vague requests.
-		</p>
-		<p class="dark:text-white">
-			Try entering 'brick' or 'london' if you're having trouble finding any places.
-		</p>
-		<Geocoder
-			let:onSuggestionEvent
-			let:attribution
-			let:suggestions
-			adapter={listAdapter}
-			bind:selected
-			{onSearchError}
-			classes="w-72"
-		>
-			{#if suggestions?.length > 0}
-				<GeocoderSuggestionList
-					{onSuggestionEvent}
-					{attribution}
-					{suggestions}
-					{selected}
-					maxSuggestions={5}
-				/>
-			{/if}
-		</Geocoder>
-		<pre class="dark:text-white whitespace-pre-wrap">
+	{#snippet template()}
+		<div class="m-6 space-y-6">
+			<p class="dark:text-white">
+				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
+				results are limited.
+			</p>
+			<p class="dark:text-white">
+				At least three characters are required before any suggestions are provided. This avoids
+				spamming the underlying Web APIs with excessively vague requests.
+			</p>
+			<p class="dark:text-white">
+				Try entering 'brick' or 'london' if you're having trouble finding any places.
+			</p>
+			<Geocoder adapter={listAdapter} bind:selected {onSearchError} classes="w-72">
+				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
+					{#if suggestions?.length > 0}
+						<GeocoderSuggestionList
+							{onSuggestionEvent}
+							{attribution}
+							{suggestions}
+							{selected}
+							maxSuggestions={5}
+						/>
+					{/if}
+				{/snippet}
+			</Geocoder>
+			<pre class="whitespace-pre-wrap dark:text-white">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
-	</div>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Disabled dropdown">
-	<div class="m-6 space-y-6">
-		<p class="dark:text-white">
-			I've disabled the dropdown in this story, instead, I'm accessing the results by binding on the
-			result set. I'm manually displaying them below but you can do whatever you like with them.
-		</p>
-		<p class="dark:text-white">
-			Try entering 'brick' or 'london' if you're having trouble finding any places.
-		</p>
-		<Geocoder
-			adapter={listAdapter}
-			{onLocationSelected}
-			{onSearchError}
-			bind:suggestions
-			classes="w-72"
-		/>
-		<pre class="dark:text-white whitespace-pre-wrap">
+	{#snippet template()}
+		<div class="m-6 space-y-6">
+			<p class="dark:text-white">
+				I've disabled the dropdown in this story, instead, I'm accessing the results by binding on
+				the result set. I'm manually displaying them below but you can do whatever you like with
+				them.
+			</p>
+			<p class="dark:text-white">
+				Try entering 'brick' or 'london' if you're having trouble finding any places.
+			</p>
+			<Geocoder
+				adapter={listAdapter}
+				{onLocationSelected}
+				{onSearchError}
+				bind:suggestions
+				classes="w-72"
+			/>
+			<pre class="whitespace-pre-wrap dark:text-white">
 			{#if suggestions}
-				{#each suggestions as location}
-					{formatResult(location)}<br />
-				{/each}
-			{/if}
+					{#each suggestions as location}
+						{formatResult(location)}<br />
+					{/each}
+				{/if}
 		</pre>
-	</div>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Custom placeholder">
-	<div class="m-6 space-y-6">
-		<p class="dark:text-white">
-			A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
-			results are limited.
-		</p>
-		<p class="dark:text-white">
-			At least three characters are required before any suggestions are provided. This avoids
-			spamming the underlying Web APIs with excessively vague requests.
-		</p>
-		<p class="dark:text-white">
-			Try entering 'brick' or 'london' if you're having trouble finding any places.
-		</p>
-		<Geocoder
-			let:onSuggestionEvent
-			let:attribution
-			let:suggestions
-			adapter={listAdapter}
-			{onLocationSelected}
-			{onSearchError}
-			classes="w-72"
-			placeholder="Type here to search for a place "
-		>
-			{#if suggestions?.length > 0}
-				<GeocoderSuggestionList
-					{onSuggestionEvent}
-					{attribution}
-					{suggestions}
-					{selected}
-					maxSuggestions={5}
-				/>
-			{/if}
-		</Geocoder>
-		<pre class="dark:text-white whitespace-pre-wrap">
+	{#snippet template()}
+		<div class="m-6 space-y-6">
+			<p class="dark:text-white">
+				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
+				results are limited.
+			</p>
+			<p class="dark:text-white">
+				At least three characters are required before any suggestions are provided. This avoids
+				spamming the underlying Web APIs with excessively vague requests.
+			</p>
+			<p class="dark:text-white">
+				Try entering 'brick' or 'london' if you're having trouble finding any places.
+			</p>
+			<Geocoder
+				adapter={listAdapter}
+				{onLocationSelected}
+				{onSearchError}
+				classes="w-72"
+				placeholder="Type here to search for a place "
+			>
+				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
+					{#if suggestions?.length > 0}
+						<GeocoderSuggestionList
+							{onSuggestionEvent}
+							{attribution}
+							{suggestions}
+							{selected}
+							maxSuggestions={5}
+						/>
+					{/if}
+				{/snippet}
+			</Geocoder>
+			<pre class="whitespace-pre-wrap dark:text-white">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
-	</div>
+		</div>
+	{/snippet}
 </Story>

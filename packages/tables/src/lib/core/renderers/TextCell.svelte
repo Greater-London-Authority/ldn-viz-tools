@@ -3,17 +3,19 @@
 	 * The `TextCell` component formats a single value as text and displays it in a table cell.
 	 * @component
 	 */
-	import { format } from 'd3-format';
 	import { classNames } from '@ldn-viz/ui';
+	import { format } from 'd3-format';
+	import type { TextCellProps } from '$lib/core/renderers/TextCellProps';
 
-	export let value: number | string;
-	export let alignText: 'left' | 'right' | 'center' | undefined = undefined;
-
-	export let fontWeight: string | ((value: number | string) => string) = 'normal';
-	export let visibility: string | ((value: number | string) => string) = 'visible';
-
-	export let formatString: string | undefined = undefined;
-	$: f = format(formatString ?? '');
+	let {
+		value,
+		alignText = undefined,
+		fontWeight = 'normal',
+		visibility = 'visible',
+		formatString = undefined,
+		...rest
+	}: TextCellProps = $props();
+	let f = $derived(format(formatString ?? ''));
 
 	const alignmentClasses = {
 		left: 'justify-start',
@@ -21,14 +23,10 @@
 		center: 'justify-center'
 	};
 
-	$: alignmentClass = alignmentClasses[alignText ?? 'left'];
+	let alignmentClass = $derived(alignmentClasses[alignText ?? 'left']);
 
-	$: fontWeightValue = typeof fontWeight === 'function' ? fontWeight(value) : fontWeight;
-	$: visibilityValue = typeof visibility === 'function' ? visibility(value) : visibility;
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let fontWeightValue = $derived(typeof fontWeight === 'function' ? fontWeight(value) : fontWeight);
+	let visibilityValue = $derived(typeof visibility === 'function' ? visibility(value) : visibility);
 </script>
 
 <span

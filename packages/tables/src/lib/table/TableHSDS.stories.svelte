@@ -1,15 +1,15 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Table from './Table.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Example Tables/HSDS',
 		component: Table
-	};
+	});
 </script>
 
 <script lang="ts">
-	import { Story } from '@storybook/addon-svelte-csf';
-
 	const footfallData = [
 		{
 			metric: 'Monday (avg)',
@@ -141,5 +141,7 @@
 </script>
 
 <Story name="Footfall table">
-	<Table data={footfallData} tableSpec={footfallTableSpec} />
+	{#snippet template()}
+		<Table data={footfallData} tableSpec={footfallTableSpec} />
+	{/snippet}
 </Story>

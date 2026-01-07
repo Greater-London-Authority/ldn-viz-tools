@@ -4,20 +4,28 @@
 
 	import { NoSymbol } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { currentTheme, tokenNameToValue } from '../theme/themeStore';
+
+	import { theme } from '../theme/themeState.svelte';
+
 	import Tooltip from '../tooltip/Tooltip.svelte';
 	import { classNames } from '../utils/classNames';
 
-	export let label;
+	interface Props {
+		label: any;
+		activeColorName?: string;
+		disabled?: boolean;
+		/**
+		 * Optional custom colours to choose from. If these don't exist, default to categoricalColors.
+		 */
+		colorNames: any;
+	}
 
-	export let activeColorName = 'data.categorical.blue';
-
-	export let disabled = false;
-
-	/**
-	 * Optional custom colours to choose from. If these don't exist, default to categoricalColors.
-	 */
-	export let colorNames;
+	let {
+		label,
+		activeColorName = $bindable(),
+		disabled = false,
+		colorNames = $bindable()
+	}: Props = $props();
 
 	const categoricalColors = [
 		'data.categorical.blue',
@@ -37,8 +45,6 @@
 		colorNames = categoricalColors;
 	}
 
-	let isOpen = false;
-
 	const trimTokenName = (token: string) => {
 		const array = token.split('.');
 		array.shift();
@@ -56,43 +62,49 @@
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="w-6 h-6 text-color-action-disabled cursor-not-allowed"
+		class="text-color-action-disabled h-6 w-6 cursor-not-allowed"
 		aria-hidden="true"
 	/>
 {:else}
-	<Popover bind:isOpen>
-		<Trigger slot="trigger" size="xs" ariaLabel="Click to open {label} layer colour picker">
-			<div
-				class="w-[22px] h-[22px] relative border rounded-full"
-				style:background={tokenNameToValue(activeColorName, $currentTheme)}
-			/>
-		</Trigger>
+	<Popover>
+		{#snippet trigger(props)}
+			<Trigger {...props} size="xs" aria-label="Click to open {label} layer colour picker">
+				<div
+					class="relative h-[22px] w-[22px] rounded-full border"
+					style:background={activeColorName
+						? theme.tokenNameToValue(activeColorName, theme.currentTheme)
+						: ''}
+				></div>
+			</Trigger>
+		{/snippet}
 
-		<svelte:fragment slot="title">Colour</svelte:fragment>
+		{#snippet title()}
+			Colour
+		{/snippet}
 
-		<span class="text-xs mb-2 inline-block">Click to assign a colour to this layer.</span>
+		<span class="mb-2 inline-block text-xs">Click to assign a colour to this layer.</span>
 
 		<div class="flex flex-wrap gap-0.5">
 			{#each colorNames as colorOption}
 				<Tooltip>
-					<Trigger
-						slot="trigger"
-						variant="square"
-						size="sm"
-						class={classNames(
-							activeColorName === colorOption ? activeOptionClasses : '',
-							optionClasses
-						)}
-						on:click={() => {
-							activeColorName = colorOption;
-							isOpen = false;
-						}}
-					>
-						<div
-							class="w-6 h-6 rounded-full"
-							style:background={tokenNameToValue(colorOption, $currentTheme)}
-						/>
-					</Trigger>
+					{#snippet trigger()}
+						<Trigger
+							variant="square"
+							size="sm"
+							class={classNames(
+								activeColorName === colorOption ? activeOptionClasses : '',
+								optionClasses
+							)}
+							onclick={() => {
+								activeColorName = colorOption;
+							}}
+						>
+							<div
+								class="h-6 w-6 rounded-full"
+								style:background={theme.tokenNameToValue(colorOption, theme.currentTheme)}
+							></div>
+						</Trigger>
+					{/snippet}
 					<span class="sr-only">Color code:</span>
 					{trimTokenName(colorOption)}
 				</Tooltip>

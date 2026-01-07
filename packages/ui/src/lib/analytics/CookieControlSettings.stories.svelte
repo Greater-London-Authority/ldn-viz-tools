@@ -1,20 +1,30 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import CookieControlSettings from './CookieControlSettings.svelte';
-	export const meta = {
+	/**
+	 * The `CookieControlSettings` component provides a button which can be clicked on to open the cookie settings modal.
+	 * @component
+	 * */
+
+	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Meta, Analytics And Cookies/CookieControlSettings',
-		component: CookieControlSettings
-	};
-</script>
+		component: CookieControlSettings,
+		tags: ['autodocs']
+	});
 
-<script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import AnalyticsAndCookieConsent from './AnalyticsAndCookieConsent.svelte';
+	// hack to make the "View cookie settings" link appear
+	window.CookieControl = () => {};
 </script>
-
-<Template let:args>
-	<AnalyticsAndCookieConsent />
-	<CookieControlSettings {...args} />
-</Template>
 
 <!-- The modal doesn't actually open in this story, as the Storybook site isn't using the Civic Cookie Control.-->
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template()}
+		<CookieControlSettings />
+	{/snippet}
+</Story>
+
+<Story name="With Button props">
+	{#snippet template()}
+		<CookieControlSettings variant="solid" slim={false} />
+	{/snippet}
+</Story>

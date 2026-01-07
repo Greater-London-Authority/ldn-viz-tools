@@ -18,53 +18,61 @@
 		OnGeolocationSearchResult
 	} from '@ldn-viz/ui';
 
-	/**
-	 * An adapter for sourcing location suggestions. All data fetching and
-	 * caching is delegated to the adapter.
-	 */
-	export let adapter: GeocoderAdapter;
+	interface Props {
+		/**
+		 * An adapter for sourcing location suggestions. All data fetching and
+		 * caching is delegated to the adapter.
+		 */
+		adapter: GeocoderAdapter;
+		/**
+		 * Called when a user clicks a suggestion.
+		 */
+		onLocationSelected?: undefined | OnGeolocationSearchResult;
+		/**
+		 * Called when the adapter rejects a promise for a search.
+		 */
+		onSearchError: undefined | OnGeolocationSearchError;
+		/**
+		 * Called when the user clears the search box.
+		 */
+		onSearchClear?: any;
+		/**
+		 * Passed to the suggestions dropdown to limit the number of suggestions
+		 * shown at once.
+		 */
+		maxSuggestions?: number;
+		/**
+		 * Additional classes applied to the root container element.
+		 */
+		classes?: string;
+		/**
+		 * Additional classes applied to the geocoder search input element.
+		 */
+		inputClasses?: string;
+		/**
+		 * Placeholder text to be displayed in the input element.
+		 */
+		placeholder?: string;
+		[key: string]: any;
+	}
 
-	/**
-	 * Called when a user clicks a suggestion.
-	 */
-	export let onLocationSelected: undefined | OnGeolocationSearchResult = undefined;
-
-	/**
-	 * Called when the adapter rejects a promise for a search.
-	 */
-	export let onSearchError: undefined | OnGeolocationSearchError;
-
-	/**
-	 * Called when the user clears the search box.
-	 */
-	export let onSearchClear = () => {};
-
-	/**
-	 * Passed to the suggestions dropdown to limit the number of suggestions
-	 * shown at once.
-	 */
-	export let maxSuggestions: number = 5;
-
-	/**
-	 * Additional classes applied to the root container element.
-	 */
-	export let classes = '';
-
-	/**
-	 * Additional classes applied to the geocoder search input element.
-	 */
-	export let inputClasses = '';
-
-	/**
-	 * Placeholder text to be displayed in the input element.
-	 */
-	export let placeholder = 'Location search';
+	let {
+		adapter,
+		onLocationSelected = undefined,
+		onSearchError,
+		onSearchClear = () => {},
+		maxSuggestions = 5,
+		classes = '',
+		inputClasses = '',
+		placeholder = 'Location search',
+		...rest
+	}: Props = $props();
 
 	const mapStore: MapStore = getContext('mapStore');
 
 	const zoomLevel = 16;
 	const delay = 500;
-	let selected: null | GeolocationNamed = null;
+	let selected: null | GeolocationNamed = $state(null);
 
 	const onLocationSelectedGeocoder = (location: Geolocation) => {
 		if (!$mapStore) {
@@ -88,10 +96,13 @@
 		}
 	};
 
-	let showClearButton = false;
+	let showClearButton = $state(false);
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: !showClearButton && clearFeature('geocoder', $mapStore);
+	$effect(() => {
+		if (!showClearButton) {
+			clearFeature('geocoder', $mapStore);
+		}
+	});
 </script>
 
 <Geocoder
@@ -105,18 +116,17 @@
 	{placeholder}
 	bind:showClearButton
 	bind:selected
-	let:onSuggestionEvent
-	let:attribution
-	let:suggestions
-	{...$$restProps}
+	{...rest}
 >
-	{#if suggestions.length > 0}
-		<GeocoderSuggestionList
-			{onSuggestionEvent}
-			{attribution}
-			{suggestions}
-			{selected}
-			{maxSuggestions}
-		/>
-	{/if}
+	{#snippet children({ onSuggestionEvent, attribution, suggestions })}
+		{#if suggestions.length > 0}
+			<GeocoderSuggestionList
+				{onSuggestionEvent}
+				{attribution}
+				{suggestions}
+				{selected}
+				{maxSuggestions}
+			/>
+		{/if}
+	{/snippet}
 </Geocoder>

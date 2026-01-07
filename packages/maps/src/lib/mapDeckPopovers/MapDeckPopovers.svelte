@@ -9,28 +9,23 @@
 	import { clickedFeature, clickedLayer } from './stores';
 	import DefaultPopover from './DefaultPopover.svelte';
 	import MapPopover from '../mapPopover/MapPopover.svelte';
-	export let spec: Record<string, any> = {};
-	/**
-	 * List of layers, as provided to deck.gl.
-	 */
-	export let layers: Layer[] = [];
-	let tooltipSpec: any;
-	$: {
-		tooltipSpec = spec[$clickedLayer];
+
+	interface Props {
+		spec?: Record<string, any>;
+		/**
+		 * List of layers, as provided to deck.gl.
+		 */
+		layers?: Layer[];
 	}
+
+	let { spec = {}, layers = [] }: Props = $props();
+	let tooltipSpec: any = $derived(spec[$clickedLayer]);
+
 	function isConstructor(obj: any) {
 		return !!obj.prototype && !!obj.prototype.constructor.name;
 	}
-	$: layerObj = layers.find((l) => l.id === $clickedLayer);
+	let layerObj = $derived(layers.find((l) => l.id === $clickedLayer));
 	// layers.find(l => l.id === $clickedLayer)?.visible;
-
-	$: console.log({
-		tooltipSpec,
-		layerObj,
-		clickedLayer: $clickedLayer,
-		layers,
-		feat: $clickedFeature
-	});
 </script>
 
 {#if layerObj && layerObj.visible !== false && $clickedFeature && $clickedLayer}

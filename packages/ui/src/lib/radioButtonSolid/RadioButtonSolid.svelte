@@ -6,57 +6,73 @@
 	 * @component
 	 */
 
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { classNames } from '../utils/classNames';
+	import type { RadioButtonSolidProps } from './types';
 
-	/**
-	 * String appearing next to the radio button.
-	 */
-	export let label = '';
-
-	/**
-	 * Value that will be assigned to `selectedId` of parent `<RadioButtonGroupSolid>` if this item is selected.
-	 */
-	export let id: string;
-
-	/**
-	 * Name of group to which radio button is assigned.
-	 */
-	export let name: string | undefined;
-
-	/**
-	 * if `true` then user cannot interact with this button to select it
-	 */
-	export let disabled = false;
+	let {
+		selectedId = $bindable(''),
+		label,
+		id,
+		name,
+		disabled = false,
+		icon,
+		rawIcon,
+		iconPlacement = 'above'
+	}: RadioButtonSolidProps = $props();
 
 	let inputID = `input-${name || ''}-${id}`;
 
-	const { selectedId } = getContext<{ selectedId: Writable<string> }>('selectedId');
+	const labelClasses = $derived(
+		classNames(
+			disabled
+				? '!bg-color-input-background-disabled !text-color-text-disabled cursor-not-allowed'
+				: 'bg-color-input-background-off text-color-text-primary cursor-pointer',
+			'form-label ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
+			'peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-color-ui-background-primary peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-inset peer-focus:ring-offset-2'
+		)
+	);
+
+	const iconOrientationClasses = {
+		above: 'h-5 w-5 mb-1',
+		below: 'h-5 w-5 mt-1'
+	};
 </script>
 
-<div class="w-full flex">
+{#snippet iconComponent()}
+	{#if icon}
+		<Icon
+			src={icon}
+			theme="mini"
+			class={iconOrientationClasses[iconPlacement]}
+			aria-hidden="true"
+		/>
+	{:else if rawIcon}
+		<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></rawIcon>
+	{/if}
+{/snippet}
+
+<div class="flex w-full">
 	<input
 		id={inputID}
 		type="radio"
+		bind:group={selectedId}
 		{name}
-		bind:group={$selectedId}
 		value={id}
 		aria-disabled={disabled}
 		{disabled}
-		class="peer absolute top-0 left-0 opacity-0"
+		class="peer absolute left-0 top-0 opacity-0"
 	/>
-	<label
-		for={inputID}
-		class={classNames(
-			disabled
-				? 'cursor-not-allowed !bg-color-input-background-disabled !text-color-text-disabled '
-				: 'cursor-pointer bg-color-input-background-off text-color-text-primary',
-			'form-label flex flex-col justify-center items-center text-center p-2 min-h-11 w-full ring-1 ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on',
-			'peer-focus:ring-inset peer-focus:ring-offset-2 peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-2 peer-focus:outline-none peer-focus:ring-color-ui-background-primary'
-		)}
-	>
+	<label for={inputID} class={labelClasses}>
 		<!-- contents of the radio button (name and/or icon) -->
-		<slot>{label}</slot>
+		{#if (icon || rawIcon) && iconPlacement === 'above'}
+			{@render iconComponent()}
+			{label}
+		{:else if (icon || rawIcon) && iconPlacement === 'below'}
+			{label}
+			{@render iconComponent()}
+		{:else}
+			{label}
+		{/if}
 	</label>
 </div>

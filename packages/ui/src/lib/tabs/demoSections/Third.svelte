@@ -2,9 +2,9 @@
 	import NonIdealState from '../../nonIdealState/NonIdealState.svelte';
 </script>
 
-<div class="w-full h-96">
+<div class="h-96 w-full">
 	<NonIdealState>
-		<svelte:fragment slot="title">This tab contains another component</svelte:fragment>
+		{#snippet title()}This tab contains another component{/snippet}
 
 		Quisquam voluptatem qui velit qui pariatur ut. Rerum qui dolor nemo accusamus non quam
 		occaecati. Corrupti est ut sit eos et perspiciatis rerum ducimus. Excepturi blanditiis molestias

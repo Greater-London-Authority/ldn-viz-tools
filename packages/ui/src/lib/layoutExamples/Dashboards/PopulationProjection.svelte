@@ -11,7 +11,6 @@
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 
-	import Theme from '../../theme/Theme.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 	import { Demo1, Pop1, Sewers } from './demoTabs';
 
@@ -22,47 +21,54 @@
 	];
 </script>
 
-<!--Only need the theme in a story in an app this will be in the layout-->
-<Theme />
-<AppShell
-	sidebarPlacement={{ initial: 'left' }}
-	sidebarAlwaysOpen={{ initial: 'false', md: 'true' }}
->
-	<svelte:fragment slot="main">
+<AppShell sidebarPlacement={{ initial: 'left' }} sidebarAlwaysOpen={{ initial: false, md: true }}>
+	{#snippet main()}
 		<div class="bg-color-canvas-background-1 h-full p-6 pl-24">
 			<div class="mb-4">
-				<h1 class="text-2xl text-color-text-primary font-bold">This is the main content area</h1>
-				<h2 class="text-xl text-color-text-secondary">
+				<h1 class="text-color-text-primary text-2xl font-bold">This is the main content area</h1>
+				<h2 class="text-color-text-secondary text-xl">
 					Maecenas ut libero vel nibh maximus feugiat non sed tortor.
 				</h2>
 			</div>
 		</div>
-	</svelte:fragment>
-	<Sidebar slot="sidebar" {tabs}>
-		<!-- HEADER -->
-		<SidebarHeader title="London's Population" slot="header">
-			<svelte:fragment slot="subTitle">
-				<p>London's 2022-based housing-led population projections, produced by GLA demography.</p>
-			</svelte:fragment>
-			<Overlay slot="hint" overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
-		</SidebarHeader>
+	{/snippet}
 
-		<!-- FOOTER -->
-		<SidebarFooter slot="footer">
-			<div class="flex justify-between">
-				<div class="w-[165px]"><LogoMayor /></div>
-				<div class="w-[165px]"><LogoCIU /></div>
-			</div>
-			<svelte:fragment slot="menu">
-				<div class="flex justify-between">
-					<ul class="flex space-x-2">
-						<li>View Cookie settings</li>
-						<li>Privacy Policy</li>
-					</ul>
+	{#snippet sidebar()}
+		<Sidebar {tabs}>
+			<!-- HEADER -->
+			{#snippet header()}
+				<SidebarHeader title="London's Population">
+					{#snippet subTitle()}
+						<p>
+							London's 2022-based housing-led population projections, produced by GLA demography.
+						</p>
+					{/snippet}
 
-					<ThemeSwitcher size="xs" />
-				</div>
-			</svelte:fragment>
-		</SidebarFooter>
-	</Sidebar>
+					{#snippet hint()}
+						<Overlay overlayType="modal" modalTitle="Modal Title">This is a modal.</Overlay>
+					{/snippet}
+				</SidebarHeader>
+			{/snippet}
+
+			<!-- FOOTER -->
+			{#snippet footer()}
+				<SidebarFooter>
+					<div class="flex justify-between">
+						<div class="w-[165px]"><LogoMayor /></div>
+						<div class="w-[165px]"><LogoCIU /></div>
+					</div>
+					{#snippet menu()}
+						<div class="flex justify-between">
+							<ul class="flex space-x-2">
+								<li>View Cookie settings</li>
+								<li>Privacy Policy</li>
+							</ul>
+
+							<ThemeSwitcher size="xs" />
+						</div>
+					{/snippet}
+				</SidebarFooter>
+			{/snippet}
+		</Sidebar>
+	{/snippet}
 </AppShell>

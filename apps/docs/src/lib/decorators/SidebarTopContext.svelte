@@ -1,11 +1,19 @@
 <script>
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
+	// import { getSidebarState, setSidebarState } from '@ldn-viz/ui';
 
-	const sidebarPlacementStore = writable('top');
-	setContext('sidebarPlacement', sidebarPlacementStore);
+	import {
+		getSidebarState,
+		setSidebarState
+	} from '../../../../../packages/ui/src/lib/sidebar/sidebarState.svelte';
+
+	setSidebarState();
+	let sidebarState = getSidebarState();
+
+	sidebarState.placement = 'top';
+
+	let { children } = $props();
 </script>
 
-<div>
-	<slot />
+<div class="relative min-h-dvh">
+	{@render children?.()}
 </div>

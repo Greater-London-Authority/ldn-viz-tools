@@ -1,41 +1,57 @@
-<script context="module" lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
-
 	import Spinner from './Spinner.svelte';
 
-	export const meta = {
+	/**
+	 * The `<Spinner>` component displays an animation to show that an operation (such as data loading) is currently in progress.
+	 *
+	 * Consider using the [LoadingIndicator](./?path=/docs/ui-components-loadingindicator--documentation) component, which wraps around this Spinner and handles user prefersReducedMotion.
+	 *
+	 * **Alternatives**: if it is necessary to display an explanation of what is happening, or to provide a placeholder to occupy space that will be occupied once an operation has completed, then consider using the [Non-Ideal State](./?path=/docs/ui-components-nonidealstate--documentation) component.
+	 */
+
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Spinner',
-		component: Spinner
-	};
+		component: Spinner,
+		tags: ['autodocs']
+	});
 </script>
 
-<Template let:args>
-	<Spinner class="w-40" {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<Spinner {...args} class="w-8" />
+	{/snippet}
+</Story>
 
 <Story name="Thickness">
-	<Spinner class="w-40 stroke-[16]" />
+	{#snippet template(args)}
+		<Spinner {...args} class="w-8 stroke-[16]" />
+	{/snippet}
 </Story>
 
 <Story name="Color">
-	<Spinner
-		class="w-40"
-		circleColorClass="stroke-color-palette-blue-100"
-		arcColorClass="stroke-color-palette-pink-500"
-	/>
+	{#snippet template(args)}
+		<Spinner
+			{...args}
+			class="w-8"
+			circleColorClass="stroke-color-ui-background-negative"
+			arcColorClass="stroke-color-ui-negative"
+		/>
+	{/snippet}
 </Story>
 
 <Story name="In a button">
-	<Button
-		>I'm loading...
-		<Spinner class="h-6 w-6" />
-	</Button>
+	{#snippet template(args)}
+		<Button>
+			I'm loading...
+			<Spinner {...args} class="h-6 w-6" />
+		</Button>
+	{/snippet}
 </Story>
 
 <Story name="With title">
-	<Spinner title="Loading" class="w-40" />
+	{#snippet template(args)}
+		<Spinner {...args} title="Loading" class="w-8" />
+	{/snippet}
 </Story>

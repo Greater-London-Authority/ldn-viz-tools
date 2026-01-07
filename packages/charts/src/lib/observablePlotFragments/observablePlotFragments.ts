@@ -1,8 +1,8 @@
-import { currentTheme } from '@ldn-viz/ui';
-import type { AxisOptions } from '@observablehq/plot';
-import { get } from 'svelte/store';
+import { theme } from '@ldn-viz/ui';
 
-export const fontStack = "'Inter', system-ui, sans-serif"; // TODO: swap for inter
+import type { AxisOptions } from '@observablehq/plot';
+
+export const fontStack = "'Inter', system-ui, sans-serif";
 type DefaultPlotStyleFunctions = {
 	[key: string]: () => any;
 };
@@ -27,7 +27,9 @@ export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultTip: () => defaultTip(),
 	defaultAnnotationTip: () => defaultAnnotationTip(),
 	defaultAnnotationText: () => defaultAnnotationText(),
-	defaultAnnotationRange: () => defaultAnnotationRange()
+	defaultAnnotationRange: () => defaultAnnotationRange(),
+	defaultBar: () => defaultBar(),
+	defaultRect: () => defaultRect()
 };
 
 export const getDefaultPlotStyles = () => {
@@ -37,10 +39,10 @@ export const getDefaultPlotStyles = () => {
 };
 
 const defaultStyle = () => ({
-	color: get(currentTheme).color.chart.label,
+	color: theme.currentTheme.color.chart.label,
 	fontSize: '0.875rem',
 	fontFamily: fontStack,
-	background: get(currentTheme).color.chart.background
+	background: theme.currentTheme.color.chart.background
 });
 
 const defaultSize = {
@@ -64,7 +66,8 @@ const defaultSizeFacet = {
 const defaultColor = {
 	legend: true,
 	swatchSize: 16,
-	className: 'defaultColorLegendLabel'
+	className: 'defaultColorLegendLabel',
+	type: 'ordinal'
 };
 
 const defaultXScale = {
@@ -82,12 +85,12 @@ const defaultYScale = {
 };
 
 const defaultGridX = () => ({
-	stroke: get(currentTheme).color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	stroke: theme.currentTheme.color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1
 });
 
 const defaultGridY = () => ({
-	stroke: get(currentTheme).color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	stroke: theme.currentTheme.color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1,
 	ticks: 4 // reasonable level to push nice breaks toward 3, 4 or 5
 });
@@ -112,7 +115,7 @@ const defaultYAxis = <AxisOptions>{
 };
 
 const defaultLine = () => ({
-	stroke: get(currentTheme).color.data.primary,
+	stroke: theme.currentTheme.color.data.primary,
 	strokeWidth: 2
 });
 
@@ -124,7 +127,7 @@ const defaultDashedLine = {
 const defaultDot = () => ({
 	// simplest mark for dense scatterplots
 	stroke: null,
-	fill: get(currentTheme).color.data.primary,
+	fill: theme.currentTheme.color.data.primary,
 	fillOpacity: 0.7,
 	strokeWidth: 0,
 	r: 2
@@ -132,26 +135,26 @@ const defaultDot = () => ({
 
 const defaultPoint = () => ({
 	// larger data point mark, for highlighting a point on line etc.
-	stroke: get(currentTheme).color.data.primary,
-	fill: get(currentTheme).color.chart.background,
+	stroke: theme.currentTheme.color.data.primary,
+	fill: theme.currentTheme.color.chart.background,
 	strokeWidth: 2,
 	r: 4
 });
 
 const defaultArea = () => ({
-	stroke: get(currentTheme).color.data.primary,
+	stroke: theme.currentTheme.color.data.primary,
 	strokeWidth: 0,
-	fill: get(currentTheme).color.data.primary,
+	fill: theme.currentTheme.color.data.primary,
 	fillOpacity: 0.2
 });
 
 const defaultRule = () => ({
-	stroke: get(currentTheme).color.chart.axis
+	stroke: theme.currentTheme.color.chart.axis
 });
 
 const defaultTip = () => ({
-	stroke: get(currentTheme).color.ui.border.secondary,
-	fill: get(currentTheme).color.chart.background,
+	stroke: theme.currentTheme.color.ui.border.secondary,
+	fill: theme.currentTheme.color.chart.background,
 	fillOpacity: 1,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -160,8 +163,8 @@ const defaultTip = () => ({
 });
 
 const defaultAnnotationTip = () => ({
-	stroke: get(currentTheme).color.ui.border.secondary,
-	fill: get(currentTheme).color.chart.background,
+	stroke: theme.currentTheme.color.ui.border.secondary,
+	fill: theme.currentTheme.color.chart.background,
 	fillOpacity: 0.8,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -173,14 +176,24 @@ const defaultAnnotationTip = () => ({
 
 const defaultAnnotationText = () => ({
 	fontSize: 14,
-	fill: get(currentTheme).color.chart.label,
+	fill: theme.currentTheme.color.chart.label,
 	dx: 8,
 	dy: 0
 });
 
 const defaultAnnotationRange = () => ({
-	fill: get(currentTheme).color.chart.label, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	fill: theme.currentTheme.color.chart.label, // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	opacity: 0.1
+});
+
+const defaultBar = () => ({
+	fill: theme.currentTheme.color.data.primary,
+	stroke: theme.currentTheme.color.chart.background
+});
+
+const defaultRect = () => ({
+	fill: theme.currentTheme.color.data.primary,
+	stroke: theme.currentTheme.color.chart.background
 });
 
 /**

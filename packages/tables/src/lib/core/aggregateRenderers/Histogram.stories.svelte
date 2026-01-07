@@ -1,22 +1,21 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Histogram from './Histogram.svelte';
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/Histogram',
 		component: Histogram,
+		tags: ['autodocs'],
 
 		args: {
 			values: [0.2, 0.2, 0.2, 0.2, 0.3, 0.4, 0.8],
 			extent: [0, 1]
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<Histogram {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<Histogram {...args} />
+	{/snippet}
+</Story>

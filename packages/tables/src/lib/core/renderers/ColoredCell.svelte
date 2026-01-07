@@ -5,33 +5,20 @@
 	 * @component
 	 */
 
-	import { format, hsl, type ScaleThreshold } from 'd3';
+	import { hsl } from 'd3-color';
+	import { format } from 'd3-format';
+	import type { ColoredCellProps } from '$lib/core/renderers/ColoredCellProps';
 
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value: number;
+	let { value, formatString = '.2f', colorScale }: ColoredCellProps = $props();
 
-	/**
-	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
-	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
-	 * If set to a falsy value, then bars will not be labelled with a value.
-	 */
-	export let formatString = '.2f';
-
-	/**
-	 * A D3 color scale used to determine cell background color.
-	 */
-	export let colorScale: ScaleThreshold<string | number, string> | (() => string);
-
-	$: f = format(formatString);
+	let f = $derived(format(formatString));
 </script>
 
 {#if !colorScale}
-	<span />
+	<span></span>
 {:else if value}
 	<span
-		class={`text-right flex h-full justify-end p-2 items-center`}
+		class="flex h-full items-center justify-end p-2 text-right"
 		style={`background-color: ${colorScale(value)}; color: ${
 			hsl(colorScale(value).toString()).l >= 0.6 ? '#000000' : '#FFFFFF'
 		}`}

@@ -1,45 +1,22 @@
-<script>
+<script lang="ts">
 	/**
 	 * The `CategoricalTick` component encodes a single categorical value redundantly as both the position and color of a tick.
 	 * @component
 	 */
 	import { format } from 'd3-format';
-
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value;
+	import type { CategoricalTickProps } from '$lib/core/renderers/CategoricalTickProps';
 
 	const fPercentage = format('0.0%');
 
-	/**
-	 * Scale used to determine color of tick.
-	 */
-	export let colorScale;
+	let { value, colorScale, posScale, showValues = true, ...rest }: CategoricalTickProps = $props();
 
-	/**
-	 * Categorical scale used to determine horizontal position of tick.
-	 */
-	export let posScale;
+	let w = $derived(1 / posScale.domain().length);
 
-	/**
-	 * If `true`, then the numerical value will be displayed as text beside the symbol.
-	 */
-	export let showValues = true;
-
-	let w;
-	$: w = 1 / posScale.domain().length;
-
-	let l;
-	$: l = posScale(value);
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let l = $derived(posScale(value));
 </script>
 
 <div
-	class="w-[3px] h-full top-0 transform -translate-x-1/2 z-[-1] relative"
+	class="relative top-0 z-[-1] h-full w-[3px] -translate-x-1/2 transform"
 	style="width: 3px"
 	style:background={colorScale(value)}
 	style:left={fPercentage(l)}

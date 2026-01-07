@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
 	const isCookieControlManagedByParent = () => {
 		if (window.location === window.parent.location) {
 			return false;
@@ -22,27 +22,41 @@
 	};
 </script>
 
-<script>
+<script lang="ts">
+	import type { ButtonProps } from '../button/types';
+
 	/**
 	 * The `CookieControlSettings` component provides a button which can be clicked on to open the cookie settings modal.
 	 * @component
 	 * */
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
+	import Button from '../button/Button.svelte';
 
-	const cookieControlStore = writable(null);
+	let {
+		slim = true,
+		variant = 'text',
+		emphasis = 'secondary',
+		...restProps
+	}: ButtonProps = $props();
+
+	let cookieControlStore = $state(window.CookieControl);
 
 	onMount(() => {
 		if (!isCookieControlManagedByParent()) {
-			cookieControlStore.set(window.CookieControl);
+			cookieControlStore = window.CookieControl;
 		}
 	});
-
-	$: cookieControlStore.set(window.CookieControl);
 </script>
 
-{#if $cookieControlStore}
-	<button aria-label="View cookie settings" on:click={$cookieControlStore.open}>
+{#if cookieControlStore}
+	<Button
+		{slim}
+		{variant}
+		{emphasis}
+		aria-label="View cookie settings"
+		onclick={cookieControlStore.open}
+		{...restProps}
+	>
 		Cookie Settings
-	</button>
+	</Button>
 {/if}

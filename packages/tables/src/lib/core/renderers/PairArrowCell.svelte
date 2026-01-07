@@ -6,46 +6,30 @@
 	 */
 
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import type { PairArrowCellProps } from '$lib/core/renderers/PairArrowCellProps';
 
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value: number;
-
-	export let extent = [0, 1]; // used to pass automatically extracted val
-
-	export let contextVals: number[] = [0]; // value to be compared to
-
-	/**
-	 * Color to be applied to bars corresponding to positive values.
-	 */
-	export let positiveColor = 'blue';
-
-	/**
-	 * Color to be applied to bars corresponding to negative values.
-	 */
-	export let negativeColor = 'red';
-
-	/**
-	 * Width of cell (in pixels).
-	 */
-	export let width = 100;
+	let {
+		value,
+		extent = [0, 1],
+		contextVals = [0],
+		positiveColor = 'blue',
+		negativeColor = 'red',
+		width = 100,
+		...rest
+	}: PairArrowCellProps = $props();
 
 	const height = 30;
 
 	const barEndPadding = 15;
 
-	let x: ScaleLinear<number, number>;
-	$: x = scaleLinear()
-		.domain(extent)
-		.range([barEndPadding, width - barEndPadding]);
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let x: ScaleLinear<number, number> = $derived(
+		scaleLinear()
+			.domain(extent)
+			.range([barEndPadding, width - barEndPadding])
+	);
 </script>
 
-<div class="h-full flex items-center">
+<div class="flex h-full items-center">
 	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 		<defs>
 			<!-- A marker to be used as an arrowhead -->

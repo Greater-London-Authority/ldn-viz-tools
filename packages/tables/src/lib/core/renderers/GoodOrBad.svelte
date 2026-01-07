@@ -10,45 +10,17 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { ComparedBenchmark } from '../../types/benchmarks';
 	import { classNames } from '../../utils/utilityFns';
+	import type { GoodOrBadProps } from '$lib/core/renderers/GoodOrBadProps';
 
-	/**
-	 * The value to be encoded in the cell.
-	 */
-	export let value: number | string;
-
-	/**
-	 * Format string defining how the number should be formatted for display (expressed in `d3-format`'s [notation](https://d3js.org/d3-format#locale_format),
-	 * which is based on Python 3’s format specification mini-language (PEP 3101)).
-	 */
-	export let formatString = '0.0f';
-
-	/**
-	 * Value that the cell's value should be compared to.
-	 */
-	export let benchmarkValue: number;
-
-	/**
-	 * Name of benchmark to be included in message.
-	 */
-	export let benchmarkLabel = '';
-
-	/**
-	 * Determines whether a "good" or desired value is greater or less than the benchmark value.
-	 */
-	export let goodIs: 'high' | 'low' | 'n/a' = 'n/a';
-
-	/**
-	 * If `true`, then display just an icon, with no message.
-	 */
-	export let iconOnly = false;
-
-	let compared: ComparedBenchmark;
-
-	$: f = format(formatString);
-
-	$: if (typeof value === 'number') {
-		compared = compareToBenchmark(value, benchmarkValue, goodIs);
-	}
+	let {
+		value,
+		formatString = '0.0f',
+		benchmarkValue,
+		benchmarkLabel = '',
+		goodIs = 'n/a',
+		iconOnly = false,
+		...rest
+	}: GoodOrBadProps = $props();
 
 	const benchmarkIcons: { [key: string]: any } = {
 		good: Check,
@@ -61,11 +33,6 @@
 		bad: 'text-color-ui-negative',
 		equal: 'text-color-ui-neutral'
 	};
-
-	$: ragClasses = classNames(
-		'text-sm inline-flex items-center',
-		benchmarkComparisonClass[compared.good as 'good']
-	);
 
 	//
 	export const compareToBenchmark = (
@@ -91,19 +58,30 @@
 		} as ComparedBenchmark;
 	};
 
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let f = $derived(format(formatString));
+
+	let compared = $derived.by(() => {
+		if (typeof value === 'number') {
+			return compareToBenchmark(value, benchmarkValue, goodIs);
+		}
+	});
+
+	let ragClasses = $derived(
+		classNames(
+			'text-sm inline-flex items-center',
+			benchmarkComparisonClass[compared?.good as 'good']
+		)
+	);
 </script>
 
-<p class={ragClasses}>
+<div class={ragClasses}>
 	{#if goodIs !== 'n/a'}
 		<div
 			class={`flex shrink-0 grow-0 items-center justify-center rounded-full bg-current ${
-				iconOnly ? 'h-4 w-4 mt-0.5' : 'h-5 w-5 mr-1 mb-0.5'
+				iconOnly ? 'mt-0.5 h-4 w-4' : 'mb-0.5 mr-1 h-5 w-5'
 			}`}
 		>
-			<Icon src={benchmarkIcons[compared.good]} theme="mini" class="w-3 h-3" aria-hidden="true" />
+			<Icon src={benchmarkIcons[compared.good]} theme="mini" class="h-3 w-3" aria-hidden="true" />
 		</div>
 	{/if}
 
@@ -114,4 +92,4 @@
 		{typeof benchmarkValue === 'number' ? f(benchmarkValue) : benchmarkValue}
 		({f(+value)})
 	{/if}
-</p>
+</div>

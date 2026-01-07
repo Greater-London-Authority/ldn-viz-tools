@@ -1,9 +1,12 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import Dot from './Dot.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/Dot',
 		component: Dot,
+		tags: ['autodocs'],
 
 		argTypes: {
 			value: {
@@ -15,24 +18,22 @@
 			value: 0.5,
 			extent: [0, 1]
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<Dot {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<Dot {...args} />
+	{/snippet}
+</Story>
 
 <Story name="Multiple">
-	<div class="flex flex-col">
-		<Dot value={0.2} extent={[0, 1]} formatString="0.1f" />
-		<Dot value={0.7} extent={[0, 1]} formatString="0.1f" />
-		<Dot value={0.5} extent={[0, 1]} formatString="0.1f" />
-		<Dot value={0.3} extent={[0, 1]} formatString="0.1f" />
-	</div>
+	{#snippet template()}
+		<div class="flex flex-col">
+			<Dot value={0.2} extent={[0, 1]} formatString="0.1f" />
+			<Dot value={0.7} extent={[0, 1]} formatString="0.1f" />
+			<Dot value={0.5} extent={[0, 1]} formatString="0.1f" />
+			<Dot value={0.3} extent={[0, 1]} formatString="0.1f" />
+		</div>
+	{/snippet}
 </Story>

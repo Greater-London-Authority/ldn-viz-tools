@@ -13,7 +13,7 @@
 		odio, commodo aliquam quam. Vestibulum volutpat efficitur varius.
 	</p>
 </div>
-<div class="w-full h-96">
+<div class="h-96 w-full">
 	<Map
 		options={{
 			transformRequest: appendOSKeyToUrl(OS_KEY)

@@ -1,68 +1,60 @@
 <script lang="ts">
 	import { InformationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { Snippet } from 'svelte';
+	import Button from '../button/Button.svelte';
+	import type { ButtonProps } from '../button/types.js';
 
-	import { getContext } from 'svelte';
+	type Props = ButtonProps & {
+		/**
+		 * text that appears in the tooltip target, next to the icon
+		 */
+		hintLabel?: string;
 
-	import Button, { type ButtonProps } from '../button/Button.svelte';
+		/**
+		 * text size for the tooltip target
+		 */
+		size?: ButtonProps['size'];
 
-	/**
-	 * text that appears in the tooltip target, next to the icon
-	 */
-	export let hintLabel = 'More Info';
+		/**
+		 * Determines how much visual emphasis is placed on the Trigger button.
+		 */
+		emphasis?: ButtonProps['emphasis'];
 
-	/**
-	 * Enables screen reader to describe contents of button
-	 */
-	export let ariaLabel: string | null = null;
+		/**
+		 * Selects which family of styles should be applied to the Trigger button.
+		 */
+		variant?: ButtonProps['variant'];
 
-	/**
-	 * text size for the tooltip target
-	 */
-	export let size: ButtonProps['size'] = 'sm';
+		/**
+		 * When true removes vertical padding and sets line height to 0 - useful for aligning buttons with text.
+		 */
+		slim?: ButtonProps['slim'];
+		children?: Snippet;
+	};
 
-	/**
-	 * When true removes vertical padding and sets line height to 0 - useful for aligning buttons with text.
-	 */
-	export let slim: ButtonProps['slim'] = true;
-
-	/**
-	 * Selects which family of styles should be applied to the Trigger button.
-	 */
-	export let variant: ButtonProps['variant'] = 'text';
-
-	/**
-	 * Determines how much visual emphasis is placed on the Trigger button.
-	 */
-	export let emphasis: ButtonProps['emphasis'] = 'secondary';
-
-	interface TriggerFuncs {
-		action: (node: HTMLElement) => void;
-		actionProps: { [key: string]: any };
-	}
-
-	const { action, actionProps } = getContext<TriggerFuncs>('triggerFuncs');
+	let {
+		hintLabel = 'More Info',
+		size = 'xs',
+		emphasis = 'secondary',
+		variant = 'text',
+		slim = true,
+		children,
+		...restProps
+	}: Props = $props();
 </script>
 
-<Button
-	{size}
-	class={$$props.class}
-	{variant}
-	{emphasis}
-	{slim}
-	{ariaLabel}
-	{action}
-	{actionProps}
-	on:click
->
-	<slot>
+<Button {size} {emphasis} {variant} {slim} {...restProps}>
+	{#if children}
+		{@render children()}
+	{:else}
 		{hintLabel}
 
 		<Icon
 			src={InformationCircle}
 			theme="mini"
-			class="w-[18px] h-[18px] ml-0.5"
+			class="ml-0.5 h-[18px] w-[18px]"
 			aria-hidden="true"
 		/>
-	</slot>
+	{/if}
 </Button>

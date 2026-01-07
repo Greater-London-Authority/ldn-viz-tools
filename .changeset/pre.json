@@ -1,0 +1,42 @@
+{
+  "mode": "pre",
+  "tag": "svelte5",
+  "initialVersions": {
+    "@ldn-viz/docs": "0.0.1",
+    "@ldn-viz/web": "0.0.1",
+    "@ldn-viz/charts": "6.0.0",
+    "@ldn-viz/config-eslint": "1.0.0",
+    "@ldn-viz/config-typescript": "0.1.0",
+    "@ldn-viz/config-vitest": "0.1.0",
+    "@ldn-viz/maps": "8.0.0",
+    "@ldn-viz/tables": "4.0.0",
+    "@ldn-viz/themes": "6.0.0",
+    "@ldn-viz/ui": "20.0.0",
+    "@ldn-viz/utils": "1.1.0"
+  },
+  "changesets": [
+    "angry-pens-sort",
+    "change-basemap-theme",
+    "deckgl-overlay",
+    "export-onClickPopoverHandler",
+    "famous-boxes-hope",
+    "forty-cases-rest",
+    "gold-deers-end",
+    "listMenu-to-navigationMenu",
+    "mapdekc-tooltips",
+    "pretty-phones-brake",
+    "rename-buttonsHidden-prop",
+    "shy-foxes-design",
+    "sixty-plums-jump",
+    "sv5-charts",
+    "sv5-layer-control",
+    "sv5-maps",
+    "sv5-select",
+    "sv5-tables-ui",
+    "sv5-tables",
+    "table-good-or-bad",
+    "tabs",
+    "three-planes-serve",
+    "true-hornets-shave"
+  ]
+}

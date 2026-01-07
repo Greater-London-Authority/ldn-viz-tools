@@ -2,75 +2,39 @@
 	import { classNames, Overlay } from '@ldn-viz/ui';
 	import { BarsArrowDown, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { ComponentType } from 'svelte';
+	import type { HeaderProps } from '$lib/core/renderers/HeaderProps';
 
-	/**
-	 * Text of label/column heading.
-	 */
-	export let label: string;
-
-	/**
-	 * Text to display above the label (optional).
-	 */
-	export let superscriptText = '';
-
-	/**
-	 * If `true`, then allow user to sort by clicking on header.
-	 */
-	export let allowSorting = false;
-
-	/**
-	 * Current sort order (used to determine icons if `allowSorting` is `true`).
-	 */
-	export let order: 'ascending' | 'descending' | undefined = undefined;
-
-	/**
-	 * Function called when user changes sort order.
-	 */
-	export let toggle: (ev: Event) => void = () => {};
-
-	/**
-	 * Text to be displayed in tooltip/popover/modal after user hovers or clicks on info icon after column heading.
-	 */
-	export let hintText = '';
-
-	/**
-	 * A Svelte component to be displayed instead of hintText.
-	 */
-	export let hintComponent: undefined | ComponentType = undefined;
-
-	/**
-	 * The type of overlay in which the hint will be displayed.
-	 */
-	export let hintType: 'tooltip' | 'popover' | 'modal' = 'tooltip';
-
-	/**
-	 * The text color.
-	 */
-	export let color = '';
-
-	export let alignHeader: 'left' | 'right' | 'center' | undefined = 'left';
+	let {
+		label,
+		superscriptText = '',
+		allowSorting = false,
+		order = undefined,
+		toggle = () => {},
+		hintText = '',
+		hintComponent = undefined,
+		hintType = 'tooltip',
+		color = '',
+		alignHeader = 'left',
+		...rest
+	}: HeaderProps = $props();
 	const alignmentClasses = {
 		left: 'justify-start',
 		right: 'justify-end',
 		center: 'justify-center'
 	};
-	$: alignmentClass = alignmentClasses[alignHeader];
-
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let alignmentClass = $derived(alignmentClasses[alignHeader]);
 </script>
 
-<div class="font-semibold py-0.5 w-full h-full" style:color>
+<div class="h-full w-full py-0.5 font-semibold" style:color>
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<svelte:element
 		this={allowSorting ? 'button' : 'div'}
-		class={classNames('flex items-center select-none', alignmentClass)}
-		on:click={allowSorting ? toggle : undefined}
+		class={classNames('flex select-none items-center', alignmentClass)}
+		onclick={allowSorting ? toggle : undefined}
 	>
 		{#if superscriptText}
 			<div class="text-left">
-				<span class="font-normal text-xs">{superscriptText}</span><br />
+				<span class="text-xs font-normal">{superscriptText}</span><br />
 				<span>{label}</span>
 			</div>
 		{:else}
@@ -79,7 +43,8 @@
 			{#if hintText || hintComponent}
 				<Overlay hintLabel="" overlayType={hintType} modalTitle={label}>
 					{#if hintComponent}
-						<svelte:component this={hintComponent} />
+						{@const SvelteComponent = hintComponent}
+						<SvelteComponent />
 					{:else}
 						{hintText}
 					{/if}
@@ -91,7 +56,7 @@
 			<Icon
 				src={order ? BarsArrowDown : ChevronUpDown}
 				theme="mini"
-				class={classNames('ml-0.5 w-4 h-4', order === 'ascending' ? 'flipY' : '')}
+				class={classNames('ml-0.5 h-4 w-4', order === 'ascending' ? 'flipY' : '')}
 				aria-hidden="true"
 			/>
 		{/if}

@@ -1,16 +1,19 @@
-<script context="module">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapControlGroup, { MapControlGroupPositions } from './MapControlGroup.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlGroup',
 		component: MapControlGroup,
+		tags: ['autodocs'],
+		render: defaultTemplate,
+
 		parameters: {
 			layout: 'full'
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
@@ -25,9 +28,9 @@
 	import MapControlZoom from '../mapControlZoom/MapControlZoom.svelte';
 </script>
 
-<Template let:args>
+{#snippet defaultTemplate({ args })}
 	<MapControlGroup {...args} />
-</Template>
+{/snippet}
 
 <!--
 Group and position map controls using `<MapControlGroup position="...">`.
@@ -35,47 +38,51 @@ The named layout positions are shown around the edges of this map.
 If using typescript you can import the `MapControlGroupPositions`enum.
 -->
 <Story name="Positioning labels">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			{#each Object.keys(MapControlGroupPositions) as position}
-				<MapControlGroup {position}>
-					<p
-						class="bg-color-container-level-0 text-color-text-primary p-2 shadow border border-color-ui-border-secondary"
-					>
-						{position}
-					</p>
-				</MapControlGroup>
-			{/each}
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				{#each Object.keys(MapControlGroupPositions) as position (position)}
+					<MapControlGroup {position}>
+						<p
+							class="bg-color-container-level-0 text-color-text-primary border-color-ui-border-secondary border p-2 shadow"
+						>
+							{position}
+						</p>
+					</MapControlGroup>
+				{/each}
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- The alignment of elements within a `MapControlGroup` depends on its position. -->
 <Story name="Positioning controls">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			{#each Object.keys(MapControlGroupPositions) as position}
-				{#if position != 'TopRightOffset'}
-					<MapControlGroup {position}>
-						<MapControlLocationSearch
-							adapter={new MapGeocoderAdapterMapBox(
-								'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
-							)}
-						/>
-						<MapControlZoom />
-					</MapControlGroup>
-				{/if}
-			{/each}
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				{#each Object.keys(MapControlGroupPositions) as position (position)}
+					{#if position != 'TopRightOffset'}
+						<MapControlGroup {position}>
+							<MapControlLocationSearch
+								adapter={new MapGeocoderAdapterMapBox(
+									'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+								)}
+							/>
+							<MapControlZoom />
+						</MapControlGroup>
+					{/if}
+				{/each}
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <!--
@@ -83,37 +90,39 @@ Typically, controls on the left are standard for every map, whereas controls on 
 On small devices most controls will hide themselves.
 -->
 <Story name="Standard Layout">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapControlGroup position="TopLeft">
-				<MapControlLocationSearch
-					adapter={new MapGeocoderAdapterMapBox(
-						'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
-					)}
-				/>
-				<MapControlZoom />
-			</MapControlGroup>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch
+						adapter={new MapGeocoderAdapterMapBox(
+							'pk.eyJ1IjoiZ2xhLWdpcyIsImEiOiJjanBvNGh1bncwOTkzNDNueWt5MGU1ZGtiIn0.XFxLdq2dXttcXSXTiREPTA'
+						)}
+					/>
+					<MapControlZoom />
+				</MapControlGroup>
 
-			<MapControlGroup position="BottomLeft">
-				<MapControlFullscreen />
-				<MapControlRefresh />
-			</MapControlGroup>
+				<MapControlGroup position="BottomLeft">
+					<MapControlFullscreen />
+					<MapControlRefresh />
+				</MapControlGroup>
 
-			<MapControlGroup position="TopRight">
-				<p
-					class="bg-color-container-level-0 text-color-text-primary p-2 text-center pointer-events-auto shadow border border-color-ui-border-secondary"
-				>
-					Bespoke controls<br />E.g. Drawing
-				</p>
-			</MapControlGroup>
+				<MapControlGroup position="TopRight">
+					<p
+						class="bg-color-container-level-0 text-color-text-primary border-color-ui-border-secondary pointer-events-auto border p-2 text-center shadow"
+					>
+						Bespoke controls<br />E.g. Drawing
+					</p>
+				</MapControlGroup>
 
-			<MapControlGroup position="BottomRight">
-				<MapControlPan />
-			</MapControlGroup>
-		</Map>
-	</div>
+				<MapControlGroup position="BottomRight">
+					<MapControlPan />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
 </Story>

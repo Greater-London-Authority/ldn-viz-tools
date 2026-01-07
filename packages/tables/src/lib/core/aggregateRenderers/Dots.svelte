@@ -5,18 +5,10 @@
 	 * @component
 	 */
 
-	import { type ScaleLinear, scaleLinear } from 'd3-scale';
+	import { scaleLinear, type ScaleLinear } from 'd3-scale';
+	import type { DotsProps } from '$lib/core/aggregateRenderers/DotsProps';
 
-	/**
-	 * Array of values to be displayed.
-	 */
-	export let values: number[];
-	export let extent = [0, 1];
-
-	/**
-	 * Width of cell (in pixels).
-	 */
-	export let width = 100;
+	let { values, extent = [0, 1], width = 100, ...rest }: DotsProps = $props();
 
 	const height = 30;
 	const marginRight = 10;
@@ -25,8 +17,8 @@
 
 	const radius = 1;
 
-	const dodge = (values: number[]) => {
-		return values.map((v) => ({
+	const dodge = (values: number[], x: ScaleLinear<number, number>) => {
+		return (values || []).map((v) => ({
 			x: x(v),
 			y: Math.random(),
 			data: v
@@ -35,19 +27,10 @@
 
 	type DodgedVal = { x: number; y: number; data: number };
 
-	let dodgedValues: DodgedVal[] = [];
-	let x: ScaleLinear<number, number>;
+	//let x: ScaleLinear<number, number> = $state();
 
 	const useCanvas = true;
-	let canvasRef: HTMLCanvasElement;
-
-	const update = (values: number[]) => {
-		x = scaleLinear()
-			.domain(extent)
-			.range([marginLeft, width - marginRight]);
-
-		dodgedValues = dodge(values);
-	};
+	let canvasRef: HTMLCanvasElement = $state();
 
 	const drawCanvas = (dodgedValues: DodgedVal[], canvasRef: HTMLCanvasElement) => {
 		if (useCanvas && canvasRef && dodgedValues.length > 0) {
@@ -65,12 +48,19 @@
 		}
 	};
 
-	$: update(values);
-	$: drawCanvas(dodgedValues, canvasRef);
+	let x = $derived(
+		scaleLinear()
+			.domain(extent)
+			.range([marginLeft, width - marginRight])
+	);
 
-	// This suppresses warnings due to the RowRenderer providing props that aren't used.
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$$restProps;
+	let dodgedValues: DodgedVal[] = $derived.by(() => {
+		return dodge(values, x);
+	});
+
+	$effect(() => {
+		drawCanvas(dodgedValues, canvasRef);
+	});
 </script>
 
 {#if useCanvas}

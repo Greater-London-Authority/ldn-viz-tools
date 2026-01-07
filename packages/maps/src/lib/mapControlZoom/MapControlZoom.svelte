@@ -30,23 +30,23 @@
 	};
 </script>
 
-<div class="flex flex-col space-y-1 invisible sm:visible">
+<div class="invisible flex flex-col space-y-1 sm:visible">
 	<Button
 		variant="square"
 		emphasis="secondary"
 		title="Zoom in"
-		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
-		on:click={newHandler(zoomIn)}
+		class="dark:border-color-ui-border-primary pointer-events-auto shadow dark:border"
+		onclick={newHandler(zoomIn)}
 	>
-		<Icon src={PlusSmall} class="w-8 h-8 p-0.5" />
+		<Icon src={PlusSmall} class="h-8 w-8 p-0.5" />
 	</Button>
 	<Button
 		variant="square"
 		emphasis="secondary"
 		title="Zoom out"
-		class="pointer-events-auto shadow dark:border dark:border-color-ui-border-primary"
-		on:click={newHandler(zoomOut)}
+		class="dark:border-color-ui-border-primary pointer-events-auto shadow dark:border"
+		onclick={newHandler(zoomOut)}
 	>
-		<Icon src={MinusSmall} class="w-8 h-8 p-0.5" />
+		<Icon src={MinusSmall} class="h-8 w-8 p-0.5" />
 	</Button>
 </div>

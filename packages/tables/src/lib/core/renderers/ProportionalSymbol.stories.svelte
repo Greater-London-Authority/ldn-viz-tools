@@ -1,9 +1,12 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import ProportionalSymbol from './ProportionalSymbol.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/ProportionalSymbol',
 		component: ProportionalSymbol,
+		tags: ['autodocs'],
 
 		argTypes: {
 			value: {
@@ -17,15 +20,11 @@
 
 			extent: [0, 1]
 		}
-	};
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
-
-<Template let:args>
-	<ProportionalSymbol {...args} />
-</Template>
-
-<Story name="Default" source />
+<Story name="Default">
+	{#snippet template(args)}
+		<ProportionalSymbol {...args} />
+	{/snippet}
+</Story>

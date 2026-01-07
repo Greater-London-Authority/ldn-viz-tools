@@ -7,8 +7,7 @@
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import GroupSizeBar from './GroupSizeBar.svelte';
 
-	export let group;
-	export let table;
+	let { group, table } = $props();
 
 	const constructLabel = (group: Group) => {
 		return group.name.split(' ∩ ').slice(-1);
@@ -24,7 +23,7 @@
 	};
 </script>
 
-<div class="flex was-tr">
+<div class="was-tr flex">
 	{#each new Array(getGroupLevel(group.name)) as _i}
 		<!-- {@const g  = getGroup(group, i)} -->
 
@@ -33,14 +32,14 @@
 
 	<button
 		style:width={table.widths.groupControl}
-		on:click={() => table.toggleGroupCollapsed(group, true)}
+		onclick={() => table.toggleGroupCollapsed(group, true)}
 	>
 		<Icon
 			src={group.isExpanded ? ChevronDown : ChevronRight}
 			theme="solid"
-			class="w-[18px] h-[18px] ml-0.5"
+			class="ml-0.5 h-[18px] w-[18px]"
 			aria-hidden="true"
-			on:click={() => table.toggleGroupCollapsed(group, true)}
+			onclick={() => table.toggleGroupCollapsed(group, true)}
 		/>
 	</button>
 
@@ -112,8 +111,7 @@
 		{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 			<div style:width={col.computedWidth + 'px'} class="was-td">
 				{#if col.group && col.group.renderer}
-					<svelte:component
-						this={col.group.renderer}
+					<col.group.renderer
 						values={table.getValsForGroup(group, col.short_label)}
 						extent={table.extents[col.short_label]}
 						colorScale={table.scales[col.short_label]}

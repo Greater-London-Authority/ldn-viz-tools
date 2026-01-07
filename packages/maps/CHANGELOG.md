@@ -1,71 +1,48 @@
 # ldn-viz-tools-maps
 
-## 8.2.2
-
-### Patch Changes
-
-- 4e84ad2: FIXED: when uploading GeoJSON file, set list of features to just the uploaded features, rather than whole GeoJSON document
-- 4e84ad2: CHANGED: be more permissive in loading GeoJSON that wasn't created with TerraDRaw or the MapDrawing component, by defaulting tool to be polygon and replacing feature ids with a UUID4 (if they aren't already)
-
-## 8.2.1
-
-### Patch Changes
-
-- 8a8fa96: CHANGED: be more permissive in loading GeoJSON that wasn't created with TerraDRaw or the MapDrawing component, by defaulting tool to be polygon and replacing feature ids with a UUID4 (if they aren't already)
-
-## 8.2.0
+## 9.0.0-svelte5.6
 
 ### Minor Changes
 
-- c3f760c: CHANGED: 'Edit area' button says 'Add area' if no areas have been drawn
+- a12ef0c: ADDED: export onClickPopoverHandler
 
-## 8.1.3
-
-### Patch Changes
-
-- 500256c: FIXED: fixes to the MapDraw component
-
-## 8.1.2
-
-### Patch Changes
-
-- b4dace5: FIXED: MapDraw component can load initial state
-
-## 8.1.1
-
-### Patch Changes
-
-- 5478a0f: FIXED: fixed path for an import from `@ldn-viz/ui` by `MapDraw` that only works in monorepo, not in projects
-
-## 8.1.0
+## 9.0.0-svelte5.5
 
 ### Minor Changes
 
-- b1f6fc7: Added: MapDraw component
+- ee28e46: CHANGED: when theme is changed, update basemap style with MapLibre's `setStyle()` method, rather than re-creating map
 
-## 8.0.1
+## 9.0.0-svelte5.4
 
 ### Patch Changes
 
-- 24cc3ad: Changed: Update geocoder from MapBox API to Searchbox API. This means that Points of Interest again appear in the results.
+- @ldn-viz/utils@1.1.1-svelte5.0
 
-## 8.0.0
+## 9.0.0-svelte5.3
+
+### Minor Changes
+
+- 7018a1a: FIXED: fix bug that would cause `MapDeckOverlay` to replace the `DeckOverlay` object whenever layers were updated
+
+## 9.0.0-svelte5.2
+
+### Minor Changes
+
+- 5e5408a: CHANGED: apply styling to MapDeckTooltips
+
+## 9.0.0-svelte5.1
+
+### Patch Changes
+
+- 289e9be: Added changes from svelte4 geocoder (issue #912) to be pulled into svelte5 branch
+
+## 9.0.0-svelte5.0
 
 ### Major Changes
 
-- e8c3af7: ADDED: `MapLegend` component
+- a955822: CHANGED: update to use Svelte 5 and runes.
 
-## 7.6.1
-
-### Patch Changes
-
-- f9d211e: FIXED: export functions needed to use `MapDeckPopovers` and `MapDeckTooltips` components
-
-## 7.6.0
-
-### Minor Changes
-
-- f8f4708: ADDED: `MapDeckPopovers` and `MapDeckTooltips` to easily add popovers or tooltips to multiple Deck.gl layers
+  CHANGED: `GeoJSONMapLayerSource` no longer has a `dataStore` prop.
 
 ## 7.5.0
 

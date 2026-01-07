@@ -10,23 +10,33 @@
 	 * @component
 	 */
 
-	import { prefersReducedMotion, Spinner } from '@ldn-viz/ui';
 	import { Clock } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Spinner from '../spinners/Spinner.svelte';
+	import { prefersReducedMotion } from '../userPreference/userPreference';
 
-	/**
-	 * Describes the state change (i.e. appearance of Spinner or icon while loading) for screen reader users.
-	 */
-	export let title = 'Loading';
+	interface Props {
+		/**
+		 * Describes the state change (i.e. appearance of Spinner or icon while loading) for screen reader users.
+		 */
+		title?: string;
 
-	/**
-	 * Customise the styling of the `<Spinner>` arc.
-	 */
-	export let arcColorClass = '';
+		/**
+		 * Customise the styling of the `<Spinner>` arc.
+		 */
+		arcColorClass?: string;
+
+		/**
+		 * Customise the styling by passing tailwind classes.
+		 */
+		class: string;
+	}
+
+	let { title = 'Loading', arcColorClass = '', class: classes = '' }: Props = $props();
 </script>
 
-{#if $prefersReducedMotion}
-	<Icon src={Clock} theme="solid" class={$$props.class} {title} aria-hidden="false" />
+{#if prefersReducedMotion.current}
+	<Icon src={Clock} theme="solid" class={classes} {title} aria-hidden="false" />
 {:else}
-	<Spinner {arcColorClass} class={$$props.class} {title} />
+	<Spinner {arcColorClass} class={classes} {title} />
 {/if}

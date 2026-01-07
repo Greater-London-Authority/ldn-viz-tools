@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	type SidebarHeaderBrandClass = {
 		[key: string]: string;
 	};
@@ -16,36 +16,40 @@
 	 */
 	import { classNames } from '../../../utils/classNames';
 
-	/**
-	 * The title to display in the header.
-	 */
-	export let title: string;
+	interface Props {
+		/**
+		 * The title to display in the header.
+		 */
+		title: string;
+		/**
+		 * If `true`, then a blue ribbon is added to the left of the title.
+		 */
+		branded?: 'true' | 'false';
+		hint?: import('svelte').Snippet;
+		subTitle?: import('svelte').Snippet;
+	}
 
-	/**
-	 * If `true`, then a blue ribbon is added to the left of the title.
-	 */
-	export let branded: 'true' | 'false' = 'true';
+	let { title, branded = 'true', hint, subTitle }: Props = $props();
 
-	$: headerClasses = classNames(
-		'py-1 bg-color-container-level-1 text-color-text-primary',
-		brandClasses[branded]
+	let headerClasses = $derived(
+		classNames('py-1 bg-color-container-level-1 text-color-text-primary', brandClasses[branded])
 	);
 </script>
 
 <header class={headerClasses}>
-	<div class="flex justify-between items-end">
-		<h1 class="text-xl font-bold">{@html title}</h1>
+	<div class="flex items-end justify-between">
+		<h1 class="text-xl font-bold leading-tight">{@html title}</h1>
 
-		{#if $$slots.hint}
+		{#if hint}
 			<!-- An optional `<Overlay>` component to provide additional explanation. -->
-			<slot name="hint" />
+			{@render hint?.()}
 		{/if}
 	</div>
 
-	{#if $$slots.subTitle}
-		<div class="text-sm pt-1">
+	{#if subTitle}
+		<div class="pt-1 text-sm">
 			<!-- Optional longer subtitle to display below the main title. -->
-			<slot name="subTitle" />
+			{@render subTitle?.()}
 		</div>
 	{/if}
 </header>

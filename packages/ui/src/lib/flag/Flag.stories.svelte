@@ -1,42 +1,39 @@
-<script context="module">
-	import Flag from './Flag.svelte';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Flag, { type FlagCondition } from './Flag.svelte';
 
-	export const meta = {
+	/**
+	 * The `<Flag>` component displays a message at the top of a page (e.g., to indicate that it is in Beta release).
+	 */
+
+	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Flag',
 		component: Flag,
-
+		tags: ['autodocs'],
 		argTypes: {
 			condition: {
 				options: ['alpha', 'beta', 'alert', 'warning', 'positive', 'notice'],
 				control: { type: 'select' }
 			}
 		}
-	};
+	});
 
-	const conditions = ['alpha', 'beta', 'alert', 'warning', 'positive', 'notice'];
+	const conditions: FlagCondition[] = ['alpha', 'beta', 'alert', 'warning', 'positive', 'notice'];
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-</script>
+<Story name="Default" />
 
-<Template let:args>
-	<Flag {...args}>This is a flag</Flag>
-</Template>
-
-<Story name="Default" source />
-
-<Story name="Default Messages">
+<Story name="Default Messages" asChild>
 	<div class="flex flex-col gap-4">
-		{#each ['alpha', 'beta'] as condition}
+		{#each conditions.filter((d) => d === 'alpha' || d === 'beta') as condition (condition)}
 			<Flag {condition} />
 		{/each}
 	</div>
 </Story>
 
-<Story name="Levels">
+<Story name="Levels" asChild>
 	<div class="flex flex-col gap-4">
-		{#each conditions as condition}
+		{#each conditions as condition (condition)}
 			<Flag {condition}>
 				{condition}
 			</Flag>
@@ -44,6 +41,6 @@
 	</div>
 </Story>
 
-<Story name="Links">
+<Story name="Links" asChild>
 	<Flag condition="alpha" link="https://apps.london.gov.uk">This site is in beta.</Flag>
 </Story>

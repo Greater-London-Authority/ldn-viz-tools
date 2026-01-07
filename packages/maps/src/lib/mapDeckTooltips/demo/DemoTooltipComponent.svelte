@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { Feature } from 'geojson';
 
-	export let feature: undefined | Feature = undefined;
+	interface Props {
+		feature?: undefined | Feature;
+	}
+
+	let { feature = undefined }: Props = $props();
 </script>
 
 {#if feature}

@@ -1,10 +1,18 @@
-<script context="module">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import ObservablePlotInner from './ObservablePlotInner.svelte';
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	export const meta = {
+	import ObservablePlotInner from './ObservablePlotInner.svelte';
+	/**
+	 * The `ObservablePlotInner` component allows the rendering of visualisations using the [Observable Plot](https://observablehq.com/plot/) library.
+	 * It does *not* apply the  [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation) as a wrapper:
+	 * if you require this, use the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) component instead.
+	 *
+	 * **Note**: if you use this instead of the `ObservablePlot` component, ensure you add a description of the chart somewhere on the page with an `id` equal to the value of `ariaDescribedBy` for screen reader use.
+	 */
+	const { Story } = defineMeta({
 		title: 'Charts/Components/ObservablePlotInner',
 		component: ObservablePlotInner,
+		tags: ['autodocs'],
 
 		argTypes: {
 			// this is a module export, not a prop, so don't include it in table
@@ -14,64 +22,73 @@
 				}
 			}
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
-	import * as Plot from '@observablehq/plot';
+	import { Plot } from '../observablePlotFragments/plot';
+	import * as UnstyledPlot from '@observablehq/plot';
+	import { monthlyData } from '../../data/demoData';
+	import { format } from 'd3-format';
 
-	import { getDefaultPlotStyles } from '../observablePlotFragments/observablePlotFragments';
+	const chartData = monthlyData.filter((d) => d.Variable === 'Variable A');
 
-	import { penguins } from '../../data/demoData';
-
-	$: ({
-		defaultDot,
-		defaultGridX,
-		defaultGridY,
-		defaultSize,
-		defaultStyle,
-		defaultTip,
-		defaultXAxis,
-		defaultXScale,
-		defaultYAxis,
-		defaultYScale,
-		defaultRule
-	} = getDefaultPlotStyles());
-
-	$: spec = {
-		style: {
-			...defaultStyle
-		},
-
-		...defaultSize,
-
-		x: { ...defaultXScale },
-
-		y: { ...defaultYScale },
-
+	// Spec and data for single line example (default)
+	let spec = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
 		marks: [
-			Plot.gridX({ ...defaultGridX }),
-			Plot.gridY({ ...defaultGridY }),
-			Plot.ruleY([0], { ...defaultRule }),
-			Plot.ruleX([0], { ...defaultRule }),
-			Plot.dot(penguins, { ...defaultDot, x: 'culmen_length_mm', y: 'culmen_depth_mm' }), // instead of defaultPoint
-			Plot.axisX({ ...defaultXAxis }),
-			Plot.axisY({ ...defaultYAxis, label: 'culmen_depth_mm' }),
-			Plot.tip(
-				penguins,
-				Plot.pointerX({ ...defaultTip, x: 'culmen_length_mm', y: 'culmen_depth_mm' })
-			)
+			Plot.axisX({ label: null, interval: '1 year' }),
+			Plot.axisY({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			})
 		]
-	};
+	});
 </script>
 
-<Template let:args>
-	<ObservablePlotInner
-		{...args}
-		{spec}
-		title="Penguin Culmens"
-		subTitle="A scatterplot of depth against length"
-	/>
-</Template>
+<Story name="Default">
+	{#snippet template(args)}
+		<ObservablePlotInner {...args} {spec} />
+	{/snippet}
+</Story>
 
-<Story name="Default" args={{ spec }} source />
+<Story name="Defaults not Applied">
+	{#snippet template(args)}
+		<ObservablePlotInner {...args} applyDefaults={false} {spec} />
+	{/snippet}
+</Story>
+
+<Story name="Unstyled Plot">
+	{#snippet template(args)}
+		<ObservablePlotInner
+			{...args}
+			applyDefaults={false}
+			spec={{
+				x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+				marks: [
+					UnstyledPlot.axisX({ label: null, interval: '1 year' }),
+					UnstyledPlot.axisY({ label: null, tickFormat: (d) => '£' + format(',.4~s')(d) }),
+					UnstyledPlot.ruleY([0]),
+					UnstyledPlot.line(chartData, {
+						x: 'Month',
+						y: 'Value',
+						tip: {
+							format: {
+								x: true,
+								y: (d) => '£' + format(',.4~s')(d)
+							}
+						}
+					})
+				]
+			}}
+		/>
+	{/snippet}
+</Story>

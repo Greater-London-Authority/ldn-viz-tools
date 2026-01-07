@@ -1,17 +1,58 @@
 # @ldn-viz/tables
 
-## 3.3.0
-
-### Minor Changes
-
-- b9c85da: ADDED: it is now possible to customize the color of column headers and column group headers.
-  Where more customization is needed, it is also possible to specify a custom renderer component (as was already possible for the cell and column summary renderers)
-  CHANGED: column headings are now semi-bold (rather than bold)
+## 5.0.0-svelte5.3
 
 ### Patch Changes
 
-- Updated dependencies [8bde3bc]
-  - @ldn-viz/charts@5.3.0
+- Updated dependencies [0998f50]
+- Updated dependencies [31020f3]
+  - @ldn-viz/themes@6.1.0-svelte5.0
+  - @ldn-viz/ui@21.0.0-svelte5.3
+  - @ldn-viz/utils@1.1.1-svelte5.0
+  - @ldn-viz/charts@7.0.0-svelte5.3
+
+## 5.0.0-svelte5.2
+
+### Patch Changes
+
+- Updated dependencies [5e5408a]
+  - @ldn-viz/ui@21.0.0-svelte5.2
+  - @ldn-viz/charts@7.0.0-svelte5.2
+
+## 5.0.0-svelte5.1
+
+### Minor Changes
+
+- 20fdf21: CHANGED: replace a <p> tag with a <div> tag
+
+### Patch Changes
+
+- Updated dependencies [0954da1]
+- Updated dependencies [289e9be]
+- Updated dependencies [46b4fab]
+- Updated dependencies [6b37511]
+- Updated dependencies [dc25586]
+  - @ldn-viz/charts@7.0.0-svelte5.1
+  - @ldn-viz/ui@21.0.0-svelte5.1
+
+## 5.0.0-svelte5.0
+
+### Major Changes
+
+- 628016d: CHANGED: update to use Svelte 5 and runes.
+
+### Patch Changes
+
+- Updated dependencies [7962ee6]
+- Updated dependencies [953d10c]
+- Updated dependencies [a81fb27]
+- Updated dependencies [4f1111a]
+- Updated dependencies [4046add]
+- Updated dependencies [0879ce9]
+- Updated dependencies [628016d]
+- Updated dependencies [7962ee6]
+  - @ldn-viz/ui@21.0.0-svelte5.0
+  - @ldn-viz/charts@7.0.0-svelte5.0
 
 ## 3.2.0
 

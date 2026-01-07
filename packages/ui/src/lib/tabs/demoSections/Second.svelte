@@ -11,5 +11,5 @@
 	</p>
 </div>
 <div class="bg-color-data-primary p-8">
-	<p class="text-xl text-color-static-white">This is not prose</p>
+	<p class="text-color-static-white text-xl">This is not prose</p>
 </div>

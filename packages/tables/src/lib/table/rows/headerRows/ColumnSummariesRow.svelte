@@ -3,19 +3,17 @@
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
-	export let table;
-	export let data;
+	let { table, data } = $props();
 </script>
 
 <Scaffolding {table}>
-	<svelte:fragment slot="dataColumns">
+	{#snippet dataColumns()}
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
-				<div role="columnheader" class="flex was-th" style:width={col.computedWidth + 'px'}>
+				<div role="columnheader" class="was-th flex" style:width={col.computedWidth + 'px'}>
 					<!-- or 100 width -->
 					{#if col.column && col.column.renderer}
-						<svelte:component
-							this={col.column.renderer}
+						<col.column.renderer
 							{table}
 							values={data.map((d) => d[col.short_label])}
 							extent={table.extents[col.short_label]}
@@ -37,5 +35,5 @@
 
 			<ColGroupSpacer {table} {i} />
 		{/each}
-	</svelte:fragment>
+	{/snippet}
 </Scaffolding>

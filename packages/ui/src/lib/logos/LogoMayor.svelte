@@ -1,7 +1,15 @@
+<script lang="ts">
+	interface Props {
+		[key: string]: any;
+	}
+
+	let { ...rest }: Props = $props();
+</script>
+
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	preserveAspectRatio="xMidYMid"
-	{...$$restProps}
+	{...rest}
 	viewBox="0 0 207 15.969"
 	fill="currentColor"
 >

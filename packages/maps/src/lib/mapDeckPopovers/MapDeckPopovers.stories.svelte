@@ -1,24 +1,26 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapDeckPopovers from './MapDeckPopovers.svelte';
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/MapDeckPopovers',
 		component: MapDeckPopovers,
+		tags: ['autodocs'],
+
 		parameters: {
 			layout: 'full'
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
+	import type { Layer } from '@deck.gl/core/typed';
 	import { MVTLayer } from '@deck.gl/geo-layers/typed';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+	import { Checkbox } from '@ldn-viz/ui';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
-	import { Checkbox } from '@ldn-viz/ui';
-	import { onClickPopoverHandler } from './stores';
 	import DemoPopoverComponent from './demo/DemoPopoverComponent.svelte';
-	import type { Layer } from '@deck.gl/core/typed';
+	import { onClickPopoverHandler } from './stores';
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const TILE_BASE_URL = 'https://d1lfm2zniswzpu.cloudfront.net';
 	const getBoroughLayer = () => {
@@ -52,94 +54,96 @@
 		});
 	};
 
-	let showWards = false;
-	let showBoroughs = true;
-	let layers: Layer[] = [];
-	$: {
-		layers = [];
+	let showWards = $state(false);
+	let showBoroughs = $state(true);
+	let layers: Layer[] = $derived.by(() => {
+		const l = [];
 		if (showWards) {
-			layers.push(getWardsLayer());
+			l.push(getWardsLayer());
 		}
 		if (showBoroughs) {
-			layers.push(getBoroughLayer());
+			l.push(getBoroughLayer());
 		}
-	}
+		return l;
+	});
 </script>
-
-<Template let:args>
-	<MapDeckPopovers {...args} />
-</Template>
 
 <!-- Here every feature in a layer is assigned the same string as a popover. -->
 <Story name="Example - spec as string">
-	<Checkbox label="Show wards" bind:checked={showWards} />
-	<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay {layers} />
-
-			<MapDeckPopovers
-				{layers}
-				spec={{
-					wardLayer: 'This is one of the Wards',
-					boroughLayer: 'This is one of the Boroughs'
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
-			/>
-		</Map>
-	</div>
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckPopovers
+					{layers}
+					spec={{
+						wardLayer: 'This is one of the Wards',
+						boroughLayer: 'This is one of the Boroughs'
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- Here the popover contents are given by applying a function (which is the same for all features in a layer, but may be different between layers) to the feature. -->
 <Story name="Example - spec as function">
-	<Checkbox label="Show wards" bind:checked={showWards} />
-	<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay {layers} />
-
-			<MapDeckPopovers
-				{layers}
-				spec={{
-					wardLayer: (feature) => feature.properties.wd22nm,
-					boroughLayer: (feature) => feature.properties.name
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
-			/>
-		</Map>
-	</div>
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckPopovers
+					{layers}
+					spec={{
+						wardLayer: (feature) => feature.properties.wd22nm,
+						boroughLayer: (feature) => feature.properties.name
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- Here the popover is rendered by a custom component, which ahs access to the feature object.
   Each layer can use a separate component to render the popovers for its features.
   -->
 <Story name="Example - spec as components">
-	<Checkbox label="Show wards" bind:checked={showWards} />
-	<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
 
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapDeckOverlay {layers} />
-
-			<MapDeckPopovers
-				{layers}
-				spec={{
-					wardLayer: DemoPopoverComponent,
-					boroughLayer: DemoPopoverComponent
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
-			/>
-		</Map>
-	</div>
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckPopovers
+					{layers}
+					spec={{
+						wardLayer: DemoPopoverComponent,
+						boroughLayer: DemoPopoverComponent
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
 </Story>

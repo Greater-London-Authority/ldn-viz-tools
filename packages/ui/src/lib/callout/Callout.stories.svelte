@@ -1,116 +1,104 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Button from '../button/Button.svelte';
 	import Callout from './Callout.svelte';
 
-	export const meta = {
+	/**
+	 * The `Callout` component is used to display a short message in a coloured banner.
+	 */
+
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Callout',
 		component: Callout,
-		argTypes: {
-			id: {
-				control: { type: 'text' },
-				table: {
-					defaultValue: { summary: '' },
-					type: { summary: 'string' }
-				}
-			},
-			status: {
-				options: ['notice', 'success', 'warning', 'error'],
-				control: { type: 'select' }
-			},
-			size: {
-				options: ['sm', 'md', 'lg'],
-				control: { type: 'select' }
-			}
-		},
-		args: {
-			status: 'notice',
-			size: 'md'
-		}
-	};
+		tags: ['autodocs']
+	});
 </script>
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import Button from '../button/Button.svelte';
-</script>
-
-<Template let:args>
-	<Callout {...args}>
-		<svelte:fragment slot="title">The title!</svelte:fragment>
-
-		<svelte:fragment slot="body">The body!</svelte:fragment>
-	</Callout>
-</Template>
-
-<Story name="Default" source />
-
-<Story name="Sizes" source>
-	<div class="space-y-4">
-		<Callout status="notice" size="sm">
-			<span slot="title">Hey look at this</span>
-
-			<div slot="body">
-				<p>
-					For quick in context callouts <a
-						href="mailto:some-email-address@example.com"
-						class="underline hover:no-underline"
-					>
-						Report it here
-					</a>
-				</p>
-			</div>
+<Story name="Default">
+	{#snippet template(args)}
+		<Callout {...args}>
+			{#snippet title()}The title!{/snippet}
+			{#snippet body()}The body!{/snippet}
 		</Callout>
-		<Callout status="warning" size="md">
-			<span slot="title">Something has gone wrong</span>
-
-			<div slot="body">
-				<p>
-					Click on the button to return home. If the error persists please <a
-						href="mailto:some-email-address@example.com"
-						class="underline hover:no-underline">Report it here</a
-					>
-				</p>
-			</div>
-
-			<div slot="more">
-				<Button href={`/`} size="sm" condition="warning">Take me home</Button>
-			</div>
-		</Callout>
-		<Callout status="error" size="lg">
-			<span slot="title">Something has gone very wrong</span>
-
-			<div slot="body">
-				<p>
-					<span class="font-bold">DO NOT</span> Click on the button!. If the error persists please
-					<a href="mailto:some-email-address@example.com" class="underline hover:no-underline"
-						>Report it here</a
-					>
-				</p>
-			</div>
-
-			<div slot="more">
-				<Button href={`/`} condition="error">Abort Action</Button>
-			</div>
-		</Callout>
-	</div>
+	{/snippet}
 </Story>
 
-<Story name="With 'more'" source>
-	<Callout status="warning">
-		<span slot="title">Something has gone wrong</span>
+<Story name="With Action">
+	{#snippet template(args)}
+		<Callout {...args}>
+			{#snippet title()}The title!{/snippet}
+			{#snippet body()}The body!{/snippet}
+			{#snippet more()}<Button>More info</Button>{/snippet}
+		</Callout>
+	{/snippet}
+</Story>
 
-		<div slot="body">
-			<p>
-				Click on the button to return home. If the error persists please <a
-					href="mailto:some-email-address@example.com"
-					class="underline hover:no-underline">Report it here</a
-				>
-			</p>
-		</div>
+<Story name="Statuses">
+	{#snippet template(args)}
+		<div class="space-y-4">
+			<Callout {...args} status="notice">
+				{#snippet title()}Notice{/snippet}
+				{#snippet body()}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ex
+					justo. Nulla tristique molestie turpis id vestibulum. Proin sapien elit, accumsan a tellus
+					eleifend, convallis elementum justo. Mauris luctus fermentum mauris nec euismod. Vivamus
+					ut ultricies eros. Integer vel velit arcu.{/snippet}
+			</Callout>
 
-		<div slot="more">
-			<Button href={`/`}>Take me home</Button>
+			<Callout {...args} status="positive">
+				{#snippet title()}Positive{/snippet}
+				{#snippet body()}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ex
+					justo. Nulla tristique molestie turpis id vestibulum. Proin sapien elit, accumsan a tellus
+					eleifend, convallis elementum justo. Mauris luctus fermentum mauris nec euismod. Vivamus
+					ut ultricies eros. Integer vel velit arcu.{/snippet}
+			</Callout>
+
+			<Callout {...args} status="caution">
+				{#snippet title()}Caution{/snippet}
+				{#snippet body()}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ex
+					justo. Nulla tristique molestie turpis id vestibulum. Proin sapien elit, accumsan a tellus
+					eleifend, convallis elementum justo. Mauris luctus fermentum mauris nec euismod. Vivamus
+					ut ultricies eros. Integer vel velit arcu.{/snippet}
+			</Callout>
+
+			<Callout {...args} status="negative">
+				{#snippet title()}Negative{/snippet}
+				{#snippet body()}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ex
+					justo. Nulla tristique molestie turpis id vestibulum. Proin sapien elit, accumsan a tellus
+					eleifend, convallis elementum justo. Mauris luctus fermentum mauris nec euismod. Vivamus
+					ut ultricies eros. Integer vel velit arcu.{/snippet}
+			</Callout>
 		</div>
-	</Callout>
+	{/snippet}
+</Story>
+
+<Story name="Sizes">
+	{#snippet template(args)}
+		<div class="space-y-4">
+			<Callout {...args} size="sm">
+				{#snippet title()}Size: sm{/snippet}
+				{#snippet body()}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ex
+					justo. Nulla tristique molestie turpis id vestibulum. Proin sapien elit, accumsan a tellus
+					eleifend, convallis elementum justo. Mauris luctus fermentum mauris nec euismod. Vivamus
+					ut ultricies eros. Integer vel velit arcu.{/snippet}
+			</Callout>
+
+			<Callout {...args} size="md">
+				{#snippet title()}Size: md{/snippet}
+				{#snippet body()}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ex
+					justo. Nulla tristique molestie turpis id vestibulum. Proin sapien elit, accumsan a tellus
+					eleifend, convallis elementum justo. Mauris luctus fermentum mauris nec euismod. Vivamus
+					ut ultricies eros. Integer vel velit arcu.{/snippet}
+			</Callout>
+
+			<Callout {...args} size="lg">
+				{#snippet title()}Size: lg{/snippet}
+				{#snippet body()}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ex
+					justo. Nulla tristique molestie turpis id vestibulum. Proin sapien elit, accumsan a tellus
+					eleifend, convallis elementum justo. Mauris luctus fermentum mauris nec euismod. Vivamus
+					ut ultricies eros. Integer vel velit arcu.{/snippet}
+			</Callout>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- When there is no heading in the callout (that is, no title slot in use), you must define an
@@ -128,14 +116,17 @@
 	</Callout>
 ```
 -->
-<Story name="No title" source>
-	<Callout ariaTitle="Learn about chart methodology">
-		<div slot="body">
-			<p>
-				You can find out more about <a href="www.example.com" class="underline hover:no-underline"
-					>the chart methodology</a
-				>.
-			</p>
-		</div>
-	</Callout>
+<Story name="No title">
+	{#snippet template(args)}
+		<Callout {...args} ariaTitle="Learn about chart methodology">
+			{#snippet body()}
+				<p>
+					You can find out more about
+					<a href="www.example.com" class="underline hover:no-underline">
+						the chart methodology
+					</a>.
+				</p>
+			{/snippet}
+		</Callout>
+	{/snippet}
 </Story>

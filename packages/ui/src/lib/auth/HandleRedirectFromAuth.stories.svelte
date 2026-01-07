@@ -1,14 +1,13 @@
-<script context="module">
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+
 	import HandleRedirectFromAuth from './HandleRedirectFromAuth.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Auth/HandleRedirectFromAuth',
-		component: HandleRedirectFromAuth
-	};
-</script>
-
-<script lang="ts">
-	import { Story } from '@storybook/addon-svelte-csf';
+		component: HandleRedirectFromAuth,
+		tags: ['autodocs']
+	});
 </script>
 
 <!-- This story is empty, as we don't actually want to redirect from Storybook. -->

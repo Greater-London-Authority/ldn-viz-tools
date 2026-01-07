@@ -1,79 +1,69 @@
 <script lang="ts">
-	/**
-	 * The `<Modal>` component provides content overlaid on the rest of the UI. It can provide the user with additional contextual information, or prompt for user interaction.
-	 * It can be dismissed by clicking elsewhere on the screen, clicking on the close button, or pressing the Escape key.
-	 *
-	 * **Alternatives**: to display shorter messages less intrusively, consider using a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation).
-	 * To display messages that remain open until dismissed, but are displayed close to the element that triggered them, consider using a [Popover](./?path=/docs/ui-components-overlays-popover--documentation).
-	 * @component
-	 */
-
-	import { createDialog } from '@melt-ui/svelte';
-	import { XMark } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
+	import type { Snippet } from 'svelte';
+	import { Dialog, type WithoutChild } from 'bits-ui';
+	import { classNames } from '../utils/classNames.js';
 	import Button from '../button/Button.svelte';
-	import { classNames } from '../utils/classNames';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { XMark } from '@steeze-ui/heroicons';
+	import Trigger from '../overlay/Trigger.svelte';
 
-	/**
-	 * Boolean that determines whether the modal is currently open.
-	 */
-	export let isOpen = false;
+	type Props = Dialog.RootProps & {
+		hintLabel?: string;
+		title?: Snippet;
+		description?: Snippet;
+		trigger?: Snippet<[Record<string, any>]>;
+		buttons?: Snippet;
 
-	const isOpenStore = writable(isOpen);
+		width?:
+			| 'xs'
+			| 'sm'
+			| 'md'
+			| 'lg'
+			| 'xl'
+			| '2xl'
+			| '3xl'
+			| '4xl'
+			| '5xl'
+			| '6xl'
+			| '7xl'
+			| 'full';
 
-	export let customOpenFocus = () => {
-		const customElToFocus = document.getElementById($meltDescription.id);
-		return customElToFocus;
+		headerTheme?: 'light' | 'dark';
+
+		contentProps?: WithoutChild<Dialog.ContentProps>;
+		// ...other component props if you wish to pass them
 	};
 
-	const {
-		elements: {
-			trigger,
-			portalled,
-			overlay,
-			content,
-			title: meltTitle,
-			description: meltDescription,
-			close
-		},
-		states: { open }
-	} = createDialog({ open: isOpenStore, openFocus: customOpenFocus });
+	let {
+		open = $bindable(false),
+		children,
+		hintLabel,
+		contentProps,
+		/**
+		 * Title that appears at the top of the modal
+		 */
+		title,
 
-	/**
-	 * Title that appears at the top of the modal
-	 */
-	export let title: string;
+		/**
+		 * Description that appears below the title
+		 */
+		description,
 
-	/**
-	 * Description that appears below the title (the `aria-describedby` for the modal points to the element containing this text)
-	 */
-	export let description: string = '';
+		trigger,
 
-	/**
-	 * Colour scheme to apply to the header, either `light` or `dark`. The modal will respect global theme settings.
-	 */
-	export let headerTheme: 'light' | 'dark' = 'dark';
+		buttons,
+		/**
+		 * width of the modal
+		 */
+		width = 'md',
 
-	/**
-	 * width of the modal
-	 */
-	export let width:
-		| 'xs'
-		| 'sm'
-		| 'md'
-		| 'lg'
-		| 'xl'
-		| '2xl'
-		| '3xl'
-		| '4xl'
-		| '5xl'
-		| '6xl'
-		| '7xl'
-		| 'full' = 'md';
+		/**
+		 * Colour scheme to apply to the header, either `light` or `dark`. The modal will respect global theme settings.
+		 */
+		headerTheme = 'dark',
 
-	const hasChildren = Object.keys($$slots).length > 0;
+		...restProps
+	}: Props = $props();
 
 	const widthClasses = {
 		xs: 'max-w-xs',
@@ -90,75 +80,65 @@
 		full: 'max-w-full'
 	};
 
-	$: modalClass = classNames(
+	const modalClass = classNames(
 		'inline-block w-full max-h-full flex flex-col overflow-hidden text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
 		widthClasses[width]
 	);
-
-	$: toggledExternally(isOpen);
-	const toggledExternally = (newIsOpen: boolean) => {
-		if ($isOpenStore != newIsOpen) {
-			$isOpenStore = newIsOpen;
-		}
-	};
-
-	$: toggledInternally($isOpenStore);
-	const toggledInternally = (newStoreValue: boolean) => {
-		if (newStoreValue != isOpen) {
-			isOpen = newStoreValue;
-		}
-	};
-
-	setContext('triggerFuncs', { action: trigger, actionProps: $trigger });
 </script>
 
-{#if $$slots.trigger}
-	<slot name="trigger" />
-{/if}
+{#snippet modalTrigger()}
+	{#if trigger}
+		<Dialog.Trigger>
+			{#snippet child({ props })}
+				{@render trigger({ ...props })}
+			{/snippet}
+		</Dialog.Trigger>
+	{:else}
+		<Dialog.Trigger>
+			{#snippet child({ props })}
+				<Trigger {...props} {hintLabel} />
+			{/snippet}
+		</Dialog.Trigger>
+	{/if}
+{/snippet}
 
-{#if $open}
-	<div {...$portalled} use:$portalled.action>
-		<div {...$overlay} use:$overlay.action class="fixed inset-0 bg-black bg-opacity-40 z-40" />
+<Dialog.Root bind:open {...restProps}>
+	{@render modalTrigger()}
 
-		<div class="fixed inset-2 sm:inset-8 flex items-center justify-center pointer-events-none z-50">
-			<div {...$content} use:$content.action class={modalClass}>
+	<Dialog.Portal>
+		<Dialog.Overlay class="fixed inset-0 z-40 bg-black/60" />
+		<div class="pointer-events-none fixed inset-8 z-50 flex items-center justify-center">
+			<Dialog.Content {...contentProps} class={modalClass}>
 				<div
-					class={`bg-color-container-level-1 text-color-text-primary p-3 pr-4 relative flex items-center justify-between border-l-[5px] border-color-static-brand ${headerTheme}`}
+					class={`border-color-static-brand bg-color-container-level-1 text-color-text-primary relative flex items-center justify-between border-l-[5px] p-3 pr-4 ${headerTheme}`}
 				>
-					<div class="text-lg font-medium" {...$meltTitle} use:$meltTitle.action tabindex="-1">
-						{title}
-					</div>
-					<div {...$close} use:$close.action>
-						<Button
-							variant="square"
-							emphasis="secondary"
-							class="w-8 h-8 self-center"
-							on:click={() => ($isOpenStore = false)}
-						>
-							<span class="sr-only">Close</span>
-							<Icon src={XMark} theme="solid" class="w-6 h-6" aria-hidden="true" />
-						</Button>
-					</div>
+					<Dialog.Title class="font-medium">
+						{@render title?.()}
+					</Dialog.Title>
+					<Dialog.Close>
+						{#snippet child({ props })}
+							<Button {...props} variant="square" emphasis="secondary" class="h-8 w-8 self-center">
+								<span class="sr-only">Close</span>
+								<Icon src={XMark} theme="solid" class="h-6 w-6" aria-hidden="true" />
+							</Button>
+						{/snippet}
+					</Dialog.Close>
 				</div>
 
-				<div class="overflow-y-auto" aria-labelledby={$meltTitle.id}>
+				<div class="overflow-y-auto">
 					<div class="px-4 py-6">
-						<div {...$meltDescription} use:$meltDescription.action tabindex="-1">
-							{description}
-						</div>
-
-						{#if hasChildren}
-							<!-- content to display below the `description`-->
-							<slot />
-						{/if}
+						<Dialog.Description>
+							{@render description?.()}
+						</Dialog.Description>
+						{@render children?.()}
 					</div>
 				</div>
-				{#if $$slots.buttons}
-					<div class="p-4 flex justify-end gap-2">
-						<slot name="buttons" />
+				{#if buttons}
+					<div class="flex justify-end gap-2 p-4">
+						{@render buttons?.()}
 					</div>
 				{/if}
-			</div>
+			</Dialog.Content>
 		</div>
-	</div>
-{/if}
+	</Dialog.Portal>
+</Dialog.Root>

@@ -6,23 +6,25 @@
 	 */
 	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox/typed';
 	import { getContext } from 'svelte';
-	import { writable } from 'svelte/store';
 
 	const mapStore = getContext('mapStore');
 
-	/**
-	 * Array of Deck.gl layer objects.
-	 * See the Deck.gl [Layer Catalog](https://deck.gl/docs/api-reference/layers) for details
-	 */
-	export let layers = [];
+	interface Props {
+		/**
+		 * Array of Deck.gl layer objects.
+		 * See the Deck.gl [Layer Catalog](https://deck.gl/docs/api-reference/layers) for details
+		 */
+		layers?: any;
+		/**
+		 * Any additional options to be passed through to the Deck.gl [MapboxOverlay](https://deck.gl/docs/api-reference/mapbox/mapbox-overlay)
+		 * constructor.
+		 * */
+		options?: any;
+	}
 
-	/**
-	 * Any additional options to be passed through to the Deck.gl [MapboxOverlay](https://deck.gl/docs/api-reference/mapbox/mapbox-overlay)
-	 * constructor.
-	 * */
-	export let options = {};
+	let { layers = [], options = {} }: Props = $props();
 
-	const loaded = writable(false);
+	let loaded = $state(false);
 	let deckOverlay;
 
 	const removeOverlay = () => {
@@ -31,7 +33,7 @@
 	};
 
 	const doLoad = () => {
-		loaded.set(false);
+		loaded = false;
 		removeOverlay();
 
 		deckOverlay = new DeckOverlay({
@@ -42,11 +44,12 @@
 
 		$mapStore.addControl(deckOverlay, 'top-left');
 
-		loaded.set(true);
+		loaded = true;
 	};
 
 	const doUnload = () => {
 		removeOverlay();
+    loaded = false;
 	};
 
 	const updateLayers = (newLayers) => {
@@ -54,13 +57,19 @@
 		deckOverlay && deckOverlay.setProps({ layers: newLayers });
 	};
 
-	$: if ($mapStore) {
-		doLoad();
-	}
+	$effect(() => {
+		if (!loaded && $mapStore) {
+			doLoad();
+		}
+	});
 
-	$: if ($loaded && !$mapStore) {
-		doUnload();
-	}
+	$effect(() => {
+		if (loaded && !$mapStore) {
+			doUnload();
+		}
+	});
 
-	$: updateLayers(layers);
+	$effect(() => {
+		updateLayers(layers);
+	});
 </script>

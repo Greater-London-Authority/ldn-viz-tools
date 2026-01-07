@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	type Timeout = ReturnType<typeof setTimeout>;
 
 	const newDebouncer = (func: () => void, delay: number) => {
@@ -23,7 +23,6 @@
 
 	import type { GeocoderAdapter } from './GeocoderAdapter';
 	import type {
-		Geolocation,
 		GeolocationNamed,
 		GeolocationSearchError,
 		OnGeolocationSearchError,
@@ -31,72 +30,85 @@
 		OnSuggestionListInteraction
 	} from './types';
 
-	/**
-	 * adapter to source location suggestions from.
-	 */
-	export let adapter: GeocoderAdapter;
+	interface Props {
+		/**
+		 * adapter to source location suggestions from.
+		 */
+		adapter: GeocoderAdapter;
+		/**
+		 * delay in ms after a keystroke to minimise redundant API requests.
+		 */
+		delay?: number;
+		/**
+		 * called when a user clicks a location from the suggestions list.
+		 */
+		onLocationSelected: undefined | OnGeolocationSearchResult;
+		/**
+		 * called when the adapter promise rejects a search request.
+		 */
+		onSearchError: undefined | OnGeolocationSearchError;
+		/**
+		 * Called when the user clears the search box.
+		 */
+		onSearchClear?: any;
+		/**
+		 * suggestions can be bound via 'bind:suggestions' to reactively receive
+		 * changes to search results.
+		 */
+		suggestions?: GeolocationNamed[];
+		/**
+		 * The currently selected location.
+		 */
+		selected?: any;
+		/**
+		 * a space-separated list of additional classes applied to the root container.
+		 */
+		classes?: string;
+		/**
+		 * a space-separated list of additional classes applied to
+		 * the input element because laying input elements can be quite fiddly.
+		 */
+		inputClasses?: string;
+		/**
+		 * `showClearButton` forces the showing of the clear button at the end of the
+		 * input element.
+		 *
+		 * It is set to `false` each time the user clicks the button so binding on this
+		 * prop is useful.
+		 */
+		showClearButton?: boolean;
+		/**
+		 * Placeholder text to be displayed in the input element.
+		 */
+		placeholder?: string;
+		children?: import('svelte').Snippet<[any]>;
+	}
 
-	/**
-	 * delay in ms after a keystroke to minimise redundant API requests.
-	 */
-	export let delay = 250;
+	let {
+		adapter,
+		delay = 250,
+		onLocationSelected,
+		onSearchError,
+		onSearchClear = () => {},
+		suggestions = $bindable(),
+		selected = $bindable(null),
+		classes = '',
+		inputClasses = '',
+		showClearButton = $bindable(false),
+		placeholder = 'Location search',
+		children
+	}: Props = $props();
 
-	/**
-	 * called when a user clicks a location from the suggestions list.
-	 */
-	export let onLocationSelected: undefined | OnGeolocationSearchResult;
+	let container: HTMLElement | undefined = $state();
+	let input: HTMLInputElement | undefined = $state();
+	let query = $state('');
+	let silentQueryTextUpdate = $state(false);
+	let showSuggestionList = $state(false);
 
-	/**
-	 * called when the adapter promise rejects a search request.
-	 */
-	export let onSearchError: undefined | OnGeolocationSearchError;
-
-	/**
-	 * Called when the user clears the search box.
-	 */
-	export let onSearchClear = () => {};
-
-	/**
-	 * suggestions can be bound via 'bind:suggestions' to reactively receive
-	 * changes to search results.
-	 */
-	export let suggestions: GeolocationNamed[] = [];
-
-	/**
-	 * The currently selected location.
-	 */
-	export let selected: null | Geolocation = null;
-
-	/**
-	 * a space-separated list of additional classes applied to the root container.
-	 */
-	export let classes = '';
-
-	/**
-	 * a space-separated list of additional classes applied to
-	 * the input element because laying input elements can be quite fiddly.
-	 */
-	export let inputClasses = '';
-
-	/**
-	 * `showClearButton` forces the showing of the clear button at the end of the
-	 * input element.
-	 *
-	 * It is set to `false` each time the user clicks the button so binding on this
-	 * prop is useful.
-	 */
-	export let showClearButton = false;
-
-	/**
-	 * Placeholder text to be displayed in the input element.
-	 */
-	export let placeholder = 'Location search';
-
-	let container: HTMLElement;
-	let input: HTMLInputElement;
-	let query = '';
-	let silentQueryTextUpdate = false;
-	let showSuggestionList = false;
+	// apply fallback - can't set directly with a bindable
+	if (!suggestions) {
+		suggestions = [];
+	}
 
 	const updateSuggestionsNow = async () => {
 		if (!query || query.length < 3) {
@@ -117,7 +129,7 @@
 					return [];
 				});
 
-			showSuggestionList = !!$$slots.default;
+			showSuggestionList = !!children;
 		} catch (e: unknown) {
 			console.error(e);
 			showSuggestionList = false;
@@ -131,7 +143,7 @@
 		showSuggestionList = false;
 	};
 
-	const onSelect = (suggestion: Geolocation) => {
+	const onSelect = (suggestion: GeolocationNamed) => {
 		closeSuggestionsList();
 		selected = suggestion;
 
@@ -200,7 +212,7 @@
 	const focusOnPrevSuggestion = (suggestion: GeolocationNamed) => {
 		const i = findSuggestionIndex(suggestion);
 		if (i >= 0) {
-			const prev = i - 1 >= 0 ? suggestions[i - 1] : undefined;
+			const prev = i - 1 >= 0 ? suggestions![i - 1] : undefined;
 			focusOnLocation(prev);
 		}
 	};
@@ -208,7 +220,7 @@
 	const focusOnNextSuggestion = (suggestion: GeolocationNamed) => {
 		const i = findSuggestionIndex(suggestion);
 		if (i >= 0) {
-			const next = i + 1 < suggestions.length ? suggestions[i + 1] : undefined;
+			const next = i + 1 < suggestions!.length ? suggestions![i + 1] : undefined;
 			focusOnLocation(next);
 		}
 	};
@@ -225,10 +237,10 @@
 	};
 
 	const focusOnInput = () => {
-		input.focus();
+		input!.focus();
 		setTimeout(() => {
-			const end = input.value.length;
-			input.setSelectionRange(end, end);
+			const end = input!.value.length;
+			input!.setSelectionRange(end, end);
 		}, 0);
 	};
 
@@ -246,7 +258,7 @@
 
 	const reshowSuggestionList = (event: Event) => {
 		if (suggestions) {
-			showSuggestionList = !!$$slots.default;
+			showSuggestionList = !!children;
 		}
 
 		navigateSuggestionList(event);
@@ -284,7 +296,8 @@
 		onSearchClear();
 	};
 
-	$: {
+	// TODO: check this state change inside effect is ok
+	$effect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		query;
 		if (!silentQueryTextUpdate) {
@@ -292,49 +305,49 @@
 		} else {
 			silentQueryTextUpdate = false;
 		}
-	}
+	});
 </script>
 
-<svelte:window on:mousedown={hideSuggestionList} on:keyup={hideSuggestionList} />
+<svelte:window onmousedown={hideSuggestionList} onkeyup={hideSuggestionList} />
 
 <search
 	bind:this={container}
-	class="bg-color-input-background pointer-events-auto relative w-full h-10 flex {classes}"
+	class="bg-color-input-background pointer-events-auto relative flex h-10 w-full {classes}"
 >
-	<div class="absolute top-2 left-2 flex items-center justify-center">
-		<Icon src={MagnifyingGlass} class="w-6 h-6 text-color-input-icon" />
+	<div class="absolute left-2 top-2 flex items-center justify-center">
+		<Icon src={MagnifyingGlass} class="text-color-input-icon h-6 w-6" />
 	</div>
 
 	<input
 		bind:this={input}
 		type="search"
 		{placeholder}
-		class="form-input min-w-0 w-64 max-w-[100%] pl-10 grow shrink bg-color-input-background border border-color-input-border placeholder-color-input-placeholder h-full text-color-valuetext {inputClasses}"
+		class="form-input bg-color-input-background border-color-input-border placeholder-color-input-placeholder text-color-valuetext h-full w-64 min-w-0 max-w-[100%] shrink grow border pl-10 {inputClasses}"
 		class:pr-8={showClearButton}
 		bind:value={query}
-		on:focus={reshowSuggestionList}
-		on:click={reshowSuggestionList}
-		on:keyup={reshowSuggestionList}
+		onfocus={reshowSuggestionList}
+		onclick={reshowSuggestionList}
+		onkeyup={reshowSuggestionList}
 	/>
 
 	{#if showClearButton || query?.length > 0}
 		<button
-			on:click={clearSearch}
-			class="absolute top-1 right-1 flex items-center justify-center y-auto bg-color-input-background"
+			onclick={clearSearch}
+			class="y-auto bg-color-input-background absolute right-1 top-1 flex items-center justify-center"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="w-8 h-8 p-0.25 text-color-input-icon" />
+			<Icon src={XMark} class="p-0.25 text-color-input-icon h-8 w-8" />
 		</button>
 	{/if}
 
 	{#if showSuggestionList && suggestions}
 		<!-- component that will render the list of suggestions (e.g, `<GeocoderSuggestionList>`)-->
-		<slot
-			attribution={adapter?.attribution ? adapter.attribution() : undefined}
-			{selected}
-			{suggestions}
-			{onSuggestionEvent}
-		/>
+		{@render children?.({
+			attribution: adapter?.attribution ? adapter.attribution() : undefined,
+			selected,
+			suggestions,
+			onSuggestionEvent
+		})}
 	{/if}
 </search>
 

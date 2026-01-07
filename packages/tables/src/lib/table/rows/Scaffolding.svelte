@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
 
-	export let table;
+	let { table, groupControl, groupSizes, dataColumns } = $props();
 
 	const sumWidths = (widths) => {
 		const colWidths = sum(widths.map((w) => +w.replace('px', '')));
@@ -12,13 +12,13 @@
 
 <!-- items-center - came from DataRow -->
 <!-- controlRows added an m-2 -->
-<div class="flex was-tr items-stretch" role="row">
+<div class="was-tr flex items-stretch" role="row">
 	<!-- controls for expanding/collapsing groups -->
-	<slot name="groupControl">
+	{#if groupControl}{@render groupControl()}{:else}
 		{#each table.groupingFields || [] as _field}
 			<div style:width={table.widths.groupControl} id="groupControl"></div>
 		{/each}
-	</slot>
+	{/if}
 
 	{#if table.groupingFields.length > 0}
 		<div
@@ -31,15 +31,15 @@
 				table.groupingFields.length +
 				'px'}
 		>
-			<slot name="groupSizes">
+			{#if groupSizes}{@render groupSizes()}{:else}
 				{#each new Array(table.groupingFields.length) as _i}
 					<div style:width={table.widths.groupLabel} id="groupLabel"></div>
 					<div style:width={table.widths.groupSizeLabel} id="groupSizeLabel"></div>
 					<div style:width={table.widths.groupSizeBar} id="groupSizeBar"></div>
 				{/each}
-			</slot>
+			{/if}
 		</div>
 	{/if}
 
-	<slot name="dataColumns" />
+	{@render dataColumns?.()}
 </div>

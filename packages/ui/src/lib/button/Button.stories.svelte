@@ -1,9 +1,15 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from './Button.svelte';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
+	import type { ButtonProps } from './types.js';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/Button',
 		component: Button,
+		tags: ['autodocs'],
+		render: defaultTemplate,
 		argTypes: {
 			emphasis: {
 				options: ['primary', 'secondary', 'caution', 'positive', 'negative'],
@@ -21,110 +27,113 @@
 				options: ['button', 'submit'],
 				control: { type: 'radio' }
 			}
-		},
-		args: {
-			title: 'storybook button'
 		}
-	};
-</script>
+	});
 
-<script lang="ts">
-	import { ArrowDownCircle, ArrowTopRightOnSquare, Camera } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
-	let count = 0;
+	let count = $state(0);
 	const handleClick = () => {
 		count += 1;
 	};
 </script>
 
-<Template let:args>
-	<Button {...args} on:click on:click={handleClick}>
+{#snippet defaultTemplate(args: ButtonProps)}
+	<Button {...args} onclick={handleClick}>
 		You clicked: {count}
 	</Button>
-</Template>
+{/snippet}
 
-<Story
-	name="Default"
-	source
-	parameters={{
-		options: {
-			showPanel: true
-		}
-	}}
-/>
+<Story name="Default" />
 
 <Story name="Emphasis">
-	<div class="flex items-end space-x-2">
-		<Button>Primary</Button>
-		<Button emphasis="secondary">Secondary</Button>
-	</div>
+	{#snippet template(args)}
+		<div class="flex items-end space-x-2">
+			<Button {...args}>Primary</Button>
+			<Button {...args} emphasis="secondary">Secondary</Button>
+		</div>
+	{/snippet}
 </Story>
 
-<Story name="Brand" source args={{ variant: 'brand' }} />
+<Story name="Brand" args={{ variant: 'brand' }} />
 
-<Story name="Solid" source args={{ variant: 'solid' }} />
+<Story name="Solid" args={{ variant: 'solid' }} />
 
-<Story name="Outline" source args={{ variant: 'outline' }} />
+<Story name="Outline" args={{ variant: 'outline' }} />
 
-<Story name="Text" source args={{ variant: 'text', emphasis: 'secondary' }} />
-
-<Story name="Square" args={{ variant: 'square' }}>
-	<div class="space-y-2">
-		<Button variant="square" title="Down" size="sm">
-			<Icon src={ArrowDownCircle} theme="mini" class="w-5 h-5" aria-hidden="true" />
-		</Button>
-		<Button variant="square" title="Down" size="md">
-			<Icon src={ArrowDownCircle} theme="solid" class="w-6 h-6" aria-hidden="true" />
-		</Button>
-		<Button variant="square" title="Down" size="lg">
-			<Icon src={ArrowDownCircle} theme="solid" class="w-8 h-8" aria-hidden="true" />
-			Down
-		</Button>
-	</div>
-</Story>
+<Story name="Text" args={{ variant: 'text', emphasis: 'secondary' }} />
 
 <Story name="Disabled">
-	<Button disabled>Cant touch this!</Button>
+	{#snippet template(args)}
+		<Button {...args} disabled>Cant touch this!</Button>
+	{/snippet}
+</Story>
+
+<Story name="Square" args={{ variant: 'square' }}>
+	{#snippet template(args)}
+		<div class="space-y-2">
+			<Button {...args} variant="square" title="Down" size="sm">
+				<Icon src={ArrowDownCircle} theme="mini" class="h-5 w-5" aria-hidden="true" />
+			</Button>
+			<Button {...args} variant="square" title="Down" size="md">
+				<Icon src={ArrowDownCircle} theme="solid" class="h-6 w-6" aria-hidden="true" />
+			</Button>
+			<Button {...args} variant="square" title="Down" size="lg">
+				<Icon src={ArrowDownCircle} theme="solid" class="h-8 w-8" aria-hidden="true" />
+				Down
+			</Button>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Sizes">
-	<div class="flex items-end space-x-2">
-		<Button size="xs">xs</Button>
-		<Button size="sm">sm</Button>
-		<Button size="md">md</Button>
-		<Button size="lg">lg</Button>
-	</div>
+	{#snippet template(args)}
+		<div class="flex items-end space-x-2">
+			<Button {...args} size="xs">xs</Button>
+			<Button {...args} size="sm">sm</Button>
+			<Button {...args} size="md">md</Button>
+			<Button {...args} size="lg">lg</Button>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="Slim">
-	<div class="space-y-4">
-		<p class="flex flex-wrap">
-			sometime you may want a buttton to&nbsp;<Button slim variant="text">go with the flow</Button
-			>&nbsp;a bit more
-		</p>
+	{#snippet template(args)}
+		<div class="space-y-4">
+			<p class="flex flex-wrap">
+				sometime you may want a buttton to&nbsp;<Button {...args} slim variant="text"
+					>go with the flow</Button
+				>&nbsp;a bit more
+			</p>
 
-		<p class="flex flex-wrap text-lg">
-			sometime you may want a buttton to&nbsp<Button slim variant="text" size="lg">
-				go with the flow
-			</Button>&nbsp;a bit more
-		</p>
+			<p class="flex flex-wrap text-lg">
+				sometime you may want a buttton to&nbsp<Button {...args} slim variant="text" size="lg">
+					go with the flow
+				</Button>&nbsp;a bit more
+			</p>
 
-		<p class="flex flex-wrap text-lg">
-			sometime you may want a buttton to&nbsp;<Button slim variant="solid" size="lg" class="!px-2">
-				go with the flow
-			</Button>&nbsp;a bit more
-		</p>
-	</div>
+			<p class="flex flex-wrap text-lg">
+				sometime you may want a buttton to&nbsp;<Button
+					{...args}
+					slim
+					variant="solid"
+					size="lg"
+					class="!px-2"
+				>
+					go with the flow
+				</Button>&nbsp;a bit more
+			</p>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="With class prop">
-	<Button
-		class="text-color-palette-pink-100 border-2 border-color-palette-pink-700 bg-color-palette-yellow-500"
-	>
-		Custom classes applied
-	</Button>
+	{#snippet template(args)}
+		<Button
+			{...args}
+			class="border-color-palette-pink-700 bg-color-palette-yellow-500 text-color-palette-pink-100 border-4 !p-8"
+		>
+			Custom classes applied
+		</Button>
+	{/snippet}
 </Story>
 
 <Story
@@ -133,39 +142,20 @@
 		layout: 'fullscreen'
 	}}
 >
-	<div class="py-4 space-y-4">
-		<Button class="w-full">Custom classes applied</Button>
+	{#snippet template(args)}
+		<div class="space-y-4 py-4">
+			<Button {...args} class="w-full">Custom classes applied</Button>
 
-		<Button fullWidth>fullWidth prop applied</Button>
-	</div>
+			<Button {...args} fullWidth>fullWidth prop applied</Button>
+		</div>
+	{/snippet}
 </Story>
 
 <Story name="With Icon">
-	<Button>
-		Download as PNG
-		<Icon src={Camera} theme="mini" class="ml-2 w-5 h-5" aria-hidden="true" />
-	</Button>
-</Story>
-
-<Story name="With Link">
-	<div class="space-y-2">
-		<Button href="#" variant="text">Link</Button>
-	</div>
-</Story>
-
-<!-- For accessibility, keep opening links in new tabs to a minimum. For cases where it's necessary to do so, you must make the functionality clear visually and to screen readers. -->
-<Story name="With Link, opening in new tab">
-	<div class="space-y-2">
-		<Button href="http://google.com" openInNewTab>
-			Link
-			<Icon
-				src={ArrowTopRightOnSquare}
-				theme="mini"
-				class="w-5 h-5 ml-2"
-				aria-hidden="false"
-				title="opens in new tab"
-			/>
+	{#snippet template(args)}
+		<Button {...args}>
+			Download as PNG
+			<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 		</Button>
-		<Button href="http://google.com" openInNewTab>Link (opens in new tab)</Button>
-	</div>
+	{/snippet}
 </Story>

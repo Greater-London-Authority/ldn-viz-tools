@@ -15,9 +15,9 @@
 	 * @component
 	 */
 
-	import { getAllContexts, onDestroy, onMount, type SvelteComponent } from 'svelte';
-	import type { ComponentType } from 'svelte';
 	import type { Feature } from 'geojson';
+	import type { Component } from 'svelte';
+	import { getAllContexts, mount, onDestroy, onMount, unmount, type SvelteComponent } from 'svelte';
 
 	import maplibre_gl from 'maplibre-gl';
 
@@ -26,32 +26,33 @@
 	const contexts = getAllContexts();
 	const mapStore = contexts.get('mapStore');
 
-	/**
-	 * Svelte component used to render the tooltip.
-	 */
-	export let popup: ComponentType | null = null;
+	interface Props {
+		/**
+		 * Svelte component used to render the tooltip.
+		 */
+		popup?: Component | null;
+		/**
+		 * Optional message to be passed to child popop component via `mapMarkerString` context.
+		 */
+		msgString?: string | null;
+		/**
+		 * Feature to which the popover should be attached.
+		 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
+		 */
+		feature: Feature;
+		/**
+		 * Name of layer containing this feature.
+		 * This is passed to the popover component via the `mapMarkerLayer` context.
+		 */
+		layer?: string;
+	}
 
-	/**
-	 * Optional message to be passed to child popop component via `mapMarkerString` context.
-	 */
-	export let msgString: string | null = null;
-
-	/**
-	 * Feature to which the popover should be attached.
-	 * This is used to position the popover, and is also passed to the popover component via the `mapMarkerFeature` context.
-	 */
-	export let feature: Feature;
-
-	/**
-	 * Name of layer containing this feature.
-	 * This is passed to the popover component via the `mapMarkerLayer` context.
-	 */
-	export let layer = '';
+	let { popup = null, msgString = null, feature, layer = '' }: Props = $props();
 
 	let popupMaplibrePopup: maplibre_gl.Popup | null = null;
 	let popupInstance: SvelteComponent | null = null;
 
-	const renderComponent = (feature: Feature, component: ComponentType | null) => {
+	const renderComponent = (feature: Feature, component: Component | null) => {
 		if (!$mapStore || !component) {
 			return;
 		}
@@ -78,7 +79,7 @@
 		// make hyperlinks clickable
 		container.style.pointerEvents = 'auto';
 
-		const instance = new component({
+		const instance = mount(component, {
 			target: container,
 			context: new Map([
 				...contexts,
@@ -99,7 +100,7 @@
 		popupMaplibrePopup?.remove();
 		popupMaplibrePopup = null;
 
-		popupInstance?.$destroy();
+		unmount(popupInstance);
 		popupInstance = null;
 	};
 
@@ -107,16 +108,9 @@
 
 	onDestroy(() => removePopup());
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: $mapStore && renderComponent(feature, popup);
+	$effect(() => {
+		if ($mapStore) {
+			renderComponent(feature, popup);
+		}
+	});
 </script>
-
-<style>
-	/** TODO: remove this hack **/
-	/* N.B. The applied z-index is equivalent to the z-10 index applied to the MapControlGroup.
-   It will display the popover above the map, but below the sidebar or a modal (if one is open).
-   */
-	:global(.maplibregl-popup) {
-		z-index: 10;
-	}
-</style>

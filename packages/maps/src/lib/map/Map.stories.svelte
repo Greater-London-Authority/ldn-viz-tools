@@ -1,14 +1,19 @@
-<script context="module">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Map from './Map.svelte';
+
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/Map',
 		component: Map,
+		tags: ['autodocs'],
+		render: defaultTemplate,
+
 		parameters: {
 			layout: 'full'
 		},
+
 		argTypes: {
 			appendOSKeyToUrl: {
 				table: {
@@ -87,7 +92,7 @@
 				transformRequest: appendOSKeyToUrl(OS_KEY)
 			}
 		}
-	};
+	});
 </script>
 
 <script lang="ts">
@@ -107,60 +112,72 @@
 	};
 </script>
 
-<Template let:args>
-	<div class="w-[100dvw] h-[100dvh]">
+{#snippet defaultTemplate({ args })}
+	<div class="h-[100dvh] w-[100dvw]">
 		<Map {...args}>I'm a map!</Map>
 	</div>
-</Template>
+{/snippet}
 
-<Story name="Responsive to theme" source />
+<Story name="Responsive to theme">
+	{#snippet template(args)}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map {...args}></Map>
+		</div>
+	{/snippet}
+</Story>
 
 <!--
 This is our default light basemap.
 It uses the Ordnance Survey's [OS_VTS_3857_Light.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet.
 -->
 <Story name="Light OS Basemap">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			lightStyle={castAsMapLibreStyle(os_light_vts)}
-			darkStyle={null}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		/>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				lightStyle={castAsMapLibreStyle(os_light_vts)}
+				darkStyle={null}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			/>
+		</div>
+	{/snippet}
 </Story>
 
 <!--
-This is the greyscale basemap used on the Cool Spaces map. 
+This is the greyscale basemap used on the Cool Spaces map.
 It is very similar to the Ordnance Survey's [OS_VTS_3857_Greyscale.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet, with a few tweaks.
  -->
 <Story name="Greyscale OS Basemap">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			lightStyle={castAsMapLibreStyle(greyStyle)}
-			darkStyle={null}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		/>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				lightStyle={castAsMapLibreStyle(greyStyle)}
+				darkStyle={null}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			/>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- This was created by Mike Brondbjerg based on the Ordnance Survey's greyscale theme. -->
 <Story name="Dark Grey, muted buildings">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			lightStyle={null}
-			darkStyle={castAsMapLibreStyle(darkGreyMutedStyle)}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		/>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				lightStyle={null}
+				darkStyle={castAsMapLibreStyle(darkGreyMutedStyle)}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			/>
+		</div>
+	{/snippet}
 </Story>
 
 <!--
@@ -168,19 +185,23 @@ This was created by the Ordnance Survey, inspired by Mike Brondbjerg's dark gray
 It uses the Ordnance Survey's [OS_VTS_3857_Dark.json](https://github.com/OrdnanceSurvey/OS-Vector-Tile-API-Stylesheets) stylesheet.
 -->
 <Story name="Dark OS Basemap">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			lightStyle={null}
-			darkStyle={castAsMapLibreStyle(darkStyle)}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		/>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				lightStyle={null}
+				darkStyle={castAsMapLibreStyle(darkStyle)}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			/>
+		</div>
+	{/snippet}
 </Story>
 
 <!-- This story registers event handlers to identify the layers underneath the point where the user clicks. -->
 <Story name="Properties">
-	<PropertiesStory />
+	{#snippet template()}
+		<PropertiesStory />
+	{/snippet}
 </Story>

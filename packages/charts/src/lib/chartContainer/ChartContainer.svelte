@@ -15,100 +15,112 @@
 	import SubTitle from './SubTitle.svelte';
 	import Title from './Title.svelte';
 
-	/**
-	 * Title that is displayed in large text above the plot.
-	 */
-	export let title = '';
-
-	/**
-	 * Subtitle that is displayed below the title, but above the plot.
-	 */
-	export let subTitle = '';
-
-	/**
-	 * Alt-text for the plot.
-	 */
-	export let alt = '';
-
-	/**
-	 * What appears in the footer:
-	 *
-	 * * `byline` (string) - statement of who created the visualization
-	 * * `source` (string) - statement of where the data came from
-	 * * `note` (string) - any additional footnotes
-	 */
-	export let source = '';
-
-	export let byline = '';
-
-	export let note = '';
-
-	/**
-	 * Data Download Button in the footer
-	 *
-	 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
-	 *
-	 */
-	export let dataDownloadButton: true | false | ('CSV' | 'JSON')[] = true;
-
-	/**
-	 * The file name to be used for the downloaded data or image file.
-	 */
-	export let filename = '';
-
-	/**
-	 * The Data passed to the data Download Button(s) in the footer
-	 */
-	export let data: { [key: string]: any }[] | undefined = undefined;
-
-	/**
-	 * Image Download Button in the footer
-	 *
-	 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
-	 * Set to false to hide completely.
-	 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
-	 *
-	 */
-	export let imageDownloadButton: true | false | ('PNG' | 'SVG')[] = true;
-
-	/**
-	 * Tailwind class to set chart area height
-	 */
-	export let chartHeight = 'h-60';
-
-	export let overrideClass = '';
-
-	/**
-	 * Tailwind class to set overall chart width
-	 */
-	export let chartWidth = 'w-full';
-
-	/**
-	 * If set to `true`, set `display: contents` on the top-level `ChartContainer` div,
-	 * so that a grid layout can be applied to align parts of charts across two columns
-	 */
-	export let alignMultiple = false;
-
 	// For save as image
-	let chartToCapture: HTMLDivElement;
+	let chartToCapture: HTMLDivElement = $state() as HTMLDivElement;
 
-	/**
-	 * Description of the chart for use in a modal for sighted users.
-	 */
-	export let chartDescription = '';
+	interface Props {
+		/**
+		 * Title that is displayed in large text above the plot.
+		 */
+		title?: string;
+		/**
+		 * Subtitle that is displayed below the title, but above the plot.
+		 */
+		subTitle?: string;
+		/**
+		 * Alt-text for the plot.
+		 */
+		alt?: string;
+		/**
+		 * What appears in the footer:
+		 *
+		 * * `byline` (string) - statement of who created the visualization
+		 * * `source` (string) - statement of where the data came from
+		 * * `note` (string) - any additional footnotes
+		 */
+		source?: string;
+		byline?: string;
+		note?: string;
+		/**
+		 * Data Download Button in the footer
+		 *
+		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+		 * Set to false to hide completely.
+		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+		 *
+		 */
+		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		/**
+		 * The file name to be used for the downloaded data or image file.
+		 */
+		filename?: string;
+		/**
+		 * The Data passed to the data Download Button(s) in the footer
+		 */
+		data?: { [key: string]: any }[] | undefined;
+		/**
+		 * Image Download Button in the footer
+		 *
+		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+		 * Set to false to hide completely.
+		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+		 *
+		 */
+		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		/**
+		 * Tailwind class to set chart area height
+		 */
+		chartHeight?: string;
+		overrideClass?: string;
+		/**
+		 * Tailwind class to set overall chart width
+		 */
+		chartWidth?: string;
+		/**
+		 * If set to `true`, set `display: contents` on the top-level `ChartContainer` div,
+		 * so that a grid layout can be applied to align parts of charts across two columns
+		 */
+		alignMultiple?: boolean;
+		/**
+		 * Description of the chart for use in a modal for sighted users.
+		 */
+		chartDescription?: string;
+		controls?: import('svelte').Snippet;
+		legend?: import('svelte').Snippet;
+		children?: import('svelte').Snippet;
+		description?: import('svelte').Snippet;
+	}
+
+	let {
+		title = '',
+		subTitle = '',
+		alt = '',
+		source = '',
+		byline = '',
+		note = '',
+		dataDownloadButton = true,
+		filename = '',
+		data = undefined,
+		imageDownloadButton = true,
+		chartHeight = 'h-60',
+		overrideClass = '',
+		chartWidth = 'w-full',
+		alignMultiple = false,
+		chartDescription = '',
+		controls,
+		legend,
+		children,
+		description
+	}: Props = $props();
 
 	let chartClass = classNames(
 		'relative',
 		chartHeight,
-		chartWidth,
 		overrideClass,
 		alignMultiple ? 'min-w-0' : ''
 	);
-	$: classes = classNames(
-		chartWidth,
-		alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose'
+	let classes = $derived(
+		classNames(chartWidth, alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose')
 	);
 </script>
 
@@ -129,29 +141,30 @@
 	{/if}
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
-	<slot name="controls" />
+	{@render controls?.()}
 
 	<!-- separate slot for legend, so that main chart can be aligned if legends wrap over different number of lines-->
-	<slot name="legend" />
+	{@render legend?.()}
 
 	<!-- Visualisation goes here -->
 	<div class={chartClass}>
-		<slot />
+		{@render children?.()}
 	</div>
 
 	<!-- long description for screen readers -->
-	<slot name="description" />
+	{@render description?.()}
 
 	{#if source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton}
 		<Footer {source} {byline} {note} {chartDescription}>
-			<ExportBtns
-				{chartToCapture}
-				{filename}
-				dataForDownload={data}
-				{dataDownloadButton}
-				{imageDownloadButton}
-				slot="exportBtns"
-			/>
+			{#snippet exportBtns()}
+				<ExportBtns
+					{chartToCapture}
+					{filename}
+					dataForDownload={data}
+					{dataDownloadButton}
+					{imageDownloadButton}
+				/>
+			{/snippet}
 		</Footer>
 	{/if}
 </div>

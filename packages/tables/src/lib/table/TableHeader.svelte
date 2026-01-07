@@ -22,15 +22,21 @@
 	import ColumnSummariesRow from './rows/headerRows/ColumnSummariesRow.svelte';
 	import ControlRow from './rows/headerRows/ControlRow.svelte';
 
-	export let tableSpec;
-	export let table;
-	export let data;
-	export let allowSorting = false;
-	export let tableWidth;
+	interface Props {
+		tableSpec: any;
+		table: any;
+		data: any;
+		allowSorting?: boolean;
+		tableWidth: any;
+		onChange: () => void;
+	}
 
-	$: topRuleClass = tableSpec.showHeaderTopRule === false ? '' : 'border-t';
-	$: bottomRuleClass =
-		tableSpec.showHeaderBottomRule === false || tableSpec.colGroups ? '' : 'border-b';
+	let { tableSpec, table, data, allowSorting = false, tableWidth, onChange }: Props = $props();
+
+	let topRuleClass = $derived(tableSpec.showHeaderTopRule === false ? '' : 'border-t');
+	let bottomRuleClass = $derived(
+		tableSpec.showHeaderBottomRule === false || tableSpec.colGroups ? '' : 'border-b'
+	);
 </script>
 
 <div
@@ -42,7 +48,7 @@
 		<ColumnGroupHeadingRow {table} />
 	{/if}
 
-	<ColumnHeadingRow {table} {allowSorting} />
+	<ColumnHeadingRow {table} {allowSorting} {onChange} />
 
 	{#if tableSpec.showColumnControls}
 		<ControlRow {table} />

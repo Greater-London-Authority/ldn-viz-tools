@@ -4,20 +4,18 @@
 	import DataCell from '../cells/DataCell.svelte';
 	import Scaffolding from './Scaffolding.svelte';
 
-	export let row;
-	export let table;
+	let { row, table } = $props();
 </script>
 
 <Scaffolding {table}>
-	<svelte:fragment slot="dataColumns">
+	{#snippet dataColumns()}
 		{#each table.columnSpec as col, i}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
 				<div style:width={col.computedWidth + 'px'} class="was-td" role="cell">
 					{#if col.cell && col.cell.renderer}
 						<DataCell href={col.href} {row}>
-							<svelte:component
-								this={col.cell.renderer}
+							<col.cell.renderer
 								colorScale={table.scales[col.short_label]}
 								posScale={table.posScales[col.short_label]}
 								value={row[col.short_label]}
@@ -41,5 +39,5 @@
 			{/if}
 			<ColGroupSpacer {table} {i} />
 		{/each}
-	</svelte:fragment>
+	{/snippet}
 </Scaffolding>

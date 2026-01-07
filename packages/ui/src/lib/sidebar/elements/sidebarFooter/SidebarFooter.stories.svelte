@@ -1,90 +1,74 @@
-<script context="module">
-	import SidebarFooter from './SidebarFooter.svelte';
-
+<script module>
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import CookieControlSettings from '../../../analytics/CookieControlSettings.svelte';
-	import PrivacyPolicyLink from './PrivacyPolicyLink.svelte';
-
-	export const meta = {
-		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarFooter',
-		component: SidebarFooter
-	};
-</script>
-
-<script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-	import { writable } from 'svelte/store';
 	import LogoCIU from '../../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../../logos/LogoMayor.svelte';
 	import ThemeSwitcher from '../../../theme/ThemeSwitcher.svelte';
+	import PrivacyPolicyLink from '../../../analytics/PrivacyPolicyLink.svelte';
+	import SidebarFooter from './SidebarFooter.svelte';
 
 	// hack to make the "View cookie settings" link appear
-	window.CookieControl = writable(true);
+	window.CookieControl = () => {};
+
+	const { Story } = defineMeta({
+		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarFooter',
+		component: SidebarFooter
+	});
 </script>
 
-<Template let:args>
-	<SidebarFooter {...args} />
-</Template>
-
-<Story name="Default" source>
-	<SidebarFooter>
-		<div class="flex justify-between">
-			<div class="w-[165px]"><LogoMayor /></div>
-			<div class="w-[165px]"><LogoCIU /></div>
-		</div>
-		<svelte:fragment slot="menu">
+<Story name="Default">
+	{#snippet template()}
+		<SidebarFooter>
 			<div class="flex justify-between">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
-				<ThemeSwitcher />
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
-		</svelte:fragment>
-	</SidebarFooter>
+			{#snippet menu()}
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li><CookieControlSettings size="sm" /></li>
+						<li><PrivacyPolicyLink size="sm" /></li>
+					</ul>
+					<ThemeSwitcher size="xs" />
+				</div>
+			{/snippet}
+		</SidebarFooter>
+	{/snippet}
 </Story>
 
-<Story name="Typical" source>
-	<SidebarFooter>
-		<div class="flex justify-between">
-			<div class="w-[165px]"><LogoMayor /></div>
-			<div class="w-[165px]"><LogoCIU /></div>
-		</div>
-		<svelte:fragment slot="menu">
-			<ul class="flex space-x-2">
-				<CookieControlSettings />
-				<PrivacyPolicyLink />
-			</ul>
-		</svelte:fragment>
-	</SidebarFooter>
-</Story>
-
-<Story name="With Logos" source>
-	<SidebarFooter>
-		<div class="flex justify-between">
-			<div class="w-[165px]"><LogoMayor /></div>
-			<div class="w-[165px]"><LogoCIU /></div>
-		</div>
-	</SidebarFooter>
-</Story>
-
-<Story name="With Single Logo" source>
-	<SidebarFooter>
-		<div class="flex">
-			<div class="w-[165px]"><LogoCIU /></div>
-		</div>
-	</SidebarFooter>
-</Story>
-
-<Story name="With Menu" source>
-	<SidebarFooter>
-		<svelte:fragment slot="menu">
+<Story name="With logos only">
+	{#snippet template()}
+		<SidebarFooter>
 			<div class="flex justify-between">
-				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
-				</ul>
-				<ThemeSwitcher />
+				<div class="w-[165px]"><LogoMayor /></div>
+				<div class="w-[165px]"><LogoCIU /></div>
 			</div>
-		</svelte:fragment>
-	</SidebarFooter>
+		</SidebarFooter>
+	{/snippet}
+</Story>
+
+<Story name="With Single Logo">
+	{#snippet template()}
+		<SidebarFooter>
+			<div class="flex">
+				<div class="w-[165px]"><LogoCIU /></div>
+			</div>
+		</SidebarFooter>
+	{/snippet}
+</Story>
+
+<Story name="With Menu">
+	{#snippet template()}
+		<SidebarFooter>
+			{#snippet menu()}
+				<div class="flex justify-between">
+					<ul class="flex space-x-2">
+						<li><CookieControlSettings size="sm" /></li>
+						<li><PrivacyPolicyLink size="sm" /></li>
+					</ul>
+					<ThemeSwitcher size="xs" />
+				</div>
+			{/snippet}
+		</SidebarFooter>
+	{/snippet}
 </Story>

@@ -2,9 +2,9 @@
 	import { sum } from 'd3-array';
 	import Scaffolding from '../Scaffolding.svelte';
 
-	export let table;
+	let { table } = $props();
 
-	$: cellWidths = table.columnSpec.map((c: { computedWidth: any }) => c.computedWidth);
+	let cellWidths = $derived(table.columnSpec.map((c: { computedWidth: any }) => c.computedWidth));
 
 	const getWidth = (colGroup: { endCol: number; startCol: any }) => {
 		if (colGroup.endCol < 0) {
@@ -16,25 +16,25 @@
 </script>
 
 <Scaffolding {table}>
-	<svelte:fragment slot="dataColumns">
+	{#snippet dataColumns()}
 		{#if table.colGroups && table.colGroups.length > 0}
 			{#each table.colGroups || [] as colGroup}
 				<div
-					class="border-b border-color-ui-border-primary"
+					class="border-color-ui-border-primary border-b"
 					style:width={getWidth(colGroup)}
 					style:height="1px"
 				></div>
 
 				{#if table.colGroupGap}
-					<div style:width={`${table.colGroupGap}px`} />
+					<div style:width={`${table.colGroupGap}px`}></div>
 				{/if}
 			{/each}
 		{:else}
 			<div
-				class="border-b border-color-ui-border-primary"
-				style:width={'100%'}
+				class="border-color-ui-border-primary border-b"
+				style:width="100%"
 				style:height="1px"
-			/>
+			></div>
 		{/if}
-	</svelte:fragment>
+	{/snippet}
 </Scaffolding>

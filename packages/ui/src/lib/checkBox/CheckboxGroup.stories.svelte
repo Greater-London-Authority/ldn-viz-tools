@@ -1,128 +1,154 @@
-<script context="module" lang="ts">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import { theme } from '../theme/themeState.svelte';
 	import CheckboxGroup from './CheckboxGroup.svelte';
+	import CheckBoxGroupDemo from './CheckBoxGroupDemo.svelte';
 
-	export const meta = {
-		title: 'Ui/Components/Checkboxes/CheckboxGroup',
-		component: CheckboxGroup
-	};
-</script>
+	/**
+	 * The `<CheckboxGroup>` component provides a way to create a set of `<Checkbox>` components defined by an array of objects.
+	 *
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation) component rather than the [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 */
 
-<script lang="ts">
-	import { Story, Template } from '@storybook/addon-svelte-csf';
-
-	let selectedOptions: string[] = ['bus', 'underground'];
+	let selectedOptions: string[] = $state(['bus', 'underground']);
 
 	let optionsForGroup = [
-		{ id: 'bus', name: 'bus', label: 'Bus stops', color: '#00AEEF' },
+		{ id: 'bus', name: 'bus', label: 'Bus stops' },
 		{
 			id: 'train',
 			name: 'train',
 			label: 'Train stations',
-			color: '#008D48',
 			hint: 'Excluding underground stations'
 		},
-		{ id: 'underground', name: 'underground', label: 'Underground stations', color: '#9E0059' },
-		{ id: 'taxi', name: 'taxi', label: 'Taxi ranks', color: 'firebrick', disabled: true }
+		{ id: 'underground', name: 'underground', label: 'Underground stations' },
+		{ id: 'taxi', name: 'taxi', label: 'Taxi ranks', disabled: true }
 	];
 
-	let ariaLabel = 'Select transport methods';
+	let colors: { [key: string]: string } = {
+		bus: 'data.categorical.blue',
+		train: 'data.categorical.green',
+		underground: 'data.categorical.red',
+		taxi: 'data.categorical.purple'
+	};
+
+	let optionsWithColor = optionsForGroup.map((option) => ({
+		...option,
+		color: theme.tokenNameToValue(colors[option.id])
+	}));
+
+	const { Story } = defineMeta({
+		title: 'Ui/Components/Checkboxes/CheckboxGroup',
+		component: CheckboxGroup,
+		tags: ['autodocs'],
+		args: {
+			options: optionsForGroup,
+			ariaLabel: 'Select transport methods'
+		}
+	});
 </script>
 
-<Template let:args>
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions {...args} {ariaLabel} />
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
-</Template>
+<Story name="Default">
+	{#snippet template(args)}
+		<CheckboxGroup {...args} bind:selectedOptions />
 
-<Story name="Default" source />
-
-<Story name="with title">
-	<CheckboxGroup
-		options={optionsForGroup}
-		bind:selectedOptions
-		label="Transport method"
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="with hint">
-	<CheckboxGroup
-		options={optionsForGroup}
-		bind:selectedOptions
-		label="Transport method"
-		hint="contextual hint text"
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="With title">
+	{#snippet template(args)}
+		<CheckboxGroup {...args} bind:selectedOptions label="Transport method" />
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="with description">
-	<CheckboxGroup
-		options={optionsForGroup}
-		buttonsHidden
-		bind:selectedOptions
-		label="Transport method"
-		description="Pick you prefered method of transport - taxis are currently not available"
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="With hint">
+	{#snippet template(args)}
+		<CheckboxGroup
+			{...args}
+			bind:selectedOptions
+			label="Transport method"
+			hint="contextual hint text"
+		/>
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="disabled buttons">
-	<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden {ariaLabel} />
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="With description">
+	{#snippet template(args)}
+		<CheckboxGroup
+			{...args}
+			bind:selectedOptions
+			label="Transport method"
+			hint="contextual hint text"
+			description="Pick your prefered method of transport - taxis are currently not available"
+		/>
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
-<Story name="externally updated">
-	<Button on:click={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
+<Story name="Hide Select all">
+	{#snippet template(args)}
+		<CheckboxGroup {...args} bind:selectedOptions hideSelectAll />
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
 
-	<div class="my-4">
-		<CheckboxGroup options={optionsForGroup} bind:selectedOptions buttonsHidden {ariaLabel} />
-	</div>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+<Story name="Externally updated">
+	{#snippet template(args)}
+		<Button onclick={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
+
+		<CheckboxGroup {...args} bind:selectedOptions />
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
 <Story name="Disabled (global)">
-	<CheckboxGroup
-		options={optionsForGroup}
-		bind:selectedOptions
-		buttonsHidden
-		label="Preferred mode of transport"
-		hint="Contextual Hint"
-		description="This is a description"
-		disabled
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+	{#snippet template(args)}
+		<CheckboxGroup {...args} bind:selectedOptions disabled />
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
 </Story>
 
 <Story name="With error">
-	<CheckboxGroup
-		options={optionsForGroup}
-		bind:selectedOptions
-		buttonsHidden
-		label="Preferred mode of transport"
-		hint="Contextual Hint"
-		description="Deselect all to see an error state!"
-		error={!selectedOptions.length ? 'You must select an option' : undefined}
-		{ariaLabel}
-	/>
-	<p class="mt-4 text-color-text-secondary">
-		selectedOptions: {JSON.stringify(selectedOptions)}
-	</p>
+	{#snippet template(args)}
+		<CheckboxGroup
+			{...args}
+			bind:selectedOptions
+			error={!selectedOptions.length ? 'You must select an option' : undefined}
+		/>
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
+
+<Story name="Options with color">
+	{#snippet template(args)}
+		<CheckboxGroup {...args} options={optionsWithColor} bind:selectedOptions />
+		<p class="text-color-text-secondary mt-4">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
+
+<Story name="With custom overlay">
+	{#snippet template()}
+		<CheckBoxGroupDemo />
+	{/snippet}
 </Story>

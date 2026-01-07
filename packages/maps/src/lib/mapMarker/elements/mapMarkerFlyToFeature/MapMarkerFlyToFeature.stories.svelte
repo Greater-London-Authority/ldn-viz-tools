@@ -1,9 +1,13 @@
-<script context="module">
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerFlyToFeature from './MapMarkerFlyToFeature.svelte';
 
-	export const meta = {
+	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerFlyToFeature',
 		component: MapMarkerFlyToFeature,
+		tags: ['autodocs'],
+		render: defaultTemplate,
+
 		parameters: {
 			layout: 'full'
 		},
@@ -13,11 +17,10 @@
 				control: 'none'
 			}
 		}
-	};
+	});
 </script>
 
 <script>
-	import { Story, Template } from '@storybook/addon-svelte-csf';
 	import { setContext } from 'svelte';
 
 	import Map from '../../../map/Map.svelte';
@@ -31,21 +34,23 @@
 	setContext('mapMarkerFeature', {});
 </script>
 
-<Template let:args>
+{#snippet defaultTemplate({ args })}
 	<MapMarkerFlyToFeature {...args} />
-</Template>
+{/snippet}
 
 <Story name="Interactive Example">
-	<div class="w-[100dvw] h-[100dvh]">
-		<Map
-			whenMapLoads={loadTestLayers}
-			options={{
-				transformRequest: appendOSKeyToUrl(OS_KEY)
-			}}
-		>
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" popup={MapMarkerFlyToFeature} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/line" popup={MapMarkerFlyToFeature} />
-			<MapMarker layerId="gla/ldn-viz-tools/test-data/point" popup={MapMarkerFlyToFeature} />
-		</Map>
-	</div>
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" popup={MapMarkerFlyToFeature} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" popup={MapMarkerFlyToFeature} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" popup={MapMarkerFlyToFeature} />
+			</Map>
+		</div>
+	{/snippet}
 </Story>

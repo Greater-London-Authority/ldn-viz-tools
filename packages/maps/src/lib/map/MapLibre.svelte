@@ -8,9 +8,9 @@
 	 * @component
 	 */
 
-	import { onMount, onDestroy } from 'svelte';
 	import maplibre_gl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	import { onDestroy, onMount } from 'svelte';
 
 	import {
 		GREATER_LONDON_BOUNDS,
@@ -18,46 +18,62 @@
 		theme_os_light_vts
 	} from '@ldn-viz/maps';
 
-	import type { MapLibre, MapLibreStyle, WhenMapLoads, MapLibreBounds } from './types';
+	import type { MapLibre, MapLibreBounds, MapLibreStyle, WhenMapLoads } from './types';
 
 	type MapLibreOptions = Omit<maplibre_gl.MapOptions, 'container'>;
 
 	const defaultOptions: MapLibreOptions = {
-		style: theme_os_light_vts as MapLibreStyle,
 		bounds: GREATER_LONDON_BOUNDS as MapLibreBounds,
 		maxBounds: GREATER_LONDON_BOUNDS_MAX as MapLibreBounds,
 		clickTolerance: 6
 	};
 
-	/**
-	 * Disables initialisation of the map on mount. This is most often used
-	 * to avoid uneeded map rendering during development of non-map application
-	 * elements.
-	 */
-	export let disabled = false;
+	interface Props {
+		/**
+		 * Disables initialisation of the map on mount. This is most often used
+		 * to avoid uneeded map rendering during development of non-map application
+		 * elements.
+		 */
+		disabled?: boolean;
+		/**
+		 * Custom MapLibre options (see [MapOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
+		 */
+		options?: MapLibreOptions;
+		/**
+		 * Called during component mounting after the map has been created but
+		 * before it has loaded.
+		 *
+		 * This allows custom `load` functions to be added to the map instance
+		 * before loading occurs.
+		 */
+		whenMapCreated?: null | WhenMapLoads;
+		/**
+		 * Called during component unmounting just before the map and component are
+		 * destroyed.
+		 */
+		whenMapDestroyed?: null | WhenMapLoads;
 
-	/**
-	 * Custom MapLibre options (see [MapOptions](https://maplibre.org/maplibre-gl-js/docs/API/type-aliases/MapOptions/)).
-	 */
-	export let options: MapLibreOptions = defaultOptions;
+		/**
+		 * MapLibre style for basemap.
+		 */
+		style?: MapLibreStyle;
 
-	/**
-	 * Called during component mounting after the map has been created but
-	 * before it has loaded.
-	 *
-	 * This allows custom `load` functions to be added to the map instance
-	 * before loading occurs.
-	 */
-	export let whenMapCreated: null | WhenMapLoads = null;
+		children?: import('svelte').Snippet;
+		[key: string]: any;
+	}
 
-	/**
-	 * Called during component unmounting just before the map and component are
-	 * destroyed.
-	 */
-	export let whenMapDestroyed: null | WhenMapLoads = null;
+	let {
+		disabled = false,
+		options = defaultOptions,
+		whenMapCreated = null,
+		whenMapDestroyed = null,
+		style = theme_os_light_vts as MapLibreStyle,
+		children,
+		...rest
+	}: Props = $props();
 
-	let container: null | HTMLElement;
-	let maplibre: null | MapLibre;
+	let container: null | HTMLElement = $state();
+	let maplibre: null | MapLibre = $state();
 
 	onMount(() => {
 		if (disabled) {
@@ -67,6 +83,7 @@
 		maplibre = new maplibre_gl.Map({
 			...defaultOptions,
 			...options,
+			style,
 			container: container as HTMLElement
 		} as maplibre_gl.MapOptions);
 
@@ -92,25 +109,22 @@
 		};
 	});
 
-	// client width and height because on:resize won't always trigger refresh.
-	let clientWidth = 0;
-	let clientHeight = 0;
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-	$: clientWidth && clientHeight && maplibre?.resize();
+	$effect(() => {
+		if (maplibre) {
+			maplibre.setStyle(style);
+		}
+	});
 </script>
 
 <section
 	bind:this={container}
-	bind:clientWidth
-	bind:clientHeight
 	class:w-full={true}
 	class:h-full={true}
 	class:relative={true}
 	class:overflow-hidden={true}
-	{...$$restProps}
+	{...rest}
 >
-	<slot />
+	{@render children?.()}
 </section>
 
 <style global>
