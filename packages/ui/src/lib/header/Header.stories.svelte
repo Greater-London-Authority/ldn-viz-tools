@@ -7,9 +7,14 @@
 	import HeaderRight from './HeaderRight.svelte';
 	import HeaderTitle from './HeaderTitle.svelte';
 
+	/**
+	 * The `<Header>` component appears at the top of a page.
+	 * It typically includes the app name, links to other pages (if the app has multiple pages), and a login/logout control (if the app requires authentication).
+	 */
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Header',
 		component: Header as any,
+		tags: ['autodocs'],
 		subcomponents: { HeaderItem, HeaderRight, HeaderTitle, NavigationMenu },
 		parameters: {
 			layout: 'fullscreen'
