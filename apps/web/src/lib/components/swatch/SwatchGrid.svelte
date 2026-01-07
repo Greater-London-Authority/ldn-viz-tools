@@ -22,6 +22,6 @@
 <!-- xl:grid-cols-6 2xl:grid-cols-8 -->
 <div class={gridClass}>
 	{#each tokenData as token}
-		<Swatch {...token} {size} />
+		<Swatch {...token} {size} content={token.value}/>
 	{/each}
 </div>
