@@ -16,7 +16,7 @@
 		/**
 		 * the `id` of the entry in the `options` array that is currently selected (state).
 		 */
-		selectedId: string;
+		selectedId?: string;
 
 		/**
 		 * Each element of this array defines a radio button, and is an object with the properties:
