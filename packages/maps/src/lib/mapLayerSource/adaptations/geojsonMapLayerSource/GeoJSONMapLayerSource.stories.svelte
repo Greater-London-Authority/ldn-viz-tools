@@ -192,7 +192,7 @@
 	{/snippet}
 </Story>
 
-<Story name="Updating via dataStore">
+<Story name="Updating data by externally updating store">
 	{#snippet template()}
 		<div class="pointer-events-auto relative h-[100dvh] w-[100dvw]">
 			<div class="pointer-events-auto absolute left-4 top-4 z-40 flex gap-2">
@@ -212,7 +212,7 @@
 			>
 				<GeoJSONMapLayerSource id={sourceId} {initialData} bind:dataStore>
 					<MapLayerView
-						id="{sourceId}/polygon"
+						id={`${sourceId}/polygon`}
 						spec={{
 							type: 'fill',
 							filter: ['==', '$type', 'Polygon'],
@@ -224,7 +224,7 @@
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/line"
+						id={`${sourceId}/line`}
 						spec={{
 							type: 'line',
 							filter: ['==', '$type', 'LineString'],
@@ -240,7 +240,7 @@
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/point"
+						id={`${sourceId}/point`}
 						spec={{
 							type: 'circle',
 							filter: ['==', '$type', 'Point'],

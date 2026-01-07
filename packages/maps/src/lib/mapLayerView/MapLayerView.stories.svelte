@@ -65,6 +65,8 @@
 </script>
 
 <script lang="ts">
+	import { Select } from '@ldn-viz/ui';
+
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 	import MapLayerSource from '../mapLayerSource/MapLayerSource.svelte';
@@ -78,6 +80,12 @@
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
+
+	const colorOptions = [
+		{label: 'Red', value: 'red'},
+		{label: 'Blue', value: 'blue'},
+	];
+	let selectedColor = $state('red');
 </script>
 
 <Story name="Default">
@@ -96,7 +104,7 @@
 					}}
 				>
 					<MapLayerView
-						id="{sourceId}/polygon"
+						id={`${sourceId}/polygon`}
 						spec={{
 							type: 'fill',
 							filter: ['==', '$type', 'Polygon'],
@@ -108,7 +116,7 @@
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/line"
+						id={`${sourceId}/line`}
 						spec={{
 							type: 'line',
 							filter: ['==', '$type', 'LineString'],
@@ -124,7 +132,7 @@
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/point"
+						id={`${sourceId}/point`}
 						spec={{
 							type: 'circle',
 							filter: ['==', '$type', 'Point'],
@@ -136,6 +144,52 @@
 							}
 						}}
 					/>
+				</MapLayerSource>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This demonstrates updating the styling of a layer.
+Note that the MapViewLayer does not update when the `spec` prop changes,
+so it is necessary to use a `#key` block to force the component to be recreated.
+-->
+<Story name="Updating">
+	{#snippet template()}
+
+	<div class="w-96">
+			<Select label="Point color" options={colorOptions} bind:value={selectedColor} />
+	</div>
+
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapLayerSource
+					id={sourceId}
+					spec={{
+						type: 'geojson',
+						data: testData
+					}}
+				>
+					{#key selectedColor}
+					<MapLayerView
+						id={`${sourceId}/point`}
+						spec={{
+							type: 'circle',
+							filter: ['==', '$type', 'Point'],
+							paint: {
+								'circle-color': selectedColor === 'red' ?  theme().color.palette.red['700'] : theme().color.palette.blue['700'],
+								'circle-radius': 6,
+								'circle-stroke-width': 1,
+								'circle-stroke-color': '#000'
+							}
+						}}
+					/>
+						{/key}
 				</MapLayerSource>
 			</Map>
 		</div>

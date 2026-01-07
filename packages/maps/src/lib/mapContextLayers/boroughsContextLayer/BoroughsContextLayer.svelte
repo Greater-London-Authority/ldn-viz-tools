@@ -59,7 +59,7 @@
 >
 	{#key lineColor + lineWidth + lineOpacity}
 		<MapLayerView
-			id="{sourceId}/line"
+			id={`${sourceId}/line`}
 			spec={{
 				type: 'line',
 				'source-layer': 'boroughs',
@@ -74,7 +74,7 @@
 	{/key}
 	{#key fillColor + fillOpacity}
 		<MapLayerView
-			id="{sourceId}/fill"
+			id={`${sourceId}/fill`}
 			spec={{
 				type: 'fill',
 				'source-layer': 'boroughs',

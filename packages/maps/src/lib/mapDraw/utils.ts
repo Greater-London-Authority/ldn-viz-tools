@@ -2,7 +2,7 @@ import type { FeatureCollection } from 'geojson';
 import uuid4 from 'uuid4';
 
 export const fixImportedGeoJSON = (parsedJson: FeatureCollection) => {
-	// modify features to please TerraDrw
+	// modify features to please TerraDraw
 	// see e.g. https://github.com/JamesLMilner/terra-draw/issues/177
 	for (const feature of parsedJson.features) {
 		if (!uuid4.valid(`${feature.id}`)) {
