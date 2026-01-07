@@ -16,7 +16,7 @@
 
 <section>
 	<div
-		class="bg-color-container-level-1 text-color-text-primary space-y-2 pb-2 text-sm last-of-type:pb-0"
+		class="space-y-2 bg-color-container-level-1 pb-2 text-sm text-color-text-primary last-of-type:pb-0"
 	>
 		{#if typeof title != 'string'}
 			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->

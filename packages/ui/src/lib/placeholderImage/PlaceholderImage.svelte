@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="bg-color-ui-background-empty text-color-text-secondary flex h-full w-full items-center justify-center"
+	class="flex h-full w-full items-center justify-center bg-color-ui-background-empty text-color-text-secondary"
 >
 	<Icon src={Photo} class="h-8 w-8" />
 </div>

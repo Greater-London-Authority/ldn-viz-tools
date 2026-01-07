@@ -41,7 +41,7 @@
 	}
 
 	[data-rehype-pretty-code-figure] [data-line-numbers] > [data-line]::before {
-		@apply text-color-text-secondary text-xs;
+		@apply text-xs text-color-text-secondary;
 		counter-increment: line;
 		content: counter(line);
 		display: inline-block;
@@ -83,7 +83,7 @@
 	}
 
 	[data-rehype-pretty-code-title] {
-		@apply text-color-text-secondary border-color-ui-border-secondary border-b text-sm;
+		@apply border-b border-color-ui-border-secondary text-sm text-color-text-secondary;
 	}
 
 	[data-pre-wrapper] {

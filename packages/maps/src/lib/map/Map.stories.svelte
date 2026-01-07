@@ -216,7 +216,7 @@ This demonstrates how you can bind to the maplibre `map` object.
 -->
 <Story name="Accessing map object">
 	{#snippet template()}
-	  <Button onclick={() => $map.flyTo({center: [-0.124, 51.5], zoom: 15})}>Fly!</Button>
+		<Button onclick={() => $map.flyTo({ center: [-0.124, 51.5], zoom: 15 })}>Fly!</Button>
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
 				whenMapLoads={loadTestLayers}

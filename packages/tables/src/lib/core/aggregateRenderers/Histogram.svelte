@@ -10,7 +10,13 @@
 
 	// TODO: move labels to separate span so they don't get truncated if max val is multiple digits
 
-	let { values, extent = [0, 1], color = 'steelblue', width = 100, ...rest }: HistogramProps = $props();
+	let {
+		values,
+		extent = [0, 1],
+		color = 'steelblue',
+		width = 100,
+		...rest
+	}: HistogramProps = $props();
 
 	const height = 30;
 	const marginTop = 0;

@@ -261,7 +261,7 @@
 
 				{#snippet table()}
 					<div
-						class="text-color-text-primary w-full table-auto text-sm"
+						class="w-full table-auto text-sm text-color-text-primary"
 						bind:clientWidth={tableWidth}
 						role="table"
 					>

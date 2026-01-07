@@ -9,11 +9,11 @@
 	let { children, menu }: Props = $props();
 </script>
 
-<footer class="bg-color-container-level-1 text-color-text-primary mt-auto pt-4">
+<footer class="mt-auto bg-color-container-level-1 pt-4 text-color-text-primary">
 	<!-- content to display above menu/links - typically a row of logos -->
 	{@render children?.()}
 	{#if menu}
-		<div class="border-color-ui-border-primary mt-4 border-t pt-2 text-sm">
+		<div class="mt-4 border-t border-color-ui-border-primary pt-2 text-sm">
 			<!-- a menu/list of links -->
 			{@render menu()}
 		</div>

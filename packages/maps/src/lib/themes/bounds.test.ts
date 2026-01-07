@@ -17,7 +17,7 @@ describe('centerOfBounds', () => {
 });
 
 describe('scaleBounds', () => {
-	const bounds: BoundsPoints  = [
+	const bounds: BoundsPoints = [
 		[0, 0],
 		[10, 10]
 	];

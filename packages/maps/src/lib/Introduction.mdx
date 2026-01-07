@@ -10,7 +10,6 @@ The `maps` package several things:
 - a set of maplibre style files for basemaps that we use frequently in our projects
 - a collection of components for rendering maps, map layers, and map-related controls
 
-
 ## Architecture
 
 The `<Map>` component creates a MapLibre ([API docs](https://maplibre.org/maplibre-gl-js/docs/), [Style Specification](https://maplibre.org/maplibre-style-spec/) ) map object, and provides it to child components via a context.
@@ -23,4 +22,3 @@ Commonly data layers are rendered using [Deck.gl](https://deck.gl/), using the `
 Less commonly, data layers are rendered directly by MapLibre: this can be done by using `<MapLayerSource>` to create a MapLibre source (responsible for data loading), and `<MapLayerView>` to create a MapLibre layer (responsible for data display).
 
 The `MapDraw` component is a wrapper around teh [Terra Draw](https://terradraw.io/) library that allows users to draw custom areas on a map.
-

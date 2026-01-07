@@ -23,10 +23,10 @@
 
 <AppShell sidebarPlacement={{ initial: 'left' }} sidebarAlwaysOpen={{ initial: false, md: true }}>
 	{#snippet main()}
-		<div class="bg-color-canvas-background-1 h-full p-6 pl-24">
+		<div class="h-full bg-color-canvas-background-1 p-6 pl-24">
 			<div class="mb-4">
-				<h1 class="text-color-text-primary text-2xl font-bold">This is the main content area</h1>
-				<h2 class="text-color-text-secondary text-xl">
+				<h1 class="text-2xl font-bold text-color-text-primary">This is the main content area</h1>
+				<h2 class="text-xl text-color-text-secondary">
 					Maecenas ut libero vel nibh maximus feugiat non sed tortor.
 				</h2>
 			</div>

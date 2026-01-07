@@ -49,7 +49,8 @@
 		mapDraw: any;
 	}
 
-	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw, onStart, onCancel }: Props = $props();
+	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw, onStart, onCancel }: Props =
+		$props();
 
 	/**
 	 * Icon lookup for mode selection buttons

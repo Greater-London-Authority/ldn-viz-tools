@@ -122,7 +122,8 @@ interface InputPropsBase {
 }
 
 export interface InputAsTextArea
-	extends Pick<HTMLTextareaAttributes, 'cols' | 'rows' | 'wrap'>,
+	extends
+		Pick<HTMLTextareaAttributes, 'cols' | 'rows' | 'wrap'>,
 		InputPropsBase,
 		Omit<InputProps, 'onchange'> {
 	/**

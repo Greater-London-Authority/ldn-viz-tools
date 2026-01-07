@@ -35,7 +35,7 @@
 	{#snippet template(args)}
 		<Checkbox {...args} bind:checked />
 
-		<p class="text-color-text-secondary mt-8">Checked: {checked}</p>
+		<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
 	{/snippet}
 </Story>
 
@@ -70,6 +70,6 @@
 <Story name="Colored checkbox">
 	{#snippet template(args)}
 		<Checkbox {...args} color={theme.tokenNameToValue('data.categorical.orange')} />
-		<p class="text-color-text-secondary mt-8">Checked: {checked}</p>
+		<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
 	{/snippet}
 </Story>

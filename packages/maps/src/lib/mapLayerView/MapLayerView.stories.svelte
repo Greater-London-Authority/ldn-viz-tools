@@ -82,8 +82,8 @@
 	const sourceId = 'gla/ldn-viz-tools/test-data';
 
 	const colorOptions = [
-		{label: 'Red', value: 'red'},
-		{label: 'Blue', value: 'blue'},
+		{ label: 'Red', value: 'red' },
+		{ label: 'Blue', value: 'blue' }
 	];
 	let selectedColor = $state('red');
 </script>
@@ -157,10 +157,9 @@ so it is necessary to use a `#key` block to force the component to be recreated.
 -->
 <Story name="Updating">
 	{#snippet template()}
-
-	<div class="w-96">
+		<div class="w-96">
 			<Select label="Point color" options={colorOptions} bind:value={selectedColor} />
-	</div>
+		</div>
 
 		<div class="relative h-[100dvh] w-[100dvw]">
 			<Map
@@ -176,20 +175,23 @@ so it is necessary to use a `#key` block to force the component to be recreated.
 					}}
 				>
 					{#key selectedColor}
-					<MapLayerView
-						id={`${sourceId}/point`}
-						spec={{
-							type: 'circle',
-							filter: ['==', '$type', 'Point'],
-							paint: {
-								'circle-color': selectedColor === 'red' ?  theme().color.palette.red['700'] : theme().color.palette.blue['700'],
-								'circle-radius': 6,
-								'circle-stroke-width': 1,
-								'circle-stroke-color': '#000'
-							}
-						}}
-					/>
-						{/key}
+						<MapLayerView
+							id={`${sourceId}/point`}
+							spec={{
+								type: 'circle',
+								filter: ['==', '$type', 'Point'],
+								paint: {
+									'circle-color':
+										selectedColor === 'red'
+											? theme().color.palette.red['700']
+											: theme().color.palette.blue['700'],
+									'circle-radius': 6,
+									'circle-stroke-width': 1,
+									'circle-stroke-color': '#000'
+								}
+							}}
+						/>
+					{/key}
 				</MapLayerSource>
 			</Map>
 		</div>

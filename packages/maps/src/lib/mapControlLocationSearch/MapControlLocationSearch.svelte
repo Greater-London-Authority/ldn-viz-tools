@@ -84,7 +84,7 @@
 	}
 
 	$effect(() => {
-		if ($mapStore){
+		if ($mapStore) {
 			initMapLayer($mapStore);
 		}
 	});

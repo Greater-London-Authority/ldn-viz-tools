@@ -110,7 +110,7 @@
 		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
 			<Dialog.Content {...contentProps} class={modalClass}>
 				<div
-					class={`border-color-static-brand bg-color-container-level-1 text-color-text-primary relative flex items-center justify-between border-l-[5px] p-3 pr-4 ${headerTheme}`}
+					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text-primary ${headerTheme}`}
 				>
 					<Dialog.Title class="font-medium">
 						{@render title?.()}

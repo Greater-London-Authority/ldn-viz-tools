@@ -36,7 +36,7 @@
 	{@render popoverTrigger()}
 
 	<Popover.Content
-		class="border-color-ui-border-secondary bg-color-container-level-0 z-50 w-60 border p-2 text-sm shadow-lg"
+		class="z-50 w-60 border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-sm shadow-lg"
 	>
 		{#if title}
 			<p class="font-medium">

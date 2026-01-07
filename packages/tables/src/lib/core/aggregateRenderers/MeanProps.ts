@@ -1,9 +1,9 @@
 export interface MeanProps {
-  /**
-   * Array of values to be displayed.
-   */
-  values: number[];
-  formatString?: string;
+	/**
+	 * Array of values to be displayed.
+	 */
+	values: number[];
+	formatString?: string;
 
-  [key: string]: any;
+	[key: string]: any;
 }

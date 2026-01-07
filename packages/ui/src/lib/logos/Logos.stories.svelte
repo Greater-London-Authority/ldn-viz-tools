@@ -47,7 +47,7 @@
 
 <Story name="Inherit font color (default)">
 	{#snippet template()}
-		<div class="text-color-text-primary flex space-x-6">
+		<div class="flex space-x-6 text-color-text-primary">
 			<LogoMayor class="w-40" />
 			<LogoCIU class="w-40" />
 			<LogoByCIU class="w-40" />
@@ -60,17 +60,17 @@
 	{#snippet template()}
 		<div class="space-y-4">
 			<div class="flex space-x-6">
-				<LogoMayor class="fill-color-palette-grey-400 w-40" />
-				<LogoCIU class="fill-color-palette-grey-400 w-40" />
-				<LogoByCIU class="fill-color-palette-grey-400 w-40" />
-				<LogoLOTI class="fill-color-palette-grey-400 h-10" />
+				<LogoMayor class="w-40 fill-color-palette-grey-400" />
+				<LogoCIU class="w-40 fill-color-palette-grey-400" />
+				<LogoByCIU class="w-40 fill-color-palette-grey-400" />
+				<LogoLOTI class="h-10 fill-color-palette-grey-400" />
 			</div>
 
 			<div class="flex space-x-6">
-				<LogoMayor class="fill-color-palette-grey-800 w-40" />
-				<LogoCIU class="fill-color-palette-grey-800 w-40" />
-				<LogoByCIU class="fill-color-palette-grey-800 w-40" />
-				<LogoLOTI class="fill-color-palette-grey-800 h-10" />
+				<LogoMayor class="w-40 fill-color-palette-grey-800" />
+				<LogoCIU class="w-40 fill-color-palette-grey-800" />
+				<LogoByCIU class="w-40 fill-color-palette-grey-800" />
+				<LogoLOTI class="h-10 fill-color-palette-grey-800" />
 			</div>
 		</div>
 	{/snippet}

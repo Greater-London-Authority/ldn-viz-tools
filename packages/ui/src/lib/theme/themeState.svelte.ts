@@ -8,7 +8,9 @@ type ThemeObject<T> = {
 
 class ThemeState {
 	currentMode: SystemModeValue = $derived(mode.current);
-	currentTheme: ThemeObject<any> = $derived.by(() => tokens.theme[mode.current ? mode.current : 'light']);
+	currentTheme: ThemeObject<any> = $derived.by(
+		() => tokens.theme[mode.current ? mode.current : 'light']
+	);
 
 	tokenNameToValue = (colorName: string, theme: ThemeObject<any> = this.currentTheme) => {
 		let val = theme.color;

@@ -62,7 +62,7 @@
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="text-color-action-disabled h-6 w-6 cursor-not-allowed"
+		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
 		aria-hidden="true"
 	/>
 {:else}

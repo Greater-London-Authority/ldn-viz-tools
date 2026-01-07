@@ -60,7 +60,7 @@
 
 <AppShell sidebarPlacement={{ initial: 'left' }}>
 	{#snippet main()}
-		<div class="bg-color-canvas-background-1 h-full p-6">
+		<div class="h-full bg-color-canvas-background-1 p-6">
 			<div class="mb-4">
 				<h1 class="title-lg responsive">This is the main content area</h1>
 				<h2 class="subtitle responsive font-normal">

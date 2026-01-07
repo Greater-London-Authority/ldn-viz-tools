@@ -66,8 +66,8 @@
 		<p>We get lots of complaints about it actually, with people regularly asking us things like:</p>
 		<blockquote>
 			<p>
-				Why is Tailwind removing the default styles on my <code>h1</code> elements? How do I disable
-				this? What do you mean I lose all the other base styles too?
+				Why is Tailwind removing the default styles on my <code>h1</code> elements? How do I disable this?
+				What do you mean I lose all the other base styles too?
 			</p>
 		</blockquote>
 		<p>
@@ -334,8 +334,8 @@
 			Another thing I've done in the past is put a <code>code</code> tag inside of a link, like if I
 			wanted to tell you about the
 			<a href="https://github.com/tailwindcss/docs"><code>tailwindcss/docs</code></a> repository. I don't
-			love that there is an underline below the backticks but it is absolutely not worth the madness
-			it would require to avoid it.
+			love that there is an underline below the backticks but it is absolutely not worth the madness it
+			would require to avoid it.
 		</p>
 		<h4>We haven't used an <code>h4</code> yet</h4>
 		<p>

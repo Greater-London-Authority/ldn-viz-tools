@@ -85,7 +85,7 @@
 				.then((updatedLocation: Geolocation) => {
 					showClearButton = true;
 
-					if ($mapStore){
+					if ($mapStore) {
 						setFeature('geocoder', $mapStore, updatedLocation, { zoom: zoomLevel });
 					}
 

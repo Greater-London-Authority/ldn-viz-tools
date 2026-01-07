@@ -20,7 +20,7 @@
 		{#if table.colGroups && table.colGroups.length > 0}
 			{#each table.colGroups || [] as colGroup}
 				<div
-					class="border-color-ui-border-primary border-b"
+					class="border-b border-color-ui-border-primary"
 					style:width={getWidth(colGroup)}
 					style:height="1px"
 				></div>
@@ -31,7 +31,7 @@
 			{/each}
 		{:else}
 			<div
-				class="border-color-ui-border-primary border-b"
+				class="border-b border-color-ui-border-primary"
 				style:width="100%"
 				style:height="1px"
 			></div>

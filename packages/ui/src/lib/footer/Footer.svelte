@@ -27,7 +27,7 @@
 
 <footer class="{theme} mt-auto">
 	<div
-		class="bg-color-container-level-0 text-color-text-primary border-color-ui-border-secondary border-t px-4 py-4 sm:flex sm:space-x-4 md:px-8"
+		class="border-t border-color-ui-border-secondary bg-color-container-level-0 px-4 py-4 text-color-text-primary sm:flex sm:space-x-4 md:px-8"
 	>
 		<!-- Contents of the footer -->
 		{@render children?.()}
@@ -35,7 +35,7 @@
 
 	{#if showCiuLogo}
 		<div
-			class="bg-color-container-level-0 text-color-text-primary flex px-4 pb-4 sm:flex-row-reverse md:px-8"
+			class="flex bg-color-container-level-0 px-4 pb-4 text-color-text-primary sm:flex-row-reverse md:px-8"
 		>
 			<div>
 				<p class="mb-1 text-xs tracking-wide">Designed and developed by</p>
@@ -44,7 +44,7 @@
 		</div>
 	{:else if logos}
 		<div
-			class="bg-color-container-level-0 text-color-text-primary flex px-4 pb-4 sm:flex-row-reverse md:px-8"
+			class="flex bg-color-container-level-0 px-4 pb-4 text-color-text-primary sm:flex-row-reverse md:px-8"
 		>
 			{@render logos()}
 		</div>
@@ -52,13 +52,13 @@
 
 	{#if footerCookieMenu}
 		<div
-			class="bg-color-container-level-1 border-color-ui-border-secondary border-t px-4 py-2 md:px-8"
+			class="border-t border-color-ui-border-secondary bg-color-container-level-1 px-4 py-2 md:px-8"
 		>
 			{@render footerCookieMenu()}
 		</div>
 	{:else if showCookieMenu}
 		<div
-			class="bg-color-container-level-1 border-color-ui-border-secondary border-t px-4 py-2 md:px-8"
+			class="border-t border-color-ui-border-secondary bg-color-container-level-1 px-4 py-2 md:px-8"
 		>
 			<FooterCookieMenu />
 		</div>

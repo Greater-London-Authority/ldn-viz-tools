@@ -158,7 +158,7 @@
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple bind:value />
 
-			<span class="text-color-text-secondary mt-4 block">
+			<span class="mt-4 block text-color-text-secondary">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -170,7 +170,7 @@
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple keepSelectionInList bind:value />
 
-			<span class="text-color-text-secondary mt-4 block">
+			<span class="mt-4 block text-color-text-secondary">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -277,7 +277,7 @@
 				bind:value={selectedBorough}
 			/>
 
-			<div class="text-color-text-secondary mt-4">
+			<div class="mt-4 text-color-text-secondary">
 				<strong>Selected:</strong>
 				{selectedBorough ?? 'None'}
 			</div>

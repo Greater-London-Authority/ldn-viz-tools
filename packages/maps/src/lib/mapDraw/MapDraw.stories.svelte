@@ -128,10 +128,8 @@
 	{/snippet}
 </Story>
 
-
 <Story name="Externally track whether editing is in progress">
 	{#snippet template()}
-
 		<span>isEditing: {isEditing}</span>
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
@@ -142,9 +140,9 @@
 				<MapControlGroup position="TopLeft">
 					<MapDraw
 						uploadDownload={[false, false]}
-						onStart={() => isEditing = true}
-						onDone={() => isEditing = false}
-						onCancel={() => isEditing = false}
+						onStart={() => (isEditing = true)}
+						onDone={() => (isEditing = false)}
+						onCancel={() => (isEditing = false)}
 					/>
 				</MapControlGroup>
 			</Map>

@@ -27,7 +27,6 @@
 		 */
 		onDone?: (_args: any) => any;
 
-
 		/**
 		 * Function to be called when user clicks 'Edit' button.
 		 */
@@ -37,7 +36,6 @@
 		 * Function to be called when user clicks 'Cancel' button.
 		 */
 		onCancel?: () => any;
-
 
 		/**
 		 * If [true, false], then Geojson upload only is enabled.
@@ -124,5 +122,13 @@
 </script>
 
 {#if terraDraw}
-	<MapDrawControls {terraDraw} {uploadDownload} {onStart} {onCancel} {onDone} {drawModes} {mapDraw} />
+	<MapDrawControls
+		{terraDraw}
+		{uploadDownload}
+		{onStart}
+		{onCancel}
+		{onDone}
+		{drawModes}
+		{mapDraw}
+	/>
 {/if}

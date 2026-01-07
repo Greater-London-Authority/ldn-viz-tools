@@ -36,6 +36,6 @@
 	label="Transport method"
 	{customOverlay}
 />
-<p class="text-color-text-secondary mt-4">
+<p class="mt-4 text-color-text-secondary">
 	selectedOptions: {JSON.stringify(selectedOptions)}
 </p>

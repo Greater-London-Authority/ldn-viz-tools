@@ -63,7 +63,7 @@
 			bind:selectedId
 			{...args}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 	{/snippet}
 </Story>
 
@@ -76,7 +76,7 @@
 			label="RadioGroup Label"
 			{...args}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId2}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId2}</p>
 	{/snippet}
 </Story>
 
@@ -90,7 +90,7 @@
 			description="This is a description"
 			{...args}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId3}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId3}</p>
 	{/snippet}
 </Story>
 
@@ -105,7 +105,7 @@
 			description="This is a description"
 			{...args}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId4}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId4}</p>
 	{/snippet}
 </Story>
 
@@ -147,7 +147,7 @@ different values as the `name` prop.
 			bind:selectedId={selectedId7}
 			{...args}
 		></RadioButtonGroupSolid>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId7}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId7}</p>
 	{/snippet}
 </Story>
 
@@ -159,7 +159,7 @@ different values as the `name` prop.
 			bind:selectedId={selectedId8}
 			{...args}
 		></RadioButtonGroupSolid>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId8}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId8}</p>
 	{/snippet}
 </Story>
 
@@ -171,7 +171,7 @@ different values as the `name` prop.
 			bind:selectedId={selectedId9}
 			{...args}
 		></RadioButtonGroupSolid>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId9}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId9}</p>
 	{/snippet}
 </Story>
 
@@ -187,7 +187,7 @@ different values as the `name` prop.
 			disabled
 			{...args}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId10}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId10}</p>
 	{/snippet}
 </Story>
 
@@ -203,7 +203,7 @@ different values as the `name` prop.
 			error={!selectedIdForError ? 'You must select an option' : undefined}
 			{...args}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedIdForError}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedIdForError}</p>
 		<Button onclick={() => (selectedIdForError = '')}>Clear</Button>
 	{/snippet}
 </Story>

@@ -226,7 +226,7 @@
 <Story name="Light Theme with Tabs" args={{ theme: 'light', tabs }} />
 
 {#snippet unstyledContent()}
-	<div class="bg-color-ui-background-notice text-color-text-primary p-4">
+	<div class="bg-color-ui-background-notice p-4 text-color-text-primary">
 		<p class="text-bold mb-2 text-xl">Unstyled Content</p>
 		<p class="mb-2">
 			This content does not inherit styles directly from the sidebar. Though it will be affected by

@@ -42,7 +42,7 @@
 	let cookieControlStore = $state(undefined);
 
 	onMount(() => {
-		if (typeof window !== 'object'){
+		if (typeof window !== 'object') {
 			// in SSR context rather than in browser
 			return;
 		}

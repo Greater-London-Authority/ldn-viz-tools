@@ -17,7 +17,7 @@
 <li class="pl-4">
 	<a
 		href={url}
-		class={`hover:text-color-action-primary-hover text-color-text-secondary text-sm hover:underline ${highlighted ? 'text-color-ui-primary' : 'text-color-text-secondary'}`}
+		class={`text-sm text-color-text-secondary hover:text-color-action-primary-hover hover:underline ${highlighted ? 'text-color-ui-primary' : 'text-color-text-secondary'}`}
 		>{title}</a
 	>
 

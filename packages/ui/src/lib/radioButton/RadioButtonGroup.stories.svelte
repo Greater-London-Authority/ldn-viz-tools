@@ -57,7 +57,7 @@
 <Story name="Default">
 	{#snippet template(args)}
 		<RadioButtonGroup {...args} options={optionsForGroup} name="station-type" bind:selectedId />
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
 	{/snippet}
 </Story>
 
@@ -72,7 +72,7 @@
 				hint="Radio ga ga"
 			/>
 		</div>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId2}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId2}</p>
 	{/snippet}
 </Story>
 
@@ -96,7 +96,7 @@
 				{/snippet}</RadioButtonGroup
 			>
 		</div>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId3}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId3}</p>
 	{/snippet}
 </Story>
 
@@ -110,7 +110,7 @@
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId4}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId4}</p>
 	{/snippet}
 </Story>
 
@@ -124,7 +124,7 @@
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId5}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId5}</p>
 	{/snippet}
 </Story>
 
@@ -139,7 +139,7 @@
 			description="Pick you preferred method of transport - taxis are currently not available"
 			allowClear={false}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId6}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId6}</p>
 	{/snippet}
 </Story>
 
@@ -154,7 +154,7 @@
 			allowClear={false}
 			orientation="horizontal"
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId7}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId7}</p>
 	{/snippet}
 </Story>
 
@@ -169,7 +169,7 @@
 			allowClear={false}
 			disabled
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedId8}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId8}</p>
 	{/snippet}
 </Story>
 
@@ -184,6 +184,6 @@
 			allowClear={false}
 			error={!selectedIdForError ? 'You must select an option' : undefined}
 		/>
-		<p class="text-color-text-secondary mt-8">Selected id: {selectedIdForError}</p>
+		<p class="mt-8 text-color-text-secondary">Selected id: {selectedIdForError}</p>
 	{/snippet}
 </Story>
