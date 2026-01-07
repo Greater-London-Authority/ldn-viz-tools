@@ -76,7 +76,7 @@
 	// Classes applied to the wrapper element
 	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
 	let wrapperClasses = $derived(
-		classNames('h-full w-full flex relative', heightClass) //overflow-hidden
+		classNames('h-full w-full flex relative', heightClass) // overflow-hidden
 	);
 
 	/*
