@@ -103,22 +103,8 @@
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
 			<p class="font-bold">
-				YO Provide some main content. The main content you provide should have appropriate padding
-				applied...Provide some main content. The main content you provide should have appropriate
-				padding applied...Provide some main content. The main content you provide should have
-				appropriate padding applied...Provide some main content. The main content you provide should
-				have appropriate padding applied...Provide some main content. The main content you provide
-				should have appropriate padding applied...Provide some main content. The main content you
-				provide should have appropriate padding applied...Provide some main content. The main
-				content you provide should have appropriate padding applied...Provide some main content. The
-				main content you provide should have appropriate padding applied...Provide some main
-				content. The main content you provide should have appropriate padding applied...Provide some
-				main content. The main content you provide should have appropriate padding applied...Provide
-				some main content. The main content you provide should have appropriate padding
-				applied...Provide some main content. The main content you provide should have appropriate
-				padding applied...Provide some main content. The main content you provide should have
-				appropriate padding applied...Provide some main content. The main content you provide should
-				have appropriate padding applied...
+				Provide some main content. The main content you provide should have appropriate padding
+				applied...
 			</p>
 		{/if}
 	</main>
