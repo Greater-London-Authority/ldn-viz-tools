@@ -76,7 +76,7 @@
 	// Classes applied to the wrapper element
 	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
 	let wrapperClasses = $derived(
-		classNames('h-full w-full flex relative overflow-hidden', heightClass)
+		classNames('h-full w-full flex relative', heightClass) // overflow-hidden
 	);
 
 	/*
@@ -103,8 +103,22 @@
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
 			<p class="font-bold">
-				Provide some main content. The main content you provide should have appropriate padding
-				applied...
+				YO Provide some main content. The main content you provide should have appropriate padding
+				applied...Provide some main content. The main content you provide should have appropriate
+				padding applied...Provide some main content. The main content you provide should have
+				appropriate padding applied...Provide some main content. The main content you provide should
+				have appropriate padding applied...Provide some main content. The main content you provide
+				should have appropriate padding applied...Provide some main content. The main content you
+				provide should have appropriate padding applied...Provide some main content. The main
+				content you provide should have appropriate padding applied...Provide some main content. The
+				main content you provide should have appropriate padding applied...Provide some main
+				content. The main content you provide should have appropriate padding applied...Provide some
+				main content. The main content you provide should have appropriate padding applied...Provide
+				some main content. The main content you provide should have appropriate padding
+				applied...Provide some main content. The main content you provide should have appropriate
+				padding applied...Provide some main content. The main content you provide should have
+				appropriate padding applied...Provide some main content. The main content you provide should
+				have appropriate padding applied...
 			</p>
 		{/if}
 	</main>
