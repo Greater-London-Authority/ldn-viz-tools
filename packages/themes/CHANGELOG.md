@@ -1,5 +1,15 @@
 # @ldn-viz/themes
 
+## 7.0.0
+
+### Major Changes
+
+- 09ba55a: CHANGED: update to use Svelte 5 and runes.
+
+### Minor Changes
+
+- a01e1a5: Updated defaults for container class padding
+
 ## 6.1.0-svelte5.0
 
 ### Minor Changes

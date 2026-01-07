@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/tables",
-	"version": "5.0.0-svelte5.10",
+	"version": "5.0.0",
 	"keywords": [
 		"svelte"
 	],
