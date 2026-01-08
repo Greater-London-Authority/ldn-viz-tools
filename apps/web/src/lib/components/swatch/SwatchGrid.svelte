@@ -13,15 +13,15 @@
 		xl: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4'
 	};
 
-	const gridClass = classNames(sizeClasses[size as keyof typeof sizeClasses]);
+	const gridClass = $derived(classNames(sizeClasses[size as keyof typeof sizeClasses]));
 </script>
 
 {#if title}
 	<h3 class={size === 'xs' ? 'title-xs' : 'title-sm'}>{title}</h3>
 {/if}
-<!-- xl:grid-cols-6 2xl:grid-cols-8 -->
+
 <div class={gridClass}>
 	{#each tokenData as token}
-		<Swatch {...token} {size} />
+		<Swatch {...token} {size} content={token.value} />
 	{/each}
 </div>
