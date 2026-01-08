@@ -13,12 +13,10 @@ const config = {
 		prerender: { entries: ['*', ...contentIndex.map((d) => d.slugFull)] }
 	},
 	onwarn: (warning, handler) => {
-		const { code } = warning;
-		if (code === 'css_unused_selector') return;
+		if (warning.code === 'css_unused_selector') return;
 		if (warning.code === 'a11y_no_noninteractive_tabindex') return;
-		if (warning.code === 'vite-plugin-svelte-preprocess-many-dependencies') {
-			return; // suppress it
-		}
+		if (warning.code === 'vite-plugin-svelte-preprocess-many-dependencies') return;
+		if (warning.code === 'script_context_deprecated') return;
 		handler(warning);
 	},
 	extensions: ['.svelte', '.svx', '.md']
