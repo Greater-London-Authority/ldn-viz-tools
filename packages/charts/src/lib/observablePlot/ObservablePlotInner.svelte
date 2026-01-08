@@ -241,6 +241,7 @@
 		}
 	});
 
+	// svelte-ignore state_referenced_locally
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
 		$tooltipStore ? data[$tooltipStore.index] : undefined
 	);
@@ -262,7 +263,7 @@
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
 		<div
-			class="absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container-level-0 p-2 text-sm shadow"
+			class="bg-color-container-level-0 absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full p-2 text-sm shadow"
 			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 			style:left={`${$tooltipStore.layerX}px`}
 		>
@@ -271,7 +272,7 @@
 			{/if}
 
 			<div
-				class="absolute inset-x-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-color-container-level-0"
+				class="bg-color-container-level-0 absolute inset-x-1/2 h-4 w-4 -translate-x-1/2 rotate-45"
 			></div>
 		</div>
 	{/if}
