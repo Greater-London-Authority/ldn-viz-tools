@@ -316,17 +316,17 @@
 
 <search
 	bind:this={container}
-	class="bg-color-input-background pointer-events-auto relative flex h-10 w-full {classes}"
+	class="pointer-events-auto relative flex h-10 w-full bg-color-input-background {classes}"
 >
 	<div class="absolute left-2 top-2 flex items-center justify-center">
-		<Icon src={MagnifyingGlass} class="text-color-input-icon h-6 w-6" />
+		<Icon src={MagnifyingGlass} class="h-6 w-6 text-color-input-icon" />
 	</div>
 
 	<input
 		bind:this={input}
 		type="search"
 		{placeholder}
-		class="text-color-valuetext form-input border-color-input-border bg-color-input-background placeholder-color-input-placeholder h-full w-64 min-w-0 max-w-[100%] shrink grow border pl-10 {inputClasses}"
+		class="text-color-valuetext form-input h-full w-64 min-w-0 max-w-[100%] shrink grow border border-color-input-border bg-color-input-background pl-10 placeholder-color-input-placeholder {inputClasses}"
 		class:pr-8={showClearButton}
 		value={query}
 		onfocus={reshowSuggestionList}
@@ -337,10 +337,10 @@
 	{#if showClearButton || query?.length > 0}
 		<button
 			onclick={clearSearch}
-			class="y-auto bg-color-input-background absolute right-1 top-1 flex items-center justify-center"
+			class="y-auto absolute right-1 top-1 flex items-center justify-center bg-color-input-background"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="p-0.25 text-color-input-icon h-8 w-8" />
+			<Icon src={XMark} class="p-0.25 h-8 w-8 text-color-input-icon" />
 		</button>
 	{/if}
 

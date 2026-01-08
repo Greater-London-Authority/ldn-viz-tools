@@ -91,7 +91,7 @@
 	{#if tabs.length}
 		<div
 			class={classNames(
-				'bg-color-container-level-0 absolute',
+				'absolute bg-color-container-level-0',
 				tabPlacementClasses,
 				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
 			)}
@@ -137,7 +137,7 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="text-color-text-primary flex h-full flex-col overflow-y-auto px-6 pt-6">
+					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text-primary">
 						{#if header}
 							<div class="pb-4">
 								<!-- typically contains a `<SidebarHeader>` -->
@@ -151,7 +151,7 @@
 									<TabPanel
 										tabPanelId={`${tab.id}-panel`}
 										tabId={tab.id}
-										class="bg-color-container-level-1 space-y-4"
+										class="space-y-4 bg-color-container-level-1"
 									>
 										{@const SvelteComponent = component}
 										<SvelteComponent />
