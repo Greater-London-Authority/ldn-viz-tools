@@ -15,7 +15,7 @@
 		hintType = 'tooltip',
 		color = '',
 		alignHeader = 'left',
-		...rest
+		..._rest
 	}: HeaderProps = $props();
 	const alignmentClasses = {
 		left: 'justify-start',

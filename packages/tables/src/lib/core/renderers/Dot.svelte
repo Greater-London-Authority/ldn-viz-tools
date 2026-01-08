@@ -16,7 +16,7 @@
 		value,
 		formatString = '0.0f',
 		extent = [0, 1],
-		...rest
+		..._rest
 	}: DotProps = $props();
 
 	let d = $derived((value - extent[0]) / (extent[1] - extent[0]));

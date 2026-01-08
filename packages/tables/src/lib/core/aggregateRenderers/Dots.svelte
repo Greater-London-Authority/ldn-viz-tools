@@ -8,7 +8,7 @@
 	import type { DotsProps } from '$lib/core/aggregateRenderers/DotsProps';
 	import { scaleLinear, type ScaleLinear } from 'd3-scale';
 
-	let { values, extent = [0, 1], width = 100, ...rest }: DotsProps = $props();
+	let { values, extent = [0, 1], width = 100, ..._rest }: DotsProps = $props();
 
 	const height = 30;
 	const marginRight = 10;

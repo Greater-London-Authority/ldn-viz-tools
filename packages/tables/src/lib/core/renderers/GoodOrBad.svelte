@@ -19,7 +19,7 @@
 		benchmarkLabel = '',
 		goodIs = 'n/a',
 		iconOnly = false,
-		...rest
+		..._rest
 	}: GoodOrBadProps = $props();
 
 	const benchmarkIcons: { [key: string]: any } = {

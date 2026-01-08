@@ -14,7 +14,7 @@
 		color = 'black',
 		posScale,
 		showValues = true,
-		...rest
+		..._rest
 	}: CategoricalTickProps = $props();
 
 	let w = $derived(1 / posScale.domain().length);

@@ -11,7 +11,7 @@
 	import type { ViolinProps } from '$lib/core/aggregateRenderers/ViolinProps';
 	import { area, curveCatmullRom } from 'd3-shape';
 
-	let { values, extent = [0, 1], width = 100, ...rest }: ViolinProps = $props();
+	let { values, extent = [0, 1], width = 100, ..._rest }: ViolinProps = $props();
 
 	// Declare the chart dimensions and margins.
 	const height = 30;

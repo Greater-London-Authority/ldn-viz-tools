@@ -7,7 +7,7 @@
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
 
-	let { values, color = 'red', width = 100, ...rest }: StackedBarProps = $props();
+	let { values, color = 'red', width = 100, ..._rest }: StackedBarProps = $props();
 
 	const height = 30;
 	const marginRight = 10;

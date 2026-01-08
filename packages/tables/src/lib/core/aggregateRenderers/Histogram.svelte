@@ -15,7 +15,7 @@
 		extent = [0, 1],
 		color = 'steelblue',
 		width = 100,
-		...rest
+		..._rest
 	}: HistogramProps = $props();
 
 	const height = 30;

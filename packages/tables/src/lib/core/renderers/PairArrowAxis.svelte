@@ -18,7 +18,7 @@
 		width = 100,
 		numTicks = 4,
 		textSize = 8,
-		...rest
+		..._rest
 	}: PairArrowAxisProps = $props();
 
 	let x: ScaleLinear<number, number> = $derived(

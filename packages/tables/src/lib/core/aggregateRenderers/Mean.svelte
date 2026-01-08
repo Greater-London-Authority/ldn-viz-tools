@@ -8,7 +8,7 @@
 	import { format } from 'd3-format';
 	import type { MeanProps } from '$lib/core/aggregateRenderers/MeanProps';
 
-	let { values, formatString = '0.0f', ...rest }: MeanProps = $props();
+	let { values, formatString = '0.0f', ..._rest }: MeanProps = $props();
 
 	let f = $derived(format(formatString));
 

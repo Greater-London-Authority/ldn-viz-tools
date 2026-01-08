@@ -16,7 +16,7 @@
 		width = 100,
 		numTicks = 4,
 		textSize = 8,
-		...rest
+		..._rest
 	}: BarDivergingAxisProps = $props();
 
 	const topPadding = height; // padding above the horizontal rule

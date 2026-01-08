@@ -9,7 +9,7 @@
 	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
 
-	let { values, color = 'lightgrey', posScale, width = 100, ...rest }: BarChartProps = $props();
+	let { values, color = 'lightgrey', posScale, width = 100, ..._rest }: BarChartProps = $props();
 
 	const height = 30;
 	const marginTop = 0;
