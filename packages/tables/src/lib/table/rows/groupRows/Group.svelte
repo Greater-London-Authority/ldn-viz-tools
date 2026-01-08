@@ -11,7 +11,7 @@
 <GroupSummaryRow {group} {table} />
 
 {#if group.isExpanded}
-	{#each table.fetchGroupContents(group) as row}
+	{#each table.fetchGroupContents(group) as row (row)}
 		<DataRow {row} {table} />
 	{/each}
 {/if}

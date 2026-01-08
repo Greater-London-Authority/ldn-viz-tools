@@ -17,7 +17,7 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-		{#each table.colGroups || [] as colGroup}
+		{#each table.colGroups || [] as colGroup (colGroup)}
 			<div class="was-th" style:width={getWidth(colGroup)}>
 				<div role="cell" tabindex="0" class="w-full">
 					<div class="text-center font-bold" style:color={colGroup.color ?? 'currentColor'}>

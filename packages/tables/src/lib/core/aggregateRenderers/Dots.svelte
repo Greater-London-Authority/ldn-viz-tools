@@ -69,7 +69,7 @@
 	<canvas {width} {height} bind:this={canvasRef}></canvas>
 {:else}
 	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
-		{#each dodgedValues as point}
+		{#each dodgedValues as point (point)}
 			<circle cx={x(point.x)} cy={(height - marginBottom) * point.y} r={radius} opacity={0.1}>
 				<title>{point.data}</title>
 			</circle>
