@@ -110,6 +110,7 @@
 	}: Props = $props();
 
 	let dndzone = $derived(reorderable ? dnd : undefined);
+	// svelte-ignore state_referenced_locally
 	overrideItemIdKeyNameBeforeInitialisingDndZones(valueField ?? 'value');
 </script>
 

@@ -32,6 +32,7 @@
 
 	let inputType = $derived(type);
 
+	// svelte-ignore state_referenced_locally
 	if (type === 'number') {
 		// Don't use type number. Advised by both MDN and GDS.
 		// Use inputmode numeric instead unless the user dev specified another.
@@ -39,6 +40,7 @@
 		inputmode = inputmode ? inputmode : 'numeric';
 	}
 
+	// svelte-ignore state_referenced_locally
 	if (type === 'password' && format === trimInput) {
 		// Form input values rarely need to keep leading and trailing whitespace
 		// but passwords are an exception so default to no formatting.

@@ -25,6 +25,7 @@
 	/**
 	 * Set props as context for retieval by items.
 	 */
+	// svelte-ignore state_referenced_locally
 	setContext('navContext', { orientation, isAlwaysExpanded });
 
 	const orientationClasses = {

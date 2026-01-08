@@ -97,7 +97,7 @@
 		}
 	};
 
-	let optionIds = options.map((o) => o.id).join(' ');
+	let optionIds = $derived(options.map((o) => o.id).join(' '));
 
 	const updateSelectedOptions = (optionId: string) => {
 		if (selectedOptions.includes(optionId)) {

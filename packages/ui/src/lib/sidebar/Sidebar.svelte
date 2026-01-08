@@ -39,16 +39,18 @@
 		class: classes
 	}: SidebarProps = $props();
 
-	const wrapperClasses = `${position} z-30 ${theme}`;
-	const sidebarClasses = `flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`; // p-6 pad on container or elements (overflow position)
+	const wrapperClasses = $derived(`${position} z-30 ${theme}`);
+	const sidebarClasses = $derived(`flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
 
 	// expose internal state to parent component
 	state = sidebarState;
 
 	// If a context provides a reactive placement use that
+	// svelte-ignore state_referenced_locally
 	sidebarState.placement = placement;
 
 	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
+	// svelte-ignore state_referenced_locally
 	sidebarState.width = width;
 
 	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
@@ -89,7 +91,7 @@
 	{#if tabs.length}
 		<div
 			class={classNames(
-				'absolute bg-color-container-level-0',
+				'bg-color-container-level-0 absolute',
 				tabPlacementClasses,
 				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
 			)}
@@ -135,7 +137,7 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text-primary">
+					<div class="text-color-text-primary flex h-full flex-col overflow-y-auto px-6 pt-6">
 						{#if header}
 							<div class="pb-4">
 								<!-- typically contains a `<SidebarHeader>` -->
@@ -149,7 +151,7 @@
 									<TabPanel
 										tabPanelId={`${tab.id}-panel`}
 										tabId={tab.id}
-										class="space-y-4 bg-color-container-level-1"
+										class="bg-color-container-level-1 space-y-4"
 									>
 										{@const SvelteComponent = component}
 										<SvelteComponent />
