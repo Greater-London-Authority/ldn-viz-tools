@@ -80,9 +80,11 @@
 		full: 'max-w-full'
 	};
 
-	const modalClass = classNames(
-		'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
-		widthClasses[width]
+	const modalClass = $derived(
+		classNames(
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
+			widthClasses[width]
+		)
 	);
 </script>
 

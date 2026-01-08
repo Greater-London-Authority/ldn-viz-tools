@@ -35,7 +35,7 @@
 		customOverlay = undefined
 	}: Props = $props();
 
-	let inputID = `input-${id}`;
+	let inputID = $derived(`input-${id}`);
 </script>
 
 <label class="flex items-center">

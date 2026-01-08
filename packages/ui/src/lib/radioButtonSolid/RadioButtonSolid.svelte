@@ -21,7 +21,7 @@
 		iconPlacement = 'above'
 	}: RadioButtonSolidProps = $props();
 
-	let inputID = `input-${name || ''}-${id}`;
+	let inputID = $derived(`input-${name || ''}-${id}`);
 
 	const labelClasses = $derived(
 		classNames(

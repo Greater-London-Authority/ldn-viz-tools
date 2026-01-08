@@ -164,7 +164,7 @@
 	 * Only generate `descriptionId` and/or `errorId` when `description` and/or `error` exist.
 	 * `descriptionId` is static but `errorId` is reactive as error state could change.
 	 */
-	const descriptionId = description ? `${id}-description` : undefined;
+	const descriptionId = $derived(description ? `${id}-description` : undefined);
 
 	let allCheckboxesCheckedOrDisabled: boolean = $derived(
 		options.every((o) => (o.disabled ? true : layersState[o.id]?.visible))
@@ -192,7 +192,7 @@
 		}
 	};
 
-	let optionIds = options.map((o) => o.id).join(' ');
+	let optionIds = $derived(options.map((o) => o.id).join(' '));
 
 	let selectedOptionId: string | undefined = $state(); // only used by radioButtons, if mutuallyExclusive
 	const updateStateFromCheckbox = (selectedId: string | undefined) => {

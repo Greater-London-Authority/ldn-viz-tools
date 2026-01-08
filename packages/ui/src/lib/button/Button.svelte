@@ -132,7 +132,7 @@
 		text: '!text-color-action-disabled hover:bg-transparent'
 	};
 
-	const sizeClasses = {
+	const sizeClasses = $derived({
 		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'text-xs px-1 min-w-6 min-h-6',
 		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5 min-w-8 min-h-8',
 		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2 min-w-10 min-h-10',
@@ -140,7 +140,7 @@
 			variant === 'square'
 				? 'w-16 h-16 text-xs flex-col space-y-4'
 				: 'text-lg px-4 py-2 min-w-16 min-h-16'
-	};
+	});
 
 	const buttonClass = $derived(
 		classNames(

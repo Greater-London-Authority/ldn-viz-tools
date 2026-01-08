@@ -39,16 +39,18 @@
 		class: classes
 	}: SidebarProps = $props();
 
-	const wrapperClasses = `${position} z-30 ${theme}`;
-	const sidebarClasses = `flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`; // p-6 pad on container or elements (overflow position)
+	const wrapperClasses = $derived(`${position} z-30 ${theme}`);
+	const sidebarClasses = $derived(`flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
 
 	// expose internal state to parent component
 	state = sidebarState;
 
 	// If a context provides a reactive placement use that
+	// svelte-ignore state_referenced_locally
 	sidebarState.placement = placement;
 
 	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
+	// svelte-ignore state_referenced_locally
 	sidebarState.width = width;
 
 	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
