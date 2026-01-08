@@ -45,7 +45,7 @@
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
-	{#each bars as bar}
+	{#each bars as bar (bar.val)}
 		<rect
 			x={x(bar.start)}
 			width={x(bar.end) - x(bar.start)}

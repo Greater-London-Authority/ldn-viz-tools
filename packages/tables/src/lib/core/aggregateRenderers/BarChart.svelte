@@ -17,6 +17,9 @@
 	const marginBottom = 10;
 	const marginLeft = 0;
 
+	/**
+	 * An array of counts, each consisting of a [value, count] pair.
+	 */
 	let sortedData = $derived.by(() => {
 		// count the values: produces a list of [value, count] pairs
 		const counts: Record<string, number> = Object.create(null);
@@ -63,7 +66,7 @@
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 	<g>
-		{#each sortedData as d}
+		{#each sortedData as d (d[0])}
 			<rect
 				fill={getVal(d[0] as string | number, color) as string}
 				x={x(String(d[0]))}
