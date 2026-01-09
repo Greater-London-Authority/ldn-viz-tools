@@ -3,11 +3,11 @@ import { getAllDocs } from './utils.js';
 const allDocs = getAllDocs();
 
 const introduction = allDocs
-	.filter((doc) => doc.section === 'Introduction')
-	.filter((doc) => doc.slugFull !== '/design-system/introduction')
+	.filter((doc) => doc.section === 'Getting Started')
+	.filter((doc) => doc.slugFull !== '/design-system/getting-started')
 	.map((doc) => ({
 		title: doc.navLabel,
-		id: `${doc.title.toLowerCase()}-introduction`,
+		id: `${doc.title.toLowerCase()}-getting-started`,
 		href: `/${doc.slug}`
 	}));
 
@@ -44,9 +44,9 @@ const dataVisualisation = allDocs
 
 export const navigation = [
 	{
-		title: 'Introduction',
-		id: 'introduction',
-		href: '/design-system/introduction',
+		title: 'Getting Started',
+		id: 'getting-started',
+		href: '/design-system/getting-started',
 		children: introduction
 	},
 	{

@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 description: Getting up and running with our system
-section: Introduction
+section: Getting Started
 navLabel: Getting Started
 ---
 
