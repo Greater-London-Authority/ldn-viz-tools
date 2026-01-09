@@ -40,11 +40,6 @@ const dataVisualisation = allDocs
 
 export const navigation = [
 	{
-		title: 'Overview',
-		id: 'overview',
-		href: '/design-system'
-	},
-	{
 		title: 'Introduction',
 		id: 'introduction',
 		href: '/design-system/introduction',
