@@ -116,6 +116,8 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineMDSveXConfig({
 	extensions: ['.md'],
+	// TODO:
+	// blueprints: // 'blueprint' that renders html tags
 	// layout: {
 	// 	_: resolve(__dirname, './src/lib/layouts/docs-layout.svelte')
 	// },
