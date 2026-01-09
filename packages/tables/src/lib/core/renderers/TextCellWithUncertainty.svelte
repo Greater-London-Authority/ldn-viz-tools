@@ -13,7 +13,7 @@
 		contextVals = [false],
 		alignText = undefined,
 		formatString = undefined,
-		...rest
+		..._rest
 	}: TextCellWithUncertaintyProps = $props();
 	let f = $derived(format(formatString ?? ''));
 

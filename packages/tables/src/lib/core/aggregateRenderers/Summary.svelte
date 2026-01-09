@@ -6,7 +6,7 @@
 	import { format } from 'd3-format';
 	import type { SummaryProps } from '$lib/core/aggregateRenderers/SummaryProps';
 
-	let { values, formatString = '0.0f', ...rest }: SummaryProps = $props();
+	let { values, formatString = '0.0f', ..._rest }: SummaryProps = $props();
 
 	let f = $derived(format(formatString));
 	let f2 = $derived((val: number | undefined) => (val === undefined ? 'undefined' : f(val)));

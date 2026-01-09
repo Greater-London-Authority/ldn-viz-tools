@@ -9,6 +9,7 @@
 
 	import { ExportBtns, Footer, SubTitle, Title } from '@ldn-viz/charts';
 	import { classNames } from '@ldn-viz/ui';
+	import type { Snippet } from 'svelte';
 
 	// export let title: string | null = null;
 
@@ -75,10 +76,10 @@
 		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the generated file.
 		 */
 		columnMapping?: undefined | { [oldName: string]: string };
-		numRowsControlSlot?: import('svelte').Snippet;
-		beforeTable?: import('svelte').Snippet;
-		table?: import('svelte').Snippet<[any]>;
-		paginationControls?: import('svelte').Snippet;
+		numRowsControlSlot?: Snippet;
+		beforeTable?: Snippet;
+		table?: Snippet<[any]>;
+		paginationControls?: Snippet;
 	}
 
 	let {

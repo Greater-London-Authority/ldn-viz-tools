@@ -18,7 +18,7 @@
 		negativeColor = 'red',
 		extent = [0, 1],
 		width = 100,
-		...rest
+		..._rest
 	}: BarDivergingCellProps = $props();
 
 	const height = 30;
