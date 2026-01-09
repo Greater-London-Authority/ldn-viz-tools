@@ -29,6 +29,9 @@ const applicationDesign = allDocs
 		href: `/${doc.slug}`
 	}));
 
+//Non alphabetic sort index. N.B reverse order so non listed pages are appended
+const dvPageOrder = ['Colour', 'Accessibility', 'Getting started'];
+
 const dataVisualisation = allDocs
 	.filter((doc) => doc.section === 'Data visualisation')
 	.filter((doc) => doc.slugFull !== '/design-system/data-visualisation')
@@ -36,7 +39,8 @@ const dataVisualisation = allDocs
 		title: doc.navLabel,
 		id: `${doc.title.toLowerCase()}-data-visualisation`,
 		href: `/${doc.slug}`
-	}));
+	}))
+	.sort((a, b) => dvPageOrder.indexOf(b.title) - dvPageOrder.indexOf(a.title));
 
 export const navigation = [
 	{
