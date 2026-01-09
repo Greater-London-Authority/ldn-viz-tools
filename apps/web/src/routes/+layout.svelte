@@ -1,4 +1,9 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
+
+	import { findActiveItem } from '@ldn-viz/ui';
+
 	import {
 		Footer,
 		Header,
@@ -14,13 +19,12 @@
 	//TMP
 	let mainMenu = [
 		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' },
-		// { title: 'Dataviz Guide', id: 'dataviz-guide', href: '/dataviz-guide' },
-		// { title: 'Tools', id: 'tools', href: '/overview' },
-		// { title: 'Team', id: 'team', href: '/overview' },
 		{ title: 'Contact', id: 'contact', href: '/' }
 	];
 
 	let { children } = $props();
+
+	let activeMenuItem = $derived(findActiveItem(mainMenu, page, resolve));
 </script>
 
 <Theme />
@@ -30,7 +34,12 @@
 		<HeaderTitle>London City Data</HeaderTitle>
 		<HeaderRight>
 			<HeaderItem>
-				<NavigationMenu items={mainMenu} orientation="horizontal" ariaLabel="main menu" />
+				<NavigationMenu
+					items={mainMenu}
+					orientation="horizontal"
+					ariaLabel="main menu"
+					activeMenuItemId={activeMenuItem?.id}
+				/>
 			</HeaderItem>
 		</HeaderRight>
 	</Header>

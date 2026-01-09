@@ -12,15 +12,15 @@
 		width = 'w-full',
 		isAlwaysExpanded = false,
 		orientation = 'vertical',
-		selectedMenuItemId = $bindable('')
+		activeMenuItemId = $bindable('')
 	}: NavigationMenuProps = $props();
 
-	const selected = $state({ value: '' });
+	const active = $state({ value: '' });
 
 	/**
-	 * Assigns value of active menu item (if set) to `selected` internal state.
+	 * Assigns value of active menu item (if set) to `active` internal state.
 	 */
-	selected.value = selectedMenuItemId;
+	active.value = activeMenuItemId;
 
 	/**
 	 * Set props as context for retieval by items.
@@ -36,12 +36,12 @@
 	let menuClasses = $derived(classNames(orientationClasses[orientation]));
 
 	/**
-	 * Event handler to update value of selected state when link is clicked.
+	 * Event handler to update value of active state when link is clicked.
 	 */
 	const onChange = (id: string) => {
-		if (selected.value !== id) {
-			selected.value = id;
-			selectedMenuItemId = id;
+		if (active.value !== id) {
+			active.value = id;
+			activeMenuItemId = id;
 		}
 	};
 
@@ -55,7 +55,7 @@
 
 	/**
 	 * Recursive function to handle applying `isExpanded` state, toggling expansion
-	 * of list when a child is selected.
+	 * of list when a child is active.
 	 */
 	const mapItems: any = (items: NavigationMenuItemProps[], targetId: string) =>
 		items.map((item: NavigationMenuItemProps) => ({
@@ -66,11 +66,11 @@
 			children: item.children ? mapItems(item.children, targetId) : undefined
 		}));
 
-	let menuState = $derived(mapItems(items, selected.value));
+	let menuState = $derived(mapItems(items, active.value));
 
 	$effect(() => {
-		if (selected.value != selectedMenuItemId) {
-			selected.value = selectedMenuItemId;
+		if (active.value != activeMenuItemId) {
+			active.value = activeMenuItemId;
 		}
 	});
 </script>
@@ -78,16 +78,7 @@
 <nav aria-label={ariaLabel} class={width}>
 	<ul {id} class={menuClasses}>
 		{#each menuState as { title, href, children, id, isExpanded }, index (index)}
-			<NavigationMenuItem
-				{href}
-				{title}
-				{id}
-				{children}
-				{index}
-				{onChange}
-				{isExpanded}
-				{selected}
-			/>
+			<NavigationMenuItem {href} {title} {id} {children} {index} {onChange} {isExpanded} {active} />
 		{/each}
 	</ul>
 </nav>
