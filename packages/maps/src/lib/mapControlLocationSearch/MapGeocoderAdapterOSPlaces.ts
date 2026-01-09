@@ -161,12 +161,10 @@ interface OSFeature {
 //
 // Update using just LPI dataset as after running some tests seems to be the most complete list of places
 // Using both causes problems like duplicate IDs in the results
-interface DPAFeature extends OSFeature {}
-interface LPIFeature extends OSFeature {}
 
 interface OSPlacesResult {
-	DPA?: DPAFeature;
-	LPI?: LPIFeature;
+	DPA?: OSFeature;
+	LPI?: OSFeature;
 }
 
 interface OSPlaces {
