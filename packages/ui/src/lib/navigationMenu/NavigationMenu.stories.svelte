@@ -256,7 +256,7 @@
 			</div>
 		</div>
 
-		<div class="text-color-text-secondary text-sm">
+		<div class="text-sm text-color-text-secondary">
 			Current active ID: <strong>{activeMenuItemId}</strong>
 		</div>
 
@@ -275,14 +275,14 @@
 	{#snippet template(args)}
 		<div class="flex w-full gap-6">
 			<div>
-				<div class="text-color-text-secondary text-sm">
+				<div class="text-sm text-color-text-secondary">
 					Current active ID: <strong>{activeMenuItemId}</strong>
 				</div>
 
 				<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:activeMenuItemId />
 			</div>
 			<div>
-				<div class="text-color-text-secondary text-sm">
+				<div class="text-sm text-color-text-secondary">
 					Current active ID: <strong>{activeMenuItemId2}</strong>
 				</div>
 

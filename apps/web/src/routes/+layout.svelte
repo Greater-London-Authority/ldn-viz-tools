@@ -19,7 +19,7 @@
 	//TMP
 	let mainMenu = [
 		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' },
-		{ title: 'Contact', id: 'contact', href: '/contact' }
+		{ title: 'Contact', id: 'contact', href: '/' }
 	];
 
 	let { children } = $props();
