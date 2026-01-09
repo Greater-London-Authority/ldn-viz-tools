@@ -26,8 +26,8 @@
 		}
 	});
 
-	let selectedMenuItemId = $state('layout');
-	let selectedMenuItemId2 = $state('applications');
+	let activeMenuItemId = $state('layout');
+	let activeMenuItemId2 = $state('applications');
 
 	export let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
@@ -154,7 +154,7 @@
 			ariaLabel="example-menu-with-width"
 			width="w-64"
 			{items}
-			bind:selectedMenuItemId
+			bind:activeMenuItemId
 		/>
 	{/snippet}
 </Story>
@@ -163,7 +163,7 @@
 <Story name="Width constrained by parent">
 	{#snippet template(args)}
 		<div class="max-w-96">
-			<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:selectedMenuItemId />
+			<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:activeMenuItemId />
 		</div>
 	{/snippet}
 </Story>
@@ -231,35 +231,33 @@
 	{/snippet}
 </Story>
 
-<Story name="Programmatically change selected item">
+<Story name="Programmatically change active item">
 	{#snippet template(args)}
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-wrap gap-2">
 				<span>Select:</span>
-				<Button onclick={() => (selectedMenuItemId = 'applications')} size="sm">
+				<Button onclick={() => (activeMenuItemId = 'applications')} size="sm">
 					Applications (level 1)
 				</Button>
-				<Button onclick={() => (selectedMenuItemId = 'layout')} size="sm">Layout (level 2)</Button>
+				<Button onclick={() => (activeMenuItemId = 'layout')} size="sm">Layout (level 2)</Button>
 			</div>
 
 			<div class="flex flex-wrap gap-2">
 				<span>Select:</span>
 
-				<Button onclick={() => (selectedMenuItemId = 'dataVisualisation')} size="sm">
+				<Button onclick={() => (activeMenuItemId = 'dataVisualisation')} size="sm">
 					DV (level 1)
 				</Button>
 
-				<Button onclick={() => (selectedMenuItemId = 'dv-color')} size="sm">
+				<Button onclick={() => (activeMenuItemId = 'dv-color')} size="sm">
 					DV Color (level 2)
 				</Button>
-				<Button onclick={() => (selectedMenuItemId = 'dv-maps')} size="sm">
-					DV Maps (level 3)
-				</Button>
+				<Button onclick={() => (activeMenuItemId = 'dv-maps')} size="sm">DV Maps (level 3)</Button>
 			</div>
 		</div>
 
-		<div class="text-sm text-color-text-secondary">
-			Current selected ID: <strong>{selectedMenuItemId}</strong>
+		<div class="text-color-text-secondary text-sm">
+			Current active ID: <strong>{activeMenuItemId}</strong>
 		</div>
 
 		<div class="max-w-96">
@@ -267,7 +265,7 @@
 				{...args}
 				ariaLabel="programmatic selection menu"
 				{items}
-				bind:selectedMenuItemId
+				bind:activeMenuItemId
 			/>
 		</div>
 	{/snippet}
@@ -277,22 +275,22 @@
 	{#snippet template(args)}
 		<div class="flex w-full gap-6">
 			<div>
-				<div class="text-sm text-color-text-secondary">
-					Current selected ID: <strong>{selectedMenuItemId}</strong>
+				<div class="text-color-text-secondary text-sm">
+					Current active ID: <strong>{activeMenuItemId}</strong>
 				</div>
 
-				<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:selectedMenuItemId />
+				<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:activeMenuItemId />
 			</div>
 			<div>
-				<div class="text-sm text-color-text-secondary">
-					Current selected ID: <strong>{selectedMenuItemId2}</strong>
+				<div class="text-color-text-secondary text-sm">
+					Current active ID: <strong>{activeMenuItemId2}</strong>
 				</div>
 
 				<NavigationMenu
 					{...args}
 					ariaLabel="example-menu"
 					{items}
-					bind:selectedMenuItemId={selectedMenuItemId2}
+					bind:activeMenuItemId={activeMenuItemId2}
 				/>
 			</div>
 		</div>

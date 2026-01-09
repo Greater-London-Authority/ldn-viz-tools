@@ -45,6 +45,7 @@ export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesC
 export { default as Modal } from './modal/Modal.svelte';
 export { default as MultipleActionButton } from './multipleActionButton/MultipleActionButton.svelte';
 export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelte';
+export * from './navigationMenu/utils';
 export { default as NonIdealState } from './nonIdealState/NonIdealState.svelte';
 export { default as Overlay } from './overlay/Overlay.svelte';
 export { default as Trigger } from './overlay/Trigger.svelte';

@@ -18,7 +18,7 @@
 		isExpanded = $bindable(false),
 		onChange,
 		index,
-		selected
+		active
 	}: NavigationMenuItemProps = $props();
 
 	const navContext: Record<keyof NavigationMenuProps, any> = getContext('navContext');
@@ -31,7 +31,7 @@
 
 	let hasChildren = $derived(children?.length > 0);
 
-	let isActive = $derived(selected.value === id);
+	let isActive = $derived(active?.value === id);
 
 	$effect(() => {
 		if ((isActive && hasChildren) || isAlwaysExpanded) {
@@ -162,7 +162,7 @@
 					level={level + 1}
 					{onChange}
 					isExpanded={child.isExpanded}
-					{selected}
+					{active}
 				/>
 			{/each}
 		</ul>
