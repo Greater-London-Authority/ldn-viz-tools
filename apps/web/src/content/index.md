@@ -11,10 +11,12 @@ navLabel: Home
 
 <div class="grid grid-cols-2 gap-4">
     <div>
+        <div class="h-60 block">
             <PlaceholderImage />
-            <h3 class="title-md pt-2">Design System Documentation</h3>
-            <p class="subtitle pb-4">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-            <Button href="/design-system/introduction" variant="outline">Read the docs</Button>
+        </div>
+        <h3 class="title-md format">Design System Documentation</h3>
+        <p class="pb-4">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system" variant="outline">Read the docs</Button>
     </div>
         <!-- <div>
             <PlaceholderImage />

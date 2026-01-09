@@ -11,7 +11,7 @@ section: Overview
 The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.
 
 <div class="space-y-4 text-center mb-8">
-    <a href="/design-system/introduction" class="h-60 block">
+    <a href="/design-system/getting-started" class="h-60 block">
         <PlaceholderImage />
     </a>
     <Button href="/design-system/foundations">Get started</Button>
