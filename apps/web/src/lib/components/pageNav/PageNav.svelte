@@ -9,9 +9,7 @@
 	// An Array of all the pages
 	const pages = navigation.flatMap((p) => [p, ...(p.children.length ? p.children : [])]);
 
-	const activeIndex = $derived(
-		pages.findIndex((p) => p.title.toLowerCase() === page.data.metadata.title.toLowerCase())
-	);
+	const activeIndex = $derived(pages.findIndex((p) => p.href === page.data.metadata.slugFull));
 
 	const hasActivePage = $derived(activeIndex !== -1);
 	const hasPrevPage = $derived(hasActivePage && activeIndex > 0);
