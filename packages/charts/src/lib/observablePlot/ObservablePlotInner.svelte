@@ -241,6 +241,7 @@
 		}
 	});
 
+	// svelte-ignore state_referenced_locally
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
 		$tooltipStore ? data[$tooltipStore.index] : undefined
 	);

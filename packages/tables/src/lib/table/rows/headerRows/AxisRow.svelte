@@ -7,7 +7,7 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i}
+		{#each table.columnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div style:width={col.computedWidth + 'px'} class="was-td">
 					{#if col.cell && col.cell.axisRenderer}

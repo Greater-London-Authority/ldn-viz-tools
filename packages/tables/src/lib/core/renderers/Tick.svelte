@@ -16,7 +16,7 @@
 		value,
 		formatString = '0.0f',
 		extent = [0, 1],
-		...rest
+		..._rest
 	}: TickProps = $props();
 
 	const fPercentage = format('0.0%');

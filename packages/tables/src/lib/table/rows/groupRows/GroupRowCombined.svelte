@@ -25,7 +25,7 @@
 </script>
 
 <div class="was-tr flex">
-	{#each new Array(getGroupLevel(group.name)) as _i}
+	{#each new Array(getGroupLevel(group.name)) as _i (_i)}
 		<!-- {@const g  = getGroup(group, i)} -->
 
 		<div style:width={table.widths.groupControl}></div>
@@ -54,14 +54,14 @@
     -->
 
 	<!-- padding of equivalent size to chevrons on other rows -->
-	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as _i}
+	{#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as _i (_i)}
 		<!-- {@const g  = getGroup(group, i)} -->
 
 		<div style:width={table.widths.groupControl}></div>
 	{/each}
 
 	<!-- padding for group size infor for lower group levels -->
-	{#each new Array(getGroupLevel(group.name)) as _, i}
+	{#each new Array(getGroupLevel(group.name)) as _, i (i)}
 		<div
 			style:width={table.widths.groupLabel}
 			style:background="white"
@@ -99,7 +99,7 @@
 		val={group.name.split(' ∩ ')[getGroupLevel(group.name)]}
 	/>
 
-	{#each new Array(Math.max(table.groupingFields.length - getGroupLevel(group.name) - 1, 0)) as _i}
+	{#each new Array(Math.max(table.groupingFields.length - getGroupLevel(group.name) - 1, 0)) as _i (_i)}
 		<div style:width={table.widths.groupLabel} style:background="white"></div>
 		<div style:width={table.widths.groupSizeLabel} style:background="white"></div>
 		<div style:width={table.widths.groupSizeBar} style:background="white"></div>
@@ -108,7 +108,7 @@
 	<!--     {#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as i} {/each} -->
 
 	<!-- actual columns -->
-	{#each table.columnSpec as col, i}
+	{#each table.columnSpec as col, i (col)}
 		{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 			<div style:width={col.computedWidth + 'px'} class="was-td">
 				{#if col.group && col.group.renderer}

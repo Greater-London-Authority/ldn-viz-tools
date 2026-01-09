@@ -14,7 +14,7 @@
 		fontWeight = 'normal',
 		visibility = 'visible',
 		formatString = undefined,
-		...rest
+		..._rest
 	}: TextCellProps = $props();
 	let f = $derived(format(formatString ?? ''));
 

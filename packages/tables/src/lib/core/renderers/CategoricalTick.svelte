@@ -14,7 +14,7 @@
 		color = 'black',
 		posScale,
 		showValues = true,
-		...rest
+		..._rest
 	}: CategoricalTickProps = $props();
 
 	let w = $derived(1 / posScale.domain().length);
@@ -24,7 +24,6 @@
 
 <div
 	class="relative top-0 z-[-1] h-full w-[3px] -translate-x-1/2 transform"
-	style="width: 3px"
 	style:background={getVal(value, color)}
 	style:left={fPercentage(l)}
 	style:width={fPercentage(w)}

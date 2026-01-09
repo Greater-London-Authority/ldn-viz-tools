@@ -18,7 +18,7 @@
 <Scaffolding {table}>
 	{#snippet dataColumns()}
 		{#if table.colGroups && table.colGroups.length > 0}
-			{#each table.colGroups || [] as colGroup}
+			{#each table.colGroups || [] as colGroup (colGroup)}
 				<div
 					class="border-b border-color-ui-border-primary"
 					style:width={getWidth(colGroup)}

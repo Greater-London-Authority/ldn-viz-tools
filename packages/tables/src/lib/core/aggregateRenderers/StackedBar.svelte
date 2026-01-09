@@ -7,7 +7,7 @@
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
 
-	let { values, color = 'red', width = 100, ...rest }: StackedBarProps = $props();
+	let { values, color = 'red', width = 100, ..._rest }: StackedBarProps = $props();
 
 	const height = 30;
 	const marginRight = 10;
@@ -45,7 +45,7 @@
 </script>
 
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
-	{#each bars as bar}
+	{#each bars as bar (bar.val)}
 		<rect
 			x={x(bar.start)}
 			width={x(bar.end) - x(bar.start)}

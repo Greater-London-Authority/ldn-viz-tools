@@ -15,7 +15,7 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i}
+		{#each table.columnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div role="columnheader" class="was-th flex" style:width={col.computedWidth + 'px'}>
 					<!-- or 100 width -->

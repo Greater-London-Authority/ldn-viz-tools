@@ -1,7 +1,7 @@
 <script lang="ts">
 	//import { MergeValuesControl, Popover } from '@ldn-viz/ui';
 
-	let { table, col } = $props();
+	// let { table, col } = $props();
 
 	// TODO: position better
 </script>

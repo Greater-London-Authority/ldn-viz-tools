@@ -187,13 +187,13 @@
 			Draw
 		</Button>
 
-		{#each drawModes.options as mode, i (mode)}
+		{#each drawModes.options as mode (mode)}
 			{#if showOptions}
 				<!-- These options hidden in the ribbon -->
 				<div in:fly>
 					<Button
 						variant="square"
-						emphasis={'secondary'}
+						emphasis="secondary"
 						class="{drawModes.mode.selected === mode
 							? '!bg-color-action-background-secondary-active'
 							: null} pointer-events-auto capitalize"

@@ -14,7 +14,7 @@
 
 <Scaffolding {table}>
 	{#snippet groupControl()}
-		{#each table.groupingFields || [] as _field, i}
+		{#each table.groupingFields || [] as _field, i (_field)}
 			<button
 				style:width={table.widths.groupControl}
 				id="groupControl"
@@ -43,7 +43,7 @@
     -->
 
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i}
+		{#each table.columnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div class="was-th flex" role="columnheader" style:width={col.computedWidth + 'px'}>
 					<FilterMenu {table} {col} />
