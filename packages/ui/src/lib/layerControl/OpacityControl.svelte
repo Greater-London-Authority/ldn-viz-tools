@@ -23,6 +23,7 @@
 		theme="mini"
 		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
 		aria-hidden="true"
+		title="Cannot change opacity."
 	/>
 {:else}
 	<Popover>
