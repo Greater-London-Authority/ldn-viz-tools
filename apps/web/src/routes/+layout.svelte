@@ -58,7 +58,7 @@
 					</li>
 					<li>
 						<a href="https://dfl.london.gov.uk/library" target="_blank" class="hover:underline">
-							Data for London Libraray
+							Data for London Library
 						</a>
 					</li>
 				</ul>
