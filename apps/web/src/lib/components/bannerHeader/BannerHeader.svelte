@@ -11,7 +11,7 @@
 	let { title, subTitle }: BannerProps = $props();
 </script>
 
-<div class="flex flex-wrap items-center">
+<div class="dark flex flex-wrap items-center bg-color-canvas-background-1">
 	<div class="w-4/6 px-2 sm:w-1/2 md:w-1/3 md:pl-6">
 		<!-- TODO: this is a p as it might not always want to be the H1 -->
 		<p class="prose headline responsive format">{title}</p>
