@@ -61,15 +61,32 @@ The color palette consists of 10 colors, each available in 11 different tints an
 
 Perceptual uniformity is maintained within each hue in the color palette. As a result, colors like blue-600 and darkPink-600 have identical contrast ratios when paired with the same color.
 
-Colours are availible in two sets specially tuned for light or dark themed applications. [see more on themeing](/design-system/foundations/accessibility)
+Colours are availible in two sets specially tuned for light or dark themed applications. [See more on theming](/design-system/foundations/accessibility)
 
 ### Accessibility and contrast
 
-WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text. [see more on Accessibility](/design-system/foundations/accessibility)
+WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text. [See more on Accessibility](/design-system/foundations/accessibility)
 
 ## Practice
 
+Colors should be referenced using token names. Hex values are provided here only for reference.
+[See more on design tokens](/design-system/foundations/design-tokens)
+
 ### Global color palette
+
+The global color palette contains the hints and shades that are used as a basis for the semantically named color tokens. In the majority of cases you should not reference this palette directly.
+
+**Do:**
+
+```html
+<p class="text-color-text-primary">Use of a semantic class token</p>
+```
+
+**Don't:**
+
+```html
+<p class="text-color-palette-grey-900">Use of a global class token</p>
+```
 
 <div class="not-prose pb-8">
 <SwatchGrid tokenData={paletteToken.grey} title="Grey" size="xs" />
@@ -83,6 +100,8 @@ WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 
 <SwatchGrid tokenData={paletteToken.purple} title="Purple" size="xs" />
 <SwatchGrid tokenData={paletteToken.turquoise} title="Turquoise" size="xs" />
 </div>
+
+### Semantic color reference
 
 <div class="not-prose">
 <SwatchGrid tokenData={chartTokenData} title="Colors for chart elements"/>
