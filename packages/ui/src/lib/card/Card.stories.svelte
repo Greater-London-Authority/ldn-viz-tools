@@ -26,15 +26,45 @@
 	{/snippet}
 </Story>
 
+<Story name="With Label & Title">
+	{#snippet template(args)}
+		<Card {...args} label="Label" title="Card title" />
+	{/snippet}
+</Story>
+
 <Story name="With Content">
 	{#snippet template(args)}
 		<Card {...args} title="Card title">
-			<p class="product responsive body-md">
+			<p class="product body-md responsive">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non dignissim odio.
 				Morbi at sollicitudin magna, viverra dapibus libero. Etiam finibus malesuada mi, in
 				tristique nulla suscipit ut. In imperdiet leo nec faucibus luctus. Fusce nec mattis velit,
 				sed vestibulum dolor. Aenean semper tempus ipsum, at pulvinar quam posuere et.
 			</p>
 		</Card>
+	{/snippet}
+</Story>
+
+<Story name="With Status">
+	{#snippet template(args)}
+		<div class="flex gap-4">
+			<Card {...args} title="Do this" status="positive">
+				<p class="product body-md responsive">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non dignissim odio.
+					Morbi at sollicitudin magna, viverra dapibus libero. Etiam finibus malesuada mi, in
+					tristique nulla suscipit ut. In imperdiet leo nec faucibus luctus. Fusce nec mattis velit,
+					sed vestibulum dolor. Aenean semper tempus ipsum, at pulvinar quam posuere et.
+				</p>
+			</Card>
+
+			<Card {...args} title="Don't do this" status="negative">
+				<p class="product body-md responsive">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non dignissim odio.
+					Morbi at sollicitudin magna, viverra dapibus libero. Etiam finibus malesuada mi, in
+					tristique nulla suscipit ut. In imperdiet leo nec faucibus luctus. Fusce nec mattis velit,
+					sed vestibulum dolor. Aenean semper tempus ipsum, at pulvinar quam posuere et.
+				</p>
+			</Card>
+		</div>
 	{/snippet}
 </Story>
