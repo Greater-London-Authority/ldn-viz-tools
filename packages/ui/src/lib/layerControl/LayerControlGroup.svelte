@@ -11,6 +11,7 @@
 	import Button from '../button/Button.svelte';
 	import { randomId } from '../utils/randomId';
 	import LayerControl from './LayerControl.svelte';
+	import type { PatternDefinitions } from './patterns';
 
 	type LayerControlGroupState = Record<
 		string,
@@ -133,6 +134,11 @@
 		 * Name of the radio button group (used only if `mutuallyExclusive` is true)
 		 */
 		name?: string;
+
+		/**
+		 * Definition of available fill patterns (e.g., hatching or dots).
+		 */
+		patterns?: PatternDefinitions;
 	}
 
 	let {
@@ -157,7 +163,8 @@
 		colorNames = [],
 		showAllLabel = 'Show all',
 		mutuallyExclusive = false,
-		name = ''
+		name = '',
+		patterns
 	}: Props = $props();
 
 	/**
@@ -268,6 +275,7 @@
 							bind:selectedOptionId
 							mutuallyExclusive
 							{colorNames}
+							{patterns}
 						/>
 					</li>
 				{/each}
@@ -305,6 +313,7 @@
 							bind:layerState={layersState[option.id]}
 							{controlsInUse}
 							{colorNames}
+							{patterns}
 						/>
 					</li>
 				{/each}
