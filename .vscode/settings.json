@@ -17,5 +17,10 @@
 	"vitest.disableWorkspaceWarning": true,
 	"svelte.plugin.svelte.compilerWarnings": {
 		"css_unused_selector": "ignore"
-	}
+	},
+	"cSpell.words": [
+		"colour",
+		"visualisation",
+		"visualisations"
+	]
 }
