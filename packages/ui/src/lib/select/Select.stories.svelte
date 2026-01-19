@@ -65,7 +65,7 @@
 	let selectedValue: number | null = $state(null);
 	let selectedValueMulti: number[] | null = $state(null);
 	let selectedBorough: string | null = $state(null);
-	let selectedValueClearable = $state(2)
+	let selectedValueClearable = $state(2);
 
 	let error = $state('');
 </script>
@@ -146,11 +146,10 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 <Story name="Adding clear button">
 	{#snippet template(args)}
 		<div class="w-96">
-			<Select {...args} {options} clearable label="Label" bind:value={selectedValueClearable}/>
+			<Select {...args} {options} clearable label="Label" bind:value={selectedValueClearable} />
 		</div>
 	{/snippet}
 </Story>
-
 
 <Story name="Description alignment">
 	{#snippet template(args)}
