@@ -7,28 +7,41 @@ navLabel: Design Tokens
 
 <script>
 	import { Callout, theme } from '@ldn-viz/ui'
+
+	//images
+	import  tiers  from '$lib/assets/design-tokens/tiers.png'
+	import  mentalModel  from '$lib/assets/design-tokens/mental-model.png'
+	import  inverseVariant  from '$lib/assets/design-tokens/inverse-variant.png'
 </script>
 
 ## Principles
 
 Design tokens are the single source of truth for naming and storing design decisions such as colors, typography, spacing, and more. They ensure consistency, scalability, and maintainability across all our applications.
 
-We have developed our token taxonomy to be:
+### Token Tiers
 
-- Easy to understand
-- A straight-forward structure that can be reproduced as variables in Figma, css and Javascript
+Tokens are defined in two tiers.
 
-Our objective is to:
+<div class="px-4">
+	<img alt="Tokens divided into tiers" src={tiers} />
+</div>
 
-- Keep the number of tokens (and therefore the choices) contained
-- Keep a clear rationale to identify correct token use
+#### Primitive
+
+Primitive tokens represent all available **options** within the system. These tokens should not be directly referenced in an application. Think of **primitive** tokens as the well from which values are drawn and poured into other tokens.
+
+#### Semantic
+
+Semantic tokens encapsulate **design decisions** giving an understandable intent to the raw value defined in a primitive token.
+
+Semantic color tokens allow for mode switching between light and dark.
 
 ### Token names
 
-Tokens are named following an object-orientated taxonomy.
-Each token name is made up from a maximum of 5 words that describe how and where to apply the token
+Tokens are named following a logical taxonomy structure that flows from left to right in an ascending order of specificity. `(category-> concept -> role -> emphasis -> state -> mode)`
 
-<code>(category)-[type-element-property-(purpose/condition)-emphasis-(size/scale)-state]</code>
+**Implied defaults**
+We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text color is `$color-text` rather than `$color-text-default`
 
 Following our naming convention ensures that each token is clearly defined and easily understandable.
 
@@ -36,55 +49,152 @@ Following our naming convention ensures that each token is clearly defined and e
 
 #### Category
 
-Tokens are categorised at the top level into: **Global**, **Semantic**, **Spacing** and **Typography**
+Tokens categories are **color**, **spacing** and **typography**
 
-The key differentiation is between **Global** and other tokens. Although it is important to understand this top level categorisation it is not usually referenced as part of token use.
+| Category     | Detail                                                                                                                                                            |
+| :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color`      | Semantic color tokens enable mode switching. They encode the fundamental design decisions for color and have been tested to conform with accessibility standards. |
+| `spacing`    | Spacing tokens are used to give a consistent rhythm and flow to our user interfaces.                                                                              |
+| `typography` | Typography tokens define fonts, size, line-height and spacing for text and typographic elements.                                                                  |
 
-<div class="ml-8">
+The following applies to tokens in the color category. Spacing and Typography are documented subsequently.
 
-##### Global
+#### Concept
 
-Think of **Global** tokens as the **_well_** from which values are drawn and poured into other tokens.
-As a general rule you should not need to directly reference tokens in the **Global** category. Direct reference of global tokens usually indicates an mis-application of token logic.
+The token **concept** guides us in how to apply the token. For color tokens values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
 
-##### Semantic
+##### Conceptual model of application ui layering
 
-Tokens in the **Semantic** category are those most often referenced as part of development. Semantic tokens give an understandable intent to the raw value defined in a global token. In our system semantic color tokens are responsible for theme switching between light and dark.
+<img alt="An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user" src={mentalModel} />
 
-</div>
+| Concept               | Detail                                                                   |
+| :-------------------- | :----------------------------------------------------------------------- |
+| `brand`               | The consistent color used for brand reinforcement                        |
+| `canvas`              | The base layer of an application                                         |
+| `container`           | Containers are organisational elements that form page structure          |
+| `surface`             | Information layer that conceptually sitting in front of the canvas layer |
+| `surface-interactive` | Objects on the information layer that afford user interaction            |
+| `text`                | Text elements                                                            |
+| `label`               | Specific text used for labelling                                         |
+| `icon`                | Icons                                                                    |
+| `border`              | Borders around surfaces and containers                                   |
 
-#### Type
+##### Component-type exceptions
 
-The token **type** is how we know what the token controls. Values can be `color`, `spacing`, `typography`
+The system eschews component tier tokens with the exception of tokens for charts and geographic features. Rather than extending the naming hierarchy these tokens are group-prefixed at the 'concept' level.
 
-#### Element
+| Concept        | Detail                           |
+| :------------- | :------------------------------- |
+| `chart-canvas` | The base layer of a chart        |
+| `chart-axis`   | The color of chart axes          |
+| `chart-grid`   | Grid-line element fo charts      |
+| `chart-label`  | Label elements for use on charts |
 
-This defines the target element of the token. These are conceptual groupings of elements and **_not_** components. This is an important distinction as we have actively tried to avoid component level tokens. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
+| Concept                   | Detail                                                         |
+| :------------------------ | :------------------------------------------------------------- |
+| `geo-feature`             | A geographic feature                                           |
+| `geo-feature-interactive` | Geographic features that afford user interaction               |
+| `geo-label`               | Label elements for use with maps and geographic visualisations |
+| `geo-annotation`          | Annotations over maps and geographic visualisations            |
 
-#### Property
+#### Role
 
-The specific property being targeted by the token eg. `border`
+The **role** signifies _intent_. Roles **primary**, **secondary** define a hierarchical role. **Positive**, **negative**, **caution** define a feedback role.
 
-#### Purpose/ condition
-
-The purpose defines the intent of the target element eg. `notice`.
-Condition is used to define a changed condition eg. `negative`
+| Role        | Detail                                                                          |
+| :---------- | :------------------------------------------------------------------------------ |
+| `primary`   | Ranking first in importance or consideration over others                        |
+| `secondary` | Supporting or less critical                                                     |
+| `positive`  | Success and confirmation                                                        |
+| `negative`  | Errors and danger                                                               |
+| `caution`   | Warnings and potential hazards                                                  |
+| `neutral`   | Informational or inactive (this is different from `disabled` which is stateful) |
 
 #### Emphasis
 
-Emphasis values are most commonly `primary` or `secondary`
+The majority of color tokens are defined with a **muted** counterpart which lets us create further visual hierarchy in our designs.
 
-#### Size/ Scale
+| Emphasis | Detail                                |
+| :------- | :------------------------------------ |
+| `muted`  | Reduces the emphasis of color         |
+| `wash`   | Reduces the emphasis of color further |
 
-Size ranges from `xxs, xs, sm, md, lg...` to `8xl`.
+##### Container level exception
 
-Scales can be numbered `100, 200...` as in the case of color shades. Or can be 0 index numbers `0, 1, 2...`
+| Emphasis  | Detail                                      |
+| :-------- | :------------------------------------------ |
+| `level-1` | One level of elevation above the default    |
+| `level-2` | Two levels of elevation above the default   |
+| `level-3` | Three levels of elevation above the default |
 
 #### State
 
-Only applicable to certain stateful elements. `on`, `off`, `active` etc.
+Interactive elements have states such as **hover**, **active**, **focus**, **disabled**
 
-### Bringing it together
+| State      | Detail                                                                                                                  |
+| :--------- | :---------------------------------------------------------------------------------------------------------------------- |
+| `hover`    | Triggered when a user places a cursor over an element without clicking it.                                              |
+| `active`   | Occurs at the exact moment an element is being pressed or clicked.                                                      |
+| `focus`    | Indicates an element is currently highlighted to receive input, typically via keyboard navigation (Tab key) or a click. |
+| `selected` | Represents a persistent choice made by the user among several options                                                   |
+| `disabled` | Indicates an element exists but is currently non-interactive and cannot be used.                                        |
+| `error`    | Signals that a user's input is invalid or that a system failure has occurred.                                           |
+| `on`       | Represents the "active" or "enabled" state of a binary toggle or switch.                                                |
+| `off`      | Represents the "inactive" or "disabled" state of a binary toggle or switch.                                             |
+| `dragged`  | Occurs when a user clicks and moves an element from its original position to another.                                   |
+
+#### Variant
+
+Many color tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
+
+| Variant   | Details                                                         |
+| :-------- | :-------------------------------------------------------------- |
+| `inverse` | Applies a colour that is inverse to the currently selected mode |
+
+<div class="px-4">
+	<img alt="Swatches showing tokens with inverse variant in light and dark mode" src={inverseVariant} />
+</div>
+
+### Spacing Tokens
+
+`category === spacing`
+
+The structure of our spacing tokens is relatively simple. They run from **xxs, xs, sm, md, lg...** though to **8xl**
+
+### Typography tokens
+
+`category === typography`
+
+#### Role
+
+Typographic roles are responsive to screen size allowing use of semantic, descriptive names. The definitions encompass font-family, font-size, font-weight, line-height and letter-spacing.
+
+The different role groupings are:
+
+| Role       | Use Case                                                                                 |
+| :--------- | :--------------------------------------------------------------------------------------- |
+| `Display`  | Large, impactful text for grabbing attention                                             |
+| `Headline` | To create immediate impact and guide the reader's eye                                    |
+| `Subhead`  | To immediately follow a headline and provide further clarification                       |
+| `Title`    | To provide waymarkers, define hierarchy and impart information throughout an application |
+| `Subtitle` | To immediately follow a title element and provide further clarification                  |
+| `Body`     | Passages of copy and bodies of text                                                      |
+| `Label`    | Used for single-line scenarios, and labelling discrete elements of the ui                |
+
+#### Emphasis
+
+Certain roles have an emphasis scale that can be applied.
+
+| Emphasis | Detail      |
+| :------- | :---------- |
+| `lg`     | Large       |
+| `md`     | Medium      |
+| `sm`     | Small       |
+| `xs`     | Extra small |
+
+[Read the chapter dedicated to typography for more details](/design-system/foundations/typography).
+
+<!-- ### Bringing it together
 
 #### Example one
 
@@ -118,11 +228,11 @@ The color token for an element that invites a user to take a primary action is: 
 
 As actions are usually stateful there are also modifier tokens:
 
-`$color-action-primary-hovered` - Its a color token representing an element inviting action with primary emphasis that is in a hovered state
+`$color-action-primary-hovered` - Its a color token representing an element inviting action with primary emphasis that is in a hovered state -->
 
 ## Practice
 
-### Via npm using tailwind
+<!-- ### Via npm using tailwind
 
 If using the `@ldn-viz` package via npm in a project using tailwind css our tokens are accessible as part of tailwind's utility class pattern.
 
@@ -130,7 +240,7 @@ If using the `@ldn-viz` package via npm in a project using tailwind css our toke
 
 In the two examples above `text-color-text-primary` and `bg-color-container-level-0` show tokens applied via tailwind classes.
 
-Spacing tokens are available in the same patter: `mb-spacing-lg` will apply the `$spacing-large` token to the bottom margin of the targeted html element.
+Spacing tokens are available in the same pattern: `mb-spacing-lg` will apply the `$spacing-large` token to the bottom margin of the targeted html element.
 
 ### CSS variables
 
@@ -146,4 +256,4 @@ Color Tokens are available from `@ldn-viz/themes` package and can be accessed un
 
 ```js
 let color = color.data.categorical.blue;
-```
+``` -->
