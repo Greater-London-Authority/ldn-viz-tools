@@ -9,9 +9,9 @@ navLabel: Design Tokens
 	import { Callout, theme } from '@ldn-viz/ui'
 
 	//images
-	import  tiers  from '$lib/assets/design-tokens/tiers.png'
-	import  mentalModel  from '$lib/assets/design-tokens/mental-model.png'
-	import  inverseVariant  from '$lib/assets/design-tokens/inverse-variant.png'
+	import  tiers  from '/assets/design-tokens/tiers.png'
+	import  mentalModel  from '/assets/design-tokens/mental-model.png'
+	import  inverseVariant  from '/assets/design-tokens/inverse-variant.png'
 </script>
 
 ## Principles
