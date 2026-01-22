@@ -17,12 +17,12 @@ These can be used within the [`load()` functions of `+page.ts` files](https://sv
 
 ## Images in markdown
 
-We use a custom  blueprint which means that rather than being converted directly into an HTML `<img>` element, a markdown image is instead converted to our custom Svelte component defined in `src/lib/components/markdown/img.svelte`.
+We use a custom blueprint which means that rather than being converted directly into an HTML `<img>` element, a markdown image is instead converted to our custom Svelte component defined in `src/lib/components/markdown/img.svelte`.
 This component uses theme aware switching, and the [svelte enhanced-img plugin](https://svelte.dev/docs/kit/images#sveltejs-enhanced-img) for format and resolution optimization.
 
 Include the image using the normal markdown syntax:
 
-    !(alt text)[/image-name.png]
+    ![alt text](/image-name.png)
 
 Images should then be added to `src/lib/assets/images/...`. The blueprint will look for `image-name`, `image-name-light` and `image-name-dark` (each followed by image extension - e.g. `image-name-dark.png`).
 In light mode, the component will render `image-name-light` if it exists, and `image-name` if it does not.

@@ -36,16 +36,16 @@ module.exports = {
 			letterSpacing: 'var(--title-sm-letter-spacing)',
 			fontSize: 'var(--title-sm-font-size)',
 			lineHeight: 'var(--title-sm-line-height)',
-			marginTop: '0',
-			marginBottom: 'var(--spacing-xs-em)'
+			marginTop: 'var(--spacing-xs-em)',
+			marginBottom: '0'
 		},
 		':where(h5):not(:where(.not-prose, .not-prose *))': {
 			fontWeight: 'var(--title-xs-font-weight)',
 			letterSpacing: 'var(--title-xs-letter-spacing)',
 			fontSize: 'var(--title-xs-font-size)',
 			lineHeight: 'var(--title-xs-line-height)',
-			marginTop: '0',
-			marginBottom: 'var(--spacing-xs-em)'
+			marginTop: 'var(--spacing-xs-em)',
+			marginBottom: '0'
 		},
 		':where(p.lead):not(:where(.not-prose, .not-prose *))': {
 			fontWeight: 'var(--body-lg-font-weight)',
@@ -62,6 +62,12 @@ module.exports = {
 			lineHeight: 'var(--body-md-line-height)',
 			marginTop: 'var(--spacing-md-em)',
 			marginBottom: 'var(--spacing-md-em)'
+		},
+		':where(h4 + p):not(:where(.not-prose *))': {
+			marginTop: 0
+		},
+		':where(h5 + p):not(:where(.not-prose *))': {
+			marginTop: 0
 		},
 		':where(.caption, figcaption):not(:where(.not-prose, .not-prose *))': {
 			fontWeight: 'var(--caption-font-weight)',
@@ -181,7 +187,7 @@ module.exports = {
 			borderTopColor: 'var(--theme-ui-border-primary)'
 		},
 		// Code
-		':where(code):not(:where(.not-prose, .not-prose *))': {
+		':where(code):not(:where(.not-prose, .not-prose *, [data-rehype-pretty-code-figure] *))': {
 			fontFamily: 'monospace',
 			padding: 'var(--spacing-xxs-em) var(--spacing-xs-em)',
 			fontSize: 'var(--body-xs-font-size)',
