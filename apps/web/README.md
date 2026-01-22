@@ -14,3 +14,12 @@ The [`vite.config.ts`](./vite.config.ts) config file allows file-system access t
 
 The [`src/lib/utils.ts`](./src/lib/utils.ts) file imports the index file from `$content/index.js` and exports functions that return documents and/or their metadata.
 These can be used within the [`load()` functions of `+page.ts` files](https://svelte.dev/docs/kit/load#Page-data); SvelteKit provides whatever this function returns to the corresponding `+page.svelte` file as the `data` prop.
+
+## Images in markdown
+
+Images included in markdown will use a custom blueprint with theme aware switching, using svelte enhanced image plugin.
+include the image in markdown as normal:
+` !(alt text)[/image-name.png]`
+
+Images should then be added to `src/lib/assets/images/...`. The blueprint will look for `image-name`, `image-name-light` and `image-name-dark` (followed by image extension)
+The relevant image will then be used under the corresponding theme mode. If images should not mode switch, just include a single image that is not suffixed with either`-light` or `-dark`.
