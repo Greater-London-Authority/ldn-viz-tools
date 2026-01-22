@@ -7,11 +7,6 @@ navLabel: Design Tokens
 
 <script>
 	import { Callout, theme } from '@ldn-viz/ui'
-
-	//images
-	import  tiers  from '/assets/design-tokens/tiers.png'
-	import  mentalModel  from '/assets/design-tokens/mental-model.png'
-	import  inverseVariant  from '/assets/design-tokens/inverse-variant.png'
 </script>
 
 ## Principles
@@ -22,9 +17,7 @@ Design tokens are the single source of truth for naming and storing design decis
 
 Tokens are defined in two tiers.
 
-<div class="px-4">
-	<img alt="Tokens divided into tiers" src={tiers} />
-</div>
+![An image illustrating the conceptual hierarchy of deign tokens](/design-tokens/tiers.png)
 
 #### Primitive
 
@@ -65,7 +58,7 @@ The token **concept** guides us in how to apply the token. For color tokens valu
 
 ##### Conceptual model of application ui layering
 
-<img alt="An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user" src={mentalModel} />
+![An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.png)
 
 | Concept               | Detail                                                                   |
 | :-------------------- | :----------------------------------------------------------------------- |
@@ -151,9 +144,7 @@ Many color tokens are defined with an **inverse** counterpart that is used to in
 | :-------- | :-------------------------------------------------------------- |
 | `inverse` | Applies a colour that is inverse to the currently selected mode |
 
-<div class="px-4">
-	<img alt="Swatches showing tokens with inverse variant in light and dark mode" src={inverseVariant} />
-</div>
+![Swatches showing tokens with inverse variant in light and dark mode](/design-tokens/inverse-variant.png)
 
 ### Spacing Tokens
 
