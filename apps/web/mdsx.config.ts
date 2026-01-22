@@ -1,18 +1,23 @@
-import { defineMDSveXConfig } from 'mdsvex';
+import { defineConfig } from 'mdsx';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import type { Root as HastRoot } from 'hast';
+import type { Root as MdastRoot } from 'mdast';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import { createHighlighter } from 'shiki';
+import type { Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 
+type MdastTransformer = Transformer<MdastRoot, MdastRoot>;
+type HastTransformer = Transformer<HastRoot, HastRoot>;
+
 const prettyCodeOptions = {
-	theme: {
-		light: 'github-light',
-		dark: 'github-dark'
-	},
-	createHighlighter: (options) =>
+	themes: ['github-dark'],
+	createHighlighter: (options: any) =>
 		createHighlighter({
 			...options,
 			langs: [
@@ -26,16 +31,15 @@ const prettyCodeOptions = {
 			]
 		}),
 	keepBackground: false,
-	onVisitLine(node) {
+	onVisitLine(node: { children: { [key: string]: any }[] }) {
 		if (node.children.length === 0) {
-			// @ts-expect-error - we're changing the node type
-			node.children = { type: 'text', value: ' ' };
+			node.children = { type: 'text', value: ' ' } as any;
 		}
 	},
-	onVisitHighlightedLine(node) {
+	onVisitHighlightedLine(node: { properties: { className: string[] } }) {
 		node.properties.className = ['line--highlighted'];
 	},
-	onVisitHighlightedChars(node) {
+	onVisitHighlightedChars(node: { properties: { className: string[] } }) {
 		node.properties.className = ['chars--highlighted'];
 	}
 };
@@ -44,16 +48,7 @@ export const baseRemarkPlugins = [remarkGfm, remarkRemovePrettierIgnore];
 export const baseRehypePlugins = [
 	rehypeSlug,
 	[rehypePrettyCode, prettyCodeOptions],
-	[
-		rehypeAutolinkHeadings,
-		{
-			behavior: `append`,
-			properties: {
-				ariaHidden: true,
-				tabIndex: -1
-			}
-		}
-	],
+	rehypeAutolinkHeadings,
 	rehypeHandleMetadata
 ];
 
@@ -70,7 +65,7 @@ export const baseRehypePlugins = [
  * itself and checking for it in the code block, but that's not something we need
  * at the moment.
  */
-function remarkRemovePrettierIgnore() {
+function remarkRemovePrettierIgnore(): MdastTransformer {
 	return async (tree) => {
 		visit(tree, 'code', (node) => {
 			node.value = node.value
@@ -85,7 +80,7 @@ function remarkRemovePrettierIgnore() {
  * We use this to style elements within the `<figure>` differently if a `<figcaption>`
  * is present.
  */
-function rehypeHandleMetadata() {
+function rehypeHandleMetadata(): HastTransformer {
 	return async (tree) => {
 		visit(tree, (node) => {
 			if (node?.type === 'element' && node?.tagName === 'figure') {
@@ -114,14 +109,13 @@ function rehypeHandleMetadata() {
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-export default defineMDSveXConfig({
+export const mdsxConfig = defineConfig({
 	extensions: ['.md'],
-	// TODO:
-	// blueprints: // 'blueprint' that renders html tags
-	// layout: {
-	// 	_: resolve(__dirname, './src/lib/layouts/docs-layout.svelte')
-	// },
-	highlight: false,
+	blueprints: {
+		default: {
+			path: resolve(__dirname, './src/lib/blueprints/default.svelte')
+		}
+	},
 	remarkPlugins: [...baseRemarkPlugins],
 	rehypePlugins: [...baseRehypePlugins]
 });
