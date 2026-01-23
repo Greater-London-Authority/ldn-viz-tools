@@ -1,10 +1,12 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Footer from './Footer.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
+	import Footer from './Footer.svelte';
 
 	/**
 	 * The `<Footer>` component appears at the bottom of a page.
+	 *
+	 * Note, if `<AnalyticsAndCookieConsent />` is not in your app or configured incorrectly, 'Cookie Settings' will not appear in the footer even when `showCookieMenu` is true.
 	 */
 
 	let { Story } = defineMeta({
