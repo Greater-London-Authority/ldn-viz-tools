@@ -93,9 +93,7 @@
 						}
 					}
 				]),
-				stroke: hoveredValue
-					? theme.currentTheme.color.data.secondary
-					: theme.currentTheme.color.data.primary
+				stroke: hoveredValue ? theme.currentMode.data.secondary : theme.currentMode.data.primary
 			})
 		]
 	});

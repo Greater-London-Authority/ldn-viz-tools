@@ -146,13 +146,13 @@
 		.mapboxgl-ctrl-attrib-inner {
 			@apply text-xs;
 			@apply align-middle;
-			@apply text-color-text-primary;
+			@apply text-color-text;
 			@apply pt-0.5;
-			@apply bg-color-container-level-0;
+			@apply bg-color-container;
 		}
 
 		.maplibregl-ctrl-attrib-inner a {
-			@apply text-color-text-primary;
+			@apply text-color-text;
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button,
@@ -165,16 +165,16 @@
 		}
 
 		.maplibregl-ctrl-attrib-inner a {
-			@apply text-color-text-primary;
+			@apply text-color-text;
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button {
-			@apply bg-color-text-primary;
+			@apply bg-color-text;
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact {
 			/* background-color: hsla(0, 0%, 100%, 0.8); */
-			@apply bg-color-container-level-0;
+			@apply bg-color-container;
 		}
 	}
 </style>

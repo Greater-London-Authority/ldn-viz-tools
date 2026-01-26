@@ -72,21 +72,21 @@ module.exports = {
 			marginBottom: 'var(--spacing-sm-em)'
 		},
 		':where(a):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--theme-action-text-primary)',
+			color: 'var(--mode-interactive-text-primary)',
 			textDecoration: 'underline',
 			textUnderlineOffset: '2px',
-			textDecorationColor: 'var(--theme-action-text-primary)',
+			textDecorationColor: 'var(--mode-interactive-text-primary)',
 			textDecorationThickness: '1px'
 		},
 		':where(a:hover):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--theme-action-text-primary-hover)',
+			color: 'var(--mode-interactive-text-primary-hover)',
 			textDecoration: 'none',
 			textUnderlineOffset: '2px',
-			textDecorationColor: 'var(--theme-action-text-primary)',
+			textDecorationColor: 'var(--mode-interactive-text-primary)',
 			textDecorationThickness: '1px'
 		},
 		':where(hr):not(:where(.not-prose, .not-prose *))': {
-			borderColor: 'var(--theme-ui-border-secondary)',
+			borderColor: 'var(--mode-border-muted)',
 			borderTopWidth: '1px',
 			marginTop: 'var(--spacing-5xl-em)',
 			marginBottom: 'var(--spacing-5xl-em)'
@@ -106,7 +106,7 @@ module.exports = {
 			marginBottom: 0
 		},
 		':where(figcaption):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--theme-text-secondary)',
+			color: 'var(--mode-text-muted)',
 			marginTop: 'var(--spacing-sm-em)'
 		},
 		// Lists
@@ -121,7 +121,7 @@ module.exports = {
 			paddingLeft: 'var(--spacing-xs-em)'
 		},
 		':where(ul li::marker, ol li::marker):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--theme-text-secondary)'
+			color: 'var(--mode-text-muted)'
 		},
 		':where(ul ul, ul ol, ol ul, ol ol):not(:where(.not-prose, .not-prose *))': {
 			marginTop: 'var(--spacing-sm-em)',
@@ -129,7 +129,7 @@ module.exports = {
 		},
 		// Blockquotes
 		':where(blockquote):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--theme-text-secondary)',
+			color: 'var(--mode-text-muted)',
 			borderInlineStartWidth: 'var(--spacing-xxs)',
 			borderInlineStartColor: 'var(--global-color-static-brand)',
 			marginTop: 'var(--spacing-lg-em)',
@@ -159,17 +159,17 @@ module.exports = {
 		},
 		':where(thead):not(:where(.not-prose, .not-prose *))': {
 			borderBottomWidth: '1px',
-			borderBottomColor: 'var(--theme-ui-border-primary)'
+			borderBottomColor: 'var(--mode-border)'
 		},
 		':where(thead th):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--theme-text-primary)',
+			color: 'var(--mode-text)',
 			fontWeight: 600,
 			verticalAlign: 'bottom',
 			padding: 'var(--spacing-xs-em)'
 		},
 		':where(tbody tr):not(:where(.not-prose, .not-prose *))': {
 			borderBottomWidth: '1px',
-			borderBottomColor: 'var(--theme-ui-border-secondary)'
+			borderBottomColor: 'var(--mode-border-muted)'
 		},
 		':where(tbody tr:last-child):not(:where(.not-prose, .not-prose *))': { borderBottomWidth: 0 },
 		':where(tbody td, tfoot td):not(:where(.not-prose, .not-prose *))': {
@@ -178,7 +178,7 @@ module.exports = {
 		},
 		':where(tfoot):not(:where(.not-prose, .not-prose *))': {
 			borderTopWidth: '1px',
-			borderTopColor: 'var(--theme-ui-border-primary)'
+			borderTopColor: 'var(--mode-border)'
 		},
 		// Code
 		':where(code):not(:where(.not-prose, .not-prose *))': {

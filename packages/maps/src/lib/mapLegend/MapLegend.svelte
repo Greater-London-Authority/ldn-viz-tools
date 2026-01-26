@@ -27,15 +27,15 @@
 
 {#if isOpen}
 	<div
-		class="pointer-events-auto flex w-full flex-col gap-3 bg-color-container-level-0 px-4 py-3 sm:max-w-96"
+		class="bg-color-container pointer-events-auto flex w-full flex-col gap-3 px-4 py-3 sm:max-w-96"
 		bind:clientWidth={width}
 	>
 		<div class="flex justify-between align-middle">
-			<p class="font-bold text-color-text-primary">Legend</p>
+			<p class="text-color-text font-bold">Legend</p>
 			<Button
 				variant="text"
 				size="sm"
-				class="absolute right-1 top-1 cursor-pointer bg-color-container-level-0 text-color-text-primary"
+				class="bg-color-container text-color-text absolute right-1 top-1 cursor-pointer"
 				onclick={handleClick}
 				aria-label="Close legend"
 			>
@@ -48,7 +48,7 @@
 {:else}
 	<Button
 		size="md"
-		emphasis="secondary"
+		emphasis="muted"
 		class="pointer-events-auto h-8"
 		onclick={handleClick}
 		aria-label="Show legend"

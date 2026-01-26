@@ -82,7 +82,7 @@
 	{#snippet template(args)}
 		<CheckboxGroupSolid {...args} bind:selectedOptions />
 
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -91,7 +91,7 @@
 <Story name="With title">
 	{#snippet template(args)}
 		<CheckboxGroupSolid {...args} bind:selectedOptions label="Transport method" />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -105,7 +105,7 @@
 			label="Transport method"
 			hint="contextual hint text"
 		/>
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -120,7 +120,7 @@
 			hint="contextual hint text"
 			description="Pick your preferred method of transport - taxis are currently not available"
 		/>
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -129,7 +129,7 @@
 <Story name="Hide select all">
 	{#snippet template(args)}
 		<CheckboxGroupSolid {...args} bind:selectedOptions hideSelectAll />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -140,7 +140,7 @@
 		<Button onclick={() => (selectedOptions = ['bus', 'train'])}>Select bus and train!</Button>
 
 		<CheckboxGroupSolid {...args} bind:selectedOptions />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -155,7 +155,7 @@
 					bind:selectedOptions={selectedOptions3}
 					{...args}
 				/>
-				<p class="text-color-text-secondary">Selected id: {selectedOptions3}</p>
+				<p class="text-color-text-muted">Selected id: {selectedOptions3}</p>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -164,7 +164,7 @@
 					bind:selectedOptions={selectedOptions4}
 					{...args}
 				/>
-				<p class="text-color-text-secondary">Selected id: {selectedOptions4}</p>
+				<p class="text-color-text-muted">Selected id: {selectedOptions4}</p>
 			</div>
 		</div>
 	{/snippet}
@@ -178,7 +178,7 @@
 			{...args}
 			options={optionsForGroupIconsAbove}
 		></CheckboxGroupSolid>
-		<p class="mt-8 text-color-text-secondary">
+		<p class="text-color-text-muted mt-8">
 			Selected options: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -192,7 +192,7 @@
 			{...args}
 			options={optionsForGroupIconsBelow}
 		></CheckboxGroupSolid>
-		<p class="mt-8 text-color-text-secondary">
+		<p class="text-color-text-muted mt-8">
 			Selected options: {JSON.stringify(selectedOptions)}
 		</p>
 	{/snippet}
@@ -206,7 +206,7 @@
 			{...args}
 			options={[optionsForGroup[0], optionsForGroup[1]]}
 		></CheckboxGroupSolid>
-		<p class="mt-8 text-color-text-secondary">
+		<p class="text-color-text-muted mt-8">
 			Selected options: {JSON.stringify(selectedOptions2)}
 		</p>
 	{/snippet}
@@ -215,7 +215,7 @@
 <Story name="Disabled (global)">
 	{#snippet template(args)}
 		<CheckboxGroupSolid {...args} bind:selectedOptions={selectedOptionsDisabled} disabled />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptionsDisabled)}
 		</p>
 	{/snippet}
@@ -228,7 +228,7 @@
 			bind:selectedOptions
 			error={!selectedOptions.length ? 'You must select an option' : undefined}
 		/>
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedOptions: {JSON.stringify(selectedOptions)}
 		</p>
 		<Button onclick={() => (selectedOptions = [])}>Clear</Button>
@@ -238,7 +238,7 @@
 <Story name="As filter">
 	{#snippet template(args)}
 		<CheckboxGroupSolid {...args} bind:selectedOptions={selectedFilters} />
-		<p class="mt-4 text-color-text-secondary">
+		<p class="text-color-text-muted mt-4">
 			selectedFilters: {JSON.stringify(selectedFilters)}
 		</p>
 		<div class="pt-2">

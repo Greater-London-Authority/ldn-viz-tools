@@ -2,7 +2,7 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import BoroughsContextLayer from './BoroughsContextLayer.svelte';
 
-	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+	import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
 
 	const theme = (mode: 'light' | 'dark' = 'light') => {
 		return tokens.theme[mode];

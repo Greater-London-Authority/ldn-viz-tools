@@ -158,7 +158,7 @@
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="text-color-text-muted mt-4 block">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -170,7 +170,7 @@
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple keepSelectionInList bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="text-color-text-muted mt-4 block">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -195,7 +195,7 @@
 			<div>Current value: <span class="font-bold">{selectedValue}</span></div>
 
 			<Button onclick={() => (selectedValue = 2)}>Reset to 2</Button>
-			<Button variant="outline" emphasis="secondary" onclick={() => (selectedValue = null)}>
+			<Button variant="outline" emphasis="muted" onclick={() => (selectedValue = null)}>
 				Clear
 			</Button>
 
@@ -210,7 +210,7 @@
 			<div>Current value: <span class="font-bold">{selectedValueMulti}</span></div>
 
 			<Button onclick={() => (selectedValueMulti = [1, 3])}>Reset to 1 and 3</Button>
-			<Button variant="outline" emphasis="secondary" onclick={() => (selectedValueMulti = null)}>
+			<Button variant="outline" emphasis="muted" onclick={() => (selectedValueMulti = null)}>
 				Clear
 			</Button>
 
@@ -223,9 +223,7 @@
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
 			<Button onclick={() => (error = 'OH NO')}>Set error</Button>
-			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}>
-				Clear error
-			</Button>
+			<Button variant="outline" emphasis="muted" onclick={() => (error = '')}>Clear error</Button>
 
 			<span><code>error is:</code> {error}</span>
 
@@ -277,7 +275,7 @@
 				bind:value={selectedBorough}
 			/>
 
-			<div class="mt-4 text-color-text-secondary">
+			<div class="text-color-text-muted mt-4">
 				<strong>Selected:</strong>
 				{selectedBorough ?? 'None'}
 			</div>

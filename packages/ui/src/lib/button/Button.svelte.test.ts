@@ -18,7 +18,7 @@ describe('Button Component', () => {
 		const button = page.getByRole('button');
 		await expect.element(button).toBeInTheDocument();
 		await expect.element(button).toHaveTextContent('Click me');
-		await expect.element(button).toHaveClass('bg-color-action-background-primary');
+		await expect.element(button).toHaveClass('bg-color-interactive-primary');
 	});
 
 	it('calls onclick handler when clicked', async () => {

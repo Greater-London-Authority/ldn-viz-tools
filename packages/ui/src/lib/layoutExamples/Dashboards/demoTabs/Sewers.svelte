@@ -14,12 +14,12 @@
 		{
 			id: 'sewer-combined',
 			label: 'Combined Sewer',
-			color: theme.currentTheme.color.data.categorical.orange
+			color: theme.currentMode.data.categorical.orange
 		},
 		{
 			id: 'sewer-separate',
 			label: 'Separate Sewer',
-			color: theme.currentTheme.color.data.secondary
+			color: theme.currentMode.data.secondary
 		}
 	]);
 
@@ -27,17 +27,17 @@
 		{
 			id: 'sewer_overflows_48hrs_yes',
 			label: 'Yes (In past 48 hours)',
-			color: theme.currentTheme.color.data.categorical.red
+			color: theme.currentMode.data.categorical.red
 		},
 		{
 			id: 'sewer_overflows_48hrs_no',
 			label: 'No (In past 48 hours)',
-			color: theme.currentTheme.color.data.categorical.green
+			color: theme.currentMode.data.categorical.green
 		},
 		{
 			id: 'sewer_overflows_offline',
 			label: 'Offline',
-			color: theme.currentTheme.color.data.categorical.grey
+			color: theme.currentMode.data.categorical.grey
 		}
 	]);
 </script>

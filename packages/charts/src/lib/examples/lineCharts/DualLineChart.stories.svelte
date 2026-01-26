@@ -2,10 +2,10 @@
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
+	import { format } from 'd3-format';
 	import { monthlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Line Charts'
@@ -19,7 +19,7 @@
 		color: {
 			legend: true,
 			type: 'ordinal',
-			range: [theme.currentTheme.color.data.primary, theme.currentTheme.color.data.context]
+			range: [theme.currentMode.data.primary, theme.currentMode.data.context]
 		},
 		marks: [
 			Plot.gridX({ interval: '2 years' }),

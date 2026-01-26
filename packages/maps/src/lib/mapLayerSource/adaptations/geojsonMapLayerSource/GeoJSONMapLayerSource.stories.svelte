@@ -101,8 +101,7 @@
 	import MapLayerView from '../../../mapLayerView/MapLayerView.svelte';
 	import testData from '../../../testData.json';
 
-	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
-	import ldnColors from '@ldn-viz/themes/styles/js/theme-tokens';
+	import { default as ldnColors, default as tokens } from '@ldn-viz/themes/styles/js/mode-tokens';
 	import { writable } from 'svelte/store';
 	const defaultColor = ldnColors.theme.light.color.palette;
 

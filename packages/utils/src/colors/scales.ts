@@ -3,8 +3,8 @@ import chroma from 'chroma-js';
 import { bin, extent, max, min } from 'd3-array';
 import { format } from 'd3-format';
 
-import ldnColors from '@ldn-viz/themes/styles/js/theme-tokens';
-const defaultColor = ldnColors.theme.light.color.palette;
+import ldnColors from '@ldn-viz/themes/styles/js/mode-tokens.js';
+const defaultColor = ldnColors.mode.light.palette;
 
 const d3 = {
 	bin,

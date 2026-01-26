@@ -82,7 +82,7 @@
 
 	const modalClass = $derived(
 		classNames(
-			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container shadow-xl pointer-events-auto',
 			widthClasses[width]
 		)
 	);
@@ -112,14 +112,14 @@
 		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
 			<Dialog.Content {...contentProps} class={modalClass}>
 				<div
-					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text-primary ${headerTheme}`}
+					class={`border-color-static-brand bg-color-container-level-1 text-color-text relative flex items-center justify-between border-l-[5px] p-3 pr-4 ${headerTheme}`}
 				>
 					<Dialog.Title class="font-medium">
 						{@render title?.()}
 					</Dialog.Title>
 					<Dialog.Close>
 						{#snippet child({ props })}
-							<Button {...props} variant="square" emphasis="secondary" class="h-8 w-8 self-center">
+							<Button {...props} variant="square" emphasis="muted" class="h-8 w-8 self-center">
 								<span class="sr-only">Close</span>
 								<Icon src={XMark} theme="solid" class="h-6 w-6" aria-hidden="true" />
 							</Button>

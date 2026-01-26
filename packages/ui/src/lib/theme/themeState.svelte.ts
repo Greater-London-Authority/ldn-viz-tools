@@ -1,6 +1,6 @@
-import { mode, type SystemModeValue } from 'mode-watcher';
+import tokens from '@ldn-viz/themes/styles/js/mode-tokens.js';
 import { colorToRGBArray } from '@ldn-viz/utils';
-import tokens from '@ldn-viz/themes/styles/js/theme-tokens.js';
+import { mode, type SystemModeValue } from 'mode-watcher';
 
 type ThemeObject<T> = {
 	[key: string]: T | ThemeObject<T>;

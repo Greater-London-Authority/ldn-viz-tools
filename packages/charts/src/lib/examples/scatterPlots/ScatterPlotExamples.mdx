@@ -1,7 +1,7 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { penguins } from '../../../data/demoData';
 import * as FacetedScatterPlot from './FacetedScatterPlot.stories.svelte';
 import * as ScatterPlot from './ScatterPlot.stories.svelte';
-import { penguins } from '../../../data/demoData';
 
 <Meta title="Charts/Examples/Scatter Plot" />
 
@@ -10,7 +10,7 @@ import { penguins } from '../../../data/demoData';
 ### Default
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
 	let spec = $derived({
 		x: { insetLeft: 100, domain: [30, 65] },
@@ -18,9 +18,9 @@ import { penguins } from '../../../data/demoData';
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.currentMode.data.primary,
+				theme.currentMode.data.secondary,
+				theme.currentMode.data.tertiary
 			]
 		},
 		marks: [
@@ -39,7 +39,7 @@ import { penguins } from '../../../data/demoData';
     ```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>{JSON.stringify(penguins, null, 2)}</pre>
 </details>
@@ -49,7 +49,7 @@ import { penguins } from '../../../data/demoData';
 ### Faceted
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
      	const { defaultTip } = $derived(getDefaultPlotStyles());
 
@@ -63,9 +63,9 @@ import { penguins } from '../../../data/demoData';
     	color: {
     		legend: true,
     		range: [
-    			theme.currentTheme.color.data.primary,
-    			theme.currentTheme.color.data.secondary,
-    			theme.currentTheme.color.data.tertiary
+    			theme.currentMode.data.primary,
+    			theme.currentMode.data.secondary,
+    			theme.currentMode.data.tertiary
     		]
     	},
     	marks: [
@@ -87,7 +87,7 @@ import { penguins } from '../../../data/demoData';
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>{JSON.stringify(penguins, null, 2)}</pre>
 </details>

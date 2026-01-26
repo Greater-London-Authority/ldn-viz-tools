@@ -80,11 +80,11 @@
 
 {#if mode}
 	<div
-		class="invisible flex flex-col space-y-1 shadow dark:border dark:border-color-ui-border-primary sm:visible"
+		class="dark:border-color-border invisible flex flex-col space-y-1 shadow sm:visible dark:border"
 	>
 		<Button
 			variant="square"
-			emphasis="secondary"
+			emphasis="muted"
 			title={$isFullscreen ? mode.titleIn : mode.titleOut}
 			class="pointer-events-auto"
 			onclick={handle}

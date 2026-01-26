@@ -1,8 +1,8 @@
 <script module lang="ts">
+	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from './Button.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
 	import type { ButtonProps } from './types.js';
 
 	const { Story } = defineMeta({
@@ -12,7 +12,7 @@
 		render: defaultTemplate,
 		argTypes: {
 			emphasis: {
-				options: ['primary', 'secondary', 'caution', 'positive', 'negative'],
+				options: ['primary', 'muted', 'caution', 'positive', 'negative'],
 				control: { type: 'select' }
 			},
 			variant: {
@@ -48,7 +48,7 @@
 	{#snippet template(args)}
 		<div class="flex items-end space-x-2">
 			<Button {...args}>Primary</Button>
-			<Button {...args} emphasis="secondary">Secondary</Button>
+			<Button {...args} emphasis="muted">Secondary</Button>
 		</div>
 	{/snippet}
 </Story>
@@ -59,7 +59,7 @@
 
 <Story name="Outline" args={{ variant: 'outline' }} />
 
-<Story name="Text" args={{ variant: 'text', emphasis: 'secondary' }} />
+<Story name="Text" args={{ variant: 'text', emphasis: 'muted' }} />
 
 <Story name="Disabled">
 	{#snippet template(args)}
@@ -129,7 +129,7 @@
 	{#snippet template(args)}
 		<Button
 			{...args}
-			class="border-4 border-color-palette-pink-700 bg-color-palette-yellow-500 !p-8 text-color-palette-pink-100"
+			class="border-color-palette-pink-700 bg-color-palette-yellow-500 text-color-palette-pink-100 border-4 !p-8"
 		>
 			Custom classes applied
 		</Button>

@@ -58,7 +58,7 @@
 
 <Story name="Changing button style">
 	{#snippet template(args)}
-		<CopyButton {...args} variant="outline" emphasis="secondary" />
+		<CopyButton {...args} variant="outline" emphasis="muted" />
 	{/snippet}
 </Story>
 

@@ -72,7 +72,7 @@
 	import MapLayerSource from '../mapLayerSource/MapLayerSource.svelte';
 	import testData from '../testData.json';
 
-	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+	import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
 
 	const theme = (mode: 'light' | 'dark' = 'light') => {
 		return tokens.theme[mode];

@@ -77,7 +77,7 @@
 		let classes = keylineLookup[placement];
 		if (tabs) {
 			if (placement === 'left') {
-				classes = `border-r border-color-ui-border-secondary`;
+				classes = `border-r border-color-border-muted`;
 			} else {
 				classes = `!border-0`;
 			}
@@ -91,7 +91,7 @@
 	{#if tabs.length}
 		<div
 			class={classNames(
-				'absolute bg-color-container-level-0',
+				'bg-color-container absolute',
 				tabPlacementClasses,
 				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
 			)}
@@ -137,7 +137,7 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text-primary">
+					<div class="text-color-text flex h-full flex-col overflow-y-auto px-6 pt-6">
 						{#if header}
 							<div class="pb-4">
 								<!-- typically contains a `<SidebarHeader>` -->
@@ -151,7 +151,7 @@
 									<TabPanel
 										tabPanelId={`${tab.id}-panel`}
 										tabId={tab.id}
-										class="space-y-4 bg-color-container-level-1"
+										class="bg-color-container-level-1 space-y-4"
 									>
 										{@const SvelteComponent = component}
 										<SvelteComponent />

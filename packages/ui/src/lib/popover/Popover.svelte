@@ -36,7 +36,7 @@
 	{@render popoverTrigger()}
 
 	<Popover.Content
-		class="z-50 w-60 border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-sm shadow-lg"
+		class="border-color-border-muted bg-color-container z-50 w-60 border p-2 text-sm shadow-lg"
 	>
 		{#if title}
 			<p class="font-medium">
@@ -52,7 +52,7 @@
 				<Button
 					{...props}
 					variant="text"
-					emphasis="secondary"
+					emphasis="muted"
 					slim
 					size="sm"
 					class="absolute right-1 top-1"
@@ -62,6 +62,6 @@
 				</Button>
 			{/snippet}
 		</Popover.Close>
-		<Popover.Arrow class="text-color-ui-border-secondary" />
+		<Popover.Arrow class="text-color-border-muted" />
 	</Popover.Content>
 </Popover.Root>

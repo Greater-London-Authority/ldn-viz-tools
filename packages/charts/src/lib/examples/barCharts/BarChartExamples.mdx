@@ -1,10 +1,10 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { yearlyData } from '../../../data/demoData';
 import * as DefaultBar from './DefaultBar.stories.svelte';
 import * as FacetedBar from './FacetedBar.stories.svelte';
 import * as HorizontalBar from './HorizontalBar.stories.svelte';
 import * as HorizontalStackedBar from './HorizontalStackedBar.stories.svelte';
 import * as StackedBar from './StackedBar.stories.svelte';
-import { yearlyData } from '../../../data/demoData';
 
 <Meta title="Charts/Examples/Bar Charts" />
 
@@ -13,7 +13,7 @@ import { yearlyData } from '../../../data/demoData';
 ### Single variable
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
     let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'band' },
@@ -38,7 +38,7 @@ import { yearlyData } from '../../../data/demoData';
     ```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>
 		{JSON.stringify(
@@ -54,16 +54,16 @@ import { yearlyData } from '../../../data/demoData';
 ### Stacked Bar
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
     	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'band' },
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.currentMode.data.primary,
+				theme.currentMode.data.secondary,
+				theme.currentMode.data.tertiary
 			]
 		},
 		marks: [
@@ -88,7 +88,7 @@ import { yearlyData } from '../../../data/demoData';
     ```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>{JSON.stringify(yearlyData, null, 2)}</pre>
 </details>
@@ -98,7 +98,7 @@ import { yearlyData } from '../../../data/demoData';
 ### Faceted Bar
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
     	let spec = $derived({
 		marginRight: 120, // adjust margin right to suit your label length
@@ -108,9 +108,9 @@ import { yearlyData } from '../../../data/demoData';
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.currentMode.data.primary,
+				theme.currentMode.data.secondary,
+				theme.currentMode.data.tertiary
 			]
 		},
 		marks: [
@@ -136,7 +136,7 @@ import { yearlyData } from '../../../data/demoData';
     ```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>{JSON.stringify(yearlyData, null, 2)}</pre>
 </details>
@@ -146,7 +146,7 @@ import { yearlyData } from '../../../data/demoData';
 ### Horizontal Bar
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
 	let spec = $derived({
 		height: 300, // height set outside of default
@@ -181,7 +181,7 @@ import { yearlyData } from '../../../data/demoData';
     ```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>
 		{JSON.stringify(
@@ -197,7 +197,7 @@ import { yearlyData } from '../../../data/demoData';
 ### Horizontal Stacked Bar
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
 	let spec = $derived({
 		height: 300, // height set outside of default
@@ -211,9 +211,9 @@ import { yearlyData } from '../../../data/demoData';
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.currentMode.data.primary,
+				theme.currentMode.data.secondary,
+				theme.currentMode.data.tertiary
 			]
 		},
 		marks: [
@@ -242,7 +242,7 @@ import { yearlyData } from '../../../data/demoData';
     ```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>
 		{JSON.stringify(

@@ -6,4 +6,4 @@
 	let { children }: Props = $props();
 </script>
 
-<div class="text-color-text-secondary">{@render children?.()}</div>
+<div class="text-color-text-muted">{@render children?.()}</div>

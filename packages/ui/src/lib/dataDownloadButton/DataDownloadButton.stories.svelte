@@ -89,7 +89,7 @@
 					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
 				{/snippet}
 			</DataDownloadButton>
-			<DataDownloadButton {...args} {data} filename="download" emphasis="secondary">
+			<DataDownloadButton {...args} {data} filename="download" emphasis="muted">
 				{#snippet afterLabel()}
 					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
 				{/snippet}

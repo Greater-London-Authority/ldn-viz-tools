@@ -61,7 +61,7 @@
 				{filename}
 				formats={dataDownloadButton === true ? ['CSV', 'JSON'] : dataDownloadButton}
 				variant="outline"
-				emphasis="secondary"
+				emphasis="muted"
 				size="sm"
 			>
 				{#snippet afterLabel()}
@@ -78,7 +78,7 @@
 				formats={imageDownloadButton === true ? ['PNG', 'SVG'] : imageDownloadButton}
 				htmlNode={chartToCapture}
 				variant="outline"
-				emphasis="secondary"
+				emphasis="muted"
 				size="sm"
 			>
 				{#snippet afterLabel()}

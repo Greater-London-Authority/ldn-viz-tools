@@ -176,7 +176,7 @@
 	<div class="pointer-events-auto flex h-fit">
 		<Button
 			variant="square"
-			emphasis={drawModes.mode.selected !== 'select' ? 'primary' : 'secondary'}
+			emphasis={drawModes.mode.selected !== 'select' ? 'primary' : 'muted'}
 			class="pointer-events-auto"
 			size="lg"
 			onclick={() => {
@@ -193,9 +193,9 @@
 				<div in:fly>
 					<Button
 						variant="square"
-						emphasis="secondary"
+						emphasis="muted"
 						class="{drawModes.mode.selected === mode
-							? '!bg-color-action-background-secondary-active'
+							? '!bg-color-interactive-muted-active'
 							: null} pointer-events-auto capitalize"
 						size="lg"
 						onclick={() => clickMode(mode)}
@@ -211,7 +211,7 @@
 	<div class="flex flex-col">
 		<Button
 			variant="square"
-			emphasis={drawModes.mode.selected === 'select' ? 'primary' : 'secondary'}
+			emphasis={drawModes.mode.selected === 'select' ? 'primary' : 'muted'}
 			class="pointer-events-auto"
 			size="lg"
 			onclick={() => clickSelect()}
@@ -224,7 +224,7 @@
 			variant="square"
 			class="pointer-events-auto"
 			size="lg"
-			emphasis="secondary"
+			emphasis="muted"
 			onclick={clickClear}
 			disabled={mapDraw.features.current.length ? false : true}
 		>
@@ -263,7 +263,7 @@
 					variant="square"
 					class="pointer-events-auto"
 					size="lg"
-					emphasis="secondary"
+					emphasis="muted"
 					onclick={clickUpload}
 				>
 					<Icon src={ArrowUpTray} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
@@ -276,7 +276,7 @@
 					variant="square"
 					class="pointer-events-auto"
 					size="lg"
-					emphasis="secondary"
+					emphasis="muted"
 					onclick={downloadData}
 					disabled={mapDraw.features.current.length ? false : true}
 				>

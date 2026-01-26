@@ -5,7 +5,7 @@
 	 * @component
 	 */
 
-	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+	import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
 	import MapLayerSource from '../../mapLayerSource/MapLayerSource.svelte';
 	import MapLayerView from '../../mapLayerView/MapLayerView.svelte';
 

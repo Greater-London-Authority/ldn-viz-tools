@@ -1,8 +1,8 @@
 <script module lang="ts">
-	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { DocumentArrowUp } from '@steeze-ui/heroicons';
-	import AsyncButton from './AsyncButton.svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import AsyncButton from './AsyncButton.svelte';
 	import { type AsyncButtonProps } from './types';
 
 	/**
@@ -29,7 +29,7 @@
 				}
 			},
 			emphasis: {
-				options: ['primary', 'secondary', 'positive', 'negative', 'caution'],
+				options: ['primary', 'muted', 'positive', 'negative', 'caution'],
 				control: { type: 'radio' }
 			},
 			working: {
@@ -62,7 +62,7 @@
 	const variants: AsyncButtonProps['variant'][] = ['solid', 'brand', 'outline', 'text', 'square'];
 	const emphasis: AsyncButtonProps['emphasis'][] = [
 		'primary',
-		'secondary',
+		'muted',
 		'positive',
 		'caution',
 		'negative'

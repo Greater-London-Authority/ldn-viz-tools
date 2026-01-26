@@ -63,11 +63,7 @@
 	}: Props = $props();
 
 	let tabListClasses = $derived(
-		classNames(
-			'bg-color-container-level-0 text-color-text-primary',
-			orientationClasses[orientation],
-			classes
-		)
+		classNames('bg-color-container text-color-text', orientationClasses[orientation], classes)
 	);
 </script>
 

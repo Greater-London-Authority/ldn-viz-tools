@@ -2,10 +2,10 @@
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
+	import { SvelteSet } from 'svelte/reactivity';
 	import { yearlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { SvelteSet } from 'svelte/reactivity';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Slope Charts'
@@ -51,9 +51,9 @@
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.currentMode.data.primary,
+				theme.currentMode.data.secondary,
+				theme.currentMode.data.tertiary
 			]
 		},
 		marks: [
@@ -66,7 +66,7 @@
 			}),
 			Plot.tickX(chartData, {
 				x: 'Year',
-				stroke: theme.currentTheme.color.chart.grid
+				stroke: theme.currentMode.chart.grid
 			}),
 			Plot.textX(
 				chartData.filter((d) => d.Variable === 'Variable A'),
@@ -81,7 +81,7 @@
 				y: 'Average',
 				stroke: 'Variable',
 				strokeWidth: 2,
-				fill: theme.currentTheme.color.chart.background,
+				fill: theme.currentMode.chart.background,
 				fillOpacity: 1
 			}),
 			d3

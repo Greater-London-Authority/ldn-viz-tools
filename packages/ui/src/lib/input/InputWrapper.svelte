@@ -30,8 +30,8 @@
 			error ? '!text-color-input-label-error' : '',
 			disabled ? 'text-color-input-label-disabled' : '',
 			descriptionAlignment === 'left'
-				? 'text-color-input-label-secondary'
-				: 'ml-auto text-color-input-label-secondary',
+				? 'text-color-input-label-muted'
+				: 'ml-auto text-color-input-label-muted',
 			'text-sm'
 		)
 	);

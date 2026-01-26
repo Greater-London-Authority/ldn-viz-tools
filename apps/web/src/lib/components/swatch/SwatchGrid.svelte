@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { classNames } from '@ldn-viz/ui';
-	import Swatch from './Swatch.svelte';
 
 	let { tokenData, title, size = 'md' } = $props();
 
@@ -21,7 +20,7 @@
 {/if}
 
 <div class={gridClass}>
-	{#each tokenData as token}
-		<Swatch {...token} {size} content={token.value} />
-	{/each}
+	<!-- {#each tokenData as token} -->
+	<!-- <Swatch {...token} {size} content={token.value} /> -->
+	<!-- {/each} -->
 </div>

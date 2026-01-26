@@ -1,4 +1,4 @@
-import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
 import testData from './testData.json';
 
 export const theme = (mode = 'light') => {

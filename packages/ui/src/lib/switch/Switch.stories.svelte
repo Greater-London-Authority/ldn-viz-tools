@@ -1,8 +1,8 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Switch from './Switch.svelte';
-	import type { SwitchProps } from './Switch.svelte';
 	import Button from '../button/Button.svelte';
+	import type { SwitchProps } from './Switch.svelte';
+	import Switch from './Switch.svelte';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Switch',
@@ -27,7 +27,7 @@
 
 {#snippet defaultTemplate(args: SwitchProps)}
 	<Switch {...args} bind:checked />
-	<p class="pt-2 text-color-text-secondary">Is checked?: {checked}</p>
+	<p class="text-color-text-muted pt-2">Is checked?: {checked}</p>
 {/snippet}
 
 <Story name="Default" />

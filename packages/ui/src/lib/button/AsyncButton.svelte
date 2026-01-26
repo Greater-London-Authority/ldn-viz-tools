@@ -1,6 +1,6 @@
 <script lang="ts">
-	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 	import Button from '../button/Button.svelte';
+	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
 	import type { AsyncButtonProps } from './types.ts';
 
 	let {
@@ -18,7 +18,7 @@
 	const getSpinnerColorClasses = (emphasis: AsyncButtonProps['emphasis']): string => {
 		const colorClasses = {
 			primary: 'stroke-color-ui-primary',
-			secondary: 'stroke-color-ui-primary',
+			muted: 'stroke-color-ui-primary',
 			positive: 'stroke-color-ui-positive',
 			negative: 'stroke-color-ui-negative',
 			caution: 'stroke-color-ui-caution'

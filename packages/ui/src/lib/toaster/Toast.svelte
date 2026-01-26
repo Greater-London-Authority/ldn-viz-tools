@@ -4,10 +4,10 @@
 	}
 
 	const typeClasses: TypeClasses = {
-		Notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
-		Success: 'bg-color-ui-background-positive border-color-ui-border-positive',
-		Warning: 'bg-color-ui-background-caution border-color-ui-border-caution',
-		Error: 'bg-color-ui-background-negative border-color-ui-border-negative'
+		Notice: 'bg-color-surface-notice border-color-border-notice',
+		Success: 'bg-color-surface-positive border-color-border-positive',
+		Warning: 'bg-color-surface-caution border-color-border-caution',
+		Error: 'bg-color-surface-negative border-color-border-negative'
 	};
 </script>
 
@@ -24,26 +24,15 @@
 
 	let { message }: Props = $props();
 
-	let classes = $derived(typeClasses[message.type] ?? 'bg-color-ui-background-neutral');
+	let classes = $derived(typeClasses[message.type] ?? 'bg-color-surface-neutral');
 </script>
 
-<div
-	role="alert"
-	id={message.id}
-	class="text-color-text-primary shadow-lg"
-	out:fade={{ duration: 100 }}
->
+<div role="alert" id={message.id} class="text-color-text shadow-lg" out:fade={{ duration: 100 }}>
 	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
 		<div class="mb-1 flex items-center justify-between text-lg font-bold">
 			{message.type}
 			{#if message.closeButton}
-				<Button
-					title="Close"
-					emphasis="secondary"
-					variant="square"
-					size="sm"
-					onclick={message.remove}
-				>
+				<Button title="Close" emphasis="muted" variant="square" size="sm" onclick={message.remove}>
 					<Icon src={XMark} theme="solid" class="h-6 w-6" aria-hidden="true" />
 				</Button>
 			{/if}

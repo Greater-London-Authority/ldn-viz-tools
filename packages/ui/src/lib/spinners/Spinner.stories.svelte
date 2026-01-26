@@ -35,7 +35,7 @@
 		<Spinner
 			{...args}
 			class="w-8"
-			circleColorClass="stroke-color-ui-background-negative"
+			circleColorClass="stroke-color-surface-negative"
 			arcColorClass="stroke-color-ui-negative"
 		/>
 	{/snippet}

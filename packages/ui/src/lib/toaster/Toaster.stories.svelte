@@ -228,7 +228,7 @@ Calling `.post()` repeatedly on same toast object will refresh it, rather than c
 					</Button>
 
 					<Button
-						emphasis="secondary"
+						emphasis="muted"
 						variant="outline"
 						onclick={() => {
 							clickCount = 0;
@@ -239,7 +239,7 @@ Calling `.post()` repeatedly on same toast object will refresh it, rather than c
 				</div>
 
 				{#if secondsRemaining > 0}
-					<div class="text-color-text-secondary">
+					<div class="text-color-text-muted">
 						Toast will remain visible for <strong>{secondsRemaining.toFixed(1)}s</strong>
 					</div>
 				{/if}

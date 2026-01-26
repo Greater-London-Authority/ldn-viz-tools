@@ -31,13 +31,13 @@
 	const nonHighlightedClasses =
 		'text-color-input-value hover:bg-color-input-background-hover py-1 px-2 cursor-pointer';
 	const buttonClasses =
-		'rounded-full text-xs p-1 min-w-6 min-h-6 bg-color-action-background-secondary text-color-static-white hover:bg-color-action-background-secondary-hover active:bg-color-action-background-secondary-active dark:hover:text-color-text-inverse-primary';
+		'rounded-full text-xs p-1 min-w-6 min-h-6 bg-color-interactive-muted text-color-static-white hover:bg-color-interactive-muted-hover active:bg-color-interactive-muted-active dark:hover:text-color-text-inverse';
 </script>
 
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger aria-label="Theme mode switcher">
 		{#snippet child({ props })}
-			<Button {...props} class={buttonClasses} variant="square" emphasis="secondary" {size}>
+			<Button {...props} class={buttonClasses} variant="square" emphasis="muted" {size}>
 				{#if size === 'xs'}
 					<Icon src={themeIcon} theme="mini" class="h-4 w-4" aria-hidden="true" />
 				{:else}
@@ -48,7 +48,7 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Portal>
 		<DropdownMenu.Content
-			class="z-40 border border-color-input-border bg-color-input-background capitalize shadow "
+			class="border-color-border-muted bg-color-input-background z-40 border capitalize shadow "
 			preventScroll={false}
 			aria-label="Select current theme mode"
 		>

@@ -36,7 +36,7 @@
 	let {
 		hintLabel = 'More Info',
 		size = 'xs',
-		emphasis = 'secondary',
+		emphasis = 'muted',
 		variant = 'text',
 		slim = true,
 		children,

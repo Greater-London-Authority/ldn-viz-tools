@@ -15,9 +15,9 @@
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.currentMode.data.primary,
+				theme.currentMode.data.secondary,
+				theme.currentMode.data.tertiary
 			]
 		},
 		marks: [

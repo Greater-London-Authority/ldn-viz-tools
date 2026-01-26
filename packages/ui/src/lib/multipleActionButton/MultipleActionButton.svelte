@@ -49,7 +49,7 @@
 	};
 
 	let triggerClasses = $derived(
-		variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'
+		variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-interactive-muted-muted'
 	);
 </script>
 
@@ -94,16 +94,16 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class="z-[60] flex max-w-sm flex-col border border-color-input-border bg-color-input-background p-1 shadow"
+					class="border-color-border-muted bg-color-input-background z-[60] flex max-w-sm flex-col border p-1 shadow"
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>
 						<DropdownMenu.GroupHeading class="p-1 text-sm">{menuTitle}</DropdownMenu.GroupHeading>
 
-						<div class="divide-y divide-color-ui-border-secondary">
+						<div class="divide-color-border-muted divide-y">
 							{#each options as option (option.id)}
 								<DropdownMenu.Item
-									class="group w-full cursor-pointer p-2 text-left hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+									class="hover:bg-color-interactive-primary-hover hover:text-color-static-white group w-full cursor-pointer p-2 text-left"
 									onSelect={() => changeOption(option)}
 								>
 									<div class="flex items-center">
@@ -112,7 +112,7 @@
 										{/if}
 										<p class="text-sm font-medium">{option.menuLabel}</p>
 									</div>
-									<p class="text-xs text-color-text-secondary group-hover:text-color-static-white">
+									<p class="text-color-text-muted group-hover:text-color-static-white text-xs">
 										{option.menuDescription}
 									</p>
 								</DropdownMenu.Item>

@@ -156,24 +156,24 @@
 	{:else if showClearButton}
 		<Button
 			variant="square"
-			emphasis="secondary"
+			emphasis="muted"
 			title="Clear location"
 			role="search"
 			aria-label="Clear location"
 			onclick={clearSearch}
-			class="dark:border dark:border-color-ui-border-primary"
+			class="dark:border-color-border dark:border"
 		>
 			<Icon src={XMark} class="p-0.25 h-8 w-8" />
 		</Button>
 	{:else}
 		<Button
 			variant="square"
-			emphasis="secondary"
+			emphasis="muted"
 			title={errorMessage ? errorMessage : 'Find my location'}
 			role="search"
 			aria-label={errorMessage ? errorMessage : 'Find my location'}
 			onclick={startSearch}
-			class="dark:border dark:border-color-ui-border-primary"
+			class="dark:border-color-border dark:border"
 		>
 			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="h-8 w-8 p-0.5" />
 		</Button>

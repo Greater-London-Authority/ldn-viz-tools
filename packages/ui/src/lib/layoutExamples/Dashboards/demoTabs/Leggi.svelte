@@ -62,6 +62,6 @@
 <SidebarSection title="Definitions">
 	<span class="text-xs"> For more details on the definitions and terms used in this tool. </span>
 	<SidebarGroup>
-		<Button emphasis="secondary" class="w-full">View definitions</Button>
+		<Button emphasis="muted" class="w-full">View definitions</Button>
 	</SidebarGroup>
 </SidebarSection>

@@ -79,7 +79,7 @@
 			"buildPath": "./styles/",
 			"files": [
 				{
-					"destination": "js/color-tokens.js",
+					"destination": "js/mode-tokens.js",
 					"format": "javascript/esm",
 					"filter": "jsFilter",
 					"options": {
