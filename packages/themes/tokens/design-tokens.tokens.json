@@ -2215,10 +2215,52 @@
         "type": "color",
         "value": "{primitive.light-mode.color.mode.light.base}"
       },
-      "container-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{primitive.light-mode.color.mode.dark.base}"
+      "inverse": {
+        "container": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.light-mode.color.mode.dark.base}"
+        },
+        "container-level-1": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.palette.grey.1100}"
+        },
+        "container-level-2": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.palette.grey.1000}"
+        },
+        "container-level-3": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.palette.grey.900}"
+        },
+        "text": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.light-mode.color.static.white}"
+        },
+        "text-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.palette.grey.300}"
+        },
+        "surface": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.palette.grey.1100}"
+        },
+        "surface-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.palette.grey.900}"
+        },
+        "text-wash": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.palette.grey.200}"
+        }
       },
       "container-level-1": {
         "description": "",
@@ -2235,40 +2277,15 @@
         "type": "color",
         "value": "{semantic-color.light-mode.palette.grey.300}"
       },
-      "container-level-1-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.1100}"
-      },
-      "container-level-2-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.1000}"
-      },
-      "container-level-3-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.900}"
-      },
       "text": {
         "description": "",
         "type": "color",
         "value": "{semantic-color.light-mode.palette.grey.900}"
       },
-      "text-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{primitive.light-mode.color.static.white}"
-      },
       "text-muted": {
         "description": "",
         "type": "color",
         "value": "{semantic-color.light-mode.palette.grey.700}"
-      },
-      "text-muted-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.300}"
       },
       "chart": {
         "axis": {
@@ -2296,15 +2313,17 @@
           "type": "color",
           "value": "{semantic-color.light-mode.text-muted}"
         },
-        "label-inverse": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.light-mode.text-inverse}"
-        },
-        "label-muted-inverse": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.light-mode.text-muted-inverse}"
+        "inverse": {
+          "label": {
+            "description": "",
+            "type": "color",
+            "value": "{semantic-color.light-mode.inverse.text}"
+          },
+          "label-muted": {
+            "description": "",
+            "type": "color",
+            "value": "{semantic-color.light-mode.inverse.text-muted}"
+          }
         }
       },
       "surface-accent": {
@@ -2599,11 +2618,6 @@
         "type": "color",
         "value": "{semantic-color.light-mode.palette.grey.300}"
       },
-      "surface-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.1100}"
-      },
       "text-wash": {
         "description": "",
         "type": "color",
@@ -2618,11 +2632,6 @@
         "description": "",
         "type": "color",
         "value": "{semantic-color.light-mode.container}"
-      },
-      "surface-muted-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.900}"
       },
       "static": {
         "brand": {
@@ -2641,15 +2650,72 @@
           "value": "{primitive.light-mode.color.static.black}"
         }
       },
-      "text-wash-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.200}"
-      },
       "label-muted": {
         "description": "",
         "type": "color",
         "value": "{semantic-color.light-mode.text-muted}"
+      },
+      "geo": {
+        "feature": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.border}"
+        },
+        "feature-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.border-muted}"
+        },
+        "interactive": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.interactive.primary}"
+        },
+        "interactive-hover": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.interactive.primary-hover}"
+        },
+        "interactive-selected": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.light-mode.color.static.gla.yellow}"
+        },
+        "interactive-focus": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.interactive.focus}"
+        },
+        "interactive-disabled": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.interactive.disabled}"
+        },
+        "interactive-error": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.interactive.error}"
+        },
+        "label": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.label}"
+        },
+        "label-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.label-muted}"
+        },
+        "annotation": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.label}"
+        },
+        "annotation-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.light-mode.label-muted}"
+        }
       }
     },
     "dark-mode": {
@@ -3336,10 +3402,52 @@
         "type": "color",
         "value": "{primitive.dark-mode.color.mode.dark.base}"
       },
-      "container-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{primitive.dark-mode.color.mode.light.base}"
+      "inverse": {
+        "container": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.dark-mode.color.mode.light.base}"
+        },
+        "container-level-1": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.1100}"
+        },
+        "container-level-2": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.1000}"
+        },
+        "container-level-3": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.900}"
+        },
+        "text": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.200}"
+        },
+        "text-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.500}"
+        },
+        "surface": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.1100}"
+        },
+        "surface-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.1000}"
+        },
+        "text-wash": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.palette.grey.200}"
+        }
       },
       "container-level-1": {
         "description": "",
@@ -3356,40 +3464,15 @@
         "type": "color",
         "value": "{semantic-color.dark-mode.palette.grey.300}"
       },
-      "container-level-1-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.1100}"
-      },
-      "container-level-2-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.1000}"
-      },
-      "container-level-3-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.900}"
-      },
       "text": {
         "description": "",
         "type": "color",
         "value": "{primitive.dark-mode.color.static.white}"
       },
-      "text-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.200}"
-      },
       "text-muted": {
         "description": "",
         "type": "color",
         "value": "{semantic-color.dark-mode.palette.grey.900}"
-      },
-      "text-muted-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.500}"
       },
       "chart": {
         "axis": {
@@ -3417,15 +3500,17 @@
           "type": "color",
           "value": "{semantic-color.dark-mode.text-muted}"
         },
-        "label-inverse": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.dark-mode.text-inverse}"
-        },
-        "label-muted-inverse": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.dark-mode.text-muted-inverse}"
+        "inverse": {
+          "label": {
+            "description": "",
+            "type": "color",
+            "value": "{semantic-color.dark-mode.inverse.text}"
+          },
+          "label-muted": {
+            "description": "",
+            "type": "color",
+            "value": "{semantic-color.dark-mode.inverse.text-muted}"
+          }
         }
       },
       "surface-accent": {
@@ -3720,11 +3805,6 @@
         "type": "color",
         "value": "{semantic-color.dark-mode.palette.grey.300}"
       },
-      "surface-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.1100}"
-      },
       "text-wash": {
         "description": "",
         "type": "color",
@@ -3739,11 +3819,6 @@
         "description": "",
         "type": "color",
         "value": "{semantic-color.dark-mode.container}"
-      },
-      "surface-muted-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.1000}"
       },
       "static": {
         "brand": {
@@ -3762,15 +3837,72 @@
           "value": "{primitive.dark-mode.color.static.black}"
         }
       },
-      "text-wash-inverse": {
-        "description": "",
-        "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.200}"
-      },
       "label-muted": {
         "description": "",
         "type": "color",
         "value": "{semantic-color.dark-mode.text-muted}"
+      },
+      "geo": {
+        "feature": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.border}"
+        },
+        "feature-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.border-muted}"
+        },
+        "interactive": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.interactive.primary}"
+        },
+        "interactive-hover": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.interactive.primary-hover}"
+        },
+        "interactive-selected": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.dark-mode.color.static.gla.yellow}"
+        },
+        "interactive-focus": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.interactive.focus}"
+        },
+        "interactive-disabled": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.interactive.disabled}"
+        },
+        "interactive-error": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.interactive.error}"
+        },
+        "label": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.label}"
+        },
+        "label-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.label-muted}"
+        },
+        "annotation": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.label}"
+        },
+        "annotation-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{semantic-color.dark-mode.label-muted}"
+        }
       }
     }
   },

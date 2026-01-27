@@ -24,14 +24,14 @@ export default create({
 
 	// Text colors
 	textColor: colors.mode.dark.text.default,
-	textInverseColor: colors.mode.dark.text.inverse,
-	textMutedColor: colors.mode.dark.text.muted.default,
+	textInverseColor: colors.mode.dark.inverse.text.default,
+	textMutedColor: colors.mode.dark.text.muted,
 
 	// Toolbar default and active colors
 	barTextColor: colors.mode.dark.text.default,
 	barHoverColor: colors.mode.dark.interactive.primary.default,
 	barSelectedColor: colors.mode.dark.interactive.primary.active,
-	barBg: colors.mode.dark.container.level[2].default,
+	barBg: colors.mode.dark.container.level[2],
 
 	// Form colors
 	buttonBg: colors.mode.dark.interactive.primary.default,
@@ -40,7 +40,7 @@ export default create({
 	booleanSelectedBg: colors.mode.dark.interactive.on,
 	inputBg: colors.mode.dark.surface.default,
 	inputBorder: colors.mode.dark.border.muted,
-	inputTextColor: colors.mode.dark.text.wash.default,
+	inputTextColor: colors.mode.dark.text.wash,
 	inputBorderRadius: 1
 });
 
@@ -55,6 +55,6 @@ export const docs = create({
 
 	// Text colors
 	textColor: colors.mode.light.text.default,
-	textInverseColor: colors.mode.light.text.inverse,
-	textMutedColor: colors.mode.light.text.muted.default
+	textInverseColor: colors.mode.light.inverse.text.default,
+	textMutedColor: colors.mode.light.text.muted
 });
