@@ -1,4 +1,4 @@
-import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
+import tokens from '@ldn-viz/themes/styles/js/color-tokens';
 import { expect, test } from 'vitest';
 import { colorWithBestContrast } from './colorWithBestContrast';
 

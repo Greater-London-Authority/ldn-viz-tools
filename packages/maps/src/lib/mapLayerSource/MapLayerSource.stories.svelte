@@ -55,7 +55,7 @@
 	import MapLayerView from '../mapLayerView/MapLayerView.svelte';
 	import testData from '../testData.json';
 
-	import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
+	import tokens from '@ldn-viz/themes/styles/js/color-tokens';
 
 	const theme = (mode: 'light' | 'dark' = 'light') => {
 		return tokens.theme[mode];

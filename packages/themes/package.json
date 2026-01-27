@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "npm run build-tokens",
-		"build-tokens": "node ./sd.build.js",
+		"build-tokens": "node ./sd.build.js && node ./processJsTokens.mjs",
 		"format": "prettier --check . --write",
 		"lint": "prettier --check . && eslint . && publint",
 		"test": "echo no tests",

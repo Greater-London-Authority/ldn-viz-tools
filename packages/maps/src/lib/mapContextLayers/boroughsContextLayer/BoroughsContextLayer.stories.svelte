@@ -2,10 +2,10 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import BoroughsContextLayer from './BoroughsContextLayer.svelte';
 
-	import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
+	import tokens from '@ldn-viz/themes/styles/js/color-tokens';
 
 	const theme = (mode: 'light' | 'dark' = 'light') => {
-		return tokens.theme[mode];
+		return tokens.mode[mode];
 	};
 
 	const color = {
@@ -13,7 +13,7 @@
 		control: 'text',
 		table: {
 			defaultValue: {
-				summary: theme().color.ui.border.primary
+				summary: theme().border.default
 			},
 			type: {
 				summary: 'string'

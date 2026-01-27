@@ -5,12 +5,12 @@
 	 * @component
 	 */
 
-	import tokens from '@ldn-viz/themes/styles/js/mode-tokens';
+	import tokens from '@ldn-viz/themes/styles/js/color-tokens';
 	import MapLayerSource from '../../mapLayerSource/MapLayerSource.svelte';
 	import MapLayerView from '../../mapLayerView/MapLayerView.svelte';
 
 	const theme = (mode: 'light' | 'dark' = 'light') => {
-		return tokens.theme[mode];
+		return tokens.mode[mode];
 	};
 
 	interface Props {
@@ -37,10 +37,10 @@
 	}
 
 	let {
-		lineColor = theme().color.ui.border.primary,
+		lineColor = theme().border.default,
 		lineOpacity = 0.5,
 		lineWidth = 2,
-		fillColor = theme().color.ui.border.primary,
+		fillColor = theme().border.default,
 		fillOpacity = 0.08
 	}: Props = $props();
 

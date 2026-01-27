@@ -4,7 +4,7 @@
 	"platforms": {
 		"css": {
 			"transformGroup": "css",
-			"transforms": ["modeName", "typography/unitless"],
+			"transforms": ["modeName", "size/pxToRem", "typography/unitless", "spacing/unitless"],
 			"buildPath": "./styles/",
 			"files": [
 				{
@@ -47,13 +47,8 @@
 				},
 				{
 					"destination": "typography.css",
-					"format": "css/variables",
-					"filter": "cssTypographyFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
+					"format": "custom/typography",
+					"filter": "cssTypographyFilter"
 				}
 			]
 		},
@@ -79,7 +74,7 @@
 			"buildPath": "./styles/",
 			"files": [
 				{
-					"destination": "js/mode-tokens.js",
+					"destination": "js/input.js",
 					"format": "javascript/esm",
 					"filter": "jsFilter",
 					"options": {

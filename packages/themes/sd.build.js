@@ -96,6 +96,8 @@ StyleDictionary.registerParser({
 
 			const output = renameKeysDeep(darkParsed, {
 				'semantic-color': 'mode',
+				'semantic-spacing': 'spacing',
+				'semantic-typography': 'typography',
 				'light-mode': 'light',
 				'dark-mode': 'dark'
 			});
@@ -149,8 +151,8 @@ const conditionsPrimitive = [{ category: 'primitive', subitem: { not: ['seed'] }
 const conditionsColorModes = [{ category: 'mode' }];
 const conditionsColorModeLight = [{ category: 'mode', type: 'light' }];
 const conditionsColorModeDark = [{ category: 'mode', type: 'dark' }];
-const conditionsSpacing = [{ category: 'semantic-spacing' }];
-const conditionsTypography = [{ category: 'semantic-typography' }];
+const conditionsSpacing = [{ category: 'spacing' }];
+const conditionsTypography = [{ category: 'typography' }];
 const conditionsTw = [
 	...conditionsColorModeLight,
 	{
@@ -244,7 +246,7 @@ StyleDictionary.registerTransform({
 	}
 });
 
-//Don't apply units to spacing when not needed in tailwind transform
+//Don't apply units to spacing when not needed
 StyleDictionary.registerTransform({
 	name: 'spacing/unitless',
 	type: transformTypes.value,
@@ -301,7 +303,7 @@ StyleDictionary.registerFormat({
 
 const formatTailwindSpacing = (token) => {
 	return `  "spacing-${token.attributes.type}": "var(--${token.name}, ${token.value / 16}rem)", 
-  "typography-spacing-${token.attributes.type}": "var(--${token.name}-em, ${token.value / 16}em)" `;
+  "typography-spacing-${token.attributes.type}": "calc(var(--${token.name}) /16 * 1em)"`;
 };
 
 StyleDictionary.registerFormat({
@@ -313,6 +315,57 @@ StyleDictionary.registerFormat({
 	}
 });
 
+/**
+ * Custom format for typography
+ */
+
+const formatTypography = (dictionary) => (token) => {
+	const isFontSize = token.path[0] === 'typography' && token.path.at(-1) === 'fontsize';
+	const isLineHeight = token.path[0] === 'typography' && token.path.at(-1) === 'lineheight';
+
+	const getNestedTokenValue = (path) => {
+		return (
+			path.reduce((obj, key) => (obj && obj[key] ? obj[key] : null), dictionary.tokens)?.original
+				.value || null
+		);
+	};
+
+	// Get the corresponding font size for a line-height token
+	const getFontSizeForLineHeight = (token) => {
+		if (!isLineHeight) return null;
+
+		// Construct the correct font size path (replace 'lineheight' with 'fontsize')
+		const fontSizePath = [...token.path.slice(0, -1), 'fontsize'];
+
+		// Retrieve the font size token value
+		return getNestedTokenValue(fontSizePath);
+	};
+
+	const applyCSSVariable = (token) => {
+		if (isFontSize) {
+			return ` --${token.name}: ${token.original.value / 16}rem; /* ${token.original.value}px */`;
+		}
+
+		if (isLineHeight) {
+			const fontSize = getFontSizeForLineHeight(token);
+			const unitlessLineHeight = fontSize ? token.value / fontSize : token.value / 16;
+			return `  --${token.name}: ${unitlessLineHeight.toFixed(4)};`;
+		}
+
+		return ` --${token.name}: ${token.value}`;
+	};
+	return applyCSSVariable(token);
+};
+
+StyleDictionary.registerFormat({
+	name: 'custom/typography',
+	format({ dictionary }) {
+		return `:root {
+		${dictionary.allTokens.map(formatTypography(dictionary)).join(';\n')}
+      }`;
+	}
+});
+
 console.log('Build started...');
 console.log('\n==============================================');
 
@@ -320,7 +373,7 @@ console.log('\n==============================================');
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
 const sd = new StyleDictionary('./sd.config.json', {
-	// warnings: 'disabled'
+	warnings: 'disabled'
 });
 
 // FINALLY, BUILD ALL THE PLATFORMS
