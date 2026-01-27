@@ -72,7 +72,8 @@ StyleDictionary.registerParser({
 				['primitive.sm.', 'primitive.'],
 				['primitive.md.', 'primitive.'],
 				['primitive.lg.', 'primitive.'],
-				['primitive.xl.', 'primitive.']
+				['primitive.xl.', 'primitive.'],
+				['focus ring', 'focus-ring']
 			];
 
 			const cleanedJson = replacements.reduce((result, [oldValue, newValue]) => {
@@ -98,6 +99,7 @@ StyleDictionary.registerParser({
 				'semantic-color': 'mode',
 				'semantic-spacing': 'spacing',
 				'semantic-typography': 'typography',
+				'custom-shadow': 'shadow',
 				'light-mode': 'light',
 				'dark-mode': 'dark'
 			});
@@ -170,6 +172,9 @@ const conditionsJs = [
 		subitem: { not: ['seed'] }
 	}
 ];
+const conditionsShadow = [
+	{ category: { not: ['primitive', 'mode', 'spacing', 'typography', 'focus ring'] } }
+];
 
 // REGISTER THE CUSTOM FILTERS USING OUR MATCHING CONDITIONS
 
@@ -211,6 +216,11 @@ StyleDictionary.registerFilter({
 StyleDictionary.registerFilter({
 	name: 'jsFilter',
 	filter: (token) => createFilter(conditionsJs)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'shadowFilter',
+	filter: (token) => createFilter(conditionsShadow)(token)
 });
 
 /*=========================================================
@@ -363,6 +373,49 @@ StyleDictionary.registerFormat({
 		return `:root {
 		${dictionary.allTokens.map(formatTypography(dictionary)).join(';\n')}
       }`;
+	}
+});
+
+/**
+ * Custom format for shadows
+ */
+
+const groupShadows = (tokens) =>
+	Object.values(
+		tokens.reduce((acc, token) => {
+			const { category } = token.attributes;
+
+			if (!acc[category]) {
+				acc[category] = {
+					category,
+					values: []
+				};
+			}
+
+			acc[category].values.push(token.original.value);
+			return acc;
+		}, {})
+	);
+
+const formatShadows = (dictionary) => {
+	const grouped = groupShadows(dictionary.allTokens);
+
+	return grouped
+		.map(({ category, values }) => {
+			return `--${category}: ${values.map(
+				({ radius, color, offsetX, offsetY, spread }) =>
+					`${offsetX}px ${offsetY}px ${radius}px ${spread}px ${color}`
+			)}`;
+		})
+		.join(';\n');
+};
+
+StyleDictionary.registerFormat({
+	name: 'custom/shadows',
+	format({ dictionary }) {
+		return `:root {
+			${formatShadows(dictionary)};
+		}`;
 	}
 });
 

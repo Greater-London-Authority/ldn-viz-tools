@@ -1,6 +1,7 @@
 {
 	"source": ["./tokens/**/*.json"],
 	"parsers": ["json-parser"],
+
 	"platforms": {
 		"css": {
 			"transformGroup": "css",
@@ -49,6 +50,11 @@
 					"destination": "typography.css",
 					"format": "custom/typography",
 					"filter": "cssTypographyFilter"
+				},
+				{
+					"destination": "shadows.css",
+					"format": "custom/shadows",
+					"filter": "shadowFilter"
 				}
 			]
 		},

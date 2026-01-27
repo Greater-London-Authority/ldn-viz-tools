@@ -1,4 +1,242 @@
 {
+  "shadow-inner": {
+    "description": null,
+    "type": "custom-shadow",
+    "value": {
+      "shadowType": "innerShadow",
+      "radius": 4,
+      "color": "#0000000d",
+      "offsetX": 0,
+      "offsetY": 2,
+      "spread": 0
+    }
+  },
+  "shadow-sm": {
+    "description": null,
+    "type": "custom-shadow",
+    "value": {
+      "shadowType": "dropShadow",
+      "radius": 2,
+      "color": "#0000000d",
+      "offsetX": 0,
+      "offsetY": 1,
+      "spread": 0
+    }
+  },
+  "shadow": {
+    "0": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 3,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 1,
+        "spread": 0
+      }
+    },
+    "1": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 2,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 1,
+        "spread": -1
+      }
+    },
+    "description": null
+  },
+  "shadow-md": {
+    "0": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 4,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 2,
+        "spread": -2
+      }
+    },
+    "1": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 6,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 4,
+        "spread": -1
+      }
+    },
+    "description": null
+  },
+  "shadow-lg": {
+    "0": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 6,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 4,
+        "spread": -4
+      }
+    },
+    "1": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 15,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 10,
+        "spread": -3
+      }
+    },
+    "description": null
+  },
+  "shadow-xl": {
+    "0": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 10,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 8,
+        "spread": -6
+      }
+    },
+    "1": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "dropShadow",
+        "radius": 25,
+        "color": "#0000001a",
+        "offsetX": 0,
+        "offsetY": 20,
+        "spread": -5
+      }
+    },
+    "description": null
+  },
+  "shadow-2xl": {
+    "description": null,
+    "type": "custom-shadow",
+    "value": {
+      "shadowType": "dropShadow",
+      "radius": 50,
+      "color": "#00000040",
+      "offsetX": 0,
+      "offsetY": 25,
+      "spread": -12
+    }
+  },
+  "focus ring": {
+    "default": {
+      "0": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#0067b4ff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 4
+        }
+      },
+      "1": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#ffffffff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 2
+        }
+      },
+      "description": "adds focus ring to an action or input element"
+    },
+    "negative": {
+      "0": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#cd0000ff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 4
+        }
+      },
+      "1": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#ffffffff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 2
+        }
+      },
+      "description": "adds negative color focus ring to an action or input element"
+    },
+    "positive": {
+      "0": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#007534ff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 4
+        }
+      },
+      "1": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#ffffffff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 2
+        }
+      },
+      "description": "adds positive color focus ring to an action or input element"
+    },
+    "warning": {
+      "0": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#b83700ff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 4
+        }
+      },
+      "1": {
+        "type": "custom-shadow",
+        "value": {
+          "shadowType": "dropShadow",
+          "radius": 0,
+          "color": "#ffffffff",
+          "offsetX": 0,
+          "offsetY": 0,
+          "spread": 2
+        }
+      },
+      "description": "adds warning color focus ring to an action or input element"
+    }
+  },
   "semantic-spacing": {
     "xxs": {
       "description": "",
@@ -2576,6 +2814,11 @@
           "description": "",
           "type": "color",
           "value": "{semantic-color.light-mode.palette.green.300}"
+        },
+        "disabled-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.light-mode.color.mode.light.grey.200}"
         }
       },
       "label": {
@@ -3763,6 +4006,11 @@
           "description": "",
           "type": "color",
           "value": "{semantic-color.dark-mode.palette.green.300}"
+        },
+        "disabled-muted": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.dark-mode.color.mode.dark.grey.300}"
         }
       },
       "label": {
