@@ -2643,7 +2643,7 @@
         "off": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.light-mode.surface-neutral}"
+          "value": "{primitive.light-mode.color.mode.light.grey.200}"
         },
         "dragged": {
           "description": "",
@@ -3835,7 +3835,7 @@
         "off": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.surface-neutral}"
+          "value": "{primitive.dark-mode.color.mode.dark.grey.300}"
         },
         "dragged": {
           "description": "",
