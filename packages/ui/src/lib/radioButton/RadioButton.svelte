@@ -49,7 +49,7 @@
 		aria-disabled={disabled}
 		{disabled}
 		style={color
-			? `--mode-border-muted: ${color}; --mode-border-muted-selected: ${color}; --mode-interactive-primary: ${color}; --tw-ring-color: ${color};`
+			? `--mode-border-muted: ${color}; --mode-interactive-selected: ${color}; --mode-interactive-primary: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
 	{#if label}
