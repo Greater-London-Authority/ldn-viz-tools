@@ -166,7 +166,7 @@
 	{/if}
 
 	<div class="mt-2 flex justify-end gap-2">
-		<Button onclick={onCancel} emphasis="muted" variant="outline">Cancel</Button>
+		<Button onclick={onCancel} emphasis="secondary" variant="outline">Cancel</Button>
 		<Button onclick={onLoad} emphasis="primary" disabled={upload.state !== 'success'}>
 			Add area
 		</Button>

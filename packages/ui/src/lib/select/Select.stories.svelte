@@ -195,7 +195,7 @@
 			<div>Current value: <span class="font-bold">{selectedValue}</span></div>
 
 			<Button onclick={() => (selectedValue = 2)}>Reset to 2</Button>
-			<Button variant="outline" emphasis="muted" onclick={() => (selectedValue = null)}>
+			<Button variant="outline" emphasis="secondary" onclick={() => (selectedValue = null)}>
 				Clear
 			</Button>
 
@@ -210,7 +210,7 @@
 			<div>Current value: <span class="font-bold">{selectedValueMulti}</span></div>
 
 			<Button onclick={() => (selectedValueMulti = [1, 3])}>Reset to 1 and 3</Button>
-			<Button variant="outline" emphasis="muted" onclick={() => (selectedValueMulti = null)}>
+			<Button variant="outline" emphasis="secondary" onclick={() => (selectedValueMulti = null)}>
 				Clear
 			</Button>
 
@@ -223,7 +223,9 @@
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
 			<Button onclick={() => (error = 'OH NO')}>Set error</Button>
-			<Button variant="outline" emphasis="muted" onclick={() => (error = '')}>Clear error</Button>
+			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}
+				>Clear error</Button
+			>
 
 			<span><code>error is:</code> {error}</span>
 

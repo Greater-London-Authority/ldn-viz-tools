@@ -48,7 +48,7 @@
 {:else}
 	<Button
 		size="md"
-		emphasis="muted"
+		emphasis="secondary"
 		class="pointer-events-auto h-8"
 		onclick={handleClick}
 		aria-label="Show legend"

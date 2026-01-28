@@ -84,7 +84,7 @@
 	>
 		<Button
 			variant="square"
-			emphasis="muted"
+			emphasis="secondary"
 			title={$isFullscreen ? mode.titleIn : mode.titleOut}
 			class="pointer-events-auto"
 			onclick={handle}

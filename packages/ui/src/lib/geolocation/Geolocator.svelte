@@ -156,7 +156,7 @@
 	{:else if showClearButton}
 		<Button
 			variant="square"
-			emphasis="muted"
+			emphasis="secondary"
 			title="Clear location"
 			role="search"
 			aria-label="Clear location"
@@ -168,7 +168,7 @@
 	{:else}
 		<Button
 			variant="square"
-			emphasis="muted"
+			emphasis="secondary"
 			title={errorMessage ? errorMessage : 'Find my location'}
 			role="search"
 			aria-label={errorMessage ? errorMessage : 'Find my location'}

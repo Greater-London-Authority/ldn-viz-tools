@@ -15,7 +15,7 @@ type ButtonAsLink = Omit<HTMLAnchorAttributes, 'href' | 'type'> & {
 
 export type LdnButtonProps = {
 	variant?: 'brand' | 'square' | 'solid' | 'outline' | 'text';
-	emphasis?: 'primary' | 'muted' | 'caution' | 'positive' | 'negative';
+	emphasis?: 'primary' | 'secondary' | 'caution' | 'positive' | 'negative';
 	size?: 'xs' | 'sm' | 'md' | 'lg';
 	title?: string;
 	slim?: boolean;

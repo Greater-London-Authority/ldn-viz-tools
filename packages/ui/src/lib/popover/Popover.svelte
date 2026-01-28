@@ -52,7 +52,7 @@
 				<Button
 					{...props}
 					variant="text"
-					emphasis="muted"
+					emphasis="secondary"
 					slim
 					size="sm"
 					class="absolute right-1 top-1"

@@ -32,7 +32,12 @@
 	import { onMount } from 'svelte';
 	import Button from '../button/Button.svelte';
 
-	let { slim = true, variant = 'text', emphasis = 'muted', ...restProps }: ButtonProps = $props();
+	let {
+		slim = true,
+		variant = 'text',
+		emphasis = 'secondary',
+		...restProps
+	}: ButtonProps = $props();
 
 	let cookieControlStore = $state(undefined);
 

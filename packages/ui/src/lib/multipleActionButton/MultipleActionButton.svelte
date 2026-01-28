@@ -49,7 +49,7 @@
 	};
 
 	let triggerClasses = $derived(
-		variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-interactive-muted-muted'
+		variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-interactive-secondary-muted'
 	);
 </script>
 

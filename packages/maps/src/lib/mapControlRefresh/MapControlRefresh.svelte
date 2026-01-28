@@ -9,7 +9,7 @@
 <div class="invisible flex flex-col space-y-1 sm:visible">
 	<Button
 		variant="square"
-		emphasis="muted"
+		emphasis="secondary"
 		title="Refresh page"
 		class="dark:border-color-border pointer-events-auto shadow dark:border"
 		onclick={handle}

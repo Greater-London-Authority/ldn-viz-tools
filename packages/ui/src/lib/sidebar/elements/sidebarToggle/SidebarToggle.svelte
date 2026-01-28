@@ -29,8 +29,8 @@
 	<Button
 		title="Toggle sidebar"
 		variant="square"
-		emphasis="muted"
-		class="!bg-color-container-level-1 !text-color-text hover:!text-color-interactive-muted-hover cursor-pointer"
+		emphasis="secondary"
+		class="!bg-color-container-level-1 !text-color-text hover:!text-color-interactive-secondary-hover cursor-pointer"
 		onclick={toggleOpen}
 		aria-controls={sidebarId}
 		aria-expanded={sidebarState?.isOpen}

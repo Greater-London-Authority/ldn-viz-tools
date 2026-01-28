@@ -12,7 +12,7 @@
 		render: defaultTemplate,
 		argTypes: {
 			emphasis: {
-				options: ['primary', 'muted', 'caution', 'positive', 'negative'],
+				options: ['primary', 'secondary', 'caution', 'positive', 'negative'],
 				control: { type: 'select' }
 			},
 			variant: {
@@ -48,7 +48,7 @@
 	{#snippet template(args)}
 		<div class="flex items-end space-x-2">
 			<Button {...args}>Primary</Button>
-			<Button {...args} emphasis="muted">Secondary</Button>
+			<Button {...args} emphasis="secondary">Secondary</Button>
 		</div>
 	{/snippet}
 </Story>
@@ -59,7 +59,7 @@
 
 <Story name="Outline" args={{ variant: 'outline' }} />
 
-<Story name="Text" args={{ variant: 'text', emphasis: 'muted' }} />
+<Story name="Text" args={{ variant: 'text', emphasis: 'secondary' }} />
 
 <Story name="Disabled">
 	{#snippet template(args)}

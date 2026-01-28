@@ -193,7 +193,7 @@
 			--sv-bg: var(--mode-input-background);
 			--sv-color: var(--mode-input-valuetext);
 			--sv-disabled-bg: var(--mode-input-background-disabled);
-			--sv-border: var(--mode-input-border) 0px solid;
+			--sv-border: var(--mode-border-muted) 0px solid;
 			--sv-border-radius: 0px;
 			--sv-general-padding: var(--spacing-xs) var(--spacing-sm);
 			--sv-control-bg: var(--sv-bg);
@@ -215,7 +215,7 @@
 
 			--sv-dropdown-bg: var(--sv-bg);
 			--sv-dropdown-offset: var(--spacing-xs);
-			--sv-dropdown-border: var(--mode-input-border) 1px solid;
+			--sv-dropdown-border: var(--mode-border-muted) 1px solid;
 			--sv-dropdown-width: auto;
 			--sv-dropdown-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 			--sv-dropdown-height: 320px;
@@ -223,7 +223,7 @@
 			--sv-dropdown-active-bg: var(--mode-input-background-hover);
 			--sv-dropdown-selected-bg: var(--mode-input-background-selected);
 
-			--sv-create-kbd-border: var(--mode-input-border) 1px solid;
+			--sv-create-kbd-border: var(--mode-border-muted) 1px solid;
 			--sv-create-kbd-bg: var(--mode-input-background);
 			--sv-create-disabled-bg: var(--mode-input-background-disabled);
 			--sv-loader-border: var(--mode-border-muted) 2px solid;
@@ -242,13 +242,13 @@
 		/* Stop active and selected having same color */
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected,
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected:hover {
-			background-color: var(--mode-input-background-active);
+			background-color: var(--mode-interactive-primary);
 			color: #fff;
 		}
 
 		.form-select.svelecte .in-dropdown.is-selected,
 		.form-select.svelecte .in-dropdown.is-selected:hover {
-			background-color: var(--mode-input-background-active);
+			background-color: var(--mode-interactive-primary);
 			color: #fff;
 		}
 
@@ -263,13 +263,13 @@
 
 		/* multiple selected items */
 		.form-select.svelecte .sv-item--container > .sv-item--wrap.is-multi {
-			border: var(--mode-input-border) 1px solid;
+			border: var(--mode-border-muted) 1px solid;
 			border-right: none;
 			padding-right: var(--spacing-xs);
 		}
 
 		.form-select.svelecte .sv-item--container .sv-item--btn {
-			border: var(--mode-input-border) 1px solid;
+			border: var(--mode-border-muted) 1px solid;
 		}
 
 		.form-select.svelecte .sv-item--wrap.is-multi {
@@ -278,7 +278,7 @@
 
 		/* States */
 		.form-select.svelecte.has-error {
-			border: var(--mode-input-border-error) 1px solid;
+			border: var(--mode-border-muted-error) 1px solid;
 		}
 
 		.form-select.svelecte:hover {
@@ -295,7 +295,7 @@
 
 		.form-select.svelecte.is-disabled:hover {
 			cursor: not-allowed;
-			border: var(--mode-input-border) 1px solid;
+			border: var(--mode-border-muted) 1px solid;
 		}
 	</style>
 {/if}

@@ -13,7 +13,7 @@ class ThemeState {
 	);
 
 	tokenNameToValue = (colorName: string, theme: ThemeObject<any> = this.currentTheme) => {
-		let val = theme.color;
+		let val = theme;
 		for (const part of colorName.split('.')) {
 			val = val[part];
 			if (!val) {

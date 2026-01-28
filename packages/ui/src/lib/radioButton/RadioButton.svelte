@@ -49,7 +49,7 @@
 		aria-disabled={disabled}
 		{disabled}
 		style={color
-			? `--mode-input-border: ${color}; --mode-input-border-selected: ${color}; --mode-input-background-active: ${color}; --tw-ring-color: ${color};`
+			? `--mode-border-muted: ${color}; --mode-border-muted-selected: ${color}; --mode-interactive-primary: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
 	{#if label}
@@ -77,7 +77,7 @@
 		height: 0.65em;
 		border-radius: 50%;
 		transform: scale(0);
-		box-shadow: inset 1em 1em var(--mode-input-background-active);
+		box-shadow: inset 1em 1em var(--mode-interactive-primary);
 	}
 	.form-radio:checked:before {
 		transform: scale(1);

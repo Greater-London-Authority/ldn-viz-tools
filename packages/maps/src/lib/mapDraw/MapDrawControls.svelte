@@ -193,9 +193,9 @@
 				<div in:fly>
 					<Button
 						variant="square"
-						emphasis="muted"
+						emphasis="secondary"
 						class="{drawModes.mode.selected === mode
-							? '!bg-color-interactive-muted-active'
+							? '!bg-color-interactive-secondary-active'
 							: null} pointer-events-auto capitalize"
 						size="lg"
 						onclick={() => clickMode(mode)}
@@ -224,7 +224,7 @@
 			variant="square"
 			class="pointer-events-auto"
 			size="lg"
-			emphasis="muted"
+			emphasis="secondary"
 			onclick={clickClear}
 			disabled={mapDraw.features.current.length ? false : true}
 		>
@@ -263,7 +263,7 @@
 					variant="square"
 					class="pointer-events-auto"
 					size="lg"
-					emphasis="muted"
+					emphasis="secondary"
 					onclick={clickUpload}
 				>
 					<Icon src={ArrowUpTray} class="h-8 w-8 pb-1 pt-0.5" aria-hidden="true" />
@@ -276,7 +276,7 @@
 					variant="square"
 					class="pointer-events-auto"
 					size="lg"
-					emphasis="muted"
+					emphasis="secondary"
 					onclick={downloadData}
 					disabled={mapDraw.features.current.length ? false : true}
 				>

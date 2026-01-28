@@ -5,7 +5,7 @@ module.exports = plugin(function ({ addComponents }) {
 	addComponents({
 		'.form-input, .form-textarea, .form-select, .form-multiselect, .form-checkbox, .form-radio': {
 			color: 'var(--mode-input-valuetext)',
-			'border-color': 'var(--mode-input-border)',
+			'border-color': 'var(--mode-border-muted)',
 			'background-color': 'var(--mode-input-background)',
 
 			'&:disabled': {
@@ -25,21 +25,21 @@ module.exports = plugin(function ({ addComponents }) {
 			'border-width': '2px',
 			width: '1.25em',
 			height: '1.25em',
-			color: 'var(--mode-input-background-active)',
+			color: 'var(--mode-interactive-primary)',
 			'&:hover': {
 				'border-color': 'var(--mode-interactive-hover)'
 			},
 			'&:focus': {
 				'--tw-ring-color': 'var(--mode-interactive-focus)',
-				'--tw-ring-offset-color': 'var(--mode-input-background)'
+				'--tw-ring-offset-color': 'var(--mode-surface)'
 			},
 			'&:disabled': {
-				'border-color': 'var(--mode-input-border-disabled)',
-				'background-color': 'var(--mode-input-background-disabled)'
+				'border-color': 'var(--mode-interactive-disabled)',
+				'background-color': 'var(--mode-interactive-disabled-muted)'
 			},
 			'&:disabled:hover': {
-				'border-color': 'var(--mode-input-border-disabled)',
-				'background-color': 'var(--mode-input-background-disabled)'
+				'border-color': 'var(--mode-interactive-disabled)',
+				'background-color': 'var(--mode-interactive-disabled-muted)'
 			}
 		},
 		'.form-radio': {
@@ -49,15 +49,15 @@ module.exports = plugin(function ({ addComponents }) {
 				'background-image': 'none',
 				color: 'var(--mode-input-background)',
 				'background-color': 'var(--mode-input-background)',
-				'border-color': 'var(--mode-input-border-selected)'
+				'border-color': 'var(--mode-border-muted-selected)'
 			},
 			'&:checked:hover': {
 				'background-color': 'var(--mode-input-background-hover)',
-				'border-color': 'var(--mode-input-border-selected)'
+				'border-color': 'var(--mode-border-muted-selected)'
 			},
 			'&:checked:focus': {
 				'background-color': 'var(--mode-input-background)',
-				'border-color': 'var(--mode-input-border)'
+				'border-color': 'var(--mode-border-muted)'
 			}
 		},
 		'.form-label': {
@@ -70,7 +70,7 @@ module.exports = plugin(function ({ addComponents }) {
 			)}")`
 		},
 		'.form-range': {
-			'accent-color': 'var(--mode-input-background-active)'
+			'accent-color': 'var(--mode-interactive-primary)'
 		}
 	});
 });

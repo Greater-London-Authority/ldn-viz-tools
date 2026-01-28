@@ -132,7 +132,7 @@
 			{/snippet}
 
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="muted" onclick={() => (isOpenButtons = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenButtons = false)}>
 					Cancel
 				</Button>
 				<Button variant="solid" onclick={() => (isOpenButtons = false)}>Accept</Button>
@@ -154,7 +154,7 @@
 			{/snippet}
 
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="muted" onclick={() => (isOpenWide = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenWide = false)}>
 					Cancel
 				</Button>
 				<Button variant="solid" onclick={() => (isOpenWide = false)}>Accept</Button>
@@ -195,7 +195,7 @@
 				{/each}
 			</div>
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="muted" onclick={() => (isOpenLongModal = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenLongModal = false)}>
 					Cancel
 				</Button>
 				<Button variant="solid" onclick={() => (isOpenLongModal = false)}>Accept</Button>
@@ -225,7 +225,7 @@
 				</ul>
 			</div>
 			{#snippet buttons()}
-				<Button variant="solid" emphasis="muted" onclick={() => (isOpenLightTheme = false)}>
+				<Button variant="solid" emphasis="secondary" onclick={() => (isOpenLightTheme = false)}>
 					Cancel
 				</Button>
 				<Button variant="solid" onclick={() => (isOpenLightTheme = false)}>Accept</Button>

@@ -33,7 +33,7 @@
 <div class="invisible flex flex-col space-y-1 sm:visible">
 	<Button
 		variant="square"
-		emphasis="muted"
+		emphasis="secondary"
 		title="Zoom in"
 		class="dark:border-color-border pointer-events-auto shadow dark:border"
 		onclick={newHandler(zoomIn)}
@@ -42,7 +42,7 @@
 	</Button>
 	<Button
 		variant="square"
-		emphasis="muted"
+		emphasis="secondary"
 		title="Zoom out"
 		class="dark:border-color-border pointer-events-auto shadow dark:border"
 		onclick={newHandler(zoomOut)}

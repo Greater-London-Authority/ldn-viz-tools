@@ -125,7 +125,7 @@
 				<Button
 					onclick={() => toggleMenu()}
 					slim={true}
-					emphasis="muted"
+					emphasis="secondary"
 					variant="text"
 					size="sm"
 					class="level-{level}"

@@ -43,10 +43,10 @@
 	}: Props = $props();
 
 	const statusClasses = {
-		notice: 'bg-color-surface-notice border-color-border-notice',
-		positive: 'bg-color-surface-positive border-color-border-positive',
-		caution: 'bg-color-surface-caution border-color-border-caution',
-		negative: 'bg-color-surface-negative border-color-border-negative'
+		notice: 'bg-color-surface-accent-muted border-color-surface-accent',
+		positive: 'bg-color-surface-positive-muted border-color-surface-positive',
+		caution: 'bg-color-surface-caution-muted border-color-surface-caution',
+		negative: 'bg-color-surface-negative-muted border-color-surface-negative'
 	};
 
 	const sizeClasses = {

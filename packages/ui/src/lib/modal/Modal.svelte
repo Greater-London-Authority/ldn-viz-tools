@@ -119,7 +119,7 @@
 					</Dialog.Title>
 					<Dialog.Close>
 						{#snippet child({ props })}
-							<Button {...props} variant="square" emphasis="muted" class="h-8 w-8 self-center">
+							<Button {...props} variant="square" emphasis="secondary" class="h-8 w-8 self-center">
 								<span class="sr-only">Close</span>
 								<Icon src={XMark} theme="solid" class="h-6 w-6" aria-hidden="true" />
 							</Button>

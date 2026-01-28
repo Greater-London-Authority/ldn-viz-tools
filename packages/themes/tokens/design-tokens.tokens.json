@@ -3850,7 +3850,7 @@
         "secondary": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.500}"
+          "value": "{semantic-color.dark-mode.palette.grey.600}"
         },
         "negative": {
           "description": "",

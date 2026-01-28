@@ -62,45 +62,45 @@
 	const styleClasses = {
 		solid: {
 			primary:
-				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active dark:hover:text-color-text-inverse',
-			muted:
-				'bg-color-interactive-muted text-color-static-white hover:bg-color-interactive-muted-hover active:bg-color-interactive-muted-active dark:hover:text-color-text-inverse',
+				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active dark:hover:text-color-inverse-text',
+			secondary:
+				'bg-color-interactive-secondary text-color-static-white hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active dark:hover:text-color-inverse-text',
 			positive:
-				'bg-color-interactive-positive text-color-static-white hover:bg-color-interactive-positive-hover focus:ring-color-interactive-positive-focussed active:bg-color-interactive-positive-active dark:text-color-text-inverse',
+				'bg-color-interactive-positive text-color-static-white hover:bg-color-interactive-positive-hover focus:ring-color-interactive-positive-focussed active:bg-color-interactive-positive-active dark:text-color-inverse-text',
 			negative:
-				'bg-color-interactive-negative text-color-static-white hover:bg-color-interactive-negative-hover focus:ring-color-interactive-negative-focussed active:bg-color-interactive-negative-active dark:text-color-text-inverse',
+				'bg-color-interactive-negative text-color-static-white hover:bg-color-interactive-negative-hover focus:ring-color-interactive-negative-focussed active:bg-color-interactive-negative-active dark:text-color-inverse-text',
 			caution:
-				'bg-color-interactive-caution text-color-static-white hover:bg-color-interactive-caution-hover focus:ring-color-interactive-caution-focussed active:bg-color-interactive-caution-active dark:text-color-text-inverse'
+				'bg-color-interactive-caution text-color-static-white hover:bg-color-interactive-caution-hover focus:ring-color-interactive-caution-focussed active:bg-color-interactive-caution-active dark:text-color-inverse-text'
 		},
 		square: {
 			primary:
-				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active dark:hover:text-color-text-inverse',
-			muted:
-				'bg-color-interactive-muted text-color-static-white hover:bg-color-interactive-muted-hover active:bg-color-interactive-muted-active dark:hover:text-color-text-inverse',
+				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active dark:hover:text-color-inverse-text',
+			secondary:
+				'bg-color-interactive-secondary text-color-static-white hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active dark:hover:text-color-inverse-text',
 			positive:
-				'bg-color-interactive-positive text-color-static-white hover:bg-color-interactive-positive-hover focus:ring-color-interactive-positive-focussed active:bg-color-interactive-positive-active dark:text-color-text-inverse',
+				'bg-color-interactive-positive text-color-static-white hover:bg-color-interactive-positive-hover focus:ring-color-interactive-positive-focussed active:bg-color-interactive-positive-active dark:text-color-inverse-text',
 			negative:
-				'bg-color-interactive-negative text-color-static-white hover:bg-color-interactive-negative-hover focus:ring-color-interactive-negative-focussed active:bg-color-interactive-negative-active dark:text-color-text-inverse',
+				'bg-color-interactive-negative text-color-static-white hover:bg-color-interactive-negative-hover focus:ring-color-interactive-negative-focussed active:bg-color-interactive-negative-active dark:text-color-inverse-text',
 			caution:
-				'bg-color-interactive-caution text-color-static-white hover:bg-color-interactive-caution-hover focus:ring-color-interactive-caution-focussed active:bg-color-interactive-caution-active dark:text-color-text-inverse'
+				'bg-color-interactive-caution text-color-static-white hover:bg-color-interactive-caution-hover focus:ring-color-interactive-caution-focussed active:bg-color-interactive-caution-active dark:text-color-inverse-text'
 		},
 		outline: {
 			primary:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-border hover:bg-color-interactive-primary-muted-hover hover:underline active:bg-color-interactive-primary-muted-active',
-			muted:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-border-muted hover:bg-color-interactive-muted-muted-hover hover:underline active:bg-color-interactive-muted-muted-active',
+				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-primary hover:bg-color-interactive-primary-muted-hover hover:underline active:bg-color-interactive-primary-muted-active',
+			secondary:
+				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-secondary hover:bg-color-interactive-secondary-muted-hover hover:underline active:bg-color-interactive-secondary-muted-active',
 			positive:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-border-positive hover:bg-color-interactive-positive-muted-hover hover:underline active:bg-color-interactive-positive-muted-active',
+				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-positive hover:bg-color-interactive-positive-muted-hover hover:underline active:bg-color-interactive-positive-muted-active',
 			negative:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-border-negative hover:bg-color-interactive-negative-muted-hover hover:underline active:bg-color-interactive-negative-muted-active',
+				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-negative hover:bg-color-interactive-negative-muted-hover hover:underline active:bg-color-interactive-negative-muted-active',
 			caution:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-border-caution hover:bg-color-interactive-caution-muted-hover hover:underline active:bg-color-interactive-caution-muted-active'
+				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-caution hover:bg-color-interactive-caution-muted-hover hover:underline active:bg-color-interactive-caution-muted-active'
 		},
 		text: {
 			primary:
 				'bg-transparent text-color-interactive-primary underline hover:text-color-interactive-primary-hover hover:no-underline active:text-color-interactive-primary-active',
-			muted:
-				'bg-transparent text-color-interactive-muted underline hover:text-color-interactive-muted-hover hover:no-underline active:text-color-interactive-muted-active',
+			secondary:
+				'bg-transparent text-color-text-muted underline hover:text-color-interactive-secondary-hover hover:no-underline active:text-color-interactive-secondary-active',
 			positive:
 				'bg-transparent text-color-interactive-positive underline hover:text-color-interactive-positive-hover hover:no-underline active:text-color-interactive-positive-active',
 			negative:
@@ -110,25 +110,25 @@
 		},
 		brand: {
 			primary:
-				'bg-color-surface-inverse text-color-text-inverse border-b-4 border-color-static-brand hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active',
-			muted:
-				'bg-color-surface-muted text-color-text border-b-4 border-color-static-brand hover:bg-color-interactive-muted-hover active:bg-color-interactive-muted-active hover:text-color-text-inverse',
+				'bg-color-inverse-surface text-color-inverse-text border-b-4 border-color-static-brand hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active',
+			secondary:
+				'bg-color-surface-muted text-color-text border-b-4 border-color-static-brand hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active hover:text-color-inverse-text',
 			positive:
-				'bg-color-interactive-positive text-color-static-white border-b-4 border-color-static-brand hover:bg-color-interactive-positive-hover focus:ring-color-interactive-positive-focussed active:bg-color-interactive-positive-active dark:text-color-text-inverse',
+				'bg-color-interactive-positive text-color-static-white border-b-4 border-color-static-brand hover:bg-color-interactive-positive-hover focus:ring-color-interactive-positive-focussed active:bg-color-interactive-positive-active dark:text-color-inverse-text',
 			negative:
-				'bg-color-interactive-negative text-color-static-white  border-b-4 border-color-static-brand hover:bg-color-interactive-negative-hover focus:ring-color-interactive-negative-focussed active:bg-color-interactive-negative-active dark:text-color-text-inverse',
+				'bg-color-interactive-negative text-color-static-white  border-b-4 border-color-static-brand hover:bg-color-interactive-negative-hover focus:ring-color-interactive-negative-focussed active:bg-color-interactive-negative-active dark:text-color-inverse-text',
 			caution:
-				'bg-color-interactive-caution text-color-static-white border-b-4 border-color-static-brand hover:bg-color-interactive-caution-hover focus:ring-color-interactive-caution-focussed active:bg-color-interactive-caution-active dark:text-color-text-inverse'
+				'bg-color-interactive-caution text-color-static-white border-b-4 border-color-static-brand hover:bg-color-interactive-caution-hover focus:ring-color-interactive-caution-focussed active:bg-color-interactive-caution-active dark:text-color-inverse-text'
 		}
 	};
 
 	const disabledClasses = {
 		brand:
-			'!bg-color-interactive-disabled !border-color-interactive-border-disabled !text-color-interactive-disabled',
-		square: '!bg-color-interactive-disabled !text-color-interactive-disabled',
-		solid: '!bg-color-interactive-disabled !text-color-interactive-disabled',
+			'!bg-color-interactive-disabled-muted !border-color-interactive-disabled-muted !text-color-interactive-disabled',
+		square: '!bg-color-interactive-disabled-muted !text-color-interactive-disabled',
+		solid: '!bg-color-interactive-disabled-muted !text-color-interactive-disabled',
 		outline:
-			'!bg-color-interactive-disabled !border-color-interactive-border-disabled !text-color-interactive-disabled',
+			'!bg-color-interactive-disabled-muted !border-color-interactive-disabled-muted !text-color-interactive-disabled',
 		text: '!text-color-interactive-disabled hover:bg-transparent'
 	};
 

@@ -76,7 +76,7 @@
 	/>
 	{#if sidebarState?.isOpen && !sidebarState?.isAlwaysOpen}
 		<div
-			class={`text-color-text-muted hover:bg-color-interactive-muted-muted-hover ${tabLabelOverride}`}
+			class={`text-color-text-muted hover:bg-color-interactive-secondary-muted-hover ${tabLabelOverride}`}
 		>
 			<button onclick={() => (sidebarState.isOpen = !sidebarState?.isOpen)}>
 				<Icon src={XCircle} theme="outline" class="mb-1 h-7 w-7" aria-hidden="true" />

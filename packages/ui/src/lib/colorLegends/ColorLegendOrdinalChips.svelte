@@ -37,12 +37,12 @@
 
 <div class="flex flex-col">
 	{#if title}
-		<span class="text-color-input-label mb-1 font-semibold">{title}</span>
+		<span class="text-color-label mb-1 font-semibold">{title}</span>
 	{/if}
 
 	<div class={orientation === 'horizontal' ? 'flex flex-wrap gap-2' : 'flex flex-col'}>
 		{#each scale.domain() as d}
-			<div class="text-color-input-label flex items-center">
+			<div class="text-color-label flex items-center">
 				<div
 					class={classNames(
 						'mr-1 h-4 w-4 flex-none',

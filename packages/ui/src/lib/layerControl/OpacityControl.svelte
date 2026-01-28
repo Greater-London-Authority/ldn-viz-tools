@@ -29,7 +29,7 @@
 		{#snippet trigger(props)}
 			<Trigger {...props} size="xs" aria-label="Click to open {label} opacity control.">
 				<OpacityIcon
-					class="text-color-text hover:text-color-interactive-muted-hover h-6 w-6"
+					class="text-color-text hover:text-color-interactive-secondary-hover h-6 w-6"
 					aria-hidden="true"
 				/>
 			</Trigger>

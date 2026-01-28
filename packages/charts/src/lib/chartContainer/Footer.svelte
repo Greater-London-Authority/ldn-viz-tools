@@ -33,7 +33,7 @@
 							<Button
 								variant="text"
 								size="xs"
-								emphasis="muted"
+								emphasis="secondary"
 								class="!p-0"
 								onclick={() => (isOpen = true)}>View description</Button
 							>

@@ -5,7 +5,7 @@
 	let {
 		slim = true,
 		variant = 'text',
-		emphasis = 'muted',
+		emphasis = 'secondary',
 		...restprops
 	}: LdnButtonProps = $props();
 </script>

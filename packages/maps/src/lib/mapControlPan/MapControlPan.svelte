@@ -52,7 +52,7 @@
 	<div class="flex justify-center">
 		<Button
 			variant="square"
-			emphasis="muted"
+			emphasis="secondary"
 			title="Pan up"
 			class="dark:border-color-border pointer-events-auto shadow dark:border"
 			onclick={newHandler(panUp)}
@@ -64,7 +64,7 @@
 	<div class="flex">
 		<Button
 			variant="square"
-			emphasis="muted"
+			emphasis="secondary"
 			title="Pan left"
 			class="dark:border-color-border pointer-events-auto shadow dark:border"
 			onclick={newHandler(panLeft)}
@@ -76,7 +76,7 @@
 
 		<Button
 			variant="square"
-			emphasis="muted"
+			emphasis="secondary"
 			title="Pan right"
 			class="dark:border-color-border pointer-events-auto shadow dark:border"
 			onclick={newHandler(panRight)}
@@ -88,7 +88,7 @@
 	<div class="flex justify-center">
 		<Button
 			variant="square"
-			emphasis="muted"
+			emphasis="secondary"
 			title="Pan down"
 			class="dark:border-color-border pointer-events-auto shadow dark:border"
 			onclick={newHandler(panDown)}

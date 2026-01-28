@@ -228,7 +228,7 @@ Calling `.post()` repeatedly on same toast object will refresh it, rather than c
 					</Button>
 
 					<Button
-						emphasis="muted"
+						emphasis="secondary"
 						variant="outline"
 						onclick={() => {
 							clickCount = 0;

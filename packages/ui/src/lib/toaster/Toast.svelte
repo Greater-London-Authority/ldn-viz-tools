@@ -32,7 +32,13 @@
 		<div class="mb-1 flex items-center justify-between text-lg font-bold">
 			{message.type}
 			{#if message.closeButton}
-				<Button title="Close" emphasis="muted" variant="square" size="sm" onclick={message.remove}>
+				<Button
+					title="Close"
+					emphasis="secondary"
+					variant="square"
+					size="sm"
+					onclick={message.remove}
+				>
 					<Icon src={XMark} theme="solid" class="h-6 w-6" aria-hidden="true" />
 				</Button>
 			{/if}

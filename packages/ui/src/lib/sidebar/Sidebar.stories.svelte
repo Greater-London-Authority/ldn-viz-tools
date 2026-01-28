@@ -255,4 +255,4 @@
 
 <Story name="With custom trigger icon" args={{ icon }} />
 
-<Story name="With custom classes" args={{ class: '[&_*]:!bg-color-ui-primary !pb-0' }} />
+<Story name="With custom classes" args={{ class: '[&_*]:!bg-color-surface-accent !pb-0' }} />
