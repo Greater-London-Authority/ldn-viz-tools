@@ -28,8 +28,8 @@
 	};
 
 	const tabLabelClasses = classNames(
-		'bg-color-input-background-off text-color-text underline hover:bg-color-input-background-hover hover:no-underline',
-		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-interactive-primary-focussed focus:ring-2 focus:outline-none focus:ring-color-surface'
+		'bg-color-interactive-off text-color-text underline hover:bg-color-interactive-primary-muted hover:no-underline',
+		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-interactive-focus focus:ring-2 focus:outline-none focus:ring-color-surface'
 	);
 
 	let isSelected = $derived(tabId === selectedTabId);
@@ -47,7 +47,7 @@
 		tabLabelClasses,
 		orientationClasses[orientation],
 		isSelected
-			? '!bg-color-input-background-active !text-color-static-white cursor-default no-underline'
+			? '!bg-color-interactive-selected !text-color-static-white cursor-default no-underline'
 			: ''
 	)}
 >

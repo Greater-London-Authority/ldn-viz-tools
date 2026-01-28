@@ -4,10 +4,10 @@
 	}
 
 	const typeClasses: TypeClasses = {
-		Notice: 'bg-color-surface-notice border-color-border-notice',
-		Success: 'bg-color-surface-positive border-color-border-positive',
-		Warning: 'bg-color-surface-caution border-color-border-caution',
-		Error: 'bg-color-surface-negative border-color-border-negative'
+		Notice: 'bg-color-surface-accent-muted border-color-surface-accent',
+		Success: 'bg-color-surface-positive-muted border-color-surface-positive',
+		Warning: 'bg-color-surface-caution-muted border-color-surface-caution',
+		Error: 'bg-color-surface-negative-muted border-color-surface-negative'
 	};
 </script>
 
@@ -24,7 +24,7 @@
 
 	let { message }: Props = $props();
 
-	let classes = $derived(typeClasses[message.type] ?? 'bg-color-surface-neutral');
+	let classes = $derived(typeClasses[message.type] ?? 'bg-color-surface-neutral-muted');
 </script>
 
 <div role="alert" id={message.id} class="text-color-text shadow-lg" out:fade={{ duration: 100 }}>

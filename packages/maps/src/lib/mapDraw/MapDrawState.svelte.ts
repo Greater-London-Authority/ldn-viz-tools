@@ -15,10 +15,10 @@ import type { HexColorStyling } from './types';
 
 // TODO: check these tokens
 const themeStyle = $derived({
-	fillColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
+	fillColor: (theme?.tokenNameToValue('geo.interactive.primary', theme.currentTheme) ||
 		'#0067B4') as HexColorStyling,
 	fillOpacity: 0.5,
-	outlineColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
+	outlineColor: (theme?.tokenNameToValue('geo.feature', theme.currentTheme) ||
 		'#0067B4') as HexColorStyling,
 	outlineWidth: 1
 });
@@ -110,11 +110,13 @@ const selectModeOptions = {
 	},
 
 	styles: {
-		selectedPolygonColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
+		selectedPolygonColor: (theme?.tokenNameToValue('geo.interactive.primary', theme.currentTheme) ||
 			'#0067B4') as HexColorStyling,
 		selectedPolygonFillOpacity: 0.5,
-		selectedPolygonOutlineColor: (theme?.tokenNameToValue('ui.primary', theme.currentTheme) ||
-			'#0067B4') as HexColorStyling,
+		selectedPolygonOutlineColor: (theme?.tokenNameToValue(
+			'geo.interactive.selected',
+			theme.currentTheme
+		) || '#0067B4') as HexColorStyling,
 		selectedPolygonOutlineWidth: 1
 	}
 };
