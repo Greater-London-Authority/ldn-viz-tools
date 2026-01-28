@@ -1,5 +1,5 @@
 import tokens from '@ldn-viz/themes/styles/js/color-tokens.js';
-import { colorToRGBArray } from '@ldn-viz/utils';
+import { colorToRGBArray, tokenNameToValue } from '@ldn-viz/utils';
 import { mode, type SystemModeValue } from 'mode-watcher';
 
 type ThemeObject<T> = {
@@ -13,14 +13,7 @@ class ThemeState {
 	);
 
 	tokenNameToValue = (colorName: string, theme: ThemeObject<any> = this.currentTheme) => {
-		let val = theme;
-		for (const part of colorName.split('.')) {
-			val = val[part];
-			if (!val) {
-				console.error(`Color name "${colorName}" not defined in theme "${this.currentMode}"`);
-			}
-		}
-		return val as unknown as string;
+		return tokenNameToValue(colorName, theme);
 	};
 
 	colorTokenNameToRGBArray = (colorName: string, theme: ThemeObject<any> = this.currentTheme) =>
