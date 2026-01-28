@@ -6,6 +6,6 @@
 	let { children }: Props = $props();
 </script>
 
-<span class="text-color-input-label-muted block text-sm">
+<span class="text-color-label-muted block text-sm">
 	{@render children?.()}
 </span>
