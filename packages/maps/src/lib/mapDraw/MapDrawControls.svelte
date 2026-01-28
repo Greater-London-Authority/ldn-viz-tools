@@ -176,7 +176,7 @@
 	<div class="pointer-events-auto flex h-fit">
 		<Button
 			variant="square"
-			emphasis={drawModes.mode.selected !== 'select' ? 'primary' : 'muted'}
+			emphasis={drawModes.mode.selected !== 'select' ? 'primary' : 'secondary'}
 			class="pointer-events-auto"
 			size="lg"
 			onclick={() => {
@@ -195,7 +195,7 @@
 						variant="square"
 						emphasis="secondary"
 						class="{drawModes.mode.selected === mode
-							? '!bg-color-interactive-secondary-active'
+							? '!bg-color-interactive-secondary-active !text-color-inverse-text'
 							: null} pointer-events-auto capitalize"
 						size="lg"
 						onclick={() => clickMode(mode)}
@@ -211,7 +211,7 @@
 	<div class="flex flex-col">
 		<Button
 			variant="square"
-			emphasis={drawModes.mode.selected === 'select' ? 'primary' : 'muted'}
+			emphasis={drawModes.mode.selected === 'select' ? 'primary' : 'secondary'}
 			class="pointer-events-auto"
 			size="lg"
 			onclick={() => clickSelect()}

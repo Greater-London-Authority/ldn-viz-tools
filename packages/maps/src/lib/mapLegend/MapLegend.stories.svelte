@@ -4,7 +4,7 @@
 	import { scaleDiverging, scaleSequential } from 'd3-scale';
 	import { interpolatePiYG, interpolateViridis } from 'd3-scale-chromatic';
 	import { writable } from 'svelte/store';
-	import { LayerControlGroupStory } from '../../../../ui/src/lib/layerControl/LayerControlGroup.stories.svelte';
+	import LayerControlGroupStory from '../../../../ui/src/lib/layerControl/LayerControlGroup.stories.svelte';
 	import Map from '../map/Map.svelte';
 	import type { MapLibreStore } from '../map/types';
 	import { appendOSKeyToUrl } from '../map/util';

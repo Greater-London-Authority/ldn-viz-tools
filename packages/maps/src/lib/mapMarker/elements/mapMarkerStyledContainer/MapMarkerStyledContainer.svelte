@@ -61,7 +61,7 @@
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 150 100"
-			class="fill-color-container-level-0 stroke-color-border-muted absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform"
+			class="fill-color-container stroke-color-border-muted absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform"
 		>
 			<line class="stroke-color-border-muted" stroke-width="14" x1="0" y1="0" x2="75" y2="100" />
 			<line class="stroke-color-border-muted" stroke-width="14" x1="75" y1="100" x2="150" y2="0" />

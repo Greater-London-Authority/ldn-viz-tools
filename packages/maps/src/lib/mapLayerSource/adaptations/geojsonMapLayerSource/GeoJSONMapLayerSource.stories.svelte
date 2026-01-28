@@ -94,20 +94,13 @@
 </script>
 
 <script lang="ts">
-	import { Button } from '@ldn-viz/ui';
+	import { Button, theme } from '@ldn-viz/ui';
 
+	import { writable } from 'svelte/store';
 	import Map from '../../../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../../../map/util';
 	import MapLayerView from '../../../mapLayerView/MapLayerView.svelte';
 	import testData from '../../../testData.json';
-
-	import { default as ldnColors, default as tokens } from '@ldn-viz/themes/styles/js/color-tokens';
-	import { writable } from 'svelte/store';
-	const defaultColor = ldnColors.theme.light.color.palette;
-
-	const theme = (mode: 'light' | 'dark' = 'light') => {
-		return tokens.theme[mode];
-	};
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
@@ -145,24 +138,24 @@
 			>
 				<GeoJSONMapLayerSource id={sourceId} initialData={testData}>
 					<MapLayerView
-						id="{sourceId}/polygon"
+						id={`${sourceId}/polygon`}
 						spec={{
 							type: 'fill',
 							filter: ['==', '$type', 'Polygon'],
 							paint: {
-								'fill-color': defaultColor.green['500'],
-								'fill-outline-color': defaultColor.green['800'],
+								'fill-color': theme.tokenNameToValue('geo.interactive.selected'),
+								'fill-outline-color': theme.tokenNameToValue('geo.interactive.selected'),
 								'fill-opacity': 0.6
 							}
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/line"
+						id={`${sourceId}/line`}
 						spec={{
 							type: 'line',
 							filter: ['==', '$type', 'LineString'],
 							paint: {
-								'line-color': defaultColor.darkpink['400'],
+								'line-color': theme.tokenNameToValue('geo.feature'),
 								'line-width': 4,
 								'line-opacity': 0.8
 							},
@@ -173,12 +166,12 @@
 						}}
 					/>
 					<MapLayerView
-						id="{sourceId}/point"
+						id={`${sourceId}/point`}
 						spec={{
 							type: 'circle',
 							filter: ['==', '$type', 'Point'],
 							paint: {
-								'circle-color': defaultColor.blue['700'],
+								'circle-color': theme.tokenNameToValue('data.primary'),
 								'circle-radius': 6,
 								'circle-stroke-width': 1,
 								'circle-stroke-color': '#000'
@@ -216,8 +209,8 @@
 							type: 'fill',
 							filter: ['==', '$type', 'Polygon'],
 							paint: {
-								'fill-color': theme().color.palette.green['500'],
-								'fill-outline-color': theme().color.palette.green['800'],
+								'fill-color': theme.tokenNameToValue('geo.interactive.selected'),
+								'fill-outline-color': theme.tokenNameToValue('geo.interactive.selected'),
 								'fill-opacity': 0.6
 							}
 						}}
@@ -228,7 +221,7 @@
 							type: 'line',
 							filter: ['==', '$type', 'LineString'],
 							paint: {
-								'line-color': theme().color.palette.darkpink['400'],
+								'line-color': theme.tokenNameToValue('geo.feature'),
 								'line-width': 4,
 								'line-opacity': 0.8
 							},
@@ -244,7 +237,7 @@
 							type: 'circle',
 							filter: ['==', '$type', 'Point'],
 							paint: {
-								'circle-color': theme().color.palette.blue['700'],
+								'circle-color': theme.tokenNameToValue('data.primary'),
 								'circle-radius': 6,
 								'circle-stroke-width': 1,
 								'circle-stroke-color': '#000'
