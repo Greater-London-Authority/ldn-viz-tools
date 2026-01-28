@@ -109,7 +109,7 @@
 					<div
 						class="grid grid-cols-2"
 						style:width={`${swatchWidth * 2}px`}
-						style:outline={patternName === fillType ? '2px solid var(--mode-ui-primary)' : ''}
+						style:outline={patternName === fillType ? '2px solid var(--mode-surface-accent)' : ''}
 					>
 						{#each [1, 2, 3, 4] as _}
 							<button

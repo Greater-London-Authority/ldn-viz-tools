@@ -39,7 +39,9 @@
 		bind:checked
 		{disabled}
 		{indeterminate}
-		style={color ? `--mode-interactive-primary: ${color};  --tw-ring-color: ${color};` : ''}
+		style={color
+			? `--mode-interactive-primary: ${color}; --mode-border-muted: ${color}  --tw-ring-color: ${color};`
+			: ''}
 		{...restProps}
 	/>
 
