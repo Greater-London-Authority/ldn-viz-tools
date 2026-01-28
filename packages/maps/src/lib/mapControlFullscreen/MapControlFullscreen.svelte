@@ -91,7 +91,7 @@
 
 {#if mode}
 	<div
-		class="dark:border-color-ui-border-primary invisible flex flex-col space-y-1 shadow sm:visible dark:border"
+		class="invisible flex flex-col space-y-1 shadow dark:border dark:border-color-ui-border-primary sm:visible"
 	>
 		<Button
 			variant="square"
