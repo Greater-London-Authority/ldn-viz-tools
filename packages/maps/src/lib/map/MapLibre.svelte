@@ -169,7 +169,8 @@
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button {
-			@apply bg-color-text;
+			@apply bg-color-inverse-text;
+			@apply dark:bg-color-text;
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact {
