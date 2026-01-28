@@ -158,7 +158,7 @@
 		<Callout status="positive" size="sm" ariaTitle="File upload successful">
 			{#snippet body()}
 				<div class="mb-2 flex items-center">
-					<Icon src={CheckCircle} theme="mini" class="text-color-ui-positive mr-2 h-6 w-6" />
+					<Icon src={CheckCircle} theme="mini" class="text-color-surface-positive mr-2 h-6 w-6" />
 					<p>File upload successful</p>
 				</div>
 			{/snippet}

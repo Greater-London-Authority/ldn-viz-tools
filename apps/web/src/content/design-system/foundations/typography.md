@@ -256,7 +256,7 @@ In either context utility classes still work:
 ```html
 <div class="product responsive">
 	<p class="body-md font-bold">Body copy</p>
-	<h2 class="text-color-ui-negative title-lg">Title Large</h2>
+	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
 </div>
 ```
 
@@ -264,7 +264,7 @@ In either context utility classes still work:
 
 <div class="not-prose product responsive border border-muted p-4 my-4">
 	<p class="body-md font-bold">Body copy</p>
-	<h2 class="title-lg text-color-ui-negative">Title Large</h2>
+	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
 </div>
 
 ### Titling pairs

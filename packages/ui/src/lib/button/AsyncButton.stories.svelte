@@ -73,7 +73,7 @@
 	<AsyncButton {...args} bind:working onclick={waitThreeSeconds}>Click me!</AsyncButton>
 	<div class="mt-4">
 		Working:
-		<span class:text-color-ui-negative={!working} class:text-color-ui-positive={working}>
+		<span class:text-color-surface-negative={!working} class:text-color-surface-positive={working}>
 			{working}
 		</span>
 	</div>
