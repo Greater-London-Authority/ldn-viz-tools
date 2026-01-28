@@ -24,9 +24,9 @@
 		color: {
 			legend: true,
 			range: [
-				theme.currentMode.data.primary,
-				theme.currentMode.data.secondary,
-				theme.currentMode.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [

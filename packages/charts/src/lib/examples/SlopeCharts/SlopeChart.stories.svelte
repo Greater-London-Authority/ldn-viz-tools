@@ -51,9 +51,9 @@
 		color: {
 			legend: true,
 			range: [
-				theme.currentMode.data.primary,
-				theme.currentMode.data.secondary,
-				theme.currentMode.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [
@@ -66,7 +66,7 @@
 			}),
 			Plot.tickX(chartData, {
 				x: 'Year',
-				stroke: theme.currentMode.chart.grid
+				stroke: theme.tokenNameToValue('chart.grid')
 			}),
 			Plot.textX(
 				chartData.filter((d) => d.Variable === 'Variable A'),
@@ -81,7 +81,7 @@
 				y: 'Average',
 				stroke: 'Variable',
 				strokeWidth: 2,
-				fill: theme.currentMode.chart.background,
+				fill: theme.tokenNameToValue('chart.background'),
 				fillOpacity: 1
 			}),
 			d3

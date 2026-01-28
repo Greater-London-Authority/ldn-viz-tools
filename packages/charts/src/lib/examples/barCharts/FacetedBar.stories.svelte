@@ -10,6 +10,10 @@
 		title: 'Charts/Examples/Bar Charts'
 	});
 
+	$effect.root(() => {
+		$inspect(theme.currentTheme.data.primary);
+	});
+
 	let spec = $derived({
 		marginRight: 120, // adjust margin right to suit your label length
 		marginTop: 20, // adjust top margin to better suit facetY,
@@ -18,9 +22,9 @@
 		color: {
 			legend: true,
 			range: [
-				theme.currentMode.data.primary,
-				theme.currentMode.data.secondary,
-				theme.currentMode.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [

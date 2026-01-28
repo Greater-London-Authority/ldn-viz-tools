@@ -17,9 +17,9 @@
 			legend: true,
 			type: 'ordinal',
 			range: [
-				theme.currentMode.data.primary,
-				theme.currentMode.data.secondary,
-				theme.currentMode.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [
@@ -34,7 +34,10 @@
 				stroke: 'Variable'
 			}),
 
-			Plot.ruleX(chartData, Plot.pointerX({ x: 'Month', stroke: theme.currentMode.chart.label })),
+			Plot.ruleX(
+				chartData,
+				Plot.pointerX({ x: 'Month', stroke: theme.tokenNameToValue('chart.label') })
+			),
 			Plot.point(
 				chartData,
 				Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })

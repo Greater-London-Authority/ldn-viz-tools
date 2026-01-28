@@ -19,7 +19,7 @@
 		color: {
 			legend: true,
 			type: 'ordinal',
-			range: [theme.currentMode.data.primary, theme.currentMode.data.context]
+			range: [theme.tokenNameToValue('data.primary'), theme.tokenNameToValue('data.context')]
 		},
 		marks: [
 			Plot.gridX({ interval: '2 years' }),

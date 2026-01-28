@@ -63,9 +63,9 @@ let spec = $derived({
 		legend: true,
 		type: 'ordinal',
 		range: [
-			theme.currentMode.data.primary,
-			theme.currentMode.data.secondary,
-			theme.currentMode.data.tertiary
+			theme.tokenNameToValue('data.primary'),
+			theme.tokenNameToValue('data.secondary'),
+			theme.tokenNameToValue('data.tertiary')
 		]
 	},
 	marks: [
@@ -80,7 +80,10 @@ let spec = $derived({
 			stroke: 'Variable'
 		}),
 
-		Plot.ruleX(chartData, Plot.pointerX({ x: 'Month', stroke: theme.currentMode.chart.label })),
+		Plot.ruleX(
+			chartData,
+			Plot.pointerX({ x: 'Month', stroke: theme.tokenNameToValue('chart.label') })
+		),
 		Plot.point(
 			chartData,
 			Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
@@ -132,7 +135,7 @@ let spec = $derived({
 	color: {
 		legend: true,
 		type: 'ordinal',
-		range: [theme.currentMode.data.primary, theme.currentMode.data.context]
+		range: [theme.tokenNameToValue('data.primary'), theme.tokenNameToValue('data.context')]
 	},
 	marks: [
 		Plot.gridX({ interval: '2 years' }),
