@@ -124,7 +124,7 @@
 						</div>
 					</DropdownMenu.Group>
 					<DropdownMenu.Separator />
-					<DropdownMenu.Arrow class="text-color-text" />
+					<DropdownMenu.Arrow class="text-color-border-muted" />
 				</DropdownMenu.Content>
 			</DropdownMenu.Portal>
 		</DropdownMenu.Root>
