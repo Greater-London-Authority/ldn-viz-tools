@@ -39,10 +39,10 @@ export const getDefaultPlotStyles = () => {
 };
 
 const defaultStyle = () => ({
-	color: theme.currentMode.chart.label,
+	color: theme.tokenNameToValue('chart.label'),
 	fontSize: '0.875rem',
 	fontFamily: fontStack,
-	background: theme.currentMode.chart.background
+	background: theme.tokenNameToValue('chart.background')
 });
 
 const defaultSize = {
@@ -84,12 +84,12 @@ const defaultYScale = {
 };
 
 const defaultGridX = () => ({
-	stroke: theme.currentMode.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	stroke: theme.tokenNameToValue('chart.grid'), // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1
 });
 
 const defaultGridY = () => ({
-	stroke: theme.currentMode.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	stroke: theme.tokenNameToValue('chart.grid'), // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1,
 	ticks: 4 // reasonable level to push nice breaks toward 3, 4 or 5
 });
@@ -114,7 +114,7 @@ const defaultYAxis = <AxisOptions>{
 };
 
 const defaultLine = () => ({
-	stroke: theme.currentMode.data.primary,
+	stroke: theme.tokenNameToValue('data.primary'),
 	strokeWidth: 2
 });
 
@@ -126,7 +126,7 @@ const defaultDashedLine = {
 const defaultDot = () => ({
 	// simplest mark for dense scatterplots
 	stroke: null,
-	fill: theme.currentMode.data.primary,
+	fill: theme.tokenNameToValue('data.primary'),
 	fillOpacity: 0.7,
 	strokeWidth: 0,
 	r: 2
@@ -134,26 +134,26 @@ const defaultDot = () => ({
 
 const defaultPoint = () => ({
 	// larger data point mark, for highlighting a point on line etc.
-	stroke: theme.currentMode.data.primary,
-	fill: theme.currentMode.chart.background,
+	stroke: theme.tokenNameToValue('data.primary'),
+	fill: theme.tokenNameToValue('chart.background'),
 	strokeWidth: 2,
 	r: 4
 });
 
 const defaultArea = () => ({
-	stroke: theme.currentMode.data.primary,
+	stroke: theme.tokenNameToValue('data.primary'),
 	strokeWidth: 0,
-	fill: theme.currentMode.data.primary,
+	fill: theme.tokenNameToValue('data.primary'),
 	fillOpacity: 0.2
 });
 
 const defaultRule = () => ({
-	stroke: theme.currentMode.chart.axis
+	stroke: theme.tokenNameToValue('chart.axis')
 });
 
 const defaultTip = () => ({
-	stroke: theme.currentMode.ui.border.muted,
-	fill: theme.currentMode.chart.background,
+	stroke: theme.tokenNameToValue('border.muted'),
+	fill: theme.tokenNameToValue('chart.background'),
 	fillOpacity: 1,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -162,8 +162,8 @@ const defaultTip = () => ({
 });
 
 const defaultAnnotationTip = () => ({
-	stroke: theme.currentMode.ui.border.muted,
-	fill: theme.currentMode.chart.background,
+	stroke: theme.tokenNameToValue('border.muted'),
+	fill: theme.tokenNameToValue('chart.background'),
 	fillOpacity: 0.8,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -175,24 +175,24 @@ const defaultAnnotationTip = () => ({
 
 const defaultAnnotationText = () => ({
 	fontSize: 14,
-	fill: theme.currentMode.chart.label,
+	fill: theme.tokenNameToValue('chart.label'),
 	dx: 8,
 	dy: 0
 });
 
 const defaultAnnotationRange = () => ({
-	fill: theme.currentMode.chart.label, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	fill: theme.tokenNameToValue('chart.label'), // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	opacity: 0.1
 });
 
 const defaultBar = () => ({
-	fill: theme.currentMode.data.primary,
-	stroke: theme.currentMode.chart.background
+	fill: theme.tokenNameToValue('data.primary'),
+	stroke: theme.tokenNameToValue('chart.background')
 });
 
 const defaultRect = () => ({
-	fill: theme.currentMode.data.primary,
-	stroke: theme.currentMode.chart.background
+	fill: theme.tokenNameToValue('data.primary'),
+	stroke: theme.tokenNameToValue('chart.background')
 });
 
 /**

@@ -93,7 +93,9 @@
 						}
 					}
 				]),
-				stroke: hoveredValue ? theme.currentMode.data.secondary : theme.currentMode.data.primary
+				stroke: hoveredValue
+					? theme.tokenNameToValue('data.secondary')
+					: theme.tokenNameToValue('data.primary')
 			})
 		]
 	});
