@@ -48,8 +48,9 @@
 
 	const switchRootClass = $derived(
 		classNames(
-			'bg-color-interactive-off data-[state=checked]:bg-color-interactive-on relative h-6 cursor-default rounded-full transition-colors',
-			size === 'md' ? 'h-[24px] w-[44px]' : 'h-[16px] w-[30px]'
+			' data-[state=checked]:bg-color-interactive-on relative h-6 cursor-default rounded-full transition-colors',
+			size === 'md' ? 'h-[24px] w-[44px]' : 'h-[16px] w-[30px]',
+			disabled ? 'bg-color-interactive-disabled-muted' : 'bg-color-interactive-off'
 		)
 	);
 
@@ -57,13 +58,17 @@
 		classNames(
 			'thumb block rounded-full transition border-color-border-muted border',
 			size === 'md' ? 'h-[22px] w-[22px]' : 'h-[14px] w-[14px]',
-			disabled ? 'bg-color-interactive-disabled' : 'bg-color-surface'
+			disabled ? 'bg-color-interactive-disabled hover:cursor-not-allowed' : 'bg-color-surface'
 		)
 	);
 
 	// Does this need to be derived for the sake of the story? TO BE DISCUSSED
 	const labelClass = $derived(
-		classNames('form-label text-color-label leading-none', labelOn === 'right' ? 'pl-2' : 'pr-2')
+		classNames(
+			'form-label  leading-none',
+			labelOn === 'right' ? 'pl-2' : 'pr-2',
+			disabled ? 'text-color-interactive-disabled' : 'text-color-label'
+		)
 	);
 
 	const translation = { md: '21px', sm: '15px' };
