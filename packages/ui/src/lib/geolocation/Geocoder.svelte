@@ -319,7 +319,7 @@
 	class="bg-color-surface pointer-events-auto relative flex h-10 w-full {classes}"
 >
 	<div class="absolute left-2 top-2 flex items-center justify-center">
-		<Icon src={MagnifyingGlass} class="text-color-input-icon h-6 w-6" />
+		<Icon src={MagnifyingGlass} class="text-color-text h-6 w-6" />
 	</div>
 
 	<input
@@ -340,7 +340,7 @@
 			class="y-auto bg-color-surface absolute right-1 top-1 flex items-center justify-center"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="p-0.25 text-color-input-icon h-8 w-8" />
+			<Icon src={XMark} class="p-0.25 text-color-text h-8 w-8" />
 		</button>
 	{/if}
 
