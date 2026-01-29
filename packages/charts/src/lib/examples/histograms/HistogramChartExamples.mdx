@@ -1,6 +1,6 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
-import * as Histogram from './Histogram.stories.svelte';
 import { randomVals as chartData } from '../../../data/demoData';
+import * as Histogram from './Histogram.stories.svelte';
 
 <Meta title="Charts/Examples/Histograms" />
 
@@ -9,7 +9,7 @@ import { randomVals as chartData } from '../../../data/demoData';
 ### Default
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
     ```javascript
        	let spec = $derived({
 		marginTop: 48, // adjust for y label
@@ -27,7 +27,7 @@ import { randomVals as chartData } from '../../../data/demoData';
     ```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
 	<summary class="cursor-pointer">Show data</summary>
 	<pre>{JSON.stringify(chartData, null, 2)}</pre>
 </details>

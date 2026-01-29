@@ -32,12 +32,9 @@
 	let svgRef: SVGElement = $state() as SVGElement;
 </script>
 
-<div
-	bind:this={htmlNode}
-	class="flex w-fit flex-col gap-2 bg-color-container-level-0 pb-8 text-color-text-primary"
->
+<div bind:this={htmlNode} class="bg-color-container text-color-text flex w-fit flex-col gap-2 pb-8">
 	<h2 class="text-lg font-bold">A title</h2>
-	<p class="text-color-text-secondary" data-capture-ignore>A paragraph of text...</p>
+	<p class="text-color-text-muted" data-capture-ignore>A paragraph of text...</p>
 	<p data-capture-ignore>Something that will not be included in the downloaded image.</p>
 	<LogoByCiu class="w-80" />
 </div>

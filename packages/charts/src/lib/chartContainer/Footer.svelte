@@ -21,7 +21,7 @@
 	{#if byline || source || note || chartDescription}
 		<ul
 			title="Chart footnotes and description"
-			class="mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs text-color-text-secondary"
+			class="text-color-text-muted mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs"
 		>
 			{#if byline}<li>{byline}</li>{/if}
 			{#if source}<li><span class="mr-1 font-bold">Source:</span>{source}</li>{/if}

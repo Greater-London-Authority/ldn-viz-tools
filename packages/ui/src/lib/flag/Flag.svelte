@@ -32,12 +32,12 @@
 	}: Props = $props();
 
 	const colorClass: Record<FlagCondition, string> = {
-		alpha: 'bg-color-ui-alpha',
-		beta: 'bg-color-ui-beta',
-		alert: 'bg-color-ui-negative',
-		warning: 'bg-color-ui-caution',
-		positive: 'bg-color-ui-positive',
-		notice: 'bg-color-ui-notice'
+		alpha: 'bg-color-surface-alpha',
+		beta: 'bg-color-surface-beta',
+		alert: 'bg-color-surface-negative',
+		warning: 'bg-color-surface-caution',
+		positive: 'bg-color-surface-positive',
+		notice: 'bg-color-surface-notice'
 	};
 
 	const defaultMessage = {
@@ -53,7 +53,7 @@
 <div
 	class={classNames('flex h-fit min-h-[24px] w-full justify-between px-4', colorClass[condition])}
 >
-	<div class="text-base uppercase text-color-static-white">
+	<div class="text-color-static-white text-base uppercase">
 		<!-- The message to be displayed in the flag. -->
 		{#if children}
 			{@render children()}

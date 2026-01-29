@@ -45,7 +45,7 @@
 					<Icon
 						src={QuestionMarkCircle}
 						theme="solid"
-						class="h-6 w-6 text-color-ui-primary"
+						class="text-color-surface-accent h-6 w-6"
 						aria-hidden="true"
 					/>
 				{/snippet}

@@ -225,7 +225,7 @@ The <code>prose</code> class provides a semantic typographic context. Elements i
 
 </div>
 
-<div class="prose responsive border border-secondary p-4 my-4">
+<div class="prose responsive border border-muted p-4 my-4">
 	<h2>Title Large</h2>
 	<p>Body copy</p>
 	<h2 class="not-prose">context escaped</h2>
@@ -245,7 +245,7 @@ The <code>product</code> class does not apply semantic styles. Elements inside a
 
 </div>
 
-<div class="not-prose product responsive border border-secondary p-4 my-4">
+<div class="not-prose product responsive border border-muted p-4 my-4">
 	<h2>Title Large?</h2>
 	<p class="body-md">Body copy</p>
 	<h2 class="title-lg">Title Large</h2>
@@ -258,15 +258,15 @@ In either context utility classes still work:
 ```html
 <div class="product responsive">
 	<p class="body-md font-bold">Body copy</p>
-	<h2 class="title-lg text-color-ui-negative">Title Large</h2>
+	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
 </div>
 ```
 
 </div>
 
-<div class="not-prose product responsive border border-secondary p-4 my-4">
+<div class="not-prose product responsive border border-muted p-4 my-4">
 	<p class="body-md font-bold">Body copy</p>
-	<h2 class="title-lg text-color-ui-negative">Title Large</h2>
+	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
 </div>
 
 ### Titling pairs
@@ -284,7 +284,7 @@ The type sets contain elements designed to work together such as <code>.headline
 
 </div>
 
-<div class="border border-secondary p-4 my-4">
+<div class="border border-muted p-4 my-4">
     <h2 class="title-lg format">Title</h2>
     <p class="subtitle">Subtitle</p>
 </div>
@@ -307,7 +307,7 @@ Because of the semantic context it creates you may wish to escape the <code>.pro
 
 </div>
 
-<div class="border border-secondary p-4 my-4">
+<div class="border border-muted p-4 my-4">
 	<h3>Title</h3>
 	<div class="not-prose">
 		<h3>I have escaped</h3>

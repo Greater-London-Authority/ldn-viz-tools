@@ -33,7 +33,7 @@
 		onkeydown={navigateList}
 		onmouseenter={highlight}
 		onfocus={highlight}
-		class:bg-color-action-background-primary-100={highlighted === suggestion}
+		class:bg-color-interactive-primary-100={highlighted === suggestion}
 		tabindex="0"
 		data-geocoder-suggestion-id={suggestion.id}
 	>

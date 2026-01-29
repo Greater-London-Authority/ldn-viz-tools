@@ -40,7 +40,7 @@
 	{#snippet template(args)}
 		<DataDownloadButton {...args}>
 			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 			{/snippet}
 		</DataDownloadButton>
 	{/snippet}
@@ -86,17 +86,17 @@
 		<div class="flex flex-col space-y-2">
 			<DataDownloadButton {...args} {data} filename="download" emphasis="primary">
 				{#snippet afterLabel()}
-					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 				{/snippet}
 			</DataDownloadButton>
 			<DataDownloadButton {...args} {data} filename="download" emphasis="secondary">
 				{#snippet afterLabel()}
-					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 				{/snippet}
 			</DataDownloadButton>
 			<DataDownloadButton {...args} {data} filename="download" variant="outline" size="sm">
 				{#snippet afterLabel()}
-					<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 				{/snippet}
 			</DataDownloadButton>
 		</div>
@@ -107,7 +107,7 @@
 	{#snippet template(args)}
 		<DataDownloadButton {...args} {data} filename="download" formats={['JSON']}>
 			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 			{/snippet}
 		</DataDownloadButton>
 	{/snippet}
@@ -117,7 +117,7 @@
 	{#snippet template(args)}
 		<DataDownloadButton {...args} {data} filename="download" formats={['CSV']}>
 			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 			{/snippet}
 		</DataDownloadButton>
 	{/snippet}
@@ -127,7 +127,7 @@
 	{#snippet template(args)}
 		<DataDownloadButton {...args} {data} disabled={true} filename="download">
 			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 			{/snippet}
 		</DataDownloadButton>
 	{/snippet}

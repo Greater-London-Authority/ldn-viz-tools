@@ -3,10 +3,10 @@
 	 * TODO: THIS EXAMPLE ALREADY EXISTS ESWHERE IN THIS REPO, SO THIS IS A REPETITION ??
 	 */
 
-	import { format } from 'd3';
-	import demoMonthlyTimeseriesLong from '../../../../data/demoMonthlyTimeseriesLong.json';
 	import { ObservablePlot, Plot } from '@ldn-viz/charts';
 	import { theme as currentThemeObj } from '@ldn-viz/ui';
+	import { format } from 'd3';
+	import demoMonthlyTimeseriesLong from '../../../../data/demoMonthlyTimeseriesLong.json';
 
 	let currentTheme = $derived(currentThemeObj.currentTheme);
 

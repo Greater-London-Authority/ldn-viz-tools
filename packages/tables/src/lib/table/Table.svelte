@@ -261,7 +261,7 @@
 
 				{#snippet table()}
 					<div
-						class="w-full table-auto text-sm text-color-text-primary"
+						class="text-color-text w-full table-auto text-sm"
 						bind:clientWidth={tableWidth}
 						role="table"
 					>
@@ -329,10 +329,10 @@
 
 <style lang="postcss">
 	:global(.striped > div:nth-child(odd)) {
-		@apply bg-color-ui-background-secondary;
+		@apply bg-color-surface-muted;
 	}
 
 	:global(.stripedVirtual > div:first-child > div:first-child > div:nth-child(odd)) {
-		@apply bg-color-ui-background-secondary;
+		@apply bg-color-surface-muted;
 	}
 </style>
