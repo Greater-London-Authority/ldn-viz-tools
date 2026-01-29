@@ -1,8 +1,8 @@
 ---
-title: Themeing
+title: Theming
 description: Accessible themes respecting user preference
-section: Foundations
-navLabel: Themeing
+section: Application design
+navLabel: Theming
 ---
 
 ### Light theme

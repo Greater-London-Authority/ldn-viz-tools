@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageNav from '$lib/components/pageNav/PageNav.svelte';
 	import { AppShell } from '@ldn-viz/ui';
 	import DocsSidebar from './DocsSidebar.svelte';
 
@@ -14,5 +15,6 @@
 		<div class="flex space-x-24 p-4 lg:p-8">
 			{@render children?.()}
 		</div>
+		<PageNav />
 	{/snippet}
 </AppShell>

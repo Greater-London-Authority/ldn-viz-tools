@@ -1,9 +1,11 @@
 ---
-title: Principles
+title: Getting started
 description: Remove the noise, highlight the signal
 section: Data visualisation
-navLabel: Principles
+navLabel: Getting started
 ---
+
+## Principles
 
 The quote below is one of Dieter Rams’ 10 Principles of good design and is particularly pertinent to the field of data visualisation & information design (as noted in the book “Data Visualisation” by Andy Kirk).
 

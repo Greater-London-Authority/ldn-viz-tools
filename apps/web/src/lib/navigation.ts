@@ -3,11 +3,11 @@ import { getAllDocs } from './utils.js';
 const allDocs = getAllDocs();
 
 const introduction = allDocs
-	.filter((doc) => doc.section === 'Introduction')
-	.filter((doc) => doc.slugFull !== '/design-system/introduction')
+	.filter((doc) => doc.section === 'Getting Started')
+	.filter((doc) => doc.slugFull !== '/design-system/getting-started')
 	.map((doc) => ({
 		title: doc.navLabel,
-		id: `${doc.title.toLowerCase()}-introduction`,
+		id: `${doc.title.toLowerCase()}-getting-started`,
 		href: `/${doc.slug}`
 	}));
 
@@ -29,6 +29,9 @@ const applicationDesign = allDocs
 		href: `/${doc.slug}`
 	}));
 
+//Non alphabetic sort index. N.B reverse order so non listed pages are appended
+const dvPageOrder = ['Charts', 'Colour', 'Accessibility', 'Getting started'];
+
 const dataVisualisation = allDocs
 	.filter((doc) => doc.section === 'Data visualisation')
 	.filter((doc) => doc.slugFull !== '/design-system/data-visualisation')
@@ -36,18 +39,14 @@ const dataVisualisation = allDocs
 		title: doc.navLabel,
 		id: `${doc.title.toLowerCase()}-data-visualisation`,
 		href: `/${doc.slug}`
-	}));
+	}))
+	.sort((a, b) => dvPageOrder.indexOf(b.title) - dvPageOrder.indexOf(a.title));
 
 export const navigation = [
 	{
-		title: 'Overview',
-		id: 'overview',
-		href: '/design-system'
-	},
-	{
-		title: 'Introduction',
-		id: 'introduction',
-		href: '/design-system/introduction',
+		title: 'Getting Started',
+		id: 'getting-started',
+		href: '/design-system/getting-started',
 		children: introduction
 	},
 	{
