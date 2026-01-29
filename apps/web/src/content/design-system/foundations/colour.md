@@ -10,45 +10,45 @@ navLabel: Colour
     import ChartTokenTable from '$lib/components/tables/colorTokenTables/ChartTokenTable.svelte'
     import DataTokenTable from '$lib/components/tables/colorTokenTables/DataTokenTable.svelte'
     import MultipleLine from '$lib/components/charts/exampleCharts/lineCharts/MultipleLine.svelte'
-    import tokens from '@ldn-viz/themes/docs/tokens/color.json';
+    import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
 
     let paletteTokenData = $derived(
-		Object.values(tokens.theme[theme.currentMode ? theme.currentMode : 'light'].color.palette)
+		Object.values(tokens.mode[theme.currentMode ? theme.currentMode : 'light'].palette)
 	);
 
-    const paletteToken = $derived(paletteTokenData.reduce((acc, item) => {
-        const parts = item.name.split('-');
-        const color = parts[2];
-        if (!color) return acc;
-        (acc[color] ??= []).push(item);
-        return acc;
-        }, {})
-    );
+    // const paletteToken = $derived(paletteTokenData.reduce((acc, item) => {
+    //     const parts = item.name.split('-');
+    //     const color = parts[2];
+    //     if (!color) return acc;
+    //     (acc[color] ??= []).push(item);
+    //     return acc;
+    //     }, {})
+    // );
 
-    let chartTokenData = $derived(
-		Object.values(tokens.theme[theme.currentMode ? theme.currentMode : 'light'].color.chart)
-	);
+    // let chartTokenData = $derived(
+	// 	Object.values(tokens.theme[theme.currentMode ? theme.currentMode : 'light'].color.chart)
+	// );
 
-    let dataTokenData = $derived(
-		Object.values(tokens.theme[theme.currentMode ? theme.currentMode : 'light'].color.data)
-	);
+    // let dataTokenData = $derived(
+	// 	Object.values(tokens.theme[theme.currentMode ? theme.currentMode : 'light'].color.data)
+	// );
 
-    const allowed = ["primary", "secondary", "tertiary"];
+    // const allowed = ["primary", "secondary", "tertiary"];
 
-    const dataTokens = $derived(dataTokenData.reduce(
-    (acc, item) => {
-        if (item.name.includes("color-data-categorical")) {
-        acc.categorical.push(item);
-        } else if (allowed.some(key => item.name.includes(key))) {
-        acc.thematic.push(item); // primary/secondary/etc.
-        } else {
-        acc.others.push(item);
-        }
-        return acc;
-    },
-    { categorical: [], thematic: [], others: [] }
-    ));
+    // const dataTokens = $derived(dataTokenData.reduce(
+    // (acc, item) => {
+    //     if (item.name.includes("color-data-categorical")) {
+    //     acc.categorical.push(item);
+    //     } else if (allowed.some(key => item.name.includes(key))) {
+    //     acc.thematic.push(item); // primary/secondary/etc.
+    //     } else {
+    //     acc.others.push(item);
+    //     }
+    //     return acc;
+    // },
+    // { categorical: [], thematic: [], others: [] }
+    // ));
 </script>
 
 ## Principles
@@ -89,7 +89,7 @@ The global color palette contains the hints and shades that are used as a basis 
 ```
 
 <div class="not-prose pb-8">
-<SwatchGrid tokenData={paletteToken.grey} title="Grey" size="xs" />
+<!-- <SwatchGrid tokenData={paletteToken.grey} title="Grey" size="xs" />
 <SwatchGrid tokenData={paletteToken.blue} title="Blue" size="xs" />
 <SwatchGrid tokenData={paletteToken.green} title="Green" size="xs" />
 <SwatchGrid tokenData={paletteToken.yellow} title="Yellow" size="xs" />
@@ -98,16 +98,16 @@ The global color palette contains the hints and shades that are used as a basis 
 <SwatchGrid tokenData={paletteToken.pink} title="Pink" size="xs" />
 <SwatchGrid tokenData={paletteToken.darkpink} title="Dark Pink" size="xs" />
 <SwatchGrid tokenData={paletteToken.purple} title="Purple" size="xs" />
-<SwatchGrid tokenData={paletteToken.turquoise} title="Turquoise" size="xs" />
+<SwatchGrid tokenData={paletteToken.turquoise} title="Turquoise" size="xs" /> -->
 </div>
 
 ### Semantic color reference
 
 <div class="not-prose">
-<SwatchGrid tokenData={chartTokenData} title="Colors for chart elements"/>
+<!-- <SwatchGrid tokenData={chartTokenData} title="Colors for chart elements"/>
 <SwatchGrid tokenData={dataTokens.thematic} title="Colors for data" />
 <SwatchGrid tokenData={dataTokens.categorical} title="Colors for categorical data"/>
-<SwatchGrid tokenData={dataTokens.others} title="Colors for other data elements"/>
+<SwatchGrid tokenData={dataTokens.others} title="Colors for other data elements"/> -->
 </div>
 
 <!-- <ChartTokenTable title="Chart color tokens" />
