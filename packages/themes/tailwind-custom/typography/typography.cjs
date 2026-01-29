@@ -101,7 +101,7 @@ module.exports = plugin(function ({ addComponents }) {
 
 	addComponents({
 		'.prose.responsive': {
-			...proseResponsive.default, // your existing typography vars
+			...proseResponsive.default,
 			'--prose-max-width': proseMaxWidths.default
 		},
 		'@screen md': {
