@@ -15,7 +15,7 @@ Design tokens are the single source of truth for naming and storing design decis
 
 ### Token Tiers
 
-Tokens are defined in two tiers.
+Tokens are defined in two tiers with reference to a raw value.
 
 ![An image illustrating the conceptual hierarchy of deign tokens](/design-tokens/tiers.png)
 
@@ -31,7 +31,9 @@ Semantic color tokens allow for mode switching between light and dark.
 
 ### Token names
 
-Tokens are named following a logical taxonomy structure that flows from left to right in an ascending order of specificity. `(category-> concept -> role -> emphasis -> state -> mode)`
+Tokens are named following a logical structure that flows from left to right to make it simple to understand how they should be used.
+
+`(category-> concept -> role -> emphasis -> state -> mode)`
 
 **Implied defaults**
 We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text color is `$color-text` rather than `$color-text-default`
@@ -58,7 +60,7 @@ The token **concept** guides us in how to apply the token. For color tokens valu
 
 ##### Conceptual model of application ui layering
 
-![An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.png)
+![An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.svg)
 
 | Concept               | Detail                                                                   |
 | :-------------------- | :----------------------------------------------------------------------- |
