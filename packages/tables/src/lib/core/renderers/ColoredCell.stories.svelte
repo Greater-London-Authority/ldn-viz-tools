@@ -1,6 +1,7 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import ColoredCell from './ColoredCell.svelte';
 
 	const { Story } = defineMeta({
@@ -16,7 +17,7 @@
 		},
 		args: {
 			value: 0.5,
-			color: () => 'red'
+			color: () => theme.tokenNameToValue('data.primary')
 		}
 	});
 </script>

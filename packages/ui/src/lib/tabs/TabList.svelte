@@ -14,7 +14,8 @@
 
 	const orientationClasses = {
 		vertical: 'flex-col w-20 space-y-0.5 pb-0.5',
-		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
+		horizontal:
+			'flex border-b-4 border-b-color-surface-accent w-full pt-5 pb-0 space-x-0.5 items-end'
 	};
 
 	const iconOrientationClasses = {
@@ -63,11 +64,7 @@
 	}: Props = $props();
 
 	let tabListClasses = $derived(
-		classNames(
-			'bg-color-container-level-0 text-color-text-primary',
-			orientationClasses[orientation],
-			classes
-		)
+		classNames('bg-color-container text-color-text', orientationClasses[orientation], classes)
 	);
 </script>
 

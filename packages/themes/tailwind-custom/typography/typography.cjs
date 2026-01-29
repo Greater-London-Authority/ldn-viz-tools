@@ -13,9 +13,9 @@ const getMaxWidth = (ch, fontSize, baseFontSize = 16) => {
 
 const proseMaxWidths = {
 	default: getMaxWidth(65, 16), // 65 chars at 16px
-	md: getMaxWidth(70, 16),
-	lg: getMaxWidth(75, 18),
-	xl: getMaxWidth(80, 20)
+	md: getMaxWidth(68, 16),
+	lg: getMaxWidth(70, 18),
+	xl: getMaxWidth(72, 20)
 };
 
 module.exports = plugin(function ({ addComponents }) {

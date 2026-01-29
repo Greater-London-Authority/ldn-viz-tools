@@ -61,7 +61,7 @@
 	<div class="hidden min-w-[186px] 2xl:block">
 		<aside class="sticky top-0">
 			<p class="product label-sm responsive mb-4 pt-8">On this page</p>
-			<ul class="border-l border-color-ui-border-secondary">
+			<ul class="border-color-border-muted border-l">
 				{#each toc.items as { title, url, items }, index (index)}
 					<TocItem {title} {url} {items} {activeUrl} />
 				{/each}

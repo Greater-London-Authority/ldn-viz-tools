@@ -1,0 +1,107 @@
+{
+	"source": ["./tokens/**/*.json"],
+	"parsers": ["json-parser"],
+
+	"platforms": {
+		"css": {
+			"transformGroup": "css",
+			"transforms": ["modeName", "size/pxToRem", "typography/unitless"],
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "primitives.css",
+					"format": "css/variables",
+					"filter": "cssPrimitiveFilter",
+					"options": {
+						"selector": ":root"
+					}
+				},
+				{
+					"destination": "light.css",
+					"format": "css/variables",
+					"filter": "cssLightModeFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "dark.css",
+					"format": "css/variables",
+					"filter": "cssDarkModeFilter",
+					"options": {
+						"selector": ":root.dark, .dark",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "spacing.css",
+					"format": "css/variables",
+					"filter": "cssSpacingFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "typography.css",
+					"format": "custom/typography",
+					"filter": "cssTypographyFilter"
+				},
+				{
+					"destination": "shadows.css",
+					"format": "custom/shadows",
+					"filter": "shadowFilter"
+				}
+			]
+		},
+		"web": {
+			"transformGroup": "web",
+			"transforms": ["modeName", "spacing/unitless"],
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "tw-extend/color.cjs",
+					"format": "tw/css-variables",
+					"filter": "twFilter"
+				},
+				{
+					"destination": "tw-extend/spacing.cjs",
+					"format": "tw/css-spacing-variables",
+					"filter": "twSpacingFilter"
+				}
+			]
+		},
+		"ts": {
+			"transformGroup": "js",
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "js/input.js",
+					"format": "javascript/esm",
+					"filter": "jsFilter",
+					"options": {
+						"minify": true
+					}
+				}
+			]
+		},
+		"docs": {
+			"transformGroup": "js",
+			"transforms": ["name/kebab", "docsName"],
+			"buildPath": "./docs/tokens/",
+			"files": [
+				{
+					"destination": "tokens.js",
+					"format": "javascript/esm",
+					"options": {
+						"stripMeta": { "keep": ["name", "value", "type", "description"] }
+					}
+				}
+			]
+		}
+	}
+}

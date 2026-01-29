@@ -15,7 +15,7 @@
 <script lang="ts">
 	import type { Layer } from '@deck.gl/core';
 	import { MVTLayer } from '@deck.gl/geo-layers';
-	import { Checkbox } from '@ldn-viz/ui';
+	import { Checkbox, theme } from '@ldn-viz/ui';
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
@@ -28,12 +28,13 @@
 			id: 'boroughLayer',
 			data: `${TILE_BASE_URL}/boroughs/{z}/{x}/{y}.mvt`,
 			filled: true,
-			getFillColor: () => [255, 0, 0],
-			opacity: 1,
+			getFillColor: () =>
+				theme.colorTokenNameToRGBArray('geo.interactive') as [number, number, number],
+			opacity: 0.5,
 			stroked: true,
-			getLineColor: [168, 168, 168, 255],
-			lineWidthScale: 5,
-			lineWidthMinPixels: 4,
+			getLineColor: () => theme.colorTokenNameToRGBArray('geo.feature') as [number, number, number],
+			lineWidthScale: 3,
+			lineWidthMinPixels: 2,
 			pickable: true, // not needed?
 			onClick: onClickPopoverHandler
 		});
@@ -43,10 +44,11 @@
 			id: 'wardLayer',
 			data: `${TILE_BASE_URL}/wards-2022-clipped/{z}/{x}/{y}.mvt`,
 			filled: true,
-			getFillColor: () => [0, 255, 0],
-			opacity: 1,
+			getFillColor: () => theme.colorTokenNameToRGBArray('geo.feature') as [number, number, number],
+			opacity: 0.5,
 			stroked: true,
-			getLineColor: [168, 168, 168, 255],
+			getLineColor: () =>
+				theme.colorTokenNameToRGBArray('geo.feature.muted') as [number, number, number],
 			lineWidthScale: 2,
 			lineWidthMinPixels: 1,
 			pickable: true,

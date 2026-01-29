@@ -1,4 +1,4 @@
-import colors from '@ldn-viz/themes/styles/js/theme-tokens';
+import colors from '@ldn-viz/themes/styles/js/color-tokens';
 import { create } from 'storybook/theming/create';
 
 export default create({
@@ -12,35 +12,35 @@ export default create({
 	brandImage: './cilogo.svg',
 	brandTarget: '_self',
 
-	colorPrimary: colors.theme.dark.color.ui.primary,
-	colorSecondary: colors.theme.dark.color.palette.blue[700],
+	colorPrimary: colors.mode.dark.surface.accent.default,
+	colorSecondary: colors.mode.dark.palette.blue[700],
 
 	// UI
-	appBg: colors.theme.dark.color.container['level-0'],
-	appContentBg: colors.theme.dark.color.canvas.background['1'],
+	appBg: colors.mode.dark.container.default,
+	appContentBg: colors.mode.dark.canvas.muted,
 	appPreviewBg: '#ffffff',
-	appBorderColor: colors.theme.dark.color.ui.border.secondary,
+	appBorderColor: colors.mode.dark.border.muted,
 	appBorderRadius: 1,
 
 	// Text colors
-	textColor: colors.theme.dark.color.text.primary,
-	textInverseColor: colors.theme.dark.color.text.inverse.primary,
-	textMutedColor: colors.theme.dark.color.text.secondary,
+	textColor: colors.mode.dark.text.default,
+	textInverseColor: colors.mode.dark.inverse.text.default,
+	textMutedColor: colors.mode.dark.text.muted,
 
 	// Toolbar default and active colors
-	barTextColor: colors.theme.dark.color.text.primary,
-	barHoverColor: colors.theme.dark.color.action.primary,
-	barSelectedColor: colors.theme.dark.color.action['primary-active'],
-	barBg: colors.theme.dark.color.container['level-2'],
+	barTextColor: colors.mode.dark.text.default,
+	barHoverColor: colors.mode.dark.interactive.primary.default,
+	barSelectedColor: colors.mode.dark.interactive.primary.active,
+	barBg: colors.mode.dark.container.level[2],
 
 	// Form colors
-	buttonBg: colors.theme.dark.color.action.background.primary,
-	buttonBorder: colors.theme.dark.color.action.border.primary,
-	booleanBg: colors.theme.dark.color.action.background.positive,
-	booleanSelectedBg: colors.theme.dark.color.input['background-selected'],
-	inputBg: colors.theme.dark.color.input.background,
-	inputBorder: colors.theme.dark.color.input.border,
-	inputTextColor: colors.theme.dark.color.input.valuetext,
+	buttonBg: colors.mode.dark.interactive.primary.default,
+	buttonBorder: colors.mode.dark.interactive.primary.default,
+	booleanBg: colors.mode.dark.interactive.positive.default,
+	booleanSelectedBg: colors.mode.dark.interactive.on,
+	inputBg: colors.mode.dark.surface.default,
+	inputBorder: colors.mode.dark.border.muted,
+	inputTextColor: colors.mode.dark.text.wash,
 	inputBorderRadius: 1
 });
 
@@ -50,11 +50,11 @@ export const docs = create({
 	fontBase: '"Inter", sans-serif',
 	fontCode: 'monospace',
 
-	colorPrimary: colors.theme.light.color.ui.primary,
-	colorSecondary: colors.theme.light.color.palette.blue[700],
+	colorPrimary: colors.mode.light.surface.accent.default,
+	colorSecondary: colors.mode.light.palette.blue[700],
 
 	// Text colors
-	textColor: colors.theme.light.color.text.primary,
-	textInverseColor: colors.theme.light.color.text.inverse.primary,
-	textMutedColor: colors.theme.light.color.text.secondary
+	textColor: colors.mode.light.text.default,
+	textInverseColor: colors.mode.light.inverse.text.default,
+	textMutedColor: colors.mode.light.text.muted
 });

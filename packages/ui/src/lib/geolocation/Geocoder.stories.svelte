@@ -117,17 +117,15 @@
 <Story name="Suggestions dropdown">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
 				results are limited.
 			</p>
-			<p class="dark:text-white">
+			<p>
 				At least three characters are required before any suggestions are provided. This avoids
 				spamming the underlying Web APIs with excessively vague requests.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder adapter={listAdapter} {onLocationSelected} {onSearchError} classes="w-72">
 				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
 					{#if suggestions?.length > 0}
@@ -141,7 +139,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="text-color-text-muted whitespace-pre-wrap">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>
@@ -151,17 +149,15 @@
 <Story name="Selected">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
 				results are limited.
 			</p>
-			<p class="dark:text-white">
+			<p>
 				At least three characters are required before any suggestions are provided. This avoids
 				spamming the underlying Web APIs with excessively vague requests.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder adapter={listAdapter} bind:selected {onSearchError} classes="w-72">
 				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
 					{#if suggestions?.length > 0}
@@ -175,7 +171,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="text-color-text-muted whitespace-pre-wrap">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>
@@ -185,14 +181,12 @@
 <Story name="Disabled dropdown">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				I've disabled the dropdown in this story, instead, I'm accessing the results by binding on
 				the result set. I'm manually displaying them below but you can do whatever you like with
 				them.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder
 				adapter={listAdapter}
 				{onLocationSelected}
@@ -200,7 +194,7 @@
 				bind:suggestions
 				classes="w-72"
 			/>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="text-color-text-muted whitespace-pre-wrap">
 			{#if suggestions}
 					{#each suggestions as location}
 						{formatResult(location)}<br />
@@ -214,17 +208,15 @@
 <Story name="Custom placeholder">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
 				results are limited.
 			</p>
-			<p class="dark:text-white">
+			<p>
 				At least three characters are required before any suggestions are provided. This avoids
 				spamming the underlying Web APIs with excessively vague requests.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder
 				adapter={listAdapter}
 				{onLocationSelected}
@@ -244,7 +236,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="text-color-text-muted whitespace-pre-wrap">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>

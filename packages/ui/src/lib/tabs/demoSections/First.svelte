@@ -1,4 +1,4 @@
-<div class="dark:prose-invert prose px-4 py-6">
+<div class="prose responsive px-4 py-6">
 	<h3>Aggregated Counts across London</h3>
 	<p class="lead">
 		This is demo content, showing how to construct tabs. This one is styled as prose.

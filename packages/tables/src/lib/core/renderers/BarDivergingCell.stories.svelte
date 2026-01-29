@@ -1,6 +1,7 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import BarDivergingCell from './BarDivergingCell.svelte';
 
 	const { Story } = defineMeta({
@@ -27,29 +28,29 @@
 				{...args}
 				value={-2}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
 			<BarDivergingCell
 				{...args}
 				value={-1}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
 			<BarDivergingCell
 				{...args}
 				value={+1}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
 			<BarDivergingCell
 				{...args}
 				value={+2}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
 		</div>
 	{/snippet}

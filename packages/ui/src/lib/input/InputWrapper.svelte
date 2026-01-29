@@ -27,19 +27,17 @@
 
 	let descriptionClass = $derived(
 		classNames(
-			error ? '!text-color-input-label-error' : '',
-			disabled ? 'text-color-input-label-disabled' : '',
-			descriptionAlignment === 'left'
-				? 'text-color-input-label-secondary'
-				: 'ml-auto text-color-input-label-secondary',
+			error ? '!text-color-interactive-error' : '',
+			disabled ? 'text-color-interactive-disabled' : '',
+			descriptionAlignment === 'left' ? 'text-color-label-muted' : 'ml-auto text-color-label-muted',
 			'text-sm'
 		)
 	);
 
 	let labelClasses = $derived(
 		classNames(
-			error ? 'text-color-input-label-error' : '',
-			disabled ? 'text-color-input-label-disabled' : '',
+			error ? 'text-color-interactive-error' : '',
+			disabled ? 'text-color-interactive-disabled' : '',
 			'form-label'
 		)
 	);

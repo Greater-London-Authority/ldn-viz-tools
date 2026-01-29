@@ -82,9 +82,9 @@
 
 	let textClasses = $derived(
 		classNames(
-			`flex w-full items-center level-${level} p-1.5 hover:text-color-action-primary-hover hover:underline `,
-			isActive ? 'text-color-action-text-primary-active underline' : '',
-			level === 1 ? 'text-color-text-primary text-base' : 'text-color-text-secondary text-sm'
+			`flex w-full items-center level-${level} p-1.5 hover:text-color-interactive-primary-hover hover:underline `,
+			isActive ? 'text-color-interactive-primary-active underline' : '',
+			level === 1 ? 'text-color-text text-base' : 'text-color-text-muted text-sm'
 		)
 	);
 
@@ -95,8 +95,8 @@
 
 	const listClasses: Record<'vertical' | 'horizontal', string> = $derived({
 		vertical:
-			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-ui-border-secondary') : '',
-		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
+			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-border-muted') : '',
+		horizontal: `relative bg-color-container ${level === 1 ? '' : ''}`
 	});
 
 	let childClasses = $derived(

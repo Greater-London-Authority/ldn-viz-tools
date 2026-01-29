@@ -48,7 +48,7 @@
 </script>
 
 <ul
-	class="max-height-[60vh] absolute left-0 top-11 z-40 w-full overflow-y-scroll bg-color-input-background text-sm text-color-text-primary shadow-lg"
+	class="max-height-[60vh] bg-color-surface text-color-text absolute left-0 top-11 z-40 w-full overflow-y-scroll text-sm shadow-lg"
 >
 	{#if suggestions.length === 0}
 		<li class="w-full px-2.5 py-1.5">
@@ -63,9 +63,9 @@
 	{/if}
 
 	{#if attribution && attribution.text}
-		<li class="w-full px-2.5 py-1.5 text-right text-color-text-secondary">
+		<li class="text-color-text-muted w-full px-2.5 py-1.5 text-right">
 			{#if attribution.link}
-				<a href={attribution.link} target="_blank" rel="noopener" class="text-color-text-primary">
+				<a href={attribution.link} target="_blank" rel="noopener" class="text-color-text">
 					{attribution.text}
 				</a>
 			{:else}

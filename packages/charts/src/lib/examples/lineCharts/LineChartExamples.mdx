@@ -1,9 +1,9 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { monthlyData } from '../../../data/demoData';
 import * as Area from './AreaChart.stories.svelte';
 import * as DualLine from './DualLineChart.stories.svelte';
 import * as MultiLine from './MultiLineChart.stories.svelte';
 import * as SingleLine from './SingleLineChart.stories.svelte';
-import { monthlyData } from '../../../data/demoData';
 
 <Meta title="Charts/Examples/Line Charts" />
 
@@ -12,7 +12,7 @@ import { monthlyData } from '../../../data/demoData';
 ### Single line
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
 	```javascript
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
@@ -37,8 +37,8 @@ import { monthlyData } from '../../../data/demoData';
 	```
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show data</summary>
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show data</summary>
     <pre>
     	{JSON.stringify(
     		monthlyData.filter((d) => d.Variable === 'Variable A'),
@@ -54,7 +54,7 @@ import { monthlyData } from '../../../data/demoData';
 ### Multiple lines
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -63,9 +63,9 @@ let spec = $derived({
 		legend: true,
 		type: 'ordinal',
 		range: [
-			theme.currentTheme.color.data.primary,
-			theme.currentTheme.color.data.secondary,
-			theme.currentTheme.color.data.tertiary
+			theme.tokenNameToValue('data.primary'),
+			theme.tokenNameToValue('data.secondary'),
+			theme.tokenNameToValue('data.tertiary')
 		]
 	},
 	marks: [
@@ -82,7 +82,7 @@ let spec = $derived({
 
 		Plot.ruleX(
 			chartData,
-			Plot.pointerX({ x: 'Month', stroke: theme.currentTheme.color.chart.label })
+			Plot.pointerX({ x: 'Month', stroke: theme.tokenNameToValue('chart.label') })
 		),
 		Plot.point(
 			chartData,
@@ -116,7 +116,7 @@ let spec = $derived({
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
     <summary class="cursor-pointer ">Show data</summary>
     <pre>{JSON.stringify(monthlyData, null, 2)}</pre>
 
@@ -127,7 +127,7 @@ let spec = $derived({
 ### Dual line
 
 <details>
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -135,7 +135,7 @@ let spec = $derived({
 	color: {
 		legend: true,
 		type: 'ordinal',
-		range: [theme.currentTheme.color.data.primary, theme.currentTheme.color.data.context]
+		range: [theme.tokenNameToValue('data.primary'), theme.tokenNameToValue('data.context')]
 	},
 	marks: [
 		Plot.gridX({ interval: '2 years' }),
@@ -173,7 +173,7 @@ let spec = $derived({
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
     <summary class="cursor-pointer">Show data</summary>
     <pre>
     	{JSON.stringify(
@@ -190,7 +190,7 @@ let spec = $derived({
 ### Area chart
 
 <details>
-	<summary class="cursor-pointer dark:text-color-text-inverse-primary">Show spec</summary>
+	<summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
 
 ```javascript
 let spec = $derived({
@@ -222,8 +222,8 @@ let spec = $derived({
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse-primary">
-    <summary class="cursor-pointer dark:text-color-text-inverse-primary">Show data</summary>
+<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
+    <summary class="cursor-pointer dark:text-color-text-inverse">Show data</summary>
     <pre>
     	{JSON.stringify(
     		monthlyData.filter((d) => d.Variable === 'Variable A'),

@@ -27,11 +27,11 @@
 	let { size = 'sm' }: Props = $props();
 
 	const highlightedClasses =
-		'bg-color-input-background-active text-color-static-white py-1 px-2 cursor-pointer';
+		'bg-color-interactive-selected text-color-static-white py-1 px-2 cursor-pointer';
 	const nonHighlightedClasses =
-		'text-color-input-value hover:bg-color-input-background-hover py-1 px-2 cursor-pointer';
+		'text-color-text hover:bg-color-interactive-primary-muted-hover py-1 px-2 cursor-pointer';
 	const buttonClasses =
-		'rounded-full text-xs p-1 min-w-6 min-h-6 bg-color-action-background-secondary text-color-static-white hover:bg-color-action-background-secondary-hover active:bg-color-action-background-secondary-active dark:hover:text-color-text-inverse-primary';
+		'rounded-full text-xs p-1 min-w-6 min-h-6 bg-color-interactive-secondary text-color-static-white hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active dark:hover:text-color-text-inverse';
 </script>
 
 <DropdownMenu.Root>
@@ -48,7 +48,7 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Portal>
 		<DropdownMenu.Content
-			class="z-40 border border-color-input-border bg-color-input-background capitalize shadow "
+			class="border-color-border-muted bg-color-surface z-40 border capitalize shadow "
 			preventScroll={false}
 			aria-label="Select current theme mode"
 		>
@@ -61,7 +61,7 @@
 				</DropdownMenu.Item>
 			{/each}
 			<DropdownMenu.Separator />
-			<DropdownMenu.Arrow class="text-color-input-border" />
+			<DropdownMenu.Arrow class="text-color-border-muted" />
 		</DropdownMenu.Content>
 	</DropdownMenu.Portal>
 </DropdownMenu.Root>

@@ -5,13 +5,9 @@
 	 * @component
 	 */
 
-	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
+	import { theme } from '@ldn-viz/ui';
 	import MapLayerSource from '../../mapLayerSource/MapLayerSource.svelte';
 	import MapLayerView from '../../mapLayerView/MapLayerView.svelte';
-
-	const theme = (mode: 'light' | 'dark' = 'light') => {
-		return tokens.theme[mode];
-	};
 
 	interface Props {
 		/**
@@ -37,11 +33,11 @@
 	}
 
 	let {
-		lineColor = theme().color.ui.border.primary,
+		lineColor = theme.tokenNameToValue('geo.feature'),
 		lineOpacity = 0.5,
 		lineWidth = 2,
-		fillColor = theme().color.ui.border.primary,
-		fillOpacity = 0.08
+		fillColor = theme.tokenNameToValue('geo.feature'),
+		fillOpacity = 0.06
 	}: Props = $props();
 
 	const sourceId = 'gla/context/boroughs';
