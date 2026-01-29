@@ -148,7 +148,9 @@ const createFilter = (conditions) => (token) => tokenMatchesAnyCondition(token, 
 
 /*------------------------------------------*/
 
-const conditionsPrimitive = [{ category: 'primitive', subitem: { not: ['seed'] } }];
+const conditionsPrimitive = [
+	{ category: 'primitive', type: { not: ['spacing'] }, subitem: { not: ['seed'] } }
+];
 
 const conditionsColorModes = [{ category: 'mode' }];
 const conditionsColorModeLight = [{ category: 'mode', type: 'light' }];
@@ -313,7 +315,7 @@ StyleDictionary.registerFormat({
 
 const formatTailwindSpacing = (token) => {
 	return `  "spacing-${token.attributes.type}": "var(--${token.name}, ${token.value / 16}rem)", 
-  "typography-spacing-${token.attributes.type}": "calc(var(--${token.name}) /16 * 1em)"`;
+  "typography-spacing-${token.attributes.type}": "calc(${token.value / 16} * 1em)"`;
 };
 
 StyleDictionary.registerFormat({
@@ -372,6 +374,24 @@ StyleDictionary.registerFormat({
 	format({ dictionary }) {
 		return `:root {
 		${dictionary.allTokens.map(formatTypography(dictionary)).join(';\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format for spacing
+ */
+const formatSpacing = (token) => {
+	console.log(token);
+	return ` --spacing-${token.attributes.type}: ${token.value / 16}rem; 
+  --typography-spacing-${token.attributes.type}: ${token.value / 16}em`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'custom/spacing',
+	format({ dictionary }) {
+		return `:root {
+        ${dictionary.allTokens.map(formatSpacing).join(';\n')}
       }`;
 	}
 });

@@ -5,7 +5,7 @@
 	"platforms": {
 		"css": {
 			"transformGroup": "css",
-			"transforms": ["modeName", "size/pxToRem", "typography/unitless"],
+			"transforms": ["modeName", "size/pxToRem", "typography/unitless", "spacing/unitless"],
 			"buildPath": "./styles/",
 			"files": [
 				{
@@ -38,13 +38,8 @@
 				},
 				{
 					"destination": "spacing.css",
-					"format": "css/variables",
-					"filter": "cssSpacingFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
+					"format": "custom/spacing",
+					"filter": "cssSpacingFilter"
 				},
 				{
 					"destination": "typography.css",
