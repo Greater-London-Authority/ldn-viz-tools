@@ -33,7 +33,24 @@ Semantic color tokens allow for mode switching between light and dark.
 
 Tokens are named following a logical structure that flows from left to right to make it simple to understand how they should be used.
 
-`(category-> concept -> role -> emphasis -> state -> mode)`
+`(tier) -> category -> variant -> concept -> role -> emphasis -> state`
+
+Token names don't need to contain each element of this convention.
+
+`category -> concept`
+
+is the minimum required:
+
+```html
+<!-- // category - concept -->
+$color-text
+
+<!-- // category - concept - emphasis -->
+$color-text-muted
+
+<!-- // category - concept - role - emphasis -->
+$color-surface-positive-muted
+```
 
 **Implied defaults**
 We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text color is `$color-text` rather than `$color-text-default`
@@ -53,6 +70,16 @@ Tokens categories are **color**, **spacing** and **typography**
 | `typography` | Typography tokens define fonts, size, line-height and spacing for text and typographic elements.                                                                  |
 
 The following applies to tokens in the color category. Spacing and Typography are documented subsequently.
+
+#### Variant
+
+Many color tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
+
+| Variant   | Details                                                         |
+| :-------- | :-------------------------------------------------------------- |
+| `inverse` | Applies a colour that is inverse to the currently selected mode |
+
+![Swatches showing tokens with inverse variant in light and dark mode](/design-tokens/inverse-variant.png)
 
 #### Concept
 
@@ -85,12 +112,12 @@ The system eschews component tier tokens with the exception of tokens for charts
 | `chart-grid`   | Grid-line element fo charts      |
 | `chart-label`  | Label elements for use on charts |
 
-| Concept                   | Detail                                                         |
-| :------------------------ | :------------------------------------------------------------- |
-| `geo-feature`             | A geographic feature                                           |
-| `geo-feature-interactive` | Geographic features that afford user interaction               |
-| `geo-label`               | Label elements for use with maps and geographic visualisations |
-| `geo-annotation`          | Annotations over maps and geographic visualisations            |
+| Concept           | Detail                                                         |
+| :---------------- | :------------------------------------------------------------- |
+| `geo-feature`     | A geographic feature                                           |
+| `geo-interactive` | Geographic elements that afford user interaction               |
+| `geo-label`       | Label elements for use with maps and geographic visualisations |
+| `geo-annotation`  | Annotations over maps and geographic visualisations            |
 
 #### Role
 
@@ -138,21 +165,21 @@ Interactive elements have states such as **hover**, **active**, **focus**, **dis
 | `off`      | Represents the "inactive" or "disabled" state of a binary toggle or switch.                                             |
 | `dragged`  | Occurs when a user clicks and moves an element from its original position to another.                                   |
 
-#### Variant
-
-Many color tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
-
-| Variant   | Details                                                         |
-| :-------- | :-------------------------------------------------------------- |
-| `inverse` | Applies a colour that is inverse to the currently selected mode |
-
-![Swatches showing tokens with inverse variant in light and dark mode](/design-tokens/inverse-variant.png)
-
 ### Spacing Tokens
 
 `category === spacing`
 
 The structure of our spacing tokens is relatively simple. They run from **xxs, xs, sm, md, lg...** though to **8xl**
+
+Spacing tokens are available in `rem` units. Each spacing token has a typographic spacing equivalent in `em`.
+`rem` (root em) scales based on the root `<html>` font size. `em` scales based on the element's parent font size.
+
+```css
+--spacing-md: 1rem;
+--typography-spacing-md: 1em;
+```
+
+[Read more about relative units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units#lengths)
 
 ### Typography tokens
 
