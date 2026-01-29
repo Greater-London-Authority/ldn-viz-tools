@@ -32,7 +32,7 @@
 	class={classNames(`flex h-full items-center py-2`, alignmentClass)}
 	style:font-weight={getVal(value, fontWeight)}
 	style:visibility={getVal(value, visibility)}
-	style:color={getVal(value, color)}
+	style:color
 >
 	{formatString ? f(+value) : value}
 </span>
