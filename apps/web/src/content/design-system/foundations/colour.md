@@ -7,9 +7,6 @@ navLabel: Colour
 
 <script>
 	import { Callout, theme } from '@ldn-viz/ui'
-    import ChartTokenTable from '$lib/components/tables/colorTokenTables/ChartTokenTable.svelte'
-    import DataTokenTable from '$lib/components/tables/colorTokenTables/DataTokenTable.svelte'
-    import MultipleLine from '$lib/components/charts/exampleCharts/lineCharts/MultipleLine.svelte'
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
 

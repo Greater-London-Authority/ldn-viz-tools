@@ -6,7 +6,36 @@ navLabel: Design Tokens
 ---
 
 <script>
-	import { Callout, theme } from '@ldn-viz/ui'
+	import { Callout, theme } from '@ldn-viz/ui';
+	import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
+	import TokenTable from '$lib/components/tables/colorTokenTables/TokenTable.svelte'
+
+	let paletteTokens = $derived(
+        Object.fromEntries(
+            Object.entries(
+                tokens.mode[theme.currentMode ?? 'light'].palette
+            ).map(([key, value]) => [
+                key,
+                { ...value }
+            ])
+        )
+	);
+
+	// const getTokenCategory = (key) => {
+    //     Object.fromEntries(
+    //         Object.entries(
+    //             tokens.mode[theme.currentMode ?? 'light'][key]
+    //         ).map(([key, value]) => [
+    //             key,
+    //             { ...value }
+    //         ])
+    //     )
+	// };
+	
+	// const conceptTokens = $derived(getTokenCategory('palette'))
+
+	
+
 </script>
 
 ## Principles
@@ -214,43 +243,13 @@ Certain roles have an emphasis scale that can be applied.
 
 [Read the chapter dedicated to typography for more details](/design-system/foundations/typography).
 
-<!-- ### Bringing it together
-
-#### Example one
-
-The color token for a container at level 0 is: `$color-container-level-0`
-
-`$color` - Its a color token
-
-`$color-container` - Its a color token representing a container element
-
-`$color-container-level-0` - Its a color token representing a container element at level 0
-
-#### Example two
-
-The color for primary text is: `$color-text-primary`
-
-`$color` - Its a color token
-
-`$color-text` - Its a color token representing a text element
-
-`$color-container-primary` - Its a color token representing a text element with primary emphasis
-
-#### Example three
-
-The color token for an element that invites a user to take a primary action is: `$color-action-primary`
-
-`$color` - Its a color token
-
-`$color-action` - Its a color token representing an element inviting action
-
-`$color-action-primary` - Its a color token representing an element inviting action with primary emphasis
-
-As actions are usually stateful there are also modifier tokens:
-
-`$color-action-primary-hovered` - Its a color token representing an element inviting action with primary emphasis that is in a hovered state -->
-
 ## Practice
+
+### Semantic token reference tables
+
+<TokenTable title="Test" tokenData={paletteTokens.grey} />
+
+####
 
 <!-- ### Via npm using tailwind
 

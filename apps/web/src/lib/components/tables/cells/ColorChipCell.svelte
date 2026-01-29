@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { colorWithBestContrast } from '@ldn-viz/utils';
 	import { theme } from '@ldn-viz/ui';
+	import { colorWithBestContrast } from '@ldn-viz/utils';
 
 	interface Props {
 		/**
@@ -12,13 +12,12 @@
 	let { value = 'red' }: Props = $props();
 	let label = $state('');
 
-	let textColor = $derived(
-		value ??
-			colorWithBestContrast(
-				value,
-				theme.tokenNameToValue('text.primary'),
-				theme.tokenNameToValue('text.inverse.primary')
-			)
+	let textColor = $derived.by(() =>
+		colorWithBestContrast(
+			value,
+			theme.tokenNameToValue('text'),
+			theme.tokenNameToValue('inverse.text')
+		)
 	);
 
 	const copyValue = (value: string) => {

@@ -17,7 +17,7 @@ export const tokenTableSpec = {
 			}
 		},
 		{
-			short_label: 'hex',
+			short_label: 'value',
 			label: 'Hex',
 			cell: {
 				renderer: 'TextCell'
