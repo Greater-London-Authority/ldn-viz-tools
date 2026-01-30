@@ -1,5 +1,6 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
+import { fileHeader } from 'style-dictionary/utils';
 
 /*===============================================
   CUSTOM PARSER 
@@ -270,16 +271,17 @@ StyleDictionary.registerTransform({
 	}
 });
 
-StyleDictionary.registerTransform({
-	name: 'docsName',
-	type: transformTypes.name,
-	filter: (token) => {
-		return token.path[0] === 'mode';
-	},
-	transform: (token) => {
-		return transformString(token.name, 'color', /.*(mode-(dark|light))/);
-	}
-});
+// //When generating the tokens for documentation transform the name to drop the mode and conform to semantic naming
+// StyleDictionary.registerTransform({
+// 	name: 'docsName',
+// 	type: transformTypes.name,
+// 	filter: (token) => {
+// 		return token.path[0] === 'mode';
+// 	},
+// 	transform: (token) => {
+// 		return transformString(token.name, 'color', /.*(mode-(dark|light))/);
+// 	}
+// });
 
 /*=========================================================
   CUSTOM FORMATS
@@ -382,7 +384,6 @@ StyleDictionary.registerFormat({
  * Custom format for spacing
  */
 const formatSpacing = (token) => {
-	console.log(token);
 	return ` --spacing-${token.attributes.type}: ${token.value / 16}rem; 
   --typography-spacing-${token.attributes.type}: ${token.value / 16}em`;
 };
@@ -436,6 +437,123 @@ StyleDictionary.registerFormat({
 		return `:root {
 			${formatShadows(dictionary)};
 		}`;
+	}
+});
+
+/**
+ * Custom format functions for documentation and js variables - where heiracical grouping with the addition of a 'default' key
+ * makes the structure easier to step though
+ */
+
+// Format a single token object for documentation style
+const formatTokenForDocs = ({ name, value, type, description = '' }) => ({
+	name: transformString(name, 'color', /.*(mode-(dark|light))/),
+	value,
+	type,
+	description
+});
+
+// Format a single token object for javascript retuning only the value
+const formatTokenForJs = ({ value }) => value;
+
+// Helper: Check if a node is a token
+const isToken = (node) => Object.hasOwn(node, 'value');
+
+// Helper: split key into base/variant
+const splitKey = (key) => {
+	const index = key.indexOf('-');
+
+	if (index === -1) {
+		return { base: key, variant: null };
+	}
+
+	return {
+		base: key.slice(0, index),
+		variant: key.slice(index + 1)
+	};
+};
+
+function makeHierarchical(input, formatter = (x) => x) {
+	// Stop at a token and apply the formatter function
+	if (isToken(input)) {
+		return formatter(input);
+	}
+
+	// Group entries by base key
+	const groups = {};
+
+	for (const [key, value] of Object.entries(input)) {
+		const { base, variant } = splitKey(key);
+
+		if (!groups[base]) {
+			groups[base] = { base: null, variants: {} };
+		}
+
+		if (variant) {
+			groups[base].variants[variant] = value;
+		} else {
+			groups[base].base = value;
+		}
+	}
+
+	// Build result with sibling awareness
+	const result = {};
+
+	for (const [base, { base: baseValue, variants }] of Object.entries(groups)) {
+		const hasVariants = Object.keys(variants).length > 0;
+
+		if (!hasVariants) {
+			// No siblings → keep structure
+			result[base] = makeHierarchical(baseValue, formatter);
+			continue;
+		}
+
+		// Siblings detected → introduce default
+		result[base] = {};
+
+		if (baseValue !== null) {
+			result[base].default = makeHierarchical(baseValue, formatter);
+		}
+
+		for (const [variant, value] of Object.entries(variants, formatter)) {
+			result[base][variant] = makeHierarchical(value, formatter);
+		}
+	}
+
+	return result;
+}
+
+// (FOR DOCS) -> Make Heirachical(add defaults to structure), then Format Token meta for docs
+const formatForDocumentation = (dictionary) => {
+	return makeHierarchical(dictionary.tokens, (token) => formatTokenForDocs(token));
+};
+
+// (FOR JS) -> Make Heirachical(add defaults to structure), then Format Token meta for js
+const formatForJs = (dictionary) => {
+	return makeHierarchical(dictionary.tokens, (token) => formatTokenForJs(token));
+};
+
+// Register custom docs formatter
+StyleDictionary.registerFormat({
+	name: 'custom/docs',
+	format: async ({ dictionary, file }) => {
+		const header = await fileHeader({ file });
+		return `${header} 
+			export default 
+				${JSON.stringify(formatForDocumentation(dictionary), null, 2)}
+			`;
+	}
+});
+
+// Register custom js formatter
+StyleDictionary.registerFormat({
+	name: 'custom/js',
+	format: async ({ dictionary, file }) => {
+		const header = await fileHeader({ file });
+		return `${header} 
+			export default 
+				${JSON.stringify(formatForJs(dictionary), null, 2)}
+			`;
 	}
 });
 

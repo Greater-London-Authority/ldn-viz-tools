@@ -75,8 +75,8 @@
 			"buildPath": "./styles/",
 			"files": [
 				{
-					"destination": "js/input.js",
-					"format": "javascript/esm",
+					"destination": "js/color-tokens.js",
+					"format": "custom/js",
 					"filter": "jsFilter",
 					"options": {
 						"minify": true
@@ -86,15 +86,12 @@
 		},
 		"docs": {
 			"transformGroup": "js",
-			"transforms": ["name/kebab", "docsName"],
+			"transforms": ["name/kebab"],
 			"buildPath": "./docs/tokens/",
 			"files": [
 				{
 					"destination": "tokens.js",
-					"format": "javascript/esm",
-					"options": {
-						"stripMeta": { "keep": ["name", "value", "type", "description"] }
-					}
+					"format": "custom/docs"
 				}
 			]
 		}
