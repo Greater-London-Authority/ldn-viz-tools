@@ -189,7 +189,7 @@ module.exports = {
 		// Code
 		':where(code):not(:where(.not-prose, .not-prose *, [data-rehype-pretty-code-figure] *))': {
 			fontFamily: 'monospace',
-			padding: 'var(--spacing-xxs-em) var(--typography-spacing-xs)',
+			padding: 'var(--typography-spacing-xxs) var(--typography-spacing-xs)',
 			fontSize: 'var(--body-xs-font-size)',
 			backgroundColor: 'rgba(229, 229, 229, 0.35)',
 			marginBottom: 'var(--typography-spacing-md)'
