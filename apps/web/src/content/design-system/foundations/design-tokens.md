@@ -54,6 +54,10 @@ navLabel: Design Tokens
     // icon??
     const borderTokens = $derived(getTokenByConcept('border'))
 
+    const geoTokens = $derived(getTokenByConcept('geo'))
+    const chartTokens = $derived(getTokenByConcept('chart'))
+    const dataTokens = $derived(getTokenByConcept('data'))
+
 </script>
 
 ## Principles
@@ -273,6 +277,10 @@ Certain roles have an emphasis scale that can be applied.
 <TokenTable title="Text" tokenData={textTokens} />
 <TokenTable title="Label" tokenData={labelTokens} />
 <TokenTable title="Border" tokenData={borderTokens} />
+<!-- ?? -->
+<TokenTable title="Geo" tokenData={geoTokens} />
+<TokenTable title="Chart" tokenData={chartTokens} />
+<TokenTable title="Data" tokenData={dataTokens} />
 
 ####
 

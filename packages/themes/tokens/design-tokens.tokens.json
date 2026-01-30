@@ -2527,27 +2527,27 @@
       },
       "chart": {
         "axis": {
-          "description": "",
+          "description": "The color of chart axes",
           "type": "color",
           "value": "{semantic-color.light-mode.text}"
         },
         "grid": {
-          "description": "",
+          "description": "Grid-line element for charts",
           "type": "color",
           "value": "{semantic-color.light-mode.palette.grey.200}"
         },
         "background": {
-          "description": "",
+          "description": "The base layer of a chart",
           "type": "color",
           "value": "{semantic-color.light-mode.container}"
         },
         "label": {
-          "description": "",
+          "description": "Primary label elements for use on charts",
           "type": "color",
           "value": "{semantic-color.light-mode.text}"
         },
         "label-muted": {
-          "description": "",
+          "description": "Secondary label elements for use on charts",
           "type": "color",
           "value": "{semantic-color.light-mode.text-muted}"
         },
@@ -2910,7 +2910,7 @@
           "value": "{semantic-color.light-mode.border-muted}"
         },
         "interactive": {
-          "description": "",
+          "description": "Geographic elements that afford user interaction",
           "type": "color",
           "value": "{semantic-color.light-mode.interactive.primary}"
         },
@@ -3719,27 +3719,27 @@
       },
       "chart": {
         "axis": {
-          "description": "",
+          "description": "The color of chart axes",
           "type": "color",
           "value": "{semantic-color.dark-mode.text}"
         },
         "grid": {
-          "description": "",
+          "description": "Grid-line element for charts",
           "type": "color",
           "value": "{semantic-color.dark-mode.palette.grey.200}"
         },
         "background": {
-          "description": "",
+          "description": "The base layer of a chart",
           "type": "color",
           "value": "{semantic-color.dark-mode.container}"
         },
         "label": {
-          "description": "",
+          "description": "Primary label elements for use on charts",
           "type": "color",
           "value": "{semantic-color.dark-mode.text}"
         },
         "label-muted": {
-          "description": "",
+          "description": "Secondary label elements for use on charts",
           "type": "color",
           "value": "{semantic-color.dark-mode.text-muted}"
         },
@@ -4102,7 +4102,7 @@
           "value": "{semantic-color.dark-mode.border-muted}"
         },
         "interactive": {
-          "description": "",
+          "description": "Geographic elements that afford user interaction",
           "type": "color",
           "value": "{semantic-color.dark-mode.interactive.primary}"
         },
