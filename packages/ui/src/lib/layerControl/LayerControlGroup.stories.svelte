@@ -3,6 +3,10 @@
 	import LayerControlGroup from './LayerControlGroup.svelte';
 	import { colorNames } from './layerControlUtils';
 
+	/**
+	 * The `<LayerControlGroup>` component provides a way to create a set of `<LayerControl>` components defined by an array of objects.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Layer Controls/LayerControlGroup',
 		component: LayerControlGroup,

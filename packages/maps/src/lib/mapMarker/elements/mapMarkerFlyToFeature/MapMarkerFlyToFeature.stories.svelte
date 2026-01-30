@@ -2,6 +2,11 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerFlyToFeature from './MapMarkerFlyToFeature.svelte';
 
+	/**
+	 * The `<MapMarkerFlyToFeature>` component is a wrapping container for use
+	 * within tooltip and marker components. It moves the map so it centers
+	 * the popup on the screen. This is activated soon after mounting.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerFlyToFeature',
 		component: MapMarkerFlyToFeature,

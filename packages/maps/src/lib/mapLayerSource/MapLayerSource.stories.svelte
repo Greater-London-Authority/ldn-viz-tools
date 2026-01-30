@@ -16,6 +16,18 @@
 
 	 */
 
+	/**
+	 * The `<MapLayerSource>` component is slotted within a `<Map>` component to
+	 * specify a data source. The slot primarily accepts one or many
+	 * `<MapLayerView>` instances to present the data.
+	 *
+	 * By design, `<MapLayerSource>` is very simple with minimal features but
+	 * extendable by wrapping the component and using patterns such as:
+	 * [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern),
+	 * [Decorator](https://en.wikipedia.org/wiki/Decorator_pattern),
+	 * and [Facade](https://en.wikipedia.org/wiki/Facade_pattern). E.g.
+	 * `<GeoJSONMapLayerSource>`.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapLayerSource',
 		component: MapLayerSource,

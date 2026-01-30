@@ -1,4 +1,4 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapCursorEvent from './MapCursorEvent.svelte';
 
@@ -26,6 +26,25 @@
 		}
 	};
 
+	/**
+	 * The `<MapCursorEvent>` component exposes the map cursor capability, for a
+	 * specific map layer, as a Svelte component.
+	 *
+	 * However, this component maybe slotted anywhere within `<Map>` providing
+	 * a layer ID is passed and guards are put in place so the layer is added to
+	 * MapLibre before this component is initialised.
+	 *
+	 * Cursor movement events in order they are called when a mouse movement occurs:
+	 * 1. `leaveFeature`
+	 * 2. `leaveTopFeature`
+	 * 3. `enterFeature`
+	 * 4. `enterTopFeature`
+	 *
+	 * Click or touch events in order they are called per click:
+	 * 1. `clickMap`
+	 * 2. `clickFeature`
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapCursorEvent',
 		component: MapCursorEvent,
