@@ -2,6 +2,11 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerContainer from './MapMarkerContainer.svelte';
 
+	/**
+	 * The `<MapMarkerContainer>` component is a wrapping container for use
+	 * within markers components. It encapsulates the standardised map
+	 * styling and behaviour.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerContainer',
 		component: MapMarkerContainer,

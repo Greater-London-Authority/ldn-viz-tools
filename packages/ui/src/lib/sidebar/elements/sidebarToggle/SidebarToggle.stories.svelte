@@ -6,6 +6,9 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import SidebarToggle from './SidebarToggle.svelte';
 
+	/**
+	 * The `<SidebarToggle>` component is the button that can be clicked on to open or close the `<Sidebar>`.
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarToggle',
 		component: SidebarToggle,

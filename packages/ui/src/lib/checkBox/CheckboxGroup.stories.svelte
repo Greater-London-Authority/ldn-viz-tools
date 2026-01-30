@@ -36,6 +36,11 @@
 		...option,
 		color: theme.tokenNameToValue(colors[option.id])
 	}));
+	/**
+	 * The `<CheckboxGroup>` component provides a way to create a set of `<Checkbox>` components defined by an array of objects.
+	 *
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation) component rather than the [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Checkboxes/CheckboxGroup',

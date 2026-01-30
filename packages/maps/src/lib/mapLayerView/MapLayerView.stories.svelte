@@ -22,6 +22,17 @@
 		}
 	};
 
+	/**
+	 * The `<MapLayerView>` component is slotted within a `<MapLayerSource>`
+	 * component, or derived version, to specify how to present data on the
+	 * map.
+	 *
+	 * By design, `<MapLayerView>` is very simple with minimal features but
+	 * extendable by wrapping the component and using patterns such as:
+	 * [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern),
+	 * [Decorator](https://en.wikipedia.org/wiki/Decorator_pattern),
+	 * and [Facade](https://en.wikipedia.org/wiki/Facade_pattern).
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapLayerView',
 		component: MapLayerView,

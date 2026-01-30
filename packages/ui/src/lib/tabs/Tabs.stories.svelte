@@ -11,6 +11,10 @@
 	import { First, Fourth, Second, Third } from './demoSections';
 	import type { Tab } from './types';
 
+	/**
+	 * The `<Tabs>` component creates an accessible set of tabs comprised of a `<TabList>` containing a set of `<TabLabel>`. Selecting a tab will make the relevant content in the associated `<TabPanel>` visible.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Tabs',
 		component: Tabs,

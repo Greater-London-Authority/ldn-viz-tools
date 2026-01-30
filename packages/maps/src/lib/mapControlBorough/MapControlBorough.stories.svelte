@@ -1,8 +1,11 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import MapControlBorough from './MapControlBorough.svelte';
 
+	/**
+	 * The `MapControlBorough` component lets the user select a borough, and zooms the map to the selected borough.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlBorough',
 		component: MapControlBorough,

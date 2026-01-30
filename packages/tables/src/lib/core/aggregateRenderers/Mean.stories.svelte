@@ -1,7 +1,11 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import Mean from './Mean.svelte';
+
+	/**
+	 * The `Mean` component renders the (arithmetic) mean of a set of values.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/Mean',
 		component: Mean,

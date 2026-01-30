@@ -4,6 +4,9 @@
 	import LayerControl from './LayerControl.svelte';
 	import { colorNames } from './layerControlUtils';
 
+	/**
+	 * The `LayerControl` component combines a checkbox with color and opacity controls.
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Layer Controls/LayerControl',
 		component: LayerControl,

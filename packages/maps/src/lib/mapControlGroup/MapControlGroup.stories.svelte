@@ -4,6 +4,10 @@
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
+	/**
+	 * The `<MapControlGroup>` component wraps map controls and other overlays
+	 * to provide positioning relative to a parent `<Map>` component instance.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlGroup',
 		component: MapControlGroup,

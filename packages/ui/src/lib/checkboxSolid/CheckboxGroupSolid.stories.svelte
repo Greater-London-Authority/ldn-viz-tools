@@ -6,13 +6,6 @@
 	import CheckboxGroupSolidDemo from './CheckboxGroupSolidDemo.svelte';
 	import type { CheckboxSolidProps } from './types';
 
-	/**
-	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
-	 *
-	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [CheckboxSolid](./?path=/docs/ui-components-Checkboxs-Checkboxgroupsolid--documentation).
-	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroupSolid](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
-	 */
-
 	let selectedOptions: string[] = $state(['bus', 'underground']);
 	let selectedOptions2: string[] = $state([]);
 	let selectedOptions3: string[] = $state([]);
@@ -59,6 +52,12 @@
 		}
 	];
 
+	/**
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
+	 *
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
+	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Checkboxes/CheckboxGroupSolid',
 		component: CheckboxGroupSolid,

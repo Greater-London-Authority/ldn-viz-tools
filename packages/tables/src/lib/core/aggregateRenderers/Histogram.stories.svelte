@@ -1,7 +1,11 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import Histogram from './Histogram.svelte';
+
+	/**
+	 * The `Histogram` component renders a set of values as a histogram.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/Histogram',
 		component: Histogram,

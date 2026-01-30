@@ -31,6 +31,10 @@
 		}
 	};
 
+	/**
+	 * The `<BoroughsContextLayer>` component is slotted into a `<Map>` to show
+	 * boroughs and their boundaries.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapContextLayers/BoroughsContextLayer',
 		component: BoroughsContextLayer,

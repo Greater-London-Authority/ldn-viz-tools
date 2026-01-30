@@ -4,6 +4,9 @@
 	import { scaleBand, scaleOrdinal } from 'd3-scale';
 	import BarChart from './BarChart.svelte';
 
+	/**
+	 * The `BarChart` component renders a set of values as a bar chart.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/BarChart',
 		component: BarChart,
