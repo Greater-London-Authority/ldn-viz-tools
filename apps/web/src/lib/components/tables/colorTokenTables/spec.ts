@@ -5,6 +5,7 @@ export const tokenTableSpec = {
 		{
 			short_label: 'value',
 			label: 'Value',
+			width: 60,
 			cell: {
 				renderer: ColorChipCell as any
 			}
@@ -12,6 +13,7 @@ export const tokenTableSpec = {
 		{
 			short_label: 'name',
 			label: 'Token Name',
+			// relativeWidth: 1,
 			cell: {
 				renderer: 'TextCell'
 			}
@@ -19,6 +21,15 @@ export const tokenTableSpec = {
 		{
 			short_label: 'value',
 			label: 'Hex',
+			// relativeWidth: 0.5,
+			cell: {
+				renderer: 'TextCell'
+			}
+		},
+		{
+			short_label: 'description',
+			label: 'Description',
+			// relativeWidth: 2,
 			cell: {
 				renderer: 'TextCell'
 			}

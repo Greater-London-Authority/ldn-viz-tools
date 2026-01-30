@@ -137,7 +137,7 @@ module.exports = {
 		':where(blockquote):not(:where(.not-prose, .not-prose *))': {
 			color: 'var(--mode-text-muted)',
 			borderInlineStartWidth: 'var(--spacing-xxs)',
-			borderInlineStartColor: 'var(--global-color-static-brand)',
+			borderInlineStartColor: 'var(--mode-static-brand)',
 			marginTop: 'var(--typography-spacing-lg)',
 			marginBottom: 'var(--typography-spacing-lg)',
 			paddingInlineStart: 'var(--typography-spacing-md)'

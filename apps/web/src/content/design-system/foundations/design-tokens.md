@@ -10,31 +10,49 @@ navLabel: Design Tokens
 	import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
 	import TokenTable from '$lib/components/tables/colorTokenTables/TokenTable.svelte'
 
-	let paletteTokens = $derived(
-        Object.fromEntries(
-            Object.entries(
-                tokens.mode[theme.currentMode ?? 'light'].palette
-            ).map(([key, value]) => [
-                key,
-                { ...value }
-            ])
-        )
-	);
+    const getTokenByConcept = (startKey = null, obj= tokens.mode[theme.currentMode ?? 'light']) => {
+        // Determine the starting point
+        let start = obj;
+        if (startKey) {
+            if (!(startKey in obj)) return []; // key not found
+            start = obj[startKey];
+        }
 
-	// const getTokenCategory = (key) => {
-    //     Object.fromEntries(
-    //         Object.entries(
-    //             tokens.mode[theme.currentMode ?? 'light'][key]
-    //         ).map(([key, value]) => [
-    //             key,
-    //             { ...value }
-    //         ])
-    //     )
-	// };
-	
-	// const conceptTokens = $derived(getTokenCategory('palette'))
+        // Recursive search
+        const results = [];
 
-	
+        function recurse(current) {
+            if (!current || typeof current !== 'object') return;
+
+            if ('value' in current) results.push(current);
+
+            for (const k in current) {
+            if (typeof current[k] === 'object') {
+                recurse(current[k]);
+            }
+            }
+        }
+
+        recurse(start);
+
+        results.sort((a, b) => {
+            const nameA = a.name?.toString().toLowerCase() || '';
+            const nameB = b.name?.toString().toLowerCase() || '';
+            return nameA.localeCompare(nameB);
+        });
+
+        return results;
+    }
+
+    const staticTokens = $derived(getTokenByConcept('static'))
+    const canvasTokens = $derived(getTokenByConcept('canvas'))
+    const containerTokens = $derived(getTokenByConcept('container'))
+    const surfaceTokens = $derived(getTokenByConcept('surface'))
+    const interactiveTokens = $derived(getTokenByConcept('interactive'))
+	const textTokens = $derived(getTokenByConcept('text'))
+    const labelTokens = $derived(getTokenByConcept('label'))
+    // icon??
+    const borderTokens = $derived(getTokenByConcept('border'))
 
 </script>
 
@@ -118,28 +136,28 @@ The token **concept** guides us in how to apply the token. For color tokens valu
 
 ![An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.svg)
 
-| Concept               | Detail                                                                   |
-| :-------------------- | :----------------------------------------------------------------------- |
-| `brand`               | The consistent color used for brand reinforcement                        |
-| `canvas`              | The base layer of an application                                         |
-| `container`           | Containers are organisational elements that form page structure          |
-| `surface`             | Information layer that conceptually sitting in front of the canvas layer |
-| `surface-interactive` | Objects on the information layer that afford user interaction            |
-| `text`                | Text elements                                                            |
-| `label`               | Specific text used for labelling                                         |
-| `icon`                | Icons                                                                    |
-| `border`              | Borders around surfaces and containers                                   |
+| Concept       | Detail                                                                   |
+| :------------ | :----------------------------------------------------------------------- |
+| `static`      | Colors that stay the same regardless of mode                             |
+| `canvas`      | The base layer of an application                                         |
+| `container`   | Containers are organisational elements that form page structure          |
+| `surface`     | Information layer that conceptually sitting in front of the canvas layer |
+| `interactive` | Objects on the information layer that afford user interaction            |
+| `text`        | Text elements                                                            |
+| `label`       | Specific text used for labelling                                         |
+| `icon`        | Icons                                                                    |
+| `border`      | Borders around surfaces and containers                                   |
 
 ##### Component-type exceptions
 
 The system eschews component tier tokens with the exception of tokens for charts and geographic features. Rather than extending the naming hierarchy these tokens are group-prefixed at the 'concept' level.
 
-| Concept        | Detail                           |
-| :------------- | :------------------------------- |
-| `chart-canvas` | The base layer of a chart        |
-| `chart-axis`   | The color of chart axes          |
-| `chart-grid`   | Grid-line element fo charts      |
-| `chart-label`  | Label elements for use on charts |
+| Concept         | Detail                           |
+| :-------------- | :------------------------------- |
+| `chart-surface` | The base layer of a chart        |
+| `chart-axis`    | The color of chart axes          |
+| `chart-grid`    | Grid-line element fo charts      |
+| `chart-label`   | Label elements for use on charts |
 
 | Concept           | Detail                                                         |
 | :---------------- | :------------------------------------------------------------- |
@@ -247,7 +265,14 @@ Certain roles have an emphasis scale that can be applied.
 
 ### Semantic token reference tables
 
-<TokenTable title="Test" tokenData={paletteTokens.grey} />
+<TokenTable title="Static" tokenData={staticTokens} />
+<TokenTable title="Canvas" tokenData={canvasTokens} />
+<TokenTable title="Container" tokenData={containerTokens} />
+<TokenTable title="Surface" tokenData={surfaceTokens} />
+<TokenTable title="Interactive" tokenData={interactiveTokens} />
+<TokenTable title="Text" tokenData={textTokens} />
+<TokenTable title="Label" tokenData={labelTokens} />
+<TokenTable title="Border" tokenData={borderTokens} />
 
 ####
 

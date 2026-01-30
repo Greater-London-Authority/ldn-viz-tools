@@ -2878,7 +2878,7 @@
       },
       "static": {
         "brand": {
-          "description": "",
+          "description": "The consistent color used for brand reinforcement",
           "type": "color",
           "value": "{primitive.light-mode.color.static.brand}"
         },
@@ -4070,7 +4070,7 @@
       },
       "static": {
         "brand": {
-          "description": "",
+          "description": "The consistent color used for brand reinforcement",
           "type": "color",
           "value": "{primitive.dark-mode.color.static.brand}"
         },
