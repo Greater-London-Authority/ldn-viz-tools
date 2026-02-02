@@ -26,7 +26,7 @@
 	{#snippet template(args)}
 		<RadioButton {...args} label="Foo" id="foo" bind:selectedId />
 
-		<div class="mt-8 space-y-2 text-color-text-secondary">
+		<div class="text-color-text-muted mt-8 space-y-2">
 			<p>selectedId: {selectedId}</p>
 			<p>Checked: {!!selectedId}</p>
 		</div>
@@ -88,7 +88,7 @@
 
 <Story name="Multiple RadioButtons not in group">
 	{#snippet template()}
-		<p class="my-8 text-color-text-secondary">
+		<p class="text-color-text-muted my-8">
 			The Radio button is intended for use when only one option can be selected at a time. For this
 			behaviour to work correctly for a set of <code>Radio</code> components, assign them the same
 			<code>name</code> attribute, and bind their <code>selectedID</code> prop to the same variable.
@@ -115,6 +115,6 @@
 			name="group1"
 			bind:selectedId
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+		<p class="text-color-text-muted mt-8">Selected id: {selectedId}</p>
 	{/snippet}
 </Story>

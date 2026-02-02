@@ -103,15 +103,15 @@
 </script>
 
 <div
-	class="pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-container-level-1 p-4 shadow"
+	class="bg-color-container-level-1 pointer-events-auto flex w-[320px] flex-col gap-2 p-4 shadow"
 >
 	<p class="form-label text-sm">Upload</p>
 
 	{#if upload.state === 'pending'}
 		<div
 			class={classNames(
-				'relative flex min-h-[180px] items-center rounded-lg  border-2 border-dashed border-color-input-border p-2 hover:border-color-input-border-focussed',
-				isDragging ? '!bg-color-action-background-primary-muted-hover' : ''
+				'border-color-border-muted hover:border-color-interactive-focus relative flex min-h-[180px]  items-center rounded-lg border-2 border-dashed p-2',
+				isDragging ? '!bg-color-interactive-primary-muted-hover' : ''
 			)}
 			ondragenter={handleDragIn}
 			ondragleave={handleDragOut}
@@ -142,7 +142,7 @@
 			</div>
 
 			<div class="relative z-0 text-center">
-				<p class="text-sm text-color-text-secondary">
+				<p class="text-color-text-muted text-sm">
 					Drag & drop a GeoJSON file here or click to open file picker.
 				</p>
 			</div>
@@ -158,7 +158,7 @@
 		<Callout status="positive" size="sm" ariaTitle="File upload successful">
 			{#snippet body()}
 				<div class="mb-2 flex items-center">
-					<Icon src={CheckCircle} theme="mini" class="mr-2 h-6 w-6 text-color-ui-positive" />
+					<Icon src={CheckCircle} theme="mini" class="text-color-surface-positive mr-2 h-6 w-6" />
 					<p>File upload successful</p>
 				</div>
 			{/snippet}

@@ -31,8 +31,10 @@
 
 	let { circleColorClass = '', arcColorClass = '', title = undefined, ...rest }: Props = $props();
 
-	let circleClasses = $derived(classNames(circleColorClass || 'stroke-color-ui-empty'));
-	let pathClasses = $derived(classNames(arcColorClass || 'stroke-color-action-primary-active'));
+	let circleClasses = $derived(classNames(circleColorClass || 'stroke-color-surface-empty'));
+	let pathClasses = $derived(
+		classNames(arcColorClass || 'stroke-color-interactive-primary-active')
+	);
 </script>
 
 <svg

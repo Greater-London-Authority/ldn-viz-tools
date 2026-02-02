@@ -133,7 +133,7 @@
 			g
 				.selectAll('.tick line')
 				.attr('y1', marginTop + marginBottom - height)
-				.attr('stroke', theme.tokenNameToValue('text.secondary'));
+				.attr('stroke', theme.tokenNameToValue('text.muted'));
 
 		if (color.interpolate) {
 			// continuous scale
@@ -252,7 +252,7 @@
 	width="100%"
 	viewBox="0  0 {width} {height}"
 	style="overflow: visible; display: block;"
-	class="text-color-text-primary"
+	class="text-color-text"
 >
 	{#if !color}
 		<text>Loading...</text>

@@ -3,12 +3,10 @@
 	 * TODO: THIS EXAMPLE ALREADY EXISTS ESWHERE IN THIS REPO, SO THIS IS A REPETITION ??
 	 */
 
+	import { ObservablePlot, Plot } from '@ldn-viz/charts';
+	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3';
 	import demoMonthlyTimeseriesLong from '../../../../data/demoMonthlyTimeseriesLong.json';
-	import { ObservablePlot, Plot } from '@ldn-viz/charts';
-	import { theme as currentThemeObj } from '@ldn-viz/ui';
-
-	let currentTheme = $derived(currentThemeObj.currentTheme);
 
 	//const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
@@ -21,9 +19,9 @@
 			legend: true,
 			type: 'ordinal',
 			range: [
-				currentTheme?.color.data.primary,
-				currentTheme?.color.data.secondary,
-				currentTheme?.color.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [
@@ -41,7 +39,7 @@
 
 			Plot.ruleX(
 				multiLineData,
-				Plot.pointerX({ x: 'Month', stroke: currentTheme?.color.chart.label })
+				Plot.pointerX({ x: 'Month', stroke: theme.tokenNameToValue('chart.label') })
 			),
 			Plot.point(
 				multiLineData,

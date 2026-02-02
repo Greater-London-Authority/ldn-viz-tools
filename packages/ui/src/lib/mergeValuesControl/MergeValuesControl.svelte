@@ -141,7 +141,7 @@
 	});
 </script>
 
-<div class="flex flex-col gap-4 text-color-text-primary">
+<div class="text-color-text flex flex-col gap-4">
 	<HelpText>
 		Drag and drop to assign values to categories; not all values need to be assigned to a category.
 		Click on category name to edit.
@@ -159,7 +159,7 @@
 		>
 			{#each groups.ungrouped as val}
 				<li
-					class="cursor-grab py-1 pl-2 hover:bg-color-input-background-hover"
+					class="hover:bg-color-interactive-secondary-muted-hover cursor-grab py-1 pl-2"
 					draggable="true"
 					data-id={val}
 					ondragstart={(ev) => dragStart(ev, '')}
@@ -174,7 +174,7 @@
 
 	<div class="flex w-96 flex-col gap-1">
 		<div
-			class="black flex items-center border-2 border-color-action-border-positive p-2"
+			class="black border-color-interactive-positive flex items-center border-2 p-2"
 			ondragover={(ev) => dragOver(ev, newGroupName)}
 			ondragleave={() => dragLeave()}
 			ondragenter={(ev) => ev.preventDefault()}
@@ -224,7 +224,7 @@
 						<li
 							data-id={val}
 							draggable="true"
-							class="flex cursor-grab py-1 pl-2 hover:bg-color-input-background-hover"
+							class="hover:bg-color-interactive-primary-muted-hover flex cursor-grab py-1 pl-2"
 							ondragstart={(ev) => dragStart(ev, groupName)}
 						>
 							<Button
@@ -248,6 +248,6 @@
 
 <style lang="postcss">
 	.currentDropTarget {
-		@apply border-2 border-dashed border-color-action-border-positive-active;
+		@apply border-color-interactive-positive-active border-2 border-dashed;
 	}
 </style>

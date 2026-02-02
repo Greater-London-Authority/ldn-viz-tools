@@ -15,7 +15,7 @@
 
 <Story name="Mayor of London">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoMayor class="w-40" />
 		</div>
 	{/snippet}
@@ -23,7 +23,7 @@
 
 <Story name="CIU">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoCIU class="w-40" />
 		</div>
 	{/snippet}
@@ -31,7 +31,7 @@
 
 <Story name="Designed By CIU">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoByCIU class="w-40" />
 		</div>
 	{/snippet}
@@ -39,7 +39,7 @@
 
 <Story name="LOTI">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoLOTI class="h-10" />
 		</div>
 	{/snippet}
@@ -47,7 +47,7 @@
 
 <Story name="Inherit font color (default)">
 	{#snippet template()}
-		<div class="flex space-x-6 text-color-text-primary">
+		<div class="text-color-text flex space-x-6">
 			<LogoMayor class="w-40" />
 			<LogoCIU class="w-40" />
 			<LogoByCIU class="w-40" />
@@ -60,17 +60,17 @@
 	{#snippet template()}
 		<div class="space-y-4">
 			<div class="flex space-x-6">
-				<LogoMayor class="w-40 fill-color-palette-grey-400" />
-				<LogoCIU class="w-40 fill-color-palette-grey-400" />
-				<LogoByCIU class="w-40 fill-color-palette-grey-400" />
-				<LogoLOTI class="h-10 fill-color-palette-grey-400" />
+				<LogoMayor class="fill-color-palette-grey-400 w-40" />
+				<LogoCIU class="fill-color-palette-grey-400 w-40" />
+				<LogoByCIU class="fill-color-palette-grey-400 w-40" />
+				<LogoLOTI class="fill-color-palette-grey-400 h-10" />
 			</div>
 
 			<div class="flex space-x-6">
-				<LogoMayor class="w-40 fill-color-palette-grey-800" />
-				<LogoCIU class="w-40 fill-color-palette-grey-800" />
-				<LogoByCIU class="w-40 fill-color-palette-grey-800" />
-				<LogoLOTI class="h-10 fill-color-palette-grey-800" />
+				<LogoMayor class="fill-color-palette-grey-800 w-40" />
+				<LogoCIU class="fill-color-palette-grey-800 w-40" />
+				<LogoByCIU class="fill-color-palette-grey-800 w-40" />
+				<LogoLOTI class="fill-color-palette-grey-800 h-10" />
 			</div>
 		</div>
 	{/snippet}

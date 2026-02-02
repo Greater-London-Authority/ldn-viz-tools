@@ -158,7 +158,7 @@
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="text-color-text-muted mt-4 block">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -170,7 +170,7 @@
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple keepSelectionInList bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="text-color-text-muted mt-4 block">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -223,9 +223,9 @@
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
 			<Button onclick={() => (error = 'OH NO')}>Set error</Button>
-			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}>
-				Clear error
-			</Button>
+			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}
+				>Clear error</Button
+			>
 
 			<span><code>error is:</code> {error}</span>
 
@@ -277,7 +277,7 @@
 				bind:value={selectedBorough}
 			/>
 
-			<div class="mt-4 text-color-text-secondary">
+			<div class="text-color-text-muted mt-4">
 				<strong>Selected:</strong>
 				{selectedBorough ?? 'None'}
 			</div>

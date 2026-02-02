@@ -39,10 +39,10 @@ export const getDefaultPlotStyles = () => {
 };
 
 const defaultStyle = () => ({
-	color: theme.currentTheme.color.chart.label,
+	color: theme.tokenNameToValue('chart.label'),
 	fontSize: '0.875rem',
 	fontFamily: fontStack,
-	background: theme.currentTheme.color.chart.background
+	background: theme.tokenNameToValue('chart.background')
 });
 
 const defaultSize = {
@@ -84,12 +84,12 @@ const defaultYScale = {
 };
 
 const defaultGridX = () => ({
-	stroke: theme.currentTheme.color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	stroke: theme.tokenNameToValue('chart.grid'), // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1
 });
 
 const defaultGridY = () => ({
-	stroke: theme.currentTheme.color.chart.grid, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	stroke: theme.tokenNameToValue('chart.grid'), // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	strokeOpacity: 1,
 	ticks: 4 // reasonable level to push nice breaks toward 3, 4 or 5
 });
@@ -114,7 +114,7 @@ const defaultYAxis = <AxisOptions>{
 };
 
 const defaultLine = () => ({
-	stroke: theme.currentTheme.color.data.primary,
+	stroke: theme.tokenNameToValue('data.primary'),
 	strokeWidth: 2
 });
 
@@ -126,7 +126,7 @@ const defaultDashedLine = {
 const defaultDot = () => ({
 	// simplest mark for dense scatterplots
 	stroke: null,
-	fill: theme.currentTheme.color.data.primary,
+	fill: theme.tokenNameToValue('data.primary'),
 	fillOpacity: 0.7,
 	strokeWidth: 0,
 	r: 2
@@ -134,26 +134,26 @@ const defaultDot = () => ({
 
 const defaultPoint = () => ({
 	// larger data point mark, for highlighting a point on line etc.
-	stroke: theme.currentTheme.color.data.primary,
-	fill: theme.currentTheme.color.chart.background,
+	stroke: theme.tokenNameToValue('data.primary'),
+	fill: theme.tokenNameToValue('chart.background'),
 	strokeWidth: 2,
 	r: 4
 });
 
 const defaultArea = () => ({
-	stroke: theme.currentTheme.color.data.primary,
+	stroke: theme.tokenNameToValue('data.primary'),
 	strokeWidth: 0,
-	fill: theme.currentTheme.color.data.primary,
+	fill: theme.tokenNameToValue('data.primary'),
 	fillOpacity: 0.2
 });
 
 const defaultRule = () => ({
-	stroke: theme.currentTheme.color.chart.axis
+	stroke: theme.tokenNameToValue('chart.axis')
 });
 
 const defaultTip = () => ({
-	stroke: theme.currentTheme.color.ui.border.secondary,
-	fill: theme.currentTheme.color.chart.background,
+	stroke: theme.tokenNameToValue('border.muted'),
+	fill: theme.tokenNameToValue('chart.background'),
 	fillOpacity: 1,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -162,8 +162,8 @@ const defaultTip = () => ({
 });
 
 const defaultAnnotationTip = () => ({
-	stroke: theme.currentTheme.color.ui.border.secondary,
-	fill: theme.currentTheme.color.chart.background,
+	stroke: theme.tokenNameToValue('border.muted'),
+	fill: theme.tokenNameToValue('chart.background'),
 	fillOpacity: 0.8,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -175,24 +175,24 @@ const defaultAnnotationTip = () => ({
 
 const defaultAnnotationText = () => ({
 	fontSize: 14,
-	fill: theme.currentTheme.color.chart.label,
+	fill: theme.tokenNameToValue('chart.label'),
 	dx: 8,
 	dy: 0
 });
 
 const defaultAnnotationRange = () => ({
-	fill: theme.currentTheme.color.chart.label, // this reactive var not updating reactively in chart itself (unless variable included in chart)
+	fill: theme.tokenNameToValue('chart.label'), // this reactive var not updating reactively in chart itself (unless variable included in chart)
 	opacity: 0.1
 });
 
 const defaultBar = () => ({
-	fill: theme.currentTheme.color.data.primary,
-	stroke: theme.currentTheme.color.chart.background
+	fill: theme.tokenNameToValue('data.primary'),
+	stroke: theme.tokenNameToValue('chart.background')
 });
 
 const defaultRect = () => ({
-	fill: theme.currentTheme.color.data.primary,
-	stroke: theme.currentTheme.color.chart.background
+	fill: theme.tokenNameToValue('data.primary'),
+	stroke: theme.tokenNameToValue('chart.background')
 });
 
 /**

@@ -1,29 +1,27 @@
-@import '@ldn-viz/themes/styles/global.css';
+@import '@ldn-viz/themes/styles/primitives.css';
 @import '@ldn-viz/themes/styles/light.css';
 @import '@ldn-viz/themes/styles/dark.css';
+@import '@ldn-viz/themes/styles/spacing.css';
+@import '@ldn-viz/themes/styles/typography.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-	strong,
-	b {
-		font-weight: bold !important;
-	}
-
 	code[data-theme='github-dark-dimmed'] {
 		display: flex !important;
 		flex-direction: column;
 	}
 
 	[data-rehype-pretty-code-figure] {
-		@apply border border-color-ui-border-secondary;
+		@apply !my-typography-spacing-sm;
+		@apply border border-color-border-muted;
 	}
 
 	[data-theme='github-dark-dimmed'] {
 		@apply !px-2;
 		background-color: #13181cff !important;
-		color: var(--global-color-static-white) !important;
+		color: var(--color-static-white) !important;
 	}
 }

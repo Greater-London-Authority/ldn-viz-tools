@@ -14,8 +14,8 @@
 	let { title = '', children }: Props = $props();
 </script>
 
-<section class="border-b border-color-ui-border-secondary last-of-type:border-0">
-	<div class="space-y-4 bg-color-container-level-1 pb-4 text-sm text-color-text-primary">
+<section class="border-color-border-muted border-b last-of-type:border-0">
+	<div class="bg-color-container-level-1 text-color-text space-y-4 pb-4 text-sm">
 		{#if typeof title != 'string'}
 			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->
 			{@render title()}

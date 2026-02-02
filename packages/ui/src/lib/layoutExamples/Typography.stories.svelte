@@ -28,7 +28,7 @@
 				x: 'Month',
 				y: 'Value',
 				z: 'Variable',
-				stroke: theme.currentTheme.color.data.primary,
+				stroke: theme.currentMode.data.primary,
 				tip: true
 			})
 		]

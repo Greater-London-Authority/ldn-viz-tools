@@ -31,7 +31,7 @@
 	};
 
 	let classes = $state(
-		`shadow-lg border border-color-ui-border-secondary absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container-level-0 overflow-y-auto`
+		`shadow-lg border border-color-border-muted absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-container overflow-y-auto`
 	);
 	classes += ' ' + (rest.class || '');
 	delete rest.class;
@@ -44,7 +44,7 @@
 	The stopImmediatePropagation on mousemove prevents tooltips below this
 	marker from being shown when mouseover.	
 -->
-<div class="relative text-sm text-color-text-primary">
+<div class="text-color-text relative text-sm">
 	<div
 		role="tooltip"
 		bind:this={container}
@@ -61,24 +61,10 @@
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 150 100"
-			class="absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform fill-color-container-level-0 stroke-color-ui-border-secondary"
+			class="fill-color-container stroke-color-border-muted absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform"
 		>
-			<line
-				class="stroke-color-ui-border-secondary"
-				stroke-width="14"
-				x1="0"
-				y1="0"
-				x2="75"
-				y2="100"
-			/>
-			<line
-				class="stroke-color-ui-border-secondary"
-				stroke-width="14"
-				x1="75"
-				y1="100"
-				x2="150"
-				y2="0"
-			/>
+			<line class="stroke-color-border-muted" stroke-width="14" x1="0" y1="0" x2="75" y2="100" />
+			<line class="stroke-color-border-muted" stroke-width="14" x1="75" y1="100" x2="150" y2="0" />
 			<polygon points="0,0 75,100 150,0" />
 		</svg>
 	{/if}

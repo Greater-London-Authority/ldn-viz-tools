@@ -4,7 +4,7 @@
 	import { scaleDiverging, scaleSequential } from 'd3-scale';
 	import { interpolatePiYG, interpolateViridis } from 'd3-scale-chromatic';
 	import { writable } from 'svelte/store';
-	import { LayerControlGroupStory } from '../../../../ui/src/lib/layerControl/LayerControlGroup.stories.svelte';
+	import LayerControlGroupStory from '../../../../ui/src/lib/layerControl/LayerControlGroup.stories.svelte';
 	import Map from '../map/Map.svelte';
 	import type { MapLibreStore } from '../map/types';
 	import { appendOSKeyToUrl } from '../map/util';
@@ -96,7 +96,7 @@
 						{#key width}
 							{#if layers[0].visible}
 								<div class="flex flex-col gap-1">
-									<p class="text-sm font-semibold text-color-text-primary">{layers[0].label}</p>
+									<p class="text-color-text text-sm font-semibold">{layers[0].label}</p>
 									<ColorLegend
 										color={layers[0][currentThemeMode!]}
 										title={layers[0].title}
@@ -157,7 +157,7 @@
 						{#key width}
 							{#if layers[0].visible}
 								<div class="flex flex-col gap-1">
-									<p class="text-sm font-semibold text-color-text-primary">{layers[0].label}</p>
+									<p class="text-color-text text-sm font-semibold">{layers[0].label}</p>
 									<ColorLegend
 										color={layers[0][currentThemeMode!]}
 										title={layers[0].title}
@@ -166,7 +166,7 @@
 								</div>
 							{/if}
 						{/key}
-						<div class="border-t border-color-ui-border-primary pt-3 text-sm">
+						<div class="border-color-border border-t pt-3 text-sm">
 							<Input type="range" label="Opacity" name="opacity" />
 						</div>
 					</MapLegend>
@@ -191,7 +191,7 @@
 							{#each layers as layer (layer.id)}
 								{#if layer.visible}
 									<div class="flex flex-col gap-1">
-										<p class="text-sm font-semibold text-color-text-primary">{layer.label}</p>
+										<p class="text-color-text text-sm font-semibold">{layer.label}</p>
 										<ColorLegend color={layer[currentThemeMode!]} title={layer.title} {width} />
 									</div>
 								{/if}
@@ -256,13 +256,13 @@
 								{#each layers as layer (layer.id)}
 									{#if layer.visible}
 										<div class="flex flex-col gap-1">
-											<p class="text-sm font-semibold text-color-text-primary">{layer.label}</p>
+											<p class="text-color-text text-sm font-semibold">{layer.label}</p>
 											<ColorLegend color={layer[currentThemeMode!]} title={layer.title} {width} />
 										</div>
 									{/if}
 								{/each}
 							{:else}
-								<p class="text-sm text-color-text-primary">Please choose a layer.</p>
+								<p class="text-color-text text-sm">Please choose a layer.</p>
 							{/if}
 						{/key}
 					</MapLegend>
