@@ -112,7 +112,7 @@ Following our naming convention ensures that each token is clearly defined and e
 
 #### Category
 
-Tokens categories are **color**, **spacing** and **typography**
+Token categories are **color**, **spacing** and **typography**
 
 | Category     | Detail                                                                                                                                                            |
 | :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -134,27 +134,27 @@ Many color tokens are defined with an **inverse** counterpart that is used to in
 
 #### Concept
 
-The token **concept** guides us in how to apply the token. For color tokens values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
+The token **concept** guides us in how to apply the token. For color tokens, values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
 
 ##### Conceptual model of application ui layering
 
 ![An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.svg)
 
-| Concept       | Detail                                                                   |
-| :------------ | :----------------------------------------------------------------------- |
-| `static`      | Colors that stay the same regardless of mode                             |
-| `canvas`      | The base layer of an application                                         |
-| `container`   | Containers are organisational elements that form page structure          |
-| `surface`     | Information layer that conceptually sitting in front of the canvas layer |
-| `interactive` | Objects on the information layer that afford user interaction            |
-| `text`        | Text elements                                                            |
-| `label`       | Specific text used for labelling                                         |
-| `icon`        | Icons                                                                    |
-| `border`      | Borders around surfaces and containers                                   |
+| Concept       | Detail                                                          |
+| :------------ | :-------------------------------------------------------------- |
+| `static`      | Colors that stay the same regardless of mode                    |
+| `canvas`      | The base layer of an application                                |
+| `container`   | Containers are organisational elements that form page structure |
+| `surface`     | Information layer that sits in front of the canvas layer        |
+| `interactive` | Objects on the information layer that are interactive           |
+| `text`        | Text elements                                                   |
+| `label`       | Specific text used for labelling                                |
+| `icon`        | Icons                                                           |
+| `border`      | Borders around surfaces and containers                          |
 
 ##### Component-type exceptions
 
-The system eschews component tier tokens with the exception of tokens for charts and geographic features. Rather than extending the naming hierarchy these tokens are group-prefixed at the 'concept' level.
+The system deliberately avoids component tier tokens with the exception of tokens for charts and geographic features. Rather than extending the naming hierarchy these tokens are group-prefixed at the 'concept' level.
 
 | Concept         | Detail                           |
 | :-------------- | :------------------------------- |
@@ -166,7 +166,7 @@ The system eschews component tier tokens with the exception of tokens for charts
 | Concept           | Detail                                                         |
 | :---------------- | :------------------------------------------------------------- |
 | `geo-feature`     | A geographic feature                                           |
-| `geo-interactive` | Geographic elements that afford user interaction               |
+| `geo-interactive` | Geographic elements that are interactive                       |
 | `geo-label`       | Label elements for use with maps and geographic visualisations |
 | `geo-annotation`  | Annotations over maps and geographic visualisations            |
 
@@ -216,14 +216,15 @@ Interactive elements have states such as **hover**, **active**, **focus**, **dis
 | `off`      | Represents the "inactive" or "disabled" state of a binary toggle or switch.                                             |
 | `dragged`  | Occurs when a user clicks and moves an element from its original position to another.                                   |
 
-### Spacing Tokens
+---
 
-`category === spacing`
+### Spacing Tokens
 
 The structure of our spacing tokens is relatively simple. They run from **xxs, xs, sm, md, lg...** though to **8xl**
 
-Spacing tokens are available in `rem` units. Each spacing token has a typographic spacing equivalent in `em`.
-`rem` (root em) scales based on the root `<html>` font size. `em` scales based on the element's parent font size.
+Spacing tokens define the spacing between and around elements of the application interface. Spacing tokens are available in `rem` units, based on the root `<html>` font size.
+
+Each spacing token has a typographic spacing equivalent in `em` units based on the element's parent font size. Typographic tokens are used to give blocks of text the correct vertical rhythm.
 
 ```css
 --spacing-md: 1rem;
@@ -232,9 +233,11 @@ Spacing tokens are available in `rem` units. Each spacing token has a typographi
 
 [Read more about relative units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units#lengths)
 
-### Typography tokens
+[Read the documentation on application layout](/design-system/application-design/layout)
 
-`category === typography`
+---
+
+### Typography tokens
 
 #### Role
 
@@ -264,6 +267,8 @@ Certain roles have an emphasis scale that can be applied.
 | `xs`     | Extra small |
 
 [Read the chapter dedicated to typography for more details](/design-system/foundations/typography).
+
+---
 
 ## Practice
 
