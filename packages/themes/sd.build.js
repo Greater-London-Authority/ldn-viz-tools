@@ -230,9 +230,12 @@ StyleDictionary.registerFilter({
   CUSTOM TRANSFORMS
 */
 
-//remove 'light' or 'dark' mode key from name
+//remove 'light' or 'dark' mode key from name and swicth mode to color
+// Before: mode-dark-text-muted - not humarn readable token name for css
+// After: color-text-muted - correct token naming schema for consumption
+
 const transformModeName = (path) => {
-	return path.filter((_, i) => i !== 1).join('-');
+	return transformString(path.join('-'), 'color', /.*(mode-(dark|light))/);
 };
 
 StyleDictionary.registerTransform({
