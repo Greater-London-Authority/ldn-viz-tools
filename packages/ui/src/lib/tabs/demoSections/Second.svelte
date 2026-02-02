@@ -1,4 +1,4 @@
-<div class="dark:prose-invert prose px-4 py-6">
+<div class="prose px-4 py-6">
 	<h3>Details of chargers</h3>
 	<p class="lead">This is demo content, showing how to construct tabs.</p>
 	<p>
@@ -11,5 +11,5 @@
 	</p>
 </div>
 <div class="bg-color-data-primary p-8">
-	<p class="text-xl text-color-static-white">This is not prose</p>
+	<p class="text-color-static-white text-xl">This is not prose</p>
 </div>

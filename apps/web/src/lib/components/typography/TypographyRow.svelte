@@ -8,9 +8,9 @@
 	let { text, usage, class: classes }: item = $props();
 </script>
 
-<div class="w-full border-b border-color-ui-border-secondary py-4">
+<div class="border-color-border-muted w-full border-b py-4">
 	<div class="grid grid-cols-2 items-end">
 		<div class={classes}>{text}</div>
-		<div class="text-color-text-secondary">{usage}</div>
+		<div class="text-color-text-muted">{usage}</div>
 	</div>
 </div>

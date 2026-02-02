@@ -40,6 +40,6 @@
 	bind:selectedOptions
 	ariaLabel="Select transport methods"
 />
-<p class="mt-4 text-color-text-secondary">
+<p class="text-color-text-muted mt-4">
 	selectedOptions: {JSON.stringify(selectedOptions)}
 </p>

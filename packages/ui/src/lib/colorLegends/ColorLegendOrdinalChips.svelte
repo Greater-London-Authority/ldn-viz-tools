@@ -37,16 +37,16 @@
 
 <div class="flex flex-col">
 	{#if title}
-		<span class="mb-1 font-semibold text-color-input-label">{title}</span>
+		<span class="text-color-label mb-1 font-semibold">{title}</span>
 	{/if}
 
 	<div class={orientation === 'horizontal' ? 'flex flex-wrap gap-2' : 'flex flex-col'}>
 		{#each scale.domain() as d}
-			<div class="flex items-center text-color-input-label">
+			<div class="text-color-label flex items-center">
 				<div
 					class={classNames(
 						'mr-1 h-4 w-4 flex-none',
-						d === highlightedValue ? 'ring-2 ring-color-input-border-focussed ring-offset-2' : ''
+						d === highlightedValue ? 'ring-color-interactive-focus ring-2 ring-offset-2' : ''
 					)}
 					style:background-color={scale(d) as string}
 				></div>

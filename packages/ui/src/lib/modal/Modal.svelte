@@ -82,7 +82,7 @@
 
 	const modalClass = $derived(
 		classNames(
-			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container shadow-xl pointer-events-auto',
 			widthClasses[width]
 		)
 	);
@@ -112,7 +112,7 @@
 		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
 			<Dialog.Content {...contentProps} class={modalClass}>
 				<div
-					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text-primary ${headerTheme}`}
+					class={`border-color-static-brand bg-color-container-level-1 text-color-text relative flex items-center justify-between border-l-[5px] p-3 pr-4 ${headerTheme}`}
 				>
 					<Dialog.Title class="font-medium">
 						{@render title?.()}

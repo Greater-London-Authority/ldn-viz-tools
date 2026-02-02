@@ -1,6 +1,7 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import Table from './Table.svelte';
 
 	const { Story } = defineMeta({
@@ -131,7 +132,8 @@
 					formatString: ',.0f',
 					alignText: 'right',
 					extent: [-140, +140],
-
+					positiveColor: theme.tokenNameToValue('surface.positive'),
+					negativeColor: theme.tokenNameToValue('surface.negative'),
 					axisRenderer: 'BarDivergingAxis',
 					numTicks: 5
 				}

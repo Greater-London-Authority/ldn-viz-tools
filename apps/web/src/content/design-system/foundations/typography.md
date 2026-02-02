@@ -23,18 +23,18 @@ navLabel: Typography
         ]
 
     const typographyExamplesProduct = [
-        {text: 'Headline', usage: '', class: 'headline'},
-        {text: 'Subhead', usage: 'Text under headline', class: 'subhead'},
-        {text: 'Title large', usage: '', class: 'title-lg'},
+        {text: 'Headline', usage: "To create immediate impact and guide the reader's eye.", class: 'headline'},
+        {text: 'Subhead', usage: 'To immediately follow a headline and provide further clarification', class: 'subhead'},
+        {text: 'Title large', usage: 'To provide waymarkers, define hierarchy and impart information throughout an application', class: 'title-lg'},
         {text: 'Title medium', usage: '', class: 'title-md'},
         {text: 'Title small', usage: '', class: 'title-sm'},
         {text: 'Title extra small', usage: '', class: 'title-xs'},
-        {text: 'Subtitle', usage: 'Text under a title (medium or large only)', class: 'subtitle'},
+        {text: 'Subtitle', usage: 'To immediately follow a title element and provide further clarification (medium or large title only)', class: 'subtitle'},
         {text: 'Body large', usage: '', class: 'body-lg'},
-        {text: 'Body medium', usage: '', class: 'body-md'},
+        {text: 'Body medium', usage: 'Passages of copy and bodies of text', class: 'body-md'},
         {text: 'Body small', usage: '', class: 'body-sm'},
         {text: 'Body extra small', usage: '', class: 'body-xs'},
-        {text: 'Label large', usage: '', class: 'label-lg'},
+        {text: 'Label large', usage: 'Used for single-line scenarios, and labelling discrete elements of the ui', class: 'label-lg'},
         {text: 'Label medium', usage: '', class: 'label-md'},
         {text: 'Label small', usage: '', class: 'label-sm'},
         {text: 'Label extra small', usage: '', class: 'label-xs'},
@@ -48,9 +48,9 @@ navLabel: Typography
         {text: 'Title medium', usage: '', class: 'title-md'},
         {text: 'Title small', usage: '', class: 'title-sm'},
         {text: 'Title extra small', usage: '', class: 'title-xs'},
-        {text: 'Subtitle', usage: 'Text under a title (medium or large only)', class: 'subtitle'},
+        {text: 'Subtitle', usage: 'To immediately follow a title element and provide further clarification (medium or large title only)', class: 'subtitle'},
         {text: 'Body large', usage: '', class: 'body-lg'},
-        {text: 'Body medium', usage: '', class: 'body-md'},
+        {text: 'Body medium', usage: 'Passages of copy and bodies of text', class: 'body-md'},
         {text: 'Body small', usage: '', class: 'body-sm'},
         {text: 'Body extra small', usage: '', class: 'body-xs'},
         {text: 'Caption', usage: '', class: 'caption'}
@@ -69,7 +69,7 @@ We use the sans serif font Inter. Inter is a variable font family carefully craf
 
 ### Type Scale
 
-Our typescale runs from **xs** to **7xl**
+Our type-scale runs from **xs** to **7xl**
 
 <div class="not-prose my-8">
     <TypographyTable items={typeScaleExamples} />
@@ -77,7 +77,7 @@ Our typescale runs from **xs** to **7xl**
 
 ### Type Sets
 
-Unlike a type scale a type set includes font weights, line-heights and letterspacing, which have all been carefully selected.
+Unlike a type scale a type set includes font weights, line-heights and letter-spacing, which have all been carefully selected.
 
 LDNviz has two type sets. **Product** is used within products that are task focussed and information is more condensed. **Prose** is intended for long passages of text where space is less of a premium.
 
@@ -99,11 +99,11 @@ The different role groupings are:
 <tbody>
 <tr>
 <td><b>Display</b></td>
-<td>Large, impactful text for grabbing attention.</td>
+<td>Large, impactful text for grabbing attention</td>
 </tr>
 <tr>
 <td><b>Headline</b></td>
-<td>To create immediate impact and guide the reader's eye.</td>
+<td>To create immediate impact and guide the reader's eye</td>
 </tr>
 <tr>
 <td><b>Subhead</b></td>
@@ -111,7 +111,7 @@ The different role groupings are:
 </tr>
 <tr>
 <td><b>Title</b></td>
-<td>To provide waymarkers, define hierachy and impart information thoughout an application</td>
+<td>To provide waymarkers, define hierarchy and impart information throughout an application</td>
 </tr>
 <tr>
 <td><b>Subtitle</b></td>
@@ -119,11 +119,11 @@ The different role groupings are:
 </tr>
 <tr>
 <td><b>Body</b></td>
-<td>Passages of copy and bodies of text.</td>
+<td>Passages of copy and bodies of text</td>
 </tr>
 <tr>
 <td><b>Label</b></td>
-<td>Used for single-line scenarios, and labelling discrete elements of the ui.</td>
+<td>Used for single-line scenarios, and labelling discrete elements of the ui</td>
 </tr>
 </tbody>
 </table>
@@ -187,7 +187,9 @@ The breakpoints are:
 
 You can test the elements on this page by resizing your browser or emulating a device in your browsers dev tools.
 
-## Usage
+## Practice
+
+**nb. This guidance applies to projects using `@ldn-viz/themes` from npm in a project using tailwind. The convenience classes outlined here are currently not exported, though the css variables required are.**
 
 Type sets are defined with the corresponding class on a parent element:
 
@@ -223,7 +225,7 @@ The <code>prose</code> class provides a semantic typographic context. Elements i
 
 </div>
 
-<div class="prose responsive border border-secondary p-4 my-4">
+<div class="prose responsive border border-muted p-4 my-4">
 	<h2>Title Large</h2>
 	<p>Body copy</p>
 	<h2 class="not-prose">context escaped</h2>
@@ -243,7 +245,7 @@ The <code>product</code> class does not apply semantic styles. Elements inside a
 
 </div>
 
-<div class="not-prose product responsive border border-secondary p-4 my-4">
+<div class="not-prose product responsive border border-muted p-4 my-4">
 	<h2>Title Large?</h2>
 	<p class="body-md">Body copy</p>
 	<h2 class="title-lg">Title Large</h2>
@@ -256,15 +258,15 @@ In either context utility classes still work:
 ```html
 <div class="product responsive">
 	<p class="body-md font-bold">Body copy</p>
-	<h2 class="title-lg text-color-ui-negative">Title Large</h2>
+	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
 </div>
 ```
 
 </div>
 
-<div class="not-prose product responsive border border-secondary p-4 my-4">
+<div class="not-prose product responsive border border-muted p-4 my-4">
 	<p class="body-md font-bold">Body copy</p>
-	<h2 class="title-lg text-color-ui-negative">Title Large</h2>
+	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
 </div>
 
 ### Titling pairs
@@ -282,7 +284,7 @@ The type sets contain elements designed to work together such as <code>.headline
 
 </div>
 
-<div class="border border-secondary p-4 my-4">
+<div class="border border-muted p-4 my-4">
     <h2 class="title-lg format">Title</h2>
     <p class="subtitle">Subtitle</p>
 </div>
@@ -305,7 +307,7 @@ Because of the semantic context it creates you may wish to escape the <code>.pro
 
 </div>
 
-<div class="border border-secondary p-4 my-4">
+<div class="border border-muted p-4 my-4">
 	<h3>Title</h3>
 	<div class="not-prose">
 		<h3>I have escaped</h3>

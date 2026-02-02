@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Footer from './Footer.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
+	import Footer from './Footer.svelte';
 
 	/**
 	 * The `<Footer>` component appears at the bottom of a page.
@@ -50,7 +50,7 @@
 </Story>
 
 {#snippet footerCookieMenu()}
-	<div class="text-color-text-primary">This would be a custom text or menu</div>
+	<div class="text-color-text">This would be a custom text or menu</div>
 {/snippet}
 
 <Story name="With Custom Cookie menu">

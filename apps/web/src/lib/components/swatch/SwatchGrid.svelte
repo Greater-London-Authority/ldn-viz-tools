@@ -2,7 +2,13 @@
 	import { classNames } from '@ldn-viz/ui';
 	import Swatch from './Swatch.svelte';
 
-	let { tokenData, title, size = 'md' } = $props();
+	interface SwatchGridProps {
+		tokenData: { [key: string]: any };
+		title: string;
+		size: keyof typeof sizeClasses;
+	}
+
+	let { tokenData, title, size = 'md' }: SwatchGridProps = $props();
 
 	const sizeClasses = {
 		// xs: 'grid grid-cols-6 gap-1 pb-4 pt-2 md:grid-cols-9 xl:grid-cols-11',
@@ -17,11 +23,11 @@
 </script>
 
 {#if title}
-	<h3 class={size === 'xs' ? 'title-xs' : 'title-sm'}>{title}</h3>
+	<h3 class={`${size === 'xs' ? 'title-xs' : 'title-sm'} mb-typography-spacing-xs`}>{title}</h3>
 {/if}
 
 <div class={gridClass}>
-	{#each tokenData as token}
+	{#each Object.values(tokenData) as token}
 		<Swatch {...token} {size} content={token.value} />
 	{/each}
 </div>

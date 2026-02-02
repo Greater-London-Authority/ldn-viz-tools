@@ -22,7 +22,7 @@
 
 <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
 	<div class="mx-2 max-w-md bg-white shadow-lg lg:w-[470px]">
-		<div class="dark relative bg-color-container-level-1 p-4 text-color-text-primary">
+		<div class="bg-color-container-level-1 text-color-text dark relative p-4">
 			<p class="text-lg font-medium">{config.app_name}: Log In</p>
 		</div>
 
