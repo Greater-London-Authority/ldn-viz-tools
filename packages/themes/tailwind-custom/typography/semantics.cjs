@@ -78,21 +78,21 @@ module.exports = {
 			marginBottom: 'var(--typography-spacing-sm)'
 		},
 		':where(a):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--mode-interactive-primary)',
+			color: 'var(--color-interactive-primary)',
 			textDecoration: 'underline',
 			textUnderlineOffset: '2px',
-			textDecorationColor: 'var(--mode-interactive-primary)',
+			textDecorationColor: 'var(--color-interactive-primary)',
 			textDecorationThickness: '1px'
 		},
 		':where(a:hover):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--mode-interactive-primary-hover)',
+			color: 'var(--color-interactive-primary-hover)',
 			textDecoration: 'none',
 			textUnderlineOffset: '2px',
-			textDecorationColor: 'var(--mode-interactive-primary)',
+			textDecorationColor: 'var(--color-interactive-primary)',
 			textDecorationThickness: '1px'
 		},
 		':where(hr):not(:where(.not-prose, .not-prose *))': {
-			borderColor: 'var(--mode-border-muted)',
+			borderColor: 'var(--color-border-muted)',
 			borderTopWidth: '1px',
 			marginTop: 'var(--typography-spacing-5xl)',
 			marginBottom: 'var(--typography-spacing-5xl)'
@@ -112,7 +112,7 @@ module.exports = {
 			marginBottom: 0
 		},
 		':where(figcaption):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--mode-text-muted)',
+			color: 'var(--color-text-muted)',
 			marginTop: 'var(--typography-spacing-sm)'
 		},
 		// Lists
@@ -127,7 +127,7 @@ module.exports = {
 			paddingLeft: 'var(--typography-spacing-xs)'
 		},
 		':where(ul li::marker, ol li::marker):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--mode-text-muted)'
+			color: 'var(--color-text-muted)'
 		},
 		':where(ul ul, ul ol, ol ul, ol ol):not(:where(.not-prose, .not-prose *))': {
 			marginTop: 'var(--typography-spacing-sm)',
@@ -135,9 +135,9 @@ module.exports = {
 		},
 		// Blockquotes
 		':where(blockquote):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--mode-text-muted)',
+			color: 'var(--color-text-muted)',
 			borderInlineStartWidth: 'var(--spacing-xxs)',
-			borderInlineStartColor: 'var(--global-color-static-brand)',
+			borderInlineStartColor: 'var(--color-static-brand)',
 			marginTop: 'var(--typography-spacing-lg)',
 			marginBottom: 'var(--typography-spacing-lg)',
 			paddingInlineStart: 'var(--typography-spacing-md)'
@@ -165,17 +165,17 @@ module.exports = {
 		},
 		':where(thead):not(:where(.not-prose, .not-prose *))': {
 			borderBottomWidth: '1px',
-			borderBottomColor: 'var(--mode-border)'
+			borderBottomColor: 'var(--color-border)'
 		},
 		':where(thead th):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--mode-text)',
+			color: 'var(--color-text)',
 			fontWeight: 600,
 			verticalAlign: 'bottom',
 			padding: 'var(--typography-spacing-xs)'
 		},
 		':where(tbody tr):not(:where(.not-prose, .not-prose *))': {
 			borderBottomWidth: '1px',
-			borderBottomColor: 'var(--mode-border-muted)'
+			borderBottomColor: 'var(--color-border-muted)'
 		},
 		':where(tbody tr:last-child):not(:where(.not-prose, .not-prose *))': { borderBottomWidth: 0 },
 		':where(tbody td, tfoot td):not(:where(.not-prose, .not-prose *))': {
@@ -184,12 +184,12 @@ module.exports = {
 		},
 		':where(tfoot):not(:where(.not-prose, .not-prose *))': {
 			borderTopWidth: '1px',
-			borderTopColor: 'var(--mode-border)'
+			borderTopColor: 'var(--color-border)'
 		},
 		// Code
 		':where(code):not(:where(.not-prose, .not-prose *, [data-rehype-pretty-code-figure] *))': {
 			fontFamily: 'monospace',
-			padding: 'var(--spacing-xxs-em) var(--typography-spacing-xs)',
+			padding: 'var(--typography-spacing-xxs) var(--typography-spacing-xs)',
 			fontSize: 'var(--body-xs-font-size)',
 			backgroundColor: 'rgba(229, 229, 229, 0.35)',
 			marginBottom: 'var(--typography-spacing-md)'

@@ -9,4 +9,19 @@
 @tailwind utilities;
 
 @layer base {
+	code[data-theme='github-dark-dimmed'] {
+		display: flex !important;
+		flex-direction: column;
+	}
+
+	[data-rehype-pretty-code-figure] {
+		@apply !my-typography-spacing-sm;
+		@apply border border-color-border-muted;
+	}
+
+	[data-theme='github-dark-dimmed'] {
+		@apply !px-2;
+		background-color: #13181cff !important;
+		color: var(--color-static-white) !important;
+	}
 }

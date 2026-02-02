@@ -4,42 +4,42 @@ const svgToDataUri = require('mini-svg-data-uri');
 module.exports = plugin(function ({ addComponents }) {
 	addComponents({
 		'.form-input, .form-textarea, .form-select, .form-multiselect, .form-checkbox, .form-radio': {
-			color: 'var(--mode-text)',
-			'border-color': 'var(--mode-border-muted)',
-			'background-color': 'var(--mode-surface)',
+			color: 'var(--color-text)',
+			'border-color': 'var(--color-border-muted)',
+			'background-color': 'var(--color-surface)',
 
 			'&:disabled': {
-				'background-color': 'var(--mode-interactive-disabled-muted)'
+				'background-color': 'var(--color-interactive-disabled-muted)'
 			}
 		},
 		'.form-input, .form-textarea, .form-select, .form-multiselect': {
 			'&:focus': {
-				'--tw-ring-color': 'var(--mode-interactive-focus)',
-				'border-color': 'var(--mode-interactive-focus)'
+				'--tw-ring-color': 'var(--color-interactive-focus)',
+				'border-color': 'var(--color-interactive-focus)'
 			}
 		},
 		'.form-input::placeholder, .form-textarea::placeholder': {
-			color: 'var(--mode-text-wash)'
+			color: 'var(--color-text-wash)'
 		},
 		'.form-checkbox, .form-radio': {
 			'border-width': '2px',
 			width: '1.25em',
 			height: '1.25em',
-			color: 'var(--mode-interactive-primary)',
+			color: 'var(--color-interactive-primary)',
 			'&:hover': {
-				'border-color': 'var(--mode-interactive-primary-hover)'
+				'border-color': 'var(--color-interactive-primary-hover)'
 			},
 			'&:focus': {
-				'--tw-ring-color': 'var(--mode-interactive-focus)',
-				'--tw-ring-offset-color': 'var(--mode-surface)'
+				'--tw-ring-color': 'var(--color-interactive-focus)',
+				'--tw-ring-offset-color': 'var(--color-surface)'
 			},
 			'&:disabled': {
-				'border-color': 'var(--mode-interactive-disabled)',
-				'background-color': 'var(--mode-interactive-disabled-muted)'
+				'border-color': 'var(--color-interactive-disabled)',
+				'background-color': 'var(--color-interactive-disabled-muted)'
 			},
 			'&:disabled:hover': {
-				'border-color': 'var(--mode-interactive-disabled)',
-				'background-color': 'var(--mode-interactive-disabled-muted)'
+				'border-color': 'var(--color-interactive-disabled)',
+				'background-color': 'var(--color-interactive-disabled-muted)'
 			}
 		},
 		'.form-radio': {
@@ -47,30 +47,30 @@ module.exports = plugin(function ({ addComponents }) {
 			'place-content': 'center',
 			'&:checked': {
 				'background-image': 'none',
-				color: 'var(--mode-surface)',
-				'background-color': 'var(--mode-surface)',
-				'border-color': 'var(--mode-interactive-selected)'
+				color: 'var(--color-surface)',
+				'background-color': 'var(--color-surface)',
+				'border-color': 'var(--color-interactive-selected)'
 			},
 			'&:checked:hover': {
-				'background-color': 'var(--mode-interactive-primary-muted-hover)',
-				'border-color': 'var(--mode-interactive-selected)'
+				'background-color': 'var(--color-interactive-primary-muted-hover)',
+				'border-color': 'var(--color-interactive-selected)'
 			},
 			'&:checked:focus': {
-				'background-color': 'var(--mode-surface)',
-				'border-color': 'var(--mode-interactive-focus)'
+				'background-color': 'var(--color-surface)',
+				'border-color': 'var(--color-interactive-focus)'
 			}
 		},
 		'.form-label': {
-			color: 'var(--mode-label)',
+			color: 'var(--color-label)',
 			'font-weight': 500
 		},
 		'.form-select': {
 			'background-image': `url("${svgToDataUri(
-				`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${'var(--mode-text-muted)'}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
+				`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${'var(--color-text-muted)'}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
 			)}")`
 		},
 		'.form-range': {
-			'accent-color': 'var(--mode-interactive-primary)'
+			'accent-color': 'var(--color-interactive-primary)'
 		}
 	});
 });

@@ -190,43 +190,43 @@
 		.form-select.svelecte {
 			/** Custom css varibales **/
 			--sv-min-height: 42px;
-			--sv-bg: var(--mode-surface);
-			--sv-color: var(--mode-text);
-			--sv-disabled-bg: var(--mode-interactive-disabled-muted);
-			--sv-border: var(--mode-border-muted) 0px solid;
+			--sv-bg: var(--color-surface);
+			--sv-color: var(--color-text);
+			--sv-disabled-bg: var(--color-interactive-disabled-muted);
+			--sv-border: var(--color-border-muted) 0px solid;
 			--sv-border-radius: 0px;
 			--sv-general-padding: var(--spacing-xs) var(--spacing-sm);
 			--sv-control-bg: var(--sv-bg);
 
 			--sv-item-wrap-padding: var(--spacing-sm) var(--spacing-xs);
-			--sv-item-selected-bg: var(--mode-interactive-primary-muted);
+			--sv-item-selected-bg: var(--color-interactive-primary-muted);
 			--sv-item-btn-color: #000;
 			--sv-item-btn-color-hover: #777;
 			--sv-item-btn-bg: #efefef;
 			--sv-item-btn-bg-hover: #ddd;
 
-			--sv-icon-color: var(--mode-text-muted);
+			--sv-icon-color: var(--color-text-muted);
 			--sv-icon-color-hover: #777;
 			--sv-icon-bg: transparent;
 			--sv-icon-size: 20px;
-			--sv-separator-bg: var(--mode-border-muted);
+			--sv-separator-bg: var(--color-border-muted);
 			--sv-btn-border: 0;
-			--sv-placeholder-color: var(--mode-text-wash);
+			--sv-placeholder-color: var(--color-text-wash);
 
 			--sv-dropdown-bg: var(--sv-bg);
 			--sv-dropdown-offset: var(--spacing-xs);
-			--sv-dropdown-border: var(--mode-border-muted) 1px solid;
+			--sv-dropdown-border: var(--color-border-muted) 1px solid;
 			--sv-dropdown-width: auto;
 			--sv-dropdown-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 			--sv-dropdown-height: 320px;
 
-			--sv-dropdown-active-bg: var(--mode-interactive-primary-muted);
-			--sv-dropdown-selected-bg: var(--mode-interactive-primary-muted-active);
+			--sv-dropdown-active-bg: var(--color-interactive-primary-muted);
+			--sv-dropdown-selected-bg: var(--color-interactive-primary-muted-active);
 
-			--sv-create-kbd-border: var(--mode-border-muted) 1px solid;
-			--sv-create-kbd-bg: var(--mode-surface);
-			--sv-create-disabled-bg: var(--mode-interactive-disabled-muted);
-			--sv-loader-border: var(--mode-border-muted) 2px solid;
+			--sv-create-kbd-border: var(--color-border-muted) 1px solid;
+			--sv-create-kbd-bg: var(--color-surface);
+			--sv-create-disabled-bg: var(--color-interactive-disabled-muted);
+			--sv-loader-border: var(--color-border-muted) 2px solid;
 		}
 
 		/* Reset allows use of form-select class elsehwere if needed */
@@ -236,19 +236,19 @@
 
 		/* Override svelecte */
 		.form-select.svelecte .sv-item--wrap.in-dropdown:hover {
-			background-color: var(--mode-interactive-primary-muted);
+			background-color: var(--color-interactive-primary-muted);
 		}
 
 		/* Stop active and selected having same color */
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected,
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected:hover {
-			background-color: var(--mode-interactive-selected);
+			background-color: var(--color-interactive-selected);
 			color: #fff;
 		}
 
 		.form-select.svelecte .in-dropdown.is-selected,
 		.form-select.svelecte .in-dropdown.is-selected:hover {
-			background-color: var(--mode-interactive-selected);
+			background-color: var(--color-interactive-selected);
 			color: #fff;
 		}
 
@@ -263,39 +263,39 @@
 
 		/* multiple selected items */
 		.form-select.svelecte .sv-item--container > .sv-item--wrap.is-multi {
-			border: var(--mode-border-muted) 1px solid;
+			border: var(--color-border-muted) 1px solid;
 			border-right: none;
 			padding-right: var(--spacing-xs);
 		}
 
 		.form-select.svelecte .sv-item--container .sv-item--btn {
-			border: var(--mode-border-muted) 1px solid;
+			border: var(--color-border-muted) 1px solid;
 		}
 
 		.form-select.svelecte .sv-item--wrap.is-multi {
-			background-color: var(--mode-surface);
+			background-color: var(--color-surface);
 		}
 
 		/* States */
 		.form-select.svelecte.has-error {
-			border: var(--mode-interactive-error) 1px solid;
+			border: var(--color-interactive-error) 1px solid;
 		}
 
 		.form-select.svelecte:hover {
-			border: var(--mode-interactive-primary-hover) 1px solid;
+			border: var(--color-interactive-primary-hover) 1px solid;
 		}
 
 		.form-select.svelecte:hover {
-			border: var(--mode-interactive-focus) 1px solid;
+			border: var(--color-interactive-focus) 1px solid;
 		}
 
 		.form-select.svelecte.is-disabled {
-			--sv-placeholder-color: var(--mode-interactive-disabled);
+			--sv-placeholder-color: var(--color-interactive-disabled);
 		}
 
 		.form-select.svelecte.is-disabled:hover {
 			cursor: not-allowed;
-			border: var(--mode-border-muted) 1px solid;
+			border: var(--color-border-muted) 1px solid;
 		}
 	</style>
 {/if}

@@ -83,7 +83,7 @@
 	};
 
 	const sizeClasses = {
-		xs: '!p-0.5 space-y-1 w-[82px]',
+		xs: '!p-0.5 space-y-1 w-[74px]',
 		sm: '!p-1 space-y-1',
 		md: '!p-2 space-y-2',
 		lg: '!p-2 space-y-2',
