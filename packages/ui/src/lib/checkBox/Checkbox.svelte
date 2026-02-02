@@ -40,7 +40,7 @@
 		{disabled}
 		{indeterminate}
 		style={color
-			? `--mode-interactive-primary: ${color}; --mode-border-muted: ${color}  --tw-ring-color: ${color};`
+			? `--color-interactive-primary: ${color}; --color-border-muted: ${color}  --tw-ring-color: ${color};`
 			: ''}
 		{...restProps}
 	/>

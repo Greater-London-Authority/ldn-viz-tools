@@ -71,7 +71,7 @@
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="text-color-interactive-disabled h-6 w-6 cursor-not-allowed"
+		class="h-6 w-6 cursor-not-allowed text-color-interactive-disabled"
 		aria-hidden="true"
 	/>
 {:else}
@@ -109,7 +109,7 @@
 					<div
 						class="grid grid-cols-2"
 						style:width={`${swatchWidth * 2}px`}
-						style:outline={patternName === fillType ? '2px solid var(--mode-surface-accent)' : ''}
+						style:outline={patternName === fillType ? '2px solid var(--color-surface-accent)' : ''}
 					>
 						{#each [1, 2, 3, 4] as _}
 							<button
