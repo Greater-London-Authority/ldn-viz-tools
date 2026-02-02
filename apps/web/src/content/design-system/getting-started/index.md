@@ -1,15 +1,11 @@
 ---
 title: Getting Started
-description: Welcome. Here you will find information about getting up and running with the system.
+description: Getting up and running with the system.
 section: Getting Started
 navLabel: Getting Started
 ---
 
-By working with the Design System you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.
-
-The design choices of the system have been made so that our work is consistently clean, clear, accessible and on brand. The components available though the @ldn-viz-tools packages are a distillation of this guidance.
-
-If you have questions or feedback please contact us. [city-data@london.gov.uk](city-data@london.gov.uk)
+By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.
 
 ## Installation
 
