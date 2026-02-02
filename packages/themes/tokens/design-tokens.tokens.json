@@ -3759,7 +3759,7 @@
       "surface-accent": {
         "description": "",
         "type": "color",
-        "value": "{semantic-color.dark-mode.palette.blue.500}"
+        "value": "{semantic-color.dark-mode.palette.blue.700}"
       },
       "border": {
         "description": "",
