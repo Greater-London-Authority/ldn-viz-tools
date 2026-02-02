@@ -4,13 +4,10 @@ description: Remove the noise, highlight the signal
 section: Data visualisation
 navLabel: Foundations
 ---
-<script>
-    import chartExample01 from '$lib/assets/images/data-viz-foundations-chart-example-01.png'
-</script>
 
 ## Principles
 
-A visualisation rarely *just shows* the raw data. It is a curated slice, summary or framing of data to tell a story. If your story is important, your charts should work hard to highlight and communicate it clearly.
+A visualisation rarely _just shows_ the raw data. It is a curated slice, summary or framing of data to tell a story. If your story is important, your charts should work hard to highlight and communicate it clearly.
 
 As noted by Andy Kirk, in his book “[Data Visualisation](https://visualisingdata.com/book/)”, one of Dieter Rams’ 10 Principles of good design is particularly pertinent to our field.
 
@@ -42,49 +39,110 @@ Whatever format of data visualisation you are producing, keep these fundamentals
 
 - **Bars & Columns always start at zero** - While line charts can (sometimes) have a non-zero baseline (if clearly indicated), a bar/column chart will radically distort the data if not started from zero.
 
-
 ## In Practice
 
 ### Highlight the insight
 
-- **Focus** – 
-Focus the value or date ranges of your chart to show data most clearly. But, only if doing so doesn’t remove important context.
-For example, a line chart’s y-axis doesn’t always have to start at zero (if clearly identified), as focusing on small value changes may be important.
-However, bars & columns must always start at zero, as they are used primarily to compare values. Starting your bars at zero will ensure comparisons are not misleading.
+- **Focus** –
+  Focus the value or date ranges of your chart to show data most clearly. But, only if doing so doesn’t remove important context.
+  For example, a line chart’s y-axis doesn’t always have to start at zero (if clearly identified), as focusing on small value changes may be important.
+  However, bars & columns must always start at zero, as they are used primarily to compare values. Starting your bars at zero will ensure comparisons are not misleading.
 
-- **Highlight** – 
-Highlight the important data with a consistent / thematic colour, and increasing the weight of the line.
+- **Highlight** –
+  Highlight the important data with a consistent / thematic colour, and increasing the weight of the line.
 
-- **Label directly** – 
-This can help draw attention to a key data point and simplifies reading by not having to translate the meaning of a colour legend. This can be harder to do in an automated / dashboard context.
+- **Label directly** –
+  This can help draw attention to a key data point and simplifies reading by not having to translate the meaning of a colour legend. This can be harder to do in an automated / dashboard context.
 
-- **Show key points on the axis** – 
-Highlight key dates or values on the axis. Consider only including the date ticks on your axis that are relevant to the chart.
+- **Show key points on the axis** –
+  Highlight key dates or values on the axis. Consider only including the date ticks on your axis that are relevant to the chart.
 
 - **Highlight important thresholds and contextual ranges** -
-Draw attention to important thresholds in the range of your data. E.g. placing a stronger gridline when your y-axis DOES start at zero. Or where you need to show data around a threshold.
+  Draw attention to important thresholds in the range of your data. E.g. placing a stronger gridline when your y-axis DOES start at zero. Or where you need to show data around a threshold.
 
 - **Only use dots & marks on important data points** - Don't mark every data point by default, instead focus on meaningful values, like:
-    - First, last, highest & lowest values
-    - Interesting events
-    - To illustrate inconsistent or sparse data points
+  - First, last, highest & lowest values
+  - Interesting events
+  - To illustrate inconsistent or sparse data points
 
 - **Say what you see** -
-Help the reader by titling the chart with a description of what you want them to see in the graphic. You could also use colour in your title text to connect to data points in your chart.
+  Help the reader by titling the chart with a description of what you want them to see in the graphic. You could also use colour in your title text to connect to data points in your chart.
 
-<img src={`${chartExample01}`} class="w-full" alt="An example chart, using the LDN City Data Design System, with a narrative title, labelled data points and highlighted date ranges.">
+![An example chart, using the LDN City Data Design System, with a narrative title, labelled data points and highlighted date ranges.](/data-viz-foundations-chart-example-01.png)
 
 ### Charts in context
+
 Charts rarely appear in isolation. They will often appear in a document or application surrounded by copy, and alongside other charts. So, consider the context your charts appear within.
 
 - **Maintain consistency** -
-Make consistent design decisions throughout your work, and certainly within any given presentation. For example, once your reader has learnt that “blue” might mean “London” don’t contradict that in your next chart.
+  Make consistent design decisions throughout your work, and certainly within any given presentation. For example, once your reader has learnt that “blue” might mean “London” don’t contradict that in your next chart.
 
 - **Consider chart comparison** -
-Ensure any two charts that are likely to be compared, use the same space for layout and use the same scale on the x & y axis.
+  Ensure any two charts that are likely to be compared, use the same space for layout and use the same scale on the x & y axis.
 
 - **Connect narrative to data** -
-Consider highlighting copy in your document or chart title with a colour or style that connects it to highlighted data in your chart.
+  Consider highlighting copy in your document or chart title with a colour or style that connects it to highlighted data in your chart.
 
 - **Logical and consistent text hierarchy across charts within your document** -
-Charts should feel part of the context they are displayed within, and so chart text sizes should be part of an overarching typographic hierarchy and should be consistent across your document or application.
+  Charts should feel part of the context they are displayed within, and so chart text sizes should be part of an overarching typographic hierarchy and should be consistent across your document or application.
+
+  | asdasd |
+  | ------ |
+  | hi     |
+
+<table style="width:100%;">
+<caption><p>Table 1: Core and supplementary indicators for London is a
+net zero carbon city</p></caption>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 34%" />
+</colgroup>
+<tbody>
+<tr>
+<td>London-level Indicator</td>
+<td>Type</td>
+<td>Year</td>
+<td>Value</td>
+<td>Source</td>
+</tr>
+<tr>
+<td>Greenhouse Gas emissions (MtCO2e)</td>
+<td>Core</td>
+<td>2022</td>
+<td>28.4</td>
+<td><a href="https://data.london.gov.uk/dataset/leggi">London Energy and
+Greenhouse Gas Inventory (LEGGI)</a>, GLA</td>
+</tr>
+<tr>
+<td>Percentage of domestic Energy Performance Certificates on the Energy
+Performance of Buildings Register with an A-C rating</td>
+<td>Supplementary</td>
+<td>Q1 2025</td>
+<td>64%</td>
+<td><a
+href="https://www.gov.uk/government/statistical-data-sets/live-tables-on-energy-performance-of-buildings-certificates#epcs-for-all-domestic-properties-existing-and-new-dwellings">Live
+tables on Energy Performance of Buildings Certificates, MHCLG</a></td>
+</tr>
+<tr>
+<td>Renewable electricity generated in London (GWh)</td>
+<td>Supplementary</td>
+<td>2023</td>
+<td>1,172</td>
+<td>Renewable <a
+href="https://www.gov.uk/government/statistics/regional-renewable-statistics">electricity</a>
+by local authority 2014 - 2023, DESNZ</td>
+</tr>
+<tr>
+<td>Percentage of collected household waste that is recycled</td>
+<td>Supplementary</td>
+<td>2023-24</td>
+<td>32.7%</td>
+<td><a
+href="https://webarchive.nationalarchives.gov.uk/ukgwa/20250102235615/https:/www.gov.uk/government/statistics/local-authority-collected-waste-management-annual-results">Local
+authority collected waste generation and management, DEFRA</a></td>
+</tr>
+</tbody>
+</table>
