@@ -1,5 +1,12 @@
 # ldn-viz-tools-ui
 
+## 21.1.0
+
+### Minor Changes
+
+- 1796b20: CHANGED: `Footer` does not render a div when it has no children.
+- 8d823f6: Added function to highlight current navMenu item
+
 ## 21.0.0
 
 ### Major Changes
