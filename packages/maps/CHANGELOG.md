@@ -1,5 +1,13 @@
 # ldn-viz-tools-maps
 
+## 10.0.0
+
+### Patch Changes
+
+- Updated dependencies [1796b20]
+- Updated dependencies [8d823f6]
+  - @ldn-viz/ui@21.1.0
+
 ## 9.0.0
 
 ### Major Changes
