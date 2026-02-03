@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Footer from './Footer.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
+	import Footer from './Footer.svelte';
 
 	/**
 	 * The `<Footer>` component appears at the bottom of a page.
@@ -40,6 +40,12 @@
 <Story name="With Custom logos">
 	{#snippet template()}
 		<Footer {logos}><p>Footer Children</p></Footer>
+	{/snippet}
+</Story>
+
+<Story name="Without children">
+	{#snippet template()}
+		<Footer {logos} />
 	{/snippet}
 </Story>
 
