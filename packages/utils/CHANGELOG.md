@@ -1,5 +1,17 @@
 # @ldn-viz/utils
 
+## 2.0.0
+
+### Major Changes
+
+- 09ba55a: CHANGED: update to use Svelte 5 and runes.
+
+### Patch Changes
+
+- Updated dependencies [a01e1a5]
+- Updated dependencies [09ba55a]
+  - @ldn-viz/themes@7.0.0
+
 ## 1.1.1-svelte5.0
 
 ### Patch Changes

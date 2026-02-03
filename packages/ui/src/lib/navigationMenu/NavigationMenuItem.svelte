@@ -18,7 +18,7 @@
 		isExpanded = $bindable(false),
 		onChange,
 		index,
-		selected
+		active
 	}: NavigationMenuItemProps = $props();
 
 	const navContext: Record<keyof NavigationMenuProps, any> = getContext('navContext');
@@ -27,11 +27,11 @@
 
 	let orientation = navContext.orientation as NavigationMenuProps['orientation'];
 
-	let childMenuId = title.toLowerCase() + '-menu';
+	let childMenuId = $derived(title.toLowerCase() + '-menu');
 
 	let hasChildren = $derived(children?.length > 0);
 
-	let isActive = $derived(selected.value === id);
+	let isActive = $derived(active?.value === id);
 
 	$effect(() => {
 		if ((isActive && hasChildren) || isAlwaysExpanded) {
@@ -88,16 +88,16 @@
 		)
 	);
 
-	const orientationClasses: Record<'vertical' | 'horizontal', string> = {
+	const orientationClasses: Record<'vertical' | 'horizontal', string> = $derived({
 		vertical: '',
 		horizontal: `w-full ${level === 1 ? 'absolute z-10' : 'relative'}`
-	};
+	});
 
-	const listClasses: Record<'vertical' | 'horizontal', string> = {
+	const listClasses: Record<'vertical' | 'horizontal', string> = $derived({
 		vertical:
 			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-ui-border-secondary') : '',
 		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
-	};
+	});
 
 	let childClasses = $derived(
 		classNames(
@@ -162,7 +162,7 @@
 					level={level + 1}
 					{onChange}
 					isExpanded={child.isExpanded}
-					{selected}
+					{active}
 				/>
 			{/each}
 		</ul>

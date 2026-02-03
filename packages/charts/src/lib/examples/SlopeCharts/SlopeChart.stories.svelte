@@ -5,6 +5,7 @@
 	import { yearlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
+	import { SvelteSet } from 'svelte/reactivity';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Slope Charts'
@@ -18,7 +19,7 @@
 			options,
 			(data, facets, { y: { value: Y }, text: { value: T } }, { y: sy }) => {
 				for (const index of facets) {
-					const unique = new Set();
+					const unique = new SvelteSet();
 					const nodes = Array.from(index, (i) => ({
 						fx: 0,
 						y: sy!(Y[i]),

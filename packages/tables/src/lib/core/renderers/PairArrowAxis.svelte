@@ -18,7 +18,7 @@
 		width = 100,
 		numTicks = 4,
 		textSize = 8,
-		...rest
+		..._rest
 	}: PairArrowAxisProps = $props();
 
 	let x: ScaleLinear<number, number> = $derived(
@@ -38,7 +38,7 @@
 	<g transform={`translate(0, ${topPadding})`}>
 		<line x1={0} x2={width} y1={0} y2={0} stroke="currentColor" />
 
-		{#each ticks as tick}
+		{#each ticks as tick (tick)}
 			<line x1={x(tick)} x2={x(tick)} y1={0} y2={-6} stroke="currentColor" />
 
 			<text

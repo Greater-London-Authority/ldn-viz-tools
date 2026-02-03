@@ -16,7 +16,7 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i}
+		{#each table.columnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
 				<div style:width={col.computedWidth + 'px'} class="was-td" role="cell">

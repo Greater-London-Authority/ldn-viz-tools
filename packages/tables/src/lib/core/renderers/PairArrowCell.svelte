@@ -16,7 +16,7 @@
 		positiveColor = 'blue',
 		negativeColor = 'red',
 		width = 100,
-		...rest
+		..._rest
 	}: PairArrowCellProps = $props();
 
 	const height = 30;

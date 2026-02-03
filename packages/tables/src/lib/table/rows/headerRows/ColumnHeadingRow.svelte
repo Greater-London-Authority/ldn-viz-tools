@@ -24,7 +24,7 @@
 
 <Scaffolding {table}>
 	{#snippet groupSizes()}
-		{#each table.groupingFields as colName}
+		{#each table.groupingFields as colName (colName)}
 			<div
 				class="was-th flex font-bold"
 				role="columnheader"
@@ -46,7 +46,7 @@
 	</div> -->
 
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i}
+		{#each table.columnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				{@const colIsSortable = allowSorting && col.sortable !== false}
 				{@const order = table.rowOrderSpec.find(

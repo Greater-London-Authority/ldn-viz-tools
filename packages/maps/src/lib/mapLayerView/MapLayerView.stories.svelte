@@ -3,7 +3,7 @@
 	import MapLayerView from './MapLayerView.svelte';
 
 	const loadHandlerArgType = {
-		type: 'function' as 'function',
+		type: 'function',
 		control: undefined,
 		table: {
 			type: {

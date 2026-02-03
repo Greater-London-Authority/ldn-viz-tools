@@ -47,6 +47,7 @@
 		onChange
 	}: Props = $props();
 
+	// svelte-ignore state_referenced_locally
 	selectedTabId = selectedTabId ? selectedTabId : tabs.length ? tabs[0].id : undefined;
 
 	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);

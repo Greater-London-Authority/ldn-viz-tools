@@ -11,7 +11,7 @@
 		value,
 		alignText = undefined,
 		formatString = '%Y-%m-%dT%H:%M:%S.%LZ',
-		...rest
+		..._rest
 	}: DateCellProps = $props();
 	let f = $derived(utcFormat(formatString ?? ''));
 

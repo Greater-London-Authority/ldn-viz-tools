@@ -13,7 +13,7 @@
 		extent = [0, 1],
 		showAllPoints = false,
 		width = 100,
-		...rest
+		..._rest
 	}: BoxPlotProps = $props();
 
 	const height = 30;

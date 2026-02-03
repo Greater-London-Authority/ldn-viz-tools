@@ -26,7 +26,7 @@ export type NavigationMenuProps = {
 	/**
 	 * Exposes active menu item to parent container for modification.
 	 */
-	selectedMenuItemId?: string;
+	activeMenuItemId?: string;
 };
 
 export interface NavigationMenuItemProps {
@@ -61,9 +61,9 @@ export interface NavigationMenuItemProps {
 	onChange?: any;
 
 	/**
-	 * Id of the curently selected item.
+	 * Id of the curently active item.
 	 */
-	selected: { value: string };
+	active?: { value: string };
 
 	/**
 	 * The indexed number of the menu item position

@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { classNames } from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
-	import FooterCookieMenu from './FooterCookieMenu.svelte';
 	import LogoCIU from '../logos/LogoCIU.svelte';
+	import FooterCookieMenu from './FooterCookieMenu.svelte';
 
 	interface Props {
 		/**
@@ -23,29 +24,34 @@
 		logos,
 		children
 	}: Props = $props();
+
+	const logoClasses = $derived(
+		classNames(
+			'flex bg-color-container-level-0 px-4 pb-4 text-color-text-primary sm:flex-row-reverse md:px-8',
+			!children ? 'pt-4' : ''
+		)
+	);
 </script>
 
 <footer class="{theme} mt-auto">
-	<div
-		class="border-t border-color-ui-border-secondary bg-color-container-level-0 px-4 py-4 text-color-text-primary sm:flex sm:space-x-4 md:px-8"
-	>
-		<!-- Contents of the footer -->
-		{@render children?.()}
-	</div>
+	{#if children}
+		<div
+			class="border-t border-color-ui-border-secondary bg-color-container-level-0 px-4 py-4 text-color-text-primary sm:flex sm:space-x-4 md:px-8"
+		>
+			<!-- Contents of the footer -->
+			{@render children?.()}
+		</div>
+	{/if}
 
 	{#if showCiuLogo}
-		<div
-			class="flex bg-color-container-level-0 px-4 pb-4 text-color-text-primary sm:flex-row-reverse md:px-8"
-		>
+		<div class={logoClasses}>
 			<div>
 				<p class="mb-1 text-xs tracking-wide">Designed and developed by</p>
 				<LogoCIU class="h-4" />
 			</div>
 		</div>
 	{:else if logos}
-		<div
-			class="flex bg-color-container-level-0 px-4 pb-4 text-color-text-primary sm:flex-row-reverse md:px-8"
-		>
+		<div class={logoClasses}>
 			{@render logos()}
 		</div>
 	{/if}

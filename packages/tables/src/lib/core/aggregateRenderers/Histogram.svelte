@@ -15,7 +15,7 @@
 		extent = [0, 1],
 		color = 'steelblue',
 		width = 100,
-		...rest
+		..._rest
 	}: HistogramProps = $props();
 
 	const height = 30;
@@ -49,7 +49,7 @@
 {#if bins}
 	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 		<g fill={color}>
-			{#each bins as d}
+			{#each bins as d (d[0])}
 				{#if d.x0 !== undefined && d.x1 !== undefined}
 					<rect
 						x={x(d.x0) + 1}

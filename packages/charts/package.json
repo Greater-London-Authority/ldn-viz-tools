@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/charts",
-	"version": "7.0.0-svelte5.9",
+	"version": "7.0.0",
 	"keywords": [
 		"svelte"
 	],

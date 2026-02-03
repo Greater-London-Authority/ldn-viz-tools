@@ -25,7 +25,7 @@
 <div class="was-tr flex items-stretch" role="row">
 	<!-- controls for expanding/collapsing groups -->
 	{#if groupControl}{@render groupControl()}{:else}
-		{#each table.groupingFields || [] as _field}
+		{#each table.groupingFields || [] as _field (_field)}
 			<div style:width={table.widths.groupControl} id="groupControl"></div>
 		{/each}
 	{/if}
@@ -42,7 +42,7 @@
 				'px'}
 		>
 			{#if groupSizes}{@render groupSizes()}{:else}
-				{#each new Array(table.groupingFields.length) as _i}
+				{#each new Array(table.groupingFields.length) as _i (_i)}
 					<div style:width={table.widths.groupLabel} id="groupLabel"></div>
 					<div style:width={table.widths.groupSizeLabel} id="groupSizeLabel"></div>
 					<div style:width={table.widths.groupSizeBar} id="groupSizeBar"></div>

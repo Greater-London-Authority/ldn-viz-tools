@@ -8,7 +8,7 @@
 	import type { DotsProps } from '$lib/core/aggregateRenderers/DotsProps';
 	import { scaleLinear, type ScaleLinear } from 'd3-scale';
 
-	let { values, extent = [0, 1], width = 100, ...rest }: DotsProps = $props();
+	let { values, extent = [0, 1], width = 100, ..._rest }: DotsProps = $props();
 
 	const height = 30;
 	const marginRight = 10;
@@ -69,7 +69,7 @@
 	<canvas {width} {height} bind:this={canvasRef}></canvas>
 {:else}
 	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
-		{#each dodgedValues as point}
+		{#each dodgedValues as point (point)}
 			<circle cx={x(point.x)} cy={(height - marginBottom) * point.y} r={radius} opacity={0.1}>
 				<title>{point.data}</title>
 			</circle>

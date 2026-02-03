@@ -1,5 +1,13 @@
-<script>
-	let { href, row, children } = $props();
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	type DataCellProps = {
+		href: (d: any) => string;
+		row: any;
+		children: Snippet;
+	};
+
+	let { href, row, children }: DataCellProps = $props();
 </script>
 
 {#if href}

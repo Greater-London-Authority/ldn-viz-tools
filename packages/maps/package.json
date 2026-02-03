@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/maps",
-	"version": "9.0.0-svelte5.17",
+	"version": "9.0.0",
 	"keywords": [
 		"svelte"
 	],

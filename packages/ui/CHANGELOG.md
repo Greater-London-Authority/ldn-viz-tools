@@ -1,5 +1,34 @@
 # ldn-viz-tools-ui
 
+## 21.0.0
+
+### Major Changes
+
+- a01e1a5: CHANGED: the `ListMenu` has been renamed to `NavigationMenu`
+- a01e1a5: CHANGED: the `buttonsHidden` prop on the `CheckboxGroup` and `LayerControlGroup` been renamed to `hideSelectAll`
+- a01e1a5: CHANGED: `LayerControl` now uses a prop called `layerState` (rather than `state`); `LayerControlGroup` now uses a prop called `layersState` (rather than `state`)
+- a01e1a5: CHANGED: `Select` component is now a wrapper around `svelecte` (rather than `svelte-select`); there are amny changes to its props.
+- 09ba55a: CHANGED: update to use Svelte 5 and runes.
+
+### Minor Changes
+
+- 5dc637b: FIXED: CookieControl component should now work with SSR
+- a01e1a5: CHANGED: LoadingIndicator component title and arcColorClass are now correctly typed as optional props
+- 598dd04: CHANGED: removed `w-screen` class from Header
+- 3743366: CHANGED: add keyline to Header and Sidebar
+- 590fbf7: CHANGED: remove `overflow-hidden` class from `Modal`
+- 2d797e0: ADDED: `@steeze-ui/phosphor-icons` is now a dependency
+- a01e1a5: FIXED: RadioButtonGroups show labels if icons don't exist
+- a01e1a5: CREATED: CheckboxSolid and CheckboxGroupSolid components
+- dd74e6d: ADDED: MapDraw component
+- e422408: CHANGED: reduced `Modal` inset from 2rem to 0.5rem on small screens
+- a01e1a5: CHANGED: update `selectedTabId` when tab is changed
+- a01e1a5: Expoxe sidebar state and allow custom classes and icons
+
+### Patch Changes
+
+- b2cae11: Adapter added for OS Places API
+
 ## 21.0.0-svelte5.9
 
 ### Patch Changes

@@ -113,11 +113,8 @@
 		description
 	}: Props = $props();
 
-	let chartClass = classNames(
-		'relative',
-		chartHeight,
-		overrideClass,
-		alignMultiple ? 'min-w-0' : ''
+	let chartClass = $derived(
+		classNames('relative', chartHeight, overrideClass, alignMultiple ? 'min-w-0' : '')
 	);
 	let classes = $derived(
 		classNames(chartWidth, alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose')

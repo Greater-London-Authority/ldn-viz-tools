@@ -278,7 +278,7 @@
 
 						{#if paginate}
 							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow, i}
+								{#each visualRows as visualRow, i (visualRow)}
 									{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
 										<RowRenderer spec={visualRow} table={tableObj} />
 									{/if}
@@ -299,7 +299,7 @@
 							</div>
 						{:else}
 							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow}
+								{#each visualRows as visualRow (visualRow)}
 									<RowRenderer spec={visualRow} table={tableObj} />
 								{/each}
 							</div>

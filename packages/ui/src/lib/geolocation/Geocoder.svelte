@@ -136,7 +136,7 @@
 		}
 	};
 
-	const [scheduleUpdate, cancelUpdate] = newDebouncer(updateSuggestionsNow, delay);
+	const [scheduleUpdate, cancelUpdate] = $derived(newDebouncer(updateSuggestionsNow, delay));
 
 	const closeSuggestionsList = () => {
 		cancelUpdate();
