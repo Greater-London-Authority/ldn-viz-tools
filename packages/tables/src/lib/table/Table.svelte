@@ -169,9 +169,9 @@
 		return to;
 	};
 
-	let tableObj = $derived.by(() => {
-		return createTable(data, tableSpec);
-	});
+	// when data is updated, update the table object rather than creating a new one
+	const tableObj = createTable(data, tableSpec);
+	$effect( () => tableObj && data && tableObj.setData(data) );
 
 	let visualRows: any[] = $derived.by(() => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions

@@ -130,19 +130,6 @@ export class TableState {
 		}
 	}
 
-	private resetMergedValues() {
-		if (!this._columnSpec || this._columnSpec.length === 0) {
-			return;
-		}
-
-		for (const col of this._columnSpec) {
-			if (col.allowGrouping) {
-				const vals = [...new Set(this._rawData.map((r) => r[col.short_label]))];
-				col.groups = { ungrouped: vals, grouped: {} };
-			}
-		}
-	}
-
 	private getGroupLevel(name: string): number {
 		return (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 	}
@@ -226,7 +213,6 @@ export class TableState {
 
 	setData(data: DataRow[]) {
 		this._rawData = data;
-		this.resetMergedValues();
 		this.notifyChanges();
 	}
 
@@ -253,7 +239,6 @@ export class TableState {
 	setColumnSpec(columns: ColSpec[]) {
 		this._columnSpec = columns;
 		this._visibleFields = columns.map((f) => f.short_label);
-		this.resetMergedValues();
 		this.notifyChanges();
 	}
 
