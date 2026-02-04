@@ -59,7 +59,7 @@ navLabel: Typography
 
 ## Principles
 
-Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. We have developed a typographic system to unify our apps, charts and graphical output. When combined with our spacing rules our designs and interfaces should achieve balance and harmony.
+Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. We have developed a typographic system to unify our apps, charts and graphical output. When combined with our spacing rules our designs and interfaces should be balanced and harmonious.
 
 ### Font
 
@@ -79,9 +79,9 @@ Our type-scale runs from **xs** to **7xl**
 
 Unlike a type scale a type set includes font weights, line-heights and letter-spacing, which have all been carefully selected.
 
-LDNviz has two type sets. **Product** is used within products that are task focussed and information is more condensed. **Prose** is intended for long passages of text where space is less of a premium.
+The London City Data Design System has two type sets. **Product** is used within products that are task focussed and information is more condensed. **Prose** is intended for long passages of text where space is less of a premium.
 
-The two sets can be combined and will work together, but this should only be done occasionaly and with consideration.
+The two sets can be combined and will work together, but this should only be done occasionally and with consideration.
 
 #### Semantic Type Roles
 
@@ -128,7 +128,7 @@ The different role groupings are:
 </tbody>
 </table>
 
-Within the **Body**, **Title**, and **Label** type roles there are further size qualifiers to allow greater flexibility
+Within the **Body**, **Title**, and **Label** type roles, there are further size qualifiers to allow greater flexibility.
 
 #### Product type set:
 
@@ -189,7 +189,7 @@ You can test the elements on this page by resizing your browser or emulating a d
 
 ## Practice
 
-**nb. This guidance applies to projects using `@ldn-viz/themes` from npm in a project using tailwind. The convenience classes outlined here are currently not exported, though the css variables required are.**
+**N.B. This guidance applies to projects using `@ldn-viz/themes` from npm in a project using tailwind. The convenience classes outlined here are currently not exported, though the css variables required are.**
 
 Type sets are defined with the corresponding class on a parent element:
 
@@ -201,7 +201,7 @@ Type sets are defined with the corresponding class on a parent element:
 
 </div>
 
-A <code>responsive</code> class can be added to the type-set defining class in order to achieve font resizing across screen widths
+A <code>responsive</code> class can be added to the type-set defining class in order to achieve font resizing across screen widths.
 
 <div class="not-prose">
 
@@ -251,9 +251,7 @@ The <code>product</code> class does not apply semantic styles. Elements inside a
 	<h2 class="title-lg">Title Large</h2>
 </div>
 
-In either context utility classes still work:
-
-<div class="not-prose">
+In either context css classes still work. When working with the svelte components from `@ldn-viz/ui` where tailwind utility classes are available ie. `font-bold` these can be applied to modify the style:
 
 ```html
 <div class="product responsive">
@@ -261,8 +259,6 @@ In either context utility classes still work:
 	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
 </div>
 ```
-
-</div>
 
 <div class="not-prose product responsive border border-muted p-4 my-4">
 	<p class="body-md font-bold">Body copy</p>
