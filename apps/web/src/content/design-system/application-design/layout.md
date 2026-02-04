@@ -58,17 +58,25 @@ Although it can be tempting to compress a lot into a small space we strive to le
 
 The header sits at the top of the page and carries the application title and highest level of inter page navigation (if applicable).
 
+![A typical dashboard style application with header highlighted](/layout/layout-header.png)
+
 #### Footer
 
 The footer is used to root the base of application page and can carry secondary/ tertiary navigation elements as well as branding and links to user preference settings.
+
+![A typical dashboard style application with footer highlighted](/layout/layout-footer.png)
 
 #### Sidebar
 
 The sidebar contains top level navigation and filters for the app. Depending on the context this could be a simple page navigation list or a complex set of grouped filters. When used for filters care should be taken so that the filters are at a global level. For example if a filter only effects a single chart on the canvas it would usually be better to co-locate the filter closer to the chart.
 
+![A typical dashboard style application with sidebar highlighted](/layout/layout-sidebar.png)
+
 #### Canvas
 
 The canvas is the main area of the application.
+
+![A typical dashboard style application with canvas area highlighted](/layout/layout-canvas.png)
 
 ### Layers
 
@@ -76,4 +84,16 @@ If the canvas exists on the lowest layer of the application we can think of thin
 
 ## Practice
 
-### Shadows and elevation
+### AppShell
+
+The @ldn-viz-tools library contains a AppShell svelte component that orchestrates sidebar positioning across breakpoints.
+
+![A typical dashboard style application with app-shell area highlighted](/layout/layout-appshell.png)
+
+Sidebars can be positioned `top`, `bottom`, `left`, `right`
+
+```html
+<Appshell sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left' }} >
+```
+
+you can find more information on component usage in [our storybook ](https://greater-london-authority.github.io/ldn-viz-tools/?path=/docs/ui-components-layout-and-themes-appshell--documentation)
