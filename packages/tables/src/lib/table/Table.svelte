@@ -2,7 +2,7 @@
 	import { computeWidths } from '../core/lib/computeWidths';
 
 	import VirtualScroll from 'svelte-virtual-scroll-list';
-	import { TableData } from '../core/lib/dataObj';
+	import { TableState } from '../core/lib/tableState.svelte';
 	import TableContainer from './TableContainer.svelte';
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
@@ -69,7 +69,7 @@
 		/**
 		 * Exposes the internal table object, so that it can be programmatically manipulated.
 		 */
-		// tableObj?: TableData | undefined;
+		// tableObj?: TableState | undefined;
 		/**
 		 * If `true`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
 		 */
@@ -149,10 +149,8 @@
 	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
 	let updateTrigger = $state(0);
 
-	const createTable = (data: any[]) => {
-		const to = new TableData(tableSpec);
-
-		// to.setOnRowsChange(() => tableObj = tableObj));
+	const createTable = (data: any[], tableSpec: TableSpec) => {
+		const to = new TableState(tableSpec);
 
 		to.setData(data);
 		to.setColumnSpec(tableSpec.columns);
@@ -171,18 +169,8 @@
 		return to;
 	};
 
-	const setColSpec = (tableObj: TableData, tableSpec: { columns: any }) => {
-		if (tableObj) {
-			tableObj.setColumnSpec(tableSpec.columns);
-		}
-	};
-
 	let tableObj = $derived.by(() => {
-		const to = createTable(data);
-
-		setColSpec(to, tableSpec);
-
-		return to;
+		return createTable(data, tableSpec);
 	});
 
 	let visualRows: any[] = $derived.by(() => {

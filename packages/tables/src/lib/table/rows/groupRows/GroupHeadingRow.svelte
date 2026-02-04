@@ -2,10 +2,16 @@
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import type { Group } from '../../../core/lib/types';
 	import GroupSizeBar from './GroupSizeBar.svelte';
 
-	let { group, table } = $props();
+	interface Props {
+		group: Group;
+		table: TableState;
+	}
+
+	let { group, table }: Props = $props();
 
 	const constructLabel = (group: Group) => {
 		if (typeof group.maxRows !== 'undefined' && group.order.length > group.maxRows) {

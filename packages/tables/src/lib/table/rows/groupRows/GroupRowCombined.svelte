@@ -3,11 +3,17 @@
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import type { Group } from '../../../core/lib/types';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import GroupSizeBar from './GroupSizeBar.svelte';
 
-	let { group, table } = $props();
+	interface Props {
+		group: Group;
+		table: TableState;
+	}
+
+	let { group, table }: Props = $props();
 
 	const constructLabel = (group: Group) => {
 		return group.name.split(' ∩ ').slice(-1);
@@ -108,7 +114,7 @@
 	<!--     {#each new Array(table.groupingFields.length - getGroupLevel(group.name)) as i} {/each} -->
 
 	<!-- actual columns -->
-	{#each table.columnSpec as col, i (col)}
+	{#each table.resolvedColumnSpec as col, i (col)}
 		{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 			<div style:width={col.computedWidth + 'px'} class="was-td">
 				{#if col.group && col.group.renderer}

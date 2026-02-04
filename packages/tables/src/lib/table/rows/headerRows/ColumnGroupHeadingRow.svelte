@@ -1,8 +1,13 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
-	let { table } = $props();
+	interface Props {
+		table: TableState;
+	}
+
+	let { table }: Props = $props();
 
 	let cellWidths = $derived(table.columnSpec.map((c: { computedWidth: any }) => c.computedWidth));
 

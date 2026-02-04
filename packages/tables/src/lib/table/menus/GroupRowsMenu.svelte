@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import { Overlay, Select } from '@ldn-viz/ui';
 
 	interface Props {
-		table: TableData;
+		table: TableState;
 		onChange: () => void;
 	}
 

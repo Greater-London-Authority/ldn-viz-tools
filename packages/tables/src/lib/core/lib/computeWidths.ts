@@ -1,6 +1,13 @@
 import { sum } from 'd3-array';
+import type { ColGroup, ColSpec } from './types';
 
 // TODO: call when grouping changes
+
+interface TableWithColumns {
+	columnSpec: ColSpec[];
+	colGroups: ColGroup[];
+	colGroupGap: number;
+}
 
 const parseWidth = (width: number | string) => {
 	if (typeof width === 'number') {
@@ -10,13 +17,12 @@ const parseWidth = (width: number | string) => {
 	}
 };
 
-export const computeWidths = (table: any, width: number) => {
+export const computeWidths = (table: TableWithColumns, width: number) => {
 	let availableWidth = width;
 
 	// subtract gaps
-	const gapWidth = table.gapWidth || 0;
 	const numColGroups = (table.colGroups || []).length;
-	const totalGapWidth = gapWidth * numColGroups;
+	const totalGapWidth = (table.colGroupGap ?? 0) * numColGroups;
 
 	availableWidth -= totalGapWidth;
 

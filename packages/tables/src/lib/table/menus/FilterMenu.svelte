@@ -1,7 +1,15 @@
 <script lang="ts">
 	import { Button, Overlay, Select } from '@ldn-viz/ui';
 
-	let { col, table } = $props();
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
+	import type { ColSpec } from '$lib/core/lib/types';
+
+	interface Props {
+		col: ColSpec;
+		table: TableState;
+	}
+
+	let { col, table }: Props = $props();
 
 	let filterTypes = [
 		{ label: 'contains', value: 'contains' },

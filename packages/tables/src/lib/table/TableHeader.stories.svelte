@@ -12,7 +12,7 @@
 
 <script lang="ts">
 	import { computeWidths } from '../core/lib/computeWidths';
-	import { TableData } from '../core/lib/dataObj';
+	import { TableState } from '../core/lib/tableState.svelte';
 	import type { TableSpec } from '../core/lib/types';
 
 	const FIXED_WIDTH = 600;
@@ -99,7 +99,7 @@
 		]
 	};
 
-	const tableBasic = new TableData(tableSpecBasic);
+	const tableBasic = new TableState(tableSpecBasic);
 	tableBasic.setData(data);
 	tableBasic.setColumnSpec(tableSpecBasic.columns);
 	computeWidths(tableBasic, FIXED_WIDTH);
@@ -145,7 +145,7 @@
 		]
 	};
 
-	const tableAlignment = new TableData(tableSpecAlignment);
+	const tableAlignment = new TableState(tableSpecAlignment);
 	tableAlignment.setData(data);
 	tableAlignment.setColumnSpec(tableSpecAlignment.columns);
 	computeWidths(tableAlignment, FIXED_WIDTH);
@@ -237,7 +237,7 @@
 		]
 	};
 
-	const table = new TableData(tableSpec);
+	const table = new TableState(tableSpec);
 	table.setData(data);
 	table.setColumnSpec(tableSpec.columns);
 	computeWidths(table, FIXED_WIDTH);
@@ -343,7 +343,7 @@
 		]
 	};
 
-	const tableColSummaries = new TableData(tableSpecColSummaries);
+	const tableColSummaries = new TableState(tableSpecColSummaries);
 	tableColSummaries.setData(data);
 	tableColSummaries.setColumnSpec(tableSpecColSummaries.columns);
 	computeWidths(tableColSummaries, FIXED_WIDTH);
@@ -449,7 +449,7 @@
 		]
 	};
 
-	const tableColSummariesGroupHeadings = new TableData(tableSpecColSummariesGroupHeadings);
+	const tableColSummariesGroupHeadings = new TableState(tableSpecColSummariesGroupHeadings);
 	tableColSummariesGroupHeadings.setData(data);
 	tableColSummariesGroupHeadings.setColumnSpec(tableSpecColSummariesGroupHeadings.columns);
 	computeWidths(tableColSummariesGroupHeadings, FIXED_WIDTH);
@@ -522,7 +522,7 @@
 		]
 	};
 
-	const tableControls = new TableData(tableSpecControls);
+	const tableControls = new TableState(tableSpecControls);
 	tableControls.setData(data);
 	tableControls.setColumnSpec(tableSpecControls.columns);
 	computeWidths(tableControls, FIXED_WIDTH);

@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import type { ColGroup } from '$lib/core/lib/types';
 
 	interface Props {
-		table: any;
+		table: TableState;
 		/**
 		 * Index of column that precedes this gap.
 		 */
@@ -11,8 +12,8 @@
 
 	let { table, i }: Props = $props();
 
-	const gapPositions: number[] = (table.colGroups || []).map(
-		(colGroup: ColGroup) => colGroup.endCol
+	const gapPositions: number[] = $derived(
+		(table.colGroups || []).map((colGroup: ColGroup) => colGroup.endCol)
 	);
 </script>
 
