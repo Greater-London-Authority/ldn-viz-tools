@@ -13,13 +13,19 @@ Our work covers different types of applications which can be roughly grouped int
 
 Dashboards help users to monitor and investigate data.
 
+![A typical dashboard style application](/application-types/dashboard.png)
+
 ### Maps
 
 Maps primary focus is the analysis of spacial data.
 
+![A typical map style application](/application-types/map.png)
+
 ### Notebooks
 
 Notebooks allow for a level of interaction within a narrative flow.
+
+![A typical notebook style application](/application-types/notebook.png)
 
 ### Reports
 
