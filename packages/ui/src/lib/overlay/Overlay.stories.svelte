@@ -138,26 +138,23 @@
 	{/snippet}
 </Story>
 
-
 <Story name="Externally controlled">
 	{#snippet template()}
-		<div class="flex flex-col w-96">
+		<div class="flex w-96 flex-col">
 			<span>Overlay is currently {open ? 'Open' : 'Closed'}</span>
-			<Button onclick={() => open = !open}>Toggle</Button>
+			<Button onclick={() => (open = !open)}>Toggle</Button>
 
 			<Select
 				label="Overlay type"
 				bind:value={type}
 				options={[
-					{value: 'modal', label: 'Modal'},
-					{value: 'tooltip', label: 'Tooltip'},
-					{value: 'popover', label: 'Popover'},
+					{ value: 'modal', label: 'Modal' },
+					{ value: 'tooltip', label: 'Tooltip' },
+					{ value: 'popover', label: 'Popover' }
 				]}
 			/>
 		</div>
 
-		<Overlay overlayType={type} bind:open>
-			This is an overlay.
-		</Overlay>
+		<Overlay overlayType={type} bind:open>This is an overlay.</Overlay>
 	{/snippet}
 </Story>

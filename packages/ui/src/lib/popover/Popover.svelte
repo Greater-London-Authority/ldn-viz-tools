@@ -20,7 +20,7 @@
 		trigger,
 		children,
 		open = $bindable(false)
- }: Props = $props();
+	}: Props = $props();
 </script>
 
 {#snippet popoverTrigger()}
