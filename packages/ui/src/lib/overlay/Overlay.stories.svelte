@@ -5,12 +5,16 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Cog6Tooth } from '@steeze-ui/heroicons';
 	import Button from '../button/Button.svelte';
+	import Select from '../select/Select.svelte';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Overlay',
 		component: Overlay,
 		tags: ['autodocs']
 	});
+
+	let open = $state(false);
+	let type = $state('modal');
 </script>
 
 <Story name="Default">
@@ -130,6 +134,30 @@
 				<Button {...props}>Custom trigger component (click)</Button>
 			{/snippet}
 			This is a popover.
+		</Overlay>
+	{/snippet}
+</Story>
+
+
+<Story name="Externally controlled">
+	{#snippet template()}
+		<div class="flex flex-col w-96">
+			<span>Overlay is currently {open ? 'Open' : 'Closed'}</span>
+			<Button onclick={() => open = !open}>Toggle</Button>
+
+			<Select
+				label="Overlay type"
+				bind:value={type}
+				options={[
+					{value: 'modal', label: 'Modal'},
+					{value: 'tooltip', label: 'Tooltip'},
+					{value: 'popover', label: 'Popover'},
+				]}
+			/>
+		</div>
+
+		<Overlay overlayType={type} bind:open>
+			This is an overlay.
 		</Overlay>
 	{/snippet}
 </Story>
