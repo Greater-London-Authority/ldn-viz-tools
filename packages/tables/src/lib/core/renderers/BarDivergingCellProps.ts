@@ -21,6 +21,12 @@ export interface BarDivergingCellProps {
 	 * Color to be applied to bars corresponding to negative values.
 	 */
 	negativeColor?: string | ((value: number) => string);
+
+	/**
+	 * Color to be applied to the background 'track'.
+	 */
+	backgroundColor?: string;
+
 	extent?: any; // used to pass automatically extracted val
 	/**
 	 * Width of cell (in pixels).
