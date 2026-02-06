@@ -86,6 +86,8 @@
 			widthClasses[width]
 		)
 	);
+
+	let descriptionEl: Element;
 </script>
 
 {#snippet modalTrigger()}
@@ -110,7 +112,14 @@
 	<Dialog.Portal>
 		<Dialog.Overlay class="fixed inset-0 z-40 bg-black/60" />
 		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
-			<Dialog.Content {...contentProps} class={modalClass}>
+			<Dialog.Content
+				{...contentProps}
+				class={modalClass}
+				onOpenAutoFocus={(e) => {
+					e.preventDefault();
+					descriptionEl?.focus();
+				}}
+			>
 				<div
 					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text-primary ${headerTheme}`}
 				>
@@ -130,7 +139,7 @@
 				<div class="overflow-y-auto">
 					<div class="px-4 py-6">
 						<Dialog.Description>
-							{@render description?.()}
+							<span bind:this={descriptionEl}>{@render description?.()}</span>
 						</Dialog.Description>
 						{@render children?.()}
 					</div>
