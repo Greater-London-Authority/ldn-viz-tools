@@ -37,31 +37,62 @@
 		}
 	]);
 
+	const limitedPatterns = {
+		patternURL:
+			'https://raw.githubusercontent.com/visgl/deck.gl/master/examples/layer-browser/data/pattern.png',
+
+		// N.B. this can't be determined from the pattern atlas alone, as there may be blank/unused pixels
+		// to the right or bottom of the pattern swatches. Ignoring these would cause incorrect scaling, and mis-alignment.
+		patternImageWidth: 256,
+		patternImageHeight: 256,
+
+		atlas: {
+			'hatch-1x': {
+				x: 4,
+				y: 4,
+				width: 120,
+				height: 120,
+				mask: true
+			},
+			dots: {
+				x: 132,
+				y: 132,
+				width: 120,
+				height: 120,
+				mask: true
+			}
+		}
+	};
+
 	let state1 = $state({
 		bus: {
 			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		train: {
 			colorName: 'data.categorical.green',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 
 		underground: {
 			colorName: 'data.categorical.darkpink',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		taxi: {
 			colorName: 'data.categorical.orange',
 			visible: false,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		}
 	});
 	let state2 = $state({
@@ -69,19 +100,22 @@
 			colorName: 'data.categorical.blue',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		train: {
 			colorName: 'data.categorical.green',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		underground: {
 			colorName: 'data.categorical.darkpink',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		}
 	});
 	let state3 = $state({
@@ -89,19 +123,22 @@
 			colorName: 'palette.blue.600',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		train: {
 			colorName: 'palette.green.600',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		},
 		underground: {
 			colorName: 'palette.darkpink.600',
 			visible: true,
 			opacity: 1.0,
-			size: 1
+			size: 1,
+			fillType: 'solid-fill'
 		}
 	});
 
@@ -114,7 +151,7 @@
 	args={{ options: optionsForGroup, layersState: state1, ariaLabel: ariaLabel }}
 >
 	{#snippet template(args)}
-		<LayerControlGroup {...args} />
+		<LayerControlGroup {...args} bind:layersState={state1} />
 		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
@@ -260,6 +297,21 @@ For example, choropleth layers would cover each other.
 			bind:layersState={state3}
 			{ariaLabel}
 			{colorNames}
+		/>
+		<pre class="mt-4 text-xs">{JSON.stringify(state3, null, 2)}</pre>
+	{/snippet}
+</Story>
+
+<!--
+This example provides a custom pattern definition that only inlcudes `hatch-1x` and `dots`.
+-->
+<Story name="With custom patterns">
+	{#snippet template()}
+		<LayerControlGroup
+			options={optionsForGroup2}
+			bind:layersState={state3}
+			{ariaLabel}
+			patterns={limitedPatterns}
 		/>
 		<pre class="mt-4 text-xs">{JSON.stringify(state3, null, 2)}</pre>
 	{/snippet}
