@@ -559,6 +559,20 @@
 	{/snippet}
 </Story>
 
+<Story name="Header Alignment with sorting">
+	{#snippet template()}
+		<div style:width="600px">
+			<TableHeader
+				{data}
+				tableSpec={tableSpecAlignment}
+				table={tableAlignment}
+				tableWidth={FIXED_WIDTH}
+				allowSorting={true}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
 <Story name="With axes and colGroup gaps">
 	{#snippet template()}
 		<TableHeader {data} {tableSpec} {table} tableWidth={FIXED_WIDTH} />
