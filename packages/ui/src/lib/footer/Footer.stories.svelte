@@ -5,9 +5,10 @@
 
 	/**
 	 * The `<Footer>` component appears at the bottom of a page.
+	 * Note, if `<AnalyticsAndCookieConsent />` is not in your app or configured incorrectly, 'Cookie Settings' will not appear in the footer even when `showCookieMenu` is true.
 	 */
 
-	let { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Footer',
 		component: Footer as any,
 		tags: ['autodocs'],

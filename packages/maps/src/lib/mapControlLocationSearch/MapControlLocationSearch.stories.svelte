@@ -1,8 +1,18 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import MapControlLocationSearch from './MapControlLocationSearch.svelte';
 
+	/**
+	 * The `<MapControlLocationSearch>` component wraps both the
+	 * `<MapControlGeocoder>` and `<MapControlGeolocator>` components to create
+	 * single and easy to use map search control. It is typically placed in the
+	 * top left hand corner.
+	 *
+	 * The selected location is indicated by a MapLibre layer of type `symbol`,
+	 * with id `gla/context/location-search/map-point-symbol`, created by `initMapLayer`.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlLocationSearch',
 		component: MapControlLocationSearch,

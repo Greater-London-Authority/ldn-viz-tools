@@ -12,6 +12,24 @@
 		}
 	};
 
+	/**
+	 * The `<MapMarker>` component allows tooltips and popups to easily be added
+	 * for feature hover and clicks respectively. This component may be slotted
+	 * anywhere provided the `<Map>` component context is available.
+	 *
+	 * To ensure the correct behaviour for overlapping tooltips that aren't
+	 * sourced via ESRI servers, set `generateId` to true in your
+	 * [MapLibre Source Specifications](https://maplibre.org/maplibre-style-spec/sources/).
+	 * This will set the value of the `feature.id` property to be equal to the
+	 * index of the corresponding feature, rather than leaving it undefined.
+	 *
+	 * The `tooltip` and `popup` components are client side rendered. This
+	 * component's context is passed to them along with three additional
+	 * values:
+	 * - `mapMarkerMaplibrePopup` is the instance of `maplibre_gl.Popup` that contains the rendered tooltip component.
+	 * - `mapMarkerLayerId` is the ID of the map layer the feature belongs to.
+	 * - `mapMarkerFeature` is the target GeoJSON feature. Note that MapLibre adds additional fields, e.g. `layer`.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker',
 		component: MapMarker,

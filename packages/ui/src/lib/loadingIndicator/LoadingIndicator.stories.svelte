@@ -9,6 +9,7 @@
 	 *
 	 * In cases where the user prefers reduced motion, the `<Spinner>` is replaced with
 	 * a clock icon.
+	 *
 	 */
 
 	const { Story } = defineMeta({

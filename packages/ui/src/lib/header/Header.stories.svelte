@@ -10,8 +10,9 @@
 	/**
 	 * The `<Header>` component appears at the top of a page.
 	 * It typically includes the app name, links to other pages (if the app has multiple pages), and a login/logout control (if the app requires authentication).
+	 *
 	 */
-	let { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Header',
 		component: Header as any,
 		tags: ['autodocs'],

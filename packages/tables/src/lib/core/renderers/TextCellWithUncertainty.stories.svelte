@@ -1,7 +1,12 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import TextCellWithUncertainty from './TextCellWithUncertainty.svelte';
+
+	/**
+	 * The `TextCellWithUncertainty` component formats a single value as text and displays it in a table cell.
+	 * The first entry of `contextVals` is interpreted as indicating whether the value is uncertain;
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/TextCellWithUncertainty',
 		component: TextCellWithUncertainty,

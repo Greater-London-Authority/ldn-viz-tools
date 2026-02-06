@@ -4,6 +4,13 @@
 	import Overlay from '../overlay/Overlay.svelte';
 	import Select from './Select.svelte';
 
+	/**
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
+	 *
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
+	 */
 	const options: Option[] = [
 		{ label: 'One', value: 1 },
 		{ label: 'Two', value: 2 },
@@ -46,7 +53,11 @@
 	];
 
 	/**
-	 * The `<Select>` component wraps a 'Svelecte' instance. Check the documentation: [here](https://svelecte.vercel.app).
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
+	 *
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
 	 */
 
 	const { Story } = defineMeta({

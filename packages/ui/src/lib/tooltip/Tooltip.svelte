@@ -6,9 +6,15 @@
 	type Props = Tooltip.RootProps & {
 		hintLabel?: string;
 		trigger?: Snippet<[Record<string, any>]>;
+		open: boolean;
 	};
 
-	let { hintLabel = 'Hover for tooltip', trigger, children }: Props = $props();
+	let {
+		open = $bindable(false),
+		hintLabel = 'Hover for tooltip',
+		trigger,
+		children
+	}: Props = $props();
 </script>
 
 {#snippet tooltipTrigger()}
@@ -28,7 +34,7 @@
 {/snippet}
 
 <Tooltip.Provider delayDuration={100}>
-	<Tooltip.Root disableCloseOnTriggerClick disableHoverableContent>
+	<Tooltip.Root disableCloseOnTriggerClick disableHoverableContent bind:open>
 		{@render tooltipTrigger()}
 
 		<Tooltip.Portal>

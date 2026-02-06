@@ -12,6 +12,20 @@
 		}
 	};
 
+	/**
+	 * The `MapPopover` component allows the creation of a popover using MapLibre, without creating a MapLibre marker.
+	 * This can be useful if the popover corresponds to a point rendered using Deck.gl (rather than MapLibre),
+	 * or to a location on a basemap that has no associated marker at all.
+	 *
+	 * Note that each instance of the component renders only a single popover.
+	 * If multiple popovers should be present simultaneously, you could create an array of features that should be labelled,
+	 * and create the popovers using an `{#each}` block.
+	 *
+	 * You can use the components defined in`mapMarker/elements` within the popover component.
+	 *
+	 * **Alternatives**: if the popover is meant to be attached to a Maplibre marker, use the [MapMarker](./?path=/docs/maps-mapmarker--documentation) instead.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapPopover',
 		component: MapPopover,
