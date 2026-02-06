@@ -64,7 +64,7 @@
 		}
 	});
 
-	const handle = (event: UIEvent) => {
+	const handleClick = (event: UIEvent) => {
 		if (!$mapStore || !mode) {
 			return;
 		}
@@ -76,7 +76,16 @@
 			$mapStore.getCanvas().focus();
 		}
 	};
+
+	// Update isFullscreen state when user presses 'Esc' or 'F11' instead of clicking button
+	const handleEscape = (_event: Event) => {
+		if (!document.fullscreenElement) {
+			isFullscreen.set(false);
+		}
+	};
 </script>
+
+<svelte:document onfullscreenchange={handleEscape} />
 
 {#if mode}
 	<div
@@ -87,7 +96,7 @@
 			emphasis="secondary"
 			title={$isFullscreen ? mode.titleIn : mode.titleOut}
 			class="pointer-events-auto"
-			onclick={handle}
+			onclick={handleClick}
 		>
 			<Icon src={$isFullscreen ? mode.iconIn : mode.iconOut} class="h-8 w-8 p-1" />
 		</Button>
