@@ -238,7 +238,6 @@
 	};
 	randomlySelectRows2();
 
-
 	interface Props {
 		page?: number;
 	}
@@ -344,7 +343,6 @@
 		<Table data={dataSubset2} {tableSpec} allowRowGrouping />
 	{/snippet}
 </Story>
-
 
 <Story name="User selection of columns to show">
 	{#snippet template()}

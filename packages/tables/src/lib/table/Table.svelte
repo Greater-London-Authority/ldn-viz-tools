@@ -163,7 +163,7 @@
 
 	// when data is updated, update the table object rather than creating a new one
 	const tableObj = createTable(data, tableSpec);
-	$effect( () => tableObj && data && (tableObj.rawData = data) );
+	$effect(() => tableObj && data && (tableObj.rawData = data));
 
 	let visualRows: any[] = $derived.by(() => {
 		const vr = [];
@@ -199,103 +199,97 @@
 	const beforeTable_render = $derived(beforeTable);
 </script>
 
-	{#if tableObj && tableObj.extents}
-		<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
-			<div class="ml-4 flex w-[430px] gap-2">
-				{#if allowRowGrouping}
-					<GroupRowsMenu table={tableObj} />
-					<SortGroupsMenu table={tableObj} />
-				{/if}
+{#if tableObj && tableObj.extents}
+	<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
+		<div class="ml-4 flex w-[430px] gap-2">
+			{#if allowRowGrouping}
+				<GroupRowsMenu table={tableObj} />
+				<SortGroupsMenu table={tableObj} />
+			{/if}
 
-				{#if allowColumnHiding}
-					<ToggleColumnsMenu table={tableObj} />
-				{/if}
-			</div>
-
-			<TableContainer
-				{data}
-				{title}
-				{subTitle}
-				{source}
-				{byline}
-				{note}
-				{dataDownloadButton}
-				{imageDownloadButton}
-				{filename}
-				{columnMapping}
-			>
-				{#snippet beforeTable()}
-					{#if beforeTable}
-						<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
-						{@render beforeTable_render?.()}
-					{/if}
-				{/snippet}
-
-				{#snippet table()}
-					<div
-						class="w-full table-auto text-sm text-color-text-primary"
-						bind:clientWidth={tableWidth}
-						role="table"
-					>
-						{#if tableSpec.showTableHeader !== false}
-							<TableHeader
-								{tableSpec}
-								table={tableObj}
-								{data}
-								{allowSorting}
-								{tableWidth}
-							/>
-						{/if}
-
-						{#if paginate}
-							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow, i (visualRow)}
-									{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
-										<RowRenderer spec={visualRow} table={tableObj} />
-									{/if}
-								{/each}
-							</div>
-						{:else if virtualise}
-							<div
-								style:height={`${height - 100}px`}
-								style:width={tableWidth}
-								class:stripedVirtual={zebraStripe}
-								role="rowgroup"
-							>
-								<VirtualScroll data={visualRows} key="uniqueKey">
-									{#snippet children({ data }: any)}
-										<RowRenderer spec={data} table={tableObj} />
-									{/snippet}
-								</VirtualScroll>
-							</div>
-						{:else}
-							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow (visualRow)}
-									<RowRenderer spec={visualRow} table={tableObj} />
-								{/each}
-							</div>
-						{/if}
-					</div>
-				{/snippet}
-
-				{#snippet paginationControls()}
-					<div>
-						{#if paginate}
-							<PaginationControls {pageSize} numRows={data.length} bind:page />
-						{/if}
-					</div>
-				{/snippet}
-
-				{#snippet numRowsControlSlot()}
-					<div>
-						{#if paginate && allowPageSizeChanges}
-							<NumRowsControls bind:pageSize bind:page />
-						{/if}
-					</div>
-				{/snippet}
-			</TableContainer>
+			{#if allowColumnHiding}
+				<ToggleColumnsMenu table={tableObj} />
+			{/if}
 		</div>
-	{/if}
+
+		<TableContainer
+			{data}
+			{title}
+			{subTitle}
+			{source}
+			{byline}
+			{note}
+			{dataDownloadButton}
+			{imageDownloadButton}
+			{filename}
+			{columnMapping}
+		>
+			{#snippet beforeTable()}
+				{#if beforeTable}
+					<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
+					{@render beforeTable_render?.()}
+				{/if}
+			{/snippet}
+
+			{#snippet table()}
+				<div
+					class="w-full table-auto text-sm text-color-text-primary"
+					bind:clientWidth={tableWidth}
+					role="table"
+				>
+					{#if tableSpec.showTableHeader !== false}
+						<TableHeader {tableSpec} table={tableObj} {data} {allowSorting} {tableWidth} />
+					{/if}
+
+					{#if paginate}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow, i (visualRow)}
+								{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
+									<RowRenderer spec={visualRow} table={tableObj} />
+								{/if}
+							{/each}
+						</div>
+					{:else if virtualise}
+						<div
+							style:height={`${height - 100}px`}
+							style:width={tableWidth}
+							class:stripedVirtual={zebraStripe}
+							role="rowgroup"
+						>
+							<VirtualScroll data={visualRows} key="uniqueKey">
+								{#snippet children({ data }: any)}
+									<RowRenderer spec={data} table={tableObj} />
+								{/snippet}
+							</VirtualScroll>
+						</div>
+					{:else}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow (visualRow)}
+								<RowRenderer spec={visualRow} table={tableObj} />
+							{/each}
+						</div>
+					{/if}
+				</div>
+			{/snippet}
+
+			{#snippet paginationControls()}
+				<div>
+					{#if paginate}
+						<PaginationControls {pageSize} numRows={data.length} bind:page />
+					{/if}
+				</div>
+			{/snippet}
+
+			{#snippet numRowsControlSlot()}
+				<div>
+					{#if paginate && allowPageSizeChanges}
+						<NumRowsControls bind:pageSize bind:page />
+					{/if}
+				</div>
+			{/snippet}
+		</TableContainer>
+	</div>
+{/if}
 
 <style lang="postcss">
 	:global(.striped > div:nth-child(odd)) {

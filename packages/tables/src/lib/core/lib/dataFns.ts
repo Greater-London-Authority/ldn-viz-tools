@@ -340,7 +340,6 @@ export function mergeData(data: any[], columns: any[]) {
 	});
 }
 
-
 export function getGroupLevel(name: string): number {
 	return (name.match(new RegExp(' ∩ ', 'g')) || []).length;
-};
+}

@@ -1,5 +1,13 @@
 import { computeColumnWidths, type ColSpecWithWidth } from './computeWidths';
-import { filterData, getGroupLevel, getRows, getSortedRows, group, mergeData, sortGroups } from './dataFns';
+import {
+	filterData,
+	getGroupLevel,
+	getRows,
+	getSortedRows,
+	group,
+	mergeData,
+	sortGroups
+} from './dataFns';
 import { computeExtents } from './extents';
 import { resolveAllColumnRenderers } from './rendererRegistry';
 import { createColorScales, createPositionScales } from './scaleFactory';
@@ -89,7 +97,9 @@ export class TableState {
 	// Convert Maps to Records for backwards compatibility with bracket notation
 	private _extents = $derived(mapToRecord(computeExtents(this._filteredData)));
 	private _scales = $derived(mapToRecord(createColorScales(this._filteredData, this._columnSpec)));
-	private _posScales = $derived(mapToRecord(createPositionScales(this._filteredData, this._columnSpec)));
+	private _posScales = $derived(
+		mapToRecord(createPositionScales(this._filteredData, this._columnSpec))
+	);
 
 	// _baseGroups do not include the expanded/collapsed UI state
 	private _baseGroups = $derived.by(() => {
@@ -283,7 +293,7 @@ export class TableState {
 
 	openOrCloseLevel(level: number) {
 		const isExpanded = !(this._levelExpansionState[level] ?? true);
-		
+
 		// Grow array if needed, defaulting new levels to expanded (true)
 		const newState = [...this._levelExpansionState];
 		while (newState.length <= level) {
@@ -291,7 +301,6 @@ export class TableState {
 		}
 		newState[level] = isExpanded;
 		this._levelExpansionState = newState;
-		
 
 		const newMap = new Map(this._groupExpansion);
 		for (const g of this._baseGroups) {
@@ -315,5 +324,4 @@ export class TableState {
 	getValsForGroup(targetGroup: Group, colName: string): unknown[] {
 		return getRows(this._filteredData, [targetGroup], []).map((d) => d[colName]);
 	}
-
 }
