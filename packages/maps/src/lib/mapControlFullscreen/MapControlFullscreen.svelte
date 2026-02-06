@@ -79,10 +79,8 @@
 
 	// Update isFullscreen state when user presses 'Esc' or 'F11' instead of clicking button
 	const handleEscape = (_event: Event) => {
-		const updateState = () => isFullscreen.set(false);
-
 		if (!document.fullscreenElement) {
-			updateState();
+			isFullscreen.set(false);
 		}
 	};
 </script>
