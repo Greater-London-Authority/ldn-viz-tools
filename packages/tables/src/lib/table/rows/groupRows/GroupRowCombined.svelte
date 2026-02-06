@@ -3,11 +3,11 @@
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	import type { TableState } from '$lib/core/lib/tableState.svelte';
+	import type { TableState } from '../../../core/lib/tableState.svelte';
 	import type { Group } from '../../../core/lib/types';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import GroupSizeBar from './GroupSizeBar.svelte';
-	import { getGroupLevel } from '$lib/core/lib/dataFns';
+	import { getGroupLevel } from '../../../core/lib/dataFns';
 
 	interface Props {
 		group: Group;
