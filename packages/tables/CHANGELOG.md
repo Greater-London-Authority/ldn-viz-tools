@@ -1,5 +1,11 @@
 # @ldn-viz/tables
 
+## 5.1.0
+
+### Minor Changes
+
+- b8b9f1f: CHANGED: `BarDivergingCell` now has a `backgroundColor` prop
+
 ## 5.0.0
 
 ### Major Changes
