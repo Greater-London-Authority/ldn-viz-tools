@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import { Overlay, Select } from '@ldn-viz/ui';
 	import {
 		type Aggregation,
@@ -8,7 +8,7 @@
 	} from '../../core/lib/types';
 
 	interface Props {
-		table: TableData;
+		table: TableState;
 		onChange: () => void;
 	}
 
@@ -34,20 +34,20 @@
 		return new_fields;
 	});
 
-	let fieldSelection: string = $state(table.groupingOrderSpec[0]?.field); // TODO: set from table
+	let fieldSelection: string = $derived(table.groupingOrderSpec[0]?.field); // TODO: set from table
 
 	const orderOptions = ['ascending', 'descending'].map((o) => ({
 		label: o,
 		value: o
 	}));
 
-	let orderSelection: SortDirection = $state(table.groupingOrderSpec[0]?.direction);
+	let orderSelection: SortDirection = $derived(table.groupingOrderSpec[0]?.direction);
 
 	const aggregationOptions = ['min', 'mean', 'median', 'max', 'q1', 'q3', 'count'].map((o) => ({
 		label: o,
 		value: o
 	}));
-	let aggregationSelection: Aggregation = $state(table.groupingOrderSpec[0]?.aggregation);
+	let aggregationSelection: Aggregation = $derived(table.groupingOrderSpec[0]?.aggregation);
 
 	const updateIfAppropriate = () => {
 		const incompleteState =
@@ -65,7 +65,7 @@
 			];
 
 			if (JSON.stringify(table.groupingOrderSpec) !== JSON.stringify(newOrdering)) {
-				table.setGroupOrdering(newOrdering);
+				table.groupingOrderSpec = newOrdering;
 				onChange();
 			}
 		}

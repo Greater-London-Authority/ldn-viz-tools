@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import type { DataRow as DataRowType } from '$lib/core/lib/types';
 	import ColoredCell from '../../core/renderers/ColoredCell.svelte';
 	import ColGroupSpacer from '../cells/ColGroupSpacer.svelte';
@@ -8,7 +8,7 @@
 
 	interface DataRowProps {
 		row: DataRowType;
-		table: TableData;
+		table: TableState;
 	}
 
 	let { row, table }: DataRowProps = $props();
@@ -16,7 +16,7 @@
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i (col)}
+		{#each table.resolvedColumnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<!-- <td>{row[col.short_label]}</td> -->
 				<div style:width={col.computedWidth + 'px'} class="was-td" role="cell">
