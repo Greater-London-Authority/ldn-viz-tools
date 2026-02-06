@@ -1,33 +1,6 @@
 import { max, mean, median, min, quantile } from 'd3-array';
 import type { Filter, Group, GroupOrderCriterion, LeafOrderCriterion } from './types';
 
-// raw data is a list of data rows
-
-// Operations:
-// - group by field
-// - apply ordering to groups
-// - apply ordering within groups
-// - get list of sorted data
-
-// When we apply groupings,
-// want structure like:
-
-// Pure functions
-
-// [ ] Apply an ordering to groups
-
-// [ ] Apply an ordering to leaves
-
-// [ ] Expand all
-// [ ] Collapse all
-// [ ] Toggle expansion fo single
-
-// Keep track of filters
-
-// sorting groups:
-// - ascending/descending for categorical values
-// - max/median/mean/min/25% quartile/75% quartile
-
 function getMemberIds(group: Group, groups: Group[]): number[] {
 	// each group has either an order or a list of childGroups
 	if (group.order && group.order.length > 0) {
@@ -124,7 +97,8 @@ function sortAndFlattenChildren(group: Group, aggregatedVals: any, orderingCrite
 		return [group];
 	} else {
 		const compareFn = (a: Group, b: Group) => compareGroups(a, b, orderingCriteria, aggregatedVals);
-		const sortedChildren = group.childGroups.sort(compareFn);
+		// const sortedChildren = group.childGroups.sort(compareFn);
+		const sortedChildren = [...group.childGroups].sort(compareFn);
 
 		const flattened = [];
 		if (group.childGroups && group.childGroups.length > 0) {
@@ -365,3 +339,8 @@ export function mergeData(data: any[], columns: any[]) {
 		return newRow;
 	});
 }
+
+
+export function getGroupLevel(name: string): number {
+	return (name.match(new RegExp(' ∩ ', 'g')) || []).length;
+};

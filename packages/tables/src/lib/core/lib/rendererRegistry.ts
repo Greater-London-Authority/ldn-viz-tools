@@ -52,8 +52,7 @@ export function resolveAxisRenderer(
 
 /**
  * Resolves all renderer strings in a column spec to their components.
- * Returns an object that delegates property access to the source column
- * for mutable properties like computedWidth, while providing resolved renderers.
+ * Returns a new object with resolved renderers.
  */
 export function resolveColumnRenderers(col: ColSpec): ResolvedColSpec {
 	const resolvedCell = col.cell
@@ -86,7 +85,7 @@ export function resolveColumnRenderers(col: ColSpec): ResolvedColSpec {
 		: undefined;
 
 	return {
-		// Static properties (copied at resolution time)
+		// Copy all properties from the source column
 		label: col.label,
 		short_label: col.short_label,
 		type: col.type,
@@ -100,12 +99,8 @@ export function resolveColumnRenderers(col: ColSpec): ResolvedColSpec {
 		groups: col.groups,
 		width: col.width,
 		relativeWidth: col.relativeWidth,
+		computedWidth: col.computedWidth,
 		href: col.href,
-
-		// Mutable property - delegate to source via getter
-		get computedWidth() {
-			return col.computedWidth;
-		},
 
 		// Resolved renderers
 		cell: resolvedCell,

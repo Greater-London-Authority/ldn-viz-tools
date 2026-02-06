@@ -31,7 +31,7 @@
 
 	let fieldSelection = $derived(table.visibleFields);
 	const updateVisibility = (newFields) => {
-		table.setVisibleFields(newFields);
+		table.visibleFields = newFields;
 		onChange();
 	};
 </script>

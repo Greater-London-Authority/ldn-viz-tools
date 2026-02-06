@@ -65,7 +65,7 @@
 			];
 
 			if (JSON.stringify(table.groupingOrderSpec) !== JSON.stringify(newOrdering)) {
-				table.setGroupOrdering(newOrdering);
+				table.groupingOrderSpec = newOrdering;
 				onChange();
 			}
 		}

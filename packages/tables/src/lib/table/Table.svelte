@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { computeWidths } from '../core/lib/computeWidths';
-
 	import VirtualScroll from 'svelte-virtual-scroll-list';
 	import { TableState } from '../core/lib/tableState.svelte';
 	import TableContainer from './TableContainer.svelte';
@@ -144,39 +142,30 @@
 		beforeTable
 	}: Props = $props();
 
-	let colWidths = $state([]);
-
-	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
-	let updateTrigger = $state(0);
-
 	const createTable = (data: any[], tableSpec: TableSpec) => {
 		const to = new TableState(tableSpec);
 
-		to.setData(data);
-		to.setColumnSpec(tableSpec.columns);
-		to.setRowOrder([
+		to.rawData = data;
+		to.columnSpec = tableSpec.columns;
+		to.rowOrderSpec = [
 			{
 				field: 'a',
 				direction: 'ascending'
 			}
-		]);
+		];
 
 		if (fixedTableWidth) {
-			computeWidths(to, fixedTableWidth);
-			// TODO: should set tableWidth to match
+			to.tableWidth = fixedTableWidth;
 		}
 
 		return to;
 	};
 
-	let tableObj = $derived.by(() => {
-		return createTable(data, tableSpec);
-	});
+	// when data is updated, update the table object rather than creating a new one
+	const tableObj = createTable(data, tableSpec);
+	$effect( () => tableObj && data && (tableObj.rawData = data) );
 
 	let visualRows: any[] = $derived.by(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		updateTrigger; // run when grouping or ordering changes
-
 		const vr = [];
 
 		for (let group of tableObj!.groups) {
@@ -200,31 +189,26 @@
 
 	let tableWidth: number | undefined = $state();
 
-	const updateTableWidths = (tableObj: any, newWidth: number) => {
-		if (tableObj && !fixedTableWidth) {
-			computeWidths(tableObj, newWidth);
-			colWidths = tableObj.columnSpec.map((col: { computedWidth: any }) => col.computedWidth);
-		}
-	};
-
+	// Update table width when container width changes
 	$effect(() => {
-		if (tableWidth) updateTableWidths(tableObj, tableWidth);
+		if (tableObj && tableWidth && !fixedTableWidth) {
+			tableObj.tableWidth = tableWidth;
+		}
 	});
 
 	const beforeTable_render = $derived(beforeTable);
 </script>
 
-{#key [colWidths, updateTrigger]}
 	{#if tableObj && tableObj.extents}
 		<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
 			<div class="ml-4 flex w-[430px] gap-2">
 				{#if allowRowGrouping}
-					<GroupRowsMenu table={tableObj} onChange={() => updateTrigger++} />
-					<SortGroupsMenu table={tableObj} onChange={() => updateTrigger++} />
+					<GroupRowsMenu table={tableObj} />
+					<SortGroupsMenu table={tableObj} />
 				{/if}
 
 				{#if allowColumnHiding}
-					<ToggleColumnsMenu table={tableObj} onChange={() => updateTrigger++} />
+					<ToggleColumnsMenu table={tableObj} />
 				{/if}
 			</div>
 
@@ -260,7 +244,6 @@
 								{data}
 								{allowSorting}
 								{tableWidth}
-								onChange={() => updateTrigger++}
 							/>
 						{/if}
 
@@ -313,7 +296,6 @@
 			</TableContainer>
 		</div>
 	{/if}
-{/key}
 
 <style lang="postcss">
 	:global(.striped > div:nth-child(odd)) {

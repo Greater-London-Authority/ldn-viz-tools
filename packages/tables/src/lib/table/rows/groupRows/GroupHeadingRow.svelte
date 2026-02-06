@@ -5,6 +5,7 @@
 	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import type { Group } from '../../../core/lib/types';
 	import GroupSizeBar from './GroupSizeBar.svelte';
+	import { getGroupLevel } from '$lib/core/lib/dataFns';
 
 	interface Props {
 		group: Group;
@@ -20,7 +21,6 @@
 		return `${group.name} `;
 		//  return `${group.name} (${group.order.length} rows)`
 	};
-	const getGroupLevel = (name: string) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 </script>
 
 <div class="was-tr flex">

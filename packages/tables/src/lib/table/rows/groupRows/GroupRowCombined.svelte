@@ -7,6 +7,7 @@
 	import type { Group } from '../../../core/lib/types';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import GroupSizeBar from './GroupSizeBar.svelte';
+	import { getGroupLevel } from '$lib/core/lib/dataFns';
 
 	interface Props {
 		group: Group;
@@ -18,7 +19,6 @@
 	const constructLabel = (group: Group) => {
 		return group.name.split(' ∩ ').slice(-1);
 	};
-	const getGroupLevel = (name: string) => (name.match(new RegExp(' ∩ ', 'g')) || []).length;
 
 	const getNthAncestor = (group: Group, i: number, n: number) => {
 		let g: Group | undefined = group;

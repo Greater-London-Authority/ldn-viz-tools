@@ -34,20 +34,20 @@
 			return;
 		}
 
-		table.setFilters([
+		table.filters = [
 			{
 				type: selectedFilterType,
 				field: col.short_label,
 				value: selectedFilterType === 'isOneOf' ? val1?.split(',') : val1,
 				value2: val2
 			}
-		]);
+		];
 	};
 
 	const clearFilter = () => {
 		val1 = '';
 		selectedFilterType = undefined;
-		table.setFilters([]);
+		table.filters = [];
 	};
 
 	// TODO: set icon based on whether filter applied

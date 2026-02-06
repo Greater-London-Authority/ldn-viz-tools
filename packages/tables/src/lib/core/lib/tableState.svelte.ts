@@ -1,7 +1,8 @@
-import { filterData, getRows, getSortedRows, group, mergeData, sortGroups } from './dataFns';
+import { computeColumnWidths, type ColSpecWithWidth } from './computeWidths';
+import { filterData, getGroupLevel, getRows, getSortedRows, group, mergeData, sortGroups } from './dataFns';
 import { computeExtents } from './extents';
-import { createColorScales, createPositionScales } from './scaleFactory';
 import { resolveAllColumnRenderers } from './rendererRegistry';
+import { createColorScales, createPositionScales } from './scaleFactory';
 import type {
 	ColGroup,
 	ColSpec,
@@ -13,9 +14,19 @@ import type {
 	GroupOrderCriterion,
 	LeafOrderCriterion,
 	PositionScaleRecord,
+	ResolvedColSpec,
 	TableSpec,
 	TableWidths
 } from './types';
+
+/** Convert a Map to a Record object */
+function mapToRecord<V>(map: Map<string, V>): Record<string, V> {
+	const record: Record<string, V> = {};
+	for (const [key, value] of map) {
+		record[key] = value;
+	}
+	return record;
+}
 
 /**
  * Reactive table state class
@@ -35,13 +46,15 @@ export class TableState {
 	private _columnSpec = $state<ColSpec[]>([]);
 	private _visibleFields = $state<string[]>([]);
 	private _maxRowsPerGroup = $state<number | undefined>(undefined);
-	private _expansionState = $state<boolean[]>([]);
+	private _levelExpansionState = $state<boolean[]>([]);
 
-	// Version counter for triggering reactivity on group expansion mutations
-	private _groupsVersion = $state(0);
+	// UI state for groups (expanded/collapsed) is stored separately, keyed by group name
+	// This preserves state when groups are recomputed
+	private _groupExpansion = $state<Map<string, boolean>>(new Map());
+	private _groupMaxRows = $state<Map<string, number>>(new Map());
 
-	// Legacy change listeners
-	private _onChangeFuncs: Array<(groups: Group[], rows: DataRow[]) => void> = [];
+	// Table width for computing column widths
+	private _tableWidth = $state<number | undefined>(undefined);
 
 	// ========================================================================
 	// Configuration (static after construction)
@@ -55,45 +68,42 @@ export class TableState {
 	// Derived State
 	// ========================================================================
 
-	private _resolvedColumnSpec = $derived(resolveAllColumnRenderers(this._columnSpec));
+	// Column specs with computed widths (derived from columnSpec + tableWidth)
+	private _columnsWithWidths = $derived.by(() => {
+		if (this._tableWidth === undefined) {
+			// No width set yet - return columns without computed widths
+			return this._columnSpec as ColSpecWithWidth[];
+		}
+		return computeColumnWidths(
+			this._columnSpec,
+			this._colGroups,
+			this._colGroupGap,
+			this._tableWidth
+		);
+	});
+
+	private _resolvedColumnSpec = $derived(resolveAllColumnRenderers(this._columnsWithWidths));
 	private _mergedData = $derived(mergeData(this._rawData, this._columnSpec));
 	private _filteredData = $derived(filterData(this._mergedData, this._filters));
 
 	// Convert Maps to Records for backwards compatibility with bracket notation
-	private _extentsMap = $derived(computeExtents(this._filteredData));
-	private _extents = $derived.by(() => {
-		const record: ExtentRecord = {};
-		for (const [key, value] of this._extentsMap) {
-			record[key] = value;
-		}
-		return record;
-	});
+	private _extents = $derived(mapToRecord(computeExtents(this._filteredData)));
+	private _scales = $derived(mapToRecord(createColorScales(this._filteredData, this._columnSpec)));
+	private _posScales = $derived(mapToRecord(createPositionScales(this._filteredData, this._columnSpec)));
 
-	private _scalesMap = $derived(createColorScales(this._filteredData, this._columnSpec));
-	private _scales = $derived.by(() => {
-		const record: ColorScaleRecord = {};
-		for (const [key, value] of this._scalesMap) {
-			record[key] = value;
-		}
-		return record;
-	});
-
-	private _posScalesMap = $derived(createPositionScales(this._filteredData, this._columnSpec));
-	private _posScales = $derived.by(() => {
-		const record: PositionScaleRecord = {};
-		for (const [key, value] of this._posScalesMap) {
-			record[key] = value;
-		}
-		return record;
-	});
-
-	// Groups computation with version tracking for expansion changes
-	private _computedGroups = $derived.by(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		this._groupsVersion; // Depend on version for reactivity on expansion changes
-
-		const unsortedGroups = group(this._filteredData, this._groupingFields, this._maxRowsPerGroup);
+	// _baseGroups do not include the expanded/collapsed UI state
+	private _baseGroups = $derived.by(() => {
+		const unsortedGroups = group(this._filteredData, this._groupingFields);
 		return sortGroups(unsortedGroups, this._filteredData, this._groupingOrderSpec);
+	});
+
+	// Merge the UI state (expansion, maxRows) into groups
+	private _computedGroups = $derived.by(() => {
+		return this._baseGroups.map((g) => ({
+			...g,
+			isExpanded: this._groupExpansion.get(g.name) ?? true,
+			maxRows: this._groupMaxRows.get(g.name) ?? this._maxRowsPerGroup
+		}));
 	});
 
 	private _rows = $derived(getRows(this._filteredData, this._computedGroups, this._filters));
@@ -121,183 +131,139 @@ export class TableState {
 	}
 
 	// ========================================================================
-	// Helper Functions
-	// ========================================================================
-
-	private notifyChanges() {
-		for (const func of this._onChangeFuncs) {
-			func(this._computedGroups, this._rows);
-		}
-	}
-
-	private resetMergedValues() {
-		if (!this._columnSpec || this._columnSpec.length === 0) {
-			return;
-		}
-
-		for (const col of this._columnSpec) {
-			if (col.allowGrouping) {
-				const vals = [...new Set(this._rawData.map((r) => r[col.short_label]))];
-				col.groups = { ungrouped: vals, grouped: {} };
-			}
-		}
-	}
-
-	private getGroupLevel(name: string): number {
-		return (name.match(new RegExp(' ∩ ', 'g')) || []).length;
-	}
-
-	// ========================================================================
 	// Public Getters and Setters
 	// ========================================================================
 
-	// Source state getters
-	get rawData() {
+	// Source state getters and setters
+	get rawData(): readonly DataRow[] {
 		return this._rawData;
 	}
-	get filters() {
+	set rawData(data: DataRow[]) {
+		this._rawData = data;
+	}
+
+	get filters(): readonly Filter[] {
 		return this._filters;
 	}
-	get groupingFields() {
+	set filters(filters: Filter[]) {
+		this._filters = filters;
+	}
+
+	get groupingFields(): readonly string[] {
 		return this._groupingFields;
 	}
-	get rowOrderSpec() {
+	set groupingFields(fields: string[]) {
+		this._groupingFields = fields;
+	}
+
+	get rowOrderSpec(): readonly LeafOrderCriterion[] {
 		return this._rowOrderSpec;
 	}
-	get groupingOrderSpec() {
+	set rowOrderSpec(order: LeafOrderCriterion[]) {
+		this._rowOrderSpec = order;
+	}
+
+	get groupingOrderSpec(): readonly GroupOrderCriterion[] {
 		return this._groupingOrderSpec;
 	}
-	get columnSpec() {
-		return this._columnSpec;
+	set groupingOrderSpec(order: GroupOrderCriterion[]) {
+		this._groupingOrderSpec = order;
+	}
+
+	get columnSpec(): readonly ColSpecWithWidth[] {
+		return this._columnsWithWidths;
 	}
 	set columnSpec(cols: ColSpec[]) {
 		this._columnSpec = cols;
+		this._visibleFields = cols.map((f) => f.short_label);
 	}
-	get resolvedColumnSpec() {
+
+	get resolvedColumnSpec(): readonly ResolvedColSpec[] {
 		return this._resolvedColumnSpec;
 	}
-	get visibleFields() {
+
+	get tableWidth() {
+		return this._tableWidth;
+	}
+	set tableWidth(width: number | undefined) {
+		this._tableWidth = width;
+	}
+
+	get visibleFields(): readonly string[] {
 		return this._visibleFields;
 	}
 	set visibleFields(fields: string[]) {
 		this._visibleFields = fields;
 	}
+
 	get maxRowsPerGroup() {
 		return this._maxRowsPerGroup;
 	}
-	get expansionState() {
-		return this._expansionState;
+	set maxRowsPerGroup(maxRows: number | undefined) {
+		this._maxRowsPerGroup = maxRows;
+		// Clear per-group overrides so all groups use the new default
+		this._groupMaxRows = new Map();
+	}
+
+	get expansionState(): readonly boolean[] {
+		return this._levelExpansionState;
+	}
+
+	get groupExpansion(): ReadonlyMap<string, boolean> {
+		return this._groupExpansion;
+	}
+
+	get groupMaxRows(): ReadonlyMap<string, number> {
+		return this._groupMaxRows;
 	}
 
 	// Derived state getters
-	get data() {
+	get data(): readonly DataRow[] {
 		return this._filteredData;
 	}
-	get groups() {
+	get groups(): readonly Group[] {
 		return this._computedGroups;
 	}
-	get rows() {
+	get rows(): readonly DataRow[] {
 		return this._rows;
 	}
-	get extents() {
+	get extents(): Readonly<ExtentRecord> {
 		return this._extents;
 	}
-	get scales() {
+	get scales(): Readonly<ColorScaleRecord> {
 		return this._scales;
 	}
-	get posScales() {
+	get posScales(): Readonly<PositionScaleRecord> {
 		return this._posScales;
 	}
 
 	// Configuration getters
-	get colGroups() {
+	get colGroups(): readonly ColGroup[] {
 		return this._colGroups;
 	}
 	get colGroupGap() {
 		return this._colGroupGap;
 	}
-	get widths() {
+	get widths(): Readonly<TableWidths> {
 		return this._widths;
 	}
 
 	// ========================================================================
-	// Public Methods - Setters
-	// ========================================================================
-
-	setData(data: DataRow[]) {
-		this._rawData = data;
-		this.resetMergedValues();
-		this.notifyChanges();
-	}
-
-	setFilters(filters: Filter[]) {
-		this._filters = filters;
-		this.notifyChanges();
-	}
-
-	setGrouping(fields: string[]) {
-		this._groupingFields = fields;
-		this.notifyChanges();
-	}
-
-	setRowOrder(order: LeafOrderCriterion[]) {
-		this._rowOrderSpec = order;
-		this.notifyChanges();
-	}
-
-	setGroupOrdering(order: GroupOrderCriterion[]) {
-		this._groupingOrderSpec = order;
-		this.notifyChanges();
-	}
-
-	setColumnSpec(columns: ColSpec[]) {
-		this._columnSpec = columns;
-		this._visibleFields = columns.map((f) => f.short_label);
-		this.resetMergedValues();
-		this.notifyChanges();
-	}
-
-	setVisibleFields(fields: string[]) {
-		this._visibleFields = fields;
-		this.notifyChanges();
-	}
-
-	setMaxRowsForGroups(maxRows: number) {
-		this._maxRowsPerGroup = maxRows;
-		for (const g of this._computedGroups) {
-			g.maxRows = maxRows;
-		}
-		this._groupsVersion++;
-		this.notifyChanges();
-	}
-
-	setMaxRowsForGroup(targetGroup: Group, maxRows: number) {
-		targetGroup.maxRows = maxRows;
-		this._groupsVersion++;
-		this.notifyChanges();
-	}
-
-	setMerged() {
-		// Trigger re-merge by updating version
-		this._groupsVersion++;
-		this.notifyChanges();
-	}
-
-	// ========================================================================
-	// Public Methods - Actions
+	// Public Methods - these work with groups and sorting
 	// ========================================================================
 
 	toggleGroupCollapsed(targetGroup: Group, adjustChildren = false) {
-		targetGroup.isExpanded = !targetGroup.isExpanded;
+		const newExpanded = !targetGroup.isExpanded;
+		const newMap = new Map(this._groupExpansion);
+		newMap.set(targetGroup.name, newExpanded);
 
-		if (adjustChildren && !targetGroup.isExpanded) {
+		if (adjustChildren && !newExpanded) {
 			for (const childGroup of targetGroup.childGroups) {
-				childGroup.isExpanded = false;
+				newMap.set(childGroup.name, false);
 			}
 		}
 
-		this._groupsVersion++;
-		this.notifyChanges();
+		this._groupExpansion = newMap;
 	}
 
 	toggleSort(fieldName: string) {
@@ -313,27 +279,30 @@ export class TableState {
 				}
 			];
 		}
-		this.notifyChanges();
 	}
 
 	openOrCloseLevel(level: number) {
-		const isExpanded = !(this._expansionState[level] ?? true);
-		this._expansionState[level] = isExpanded;
+		const isExpanded = !(this._levelExpansionState[level] ?? true);
+		
+		// Grow array if needed, defaulting new levels to expanded (true)
+		const newState = [...this._levelExpansionState];
+		while (newState.length <= level) {
+			newState.push(true);
+		}
+		newState[level] = isExpanded;
+		this._levelExpansionState = newState;
+		
 
-		for (const g of this._computedGroups) {
-			const thisLevel = this.getGroupLevel(g.name);
+		const newMap = new Map(this._groupExpansion);
+		for (const g of this._baseGroups) {
+			const thisLevel = getGroupLevel(g.name);
 			if (thisLevel === level) {
-				g.isExpanded = isExpanded;
+				newMap.set(g.name, isExpanded);
 			}
 		}
 
-		this._groupsVersion++;
-		this.notifyChanges();
+		this._groupExpansion = newMap;
 	}
-
-	// ========================================================================
-	// Public Methods - Queries
-	// ========================================================================
 
 	fetchGroupContents(targetGroup: Group): DataRow[] {
 		return getSortedRows(
@@ -347,11 +316,4 @@ export class TableState {
 		return getRows(this._filteredData, [targetGroup], []).map((d) => d[colName]);
 	}
 
-	// ========================================================================
-	// Legacy Compatibility
-	// ========================================================================
-
-	setOnRowsChange(func: (groups: Group[], rows: DataRow[]) => void) {
-		this._onChangeFuncs.push(func);
-	}
 }
