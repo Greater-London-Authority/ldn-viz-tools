@@ -16,6 +16,7 @@
 		textSize = 16,
 		positiveColor = 'blue',
 		negativeColor = 'red',
+		backgroundColor = 'lightgrey',
 		extent = [0, 1],
 		width = 100,
 		..._rest
@@ -40,7 +41,7 @@
 			{width}
 			y={barVerticalPadding}
 			height={height - 2 * barVerticalPadding}
-			fill="lightgrey"
+			fill={backgroundColor}
 		/>
 
 		<!-- data bar -->

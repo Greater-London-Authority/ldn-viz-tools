@@ -55,6 +55,16 @@
 	{/snippet}
 </Story>
 
+<Story name="Changing background colors">
+	{#snippet template(args)}
+		<div class="flex w-36 flex-col">
+			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} backgroundColor="lightGrey" />
+			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} backgroundColor="aliceblue" />
+			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} backgroundColor="cornsilk" />
+		</div>
+	{/snippet}
+</Story>
+
 <Story name="Custom text size">
 	{#snippet template({ args })}
 		<div class="flex w-36 flex-col">
