@@ -1,5 +1,14 @@
 # ldn-viz-tools-ui
 
+## 21.2.0
+
+### Minor Changes
+
+- 2f18b94: FIXED: `ColorLegendOrdinalChips` and `ColorLegendOrdinalHorizontalAlt` components are now exported again
+- 56de83f: CHANGED: `Overlay`, `Tooltip` and `Popover` components now have a bindable `open` prop (as `Modal` already did)
+- c2bdd76: FIXED: fixed highlight state for geocoder
+- 946013e: CHANGED: focus modal description, rather than close button
+
 ## 21.1.0
 
 ### Minor Changes
