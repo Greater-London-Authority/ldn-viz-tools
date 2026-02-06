@@ -1,8 +1,12 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import PairArrowCell from './PairArrowCell.svelte';
 
+	/**
+	 * The `PairArrowCell` component renders a table cell containing an arrow pointing from a context value to the cell's value.
+	 * The color of the arrow indicates whether it is increasing or decreasing
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/PairArrowCell',
 		component: PairArrowCell,

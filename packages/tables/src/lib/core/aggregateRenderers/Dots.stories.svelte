@@ -1,8 +1,12 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import Dots from './Dots.svelte';
 
+	/**
+	 * The `Dots` component renders a set of values as something like a beeswarm plot or jittered Cleveland dot plot.
+	 * Different plots in the same column have a consistent x-axis based on computed extent of column.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/Dots',
 		component: Dots,

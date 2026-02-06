@@ -1,6 +1,12 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapDeckPopovers from './MapDeckPopovers.svelte';
+
+	/**
+	 * The `MapDeckPopovers` component renders a popover for features rendered by Deck.gl, when they are clicked on.
+	 * It accepts a configuration object, the keys are the layer ids for which Popovers should be rendered, and the  values specify how they should be rendered.
+	 * For each layer, the output can be specified as a string constant, a function that is passed a feature and returns a string, or a custom Svelte component.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/MapDeckPopovers',
 		component: MapDeckPopovers,

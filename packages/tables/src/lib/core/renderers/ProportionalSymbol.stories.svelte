@@ -1,7 +1,10 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import ProportionalSymbol from './ProportionalSymbol.svelte';
+	/**
+	 * The `ProportionalSymbol` component renders a table cell encoding a single value as a circle, with the radius encoding the value.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/ProportionalSymbol',

@@ -1,10 +1,18 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import ChartContainer from './ChartContainer.svelte';
 
 	import { Select } from '@ldn-viz/ui';
 
+	/**
+	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
+	 * It also provides controls such as data/image download buttons.
+	 *
+	 * **Note**: You must provide a `chartDescription` for accessibility.
+	 *
+	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
+	 */
 	const { Story } = defineMeta({
 		title: 'Charts/Components/ChartContainer',
 		component: ChartContainer,
