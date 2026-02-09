@@ -162,6 +162,7 @@
 	};
 
 	// when data is updated, update the table object rather than creating a new one
+	// svelte-ignore state_referenced_locally
 	const tableObj = createTable(data, tableSpec);
 	$effect(() => tableObj && data && (tableObj.rawData = data));
 
