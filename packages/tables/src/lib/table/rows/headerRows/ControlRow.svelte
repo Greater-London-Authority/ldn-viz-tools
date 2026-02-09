@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
 	import { ChevronDown, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
@@ -9,7 +10,11 @@
 	import FilterMenu from '../../menus/FilterMenu.svelte';
 	import MergeMenu from '../../menus/MergeMenu.svelte';
 
-	let { table } = $props();
+	interface Props {
+		table: TableState;
+	}
+
+	let { table }: Props = $props();
 </script>
 
 <Scaffolding {table}>
@@ -43,7 +48,7 @@
     -->
 
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i (col)}
+		{#each table.resolvedColumnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div class="was-th flex" role="columnheader" style:width={col.computedWidth + 'px'}>
 					<FilterMenu {table} {col} />
