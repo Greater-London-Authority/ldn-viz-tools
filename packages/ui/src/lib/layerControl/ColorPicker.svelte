@@ -18,13 +18,18 @@
 		 * Optional custom colours to choose from. If these don't exist, default to categoricalColors.
 		 */
 		colorNames: any;
+		/**
+		 * If `true`, shows the color chip even when the control is disabled (but clicking on it does not open the control).
+		 */
+		alwaysShowcolorChip?: boolean;
 	}
 
 	let {
 		label,
 		activeColorName = $bindable(),
 		disabled = false,
-		colorNames = $bindable()
+		colorNames = $bindable(),
+		alwaysShowcolorChip = false
 	}: Props = $props();
 
 	const categoricalColors = [
@@ -58,13 +63,21 @@
 		'rounded-full bg-color-container-level-0 hover:bg-color-container-level-0 hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-ui-border-secondary hover:ring-2 hover:ring-color-ui-background-primary focus-visible:ring-offset-color-ui-border-secondary';
 </script>
 
-{#if disabled}
+{#if disabled && !alwaysShowcolorChip}
 	<Icon
 		src={NoSymbol}
 		theme="mini"
 		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
 		aria-hidden="true"
 	/>
+{:else if disabled && alwaysShowcolorChip}
+	<div
+		class="relative h-[22px] w-[22px] rounded-full border"
+		style:background={activeColorName
+			? theme.tokenNameToValue(activeColorName, theme.currentTheme)
+			: ''}
+		title="Layer color is not editable."
+	></div>
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
