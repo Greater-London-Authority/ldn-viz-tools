@@ -7,8 +7,8 @@
 
 	import { Geocoder, GeocoderSuggestionList } from '@ldn-viz/ui';
 	import { getContext } from 'svelte';
-	import { clearFeature, setFeature } from './map-layer';
 	import type { MapLibreStore } from '../map/types';
+	import { clearFeature, setFeature } from './map-layer';
 
 	import type {
 		GeocoderAdapter,
