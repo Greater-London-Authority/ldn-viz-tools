@@ -72,7 +72,7 @@
 	/>
 {:else if disabled && alwaysShowcolorChip}
 	<div
-		class="relative h-[22px] w-[22px] rounded-full border"
+		class="relative h-[22px] w-[22px] cursor-not-allowed rounded-full border"
 		style:background={activeColorName
 			? theme.tokenNameToValue(activeColorName, theme.currentTheme)
 			: ''}
