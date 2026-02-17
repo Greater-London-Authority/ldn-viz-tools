@@ -2,6 +2,7 @@
 	import { theme } from '@ldn-viz/ui';
 	import { colorWithBestContrast } from '@ldn-viz/utils';
 	import { arc, pie, type DefaultArcObject, type PieArcDatum } from 'd3-shape';
+	import DonutTooltip from './DonutTooltip.svelte';
 
 	/* =========================
 	   Props 
@@ -54,6 +55,12 @@
 
 	const formatValue = (value: number) => valueFormatter(value, total);
 
+	const radius = Math.min(width, height) / 2;
+
+	let tooltipArc = arc<DefaultArcObject>()
+		.innerRadius(radius * 0.36)
+		.outerRadius(radius * 0.9);
+
 	let labelArc = arc<DefaultArcObject>()
 		.innerRadius((0.9 * height) / 2)
 		.outerRadius((0.5 * height) / 2);
@@ -71,20 +78,10 @@
 	let svgEl: SVGSVGElement | undefined = $state();
 
 	const onMouseEnter = (slice: PieArcDatum<T>) => {
-		const [cx, cy] = labelArc.centroid({
-			...slice,
-			innerRadius: (0.9 * height) / 2,
-			outerRadius: (0.5 * height) / 2
-		});
-
 		if (!svgEl) return;
 
-		const rect = svgEl.getBoundingClientRect();
-		const scaleX = rect.width / width;
-		const scaleY = rect.height / height;
-
-		tooltipX = rect.left + (cx + width / 2) * scaleX;
-		tooltipY = rect.top + (cy + height / 2) * scaleY;
+		tooltipX = tooltipArc.centroid(slice)[0] + width / 2;
+		tooltipY = tooltipArc.centroid(slice)[1] + height / 2;
 
 		tooltipLabel = labelAccessor(slice.data);
 		tooltipValue = formatValue(valueAccessor(slice.data));
@@ -144,15 +141,13 @@
 			{/each}
 		</svg>
 
-		{#if tooltipVisible}
-			<div
-				class="pointer-events-none fixed rounded bg-black px-2 py-1 text-xs text-white"
-				style="left: {tooltipX}px; top: {tooltipY}px"
-			>
-				<strong>{tooltipLabel}</strong><br />
-				{tooltipValue}
-			</div>
-		{/if}
+		<DonutTooltip
+			x={tooltipX}
+			y={tooltipY}
+			category={tooltipLabel}
+			quantity={tooltipValue}
+			visible={tooltipVisible}
+		/>
 	</div>
 {:else}
 	No data
