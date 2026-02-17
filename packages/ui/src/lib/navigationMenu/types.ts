@@ -27,6 +27,11 @@ export type NavigationMenuProps = {
 	 * Exposes active menu item to parent container for modification.
 	 */
 	activeMenuItemId?: string;
+
+	/**
+	 * If `true`, then query parameters will be copied from the current page to the target of navigation links.
+	 */
+	copySearchParams?: boolean;
 };
 
 export interface NavigationMenuItemProps {
@@ -69,4 +74,9 @@ export interface NavigationMenuItemProps {
 	 * The indexed number of the menu item position
 	 */
 	index?: number;
+
+	/**
+	 * If `true`, then query parameters will be copied from the current page to the target of navigation links.
+	 */
+	copySearchParams?: boolean;
 }

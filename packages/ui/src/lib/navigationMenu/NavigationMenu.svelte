@@ -12,7 +12,8 @@
 		width = 'w-full',
 		isAlwaysExpanded = false,
 		orientation = 'vertical',
-		activeMenuItemId = $bindable('')
+		activeMenuItemId = $bindable(''),
+		copySearchParams = false
 	}: NavigationMenuProps = $props();
 
 	const active = $state({ value: '' });
@@ -78,7 +79,17 @@
 <nav aria-label={ariaLabel} class={width}>
 	<ul {id} class={menuClasses}>
 		{#each menuState as { title, href, children, id, isExpanded }, index (index)}
-			<NavigationMenuItem {href} {title} {id} {children} {index} {onChange} {isExpanded} {active} />
+			<NavigationMenuItem
+				{href}
+				{title}
+				{id}
+				{children}
+				{index}
+				{onChange}
+				{isExpanded}
+				{active}
+				{copySearchParams}
+			/>
 		{/each}
 	</ul>
 </nav>

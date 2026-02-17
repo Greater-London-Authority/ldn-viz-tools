@@ -18,7 +18,8 @@
 		isExpanded = $bindable(false),
 		onChange,
 		index,
-		active
+		active,
+		copySearchParams
 	}: NavigationMenuItemProps = $props();
 
 	const navContext: Record<keyof NavigationMenuProps, any> = getContext('navContext');
@@ -106,13 +107,30 @@
 		)
 	);
 	let listItemClasses = $derived(classNames(listClasses[orientation!]));
+
+	const constructURL = (href?: string) => {
+		if (!copySearchParams || !href) {
+			return href;
+		}
+
+		const parameterString = new URL(window.location.href).search;
+		const target = new URL(href);
+		target.search = parameterString;
+
+		return target.toString();
+	};
 </script>
 
 <li class={listItemClasses}>
 	{#if hasChildren}
 		<div {id} class="flex items-center justify-between">
 			{#if href}
-				<a {href} class={textClasses} {...currentPage} onclick={() => onChange(id)}>
+				<a
+					href={constructURL(href)}
+					class={textClasses}
+					{...currentPage}
+					onclick={() => onChange(id)}
+				>
 					{title}
 				</a>
 			{:else}
@@ -146,7 +164,13 @@
 			{/if}
 		</div>
 	{:else}
-		<a {id} {href} class={textClasses} {...currentPage} onclick={() => onChange(id)}>
+		<a
+			{id}
+			href={constructURL(href)}
+			class={textClasses}
+			{...currentPage}
+			onclick={() => onChange(id)}
+		>
 			{title}
 		</a>
 	{/if}
