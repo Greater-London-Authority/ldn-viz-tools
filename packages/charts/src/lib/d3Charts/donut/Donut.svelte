@@ -19,9 +19,9 @@
 		 */
 		data: DonutData[];
 		/**
-		 * Color ramp to be used and how it links to data labels
+		 * Define catergorical colours and which category they should be associated with
 		 */
-		domainColors: any;
+		colorMapping: any;
 
 		/**
 		 * Width of donut
@@ -47,7 +47,7 @@
 
 	let {
 		data,
-		domainColors,
+		colorMapping,
 		width = 300,
 		height = 300,
 		margin = 0,
@@ -139,7 +139,7 @@
 			{#each pieData as slice}
 				<path
 					d={arcPath(slice)}
-					fill={domainColors[slice.data.label]}
+					fill={colorMapping[slice.data.label]}
 					stroke={theme.currentTheme.color.chart.background}
 					role="listitem"
 					cursor="pointer"
@@ -153,7 +153,7 @@
 						font-size="0.8em"
 						font-weight="500"
 						pointer-events="none"
-						style:fill={textColor(domainColors[slice.data.label])}
+						style:fill={textColor(colorMapping[slice.data.label])}
 						transform="translate({labelArc.centroid({
 							...slice
 						})})"
@@ -174,7 +174,7 @@
 			/>
 		{/if}
 
-		<DonutLegend {data} {domainColors} />
+		<DonutLegend {data} {colorMapping} />
 	</div>
 {:else}
 	No data

@@ -40,7 +40,7 @@
 			chartHeight="h-200px"
 			data={fruitSales}
 		>
-			<Donut data={fruitSales} domainColors={fruitColors}></Donut>
+			<Donut data={fruitSales} colorMapping={fruitColors}></Donut>
 		</ChartContainer>
 	{/snippet}
 </Story>
