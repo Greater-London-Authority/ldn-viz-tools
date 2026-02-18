@@ -5,16 +5,16 @@
 	interface Props {
 		data: DonutData[];
 		colorMapping: any;
-		valueFormatter?: (value: number, total: number) => string;
-		numberFormatter?: (value: number) => string;
+		percentFormatter?: (value: number, total: number) => string;
+		countFormatter?: (value: number) => string;
 	}
 
 	let {
 		data,
 		colorMapping,
 
-		valueFormatter = (v, total) => (total ? ((v / total) * 100).toFixed(1) + '%' : ''),
-		numberFormatter = (v) => v.toLocaleString()
+		percentFormatter = (v, total) => (total ? ((v / total) * 100).toFixed(1) + '%' : ''),
+		countFormatter = (v) => v.toLocaleString()
 	}: Props = $props();
 
 	let total = $derived(sum(data.map((d) => d.value)));
@@ -30,7 +30,7 @@
 <div class="m-4 flex flex-col p-4">
 	<div class="mb-2 flex justify-between">
 		<span class="font-bold">
-			Total: {numberFormatter(total)}
+			Total: {countFormatter(total)}
 		</span>
 	</div>
 
@@ -46,11 +46,11 @@
 			</div>
 
 			<div class="w-14 text-center font-bold">
-				{valueFormatter(entry.value, total)}
+				{percentFormatter(entry.value, total)}
 			</div>
 
 			<div class="w-20 text-right">
-				{numberFormatter(entry.value)}
+				{countFormatter(entry.value)}
 			</div>
 		</div>
 	{/each}
