@@ -240,6 +240,10 @@
 				.call(bottomAxis as any, 0)
 				.call(axisState.tickAdjust)
 				.call((g: any) => g.select('.domain').remove());
+
+			// clear the `font-family="sans-serif"` attribute applied by the axis generator,
+			// so the font-family used on the rest of the page (Inter) is used
+			select(ticksRef).attr('font-family', null);
 		}
 	};
 
