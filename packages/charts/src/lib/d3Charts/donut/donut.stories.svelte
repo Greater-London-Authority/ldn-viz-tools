@@ -4,12 +4,11 @@
 	import { ChartContainer } from '@ldn-viz/charts';
 	import { theme } from '@ldn-viz/ui';
 	import Donut from './Donut.svelte';
-	import DonutLegend from './DonutLegend.svelte';
+	import type { DonutData } from './types';
 
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
-	 *
-	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
+	 
 	 */
 
 	const { Story } = defineMeta({
@@ -17,11 +16,6 @@
 		component: Donut,
 		tags: ['autodocs']
 	});
-
-	type DonutData = {
-		label: string;
-		value: number;
-	};
 
 	const fruitSales: DonutData[] = [
 		{ label: 'Apples', value: 12000 },
@@ -34,8 +28,6 @@
 		Bananas: theme.currentTheme.color.palette.orange[500],
 		Oranges: theme.currentTheme.color.palette.orange[700]
 	};
-
-	const colorAccessor = (d: DonutData) => fruitColors[d.label as keyof typeof fruitColors];
 </script>
 
 <Story name="Default">
@@ -48,9 +40,7 @@
 			chartHeight="h-200px"
 			data={fruitSales}
 		>
-			<Donut data={fruitSales} {colorAccessor}></Donut>
-
-			<DonutLegend data={fruitSales} {colorAccessor} order={Object.keys(fruitColors)} />
+			<Donut data={fruitSales} domainColors={fruitColors}></Donut>
 		</ChartContainer>
 	{/snippet}
 </Story>

@@ -1,23 +1,18 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
-
-	type DonutData = {
-		label: string;
-		value: number;
-	};
+	import type { DonutData } from './types';
 
 	interface Props {
 		data: DonutData[];
-		colorAccessor?: (d: DonutData) => string;
-		order?: string[]; // optional manual ordering
+		domainColors: any;
 		valueFormatter?: (value: number, total: number) => string;
 		numberFormatter?: (value: number) => string;
 	}
 
 	let {
 		data,
-		colorAccessor,
-		order,
+		domainColors,
+
 		valueFormatter = (v, total) => (total ? ((v / total) * 100).toFixed(1) + '%' : ''),
 		numberFormatter = (v) => v.toLocaleString()
 	}: Props = $props();
@@ -25,8 +20,7 @@
 	let total = $derived(sum(data.map((d) => d.value)));
 
 	let orderedData = $derived.by(() => {
-		if (!order) return [...data];
-
+		const order = Object.keys(domainColors);
 		return [...data].sort((a, b) => {
 			return order.indexOf(a.label) - order.indexOf(b.label);
 		});
@@ -44,7 +38,7 @@
 		<div class="mb-1 flex items-center">
 			<div
 				class="mr-2 h-5 w-5 shrink-0"
-				style="background-color: {colorAccessor ? colorAccessor(entry) : '#ccc'}"
+				style="background-color: {domainColors[entry.label] ?? '#ccc'}"
 			></div>
 
 			<div class="w-24">

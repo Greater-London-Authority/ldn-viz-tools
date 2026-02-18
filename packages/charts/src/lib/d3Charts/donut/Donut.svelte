@@ -2,7 +2,6 @@
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
 	 *
-	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 * 	@component
 	 */
 
@@ -10,12 +9,9 @@
 	import { colorWithBestContrast } from '@ldn-viz/utils';
 	import { sum } from 'd3-array';
 	import { arc, pie, type PieArcDatum } from 'd3-shape';
+	import DonutLegend from './DonutLegend.svelte';
 	import DonutTooltip from './DonutTooltip.svelte';
-
-	type DonutData = {
-		label: string;
-		value: number;
-	};
+	import type { DonutData } from './types';
 
 	interface Props {
 		/**
@@ -25,7 +21,8 @@
 		/**
 		 * Color ramp to be used and how it links to data labels
 		 */
-		colorAccessor?: (d: DonutData) => string;
+		domainColors: any;
+
 		/**
 		 * Width of donut
 		 */
@@ -50,7 +47,7 @@
 
 	let {
 		data,
-		colorAccessor,
+		domainColors,
 		width = 300,
 		height = 300,
 		margin = 0,
@@ -117,7 +114,7 @@
 	};
 
 	/**
-	 * Labels on donut - change color of the text depending on color of segment based off what has the best contrast
+	 * Labels on donut - change text color depending on color of segment
 	 */
 
 	let textColor = (color: any) => {
@@ -142,7 +139,7 @@
 			{#each pieData as slice}
 				<path
 					d={arcPath(slice)}
-					fill={colorAccessor ? colorAccessor(slice.data) : 'blue'}
+					fill={domainColors[slice.data.label]}
 					stroke={theme.currentTheme.color.chart.background}
 					role="listitem"
 					cursor="pointer"
@@ -156,9 +153,7 @@
 						font-size="0.8em"
 						font-weight="500"
 						pointer-events="none"
-						style:fill={textColor(
-							colorAccessor ? colorAccessor(slice.data) : theme.currentTheme.color.chart.background
-						)}
+						style:fill={textColor(domainColors[slice.data.label])}
 						transform="translate({labelArc.centroid({
 							...slice
 						})})"
@@ -178,6 +173,8 @@
 				visible={tooltipVisible}
 			/>
 		{/if}
+
+		<DonutLegend {data} {domainColors} />
 	</div>
 {:else}
 	No data
