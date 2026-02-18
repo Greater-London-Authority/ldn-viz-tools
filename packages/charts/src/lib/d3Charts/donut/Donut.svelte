@@ -42,7 +42,11 @@
 		/**
 		 * Tooltips on donut segment, defaults to true.
 		 */
-		tooltip?: boolean;
+		hideTooltip?: boolean;
+		/**
+		 * Tooltips on donut segment, defaults to true.
+		 */
+		hideLegend?: boolean;
 	}
 
 	let {
@@ -52,7 +56,8 @@
 		height = 300,
 		margin = 0,
 		minAngle = 0.5,
-		tooltip = true
+		hideTooltip = false,
+		hideLegend = false
 	}: Props = $props();
 
 	/**
@@ -164,7 +169,7 @@
 			{/each}
 		</svg>
 
-		{#if tooltip}
+		{#if !hideTooltip}
 			<DonutTooltip
 				x={tooltipX}
 				y={tooltipY}
@@ -174,7 +179,9 @@
 			/>
 		{/if}
 
-		<DonutLegend {data} {colorMapping} />
+		{#if !hideLegend}
+			<DonutLegend {data} {colorMapping} />
+		{/if}
 	</div>
 {:else}
 	No data
