@@ -35,7 +35,7 @@
 		Oranges: theme.currentTheme.color.palette.orange[700]
 	};
 
-	const colorAccessor = (d: DonutData) => fruitColors[d.label];
+	const colorAccessor = (d: DonutData) => fruitColors[d.label as keyof typeof fruitColors];
 </script>
 
 <Story name="Default">

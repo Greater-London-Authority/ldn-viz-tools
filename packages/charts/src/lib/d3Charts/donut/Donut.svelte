@@ -9,7 +9,7 @@
 	import { theme } from '@ldn-viz/ui';
 	import { colorWithBestContrast } from '@ldn-viz/utils';
 	import { sum } from 'd3-array';
-	import { arc, pie, type DefaultArcObject, type PieArcDatum } from 'd3-shape';
+	import { arc, pie, type PieArcDatum } from 'd3-shape';
 	import DonutTooltip from './DonutTooltip.svelte';
 
 	type DonutData = {
@@ -85,7 +85,7 @@
 
 	const formatPercent = (val: number, total: number) => ((val / total) * 100).toFixed(1) + '%';
 
-	let labelArc = arc<DefaultArcObject>()
+	let labelArc = arc<PieArcDatum<DonutData>>()
 		.innerRadius((0.9 * height) / 2)
 		.outerRadius((0.5 * height) / 2);
 
@@ -160,9 +160,7 @@
 							colorAccessor ? colorAccessor(slice.data) : theme.currentTheme.color.chart.background
 						)}
 						transform="translate({labelArc.centroid({
-							...slice,
-							innerRadius: (0.9 * height) / 2,
-							outerRadius: (0.5 * height) / 2
+							...slice
 						})})"
 					>
 						{formatPercent(slice.data.value, total)}
