@@ -34,7 +34,7 @@
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
-			title={`Proportion of all Fruit Sales`}
+			title="Proportion of all Fruit Sales"
 			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 			chartHeight="h-200px"
