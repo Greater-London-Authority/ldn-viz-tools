@@ -7,10 +7,7 @@
 	import DonutLegend from './DonutLegend.svelte';
 
 	/**
-	 * The `Donut` chart component is D3 based donut plot that adds additional information such as a title, subtitle, and description.
-	 *
-	 *
-	 * **Note**: note note note.
+	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 */
@@ -21,10 +18,15 @@
 		tags: ['autodocs']
 	});
 
-	const fruitSales = [
-		{ product: 'Apples', revenue: 12000 },
-		{ product: 'Bananas', revenue: 8000 },
-		{ product: 'Oranges', revenue: 6000 }
+	type DonutData = {
+		label: string;
+		value: number;
+	};
+
+	const fruitSales: DonutData[] = [
+		{ label: 'Apples', value: 12000 },
+		{ label: 'Bananas', value: 8000 },
+		{ label: 'Oranges', value: 6000 }
 	];
 
 	let fruitColors = {
@@ -33,9 +35,7 @@
 		Oranges: theme.currentTheme.color.palette.orange[700]
 	};
 
-	const labelAccessor = (d) => d.product;
-	const valueAccessor = (d) => d.revenue;
-	const colorAccessor = (d) => fruitColors[d.product];
+	const colorAccessor = (d: DonutData) => fruitColors[d.label];
 </script>
 
 <Story name="Default">
@@ -48,21 +48,9 @@
 			chartHeight="h-200px"
 			data={fruitSales}
 		>
-			<Donut
-				data={fruitSales}
-				{labelAccessor}
-				{valueAccessor}
-				{colorAccessor}
-				valueFormatter={(v, total) => `£${v.toLocaleString()} (${((v / total) * 100).toFixed(1)}%)`}
-			></Donut>
+			<Donut data={fruitSales} {colorAccessor}></Donut>
 
-			<DonutLegend
-				data={fruitSales}
-				{labelAccessor}
-				{valueAccessor}
-				{colorAccessor}
-				order={Object.keys(fruitColors)}
-			/>
+			<DonutLegend data={fruitSales} {colorAccessor} order={Object.keys(fruitColors)} />
 		</ChartContainer>
 	{/snippet}
 </Story>

@@ -1,73 +1,97 @@
-<script lang="ts" generics="T">
+<script lang="ts">
+	/**
+	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
+	 *
+	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
+	 * 	@component
+	 */
+
 	import { theme } from '@ldn-viz/ui';
 	import { colorWithBestContrast } from '@ldn-viz/utils';
+	import { sum } from 'd3-array';
 	import { arc, pie, type DefaultArcObject, type PieArcDatum } from 'd3-shape';
 	import DonutTooltip from './DonutTooltip.svelte';
 
-	/* =========================
-	   Props 
-	========================= */
+	type DonutData = {
+		label: string;
+		value: number;
+	};
 
-	interface Props<T> {
-		data: T[];
-		valueAccessor: (d: T) => number;
-		labelAccessor: (d: T) => string;
-		colorAccessor?: (d: T) => string;
-		valueFormatter?: (value: number, total: number) => string;
+	interface Props {
+		/**
+		 * Data being displayed in the donut chart.
+		 */
+		data: DonutData[];
+		/**
+		 * Color ramp to be used and how it links to data labels
+		 */
+		colorAccessor?: (d: DonutData) => string;
+		/**
+		 * Width of donut
+		 */
 		width?: number;
+		/**
+		 * Height of donut
+		 */
 		height?: number;
+		/**
+		 * Margin of donut
+		 */
 		margin?: number;
+		/**
+		 * Minimum angle to dipslay label in chart segment
+		 */
 		minAngle?: number;
+		/**
+		 * Tooltips on donut segment, defaults to true.
+		 */
+		tooltip?: boolean;
 	}
 
 	let {
 		data,
-		valueAccessor,
-		labelAccessor,
 		colorAccessor,
-		valueFormatter = (v, total) => (total ? ((v / total) * 100).toFixed(1) + '%' : ''),
 		width = 300,
 		height = 300,
 		margin = 0,
-		minAngle = 0.5
-	}: Props<T> = $props();
+		minAngle = 0.5,
+		tooltip = true
+	}: Props = $props();
 
-	/* =========================
-	   Layout
-	========================= */
+	/**
+	 * Donut segments
+	 */
+
+	let total = $derived(sum(data.map((d) => d.value)));
 
 	let outerRadius = $derived(Math.min(width, height) / 2 - margin);
 	let innerRadius = $derived(Math.min(width, height) / 4 - margin);
 
-	let total = $derived(data.reduce((sum, d) => sum + valueAccessor(d), 0));
-
-	let pieGen = $derived(
-		pie<T>()
-			.value((d) => valueAccessor(d))
+	let pieGenerator = $derived(
+		pie<DonutData>()
+			.value((d) => d.value)
 			.sort(null)
+			.padAngle(0.005)
 	);
 
-	let arcs: PieArcDatum<T>[] = $derived(pieGen(data));
+	let pieData: PieArcDatum<DonutData>[] = $derived(pieGenerator(data));
 
-	let arcPath = $derived(arc<PieArcDatum<T>>().innerRadius(innerRadius).outerRadius(outerRadius));
+	let arcPath = $derived(
+		arc<PieArcDatum<DonutData>>().innerRadius(innerRadius).outerRadius(outerRadius)
+	);
 
-	const shouldShowLabel = (slice: PieArcDatum<T>) => slice.endAngle - slice.startAngle >= minAngle;
+	const shouldShowLabel = (slice: PieArcDatum<DonutData>) =>
+		slice.endAngle - slice.startAngle >= minAngle;
 
-	const formatValue = (value: number) => valueFormatter(value, total);
-
-	const radius = Math.min(width, height) / 2;
-
-	let tooltipArc = arc<DefaultArcObject>()
-		.innerRadius(radius * 0.36)
-		.outerRadius(radius * 0.9);
+	const formatPercent = (val: number, total: number) => ((val / total) * 100).toFixed(1) + '%';
 
 	let labelArc = arc<DefaultArcObject>()
 		.innerRadius((0.9 * height) / 2)
 		.outerRadius((0.5 * height) / 2);
 
-	/* =========================
-	   Tooltip
-	========================= */
+	/**
+	 * Donut tooltips
+	 */
 
 	let tooltipVisible = $state(false);
 	let tooltipX = $state(0);
@@ -77,20 +101,24 @@
 
 	let svgEl: SVGSVGElement | undefined = $state();
 
-	const onMouseEnter = (slice: PieArcDatum<T>) => {
+	const onMouseEnter = (slice: PieArcDatum<DonutData>) => {
 		if (!svgEl) return;
 
-		tooltipX = tooltipArc.centroid(slice)[0] + width / 2;
-		tooltipY = tooltipArc.centroid(slice)[1] + height / 2;
+		tooltipX = labelArc.centroid(slice)[0] + width / 2;
+		tooltipY = labelArc.centroid(slice)[1] + height / 2;
 
-		tooltipLabel = labelAccessor(slice.data);
-		tooltipValue = formatValue(valueAccessor(slice.data));
+		tooltipLabel = String(slice.data.label);
+		tooltipValue = formatPercent(slice.data.value, total);
 		tooltipVisible = true;
 	};
 
 	const onMouseLeave = () => {
 		tooltipVisible = false;
 	};
+
+	/**
+	 * Labels on donut - change color of the text depending on color of segment based off what has the best contrast
+	 */
 
 	let textColor = (color: any) => {
 		return colorWithBestContrast(
@@ -111,10 +139,10 @@
 			style:max-width="100%"
 			style:height="auto"
 		>
-			{#each arcs as slice}
+			{#each pieData as slice}
 				<path
 					d={arcPath(slice)}
-					fill={colorAccessor ? colorAccessor(slice.data) : 'steelblue'}
+					fill={colorAccessor ? colorAccessor(slice.data) : 'blue'}
 					stroke={theme.currentTheme.color.chart.background}
 					role="listitem"
 					cursor="pointer"
@@ -128,26 +156,30 @@
 						font-size="0.8em"
 						font-weight="500"
 						pointer-events="none"
-						style:fill={textColor(colorAccessor ? colorAccessor(slice.data) : 'steelblue')}
+						style:fill={textColor(
+							colorAccessor ? colorAccessor(slice.data) : theme.currentTheme.color.chart.background
+						)}
 						transform="translate({labelArc.centroid({
 							...slice,
 							innerRadius: (0.9 * height) / 2,
 							outerRadius: (0.5 * height) / 2
 						})})"
 					>
-						{formatValue(valueAccessor(slice.data))}
+						{formatPercent(slice.data.value, total)}
 					</text>
 				{/if}
 			{/each}
 		</svg>
 
-		<DonutTooltip
-			x={tooltipX}
-			y={tooltipY}
-			category={tooltipLabel}
-			quantity={tooltipValue}
-			visible={tooltipVisible}
-		/>
+		{#if tooltip}
+			<DonutTooltip
+				x={tooltipX}
+				y={tooltipY}
+				category={tooltipLabel}
+				quantity={tooltipValue}
+				visible={tooltipVisible}
+			/>
+		{/if}
 	</div>
 {:else}
 	No data

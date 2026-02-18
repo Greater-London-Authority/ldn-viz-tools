@@ -1,11 +1,14 @@
-<script lang="ts" generics="T">
+<script lang="ts">
 	import { sum } from 'd3-array';
 
-	interface Props<T> {
-		data: T[];
-		labelAccessor: (d: T) => string;
-		valueAccessor: (d: T) => number;
-		colorAccessor?: (d: T) => string;
+	type DonutData = {
+		label: string;
+		value: number;
+	};
+
+	interface Props {
+		data: DonutData[];
+		colorAccessor?: (d: DonutData) => string;
 		order?: string[]; // optional manual ordering
 		valueFormatter?: (value: number, total: number) => string;
 		numberFormatter?: (value: number) => string;
@@ -13,25 +16,19 @@
 
 	let {
 		data,
-		labelAccessor,
-		valueAccessor,
 		colorAccessor,
 		order,
 		valueFormatter = (v, total) => (total ? ((v / total) * 100).toFixed(1) + '%' : ''),
 		numberFormatter = (v) => v.toLocaleString()
-	}: Props<T> = $props();
+	}: Props = $props();
 
-	/* =========================
-	   Derived Values
-	========================= */
-
-	let total = $derived(sum(data.map((d) => valueAccessor(d))));
+	let total = $derived(sum(data.map((d) => d.value)));
 
 	let orderedData = $derived.by(() => {
 		if (!order) return [...data];
 
 		return [...data].sort((a, b) => {
-			return order.indexOf(labelAccessor(a)) - order.indexOf(labelAccessor(b));
+			return order.indexOf(a.label) - order.indexOf(b.label);
 		});
 	});
 </script>
@@ -51,15 +48,15 @@
 			></div>
 
 			<div class="w-24">
-				{labelAccessor(entry)}
+				{entry.label}
 			</div>
 
 			<div class="w-14 text-center font-bold">
-				{valueFormatter(valueAccessor(entry), total)}
+				{valueFormatter(entry.value, total)}
 			</div>
 
 			<div class="w-20 text-right">
-				{numberFormatter(valueAccessor(entry))}
+				{numberFormatter(entry.value)}
 			</div>
 		</div>
 	{/each}
