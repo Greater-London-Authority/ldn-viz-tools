@@ -20,7 +20,7 @@
 </script>
 
 {#if breadcrumbs && breadcrumbs.length > 0}
-	<div class="text-color-text-secondary py-2 text-sm">
+	<div class="py-2 text-sm text-color-text-secondary">
 		{#each breadcrumbs as c, i}
 			{#if i == breadcrumbs.length - 1}
 				<span class="text-color-ui-primary">
