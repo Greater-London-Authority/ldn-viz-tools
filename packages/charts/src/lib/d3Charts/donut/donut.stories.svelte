@@ -22,7 +22,7 @@
 		{ label: 'Oranges', value: 6000 }
 	];
 
-	let fruitColors = {
+	let fruitColors: Record<string, string> = {
 		Apples: theme.currentTheme.color.palette.orange[300],
 		Bananas: theme.currentTheme.color.palette.orange[500],
 		Oranges: theme.currentTheme.color.palette.orange[700]

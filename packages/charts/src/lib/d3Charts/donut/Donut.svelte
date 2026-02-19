@@ -28,7 +28,7 @@
 		/**
 		 * Define catergorical colours and which category they should be associated with
 		 */
-		colorMapping: any;
+		colorMapping: Record<string, string>;
 		/**
 		 * Width of donut
 		 */
@@ -146,7 +146,7 @@
 			style:max-width="100%"
 			style:height="auto"
 		>
-			{#each pieData as slice}
+			{#each pieData as slice (slice.data[labelField])}
 				<path
 					d={arcPath(slice)}
 					fill={colorMapping[slice.data[labelField]]}

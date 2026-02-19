@@ -5,7 +5,7 @@
 		data: T[];
 		labelField: keyof T;
 		countField: keyof T;
-		colorMapping: any;
+		colorMapping: Record<string, string>;
 		percentFormatter?: (value: number, total: number) => string;
 		countFormatter?: (value: number) => string;
 	}
