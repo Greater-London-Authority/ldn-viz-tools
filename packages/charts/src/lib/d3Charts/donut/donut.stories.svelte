@@ -4,7 +4,6 @@
 	import { ChartContainer } from '@ldn-viz/charts';
 	import { theme } from '@ldn-viz/ui';
 	import Donut from './Donut.svelte';
-	import type { DonutData } from './types';
 
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
@@ -17,7 +16,7 @@
 		tags: ['autodocs']
 	});
 
-	const fruitSales: DonutData[] = [
+	const fruitSales = [
 		{ label: 'Apples', value: 12000 },
 		{ label: 'Bananas', value: 8000 },
 		{ label: 'Oranges', value: 6000 }

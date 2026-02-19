@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T extends Record<string, any>">
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
 	 *
@@ -11,18 +11,24 @@
 	import { arc, pie, type PieArcDatum } from 'd3-shape';
 	import DonutLegend from './DonutLegend.svelte';
 	import DonutTooltip from './DonutTooltip.svelte';
-	import type { DonutData } from './types';
 
-	interface Props {
+	interface Props<T extends Record<string, any>> {
 		/**
 		 * Data being displayed in the donut chart.
 		 */
-		data: DonutData[];
+		data: T[];
+		/**
+		 * Field used for labels. Defaults to 'label'.
+		 */
+		labelField?: keyof T;
+		/**
+		 * Field used for numeric value. Defaults to 'value'.
+		 */
+		countField?: keyof T;
 		/**
 		 * Define catergorical colours and which category they should be associated with
 		 */
 		colorMapping: any;
-
 		/**
 		 * Width of donut
 		 */
@@ -52,42 +58,41 @@
 	let {
 		data,
 		colorMapping,
+		labelField = 'label',
+		countField = 'value',
 		width = 300,
 		height = 300,
 		margin = 0,
 		minAngle = 0.5,
 		hideTooltip = false,
 		hideLegend = false
-	}: Props = $props();
+	}: Props<T> = $props();
 
 	/**
 	 * Donut segments
 	 */
 
-	let total = $derived(sum(data.map((d) => d.value)));
+	let total = $derived(sum(data.map((d) => Number(d[countField]))));
 
 	let outerRadius = $derived(Math.min(width, height) / 2 - margin);
 	let innerRadius = $derived(Math.min(width, height) / 4 - margin);
 
 	let pieGenerator = $derived(
-		pie<DonutData>()
-			.value((d) => d.value)
+		pie<T>()
+			.value((d) => d[countField])
 			.sort(null)
 			.padAngle(0.005)
 	);
 
-	let pieData: PieArcDatum<DonutData>[] = $derived(pieGenerator(data));
+	let pieData: PieArcDatum<T>[] = $derived(pieGenerator(data));
 
-	let arcPath = $derived(
-		arc<PieArcDatum<DonutData>>().innerRadius(innerRadius).outerRadius(outerRadius)
-	);
+	let arcPath = $derived(arc<PieArcDatum<T>>().innerRadius(innerRadius).outerRadius(outerRadius));
 
-	const shouldShowLabel = (slice: PieArcDatum<DonutData>) =>
-		slice.endAngle - slice.startAngle >= minAngle;
+	const shouldShowLabel = (slice: PieArcDatum<T>) => slice.endAngle - slice.startAngle >= minAngle;
 
 	const formatPercent = (val: number, total: number) => ((val / total) * 100).toFixed(1) + '%';
 
-	let labelArc = arc<PieArcDatum<DonutData>>()
+	let labelArc = arc<PieArcDatum<T>>()
 		.innerRadius((0.9 * height) / 2)
 		.outerRadius((0.5 * height) / 2);
 
@@ -103,14 +108,14 @@
 
 	let svgEl: SVGSVGElement | undefined = $state();
 
-	const onMouseEnter = (slice: PieArcDatum<DonutData>) => {
+	const onMouseEnter = (slice: PieArcDatum<T>) => {
 		if (!svgEl) return;
 
 		tooltipX = labelArc.centroid(slice)[0] + width / 2;
 		tooltipY = labelArc.centroid(slice)[1] + height / 2;
 
-		tooltipLabel = String(slice.data.label);
-		tooltipValue = formatPercent(slice.data.value, total);
+		tooltipLabel = String(slice.data[labelField]);
+		tooltipValue = formatPercent(slice.data[countField], total);
 		tooltipVisible = true;
 	};
 
@@ -144,7 +149,7 @@
 			{#each pieData as slice}
 				<path
 					d={arcPath(slice)}
-					fill={colorMapping[slice.data.label]}
+					fill={colorMapping[slice.data[labelField]]}
 					stroke={theme.currentTheme.color.chart.background}
 					role="listitem"
 					cursor="pointer"
@@ -158,12 +163,12 @@
 						font-size="0.8em"
 						font-weight="500"
 						pointer-events="none"
-						style:fill={textColor(colorMapping[slice.data.label])}
+						style:fill={textColor(colorMapping[slice.data[labelField]])}
 						transform="translate({labelArc.centroid({
 							...slice
 						})})"
 					>
-						{formatPercent(slice.data.value, total)}
+						{formatPercent(slice.data[countField], total)}
 					</text>
 				{/if}
 			{/each}
@@ -180,7 +185,7 @@
 		{/if}
 
 		{#if !hideLegend}
-			<DonutLegend {data} {colorMapping} />
+			<DonutLegend {data} {labelField} {countField} {colorMapping} />
 		{/if}
 	</div>
 {:else}

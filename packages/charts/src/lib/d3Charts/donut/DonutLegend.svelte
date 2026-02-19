@@ -1,9 +1,10 @@
-<script lang="ts">
+<script lang="ts" generics="T extends Record<string, any>">
 	import { sum } from 'd3-array';
-	import type { DonutData } from './types';
 
-	interface Props {
-		data: DonutData[];
+	interface Props<T extends Record<string, any>> {
+		data: T[];
+		labelField: keyof T;
+		countField: keyof T;
 		colorMapping: any;
 		percentFormatter?: (value: number, total: number) => string;
 		countFormatter?: (value: number) => string;
@@ -12,17 +13,18 @@
 	let {
 		data,
 		colorMapping,
-
+		labelField,
+		countField,
 		percentFormatter = (v, total) => (total ? ((v / total) * 100).toFixed(1) + '%' : ''),
 		countFormatter = (v) => v.toLocaleString()
-	}: Props = $props();
+	}: Props<T> = $props();
 
 	let total = $derived(sum(data.map((d) => d.value)));
 
 	let orderedData = $derived.by(() => {
 		const order = Object.keys(colorMapping);
 		return [...data].sort((a, b) => {
-			return order.indexOf(a.label) - order.indexOf(b.label);
+			return order.indexOf(a[labelField]) - order.indexOf(b[labelField]);
 		});
 	});
 </script>
@@ -38,7 +40,7 @@
 		<div class="mb-1 flex items-center">
 			<div
 				class="mr-2 h-5 w-5 shrink-0"
-				style="background-color: {colorMapping[entry.label] ?? '#ccc'}"
+				style="background-color: {colorMapping[entry[labelField]] ?? '#ccc'}"
 			></div>
 
 			<div class="w-24">
@@ -46,11 +48,11 @@
 			</div>
 
 			<div class="w-14 text-center font-bold">
-				{percentFormatter(entry.value, total)}
+				{percentFormatter(entry[countField], total)}
 			</div>
 
 			<div class="w-20 text-right">
-				{countFormatter(entry.value)}
+				{countFormatter(entry[countField])}
 			</div>
 		</div>
 	{/each}
