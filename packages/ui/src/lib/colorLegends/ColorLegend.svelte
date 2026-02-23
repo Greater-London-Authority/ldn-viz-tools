@@ -300,7 +300,7 @@
 	{:else}
 		<!-- ordinal -->
 		<g>
-			{#each color.domain() as d}
+			{#each color.domain() as d, i (i)}
 				<rect
 					x={axisState.x(d)}
 					y={marginTop}
