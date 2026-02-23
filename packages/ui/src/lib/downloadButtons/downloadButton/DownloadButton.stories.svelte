@@ -59,7 +59,7 @@
 
 <div
 	bind:this={htmlNode}
-	class="bg-color-container-level-0 text-color-text-primary flex w-fit flex-col gap-2 pb-8"
+	class="flex w-fit flex-col gap-2 bg-color-container-level-0 pb-8 text-color-text-primary"
 >
 	<h2 class="text-lg font-bold">A title</h2>
 	<p class="text-color-text-secondary" data-capture-ignore>A paragraph of text...</p>
