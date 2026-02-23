@@ -285,7 +285,7 @@
 	{:else if color.invertExtent}
 		<!--threshold -->
 		<g>
-			{#each color.range() as d, i}
+			{#each color.range() as d, i (i)}
 				<rect
 					x={reverse ? axisState.x(i) : axisState.x(i - 1)}
 					y={marginTop}
