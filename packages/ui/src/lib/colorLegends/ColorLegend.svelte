@@ -230,7 +230,7 @@
 
 			if (typeof axisState.tickF === 'function') {
 				const formatter = axisState.tickF;
-				bottomAxis.tickFormat((d, i) => {
+				bottomAxis.tickFormat((d) => {
 					const value = formatter(d);
 					return value ?? '';
 				});
