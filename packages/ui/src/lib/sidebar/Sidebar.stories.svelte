@@ -82,8 +82,6 @@
 
 	let selectedTabId = $state('markers');
 
-	let setOpenState = $state();
-
 	let sidebarState = $state();
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed
@@ -226,7 +224,7 @@
 <Story name="Light Theme with Tabs" args={{ theme: 'light', tabs }} />
 
 {#snippet unstyledContent()}
-	<div class="bg-color-ui-background-notice p-4 text-color-text-primary">
+	<div class="bg-color-ui-background-notice text-color-text-primary p-4">
 		<p class="text-bold mb-2 text-xl">Unstyled Content</p>
 		<p class="mb-2">
 			This content does not inherit styles directly from the sidebar. Though it will be affected by

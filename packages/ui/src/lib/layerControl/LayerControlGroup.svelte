@@ -210,11 +210,11 @@
 	// construct list of controls which are in use
 	let errorId = $derived(error ? `${id}-error` : undefined);
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	$effect(() => {
-		mutuallyExclusive && updateStateFromCheckbox(selectedOptionId);
+		if (mutuallyExclusive) {
+			updateStateFromCheckbox(selectedOptionId);
+		}
 	});
-
 	let controlsInUse = $derived.by(() => {
 		const controls = [];
 		if (!disableColorControl && !options.every((l) => l.disableColorControl)) {
