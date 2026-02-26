@@ -13,7 +13,7 @@
 
 	const { defaultTip } = $derived(getDefaultPlotStyles());
 
-	const width = $derived(window && window.innerWidth);
+	let width = $state(0);
 	const height = $derived(width * (6 / 16));
 
 	const toTitleCase = (str: string) => {
@@ -36,7 +36,7 @@
 
 	const root = { name: 'root', children: group(penguins, ['island', 'species', 'sex']) };
 
-	const leaves = (root: any) => {
+	const leaves = (root: any, width: number, height: number) => {
 		const hierarchy = d3
 			.hierarchy(root)
 			.sum((d) => d.value)
@@ -45,7 +45,7 @@
 		return hierarchy.leaves();
 	};
 
-	const leafData = leaves(root);
+	const leafData = $derived.by(() => leaves(root, width, height));
 
 	let spec = $derived({
 		marginLeft: 0,
@@ -96,10 +96,10 @@
 				textAnchor: 'middle', // align text center to x
 				dy: -20, // small vertical offset
 				text: (d) => {
-					const v = d.parent.data.name;
-					const width = (v.length - 1) * 12 + 5;
-					const height = 15 + 20;
-					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? v : '';
+					const textValue = d.parent.data.name;
+					const width = (textValue.length - 1) * 12 + 5;
+					const height = 40;
+					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? textValue : '';
 				},
 				fill: '#fff',
 				fontWeight: 'bold'
@@ -108,12 +108,11 @@
 				x: (d) => (d.x0 + d.x1) / 2, // center of node
 				y: (d) => (d.y0 + d.y1) / 2, // vertical center, optional
 				textAnchor: 'middle', // align text center to x
-				// dy: -10, // small vertical offset
 				text: (d) => {
-					const v = d.data.name ? toTitleCase(d.data.name) : 'N/A';
-					const width = (v.length - 1) * 12 + 5;
-					const height = 15 + 20;
-					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? v : '';
+					const textValue = d.data.name ? toTitleCase(d.data.name) : 'N/A';
+					const width = (textValue.length - 1) * 10 + 5;
+					const height = 40;
+					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? textValue : '';
 				},
 				fill: '#fff'
 			}),
@@ -123,10 +122,10 @@
 				textAnchor: 'middle', // align text center to x
 				dy: 20, // small vertical offset
 				text: (d) => {
-					const v = d.value?.toFixed(0);
-					const width = v.length * 12 + 5;
-					const height = 15 + 40;
-					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? v : '';
+					const textValue = d.value?.toFixed(0);
+					const width = textValue.length * 5 + 5;
+					const height = 40;
+					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? textValue : '';
 				},
 				fill: '#fff'
 			})
@@ -134,18 +133,20 @@
 	});
 </script>
 
-<Story name="Default centred text - three facets">
+<Story name="Centre Text">
 	{#snippet template()}
-		<ObservablePlot
-			{spec}
-			data={leafData}
-			title="Adelie penguins live on all islands"
-			subTitle="Penguin data from the islands of Biscoe, Dream and Torgersen"
-			alt="Treemap of penguin counts split by island, species and sex"
-			byline="GLA City Intelligence"
-			source="Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data."
-			note="Data for demonstration only"
-			chartDescription=""
-		/>
+		<div bind:clientWidth={width}>
+			<ObservablePlot
+				{spec}
+				data={leafData}
+				title="Adelie penguins live on all islands"
+				subTitle="Penguin data from the islands of Biscoe, Dream and Torgersen"
+				alt="Treemap of penguin counts split by island, species and sex"
+				byline="GLA City Intelligence"
+				source="Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data."
+				note="Data for demonstration only"
+				chartDescription="The treemap chart shows count of penguins across three islands, split by species and sex. Adelie penguins have a highest total population of 151 across all islands. 124 Gentoo penguins live on Biscoe island, along with 44 Adelie penguins. 68 Chinstrap penguins live on Dream island, along with 56 Adelie penguins. 51 Adelie penguins live on Torgersen island. The split between male and female penguins is relatively equal across all species and islands."
+			/>
+		</div>
 	{/snippet}
 </Story>

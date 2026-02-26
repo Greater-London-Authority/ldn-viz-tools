@@ -13,9 +13,10 @@
 
 	const { defaultTip } = $derived(getDefaultPlotStyles());
 
-	const width = $derived(window && window.innerWidth);
+	let width = $state(0);
 	const height = $derived(width * (6 / 16));
 
+	// sanitising data for display by changing sex from uppercase to title case
 	const toTitleCase = (str: string) => {
 		return str
 			.toLowerCase()
@@ -24,6 +25,12 @@
 			.join(' ');
 	};
 
+	const penguinsPreprocessed = penguins.map((d) => ({
+		...d,
+		sex: d.sex ? toTitleCase(d.sex) : 'N/A'
+	}));
+
+	// turning tidy data into hierarchical data for use in treemap
 	const group = (data: any, [name, ...path]: string[]): any => {
 		return d3
 			.groups(data, (d) => d[name])
@@ -34,9 +41,12 @@
 			);
 	};
 
-	const root = { name: 'root', children: group(penguins, ['island', 'species', 'sex']) };
+	const root = {
+		name: 'root',
+		children: group(penguinsPreprocessed, ['island', 'species', 'sex'])
+	};
 
-	const leaves = (root: any) => {
+	const leaves = (root: any, width: number, height: number) => {
 		const hierarchy = d3
 			.hierarchy(root)
 			.sum((d) => d.value)
@@ -45,7 +55,15 @@
 		return hierarchy.leaves();
 	};
 
-	const leafData = leaves(root);
+	const leafData = $derived.by(() => leaves(root, width, height));
+
+	// function checking whether text should be displayed and which text should be displayed
+	const showText = (text: string, datum: any) => {
+		const width = text.toString().length * 5 + 5;
+		const height = 20;
+		const visible = datum.x1 - datum.x0 > width && datum.y1 - datum.y0 > height;
+		return visible;
+	};
 
 	let spec = $derived({
 		marginLeft: 0,
@@ -71,7 +89,7 @@
 				tip: {
 					...defaultTip,
 					lineHeight: 1.3,
-					textAnchor: 'middle',
+					textAnchor: 'start',
 					format: {
 						fill: false,
 						fx: false,
@@ -84,48 +102,23 @@
 					channels: {
 						island: { value: (d) => d.parent.parent.data.name, label: '' },
 						species: { value: (d) => d.parent.data.name, label: '' },
-						sex: { value: (d) => (d.data.name ? toTitleCase(d.data.name) : 'N/A'), label: '' },
+						sex: { value: (d) => d.data.name, label: '' },
 						value: { value: (d) => d.value, label: '' }
 					}
 				}
 			}),
-			// ensure text marks are 20px apart
+			// // what are all the text in the group, how are they behaving and how should this text mark behave
+			// // ensure text marks are 20px apart
 			Plot.text(leafData, {
-				x: (d) => d.x0 + 8,
-				y: (d) => d.y1 - 8,
+				x: 'x0',
+				y: 'y1',
+				dy: 12,
+				dx: 6,
 				textAnchor: 'start',
 				text: (d) => {
-					const v = d.parent.data.name;
-					const width = (v.length - 1) * 12 + 5;
-					const height = 15;
-					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? v : '';
-				},
-				fill: '#fff',
-				fontWeight: 'bold'
-			}),
-			Plot.text(leafData, {
-				x: (d) => d.x0 + 8,
-				y: (d) => d.y1 - 8,
-				dy: 20, // small vertical offset
-				textAnchor: 'start',
-				text: (d) => {
-					const v = d.data.name ? toTitleCase(d.data.name) : 'N/A';
-					const width = (v.length - 1) * 12 + 5;
-					const height = 15 + 20;
-					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? v : '';
-				},
-				fill: '#fff'
-			}),
-			Plot.text(leafData, {
-				x: (d) => d.x0 + 8,
-				y: (d) => d.y1 - 8,
-				textAnchor: 'start',
-				dy: 40, // small vertical offset
-				text: (d) => {
-					const v = d.value?.toFixed(0);
-					const width = v.length * 12 + 5;
-					const height = 15 + 40;
-					return d.x1 - d.x0 > width && d.y1 - d.y0 > height ? v : '';
+					const textValue = d.value; // penguin name
+					const visible = showText(textValue, d);
+					return visible ? textValue : '';
 				},
 				fill: '#fff'
 			})
@@ -133,18 +126,20 @@
 	});
 </script>
 
-<Story name="Alternative text position">
+<Story name="Top Left Text - simple">
 	{#snippet template()}
-		<ObservablePlot
-			{spec}
-			data={leafData}
-			title="Adelie penguins live on all islands"
-			subTitle="Penguin data from the islands of Biscoe, Dream and Torgersen"
-			alt="Treemap of penguin counts split by island and species"
-			byline="GLA City Intelligence"
-			source="Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data."
-			note="Data for demonstration only"
-			chartDescription=""
-		/>
+		<div bind:clientWidth={width}>
+			<ObservablePlot
+				{spec}
+				data={leafData}
+				title="Adelie penguins live on all islands"
+				subTitle="Penguin data from the islands of Biscoe, Dream and Torgersen"
+				alt="Treemap of penguin counts split by island and species"
+				byline="GLA City Intelligence"
+				source="Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data."
+				note="Data for demonstration only"
+				chartDescription="The treemap chart shows count of penguins across three islands, split by species and sex. Adelie penguins have a highest total population of 151 across all islands. 124 Gentoo penguins live on Biscoe island, along with 44 Adelie penguins. 68 Chinstrap penguins live on Dream island, along with 56 Adelie penguins. 51 Adelie penguins live on Torgersen island. The split between male and female penguins is relatively equal across all species and islands."
+			/>
+		</div>
 	{/snippet}
 </Story>
