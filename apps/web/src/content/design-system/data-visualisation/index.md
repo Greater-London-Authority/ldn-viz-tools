@@ -1,5 +1,5 @@
 ---
-title: Data visualisation
+title: Data Visualisation
 description: Guiding principles for consistent presentation
 section: Data visualisation
 navLabel: Data visualisation
