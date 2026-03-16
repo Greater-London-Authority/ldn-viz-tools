@@ -14,6 +14,7 @@ To use OAuth authentication:
 
 ```sveltehtml
 <script>
+	import { goto } from '$app/navigation';
 	import { Header, HeaderRight, HeaderTitle, Theme } from '@ldn-viz/ui';
 
 	import { base } from '$app/paths';
@@ -28,7 +29,7 @@ To use OAuth authentication:
 </script>
 
 
-<HandleRedirectFromAuth config={oauth_config} />
+<HandleRedirectFromAuth config={oauth_config} {goto} />
 
 <Theme />
 
