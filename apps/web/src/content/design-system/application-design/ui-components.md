@@ -37,7 +37,7 @@ Buttons are a fundamental ui component inviting user action. The system has diff
   height="80"
 > </iframe>
 
-#### Text
+#### Square
 
  <iframe
   src="https://greater-london-authority.github.io/ldn-viz-tools/iframe.html?id=ui-components-buttons-button--square&viewMode=story&shortcuts=false&singleStory=true"
