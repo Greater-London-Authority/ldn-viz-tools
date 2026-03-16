@@ -116,6 +116,12 @@ module.exports = {
 			marginTop: 'var(--typography-spacing-sm)'
 		},
 		// Lists
+		':where(ul):not(:where(.not-prose, .not-prose *))': {
+			listStyleType: 'disc'
+		},
+		':where(ol):not(:where(.not-prose, .not-prose *))': {
+			listStyleType: 'decimal'
+		},
 		':where(ul, ol):not(:where(.not-prose, .not-prose *))': {
 			marginTop: 'var(--typography-spacing-lg)',
 			marginBottom: 'var(--typography-spacing-lg)',
@@ -135,7 +141,7 @@ module.exports = {
 		},
 		// Blockquotes
 		':where(blockquote):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--color-text-muted)',
+			color: 'var(--color-text)',
 			borderInlineStartWidth: 'var(--spacing-xxs)',
 			borderInlineStartColor: 'var(--color-static-brand)',
 			marginTop: 'var(--typography-spacing-lg)',
