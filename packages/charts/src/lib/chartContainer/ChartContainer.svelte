@@ -126,16 +126,18 @@
 		<p class="sr-only">{alt}</p>
 	{/if}
 
+	<!-- eslint-disable svelte/no-at-html-tags -->
 	{#if title || subTitle}
 		<div class="mb-4">
 			{#if title}
-				<Title>{title}</Title>
+				<Title>{@html title}</Title>
 			{/if}
 			{#if subTitle}
-				<SubTitle>{subTitle}</SubTitle>
+				<SubTitle>{@html subTitle}</SubTitle>
 			{/if}
 		</div>
 	{/if}
+	<!-- eslint-enable svelte/no-at-html-tags -->
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 	{@render controls?.()}
