@@ -1,4 +1,5 @@
 <script module lang="ts">
+	import { resolve } from '$app/paths';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Breadcrumbs from './Breadcrumbs.svelte';
 	/**
@@ -23,7 +24,7 @@
 </script>
 
 <Story name="Default">
-	{#snippet template(args)}
-		<Breadcrumbs {breadcrumbs} />
+	{#snippet template()}
+		<Breadcrumbs {breadcrumbs} {resolve} />
 	{/snippet}
 </Story>
