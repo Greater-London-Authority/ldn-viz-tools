@@ -117,7 +117,7 @@
 		classNames('relative', chartHeight, overrideClass, alignMultiple ? 'min-w-0' : '')
 	);
 	let classes = $derived(
-		classNames(chartWidth, alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose')
+		classNames(chartWidth, alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose', 'break-inside-avoid')
 	);
 </script>
 
