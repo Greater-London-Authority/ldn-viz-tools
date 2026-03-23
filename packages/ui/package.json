@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/ui",
-	"version": "21.2.0",
+	"version": "22.0.0-ds3.0",
 	"keywords": [
 		"svelte"
 	],
@@ -55,7 +55,7 @@
 		"@ldn-viz/config-eslint": "*",
 		"@ldn-viz/config-typescript": "*",
 		"@ldn-viz/config-vitest": "*",
-		"@ldn-viz/docs": "*",
+		"@ldn-viz/docs": "0.0.2-ds3.0",
 		"@playwright/test": "^1.49.1",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.49.3",

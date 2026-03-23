@@ -1,5 +1,17 @@
 # ldn-viz-tools-maps
 
+## 12.0.0-ds3.0
+
+### Major Changes
+
+- 9269ac2: update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [9269ac2]
+  - @ldn-viz/utils@3.0.0-ds3.0
+  - @ldn-viz/ui@22.0.0-ds3.0
+
 ## 11.0.0
 
 ### Minor Changes
