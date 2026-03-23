@@ -1,5 +1,28 @@
 # ldn-viz-tools-maps
 
+## 11.0.0
+
+### Minor Changes
+
+- bdfc142: FIXED: `MapControlFullscreen` isFullscreen state updates when user presses 'Esc' or 'F11' to exit fullscreen instead of clicking the button
+
+### Patch Changes
+
+- ff1eaf0: FIXED: upgrade `terra-draw` and `terra-draw-maplibre-gl-adapter` to fix bug in `MapDraw` component (features would immediately disappear after user had finished editing them)
+- Updated dependencies [2f18b94]
+- Updated dependencies [56de83f]
+- Updated dependencies [c2bdd76]
+- Updated dependencies [946013e]
+  - @ldn-viz/ui@21.2.0
+
+## 10.0.0
+
+### Patch Changes
+
+- Updated dependencies [1796b20]
+- Updated dependencies [8d823f6]
+  - @ldn-viz/ui@21.1.0
+
 ## 9.0.0
 
 ### Major Changes

@@ -23,7 +23,7 @@
 <li>
 	<div
 		role="button"
-		class="w-full cursor-pointer px-2.5 py-1.5"
+		class="w-full cursor-pointer px-2.5 py-1.5 focus-visible:outline-none"
 		bind:this={divRef}
 		onclick={(ev) => {
 			if (ev.target === divRef) {

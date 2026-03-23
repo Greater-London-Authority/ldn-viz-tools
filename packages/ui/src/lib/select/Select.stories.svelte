@@ -4,6 +4,13 @@
 	import Overlay from '../overlay/Overlay.svelte';
 	import Select from './Select.svelte';
 
+	/**
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
+	 *
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
+	 */
 	const options: Option[] = [
 		{ label: 'One', value: 1 },
 		{ label: 'Two', value: 2 },
@@ -46,7 +53,11 @@
 	];
 
 	/**
-	 * The `<Select>` component wraps a 'Svelecte' instance. Check the documentation: [here](https://svelecte.vercel.app).
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
+	 *
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
 	 */
 
 	const { Story } = defineMeta({
@@ -65,6 +76,7 @@
 	let selectedValue: number | null = $state(null);
 	let selectedValueMulti: number[] | null = $state(null);
 	let selectedBorough: string | null = $state(null);
+	let selectedValueClearable = $state(2);
 
 	let error = $state('');
 </script>
@@ -135,6 +147,17 @@
 	{#snippet template(args)}
 		<div class="w-96">
 			<Select {...args} {options} label="Label" description="descriptive text" />
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+The `clearable` prop will be passed through to svelecte, and create a button with a cross-shape icon to clear the current selection.
+-->
+<Story name="Adding clear button">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {...args} {options} clearable label="Label" bind:value={selectedValueClearable} />
 		</div>
 	{/snippet}
 </Story>

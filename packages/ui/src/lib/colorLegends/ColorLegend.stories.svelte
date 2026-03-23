@@ -38,6 +38,10 @@
 
 	import Button from '../button/Button.svelte';
 
+	/**
+	 * The `<ColorLegend>` component draws a legend for a D3 color scale.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Legends/ColorLegend',
 		component: ColorLegend,

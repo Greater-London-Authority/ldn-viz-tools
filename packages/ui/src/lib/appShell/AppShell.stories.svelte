@@ -6,7 +6,12 @@
 	import AppShell from './AppShell.svelte';
 	import DemoSidebarOpener from './DemoSidebarOpener.svelte';
 
-	let { Story } = defineMeta({
+	/**
+	 * The `<AppShell>` is responsible for positioning and orchestrating page content.
+	 * It currently mainly coordinate the [Sidebar](./?path=/docs/ui-components-layout-and-themes-sidebar--documentation) and the other page content.
+	 *
+	 */
+	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/AppShell',
 		component: AppShell,
 		tags: ['autodocs'],

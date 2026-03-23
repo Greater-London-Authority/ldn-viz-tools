@@ -2,6 +2,10 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapDeckOverlay from './MapDeckOverlay.svelte';
 
+	/**
+	 * The `MapDeckOverlay` component renders Deck.gl layers in an overlay on top of a MapLibre map.
+	 * It must be used inside a `Map` component, so that it can access the MapLibre map object from the `mapStore` context.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/MapDeckOverlay',
 		component: MapDeckOverlay,

@@ -9,6 +9,7 @@
 	 * for specific content. The button has a copied state to indicate the copy
 	 * was successful. The button will revert back to an uncopied state if
 	 * another copy button is clicked or after several seconds.
+	 *
 	 */
 
 	const { Story } = defineMeta({

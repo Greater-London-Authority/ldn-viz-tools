@@ -9,6 +9,9 @@
 		{ A: 4, B: 5, C: 6 },
 		{ A: 7, B: 8, C: 9 }
 	];
+	/**
+	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/DataDownloadButton',

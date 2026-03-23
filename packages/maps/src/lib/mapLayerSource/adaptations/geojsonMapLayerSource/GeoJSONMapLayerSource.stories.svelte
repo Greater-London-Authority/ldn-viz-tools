@@ -1,6 +1,13 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import GeoJSONMapLayerSource from './GeoJSONMapLayerSource.svelte';
+	/**
+	 * The `<MapLayerSourceGeoJSON>` component is a specialised
+	 * `<MapLayerSource>` for local or remote GeoJSON data.
+	 *
+	 * If `url` is set, result of a data fetch will be passed to the
+	 * `onLoad` function, otherwise the value of `initialData` will be passed.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapLayerSource/adaptations/GeoJSONMapLayerSource',

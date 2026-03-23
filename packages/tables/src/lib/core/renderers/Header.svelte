@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { HeaderProps } from '$lib/core/renderers/HeaderProps';
 	import { classNames, Overlay } from '@ldn-viz/ui';
 	import { BarsArrowDown, ChevronUpDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { HeaderProps } from '$lib/core/renderers/HeaderProps';
 
 	let {
 		label,
@@ -18,9 +18,9 @@
 		..._rest
 	}: HeaderProps = $props();
 	const alignmentClasses = {
-		left: 'justify-start',
-		right: 'justify-end',
-		center: 'justify-center'
+		left: 'justify-start mr-auto',
+		right: 'justify-end ml-auto',
+		center: 'justify-center mx-auto'
 	};
 	let alignmentClass = $derived(alignmentClasses[alignHeader]);
 </script>

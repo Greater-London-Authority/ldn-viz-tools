@@ -1,7 +1,11 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import ViolinPlot from './ViolinPlot.svelte';
+
+	/**
+	 * The `ViolinPlot` component renders a set of values as a violin plot.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/ViolinPlot',
 		component: ViolinPlot,

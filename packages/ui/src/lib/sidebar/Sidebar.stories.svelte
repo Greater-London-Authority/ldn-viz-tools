@@ -82,8 +82,6 @@
 
 	let selectedTabId = $state('markers');
 
-	let setOpenState = $state();
-
 	let sidebarState = $state();
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed

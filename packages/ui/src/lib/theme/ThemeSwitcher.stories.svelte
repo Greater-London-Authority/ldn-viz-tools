@@ -6,6 +6,7 @@
 	 * The `<ThemeSwitcher>` component provides a select for the current theme - light, dark or system.
 	 *
 	 * **Important**: Requires the inclusion of the sibling "Theme" component. This should be implemented in the top level Layout component of the app. The theme switcher can then live at any level(s)
+	 *
 	 */
 
 	const { Story } = defineMeta({

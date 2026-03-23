@@ -3,6 +3,12 @@
 	import LogoCIU from '../logos/LogoCIU.svelte';
 	import FooterCookieMenu from './FooterCookieMenu.svelte';
 
+	/**
+	 * The `<Footer>` component appears at the bottom of a page.
+	 * Note, if `<AnalyticsAndCookieConsent />` is not in your app or configured incorrectly, 'Cookie Settings' will not appear in the footer even when `showCookieMenu` is true.
+	 * @component
+	 */
+
 	interface Props {
 		/**
 		 * Colour scheme to use, either `light` or `dark`.
@@ -47,11 +53,11 @@
 	{/if}
 
 	{#if footerCookieMenu}
-		<div class="border-color-border-muted bg-color-container-level-1 border-t px-4 py-2 md:px-8">
+		<div class="border-color-border-muted border-t bg-color-container-level-1 px-4 py-2 md:px-8">
 			{@render footerCookieMenu()}
 		</div>
 	{:else if showCookieMenu}
-		<div class="border-color-border-muted bg-color-container-level-1 border-t px-4 py-2 md:px-8">
+		<div class="border-color-border-muted border-t bg-color-container-level-1 px-4 py-2 md:px-8">
 			<FooterCookieMenu />
 		</div>
 	{/if}

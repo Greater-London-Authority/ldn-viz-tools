@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/tables",
-	"version": "5.0.0",
+	"version": "5.2.0",
 	"keywords": [
 		"svelte"
 	],
@@ -32,6 +32,7 @@
 		"prepack": "svelte-kit sync && svelte-package && publint",
 		"prepare": "svelte-kit sync || echo ''",
 		"preview": "vite preview",
+		"sync-docstrings": "node ../../scripts/sync-docstrings.mjs packages/tables/",
 		"test": "npm run test:unit && npm run test:e2e",
 		"test:coverage": "vitest run --coverage",
 		"test:e2e": "playwright test",

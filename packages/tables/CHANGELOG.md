@@ -1,5 +1,25 @@
 # @ldn-viz/tables
 
+## 5.2.0
+
+### Minor Changes
+
+- 19f60cb: FIXED: column heading snow respect specified alignment when sortable
+
+### Patch Changes
+
+- Updated dependencies [2f18b94]
+- Updated dependencies [56de83f]
+- Updated dependencies [c2bdd76]
+- Updated dependencies [946013e]
+  - @ldn-viz/ui@21.2.0
+
+## 5.1.0
+
+### Minor Changes
+
+- b8b9f1f: CHANGED: `BarDivergingCell` now has a `backgroundColor` prop
+
 ## 5.0.0
 
 ### Major Changes

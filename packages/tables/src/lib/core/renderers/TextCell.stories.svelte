@@ -1,8 +1,12 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import { theme } from '@ldn-viz/ui';
 	import TextCell from './TextCell.svelte';
+
+	/**
+	 * The `TextCell` component formats a single value as text and displays it in a table cell.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/TextCell',
 		component: TextCell,

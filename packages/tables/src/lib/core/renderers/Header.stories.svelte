@@ -1,11 +1,11 @@
-<script module>
-	/**
-	 * The `Header` component displays the heading for a column, optionally with arrows to indicate sort order.
-	 */
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import Header from './Header.svelte';
 
+	/**
+	 * The `Header` component displays the heading for a column, optionally with arrows to indicate sort order.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/Header',
 		component: Header,

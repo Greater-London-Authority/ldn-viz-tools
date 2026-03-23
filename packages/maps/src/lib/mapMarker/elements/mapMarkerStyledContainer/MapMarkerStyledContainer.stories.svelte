@@ -2,6 +2,11 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerStyledContainer from './MapMarkerStyledContainer.svelte';
 
+	/**
+	 * The `<MapMarkerStyledContainer>` component is a wrapping container for use
+	 * within marker components. It provides standardised styling that is
+	 * suitable for the vast majority of map tooltips and popups.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerStyledContainer',
 		component: MapMarkerStyledContainer,

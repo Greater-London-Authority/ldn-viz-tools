@@ -15,7 +15,8 @@
 
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapDraw',
-		component: MapDraw
+		component: MapDraw,
+		tags: ['autodocs']
 	});
 
 	let features1: Feature[] = $state([]);

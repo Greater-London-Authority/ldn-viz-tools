@@ -17,6 +17,8 @@ export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as CheckboxGroupSolid } from './checkboxSolid/CheckboxGroupSolid.svelte';
 export { default as CheckboxSolid } from './checkboxSolid/CheckboxSolid.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
+export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOrdinalChips.svelte';
+export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
 export { default as Flag } from './flag/Flag.svelte';

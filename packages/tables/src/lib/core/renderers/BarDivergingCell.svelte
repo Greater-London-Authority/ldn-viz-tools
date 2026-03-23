@@ -17,6 +17,7 @@
 		textSize = 16,
 		positiveColor = theme.tokenNameToValue('data.primary'),
 		negativeColor = theme.tokenNameToValue('data.secondary'),
+		backgroundColor = theme.tokenNameToValue('surface.neutral'),
 		extent = [0, 1],
 		width = 100,
 		..._rest
@@ -41,7 +42,7 @@
 			{width}
 			y={barVerticalPadding}
 			height={height - 2 * barVerticalPadding}
-			fill={theme.tokenNameToValue('surface.neutral')}
+			fill={backgroundColor}
 		/>
 
 		<!-- data bar -->

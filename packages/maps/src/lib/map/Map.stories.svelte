@@ -6,6 +6,21 @@
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
+	/**
+	 * The `<Map>` component wraps a MapLibre map and manages the style (based
+	 * on the current theme mode) and cursor event handling for quicker and
+	 * easier map creation and management.
+	 *
+	 * It also:
+	 * - provides stores for `Map` and `MapCursor` instances;
+	 * - sets context for `Map` and `MapCursor` instances;
+	 *
+	 * The map's container has a relative CSS position so slotted content can
+	 * position itself accordingly. Map controls and other overlay components
+	 * should be wrapped and positioned using a `MapControlGroup` instance.
+	 *
+	 * (see [MapLibre Map](https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/)).
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/Map',
 		component: Map,
