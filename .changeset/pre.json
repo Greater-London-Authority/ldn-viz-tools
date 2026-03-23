@@ -1,0 +1,18 @@
+{
+  "mode": "pre",
+  "tag": "ds3",
+  "initialVersions": {
+    "@ldn-viz/docs": "0.0.1",
+    "@ldn-viz/web": "0.0.1",
+    "@ldn-viz/charts": "7.0.0",
+    "@ldn-viz/config-eslint": "1.0.0",
+    "@ldn-viz/config-typescript": "0.1.0",
+    "@ldn-viz/config-vitest": "0.1.0",
+    "@ldn-viz/maps": "11.0.0",
+    "@ldn-viz/tables": "5.2.0",
+    "@ldn-viz/themes": "7.0.0",
+    "@ldn-viz/ui": "21.2.0",
+    "@ldn-viz/utils": "2.0.0"
+  },
+  "changesets": []
+}
