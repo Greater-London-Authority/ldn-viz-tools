@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/charts",
-	"version": "7.0.0",
+	"version": "8.0.0-ds3.0",
 	"keywords": [
 		"svelte"
 	],
@@ -39,8 +39,8 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@ldn-viz/ui": "*",
-		"@ldn-viz/utils": "*",
+		"@ldn-viz/ui": "22.0.0-ds3.0",
+		"@ldn-viz/utils": "3.0.0-ds3.0",
 		"@observablehq/plot": "^0.6.16"
 	},
 	"devDependencies": {

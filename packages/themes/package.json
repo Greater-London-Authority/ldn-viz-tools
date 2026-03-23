@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/themes",
-	"version": "7.0.0",
+	"version": "8.0.0-ds3.0",
 	"license": "MIT",
 	"type": "module",
 	"scripts": {

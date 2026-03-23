@@ -1,5 +1,16 @@
 # @ldn-viz/utils
 
+## 3.0.0-ds3.0
+
+### Major Changes
+
+- 9269ac2: update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [9269ac2]
+  - @ldn-viz/themes@8.0.0-ds3.0
+
 ## 2.0.0
 
 ### Major Changes

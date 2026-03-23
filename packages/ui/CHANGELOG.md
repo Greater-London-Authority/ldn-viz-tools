@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 22.0.0-ds3.0
+
+### Major Changes
+
+- 9269ac2: update tokens to new design system
+
 ## 21.2.0
 
 ### Minor Changes

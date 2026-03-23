@@ -14,5 +14,7 @@
     "@ldn-viz/ui": "21.2.0",
     "@ldn-viz/utils": "2.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "grumpy-camels-crash"
+  ]
 }
