@@ -35,7 +35,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git checkout -b release-msg-svelte5
+          git checkout -b release-msg-ds3
 
           git add -A .changeset
           git add packages/*/CHANGELOG.md
@@ -48,4 +48,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release-msg-svelte5
+          branch: release-msg-ds3
