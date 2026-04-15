@@ -31,6 +31,7 @@
 		headerTheme?: 'light' | 'dark';
 
 		contentProps?: WithoutChild<Dialog.ContentProps>;
+		onOpenAutoFocus?: Dialog.ContentProps['onOpenAutoFocus'];
 		// ...other component props if you wish to pass them
 	};
 
@@ -62,6 +63,11 @@
 		 */
 		headerTheme = 'dark',
 
+		onOpenAutoFocus = (e) => {
+			e.preventDefault();
+			descriptionEl?.focus();
+		},
+
 		...restProps
 	}: Props = $props();
 
@@ -87,7 +93,7 @@
 		)
 	);
 
-	let descriptionEl: Element;
+	let descriptionEl = $state<HTMLElement>();
 </script>
 
 {#snippet modalTrigger()}
@@ -112,14 +118,7 @@
 	<Dialog.Portal>
 		<Dialog.Overlay class="fixed inset-0 z-40 bg-black/60" />
 		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
-			<Dialog.Content
-				{...contentProps}
-				class={modalClass}
-				onOpenAutoFocus={(e) => {
-					e.preventDefault();
-					descriptionEl?.focus();
-				}}
-			>
+			<Dialog.Content {...contentProps} class={modalClass} {onOpenAutoFocus}>
 				<div
 					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text-primary ${headerTheme}`}
 				>
@@ -138,9 +137,12 @@
 
 				<div class="overflow-y-auto">
 					<div class="px-4 py-6">
-						<Dialog.Description>
-							<span bind:this={descriptionEl}>{@render description?.()}</span>
-						</Dialog.Description>
+						{#if description}
+							<Dialog.Description>
+								<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+								<p bind:this={descriptionEl} tabindex={-1}>{@render description?.()}</p>
+							</Dialog.Description>
+						{/if}
 						{@render children?.()}
 					</div>
 				</div>
