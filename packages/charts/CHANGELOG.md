@@ -1,5 +1,19 @@
 # ldn-viz-tools-charts
 
+## 7.1.0
+
+### Minor Changes
+
+- 6ffd5e2: CHANGED: allow HTML formatting to be used in chart title/subTitle/source/byline/note
+
+### Patch Changes
+
+- Updated dependencies [6c3607d]
+- Updated dependencies [8402081]
+- Updated dependencies [792b3f6]
+- Updated dependencies [2398df2]
+  - @ldn-viz/ui@22.0.0
+
 ## 7.0.0
 
 ### Major Changes

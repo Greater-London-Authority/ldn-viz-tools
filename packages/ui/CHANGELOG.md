@@ -1,5 +1,17 @@
 # ldn-viz-tools-ui
 
+## 22.0.0
+
+### Major Changes
+
+- 6c3607d: CHANGED: `HandleRedirectFromAuth` now receives `goto` as a prop rather than importing it from `'$app/navigation'`
+- 8402081: FIXED: in the `ColorLegend` component, the tick labels are now formatted with the default font-fmaily for the page, rather than `sans-serif`
+
+### Minor Changes
+
+- 792b3f6: CHANGED: ThemeSwitcher icon now has a title tooltip expalining what it does before it is clicked on.
+- 2398df2: FIXED: don't throw a ReferenceError when checking whether CookieControl is undefined if it is undefined
+
 ## 21.2.0
 
 ### Minor Changes
