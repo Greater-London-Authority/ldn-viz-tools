@@ -89,6 +89,13 @@
 		legend?: import('svelte').Snippet;
 		children?: import('svelte').Snippet;
 		description?: import('svelte').Snippet;
+
+		/**
+		 * Optional id to apply to the chart container div.
+		 * This can be ueful if you are mebedding multiple charts in a report
+		 * page, and want to be able to directly link to individual charts.
+		 */
+		id?: string;
 	}
 
 	let {
@@ -110,7 +117,8 @@
 		controls,
 		legend,
 		children,
-		description
+		description,
+		id = 'captureElement'
 	}: Props = $props();
 
 	let chartClass = $derived(
@@ -121,7 +129,7 @@
 	);
 </script>
 
-<div class={classes} bind:this={chartToCapture} id="captureElement">
+<div class={classes} bind:this={chartToCapture} {id}>
 	{#if alt}
 		<p class="sr-only">{alt}</p>
 	{/if}
