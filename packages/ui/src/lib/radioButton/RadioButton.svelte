@@ -34,13 +34,11 @@
 		hintLabel = '',
 		customOverlay = undefined
 	}: Props = $props();
-
-	let inputID = $derived(`input-${id}`);
 </script>
 
-<label class="flex items-center">
+<div class="flex items-center">
 	<input
-		id={inputID}
+		{id}
 		class="form-radio"
 		type="radio"
 		bind:group={selectedId}
@@ -53,7 +51,7 @@
 			: ''}
 	/>
 	{#if label}
-		<span class="form-label ml-2 font-normal">{label}</span>
+		<label class="form-label ml-2 font-normal" for={id}>{label}</label>
 	{/if}
 
 	{#if hint}
@@ -68,7 +66,7 @@
 	{#if customOverlay}
 		{@render customOverlay()}
 	{/if}
-</label>
+</div>
 
 <style>
 	.form-radio:before {
