@@ -1,5 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Overlay from '../overlay/Overlay.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
 	import { theme } from '../theme/themeState.svelte';
 	import LayerControl from './LayerControl.svelte';
 	import { colorNames } from './layerControlUtils';
@@ -150,5 +152,29 @@
 <Story name="With custom colours">
 	{#snippet template()}
 		<LayerControl bind:layerState={layerStates.customColors} label="Borough" {colorNames} />
+	{/snippet}
+</Story>
+
+<Story name="With custom overlay">
+	{#snippet template()}
+		<LayerControl bind:layerState label="Borough">
+			{#snippet customOverlay()}
+				<Overlay
+					overlayType="modal"
+					modalTitle="About borough layer"
+					modalDescription="More information about this borough layer."
+				>
+					{#snippet trigger(props)}
+						<Trigger
+							{...props}
+							size="xs"
+							hintLabel=""
+							aria-label="Click for more information about Borough layer"
+						/>
+					{/snippet}
+					<p class="mt-4">Boundaries of each of Greater London's 32 boroughs</p>
+				</Overlay>
+			{/snippet}
+		</LayerControl>
 	{/snippet}
 </Story>

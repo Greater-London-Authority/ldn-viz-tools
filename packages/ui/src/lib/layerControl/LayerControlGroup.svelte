@@ -8,6 +8,7 @@
 	import Checkbox from '../checkBox/Checkbox.svelte';
 	import InputWrapper from '../input/InputWrapper.svelte';
 
+	import type { Snippet } from 'svelte';
 	import Button from '../button/Button.svelte';
 	import { randomId } from '../utils/randomId';
 	import LayerControl from './LayerControl.svelte';
@@ -70,6 +71,7 @@
 		 * * `label` (string) - the text displayed next to the checkbox
 		 * * `name` (string, optional) - for use by radio or checkbox buttons
 		 * * `hint` (string, optional) - help text to be displayed in tooltip
+		 * * `customOverlay` (Snippet, optional) -
 		 *
 		 * * `disableColorControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
 		 * * `disableOpacityControl` (boolean) - if `true`, then the trigger to open the opacity control for this layer is not displayed
@@ -86,6 +88,7 @@
 			label: string;
 			name?: string;
 			hint?: string;
+			customOverlay?: Snippet;
 			disabled?: boolean;
 			disableColorControl?: boolean;
 			disableOpacityControl?: boolean;
@@ -262,6 +265,8 @@
 						<LayerControl
 							label={option.label}
 							{name}
+							hint={option.hint}
+							customOverlay={option.customOverlay}
 							bind:layerState={layersState[option.id]}
 							optionId={option.id}
 							disabled={option.disabled || disabled}
@@ -299,6 +304,7 @@
 							name={option.name}
 							disabled={option.disabled || disabled}
 							hint={option.hint}
+							customOverlay={option.customOverlay}
 							disableColorControl={disableColorControl || option.disableColorControl}
 							disableOpacityControl={disableOpacityControl || option.disableOpacityControl}
 							disableSizeControl={disableSizeControl || option.disableSizeControl}

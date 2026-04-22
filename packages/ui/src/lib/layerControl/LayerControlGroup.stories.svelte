@@ -1,5 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import CustomOverlay from './demo/CustomOverlay.svelte';
 	import LayerControlGroup from './LayerControlGroup.svelte';
 	import { colorNames } from './layerControlUtils';
 
@@ -28,6 +29,21 @@
 
 	let optionsForGroup2 = $state([
 		{ id: 'bus', label: 'Bus stops' },
+		{
+			id: 'train',
+			label: 'Train stations',
+			hint: 'Excluding underground stations'
+		},
+		{
+			id: 'underground',
+			label: 'Underground stations',
+			disableOpacityControl: true,
+			disableSizeControl: true
+		}
+	]);
+
+	let optionsForGroup3 = $state([
+		{ id: 'bus', label: 'Bus stops', customOverlay: CustomOverlay },
 		{
 			id: 'train',
 			label: 'Train stations',
@@ -266,5 +282,15 @@ For example, choropleth layers would cover each other.
 			{colorNames}
 		/>
 		<pre class="mt-4 text-xs">{JSON.stringify(state3, null, 2)}</pre>
+	{/snippet}
+</Story>
+
+<Story
+	name="With custom overlays"
+	args={{ options: optionsForGroup3, layersState: state1, ariaLabel: ariaLabel }}
+>
+	{#snippet template(args)}
+		<LayerControlGroup {...args} />
+		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>

@@ -10,7 +10,7 @@
 	import RadioButton from '../radioButton/RadioButton.svelte';
 	import ResizeControl from './ResizeControl.svelte';
 
-	import type { Snippet } from 'svelte';
+	import type { Component, Snippet } from 'svelte';
 	import { randomId } from '../utils/randomId';
 	import ColorPicker from './ColorPicker.svelte';
 	import FillTypeControl from './FillTypeControl.svelte';
@@ -55,7 +55,7 @@
 		 * hint and hintLabel props are superceeded if customOverlay is supplied
 		 * It provides additional information to support the users decisions.
 		 */
-		customOverlay?: Snippet;
+		customOverlay?: Snippet | Component;
 
 		disabled?: boolean;
 		/**
@@ -128,21 +128,19 @@
 		selectedOptionId = $bindable(),
 		optionId = randomId(),
 		name = '',
-		controlsInUse = ['color', 'opacity', 'size']
+		controlsInUse = ['color', 'opacity', 'size'],
+		...restProps
 	}: Props = $props();
+
+	function isConstructor(obj: any) {
+		return !!obj.prototype && !!obj.prototype.constructor.name;
+	}
 </script>
 
 <div class="flex items-center space-x-1">
 	<div class="mr-1">
 		{#if mutuallyExclusive}
-			<RadioButton
-				id={optionId}
-				bind:selectedId={selectedOptionId}
-				label=""
-				{disabled}
-				{hint}
-				{name}
-			/>
+			<RadioButton id={optionId} bind:selectedId={selectedOptionId} label="" {disabled} {name} />
 		{:else}
 			<Checkbox bind:checked={layerState.visible} label="" {disabled} id={optionId} {name} />
 		{/if}
@@ -187,16 +185,23 @@
 		<label class="form-label font-normal leading-none" for={optionId}>{label}</label>
 	{/if}
 
-	{#if hint}
+	{#if customOverlay && customOverlay.length === 2}
+		{@const SvelteComponent = customOverlay}
+		<SvelteComponent {label} {hint} />
+	{:else if customOverlay && customOverlay.length === 1}
+		{@render customOverlay()}
+	{:else if hint}
 		<Overlay>
 			{#snippet trigger(props)}
-				<Trigger {...props} size="xs" {hintLabel} />
+				<Trigger
+					{...props}
+					size="xs"
+					{hintLabel}
+					aria-label={!hintLabel && label ? `More information about ${label} layer` : ''}
+					{...restProps}
+				/>
 			{/snippet}
 			{hint}
 		</Overlay>
-	{/if}
-
-	{#if customOverlay}
-		{@render customOverlay()}
 	{/if}
 </div>
