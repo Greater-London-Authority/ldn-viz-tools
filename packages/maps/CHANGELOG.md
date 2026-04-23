@@ -12,6 +12,17 @@
   - @ldn-viz/utils@3.0.0-ds3.0
   - @ldn-viz/ui@22.0.0-ds3.0
 
+## 12.0.0
+
+### Patch Changes
+
+- Updated dependencies [6c3607d]
+- Updated dependencies [8402081]
+- Updated dependencies [792b3f6]
+- Updated dependencies [2398df2]
+  - @ldn-viz/ui@22.0.0
+
+
 ## 11.0.0
 
 ### Minor Changes

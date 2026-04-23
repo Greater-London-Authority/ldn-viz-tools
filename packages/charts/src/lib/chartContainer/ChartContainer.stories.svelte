@@ -76,6 +76,19 @@
 	{/snippet}
 </Story>
 
+<Story name="With custom id">
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			id="MySpecialChartContainer"
+			title="This is the Chart Title"
+			subTitle="Subtitle provides extra context"
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		/>
+	{/snippet}
+</Story>
+
 <Story name="Source, byline and note (footer)">
 	{#snippet template(args)}
 		<ChartContainer
@@ -172,5 +185,27 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 				alignMultiple
 			/>
 		</div>
+	{/snippet}
+</Story>
+
+<!--
+You can use HTML to provide additional formatting for the title/subTitle/source/byline/note.
+It can also be used to add liks.
+-->
+<Story name="With HTML formatting">
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart <i>Title</i>"
+			subTitle="<i>Subtitle</i> provides extra context"
+			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis' class='underline'>GLA city intelligence</a>"
+			byline="A <i>byline</i> for the chart"
+			note="Be aware that you can provide a <i>note</i> if required"
+			dataDownloadButton={['JSON', 'CSV']}
+			data={[]}
+			imageDownloadButton
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		/>
 	{/snippet}
 </Story>

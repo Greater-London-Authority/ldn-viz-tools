@@ -230,7 +230,7 @@
 
 			if (typeof axisState.tickF === 'function') {
 				const formatter = axisState.tickF;
-				bottomAxis.tickFormat((d, i) => {
+				bottomAxis.tickFormat((d) => {
 					const value = formatter(d);
 					return value ?? '';
 				});
@@ -240,6 +240,10 @@
 				.call(bottomAxis as any, 0)
 				.call(axisState.tickAdjust)
 				.call((g: any) => g.select('.domain').remove());
+
+			// clear the `font-family="sans-serif"` attribute applied by the axis generator,
+			// so the font-family used on the rest of the page (Inter) is used
+			select(ticksRef).attr('font-family', null);
 		}
 	};
 
@@ -281,7 +285,7 @@
 	{:else if color.invertExtent}
 		<!--threshold -->
 		<g>
-			{#each color.range() as d, i}
+			{#each color.range() as d, i (i)}
 				<rect
 					x={reverse ? axisState.x(i) : axisState.x(i - 1)}
 					y={marginTop}
@@ -296,7 +300,7 @@
 	{:else}
 		<!-- ordinal -->
 		<g>
-			{#each color.domain() as d}
+			{#each color.domain() as d, i (i)}
 				<rect
 					x={axisState.x(d)}
 					y={marginTop}

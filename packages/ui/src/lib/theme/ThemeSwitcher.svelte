@@ -39,9 +39,21 @@
 		{#snippet child({ props })}
 			<Button {...props} class={buttonClasses} variant="square" emphasis="secondary" {size}>
 				{#if size === 'xs'}
-					<Icon src={themeIcon} theme="mini" class="h-4 w-4" aria-hidden="true" />
+					<Icon
+						src={themeIcon}
+						theme="mini"
+						class="h-4 w-4"
+						aria-hidden="true"
+						title="Switch between light and dark mode."
+					/>
 				{:else}
-					<Icon src={themeIcon} theme="mini" class="h-5 w-5" aria-hidden="true" />
+					<Icon
+						src={themeIcon}
+						theme="mini"
+						class="h-5 w-5"
+						aria-hidden="true"
+						title="Switch between light and dark mode."
+					/>
 				{/if}
 			</Button>
 		{/snippet}
