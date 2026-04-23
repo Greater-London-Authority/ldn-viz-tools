@@ -64,6 +64,7 @@
 		theme="mini"
 		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
 		aria-hidden="true"
+		title="Cannot change color."
 	/>
 {:else}
 	<Popover>
@@ -74,6 +75,7 @@
 					style:background={activeColorName
 						? theme.tokenNameToValue(activeColorName, theme.currentTheme)
 						: ''}
+					title="Click to change layer color."
 				></div>
 			</Trigger>
 		{/snippet}
