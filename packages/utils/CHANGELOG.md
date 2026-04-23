@@ -1,5 +1,16 @@
 # @ldn-viz/utils
 
+## 3.0.0-ds3.1
+
+### Major Changes
+
+- 60cb297: trigger release after changes made in dev branch and published without @ds3 tag
+
+### Patch Changes
+
+- Updated dependencies [60cb297]
+  - @ldn-viz/themes@8.0.0-ds3.1
+
 ## 3.0.0-ds3.0
 
 ### Major Changes
