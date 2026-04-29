@@ -198,7 +198,7 @@ It can also be used to add liks.
 			{...args}
 			title="This is the Chart <i>Title</i>"
 			subTitle="<i>Subtitle</i> provides extra context"
-			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis' class='underline'>GLA city intelligence</a>"
+			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis'>GLA city intelligence</a>"
 			byline="A <i>byline</i> for the chart"
 			note="Be aware that you can provide a <i>note</i> if required"
 			dataDownloadButton={['JSON', 'CSV']}
