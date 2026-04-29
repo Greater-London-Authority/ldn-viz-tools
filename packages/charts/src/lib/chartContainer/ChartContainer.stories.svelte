@@ -209,3 +209,22 @@ It can also be used to add liks.
 		/>
 	{/snippet}
 </Story>
+
+<Story name="With id">
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart <i>Title</i>"
+			subTitle="<i>Subtitle</i> provides extra context"
+			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis' class='underline'>GLA city intelligence</a>"
+			byline="A <i>byline</i> for the chart"
+			note="Be aware that you can provide a <i>note</i> if required"
+			dataDownloadButton={['JSON', 'CSV']}
+			data={[]}
+			imageDownloadButton
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+			id="MyCustomChart"
+		/>
+	{/snippet}
+</Story>

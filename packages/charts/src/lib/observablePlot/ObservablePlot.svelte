@@ -148,6 +148,7 @@
 		chartHeight="h-fit"
 		{chartWidth}
 		{chartDescription}
+		{id}
 	>
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 		{@render controls?.()}
