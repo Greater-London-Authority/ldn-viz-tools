@@ -12,7 +12,7 @@ export default create({
 	brandImage: './cilogo.svg',
 	brandTarget: '_self',
 
-	colorPrimary: colors.mode.dark.surface.accent.default,
+	colorPrimary: colors.mode.dark.surface.accent,
 	colorSecondary: colors.mode.dark.palette.blue[700],
 
 	// UI
@@ -31,7 +31,7 @@ export default create({
 	barTextColor: colors.mode.dark.text.default,
 	barHoverColor: colors.mode.dark.interactive.primary.default,
 	barSelectedColor: colors.mode.dark.interactive.primary.active,
-	barBg: colors.mode.dark.container.level[2],
+	barBg: colors.mode.dark.container['level-2'],
 
 	// Form colors
 	buttonBg: colors.mode.dark.interactive.primary.default,
@@ -50,7 +50,7 @@ export const docs = create({
 	fontBase: '"Inter", sans-serif',
 	fontCode: 'monospace',
 
-	colorPrimary: colors.mode.light.surface.accent.default,
+	colorPrimary: colors.mode.light.surface.accent,
 	colorSecondary: colors.mode.light.palette.blue[700],
 
 	// Text colors
