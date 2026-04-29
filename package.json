@@ -12,8 +12,8 @@
 		"format": "prettier --write .",
 		"lint": "turbo run lint",
 		"publish-packages": "turbo run build && changeset version && changeset publish",
-		"publish-packages-svelte5": "turbo run build && changeset version && changeset publish",
 		"publish-packages-ds3": "turbo run build && changeset version && changeset publish",
+		"publish-packages-svelte5": "turbo run build && changeset version && changeset publish",
 		"sync-docstrings": "turbo run sync-docstrings",
 		"test": "turbo run test",
 		"test-storybook": "npm run test-storybook -w apps/docs",
@@ -29,7 +29,6 @@
 	"devDependencies": {
 		"@changesets/cli": "^2.27.1",
 		"@ldn-viz/config-vitest": "*",
-		"@ldn-viz/docs": "*",
 		"@observablehq/sample-datasets": "^1.0.1",
 		"@storybook/addon-svelte-csf": "^5.0.3",
 		"@tailwindcss/node": "^4.1.8",
@@ -40,7 +39,7 @@
 		"prettier-plugin-svelte": "^3.4.0",
 		"turbo": "^2.5.3",
 		"typescript": "5.8.2",
-		"vite": "^7.2.2",
+		"vite": "^8.0.0",
 		"vitest": "^4.0.16"
 	},
 	"packageManager": "npm@11.3.0",
