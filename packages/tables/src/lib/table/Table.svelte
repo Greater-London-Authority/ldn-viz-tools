@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { computeWidths } from '../core/lib/computeWidths';
-
 	import VirtualScroll from 'svelte-virtual-scroll-list';
-	import { TableData } from '../core/lib/dataObj';
+	import { TableState } from '../core/lib/tableState.svelte';
 	import TableContainer from './TableContainer.svelte';
 	import GroupRowsMenu from './menus/GroupRowsMenu.svelte';
 	import SortGroupsMenu from './menus/SortGroupsMenu.svelte';
@@ -69,7 +67,7 @@
 		/**
 		 * Exposes the internal table object, so that it can be programmatically manipulated.
 		 */
-		// tableObj?: TableData | undefined;
+		// tableObj?: TableState | undefined;
 		/**
 		 * If `true`, then rows of the table will alternate in color, making it easier to see which cells are on the same row.
 		 */
@@ -144,51 +142,31 @@
 		beforeTable
 	}: Props = $props();
 
-	let colWidths = $state([]);
+	const createTable = (data: any[], tableSpec: TableSpec) => {
+		const to = new TableState(tableSpec);
 
-	// this is a hack to trigger updates after the tableObj object ha changes in a way that Svelte isn't keeping track of
-	let updateTrigger = $state(0);
-
-	const createTable = (data: any[]) => {
-		const to = new TableData(tableSpec);
-
-		// to.setOnRowsChange(() => tableObj = tableObj));
-
-		to.setData(data);
-		to.setColumnSpec(tableSpec.columns);
-		to.setRowOrder([
+		to.rawData = data;
+		to.columnSpec = tableSpec.columns;
+		to.rowOrderSpec = [
 			{
 				field: 'a',
 				direction: 'ascending'
 			}
-		]);
+		];
 
 		if (fixedTableWidth) {
-			computeWidths(to, fixedTableWidth);
-			// TODO: should set tableWidth to match
+			to.tableWidth = fixedTableWidth;
 		}
 
 		return to;
 	};
 
-	const setColSpec = (tableObj: TableData, tableSpec: { columns: any }) => {
-		if (tableObj) {
-			tableObj.setColumnSpec(tableSpec.columns);
-		}
-	};
-
-	let tableObj = $derived.by(() => {
-		const to = createTable(data);
-
-		setColSpec(to, tableSpec);
-
-		return to;
-	});
+	// when data is updated, update the table object rather than creating a new one
+	// svelte-ignore state_referenced_locally
+	const tableObj = createTable(data, tableSpec);
+	$effect(() => tableObj && data && (tableObj.rawData = data));
 
 	let visualRows: any[] = $derived.by(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		updateTrigger; // run when grouping or ordering changes
-
 		const vr = [];
 
 		for (let group of tableObj!.groups) {
@@ -212,120 +190,107 @@
 
 	let tableWidth: number | undefined = $state();
 
-	const updateTableWidths = (tableObj: any, newWidth: number) => {
-		if (tableObj && !fixedTableWidth) {
-			computeWidths(tableObj, newWidth);
-			colWidths = tableObj.columnSpec.map((col: { computedWidth: any }) => col.computedWidth);
-		}
-	};
-
+	// Update table width when container width changes
 	$effect(() => {
-		if (tableWidth) updateTableWidths(tableObj, tableWidth);
+		if (tableObj && tableWidth && !fixedTableWidth) {
+			tableObj.tableWidth = tableWidth;
+		}
 	});
 
 	const beforeTable_render = $derived(beforeTable);
 </script>
 
-{#key [colWidths, updateTrigger]}
-	{#if tableObj && tableObj.extents}
-		<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
-			<div class="ml-4 flex w-[430px] gap-2">
-				{#if allowRowGrouping}
-					<GroupRowsMenu table={tableObj} onChange={() => updateTrigger++} />
-					<SortGroupsMenu table={tableObj} onChange={() => updateTrigger++} />
-				{/if}
+{#if tableObj && tableObj.extents}
+	<div style:width={fixedTableWidth ? fixedTableWidth + 'px' : '100%'}>
+		<div class="ml-4 flex w-[430px] gap-2">
+			{#if allowRowGrouping}
+				<GroupRowsMenu table={tableObj} />
+				<SortGroupsMenu table={tableObj} />
+			{/if}
 
-				{#if allowColumnHiding}
-					<ToggleColumnsMenu table={tableObj} onChange={() => updateTrigger++} />
-				{/if}
-			</div>
-
-			<TableContainer
-				{data}
-				{title}
-				{subTitle}
-				{source}
-				{byline}
-				{note}
-				{dataDownloadButton}
-				{imageDownloadButton}
-				{filename}
-				{columnMapping}
-			>
-				{#snippet beforeTable()}
-					{#if beforeTable}
-						<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
-						{@render beforeTable_render?.()}
-					{/if}
-				{/snippet}
-
-				{#snippet table()}
-					<div
-						class="w-full table-auto text-sm text-color-text-primary"
-						bind:clientWidth={tableWidth}
-						role="table"
-					>
-						{#if tableSpec.showTableHeader !== false}
-							<TableHeader
-								{tableSpec}
-								table={tableObj}
-								{data}
-								{allowSorting}
-								{tableWidth}
-								onChange={() => updateTrigger++}
-							/>
-						{/if}
-
-						{#if paginate}
-							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow, i (visualRow)}
-									{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
-										<RowRenderer spec={visualRow} table={tableObj} />
-									{/if}
-								{/each}
-							</div>
-						{:else if virtualise}
-							<div
-								style:height={`${height - 100}px`}
-								style:width={tableWidth}
-								class:stripedVirtual={zebraStripe}
-								role="rowgroup"
-							>
-								<VirtualScroll data={visualRows} key="uniqueKey">
-									{#snippet children({ data }: any)}
-										<RowRenderer spec={data} table={tableObj} />
-									{/snippet}
-								</VirtualScroll>
-							</div>
-						{:else}
-							<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
-								{#each visualRows as visualRow (visualRow)}
-									<RowRenderer spec={visualRow} table={tableObj} />
-								{/each}
-							</div>
-						{/if}
-					</div>
-				{/snippet}
-
-				{#snippet paginationControls()}
-					<div>
-						{#if paginate}
-							<PaginationControls {pageSize} numRows={data.length} bind:page />
-						{/if}
-					</div>
-				{/snippet}
-
-				{#snippet numRowsControlSlot()}
-					<div>
-						{#if paginate && allowPageSizeChanges}
-							<NumRowsControls bind:pageSize bind:page />
-						{/if}
-					</div>
-				{/snippet}
-			</TableContainer>
+			{#if allowColumnHiding}
+				<ToggleColumnsMenu table={tableObj} />
+			{/if}
 		</div>
-	{/if}
-{/key}
+
+		<TableContainer
+			{data}
+			{title}
+			{subTitle}
+			{source}
+			{byline}
+			{note}
+			{dataDownloadButton}
+			{imageDownloadButton}
+			{filename}
+			{columnMapping}
+		>
+			{#snippet beforeTable()}
+				{#if beforeTable}
+					<!-- Content to be inserted below the title and subtitle, but above the table itself. -->
+					{@render beforeTable_render?.()}
+				{/if}
+			{/snippet}
+
+			{#snippet table()}
+				<div
+					class="w-full table-auto text-sm text-color-text-primary"
+					bind:clientWidth={tableWidth}
+					role="table"
+				>
+					{#if tableSpec.showTableHeader !== false}
+						<TableHeader {tableSpec} table={tableObj} {data} {allowSorting} {tableWidth} />
+					{/if}
+
+					{#if paginate}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow, i (visualRow)}
+								{#if i >= (page - 1) * pageSize && i <= page * pageSize - 1}
+									<RowRenderer spec={visualRow} table={tableObj} />
+								{/if}
+							{/each}
+						</div>
+					{:else if virtualise}
+						<div
+							style:height={`${height - 100}px`}
+							style:width={tableWidth}
+							class:stripedVirtual={zebraStripe}
+							role="rowgroup"
+						>
+							<VirtualScroll data={visualRows} key="uniqueKey">
+								{#snippet children({ data }: any)}
+									<RowRenderer spec={data} table={tableObj} />
+								{/snippet}
+							</VirtualScroll>
+						</div>
+					{:else}
+						<div style:width={tableWidth} class:striped={zebraStripe} role="rowgroup">
+							{#each visualRows as visualRow (visualRow)}
+								<RowRenderer spec={visualRow} table={tableObj} />
+							{/each}
+						</div>
+					{/if}
+				</div>
+			{/snippet}
+
+			{#snippet paginationControls()}
+				<div>
+					{#if paginate}
+						<PaginationControls {pageSize} numRows={data.length} bind:page />
+					{/if}
+				</div>
+			{/snippet}
+
+			{#snippet numRowsControlSlot()}
+				<div>
+					{#if paginate && allowPageSizeChanges}
+						<NumRowsControls bind:pageSize bind:page />
+					{/if}
+				</div>
+			{/snippet}
+		</TableContainer>
+	</div>
+{/if}
 
 <style lang="postcss">
 	:global(.striped > div:nth-child(odd)) {
