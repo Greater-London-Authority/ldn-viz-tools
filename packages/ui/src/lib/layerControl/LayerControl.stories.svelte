@@ -129,6 +129,13 @@
 	{/snippet}
 </Story>
 
+<!-- The color control is disabled but the color chip is still displayed to show the current color. -->
+<Story name="Color chips shown, desite color control being disabled">
+	{#snippet template()}
+		<LayerControl bind:layerState label="Borough" disableColorControl alwaysShowcolorChip />
+	{/snippet}
+</Story>
+
 <Story name="Disabled (Opacity)">
 	{#snippet template()}
 		<LayerControl bind:layerState label="Borough" disableOpacityControl />

@@ -72,6 +72,12 @@
 			size?: number;
 			fillType?: string;
 		};
+
+		/**
+		 * If `true`, then color chips will be displayed even if the color control is disabled.
+		 */
+		alwaysShowcolorChip: false;
+
 		/**
 		 * minimum permitted value for the marker size
 		 */
@@ -122,6 +128,7 @@
 			size: 10,
 			fillType: 'solid-fill'
 		}),
+		alwaysShowcolorChip = false,
 		minSize = 1,
 		maxSize = 100,
 		mutuallyExclusive = false,
@@ -153,6 +160,7 @@
 			{colorNames}
 			bind:activeColorName={layerState.colorName}
 			disabled={disabled || disableColorControl}
+			{alwaysShowcolorChip}
 			{label}
 		/>
 	{/if}
