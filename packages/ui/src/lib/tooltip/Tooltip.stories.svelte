@@ -1,10 +1,10 @@
 <script module lang="ts">
-	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Tooltip from './Tooltip.svelte';
-	import Trigger from '../overlay/Trigger.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Cog6Tooth } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import Trigger from '../overlay/Trigger.svelte';
+	import Tooltip from './Tooltip.svelte';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Tooltip',
@@ -61,5 +61,15 @@
 			{/snippet}
 			The contents of the Tooltip...
 		</Tooltip>
+	{/snippet}
+</Story>
+
+<!--
+Setting the `disableHoverableContent` prop to `false` allows the user to move
+the cursor from the tooltip trigger to its content with it closing.
+-->
+<Story name="Enabling hovering over tooltip contents">
+	{#snippet template(args)}
+		<Tooltip {...args} disableHoverableContent={false}>The contents of the Tooltip...</Tooltip>
 	{/snippet}
 </Story>
