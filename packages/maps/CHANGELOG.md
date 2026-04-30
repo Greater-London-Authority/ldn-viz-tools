@@ -1,5 +1,18 @@
 # ldn-viz-tools-maps
 
+## 13.0.0
+
+### Minor Changes
+
+- 6c89899: CHANGED: expose functions from `MapDraw` component, so users of the component can trigger the actions that would result from clicking the control buttons
+
+### Patch Changes
+
+- Updated dependencies [e3ca40c]
+- Updated dependencies [6d6d424]
+- Updated dependencies [01c499c]
+  - @ldn-viz/ui@22.1.0
+
 ## 12.0.0
 
 ### Patch Changes
