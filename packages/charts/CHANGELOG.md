@@ -1,5 +1,12 @@
 # ldn-viz-tools-charts
 
+## 8.0.0-ds3.2
+
+### Minor Changes
+
+- 8035407: CHANGED: apply styling to links in chart footers
+- 0c15080: CHANGED: `ObservablePlot` can now passes the `id` prop through to `ChartContainer`
+
 ## 8.0.0-ds3.1
 
 ### Major Changes
