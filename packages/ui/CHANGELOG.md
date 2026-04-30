@@ -1,5 +1,13 @@
 # ldn-viz-tools-ui
 
+## 22.1.0
+
+### Minor Changes
+
+- e3ca40c: ADDED: Breadcrumbs component
+- 6d6d424: CHANGED: add `alwaysShowcolorChip` prop that allows color chips to be displayed in `LayerControl` when color editing is disabled
+- 01c499c: CHANGED: added the `disableHoverableContent` prop to `Tooltip` component, allowing tooltips to be kept open as cursor moves from the tooltip trigger to its content.
+
 ## 22.0.0
 
 ### Major Changes
