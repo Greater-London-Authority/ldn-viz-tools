@@ -9,6 +9,7 @@ export { default as AuthMenu } from './auth/AuthMenu.svelte';
 export { default as HandleRedirectFromAuth } from './auth/HandleRedirectFromAuth.svelte';
 export { default as LoginForm } from './auth/LoginForm.svelte';
 export { default as LoginLink } from './auth/LoginLink.svelte';
+export { default as Breadcrumbs } from './breadcrumbs/Breadcrumbs.svelte';
 export { default as AsyncButton } from './button/AsyncButton.svelte';
 export { default as Button } from './button/Button.svelte';
 export { default as Callout } from './callout/Callout.svelte';
