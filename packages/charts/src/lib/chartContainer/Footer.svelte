@@ -21,7 +21,7 @@
 	{#if byline || source || note || chartDescription}
 		<ul
 			title="Chart footnotes and description"
-			class="text-color-text-muted mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs"
+			class="footer-ul mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs text-color-text-muted"
 		>
 			<!-- eslint-disable svelte/no-at-html-tags -->
 			{#if byline}<li>{@html byline}</li>{/if}
@@ -60,3 +60,9 @@
 		</div>
 	{/if}
 </div>
+
+<style>
+	.footer-ul :global(a) {
+		@apply underline hover:text-color-interactive-primary-hover hover:no-underline;
+	}
+</style>

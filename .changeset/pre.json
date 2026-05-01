@@ -15,7 +15,9 @@
     "@ldn-viz/utils": "2.0.0"
   },
   "changesets": [
+    "chart-footer-link-styling",
     "grumpy-camels-crash",
-    "merge-dev-changes"
+    "merge-dev-changes",
+    "observable-plot-custom-id"
   ]
 }

@@ -156,6 +156,7 @@
 		{chartWidth}
 		{chartDescription}
 		{columnMapping}
+		{id}
 	>
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 		{@render controls?.()}
