@@ -9,6 +9,10 @@ navLabel: Colour
 	import { Callout, theme } from '@ldn-viz/ui'
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
+    import ColorStackedBar from '$lib/components/charts/exampleCharts/lineCharts/ColorStackedBar.svelte'
+    import ColorMultipleLine from '$lib/components/charts/exampleCharts/lineCharts/ColorMultipleLine.svelte'
+    import ColorDualLine from '$lib/components/charts/exampleCharts/lineCharts/ColorDualLine.svelte'
+
 
     let dataTokens = $derived(
         Object.fromEntries(
@@ -123,15 +127,15 @@ When selecting colors directly from the categorical palette, choose as few as po
 
 Color differentiation is harder when elements are smaller, as there is physically less color to see.
 
-So, using high contrast & easily differentiable colors are particularly important when producing line charts. For bar charts and other larger graphical elements, you can lower your contrast threshold a bit.
+Using high contrast and easily differentiable colors are particularly important when producing line charts. For bar charts and other larger graphical elements, you can lower your contrast a bit.
 
-The WCAG say:
+> As with large text, for graphical objects such as charts and graphs a contrast ratio of 3:1 should be sufficient
 
-**”As with large text, for graphical objects such as charts and graphs a contrast ratio of 3:1 should be sufficient”**
+<cite>WCAG Guidelines</cite>
 
-- [WCAG Guidelines](https://wcag.com/resource/ui-quick-tips-for-designers/)
+[Read more on WCAG Guidelines](https://wcag.com/resource/ui-quick-tips-for-designers/)
 
-[TODO: ADD LINE CHART]
+<ColorStackedBar />
 
 ### Semantic Data Colours
 
@@ -145,9 +149,13 @@ We've created semantic tokens to simplify and standardise the use of our colours
 
 We recommend you consistently use `color-data-primary, secondary and tertiary` in your charts, unless you have a specific reason for choosing a different set.
 
-These are colours are easily differentiated, and have an equivalent set in dark mode.
+These colours are easily differentiated, and have an equivalent set in dark mode.
 
-For "other" or "context" data, use `color-data-context`.
+<ColorMultipleLine />
+
+For charts where you want to show "other" or "context" data, use `color-data-primary` and `color-data-context`.
+
+<ColorDualLine />
 
 #### Demographics
 
