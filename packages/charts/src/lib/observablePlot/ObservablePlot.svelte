@@ -101,6 +101,12 @@
 		ariaHidden?: boolean;
 		controls?: import('svelte').Snippet;
 		tooltip?: import('svelte').Snippet;
+
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
+		columnMapping?: undefined | { [oldName: string]: string };
+
 		[key: string]: any;
 	}
 
@@ -126,6 +132,7 @@
 		ariaHidden = true,
 		controls,
 		tooltip,
+		columnMapping = undefined,
 		...rest
 	}: Props = $props();
 
@@ -148,6 +155,7 @@
 		chartHeight="h-fit"
 		{chartWidth}
 		{chartDescription}
+		{columnMapping}
 		{id}
 	>
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
