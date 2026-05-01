@@ -83,7 +83,7 @@ navLabel: Colour
 
 Balancing the requirements of accessibility, personal perception, system preferences, cultural association and branding is difficult to get right.
 
-### Keep in mind these principles when using colors:
+### Keep in mind these principles when using color
 
 - Colors should be easily differentiated by as many people, in as many environments as possible.
 
@@ -180,3 +180,39 @@ To ensure consistency and correct contrast across all charts, use the following 
 <div class="not-prose">
 <SwatchGrid tokenData={chartColors} title="Chart Colour Tokens"/>
 </div>
+
+### Quantitative Color Scales
+
+A quantitative color scale is a continuous (smooth or stepped) gradient of color that is mapped to a sequential set of values. These color scales can be single-hued (e.g. light to dark blue), or multi-hued (e.g. red, to yellow, to blue).
+
+These quantitative color scales are mostly used to encode data on a map or, for example, the value of a point on a scatterplot.
+
+**TODO**: Add Example Choropleth Map / Scatterplot
+
+#### Sequential
+
+A sequential color scale is a gradient of color (continuous or stepped) that runs in one direction. For example, on a light background, a gradient from light to dark blue, might be mapped to values that run from 1 to 100.
+
+Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader, so on a dark background, a domain of 1 to 100 would be mapped from dark to light blue.. the lighter blue having the higher contrast and so the higher value.
+
+#### Perceptually Even
+
+It’s important that color scales are perceptually even. This means that a reader can infer the correct value from the color without being misled by particularly bright or dark patches.
+
+While multi-hued scales can help users differentiate between steps on a scale, perceptual unevenness can be an issue. This is because a scale may pass through hues that could be perceived as brighter (like yellow), and depending on your color space, can create odd color artefacts.
+
+**TODO**: Add Rainbow Scale Example (don’t use)
+
+If you do need multi-hued color scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis). (see further reading for tools like chroma.js if you need to generate your own).
+
+**TODO**: Add Viridis scales (do use)
+
+In reality, you’ll most likely need to generate a set stepped colors along a color scale. For example, 5 steps from light to dark blue.
+
+We’ve created a tool (based on Chroma.js) to help you generate stepped sequential color scales, from our core hues (blue, red, green etc).
+
+xxxxx
+
+The tool allows you to change the start and end points along the color scale, choose your number of stops, reverse the direction and switch the background color between light and dark theme to help preview the scale in context.
+
+**TODO**: Finish and publish this tool
