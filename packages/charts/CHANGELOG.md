@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 8.0.0-ds3.3
+
+### Minor Changes
+
+- 638c76d: CHANGED: allow `columnMapping` prop to be supplied to `ChartContainer` or `ObservablePlot`
+
 ## 8.0.0-ds3.2
 
 ### Minor Changes
