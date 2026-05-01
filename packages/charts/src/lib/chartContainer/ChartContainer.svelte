@@ -96,6 +96,11 @@
 		 * page, and want to be able to directly link to individual charts.
 		 */
 		id?: string;
+
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
+		columnMapping?: undefined | { [oldName: string]: string };
 	}
 
 	let {
@@ -118,7 +123,8 @@
 		legend,
 		children,
 		description,
-		id = 'captureElement'
+		id = 'captureElement',
+		columnMapping = undefined
 	}: Props = $props();
 
 	let chartClass = $derived(
@@ -170,6 +176,7 @@
 					dataForDownload={data}
 					{dataDownloadButton}
 					{imageDownloadButton}
+					{columnMapping}
 				/>
 			{/snippet}
 		</Footer>
