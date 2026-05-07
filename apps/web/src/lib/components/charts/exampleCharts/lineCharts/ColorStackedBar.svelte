@@ -3,10 +3,10 @@
 	 * TODO: THIS EXAMPLE ALREADY EXISTS ESWHERE IN THIS REPO, SO THIS IS A REPETITION ??
 	 */
 
+	import demoYearlyTimeseriesLong from '$lib/data/demoYearlyTimeseriesLong.json';
 	import { ObservablePlot, Plot } from '@ldn-viz/charts';
 	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
-	import demoYearlyTimeseriesLong from '../../../../data/demoYearlyTimeseriesLong.json';
 
 	//const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
