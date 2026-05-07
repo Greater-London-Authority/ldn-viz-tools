@@ -12,20 +12,12 @@ navLabel: Colour
     import ColorStackedBar from '$lib/components/charts/exampleCharts/lineCharts/ColorStackedBar.svelte'
     import ColorMultipleLine from '$lib/components/charts/exampleCharts/lineCharts/ColorMultipleLine.svelte'
     import ColorDualLine from '$lib/components/charts/exampleCharts/lineCharts/ColorDualLine.svelte'
+    import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
 
 
-    let dataTokens = $derived(
-        Object.fromEntries(
-            Object.entries(
-                tokens.mode[theme.currentMode ?? 'light'].data
-            ).map(([key, value]) => [
-                key,
-                { ...value }
-            ])
-        )
-	);
+    // functions
 
-    const getTokenByConcept = (startKey = null, obj= tokens.mode[theme.currentMode ?? 'light']) => {
+     const getTokenByConcept = (startKey = null, obj= tokens.mode[theme.currentMode ?? 'light']) => {
         // Determine the starting point
         let start = obj;
         if (startKey) {
@@ -59,6 +51,23 @@ navLabel: Colour
         return results;
     }
 
+    const hexToToken = (hexArr = []) => {
+        return hexArr.map((hex) => ({name:'', description:'', type:'', value: hex}));
+    }
+
+    // ------ 
+
+    let dataTokens = $derived(
+        Object.fromEntries(
+            Object.entries(
+                tokens.mode[theme.currentMode ?? 'light'].data
+            ).map(([key, value]) => [
+                key,
+                { ...value }
+            ])
+        )
+	);
+
     let themeColorsOrdered = [
             'color-data-primary', 
             'color-data-secondary',
@@ -74,9 +83,24 @@ navLabel: Colour
         ]
 
     let themeColors = $derived(getTokenByConcept('data').filter(token => themeColorsOrdered.includes(token.name)).sort((a, b) => themeColorsOrdered.indexOf(a.name) - themeColorsOrdered.indexOf(b.name)));
+    
     let chartColors = $derived(getTokenByConcept('chart'));
-  
+
+    
+
+    let ldnBlue10Hex = $derived(getColorRamp({ colors: [
+        theme.tokenNameToValue('palette.blue.200'), 
+        theme.tokenNameToValue('palette.blue.500'),
+        theme.tokenNameToValue('palette.blue.900')
+        ],count:10, even:true}))
+
+    let ldnBlue10Tokens = $derived(hexToToken(ldnBlue10Hex))
+
+    
    
+
+
+
 </script>
 
 ## Principles
@@ -194,6 +218,12 @@ These quantitative color scales are mostly used to encode data on a map or, for 
 A sequential color scale is a gradient of color (continuous or stepped) that runs in one direction. For example, on a light background, a gradient from light to dark blue, might be mapped to values that run from 1 to 100.
 
 Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader, so on a dark background, a domain of 1 to 100 would be mapped from dark to light blue.. the lighter blue having the higher contrast and so the higher value.
+
+<div class="not-prose py-spacing-xl">
+<SwatchGrid tokenData={ldnBlue10Tokens} title="Example: Blue Colour Scale" size="xs" />
+</div>
+
+**TODO**: Add mode reactive blue-200 to blue-900 colour ramp
 
 #### Perceptually Even
 

@@ -6,7 +6,7 @@ navLabel: Chart examples
 ---
 
 <script>
-    import MultipleLine from '$lib/components/charts/exampleCharts/lineCharts/MultipleLine.svelte'
+    import GeneralMultipleLine from '$lib/components/charts/exampleCharts/lineCharts/GeneralMultipleLine.svelte'
 </script>
 
 ## Line Charts
@@ -15,4 +15,4 @@ Line charts display data as points connected by lines, excellent for showing tre
 
 ### Multiple Lines
 
-<MultipleLine />
+<GeneralMultipleLine />
