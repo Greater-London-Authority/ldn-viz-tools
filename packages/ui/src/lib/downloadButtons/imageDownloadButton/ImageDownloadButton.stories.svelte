@@ -24,7 +24,7 @@
 <script lang="ts">
 	import { Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import LogoByCiu from '../logos/LogoByCIU.svelte';
+	import LogoByCiu from '../../logos/LogoByCIU.svelte';
 
 	let htmlNode: HTMLElement = $state() as HTMLElement;
 	let htmlNode2: HTMLElement = $state() as HTMLElement;
