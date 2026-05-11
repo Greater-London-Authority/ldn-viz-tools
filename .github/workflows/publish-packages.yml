@@ -2,6 +2,18 @@ name: Publish Packages to NPM
 
 on:
   workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        type: choice
+        options:
+          - normal
+          - ds3
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   build:
@@ -15,6 +27,7 @@ jobs:
         with:
           node-version: '24.0.2'
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false # never use caching in release builds
 
       - name: Install dependencies
         run: npm install
@@ -23,16 +36,23 @@ jobs:
         run: npm install turbo --global
 
       - name: Publish packages
-        run: npm run publish-packages
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ "${{ inputs.release_type }}" == "ds3" ]; then
+            npm run publish-packages-ds3
+          else
+            npm run publish-packages
+          fi
 
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git checkout -b release-msg
+          if [ "${{ inputs.release_type }}" == "ds3" ]; then
+            git checkout -b release-msg-ds3
+          else
+            git checkout -b release-msg
+          fi
 
           git add -A .changeset
           git add packages/*/CHANGELOG.md
@@ -45,4 +65,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release-msg
+          branch: ${{ inputs.release_type == 'ds3' && 'release-msg-ds3' || 'release-msg' }}
