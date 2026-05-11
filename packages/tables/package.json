@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/tables",
-	"version": "6.0.0-ds3.3",
+	"version": "6.0.0-ds3.4",
 	"keywords": [
 		"svelte"
 	],
@@ -43,7 +43,7 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@ldn-viz/charts": "8.0.0-ds3.3",
+		"@ldn-viz/charts": "8.0.0-ds3.4",
 		"@ldn-viz/themes": "8.0.0-ds3.1",
 		"@ldn-viz/ui": "22.0.0-ds3.1",
 		"@ldn-viz/utils": "3.0.0-ds3.1",

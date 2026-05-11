@@ -17,6 +17,7 @@
   "changesets": [
     "chart-column-mappings",
     "chart-footer-link-styling",
+    "chart-legend-exports",
     "grumpy-camels-crash",
     "merge-dev-changes",
     "observable-plot-custom-id"
