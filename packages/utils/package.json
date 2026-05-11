@@ -1,6 +1,10 @@
 {
 	"name": "@ldn-viz/utils",
 	"version": "3.0.0-ds3.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Greater-London-Authority/ldn-viz-tools.git"
+	},
 	"license": "MIT",
 	"type": "module",
 	"exports": {

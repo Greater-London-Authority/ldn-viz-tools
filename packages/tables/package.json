@@ -4,6 +4,10 @@
 	"keywords": [
 		"svelte"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Greater-London-Authority/ldn-viz-tools.git"
+	},
 	"license": "MIT",
 	"sideEffects": [
 		"**/*.css"
