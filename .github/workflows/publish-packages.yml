@@ -13,7 +13,7 @@ on:
 
 permissions:
   id-token: write # Required for OIDC
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -36,6 +36,10 @@ jobs:
         run: npm install turbo --global
 
       - name: Publish packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: '' # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+          NPM_CONFIG_PROVENANCE: true
         run: |
           if [ "${{ inputs.release_type }}" == "ds3" ]; then
             npm run publish-packages-ds3
