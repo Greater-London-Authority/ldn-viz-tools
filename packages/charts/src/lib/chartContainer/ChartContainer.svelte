@@ -135,7 +135,7 @@
 	);
 </script>
 
-<div class={classes} bind:this={chartToCapture} {id}>
+<div class={classes} {id}>
 	{#if alt}
 		<p class="sr-only">{alt}</p>
 	{/if}
@@ -160,7 +160,7 @@
 	{@render legend?.()}
 
 	<!-- Visualisation goes here -->
-	<div class={chartClass}>
+	<div class={chartClass} bind:this={chartToCapture}>
 		{@render children?.()}
 	</div>
 

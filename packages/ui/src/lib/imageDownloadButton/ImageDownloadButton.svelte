@@ -13,10 +13,11 @@
 	 */
 
 	import { toPng } from 'html-to-image';
+	import type { Snippet } from 'svelte';
+	import type { ButtonProps } from '../button/types';
 	import MultipleActionButton from '../multipleActionButton/MultipleActionButton.svelte';
 	import type { MultipleActionButtonOption } from '../multipleActionButton/types.ts';
-	import type { ButtonProps } from '../button/types';
-	import type { Snippet } from 'svelte';
+	import { toSVG } from './utils';
 
 	type ImageDownloadButtonProps = ButtonProps & {
 		/**
@@ -216,17 +217,44 @@
 			});
 		};
 
-		if (format === 'SVG') {
-			const svgNode = findNearestChildSvg(htmlNode);
+		const serializeObservablePlot = (svgNode: SVGElement) => {
+			return new Promise<string>(async (resolve, reject) => {
+				try {
+					const fig = svgNode.querySelector('figure');
+					const svgString = await toSVG(fig);
+					const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgString)}`;
+					resolve(dataUrl);
+				} catch (error) {
+					reject(error);
+				}
+			});
+		};
 
-			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-			svgNode !== null
-				? serialize(svgNode)
+		if (format === 'SVG') {
+			if (htmlNode === null) {
+				console.warn('No svgNode found');
+				return;
+			}
+
+			const fig = htmlNode.querySelector('figure');
+			if (fig) {
+				serializeObservablePlot(htmlNode as SVGElement)
+					.then((dataUrl: string) => downloadFromURL(dataUrl))
+					.catch((error: any) => {
+						console.error('Error serializing SVG:', error);
+					});
+			} else {
+				const svgNode = findNearestChildSvg(htmlNode);
+				if (svgNode === null) {
+					console.warn('No svgNode found');
+				} else {
+					serialize(svgNode)
 						.then((dataUrl: string) => downloadFromURL(dataUrl))
 						.catch((error: any) => {
 							console.error('Error serializing SVG:', error);
-						})
-				: console.warn('No svgNode found');
+						});
+				}
+			}
 		} else if (format === 'PNG') {
 			toPng(htmlNode as HTMLElement, { ...captureOptions, pixelRatio: scaleFactor })
 				.then((dataUrl: string) => downloadFromURL(dataUrl))
