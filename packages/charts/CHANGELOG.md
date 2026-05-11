@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 8.0.0-ds3.4
+
+### Minor Changes
+
+- b5ac9bb: CHANGED: downloaded images of ObservablePlot plots now inlcude the legend
+
 ## 8.0.0-ds3.3
 
 ### Minor Changes
