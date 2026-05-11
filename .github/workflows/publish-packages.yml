@@ -18,6 +18,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: NPM publishing
+
     steps:
       - name: Checkout the git repository
         uses: actions/checkout@v4
