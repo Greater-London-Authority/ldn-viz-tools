@@ -12,6 +12,7 @@ navLabel: Colour
     import ColorStackedBar from '$lib/components/charts/exampleCharts/lineCharts/ColorStackedBar.svelte'
     import ColorMultipleLine from '$lib/components/charts/exampleCharts/lineCharts/ColorMultipleLine.svelte'
     import ColorDualLine from '$lib/components/charts/exampleCharts/lineCharts/ColorDualLine.svelte'
+    import ColorBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorBoroughMap.svelte'
     import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
 
 
@@ -87,7 +88,7 @@ navLabel: Colour
     let chartColors = $derived(getTokenByConcept('chart'));
 
     
-
+    // blue ramp definition
     let ldnBlue10Hex = $derived(getColorRamp({ colors: [
         theme.tokenNameToValue('palette.blue.200'), 
         theme.tokenNameToValue('palette.blue.500'),
@@ -95,11 +96,10 @@ navLabel: Colour
         ],count:10, even:true}))
 
     let ldnBlue10Tokens = $derived(hexToToken(ldnBlue10Hex))
-
-    
    
-
-
+    // get width & height of wrapper around ColorMapBorough component
+    let colorBoroughMapWidth = $state();
+	let colorBoroughMapHeight = $state();
 
 </script>
 
@@ -209,9 +209,11 @@ To ensure consistency and correct contrast across all charts, use the following 
 
 A quantitative color scale is a continuous (smooth or stepped) gradient of color that is mapped to a sequential set of values. These color scales can be single-hued (e.g. light to dark blue), or multi-hued (e.g. red, to yellow, to blue).
 
-These quantitative color scales are mostly used to encode data on a map or, for example, the value of a point on a scatterplot.
+These quantitative color scales are commonly used to encode data on a (choropleth) map, or the value of points on a scatterplot.
 
-**TODO**: Add Example Choropleth Map / Scatterplot
+<div bind:clientWidth={colorBoroughMapWidth} bind:clientHeight={colorBoroughMapHeight}>
+    <ColorBoroughMap containerWidth={colorBoroughMapWidth} containerHeight={colorBoroughMapHeight} />
+</div>
 
 #### Sequential
 
@@ -223,7 +225,7 @@ Typically, the higher the contrast with the background, the higher the value is 
 <SwatchGrid tokenData={ldnBlue10Tokens} title="Example: Blue Colour Scale" size="xs" />
 </div>
 
-**TODO**: Add mode reactive blue-200 to blue-900 colour ramp
+<!--TODO: Would be better as an actual ramp that you could copy ALL values from, rather than individual chips -->
 
 #### Perceptually Even
 
