@@ -6,15 +6,32 @@ navLabel: Colour
 ---
 
 <script>
-	import { Callout, theme } from '@ldn-viz/ui'
+    import { onMount } from 'svelte';
+	import { Callout, theme, ColorLegend, Select, Checkbox } from '@ldn-viz/ui'
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
     import ColorStackedBar from '$lib/components/charts/exampleCharts/lineCharts/ColorStackedBar.svelte'
     import ColorMultipleLine from '$lib/components/charts/exampleCharts/lineCharts/ColorMultipleLine.svelte'
     import ColorDualLine from '$lib/components/charts/exampleCharts/lineCharts/ColorDualLine.svelte'
     import ColorBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorBoroughMap.svelte'
+    import ColorRampGenerator from '$lib/components/ramp/ColorRampGenerator.svelte'
     import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
+    import { hsl } from 'd3';
+    import { scaleSequential } from 'd3-scale';
+	import { interpolateViridis	} from 'd3-scale-chromatic';
 
+    // check if mounted, for DOM (Canvas) dependent components (ColorLegend)
+    let mounted = $derived(false);
+
+	onMount(() => {
+		mounted = true;
+	});
+
+    // get width & height of wrappers around content components
+    // TODO: Code review.. is this ok to share between bindings on component wrappers
+    let contentWidth = $state();
+	let contentHeight = $state();
+    
 
     // functions
 
@@ -56,6 +73,14 @@ navLabel: Colour
         return hexArr.map((hex) => ({name:'', description:'', type:'', value: hex}));
     }
 
+    // based on D3 scale chromatic: https://github.com/d3/d3-scale-chromatic/blob/main/src/sequential-multi/viridis.js
+    const ramp = (range) => {
+        var n = range.length;
+        return function(t) {
+            return range[Math.max(0, Math.min(n - 1, Math.floor(t * n)))];
+        };
+    }
+
     // ------ 
 
     let dataTokens = $derived(
@@ -86,20 +111,80 @@ navLabel: Colour
     let themeColors = $derived(getTokenByConcept('data').filter(token => themeColorsOrdered.includes(token.name)).sort((a, b) => themeColorsOrdered.indexOf(a.name) - themeColorsOrdered.indexOf(b.name)));
     
     let chartColors = $derived(getTokenByConcept('chart'));
-
     
-    // blue ramp definition
-    let ldnBlue10Hex = $derived(getColorRamp({ colors: [
+    // blue 5 ramp definition
+    let ldnBlue5Ramp = $derived(ramp(getColorRamp({ colors: [
         theme.tokenNameToValue('palette.blue.200'), 
         theme.tokenNameToValue('palette.blue.500'),
         theme.tokenNameToValue('palette.blue.900')
-        ],count:10, even:true}))
+        ],count:5, even:true})))
 
-    let ldnBlue10Tokens = $derived(hexToToken(ldnBlue10Hex))
-   
-    // get width & height of wrapper around ColorMapBorough component
-    let colorBoroughMapWidth = $state();
-	let colorBoroughMapHeight = $state();
+    // LDN Blue Interpolator 
+    const interpolateLDNBlue5 = (t) => {
+        return ldnBlue5Ramp(t);
+    }
+
+    // let ldnBlue10Tokens = $derived(hexToToken(ldnBlue10Hex))
+
+    let ldnBlue100Ramp = $derived(ramp(getColorRamp({ colors: [
+        theme.tokenNameToValue('palette.blue.200'), 
+        theme.tokenNameToValue('palette.blue.500'),
+        theme.tokenNameToValue('palette.blue.900')
+        ],count:100, even:true})))
+
+    // LDN Blue Interpolator 
+    const interpolateLDNBlue = (t) => {
+        return ldnBlue100Ramp(t);
+    }
+
+    // bad "angry" rainbow ramp
+    const interpolateAngryRainbow = (t) => {
+        return hsl(
+            t * 360,
+            1,
+            0.5
+        )
+    } 
+
+    
+
+    // angry rainbow scale from HSL interpolator
+    let angryRainbowScale = scaleSequential([0, 100], interpolateAngryRainbow);
+
+    // viridis scale from d3 viridis
+    let viridisScale = scaleSequential([0, 100], interpolateViridis);
+
+    // ldn blue scale (100)
+    let ldnBlueScale = scaleSequential([0, 100], interpolateLDNBlue);
+
+    // ldn blue scale (100)
+    let ldnBlue5Scale = scaleSequential([0, 100], interpolateLDNBlue5);
+
+
+    // let rampToolHex = $derived(getColorRamp({ colors: [
+    //     theme.tokenNameToValue('palette.'+rampToolColorSelected+'.'+rampToolPaletteStepStartSelected), 
+    //     theme.tokenNameToValue('palette.'+rampToolColorSelected+'.'+rampToolPaletteStepMid),
+    //     theme.tokenNameToValue('palette.'+rampToolColorSelected+'.'+rampToolPaletteStepEndSelected)
+    //     ],count:rampToolBreaksSelected, even:true}))
+    
+    // const rampToolInterpolator = ((t) => {
+    //     return ramp(rampToolHex)(t);
+    // })
+
+    // let rampToolScale = scaleSequential([0, 100], rampToolInterpolator);
+
+    // const rampToolBreaksOptions = [2,3,4,5,6,7,8,9,10 ];
+    // let rampToolBreaksSelected = $state(5);
+
+    // const rampToolColorOptions = ["blue","red","green","darkpink"];
+    // let rampToolColorSelected = $state("blue");
+
+    // const rampToolPaletteStepOptions = [100,200,300,400,500,600,700,800,900,1000,1100];
+    // let rampToolPaletteStepStartSelected = $state(200);
+    // let rampToolPaletteStepEndSelected = $state(900);
+    // let rampToolPaletteStepMid = $derived(rampToolPaletteStepStartSelected + (Math.round(((rampToolPaletteStepEndSelected - rampToolPaletteStepStartSelected)/2)/100))*100);
+    
+
 
 </script>
 
@@ -211,21 +296,23 @@ A quantitative color scale is a continuous (smooth or stepped) gradient of color
 
 These quantitative color scales are commonly used to encode data on a (choropleth) map, or the value of points on a scatterplot.
 
-<div bind:clientWidth={colorBoroughMapWidth} bind:clientHeight={colorBoroughMapHeight}>
-    <ColorBoroughMap containerWidth={colorBoroughMapWidth} containerHeight={colorBoroughMapHeight} />
+<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
+    <ColorBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
 </div>
 
 #### Sequential
 
 A sequential color scale is a gradient of color (continuous or stepped) that runs in one direction. For example, on a light background, a gradient from light to dark blue, might be mapped to values that run from 1 to 100.
 
-Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader, so on a dark background, a domain of 1 to 100 would be mapped from dark to light blue.. the lighter blue having the higher contrast and so the higher value.
-
-<div class="not-prose py-spacing-xl">
-<SwatchGrid tokenData={ldnBlue10Tokens} title="Example: Blue Colour Scale" size="xs" />
+<div bind:clientWidth={contentWidth} >
+{#if mounted}
+    <ColorLegend color={ldnBlueScale} ticks=5 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
+{/if}
 </div>
 
-<!--TODO: Would be better as an actual ramp that you could copy ALL values from, rather than individual chips -->
+Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader, so on a dark background, a domain of 1 to 100 would be mapped from dark to light blue.. the lighter blue having the higher contrast and so the higher value.
+
+<ColorRampGenerator />
 
 #### Perceptually Even
 
@@ -233,18 +320,22 @@ It’s important that color scales are perceptually even. This means that a read
 
 While multi-hued scales can help users differentiate between steps on a scale, perceptual unevenness can be an issue. This is because a scale may pass through hues that could be perceived as brighter (like yellow), and depending on your color space, can create odd color artefacts.
 
-**TODO**: Add Rainbow Scale Example (don’t use)
+**Don't use this**
 
-If you do need multi-hued color scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis). (see further reading for tools like chroma.js if you need to generate your own).
+<div bind:clientWidth={contentWidth} >
+{#if mounted}
+    <ColorLegend color={angryRainbowScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidth}/>
+{/if}
+</div>
 
-**TODO**: Add Viridis scales (do use)
+If you do need multi-hued color scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis).
 
-In reality, you’ll most likely need to generate a set stepped colors along a color scale. For example, 5 steps from light to dark blue.
+**Do use this**
 
-We’ve created a tool (based on Chroma.js) to help you generate stepped sequential color scales, from our core hues (blue, red, green etc).
+<div bind:clientWidth={contentWidth} >
+{#if mounted}
+    <ColorLegend color={viridisScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidth}/>
+{/if}
+</div>
 
-xxxxx
-
-The tool allows you to change the start and end points along the color scale, choose your number of stops, reverse the direction and switch the background color between light and dark theme to help preview the scale in context.
-
-**TODO**: Finish and publish this tool
+**Note**: If you have more complex ramp generation needs, see the 'further reading' section (below) for tools like chroma.js.
