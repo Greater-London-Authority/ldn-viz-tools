@@ -1,5 +1,12 @@
 # ldn-viz-tools-charts
 
+## 8.0.0-ds3.5
+
+### Patch Changes
+
+- Updated dependencies [ac203e1]
+  - @ldn-viz/ui@22.0.0-ds3.2
+
 ## 8.0.0-ds3.4
 
 ### Minor Changes
