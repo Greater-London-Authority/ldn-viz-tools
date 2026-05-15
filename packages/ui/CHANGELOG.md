@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 22.0.0-ds3.2
+
+### Minor Changes
+
+- ac203e1: CHANGED: changes to ImageDownloadButton needed fot downloaded images of ObservablePlot plots to inlcude the legend
+
 ## 22.0.0-ds3.1
 
 ### Major Changes
