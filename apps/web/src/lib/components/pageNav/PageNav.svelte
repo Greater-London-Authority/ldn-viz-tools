@@ -16,14 +16,14 @@
 	const hasNextPage = $derived(hasActivePage && activeIndex < pages.length - 1);
 </script>
 
-<div class="flex justify-between gap-4 p-4 lg:p-8">
+<div class="flex justify-between gap-4 py-4 lg:py-8">
 	<div>
 		{#if hasPrevPage}
 			{@const prevPage = pages[activeIndex - 1]}
 			<Button href={resolve(prevPage.href, {})} variant="outline" emphasis="secondary">
 				<Icon src={ArrowLeftCircle} theme="outline" class="mr-4 h-8 w-8" aria-hidden="true" />
 				<div class="flex flex-col">
-					<span class="product label-sm text-color-text-secondary"> Previous </span>
+					<span class="text-color-text-secondary product label-sm"> Previous </span>
 					<span class="product label-lg responsive">{prevPage.title}</span>
 				</div>
 			</Button>
@@ -35,7 +35,7 @@
 
 			<Button href={resolve(nextPage.href, {})} variant="outline" emphasis="secondary">
 				<div class="flex flex-col">
-					<span class="product label-sm text-color-text-secondary"> Next </span>
+					<span class="text-color-text-secondary product label-sm"> Next </span>
 					<span class="product label-lg responsive">{nextPage.title}</span>
 				</div>
 				<Icon src={ArrowRightCircle} theme="outline" class="ml-4 h-8 w-8" aria-hidden="true" />
