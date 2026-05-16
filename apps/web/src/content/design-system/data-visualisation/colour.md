@@ -312,7 +312,7 @@ A sequential color scale is a gradient of color (continuous or stepped) that run
 
 Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader, so on a dark background, a domain of 1 to 100 would be mapped from dark to light blue.. the lighter blue having the higher contrast and so the higher value.
 
-<ColorRampGenerator />
+<ColorRampGenerator title='Example Color Ramp' colorRight='blue' type='Sequential' breaks={5} />
 
 #### Perceptually Even
 

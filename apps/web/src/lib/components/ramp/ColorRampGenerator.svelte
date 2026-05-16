@@ -12,6 +12,28 @@
 	import { scaleSequential } from 'd3-scale';
 	import { onMount } from 'svelte';
 
+	interface SwatchGridProps {
+		title: string;
+		colorLeft: string;
+		colorRight: string;
+		type: string;
+		includeGrey: boolean;
+		breaks: number;
+		paletteStart: number;
+		paletteEnd: number;
+	}
+
+	let {
+		title = 'Colour Ramp',
+		colorLeft = 'red',
+		colorRight = 'blue',
+		type = 'Sequential',
+		includeGrey = false,
+		breaks = 5,
+		paletteStart = 300,
+		paletteEnd = 900
+	}: SwatchGridProps = $props();
+
 	// check if mounted, for DOM (Canvas) dependent components (ColorLegend)
 	let mounted = $derived(false);
 
@@ -20,15 +42,13 @@
 	});
 
 	// get width & height of wrappers around content components
-	// TODO: Code review.. is this ok to share between bindings on component wrappers
 	let contentWidth = $state();
 	let contentHeight = $state();
 
 	const typeOptions = ['Sequential', 'Diverging'];
-	let typeSelected = $state('Sequential');
 
 	const breaksOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-	let breaksSelected = $state(5);
+	// let breaks = $state(5);
 
 	const colorOptions = [
 		'grey',
@@ -42,18 +62,9 @@
 		'purple',
 		'turquoise'
 	];
-	let colorSelectedLeft = $state('red');
-	let colorSelectedRight = $state('blue');
 
 	const paletteStepOptions = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100];
-	let paletteStepStartSelected = $state(300);
-	let paletteStepEndSelected = $state(900);
-	let paletteStepMid = $derived(
-		paletteStepStartSelected +
-			Math.round((paletteStepEndSelected - paletteStepStartSelected) / 2 / 100) * 100
-	);
-
-	let includeZeroGrey = $state(false);
+	let paletteMid = $derived(paletteStart + Math.round((paletteEnd - paletteStart) / 2 / 100) * 100);
 
 	const id = randomId();
 
@@ -85,11 +96,11 @@
 	let hexLeft = $derived(
 		getColorRamp({
 			colors: [
-				theme.tokenNameToValue('palette.' + colorSelectedLeft + '.' + paletteStepEndSelected),
-				theme.tokenNameToValue('palette.' + colorSelectedLeft + '.' + paletteStepMid),
-				theme.tokenNameToValue('palette.' + colorSelectedLeft + '.' + paletteStepStartSelected)
+				theme.tokenNameToValue('palette.' + colorLeft + '.' + paletteEnd),
+				theme.tokenNameToValue('palette.' + colorLeft + '.' + paletteMid),
+				theme.tokenNameToValue('palette.' + colorLeft + '.' + paletteStart)
 			],
-			count: breaksSelected,
+			count: breaks,
 			even: true
 		})
 	);
@@ -98,22 +109,20 @@
 	let hexRight = $derived(
 		getColorRamp({
 			colors: [
-				theme.tokenNameToValue('palette.' + colorSelectedRight + '.' + paletteStepStartSelected),
-				theme.tokenNameToValue('palette.' + colorSelectedRight + '.' + paletteStepMid),
-				theme.tokenNameToValue('palette.' + colorSelectedRight + '.' + paletteStepEndSelected)
+				theme.tokenNameToValue('palette.' + colorRight + '.' + paletteStart),
+				theme.tokenNameToValue('palette.' + colorRight + '.' + paletteMid),
+				theme.tokenNameToValue('palette.' + colorRight + '.' + paletteEnd)
 			],
-			count: breaksSelected,
+			count: breaks,
 			even: true
 		})
 	);
 
-	let hexRightWithZeroGrey = $derived(
-		includeZeroGrey === true ? [theme.tokenNameToValue('data.empty')].concat(hexRight) : hexRight
+	let hexRightWithGrey = $derived(
+		includeGrey == true ? [theme.tokenNameToValue('data.empty')].concat(hexRight) : hexRight
 	);
 
-	let hex = $derived(
-		typeSelected == 'Diverging' ? hexLeft.concat(hexRightWithZeroGrey) : hexRightWithZeroGrey
-	);
+	let hex = $derived(type == 'Diverging' ? hexLeft.concat(hexRightWithGrey) : hexRightWithGrey);
 
 	const interpolator = (t) => {
 		return ramp(hex)(t);
@@ -123,30 +132,25 @@
 </script>
 
 <div class="pb-8">
-	<h3 class="title-sm mb-typography-spacing-xs">Color Ramp Generator</h3>
+	<h3 class="title-sm mb-typography-spacing-xs">{title}</h3>
 
 	<div>
 		<div class="float-left w-48 pb-4 pr-4">
-			<Select label="Type" options={typeOptions} name="Type" bind:value={typeSelected} />
+			<Select label="Type" options={typeOptions} name="Type" bind:value={type} />
 		</div>
 
-		{#if typeSelected == 'Diverging'}
+		{#if type == 'Diverging'}
 			<div class="not-prose float-left w-32 pb-4 pr-4">
-				<Select
-					label="Palette Left"
-					options={colorOptions}
-					name="Color"
-					bind:value={colorSelectedLeft}
-				/>
+				<Select label="Palette Left" options={colorOptions} name="Color" bind:value={colorLeft} />
 			</div>
 		{/if}
 
 		<div class="float-left w-32 pb-4 pr-4">
 			<Select
-				label={typeSelected == 'Diverging' ? 'Palette Right' : 'Palette'}
+				label={type == 'Diverging' ? 'Palette Right' : 'Palette'}
 				options={colorOptions}
 				name="Color"
-				bind:value={colorSelectedRight}
+				bind:value={colorRight}
 			/>
 		</div>
 
@@ -155,7 +159,7 @@
 				label="Palette Start"
 				options={paletteStepOptions}
 				name="StartStep"
-				bind:value={paletteStepStartSelected}
+				bind:value={paletteStart}
 			/>
 		</div>
 
@@ -164,12 +168,12 @@
 				label="Palette End"
 				options={paletteStepOptions}
 				name="EndStep"
-				bind:value={paletteStepEndSelected}
+				bind:value={paletteEnd}
 			/>
 		</div>
 
 		<div class="float-left w-32 pb-4 pr-4">
-			<Select label="Breaks" options={breaksOptions} name="Steps" bind:value={breaksSelected} />
+			<Select label="Breaks" options={breaksOptions} name="Steps" bind:value={breaks} />
 		</div>
 	</div>
 
@@ -188,7 +192,7 @@
 
 	<div>
 		<div class="float-left pr-4 pt-4">
-			<Checkbox label="Include grey at zero" bind:checked={includeZeroGrey} />
+			<Checkbox label="Include grey at zero" bind:checked={includeGrey} />
 		</div>
 
 		<div class="right-0 float-right flex items-center pt-4">
