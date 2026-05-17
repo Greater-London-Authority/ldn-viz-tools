@@ -131,7 +131,7 @@
 	let scale = scaleSequential([0, 100], interpolator);
 </script>
 
-<div class="pb-8">
+<div class="pb-4">
 	<h3 class="title-sm mb-typography-spacing-xs">{title}</h3>
 
 	<div>

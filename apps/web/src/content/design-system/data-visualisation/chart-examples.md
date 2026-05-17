@@ -6,7 +6,7 @@ navLabel: Chart examples
 ---
 
 <script>
-    import GeneralMultipleLine from '$lib/components/charts/exampleCharts/lineCharts/GeneralMultipleLine.svelte'
+    import GeneralMultipleLine from '$lib/components/charts/exampleCharts/lines/GeneralMultipleLine.svelte'
 </script>
 
 ## Line Charts

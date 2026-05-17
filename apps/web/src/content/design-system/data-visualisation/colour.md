@@ -10,10 +10,11 @@ navLabel: Colour
 	import { Callout, theme, ColorLegend, Select, Checkbox } from '@ldn-viz/ui'
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
-    import ColorStackedBar from '$lib/components/charts/exampleCharts/lineCharts/ColorStackedBar.svelte'
-    import ColorMultipleLine from '$lib/components/charts/exampleCharts/lineCharts/ColorMultipleLine.svelte'
-    import ColorDualLine from '$lib/components/charts/exampleCharts/lineCharts/ColorDualLine.svelte'
+    import ColorStackedBar from '$lib/components/charts/exampleCharts/bars/ColorStackedBar.svelte'
+    import ColorMultipleLine from '$lib/components/charts/exampleCharts/lines/ColorMultipleLine.svelte'
+    import ColorDualLine from '$lib/components/charts/exampleCharts/lines/ColorDualLine.svelte'
     import ColorBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorBoroughMap.svelte'
+    import ColorDivergingBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorDivergingBoroughMap.svelte'
     import ColorRampGenerator from '$lib/components/ramp/ColorRampGenerator.svelte'
     import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
     import { hsl } from 'd3';
@@ -310,9 +311,33 @@ A sequential color scale is a gradient of color (continuous or stepped) that run
 {/if}
 </div>
 
-Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader, so on a dark background, a domain of 1 to 100 would be mapped from dark to light blue.. the lighter blue having the higher contrast and so the higher value.
+Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader. On a light background, a domain of 1 to 100 would be mapped from light to dark blue. The darker blue having the higher contrast and so the higher value. The opposite is true in dark mode.
 
-<ColorRampGenerator title='Example Color Ramp' colorRight='blue' type='Sequential' breaks={5} />
+<ColorRampGenerator title='Interactive Example' colorRight='blue' type='Sequential' breaks={5} />
+
+#### Diverging
+
+A diverging color scale works in the same way as the single “direction” sequential scale above, but it "diverges" in two directions, typically negative and positive.
+
+Typically we use 2 diverging, single hue, stepped gradients, but a diverging color scale can also be a continuous gradient of color.
+
+<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
+    <ColorDivergingBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
+</div>
+
+Our default diverging scale, is red (negative) to blue (positive). This is to avoid any red/green perception issues, and is a simple augmentation of our default (positive) blue ramp.
+
+<ColorRampGenerator title='Interactive Example' colorLeft='red' colorRight='blue' type='Diverging' paletteStart={300} paletteEnd={800} includeGrey={true} breaks={5} />
+
+With diverging scales, you may want to add a central neutral grey step between the positive/negative steps to indicate values that are truly zero. Zero values could get binned into the lowest positive step of a scale giving a false impression of that bin.
+
+**Note:** You should avoid mapping uneven ranges of values to apparently even ranges of color contrast.
+
+For example, if the range of your data is **not** evenly distributed on either side of zero (e.g. -50 to +100), then that should be reflected in the scale and the legend.
+
+<!-- TODO: Show misleading diverging ramp with values (bad) -->
+
+<!-- TODO: Show correct diverging ramp with values (good) -->
 
 #### Perceptually Even
 
@@ -330,7 +355,7 @@ While multi-hued scales can help users differentiate between steps on a scale, p
 
 If you do need multi-hued color scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis).
 
-**Do use this**
+**Use this**
 
 <div bind:clientWidth={contentWidth} >
 {#if mounted}

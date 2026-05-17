@@ -1,0 +1,52 @@
+[
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Very Negative",
+		"Average": 0.15
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Quite Negative",
+		"Average": 0.25
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Don't Know",
+		"Average": 0.15
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Quite Positive",
+		"Average": 0.15
+	},
+	{
+		"Year": "2015-01-01",
+		"Opinion": "Very Positive",
+		"Average": 0.3
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Very Negative",
+		"Average": 0.4
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Quite Negative",
+		"Average": 0.1
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Don't Know",
+		"Average": 0.05
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Quite Positive",
+		"Average": 0.25
+	},
+	{
+		"Year": "2025-01-01",
+		"Opinion": "Very Positive",
+		"Average": 0.2
+	}
+]
