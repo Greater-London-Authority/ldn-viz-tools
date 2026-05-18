@@ -16,6 +16,7 @@ navLabel: Colour
     import ColorBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorBoroughMap.svelte'
     import ColorDivergingBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorDivergingBoroughMap.svelte'
     import ColorRampGenerator from '$lib/components/ramp/ColorRampGenerator.svelte'
+    import ColorStackedBarLikert from '$lib/components/charts/exampleCharts/bars/ColorStackedBarLikert.svelte'
     import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
     import { hsl } from 'd3';
     import { scaleSequential } from 'd3-scale';
@@ -211,7 +212,7 @@ Balancing the requirements of accessibility, personal perception, system prefere
 
 - Some colors have overriding cultural, political or contextual meaning. Try and reserve those if you’ll need them later in your presentation. E.g. Red = Bad, Failing or Hot, Green = Good, improving or Environment, Blue = cold, etc...
 
-## In Practice
+## Practice
 
 ### Categorical Colors
 
@@ -339,6 +340,36 @@ For example, if the range of your data is **not** evenly distributed on either s
 
 <!-- TODO: Show correct diverging ramp with values (good) -->
 
+#### Diverging Opinion
+
+Another use for a diverging color scale is for visualising opinion.
+
+Likert scale survey questions divide opinion into Agree - Neutral - Disagree, or Negative - Neutral - Positive. This is ideal to data to visualise with a diverging color scale.
+
+<ColorStackedBarLikert />
+
+Once again datawrapper have written [a useful blog post about diverging bars](https://blog.datawrapper.de/divergingbars/), and how to position/scale your segments for clarity & comparison.
+
+#### Interpolation
+
+Interpolation is how the values in your data get mapped to the colors in your scale.
+
+The simplest (and most instinctive) type of interpolation is “linear” interpolation. This is simply mapping the lowest value to the first color, the highest value to the last color, and interpolating linearly between both.
+
+<!-- **TODO**: Show simple linear scale 0 - 100 -->
+
+However, it’s not always the best interpolation to use, particularly if you have extreme outliers and uneven distribution of values in your data.
+
+Editorial judgement is needed here in the choice of your interpolation… what aspect of the data are you trying to show? What insight are your readers trying to glean from the map or chart?
+
+Your mapping or visualisation tool of choice will usually allow you to choose a different interpolation to apply to your color scale. Most readers will assume a simple linear interpolation, so your choice may distort their interpretation. For that reason, it’s important your choice is clearly communicated to the user.
+
+Lisa Charlotte Muth from Datawrapper has written another [brilliant article exploring different interpolations](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/). This quote from that article is a perfect summing up of the issue.
+
+> All maps are wrong, but some are useful
+
+<cite>Lisa Charlotte Muth (after George Box)</cite>
+
 #### Perceptually Even
 
 It’s important that color scales are perceptually even. This means that a reader can infer the correct value from the color without being misled by particularly bright or dark patches.
@@ -364,3 +395,18 @@ If you do need multi-hued color scales, it’s best practice to [use well establ
 </div>
 
 **Note**: If you have more complex ramp generation needs, see the 'further reading' section (below) for tools like chroma.js.
+
+---
+
+## Further reading
+
+- [https://wcag.com/resource/ui-quick-tips-for-designers/](https://wcag.com/resource/ui-quick-tips-for-designers/)
+- [Viz Palette - Categorical Color Tool](https://projects.susielu.com/viz-palette)
+- [https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/](https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/)
+- [https://blog.datawrapper.de/divergingbars/](https://blog.datawrapper.de/divergingbars/)
+- [https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/)
+- [https://www.vis4.net/blog/mastering-multi-hued-color-scales/](https://www.vis4.net/blog/mastering-multi-hued-color-scales/)
+- [https://gka.github.io/palettes/](https://gka.github.io/palettes/)
+- [https://gka.github.io/chroma.js/#chroma-scale](https://gka.github.io/chroma.js/#chroma-scale)
+- [Introduction to the viridis color maps](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+- [https://bjoernkw.github.io/hexrgb/](https://bjoernkw.github.io/hexrgb/)

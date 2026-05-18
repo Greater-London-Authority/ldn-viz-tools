@@ -15,7 +15,7 @@ However, we believe:
 
 - **Provide equity of insight** - A well designed chart should provide an insight into a dataset. Make the chart as visually accessible as possible, but communicate the insight with well written text.
 
-## In Practice
+## Practice
 
 ### Colour choices
 
@@ -73,7 +73,7 @@ Where possible also link to the underlying data for the chart, allowing users to
 
 ---
 
-## Further reading:
+## Further reading
 
 - [https://www.w3.org/WAI/tutorials/images/complex/](https://www.w3.org/WAI/tutorials/images/complex/)
 - [https://nightingaledvs.com/visual-accessibility-barriers-change/](https://nightingaledvs.com/visual-accessibility-barriers-change/)
