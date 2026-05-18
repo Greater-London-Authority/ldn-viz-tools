@@ -1,5 +1,13 @@
 # @ldn-viz/tables
 
+## 6.0.0-ds3.6
+
+### Patch Changes
+
+- Updated dependencies [d73427a]
+  - @ldn-viz/ui@22.0.0-ds3.3
+  - @ldn-viz/charts@8.0.0-ds3.6
+
 ## 6.0.0-ds3.5
 
 ### Patch Changes
