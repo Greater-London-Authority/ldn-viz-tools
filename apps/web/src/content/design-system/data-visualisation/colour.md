@@ -163,66 +163,41 @@ navLabel: Colour
     let ldnBlue5Scale = scaleSequential([0, 100], interpolateLDNBlue5);
 
 
-    // let rampToolHex = $derived(getColorRamp({ colors: [
-    //     theme.tokenNameToValue('palette.'+rampToolColorSelected+'.'+rampToolPaletteStepStartSelected), 
-    //     theme.tokenNameToValue('palette.'+rampToolColorSelected+'.'+rampToolPaletteStepMid),
-    //     theme.tokenNameToValue('palette.'+rampToolColorSelected+'.'+rampToolPaletteStepEndSelected)
-    //     ],count:rampToolBreaksSelected, even:true}))
-    
-    // const rampToolInterpolator = ((t) => {
-    //     return ramp(rampToolHex)(t);
-    // })
-
-    // let rampToolScale = scaleSequential([0, 100], rampToolInterpolator);
-
-    // const rampToolBreaksOptions = [2,3,4,5,6,7,8,9,10 ];
-    // let rampToolBreaksSelected = $state(5);
-
-    // const rampToolColorOptions = ["blue","red","green","darkpink"];
-    // let rampToolColorSelected = $state("blue");
-
-    // const rampToolPaletteStepOptions = [100,200,300,400,500,600,700,800,900,1000,1100];
-    // let rampToolPaletteStepStartSelected = $state(200);
-    // let rampToolPaletteStepEndSelected = $state(900);
-    // let rampToolPaletteStepMid = $derived(rampToolPaletteStepStartSelected + (Math.round(((rampToolPaletteStepEndSelected - rampToolPaletteStepStartSelected)/2)/100))*100);
-    
-
-
 </script>
 
 ## Principles
 
 Balancing the requirements of accessibility, personal perception, system preferences, cultural association and branding is difficult to get right.
 
-### Keep in mind these principles when using color
+### Keep in mind these principles when using colour
 
-- Colors should be easily differentiated by as many people, in as many environments as possible.
+- Colours should be easily differentiated by as many people, in as many environments as possible.
 
-- Colors should have appropriate levels of contrast with the background. The smaller the element, the higher the contrast required.
+- Colours should have appropriate levels of contrast with the background. The smaller the element, the higher the contrast required.
 
-- Use a single color that highlights your key data, and grey for secondary contextual data.
+- Use a single colour that highlights your key data, and grey for secondary contextual data.
 
-- Only use a second or third categorical color if direct comparison of data is required.
+- Only use a second or third categorical colour if direct comparison of data is required.
 
-- Don’t use more than 2 or 3 categorical colors. Consider labelling, line styling or small multiples instead.
+- Don’t use more than 2 or 3 categorical colours. Consider labelling, line styling or small multiples instead.
 
-- Keep color meaning consistent across all charts that are likely to be read in the same context.
+- Keep colour meaning consistent across all charts that are likely to be read in the same context.
 
-- Use color to connect information across different charts and editorial.
+- Use colour to connect information across different charts and editorial.
 
-- Some colors have overriding cultural, political or contextual meaning. Try and reserve those if you’ll need them later in your presentation. E.g. Red = Bad, Failing or Hot, Green = Good, improving or Environment, Blue = cold, etc...
+- Some colours have overriding cultural, political or contextual meaning. Try and reserve those if you’ll need them later in your presentation. E.g. Red = Bad, Failing or Hot, Green = Good, improving or Environment, Blue = cold, etc...
 
 ## Practice
 
-### Categorical Colors
+### Categorical colours
 
-Categorical (or qualitative) colors are used to identify and differentiate data that has no particular order or value. For example, a set of London boroughs, industry types or groups of people.
+Categorical (or qualitative) colours are used to identify and differentiate data that has no particular order or value. For example, a set of London boroughs, industry types or groups of people.
 
-Categorical colors should be as visually differentiable as possible, and maintain a high level of contrast with their background.
+Categorical colours should be as visually differentiable as possible, and maintain a high level of contrast with their background.
 
-#### Our Categorical Colors
+#### Our categorical colours
 
-We developed our categorical color palettes by carefully balancing the requirements of GLA brand recognition, color differentiation and contrast.
+We developed our categorical colour palettes by carefully balancing the requirements of GLA brand recognition, colour differentiation and contrast.
 
 Switching between our light and dark categorical palettes is easy, because they have a consistent colour naming scheme (`categorical-blue, red, green, etc`).
 
@@ -230,15 +205,15 @@ Switching between our light and dark categorical palettes is easy, because they 
 <SwatchGrid tokenData={dataTokens.categorical} title="Categorical Palette"/>
 </div>
 
-These categorical colors pass differentiation tests for all but small lines, but don't use them all in a single chart.
+These categorical colours pass differentiation tests for all but small lines, but don't use them all in a single chart.
 
-#### Considering contrast ratios in your color choices
+#### Considering contrast ratios in your colour choices
 
-When selecting colors directly from the categorical palette, choose as few as possible, and prioritise colors with higher contrast ratios (4.5:1+).
+When selecting colours directly from the categorical palette, choose as few as possible, and prioritise colours with higher contrast ratios (4.5:1+).
 
-Color differentiation is harder when elements are smaller, as there is physically less color to see.
+Colour differentiation is harder when elements are smaller, as there is physically less colour to see.
 
-Using high contrast and easily differentiable colors are particularly important when producing line charts. For bar charts and other larger graphical elements, you can lower your contrast a bit.
+Using high contrast and easily differentiable colours are particularly important when producing line charts. For bar charts and other larger graphical elements, you can lower your contrast a bit.
 
 > As with large text, for graphical objects such as charts and graphs a contrast ratio of 3:1 should be sufficient
 
@@ -248,7 +223,7 @@ Using high contrast and easily differentiable colors are particularly important 
 
 <ColorStackedBar />
 
-### Semantic Data Colours
+### Semantic data colours
 
 We've created semantic tokens to simplify and standardise the use of our colours.
 
@@ -272,7 +247,7 @@ For charts where you want to show "other" or "context" data, use `color-data-pri
 
 When representing sex in your demography data, use `color-data-male` and `color-data-female`. The Purple and Green is a tribute to the Suffragette flag (and a great idea we borrowed from the Telegraph style guide).
 
-#### Diverging Opinion
+#### Opinion
 
 If you are visualising diverging data (like opinion research) or want to explicitly show if something is good or bad, then use `color-data-good`, and `color-data-bad`.
 
@@ -280,11 +255,11 @@ We've chosen blue and red to represent good and bad, to avoid the common red/gre
 
 It's also useful to have a couple of neutral grey's for "neither" and "don't know". Here you can use `color-data-neutral-0` and `color-data-neutral-1`.
 
-#### Missing Data
+#### Missing data
 
 Sometimes you need to show missing (or filtered out) data. Here you can use `color-data-empty`.
 
-### Chart Colours
+### Chart styling
 
 To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's `background, axis, grids and labels`.
 
@@ -292,11 +267,11 @@ To ensure consistency and correct contrast across all charts, use the following 
 <SwatchGrid tokenData={chartColors} title="Chart Colour Tokens"/>
 </div>
 
-### Quantitative Color Scales
+### Quantitative colour scales
 
-A quantitative color scale is a continuous (smooth or stepped) gradient of color that is mapped to a sequential set of values. These color scales can be single-hued (e.g. light to dark blue), or multi-hued (e.g. red, to yellow, to blue).
+A quantitative colour scale is a continuous (smooth or stepped) gradient of colour that is mapped to a sequential set of values. These colour scales can be single-hued (e.g. light to dark blue), or multi-hued (e.g. red, to yellow, to blue).
 
-These quantitative color scales are commonly used to encode data on a (choropleth) map, or the value of points on a scatterplot.
+These quantitative colour scales are commonly used to encode data on a (choropleth) map, or the value of points on a scatterplot.
 
 <div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
     <ColorBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
@@ -304,7 +279,7 @@ These quantitative color scales are commonly used to encode data on a (choroplet
 
 #### Sequential
 
-A sequential color scale is a gradient of color (continuous or stepped) that runs in one direction. For example, on a light background, a gradient from light to dark blue, might be mapped to values that run from 1 to 100.
+A sequential colour scale is a gradient of colour (continuous or stepped) that runs in one direction. For example, on a light background, a gradient from light to dark blue, might be mapped to values that run from 1 to 100.
 
 <div bind:clientWidth={contentWidth} >
 {#if mounted}
@@ -318,9 +293,9 @@ Typically, the higher the contrast with the background, the higher the value is 
 
 #### Diverging
 
-A diverging color scale works in the same way as the single “direction” sequential scale above, but it "diverges" in two directions, typically negative and positive.
+A diverging colour scale works in the same way as the single “direction” sequential scale above, but it "diverges" in two directions, typically negative and positive.
 
-Typically we use 2 diverging, single hue, stepped gradients, but a diverging color scale can also be a continuous gradient of color.
+Typically we use 2 diverging, single hue, stepped gradients, but a diverging colour scale can also be a continuous gradient of colour.
 
 <div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
     <ColorDivergingBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
@@ -332,7 +307,7 @@ Our default diverging scale, is red (negative) to blue (positive). This is to av
 
 With diverging scales, you may want to add a central neutral grey step between the positive/negative steps to indicate values that are truly zero. Zero values could get binned into the lowest positive step of a scale giving a false impression of that bin.
 
-**Note:** You should avoid mapping uneven ranges of values to apparently even ranges of color contrast.
+**Note:** You should avoid mapping uneven ranges of values to apparently even ranges of colour contrast.
 
 For example, if the range of your data is **not** evenly distributed on either side of zero (e.g. -50 to +100), then that should be reflected in the scale and the legend.
 
@@ -340,11 +315,11 @@ For example, if the range of your data is **not** evenly distributed on either s
 
 <!-- TODO: Show correct diverging ramp with values (good) -->
 
-#### Diverging Opinion
+#### Diverging opinion
 
-Another use for a diverging color scale is for visualising opinion.
+Another use for a diverging colour scale is for visualising opinion.
 
-Likert scale survey questions divide opinion into Agree - Neutral - Disagree, or Negative - Neutral - Positive. This is ideal to data to visualise with a diverging color scale.
+Likert scale survey questions divide opinion into Agree - Neutral - Disagree, or Negative - Neutral - Positive. This is ideal to data to visualise with a diverging colour scale.
 
 <ColorStackedBarLikert />
 
@@ -352,9 +327,9 @@ Once again datawrapper have written [a useful blog post about diverging bars](ht
 
 #### Interpolation
 
-Interpolation is how the values in your data get mapped to the colors in your scale.
+Interpolation is how the values in your data get mapped to the colours in your scale.
 
-The simplest (and most instinctive) type of interpolation is “linear” interpolation. This is simply mapping the lowest value to the first color, the highest value to the last color, and interpolating linearly between both.
+The simplest (and most instinctive) type of interpolation is “linear” interpolation. This is simply mapping the lowest value to the first colour, the highest value to the last colour, and interpolating linearly between both.
 
 <!-- **TODO**: Show simple linear scale 0 - 100 -->
 
@@ -362,7 +337,7 @@ However, it’s not always the best interpolation to use, particularly if you ha
 
 Editorial judgement is needed here in the choice of your interpolation… what aspect of the data are you trying to show? What insight are your readers trying to glean from the map or chart?
 
-Your mapping or visualisation tool of choice will usually allow you to choose a different interpolation to apply to your color scale. Most readers will assume a simple linear interpolation, so your choice may distort their interpretation. For that reason, it’s important your choice is clearly communicated to the user.
+Your mapping or visualisation tool of choice will usually allow you to choose a different interpolation to apply to your colour scale. Most readers will assume a simple linear interpolation, so your choice may distort their interpretation. For that reason, it’s important your choice is clearly communicated to the user.
 
 Lisa Charlotte Muth from Datawrapper has written another [brilliant article exploring different interpolations](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/). This quote from that article is a perfect summing up of the issue.
 
@@ -370,11 +345,11 @@ Lisa Charlotte Muth from Datawrapper has written another [brilliant article expl
 
 <cite>Lisa Charlotte Muth (after George Box)</cite>
 
-#### Perceptually Even
+#### Perceptually even
 
-It’s important that color scales are perceptually even. This means that a reader can infer the correct value from the color without being misled by particularly bright or dark patches.
+It’s important that colour scales are perceptually even. This means that a reader can infer the correct value from the colour without being misled by particularly bright or dark patches.
 
-While multi-hued scales can help users differentiate between steps on a scale, perceptual unevenness can be an issue. This is because a scale may pass through hues that could be perceived as brighter (like yellow), and depending on your color space, can create odd color artefacts.
+While multi-hued scales can help users differentiate between steps on a scale, perceptual unevenness can be an issue. This is because a scale may pass through hues that could be perceived as brighter (like yellow), and depending on your colour space, can create odd colour artefacts.
 
 **Don't use this**
 
@@ -384,7 +359,7 @@ While multi-hued scales can help users differentiate between steps on a scale, p
 {/if}
 </div>
 
-If you do need multi-hued color scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis).
+If you do need multi-hued colour scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis).
 
 **Use this**
 
