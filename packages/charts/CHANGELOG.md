@@ -1,5 +1,16 @@
 # ldn-viz-tools-charts
 
+## 8.0.0-ds3.9
+
+### Minor Changes
+
+- 40eab2f: FIXED: when an ObservablePlot image is donnloaded as an SVG, the size of the SVG is now set correctly
+
+### Patch Changes
+
+- Updated dependencies [40eab2f]
+  - @ldn-viz/ui@22.0.0-ds3.6
+
 ## 8.0.0-ds3.8
 
 ### Minor Changes
