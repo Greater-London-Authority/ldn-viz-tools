@@ -121,7 +121,7 @@ export function toSVG(origChart) {
 	}
 
 	return serializeAll(nodes).then((blob) => {
-		origChart.parentElement.removeElement(chart);
+		origChart.parentElement.removeChild(chart);
 		return blob.text();
 	});
 }
