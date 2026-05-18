@@ -1,8 +1,8 @@
 ---
-title: Colour
+title: Colour foundations
 description: Carefully considered colours for data visualisation
 section: Data visualisation
-navLabel: Colour
+navLabel: Colour foundations
 ---
 
 <script>
@@ -112,7 +112,17 @@ navLabel: Colour
 
     let themeColors = $derived(getTokenByConcept('data').filter(token => themeColorsOrdered.includes(token.name)).sort((a, b) => themeColorsOrdered.indexOf(a.name) - themeColorsOrdered.indexOf(b.name)));
     
-    let chartColors = $derived(getTokenByConcept('chart'));
+
+    let chartColorsOrdered = [
+            'color-chart-background', 
+            'color-chart-axis', 
+            'color-chart-grid', 
+            'color-chart-label', 
+            'color-chart-label-muted' 
+        ]
+
+    let chartColors = $derived(getTokenByConcept('chart').filter(token => chartColorsOrdered.includes(token.name)).sort((a, b) => chartColorsOrdered.indexOf(a.name) - chartColorsOrdered.indexOf(b.name)));
+    
     
     // blue 5 ramp definition
     let ldnBlue5Ramp = $derived(ramp(getColorRamp({ colors: [
@@ -169,7 +179,7 @@ navLabel: Colour
 
 Balancing the requirements of accessibility, personal perception, system preferences, cultural association and branding is difficult to get right.
 
-### Keep in mind these principles when using colour
+### Follow these principles
 
 - Colours should be easily differentiated by as many people, in as many environments as possible.
 
@@ -202,7 +212,7 @@ We developed our categorical colour palettes by carefully balancing the requirem
 Switching between our light and dark categorical palettes is easy, because they have a consistent colour naming scheme (`categorical-blue, red, green, etc`).
 
 <div class="not-prose">
-<SwatchGrid tokenData={dataTokens.categorical} title="Categorical Palette"/>
+<SwatchGrid tokenData={dataTokens.categorical} title="Categorical palette"/>
 </div>
 
 These categorical colours pass differentiation tests for all but small lines, but don't use them all in a single chart.
@@ -228,7 +238,7 @@ Using high contrast and easily differentiable colours are particularly important
 We've created semantic tokens to simplify and standardise the use of our colours.
 
 <div class="not-prose">
-<SwatchGrid tokenData={themeColors} title="Semantic Colour Tokens"/>
+<SwatchGrid tokenData={themeColors} title="Semantic colour tokens"/>
 </div>
 
 #### Prioritisation
@@ -264,112 +274,8 @@ Sometimes you need to show missing (or filtered out) data. Here you can use `col
 To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's `background, axis, grids and labels`.
 
 <div class="not-prose">
-<SwatchGrid tokenData={chartColors} title="Chart Colour Tokens"/>
+<SwatchGrid tokenData={chartColors} title="Chart colour tokens"/>
 </div>
-
-### Quantitative colour scales
-
-A quantitative colour scale is a continuous (smooth or stepped) gradient of colour that is mapped to a sequential set of values. These colour scales can be single-hued (e.g. light to dark blue), or multi-hued (e.g. red, to yellow, to blue).
-
-These quantitative colour scales are commonly used to encode data on a (choropleth) map, or the value of points on a scatterplot.
-
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ColorBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
-</div>
-
-#### Sequential
-
-A sequential colour scale is a gradient of colour (continuous or stepped) that runs in one direction. For example, on a light background, a gradient from light to dark blue, might be mapped to values that run from 1 to 100.
-
-<div bind:clientWidth={contentWidth} >
-{#if mounted}
-    <ColorLegend color={ldnBlueScale} ticks=5 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
-{/if}
-</div>
-
-Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader. On a light background, a domain of 1 to 100 would be mapped from light to dark blue. The darker blue having the higher contrast and so the higher value. The opposite is true in dark mode.
-
-<ColorRampGenerator title='Interactive Example' colorRight='blue' type='Sequential' breaks={5} />
-
-#### Diverging
-
-A diverging colour scale works in the same way as the single “direction” sequential scale above, but it "diverges" in two directions, typically negative and positive.
-
-Typically we use 2 diverging, single hue, stepped gradients, but a diverging colour scale can also be a continuous gradient of colour.
-
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ColorDivergingBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
-</div>
-
-Our default diverging scale, is red (negative) to blue (positive). This is to avoid any red/green perception issues, and is a simple augmentation of our default (positive) blue ramp.
-
-<ColorRampGenerator title='Interactive Example' colorLeft='red' colorRight='blue' type='Diverging' paletteStart={300} paletteEnd={800} includeGrey={true} breaks={5} />
-
-With diverging scales, you may want to add a central neutral grey step between the positive/negative steps to indicate values that are truly zero. Zero values could get binned into the lowest positive step of a scale giving a false impression of that bin.
-
-**Note:** You should avoid mapping uneven ranges of values to apparently even ranges of colour contrast.
-
-For example, if the range of your data is **not** evenly distributed on either side of zero (e.g. -50 to +100), then that should be reflected in the scale and the legend.
-
-<!-- TODO: Show misleading diverging ramp with values (bad) -->
-
-<!-- TODO: Show correct diverging ramp with values (good) -->
-
-#### Diverging opinion
-
-Another use for a diverging colour scale is for visualising opinion.
-
-Likert scale survey questions divide opinion into Agree - Neutral - Disagree, or Negative - Neutral - Positive. This is ideal to data to visualise with a diverging colour scale.
-
-<ColorStackedBarLikert />
-
-Once again datawrapper have written [a useful blog post about diverging bars](https://blog.datawrapper.de/divergingbars/), and how to position/scale your segments for clarity & comparison.
-
-#### Interpolation
-
-Interpolation is how the values in your data get mapped to the colours in your scale.
-
-The simplest (and most instinctive) type of interpolation is “linear” interpolation. This is simply mapping the lowest value to the first colour, the highest value to the last colour, and interpolating linearly between both.
-
-<!-- **TODO**: Show simple linear scale 0 - 100 -->
-
-However, it’s not always the best interpolation to use, particularly if you have extreme outliers and uneven distribution of values in your data.
-
-Editorial judgement is needed here in the choice of your interpolation… what aspect of the data are you trying to show? What insight are your readers trying to glean from the map or chart?
-
-Your mapping or visualisation tool of choice will usually allow you to choose a different interpolation to apply to your colour scale. Most readers will assume a simple linear interpolation, so your choice may distort their interpretation. For that reason, it’s important your choice is clearly communicated to the user.
-
-Lisa Charlotte Muth from Datawrapper has written another [brilliant article exploring different interpolations](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/). This quote from that article is a perfect summing up of the issue.
-
-> All maps are wrong, but some are useful
-
-<cite>Lisa Charlotte Muth (after George Box)</cite>
-
-#### Perceptually even
-
-It’s important that colour scales are perceptually even. This means that a reader can infer the correct value from the colour without being misled by particularly bright or dark patches.
-
-While multi-hued scales can help users differentiate between steps on a scale, perceptual unevenness can be an issue. This is because a scale may pass through hues that could be perceived as brighter (like yellow), and depending on your colour space, can create odd colour artefacts.
-
-**Don't use this**
-
-<div bind:clientWidth={contentWidth} >
-{#if mounted}
-    <ColorLegend color={angryRainbowScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidth}/>
-{/if}
-</div>
-
-If you do need multi-hued colour scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis).
-
-**Use this**
-
-<div bind:clientWidth={contentWidth} >
-{#if mounted}
-    <ColorLegend color={viridisScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidth}/>
-{/if}
-</div>
-
-**Note**: If you have more complex ramp generation needs, see the 'further reading' section (below) for tools like chroma.js.
 
 ---
 
@@ -378,10 +284,4 @@ If you do need multi-hued colour scales, it’s best practice to [use well estab
 - [https://wcag.com/resource/ui-quick-tips-for-designers/](https://wcag.com/resource/ui-quick-tips-for-designers/)
 - [Viz Palette - Categorical Color Tool](https://projects.susielu.com/viz-palette)
 - [https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/](https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/)
-- [https://blog.datawrapper.de/divergingbars/](https://blog.datawrapper.de/divergingbars/)
-- [https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/)
-- [https://www.vis4.net/blog/mastering-multi-hued-color-scales/](https://www.vis4.net/blog/mastering-multi-hued-color-scales/)
-- [https://gka.github.io/palettes/](https://gka.github.io/palettes/)
-- [https://gka.github.io/chroma.js/#chroma-scale](https://gka.github.io/chroma.js/#chroma-scale)
-- [Introduction to the viridis color maps](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
 - [https://bjoernkw.github.io/hexrgb/](https://bjoernkw.github.io/hexrgb/)
