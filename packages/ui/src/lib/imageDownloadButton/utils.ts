@@ -118,7 +118,7 @@ export function toSVG(chart) {
 	}
 
 	return serializeAll(nodes).then((blob) => {
-		document.body.removeChild(chart);
+		// document.body.removeChild(chart);
 		return blob.text();
 	});
 }
