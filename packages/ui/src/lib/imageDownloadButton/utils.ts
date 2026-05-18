@@ -3,7 +3,10 @@
 
 import { sum } from 'd3-array';
 
-export function toSVG(chart) {
+export function toSVG(origChart) {
+	const chart = origChart.cloneNode(true);
+	origChart.parentElement.appendChild(chart);
+
 	if (chart.nodeName !== 'FIGURE') {
 		return chart;
 	}
@@ -118,7 +121,7 @@ export function toSVG(chart) {
 	}
 
 	return serializeAll(nodes).then((blob) => {
-		// document.body.removeChild(chart);
+		origChart.parentElement.removeElement(chart);
 		return blob.text();
 	});
 }
