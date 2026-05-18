@@ -3,10 +3,7 @@
 
 import { sum } from 'd3-array';
 
-export function toSVG(origChart) {
-	const chart = origChart.cloneNode(true);
-	document.body.appendChild(chart);
-
+export function toSVG(chart) {
 	if (chart.nodeName !== 'FIGURE') {
 		return chart;
 	}
