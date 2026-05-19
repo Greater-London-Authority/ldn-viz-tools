@@ -227,7 +227,7 @@ Typically we use 2 diverging, single hue, stepped gradients, but a diverging col
 
 Our default diverging scale, is red (negative) to blue (positive). This is to avoid any red/green perception issues, and is a simple augmentation of our default (positive) blue ramp.
 
-<ColorRampGenerator title='Generate a colour ramp' colorLeft='red' colorRight='blue' type='Diverging' paletteStart={300} paletteEnd={800} includeGrey={true} breaks={5} />
+<!-- <ColorRampGenerator title='Generate a colour ramp' colorLeft='red' colorRight='blue' type='Diverging' paletteStart={300} paletteEnd={800} includeGrey={true} breaks={5} /> -->
 
 With diverging scales, you may want to add a central neutral grey step between the positive/negative steps to indicate values that are truly zero. Zero values could get binned into the lowest positive step of a scale giving a false impression of that bin.
 
@@ -293,15 +293,18 @@ If you do need multi-hued colour scales, it’s best practice to [use well estab
 {/if}
 </div>
 
-**Note**: If you have more complex ramp generation needs, see the 'further reading' section (below) for tools like chroma.js.
+**Note**: If you have more complex ramp generation needs, see the 'further reading' section (below) and use tools like [gka.github.io/palettes](https://gka.github.io/palettes/) and the [obumbratta.com/colour](https://obumbratta.com/colour).
+
+When using the [Obumbratta.com Colour Ramp Tool](https://obumbratta.com/colour), you can match our internal ramp methodology with these settings: _Correct Lightness: **On**, Intelligent Interpolation: **Off**, Maintain Input Colours: **Off**, Colour Space: **BEZ LAB**_.
 
 ---
 
 ## Further reading
 
+- [https://obumbratta.com/colour](https://obumbratta.com/colour)
+- [https://gka.github.io/palettes/](https://gka.github.io/palettes/)
+- [https://gka.github.io/chroma.js/#chroma-scale](https://gka.github.io/chroma.js/#chroma-scale)
 - [https://blog.datawrapper.de/divergingbars/](https://blog.datawrapper.de/divergingbars/)
 - [https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/)
 - [https://www.vis4.net/blog/mastering-multi-hued-color-scales/](https://www.vis4.net/blog/mastering-multi-hued-color-scales/)
-- [https://gka.github.io/palettes/](https://gka.github.io/palettes/)
-- [https://gka.github.io/chroma.js/#chroma-scale](https://gka.github.io/chroma.js/#chroma-scale)
 - [Introduction to the viridis color maps](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)

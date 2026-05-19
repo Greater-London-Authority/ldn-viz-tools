@@ -124,6 +124,9 @@
 
 	let hex = $derived(type == 'Diverging' ? hexLeft.concat(hexRightWithGrey) : hexRightWithGrey);
 
+	// $inspect(paletteStart, paletteMid, paletteEnd);
+	// $inspect(hex);
+
 	const interpolator = (t) => {
 		return ramp(hex)(t);
 	};
