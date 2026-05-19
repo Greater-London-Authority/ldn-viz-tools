@@ -112,10 +112,10 @@
 
 <ObservablePlot
 	spec={mapSpec}
-	data={mapData}
+	data={demoBoroughCount}
 	title="Example"
 	imageDownloadButton={false}
 	dataDownloadButton={false}
 	alt="Choropleth map of London boroughs and their variable values"
-	chartDescription="The choropleth map of London shows the rate of something at a borough level. The lowest value is 9% in Merton. The highest value is 97% in Hounslow. The mean value is 50%."
+	chartDescription="The diverging choropleth map of London shows the change in count of something at a borough level. The lowest value is -96 in Tower Hamlets. The highest value is 97 in Hounslow. The mean value is 20. Three Boroughs have values of 0. Haringey, Waltham Forest, and Bexley."
 />

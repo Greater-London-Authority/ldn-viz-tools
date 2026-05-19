@@ -97,7 +97,7 @@
 
 <ObservablePlot
 	spec={mapSpec}
-	data={mapData}
+	data={demoBoroughPercent}
 	title="Example"
 	imageDownloadButton={false}
 	dataDownloadButton={false}

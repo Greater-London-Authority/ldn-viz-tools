@@ -33,6 +33,7 @@ const applicationDesign = allDocs
 const dvPageOrder = [
 	'Chart examples',
 	'Charts',
+	'Maps',
 	'Quantitative colour',
 	'Colour foundations',
 	'Accessibility',
