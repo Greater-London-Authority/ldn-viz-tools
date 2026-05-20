@@ -15,9 +15,5 @@
 	"svelte.plugin.svelte.compilerWarnings": {
 		"css_unused_selector": "ignore"
 	},
-	"cSpell.words": [
-		"colour",
-		"visualisation",
-		"visualisations"
-	]
+	"cSpell.words": ["colour", "visualisation", "visualisations", "WCAG"]
 }
