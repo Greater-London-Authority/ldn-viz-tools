@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classNames, CopyButton, ThemeSwitcher } from '@ldn-viz/ui';
+	import { classNames } from '@ldn-viz/ui';
 	import Swatch from './Swatch.svelte';
 
 	interface SwatchGridProps {
@@ -20,14 +20,6 @@
 	};
 
 	const gridClass = $derived(classNames(sizeClasses[size as keyof typeof sizeClasses]));
-
-	const tokensToHex = (tokensObj = []) => {
-		return tokensObj.map((token) => token['value']);
-	};
-
-	let hex = $derived(tokenData.length ? tokensToHex(tokenData) : []);
-
-	$inspect(hex);
 </script>
 
 {#if title}
@@ -38,16 +30,4 @@
 	{#each Object.values(tokenData) as token}
 		<Swatch {...token} {size} content={token.value} />
 	{/each}
-</div>
-
-<!-- TODO: Code Review. Use code that isn't from 2006 ;)  -->
-<div class="pb-16">
-	<div class="float-left pr-4 pt-4">
-		<CopyButton content={hex} label="Copy Hex Values" />
-	</div>
-
-	<div class="right-0 float-right flex items-center pt-4">
-		<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
-		<ThemeSwitcher size="xs" />
-	</div>
 </div>

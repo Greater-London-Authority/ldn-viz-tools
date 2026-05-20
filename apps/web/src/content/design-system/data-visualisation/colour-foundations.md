@@ -212,7 +212,7 @@ We developed our categorical colour palettes by carefully balancing the requirem
 Switching between our light and dark categorical palettes is easy, because they have a consistent colour naming scheme (`categorical-blue, red, green, etc`).
 
 <div class="not-prose">
-<SwatchGrid tokenData={dataTokens.categorical} title="Categorical palette"/>
+<SwatchGrid tokenData={dataTokens.categorical} size="xs" title="Categorical palette"/>
 </div>
 
 These categorical colours pass differentiation tests for all but small lines, but don't use them all in a single chart.
