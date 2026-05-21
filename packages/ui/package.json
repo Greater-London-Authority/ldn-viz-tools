@@ -43,6 +43,7 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
+		"@observablehq/plot": "^0.6.17",
 		"@steeze-ui/heroicons": "^2.4.2",
 		"@steeze-ui/phosphor-icons": "^2.1.1",
 		"@steeze-ui/svelte-icon": "^1.6.2",

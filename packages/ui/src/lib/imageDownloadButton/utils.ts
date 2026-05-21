@@ -1,18 +1,40 @@
 // this is based on https://observablehq.com/@fil/plot-figure-to-svg
 // modified to not use d3 for DOM manipulation
+// it is also modified to:
+// - not create a copy of the chart and attach it to the DOM: if remove from it's parent container, its width will be too large, and the exported SVG will have lots of empty space to the right
+// - combine multiple Observable Plots into one SVG
 
+import * as Plot from '@observablehq/plot';
 import { sum } from 'd3-array';
 
 export function toSVG(origChart) {
 	const chart = origChart.cloneNode(true);
 	origChart.parentElement.appendChild(chart);
+	const removeClone = () => {
+		if (chart.parentElement) {
+			chart.parentElement.removeChild(chart);
+		}
+	};
 
-	if (chart.nodeName !== 'FIGURE') {
-		return chart;
+	const figs = origChart.querySelectorAll('figure');
+
+	if (figs.length === 1) {
+		const nodes = extractFigureNodes(figs[0]);
+		return serializeAll(nodes)
+			.then((blob) => blob.text())
+			.finally(removeClone);
+	} else if (figs.length > 1) {
+		const nodes = Array.from(figs).flatMap((figure) => extractFigureNodes(figure));
+		return serializeAll(nodes)
+			.then((blob) => blob.text())
+			.finally(removeClone);
 	}
 
-	const [x0, y0, width, height] = getBounds([chart]);
+	return chart;
+}
 
+function extractFigureNodes(chart) {
+	const [x0, y0, width] = getBounds([chart]);
 	const nodes = [];
 
 	const selectedChildren = selectChildren(chart, 'h1,h2,h3,div,figcaption,svg');
@@ -120,10 +142,7 @@ export function toSVG(origChart) {
 		}
 	}
 
-	return serializeAll(nodes).then((blob) => {
-		origChart.parentElement.removeChild(chart);
-		return blob.text();
-	});
+	return nodes;
 }
 
 // Helpers

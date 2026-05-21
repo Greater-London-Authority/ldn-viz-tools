@@ -39,9 +39,10 @@
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
 	import { monthlyData } from '../../data/demoData';
+	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import { Plot } from '../observablePlotFragments/plot';
 	import DemoTooltip from './DemoTooltip.svelte';
-	import {
+	import ObservablePlotInner, {
 		addEventHandler,
 		addMultipleEventHandlers,
 		registerTooltip
@@ -123,6 +124,39 @@
 	});
 
 	let width = $state('w-96');
+
+	// Spec and data for dual line example
+	let specDualLine = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		color: {
+			legend: true,
+			type: 'ordinal',
+			range: [theme.tokenNameToValue('data.primary'), theme.tokenNameToValue('data.context')]
+		},
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				z: 'Variable',
+				stroke: 'Variable',
+				reverse: true, // draw in reverse to get Var A on top
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			}),
+			Plot.ruleX([new Date('2016-01-01T00:00:01')]),
+
+			// baseline last
+			Plot.ruleY([0])
+		]
+	});
 </script>
 
 <Story name="Default">
@@ -350,5 +384,29 @@
 <Story name="With ariaHidden false">
 	{#snippet template(args)}
 		<ObservablePlot {...args} {spec} data={chartData} ariaHidden={false} />
+	{/snippet}
+</Story>
+
+<Story name="Combines multiple ObservablePlot images into single SVG">
+	{#snippet template(args)}
+		<div class=" w-full py-typography-spacing-3xl">
+			<ChartContainer
+				title="Two ObservablePlotInner plots in one ChartContainer..."
+				subTitle="...should be combined into one SVG"
+				source="The source of this chart data"
+				byline="A byline for the chart"
+				chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+				alt="Simple description of type of chart"
+				imageDownloadButton={['SVG']}
+				dataDownloadButton={true}
+				data={monthlyData}
+				chartHeight="h-fit"
+				id="multiple"
+			>
+				<ObservablePlotInner spec={specDualLine} data={monthlyData} id="multiple-1" />
+
+				<ObservablePlotInner spec={specDualLine} data={monthlyData} id="multiple-2" />
+			</ChartContainer>
+		</div>
 	{/snippet}
 </Story>

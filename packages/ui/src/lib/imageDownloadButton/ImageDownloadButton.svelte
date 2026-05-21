@@ -220,8 +220,7 @@
 		const serializeObservablePlot = (svgNode: SVGElement) => {
 			return new Promise<string>(async (resolve, reject) => {
 				try {
-					const fig = svgNode.querySelector('figure');
-					const svgString = await toSVG(fig);
+					const svgString = await toSVG(svgNode);
 					const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgString)}`;
 					resolve(dataUrl);
 				} catch (error) {
@@ -237,7 +236,11 @@
 			}
 
 			const fig = htmlNode.querySelector('figure');
-			if (fig) {
+			const isFigure = htmlNode.nodeName === 'FIGURE';
+			const childDivs = Array.from(htmlNode.querySelectorAll(':scope > div'));
+			const hasGrandchildFigures = childDivs.some((div) => div.querySelector('figure') !== null);
+
+			if (fig || isFigure || hasGrandchildFigures) {
 				serializeObservablePlot(htmlNode as SVGElement)
 					.then((dataUrl: string) => downloadFromURL(dataUrl))
 					.catch((error: any) => {
