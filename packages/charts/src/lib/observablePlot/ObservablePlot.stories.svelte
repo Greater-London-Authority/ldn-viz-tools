@@ -403,9 +403,17 @@
 				chartHeight="h-fit"
 				id="multiple"
 			>
-				<ObservablePlotInner spec={specDualLine} data={monthlyData} id="multiple-1" />
+				<ObservablePlotInner
+					spec={{ ...specDualLine, title: 'Plot 1' }}
+					data={monthlyData}
+					id="multiple-1"
+				/>
 
-				<ObservablePlotInner spec={specDualLine} data={monthlyData} id="multiple-2" />
+				<ObservablePlotInner
+					spec={{ ...specDualLine, title: 'Plot 2' }}
+					data={monthlyData}
+					id="multiple-2"
+				/>
 			</ChartContainer>
 		</div>
 	{/snippet}

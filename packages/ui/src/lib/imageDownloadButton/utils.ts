@@ -34,12 +34,13 @@ export function toSVG(origChart) {
 }
 
 function extractFigureNodes(chart) {
-	const [x0, y0, width] = getBounds([chart]);
 	const nodes = [];
 
 	const selectedChildren = selectChildren(chart, 'h1,h2,h3,div,figcaption,svg');
 
 	for (const node of selectedChildren) {
+		const [x0, y0, width] = getBounds([node]);
+
 		switch (node.nodeName.toLowerCase()) {
 			case 'div':
 				{
