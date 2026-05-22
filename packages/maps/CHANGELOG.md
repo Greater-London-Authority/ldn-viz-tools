@@ -1,5 +1,12 @@
 # ldn-viz-tools-maps
 
+## 12.0.0-ds3.8
+
+### Patch Changes
+
+- Updated dependencies [895049b]
+  - @ldn-viz/ui@22.0.0-ds3.8
+
 ## 12.0.0-ds3.7
 
 ### Patch Changes
