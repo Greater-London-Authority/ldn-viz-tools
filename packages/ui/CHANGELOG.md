@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 22.0.0-ds3.8
+
+### Minor Changes
+
+- 895049b: FIXED: when there is an Obervable Plot chart title above the legend on a plot, and it is converted to SVG don't offset the color legend by the height of the legend
+
 ## 22.0.0-ds3.7
 
 ### Minor Changes
