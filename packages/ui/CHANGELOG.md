@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 22.0.0-ds3.7
+
+### Minor Changes
+
+- c014185: FIXED: when a `ChartContainer` includes multiple `ObservablePlotInner`s, combine them into one SVG when image is downloaded
+
 ## 22.0.0-ds3.6
 
 ### Minor Changes
