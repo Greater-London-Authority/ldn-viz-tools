@@ -1,12 +1,13 @@
 <script lang="ts">
 	import {
-		Checkbox,
 		ColorLegend,
 		CopyButton,
-		Select,
-		ThemeSwitcher,
+		Input,
 		randomId,
-		theme
+		Select,
+		Switch,
+		theme,
+		ThemeSwitcher
 	} from '@ldn-viz/ui';
 	import { getColorRamp } from '@ldn-viz/utils';
 	import { scaleSequential } from 'd3-scale';
@@ -47,7 +48,7 @@
 
 	const typeOptions = ['Sequential', 'Diverging'];
 
-	const breaksOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+	// const breaksOptions = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 	// let breaks = $state(5);
 
 	const colorOptions = [
@@ -138,17 +139,17 @@
 	<h3 class="title-sm mb-typography-spacing-xs">{title}</h3>
 
 	<div>
-		<div class="float-left w-48 pb-4 pr-4">
+		<div class="float-left w-40 pb-4 pr-2">
 			<Select label="Type" options={typeOptions} name="Type" bind:value={type} />
 		</div>
 
 		{#if type == 'Diverging'}
-			<div class="not-prose float-left w-32 pb-4 pr-4">
+			<div class="not-prose float-left w-32 pb-4 pr-2">
 				<Select label="Palette Left" options={colorOptions} name="Color" bind:value={colorLeft} />
 			</div>
 		{/if}
 
-		<div class="float-left w-32 pb-4 pr-4">
+		<div class="w-30 float-left pb-4 pr-2">
 			<Select
 				label={type == 'Diverging' ? 'Palette Right' : 'Palette'}
 				options={colorOptions}
@@ -157,26 +158,27 @@
 			/>
 		</div>
 
-		<div class="float-left w-32 pb-4 pr-4">
+		<div class="w-30 float-left pb-4 pr-2">
 			<Select
-				label="Palette Start"
+				label="Start"
 				options={paletteStepOptions}
 				name="StartStep"
 				bind:value={paletteStart}
 			/>
 		</div>
 
-		<div class="float-left w-32 pb-4 pr-4">
-			<Select
-				label="Palette End"
-				options={paletteStepOptions}
-				name="EndStep"
-				bind:value={paletteEnd}
-			/>
+		<div class="w-30 float-left pb-4 pr-2">
+			<Select label="End" options={paletteStepOptions} name="EndStep" bind:value={paletteEnd} />
 		</div>
 
-		<div class="float-left w-32 pb-4 pr-4">
-			<Select label="Breaks" options={breaksOptions} name="Steps" bind:value={breaks} />
+		<div class="float-left w-16 pb-4 pr-4">
+			<!-- <Select label="Breaks" options={breaksOptions} name="Steps" bind:value={breaks} /> -->
+			<Input label="Breaks" name="Steps" type="number" bind:value={breaks} />
+		</div>
+
+		<div class="float-left pr-2 pt-10">
+			<!-- <Checkbox label="Grey at zero" bind:checked={includeGrey} /> -->
+			<Switch bind:checked={includeGrey} label="Grey zero" />
 		</div>
 	</div>
 
@@ -193,11 +195,7 @@
 		{/if}
 	</div>
 
-	<div>
-		<div class="float-left pr-4 pt-4">
-			<Checkbox label="Include grey at zero" bind:checked={includeGrey} />
-		</div>
-
+	<!-- <div>
 		<div class="right-0 float-right flex items-center pt-4">
 			<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
 			<ThemeSwitcher size="xs" />
@@ -205,6 +203,31 @@
 	</div>
 
 	<div class="clear-both pt-4">
-		<CopyButton content={hex} label="Copy Hex Values" />
+		<CopyButton
+			content={hex}
+			label="Copy Hex Values"
+			emphasis="secondary"
+			variant="outline"
+			size="sm"
+		/>
+	</div> -->
+
+	<div class="flex pb-2">
+		<div class="float-left flex-1 pr-4 pt-4">
+			<CopyButton
+				content={hex}
+				label="Copy Hex Values"
+				emphasis="secondary"
+				variant="outline"
+				size="sm"
+			/>
+		</div>
+
+		<div class="flex-1 pt-4 text-right">
+			<div class="float-right flex items-center pt-1">
+				<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
+				<ThemeSwitcher size="xs" />
+			</div>
+		</div>
 	</div>
 </div>

@@ -13,21 +13,19 @@
 	const sizeClasses = {
 		// xs: 'grid grid-cols-6 gap-1 pb-4 pt-2 md:grid-cols-9 xl:grid-cols-11',
 		xs: 'flex flex-wrap gap-1 pb-2',
-		sm: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4',
-		md: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4',
-		lg: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4',
-		xl: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4'
+		sm: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
+		md: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
+		lg: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
+		xl: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4'
 	};
 
 	const gridClass = $derived(classNames(sizeClasses[size as keyof typeof sizeClasses]));
 
 	const tokensToHex = (tokensObj = []) => {
-		return tokensObj.map((token) => token['value']);
+		return Object.values(tokensObj).map((token) => token['value']);
 	};
 
-	let hex = $derived(tokenData.length ? tokensToHex(tokenData) : []);
-
-	$inspect(hex);
+	let hex = $derived(tokensToHex(tokenData));
 </script>
 
 {#if title}
@@ -40,14 +38,21 @@
 	{/each}
 </div>
 
-<!-- TODO: Code Review. Use code that isn't from 2006 ;)  -->
-<div class="pb-16">
-	<div class="float-left pr-4 pt-4">
-		<CopyButton content={hex} label="Copy Hex Values" />
+<div class="flex pb-6">
+	<div class="float-left flex-1 pr-4 pt-4">
+		<CopyButton
+			content={hex}
+			label="Copy Hex Values"
+			emphasis="secondary"
+			variant="outline"
+			size="sm"
+		/>
 	</div>
 
-	<div class="right-0 float-right flex items-center pt-4">
-		<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
-		<ThemeSwitcher size="xs" />
+	<div class="flex-1 pt-4 text-right">
+		<div class="float-right flex items-center pt-1">
+			<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
+			<ThemeSwitcher size="xs" />
+		</div>
 	</div>
 </div>

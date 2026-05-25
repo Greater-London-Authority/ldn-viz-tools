@@ -1,6 +1,6 @@
 ---
 title: Quantitative colour
-description: Data values mapped to colour gradients
+description: Values mapped to colour gradients
 section: Data visualisation
 navLabel: Quantitative colour
 ---
