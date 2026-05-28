@@ -3,10 +3,10 @@
 	 * TODO: THIS EXAMPLE ALREADY EXISTS ESWHERE IN THIS REPO, SO THIS IS A REPETITION ??
 	 */
 
+	import demoMonthlyTimeseriesLong from '$lib/data/demoMonthlyTimeseriesLong.json';
 	import { ObservablePlot, Plot } from '@ldn-viz/charts';
 	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3';
-	import demoMonthlyTimeseriesLong from '../../../../data/demoMonthlyTimeseriesLong.json';
 
 	//const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
@@ -37,10 +37,6 @@
 				stroke: 'Variable'
 			}),
 
-			Plot.ruleX(
-				multiLineData,
-				Plot.pointerX({ x: 'Month', stroke: theme.tokenNameToValue('chart.label') })
-			),
 			Plot.point(
 				multiLineData,
 				Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })

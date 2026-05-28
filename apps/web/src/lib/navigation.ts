@@ -30,7 +30,16 @@ const applicationDesign = allDocs
 	}));
 
 //Non alphabetic sort index. N.B reverse order so non listed pages are appended
-const dvPageOrder = ['Chart examples', 'Charts', 'Colour', 'Accessibility', 'Foundations'];
+const dvPageOrder = [
+	'Chart examples',
+	'Charts',
+	'Maps',
+	'Quantitative colour',
+	'Colour foundations',
+	'Accessibility',
+	'Quick colour guide',
+	'Foundations'
+];
 
 const dataVisualisation = allDocs
 	.filter((doc) => doc.section === 'Data visualisation')
