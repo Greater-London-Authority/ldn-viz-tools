@@ -2,51 +2,42 @@
 title: Design System
 description: A unified approach to UI design, data presentation and mapping.
 section: Overview
+heroImage: header-design-system.svg
+thumbnail: cta-design-system.svg
+layout: index
 ---
 
 <script>
 	import { Button, PlaceholderImage } from '@ldn-viz/ui'
+    import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte'
 </script>
 
-The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.
+<p class="prose responsive body-lg py-typography-spacing-xl">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
-<div class="space-y-4 text-center mb-8">
-    <a href="/design-system/getting-started" class="h-60 block">
-        <PlaceholderImage />
-    </a>
-    <Button href="/design-system/getting-started">Get started</Button>
-</div>
-
-<div class="grid grid-cols-3 grid-rows-[auto] gap-4 product">
+<div class="grid grid-cols-3 grid-rows-[auto] gap-4 ">
     <div>
         <a href="/design-system/foundations">
-    <div class="h-60">
-        <PlaceholderImage />
-    </div>
+        <EnhancedImage src='cta-foundations.svg'/>
         </a>
-        <h3 class="title-sm mt-2">Foundations</h3>
-        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-        <Button href="/design-system/foundations" variant="outline">Read more</Button>
+        <h3 class="title-sm format">Foundations</h3>
+        <p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system/foundations" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
     <div>
         <a href="/design-system/application-design" >
-    <div class="h-60">
-        <PlaceholderImage />
-    </div>
+        <EnhancedImage src='cta-application-design.svg'/>
         </a>
-        <h3 class="title-sm mt-2">Application Design</h3>
-        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-        <Button href="/design-system/application-design" variant="outline">Read more</Button>
+        <h3 class="title-sm format">Application Design</h3>
+        <p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system/application-design" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
     <div>
         <a href="/design-system/data-visualisation">
-    <div class="h-60">
-        <PlaceholderImage />
-    </div>
+        <EnhancedImage src='cta-dataviz.svg'/>
         </a>
-        <h3 class="title-sm mt-2">Data Visualisation</h3>
-        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-        <Button href="/design-system/data-visualisation" variant="outline">Read more</Button>
+        <h3 class="title-sm format">Data Visualisation</h3>
+        <p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system/data-visualisation" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
 
 </div>

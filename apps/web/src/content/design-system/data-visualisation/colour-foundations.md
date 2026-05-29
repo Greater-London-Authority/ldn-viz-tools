@@ -3,6 +3,8 @@ title: Colour foundations
 description: Carefully considered colours for data visualisation
 section: Data visualisation
 navLabel: Colour foundations
+heroImage: header-dataviz-overflow.svg
+thumbnail: cta-dataviz.svg
 ---
 
 <script>

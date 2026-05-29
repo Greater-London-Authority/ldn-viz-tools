@@ -3,6 +3,8 @@ title: Quick colour guide
 description: Simple guide to using colour in data visualisation
 section: Data visualisation
 navLabel: Quick colour guide
+heroImage: header-dataviz-overflow.svg
+thumbnail: cta-dataviz.svg
 ---
 
 <script>

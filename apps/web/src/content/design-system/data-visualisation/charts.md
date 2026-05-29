@@ -3,6 +3,8 @@ title: Charts
 description: Graphical representation for data visualization
 section: Data visualisation
 navLabel: Charts
+heroImage: header-dataviz-overflow.svg
+thumbnail: cta-dataviz.svg
 ---
 
 <script>

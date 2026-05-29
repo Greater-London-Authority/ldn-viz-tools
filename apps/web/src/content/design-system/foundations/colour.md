@@ -3,6 +3,8 @@ title: Colour
 description: Contrast and differentiation
 section: Foundations
 navLabel: Colour
+heroImage: header-foundations-overflow.svg
+thumbnail: cta-foundations.svg
 ---
 
 <script>

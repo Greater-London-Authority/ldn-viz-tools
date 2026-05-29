@@ -12,9 +12,8 @@
 	{/snippet}
 
 	{#snippet main()}
-		<!-- <div class="flex space-x-24 p-4 lg:p-8"> -->
 		{@render children?.()}
-		<!-- </div> -->
+
 		<div class="container mx-auto">
 			<PageNav />
 		</div>

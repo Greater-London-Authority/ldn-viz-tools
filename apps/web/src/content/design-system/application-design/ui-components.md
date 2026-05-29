@@ -3,9 +3,12 @@ title: User interface components
 description: Coherent presentation structure
 section: Application design
 navLabel: Ui components
+heroImage: header-application-design-overflow.svg
+thumbnail: cta-application-design.svg
 ---
 
-The full documentation and examples for ui components can be found on our [storybook](https://greater-london-authority.github.io/ldn-viz-tools)
+<p class="prose responsive body-lg">The full documentation and examples for ui components can be found on our <a href="https://greater-london-authority.github.io/ldn-viz-tools">storybook</a>
+</p>
 
 ## Buttons
 

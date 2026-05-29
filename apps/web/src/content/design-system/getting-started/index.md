@@ -3,9 +3,12 @@ title: Getting Started
 description: Getting up and running with the system.
 section: Getting Started
 navLabel: Getting Started
+layout: index
+heroImage: header-design-system.svg
+thumbnail: cta-design-system.svg
 ---
 
-By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.
+<p class="prose responsive body-lg">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.</p>
 
 ## Installation
 

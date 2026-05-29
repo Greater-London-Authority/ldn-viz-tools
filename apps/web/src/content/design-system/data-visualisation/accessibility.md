@@ -3,6 +3,8 @@ title: Accessibility
 description: Making data insights available to all
 section: Data visualisation
 navLabel: Accessibility
+heroImage: header-dataviz-overflow.svg
+thumbnail: cta-dataviz.svg
 ---
 
 ## Principles
