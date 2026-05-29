@@ -4,7 +4,7 @@ description: Accessible themes respecting user preference
 section: Application design
 navLabel: Theming
 heroImage: header-application-design-overflow.svg
-thumbnail: cta-application-design.svg
+thumbnail: cta-application-design-3.svg
 ---
 
 ## Principles

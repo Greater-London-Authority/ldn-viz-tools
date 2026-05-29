@@ -18,28 +18,28 @@ thumbnail: cta-foundations.svg
 <div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-4 ">
     <div>
         <a href="/design-system/foundations/accessibility">
-        <EnhancedImage src='cta-foundations.svg'/>
+        <EnhancedImage src='cta-foundations-1.svg'/>
         </a>
         <h3 class="title-sm format">Accessibility</h3>
         <Button href="/design-system/foundations/accessibility" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
     <div>
         <a href="/design-system/foundations/colour" >
-        <EnhancedImage src='cta-foundations.svg'/>
+        <EnhancedImage src='cta-foundations-2.svg'/>
         </a>
         <h3 class="title-sm format">Colour</h3>
         <Button href="/design-system/foundations/colour" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
     <div>
         <a href="/design-system/foundations/design-tokens">
-        <EnhancedImage src=cta-foundations.svg/>
+        <EnhancedImage src=cta-foundations-3.svg/>
         </a>
         <h3 class="title-sm format">Design tokens</h3>
         <Button href="/design-system/foundations/design-tokens" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
     <div>
         <a href="/design-system/foundations/typography">
-        <EnhancedImage src=cta-foundations.svg/>
+        <EnhancedImage src=cta-foundations-4.svg/>
         </a>
         <h3 class="title-sm format">Typography</h3>
         <Button href="/design-system/foundations/typography" variant="text" slim emphasis="secondary">Read more</Button>

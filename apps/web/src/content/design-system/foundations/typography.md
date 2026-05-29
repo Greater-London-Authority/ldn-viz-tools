@@ -4,7 +4,7 @@ description: Coherent and consistent use of type
 section: Foundations
 navLabel: Typography
 heroImage: header-foundations-overflow.svg
-thumbnail: cta-foundations.svg
+thumbnail: cta-foundations-4.svg
 ---
 
 <script>

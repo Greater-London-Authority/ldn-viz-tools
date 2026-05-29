@@ -4,7 +4,7 @@ description: Graphical representation for data visualization
 section: Data visualisation
 navLabel: Chart examples
 heroImage: header-dataviz-overflow.svg
-thumbnail: cta-dataviz.svg
+thumbnail: cta-dataviz-2.svg
 ---
 
 <script>

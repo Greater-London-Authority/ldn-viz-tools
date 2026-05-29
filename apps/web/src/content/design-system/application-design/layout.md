@@ -4,7 +4,7 @@ description: Coherent presentation structure
 section: Application design
 navLabel: Layout
 heroImage: header-application-design-overflow.svg
-thumbnail: cta-application-design.svg
+thumbnail: cta-application-design-2.svg
 ---
 
 ## Principles

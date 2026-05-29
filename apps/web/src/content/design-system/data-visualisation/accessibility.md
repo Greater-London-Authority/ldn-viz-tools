@@ -4,7 +4,7 @@ description: Making data insights available to all
 section: Data visualisation
 navLabel: Accessibility
 heroImage: header-dataviz-overflow.svg
-thumbnail: cta-dataviz.svg
+thumbnail: cta-dataviz-1.svg
 ---
 
 ## Principles

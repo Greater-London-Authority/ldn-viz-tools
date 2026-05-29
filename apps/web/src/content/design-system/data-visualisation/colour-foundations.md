@@ -4,7 +4,7 @@ description: Carefully considered colours for data visualisation
 section: Data visualisation
 navLabel: Colour foundations
 heroImage: header-dataviz-overflow.svg
-thumbnail: cta-dataviz.svg
+thumbnail: cta-dataviz-4.svg
 ---
 
 <script>

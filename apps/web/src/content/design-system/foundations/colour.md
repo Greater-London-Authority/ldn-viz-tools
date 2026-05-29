@@ -4,7 +4,7 @@ description: Contrast and differentiation
 section: Foundations
 navLabel: Colour
 heroImage: header-foundations-overflow.svg
-thumbnail: cta-foundations.svg
+thumbnail: cta-foundations-2.svg
 ---
 
 <script>
