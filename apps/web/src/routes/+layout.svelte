@@ -31,7 +31,7 @@
 	let activeMenuItem = $derived(findActiveItem(mainMenu, page, resolve));
 
 	$effect(() => {
-		sidebarState.state.isOpen = breakPoint.current >= 1530;
+		sidebarState.state.isOpen = breakPoint.current >= 1536;
 	});
 
 	beforeNavigate(() => {
@@ -44,7 +44,7 @@
 		});
 	});
 
-	afterNavigate(() => (sidebarState.state.isOpen = breakPoint.current >= 1530));
+	afterNavigate(() => (sidebarState.state.isOpen = breakPoint.current >= 1536));
 </script>
 
 <Theme />
