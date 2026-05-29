@@ -4,7 +4,7 @@ description: Foundational principles
 section: Foundations
 navLabel: Foundational Label
 layout: index
-heroImage: header-foundations.svg
+heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations.svg
 ---
 

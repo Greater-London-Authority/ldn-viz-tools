@@ -4,7 +4,7 @@ description: Getting up and running with the system.
 section: Getting Started
 navLabel: Getting Started
 layout: index
-heroImage: header-design-system.svg
+heroImage: header-design-system-overflow.svg
 thumbnail: cta-design-system.svg
 ---
 

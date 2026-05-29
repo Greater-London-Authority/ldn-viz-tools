@@ -4,7 +4,7 @@ description: Guiding principles for consistent presentation
 section: Application design
 navLabel: Application design
 layout: index
-heroImage: header-application-design.svg
+heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design.svg
 ---
 

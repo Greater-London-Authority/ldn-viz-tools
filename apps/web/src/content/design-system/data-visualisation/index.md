@@ -4,7 +4,7 @@ description: Guiding principles for consistent presentation
 section: Data visualisation
 navLabel: Data visualisation
 layout: index
-heroImage: header-dataviz.svg
+heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz.svg
 ---
 
