@@ -3,6 +3,9 @@ import { defineCollection, defineConfig, s, type UserConfig } from 'velite';
 const baseSchema = s.object({
 	title: s.string(),
 	description: s.string(),
+	heroImage: s.string().optional(),
+	thumbnail: s.string().optional(),
+	layout: s.string().optional(),
 	path: s.path(),
 	content: s.markdown(),
 	navLabel: s.string().optional(),

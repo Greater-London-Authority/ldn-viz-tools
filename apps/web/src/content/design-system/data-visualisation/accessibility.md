@@ -3,6 +3,8 @@ title: Accessibility
 description: Making data insights available to all
 section: Data visualisation
 navLabel: Accessibility
+heroImage: header-dataviz-overflow.svg
+thumbnail: cta-dataviz-1.svg
 ---
 
 ## Principles
@@ -25,7 +27,7 @@ This requires balancing brand, meaning, context, differentiation and contrast. I
 
 If your visualisation uses more than two or three colours, you’ll want to keep a closer eye on accessibility and differentiation. 
 
-Our categorical colour palettes and chart themes are well tested and should be your default choice. [See more on data visualisation colour](/design-system/data-visualisation/colour)
+Our categorical colour palettes and chart themes are well tested and should be your default choice. [See more on data visualisation colour](/design-system/data-visualisation/colour-foundations)
 
 ### Differentiation
 
@@ -37,7 +39,7 @@ This is one of many good tools for checking colour contrast between foreground a
 
 Remember, disability may not be a permanent physical condition. It will be something that we all suffer either temporarily or situationally. For example, good colour contrast is important not just for people with impaired vision, but for users of small devices, or in bright sunshine etc.
 
-[See more on data visualisation colour](/design-system/data-visualisation/colour)
+[See more on data visualisation colour](/design-system/data-visualisation/colour-foundations)
 
 ### Use descriptive headlines
 

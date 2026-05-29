@@ -3,6 +3,8 @@ title: Foundations
 description: Remove the noise, highlight the signal
 section: Data visualisation
 navLabel: Foundations
+heroImage: header-dataviz-overflow.svg
+thumbnail: cta-dataviz-1.svg
 ---
 
 ## Principles

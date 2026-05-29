@@ -3,6 +3,8 @@ title: Design Tokens
 description: A single source of truth
 section: Foundations
 navLabel: Design Tokens
+heroImage: header-foundations-overflow.svg
+thumbnail: cta-foundations-3.svg
 ---
 
 <script>

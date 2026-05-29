@@ -2,9 +2,10 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { findActiveItem } from '@ldn-viz/ui';
 
+	import { breakPoint, sidebarState } from '$lib/state.svelte';
 	import {
 		Button,
 		Footer,
@@ -18,7 +19,6 @@
 	} from '@ldn-viz/ui';
 	import { Bars3, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { slide } from 'svelte/transition';
 	import '../app.postcss';
 
 	let mainMenu = [
@@ -26,25 +26,50 @@
 		{ title: 'Contact', id: 'contact', href: '/contact' }
 	];
 
-	let menuOpen = $state(false);
-	let breakPoint: number = $state(0);
-
 	let { children } = $props();
 
 	let activeMenuItem = $derived(findActiveItem(mainMenu, page, resolve));
 
-	afterNavigate(() => (menuOpen = false));
+	$effect(() => {
+		sidebarState.state.isOpen = breakPoint.current >= 1536;
+	});
+
+	beforeNavigate(() => {
+		document.documentElement.classList.add('disable-smooth-scroll');
+	});
+
+	afterNavigate(() => {
+		requestAnimationFrame(() => {
+			document.documentElement.classList.remove('disable-smooth-scroll');
+		});
+	});
+
+	afterNavigate(() => (sidebarState.state.isOpen = breakPoint.current >= 1536));
 </script>
 
 <Theme />
 
-<svelte:window bind:innerWidth={breakPoint} />
+<svelte:window bind:innerWidth={breakPoint.current} />
 
 <div class="flex min-h-dvh flex-col">
 	<Header>
+		<Button
+			variant="square"
+			size="sm"
+			emphasis="secondary"
+			class="-ml-3 mr-1 !bg-transparent text-color-text no-underline hover:!text-color-text-muted 2xl:hidden"
+			onclick={() => (sidebarState.state.isOpen = !sidebarState.state.isOpen)}
+		>
+			{#if !sidebarState.state.isOpen}
+				<Icon src={Bars3} class="h-5 w-5"></Icon>
+			{:else}
+				<Icon src={XMark} class="h-5 w-5"></Icon>
+			{/if}
+		</Button>
+
 		<HeaderTitle base={resolve('/', {})}>London City Data</HeaderTitle>
 		<HeaderRight>
-			{#if breakPoint >= 768}
+			{#if breakPoint.current >= 768}
 				<HeaderItem>
 					<NavigationMenu
 						items={mainMenu}
@@ -53,26 +78,8 @@
 						activeMenuItemId={activeMenuItem?.id}
 					/>
 				</HeaderItem>
-			{:else}
-				<Button
-					variant="text"
-					class=" !text-color-static-white no-underline"
-					onclick={() => (menuOpen = !menuOpen)}
-				>
-					Menu {#if !menuOpen}
-						<Icon src={Bars3} class="ml-2 h-5 w-5"></Icon>
-					{:else}
-						<Icon src={XMark} class="ml-2 h-5 w-5"></Icon>
-					{/if}
-				</Button>
 			{/if}
 		</HeaderRight>
-
-		{#if breakPoint <= 768 && menuOpen}
-			<div class="absolute inset-x-0 top-[48px] z-50 bg-color-container-level-0" transition:slide>
-				<NavigationMenu ariaLabel="Main Menu" items={mainMenu}></NavigationMenu>
-			</div>
-		{/if}
 	</Header>
 
 	{@render children()}
