@@ -8,6 +8,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	scroll-behavior: smooth;
+}
+
+html.disable-smooth-scroll {
+	scroll-behavior: auto;
+}
+
+/* [id] {
+	scroll-margin-top: 66px;
+} */
+
 @layer base {
 	code[data-theme='github-dark-dimmed'] {
 		display: flex !important;
@@ -24,5 +36,11 @@
 		@apply !px-2;
 		background-color: #13181cff !important;
 		color: var(--color-static-white) !important;
+	}
+}
+
+@layer components {
+	.ldn-viz-sidebar-toggle {
+		@apply hidden;
 	}
 }
