@@ -207,18 +207,18 @@
 <path d="M3040.25 480.25H2880.25V640.25H3040.25V480.25Z" stroke="#D6D8DA" stroke-width="0.5" stroke-miterlimit="10"/>
 <rect width="160" height="160" transform="translate(3040.25 480.25)" fill="#FAFAFB"/>
 <path d="M3200.25 480.25H3040.25V640.25H3200.25V480.25Z" stroke="#D6D8DA" stroke-width="0.5" stroke-miterlimit="10"/>
-<circle cx="2520.25" cy="520.25" r="40" fill="#460D53"/>
+<circle cx="2520.25" cy="520.25" r="40" fill="#AE4AC6"/>
 <circle cx="2440.25" cy="600.25" r="40" fill="#BDC0C2"/>
 <circle cx="2520.25" cy="600.25" r="40" fill="#BDC0C2"/>
-<circle cx="2520.25" cy="120.25" r="40" fill="#460D53"/>
+<circle cx="2520.25" cy="120.25" r="40" fill="#AE4AC6"/>
 <circle cx="2440.25" cy="40.25" r="40" fill="#BDC0C2"/>
-<circle cx="2080.25" cy="160.25" r="160" fill="#460D53"/>
+<circle cx="2080.25" cy="160.25" r="160" fill="#AE4AC6"/>
 <circle cx="1520.25" cy="240.25" r="80" fill="#BDC0C2"/>
-<circle cx="1840.25" cy="240.25" r="80" fill="#460D53"/>
-<circle cx="1680.25" cy="560.25" r="80" fill="#460D53"/>
+<circle cx="1840.25" cy="240.25" r="80" fill="#AE4AC6"/>
+<circle cx="1680.25" cy="560.25" r="80" fill="#AE4AC6"/>
 <circle cx="2320.25" cy="400.25" r="80" fill="#BDC0C2"/>
-<circle cx="2000.25" cy="560.25" r="80" fill="#460D53"/>
-<circle cx="2160.25" cy="560.25" r="80" fill="#460D53"/>
-<circle cx="1680.25" cy="80.25" r="80" fill="#460D53"/>
+<circle cx="2000.25" cy="560.25" r="80" fill="#AE4AC6"/>
+<circle cx="2160.25" cy="560.25" r="80" fill="#AE4AC6"/>
+<circle cx="1680.25" cy="80.25" r="80" fill="#AE4AC6"/>
 <circle cx="1840.25" cy="80.25" r="80" fill="#BDC0C2"/>
 </svg>
