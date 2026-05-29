@@ -14,7 +14,7 @@ layout: index
 
 <p class="prose responsive body-lg py-typography-spacing-xl">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
-<div class="grid grid-cols-3 grid-rows-[auto] gap-4 ">
+<div class="grid sm:grid-cols-3 grid-rows-[auto] gap-4 ">
     <div>
         <a href="/design-system/foundations">
         <EnhancedImage src='cta-foundations.svg'/>
