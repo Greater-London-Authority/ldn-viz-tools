@@ -14,6 +14,7 @@
 	import { randomId } from '../utils/randomId';
 	import ColorPicker from './ColorPicker.svelte';
 	import FillTypeControl from './FillTypeControl.svelte';
+	import type { PatternDefinitions } from './patterns';
 
 	interface Props {
 		/**
@@ -108,6 +109,11 @@
 		 * This enables alignment of controls between different `LayerControl`s with different controls enabled,
 		 */
 		controlsInUse?: ('color' | 'opacity' | 'size' | 'fill')[];
+
+		/**
+		 * Definition of available fill patterns (e.g., hatching or dots).
+		 */
+		patterns?: PatternDefinitions;
 	}
 
 	let {
@@ -135,7 +141,8 @@
 		selectedOptionId = $bindable(),
 		optionId = randomId(),
 		name = '',
-		controlsInUse = ['color', 'opacity', 'size']
+		controlsInUse = ['color', 'opacity', 'size'],
+		patterns
 	}: Props = $props();
 </script>
 
@@ -188,6 +195,7 @@
 			bind:fillType={layerState.fillType}
 			disabled={disabled || disableFillControl}
 			{label}
+			{patterns}
 		/>
 	{/if}
 
