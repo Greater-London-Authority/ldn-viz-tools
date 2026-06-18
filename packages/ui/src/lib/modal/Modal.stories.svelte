@@ -22,6 +22,8 @@
 	let isOpenLightTheme = $state(false);
 	let isOpenWide = $state(false);
 	let isOpenButtons = $state(false);
+
+	let contentEl = $state<HTMLElement>();
 </script>
 
 <Story name="Default">
@@ -250,6 +252,28 @@
 			{#snippet description()}
 				This demonstrates how to use the Trigger component.
 			{/snippet}
+		</Modal>
+	{/snippet}
+</Story>
+
+<!-- If the modal has no description, ensure you set the auto focus to the first interactive element or (if the first interactive element is too far down) the first element. See [WAI ARIA Modal Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) -->
+
+<Story name="No Description">
+	{#snippet template(args)}
+		<Modal
+			{...args}
+			hintLabel="Open Dialog"
+			onOpenAutoFocus={(e) => {
+				e.preventDefault();
+				contentEl?.focus();
+			}}
+		>
+			{#snippet title()}
+				Account settings
+			{/snippet}
+
+			<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+			<p bind:this={contentEl} tabindex={-1}>No description here, just contents!</p>
 		</Modal>
 	{/snippet}
 </Story>
