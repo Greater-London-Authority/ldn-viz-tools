@@ -20,7 +20,7 @@
 		{#if table.colGroups && table.colGroups.length > 0}
 			{#each table.colGroups || [] as colGroup (colGroup)}
 				<div
-					class="border-b border-color-ui-border-primary"
+					class="border-b border-color-border"
 					style:width={getWidth(colGroup)}
 					style:height="1px"
 				></div>
@@ -30,11 +30,7 @@
 				{/if}
 			{/each}
 		{:else}
-			<div
-				class="border-b border-color-ui-border-primary"
-				style:width="100%"
-				style:height="1px"
-			></div>
+			<div class="border-b border-color-border" style:width="100%" style:height="1px"></div>
 		{/if}
 	{/snippet}
 </Scaffolding>

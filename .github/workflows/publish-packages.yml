@@ -12,22 +12,24 @@ on:
           - ds3
 
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write # Required for OIDC
   contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: NPM publishing
+
     steps:
       - name: Checkout the git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup .npmrc file to publish to npm
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '24.0.2'
+          node-version: '24.15.0'
           registry-url: 'https://registry.npmjs.org'
-          package-manager-cache: false  # never use caching in release builds
+          package-manager-cache: false # never use caching in release builds
 
       - name: Install dependencies
         run: npm install
@@ -58,6 +60,7 @@ jobs:
           git add packages/*/CHANGELOG.md
           git add packages/*/package.json
           git add package-lock.json
+          git reset HEAD .github/  # safety net
 
           git diff-index --quiet HEAD || git commit -m "Update CHANGELOG and package.json"
 

@@ -195,7 +195,7 @@
 						variant="square"
 						emphasis="secondary"
 						class="{drawModes.mode.selected === mode
-							? '!bg-color-action-background-secondary-active'
+							? '!bg-color-interactive-secondary-active !text-color-inverse-text'
 							: null} pointer-events-auto capitalize"
 						size="lg"
 						onclick={() => clickMode(mode)}

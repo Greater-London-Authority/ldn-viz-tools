@@ -1,8 +1,8 @@
 <script module lang="ts">
+	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from './Button.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
 	import type { ButtonProps } from './types.js';
 
 	const { Story } = defineMeta({

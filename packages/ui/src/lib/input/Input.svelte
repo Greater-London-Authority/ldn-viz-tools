@@ -86,12 +86,12 @@
 	let inputClasses = $derived(
 		classNames(
 			'm-0',
-			error ? 'border-color-input-border-error' : '',
+			error ? 'border-color-interactive-error' : '',
 			disabled
-				? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
+				? 'cursor-not-allowed text-color-interactive-disabled placeholder-color-interactive-disabled'
 				: '',
 			type === 'range' ? 'form-range' : 'form-input',
-			'placeholder-color-input-placeholder'
+			'placeholder-color-text-wash'
 		)
 	);
 

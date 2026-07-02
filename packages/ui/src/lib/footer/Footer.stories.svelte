@@ -57,7 +57,7 @@
 </Story>
 
 {#snippet footerCookieMenu()}
-	<div class="text-color-text-primary">This would be a custom text or menu</div>
+	<div class="text-color-text">This would be a custom text or menu</div>
 {/snippet}
 
 <Story name="With Custom Cookie menu">

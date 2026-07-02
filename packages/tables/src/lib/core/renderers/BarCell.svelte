@@ -30,7 +30,7 @@
 </script>
 
 <div class="flex h-full items-center py-1">
-	<div class="relative flex w-full bg-color-ui-neutral text-xs">
+	<div class="relative flex w-full bg-color-surface-neutral text-xs">
 		<div
 			style:width={scale(+value) + 'px'}
 			style:background-color={getVal(value, color)}

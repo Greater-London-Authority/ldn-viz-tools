@@ -50,7 +50,6 @@
 		afterCopy?: import('svelte').Snippet;
 
 		name: string;
-		hex: string;
 		value: string;
 		type: string;
 		description: string;
@@ -65,7 +64,6 @@
 		beforeCopy,
 		afterCopy,
 		name,
-		hex,
 		value,
 		type,
 		description,
@@ -85,7 +83,7 @@
 	};
 
 	const sizeClasses = {
-		xs: '!p-0.5 space-y-1 w-[82px]',
+		xs: '!p-0.5 space-y-1 w-[74px]',
 		sm: '!p-1 space-y-1',
 		md: '!p-2 space-y-2',
 		lg: '!p-2 space-y-2',
@@ -94,8 +92,8 @@
 
 	const swatchClass = $derived(
 		classNames(
-			'text-left !items-stretch !no-underline hover:bg-color-action-background-primary-muted-hover',
-			'border-color-ui-border-secondary bg-color-container-level-0 flex-col justify-between border shadow-sm',
+			'text-left !items-stretch !no-underline hover:bg-color-interactive-primary-muted-hover',
+			'border-color-border-muted bg-color-container flex-col justify-between border shadow-sm',
 			sizeClasses[size]
 		)
 	);
@@ -104,15 +102,15 @@
 </script>
 
 <Button variant="text" onclick={copyToClipboard} class={swatchClass}>
-	<div class="aspect-video" style:background-color={hex}></div>
+	<div class="aspect-video" style:background-color={value}></div>
 
 	{#if size !== 'xs'}
 		<div class={textSize}>
-			<p class="text-color-text-secondary">{name}</p>
+			<p class="text-color-text-muted">{name}</p>
 			{#if lastButtonId !== id}
-				<p class="text-color-text-primary">{value}</p>
+				<p class="text-color-text">{value}</p>
 			{:else}
-				<p class="text-color-action-primary-active">Copied!</p>
+				<p class="text-color-interactive-primary-active">Copied!</p>
 			{/if}
 			{#if description}
 				<p>Description: {description}</p>
@@ -123,11 +121,11 @@
 	{#if size === 'xs'}
 		{@const trimmedName = name.split('-').pop()}
 		<div class={textSize}>
-			<p class="text-color-text-secondary">{trimmedName}</p>
+			<p class="text-color-text-muted">{trimmedName}</p>
 			{#if lastButtonId !== id}
-				<p class="text-color-text-primary">{value}</p>
+				<p class="text-color-text">{value}</p>
 			{:else}
-				<p class="text-color-action-primary-active">Copied!</p>
+				<p class="text-color-interactive-primary-active">Copied!</p>
 			{/if}
 		</div>
 	{/if}

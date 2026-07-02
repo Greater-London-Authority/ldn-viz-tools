@@ -6,6 +6,7 @@
 	 */
 
 	import type { BarDivergingCellProps } from '$lib/core/renderers/BarDivergingCellProps';
+	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 	import { scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
@@ -14,9 +15,9 @@
 		value,
 		formatString = '0.0f',
 		textSize = 16,
-		positiveColor = 'blue',
-		negativeColor = 'red',
-		backgroundColor = 'lightgrey',
+		positiveColor = theme.tokenNameToValue('data.primary'),
+		negativeColor = theme.tokenNameToValue('data.secondary'),
+		backgroundColor = theme.tokenNameToValue('surface.neutral'),
 		extent = [0, 1],
 		width = 100,
 		..._rest

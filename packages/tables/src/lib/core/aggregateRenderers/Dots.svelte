@@ -6,6 +6,7 @@
 	 */
 
 	import type { DotsProps } from '$lib/core/aggregateRenderers/DotsProps';
+	import { theme } from '@ldn-viz/ui';
 	import { scaleLinear, type ScaleLinear } from 'd3-scale';
 
 	let { values, extent = [0, 1], width = 100, ..._rest }: DotsProps = $props();
@@ -42,7 +43,7 @@
 			for (const point of dodgedValues) {
 				const cx = point.x;
 				const cy = (height - marginBottom) * point.y;
-				ctx.fillStyle = 'rgb(200, 0, 0)';
+				ctx.fillStyle = `rgba(${theme.colorTokenNameToRGBArray('data.primary')})`;
 				ctx.fillRect(cx, cy, 1, 1);
 			}
 		}

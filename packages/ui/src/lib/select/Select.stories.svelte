@@ -181,7 +181,7 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="mt-4 block text-color-text-muted">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -193,7 +193,7 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple keepSelectionInList bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="mt-4 block text-color-text-muted">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -246,9 +246,9 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
 			<Button onclick={() => (error = 'OH NO')}>Set error</Button>
-			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}>
-				Clear error
-			</Button>
+			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}
+				>Clear error</Button
+			>
 
 			<span><code>error is:</code> {error}</span>
 
@@ -300,7 +300,7 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 				bind:value={selectedBorough}
 			/>
 
-			<div class="mt-4 text-color-text-secondary">
+			<div class="mt-4 text-color-text-muted">
 				<strong>Selected:</strong>
 				{selectedBorough ?? 'None'}
 			</div>

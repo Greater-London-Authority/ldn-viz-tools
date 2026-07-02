@@ -45,9 +45,7 @@
 			transformRequest: appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP')
 		}}
 	>
-		<ul
-			class="absolute left-0 top-0 z-10 m-2 bg-color-container-level-0 p-2 text-sm text-color-text-primary"
-		>
+		<ul class="absolute left-0 top-0 z-10 m-2 bg-color-container p-2 text-sm text-color-text">
 			{#each clickedLayerIDs as id (id)}
 				<li>{id}</li>
 			{/each}

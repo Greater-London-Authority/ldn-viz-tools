@@ -263,7 +263,7 @@
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
 		<div
-			class="absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container-level-0 p-2 text-sm shadow"
+			class="absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container p-2 text-sm shadow"
 			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 			style:left={`${$tooltipStore.layerX}px`}
 		>
@@ -271,18 +271,16 @@
 				<pre>{JSON.stringify(data[$tooltipStore.index], null, 2)}</pre>
 			{/if}
 
-			<div
-				class="absolute inset-x-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-color-container-level-0"
-			></div>
+			<div class="absolute inset-x-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-color-container"></div>
 		</div>
 	{/if}
 {/key}
 
 <style>
 	:global(.themed-chart svg) {
-		--plot-background: var(--theme-chart-background) !important;
+		--plot-background: var(--color-chart-background) !important;
 	}
 	:global(.themed-chart [aria-label='tip']) {
-		stroke: var(--theme-ui-border-secondary) !important;
+		stroke: var(--color-border-muted) !important;
 	}
 </style>

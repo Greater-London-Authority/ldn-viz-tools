@@ -67,11 +67,7 @@
 	import MapLayerView from '../mapLayerView/MapLayerView.svelte';
 	import testData from '../testData.json';
 
-	import tokens from '@ldn-viz/themes/styles/js/theme-tokens';
-
-	const theme = (mode: 'light' | 'dark' = 'light') => {
-		return tokens.theme[mode];
-	};
+	import { theme } from '@ldn-viz/ui';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
@@ -98,8 +94,8 @@
 							type: 'fill',
 							filter: ['==', '$type', 'Polygon'],
 							paint: {
-								'fill-color': theme().color.palette.green['500'],
-								'fill-outline-color': theme().color.palette.green['800'],
+								'fill-color': theme.tokenNameToValue('geo.interactive.selected'),
+								'fill-outline-color': theme.tokenNameToValue('geo.interactive.selected'),
 								'fill-opacity': 0.6
 							}
 						}}
@@ -110,7 +106,7 @@
 							type: 'line',
 							filter: ['==', '$type', 'LineString'],
 							paint: {
-								'line-color': theme().color.palette.darkpink['400'],
+								'line-color': theme.tokenNameToValue('geo.feature'),
 								'line-width': 4,
 								'line-opacity': 0.8
 							},
@@ -126,7 +122,7 @@
 							type: 'circle',
 							filter: ['==', '$type', 'Point'],
 							paint: {
-								'circle-color': theme().color.palette.blue['700'],
+								'circle-color': theme.tokenNameToValue('data.primary'),
 								'circle-radius': 6,
 								'circle-stroke-width': 1,
 								'circle-stroke-color': '#000'
