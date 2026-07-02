@@ -3,4 +3,4 @@
 '@ldn-viz/charts': minor
 ---
 
-FIXED: when an ObservablePlot image is donnloaded as an SVG, the size of the SVG is now set correctly
+FIXED: when an `ObservablePlot` image is downloaded as an SVG, the size of the SVG is now set correctly
