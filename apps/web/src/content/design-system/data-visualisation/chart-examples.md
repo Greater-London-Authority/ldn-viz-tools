@@ -3,10 +3,12 @@ title: Chart examples
 description: Graphical representation for data visualization
 section: Data visualisation
 navLabel: Chart examples
+heroImage: header-dataviz-overflow.svg
+thumbnail: cta-dataviz-2.svg
 ---
 
 <script>
-    import MultipleLine from '$lib/components/charts/exampleCharts/lineCharts/MultipleLine.svelte'
+    import GeneralMultipleLine from '$lib/components/charts/exampleCharts/lines/GeneralMultipleLine.svelte'
 </script>
 
 ## Line Charts
@@ -15,4 +17,4 @@ Line charts display data as points connected by lines, excellent for showing tre
 
 ### Multiple Lines
 
-<MultipleLine />
+<GeneralMultipleLine />

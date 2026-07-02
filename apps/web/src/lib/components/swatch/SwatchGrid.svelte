@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classNames } from '@ldn-viz/ui';
+	import { classNames, CopyButton, ThemeSwitcher } from '@ldn-viz/ui';
 	import Swatch from './Swatch.svelte';
 
 	interface SwatchGridProps {
@@ -13,13 +13,19 @@
 	const sizeClasses = {
 		// xs: 'grid grid-cols-6 gap-1 pb-4 pt-2 md:grid-cols-9 xl:grid-cols-11',
 		xs: 'flex flex-wrap gap-1 pb-2',
-		sm: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4',
-		md: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4',
-		lg: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4',
-		xl: 'grid grid-cols-2 gap-4 pb-8 pt-2 md:grid-cols-4'
+		sm: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
+		md: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
+		lg: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
+		xl: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4'
 	};
 
 	const gridClass = $derived(classNames(sizeClasses[size as keyof typeof sizeClasses]));
+
+	const tokensToHex = (tokensObj = []) => {
+		return Object.values(tokensObj).map((token) => token['value']);
+	};
+
+	let hex = $derived(tokensToHex(tokenData));
 </script>
 
 {#if title}
@@ -30,4 +36,23 @@
 	{#each Object.values(tokenData) as token}
 		<Swatch {...token} {size} content={token.value} />
 	{/each}
+</div>
+
+<div class="flex pb-6">
+	<div class="float-left flex-1 pr-4 pt-4">
+		<CopyButton
+			content={hex}
+			label="Copy Hex Values"
+			emphasis="secondary"
+			variant="outline"
+			size="sm"
+		/>
+	</div>
+
+	<div class="flex-1 pt-4 text-right">
+		<div class="float-right flex items-center pt-1">
+			<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
+			<ThemeSwitcher size="xs" />
+		</div>
+	</div>
 </div>
