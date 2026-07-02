@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 23.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Minor Changes
+
+- d73427a: FIXED: when an `ObservablePlot` image is downloaded as an SVG, the size of the SVG is now set correctly
+- ac203e1: CHANGED: changes to `ImageDownloadButton` needed for downloaded images of `ObservablePlot` plots to include the legend
+
 ## 22.1.0
 
 ### Minor Changes
