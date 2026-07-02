@@ -94,16 +94,16 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class="border-color-border-muted bg-color-surface z-[60] flex max-w-sm flex-col border p-1 shadow"
+					class="z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>
 						<DropdownMenu.GroupHeading class="p-1 text-sm">{menuTitle}</DropdownMenu.GroupHeading>
 
-						<div class="divide-color-border-muted divide-y">
+						<div class="divide-y divide-color-border-muted">
 							{#each options as option (option.id)}
 								<DropdownMenu.Item
-									class="hover:bg-color-interactive-primary-muted-hover  group w-full cursor-pointer p-2 text-left"
+									class="group  w-full cursor-pointer p-2 text-left hover:bg-color-interactive-primary-muted-hover"
 									onSelect={() => changeOption(option)}
 								>
 									<div class="flex items-center">
@@ -111,12 +111,12 @@
 											<Icon
 												src={Check}
 												theme="mini"
-												class="text-color-surface-accent mr-1 h-5 w-5"
+												class="mr-1 h-5 w-5 text-color-surface-accent"
 											/>
 										{/if}
 										<p class="text-sm font-medium">{option.menuLabel}</p>
 									</div>
-									<p class="text-color-text-muted text-xs">
+									<p class="text-xs text-color-text-muted">
 										{option.menuDescription}
 									</p>
 								</DropdownMenu.Item>

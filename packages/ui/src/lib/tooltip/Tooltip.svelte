@@ -49,7 +49,7 @@
 
 		<Tooltip.Portal>
 			<Tooltip.Content
-				class="border-color-border-muted bg-color-container z-50 max-w-[200px] border p-2 text-sm shadow-lg"
+				class="z-50 max-w-[200px] border border-color-border-muted bg-color-container p-2 text-sm shadow-lg"
 			>
 				{@render children?.()}
 

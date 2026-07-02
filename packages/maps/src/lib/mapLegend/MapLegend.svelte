@@ -27,15 +27,15 @@
 
 {#if isOpen}
 	<div
-		class="bg-color-container pointer-events-auto flex w-full flex-col gap-3 px-4 py-3 sm:max-w-96"
+		class="pointer-events-auto flex w-full flex-col gap-3 bg-color-container px-4 py-3 sm:max-w-96"
 		bind:clientWidth={width}
 	>
 		<div class="flex justify-between align-middle">
-			<p class="text-color-text font-bold">Legend</p>
+			<p class="font-bold text-color-text">Legend</p>
 			<Button
 				variant="text"
 				size="sm"
-				class="bg-color-container text-color-text absolute right-1 top-1 cursor-pointer"
+				class="absolute right-1 top-1 cursor-pointer bg-color-container text-color-text"
 				onclick={handleClick}
 				aria-label="Close legend"
 			>

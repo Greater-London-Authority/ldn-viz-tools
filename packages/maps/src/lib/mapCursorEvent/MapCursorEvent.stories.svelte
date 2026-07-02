@@ -149,7 +149,7 @@
 			</Map>
 
 			<div
-				class="bg-color-container text-color-text dark absolute left-0 top-0 h-[16em] w-full bg-opacity-75 p-2"
+				class="dark absolute left-0 top-0 h-[16em] w-full bg-color-container bg-opacity-75 p-2 text-color-text"
 			>
 				<table>
 					<tbody>

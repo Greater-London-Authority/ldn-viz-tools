@@ -8,6 +8,6 @@
 	let { children } = $props();
 </script>
 
-<span class="text-color-text-muted block text-sm font-medium">
+<span class="block text-sm font-medium text-color-text-muted">
 	{@render children?.()}
 </span>

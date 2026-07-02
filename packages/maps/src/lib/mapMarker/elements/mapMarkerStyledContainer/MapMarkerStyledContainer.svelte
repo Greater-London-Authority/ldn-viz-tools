@@ -44,7 +44,7 @@
 	The stopImmediatePropagation on mousemove prevents tooltips below this
 	marker from being shown when mouseover.	
 -->
-<div class="text-color-text relative text-sm">
+<div class="relative text-sm text-color-text">
 	<div
 		role="tooltip"
 		bind:this={container}
@@ -61,7 +61,7 @@
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 150 100"
-			class="fill-color-container stroke-color-border-muted absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform"
+			class="absolute bottom-0 left-1/2 h-4 w-8 -translate-x-1/2 transform fill-color-container stroke-color-border-muted"
 		>
 			<line class="stroke-color-border-muted" stroke-width="14" x1="0" y1="0" x2="75" y2="100" />
 			<line class="stroke-color-border-muted" stroke-width="14" x1="75" y1="100" x2="150" y2="0" />

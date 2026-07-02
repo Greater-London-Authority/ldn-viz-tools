@@ -47,7 +47,7 @@
 		tabLabelClasses,
 		orientationClasses[orientation],
 		isSelected
-			? '!bg-color-interactive-selected !text-color-static-white cursor-default no-underline'
+			? 'cursor-default !bg-color-interactive-selected !text-color-static-white no-underline'
 			: ''
 	)}
 >

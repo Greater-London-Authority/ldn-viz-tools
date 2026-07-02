@@ -18,7 +18,7 @@
 </script>
 
 <header
-	class={`border-color-static-brand border-b-color-border-muted bg-color-container text-color-text flex h-[50px] items-center border-b  border-l-[5px] px-4 py-[.5rem] text-left ${theme}`}
+	class={`flex h-[50px] items-center border-b border-l-[5px] border-color-static-brand border-b-color-border-muted bg-color-container  px-4 py-[.5rem] text-left text-color-text ${theme}`}
 >
 	<!-- Contents of the header (typically a combination of `<HeaderTitle>`, `<HeaderRight>`, `<NavLinks>`, and `<HeaderItem>` components) -->
 	{@render children?.()}

@@ -27,7 +27,7 @@
 
 {#snippet defaultTemplate(args: SwitchProps)}
 	<Switch {...args} bind:checked />
-	<p class="text-color-text-muted pt-2">Is checked?: {checked}</p>
+	<p class="pt-2 text-color-text-muted">Is checked?: {checked}</p>
 {/snippet}
 
 <Story name="Default" />

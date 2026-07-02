@@ -22,7 +22,7 @@
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="text-color-interactive-disabled h-6 w-6 cursor-not-allowed"
+		class="h-6 w-6 cursor-not-allowed text-color-interactive-disabled"
 		aria-hidden="true"
 	/>
 {:else}
@@ -30,7 +30,7 @@
 		{#snippet trigger(props)}
 			<Trigger {...props} size="xs" aria-label="Click to open {label} marker size control">
 				<ResizeIcon
-					class="text-color-text hover:text-color-interactive-secondary-hover h-6 w-6"
+					class="h-6 w-6 text-color-text hover:text-color-interactive-secondary-hover"
 					aria-hidden="true"
 				/>
 			</Trigger>

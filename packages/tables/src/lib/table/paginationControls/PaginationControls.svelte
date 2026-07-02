@@ -20,7 +20,7 @@
 </script>
 
 <div
-	class="border-color-border text-color-text-muted flex items-center justify-between border-t text-sm"
+	class="flex items-center justify-between border-t border-color-border text-sm text-color-text-muted"
 >
 	<div class="">
 		Showing {firstRowNum} to {lastRowNum} of {numRows} entries.

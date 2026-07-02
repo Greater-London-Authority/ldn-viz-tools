@@ -15,9 +15,9 @@
 		"preview": "vite preview",
 		"storybook": "storybook dev -p 6006",
 		"test": "npm run test-storybook",
-		"test-storybook": "vitest --project=storybook",
 		"test:e2e": "playwright test",
-		"test:unit": "vitest run"
+		"test:unit": "vitest run",
+		"test-storybook": "vitest --project=storybook"
 	},
 	"overrides": {
 		"storybook": "$storybook"

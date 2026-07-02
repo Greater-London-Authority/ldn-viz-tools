@@ -5,7 +5,7 @@
 </script>
 
 <div class="my-8">
-	<div class="text-color-text-muted grid grid-cols-2">
+	<div class="grid grid-cols-2 text-color-text-muted">
 		<div><p>Example</p></div>
 		<div><p>Usage</p></div>
 	</div>

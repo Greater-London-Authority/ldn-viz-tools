@@ -139,7 +139,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="text-color-text-muted whitespace-pre-wrap">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>
@@ -171,7 +171,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="text-color-text-muted whitespace-pre-wrap">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>
@@ -194,7 +194,7 @@
 				bind:suggestions
 				classes="w-72"
 			/>
-			<pre class="text-color-text-muted whitespace-pre-wrap">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{#if suggestions}
 					{#each suggestions as location}
 						{formatResult(location)}<br />
@@ -236,7 +236,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="text-color-text-muted whitespace-pre-wrap">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>

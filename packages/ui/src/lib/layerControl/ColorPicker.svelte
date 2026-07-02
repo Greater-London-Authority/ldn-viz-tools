@@ -67,7 +67,7 @@
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="text-color-interactive-disabled h-6 w-6 cursor-not-allowed"
+		class="h-6 w-6 cursor-not-allowed text-color-interactive-disabled"
 		aria-hidden="true"
 	/>
 {:else if disabled && alwaysShowcolorChip}
