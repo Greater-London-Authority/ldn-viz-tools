@@ -1,52 +1,12 @@
 # ldn-viz-tools-ui
 
-## 22.0.0-ds3.7
+## 22.1.0
 
 ### Minor Changes
 
-- c014185: FIXED: when a `ChartContainer` includes multiple `ObservablePlotInner`s, combine them into one SVG when image is downloaded
-
-## 22.0.0-ds3.6
-
-### Minor Changes
-
-- 40eab2f: FIXED: when an ObservablePlot image is donnloaded as an SVG, the size of the SVG is now set correctly
-
-## 22.0.0-ds3.5
-
-### Minor Changes
-
-- 586ebf4: FIXED: when an ObservablePlot image is donnloaded as an SVG, the size of the SVG is now set correctly
-
-## 22.0.0-ds3.4
-
-### Minor Changes
-
-- 0b662a3: FIXED: when an ObservablePlot image is donnloaded as an SVG, the size of the SVG is now set correctly
-
-## 22.0.0-ds3.3
-
-### Minor Changes
-
-- d73427a: FIXED: when an ObservablePlot image is donnloaded as an SVG, the size of the SVG is now set correctly
-
-## 22.0.0-ds3.2
-
-### Minor Changes
-
-- ac203e1: CHANGED: changes to ImageDownloadButton needed fot downloaded images of ObservablePlot plots to inlcude the legend
-
-## 22.0.0-ds3.1
-
-### Major Changes
-
-- 60cb297: trigger release after changes made in dev branch and published without @ds3 tag
-
-## 22.0.0-ds3.0
-
-### Major Changes
-
-- 9269ac2: update tokens to new design system
+- e3ca40c: ADDED: Breadcrumbs component
+- 6d6d424: CHANGED: add `alwaysShowcolorChip` prop that allows color chips to be displayed in `LayerControl` when color editing is disabled
+- 01c499c: CHANGED: added the `disableHoverableContent` prop to `Tooltip` component, allowing tooltips to be kept open as cursor moves from the tooltip trigger to its content.
 
 ## 22.0.0
 

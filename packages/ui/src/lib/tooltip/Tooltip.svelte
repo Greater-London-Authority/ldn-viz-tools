@@ -7,13 +7,23 @@
 		hintLabel?: string;
 		trigger?: Snippet<[Record<string, any>]>;
 		open: boolean;
+
+		/**
+		 * Defaults to `true`, which causes the Tooltip to close as the user
+		 * moves the cursor from the trigger towards the content.
+		 * Setting it to `false` allows the user to mouse-over the tooltip
+		 * content (e.g., to click on a link); before doing this, consider
+		 * whether it would be better to instead use a Popover component.
+		 */
+		disableHoverableContent?: boolean;
 	};
 
 	let {
 		open = $bindable(false),
 		hintLabel = 'Hover for tooltip',
 		trigger,
-		children
+		children,
+		disableHoverableContent = true
 	}: Props = $props();
 </script>
 
@@ -34,7 +44,7 @@
 {/snippet}
 
 <Tooltip.Provider delayDuration={100}>
-	<Tooltip.Root disableCloseOnTriggerClick disableHoverableContent bind:open>
+	<Tooltip.Root disableCloseOnTriggerClick {disableHoverableContent} bind:open>
 		{@render tooltipTrigger()}
 
 		<Tooltip.Portal>

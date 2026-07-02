@@ -23,6 +23,7 @@
 	let features2: Feature[] = $state([]);
 	let features3: Feature[] = $state([]);
 	let features4: Feature[] = $state([]);
+	let features5: Feature[] = $state([]);
 
 	const newFeatures = [
 		{
@@ -46,6 +47,7 @@
 	];
 
 	let isEditing = $state(false);
+	let mapDrawRef: { clickEdit: () => void } | undefined = $state(undefined);
 </script>
 
 <Story name="Default">
@@ -148,5 +150,28 @@
 				</MapControlGroup>
 			</Map>
 		</div>
+	{/snippet}
+</Story>
+
+<Story name="Externally trigger edit mode">
+	{#snippet template()}
+		<Button onclick={() => mapDrawRef?.clickEdit()}>Start editing</Button>
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw
+						bind:this={mapDrawRef}
+						onDone={(features) => (features5 = features)}
+						uploadDownload={[false, false]}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
+
+		<pre>{JSON.stringify(features5, null, 4)}</pre>
 	{/snippet}
 </Story>

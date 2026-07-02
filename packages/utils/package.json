@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/utils",
-	"version": "3.0.0-ds3.1",
+	"version": "2.0.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Greater-London-Authority/ldn-viz-tools.git"
@@ -26,7 +26,7 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@ldn-viz/themes": "8.0.0-ds3.1",
+		"@ldn-viz/themes": "*",
 		"apca-w3": "^0.1.9",
 		"chroma-js": "^2.4.2",
 		"d3-array": "^3.2.4",

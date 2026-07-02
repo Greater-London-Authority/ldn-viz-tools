@@ -1,70 +1,17 @@
 # ldn-viz-tools-maps
 
-## 12.0.0-ds3.7
+## 13.0.0
+
+### Minor Changes
+
+- 6c89899: CHANGED: expose functions from `MapDraw` component, so users of the component can trigger the actions that would result from clicking the control buttons
 
 ### Patch Changes
 
-- Updated dependencies [c014185]
-  - @ldn-viz/ui@22.0.0-ds3.7
-
-## 12.0.0-ds3.6
-
-### Patch Changes
-
-- Updated dependencies [40eab2f]
-  - @ldn-viz/ui@22.0.0-ds3.6
-
-## 12.0.0-ds3.5
-
-### Patch Changes
-
-- Updated dependencies [586ebf4]
-  - @ldn-viz/ui@22.0.0-ds3.5
-
-## 12.0.0-ds3.4
-
-### Patch Changes
-
-- Updated dependencies [0b662a3]
-  - @ldn-viz/ui@22.0.0-ds3.4
-
-## 12.0.0-ds3.3
-
-### Patch Changes
-
-- Updated dependencies [d73427a]
-  - @ldn-viz/ui@22.0.0-ds3.3
-
-## 12.0.0-ds3.2
-
-### Patch Changes
-
-- Updated dependencies [ac203e1]
-  - @ldn-viz/ui@22.0.0-ds3.2
-
-## 12.0.0-ds3.1
-
-### Major Changes
-
-- 60cb297: trigger release after changes made in dev branch and published without @ds3 tag
-
-### Patch Changes
-
-- Updated dependencies [60cb297]
-  - @ldn-viz/utils@3.0.0-ds3.1
-  - @ldn-viz/ui@22.0.0-ds3.1
-
-## 12.0.0-ds3.0
-
-### Major Changes
-
-- 9269ac2: update tokens to new design system
-
-### Patch Changes
-
-- Updated dependencies [9269ac2]
-  - @ldn-viz/utils@3.0.0-ds3.0
-  - @ldn-viz/ui@22.0.0-ds3.0
+- Updated dependencies [e3ca40c]
+- Updated dependencies [6d6d424]
+- Updated dependencies [01c499c]
+  - @ldn-viz/ui@22.1.0
 
 ## 12.0.0
 

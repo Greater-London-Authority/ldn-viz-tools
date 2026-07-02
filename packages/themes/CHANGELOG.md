@@ -1,17 +1,5 @@
 # @ldn-viz/themes
 
-## 8.0.0-ds3.1
-
-### Major Changes
-
-- 60cb297: trigger release after changes made in dev branch and published without @ds3 tag
-
-## 8.0.0-ds3.0
-
-### Major Changes
-
-- 9269ac2: update tokens to new design system
-
 ## 7.0.0
 
 ### Major Changes
