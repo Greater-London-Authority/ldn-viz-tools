@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 8.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
 ## 7.0.0
 
 ### Major Changes
