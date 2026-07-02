@@ -1,6 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import ColorAndLabel from './ColorAndLabel.svelte';
 
 	/**
@@ -20,7 +21,7 @@
 		},
 		args: {
 			value: 0.5,
-			colorScale: () => 'red'
+			colorScale: () => theme.tokenNameToValue('data.primary')
 		}
 	});
 </script>

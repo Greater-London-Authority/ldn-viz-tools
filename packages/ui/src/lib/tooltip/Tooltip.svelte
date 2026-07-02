@@ -49,11 +49,11 @@
 
 		<Tooltip.Portal>
 			<Tooltip.Content
-				class="z-50 max-w-[200px] border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-sm shadow-lg"
+				class="z-50 max-w-[200px] border border-color-border-muted bg-color-container p-2 text-sm shadow-lg"
 			>
 				{@render children?.()}
 
-				<Tooltip.Arrow class="text-color-ui-border-secondary" />
+				<Tooltip.Arrow class="text-color-border-muted" />
 			</Tooltip.Content>
 		</Tooltip.Portal>
 	</Tooltip.Root>

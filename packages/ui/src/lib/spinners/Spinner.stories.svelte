@@ -35,8 +35,8 @@
 		<Spinner
 			{...args}
 			class="w-8"
-			circleColorClass="stroke-color-ui-background-negative"
-			arcColorClass="stroke-color-ui-negative"
+			circleColorClass="stroke-color-surface-negative-muted"
+			arcColorClass="stroke-color-surface-negative"
 		/>
 	{/snippet}
 </Story>
@@ -45,7 +45,7 @@
 	{#snippet template(args)}
 		<Button>
 			I'm loading...
-			<Spinner {...args} class="h-6 w-6" />
+			<Spinner {...args} class="ml-2 h-6 w-6" />
 		</Button>
 	{/snippet}
 </Story>

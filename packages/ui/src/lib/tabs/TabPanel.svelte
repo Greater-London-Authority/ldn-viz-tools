@@ -22,7 +22,7 @@
 
 	let { tabId, tabPanelId, tabIndex = 0, class: classes = '', children }: Props = $props();
 
-	const tabPanelClasses = $derived(classNames('bg-color-container-level-0 w-full', classes));
+	const tabPanelClasses = $derived(classNames('bg-color-container w-full', classes));
 </script>
 
 <div

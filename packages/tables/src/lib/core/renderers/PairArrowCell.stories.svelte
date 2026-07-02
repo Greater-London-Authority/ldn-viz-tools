@@ -1,6 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import PairArrowCell from './PairArrowCell.svelte';
 
 	/**
@@ -28,10 +29,30 @@
 <Story name="Multiple - custom colors">
 	{#snippet template()}
 		<div class="flex w-36 flex-col">
-			<PairArrowCell value={-2} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
-			<PairArrowCell value={-1} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
-			<PairArrowCell value={+1} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
-			<PairArrowCell value={+2} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
+			<PairArrowCell
+				value={-2}
+				extent={[-2, +2]}
+				positiveColor={theme.tokenNameToValue('data.secondary')}
+				negativeColor={theme.tokenNameToValue('data.primary')}
+			/>
+			<PairArrowCell
+				value={-1}
+				extent={[-2, +2]}
+				negativeColor={theme.tokenNameToValue('data.secondary')}
+				positiveColor={theme.tokenNameToValue('data.primary')}
+			/>
+			<PairArrowCell
+				value={+1}
+				extent={[-2, +2]}
+				negativeColor={theme.tokenNameToValue('data.secondary')}
+				positiveColor={theme.tokenNameToValue('data.primary')}
+			/>
+			<PairArrowCell
+				value={+2}
+				extent={[-2, +2]}
+				negativeColor={theme.tokenNameToValue('data.secondary')}
+				positiveColor={theme.tokenNameToValue('data.primary')}
+			/>
 		</div>
 	{/snippet}
 </Story>

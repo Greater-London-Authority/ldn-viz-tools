@@ -1,6 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import BarCell from './BarCell.svelte';
 
 	/**
@@ -12,7 +13,8 @@
 		tags: ['autodocs'],
 
 		args: {
-			value: 0.5
+			value: 0.5,
+			color: theme.tokenNameToValue('data.primary')
 		}
 	});
 </script>

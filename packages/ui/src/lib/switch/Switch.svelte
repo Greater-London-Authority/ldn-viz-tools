@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { Label, Switch } from 'bits-ui';
 	import { classNames } from '../utils/classNames.js';
 	import { randomId } from '../utils/randomId.js';
-	import { Label, Switch } from 'bits-ui';
 
 	export interface SwitchProps {
 		/**
@@ -48,25 +48,26 @@
 
 	const switchRootClass = $derived(
 		classNames(
-			'bg-color-input-background-off data-[state=checked]:bg-color-input-background-on relative h-6 cursor-default rounded-full transition-colors',
-			size === 'md' ? 'h-[24px] w-[44px]' : 'h-[16px] w-[30px]'
+			' data-[state=checked]:bg-color-interactive-on relative h-6 cursor-default rounded-full transition-colors',
+			size === 'md' ? 'h-[24px] w-[44px]' : 'h-[16px] w-[30px]',
+			disabled ? 'bg-color-interactive-disabled-muted' : 'bg-color-interactive-off'
 		)
 	);
 
-	// TODO replace color token with handle
 	const switchThumbClass = $derived(
 		classNames(
-			'thumb block rounded-full transition',
+			'thumb block rounded-full transition border-color-border-muted border',
 			size === 'md' ? 'h-[22px] w-[22px]' : 'h-[14px] w-[14px]',
-			disabled ? 'bg-color-input-label-disabled' : 'bg-color-input-background'
+			disabled ? 'bg-color-interactive-disabled hover:cursor-not-allowed' : 'bg-color-surface'
 		)
 	);
 
 	// Does this need to be derived for the sake of the story? TO BE DISCUSSED
 	const labelClass = $derived(
 		classNames(
-			'form-label text-color-input-label leading-none',
-			labelOn === 'right' ? 'pl-2' : 'pr-2'
+			'form-label  leading-none',
+			labelOn === 'right' ? 'pl-2' : 'pr-2',
+			disabled ? 'text-color-interactive-disabled' : 'text-color-label'
 		)
 	);
 
