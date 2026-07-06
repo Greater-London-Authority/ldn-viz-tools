@@ -1,0 +1,19 @@
+# ldn-viz tools
+
+The `@ldn-viz-tools` scope includes several npm packages used to create Svelte web apps:
+
+- `@ldn-viz/charts` contains components for visualizing data
+- `@ldn-viz/maps` contains components for rendering maps
+- `@ldn-viz/tables` contains components for rendering tables
+- `@ldn-viz/themes` contains CSS and design tokens that are used by other components
+- `@ldn-viz/ui` contains general UI components like modals or sidebars
+- `@ldn-viz/utils` contains utils functions (such as for constructing color scales)
+
+## Components
+
+- [List of components](./component-list.txt)
+
+## Notes
+
+- The list of component includes guidance about when to use specific components, and when alternatives should be used instead
+- The list of components includes links to detailed documentation for individual components, which list the required props and provide usage examples

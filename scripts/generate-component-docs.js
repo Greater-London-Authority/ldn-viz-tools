@@ -8,7 +8,7 @@
  *   2. A table of props with their types, defaults, and descriptions
  *   3. Stories from the corresponding .stories.svelte file (if it exists)
  *
- * Output goes to llm-docs/components/<relative-path>/<ComponentName>.md
+ * Output goes to llm-docs/components/<relative-path>/<ComponentName>.txt
  */
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'fs';
@@ -41,7 +41,7 @@ function walk(dir, predicate, results = []) {
 	for (const entry of readdirSync(dir)) {
 		const full = join(dir, entry);
 		const st = statSync(full);
-		if (st.isDirectory() && entry !== 'node_modules' && entry !== '.svelte-kit') {
+		if (st.isDirectory() && entry !== 'node_modules' && entry !== '.svelte-kit' && entry !== 'dist') {
 			walk(full, predicate, results);
 		} else if (st.isFile() && predicate(full)) {
 			results.push(full);
@@ -317,7 +317,7 @@ function main() {
 		}
 
 		const relPath = stripSrcLib(relative(PACKAGES_DIR, dir));
-		const docRelPath = join(relPath, `${componentName}.md`);
+		const docRelPath = join(relPath, `${componentName}.txt`);
 		componentDocPaths.set(componentName, docRelPath);
 		toGenerate.push({ filePath, componentName, componentComment, props, stories, relPath });
 	}
@@ -333,10 +333,61 @@ function main() {
 		md = replaceStorybookLinks(md, componentDocPaths, outDir);
 
 		mkdirSync(outDir, { recursive: true });
-		const outFile = join(outDir, `${componentName}.md`);
+		const outFile = join(outDir, `${componentName}.txt`);
 		writeFileSync(outFile, md);
 		generated++;
 	}
+
+	// Third pass: write per-package and combined component lists.
+	const byPackage = new Map();
+	for (const { componentName, relPath } of toGenerate) {
+		const pkg = relPath.split('/')[0];
+		if (!byPackage.has(pkg)) byPackage.set(pkg, []);
+		byPackage.get(pkg).push({ componentName, relPath });
+	}
+
+	const combinedParts = ['# Component List', ''];
+	for (const pkg of [...byPackage.keys()].sort()) {
+		const items = byPackage
+			.get(pkg)
+			.sort((a, b) => a.componentName.localeCompare(b.componentName));
+
+		// Resolve display name from package.json
+		const pkgJsonPath = join(PACKAGES_DIR, pkg, 'package.json');
+		let pkgDisplayName = pkg;
+		if (existsSync(pkgJsonPath)) {
+			try {
+				pkgDisplayName = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')).name ?? pkg;
+			} catch {
+				// ignore
+			}
+		}
+
+		// Per-package list
+		const pkgListLines = [`# ${pkgDisplayName} Components`, ''];
+		for (const { componentName, relPath } of items) {
+			const withinPkg = relPath.split('/').slice(1).join('/');
+			const linkTarget = withinPkg
+				? `./${withinPkg}/${componentName}.txt`
+				: `./${componentName}.txt`;
+			pkgListLines.push(`- [${componentName}](${linkTarget})`);
+		}
+		pkgListLines.push('');
+
+		const pkgOutDir = join(OUTPUT_DIR, pkg);
+		mkdirSync(pkgOutDir, { recursive: true });
+		writeFileSync(join(pkgOutDir, 'components-list.txt'), pkgListLines.join('\n'));
+
+		// Combined list section
+		combinedParts.push(`## ${pkgDisplayName}`);
+		combinedParts.push('');
+		for (const { componentName, relPath } of items) {
+			combinedParts.push(`- [${componentName}](./components/${relPath}/${componentName}.txt)`);
+		}
+		combinedParts.push('');
+	}
+
+	writeFileSync(join(ROOT, 'llm-docs', 'component-list.txt'), combinedParts.join('\n'));
 
 	const skipped = allSvelteFiles.length - generated;
 	console.log(
