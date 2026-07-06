@@ -11,7 +11,12 @@ The `@ldn-viz-tools` scope includes several npm packages used to create Svelte w
 
 ## Components
 
-- [List of components](./component-list.txt)
+- [List of components in all packages](./component-list.txt)
+- [List of components in @ldn-viz/charts](./components/charts/components-list.txt)
+- [List of components in @ldn-viz/maps](./components/maps/components-list.txt)
+- [List of components in @ldn-viz/tables](./components/tables/components-list.txt)
+- [List of components in @ldn-viz/ui](./components/ui/components-list.txt)
+
 
 ## Notes
 
