@@ -41,7 +41,12 @@ function walk(dir, predicate, results = []) {
 	for (const entry of readdirSync(dir)) {
 		const full = join(dir, entry);
 		const st = statSync(full);
-		if (st.isDirectory() && entry !== 'node_modules' && entry !== '.svelte-kit' && entry !== 'dist') {
+		if (
+			st.isDirectory() &&
+			entry !== 'node_modules' &&
+			entry !== '.svelte-kit' &&
+			entry !== 'dist'
+		) {
 			walk(full, predicate, results);
 		} else if (st.isFile() && predicate(full)) {
 			results.push(full);
@@ -348,9 +353,7 @@ function main() {
 
 	const combinedParts = ['# Component List', ''];
 	for (const pkg of [...byPackage.keys()].sort()) {
-		const items = byPackage
-			.get(pkg)
-			.sort((a, b) => a.componentName.localeCompare(b.componentName));
+		const items = byPackage.get(pkg).sort((a, b) => a.componentName.localeCompare(b.componentName));
 
 		// Resolve display name from package.json
 		const pkgJsonPath = join(PACKAGES_DIR, pkg, 'package.json');
