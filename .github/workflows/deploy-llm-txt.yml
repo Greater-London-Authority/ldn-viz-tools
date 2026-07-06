@@ -1,4 +1,4 @@
-name: Deploy branch preview of storybook site to Pages
+name: Deploy LLM.txt
 
 on:
   workflow_dispatch:
