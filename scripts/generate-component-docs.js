@@ -351,9 +351,11 @@ function main() {
 		byPackage.get(pkg).push({ componentName, relPath });
 	}
 
-	const combinedParts = ['# Component List', ''];
+	const componentsSectionLines = [];
 	for (const pkg of [...byPackage.keys()].sort()) {
-		const items = byPackage.get(pkg).sort((a, b) => a.componentName.localeCompare(b.componentName));
+		const items = byPackage
+			.get(pkg)
+			.sort((a, b) => a.componentName.localeCompare(b.componentName));
 
 		// Resolve display name from package.json
 		const pkgJsonPath = join(PACKAGES_DIR, pkg, 'package.json');
@@ -381,16 +383,23 @@ function main() {
 		mkdirSync(pkgOutDir, { recursive: true });
 		writeFileSync(join(pkgOutDir, 'components-list.txt'), pkgListLines.join('\n'));
 
-		// Combined list section
-		combinedParts.push(`## ${pkgDisplayName}`);
-		combinedParts.push('');
+		// Contribution to llms.txt Components section
+		componentsSectionLines.push(`### ${pkgDisplayName}`);
+		componentsSectionLines.push('');
 		for (const { componentName, relPath } of items) {
-			combinedParts.push(`- [${componentName}](./components/${relPath}/${componentName}.txt)`);
+			componentsSectionLines.push(
+				`- [${componentName}](./components/${relPath}/${componentName}.txt)`
+			);
 		}
-		combinedParts.push('');
+		componentsSectionLines.push('');
 	}
 
-	writeFileSync(join(ROOT, 'llm-docs', 'component-list.txt'), combinedParts.join('\n'));
+	// Update the ## Components section of llms.txt in-place
+	const llmsTxtPath = join(ROOT, 'llm-docs', 'llms.txt');
+	const llmsTxt = readFileSync(llmsTxtPath, 'utf-8');
+	const newComponentsBlock = `## Components\n\n${componentsSectionLines.join('\n').trimEnd()}\n\n`;
+	const updated = llmsTxt.replace(/## Components\n[\s\S]*?(?=\n## |\s*$)/, newComponentsBlock);
+	writeFileSync(llmsTxtPath, updated);
 
 	const skipped = allSvelteFiles.length - generated;
 	console.log(
