@@ -79,3 +79,33 @@
 		</div>
 	{/snippet}
 </Story>
+
+<!-- 
+When content is taller than the container's constrained height, the `overflow-y-auto` styling makes it scroll.
+The container's `preventZoom` handler stops scroll events from being interpreted as map zoom when the content itself can scroll.
+ -->
+<Story name="Overflowing content">
+	{#snippet template()}
+		<div class="mb-4 mt-32 flex items-center justify-center">
+			<MapMarkerStyledContainer class="max-h-48">
+				<div class="w-auto max-w-64">
+					<h1 class="mb-2 text-lg font-medium">Scrollable content</h1>
+					{#each Array(15) as _, i (i)}
+						<p>Line {i + 1}: content goes here. Content goes here. Content goes here.</p>
+					{/each}
+				</div>
+			</MapMarkerStyledContainer>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Passing `noPad` removes the standard container padding, which is useful for edge-to-edge content such as images that should reach the container's borders. -->
+<Story name="No padding (edge-to-edge image)">
+	{#snippet template()}
+		<div class="mb-4 mt-32 flex items-center justify-center">
+			<MapMarkerStyledContainer noPad>
+				<div class="h-32 w-56 bg-color-data-categorical-blue"></div>
+			</MapMarkerStyledContainer>
+		</div>
+	{/snippet}
+</Story>

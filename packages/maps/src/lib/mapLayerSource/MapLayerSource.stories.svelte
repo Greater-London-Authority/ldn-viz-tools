@@ -71,6 +71,8 @@
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
+
+	const boroughsSourceId = 'gla/context/boroughs';
 </script>
 
 <Story name="Default">
@@ -126,6 +128,60 @@
 								'circle-radius': 6,
 								'circle-stroke-width': 1,
 								'circle-stroke-color': '#000'
+							}
+						}}
+					/>
+				</MapLayerSource>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+A source can also load vector tiles by using a `type: 'vector'` specification.
+This example uses the GLA boroughs vector tile source; note that the slotted
+`<MapLayerView>` instances must specify the `'source-layer'` to render.
+-->
+<Story name="Vector tile source">
+	{#snippet template()}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapLayerSource
+					id={boroughsSourceId}
+					spec={{
+						type: 'vector',
+						tiles: ['https://d1lfm2zniswzpu.cloudfront.net/boroughs/{z}/{x}/{y}.mvt'],
+						minzoom: 7,
+						maxzoom: 14,
+						promoteId: 'objectid'
+					}}
+				>
+					<MapLayerView
+						id={`${boroughsSourceId}/fill`}
+						spec={{
+							type: 'fill',
+							'source-layer': 'boroughs',
+							filter: ['==', '$type', 'Polygon'],
+							paint: {
+								'fill-color': theme.tokenNameToValue('geo.feature'),
+								'fill-opacity': 0.06
+							}
+						}}
+					/>
+					<MapLayerView
+						id={`${boroughsSourceId}/line`}
+						spec={{
+							type: 'line',
+							'source-layer': 'boroughs',
+							filter: ['==', '$type', 'Polygon'],
+							paint: {
+								'line-color': theme.tokenNameToValue('geo.feature'),
+								'line-width': 2,
+								'line-opacity': 0.5
 							}
 						}}
 					/>

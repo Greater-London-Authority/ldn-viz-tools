@@ -14,7 +14,7 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
 	const { Story } = defineMeta({
-		title: 'Maps/Components/MapDraw',
+		title: 'Maps/Components/MapDraw/MapDraw',
 		component: MapDraw,
 		tags: ['autodocs']
 	});
@@ -24,6 +24,8 @@
 	let features3: Feature[] = $state([]);
 	let features4: Feature[] = $state([]);
 	let features5: Feature[] = $state([]);
+	let features6: Feature[] = $state([]);
+	let features7: Feature[] = $state([]);
 
 	const newFeatures = [
 		{
@@ -173,5 +175,49 @@
 		</div>
 
 		<pre>{JSON.stringify(features5, null, 4)}</pre>
+	{/snippet}
+</Story>
+
+<!--
+The `uploadDownload` prop's second element enables downloading the drawn shape as
+a GeoJSON file. Here `[false, true]` enables download only (upload is disabled).
+-->
+<Story name="Allow download but not upload">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw uploadDownload={[false, true]} onDone={(features) => (features6 = features)} />
+				</MapControlGroup>
+			</Map>
+		</div>
+
+		<pre>{JSON.stringify(features6, null, 4)}</pre>
+	{/snippet}
+</Story>
+
+<!--
+A single, non-polygon drawing mode can be enabled by passing a one-element `modes`
+array, e.g. `['point']`. The 'select' and 'render' modes are always added internally.
+-->
+<Story name="Single non-polygon mode">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapDraw modes={['point']} onDone={(features) => (features7 = features)} />
+				</MapControlGroup>
+			</Map>
+		</div>
+
+		<pre>{JSON.stringify(features7, null, 4)}</pre>
 	{/snippet}
 </Story>

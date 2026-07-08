@@ -80,6 +80,31 @@
 		}
 		return l;
 	});
+
+	// Borough layer whose deck.gl `visible` prop is bound to a checkbox, so we
+	// can exercise the `layerObj.visible !== false` render guard.
+	const getBoroughLayerWithVisibility = (visible: boolean) => {
+		return new MVTLayer({
+			id: 'boroughLayer',
+			data: `${TILE_BASE_URL}/boroughs/{z}/{x}/{y}.mvt`,
+			filled: true,
+			getFillColor: () =>
+				theme.colorTokenNameToRGBArray('geo.interactive') as [number, number, number],
+			opacity: 0.5,
+			stroked: true,
+			getLineColor: () => theme.colorTokenNameToRGBArray('geo.feature') as [number, number, number],
+			lineWidthScale: 3,
+			lineWidthMinPixels: 2,
+			pickable: true,
+			onClick: onMouseOverTooltipHandler,
+			visible
+		});
+	};
+
+	let boroughLayerVisible = $state(true);
+	let visibilityLayers: Layer[] = $derived.by(() => [
+		getBoroughLayerWithVisibility(boroughLayerVisible)
+	]);
 </script>
 
 <!-- Here every feature in a layer is assigned the same string as a Tooltip. -->
@@ -155,6 +180,63 @@
 					spec={{
 						wardLayer: DemoTooltipComponent,
 						boroughLayer: DemoTooltipComponent
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+ Different spec types can be mixed within a single `spec`: here the wards use a
+ plain string while the boroughs use a function of the feature.
+ -->
+<Story name="Example - mixed spec per layer">
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckTooltips
+					{layers}
+					spec={{
+						wardLayer: 'This is one of the Wards',
+						boroughLayer: (feature) => feature?.properties?.name
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+ Toggling a layer's visibility off (deck.gl `visible: false`)
+ prevents the corresponding tooltip being opened, so hovering over a hidden
+ borough doesn't dispaly a tooltip.
+ -->
+<Story name="Example - hidden layer">
+	{#snippet template()}
+		<Checkbox label="Borough layer visible" bind:checked={boroughLayerVisible} />
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay layers={visibilityLayers} />
+
+				<MapDeckTooltips
+					layers={visibilityLayers}
+					spec={{
+						boroughLayer: 'This is one of the Boroughs'
 					}}
 				/>
 			</Map>
