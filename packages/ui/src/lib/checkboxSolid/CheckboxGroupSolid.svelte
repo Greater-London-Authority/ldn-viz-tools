@@ -152,7 +152,7 @@
 						disabled={option.disabled || disabled}
 						checked={selectionState[option.id]}
 						icon={option.icon}
-						rawIcon={option.rawIcon}
+						RawIcon={option.rawIcon}
 						iconPlacement={option.iconPlacement}
 						onchange={() => updateSelectedOptions(option.id)}
 					/>

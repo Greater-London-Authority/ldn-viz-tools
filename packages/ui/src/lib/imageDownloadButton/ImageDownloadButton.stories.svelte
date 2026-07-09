@@ -107,6 +107,57 @@
 	{/snippet}
 </Story>
 
+<!-- Setting `filename` controls the name of the downloaded file. Any trailing `.png`/`.svg`
+  is stripped and the correct extension for the chosen format is appended, so here the file
+  is saved as `my-chart.png` or `my-chart.svg`. -->
+<Story name="Custom filename">
+	{#snippet template()}
+		<ImageDownloadButton {htmlNode} filename="my-chart.png">
+			{#snippet afterLabel()}
+				<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
+		</ImageDownloadButton>
+	{/snippet}
+</Story>
+
+<!-- The `padding` prop (default `30`) controls the amount of whitespace, in pixels, added
+  around the captured content. Here it is increased to give the exported image more margin. -->
+<Story name="Custom padding">
+	{#snippet template()}
+		<ImageDownloadButton {htmlNode} formats={['PNG']} padding={60}>
+			{#snippet afterLabel()}
+				<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
+		</ImageDownloadButton>
+	{/snippet}
+</Story>
+
+<!-- The `beforeLabel` snippet renders content before the button label (the counterpart to
+  `afterLabel`, used in the other stories). 
+ Here it's used to add an icon on the left (rather than right) of the button.
+  -->
+<Story name="With beforeLabel snippet">
+	{#snippet template()}
+		<ImageDownloadButton {htmlNode}>
+			{#snippet beforeLabel()}
+				<Icon src={Camera} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
+		</ImageDownloadButton>
+	{/snippet}
+</Story>
+
+<!-- `ImageDownloadButton` extends `ButtonProps`, so `variant`, `emphasis` and `size` are
+  passed through to the underlying button to restyle it. -->
+<Story name="Button variant/size passthrough">
+	{#snippet template()}
+		<ImageDownloadButton {htmlNode} variant="outline" emphasis="secondary" size="lg">
+			{#snippet afterLabel()}
+				<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
+			{/snippet}
+		</ImageDownloadButton>
+	{/snippet}
+</Story>
+
 <!-- Here the circle and rectangle are separated into superimposed SVGs;
   because the `data-capture-ignore` atribtue has been applied to the second,
   it will not be included in the exported image . -->

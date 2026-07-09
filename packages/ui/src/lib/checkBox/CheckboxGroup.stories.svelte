@@ -53,6 +53,10 @@
 	});
 </script>
 
+<script lang="ts">
+	let onChangeLog: string[] = $state([]);
+</script>
+
 <Story name="Default">
 	{#snippet template(args)}
 		<CheckboxGroup {...args} bind:selectedOptions />
@@ -155,5 +159,29 @@
 <Story name="With custom overlay">
 	{#snippet template()}
 		<CheckBoxGroupDemo />
+	{/snippet}
+</Story>
+
+<Story name="Optional">
+	{#snippet template(args)}
+		<CheckboxGroup {...args} bind:selectedOptions label="Transport method" optional />
+		<p class="mt-4 text-color-text-muted">
+			selectedOptions: {JSON.stringify(selectedOptions)}
+		</p>
+	{/snippet}
+</Story>
+
+<Story name="onChange callback">
+	{#snippet template(args)}
+		<CheckboxGroup
+			{...args}
+			bind:selectedOptions
+			label="Transport method"
+			onChange={(selected) => {
+				onChangeLog = [...onChangeLog, JSON.stringify(selected)];
+			}}
+		/>
+		<p class="mt-4 text-color-text-muted">onChange calls:</p>
+		<pre class="mt-1 text-color-text-muted">{onChangeLog.join('\n')}</pre>
 	{/snippet}
 </Story>

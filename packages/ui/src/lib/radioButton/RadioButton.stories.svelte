@@ -45,6 +45,19 @@
 	{/snippet}
 </Story>
 
+<Story name="With hint and hint label">
+	{#snippet template(args)}
+		<RadioButton
+			{...args}
+			label="Foo"
+			id="foo"
+			name="isolated"
+			hint="Radio Ga Ga"
+			hintLabel="More info"
+		/>
+	{/snippet}
+</Story>
+
 <Story name="With custom overlay">
 	{#snippet template(args)}
 		{#snippet customOverlay()}

@@ -29,6 +29,9 @@
 	let selectedId6: string = $state('');
 	let selectedId7: string = $state('');
 	let selectedId8: string = $state('');
+	let selectedId9: string = $state('');
+	let selectedId10: string = $state('bus');
+	let selectedId11: string = $state('');
 	let selectedIdForError: string = $state('');
 
 	let optionsForGroup = [
@@ -53,6 +56,16 @@
 		...option,
 		color: theme.tokenNameToValue(colors[option.id])
 	}));
+
+	let manyLongOptions = [
+		{ id: 'bus', label: 'Bus stops and coach stations' },
+		{ id: 'train', label: 'National Rail train stations (excluding underground)' },
+		{ id: 'underground', label: 'London Underground and Overground stations' },
+		{ id: 'tram', label: 'Tramlink and Docklands Light Railway stops' },
+		{ id: 'taxi', label: 'Licensed taxi ranks and minicab offices' },
+		{ id: 'cycle', label: 'Santander Cycle hire docking stations' },
+		{ id: 'river', label: 'River bus and Thames Clipper piers' }
+	];
 </script>
 
 <Story name="Default">
@@ -159,6 +172,20 @@
 	{/snippet}
 </Story>
 
+<Story name="Horizontal with many/long options">
+	{#snippet template(args)}
+		<RadioButtonGroup
+			{...args}
+			options={manyLongOptions}
+			name="station-type"
+			bind:selectedId={selectedId11}
+			label="Transport method"
+			orientation="horizontal"
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId11}</p>
+	{/snippet}
+</Story>
+
 <Story name="Disabled (global)">
 	{#snippet template(args)}
 		<RadioButtonGroup
@@ -171,6 +198,33 @@
 			disabled
 		/>
 		<p class="mt-8 text-color-text-muted">Selected id: {selectedId8}</p>
+	{/snippet}
+</Story>
+
+<Story name="Optional">
+	{#snippet template(args)}
+		<RadioButtonGroup
+			{...args}
+			options={optionsForGroup}
+			name="station-type"
+			bind:selectedId={selectedId9}
+			label="Transport method"
+			optional
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId9}</p>
+	{/snippet}
+</Story>
+
+<Story name="Pre-selected value">
+	{#snippet template(args)}
+		<RadioButtonGroup
+			{...args}
+			options={optionsForGroup}
+			name="station-type"
+			bind:selectedId={selectedId10}
+			label="Transport method"
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId10}</p>
 	{/snippet}
 </Story>
 

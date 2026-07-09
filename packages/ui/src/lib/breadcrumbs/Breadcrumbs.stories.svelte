@@ -28,3 +28,48 @@
 		<Breadcrumbs {breadcrumbs} {resolve} />
 	{/snippet}
 </Story>
+
+<Story name="Single item">
+	{#snippet template()}
+		<Breadcrumbs breadcrumbs={[{ label: 'Home', href: '/' }]} {resolve} />
+	{/snippet}
+</Story>
+
+<Story name="Two levels">
+	{#snippet template()}
+		<Breadcrumbs
+			breadcrumbs={[
+				{ label: 'Home', href: '/' },
+				{ label: 'Current page', href: '/current-page' }
+			]}
+			{resolve}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Long labels / wrapping">
+	{#snippet template()}
+		<div class="max-w-sm">
+			<Breadcrumbs
+				breadcrumbs={[
+					{ label: 'Greater London Authority Home Page', href: '/' },
+					{
+						label: 'Environment, Climate Change and Air Quality Programmes',
+						href: '/environment'
+					},
+					{
+						label: 'This is the very long label of the current page that should wrap',
+						href: '/environment/current'
+					}
+				]}
+				{resolve}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Empty array">
+	{#snippet template()}
+		<Breadcrumbs breadcrumbs={[]} {resolve} />
+	{/snippet}
+</Story>

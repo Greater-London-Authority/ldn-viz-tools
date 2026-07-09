@@ -1,9 +1,9 @@
 <script module lang="ts">
-	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Popover from './Popover.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Cog6Tooth } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import Popover from './Popover.svelte';
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Popover',
@@ -12,6 +12,7 @@
 	});
 
 	let count = $state(0);
+	let open = $state(false);
 </script>
 
 <Story name="Default">
@@ -68,6 +69,38 @@
 			The contents of the popover...
 
 			<Button onclick={() => count++}>You can click me {count}</Button>
+		</Popover>
+	{/snippet}
+</Story>
+
+<Story name="Controlled open state">
+	{#snippet template()}
+		<div class="flex flex-col gap-2">
+			<span>Popover is currently {open ? 'Open' : 'Closed'}</span>
+			<div class="flex gap-2">
+				<Button onclick={() => (open = true)}>Open</Button>
+				<Button emphasis="secondary" onclick={() => (open = false)}>Close</Button>
+			</div>
+
+			<Popover bind:open>
+				{#snippet title()}
+					Account settings
+				{/snippet}
+				This popover's open state is controlled externally.
+			</Popover>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Long / overflowing content">
+	{#snippet template()}
+		<Popover>
+			{#snippet title()}
+				A popover with a lot of content
+			{/snippet}
+			The contents of the popover can be quite long. This checks that the text wraps within the fixed
+			width and that the absolutely-positioned close button in the top-right corner does not collide with
+			the title or the body text as it flows over multiple lines.
 		</Popover>
 	{/snippet}
 </Story>
