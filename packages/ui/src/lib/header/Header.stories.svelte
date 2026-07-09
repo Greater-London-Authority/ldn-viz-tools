@@ -131,8 +131,12 @@
 
 <!-- HeaderTitle stories -->
 
-<!-- The `base` prop is prepended to construct the homepage link. Here it is set to `/app`,
-	so the title links to `/app` rather than the default `/`. -->
+<!--
+The `base` prop is prepended to construct the homepage link.
+Normally it is imported from `$app/paths` to link the the root,
+but here it is set to  `/app`, so the title links to `/app` rather than the default `/`. 
+(If you do this in a real app, wrap the link in `resolve()`)
+-->
 <Story name="Custom base path">
 	{#snippet template()}
 		<Header>
