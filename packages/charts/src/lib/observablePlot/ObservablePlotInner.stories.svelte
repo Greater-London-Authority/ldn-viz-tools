@@ -27,13 +27,110 @@
 </script>
 
 <script lang="ts">
+	import { theme } from '@ldn-viz/ui';
 	import * as UnstyledPlot from '@observablehq/plot';
 	import { format } from 'd3-format';
+	import type { Writable } from 'svelte/store';
+	import { writable } from 'svelte/store';
 	import { monthlyData } from '../../data/demoData';
 	import { preprocessOptions } from '../observablePlotFragments/observablePlotFragments';
 	import { Plot } from '../observablePlotFragments/plot';
+	import DemoTooltip from './DemoTooltip.svelte';
+	import {
+		addEventHandler,
+		addMultipleEventHandlers,
+		registerTooltip
+	} from './ObservablePlotInner.svelte';
+	import type { Position } from './types';
 
 	const chartData = monthlyData.filter((d) => d.Variable === 'Variable A');
+
+	const tooltipStore: Writable<Position> = writable();
+
+	let clickedValue: any | undefined = $state(undefined);
+	let hoveredValue: any | undefined = $state(undefined);
+
+	let specCustomTooltip = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				render: registerTooltip(tooltipStore, 'Path')
+			})
+		]
+	});
+
+	let specClickOnly = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.point(chartData, {
+				x: 'Month',
+				y: 'Value',
+				render: addEventHandler(
+					'click',
+					(_ev: any, d: { index: number }) => {
+						clickedValue = chartData[d.index];
+					},
+					'Circle'
+				)
+			})
+		]
+	});
+
+	let specMultipleEventHandlers = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.ruleY([0]),
+			Plot.point(chartData, {
+				x: 'Month',
+				y: 'Value',
+				render: addMultipleEventHandlers([
+					{
+						markShape: 'Circle',
+						type: 'click',
+						handler: (_: any, d: { index: number }) => {
+							clickedValue = chartData[d.index];
+						}
+					},
+					{
+						markShape: 'Circle',
+						type: 'mouseenter',
+						handler: (_: any, d: { index: number }) => {
+							if (hoveredValue?.Month != chartData[d.index].Month) {
+								hoveredValue = chartData[d.index];
+							}
+						}
+					},
+					{
+						markShape: 'Circle',
+						type: 'mouseleave',
+						handler: () => {
+							hoveredValue = undefined;
+						}
+					}
+				]),
+				stroke: (d) =>
+					hoveredValue?.Month === d.Month
+						? theme.tokenNameToValue('data.secondary')
+						: theme.tokenNameToValue('data.primary')
+			})
+		]
+	});
 
 	// Spec and data for single line example (default)
 	let spec = $derived({
@@ -401,5 +498,63 @@ We therefore provide a `preprocessOptions` function, which splits one mark into 
 <Story name="Preprocessing to split into multple marks">
 	{#snippet template(args)}
 		<ObservablePlotInner {...args} spec={specPreprocessed} data={chartData} />
+	{/snippet}
+</Story>
+
+<!--
+	Rather than using the default tooltips provided by Observable Plot, you can use a custom Svelte component to render a tooltip.
+-->
+<Story name="Custom tooltip">
+	{#snippet template(args)}
+		<ObservablePlotInner {...args} spec={specCustomTooltip} data={chartData} {tooltipStore}>
+			{#snippet tooltip()}
+				<DemoTooltip />
+			{/snippet}
+		</ObservablePlotInner>
+	{/snippet}
+</Story>
+
+<Story name="With single event handler">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			<div>
+				<p class="mb-2 font-bold">addEventHandler (click only)</p>
+				<ObservablePlotInner {...args} spec={specClickOnly} data={chartData} />
+			</div>
+
+			<div>
+				Clicked:
+				<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
+			</div>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="With multiple event handlers">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-4">
+			<div>
+				<p class="mb-2 font-bold">addMultipleEventHandlers (click + mouseenter/leave)</p>
+				<ObservablePlotInner {...args} spec={specMultipleEventHandlers} data={chartData} />
+			</div>
+
+			<div>
+				Clicked:
+				<pre>{JSON.stringify(clickedValue, null, 2)}</pre>
+				Moused over:
+				<pre>{JSON.stringify(hoveredValue, null, 2)}</pre>
+			</div>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+	With `ariaHidden={false}`, screen readers will read the contents of the chart itself.
+	This is usually undesirable — normally the title, subtitle and surrounding description
+	should convey the key takeaways instead, and a secription fo the chart's DOM would be incomprehensible.
+-->
+<Story name="ariaHidden false">
+	{#snippet template(args)}
+		<ObservablePlotInner {...args} {spec} data={chartData} ariaHidden={false} />
 	{/snippet}
 </Story>
