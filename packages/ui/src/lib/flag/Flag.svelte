@@ -37,7 +37,7 @@
 		alert: 'bg-color-surface-negative',
 		warning: 'bg-color-surface-caution',
 		positive: 'bg-color-surface-positive',
-		notice: 'bg-color-surface-notice'
+		notice: 'bg-color-surface-accent'
 	};
 
 	const defaultMessage = {
