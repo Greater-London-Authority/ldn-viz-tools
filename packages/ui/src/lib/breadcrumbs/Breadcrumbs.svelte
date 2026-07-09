@@ -19,7 +19,7 @@
 		 * Should be imported from:
 		 * import { resolve } from '$app/paths';
 		 */
-		resolve?: (url: any) => string;
+		resolve?: (url: string) => string;
 	}
 
 	let { breadcrumbs, resolve = (url: string) => url }: Props = $props();

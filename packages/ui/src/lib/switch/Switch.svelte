@@ -12,7 +12,7 @@
 		 * Value set as the `name` attribute of the hidden `<input>` element (optional, but required if providing value with a form submission)
 		 */
 		name?: string;
-		id?: any;
+		id?: string;
 		/**
 		 * Determines whether field is required.
 		 */

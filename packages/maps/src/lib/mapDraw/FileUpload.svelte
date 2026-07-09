@@ -39,7 +39,7 @@
 		mapDraw.controlMode.current = 'edit';
 	};
 
-	async function readFile(file: any) {
+	async function readFile(file: File) {
 		try {
 			const text = await file.text();
 			const parsedJson = JSON.parse(text);

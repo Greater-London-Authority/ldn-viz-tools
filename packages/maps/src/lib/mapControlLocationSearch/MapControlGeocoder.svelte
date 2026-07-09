@@ -35,7 +35,7 @@
 		/**
 		 * Called when the user clears the search box.
 		 */
-		onSearchClear?: any;
+		onSearchClear?: () => void;
 		/**
 		 * Passed to the suggestions dropdown to limit the number of suggestions
 		 * shown at once.
@@ -93,7 +93,7 @@
 						onLocationSelected(updatedLocation);
 					}
 				})
-				.catch((error: any) => {
+				.catch((error: unknown) => {
 					console.error('Error retrieving location:', error);
 				});
 		}

@@ -81,7 +81,7 @@ export const wrapperFlowLookup: PlacementLookup = {
 	bottom: 'flex-col'
 };
 
-export const transitionAxis: { [key: string]: any } = {
+export const transitionAxis: { [key: string]: 'x' | 'y' } = {
 	left: 'x',
 	right: 'x',
 	top: 'y',

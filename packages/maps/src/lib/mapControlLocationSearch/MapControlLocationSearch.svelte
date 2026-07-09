@@ -45,7 +45,7 @@
 		/**
 		 * Called when the user clears the search box.
 		 */
-		onSearchClear?: any;
+		onSearchClear?: () => void;
 		/**
 		 * Passed to the suggestions dropdown to limit the number of suggestions
 		 * shown at once.
