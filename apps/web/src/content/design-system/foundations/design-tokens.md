@@ -297,7 +297,7 @@ If using the `@ldn-viz` package via npm in a project using tailwind css our toke
 
 `text-($token-name)` will apply the token to text elements. `bg-($token-name)` will apply the token to the background element etc.
 
-In the two examples above `text-color-text-primary` and `bg-color-container-level-0` show tokens applied via tailwind classes.
+In the two examples above `text-color-text` and `bg-color-container` show tokens applied via tailwind classes.
 
 Spacing tokens are available in the same pattern: `mb-spacing-lg` will apply the `$spacing-large` token to the bottom margin of the targeted html element.
 
