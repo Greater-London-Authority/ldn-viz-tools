@@ -17,7 +17,7 @@
 		name,
 		disabled = false,
 		icon,
-		rawIcon,
+		RawIcon,
 		iconPlacement = 'above'
 	}: RadioButtonSolidProps = $props();
 
@@ -47,8 +47,8 @@
 			class={iconOrientationClasses[iconPlacement]}
 			aria-hidden="true"
 		/>
-	{:else if rawIcon}
-		<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></rawIcon>
+	{:else if RawIcon}
+		<RawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></RawIcon>
 	{/if}
 {/snippet}
 
@@ -65,10 +65,10 @@
 	/>
 	<label for={inputID} class={labelClasses}>
 		<!-- contents of the radio button (name and/or icon) -->
-		{#if (icon || rawIcon) && iconPlacement === 'above'}
+		{#if (icon || RawIcon) && iconPlacement === 'above'}
 			{@render iconComponent()}
 			{label}
-		{:else if (icon || rawIcon) && iconPlacement === 'below'}
+		{:else if (icon || RawIcon) && iconPlacement === 'below'}
 			{label}
 			{@render iconComponent()}
 		{:else}

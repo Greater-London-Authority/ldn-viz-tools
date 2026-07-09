@@ -76,9 +76,9 @@
 			<RadioButtonSolid
 				{...args}
 				id="raw"
-				label="rawIcon"
+				label="RawIcon"
 				name="icon-placement"
-				rawIcon={OpacityIcon}
+				RawIcon={OpacityIcon}
 				iconPlacement="above"
 				bind:selectedId={selectedId3}
 			/>

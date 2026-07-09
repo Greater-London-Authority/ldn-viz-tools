@@ -68,7 +68,7 @@
 <Story name="Raw icon">
 	{#snippet template(args)}
 		<div class="w-40">
-			<CheckboxSolid {...args} rawIcon={OpacityIcon} iconPlacement="above" />
+			<CheckboxSolid {...args} RawIcon={OpacityIcon} iconPlacement="above" />
 		</div>
 	{/snippet}
 </Story>

@@ -9,6 +9,8 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 	import OpacityIcon from '../layerControl/OpacityIcon.svelte';
+	import ResizeIcon from '../layerControl/ResizeIcon.svelte';
+
 	import { First, Fourth, Second, Third } from './demoSections';
 	import type { Tab } from './types';
 
@@ -84,7 +86,7 @@
 
 	let tabsWithRawIcon: Tab[] = [
 		{ id: 'aggregates', label: 'Aggregates', rawIcon: OpacityIcon, content: First },
-		{ id: 'chargers', label: 'Details', rawIcon: OpacityIcon, content: Second },
+		{ id: 'chargers', label: 'Details', rawIcon: ResizeIcon, content: Second },
 		{ id: 'averages', label: 'Averages', rawIcon: OpacityIcon, content: Third },
 		{ id: 'histograms', label: 'Histograms', rawIcon: OpacityIcon, content: Fourth }
 	];

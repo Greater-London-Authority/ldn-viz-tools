@@ -3,6 +3,8 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 	import OpacityIcon from '../layerControl/OpacityIcon.svelte';
+	import ResizeIcon from '../layerControl/ResizeIcon.svelte';
+
 	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
 	import type { RadioButtonSolidProps } from './types';
 
@@ -60,7 +62,7 @@
 
 	let optionsForGroupRawIcon: RadioButtonSolidProps[] = [
 		{ id: 'bus', label: 'Bus stops', rawIcon: OpacityIcon },
-		{ id: 'train', label: 'Train stations', rawIcon: OpacityIcon },
+		{ id: 'train', label: 'Train stations', rawIcon: ResizeIcon },
 		{ id: 'underground', label: 'Underground stations', rawIcon: OpacityIcon }
 	];
 
@@ -211,7 +213,7 @@ different values as the `name` prop.
 	{/snippet}
 </Story>
 
-<Story name="With rawIcon">
+<Story name="With RawIcon">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			name="station-type"
