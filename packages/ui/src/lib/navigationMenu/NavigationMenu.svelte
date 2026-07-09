@@ -58,7 +58,10 @@
 	 * Recursive function to handle applying `isExpanded` state, toggling expansion
 	 * of list when a child is active.
 	 */
-	const mapItems = (items: NavigationMenuItemProps[], targetId: string): NavigationMenuItemProps[] =>
+	const mapItems = (
+		items: NavigationMenuItemProps[],
+		targetId: string
+	): NavigationMenuItemProps[] =>
 		items.map((item: NavigationMenuItemProps) => ({
 			...item,
 			isExpanded: !isAlwaysExpanded
