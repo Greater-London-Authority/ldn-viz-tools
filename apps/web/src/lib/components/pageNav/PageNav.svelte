@@ -23,7 +23,7 @@
 			<Button href={resolve(prevPage.href, {})} variant="outline" emphasis="secondary">
 				<Icon src={ArrowLeftCircle} theme="outline" class="mr-4 h-8 w-8" aria-hidden="true" />
 				<div class="flex flex-col">
-					<span class="text-color-text-muted product label-sm"> Previous </span>
+					<span class="product label-sm text-color-text-muted"> Previous </span>
 					<span class="product label-lg responsive">{prevPage.title}</span>
 				</div>
 			</Button>
@@ -35,7 +35,7 @@
 
 			<Button href={resolve(nextPage.href, {})} variant="outline" emphasis="secondary">
 				<div class="flex flex-col">
-					<span class="text-color-text-muted product label-sm"> Next </span>
+					<span class="product label-sm text-color-text-muted"> Next </span>
 					<span class="product label-lg responsive">{nextPage.title}</span>
 				</div>
 				<Icon src={ArrowRightCircle} theme="outline" class="ml-4 h-8 w-8" aria-hidden="true" />
