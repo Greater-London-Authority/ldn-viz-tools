@@ -130,3 +130,27 @@ On small devices most controls will hide themselves.
 		</div>
 	{/snippet}
 </Story>
+
+<!--
+The `classes` prop is appended to the group's container element, allowing
+extra styling or layout utilities to be applied. Here a wider gap and a padded,
+bordered container are added.
+-->
+<Story name="Custom classes">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup
+					position="TopLeft"
+					classes="space-y-6 rounded border border-color-border-muted bg-color-container p-3"
+				>
+					<MapControlPan />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>

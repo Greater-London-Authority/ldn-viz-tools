@@ -81,6 +81,8 @@
 	import Map from '../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../map/util';
 	import MapLayerSource from '../mapLayerSource/MapLayerSource.svelte';
+	import TestPopup from '../mapMarker/TestPopup.svelte';
+	import TestTooltip from '../mapMarker/TestTooltip.svelte';
 	import testData from '../testData.json';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
@@ -146,6 +148,96 @@
 								'circle-radius': 6,
 								'circle-stroke-width': 1,
 								'circle-stroke-color': '#000'
+							}
+						}}
+					/>
+				</MapLayerSource>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+The `beforeId` prop controls where a layer is inserted in the map's layer stack.
+Here the line layer is inserted before (below) the fill layer by passing the fill
+layer's ID as `beforeId`, so the fill is drawn on top. Without a `beforeId`, a layer
+is inserted above all existing layers.
+-->
+<Story name="Layer ordering (beforeId)">
+	{#snippet template()}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapLayerSource
+					id={sourceId}
+					spec={{
+						type: 'geojson',
+						data: testData
+					}}
+				>
+					<MapLayerView
+						id={`${sourceId}/polygon`}
+						spec={{
+							type: 'fill',
+							filter: ['==', '$type', 'Polygon'],
+							paint: {
+								'fill-color': theme.tokenNameToValue('geo.interactive.selected'),
+								'fill-opacity': 0.6
+							}
+						}}
+					/>
+					<MapLayerView
+						id={`${sourceId}/line`}
+						beforeId={`${sourceId}/polygon`}
+						spec={{
+							type: 'line',
+							filter: ['==', '$type', 'Polygon'],
+							paint: {
+								'line-color': theme.tokenNameToValue('geo.feature'),
+								'line-width': 6,
+								'line-opacity': 0.9
+							}
+						}}
+					/>
+				</MapLayerSource>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+Setting the `tooltip` and/or `popup` props causes the component to render a nested
+`<MapMarker>`, which shows the given component on feature hover and click respectively.
+-->
+<Story name="With tooltip and popup">
+	{#snippet template()}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapLayerSource
+					id={sourceId}
+					spec={{
+						type: 'geojson',
+						data: testData
+					}}
+				>
+					<MapLayerView
+						id={`${sourceId}/polygon`}
+						tooltip={TestTooltip}
+						popup={TestPopup}
+						spec={{
+							type: 'fill',
+							filter: ['==', '$type', 'Polygon'],
+							paint: {
+								'fill-color': theme.tokenNameToValue('geo.interactive.selected'),
+								'fill-outline-color': theme.tokenNameToValue('geo.interactive.selected'),
+								'fill-opacity': 0.6
 							}
 						}}
 					/>

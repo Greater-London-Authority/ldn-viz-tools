@@ -290,3 +290,36 @@
 		</div>
 	{/snippet}
 </Story>
+
+<!--
+Passing `isOpen={false}` causes the legend to be initially closed, and render as a button labelled "Legend"
+-->
+<Story name="Closed by default" args={{ isOpen: false }}>
+	{#snippet template({ args })}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+				bind:mapStore
+			>
+				<MapControlGroup position="BottomRight" classes="bottom-16 left-6 sm:bottom-11">
+					<MapLegend {...args} bind:width isOpen={false}>
+						{#key width}
+							{#if layers[0].visible}
+								<div class="flex flex-col gap-1">
+									<p class="text-sm font-semibold text-color-text">{layers[0].label}</p>
+									<ColorLegend
+										color={layers[0][currentThemeMode!]}
+										title={layers[0].title}
+										{width}
+									/>
+								</div>
+							{/if}
+						{/key}
+					</MapLegend>
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
