@@ -29,7 +29,7 @@
 	<div class="py-2 text-sm text-color-text-muted">
 		{#each breadcrumbs as c, i (c.label)}
 			{#if i == breadcrumbs.length - 1}
-				<span class="text-color-text">
+				<span class="text-color-interactive-primary">
 					{c.label}
 				</span>
 			{:else}
