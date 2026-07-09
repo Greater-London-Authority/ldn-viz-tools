@@ -1,5 +1,8 @@
 <script module lang="ts">
-	import { SidebarLeftContext } from '../../../../../../../apps/docs/src/lib';
+	import {
+		SidebarLeftContext,
+		SidebarLeftOpenContext
+	} from '../../../../../../../apps/docs/src/lib';
 
 	import { AdjustmentsHorizontal } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -12,7 +15,8 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarToggle',
 		component: SidebarToggle,
-		decorators: [() => SidebarLeftContext as any]
+		decorators: [() => SidebarLeftContext as any],
+		tags: ['autodocs']
 	});
 </script>
 
@@ -29,5 +33,15 @@
 				<Icon src={AdjustmentsHorizontal} class="p-1" aria-hidden="true" />
 			{/snippet}
 		</SidebarToggle>
+	{/snippet}
+</Story>
+
+<!--
+When the sidebar is open, the toggle renders the `XMark` (close) icon and reports
+`aria-expanded="true"`. This story provides a context where `sidebarState.isOpen` is true.
+-->
+<Story name="Open state (close icon)" decorators={[() => SidebarLeftOpenContext as any]}>
+	{#snippet template()}
+		<SidebarToggle />
 	{/snippet}
 </Story>

@@ -73,3 +73,25 @@
 		<p class="mt-8 text-color-text-muted">Checked: {checked}</p>
 	{/snippet}
 </Story>
+
+<!--
+The indeterminate state is neither checked nor unchecked.
+It is usually used for a "Select All" control, where some but not all of the child options are selected. 
+-->
+<Story name="Indeterminate">
+	{#snippet template(args)}
+		<Checkbox {...args} indeterminate />
+	{/snippet}
+</Story>
+
+<Story name="Checked by default">
+	{#snippet template(args)}
+		<Checkbox {...args} checked />
+	{/snippet}
+</Story>
+
+<Story name="Hint with hintLabel">
+	{#snippet template(args)}
+		<Checkbox {...args} hint="A hint" hintLabel="More info" />
+	{/snippet}
+</Story>

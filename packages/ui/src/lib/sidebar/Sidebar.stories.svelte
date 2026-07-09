@@ -254,3 +254,15 @@
 <Story name="With custom trigger icon" args={{ icon }} />
 
 <Story name="With custom classes" args={{ class: '[&_*]:!bg-color-surface-accent !pb-0' }} />
+
+<!--
+The sidebar starts collapsed: only the toggle button (or tab strip) is shown until it is opened.
+This documents the primary collapsed appearance, which every other story opens out of.
+-->
+<Story name="Collapsed (closed) state" />
+
+<!--
+Combines `width='wide'`, `placement='right'` and `tabs`, exercising the
+right + wide + tabs entry of the width/height lookup matrix.
+-->
+<Story name="Right placement with wide tabs" args={{ placement: 'right', width: 'wide', tabs }} />

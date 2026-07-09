@@ -15,6 +15,19 @@
 		component: PlacardButton,
 		tags: ['autodocs']
 	});
+
+	const colorWays = [
+		'grey',
+		'blue',
+		'green',
+		'yellow',
+		'orange',
+		'red',
+		'pink',
+		'darkpink',
+		'purple',
+		'turquoise'
+	] as const;
 </script>
 
 <Story name="Default">
@@ -125,6 +138,46 @@
 					The Survey of Londoners on London Datastore
 				{/snippet}
 			</PlacardButton>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Opens in new window">
+	{#snippet template(args)}
+		<div class="max-w-xl">
+			<PlacardButton {...args} href="https://data.london.gov.uk" newWindow>
+				{#snippet title()}
+					Getting the Data.
+				{/snippet}
+				{#snippet body()}
+					This link opens the London Datastore in a new browser tab (target="_blank" with
+					rel="noopener noreferrer").
+				{/snippet}
+				{#snippet footer()}
+					The Survey of Londoners on London Datastore
+				{/snippet}
+			</PlacardButton>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="All colorways">
+	{#snippet template(args)}
+		<div class="grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+			{#each colorWays as colorWay}
+				<PlacardButton {...args} {colorWay}>
+					{#snippet title()}
+						{colorWay}
+					{/snippet}
+					{#snippet body()}
+						The full dataset that this explorer is based on is available for download from the
+						London Datastore.
+					{/snippet}
+					{#snippet footer()}
+						The Survey of Londoners
+					{/snippet}
+				</PlacardButton>
+			{/each}
 		</div>
 	{/snippet}
 </Story>

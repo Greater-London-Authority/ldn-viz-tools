@@ -153,3 +153,37 @@
 		</div>
 	{/snippet}
 </Story>
+
+<!-- With a single option there is no choice to make, so the component renders a plain button with no dropdown chevron. -->
+<Story name="Single option">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			options={[options[0]]}
+			menuTitle="Select image format"
+			onClick={handleClick}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Outline variant">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			variant="outline"
+			menuTitle="Select image format"
+			onClick={handleClick}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Disabled">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			disabled
+			menuTitle="Select image format"
+			onClick={handleClick}
+		/>
+	{/snippet}
+</Story>

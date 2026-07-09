@@ -53,7 +53,7 @@
 	];
 
 	/**
-	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of [CheckboxSolid](./?path=/docs/ui-components-checkboxes-checkboxsolid--documentation) components defined by an array of objects.
 	 *
 	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
 	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
