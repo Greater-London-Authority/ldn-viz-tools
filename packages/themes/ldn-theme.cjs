@@ -41,7 +41,7 @@ const config = {
 				':where(*)': {
 					'--outline-size': 'max(2px, 0.08em)',
 					'--outline-style': 'solid',
-					'--outline-color': 'var(--color-interactive-primary-focussed)'
+					'--outline-color': 'var(--color-interactive-focus)'
 				},
 				':where(*:focus)': {
 					outline: 'var(--outline-size) var(--outline-style) var(--outline-color)',
