@@ -2,6 +2,11 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import ColorLegendOrdinalChips from './ColorLegendOrdinalChips.svelte';
 
+	/**
+	 * The `<ColorLegendOrdinalHorizontal>` component draws a legend for an ordinal D3 color scale.
+	 *
+	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-components-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Legends/ColorLegendOrdinalChips',
 		component: ColorLegendOrdinalChips,

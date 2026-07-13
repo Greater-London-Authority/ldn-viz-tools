@@ -1,9 +1,8 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import CookieControlSettings from './CookieControlSettings.svelte';
 	/**
 	 * The `CookieControlSettings` component provides a button which can be clicked on to open the cookie settings modal.
-	 * @component
 	 * */
 
 	const { Story } = defineMeta({

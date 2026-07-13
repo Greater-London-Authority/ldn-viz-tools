@@ -1,5 +1,57 @@
 # ldn-viz-tools-maps
 
+## 14.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [d73427a]
+- Updated dependencies [9269ac2]
+- Updated dependencies [ac203e1]
+  - @ldn-viz/ui@23.0.0
+  - @ldn-viz/utils@3.0.0
+
+## 13.0.0
+
+### Minor Changes
+
+- 6c89899: CHANGED: expose functions from `MapDraw` component, so users of the component can trigger the actions that would result from clicking the control buttons
+
+### Patch Changes
+
+- Updated dependencies [e3ca40c]
+- Updated dependencies [6d6d424]
+- Updated dependencies [01c499c]
+  - @ldn-viz/ui@22.1.0
+
+## 12.0.0
+
+### Patch Changes
+
+- Updated dependencies [6c3607d]
+- Updated dependencies [8402081]
+- Updated dependencies [792b3f6]
+- Updated dependencies [2398df2]
+  - @ldn-viz/ui@22.0.0
+
+## 11.0.0
+
+### Minor Changes
+
+- bdfc142: FIXED: `MapControlFullscreen` isFullscreen state updates when user presses 'Esc' or 'F11' to exit fullscreen instead of clicking the button
+
+### Patch Changes
+
+- ff1eaf0: FIXED: upgrade `terra-draw` and `terra-draw-maplibre-gl-adapter` to fix bug in `MapDraw` component (features would immediately disappear after user had finished editing them)
+- Updated dependencies [2f18b94]
+- Updated dependencies [56de83f]
+- Updated dependencies [c2bdd76]
+- Updated dependencies [946013e]
+  - @ldn-viz/ui@21.2.0
+
 ## 10.0.0
 
 ### Patch Changes

@@ -11,9 +11,16 @@
 		hintLabel?: string;
 		title?: Snippet;
 		trigger?: Snippet<[Record<string, any>]>;
+		open: boolean;
 	};
 
-	let { hintLabel = 'Click for popover', title, trigger, children }: Props = $props();
+	let {
+		hintLabel = 'Click for popover',
+		title,
+		trigger,
+		children,
+		open = $bindable(false)
+	}: Props = $props();
 </script>
 
 {#snippet popoverTrigger()}
@@ -32,11 +39,11 @@
 	{/if}
 {/snippet}
 
-<Popover.Root>
+<Popover.Root bind:open>
 	{@render popoverTrigger()}
 
 	<Popover.Content
-		class="z-50 w-60 border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-sm shadow-lg"
+		class="z-50 w-60 border border-color-border-muted bg-color-container p-2 text-sm shadow-lg"
 	>
 		{#if title}
 			<p class="font-medium">
@@ -62,6 +69,6 @@
 				</Button>
 			{/snippet}
 		</Popover.Close>
-		<Popover.Arrow class="text-color-ui-border-secondary" />
+		<Popover.Arrow class="text-color-border-muted" />
 	</Popover.Content>
 </Popover.Root>

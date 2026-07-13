@@ -21,7 +21,7 @@
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
+		class="h-6 w-6 cursor-not-allowed text-color-interactive-disabled"
 		aria-hidden="true"
 	/>
 {:else}
@@ -29,7 +29,7 @@
 		{#snippet trigger(props)}
 			<Trigger {...props} size="xs" aria-label="Click to open {label} opacity control.">
 				<OpacityIcon
-					class="h-6 w-6 text-color-text-primary hover:text-color-action-text-secondary-hover"
+					class="h-6 w-6 text-color-text hover:text-color-interactive-secondary-hover"
 					aria-hidden="true"
 				/>
 			</Trigger>

@@ -9,7 +9,7 @@ export interface CheckboxSolidProps {
 	name?: string;
 	disabled?: boolean;
 	icon?: IconSource;
-	rawIcon?: Component;
+	RawIcon?: Component;
 	iconPlacement?: 'above' | 'below';
 	'aria-controls'?: string;
 	onchange?: ChangeEventHandler<HTMLInputElement>;

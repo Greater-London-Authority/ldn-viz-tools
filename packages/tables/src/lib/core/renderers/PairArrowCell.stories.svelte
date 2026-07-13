@@ -1,8 +1,13 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import PairArrowCell from './PairArrowCell.svelte';
 
+	/**
+	 * The `PairArrowCell` component renders a table cell containing an arrow pointing from a context value to the cell's value.
+	 * The color of the arrow indicates whether it is increasing or decreasing
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/PairArrowCell',
 		component: PairArrowCell,
@@ -24,10 +29,30 @@
 <Story name="Multiple - custom colors">
 	{#snippet template()}
 		<div class="flex w-36 flex-col">
-			<PairArrowCell value={-2} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
-			<PairArrowCell value={-1} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
-			<PairArrowCell value={+1} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
-			<PairArrowCell value={+2} extent={[-2, +2]} positiveColor="pink" negativeColor="gold" />
+			<PairArrowCell
+				value={-2}
+				extent={[-2, +2]}
+				positiveColor={theme.tokenNameToValue('data.secondary')}
+				negativeColor={theme.tokenNameToValue('data.primary')}
+			/>
+			<PairArrowCell
+				value={-1}
+				extent={[-2, +2]}
+				negativeColor={theme.tokenNameToValue('data.secondary')}
+				positiveColor={theme.tokenNameToValue('data.primary')}
+			/>
+			<PairArrowCell
+				value={+1}
+				extent={[-2, +2]}
+				negativeColor={theme.tokenNameToValue('data.secondary')}
+				positiveColor={theme.tokenNameToValue('data.primary')}
+			/>
+			<PairArrowCell
+				value={+2}
+				extent={[-2, +2]}
+				negativeColor={theme.tokenNameToValue('data.secondary')}
+				positiveColor={theme.tokenNameToValue('data.primary')}
+			/>
 		</div>
 	{/snippet}
 </Story>

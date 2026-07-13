@@ -32,6 +32,7 @@
 			| 'full';
 		children: Snippet;
 		trigger?: Snippet<[Record<string, any>]>;
+		open: boolean;
 	}
 
 	let {
@@ -61,22 +62,24 @@
 		 */
 		modalWidth = undefined,
 
+		open = $bindable(false),
+
 		trigger
 	}: Props = $props();
 </script>
 
 {#if overlayType === 'tooltip'}
-	<Tooltip {trigger} {hintLabel}>
+	<Tooltip {trigger} {hintLabel} bind:open>
 		<!-- The help message. -->
 		{@render children()}
 	</Tooltip>
 {:else if overlayType === 'popover'}
-	<Popover {trigger} {hintLabel}>
+	<Popover {trigger} {hintLabel} bind:open>
 		<!-- The help message. -->
 		{@render children()}
 	</Popover>
 {:else if overlayType === 'modal'}
-	<Modal width={modalWidth} {trigger} {hintLabel}>
+	<Modal width={modalWidth} {trigger} {hintLabel} bind:open>
 		{#snippet title()}
 			{modalTitle}
 		{/snippet}

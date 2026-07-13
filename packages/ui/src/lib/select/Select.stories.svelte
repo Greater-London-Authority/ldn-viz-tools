@@ -4,6 +4,13 @@
 	import Overlay from '../overlay/Overlay.svelte';
 	import Select from './Select.svelte';
 
+	/**
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
+	 *
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
+	 */
 	const options: Option[] = [
 		{ label: 'One', value: 1 },
 		{ label: 'Two', value: 2 },
@@ -15,6 +22,12 @@
 		{ word: 'Two', number: 2 },
 		{ word: 'Three', number: 3 }
 	];
+
+	// A large option list to demonstrate the virtualised dropdown.
+	const manyOptions = Array.from({ length: 500 }, (_, i) => ({
+		label: `Option ${i + 1}`,
+		value: i + 1
+	}));
 
 	const groupedOptions = [
 		{
@@ -46,7 +59,11 @@
 	];
 
 	/**
-	 * The `<Select>` component wraps a 'Svelecte' instance. Check the documentation: [here](https://svelecte.vercel.app).
+	 * The `Select` component allows users to select an option from a drop-down list of alternatives.
+	 * Our select element is a wrapper around ['svelecte'](https://github.com/mskocik/svelecte).
+	 * Many of the props exposed by this component are provided by `svelecte`, so you may find it helpful to consult its [documentation](https://svelecte.vercel.app/).
+	 *
+	 * Notably, this wrapper applies the `InputWrapper` chrome (label, description, tooltip, error, etc.), and adds a Boolean `reorderable` prop.
 	 */
 
 	const { Story } = defineMeta({
@@ -170,7 +187,7 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="mt-4 block text-color-text-muted">
 				Value is: {JSON.stringify(value)}
 			</span>
 		</div>
@@ -182,9 +199,21 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 		<div class="w-96">
 			<Select {...args} {options} label="Label" multiple keepSelectionInList bind:value />
 
-			<span class="mt-4 block text-color-text-secondary">
+			<span class="mt-4 block text-color-text-muted">
 				Value is: {JSON.stringify(value)}
 			</span>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+When `multiple` is combined with `max`, the number of selections is capped.
+Once the limit is reached, no further options can be selected.
+-->
+<Story name="Multiple selects - max num selections">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select {...args} {options} label="Pick up to two" multiple max={2} />
 		</div>
 	{/snippet}
 </Story>
@@ -235,9 +264,9 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
 			<Button onclick={() => (error = 'OH NO')}>Set error</Button>
-			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}>
-				Clear error
-			</Button>
+			<Button variant="outline" emphasis="secondary" onclick={() => (error = '')}
+				>Clear error</Button
+			>
 
 			<span><code>error is:</code> {error}</span>
 
@@ -270,6 +299,46 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 	{/snippet}
 </Story>
 
+<!--
+The `creatable` prop lets users add their own options that are not in the list.
+`creatablePrefix` sets the text shown before the value to be created, and `keepCreated`
+retains created options in the dropdown so they can be re-selected.
+-->
+<Story name="Creatable options">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select
+				{...args}
+				{options}
+				label="Tags"
+				multiple
+				creatable
+				keepCreated
+				creatablePrefix="Add: "
+				placeholder="Select or type to add..."
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+For very long option lists, set `virtualList` to only render the visible rows.
+`vlItemSize` sets the row height (in pixels) used to calculate the scroll position.
+-->
+<Story name="Large / virtualised list">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Select
+				{...args}
+				options={manyOptions}
+				label="Pick an option (500 options)"
+				virtualList
+				vlItemSize={40}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
 <Story name="Loading options from API">
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
@@ -289,7 +358,7 @@ The `clearable` prop will be passed through to svelecte, and create a button wit
 				bind:value={selectedBorough}
 			/>
 
-			<div class="mt-4 text-color-text-secondary">
+			<div class="mt-4 text-color-text-muted">
 				<strong>Selected:</strong>
 				{selectedBorough ?? 'None'}
 			</div>

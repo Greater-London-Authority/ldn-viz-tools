@@ -28,6 +28,10 @@
 		}
 	];
 
+	/**
+	 * The `MultipleActionButton` combines a button and popover menu, so that the user can select which action
+	 * (or variation on an action) will be performed when the button is pressed.
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/MultipleActionButton',
 		component: MultipleActionButton,
@@ -147,5 +151,39 @@
 				onClick={(selectedOption) => console.log('Clicked on button in state:', selectedOption)}
 			/>
 		</div>
+	{/snippet}
+</Story>
+
+<!-- With a single option there is no choice to make, so the component renders a plain button with no dropdown chevron. -->
+<Story name="Single option">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			options={[options[0]]}
+			menuTitle="Select image format"
+			onClick={handleClick}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Outline variant">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			variant="outline"
+			menuTitle="Select image format"
+			onClick={handleClick}
+		/>
+	{/snippet}
+</Story>
+
+<Story name="Disabled">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			disabled
+			menuTitle="Select image format"
+			onClick={handleClick}
+		/>
 	{/snippet}
 </Story>

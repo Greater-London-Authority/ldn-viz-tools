@@ -1,7 +1,11 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import DateCell from './DateCell.svelte';
+
+	/**
+	 * The `DateCell` component renders a table cell representing a single date or datetime as text.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/DateCell',
 		component: DateCell,

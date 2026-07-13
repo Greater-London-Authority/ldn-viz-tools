@@ -89,6 +89,18 @@
 		legend?: import('svelte').Snippet;
 		children?: import('svelte').Snippet;
 		description?: import('svelte').Snippet;
+
+		/**
+		 * Optional id to apply to the chart container div.
+		 * This can be ueful if you are mebedding multiple charts in a report
+		 * page, and want to be able to directly link to individual charts.
+		 */
+		id?: string;
+
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
+		columnMapping?: undefined | { [oldName: string]: string };
 	}
 
 	let {
@@ -110,7 +122,9 @@
 		controls,
 		legend,
 		children,
-		description
+		description,
+		id = 'captureElement',
+		columnMapping = undefined
 	}: Props = $props();
 
 	let chartClass = $derived(
@@ -121,21 +135,23 @@
 	);
 </script>
 
-<div class={classes} bind:this={chartToCapture} id="captureElement">
+<div class={classes} {id}>
 	{#if alt}
 		<p class="sr-only">{alt}</p>
 	{/if}
 
+	<!-- eslint-disable svelte/no-at-html-tags -->
 	{#if title || subTitle}
 		<div class="mb-4">
 			{#if title}
-				<Title>{title}</Title>
+				<Title>{@html title}</Title>
 			{/if}
 			{#if subTitle}
-				<SubTitle>{subTitle}</SubTitle>
+				<SubTitle>{@html subTitle}</SubTitle>
 			{/if}
 		</div>
 	{/if}
+	<!-- eslint-enable svelte/no-at-html-tags -->
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 	{@render controls?.()}
@@ -144,7 +160,7 @@
 	{@render legend?.()}
 
 	<!-- Visualisation goes here -->
-	<div class={chartClass}>
+	<div class={chartClass} bind:this={chartToCapture}>
 		{@render children?.()}
 	</div>
 
@@ -160,6 +176,7 @@
 					dataForDownload={data}
 					{dataDownloadButton}
 					{imageDownloadButton}
+					{columnMapping}
 				/>
 			{/snippet}
 		</Footer>

@@ -2,6 +2,11 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerFlyToFeature from './MapMarkerFlyToFeature.svelte';
 
+	/**
+	 * The `<MapMarkerFlyToFeature>` component is a wrapping container for use
+	 * within tooltip and marker components. It moves the map so it centers
+	 * the popup on the screen. This is activated soon after mounting.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerFlyToFeature',
 		component: MapMarkerFlyToFeature,
@@ -28,6 +33,7 @@
 
 	import loadTestLayers from '../../../loadTestLayers';
 	import MapMarker from '../../MapMarker.svelte';
+	import TestDisabledFlyToFeature from './TestDisabledFlyToFeature.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
@@ -50,6 +56,26 @@
 				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" popup={MapMarkerFlyToFeature} />
 				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" popup={MapMarkerFlyToFeature} />
 				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" popup={MapMarkerFlyToFeature} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- 
+When `disabled` is `true`, clicking a feature still opens the popup, but the map does not move. 
+-->
+<Story name="Disabled">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/polygon" popup={TestDisabledFlyToFeature} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/line" popup={TestDisabledFlyToFeature} />
+				<MapMarker layerId="gla/ldn-viz-tools/test-data/point" popup={TestDisabledFlyToFeature} />
 			</Map>
 		</div>
 	{/snippet}

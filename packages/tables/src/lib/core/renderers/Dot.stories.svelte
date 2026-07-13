@@ -1,8 +1,13 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import Dot from './Dot.svelte';
 
+	/**
+	 * The `Dot` component renders a table cell representing a numerical value as a tick;
+	 * the horizontal position of the dot encodes the value.
+	 * See also: [Tick](./?path=/docs/tables-components-renderers-tick--documentation)
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/Dot',
 		component: Dot,

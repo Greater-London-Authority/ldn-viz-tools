@@ -4,6 +4,7 @@
 	 */
 
 	import type { StackedBarProps } from '$lib/core/aggregateRenderers/StackedBarProps';
+	import { theme } from '@ldn-viz/ui';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
 
@@ -52,10 +53,15 @@
 			y={0}
 			{height}
 			fill={getVal(bar.val, color) as string}
-			stroke="black"
+			stroke={theme.tokenNameToValue('surface')}
 		/>
 
-		<text x={x(bar.start) + 6} y={height - 6} font-size="12px" fill="white">
+		<text
+			x={x(bar.start) + 6}
+			y={height - 6}
+			font-size="12px"
+			fill={theme.tokenNameToValue('text')}
+		>
 			{bar.val}
 		</text>
 	{/each}

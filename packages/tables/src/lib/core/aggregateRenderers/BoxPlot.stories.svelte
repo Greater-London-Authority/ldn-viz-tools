@@ -1,7 +1,10 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import BoxPlot from './BoxPlot.svelte';
+	/**
+	 * The `BoxPlot` component renders a set of values as a BoxPlot.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Tables/Components/AggregateRenderers/BoxPlot',

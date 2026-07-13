@@ -18,7 +18,8 @@
 		isExpanded = $bindable(false),
 		onChange,
 		index,
-		active
+		active,
+		copySearchParams
 	}: NavigationMenuItemProps = $props();
 
 	const navContext: Record<keyof NavigationMenuProps, any> = getContext('navContext');
@@ -82,9 +83,9 @@
 
 	let textClasses = $derived(
 		classNames(
-			`flex w-full items-center level-${level} p-1.5 hover:text-color-action-primary-hover hover:underline `,
-			isActive ? 'text-color-action-text-primary-active underline' : '',
-			level === 1 ? 'text-color-text-primary text-base' : 'text-color-text-secondary text-sm'
+			`flex w-full items-center level-${level} p-1.5 hover:text-color-interactive-primary-hover hover:underline `,
+			isActive ? 'text-color-interactive-primary-active underline' : '',
+			level === 1 ? 'text-color-text text-base' : 'text-color-text-muted text-sm'
 		)
 	);
 
@@ -95,8 +96,8 @@
 
 	const listClasses: Record<'vertical' | 'horizontal', string> = $derived({
 		vertical:
-			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-ui-border-secondary') : '',
-		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
+			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-border-muted') : '',
+		horizontal: `relative bg-color-container ${level === 1 ? '' : ''}`
 	});
 
 	let childClasses = $derived(
@@ -106,13 +107,30 @@
 		)
 	);
 	let listItemClasses = $derived(classNames(listClasses[orientation!]));
+
+	const constructURL = (href?: string) => {
+		if (!copySearchParams || !href) {
+			return href;
+		}
+
+		const parameterString = new URL(window.location.href).search;
+		const target = new URL(href);
+		target.search = parameterString;
+
+		return target.toString();
+	};
 </script>
 
 <li class={listItemClasses}>
 	{#if hasChildren}
 		<div {id} class="flex items-center justify-between">
 			{#if href}
-				<a {href} class={textClasses} {...currentPage} onclick={() => onChange(id)}>
+				<a
+					href={constructURL(href)}
+					class={textClasses}
+					{...currentPage}
+					onclick={() => onChange(id)}
+				>
 					{title}
 				</a>
 			{:else}
@@ -146,7 +164,13 @@
 			{/if}
 		</div>
 	{:else}
-		<a {id} {href} class={textClasses} {...currentPage} onclick={() => onChange(id)}>
+		<a
+			{id}
+			href={constructURL(href)}
+			class={textClasses}
+			{...currentPage}
+			onclick={() => onChange(id)}
+		>
 			{title}
 		</a>
 	{/if}

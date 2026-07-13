@@ -190,8 +190,22 @@
 
 <Story name="Disabled">
 	{#snippet template(args)}
-		<div class="w-96">
+		<div class="flex w-96 flex-col gap-4">
 			<Input {...args} label="Disabled" name="disabled-input" disabled />
+			<Input
+				{...args}
+				label="Disabled with value"
+				name="disabled-value-input"
+				value="Prefilled value"
+				disabled
+			/>
+			<Input
+				{...args}
+				label="Disabled with placeholder"
+				name="disabled-placeholder-input"
+				placeholder="Placeholder text"
+				disabled
+			/>
 		</div>
 	{/snippet}
 </Story>
@@ -264,8 +278,61 @@
 	{/snippet}
 </Story>
 
+<!-- Long label, description and error text (all rendered via `{@html}`) to exercise wrapping
+	of the label row and the description/error paragraphs. -->
+<Story name="Long label / long error overflow">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Input
+				{...args}
+				label="This is an unusually long label that should wrap onto multiple lines within the fixed-width container to demonstrate how the label row behaves"
+				name="long-label-input"
+				value="some value"
+				error="This is a deliberately long error message that keeps going in order to show how the error paragraph wraps across several lines when the text is far longer than the width of the input."
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- An input with `type='textarea'` using the `rows` (set to 4),
+  `cols` (set to 40) and `wrap` attributes,
+	to show scrolling behaviour with long content. -->
+<Story name="Textarea with rows/wrap">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Input
+				{...args}
+				type="textarea"
+				label="Comments"
+				name="textarea-wrap-input"
+				rows={4}
+				cols={40}
+				wrap="hard"
+				value="This is a long piece of pre-filled content that stretches well beyond the visible height of the textarea so that its internal scrolling can be observed. Wrapping is set to 'hard', so line breaks are preserved in the submitted value."
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- With `format={null}` no formatting is applied on blur, so leading and trailing whitespace
+	is preserved (by default a text field trims it). -->
+<Story name="No-format field">
+	{#snippet template(args)}
+		<div class="w-96">
+			<Input
+				{...args}
+				label="Raw value"
+				name="no-format-input"
+				format={null}
+				description="Trailing and leading whitespace is preserved."
+			/>
+		</div>
+	{/snippet}
+</Story>
+
 <!-- You can facilitate autocompletion of input values by setting the `autocomplete` attribute
-([docs on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)).  -->
+([docs on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete))
+to indicate the type of value that should be entered.  -->
 <Story name="With autocomplete">
 	{#snippet template(args)}
 		<div class="w-96">

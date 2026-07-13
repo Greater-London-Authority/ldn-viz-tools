@@ -10,8 +10,9 @@
 	/**
 	 * The `<Header>` component appears at the top of a page.
 	 * It typically includes the app name, links to other pages (if the app has multiple pages), and a login/logout control (if the app requires authentication).
+	 *
 	 */
-	let { Story } = defineMeta({
+	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Header',
 		component: Header as any,
 		tags: ['autodocs'],
@@ -20,6 +21,11 @@
 			layout: 'fullscreen'
 		}
 	});
+</script>
+
+<script lang="ts">
+	import { Home } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 </script>
 
 <Story name="Default">
@@ -81,6 +87,74 @@
 					<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
 				</HeaderItem>
 			</HeaderRight>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- A very long title alongside a horizontal navigation menu. -->
+<Story name="Long title overflow">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>
+				A very long application title that keeps going and going to demonstrate overflow behaviour
+			</HeaderTitle>
+			<HeaderRight>
+				<HeaderItem>
+					<NavigationMenu ariaLabel="Main menu" items={subMenu} orientation="horizontal" />
+				</HeaderItem>
+			</HeaderRight>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- Many navigation links inside `HeaderRight`, to show how the flex row behaves when it
+	runs out of horizontal space. -->
+<Story name="Overflowing nav items">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>App title</HeaderTitle>
+			<HeaderRight>
+				<HeaderItem><a class="text-xs" href="/#">Overview</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Analysis</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Datasets</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Reports</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Dashboards</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Documentation</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Settings</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Notifications</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Help &amp; support</a></HeaderItem>
+				<HeaderItem><a class="text-xs" href="/#">Account</a></HeaderItem>
+			</HeaderRight>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- HeaderTitle stories -->
+
+<!--
+The `base` prop is prepended to construct the homepage link.
+Normally it is imported from `$app/paths` to link the the root,
+but here it is set to  `/app`, so the title links to `/app` rather than the default `/`. 
+(If you do this in a real app, wrap the link in `resolve()`)
+-->
+<Story name="Custom base path">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle base="/app">App title</HeaderTitle>
+		</Header>
+	{/snippet}
+</Story>
+
+<!-- The title can include an icon alongside the text. -->
+<Story name="Title with icon">
+	{#snippet template()}
+		<Header>
+			<HeaderTitle>
+				<span class="inline-flex items-center gap-2">
+					<Icon src={Home} theme="mini" class="h-5 w-5" aria-hidden="true" />
+					App title
+				</span>
+			</HeaderTitle>
 		</Header>
 	{/snippet}
 </Story>

@@ -9,6 +9,7 @@
 	 * for specific content. The button has a copied state to indicate the copy
 	 * was successful. The button will revert back to an uncopied state if
 	 * another copy button is clicked or after several seconds.
+	 *
 	 */
 
 	const { Story } = defineMeta({
@@ -86,6 +87,28 @@
 					<Icon src={HandThumbUp} theme="mini" class="ml-1 h-5 w-5" />
 				{/snippet}
 			</CopyButton>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Disabled">
+	{#snippet template(args)}
+		<CopyButton {...args} label="Copy to clipboard" disabled />
+	{/snippet}
+</Story>
+
+<!-- 
+As a wrapper around
+[Button](./?path=/docs/ui-components-buttons-button--documentation),
+the `CopyButton` accepts the same size variants. 
+-->
+<Story name="Size variants">
+	{#snippet template(args)}
+		<div class="flex items-center gap-2">
+			<CopyButton {...args} size="xs" label="Copy" />
+			<CopyButton {...args} size="sm" label="Copy" />
+			<CopyButton {...args} size="md" label="Copy" />
+			<CopyButton {...args} size="lg" label="Copy" />
 		</div>
 	{/snippet}
 </Story>

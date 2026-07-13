@@ -71,7 +71,7 @@
 		<div
 			style:width={table.widths.groupLabel}
 			style:background="white"
-			class="text-color-text-secondary"
+			class="text-color-text-muted"
 		>
 			{group.name.split(' ∩ ')[i]}
 		</div>

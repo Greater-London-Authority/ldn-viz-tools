@@ -5,13 +5,8 @@ import { page } from 'vitest/browser';
 import CopyButton from './CopyButton.svelte';
 
 describe('CopyButton', () => {
-	let writeTextMock: ReturnType<typeof vi.fn>;
-
 	beforeEach(() => {
 		// Mock the clipboard API for testing
-
-		writeTextMock = vi.fn();
-
 		Object.defineProperty(navigator, 'clipboard', {
 			value: {
 				writeText: vi.fn().mockImplementation(() => Promise.resolve())

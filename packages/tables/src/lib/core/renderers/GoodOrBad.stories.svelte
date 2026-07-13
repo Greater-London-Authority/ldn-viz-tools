@@ -1,8 +1,11 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import GoodOrBad from './GoodOrBad.svelte';
 
+	/**
+	 * The `GoodOrBad` component renders a table cell comparing a single value to a reference or benchmark value.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/GoodOrBad',
 		component: GoodOrBad,

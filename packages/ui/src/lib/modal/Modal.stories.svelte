@@ -22,6 +22,9 @@
 	let isOpenLightTheme = $state(false);
 	let isOpenWide = $state(false);
 	let isOpenButtons = $state(false);
+	let isOpenProgrammatic = $state(false);
+	let isOpenFull = $state(false);
+	let isOpenContentProps = $state(false);
 </script>
 
 <Story name="Default">
@@ -149,8 +152,8 @@
 			{/snippet}
 
 			{#snippet description()}
-				We can use the width prop to set different max-widths from xs though 7xl and full. Default
-				is md
+				We can use the width prop to set different max-widths from `xs` though `7xl` and `full`.
+				Default is `md`.
 			{/snippet}
 
 			{#snippet buttons()}
@@ -249,6 +252,55 @@
 
 			{#snippet description()}
 				This demonstrates how to use the Trigger component.
+			{/snippet}
+		</Modal>
+	{/snippet}
+</Story>
+
+<!-- The modal can be opened by binding `open` and toggling it externally, without passing any `trigger`. -->
+<Story name="Programmatically opened (no trigger)">
+	{#snippet template(args)}
+		<Button onclick={() => (isOpenProgrammatic = true)}>Open modal programmatically</Button>
+
+		<Modal {...args} bind:open={isOpenProgrammatic}>
+			{#snippet title()}
+				Opened without a trigger
+			{/snippet}
+
+			{#snippet description()}
+				This modal has no trigger snippet; it was opened by toggling the bound `open` prop from an
+				external button.
+			{/snippet}
+
+			{#snippet buttons()}
+				<Button variant="solid" onclick={() => (isOpenProgrammatic = false)}>Close</Button>
+			{/snippet}
+		</Modal>
+	{/snippet}
+</Story>
+
+<!-- 
+`contentProps` are passed through to the underlying `Dialog.Content`. Here they disable closing the modal by pressing Escape or clicking outside, so it can only be dismissed via the buttons.
+This is a bad user experience - don't do this in an actual app.
+-->
+<Story name="contentProps passthrough">
+	{#snippet template(args)}
+		<Modal
+			{...args}
+			bind:open={isOpenContentProps}
+			contentProps={{ escapeKeydownBehavior: 'ignore', interactOutsideBehavior: 'ignore' }}
+		>
+			{#snippet title()}
+				Passing contentProps
+			{/snippet}
+
+			{#snippet description()}
+				`contentProps` have been passed to the underlying `Dialog.Content` so that pressing Escape
+				or clicking outside will not close this modal. Use the button below instead.
+			{/snippet}
+
+			{#snippet buttons()}
+				<Button variant="solid" onclick={() => (isOpenContentProps = false)}>Close</Button>
 			{/snippet}
 		</Modal>
 	{/snippet}

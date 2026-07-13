@@ -3,9 +3,7 @@
 </script>
 
 <MapMarkerPlacement placement="follow">
-	<div
-		class="w-fit border border-color-ui-border-secondary bg-color-container-level-0 p-4 text-color-text-primary shadow"
-	>
+	<div class="w-fit border border-color-border-muted bg-color-container p-4 text-color-text shadow">
 		Following mouse.
 	</div>
 </MapMarkerPlacement>

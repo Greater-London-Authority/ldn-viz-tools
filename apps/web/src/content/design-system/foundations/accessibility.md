@@ -3,9 +3,11 @@ title: Accessibility
 description: Ensuring our work is useful for everyone
 section: Foundations
 navLabel: Accessibility
+heroImage: header-foundations-overflow.svg
+thumbnail: cta-foundations-1.svg
 ---
 
-We are dedicated to creating inclusive and accessible digital experiences for all users. Accessible, inclusive design is closely related to usability, providing varied and flexible ways for users to interact - options which can be useful for everyone
+<p class="body-lg">We are dedicated to creating inclusive and accessible digital experiences for all users. Accessible, inclusive design is closely related to usability, providing varied and flexible ways for users to interact - options which can be useful for everyone</p>
 
 Since September 2018, all public sector bodies have been required by law to ensure our sites and apps can be used by those with disabilities. This means meeting the Web Content and Accessibility Guidelines (WCAG 2.1). These are a set of internationally recognised, testable guidelines based on four guiding principles of accessibility - digital products must be: Perceivable, Operable, Usable and Robust.
 

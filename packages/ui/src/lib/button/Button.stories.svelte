@@ -1,8 +1,8 @@
 <script module lang="ts">
+	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from './Button.svelte';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { ArrowDownCircle, Camera } from '@steeze-ui/heroicons';
 	import type { ButtonProps } from './types.js';
 
 	const { Story } = defineMeta({
@@ -157,5 +157,39 @@
 			Download as PNG
 			<Icon src={Camera} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
 		</Button>
+	{/snippet}
+</Story>
+
+<Story name="All emphases">
+	{#snippet template(args)}
+		<div class="flex items-end space-x-2">
+			<Button {...args} emphasis="primary">Primary</Button>
+			<Button {...args} emphasis="secondary">Secondary</Button>
+
+			<Button {...args} emphasis="caution">Caution</Button>
+
+			<Button {...args} emphasis="positive">Positive</Button>
+			<Button {...args} emphasis="negative">Negative</Button>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="As link (href)">
+	{#snippet template(args)}
+		<Button {...args as any} href="https://www.london.gov.uk">Visit london.gov.uk</Button>
+	{/snippet}
+</Story>
+
+<Story name="Disabled link">
+	{#snippet template(args)}
+		<Button {...args as any} href="https://www.london.gov.uk" disabled>Disabled link</Button>
+	{/snippet}
+</Story>
+
+<Story name="With type='submit'">
+	{#snippet template(args)}
+		<form onsubmit={(e) => e.preventDefault()}>
+			<Button {...args as any} type="submit">Submit</Button>
+		</form>
 	{/snippet}
 </Story>

@@ -4,10 +4,10 @@
 	}
 
 	const typeClasses: TypeClasses = {
-		Notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
-		Success: 'bg-color-ui-background-positive border-color-ui-border-positive',
-		Warning: 'bg-color-ui-background-caution border-color-ui-border-caution',
-		Error: 'bg-color-ui-background-negative border-color-ui-border-negative'
+		Notice: 'bg-color-surface-accent-muted border-color-surface-accent',
+		Success: 'bg-color-surface-positive-muted border-color-surface-positive',
+		Warning: 'bg-color-surface-caution-muted border-color-surface-caution',
+		Error: 'bg-color-surface-negative-muted border-color-surface-negative'
 	};
 </script>
 
@@ -24,15 +24,10 @@
 
 	let { message }: Props = $props();
 
-	let classes = $derived(typeClasses[message.type] ?? 'bg-color-ui-background-neutral');
+	let classes = $derived(typeClasses[message.type] ?? 'bg-color-surface-neutral-muted');
 </script>
 
-<div
-	role="alert"
-	id={message.id}
-	class="text-color-text-primary shadow-lg"
-	out:fade={{ duration: 100 }}
->
+<div role="alert" id={message.id} class="text-color-text shadow-lg" out:fade={{ duration: 100 }}>
 	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
 		<div class="mb-1 flex items-center justify-between text-lg font-bold">
 			{message.type}

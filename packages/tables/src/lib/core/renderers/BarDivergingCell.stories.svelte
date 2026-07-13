@@ -1,8 +1,13 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import { theme } from '@ldn-viz/ui';
 	import BarDivergingCell from './BarDivergingCell.svelte';
 
+	/**
+	 * The `BarDivergingCell` component renders a table cell representing a numerical value as a bar, where the length of the bar encodes the value.
+	 * There is a vertical line at x=0, and the bar color indicates whether the value is greater than or less than 0.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/BarDivergingCell',
 		component: BarDivergingCell,
@@ -27,30 +32,40 @@
 				{...args}
 				value={-2}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
 			<BarDivergingCell
 				{...args}
 				value={-1}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
 			<BarDivergingCell
 				{...args}
 				value={+1}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
 			<BarDivergingCell
 				{...args}
 				value={+2}
 				extent={[-2, +2]}
-				positiveColor="pink"
-				negativeColor="gold"
+				positiveColor={theme.tokenNameToValue('surface.positive')}
+				negativeColor={theme.tokenNameToValue('surface.negative')}
 			/>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Changing background colors">
+	{#snippet template(args)}
+		<div class="flex w-36 flex-col">
+			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} backgroundColor="lightGrey" />
+			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} backgroundColor="aliceblue" />
+			<BarDivergingCell {...args} value={-1} extent={[-2, +2]} backgroundColor="cornsilk" />
 		</div>
 	{/snippet}
 </Story>

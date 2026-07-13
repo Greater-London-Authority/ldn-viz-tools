@@ -1,9 +1,12 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import { scaleBand, scaleOrdinal } from 'd3-scale';
 	import CategoricalTick from './CategoricalTick.svelte';
 
+	/**
+	 * The `CategoricalTick` component encodes a single categorical value redundantly as both the position and color of a tick.
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Renderers/CategoricalTick',
 		component: CategoricalTick,

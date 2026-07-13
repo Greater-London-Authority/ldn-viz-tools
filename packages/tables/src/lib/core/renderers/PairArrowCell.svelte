@@ -6,6 +6,7 @@
 	 */
 
 	import type { PairArrowCellProps } from '$lib/core/renderers/PairArrowCellProps';
+	import { theme } from '@ldn-viz/ui';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 	import { getVal } from '../../getVal';
 
@@ -13,8 +14,8 @@
 		value,
 		extent = [0, 1],
 		contextVals = [0],
-		positiveColor = 'blue',
-		negativeColor = 'red',
+		positiveColor = theme.tokenNameToValue('surface.positive'),
+		negativeColor = theme.tokenNameToValue('surface.negative'),
 		width = 100,
 		..._rest
 	}: PairArrowCellProps = $props();

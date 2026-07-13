@@ -49,7 +49,7 @@
 </script>
 
 <div
-	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary py-2')}
+	class={classNames(topRuleClass, bottomRuleClass, 'border-color-border py-2')}
 	style:width={tableWidth}
 	role="rowgroup"
 >

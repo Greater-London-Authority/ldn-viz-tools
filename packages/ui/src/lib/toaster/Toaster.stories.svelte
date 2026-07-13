@@ -1,8 +1,36 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import Toaster from './Toaster.svelte';
 
+	/**
+	 * The `<Toaster>` component acts as a container for short messages that appear temporarily ("toasts").
+	 * It can be included in the `+layout.svelte` file to avoid needing to add it to each route separately.
+	 *
+	 * On a page that includes a `<Toaster>` component, you can create a toast using the `newToastMessage()` function,
+	 * then display it by calling `.post()` on the object it returns; calling `.post()` repeatedly will refresh the toast.
+	 * You can remove a toast by calling `.remove()`.
+	 *
+	 * ```js
+	 *  // there should be an at-sign in the package name, but JSDoc chokes on it
+	 * import { newToastMessage, ToastType, ToastMessageOptions } from 'ldn-viz/ui';
+	 *
+	 * const staticToast = newToastMessage('This is a warning!', {
+	 *	// Type: ToastMessageOptions
+	 *	// An id is rarely needed but prevents HMR duplicates.
+	 *	id: 'a-warning-toast',
+	 *	type: ToastType.Warning,
+	 *	closeButton: true,
+	 * timeToLive: 10 * 1000, // in ms, so this is 10 seconds
+	 *});
+	 *
+	 * // calling .post() repeatedly on same toast object will refresh it, rather than creating duplicate toasts
+	 * staticToast.post();
+	 * staticToast.post();
+	 *
+	 *```
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Toaster',
 		component: Toaster,
@@ -51,6 +79,14 @@
 	const toastNotice = () => {
 		noticeNumber++;
 		newToastMessage(`A notice! Number ${noticeNumber}`).post();
+	};
+
+	// Rapidly posts several distinct toasts to demonstrate the MAX_MESSAGES=3 cap:
+	// only the newest are shown, older ones are pushed down and hidden.
+	const toastMany = () => {
+		for (let i = 0; i < 5; i++) {
+			toastNotice();
+		}
 	};
 
 	const toastSuccess = () => {
@@ -194,6 +230,33 @@ Note that MAX_MESSAGES=3; pressing the 'Notice' button quickly to create more me
 </Story>
 
 <!--
+`MAX_MESSAGES=3`: posting more than three toasts at once shows only the newest;
+older messages are pushed down and hidden.
+-->
+<Story name="Max messages stacking">
+	{#snippet template()}
+		<div class="flex gap-6">
+			<Button onclick={toastMany}>Post 5 toasts at once</Button>
+		</div>
+		<Toaster position="TopRight" />
+	{/snippet}
+</Story>
+
+<!--
+The `classes` prop is appended to the container `<div>`, letting you add custom
+styling (here a padded, rounded, shadowed wrapper) on top of the positioning.
+Consider carefully whether overriding the default styles is actually a good idea.
+-->
+<Story name="Custom classes">
+	{#snippet template()}
+		<div class="flex gap-6">
+			<Button onclick={toastNotice}>Notice</Button>
+		</div>
+		<Toaster position="TopRight" classes="rounded-lg bg-color-container p-3 shadow-2xl" />
+	{/snippet}
+</Story>
+
+<!--
 Calling `.post()` repeatedly on same toast object will refresh it, rather than creating duplicate toasts.
 -->
 
@@ -239,7 +302,7 @@ Calling `.post()` repeatedly on same toast object will refresh it, rather than c
 				</div>
 
 				{#if secondsRemaining > 0}
-					<div class="text-color-text-secondary">
+					<div class="text-color-text-muted">
 						Toast will remain visible for <strong>{secondsRemaining.toFixed(1)}s</strong>
 					</div>
 				{/if}
