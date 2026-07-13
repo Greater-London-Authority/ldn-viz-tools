@@ -217,7 +217,7 @@
 
 			{
 				short_label: 'current',
-				label: 'Actual',
+				label: 'Current',
 
 				cell: {
 					renderer: 'PairArrow',
@@ -227,22 +227,6 @@
 					extent: [0, 250],
 
 					axisRenderer: 'PairArrowAxis'
-				}
-			},
-
-			{
-				short_label: 'percentage_change',
-				label: '% Change',
-				domainType: 'MinToMax',
-
-				cell: {
-					renderer: 'BarDivergingCell',
-					formatString: ',.0f',
-					alignText: 'right',
-					extent: [-140, +140],
-
-					axisRenderer: 'BarDivergingAxis',
-					numTicks: 5
 				}
 			}
 		]
@@ -537,6 +521,52 @@
 	tableControls.rawData = data;
 	tableControls.columnSpec = tableSpecControls.columns;
 	tableControls.tableWidth = FIXED_WIDTH;
+
+	/*********************************/
+	// Leaves `showHeaderTopRule` at its default (true) and explicitly enables
+	// `showHeaderBottomRule`, so both the `border-t` and `border-b` branches render.
+	const tableSpecRules = {
+		showHeaderTopRule: true,
+		showHeaderBottomRule: true,
+
+		columns: [
+			{
+				short_label: 'metric',
+				label: 'Metric',
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'previous',
+				label: 'Previous',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			},
+
+			{
+				short_label: 'current',
+				label: 'Current',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			}
+		]
+	};
+
+	const tableRules = new TableState(tableSpecRules);
+	tableRules.rawData = data;
+	tableRules.columnSpec = tableSpecRules.columns;
+	tableRules.tableWidth = FIXED_WIDTH;
 </script>
 
 <Story name="Default">
@@ -628,5 +658,12 @@
 			tableWidth={FIXED_WIDTH}
 			allowSorting={true}
 		/>
+	{/snippet}
+</Story>
+
+<!-- Renders both the top rule (`border-t`) and bottom rule (`border-b`) around the header -->
+<Story name="With top and bottom rules">
+	{#snippet template()}
+		<TableHeader {data} tableSpec={tableSpecRules} table={tableRules} tableWidth={FIXED_WIDTH} />
 	{/snippet}
 </Story>
