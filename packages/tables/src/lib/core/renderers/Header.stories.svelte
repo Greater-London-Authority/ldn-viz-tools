@@ -13,7 +13,7 @@
 
 		argTypes: {
 			order: {
-				options: ['asc', 'desc', undefined],
+				options: ['ascending', 'descending', undefined],
 				control: { type: 'radio' }
 			}
 		},
@@ -67,5 +67,50 @@
 <Story name="With a hint component - modal">
 	{#snippet template()}
 		<Header label="A column" hintComponent={HeaderModalDemo} hintType="modal" />
+	{/snippet}
+</Story>
+
+<!-- With `allowSorting` the header renders as a <button> with sort icons that depend on `order`. -->
+<Story name="Sortable - ascending">
+	{#snippet template()}
+		<Header label="Age" allowSorting={true} order="ascending" />
+	{/snippet}
+</Story>
+
+<Story name="Sortable - descending">
+	{#snippet template()}
+		<Header label="Age" allowSorting={true} order="descending" />
+	{/snippet}
+</Story>
+
+<!-- With no `order` set, the neutral up/down chevron icon is shown. -->
+<Story name="Sortable - unsorted">
+	{#snippet template()}
+		<Header label="Age" allowSorting={true} />
+	{/snippet}
+</Story>
+
+<!-- `superscriptText` triggers the two-line layout branch. -->
+<Story name="With superscriptText">
+	{#snippet template()}
+		<Header label="Age" superscriptText="Years" />
+	{/snippet}
+</Story>
+
+<!-- The `alignHeader` prop controls horizontal alignment of the heading. -->
+<Story name="Alignment variants">
+	{#snippet template()}
+		<div class="flex w-64 flex-col gap-2">
+			<Header label="Left aligned" alignHeader="left" />
+			<Header label="Center aligned" alignHeader="center" />
+			<Header label="Right aligned" alignHeader="right" />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- A custom text `color` can be applied to the heading. -->
+<Story name="Custom color">
+	{#snippet template()}
+		<Header label="Age" color="rebeccapurple" />
 	{/snippet}
 </Story>

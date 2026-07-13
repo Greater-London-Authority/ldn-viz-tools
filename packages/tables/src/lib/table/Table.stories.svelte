@@ -313,9 +313,9 @@
 	{/snippet}
 </Story>
 
-<Story name="Export buttons">
+<Story name="No Export buttons">
 	{#snippet template()}
-		<Table {data} {tableSpec} dataDownloadButton imageDownloadButton />
+		<Table {data} {tableSpec} dataDownloadButton={false} imageDownloadButton={false} />
 	{/snippet}
 </Story>
 
@@ -392,7 +392,6 @@
 		/>
 	{/snippet}
 </Story>
-<!-- TODO: add example of filtering -->
 
 <Story name="Externally implemented filtering">
 	{#snippet template()}
@@ -422,9 +421,42 @@
 	{/snippet}
 </Story>
 
-<!-- tableSpecCustomHeaderColors -->
 <Story name="Coloured headers">
 	{#snippet template()}
 		<Table {data} tableSpec={tableSpecCustomHeaderColors} fixedTableWidth={500} bind:page />
+	{/snippet}
+</Story>
+
+<!-- With no data, the table falls back to its empty state (the `tableObj.extents` guard) -->
+<Story name="Empty data">
+	{#snippet template()}
+		<Table data={[]} {tableSpec} />
+	{/snippet}
+</Story>
+
+<!-- The `source`, `byline`, and `note` props are forwarded to the footer -->
+<Story name="Footer metadata">
+	{#snippet template()}
+		<Table
+			{data}
+			{tableSpec}
+			source="Source: made-up data"
+			byline="Compiled by the GLA"
+			note="These are only guesses!"
+		/>
+	{/snippet}
+</Story>
+
+<!-- Sorting, row grouping, and column hiding controls all enabled at once -->
+<Story name="All controls enabled">
+	{#snippet template()}
+		<Table {data} {tableSpec} allowSorting allowRowGrouping allowColumnHiding />
+	{/snippet}
+</Story>
+
+<!-- Restrict data downloads to CSV only, and hide the image download button entirely -->
+<Story name="Restricted download formats">
+	{#snippet template()}
+		<Table {data} {tableSpec} dataDownloadButton={['CSV']} imageDownloadButton={false} />
 	{/snippet}
 </Story>

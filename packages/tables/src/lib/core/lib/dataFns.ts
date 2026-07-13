@@ -335,6 +335,10 @@ export function mergeData(data: any[], columns: any[]) {
 			} else {
 				newRow[fieldName] = d[fieldName];
 			}
+
+			for (const contextFieldName of col.cell.contextFields || []) {
+				newRow[contextFieldName] = d[contextFieldName];
+			}
 		}
 		return newRow;
 	});
