@@ -225,6 +225,19 @@
 	};
 	randomlySelectRows();
 
+	let dataSubset2: Record<string, string | number>[] = $state([]);
+	const randomlySelectRows2 = () => {
+		const selectedEntries = [];
+
+		for (let i = 0; i < 5; i++) {
+			const randomIndex = Math.floor(Math.random() * data.length);
+			selectedEntries.push(data[randomIndex]);
+		}
+
+		dataSubset2 = selectedEntries;
+	};
+	randomlySelectRows2();
+
 	interface Props {
 		page?: number;
 	}
@@ -321,6 +334,13 @@
 <Story name="Row Grouping">
 	{#snippet template()}
 		<Table {data} {tableSpec} allowRowGrouping />
+	{/snippet}
+</Story>
+
+<Story name="Row grouping - with data updates">
+	{#snippet template()}
+		<Button onclick={randomlySelectRows2}>Update</Button>
+		<Table data={dataSubset2} {tableSpec} allowRowGrouping />
 	{/snippet}
 </Story>
 

@@ -18,6 +18,6 @@ TOOD: restore once component is migrated
 
 	<h2 class="text-large font-bold">Aggregate Values</h2>
 
-	<MergeValuesControl groups={col.groups} onGroupingsChanged={() => table.setMerged()} />
+	<MergeValuesControl groups={col.groups} />
 </Popover>
 -->

@@ -1,13 +1,20 @@
-<script>
+<script lang="ts">
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
+	import type { Group } from '$lib/core/lib/types';
 	import ColGroupSpacer from '../../cells/ColGroupSpacer.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
-	let { group, table } = $props();
+	interface Props {
+		group: Group;
+		table: TableState;
+	}
+
+	let { group, table }: Props = $props();
 </script>
 
 <Scaffolding {table}>
 	{#snippet dataColumns()}
-		{#each table.columnSpec as col, i (col)}
+		{#each table.resolvedColumnSpec as col, i (col)}
 			{#if !table.visibleFields || table.visibleFields.includes(col.short_label)}
 				<div style:width={col.computedWidth + 'px'} class="was-td">
 					{#if col.group && col.group.renderer}

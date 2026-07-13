@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import { sum } from 'd3-array';
 	import type { Snippet } from 'svelte';
 
 	interface ScaffoldingProps {
-		table: TableData;
+		table: TableState;
 		groupControl?: Snippet;
 		groupSizes?: Snippet;
 		dataColumns?: Snippet;
