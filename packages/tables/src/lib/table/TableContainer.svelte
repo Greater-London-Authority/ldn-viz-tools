@@ -1,9 +1,10 @@
 <script lang="ts">
 	/**
-	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and description.
+	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and footer (source/byline/note).
 	 * It also provides controls such as data/image download buttons.
 	 *
-	 * **Note** Similar in structure and functionality to the ChartContainer in @ldn-viz/charts.
+	 * **Note** Similar in structure and functionality to the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
+	 * in @ldn-viz/charts.
 	 * 	@component
 	 */
 

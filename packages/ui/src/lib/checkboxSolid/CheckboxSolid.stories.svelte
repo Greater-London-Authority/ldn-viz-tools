@@ -5,9 +5,12 @@
 	import CheckboxSolid from './CheckboxSolid.svelte';
 
 	/**
-	 * The `<CheckboxSolid>` component provides a checkbox control styled as a solid button. It is intended to be used for selecting multiple options from a small list.
-	 * It is generally used indirectly vis the [CheckboxGroupSolid](./?path=/docs/ui-components-checkboxes-checkboxgroupsolid--documentation) component.
+	 * The `<CheckboxSolid>` component provides a checkbox control as a Boolean input, styled as a button. It is intended to be used for selecting multiple options from a small list.
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
 	 *
+	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
+	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
+	 * Consider using a [Switch](./?path=/docs/ui-components-switch--documentation).
 	 */
 
 	const { Story } = defineMeta({
