@@ -4,9 +4,11 @@
 	import TableContainer from './TableContainer.svelte';
 
 	/**
-	 * The `TableContainer` is a wrapper around a table that adds additional information such as a
-	 * title, subtitle, and footer (source/byline/note). It also provides controls such as
-	 * data/image download buttons. The table itself is supplied via the `table` snippet.
+	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and footer (source/byline/note).
+	 * It also provides controls such as data/image download buttons.
+	 *
+	 * **Note** Similar in structure and functionality to the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
+	 * in @ldn-viz/charts.
 	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/TableContainer',

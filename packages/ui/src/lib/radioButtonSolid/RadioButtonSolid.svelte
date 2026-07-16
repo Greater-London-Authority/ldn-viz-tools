@@ -1,8 +1,9 @@
 <script lang="ts">
 	/**
-	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs or selecting one option from a small number of alternatives.
+	 * The `RadioButtonSolid` component provides a single button styled radio input for switching between tabs or selecting one option from a small number of alternatives.
+	 * It is normally used indirectly via the [RadioButtonGroupSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation); these stories exercise the atom on its own.
 	 *
-	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](.-components-radiobuttons-radiobuttongroup--documentation).
+	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation).
 	 * @component
 	 */
 
