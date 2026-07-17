@@ -6,7 +6,7 @@
 	type Props = Tooltip.RootProps & {
 		hintLabel?: string;
 		trigger?: Snippet<[Record<string, any>]>;
-		open: boolean;
+		open?: boolean;
 
 		/**
 		 * Defaults to `true`, which causes the Tooltip to close as the user

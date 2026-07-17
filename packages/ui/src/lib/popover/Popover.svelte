@@ -11,7 +11,7 @@
 		hintLabel?: string;
 		title?: Snippet;
 		trigger?: Snippet<[Record<string, any>]>;
-		open: boolean;
+		open?: boolean;
 	};
 
 	let {

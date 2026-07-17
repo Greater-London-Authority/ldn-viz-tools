@@ -32,7 +32,7 @@
 			| 'full';
 		children: Snippet;
 		trigger?: Snippet<[Record<string, any>]>;
-		open: boolean;
+		open?: boolean;
 	}
 
 	let {
