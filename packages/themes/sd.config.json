@@ -42,6 +42,16 @@
 					"filter": "cssSpacingFilter"
 				},
 				{
+					"destination": "grid-spacing.css",
+					"format": "custom/grid-spacing",
+					"filter": "cssGridSpacingFilter"
+				},
+				{
+					"destination": "flow.css",
+					"format": "custom/flow",
+					"filter": "cssFlowFilter"
+				},
+				{
 					"destination": "typography.css",
 					"format": "custom/typography",
 					"filter": "cssTypographyFilter"
@@ -67,6 +77,16 @@
 					"destination": "tw-extend/spacing.cjs",
 					"format": "tw/css-spacing-variables",
 					"filter": "twSpacingFilter"
+				},
+				{
+					"destination": "tw-extend/gridspacing.cjs",
+					"format": "tw/css-grid-spacing-variables",
+					"filter": "twGridSpacingFilter"
+				},
+				{
+					"destination": "tw-extend/flow.cjs",
+					"format": "tw/css-flow-variables",
+					"filter": "twFlowFilter"
 				}
 			]
 		},

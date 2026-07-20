@@ -70,10 +70,12 @@ StyleDictionary.registerParser({
 				['primitive.mode 1.', 'primitive.'],
 				['primitive.light-mode.', 'primitive.'],
 				['primitive.dark-mode.', 'primitive.'],
+				['primitive.base.', 'primitive.'],
 				['primitive.sm.', 'primitive.'],
 				['primitive.md.', 'primitive.'],
 				['primitive.lg.', 'primitive.'],
 				['primitive.xl.', 'primitive.'],
+				['primitive.2xl.', 'primitive.'],
 				['focus ring', 'focus-ring']
 			];
 
@@ -100,6 +102,7 @@ StyleDictionary.registerParser({
 				'semantic-color': 'mode',
 				'semantic-spacing': 'spacing',
 				'semantic-typography': 'typography',
+				'semantic-flow': 'flow',
 				'custom-shadow': 'shadow',
 				'light-mode': 'light',
 				'dark-mode': 'dark'
@@ -158,6 +161,8 @@ const conditionsColorModeLight = [{ category: 'mode', type: 'light' }];
 const conditionsColorModeDark = [{ category: 'mode', type: 'dark' }];
 const conditionsSpacing = [{ category: 'spacing' }];
 const conditionsTypography = [{ category: 'typography' }];
+const conditionsFlow = [{ category: 'flow' }];
+const conditionsGridSpacing = [{ category: 'grid-spacing' }];
 const conditionsTw = [
 	...conditionsColorModeLight,
 	{
@@ -176,7 +181,11 @@ const conditionsJs = [
 	}
 ];
 const conditionsShadow = [
-	{ category: { not: ['primitive', 'mode', 'spacing', 'typography', 'focus ring'] } }
+	{
+		category: {
+			not: ['focus ring', 'spacing', 'primitive', 'mode', 'typography', 'flow', 'grid-spacing']
+		}
+	}
 ];
 
 // REGISTER THE CUSTOM FILTERS USING OUR MATCHING CONDITIONS
@@ -202,6 +211,16 @@ StyleDictionary.registerFilter({
 });
 
 StyleDictionary.registerFilter({
+	name: 'cssGridSpacingFilter',
+	filter: (token) => createFilter(conditionsGridSpacing)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'cssFlowFilter',
+	filter: (token) => createFilter(conditionsFlow)(token)
+});
+
+StyleDictionary.registerFilter({
 	name: 'cssTypographyFilter',
 	filter: (token) => createFilter(conditionsTypography)(token)
 });
@@ -214,6 +233,16 @@ StyleDictionary.registerFilter({
 StyleDictionary.registerFilter({
 	name: 'twSpacingFilter',
 	filter: (token) => createFilter(conditionsSpacing)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'twFlowFilter',
+	filter: (token) => createFilter(conditionsFlow)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'twGridSpacingFilter',
+	filter: (token) => createFilter(conditionsGridSpacing)(token)
 });
 
 StyleDictionary.registerFilter({
@@ -274,18 +303,6 @@ StyleDictionary.registerTransform({
 	}
 });
 
-// //When generating the tokens for documentation transform the name to drop the mode and conform to semantic naming
-// StyleDictionary.registerTransform({
-// 	name: 'docsName',
-// 	type: transformTypes.name,
-// 	filter: (token) => {
-// 		return token.path[0] === 'mode';
-// 	},
-// 	transform: (token) => {
-// 		return transformString(token.name, 'color', /.*(mode-(dark|light))/);
-// 	}
-// });
-
 /*=========================================================
   CUSTOM FORMATS
 */
@@ -328,6 +345,40 @@ StyleDictionary.registerFormat({
 	format({ dictionary }) {
 		return `module.exports = {
         ${dictionary.allTokens.map(formatTailwindSpacing).join(',\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format that generates tailwind flow config based on css variables
+ */
+
+const formatTailwindFlow = (token) => {
+	return `  "flow-${token.attributes.type}": "var(--${token.name}, ${token.value / 16}rem)"`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'tw/css-flow-variables',
+	format({ dictionary }) {
+		return `module.exports = {
+        ${dictionary.allTokens.map(formatTailwindFlow).join(',\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format that generates tailwind gridSpacing config based on css variables
+ */
+
+const formatTailwindGridSpacing = (token) => {
+	return `  "${token.name}": "var(--${token.name}, ${token.value / 16}rem)"`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'tw/css-grid-spacing-variables',
+	format({ dictionary }) {
+		return `module.exports = {
+        ${dictionary.allTokens.map(formatTailwindGridSpacing).join(',\n')}
       }`;
 	}
 });
@@ -396,6 +447,38 @@ StyleDictionary.registerFormat({
 	format({ dictionary }) {
 		return `:root {
         ${dictionary.allTokens.map(formatSpacing).join(';\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format for flow
+ */
+const formatFlow = (token) => {
+	return ` --flow-${token.attributes.type}: ${token.value / 16}rem`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'custom/flow',
+	format({ dictionary }) {
+		return `:root {
+        ${dictionary.allTokens.map(formatFlow).join(';\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format for grid-spacing
+ */
+const formatGridSpacing = (token) => {
+	return ` --${token.name}: ${token.value / 16}rem`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'custom/grid-spacing',
+	format({ dictionary }) {
+		return `:root {
+        ${dictionary.allTokens.map(formatGridSpacing).join(';\n')}
       }`;
 	}
 });
