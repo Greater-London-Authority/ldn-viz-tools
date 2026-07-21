@@ -16,50 +16,50 @@ module.exports = {
 			marginBottom: 'var(--typography-spacing-sm)'
 		},
 		':where(h2):not(:where(.not-prose, .not-prose *))': {
-			fontWeight: 'var(--title-lg-font-weight)',
-			letterSpacing: 'var(--title-lg-letter-spacing)',
-			fontSize: 'var(--title-lg-font-size)',
-			lineHeight: 'var(--title-lg-line-height)',
+			fontWeight: 'var(--title-1-font-weight)',
+			letterSpacing: 'var(--title-1-letter-spacing)',
+			fontSize: 'var(--title-1-font-size)',
+			lineHeight: 'var(--title-1-line-height)',
 			marginTop: 'var(--typography-spacing-3xl)',
 			marginBottom: 'var(--typography-spacing-md)'
 		},
 		':where(h3):not(:where(.not-prose, .not-prose *))': {
-			fontWeight: 'var(--title-md-font-weight)',
-			letterSpacing: 'var(--title-md-letter-spacing)',
-			fontSize: 'var(--title-md-font-size)',
-			lineHeight: 'var(--title-md-line-height)',
+			fontWeight: 'var(--title-2-font-weight)',
+			letterSpacing: 'var(--title-2-letter-spacing)',
+			fontSize: 'var(--title-2-font-size)',
+			lineHeight: 'var(--title-2-line-height)',
 			marginTop: 'var(--typography-spacing-xl)',
 			marginBottom: 'var(--typography-spacing-xs)'
 		},
 		':where(h4):not(:where(.not-prose, .not-prose *))': {
-			fontWeight: 'var(--title-sm-font-weight)',
-			letterSpacing: 'var(--title-sm-letter-spacing)',
-			fontSize: 'var(--title-sm-font-size)',
-			lineHeight: 'var(--title-sm-line-height)',
+			fontWeight: 'var(--title-3-font-weight)',
+			letterSpacing: 'var(--title-3-letter-spacing)',
+			fontSize: 'var(--title-3-font-size)',
+			lineHeight: 'var(--title-3-line-height)',
 			marginTop: 'var(--typography-spacing-xs)',
 			marginBottom: '0'
 		},
 		':where(h5):not(:where(.not-prose, .not-prose *))': {
-			fontWeight: 'var(--title-xs-font-weight)',
-			letterSpacing: 'var(--title-xs-letter-spacing)',
-			fontSize: 'var(--title-xs-font-size)',
-			lineHeight: 'var(--title-xs-line-height)',
+			fontWeight: 'var(--title-4-font-weight)',
+			letterSpacing: 'var(--title-4-letter-spacing)',
+			fontSize: 'var(--title-4-font-size)',
+			lineHeight: 'var(--title-4-line-height)',
 			marginTop: 'var(--typography-spacing-xs)',
 			marginBottom: '0'
 		},
 		':where(p.lead):not(:where(.not-prose, .not-prose *))': {
-			fontWeight: 'var(--body-lg-font-weight)',
-			letterSpacing: 'var(--body-lg-letter-spacing)',
-			fontSize: 'var(--body-lg-font-size)',
-			lineHeight: 'var(--body-lg-line-height)',
+			fontWeight: 'var(--lead-font-weight)',
+			letterSpacing: 'var(--lead-letter-spacing)',
+			fontSize: 'var(--lead-font-size)',
+			lineHeight: 'var(--lead-line-height)',
 			marginTop: 'var(--typography-spacing-md)',
 			marginBottom: 'var(--typography-spacing-md)'
 		},
 		':where(p):not(:where(.not-prose, .not-prose *))': {
-			fontWeight: 'var(--body-md-font-weight)',
-			letterSpacing: 'var(--body-md-letter-spacing)',
-			fontSize: 'var(--body-md-font-size)',
-			lineHeight: 'var(--body-md-line-height)',
+			fontWeight: 'var(--body-font-weight)',
+			letterSpacing: 'var(--body-letter-spacing)',
+			fontSize: 'var(--body-font-size)',
+			lineHeight: 'var(--body-line-height)',
 			marginTop: 'var(--typography-spacing-md)',
 			marginBottom: 'var(--typography-spacing-md)'
 		},
@@ -149,8 +149,8 @@ module.exports = {
 			paddingInlineStart: 'var(--typography-spacing-md)'
 		},
 		':where(blockquote p):not(:where(.not-prose, .not-prose *))': {
-			fontSize: 'var(--body-lg-font-size)',
-			lineHeight: 'var(--body-lg-line-height)'
+			fontSize: 'var(--lead-font-size)',
+			lineHeight: 'var(--lead-line-height)'
 		},
 		':where(blockquote:has(+ cite)):not(:where(.not-prose, .not-prose *))': {
 			marginBottom: 'var(--typography-spacing-xs)'
@@ -165,7 +165,7 @@ module.exports = {
 			marginTop: 'var(--typography-spacing-3xl)',
 			marginBottom: 'var(--typography-spacing-3xl)',
 			fontSize: 'var(--body-sm-font-size)',
-			lineHeight: 'var(--body-md-line-height)',
+			lineHeight: 'var(--body-line-height)',
 			width: '100%',
 			tableLayout: 'auto'
 		},
@@ -196,7 +196,7 @@ module.exports = {
 		':where(code):not(:where(.not-prose, .not-prose *, [data-rehype-pretty-code-figure] *))': {
 			fontFamily: 'monospace',
 			padding: 'var(--typography-spacing-xxs) var(--typography-spacing-xs)',
-			fontSize: 'var(--body-xs-font-size)',
+			fontSize: 'var(--caption-font-size)',
 			backgroundColor: 'rgba(229, 229, 229, 0.35)',
 			marginBottom: 'var(--typography-spacing-md)'
 		}

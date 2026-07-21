@@ -16,25 +16,25 @@ module.exports = {
 		marginBottom: 'var(--spacing-md-em)',
 		sibling: { marginTop: 0 }
 	},
-	'title-lg': {
+	'title-1': {
 		marginTop: 'var(--spacing-3xl-em)',
 		marginBottom: 'var(--spacing-md-em)',
 		sibling: { marginTop: 0 },
 		subtitleAfter: { marginBottom: '0.1em' }
 	},
-	'title-md': {
+	'title-2': {
 		marginTop: 'var(--spacing-xl-em)',
 		marginBottom: 'var(--spacing-xs-em)',
 		sibling: { marginTop: 0 },
 		subtitleAfter: { marginBottom: '0.1em' }
 	},
-	'title-sm': {
+	'title-3': {
 		marginTop: 'var(--spacing-xl-em)',
 		marginBottom: 'var(--spacing-xs-em)',
 		sibling: { marginTop: 0 },
 		subtitleAfter: { marginBottom: '0.1em' }
 	},
-	'title-xs': {
+	'title-4': {
 		marginTop: 'var(--spacing-xl-em)',
 		marginBottom: 'var(--spacing-xs-em)',
 		sibling: { marginTop: 0 },

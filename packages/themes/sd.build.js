@@ -283,7 +283,14 @@ StyleDictionary.registerTransform({
 	name: 'typography/unitless',
 	type: transformTypes.value,
 	filter: (token) => {
-		const unitlessDimensions = ['lineheight', 'font-weight', 'weight', 'letterspacing'];
+		const unitlessDimensions = [
+			'lineheight',
+			'line-height',
+			'font-weight',
+			'weight',
+			'letterspacing',
+			'letter-spacing'
+		];
 		return unitlessDimensions.some((i) => token.path.includes(i));
 	},
 	transform: (token) => {
@@ -388,8 +395,15 @@ StyleDictionary.registerFormat({
  */
 
 const formatTypography = (dictionary) => (token) => {
-	const isFontSize = token.path[0] === 'typography' && token.path.at(-1) === 'fontsize';
-	const isLineHeight = token.path[0] === 'typography' && token.path.at(-1) === 'lineheight';
+	// Token field names vary between the no-hyphen ('fontsize') and hyphenated ('font-size')
+	// naming conventions used across different breakpoints/sets in the tokens file.
+	const lastSegment = token.path.at(-1);
+	const isFontSize =
+		token.path[0] === 'typography' && (lastSegment === 'fontsize' || lastSegment === 'font-size');
+	const isLineHeight =
+		token.path[0] === 'typography' &&
+		(lastSegment === 'lineheight' || lastSegment === 'line-height');
+	const isReadableWidth = token.path[0] === 'typography' && lastSegment === 'readable-width';
 
 	const getNestedTokenValue = (path) => {
 		return (
@@ -402,8 +416,9 @@ const formatTypography = (dictionary) => (token) => {
 	const getFontSizeForLineHeight = (token) => {
 		if (!isLineHeight) return null;
 
-		// Construct the correct font size path (replace 'lineheight' with 'fontsize')
-		const fontSizePath = [...token.path.slice(0, -1), 'fontsize'];
+		// Construct the correct font size path (matching the same naming convention as lastSegment)
+		const fontSizeKey = lastSegment === 'line-height' ? 'font-size' : 'fontsize';
+		const fontSizePath = [...token.path.slice(0, -1), fontSizeKey];
 
 		// Retrieve the font size token value
 		return getNestedTokenValue(fontSizePath);
@@ -418,6 +433,10 @@ const formatTypography = (dictionary) => (token) => {
 			const fontSize = getFontSizeForLineHeight(token);
 			const unitlessLineHeight = fontSize ? token.value / fontSize : token.value / 16;
 			return `  --${token.name}: ${unitlessLineHeight.toFixed(4)};`;
+		}
+
+		if (isReadableWidth) {
+			return ` --${token.name}: ${token.original.value / 16}rem;`;
 		}
 
 		return ` --${token.name}: ${token.value}`;

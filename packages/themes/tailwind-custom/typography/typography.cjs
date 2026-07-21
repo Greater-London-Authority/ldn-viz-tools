@@ -6,18 +6,6 @@ const semantics = require('./semantics');
 const formatRules = require('./format');
 const responsive = require('./responsive');
 
-const getMaxWidth = (ch, fontSize, baseFontSize = 16) => {
-	const chToRemRatio = (0.6 * fontSize) / baseFontSize;
-	return `${ch * chToRemRatio}rem`;
-};
-
-const proseMaxWidths = {
-	default: getMaxWidth(65, 16), // 65 chars at 16px
-	md: getMaxWidth(68, 16),
-	lg: getMaxWidth(70, 18),
-	xl: getMaxWidth(72, 20)
-};
-
 module.exports = plugin(function ({ addComponents }) {
 	// Add contexts (variables only)
 	addComponents({
@@ -29,27 +17,9 @@ module.exports = plugin(function ({ addComponents }) {
 	addComponents(semantics);
 
 	// Add roles
-	addComponents({
-		'.display': roles.display,
-		'.headline': roles.headline,
-		'.subhead': roles.subhead,
-		'.title-lg': roles['title-lg'],
-		'.title-md': roles['title-md'],
-		'.title-sm': roles['title-sm'],
-		'.title-xs': roles['title-xs'],
-		'.subtitle': roles.subtitle,
-		'.body-lg': roles['body-lg'],
-		'.body-md': roles['body-md'],
-		'.body-sm': roles['body-sm'],
-		'.body-xs': roles['body-xs'],
-		'.caption': roles.caption,
-		'.label-lg': roles['label-lg'],
-		'.label-md': roles['label-md'],
-		'.label-sm': roles['label-sm'],
-		'.label-xs': roles['label-xs']
-	});
-
 	const rolesKeys = Object.keys(roles);
+	addComponents(Object.fromEntries(rolesKeys.map((role) => [`.${role}`, roles[role]])));
+
 	['prose', 'product'].forEach((context) => {
 		rolesKeys.forEach((role) => {
 			const mapping = responsive[context][role];
@@ -102,24 +72,24 @@ module.exports = plugin(function ({ addComponents }) {
 	addComponents({
 		'.prose.responsive': {
 			...proseResponsive.default,
-			'--prose-max-width': proseMaxWidths.default
+			'--prose-max-width': 'var(--typography-base-prose-readable-width)'
 		},
 		'@screen md': {
 			'.prose.responsive': {
 				...proseResponsive.md,
-				'--prose-max-width': proseMaxWidths.md
+				'--prose-max-width': 'var(--typography-md-prose-readable-width)'
 			}
 		},
 		'@screen lg': {
 			'.prose.responsive': {
 				...proseResponsive.lg,
-				'--prose-max-width': proseMaxWidths.lg
+				'--prose-max-width': 'var(--typography-lg-prose-readable-width)'
 			}
 		},
 		'@screen xl': {
 			'.prose.responsive': {
 				...proseResponsive.xl,
-				'--prose-max-width': proseMaxWidths.xl
+				'--prose-max-width': 'var(--typography-xl-prose-readable-width)'
 			}
 		}
 	});
