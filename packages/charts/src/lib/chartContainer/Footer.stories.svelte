@@ -32,7 +32,7 @@
 
 {#snippet placeholderChart()}
 	<div
-		class="text-color-text-muted mb-2 flex h-24 w-full items-center justify-center bg-color-container-level-1"
+		class="mb-2 flex h-24 w-full items-center justify-center bg-color-container-level-1 text-color-text-muted"
 	>
 		Chart would go here.
 	</div>
