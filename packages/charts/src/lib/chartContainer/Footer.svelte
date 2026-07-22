@@ -10,8 +10,26 @@
 	import { Button, Modal } from '@ldn-viz/ui';
 
 	interface Props {
+		/**
+		 * Statement of who created the visualization.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
+		 */
 		byline?: string;
+		/**
+		 * Statement of where the data came from.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
+		 */
 		source?: string;
+		/**
+		 * Any additional footnotes.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
+		 */
 		note?: string;
 		chartDescription?: string;
 		exportBtns?: import('svelte').Snippet;

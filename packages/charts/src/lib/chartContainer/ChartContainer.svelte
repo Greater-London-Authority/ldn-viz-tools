@@ -21,10 +21,16 @@
 	interface Props {
 		/**
 		 * Title that is displayed in large text above the plot.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		title?: string;
 		/**
 		 * Subtitle that is displayed below the title, but above the plot.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		subTitle?: string;
 		/**
@@ -37,6 +43,9 @@
 		 * * `byline` (string) - statement of who created the visualization
 		 * * `source` (string) - statement of where the data came from
 		 * * `note` (string) - any additional footnotes
+		 *
+		 * **Warning**: these are rendered as raw HTML and are not sanitized, so they must never be
+		 * set from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		source?: string;
 		byline?: string;
