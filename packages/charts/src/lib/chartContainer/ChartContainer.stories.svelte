@@ -22,7 +22,7 @@
 
 {#snippet placeholderChart()}
 	<div
-		class="flex h-full w-full items-center justify-center bg-color-container-level-1 text-color-text-muted"
+		class="text-color-text-muted flex h-full w-full items-center justify-center bg-color-container-level-1"
 	>
 		Chart would go here.
 	</div>
@@ -407,7 +407,7 @@ It can also be used to add liks.
 			alt="Simple description of type of chart"
 		>
 			<div
-				class="flex h-full w-full items-center justify-center bg-color-container-level-1 text-color-text-muted"
+				class="text-color-text-muted flex h-full w-full items-center justify-center bg-color-container-level-1"
 			>
 				Chart body content goes here
 			</div>

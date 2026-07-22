@@ -13,6 +13,6 @@
 	let { children }: Props = $props();
 </script>
 
-<div class="max-w-prose text-xl font-bold text-color-text">
+<div class="text-color-text max-w-prose text-xl font-bold">
 	{@render children?.()}
 </div>

@@ -4,7 +4,10 @@
 	import * as d3 from 'd3';
 	import { penguins } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
-	import { getDefaultPlotStyles, preprocessOptions } from '../../observablePlotFragments/observablePlotFragments';
+	import {
+		getDefaultPlotStyles,
+		preprocessOptions
+	} from '../../observablePlotFragments/observablePlotFragments';
 	import { Plot } from '../../observablePlotFragments/plot';
 
 	const { Story } = defineMeta({
