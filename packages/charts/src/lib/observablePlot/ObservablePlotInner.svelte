@@ -8,6 +8,7 @@
 	 *  @component
 	 */
 
+	import type { RenderFunction } from '@observablehq/plot';
 	import type {
 		AddEventHandlerFunction,
 		AddEventHandlerInnerFunction,
@@ -65,7 +66,14 @@
 		};
 
 	export const addMultipleEventHandlers = (events: EventHandler[]) => {
-		return (index: any, scales: any, values: any, dimensions: any, context: any, next: any) => {
+		return (
+			index: number[],
+			scales: any,
+			values: any,
+			dimensions: any,
+			context: any,
+			next: RenderFunction | undefined
+		) => {
 			const el = next && next(index, scales, values, dimensions, context);
 
 			for (const event of events) {
@@ -132,7 +140,7 @@
 				cy: values.channels.cy?.value[i]
 			};
 
-			marks[i].addEventListener(eventName, (ev: any) => eventHandler(ev, d));
+			marks[i].addEventListener(eventName, (ev: Event) => eventHandler(ev, d));
 		}
 	};
 </script>
@@ -156,14 +164,14 @@
 		/**
 		 * Provides a way to access the DOM node into which the visualization is rendered.
 		 */
-		domNode?: any;
+		domNode?: HTMLDivElement;
 		/**
 		 * A store that stores details of the moused-over point.
 		 * Used for custom tooltips.
 		 */
-		tooltipStore?: Writable<{ [key: string]: any }>;
+		tooltipStore?: Writable<Position | undefined>;
 		/** A y-offset between data points and tooltips (pixels). */
-		tooltipOffset?: any;
+		tooltipOffset?: number;
 		/**
 		 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
 		 * so that default chart-level styling is not applied.
@@ -181,7 +189,7 @@
 		/**
 		 * Defaults to randomly generated id passed in by `ObservablePlot`
 		 */
-		id: any;
+		id: string;
 		tooltip?: import('svelte').Snippet;
 		[key: string]: any;
 	}
