@@ -109,7 +109,8 @@ StyleDictionary.registerParser({
 
 			return output;
 		} catch (error) {
-			console.log(error);
+			console.error(error);
+			process.exit(1);
 		}
 	}
 });
