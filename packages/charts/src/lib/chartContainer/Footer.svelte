@@ -1,4 +1,12 @@
 <script lang="ts">
+	/**
+	 * The `Footer` renders the content that appears below a chart (the `byline`,
+	 * `source`, `note`, trigger for a description modal, and image/data download buttons).
+	 *
+	 * It is normally used only indirectly via the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation).
+	 * @component
+	 */
+
 	import { Button, Modal } from '@ldn-viz/ui';
 
 	interface Props {

@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * The `ExportBtns` component renders the Image and data download buttons shown in a chart footer.
+	 *
+	 * It is normally used indirectly via the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation).
+	 * @component
+	 */
+
 	import { DataDownloadButton, ImageDownloadButton } from '@ldn-viz/ui';
 	import { ArrowDownTray, Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

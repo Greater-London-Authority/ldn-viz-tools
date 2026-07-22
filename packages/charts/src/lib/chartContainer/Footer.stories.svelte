@@ -4,7 +4,7 @@
 	import Footer from './Footer.svelte';
 
 	/**
-	 * The `Footer` renders the cotent that appears below a chart (the `byline`,
+	 * The `Footer` renders the content that appears below a chart (the `byline`,
 	 * `source`, `note`, trigger for a description modal, and image/data download buttons).
 	 *
 	 * It is normally used only indirectly via the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation).
