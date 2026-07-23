@@ -50,21 +50,21 @@
 	};
 
 	const sizeClasses = {
-		sm: 'border shadow-sm text-color-text px-2 pt-2 ',
-		md: 'border-l-[5px] border shadow-sm text-color-text px-2 pt-2 ',
-		lg: 'border-l-[5px] border shadow-sm text-color-text px-4 pt-4'
+		sm: 'product border shadow-sm text-color-text px-2 pt-2 ',
+		md: 'product border-l-[5px] border shadow-sm text-color-text px-2 pt-2 ',
+		lg: 'product border-l-[5px] border shadow-sm text-color-text px-4 pt-4'
 	};
 
 	const titleClasses = {
-		sm: 'text-base mb-1',
-		md: 'text-lg mb-2',
-		lg: 'text-xl mb-4'
+		sm: 'mb-1',
+		md: 'mb-2',
+		lg: 'mb-4'
 	};
 
 	const bodyClasses = {
-		sm: 'text-sm mb-1',
-		md: 'text-base mb-2',
-		lg: 'text-base mb-4'
+		sm: 'mb-1',
+		md: 'mb-2',
+		lg: 'mb-4'
 	};
 
 	const moreClasses = {
@@ -78,7 +78,7 @@
 
 <aside class={calloutClasses} aria-labelledby={id}>
 	{#if title}
-		<h3 {id} class={classNames('font-bold leading-tight', titleClasses[size])}>
+		<h3 {id} class={classNames('card-panel-title', titleClasses[size])}>
 			{@render title?.()}
 		</h3>
 	{:else}
@@ -86,7 +86,7 @@
 	{/if}
 
 	{#if body}
-		<div class={bodyClasses[size]}>
+		<div class={classNames('body', bodyClasses[size])}>
 			{@render body?.()}
 		</div>
 	{/if}
