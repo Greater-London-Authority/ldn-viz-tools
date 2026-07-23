@@ -56,10 +56,10 @@
 
 	<div class="relative z-10 flex">
 		<div class="container mx-auto">
-			<div class="prose responsive">
-				<p class="display mb-0">{title}</p>
+			<div class="flow-prose prose">
+				<p class="display pt-spacing-5xl">{title}</p>
 				{#if subTitle}
-					<p class="subhead pb-typography-spacing-3xl">{subTitle}</p>
+					<p class="subhead">{subTitle}</p>
 				{/if}
 			</div>
 		</div>

@@ -15,12 +15,12 @@ layout: index
 <!-- <p class="prose responsive body-lg py-typography-spacing-3xl">The London City Data team bring insight</p> -->
 
 <div class="grid md:grid-cols-2 gap-4 pt-spacing-xl">
-    <div>
+    <div class="flow-product">
         <a href="/design-system">
         <EnhancedImage src='cta-design-system.svg'/>
         </a>
-        <h3 class="title-md format">Design System Documentation</h3>
-        <p class="leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <h3>Design System Documentation</h3>
+        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
         <Button href="/design-system" variant="text" slim emphasis="secondary">Read the docs</Button>
     </div>
 </div>

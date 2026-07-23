@@ -3,7 +3,7 @@
 </script>
 
 <div class="p-8">
-	<div class="prose responsive">
+	<div class="flow-prose prose">
 		{@render children?.()}
 	</div>
 </div>

@@ -12,10 +12,10 @@ layout: index
     import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte'
 </script>
 
-<p class="prose responsive body-lg py-typography-spacing-xl">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
+<p class="prose lead py-typography-spacing-xl">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
 <div class="grid sm:grid-cols-3 grid-rows-[auto] gap-4 ">
-    <div>
+    <div class="flow-product">
         <a href="/design-system/foundations">
         <EnhancedImage src='cta-foundations.svg'/>
         </a>
@@ -23,7 +23,7 @@ layout: index
         <p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
         <Button href="/design-system/foundations" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
-    <div>
+    <div class="flow-product">
         <a href="/design-system/application-design" >
         <EnhancedImage src='cta-application-design.svg'/>
         </a>
@@ -31,7 +31,7 @@ layout: index
         <p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
         <Button href="/design-system/application-design" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
-    <div>
+    <div class="flow-product">
         <a href="/design-system/data-visualisation">
         <EnhancedImage src='cta-dataviz.svg'/>
         </a>
