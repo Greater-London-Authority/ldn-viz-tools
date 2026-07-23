@@ -6,6 +6,7 @@
 
 	/**
 	 * The `<MapLegend>` component provides a container inside which a `Legend` can be inserted for display on maps.
+	 * @component
 	 */
 
 	interface Props {
