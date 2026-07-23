@@ -5,6 +5,10 @@ module.exports = {
 				'--body-font-size': 'var(--typography-base-prose-body-font-size)',
 				'--body-line-height': 'var(--typography-base-prose-body-line-height)'
 			},
+			sm: {
+				'--body-font-size': 'var(--typography-sm-prose-body-font-size)',
+				'--body-line-height': 'var(--typography-sm-prose-body-line-height)'
+			},
 			md: {
 				'--body-font-size': 'var(--typography-md-prose-body-font-size)',
 				'--body-line-height': 'var(--typography-md-prose-body-line-height)'
@@ -22,6 +26,10 @@ module.exports = {
 			default: {
 				'--body-sm-font-size': 'var(--typography-base-prose-body-sm-font-size)',
 				'--body-sm-line-height': 'var(--typography-base-prose-body-sm-line-height)'
+			},
+			sm: {
+				'--body-sm-font-size': 'var(--typography-sm-prose-body-sm-font-size)',
+				'--body-sm-line-height': 'var(--typography-sm-prose-body-sm-line-height)'
 			},
 			md: {
 				'--body-sm-font-size': 'var(--typography-md-prose-body-sm-font-size)',
@@ -41,6 +49,10 @@ module.exports = {
 				'--caption-font-size': 'var(--typography-base-prose-caption-font-size)',
 				'--caption-line-height': 'var(--typography-base-prose-caption-line-height)'
 			},
+			sm: {
+				'--caption-font-size': 'var(--typography-sm-prose-caption-font-size)',
+				'--caption-line-height': 'var(--typography-sm-prose-caption-line-height)'
+			},
 			md: {
 				'--caption-font-size': 'var(--typography-md-prose-caption-font-size)',
 				'--caption-line-height': 'var(--typography-md-prose-caption-line-height)'
@@ -58,6 +70,10 @@ module.exports = {
 			default: {
 				'--display-font-size': 'var(--typography-base-prose-display-font-size)',
 				'--display-line-height': 'var(--typography-base-prose-display-line-height)'
+			},
+			sm: {
+				'--display-font-size': 'var(--typography-sm-prose-display-font-size)',
+				'--display-line-height': 'var(--typography-sm-prose-display-line-height)'
 			},
 			md: {
 				'--display-font-size': 'var(--typography-md-prose-display-font-size)',
@@ -77,6 +93,10 @@ module.exports = {
 				'--headline-font-size': 'var(--typography-base-prose-headline-font-size)',
 				'--headline-line-height': 'var(--typography-base-prose-headline-line-height)'
 			},
+			sm: {
+				'--headline-font-size': 'var(--typography-sm-prose-headline-font-size)',
+				'--headline-line-height': 'var(--typography-sm-prose-headline-line-height)'
+			},
 			md: {
 				'--headline-font-size': 'var(--typography-md-prose-headline-font-size)',
 				'--headline-line-height': 'var(--typography-md-prose-headline-line-height)'
@@ -94,6 +114,10 @@ module.exports = {
 			default: {
 				'--subhead-font-size': 'var(--typography-base-prose-subhead-font-size)',
 				'--subhead-line-height': 'var(--typography-base-prose-subhead-line-height)'
+			},
+			sm: {
+				'--subhead-font-size': 'var(--typography-sm-prose-subhead-font-size)',
+				'--subhead-line-height': 'var(--typography-sm-prose-subhead-line-height)'
 			},
 			md: {
 				'--subhead-font-size': 'var(--typography-md-prose-subhead-font-size)',
@@ -113,6 +137,10 @@ module.exports = {
 				'--title-1-font-size': 'var(--typography-base-prose-title-1-font-size)',
 				'--title-1-line-height': 'var(--typography-base-prose-title-1-line-height)'
 			},
+			sm: {
+				'--title-1-font-size': 'var(--typography-sm-prose-title-1-font-size)',
+				'--title-1-line-height': 'var(--typography-sm-prose-title-1-line-height)'
+			},
 			md: {
 				'--title-1-font-size': 'var(--typography-md-prose-title-1-font-size)',
 				'--title-1-line-height': 'var(--typography-md-prose-title-1-line-height)'
@@ -130,6 +158,10 @@ module.exports = {
 			default: {
 				'--title-2-font-size': 'var(--typography-base-prose-title-2-font-size)',
 				'--title-2-line-height': 'var(--typography-base-prose-title-2-line-height)'
+			},
+			sm: {
+				'--title-2-font-size': 'var(--typography-sm-prose-title-2-font-size)',
+				'--title-2-line-height': 'var(--typography-sm-prose-title-2-line-height)'
 			},
 			md: {
 				'--title-2-font-size': 'var(--typography-md-prose-title-2-font-size)',
@@ -149,6 +181,10 @@ module.exports = {
 				'--title-3-font-size': 'var(--typography-base-prose-title-3-font-size)',
 				'--title-3-line-height': 'var(--typography-base-prose-title-3-line-height)'
 			},
+			sm: {
+				'--title-3-font-size': 'var(--typography-sm-prose-title-3-font-size)',
+				'--title-3-line-height': 'var(--typography-sm-prose-title-3-line-height)'
+			},
 			md: {
 				'--title-3-font-size': 'var(--typography-md-prose-title-3-font-size)',
 				'--title-3-line-height': 'var(--typography-md-prose-title-3-line-height)'
@@ -166,6 +202,10 @@ module.exports = {
 			default: {
 				'--title-4-font-size': 'var(--typography-base-prose-title-4-font-size)',
 				'--title-4-line-height': 'var(--typography-base-prose-title-4-line-height)'
+			},
+			sm: {
+				'--title-4-font-size': 'var(--typography-sm-prose-title-4-font-size)',
+				'--title-4-line-height': 'var(--typography-sm-prose-title-4-line-height)'
 			},
 			md: {
 				'--title-4-font-size': 'var(--typography-md-prose-title-4-font-size)',
@@ -185,6 +225,10 @@ module.exports = {
 				'--subtitle-font-size': 'var(--typography-base-prose-subtitle-font-size)',
 				'--subtitle-line-height': 'var(--typography-base-prose-subtitle-line-height)'
 			},
+			sm: {
+				'--subtitle-font-size': 'var(--typography-sm-prose-subtitle-font-size)',
+				'--subtitle-line-height': 'var(--typography-sm-prose-subtitle-line-height)'
+			},
 			md: {
 				'--subtitle-font-size': 'var(--typography-md-prose-subtitle-font-size)',
 				'--subtitle-line-height': 'var(--typography-md-prose-subtitle-line-height)'
@@ -203,6 +247,10 @@ module.exports = {
 				'--lead-font-size': 'var(--typography-base-prose-lead-font-size)',
 				'--lead-line-height': 'var(--typography-base-prose-lead-line-height)'
 			},
+			sm: {
+				'--lead-font-size': 'var(--typography-sm-prose-lead-font-size)',
+				'--lead-line-height': 'var(--typography-sm-prose-lead-line-height)'
+			},
 			md: {
 				'--lead-font-size': 'var(--typography-md-prose-lead-font-size)',
 				'--lead-line-height': 'var(--typography-md-prose-lead-line-height)'
@@ -220,6 +268,10 @@ module.exports = {
 			default: {
 				'--eyebrow-font-size': 'var(--typography-base-prose-eyebrow-font-size)',
 				'--eyebrow-line-height': 'var(--typography-base-prose-eyebrow-line-height)'
+			},
+			sm: {
+				'--eyebrow-font-size': 'var(--typography-sm-prose-eyebrow-font-size)',
+				'--eyebrow-line-height': 'var(--typography-sm-prose-eyebrow-line-height)'
 			},
 			md: {
 				'--eyebrow-font-size': 'var(--typography-md-prose-eyebrow-font-size)',
@@ -242,6 +294,10 @@ module.exports = {
 				'--body-font-size': 'var(--typography-base-product-body-font-size)',
 				'--body-line-height': 'var(--typography-base-product-body-line-height)'
 			},
+			sm: {
+				'--body-font-size': 'var(--typography-sm-product-body-font-size)',
+				'--body-line-height': 'var(--typography-sm-product-body-line-height)'
+			},
 			md: {
 				'--body-font-size': 'var(--typography-md-product-body-font-size)',
 				'--body-line-height': 'var(--typography-md-product-body-line-height)'
@@ -259,6 +315,10 @@ module.exports = {
 			default: {
 				'--body-sm-font-size': 'var(--typography-base-product-body-sm-font-size)',
 				'--body-sm-line-height': 'var(--typography-base-product-body-sm-line-height)'
+			},
+			sm: {
+				'--body-sm-font-size': 'var(--typography-sm-product-body-sm-font-size)',
+				'--body-sm-line-height': 'var(--typography-sm-product-body-sm-line-height)'
 			},
 			md: {
 				'--body-sm-font-size': 'var(--typography-md-product-body-sm-font-size)',
@@ -278,6 +338,10 @@ module.exports = {
 				'--caption-font-size': 'var(--typography-base-product-caption-font-size)',
 				'--caption-line-height': 'var(--typography-base-product-caption-line-height)'
 			},
+			sm: {
+				'--caption-font-size': 'var(--typography-sm-product-caption-font-size)',
+				'--caption-line-height': 'var(--typography-sm-product-caption-line-height)'
+			},
 			md: {
 				'--caption-font-size': 'var(--typography-md-product-caption-font-size)',
 				'--caption-line-height': 'var(--typography-md-product-caption-line-height)'
@@ -295,6 +359,10 @@ module.exports = {
 			default: {
 				'--dashboard-head-font-size': 'var(--typography-base-product-dashboard-head-font-size)',
 				'--dashboard-head-line-height': 'var(--typography-base-product-dashboard-head-line-height)'
+			},
+			sm: {
+				'--dashboard-head-font-size': 'var(--typography-sm-product-dashboard-head-font-size)',
+				'--dashboard-head-line-height': 'var(--typography-sm-product-dashboard-head-line-height)'
 			},
 			md: {
 				'--dashboard-head-font-size': 'var(--typography-md-product-dashboard-head-font-size)',
@@ -314,6 +382,10 @@ module.exports = {
 				'--section-head-font-size': 'var(--typography-base-product-section-head-font-size)',
 				'--section-head-line-height': 'var(--typography-base-product-section-head-line-height)'
 			},
+			sm: {
+				'--section-head-font-size': 'var(--typography-sm-product-section-head-font-size)',
+				'--section-head-line-height': 'var(--typography-sm-product-section-head-line-height)'
+			},
 			md: {
 				'--section-head-font-size': 'var(--typography-md-product-section-head-font-size)',
 				'--section-head-line-height': 'var(--typography-md-product-section-head-line-height)'
@@ -331,6 +403,10 @@ module.exports = {
 			default: {
 				'--card-panel-title-font-size': 'var(--typography-base-product-card-panel-title-font-size)',
 				'--card-panel-title-line-height': 'var(--typography-base-product-card-panel-title-line-height)'
+			},
+			sm: {
+				'--card-panel-title-font-size': 'var(--typography-sm-product-card-panel-title-font-size)',
+				'--card-panel-title-line-height': 'var(--typography-sm-product-card-panel-title-line-height)'
 			},
 			md: {
 				'--card-panel-title-font-size': 'var(--typography-md-product-card-panel-title-font-size)',
@@ -350,6 +426,10 @@ module.exports = {
 				'--card-panel-subtitle-font-size': 'var(--typography-base-product-card-panel-subtitle-font-size)',
 				'--card-panel-subtitle-line-height': 'var(--typography-base-product-card-panel-subtitle-line-height)'
 			},
+			sm: {
+				'--card-panel-subtitle-font-size': 'var(--typography-sm-product-card-panel-subtitle-font-size)',
+				'--card-panel-subtitle-line-height': 'var(--typography-sm-product-card-panel-subtitle-line-height)'
+			},
 			md: {
 				'--card-panel-subtitle-font-size': 'var(--typography-md-product-card-panel-subtitle-font-size)',
 				'--card-panel-subtitle-line-height': 'var(--typography-md-product-card-panel-subtitle-line-height)'
@@ -367,6 +447,10 @@ module.exports = {
 			default: {
 				'--card-panel-eyebrow-font-size': 'var(--typography-base-product-card-panel-eyebrow-font-size)',
 				'--card-panel-eyebrow-line-height': 'var(--typography-base-product-card-panel-eyebrow-line-height)'
+			},
+			sm: {
+				'--card-panel-eyebrow-font-size': 'var(--typography-sm-product-card-panel-eyebrow-font-size)',
+				'--card-panel-eyebrow-line-height': 'var(--typography-sm-product-card-panel-eyebrow-line-height)'
 			},
 			md: {
 				'--card-panel-eyebrow-font-size': 'var(--typography-md-product-card-panel-eyebrow-font-size)',
@@ -386,6 +470,10 @@ module.exports = {
 				'--metric-font-size': 'var(--typography-base-product-metric-font-size)',
 				'--metric-line-height': 'var(--typography-base-product-metric-line-height)'
 			},
+			sm: {
+				'--metric-font-size': 'var(--typography-sm-product-metric-font-size)',
+				'--metric-line-height': 'var(--typography-sm-product-metric-line-height)'
+			},
 			md: {
 				'--metric-font-size': 'var(--typography-md-product-metric-font-size)',
 				'--metric-line-height': 'var(--typography-md-product-metric-line-height)'
@@ -403,6 +491,10 @@ module.exports = {
 			default: {
 				'--metric-sm-font-size': 'var(--typography-base-product-metric-sm-font-size)',
 				'--metric-sm-line-height': 'var(--typography-base-product-metric-sm-line-height)'
+			},
+			sm: {
+				'--metric-sm-font-size': 'var(--typography-sm-product-metric-sm-font-size)',
+				'--metric-sm-line-height': 'var(--typography-sm-product-metric-sm-line-height)'
 			},
 			md: {
 				'--metric-sm-font-size': 'var(--typography-md-product-metric-sm-font-size)',
@@ -422,6 +514,10 @@ module.exports = {
 				'--label-font-size': 'var(--typography-base-product-label-font-size)',
 				'--label-line-height': 'var(--typography-base-product-label-line-height)'
 			},
+			sm: {
+				'--label-font-size': 'var(--typography-sm-product-label-font-size)',
+				'--label-line-height': 'var(--typography-sm-product-label-line-height)'
+			},
 			md: {
 				'--label-font-size': 'var(--typography-md-product-label-font-size)',
 				'--label-line-height': 'var(--typography-md-product-label-line-height)'
@@ -439,6 +535,10 @@ module.exports = {
 			default: {
 				'--label-sm-font-size': 'var(--typography-base-product-label-sm-font-size)',
 				'--label-sm-line-height': 'var(--typography-base-product-label-sm-line-height)'
+			},
+			sm: {
+				'--label-sm-font-size': 'var(--typography-sm-product-label-sm-font-size)',
+				'--label-sm-line-height': 'var(--typography-sm-product-label-sm-line-height)'
 			},
 			md: {
 				'--label-sm-font-size': 'var(--typography-md-product-label-sm-font-size)',

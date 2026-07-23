@@ -3,14 +3,16 @@ const plugin = require('tailwindcss/plugin');
 const contexts = require('./contexts');
 const roles = require('./roles');
 const semantics = require('./semantics');
-const formatRules = require('./format');
 const responsive = require('./responsive');
 
 module.exports = plugin(function ({ addComponents }) {
 	// Add contexts (variables only)
 	addComponents({
 		'.prose': contexts.prose,
-		'.product': contexts.product
+		'.product': contexts.product,
+		// chart values don't scale per-breakpoint, so unlike prose/product it's
+		// not added to the responsive role loop below.
+		'.chart': contexts.chart
 	});
 
 	// Add semantics
@@ -20,31 +22,28 @@ module.exports = plugin(function ({ addComponents }) {
 	const rolesKeys = Object.keys(roles);
 	addComponents(Object.fromEntries(rolesKeys.map((role) => [`.${role}`, roles[role]])));
 
+	// Responsive by default - no `.responsive` modifier needed. Fixed roles
+	// (identical values at every breakpoint, e.g. Body/Label/Caption) just get
+	// no-op media queries here; only the roles that actually scale move.
 	['prose', 'product'].forEach((context) => {
 		rolesKeys.forEach((role) => {
 			const mapping = responsive[context][role];
 			if (!mapping) return;
 
-			addComponents({
-				[`.${context}.${role}, .not-prose .${context}.${role}`]: mapping.default,
-				[`.${context} .${role}, .not-prose .${context} .${role}`]: mapping.default,
-				[`.${context} .${role}, .not-prose.${context} .${role}`]: mapping.default
-			});
+			const sel = [
+				`.${context}.${role}`,
+				`.${context} .${role}`,
+				`.not-prose .${context}.${role}`,
+				`.not-prose .${context} .${role}`,
+				`.not-prose.${context} .${role}`
+			].join(', ');
 
-			// Variables on parent with role
 			addComponents({
-				[`.${context}.responsive.${role}`]: mapping.default,
-				'@screen md': { [`.${context}.responsive.${role}`]: mapping.md },
-				'@screen lg': { [`.${context}.responsive.${role}`]: mapping.lg },
-				'@screen xl': { [`.${context}.responsive.${role}`]: mapping.xl }
-			});
-
-			// Variables applied to children of parent context
-			addComponents({
-				[`.${context}.responsive .${role}`]: mapping.default,
-				'@screen md': { [`.${context}.responsive .${role}`]: mapping.md },
-				'@screen lg': { [`.${context}.responsive .${role}`]: mapping.lg },
-				'@screen xl': { [`.${context}.responsive .${role}`]: mapping.xl }
+				[sel]: mapping.default,
+				...(mapping.sm ? { '@screen sm': { [sel]: mapping.sm } } : {}),
+				...(mapping.md ? { '@screen md': { [sel]: mapping.md } } : {}),
+				...(mapping.lg ? { '@screen lg': { [sel]: mapping.lg } } : {}),
+				...(mapping.xl ? { '@screen xl': { [sel]: mapping.xl } } : {})
 			});
 		});
 	});
@@ -52,6 +51,7 @@ module.exports = plugin(function ({ addComponents }) {
 	function buildContextResponsiveVars(responsiveByRole) {
 		const result = {
 			default: {},
+			sm: {},
 			md: {},
 			lg: {},
 			xl: {}
@@ -59,6 +59,7 @@ module.exports = plugin(function ({ addComponents }) {
 
 		Object.values(responsiveByRole).forEach((role) => {
 			if (role.default) Object.assign(result.default, role.default);
+			if (role.sm) Object.assign(result.sm, role.sm);
 			if (role.md) Object.assign(result.md, role.md);
 			if (role.lg) Object.assign(result.lg, role.lg);
 			if (role.xl) Object.assign(result.xl, role.xl);
@@ -67,65 +68,38 @@ module.exports = plugin(function ({ addComponents }) {
 		return result;
 	}
 
+	// --prose-max-width used to scale only inside the `.prose.responsive`
+	// aggregate; now that scaling is on by default, it moves onto plain
+	// `.prose` (base value already in contexts.cjs) with the same @screen steps.
 	const proseResponsive = buildContextResponsiveVars(responsive.prose);
 
 	addComponents({
-		'.prose.responsive': {
-			...proseResponsive.default,
-			'--prose-max-width': 'var(--typography-base-prose-readable-width)'
+		'.prose': {
+			...proseResponsive.default
+		},
+		'@screen sm': {
+			'.prose': {
+				...proseResponsive.sm,
+				'--prose-max-width': 'var(--typography-sm-prose-readable-width)'
+			}
 		},
 		'@screen md': {
-			'.prose.responsive': {
+			'.prose': {
 				...proseResponsive.md,
 				'--prose-max-width': 'var(--typography-md-prose-readable-width)'
 			}
 		},
 		'@screen lg': {
-			'.prose.responsive': {
+			'.prose': {
 				...proseResponsive.lg,
 				'--prose-max-width': 'var(--typography-lg-prose-readable-width)'
 			}
 		},
 		'@screen xl': {
-			'.prose.responsive': {
+			'.prose': {
 				...proseResponsive.xl,
 				'--prose-max-width': 'var(--typography-xl-prose-readable-width)'
 			}
-		}
-	});
-
-	// Add format
-	Object.entries(formatRules).forEach(([role, spacing]) => {
-		// Main .format class
-		addComponents({
-			[`.${role}.format`]: {
-				marginTop: spacing.marginTop,
-				marginBottom: spacing.marginBottom
-			}
-		});
-
-		// Sibling element spacing
-		addComponents({
-			[`.${role}.format + *`]: {
-				marginTop: spacing.sibling.marginTop
-			}
-		});
-
-		// Special case: role followed by subhead
-		if (spacing.subheadAfter) {
-			addComponents({
-				[`.${role}.format:has(+ .subhead)`]: {
-					marginBottom: spacing.subheadAfter.marginBottom
-				}
-			});
-		}
-		// Special case: role followed by subtitle
-		if (spacing.subtitleAfter) {
-			addComponents({
-				[`.${role}.format:has(+ .subtitle)`]: {
-					marginBottom: spacing.subtitleAfter.marginBottom
-				}
-			});
 		}
 	});
 });

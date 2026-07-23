@@ -1,6 +1,6 @@
 module.exports = {
 	prose: {
-		'--prose-max-width': 'var(--typography-md-prose-readable-width)',
+		'--prose-max-width': 'var(--typography-base-prose-readable-width)',
 		'--image-max-width': '100%',
 		//body
 		'--body-font-family': 'var(--typography-md-prose-body-font-family)',
@@ -156,5 +156,35 @@ module.exports = {
 		'--label-sm-letter-spacing': 'var(--typography-md-product-label-sm-letter-spacing)',
 		'--label-sm-font-size': 'var(--typography-md-product-label-sm-font-size)',
 		'--label-sm-line-height': 'var(--typography-md-product-label-sm-line-height)'
+	},
+
+	// CHART - values are identical across every breakpoint (see the
+	// semantic-typography.chart tokens), so there's nothing to scale; pinning
+	// to md here is just for consistency with prose/product.
+	chart: {
+		//axis-title
+		'--axis-title-font-family': 'var(--typography-md-chart-axis-title-font-family)',
+		'--axis-title-font-weight': 'var(--typography-md-chart-axis-title-font-weight)',
+		'--axis-title-letter-spacing': 'var(--typography-md-chart-axis-title-letter-spacing)',
+		'--axis-title-font-size': 'var(--typography-md-chart-axis-title-font-size)',
+		'--axis-title-line-height': 'var(--typography-md-chart-axis-title-line-height)',
+		//label (reuses the generic --label-* vars/role)
+		'--label-font-family': 'var(--typography-md-chart-label-font-family)',
+		'--label-font-weight': 'var(--typography-md-chart-label-font-weight)',
+		'--label-letter-spacing': 'var(--typography-md-chart-label-letter-spacing)',
+		'--label-font-size': 'var(--typography-md-chart-label-font-size)',
+		'--label-line-height': 'var(--typography-md-chart-label-line-height)',
+		//tick
+		'--tick-font-family': 'var(--typography-md-chart-tick-font-family)',
+		'--tick-font-weight': 'var(--typography-md-chart-tick-font-weight)',
+		'--tick-letter-spacing': 'var(--typography-md-chart-tick-letter-spacing)',
+		'--tick-font-size': 'var(--typography-md-chart-tick-font-size)',
+		'--tick-line-height': 'var(--typography-md-chart-tick-line-height)',
+		//tick-sm
+		'--tick-sm-font-family': 'var(--typography-md-chart-tick-sm-font-family)',
+		'--tick-sm-font-weight': 'var(--typography-md-chart-tick-sm-font-weight)',
+		'--tick-sm-letter-spacing': 'var(--typography-md-chart-tick-sm-letter-spacing)',
+		'--tick-sm-font-size': 'var(--typography-md-chart-tick-sm-font-size)',
+		'--tick-sm-line-height': 'var(--typography-md-chart-tick-sm-line-height)'
 	}
 };

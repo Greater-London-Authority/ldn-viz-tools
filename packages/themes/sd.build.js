@@ -472,17 +472,38 @@ StyleDictionary.registerFormat({
 
 /**
  * Custom format for flow
+ *
+ * Flow tokens are keyed [context][step] (e.g. prose.tight, product.section) - a
+ * context class carrying a 4-step ramp, not one flat var per context. Group by
+ * context and key the var on the step, so tight/default/loose/section don't
+ * collapse onto a single `--flow-${context}` var (last-token-wins).
  */
-const formatFlow = (token) => {
-	return ` --flow-${token.attributes.type}: ${token.value / 16}rem`;
+const FLOW_STEP_ORDER = ['tight', 'default', 'loose', 'section'];
+
+const formatFlow = (dictionary) => {
+	const byContext = {};
+
+	dictionary.allTokens.forEach((token) => {
+		const [, context, step] = token.path;
+		byContext[context] = byContext[context] || {};
+		byContext[context][step] = `${token.value / 16}rem`;
+	});
+
+	return Object.keys(byContext)
+		.map((context) => {
+			const steps = byContext[context];
+			const vars = FLOW_STEP_ORDER.filter((step) => steps[step] !== undefined)
+				.map((step) => `--flow-${step}: ${steps[step]};`)
+				.join(' ');
+			return `.flow-${context} { ${vars} }`;
+		})
+		.join('\n');
 };
 
 StyleDictionary.registerFormat({
 	name: 'custom/flow',
 	format({ dictionary }) {
-		return `:root {
-        ${dictionary.allTokens.map(formatFlow).join(';\n')}
-      }`;
+		return formatFlow(dictionary);
 	}
 });
 
