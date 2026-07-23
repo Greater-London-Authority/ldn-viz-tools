@@ -83,9 +83,9 @@
 
 	let textClasses = $derived(
 		classNames(
-			`flex w-full items-center level-${level} p-1.5 hover:text-color-interactive-primary-hover hover:underline `,
+			`flex w-full items-center level-${level} label-tight p-1.5 hover:text-color-interactive-primary-hover hover:underline `,
 			isActive ? 'text-color-interactive-primary-active underline' : '',
-			level === 1 ? 'text-color-text text-base' : 'text-color-text-muted text-sm'
+			level === 1 ? 'text-color-text' : 'text-color-text-muted'
 		)
 	);
 
