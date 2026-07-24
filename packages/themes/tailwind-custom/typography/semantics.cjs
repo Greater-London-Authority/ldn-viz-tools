@@ -79,10 +79,10 @@ module.exports = {
 			listStyleType: 'decimal'
 		},
 		':where(ul, ol):not(:where(.not-prose, .not-prose *))': {
-			paddingInlineStart: 'var(--typography-spacing-lg)'
+			paddingInlineStart: 'var(--spacing-5)'
 		},
 		':where(li):not(:where(.not-prose, .not-prose *))': {
-			paddingLeft: 'var(--typography-spacing-xs)'
+			paddingLeft: 'var(--spacing-2)'
 		},
 		':where(ul li::marker, ol li::marker):not(:where(.not-prose, .not-prose *))': {
 			color: 'var(--color-text-muted)'
@@ -90,9 +90,9 @@ module.exports = {
 		// Blockquotes
 		':where(blockquote):not(:where(.not-prose, .not-prose *))': {
 			color: 'var(--color-text-muted)',
-			borderInlineStartWidth: 'var(--spacing-xxs)',
+			borderInlineStartWidth: 'var(--spacing-1)',
 			borderInlineStartColor: 'var(--color-static-brand)',
-			paddingInlineStart: 'var(--typography-spacing-md)'
+			paddingInlineStart: 'var(--spacing-4)'
 		},
 		':where(blockquote p):not(:where(.not-prose, .not-prose *))': {
 			fontSize: 'var(--lead-font-size)',
@@ -118,7 +118,7 @@ module.exports = {
 			color: 'var(--color-text)',
 			fontWeight: 600,
 			verticalAlign: 'bottom',
-			padding: 'var(--typography-spacing-xs)'
+			padding: 'var(--spacing-2)'
 		},
 		':where(tbody tr):not(:where(.not-prose, .not-prose *))': {
 			borderBottomWidth: '1px',
@@ -127,7 +127,7 @@ module.exports = {
 		':where(tbody tr:last-child):not(:where(.not-prose, .not-prose *))': { borderBottomWidth: 0 },
 		':where(tbody td, tfoot td):not(:where(.not-prose, .not-prose *))': {
 			verticalAlign: 'baseline',
-			padding: 'var(--typography-spacing-xs)'
+			padding: 'var(--spacing-2)'
 		},
 		':where(tfoot):not(:where(.not-prose, .not-prose *))': {
 			borderTopWidth: '1px',
@@ -136,7 +136,7 @@ module.exports = {
 		// Code
 		':where(code):not(:where(.not-prose, .not-prose *, [data-rehype-pretty-code-figure] *))': {
 			fontFamily: 'monospace',
-			padding: 'var(--typography-spacing-xxs) var(--typography-spacing-xs)',
+			padding: 'var(--spacing-1) var(--spacing-2)',
 			fontSize: 'var(--caption-font-size)',
 			backgroundColor: 'rgba(229, 229, 229, 0.35)'
 		}

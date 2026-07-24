@@ -102,7 +102,7 @@
 	<main class={classNames('w-full', breakPointProp === 'right' ? '' : 'order-1')}>
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
-			<p class="font-bold">
+			<p class="product body font-bold">
 				Provide some main content. The main content you provide should have appropriate padding
 				applied...
 			</p>

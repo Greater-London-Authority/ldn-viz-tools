@@ -195,10 +195,10 @@
 			--sv-disabled-bg: var(--color-interactive-disabled-muted);
 			--sv-border: var(--color-border-muted) 0px solid;
 			--sv-border-radius: 0px;
-			--sv-general-padding: var(--spacing-xs) var(--spacing-sm);
+			--sv-general-padding: var(--spacing-2) var(--spacing-3);
 			--sv-control-bg: var(--sv-bg);
 
-			--sv-item-wrap-padding: var(--spacing-sm) var(--spacing-xs);
+			--sv-item-wrap-padding: var(--spacing-3) var(--spacing-2);
 			--sv-item-selected-bg: var(--color-interactive-primary-muted);
 			--sv-item-btn-color: #000;
 			--sv-item-btn-color-hover: #777;
@@ -214,7 +214,7 @@
 			--sv-placeholder-color: var(--color-text-wash);
 
 			--sv-dropdown-bg: var(--sv-bg);
-			--sv-dropdown-offset: var(--spacing-xs);
+			--sv-dropdown-offset: var(--spacing-2);
 			--sv-dropdown-border: var(--color-border-muted) 1px solid;
 			--sv-dropdown-width: auto;
 			--sv-dropdown-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -265,7 +265,7 @@
 		.form-select.svelecte .sv-item--container > .sv-item--wrap.is-multi {
 			border: var(--color-border-muted) 1px solid;
 			border-right: none;
-			padding-right: var(--spacing-xs);
+			padding-right: var(--spacing-2);
 		}
 
 		.form-select.svelecte .sv-item--container .sv-item--btn {
