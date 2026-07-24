@@ -7,7 +7,7 @@ _Draft skeleton. The hard part of spacing migration is **classification**, not l
 For each spacing utility, decide which kind of spacing it is:
 
 - **Rhythm** — the gap between **vertically** stacked repeated peers (field after field, card after card, row after row) or between coupled content blocks (heading↔body, figure↔caption). Open-ended sequences. → **flow** (context class + let the coupling rules place it).
-- **Construction** — the fixed internal geometry that assembles a single component: padding, control/icon gaps, the offset between the named parts of one widget (this label / this input / this helper). Closed, designed set. → **spacing token** (`primitive.spacing.*`; component-internal carve-out permits primitives).
+- **Construction** — the fixed internal geometry that assembles a single component: padding, control/icon gaps, the offset between the named parts of one widget (this label / this input / this helper). Closed, designed set. → **spacing token** (`--spacing-{n}` public alias; never `--primitive-spacing-*` directly — the internal-primitive carve-out is retired, see below).
 
 **Axis rule (decides most edge cases):** flow is a **vertical** mechanism only — it applies `margin-top` down a stack. **Horizontal** peer gaps have no flow equivalent, so they are **always construction**, even when they're gaps between repeated peers that would otherwise read as rhythm (e.g. `space-x-*` between horizontal nav items, a horizontal flex/grid `gap`). Only vertical stacking is eligible for flow. So: repeated-peer gap **+ vertical** → flow; repeated-peer gap **+ horizontal** → construction.
 
@@ -50,33 +50,33 @@ If an existing `space-y-N` doesn't match the context's `default`, that's a signa
 
 ## Path B — construction → spacing token
 
-**End-state ruling (set during Callout test, 2026-07-22):** construction spacing **may remain as numeric Tailwind utilities** for this migration where the value equals the primitive step — this is the documented component-internal carve-out, and it's the less disruptive choice. Converting internal padding to explicit `spacing.*` bindings is a **separate later pass** that also verifies the values are correct. So "done" for a component does **not** require converting `p-*`/`gap-*` internal padding; leave numerically-correct Tailwind in place and note it. (The table below is the target for that later binding pass, and for any value that is *not* already on-scale.)
+**End-state ruling (updated 2026-07-24 — internal-primitive carve-out retired):** numeric Tailwind spacing utilities (`p-4`, `gap-2`, …) already compile to the public `--spacing-{n}` alias via `tw-extend/spacing.cjs` (`mt-4` → `var(--spacing-4)`), never to `--primitive-spacing-*` — so construction spacing **may remain as numeric Tailwind utilities** for this migration where the value is on-scale; that's not a primitive binding, it resolves through the alias automatically. The carve-out recorded during the Callout test (2026-07-22), which read as permission to bind component-internal spacing straight to the primitive, is **retired**: component-internal spacing binds to `--spacing-{n}` (or `flow`, where the gate above calls for rhythm) — **never** to `--primitive-spacing-*` directly. Converting internal padding to explicit `--spacing-*` bindings (rather than leaving bare Tailwind utilities) is a **separate later pass** that also verifies the values are correct. So "done" for a component does **not** require converting `p-*`/`gap-*` internal padding; leave numerically-correct Tailwind in place and note it. (The table below is the target for that later binding pass, and for any value that is *not* already on-scale.)
 
-`primitive.spacing.N` is a 4px scale where the number is the multiplier (`spacing.4` = 16px), so it aligns 1:1 with Tailwind's spacing scale — mostly a direct number swap.
+`--spacing-{n}` is the public alias for the 4px scale, where the number is the multiplier (`--spacing-4` = 16px); each alias is a pure reference to the private `--primitive-spacing-{n}` (never restated), so components bind to the alias only. It aligns 1:1 with Tailwind's spacing scale, so mapping is mostly a direct number swap.
 
 | Tailwind | px | → token |
 |---|---|---|
-| `0.5` | 2 | `spacing.0.5` |
-| `1` | 4 | `spacing.1` |
-| `1.5` | 6 | `spacing.1.5` |
-| `2` | 8 | `spacing.2` |
-| `2.5` | 10 | `spacing.2.5` |
-| `3` | 12 | `spacing.3` |
-| `3.5` | 14 | `spacing.3.5` |
-| `4` | 16 | `spacing.4` |
-| `5` | 20 | `spacing.5` |
-| `6` | 24 | `spacing.6` |
-| `7` | 28 | `spacing.7` |
-| `8` | 32 | `spacing.8` |
-| `10` | 40 | `spacing.10` |
-| `12` | 48 | `spacing.12` |
-| `16` | 64 | `spacing.16` |
+| `0.5` | 2 | `--spacing-0-5` |
+| `1` | 4 | `--spacing-1` |
+| `1.5` | 6 | `--spacing-1-5` |
+| `2` | 8 | `--spacing-2` |
+| `2.5` | 10 | `--spacing-2-5` |
+| `3` | 12 | `--spacing-3` |
+| `3.5` | 14 | `--spacing-3-5` |
+| `4` | 16 | `--spacing-4` |
+| `5` | 20 | `--spacing-5` |
+| `6` | 24 | `--spacing-6` |
+| `7` | 28 | `--spacing-7` |
+| `8` | 32 | `--spacing-8` |
+| `10` | 40 | `--spacing-10` |
+| `12` | 48 | `--spacing-12` |
+| `16` | 64 | `--spacing-16` |
 
 Off-scale arbitraries (`p-[15px]`, `mt-[13px]`) are off-system → snap to the nearest token and flag.
 
-## Do NOT map to `semantic-spacing` (t-shirt scale)
+## The retired `semantic-spacing` (t-shirt scale)
 
-`semantic-spacing` (`xxs … 9xl`) is **deprecating** toward the numbered/primitive scale. Do not introduce new bindings to it during migration; migrate off it where encountered. (Reference only: `xxs`4 `xs`8 `sm`12 `md`16 `lg`20 `xl`24 `2xl`28 `3xl`32 `4xl`40 `5xl`48 …)
+`semantic-spacing` (`xxs … 9xl`) is **retired**: as of 2026-07-24 the token source emits neither the t-shirt set nor its em-relative companion `--typography-spacing-*`, and the last two live component references (`Select.svelte`, `semantics.cjs`) have been migrated onto the numbered `--spacing-{n}` alias. Do not introduce new bindings to it — there's nothing left to bind to. (Reference only, for reading old code / historical PRs: `xxs`4 `xs`8 `sm`12 `md`16 `lg`20 `xl`24 `2xl`28 `3xl`32 `4xl`40 `5xl`48 …)
 
 ## Corners (system-wide visual rule)
 
@@ -92,6 +92,6 @@ Earlier, `flow-*` could not be applied to components with an `sr-only`/condition
 
 ## Deferred items (raised during Callout test)
 
-- **Construction-spacing value verification** — internal `p-*`/`gap-*` left as Tailwind this pass; a later pass checks the values are right and decides whether to bind them to `spacing.*` explicitly.
+- **Construction-spacing value verification** — internal `p-*`/`gap-*` left as Tailwind this pass; a later pass checks the values are right and decides whether to bind them to `--spacing-*` explicitly.
 - **Callout size-prop drift** — Figma models Callout as a single size (panel-title/body); code has `sm/md/lg`. After migration the prop varies *density* (padding) only, not type size — which narrows the gap. Post-migration decision: Figma gains density variants, or code drops the size prop. Component-API change, not a token migration — out of scope here.
 - **`border-l-[5px]` = branded accent (not an error)** — intentional brand element, correctly out of scope for a type/spacing/radius run. Follow-up: promote the arbitrary `[5px]` to a named token (e.g. a `border/brand-accent` width) so its intent is legible and future sweeps don't re-flag it as a stray value.

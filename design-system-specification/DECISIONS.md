@@ -121,7 +121,7 @@ _Step 3 of the t-shirt retirement (see token-architecture-and-naming.md §5, SPE
 
 - `.DS-` prefix = docs scaffolding (audited only on Get Started; `.DS-Page-Head` is an ignorable waymarker).
 - `.`-prefix (single dot, no DS) = internal/private sub-component (not scaffolding, not published) — legitimate, migrate normally.
-- Real components never skipped in sweeps. Component-internal spacing MAY use primitives (carve-out).
+- Real components never skipped in sweeps. ~~Component-internal spacing MAY use primitives (carve-out)~~ RETIRED 2026-07-24: component-internal spacing binds to the public `--spacing-{n}` alias (or `flow` where the spacing gate calls for rhythm) — **never** to `--primitive-spacing-*` directly. See Spacing alias — spec + guard closeout.
 - `component archive` page (6405:179693) — IGNORE in audits.
 
 ## Working stance
