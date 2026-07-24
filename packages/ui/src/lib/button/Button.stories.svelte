@@ -77,7 +77,7 @@
 				<Icon src={ArrowDownCircle} theme="solid" class="h-6 w-6" aria-hidden="true" />
 			</Button>
 			<Button {...args} variant="square" title="Down" size="lg">
-				<Icon src={ArrowDownCircle} theme="solid" class="h-8 w-8" aria-hidden="true" />
+				<Icon src={ArrowDownCircle} theme="solid" class="mb-0.5 h-8 w-8" aria-hidden="true" />
 				Down
 			</Button>
 		</div>

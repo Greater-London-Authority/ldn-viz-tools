@@ -23,8 +23,8 @@
 	}: Props = $props();
 
 	const orientationClasses = {
-		vertical: 'text-xs w-20 h-20 p-2 flex flex-col items-center justify-center text-center',
-		horizontal: 'text-base py-2 px-4 flex items-center select-none'
+		vertical: 'label leading-none w-20 h-20 p-2 flex flex-col items-center justify-center text-center',
+		horizontal: 'label leading-none py-2 px-4 flex items-center select-none'
 	};
 
 	const tabLabelClasses = classNames(
