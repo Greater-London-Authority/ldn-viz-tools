@@ -55,6 +55,12 @@ _Step 3 of the t-shirt retirement (see token-architecture-and-naming.md §5, SPE
 - **`apps/web/src/content/design-system/foundations/design-tokens.md` updated** — doc prose no longer shows the retired t-shirt/em example (`--spacing-md` / `--typography-spacing-md`); now documents the numbered scale + a pointer to `flow` for vertical rhythm.
 - **T-shirt retirement scope decision — RESOLVED:** repo consumer migration (step 3) is done and full-scan-verified. Remaining work is **step 4 only** (separate, gated): drop `--spacing-{tshirt}` + `--typography-spacing-*` emission from `sd.config.json`/`sd.build.js`, unwire the t-shirt Tailwind file, delete `semantic-spacing` in Figma, re-run full-scan verify, then re-baseline.
 
+## Spacing alias — spec + guard closeout (2026-07-24)
+
+- **Spec documents the public layer.** `design-system-specification.md` reframes `--primitive-spacing-{n}` as the private source, adds a `## Public spacing layer (--spacing-{n} / mt-{n})` subsection + generated `GEN:spacing-alias` table, and rewrites the t-shirt section to past tense (retired; source emits neither t-shirt nor `--typography-spacing-*`; consumers migrated, full-scan verified).
+- **Guard now covers the alias.** `regen_spec.py check` asserts every `--spacing-{n}` is a pure `var(--primitive-spacing-{n})` reference to the identically-keyed primitive and that all dev-facing rungs exist — catches the dropped-rung and mis-key (spacing-9→primitive-spacing-10) classes. New `GEN:spacing-alias` block generated from styles/.
+- **Observed (confirmed at HEAD):** the current `sd.config.json` / `sd.build.js` / token export / emitted output carry NO t-shirt or `--typography-spacing-*` emission — so step 4's "drop emit / unwire t-shirt Tailwind file" is already complete at the pipeline level. Remaining step-4 items reduce to Figma `semantic-spacing` rename (done) + accept-and-re-baseline.
+
 ---
 
 ## Sources of truth (who's authoritative)
@@ -150,7 +156,7 @@ To continue this work in a fresh thread, load: **DECISIONS.md** (this file — s
 - Retire old Metric family + old Section break sets (user moving to archive page; composition sweep fixes instances).
 - Repo/Claude-Code: full cutover via parser alias; migrate real Storybook tables + charts.
 - Maps page: still a gap (empty / re-assess later).
-- ~~T-shirt retirement — scope decision OPEN~~ RESOLVED 2026-07-24: spec-only done; **repo consumer migration (step 3) done, full-scan verified** — see Repo consumer migration resolutions. Remaining: Figma (delete `semantic-spacing`) + repo step 4 (drop t-shirt emit, full-scan verify, re-baseline) — pending.
+- ~~T-shirt retirement — scope decision OPEN~~ RESOLVED 2026-07-24: spec-only done; **repo consumer migration (step 3) done, full-scan verified**; **step 4 pipeline-level emit already dropped** (confirmed at HEAD — `sd.config.json`/`sd.build.js`/emitted output carry no t-shirt or `--typography-spacing-*` output). See Repo consumer migration + Spacing alias closeout resolutions. Remaining: Figma `semantic-spacing` rename (done) + accept-and-re-baseline only.
 - **Fluid tier home** — implement 4 `clamp()` roles + unitless lh in cjs (post-SD) OR keep spec-only. Currently spec-only.
 - **`tw-extend/primitive-spacing.cjs`** emitted but not wired into `ldn-theme.cjs` (repo).
 
@@ -167,4 +173,5 @@ To continue this work in a fresh thread, load: **DECISIONS.md** (this file — s
 - ▶ NEXT (charts): the genuinely open item is **repointing the 11 raw SVG exports** in the "Example downloads" frame (`6497:277388`) — verified untouched (348 unstyled text nodes, 323 hardcoded hex fills, 0 tokens). Assign `Chart/*` roles + repoint fills to `data/*`/`chart/*`. Needs a hex→token colour map first (read `data/*`+`chart/*`, confirm mapping, then migrate + full-scan verify).
 - ✅ Spec reconciled to emitted output (2026-07-24): Step 5 applied, 17-step scale, two-policy line-height, chart 14/12, fluid spec-only; value blocks generated between `GEN` markers; `regen_spec.py` + `SPEC-CHANGE-PROTOCOL.md` added.
 - ⚠ GENERAL: the transport docs had drifted materially behind the live file (caught 2026-07-20 via ground-truth recon). Re-verify against Figma before trusting any snapshot line; re-audit `charts/bar-chart.md` similarly when next touching charts.
-- ✅ T-shirt spacing repo consumer migration (2026-07-24, step 3): `Select.svelte` + `semantics.cjs` migrated off `--spacing-{tshirt}`/`--typography-spacing-*` onto numbered `--spacing-{n}`; full-scan verified zero remaining t-shirt/em-set/stray-primitive refs in consumers; build re-verified zero-diff. Step 4 (drop emit, Figma cleanup) still pending.
+- ✅ T-shirt spacing repo consumer migration (2026-07-24, step 3): `Select.svelte` + `semantics.cjs` migrated off `--spacing-{tshirt}`/`--typography-spacing-*` onto numbered `--spacing-{n}`; full-scan verified zero remaining t-shirt/em-set/stray-primitive refs in consumers; build re-verified zero-diff.
+- ✅ Spacing alias spec + guard closeout (2026-07-24): spec documents `--primitive-spacing-{n}` as private source + new "Public spacing layer" section with generated `GEN:spacing-alias` table; t-shirt section rewritten past-tense as retired; `regen_spec.py check` now guards every `--spacing-{n}` is a pure reference to its identically-keyed primitive (dropped-rung + mis-key protection). Step 4 confirmed already complete at the pipeline level (no t-shirt/em-set emission at HEAD) — only Figma cleanup + re-baseline remain.

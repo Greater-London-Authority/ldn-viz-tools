@@ -48,6 +48,15 @@ PINNED = [
     ("product card-panel-eyebrow wt 500", "product", "card-panel-eyebrow","font-weight",500,None),
 ]
 
+# ── public spacing-alias contract (--spacing-{n} -> var(--primitive-spacing-{n})).
+#    These are the dev-facing rungs (migration-table targets + sub-steps); each
+#    MUST exist and resolve to the identically-keyed primitive by *pure reference*
+#    (never a restated value). Guards two failure classes: a dropped rung, and the
+#    mis-key bug (e.g. --spacing-9 -> --primitive-spacing-10). Keep in step with
+#    DECISIONS.md "spacing consumption alias --spacing-{n} -> primitive".
+SPACING_ALIAS_REQUIRED = ["1", "2", "3", "4", "5", "6", "7", "8", "10", "12",
+                          "14", "16", "20", "24", "px", "0-5", "1-5", "2-5", "3-5"]
+
 # ── ordered editorial rows for the responsive matrices. Each display row names
 #    one or more emitted roles; multi-role rows must share a value (asserted).
 PROSE_ROWS = [
@@ -124,6 +133,20 @@ def parse_primitive_scale(styles_dir):
     sp = re.findall(r"(--primitive-spacing-[0-9a-z-]+):\s*([^;]+);", txt)
     return fs, sp
 
+def parse_spacing_alias(styles_dir):
+    """styles/spacing.css -> {alias_key: referenced_primitive_key or None}, in
+    emission order. e.g. '--spacing-4: var(--primitive-spacing-4, 1rem);' -> 4:'4'.
+    The var() target is what matters (the fallback is not part of the contract)."""
+    path = os.path.join(styles_dir, "spacing.css")
+    txt = open(path).read()
+    out = {}
+    for key, body in re.findall(r"--spacing-([0-9a-z-]+)\s*:\s*([^;}]+)", txt):
+        m = re.search(r"var\(\s*--primitive-spacing-([0-9a-z-]+)", body)
+        out[key] = m.group(1) if m else None
+    if not out:
+        sys.exit(f"ERROR: parsed 0 --spacing-* aliases from {path}")
+    return out
+
 # ───────────────────────── generating the blocks ──────────────────────────
 
 def gen_css_appendix(styles_dir):
@@ -191,6 +214,19 @@ def gen_spacing_table(styles_dir):
         rows.append(f"| `{name}` | {px} | {val} |")
     return "\n".join(rows)
 
+def gen_spacing_alias(styles_dir):
+    """Public spacing layer table: utility -> --spacing-{n} -> primitive it references.
+    Utility name uses Tailwind's dot spelling for sub-steps (1-5 -> mt-1.5)."""
+    alias = parse_spacing_alias(styles_dir)
+    def util(k):
+        return "mt-" + re.sub(r"^(\d+)-(\d+)$", r"\1.\2", k)
+    rows = ["| Utility (e.g.) | Public token | References |",
+            "|----------------|--------------|------------|"]
+    for k, ref in alias.items():
+        tgt = f"`--primitive-spacing-{ref}`" if ref else "**—  not a reference!**"
+        rows.append(f"| `{util(k)}` | `--spacing-{k}` | {tgt} |")
+    return "\n".join(rows)
+
 def _matrix(model, family, rowspec, omit):
     emitted = role_set(model, family) - {"readable-width"}
     named = {r for _lbl, rs in rowspec for r in rs}
@@ -224,6 +260,7 @@ def gen_product_matrix(styles_dir):
 BLOCKS = {
     "css-appendix":   gen_css_appendix,
     "spacing-table":  gen_spacing_table,
+    "spacing-alias":  gen_spacing_alias,
     "prose-matrix":   gen_prose_matrix,
     "product-matrix": gen_product_matrix,
 }
@@ -271,6 +308,27 @@ def cmd_gen(spec_path, styles_dir, dry=False):
         print("     (already current — no value changes)")
     return stale
 
+def check_spacing_alias(styles_dir):
+    """The governing-decision invariant: every public --spacing-{n} is a pure
+    reference to the identically-keyed primitive, and every required rung exists."""
+    alias = parse_spacing_alias(styles_dir)
+    ok = True
+    print("spacing alias (--spacing-{n} -> --primitive-spacing-{n}):")
+    missing = [k for k in SPACING_ALIAS_REQUIRED if k not in alias]
+    if missing:
+        ok = False
+        print(f"  [FAIL] required rungs missing from --spacing-*: {missing}")
+    for key, ref in alias.items():
+        if ref is None:
+            ok = False
+            print(f"  [FAIL] --spacing-{key} restates a value instead of referencing a primitive")
+        elif ref != key:
+            ok = False
+            print(f"  [FAIL] --spacing-{key} -> --primitive-spacing-{ref} (key mismatch; expected -{key})")
+    if ok:
+        print(f"  [PASS] {len(alias)} aliases present, all pure references to the matching primitive")
+    return ok
+
 def cmd_check(spec_path, styles_dir):
     ok = True
     stale = cmd_gen(spec_path, styles_dir, dry=True)
@@ -279,6 +337,8 @@ def cmd_check(spec_path, styles_dir):
         print("STALE blocks (run `gen`): " + ", ".join(stale))
     else:
         print("blocks: up to date")
+    if not check_spacing_alias(styles_dir):
+        ok = False
     model = parse_typography(styles_dir)
     print("lint (pinned decisions vs emitted):")
     for desc, fam, role, prop, expected, modes in PINNED:

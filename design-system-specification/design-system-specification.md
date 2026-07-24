@@ -439,9 +439,9 @@ The spacing system is independent of the type scale and stands on its own. Every
 
 Layout rhythm defaults to 8px; the 4px sub-grid is for the places where type (font-size or line-height) needs to compose against spacing.
 
-### Primitive spacing tokens
+### Primitive spacing tokens (private source)
 
-Numbered so the index directly encodes the multiplier of the 4px unit (`--primitive-spacing-4` = 4 × 4px = 16px). This is the canonical spacing scale; it supersedes the deprecated t-shirt scale (below).
+Numbered so the index directly encodes the multiplier of the 4px unit (`--primitive-spacing-4` = 4 × 4px = 16px). This is the **private source scale** — the single place a spacing value is defined. Only `flow` / `grid-spacing` and the public `--spacing-{n}` alias (below) reference it; authored code and components never bind to `--primitive-*` directly.
 
 <!-- GEN:spacing-table START -->
 | Token | Value (px) | Value (rem) |
@@ -485,9 +485,43 @@ Numbered so the index directly encodes the multiplier of the 4px unit (`--primit
 
 Sub-steps cover the finer gaps (dots are invalid in CSS idents, so they are spelled out): `--primitive-spacing-px` 1px, `--primitive-spacing-0-5` 2px, `--primitive-spacing-1-5` 6px, `--primitive-spacing-2-5` 10px, `--primitive-spacing-3-5` 14px. The low end aligns with Tailwind's default spacing scale (`p-4` → 16px), so no custom rungs are required.
 
-### Retiring the t-shirt scale
+### Public spacing layer (`--spacing-{n}` / `mt-{n}`)
 
-A parallel t-shirt scale (`--spacing-{xxs…9xl}` plus an em set `--typography-spacing-*`, 14 rungs each) still emits today and is **deprecated-but-live**. The numbered `--primitive-spacing-{n}` scale is canonical; the t-shirt scale is being retired in phases: (1) the numbered scale emits — done; (2) migrate component bindings from `--spacing-{tshirt}` onto `--primitive-spacing-{n}` (or a thin semantic alias that references the primitive via `var()`, never restating values); (3) drop the t-shirt emit once nothing references it, verified with a full scan. Steps 2–3 are repo work; author against the numbered scale now.
+Components and authored CSS bind to a thin **semantic alias**, never to the primitive. Each `--spacing-{n}` is a pure reference — `var(--primitive-spacing-{n})` — carrying no value of its own (the colour `outputReferences` pattern): the primitive stays the single source of truth and the alias just forwards the name. This layer is authored in Figma too, as the numbered `semantic-spacing` collection, for parity.
+
+Tailwind utilities compile to the alias: `mt-{n}` → `margin-top: var(--spacing-{n})`, so `mt-4` = 16px. Fractional sub-steps keep Tailwind's dot spelling on the class while the custom property uses dashes: `mt-1.5` → `var(--spacing-1-5)`. Authors write `mt-{n}` / `p-{n}` / … ; they never type `--primitive-spacing-*` (nor the `mt-primitive-spacing-*` that keying utilities on the primitive would produce).
+
+There is deliberately **no** named spacing-role set beyond `flow` (vertical rhythm) and `grid-spacing` (layout structure). A numbered alias carries no decision and is free; a named role must earn a one-sentence job those two don't already cover.
+
+<!-- GEN:spacing-alias START -->
+| Utility (e.g.) | Public token | References |
+|----------------|--------------|------------|
+| `mt-1` | `--spacing-1` | `--primitive-spacing-1` |
+| `mt-2` | `--spacing-2` | `--primitive-spacing-2` |
+| `mt-3` | `--spacing-3` | `--primitive-spacing-3` |
+| `mt-4` | `--spacing-4` | `--primitive-spacing-4` |
+| `mt-5` | `--spacing-5` | `--primitive-spacing-5` |
+| `mt-6` | `--spacing-6` | `--primitive-spacing-6` |
+| `mt-7` | `--spacing-7` | `--primitive-spacing-7` |
+| `mt-8` | `--spacing-8` | `--primitive-spacing-8` |
+| `mt-10` | `--spacing-10` | `--primitive-spacing-10` |
+| `mt-12` | `--spacing-12` | `--primitive-spacing-12` |
+| `mt-14` | `--spacing-14` | `--primitive-spacing-14` |
+| `mt-16` | `--spacing-16` | `--primitive-spacing-16` |
+| `mt-20` | `--spacing-20` | `--primitive-spacing-20` |
+| `mt-24` | `--spacing-24` | `--primitive-spacing-24` |
+| `mt-px` | `--spacing-px` | `--primitive-spacing-px` |
+| `mt-0.5` | `--spacing-0-5` | `--primitive-spacing-0-5` |
+| `mt-1.5` | `--spacing-1-5` | `--primitive-spacing-1-5` |
+| `mt-2.5` | `--spacing-2-5` | `--primitive-spacing-2-5` |
+| `mt-3.5` | `--spacing-3-5` | `--primitive-spacing-3-5` |
+<!-- GEN:spacing-alias END -->
+
+### The retired t-shirt scale
+
+The system previously carried a parallel t-shirt scale (`--spacing-{xxs…9xl}` plus an em-relative set `--typography-spacing-*`). It is **retired**: the token source emits neither set, and all consumers have been migrated onto the numbered `--spacing-{n}` scale (full-repo scan verified; the last live references were in `Select.svelte` and `semantics.cjs`). Every t-shirt value was an exact rung, so the migration was a rename-by-alias with no re-scaling (xxs→1, xs→2, sm→3, md→4, lg→5, xl→6, 2xl→7, 3xl→8, 4xl→**10**, 5xl→12, 6xl→14, 7xl→16, 8xl→20, 9xl→24). The `--typography-spacing-*` em set was construction spacing (padding, border widths), not vertical rhythm, so it mapped to numbered `--spacing-{n}` rather than to `flow`.
+
+**Constraint that outlived the retirement:** `semantic-flow`, `semantic-spacing`, and `grid-spacing` reference `primitive.spacing` and ÷16 expecting **px** — so the shared primitive value must stay px in the token graph, with rem conversion only at emit time. The `--spacing-{n}` alias sidesteps this by referencing rather than restating.
 
 ### Spacing around type comes from the spacing scale
 
