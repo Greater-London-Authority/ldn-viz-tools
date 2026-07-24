@@ -17,6 +17,11 @@
 					}
 				},
 				{
+					"destination": "primitive-scale.css",
+					"format": "custom/primitive-scale",
+					"filter": "cssPrimitiveScaleFilter"
+				},
+				{
 					"destination": "light.css",
 					"format": "css/variables",
 					"filter": "cssLightModeFilter",
@@ -39,7 +44,12 @@
 				{
 					"destination": "spacing.css",
 					"format": "custom/spacing",
-					"filter": "cssSpacingFilter"
+					"filter": "cssSpacingFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
 				},
 				{
 					"destination": "grid-spacing.css",
@@ -54,7 +64,12 @@
 				{
 					"destination": "typography.css",
 					"format": "custom/typography",
-					"filter": "cssTypographyFilter"
+					"filter": "cssTypographyFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
 				},
 				{
 					"destination": "shadows.css",

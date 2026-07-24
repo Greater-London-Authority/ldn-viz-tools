@@ -238,75 +238,100 @@
     }
   },
   "semantic-spacing": {
-    "xxs": {
+    "1": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.1}"
     },
-    "xs": {
+    "2": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.2}"
     },
-    "sm": {
+    "3": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.3}"
     },
-    "md": {
+    "4": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.4}"
     },
-    "lg": {
+    "5": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.5}"
     },
-    "xl": {
+    "6": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.6}"
     },
-    "2xl": {
+    "7": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.7}"
     },
-    "3xl": {
+    "8": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.8}"
     },
-    "4xl": {
+    "10": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.10}"
     },
-    "5xl": {
+    "12": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.12}"
     },
-    "6xl": {
+    "14": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.14}"
     },
-    "7xl": {
+    "16": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.16}"
     },
-    "8xl": {
+    "20": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.20}"
     },
-    "9xl": {
+    "24": {
       "description": "",
       "type": "dimension",
       "value": "{primitive.mode 1.spacing.24}"
+    },
+    "px": {
+      "description": "",
+      "type": "dimension",
+      "value": "{primitive.mode 1.spacing.px}"
+    },
+    "0-5": {
+      "description": "",
+      "type": "dimension",
+      "value": "{primitive.mode 1.spacing.0-5}"
+    },
+    "1-5": {
+      "description": "",
+      "type": "dimension",
+      "value": "{primitive.mode 1.spacing.1-5}"
+    },
+    "2-5": {
+      "description": "",
+      "type": "dimension",
+      "value": "{primitive.mode 1.spacing.2-5}"
+    },
+    "3-5": {
+      "description": "",
+      "type": "dimension",
+      "value": "{primitive.mode 1.spacing.3-5}"
     }
   },
   "primitive": {
@@ -1725,19 +1750,19 @@
         "type": "dimension",
         "value": 1
       },
-      "0․5": {
+      "0-5": {
         "type": "dimension",
         "value": 2
       },
-      "1․5": {
+      "1-5": {
         "type": "dimension",
         "value": 6
       },
-      "2․5": {
+      "2-5": {
         "type": "dimension",
         "value": 10
       },
-      "3․5": {
+      "3-5": {
         "type": "dimension",
         "value": 14
       }
@@ -1768,6 +1793,76 @@
           "bold": {
             "type": "dimension",
             "value": 700
+          }
+        },
+        "size": {
+          "12": {
+            "type": "dimension",
+            "value": 12
+          },
+          "14": {
+            "type": "dimension",
+            "value": 14
+          },
+          "16": {
+            "type": "dimension",
+            "value": 16
+          },
+          "18": {
+            "type": "dimension",
+            "value": 18
+          },
+          "20": {
+            "type": "dimension",
+            "value": 20
+          },
+          "22": {
+            "type": "dimension",
+            "value": 22
+          },
+          "24": {
+            "type": "dimension",
+            "value": 24
+          },
+          "26": {
+            "type": "dimension",
+            "value": 26
+          },
+          "28": {
+            "type": "dimension",
+            "value": 28
+          },
+          "30": {
+            "type": "dimension",
+            "value": 30
+          },
+          "32": {
+            "type": "dimension",
+            "value": 32
+          },
+          "36": {
+            "type": "dimension",
+            "value": 36
+          },
+          "40": {
+            "type": "dimension",
+            "value": 40
+          },
+          "48": {
+            "type": "dimension",
+            "value": 48
+          },
+          "56": {
+            "type": "dimension",
+            "value": 56
+          },
+          "64": {
+            "type": "dimension",
+            "value": 64
+          },
+          "76": {
+            "type": "dimension",
+            "value": 76
           }
         }
       }
@@ -4260,8 +4355,9 @@
       "prose": {
         "display": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 48
+            "value": "{primitive.sm.typography.font.size.48}"
           },
           "font-family": {
             "description": "",
@@ -4288,8 +4384,9 @@
         },
         "headline": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 36
+            "value": "{primitive.sm.typography.font.size.36}"
           },
           "font-family": {
             "description": "",
@@ -4316,8 +4413,9 @@
         },
         "subhead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.sm.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -4340,8 +4438,9 @@
         },
         "title-1": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 30
+            "value": "{primitive.sm.typography.font.size.30}"
           },
           "font-family": {
             "description": "",
@@ -4364,8 +4463,9 @@
         },
         "title-2": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 26
+            "value": "{primitive.sm.typography.font.size.26}"
           },
           "font-family": {
             "description": "",
@@ -4388,8 +4488,9 @@
         },
         "title-3": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.sm.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -4412,8 +4513,9 @@
         },
         "subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 18
+            "value": "{primitive.sm.typography.font.size.18}"
           },
           "font-family": {
             "description": "",
@@ -4436,8 +4538,9 @@
         },
         "lead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.sm.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -4460,8 +4563,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.sm.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -4484,8 +4588,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4508,8 +4613,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.sm.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -4532,8 +4638,9 @@
         },
         "title-4": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.sm.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -4560,8 +4667,9 @@
         },
         "eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4586,8 +4694,9 @@
       "product": {
         "dashboard-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 30
+            "value": "{primitive.sm.typography.font.size.30}"
           },
           "font-family": {
             "description": "",
@@ -4610,8 +4719,9 @@
         },
         "section-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 24
+            "value": "{primitive.sm.typography.font.size.24}"
           },
           "font-family": {
             "description": "",
@@ -4634,8 +4744,9 @@
         },
         "card-panel-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.sm.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -4658,8 +4769,9 @@
         },
         "metric": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 30
+            "value": "{primitive.sm.typography.font.size.30}"
           },
           "font-family": {
             "description": "",
@@ -4682,8 +4794,9 @@
         },
         "metric-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.sm.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -4706,8 +4819,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.sm.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -4730,8 +4844,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4754,8 +4869,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4778,8 +4894,9 @@
         },
         "label-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.sm.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -4802,8 +4919,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.sm.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -4826,8 +4944,9 @@
         },
         "card-panel-eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4850,8 +4969,9 @@
         },
         "card-panel-subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.sm.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -4876,8 +4996,9 @@
       "chart": {
         "axis-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4900,8 +5021,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4924,8 +5046,9 @@
         },
         "tick": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.sm.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -4948,8 +5071,9 @@
         },
         "tick-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.sm.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -4976,8 +5100,9 @@
       "prose": {
         "display": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 56
+            "value": "{primitive.md.typography.font.size.56}"
           },
           "font-family": {
             "description": "",
@@ -5004,8 +5129,9 @@
         },
         "headline": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 40
+            "value": "{primitive.md.typography.font.size.40}"
           },
           "font-family": {
             "description": "",
@@ -5032,8 +5158,9 @@
         },
         "subhead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.md.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -5056,8 +5183,9 @@
         },
         "title-1": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 32
+            "value": "{primitive.md.typography.font.size.32}"
           },
           "font-family": {
             "description": "",
@@ -5080,8 +5208,9 @@
         },
         "title-2": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.md.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -5104,8 +5233,9 @@
         },
         "title-3": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.md.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -5128,8 +5258,9 @@
         },
         "subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 18
+            "value": "{primitive.md.typography.font.size.18}"
           },
           "font-family": {
             "description": "",
@@ -5152,8 +5283,9 @@
         },
         "lead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.md.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -5176,8 +5308,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.md.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -5200,8 +5333,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5224,8 +5358,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.md.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -5248,8 +5383,9 @@
         },
         "title-4": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.md.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -5276,8 +5412,9 @@
         },
         "eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5302,8 +5439,9 @@
       "product": {
         "dashboard-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 32
+            "value": "{primitive.md.typography.font.size.32}"
           },
           "font-family": {
             "description": "",
@@ -5326,8 +5464,9 @@
         },
         "section-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 26
+            "value": "{primitive.md.typography.font.size.26}"
           },
           "font-family": {
             "description": "",
@@ -5350,8 +5489,9 @@
         },
         "card-panel-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.md.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -5374,8 +5514,9 @@
         },
         "metric": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 32
+            "value": "{primitive.md.typography.font.size.32}"
           },
           "font-family": {
             "description": "",
@@ -5398,8 +5539,9 @@
         },
         "metric-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.md.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -5422,8 +5564,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.md.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -5446,8 +5589,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5470,8 +5614,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5494,8 +5639,9 @@
         },
         "label-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.md.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -5518,8 +5664,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.md.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -5542,8 +5689,9 @@
         },
         "card-panel-eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5566,8 +5714,9 @@
         },
         "card-panel-subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.md.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -5592,8 +5741,9 @@
       "chart": {
         "axis-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5616,8 +5766,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5640,8 +5791,9 @@
         },
         "tick": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.md.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5664,8 +5816,9 @@
         },
         "tick-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.md.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -5692,8 +5845,9 @@
       "prose": {
         "display": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 64
+            "value": "{primitive.lg.typography.font.size.64}"
           },
           "font-family": {
             "description": "",
@@ -5720,8 +5874,9 @@
         },
         "headline": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 48
+            "value": "{primitive.lg.typography.font.size.48}"
           },
           "font-family": {
             "description": "",
@@ -5748,8 +5903,9 @@
         },
         "subhead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.lg.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -5772,8 +5928,9 @@
         },
         "title-1": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 32
+            "value": "{primitive.lg.typography.font.size.32}"
           },
           "font-family": {
             "description": "",
@@ -5796,8 +5953,9 @@
         },
         "title-2": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 30
+            "value": "{primitive.lg.typography.font.size.30}"
           },
           "font-family": {
             "description": "",
@@ -5820,8 +5978,9 @@
         },
         "title-3": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 24
+            "value": "{primitive.lg.typography.font.size.24}"
           },
           "font-family": {
             "description": "",
@@ -5844,8 +6003,9 @@
         },
         "subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 18
+            "value": "{primitive.lg.typography.font.size.18}"
           },
           "font-family": {
             "description": "",
@@ -5868,8 +6028,9 @@
         },
         "lead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.lg.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -5892,8 +6053,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.lg.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -5916,8 +6078,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -5940,8 +6103,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.lg.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -5964,8 +6128,9 @@
         },
         "title-4": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.lg.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -5992,8 +6157,9 @@
         },
         "eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6018,8 +6184,9 @@
       "product": {
         "dashboard-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 32
+            "value": "{primitive.lg.typography.font.size.32}"
           },
           "font-family": {
             "description": "",
@@ -6042,8 +6209,9 @@
         },
         "section-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 26
+            "value": "{primitive.lg.typography.font.size.26}"
           },
           "font-family": {
             "description": "",
@@ -6066,8 +6234,9 @@
         },
         "card-panel-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.lg.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -6090,8 +6259,9 @@
         },
         "metric": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 32
+            "value": "{primitive.lg.typography.font.size.32}"
           },
           "font-family": {
             "description": "",
@@ -6114,8 +6284,9 @@
         },
         "metric-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.lg.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -6138,8 +6309,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.lg.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -6162,8 +6334,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6186,8 +6359,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6210,8 +6384,9 @@
         },
         "label-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.lg.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -6234,8 +6409,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.lg.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -6258,8 +6434,9 @@
         },
         "card-panel-eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6282,8 +6459,9 @@
         },
         "card-panel-subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.lg.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -6308,8 +6486,9 @@
       "chart": {
         "axis-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6332,8 +6511,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6356,8 +6536,9 @@
         },
         "tick": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.lg.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6380,8 +6561,9 @@
         },
         "tick-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.lg.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -6408,8 +6590,9 @@
       "prose": {
         "display": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 76
+            "value": "{primitive.xl.typography.font.size.76}"
           },
           "font-family": {
             "description": "",
@@ -6436,8 +6619,9 @@
         },
         "headline": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 56
+            "value": "{primitive.xl.typography.font.size.56}"
           },
           "font-family": {
             "description": "",
@@ -6464,8 +6648,9 @@
         },
         "subhead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.xl.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -6488,8 +6673,9 @@
         },
         "title-1": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 36
+            "value": "{primitive.xl.typography.font.size.36}"
           },
           "font-family": {
             "description": "",
@@ -6512,8 +6698,9 @@
         },
         "title-2": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 30
+            "value": "{primitive.xl.typography.font.size.30}"
           },
           "font-family": {
             "description": "",
@@ -6536,8 +6723,9 @@
         },
         "title-3": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 24
+            "value": "{primitive.xl.typography.font.size.24}"
           },
           "font-family": {
             "description": "",
@@ -6560,8 +6748,9 @@
         },
         "subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 18
+            "value": "{primitive.xl.typography.font.size.18}"
           },
           "font-family": {
             "description": "",
@@ -6584,8 +6773,9 @@
         },
         "lead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.xl.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -6608,8 +6798,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.xl.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -6632,8 +6823,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6656,8 +6848,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.xl.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -6680,8 +6873,9 @@
         },
         "title-4": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.xl.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -6708,8 +6902,9 @@
         },
         "eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6734,8 +6929,9 @@
       "product": {
         "dashboard-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 36
+            "value": "{primitive.xl.typography.font.size.36}"
           },
           "font-family": {
             "description": "",
@@ -6758,8 +6954,9 @@
         },
         "section-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.xl.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -6782,8 +6979,9 @@
         },
         "card-panel-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.xl.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -6806,8 +7004,9 @@
         },
         "metric": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 36
+            "value": "{primitive.xl.typography.font.size.36}"
           },
           "font-family": {
             "description": "",
@@ -6830,8 +7029,9 @@
         },
         "metric-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.xl.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -6854,8 +7054,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.xl.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -6878,8 +7079,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6902,8 +7104,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6926,8 +7129,9 @@
         },
         "label-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.xl.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -6950,8 +7154,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.xl.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -6974,8 +7179,9 @@
         },
         "card-panel-eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -6998,8 +7204,9 @@
         },
         "card-panel-subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.xl.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -7024,8 +7231,9 @@
       "chart": {
         "axis-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7048,8 +7256,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7072,8 +7281,9 @@
         },
         "tick": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.xl.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7096,8 +7306,9 @@
         },
         "tick-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.xl.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -7124,8 +7335,9 @@
       "prose": {
         "display": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 40
+            "value": "{primitive.base.typography.font.size.40}"
           },
           "font-family": {
             "description": "",
@@ -7152,8 +7364,9 @@
         },
         "headline": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 32
+            "value": "{primitive.base.typography.font.size.32}"
           },
           "font-family": {
             "description": "",
@@ -7180,8 +7393,9 @@
         },
         "subhead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.base.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -7204,8 +7418,9 @@
         },
         "title-1": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.base.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -7228,8 +7443,9 @@
         },
         "title-2": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 24
+            "value": "{primitive.base.typography.font.size.24}"
           },
           "font-family": {
             "description": "",
@@ -7252,8 +7468,9 @@
         },
         "title-3": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.base.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -7276,8 +7493,9 @@
         },
         "subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 18
+            "value": "{primitive.base.typography.font.size.18}"
           },
           "font-family": {
             "description": "",
@@ -7300,8 +7518,9 @@
         },
         "lead": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 22
+            "value": "{primitive.base.typography.font.size.22}"
           },
           "font-family": {
             "description": "",
@@ -7324,8 +7543,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.base.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -7348,8 +7568,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7372,8 +7593,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.base.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -7396,8 +7618,9 @@
         },
         "title-4": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.base.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -7424,8 +7647,9 @@
         },
         "eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7450,8 +7674,9 @@
       "product": {
         "dashboard-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.base.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -7474,8 +7699,9 @@
         },
         "section-head": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 24
+            "value": "{primitive.base.typography.font.size.24}"
           },
           "font-family": {
             "description": "",
@@ -7498,8 +7724,9 @@
         },
         "card-panel-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.base.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -7522,8 +7749,9 @@
         },
         "metric": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 28
+            "value": "{primitive.base.typography.font.size.28}"
           },
           "font-family": {
             "description": "",
@@ -7546,8 +7774,9 @@
         },
         "metric-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 20
+            "value": "{primitive.base.typography.font.size.20}"
           },
           "font-family": {
             "description": "",
@@ -7570,8 +7799,9 @@
         },
         "body": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.base.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -7594,8 +7824,9 @@
         },
         "body-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7618,8 +7849,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7642,8 +7874,9 @@
         },
         "label-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.base.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -7666,8 +7899,9 @@
         },
         "caption": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.base.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
@@ -7690,8 +7924,9 @@
         },
         "card-panel-eyebrow": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7714,8 +7949,9 @@
         },
         "card-panel-subtitle": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 16
+            "value": "{primitive.base.typography.font.size.16}"
           },
           "font-family": {
             "description": "",
@@ -7740,8 +7976,9 @@
       "chart": {
         "axis-title": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7764,8 +8001,9 @@
         },
         "label": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7788,8 +8026,9 @@
         },
         "tick": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 14
+            "value": "{primitive.base.typography.font.size.14}"
           },
           "font-family": {
             "description": "",
@@ -7812,8 +8051,9 @@
         },
         "tick-sm": {
           "font-size": {
+            "description": "",
             "type": "dimension",
-            "value": 12
+            "value": "{primitive.base.typography.font.size.12}"
           },
           "font-family": {
             "description": "",
