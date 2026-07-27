@@ -438,6 +438,99 @@ None found in any of the 8 files (the tooltip's decorative pointer in `Observabl
 
 This completes both `packages/ui/src/lib` and `packages/charts/src/lib`.
 
+---
+
+# packages/maps
+
+Same protocol applied to `packages/maps/src/lib` (~33 non-story, non-demo/test components across `map/`, `mapControl*/`, `mapDeck*/`, `mapDraw/`, `mapLayer*/`, `mapMarker/`, `mapPopover/`, `mapLegend/`, `mapContextLayers/`, `mapCursorEvent/`). `Test*`/`Demo*` files and `+layout.svelte`/`+page.svelte` route files are treated as out of scope, consistent with the demo-file precedent from `packages/ui`.
+
+## Batch 15 — Map, MapLibre, MapControlGroup, MapControlZoom, MapControlPan, MapControlFullscreen, MapControlRefresh, MapControlBorough
+
+### Changed
+None — every file in this batch was either pure logic/composition, out-of-scope vendor CSS, or on-scale construction spacing.
+
+### Flagged
+1. **MapLibre.svelte's `<style>` block targets third-party MapLibre/Mapbox-generated DOM** (`.maplibregl-ctrl-attrib-inner`, etc.) via `@apply text-xs` / `@apply pt-0.5`. Same category as `ObservablePlot`'s and `AnalyticsAndCookieConsent`'s vendor-CSS flags (charts batch, ui batch 9) — this sizes the map's attribution/copyright control, not our component markup, so it's out of scope for a Tailwind-class migration. Left untouched.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*` throughout, including inside MapLibre's vendor-CSS block.
+
+### Radius
+None found in any of the 8 files.
+
+### Left as-is
+- **Map.svelte** — pure composition/context-provider, no template classes of its own.
+- **MapControlGroup**'s `space-y-2` (stacked control groups) and **MapControlZoom/Fullscreen/Refresh**'s `space-y-1` — classified **construction**, same reasoning as `TabList` (ui batch 1): these are fixed control-cluster toolbars (a stack of map buttons), not open-ended editorial content, so they don't qualify for flow even though the utility is nominally "vertical repeated-peer." (Fullscreen/Refresh currently render only one child each, so the utility is inert either way — noted, not fixed.)
+- **MapControlPan**'s per-icon asymmetric padding (`pb-1 pt-0.5`, `pl-0.5 pr-1`, etc.) — deliberate directional nudge for each chevron in a D-pad layout; construction, on-scale, left as bare Tailwind.
+- **MapControlGroup**'s `positionClasses` (`top-6`, `left-1/2`, etc.) — absolute-positioning offsets, not one of the four in-scope utility categories.
+- **MapControlBorough** — delegates entirely to the already-migrated `Select` component; no classes of its own beyond layout.
+
+### Survivors (grep-verified)
+`text-xs`/`pt-0.5` (MapLibre, vendor CSS) — flagged item 1. `space-y-2` (MapControlGroup) — construction. `space-y-1`/`p-0.5` ×2 (MapControlZoom) — construction. `pb-1 pt-0.5`/`pl-0.5 pr-1`/`pl-1 pr-0.5`/`pb-0.5 pt-1` (MapControlPan) — construction. `space-y-1`/`p-1` (MapControlFullscreen, MapControlRefresh) — construction.
+
+## Batch 16 — MapControlGeocoder, MapControlGeolocator, MapControlLocationSearch, MapCursorEvent, BoroughsContextLayer
+
+### Changed
+None — all five files are pure composition/logic wrappers (around the already-migrated `Geocoder`/`Geolocator` `ui` components, or headless map-layer/cursor-event plumbing with no template classes at all). `MapControlLocationSearch`'s only classes are `flex shadow` and a `max-w-[calc(...)]` dimension, neither in scope.
+
+### Flagged
+None.
+
+### Survivors
+None — no in-scope classes present in any of the five files.
+
+## Batch 17 — MapDeckOverlay, DefaultPopover, MapDeckPopovers, MapDeckTooltips, FileUpload, MapDraw, MapDrawControls
+
+### Changed
+- **FileUpload.svelte**: drop-zone instructional text `text-sm` → `body-sm` (exact 14px match, textbook helper text). Added `product` context to the root div (also covers the "Upload" label discussed in the flags below).
+- MapDeckOverlay / DefaultPopover / MapDeckPopovers / MapDeckTooltips / MapDraw: no edits — headless logic or pure composition with no in-scope classes.
+
+### Flagged
+1. **FileUpload's drop-zone `rounded-lg`** — a drag-and-drop file zone with rounded corners. Not one of the doc's genuinely-round exceptions (avatar/dot/pill-knob); per the system-wide flat-corner rule this looks like it should be removed, but per "don't fix what looks wrong," left in place and flagged rather than guessed.
+2. **FileUpload `<p class="form-label text-sm">Upload</p>`** — same "`form-label` family vs. `label`/`label-tight` family" open question raised repeatedly in the `ui` package (batch 2's Checkbox/RadioButton `font-normal`, batch 7's LayerControl label). Left untouched.
+3. **FileUpload root `gap-2`** — a fixed 3-part composition (title / drop-zone-or-status / action-row) inside one closed widget, so by the established precedent (Sidebar, MergeValuesControl, LoginForm) this reads as construction — but unlike those cases, `gap-2` (8px) actually *matches* `flow-product`'s `default` step exactly, which weakens my confidence it's clearly not rhythm. Flagging as a genuine close call (same shape as LoginForm's batch-10 flag) rather than picking a side.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*`/`border-color-*` throughout.
+
+### Radius
+`rounded-lg` (FileUpload) — flagged item 1, not removed.
+
+### Left as-is
+- **MapDeckOverlay** — no template/markup at all.
+- **DefaultPopover / MapDeckPopovers / MapDraw** — pure composition/logic, no classes of their own.
+- **MapDeckTooltips** `maplibregl-popup` — a marker class, not a Tailwind utility; delegates all content styling to `MapMarkerStyledContainer` (not yet reviewed — later batch).
+- **FileUpload** `p-4`/`p-2`/`mb-2`/`mr-2`/`mt-2`/`gap-2` (action row) — construction, on-scale.
+- **MapDrawControls**'s repeated `pb-1 pt-0.5` icon nudge (×8, one per draw-mode icon) — construction, deliberate consistent per-icon offset, on-scale.
+
+### Survivors (grep-verified)
+`gap-2`/`form-label text-sm`/`rounded-lg`/`p-2`/`mb-2`/`mr-2`/`mt-2` (FileUpload) — flagged items 1–3 or construction, per table above. `pb-1 pt-0.5` ×8 (MapDrawControls) — construction.
+
+## Batch 18 — MapLayerSource, GeoJSONMapLayerSource, MapLayerView, MapLegend, MapPopover
+
+### Changed
+- **MapLegend.svelte**:
+  - Title `font-bold` (no size at all) → `label-sm`, following the precedent you set for Popover's title (batch 3/its resolution) — same shape, a small overlay-panel heading.
+  - Content wrapper `text-sm` → `body-sm` (exact match — this is the ambient default for whatever legend content is slotted in).
+  - Added `product` context to the root div, covering both edits.
+- MapLayerSource / GeoJSONMapLayerSource / MapLayerView / MapPopover: no edits — all pure headless logic/composition, no template classes at all.
+
+### Flagged
+None.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*` (MapLegend).
+
+### Radius
+None found in any of the 5 files.
+
+### Left as-is
+- **MapLegend** `gap-3`/`px-4 py-3` — construction (fixed 2-part composition: header row + content, consistent with the Sidebar/FileUpload precedent); `right-1`/`top-1` on the close button — absolute-positioning offsets, not in scope.
+- The other four files have no markup/classes of their own.
+
+### Survivors (grep-verified)
+`gap-3`/`px-4 py-3` (MapLegend) — construction. No other survivors.
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
