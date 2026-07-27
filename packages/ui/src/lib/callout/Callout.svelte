@@ -78,7 +78,7 @@
 
 <aside class={calloutClasses} aria-labelledby={id}>
 	{#if title}
-		<h3 {id} class={classNames('card-panel-title', titleClasses[size])}>
+		<h3 {id} class={classNames('title', titleClasses[size])}>
 			{@render title?.()}
 		</h3>
 	{:else}

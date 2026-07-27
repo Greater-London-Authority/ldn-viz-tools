@@ -102,36 +102,36 @@ module.exports = {
 		'--caption-letter-spacing': 'var(--typography-md-product-caption-letter-spacing)',
 		'--caption-font-size': 'var(--typography-md-product-caption-font-size)',
 		'--caption-line-height': 'var(--typography-md-product-caption-line-height)',
-		//dashboard-head
-		'--dashboard-head-font-family': 'var(--typography-md-product-dashboard-head-font-family)',
-		'--dashboard-head-font-weight': 'var(--typography-md-product-dashboard-head-font-weight)',
-		'--dashboard-head-letter-spacing': 'var(--typography-md-product-dashboard-head-letter-spacing)',
-		'--dashboard-head-font-size': 'var(--typography-md-product-dashboard-head-font-size)',
-		'--dashboard-head-line-height': 'var(--typography-md-product-dashboard-head-line-height)',
+		//page-head
+		'--page-head-font-family': 'var(--typography-md-product-page-head-font-family)',
+		'--page-head-font-weight': 'var(--typography-md-product-page-head-font-weight)',
+		'--page-head-letter-spacing': 'var(--typography-md-product-page-head-letter-spacing)',
+		'--page-head-font-size': 'var(--typography-md-product-page-head-font-size)',
+		'--page-head-line-height': 'var(--typography-md-product-page-head-line-height)',
 		//section-head
 		'--section-head-font-family': 'var(--typography-md-product-section-head-font-family)',
 		'--section-head-font-weight': 'var(--typography-md-product-section-head-font-weight)',
 		'--section-head-letter-spacing': 'var(--typography-md-product-section-head-letter-spacing)',
 		'--section-head-font-size': 'var(--typography-md-product-section-head-font-size)',
 		'--section-head-line-height': 'var(--typography-md-product-section-head-line-height)',
-		//card-panel-title
-		'--card-panel-title-font-family': 'var(--typography-md-product-card-panel-title-font-family)',
-		'--card-panel-title-font-weight': 'var(--typography-md-product-card-panel-title-font-weight)',
-		'--card-panel-title-letter-spacing': 'var(--typography-md-product-card-panel-title-letter-spacing)',
-		'--card-panel-title-font-size': 'var(--typography-md-product-card-panel-title-font-size)',
-		'--card-panel-title-line-height': 'var(--typography-md-product-card-panel-title-line-height)',
-		//card-panel-subtitle
-		'--card-panel-subtitle-font-family': 'var(--typography-md-product-card-panel-subtitle-font-family)',
-		'--card-panel-subtitle-font-weight': 'var(--typography-md-product-card-panel-subtitle-font-weight)',
-		'--card-panel-subtitle-letter-spacing': 'var(--typography-md-product-card-panel-subtitle-letter-spacing)',
-		'--card-panel-subtitle-font-size': 'var(--typography-md-product-card-panel-subtitle-font-size)',
-		'--card-panel-subtitle-line-height': 'var(--typography-md-product-card-panel-subtitle-line-height)',
-		//card-panel-eyebrow
-		'--card-panel-eyebrow-font-family': 'var(--typography-md-product-card-panel-eyebrow-font-family)',
-		'--card-panel-eyebrow-font-weight': 'var(--typography-md-product-card-panel-eyebrow-font-weight)',
-		'--card-panel-eyebrow-letter-spacing': 'var(--typography-md-product-card-panel-eyebrow-letter-spacing)',
-		'--card-panel-eyebrow-font-size': 'var(--typography-md-product-card-panel-eyebrow-font-size)',
-		'--card-panel-eyebrow-line-height': 'var(--typography-md-product-card-panel-eyebrow-line-height)',
+		//title
+		'--title-font-family': 'var(--typography-md-product-title-font-family)',
+		'--title-font-weight': 'var(--typography-md-product-title-font-weight)',
+		'--title-letter-spacing': 'var(--typography-md-product-title-letter-spacing)',
+		'--title-font-size': 'var(--typography-md-product-title-font-size)',
+		'--title-line-height': 'var(--typography-md-product-title-line-height)',
+		//subtitle
+		'--subtitle-font-family': 'var(--typography-md-product-subtitle-font-family)',
+		'--subtitle-font-weight': 'var(--typography-md-product-subtitle-font-weight)',
+		'--subtitle-letter-spacing': 'var(--typography-md-product-subtitle-letter-spacing)',
+		'--subtitle-font-size': 'var(--typography-md-product-subtitle-font-size)',
+		'--subtitle-line-height': 'var(--typography-md-product-subtitle-line-height)',
+		//eyebrow
+		'--eyebrow-font-family': 'var(--typography-md-product-eyebrow-font-family)',
+		'--eyebrow-font-weight': 'var(--typography-md-product-eyebrow-font-weight)',
+		'--eyebrow-letter-spacing': 'var(--typography-md-product-eyebrow-letter-spacing)',
+		'--eyebrow-font-size': 'var(--typography-md-product-eyebrow-font-size)',
+		'--eyebrow-line-height': 'var(--typography-md-product-eyebrow-line-height)',
 		//metric
 		'--metric-font-family': 'var(--typography-md-product-metric-font-family)',
 		'--metric-font-weight': 'var(--typography-md-product-metric-font-weight)',
@@ -185,6 +185,24 @@ module.exports = {
 		'--tick-sm-font-weight': 'var(--typography-md-chart-tick-sm-font-weight)',
 		'--tick-sm-letter-spacing': 'var(--typography-md-chart-tick-sm-letter-spacing)',
 		'--tick-sm-font-size': 'var(--typography-md-chart-tick-sm-font-size)',
-		'--tick-sm-line-height': 'var(--typography-md-chart-tick-sm-line-height)'
+		'--tick-sm-line-height': 'var(--typography-md-chart-tick-sm-line-height)',
+		//title
+		'--title-font-family': 'var(--typography-md-chart-title-font-family)',
+		'--title-font-weight': 'var(--typography-md-chart-title-font-weight)',
+		'--title-letter-spacing': 'var(--typography-md-chart-title-letter-spacing)',
+		'--title-font-size': 'var(--typography-md-chart-title-font-size)',
+		'--title-line-height': 'var(--typography-md-chart-title-line-height)',
+		//eyebrow
+		'--eyebrow-font-family': 'var(--typography-md-chart-eyebrow-font-family)',
+		'--eyebrow-font-weight': 'var(--typography-md-chart-eyebrow-font-weight)',
+		'--eyebrow-letter-spacing': 'var(--typography-md-chart-eyebrow-letter-spacing)',
+		'--eyebrow-font-size': 'var(--typography-md-chart-eyebrow-font-size)',
+		'--eyebrow-line-height': 'var(--typography-md-chart-eyebrow-line-height)',
+		//subtitle
+		'--subtitle-font-family': 'var(--typography-md-chart-subtitle-font-family)',
+		'--subtitle-font-weight': 'var(--typography-md-chart-subtitle-font-weight)',
+		'--subtitle-letter-spacing': 'var(--typography-md-chart-subtitle-letter-spacing)',
+		'--subtitle-font-size': 'var(--typography-md-chart-subtitle-font-size)',
+		'--subtitle-line-height': 'var(--typography-md-chart-subtitle-line-height)'
 	}
 };

@@ -94,12 +94,12 @@ module.exports = {
 		fontSize: 'var(--eyebrow-font-size)',
 		lineHeight: 'var(--eyebrow-line-height)'
 	},
-	'dashboard-head': {
-		fontFamily: 'var(--dashboard-head-font-family)',
-		fontWeight: 'var(--dashboard-head-font-weight)',
-		letterSpacing: 'var(--dashboard-head-letter-spacing)',
-		fontSize: 'var(--dashboard-head-font-size)',
-		lineHeight: 'var(--dashboard-head-line-height)'
+	'page-head': {
+		fontFamily: 'var(--page-head-font-family)',
+		fontWeight: 'var(--page-head-font-weight)',
+		letterSpacing: 'var(--page-head-letter-spacing)',
+		fontSize: 'var(--page-head-font-size)',
+		lineHeight: 'var(--page-head-line-height)'
 	},
 	'section-head': {
 		fontFamily: 'var(--section-head-font-family)',
@@ -108,28 +108,13 @@ module.exports = {
 		fontSize: 'var(--section-head-font-size)',
 		lineHeight: 'var(--section-head-line-height)'
 	},
-	'card-panel-title': {
-		fontFamily: 'var(--card-panel-title-font-family)',
-		fontWeight: 'var(--card-panel-title-font-weight)',
-		letterSpacing: 'var(--card-panel-title-letter-spacing)',
-		fontSize: 'var(--card-panel-title-font-size)',
-		lineHeight: 'var(--card-panel-title-line-height)'
-	},
-	'card-panel-subtitle': {
-		color: 'var(--color-text-muted)',
-		fontFamily: 'var(--card-panel-subtitle-font-family)',
-		fontWeight: 'var(--card-panel-subtitle-font-weight)',
-		letterSpacing: 'var(--card-panel-subtitle-letter-spacing)',
-		fontSize: 'var(--card-panel-subtitle-font-size)',
-		lineHeight: 'var(--card-panel-subtitle-line-height)'
-	},
-	'card-panel-eyebrow': {
-		color: 'var(--color-text-muted)',
-		fontFamily: 'var(--card-panel-eyebrow-font-family)',
-		fontWeight: 'var(--card-panel-eyebrow-font-weight)',
-		letterSpacing: 'var(--card-panel-eyebrow-letter-spacing)',
-		fontSize: 'var(--card-panel-eyebrow-font-size)',
-		lineHeight: 'var(--card-panel-eyebrow-line-height)'
+	// Shared across .product and .chart contexts, same as subtitle/eyebrow below.
+	title: {
+		fontFamily: 'var(--title-font-family)',
+		fontWeight: 'var(--title-font-weight)',
+		letterSpacing: 'var(--title-letter-spacing)',
+		fontSize: 'var(--title-font-size)',
+		lineHeight: 'var(--title-line-height)'
 	},
 	metric: {
 		fontFamily: 'var(--metric-font-family)',
@@ -175,8 +160,9 @@ module.exports = {
 		fontSize: 'var(--label-sm-font-size)',
 		lineHeight: '1'
 	},
-	// Chart roles: axis-title and tick/tick-sm (chart's "label" role reuses
-	// the generic `.label` class/vars above via the `.chart` context).
+	// Chart roles: axis-title and tick/tick-sm (chart's "label", "title",
+	// "eyebrow" and "subtitle" roles reuse the generic classes/vars above via
+	// the `.chart` context).
 	'axis-title': {
 		color: 'var(--color-text-muted)',
 		fontFamily: 'var(--axis-title-font-family)',

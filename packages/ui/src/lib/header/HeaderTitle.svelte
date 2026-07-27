@@ -13,7 +13,7 @@
 </script>
 
 <a href={base || '/'}>
-	<span class="product card-panel-title mr-4">
+	<span class="product title mr-4">
 		<!-- The app title, possibly including an icon. -->
 		{@render children?.()}
 	</span>

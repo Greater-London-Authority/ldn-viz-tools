@@ -6,6 +6,6 @@
 	let { children }: Props = $props();
 </script>
 
-<div class="product card-panel-title">
+<div class="chart title">
 	{@render children?.()}
 </div>

@@ -355,26 +355,26 @@ module.exports = {
 				'--caption-line-height': 'var(--typography-xl-product-caption-line-height)'
 			}
 		},
-		'dashboard-head': {
+		'page-head': {
 			default: {
-				'--dashboard-head-font-size': 'var(--typography-base-product-dashboard-head-font-size)',
-				'--dashboard-head-line-height': 'var(--typography-base-product-dashboard-head-line-height)'
+				'--page-head-font-size': 'var(--typography-base-product-page-head-font-size)',
+				'--page-head-line-height': 'var(--typography-base-product-page-head-line-height)'
 			},
 			sm: {
-				'--dashboard-head-font-size': 'var(--typography-sm-product-dashboard-head-font-size)',
-				'--dashboard-head-line-height': 'var(--typography-sm-product-dashboard-head-line-height)'
+				'--page-head-font-size': 'var(--typography-sm-product-page-head-font-size)',
+				'--page-head-line-height': 'var(--typography-sm-product-page-head-line-height)'
 			},
 			md: {
-				'--dashboard-head-font-size': 'var(--typography-md-product-dashboard-head-font-size)',
-				'--dashboard-head-line-height': 'var(--typography-md-product-dashboard-head-line-height)'
+				'--page-head-font-size': 'var(--typography-md-product-page-head-font-size)',
+				'--page-head-line-height': 'var(--typography-md-product-page-head-line-height)'
 			},
 			lg: {
-				'--dashboard-head-font-size': 'var(--typography-lg-product-dashboard-head-font-size)',
-				'--dashboard-head-line-height': 'var(--typography-lg-product-dashboard-head-line-height)'
+				'--page-head-font-size': 'var(--typography-lg-product-page-head-font-size)',
+				'--page-head-line-height': 'var(--typography-lg-product-page-head-line-height)'
 			},
 			xl: {
-				'--dashboard-head-font-size': 'var(--typography-xl-product-dashboard-head-font-size)',
-				'--dashboard-head-line-height': 'var(--typography-xl-product-dashboard-head-line-height)'
+				'--page-head-font-size': 'var(--typography-xl-product-page-head-font-size)',
+				'--page-head-line-height': 'var(--typography-xl-product-page-head-line-height)'
 			}
 		},
 		'section-head': {
@@ -399,70 +399,70 @@ module.exports = {
 				'--section-head-line-height': 'var(--typography-xl-product-section-head-line-height)'
 			}
 		},
-		'card-panel-title': {
+		title: {
 			default: {
-				'--card-panel-title-font-size': 'var(--typography-base-product-card-panel-title-font-size)',
-				'--card-panel-title-line-height': 'var(--typography-base-product-card-panel-title-line-height)'
+				'--title-font-size': 'var(--typography-base-product-title-font-size)',
+				'--title-line-height': 'var(--typography-base-product-title-line-height)'
 			},
 			sm: {
-				'--card-panel-title-font-size': 'var(--typography-sm-product-card-panel-title-font-size)',
-				'--card-panel-title-line-height': 'var(--typography-sm-product-card-panel-title-line-height)'
+				'--title-font-size': 'var(--typography-sm-product-title-font-size)',
+				'--title-line-height': 'var(--typography-sm-product-title-line-height)'
 			},
 			md: {
-				'--card-panel-title-font-size': 'var(--typography-md-product-card-panel-title-font-size)',
-				'--card-panel-title-line-height': 'var(--typography-md-product-card-panel-title-line-height)'
+				'--title-font-size': 'var(--typography-md-product-title-font-size)',
+				'--title-line-height': 'var(--typography-md-product-title-line-height)'
 			},
 			lg: {
-				'--card-panel-title-font-size': 'var(--typography-lg-product-card-panel-title-font-size)',
-				'--card-panel-title-line-height': 'var(--typography-lg-product-card-panel-title-line-height)'
+				'--title-font-size': 'var(--typography-lg-product-title-font-size)',
+				'--title-line-height': 'var(--typography-lg-product-title-line-height)'
 			},
 			xl: {
-				'--card-panel-title-font-size': 'var(--typography-xl-product-card-panel-title-font-size)',
-				'--card-panel-title-line-height': 'var(--typography-xl-product-card-panel-title-line-height)'
+				'--title-font-size': 'var(--typography-xl-product-title-font-size)',
+				'--title-line-height': 'var(--typography-xl-product-title-line-height)'
 			}
 		},
-		'card-panel-subtitle': {
+		subtitle: {
 			default: {
-				'--card-panel-subtitle-font-size': 'var(--typography-base-product-card-panel-subtitle-font-size)',
-				'--card-panel-subtitle-line-height': 'var(--typography-base-product-card-panel-subtitle-line-height)'
+				'--subtitle-font-size': 'var(--typography-base-product-subtitle-font-size)',
+				'--subtitle-line-height': 'var(--typography-base-product-subtitle-line-height)'
 			},
 			sm: {
-				'--card-panel-subtitle-font-size': 'var(--typography-sm-product-card-panel-subtitle-font-size)',
-				'--card-panel-subtitle-line-height': 'var(--typography-sm-product-card-panel-subtitle-line-height)'
+				'--subtitle-font-size': 'var(--typography-sm-product-subtitle-font-size)',
+				'--subtitle-line-height': 'var(--typography-sm-product-subtitle-line-height)'
 			},
 			md: {
-				'--card-panel-subtitle-font-size': 'var(--typography-md-product-card-panel-subtitle-font-size)',
-				'--card-panel-subtitle-line-height': 'var(--typography-md-product-card-panel-subtitle-line-height)'
+				'--subtitle-font-size': 'var(--typography-md-product-subtitle-font-size)',
+				'--subtitle-line-height': 'var(--typography-md-product-subtitle-line-height)'
 			},
 			lg: {
-				'--card-panel-subtitle-font-size': 'var(--typography-lg-product-card-panel-subtitle-font-size)',
-				'--card-panel-subtitle-line-height': 'var(--typography-lg-product-card-panel-subtitle-line-height)'
+				'--subtitle-font-size': 'var(--typography-lg-product-subtitle-font-size)',
+				'--subtitle-line-height': 'var(--typography-lg-product-subtitle-line-height)'
 			},
 			xl: {
-				'--card-panel-subtitle-font-size': 'var(--typography-xl-product-card-panel-subtitle-font-size)',
-				'--card-panel-subtitle-line-height': 'var(--typography-xl-product-card-panel-subtitle-line-height)'
+				'--subtitle-font-size': 'var(--typography-xl-product-subtitle-font-size)',
+				'--subtitle-line-height': 'var(--typography-xl-product-subtitle-line-height)'
 			}
 		},
-		'card-panel-eyebrow': {
+		eyebrow: {
 			default: {
-				'--card-panel-eyebrow-font-size': 'var(--typography-base-product-card-panel-eyebrow-font-size)',
-				'--card-panel-eyebrow-line-height': 'var(--typography-base-product-card-panel-eyebrow-line-height)'
+				'--eyebrow-font-size': 'var(--typography-base-product-eyebrow-font-size)',
+				'--eyebrow-line-height': 'var(--typography-base-product-eyebrow-line-height)'
 			},
 			sm: {
-				'--card-panel-eyebrow-font-size': 'var(--typography-sm-product-card-panel-eyebrow-font-size)',
-				'--card-panel-eyebrow-line-height': 'var(--typography-sm-product-card-panel-eyebrow-line-height)'
+				'--eyebrow-font-size': 'var(--typography-sm-product-eyebrow-font-size)',
+				'--eyebrow-line-height': 'var(--typography-sm-product-eyebrow-line-height)'
 			},
 			md: {
-				'--card-panel-eyebrow-font-size': 'var(--typography-md-product-card-panel-eyebrow-font-size)',
-				'--card-panel-eyebrow-line-height': 'var(--typography-md-product-card-panel-eyebrow-line-height)'
+				'--eyebrow-font-size': 'var(--typography-md-product-eyebrow-font-size)',
+				'--eyebrow-line-height': 'var(--typography-md-product-eyebrow-line-height)'
 			},
 			lg: {
-				'--card-panel-eyebrow-font-size': 'var(--typography-lg-product-card-panel-eyebrow-font-size)',
-				'--card-panel-eyebrow-line-height': 'var(--typography-lg-product-card-panel-eyebrow-line-height)'
+				'--eyebrow-font-size': 'var(--typography-lg-product-eyebrow-font-size)',
+				'--eyebrow-line-height': 'var(--typography-lg-product-eyebrow-line-height)'
 			},
 			xl: {
-				'--card-panel-eyebrow-font-size': 'var(--typography-xl-product-card-panel-eyebrow-font-size)',
-				'--card-panel-eyebrow-line-height': 'var(--typography-xl-product-card-panel-eyebrow-line-height)'
+				'--eyebrow-font-size': 'var(--typography-xl-product-eyebrow-font-size)',
+				'--eyebrow-line-height': 'var(--typography-xl-product-eyebrow-line-height)'
 			}
 		},
 		'metric': {

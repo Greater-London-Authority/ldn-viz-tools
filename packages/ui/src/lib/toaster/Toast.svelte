@@ -34,7 +34,7 @@
 	out:fade={{ duration: 100 }}
 >
 	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
-		<div class="mb-1 flex items-center justify-between card-panel-title">
+		<div class="mb-1 flex items-center justify-between title">
 			{message.type}
 			{#if message.closeButton}
 				<Button
