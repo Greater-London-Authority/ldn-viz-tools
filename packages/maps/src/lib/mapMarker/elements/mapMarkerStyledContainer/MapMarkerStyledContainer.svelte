@@ -44,7 +44,7 @@
 	The stopImmediatePropagation on mousemove prevents tooltips below this
 	marker from being shown when mouseover.	
 -->
-<div class="relative text-sm text-color-text">
+<div class="product relative body-sm text-color-text">
 	<div
 		role="tooltip"
 		bind:this={container}

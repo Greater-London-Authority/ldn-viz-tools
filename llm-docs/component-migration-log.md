@@ -531,6 +531,36 @@ None found in any of the 5 files.
 ### Survivors (grep-verified)
 `gap-3`/`px-4 py-3` (MapLegend) — construction. No other survivors.
 
+## Batch 19 (final) — MapMarker, MapMarkerContainer, PlacementCenterMarker, PlacementFollowMarker, PlacementNoneMarker, MapMarkerFlyToFeature, MapMarkerPlacement, PlacementCenterAboveFeature, PlacementFollowMouse, MapMarkerStyledContainer
+
+This completes `packages/maps/src/lib`.
+
+### Changed
+- **MapMarkerStyledContainer.svelte**: outer container `text-sm` → `body-sm` + added `product` context. This is the shared styling wrapper "suitable for the vast majority of map tooltips and popups" (per its own doc comment) — same ambient-default pattern as `Tooltip`/`Popover` in the `ui` package and `ObservablePlotInner`'s tooltip in `charts`, all resolved the same way.
+- **PlacementCenterMarker / PlacementFollowMarker / PlacementNoneMarker.svelte**: each has a `text-sm` descriptive line ("Centred above the feature.", etc.) → `body-sm`. No `product` context added directly in these files — they render as children passed through `MapMarkerContainer` → `MapMarkerPlacement` → `MapMarkerStyledContainer`, so the context added there covers them. (First pass at this added a wrapping `<div class="product">` directly in these three files — caught before finalizing that it was an unnecessary markup restructure once `MapMarkerStyledContainer` already provides the ancestor context; corrected to a plain class-attribute edit.)
+- MapMarker / MapMarkerContainer / MapMarkerFlyToFeature / MapMarkerPlacement / PlacementCenterAboveFeature / PlacementFollowMouse: no edits — pure headless logic/composition, no classes of their own.
+
+### Flagged
+None.
+
+### Out-of-scope colour
+`text-color-*`/`border-color-*`/`fill-color-*`/`stroke-color-*` (MapMarkerStyledContainer, including its SVG tip/arrow).
+
+### Radius
+None found in any of the 10 files. The SVG "tip" at the bottom of `MapMarkerStyledContainer` is a pointed triangle (polygon + two lines), not a rounded shape — nothing to flag there.
+
+### Left as-is
+- **MapMarkerStyledContainer** `class:p-4={!noPad}` — construction, on-scale (didn't show in the grep pass since it's a Svelte `class:` directive rather than a plain string, but was reviewed manually).
+- Positioning offsets (`bottom-[calc(1rem-1px)]`, `left-1/2`, etc.) — not in the four in-scope utility categories.
+- All other files in this batch — pure logic/composition, no template classes of their own.
+
+### Survivors (grep-verified)
+None via the standard grep pass (the one construction padding utility present uses Svelte's `class:` directive syntax and was reviewed manually instead, per the note above).
+
+---
+
+This completes `packages/ui/src/lib`, `packages/charts/src/lib`, and `packages/maps/src/lib`. Remaining un-swept packages in the monorepo: `tables`, `utils`, `themes` (the latter is the token/theme source itself, not a component consumer).
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
