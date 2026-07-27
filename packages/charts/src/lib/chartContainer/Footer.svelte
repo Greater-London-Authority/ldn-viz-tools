@@ -21,7 +21,7 @@
 	{#if byline || source || note || chartDescription}
 		<ul
 			title="Chart footnotes and description"
-			class="footer-ul mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs text-color-text-muted"
+			class="footer-ul product mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 caption text-color-text-muted"
 		>
 			<!-- eslint-disable svelte/no-at-html-tags -->
 			{#if byline}<li>{@html byline}</li>{/if}

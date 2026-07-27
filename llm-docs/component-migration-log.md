@@ -399,6 +399,45 @@ Every real component (`.svelte`, non-story, non-demo) in `packages/ui/src/lib` h
 - **Likely pre-existing bugs surfaced, not fixed**: CheckboxSolid/RadioButtonSolid drift (batch 7), several dead/invalid utility classes (`padding-0`, `width-fit`, `black` in MergeValuesControl — deprecated, no action; both `p-0.25` typos already fixed by user in batch 11), ColorLegendOrdinalChips's missing vertical gap (this batch).
 - **MergeValuesControl** is flagged for deprecation per your instruction — no further migration work should target it.
 
+---
+
+# packages/charts — batch 14
+
+Same protocol applied to `packages/charts/src/lib` (8 non-story components: `chartContainer/` and `observablePlot/`). Small enough package to cover in one batch.
+
+### Changed
+- **Footer.svelte** (chartContainer): footnote list `text-xs` → `caption` (exact 12px match — byline/source/note/description-link text is textbook "small functional/meta" text). Added `product` context to the `<ul>` — nested inside the parent `ChartContainer`'s `chart` context without conflict, since context classes just scope their own CSS custom properties.
+- **ObservablePlotInner.svelte**: default tooltip container `text-sm` → `label` (exact 14px match, no resize). Added `chart` context — this is chart-data-adjacent content (the fallback tooltip shows raw data values), so `chart/label` ("series/data label") is the better function fit than a generic `product` role.
+- ChartContainer / ExportBtns / SubTitle / Title / DemoTooltip / ObservablePlot: no edits.
+
+### Flagged
+1. **No `flow-chart` context exists.** `flow.cjs` only defines `flow-prose`/`flow-product`/`flow-compact`. Two genuine rhythm cases in this package have no context to convert to:
+   - `ChartContainer`'s `mb-4` (title/subtitle block → controls/legend/chart) — a title→content coupling, same shape as the flow.cjs's own heading-spacing rule.
+   - `Footer`'s `space-y-0.5` (byline/source/note/description-link lines) — literally "field after field" repeated lines.
+   Both left as bare Tailwind. Recommend a design decision: either charts should borrow `flow-product`/`flow-compact` for rhythm, or a dedicated `flow-chart` context should be added to `flow.cjs`.
+2. **SubTitle.svelte / Title.svelte already use `product/card-panel-subtitle` and `product/card-panel-title`** despite living inside a `chart`-context `ChartContainer`. This is almost certainly deliberate and correct-by-necessity — the type map's Chart context section has no title/subtitle role at all (only axis-title/label/tick/tick-sm), so falling back to the nearest Product role is the sensible choice. Left as-is, not flagged as a problem — noting it here only so the "chart context has gaps" theme is documented in one place alongside items 1 and 3.
+3. **ExportBtns's `space-y-2` on a `flex flex-wrap` row** — `space-y-*` targets block/flex-col stacking; on a wrapping horizontal row it will still add `margin-top` to every child regardless of visual row position, which reads as a likely axis mismatch (probably intended `gap-2`). Per the axis rule this would be construction either way (horizontal container), so reclassifying it doesn't change the target type, only the utility — left untouched and flagged as a probable pre-existing bug rather than fixed.
+4. **Footer's `<span class="mr-1 font-bold">Source:</span>` / `Note:`** — inline bold label prefixes with no size set, same "no map entry for inline emphasis" shape as AuthMenu's username (batch 9) and MergeValuesControl's spans (batch 7). Left untouched.
+5. **DemoTooltip.svelte `text-xl`** — this is example/reference tooltip content (filename literally `Demo*`), same ambiguity as the `ui` package's Storybook-demo files that were treated as lower priority throughout. If it should be migrated: function-first this is chart tooltip content → `chart/label`, which would be a significant resize (20→14px). Left untouched pending a decision on whether Demo files are in scope at all.
+6. **Two raw-CSS rules targeting third-party-generated markup** — `ObservablePlot.svelte`'s `:global(.defaultColorLegendLabel-swatch) { font-size: 1rem; }` and `ObservablePlotInner.svelte`'s `:global(.themed-chart svg)`/`[aria-label='tip']` rules target Observable Plot's own internally-generated SVG/legend DOM, not our component markup. Same category as `ColorLegend`'s D3-generated-content flag (batch 6) — out of scope for a Tailwind-class migration, left untouched.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*` throughout; `--color-chart-background`/`--color-border-muted` in ObservablePlotInner's global style block.
+
+### Radius
+None found in any of the 8 files (the tooltip's decorative pointer in `ObservablePlotInner` is a rotated square, not rounded — nothing to flag there).
+
+### Left as-is
+- **ChartContainer** `not-prose` — correct, deliberate use of the Tailwind-prose-plugin opt-out marker (matches the `:not(.not-prose, .not-prose *)` guards throughout `semantics.cjs`), not a leftover to migrate.
+- **ExportBtns** `mt-2`, `mr-2`, `ml-2` (icons) — construction, on-scale.
+- **Footer** `mt-1`, `mr-4`, `mr-1` (×2), `!p-0`, `ml-auto` — construction (or, for `ml-auto`, not a scale value at all — same category as the `ui` package's `mt-auto`/`ml-auto` cases).
+- **ObservablePlotInner** `p-2` (tooltip), dimensions on the pointer triangle — construction / out of scope.
+
+### Survivors (grep-verified)
+`mb-4` (ChartContainer) — flagged item 1. `space-y-2`/`mt-2`/`mr-2`/`ml-2` (ExportBtns) — flagged item 3 or construction. `mt-1`/`mr-4`/`space-y-0.5`/`mr-1 font-bold` ×2 (Footer) — flagged items 1/4 or construction. `text-xl` (DemoTooltip) — flagged item 5. `p-2` (ObservablePlotInner) — construction.
+
+This completes both `packages/ui/src/lib` and `packages/charts/src/lib`.
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.

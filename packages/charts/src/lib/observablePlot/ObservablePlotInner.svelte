@@ -263,7 +263,7 @@
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
 		<div
-			class="absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container p-2 text-sm shadow"
+			class="chart absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container p-2 label shadow"
 			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 			style:left={`${$tooltipStore.layerX}px`}
 		>
