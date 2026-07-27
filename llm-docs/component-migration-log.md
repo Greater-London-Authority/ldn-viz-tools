@@ -183,6 +183,71 @@ None found in any of the 6 files.
 ### Survivors (grep-verified)
 `space-x-1` (NavigationMenu) — construction. `p-1.5`/`pl-4`/`mb-1` (NavigationMenuItem) — construction. `p-2 pb-4 pl-4 pr-2`/`mb-1`/`pr-2` (Toast) — construction, per table above. ColorLegend and ImageDownloadButton — no survivors (no Tailwind type/spacing/radius classes present at all; ColorLegend's typography is SVG attributes, see flag).
 
+---
+
+## Batch 7 — CheckboxSolid, RadioButtonSolid, LayerControl, MergeValuesControl/HelpText, PageMetadata
+
+### Changed
+- **HelpText.svelte**: `text-sm` → `body-sm` + `product` context. Clean, confident: this component's entire purpose is to render helper/instructional text, an exact function-first + exact-size match.
+- CheckboxSolid / RadioButtonSolid / LayerControl / MergeValuesControl / PageMetadata: no edits — see flags (several genuine ambiguities and a couple of likely pre-existing bugs surfaced this batch) or pure out-of-scope content (PageMetadata is `<svelte:head>` meta tags only, no classes at all).
+
+### Flagged
+1. **CheckboxSolid `form-label leading-tight`** — `leading-tight` is Tailwind's own utility (1.25), not our system's tight-label convention (`label-tight`/1.0) nor a value explained by `form-label` alone. This checkbox-as-button label can wrap to two lines (icon + text in a `flex-col` box), so it may be a deliberate choice distinct from the single-line-only tight-label treatment — forcing `label-tight` here could feel cramped if labels wrap. No map row covers "solid/button-styled checkbox label." Left untouched, flagged for a decision.
+2. **CheckboxSolid vs. RadioButtonSolid inconsistency** — two structurally near-identical sibling components diverge: CheckboxSolid has `leading-tight` on its label, RadioButtonSolid doesn't; CheckboxSolid's icon offset is `mb-0.5`/`mt-0.5`, RadioButtonSolid's is `mb-1`/`mt-1` (double). Not fixed (per "don't fix what looks wrong, flag it"), but flagging since it looks like unintentional drift between two components that should probably match.
+3. **LayerControl gap-4/MergeValuesControl gap-4 — same re-examination as Sidebar's `space-y-4` (batch 4)**: MergeValuesControl's outer `gap-4` (16px) separates genuinely distinct, non-repeating sections (help text / unassigned list / new-category control / grouped list) inside one closed drag-and-drop widget. 16px matches `flow-product`'s `loose` step, not `default`, and there's no owl rule that gets plain sibling `<div>`s to "loose" without a heading/block-object marker — re-running the gate (per the spacing map's own guidance), I read this as **construction**, consistent with the Sidebar precedent. Left as bare Tailwind.
+4. **MergeValuesControl `<span class="font-bold">` and the group-rename `<input class="... font-bold">`** — both set only a weight, with no explicit size at all (same shape as Modal's `Dialog.Title` gap from batch 3, now user-resolved to `label` there — but these two have no clear single-line-control framing to justify the same fix). No map row for "inline section sub-heading" or "editable inline field, bold." Left untouched, flagged.
+5. **MergeValuesControl `class="padding-0 width-fit ..."`** — `padding-0` and `width-fit` are not real Tailwind utilities (would need to be `p-0` and `w-fit`); as written they do nothing. Not fixed (outside "don't guess-fix" boundary — this isn't a token migration question, it's a pre-existing dead class), but flagging since it's squarely adjacent to the padding utilities I'm auditing.
+6. **MergeValuesControl `class="black flex items-center ..."`** — `black` isn't a valid Tailwind utility either; likely leftover/dead. Flagged, not touched (not a type/spacing/radius utility, so strictly out of this pass's scope regardless).
+7. **MergeValuesControl inline Button override `class="h-5 py-0 leading-5"`** — this Button call passes `leading-5` (Tailwind utility, 20px), which **will win over the Button's own internal `label-tight` (1.0)** in the compiled cascade — Tailwind utilities sit in a later cascade layer than `addComponents`-registered role classes like `label-tight`, so utilities always beat them regardless of class order in the markup. This means the tight-label treatment I confirmed for `Button` in batches 1/6 is being silently overridden here. Left untouched (not this component's role to resolve someone else's override without confirming intent), flagged for a decision: was `leading-5` intentional, or should it be dropped now that `Button` handles its own line-height correctly?
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*`/`border-color-*` throughout; CheckboxSolid/RadioButtonSolid's `peer-checked:`/`peer-focus:` colour states.
+
+### Radius
+None found in any of the 6 files.
+
+### Left as-is
+- **PageMetadata.svelte** — `<svelte:head>` meta tags only, zero CSS classes of any kind.
+- **LayerControl.svelte** `space-x-1`/`mr-1` — construction (axis rule + fixed single offset). Its `form-label font-normal leading-none` label is the same open question as batch 2's Checkbox/RadioButton `font-normal` flag (item 2 there) — not re-flagged as new, just noted as another instance of the same "`form-label` family vs. `label`/`label-tight` family" ambiguity.
+- **CheckboxSolid/RadioButtonSolid** `p-2`, icon offset margins — construction, on-scale.
+- **MergeValuesControl** — remaining `py-1 pl-2`/`p-2`/`gap-1`/`mr-2` — construction, on-scale.
+- Deferred: `LayerControl`'s sibling subcomponents (`ColorPicker`, `OpacityControl`, `ResizeControl`, `FillTypeControl`) not read this batch — held for a future batch rather than expanding scope further here.
+
+### Survivors (grep-verified)
+`form-label leading-tight`/`mb-0.5 mt-0.5` (CheckboxSolid) — flagged items 1–2. `form-label`/`mb-1 mt-1` (RadioButtonSolid) — flagged item 2, construction otherwise. `space-x-1`/`mr-1`/`form-label font-normal leading-none` (LayerControl) — construction / same open question as batch 2. `gap-4`/`font-bold`/`py-1 pl-2`/`p-2`/`gap-1`/`padding-0 width-fit`/`leading-5` (MergeValuesControl) — flagged items 3–7 or construction, per table above.
+
+**Post-batch resolutions (user):**
+- Flags 1–2 (CheckboxSolid/RadioButtonSolid label) → **`product label`** on both (replacing `form-label`/`form-label leading-tight`). CheckboxSolid was already updated by the user; applied the same to RadioButtonSolid.
+- Icon offset inconsistency → standardized on **`0.5`**: RadioButtonSolid's `mb-1`/`mt-1` → `mb-0.5`/`mt-0.5` to match CheckboxSolid.
+- **MergeValuesControl flagged for deprecation** — no further migration work on this component; flags 3–7 above stand as documentation but are not being chased further.
+
+---
+
+## Batch 8 — layerControl (remaining): ColorPicker, ResizeControl, FillTypeControl, OpacityControl, OpacityIcon, ResizeIcon, LayerControlGroup
+
+### Changed
+- **ColorPicker.svelte**: popover instructional text `text-xs` → `caption`. Function-first + exact match: this text sits inside `Popover.Content`, whose ambient default is already `body-sm` (14/400, from batch 3) — the original code's deliberate `text-xs` (12) is a genuine departure from that ambient size, i.e. this really is caption-weight micro-copy, not helper text that happened to be off-scale. `caption` (12/400) preserves the intended contrast with zero resize.
+- **FillTypeControl.svelte**: same edit, same reasoning, identical instructional-text pattern ("Click to assign a fill type to this layer.").
+- ResizeControl / OpacityControl / OpacityIcon / ResizeIcon / LayerControlGroup: no edits.
+
+### Flagged
+1. **LayerControlGroup's two `space-y-1` instances** — same shape and same conclusion as batch 2's CheckboxGroup/RadioButtonGroup: the inner `<ul>` wrapping repeated `<LayerControl>` peers is genuine "field after field" rhythm, but the owl mechanism can't reach it cleanly without either resizing the unrelated Clear-button→list relationship or adding a wrapping element (markup restructure, out of scope). Left as bare Tailwind, pointing back to the batch 2 precedent rather than re-litigating it.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*`/`border-color-*` throughout; ColorPicker's `theme.tokenNameToValue(...)` swatch colours; FillTypeControl's inline pattern-swatch `style:background-*`.
+
+### Radius — kept and justified
+- **ColorPicker**: all three `rounded-full` instances (the two colour-chip trigger divs + each swatch-option div in the popover) — genuinely round colour dots/chips, explicitly the kind of case named in the doc's exception list. Kept.
+
+### Left as-is
+- **ResizeControl/OpacityControl** `gap-4`/`pt-2` — construction (axis rule: horizontal `items-center` rows → always construction).
+- **FillTypeControl** `gap-2` (outer, between the radio-group block and the pattern-swatch block) — construction: two fixed, non-repeating sections in one closed popover panel, not open rhythm (same reasoning as the Sidebar/MergeValuesControl precedent). `gap-0.5`/`gap-2` (inner wraps) — construction, axis rule.
+- **LayerControlGroup** `pl-5`, `!px-0` — construction, on-scale.
+- **OpacityIcon/ResizeIcon** — pure SVG path/stroke icons, no type/spacing/radius utilities of any kind.
+
+### Survivors (grep-verified)
+`rounded-full` ×3 (ColorPicker) — kept, genuinely round. `gap-0.5`/`gap-4`/`pt-2` (ColorPicker, ResizeControl) — construction. `gap-2`/`gap-0.5` (FillTypeControl) — construction, per table above. `gap-4` (OpacityControl) — construction. `space-y-1` ×2/`pl-5`/`!px-0` (LayerControlGroup) — flagged item 1 or construction.
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
