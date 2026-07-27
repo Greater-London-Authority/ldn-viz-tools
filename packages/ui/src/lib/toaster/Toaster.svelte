@@ -70,7 +70,7 @@
 
 <div
 	style:display={$messages.length === 0 ? 'none' : 'block'}
-	class="fixed z-[50] flex w-fit flex-col space-y-1 {posClasses} {classes}"
+	class="fixed z-[50] flex w-fit flex-col flow-product {posClasses} {classes}"
 	{...rest}
 >
 	{#each $messages as message (message.id)}

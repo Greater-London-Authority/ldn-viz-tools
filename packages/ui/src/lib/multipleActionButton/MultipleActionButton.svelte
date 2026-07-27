@@ -114,7 +114,7 @@
 												class="mr-1 h-5 w-5 text-color-surface-accent"
 											/>
 										{/if}
-										<p class="label leading-none">{option.menuLabel}</p>
+										<p class="label-tight">{option.menuLabel}</p>
 									</div>
 									<p class="caption text-color-text-muted">
 										{option.menuDescription}

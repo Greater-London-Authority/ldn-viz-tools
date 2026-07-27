@@ -133,17 +133,17 @@
 	};
 
 	const sizeClasses = $derived({
-		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'label-sm leading-none px-1 min-w-6 min-h-6',
+		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'label-sm-tight px-1 min-w-6 min-h-6',
 		sm:
-			variant === 'square' ? 'w-8 h-8 flex-col' : 'label leading-none px-2 py-1.5 min-w-8 min-h-8',
+			variant === 'square' ? 'w-8 h-8 flex-col' : 'label-tight px-2 py-1.5 min-w-8 min-h-8',
 		md:
 			variant === 'square'
 				? 'w-10 h-10 flex-col'
-				: 'label leading-none px-4 py-2 min-w-10 min-h-10',
+				: 'label-tight px-4 py-2 min-w-10 min-h-10',
 		lg:
 			variant === 'square'
-				? 'w-16 h-16 label-sm leading-none flex-col'
-				: 'label leading-none px-4 py-2 min-w-16 min-h-16'
+				? 'w-16 h-16 label-sm-tight flex-col'
+				: 'label-tight px-4 py-2 min-w-16 min-h-16'
 	});
 
 	const buttonClass = $derived(

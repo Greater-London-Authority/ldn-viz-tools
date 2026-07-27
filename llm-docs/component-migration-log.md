@@ -140,6 +140,49 @@ None found in any of the 6 files.
 ### Survivors (grep-verified)
 `ml-0.5` (Trigger) — construction. `gap-0`/`p-1`/`p-2`/`mr-1` (MultipleActionButton) — construction. `text-2xl font-bold` (PlacardButton title) — flagged item 2. `prose ... leading-snug` (PlacardButton body) — flagged item 3. `mt-4 px-4 py-2` (PlacardButton footer) — construction.
 
+---
+
+## Correction — `label-tight` / `label-sm-tight` (found during batch 6, applied retroactively)
+
+**Important finding.** While reading `NavigationMenuItem.svelte` (already using `class="... label-tight ..."` directly) I found that `roles.cjs` **already defines real `label-tight`/`label-sm-tight` role classes** (line-height 1.0 baked in, same size/weight as `label`/`label-sm`), built through the exact same mechanism as every other role (`typography.cjs`'s `rolesKeys` loop). This **contradicts** `migration-type-mapping.md`'s stated guidance ("[tight-label] is currently **not** present as a variable... must be applied at the component level") — that doc is stale on this specific point; the token exists and `NavigationMenuItem` was already using it correctly.
+
+My earlier batches used the doc's literal instruction (`label`/`label-sm` + a manual `leading-none` override) instead. That was **visually correct** (line-height 1.0 either way) but didn't bind to the canonical semantic role, which the overall migration rule requires ("bind to semantic roles only... never a leftover Tailwind class/override").
+
+**Fixed retroactively, this batch:**
+- **Button.svelte**: all four `label-sm leading-none` → `label-sm-tight`; all `label leading-none` → `label-tight`.
+- **TabLabel.svelte**: both orientation variants `label leading-none` → `label-tight`.
+- **MultipleActionButton.svelte**: menu item label `label leading-none` → `label-tight`.
+
+No visual change from this correction — same computed size/weight/line-height, now via the proper token. Flagging this so the source-of-truth mapping doc (`migration-type-mapping.md`) can be updated to reflect that `label-tight`/`label-sm-tight` do exist.
+
+---
+
+## Batch 6 — NavigationMenu/NavigationMenuItem, Toaster/Toast, ColorLegend, ImageDownloadButton
+
+### Changed
+- **Toast.svelte**: type heading (`text-lg font-bold`, "Notice"/"Success"/etc.) → `card-panel-title`. Function-first match: a toast is structurally a small status banner, same category as `Callout` (which already uses `card-panel-title` for its title) — confident precedent-following edit despite the compound off-system resize (18→20px, 700→600 weight). Body message `text-sm` → `body-sm` (exact 14px match). Added `product` context to the outer `role="alert"` div.
+- **Toaster.svelte**: `space-y-1` (stacked toast messages) → `flow-product`. Classified rhythm — literally "field after field" (repeated peer toast messages stacking vertically); `space-y-1` = 4px = exactly `flow-product`'s `tight` step, confirming the read. Toasts render as direct children, no markup change needed.
+- NavigationMenu / NavigationMenuItem / ImageDownloadButton: no edits — already correctly migrated (`product`, `label-tight`) or pure composition with nothing of their own.
+- ColorLegend.svelte: no edits — see flag below, this one is a different kind of case entirely.
+
+### Flagged
+1. **ColorLegend.svelte is not a Tailwind-class migration candidate at all.** Its text sizing is set via raw SVG presentation attributes (`font-size="10px"`, `font-weight="bold"`) on hand-authored `<text>` elements, plus **D3-generated tick labels** created imperatively inside `updateLegend()` (via `axisBottom()`), which aren't authored in the template and can't be given a Tailwind class without touching the D3 rendering code itself. This is chart-context content (title/tick roles conceptually apply — `chart/axis-title`, `chart/tick-sm`) but converting it means changing how typography is applied (attribute → CSS class, plus editing the D3 call to set a class on generated nodes), which is a behavior-adjacent code change beyond a class swap and out of scope for this pass. Recommend a dedicated follow-up that also decides how to class D3-generated SVG text.
+
+### Out-of-scope colour
+`text-color-*` throughout; Toast's `typeClasses` (bg/border colour lookup); ColorLegend's `fill="currentColor"`/`theme.tokenNameToValue(...)` calls.
+
+### Radius
+None found in any of the 6 files.
+
+### Left as-is
+- **ImageDownloadButton.svelte** — pure composition over the already-migrated `MultipleActionButton`; no Tailwind classes of its own.
+- **NavigationMenu.svelte** `space-x-1` (horizontal tab-like nav wrap) — construction (axis rule: horizontal → always construction).
+- **NavigationMenuItem.svelte** `p-1.5`, `pl-4`, `mb-1` — construction (fixed internal offsets: label padding, child-list indent, list↔expanded-child gap), on-scale, left bare.
+- **Toast.svelte** `p-2 pb-4 pl-4 pr-2`, `pr-2`, `mb-1` (title→body offset) — construction: `mb-1` separates two fixed named parts of one closed toast widget, not open rhythm.
+
+### Survivors (grep-verified)
+`space-x-1` (NavigationMenu) — construction. `p-1.5`/`pl-4`/`mb-1` (NavigationMenuItem) — construction. `p-2 pb-4 pl-4 pr-2`/`mb-1`/`pr-2` (Toast) — construction, per table above. ColorLegend and ImageDownloadButton — no survivors (no Tailwind type/spacing/radius classes present at all; ColorLegend's typography is SVG attributes, see flag).
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
