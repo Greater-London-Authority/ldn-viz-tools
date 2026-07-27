@@ -297,6 +297,37 @@ None found in any of the 5 files.
 ### Survivors (grep-verified)
 `mx-2`/`p-4`/`space-y-4 p-3` (LoginForm) — construction or flagged item 1. `space-y-1` (CheckboxGroupSolid) — construction (fixed 2-part composition, not blocked-rhythm this time since the list itself is horizontal).
 
+---
+
+## Batch 11 — Geocoder, GeocoderSuggestion, GeocoderSuggestionList, Geolocator, TargetIcon
+
+### Changed
+- **GeocoderSuggestion.svelte**: address line `leading-4` (a raw line-height override with no accompanying size utility) → `body-sm`. Clean function-first match: a secondary descriptive line under a primary suggestion label is exactly the "helper/secondary text" case, and `body-sm` carries its own correct size+line-height, replacing the bare override.
+- **GeocoderSuggestionList.svelte**: `text-sm` on the list container → `body-sm` (exact match) + added `product` context — this single ancestor addition covers `GeocoderSuggestion`'s `body-sm` edit too, no need to duplicate the context class per-row.
+
+### Flagged
+1. **Both `<h1>` suggestion-name elements** (`GeocoderSuggestion`'s `{suggestion.name}` and `GeocoderSuggestionList`'s "No locations found") **have no type role at all** — no `text-*`/`font-*` utility present, so they render at whatever Tailwind's preflight leaves headings at (unstyled, inheriting ambient size). Function-wise this reads strongly as a "nav item/menu item" (`label-tight`), but there's no existing utility to migrate *from* — adding one would be introducing new type styling rather than mapping an existing class. Left untouched, flagged rather than guessed. (Aside: using `<h1>` for a single list-item's text is also a heading-level oddity worth a look, but that's a structural/semantic-HTML question, not this pass's concern.)
+2. **`p-0.25` appears twice** (Geocoder's clear-button `XMark` icon, Geolocator's clear-button `XMark` icon) — `0.25` isn't a step in Tailwind's default spacing scale (smallest fractional step is `0.5`), and doesn't match our spacing token table either (smallest is `--spacing-0-5` = 2px). Both sibling icons in the same components use valid `p-0.5`, suggesting this is a copy-paste typo repeated in two places, not an intentional value. Not fixed (not a token-migration decision, a probable pre-existing bug), but flagged since it's squarely in the padding audit.
+3. **Two more likely-invalid utility classes**: Geocoder's clear button `class="y-auto absolute ..."` (`y-auto` isn't a real Tailwind utility) and GeocoderSuggestionList's `class="max-height-[60vh] ..."` (should be `max-h-[60vh]`). Neither is in the type/spacing/radius scope of this pass, but flagging alongside the `p-0.25` finds since they're the same category of dead class.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*`/`border-color-*` throughout.
+
+### Radius
+None found in any of the 5 files.
+
+### Left as-is
+- **TargetIcon.svelte** — pure SVG path/line icon, no classes of any kind.
+- **Geocoder** `pl-10`, `pr-8`, **GeocoderSuggestion** `px-2.5 py-1.5`, `mb-1`, **GeocoderSuggestionList** `px-2.5 py-1.5` (×2), **Geolocator** `p-1` — construction, on-scale, left as bare Tailwind. `left-2`/`top-2`/`right-1`/`top-1`/`left-0`/`top-11` — absolute-positioning offsets, not in the four in-scope utility categories (not padding/margin/gap), left untouched regardless.
+
+### Survivors (grep-verified)
+`pl-10`/`pr-8`/`p-0.25` (Geocoder) — construction / flagged item 2. `px-2.5 py-1.5`/`mb-1`/`h1` (GeocoderSuggestion) — construction / flagged item 1. `px-2.5 py-1.5` ×2 (GeocoderSuggestionList) — construction. `p-1`/`p-0.5`/`p-0.25` (Geolocator) — construction / flagged item 2.
+
+**Post-batch resolutions (user):**
+- **`<h1>`s removed** by the user in both `GeocoderSuggestion` and `GeocoderSuggestionList` (now plain `<p>`/`<li>` text) — this cleared the structural objection behind flag 1, so I applied the recommended role now that there's a real element to attach it to: `label-tight` added to the suggestion-name `<p>` and to the "No locations found" `<li>` (both already sit under the `product` context added to the list in this same batch).
+- **Flag 2 fixed**: `p-0.25` → `p-0.5` in both Geocoder.svelte and Geolocator.svelte's clear-button `XMark` icons, matching their sibling icons.
+- **Flag 3 fixed**: `max-height-[60vh]` → `max-h-[60vh]` in GeocoderSuggestionList (real Tailwind utility, same effect intended). `y-auto` removed from Geocoder's clear button — it wasn't a real utility and did nothing, and no clear correct replacement was evident from context, so it was dropped rather than guessed at (zero visual change, since it was a no-op class either way).
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.

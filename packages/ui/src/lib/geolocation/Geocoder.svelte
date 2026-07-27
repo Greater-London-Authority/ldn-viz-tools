@@ -337,10 +337,10 @@
 	{#if showClearButton || query?.length > 0}
 		<button
 			onclick={clearSearch}
-			class="y-auto absolute right-1 top-1 flex items-center justify-center bg-color-surface"
+			class="absolute right-1 top-1 flex items-center justify-center bg-color-surface"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="p-0.25 h-8 w-8 text-color-text" />
+			<Icon src={XMark} class="p-0.5 h-8 w-8 text-color-text" />
 		</button>
 	{/if}
 
