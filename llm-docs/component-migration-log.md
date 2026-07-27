@@ -328,6 +328,77 @@ None found in any of the 5 files.
 - **Flag 2 fixed**: `p-0.25` → `p-0.5` in both Geocoder.svelte and Geolocator.svelte's clear-button `XMark` icons, matching their sibling icons.
 - **Flag 3 fixed**: `max-height-[60vh]` → `max-h-[60vh]` in GeocoderSuggestionList (real Tailwind utility, same effect intended). `y-auto` removed from Geocoder's clear button — it wasn't a real utility and did nothing, and no clear correct replacement was evident from context, so it was dropped rather than guessed at (zero visual change, since it was a no-op class either way).
 
+---
+
+## Batch 12 — Theme, ThemeSwitcher, FooterCookieMenu, SidebarTabList, SidebarToggle
+
+### Changed
+- **ThemeSwitcher.svelte**: dropdown menu item text (`highlightedClasses`/`nonHighlightedClasses`) → added `label-tight` — same "dropdown menu item" pattern as `MultipleActionButton` (batch 5), previously had no type role at all (just padding/colour), now correctly bound. Added `product` context to `DropdownMenu.Content`.
+- Theme / FooterCookieMenu / SidebarTabList / SidebarToggle: no edits — `SidebarTabList`'s "Close" button text already resolves correctly via `tabLabelOverride` (fixed in batches 4/6), nothing further needed there.
+
+### Flagged
+1. **ThemeSwitcher `buttonClasses`: `rounded-full` on the icon-only mode-toggle button** — not one of the doc's named genuinely-round exceptions (avatar/dot/pill-toggle-knob); every other `Button` instance in the system (including its own `square` variant) has zero border-radius. This looks like a one-off that doesn't match the system-wide flat-corner rule, but I didn't remove it — flagging for a decision rather than guessing.
+2. **ThemeSwitcher `buttonClasses`: `text-xs`** — this is passed as a `class` override into the `Button` component, which (per the batch 7 finding, flag 7) means it sits in Tailwind's utility layer and **will win over `Button`'s own internal `label`/`label-sm-tight` sizing** regardless of the `size` prop passed in. Migrating this to a role class wouldn't cleanly resolve the conflict either, since two component-layer classes of equal specificity would then compete on stylesheet-registration order rather than intent. Same underlying issue as batch 7 flag 7 — left untouched, flagged as another instance of it rather than re-solving it here.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*` throughout; `capitalize` (text-transform, not a type-role utility, left untouched regardless).
+
+### Radius
+`rounded-full` (ThemeSwitcher) — flagged item 1, not removed.
+
+### Left as-is
+- **Theme.svelte** — a headless `ModeWatcher` wrapper, no markup/classes at all.
+- **FooterCookieMenu** `space-x-2` — construction (axis rule: horizontal → always construction).
+- **SidebarTabList** `mb-1` (icon→"Close"-text offset) — construction, on-scale.
+- **SidebarToggle** `p-1` (×2) — construction, on-scale. Its custom `<style>` block (`--size: clamp(...)`) isn't a Tailwind class, out of scope regardless.
+
+### Survivors (grep-verified)
+`py-1 px-2` (ThemeSwitcher) — construction. `rounded-full`/`text-xs`/`p-1` (ThemeSwitcher `buttonClasses`) — flagged items 1–2 / construction. `space-x-2` (FooterCookieMenu) — construction. `mb-1` (SidebarTabList) — construction. `p-1` ×2 (SidebarToggle) — construction.
+
+---
+
+## Batch 13 (final) — LogoLOTI, LogoByCIU, LogoCIU, LogoMayor, ColorLegendOrdinalHorizontalAlt, ColorLegendOrdinalChips
+
+This completes coverage of every real component in `packages/ui/src/lib` (demo-only Storybook scaffolding files were treated as out of scope throughout, per the standing note in earlier batches).
+
+### Changed
+- **ColorLegendOrdinalHorizontalAlt.svelte**:
+  - Wrapper `gap-2` (title → chart) → `flow-product`. Clean rhythm case — a title-then-content coupling, and 8px matched `flow-product`'s `default` step exactly (no special "loose" marker needed, unlike the figure/table block-object rule). Added `chart` context to the same wrapper.
+  - Title `font-semibold` (no size at all previously) → `axis-title`. Function-first: this is literally a chart-legend title, the type map's own "axis title → chart/axis-title" row.
+  - Per-swatch SVG `<text>` data labels: added `label` role (chart/label, 14/400) — these are authored template elements (not D3-generated like `ColorLegend`'s tick labels), so unlike that flagged case, classing them directly was straightforward. Kept the existing `select-none` and the inline `style:font-weight` highlight-toggle, which now layers on top of `label`'s own weight as an intentional per-value emphasis override.
+- **ColorLegendOrdinalChips.svelte**:
+  - Title `font-semibold` → `axis-title`, same reasoning as above. Added `chart` context to the outer wrapper.
+  - Per-chip label `<span>`: added `label` role alongside its existing conditional `font-semibold`/`font-normal` highlight toggle (same "role + deliberate override" pattern as the SVG text above).
+- Logo files: no edits — all four are pure SVG path/polygon marks with zero CSS classes.
+
+### Flagged
+1. **ColorLegendOrdinalChips's vertical orientation has no gap at all** between chip rows (`orientation === 'vertical'` branch is just `'flex flex-col'`, no `gap`/`space-y`), while the horizontal branch has `gap-2`. This looks like a likely oversight — chips would render with rows touching — but per "don't fix what looks wrong," left untouched and flagged rather than adding a gap value that wasn't there.
+
+### Out-of-scope colour
+`text-color-label` (both chip/legend files); logo files' `fill="currentColor"` (colour by inheritance, not a token).
+
+### Radius
+None found in any of the 6 files.
+
+### Left as-is
+- **All four logo files** — pure SVG mark/wordmark paths, zero classes of any kind.
+- **ColorLegendOrdinalChips** `mr-1` (swatch→label offset), `gap-2` (horizontal chip wrap) — construction (fixed single offset / axis-rule horizontal gap).
+
+### Survivors (grep-verified)
+`gap-2` (ColorLegendOrdinalChips, horizontal branch) — construction. `mr-1` — construction. `font-semibold`/`font-normal` (ColorLegendOrdinalChips per-chip label) — intentional highlight-toggle layered on top of the new `label` role, not a leftover. No survivors in any logo file or in ColorLegendOrdinalHorizontalAlt.
+
+---
+
+## Migration complete
+
+Every real component (`.svelte`, non-story, non-demo) in `packages/ui/src/lib` has now been reviewed across 13 batches. Summary of what's left for follow-up passes, consolidated from the flags above:
+
+- **Structural/markup-blocked rhythm cases** (need a wrapping element, out of scope for a class-only pass): `CheckboxGroup`/`RadioButtonGroup` (batch 2), `LayerControlGroup` (batch 8), `CheckboxGroupSolid` doesn't apply (horizontal layout).
+- **Deferred to a dedicated pass**: `ColorLegend.svelte`'s D3-generated + SVG-attribute typography (batch 6); the construction-spacing→explicit-`--spacing-*`-binding pass mentioned throughout (currently correct as bare on-scale Tailwind per the 2026-07-24 carve-out retirement).
+- **Design decisions still open**: Callout's rhythm-vs-construction call (batch 1); several "no map entry" titles/headings (AppShell's `font-bold`-on-`body`, NonIdealState's title, MergeValuesControl's spans — flagged deprecated, so no action needed there); the two `Button`-override cascade conflicts (batch 7 item 7, batch 12 item 2) that need a site-wide decision on how consumer class overrides should interact with `Button`'s internal role classes; ThemeSwitcher's non-conforming `rounded-full`.
+- **Likely pre-existing bugs surfaced, not fixed**: CheckboxSolid/RadioButtonSolid drift (batch 7), several dead/invalid utility classes (`padding-0`, `width-fit`, `black` in MergeValuesControl — deprecated, no action; both `p-0.25` typos already fixed by user in batch 11), ColorLegendOrdinalChips's missing vertical gap (this batch).
+- **MergeValuesControl** is flagged for deprecation per your instruction — no further migration work should target it.
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
