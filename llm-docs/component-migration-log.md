@@ -106,6 +106,40 @@ None found in any of the 6 files (5 components + sidebarUtils.ts).
 ### Survivors (grep-verified)
 `pb-6/pb-4/px-6 pt-6/space-y-4` (Sidebar) — flagged item 1 or construction, per table above. `font-bold` (AppShell) — flagged item 3. `px-4/py-4/pb-4/py-2` (Footer) — construction. `ml-2` (CopyButton) — construction. `px-4` (Flag) — construction; `text-base uppercase` (Flag) — flagged item 4. `!space-y-*/!p-0/mr-0/mb-1` (sidebarUtils.ts) — construction, intentional resets.
 
+---
+
+## Batch 5 — Overlay/Trigger, MultipleActionButton, PlacardButton, AsyncButton, DataDownloadButton
+
+### Changed
+- **MultipleActionButton.svelte** (`DropdownMenu.Content`):
+  - Added `product` context to `DropdownMenu.Content` (covers all three role classes below).
+  - `DropdownMenu.GroupHeading` `text-sm` → `body-sm` (secondary/plain text, exact 14px match — see flag below for the alternative reading).
+  - Menu item primary label `text-sm font-medium` → `label leading-none` — clean, confident: exact 14/500 match for "nav item/menu item/tab label" per the type map, tight-label applied since it's single-line.
+  - Menu item description `text-xs text-color-text-muted` → `caption` — exact 12px match ("small functional — timestamp, badge, meta").
+- **PlacardButton.svelte**: content wrapper `space-y-2` → `flow-product`. Classified rhythm: PlacardButton's title→body→footer shape matches the doc's own "Card (title/body/actions)" mini-document exemplar; `space-y-2` = 8px = exactly `flow-product`'s `default` step, confirming the read. Title and body are direct children of this div, so no markup change was needed.
+- Overlay / Trigger / AsyncButton / DataDownloadButton: no edits — no in-scope utilities present (Overlay and DataDownloadButton are pure composition with no Tailwind classes of their own; Trigger and AsyncButton only have construction margins/dimensions/colour).
+
+### Flagged
+1. **MultipleActionButton `GroupHeading` — `body-sm` vs. `label`** — judgment call, not a hard block, same shape as the Breadcrumbs case in batch 3. It's a heading for a group of menu items (structurally a heading), but carries no explicit weight in the original code (plain `text-sm`, no `font-medium`), reading as intentionally plain rather than a control-style label. Went with **`body-sm`** (exact match, zero visual change); flagging the alternative (`label`, weight 400→500) in case group headings are meant to read as control labels.
+2. **PlacardButton title (`text-2xl font-bold`, 24/700)** — no map row fits exactly. Two off-system candidates conflict: `section-head` (24/600) matches size but not weight; `dashboard-head` (28/700) matches weight but not size. Left untouched rather than force either — recommend a design decision on which axis (size or weight) should win, or whether this needs its own "CTA/placard title" role.
+3. **PlacardButton body (`prose h-full leading-snug`)** — the `.prose` context already applies correct body typography (including line-height) to bare `<p>` elements via the shared `semantics.cjs` selector, so `leading-snug` is a stray override fighting the role's own line-height rather than a documented per-component exception. Left untouched (uncertain whether the tightened leading was a deliberate density choice for this card), flagged for a decision: drop `leading-snug` and let `.prose`'s body line-height apply, or confirm the override is intentional.
+
+### Out-of-scope colour
+`text-color-*`/`bg-color-*`/`border-color-*`/`divide-color-*` throughout; PlacardButton's inline `style:color`/`style:background-color` palette lookups (colour, untouched); AsyncButton's `stroke-color-*` spinner classes.
+
+### Radius
+None found in any of the 6 files.
+
+### Left as-is
+- **Overlay.svelte / DataDownloadButton.svelte** — pure composition over already-migrated child components; no Tailwind utility classes of their own to migrate.
+- **AsyncButton.svelte** — only construction dimensions (`w-*`/`h-*`/`stroke-[10]`, not in scope) and colour; no type/spacing utilities in scope.
+- **Trigger.svelte** `ml-0.5` (icon offset) — construction, on-scale.
+- **MultipleActionButton** `p-1`/`p-2`/`gap-0`/`mr-1` — construction, on-scale/zero.
+- **PlacardButton** `p-4`, `mt-4`, `px-4 py-2` (footer bar) — construction: `mt-4` separates two fixed named parts (content block / CTA footer bar) of one closed widget, not open rhythm.
+
+### Survivors (grep-verified)
+`ml-0.5` (Trigger) — construction. `gap-0`/`p-1`/`p-2`/`mr-1` (MultipleActionButton) — construction. `text-2xl font-bold` (PlacardButton title) — flagged item 2. `prose ... leading-snug` (PlacardButton body) — flagged item 3. `mt-4 px-4 py-2` (PlacardButton footer) — construction.
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
