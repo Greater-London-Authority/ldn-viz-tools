@@ -76,6 +76,7 @@ StyleDictionary.registerParser({
 				['primitive.lg.', 'primitive.'],
 				['primitive.xl.', 'primitive.'],
 				['primitive.2xl.', 'primitive.'],
+				['semantic-typography.', 'typography.'],
 				['focus ring', 'focus-ring']
 			];
 
