@@ -248,6 +248,30 @@ None found in any of the 6 files.
 ### Survivors (grep-verified)
 `rounded-full` ×3 (ColorPicker) — kept, genuinely round. `gap-0.5`/`gap-4`/`pt-2` (ColorPicker, ResizeControl) — construction. `gap-2`/`gap-0.5` (FillTypeControl) — construction, per table above. `gap-4` (OpacityControl) — construction. `space-y-1` ×2/`pl-5`/`!px-0` (LayerControlGroup) — flagged item 1 or construction.
 
+---
+
+## Batch 9 — AnalyticsAndCookieConsent, PrivacyPolicyLink, CookieControlSettings, LoginLink, AuthMenu
+
+### Changed
+None — every file in this batch was either pure composition around already-migrated components, third-party vendor CSS, or a single flagged no-entry case.
+
+### Flagged
+1. **AnalyticsAndCookieConsent.svelte is not a token-migration candidate.** Its only styling is a `<style global>` block of `!important` overrides targeting a third-party widget's own DOM (`#ccc`, `.ccc-notify-button`, etc. — the CivicUK cookie-control script). This isn't our Tailwind/type-scale surface at all; it's vendor-widget CSS we don't control the markup/class conventions for. Same category as ColorLegend's SVG-attribute case in batch 6 — flagged as out of scope rather than touched.
+2. **AuthMenu `<span class="font-bold">{$userName}</span>`** — inline emphasis on a username within a sentence, no size set at all (inherits ambient/browser default, no `product`/`prose` context anywhere in this component). No map row for "inline emphasized username." Left untouched, flagged.
+
+### Out-of-scope colour
+AnalyticsAndCookieConsent's vendor CSS hex colours (`#e7135d`, `#9e0059`, etc.) — third-party branding, not our token system, untouched regardless.
+
+### Radius
+None found (AnalyticsAndCookieConsent's vendor CSS is out of scope regardless; no other files have any classes at all).
+
+### Left as-is
+- **PrivacyPolicyLink / CookieControlSettings / LoginLink** — pure composition around the already-migrated `Button`; no Tailwind classes of their own.
+- **AuthMenu** `dark` class — theme selector, not a type/spacing/radius utility.
+
+### Survivors (grep-verified)
+`font-bold` (AuthMenu) — flagged item 2. No other survivors — the other four files have no in-scope classes at all.
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
