@@ -272,6 +272,31 @@ None found (AnalyticsAndCookieConsent's vendor CSS is out of scope regardless; n
 ### Survivors (grep-verified)
 `font-bold` (AuthMenu) — flagged item 2. No other survivors — the other four files have no in-scope classes at all.
 
+---
+
+## Batch 10 — LoginForm, HandleRedirectFromAuth, CheckboxGroupSolid, RadioButtonGroupSolid, PlaceholderImage
+
+### Changed
+- **LoginForm.svelte**: header title `text-lg font-medium` ("{app_name}: Log In") → `label`, following the precedent the user already set for Modal's `Dialog.Title` (batch 3) — structurally the same case (a title bar atop a form/dialog-like overlay), same off-system resize (18→14px). Added `product` context to the header bar div.
+
+### Flagged
+1. **LoginForm `<form class="space-y-4 p-3">`** — ambiguous, same shape as the Sidebar/MergeValuesControl re-examination cases: 16px doesn't match `flow-product`'s `default` (8px). Two readings compete here: **construction** (a fixed, short sequence of parts in one closed auth-form widget — consistent with the Sidebar/MergeValuesControl precedent), or **rhythm** (the doc's own definition includes "coupled content blocks," and this reads somewhat like a natural stacked-content flow: instruction text → status callout → CTA button). Left as bare Tailwind, flagging both readings rather than picking one — this is genuinely closer to 50/50 than the earlier construction calls.
+
+### Out-of-scope colour
+`bg-black/60`, `bg-white`, `text-color-text` (LoginForm).
+
+### Radius
+None found in any of the 5 files.
+
+### Left as-is
+- **HandleRedirectFromAuth.svelte** — headless component, no template/markup at all.
+- **PlaceholderImage.svelte** — only a dimension (`h-8 w-8`) and colour classes; no type/spacing/radius utilities.
+- **CheckboxGroupSolid/RadioButtonGroupSolid** — their option rows render as a horizontal `flex` button-row (unlike the vertical `CheckboxGroup`/`RadioButtonGroup`/`LayerControlGroup` cases), so there's no vertical-list rhythm ambiguity here: axis rule makes it construction outright. `CheckboxGroupSolid`'s outer `space-y-1` (select-all → button row) is the same fixed-2-part construction call as its non-solid sibling.
+- **LoginForm** `mx-2`, `p-4`, `p-3` — construction, on-scale.
+
+### Survivors (grep-verified)
+`mx-2`/`p-4`/`space-y-4 p-3` (LoginForm) — construction or flagged item 1. `space-y-1` (CheckboxGroupSolid) — construction (fixed 2-part composition, not blocked-rhythm this time since the list itself is horizontal).
+
 ### Flagged
 1. **CheckboxGroup `<ul>` and RadioButtonGroup vertical option stack** — genuine "field after field" rhythm per the gate, but `flow-*`'s owl mechanism can't cleanly reach just the list: the shared wrapper also contains an unrelated sibling (select-all checkbox / Clear button) whose relationship to the list is a different, non-rhythmic composition. Applying `flow-product` to the shared wrapper would correctly space the list but would also resize the select-all→list gap (4px→8px), which I've classified construction. Properly separating the two needs a wrapping element — a markup restructure, out of scope this pass. Left as bare `space-y-1`. Recommend a structural follow-up pass.
 2. **Checkbox/RadioButton `font-normal` override on `form-label`** — no map row covers checkbox/radio option labels specifically (map's "control label" examples are short button/tab/chip text; these are closer to full-sentence body copy). Don't know what `form-label` resolves to under the hood (shared `forms.cjs`, out of scope to open). Left untouched, flagged rather than guessed.
