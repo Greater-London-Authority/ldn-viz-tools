@@ -70,6 +70,8 @@ Sizes shown are `xl`; scaling roles are marked.
 
 Migrate off-system legacy sizes to the correct role even when it visibly resizes the element.
 
+**Tight variants for single-line controls.** `label-tight` / `label-sm-tight` are real Tailwind utilities — same size and weight as `label` / `label-sm`, with `line-height` set to `1` for buttons, tabs and chips that must never wrap. Already in use (`Button`, `TabLabel`, `NavigationMenuItem`, `ThemeSwitcher`, `MultipleActionButton`, `GeocoderSuggestion(List)`). What's missing is a dedicated backing token — they currently reuse `label`/`label-sm`'s vars rather than having their own entry in `semantic-typography`.
+
 ## Prose roles
 
 | Role       | Size | Weight | Job                                         |
@@ -213,7 +215,7 @@ Specified but not emitted — don't build against these:
 
 - **Fluid `clamp()` display tokens** (`display`, `headline`, `page-head`, `metric`). The stepped tokens are the canonical set.
 - **Compressed chart tick density** (12 / 11). Default density is 14 / 12.
-- **Tight label variants** (`label-tight`, `label-sm-tight`) — a line-height-1.0 treatment for single-line controls, currently style-only. Buttons, tabs and chips want it; check the current build before assuming a utility exists.
+- **A dedicated `label-tight` / `label-sm-tight` token.** The utilities themselves emit and are in use — see [Product roles](#product-roles) — but there's no dedicated entry in `semantic-typography` yet, so they can't be retuned independently of `label`/`label-sm`.
 
 ## Going deeper
 
