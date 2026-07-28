@@ -12,7 +12,7 @@ layout: index
         import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte'
 </script>
 
-<!-- <p class="prose responsive body-lg py-typography-spacing-3xl">The London City Data team bring insight</p> -->
+<!-- <p class="prose lead py-8">The London City Data team bring insight</p> -->
 
 <div class="grid md:grid-cols-2 gap-4 pt-spacing-xl">
     <div class="flow-product">
