@@ -64,7 +64,7 @@ The scale has a two-region structure: a doubling-chain upper half and a near-con
 
 ## Line Height Scale
 
-Line-height follows **two policies, assigned by role** (the reading-leading policy is stated after the table). Most roles take **grid leading** — a line-height rounded to the 4px grid, tight at the top (~1.05–1.15) and generous at the bottom (~1.3–1.6). The grid below is that reference; it increments roughly every two font-size steps rather than every step, which keeps the number of distinct values manageable — 13 values covering 17 font sizes — without losing accuracy. It is a **reference for authoring, not a CSS-cascade participant**: emitted line-height is a computed unitless ratio, never a `var()` to a px value.
+Line-height follows **two policies, assigned by role** (the reading-leading policy is stated after the table). Most roles take **grid leading** — a line-height rounded to the 4px grid, tight at the top (~1.05–1.15) and generous at the bottom (~1.3–1.6). The grid below is that reference; it increments roughly every two font-size steps rather than every step, which keeps the number of distinct values manageable — 13 values covering 17 font sizes — without losing accuracy. It is a **reference for authoring, not a CSS-cascade participant**: emitted line-height is a computed unitless ratio, never a `var()` to a px value. One exception, introduced with the chart family: the three aliased chart object-tier roles (`chart/title`, `chart/subtitle`, `chart/eyebrow`) reference their product source for *every* property, line-height included, because a pure alias restates nothing. They still resolve to a unitless ratio — the reference points at a sibling semantic role, not at this grid.
 
 | Step | Font size | Line height | Ratio |
 |------|-----------|-------------|-------|
@@ -123,7 +123,7 @@ Naming states the *job* rather than the size or a component. `Title 1–4` map t
 
 **Hero and content are separate tiers.** The hero slot (Display, or Headline with Subhead — not both) sits above the content region as page chrome. The content region runs its own independent heading count starting at Title 1, regardless of what the hero above it was. The two do not collide because they belong to different structural tiers, which is the same reason a CMS often demotes a body's own `h1` when the page already has its hero heading.
 
-**The Eyebrow is a composition role, not a demotion.** The prose Eyebrow is an overline used *within* the prose composition components (Page Title, Section Break) as a deliberate kicker above the heading — it is chosen, not the result of a title stepping aside. This distinguishes it from the product-context eyebrow *treatment* (see Product / UI), where "eyebrow" is what a Card / Panel title becomes when it yields the primary slot. Same 14px recessive treatment (weight 500, tracking 0; casing on hold), different intent: prose eyebrow = a labelling overline you add; product eyebrow = a title demoted by the primary-slot rule. The shared treatment is deliberate so the two read consistently, but they are separate roles in separate contexts. The Eyebrow appears only in the composition components; ordinary in-flow prose (e.g. from markdown) never uses it.
+**The Eyebrow is a composition role, not a demotion.** The prose Eyebrow is an overline used *within* the prose composition components (Page Title, Section Break) as a deliberate kicker above the heading — it is chosen, not the result of a title stepping aside. This distinguishes it from the product-context eyebrow *treatment* (see Product / UI), where `Eyebrow` is the role a `Title` binds when it yields the primary slot. Same 14px recessive treatment (weight 500, tracking 0; casing on hold), different intent: prose eyebrow = a labelling overline you add; product eyebrow = a title demoted by the primary-slot rule. The shared treatment is deliberate so the two read consistently, but they are separate roles in separate contexts. The Eyebrow appears only in the composition components; ordinary in-flow prose (e.g. from markdown) never uses it.
 
 ## Semantic Layer: Product / UI
 
@@ -133,47 +133,49 @@ Product carries fewer roles than Prose, since dashboard chrome has shallower str
 
 | Role | Step | Size | Job |
 |------|------|------|-----|
-| Dashboard head | 9 | 36px | Top page/dashboard title, Bold. Takes an optional subtitle. Scales. |
-| Section head | 6 | 28px | Groups cards within a page; may appear several times. Takes an optional subtitle. Scales. |
-| Card / Panel title | 2 | 20px | Title at card *or* panel level. Dominant treatment; also has eyebrow (14px) and subtitle (16px) treatments — see below. Fixed. |
-| Metric | 9 | 36px | Hero/stat numerals, Bold. Scales in step with Dashboard head. |
-| Metric Sm | 2 | 20px | Secondary stat, in-card KPI, Bold. Fixed at the 20px panel-title size; small metrics rarely sit beside a title, so the shared size is fine in context. |
+| Page head | 9 | 36px | Top page title, Bold. Takes an optional Subtitle. Scales. |
+| Section head | 6 | 28px | Groups cards within a page; may appear several times. Takes an optional Subtitle. Scales. |
+| Title | 2 | 20px | The object-level title — card, panel, modal, callout, drawer. Takes the dominant treatment; a title yielding its slot binds `Eyebrow` instead. Fixed. |
+| Subtitle | 0 | 16px | Supporting line beneath any heading or title. Shared treatment, recessive grey. Fixed. |
+| Eyebrow | -1 | 14px | Overline above a title, and the demoted treatment a `Title` takes when it yields. Weight 500. Fixed. |
+| Metric | 9 | 36px | Hero/stat numerals, Bold. Scales in step with Page head. |
+| Metric Sm | 2 | 20px | Secondary stat, in-card KPI, Bold. Fixed at the 20px `Title` size; small metrics rarely sit beside a title, so the shared size is fine in context. |
 | Body | 0 | 16px | Default UI text, field values, menu items. Fixed. |
 | Body Sm | -1 | 14px | Secondary/dense text, hints, table cells. Fixed. |
 | Label | -1 | 14px | Control identifiers (buttons, inputs, tabs). Weight 500. Fixed. |
-| Label Sm | -2 | 12px | Label in dense contexts; also chart group labels / column headers. Weight 500. Fixed. |
-| Caption | -2 | 12px | Metadata, legends, badges, data-point values. Fixed. |
+| Label Sm | -2 | 12px | Label in dense contexts; also table column headers. Weight 500. Fixed. (Chart text takes the `Chart/*` roles, not this one.) |
+| Caption | -2 | 12px | Metadata, badges, table cell values. Fixed. (Chart legends and data labels take `Chart Label`.) |
 
-Ten roles, ten font-size variables. The eyebrow (14px) and subtitle (16px) treatments, and the data-labelling roles (Group label → Label Sm, Data point → Caption), reuse the steps above rather than adding variables, so they need no new tokens — only the correct alias plus weight and colour. The subsections below describe how.
+Twelve roles, twelve font-size variables. `Subtitle` and `Eyebrow` are shared treatments that carry their own tokens: they are currently metric twins of `Body` (16/24/400) and `Label` (14/20/500), kept as distinct variables so either can be retuned without dragging the role it happens to match. That duplication is deliberate and named rather than accidental. The data-labelling roles genuinely add no variables — Group label resolves to `Label Sm`, Data point to `Caption`. The subsections below describe how.
 
 ### Structural hierarchy (recursive)
 
-Container-level headings. The upper rungs (Dashboard, Section) are distinct sizes. At the card and panel level the size stops descending: Card and Panel share one title role, and the difference between them in a given layout is carried by treatment (dominant, eyebrow, or absent), assigned by the primary-slot rule rather than by a distinct size per level. This is what makes the ladder recursive without multiplying tokens.
+Container-level headings. The upper two rungs (Page, Section) are page furniture: each sits at a fixed position, one per page or repeating at one level, so each is named for that position. The leaf rung is different in kind — it is the recursive, general case, appearing at any nesting depth, and which treatment applies is resolved by the primary-slot rule rather than by depth. That is why it is named plainly `Title` while the rungs above keep their positional `-head` names. Card, panel, modal, callout and drawer all share it; the difference between them in a given layout is carried by treatment (dominant, `Eyebrow`, or absent), not by a distinct size per level. This is what makes the ladder recursive without multiplying tokens.
 
 | Role          | Step | Size    | Job |
 |---------------|------|---------|-----|
-| Dashboard head| 9    | 36px    | Top page/dashboard title, Bold. Scales. |
+| Page head     | 9    | 36px    | Top page title, Bold. Scales. |
 | Section head  | 6    | 28px    | Groups cards within a page. Scales. |
-| Card / Panel title | 2 | 20px | Title at card *or* panel level. One role, three treatments (below). Fixed. |
+| Title         | 2    | 20px    | The object-level title. One role, three treatments (below). Fixed. |
 
-Both Dashboard head and Section head may carry a **subtitle**: the same subtitle treatment used under a Card / Panel title (16px, Regular, recessive grey), coupled tightly beneath the heading. It is one shared treatment, not a per-head token. Under a Section head, ordinary body text may also follow, which is simply Body. Section heads often appear several times down a page to mark card groups, so they are kept calm (28px, one step above the following content) rather than made large.
+Both Page head and Section head may carry a **Subtitle**: the same shared treatment used under a `Title` (16px, Regular, recessive grey), coupled tightly beneath the heading. It is one shared role, not a per-head token. Under a Section head, ordinary body text may also follow, which is simply Body. Section heads often appear several times down a page to mark card groups, so they are kept calm (28px, one step above the following content) rather than made large.
 
-**Card / Panel title — the three treatments.** Which one applies is a composition decision (see Composition & Hierarchy Resolution) rather than a separate size token:
+**Title — the three treatments.** Which one applies is a composition decision (see Composition & Hierarchy Resolution) rather than a separate size token. Two of the three are their own roles (`Subtitle`, `Eyebrow`), which is what lets a demotion be expressed as a token binding rather than as a note in prose:
 
 | Treatment | Step | Size | Weight | Colour | When |
 |-----------|------|------|--------|--------|------|
-| Dominant  | 2  | 20px | Semibold (600) | primary | The element owns its container's primary slot |
-| Eyebrow (demoted) | -1 | 14px | 500, tracking 0 (casing on hold) | secondary | A title that steps aside — an umbrella over sibling panels, or a card title yielding to a chart's own title. Same treatment as a chip-card metric label. |
-| Subtitle  | 0  | 16px | 400 | recessive grey | Supporting line beneath a *dominant* title |
+| Dominant (`Title`) | 2  | 20px | Semibold (600) | primary | The element owns its container's primary slot |
+| Demoted (`Eyebrow`) | -1 | 14px | 500, tracking 0 (casing on hold) | secondary | A title that steps aside — an umbrella over sibling panels, or a card title yielding to a chart's own title. Same treatment as a chip-card metric label. |
+| Supporting (`Subtitle`) | 0  | 16px | 400 | recessive grey | Supporting line beneath a *dominant* title |
 
-The eyebrow at 14px coincides with `Label` (step −1): a demoted title is a label, so it reuses that step and its styling (weight 500, tracking 0; casing on hold) rather than introducing a new one. The subtitle at 16px coincides with `Body` (step 0), separated from it by colour rather than size. The subtitle is a shared treatment: the same 16px recessive-grey line sits beneath a Dashboard head, a Section head, or a Card / Panel title.
+`Eyebrow` at 14px matches `Label` (step −1) exactly: a demoted title *is* a label, so it holds that step and its styling (weight 500, tracking 0; casing on hold). `Subtitle` at 16px matches `Body` (step 0), separated from it by colour rather than size. Both are shared across the ladder: the same 16px recessive-grey `Subtitle` sits beneath a Page head, a Section head, or a `Title`, and `Eyebrow` serves both as a chosen overline and as the demoted title. They carry their own tokens rather than aliasing `Label` and `Body` so that the titling cluster can be retuned as a group — an intentional, documented duplication, not an oversight.
 
 ### Metric
 
 | Role      | Step | Size    | Job |
 |-----------|------|---------|-----|
-| Metric    | 9    | 36px    | Hero/stat numerals, Bold. Scales in step with Dashboard head. |
-| Metric Sm | 2    | 20px    | Secondary stat, in-card KPI, Bold. Fixed at the panel-title size (20px). Small metrics rarely sit beside a title, so sharing that size reads fine in context; weight (Bold) distinguishes it from a Semibold panel title. |
+| Metric    | 9    | 36px    | Hero/stat numerals, Bold. Scales in step with Page head. |
+| Metric Sm | 2    | 20px    | Secondary stat, in-card KPI, Bold. Fixed at the `Title` size (20px). Small metrics rarely sit beside a title, so sharing that size reads fine in context; weight (Bold) distinguishes it from a Semibold `Title`. |
 
 **Line-height and alignment.** A metric standing alone, or set in flowing text, uses its standard line-height. But a metric sitting beside labels is not flowing text — it is a single value to be aligned with its companions, and a reading line-height pushes it off that alignment: the tall line-box centres the numeral and adds leading that a small label does not have, so the two no longer share a baseline. In any label or comparison cluster a metric therefore uses a **tight, near-1 line-height** (off the 4px grid by design, like the fluid and compact line-heights), and the cluster is aligned as a unit. Three cases:
 
@@ -189,9 +191,9 @@ Travels with the data object, independent of the structural ladder.
 
 | Role | Maps to | Size | Job |
 |------|---------|------|-----|
-| Data title   | *routed* | — | Chart/table title. Routed by the primary-slot rule → takes the dominant Card/Panel title treatment when it owns the primary slot, else drops to eyebrow. |
-| Group label  | Label Sm | 12px | Axis title, column header. |
-| Data point   | Caption  | 12px | Cell value, legend entry, data label. |
+| Data title   | `Chart Title` / `Chart Eyebrow` | 20px / 14px | Chart or table title. The primary-slot rule now resolves to a **binding**, not a routing note: it binds `Chart Title` when it owns the primary slot, `Chart Eyebrow` when it yields. |
+| Group label  | `Label Sm` | 12px | Column header. (Chart **axis titles** take `Chart Axis Title` at 14/500 — they are chart anatomy, not a generic group label.) |
+| Data point   | `Chart Label` in charts; `Caption` in tables | 14px / 12px | Data and value labels, legend entries, annotations → `Chart Label`. Table cell values → `Caption`. |
 
 ### Body & label roles
 
@@ -211,7 +213,7 @@ Travels with the data object, independent of the structural ladder.
 - **Input value, placeholder, and body copy → `Body`** (16).
 - **Helper, hint, descriptive, and secondary text → `Body Sm`** (14).
 - **Small functional text (metadata, counts) → `Caption`.**
-- **Genuine component titles** (modal, callout, sidebar, panel headers) **→ `Card / Panel title`** (20). Sidebar/nav *section* titles are labels, not titles — they take `Label`, not a title role, so nav group headings stay small.
+- **Genuine component titles** (modal, callout, sidebar, panel headers) **→ `Title`** (20). This is the whole point of the plain name: the role covers every object-level title, not just cards and panels. Sidebar/nav *section* titles are labels, not titles — they take `Label`, not a title role, so nav group headings stay small.
 
 The through-line: emphasis and size in UI come from the role's place in the hierarchy and from padding, not from inflating text. When a legacy element used an off-scale size, it moves to the correct role even if that resizes it.
 
@@ -230,8 +232,10 @@ Every element below resolves to one of the roles above, differentiated by weight
 | Tab / nav item | Label (tight) | single-line; leading-none |
 | Popover body | Body Sm | — |
 | Tooltip | Caption | secondary color |
-| Chart legend | Caption | — |
-| Chart axis label | Caption | secondary color |
+| Chart legend entry | `Chart Label` | — |
+| Chart axis title | `Chart Axis Title` | weight 500 |
+| Chart tick / scale label | `Chart Tick` | tight leading; `Chart Tick Sm` when dense |
+| Chart source / citation | `Chart Note` | secondary color |
 | Table column header | Label | Same size as cells, differentiated by weight (Medium 500) and secondary colour. A header labels the data, so it reads equal-or-stronger, not lighter |
 | Table column header (dense grid) | Label Sm | Smaller only with compensating treatment: uppercase, tracked, secondary colour. 12px plain would read weaker than the cells |
 | Table cell | Body Sm | — |
@@ -243,19 +247,37 @@ Every element below resolves to one of the roles above, differentiated by weight
 
 ## Semantic Layer: Chart typography
 
-Charts are a distinct context, like prose and product — heavily used, and (as with the data-colour tokens) they warrant their own small typography subset. Chart text reuses the product scale's family and metrics where it can, and adds only what the product scale cannot express: a legible sub-floor tick size. This subset is deliberately minimal — four roles, not a parallel scale — and lives beside the product roles as `Chart/*`.
+Charts are a distinct context, like prose and product, and they carry their own complete typography vocabulary as `Chart/*`. Two conditions justify that, and both have to hold:
 
-The role a chart element takes is fixed by what the element *is*, matching how Observable Plot structures a chart (titles, labels, ticks). Chart text is data, not UI chrome, so it is Regular weight except axis titles.
+- **Genuinely divergent values.** Charts want a legible sub-floor tick the product scale deliberately does not carry, because lowering the product floor would ripple through the whole UI.
+- **Standalone published consumption.** Teams outside this one build charts against these tokens without adopting the product set around them. A vocabulary consumed on its own has to be complete and self-describing on its own terms — a chart author should not have to learn the product ladder to name the text in a chart.
+
+Divergent values alone would justify only the roles that diverge. Standalone consumption alone would justify only renaming. Together they justify the full set. Any future context family — `map`, say — is tested against these same two conditions rather than admitted on chart's precedent. (See *Extending the System* for the naming register this follows.)
+
+The role a chart element takes is fixed by what the element *is*, matching how Observable Plot structures a chart. **Eight roles in two tiers.**
+
+**Object tier — aliased, no independent values.** A chart is an object sitting in a container, so it titles like one. These three are pure aliases of the product roles: they reference every property, so they cannot drift, and they inherit the product roles' responsive behaviour automatically.
+
+| Role | Aliases | Size / weight | Use |
+|------|---------|---------------|-----|
+| `Chart Title` | `product/title` | 20px / 600 | The chart's own title, when it owns its container's primary slot. |
+| `Chart Subtitle` | `product/subtitle` | 16px / 400 | Supporting line beneath a dominant chart title. |
+| `Chart Eyebrow` | `product/eyebrow` | 14px / 500 | What the chart title binds when it yields the primary slot. |
+
+**Chart-internal tier — chart anatomy, own values.** Chart text is data rather than UI chrome, so it is Regular weight except axis titles.
 
 | Role | Step / size | Weight | Line height | Use |
 |------|-------------|--------|-------------|-----|
 | `Chart Axis Title` | 14px | 500 | 20 (normal) | Axis names, series/legend titles. Same metrics as product `Label`; chart-named for independent tuning. |
-| `Chart Label` | 14px | 400 | 20 (normal) | Data and value labels (e.g. `£43.47k`), annotations. Same metrics as `Body Sm`. |
+| `Chart Label` | 14px | 400 | 20 (normal) | Data and value labels (e.g. `£43.47k`), annotations, **legend entries**. Same metrics as `Body Sm`. |
 | `Chart Tick` | 14px | 400 | **1.0 (tight)** | Axis tick / scale labels (years, £ gridline values) at default density. Single-line, so leading-none keeps ticks tight against the axis. |
 | `Chart Tick Sm` | 12px | 400 | **1.0 (tight)** | The smaller tick tier; sits at the caption floor (12px). Single-line, tight. A **compressed** density drops the pair to 12 / 11 (see notes). |
+| `Chart Note` | 12px | 400 | 16 (normal) | Source, citation, or footnote in the chart container's footer. Metric twin of `Caption`, named for the chart footer so the published vocabulary is complete. |
 
 Notes:
-- **Why a subset at all.** An audit of real chart exports found text at 16 / 14 / 12 / 10–11px. 14 and 12 map onto `Label` / `Body Sm` and the caption floor, but genuinely dense charts want an 11px tick that falls below the product floor. Rather than lower the product floor (which would ripple through UI), charts get their own tick roles. Same reasoning as the data-colour subset: charts have needs the general scale should not carry.
+- **Why a set at all.** An audit of real chart exports found text at 16 / 14 / 12 / 10–11px. 14 and 12 map onto `Label` / `Body Sm` and the caption floor, but genuinely dense charts want an 11px tick that falls below the product floor. Rather than lower the product floor, charts get their own tick roles. Same reasoning as the data-colour subset: charts have needs the general scale should not carry.
+- **There is no `Chart Legend` role.** Legend entries take `Chart Label`. A dedicated role would read "like `label`, but in the legend" — a position difference rather than a job difference, which the one-sentence-job test rejects. Legend *titles* take `Chart Axis Title`.
+- **The object tier aliases; it does not restate.** `Chart Title` / `Subtitle` / `Eyebrow` reference their product sources for every property including line-height, so they carry no values of their own and cannot drift. This is the only place in typography where a semantic role references another semantic role rather than a primitive — deliberate, because these three genuinely *are* the product roles under chart-domain names. `Chart Axis Title` and `Chart Label` are metric twins of `Label` and `Body Sm` but hold their own values, so chart anatomy can be tuned without touching product UI.
 - **Tick density.** Default ticks are **14** (`Chart Tick`) with **12** (`Chart Tick Sm`) for the smaller tier — the two emitted tokens. A **compressed** density (dense grids, small multiples) drops these to **12 / 11**; 11 is the sub-floor. Wild exports occasionally show ~10px (and a known rem-export bug writes `0.86` ≈ 14px — always correct that to the intended role); 10px is nudged up to 11 for legibility. Do not go below 11.
 - **Tight line-height on ticks** mirrors the tight Label / Metric treatment: single-line labels want a line-box equal to the font size so they sit precisely against axes and gridlines.
 - Charts in Figma are **representative**, not data-accurate (Observable Plot is authoritative). These roles exist so chart specimens and the chart chrome slot read on-system, and so chart SVG imports can be repointed off raw fonts onto real roles.
@@ -301,17 +323,17 @@ So weight is neither fully free (which produces inconsistent headings) nor fully
 | Body Sm | Regular (400) |
 | Caption | Regular (400) |
 
-**Product.** More restrained than prose: the two top roles carry weight, everything below stays Semibold or lighter. Dashboard head and Metric are **Bold** — the page title and the hero stat are the elements a dashboard most wants to anchor on. Section head stays Semibold, which preserves a visible weight step between the page title and the section headings that repeat down the page (they are close in size, so the weight contrast does the separating). No product text below the top tier uses Bold.
+**Product.** More restrained than prose: the two top roles carry weight, everything below stays Semibold or lighter. Page head and Metric are **Bold** — the page title and the hero stat are the elements a dashboard most wants to anchor on. Section head stays Semibold, which preserves a visible weight step between the page title and the section headings that repeat down the page (they are close in size, so the weight contrast does the separating). No product text below the top tier uses Bold.
 
 | Role | Weight |
 |------|--------|
-| Dashboard head | Bold (700) |
+| Page head | Bold (700) |
 | Metric | Bold (700) |
 | Section head | Semibold (600) |
 | Metric Sm | Bold (700) |
-| Card / Panel title — dominant | Semibold (600) |
-| Card / Panel title — eyebrow | Medium (500) |
-| Card / Panel title — subtitle | Regular (400) |
+| Title | Semibold (600) |
+| Eyebrow | Medium (500) |
+| Subtitle | Regular (400) |
 | Body | Regular (400) |
 | Body Sm | Regular (400) |
 | Label | Medium (500) |
@@ -347,14 +369,14 @@ Dominance is a property of position in a container rather than of a token. Two l
 **The primary-slot rule (recursive).** Every titling container has one primary slot. Whatever occupies it takes the dominant title treatment (20px); a title that yields the slot drops to the eyebrow treatment (14px) or is omitted. "Container" resolves to the nearest titling level:
 
 - **One titled data element in a card:** the card is the container. If the chart or table has its own title, that title is dominant (20px) and the card's own title drops to an eyebrow above it, or is absent. If the data element is untitled, the card title is dominant.
-- **Two or more co-equal titled elements in a card:** each element gets its own Panel, and the panel is the container. Each panel title is dominant (20px) within its panel — co-equal because they are primary in sibling panels rather than competing for one slot. The card title then either sits above as an eyebrow (14px) labelling the collection, or is absent, leaving the dominant panel titles as the top of that card's hierarchy.
+- **Two or more co-equal titled elements in a card:** each element gets its own Panel, and the panel is the container. Each panel's `Title` is dominant (20px) within its panel — co-equal because they are primary in sibling panels rather than competing for one slot. The card title then either sits above as an `Eyebrow` (14px) labelling the collection, or is absent, leaving the dominant panel `Title`s as the top of that card's hierarchy.
 - **Chip cards** (small grouped cards, one metric each): the label sits in the eyebrow treatment (14px) above the Metric numeral — the same treatment a demoted title takes, which is why they read consistently when a chip group sits near a titled card.
 
-**The demotion convention.** Demotion is a treatment change, not a subtle nudge: a title yielding its slot drops from dominant (20px, primary) to eyebrow (14px, weight 500, tracking 0, casing on hold, secondary). A dominant title's supporting line uses the subtitle treatment (16px, recessive grey). These three treatments — dominant, eyebrow, subtitle — cover every card and panel titling combination without a dedicated "recessive title" token.
+**The demotion convention.** Demotion is a treatment change, not a subtle nudge: a title yielding its slot moves from `Title` (20px, Semibold, primary) to `Eyebrow` (14px, weight 500, tracking 0, casing on hold, secondary). A dominant title's supporting line takes `Subtitle` (16px, recessive grey). Because all three are real roles, a demotion is a token swap rather than an instruction to remember — which is what makes it survive contact with a component library. These three cover every titling combination without a dedicated "recessive title" token.
 
 Full structural ladder, recursive (card and panel share the title role; treatment distinguishes them):
 
-`Dashboard head → Section head → Card / Panel title {dominant | eyebrow | absent} → [Data title → Group label → Data point]`
+`Page head → Section head → Title {dominant | Eyebrow | absent} → [Data title → Group label → Data point]`
 
 ---
 
@@ -362,7 +384,7 @@ Full structural ladder, recursive (card and panel share the title role; treatmen
 
 The responsive behaviour is designed mobile-first: values are set at `base` so the hierarchy is correct on the smallest screen, then grow upward. The governing rule is that a role never overtakes the role above it and never drops below the role beneath it, at any breakpoint. A role scales only if the roles it must stay ordered against scale with it. This is why the content Title ladder and the two Metric roles scale as groups rather than individually — scaling one alone is what produced the earlier inversions (Title 1 below Title 2, Metric below Metric Sm).
 
-Scaling roles: **Prose** Display, Headline, Title 1, Title 2, Title 3 (Title 4 is the fixed ladder floor); **Product** Dashboard head, Metric, Section head. Everything else is fixed at every breakpoint.
+Scaling roles: **Prose** Display, Headline, Title 1, Title 2, Title 3 (Title 4 is the fixed ladder floor); **Product** Page head, Metric, Section head. Everything else is fixed at every breakpoint.
 
 The matrices below list every role at every breakpoint; read a column top-to-bottom to confirm the hierarchy holds at that width. Breakpoints: `base` <640, `sm` ≥640, `md` ≥768, `lg` ≥1024, `xl` ≥1280.
 
@@ -404,7 +426,9 @@ Two intentional coincidences, neither an inversion. Subhead (28) equals Title 1 
 | Label Sm | 12 | 12 | 12 | 12 | 12 | fixed |
 <!-- GEN:product-matrix END -->
 
-One intentional tie, not an inversion: Dashboard head equals Metric at every breakpoint — a heading and a numeral that rarely sit adjacent, scaled together so the pairing stays consistent. Metric Sm is fixed at 20px, level with Card / Panel title; the two rarely appear together, and weight (Bold Metric Sm versus Semibold panel title) separates them where they do. If a hero metric needs to out-rank a page title on a given surface, promote the Metric one tier locally (Metric → Dashboard-head+1) rather than changing the global tokens.
+One intentional tie, not an inversion: Page head equals Metric at every breakpoint — a heading and a numeral that rarely sit adjacent, scaled together so the pairing stays consistent. Metric Sm is fixed at 20px, level with `Title`; the two rarely appear together, and weight (Bold Metric Sm versus Semibold `Title`) separates them where they do. If a hero metric needs to out-rank a page title on a given surface, promote the Metric one tier locally (Metric → Page-head+1) rather than changing the global tokens.
+
+**Row labels in the generated matrix above** come from `PROSE_ROWS` / `PRODUCT_ROWS` in `regen_spec.py`, not from this prose. They still read `Dashboard head` and `Card / Panel title` until those lists are updated and `regen_spec.py gen` is re-run against the migrated build.
 
 **Figma note.** Each breakpoint maps onto a variable mode: one mode per breakpoint, with every role taking its value from the matrix column. Fixed roles carry the same value in all modes; scaling roles differ per mode. Since every column is pre-verified for order, no mode can produce an inverted hierarchy.
 
@@ -414,7 +438,7 @@ One intentional tie, not an inversion: Dashboard head equals Metric at every bre
 
 **Status: spec-only — not yet emitted.** These four tokens exist in neither the cjs layer nor the generated CSS (`clamp()` appears in neither). Their intended home is the cjs post-SD layer, where `clamp()` and unitless line-heights belong alongside the tight-label and compact-leading treatments; until built there this section is the specification, not shipped output.
 
-The stepped tokens above are the canonical set. Fluid is an opt-in parallel variant, offered only on the four display-tier roles where per-breakpoint jumps are most visible: Prose Display, Prose Headline, Product Dashboard head, and Product Metric. The rest stay stepped — body, label, and caption need consistency and 4px-grid line-heights, and the mid-tier scalers (the Title ladder, Section head, Metric Sm) have too small a per-step range for stepping to read as a jump.
+The stepped tokens above are the canonical set. Fluid is an opt-in parallel variant, offered only on the four display-tier roles where per-breakpoint jumps are most visible: Prose Display, Prose Headline, Product Page head, and Product Metric. The rest stay stepped — body, label, and caption need consistency and 4px-grid line-heights, and the mid-tier scalers (the Title ladder, Section head, Metric Sm) have too small a per-step range for stepping to read as a jump.
 
 **How to use.** Each fluid role is a separate token suffixed `-fluid`. A surface chooses per use: `--display` for the stepped literal (the cjs resolved local), `--display-fluid` for smooth interpolation. Both are maintained; neither replaces the other.
 
@@ -426,10 +450,10 @@ The stepped tokens above are the canonical set. Fluid is an opt-in parallel vari
 |---|---|---|
 | `--display-fluid`        | 40 → 76px | `clamp(2.5rem, 0.25rem + 5.625vw, 4.75rem)` |
 | `--headline-fluid`       | 32 → 56px | `clamp(2rem, 0.5rem + 3.75vw, 3.5rem)` |
-| `--dashboard-head-fluid` | 28 → 36px | `clamp(1.75rem, 1.25rem + 1.25vw, 2.25rem)` |
+| `--page-head-fluid`      | 28 → 36px | `clamp(1.75rem, 1.25rem + 1.25vw, 2.25rem)` |
 | `--metric-fluid`         | 28 → 36px | `clamp(1.75rem, 1.25rem + 1.25vw, 2.25rem)` |
 
-**Line-height for fluid tokens is unitless.** A fixed px line-height cannot track a fluid size, so fluid roles use a unitless multiplier instead of a 4px-grid value. This works because display-tier text sits in its own generous whitespace rather than stacking densely against grid-aligned elements, so the grid-alignment rule that governs body and label line-heights does not apply here. Recommended multipliers, each a single value spanning the token's range and landing between its base and xl stepped ratios: Display 1.1, Headline 1.15, Dashboard head and Metric 1.2.
+**Line-height for fluid tokens is unitless.** A fixed px line-height cannot track a fluid size, so fluid roles use a unitless multiplier instead of a 4px-grid value. This works because display-tier text sits in its own generous whitespace rather than stacking densely against grid-aligned elements, so the grid-alignment rule that governs body and label line-heights does not apply here. Recommended multipliers, each a single value spanning the token's range and landing between its base and xl stepped ratios: Display 1.1, Headline 1.15, Page head and Metric 1.2.
 
 ## Spacing Scale
 
@@ -772,6 +796,8 @@ When a token seems missing for a context, work this path in order before adding 
 4. **Make a new role earn its place with a one-sentence job.** If the specific situation it exists for can be named in a sentence ("the label above a form control", "the h3 depth in prose"), it is real — add it. If the sentence is "like Body but a bit bigger", it is not a role; it is emphasis or a context difference, and belongs on the weight, colour, or flow axes. This test separates a healthy addition from sprawl.
 
 5. **Add at the semantic layer, once, centrally.** If the same role recurs across surfaces, that is a signal the system should grow — added in one place so everyone gets the same answer, rather than each team inventing a local value. A new primitive step or weight is not the way to solve a single-surface need.
+
+6. **Name the job, in the register the context uses.** A role name may be **domain-specific within a context family, never component-specific**. Product roles answer "where does this sit in the ladder", which is structural, so they are named generically — `Title`, not `Card / Panel title`. Chart roles answer "what part of a chart is this", which is anatomical, so they are named specifically — `Chart Tick`, `Chart Axis Title`. Both are correct; they answer different questions. The failure mode is naming a role after the component that first needed it, which under-describes its real scope (the old `card-panel-title` was already carrying modal, callout, drawer and sidebar titles) and forces awkward compounds when a second component wants the same role. A related test governs whether a whole family earns its own vocabulary: it needs **genuinely divergent values *and* standalone published consumption**. Chart passes both; a family that passes neither is a rename looking for a reason.
 
 The rules intervene to prevent one move: encoding a weight, colour, or spacing difference as a new size, since that is what multiplies tokens until they stop meaning anything. Everywhere else the system is a set of overridable defaults, and a default that can be overridden on purpose is freeing rather than constraining.
 
