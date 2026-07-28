@@ -250,7 +250,7 @@ The numbers that keep getting re-litigated. **This table is the answer.** Change
 - **Numbered scale emits** `--primitive-spacing-{n}` plus sub-steps `-px`, `-0-5`, `-1-5`, `-2-5`, `-3-5`.
 - **No named spacing-role set beyond `flow` and `grid`.**
 - **Vertical rhythm consolidates on `flow`** — the context flow ramp `--flow-*` plus the owl selector.
-- **The rhythm-vs-construction gate decides the source:** rhythm → `flow`; construction (padding, border-width, list indent, cell padding) → numbered `--spacing-{n}`. See `llm-docs/migration-spacing-mapping.md`.
+- **The rhythm-vs-construction gate decides the source:** rhythm → `flow`; construction (padding, border-width, list indent, cell padding) → numbered `--spacing-{n}`. See `.claude/skills/lcd-ds/references/component-migration.md` (the rhythm-vs-construction gate; migrated from the former `llm-docs/migration-spacing-mapping.md`).
 - **T-shirt mapping**, for any straggler: `xxs`→1, `xs`→2, `sm`→3, `md`→4, `lg`→5, …
 - **`--spacing-{tshirt}` and `--typography-spacing-*` are RETIRED** — not emitted, no live consumers. `format.cjs` no longer exists.
 - ⚠ **Constraint — the easiest thing in the system to break:** `semantic-flow`, `semantic-spacing` and `grid-spacing` reference `primitive.spacing` and divide by 16 expecting **px**. The shared primitive must stay px in the token graph; rem conversion happens only at emit time.

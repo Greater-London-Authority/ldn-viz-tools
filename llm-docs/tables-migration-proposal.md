@@ -9,7 +9,8 @@ as usual.
 
 ## Read first
 
-Same source docs as every other package: `migration-type-mapping.md`, `migration-spacing-mapping.md`,
+Same source protocol as every other package: `.claude/skills/lcd-ds/references/component-migration.md`
+(migrated from the former `migration-type-mapping.md` / `migration-spacing-mapping.md`), plus
 `flow.cjs`. One additional load-bearing fact specific to this package: the type map explicitly
 carves out table header cells as **"defer to Table Kit (code-authoritative)"** — this package *is*
 that Table Kit. That carve-out turns out to apply much more broadly than just header cells.

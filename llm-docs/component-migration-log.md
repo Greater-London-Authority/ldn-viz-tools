@@ -1,7 +1,9 @@
 # Component type/spacing/radius migration — batch log
 
 Log of each batch run against `packages/ui/src/lib` per the protocol in
-`migration-type-mapping.md` + `migration-spacing-mapping.md`. Scope per batch:
+`.claude/skills/lcd-ds/references/component-migration.md` (the type/spacing mapping
+was migrated there from the former `migration-type-mapping.md` +
+`migration-spacing-mapping.md`, verified against current roles). Scope per batch:
 type utilities → semantic role (function-first), spacing utilities → gate
 (rhythm→flow / construction→token, most construction left as bare on-scale
 Tailwind per the 2026-07-24 carve-out retirement), `rounded-*` removed unless
@@ -144,7 +146,7 @@ None found in any of the 6 files.
 
 ## Correction — `label-tight` / `label-sm-tight` (found during batch 6, applied retroactively)
 
-**Important finding.** While reading `NavigationMenuItem.svelte` (already using `class="... label-tight ..."` directly) I found that `roles.cjs` **already defines real `label-tight`/`label-sm-tight` role classes** (line-height 1.0 baked in, same size/weight as `label`/`label-sm`), built through the exact same mechanism as every other role (`typography.cjs`'s `rolesKeys` loop). This **contradicts** `migration-type-mapping.md`'s stated guidance ("[tight-label] is currently **not** present as a variable... must be applied at the component level") — that doc is stale on this specific point; the token exists and `NavigationMenuItem` was already using it correctly.
+**Important finding.** While reading `NavigationMenuItem.svelte` (already using `class="... label-tight ..."` directly) I found that `roles.cjs` **already defines real `label-tight`/`label-sm-tight` role classes** (line-height 1.0 baked in, same size/weight as `label`/`label-sm`), built through the exact same mechanism as every other role (`typography.cjs`'s `rolesKeys` loop). This **contradicted** the then-current `migration-type-mapping.md` guidance ("[tight-label] is currently **not** present as a variable... must be applied at the component level") — that doc was stale on this specific point; the token exists and `NavigationMenuItem` was already using it correctly. (The mapping doc has since been migrated into `.claude/skills/lcd-ds/references/component-migration.md`, which reflects that `label-tight`/`label-sm-tight` exist.)
 
 My earlier batches used the doc's literal instruction (`label`/`label-sm` + a manual `leading-none` override) instead. That was **visually correct** (line-height 1.0 either way) but didn't bind to the canonical semantic role, which the overall migration rule requires ("bind to semantic roles only... never a leftover Tailwind class/override").
 
@@ -153,7 +155,7 @@ My earlier batches used the doc's literal instruction (`label`/`label-sm` + a ma
 - **TabLabel.svelte**: both orientation variants `label leading-none` → `label-tight`.
 - **MultipleActionButton.svelte**: menu item label `label leading-none` → `label-tight`.
 
-No visual change from this correction — same computed size/weight/line-height, now via the proper token. Flagging this so the source-of-truth mapping doc (`migration-type-mapping.md`) can be updated to reflect that `label-tight`/`label-sm-tight` do exist.
+No visual change from this correction — same computed size/weight/line-height, now via the proper token. (Resolved: the source-of-truth mapping now lives in `.claude/skills/lcd-ds/references/component-migration.md` and reflects that `label-tight`/`label-sm-tight` do exist.)
 
 ---
 
