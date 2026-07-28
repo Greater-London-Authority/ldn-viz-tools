@@ -36,30 +36,22 @@
 </script>
 
 <Story name="Typography">
-	<div class="container">
+	<div class="container py-24">
 		<div class="prose flow-prose">
-			<h1 class="mt-spacing-3xl display">State of London</h1>
-			<!-- <h1 class="prose headline">Skills</h1> -->
-			<p class="prose subhead">
-				A sample data notebook, styled by the London City Data Design System
-			</p>
+			<!-- Hero cluster — eyebrow kicker, headline and subhead couple tight to the title -->
+			<p class="eyebrow">GLA City Intelligence</p>
+			<h1 class="headline">State of London</h1>
+			<p class="subhead">A sample data notebook, styled by the London City Data Design System</p>
 
-			<!-- <div class="flow-prose prose"> -->
-			<!-- <p class="eyebrow">Seagulls</p> -->
-			<h1>Reading the city in long form</h1>
-			<p class="subtitle">How prose, charts and tables hang together on the page</p>
-
-			<!--<h2>Prose Title 2</h2> -->
-			<!-- <p class="lead">
-				Until now, trying to style an article, document, or blog post with Tailwind has been a
-				tedious task that required a keen eye for typography and a lot of complex custom CSS.
-			</p> -->
-			<p>
+			<p class="lead">
 				This page is an example of long-form analytical content — the kind of borough profile or
 				briefing where a paragraph sets up a chart, a chart earns a table, and a table needs a
-				footnote. The words here are placeholder, but every element is real, so we can see how the
-				London City Data Design System (lcd-ds) styles a whole document rather than a single
-				component. Think of it as a stand-in for a City Intelligence notebook about London.
+				footnote.
+			</p>
+			<p>
+				The words here are placeholder, but every element is real, so we can see how the London City
+				Data Design System (lcd-ds) styles a whole document rather than a single component. Think of
+				it as a stand-in for a City Intelligence notebook about London.
 			</p>
 			<ObservablePlot
 				spec={singleLineSpec}
@@ -106,6 +98,7 @@
 			</p>
 			<hr />
 			<h2>What to expect from here on out</h2>
+			<p class="subtitle">A tour of every element the design system styles</p>
 			<div>
 				<p>
 					What follows is placeholder copy standing in for the body of a report, written to exercise
@@ -314,6 +307,7 @@
 					they're allowed to break out wider than the column when the viewport gives them room.
 				</dd>
 			</dl>
+			<p class="eyebrow">Building blocks</p>
 			<h2>There are other elements we need to style</h2>
 			<p>
 				Links matter in a notebook that cites its sources, like <a href="https://data.london.gov.uk"

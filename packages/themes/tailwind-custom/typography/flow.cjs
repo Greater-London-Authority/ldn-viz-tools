@@ -47,6 +47,28 @@ module.exports = {
 		marginTop: 'var(--flow-tight)'
 	},
 
+	// 4b · companion roles couple tight to their titling primary.
+	// A subhead/subtitle is a supporting line bound *beneath* its heading; an
+	// eyebrow is an overline bound *above* the heading it introduces. These are
+	// coupling (flow-tight), not block-to-block rhythm. Placed after rules 1 & 3
+	// so they win at equal specificity for the pairings they target.
+
+	// supporting line directly under a heading hugs it
+	':is(.flow-prose, .flow-product, .flow-compact) > :is(h1, h2, h3, h4, [class*="title-"], .display, .headline, .page-head, .section-head) + :is(.subtitle, .subhead)': {
+		marginTop: 'var(--flow-tight)'
+	},
+
+	// eyebrow overline hugs the heading directly below it (overrides rule 3's section gap)
+	':is(.flow-prose, .flow-product, .flow-compact) > .eyebrow + :is(h1, h2, h3, h4, [class*="title-"], .display, .headline, .page-head, .section-head)': {
+		marginTop: 'var(--flow-tight)'
+	},
+
+	// the major break sits ABOVE an eyebrow that introduces a heading — the eyebrow
+	// is the top of the titling cluster, so the section gap belongs before it
+	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + .eyebrow:has(+ :is(h1, h2, .title-1, .title-2, .display, .headline, .page-head, .section-head))': {
+		marginTop: 'var(--flow-section)'
+	},
+
 	// 5 · caption binds to its figure
 	':is(.flow-prose, .flow-product, .flow-compact) figure > figcaption': {
 		marginTop: 'var(--flow-tight)'
