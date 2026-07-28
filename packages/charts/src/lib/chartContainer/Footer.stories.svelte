@@ -31,11 +31,7 @@
 </script>
 
 {#snippet placeholderChart()}
-	<div
-		class="mb-2 flex h-24 w-full items-center justify-center bg-color-container-level-1 text-color-text-muted"
-	>
-		Chart would go here.
-	</div>
+	<div class="sr-only">Example image holder - hidden so as not to present misleading layout</div>
 {/snippet}
 
 <Story name="All footnotes + export buttons">

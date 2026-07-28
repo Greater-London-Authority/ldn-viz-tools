@@ -20,7 +20,7 @@
 -->
 <Story name="Long title wrapping">
 	{#snippet template(args)}
-		<div class="w-[960px] border border-gray-500">
+		<div class="border-muted max-w-prose border">
 			<Title {...args}>
 				This is a deliberately long chart title that demonstrates how the max-w-prose line-length
 				cap causes the heading to wrap onto multiple lines instead of stretching across the full
