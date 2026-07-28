@@ -9,11 +9,9 @@
 	 * 	@component
 	 */
 
-	import { classNames } from '@ldn-viz/ui';
+	import { ChromeHeader, classNames } from '@ldn-viz/ui';
 	import ExportBtns from './ExportBtns.svelte';
 	import Footer from './Footer.svelte';
-	import SubTitle from './SubTitle.svelte';
-	import Title from './Title.svelte';
 
 	// For save as image
 	let chartToCapture: HTMLDivElement = $state() as HTMLDivElement;
@@ -143,18 +141,11 @@
 		<p class="sr-only">{alt}</p>
 	{/if}
 
-	<!-- eslint-disable svelte/no-at-html-tags -->
 	{#if title || subTitle}
 		<div class="mb-4">
-			{#if title}
-				<Title>{@html title}</Title>
-			{/if}
-			{#if subTitle}
-				<SubTitle>{@html subTitle}</SubTitle>
-			{/if}
+			<ChromeHeader {title} subtitle={subTitle} />
 		</div>
 	{/if}
-	<!-- eslint-enable svelte/no-at-html-tags -->
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 	{@render controls?.()}

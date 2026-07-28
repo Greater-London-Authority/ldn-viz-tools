@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { Button, Modal } from '@ldn-viz/ui';
+	/**
+	 * The chart `Footer` composes the shared `ChromeActions` row — footnotes
+	 * (byline / source / note) plus an optional "View description" modal trigger on
+	 * the left, and the export buttons on the right. Sharing `ChromeActions` keeps
+	 * `ChartContainer` and `Card` constructed identically.
+	 */
+	import { Button, ChromeActions, Modal } from '@ldn-viz/ui';
 
 	interface Props {
 		byline?: string;
@@ -17,52 +23,38 @@
 	let isOpen = $state(false);
 </script>
 
-<div class="mt-1 flex w-full flex-wrap items-end justify-between">
-	{#if byline || source || note || chartDescription}
-		<ul
-			title="Chart footnotes and description"
-			class="footer-ul product mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 caption text-color-text-muted"
-		>
-			<!-- eslint-disable svelte/no-at-html-tags -->
-			{#if byline}<li>{@html byline}</li>{/if}
-			{#if source}<li><span class="mr-1 font-bold">Source:</span>{@html source}</li>{/if}
-			{#if note}<li><span class="mr-1 font-bold">Note:</span>{@html note}</li>{/if}
-			<!-- eslint-enable svelte/no-at-html-tags -->
+{#snippet description()}
+	{#if chartDescription}
+		<Modal bind:open={isOpen}>
+			{#snippet trigger()}
+				<li data-capture-ignore>
+					<Button
+						variant="text"
+						size="xs"
+						emphasis="secondary"
+						class="!p-0"
+						onclick={() => (isOpen = true)}>View description</Button
+					>
+				</li>
+			{/snippet}
 
-			{#if chartDescription}
-				<Modal bind:open={isOpen}>
-					{#snippet trigger()}
-						<li data-capture-ignore>
-							<Button
-								variant="text"
-								size="xs"
-								emphasis="secondary"
-								class="!p-0"
-								onclick={() => (isOpen = true)}>View description</Button
-							>
-						</li>
-					{/snippet}
+			{#snippet title()}
+				Description
+			{/snippet}
 
-					{#snippet title()}
-						Description
-					{/snippet}
-
-					{#snippet description()}
-						{chartDescription}
-					{/snippet}
-				</Modal>
-			{/if}
-		</ul>
+			{#snippet description()}
+				{chartDescription}
+			{/snippet}
+		</Modal>
 	{/if}
-	{#if exportBtns}
-		<div class={`${byline || source || note ? '' : 'ml-auto'}`}>
-			{@render exportBtns?.()}
-		</div>
-	{/if}
+{/snippet}
+
+<div class="mt-1">
+	<ChromeActions
+		{byline}
+		{source}
+		{note}
+		description={chartDescription ? description : undefined}
+		actions={exportBtns}
+	/>
 </div>
-
-<style>
-	.footer-ul :global(a) {
-		@apply underline hover:text-color-interactive-primary-hover hover:no-underline;
-	}
-</style>
