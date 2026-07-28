@@ -37,15 +37,17 @@
 
 <Story name="Typography">
 	<div class="container">
-		<div class="flow-prose prose">
-			<h1 class="display mt-spacing-3xl">State of London</h1>
+		<div class="prose flow-prose">
+			<h1 class="mt-spacing-3xl display">State of London</h1>
 			<!-- <h1 class="prose headline">Skills</h1> -->
-			<p class="prose subhead">Skills levels and workforce readiness in London</p>
+			<p class="prose subhead">
+				A sample data notebook, styled by the London City Data Design System
+			</p>
 
 			<!-- <div class="flow-prose prose"> -->
 			<!-- <p class="eyebrow">Seagulls</p> -->
-			<h1>Prose Title 1</h1>
-			<p class="subtitle">Subtitle</p>
+			<h1>Reading the city in long form</h1>
+			<p class="subtitle">How prose, charts and tables hang together on the page</p>
 
 			<!--<h2>Prose Title 2</h2> -->
 			<!-- <p class="lead">
@@ -53,11 +55,11 @@
 				tedious task that required a keen eye for typography and a lot of complex custom CSS.
 			</p> -->
 			<p>
-				By default, Tailwind removes all of the default browser styling from paragraphs, headings,
-				lists and more. This ends up being really useful for building application UIs because you
-				spend less time undoing user-agent styles, but when you <em>really are</em> just trying to style
-				some content that came from a rich-text editor in a CMS or a markdown file, it can be surprising
-				and unintuitive.
+				This page is an example of long-form analytical content — the kind of borough profile or
+				briefing where a paragraph sets up a chart, a chart earns a table, and a table needs a
+				footnote. The words here are placeholder, but every element is real, so we can see how the
+				London City Data Design System (lcd-ds) styles a whole document rather than a single
+				component. Think of it as a stand-in for a City Intelligence notebook about London.
 			</p>
 			<ObservablePlot
 				spec={singleLineSpec}
@@ -71,311 +73,308 @@
 				chartDescription="The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"
 			/>
 			<p>
-				We get lots of complaints about it actually, with people regularly asking us things like:
+				A chart like the one above rarely stands alone. It sits inside a train of thought, and the
+				text around it has to carry its own weight without fighting the figure for attention. A
+				common worry when a document mixes elements is:
 			</p>
 			<blockquote>
 				<p>
-					Why is Tailwind removing the default styles on my <code>h1</code> elements? How do I disable
-					this? What do you mean I lose all the other base styles too?
+					Won't the chart's <code>title</code> clash with my <code>h2</code> headings? Do I have to hand-tune
+					spacing every time I drop a figure between two paragraphs?
 				</p>
 			</blockquote>
 			<p>
-				We hear you, but we're not convinced that simply disabling our base styles is what you
-				really want. You don't want to have to remove annoying margins every time you use a <code
-					>p</code
-				>
-				element in a piece of your dashboard UI. And I doubt you really want your blog posts to use the
-				user-agent styles either — you want them to look <em>awesome</em>, not awful.
+				The answer is no. Vertical rhythm is a property of the context, not of the type inside it.
+				Wrapping the document in <code>flow-prose</code> means consecutive blocks — a
+				<code>p</code>, a figure, a heading — space themselves, so a chart between two paragraphs
+				lands with the <em>right</em> gap, not an arbitrary one.
 			</p>
 			<p>
-				The <code>@tailwindcss/typography</code> plugin is our attempt to give you what you
-				<em>actually</em> want, without any of the downsides of doing something stupid like disabling
-				our base styles.
+				The <code>flow-prose</code> context also caps reading columns at a legible width through
+				<code>--readable-width</code>, while letting wide elements like charts and tables
+				<em>break out</em> beyond the column when they need the room.
 			</p>
 			<p>
-				It adds a new <code>prose</code> class that you can slap on any block of vanilla HTML content
-				and turn it into a beautiful, well-formatted document:
+				The rest of this page runs through every typographic element the system styles, so we can
+				confirm they all hold up together:
 			</p>
 
 			<p>
-				For more information about how to use the plugin and the features it includes, <a
-					href="https://github.com/tailwindcss/typography/blob/master/README.md"
-					>read the documentation</a
+				For the full vocabulary — roles, families and the one binding rule — see the <a
+					href="/?path=/docs/ui-typography--docs">Typography guide</a
 				>.
 			</p>
 			<hr />
 			<h2>What to expect from here on out</h2>
 			<div>
 				<p>
-					What follows from here is just a bunch of absolute nonsense I've written to dogfood the
-					plugin itself. It includes every sensible typographic element I could think of, like <strong
-						>bold text</strong
-					>, unordered lists, ordered lists, code blocks, block quotes, <em>and even italics</em>.
+					What follows is placeholder copy standing in for the body of a report, written to exercise
+					the design system itself. It works through every sensible typographic element a notebook
+					might use, such as <strong>bold text</strong>, unordered lists, ordered lists, code
+					samples, block quotes, <em>and even italics</em>.
 				</p>
 			</div>
-			<p>It's important to cover all of these use cases for a few reasons:</p>
+			<p>It's worth covering all of these, for a few reasons:</p>
 			<ol>
-				<li>We want everything to look good out of the box.</li>
-				<li>Really just the first reason, that's the whole point of the plugin.</li>
+				<li>A document should read as one coherent piece, not a pile of mismatched components.</li>
+				<li>Authors bind text to a role and let the system pick the size, weight and rhythm.</li>
 				<li>
-					Here's a third pretend reason though a list with three items looks more realistic than a
-					list with two items.
+					When a report is exported or re-themed, the same roles carry the hierarchy across every
+					surface without a rewrite.
 				</li>
 			</ol>
-			<p>Now we're going to try out another header style.</p>
-			<h3>Typography should be easy</h3>
+			<p>Now we're going to try out another heading level.</p>
+			<h3>Good typography should be invisible</h3>
 			<p>
-				So that's a header for you — with any luck if we've done our job correctly that will look
-				pretty reasonable.
+				That's a level-three heading — with any luck the ladder from title to subtitle to body reads
+				clearly, and you notice the argument rather than the type.
 			</p>
-			<p>Something a wise person once told me about typography is:</p>
+			<p>A principle the design system keeps coming back to:</p>
 			<blockquote>
 				<p>
-					Typography is pretty important if you don't want your stuff to look like trash. Make it
-					good then it won't be bad.
+					Bind to a role, never to a size. Every piece of text has a job — a section head, a chart
+					title, an axis tick — and the system already names it. Pick the role and the rest arrives
+					with it.
 				</p>
 			</blockquote>
-			<p>It's probably important that images look okay here by default as well:</p>
+			<p>Images should sit comfortably in the flow as well:</p>
 			<figure>
 				<img
-					src="https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
-					alt=""
+					src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+					alt="A red telephone box on a London street with the Elizabeth Tower and Big Ben in the background"
 				/>
 				<figcaption>
-					Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-					of classical Latin literature from 45 BC, making it over 2000 years old.
+					A figure can break out wider than the reading column when it needs the room. The caption
+					stays with its image because the two are wrapped together in a single <code>figure</code>.
 				</figcaption>
 			</figure>
-			<p>
-				Now I'm going to show you an example of an unordered list to make sure that looks good, too:
-			</p>
+			<p>Here is an unordered list, to check that shorter items look right in the flow as well:</p>
 			<ul>
-				<li>So here is the first item in this list.</li>
-				<li>In this example we're keeping the items short.</li>
-				<li>Later, we'll use longer, more complex list items.</li>
+				<li>Each London borough gets its own profile.</li>
+				<li>Every profile shares the same set of indicators.</li>
+				<li>Later in this page we'll use longer, more complex list items.</li>
 			</ul>
 			<p>And that's the end of this section.</p>
 			<h2>What if we stack headings?</h2>
-			<h3>We should make sure that looks good, too.</h3>
+			<h3>A subheading can follow straight after</h3>
 			<p>
-				Sometimes you have headings directly underneath each other. In those cases you often have to
-				undo the top margin on the second heading because it usually looks better for the headings
-				to be closer together than a paragraph followed by a heading should be.
+				Sometimes a section head is followed immediately by a lower-level heading, with no paragraph
+				in between. The flow rule handles this: consecutive headings tuck closer together than a
+				paragraph-then-heading pair would, so the pair reads as one unit.
 			</p>
 			<h3>When a heading comes after a paragraph …</h3>
 			<p>
-				When a heading comes after a paragraph, we need a bit more space, like I already mentioned
-				above. Now let's see what a more complex list would look like.
+				When a heading follows body text it gets a little more space, as above, to signal a fresh
+				section. Now let's see what a more complex list looks like — the kind used to annotate a set
+				of indicators.
 			</p>
 			<ul>
 				<li>
-					<p><strong>I often do this thing where list items have headings.</strong></p>
+					<p><strong>Employment rate.</strong></p>
 					<p>
-						For some reason I think this looks cool which is unfortunate because it's pretty
-						annoying to get the styles right.
+						The share of working-age residents in work. It's a headline indicator, so it usually
+						leads a borough profile and anchors the comparison against the London average.
 					</p>
 					<p>
-						I often have two or three paragraphs in these list items, too, so the hard part is
-						getting the spacing between the paragraphs, list item heading, and separate list items
-						to all make sense. Pretty tough honestly, you could make a strong argument that you just
-						shouldn't write this way.
-					</p>
-				</li>
-				<li>
-					<p><strong>Since this is a list, I need at least two items.</strong></p>
-					<p>
-						I explained what I'm doing already in the previous list item, but a list wouldn't be a
-						list if it only had one item, and we really want this to look realistic. That's why I've
-						added this second list item so I actually have something to look at when writing the
-						styles.
+						List items like this often run to two or three paragraphs, so the spacing between the
+						paragraphs, the item's lead-in, and the gap to the next item all has to make sense
+						together. Getting that rhythm right is exactly what the <code>flow</code> context is for.
 					</p>
 				</li>
 				<li>
-					<p><strong>It's not a bad idea to add a third item either.</strong></p>
+					<p><strong>Median house price to earnings ratio.</strong></p>
 					<p>
-						I think it probably would've been fine to just use two items but three is definitely not
-						worse, and since I seem to be having no trouble making up arbitrary things to type, I
-						might as well include it. I'm going to press <kbd>Enter</kbd> now.
+						A measure of housing affordability — how many years of local earnings it takes to buy a
+						typical home. It pairs naturally with the employment indicator above, which is why the
+						two sit together in the same list.
+					</p>
+				</li>
+				<li>
+					<p><strong>Air quality: annual mean NO₂.</strong></p>
+					<p>
+						Nitrogen dioxide concentration at the roadside, against the legal limit. Three items
+						read as a genuine list rather than a pair, and there is plenty more we could add. Filter
+						the data yourself and press <kbd>Enter</kbd> to re-run the notebook.
 					</p>
 				</li>
 			</ul>
 			<p>
-				After this sort of list I usually have a closing statement or paragraph, because it kinda
-				looks weird jumping right to a heading.
+				A list like this usually closes with a sentence or two, because jumping straight to the next
+				heading looks abrupt.
 			</p>
 			<h2>Code should look okay by default.</h2>
 			<p>
-				I think most people are going to use <a href="https://highlightjs.org/">highlight.js</a>
-				or <a href="https://prismjs.com/">Prism</a> or something if they want to style their code
-				blocks but it wouldn't hurt to make them look <em>okay</em> out of the box, even with no syntax
-				highlighting.
+				Data notebooks often show the query or snippet behind a figure. Most authors will reach for
+				a syntax highlighter such as <a href="https://highlightjs.org/">highlight.js</a>
+				or <a href="https://prismjs.com/">Prism</a>, but a code block should still read
+				<em>okay</em> out of the box, even with no highlighting.
 			</p>
-			<p>
-				Here's what a default <code>tailwind.config.js</code> file looks like at the time of writing:
-			</p>
-			<!-- <pre><code class="language-js">module.exports = {
-		purge: [],
-		theme: {
-		  extend: {},
-		},
-		variants: {},
-		plugins: [],
-	  }
+			<p>Here's roughly how you set the chart above to use the design system's data colour:</p>
+			<!-- <pre><code class="language-js">Plot.line(data, {
+	  x: 'Month',
+	  y: 'Value',
+	  stroke: theme.currentTheme.data.primary,
+	  tip: true,
+	})
 	  </code></pre> -->
-			<p>Hopefully that looks good enough to you.</p>
+			<p>Binding to the theme's data colour means the chart re-themes with the rest of the page.</p>
 			<h3>What about nested lists?</h3>
 			<p>
-				Nested lists basically always look bad which is why editors like Medium don't even let you
-				do it, but I guess since some of you goofballs are going to do it we have to carry the
-				burden of at least making it work.
+				Nesting is best used sparingly — deep hierarchies are hard to scan on screen — but reports
+				do occasionally need a level of structure beneath a point, so the system has to style it
+				well.
 			</p>
 			<ol>
 				<li>
-					<strong>Nested lists are rarely a good idea.</strong>
+					<strong>Keep structure shallow where you can.</strong>
 					<ul>
 						<li>
-							You might feel like you are being really "organized" or something but you are just
-							creating a gross shape on the screen that is hard to read.
+							A flat list is easier to scan than a nested one, so reach for nesting only when the
+							sub-points genuinely belong to their parent.
 						</li>
-						<li>Nested navigation in UIs is a bad idea too, keep things as flat as possible.</li>
-						<li>Nesting tons of folders in your source code is also not helpful.</li>
+						<li>
+							The same holds for navigation in a dashboard — keep it as flat as the content allows.
+						</li>
+						<li>
+							And for the folders in a codebase, deep trees tend to hide more than they organise.
+						</li>
 					</ul>
 				</li>
 				<li>
-					<strong>Since we need to have more items, here's another one.</strong>
+					<strong>When you do nest, one level usually says enough.</strong>
 					<ul>
-						<li>I'm not sure if we'll bother styling more than two levels deep.</li>
-						<li>Two is already too much, three is guaranteed to be a bad idea.</li>
-						<li>If you nest four levels deep you belong in prison.</li>
+						<li>Two levels covers almost every real report.</li>
+						<li>Three is rare, and worth pausing over before you commit to it.</li>
+						<li>Beyond that, a table or a set of subheadings is almost always clearer.</li>
 					</ul>
 				</li>
 				<li>
-					<strong>Two items isn't really a list, three is good though.</strong>
+					<strong>Three items read as a list; two barely do.</strong>
 					<ul>
-						<li>Again please don't nest lists if you want people to actually read your content.</li>
-						<li>Nobody wants to look at this.</li>
-						<li>I'm upset that we even have to bother styling this.</li>
+						<li>Vary the length of items so the list doesn't look mechanical.</li>
+						<li>Let the indent and marker do the work — no manual spacing needed.</li>
+						<li>Then close the point and move on.</li>
 					</ul>
 				</li>
 			</ol>
 			<p>
-				The most annoying thing about lists in Markdown is that <code>&lt;li&gt;</code> elements
-				aren't given a child <code>&lt;p&gt;</code> tag unless there are multiple paragraphs in the list
-				item. That means I have to worry about styling that annoying situation too.
+				One quirk of Markdown: a <code>&lt;li&gt;</code> only gets a child <code>&lt;p&gt;</code>
+				when it holds more than one paragraph. The design system styles both the wrapped and unwrapped
+				cases so single-line and multi-paragraph items sit together cleanly.
 			</p>
 			<ul>
 				<li>
-					<p><strong>For example, here's another nested list.</strong></p>
-					<p>But this time with a second paragraph.</p>
+					<p><strong>Take this nested list as an example.</strong></p>
+					<p>This top-level item has a second paragraph.</p>
 					<ul>
-						<li>These list items won't have <code>&lt;p&gt;</code> tags</li>
-						<li>Because they are only one line each</li>
+						<li>These items won't get <code>&lt;p&gt;</code> tags</li>
+						<li>because they are only one line each</li>
 					</ul>
 				</li>
 				<li>
-					<p><strong>But in this second top-level list item, they will.</strong></p>
-					<p>This is especially annoying because of the spacing on this paragraph.</p>
+					<p><strong>But this second top-level item will.</strong></p>
+					<p>Its spacing has to stay consistent with the item above.</p>
 					<ul>
 						<li>
 							<p>
-								As you can see here, because I've added a second line, this list item now has a <code
-									>&lt;p&gt;</code
-								> tag.
+								Because this item runs to a second line, it now carries a <code>&lt;p&gt;</code>
+								tag of its own.
 							</p>
-							<p>This is the second line I'm talking about by the way.</p>
+							<p>And this is that second line.</p>
 						</li>
-						<li><p>Finally here's another list item so it's more like a list.</p></li>
+						<li><p>Then one more item, so it reads as a proper list.</p></li>
 					</ul>
 				</li>
-				<li><p>A closing list item, but with no nested list, because why not?</p></li>
+				<li><p>A closing item, with no nested list beneath it.</p></li>
 			</ul>
-			<p>And finally a sentence to close off this section.</p>
+			<p>And a sentence to close off the section.</p>
 			<h2>We didn't forget about description lists</h2>
 			<p>
-				Well, that's not exactly true, we first released this plugin back in 2020 and it took three
-				years before we added description lists. But they're here now, so let's just be happy about
-				that<!-- -->…<!-- -->okay? They can be great for things like FAQs.
+				Description lists earn their keep in a data notebook — a glossary of indicators, a set of
+				methodology notes, or an FAQ that sits alongside the numbers. Each term pairs with its
+				definition, and the design system keeps that pairing tight.
 			</p>
 			<dl>
-				<dt>Why do you never see elephants hiding in trees?</dt>
+				<dt>What is the London City Data Design System?</dt>
 				<dd>
-					Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Quas cupiditate laboriosam fugiat.
+					A shared toolkit of tokens, components and typography roles (lcd-ds) that GLA City
+					Intelligence uses to build charts, dashboards and reports that look and behave as one
+					system.
 				</dd>
-				<dt>What do you call someone with no body and no nose?</dt>
+				<dt>What does "bind to a role, not a size" mean?</dt>
 				<dd>
-					Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas
-					ipsa quia excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.
+					Every piece of text has a job — a section head, a chart title, an axis tick. You choose
+					the role and the size, line-height and weight come with it, so the hierarchy stays
+					consistent across every surface.
 				</dd>
-				<dt>Why can't you hear a pterodactyl go to the bathroom?</dt>
+				<dt>Why cap the reading column but let charts break out?</dt>
 				<dd>
-					Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-					Ipsam, quas voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam
-					suscipit deserunt illum natus facilis atque vero consequatur! Quisquam, debitis error.
+					Body text is easiest to read at a limited measure, so <code>flow-prose</code> caps it via
+					<code>--readable-width</code>. Charts, tables and figures carry more information, so
+					they're allowed to break out wider than the column when the viewport gives them room.
 				</dd>
 			</dl>
 			<h2>There are other elements we need to style</h2>
 			<p>
-				I almost forgot to mention links, like <a href="https://tailwindcss.com"
-					>this link to the Tailwind CSS website</a
-				>. We almost made them blue but that's so yesterday, so we went with dark gray, feels
-				edgier.
+				Links matter in a notebook that cites its sources, like <a href="https://data.london.gov.uk"
+					>this link to the London Datastore</a
+				>. They pick up a semantic colour token rather than a raw value, so they stay legible and
+				on-brand in both light and dark themes.
 			</p>
-			<p>We even included table styles, check it out:</p>
+			<p>Tables carry the numbers behind the prose. Here's an illustrative one:</p>
 			<table>
-				<thead><tr><th>Wrestler</th><th>Origin</th><th>Finisher</th></tr></thead><tbody
-					><tr><td>Bret "The Hitman" Hart</td><td>Calgary, AB</td><td>Sharpshooter</td></tr><tr
-						><td>Stone Cold Steve Austin</td><td>Austin, TX</td><td>Stone Cold Stunner</td></tr
-					><tr><td>Randy Savage</td><td>Sarasota, FL</td><td>Elbow Drop</td></tr><tr
-						><td>Vader</td><td>Boulder, CO</td><td>Vader Bomb</td></tr
-					><tr><td>Razor Ramon</td><td>Chuluota, FL</td><td>Razor's Edge</td></tr></tbody
+				<thead><tr><th>Borough</th><th>Sub-region</th><th>Indicator</th></tr></thead><tbody
+					><tr><td>Barking and Dagenham</td><td>East</td><td>Employment rate</td></tr><tr
+						><td>Camden</td><td>Central</td><td>House price to earnings</td></tr
+					><tr><td>Croydon</td><td>South</td><td>Annual mean NO₂</td></tr><tr
+						><td>Hackney</td><td>East</td><td>Green space per resident</td></tr
+					><tr><td>Richmond upon Thames</td><td>West</td><td>Recycling rate</td></tr></tbody
 				>
 			</table>
 			<p>
-				We also need to make sure inline code looks good, like if I wanted to talk about <code
-					>&lt;span&gt;</code
+				Inline code should read cleanly too — whether that's a token like <code
+					>--readable-width</code
 				>
-				elements or tell you the good news about <code>@tailwindcss/typography</code>.
+				or a package name like <code>@ldn-viz/charts</code>.
 			</p>
-			<h3>Sometimes I even use <code>code</code> in headings</h3>
+			<h3>Sometimes <code>code</code> appears in a heading</h3>
 			<p>
-				Even though it's probably a bad idea, and historically I've had a hard time making it look
-				good. This <em>"wrap the code blocks in backticks"</em> trick works pretty well though really.
-			</p>
-			<p>
-				Another thing I've done in the past is put a <code>code</code> tag inside of a link, like if
-				I wanted to tell you about the
-				<a href="https://github.com/tailwindcss/docs"><code>tailwindcss/docs</code></a> repository. I
-				don't love that there is an underline below the backticks but it is absolutely not worth the madness
-				it would require to avoid it.
-			</p>
-			<h4>We haven't used an <code>h4</code> yet</h4>
-			<p>
-				But now we have. Please don't use <code>h5</code> or <code>h6</code> in your content, Medium
-				only supports two heading levels for a reason, you animals. I honestly considered using a
-				<code>before</code>
-				pseudo-element to scream at you if you use an
-				<code>h5</code>
-				or <code>h6</code>.
+				A methodology section might name a token or a function right in its heading. The
+				<em>"wrap it in a code span"</em> approach holds up here, so the inline code reads as code without
+				breaking the heading's weight or size.
 			</p>
 			<p>
-				We don't style them at all out of the box because <code>h4</code> elements are already so
-				small that they are the same size as the body copy. What are we supposed to do with an
-				<code>h5</code>, make it <em>smaller</em> than the body copy? No thanks.
+				Code can also sit inside a link — say, pointing to the
+				<a href="https://github.com/Greater-London-Authority/ldn-viz-tools"
+					><code>ldn-viz-tools</code></a
+				> repository. The underline runs beneath the code span, which is a small compromise but far simpler
+				than the effort it would take to avoid.
 			</p>
-			<h3>We still need to think about stacked headings though.</h3>
-			<h4>Let's make sure we don't screw that up with <code>h4</code> elements, either.</h4>
+			<h4>This is the first h4</h4>
 			<p>
-				Phew, with any luck we have styled the headings above this text and they look pretty good.
-			</p>
-			<p>
-				Let's add a closing paragraph here so things end with a decently sized block of text. I
-				can't explain why I want things to end that way but I have to assume it's because I think
-				things will look weird or unbalanced if there is a heading too close to the end of the
-				document.
+				And it marks the floor of the heading ladder. Keep content to h1–h4;
+				<code>h5</code> and <code>h6</code> aren't styled, because by <code>h4</code> the heading is already
+				close to body size and there's nowhere sensible left to go.
 			</p>
 			<p>
-				What I've written here is probably long enough, but adding this final sentence can't hurt.
+				Making an <code>h5</code> smaller than the body copy it introduces would invert the hierarchy,
+				so the ladder stops at four levels by design. If you need more structure than that, the section
+				probably wants splitting.
+			</p>
+			<h3>Stacked headings, one more time</h3>
+			<h4>Including an h4 tucked straight under an h3</h4>
+			<p>
+				With any luck the headings above sit closer to each other than they would to a paragraph, so
+				each pair reads as a single unit rather than two loose lines.
+			</p>
+			<p>
+				A closing paragraph gives the document a decent block of text to end on. A heading sitting
+				too near the end tends to look unbalanced, so it's worth rounding off a section with prose
+				rather than a title.
+			</p>
+			<p>
+				That covers every element the London City Data Design System styles in long-form content —
+				enough to trust that a full notebook will hang together on the page.
 			</p>
 		</div>
 	</div>

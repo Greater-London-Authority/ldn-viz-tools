@@ -278,7 +278,7 @@
 
 <style>
 	:global(.themed-chart svg) {
-		--plot-background: var(--color-chart-background) !important;
+		--plot-background: var(--color-chart-surface) !important;
 	}
 	:global(.themed-chart [aria-label='tip']) {
 		stroke: var(--color-border-muted) !important;
