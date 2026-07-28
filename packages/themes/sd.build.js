@@ -449,14 +449,13 @@ const formatTypography = (dictionary) => (token) => {
 		(lastSegment === 'lineheight' || lastSegment === 'line-height');
 	const isReadableWidth = token.path[0] === 'typography' && lastSegment === 'readable-width';
 
-	const getNestedTokenValue = (path) => {
-		return (
-			path.reduce((obj, key) => (obj && obj[key] ? obj[key] : null), dictionary.tokens)?.original
-				.value || null
-		);
-	};
-
-	// Get the corresponding font size for a line-height token
+	// Get the corresponding font size for a line-height token, as a resolved
+	// px number. Uses the sibling token's final resolved `.value` (not
+	// `.original.value`), so it works whether the font-size is authored as a
+	// primitive reference OR a semantic→semantic alias (e.g. aliased chart
+	// roles referencing product) — parsing the primitive name out of
+	// `.original.value` broke as soon as a role aliased another semantic
+	// token instead of a primitive.
 	const getFontSizeForLineHeight = (token) => {
 		if (!isLineHeight) return null;
 
@@ -464,8 +463,11 @@ const formatTypography = (dictionary) => (token) => {
 		const fontSizeKey = lastSegment === 'line-height' ? 'font-size' : 'fontsize';
 		const fontSizePath = [...token.path.slice(0, -1), fontSizeKey];
 
-		// Retrieve the font size token value
-		return getNestedTokenValue(fontSizePath);
+		const fontSizeToken = fontSizePath.reduce(
+			(obj, key) => (obj && obj[key] ? obj[key] : null),
+			dictionary.tokens
+		);
+		return fontSizeToken ? fontSizeToken.value : null;
 	};
 
 	const applyCSSVariable = (token) => {
@@ -482,17 +484,8 @@ const formatTypography = (dictionary) => (token) => {
 		if (isLineHeight) {
 			// Always computed unitless (ratio). Line-height is deliberately NOT a
 			// primitive reference: the emitted value is lh/fs, not a px alias.
-
-			const ref = referencedVarName(token);
-
-			const fontSize = getFontSizeForLineHeight(token);
-			const match = fontSize
-				.trim()
-				.replace(/[{}]/g, '')
-				.match(/size\.(\d+)/);
-			const result = match ? match[1] : null;
-
-			const unitlessLineHeight = result ? token.value / result : token.value / 16;
+			const fontSizePx = getFontSizeForLineHeight(token);
+			const unitlessLineHeight = fontSizePx ? token.value / fontSizePx : token.value / 16;
 			return `  --${token.name}: ${unitlessLineHeight.toFixed(4)}`;
 		}
 

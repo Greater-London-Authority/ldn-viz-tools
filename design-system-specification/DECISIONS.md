@@ -29,6 +29,23 @@ Cross-references are by heading name, not number, so they survive inserts. Same-
 
 _Newest first. Append at the top._
 
+## 2026-07-28 — Spec re-baseline
+
+- **`design-system-specification-2026-07-27.md` renamed to canonical `design-system-specification.md`** — `regen_spec.py`'s default `--spec` path now resolves without an override.
+- **`regen_spec.py` guard updated for the 07-27 rename:** `PRODUCT_ROWS` (`dashboard-head`→`page-head`, `card-panel-title`→`title`), `PRODUCT_MATRIX_OMIT` (`card-panel-subtitle`/`card-panel-eyebrow`→`subtitle`/`eyebrow`), `SAMPLE`, and the `PINNED` product-eyebrow-weight check all moved off the old component-specific names. Without this the guard was checking roles that no longer exist and would have false-failed forever.
+- **`verify-build` → `gen` → `check` run clean:** zero-diff build, all generated blocks (CSS appendix, spacing table/alias, prose/product matrices) regenerated, all 12 `PINNED` decisions pass against emitted output — including the corrected `chart/title`/`chart/eyebrow` line-height from the fix below and the `tick-sm` font-weight binding fixed 07-27.
+- Closes the "spec prose" in-flight row — superseded, see [Status](#status).
+
+## 2026-07-28 — Repo audit: line-height alias bug found and fixed
+
+Detail: read-only repo audit of the Status section against emitted output (tokens JSON, build pipeline, `styles/typography.css`, tailwind-custom cjs files), prompted by suspected drift.
+
+- **`sd.build.js` line-height resolution was broken for semantic→semantic aliases.** `chart/title` and `chart/eyebrow` line-height are authored as references to `product/title` / `product/eyebrow` (correct in the source token JSON), but the build's ratio calculator read the font-size sibling's *original* (unresolved) value and regex-matched it against a primitive-only pattern (`size\.(\d+)`). When that sibling's font-size was itself a semantic alias rather than a primitive reference, the regex failed and the code silently fell back to dividing by a hardcoded `16`. Emitted `chart/title` line-height was **1.7500** instead of **1.4000**; `chart/eyebrow` was **1.2500** instead of **1.4286**. `chart/subtitle` coincidentally matched (its aliased font-size happens to be 16px). RULED — fixed.
+- **Fix:** `getFontSizeForLineHeight` in `sd.build.js` now reads the sibling font-size token's resolved `.value` instead of regex-parsing `.original.value` — the same approach the font-size branch already used for its own aliasing. Rebuilt; all three aliased chart roles now correctly equal their product source at every breakpoint. This directly disproves the `Typography.mdx` claim that these roles "cannot drift" — they did; now fixed.
+- **Repo-side rename migration confirmed complete**, superseding the "▶ next" status: `outputReferences` has been `true` on the typography platform since 2026-07-24 (`8d9e559f`); cjs renames (`card-panel-*` / `dashboard-head` → generic role names) landed 2026-07-27 (`6e60de6f`) — zero stale references anywhere in `.cjs`/`.css`.
+- **Spec prose confirmed present** (naming rule, chart rationale, twelve-role correction, line-height-as-reference exception) in `design-system-specification-2026-07-27.md`. Re-baseline — rename to canonical `design-system-specification.md`, run `regen_spec.py check` — still outstanding. — superseded 2026-07-28
+- **`label-tight` / `label-sm-tight` correction:** these DO emit — real Tailwind utility classes in `roles.cjs`, live in 7 components (`Button`, `TabLabel`, `NavigationMenuItem`, `ThemeSwitcher`, `MultipleActionButton`, `GeocoderSuggestion`, `GeocoderSuggestionList`). What's actually missing is a dedicated backing token: they currently reuse the `label` / `label-sm` vars with `line-height` hardcoded to the literal `1`. Re-scoped, not closed.
+
 ## 2026-07-27 — Chart typography family + product ladder renamed
 
 Detail: `audit-2026-07-27-chart-family.md`. Figma-only session.
@@ -116,22 +133,20 @@ Detail: `implementation-audit.md`. Reconciles the first `.cjs`/token pass, done 
 - Spec reconciled to emitted output; `regen_spec.py` and the change protocol in place.
 - T-shirt repo consumer migration (step 3), full-scan verified; spacing alias spec and guard closeout.
 - Chart family and product ladder renamed and verified in Figma.
+- Repo binding migration for the 07-27 rename: `outputReferences` on the typography platform (`8d9e559f`, 07-24) and cjs renames (`6e60de6f`, 07-27) — verified zero stale `card-panel-*` / `dashboard-head` references anywhere in `.cjs`/`.css` (repo audit, 07-28).
+- Line-height alias bug in `sd.build.js` found and fixed (07-28): `chart/title` / `chart/eyebrow` now correctly resolve to product's line-height (1.4000 / 1.4286) at every breakpoint instead of a silent `/16` fallback (1.7500 / 1.2500). Rebuilt and verified against `styles/typography.css`.
+- Spec re-baselined (07-28): `design-system-specification-2026-07-27.md` renamed to canonical `design-system-specification.md`; `regen_spec.py`'s `PRODUCT_ROWS`/`PRODUCT_MATRIX_OMIT`/`SAMPLE`/`PINNED` updated off the old `card-panel-*` / `dashboard-head` names onto the 07-27 rename. `verify-build` → `gen` → `check` all green — no drift between decisions, tokens, build and spec.
 
 ## In flight ▶
 
-| Work                                                                                                                                                            | Owner              | State                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ----------------------- |
-| Rename product role groups; author chart roles as semantic→semantic aliases; fix xl lh error + `tick-sm` binding                                                | Figma (Chris)      | ✅ done, verified 07-27 |
-| Re-export variables; `outputReferences` on typography; cjs locals and utility renames; repo binding migration — **atomic, no alias window**                     | repo / Claude Code | ▶ next                  |
-| Spec prose: naming rule, chart family rationale, product tables, three stale rows, line 147 correction, line-height-as-reference exception; guard updates       | spec session       | ▶ in progress           |
-| Repoint the 11 raw SVG exports in "Example downloads" (`6497:277388`) — 348 unstyled text nodes, 323 hardcoded hex fills, 0 tokens. Needs a hex→token map first | Figma              | ▶ next (charts)         |
-
-Then `verify-build` → `gen` → `check` to re-baseline.
+| Work                                                                                                                                                            | Owner         | State            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------- |
+| Repoint the 11 raw SVG exports in "Example downloads" (`6497:277388`) — 348 unstyled text nodes, 323 hardcoded hex fills, 0 tokens. Needs a hex→token map first | Figma         | ▶ next (charts)   |
 
 ## Open / deferred
 
 - **Eyebrow casing** — currently uppercase and tracked in places; "resist uppercase for now", decision pending. OPEN.
-- **`label-tight` / `label-sm-tight` cannot emit** — style-only, no backing variables in `semantic-typography`. OPEN.
+- **`label-tight` / `label-sm-tight` have no dedicated backing token** — the Tailwind classes emit and are live in 7 components (`Button`, `TabLabel`, `NavigationMenuItem`, `ThemeSwitcher`, `MultipleActionButton`, `GeocoderSuggestion(List)`), but reuse `label`/`label-sm`'s vars with `line-height` hardcoded to `1` rather than having their own `semantic-typography` entry. OPEN.
 - **Fluid tier home** — implement 4 `clamp()` roles + unitless lh in cjs post-SD, or keep spec-only. Currently spec-only. OPEN.
 - **Compressed tick density** — if 12 / 11 should become real tokens that's 2 variables + 2 `PINNED` entries. Separate decision. OPEN.
 - **Doc-frame home for component docs** — undecided; batch, don't scatter. OPEN.
@@ -149,7 +164,7 @@ Then `verify-build` → `gen` → `check` to re-baseline.
 
 - **Transport docs drifted materially behind the live file** (caught 2026-07-20 via ground-truth recon). Re-verify against Figma before trusting any snapshot line here.
 - **`charts/bar-chart.md` is partly stale** — still describes static SVG specimens for line/area/scatter, which real kits superseded. Re-audit when next touching charts.
-- **The 2026-07-27 block is unverified against emitted output.** Repo-side resolution of the new semantic→semantic aliases is unproven until a rebuild.
+- **`Typography.mdx:95`** claims aliased chart roles "cannot drift" — true again as of the 07-28 fix, but re-verify after any future change to `sd.build.js`'s line-height handling; this exact claim broke silently once already.
 
 ---
 

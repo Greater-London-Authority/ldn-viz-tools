@@ -45,7 +45,7 @@ PINNED = [
     ("chart axis-title weight 500",       "chart",   "axis-title","font-weight", 500,    None),
     ("chart label = 14px",                "chart",   "label",     "font-size",   14,     None),
     ("prose eyebrow weight 500",          "prose",   "eyebrow",   "font-weight", 500,    None),
-    ("product card-panel-eyebrow wt 500", "product", "card-panel-eyebrow","font-weight",500,None),
+    ("product eyebrow wt 500",            "product", "eyebrow",   "font-weight", 500,    None),
 ]
 
 # ── public spacing-alias contract (--spacing-{n} -> var(--primitive-spacing-{n})).
@@ -67,10 +67,10 @@ PROSE_ROWS = [
     ("Caption",  ["caption"]),
 ]
 PRODUCT_ROWS = [
-    ("Dashboard head",      ["dashboard-head"]),
+    ("Page head",           ["page-head"]),
     ("Metric",              ["metric"]),
     ("Section head",        ["section-head"]),
-    ("Card / Panel title",  ["card-panel-title"]),
+    ("Title",               ["title"]),
     ("Metric Sm",           ["metric-sm"]),
     ("Body / Field value",  ["body"]),
     ("Body Sm / Label",     ["body-sm", "label"]),
@@ -79,12 +79,15 @@ PRODUCT_ROWS = [
 ]
 # roles legitimately absent from the collapsed matrices (editorial), so the
 # "did the emitted role set change?" assertion doesn't false-alarm on them.
-PRODUCT_MATRIX_OMIT = {"card-panel-subtitle", "card-panel-eyebrow"}
+# `subtitle`/`eyebrow` are metric duplicates of body/label (renamed 07-27 from
+# card-panel-subtitle/card-panel-eyebrow) — omitted here for the same reason
+# the old names were: a dedicated row would just repeat Body/Label's values.
+PRODUCT_MATRIX_OMIT = {"subtitle", "eyebrow"}
 
 # representative roles shown in the CSS appendix typography sample
 SAMPLE = [
     ("prose",   ["display", "body", "body-sm", "caption"]),
-    ("product", ["card-panel-title", "label", "label-sm"]),
+    ("product", ["title", "label", "label-sm"]),
     ("chart",   ["axis-title", "tick", "tick-sm"]),
 ]
 

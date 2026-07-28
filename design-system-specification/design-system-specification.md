@@ -415,10 +415,10 @@ Two intentional coincidences, neither an inversion. Subhead (28) equals Title 1 
 <!-- GEN:product-matrix START -->
 | Role (high → low) | base | sm | md | lg | xl | |
 |---|---|---|---|---|---|---|
-| Dashboard head | 28 | 30 | 32 | 32 | 36 | scales |
+| Page head | 28 | 30 | 32 | 32 | 36 | scales |
 | Metric | 28 | 30 | 32 | 32 | 36 | scales |
 | Section head | 24 | 24 | 26 | 26 | 28 | scales |
-| Card / Panel title | 20 | 20 | 20 | 20 | 20 | fixed |
+| Title | 20 | 20 | 20 | 20 | 20 | fixed |
 | Metric Sm | 20 | 20 | 20 | 20 | 20 | fixed |
 | Body / Field value | 16 | 16 | 16 | 16 | 16 | fixed |
 | Body Sm / Label | 14 | 14 | 14 | 14 | 14 | fixed |
@@ -899,9 +899,9 @@ The rules intervene to prevent one move: encoding a weight, colour, or spacing d
   --typography-base-prose-caption-line-height: 1.3333;
   --typography-base-prose-caption-font-weight: var(--primitive-typography-font-weight-regular, 400);
   /* product */
-  --typography-base-product-card-panel-title-font-size: var(--primitive-typography-font-size-20, 1.25rem);
-  --typography-base-product-card-panel-title-line-height: 1.4000;
-  --typography-base-product-card-panel-title-font-weight: var(--primitive-typography-font-weight-semi-bold, 600);
+  --typography-base-product-title-font-size: var(--primitive-typography-font-size-20, 1.25rem);
+  --typography-base-product-title-line-height: 1.4000;
+  --typography-base-product-title-font-weight: var(--primitive-typography-font-weight-semi-bold, 600);
   --typography-base-product-label-font-size: var(--primitive-typography-font-size-14, 0.875rem);
   --typography-base-product-label-line-height: 1.4286;
   --typography-base-product-label-font-weight: var(--primitive-typography-font-weight-medium, 500);
@@ -917,6 +917,7 @@ The rules intervene to prevent one move: encoding a weight, colour, or spacing d
   --typography-base-chart-tick-font-weight: var(--primitive-typography-font-weight-regular, 400);
   --typography-base-chart-tick-sm-font-size: var(--primitive-typography-font-size-12, 0.75rem);
   --typography-base-chart-tick-sm-line-height: 1.0000;
+  --typography-base-chart-tick-sm-font-weight: var(--primitive-typography-font-weight-regular, 400);
 }
 
 /* -- Content flow (context themes; each rung a --primitive-spacing-{n}) */

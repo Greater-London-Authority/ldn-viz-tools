@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/sveltekit';
-import { dirname, join } from 'path';
-
 import { createRequire } from 'node:module';
+import { dirname, join } from 'path';
+import remarkGfm from 'remark-gfm';
 const require = createRequire(import.meta.url);
 
 /**
@@ -28,8 +28,11 @@ const config: StorybookConfig = {
 		getAbsolutePath('@storybook/addon-themes'),
 		getAbsolutePath('@storybook/addon-svelte-csf'),
 		getAbsolutePath('@storybook/addon-a11y'),
-		getAbsolutePath('@storybook/addon-docs'),
-		getAbsolutePath('@storybook/addon-vitest')
+		getAbsolutePath('@storybook/addon-vitest'),
+		{
+			name: getAbsolutePath('@storybook/addon-docs'),
+			options: { mdxPluginOptions: { mdxCompileOptions: { remarkPlugins: [remarkGfm] } } }
+		}
 	],
 	framework: {
 		name: getAbsolutePath('@storybook/sveltekit'),
