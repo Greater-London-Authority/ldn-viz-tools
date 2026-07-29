@@ -121,8 +121,8 @@
 				for (const val of values) {
 					const cx = x(val);
 					const cy = height * Math.random();
-					ctx.fillStyle = 'rgb(0, 0, 0, 0.05)';
-					ctx.fillRect(cx, cy, 1, 1);
+					ctx.fillStyle = 'rgb(0, 0, 0, 0.5)';
+					ctx.fillRect(cx, cy, 2, 2);
 				}
 			}
 		}

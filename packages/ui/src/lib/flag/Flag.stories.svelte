@@ -44,3 +44,14 @@
 <Story name="Links" asChild>
 	<Flag condition="alpha" link="https://apps.london.gov.uk">This site is in beta.</Flag>
 </Story>
+
+<!--
+The `link` prop can be a 
+ [mailto:// URL](https://datatracker.ietf.org/doc/html/rfc6068),
+  and the `linkText` prop overrides the default link label. 
+  -->
+<Story name="mailto link with custom linkText" asChild>
+	<Flag condition="beta" link="mailto://feedback@london.gov.uk" linkText="Email us your feedback">
+		This site is in beta.
+	</Flag>
+</Story>

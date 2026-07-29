@@ -26,7 +26,7 @@
 </script>
 
 <div
-	class="flex h-full w-full flex-col items-center justify-center gap-2 border border-color-ui-border-secondary bg-color-ui-background-neutral px-2 py-2 text-center text-color-text-secondary"
+	class="flex h-full w-full flex-col items-center justify-center gap-2 border border-color-border-muted bg-color-surface-neutral-muted px-2 py-2 text-center text-color-text-muted"
 >
 	{#if spinner}
 		<LoadingIndicator class="h-12 w-12" />

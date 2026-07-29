@@ -29,3 +29,11 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Check docstrings are in sync with Storybook
+        run: |
+          npm run sync-docstrings
+          if ! git diff --quiet -- 'packages/*/src/**'; then
+            echo "Component docstrings and Storybook are not in sync"
+            exit 1
+          fi

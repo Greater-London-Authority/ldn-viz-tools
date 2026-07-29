@@ -1,5 +1,45 @@
 # @ldn-viz/tables
 
+## 6.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [638c76d]
+- Updated dependencies [8035407]
+- Updated dependencies [b5ac9bb]
+- Updated dependencies [d73427a]
+- Updated dependencies [9269ac2]
+- Updated dependencies [ac203e1]
+- Updated dependencies [0c15080]
+  - @ldn-viz/charts@8.0.0
+  - @ldn-viz/ui@23.0.0
+  - @ldn-viz/themes@8.0.0
+  - @ldn-viz/utils@3.0.0
+
+## 5.2.0
+
+### Minor Changes
+
+- 19f60cb: FIXED: column heading snow respect specified alignment when sortable
+
+### Patch Changes
+
+- Updated dependencies [2f18b94]
+- Updated dependencies [56de83f]
+- Updated dependencies [c2bdd76]
+- Updated dependencies [946013e]
+  - @ldn-viz/ui@21.2.0
+
+## 5.1.0
+
+### Minor Changes
+
+- b8b9f1f: CHANGED: `BarDivergingCell` now has a `backgroundColor` prop
+
 ## 5.0.0
 
 ### Major Changes

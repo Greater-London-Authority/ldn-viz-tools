@@ -21,11 +21,14 @@
 	{#if byline || source || note || chartDescription}
 		<ul
 			title="Chart footnotes and description"
-			class="mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs text-color-text-secondary"
+			class="footer-ul mr-4 flex min-w-40 max-w-xl flex-col space-y-0.5 text-xs text-color-text-muted"
 		>
-			{#if byline}<li>{byline}</li>{/if}
-			{#if source}<li><span class="mr-1 font-bold">Source:</span>{source}</li>{/if}
-			{#if note}<li><span class="mr-1 font-bold">Note:</span>{note}</li>{/if}
+			<!-- eslint-disable svelte/no-at-html-tags -->
+			{#if byline}<li>{@html byline}</li>{/if}
+			{#if source}<li><span class="mr-1 font-bold">Source:</span>{@html source}</li>{/if}
+			{#if note}<li><span class="mr-1 font-bold">Note:</span>{@html note}</li>{/if}
+			<!-- eslint-enable svelte/no-at-html-tags -->
+
 			{#if chartDescription}
 				<Modal bind:open={isOpen}>
 					{#snippet trigger()}
@@ -57,3 +60,9 @@
 		</div>
 	{/if}
 </div>
+
+<style>
+	.footer-ul :global(a) {
+		@apply underline hover:text-color-interactive-primary-hover hover:no-underline;
+	}
+</style>

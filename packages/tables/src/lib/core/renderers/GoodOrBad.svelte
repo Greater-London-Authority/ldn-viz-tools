@@ -29,9 +29,9 @@
 	};
 
 	const benchmarkComparisonClass = {
-		good: 'text-color-ui-positive',
-		bad: 'text-color-ui-negative',
-		equal: 'text-color-ui-neutral'
+		good: 'text-color-surface-positive',
+		bad: 'text-color-surface-negative',
+		equal: 'text-color-surface-neutral'
 	};
 
 	//

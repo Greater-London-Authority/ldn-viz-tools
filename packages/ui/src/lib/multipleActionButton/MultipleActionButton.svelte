@@ -49,7 +49,7 @@
 	};
 
 	let triggerClasses = $derived(
-		variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-action-secondary-muted'
+		variant === 'outline' ? ' border-l-0 ' : 'border-l border-color-interactive-secondary-muted'
 	);
 </script>
 
@@ -69,6 +69,7 @@
 			{variant}
 			{fullWidth}
 			{...restProps}
+			disabled={restProps.disabled ?? options.length === 0}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
@@ -83,7 +84,14 @@
 				aria-label={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 			>
 				{#snippet child({ props })}
-					<Button {...props} class={triggerClasses} variant="square" {size} {...restProps}>
+					<Button
+						{...props}
+						class={triggerClasses}
+						variant="square"
+						{size}
+						{...restProps}
+						disabled={restProps.disabled ?? options.length === 0}
+					>
 						{#if size === 'xs'}
 							<Icon src={ChevronDown} theme="mini" class="h-4 w-4" aria-hidden="true" />
 						{:else}
@@ -94,25 +102,29 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class="z-[60] flex max-w-sm flex-col border border-color-input-border bg-color-input-background p-1 shadow"
+					class="z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>
 						<DropdownMenu.GroupHeading class="p-1 text-sm">{menuTitle}</DropdownMenu.GroupHeading>
 
-						<div class="divide-y divide-color-ui-border-secondary">
+						<div class="divide-y divide-color-border-muted">
 							{#each options as option (option.id)}
 								<DropdownMenu.Item
-									class="group w-full cursor-pointer p-2 text-left hover:bg-color-action-background-primary-hover hover:text-color-static-white"
+									class="group  w-full cursor-pointer p-2 text-left hover:bg-color-interactive-primary-muted-hover"
 									onSelect={() => changeOption(option)}
 								>
 									<div class="flex items-center">
 										{#if state.id === option.id}
-											<Icon src={Check} theme="mini" class="mr-1 h-5 w-5" />
+											<Icon
+												src={Check}
+												theme="mini"
+												class="mr-1 h-5 w-5 text-color-surface-accent"
+											/>
 										{/if}
 										<p class="text-sm font-medium">{option.menuLabel}</p>
 									</div>
-									<p class="text-xs text-color-text-secondary group-hover:text-color-static-white">
+									<p class="text-xs text-color-text-muted">
 										{option.menuDescription}
 									</p>
 								</DropdownMenu.Item>
@@ -120,7 +132,7 @@
 						</div>
 					</DropdownMenu.Group>
 					<DropdownMenu.Separator />
-					<DropdownMenu.Arrow class="text-color-input-border" />
+					<DropdownMenu.Arrow class="text-color-border-muted" />
 				</DropdownMenu.Content>
 			</DropdownMenu.Portal>
 		</DropdownMenu.Root>

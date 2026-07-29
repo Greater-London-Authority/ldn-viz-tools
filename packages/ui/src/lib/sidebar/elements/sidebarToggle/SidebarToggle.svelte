@@ -30,7 +30,7 @@
 		title="Toggle sidebar"
 		variant="square"
 		emphasis="secondary"
-		class="cursor-pointer !bg-color-container-level-1 !text-color-text-primary hover:!text-color-action-text-secondary-hover"
+		class="cursor-pointer !bg-color-container-level-1 !text-color-text hover:!text-color-interactive-secondary-hover"
 		onclick={toggleOpen}
 		aria-controls={sidebarId}
 		aria-expanded={sidebarState?.isOpen}

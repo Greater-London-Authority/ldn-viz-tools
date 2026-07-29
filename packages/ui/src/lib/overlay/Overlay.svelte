@@ -2,7 +2,11 @@
 	import type { Snippet } from 'svelte';
 	/**
 	 * The `<Overlay>` component provides additional explanatory or help text when a user interacts with a trigger.
-	 * You can choose whether this is a modal, popover or tooltip, depending on your needs.
+	 * You can choose whether this is a
+	 * [Modal](./?path=/docs/ui-components-overlays-modal--documentation),
+	 * [Popover](./?path=/docs/ui-components-overlays-popover--documentation),
+	 * or [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation),
+	 * depending on your needs.
 	 *
 	 * The trigger can either be the built in `<Trigger>` component or a custom trigger provided as a snippet.
 	 * @component
@@ -32,6 +36,7 @@
 			| 'full';
 		children: Snippet;
 		trigger?: Snippet<[Record<string, any>]>;
+		open?: boolean;
 	}
 
 	let {
@@ -61,22 +66,24 @@
 		 */
 		modalWidth = undefined,
 
+		open = $bindable(false),
+
 		trigger
 	}: Props = $props();
 </script>
 
 {#if overlayType === 'tooltip'}
-	<Tooltip {trigger} {hintLabel}>
+	<Tooltip {trigger} {hintLabel} bind:open>
 		<!-- The help message. -->
 		{@render children()}
 	</Tooltip>
 {:else if overlayType === 'popover'}
-	<Popover {trigger} {hintLabel}>
+	<Popover {trigger} {hintLabel} bind:open>
 		<!-- The help message. -->
 		{@render children()}
 	</Popover>
 {:else if overlayType === 'modal'}
-	<Modal width={modalWidth} {trigger} {hintLabel}>
+	<Modal width={modalWidth} {trigger} {hintLabel} bind:open>
 		{#snippet title()}
 			{modalTitle}
 		{/snippet}

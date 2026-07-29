@@ -15,7 +15,7 @@
 
 <Story name="Mayor of London">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoMayor class="w-40" />
 		</div>
 	{/snippet}
@@ -23,7 +23,7 @@
 
 <Story name="CIU">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoCIU class="w-40" />
 		</div>
 	{/snippet}
@@ -31,7 +31,7 @@
 
 <Story name="Designed By CIU">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoByCIU class="w-40" />
 		</div>
 	{/snippet}
@@ -39,7 +39,7 @@
 
 <Story name="LOTI">
 	{#snippet template()}
-		<div class="text-color-text-primary">
+		<div class="text-color-text">
 			<LogoLOTI class="h-10" />
 		</div>
 	{/snippet}
@@ -47,7 +47,7 @@
 
 <Story name="Inherit font color (default)">
 	{#snippet template()}
-		<div class="flex space-x-6 text-color-text-primary">
+		<div class="flex space-x-6 text-color-text">
 			<LogoMayor class="w-40" />
 			<LogoCIU class="w-40" />
 			<LogoByCIU class="w-40" />

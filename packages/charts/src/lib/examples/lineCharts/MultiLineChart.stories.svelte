@@ -1,10 +1,10 @@
 <script module lang="ts">
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { format } from 'd3-format';
 	import { monthlyData as chartData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Line Charts'
@@ -13,13 +13,14 @@
 	// Spec and data for multi-line example
 	let spec = $derived({
 		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		y: { insetTop: 50 },
 		color: {
 			legend: true,
 			type: 'ordinal',
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [
@@ -36,15 +37,16 @@
 
 			Plot.ruleX(
 				chartData,
-				Plot.pointerX({ x: 'Month', stroke: theme.currentTheme.color.chart.label })
+				Plot.pointerX({ x: 'Month', stroke: theme.tokenNameToValue('chart.label') })
 			),
 			Plot.point(
 				chartData,
-				Plot.pointer({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
+				Plot.pointerX({ x: 'Month', y: 'Value', z: 'Variable', stroke: 'Variable' })
 			),
+
 			Plot.tip(
 				chartData,
-				Plot.pointer({
+				Plot.pointerX({
 					x: 'Month',
 					y: 'Value',
 					z: 'Variable',

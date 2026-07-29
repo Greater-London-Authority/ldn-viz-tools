@@ -10,6 +10,11 @@
 	import InputWrapper from './InputWrapper.svelte';
 	import { type InputAsNonTextArea, type InputAsTextArea, type InputComponentProps } from './types';
 
+	/**
+	 * The `Input` component renders a labelled form input (or, if `type` is `textarea`, a `<textarea>`), with support for a `description`, `hint`, `error` message, and `optional`/required state.
+	 * The value can be reformatted on blur (for example, trimming whitespace) via the `format` prop.
+	 * @component
+	 */
 	let {
 		type = 'text',
 		inputmode = undefined,
@@ -86,12 +91,12 @@
 	let inputClasses = $derived(
 		classNames(
 			'm-0',
-			error ? 'border-color-input-border-error' : '',
+			error ? 'border-color-interactive-error' : '',
 			disabled
-				? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
+				? 'cursor-not-allowed text-color-interactive-disabled placeholder-color-interactive-disabled'
 				: '',
 			type === 'range' ? 'form-range' : 'form-input',
-			'placeholder-color-input-placeholder'
+			'placeholder-color-text-wash'
 		)
 	);
 

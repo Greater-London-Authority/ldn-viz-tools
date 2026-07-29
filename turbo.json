@@ -10,6 +10,9 @@
 		"lint": {
 			"dependsOn": ["^lint"]
 		},
+		"sync-docstrings": {
+			"dependsOn": ["^sync-docstrings"]
+		},
 		"check-types": {
 			"dependsOn": ["^check-types"]
 		},

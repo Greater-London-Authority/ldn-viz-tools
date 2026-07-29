@@ -1,4 +1,4 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import { Select } from '@ldn-viz/ui';
@@ -225,6 +225,19 @@
 	};
 	randomlySelectRows();
 
+	let dataSubset2: Record<string, string | number>[] = $state([]);
+	const randomlySelectRows2 = () => {
+		const selectedEntries = [];
+
+		for (let i = 0; i < 5; i++) {
+			const randomIndex = Math.floor(Math.random() * data.length);
+			selectedEntries.push(data[randomIndex]);
+		}
+
+		dataSubset2 = selectedEntries;
+	};
+	randomlySelectRows2();
+
 	interface Props {
 		page?: number;
 	}
@@ -300,9 +313,9 @@
 	{/snippet}
 </Story>
 
-<Story name="Export buttons">
+<Story name="No Export buttons">
 	{#snippet template()}
-		<Table {data} {tableSpec} dataDownloadButton imageDownloadButton />
+		<Table {data} {tableSpec} dataDownloadButton={false} imageDownloadButton={false} />
 	{/snippet}
 </Story>
 
@@ -321,6 +334,13 @@
 <Story name="Row Grouping">
 	{#snippet template()}
 		<Table {data} {tableSpec} allowRowGrouping />
+	{/snippet}
+</Story>
+
+<Story name="Row grouping - with data updates">
+	{#snippet template()}
+		<Button onclick={randomlySelectRows2}>Update</Button>
+		<Table data={dataSubset2} {tableSpec} allowRowGrouping />
 	{/snippet}
 </Story>
 
@@ -345,12 +365,12 @@
 <Story name="Paginated - page externally controlled">
 	{#snippet template()}
 		<div class="flex max-w-2xl flex-col gap-4">
-			<div class="border border-color-ui-border-secondary p-2">
+			<div class="border border-color-border-muted p-2">
 				<span class="font-bold">Separate control</span>
 				<Input bind:value={pageInput.value} type="text" label="Set page here"></Input>
 			</div>
 
-			<div class="border border-color-ui-border-secondary p-2">
+			<div class="border border-color-border-muted p-2">
 				<span class="font-bold">Table component</span>
 
 				<Table {data} {tableSpec} paginate pageSize={5} bind:page />
@@ -372,7 +392,6 @@
 		/>
 	{/snippet}
 </Story>
-<!-- TODO: add example of filtering -->
 
 <Story name="Externally implemented filtering">
 	{#snippet template()}
@@ -402,9 +421,42 @@
 	{/snippet}
 </Story>
 
-<!-- tableSpecCustomHeaderColors -->
 <Story name="Coloured headers">
 	{#snippet template()}
 		<Table {data} tableSpec={tableSpecCustomHeaderColors} fixedTableWidth={500} bind:page />
+	{/snippet}
+</Story>
+
+<!-- With no data, the table falls back to its empty state (the `tableObj.extents` guard) -->
+<Story name="Empty data">
+	{#snippet template()}
+		<Table data={[]} {tableSpec} />
+	{/snippet}
+</Story>
+
+<!-- The `source`, `byline`, and `note` props are forwarded to the footer -->
+<Story name="Footer metadata">
+	{#snippet template()}
+		<Table
+			{data}
+			{tableSpec}
+			source="Source: made-up data"
+			byline="Compiled by the GLA"
+			note="These are only guesses!"
+		/>
+	{/snippet}
+</Story>
+
+<!-- Sorting, row grouping, and column hiding controls all enabled at once -->
+<Story name="All controls enabled">
+	{#snippet template()}
+		<Table {data} {tableSpec} allowSorting allowRowGrouping allowColumnHiding />
+	{/snippet}
+</Story>
+
+<!-- Restrict data downloads to CSV only, and hide the image download button entirely -->
+<Story name="Restricted download formats">
+	{#snippet template()}
+		<Table {data} {tableSpec} dataDownloadButton={['CSV']} imageDownloadButton={false} />
 	{/snippet}
 </Story>

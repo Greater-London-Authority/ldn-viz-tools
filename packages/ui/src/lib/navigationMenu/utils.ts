@@ -21,7 +21,7 @@ const getItems = (item: NavigationMenuItemProps): NavigationMenuItemProps[] => {
 export const findActiveItem = (
 	items: NavigationMenuItemProps[],
 	page: any,
-	resolve: (url: string) => string
+	resolve: (url: any) => string
 ) => {
 	let bestMatch: NavigationMenuItemProps | undefined = undefined;
 

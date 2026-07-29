@@ -1,5 +1,52 @@
 # ldn-viz-tools-ui
 
+## 23.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Minor Changes
+
+- d73427a: FIXED: when an `ObservablePlot` image is downloaded as an SVG, the size of the SVG is now set correctly
+- ac203e1: CHANGED: changes to `ImageDownloadButton` needed for downloaded images of `ObservablePlot` plots to include the legend
+
+## 22.1.0
+
+### Minor Changes
+
+- e3ca40c: ADDED: Breadcrumbs component
+- 6d6d424: CHANGED: add `alwaysShowcolorChip` prop that allows color chips to be displayed in `LayerControl` when color editing is disabled
+- 01c499c: CHANGED: added the `disableHoverableContent` prop to `Tooltip` component, allowing tooltips to be kept open as cursor moves from the tooltip trigger to its content.
+
+## 22.0.0
+
+### Major Changes
+
+- 6c3607d: CHANGED: `HandleRedirectFromAuth` now receives `goto` as a prop rather than importing it from `'$app/navigation'`
+- 8402081: FIXED: in the `ColorLegend` component, the tick labels are now formatted with the default font-fmaily for the page, rather than `sans-serif`
+
+### Minor Changes
+
+- 792b3f6: CHANGED: ThemeSwitcher icon now has a title tooltip expalining what it does before it is clicked on.
+- 2398df2: FIXED: don't throw a ReferenceError when checking whether CookieControl is undefined if it is undefined
+
+## 21.2.0
+
+### Minor Changes
+
+- 2f18b94: FIXED: `ColorLegendOrdinalChips` and `ColorLegendOrdinalHorizontalAlt` components are now exported again
+- 56de83f: CHANGED: `Overlay`, `Tooltip` and `Popover` components now have a bindable `open` prop (as `Modal` already did)
+- c2bdd76: FIXED: fixed highlight state for geocoder
+- 946013e: CHANGED: focus modal description, rather than close button
+
+## 21.1.0
+
+### Minor Changes
+
+- 1796b20: CHANGED: `Footer` does not render a div when it has no children.
+- 8d823f6: Added function to highlight current navMenu item
+
 ## 21.0.0
 
 ### Major Changes
@@ -728,7 +775,7 @@
 ### Major Changes
 
 - 3c90996: CHANGED - switch from using `@rgossiaux/svelte-heroicons` to using `@steeze-ui/heroicons` as an icon library
-- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `rawIcon` prop)
+- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `RawIcon` prop)
 
 ### Minor Changes
 

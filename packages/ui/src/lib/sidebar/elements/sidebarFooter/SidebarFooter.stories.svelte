@@ -12,7 +12,8 @@
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarFooter',
-		component: SidebarFooter
+		component: SidebarFooter,
+		tags: ['autodocs']
 	});
 </script>
 

@@ -43,16 +43,16 @@
 	}: Props = $props();
 
 	const statusClasses = {
-		notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
-		positive: 'bg-color-ui-background-positive border-color-ui-border-positive',
-		caution: 'bg-color-ui-background-caution border-color-ui-border-caution',
-		negative: 'bg-color-ui-background-negative border-color-ui-border-negative'
+		notice: 'bg-color-surface-accent-muted border-color-surface-accent',
+		positive: 'bg-color-surface-positive-muted border-color-surface-positive',
+		caution: 'bg-color-surface-caution-muted border-color-surface-caution',
+		negative: 'bg-color-surface-negative-muted border-color-surface-negative'
 	};
 
 	const sizeClasses = {
-		sm: 'border shadow-sm text-color-text-primary px-2 pt-2 ',
-		md: 'border-l-[5px] border shadow-sm text-color-text-primary px-2 pt-2 ',
-		lg: 'border-l-[5px] border shadow-sm text-color-text-primary px-4 pt-4'
+		sm: 'border shadow-sm text-color-text px-2 pt-2 ',
+		md: 'border-l-[5px] border shadow-sm text-color-text px-2 pt-2 ',
+		lg: 'border-l-[5px] border shadow-sm text-color-text px-4 pt-4'
 	};
 
 	const titleClasses = {

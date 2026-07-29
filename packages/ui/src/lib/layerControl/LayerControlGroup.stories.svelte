@@ -3,6 +3,10 @@
 	import LayerControlGroup from './LayerControlGroup.svelte';
 	import { colorNames } from './layerControlUtils';
 
+	/**
+	 * The `<LayerControlGroup>` component provides a way to create a set of `<LayerControl>` components defined by an array of objects.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Layer Controls/LayerControlGroup',
 		component: LayerControlGroup,
@@ -102,6 +106,57 @@
 			visible: true,
 			opacity: 1.0,
 			size: 1
+		}
+	});
+
+	let stateIndeterminate = $state({
+		bus: {
+			colorName: 'data.categorical.blue',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		train: {
+			colorName: 'data.categorical.green',
+			visible: false,
+			opacity: 1.0,
+			size: 1
+		},
+		underground: {
+			colorName: 'data.categorical.darkpink',
+			visible: true,
+			opacity: 1.0,
+			size: 1
+		},
+		taxi: {
+			colorName: 'data.categorical.orange',
+			visible: false,
+			opacity: 1.0,
+			size: 1
+		}
+	});
+
+	let stateFill = $state({
+		bus: {
+			colorName: 'data.categorical.blue',
+			visible: true,
+			opacity: 1.0,
+			size: 1,
+			fillType: 'solid-fill'
+		},
+		train: {
+			colorName: 'data.categorical.green',
+			visible: true,
+			opacity: 1.0,
+			size: 1,
+			fillType: 'no-fill'
+		},
+		underground: {
+			colorName: 'data.categorical.darkpink',
+			visible: true,
+			opacity: 1.0,
+			size: 1,
+			fillType: 'hatch-cross'
 		}
 	});
 
@@ -262,5 +317,66 @@ For example, choropleth layers would cover each other.
 			{colorNames}
 		/>
 		<pre class="mt-4 text-xs">{JSON.stringify(state3, null, 2)}</pre>
+	{/snippet}
+</Story>
+
+<!-- The "Show all" master checkbox can be suppressed via `hideSelectAll`. -->
+<Story name="hideSelectAll">
+	{#snippet template()}
+		<LayerControlGroup
+			options={optionsForGroup}
+			bind:layersState={state1}
+			hideSelectAll
+			{ariaLabel}
+		/>
+		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+	{/snippet}
+</Story>
+
+<!-- The label of the "Show all" master checkbox can be customised via `showAllLabel`. -->
+<Story name="Custom showAllLabel">
+	{#snippet template()}
+		<LayerControlGroup
+			options={optionsForGroup}
+			bind:layersState={state1}
+			showAllLabel="Toggle every layer"
+			{ariaLabel}
+		/>
+		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+	{/snippet}
+</Story>
+
+<!-- With `allowClear={false}`, the "Clear" reset button is hidden in the mutually-exclusive layout. -->
+<Story name="Mutually exclusive without Clear">
+	{#snippet template()}
+		<LayerControlGroup
+			options={optionsForGroup}
+			bind:layersState={state1}
+			mutuallyExclusive
+			allowClear={false}
+			name="mutually-exclusive-no-clear"
+			{ariaLabel}
+		/>
+		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+	{/snippet}
+</Story>
+
+<!-- The fill control is enabled for each layer (each layer's state carries a `fillType`). -->
+<Story name="Fill control enabled">
+	{#snippet template()}
+		<LayerControlGroup options={optionsForGroup2} bind:layersState={stateFill} {ariaLabel} />
+		<pre class="mt-4 text-xs">{JSON.stringify(stateFill, null, 2)}</pre>
+	{/snippet}
+</Story>
+
+<!-- Some (but not all) layers are visible, so the "Show all" master checkbox is in its indeterminate state. -->
+<Story name="Indeterminate select-all">
+	{#snippet template()}
+		<LayerControlGroup
+			options={optionsForGroup}
+			bind:layersState={stateIndeterminate}
+			{ariaLabel}
+		/>
+		<pre class="mt-4 text-xs">{JSON.stringify(stateIndeterminate, null, 2)}</pre>
 	{/snippet}
 </Story>

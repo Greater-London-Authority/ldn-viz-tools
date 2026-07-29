@@ -1,4 +1,4 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import ObservablePlot from './ObservablePlot.svelte';
@@ -39,9 +39,10 @@
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
 	import { monthlyData } from '../../data/demoData';
+	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import { Plot } from '../observablePlotFragments/plot';
 	import DemoTooltip from './DemoTooltip.svelte';
-	import {
+	import ObservablePlotInner, {
 		addEventHandler,
 		addMultipleEventHandlers,
 		registerTooltip
@@ -94,8 +95,8 @@
 					}
 				]),
 				stroke: hoveredValue
-					? theme.currentTheme.color.data.secondary
-					: theme.currentTheme.color.data.primary
+					? theme.tokenNameToValue('data.secondary')
+					: theme.tokenNameToValue('data.primary')
 			})
 		]
 	});
@@ -123,6 +124,39 @@
 	});
 
 	let width = $state('w-96');
+
+	// Spec and data for dual line example
+	let specDualLine = $derived({
+		x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+		color: {
+			legend: true,
+			type: 'ordinal',
+			range: [theme.tokenNameToValue('data.primary'), theme.tokenNameToValue('data.context')]
+		},
+		marks: [
+			Plot.gridX({ interval: '2 years' }),
+			Plot.gridY(),
+			Plot.axisX({ label: 'Year', interval: '1 year' }),
+			Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+			Plot.line(chartData, {
+				x: 'Month',
+				y: 'Value',
+				z: 'Variable',
+				stroke: 'Variable',
+				reverse: true, // draw in reverse to get Var A on top
+				tip: {
+					format: {
+						x: true,
+						y: (d) => '£' + format(',.4~s')(d)
+					}
+				}
+			}),
+			Plot.ruleX([new Date('2016-01-01T00:00:01')]),
+
+			// baseline last
+			Plot.ruleY([0])
+		]
+	});
 </script>
 
 <Story name="Default">
@@ -350,5 +384,98 @@
 <Story name="With ariaHidden false">
 	{#snippet template(args)}
 		<ObservablePlot {...args} {spec} data={chartData} ariaHidden={false} />
+	{/snippet}
+</Story>
+
+<Story name="Combines multiple ObservablePlot images into single SVG">
+	{#snippet template(args)}
+		<div class=" w-full py-typography-spacing-3xl">
+			<ChartContainer
+				title="Two ObservablePlotInner plots in one ChartContainer..."
+				subTitle="...should be combined into one SVG"
+				source="The source of this chart data"
+				byline="A byline for the chart"
+				chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+				alt="Simple description of type of chart"
+				imageDownloadButton={['SVG']}
+				dataDownloadButton={true}
+				data={monthlyData}
+				chartHeight="h-fit"
+				id="multiple"
+			>
+				<ObservablePlotInner
+					spec={{ ...specDualLine, title: 'Plot 1' }}
+					data={monthlyData}
+					id="multiple-1"
+				/>
+
+				<ObservablePlotInner
+					spec={{ ...specDualLine, title: 'Plot 2' }}
+					data={monthlyData}
+					id="multiple-2"
+				/>
+			</ChartContainer>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+	The `columnMapping` prop renames data attributes to friendlier column headers in the downloaded
+	CSV/JSON file. Here `Month`/`Value` are exported as `Date`/`Amount (GBP)`.
+	The `filename` prop sets the name used for downloaded data and image files.
+-->
+<Story name="With columnMapping and filename">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			columnMapping={{ Month: 'Date', Value: 'Amount (GBP)', Variable: 'Series' }}
+			filename="financial-data"
+			dataDownloadButton={['CSV', 'JSON']}
+		/>
+	{/snippet}
+</Story>
+
+<!--
+	`tooltipOffset` sets the vertical offset (in pixels) between a data point and its custom tooltip.
+	The default is `-16`; here a larger negative offset lifts the tooltip further above the data point it labels.
+-->
+<Story name="With tooltipOffset">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			spec={{
+				x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+				marks: [
+					Plot.gridX({ interval: '2 years' }),
+					Plot.gridY(),
+					Plot.axisX({ label: 'Year', interval: '1 year' }),
+					Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+					Plot.ruleY([0]),
+					Plot.line(chartData, {
+						x: 'Month',
+						y: 'Value',
+						render: registerTooltip(tooltipStore, 'Path')
+					})
+				]
+			}}
+			data={chartData}
+			{tooltipStore}
+			tooltipOffset={-48}
+		>
+			{#snippet tooltip()}
+				<DemoTooltip />
+			{/snippet}
+		</ObservablePlot>
+	{/snippet}
+</Story>
+
+<!--
+	Setting `applyDefaults={false}` skips the ldn-viz default styling, using Observable Plot's defaults instead.
+-->
+<Story name="applyDefaults false">
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData} applyDefaults={false} />
 	{/snippet}
 </Story>
