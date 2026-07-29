@@ -8,9 +8,9 @@
 	 * `ChromeActions`) but are distinct components so they can nest — a
 	 * `ChartContainer` can sit inside a `Card`.
 	 *
-	 * Title dominance follows the primary-slot rule: the card title is dominant
-	 * when it owns the primary slot, and demotes to an eyebrow
-	 * (`treatment="demoted"`) when a titled element inside owns it.
+	 * Title emphasis follows the primary-slot rule: the card title is `primary`
+	 * when it owns the primary slot, and steps down to an eyebrow
+	 * (`emphasis="secondary"`) when a titled element inside owns it.
 	 *
 	 * Surface construction (border, padding, shadow) lives on the card. Corner
 	 * radius matches the design source (square) and can be overridden via `class`.
@@ -26,7 +26,7 @@
 		title?: string;
 		subtitle?: string;
 		eyebrow?: string;
-		treatment?: 'dominant' | 'demoted';
+		emphasis?: 'primary' | 'secondary';
 		/** Hint affordance in the header (string → info icon + tooltip, or a snippet). */
 		hint?: string | Snippet;
 		/** Footnotes shown in the actions row. */
@@ -43,7 +43,7 @@
 		title = '',
 		subtitle = '',
 		eyebrow = '',
-		treatment = 'dominant',
+		emphasis = 'primary',
 		hint,
 		byline = '',
 		source = '',
@@ -62,7 +62,7 @@
 		classes
 	)}
 >
-	<ChromeHeader {title} {subtitle} {eyebrow} {treatment} {hint} />
+	<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} />
 	{#if children}
 		<div class="min-w-0">{@render children()}</div>
 	{/if}

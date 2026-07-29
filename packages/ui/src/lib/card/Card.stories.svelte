@@ -13,7 +13,7 @@
 		component: Card,
 		tags: ['autodocs'],
 		argTypes: {
-			treatment: { control: 'select', options: ['dominant', 'demoted'] }
+			emphasis: { control: 'select', options: ['primary', 'secondary'] }
 		}
 	});
 </script>
@@ -53,8 +53,8 @@
 </Story>
 
 <Story
-	name="Demoted title"
-	args={{ treatment: 'demoted', title: 'Section label' }}
+	name="Secondary emphasis (demoted title)"
+	args={{ emphasis: 'secondary', title: 'Section label' }}
 >
 	{#snippet template(args)}
 		<div class="max-w-xl">
