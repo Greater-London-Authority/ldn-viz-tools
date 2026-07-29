@@ -22,7 +22,7 @@
 		"build": "vite build",
 		"format": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --write .",
 		"lint": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore  --check . && eslint .",
-		"test": "echo no tests",
+		"test": "npm run test:unit",
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
