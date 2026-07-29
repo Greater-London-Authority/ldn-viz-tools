@@ -28,18 +28,18 @@
 		note = '',
 		description,
 		actions,
-		class: klass = ''
+		class: classes = ''
 	}: Props = $props();
 
 	let hasFootnotes = $derived(!!(byline || source || note || description));
 </script>
 
 {#if hasFootnotes || actions}
-	<div class={classNames('flex w-full flex-wrap items-end justify-between gap-2', klass)}>
+	<div class={classNames('flex w-full flex-wrap items-end justify-between gap-2', classes)}>
 		{#if hasFootnotes}
 			<!-- eslint-disable svelte/no-at-html-tags -->
 			<ul
-				class="product mr-4 flex min-w-40 max-w-xl flex-col gap-1 caption text-color-text-muted [&_a:hover]:text-color-interactive-primary-hover [&_a:hover]:no-underline [&_a]:underline"
+				class="product caption mr-4 flex min-w-40 max-w-xl flex-col gap-1 text-color-text-muted [&_a:hover]:text-color-interactive-primary-hover [&_a:hover]:no-underline [&_a]:underline"
 			>
 				{#if byline}<li>{@html byline}</li>{/if}
 				{#if source}<li><span class="mr-1 font-bold">Source:</span>{@html source}</li>{/if}

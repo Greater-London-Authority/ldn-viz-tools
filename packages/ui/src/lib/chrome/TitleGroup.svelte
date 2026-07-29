@@ -33,14 +33,14 @@
 		subtitle = '',
 		eyebrow = '',
 		treatment = 'dominant',
-		class: klass = ''
+		class: classes = ''
 	}: Props = $props();
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->
 {#if treatment === 'demoted'}
 	{#if title}
-		<p class={classNames('eyebrow text-color-text-muted', klass)}>{@html title}</p>
+		<p class={classNames('eyebrow text-color-text-muted', classes)}>{@html title}</p>
 	{/if}
 {:else}
 	<!--
@@ -48,7 +48,7 @@
 		(flow.cjs) don't cover the bare product `.title` role, so the cluster spaces
 		itself rather than relying on a flow context.
 	-->
-	<div class={classNames('flex flex-col gap-1', klass)}>
+	<div class={classNames('flex flex-col gap-1', classes)}>
 		{#if eyebrow}
 			<p class="eyebrow text-color-text-muted">{@html eyebrow}</p>
 		{/if}

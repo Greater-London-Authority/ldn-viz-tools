@@ -50,7 +50,7 @@
 		note = '',
 		actions,
 		children,
-		class: klass = ''
+		class: classes = ''
 	}: Props = $props();
 
 	let hasActions = $derived(!!(actions || byline || source || note));
@@ -59,7 +59,7 @@
 <div
 	class={classNames(
 		'product flex flex-col gap-2 border border-color-border-muted bg-color-surface p-4 text-color-text shadow-sm',
-		klass
+		classes
 	)}
 >
 	<ChromeHeader {title} {subtitle} {eyebrow} {treatment} {hint} />

@@ -31,12 +31,12 @@
 		eyebrow = '',
 		treatment = 'dominant',
 		hint,
-		class: klass = ''
+		class: classes = ''
 	}: Props = $props();
 </script>
 
 {#if title || subtitle || eyebrow || hint}
-	<div class={classNames('flex items-start justify-between gap-2', klass)}>
+	<div class={classNames('flex items-start justify-between gap-2', classes)}>
 		<TitleGroup {title} {subtitle} {eyebrow} {treatment} />
 		{#if hint}
 			<div class="shrink-0 pt-0.5">
