@@ -183,6 +183,8 @@
 
 {#if errorMessage}
 	<Modal bind:open={errorModalOpen}>
+		{#snippet trigger()}{/snippet}
+
 		{#snippet title()}
 			Unable to find location.
 		{/snippet}
