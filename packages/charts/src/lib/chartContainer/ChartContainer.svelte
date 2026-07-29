@@ -1,15 +1,18 @@
 <script lang="ts">
 	/**
-	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls such as data/image download buttons.
+	 * The `ChartContainer` is a wrapper around a plot that adds a title, subtitle, footnotes and
+	 * export controls.
 	 *
-	 * **Note**: You must provide a `chartDescription` for accessibility.
+	 * **Accessibility**: always provide `alt` — a short text alternative naming what the chart shows.
+	 * `description` (a longer account of the data/trends) is optional but recommended; when given it
+	 * is exposed to **both** audiences from one source — screen readers (a visually-hidden copy wired
+	 * via `aria-describedby`) and sighted users (a "View description" Modal in the footer).
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 * 	@component
 	 */
 
-	import { Button, ChromeActions, ChromeHeader, ExportButtons, Modal, classNames } from '@ldn-viz/ui';
+	import { Button, ChromeFooter, ChromeHeader, ExportButtons, Modal, classNames } from '@ldn-viz/ui';
 
 	/** Controls whether the chart-description Modal is open. */
 	let descriptionOpen = $state(false);
@@ -94,13 +97,18 @@
 		 */
 		alignMultiple?: boolean;
 		/**
-		 * Description of the chart for use in a modal for sighted users.
+		 * A longer description of the chart (data, trends). Optional but recommended. When provided
+		 * it is exposed to screen readers (visually hidden, `aria-describedby`) and to sighted users
+		 * via a "View description" Modal in the footer. Accepts a string or a snippet.
+		 */
+		description?: string | import('svelte').Snippet;
+		/**
+		 * @deprecated Renamed to `description`. Retained as an alias for one release.
 		 */
 		chartDescription?: string;
 		controls?: import('svelte').Snippet;
 		legend?: import('svelte').Snippet;
 		children?: import('svelte').Snippet;
-		description?: import('svelte').Snippet;
 
 		/**
 		 * Optional id to apply to the chart container div.
@@ -134,11 +142,11 @@
 		overrideClass = '',
 		chartWidth = 'w-full',
 		alignMultiple = false,
+		description = undefined,
 		chartDescription = '',
 		controls,
 		legend,
 		children,
-		description,
 		id = 'captureElement',
 		columnMapping = undefined
 	}: Props = $props();
@@ -155,8 +163,12 @@
 
 	// `subtitle` is the current name; `subTitle` is a deprecated alias kept for one release.
 	let resolvedSubtitle = $derived(subtitle || subTitle);
+	// `description` is the current name; `chartDescription` (string) is a deprecated alias.
+	let resolvedDescription = $derived(description || chartDescription || undefined);
+	let hasDescription = $derived(!!resolvedDescription);
+	let descriptionIsString = $derived(typeof resolvedDescription === 'string');
 	let hasActions = $derived(
-		!!(source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton)
+		!!(source || byline || note || hasDescription || dataDownloadButton || imageDownloadButton)
 	);
 </script>
 
@@ -178,20 +190,28 @@
 	{@render legend?.()}
 
 	<!-- Visualisation goes here -->
-	<div class={chartClass} bind:this={chartToCapture}>
+	<div
+		class={chartClass}
+		bind:this={chartToCapture}
+		aria-describedby={hasDescription ? `${id}-description` : undefined}
+	>
 		{@render children?.()}
 	</div>
 
-	<!-- long description for screen readers -->
-	{@render description?.()}
+	<!-- long description, visually hidden — the screen-reader copy referenced by aria-describedby -->
+	{#if hasDescription}
+		<div id="{id}-description" class="sr-only">
+			{@render descriptionBody()}
+		</div>
+	{/if}
 
 	{#if hasActions}
 		<div class="mt-2">
-			<ChromeActions
+			<ChromeFooter
 				{source}
 				{byline}
 				{note}
-				description={chartDescription ? descriptionTrigger : undefined}
+				footnoteExtra={hasDescription ? descriptionTrigger : undefined}
 				actions={exportBtns}
 			/>
 		</div>
@@ -207,6 +227,14 @@
 		{imageDownloadButton}
 		{columnMapping}
 	/>
+{/snippet}
+
+{#snippet descriptionBody()}
+	{#if descriptionIsString}
+		{resolvedDescription}
+	{:else if resolvedDescription}
+		{@render (resolvedDescription as import('svelte').Snippet)()}
+	{/if}
 {/snippet}
 
 {#snippet descriptionTrigger()}
@@ -228,7 +256,7 @@
 		{/snippet}
 
 		{#snippet description()}
-			{chartDescription}
+			{@render descriptionBody()}
 		{/snippet}
 	</Modal>
 {/snippet}

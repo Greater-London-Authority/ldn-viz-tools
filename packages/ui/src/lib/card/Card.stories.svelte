@@ -4,7 +4,7 @@
 
 	/**
 	 * The `Card` is a titled container composing a `ChromeHeader` (a `TitleGroup`
-	 * plus an optional hint) above a content slot, and an optional `ChromeActions`
+	 * plus an optional hint) above the content, and an optional `ChromeFooter`
 	 * row (footnotes + actions) below. `Card` and `ChartContainer` share the same
 	 * chrome pieces, so they read and construct identically across surfaces.
 	 */

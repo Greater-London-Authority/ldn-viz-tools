@@ -1,10 +1,10 @@
 <script lang="ts">
 	/**
-	 * @deprecated Compose `ChromeActions` (from `@ldn-viz/ui`) directly instead.
+	 * @deprecated Compose `ChromeFooter` (from `@ldn-viz/ui`) directly instead.
 	 * `ChartContainer` and `TableContainer` no longer use this wrapper; it collides
 	 * in name with the page-level `Footer` and is retained only for one release.
 	 *
-	 * The chart `Footer` composes the shared `ChromeActions` row — footnotes
+	 * The chart `Footer` composes the shared `ChromeFooter` row — footnotes
 	 * (byline / source / note) plus an optional "View description" modal trigger on
 	 * the left, and the export buttons on the right.
 	 */

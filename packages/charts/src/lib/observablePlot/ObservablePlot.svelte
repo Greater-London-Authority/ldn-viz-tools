@@ -154,7 +154,7 @@
 		{...rest}
 		chartHeight="h-fit"
 		{chartWidth}
-		{chartDescription}
+		description={chartDescription}
 		{columnMapping}
 		{id}
 	>
@@ -176,12 +176,6 @@
 				{@render tooltip_render?.()}
 			{/snippet}
 		</ObservablePlotInner>
-
-		{#snippet description()}
-			<p class="sr-only" id="{id}-description">
-				{chartDescription}
-			</p>
-		{/snippet}
 	</ChartContainer>
 {/key}
 

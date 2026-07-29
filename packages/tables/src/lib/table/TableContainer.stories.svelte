@@ -6,7 +6,7 @@
 
 	/**
 	 * `TableContainer` wraps a table with the shared chrome primitives — a `ChromeHeader`
-	 * (title / subtitle / optional hint) above and a `ChromeActions` row (source / byline / note
+	 * (title / subtitle / optional hint) above and a `ChromeFooter` row (source / byline / note
 	 * + data/image download buttons) below — the same pieces used by `Card` and `ChartContainer`.
 	 *
 	 * It has **no surface of its own** (no border, padding or shadow); compose it inside a `Card`
@@ -123,6 +123,35 @@
 		<TableContainer
 			title="Some famous people"
 			alt="A table of famous people and a guess of their favourite pets"
+		>
+			{#snippet table()}
+				<table class="w-full text-left text-sm text-color-text">
+					<tbody>
+						{#each data as row}
+							<tr>
+								<td class="pr-4">{row.first_name}</td>
+								<td class="pr-4">{row.last_name}</td>
+								<td>{row.pet}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			{/snippet}
+		</TableContainer>
+	{/snippet}
+</Story>
+
+<!--
+	`description` is a longer account of the table. Provided once, it is exposed to screen readers
+	(visually hidden, `aria-describedby`) and to sighted users via a "View description" link in the
+	footer that opens a Modal. `alt` remains the short text alternative.
+-->
+<Story name="With description (both audiences)">
+	{#snippet template()}
+		<TableContainer
+			title="Some famous people"
+			alt="A table of famous people and a guess of their favourite pets"
+			description="This table lists three well-known figures alongside an illustrative guess of the kind of pet they might have kept. It is placeholder data for demonstration only."
 		>
 			{#snippet table()}
 				<table class="w-full text-left text-sm text-color-text">

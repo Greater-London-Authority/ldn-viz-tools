@@ -1,11 +1,11 @@
 <script lang="ts">
 	/**
-	 * `Card` — a titled container composing a `ChromeHeader` above a content slot
-	 * and an optional `ChromeActions` row below. The `children` snippet holds the
+	 * `Card` — a titled container composing a `ChromeHeader` above the content
+	 * and an optional `ChromeFooter` row below. The `children` snippet holds the
 	 * content: a single element, or several panels arranged together.
 	 *
 	 * `Card` and `ChartContainer` share the same chrome pieces (`ChromeHeader` +
-	 * `ChromeActions`) but are distinct components so they can nest — a
+	 * `ChromeFooter`) but are distinct components so they can nest — a
 	 * `ChartContainer` can sit inside a `Card`.
 	 *
 	 * Title emphasis follows the primary-slot rule: the card title is `primary`
@@ -18,7 +18,7 @@
 	 * @component
 	 */
 	import type { Snippet } from 'svelte';
-	import ChromeActions from '../chrome/ChromeActions.svelte';
+	import ChromeFooter from '../chrome/ChromeFooter.svelte';
 	import ChromeHeader from '../chrome/ChromeHeader.svelte';
 	import { classNames } from '../utils/classNames.js';
 
@@ -73,6 +73,6 @@
 		<div class="min-w-0">{@render children()}</div>
 	{/if}
 	{#if hasActions}
-		<ChromeActions {byline} {source} {note} {actions} />
+		<ChromeFooter {byline} {source} {note} {actions} />
 	{/if}
 </div>

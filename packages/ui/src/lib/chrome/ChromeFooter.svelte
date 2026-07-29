@@ -1,10 +1,11 @@
 <script lang="ts">
 	/**
-	 * `ChromeActions` — the actions/footnotes row shared by `Card` and
-	 * `ChartContainer`. Footnotes (byline / source / note, plus an optional
-	 * `description` snippet, e.g. a "View description" trigger) sit on the left; an
-	 * `actions` snippet (e.g. download buttons) sits on the right, justified apart
-	 * and bottom-aligned. Renders nothing when it has neither footnotes nor actions.
+	 * `ChromeFooter` — the footer row shared by `Card`, `ChartContainer` and
+	 * `TableContainer`; the positional counterpart to `ChromeHeader`. Footnotes
+	 * (byline / source / note, plus an optional `footnoteExtra` snippet — e.g. a
+	 * "View description" trigger) sit on the left; an `actions` snippet (e.g. export
+	 * buttons) sits on the right, justified apart and bottom-aligned. Renders nothing
+	 * when it has neither footnotes nor actions.
 	 *
 	 * @component
 	 */
@@ -15,7 +16,9 @@
 		byline?: string;
 		source?: string;
 		note?: string;
-		/** Extra footnote content, appended to the footnotes list (e.g. a description trigger). */
+		/** Extra footnote content, appended to the footnotes list (e.g. a "View description" trigger). */
+		footnoteExtra?: Snippet;
+		/** @deprecated Renamed to `footnoteExtra`. Retained as an alias for one release. */
 		description?: Snippet;
 		/** Right-aligned actions (e.g. download buttons). */
 		actions?: Snippet;
@@ -26,12 +29,15 @@
 		byline = '',
 		source = '',
 		note = '',
+		footnoteExtra,
 		description,
 		actions,
 		class: classes = ''
 	}: Props = $props();
 
-	let hasFootnotes = $derived(!!(byline || source || note || description));
+	// `footnoteExtra` is the current name; `description` is a deprecated alias.
+	let extra = $derived(footnoteExtra ?? description);
+	let hasFootnotes = $derived(!!(byline || source || note || extra));
 </script>
 
 {#if hasFootnotes || actions}
@@ -44,7 +50,7 @@
 				{#if byline}<li>{@html byline}</li>{/if}
 				{#if source}<li><span class="mr-1 font-bold">Source:</span>{@html source}</li>{/if}
 				{#if note}<li><span class="mr-1 font-bold">Note:</span>{@html note}</li>{/if}
-				{@render description?.()}
+				{@render extra?.()}
 			</ul>
 			<!-- eslint-enable svelte/no-at-html-tags -->
 		{/if}

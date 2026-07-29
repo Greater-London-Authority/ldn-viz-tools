@@ -6,10 +6,12 @@
 	import { Card, Select } from '@ldn-viz/ui';
 
 	/**
-	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls such as data/image download buttons.
+	 * The `ChartContainer` is a wrapper around a plot that adds a title, subtitle, footnotes and
+	 * export controls.
 	 *
-	 * **Note**: You must provide a `chartDescription` for accessibility.
+	 * **Accessibility**: always provide `alt` (a short text alternative). `description` (a longer
+	 * account) is optional but recommended and, when given, is exposed to both screen readers
+	 * (`aria-describedby`) and sighted users (a "View description" Modal).
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 */
@@ -32,7 +34,7 @@
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -45,7 +47,7 @@
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -59,7 +61,7 @@
 			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -78,7 +80,7 @@
 			title="This is the Chart Title"
 			subtitle="Subtitle provides extra context"
 			hint="These figures are illustrative placeholder data, not a real series."
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -92,7 +94,7 @@
 			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{#snippet controls()}
@@ -118,7 +120,7 @@
 			id="MySpecialChartContainer"
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -138,7 +140,7 @@
 			dataDownloadButton={['JSON', 'CSV']}
 			data={[]}
 			imageDownloadButton
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -157,7 +159,7 @@
 			dataDownloadButton={['JSON', 'CSV']}
 			data={[]}
 			imageDownloadButton
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -183,7 +185,7 @@
 			dataDownloadButton={['JSON', 'CSV']}
 			data={[]}
 			imageDownloadButton={['PNG']}
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -242,7 +244,7 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{#snippet legend()}
@@ -279,7 +281,7 @@ It can also be used to add liks.
 			dataDownloadButton={['JSON', 'CSV']}
 			data={[]}
 			imageDownloadButton
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -299,7 +301,7 @@ It can also be used to add liks.
 			dataDownloadButton={['JSON', 'CSV']}
 			data={[]}
 			imageDownloadButton
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 			id="MyCustomChart"
 		>
@@ -319,7 +321,7 @@ It can also be used to add liks.
 			chartHeight="h-96"
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -338,7 +340,7 @@ It can also be used to add liks.
 			chartWidth="w-1/2"
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -355,7 +357,7 @@ It can also be used to add liks.
 			{...args}
 			dataDownloadButton={false}
 			imageDownloadButton={false}
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -377,7 +379,7 @@ It can also be used to add liks.
 			note="Be aware that you can provide a note if required"
 			dataDownloadButton={false}
 			imageDownloadButton={false}
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -404,7 +406,7 @@ It can also be used to add liks.
 			filename="my-custom-chart-data"
 			dataDownloadButton={['CSV', 'JSON']}
 			imageDownloadButton
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
 			{@render placeholderChart()}
@@ -413,29 +415,24 @@ It can also be used to add liks.
 </Story>
 
 <!--
-	The `description` snippet renders a long, screen-reader-only description below the chart body.
-	It is  visually hidden with the `sr-only` class.
-	It is distinct from `chartDescription` (which appears in a modal for sighted users).
+	`description` may also be a snippet, for rich content. The container still handles the a11y
+	wiring: the snippet is rendered once visually hidden (referenced by `aria-describedby` for
+	screen readers) and once inside the "View description" Modal for sighted users — you do not
+	add your own `sr-only` wrapper.
 -->
-<Story name="sr-only description snippet">
+<Story name="Description as a snippet">
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			alt="Simple description of type of chart"
 		>
-			<div
-				class="flex h-full w-full items-center justify-center bg-color-container-level-1 text-color-text-muted"
-			>
-				Chart body content goes here
-			</div>
+			{@render placeholderChart()}
 
 			{#snippet description()}
-				<p class="sr-only">
-					This visually hidden description is read by screen readers to describe the chart in
-					detail.
-				</p>
+				This chart shows an <strong>illustrative upward trend</strong> across the period; values are
+				placeholder data.
 			{/snippet}
 		</ChartContainer>
 	{/snippet}
@@ -453,7 +450,7 @@ It can also be used to add liks.
 				<ChartContainer
 					source="GLA City Intelligence"
 					byline="Illustrative placeholder data"
-					chartDescription="A detailed description of the chart for screen-reader and sighted users."
+					description="A detailed description of the chart for screen-reader and sighted users."
 					alt="Simple description of type of chart"
 				>
 					{@render placeholderChart()}
