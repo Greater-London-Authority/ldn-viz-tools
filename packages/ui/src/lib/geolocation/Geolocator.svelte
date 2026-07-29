@@ -10,10 +10,11 @@
 	 * @component
 	 */
 
-	import { Button, Modal } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Button from '../button/Button.svelte';
 	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
+	import Modal from '../modal/Modal.svelte';
 	import TargetIcon from './TargetIcon.svelte';
 	import type {
 		GeolocationCoords,
