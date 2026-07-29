@@ -109,7 +109,8 @@ StyleDictionary.registerParser({
 
 			return output;
 		} catch (error) {
-			console.log(error);
+			console.error(error);
+			process.exit(1);
 		}
 	}
 });
@@ -566,6 +567,9 @@ console.log('\n==============================================');
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
+// N.B. we supress warnings because warnings about
+// "filtered out token references were found;"
+// are expected due to how we split output across multiple files.
 const sd = new StyleDictionary('./sd.config.json', {
 	warnings: 'disabled'
 });
