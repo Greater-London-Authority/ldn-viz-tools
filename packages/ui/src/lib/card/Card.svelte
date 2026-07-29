@@ -1,8 +1,8 @@
 <script lang="ts">
 	/**
 	 * `Card` — a titled container composing a `ChromeHeader` above a content slot
-	 * and an optional `ChromeActions` row below. The slot holds content: a single
-	 * element, or several panels arranged together.
+	 * and an optional `ChromeActions` row below. The `children` snippet holds the
+	 * content: a single element, or several panels arranged together.
 	 *
 	 * `Card` and `ChartContainer` share the same chrome pieces (`ChromeHeader` +
 	 * `ChromeActions`) but are distinct components so they can nest — a

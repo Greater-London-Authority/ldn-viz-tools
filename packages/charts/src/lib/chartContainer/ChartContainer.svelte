@@ -9,8 +9,7 @@
 	 * 	@component
 	 */
 
-	import { Button, ChromeActions, ChromeHeader, Modal, classNames } from '@ldn-viz/ui';
-	import ExportBtns from './ExportBtns.svelte';
+	import { Button, ChromeActions, ChromeHeader, ExportButtons, Modal, classNames } from '@ldn-viz/ui';
 
 	/** Controls whether the chart-description Modal is open. */
 	let descriptionOpen = $state(false);
@@ -175,7 +174,7 @@
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 	{@render controls?.()}
 
-	<!-- separate slot for legend, so that main chart can be aligned if legends wrap over different number of lines-->
+	<!-- separate snippet for the legend, so the main chart can be aligned if legends wrap over a different number of lines-->
 	{@render legend?.()}
 
 	<!-- Visualisation goes here -->
@@ -200,8 +199,8 @@
 </div>
 
 {#snippet exportBtns()}
-	<ExportBtns
-		{chartToCapture}
+	<ExportButtons
+		elementToCapture={chartToCapture}
 		{filename}
 		dataForDownload={data}
 		{dataDownloadButton}

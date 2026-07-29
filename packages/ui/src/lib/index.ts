@@ -26,6 +26,7 @@ export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOr
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
 export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
+export { default as ExportButtons } from './exportButtons/ExportButtons.svelte';
 export { default as Flag } from './flag/Flag.svelte';
 export { default as Footer } from './footer/Footer.svelte';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';

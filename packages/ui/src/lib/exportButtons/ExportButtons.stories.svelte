@@ -1,16 +1,17 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	import ExportBtns from './ExportBtns.svelte';
+	import ExportButtons from './ExportButtons.svelte';
 
 	/**
-	 * The `ExportBtns` component renders the Image and data download buttons shown in a chart footer.
+	 * `ExportButtons` renders the data- and image-download buttons used in a container's actions row.
 	 *
-	 * It is normally used indirectly via the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation).
+	 * It composes `DataDownloadButton` and `ImageDownloadButton`, so it is shared across `Card`,
+	 * `ChartContainer` and `TableContainer`. It is normally used indirectly via those containers.
 	 */
 	const { Story } = defineMeta({
-		title: 'Charts/Components/ChartContainer/ExportBtns',
-		component: ExportBtns,
+		title: 'Ui/ExportButtons',
+		component: ExportButtons,
 		tags: ['autodocs']
 	});
 </script>
@@ -37,8 +38,8 @@
 		<div bind:this={bothNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={bothNode}
+		<ExportButtons
+			elementToCapture={bothNode}
 			dataForDownload={demoData}
 			dataDownloadButton={true}
 			imageDownloadButton={false}
@@ -51,8 +52,8 @@
 		<div bind:this={bothNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={bothNode}
+		<ExportButtons
+			elementToCapture={bothNode}
 			dataForDownload={demoData}
 			dataDownloadButton={false}
 			imageDownloadButton={true}
@@ -69,8 +70,8 @@
 		<div bind:this={bothNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={bothNode}
+		<ExportButtons
+			elementToCapture={bothNode}
 			dataForDownload={demoData}
 			dataDownloadButton={true}
 			imageDownloadButton={true}
@@ -79,7 +80,7 @@
 </Story>
 
 <!--
-	Here the data format is restricted to CSV and the image	format is restricted to PNG. 
+	Here the data format is restricted to CSV and the image	format is restricted to PNG.
 	As there is only a single format, the buttons render as a normal button (rather than a [MultipleActionButton](./?path=/docs/docs/ui-components-buttons-multipleactionbutton--documentation)).
 -->
 <Story name="Restricted choice of formats">
@@ -87,8 +88,8 @@
 		<div bind:this={restrictedNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={restrictedNode}
+		<ExportButtons
+			elementToCapture={restrictedNode}
 			dataForDownload={demoData}
 			dataDownloadButton={['CSV']}
 			imageDownloadButton={['PNG']}
@@ -106,8 +107,8 @@
 		<div bind:this={noDataNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={noDataNode}
+		<ExportButtons
+			elementToCapture={noDataNode}
 			dataForDownload={undefined}
 			dataDownloadButton={true}
 			imageDownloadButton={true}

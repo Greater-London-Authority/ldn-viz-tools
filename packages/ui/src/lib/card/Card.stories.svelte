@@ -20,8 +20,8 @@
 
 {#snippet body()}
 	<p class="body text-color-text-muted">
-		Maecenas ut libero vel nibh maximus feugiat non sed tortor. Card content sits in the slot
-		between the header and actions.
+		Maecenas ut libero vel nibh maximus feugiat non sed tortor. Card content sits between the
+		header and the actions row.
 	</p>
 {/snippet}
 
@@ -77,7 +77,7 @@
 			<Card {...args}>
 				{@render body()}
 				{#snippet actions()}
-					<span class="label text-color-text-muted">actions slot</span>
+					<span class="label text-color-text-muted">actions snippet</span>
 				{/snippet}
 			</Card>
 		</div>

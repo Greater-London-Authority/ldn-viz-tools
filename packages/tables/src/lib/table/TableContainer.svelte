@@ -19,8 +19,7 @@
 	 * 	@component
 	 */
 
-	import { ExportBtns } from '@ldn-viz/charts';
-	import { ChromeActions, ChromeHeader, classNames } from '@ldn-viz/ui';
+	import { ChromeActions, ChromeHeader, ExportButtons, classNames } from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
 
 	// export let title: string | null = null;
@@ -179,8 +178,8 @@
 
 {#snippet exportBtns()}
 	{#if tableToCapture}
-		<ExportBtns
-			chartToCapture={tableToCapture}
+		<ExportButtons
+			elementToCapture={tableToCapture}
 			{columnMapping}
 			dataForDownload={data}
 			{dataDownloadButton}

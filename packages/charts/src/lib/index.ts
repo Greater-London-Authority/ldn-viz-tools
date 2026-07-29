@@ -1,5 +1,7 @@
 export { default as ChartContainer } from './chartContainer/ChartContainer.svelte';
-export { default as ExportBtns } from './chartContainer/ExportBtns.svelte';
+// `ExportButtons` now lives in @ldn-viz/ui. Re-exported here (incl. the deprecated
+// `ExportBtns` name) so existing `@ldn-viz/charts` imports keep working for one release.
+export { ExportButtons, ExportButtons as ExportBtns } from '@ldn-viz/ui';
 export { default as Footer } from './chartContainer/Footer.svelte';
 export { default as SubTitle } from './chartContainer/SubTitle.svelte';
 export { default as Title } from './chartContainer/Title.svelte';

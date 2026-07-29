@@ -17,7 +17,7 @@
 </script>
 
 <script lang="ts">
-	import ExportBtns from './ExportBtns.svelte';
+	import { ExportButtons } from '@ldn-viz/ui';
 
 	const demoData = [
 		{ Month: '2015-01-01', Value: 53623.9 },
@@ -47,8 +47,8 @@
 			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 		>
 			{#snippet exportBtns()}
-				<ExportBtns
-					chartToCapture={footnotesNode}
+				<ExportButtons
+					elementToCapture={footnotesNode}
 					dataForDownload={demoData}
 					dataDownloadButton={true}
 					imageDownloadButton={true}
@@ -80,8 +80,8 @@
 		</div>
 		<Footer {...args}>
 			{#snippet exportBtns()}
-				<ExportBtns
-					chartToCapture={buttonsOnlyNode}
+				<ExportButtons
+					elementToCapture={buttonsOnlyNode}
 					dataForDownload={demoData}
 					dataDownloadButton={true}
 					imageDownloadButton={true}
