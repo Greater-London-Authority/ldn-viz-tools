@@ -82,8 +82,6 @@
 
 	let selectedTabId = $state('markers');
 
-	let setOpenState = $state();
-
 	let sidebarState = $state();
 
 	// Snippets for stories. Defaults defined as args, overridden per story as needed
@@ -226,7 +224,7 @@
 <Story name="Light Theme with Tabs" args={{ theme: 'light', tabs }} />
 
 {#snippet unstyledContent()}
-	<div class="bg-color-ui-background-notice p-4 text-color-text-primary">
+	<div class="bg-color-surface-accent p-4 text-color-text">
 		<p class="text-bold mb-2 text-xl">Unstyled Content</p>
 		<p class="mb-2">
 			This content does not inherit styles directly from the sidebar. Though it will be affected by
@@ -255,4 +253,16 @@
 
 <Story name="With custom trigger icon" args={{ icon }} />
 
-<Story name="With custom classes" args={{ class: '[&_*]:!bg-color-ui-primary !pb-0' }} />
+<Story name="With custom classes" args={{ class: '[&_*]:!bg-color-surface-accent !pb-0' }} />
+
+<!--
+The sidebar starts collapsed: only the toggle button (or tab strip) is shown until it is opened.
+This documents the primary collapsed appearance, which every other story opens out of.
+-->
+<Story name="Collapsed (closed) state" />
+
+<!--
+Combines `width='wide'`, `placement='right'` and `tabs`, exercising the
+right + wide + tabs entry of the width/height lookup matrix.
+-->
+<Story name="Right placement with wide tabs" args={{ placement: 'right', width: 'wide', tabs }} />

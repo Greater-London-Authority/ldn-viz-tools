@@ -70,7 +70,7 @@
 					bind:selectedId
 					{name}
 					icon={option.icon}
-					rawIcon={option.rawIcon}
+					RawIcon={option.rawIcon}
 					iconPlacement={option.iconPlacement}
 				/>
 			{/each}

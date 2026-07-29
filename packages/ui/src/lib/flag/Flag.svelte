@@ -32,12 +32,12 @@
 	}: Props = $props();
 
 	const colorClass: Record<FlagCondition, string> = {
-		alpha: 'bg-color-ui-alpha',
-		beta: 'bg-color-ui-beta',
-		alert: 'bg-color-ui-negative',
-		warning: 'bg-color-ui-caution',
-		positive: 'bg-color-ui-positive',
-		notice: 'bg-color-ui-notice'
+		alpha: 'bg-color-surface-alpha',
+		beta: 'bg-color-surface-beta',
+		alert: 'bg-color-surface-negative',
+		warning: 'bg-color-surface-caution',
+		positive: 'bg-color-surface-positive',
+		notice: 'bg-color-surface-accent'
 	};
 
 	const defaultMessage = {

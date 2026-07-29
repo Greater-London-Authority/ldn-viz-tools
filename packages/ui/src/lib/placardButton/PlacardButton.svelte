@@ -59,16 +59,16 @@
 	let textColor = $derived(
 		colorWithBestContrast(
 			bgColor,
-			theme.tokenNameToValue('text.primary'),
-			theme.tokenNameToValue('text.inverse.primary')
+			theme.tokenNameToValue('text'),
+			theme.tokenNameToValue('inverse.text')
 		)
 	);
 
 	let ctaTextColor = $derived(
 		colorWithBestContrast(
 			ctaColorHover,
-			theme.tokenNameToValue('text.primary'),
-			theme.tokenNameToValue('text.inverse.primary')
+			theme.tokenNameToValue('text'),
+			theme.tokenNameToValue('inverse.text')
 		)
 	);
 

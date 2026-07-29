@@ -77,7 +77,7 @@
 		let classes = keylineLookup[placement];
 		if (tabs) {
 			if (placement === 'left') {
-				classes = `border-r border-color-ui-border-secondary`;
+				classes = `border-r border-color-border-muted`;
 			} else {
 				classes = `!border-0`;
 			}
@@ -91,7 +91,7 @@
 	{#if tabs.length}
 		<div
 			class={classNames(
-				'absolute bg-color-container-level-0',
+				'absolute bg-color-container',
 				tabPlacementClasses,
 				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
 			)}
@@ -137,7 +137,7 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text-primary">
+					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text">
 						{#if header}
 							<div class="pb-4">
 								<!-- typically contains a `<SidebarHeader>` -->

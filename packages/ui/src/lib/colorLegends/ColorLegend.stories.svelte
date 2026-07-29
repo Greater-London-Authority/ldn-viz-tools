@@ -38,6 +38,10 @@
 
 	import Button from '../button/Button.svelte';
 
+	/**
+	 * The `<ColorLegend>` component draws a legend for a D3 color scale.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Legends/ColorLegend',
 		component: ColorLegend,
@@ -208,6 +212,22 @@
 	{/snippet}
 </Story>
 
+<Story name="Ordinal scale - highlighed value">
+	{#snippet template()}
+		<div class="max-w-[400px]">
+			<ColorLegend
+				color={scaleOrdinal(
+					['<10', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '≥80'],
+					schemeSpectral[10]
+				)}
+				title="Age (years)"
+				tickSize={0}
+				highlightedValue="40-49"
+			/>
+		</div>
+	{/snippet}
+</Story>
+
 <!-- new stories, not in observable notebook -->
 
 <Story name="Color bands">
@@ -280,5 +300,34 @@
 				<ColorLegend color={randomThresholdScale} title="Threshold" tickFormat=".2f" />
 			</div>
 		{/if}
+	{/snippet}
+</Story>
+
+<!-- tickFormat can be a function rather than a d3-format string. -->
+<Story name="tickFormat as a function">
+	{#snippet template()}
+		<div class="max-w-[400px]">
+			<ColorLegend
+				color={scaleSequential([0, 100], interpolateViridis)}
+				title="Temperature (°F)"
+				tickFormat={(d: number) => {
+					console.log(d);
+					return `${d}°`;
+				}}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- tickValues sets explicit tick positions instead of letting d3 choose them. -->
+<Story name="Custom tickValues">
+	{#snippet template()}
+		<div class="max-w-[400px]">
+			<ColorLegend
+				color={scaleSequential([0, 100], interpolateViridis)}
+				title="Temperature (°F)"
+				tickValues={[0, 21, 42, 63, 84, 100]}
+			/>
+		</div>
 	{/snippet}
 </Story>

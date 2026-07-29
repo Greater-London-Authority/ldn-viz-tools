@@ -9,6 +9,7 @@
 	 *
 	 * In cases where the user prefers reduced motion, the `<Spinner>` is replaced with
 	 * a clock icon.
+	 *
 	 */
 
 	const { Story } = defineMeta({
@@ -28,5 +29,29 @@
 <Story name="Prefers reduced motion">
 	{#snippet template(args)}
 		<LoadingIndicator {...args} class="h-10 w-10" />
+	{/snippet}
+</Story>
+
+<!-- Use `arcColorClass` to customise the colour of the spinner's arc. -->
+<Story name="Custom arc colour">
+	{#snippet template(args)}
+		<LoadingIndicator {...args} arcColorClass="stroke-color-static-gla-pink" class="h-10 w-10  " />
+	{/snippet}
+</Story>
+
+<!-- The `title` prop sets the accessible label announced to screen readers (and applied to the clock fallback). -->
+<Story name="Custom title">
+	{#snippet template(args)}
+		<LoadingIndicator {...args} title="Fetching results" class="h-10 w-10" />
+	{/snippet}
+</Story>
+
+<Story name="Size variations">
+	{#snippet template(args)}
+		<div class="flex items-center gap-4">
+			<LoadingIndicator {...args} class="h-4 w-4" />
+			<LoadingIndicator {...args} class="h-10 w-10" />
+			<LoadingIndicator {...args} class="h-20 w-20" />
+		</div>
 	{/snippet}
 </Story>

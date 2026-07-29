@@ -10,10 +10,11 @@
 	 * @component
 	 */
 
-	import { Button, Modal } from '@ldn-viz/ui';
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Button from '../button/Button.svelte';
 	import LoadingIndicator from '../loadingIndicator/LoadingIndicator.svelte';
+	import Modal from '../modal/Modal.svelte';
 	import TargetIcon from './TargetIcon.svelte';
 	import type {
 		GeolocationCoords,
@@ -161,7 +162,7 @@
 			role="search"
 			aria-label="Clear location"
 			onclick={clearSearch}
-			class="dark:border dark:border-color-ui-border-primary"
+			class="dark:border dark:border-color-border"
 		>
 			<Icon src={XMark} class="p-0.25 h-8 w-8" />
 		</Button>
@@ -173,7 +174,7 @@
 			role="search"
 			aria-label={errorMessage ? errorMessage : 'Find my location'}
 			onclick={startSearch}
-			class="dark:border dark:border-color-ui-border-primary"
+			class="dark:border dark:border-color-border"
 		>
 			<TargetIcon title={errorMessage ? errorMessage : 'Find my location'} class="h-8 w-8 p-0.5" />
 		</Button>
@@ -182,6 +183,8 @@
 
 {#if errorMessage}
 	<Modal bind:open={errorModalOpen}>
+		{#snippet trigger()}{/snippet}
+
 		{#snippet title()}
 			Unable to find location.
 		{/snippet}

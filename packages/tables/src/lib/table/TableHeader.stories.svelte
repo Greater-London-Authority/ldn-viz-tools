@@ -1,8 +1,20 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import TableHeader from './TableHeader.svelte';
 
+	/**
+	 * The `TableHeader` component renders the header above the table body.
+	 * There are several tracks that may be included, depending on the table specification and the props provided to the `Table` component:
+	 * * A horizontal rule delimiting the top of the header(if `showHeaderTopRule` is `true` in the spec)
+	 * * Labels for column groups (if these are defined in the `colGroups` section of the spec)
+	 * * The headings for each column (determined by the value of the `label` for each entry of `column` in the spec)
+	 * * Controls for filtering and changing the visual encoding (if `showColumnControls` is `true` in the spec)
+	 * * Summaries of the values in each column (if `showColSummaries` is `true` in the spec)
+	 * * A labelled axis, if one exists for the column's cell renderer
+	 * * A horizontal rule delimiting the bottom of the header (if `colGroupGap` is set in the spec, then a gap of this size will be left between columns in different groups)
+	 * Font size is inherited from the table
+	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/TableHeader',
 		component: TableHeader,
@@ -11,8 +23,7 @@
 </script>
 
 <script lang="ts">
-	import { computeWidths } from '../core/lib/computeWidths';
-	import { TableData } from '../core/lib/dataObj';
+	import { TableState } from '../core/lib/tableState.svelte';
 	import type { TableSpec } from '../core/lib/types';
 
 	const FIXED_WIDTH = 600;
@@ -99,10 +110,10 @@
 		]
 	};
 
-	const tableBasic = new TableData(tableSpecBasic);
-	tableBasic.setData(data);
-	tableBasic.setColumnSpec(tableSpecBasic.columns);
-	computeWidths(tableBasic, FIXED_WIDTH);
+	const tableBasic = new TableState(tableSpecBasic);
+	tableBasic.rawData = data;
+	tableBasic.columnSpec = tableSpecBasic.columns;
+	tableBasic.tableWidth = FIXED_WIDTH;
 
 	/********************/
 	const tableSpecAlignment: TableSpec = {
@@ -145,10 +156,10 @@
 		]
 	};
 
-	const tableAlignment = new TableData(tableSpecAlignment);
-	tableAlignment.setData(data);
-	tableAlignment.setColumnSpec(tableSpecAlignment.columns);
-	computeWidths(tableAlignment, FIXED_WIDTH);
+	const tableAlignment = new TableState(tableSpecAlignment);
+	tableAlignment.rawData = data;
+	tableAlignment.columnSpec = tableSpecAlignment.columns;
+	tableAlignment.tableWidth = FIXED_WIDTH;
 
 	/*************/
 	const tableSpec = {
@@ -206,7 +217,7 @@
 
 			{
 				short_label: 'current',
-				label: 'Actual',
+				label: 'Current',
 
 				cell: {
 					renderer: 'PairArrow',
@@ -217,30 +228,14 @@
 
 					axisRenderer: 'PairArrowAxis'
 				}
-			},
-
-			{
-				short_label: 'percentage_change',
-				label: '% Change',
-				domainType: 'MinToMax',
-
-				cell: {
-					renderer: 'BarDivergingCell',
-					formatString: ',.0f',
-					alignText: 'right',
-					extent: [-140, +140],
-
-					axisRenderer: 'BarDivergingAxis',
-					numTicks: 5
-				}
 			}
 		]
 	};
 
-	const table = new TableData(tableSpec);
-	table.setData(data);
-	table.setColumnSpec(tableSpec.columns);
-	computeWidths(table, FIXED_WIDTH);
+	const table = new TableState(tableSpec);
+	table.rawData = data;
+	table.columnSpec = tableSpec.columns;
+	table.tableWidth = FIXED_WIDTH;
 
 	/*************************/
 
@@ -343,10 +338,10 @@
 		]
 	};
 
-	const tableColSummaries = new TableData(tableSpecColSummaries);
-	tableColSummaries.setData(data);
-	tableColSummaries.setColumnSpec(tableSpecColSummaries.columns);
-	computeWidths(tableColSummaries, FIXED_WIDTH);
+	const tableColSummaries = new TableState(tableSpecColSummaries);
+	tableColSummaries.rawData = data;
+	tableColSummaries.columnSpec = tableSpecColSummaries.columns;
+	tableColSummaries.tableWidth = FIXED_WIDTH;
 
 	/**************/
 
@@ -449,10 +444,10 @@
 		]
 	};
 
-	const tableColSummariesGroupHeadings = new TableData(tableSpecColSummariesGroupHeadings);
-	tableColSummariesGroupHeadings.setData(data);
-	tableColSummariesGroupHeadings.setColumnSpec(tableSpecColSummariesGroupHeadings.columns);
-	computeWidths(tableColSummariesGroupHeadings, FIXED_WIDTH);
+	const tableColSummariesGroupHeadings = new TableState(tableSpecColSummariesGroupHeadings);
+	tableColSummariesGroupHeadings.rawData = data;
+	tableColSummariesGroupHeadings.columnSpec = tableSpecColSummariesGroupHeadings.columns;
+	tableColSummariesGroupHeadings.tableWidth = FIXED_WIDTH;
 
 	/*********************************/
 	const tableSpecControls = {
@@ -522,10 +517,56 @@
 		]
 	};
 
-	const tableControls = new TableData(tableSpecControls);
-	tableControls.setData(data);
-	tableControls.setColumnSpec(tableSpecControls.columns);
-	computeWidths(tableControls, FIXED_WIDTH);
+	const tableControls = new TableState(tableSpecControls);
+	tableControls.rawData = data;
+	tableControls.columnSpec = tableSpecControls.columns;
+	tableControls.tableWidth = FIXED_WIDTH;
+
+	/*********************************/
+	// Leaves `showHeaderTopRule` at its default (true) and explicitly enables
+	// `showHeaderBottomRule`, so both the `border-t` and `border-b` branches render.
+	const tableSpecRules = {
+		showHeaderTopRule: true,
+		showHeaderBottomRule: true,
+
+		columns: [
+			{
+				short_label: 'metric',
+				label: 'Metric',
+
+				cell: {
+					renderer: 'TextCell'
+				}
+			},
+
+			{
+				short_label: 'previous',
+				label: 'Previous',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			},
+
+			{
+				short_label: 'current',
+				label: 'Current',
+
+				cell: {
+					renderer: 'TextCell',
+					formatString: ',.0f',
+					alignText: 'right'
+				}
+			}
+		]
+	};
+
+	const tableRules = new TableState(tableSpecRules);
+	tableRules.rawData = data;
+	tableRules.columnSpec = tableSpecRules.columns;
+	tableRules.tableWidth = FIXED_WIDTH;
 </script>
 
 <Story name="Default">
@@ -542,6 +583,20 @@
 				tableSpec={tableSpecAlignment}
 				table={tableAlignment}
 				tableWidth={FIXED_WIDTH}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Header Alignment with sorting">
+	{#snippet template()}
+		<div style:width="600px">
+			<TableHeader
+				{data}
+				tableSpec={tableSpecAlignment}
+				table={tableAlignment}
+				tableWidth={FIXED_WIDTH}
+				allowSorting={true}
 			/>
 		</div>
 	{/snippet}
@@ -603,5 +658,12 @@
 			tableWidth={FIXED_WIDTH}
 			allowSorting={true}
 		/>
+	{/snippet}
+</Story>
+
+<!-- Renders both the top rule (`border-t`) and bottom rule (`border-b`) around the header -->
+<Story name="With top and bottom rules">
+	{#snippet template()}
+		<TableHeader {data} tableSpec={tableSpecRules} table={tableRules} tableWidth={FIXED_WIDTH} />
 	{/snippet}
 </Story>

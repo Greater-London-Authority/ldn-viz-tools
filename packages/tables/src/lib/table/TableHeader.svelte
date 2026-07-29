@@ -15,6 +15,8 @@
 
 	import { classNames } from '@ldn-viz/ui';
 
+	import type { TableState } from '../core/lib/tableState.svelte';
+	import type { DataRow, TableSpec } from '../core/lib/types';
 	import AxisRow from './rows/headerRows/AxisRow.svelte';
 	import ColumnGroupHeadingRow from './rows/headerRows/ColumnGroupHeadingRow.svelte';
 	import ColumnGroupHeadingRuleRow from './rows/headerRows/ColumnGroupHeadingRuleRow.svelte';
@@ -23,11 +25,11 @@
 	import ControlRow from './rows/headerRows/ControlRow.svelte';
 
 	interface Props {
-		tableSpec: any;
-		table: any;
-		data: any;
+		tableSpec: TableSpec;
+		table: TableState;
+		data: DataRow[];
 		allowSorting?: boolean;
-		tableWidth: any;
+		tableWidth: number | undefined;
 		onChange?: () => void;
 	}
 
@@ -47,7 +49,7 @@
 </script>
 
 <div
-	class={classNames(topRuleClass, bottomRuleClass, 'border-color-ui-border-primary py-2')}
+	class={classNames(topRuleClass, bottomRuleClass, 'border-color-border py-2')}
 	style:width={tableWidth}
 	role="rowgroup"
 >
@@ -65,7 +67,7 @@
 		<ColumnSummariesRow {table} {data} />
 	{/if}
 
-	{#if table.columnSpec.some((c: any) => c.cell.axisRenderer)}
+	{#if table.resolvedColumnSpec.some((c) => c.cell?.axisRenderer)}
 		<AxisRow {table} />
 	{/if}
 </div>

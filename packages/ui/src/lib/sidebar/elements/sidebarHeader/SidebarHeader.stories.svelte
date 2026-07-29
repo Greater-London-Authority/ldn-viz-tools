@@ -1,11 +1,15 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Overlay from '../../../overlay/Overlay.svelte';
 	import SidebarHeader from './SidebarHeader.svelte';
 
+	/**
+	 * The `<SidebarHeader>` creates a header at the top of a `<Sidebar>`.
+	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarHeader',
-		component: SidebarHeader
+		component: SidebarHeader,
+		tags: ['autodocs']
 	});
 </script>
 

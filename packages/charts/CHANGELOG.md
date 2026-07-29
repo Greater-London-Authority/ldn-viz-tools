@@ -1,5 +1,41 @@
 # ldn-viz-tools-charts
 
+## 8.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Minor Changes
+
+- 638c76d: CHANGED: allow `columnMapping` prop to be supplied to `ChartContainer` or `ObservablePlot`
+- 8035407: CHANGED: apply styling to links in chart footers
+- b5ac9bb: CHANGED: downloaded images of `ObservablePlot` plots now include the legend
+- d73427a: FIXED: when an `ObservablePlot` image is downloaded as an SVG, the size of the SVG is now set correctly
+- 0c15080: CHANGED: `ObservablePlot` can now passes the `id` prop through to `ChartContainer`
+
+### Patch Changes
+
+- Updated dependencies [d73427a]
+- Updated dependencies [9269ac2]
+- Updated dependencies [ac203e1]
+  - @ldn-viz/ui@23.0.0
+  - @ldn-viz/utils@3.0.0
+
+## 7.1.0
+
+### Minor Changes
+
+- 6ffd5e2: CHANGED: allow HTML formatting to be used in chart title/subTitle/source/byline/note
+
+### Patch Changes
+
+- Updated dependencies [6c3607d]
+- Updated dependencies [8402081]
+- Updated dependencies [792b3f6]
+- Updated dependencies [2398df2]
+  - @ldn-viz/ui@22.0.0
+
 ## 7.0.0
 
 ### Major Changes

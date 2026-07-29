@@ -1,17 +1,18 @@
-<script>
+<script lang="ts">
 	import { format } from 'd3-format';
 
-	/**
-	 * @typedef {Object} Props
-	 * @property {any} table
-	 * @property {any} group
-	 * @property {boolean} [stretchUp]
-	 * @property {any} [fieldName]
-	 * @property {any} [val]
-	 */
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
+	import type { Group } from '$lib/core/lib/types';
 
-	/** @type {Props} */
-	let { table, group, stretchUp = false, fieldName, val } = $props();
+	interface Props {
+		table: TableState;
+		group: Group | undefined;
+		stretchUp?: boolean;
+		fieldName?: string;
+		val?: string | number;
+	}
+
+	let { table, group, stretchUp = false, fieldName, val }: Props = $props();
 
 	const fPercentage = format('0.0%');
 </script>

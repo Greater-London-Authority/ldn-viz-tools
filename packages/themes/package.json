@@ -1,11 +1,15 @@
 {
 	"name": "@ldn-viz/themes",
-	"version": "7.0.0",
+	"version": "8.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Greater-London-Authority/ldn-viz-tools.git"
+	},
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
 		"build": "npm run build-tokens",
-		"build-tokens": "node ./build.js",
+		"build-tokens": "node ./sd.build.js",
 		"format": "prettier --check . --write",
 		"lint": "prettier --check . && eslint . && publint",
 		"test": "echo no tests",
@@ -24,8 +28,7 @@
 		"npm-packlist": "^10.0.0",
 		"prettier": "^3.4.2",
 		"publint": "^0.2.7",
-		"style-dictionary": "^3.9.2",
-		"style-dictionary-utils": "^2.4.1",
+		"style-dictionary": "^5.2.0",
 		"tailwindcss": "^3.4.17"
 	}
 }

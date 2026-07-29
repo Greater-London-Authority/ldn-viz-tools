@@ -1,8 +1,18 @@
-<script module>
+<script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import MapControlLocationSearch from './MapControlLocationSearch.svelte';
 
+	/**
+	 * The `<MapControlLocationSearch>` component wraps both the
+	 * `<MapControlGeocoder>` and `<MapControlGeolocator>` components to create
+	 * single and easy to use map search control. It is typically placed in the
+	 * top left hand corner.
+	 *
+	 * The selected location is indicated by a MapLibre layer of type `symbol`,
+	 * with id `gla/context/location-search/map-point-symbol`, created by `initMapLayer`.
+	 *
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapControls/MapControlLocationSearch',
 		component: MapControlLocationSearch,
@@ -104,6 +114,25 @@ Note that this API allows searches for "specific address accurately using a full
 			>
 				<MapControlGroup position="TopLeft">
 					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} hideGeolocator />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This story caps the number of suggestions shown in the dropdown using the `maxSuggestions` prop (default 5).
+-->
+<Story name="Location Search - limited suggestions">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} maxSuggestions={2} />
 				</MapControlGroup>
 			</Map>
 		</div>

@@ -2,6 +2,11 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import MapMarkerPlacement from './MapMarkerPlacement.svelte';
 
+	/**
+	 * The `<MapMarkerPlacement>` component is a wrapping container for use
+	 * within marker components. It determines how a map marker is placed
+	 * relative to its associated feature.
+	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapMarker/elements/MapMarkerPlacement',
 		component: MapMarkerPlacement,

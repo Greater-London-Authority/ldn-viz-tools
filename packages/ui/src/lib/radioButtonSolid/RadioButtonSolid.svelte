@@ -1,8 +1,9 @@
 <script lang="ts">
 	/**
-	 * The `RadioButtonSolid` component provides a set of buttons for switching between tabs or selecting one option from a small number of alternatives.
+	 * The `RadioButtonSolid` component provides a single button styled radio input for switching between tabs or selecting one option from a small number of alternatives.
+	 * It is normally used indirectly via the [RadioButtonGroupSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation); these stories exercise the atom on its own.
 	 *
-	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](.-components-radiobuttons-radiobuttongroup--documentation).
+	 * **Alternatives**: consider using the [RadioButton](./?path=/docs/ui-components-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation).
 	 * @component
 	 */
 
@@ -17,7 +18,7 @@
 		name,
 		disabled = false,
 		icon,
-		rawIcon,
+		RawIcon,
 		iconPlacement = 'above'
 	}: RadioButtonSolidProps = $props();
 
@@ -26,10 +27,10 @@
 	const labelClasses = $derived(
 		classNames(
 			disabled
-				? '!bg-color-input-background-disabled !text-color-text-disabled cursor-not-allowed'
-				: 'bg-color-input-background-off text-color-text-primary cursor-pointer',
-			'form-label ring-color-container-level-1 hover:bg-color-input-background-hover peer-checked:text-color-static-white peer-checked:bg-color-input-background-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
-			'peer-focus:ring-offset-color-action-primary-focussed peer-focus:ring-color-ui-background-primary peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-inset peer-focus:ring-offset-2'
+				? '!bg-color-interactive-disabled-muted !text-color-interactive-disabled cursor-not-allowed'
+				: 'bg-color-interactive-off text-color-text cursor-pointer',
+			'form-label ring-color-container-level-1 hover:bg-color-interactive-primary-muted-hover peer-checked:text-color-static-white peer-checked:bg-color-interactive-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
+			'peer-focus:ring-offset-color-interactive-focus peer-focus:ring-color-surface peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-inset peer-focus:ring-offset-2'
 		)
 	);
 
@@ -47,8 +48,8 @@
 			class={iconOrientationClasses[iconPlacement]}
 			aria-hidden="true"
 		/>
-	{:else if rawIcon}
-		<rawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></rawIcon>
+	{:else if RawIcon}
+		<RawIcon class={iconOrientationClasses[iconPlacement]} aria-hidden="true"></RawIcon>
 	{/if}
 {/snippet}
 
@@ -65,10 +66,10 @@
 	/>
 	<label for={inputID} class={labelClasses}>
 		<!-- contents of the radio button (name and/or icon) -->
-		{#if (icon || rawIcon) && iconPlacement === 'above'}
+		{#if (icon || RawIcon) && iconPlacement === 'above'}
 			{@render iconComponent()}
 			{label}
-		{:else if (icon || rawIcon) && iconPlacement === 'below'}
+		{:else if (icon || RawIcon) && iconPlacement === 'below'}
 			{label}
 			{@render iconComponent()}
 		{:else}

@@ -1,4 +1,10 @@
 <script lang="ts">
+	/**
+	 * `GeocoderSuggestion` renders a single suggested location; it is used indirectly via the
+	 * [GeocoderSuggestionList](./?path=/docs/ui-components-geocoder-geocodersuggestionlist--documentation)
+	 *
+	 * @component
+	 */
 	import type { GeolocationNamed, OnSuggestionListInteraction } from './types';
 
 	interface Props {
@@ -23,7 +29,7 @@
 <li>
 	<div
 		role="button"
-		class="w-full cursor-pointer px-2.5 py-1.5"
+		class="w-full cursor-pointer px-2.5 py-1.5 focus-visible:outline-none"
 		bind:this={divRef}
 		onclick={(ev) => {
 			if (ev.target === divRef) {
@@ -33,7 +39,7 @@
 		onkeydown={navigateList}
 		onmouseenter={highlight}
 		onfocus={highlight}
-		class:bg-color-action-background-primary-100={highlighted === suggestion}
+		class:bg-color-interactive-primary-muted={highlighted === suggestion}
 		tabindex="0"
 		data-geocoder-suggestion-id={suggestion.id}
 	>

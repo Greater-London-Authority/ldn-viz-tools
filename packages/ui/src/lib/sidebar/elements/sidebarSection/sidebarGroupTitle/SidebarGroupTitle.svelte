@@ -8,7 +8,7 @@
 	let { children, hint, subTitle }: Props = $props();
 </script>
 
-<div class=" text-color-text-primary">
+<div class=" text-color-text">
 	<div class="flex items-end justify-between">
 		<h3 class="text-sm font-semibold leading-snug">
 			<!-- The title. -->
