@@ -481,3 +481,24 @@ It can also be used to add liks.
 		</div>
 	{/snippet}
 </Story>
+
+<!--
+	The other side of the primary-slot rule: when the Card owns the primary title, the chart yields
+	with `emphasis="secondary"` so its own title renders as an eyebrow (kicker) rather than competing.
+-->
+<Story name="Demoted chart title in a Card">
+	{#snippet template()}
+		<div class="max-w-2xl">
+			<Card title="Population" subtitle="Greater London, mid-year estimate">
+				<ChartContainer
+					title="By borough"
+					emphasis="secondary"
+					byline="Illustrative data"
+					alt="Bar chart of population by London borough"
+				>
+					{@render placeholderChart()}
+				</ChartContainer>
+			</Card>
+		</div>
+	{/snippet}
+</Story>

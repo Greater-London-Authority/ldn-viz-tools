@@ -34,6 +34,16 @@
 		 */
 		subTitle?: string;
 		/**
+		 * Optional eyebrow (kicker label) shown above the title.
+		 */
+		eyebrow?: string;
+		/**
+		 * Title emphasis (the primary-slot rule): `primary` renders the dominant title; `secondary`
+		 * yields the primary slot and renders the title as an eyebrow — e.g. when this chart sits
+		 * inside a `Card` that owns the primary title.
+		 */
+		emphasis?: 'primary' | 'secondary';
+		/**
 		 * Optional help affordance shown beside the title. A string opens an `Overlay`
 		 * (`hintType` selects tooltip / popover / modal); pass a snippet via `ChromeHeader` for full control.
 		 */
@@ -127,6 +137,8 @@
 		title = '',
 		subtitle = '',
 		subTitle = '',
+		eyebrow = '',
+		emphasis = 'primary',
 		hint = undefined,
 		hintType = 'tooltip',
 		hintTitle = undefined,
@@ -177,9 +189,17 @@
 		<p class="sr-only">{alt}</p>
 	{/if}
 
-	{#if title || resolvedSubtitle || hint}
+	{#if title || resolvedSubtitle || eyebrow || hint}
 		<div class="mb-2">
-			<ChromeHeader {title} subtitle={resolvedSubtitle} {hint} {hintType} {hintTitle} />
+			<ChromeHeader
+				{title}
+				subtitle={resolvedSubtitle}
+				{eyebrow}
+				{emphasis}
+				{hint}
+				{hintType}
+				{hintTitle}
+			/>
 		</div>
 	{/if}
 
