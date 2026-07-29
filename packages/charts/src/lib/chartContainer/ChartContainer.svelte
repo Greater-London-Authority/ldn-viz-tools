@@ -9,9 +9,11 @@
 	 * 	@component
 	 */
 
-	import { ChromeHeader, classNames } from '@ldn-viz/ui';
+	import { Button, ChromeActions, ChromeHeader, Modal, classNames } from '@ldn-viz/ui';
 	import ExportBtns from './ExportBtns.svelte';
-	import Footer from './Footer.svelte';
+
+	/** Controls whether the chart-description Modal is open. */
+	let descriptionOpen = $state(false);
 
 	// For save as image
 	let chartToCapture: HTMLDivElement = $state() as HTMLDivElement;
@@ -24,7 +26,20 @@
 		/**
 		 * Subtitle that is displayed below the title, but above the plot.
 		 */
+		subtitle?: string;
+		/**
+		 * @deprecated Use `subtitle` (lowercase) instead. Retained as an alias for one release.
+		 */
 		subTitle?: string;
+		/**
+		 * Optional help affordance shown beside the title. A string opens an `Overlay`
+		 * (`hintType` selects tooltip / popover / modal); pass a snippet via `ChromeHeader` for full control.
+		 */
+		hint?: string;
+		/** Overlay form used when `hint` is a string. */
+		hintType?: 'tooltip' | 'popover' | 'modal';
+		/** Modal heading when `hintType="modal"`. */
+		hintTitle?: string;
 		/**
 		 * Alt-text for the plot.
 		 */
@@ -103,7 +118,11 @@
 
 	let {
 		title = '',
+		subtitle = '',
 		subTitle = '',
+		hint = undefined,
+		hintType = 'tooltip',
+		hintTitle = undefined,
 		alt = '',
 		source = '',
 		byline = '',
@@ -134,6 +153,12 @@
 			alignMultiple ? 'contents not-prose chart' : 'flex flex-col not-prose chart'
 		)
 	);
+
+	// `subtitle` is the current name; `subTitle` is a deprecated alias kept for one release.
+	let resolvedSubtitle = $derived(subtitle || subTitle);
+	let hasActions = $derived(
+		!!(source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton)
+	);
 </script>
 
 <div class={classes} {id}>
@@ -141,9 +166,9 @@
 		<p class="sr-only">{alt}</p>
 	{/if}
 
-	{#if title || subTitle}
-		<div class="mb-4">
-			<ChromeHeader {title} subtitle={subTitle} />
+	{#if title || resolvedSubtitle || hint}
+		<div class="mb-2">
+			<ChromeHeader {title} subtitle={resolvedSubtitle} {hint} {hintType} {hintTitle} />
 		</div>
 	{/if}
 
@@ -161,18 +186,50 @@
 	<!-- long description for screen readers -->
 	{@render description?.()}
 
-	{#if source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note} {chartDescription}>
-			{#snippet exportBtns()}
-				<ExportBtns
-					{chartToCapture}
-					{filename}
-					dataForDownload={data}
-					{dataDownloadButton}
-					{imageDownloadButton}
-					{columnMapping}
-				/>
-			{/snippet}
-		</Footer>
+	{#if hasActions}
+		<div class="mt-2">
+			<ChromeActions
+				{source}
+				{byline}
+				{note}
+				description={chartDescription ? descriptionTrigger : undefined}
+				actions={exportBtns}
+			/>
+		</div>
 	{/if}
 </div>
+
+{#snippet exportBtns()}
+	<ExportBtns
+		{chartToCapture}
+		{filename}
+		dataForDownload={data}
+		{dataDownloadButton}
+		{imageDownloadButton}
+		{columnMapping}
+	/>
+{/snippet}
+
+{#snippet descriptionTrigger()}
+	<Modal bind:open={descriptionOpen}>
+		{#snippet trigger()}
+			<li data-capture-ignore>
+				<Button
+					variant="text"
+					size="xs"
+					emphasis="secondary"
+					class="!p-0"
+					onclick={() => (descriptionOpen = true)}>View description</Button
+				>
+			</li>
+		{/snippet}
+
+		{#snippet title()}
+			Description
+		{/snippet}
+
+		{#snippet description()}
+			{chartDescription}
+		{/snippet}
+	</Modal>
+{/snippet}

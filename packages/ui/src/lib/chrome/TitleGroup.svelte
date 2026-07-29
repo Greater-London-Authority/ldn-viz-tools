@@ -46,11 +46,11 @@
 	{/if}
 {:else}
 	<!--
-		4px construction gap (= product/tight). The owl companion-coupling rules
-		(flow.cjs) don't cover the bare product `.title` role, so the cluster spaces
-		itself rather than relying on a flow context.
+		No gap: the eyebrow / title / subtitle roles carry their own line-heights,
+		which supply the optical spacing (Figma `TitleGroup` uses itemSpacing 0). A
+		flex gap here would sit on top of that leading and read too loose.
 	-->
-	<div class={classNames('flex flex-col gap-1', classes)}>
+	<div class={classNames('flex flex-col', classes)}>
 		{#if eyebrow}
 			<p class="eyebrow text-color-text-muted">{@html eyebrow}</p>
 		{/if}

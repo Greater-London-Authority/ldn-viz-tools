@@ -27,8 +27,12 @@
 		subtitle?: string;
 		eyebrow?: string;
 		emphasis?: 'primary' | 'secondary';
-		/** Hint affordance in the header (string → info icon + tooltip, or a snippet). */
+		/** Hint affordance in the header (string → info icon opening an `Overlay`, or a snippet). */
 		hint?: string | Snippet;
+		/** Overlay form used when `hint` is a string. */
+		hintType?: 'tooltip' | 'popover' | 'modal';
+		/** Modal heading when `hintType="modal"`. */
+		hintTitle?: string;
 		/** Footnotes shown in the actions row. */
 		byline?: string;
 		source?: string;
@@ -45,6 +49,8 @@
 		eyebrow = '',
 		emphasis = 'primary',
 		hint,
+		hintType = 'tooltip',
+		hintTitle = undefined,
 		byline = '',
 		source = '',
 		note = '',
@@ -62,7 +68,7 @@
 		classes
 	)}
 >
-	<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} />
+	<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
 	{#if children}
 		<div class="min-w-0">{@render children()}</div>
 	{/if}

@@ -3,7 +3,7 @@
 
 	import ChartContainer from './ChartContainer.svelte';
 
-	import { Select } from '@ldn-viz/ui';
+	import { Card, Select } from '@ldn-viz/ui';
 
 	/**
 	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
@@ -59,6 +59,25 @@
 			{...args}
 			title="This is the Chart Title"
 			subTitle="Subtitle provides extra context"
+			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			alt="Simple description of type of chart"
+		>
+			{@render placeholderChart()}
+		</ChartContainer>
+	{/snippet}
+</Story>
+
+<!--
+	`hint` shows an information affordance beside the title. A string opens an `Overlay`;
+	`hintType` selects `tooltip` (default), `popover`, or `modal` (with `hintTitle`).
+-->
+<Story name="With hint (tooltip)">
+	{#snippet template(args)}
+		<ChartContainer
+			{...args}
+			title="This is the Chart Title"
+			subtitle="Subtitle provides extra context"
+			hint="These figures are illustrative placeholder data, not a real series."
 			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -419,5 +438,49 @@ It can also be used to add liks.
 				</p>
 			{/snippet}
 		</ChartContainer>
+	{/snippet}
+</Story>
+
+<!--
+	`ChartContainer` has no surface of its own — no border, padding or shadow. When a surface
+	is wanted, compose it inside a `Card`, which supplies the border/padding/shadow. Here the
+	Card owns the title (primary slot), so the single chart inside is left untitled.
+-->
+<Story name="Inside a Card (single chart)">
+	{#snippet template()}
+		<div class="max-w-2xl">
+			<Card title="Population by borough" subtitle="Mid-year estimate, illustrative data">
+				<ChartContainer
+					source="GLA City Intelligence"
+					byline="Illustrative placeholder data"
+					chartDescription="A detailed description of the chart for screen-reader and sighted users."
+					alt="Simple description of type of chart"
+				>
+					{@render placeholderChart()}
+				</ChartContainer>
+			</Card>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+	Several charts in one Card. The Card title yields the primary slot (`emphasis="secondary"`,
+	so it renders as an eyebrow labelling the group), and each `ChartContainer` carries its own
+	dominant title — the primary-slot rule from the spec.
+-->
+<Story name="Multiple charts in a Card">
+	{#snippet template()}
+		<div class="max-w-4xl">
+			<Card title="London indicators" emphasis="secondary">
+				<div class="grid gap-x-12 gap-y-6 sm:grid-cols-2">
+					<ChartContainer title="Population" subtitle="by borough" byline="Illustrative data">
+						{@render placeholderChart()}
+					</ChartContainer>
+					<ChartContainer title="Employment rate" subtitle="16–64, by borough" byline="Illustrative data">
+						{@render placeholderChart()}
+					</ChartContainer>
+				</div>
+			</Card>
+		</div>
 	{/snippet}
 </Story>

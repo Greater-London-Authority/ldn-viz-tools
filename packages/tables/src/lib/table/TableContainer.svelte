@@ -1,15 +1,26 @@
 <script lang="ts">
 	/**
-	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and footer (source/byline/note).
-	 * It also provides controls such as data/image download buttons.
+	 * `TableContainer` wraps a table with the shared chrome primitives: a `ChromeHeader`
+	 * (title / subtitle / optional hint) above the table, and a `ChromeActions` row
+	 * (source / byline / note + data/image download buttons) below it — the same pieces
+	 * used by `Card` and `ChartContainer`, so the three read and construct identically.
 	 *
-	 * **Note** Similar in structure and functionality to the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
+	 * It has **no surface of its own** — no border, padding or shadow. When a surface is
+	 * wanted, compose it inside a `Card`, which supplies those. This is what lets several
+	 * tables share one `Card`: the Card title takes `emphasis="secondary"` (an eyebrow
+	 * labelling the group) while each `TableContainer` keeps its own dominant title — the
+	 * primary-slot rule.
+	 *
+	 * The table is supplied via the `table` snippet; `beforeTable`, `numRowsControlSlot`
+	 * and `paginationControls` snippets remain for content and pagination controls.
+	 *
+	 * **Note** Mirrors [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
 	 * in @ldn-viz/charts.
 	 * 	@component
 	 */
 
-	import { ExportBtns, Footer, SubTitle, Title } from '@ldn-viz/charts';
-	import { classNames } from '@ldn-viz/ui';
+	import { ExportBtns } from '@ldn-viz/charts';
+	import { ChromeActions, ChromeHeader, classNames } from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
 
 	// export let title: string | null = null;
@@ -26,7 +37,20 @@
 		/**
 		 * Subtitle that is displayed below the title, but above the table.
 		 */
+		subtitle?: string;
+		/**
+		 * @deprecated Use `subtitle` (lowercase) instead. Retained as an alias for one release.
+		 */
 		subTitle?: string;
+		/**
+		 * Optional help affordance shown beside the title. A string opens an `Overlay`
+		 * (`hintType` selects tooltip / popover / modal).
+		 */
+		hint?: string;
+		/** Overlay form used when `hint` is a string. */
+		hintType?: 'tooltip' | 'popover' | 'modal';
+		/** Modal heading when `hintType="modal"`. */
+		hintTitle?: string;
 		/**
 		 * Alt-text for the plot.
 		 */
@@ -85,7 +109,11 @@
 
 	let {
 		title = '',
+		subtitle = '',
 		subTitle = '',
+		hint = undefined,
+		hintType = 'tooltip',
+		hintTitle = undefined,
 		alt = '',
 		source = '',
 		byline = '',
@@ -106,21 +134,23 @@
 
 	let tableClass = $derived(classNames('relative', tableHeight, overrideClass));
 
+	// `subtitle` is the current name; `subTitle` is a deprecated alias kept for one release.
+	let resolvedSubtitle = $derived(subtitle || subTitle);
+
 	// For save as image
 	let tableToCapture: HTMLDivElement | undefined = $state();
 </script>
 
 {@render numRowsControlSlot?.()}
 
-<div class={`table-container ${tableWidth}`} bind:this={tableToCapture} id="captureElement">
-	{#if title || subTitle}
-		<div class="mb-4">
-			{#if title}
-				<Title>{title}</Title>
-			{/if}
-			{#if subTitle}
-				<SubTitle>{subTitle}</SubTitle>
-			{/if}
+<div
+	class={`table-container not-prose product ${tableWidth}`}
+	bind:this={tableToCapture}
+	id="captureElement"
+>
+	{#if title || resolvedSubtitle || hint}
+		<div class="mb-2">
+			<ChromeHeader {title} subtitle={resolvedSubtitle} {hint} {hintType} {hintTitle} />
 		</div>
 	{/if}
 
@@ -141,22 +171,24 @@
 	{@render paginationControls?.()}
 
 	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note}>
-			{#snippet exportBtns()}
-				{#if tableToCapture}
-					<ExportBtns
-						chartToCapture={tableToCapture}
-						{columnMapping}
-						dataForDownload={data}
-						{dataDownloadButton}
-						{imageDownloadButton}
-						{filename}
-					/>
-				{/if}
-			{/snippet}
-		</Footer>
+		<div class="mt-2">
+			<ChromeActions {source} {byline} {note} actions={exportBtns} />
+		</div>
 	{/if}
 </div>
+
+{#snippet exportBtns()}
+	{#if tableToCapture}
+		<ExportBtns
+			chartToCapture={tableToCapture}
+			{columnMapping}
+			dataForDownload={data}
+			{dataDownloadButton}
+			{imageDownloadButton}
+			{filename}
+		/>
+	{/if}
+{/snippet}
 
 <style lang="postcss">
 	.table-container {
