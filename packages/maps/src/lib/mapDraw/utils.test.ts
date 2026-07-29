@@ -98,7 +98,7 @@ describe('fixImportedGeoJSON', () => {
 			// Numeric IDs might not be valid UUIDs, should get replaced
 			expect(typeof geojson.features[0].id).toBe('string');
 
-						expect(geojson.features[0].id).toMatch(
+			expect(geojson.features[0].id).toMatch(
 				/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 			);
 		});
