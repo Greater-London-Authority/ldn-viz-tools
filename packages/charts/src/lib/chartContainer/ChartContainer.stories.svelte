@@ -483,7 +483,7 @@ It can also be used to add liks.
 </Story>
 
 <!--
-	The other side of the primary-slot rule: when the Card owns the primary title, the chart yields
+	When the Card owns the primary title, the chart yields
 	with `emphasis="secondary"` so its own title renders as an eyebrow (kicker) rather than competing.
 -->
 <Story name="Demoted chart title in a Card">
