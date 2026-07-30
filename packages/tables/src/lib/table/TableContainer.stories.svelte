@@ -229,7 +229,7 @@
 <!--
 	Several tables in one Card. The Card title yields the primary slot (`emphasis="secondary"`, so it
 	renders as an eyebrow labelling the group), and each `TableContainer` carries its own dominant
-	title — the primary-slot rule from the spec.
+	title.
 -->
 <Story name="Multiple tables in a Card">
 	{#snippet template()}
