@@ -10,7 +10,7 @@
 	 * export controls.
 	 *
 	 * **Accessibility**: always provide `alt` (a short text alternative). `description` (a longer
-	 * account) is optional but recommended and, when given, is exposed to both screen readers
+	 * account) is optional but recommended; when given, it is exposed to both screen readers
 	 * (`aria-describedby`) and sighted users (a "View description" Modal).
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
