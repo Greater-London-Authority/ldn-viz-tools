@@ -170,6 +170,8 @@ Both Page head and Section head may carry a **Subtitle**: the same shared treatm
 
 `Eyebrow` at 14px matches `Label` (step −1) exactly: a demoted title *is* a label, so it holds that step and its styling (weight 500, tracking 0; casing on hold). `Subtitle` at 16px matches `Body` (step 0), separated from it by colour rather than size. Both are shared across the ladder: the same 16px recessive-grey `Subtitle` sits beneath a Page head, a Section head, or a `Title`, and `Eyebrow` serves both as a chosen overline and as the demoted title. They carry their own tokens rather than aliasing `Label` and `Body` so that the titling cluster can be retuned as a group — an intentional, documented duplication, not an oversight.
 
+**How components surface this.** "Treatment" is the spec's concept word for the ladder above; the *component and Figma property* that selects between the two title states is the library's standard **`emphasis`** axis (the same axis `Button` uses), not a bespoke enum. The mapping is exactly the Colour column: `emphasis="primary"` is the **dominant `Title`** treatment; `emphasis="secondary"` is the **demoted `Eyebrow`** treatment. The `Supporting`/`Subtitle` treatment is a separate slot beneath a primary title, not an `emphasis` value, so the property is two-valued. The `TitleGroup` component and its Figma variant (`Emphasis: Primary | Secondary`) reflect this; a title only ever uses `primary`/`secondary` — the status emphases (`positive`/`negative`/`caution`) are meaningless for a heading and are not offered.
+
 ### Metric
 
 | Role      | Step | Size    | Job |

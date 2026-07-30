@@ -43,7 +43,6 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@ldn-viz/charts": "*",
 		"@ldn-viz/themes": "*",
 		"@ldn-viz/ui": "*",
 		"@ldn-viz/utils": "*",

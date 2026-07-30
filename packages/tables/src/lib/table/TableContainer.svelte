@@ -1,15 +1,36 @@
 <script lang="ts">
 	/**
-	 * The `TableContainer` is a wrapper around a table that adds additional information such as a title, subtitle, and footer (source/byline/note).
-	 * It also provides controls such as data/image download buttons.
+	 * `TableContainer` wraps a table with the shared chrome primitives: a `ChromeHeader`
+	 * (title / subtitle / optional hint) above the table, and a `ChromeFooter` row
+	 * (source / byline / note + data/image download buttons) below it — the same pieces
+	 * used by `Card` and `ChartContainer`, so the three read and construct identically.
 	 *
-	 * **Note** Similar in structure and functionality to the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
+	 * It has **no surface of its own** — no border, padding or shadow. When a surface is
+	 * wanted, compose it inside a `Card`, which supplies those. This is what lets several
+	 * tables share one `Card`: the Card title takes `emphasis="secondary"` (an eyebrow
+	 * labelling the group) while each `TableContainer` keeps its own dominant title.
+	 *
+	 * **Accessibility**: always provide `alt` (a short text alternative). `description`
+	 * (a longer account) is optional but recommended and, when given, is exposed to both
+	 * screen readers (`aria-describedby`) and sighted users (a "View description" Modal).
+	 *
+	 * The table is supplied via the `table` snippet; `beforeTable`, `numRowsControlSlot`
+	 * and `paginationControls` snippets remain for content and pagination controls.
+	 *
+	 * **Note** Mirrors [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
 	 * in @ldn-viz/charts.
 	 * 	@component
 	 */
 
-	import { ExportBtns, Footer, SubTitle, Title } from '@ldn-viz/charts';
-	import { classNames } from '@ldn-viz/ui';
+	import {
+		Button,
+		ChromeFooter,
+		ChromeHeader,
+		ExportButtons,
+		Modal,
+		classNames,
+		randomId
+	} from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
 
 	// export let title: string | null = null;
@@ -26,11 +47,36 @@
 		/**
 		 * Subtitle that is displayed below the title, but above the table.
 		 */
-		subTitle?: string;
+		subtitle?: string;
 		/**
-		 * Alt-text for the plot.
+		 * Optional eyebrow (kicker label) shown above the title.
+		 */
+		eyebrow?: string;
+		/**
+		 * Title emphasis: `primary` renders the dominant title; `secondary`
+		 * yields the primary slot and renders the title as an eyebrow — e.g. when this table sits
+		 * inside a `Card` that owns the primary title.
+		 */
+		emphasis?: 'primary' | 'secondary';
+		/**
+		 * Optional help affordance shown beside the title. A string opens an `Overlay`
+		 * (`hintType` selects tooltip / popover / modal).
+		 */
+		hint?: string;
+		/** Overlay form used when `hint` is a string. */
+		hintType?: 'tooltip' | 'popover' | 'modal';
+		/** Modal heading when `hintType="modal"`. */
+		hintTitle?: string;
+		/**
+		 * Short text alternative naming what the table shows. Required for accessibility.
 		 */
 		alt?: string;
+		/**
+		 * A longer description of the table. Optional but recommended. When provided it is exposed to
+		 * screen readers (visually hidden, `aria-describedby`) and to sighted users via a
+		 * "View description" Modal in the footer. Accepts a string or a snippet.
+		 */
+		description?: string | Snippet;
 		/**
 		 * What appears in the footer:
 		 *
@@ -85,8 +131,14 @@
 
 	let {
 		title = '',
-		subTitle = '',
+		subtitle = '',
+		eyebrow = '',
+		emphasis = 'primary',
+		hint = undefined,
+		hintType = 'tooltip',
+		hintTitle = undefined,
 		alt = '',
+		description = undefined,
 		source = '',
 		byline = '',
 		note = '',
@@ -106,21 +158,34 @@
 
 	let tableClass = $derived(classNames('relative', tableHeight, overrideClass));
 
+	// Long description, exposed to both audiences from one source.
+	let descriptionOpen = $state(false);
+	let descId = randomId();
+	let hasDescription = $derived(!!description);
+	let descriptionIsString = $derived(typeof description === 'string');
+
 	// For save as image
 	let tableToCapture: HTMLDivElement | undefined = $state();
 </script>
 
 {@render numRowsControlSlot?.()}
 
-<div class={`table-container ${tableWidth}`} bind:this={tableToCapture} id="captureElement">
-	{#if title || subTitle}
-		<div class="mb-4">
-			{#if title}
-				<Title>{title}</Title>
-			{/if}
-			{#if subTitle}
-				<SubTitle>{subTitle}</SubTitle>
-			{/if}
+<div
+	class={`table-container not-prose product ${tableWidth}`}
+	bind:this={tableToCapture}
+	id="captureElement"
+>
+	{#if title || subtitle || eyebrow || hint}
+		<div class="mb-2">
+			<ChromeHeader
+				{title}
+				subtitle={subtitle}
+				{eyebrow}
+				{emphasis}
+				{hint}
+				{hintType}
+				{hintTitle}
+			/>
 		</div>
 	{/if}
 
@@ -134,29 +199,76 @@
 	{/if}
 
 	<!-- Viz element goes here -->
-	<div class={tableClass}>
+	<div class={tableClass} aria-describedby={hasDescription ? descId : undefined}>
 		{@render table?.({ data })}
 	</div>
 
+	<!-- long description, visually hidden — the screen-reader copy referenced by aria-describedby -->
+	{#if hasDescription}
+		<div id={descId} class="sr-only">
+			{@render descriptionBody()}
+		</div>
+	{/if}
+
 	{@render paginationControls?.()}
 
-	{#if source || byline || note || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note}>
-			{#snippet exportBtns()}
-				{#if tableToCapture}
-					<ExportBtns
-						chartToCapture={tableToCapture}
-						{columnMapping}
-						dataForDownload={data}
-						{dataDownloadButton}
-						{imageDownloadButton}
-						{filename}
-					/>
-				{/if}
-			{/snippet}
-		</Footer>
+	{#if source || byline || note || hasDescription || dataDownloadButton || imageDownloadButton}
+		<div class="mt-2">
+			<ChromeFooter
+				{source}
+				{byline}
+				{note}
+				footnoteExtra={hasDescription ? descriptionTrigger : undefined}
+				actions={exportBtns}
+			/>
+		</div>
 	{/if}
 </div>
+
+{#snippet descriptionBody()}
+	{#if descriptionIsString}
+		{description}
+	{:else if description}
+		{@render (description as Snippet)()}
+	{/if}
+{/snippet}
+
+{#snippet descriptionTrigger()}
+	<Modal bind:open={descriptionOpen}>
+		{#snippet trigger()}
+			<li data-capture-ignore>
+				<Button
+					variant="text"
+					size="xs"
+					emphasis="secondary"
+					class="!p-0"
+					onclick={() => (descriptionOpen = true)}>View description</Button
+				>
+			</li>
+		{/snippet}
+
+		{#snippet title()}
+			Description
+		{/snippet}
+
+		{#snippet description()}
+			{@render descriptionBody()}
+		{/snippet}
+	</Modal>
+{/snippet}
+
+{#snippet exportBtns()}
+	{#if tableToCapture}
+		<ExportButtons
+			elementToCapture={tableToCapture}
+			{columnMapping}
+			dataForDownload={data}
+			{dataDownloadButton}
+			{imageDownloadButton}
+			{filename}
+		/>
+	{/if}
+{/snippet}
 
 <style lang="postcss">
 	.table-container {
