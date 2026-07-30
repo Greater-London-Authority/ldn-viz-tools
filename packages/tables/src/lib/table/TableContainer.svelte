@@ -57,7 +57,7 @@
 		 */
 		eyebrow?: string;
 		/**
-		 * Title emphasis (the primary-slot rule): `primary` renders the dominant title; `secondary`
+		 * Title emphasis: `primary` renders the dominant title; `secondary`
 		 * yields the primary slot and renders the title as an eyebrow — e.g. when this table sits
 		 * inside a `Card` that owns the primary title.
 		 */
