@@ -3,7 +3,7 @@
 	 * `TitleGroup` — the titling cluster for cards, panels and chrome. Up to three
 	 * stacked parts: an optional eyebrow, a title, and an optional subtitle.
 	 *
-	 * `emphasis` sets how much prominence the title carries (the primary-slot rule),
+	 * `emphasis` sets how much prominence the title carries,
 	 * following the library's standard emphasis axis (as on `Button`):
 	 * - `primary` — the title owns its container's primary slot. Rendered at the
 	 *   `title` role (Semibold, primary colour). May carry an `eyebrow` above and/or
