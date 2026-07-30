@@ -8,8 +8,7 @@
 	 * It has **no surface of its own** — no border, padding or shadow. When a surface is
 	 * wanted, compose it inside a `Card`, which supplies those. This is what lets several
 	 * tables share one `Card`: the Card title takes `emphasis="secondary"` (an eyebrow
-	 * labelling the group) while each `TableContainer` keeps its own dominant title — the
-	 * primary-slot rule.
+	 * labelling the group) while each `TableContainer` keeps its own dominant title.
 	 *
 	 * **Accessibility**: always provide `alt` (a short text alternative). `description`
 	 * (a longer account) is optional but recommended and, when given, is exposed to both
