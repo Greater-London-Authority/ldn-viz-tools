@@ -14,15 +14,13 @@ export { default as AsyncButton } from './button/AsyncButton.svelte';
 export { default as Button } from './button/Button.svelte';
 export { default as Callout } from './callout/Callout.svelte';
 export { default as Card } from './card/Card.svelte';
-export { default as ChromeFooter } from './chrome/ChromeFooter.svelte';
-// @deprecated `ChromeActions` was renamed to `ChromeFooter`; alias kept for one release.
-export { default as ChromeActions } from './chrome/ChromeFooter.svelte';
-export { default as ChromeHeader } from './chrome/ChromeHeader.svelte';
-export { default as TitleGroup } from './chrome/TitleGroup.svelte';
 export { default as Checkbox } from './checkBox/Checkbox.svelte';
 export { default as CheckboxGroup } from './checkBox/CheckboxGroup.svelte';
 export { default as CheckboxGroupSolid } from './checkboxSolid/CheckboxGroupSolid.svelte';
 export { default as CheckboxSolid } from './checkboxSolid/CheckboxSolid.svelte';
+export { default as ChromeFooter } from './chrome/ChromeFooter.svelte';
+export { default as ChromeHeader } from './chrome/ChromeHeader.svelte';
+export { default as TitleGroup } from './chrome/TitleGroup.svelte';
 export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOrdinalChips.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
@@ -94,3 +92,4 @@ export { default as Tooltip } from './tooltip/Tooltip.svelte';
 export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPreference.js';
 export { classNames } from './utils/classNames.js';
 export { randomId } from './utils/randomId.js';
+

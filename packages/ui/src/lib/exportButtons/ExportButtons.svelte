@@ -21,10 +21,6 @@
 		 */
 		elementToCapture?: HTMLElement;
 		/**
-		 * @deprecated Use `elementToCapture` instead. Retained as an alias for one release.
-		 */
-		chartToCapture?: HTMLElement;
-		/**
 		 * The data to be exported. An array of objects: each entry becomes a row in the generated
 		 * CSV/JSON file, and each attribute of the objects becomes a column.
 		 */
@@ -53,7 +49,6 @@
 
 	let {
 		elementToCapture,
-		chartToCapture,
 		dataForDownload,
 		dataDownloadButton,
 		imageDownloadButton,
@@ -61,8 +56,6 @@
 		columnMapping = undefined
 	}: Props = $props();
 
-	// `elementToCapture` is the current name; `chartToCapture` is a deprecated alias.
-	let captureEl = $derived(elementToCapture ?? chartToCapture);
 </script>
 
 <div class="mt-2 flex flex-wrap items-end space-y-2" data-capture-ignore>
@@ -84,12 +77,12 @@
 		</div>
 	{/if}
 
-	{#if imageDownloadButton && captureEl}
+	{#if imageDownloadButton && elementToCapture}
 		<div class="shrink-0">
 			<ImageDownloadButton
 				{filename}
 				formats={imageDownloadButton === true ? ['PNG', 'SVG'] : imageDownloadButton}
-				htmlNode={captureEl}
+				htmlNode={elementToCapture}
 				variant="outline"
 				emphasis="secondary"
 				size="sm"

@@ -18,8 +18,6 @@
 		note?: string;
 		/** Extra footnote content, appended to the footnotes list (e.g. a "View description" trigger). */
 		footnoteExtra?: Snippet;
-		/** @deprecated Renamed to `footnoteExtra`. Retained as an alias for one release. */
-		description?: Snippet;
 		/** Right-aligned actions (e.g. download buttons). */
 		actions?: Snippet;
 		class?: string;
@@ -30,14 +28,11 @@
 		source = '',
 		note = '',
 		footnoteExtra,
-		description,
 		actions,
 		class: classes = ''
 	}: Props = $props();
 
-	// `footnoteExtra` is the current name; `description` is a deprecated alias.
-	let extra = $derived(footnoteExtra ?? description);
-	let hasFootnotes = $derived(!!(byline || source || note || extra));
+	let hasFootnotes = $derived(!!(byline || source || note || footnoteExtra));
 </script>
 
 {#if hasFootnotes || actions}
@@ -50,7 +45,7 @@
 				{#if byline}<li>{@html byline}</li>{/if}
 				{#if source}<li><span class="mr-1 font-bold">Source:</span>{@html source}</li>{/if}
 				{#if note}<li><span class="mr-1 font-bold">Note:</span>{@html note}</li>{/if}
-				{@render extra?.()}
+				{@render footnoteExtra?.()}
 			</ul>
 			<!-- eslint-enable svelte/no-at-html-tags -->
 		{/if}

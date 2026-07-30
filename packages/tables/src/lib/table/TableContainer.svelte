@@ -49,10 +49,6 @@
 		 */
 		subtitle?: string;
 		/**
-		 * @deprecated Use `subtitle` (lowercase) instead. Retained as an alias for one release.
-		 */
-		subTitle?: string;
-		/**
 		 * Optional eyebrow (kicker label) shown above the title.
 		 */
 		eyebrow?: string;
@@ -136,7 +132,6 @@
 	let {
 		title = '',
 		subtitle = '',
-		subTitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
 		hint = undefined,
@@ -163,9 +158,6 @@
 
 	let tableClass = $derived(classNames('relative', tableHeight, overrideClass));
 
-	// `subtitle` is the current name; `subTitle` is a deprecated alias kept for one release.
-	let resolvedSubtitle = $derived(subtitle || subTitle);
-
 	// Long description, exposed to both audiences from one source.
 	let descriptionOpen = $state(false);
 	let descId = randomId();
@@ -183,11 +175,11 @@
 	bind:this={tableToCapture}
 	id="captureElement"
 >
-	{#if title || resolvedSubtitle || eyebrow || hint}
+	{#if title || subtitle || eyebrow || hint}
 		<div class="mb-2">
 			<ChromeHeader
 				{title}
-				subtitle={resolvedSubtitle}
+				subtitle={subtitle}
 				{eyebrow}
 				{emphasis}
 				{hint}

@@ -30,10 +30,6 @@
 		 */
 		subtitle?: string;
 		/**
-		 * @deprecated Use `subtitle` (lowercase) instead. Retained as an alias for one release.
-		 */
-		subTitle?: string;
-		/**
 		 * Optional eyebrow (kicker label) shown above the title.
 		 */
 		eyebrow?: string;
@@ -112,10 +108,6 @@
 		 * via a "View description" Modal in the footer. Accepts a string or a snippet.
 		 */
 		description?: string | import('svelte').Snippet;
-		/**
-		 * @deprecated Renamed to `description`. Retained as an alias for one release.
-		 */
-		chartDescription?: string;
 		controls?: import('svelte').Snippet;
 		legend?: import('svelte').Snippet;
 		children?: import('svelte').Snippet;
@@ -136,7 +128,6 @@
 	let {
 		title = '',
 		subtitle = '',
-		subTitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
 		hint = undefined,
@@ -155,7 +146,6 @@
 		chartWidth = 'w-full',
 		alignMultiple = false,
 		description = undefined,
-		chartDescription = '',
 		controls,
 		legend,
 		children,
@@ -173,12 +163,8 @@
 		)
 	);
 
-	// `subtitle` is the current name; `subTitle` is a deprecated alias kept for one release.
-	let resolvedSubtitle = $derived(subtitle || subTitle);
-	// `description` is the current name; `chartDescription` (string) is a deprecated alias.
-	let resolvedDescription = $derived(description || chartDescription || undefined);
-	let hasDescription = $derived(!!resolvedDescription);
-	let descriptionIsString = $derived(typeof resolvedDescription === 'string');
+	let hasDescription = $derived(!!description);
+	let descriptionIsString = $derived(typeof description === 'string');
 	let hasActions = $derived(
 		!!(source || byline || note || hasDescription || dataDownloadButton || imageDownloadButton)
 	);
@@ -189,11 +175,11 @@
 		<p class="sr-only">{alt}</p>
 	{/if}
 
-	{#if title || resolvedSubtitle || eyebrow || hint}
+	{#if title || description || eyebrow || hint}
 		<div class="mb-2">
 			<ChromeHeader
 				{title}
-				subtitle={resolvedSubtitle}
+				{subtitle}
 				{eyebrow}
 				{emphasis}
 				{hint}
@@ -251,9 +237,9 @@
 
 {#snippet descriptionBody()}
 	{#if descriptionIsString}
-		{resolvedDescription}
-	{:else if resolvedDescription}
-		{@render (resolvedDescription as import('svelte').Snippet)()}
+		{description}
+	{:else if description}
+		{@render (description as import('svelte').Snippet)()}
 	{/if}
 {/snippet}
 
