@@ -12,7 +12,7 @@
 	 * It has **no surface of its own** (no border, padding or shadow); compose it inside a `Card`
 	 * when a surface is wanted. That is what lets several tables share one Card: the Card title
 	 * takes `emphasis="secondary"` (an eyebrow labelling the group) while each `TableContainer`
-	 * keeps its own dominant title — the primary-slot rule (see the last two stories).
+	 * keeps its own dominant title (see the last two stories).
 	 *
 	 * The table is supplied via the `table` snippet; `beforeTable`, `numRowsControlSlot` and
 	 * `paginationControls` snippets remain for content and pagination controls.
