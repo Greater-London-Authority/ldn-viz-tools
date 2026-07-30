@@ -463,7 +463,7 @@ It can also be used to add liks.
 <!--
 	Several charts in one Card. The Card title yields the primary slot (`emphasis="secondary"`,
 	so it renders as an eyebrow labelling the group), and each `ChartContainer` carries its own
-	dominant title — the primary-slot rule from the spec.
+	dominant title.
 -->
 <Story name="Multiple charts in a Card">
 	{#snippet template()}
