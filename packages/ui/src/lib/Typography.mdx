@@ -70,7 +70,7 @@ Sizes shown are `xl`; scaling roles are marked.
 
 Migrate off-system legacy sizes to the correct role even when it visibly resizes the element.
 
-**Tight variants for single-line controls.** `label-tight` / `label-sm-tight` are real Tailwind utilities — same size and weight as `label` / `label-sm`, with `line-height` set to `1` for buttons, tabs and chips that must never wrap. Already in use (`Button`, `TabLabel`, `NavigationMenuItem`, `ThemeSwitcher`, `MultipleActionButton`, `GeocoderSuggestion(List)`). What's missing is a dedicated backing token — they currently reuse `label`/`label-sm`'s vars rather than having their own entry in `semantic-typography`.
+**Tight variants for single-line controls.** `label-tight` / `label-sm-tight` are real Tailwind utilities — same size and weight as `label` / `label-sm`, with `line-height` set to `1` for buttons, tabs and chips that must never wrap. Already in use (`Button`, `TabLabel`, `NavigationMenuItem`, `ThemeSwitcher`, `MultipleActionButton`, `GeocoderSuggestion(List)`). These reuse `label`/`label-sm`'s vars with a line height update, rather than having their own entry in `semantic-typography`.
 
 ## Prose roles
 
