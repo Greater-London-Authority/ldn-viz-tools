@@ -302,14 +302,7 @@ StyleDictionary.registerTransform({
 	name: 'typography/unitless',
 	type: transformTypes.value,
 	filter: (token) => {
-		const unitlessDimensions = [
-			'lineheight',
-			'line-height',
-			'font-weight',
-			'weight',
-			'letterspacing',
-			'letter-spacing'
-		];
+		const unitlessDimensions = ['line-height', 'font-weight', 'letter-spacing'];
 		return unitlessDimensions.some((i) => token.path.includes(i));
 	},
 	transform: (token) => {
