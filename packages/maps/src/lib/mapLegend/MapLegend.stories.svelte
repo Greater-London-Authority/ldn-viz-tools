@@ -10,6 +10,9 @@
 	import { appendOSKeyToUrl } from '../map/util';
 	import MapControlGroup from '../mapControlGroup/MapControlGroup.svelte';
 	import MapLegend from './MapLegend.svelte';
+	/**
+	 * The `<MapLegend>` component provides a container inside which a `Legend` can be inserted for display on maps.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Maps/Components/MapLegend',

@@ -69,6 +69,7 @@
 			{variant}
 			{fullWidth}
 			{...restProps}
+			disabled={restProps.disabled ?? options.length === 0}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
@@ -83,7 +84,14 @@
 				aria-label={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 			>
 				{#snippet child({ props })}
-					<Button {...props} class={triggerClasses} variant="square" {size} {...restProps}>
+					<Button
+						{...props}
+						class={triggerClasses}
+						variant="square"
+						{size}
+						{...restProps}
+						disabled={restProps.disabled ?? options.length === 0}
+					>
 						{#if size === 'xs'}
 							<Icon src={ChevronDown} theme="mini" class="h-4 w-4" aria-hidden="true" />
 						{:else}
