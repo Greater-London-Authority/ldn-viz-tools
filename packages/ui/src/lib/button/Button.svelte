@@ -1,4 +1,20 @@
 <script lang="ts">
+	/**
+	 * The `Button` component is a general-purpose interactive button, supporting a range of style `variant`s, `emphasis` colours and `size`s.
+	 * If an `href` is provided, it renders as a link (`<a>`) styled as a button, rather than a `<button>` element.
+	 *
+	 * **Alternatives**: there are several more specialized buttons, which have specific functionality
+	 * ([AsyncButton](./?path=/docs/ui-components-buttons-asyncbutton--documentation),
+	 * [CopyButton](./?path=/docs/ui-components-buttons-copybutton--documentation),
+	 * [DataDownloadButton](./?path=/docs/ui-components-buttons-datadownloadbutton--documentation),
+	 * [ImageDownloadButton](./?path=/docs/ui-components-buttons-imagedownloadbutton--documentation)),
+	 * the ability to trigger one of several different actions
+	 * ([MultipleActionButton](./?path=/docs/ui-components-buttons-multipleactionbutton--documentation)),
+	 * or which can display multiple lines of description as a call-to-action
+	 * ([PlacardButton](./?path=/docs/ui-components-buttons-placardbutton--documentation)).
+	 *
+	 * @component
+	 */
 	import { classNames } from '../utils/classNames.js';
 	import type { ButtonProps } from './types.js';
 
