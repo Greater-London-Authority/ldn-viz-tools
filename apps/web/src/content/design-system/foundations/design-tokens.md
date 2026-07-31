@@ -222,7 +222,7 @@ Interactive elements have states such as **hover**, **active**, **focus**, **dis
 
 ### Spacing Tokens
 
-The structure of our spacing tokens is a numbered scale, where the index is the multiplier of the 4px base unit (`--spacing-4` = 4 × 4px = 16px). It runs **1, 2, 3, 4, 5...** through to **24**, plus sub-steps (`px`, `0-5`, `1-5`, `2-5`, `3-5`) for finer gaps.
+The structure of our spacing tokens is a numbered scale, where the index is the multiplier of the 4px base unit (`--spacing-4` = 4 × 4px = 16px). It runs **1, 2, 3, 4, 5, ..., 24**, plus sub-steps (`px`, `0-5`, `1-5`, `2-5`, `3-5`) for finer gaps.
 
 Spacing tokens define the spacing between and around elements of the application interface. Spacing tokens are available in `rem` units, based on the root `<html>` font size.
 
