@@ -4,10 +4,14 @@
 	import ExportButtons from './ExportButtons.svelte';
 
 	/**
-	 * `ExportButtons` renders the data- and image-download buttons used in a container's actions row.
+	 * `ExportButtons` — a trailing group of download controls: a data-download button
+	 * (CSV / JSON) and an image-download button (PNG / SVG). It composes the shared
+	 * `DataDownloadButton` and `ImageDownloadButton`, so any titled container (`Card`,
+	 * `ChartContainer`, `TableContainer`) can offer the same export affordance.
 	 *
-	 * It composes `DataDownloadButton` and `ImageDownloadButton`, so it is shared across `Card`,
-	 * `ChartContainer` and `TableContainer`. It is normally used indirectly via those containers.
+	 * Pass the DOM node to capture for the image via `elementToCapture` — it works for
+	 * any element (a chart's SVG, a table wrapper, a card body), not only charts.
+	 *
 	 */
 	const { Story } = defineMeta({
 		title: 'Ui/ExportButtons',

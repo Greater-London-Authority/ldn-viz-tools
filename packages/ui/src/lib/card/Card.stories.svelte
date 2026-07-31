@@ -3,10 +3,21 @@
 	import Card from './Card.svelte';
 
 	/**
-	 * The `Card` is a titled container composing a `ChromeHeader` (a `TitleGroup`
-	 * plus an optional hint) above the content, and an optional `ChromeFooter`
-	 * row (footnotes + actions) below. `Card` and `ChartContainer` share the same
-	 * chrome pieces, so they read and construct identically across surfaces.
+	 * `Card` — a titled container composing a `ChromeHeader` above the content
+	 * and an optional `ChromeFooter` row below. The `children` snippet holds the
+	 * content: a single element, or several panels arranged together.
+	 *
+	 * `Card` and `ChartContainer` share the same chrome pieces (`ChromeHeader` +
+	 * `ChromeFooter`) but are distinct components so they can nest — a
+	 * `ChartContainer` can sit inside a `Card`.
+	 *
+	 * Title emphasis follows the primary-slot rule: the card title is `primary`
+	 * when it owns the primary slot, and steps down to an eyebrow
+	 * (`emphasis="secondary"`) when a titled element inside owns it.
+	 *
+	 * Surface construction (border, padding, shadow) lives on the card. Corner
+	 * radius matches the design source (square) and can be overridden via `class`.
+	 *
 	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Card',

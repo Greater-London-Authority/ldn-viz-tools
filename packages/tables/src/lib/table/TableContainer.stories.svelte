@@ -5,17 +5,22 @@
 	import { Card } from '@ldn-viz/ui';
 
 	/**
-	 * `TableContainer` wraps a table with the shared chrome primitives — a `ChromeHeader`
-	 * (title / subtitle / optional hint) above and a `ChromeFooter` row (source / byline / note
-	 * + data/image download buttons) below — the same pieces used by `Card` and `ChartContainer`.
+	 * `TableContainer` wraps a table with the shared chrome primitives: a `ChromeHeader`
+	 * (title / subtitle / optional hint) above the table, and a `ChromeFooter` row
+	 * (source / byline / note + data/image download buttons) below it — the same pieces
+	 * used by `Card` and `ChartContainer`, so the three read and construct identically.
 	 *
-	 * It has **no surface of its own** (no border, padding or shadow); compose it inside a `Card`
-	 * when a surface is wanted. That is what lets several tables share one Card: the Card title
-	 * takes `emphasis="secondary"` (an eyebrow labelling the group) while each `TableContainer`
-	 * keeps its own dominant title (see the last two stories).
+	 * It has **no surface of its own** — no border, padding or shadow. When a surface is
+	 * wanted, compose it inside a `Card`, which supplies those. This is what lets several
+	 * tables share one `Card`: the Card title takes `emphasis="secondary"` (an eyebrow
+	 * labelling the group) while each `TableContainer` keeps its own dominant title.
 	 *
-	 * The table is supplied via the `table` snippet; `beforeTable`, `numRowsControlSlot` and
-	 * `paginationControls` snippets remain for content and pagination controls.
+	 * **Accessibility**: always provide `alt` (a short text alternative). `description`
+	 * (a longer account) is optional but recommended and, when given, is exposed to both
+	 * screen readers (`aria-describedby`) and sighted users (a "View description" Modal).
+	 *
+	 * The table is supplied via the `table` snippet; `beforeTable`, `numRowsControlSlot`
+	 * and `paginationControls` snippets remain for content and pagination controls.
 	 *
 	 * **Note** Mirrors [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation)
 	 * in @ldn-viz/charts.

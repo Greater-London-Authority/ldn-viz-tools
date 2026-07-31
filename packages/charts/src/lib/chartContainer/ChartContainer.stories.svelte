@@ -9,9 +9,10 @@
 	 * The `ChartContainer` is a wrapper around a plot that adds a title, subtitle, footnotes and
 	 * export controls.
 	 *
-	 * **Accessibility**: always provide `alt` (a short text alternative). `description` (a longer
-	 * account) is optional but recommended; when given, it is exposed to both screen readers
-	 * (`aria-describedby`) and sighted users (a "View description" Modal).
+	 * **Accessibility**: always provide `alt` — a short text alternative naming what the chart shows.
+	 * `description` (a longer account of the data/trends) is optional but recommended; when given it
+	 * is exposed to **both** audiences from one source — screen readers (a visually-hidden copy wired
+	 * via `aria-describedby`) and sighted users (a "View description" Modal in the footer).
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 */
