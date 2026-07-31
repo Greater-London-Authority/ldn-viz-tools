@@ -483,7 +483,7 @@ const formatTypography = (dictionary) => (token) => {
 
 		if (isLineHeight) {
 			// Always computed unitless (ratio). Line-height is deliberately NOT a
-			// primitive reference: the emitted value is lh/fs, not a px alias.
+			// primitive reference: the emitted value is line-height/font-size, not a px alias.
 			const fontSizePx = getFontSizeForLineHeight(token);
 			const unitlessLineHeight = fontSizePx ? token.value / fontSizePx : token.value / 16;
 			return `  --${token.name}: ${unitlessLineHeight.toFixed(4)}`;
