@@ -181,6 +181,12 @@
 
 <style>
 	:global(.defaultColorLegendLabel-swatch) {
-		font-size: 1rem;
+		font-size: var(--label-font-size);
+	}
+	:global(.defaultColorLegendLabel-ramp) {
+		font-size: var(--label-font-size);
+	}
+	:global(.defaultColorLegendLabel-ramp .tick) {
+		font-size: var(--tick-sm-font-size);
 	}
 </style>
