@@ -77,7 +77,7 @@
 			</blockquote>
 			<p>
 				The answer is no. Vertical rhythm is a property of the context, not of the type inside it.
-				Wrapping the document in <code>flow-prose</code> means consecutive blocks — a
+				Wrapping the document in a <code>div</code> element with the <code>flow-prose</code> class applied means consecutive blocks — a
 				<code>p</code>, a figure, a heading — space themselves, so a chart between two paragraphs
 				lands with the <em>right</em> gap, not an arbitrary one.
 			</p>
