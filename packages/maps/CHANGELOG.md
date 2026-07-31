@@ -1,5 +1,26 @@
 # ldn-viz-tools-maps
 
+## 15.0.0
+
+### Major Changes
+
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Patch Changes
+
+- Updated dependencies [0e03ccc]
+- Updated dependencies [864fdfb]
+- Updated dependencies [0d7953b]
+- Updated dependencies [2633ae9]
+- Updated dependencies [2633ae9]
+- Updated dependencies [62ec2b9]
+- Updated dependencies [bddeccb]
+- Updated dependencies [6d20c4e]
+- Updated dependencies [3a6075a]
+- Updated dependencies [e1e3928]
+  - @ldn-viz/ui@24.0.0
+  - @ldn-viz/utils@4.0.0
+
 ## 14.0.0
 
 ### Major Changes
