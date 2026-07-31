@@ -21,7 +21,7 @@ A developer's guide to applying type in our apps, components and charts. It cove
 
 Two things that follow from it:
 
-- **Don't reach for Tailwind's `text-*` sizes.** `text-xl`, `text-9xl` and friends are off-system. If a role looks wrong at a given size, the role is probably wrong — check the mapping below before overriding.
+- **Don't use Tailwind's `text-*` sizes.** `text-xl`, `text-9xl` et al are off-system. If a role looks wrong at a given size, the role is probably wrong — check the mapping below before overriding.
 - **Never bind to `--primitive-*`.** Primitives are the private source. Components consume semantic roles and the `--spacing-{n}` alias only.
 
 ## Three families
@@ -74,14 +74,14 @@ Migrate off-system legacy sizes to the correct role even when it visibly resizes
 
 ## Prose roles
 
-| Role       | Size | Weight | Job                                         |
-| ---------- | ---- | ------ | ------------------------------------------- |
-| `display`  | 76   | 700    | Homepage hero. Scales.                      |
-| `headline` | 56   | 700    | Subpage hero. Scales.                       |
+| Role       | Size | Weight | Job                                          |
+| ---------- | ---- | ------ | -------------------------------------------- |
+| `display`  | 76   | 700    | Homepage hero. Scales.                       |
+| `headline` | 56   | 700    | Subpage hero. Scales.                        |
 | `subhead`  | 28   | 400    | Companion line under a `headline`.           |
-| `title-1`  | 36   | 600    | Content h1. Scales.                         |
-| `title-2`  | 30   | 600    | Content h2. Scales.                         |
-| `title-3`  | 24   | 600    | Content h3. Scales.                         |
+| `title-1`  | 36   | 600    | Content h1. Scales.                          |
+| `title-2`  | 30   | 600    | Content h2. Scales.                          |
+| `title-3`  | 24   | 600    | Content h3. Scales.                          |
 | `title-4`  | 20   | 600    | Content h4 — floor of the ladder.            |
 | `subtitle` | 18   | 400    | Companion line under a content title.        |
 | `lead`     | 22   | 400    | Intro / standfirst paragraph.                |
@@ -96,8 +96,8 @@ Migrate off-system legacy sizes to the correct role even when it visibly resizes
 
 Charts carry a complete vocabulary so they can be consumed standalone. `title`, `subtitle` and `eyebrow` are aliases of their product equivalents, so they cannot drift.
 
-| Role         | Size | Weight | Line-height | Job                                                |
-| ------------ | ---- | ------ | ----------- | -------------------------------------------------- |
+| Role         | Size | Weight | Line-height | Job                                                 |
+| ------------ | ---- | ------ | ----------- | --------------------------------------------------- |
 | `title`      | 20   | 600    | inherited   | The chart's own title.                              |
 | `subtitle`   | 16   | 400    | inherited   | Supporting line under a chart title.                |
 | `eyebrow`    | 14   | 500    | inherited   | A chart title that has yielded its slot.            |
