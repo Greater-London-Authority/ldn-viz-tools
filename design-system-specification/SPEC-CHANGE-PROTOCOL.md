@@ -4,24 +4,25 @@ _How changes flow through the GLA / ldn-viz design system without the spec drift
 
 ## The core rule
 
-**For anything with a concrete value or name, the spec is downstream of the build — never the source.** The emitted CSS in `styles/` is ground truth: it ships, and the Style Dictionary build is deterministic (reproducible zero-diff). So the spec's value content is *generated* from that output, and only its prose — intent, rationale, role logic — is hand-written. Generated numbers can be out of date (a rerun fixes that); they can't be silently wrong.
+**For anything with a concrete value or name, the spec is downstream of the build — never the source.** The emitted CSS in `styles/` is ground truth: it ships, and the Style Dictionary build is deterministic (reproducible zero-diff). So the spec's value content is _generated_ from that output, and only its prose — intent, rationale, role logic — is hand-written. Generated numbers can be out of date (a rerun fixes that); they can't be silently wrong.
 
 Three artifacts, three distinct jobs — don't blur them:
 
-- **`DECISIONS.md`** — the decision ledger. One line per settled decision. The *why*.
-- **Figma variables → token export → `styles/`** — the value source. The *what*, authoritative.
+- **`DECISIONS.md`** — the decision ledger. One line per settled decision. The _why_.
+- **Figma variables → token export → `styles/`** — the value source. The _what_, authoritative.
 - **`design-system-specification.md`** — the reconciled narrative. Prose by hand; value tables + CSS appendix generated.
 
 ## Two kinds of change, two directions
 
-**A decision** (rename a role, refine chart typography, "tick should be X"): enters as prose, flows *down* the pipeline.
+**A decision** (rename a role, refine chart typography, "tick should be X"): enters as prose, flows _down_ the pipeline.
+
 1. Add a one-line entry to `DECISIONS.md`.
 2. Write/adjust the **intent** in the spec prose (not the numbers).
 3. Make it real in **Figma**, re-export tokens, rebuild.
 4. Regenerate the spec's value blocks so the numbers catch up (`regen_spec.py gen`).
 5. Update the pinned value in `regen_spec.py`'s `PINNED` list if the decision changed a checked value.
 
-**A value/name reality** (what a token actually is): only ever flows *up* from Figma. Never hand-edit a value in the spec and treat it as truth — that is exactly what caused the earlier drift. Figma → tokens → emitted → reconcile spec to it.
+**A value/name reality** (what a token actually is): only ever flows _up_ from Figma. Never hand-edit a value in the spec and treat it as truth — that is exactly what caused the earlier drift. Figma → tokens → emitted → reconcile spec to it.
 
 ## The tool: `regen_spec.py`
 

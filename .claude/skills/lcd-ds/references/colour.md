@@ -1,6 +1,6 @@
 # Colour
 
-Distilled from the spec's *Semantic Layer: Colour*. Emitted tokens:
+Distilled from the spec's _Semantic Layer: Colour_. Emitted tokens:
 `packages/themes/styles/js/color-tokens.js` (JS tree, keyed by `mode.light`/`mode.dark`)
 and `packages/themes/styles/{light,dark}.css` (CSS custom props `--color-*`).
 
@@ -14,25 +14,26 @@ token carries a value per mode, so a bound component themes automatically.
 - Ten hues (grey, blue, green, yellow, orange, red, pink, darkpink, + purple &
   turquoise in the data set), each 100–1100.
 
-## Semantic groups (choose by what the element *is*)
+## Semantic groups (choose by what the element _is_)
 
-| Group | Tokens (shape) | Job |
-|---|---|---|
-| **Text** | `text`, `text-muted`, `text-wash`, `label`, `label-muted` | Foreground text/labels, descending emphasis |
-| **Surface** | `surface`, `surface-muted`, `surface-accent`, `surface-{negative,positive,caution,neutral,empty}(-muted)`, `surface-alpha,beta` | Fills/backgrounds incl. status tints |
-| **Container** | `container`, `container-level-1,2,3` | Layered container backgrounds (elevation/nesting) |
-| **Canvas** | `canvas`, `canvas-muted` | Base page background |
-| **Border** | `border`, `border-muted` | Strokes/dividers |
-| **Interactive** | `interactive/{intent}[-muted][-state]` | All control colours — the systematic core (below) |
-| **Inverse** | `inverse/text(-muted,-wash)`, `inverse/surface(-muted)`, `inverse/container[-level-N]` | Content on an inverse surface |
-| **Static** | `static/brand,white,black` | Mode-independent fixed colours (rare) |
-| **Data** | `data/categorical/{hue}`, `data/{primary,secondary,tertiary}`, `data/{positive,negative,neutral/0,neutral/1,empty,context}`, `data/{male,female}` | Chart/series colours |
-| **Chart chrome** | `chart/{axis,grid,surface,label,label-muted}` (+ `chart/inverse/*`) | Non-data chart furniture |
-| **Geo** | `geo/{feature,label,annotation}(-muted)`, `geo/interactive[-state]` | Map colours |
+| Group            | Tokens (shape)                                                                                                                                    | Job                                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| **Text**         | `text`, `text-muted`, `text-wash`, `label`, `label-muted`                                                                                         | Foreground text/labels, descending emphasis       |
+| **Surface**      | `surface`, `surface-muted`, `surface-accent`, `surface-{negative,positive,caution,neutral,empty}(-muted)`, `surface-alpha,beta`                   | Fills/backgrounds incl. status tints              |
+| **Container**    | `container`, `container-level-1,2,3`                                                                                                              | Layered container backgrounds (elevation/nesting) |
+| **Canvas**       | `canvas`, `canvas-muted`                                                                                                                          | Base page background                              |
+| **Border**       | `border`, `border-muted`                                                                                                                          | Strokes/dividers                                  |
+| **Interactive**  | `interactive/{intent}[-muted][-state]`                                                                                                            | All control colours — the systematic core (below) |
+| **Inverse**      | `inverse/text(-muted,-wash)`, `inverse/surface(-muted)`, `inverse/container[-level-N]`                                                            | Content on an inverse surface                     |
+| **Static**       | `static/brand,white,black`                                                                                                                        | Mode-independent fixed colours (rare)             |
+| **Data**         | `data/categorical/{hue}`, `data/{primary,secondary,tertiary}`, `data/{positive,negative,neutral/0,neutral/1,empty,context}`, `data/{male,female}` | Chart/series colours                              |
+| **Chart chrome** | `chart/{axis,grid,surface,label,label-muted}` (+ `chart/inverse/*`)                                                                               | Non-data chart furniture                          |
+| **Geo**          | `geo/{feature,label,annotation}(-muted)`, `geo/interactive[-state]`                                                                               | Map colours                                       |
 
 ## Interactive token logic
 
 `interactive/{intent}[-muted][-state]`:
+
 - **intent**: `primary`, `secondary`, `positive`, `negative`, `caution` (+ standalone
   states `selected`, `on`, `off`, `dragged`, `focus`, `error`, `disabled`).
 - **variant**: base or `-muted` (lower-emphasis fill of same intent).

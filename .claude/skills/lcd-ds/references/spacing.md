@@ -1,6 +1,6 @@
 # Spacing
 
-Distilled from the spec's *Spacing Scale*. Emitted: `packages/themes/styles/spacing.css`
+Distilled from the spec's _Spacing Scale_. Emitted: `packages/themes/styles/spacing.css`
 (+ `tw-extend/spacing.cjs`). Independent of the type scale.
 
 ## The numbered scale (what authors use)
@@ -28,13 +28,13 @@ free; a named role must earn a one-sentence job those two don't cover.
 
 ## Which system for which job
 
-- **Rhythm** — space *between* stacked blocks → `flow` (context ramp). See `references/flow.md`.
+- **Rhythm** — space _between_ stacked blocks → `flow` (context ramp). See `references/flow.md`.
 - **Construction** — padding, border widths, list indents, cell padding, gaps →
   `--spacing-{n}` / `p-{n}` / `gap-{n}`.
 - **Layout structure** — grid gutters, container padding → `grid-spacing` tokens.
   See `references/layout-grid.md`.
-- Line-height governs space *within* a text block; spacing tokens govern space
-  *between* elements. Whitespace around text uses the spacing scale, not the
+- Line-height governs space _within_ a text block; spacing tokens govern space
+  _between_ elements. Whitespace around text uses the spacing scale, not the
   font-size/line-height primitives.
 
 ## Retired: the t-shirt scale (migration mapping)

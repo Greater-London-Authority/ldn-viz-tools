@@ -42,7 +42,7 @@
 	{#if showCiuLogo}
 		<div class="flex bg-color-container px-4 pb-4 text-color-text sm:flex-row-reverse md:px-8">
 			<div class="product">
-				<p class="mb-1 caption tracking-wide">Designed and developed by</p>
+				<p class="caption mb-1 tracking-wide">Designed and developed by</p>
 				<LogoCIU class="h-4" />
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 # Flow & vertical rhythm
 
-Distilled from the spec's *Content Flow* section. Implementation:
+Distilled from the spec's _Content Flow_ section. Implementation:
 `packages/themes/tailwind-custom/typography/flow.cjs` (Tailwind plugin) →
 emitted context vars in `packages/themes/styles/flow.css`.
 
@@ -12,12 +12,12 @@ with their primary; everything else follows. No margin is computed by hand.
 
 ## The four-step ramp, remapped per context
 
-| Ramp role | `flow-prose` | `flow-product` | `flow-compact` |
-|---|---|---|---|
-| `--flow-tight` | 4 | 4 | 4 |
-| `--flow-default` | 16 | 8 | 4 |
-| `--flow-loose` | 24 | 16 | 8 |
-| `--flow-section` | 40 | 24 | 8 |
+| Ramp role        | `flow-prose` | `flow-product` | `flow-compact` |
+| ---------------- | ------------ | -------------- | -------------- |
+| `--flow-tight`   | 4            | 4              | 4              |
+| `--flow-default` | 16           | 8              | 4              |
+| `--flow-loose`   | 24           | 16             | 8              |
+| `--flow-section` | 40           | 24             | 8              |
 
 `flow-compact` (tooltips/alerts/dialogs) also tightens body-tier leading to ~1.3
 (`--flow-leading: 1.3`). A new density is one new theme remapping four variables —
@@ -25,7 +25,7 @@ don't hand-set margins to get there.
 
 **The context class is both the variable scope AND the flow root** — e.g.
 `flow-prose` alone; there is no separate bare `.flow` root. (Note: `flow-*` sets
-*rhythm* vars only; typography role vars come from the separate `.prose`/`.product`
+_rhythm_ vars only; typography role vars come from the separate `.prose`/`.product`
 context class — see `references/typography.md`.)
 
 ## The owl rules (what's actually implemented)
@@ -71,7 +71,7 @@ override at equal specificity.
 ## Hero spacing (proportional)
 
 Hero-tier margins scale with the type via `em` (hero line-heights are unitless):
-`.display { margin-block-start: 0.75em }`. The gap *below* a hero to its subhead
+`.display { margin-block-start: 0.75em }`. The gap _below_ a hero to its subhead
 stays coupling (`flow-tight`); only the space above is proportional. Figma stores
 precomputed per-breakpoint `hero/space-before` values.
 

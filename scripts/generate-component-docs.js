@@ -353,9 +353,7 @@ function main() {
 
 	const componentsSectionLines = [];
 	for (const pkg of [...byPackage.keys()].sort()) {
-		const items = byPackage
-			.get(pkg)
-			.sort((a, b) => a.componentName.localeCompare(b.componentName));
+		const items = byPackage.get(pkg).sort((a, b) => a.componentName.localeCompare(b.componentName));
 
 		// Resolve display name from package.json
 		const pkgJsonPath = join(PACKAGES_DIR, pkg, 'package.json');

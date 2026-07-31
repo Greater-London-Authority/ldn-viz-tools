@@ -38,7 +38,7 @@
 				x={(width * (i + 0.5)) / scale.domain().length}
 				y={height + 20}
 				text-anchor="middle"
-				class="select-none label"
+				class="label select-none"
 				style:font-weight={val === highlightedValue ? 'bold' : 'normal'}
 			>
 				{val}

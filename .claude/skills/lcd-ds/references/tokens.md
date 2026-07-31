@@ -1,7 +1,7 @@
 # Token architecture & naming
 
-Distilled from *token-architecture-and-naming.md*, the spec's *Primitive Scale*,
-*Generative Logic*, *Line Height Scale*, and *Extending the System*. The naming
+Distilled from _token-architecture-and-naming.md_, the spec's _Primitive Scale_,
+_Generative Logic_, _Line Height Scale_, and _Extending the System_. The naming
 doc is the canonical reference for exact keys.
 
 ## Two tiers (the third was fiction)
@@ -30,8 +30,8 @@ Hand-placed exceptions: 22, 26, 30, 76. Steps −2…14 = 12,14,16,18,20,22,24,2
 
 ## Line-height — two policies by role
 
-- **Grid leading** (most roles): rounded to the 4px grid. A *reference for
-  authoring*, not a cascade participant — emitted line-height is a computed
+- **Grid leading** (most roles): rounded to the 4px grid. A _reference for
+  authoring_, not a cascade participant — emitted line-height is a computed
   **unitless ratio**, never a `var()` to a px value.
 - **Reading leading** (prose body only): `prose body` 16→26 (1.625),
   `prose body-sm` 14→22 (1.571). Product `body`/`body-sm` keep grid leading
@@ -72,7 +72,8 @@ Exposed as `theme.tokenNameToValue(name)` and `theme.currentTheme`
 
 > History: it previously threw on a missing `.default`, which blanked whole charts.
 > Now it degrades. Don't rely on the throw; a missing token = wrong/absent value
-> + a console error.
+>
+> - a console error.
 
 ## Extending the system (work in order before adding anything)
 
@@ -86,7 +87,7 @@ Exposed as `theme.tokenNameToValue(name)` and `theme.currentTheme`
    a single-surface need.
 6. Name in the context's register: product roles are **structural/generic**
    (`Title`, not `CardTitle`); chart roles are **anatomical/specific** (`Chart Tick`).
-   A new *family* needs both divergent values AND standalone consumption (chart passes; most don't).
+   A new _family_ needs both divergent values AND standalone consumption (chart passes; most don't).
 
 To change the spec itself, follow `design-system-specification/SPEC-CHANGE-PROTOCOL.md`
 (and log rulings in `DECISIONS.md`).

@@ -1,6 +1,6 @@
 module.exports = {
 	prose: {
-		'body': {
+		body: {
 			default: {
 				'--body-font-size': 'var(--typography-base-prose-body-font-size)',
 				'--body-line-height': 'var(--typography-base-prose-body-line-height)'
@@ -44,7 +44,7 @@ module.exports = {
 				'--body-sm-line-height': 'var(--typography-xl-prose-body-sm-line-height)'
 			}
 		},
-		'caption': {
+		caption: {
 			default: {
 				'--caption-font-size': 'var(--typography-base-prose-caption-font-size)',
 				'--caption-line-height': 'var(--typography-base-prose-caption-line-height)'
@@ -66,7 +66,7 @@ module.exports = {
 				'--caption-line-height': 'var(--typography-xl-prose-caption-line-height)'
 			}
 		},
-		'display': {
+		display: {
 			default: {
 				'--display-font-size': 'var(--typography-base-prose-display-font-size)',
 				'--display-line-height': 'var(--typography-base-prose-display-line-height)'
@@ -88,7 +88,7 @@ module.exports = {
 				'--display-line-height': 'var(--typography-xl-prose-display-line-height)'
 			}
 		},
-		'headline': {
+		headline: {
 			default: {
 				'--headline-font-size': 'var(--typography-base-prose-headline-font-size)',
 				'--headline-line-height': 'var(--typography-base-prose-headline-line-height)'
@@ -110,7 +110,7 @@ module.exports = {
 				'--headline-line-height': 'var(--typography-xl-prose-headline-line-height)'
 			}
 		},
-		'subhead': {
+		subhead: {
 			default: {
 				'--subhead-font-size': 'var(--typography-base-prose-subhead-font-size)',
 				'--subhead-line-height': 'var(--typography-base-prose-subhead-line-height)'
@@ -220,7 +220,7 @@ module.exports = {
 				'--title-4-line-height': 'var(--typography-xl-prose-title-4-line-height)'
 			}
 		},
-		'subtitle': {
+		subtitle: {
 			default: {
 				'--subtitle-font-size': 'var(--typography-base-prose-subtitle-font-size)',
 				'--subtitle-line-height': 'var(--typography-base-prose-subtitle-line-height)'
@@ -242,7 +242,7 @@ module.exports = {
 				'--subtitle-line-height': 'var(--typography-xl-prose-subtitle-line-height)'
 			}
 		},
-		'lead': {
+		lead: {
 			default: {
 				'--lead-font-size': 'var(--typography-base-prose-lead-font-size)',
 				'--lead-line-height': 'var(--typography-base-prose-lead-line-height)'
@@ -264,7 +264,7 @@ module.exports = {
 				'--lead-line-height': 'var(--typography-xl-prose-lead-line-height)'
 			}
 		},
-		'eyebrow': {
+		eyebrow: {
 			default: {
 				'--eyebrow-font-size': 'var(--typography-base-prose-eyebrow-font-size)',
 				'--eyebrow-line-height': 'var(--typography-base-prose-eyebrow-line-height)'
@@ -289,7 +289,7 @@ module.exports = {
 	},
 	//PRODUCT
 	product: {
-		'body': {
+		body: {
 			default: {
 				'--body-font-size': 'var(--typography-base-product-body-font-size)',
 				'--body-line-height': 'var(--typography-base-product-body-line-height)'
@@ -333,7 +333,7 @@ module.exports = {
 				'--body-sm-line-height': 'var(--typography-xl-product-body-sm-line-height)'
 			}
 		},
-		'caption': {
+		caption: {
 			default: {
 				'--caption-font-size': 'var(--typography-base-product-caption-font-size)',
 				'--caption-line-height': 'var(--typography-base-product-caption-line-height)'
@@ -465,7 +465,7 @@ module.exports = {
 				'--eyebrow-line-height': 'var(--typography-xl-product-eyebrow-line-height)'
 			}
 		},
-		'metric': {
+		metric: {
 			default: {
 				'--metric-font-size': 'var(--typography-base-product-metric-font-size)',
 				'--metric-line-height': 'var(--typography-base-product-metric-line-height)'
@@ -509,7 +509,7 @@ module.exports = {
 				'--metric-sm-line-height': 'var(--typography-xl-product-metric-sm-line-height)'
 			}
 		},
-		'label': {
+		label: {
 			default: {
 				'--label-font-size': 'var(--typography-base-product-label-font-size)',
 				'--label-line-height': 'var(--typography-base-product-label-line-height)'

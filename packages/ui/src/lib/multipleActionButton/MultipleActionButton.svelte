@@ -98,7 +98,7 @@
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>
-						<DropdownMenu.GroupHeading class="p-1 body-sm">{menuTitle}</DropdownMenu.GroupHeading>
+						<DropdownMenu.GroupHeading class="body-sm p-1">{menuTitle}</DropdownMenu.GroupHeading>
 
 						<div class="divide-y divide-color-border-muted">
 							{#each options as option (option.id)}

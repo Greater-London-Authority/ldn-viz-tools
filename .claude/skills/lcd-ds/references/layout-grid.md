@@ -1,6 +1,6 @@
 # Layout grid
 
-Distilled from the spec's *Layout Grid*. Sits one level above type, independent of
+Distilled from the spec's _Layout Grid_. Sits one level above type, independent of
 it. Grid tokens: `--grid-spacing-{mode}-{contained|fluid}-{gutter|container-padding}`
 (emitted `packages/themes/styles/grid-spacing.css`, `tw-extend/gridspacing.cjs`),
 resolving from `--primitive-spacing-{n}`.
@@ -22,24 +22,24 @@ component frames. Components use Auto Layout with padding/gap bound to
 **Contained** — centred, max-width, edge space grows with viewport. For
 document-like surfaces (prose, marketing, settings, forms).
 
-| bp | cols | container padding | gutter |
-|---|---|---|---|
-| base | 4 | 16 | 16 |
-| sm | 6 | 32 | 20 |
-| md | 8 | 32 | 24 |
-| lg | 12 | 64 | 24 |
-| xl | 12 | 80 | 32 |
-| 2xl | 12 | 96 | 32 |
+| bp   | cols | container padding | gutter |
+| ---- | ---- | ----------------- | ------ |
+| base | 4    | 16                | 16     |
+| sm   | 6    | 32                | 20     |
+| md   | 8    | 32                | 24     |
+| lg   | 12   | 64                | 24     |
+| xl   | 12   | 80                | 32     |
+| 2xl  | 12   | 96                | 32     |
 
 **Fluid** — full-bleed, columns stretch, **constant** modest edge space. For
 dashboards and app shells.
 
-| bp | cols | container padding | gutter |
-|---|---|---|---|
-| base | 4 | 16 | 16 |
-| sm | 6 | 16 | 16 |
-| md | 8 | 24 | 16 |
-| lg–2xl | 12 | 24 | 16 |
+| bp     | cols | container padding | gutter |
+| ------ | ---- | ----------------- | ------ |
+| base   | 4    | 16                | 16     |
+| sm     | 6    | 16                | 16     |
+| md     | 8    | 24                | 16     |
+| lg–2xl | 12   | 24                | 16     |
 
 The uniform 16px gutter is a deliberate card-tiling gap (looser than the 8px
 product vertical flow). Keep **gutter ≤ card interior padding**, and edge padding

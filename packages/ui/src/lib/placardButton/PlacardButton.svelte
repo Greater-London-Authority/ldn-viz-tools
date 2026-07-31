@@ -85,7 +85,7 @@
 	onmouseenter={() => (isHovered = true)}
 	onmouseleave={() => (isHovered = false)}
 >
-	<div class="h-full flow-product p-4">
+	<div class="flow-product h-full p-4">
 		{#if title}
 			<p class="text-2xl font-bold">
 				<!-- Title text, displayed at top of card in large font-->

@@ -7,4 +7,3 @@ export { default as ObservablePlotInner } from './observablePlot/ObservablePlotI
 
 export * from './observablePlotFragments/observablePlotFragments';
 export * from './observablePlotFragments/plot.js';
-

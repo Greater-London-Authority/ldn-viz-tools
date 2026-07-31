@@ -5,7 +5,7 @@
 </script>
 
 <div class="container mx-auto py-8">
-	<div class="flow-prose prose">
+	<div class="prose flow-prose">
 		<h1 class="display mt-3">{data.metadata.title}</h1>
 		<PageComponent />
 	</div>

@@ -12,7 +12,14 @@
 	 * 	@component
 	 */
 
-	import { Button, ChromeFooter, ChromeHeader, ExportButtons, Modal, classNames } from '@ldn-viz/ui';
+	import {
+		Button,
+		ChromeFooter,
+		ChromeHeader,
+		ExportButtons,
+		Modal,
+		classNames
+	} from '@ldn-viz/ui';
 
 	/** Controls whether the chart-description Modal is open. */
 	let descriptionOpen = $state(false);
@@ -177,15 +184,7 @@
 
 	{#if title || description || eyebrow || hint}
 		<div class="mb-2">
-			<ChromeHeader
-				{title}
-				{subtitle}
-				{eyebrow}
-				{emphasis}
-				{hint}
-				{hintType}
-				{hintTitle}
-			/>
+			<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
 		</div>
 	{/if}
 

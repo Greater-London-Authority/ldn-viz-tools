@@ -340,7 +340,7 @@
 			class="absolute right-1 top-1 flex items-center justify-center bg-color-surface"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="p-0.5 h-8 w-8 text-color-text" />
+			<Icon src={XMark} class="h-8 w-8 p-0.5 text-color-text" />
 		</button>
 	{/if}
 

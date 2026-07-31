@@ -23,6 +23,7 @@ day, pins the exact code anchors, and records gotchas the spec doesn't cover.
 When rationale matters, follow the spec links.
 
 **Source of truth (do not duplicate — read when you need the "why"):**
+
 - `design-system-specification/design-system-specification.md` — the full spec
 - `design-system-specification/DECISIONS.md` — dated changelog of rulings
 - `design-system-specification/token-architecture-and-naming.md` — token names/tiers
@@ -43,17 +44,17 @@ When rationale matters, follow the spec links.
 
 ## Router — read the reference(s) for the task
 
-| Working on… | Read |
-|---|---|
-| Picking/renaming a type role, the title ladder, companion coupling (eyebrow/subtitle/subhead) | `references/typography.md` (+ `references/flow.md` for coupling) |
-| Colour: binding a token, interactive/status/inverse, data colours | `references/colour.md` |
-| Vertical rhythm, the owl rule, coupling, contexts (prose/product/compact) | `references/flow.md` |
-| Margins/padding/gaps, the numbered scale, retired t-shirt scale | `references/spacing.md` |
-| Styling an Observable Plot chart, chart roles, `tokenNameToValue` in charts | `references/charts.md` |
-| Column grids, gutters, container padding, contained vs fluid | `references/layout-grid.md` |
-| Token tiers, naming, primitive→semantic aliasing, adding a role, `tokenNameToValue` | `references/tokens.md` |
-| Migrating a **component's** raw Tailwind (`text-*`/`space-*`/`p-*`/`rounded-*`) → roles + flow (function-first, rhythm-vs-construction gate) | `references/component-migration.md` |
-| Sweeping a **package/app** off already-retired classes/tokens to the new system | `references/migration.md` |
+| Working on…                                                                                                                                  | Read                                                             |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Picking/renaming a type role, the title ladder, companion coupling (eyebrow/subtitle/subhead)                                                | `references/typography.md` (+ `references/flow.md` for coupling) |
+| Colour: binding a token, interactive/status/inverse, data colours                                                                            | `references/colour.md`                                           |
+| Vertical rhythm, the owl rule, coupling, contexts (prose/product/compact)                                                                    | `references/flow.md`                                             |
+| Margins/padding/gaps, the numbered scale, retired t-shirt scale                                                                              | `references/spacing.md`                                          |
+| Styling an Observable Plot chart, chart roles, `tokenNameToValue` in charts                                                                  | `references/charts.md`                                           |
+| Column grids, gutters, container padding, contained vs fluid                                                                                 | `references/layout-grid.md`                                      |
+| Token tiers, naming, primitive→semantic aliasing, adding a role, `tokenNameToValue`                                                          | `references/tokens.md`                                           |
+| Migrating a **component's** raw Tailwind (`text-*`/`space-*`/`p-*`/`rounded-*`) → roles + flow (function-first, rhythm-vs-construction gate) | `references/component-migration.md`                              |
+| Sweeping a **package/app** off already-retired classes/tokens to the new system                                                              | `references/migration.md`                                        |
 
 Most tasks need two files (e.g. chart colour = `charts.md` + `colour.md`;
 type spacing = `typography.md` + `flow.md`). Read what the router points to

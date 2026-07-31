@@ -21,13 +21,13 @@ xxs→1  xs→2  sm→3  md→4  lg→5  xl→6  2xl→7  3xl→8  4xl→10  5xl
 Old t-shirt roles are gone (defined in 0 theme files). Size-rank mapping preserves
 the visual hierarchy:
 
-| Old | New | | Old | New |
-|---|---|---|---|---|
-| `title-lg` | `title-1` | | `body-lg` | `lead` |
-| `title-md` | `title-2` | | `body-md` | `body` |
-| `title-sm` | `title-3` | | `body-xs` | `caption` |
-| `title-xs` | `title-4` | | `label-lg` / `label-md` | `label` |
-| | | | `label-xs` | `label-sm` |
+| Old        | New       |     | Old                     | New        |
+| ---------- | --------- | --- | ----------------------- | ---------- |
+| `title-lg` | `title-1` |     | `body-lg`               | `lead`     |
+| `title-md` | `title-2` |     | `body-md`               | `body`     |
+| `title-sm` | `title-3` |     | `body-xs`               | `caption`  |
+| `title-xs` | `title-4` |     | `label-lg` / `label-md` | `label`    |
+|            |           |     | `label-xs`              | `label-sm` |
 
 `body-sm` / `label-sm` are valid new roles — leave them. Dead helpers: **`format`**
 (undefined) and **`.responsive`** (no-op — scaling is automatic) should be removed.

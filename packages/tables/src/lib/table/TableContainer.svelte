@@ -171,21 +171,13 @@
 {@render numRowsControlSlot?.()}
 
 <div
-	class={`table-container not-prose product ${tableWidth}`}
+	class={`table-container product not-prose ${tableWidth}`}
 	bind:this={tableToCapture}
 	id="captureElement"
 >
 	{#if title || subtitle || eyebrow || hint}
 		<div class="mb-2">
-			<ChromeHeader
-				{title}
-				subtitle={subtitle}
-				{eyebrow}
-				{emphasis}
-				{hint}
-				{hintType}
-				{hintTitle}
-			/>
+			<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
 		</div>
 	{/if}
 

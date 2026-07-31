@@ -3,8 +3,8 @@
 The function-first protocol for migrating a component's raw Tailwind
 (`text-*`, `space-*`, `p-*`, `rounded-*`) onto semantic type roles, the flow
 ramp, and the spacing scale. Distinct from `migration.md`, which is the
-*app/package sweep off already-retired classes/tokens* — this file is the
-*per-component conversion method*.
+_app/package sweep off already-retired classes/tokens_ — this file is the
+_per-component conversion method_.
 
 > **Provenance & caution.** Distilled from two now-deleted drafts
 > (`llm-docs/migration-type-mapping.md`, `migration-spacing-mapping.md`) that
@@ -18,7 +18,7 @@ ramp, and the spacing scale. Distinct from `migration.md`, which is the
 ## How to use
 
 1. **Function first, size second.** The same Tailwind size maps to different
-   roles by what the element *does*: `text-sm` → `label` on a button but
+   roles by what the element _does_: `text-sm` → `label` on a button but
    `body-sm` on helper text. Use Part A; Part B is only a cross-check.
 2. **Context prefix governs family** (no cross-mixing): product UI → `product/*`,
    reading content → `prose/*`, chart chrome → `chart/*`. The component needs the
@@ -35,24 +35,24 @@ ramp, and the spacing scale. Distinct from `migration.md`, which is the
 
 ### Product context (xl-default sizes; scaling roles scale)
 
-| element's job | role | size/wt | typically replaces | status |
-|---|---|---|---|---|
-| body copy / panel description | `body` | 16 / 400 | `text-base` | ✓ |
-| input value / placeholder | `body` | 16 / 400 | `text-base` / `text-sm`* | ⚑ *legacy 14 → up to 16 |
-| helper / hint / secondary / error | `body-sm` | 14 / 400 | `text-sm` | ✓ |
-| control label — button / tab / chip | `label` + `label-tight` | 14 / 500, lh 1 | `text-sm font-medium` | ✓ |
-| nav / menu item / tab label | `label` + `label-tight` | 14 / 500, lh 1 | `text-sm` / `text-base`* | ✓ single-line; *legacy 16→14 |
-| sidebar / nav **section** title | `label` (NOT a title) | 14 / 500 | `text-xs`/`text-sm uppercase` | ⚑ casing on hold |
-| small functional — timestamp/badge/meta | `caption` | 12 / 400 | `text-xs` | ✓ |
-| column header (dense) | `label-sm` | 12 / 500 | `text-xs` | ✓ |
-| object title — card/panel/modal/callout/drawer | `title` | 20 / 600 | `text-lg`/`text-xl font-semibold` | ✓ |
-| object eyebrow (kicker) / demoted title | `eyebrow` | 14 / 500 | `text-sm font-medium` | ✓ |
-| object subtitle (deck) | `subtitle` | 16 / 400 | `text-base` | ✓ |
-| section heading (groups cards) | `section-head` | 28 / 600 | `text-2xl/3xl font-semibold` | ✓ |
-| page / view title | `page-head` | 36 / 700 | `text-3xl/4xl font-bold` | ✓ |
-| KPI / big number | `metric` | 36 / 700, lh ~1 | `text-4xl font-bold tabular` | ✓ |
-| KPI, smaller | `metric-sm` | 20 / 700, lh ~1 | `text-xl font-bold` | ✓ |
-| table cells/headers | — | — | — | ⚑ **defer to Table Kit** (`packages/tables` is code-authoritative; header font inherited from `Table.svelte`) |
+| element's job                                  | role                    | size/wt         | typically replaces                | status                                                                                                        |
+| ---------------------------------------------- | ----------------------- | --------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| body copy / panel description                  | `body`                  | 16 / 400        | `text-base`                       | ✓                                                                                                             |
+| input value / placeholder                      | `body`                  | 16 / 400        | `text-base` / `text-sm`\*         | ⚑ \*legacy 14 → up to 16                                                                                      |
+| helper / hint / secondary / error              | `body-sm`               | 14 / 400        | `text-sm`                         | ✓                                                                                                             |
+| control label — button / tab / chip            | `label` + `label-tight` | 14 / 500, lh 1  | `text-sm font-medium`             | ✓                                                                                                             |
+| nav / menu item / tab label                    | `label` + `label-tight` | 14 / 500, lh 1  | `text-sm` / `text-base`\*         | ✓ single-line; \*legacy 16→14                                                                                 |
+| sidebar / nav **section** title                | `label` (NOT a title)   | 14 / 500        | `text-xs`/`text-sm uppercase`     | ⚑ casing on hold                                                                                              |
+| small functional — timestamp/badge/meta        | `caption`               | 12 / 400        | `text-xs`                         | ✓                                                                                                             |
+| column header (dense)                          | `label-sm`              | 12 / 500        | `text-xs`                         | ✓                                                                                                             |
+| object title — card/panel/modal/callout/drawer | `title`                 | 20 / 600        | `text-lg`/`text-xl font-semibold` | ✓                                                                                                             |
+| object eyebrow (kicker) / demoted title        | `eyebrow`               | 14 / 500        | `text-sm font-medium`             | ✓                                                                                                             |
+| object subtitle (deck)                         | `subtitle`              | 16 / 400        | `text-base`                       | ✓                                                                                                             |
+| section heading (groups cards)                 | `section-head`          | 28 / 600        | `text-2xl/3xl font-semibold`      | ✓                                                                                                             |
+| page / view title                              | `page-head`             | 36 / 700        | `text-3xl/4xl font-bold`          | ✓                                                                                                             |
+| KPI / big number                               | `metric`                | 36 / 700, lh ~1 | `text-4xl font-bold tabular`      | ✓                                                                                                             |
+| KPI, smaller                                   | `metric-sm`             | 20 / 700, lh ~1 | `text-xl font-bold`               | ✓                                                                                                             |
+| table cells/headers                            | —                       | —               | —                                 | ⚑ **defer to Table Kit** (`packages/tables` is code-authoritative; header font inherited from `Table.svelte`) |
 
 > Renamed since the drafts: `card-panel-title`→`title`, `card-panel-subtitle`→`subtitle`,
 > `card-panel-eyebrow`→`eyebrow`, `dashboard-head`→`page-head`. `section-head` is 28 (not 24);
@@ -60,44 +60,44 @@ ramp, and the spacing scale. Distinct from `migration.md`, which is the
 
 ### Prose context
 
-| element's job | role | size/wt | typically replaces | status |
-|---|---|---|---|---|
-| body paragraph | `body` | 16 / 400, reading-lh 1.625 | `text-base` | ✓ |
-| small body / footnote | `body-sm` | 14 / 400, reading-lh 1.571 | `text-sm` | ✓ |
-| intro / standfirst | `lead` | 22 / 400 | `text-xl`/`text-2xl` | ⚑ |
-| h1–h4 (markdown ladder) | `title-1 … title-4` | 36/30/24/20 / 600 | auto inside `.prose` | ✓ |
-| deck under a content title | `subtitle` | 18 / 400 | `text-lg` | ✓ |
-| hero / page title | `headline` (56) or `display` (76) | 700 | `text-4xl`+ | ⚑ hero chrome only |
-| deck under display/headline | `subhead` | 28 / 400 | `text-3xl font-normal` | ✓ |
-| eyebrow / overline / kicker | `eyebrow` | 14 / 500 | `text-sm font-medium` | ✓ casing on hold |
-| caption / credit | `caption` | 12 / 400 | `text-xs` | ✓ |
+| element's job               | role                              | size/wt                    | typically replaces     | status             |
+| --------------------------- | --------------------------------- | -------------------------- | ---------------------- | ------------------ |
+| body paragraph              | `body`                            | 16 / 400, reading-lh 1.625 | `text-base`            | ✓                  |
+| small body / footnote       | `body-sm`                         | 14 / 400, reading-lh 1.571 | `text-sm`              | ✓                  |
+| intro / standfirst          | `lead`                            | 22 / 400                   | `text-xl`/`text-2xl`   | ⚑                  |
+| h1–h4 (markdown ladder)     | `title-1 … title-4`               | 36/30/24/20 / 600          | auto inside `.prose`   | ✓                  |
+| deck under a content title  | `subtitle`                        | 18 / 400                   | `text-lg`              | ✓                  |
+| hero / page title           | `headline` (56) or `display` (76) | 700                        | `text-4xl`+            | ⚑ hero chrome only |
+| deck under display/headline | `subhead`                         | 28 / 400                   | `text-3xl font-normal` | ✓                  |
+| eyebrow / overline / kicker | `eyebrow`                         | 14 / 500                   | `text-sm font-medium`  | ✓ casing on hold   |
+| caption / credit            | `caption`                         | 12 / 400                   | `text-xs`              | ✓                  |
 
 ### Chart context
 
-| element's job | role | size/wt |
-|---|---|---|
+| element's job                                  | role                                             | size/wt                  |
+| ---------------------------------------------- | ------------------------------------------------ | ------------------------ |
 | chart title / subtitle / eyebrow (object tier) | `title` / `subtitle` / `eyebrow` (alias product) | 20·600 / 16·400 / 14·500 |
-| axis title, series/legend title | `axis-title` | 14 / 500 |
-| series / data / legend label | `label` | 14 / 400 |
-| axis tick (default density) | `tick` | 14 / 400, lh 1 |
-| axis tick (compressed) / small tier | `tick-sm` | 12 / 400, lh 1 |
-| footer source / citation | `note` | 12 / 400 |
+| axis title, series/legend title                | `axis-title`                                     | 14 / 500                 |
+| series / data / legend label                   | `label`                                          | 14 / 400                 |
+| axis tick (default density)                    | `tick`                                           | 14 / 400, lh 1           |
+| axis tick (compressed) / small tier            | `tick-sm`                                        | 12 / 400, lh 1           |
+| footer source / citation                       | `note`                                           | 12 / 400                 |
 
 ## Part B — size/weight anchor (cross-check only)
 
 On-system font sizes (17-step scale): 12,14,16,18,20,22,24,26,28,30,32,36,40,48,56,64,76.
 
-| Tailwind | px | role(s) — disambiguate by function |
-|---|---|---|
-| `text-xs` | 12 | caption · label-sm · tick-sm |
-| `text-sm` | 14 | body-sm · label · eyebrow · chart tick/label/axis-title |
-| `text-base` | 16 | body · product subtitle |
-| `text-lg` | 18 | prose subtitle |
-| `text-xl` | 20 | title-4 · product title · metric-sm |
-| `text-2xl` | 24 | prose title-3 |
-| `text-3xl` | 30 | prose title-2 |
-| `text-4xl` | 36 | prose title-1 · page-head · metric |
-| `text-5xl` | 48 | no fixed role sits at 48 (display/headline pass through between breakpoints) — pick by role or flag |
+| Tailwind    | px  | role(s) — disambiguate by function                                                                  |
+| ----------- | --- | --------------------------------------------------------------------------------------------------- |
+| `text-xs`   | 12  | caption · label-sm · tick-sm                                                                        |
+| `text-sm`   | 14  | body-sm · label · eyebrow · chart tick/label/axis-title                                             |
+| `text-base` | 16  | body · product subtitle                                                                             |
+| `text-lg`   | 18  | prose subtitle                                                                                      |
+| `text-xl`   | 20  | title-4 · product title · metric-sm                                                                 |
+| `text-2xl`  | 24  | prose title-3                                                                                       |
+| `text-3xl`  | 30  | prose title-2                                                                                       |
+| `text-4xl`  | 36  | prose title-1 · page-head · metric                                                                  |
+| `text-5xl`  | 48  | no fixed role sits at 48 (display/headline pass through between breakpoints) — pick by role or flag |
 
 Weights: `font-normal` 400 · `font-medium` 500 · `font-semibold` 600 · `font-bold` 700.
 
@@ -128,7 +128,7 @@ on-scale numeric Tailwind).
   real rhythm the owl can't reach — keep it, flag it, don't blanket the outer
   container with `flow-*`.
 - **Heuristics (bias, not rule):** `space-y-*` → lean flow; `space-x-*` → token;
-  `gap-*` → construction (only a *vertical* gap on a content stack is a flow
+  `gap-*` → construction (only a _vertical_ gap on a content stack is a flow
   candidate); `p-*`/`px/py-*` → always token; `mt/mb/my-*` → run the gate.
 - **Composite exception:** mini-document components (Card title/body/actions,
   ChromeHeader title/eyebrow/subtitle, TitleGroup) are genuine titling **rhythm** →

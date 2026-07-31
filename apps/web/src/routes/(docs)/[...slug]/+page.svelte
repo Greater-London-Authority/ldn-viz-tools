@@ -28,7 +28,7 @@
 	/>
 {/if}
 
-<div class="container mx-auto pt-spacing-5xl">
+<div class="pt-spacing-5xl container mx-auto">
 	<div class="flex justify-between">
 		<div class={wrapperClass}>
 			<PageComponent />

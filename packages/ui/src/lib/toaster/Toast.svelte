@@ -34,7 +34,7 @@
 	out:fade={{ duration: 100 }}
 >
 	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
-		<div class="mb-1 flex items-center justify-between title">
+		<div class="title mb-1 flex items-center justify-between">
 			{message.type}
 			{#if message.closeButton}
 				<Button
@@ -48,7 +48,7 @@
 				</Button>
 			{/if}
 		</div>
-		<div class="pr-2 body-sm">{message.text}</div>
+		<div class="body-sm pr-2">{message.text}</div>
 	</div>
 </div>
 

@@ -10,11 +10,11 @@ _This is the authoritative naming rule for the GLA / ldn-viz design system. Ever
 
 Typography, spacing, and colour all resolve through the same shape. The spec previously described a two-tier `primitive → semantic` model for typography using names (`--fs-*`, `--lh-*`) that **do not exist in the pipeline** — font-size and line-height were never primitives; they were resolved literals inside each semantic token. That fiction is retired here. Going forward the model is real and uniform, matching what colour already ships.
 
-| Tier | What it is | Who authors it | Who consumes it |
-|---|---|---|---|
-| **Primitive** | mode-invariant scales (colour ramp, font-weight, font-size steps, line-height grid, numbered spacing, breakpoints) | Figma | referenced *by semantics only*, never by components |
-| **Semantic (emitted)** | per-mode role tokens; the value source | Figma modes → SD | the cjs layer |
-| **Consumption (cjs)** | breakpoint-resolved locals + author-facing utilities | cjs | components / authors |
+| Tier                   | What it is                                                                                                         | Who authors it   | Who consumes it                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- | --------------------------------------------------- |
+| **Primitive**          | mode-invariant scales (colour ramp, font-weight, font-size steps, line-height grid, numbered spacing, breakpoints) | Figma            | referenced _by semantics only_, never by components |
+| **Semantic (emitted)** | per-mode role tokens; the value source                                                                             | Figma modes → SD | the cjs layer                                       |
+| **Consumption (cjs)**  | breakpoint-resolved locals + author-facing utilities                                                               | cjs              | components / authors                                |
 
 The colour proof that this works in this exact pipeline: `--color-surface: var(--primitive-color-mode-light-base, #ffffff)` — semantic references primitive via `var()`, literal as fallback. Typography and spacing are being brought onto this same pattern (§4, §5).
 
@@ -24,16 +24,16 @@ The colour proof that this works in this exact pipeline: `--color-surface: var(-
 
 ### Shipping today
 
-| Name | Value |
-|---|---|
-| `--primitive-typography-font-family` | `Inter` |
-| `--primitive-typography-font-weight-light` | `300` |
-| `--primitive-typography-font-weight-regular` | `400` |
-| `--primitive-typography-font-weight-medium` | `500` |
-| `--primitive-typography-font-weight-semi-bold` | `600` |
-| `--primitive-typography-font-weight-bold` | `700` |
-| `--primitive-breakpoint-sm` / `-md` / `-lg` / `-xl` / `-2xl` | `640` / `768` / `1024` / `1280` / `1536` |
-| `--primitive-color-*` | palette + per-mode colour refs (unchanged) |
+| Name                                                         | Value                                      |
+| ------------------------------------------------------------ | ------------------------------------------ |
+| `--primitive-typography-font-family`                         | `Inter`                                    |
+| `--primitive-typography-font-weight-light`                   | `300`                                      |
+| `--primitive-typography-font-weight-regular`                 | `400`                                      |
+| `--primitive-typography-font-weight-medium`                  | `500`                                      |
+| `--primitive-typography-font-weight-semi-bold`               | `600`                                      |
+| `--primitive-typography-font-weight-bold`                    | `700`                                      |
+| `--primitive-breakpoint-sm` / `-md` / `-lg` / `-xl` / `-2xl` | `640` / `768` / `1024` / `1280` / `1536`   |
+| `--primitive-color-*`                                        | palette + per-mode colour refs (unchanged) |
 
 Note the exact spellings: **`semi-bold`** is hyphenated; there is no `--primitive-typography-font-weight-semibold`. There is **no** `--fw-*`, **no** `--primitive-typography-font-size-*`, and **no** `--primitive-typography-line-height-*` shipping today.
 
@@ -86,11 +86,11 @@ Grammar: **`--typography-{mode}-{family}-{role}-{prop}`**
 
 ### Roles by family (exact keys)
 
-| Family | Roles |
-|---|---|
-| `prose` | `display` · `headline` · `subhead` · `title-1` · `title-2` · `title-3` · `title-4` · `subtitle` · `lead` · `body` · `body-sm` · `caption` · `eyebrow` (+ `readable-width`) |
+| Family    | Roles                                                                                                                                                                                  |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `prose`   | `display` · `headline` · `subhead` · `title-1` · `title-2` · `title-3` · `title-4` · `subtitle` · `lead` · `body` · `body-sm` · `caption` · `eyebrow` (+ `readable-width`)             |
 | `product` | `dashboard-head` · `section-head` · `card-panel-title` · `card-panel-subtitle` · `card-panel-eyebrow` · `metric` · `metric-sm` · `body` · `body-sm` · `label` · `label-sm` · `caption` |
-| `chart` | `axis-title` · `label` · `tick` · `tick-sm` |
+| `chart`   | `axis-title` · `label` · `tick` · `tick-sm`                                                                                                                                            |
 
 Example (verified): `--typography-base-prose-caption-font-size: 0.75rem; /* 12px */`.
 
@@ -144,10 +144,10 @@ Line-height is **not** a single generated scale. Two policies, assigned by role:
 
 **Reading leading** — a small set of unitless ratios for prose text that flows in a column and wants font-relative comfort the 4px grid can't express. Applies to **exactly two roles**, prose-context only:
 
-| Role | fs | lh | ratio |
-|---|---|---|---|
-| `prose/body` | 16 | 26 | **1.625** |
-| `prose/body-sm` | 14 | 22 | **1.571** |
+| Role            | fs  | lh  | ratio     |
+| --------------- | --- | --- | --------- |
+| `prose/body`    | 16  | 26  | **1.625** |
+| `prose/body-sm` | 14  | 22  | **1.571** |
 
 `prose/lead` (22 → 32) is reading-tier by intent but its line-height lands on the grid at 32, so no off-grid value is needed. Product body/body-sm deliberately use grid leading (denser UI), which is why the nudge is described as prose-only.
 
@@ -165,10 +165,10 @@ Rationale for keeping these off the grid rather than snapping to 28/24: 16→28 
 
 ## 8 · Work split
 
-| Change | Owner | Session |
-|---|---|---|
-| Author `primitive/font-size/{px}`, `primitive/line-height/{px}` (reference), numbered `primitive/spacing/{n}`; repoint semantic roles to alias fs per mode; author lh per the two policies | Figma (you) | now |
-| Widen SD primitive filter to emit fs + spacing primitives; `outputReferences` on typography; migrate components off t-shirt spacing; then drop t-shirt emit | repo / Claude Code | deferred (no repo access this session) |
-| Purge phantom names from the spec; document primitives as the real generative source; two lh policies; generated CSS appendix | spec | this session |
+| Change                                                                                                                                                                                     | Owner              | Session                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ | -------------------------------------- |
+| Author `primitive/font-size/{px}`, `primitive/line-height/{px}` (reference), numbered `primitive/spacing/{n}`; repoint semantic roles to alias fs per mode; author lh per the two policies | Figma (you)        | now                                    |
+| Widen SD primitive filter to emit fs + spacing primitives; `outputReferences` on typography; migrate components off t-shirt spacing; then drop t-shirt emit                                | repo / Claude Code | deferred (no repo access this session) |
+| Purge phantom names from the spec; document primitives as the real generative source; two lh policies; generated CSS appendix                                                              | spec               | this session                           |
 
 Nothing here changes a shipped value. The only value decisions already made and verified live: caption 12, eyebrow tracking 0 (casing on hold), prose body/body-sm reading leading 26/22, chart tick/tick-sm default density 14/12.

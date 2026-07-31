@@ -20,8 +20,8 @@
 
 {#snippet body()}
 	<p class="body text-color-text-muted">
-		Maecenas ut libero vel nibh maximus feugiat non sed tortor. Card content sits between the
-		header and the actions row.
+		Maecenas ut libero vel nibh maximus feugiat non sed tortor. Card content sits between the header
+		and the actions row.
 	</p>
 {/snippet}
 

@@ -17,35 +17,56 @@
 
 module.exports = {
 	// Context class = variable scope AND flow root
-	'.flow-prose':   { '--flow-tight': '0.25rem', '--flow-default': '1rem',    '--flow-loose': '1.5rem', '--flow-section': '2.5rem' },
-	'.flow-product': { '--flow-tight': '0.25rem', '--flow-default': '0.5rem',  '--flow-loose': '1rem',   '--flow-section': '1.5rem' },
-	'.flow-compact': { '--flow-tight': '0.25rem', '--flow-default': '0.25rem', '--flow-loose': '0.5rem', '--flow-section': '0.5rem' },
+	'.flow-prose': {
+		'--flow-tight': '0.25rem',
+		'--flow-default': '1rem',
+		'--flow-loose': '1.5rem',
+		'--flow-section': '2.5rem'
+	},
+	'.flow-product': {
+		'--flow-tight': '0.25rem',
+		'--flow-default': '0.5rem',
+		'--flow-loose': '1rem',
+		'--flow-section': '1.5rem'
+	},
+	'.flow-compact': {
+		'--flow-tight': '0.25rem',
+		'--flow-default': '0.25rem',
+		'--flow-loose': '0.5rem',
+		'--flow-section': '0.5rem'
+	},
 
 	// 1 · base — every VISIBLE sibling gets the default gap
-	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :not(.sr-only, [hidden], template)': {
-		marginTop: 'var(--flow-default)'
-	},
+	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :not(.sr-only, [hidden], template)':
+		{
+			marginTop: 'var(--flow-default)'
+		},
 
 	// 2 · block objects set off — loose above and below
-	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :is(figure, img, table, pre, blockquote, .chart)': {
-		marginTop: 'var(--flow-loose)'
-	},
-	':is(.flow-prose, .flow-product, .flow-compact) > :is(figure, img, table, pre, blockquote, .chart) + :not(.sr-only, [hidden], template)': {
-		marginTop: 'var(--flow-loose)'
-	},
+	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :is(figure, img, table, pre, blockquote, .chart)':
+		{
+			marginTop: 'var(--flow-loose)'
+		},
+	':is(.flow-prose, .flow-product, .flow-compact) > :is(figure, img, table, pre, blockquote, .chart) + :not(.sr-only, [hidden], template)':
+		{
+			marginTop: 'var(--flow-loose)'
+		},
 
 	// 3 · space BEFORE headings — major vs minor (main rhythm lever)
-	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :is(h1, h2, .title-1, .title-2)': {
-		marginTop: 'var(--flow-section)'
-	},
-	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :is(h3, h4, .title-3, .title-4)': {
-		marginTop: 'var(--flow-loose)'
-	},
+	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :is(h1, h2, .title-1, .title-2)':
+		{
+			marginTop: 'var(--flow-section)'
+		},
+	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + :is(h3, h4, .title-3, .title-4)':
+		{
+			marginTop: 'var(--flow-loose)'
+		},
 
 	// 4 · stacked headings group tightly (wins over rule 3 for consecutive headings)
-	':is(.flow-prose, .flow-product, .flow-compact) > :is(h1, h2, h3, h4, [class*="title-"]) + :is(h1, h2, h3, h4, [class*="title-"])': {
-		marginTop: 'var(--flow-tight)'
-	},
+	':is(.flow-prose, .flow-product, .flow-compact) > :is(h1, h2, h3, h4, [class*="title-"]) + :is(h1, h2, h3, h4, [class*="title-"])':
+		{
+			marginTop: 'var(--flow-tight)'
+		},
 
 	// 4b · companion roles couple tight to their titling primary.
 	// A subhead/subtitle is a supporting line bound *beneath* its heading; an
@@ -54,20 +75,23 @@ module.exports = {
 	// so they win at equal specificity for the pairings they target.
 
 	// supporting line directly under a heading hugs it
-	':is(.flow-prose, .flow-product, .flow-compact) > :is(h1, h2, h3, h4, [class*="title-"], .display, .headline, .page-head, .section-head) + :is(.subtitle, .subhead)': {
-		marginTop: 'var(--flow-tight)'
-	},
+	':is(.flow-prose, .flow-product, .flow-compact) > :is(h1, h2, h3, h4, [class*="title-"], .display, .headline, .page-head, .section-head) + :is(.subtitle, .subhead)':
+		{
+			marginTop: 'var(--flow-tight)'
+		},
 
 	// eyebrow overline hugs the heading directly below it (overrides rule 3's section gap)
-	':is(.flow-prose, .flow-product, .flow-compact) > .eyebrow + :is(h1, h2, h3, h4, [class*="title-"], .display, .headline, .page-head, .section-head)': {
-		marginTop: 'var(--flow-tight)'
-	},
+	':is(.flow-prose, .flow-product, .flow-compact) > .eyebrow + :is(h1, h2, h3, h4, [class*="title-"], .display, .headline, .page-head, .section-head)':
+		{
+			marginTop: 'var(--flow-tight)'
+		},
 
 	// the major break sits ABOVE an eyebrow that introduces a heading — the eyebrow
 	// is the top of the titling cluster, so the section gap belongs before it
-	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + .eyebrow:has(+ :is(h1, h2, .title-1, .title-2, .display, .headline, .page-head, .section-head))': {
-		marginTop: 'var(--flow-section)'
-	},
+	':is(.flow-prose, .flow-product, .flow-compact) > :not(.sr-only, [hidden], template) + .eyebrow:has(+ :is(h1, h2, .title-1, .title-2, .display, .headline, .page-head, .section-head))':
+		{
+			marginTop: 'var(--flow-section)'
+		},
 
 	// 5 · caption binds to its figure
 	':is(.flow-prose, .flow-product, .flow-compact) figure > figcaption': {

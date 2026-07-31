@@ -40,7 +40,7 @@ _Newest first. Append at the top._
 
 Detail: read-only repo audit of the Status section against emitted output (tokens JSON, build pipeline, `styles/typography.css`, tailwind-custom cjs files), prompted by suspected drift.
 
-- **`sd.build.js` line-height resolution was broken for semantic→semantic aliases.** `chart/title` and `chart/eyebrow` line-height are authored as references to `product/title` / `product/eyebrow` (correct in the source token JSON), but the build's ratio calculator read the font-size sibling's *original* (unresolved) value and regex-matched it against a primitive-only pattern (`size\.(\d+)`). When that sibling's font-size was itself a semantic alias rather than a primitive reference, the regex failed and the code silently fell back to dividing by a hardcoded `16`. Emitted `chart/title` line-height was **1.7500** instead of **1.4000**; `chart/eyebrow` was **1.2500** instead of **1.4286**. `chart/subtitle` coincidentally matched (its aliased font-size happens to be 16px). RULED — fixed.
+- **`sd.build.js` line-height resolution was broken for semantic→semantic aliases.** `chart/title` and `chart/eyebrow` line-height are authored as references to `product/title` / `product/eyebrow` (correct in the source token JSON), but the build's ratio calculator read the font-size sibling's _original_ (unresolved) value and regex-matched it against a primitive-only pattern (`size\.(\d+)`). When that sibling's font-size was itself a semantic alias rather than a primitive reference, the regex failed and the code silently fell back to dividing by a hardcoded `16`. Emitted `chart/title` line-height was **1.7500** instead of **1.4000**; `chart/eyebrow` was **1.2500** instead of **1.4286**. `chart/subtitle` coincidentally matched (its aliased font-size happens to be 16px). RULED — fixed.
 - **Fix:** `getFontSizeForLineHeight` in `sd.build.js` now reads the sibling font-size token's resolved `.value` instead of regex-parsing `.original.value` — the same approach the font-size branch already used for its own aliasing. Rebuilt; all three aliased chart roles now correctly equal their product source at every breakpoint. This directly disproves the `Typography.mdx` claim that these roles "cannot drift" — they did; now fixed.
 - **Repo-side rename migration confirmed complete**, superseding the "▶ next" status: `outputReferences` has been `true` on the typography platform since 2026-07-24 (`8d9e559f`); cjs renames (`card-panel-*` / `dashboard-head` → generic role names) landed 2026-07-27 (`6e60de6f`) — zero stale references anywhere in `.cjs`/`.css`.
 - **Spec prose confirmed present** (naming rule, chart rationale, twelve-role correction, line-height-as-reference exception) in `design-system-specification-2026-07-27.md`. Re-baseline — rename to canonical `design-system-specification.md`, run `regen_spec.py check` — still outstanding. — superseded 2026-07-28
@@ -139,9 +139,9 @@ Detail: `implementation-audit.md`. Reconciles the first `.cjs`/token pass, done 
 
 ## In flight ▶
 
-| Work                                                                                                                                                            | Owner         | State            |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------- |
-| Repoint the 11 raw SVG exports in "Example downloads" (`6497:277388`) — 348 unstyled text nodes, 323 hardcoded hex fills, 0 tokens. Needs a hex→token map first | Figma         | ▶ next (charts)   |
+| Work                                                                                                                                                            | Owner | State           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | --------------- |
+| Repoint the 11 raw SVG exports in "Example downloads" (`6497:277388`) — 348 unstyled text nodes, 323 hardcoded hex fills, 0 tokens. Needs a hex→token map first | Figma | ▶ next (charts) |
 
 ## Open / deferred
 

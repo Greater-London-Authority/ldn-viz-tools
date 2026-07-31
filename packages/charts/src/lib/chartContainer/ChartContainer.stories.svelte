@@ -431,8 +431,8 @@ It can also be used to add liks.
 			{@render placeholderChart()}
 
 			{#snippet description()}
-				This chart shows an <strong>illustrative upward trend</strong> across the period; values are
-				placeholder data.
+				This chart shows an <strong>illustrative upward trend</strong> across the period; values are placeholder
+				data.
 			{/snippet}
 		</ChartContainer>
 	{/snippet}
@@ -473,7 +473,11 @@ It can also be used to add liks.
 					<ChartContainer title="Population" subtitle="by borough" byline="Illustrative data">
 						{@render placeholderChart()}
 					</ChartContainer>
-					<ChartContainer title="Employment rate" subtitle="16–64, by borough" byline="Illustrative data">
+					<ChartContainer
+						title="Employment rate"
+						subtitle="16–64, by borough"
+						byline="Illustrative data"
+					>
 						{@render placeholderChart()}
 					</ChartContainer>
 				</div>

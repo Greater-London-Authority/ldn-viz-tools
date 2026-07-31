@@ -27,7 +27,7 @@ doc chrome.** Docs have their own `.DS-Section-header` component and a dedicated
    the doc title. Never build a title text layer by hand.
 2. **Doc chrome uses `Doc/*` styles, never product roles.** Intro prose =
    `Doc/Body`. Captions = `Doc/Caption`. Section titles inside the header are
-   handled by the component itself. This is about the *frame's own* chrome
+   handled by the component itself. This is about the _frame's own_ chrome
    (title, intro, captions) — the **content specimens** placed inside a doc
    frame keep whatever styles they legitimately use (product roles for UI
    components, the `Chart/*` subset for chart specimens, etc.). Doc chrome and
@@ -63,7 +63,7 @@ Outer frame                     VERTICAL · AUTO/FIXED · padding 0 · gap 0 · 
 ```
 
 The **states strip is optional** and, per the standing docs-scope decision, is
-part of the *fuller* documentation tier. For a lightweight intro/overview frame,
+part of the _fuller_ documentation tier. For a lightweight intro/overview frame,
 build the header + intro prose and omit the states strip (or include 2–3
 genuinely meaningful states only). Do NOT exhaustively enumerate every variant —
 responsive behaviour and full state matrices are documented centrally, not
@@ -72,18 +72,21 @@ per-frame.
 ## Canonical IDs (verify before use)
 
 Text styles (`Doc/*` family):
-- `Doc/Title`     — `S:e919a6afd0c314b2fee6d29b86e743c61a693f7d,`  (Inter Semi Bold 30)
-- `Doc/Heading`   — `S:9bf5a4b49eb03b5920538dd954bb4279b7137b48,`  (Inter Semi Bold 24)
-- `Doc/Subheading`— `S:522d9faf209d6a75e98e39d781c367b375ad2f39,`  (Inter Medium 20)
-- `Doc/Body`      — `S:4891d18cde867dae4cac5d19534cfb3fb9caaa33,`  (Inter Regular 16)  ← intro prose
-- `Doc/Body-sm`   — `S:4a93108c6f3ae8aa40c8a787c6c0a9615764a132,`  (Inter Regular 14)
-- `Doc/Caption`   — `S:db9d0e4998e97d76268401b3524d22f3f5175659,`  (IBM Plex Mono 13) ← state captions
-- `Doc/Mono`      — `S:3b3019f652bd8fbfaa76b361af5833f8ad65c6f1,`  (IBM Plex Mono 13)
+
+- `Doc/Title` — `S:e919a6afd0c314b2fee6d29b86e743c61a693f7d,` (Inter Semi Bold 30)
+- `Doc/Heading` — `S:9bf5a4b49eb03b5920538dd954bb4279b7137b48,` (Inter Semi Bold 24)
+- `Doc/Subheading`— `S:522d9faf209d6a75e98e39d781c367b375ad2f39,` (Inter Medium 20)
+- `Doc/Body` — `S:4891d18cde867dae4cac5d19534cfb3fb9caaa33,` (Inter Regular 16) ← intro prose
+- `Doc/Body-sm` — `S:4a93108c6f3ae8aa40c8a787c6c0a9615764a132,` (Inter Regular 14)
+- `Doc/Caption` — `S:db9d0e4998e97d76268401b3524d22f3f5175659,` (IBM Plex Mono 13) ← state captions
+- `Doc/Mono` — `S:3b3019f652bd8fbfaa76b361af5833f8ad65c6f1,` (IBM Plex Mono 13)
 
 Component:
+
 - `.DS-Section-header` — component `425:7094`, text property `Title#425:0`
 
 Tokens (semantic-color):
+
 - `text` — `VariableID:598:26405`
 - `surface-accent` — `VariableID:600:26430`
 

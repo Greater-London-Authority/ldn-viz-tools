@@ -55,7 +55,6 @@
 		filename = '',
 		columnMapping = undefined
 	}: Props = $props();
-
 </script>
 
 <div class="mt-2 flex flex-wrap items-end space-y-2" data-capture-ignore>

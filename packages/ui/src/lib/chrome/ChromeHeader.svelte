@@ -67,12 +67,7 @@
 		{#if hint}
 			<div class="shrink-0 pt-0.5">
 				{#if typeof hint === 'string'}
-					<Overlay
-						overlayType={hintType}
-						modalTitle={hintTitle}
-						{hintLabel}
-						trigger={hintTrigger}
-					>
+					<Overlay overlayType={hintType} modalTitle={hintTitle} {hintLabel} trigger={hintTrigger}>
 						{hint}
 					</Overlay>
 				{:else}
