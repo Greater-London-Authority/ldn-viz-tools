@@ -1,5 +1,5 @@
 {
-	"name": "@ldn-viz/docs",
+	"name": "@ldn-viz/storybook",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",
