@@ -164,7 +164,7 @@
 			onclick={clearSearch}
 			class="dark:border dark:border-color-border"
 		>
-			<Icon src={XMark} class="p-0.25 h-8 w-8" />
+			<Icon src={XMark} class="h-8 w-8 p-0.5" />
 		</Button>
 	{:else}
 		<Button

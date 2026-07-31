@@ -76,7 +76,7 @@
 	});
 </script>
 
-<nav aria-label={ariaLabel} class={width}>
+<nav aria-label={ariaLabel} class={classNames('product', width)}>
 	<ul {id} class={menuClasses}>
 		{#each menuState as { title, href, children, id, isExpanded }, index (index)}
 			<NavigationMenuItem

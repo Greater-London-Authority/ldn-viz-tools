@@ -1,16 +1,21 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	import ExportBtns from './ExportBtns.svelte';
+	import ExportButtons from './ExportButtons.svelte';
 
 	/**
-	 * The `ExportBtns` component renders the Image and data download buttons shown in a chart footer.
+	 * `ExportButtons` — a trailing group of download controls: a data-download button
+	 * (CSV / JSON) and an image-download button (PNG / SVG). It composes the shared
+	 * `DataDownloadButton` and `ImageDownloadButton`, so any titled container (`Card`,
+	 * `ChartContainer`, `TableContainer`) can offer the same export affordance.
 	 *
-	 * It is normally used indirectly via the [ChartContainer](./?path=/docs/charts-components-chartcontainer--documentation).
+	 * Pass the DOM node to capture for the image via `elementToCapture` — it works for
+	 * any element (a chart's SVG, a table wrapper, a card body), not only charts.
+	 *
 	 */
 	const { Story } = defineMeta({
-		title: 'Charts/Components/ChartContainer/ExportBtns',
-		component: ExportBtns,
+		title: 'Ui/ExportButtons',
+		component: ExportButtons,
 		tags: ['autodocs']
 	});
 </script>
@@ -29,11 +34,7 @@
 </script>
 
 {#snippet placeholderChart()}
-	<div
-		class="flex h-24 w-full items-center justify-center bg-color-container-level-1 text-color-text-muted"
-	>
-		Chart would go here.
-	</div>
+	<div class="sr-only">Example image holder - hidden so as not to present misleading layout</div>
 {/snippet}
 
 <Story name="Only data download enabled">
@@ -41,8 +42,8 @@
 		<div bind:this={bothNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={bothNode}
+		<ExportButtons
+			elementToCapture={bothNode}
 			dataForDownload={demoData}
 			dataDownloadButton={true}
 			imageDownloadButton={false}
@@ -55,8 +56,8 @@
 		<div bind:this={bothNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={bothNode}
+		<ExportButtons
+			elementToCapture={bothNode}
 			dataForDownload={demoData}
 			dataDownloadButton={false}
 			imageDownloadButton={true}
@@ -73,8 +74,8 @@
 		<div bind:this={bothNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={bothNode}
+		<ExportButtons
+			elementToCapture={bothNode}
 			dataForDownload={demoData}
 			dataDownloadButton={true}
 			imageDownloadButton={true}
@@ -83,7 +84,7 @@
 </Story>
 
 <!--
-	Here the data format is restricted to CSV and the image	format is restricted to PNG. 
+	Here the data format is restricted to CSV and the image	format is restricted to PNG.
 	As there is only a single format, the buttons render as a normal button (rather than a [MultipleActionButton](./?path=/docs/docs/ui-components-buttons-multipleactionbutton--documentation)).
 -->
 <Story name="Restricted choice of formats">
@@ -91,8 +92,8 @@
 		<div bind:this={restrictedNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={restrictedNode}
+		<ExportButtons
+			elementToCapture={restrictedNode}
 			dataForDownload={demoData}
 			dataDownloadButton={['CSV']}
 			imageDownloadButton={['PNG']}
@@ -110,8 +111,8 @@
 		<div bind:this={noDataNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportBtns
-			chartToCapture={noDataNode}
+		<ExportButtons
+			elementToCapture={noDataNode}
 			dataForDownload={undefined}
 			dataDownloadButton={true}
 			imageDownloadButton={true}

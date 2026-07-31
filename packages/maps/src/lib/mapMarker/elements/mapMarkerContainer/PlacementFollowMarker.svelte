@@ -4,5 +4,5 @@
 
 <MapMarkerContainer placement="follow">
 	<p>placement="follow"</p>
-	<p class="text-sm">Tracks the mouse pointer over the feature.</p>
+	<p class="body-sm">Tracks the mouse pointer over the feature.</p>
 </MapMarkerContainer>

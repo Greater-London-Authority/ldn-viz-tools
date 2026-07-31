@@ -149,18 +149,18 @@
 	};
 
 	const sizeClasses = $derived({
-		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'text-xs px-1 min-w-6 min-h-6',
-		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'text-sm px-2 py-1.5 min-w-8 min-h-8',
-		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'text-base px-4 py-2 min-w-10 min-h-10',
+		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'label-sm-tight px-1 min-w-6 min-h-6',
+		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'label-tight px-2 py-1.5 min-w-8 min-h-8',
+		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'label-tight px-4 py-2 min-w-10 min-h-10',
 		lg:
 			variant === 'square'
-				? 'w-16 h-16 text-xs flex-col space-y-4'
-				: 'text-lg px-4 py-2 min-w-16 min-h-16'
+				? 'w-16 h-16 label-sm-tight flex-col'
+				: 'label-tight px-4 py-2 min-w-16 min-h-16'
 	});
 
 	const buttonClass = $derived(
 		classNames(
-			'inline-flex justify-center items-center disabled:cursor-not-allowed',
+			'product inline-flex justify-center items-center disabled:cursor-not-allowed',
 			'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-interactive-focus focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-surface',
 			styleClasses[variant][emphasis],
 			sizeClasses[size],

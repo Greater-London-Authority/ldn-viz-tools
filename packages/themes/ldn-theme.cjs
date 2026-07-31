@@ -3,6 +3,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const ldnColors = require('./styles/tw-extend/color');
 const ldnSpacing = require('./styles/tw-extend/spacing');
+const ldnGridSpacing = require('./styles/tw-extend/gridspacing');
 const plugin = require('tailwindcss/plugin');
 
 const customTypography = require('./tailwind-custom/typography/typography');
@@ -14,11 +15,12 @@ const config = {
 	theme: {
 		container: {
 			padding: {
-				DEFAULT: '1rem',
-				sm: '2rem',
-				lg: '4rem',
-				xl: '5rem',
-				'2xl': '6rem'
+				DEFAULT: ldnGridSpacing['grid-spacing-base-contained-container-padding'],
+				sm: ldnGridSpacing['grid-spacing-sm-contained-container-padding'],
+				md: ldnGridSpacing['grid-spacing-md-contained-container-padding'],
+				lg: ldnGridSpacing['grid-spacing-lg-contained-container-padding'],
+				xl: ldnGridSpacing['grid-spacing-xl-contained-container-padding'],
+				'2xl': ldnGridSpacing['grid-spacing-2xl-contained-container-padding']
 			}
 		},
 		extend: {
@@ -32,6 +34,42 @@ const config = {
 		}
 	},
 	plugins: [
+		// `.container` uses the "contained" grid-spacing padding (see theme.container above).
+		// `.container-fluid` is the same component, driven by the "fluid" grid-spacing padding instead.
+		// `.grid-gutter` / `.grid-gutter-fluid` expose the matching gutter tokens as a responsive `gap`.
+		plugin(function ({ addComponents, theme }) {
+			const screens = theme('screens');
+
+			// Builds the `@media (min-width: ...)` overrides for a grid-spacing token across breakpoints.
+			const buildResponsiveStyles = (cssProperty, gridSpacingKey) => {
+				return Object.keys(screens).reduce((styles, breakpoint) => {
+					const token = ldnGridSpacing[`grid-spacing-${breakpoint}-${gridSpacingKey}`];
+					if (!token) return styles;
+
+					styles[`@media (min-width: ${screens[breakpoint]})`] = {
+						[cssProperty]: token
+					};
+					return styles;
+				}, {});
+			};
+
+			addComponents({
+				'.container-fluid': {
+					width: '100%',
+					marginInline: 'auto',
+					paddingInline: ldnGridSpacing['grid-spacing-base-fluid-container-padding'],
+					...buildResponsiveStyles('paddingInline', 'fluid-container-padding')
+				},
+				'.grid-gutter': {
+					gap: ldnGridSpacing['grid-spacing-base-contained-gutter'],
+					...buildResponsiveStyles('gap', 'contained-gutter')
+				},
+				'.grid-gutter-fluid': {
+					gap: ldnGridSpacing['grid-spacing-base-fluid-gutter'],
+					...buildResponsiveStyles('gap', 'fluid-gutter')
+				}
+			});
+		}),
 		plugin(function ({ addBase }) {
 			addBase({
 				body: {

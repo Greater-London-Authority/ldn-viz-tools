@@ -130,7 +130,7 @@
 				<div
 					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text ${headerTheme}`}
 				>
-					<Dialog.Title class="font-medium">
+					<Dialog.Title class="product label">
 						{@render title?.()}
 					</Dialog.Title>
 					<Dialog.Close>

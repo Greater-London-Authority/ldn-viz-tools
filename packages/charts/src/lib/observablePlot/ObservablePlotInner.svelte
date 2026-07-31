@@ -263,7 +263,7 @@
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
 		<div
-			class="absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container p-2 text-sm shadow"
+			class="chart label absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-container p-2 shadow"
 			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 			style:left={`${$tooltipStore.layerX}px`}
 		>
@@ -278,7 +278,7 @@
 
 <style>
 	:global(.themed-chart svg) {
-		--plot-background: var(--color-chart-background) !important;
+		--plot-background: var(--color-chart-surface) !important;
 	}
 	:global(.themed-chart [aria-label='tip']) {
 		stroke: var(--color-border-muted) !important;

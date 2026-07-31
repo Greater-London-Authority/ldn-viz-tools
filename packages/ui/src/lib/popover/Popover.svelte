@@ -51,10 +51,10 @@
 	{@render popoverTrigger()}
 
 	<Popover.Content
-		class="z-50 w-60 border border-color-border-muted bg-color-container p-2 text-sm shadow-lg"
+		class="product body-sm z-50 w-60 border border-color-border-muted bg-color-container p-2 shadow-lg"
 	>
 		{#if title}
-			<p class="font-medium">
+			<p class="label-sm">
 				<!-- Optional title for the popover -->
 				{@render title()}
 			</p>

@@ -1,6 +1,26 @@
 module.exports = {
+	body: {
+		fontFamily: 'var(--body-font-family)',
+		fontWeight: 'var(--body-font-weight)',
+		letterSpacing: 'var(--body-letter-spacing)',
+		fontSize: 'var(--body-font-size)',
+		lineHeight: 'var(--body-line-height)'
+	},
+	'body-sm': {
+		fontFamily: 'var(--body-sm-font-family)',
+		fontWeight: 'var(--body-sm-font-weight)',
+		letterSpacing: 'var(--body-sm-letter-spacing)',
+		fontSize: 'var(--body-sm-font-size)',
+		lineHeight: 'var(--body-sm-line-height)'
+	},
+	caption: {
+		fontFamily: 'var(--caption-font-family)',
+		fontWeight: 'var(--caption-font-weight)',
+		letterSpacing: 'var(--caption-letter-spacing)',
+		fontSize: 'var(--caption-font-size)',
+		lineHeight: 'var(--caption-line-height)'
+	},
 	display: {
-		color: 'var(--color-text)',
 		fontFamily: 'var(--display-font-family)',
 		fontWeight: 'var(--display-font-weight)',
 		letterSpacing: 'var(--display-letter-spacing)',
@@ -8,7 +28,6 @@ module.exports = {
 		lineHeight: 'var(--display-line-height)'
 	},
 	headline: {
-		color: 'var(--color-text)',
 		fontFamily: 'var(--headline-font-family)',
 		fontWeight: 'var(--headline-font-weight)',
 		letterSpacing: 'var(--headline-letter-spacing)',
@@ -23,37 +42,33 @@ module.exports = {
 		fontSize: 'var(--subhead-font-size)',
 		lineHeight: 'var(--subhead-line-height)'
 	},
-	'title-lg': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--title-lg-font-family)',
-		fontWeight: 'var(--title-lg-font-weight)',
-		letterSpacing: 'var(--title-lg-letter-spacing)',
-		fontSize: 'var(--title-lg-font-size)',
-		lineHeight: 'var(--title-lg-line-height)'
+	'title-1': {
+		fontFamily: 'var(--title-1-font-family)',
+		fontWeight: 'var(--title-1-font-weight)',
+		letterSpacing: 'var(--title-1-letter-spacing)',
+		fontSize: 'var(--title-1-font-size)',
+		lineHeight: 'var(--title-1-line-height)'
 	},
-	'title-md': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--title-md-font-family)',
-		fontWeight: 'var(--title-md-font-weight)',
-		letterSpacing: 'var(--title-md-letter-spacing)',
-		fontSize: 'var(--title-md-font-size)',
-		lineHeight: 'var(--title-md-line-height)'
+	'title-2': {
+		fontFamily: 'var(--title-2-font-family)',
+		fontWeight: 'var(--title-2-font-weight)',
+		letterSpacing: 'var(--title-2-letter-spacing)',
+		fontSize: 'var(--title-2-font-size)',
+		lineHeight: 'var(--title-2-line-height)'
 	},
-	'title-sm': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--title-sm-font-family)',
-		fontWeight: 'var(--title-sm-font-weight)',
-		letterSpacing: 'var(--title-sm-letter-spacing)',
-		fontSize: 'var(--title-sm-font-size)',
-		lineHeight: 'var(--title-sm-line-height)'
+	'title-3': {
+		fontFamily: 'var(--title-3-font-family)',
+		fontWeight: 'var(--title-3-font-weight)',
+		letterSpacing: 'var(--title-3-letter-spacing)',
+		fontSize: 'var(--title-3-font-size)',
+		lineHeight: 'var(--title-3-line-height)'
 	},
-	'title-xs': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--title-xs-font-family)',
-		fontWeight: 'var(--title-xs-font-weight)',
-		letterSpacing: 'var(--title-xs-letter-spacing)',
-		fontSize: 'var(--title-xs-font-size)',
-		lineHeight: 'var(--title-xs-line-height)'
+	'title-4': {
+		fontFamily: 'var(--title-4-font-family)',
+		fontWeight: 'var(--title-4-font-weight)',
+		letterSpacing: 'var(--title-4-letter-spacing)',
+		fontSize: 'var(--title-4-font-size)',
+		lineHeight: 'var(--title-4-line-height)'
 	},
 	subtitle: {
 		color: 'var(--color-text-muted)',
@@ -63,76 +78,113 @@ module.exports = {
 		fontSize: 'var(--subtitle-font-size)',
 		lineHeight: 'var(--subtitle-line-height)'
 	},
-	'body-lg': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--body-lg-font-family)',
-		fontWeight: 'var(--body-lg-font-weight)',
-		letterSpacing: 'var(--body-lg-letter-spacing)',
-		fontSize: 'var(--body-lg-font-size)',
-		lineHeight: 'var(--body-lg-line-height)'
+	lead: {
+		color: 'var(--color-text-muted)',
+		fontFamily: 'var(--lead-font-family)',
+		fontWeight: 'var(--lead-font-weight)',
+		letterSpacing: 'var(--lead-letter-spacing)',
+		fontSize: 'var(--lead-font-size)',
+		lineHeight: 'var(--lead-line-height)'
 	},
-	'body-md': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--body-md-font-family)',
-		fontWeight: 'var(--body-md-font-weight)',
-		letterSpacing: 'var(--body-md-letter-spacing)',
-		fontSize: 'var(--body-md-font-size)',
-		lineHeight: 'var(--body-md-line-height)'
+	eyebrow: {
+		color: 'var(--color-text-muted)',
+		fontFamily: 'var(--eyebrow-font-family)',
+		fontWeight: 'var(--eyebrow-font-weight)',
+		letterSpacing: 'var(--eyebrow-letter-spacing)',
+		fontSize: 'var(--eyebrow-font-size)',
+		lineHeight: 'var(--eyebrow-line-height)'
 	},
-	'body-sm': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--body-sm-font-family)',
-		fontWeight: 'var(--body-sm-font-weight)',
-		letterSpacing: 'var(--body-sm-letter-spacing)',
-		fontSize: 'var(--body-sm-font-size)',
-		lineHeight: 'var(--body-sm-line-height)'
+	'page-head': {
+		fontFamily: 'var(--page-head-font-family)',
+		fontWeight: 'var(--page-head-font-weight)',
+		letterSpacing: 'var(--page-head-letter-spacing)',
+		fontSize: 'var(--page-head-font-size)',
+		lineHeight: 'var(--page-head-line-height)'
 	},
-	'body-xs': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--body-xs-font-family)',
-		fontWeight: 'var(--body-xs-font-weight)',
-		letterSpacing: 'var(--body-xs-letter-spacing)',
-		fontSize: 'var(--body-xs-font-size)',
-		lineHeight: 'var(--body-xs-line-height)'
+	'section-head': {
+		fontFamily: 'var(--section-head-font-family)',
+		fontWeight: 'var(--section-head-font-weight)',
+		letterSpacing: 'var(--section-head-letter-spacing)',
+		fontSize: 'var(--section-head-font-size)',
+		lineHeight: 'var(--section-head-line-height)'
 	},
-	caption: {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--caption-font-family)',
-		fontWeight: 'var(--caption-font-weight)',
-		letterSpacing: 'var(--caption-letter-spacing)',
-		fontSize: 'var(--caption-font-size)',
-		lineHeight: 'var(--caption-line-height)'
+	// Shared across .product and .chart contexts, same as subtitle/eyebrow below.
+	title: {
+		fontFamily: 'var(--title-font-family)',
+		fontWeight: 'var(--title-font-weight)',
+		letterSpacing: 'var(--title-letter-spacing)',
+		fontSize: 'var(--title-font-size)',
+		lineHeight: 'var(--title-line-height)'
 	},
-	'label-lg': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--label-lg-font-family)',
-		fontWeight: 'var(--label-lg-font-weight)',
-		letterSpacing: 'var(--label-lg-letter-spacing)',
-		fontSize: 'var(--label-lg-font-size)',
-		lineHeight: 'var(--label-lg-line-height)'
+	metric: {
+		fontFamily: 'var(--metric-font-family)',
+		fontWeight: 'var(--metric-font-weight)',
+		letterSpacing: 'var(--metric-letter-spacing)',
+		fontSize: 'var(--metric-font-size)',
+		lineHeight: 'var(--metric-line-height)'
 	},
-	'label-md': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--label-md-font-family)',
-		fontWeight: 'var(--label-md-font-weight)',
-		letterSpacing: 'var(--label-md-letter-spacing)',
-		fontSize: 'var(--label-md-font-size)',
-		lineHeight: 'var(--label-md-line-height)'
+	'metric-sm': {
+		fontFamily: 'var(--metric-sm-font-family)',
+		fontWeight: 'var(--metric-sm-font-weight)',
+		letterSpacing: 'var(--metric-sm-letter-spacing)',
+		fontSize: 'var(--metric-sm-font-size)',
+		lineHeight: 'var(--metric-sm-line-height)'
+	},
+	label: {
+		fontFamily: 'var(--label-font-family)',
+		fontWeight: 'var(--label-font-weight)',
+		letterSpacing: 'var(--label-letter-spacing)',
+		fontSize: 'var(--label-font-size)',
+		lineHeight: 'var(--label-line-height)'
 	},
 	'label-sm': {
-		color: 'var(--color-text)',
 		fontFamily: 'var(--label-sm-font-family)',
 		fontWeight: 'var(--label-sm-font-weight)',
 		letterSpacing: 'var(--label-sm-letter-spacing)',
 		fontSize: 'var(--label-sm-font-size)',
 		lineHeight: 'var(--label-sm-line-height)'
 	},
-	'label-xs': {
-		color: 'var(--color-text)',
-		fontFamily: 'var(--label-xs-font-family)',
-		fontWeight: 'var(--label-xs-font-weight)',
-		letterSpacing: 'var(--label-xs-letter-spacing)',
-		fontSize: 'var(--label-xs-font-size)',
-		lineHeight: 'var(--label-xs-line-height)'
+	// Tight variants: same size/weight as label / label-sm, line-height 1 for
+	// single-line controls (buttons, tabs, chips). Never wraps.
+	'label-tight': {
+		fontFamily: 'var(--label-font-family)',
+		fontWeight: 'var(--label-font-weight)',
+		letterSpacing: 'var(--label-letter-spacing)',
+		fontSize: 'var(--label-font-size)',
+		lineHeight: '1'
+	},
+	'label-sm-tight': {
+		fontFamily: 'var(--label-sm-font-family)',
+		fontWeight: 'var(--label-sm-font-weight)',
+		letterSpacing: 'var(--label-sm-letter-spacing)',
+		fontSize: 'var(--label-sm-font-size)',
+		lineHeight: '1'
+	},
+	// Chart roles: axis-title and tick/tick-sm (chart's "label", "title",
+	// "eyebrow" and "subtitle" roles reuse the generic classes/vars above via
+	// the `.chart` context).
+	'axis-title': {
+		color: 'var(--color-text-muted)',
+		fontFamily: 'var(--axis-title-font-family)',
+		fontWeight: 'var(--axis-title-font-weight)',
+		letterSpacing: 'var(--axis-title-letter-spacing)',
+		fontSize: 'var(--axis-title-font-size)',
+		lineHeight: 'var(--axis-title-line-height)'
+	},
+	tick: {
+		color: 'var(--color-text-muted)',
+		fontFamily: 'var(--tick-font-family)',
+		fontWeight: 'var(--tick-font-weight)',
+		letterSpacing: 'var(--tick-letter-spacing)',
+		fontSize: 'var(--tick-font-size)',
+		lineHeight: 'var(--tick-line-height)'
+	},
+	'tick-sm': {
+		color: 'var(--color-text-muted)',
+		fontFamily: 'var(--tick-sm-font-family)',
+		fontWeight: 'var(--tick-sm-font-weight)',
+		letterSpacing: 'var(--tick-sm-letter-spacing)',
+		fontSize: 'var(--tick-sm-font-size)',
+		lineHeight: 'var(--tick-sm-line-height)'
 	}
 };

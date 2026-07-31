@@ -29,7 +29,7 @@
 </script>
 
 {#if title}
-	<h3 class={`${size === 'xs' ? 'title-xs' : 'title-sm'} mb-typography-spacing-xs`}>{title}</h3>
+	<h3 class={`${size === 'xs' ? 'title-4' : 'title-3'} mb-2`}>{title}</h3>
 {/if}
 
 <div class={gridClass}>
@@ -51,7 +51,7 @@
 
 	<div class="flex-1 pt-4 text-right">
 		<div class="float-right flex items-center pt-1">
-			<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
+			<span class="label-sm mr-2 text-color-label-muted">Mode</span>
 			<ThemeSwitcher size="xs" />
 		</div>
 	</div>

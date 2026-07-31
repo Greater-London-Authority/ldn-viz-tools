@@ -1,19 +1,28 @@
 <script lang="ts">
 	/**
-	 * The `ChartContainer` is a wrapper around a plot that adds additional information such as a title, subtitle, and description.
-	 * It also provides controls such as data/image download buttons.
+	 * The `ChartContainer` is a wrapper around a plot that adds a title, subtitle, footnotes and
+	 * export controls.
 	 *
-	 * **Note**: You must provide a `chartDescription` for accessibility.
+	 * **Accessibility**: always provide `alt` — a short text alternative naming what the chart shows.
+	 * `description` (a longer account of the data/trends) is optional but recommended; when given it
+	 * is exposed to **both** audiences from one source — screen readers (a visually-hidden copy wired
+	 * via `aria-describedby`) and sighted users (a "View description" Modal in the footer).
 	 *
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 * 	@component
 	 */
 
-	import { classNames } from '@ldn-viz/ui';
-	import ExportBtns from './ExportBtns.svelte';
-	import Footer from './Footer.svelte';
-	import SubTitle from './SubTitle.svelte';
-	import Title from './Title.svelte';
+	import {
+		Button,
+		ChromeFooter,
+		ChromeHeader,
+		ExportButtons,
+		Modal,
+		classNames
+	} from '@ldn-viz/ui';
+
+	/** Controls whether the chart-description Modal is open. */
+	let descriptionOpen = $state(false);
 
 	// For save as image
 	let chartToCapture: HTMLDivElement = $state() as HTMLDivElement;
@@ -26,7 +35,26 @@
 		/**
 		 * Subtitle that is displayed below the title, but above the plot.
 		 */
-		subTitle?: string;
+		subtitle?: string;
+		/**
+		 * Optional eyebrow (kicker label) shown above the title.
+		 */
+		eyebrow?: string;
+		/**
+		 * Title emphasis (the primary-slot rule): `primary` renders the dominant title; `secondary`
+		 * yields the primary slot and renders the title as an eyebrow — e.g. when this chart sits
+		 * inside a `Card` that owns the primary title.
+		 */
+		emphasis?: 'primary' | 'secondary';
+		/**
+		 * Optional help affordance shown beside the title. A string opens an `Overlay`
+		 * (`hintType` selects tooltip / popover / modal); pass a snippet via `ChromeHeader` for full control.
+		 */
+		hint?: string;
+		/** Overlay form used when `hint` is a string. */
+		hintType?: 'tooltip' | 'popover' | 'modal';
+		/** Modal heading when `hintType="modal"`. */
+		hintTitle?: string;
 		/**
 		 * Alt-text for the plot.
 		 */
@@ -82,13 +110,14 @@
 		 */
 		alignMultiple?: boolean;
 		/**
-		 * Description of the chart for use in a modal for sighted users.
+		 * A longer description of the chart (data, trends). Optional but recommended. When provided
+		 * it is exposed to screen readers (visually hidden, `aria-describedby`) and to sighted users
+		 * via a "View description" Modal in the footer. Accepts a string or a snippet.
 		 */
-		chartDescription?: string;
+		description?: string | import('svelte').Snippet;
 		controls?: import('svelte').Snippet;
 		legend?: import('svelte').Snippet;
 		children?: import('svelte').Snippet;
-		description?: import('svelte').Snippet;
 
 		/**
 		 * Optional id to apply to the chart container div.
@@ -105,7 +134,12 @@
 
 	let {
 		title = '',
-		subTitle = '',
+		subtitle = '',
+		eyebrow = '',
+		emphasis = 'primary',
+		hint = undefined,
+		hintType = 'tooltip',
+		hintTitle = undefined,
 		alt = '',
 		source = '',
 		byline = '',
@@ -118,11 +152,10 @@
 		overrideClass = '',
 		chartWidth = 'w-full',
 		alignMultiple = false,
-		chartDescription = '',
+		description = undefined,
 		controls,
 		legend,
 		children,
-		description,
 		id = 'captureElement',
 		columnMapping = undefined
 	}: Props = $props();
@@ -133,9 +166,15 @@
 	let classes = $derived(
 		classNames(
 			chartWidth,
-			alignMultiple ? 'contents not-prose' : 'flex flex-col not-prose',
-			'break-inside-avoid'
+			'break-inside-avoid',
+			alignMultiple ? 'contents not-prose chart' : 'flex flex-col not-prose chart'
 		)
+	);
+
+	let hasDescription = $derived(!!description);
+	let descriptionIsString = $derived(typeof description === 'string');
+	let hasActions = $derived(
+		!!(source || byline || note || hasDescription || dataDownloadButton || imageDownloadButton)
 	);
 </script>
 
@@ -144,45 +183,86 @@
 		<p class="sr-only">{alt}</p>
 	{/if}
 
-	<!-- eslint-disable svelte/no-at-html-tags -->
-	{#if title || subTitle}
-		<div class="mb-4">
-			{#if title}
-				<Title>{@html title}</Title>
-			{/if}
-			{#if subTitle}
-				<SubTitle>{@html subTitle}</SubTitle>
-			{/if}
+	{#if title || description || eyebrow || hint}
+		<div class="mb-2">
+			<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
 		</div>
 	{/if}
-	<!-- eslint-enable svelte/no-at-html-tags -->
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
 	{@render controls?.()}
 
-	<!-- separate slot for legend, so that main chart can be aligned if legends wrap over different number of lines-->
+	<!-- separate snippet for the legend, so the main chart can be aligned if legends wrap over a different number of lines-->
 	{@render legend?.()}
 
 	<!-- Visualisation goes here -->
-	<div class={chartClass} bind:this={chartToCapture}>
+	<div
+		class={chartClass}
+		bind:this={chartToCapture}
+		aria-describedby={hasDescription ? `${id}-description` : undefined}
+	>
 		{@render children?.()}
 	</div>
 
-	<!-- long description for screen readers -->
-	{@render description?.()}
+	<!-- long description, visually hidden — the screen-reader copy referenced by aria-describedby -->
+	{#if hasDescription}
+		<div id="{id}-description" class="sr-only">
+			{@render descriptionBody()}
+		</div>
+	{/if}
 
-	{#if source || byline || note || chartDescription || dataDownloadButton || imageDownloadButton}
-		<Footer {source} {byline} {note} {chartDescription}>
-			{#snippet exportBtns()}
-				<ExportBtns
-					{chartToCapture}
-					{filename}
-					dataForDownload={data}
-					{dataDownloadButton}
-					{imageDownloadButton}
-					{columnMapping}
-				/>
-			{/snippet}
-		</Footer>
+	{#if hasActions}
+		<div class="mt-2">
+			<ChromeFooter
+				{source}
+				{byline}
+				{note}
+				footnoteExtra={hasDescription ? descriptionTrigger : undefined}
+				actions={exportBtns}
+			/>
+		</div>
 	{/if}
 </div>
+
+{#snippet exportBtns()}
+	<ExportButtons
+		elementToCapture={chartToCapture}
+		{filename}
+		dataForDownload={data}
+		{dataDownloadButton}
+		{imageDownloadButton}
+		{columnMapping}
+	/>
+{/snippet}
+
+{#snippet descriptionBody()}
+	{#if descriptionIsString}
+		{description}
+	{:else if description}
+		{@render (description as import('svelte').Snippet)()}
+	{/if}
+{/snippet}
+
+{#snippet descriptionTrigger()}
+	<Modal bind:open={descriptionOpen}>
+		{#snippet trigger()}
+			<li data-capture-ignore>
+				<Button
+					variant="text"
+					size="xs"
+					emphasis="secondary"
+					class="!p-0"
+					onclick={() => (descriptionOpen = true)}>View description</Button
+				>
+			</li>
+		{/snippet}
+
+		{#snippet title()}
+			Description
+		{/snippet}
+
+		{#snippet description()}
+			{@render descriptionBody()}
+		{/snippet}
+	</Modal>
+{/snippet}
