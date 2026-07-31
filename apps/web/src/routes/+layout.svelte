@@ -31,7 +31,7 @@
 	let activeMenuItem = $derived(findActiveItem(mainMenu, page, resolve));
 
 	$effect(() => {
-		sidebarState.state.isOpen = breakPoint.current >= 1536;
+		sidebarState.state.isOpen = breakPoint.current >= 1280;
 	});
 
 	beforeNavigate(() => {
@@ -44,7 +44,7 @@
 		});
 	});
 
-	afterNavigate(() => (sidebarState.state.isOpen = breakPoint.current >= 1536));
+	afterNavigate(() => (sidebarState.state.isOpen = breakPoint.current >= 1280));
 </script>
 
 <Theme />
@@ -63,20 +63,21 @@
 
 <div class="flex min-h-dvh flex-col">
 	<Header>
-		<Button
-			variant="square"
-			size="sm"
-			emphasis="secondary"
-			class="-ml-3 mr-1 !bg-transparent text-color-text no-underline hover:!text-color-text-muted 2xl:hidden"
-			onclick={() => (sidebarState.state.isOpen = !sidebarState.state.isOpen)}
-		>
-			{#if !sidebarState.state.isOpen}
-				<Icon src={Bars3} class="h-5 w-5"></Icon>
-			{:else}
-				<Icon src={XMark} class="h-5 w-5"></Icon>
-			{/if}
-		</Button>
-
+		{#if page.data.metadata.slug !== 'index'}
+			<Button
+				variant="square"
+				size="sm"
+				emphasis="secondary"
+				class="-ml-3 mr-1 !bg-transparent text-color-text no-underline hover:!text-color-text-muted xl:hidden"
+				onclick={() => (sidebarState.state.isOpen = !sidebarState.state.isOpen)}
+			>
+				{#if !sidebarState.state.isOpen}
+					<Icon src={Bars3} class="h-5 w-5"></Icon>
+				{:else}
+					<Icon src={XMark} class="h-5 w-5"></Icon>
+				{/if}
+			</Button>
+		{/if}
 		<HeaderTitle base={resolve('/', {})}>London City Data</HeaderTitle>
 		<HeaderRight>
 			{#if breakPoint.current >= 768}

@@ -14,7 +14,7 @@ layout: index
 
 <!-- <p class="prose lead py-8">The London City Data team bring insight</p> -->
 
-<div class="grid md:grid-cols-2 gap-4 pt-spacing-xl">
+<div class="grid md:grid-cols-2 gap-4 pt-xl">
     <div class="flow-product">
         <a href="/design-system">
         <EnhancedImage src='cta-design-system.svg'/>
