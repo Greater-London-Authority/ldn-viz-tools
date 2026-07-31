@@ -171,7 +171,7 @@
 {@render numRowsControlSlot?.()}
 
 <div
-	class={`table-container product not-prose ${tableWidth}`}
+	class={`table-container product not-prose break-inside-avoid ${tableWidth}`}
 	bind:this={tableToCapture}
 	id="captureElement"
 >

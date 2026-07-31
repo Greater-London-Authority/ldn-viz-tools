@@ -64,7 +64,7 @@
 
 <div
 	class={classNames(
-		'product flex flex-col gap-2 border border-color-border-muted bg-color-surface p-4 text-color-text shadow-sm',
+		'product flex break-inside-avoid flex-col gap-2 border border-color-border-muted bg-color-surface p-4 text-color-text shadow-sm',
 		classes
 	)}
 >

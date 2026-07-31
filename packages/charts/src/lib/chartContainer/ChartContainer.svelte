@@ -166,6 +166,7 @@
 	let classes = $derived(
 		classNames(
 			chartWidth,
+			'break-inside-avoid',
 			alignMultiple ? 'contents not-prose chart' : 'flex flex-col not-prose chart'
 		)
 	);
