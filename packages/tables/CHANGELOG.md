@@ -1,5 +1,35 @@
 # @ldn-viz/tables
 
+## 7.0.0
+
+### Major Changes
+
+- 46f1a37: CHANGED: refactor how state is handled within table library
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Minor Changes
+
+- 864fdfb: CHANGED: `TableContainer` is now constructed using the `ChromeHeader` and `ChromeFooter` from `@ldn-viz/ui`
+  CHANGED: `TableContainer` now accepts `eyebrow`, `emphasis` (`primary`/`secondary`), `description`, and `hint`/`hintType`/`hintTitle` props
+  CHANGED: `TableContainer` prop `subTitle` has been renamed to `subtitle`
+  CHANGED: package no longer depends on `@ldn-viz/charts`
+
+### Patch Changes
+
+- Updated dependencies [0e03ccc]
+- Updated dependencies [864fdfb]
+- Updated dependencies [0d7953b]
+- Updated dependencies [2633ae9]
+- Updated dependencies [2633ae9]
+- Updated dependencies [62ec2b9]
+- Updated dependencies [bddeccb]
+- Updated dependencies [6d20c4e]
+- Updated dependencies [3a6075a]
+- Updated dependencies [e1e3928]
+  - @ldn-viz/ui@24.0.0
+  - @ldn-viz/themes@9.0.0
+  - @ldn-viz/utils@4.0.0
+
 ## 6.0.0
 
 ### Major Changes
