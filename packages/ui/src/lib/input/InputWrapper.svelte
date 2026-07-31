@@ -30,7 +30,7 @@
 			error ? '!text-color-interactive-error' : '',
 			disabled ? 'text-color-interactive-disabled' : '',
 			descriptionAlignment === 'left' ? 'text-color-label-muted' : 'ml-auto text-color-label-muted',
-			'text-sm'
+			'body-sm'
 		)
 	);
 
@@ -43,8 +43,8 @@
 	);
 </script>
 
-<div class="flex flex-col space-y-1">
-	<div class="flex justify-between [&>div]:text-sm">
+<div class="product flex flex-col space-y-1">
+	<div class="flex justify-between">
 		{#if label}
 			<label for={id} class={labelClasses}>
 				{@html label}{#if optional}&nbsp;(optional){/if}

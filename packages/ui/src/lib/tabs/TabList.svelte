@@ -2,6 +2,11 @@
 	/**
 	 * The `<TabList>` component allows users to select a tab from a list of options.
 	 *
+	 * It renders just the row (or column) of selectable tab labels, managing
+	 * `selectedTabId` and roving-tabindex keyboard focus.
+	 * Most applications should use the higher-level [Tabs](./?path=/docs/ui-components-tabs--documentation)
+	 * component, which pairs a `<TabList>` with `<TabPanel>`s.
+	 *
 	 * **Alternatives**: if the user's choice doesn't replace what is rendered below (or, for vertical tabs, to the side of) the control then use the [RadioButton](./?path=/docs/uicomponents-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation) or [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
 	 * @component
 	 */
@@ -66,7 +71,11 @@
 	}: Props = $props();
 
 	let tabListClasses = $derived(
-		classNames('bg-color-container text-color-text', orientationClasses[orientation], classes)
+		classNames(
+			'product bg-color-container text-color-text',
+			orientationClasses[orientation],
+			classes
+		)
 	);
 </script>
 

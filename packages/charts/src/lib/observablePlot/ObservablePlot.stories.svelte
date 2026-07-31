@@ -389,7 +389,7 @@
 
 <Story name="Combines multiple ObservablePlot images into single SVG">
 	{#snippet template(args)}
-		<div class=" w-full py-typography-spacing-3xl">
+		<div class=" py-typography-spacing-3xl w-full">
 			<ChartContainer
 				title="Two ObservablePlotInner plots in one ChartContainer..."
 				subTitle="...should be combined into one SVG"
@@ -416,5 +416,66 @@
 				/>
 			</ChartContainer>
 		</div>
+	{/snippet}
+</Story>
+
+<!--
+	The `columnMapping` prop renames data attributes to friendlier column headers in the downloaded
+	CSV/JSON file. Here `Month`/`Value` are exported as `Date`/`Amount (GBP)`.
+	The `filename` prop sets the name used for downloaded data and image files.
+-->
+<Story name="With columnMapping and filename">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			{spec}
+			data={chartData}
+			columnMapping={{ Month: 'Date', Value: 'Amount (GBP)', Variable: 'Series' }}
+			filename="financial-data"
+			dataDownloadButton={['CSV', 'JSON']}
+		/>
+	{/snippet}
+</Story>
+
+<!--
+	`tooltipOffset` sets the vertical offset (in pixels) between a data point and its custom tooltip.
+	The default is `-16`; here a larger negative offset lifts the tooltip further above the data point it labels.
+-->
+<Story name="With tooltipOffset">
+	{#snippet template(args)}
+		<ObservablePlot
+			{...args}
+			spec={{
+				x: { insetLeft: 80, insetRight: 20, type: 'utc' },
+				marks: [
+					Plot.gridX({ interval: '2 years' }),
+					Plot.gridY(),
+					Plot.axisX({ label: 'Year', interval: '1 year' }),
+					Plot.axisY({ label: '', tickFormat: (d) => '£' + format(',.4~s')(d) }),
+					Plot.ruleY([0]),
+					Plot.line(chartData, {
+						x: 'Month',
+						y: 'Value',
+						render: registerTooltip(tooltipStore, 'Path')
+					})
+				]
+			}}
+			data={chartData}
+			{tooltipStore}
+			tooltipOffset={-48}
+		>
+			{#snippet tooltip()}
+				<DemoTooltip />
+			{/snippet}
+		</ObservablePlot>
+	{/snippet}
+</Story>
+
+<!--
+	Setting `applyDefaults={false}` skips the ldn-viz default styling, using Observable Plot's defaults instead.
+-->
+<Story name="applyDefaults false">
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData} applyDefaults={false} />
 	{/snippet}
 </Story>

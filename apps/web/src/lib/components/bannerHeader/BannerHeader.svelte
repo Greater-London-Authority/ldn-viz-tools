@@ -56,8 +56,8 @@
 
 	<div class="relative z-10 flex">
 		<div class="container mx-auto">
-			<div class="prose responsive">
-				<p class="headline format pt-typography-spacing-md">{title}</p>
+			<div class="prose flow-prose">
+				<p class="headline pt-4">{title}</p>
 				{#if subTitle}
 					<p class="subhead">{subTitle}</p>
 				{/if}

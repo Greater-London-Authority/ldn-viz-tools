@@ -31,14 +31,6 @@ const docSchema = baseSchema
 		};
 	});
 
-const guideSchema = baseSchema.transform((data) => {
-	return {
-		...data,
-		slug: data.path,
-		slugFull: `/${data.path}`
-	};
-});
-
 const index = defineCollection({
 	name: 'Index',
 	pattern: './index.md',
@@ -58,17 +50,10 @@ const docs = defineCollection({
 	schema: docSchema
 });
 
-const dataVizGuide = defineCollection({
-	name: 'Guide',
-	pattern: './dataviz-guide/**/*.md',
-	schema: guideSchema
-});
-
 export default defineConfig({
 	root: './src/content',
 	collections: {
 		index,
-		docs,
-		dataVizGuide
+		docs
 	}
 }) as UserConfig;

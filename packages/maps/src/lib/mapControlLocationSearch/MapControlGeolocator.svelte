@@ -1,15 +1,20 @@
 <script lang="ts">
 	/**
-	 * The `<MapControlGeolocator>` component wraps the UI package's
-	 * `<Geolocator>` component for use with MapLibre maps.
+	 * The `<MapControlGeolocator>` component wraps the UI package's `<Geolocator>`
+	 * component for use with MapLibre maps. When the browser locates the user it
+	 * places a marker on the map and flies to it (via `setFeature`), calling
+	 * `onLocationFound`. Errors (e.g. denied permission) call `onSearchError`.
+	 *
+	 * It reads the `mapStore` context, so it must be rendered inside a `<Map>`.
+	 * It is usually positioned using a [MapControlGroup](./?path=/docs/maps-components-mapcontrols-mapcontrolgroup--documentation).
 	 * @component
 	 */
 
 	import { Geolocator } from '@ldn-viz/ui';
 	import mapgl from 'maplibre-gl';
 	import { getContext } from 'svelte';
-	import { clearFeature, setFeature } from './map-layer';
 	import type { MapLibreStore } from '../map/types';
+	import { clearFeature, setFeature } from './map-layer';
 
 	import type {
 		GeolocationUnamed,

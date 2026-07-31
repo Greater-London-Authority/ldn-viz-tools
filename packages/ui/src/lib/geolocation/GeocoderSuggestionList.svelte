@@ -48,12 +48,10 @@
 </script>
 
 <ul
-	class="max-height-[60vh] absolute left-0 top-11 z-40 w-full overflow-y-scroll bg-color-surface text-sm text-color-text shadow-lg"
+	class="product body-sm absolute left-0 top-11 z-40 max-h-[60vh] w-full overflow-y-scroll bg-color-surface text-color-text shadow-lg"
 >
 	{#if suggestions.length === 0}
-		<li class="w-full px-2.5 py-1.5">
-			<h1 class="pointer-events-none">No locations found</h1>
-		</li>
+		<li class="label-tight pointer-events-none w-full px-2.5 py-1.5">No locations found</li>
 	{:else}
 		{#each suggestions as suggestion, i (suggestion.id)}
 			{#if i < maxSuggestions}

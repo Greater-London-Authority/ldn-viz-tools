@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { AdjustmentsHorizontal, ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { SidebarLeftContext } from '../../../../../apps/docs/src/lib';
+	import { SidebarLeftContext } from '../../../../../apps/storybook/src/lib';
 	import LogoCIU from '../logos/LogoCIU.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
 	import Overlay from '../overlay/Overlay.svelte';
@@ -224,7 +224,7 @@
 <Story name="Light Theme with Tabs" args={{ theme: 'light', tabs }} />
 
 {#snippet unstyledContent()}
-	<div class="bg-color-surface-notice p-4 text-color-text">
+	<div class="bg-color-surface-accent p-4 text-color-text">
 		<p class="text-bold mb-2 text-xl">Unstyled Content</p>
 		<p class="mb-2">
 			This content does not inherit styles directly from the sidebar. Though it will be affected by
@@ -254,3 +254,15 @@
 <Story name="With custom trigger icon" args={{ icon }} />
 
 <Story name="With custom classes" args={{ class: '[&_*]:!bg-color-surface-accent !pb-0' }} />
+
+<!--
+The sidebar starts collapsed: only the toggle button (or tab strip) is shown until it is opened.
+This documents the primary collapsed appearance, which every other story opens out of.
+-->
+<Story name="Collapsed (closed) state" />
+
+<!--
+Combines `width='wide'`, `placement='right'` and `tabs`, exercising the
+right + wide + tabs entry of the width/height lookup matrix.
+-->
+<Story name="Right placement with wide tabs" args={{ placement: 'right', width: 'wide', tabs }} />

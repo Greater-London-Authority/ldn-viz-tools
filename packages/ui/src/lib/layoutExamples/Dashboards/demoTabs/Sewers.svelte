@@ -37,7 +37,7 @@
 		{
 			id: 'sewer_overflows_offline',
 			label: 'Offline',
-			color: theme.tokenNameToValue('data.categorical.grey')
+			color: theme.tokenNameToValue('data.empty')
 		}
 	]);
 </script>

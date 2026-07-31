@@ -222,16 +222,15 @@ Interactive elements have states such as **hover**, **active**, **focus**, **dis
 
 ### Spacing Tokens
 
-The structure of our spacing tokens is relatively simple. They run from **xxs, xs, sm, md, lg...** though to **8xl**
+The structure of our spacing tokens is a numbered scale, where the index is the multiplier of the 4px base unit (`--spacing-4` = 4 × 4px = 16px). It runs **1, 2, 3, 4, 5, ..., 24**, plus sub-steps (`px`, `0-5`, `1-5`, `2-5`, `3-5`) for finer gaps.
 
 Spacing tokens define the spacing between and around elements of the application interface. Spacing tokens are available in `rem` units, based on the root `<html>` font size.
 
-Each spacing token has a typographic spacing equivalent in `em` units based on the element's parent font size. Typographic tokens are used to give blocks of text the correct vertical rhythm.
-
 ```css
---spacing-md: 1rem;
---typography-spacing-md: 1em;
+--spacing-4: 1rem;
 ```
+
+Vertical rhythm between stacked blocks (paragraph-to-paragraph, section breaks) is handled separately by the content flow `--flow-*` tokens rather than by binding spacing tokens directly to text.
 
 [Read more about relative units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units#lengths)
 
@@ -297,7 +296,7 @@ If using the `@ldn-viz` package via npm in a project using tailwind css our toke
 
 `text-($token-name)` will apply the token to text elements. `bg-($token-name)` will apply the token to the background element etc.
 
-In the two examples above `text-color-text-primary` and `bg-color-container-level-0` show tokens applied via tailwind classes.
+In the two examples above `text-color-text` and `bg-color-container` show tokens applied via tailwind classes.
 
 Spacing tokens are available in the same pattern: `mb-spacing-lg` will apply the `$spacing-large` token to the bottom margin of the targeted html element.
 

@@ -48,6 +48,16 @@
 	<DemoSidebarOpener />
 {/snippet}
 
+{#snippet mainContent()}
+	<div class="p-4">
+		<h1 class="text-xl font-bold">Main content</h1>
+		<p>
+			This story passes a real <code>main</code> snippet, so the <code>{`{@render main()}`}</code>
+			branch is exercised instead of the placeholder text.
+		</p>
+	</div>
+{/snippet}
+
 <Story name="default">
 	{#snippet template(args)}
 		<AppShell {...args}></AppShell>
@@ -199,5 +209,15 @@ the screen width increases past this threshold.
 <Story name="With custom height class">
 	{#snippet template(args)}
 		<AppShell {...args} heightClass="h-[200px]" />
+	{/snippet}
+</Story>
+
+<!--
+This story provides the `main` snippet, to show that it is rendered in place of the placeholder
+when it is provided.
+-->
+<Story name="With main snippet provided">
+	{#snippet template(args)}
+		<AppShell {...args} main={mainContent}></AppShell>
 	{/snippet}
 </Story>

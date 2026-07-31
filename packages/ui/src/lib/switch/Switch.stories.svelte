@@ -64,3 +64,31 @@
 		</div>
 	{/snippet}
 </Story>
+
+<Story name="Checked by default">
+	{#snippet template(args)}
+		<Switch {...args} checked={true} label="Enable something" />
+	{/snippet}
+</Story>
+
+<!--
+The disabled appearance shown statically for both off and on, so the
+`interactive-disabled` styling is reviewable without toggling.
+-->
+<Story name="Disabled (checked and unchecked)">
+	{#snippet template()}
+		<div class="flex flex-col space-y-4">
+			<Switch label="Disabled, off" disabled checked={false} />
+			<Switch label="Disabled, on" disabled checked={true} />
+		</div>
+	{/snippet}
+</Story>
+
+<Story
+	name="Small + label on left"
+	args={{ label: 'Enable something', size: 'sm', labelOn: 'left' }}
+>
+	{#snippet template(args)}
+		<Switch {...args} />
+	{/snippet}
+</Story>

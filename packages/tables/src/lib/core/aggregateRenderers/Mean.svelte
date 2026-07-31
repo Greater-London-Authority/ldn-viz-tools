@@ -4,9 +4,9 @@
 	 * @component
 	 */
 
+	import type { MeanProps } from '$lib/core/aggregateRenderers/MeanProps';
 	import { mean } from 'd3-array';
 	import { format } from 'd3-format';
-	import type { MeanProps } from '$lib/core/aggregateRenderers/MeanProps';
 
 	let { values, formatString = '0.0f', ..._rest }: MeanProps = $props();
 
@@ -15,4 +15,6 @@
 	let meanVal = $derived(mean(values));
 </script>
 
-<span>{meanVal === undefined ? 'undefined' : f(meanVal)}</span>
+{#if values && values.length > 0}
+	<span>{meanVal === undefined ? 'undefined' : f(meanVal)}</span>
+{/if}

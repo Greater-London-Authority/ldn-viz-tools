@@ -74,3 +74,48 @@
 		</div>
 	{/snippet}
 </Story>
+
+<!-- Overrides the default token colours with explicit `lineColor` and `fillColor` values. -->
+<Story name="Custom colors">
+	{#snippet template()}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<BoroughsContextLayer lineColor="#c2185b" fillColor="#f06292" fillOpacity={0.2} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Shows only the borough borders by setting `fillOpacity` to 0, leaving the basemap visible inside each borough. -->
+<Story name="Borders only (no fill)">
+	{#snippet template()}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<BoroughsContextLayer fillOpacity={0} lineWidth={2} lineOpacity={1} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Emphasises boroughs strongly with a high `lineWidth`, fully opaque borders and a heavier `fillOpacity`. -->
+<Story name="Heavy emphasis">
+	{#snippet template()}
+		<div class="relative h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<BoroughsContextLayer lineWidth={6} lineOpacity={1} fillOpacity={0.35} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>

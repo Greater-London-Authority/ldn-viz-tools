@@ -2,6 +2,9 @@
 	import { Funnel, Map, PresentationChartLine } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import OpacityIcon from '../layerControl/OpacityIcon.svelte';
+	import ResizeIcon from '../layerControl/ResizeIcon.svelte';
+
 	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
 	import type { RadioButtonSolidProps } from './types';
 
@@ -28,6 +31,9 @@
 	let selectedId8: string = $state('');
 	let selectedId9: string = $state('');
 	let selectedId10: string = $state('');
+	let selectedId11: string = $state('');
+	let selectedId12: string = $state('');
+	let selectedId13: string = $state('train');
 	let selectedIdForError: string = $state('');
 
 	let optionsForGroup: RadioButtonSolidProps[] = [
@@ -52,6 +58,22 @@
 			icon: PresentationChartLine,
 			iconPlacement: 'below'
 		}
+	];
+
+	let optionsForGroupRawIcon: RadioButtonSolidProps[] = [
+		{ id: 'bus', label: 'Bus stops', rawIcon: OpacityIcon },
+		{ id: 'train', label: 'Train stations', rawIcon: ResizeIcon },
+		{ id: 'underground', label: 'Underground stations', rawIcon: OpacityIcon }
+	];
+
+	let manyOptions: RadioButtonSolidProps[] = [
+		{ id: 'bus', label: 'Bus' },
+		{ id: 'train', label: 'Train' },
+		{ id: 'underground', label: 'Underground' },
+		{ id: 'tram', label: 'Tram' },
+		{ id: 'taxi', label: 'Taxi' },
+		{ id: 'cycle', label: 'Cycle' },
+		{ id: 'river', label: 'River bus' }
 	];
 </script>
 
@@ -188,6 +210,43 @@ different values as the `name` prop.
 			{...args}
 		/>
 		<p class="mt-8 text-color-text-muted">Selected id: {selectedId10}</p>
+	{/snippet}
+</Story>
+
+<Story name="With RawIcon">
+	{#snippet template(args)}
+		<RadioButtonGroupSolid
+			name="station-type"
+			options={optionsForGroupRawIcon}
+			bind:selectedId={selectedId11}
+			{...args}
+		></RadioButtonGroupSolid>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId11}</p>
+	{/snippet}
+</Story>
+
+<Story name="Many options (overflow)">
+	{#snippet template(args)}
+		<RadioButtonGroupSolid
+			name="station-type"
+			options={manyOptions}
+			bind:selectedId={selectedId12}
+			{...args}
+		></RadioButtonGroupSolid>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId12}</p>
+	{/snippet}
+</Story>
+
+<Story name="Pre-selected value">
+	{#snippet template(args)}
+		<RadioButtonGroupSolid
+			options={optionsForGroup}
+			name="station-type"
+			bind:selectedId={selectedId13}
+			label="RadioGroup Label"
+			{...args}
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId13}</p>
 	{/snippet}
 </Story>
 

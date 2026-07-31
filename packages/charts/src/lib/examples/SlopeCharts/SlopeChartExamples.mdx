@@ -9,7 +9,7 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
 ### Default
 
 <details>
-	<summary class="cursor-pointer dark:text-color-text-inverse">Show spec</summary>
+	<summary class="cursor-pointer dark:text-color-inverse-text">Show spec</summary>
 
     ```javascript
         // OcclusionY adds an initializer that shifts nodes vertically with a tiny force simulation.
@@ -80,7 +80,7 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
     			y: 'Average',
     			stroke: 'Variable',
     			strokeWidth: 2,
-    			fill: theme.tokenNameToValue('chart.background'),
+    			fill: theme.tokenNameToValue('chart.surface'),
     			fillOpacity: 1
     		}),
     		d3
@@ -105,7 +105,7 @@ import * as SlopeChart from './SlopeChart.stories.svelte';
 
 </details>
 
-<details class="max-h-[300px] overflow-y-auto dark:text-color-text-inverse">
+<details class="max-h-[300px] overflow-y-auto dark:text-color-inverse-text">
     <summary class="cursor-pointer">Show data</summary>
     <pre>
     	{JSON.stringify(
