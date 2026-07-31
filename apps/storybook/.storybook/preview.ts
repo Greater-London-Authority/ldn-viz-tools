@@ -1,5 +1,5 @@
 import { withThemeByClassName } from './withThemeByClassName';
-import type { Preview } from '@storybook/svelte';
+import type { Preview } from '@storybook/sveltekit';
 import '../src/app.postcss';
 import { docs } from './ciuStorybookTheme';
 import ThemeContext from '../src/lib/decorators/ThemeContext.svelte';
