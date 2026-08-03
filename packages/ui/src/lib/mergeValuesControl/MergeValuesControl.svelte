@@ -14,7 +14,7 @@
 
 	interface Props {
 		groups?: Grouping;
-		onGroupingsChanged?: any;
+		onGroupingsChanged?: () => void;
 	}
 
 	let {

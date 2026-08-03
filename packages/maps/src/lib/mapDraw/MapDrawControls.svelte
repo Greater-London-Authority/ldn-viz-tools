@@ -16,6 +16,7 @@
 	import { fly } from 'svelte/transition';
 	import type { GeoJSONStoreFeatures, TerraDraw } from 'terra-draw';
 	import FileUpload from './FileUpload.svelte';
+	import type { MapDraw, Modes } from './MapDrawState.svelte';
 
 	interface Props {
 		/**
@@ -45,8 +46,8 @@
 		 */
 		uploadDownload: [boolean, boolean];
 
-		drawModes: any;
-		mapDraw: any;
+		drawModes: Modes;
+		mapDraw: MapDraw;
 	}
 
 	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw, onStart, onCancel }: Props =

@@ -1,5 +1,48 @@
 # ldn-viz-tools-charts
 
+## 9.1.0
+
+### Minor Changes
+
+- 5a76198: FIXED: `ObservablePlot` now passes `subtitle` (rather than `SubTitle`) to `ChartContainer`, fixing regression when prop was renamed
+- e013788: CHANGED: replaced many `any` types with tighter types
+- e0d5450: CHANGED: adjusted size of Observable Plot color legends
+
+### Patch Changes
+
+- Updated dependencies [e013788]
+  - @ldn-viz/ui@24.1.0
+
+## 9.0.0
+
+### Major Changes
+
+- 864fdfb: CHANGED: `ChartContainer` is now constructed using the `ChromeHeader` and `ChromeFooter` from `@ldn-viz/ui`.
+  CHANGED: `ChartContainer` now accepts `eyebrow`, `emphasis` (`primary`/`secondary`) and `hint`/`hintType`/`hintTitle` props
+  CHANGED: `ChartContainer` props have been renamed: `subtitle` replaces `subTitle`, and `description` replaces `chartDescription`
+  REMOVED: `ExportBtns` has been moved to `@ldn-viz/ui` and renamed to `ExportButtons`; its `chartToCapture` prop has been renamed to `elementToCapture`
+  REMOVED: `Title`/`Subtitlte`/`Footer` have been removed - use the `ChromeHeader` and `ChromeFooter` from `@ldn-viz/ui` instead.
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Minor Changes
+
+- a223a29: CHANGED: apply the `break-inside-avoid` class to the `ChartContainer` to avoid pagebreaks splitting it across pages when printed
+
+### Patch Changes
+
+- Updated dependencies [0e03ccc]
+- Updated dependencies [864fdfb]
+- Updated dependencies [0d7953b]
+- Updated dependencies [2633ae9]
+- Updated dependencies [2633ae9]
+- Updated dependencies [62ec2b9]
+- Updated dependencies [bddeccb]
+- Updated dependencies [6d20c4e]
+- Updated dependencies [3a6075a]
+- Updated dependencies [e1e3928]
+  - @ldn-viz/ui@24.0.0
+  - @ldn-viz/utils@4.0.0
+
 ## 8.0.0
 
 ### Major Changes

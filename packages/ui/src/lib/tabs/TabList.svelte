@@ -52,8 +52,8 @@
 		 * Enables screen reader to describe purpose of tab list. Required.
 		 */
 		ariaLabel: string;
-		onChange?: any;
-		handleSelect?: any;
+		onChange?: (id: Tab['id']) => void;
+		handleSelect?: (id: Tab['id']) => void;
 		class?: string;
 	}
 

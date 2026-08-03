@@ -1,5 +1,33 @@
 # ldn-viz-tools-ui
 
+## 24.1.0
+
+### Minor Changes
+
+- e013788: CHANGED: replaced many `any` types with tighter types
+
+## 24.0.0
+
+### Major Changes
+
+- 864fdfb: ADDED: `ExportButtons` (moved from `@ldn-viz/charts`); its `chartToCapture` prop has been renamed to `elementToCapture`
+
+  ADDED: `Card`, `ChromeHeader`, `ChromeFooter` and `TitleGroup`
+
+- 3a6075a: CHANGED: refactored state managment
+  FIXED: fix bug in bar length in `BarCell`
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Minor Changes
+
+- 0e03ccc: FIXED: `MultipleActionButton` is disabled if it has no options
+- 0d7953b: FIXED: highlighted value marker in `ColorLegend` now changes color based on theme, so remains visible in dark mode
+- 2633ae9: FIXED: rawIcons now work again in `RadioButtonSolid` and `Tab`
+- 2633ae9: FIXED: updated class name applied to highlighted location in `GeocoderSuggestion`
+- 62ec2b9: FIXED: the error modal in `Geolocator` no longer has a "More info" trigger rendered
+- bddeccb: CHANGED: made `open` prop optional for `Overlay`/`Popover`/`Tooltip`
+- 6d20c4e: FIXED: replace various uses of old color tokens
+
 ## 23.0.0
 
 ### Major Changes

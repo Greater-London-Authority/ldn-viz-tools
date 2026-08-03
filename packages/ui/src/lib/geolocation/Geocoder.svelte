@@ -50,7 +50,7 @@
 		/**
 		 * Called when the user clears the search box.
 		 */
-		onSearchClear?: any;
+		onSearchClear?: () => void;
 		/**
 		 * suggestions can be bound via 'bind:suggestions' to reactively receive
 		 * changes to search results.

@@ -8,7 +8,7 @@
 		 * Also connects TabLabel to relevant TabPanel
 		 */
 		tabId: Tab['id'];
-		handleSelect: any;
+		handleSelect: (id: Tab['id']) => void;
 		orientation?: 'vertical' | 'horizontal';
 		selectedTabId?: Tab['id'];
 		children?: import('svelte').Snippet;
