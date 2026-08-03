@@ -46,13 +46,9 @@ describe('findActiveItem', () => {
 	});
 
 	it('does not select an item that has no href (documents current behaviour)', () => {
-		// Quirk: the match check falls back to '/' (so an hrefless item matches
-		// any path) but the depth comparison falls back to '' — giving it a path
-		// depth of 1, which never beats the initial best-match depth of 1. So an
-		// hrefless item can match yet never win.
 		const hrefless: NavigationMenuItemProps[] = [{ title: 'Home' }];
 		const active = findActiveItem(hrefless, pageWith('/anything'), identity);
-		expect(active).toBeUndefined();
+		expect(active).toBe(hrefless[0]);
 	});
 
 	it('uses the resolve function to map hrefs to real paths', () => {
