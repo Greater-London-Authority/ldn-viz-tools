@@ -10,7 +10,7 @@
 		/**
 		 * Defaults to a random twelve-character string for use to identify the title by the screen reader.
 		 */
-		id?: any;
+		id?: string;
 
 		/**
 		 * Required when `Callout` has no title, to ensure screen reader can identify it.

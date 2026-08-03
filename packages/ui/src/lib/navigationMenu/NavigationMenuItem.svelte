@@ -129,7 +129,7 @@
 					href={constructURL(href)}
 					class={textClasses}
 					{...currentPage}
-					onclick={() => onChange(id)}
+					onclick={() => onChange?.(id)}
 				>
 					{title}
 				</a>
@@ -169,7 +169,7 @@
 			href={constructURL(href)}
 			class={textClasses}
 			{...currentPage}
-			onclick={() => onChange(id)}
+			onclick={() => onChange?.(id)}
 		>
 			{title}
 		</a>

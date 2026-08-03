@@ -11,13 +11,13 @@
 	import { classNames } from '../utils/classNames';
 
 	interface Props {
-		label: any;
+		label: string;
 		activeColorName?: string;
 		disabled?: boolean;
 		/**
 		 * Optional custom colours to choose from. If these don't exist, default to categoricalColors.
 		 */
-		colorNames: any;
+		colorNames: string[];
 		/**
 		 * If `true`, shows the color chip even when the control is disabled (but clicking on it does not open the control).
 		 */

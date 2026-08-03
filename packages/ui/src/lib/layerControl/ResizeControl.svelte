@@ -8,10 +8,10 @@
 	import ResizeIcon from './ResizeIcon.svelte';
 
 	interface Props {
-		label: any;
+		label: string;
 		size?: number;
-		minSize: any;
-		maxSize: any;
+		minSize: number;
+		maxSize: number;
 		disabled?: boolean;
 	}
 
