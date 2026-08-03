@@ -8,7 +8,7 @@ thumbnail: cta-dataviz-1.svg
 ---
 
 <script>
-    import FoundationsMultipleLine from '$lib/components/charts/exampleCharts/lines/FoundationsMultipleLine.svelte'
+    import FoundationsDualLine from '$lib/components/charts/exampleCharts/lines/FoundationsDualLine.svelte'
 </script>
 
 ## Principles
@@ -74,7 +74,7 @@ Whatever format of data visualisation you are producing, keep these fundamentals
 - **Say what you see** -
   Help the reader by titling the chart with a description of what you want them to see in the graphic. You could also use colour in your title text to connect to data points in your chart.
 
-<FoundationsMultipleLine />
+<FoundationsDualLine />
 
 ### Charts in context
 
