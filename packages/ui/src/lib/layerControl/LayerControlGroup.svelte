@@ -26,7 +26,7 @@
 		/**
 		 * The `id` of the `<input>` element: defaults to a randomly-generated value.
 		 */
-		id?: any;
+		id?: string;
 		/**
 		 * Text displayed above the `<input>` element.
 		 */

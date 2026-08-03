@@ -55,7 +55,7 @@
 	const swatchWidth = 30;
 
 	interface Props {
-		label: any;
+		label: string;
 		disabled?: boolean;
 		fillType?: string;
 	}
