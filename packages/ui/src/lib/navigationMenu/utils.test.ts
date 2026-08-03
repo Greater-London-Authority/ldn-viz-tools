@@ -45,7 +45,7 @@ describe('findActiveItem', () => {
 		expect(findActiveItem(undefined as any, pageWith('/a'), identity)).toBeUndefined();
 	});
 
-	it('does not select an item that has no href (documents current behaviour)', () => {
+	it('selects an item that has no href, if there is no more specific match', () => {
 		const hrefless: NavigationMenuItemProps[] = [{ title: 'Home' }];
 		const active = findActiveItem(hrefless, pageWith('/anything'), identity);
 		expect(active).toBe(hrefless[0]);
