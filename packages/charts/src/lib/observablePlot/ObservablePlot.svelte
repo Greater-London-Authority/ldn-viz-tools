@@ -143,7 +143,7 @@
 	<ChartContainer
 		{data}
 		{title}
-		{subTitle}
+		subtitle={subTitle}
 		{alt}
 		{source}
 		{note}
