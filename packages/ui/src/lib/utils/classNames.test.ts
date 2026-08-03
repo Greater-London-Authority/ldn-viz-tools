@@ -24,8 +24,7 @@ describe('classNames', () => {
 		expect(classNames('', undefined as any, null as any)).toBe('');
 	});
 
-	it('does trims whitespace within a single argument', () => {
-		// Documents current behaviour: internal spacing is preserved verbatim.
+	it('does trim whitespace within a single argument', () => {
 		expect(classNames('a b', 'c')).toBe('a b c');
 		expect(classNames(' a ', 'b')).toBe('a b');
 	});
