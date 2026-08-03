@@ -1,5 +1,16 @@
 # ldn-viz-tools-maps
 
+## 16.0.0
+
+### Minor Changes
+
+- e013788: CHANGED: replaced many `any` types with tighter types
+
+### Patch Changes
+
+- Updated dependencies [e013788]
+  - @ldn-viz/ui@24.1.0
+
 ## 15.0.0
 
 ### Major Changes

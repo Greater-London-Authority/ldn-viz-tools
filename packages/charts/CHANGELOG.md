@@ -1,5 +1,18 @@
 # ldn-viz-tools-charts
 
+## 9.1.0
+
+### Minor Changes
+
+- 5a76198: FIXED: `ObservablePlot` now passes `subtitle` (rather than `SubTitle`) to `ChartContainer`, fixing regression when prop was renamed
+- e013788: CHANGED: replaced many `any` types with tighter types
+- e0d5450: CHANGED: adjusted size of Observable Plot color legends
+
+### Patch Changes
+
+- Updated dependencies [e013788]
+  - @ldn-viz/ui@24.1.0
+
 ## 9.0.0
 
 ### Major Changes

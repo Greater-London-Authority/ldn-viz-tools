@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 24.1.0
+
+### Minor Changes
+
+- e013788: CHANGED: replaced many `any` types with tighter types
+
 ## 24.0.0
 
 ### Major Changes
