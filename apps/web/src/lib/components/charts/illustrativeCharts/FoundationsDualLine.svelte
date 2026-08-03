@@ -11,8 +11,7 @@
 	//const formatLow = format(',.0f'); // for lower than 10000, format commas and not dp
 	const formatHigh = format(',.4~s'); // for 10000 and above, format commas and SI numbering (M & K)
 
-	// Spec and data for multi-line example
-	// let multiLineData = $derived(demoMonthlyTimeseriesLong);
+	// Spec and data for example
 	const chartData = demoMonthlyTimeseriesLong.filter((d) => d.Variable != 'Variable C');
 	let dualLineSpec = $derived({
 		x: { insetLeft: 60, insetRight: 10, type: 'utc' },

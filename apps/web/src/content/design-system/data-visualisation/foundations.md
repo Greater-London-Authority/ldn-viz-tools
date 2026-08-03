@@ -8,7 +8,7 @@ thumbnail: cta-dataviz-1.svg
 ---
 
 <script>
-    import FoundationsDualLine from '$lib/components/charts/exampleCharts/lines/FoundationsDualLine.svelte'
+    import FoundationsDualLine from '$lib/components/charts/illustrativeCharts/FoundationsDualLine.svelte'
 </script>
 
 ## Principles
