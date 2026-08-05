@@ -1,6 +1,6 @@
 ---
 title: Chart examples
-description: Graphical representation for data visualization
+description: Using our design system to produce clear, understandable and accessible charts
 section: Data visualisation
 navLabel: Chart examples
 heroImage: header-dataviz-overflow.svg
@@ -16,7 +16,22 @@ thumbnail: cta-dataviz-2.svg
     import ExampleStackedColumn from '$lib/components/charts/exampleCharts/bars/ExampleStackedColumn.svelte'
     import ExampleFacetedColumn from '$lib/components/charts/exampleCharts/bars/ExampleFacetedColumn.svelte'
     import ExampleBar from '$lib/components/charts/exampleCharts/bars/ExampleBar.svelte'
+    import ExampleStackedBar from '$lib/components/charts/exampleCharts/bars/ExampleStackedBar.svelte'
+    import ExampleSlope from '$lib/components/charts/exampleCharts/slopes/ExampleSlope.svelte'
+    import ExampleHistogram from '$lib/components/charts/exampleCharts/histograms/ExampleHistogram.svelte'
+    import ExampleScatterplot from '$lib/components/charts/exampleCharts/scatterplots/ExampleScatterplot.svelte'
+    import ExampleFacetedScatterplot from '$lib/components/charts/exampleCharts/scatterplots/ExampleFacetedScatterplot.svelte'
+    import ExampleCentreTextTreemap from '$lib/components/charts/exampleCharts/treemaps/ExampleCentreTextTreemap.svelte'
+    import ExampleTopLeftTextTreemapSimple from '$lib/components/charts/exampleCharts/treemaps/ExampleTopLeftTextTreemapSimple.svelte'
+    import ExampleTopLeftTextTreemapVariable from '$lib/components/charts/exampleCharts/treemaps/ExampleTopLeftTextTreemapVariable.svelte'
+
 </script>
+
+<p class="lead">A consistent approach to data presentation ensures that our work is recognisable and easily understood across multiple products and outputs. </p>
+
+These examples are a starting point for producing a range of charts that are clear, understandable and accessible.
+
+You can find Observable Plot code snippets for these examples on our [LDN Viz Tools Storybook](https://greater-london-authority.github.io/ldn-viz-tools/?path=/docs/charts-examples-line-charts--documentation).
 
 ## Line Charts
 
@@ -71,3 +86,55 @@ Bar charts are oriented horizontally. They always start at zero and have a solid
 ### Horizontal Bar
 
 <ExampleBar />
+
+### Horizontal Stacked Bar
+
+<ExampleStackedBar />
+
+## Histograms
+
+Histograms are visually similar to column charts, but are designed to show the distribution of continuous values that fall within particular ranges (or bins). As the values are continuous, remove gaps (inset) and keep stroke width minimal.
+
+### Histogram
+
+<ExampleHistogram />
+
+## Slope Charts
+
+Slope charts are good for comparing rates of change and ranking between two points in time.
+
+### Slope chart
+
+<ExampleSlope />
+
+## Scatterplots
+
+Scatterplots are great for showing the relationship between two variables (on the x & y axis). Further dimensions can be encoded through the colour, scale and symbology of the data point.
+
+### Scatterplot
+
+<ExampleScatterplot />
+
+### Faceted Scatterplot
+
+<ExampleFacetedScatterplot />
+
+## Treemaps
+
+Treemaps are used for hierarchical data that have a part-to-whole relationship.
+
+### Centred Text
+
+We prefer treemaps with centred text as they work best across different screen sizes. These are ideal for more infographic-type treemaps.
+
+<ExampleCentreTextTreemap />
+
+However, for treemaps with more text density, it may be preferable to use treemaps with text aligned to the top left. There are two examples, one with one text mark which is simple to reproduce. The second has variable text positioning dependent on other visible text, to ensure the first line of text is always in the same position.
+
+### Top Left Text - Simple
+
+<ExampleTopLeftTextTreemapSimple />
+
+### Top Left Text - Variable Text Position
+
+<ExampleTopLeftTextTreemapVariable />
