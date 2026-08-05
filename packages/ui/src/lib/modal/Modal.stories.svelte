@@ -4,6 +4,12 @@
 	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
 	import Modal from './Modal.svelte';
+	/**
+	 * The `Modal` component displays content in a dialog that overlays the rest of the page, built on top of the `bits-ui` `Dialog` primitive.
+	 * It supports a `title`, `description` and `buttons` snippet, and can be opened by a custom `trigger` snippet or the default [Trigger](./?path=/docs/ui-components-overlays-overlay--documentation) button.
+	 *
+	 * **Alternatives**: for less disruptive explanatory content, consider a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation) or [Popover](./?path=/docs/ui-components-overlays-popover--documentation) instead, or use the [Overlay](./?path=/docs/ui-components-overlays-overlay--documentation) component to choose between them.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Modal',
@@ -22,6 +28,9 @@
 	let isOpenLightTheme = $state(false);
 	let isOpenWide = $state(false);
 	let isOpenButtons = $state(false);
+	let isOpenProgrammatic = $state(false);
+	let isOpenFull = $state(false);
+	let isOpenContentProps = $state(false);
 </script>
 
 <Story name="Default">
@@ -149,8 +158,8 @@
 			{/snippet}
 
 			{#snippet description()}
-				We can use the width prop to set different max-widths from xs though 7xl and full. Default
-				is md
+				We can use the width prop to set different max-widths from `xs` though `7xl` and `full`.
+				Default is `md`.
 			{/snippet}
 
 			{#snippet buttons()}
@@ -249,6 +258,55 @@
 
 			{#snippet description()}
 				This demonstrates how to use the Trigger component.
+			{/snippet}
+		</Modal>
+	{/snippet}
+</Story>
+
+<!-- The modal can be opened by binding `open` and toggling it externally, without passing any `trigger`. -->
+<Story name="Programmatically opened (no trigger)">
+	{#snippet template(args)}
+		<Button onclick={() => (isOpenProgrammatic = true)}>Open modal programmatically</Button>
+
+		<Modal {...args} bind:open={isOpenProgrammatic}>
+			{#snippet title()}
+				Opened without a trigger
+			{/snippet}
+
+			{#snippet description()}
+				This modal has no trigger snippet; it was opened by toggling the bound `open` prop from an
+				external button.
+			{/snippet}
+
+			{#snippet buttons()}
+				<Button variant="solid" onclick={() => (isOpenProgrammatic = false)}>Close</Button>
+			{/snippet}
+		</Modal>
+	{/snippet}
+</Story>
+
+<!-- 
+`contentProps` are passed through to the underlying `Dialog.Content`. Here they disable closing the modal by pressing Escape or clicking outside, so it can only be dismissed via the buttons.
+This is a bad user experience - don't do this in an actual app.
+-->
+<Story name="contentProps passthrough">
+	{#snippet template(args)}
+		<Modal
+			{...args}
+			bind:open={isOpenContentProps}
+			contentProps={{ escapeKeydownBehavior: 'ignore', interactOutsideBehavior: 'ignore' }}
+		>
+			{#snippet title()}
+				Passing contentProps
+			{/snippet}
+
+			{#snippet description()}
+				`contentProps` have been passed to the underlying `Dialog.Content` so that pressing Escape
+				or clicking outside will not close this modal. Use the button below instead.
+			{/snippet}
+
+			{#snippet buttons()}
+				<Button variant="solid" onclick={() => (isOpenContentProps = false)}>Close</Button>
 			{/snippet}
 		</Modal>
 	{/snippet}

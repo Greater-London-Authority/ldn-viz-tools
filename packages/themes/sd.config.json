@@ -1,0 +1,134 @@
+{
+	"source": ["./tokens/**/*.json"],
+	"parsers": ["json-parser"],
+
+	"platforms": {
+		"css": {
+			"transformGroup": "css",
+			"transforms": ["modeName", "size/pxToRem", "typography/unitless", "spacing/unitless"],
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "primitives.css",
+					"format": "css/variables",
+					"filter": "cssPrimitiveFilter",
+					"options": {
+						"selector": ":root"
+					}
+				},
+				{
+					"destination": "primitive-scale.css",
+					"format": "custom/primitive-scale",
+					"filter": "cssPrimitiveScaleFilter"
+				},
+				{
+					"destination": "light.css",
+					"format": "css/variables",
+					"filter": "cssLightModeFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "dark.css",
+					"format": "css/variables",
+					"filter": "cssDarkModeFilter",
+					"options": {
+						"selector": ":root.dark, .dark",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "spacing.css",
+					"format": "custom/spacing",
+					"filter": "cssSpacingFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "grid-spacing.css",
+					"format": "custom/grid-spacing",
+					"filter": "cssGridSpacingFilter"
+				},
+				{
+					"destination": "flow.css",
+					"format": "custom/flow",
+					"filter": "cssFlowFilter"
+				},
+				{
+					"destination": "typography.css",
+					"format": "custom/typography",
+					"filter": "cssTypographyFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "shadows.css",
+					"format": "custom/shadows",
+					"filter": "shadowFilter"
+				}
+			]
+		},
+		"web": {
+			"transformGroup": "web",
+			"transforms": ["modeName", "spacing/unitless"],
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "tw-extend/color.cjs",
+					"format": "tw/css-variables",
+					"filter": "twFilter"
+				},
+				{
+					"destination": "tw-extend/spacing.cjs",
+					"format": "tw/css-spacing-variables",
+					"filter": "twSpacingFilter"
+				},
+				{
+					"destination": "tw-extend/gridspacing.cjs",
+					"format": "tw/css-grid-spacing-variables",
+					"filter": "twGridSpacingFilter"
+				},
+				{
+					"destination": "tw-extend/flow.cjs",
+					"format": "tw/css-flow-variables",
+					"filter": "twFlowFilter"
+				}
+			]
+		},
+		"ts": {
+			"transformGroup": "js",
+			"buildPath": "./styles/",
+			"files": [
+				{
+					"destination": "js/color-tokens.js",
+					"format": "custom/js",
+					"filter": "jsFilter",
+					"options": {
+						"minify": true
+					}
+				}
+			]
+		},
+		"docs": {
+			"transformGroup": "js",
+			"transforms": ["name/kebab"],
+			"buildPath": "./docs/tokens/",
+			"files": [
+				{
+					"destination": "tokens.js",
+					"format": "custom/docs"
+				}
+			]
+		}
+	}
+}

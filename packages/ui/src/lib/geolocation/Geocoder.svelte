@@ -50,7 +50,7 @@
 		/**
 		 * Called when the user clears the search box.
 		 */
-		onSearchClear?: any;
+		onSearchClear?: () => void;
 		/**
 		 * suggestions can be bound via 'bind:suggestions' to reactively receive
 		 * changes to search results.
@@ -316,17 +316,17 @@
 
 <search
 	bind:this={container}
-	class="pointer-events-auto relative flex h-10 w-full bg-color-input-background {classes}"
+	class="pointer-events-auto relative flex h-10 w-full bg-color-surface {classes}"
 >
 	<div class="absolute left-2 top-2 flex items-center justify-center">
-		<Icon src={MagnifyingGlass} class="h-6 w-6 text-color-input-icon" />
+		<Icon src={MagnifyingGlass} class="h-6 w-6 text-color-text" />
 	</div>
 
 	<input
 		bind:this={input}
 		type="search"
 		{placeholder}
-		class="text-color-valuetext form-input h-full w-64 min-w-0 max-w-[100%] shrink grow border border-color-input-border bg-color-input-background pl-10 placeholder-color-input-placeholder {inputClasses}"
+		class="form-input h-full w-64 min-w-0 max-w-[100%] shrink grow border border-color-border-muted bg-color-surface pl-10 text-color-text placeholder-color-text-wash {inputClasses}"
 		class:pr-8={showClearButton}
 		value={query}
 		onfocus={reshowSuggestionList}
@@ -337,10 +337,10 @@
 	{#if showClearButton || query?.length > 0}
 		<button
 			onclick={clearSearch}
-			class="y-auto absolute right-1 top-1 flex items-center justify-center bg-color-input-background"
+			class="absolute right-1 top-1 flex items-center justify-center bg-color-surface"
 			title="Clear search and marker"
 		>
-			<Icon src={XMark} class="p-0.25 h-8 w-8 text-color-input-icon" />
+			<Icon src={XMark} class="h-8 w-8 p-0.5 text-color-text" />
 		</button>
 	{/if}
 

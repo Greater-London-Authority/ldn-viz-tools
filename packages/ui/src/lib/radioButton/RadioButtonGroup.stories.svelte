@@ -29,6 +29,9 @@
 	let selectedId6: string = $state('');
 	let selectedId7: string = $state('');
 	let selectedId8: string = $state('');
+	let selectedId9: string = $state('');
+	let selectedId10: string = $state('bus');
+	let selectedId11: string = $state('');
 	let selectedIdForError: string = $state('');
 
 	let optionsForGroup = [
@@ -53,12 +56,22 @@
 		...option,
 		color: theme.tokenNameToValue(colors[option.id])
 	}));
+
+	let manyLongOptions = [
+		{ id: 'bus', label: 'Bus stops and coach stations' },
+		{ id: 'train', label: 'National Rail train stations (excluding underground)' },
+		{ id: 'underground', label: 'London Underground and Overground stations' },
+		{ id: 'tram', label: 'Tramlink and Docklands Light Railway stops' },
+		{ id: 'taxi', label: 'Licensed taxi ranks and minicab offices' },
+		{ id: 'cycle', label: 'Santander Cycle hire docking stations' },
+		{ id: 'river', label: 'River bus and Thames Clipper piers' }
+	];
 </script>
 
 <Story name="Default">
 	{#snippet template(args)}
 		<RadioButtonGroup {...args} options={optionsForGroup} name="station-type" bind:selectedId />
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId}</p>
 	{/snippet}
 </Story>
 
@@ -73,7 +86,7 @@
 				hint="Radio ga ga"
 			/>
 		</div>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId2}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId2}</p>
 	{/snippet}
 </Story>
 
@@ -97,7 +110,7 @@
 				{/snippet}</RadioButtonGroup
 			>
 		</div>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId3}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId3}</p>
 	{/snippet}
 </Story>
 
@@ -111,7 +124,7 @@
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId4}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId4}</p>
 	{/snippet}
 </Story>
 
@@ -125,7 +138,7 @@
 			label="Transport method"
 			description="Pick you preferred method of transport - taxis are currently not available"
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId5}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId5}</p>
 	{/snippet}
 </Story>
 
@@ -140,7 +153,7 @@
 			description="Pick you preferred method of transport - taxis are currently not available"
 			allowClear={false}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId6}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId6}</p>
 	{/snippet}
 </Story>
 
@@ -155,7 +168,21 @@
 			allowClear={false}
 			orientation="horizontal"
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId7}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId7}</p>
+	{/snippet}
+</Story>
+
+<Story name="Horizontal with many/long options">
+	{#snippet template(args)}
+		<RadioButtonGroup
+			{...args}
+			options={manyLongOptions}
+			name="station-type"
+			bind:selectedId={selectedId11}
+			label="Transport method"
+			orientation="horizontal"
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId11}</p>
 	{/snippet}
 </Story>
 
@@ -170,7 +197,34 @@
 			allowClear={false}
 			disabled
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId8}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId8}</p>
+	{/snippet}
+</Story>
+
+<Story name="Optional">
+	{#snippet template(args)}
+		<RadioButtonGroup
+			{...args}
+			options={optionsForGroup}
+			name="station-type"
+			bind:selectedId={selectedId9}
+			label="Transport method"
+			optional
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId9}</p>
+	{/snippet}
+</Story>
+
+<Story name="Pre-selected value">
+	{#snippet template(args)}
+		<RadioButtonGroup
+			{...args}
+			options={optionsForGroup}
+			name="station-type"
+			bind:selectedId={selectedId10}
+			label="Transport method"
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId10}</p>
 	{/snippet}
 </Story>
 
@@ -185,6 +239,6 @@
 			allowClear={false}
 			error={!selectedIdForError ? 'You must select an option' : undefined}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedIdForError}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedIdForError}</p>
 	{/snippet}
 </Story>

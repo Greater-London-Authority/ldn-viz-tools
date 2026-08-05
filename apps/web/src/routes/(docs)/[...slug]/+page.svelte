@@ -1,20 +1,38 @@
 <script lang="ts">
+	import BannerHeader from '$lib/components/bannerHeader/BannerHeader.svelte';
+	import DisplayHeader from '$lib/components/bannerHeader/DisplayHeader.svelte';
 	import Toc from '$lib/components/toc/Toc.svelte';
+	import { classNames } from '@ldn-viz/ui';
 
 	let { data } = $props();
 
 	const PageComponent = $derived(data.component);
 	const tocItems = $derived(data.metadata.toc);
+
+	let wrapperClass = $derived(
+		classNames('flow-prose prose', data.metadata.layout === 'index' ? 'max-w-full' : '')
+	);
 </script>
 
-<div class="prose responsive">
-	<div class="my-typography-spacing-xl">
-		<h1 class="headline format">{data.metadata.title}</h1>
-		<p class="subhead format">
-			{data.metadata.description}
-		</p>
-	</div>
-	<PageComponent />
-</div>
+{#if data.metadata.layout === 'index'}
+	<DisplayHeader
+		title={data.metadata.title}
+		subTitle={data.metadata.description}
+		src={data.metadata.heroImage}
+	/>
+{:else}
+	<BannerHeader
+		title={data.metadata.title}
+		subTitle={data.metadata.description}
+		src={data.metadata.heroImage}
+	/>
+{/if}
 
-<Toc toc={{ items: tocItems }} />
+<div class="pt-spacing-5xl container mx-auto">
+	<div class="flex justify-between">
+		<div class={wrapperClass}>
+			<PageComponent />
+		</div>
+		<Toc toc={{ items: tocItems }} />
+	</div>
+</div>

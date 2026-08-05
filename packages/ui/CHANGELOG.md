@@ -1,5 +1,64 @@
 # ldn-viz-tools-ui
 
+## 24.1.0
+
+### Minor Changes
+
+- e013788: CHANGED: replaced many `any` types with tighter types
+
+## 24.0.0
+
+### Major Changes
+
+- 864fdfb: ADDED: `ExportButtons` (moved from `@ldn-viz/charts`); its `chartToCapture` prop has been renamed to `elementToCapture`
+
+  ADDED: `Card`, `ChromeHeader`, `ChromeFooter` and `TitleGroup`
+
+- 3a6075a: CHANGED: refactored state managment
+  FIXED: fix bug in bar length in `BarCell`
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Minor Changes
+
+- 0e03ccc: FIXED: `MultipleActionButton` is disabled if it has no options
+- 0d7953b: FIXED: highlighted value marker in `ColorLegend` now changes color based on theme, so remains visible in dark mode
+- 2633ae9: FIXED: rawIcons now work again in `RadioButtonSolid` and `Tab`
+- 2633ae9: FIXED: updated class name applied to highlighted location in `GeocoderSuggestion`
+- 62ec2b9: FIXED: the error modal in `Geolocator` no longer has a "More info" trigger rendered
+- bddeccb: CHANGED: made `open` prop optional for `Overlay`/`Popover`/`Tooltip`
+- 6d20c4e: FIXED: replace various uses of old color tokens
+
+## 23.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Minor Changes
+
+- d73427a: FIXED: when an `ObservablePlot` image is downloaded as an SVG, the size of the SVG is now set correctly
+- ac203e1: CHANGED: changes to `ImageDownloadButton` needed for downloaded images of `ObservablePlot` plots to include the legend
+
+## 22.1.0
+
+### Minor Changes
+
+- e3ca40c: ADDED: Breadcrumbs component
+- 6d6d424: CHANGED: add `alwaysShowcolorChip` prop that allows color chips to be displayed in `LayerControl` when color editing is disabled
+- 01c499c: CHANGED: added the `disableHoverableContent` prop to `Tooltip` component, allowing tooltips to be kept open as cursor moves from the tooltip trigger to its content.
+
+## 22.0.0
+
+### Major Changes
+
+- 6c3607d: CHANGED: `HandleRedirectFromAuth` now receives `goto` as a prop rather than importing it from `'$app/navigation'`
+- 8402081: FIXED: in the `ColorLegend` component, the tick labels are now formatted with the default font-fmaily for the page, rather than `sans-serif`
+
+### Minor Changes
+
+- 792b3f6: CHANGED: ThemeSwitcher icon now has a title tooltip expalining what it does before it is clicked on.
+- 2398df2: FIXED: don't throw a ReferenceError when checking whether CookieControl is undefined if it is undefined
+
 ## 21.2.0
 
 ### Minor Changes
@@ -744,7 +803,7 @@
 ### Major Changes
 
 - 3c90996: CHANGED - switch from using `@rgossiaux/svelte-heroicons` to using `@steeze-ui/heroicons` as an icon library
-- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `rawIcon` prop)
+- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `RawIcon` prop)
 
 ### Minor Changes
 

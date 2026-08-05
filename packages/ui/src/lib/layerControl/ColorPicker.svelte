@@ -11,20 +11,25 @@
 	import { classNames } from '../utils/classNames';
 
 	interface Props {
-		label: any;
+		label: string;
 		activeColorName?: string;
 		disabled?: boolean;
 		/**
 		 * Optional custom colours to choose from. If these don't exist, default to categoricalColors.
 		 */
-		colorNames: any;
+		colorNames: string[];
+		/**
+		 * If `true`, shows the color chip even when the control is disabled (but clicking on it does not open the control).
+		 */
+		alwaysShowcolorChip?: boolean;
 	}
 
 	let {
 		label,
 		activeColorName = $bindable(),
 		disabled = false,
-		colorNames = $bindable()
+		colorNames = $bindable(),
+		alwaysShowcolorChip = false
 	}: Props = $props();
 
 	const categoricalColors = [
@@ -52,19 +57,27 @@
 	};
 
 	const activeOptionClasses =
-		'ring-inset ring-2 ring-offset-2 ring-color-ui-background-primary ring-offset-color-ui-border-primary hover:ring-offset-color-ui-border-primary focus-visible:ring-offset-color-ui-border-primary';
+		'ring-inset ring-2 ring-offset-2 ring-color-surface ring-offset-color-border hover:ring-offset-color-border focus-visible:ring-offset-color-border';
 
 	const optionClasses =
-		'rounded-full bg-color-container-level-0 hover:bg-color-container-level-0 hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-ui-border-secondary hover:ring-2 hover:ring-color-ui-background-primary focus-visible:ring-offset-color-ui-border-secondary';
+		'rounded-full bg-color-container hover:bg-color-container hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-border-muted hover:ring-2 hover:ring-color-surface focus-visible:ring-offset-color-border-muted';
 </script>
 
-{#if disabled}
+{#if disabled && !alwaysShowcolorChip}
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
+		class="h-6 w-6 cursor-not-allowed text-color-interactive-disabled"
 		aria-hidden="true"
 	/>
+{:else if disabled && alwaysShowcolorChip}
+	<div
+		class="relative h-[22px] w-[22px] cursor-not-allowed rounded-full border"
+		style:background={activeColorName
+			? theme.tokenNameToValue(activeColorName, theme.currentTheme)
+			: ''}
+		title="Layer color is not editable."
+	></div>
 {:else}
 	<Popover>
 		{#snippet trigger(props)}
@@ -82,7 +95,7 @@
 			Colour
 		{/snippet}
 
-		<span class="mb-2 inline-block text-xs">Click to assign a colour to this layer.</span>
+		<span class="caption mb-2 inline-block">Click to assign a colour to this layer.</span>
 
 		<div class="flex flex-wrap gap-0.5">
 			{#each colorNames as colorOption}

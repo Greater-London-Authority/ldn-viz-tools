@@ -1,5 +1,74 @@
 # ldn-viz-tools-maps
 
+## 16.0.0
+
+### Minor Changes
+
+- e013788: CHANGED: replaced many `any` types with tighter types
+
+### Patch Changes
+
+- Updated dependencies [e013788]
+  - @ldn-viz/ui@24.1.0
+
+## 15.0.0
+
+### Major Changes
+
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Patch Changes
+
+- Updated dependencies [0e03ccc]
+- Updated dependencies [864fdfb]
+- Updated dependencies [0d7953b]
+- Updated dependencies [2633ae9]
+- Updated dependencies [2633ae9]
+- Updated dependencies [62ec2b9]
+- Updated dependencies [bddeccb]
+- Updated dependencies [6d20c4e]
+- Updated dependencies [3a6075a]
+- Updated dependencies [e1e3928]
+  - @ldn-viz/ui@24.0.0
+  - @ldn-viz/utils@4.0.0
+
+## 14.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [d73427a]
+- Updated dependencies [9269ac2]
+- Updated dependencies [ac203e1]
+  - @ldn-viz/ui@23.0.0
+  - @ldn-viz/utils@3.0.0
+
+## 13.0.0
+
+### Minor Changes
+
+- 6c89899: CHANGED: expose functions from `MapDraw` component, so users of the component can trigger the actions that would result from clicking the control buttons
+
+### Patch Changes
+
+- Updated dependencies [e3ca40c]
+- Updated dependencies [6d6d424]
+- Updated dependencies [01c499c]
+  - @ldn-viz/ui@22.1.0
+
+## 12.0.0
+
+### Patch Changes
+
+- Updated dependencies [6c3607d]
+- Updated dependencies [8402081]
+- Updated dependencies [792b3f6]
+- Updated dependencies [2398df2]
+  - @ldn-viz/ui@22.0.0
+
 ## 11.0.0
 
 ### Minor Changes

@@ -55,7 +55,7 @@
 	const swatchWidth = 30;
 
 	interface Props {
-		label: any;
+		label: string;
 		disabled?: boolean;
 		fillType?: string;
 	}
@@ -71,7 +71,7 @@
 	<Icon
 		src={NoSymbol}
 		theme="mini"
-		class="h-6 w-6 cursor-not-allowed text-color-action-disabled"
+		class="h-6 w-6 cursor-not-allowed text-color-interactive-disabled"
 		aria-hidden="true"
 	/>
 {:else}
@@ -86,7 +86,7 @@
 			Fill type
 		{/snippet}
 
-		<span class="mb-2 inline-block text-xs">Click to assign a fill type to this layer.</span>
+		<span class="caption mb-2 inline-block">Click to assign a fill type to this layer.</span>
 
 		<div class="flex flex-col gap-2">
 			<div class="flex flex-wrap gap-0.5">
@@ -109,7 +109,7 @@
 					<div
 						class="grid grid-cols-2"
 						style:width={`${swatchWidth * 2}px`}
-						style:outline={patternName === fillType ? '2px solid var(--theme-ui-primary)' : ''}
+						style:outline={patternName === fillType ? '2px solid var(--color-surface-accent)' : ''}
 					>
 						{#each [1, 2, 3, 4] as _}
 							<button

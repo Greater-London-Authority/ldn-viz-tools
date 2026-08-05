@@ -5,10 +5,8 @@
 </script>
 
 <div class="container mx-auto py-8">
-	<div class="prose max-w-full">
-		<h1 class="headline responsive format">{data.metadata.title}</h1>
-		<p class="subhead responsive format">{data.metadata.description}</p>
-
+	<div class="prose flow-prose">
+		<h1 class="display mt-3">{data.metadata.title}</h1>
 		<PageComponent />
 	</div>
 </div>

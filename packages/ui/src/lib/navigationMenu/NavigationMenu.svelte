@@ -12,7 +12,8 @@
 		width = 'w-full',
 		isAlwaysExpanded = false,
 		orientation = 'vertical',
-		activeMenuItemId = $bindable('')
+		activeMenuItemId = $bindable(''),
+		copySearchParams = false
 	}: NavigationMenuProps = $props();
 
 	const active = $state({ value: '' });
@@ -29,7 +30,7 @@
 	setContext('navContext', { orientation, isAlwaysExpanded });
 
 	const orientationClasses = {
-		vertical: 'flex-col border-b border-color-ui-border-secondary',
+		vertical: 'flex-col border-b border-color-border-muted',
 		horizontal: 'flex space-x-1 flex-wrap'
 	};
 
@@ -57,7 +58,10 @@
 	 * Recursive function to handle applying `isExpanded` state, toggling expansion
 	 * of list when a child is active.
 	 */
-	const mapItems: any = (items: NavigationMenuItemProps[], targetId: string) =>
+	const mapItems = (
+		items: NavigationMenuItemProps[],
+		targetId: string
+	): NavigationMenuItemProps[] =>
 		items.map((item: NavigationMenuItemProps) => ({
 			...item,
 			isExpanded: !isAlwaysExpanded
@@ -75,10 +79,20 @@
 	});
 </script>
 
-<nav aria-label={ariaLabel} class={width}>
+<nav aria-label={ariaLabel} class={classNames('product', width)}>
 	<ul {id} class={menuClasses}>
 		{#each menuState as { title, href, children, id, isExpanded }, index (index)}
-			<NavigationMenuItem {href} {title} {id} {children} {index} {onChange} {isExpanded} {active} />
+			<NavigationMenuItem
+				{href}
+				{title}
+				{id}
+				{children}
+				{index}
+				{onChange}
+				{isExpanded}
+				{active}
+				{copySearchParams}
+			/>
 		{/each}
 	</ul>
 </nav>

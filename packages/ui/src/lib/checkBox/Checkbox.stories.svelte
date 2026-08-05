@@ -35,7 +35,7 @@
 	{#snippet template(args)}
 		<Checkbox {...args} bind:checked />
 
-		<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
+		<p class="mt-8 text-color-text-muted">Checked: {checked}</p>
 	{/snippet}
 </Story>
 
@@ -70,6 +70,28 @@
 <Story name="Colored checkbox">
 	{#snippet template(args)}
 		<Checkbox {...args} color={theme.tokenNameToValue('data.categorical.orange')} />
-		<p class="mt-8 text-color-text-secondary">Checked: {checked}</p>
+		<p class="mt-8 text-color-text-muted">Checked: {checked}</p>
+	{/snippet}
+</Story>
+
+<!--
+The indeterminate state is neither checked nor unchecked.
+It is usually used for a "Select All" control, where some but not all of the child options are selected. 
+-->
+<Story name="Indeterminate">
+	{#snippet template(args)}
+		<Checkbox {...args} indeterminate />
+	{/snippet}
+</Story>
+
+<Story name="Checked by default">
+	{#snippet template(args)}
+		<Checkbox {...args} checked />
+	{/snippet}
+</Story>
+
+<Story name="Hint with hintLabel">
+	{#snippet template(args)}
+		<Checkbox {...args} hint="A hint" hintLabel="More info" />
 	{/snippet}
 </Story>

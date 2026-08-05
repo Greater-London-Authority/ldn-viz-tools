@@ -2,6 +2,11 @@
 	/**
 	 * The `<TabList>` component allows users to select a tab from a list of options.
 	 *
+	 * It renders just the row (or column) of selectable tab labels, managing
+	 * `selectedTabId` and roving-tabindex keyboard focus.
+	 * Most applications should use the higher-level [Tabs](./?path=/docs/ui-components-tabs--documentation)
+	 * component, which pairs a `<TabList>` with `<TabPanel>`s.
+	 *
 	 * **Alternatives**: if the user's choice doesn't replace what is rendered below (or, for vertical tabs, to the side of) the control then use the [RadioButton](./?path=/docs/uicomponents-radiobuttons-radiobutton--documentation)/[RadioButtonGroup](./?path=/docs/ui-components-radiobuttons-radiobuttongroup--documentation) or [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
 	 * @component
 	 */
@@ -16,7 +21,8 @@
 
 	const orientationClasses = {
 		vertical: 'flex-col w-20 space-y-0.5 pb-0.5',
-		horizontal: 'flex border-b-4 border-b-color-ui-primary w-full pt-5 pb-0 space-x-0.5 items-end'
+		horizontal:
+			'flex border-b-4 border-b-color-surface-accent w-full pt-5 pb-0 space-x-0.5 items-end'
 	};
 
 	const iconOrientationClasses = {
@@ -46,8 +52,8 @@
 		 * Enables screen reader to describe purpose of tab list. Required.
 		 */
 		ariaLabel: string;
-		onChange?: any;
-		handleSelect?: any;
+		onChange?: (id: Tab['id']) => void;
+		handleSelect?: (id: Tab['id']) => void;
 		class?: string;
 	}
 
@@ -66,7 +72,7 @@
 
 	let tabListClasses = $derived(
 		classNames(
-			'bg-color-container-level-0 text-color-text-primary',
+			'product bg-color-container text-color-text',
 			orientationClasses[orientation],
 			classes
 		)

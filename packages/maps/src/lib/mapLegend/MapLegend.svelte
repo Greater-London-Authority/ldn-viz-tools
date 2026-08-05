@@ -6,6 +6,7 @@
 
 	/**
 	 * The `<MapLegend>` component provides a container inside which a `Legend` can be inserted for display on maps.
+	 * @component
 	 */
 
 	interface Props {
@@ -27,15 +28,15 @@
 
 {#if isOpen}
 	<div
-		class="pointer-events-auto flex w-full flex-col gap-3 bg-color-container-level-0 px-4 py-3 sm:max-w-96"
+		class="product pointer-events-auto flex w-full flex-col gap-3 bg-color-container px-4 py-3 sm:max-w-96"
 		bind:clientWidth={width}
 	>
 		<div class="flex justify-between align-middle">
-			<p class="font-bold text-color-text-primary">Legend</p>
+			<p class="label-sm text-color-text">Legend</p>
 			<Button
 				variant="text"
 				size="sm"
-				class="absolute right-1 top-1 cursor-pointer bg-color-container-level-0 text-color-text-primary"
+				class="absolute right-1 top-1 cursor-pointer bg-color-container text-color-text"
 				onclick={handleClick}
 				aria-label="Close legend"
 			>
@@ -43,7 +44,7 @@
 			</Button>
 		</div>
 		<!-- Pass in `ColorLegend` or other components in the default slot -->
-		<div class="text-sm">{@render children?.()}</div>
+		<div class="body-sm">{@render children?.()}</div>
 	</div>
 {:else}
 	<Button

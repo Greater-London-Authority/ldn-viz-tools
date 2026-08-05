@@ -2,6 +2,9 @@
 	import { Funnel, Map, PresentationChartLine } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import OpacityIcon from '../layerControl/OpacityIcon.svelte';
+	import ResizeIcon from '../layerControl/ResizeIcon.svelte';
+
 	import RadioButtonGroupSolid from './RadioButtonGroupSolid.svelte';
 	import type { RadioButtonSolidProps } from './types';
 
@@ -28,6 +31,9 @@
 	let selectedId8: string = $state('');
 	let selectedId9: string = $state('');
 	let selectedId10: string = $state('');
+	let selectedId11: string = $state('');
+	let selectedId12: string = $state('');
+	let selectedId13: string = $state('train');
 	let selectedIdForError: string = $state('');
 
 	let optionsForGroup: RadioButtonSolidProps[] = [
@@ -53,6 +59,22 @@
 			iconPlacement: 'below'
 		}
 	];
+
+	let optionsForGroupRawIcon: RadioButtonSolidProps[] = [
+		{ id: 'bus', label: 'Bus stops', rawIcon: OpacityIcon },
+		{ id: 'train', label: 'Train stations', rawIcon: ResizeIcon },
+		{ id: 'underground', label: 'Underground stations', rawIcon: OpacityIcon }
+	];
+
+	let manyOptions: RadioButtonSolidProps[] = [
+		{ id: 'bus', label: 'Bus' },
+		{ id: 'train', label: 'Train' },
+		{ id: 'underground', label: 'Underground' },
+		{ id: 'tram', label: 'Tram' },
+		{ id: 'taxi', label: 'Taxi' },
+		{ id: 'cycle', label: 'Cycle' },
+		{ id: 'river', label: 'River bus' }
+	];
 </script>
 
 <Story name="Default">
@@ -63,7 +85,7 @@
 			bind:selectedId
 			{...args}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId}</p>
 	{/snippet}
 </Story>
 
@@ -76,7 +98,7 @@
 			label="RadioGroup Label"
 			{...args}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId2}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId2}</p>
 	{/snippet}
 </Story>
 
@@ -90,7 +112,7 @@
 			description="This is a description"
 			{...args}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId3}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId3}</p>
 	{/snippet}
 </Story>
 
@@ -105,7 +127,7 @@
 			description="This is a description"
 			{...args}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId4}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId4}</p>
 	{/snippet}
 </Story>
 
@@ -123,7 +145,7 @@ different values as the `name` prop.
 					bind:selectedId={selectedId5}
 					{...args}
 				/>
-				<p class="text-color-text-secondary">Selected id: {selectedId5}</p>
+				<p class="text-color-text-muted">Selected id: {selectedId5}</p>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -133,7 +155,7 @@ different values as the `name` prop.
 					bind:selectedId={selectedId6}
 					{...args}
 				/>
-				<p class="text-color-text-secondary">Selected id: {selectedId6}</p>
+				<p class="text-color-text-muted">Selected id: {selectedId6}</p>
 			</div>
 		</div>
 	{/snippet}
@@ -147,7 +169,7 @@ different values as the `name` prop.
 			bind:selectedId={selectedId7}
 			{...args}
 		></RadioButtonGroupSolid>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId7}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId7}</p>
 	{/snippet}
 </Story>
 
@@ -159,7 +181,7 @@ different values as the `name` prop.
 			bind:selectedId={selectedId8}
 			{...args}
 		></RadioButtonGroupSolid>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId8}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId8}</p>
 	{/snippet}
 </Story>
 
@@ -171,7 +193,7 @@ different values as the `name` prop.
 			bind:selectedId={selectedId9}
 			{...args}
 		></RadioButtonGroupSolid>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId9}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId9}</p>
 	{/snippet}
 </Story>
 
@@ -187,7 +209,44 @@ different values as the `name` prop.
 			disabled
 			{...args}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedId10}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId10}</p>
+	{/snippet}
+</Story>
+
+<Story name="With RawIcon">
+	{#snippet template(args)}
+		<RadioButtonGroupSolid
+			name="station-type"
+			options={optionsForGroupRawIcon}
+			bind:selectedId={selectedId11}
+			{...args}
+		></RadioButtonGroupSolid>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId11}</p>
+	{/snippet}
+</Story>
+
+<Story name="Many options (overflow)">
+	{#snippet template(args)}
+		<RadioButtonGroupSolid
+			name="station-type"
+			options={manyOptions}
+			bind:selectedId={selectedId12}
+			{...args}
+		></RadioButtonGroupSolid>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId12}</p>
+	{/snippet}
+</Story>
+
+<Story name="Pre-selected value">
+	{#snippet template(args)}
+		<RadioButtonGroupSolid
+			options={optionsForGroup}
+			name="station-type"
+			bind:selectedId={selectedId13}
+			label="RadioGroup Label"
+			{...args}
+		/>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedId13}</p>
 	{/snippet}
 </Story>
 
@@ -203,7 +262,7 @@ different values as the `name` prop.
 			error={!selectedIdForError ? 'You must select an option' : undefined}
 			{...args}
 		/>
-		<p class="mt-8 text-color-text-secondary">Selected id: {selectedIdForError}</p>
+		<p class="mt-8 text-color-text-muted">Selected id: {selectedIdForError}</p>
 		<Button onclick={() => (selectedIdForError = '')}>Clear</Button>
 	{/snippet}
 </Story>

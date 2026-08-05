@@ -1,5 +1,8 @@
 <script module lang="ts">
-	import { SidebarLeftContext, SidebarTopContext } from '../../../../../../../apps/docs/src/lib/';
+	import {
+		SidebarLeftContext,
+		SidebarTopContext
+	} from '../../../../../../../apps/storybook/src/lib';
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';

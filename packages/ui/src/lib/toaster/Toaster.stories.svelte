@@ -81,6 +81,14 @@
 		newToastMessage(`A notice! Number ${noticeNumber}`).post();
 	};
 
+	// Rapidly posts several distinct toasts to demonstrate the MAX_MESSAGES=3 cap:
+	// only the newest are shown, older ones are pushed down and hidden.
+	const toastMany = () => {
+		for (let i = 0; i < 5; i++) {
+			toastNotice();
+		}
+	};
+
 	const toastSuccess = () => {
 		newToastMessage('A success!', { type: ToastType.Success }).post();
 	};
@@ -222,6 +230,33 @@ Note that MAX_MESSAGES=3; pressing the 'Notice' button quickly to create more me
 </Story>
 
 <!--
+`MAX_MESSAGES=3`: posting more than three toasts at once shows only the newest;
+older messages are pushed down and hidden.
+-->
+<Story name="Max messages stacking">
+	{#snippet template()}
+		<div class="flex gap-6">
+			<Button onclick={toastMany}>Post 5 toasts at once</Button>
+		</div>
+		<Toaster position="TopRight" />
+	{/snippet}
+</Story>
+
+<!--
+The `classes` prop is appended to the container `<div>`, letting you add custom
+styling (here a padded, rounded, shadowed wrapper) on top of the positioning.
+Consider carefully whether overriding the default styles is actually a good idea.
+-->
+<Story name="Custom classes">
+	{#snippet template()}
+		<div class="flex gap-6">
+			<Button onclick={toastNotice}>Notice</Button>
+		</div>
+		<Toaster position="TopRight" classes="rounded-lg bg-color-container p-3 shadow-2xl" />
+	{/snippet}
+</Story>
+
+<!--
 Calling `.post()` repeatedly on same toast object will refresh it, rather than creating duplicate toasts.
 -->
 
@@ -267,7 +302,7 @@ Calling `.post()` repeatedly on same toast object will refresh it, rather than c
 				</div>
 
 				{#if secondsRemaining > 0}
-					<div class="text-color-text-secondary">
+					<div class="text-color-text-muted">
 						Toast will remain visible for <strong>{secondsRemaining.toFixed(1)}s</strong>
 					</div>
 				{/if}

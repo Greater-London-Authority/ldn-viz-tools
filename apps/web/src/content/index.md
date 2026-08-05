@@ -1,25 +1,26 @@
 ---
 title: London City Data
-description: Home page
+description: ''
 section: Overview
 navLabel: Home
+heroImage: header-main-overflow.svg
+layout: index
 ---
 
 <script>
 	import { Button, PlaceholderImage } from '@ldn-viz/ui'
+        import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte'
 </script>
 
-<div class="grid grid-cols-2 gap-4">
-    <div>
-            <PlaceholderImage />
-            <h3 class="title-md pt-2">Design System Documentation</h3>
-            <p class="subtitle pb-4">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
-            <Button href="/design-system/introduction" variant="outline">Read the docs</Button>
+<!-- <p class="prose lead py-8">The London City Data team bring insight</p> -->
+
+<div class="grid md:grid-cols-2 gap-4 pt-spacing-xl">
+    <div class="flow-product">
+        <a href="/design-system">
+        <EnhancedImage src='cta-design-system.svg'/>
+        </a>
+        <h3>Design System Documentation</h3>
+        <p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+        <Button href="/design-system" variant="text" slim emphasis="secondary">Read the docs</Button>
     </div>
-        <!-- <div>
-            <PlaceholderImage />
-            <h3 class="title-md pt-2">Data Visualisation Guide</h3>
-            <p class="subtitle pb-4">Lorem ipsum dollar sit.</p>
-            <Button href="/dataviz-guide" variant="outline">Read the guide</Button>
-    </div> -->
 </div>

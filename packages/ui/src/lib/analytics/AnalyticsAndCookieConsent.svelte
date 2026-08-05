@@ -190,7 +190,7 @@
 		};
 
 		ldnVizCivic.init = function () {
-			if (CookieControl) {
+			if (typeof CookieControl !== 'undefined') {
 				clearInterval(ldnVizCivic.initialIntervalId);
 			} else {
 				return;

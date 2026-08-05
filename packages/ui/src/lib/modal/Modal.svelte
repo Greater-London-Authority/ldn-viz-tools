@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * The `Modal` component displays content in a dialog that overlays the rest of the page, built on top of the `bits-ui` `Dialog` primitive.
+	 * It supports a `title`, `description` and `buttons` snippet, and can be opened by a custom `trigger` snippet or the default [Trigger](./?path=/docs/ui-components-overlays-overlay--documentation) button.
+	 *
+	 * **Alternatives**: for less disruptive explanatory content, consider a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation) or [Popover](./?path=/docs/ui-components-overlays-popover--documentation) instead, or use the [Overlay](./?path=/docs/ui-components-overlays-overlay--documentation) component to choose between them.
+	 * @component
+	 */
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Dialog, type WithoutChild } from 'bits-ui';
@@ -82,7 +89,7 @@
 
 	const modalClass = $derived(
 		classNames(
-			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container shadow-xl pointer-events-auto',
 			widthClasses[width]
 		)
 	);
@@ -121,9 +128,9 @@
 				}}
 			>
 				<div
-					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text-primary ${headerTheme}`}
+					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text ${headerTheme}`}
 				>
-					<Dialog.Title class="font-medium">
+					<Dialog.Title class="product label">
 						{@render title?.()}
 					</Dialog.Title>
 					<Dialog.Close>

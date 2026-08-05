@@ -1,0 +1,20 @@
+/* Write your global styles here, in PostCSS syntax */
+@import '@ldn-viz/themes/styles/primitives.css';
+@import '@ldn-viz/themes/styles/light.css';
+@import '@ldn-viz/themes/styles/dark.css';
+@import '@ldn-viz/themes/styles/spacing.css';
+@import '@ldn-viz/themes/styles/typography.css';
+@import '@ldn-viz/themes/styles/flow.css';
+@import '@ldn-viz/themes/styles/grid-spacing.css';
+@import '@ldn-viz/themes/styles/shadows.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+.docs-story {
+	@apply bg-color-canvas;
+	@apply text-color-text;
+}

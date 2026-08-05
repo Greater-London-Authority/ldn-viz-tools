@@ -8,7 +8,7 @@
 	let { children, hint, subTitle }: Props = $props();
 </script>
 
-<header class="text-color-text-primary">
+<header class="text-color-text">
 	<div class="flex items-end justify-between">
 		<h2 class="text-base font-semibold leading-snug">
 			<!-- The title of the section. -->

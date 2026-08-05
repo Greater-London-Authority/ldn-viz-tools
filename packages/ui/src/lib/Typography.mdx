@@ -4,52 +4,219 @@ import { Markdown, Meta } from '@storybook/addon-docs/blocks';
 
 # Typography
 
-## How to achieve coherent and consistent typography in our apps and components
+For the full rationale, and details of the primitive scale and composition rules, consult the design system specification.
 
-Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed.
-We have developed a typographic system to unify our apps, charts and graphical output.
-Combined with our spacing rules this should help our designs and interfaces to achieve balance and harmony.
+## The one rule
 
-### Font
+**Bind to a role, never to a size.** Every piece of text has a job — a control label, a card title, an axis tick — and the system already names it. Pick the role and the size, line-height and weight arrive with it.
 
-We use the sans serif font [Inter](https://rsms.me/inter/).
-Inter is a variable font family carefully crafted & designed for computer screens.
-Inter is available via Google Fonts under the Open Font License.
-By using webfonts in our applications we can be relatively certain that they will used under normal circumstances.
-[@ldn-viz/themes](https://www.npmjs.com/package/@ldn-viz/themes) extends the tailwind default sans serif font stack:
+```html
+<!-- do this -->
+<h2 class="section-head">Air quality</h2>
+<p class="body-sm">Rolling 24-hour mean.</p>
+
+<!-- not this -->
+<h2 class="text-3xl font-semibold">Air quality</h2>
+```
+
+Two things that follow from it:
+
+- **Don't use Tailwind's `text-*` sizes.** `text-xl`, `text-9xl` et al are off-system. If a role looks wrong at a given size, the role is probably wrong — check the mapping below before overriding.
+- **Never bind to `--primitive-*`.** Primitives are the private source. Components consume semantic roles and the `--spacing-{n}` alias only.
+
+## Three families
+
+The family comes from the surface you're building, and there is no cross-mixing.
+
+| Family    | Use for                                                       |
+| --------- | ------------------------------------------------------------- |
+| `product` | App and dashboard UI — pages, cards, panels, controls, tables |
+| `prose`   | Reading content — markdown, help articles, rich text          |
+| `chart`   | Chart chrome and chart-internal text                          |
+
+Set the context once on a container; role utilities inside it resolve to that family.
+
+```html
+<article class="flow flow-prose">…</article>
+<section class="flow flow-product">…</section>
+```
+
+## Product roles
+
+Sizes shown are `xl`; scaling roles are marked.
+
+| Role           | Size | Weight | Job                                                      |
+| -------------- | ---- | ------ | -------------------------------------------------------- |
+| `page-head`    | 36   | 700    | Top page title. Scales.                                  |
+| `section-head` | 28   | 600    | Groups cards within a page. Scales.                      |
+| `title`        | 20   | 600    | Object-level title — card, panel, modal, callout, drawer |
+| `subtitle`     | 16   | 400    | Supporting line under any heading or title               |
+| `eyebrow`      | 14   | 500    | Overline above a title, or a title that has yielded      |
+| `metric`       | 36   | 700    | Hero stat numerals. Scales.                              |
+| `metric-sm`    | 20   | 700    | Secondary stat, in-card KPI                              |
+| `body`         | 16   | 400    | Default UI text, field values, menu items                |
+| `body-sm`      | 14   | 400    | Helper text, hints, secondary copy, table cells          |
+| `label`        | 14   | 500    | Control and nav labels — buttons, inputs, tabs           |
+| `label-sm`     | 12   | 500    | Labels in dense contexts, column headers                 |
+| `caption`      | 12   | 400    | Metadata, badges, smallest functional text               |
+
+**Resolving by element, not by eye.** These conventions are settled — apply them rather than picking a size:
+
+- Control and nav labels → `label`. This holds where legacy markup used 16px.
+- Input values, placeholders, body copy → `body`.
+- Helper, hint and secondary text → `body-sm`.
+- Genuine component titles (modal, callout, panel, sidebar header) → `title`.
+- Sidebar and nav _section_ headings are labels, not titles → `label`.
+
+Migrate off-system legacy sizes to the correct role even when it visibly resizes the element.
+
+**Tight variants for single-line controls.** `label-tight` / `label-sm-tight` are real Tailwind utilities — same size and weight as `label` / `label-sm`, with `line-height` set to `1` for buttons, tabs and chips that must never wrap. Already in use (`Button`, `TabLabel`, `NavigationMenuItem`, `ThemeSwitcher`, `MultipleActionButton`, `GeocoderSuggestion(List)`). These reuse `label`/`label-sm`'s vars with a line height update, rather than having their own entry in `semantic-typography`.
+
+## Prose roles
+
+| Role       | Size | Weight | Job                                          |
+| ---------- | ---- | ------ | -------------------------------------------- |
+| `display`  | 76   | 700    | Homepage hero. Scales.                       |
+| `headline` | 56   | 700    | Subpage hero. Scales.                        |
+| `subhead`  | 28   | 400    | Companion line under a `headline`.           |
+| `title-1`  | 36   | 600    | Content h1. Scales.                          |
+| `title-2`  | 30   | 600    | Content h2. Scales.                          |
+| `title-3`  | 24   | 600    | Content h3. Scales.                          |
+| `title-4`  | 20   | 600    | Content h4 — floor of the ladder.            |
+| `subtitle` | 18   | 400    | Companion line under a content title.        |
+| `lead`     | 22   | 400    | Intro / standfirst paragraph.                |
+| `body`     | 16   | 400    | Default reading text.                        |
+| `body-sm`  | 14   | 400    | Secondary or dense reading text.             |
+| `caption`  | 12   | 400    | Metadata, smallest text.                     |
+| `eyebrow`  | 14   | 500    | Overline above a display, headline or title. |
+
+**Markdown maps `<h1>` – `<h4>` onto `title-1`–`title-4`.** `headline` and `display` are hero chrome and never render a content h1.
+
+## Chart roles
+
+Charts carry a complete vocabulary so they can be consumed standalone. `title`, `subtitle` and `eyebrow` are aliases of their product equivalents, so they cannot drift.
+
+| Role         | Size | Weight | Line-height | Job                                                 |
+| ------------ | ---- | ------ | ----------- | --------------------------------------------------- |
+| `title`      | 20   | 600    | inherited   | The chart's own title.                              |
+| `subtitle`   | 16   | 400    | inherited   | Supporting line under a chart title.                |
+| `eyebrow`    | 14   | 500    | inherited   | A chart title that has yielded its slot.            |
+| `axis-title` | 14   | 500    | normal      | Axis names, series and legend titles.               |
+| `label`      | 14   | 400    | normal      | Data and value labels, annotations, legend entries. |
+| `tick`       | 14   | 400    | 1.0         | Axis tick and scale labels.                         |
+| `tick-sm`    | 12   | 400    | 1.0         | The smaller tick tier.                              |
+| `note`       | 12   | 400    | normal      | Source, citation or footnote in the footer.         |
+
+There is no `legend` role — a legend entry is a data label, so it takes `label`. Observable Plot is authoritative for real charts.
+
+## Responsive scaling is automatic
+
+Scaling roles carry a value per breakpoint and resolve themselves. **Don't write breakpoint variants for type** — no `md:section-head`, no per-breakpoint size overrides. Every column of the matrix is pre-verified for hierarchy, so a role never overtakes the one above it at any width.
+
+Scaling: `display`, `headline`, `title-1`, `title-2`, `title-3`, `page-head`, `section-head`, `metric`. Everything else is fixed.
+
+## Weight and emphasis
+
+Each role bundles its own weight — you don't set one alongside a role. For genuine emphasis riding on top of a role, use the modifiers:
+
+```html
+<p class="body">Readings are <span class="text-strong">provisional</span>.</p>
+<p class="text-soft caption">Updated hourly.</p>
+```
+
+`.text-strong` is semibold (600), `.text-soft` regular (400). Both are role-agnostic. Reach for them when the job is emphasis — not to nudge a role you suspect is wrong.
+
+## Colour
+
+Colour is a separate axis. Bind text colour to a semantic token; never a primitive or a raw hex.
+
+```html
+<p class="text-color-text">Primary text</p>
+<p class="text-color-text-muted">Secondary text</p>
+<span class="text-color-label">Control label</span>
+```
+
+Text and label tokens descend in emphasis: `text` → `text-muted` → `text-wash`, and `label` → `label-muted`. Text or an icon sitting on a filled control uses `inverse/text` so it themes against the fill.
+
+## Vertical rhythm: flow
+
+Spacing between stacked blocks is a property of the context, not of the type inside it. Add `flow` plus a context class and consecutive children space themselves.
+
+```html
+<div class="flow flow-product">
+	<h2 class="section-head">Monitoring sites</h2>
+	<p class="body-sm">Twelve active sensors.</p>
+	<div>…</div>
+</div>
+```
+
+Three contexts remap one four-step ramp:
+
+| Ramp step        | `flow-prose` | `flow-product` | `flow-compact` |
+| ---------------- | ------------ | -------------- | -------------- |
+| `--flow-tight`   | 4            | 4              | 4              |
+| `--flow-default` | 16           | 8              | 4              |
+| `--flow-loose`   | 24           | 16             | 8              |
+| `--flow-section` | 40           | 24             | 8              |
+
+`flow-compact` is for tooltips, alerts and dialogs, and also tightens body-tier leading to ~1.3. A new surface with its own density is one new theme remapping four variables — don't hand-set margins to get there.
+
+**Wrap companions with their primary.** The flow rule targets direct children, so a caption left loose in the flow picks up paragraph spacing and looks wrong. Nest it:
+
+```html
+<figure>
+	<img src="…" alt="…" />
+	<figcaption class="caption">Source: LAEI 2019.</figcaption>
+</figure>
+```
+
+The `figure` participates in the flow as one block; its insides are its own concern. Same split as a card and its layout.
+
+## Spacing
+
+Where you do set space by hand, use the numbered utilities. `mt-{n}` → `var(--spacing-{n})`, where the index is the multiplier of the 4px unit: `p-4` is 16px, `mt-2` is 8px. Fractional sub-steps keep the dot on the class — `mt-1.5` → `var(--spacing-1-5)`.
+
+The t-shirt scale (`mt-xxs`, `p-lg`) and the em-relative `--typography-spacing-*` set are **retired** — not emitted, no live consumers. Straggler mapping: `xxs`→1, `xs`→2, `sm`→3, `md`→4, `lg`→5, `xl`→6, `2xl`→7, `3xl`→8, `4xl`→10, `5xl`→12, `6xl`→14, `7xl`→16, `8xl`→20, `9xl`→24.
+
+Rhythm goes through `flow`; construction — padding, border widths, list indents, cell padding — goes through `--spacing-{n}`.
+
+## Prose columns
+
+Reading columns are width-capped for legibility. `flow-prose` exposes `--readable-width`; bind a column's max-width to it rather than picking a pixel value.
+
+```html
+<article class="flow flow-prose">
+	<div class="prose-column">…</div>
+</article>
+```
+
+Images, figures, tables, code blocks and pull quotes may break out wider than the column. That is the intended way to use a wide viewport — widening body text is not.
+
+## The Tailwind `.prose` class
+
+[@ldn-viz/themes](https://www.npmjs.com/package/@ldn-viz/themes) still exposes `.prose` from the [Tailwind Typography plugin](https://github.com/tailwindlabs/tailwindcss-typography).
+
+**Use it only for HTML you don't control**, such as markdown output or CMS content. Anywhere you own the markup, including component internals, apply roles and `flow` directly; you get the same result with the hierarchy and rhythm the system actually specifies.
+
+## Font
+
+We use [Inter](https://rsms.me/inter/), available via Google Fonts under the Open Font License. All weights ship, so there are no browser-synthesised faux weights. [@ldn-viz/themes](https://www.npmjs.com/package/@ldn-viz/themes) extends the Tailwind sans stack:
 
 ```
 "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI
 	Symbol", "Noto Color Emoji";
 ```
 
-### Source of truth
+Four weights are in use: regular (400), medium (500), semibold (600), bold (700).
 
-Our 'source of truth' for our designs is Figma: we have carefully matched our Figma typography style names to Tailwind's typography classes.
-In Figma our `text-base` text style matches to `.text-base` in our [@ldn-viz/themes](https://www.npmjs.com/package/@ldn-viz/themes) package, which inherits from Tailwind.
+## Not available yet
 
-### Font sizes
+Specified but not emitted — don't build against these:
 
-Font sizes run from `text-xs` (0.75rem or 12px) through `text-9xl` (8rem or 128px)
+- **Fluid `clamp()` display tokens** (`display`, `headline`, `page-head`, `metric`). The stepped tokens are the canonical set.
+- **Compressed chart tick density** (12 / 11). Default density is 14 / 12.
+- **A dedicated `label-tight` / `label-sm-tight` token.** The utilities themselves emit and are in use — see [Product roles](#product-roles) — but there's no dedicated entry in `semantic-typography` yet, so they can't be retuned independently of `label`/`label-sm`.
 
-### Text color
+## Going deeper
 
-Our design token classes should be used to apply text color.
-This will ensure consistency and correct color contrast for accessibility:
-
-```html
-<!-- apply our theme to text elements -->
-<p class="text-color-text-primary">Primary text color</p>
-
-<p class="text-color-text-secondary">Secondary text color</p>
-```
-
-### Tailwind typography plugin (the .prose class)
-
-[@ldn-viz/themes](https://www.npmjs.com/package/@ldn-viz/themes) exposes the `.prose` class from the [Tailwind Typography Plugin](https://github.com/tailwindlabs/tailwindcss-typography)
-
-> The official Tailwind CSS Typography plugin provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control, like HTML rendered from Markdown, or pulled from a CMS.
-
-**Use with caution**. The prose class is intended for _HTML you don't control, such as HTML rendered from Markdown_.
-You should avoid using the prose class in situations where we do have more control over the HTML such as the internals of our components.
-In these situations more granular classes should be applied for greater control.
+Roles, sizes and names here are generated from emitted output — the specification is downstream of the build, so this page and the tokens agree by construction. For the reasoning, the primitive scale, the responsive matrices and the composition rules (the primary-slot rule, demotion, metric alignment), see the design system specification.

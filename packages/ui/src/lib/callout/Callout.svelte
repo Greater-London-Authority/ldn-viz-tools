@@ -10,7 +10,7 @@
 		/**
 		 * Defaults to a random twelve-character string for use to identify the title by the screen reader.
 		 */
-		id?: any;
+		id?: string;
 
 		/**
 		 * Required when `Callout` has no title, to ensure screen reader can identify it.
@@ -43,28 +43,28 @@
 	}: Props = $props();
 
 	const statusClasses = {
-		notice: 'bg-color-ui-background-notice border-color-ui-border-notice',
-		positive: 'bg-color-ui-background-positive border-color-ui-border-positive',
-		caution: 'bg-color-ui-background-caution border-color-ui-border-caution',
-		negative: 'bg-color-ui-background-negative border-color-ui-border-negative'
+		notice: 'bg-color-surface-accent-muted border-color-surface-accent',
+		positive: 'bg-color-surface-positive-muted border-color-surface-positive',
+		caution: 'bg-color-surface-caution-muted border-color-surface-caution',
+		negative: 'bg-color-surface-negative-muted border-color-surface-negative'
 	};
 
 	const sizeClasses = {
-		sm: 'border shadow-sm text-color-text-primary px-2 pt-2 ',
-		md: 'border-l-[5px] border shadow-sm text-color-text-primary px-2 pt-2 ',
-		lg: 'border-l-[5px] border shadow-sm text-color-text-primary px-4 pt-4'
+		sm: 'product border shadow-sm text-color-text px-2 pt-2 ',
+		md: 'product border-l-[5px] border shadow-sm text-color-text px-2 pt-2 ',
+		lg: 'product border-l-[5px] border shadow-sm text-color-text px-4 pt-4'
 	};
 
 	const titleClasses = {
-		sm: 'text-base mb-1',
-		md: 'text-lg mb-2',
-		lg: 'text-xl mb-4'
+		sm: 'mb-1',
+		md: 'mb-2',
+		lg: 'mb-4'
 	};
 
 	const bodyClasses = {
-		sm: 'text-sm mb-1',
-		md: 'text-base mb-2',
-		lg: 'text-base mb-4'
+		sm: 'mb-1',
+		md: 'mb-2',
+		lg: 'mb-4'
 	};
 
 	const moreClasses = {
@@ -78,7 +78,7 @@
 
 <aside class={calloutClasses} aria-labelledby={id}>
 	{#if title}
-		<h3 {id} class={classNames('font-bold leading-tight', titleClasses[size])}>
+		<h3 {id} class={classNames('title', titleClasses[size])}>
 			{@render title?.()}
 		</h3>
 	{:else}
@@ -86,7 +86,7 @@
 	{/if}
 
 	{#if body}
-		<div class={bodyClasses[size]}>
+		<div class={classNames('body', bodyClasses[size])}>
 			{@render body?.()}
 		</div>
 	{/if}

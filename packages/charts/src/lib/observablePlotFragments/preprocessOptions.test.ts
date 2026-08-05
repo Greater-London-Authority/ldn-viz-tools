@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { preprocessOptions } from './observablePlotFragments';
 
 describe('preprocessOptions', () => {
@@ -157,7 +157,7 @@ describe('preprocessOptions', () => {
 		it('should NOT evaluate function options for keys not in optionsToConvert', () => {
 			const data = [{ id: 1 }];
 			const mockMarkFunction = vi.fn((data, options) => ({ data, options }));
-			const fillFunction = (d: any) => 'red';
+			const fillFunction = () => 'red';
 
 			const config = {
 				type: mockMarkFunction,

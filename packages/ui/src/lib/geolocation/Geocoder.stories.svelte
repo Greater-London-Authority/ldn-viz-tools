@@ -16,6 +16,7 @@
 </script>
 
 <script lang="ts">
+	import type { GeocoderAdapter } from './GeocoderAdapter';
 	import { GeocoderAdapterList } from './GeocoderAdapterList';
 	import type {
 		Geolocation,
@@ -106,6 +107,24 @@
 			address: 'Westferry Rd, Tower Hamlets, London'
 		}
 	]);
+
+	// An adapter whose search always rejects, used to demonstrate the
+	// `onSearchError` path.
+	const rejectingAdapter: GeocoderAdapter = {
+		search: () =>
+			Promise.reject(new Error('Simulated search failure: the geocoding service is unavailable.'))
+	};
+
+	let searchErrorMessage = $state('');
+	const onSearchErrorDisplay: OnGeolocationSearchError = (err) => {
+		searchErrorMessage = err instanceof Error ? err.message : String(err);
+		console.error(err);
+	};
+
+	let clearCount = $state(0);
+	const onSearchClearDisplay = () => {
+		clearCount += 1;
+	};
 </script>
 
 <Story name="Default">
@@ -117,17 +136,15 @@
 <Story name="Suggestions dropdown">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
 				results are limited.
 			</p>
-			<p class="dark:text-white">
+			<p>
 				At least three characters are required before any suggestions are provided. This avoids
 				spamming the underlying Web APIs with excessively vague requests.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder adapter={listAdapter} {onLocationSelected} {onSearchError} classes="w-72">
 				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
 					{#if suggestions?.length > 0}
@@ -141,7 +158,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>
@@ -151,17 +168,15 @@
 <Story name="Selected">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
 				results are limited.
 			</p>
-			<p class="dark:text-white">
+			<p>
 				At least three characters are required before any suggestions are provided. This avoids
 				spamming the underlying Web APIs with excessively vague requests.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder adapter={listAdapter} bind:selected {onSearchError} classes="w-72">
 				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
 					{#if suggestions?.length > 0}
@@ -175,7 +190,7 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
 		</div>
@@ -185,14 +200,12 @@
 <Story name="Disabled dropdown">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				I've disabled the dropdown in this story, instead, I'm accessing the results by binding on
 				the result set. I'm manually displaying them below but you can do whatever you like with
 				them.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder
 				adapter={listAdapter}
 				{onLocationSelected}
@@ -200,7 +213,7 @@
 				bind:suggestions
 				classes="w-72"
 			/>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{#if suggestions}
 					{#each suggestions as location}
 						{formatResult(location)}<br />
@@ -214,17 +227,15 @@
 <Story name="Custom placeholder">
 	{#snippet template()}
 		<div class="m-6 space-y-6">
-			<p class="dark:text-white">
+			<p>
 				A simple geocoder with dropdown suggestions. A simple hardcoded list adapter is used here so
 				results are limited.
 			</p>
-			<p class="dark:text-white">
+			<p>
 				At least three characters are required before any suggestions are provided. This avoids
 				spamming the underlying Web APIs with excessively vague requests.
 			</p>
-			<p class="dark:text-white">
-				Try entering 'brick' or 'london' if you're having trouble finding any places.
-			</p>
+			<p>Try entering 'brick' or 'london' if you're having trouble finding any places.</p>
 			<Geocoder
 				adapter={listAdapter}
 				{onLocationSelected}
@@ -244,9 +255,121 @@
 					{/if}
 				{/snippet}
 			</Geocoder>
-			<pre class="whitespace-pre-wrap dark:text-white">
+			<pre class="whitespace-pre-wrap text-color-text-muted">
 			{selected ? formatResult(selected) : formatResult({})}
 		</pre>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+	This story uses an adapter whose `search` promise always rejects. When the
+	adapter rejects, the `Geocoder` catches the error, clears the suggestions, and
+	invokes the	`onSearchError` callback.
+-->
+<Story name="Search error handling">
+	{#snippet template()}
+		<div class="m-6 space-y-6">
+			<p>
+				This story uses an adapter whose <code>search</code> promise always rejects. When the
+				adapter rejects, the <code>Geocoder</code> catches the error, clears the suggestions, and
+				invokes the
+				<code>onSearchError</code> callback.
+			</p>
+			<p>Type at least three characters (e.g. 'brick') to trigger a search and see the error.</p>
+			<Geocoder
+				adapter={rejectingAdapter}
+				{onLocationSelected}
+				onSearchError={onSearchErrorDisplay}
+				classes="w-72"
+			>
+				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
+					<GeocoderSuggestionList
+						{onSuggestionEvent}
+						{attribution}
+						{suggestions}
+						maxSuggestions={5}
+					/>
+				{/snippet}
+			</Geocoder>
+			<pre class="whitespace-pre-wrap text-color-text-muted">
+			{searchErrorMessage
+					? `onSearchError fired: ${searchErrorMessage}`
+					: 'No error yet - type to search.'}
+		</pre>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+	The clear button appears at the end of the input whenever there is text to clear (or when
+	`showClearButton` is bound to `true`). Clicking it clears the query,
+	selection and suggestions, and fires the `onSearchClear` callback.
+-->
+<Story name="Clear button / onSearchClear">
+	{#snippet template()}
+		<div class="m-6 space-y-6">
+			<p>Type 'brick', then press the clear (X) button to see the callback fire.</p>
+			<Geocoder
+				adapter={listAdapter}
+				{onLocationSelected}
+				{onSearchError}
+				onSearchClear={onSearchClearDisplay}
+				classes="w-72"
+			>
+				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
+					{#if suggestions?.length > 0}
+						<GeocoderSuggestionList
+							{onSuggestionEvent}
+							{attribution}
+							{suggestions}
+							{selected}
+							maxSuggestions={5}
+						/>
+					{/if}
+				{/snippet}
+			</Geocoder>
+			<pre class="whitespace-pre-wrap text-color-text-muted">
+			onSearchClear called {clearCount} time(s).
+		</pre>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+	The `inputClasses` prop applies additional classes to the input element itself
+	(distinct from `classes`, which targets the root container).
+	Here the input is given a rounded, thicker border.
+	This should be used sparingly - think about whetehr deviating from the default styling is really necessary.
+-->
+<Story name="Custom inputClasses">
+	{#snippet template()}
+		<div class="m-6 space-y-6">
+			<p>
+				The <code>inputClasses</code> prop applies additional classes to the input element itself
+				(distinct from <code>classes</code>, which targets the root container). Here the input is
+				given a rounded, thicker border.
+			</p>
+			<p>Try entering 'brick' or 'london'.</p>
+			<Geocoder
+				adapter={listAdapter}
+				{onLocationSelected}
+				{onSearchError}
+				classes="w-72"
+				inputClasses="rounded-full border-2 border-color-border"
+			>
+				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
+					{#if suggestions?.length > 0}
+						<GeocoderSuggestionList
+							{onSuggestionEvent}
+							{attribution}
+							{suggestions}
+							{selected}
+							maxSuggestions={5}
+						/>
+					{/if}
+				{/snippet}
+			</Geocoder>
 		</div>
 	{/snippet}
 </Story>

@@ -7,11 +7,12 @@
 	 */
 
 	import type { DotProps } from '$lib/core/renderers/DotProps';
+	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 	import { getVal } from '../../getVal';
 
 	let {
-		color = 'steelblue',
+		color = theme.tokenNameToValue('data.primary'),
 		showValues = true,
 		value,
 		formatString = '0.0f',

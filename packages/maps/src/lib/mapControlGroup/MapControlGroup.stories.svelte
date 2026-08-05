@@ -52,7 +52,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 				{#each Object.keys(MapControlGroupPositions) as position (position)}
 					<MapControlGroup {position}>
 						<p
-							class="border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-color-text-primary shadow"
+							class="border border-color-border-muted bg-color-container p-2 text-color-text shadow"
 						>
 							{position}
 						</p>
@@ -117,13 +117,37 @@ On small devices most controls will hide themselves.
 
 				<MapControlGroup position="TopRight">
 					<p
-						class="pointer-events-auto border border-color-ui-border-secondary bg-color-container-level-0 p-2 text-center text-color-text-primary shadow"
+						class="pointer-events-auto border border-color-border-muted bg-color-container p-2 text-center text-color-text shadow"
 					>
 						Bespoke controls<br />E.g. Drawing
 					</p>
 				</MapControlGroup>
 
 				<MapControlGroup position="BottomRight">
+					<MapControlPan />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+The `classes` prop is appended to the group's container element, allowing
+extra styling or layout utilities to be applied. Here a wider gap and a padded,
+bordered container are added.
+-->
+<Story name="Custom classes">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup
+					position="TopLeft"
+					classes="space-y-6 rounded border border-color-border-muted bg-color-container p-3"
+				>
 					<MapControlPan />
 				</MapControlGroup>
 			</Map>

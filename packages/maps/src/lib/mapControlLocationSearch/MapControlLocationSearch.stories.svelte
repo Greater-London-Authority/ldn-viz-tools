@@ -121,6 +121,25 @@ Note that this API allows searches for "specific address accurately using a full
 </Story>
 
 <!--
+This story caps the number of suggestions shown in the dropdown using the `maxSuggestions` prop (default 5).
+-->
+<Story name="Location Search - limited suggestions">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapControlLocationSearch adapter={adapterMapBox} {onSearchError} maxSuggestions={2} />
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
 This story shows how you can provide callback functions to be called when the user selects a location from the search results, or clears the selection.
 -->
 <Story name="Location Search - callback functions">

@@ -27,26 +27,24 @@
 
 	let descriptionClass = $derived(
 		classNames(
-			error ? '!text-color-input-label-error' : '',
-			disabled ? 'text-color-input-label-disabled' : '',
-			descriptionAlignment === 'left'
-				? 'text-color-input-label-secondary'
-				: 'ml-auto text-color-input-label-secondary',
-			'text-sm'
+			error ? '!text-color-interactive-error' : '',
+			disabled ? 'text-color-interactive-disabled' : '',
+			descriptionAlignment === 'left' ? 'text-color-label-muted' : 'ml-auto text-color-label-muted',
+			'body-sm'
 		)
 	);
 
 	let labelClasses = $derived(
 		classNames(
-			error ? 'text-color-input-label-error' : '',
-			disabled ? 'text-color-input-label-disabled' : '',
+			error ? 'text-color-interactive-error' : '',
+			disabled ? 'text-color-interactive-disabled' : '',
 			'form-label'
 		)
 	);
 </script>
 
-<div class="flex flex-col space-y-1">
-	<div class="flex justify-between [&>div]:text-sm">
+<div class="product flex flex-col space-y-1">
+	<div class="flex justify-between">
 		{#if label}
 			<label for={id} class={labelClasses}>
 				{@html label}{#if optional}&nbsp;(optional){/if}

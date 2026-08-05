@@ -22,10 +22,10 @@ export const tabPlacementLookup: PlacementLookup = {
 };
 
 export const keylineLookup: PlacementLookup = {
-	left: 'border-r border-color-ui-border-secondary',
-	right: 'border-l border-color-ui-border-secondary',
-	top: 'border-b border-color-ui-border-secondary',
-	bottom: 'border-t border-color-ui-border-secondary'
+	left: 'border-r border-color-border-muted',
+	right: 'border-l border-color-border-muted',
+	top: 'border-b border-color-border-muted',
+	bottom: 'border-t border-color-border-muted'
 };
 
 export const tabLayoutOverride: PlacementLookup = {
@@ -34,11 +34,11 @@ export const tabLayoutOverride: PlacementLookup = {
 };
 
 // These classes overide the theme of default tabs in a sidebar context
-export const tabThemeOverride = '[&>button]:bg-color-container-level-0 [&>button]:no-underline';
+export const tabThemeOverride = '[&>button]:bg-color-container [&>button]:no-underline';
 
 // These classes overide the 'horizontal' style of tablabels in a sidebar context
 export const tabLabelOverride =
-	'[&>button]:text-xs [&>button]:w-20 [&>button]:h-20 [&>button]:p-2 [&>button]:flex [&>button]:flex-col [&>button]:items-center [&>button]:justify-center [&>button]:text-center';
+	'[&>button]:label-sm [&>button]:w-20 [&>button]:h-20 [&>button]:p-2 [&>button]:flex [&>button]:flex-col [&>button]:items-center [&>button]:justify-center [&>button]:text-center';
 
 // These classes override the margin-right on icons in 'horizontal' style tabLabels in a sidebar context
 export const tabIconOverride = '[&>button>svg]:mr-0 [&>button>svg]:mb-1';
@@ -81,7 +81,7 @@ export const wrapperFlowLookup: PlacementLookup = {
 	bottom: 'flex-col'
 };
 
-export const transitionAxis: { [key: string]: any } = {
+export const transitionAxis: { [key: string]: 'x' | 'y' } = {
 	left: 'x',
 	right: 'x',
 	top: 'y',
