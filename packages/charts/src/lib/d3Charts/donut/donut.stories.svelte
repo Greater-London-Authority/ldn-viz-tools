@@ -23,9 +23,9 @@
 	];
 
 	let fruitColors: Record<string, string> = {
-		Apples: theme.currentTheme.color.palette.orange[300],
-		Bananas: theme.currentTheme.color.palette.orange[500],
-		Oranges: theme.currentTheme.color.palette.orange[700]
+		Apples: theme.tokenNameToValue('data.primary'),
+		Bananas: theme.tokenNameToValue('data.secondary'),
+		Oranges: theme.tokenNameToValue('data.tertiary')
 	};
 </script>
 

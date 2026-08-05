@@ -130,8 +130,8 @@
 	let textColor = (color: any) => {
 		return colorWithBestContrast(
 			color,
-			theme.tokenNameToValue('text.primary'),
-			theme.tokenNameToValue('text.inverse.primary')
+			theme.tokenNameToValue('text'),
+			theme.tokenNameToValue('inverse.text')
 		);
 	};
 </script>
@@ -150,7 +150,7 @@
 				<path
 					d={arcPath(slice)}
 					fill={colorMapping[slice.data[labelField]]}
-					stroke={theme.currentTheme.color.chart.background}
+					stroke={theme.tokenNameToValue('chart.surface')}
 					role="listitem"
 					cursor="pointer"
 					onmouseenter={() => onMouseEnter(slice)}
