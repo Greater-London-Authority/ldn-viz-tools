@@ -44,7 +44,10 @@
 	{/snippet}
 </Story>
 
-<Story name="Hide legend">
+<!--
+To save space, the table can be hiden, in which case a separate color legend is displayed.
+-->
+<Story name="Hide table">
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
@@ -54,7 +57,7 @@
 			chartHeight="h-200px"
 			data={fruitSales}
 		>
-			<Donut data={fruitSales} colorMapping={fruitColors} hideLegend></Donut>
+			<Donut data={fruitSales} colorMapping={fruitColors} hideTable></Donut>
 		</ChartContainer>
 	{/snippet}
 </Story>

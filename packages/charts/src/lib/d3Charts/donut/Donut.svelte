@@ -5,9 +5,10 @@
 	 * 	@component
 	 */
 
-	import { theme } from '@ldn-viz/ui';
+	import { ColorLegendOrdinalChips, theme } from '@ldn-viz/ui';
 	import { colorWithBestContrast } from '@ldn-viz/utils';
 	import { sum } from 'd3-array';
+	import { scaleOrdinal } from 'd3-scale';
 	import { arc, pie, type PieArcDatum } from 'd3-shape';
 	import DonutLegend from './DonutLegend.svelte';
 	import DonutTooltip from './DonutTooltip.svelte';
@@ -50,9 +51,9 @@
 		 */
 		hideTooltip?: boolean;
 		/**
-		 * Tooltips on donut segment, defaults to true.
+		 * If `true`, then the table of values is hidden.
 		 */
-		hideLegend?: boolean;
+		hideTable?: boolean;
 	}
 
 	let {
@@ -65,7 +66,7 @@
 		margin = 0,
 		minAngle = 0.5,
 		hideTooltip = false,
-		hideLegend = false
+		hideTable = false
 	}: Props<T> = $props();
 
 	/**
@@ -137,56 +138,64 @@
 </script>
 
 {#if data?.length}
-	<div class="flex w-full">
-		<svg
-			bind:this={svgEl}
-			{width}
-			{height}
-			viewBox="{-width / 2} {-height / 2} {width} {height}"
-			style:max-width="100%"
-			style:height="auto"
-		>
-			{#each pieData as slice (slice.data[labelField])}
-				<path
-					d={arcPath(slice)}
-					fill={colorMapping[slice.data[labelField]]}
-					stroke={theme.tokenNameToValue('chart.surface')}
-					role="listitem"
-					cursor="pointer"
-					onmouseenter={() => onMouseEnter(slice)}
-					onmouseleave={onMouseLeave}
-				/>
-
-				{#if shouldShowLabel(slice)}
-					<text
-						text-anchor="middle"
-						font-size="0.8em"
-						font-weight="500"
-						pointer-events="none"
-						style:fill={textColor(colorMapping[slice.data[labelField]])}
-						transform="translate({labelArc.centroid({
-							...slice
-						})})"
-					>
-						{formatPercent(slice.data[countField], total)}
-					</text>
-				{/if}
-			{/each}
-		</svg>
-
-		{#if !hideTooltip}
-			<DonutTooltip
-				x={tooltipX}
-				y={tooltipY}
-				category={tooltipLabel}
-				quantity={tooltipValue}
-				visible={tooltipVisible}
+	<div class="flex flex-col gap-2">
+		{#if hideTable}
+			<ColorLegendOrdinalChips
+				scale={scaleOrdinal(Object.keys(colorMapping), Object.values(colorMapping))}
 			/>
 		{/if}
 
-		{#if !hideLegend}
-			<DonutLegend {data} {labelField} {countField} {colorMapping} />
-		{/if}
+		<div class="flex w-full">
+			<svg
+				bind:this={svgEl}
+				{width}
+				{height}
+				viewBox="{-width / 2} {-height / 2} {width} {height}"
+				style:max-width="100%"
+				style:height="auto"
+			>
+				{#each pieData as slice (slice.data[labelField])}
+					<path
+						d={arcPath(slice)}
+						fill={colorMapping[slice.data[labelField]]}
+						stroke={theme.tokenNameToValue('chart.surface')}
+						role="listitem"
+						cursor="pointer"
+						onmouseenter={() => onMouseEnter(slice)}
+						onmouseleave={onMouseLeave}
+					/>
+
+					{#if shouldShowLabel(slice)}
+						<text
+							text-anchor="middle"
+							font-size="0.8em"
+							font-weight="500"
+							pointer-events="none"
+							style:fill={textColor(colorMapping[slice.data[labelField]])}
+							transform="translate({labelArc.centroid({
+								...slice
+							})})"
+						>
+							{formatPercent(slice.data[countField], total)}
+						</text>
+					{/if}
+				{/each}
+			</svg>
+
+			{#if !hideTooltip}
+				<DonutTooltip
+					x={tooltipX}
+					y={tooltipY}
+					category={tooltipLabel}
+					quantity={tooltipValue}
+					visible={tooltipVisible}
+				/>
+			{/if}
+
+			{#if !hideTable}
+				<DonutLegend {data} {labelField} {countField} {colorMapping} />
+			{/if}
+		</div>
 	</div>
 {:else}
 	No data
