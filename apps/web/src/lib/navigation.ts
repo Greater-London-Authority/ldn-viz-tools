@@ -31,8 +31,8 @@ const applicationDesign = allDocs
 
 //Non alphabetic sort index. N.B reverse order so non listed pages are appended
 const dvPageOrder = [
-	'Charts',
-	'Maps',
+	'Chart anatomy',
+	'Map examples',
 	'Chart examples',
 	'Quantitative colour',
 	'Colour foundations',

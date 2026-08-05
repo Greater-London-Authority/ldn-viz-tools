@@ -1,8 +1,8 @@
 ---
-title: Charts
-description: Graphical representation for data visualization
+title: Chart anatomy
+description: The building blocks of a chart
 section: Data visualisation
-navLabel: Charts
+navLabel: Chart anatomy
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-3.svg
 ---
@@ -11,18 +11,12 @@ thumbnail: cta-dataviz-3.svg
     import ChartAnatomy from '$lib/components/charts/chartAnatomy/ChartAnatomy.svelte'
 </script>
 
-## Principles
+<p class="lead">Charts in our design system are composed of common building blocks. It's helpful to know what they are and how they're styled.</p>
 
-### Choosing the right chart type
-
-## Practice
-
-### Chart elements
+## Chart elements
 
 <div class="not-prose">
     <div class="w-full max-w-full">
         <ChartAnatomy />
     </div>
 </div>
-
-### Maps
