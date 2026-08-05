@@ -87,9 +87,9 @@
 		y: { axis: null },
 		color: {
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [

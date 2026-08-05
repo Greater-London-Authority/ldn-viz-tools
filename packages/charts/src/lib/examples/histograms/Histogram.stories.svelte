@@ -1,12 +1,17 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { randomVals as chartData } from '../../../data/demoData';
+	// import { randomVals as chartData } from '../../../data/demoData';
+	import { randomNormal } from 'd3';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Histograms'
 	});
+
+	const getRandomNormal = randomNormal(0.5, 0.2);
+	const randomVals = [...Array(1000)].map(() => ({ x: getRandomNormal() }));
+	const chartData = randomVals;
 
 	// Spec and data for histogram example (default)
 	let spec = $derived({
@@ -29,13 +34,13 @@
 		<ObservablePlot
 			{spec}
 			data={chartData}
-			title="Using the RectY mark to create a histogram that shows Math.random samples from a uniform distribution"
+			title="Using the RectY mark to create a histogram that shows random samples from a normal distribution"
 			subTitle="1000 randomly generated and binned values"
 			alt="Histogram chart of 1000 randomly generated values"
 			byline="GLA City Intelligence"
 			source="LDN Viz Tools Demo Data"
 			note="Data for demonstration only"
-			chartDescription="The histogram chart shows 1000 randomly generated and binned values in a uniform distribution. The x axis ranges in value from 0 to 1.0 and the y axis ranges in frequency from 0 to a randomly defined number."
+			chartDescription="The histogram chart shows 1000 randomly generated and binned values in a normal distribution. The x axis ranges in value from around 0 to 1.0 and the y axis ranges in frequency from 0 to a randomly defined number."
 		/>
 	{/snippet}
 </Story>
