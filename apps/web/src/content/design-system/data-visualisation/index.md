@@ -51,25 +51,26 @@ thumbnail: cta-dataviz.svg
         <h3 class="title-3">Quantitative colour</h3>
         <Button href="/design-system/data-visualisation/quantitative-colour" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
-        <div>
-        <a href="/design-system/data-visualisation/maps">
-        <EnhancedImage src=cta-dataviz-4.svg/>
-        </a>
-        <h3 class="title-3">Maps</h3>
-        <Button href="/design-system/data-visualisation/maps" variant="text" slim emphasis="secondary">Read more</Button>
-    </div>
-        <div>
-        <a href="/design-system/data-visualisation/charts">
-        <EnhancedImage src=cta-dataviz-1.svg/>
-        </a>
-        <h3 class="title-3">Charts</h3>
-        <Button href="/design-system/data-visualisation/charts" variant="text" slim emphasis="secondary">Read more</Button>
-    </div>
-        <div>
+    <div>
         <a href="/design-system/data-visualisation/chart-examples">
         <EnhancedImage src=cta-dataviz-3.svg/>
         </a>
         <h3 class="title-3">Chart examples</h3>
         <Button href="/design-system/data-visualisation/chart-examples" variant="text" slim emphasis="secondary">Read more</Button>
     </div>
+    <div>
+        <a href="/design-system/data-visualisation/map-examples">
+        <EnhancedImage src=cta-dataviz-4.svg/>
+        </a>
+        <h3 class="title-3">Map examples</h3>
+        <Button href="/design-system/data-visualisation/maps" variant="text" slim emphasis="secondary">Read more</Button>
+    </div>
+    <div>
+        <a href="/design-system/data-visualisation/chart-anatomy">
+        <EnhancedImage src=cta-dataviz-1.svg/>
+        </a>
+        <h3 class="title-3">Chart anatomy</h3>
+        <Button href="/design-system/data-visualisation/charts" variant="text" slim emphasis="secondary">Read more</Button>
+    </div>
+        
 </div>
