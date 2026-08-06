@@ -1,0 +1,30 @@
+name: Deploy website to https://dev.ldn-gis.co.uk/city-data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.0.2'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build everything
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: ./apps/web/build
+          retention-days: 5
