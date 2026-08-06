@@ -39,7 +39,7 @@ In dark mode all components adopt their dark mode variants, contrast levels rema
 
 Assuming you are importing the relevant css files - [see the getting started section](/design-system/getting-started) you can then use css variables to style your application.
 
-Refer to the documentation on [design tokens](http://localhost:5173/design-system/foundations/design-tokens#practice) for reference. All tokens listed are available as css variables:
+Refer to the documentation on [design tokens](/design-system/foundations/design-tokens#practice) for reference. All tokens listed are available as css variables:
 
 ```css
 // token name

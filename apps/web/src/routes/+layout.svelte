@@ -6,6 +6,7 @@
 	import { findActiveItem } from '@ldn-viz/ui';
 
 	import { breakPoint, sidebarState } from '$lib/state.svelte';
+	import { resolveNavItems } from '$lib/utils';
 	import {
 		Button,
 		Footer,
@@ -82,7 +83,7 @@
 			{#if breakPoint.current >= 768}
 				<HeaderItem>
 					<NavigationMenu
-						items={mainMenu}
+						items={resolveNavItems(mainMenu, resolve)}
 						orientation="horizontal"
 						ariaLabel="main menu"
 						activeMenuItemId={activeMenuItem?.id}

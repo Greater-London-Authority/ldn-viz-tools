@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { breakPoint, sidebarState } from '$lib/state.svelte';
+	import { resolveNavItems } from '$lib/utils';
 
 	import { findActiveItem, NavigationMenu, Sidebar, SidebarSection } from '@ldn-viz/ui';
 
@@ -25,7 +26,7 @@
 			{/if}
 
 			<NavigationMenu
-				items={navigation}
+				items={resolveNavItems(navigation, resolve)}
 				ariaLabel="SiteNavigation"
 				activeMenuItemId={activeMenuItem?.id}
 			/>
