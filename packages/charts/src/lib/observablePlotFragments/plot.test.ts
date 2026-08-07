@@ -113,7 +113,7 @@ describe('plot()', () => {
 			color: 'red',
 			fontSize: '0.875rem',
 			fontFamily: expect.any(String),
-			background: 'value(chart.background)',
+			background: 'value(chart.surface)',
 			extra: 'thing'
 		});
 	});
