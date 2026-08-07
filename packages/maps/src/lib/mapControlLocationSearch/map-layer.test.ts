@@ -1,14 +1,5 @@
-import { describe, test, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { GLIDE_ANIMATION_OPTIONS } from '../themes/animations';
-
-// The module under test imports `GLIDE_ANIMATION_OPTIONS` from the package's
-// own public entrypoint, which also re-exports .svelte components that can't
-// be resolved outside a browser/Svelte-aware test environment. Mock that
-// entrypoint to just the constant this module actually needs.
-vi.mock('@ldn-viz/maps', async () => {
-	const animations = await import('../themes/animations');
-	return { GLIDE_ANIMATION_OPTIONS: animations.GLIDE_ANIMATION_OPTIONS };
-});
 
 const { initMapLayer, setFeature, clearFeature } = await import('./map-layer');
 
