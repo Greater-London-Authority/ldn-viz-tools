@@ -18,7 +18,7 @@ describe('ChartContainer', () => {
 
 	it('should render subtitle when provided', async () => {
 		const { container } = render(ChartContainer, {
-			props: { title: 'Chart', subTitle: 'Subtitle' }
+			props: { title: 'Chart', subtitle: 'Subtitle' }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
@@ -85,9 +85,9 @@ describe('ChartContainer', () => {
 		expect(captureElement.textContent).toContain('A footnote');
 	});
 
-	it('should render the "View description" trigger and show chartDescription inside the Modal when opened', async () => {
+	it('should render the "View description" trigger and show description inside the Modal when opened', async () => {
 		render(ChartContainer, {
-			props: { chartDescription: 'This chart shows monthly values over time.' }
+			props: { description: 'This chart shows monthly values over time.' }
 		});
 
 		await expect
@@ -97,17 +97,21 @@ describe('ChartContainer', () => {
 		await page.getByRole('button', { name: 'View description' }).click();
 
 		await expect
-			.element(page.getByText('This chart shows monthly values over time.'))
+			.element(
+				page
+					.getByRole('dialog', { name: 'Description' })
+					.getByText('This chart shows monthly values over time.')
+			)
 			.toBeInTheDocument();
 	});
 
-	it('should omit the Footer entirely when source/byline/note/chartDescription/download buttons are all falsy', async () => {
+	it('should omit the Footer entirely when source/byline/note/description/download buttons are all falsy', async () => {
 		const { container } = render(ChartContainer, {
 			props: {
 				source: '',
 				byline: '',
 				note: '',
-				chartDescription: '',
+				description: '',
 				dataDownloadButton: false,
 				imageDownloadButton: false
 			}

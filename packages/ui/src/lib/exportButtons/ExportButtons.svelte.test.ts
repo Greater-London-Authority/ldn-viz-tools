@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 
-import ExportBtns from './ExportBtns.svelte';
+import ExportButtons from './ExportButtons.svelte';
 
 const demoData = [
 	{ Month: '2015-01-01', Value: 53623.9 },
@@ -12,10 +12,10 @@ const demoData = [
 // Decode a `data:application/csv;base64,...` or `data:application/json;base64,...` URL.
 const decodeDataUrl = (dataUrl: string) => window.atob(dataUrl.split(',')[1]);
 
-describe('ExportBtns', () => {
+describe('ExportButtons', () => {
 	it('renders the data download button when dataDownloadButton is truthy and dataForDownload is defined', async () => {
-		const { container } = render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		const { container } = render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: true,
 			imageDownloadButton: false
@@ -25,8 +25,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('hides the data download button when dataForDownload is undefined, even if dataDownloadButton is truthy', async () => {
-		const { container } = render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		const { container } = render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: true,
 			imageDownloadButton: false
@@ -36,8 +36,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('passes formats={["CSV", "JSON"]} to DataDownloadButton when dataDownloadButton === true', async () => {
-		render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: true,
 			imageDownloadButton: false
@@ -50,8 +50,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('passes a custom formats array to DataDownloadButton unchanged', async () => {
-		render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: ['CSV'],
 			imageDownloadButton: false
@@ -64,8 +64,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('renders the image download button unconditionally, regardless of dataForDownload', async () => {
-		const { container } = render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		const { container } = render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
 			imageDownloadButton: true
@@ -75,8 +75,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('passes formats={["PNG", "SVG"]} to ImageDownloadButton when imageDownloadButton === true', async () => {
-		render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
 			imageDownloadButton: true
@@ -89,8 +89,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('passes a custom formats array to ImageDownloadButton unchanged', async () => {
-		render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
 			imageDownloadButton: ['PNG']
@@ -103,8 +103,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('hides the image download button when imageDownloadButton === false', async () => {
-		const { container } = render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		const { container } = render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
 			imageDownloadButton: false
@@ -114,8 +114,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('forwards filename to DataDownloadButton unchanged', async () => {
-		render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: ['CSV'],
 			imageDownloadButton: false,
@@ -142,8 +142,8 @@ describe('ExportBtns', () => {
 	});
 
 	it('forwards columnMapping to DataDownloadButton unchanged', async () => {
-		render(ExportBtns, {
-			chartToCapture: document.createElement('div'),
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: ['CSV'],
 			imageDownloadButton: false,
