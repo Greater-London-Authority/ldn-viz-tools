@@ -1,15 +1,6 @@
-import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { GREATER_LONDON_BOUNDS_PADDED } from '../themes/bounds';
 import { MapGeocoderAdapterMapBox } from './MapGeocoderAdapterMapBox';
-
-// The module under test imports `GREATER_LONDON_BOUNDS_PADDED` from the
-// package's own public entrypoint, which also re-exports .svelte components
-// that can't be resolved outside a browser/Svelte-aware test environment.
-// Mock that entrypoint to just the constant this module actually needs.
-vi.mock('@ldn-viz/maps', async () => {
-	const bounds = await import('../themes/bounds');
-	return { GREATER_LONDON_BOUNDS_PADDED: bounds.GREATER_LONDON_BOUNDS_PADDED };
-});
 
 describe('MapGeocoderAdapterMapBox', () => {
 	beforeEach(() => {
