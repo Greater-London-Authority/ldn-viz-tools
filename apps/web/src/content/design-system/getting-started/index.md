@@ -8,7 +8,7 @@ heroImage: header-design-system-overflow.svg
 thumbnail: cta-design-system.svg
 ---
 
-<p class="prose responsive body-lg">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.</p>
+<p class="lead">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.</p>
 
 ## Installation
 

@@ -1,8 +1,12 @@
+/* Write your global styles here, in PostCSS syntax */
 @import '@ldn-viz/themes/styles/primitives.css';
 @import '@ldn-viz/themes/styles/light.css';
 @import '@ldn-viz/themes/styles/dark.css';
 @import '@ldn-viz/themes/styles/spacing.css';
 @import '@ldn-viz/themes/styles/typography.css';
+@import '@ldn-viz/themes/styles/flow.css';
+@import '@ldn-viz/themes/styles/grid-spacing.css';
+@import '@ldn-viz/themes/styles/shadows.css';
 
 @tailwind base;
 @tailwind components;
@@ -27,7 +31,7 @@ html.disable-smooth-scroll {
 	}
 
 	[data-rehype-pretty-code-figure] {
-		@apply !my-typography-spacing-sm;
+		@apply !my-3;
 		@apply border border-color-border-muted;
 		@apply overflow-auto;
 	}

@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { AdjustmentsHorizontal, ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { SidebarLeftContext } from '../../../../../apps/docs/src/lib';
+	import { SidebarLeftContext } from '../../../../../apps/storybook/src/lib';
 	import LogoCIU from '../logos/LogoCIU.svelte';
 	import LogoMayor from '../logos/LogoMayor.svelte';
 	import Overlay from '../overlay/Overlay.svelte';

@@ -58,7 +58,10 @@
 	 * Recursive function to handle applying `isExpanded` state, toggling expansion
 	 * of list when a child is active.
 	 */
-	const mapItems: any = (items: NavigationMenuItemProps[], targetId: string) =>
+	const mapItems = (
+		items: NavigationMenuItemProps[],
+		targetId: string
+	): NavigationMenuItemProps[] =>
 		items.map((item: NavigationMenuItemProps) => ({
 			...item,
 			isExpanded: !isAlwaysExpanded
@@ -76,7 +79,7 @@
 	});
 </script>
 
-<nav aria-label={ariaLabel} class={width}>
+<nav aria-label={ariaLabel} class={classNames('product', width)}>
 	<ul {id} class={menuClasses}>
 		{#each menuState as { title, href, children, id, isExpanded }, index (index)}
 			<NavigationMenuItem

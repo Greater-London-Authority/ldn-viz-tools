@@ -51,9 +51,12 @@
 </script>
 
 <div
-	class={classNames('flex h-fit min-h-[24px] w-full justify-between px-4', colorClass[condition])}
+	class={classNames(
+		'product flex h-fit min-h-[24px] w-full justify-between px-4',
+		colorClass[condition]
+	)}
 >
-	<div class="text-base uppercase text-color-static-white">
+	<div class="label uppercase text-color-static-white">
 		<!-- The message to be displayed in the flag. -->
 		{#if children}
 			{@render children()}

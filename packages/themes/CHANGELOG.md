@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 9.0.0
+
+### Major Changes
+
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
 ## 8.0.0
 
 ### Major Changes
