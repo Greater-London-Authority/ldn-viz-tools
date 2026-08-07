@@ -1,6 +1,5 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	// import { randomVals as chartData } from '../../../data/demoData';
 	import { randomNormal } from 'd3';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
