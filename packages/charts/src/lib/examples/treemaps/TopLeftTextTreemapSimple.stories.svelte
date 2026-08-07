@@ -1,10 +1,10 @@
 <script module lang="ts">
-	import { getDefaultPlotStyles } from '@ldn-viz/charts';
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as d3 from 'd3';
 	import { penguins } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
+	import { getDefaultPlotStyles } from '../../observablePlotFragments/observablePlotFragments';
 	import { Plot } from '../../observablePlotFragments/plot';
 
 	const { Story } = defineMeta({

@@ -19,7 +19,7 @@ export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultXAxis: () => defaultXAxis,
 	defaultYAxis: () => defaultYAxis,
 	defaultLine: () => defaultLine(),
-	defaultDashedLine: () => defaultDashedLine,
+	defaultDashedLine: () => defaultDashedLine(),
 	defaultDot: () => defaultDot(),
 	defaultPoint: () => defaultPoint(),
 	defaultArea: () => defaultArea(),
@@ -118,10 +118,10 @@ const defaultLine = () => ({
 	strokeWidth: 2
 });
 
-const defaultDashedLine = {
-	...defaultLine,
+const defaultDashedLine = () => ({
+	...defaultLine(),
 	strokeDasharray: '5,5'
-};
+});
 
 const defaultDot = () => ({
 	// simplest mark for dense scatterplots
