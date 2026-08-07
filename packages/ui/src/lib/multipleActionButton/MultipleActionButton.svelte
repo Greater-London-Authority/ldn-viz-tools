@@ -69,6 +69,7 @@
 			{variant}
 			{fullWidth}
 			{...restProps}
+			disabled={restProps.disabled ?? options.length === 0}
 			class={`${variant === 'outline' ? 'border-r-0' : ''}`}
 		>
 			<div class="flex items-center">
@@ -83,7 +84,14 @@
 				aria-label={menuTitle ? 'Open popover to ' + menuTitle : 'Open popover'}
 			>
 				{#snippet child({ props })}
-					<Button {...props} class={triggerClasses} variant="square" {size} {...restProps}>
+					<Button
+						{...props}
+						class={triggerClasses}
+						variant="square"
+						{size}
+						{...restProps}
+						disabled={restProps.disabled ?? options.length === 0}
+					>
 						{#if size === 'xs'}
 							<Icon src={ChevronDown} theme="mini" class="h-4 w-4" aria-hidden="true" />
 						{:else}
@@ -94,11 +102,11 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class="z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
+					class="product z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>
-						<DropdownMenu.GroupHeading class="p-1 text-sm">{menuTitle}</DropdownMenu.GroupHeading>
+						<DropdownMenu.GroupHeading class="body-sm p-1">{menuTitle}</DropdownMenu.GroupHeading>
 
 						<div class="divide-y divide-color-border-muted">
 							{#each options as option (option.id)}
@@ -114,9 +122,9 @@
 												class="mr-1 h-5 w-5 text-color-surface-accent"
 											/>
 										{/if}
-										<p class="text-sm font-medium">{option.menuLabel}</p>
+										<p class="label-tight">{option.menuLabel}</p>
 									</div>
-									<p class="text-xs text-color-text-muted">
+									<p class="caption text-color-text-muted">
 										{option.menuDescription}
 									</p>
 								</DropdownMenu.Item>

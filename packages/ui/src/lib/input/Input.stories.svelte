@@ -3,6 +3,10 @@
 
 	import Overlay from '../overlay/Overlay.svelte';
 	import Input from './Input.svelte';
+	/**
+	 * The `Input` component renders a labelled form input (or, if `type` is `textarea`, a `<textarea>`), with support for a `description`, `hint`, `error` message, and `optional`/required state.
+	 * The value can be reformatted on blur (for example, trimming whitespace) via the `format` prop.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Input',

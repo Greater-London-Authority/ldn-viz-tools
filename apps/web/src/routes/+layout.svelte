@@ -51,6 +51,16 @@
 
 <svelte:window bind:innerWidth={breakPoint.current} />
 
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+		rel="stylesheet"
+		crossorigin="anonymous"
+	/>
+</svelte:head>
+
 <div class="flex min-h-dvh flex-col">
 	<Header>
 		<Button
@@ -88,7 +98,7 @@
 		<div class="pb-4 text-sm lg:w-1/6">
 			<nav>
 				<h3 class="mb-1 font-semibold">Links</h3>
-				<ul class=" text-color-text-muted">
+				<ul class="text-color-text-muted">
 					<li>
 						<a href="https://data.london.gov.uk/" target="_blank" class="hover:underline">
 							London Data Store

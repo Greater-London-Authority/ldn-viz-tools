@@ -335,7 +335,7 @@
 		<g
 			transform={`translate(${axisState.x(highlightedValue)}, ${height - marginBottom + 10} ) scale(10) `}
 		>
-			<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="black" />
+			<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="currentColor" />
 		</g>
 	{/if}
 </svg>

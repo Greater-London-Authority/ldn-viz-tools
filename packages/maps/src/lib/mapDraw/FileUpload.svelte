@@ -39,7 +39,7 @@
 		mapDraw.controlMode.current = 'edit';
 	};
 
-	async function readFile(file: any) {
+	async function readFile(file: File) {
 		try {
 			const text = await file.text();
 			const parsedJson = JSON.parse(text);
@@ -103,7 +103,7 @@
 </script>
 
 <div
-	class="pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-container-level-1 p-4 shadow"
+	class="product pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-container-level-1 p-4 shadow"
 >
 	<p class="form-label text-sm">Upload</p>
 
@@ -142,7 +142,7 @@
 			</div>
 
 			<div class="relative z-0 text-center">
-				<p class="text-sm text-color-text-muted">
+				<p class="body-sm text-color-text-muted">
 					Drag & drop a GeoJSON file here or click to open file picker.
 				</p>
 			</div>

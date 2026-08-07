@@ -70,10 +70,13 @@ StyleDictionary.registerParser({
 				['primitive.mode 1.', 'primitive.'],
 				['primitive.light-mode.', 'primitive.'],
 				['primitive.dark-mode.', 'primitive.'],
+				['primitive.base.', 'primitive.'],
 				['primitive.sm.', 'primitive.'],
 				['primitive.md.', 'primitive.'],
 				['primitive.lg.', 'primitive.'],
 				['primitive.xl.', 'primitive.'],
+				['primitive.2xl.', 'primitive.'],
+				['semantic-typography.', 'typography.'],
 				['focus ring', 'focus-ring']
 			];
 
@@ -100,6 +103,7 @@ StyleDictionary.registerParser({
 				'semantic-color': 'mode',
 				'semantic-spacing': 'spacing',
 				'semantic-typography': 'typography',
+				'semantic-flow': 'flow',
 				'custom-shadow': 'shadow',
 				'light-mode': 'light',
 				'dark-mode': 'dark'
@@ -109,7 +113,8 @@ StyleDictionary.registerParser({
 
 			return output;
 		} catch (error) {
-			console.log(error);
+			console.error(error);
+			process.exit(1);
 		}
 	}
 });
@@ -149,15 +154,30 @@ const createFilter = (conditions) => (token) => tokenMatchesAnyCondition(token, 
 
 /*------------------------------------------*/
 
+// Generic primitives.css carries the NON-scale primitives (colour, font-family,
+// font-weight, breakpoint) via css/variables, which emits raw values. The two
+// dimension SCALES - spacing (type 'spacing') and font-size (subitem 'size') -
+// are excluded here and emitted by custom/primitive-scale instead, because they
+// need px->rem conversion at emit time while their token-graph value stays px
+// (so tokens that reference them - flow, t-shirt spacing, grid - resolve correctly).
 const conditionsPrimitive = [
-	{ category: 'primitive', type: { not: ['spacing'] }, subitem: { not: ['seed'] } }
+	{ category: 'primitive', type: { not: ['spacing'] }, subitem: { not: ['seed', 'size'] } }
+];
+const conditionsPrimitiveScale = [
+	{ category: 'primitive', type: 'spacing' },
+	{ category: 'primitive', subitem: 'size' }
 ];
 
 const conditionsColorModes = [{ category: 'mode' }];
 const conditionsColorModeLight = [{ category: 'mode', type: 'light' }];
 const conditionsColorModeDark = [{ category: 'mode', type: 'dark' }];
 const conditionsSpacing = [{ category: 'spacing' }];
-const conditionsTypography = [{ category: 'typography' }];
+const conditionsTypography = [
+	{ category: 'typography' },
+	{ category: 'primitive', subitem: 'size' }
+];
+const conditionsFlow = [{ category: 'flow' }];
+const conditionsGridSpacing = [{ category: 'grid-spacing' }];
 const conditionsTw = [
 	...conditionsColorModeLight,
 	{
@@ -176,7 +196,11 @@ const conditionsJs = [
 	}
 ];
 const conditionsShadow = [
-	{ category: { not: ['primitive', 'mode', 'spacing', 'typography', 'focus ring'] } }
+	{
+		category: {
+			not: ['focus ring', 'spacing', 'primitive', 'mode', 'typography', 'flow', 'grid-spacing']
+		}
+	}
 ];
 
 // REGISTER THE CUSTOM FILTERS USING OUR MATCHING CONDITIONS
@@ -184,6 +208,11 @@ const conditionsShadow = [
 StyleDictionary.registerFilter({
 	name: 'cssPrimitiveFilter',
 	filter: (token) => createFilter(conditionsPrimitive)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'cssPrimitiveScaleFilter',
+	filter: (token) => createFilter(conditionsPrimitiveScale)(token)
 });
 
 StyleDictionary.registerFilter({
@@ -202,6 +231,16 @@ StyleDictionary.registerFilter({
 });
 
 StyleDictionary.registerFilter({
+	name: 'cssGridSpacingFilter',
+	filter: (token) => createFilter(conditionsGridSpacing)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'cssFlowFilter',
+	filter: (token) => createFilter(conditionsFlow)(token)
+});
+
+StyleDictionary.registerFilter({
 	name: 'cssTypographyFilter',
 	filter: (token) => createFilter(conditionsTypography)(token)
 });
@@ -214,6 +253,16 @@ StyleDictionary.registerFilter({
 StyleDictionary.registerFilter({
 	name: 'twSpacingFilter',
 	filter: (token) => createFilter(conditionsSpacing)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'twFlowFilter',
+	filter: (token) => createFilter(conditionsFlow)(token)
+});
+
+StyleDictionary.registerFilter({
+	name: 'twGridSpacingFilter',
+	filter: (token) => createFilter(conditionsGridSpacing)(token)
 });
 
 StyleDictionary.registerFilter({
@@ -254,7 +303,7 @@ StyleDictionary.registerTransform({
 	name: 'typography/unitless',
 	type: transformTypes.value,
 	filter: (token) => {
-		const unitlessDimensions = ['lineheight', 'font-weight', 'weight', 'letterspacing'];
+		const unitlessDimensions = ['line-height', 'font-weight', 'letter-spacing'];
 		return unitlessDimensions.some((i) => token.path.includes(i));
 	},
 	transform: (token) => {
@@ -262,7 +311,13 @@ StyleDictionary.registerTransform({
 	}
 });
 
-//Don't apply units to spacing when not needed
+//Don't apply units to spacing when not needed.
+// Keeps ALL dimension tokens as raw px in the resolved value, so the custom
+// formats (spacing, grid-spacing, flow, primitive-scale) can do their own /16
+// rem/em conversion. This matters for the shared primitive-spacing scale, which
+// semantic-flow / semantic-spacing / grid-spacing all REFERENCE - they divide
+// the resolved px by 16, so the primitive must stay px in the token graph and
+// be converted to rem only at emit time (see custom/primitive-scale).
 StyleDictionary.registerTransform({
 	name: 'spacing/unitless',
 	type: transformTypes.value,
@@ -273,18 +328,6 @@ StyleDictionary.registerTransform({
 		return token.original.value;
 	}
 });
-
-// //When generating the tokens for documentation transform the name to drop the mode and conform to semantic naming
-// StyleDictionary.registerTransform({
-// 	name: 'docsName',
-// 	type: transformTypes.name,
-// 	filter: (token) => {
-// 		return token.path[0] === 'mode';
-// 	},
-// 	transform: (token) => {
-// 		return transformString(token.name, 'color', /.*(mode-(dark|light))/);
-// 	}
-// });
 
 /*=========================================================
   CUSTOM FORMATS
@@ -318,9 +361,15 @@ StyleDictionary.registerFormat({
  * Custom format that generates tailwind spacing config based on css variables
  */
 
+/**
+ * Custom format that exposes the numbered spacing scale to Tailwind.
+ * The Tailwind key mirrors the native numeric scale ('4', '2.5', 'px') so it can
+ * drop in as theme.extend.spacing; the CSS var uses the CSS-safe emitted name
+ * ('--spacing-4', '---spacing-2-5', '---spacing-px').
+ */
 const formatTailwindSpacing = (token) => {
-	return `  "spacing-${token.attributes.type}": "var(--${token.name}, ${token.value / 16}rem)", 
-  "typography-spacing-${token.attributes.type}": "calc(${token.value / 16} * 1em)"`;
+	const key = String(token.attributes.type).replace(/^(\d+)-(\d+)$/, '$1.$2');
+	return `"${key}": "var(--${token.name}, ${token.value / 16}rem)"`;
 };
 
 StyleDictionary.registerFormat({
@@ -333,44 +382,119 @@ StyleDictionary.registerFormat({
 });
 
 /**
+ * Custom format that generates tailwind flow config based on css variables
+ */
+
+const formatTailwindFlow = (token) => {
+	return `  "flow-${token.attributes.type}": "var(--${token.name}, ${token.value / 16}rem)"`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'tw/css-flow-variables',
+	format({ dictionary }) {
+		return `module.exports = {
+        ${dictionary.allTokens.map(formatTailwindFlow).join(',\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format that generates tailwind gridSpacing config based on css variables
+ */
+
+const formatTailwindGridSpacing = (token) => {
+	return `  "${token.name}": "var(--${token.name}, ${token.value / 16}rem)"`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'tw/css-grid-spacing-variables',
+	format({ dictionary }) {
+		return `module.exports = {
+        ${dictionary.allTokens.map(formatTailwindGridSpacing).join(',\n')}
+      }`;
+	}
+});
+
+// If a token's authored value is an alias (e.g. font-weight -> a primitive),
+// emit it as var(--<primitive>, <resolved fallback>) so the semantic layer
+// REFERENCES the primitive rather than restating it - matching the colour
+// tokens. Returns the kebab primitive var name, or null for literals.
+// (Honours the platform's outputReferences intent for this custom format.)
+const referencedVarName = (token) => {
+	const authored = token.original && token.original.value;
+	if (typeof authored === 'string' && authored.trim().startsWith('{')) {
+		return authored.trim().replace(/[{}]/g, '').split('.').join('-');
+	}
+	return null;
+};
+
+/**
  * Custom format for typography
  */
 
 const formatTypography = (dictionary) => (token) => {
-	const isFontSize = token.path[0] === 'typography' && token.path.at(-1) === 'fontsize';
-	const isLineHeight = token.path[0] === 'typography' && token.path.at(-1) === 'lineheight';
+	// Token field names vary between the no-hyphen ('fontsize') and hyphenated ('font-size')
+	// naming conventions used across different breakpoints/sets in the tokens file.
+	const lastSegment = token.path.at(-1);
+	const isFontSize =
+		token.path[0] === 'typography' && (lastSegment === 'fontsize' || lastSegment === 'font-size');
+	const isLineHeight =
+		token.path[0] === 'typography' &&
+		(lastSegment === 'lineheight' || lastSegment === 'line-height');
+	const isReadableWidth = token.path[0] === 'typography' && lastSegment === 'readable-width';
 
-	const getNestedTokenValue = (path) => {
-		return (
-			path.reduce((obj, key) => (obj && obj[key] ? obj[key] : null), dictionary.tokens)?.original
-				.value || null
-		);
-	};
-
-	// Get the corresponding font size for a line-height token
+	// Get the corresponding font size for a line-height token, as a resolved
+	// px number. Uses the sibling token's final resolved `.value` (not
+	// `.original.value`), so it works whether the font-size is authored as a
+	// primitive reference OR a semantic→semantic alias (e.g. aliased chart
+	// roles referencing product) — parsing the primitive name out of
+	// `.original.value` broke as soon as a role aliased another semantic
+	// token instead of a primitive.
 	const getFontSizeForLineHeight = (token) => {
 		if (!isLineHeight) return null;
 
-		// Construct the correct font size path (replace 'lineheight' with 'fontsize')
-		const fontSizePath = [...token.path.slice(0, -1), 'fontsize'];
+		// Construct the correct font size path (matching the same naming convention as lastSegment)
+		const fontSizeKey = lastSegment === 'line-height' ? 'font-size' : 'fontsize';
+		const fontSizePath = [...token.path.slice(0, -1), fontSizeKey];
 
-		// Retrieve the font size token value
-		return getNestedTokenValue(fontSizePath);
+		const fontSizeToken = fontSizePath.reduce(
+			(obj, key) => (obj && obj[key] ? obj[key] : null),
+			dictionary.tokens
+		);
+		return fontSizeToken ? fontSizeToken.value : null;
 	};
 
 	const applyCSSVariable = (token) => {
 		if (isFontSize) {
-			return ` --${token.name}: ${token.original.value / 16}rem; /* ${token.original.value}px */`;
+			const ref = referencedVarName(token);
+			// Literal today; when a primitive font-size scale is authored and the
+			// role aliases it, `original.value` becomes a reference and this emits
+			// var(--primitive-typography-font-size-<px>, <rem>).
+			const px = typeof token.original.value === 'number' ? token.original.value : token.value;
+			const rem = px / 16;
+			return ref ? ` --${token.name}: var(--${ref}, ${rem}rem)` : ` --${token.name}: ${rem}rem`;
 		}
 
 		if (isLineHeight) {
-			const fontSize = getFontSizeForLineHeight(token);
-			const unitlessLineHeight = fontSize ? token.value / fontSize : token.value / 16;
-			return `  --${token.name}: ${unitlessLineHeight.toFixed(4)};`;
+			// Always computed unitless (ratio). Line-height is deliberately NOT a
+			// primitive reference: the emitted value is line-height/font-size, not a px alias.
+			const fontSizePx = getFontSizeForLineHeight(token);
+			const unitlessLineHeight = fontSizePx ? token.value / fontSizePx : token.value / 16;
+			return `  --${token.name}: ${unitlessLineHeight.toFixed(4)}`;
 		}
 
-		return ` --${token.name}: ${token.value}`;
+		if (isReadableWidth) {
+			return ` --${token.name}: ${token.original.value / 16}rem`;
+		}
+
+		// font-family, font-weight, letter-spacing, space-before: reference the
+		// primitive when authored as an alias (family, weight), else literal.
+		const ref = referencedVarName(token);
+		return ref
+			? ` --${token.name}: var(--${ref}, ${token.value})`
+			: ` --${token.name}: ${token.value}`;
 	};
+
 	return applyCSSVariable(token);
 };
 
@@ -378,7 +502,10 @@ StyleDictionary.registerFormat({
 	name: 'custom/typography',
 	format({ dictionary }) {
 		return `:root {
-		${dictionary.allTokens.map(formatTypography(dictionary)).join(';\n')}
+		${dictionary.allTokens
+			.filter((token) => token.path[0] !== 'primitive')
+			.map(formatTypography(dictionary))
+			.join(';\n')}
       }`;
 	}
 });
@@ -387,8 +514,8 @@ StyleDictionary.registerFormat({
  * Custom format for spacing
  */
 const formatSpacing = (token) => {
-	return ` --spacing-${token.attributes.type}: ${token.value / 16}rem; 
-  --typography-spacing-${token.attributes.type}: ${token.value / 16}em`;
+	const ref = referencedVarName(token);
+	return ` --${token.name}: var(--${ref}, ${token.value / 16}rem)`;
 };
 
 StyleDictionary.registerFormat({
@@ -396,6 +523,80 @@ StyleDictionary.registerFormat({
 	format({ dictionary }) {
 		return `:root {
         ${dictionary.allTokens.map(formatSpacing).join(';\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format for the dimension PRIMITIVE scales (spacing + font-size).
+ *
+ * These live in the token graph as raw px (see spacing/unitless) so that tokens
+ * which reference them resolve to px for their own /16 maths. Here - at emit
+ * time only - we convert px -> rem. token.name is already CSS-safe kebab
+ * (name/kebab maps the authored U+2024 in fractional keys to '-', e.g.
+ * '0.5' -> primitive-spacing-0-5, 'px' -> primitive-spacing-px), so we emit it
+ * verbatim. Produces e.g.:
+ *   --primitive-spacing-4: 1rem;
+ *   --primitive-typography-font-size-40: 2.5rem;
+ */
+const formatPrimitiveScale = (token) => ` --${token.name}: ${token.value / 16}rem;`;
+
+StyleDictionary.registerFormat({
+	name: 'custom/primitive-scale',
+	format({ dictionary }) {
+		return `:root {
+        ${dictionary.allTokens.map(formatPrimitiveScale).join('\n')}
+      }`;
+	}
+});
+
+/**
+ * Custom format for flow
+ *
+ * Flow tokens are keyed [context][step] (e.g. prose.tight, product.section) - a
+ * context class carrying a 4-step ramp, not one flat var per context. Group by
+ * context and key the var on the step, so tight/default/loose/section don't
+ * collapse onto a single `--flow-${context}` var (last-token-wins).
+ */
+const FLOW_STEP_ORDER = ['tight', 'default', 'loose', 'section'];
+
+const formatFlow = (dictionary) => {
+	const byContext = {};
+
+	dictionary.allTokens.forEach((token) => {
+		const [, context, step] = token.path;
+		byContext[context] = byContext[context] || {};
+		byContext[context][step] = `${token.value / 16}rem`;
+	});
+
+	return Object.keys(byContext)
+		.map((context) => {
+			const steps = byContext[context];
+			const vars = FLOW_STEP_ORDER.filter((step) => steps[step] !== undefined)
+				.map((step) => `--flow-${step}: ${steps[step]};`)
+				.join(' ');
+			return `.flow-${context} { ${vars} }`;
+		})
+		.join('\n');
+};
+
+StyleDictionary.registerFormat({
+	name: 'custom/flow',
+	format({ dictionary }) {
+		return formatFlow(dictionary);
+	}
+});
+
+/**
+ * Custom format for grid-spacing
+ */
+const formatGridSpacing = (token) => `--${token.name}: ${token.value / 16}rem`;
+
+StyleDictionary.registerFormat({
+	name: 'custom/grid-spacing',
+	format({ dictionary }) {
+		return `:root {
+        ${dictionary.allTokens.map(formatGridSpacing).join(';\n')}
       }`;
 	}
 });
@@ -566,6 +767,9 @@ console.log('\n==============================================');
 // APPLY THE CONFIGURATION
 // IMPORTANT: the registration of custom transforms
 // needs to be done _before_ applying the configuration
+// N.B. we supress warnings because warnings about
+// "filtered out token references were found;"
+// are expected due to how we split output across multiple files.
 const sd = new StyleDictionary('./sd.config.json', {
 	warnings: 'disabled'
 });

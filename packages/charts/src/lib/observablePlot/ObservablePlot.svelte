@@ -8,7 +8,7 @@
 	import type { Position } from './types.ts';
 
 	import { randomId } from '@ldn-viz/ui';
-	import { writable } from 'svelte/store';
+	import { writable, type Writable } from 'svelte/store';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
@@ -72,14 +72,14 @@
 		/**
 		 * Provides a way to access the DOM node into which the visualization is rendered.
 		 */
-		domNode?: any;
+		domNode?: HTMLDivElement;
 		/**
 		 * A store that stores details of the moused-over point.
 		 * Used for custom tooltips.
 		 */
-		tooltipStore?: any;
+		tooltipStore?: Writable<Position | undefined>;
 		/** A y-offset between data points and tooltips (pixels). */
-		tooltipOffset?: any;
+		tooltipOffset?: number;
 		/**
 		 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
 		 * so that default chart-level styling is not applied.
@@ -88,7 +88,7 @@
 		/**
 		 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
 		 */
-		id?: any;
+		id?: string;
 		/**
 		 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
 		 */
@@ -143,7 +143,7 @@
 	<ChartContainer
 		{data}
 		{title}
-		{subTitle}
+		subtitle={subTitle}
 		{alt}
 		{source}
 		{note}
@@ -154,7 +154,7 @@
 		{...rest}
 		chartHeight="h-fit"
 		{chartWidth}
-		{chartDescription}
+		description={chartDescription}
 		{columnMapping}
 		{id}
 	>
@@ -176,17 +176,17 @@
 				{@render tooltip_render?.()}
 			{/snippet}
 		</ObservablePlotInner>
-
-		{#snippet description()}
-			<p class="sr-only" id="{id}-description">
-				{chartDescription}
-			</p>
-		{/snippet}
 	</ChartContainer>
 {/key}
 
 <style>
 	:global(.defaultColorLegendLabel-swatch) {
-		font-size: 1rem;
+		font-size: var(--label-font-size);
+	}
+	:global(.defaultColorLegendLabel-ramp) {
+		font-size: var(--label-font-size);
+	}
+	:global(.defaultColorLegendLabel-ramp .tick) {
+		font-size: var(--tick-sm-font-size);
 	}
 </style>

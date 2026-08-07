@@ -11,13 +11,13 @@
 	import { classNames } from '../utils/classNames';
 
 	interface Props {
-		label: any;
+		label: string;
 		activeColorName?: string;
 		disabled?: boolean;
 		/**
 		 * Optional custom colours to choose from. If these don't exist, default to categoricalColors.
 		 */
-		colorNames: any;
+		colorNames: string[];
 		/**
 		 * If `true`, shows the color chip even when the control is disabled (but clicking on it does not open the control).
 		 */
@@ -95,7 +95,7 @@
 			Colour
 		{/snippet}
 
-		<span class="mb-2 inline-block text-xs">Click to assign a colour to this layer.</span>
+		<span class="caption mb-2 inline-block">Click to assign a colour to this layer.</span>
 
 		<div class="flex flex-wrap gap-0.5">
 			{#each colorNames as colorOption}

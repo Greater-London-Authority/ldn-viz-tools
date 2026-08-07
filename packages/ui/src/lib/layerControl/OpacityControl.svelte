@@ -9,7 +9,7 @@
 	import OpacityIcon from './OpacityIcon.svelte';
 
 	interface Props {
-		label: any;
+		label: string;
 		opacity?: number;
 		disabled?: boolean;
 	}

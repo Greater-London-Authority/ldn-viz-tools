@@ -5,6 +5,12 @@
 	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
 	import Tooltip from './Tooltip.svelte';
+	/**
+	 * The `Tooltip` component displays explanatory text next to a trigger element when the user hovers over (or focuses) it, built on top of the `bits-ui` `Tooltip` primitive.
+	 *
+	 * **Alternatives**: if the content needs to remain visible while the user interacts with it (e.g. to click a link), or should open when the trigger is clicked rather than hovered, use a [Popover](./?path=/docs/ui-components-overlays-popover--documentation) instead.
+	 * To display content in a dialog that overlays the rest of the page, use a [Modal](./?path=/docs/ui-components-overlays-modal--documentation) instead.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Tooltip',
