@@ -4,6 +4,21 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from './Button.svelte';
 	import type { ButtonProps } from './types.js';
+	/**
+	 * The `Button` component is a general-purpose interactive button, supporting a range of style `variant`s, `emphasis` colours and `size`s.
+	 * If an `href` is provided, it renders as a link (`<a>`) styled as a button, rather than a `<button>` element.
+	 *
+	 * **Alternatives**: there are several more specialized buttons, which have specific functionality
+	 * ([AsyncButton](./?path=/docs/ui-components-buttons-asyncbutton--documentation),
+	 * [CopyButton](./?path=/docs/ui-components-buttons-copybutton--documentation),
+	 * [DataDownloadButton](./?path=/docs/ui-components-buttons-datadownloadbutton--documentation),
+	 * [ImageDownloadButton](./?path=/docs/ui-components-buttons-imagedownloadbutton--documentation)),
+	 * the ability to trigger one of several different actions
+	 * ([MultipleActionButton](./?path=/docs/ui-components-buttons-multipleactionbutton--documentation)),
+	 * or which can display multiple lines of description as a call-to-action
+	 * ([PlacardButton](./?path=/docs/ui-components-buttons-placardbutton--documentation)).
+	 *
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/Button',
@@ -77,7 +92,7 @@
 				<Icon src={ArrowDownCircle} theme="solid" class="h-6 w-6" aria-hidden="true" />
 			</Button>
 			<Button {...args} variant="square" title="Down" size="lg">
-				<Icon src={ArrowDownCircle} theme="solid" class="h-8 w-8" aria-hidden="true" />
+				<Icon src={ArrowDownCircle} theme="solid" class="mb-0.5 h-8 w-8" aria-hidden="true" />
 				Down
 			</Button>
 		</div>

@@ -81,7 +81,7 @@
 				y: 'Average',
 				stroke: 'Variable',
 				strokeWidth: 2,
-				fill: theme.tokenNameToValue('chart.background'),
+				fill: theme.tokenNameToValue('chart.surface'),
 				fillOpacity: 1
 			}),
 			d3

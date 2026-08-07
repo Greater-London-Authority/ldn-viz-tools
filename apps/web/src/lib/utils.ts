@@ -1,11 +1,11 @@
-import { dataVizGuide, docs, index, type Doc, type Guide } from '$content/index';
+import { docs, index, type Doc } from '$content/index';
 import { error } from '@sveltejs/kit';
 import type { Component } from 'svelte';
 import type { Attachment } from 'svelte/attachments';
 
-const allContent = [...dataVizGuide, ...docs, index];
+const allContent = [...docs, index];
 
-export type ContentResolver = () => Promise<{ default: Component; metadata: Doc | Guide }>;
+export type ContentResolver = () => Promise<{ default: Component; metadata: Doc }>;
 
 export const generateMetadata = (slug: string = 'index') => {
 	return allContent.find((data) => data.slug === slug);

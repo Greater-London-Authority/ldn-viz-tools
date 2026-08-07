@@ -20,8 +20,8 @@ describe('getSetting (default tailwind breakpoints)', () => {
 	});
 
 	it('matches exactly at a breakpoint boundary', () => {
-		expect(getSetting(settings, 640)).toBe('s'); // exactly sm
 		expect(getSetting(settings, 639)).toBe('i'); // one below sm
+		expect(getSetting(settings, 640)).toBe('s'); // exactly sm
 		expect(getSetting(settings, 768)).toBe('m'); // exactly md
 	});
 

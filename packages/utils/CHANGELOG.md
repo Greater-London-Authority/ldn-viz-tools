@@ -1,5 +1,16 @@
 # @ldn-viz/utils
 
+## 4.0.0
+
+### Major Changes
+
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Patch Changes
+
+- Updated dependencies [e1e3928]
+  - @ldn-viz/themes@9.0.0
+
 ## 3.0.0
 
 ### Major Changes

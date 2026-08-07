@@ -27,34 +27,34 @@ thumbnail: cta-foundations-4.svg
     const typographyExamplesProduct = [
         {text: 'Headline', usage: "To create immediate impact and guide the reader's eye.", class: 'headline'},
         {text: 'Subhead', usage: 'To immediately follow a headline and provide further clarification', class: 'subhead'},
-        {text: 'Title large', usage: 'To provide waymarkers, define hierarchy and impart information throughout an application', class: 'title-lg'},
-        {text: 'Title medium', usage: '', class: 'title-md'},
-        {text: 'Title small', usage: '', class: 'title-sm'},
-        {text: 'Title extra small', usage: '', class: 'title-xs'},
+        {text: 'Title large', usage: 'To provide waymarkers, define hierarchy and impart information throughout an application', class: 'title-1'},
+        {text: 'Title medium', usage: '', class: 'title-2'},
+        {text: 'Title small', usage: '', class: 'title-3'},
+        {text: 'Title extra small', usage: '', class: 'title-4'},
         {text: 'Subtitle', usage: 'To immediately follow a title element and provide further clarification (medium or large title only)', class: 'subtitle'},
-        {text: 'Body large', usage: '', class: 'body-lg'},
-        {text: 'Body medium', usage: 'Passages of copy and bodies of text', class: 'body-md'},
+        {text: 'Body large', usage: '', class: 'lead'},
+        {text: 'Body medium', usage: 'Passages of copy and bodies of text', class: 'body'},
         {text: 'Body small', usage: '', class: 'body-sm'},
-        {text: 'Body extra small', usage: '', class: 'body-xs'},
-        {text: 'Label large', usage: 'Used for single-line scenarios, and labelling discrete elements of the ui', class: 'label-lg'},
-        {text: 'Label medium', usage: '', class: 'label-md'},
+        {text: 'Body extra small', usage: '', class: 'caption'},
+        {text: 'Label large', usage: 'Used for single-line scenarios, and labelling discrete elements of the ui', class: 'label'},
+        {text: 'Label medium', usage: '', class: 'label'},
         {text: 'Label small', usage: '', class: 'label-sm'},
-        {text: 'Label extra small', usage: '', class: 'label-xs'},
+        {text: 'Label extra small', usage: '', class: 'label-sm'},
         ]
 
     const typographyExamplesProse = [
         {text: 'Display', usage: 'Large, impactful text for grabbing attention.', class: 'display'},
         {text: 'Headline', usage: "To create immediate impact and guide the reader's eye.", class: 'headline'},
         {text: 'Subhead', usage: 'To immediately follow a headline and provide further clarification', class: 'subhead'},
-        {text: 'Title large', usage: '', class: 'title-lg'},
-        {text: 'Title medium', usage: '', class: 'title-md'},
-        {text: 'Title small', usage: '', class: 'title-sm'},
-        {text: 'Title extra small', usage: '', class: 'title-xs'},
+        {text: 'Title large', usage: '', class: 'title-1'},
+        {text: 'Title medium', usage: '', class: 'title-2'},
+        {text: 'Title small', usage: '', class: 'title-3'},
+        {text: 'Title extra small', usage: '', class: 'title-4'},
         {text: 'Subtitle', usage: 'To immediately follow a title element and provide further clarification (medium or large title only)', class: 'subtitle'},
-        {text: 'Body large', usage: '', class: 'body-lg'},
-        {text: 'Body medium', usage: 'Passages of copy and bodies of text', class: 'body-md'},
+        {text: 'Body large', usage: '', class: 'lead'},
+        {text: 'Body medium', usage: 'Passages of copy and bodies of text', class: 'body'},
         {text: 'Body small', usage: '', class: 'body-sm'},
-        {text: 'Body extra small', usage: '', class: 'body-xs'},
+        {text: 'Body extra small', usage: '', class: 'caption'},
         {text: 'Caption', usage: '', class: 'caption'}
         ]
 </script>
@@ -134,7 +134,7 @@ Within the **Body**, **Title**, and **Label** type roles, there are further size
 
 #### Product type set:
 
-<div class="not-prose my-8 product responsive">
+<div class="not-prose my-8 product">
     <TypographyTable items={typographyExamplesProduct} />
 </div>
 
@@ -208,7 +208,7 @@ A <code>responsive</code> class can be added to the type-set defining class in o
 <div class="not-prose">
 
 ```html
-<div class="prose responsive">...</div>
+<div class="prose">...</div>
 ```
 
 </div>
@@ -218,7 +218,7 @@ The <code>prose</code> class provides a semantic typographic context. Elements i
 <div class="not-prose">
 
 ```html
-<div class="prose responsive">
+<div class="prose">
 	<h2>Title Large</h2>
 	<p>Body copy</p>
 	<h2 class="not-prose">context escaped</h2>
@@ -227,7 +227,7 @@ The <code>prose</code> class provides a semantic typographic context. Elements i
 
 </div>
 
-<div class="prose responsive border border-muted p-4 my-4">
+<div class="prose border border-muted p-4 my-4">
 	<h2>Title Large</h2>
 	<p>Body copy</p>
 	<h2 class="not-prose">context escaped</h2>
@@ -238,33 +238,33 @@ The <code>product</code> class does not apply semantic styles. Elements inside a
 <div class="not-prose">
 
 ```html
-<div class="product responsive">
+<div class="product">
 	<h2>Title Large?</h2>
-	<p class="body-md">Body copy</p>
-	<h2 class="title-lg">Title Large</h2>
+	<p class="body">Body copy</p>
+	<h2 class="title-1">Title Large</h2>
 </div>
 ```
 
 </div>
 
-<div class="not-prose product responsive border border-muted p-4 my-4">
+<div class="not-prose product border border-muted p-4 my-4">
 	<h2>Title Large?</h2>
-	<p class="body-md">Body copy</p>
-	<h2 class="title-lg">Title Large</h2>
+	<p class="body">Body copy</p>
+	<h2 class="title-1">Title Large</h2>
 </div>
 
 In either context css classes still work. When working with the svelte components from `@ldn-viz/ui` where tailwind utility classes are available ie. `font-bold` these can be applied to modify the style:
 
 ```html
-<div class="product responsive">
-	<p class="body-md font-bold">Body copy</p>
-	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
+<div class="product">
+	<p class="body font-bold">Body copy</p>
+	<h2 class="title-1 text-color-surface-negative">Title Large</h2>
 </div>
 ```
 
-<div class="not-prose product responsive border border-muted p-4 my-4">
-	<p class="body-md font-bold">Body copy</p>
-	<h2 class="title-lg text-color-surface-negative">Title Large</h2>
+<div class="not-prose product border border-muted p-4 my-4">
+	<p class="body font-bold">Body copy</p>
+	<h2 class="title-1 text-color-surface-negative">Title Large</h2>
 </div>
 
 ### Titling pairs
@@ -274,8 +274,8 @@ The type sets contain elements designed to work together such as <code>.headline
 <div class="not-prose">
 
 ```html
-<div class="prose responsive">
-	<h2 class="title-lg format">Title</h2>
+<div class="prose">
+	<h2 class="title-1">Title</h2>
 	<p class="subtitle">Subtitle</p>
 </div>
 ```
@@ -283,7 +283,7 @@ The type sets contain elements designed to work together such as <code>.headline
 </div>
 
 <div class="border border-muted p-4 my-4">
-    <h2 class="title-lg format">Title</h2>
+    <h2 class="title-1">Title</h2>
     <p class="subtitle">Subtitle</p>
 </div>
 
@@ -294,7 +294,7 @@ Because of the semantic context it creates you may wish to escape the <code>.pro
 <div class="not-prose">
 
 ```html
-<div class="prose responsive">
+<div class="prose">
 	<h3>Title</h3>
 	<div class="not-prose">
 		<h3>I have escaped</h3>

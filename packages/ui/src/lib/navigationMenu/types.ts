@@ -42,7 +42,7 @@ export interface NavigationMenuItemProps {
 	/**
 	 * Value set as the `id` attribute of the `<a>` or `<div>` element. Should be in the array of `items` but defaults to randomly generated value in case not.
 	 */
-	id?: any;
+	id?: string;
 	/**
 	 * URL to navigate to when link is clicked.
 	 */
@@ -63,7 +63,7 @@ export interface NavigationMenuItemProps {
 	/**
 	 * Event handler to handle what happens when links are clicked.
 	 */
-	onChange?: any;
+	onChange?: (id: string) => void;
 
 	/**
 	 * Id of the curently active item.

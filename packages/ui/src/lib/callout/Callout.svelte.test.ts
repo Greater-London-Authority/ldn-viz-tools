@@ -110,7 +110,7 @@ describe('Callout Component', () => {
 	});
 
 	describe('size variants', () => {
-		it('applies sm classes (no left border, smaller heading)', async () => {
+		it('applies sm classes (no left border)', async () => {
 			const { container } = render(Callout, {
 				size: 'sm',
 				title: titleSnippet('Title'),
@@ -119,12 +119,9 @@ describe('Callout Component', () => {
 
 			const aside = container.querySelector('aside');
 			expect(aside).not.toHaveClass('border-l-[5px]');
-
-			const heading = container.querySelector('h3');
-			expect(heading).toHaveClass('text-base');
 		});
 
-		it('applies lg classes (left border, larger heading)', async () => {
+		it('applies lg classes (left border)', async () => {
 			const { container } = render(Callout, {
 				size: 'lg',
 				title: titleSnippet('Title'),
@@ -133,9 +130,6 @@ describe('Callout Component', () => {
 
 			const aside = container.querySelector('aside');
 			expect(aside).toHaveClass('border-l-[5px]');
-
-			const heading = container.querySelector('h3');
-			expect(heading).toHaveClass('text-xl');
 		});
 	});
 

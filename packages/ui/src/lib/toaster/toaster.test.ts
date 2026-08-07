@@ -96,14 +96,11 @@ describe('toaster', () => {
 		it('does not auto-remove when timeToLive is zero or negative', () => {
 			const msg = newToastMessage('Hello', { id: 'a', timeToLive: 0 });
 			msg.post();
-
 			vi.advanceTimersByTime(60_000);
-
-			// timeToLive of 0 is falsy, so the DEFAULT_TIME_TO_LIVE (5000) applies.
-			// This test documents that a persistent toast requires a negative value.
-			expect(get(messages)).toHaveLength(0);
+			expect(get(messages)).toHaveLength(1);
 
 			messages.set([]);
+
 			const persistent = newToastMessage('Stay', { id: 'b', timeToLive: -1 });
 			persistent.post();
 			vi.advanceTimersByTime(60_000);

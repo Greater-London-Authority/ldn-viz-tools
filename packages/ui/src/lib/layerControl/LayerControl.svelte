@@ -97,7 +97,7 @@
 		/**
 		 * Id of this option.
 		 */
-		optionId?: any;
+		optionId?: string;
 		/**
 		 * Name of the radio/checkbox button group. If `mutuallyExclusive` is true,
 		 * this is required (should have the same value for all radio buttons in group).

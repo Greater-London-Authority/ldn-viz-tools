@@ -1,5 +1,5 @@
 import tokens from '@ldn-viz/themes/styles/js/color-tokens.js';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { theme } from './themeState.svelte';
 
 // themeState uses Svelte runes and mode-watcher, so this runs in the browser
@@ -26,11 +26,7 @@ describe('theme (ThemeState)', () => {
 		});
 	});
 
-	it('throws for an unknown top-level token name (documents current behaviour)', () => {
-		// Unknown names have no matching key and no `default` fallback, so the
-		// lookup currently throws rather than returning a sentinel.
-		const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-		expect(() => theme.tokenNameToValue('definitely-not-a-token', lightTheme)).toThrow();
-		errorSpy.mockRestore();
+	it('returns undefined for an unknown top-level token name', () => {
+		expect(theme.tokenNameToValue('definitely-not-a-token', lightTheme)).toBeUndefined();
 	});
 });
