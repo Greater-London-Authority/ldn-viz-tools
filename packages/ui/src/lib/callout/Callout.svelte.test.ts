@@ -4,11 +4,6 @@ import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import Callout from './Callout.svelte';
 
-// Note: unlike NonIdealState, Callout.svelte does not render an icon at all -
-// it only ever shows a title (in an <h3>), a body, and an optional `more`
-// snippet, styled by `status` and `size`. So "renders icon per variant" from
-// SUGGESTED_TESTS.md does not apply here; there is no icon prop/slot.
-
 const titleSnippet = (text: string) =>
 	createRawSnippet(() => ({
 		render: () => `<span>${text}</span>`,

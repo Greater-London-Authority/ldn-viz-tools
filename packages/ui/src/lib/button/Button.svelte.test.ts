@@ -144,11 +144,4 @@ describe('Button Component', () => {
 
 		await expect.element(page.getByRole('button')).toHaveAttribute('type', 'button');
 	});
-
-	// Note: `Button.svelte` (per its `types.ts`) does not expose `beforeLabel` /
-	// `afterLabel` snippet props - those only exist on `MultipleActionButton`,
-	// which composes `Button` internally. `Button` itself only accepts a single
-	// `children` snippet, so the "beforeLabel / afterLabel render in the right
-	// position" bullet from SUGGESTED_TESTS.md is covered instead by
-	// MultipleActionButton's own test suite.
 });

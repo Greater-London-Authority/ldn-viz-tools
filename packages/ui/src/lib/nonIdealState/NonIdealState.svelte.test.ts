@@ -4,11 +4,6 @@ import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import NonIdealState from './NonIdealState.svelte';
 
-// NonIdealState does not have a `variant` prop / status colour scheme like
-// Callout; instead it toggles between an icon and a spinner (`spinner` prop),
-// and each of icon/title/children can be overridden via snippets. These tests
-// cover the default icon+title, custom icon/title, spinner mode, and children.
-
 describe('NonIdealState Component', () => {
 	it('renders the default icon and default title when nothing is customised', async () => {
 		const { container } = render(NonIdealState, {});
