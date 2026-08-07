@@ -1,5 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as ObservablePlot from '@observablehq/plot';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { defaultSize, defaultSizeFacet } from './observablePlotFragments';
 
 vi.mock('@ldn-viz/ui', () => ({
 	theme: {
@@ -64,19 +65,21 @@ describe('plot()', () => {
 	it('uses defaultSize when none of fx/fy/facet are set', () => {
 		const spec = buildSpec({});
 
-		expect(spec.height).toBe(440);
-		expect(spec.marginLeft).toBe(0);
-		expect(spec.marginRight).toBe(8);
-		expect(spec.marginTop).toBe(24);
-		expect(spec.marginBottom).toBe(52);
+		expect(spec.height).toBe(defaultSize.height);
+		expect(spec.marginLeft).toBe(defaultSize.marginLeft);
+		expect(spec.marginRight).toBe(defaultSize.marginRight);
+		expect(spec.marginTop).toBe(defaultSize.marginTop);
+		expect(spec.marginBottom).toBe(defaultSize.marginBottom);
 	});
 
 	it.each(['fx', 'fy', 'facet'])('uses defaultSizeFacet when options.%s is set', (key) => {
 		const spec = buildSpec({ [key]: {} });
 
-		expect(spec.height).toBe(660);
-		expect(spec.marginRight).toBe(96);
-		expect(spec.marginTop).toBe(40);
+		expect(spec.height).toBe(defaultSizeFacet.height);
+		expect(spec.marginLeft).toBe(defaultSizeFacet.marginLeft);
+		expect(spec.marginRight).toBe(defaultSizeFacet.marginRight);
+		expect(spec.marginTop).toBe(defaultSizeFacet.marginTop);
+		expect(spec.marginBottom).toBe(defaultSizeFacet.marginBottom);
 	});
 
 	it('lets explicit height/margins override the defaults, including an explicit 0', () => {
