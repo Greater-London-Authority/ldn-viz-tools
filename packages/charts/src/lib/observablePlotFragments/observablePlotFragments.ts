@@ -42,10 +42,10 @@ const defaultStyle = () => ({
 	color: theme.tokenNameToValue('chart.label'),
 	fontSize: '0.875rem',
 	fontFamily: fontStack,
-	background: theme.tokenNameToValue('chart.background')
+	background: theme.tokenNameToValue('chart.surface')
 });
 
-const defaultSize = {
+export const defaultSize = {
 	height: 440, // opinionated approx half of full page width. 2:1 ratio
 	marginLeft: 0,
 	marginRight: 8,
@@ -53,7 +53,7 @@ const defaultSize = {
 	marginBottom: 52
 };
 
-const defaultSizeFacet = {
+export const defaultSizeFacet = {
 	height: 660, // opinionated normal chart height * 1.5 for additional fy height & spacing
 	marginLeft: 0,
 	marginBottom: 52,
@@ -135,7 +135,7 @@ const defaultDot = () => ({
 const defaultPoint = () => ({
 	// larger data point mark, for highlighting a point on line etc.
 	stroke: theme.tokenNameToValue('data.primary'),
-	fill: theme.tokenNameToValue('chart.background'),
+	fill: theme.tokenNameToValue('chart.surface'),
 	strokeWidth: 2,
 	r: 4
 });
@@ -153,7 +153,7 @@ const defaultRule = () => ({
 
 const defaultTip = () => ({
 	stroke: theme.tokenNameToValue('border.muted'),
-	fill: theme.tokenNameToValue('chart.background'),
+	fill: theme.tokenNameToValue('chart.surface'),
 	fillOpacity: 1,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -163,7 +163,7 @@ const defaultTip = () => ({
 
 const defaultAnnotationTip = () => ({
 	stroke: theme.tokenNameToValue('border.muted'),
-	fill: theme.tokenNameToValue('chart.background'),
+	fill: theme.tokenNameToValue('chart.surface'),
 	fillOpacity: 0.8,
 	strokeOpacity: 1,
 	fontSize: 14,
@@ -187,12 +187,12 @@ const defaultAnnotationRange = () => ({
 
 const defaultBar = () => ({
 	fill: theme.tokenNameToValue('data.primary'),
-	stroke: theme.tokenNameToValue('chart.background')
+	stroke: theme.tokenNameToValue('chart.surface')
 });
 
 const defaultRect = () => ({
 	fill: theme.tokenNameToValue('data.primary'),
-	stroke: theme.tokenNameToValue('chart.background')
+	stroke: theme.tokenNameToValue('chart.surface')
 });
 
 /**

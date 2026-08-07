@@ -55,7 +55,7 @@
 	const swatchWidth = 30;
 
 	interface Props {
-		label: any;
+		label: string;
 		disabled?: boolean;
 		fillType?: string;
 	}
@@ -86,7 +86,7 @@
 			Fill type
 		{/snippet}
 
-		<span class="mb-2 inline-block text-xs">Click to assign a fill type to this layer.</span>
+		<span class="caption mb-2 inline-block">Click to assign a fill type to this layer.</span>
 
 		<div class="flex flex-col gap-2">
 			<div class="flex flex-wrap gap-0.5">

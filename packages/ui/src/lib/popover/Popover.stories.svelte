@@ -4,6 +4,13 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 	import Popover from './Popover.svelte';
+	/**
+	 * The `Popover` component displays additional content in an overlay anchored to a trigger element, opened by clicking the trigger, built on top of the `bits-ui` `Popover` primitive.
+	 * It supports an optional `title` and includes a close button.
+	 *
+	 * **Alternatives**: for short hint text that only needs to appear whilst the trigger is being hovered over, use a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation) instead.
+	 * To display content in a dialog that overlays the rest of the page, use a [Modal](./?path=/docs/ui-components-overlays-modal--documentation) instead
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Popover',

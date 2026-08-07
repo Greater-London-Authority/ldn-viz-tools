@@ -2,7 +2,7 @@
 	import {
 		SidebarLeftContext,
 		SidebarLeftOpenContext
-	} from '../../../../../../../apps/docs/src/lib';
+	} from '../../../../../../../apps/storybook/src/lib';
 
 	import { AdjustmentsHorizontal } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

@@ -25,17 +25,17 @@
 		/**
 		 * Function to be called when user clicks 'Done' button.
 		 */
-		onDone?: (_args: any) => any;
+		onDone?: (_features: GeoJSONStoreFeatures[]) => void;
 
 		/**
 		 * Function to be called when user clicks 'Edit' button.
 		 */
-		onStart?: () => any;
+		onStart?: () => void;
 
 		/**
 		 * Function to be called when user clicks 'Cancel' button.
 		 */
-		onCancel?: () => any;
+		onCancel?: () => void;
 
 		/**
 		 * If [true, false], then Geojson upload only is enabled.

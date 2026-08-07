@@ -32,7 +32,7 @@ It uses:
 
 ### Developing with Storybook
 
-There is a single storybook instance in apps/docs. Once installed run `npm run storybook -w apps/docs` from the repo root. This storybook instance draws stories from each of the packages - with a separate section for each.
+There is a single storybook instance in apps/storybook. Once installed run `npm run storybook -w apps/storybook` from the repo root. This storybook instance draws stories from each of the packages - with a separate section for each.
 
 Each package is structured so that components live next to their stories (and tests etc)
 
@@ -46,7 +46,7 @@ lib/
 
 Storybook needs to be restarted when adding a new story to allow it to index the new file.
 
-You can preview the storybook by running `npm run storybook -w apps/docs`.
+You can preview the storybook by running `npm run storybook -w apps/storybook`.
 
 #### Step-by-step Set Up
 

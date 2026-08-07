@@ -17,6 +17,11 @@
 					}
 				},
 				{
+					"destination": "primitive-scale.css",
+					"format": "custom/primitive-scale",
+					"filter": "cssPrimitiveScaleFilter"
+				},
+				{
 					"destination": "light.css",
 					"format": "css/variables",
 					"filter": "cssLightModeFilter",
@@ -39,12 +44,32 @@
 				{
 					"destination": "spacing.css",
 					"format": "custom/spacing",
-					"filter": "cssSpacingFilter"
+					"filter": "cssSpacingFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
+				},
+				{
+					"destination": "grid-spacing.css",
+					"format": "custom/grid-spacing",
+					"filter": "cssGridSpacingFilter"
+				},
+				{
+					"destination": "flow.css",
+					"format": "custom/flow",
+					"filter": "cssFlowFilter"
 				},
 				{
 					"destination": "typography.css",
 					"format": "custom/typography",
-					"filter": "cssTypographyFilter"
+					"filter": "cssTypographyFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
 				},
 				{
 					"destination": "shadows.css",
@@ -67,6 +92,16 @@
 					"destination": "tw-extend/spacing.cjs",
 					"format": "tw/css-spacing-variables",
 					"filter": "twSpacingFilter"
+				},
+				{
+					"destination": "tw-extend/gridspacing.cjs",
+					"format": "tw/css-grid-spacing-variables",
+					"filter": "twGridSpacingFilter"
+				},
+				{
+					"destination": "tw-extend/flow.cjs",
+					"format": "tw/css-flow-variables",
+					"filter": "twFlowFilter"
 				}
 			]
 		},

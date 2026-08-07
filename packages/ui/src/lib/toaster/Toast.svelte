@@ -27,9 +27,14 @@
 	let classes = $derived(typeClasses[message.type] ?? 'bg-color-surface-neutral-muted');
 </script>
 
-<div role="alert" id={message.id} class="text-color-text shadow-lg" out:fade={{ duration: 100 }}>
+<div
+	role="alert"
+	id={message.id}
+	class="product text-color-text shadow-lg"
+	out:fade={{ duration: 100 }}
+>
 	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
-		<div class="mb-1 flex items-center justify-between text-lg font-bold">
+		<div class="title mb-1 flex items-center justify-between">
 			{message.type}
 			{#if message.closeButton}
 				<Button
@@ -43,7 +48,7 @@
 				</Button>
 			{/if}
 		</div>
-		<div class="pr-2 text-sm">{message.text}</div>
+		<div class="body-sm pr-2">{message.text}</div>
 	</div>
 </div>
 

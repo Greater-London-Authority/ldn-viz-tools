@@ -166,6 +166,17 @@
 	{/snippet}
 </Story>
 
+<Story name="No options">
+	{#snippet template(args)}
+		<MultipleActionButton
+			{...args}
+			options={[]}
+			menuTitle="Select image format"
+			onClick={handleClick}
+		/>
+	{/snippet}
+</Story>
+
 <Story name="Outline variant">
 	{#snippet template(args)}
 		<MultipleActionButton

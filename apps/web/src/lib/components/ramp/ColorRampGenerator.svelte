@@ -136,7 +136,7 @@
 </script>
 
 <div class="pb-4">
-	<h3 class="title-sm mb-typography-spacing-xs">{title}</h3>
+	<h3 class="title-3 mb-2">{title}</h3>
 
 	<div>
 		<div class="float-left w-40 pb-4 pr-2">
@@ -197,7 +197,7 @@
 
 	<!-- <div>
 		<div class="right-0 float-right flex items-center pt-4">
-			<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
+			<span class="label-sm mr-2 text-color-label-muted">Mode</span>
 			<ThemeSwitcher size="xs" />
 		</div>
 	</div>
@@ -225,7 +225,7 @@
 
 		<div class="flex-1 pt-4 text-right">
 			<div class="float-right flex items-center pt-1">
-				<span class="label-xs responsive mr-2 text-color-label-muted">Mode</span>
+				<span class="label-sm mr-2 text-color-label-muted">Mode</span>
 				<ThemeSwitcher size="xs" />
 			</div>
 		</div>

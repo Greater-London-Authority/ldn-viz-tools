@@ -4,6 +4,12 @@
 	import Button from '../button/Button.svelte';
 	import Trigger from '../overlay/Trigger.svelte';
 	import Modal from './Modal.svelte';
+	/**
+	 * The `Modal` component displays content in a dialog that overlays the rest of the page, built on top of the `bits-ui` `Dialog` primitive.
+	 * It supports a `title`, `description` and `buttons` snippet, and can be opened by a custom `trigger` snippet or the default [Trigger](./?path=/docs/ui-components-overlays-overlay--documentation) button.
+	 *
+	 * **Alternatives**: for less disruptive explanatory content, consider a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation) or [Popover](./?path=/docs/ui-components-overlays-popover--documentation) instead, or use the [Overlay](./?path=/docs/ui-components-overlays-overlay--documentation) component to choose between them.
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Overlays/Modal',
