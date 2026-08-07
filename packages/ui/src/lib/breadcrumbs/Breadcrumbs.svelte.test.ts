@@ -3,13 +3,6 @@ import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import Breadcrumbs from './Breadcrumbs.svelte';
 
-// Discrepancy from SUGGESTED_TESTS.md: Breadcrumbs.svelte does NOT set
-// `aria-current="page"` on the last crumb. Instead, the last crumb is
-// rendered as a plain `<span>` (not a link at all), styled with
-// `text-color-interactive-primary`, while every other crumb is rendered as an
-// `<a>` followed by a literal "/" separator (`&sol;&nbsp;`). Tests below
-// assert on the actual markup rather than an aria-current attribute.
-
 const breadcrumbs = [
 	{ label: 'Home', href: '/' },
 	{ label: 'Foo', href: '/foo' },

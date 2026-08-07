@@ -2,22 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import LoadingIndicator from './LoadingIndicator.svelte';
 
-// Discrepancy from SUGGESTED_TESTS.md: LoadingIndicator.svelte itself does
-// NOT set `role="status"` or `aria-busy`. Those attributes are added by
-// *consumers* of LoadingIndicator (e.g. the wrapping <div> in AsyncButton.svelte,
-// already covered by AsyncButton.svelte.test.ts) - LoadingIndicator only
-// forwards a `title` (used for the accessible name, via an inner <title>
-// element) and a `class` prop, and renders <Spinner> (or a static clock icon
-// under prefers-reduced-motion). These tests assert on what the component
-// itself actually renders.
-//
-// Note: the prefers-reduced-motion branch (which swaps <Spinner> for a static
-// clock <Icon>) is not exercised here, since `prefersReducedMotion` is a
-// module-level `MediaQuery` singleton read from the real browser at import
-// time, and the default Playwright/Chromium context used by these tests has
-// no reduced-motion preference - there's no supported way to flip it for a
-// single test in this suite.
-
 describe('LoadingIndicator Component', () => {
 	it('renders a Spinner svg by default, with a default accessible title of "Loading"', async () => {
 		const { container } = render(LoadingIndicator, { class: 'h-10 w-10' });

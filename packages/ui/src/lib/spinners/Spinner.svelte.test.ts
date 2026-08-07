@@ -2,16 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import Spinner from './Spinner.svelte';
 
-// Discrepancy from SUGGESTED_TESTS.md: Spinner.svelte does not itself set
-// `role="status"` or `aria-busy` - it accepts arbitrary rest props (`[key:
-// string]: any`) spread onto the root <svg>, so a consumer *could* pass those
-// attributes through, but nothing in Spinner.svelte sets them by default.
-// (AsyncButton.svelte.test.ts already covers the `role="status"`/`aria-busy`
-// behaviour, which is added by AsyncButton's own wrapping <div>.) These tests
-// instead cover what Spinner actually renders: an animated svg arc, with
-// configurable colours via `circleColorClass`/`arcColorClass`, an optional
-// accessible `title`, and forwarding of arbitrary rest attributes.
-
 describe('Spinner Component', () => {
 	it('renders an animated svg with a circle and an arc path', async () => {
 		const { container } = render(Spinner, {});
