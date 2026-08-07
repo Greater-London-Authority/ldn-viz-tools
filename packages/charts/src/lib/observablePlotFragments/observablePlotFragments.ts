@@ -45,7 +45,7 @@ const defaultStyle = () => ({
 	background: theme.tokenNameToValue('chart.surface')
 });
 
-const defaultSize = {
+export const defaultSize = {
 	height: 440, // opinionated approx half of full page width. 2:1 ratio
 	marginLeft: 0,
 	marginRight: 8,
@@ -53,7 +53,7 @@ const defaultSize = {
 	marginBottom: 52
 };
 
-const defaultSizeFacet = {
+export const defaultSizeFacet = {
 	height: 660, // opinionated normal chart height * 1.5 for additional fy height & spacing
 	marginLeft: 0,
 	marginBottom: 52,
