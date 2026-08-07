@@ -37,9 +37,7 @@ describe('ChromeHeader', () => {
 	it('renders no hint trigger when hint is unset', async () => {
 		render(ChromeHeader, { title: 'Chart title' });
 
-		await expect(
-			page.getByRole('button', { name: 'More information' }).query()
-		).toBeNull();
+		await expect(page.getByRole('button', { name: 'More information' }).query()).toBeNull();
 	});
 
 	it('renders a hint trigger that opens a tooltip with the hint text by default', async () => {
@@ -75,16 +73,14 @@ describe('ChromeHeader', () => {
 		await expect.element(page.getByText('About this chart')).toBeInTheDocument();
 	});
 
-	it('uses hintLabel for the trigger\'s accessible name instead of the default', async () => {
+	it("uses hintLabel for the trigger's accessible name instead of the default", async () => {
 		render(ChromeHeader, {
 			title: 'Chart title',
 			hint: 'Helpful context',
 			hintLabel: 'Learn more'
 		});
 
-		await expect
-			.element(page.getByRole('button', { name: 'Learn more' }))
-			.toBeInTheDocument();
+		await expect.element(page.getByRole('button', { name: 'Learn more' })).toBeInTheDocument();
 	});
 
 	it('renders a hint snippet as-is instead of an Overlay trigger, when hint is a snippet', async () => {
@@ -99,9 +95,7 @@ describe('ChromeHeader', () => {
 		});
 
 		expect(container.textContent).toContain('CUSTOM_HINT_MARKER');
-		await expect(
-			page.getByRole('button', { name: 'More information' }).query()
-		).toBeNull();
+		await expect(page.getByRole('button', { name: 'More information' }).query()).toBeNull();
 	});
 
 	it('renders the header when only a hint is provided, with no title/subtitle/eyebrow', async () => {
