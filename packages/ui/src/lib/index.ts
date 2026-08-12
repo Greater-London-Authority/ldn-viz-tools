@@ -50,6 +50,7 @@ export { default as LogoCIU } from './logos/LogoCIU.svelte';
 export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
+export { default as Metric } from './metric/Metric.svelte';
 export { default as Modal } from './modal/Modal.svelte';
 export { default as MultipleActionButton } from './multipleActionButton/MultipleActionButton.svelte';
 export { default as NavigationMenu } from './navigationMenu/NavigationMenu.svelte';
