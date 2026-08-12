@@ -4,17 +4,11 @@ import { page } from 'vitest/browser';
 import PageTitle from './PageTitle.svelte';
 
 describe('PageTitle', () => {
-	it('renders the title as an h1 with the headline role by default', async () => {
+	it('renders the title as an h1 with the display role by default', async () => {
 		const { container } = render(PageTitle, { title: 'State of London' });
 
 		const heading = page.getByRole('heading', { level: 1 });
 		await expect.element(heading).toHaveTextContent('State of London');
-		expect(container.querySelector('h1')).toHaveClass('headline');
-	});
-
-	it('renders the title with the display role when hero is "display"', async () => {
-		const { container } = render(PageTitle, { title: 'London Datastore', hero: 'display' });
-
 		expect(container.querySelector('h1')).toHaveClass('display');
 	});
 
@@ -24,16 +18,10 @@ describe('PageTitle', () => {
 		expect(container.querySelectorAll('p')).toHaveLength(0);
 	});
 
-	it('renders the subhead when hero is "headline"', async () => {
+	it('renders the subhead when provided', async () => {
 		render(PageTitle, { title: 'State of London', subhead: 'A subhead' });
 
 		await expect.element(page.getByText('A subhead')).toBeInTheDocument();
-	});
-
-	it('does not render the subhead when hero is "display"', async () => {
-		render(PageTitle, { title: 'London Datastore', hero: 'display', subhead: 'A subhead' });
-
-		expect(page.getByText('A subhead').elements().length).toBe(0);
 	});
 
 	it('renders the eyebrow when provided', async () => {

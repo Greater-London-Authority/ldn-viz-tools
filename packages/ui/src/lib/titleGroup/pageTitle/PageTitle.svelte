@@ -10,20 +10,12 @@
 
 	interface Props {
 		title?: string;
-		/** Companion line under the heading. Only rendered when `hero` is `"headline"`. */
 		subhead?: string;
 		eyebrow?: string;
-		hero?: 'display' | 'headline';
 		class?: string;
 	}
 
-	let {
-		title = '',
-		subhead = '',
-		eyebrow = '',
-		hero = 'headline',
-		class: classes = ''
-	}: Props = $props();
+	let { title = '', subhead = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
 <div class={classNames('prose flex flex-col items-start', classes)}>
@@ -31,9 +23,9 @@
 		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
 	{/if}
 	{#if title}
-		<h1 class={classNames(hero, 'text-color-text')}>{title}</h1>
+		<h1 class={'display text-color-text'}>{title}</h1>
 	{/if}
-	{#if hero === 'headline' && subhead}
+	{#if subhead}
 		<p class="subhead text-color-text-muted">{subhead}</p>
 	{/if}
 </div>
