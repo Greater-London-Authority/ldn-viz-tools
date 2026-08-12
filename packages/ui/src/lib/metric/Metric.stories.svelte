@@ -3,9 +3,13 @@
 	import Metric from './Metric.svelte';
 
 	/**
-	 * `Metric` — a single figure with its context and change. Consolidates the
-	 * former metric, change-indicator, change-values and static-metric
-	 * treatments into one component.
+	 * `Metric` — a single figure with an optional previous value and change.
+	 *
+	 *
+	 * `size` maps to the type roles: `lg` → `metric`/`label`/`body`, `sm` →
+	 * `metric-sm`/`label-sm`/`body-sm`. `layout` arranges the parts vertically
+	 * (stacked) or horizontally (inline).
+	 *
 	 */
 
 	const { Story } = defineMeta({
