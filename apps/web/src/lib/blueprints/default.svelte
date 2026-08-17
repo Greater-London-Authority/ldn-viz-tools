@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	export { default as a } from '$lib/components/markdown/a.svelte';
-	export { default as img } from '$lib/components/markdown/img.svelte';
+	export { default as img } from '$lib/components/enhancedImage/EnhancedImage.svelte';
 	export { default as pre } from '$lib/components/markdown/pre.svelte';
 </script>
 

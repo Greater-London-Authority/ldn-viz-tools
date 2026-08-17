@@ -13,7 +13,7 @@
 	let mainMenu = [{ title: 'Design System', id: 'design-system-docs', href: '/design-system' }];
 </script>
 
-<Sidebar sidebarId="sideNav" theme="light" bind:state={sidebarState.state}>
+<Sidebar sidebarId="sideNav" theme="light" bind:state={sidebarState.state} width={'slim'}>
 	{#snippet sections()}
 		<SidebarSection>
 			{#if breakPoint.current <= 768}

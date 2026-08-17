@@ -12,7 +12,7 @@
 	src={data.metadata.heroImage}
 />
 <div class="container mx-auto py-8">
-	<div class="prose flow-prose">
+	<div class="prose flow-prose max-w-full">
 		<PageComponent />
 	</div>
 </div>

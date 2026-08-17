@@ -11,7 +11,7 @@ layout: index
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="prose lead py-6">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
+<p class="prose lead">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
 <div class="grid sm:grid-cols-3 grid-rows-[auto] grid-gutter">
 
@@ -20,7 +20,7 @@ layout: index
     image="cta-foundations.svg"
     title="Foundations">
 
-<p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+<p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
 </ImageLink>
 
 <ImageLink
@@ -28,7 +28,7 @@ layout: index
     image="cta-application-design.svg"
     title="Application Design">
 
-<p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+<p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
 </ImageLink>
 
 <ImageLink
@@ -36,7 +36,7 @@ layout: index
     image="cta-dataviz.svg"
     title="Data Visualisation">
 
-<p class="body-sm leading-normal">A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+<p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
 </ImageLink>
 
 </div>

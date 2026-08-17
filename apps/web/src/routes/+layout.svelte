@@ -23,8 +23,8 @@
 	import '../app.postcss';
 
 	let mainMenu = [
-		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' },
-		{ title: 'Contact', id: 'contact', href: '/contact' }
+		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' }
+		// { title: 'Contact', id: 'contact', href: '/contact' }
 	];
 
 	let { children } = $props();
@@ -64,7 +64,7 @@
 
 <div class="flex min-h-dvh flex-col">
 	<Header>
-		{#if page.data.metadata.slug !== 'index'}
+		{#if page.data.metadata?.slug !== 'index'}
 			<Button
 				variant="square"
 				size="sm"
@@ -119,7 +119,7 @@
 			<nav>
 				<h3 class="mb-1 font-semibold">Contact</h3>
 				<ul class="text-color-text-muted">
-					<li>email:</li>
+					<li>email: <a href="mailto:gis@london.gov.uk">gis@london.gov.uk</a></li>
 				</ul>
 			</nav>
 		</div>

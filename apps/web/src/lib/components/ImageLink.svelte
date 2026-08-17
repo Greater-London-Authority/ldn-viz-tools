@@ -8,17 +8,38 @@
 		url: string;
 		image: string;
 		title: string;
+		titleClass: 'title-3' | 'title-4';
 		cta?: string;
 		children?: Snippet;
 	};
-	const { url, image, title, children, cta = 'Read more' }: Props = $props();
+	const {
+		url,
+		image,
+		title,
+		titleClass = 'title-3',
+		children,
+		cta = 'Read more'
+	}: Props = $props();
+
+	// `url` may be an internal route (needs resolving against the base path) or an
+	// absolute external link / mailto, which must be passed through untouched.
+	const isExternal = $derived(/^([a-z][a-z\d+.-]*:|\/\/)/i.test(url));
+	const href = $derived(isExternal ? url : resolve(url, {}));
 </script>
 
 <div class="flow-product">
-	<a href={resolve(url, {})}>
+	<a {href} target={isExternal ? '_blank' : undefined}>
 		<EnhancedImage src={image} />
 	</a>
-	<h3 class="title-3">{title}</h3>
+	<h3 class={titleClass}>{title}</h3>
 	{@render children?.()}
-	<Button href={resolve(url, {})} variant="text" slim emphasis="secondary">{cta}</Button>
+	<Button
+		{href}
+		target={isExternal ? '_blank' : undefined}
+		variant="text"
+		slim
+		emphasis="secondary"
+	>
+		{cta}
+	</Button>
 </div>
