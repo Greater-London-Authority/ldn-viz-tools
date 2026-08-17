@@ -39,7 +39,7 @@
 	const darkImage = $derived(getImage(constructPath(src, '-dark')));
 </script>
 
-<div class="relative h-[300px] bg-color-canvas-muted">
+<div class="relative h-[294px] bg-color-canvas-muted">
 	{#key page.url.pathname}
 		<div class="absolute inset-0" transition:fade={{ duration: 200 }}>
 			{#if theme.currentMode === 'light' && lightImage}
@@ -54,7 +54,7 @@
 		</div>
 	{/key}
 
-	<div class="relative z-10 flex">
+	<div class="relative z-10 flex h-full items-center">
 		<div class="container mx-auto">
 			<div class="prose flow-prose">
 				<p class="headline pt-4">{title}</p>
