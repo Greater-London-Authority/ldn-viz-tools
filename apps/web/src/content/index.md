@@ -11,8 +11,6 @@ layout: index
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<!-- <p class="prose lead py-8">The London City Data team bring insight</p> -->
-
 <ImageLink
     url="/design-system"
     image="cta-design-system.svg"
