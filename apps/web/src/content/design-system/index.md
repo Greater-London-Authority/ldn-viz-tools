@@ -13,7 +13,7 @@ layout: index
 
 <p class="prose lead py-6">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
-<div class="grid sm:grid-cols-3 grid-rows-[auto] gap-4">
+<div class="grid sm:grid-cols-3 grid-rows-[auto] grid-gutter">
 
 <ImageLink
     url="/design-system/foundations"

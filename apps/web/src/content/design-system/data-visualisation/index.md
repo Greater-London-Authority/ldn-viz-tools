@@ -14,7 +14,7 @@ thumbnail: cta-dataviz.svg
 
 <p class="prose lead">Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.</p>
 
-<div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-4">
+<div class="grid grid-cols-2 2xl:grid-cols-4 grid-rows-[auto] grid-gutter">
 
 <ImageLink
     url="/design-system/data-visualisation/foundations"
