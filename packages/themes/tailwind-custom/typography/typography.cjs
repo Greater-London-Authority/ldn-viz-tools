@@ -3,7 +3,6 @@ const plugin = require('tailwindcss/plugin');
 const contexts = require('./contexts');
 const roles = require('./roles');
 const semantics = require('./semantics');
-const flow = require('./flow');
 const responsive = require('./responsive');
 
 module.exports = plugin(function ({ addComponents }) {
@@ -16,8 +15,6 @@ module.exports = plugin(function ({ addComponents }) {
 		'.chart': contexts.chart
 	});
 
-	// Add flow
-	addComponents(flow);
 	// Add semantics
 	addComponents(semantics);
 
