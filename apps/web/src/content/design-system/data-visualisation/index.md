@@ -51,9 +51,4 @@ url="/design-system/data-visualisation/map-examples"
 image="cta-dataviz-4.svg"
 title="Map examples"/>
 
-<ImageLink
-url="/design-system/data-visualisation/chart-anatomy"
-image="cta-dataviz-1.svg"
-title="Chart anatomy"/>
-
 </div>
