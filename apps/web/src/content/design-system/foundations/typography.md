@@ -81,8 +81,8 @@ Roles are what designs and code should reference. Beneath them sits a scale of r
 
 Roles are grouped into three **type sets**, each intended for a different kind of surface. A type set is not a different typeface; it is the same ideas tuned for a different reading situation.
 
-| Type set    | Intended for                                                                       |
-| ----------- | ---------------------------------------------------------------------------------- |
+| Type set    | Intended for                                                                        |
+| ----------- | ----------------------------------------------------------------------------------- |
 | **Product** | Applications and dashboards, where information is condensed and tasks are the focus |
 | **Prose**   | Long passages of reading — articles, guidance, help content, documentation          |
 | **Chart**   | The text in and around a chart — titles, axis labels, ticks and annotations         |
@@ -93,7 +93,7 @@ The sets can be combined and will work together, but this should be done with co
 
 ### The Product set
 
-Product carries fewer roles than Prose, because application chrome has shallower structure than rich content. The sizes shown below are those used on the widest screens; several roles grow with screen size, which is described under *Responsive sizing*.
+Product carries fewer roles than Prose, because application chrome has shallower structure than rich content. The sizes shown below are those used on the widest screens; several roles grow with screen size, which is described under _Responsive sizing_.
 
 <div class="not-prose product my-8">
     <TypographyTable items={productRoles} />
@@ -111,7 +111,7 @@ Three roles carry structure, and they behave differently from one another.
 
 Every container that can carry a title has one **primary slot**. Whatever occupies that slot takes the dominant treatment. A title that gives up the slot to something else steps down to the eyebrow treatment, or is left out.
 
-| Treatment  | Role       | Size | Weight | When it applies                                                                               |
+| Treatment  | Role       | Size | Weight | When it applies                                                                                |
 | ---------- | ---------- | ---- | ------ | ---------------------------------------------------------------------------------------------- |
 | Dominant   | `Title`    | 20px | 600    | The element owns its container's primary slot                                                  |
 | Demoted    | `Eyebrow`  | 14px | 500    | A title steps aside — for instance a card title yielding to a chart that carries its own title |
@@ -279,10 +279,10 @@ A type set is applied as a class on a containing element. Everything inside it r
 
 The class is required. Role classes read values that exist only inside a type set, so a role used outside one will not size correctly.
 
-An application surface will normally also want a flow context, which governs the space between blocks. The two are separate systems that happen to share the words *product* and *prose*:
+An application surface will normally also want a flow context, which governs the space between blocks. The two are separate systems that happen to share the words _product_ and _prose_:
 
 ```html
-<section class="product flow-product">…</section>
+<section class="flow-product product">…</section>
 ```
 
 ### Prose styles its content automatically
@@ -355,7 +355,7 @@ These conventions are settled, and are worth applying rather than judging by eye
 
 | Element                                          | Role                                       |
 | ------------------------------------------------ | ------------------------------------------ |
-| Input label, tab, navigation item, button        | `label` — see *single-line controls* below |
+| Input label, tab, navigation item, button        | `label` — see _single-line controls_ below |
 | Field value, placeholder, menu item              | `body`                                     |
 | Helper text, hints, descriptions, secondary copy | `body-sm`                                  |
 | Table column header                              | `label`                                    |
@@ -367,7 +367,7 @@ These conventions are settled, and are worth applying rather than judging by eye
 | Chart axis name                                  | `axis-title`                               |
 | Chart tick or scale label                        | `tick`, or `tick-sm` when dense            |
 
-Two of these are worth drawing out. Control and navigation labels take `label` even where older markup used sixteen pixels — a control label is the Label role rather than a larger size. And a sidebar's *section* headings are labels rather than titles, so that navigation group headings stay small and do not compete with page content.
+Two of these are worth drawing out. Control and navigation labels take `label` even where older markup used sixteen pixels — a control label is the Label role rather than a larger size. And a sidebar's _section_ headings are labels rather than titles, so that navigation group headings stay small and do not compete with page content.
 
 Where an existing element uses a size from outside the system, move it to the correct role even if that visibly resizes it.
 
@@ -388,7 +388,7 @@ These must not wrap. Label text running to more than one line uses the standard 
 The titling roles are designed to be used together. Write the group as flat sibling elements and give each its role; the spacing between them is handled by the flow system.
 
 ```html
-<section class="product flow-product">
+<section class="flow-product product">
 	<p class="eyebrow">Air quality</p>
 	<h2 class="section-head">Nitrogen dioxide</h2>
 	<p class="subtitle">Rolling 24-hour mean</p>

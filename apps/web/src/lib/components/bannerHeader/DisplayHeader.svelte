@@ -56,7 +56,7 @@
 
 	<div class="relative z-10 flex h-full items-center">
 		<div class="container mx-auto">
-			<div class="prose flow-prose">
+			<div class="flow-prose prose">
 				<p class="display">{title}</p>
 				{#if subTitle}
 					<p class="subhead">{subTitle}</p>

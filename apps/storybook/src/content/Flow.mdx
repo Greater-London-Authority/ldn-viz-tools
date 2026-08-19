@@ -42,7 +42,7 @@ Values come from Figma through Style Dictionary into `styles/flow.css`. Nothing 
 Inside `flow-prose` the relationships are recognised from the markup, so an article needs no spacing classes:
 
 ```html
-<article class="prose flow-prose">
+<article class="flow-prose prose">
 	<h2>Air quality</h2>
 	<p class="subtitle">Rolling 24-hour mean</p>
 	<p>Concentrations fell across every monitored borough…</p>
@@ -102,7 +102,7 @@ gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
 The `mt-` form goes on the element needing space above it. The `gap-` form goes on a flex or grid container that is not itself a flow context.
 
 ```html
-<section class="product flow-product">
+<section class="flow-product product">
 	<h2 class="section-head">Monitoring sites</h2>
 	<p class="subtitle">Twelve active sensors</p>
 

@@ -135,7 +135,7 @@
 	let scale = scaleSequential([0, 100], interpolator);
 </script>
 
-<div class="product flow-product not-prose">
+<div class="not-prose flow-product product">
 	<h3 class="title">{title}</h3>
 
 	<div class="flex space-x-4">

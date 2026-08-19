@@ -25,12 +25,12 @@ Instead a container declares which kind of surface it is, and the spacing within
 
 The whole vocabulary is four steps. Each names a **relationship** between two blocks — how closely bound together they are — rather than a distance.
 
-| Step        | The relationship it describes                                                    |
-| ----------- | -------------------------------------------------------------------------------- |
+| Step        | The relationship it describes                                                                |
+| ----------- | -------------------------------------------------------------------------------------------- |
 | **Tight**   | Two things that belong together — a caption and its image, a heading and its supporting line |
-| **Default** | The ordinary gap between one block and the next, as between two paragraphs        |
-| **Loose**   | Deliberate breathing room, as around a figure, a table or a chart                 |
-| **Section** | A major break, as above the heading that begins a new part of the page            |
+| **Default** | The ordinary gap between one block and the next, as between two paragraphs                   |
+| **Loose**   | Deliberate breathing room, as around a figure, a table or a chart                            |
+| **Section** | A major break, as above the heading that begins a new part of the page                       |
 
 Naming the relationship rather than the distance is what allows the same document structure to be read at different densities. A caption is bound to its image whether it appears in an article or in a dashboard; only how close it sits changes.
 
@@ -38,11 +38,11 @@ Naming the relationship rather than the distance is what allows the same documen
 
 A **context** decides how far apart the four relationships actually sit. Three are provided, each for a different kind of surface.
 
-| Context      | Intended for                                                     | Tight | Default | Loose | Section |
-| ------------ | ---------------------------------------------------------------- | ----- | ------- | ----- | ------- |
-| **Prose**    | Long passages of reading — articles, guidance, documentation      | 4px   | 16px    | 24px  | 40px    |
-| **Product**  | Applications and dashboards, where information is condensed       | 4px   | 8px     | 16px  | 24px    |
-| **Compact**  | Small self-contained surfaces — toasts, tooltips, alerts, dialogs | 4px   | 4px     | 8px   | 8px     |
+| Context     | Intended for                                                      | Tight | Default | Loose | Section |
+| ----------- | ----------------------------------------------------------------- | ----- | ------- | ----- | ------- |
+| **Prose**   | Long passages of reading — articles, guidance, documentation      | 4px   | 16px    | 24px  | 40px    |
+| **Product** | Applications and dashboards, where information is condensed       | 4px   | 8px     | 16px  | 24px    |
+| **Compact** | Small self-contained surfaces — toasts, tooltips, alerts, dialogs | 4px   | 4px     | 8px   | 8px     |
 
 Prose is the most generous, because a reading column benefits from air and the page is not competing for space. Product is roughly half as open, because a dashboard is dense by nature and generous spacing there pushes content below the fold without helping anyone read it.
 
@@ -92,37 +92,37 @@ The class does two things at once: it sets the four relationships to that contex
 
 Contexts can be nested, and the innermost one applies. A toast inside a dashboard can declare `flow-compact` and will space its contents accordingly, whatever surrounds it. A component whose spacing must be the same wherever it is placed should declare its own context rather than relying on the one it happens to be dropped into.
 
-A surface will usually want a type set as well as a flow context. The two are separate systems that share the words *product* and *prose*:
+A surface will usually want a type set as well as a flow context. The two are separate systems that share the words _product_ and _prose_:
 
 ```html
-<section class="product flow-product">…</section>
+<section class="flow-product product">…</section>
 ```
 
 ### Reading content spaces itself
 
 Inside `flow-prose`, the spacing follows from the markup. These are the relationships the system recognises:
 
-| Where                                                                       | Relationship |
-| --------------------------------------------------------------------------- | ------------ |
-| Between any two blocks, as a general rule                                    | Default      |
-| Above and below a figure, image, table, code block, blockquote or chart      | Loose        |
-| Above a first- or second-level heading                                       | Section      |
-| Above a third- or fourth-level heading                                       | Loose        |
-| Between two headings that follow one another                                 | Tight        |
-| Between a heading and a subtitle or subhead directly beneath it              | Tight        |
-| Between an eyebrow and the heading directly below it                         | Tight        |
-| Above an eyebrow that introduces a heading                                   | Section      |
-| Between an image and its caption                                             | Tight        |
-| Between list items, and around a nested list                                 | Tight        |
-| Between a term and its definition in a description list                      | Tight        |
-| Between one term-and-definition pair and the next                            | Default      |
+| Where                                                                   | Relationship |
+| ----------------------------------------------------------------------- | ------------ |
+| Between any two blocks, as a general rule                               | Default      |
+| Above and below a figure, image, table, code block, blockquote or chart | Loose        |
+| Above a first- or second-level heading                                  | Section      |
+| Above a third- or fourth-level heading                                  | Loose        |
+| Between two headings that follow one another                            | Tight        |
+| Between a heading and a subtitle or subhead directly beneath it         | Tight        |
+| Between an eyebrow and the heading directly below it                    | Tight        |
+| Above an eyebrow that introduces a heading                              | Section      |
+| Between an image and its caption                                        | Tight        |
+| Between list items, and around a nested list                            | Tight        |
+| Between a term and its definition in a description list                 | Tight        |
+| Between one term-and-definition pair and the next                       | Default      |
 
 The last entry in the heading group is worth drawing out. When an eyebrow introduces a heading, the major break moves above the eyebrow rather than sitting between them, because the eyebrow is the top of that titling group rather than a stray line before it.
 
 An article needs no spacing classes at all:
 
 ```html
-<article class="prose flow-prose">
+<article class="flow-prose prose">
 	<h2>Air quality</h2>
 	<p class="subtitle">Rolling 24-hour mean across twelve sites</p>
 	<p>Concentrations fell across every monitored borough during the period…</p>
@@ -165,7 +165,7 @@ gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
 The `mt-` form goes on the element that needs space above it. The `gap-` form goes on a flex or grid container to space its children, and should be used on a container that is not itself a flow context — a context already spaces its children, so doing both produces twice the gap.
 
 ```html
-<section class="product flow-product">
+<section class="flow-product product">
 	<h2 class="section-head">Monitoring sites</h2>
 	<p class="subtitle">Twelve active sensors</p>
 
@@ -185,13 +185,13 @@ Padding, border widths, list indents and cell padding come from the numbered spa
 
 In practice most interior spacing settles on five values:
 
-| Class | Value | Typical use                                           |
-| ----- | ----- | ----------------------------------------------------- |
-| `1`   | 4px   | Fine separation within a control                      |
-| `2`   | 8px   | Compact interior padding, dense components            |
-| `4`   | 16px  | The ordinary padding of a card or panel               |
-| `6`   | 24px  | More generous interior padding                        |
-| `8`   | 32px  | Large surfaces and page-level insets                  |
+| Class | Value | Typical use                                |
+| ----- | ----- | ------------------------------------------ |
+| `1`   | 4px   | Fine separation within a control           |
+| `2`   | 8px   | Compact interior padding, dense components |
+| `4`   | 16px  | The ordinary padding of a card or panel    |
+| `6`   | 24px  | More generous interior padding             |
+| `8`   | 32px  | Large surfaces and page-level insets       |
 
 A value outside this set is worth a second look. It is usually either a gap between blocks that has been chosen by hand, or a measurement that should be derived from the element it aligns to rather than picked from a scale.
 
@@ -217,11 +217,11 @@ There are four chosen numbers here, none of which is wrong exactly, and none of 
 Using the system:
 
 ```html
-<section class="product flow-product">
+<section class="flow-product product">
 	<h2 class="section-head">Rough sleeping</h2>
 	<p class="subtitle">Quarterly</p>
 
-	<div class="grid grid-cols-3 grid-gutter-fluid mt-flow-section">
+	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
 		<!-- cards -->
 	</div>
 

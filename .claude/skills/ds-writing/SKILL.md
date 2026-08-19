@@ -47,14 +47,14 @@ evidence.
 
 ### Every claim needs a class of evidence
 
-| Claim type                          | Verify by                                                     |
-| ----------------------------------- | ------------------------------------------------------------- |
-| A number (size, spacing, ratio)     | Parse it out of emitted CSS                                   |
-| A class name exists                 | `grep` the plugin source and the emitted output                |
-| A class does X                      | Read the rule, including its selector and its specificity      |
-| A plugin/dependency is in play      | Read the plugin list, not the `package.json` dependency list   |
-| An import reaches the browser       | Read the app's `app.postcss` or equivalent entry point         |
-| "Automatic" / "handled for you"     | Find the rule that does it                                     |
+| Claim type                      | Verify by                                                    |
+| ------------------------------- | ------------------------------------------------------------ |
+| A number (size, spacing, ratio) | Parse it out of emitted CSS                                  |
+| A class name exists             | `grep` the plugin source and the emitted output              |
+| A class does X                  | Read the rule, including its selector and its specificity    |
+| A plugin/dependency is in play  | Read the plugin list, not the `package.json` dependency list |
+| An import reaches the browser   | Read the app's `app.postcss` or equivalent entry point       |
+| "Automatic" / "handled for you" | Find the rule that does it                                   |
 
 ### Known traps
 
@@ -128,15 +128,15 @@ a later section, written out in prose, with its reasoning attached.
 
 ### Vocabulary
 
-| Prefer                          | Over                                    |
-| ------------------------------- | --------------------------------------- |
-| are included / are available    | ship                                    |
-| is applied / takes effect       | fires, is armed                         |
-| private to the system           | private source, the fiction, the phantom |
-| set / type set                  | family (when describing prose/product/chart to readers) |
-| closes up to                    | hugs                                    |
-| step aside / step down          | demote, yield the slot (as bare jargon)  |
-| the space between blocks        | rhythm (unless introduced first)         |
+| Prefer                       | Over                                                    |
+| ---------------------------- | ------------------------------------------------------- |
+| are included / are available | ship                                                    |
+| is applied / takes effect    | fires, is armed                                         |
+| private to the system        | private source, the fiction, the phantom                |
+| set / type set               | family (when describing prose/product/chart to readers) |
+| closes up to                 | hugs                                                    |
+| step aside / step down       | demote, yield the slot (as bare jargon)                 |
+| the space between blocks     | rhythm (unless introduced first)                        |
 
 British spelling throughout: colour, behaviour, centred, organised, recognised.
 

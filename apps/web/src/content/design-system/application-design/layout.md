@@ -144,10 +144,10 @@ Two classes apply the gutter values, and carry their breakpoint changes with the
 
 ```html
 <!-- A dashboard canvas: the gutter stays at 16px across every width -->
-<div class="grid grid-cols-3 grid-gutter-fluid">…</div>
+<div class="grid-gutter-fluid grid grid-cols-3">…</div>
 
 <!-- A document-like surface: the gutter grows from 16px to 32px -->
-<div class="grid grid-cols-12 grid-gutter">…</div>
+<div class="grid-gutter grid grid-cols-12">…</div>
 ```
 
 Setting a gap by hand is worth avoiding here even where it produces the right result today. On a fluid surface `gap-4` happens to match the gutter at every width, so the error is invisible until the value is adjusted. On a contained surface it is already too narrow at four of the six breakpoints.
@@ -157,11 +157,11 @@ Setting a gap by hand is worth avoiding here even where it produces the right re
 The space between blocks within a section comes from a [flow](/design-system/foundations/flow) context rather than from margins set on each element. Declaring the context on the section is usually enough; a relationship is stated explicitly only where nothing could infer it.
 
 ```html
-<section class="product flow-product">
+<section class="flow-product product">
 	<h2 class="section-head">Rough sleeping</h2>
 	<p class="subtitle">Quarterly</p>
 
-	<div class="grid grid-cols-3 grid-gutter-fluid mt-flow-section">
+	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
 		<!-- cards -->
 	</div>
 

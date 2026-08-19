@@ -123,7 +123,7 @@ genuine component titles → `title`; sidebar/nav _section_ headings → `label`
 | `subtitle`   | 16  | 400    | inherited   | Supporting line under a chart title              |
 | `eyebrow`    | 14  | 500    | inherited   | A chart title that has yielded the slot          |
 | `axis-title` | 14  | 500    | 20          | Axis names, series/legend **titles**             |
-| `label`      | 14  | 400    | 20          | Data/value labels, annotations, legend *entries* |
+| `label`      | 14  | 400    | 20          | Data/value labels, annotations, legend _entries_ |
 | `tick`       | 14  | 400    | 1.0         | Axis tick / scale labels, default density        |
 | `tick-sm`    | 12  | 400    | 1.0         | Smaller tick tier, at the 12px floor             |
 
@@ -137,7 +137,7 @@ Inside `.chart`, the shared class names (`title`, `subtitle`, `eyebrow`, `label`
 resolve to chart values; `axis-title`, `tick` and `tick-sm` are chart-only classes.
 
 - **There is no `legend` role** — a legend entry is a data label → `label`. A legend
-  *title* → `axis-title`.
+  _title_ → `axis-title`.
 - **`chart/note` is a token, not a class.** It emits at all five modes in
   `typography.css` but has no entry in `contexts.cjs` or `roles.cjs`, so there is no
   `.note` utility. Chart is eight roles in tokens, seven usable in code. Don't

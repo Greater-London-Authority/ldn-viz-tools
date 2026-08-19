@@ -56,16 +56,18 @@ surface normally carries both: `class="product flow-product"`.
 
 ```css
 :root {
-	--flow-prose-tight: 0.25rem;    /* 12 flat vars: 3 contexts × 4 rungs — */
+	--flow-prose-tight: 0.25rem; /* 12 flat vars: 3 contexts × 4 rungs — */
 	--flow-product-default: 0.5rem; /* the single value source              */
 	/* … */
-	--flow-tight: var(--flow-product-tight);   /* product is the library    */
+	--flow-tight: var(--flow-product-tight); /* product is the library    */
 	--flow-default: var(--flow-product-default); /* default density, so the */
-	--flow-loose: var(--flow-product-loose);   /* four rungs always resolve */
+	--flow-loose: var(--flow-product-loose); /* four rungs always resolve */
 	--flow-section: var(--flow-product-section);
 }
 
-.flow-prose { --flow-tight: var(--flow-prose-tight); /* … */ }
+.flow-prose {
+	--flow-tight: var(--flow-prose-tight); /* … */
+}
 ```
 
 Context blocks **reference** the flat vars rather than restating them. Nothing in
@@ -170,7 +172,7 @@ and the reason **using the right role class is what earns the rhythm**:
 ## The ownership question
 
 Replaces the older rhythm-vs-construction gate, which failed because it asked for a
-judgement about a gap's *nature*:
+judgement about a gap's _nature_:
 
 > **Does this gap exist because two things sit next to each other, or because one
 > thing has an inside?**
@@ -198,7 +200,7 @@ component interiors.
 - **Don't combine a context class and `gap-flow-*` on one element** — they add.
 - **`product` ≠ `flow-product`.** Typography family vs spacing ramp; same word, two
   systems. Most surfaces want both.
-- **`.chart` is in both systems on purpose.** It names a typography context *and*
+- **`.chart` is in both systems on purpose.** It names a typography context _and_
   appears in flow's block-object list beside `figure`/`table`/`pre`. A chart in prose
   wants both chart typography and generous surrounding space. Reported as a
   collision once; it is not one. **Do not rename it.**

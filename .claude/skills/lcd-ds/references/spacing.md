@@ -45,8 +45,8 @@ Shorter form: **if the children are a stack of blocks it's flow; if they're a
 structure it's construction.** A card's contents stack; a form's fields stack. A
 table's cells don't; a button row doesn't.
 
-This supersedes the older *rhythm-vs-construction* gate, which asked for a judgement
-about a gap's *nature* and proved unanswerable in practice.
+This supersedes the older _rhythm-vs-construction_ gate, which asked for a judgement
+about a gap's _nature_ and proved unanswerable in practice.
 
 **Construction shortlist.** Real usage across `packages/ui/src` concentrates almost
 entirely on five rungs — `4` (16px), `2` (8px), `6` (24px), `1` (4px), `8` (32px).
