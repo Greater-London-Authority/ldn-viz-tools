@@ -1,6 +1,6 @@
-import { describe, test, expect, vi } from 'vitest';
-import { fixImportedGeoJSON } from './utils';
 import type { FeatureCollection, Geometry, Polygon } from 'geojson';
+import { describe, expect, test } from 'vitest';
+import { fixImportedGeoJSON } from './utils';
 
 const geometry = {
 	type: 'Polygon',

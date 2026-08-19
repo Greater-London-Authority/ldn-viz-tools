@@ -9,6 +9,7 @@
 	import { clickedFeature, clickedLayer } from './stores';
 	import DefaultPopover from './DefaultPopover.svelte';
 	import MapPopover from '../mapPopover/MapPopover.svelte';
+	import { isConstructor } from '../utils/isConstructor';
 
 	interface Props {
 		spec?: Record<string, any>;
@@ -21,9 +22,6 @@
 	let { spec = {}, layers = [] }: Props = $props();
 	let tooltipSpec: any = $derived(spec[$clickedLayer]);
 
-	function isConstructor(obj: any) {
-		return !!obj.prototype && !!obj.prototype.constructor.name;
-	}
 	let layerObj = $derived(layers.find((l) => l.id === $clickedLayer));
 	// layers.find(l => l.id === $clickedLayer)?.visible;
 </script>

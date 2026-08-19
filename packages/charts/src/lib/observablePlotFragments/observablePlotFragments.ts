@@ -19,7 +19,7 @@ export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultXAxis: () => defaultXAxis,
 	defaultYAxis: () => defaultYAxis,
 	defaultLine: () => defaultLine(),
-	defaultDashedLine: () => defaultDashedLine,
+	defaultDashedLine: () => defaultDashedLine(),
 	defaultDot: () => defaultDot(),
 	defaultPoint: () => defaultPoint(),
 	defaultArea: () => defaultArea(),
@@ -45,7 +45,7 @@ const defaultStyle = () => ({
 	background: theme.tokenNameToValue('chart.surface')
 });
 
-const defaultSize = {
+export const defaultSize = {
 	height: 440, // opinionated approx half of full page width. 2:1 ratio
 	marginLeft: 0,
 	marginRight: 8,
@@ -53,7 +53,7 @@ const defaultSize = {
 	marginBottom: 52
 };
 
-const defaultSizeFacet = {
+export const defaultSizeFacet = {
 	height: 660, // opinionated normal chart height * 1.5 for additional fy height & spacing
 	marginLeft: 0,
 	marginBottom: 52,
@@ -118,10 +118,10 @@ const defaultLine = () => ({
 	strokeWidth: 2
 });
 
-const defaultDashedLine = {
-	...defaultLine,
+const defaultDashedLine = () => ({
+	...defaultLine(),
 	strokeDasharray: '5,5'
-};
+});
 
 const defaultDot = () => ({
 	// simplest mark for dense scatterplots
