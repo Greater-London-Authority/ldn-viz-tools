@@ -32,8 +32,13 @@ image="cta-foundations-3.svg"
 title="Design tokens"/>
 
 <ImageLink
-url="/design-system/foundations/typography"
+url="/design-system/foundations/flow"
 image="cta-foundations-4.svg"
+title="Flow"/>
+
+<ImageLink
+url="/design-system/foundations/typography"
+image="cta-foundations-2.svg"
 title="Typography"/>
 
 </div>
