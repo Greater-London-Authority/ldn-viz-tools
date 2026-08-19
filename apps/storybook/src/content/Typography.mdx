@@ -1,0 +1,193 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+The system describes type by **role** rather than by size. A role names the job a piece of text does, and carries the font, size, weight, line height and letter spacing that job requires. Choosing a role is therefore the whole decision.
+
+```html
+<!-- The role carries its own size and weight -->
+<h2 class="section-head">Air quality</h2>
+<p class="body-sm">Rolling 24-hour mean.</p>
+
+<!-- Re-answers a question the system has already answered -->
+<h2 class="text-3xl font-semibold">Air quality</h2>
+```
+
+The full reasoning, and the responsive size tables, are on the [Typography foundation page](https://greater-london-authority.github.io/ldn-viz-tools/). This page covers what to type.
+
+## Type sets
+
+Roles are grouped into three sets, one for each kind of surface. A set is applied as a class on a container, and every role inside it resolves to that set's values.
+
+| Set       | For                                                                  |
+| --------- | -------------------------------------------------------------------- |
+| `product` | Applications and dashboards — pages, cards, panels, controls, tables |
+| `prose`   | Reading content — markdown, help articles, documentation             |
+| `chart`   | Text in and around a chart                                           |
+
+```html
+<article class="prose flow-prose">…</article>
+<section class="product flow-product">…</section>
+<div class="chart">…</div>
+```
+
+**The set class is required.** Role classes read values that exist only inside a set, so a role used outside one will not size. There is no default.
+
+Several role names appear in more than one set. `body` is sixteen pixels regular in both `product` and `prose`, with a different line height in each — the set decides the treatment, which is what lets a component be written once and read correctly in either.
+
+Reading content on an application surface should be given its own `prose` container rather than assembled from a mixture of sets.
+
+Note that `product` and `flow-product` are separate classes: one sets the type, the other the spacing between blocks. Most surfaces want both.
+
+## Product roles
+
+Sizes shown are at `xl`. Roles marked as scaling carry a smaller value at narrower widths and resolve themselves; the per-breakpoint tables are on the foundation page.
+
+| Role           | Size | Weight | For                                                          |
+| -------------- | ---- | ------ | ------------------------------------------------------------ |
+| `page-head`    | 36   | 700    | The page title. One per page. Scales.                        |
+| `section-head` | 28   | 600    | Groups content within a page; may repeat. Scales.            |
+| `title`        | 20   | 600    | An object's title — card, panel, modal, callout, drawer      |
+| `subtitle`     | 16   | 400    | A supporting line beneath any heading or title               |
+| `eyebrow`      | 14   | 500    | An overline above a title, or a title that has stepped aside |
+| `metric`       | 36   | 700    | A headline figure. Scales.                                   |
+| `metric-sm`    | 20   | 700    | A secondary figure, or a KPI within a card                   |
+| `body`         | 16   | 400    | Default interface text, field values, menu items             |
+| `body-sm`      | 14   | 400    | Helper text, hints, secondary copy, table cells              |
+| `label`        | 14   | 500    | Control and navigation labels — buttons, inputs, tabs        |
+| `label-sm`     | 12   | 500    | Labels in dense contexts, column headers                     |
+| `caption`      | 12   | 400    | Metadata, badges, the smallest functional text               |
+
+The `product` class sets the values but styles no elements. An application's markup carries no reliable typographic meaning — a heading element might be a page title or a widget label — so nothing is assumed and the role is always applied explicitly.
+
+### Choosing between them
+
+| Element                                          | Role                            |
+| ------------------------------------------------ | ------------------------------- |
+| Input label, tab, navigation item, button        | `label`, tight for single lines |
+| Field value, placeholder, menu item              | `body`                          |
+| Helper text, hints, descriptions, secondary copy | `body-sm`                       |
+| Table column header                              | `label`                         |
+| Table cell                                       | `body-sm`                       |
+| Tooltip, badge, tag, metadata                    | `caption`                       |
+| Modal, callout, panel or drawer heading          | `title`                         |
+| Sidebar or navigation section heading            | `label`                         |
+
+Control and navigation labels take `label` even where older markup used sixteen pixels. Sidebar _section_ headings are labels rather than titles, so that navigation group headings stay small.
+
+### Single-line controls
+
+`label-tight` and `label-sm-tight` are the same size and weight with the line height reduced to match the font size. They exist for controls whose text is one line, vertically centred, where the component's padding governs its height.
+
+```html
+<button class="label-tight">Download</button>
+```
+
+They must not wrap. Label text running to more than one line uses `label` or `label-sm`.
+
+### Titles and treatments
+
+Every container that can carry a title has one primary slot. What occupies it takes `title`; a title that gives up the slot takes `eyebrow` or is omitted; a supporting line beneath a dominant title takes `subtitle`. Moving a title between treatments is a change of role rather than an adjustment.
+
+A card containing a titled chart is the common case: the chart's title is dominant, and the card's own title becomes an eyebrow above it, or is left out.
+
+## Prose roles
+
+| Role       | Size | Weight | For                                               |
+| ---------- | ---- | ------ | ------------------------------------------------- |
+| `display`  | 76   | 700    | A homepage hero. Page chrome. Scales.             |
+| `headline` | 56   | 700    | A subpage hero. Scales.                           |
+| `subhead`  | 28   | 400    | A supporting line beneath a headline              |
+| `title-1`  | 36   | 600    | The top heading within the content. Scales.       |
+| `title-2`  | 30   | 600    | Second-level heading. Scales.                     |
+| `title-3`  | 24   | 600    | Third-level heading. Scales.                      |
+| `title-4`  | 20   | 600    | Fourth-level heading, the floor of the ladder     |
+| `subtitle` | 18   | 400    | A supporting line beneath a title                 |
+| `lead`     | 22   | 400    | An introductory or standfirst paragraph           |
+| `body`     | 16   | 400    | Default reading text                              |
+| `body-sm`  | 14   | 400    | Secondary or denser reading text                  |
+| `caption`  | 12   | 400    | Metadata and the smallest text                    |
+| `eyebrow`  | 14   | 500    | A short overline introducing the heading below it |
+
+Inside `prose`, ordinary elements are styled without classes: `h1` to `h4` take the Title ladder, `p` takes `body`, and links, lists, blockquotes, tables and captions are handled. `h5` falls back to `body`, because `title-4` is the floor. Display and Headline are hero chrome and are never reached from a content heading — they are applied by class.
+
+The `prose` class also limits its own width to a measure of roughly seventy characters. Figures, tables, code blocks and pull quotes are meant to break out wider; body text is not.
+
+Use `not-prose` to opt out, at block or element level. This is most often needed around an embedded component with its own styling.
+
+```html
+<div class="prose">
+	<h3>Styled by the set</h3>
+	<div class="not-prose">
+		<h3>Not styled</h3>
+	</div>
+</div>
+```
+
+The `prose` class here is our own and is unrelated to the Tailwind Typography plugin, which this system does not use. Its modifiers — `prose-lg`, `prose-invert`, `prose-headings:` and similar — have no effect.
+
+## Chart roles
+
+| Role         | Size | Weight | Line height | For                                              |
+| ------------ | ---- | ------ | ----------- | ------------------------------------------------ |
+| `title`      | 20   | 600    | inherited   | The chart's title, when it owns the primary slot |
+| `subtitle`   | 16   | 400    | inherited   | A supporting line beneath a chart title          |
+| `eyebrow`    | 14   | 500    | inherited   | A chart title that has stepped aside             |
+| `axis-title` | 14   | 500    | 20          | Axis names, series and legend titles             |
+| `label`      | 14   | 400    | 20          | Value labels, annotations, legend entries        |
+| `tick`       | 14   | 400    | 1.0         | Axis and scale labels at default density         |
+| `tick-sm`    | 12   | 400    | 1.0         | The smaller tick tier, for denser charts         |
+
+The first three refer to their product equivalents for every property, so they cannot drift and they inherit the product roles' responsive behaviour. `axis-title` and `label` match product `label` and `body-sm` in size and weight but hold their own values, so chart anatomy can be adjusted independently.
+
+There is no legend role. A legend entry is a data label and takes `label`; a legend's own heading takes `axis-title`.
+
+Ticks are single-line and take a line height equal to their font size, so that they sit precisely against axes and gridlines.
+
+Chart sizes are the same at every breakpoint.
+
+## Titling groups
+
+The titling roles are designed to be used together. Written as flat siblings inside a flow context, the spacing between them follows from the roles.
+
+```html
+<section class="product flow-product">
+	<p class="eyebrow">Air quality</p>
+	<h2 class="section-head">Nitrogen dioxide</h2>
+	<p class="subtitle">Rolling 24-hour mean</p>
+</section>
+```
+
+The eyebrow closes up to the heading below it, the subtitle to the heading above it, and the larger break moves above the whole group. Substituting `body-sm text-color-text-muted` for `subtitle` looks almost identical but is not recognised, and the spacing comes out wrong. See [Flow](./?path=/docs/ui-flow--docs).
+
+## Colour and emphasis
+
+Colour is a separate axis. Bind to a semantic token.
+
+```html
+<p class="body text-color-text">Primary text</p>
+<p class="body-sm text-color-text-muted">Secondary text</p>
+<span class="label text-color-label">Control label</span>
+```
+
+Text and label tokens descend in emphasis — `text`, `text-muted`, `text-wash`, and `label`, `label-muted`. Text or an icon on a filled control uses an inverse token. Subhead, Subtitle, Lead, Eyebrow and the chart roles are already muted.
+
+For emphasis within a role, change the weight:
+
+```html
+<p class="body">Readings are <span class="font-semibold">provisional</span>.</p>
+```
+
+Four weights are in use: 400, 500, 600 and 700. Each role carries its own, so a weight should not be set alongside a role to reach a particular look. If a role looks wrong at its own weight, the role is usually the thing to reconsider.
+
+## Things to watch for
+
+**Tailwind's `text-*` sizes are not part of this scale.** If a role looks wrong at its size, check the role before overriding it.
+
+**Do not write breakpoint variants on type.** Roles already carry a value at every breakpoint, and each breakpoint has been checked to confirm the hierarchy holds. `md:section-head` works against that.
+
+**Do not bind to the underlying scale.** The raw values beneath the roles are internal to the system, including within a component.
+
+**A role outside a set class will not size.** Unlike flow, typography has no default; the set must be declared.

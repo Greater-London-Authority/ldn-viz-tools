@@ -1,0 +1,159 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Flow" />
+
+# Flow
+
+Flow governs the vertical space between stacked blocks. A container declares a context, and the gaps within it follow from that, rather than being set element by element.
+
+The full reasoning is on the [Flow foundation page](https://greater-london-authority.github.io/ldn-viz-tools/). This page covers what to type.
+
+## The four relationships
+
+The vocabulary is four names, each describing how closely two blocks are related. The distance those names produce is decided by the context they sit in.
+
+| Relationship | Prose | Product | Compact |
+| ------------ | ----- | ------- | ------- |
+| tight        | 4px   | 4px     | 4px     |
+| default      | 16px  | 8px     | 4px     |
+| loose        | 24px  | 16px    | 8px     |
+| section      | 40px  | 24px    | 8px     |
+
+Compact collapses the ramp on purpose — tight equals default, loose equals section. A surface that small cannot carry four distinguishable gaps.
+
+Values come from Figma through Style Dictionary into `styles/flow.css`. Nothing in the ramp is written by hand in CSS, and a component should never restate one of these numbers.
+
+## Declaring a context
+
+```html
+<article class="flow-prose">…</article>
+<section class="flow-product">…</section>
+<div class="flow-compact">…</div>
+```
+
+One class. It sets the four relationships and enables the spacing between that element's direct children.
+
+Contexts nest, and the innermost applies. A component whose spacing must hold wherever it is placed should declare its own context rather than depend on the one it is dropped into.
+
+A surface usually wants a type set as well — `product` and `flow-product` are separate systems that share a word.
+
+## Reading content spaces itself
+
+Inside `flow-prose` the relationships are recognised from the markup, so an article needs no spacing classes:
+
+```html
+<article class="prose flow-prose">
+	<h2>Air quality</h2>
+	<p class="subtitle">Rolling 24-hour mean</p>
+	<p>Concentrations fell across every monitored borough…</p>
+	<figure>
+		<img src="/no2.svg" alt="Nitrogen dioxide concentration" />
+		<figcaption>Source: LAEI 2019</figcaption>
+	</figure>
+	<h3>Method</h3>
+	<p>Readings are taken hourly…</p>
+</article>
+```
+
+What is recognised, from `packages/themes/tailwind-custom/flow/flow.cjs`:
+
+| Where                                                                  | Relationship |
+| ---------------------------------------------------------------------- | ------------ |
+| Between any two blocks                                                 | default      |
+| Either side of `figure`, `img`, `table`, `pre`, `blockquote`, `.chart` | loose        |
+| Above `h1`, `h2`, `.title-1`, `.title-2`                               | section      |
+| Above `h3`, `h4`, `.title-3`, `.title-4`                               | loose        |
+| Between two consecutive headings                                       | tight        |
+| Heading followed by `.subtitle` or `.subhead`                          | tight        |
+| `.eyebrow` followed by a heading                                       | tight        |
+| Above an `.eyebrow` that introduces a heading                          | section      |
+| `figure > figcaption`                                                  | tight        |
+| `li + li`, and a list nested inside an `li`                            | tight        |
+| `dl > dd`                                                              | tight        |
+| `dl > dt`                                                              | default      |
+
+Headings here include `.display`, `.headline`, `.page-head` and `.section-head` as well as the elements.
+
+Two implementation details, in case you are debugging: the selectors use `:is()` rather than `:where()`, so the context class carries specificity and beats element resets such as `p { margin: 0 }`; and every pair excludes `.sr-only`, `[hidden]` and `template` at both ends, so a conditionally rendered sibling neither receives a gap nor becomes the thing a real element couples to.
+
+## Role classes earn the spacing
+
+Most of the rules match on the role class, not only the element. Using the right typography role is therefore also how the spacing is obtained.
+
+```html
+<!-- Recognised as a heading and its supporting line -->
+<h2 class="section-head">Rough sleeping</h2>
+<p class="subtitle">Quarterly</p>
+
+<!-- Visually near-identical, not recognised, takes the default gap -->
+<h2 class="section-head">Rough sleeping</h2>
+<p class="body-sm text-color-text-muted">Quarterly</p>
+```
+
+## In an application, state the relationship
+
+Generic containers describe nothing, so only the general rule applies and every gap comes out the same. Name the relationship where it matters:
+
+```
+mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section
+gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
+```
+
+The `mt-` form goes on the element needing space above it. The `gap-` form goes on a flex or grid container that is not itself a flow context.
+
+```html
+<section class="product flow-product">
+	<h2 class="section-head">Monitoring sites</h2>
+	<p class="subtitle">Twelve active sensors</p>
+
+	<div class="mt-flow-section">…</div>
+</section>
+```
+
+A stated relationship always beats an inferred one — every rule excludes elements carrying `mt-flow-`, so no override is needed.
+
+These carry a relationship rather than a distance: `mt-flow-section` produces 24px in a product context and 40px in a prose one. If a gap must be a fixed size regardless of surroundings, it is not flow.
+
+There are deliberately no context-prefixed utilities. `mt-flow-product-section` does not exist, because it would pin one gap to a fixed distance wherever it appeared, which is `mt-6` under another name. A component needing fixed density declares its own context class instead.
+
+## Which system owns the gap
+
+| Gap                                | Owner         | Comes from                           |
+| ---------------------------------- | ------------- | ------------------------------------ |
+| Vertical, between stacked siblings | the stack     | a flow relationship                  |
+| Horizontal, between tiled objects  | the grid      | `grid-gutter` or `grid-gutter-fluid` |
+| Inside a component's own box       | the component | `p-{n}`, `mt-{n}` and similar        |
+
+If the children of a container are a stack of blocks, it is flow. If they are a structure — a table's cells, a button's parts — it is the component's own space. A card's contents stack; a form's fields stack; a table's cells do not.
+
+Interior spacing settles on five values in practice: `1`, `2`, `4`, `6` and `8`. Anything else is usually a stack gap chosen by hand, or a measurement that should be derived from the element it aligns to.
+
+There are no padding utilities for the four relationships. Padding is a component's own space.
+
+## Things to watch for
+
+**A wrapping element interrupts the spacing.** The rules match direct children of the container that declares the context. This is the most common reason flow appears not to work.
+
+**Space above a first element has nothing to sit between**, and may push the whole container down instead.
+
+**A context class and a gap utility on the same element double the space.**
+
+**Use the `mt-` and `gap-` forms.** Other margin directions are generated by the theme's configuration but are not part of the system, and only `mt-flow-` is recognised by the rules as a stated relationship.
+
+**`product` and `flow-product` are different classes** — a type set and a spacing context.
+
+**`.chart` appears in both systems by design** — a type set, and an element given room above and below it in a flow. Not a conflict.
+
+**A chart container's slot is not a stack.** A plot's internal margins belong to the plot and should not be re-expressed as flow relationships.
+
+## Migrating existing components
+
+The current values already fall on relationships, so these are equivalent swaps:
+
+| Component                       | From        | To                                  |
+| ------------------------------- | ----------- | ----------------------------------- |
+| `Card`                          | `gap-2`     | `gap-flow-default`                  |
+| `InputWrapper`, `CheckboxGroup` | `space-y-1` | `gap-flow-tight`                    |
+| `Toast`                         | `mb-1`      | remove — `flow-compact` provides it |
+
+Card grids using `gap-4` should move to `grid-gutter-fluid`, or `grid-gutter` on a contained surface. That one changes the result rather than preserving it — a contained surface will legitimately shift at `sm` and above — so it is worth reviewing visually.
