@@ -30,7 +30,7 @@
 
 	const removeOverlay = () => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-		deckOverlay && $mapStore.removeControl(deckOverlay);
+		deckOverlay && $mapStore?.removeControl(deckOverlay);
 	};
 
 	const doLoad = () => {
