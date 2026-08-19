@@ -44,6 +44,9 @@ PINNED = [
     ("chart axis-title = 14px",           "chart",   "axis-title","font-size",   14,     None),
     ("chart axis-title weight 500",       "chart",   "axis-title","font-weight", 500,    None),
     ("chart label = 14px",                "chart",   "label",     "font-size",   14,     None),
+    ("chart title = 20px (= product)",    "chart",   "title",     "font-size",   20,     None),
+    ("chart subtitle = 16px (= product)", "chart",   "subtitle",  "font-size",   16,     None),
+    ("chart eyebrow = 14px (= product)",  "chart",   "eyebrow",   "font-size",   14,     None),
     ("prose eyebrow weight 500",          "prose",   "eyebrow",   "font-weight", 500,    None),
     ("product eyebrow wt 500",            "product", "eyebrow",   "font-weight", 500,    None),
 ]
@@ -81,6 +84,14 @@ FLOW_DEFAULT_CONTEXT = "product"
 # rules from (0,3,0) to (0,4,0) while the rest stay put, which silently inverts the
 # companion-coupling order (eyebrow->heading flips from tight to section).
 FLOW_OWL_GUARD = '[class*="mt-flow-"]'
+# Every flow rule is ROOTED at the element declaring the context: a child combinator
+# immediately after the :is() context group. A descendant combinator there reaches
+# arbitrary depth — through `not-prose`, through a nested context, into any component —
+# and the component author cannot override it (the rule computes to (0,1,3); the
+# obvious `[&>li+li]:mt-0` only reaches (0,1,2)). That was the footnote ghost-margin
+# bug in ChromeFooter/TableContainer. Keep in step with DECISIONS.md "a declared
+# context seals its subtree".
+FLOW_ROOT = ":is(.flow-prose, .flow-product, .flow-compact) > "
 FLOW_RAMP_PX = {
     "prose":   {"tight": 4, "default": 16, "loose": 24, "section": 40},
     "product": {"tight": 4, "default":  8, "loose": 16, "section": 24},
@@ -113,6 +124,15 @@ PRODUCT_ROWS = [
 # card-panel-subtitle/card-panel-eyebrow) — omitted here for the same reason
 # the old names were: a dedicated row would just repeat Body/Label's values.
 PRODUCT_MATRIX_OMIT = {"subtitle", "eyebrow"}
+
+# ── role names chart shares with another type set. `chart/{role}` must resolve to
+#    the same value as its `product/{role}` source: chart aliases product for these
+#    (title/subtitle/eyebrow) or restates the identical primitive (label). A shared
+#    name whose values DIVERGE is the shape of the subtitle bug — chart/subtitle
+#    rendered at prose's 18px inside a prose page for as long as the chart family
+#    had shipped, and went unseen only because every other shared name coincided.
+#    Keep in step with DECISIONS.md "a nested context seals only the roles it defines".
+CHART_SHARED_ROLES = ["title", "subtitle", "eyebrow", "label"]
 
 # representative roles shown in the CSS appendix typography sample
 SAMPLE = [
@@ -503,6 +523,68 @@ def check_flow(styles_dir):
               "(prose 4/16/24/40, product 4/8/16/24, compact 4/4/8/8)")
     return ok
 
+def parse_flow_selectors(project):
+    """flow/flow.cjs -> the selector keys, in emission order (or None if unreadable).
+    Keys are written out in full as quoted object keys, so a static read is enough —
+    no need to execute the plugin."""
+    path = os.path.join(project, "tailwind-custom", "flow", "flow.cjs")
+    if not os.path.exists(path):
+        print(f"  [FAIL] {path} not found (flow plugin moved?)")
+        return None
+    txt = open(path).read()
+    sels = re.findall(r"^\t'(:is\(\.flow-[^']+)':", txt, re.M)
+    if not sels:
+        print(f"  [FAIL] parsed 0 flow selectors from {path}")
+        return None
+    return sels
+
+def _mask_groups(sel):
+    """Blank out the contents of every (...) group so combinators INSIDE :is()/:not()/
+    :has() lists are not mistaken for structure in the selector itself."""
+    out, depth = [], 0
+    for ch in sel:
+        if ch == "(":
+            depth += 1; out.append(ch)
+        elif ch == ")":
+            depth -= 1; out.append(ch)
+        else:
+            out.append("_" if depth else ch)
+    return "".join(out)
+
+def _is_direct_child_pair(sel):
+    """True when the adjacent pair in `sel` are DIRECT CHILDREN of the flow container:
+    "<root> A + B". False for a pair that sits deeper — "<root> > :is(ul, ol) li + li"
+    is rooted at the container but its pair is a descendant, so it is a descendant rule."""
+    if not sel.startswith(FLOW_ROOT):
+        return False
+    # mask AFTER stripping the root: the root's own :is() list would otherwise be
+    # blanked out and no longer match
+    rest = _mask_groups(sel[len(FLOW_ROOT):])
+    if " + " not in rest:
+        return False
+    # a descendant step anywhere in either side of the pair means the pair is deeper
+    return all(" " not in part.strip() for part in rest.split(" + "))
+
+def check_flow_rooted(project):
+    """Every flow rule is rooted at the element declaring the context — a child
+    combinator immediately after the context group, no exceptions. Catches a
+    regression to unbounded descendant reach, which is invisible in the source
+    (one missing `>`) and unoverridable at the component (see FLOW_ROOT)."""
+    selectors = parse_flow_selectors(project)
+    if selectors is None:
+        return False
+    unrooted = [s for s in selectors if not s.startswith(FLOW_ROOT)]
+    print("flow rules are rooted at the context element:")
+    if unrooted:
+        print(f"  [FAIL] {len(unrooted)} of {len(selectors)} flow rules use a "
+              "descendant combinator after the context group — they reach into any "
+              "component at any depth, and the component author cannot override them:")
+        for s in unrooted:
+            print(f"         {s[:96]}...")
+        return False
+    print(f"  [PASS] all {len(selectors)} flow rules start with '{FLOW_ROOT.strip()}'")
+    return True
+
 def check_flow_owl_guard(project):
     """Author-declared rungs must beat DOM-inferred ones. Every SIBLING rule in
     flow/flow.cjs that sets margin-top must exclude elements carrying an explicit
@@ -513,23 +595,13 @@ def check_flow_owl_guard(project):
     :not() list, so guarding only some sibling rules reorders them against each
     other — measured: it flips eyebrow->heading coupling from tight (4px) to
     section (24px). Descendant rules (figcaption, li+li, dd, dt) are out of scope
-    by decision and are not required to carry it."""
-    path = os.path.join(project, "tailwind-custom", "flow", "flow.cjs")
-    if not os.path.exists(path):
-        print(f"  [FAIL] {path} not found (flow plugin moved?)")
+    by decision and are not required to carry it — note that since change-set 03
+    those are rooted too, so "descendant" means the adjacent PAIR sits below the
+    flow root, not that the rule is unrooted."""
+    selectors = parse_flow_selectors(project)
+    if selectors is None:
         return False
-    txt = open(path).read()
-    # selector keys are written out in full as quoted object keys
-    selectors = re.findall(r"^\t'(:is\(\.flow-[^']+)':", txt, re.M)
-    if not selectors:
-        print(f"  [FAIL] parsed 0 flow selectors from {path}")
-        return False
-    # A sibling rule is one whose adjacent pair are DIRECT CHILDREN of the flow
-    # container: "<context> > A + B". Rules where the pair sits deeper (e.g.
-    # "<context> :is(ul, ol) > li + li") are descendant rules and exempt, even
-    # though they also contain "+".
-    ctx = ":is(.flow-prose, .flow-product, .flow-compact) > "
-    siblings = [s for s in selectors if s.startswith(ctx) and " + " in s]
+    siblings = [s for s in selectors if _is_direct_child_pair(s)]
     unguarded = [s for s in siblings if FLOW_OWL_GUARD not in s]
     print("flow owl guard (explicit rung beats the inferred one):")
     if unguarded:
@@ -542,6 +614,85 @@ def check_flow_owl_guard(project):
     print(f"  [PASS] all {len(siblings)} sibling rules carry {FLOW_OWL_GUARD} "
           f"({len(selectors) - len(siblings)} descendant rules exempt by decision)")
     return True
+
+def check_typography_delivery(project):
+    """Typography responsive values are delivered on the CONTEXT element, never on
+    the role element. A declaration on an element beats an inherited one outright —
+    it is not a specificity contest — so an element-level rule from an OUTER context
+    (`.prose .subtitle { --subtitle-font-size: 18px }`) overrode a nested context's
+    own inherited values, and `not-prose` did not exclude it. That was the chart
+    subtitle bug. Every context must publish its full role set on itself, so the
+    innermost declared context wins at any depth.
+
+    Read statically from the plugin source: the per-role selector loop that caused
+    this is a distinctive shape (a `.${context} .${role}` template), and its absence
+    plus all three contexts in the delivery loop is what we assert."""
+    path = os.path.join(project, "tailwind-custom", "typography", "typography.cjs")
+    if not os.path.exists(path):
+        print(f"  [FAIL] {path} not found (typography plugin moved?)")
+        return False
+    txt = open(path).read()
+    print("typography delivered on the context, never the role element:")
+    ok = True
+    # any selector template pairing a context with a role — `.${context}.${role}`,
+    # `.${context} .${role}`, or the `.not-prose ...` variants that existed only to
+    # keep element-level targeting working across a not-prose boundary
+    role_elem = re.findall(r"`[^`]*\$\{context\}[^`]*\$\{role\}[^`]*`", txt)
+    if role_elem:
+        ok = False
+        print(f"  [FAIL] {len(role_elem)} selector template(s) target the role "
+              "element from a context; an outer context then overrides a nested "
+              "one's own values:")
+        for r in role_elem:
+            print(f"         {r}")
+    else:
+        print("  [PASS] no context+role selector template (the per-role loop is gone)")
+    if ".not-prose" in txt:
+        ok = False
+        print("  [FAIL] typography.cjs still emits `.not-prose` selector variants — "
+              "they existed only for element-level targeting; inheritance crosses a "
+              "not-prose boundary regardless")
+    # all three contexts publish their role set on themselves. chart has no key in
+    # responsive.cjs and contributes no vars here, but must be in the loop so that
+    # nothing is left relying on element-level delivery.
+    m = re.search(r"\[([^\]]*)\]\.forEach\(\(context\)", txt)
+    listed = set(re.findall(r"'(\w+)'", m.group(1))) if m else set()
+    want = {"prose", "product", "chart"}
+    if listed >= want:
+        print(f"  [PASS] context delivery loop covers {sorted(want)}")
+    else:
+        ok = False
+        print(f"  [FAIL] context delivery loop covers {sorted(listed) or 'nothing'}, "
+              f"expected at least {sorted(want)} — a context left out does not seal")
+    return ok
+
+def check_chart_seals(model):
+    """A nested context seals only the roles it DEFINES; for the names chart shares
+    with product, the two must agree. chart aliases product for title/subtitle/eyebrow
+    and restates the same primitive for label, so a divergence means either the alias
+    broke or the two sets drifted — the shape of the subtitle bug, which hid for as
+    long as it did precisely because the other shared names coincided."""
+    print("chart's shared role names agree with their product source:")
+    ok = True
+    for role in CHART_SHARED_ROLES:
+        for mode in MODES:
+            chart = model.get((mode, "chart", role, "font-size"))
+            prod = model.get((mode, "product", role, "font-size"))
+            if chart is None or prod is None:
+                ok = False
+                print(f"  [FAIL] {mode}/{role}: chart={chart!r} product={prod!r} — "
+                      "one side is missing a font-size")
+                break
+            if fs_px(chart) != fs_px(prod):
+                ok = False
+                print(f"  [FAIL] {mode} chart/{role} = {fs_px(chart)}px but "
+                      f"product/{role} = {fs_px(prod)}px — a shared role name whose "
+                      "values diverge is invisible until it is nested")
+                break
+        else:
+            print(f"  [PASS] chart/{role} = product/{role} = "
+                  f"{fs_px(model[('md', 'chart', role, 'font-size')])}px at all modes")
+    return ok
 
 def _repo_root(styles_dir):
     d = os.path.abspath(styles_dir)
@@ -606,11 +757,18 @@ def cmd_check(spec_path, styles_dir):
         ok = False
     if not check_flow(styles_dir):
         ok = False
-    if not check_flow_owl_guard(os.path.dirname(os.path.abspath(styles_dir))):
+    project = os.path.dirname(os.path.abspath(styles_dir))
+    if not check_flow_rooted(project):
+        ok = False
+    if not check_flow_owl_guard(project):
+        ok = False
+    if not check_typography_delivery(project):
         ok = False
     if not check_tw_extend_wired(styles_dir):
         ok = False
     model = parse_typography(styles_dir)
+    if not check_chart_seals(model):
+        ok = False
     print("lint (pinned decisions vs emitted):")
     for desc, fam, role, prop, expected, modes in PINNED:
         ms = modes or MODES

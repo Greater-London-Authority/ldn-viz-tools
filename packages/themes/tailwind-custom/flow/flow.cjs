@@ -14,6 +14,15 @@
 // Selector keys are written out in full (no computed keys) so the file is safe
 // whether the build executes or statically parses it. Later keys win at equal
 // specificity — ordering is load-bearing.
+//
+// EVERY rule is ROOTED at the element declaring the context: a child combinator
+// immediately after the :is() group, no exceptions. A descendant combinator there
+// reaches arbitrary depth — through `not-prose`, through a nested context, into any
+// component — and cannot be overridden by the component author, since the rule
+// computes to (0,1,3) and the obvious `[&>li+li]:mt-0` only reaches (0,1,2). That
+// was the footnote ghost-margin bug. The list rules keep a descendant reach WITHIN
+// a list that is itself a direct child of the flow root, so nested lists retain
+// their rhythm without reaching into components. Guarded by regen_spec.py check.
 
 module.exports = {
 	// No context variable blocks here. The ramp's values live in
@@ -89,26 +98,28 @@ module.exports = {
 		},
 
 	// 5 · caption binds to its figure
-	':is(.flow-prose, .flow-product, .flow-compact) figure > figcaption': {
+	':is(.flow-prose, .flow-product, .flow-compact) > figure > figcaption': {
 		marginTop: 'var(--flow-tight)'
 	},
 
-	// 6 · list internal rhythm — li is not a flow-root child, so the owl never reached it
-	':is(.flow-prose, .flow-product, .flow-compact) :is(ul, ol) > li + li': {
+	// 6 · list internal rhythm — li is not a flow-root child, so the owl never reached
+	// it. Reach is bounded to lists that are themselves direct children of the flow
+	// root; a list inside a component declares its own spacing (e.g. `gap-1`).
+	':is(.flow-prose, .flow-product, .flow-compact) > :is(ul, ol) li + li': {
 		marginTop: 'var(--flow-tight)'
 	},
-	':is(.flow-prose, .flow-product, .flow-compact) li > :is(ul, ol)': {
+	':is(.flow-prose, .flow-product, .flow-compact) > :is(ul, ol) li > :is(ul, ol)': {
 		marginTop: 'var(--flow-tight)'
 	},
 
 	// 6b · description lists — definition binds to its term; pairs separate
-	':is(.flow-prose, .flow-product, .flow-compact) dl > dd': {
+	':is(.flow-prose, .flow-product, .flow-compact) > dl > dd': {
 		marginTop: 'var(--flow-tight)'
 	},
-	':is(.flow-prose, .flow-product, .flow-compact) dl > dt': {
+	':is(.flow-prose, .flow-product, .flow-compact) > dl > dt': {
 		marginTop: 'var(--flow-default)'
 	},
-	':is(.flow-prose, .flow-product, .flow-compact) dl > dt:first-child': {
+	':is(.flow-prose, .flow-product, .flow-compact) > dl > dt:first-child': {
 		marginTop: '0'
 	}
 
