@@ -28,14 +28,34 @@ free; a named role must earn a one-sentence job those two don't cover.
 
 ## Which system for which job
 
-- **Rhythm** — space _between_ stacked blocks → `flow` (context ramp). See `references/flow.md`.
-- **Construction** — padding, border widths, list indents, cell padding, gaps →
-  `--spacing-{n}` / `p-{n}` / `gap-{n}`.
-- **Layout structure** — grid gutters, container padding → `grid-spacing` tokens.
-  See `references/layout-grid.md`.
-- Line-height governs space _within_ a text block; spacing tokens govern space
-  _between_ elements. Whitespace around text uses the spacing scale, not the
-  font-size/line-height primitives.
+Three owners. The test is **ownership**, not the gap's appearance:
+
+> **Does this gap exist because two things sit next to each other, or because one
+> thing has an inside?**
+
+- **Vertical, between stacked siblings** → the **stack** owns it → a `flow` rung
+  (`mt-flow-{rung}` / `gap-flow-{rung}`). See `references/flow.md`.
+- **Horizontal, between tiled objects** (cards in a grid, side-by-side panels) →
+  the **grid** owns it → `.grid-gutter` / `.grid-gutter-fluid`, **not** a hardcoded
+  `gap-{n}`. See `references/layout-grid.md`.
+- **Inside a component's box** — padding, border widths, list indents, cell padding
+  → the **component** owns it → `--spacing-{n}` / `p-{n}` / `mt-{n}`.
+
+Shorter form: **if the children are a stack of blocks it's flow; if they're a
+structure it's construction.** A card's contents stack; a form's fields stack. A
+table's cells don't; a button row doesn't.
+
+This supersedes the older *rhythm-vs-construction* gate, which asked for a judgement
+about a gap's *nature* and proved unanswerable in practice.
+
+**Construction shortlist.** Real usage across `packages/ui/src` concentrates almost
+entirely on five rungs — `4` (16px), `2` (8px), `6` (24px), `1` (4px), `8` (32px).
+Reach for these first; anything outside the set is usually a flow gap in disguise,
+or an alignment value that should derive from the element it aligns to.
+
+Line-height governs space _within_ a text block; spacing tokens govern space
+_between_ elements. Whitespace around text uses the spacing scale, not the
+font-size/line-height primitives.
 
 ## Retired: the t-shirt scale (migration mapping)
 
