@@ -8,6 +8,20 @@ Flow governs the vertical space between stacked blocks. A container declares a c
 
 The full reasoning is on the [Flow foundation page](https://greater-london-authority.github.io/ldn-viz-tools/). This page covers what to type.
 
+## Declaring a context
+
+```html
+<article class="flow-prose">…</article>
+<section class="flow-product">…</section>
+<div class="flow-compact">…</div>
+```
+
+One class. It sets the four relationships (see below) and enables the spacing between that element's direct children.
+
+Contexts nest, and the innermost applies. A component whose spacing must hold wherever it is placed should declare its own context rather than depend on the one it is dropped into.
+
+A surface usually wants a type set as well — `product` and `flow-product` are separate systems that share a word.
+
 ## The four relationships
 
 The vocabulary is four names, each describing how closely two blocks are related. The distance those names produce is decided by the context they sit in.
@@ -19,23 +33,9 @@ The vocabulary is four names, each describing how closely two blocks are related
 | loose        | 24px  | 16px    | 8px     |
 | section      | 40px  | 24px    | 8px     |
 
-Compact collapses the ramp on purpose — tight equals default, loose equals section. A surface that small cannot carry four distinguishable gaps.
+**Compact** is for small spaces and so collapses the ramp — tight equals default, loose equals section. A small surface cannot carry four distinguishable gaps.
 
 Values come from Figma through Style Dictionary into `styles/flow.css`. Nothing in the ramp is written by hand in CSS, and a component should never restate one of these numbers.
-
-## Declaring a context
-
-```html
-<article class="flow-prose">…</article>
-<section class="flow-product">…</section>
-<div class="flow-compact">…</div>
-```
-
-One class. It sets the four relationships and enables the spacing between that element's direct children.
-
-Contexts nest, and the innermost applies. A component whose spacing must hold wherever it is placed should declare its own context rather than depend on the one it is dropped into.
-
-A surface usually wants a type set as well — `product` and `flow-product` are separate systems that share a word.
 
 ## Reading content spaces itself
 
@@ -92,7 +92,7 @@ Most of the rules match on the role class, not only the element. Using the right
 
 ## In an application, state the relationship
 
-Generic containers describe nothing, so only the general rule applies and every gap comes out the same. Name the relationship where it matters:
+Generic containers (such as `div` element), describe nothing, so only the general rule applies and every gap comes out the same. Use `mt-flow-*` and `gap-flow-*` classes to explicitly name the relationship where it matters:
 
 ```
 mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section

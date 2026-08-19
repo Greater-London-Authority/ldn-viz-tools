@@ -64,22 +64,22 @@ The `product` class sets the values but styles no elements. An application's mar
 
 ### Choosing between them
 
-| Element                                          | Role                            |
-| ------------------------------------------------ | ------------------------------- |
-| Input label, tab, navigation item, button        | `label`, tight for single lines |
-| Field value, placeholder, menu item              | `body`                          |
-| Helper text, hints, descriptions, secondary copy | `body-sm`                       |
-| Table column header                              | `label`                         |
-| Table cell                                       | `body-sm`                       |
-| Tooltip, badge, tag, metadata                    | `caption`                       |
-| Modal, callout, panel or drawer heading          | `title`                         |
-| Sidebar or navigation section heading            | `label`                         |
+| Element                                          | Role                                    |
+| ------------------------------------------------ | --------------------------------------- |
+| Input label, tab, navigation item, button        | `label`, `label-tight` for single lines |
+| Field value, placeholder, menu item              | `body`                                  |
+| Helper text, hints, descriptions, secondary copy | `body-sm`                               |
+| Table column header                              | `label`                                 |
+| Table cell                                       | `body-sm`                               |
+| Tooltip, badge, tag, metadata                    | `caption`                               |
+| Modal, callout, panel or drawer heading          | `title`                                 |
+| Sidebar or navigation section heading            | `label`                                 |
 
 Control and navigation labels take `label` even where older markup used sixteen pixels. Sidebar _section_ headings are labels rather than titles, so that navigation group headings stay small.
 
 ### Single-line controls
 
-`label-tight` and `label-sm-tight` are the same size and weight with the line height reduced to match the font size. They exist for controls whose text is one line, vertically centred, where the component's padding governs its height.
+`label-tight` and `label-sm-tight` are the same size and weight as `label` or `label-sm`; with the line height reduced to match the font size. They exist for controls whose text is one line, vertically centred, where the component's padding governs its height.
 
 ```html
 <button class="label-tight">Download</button>
