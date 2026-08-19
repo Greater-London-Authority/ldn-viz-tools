@@ -62,7 +62,7 @@
 	/>
 </svelte:head>
 
-<div class="flex min-h-dvh flex-col">
+<div class="flex min-h-dvh flex-col bg-color-surface">
 	<Header>
 		{#if page.data.metadata?.slug !== 'index'}
 			<Button
