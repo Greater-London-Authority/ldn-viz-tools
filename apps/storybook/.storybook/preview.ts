@@ -31,10 +31,13 @@ const preview: Preview = {
 						],
 						'Components - Layout And Themes',
 						'*',
-						'Examples'
+						'Example Layouts'
 					],
 					'Charts',
-					['Introduction', 'Components', ['ChartContainer']]
+					['Introduction', 'Components', ['ChartContainer']],
+					'Maps',
+					'Tables',
+					['*', 'Example Tables']
 				]
 			}
 		},
