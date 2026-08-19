@@ -1,19 +1,21 @@
-import { withThemeByClassName } from './withThemeByClassName';
 import type { Preview } from '@storybook/sveltekit';
 import '../src/app.postcss';
-import { docs } from './ciuStorybookTheme';
 import ThemeContext from '../src/lib/decorators/ThemeContext.svelte';
+import { docs } from './ciuStorybookTheme';
+import { withThemeByClassName } from './withThemeByClassName';
 
 const preview: Preview = {
 	parameters: {
 		options: {
 			storySort: {
 				order: [
+					'Foundations',
 					'Ui',
 					[
 						'Introduction',
-						'Typography',
-						'Form Element Styling',
+						'Icons',
+						'Theme',
+						'User Preference',
 						'Auth',
 						'Components',
 						[
@@ -29,10 +31,13 @@ const preview: Preview = {
 						],
 						'Components - Layout And Themes',
 						'*',
-						'Examples'
+						'Example Layouts'
 					],
 					'Charts',
-					['Introduction', 'Components', ['ChartContainer']]
+					['Introduction', 'Components', ['ChartContainer']],
+					'Maps',
+					'Tables',
+					['*', 'Example Tables']
 				]
 			}
 		},
