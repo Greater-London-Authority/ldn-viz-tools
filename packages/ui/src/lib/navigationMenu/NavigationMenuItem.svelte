@@ -85,7 +85,9 @@
 		classNames(
 			`flex w-full items-center level-${level} label-tight p-1.5 hover:text-color-interactive-primary-hover hover:underline `,
 			isActive ? 'text-color-interactive-primary-active underline' : '',
-			level === 1 ? 'text-color-text' : 'text-color-text-muted'
+			level === 1 ? 'text-color-text' : 'text-color-text-muted ',
+			level === 3 || level == 4 ? 'label-sm-tight' : '',
+			level === 4 ? 'text-color-text-wash' : ''
 		)
 	);
 
@@ -102,7 +104,9 @@
 
 	let childClasses = $derived(
 		classNames(
-			!isExpanded ? 'hidden' : `${level === 2 ? 'pl-4' : ''} mb-1`,
+			!isExpanded
+				? 'hidden'
+				: `${(level === 1 && orientation !== 'horizontal') || level === 2 ? 'pl-2' : ''} mb-1`,
 			orientationClasses[orientation!]
 		)
 	);
