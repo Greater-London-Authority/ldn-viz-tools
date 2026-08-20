@@ -17,8 +17,7 @@
 		HeaderTitle,
 		NavigationMenu,
 		PageMetadata,
-		Theme,
-		ThemeSwitcher
+		Theme
 	} from '@ldn-viz/ui';
 	import { Bars3, XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -114,7 +113,7 @@
 
 	{@render children()}
 
-	<Footer showCiuLogo>
+	<Footer showCiuLogo showCookieMenu>
 		<div class="pb-4 text-sm lg:w-1/6">
 			<nav>
 				<h3 class="mb-1 font-semibold">Links</h3>
@@ -141,11 +140,5 @@
 				</ul>
 			</nav>
 		</div>
-
-		{#snippet footerCookieMenu()}
-			<div class="flex justify-end">
-				<ThemeSwitcher size="xs" />
-			</div>
-		{/snippet}
 	</Footer>
 </div>
