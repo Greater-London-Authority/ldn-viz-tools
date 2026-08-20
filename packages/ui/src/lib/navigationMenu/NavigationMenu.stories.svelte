@@ -231,7 +231,7 @@
 
 <Story name="Programmatically change active item">
 	{#snippet template(args)}
-		<div class="flex flex-col gap-4">
+		<div class="product flow-product">
 			<div class="flex flex-wrap gap-2">
 				<span>Select:</span>
 				<Button onclick={() => (activeMenuItemId = 'applications')} size="sm">
@@ -252,44 +252,46 @@
 				</Button>
 				<Button onclick={() => (activeMenuItemId = 'dv-maps')} size="sm">DV Maps (level 3)</Button>
 			</div>
-		</div>
 
-		<div class="product body-sm text-color-text-muted">
-			Current active ID: <strong>{activeMenuItemId}</strong>
-		</div>
+			<div class="body-sm text-color-text-muted">
+				Current active ID: <strong>{activeMenuItemId}</strong>
+			</div>
 
-		<div class="max-w-96">
-			<NavigationMenu
-				{...args}
-				ariaLabel="programmatic selection menu"
-				{items}
-				bind:activeMenuItemId
-			/>
+			<div class="mt-flow-section max-w-96">
+				<NavigationMenu
+					{...args}
+					ariaLabel="programmatic selection menu"
+					{items}
+					bind:activeMenuItemId
+				/>
+			</div>
 		</div>
 	{/snippet}
 </Story>
 
 <Story name="Two menus on page">
 	{#snippet template(args)}
-		<div class="flex w-full gap-6">
-			<div>
-				<div class="product body-sm text-color-text-muted">
-					Current active ID: <strong>{activeMenuItemId}</strong>
-				</div>
+		<div class="product flow-product">
+			<div class="grid-gutter grid grid-cols-2">
+				<div>
+					<div class="body-sm mb-4 text-color-text-muted">
+						Current active ID: <strong>{activeMenuItemId}</strong>
+					</div>
 
-				<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:activeMenuItemId />
-			</div>
-			<div>
-				<div class="product body-sm text-color-text-muted">
-					Current active ID: <strong>{activeMenuItemId2}</strong>
+					<NavigationMenu {...args} ariaLabel="example-menu" {items} bind:activeMenuItemId />
 				</div>
+				<div>
+					<div class="body-sm mb-4 text-color-text-muted">
+						Current active ID: <strong>{activeMenuItemId2}</strong>
+					</div>
 
-				<NavigationMenu
-					{...args}
-					ariaLabel="example-menu"
-					{items}
-					bind:activeMenuItemId={activeMenuItemId2}
-				/>
+					<NavigationMenu
+						{...args}
+						ariaLabel="example-menu"
+						{items}
+						bind:activeMenuItemId={activeMenuItemId2}
+					/>
+				</div>
 			</div>
 		</div>
 	{/snippet}
