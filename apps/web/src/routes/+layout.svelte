@@ -1,20 +1,22 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import { findActiveItem } from '@ldn-viz/ui';
 
 	import { breakPoint, sidebarState } from '$lib/state.svelte';
 	import { resolveNavItems } from '$lib/utils';
 	import {
+		AnalyticsAndCookieConsent,
 		Button,
+		findActiveItem,
 		Footer,
 		Header,
 		HeaderItem,
 		HeaderRight,
 		HeaderTitle,
 		NavigationMenu,
+		PageMetadata,
 		Theme,
 		ThemeSwitcher
 	} from '@ldn-viz/ui';
@@ -48,11 +50,21 @@
 	afterNavigate(() => (sidebarState.state.isOpen = breakPoint.current >= 1280));
 </script>
 
-<Theme />
-
-<svelte:window bind:innerWidth={breakPoint.current} />
+<PageMetadata
+	title="London City Data"
+	description="We build data applications that help Londoners get access to the data they need, and support policy makers to make data driven decisions to improve London for all."
+	url={`https://apps.london.gov.uk/city-data`}
+	image="https://apps.london.gov.uk/city-data/preview.png"
+	imageAlt="London City Data"
+	favicon={asset('/favicon.ico')}
+/>
 
 <svelte:head>
+	<script>
+		window.ldnVizCivicApiKey = 'b08bca6362c188d40519ea5501ffd4a94d8003dc';
+		window.ldnVizCivicAppName = 'ldn-city-data';
+	</script>
+
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
@@ -61,6 +73,12 @@
 		crossorigin="anonymous"
 	/>
 </svelte:head>
+
+<AnalyticsAndCookieConsent />
+
+<Theme />
+
+<svelte:window bind:innerWidth={breakPoint.current} />
 
 <div class="flex min-h-dvh flex-col bg-color-surface">
 	<Header>

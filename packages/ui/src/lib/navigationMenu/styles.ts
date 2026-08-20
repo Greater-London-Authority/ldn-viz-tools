@@ -33,9 +33,9 @@ export const itemTextClass = ({ level, isActive }: { level: number; isActive: bo
 	const { type, color } = LEVEL_STYLES[toLevel(level)];
 
 	return classNames(
-		'flex w-full items-center hover:text-color-interactive-primary-hover hover:underline py-2',
+		'flex w-full items-center hover:text-color-interactive-primary-text-hover hover:underline py-2',
 		type,
-		isActive ? 'text-color-interactive-primary-active underline' : color
+		isActive ? 'text-color-interactive-primary-text-active underline' : color
 	);
 };
 
