@@ -74,7 +74,7 @@
 
 <Story name="Outline" args={{ variant: 'outline' }} />
 
-<Story name="Text" args={{ variant: 'text', emphasis: 'secondary' }} />
+<Story name="Text" args={{ variant: 'text' }} />
 
 <Story name="Disabled">
 	{#snippet template(args)}
