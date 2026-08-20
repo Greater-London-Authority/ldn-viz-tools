@@ -140,12 +140,6 @@
 	{/snippet}
 </Story>
 
-<Story name="Horizontal">
-	{#snippet template(args)}
-		<NavigationMenu {...args} {items} orientation="horizontal" />
-	{/snippet}
-</Story>
-
 <!-- The component takes a width prop that can accept Tailwind width classes -->
 <Story name="Width by class">
 	{#snippet template(args)}
@@ -214,7 +208,11 @@
 		<NavigationMenu
 			{...args}
 			ariaLabel="horizontally oriented menu"
-			items={[...items, { title: 'No child items', id: 'no-child', href: '/' }]}
+			items={[
+				{ title: 'No child items', id: 'no-child', href: '/' },
+				...items,
+				{ title: 'No child items', id: 'no-child', href: '/' }
+			]}
 			orientation="horizontal"
 		/>
 	{/snippet}
