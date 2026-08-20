@@ -143,9 +143,9 @@ Many color tokens are defined with an **inverse** counterpart that is used to in
 
 The token **concept** guides us in how to apply the token. For color tokens, values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
 
-##### Conceptual model of application ui layering
-
 ![An isometric illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.svg)
+
+<figcaption>Conceptual model of application ui layering</figcaption>
 
 | Concept       | Detail                                                          |
 | :------------ | :-------------------------------------------------------------- |
@@ -160,7 +160,7 @@ The token **concept** guides us in how to apply the token. For color tokens, val
 
 Icons take the colour of the element they sit in rather than having a concept of their own. An icon on a filled control uses the inverse text token, and an icon beside a label uses the same token as the label.
 
-##### Component-type exceptions
+**Component-type exceptions**
 
 The system deliberately avoids component tier tokens with the exception of tokens for charts and geographic features. Rather than extending the naming hierarchy these tokens are group-prefixed at the 'concept' level.
 
@@ -208,7 +208,7 @@ The majority of color tokens are defined with a **muted** counterpart which lets
 
 `muted` is available across most concepts. `wash` is a third step for text only, where a reading hierarchy needs more than two levels.
 
-##### Container level exception
+**Container level exception**
 
 | Emphasis  | Detail                                      |
 | :-------- | :------------------------------------------ |
