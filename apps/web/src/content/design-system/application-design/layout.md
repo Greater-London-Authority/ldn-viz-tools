@@ -161,7 +161,7 @@ The space between blocks within a section comes from a [flow](/design-system/fou
 	<h2 class="section-head">Rough sleeping</h2>
 	<p class="subtitle">Quarterly</p>
 
-	<div class="mt-flow-section grid-gutter-fluid grid grid-cols-3">
+	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
 		<!-- cards -->
 	</div>
 
