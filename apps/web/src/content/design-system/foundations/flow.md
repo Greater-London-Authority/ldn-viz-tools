@@ -221,7 +221,7 @@ Using the system:
 	<h2 class="section-head">Rough sleeping</h2>
 	<p class="subtitle">Quarterly</p>
 
-	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
+	<div class="mt-flow-section grid-gutter-fluid grid grid-cols-3">
 		<!-- cards -->
 	</div>
 

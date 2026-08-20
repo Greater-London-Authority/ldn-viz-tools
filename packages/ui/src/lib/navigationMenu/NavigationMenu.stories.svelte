@@ -231,7 +231,7 @@
 
 <Story name="Programmatically change active item">
 	{#snippet template(args)}
-		<div class="product flow-product">
+		<div class="flow-product product">
 			<div class="flex flex-wrap gap-2">
 				<span>Select:</span>
 				<Button onclick={() => (activeMenuItemId = 'applications')} size="sm">
@@ -271,7 +271,7 @@
 
 <Story name="Two menus on page">
 	{#snippet template(args)}
-		<div class="product flow-product">
+		<div class="flow-product product">
 			<div class="grid-gutter grid grid-cols-2">
 				<div>
 					<div class="body-sm mb-4 text-color-text-muted">
