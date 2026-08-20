@@ -146,7 +146,7 @@
 		<a
 			{id}
 			href={constructURL(href)}
-			class={textClass}
+			class={`${textClass} pr-4`}
 			{...currentPage}
 			onclick={() => onChange?.(id)}
 		>
