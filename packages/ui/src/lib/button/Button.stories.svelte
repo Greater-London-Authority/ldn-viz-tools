@@ -74,7 +74,17 @@
 
 <Story name="Outline" args={{ variant: 'outline' }} />
 
-<Story name="Text" args={{ variant: 'text', emphasis: 'secondary' }} />
+<Story name="Text" args={{ variant: 'text' }} />
+
+<Story name="Test">
+	{#snippet template(args)}
+		<Button {...args}>Cant touch this!</Button>
+		<p class="body mt-4">
+			Inline text with <Button {...(args, { variant: 'text', slim: true })}>Cant touch this!</Button
+			>
+		</p>
+	{/snippet}
+</Story>
 
 <Story name="Disabled">
 	{#snippet template(args)}
