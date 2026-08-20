@@ -83,8 +83,10 @@ export const childListClass = ({
 	const isIndented = (level === 1 && orientation !== 'horizontal') || level === 2;
 
 	return classNames(
-		'mb-1 bg-color-container',
+		'mb-1',
 		isIndented ? 'pl-2' : '',
-		orientation === 'horizontal' ? `w-full ${level === 1 ? 'absolute z-10' : 'relative'}` : ''
+		orientation === 'horizontal'
+			? `w-full bg-color-container' ${level === 1 ? 'absolute z-10' : 'relative'}`
+			: ''
 	);
 };
