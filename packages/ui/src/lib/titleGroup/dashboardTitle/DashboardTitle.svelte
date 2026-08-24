@@ -19,12 +19,7 @@
 	let { title = '', subtitle = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
-<div
-	class={classNames(
-		'product flex flex-col items-start border-t border-color-border-muted py-2',
-		classes
-	)}
->
+<div class={classNames('product flow-product flex flex-col items-start', classes)}>
 	{#if eyebrow}
 		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
 	{/if}
