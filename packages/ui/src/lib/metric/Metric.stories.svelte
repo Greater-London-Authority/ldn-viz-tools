@@ -18,10 +18,9 @@
 		tags: ['autodocs'],
 		args: {
 			label: 'Population',
-			value: '100,000',
-			change: '10%',
+			value: 100000,
 			status: 'positive',
-			comparisonValue: '110,000'
+			comparisonValue: 110000
 		},
 		argTypes: {
 			status: {
@@ -51,17 +50,33 @@
 
 <Story name="Horizontal" args={{ layout: 'horizontal' }} />
 
-<Story name="Plain metric (no change)" args={{ change: '', comparisonValue: '' }} />
+<Story name="Plain metric (no change)" args={{ comparisonValue: undefined }} />
 
-<Story name="With translation" args={{ translation: '(20%)' }} />
+<Story name="With translation" args={{ translation: '(Jun 2026)' }} />
 
-<!-- Status can be displaed as positive/negative/netral -->
+<!-- An increase can be displayed as positive/negative/neutral depending on the value of `goodIs` -->
 <Story name="Statuses">
 	{#snippet template(args)}
 		<div class="flex gap-8">
-			<Metric {...args} status="positive" />
-			<Metric {...args} status="negative" />
-			<Metric {...args} status="neutral" />
+			<Metric {...args} goodIs="high" />
+			<Metric {...args} goodIs="low" />
+			<Metric {...args} goodIs={undefined} />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Formatting changes">
+	{#snippet template(args)}
+		<div class="flex gap-8">
+			<Metric {...args} showChangeAs="absolute" />
+			<Metric {...args} showChangeAs="percentage" />
+			<Metric
+				{...args}
+				formatString=".0%"
+				value={0.05}
+				comparisonValue={0.2}
+				showChangeAs="percentage-point"
+			/>
 		</div>
 	{/snippet}
 </Story>
@@ -87,3 +102,13 @@
 </Story>
 
 <Story name="Without icon" args={{ showIcon: false }} />
+
+<Story name="Custom change renderer">
+	{#snippet template(args)}
+		<Metric {...args} hero="change" goodIs="high">
+			{#snippet changeRenderer()}
+				The change was 10,000.
+			{/snippet}
+		</Metric>
+	{/snippet}
+</Story>

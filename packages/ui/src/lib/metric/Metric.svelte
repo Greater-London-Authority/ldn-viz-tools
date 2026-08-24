@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	/**
 	 * `Metric` — a single figure with an optional previous value and change.
 	 *
@@ -9,9 +10,9 @@
 	 *
 	 * @component
 	 */
-	import { ArrowTrendingDown, ArrowTrendingUp } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import { format } from 'd3-format';
 	import { classNames } from '../utils/classNames.js';
+	import ChangeIndicator from './ChangeIndicator.svelte';
 
 	type Status = 'positive' | 'negative' | 'neutral';
 
@@ -20,13 +21,10 @@
 		label?: string;
 
 		/** The absolute figure, e.g. "100,000". */
-		value: string;
+		value: number;
 
 		/** Unit or suffix shown after the value, e.g. "%" or "km". */
 		unit?: string;
-
-		/** The change figure, e.g. "10%". Omit to render a plain metric with no change. */
-		change?: string;
 
 		/** Colours the change (and its icon); `neutral` shows no icon. */
 		status?: Status;
@@ -35,7 +33,7 @@
 		translation?: string;
 
 		/** Prior value to compare against; rendered as "vs {comparisonValue}". */
-		comparisonValue?: string;
+		comparisonValue?: number;
 
 		/** Which figure leads: the absolute value, or the change. */
 		hero?: 'value' | 'change';
@@ -49,41 +47,41 @@
 		/** Show the direction icon beside the change value. */
 		showIcon?: boolean;
 
+		goodIs?: 'high' | 'low';
+
 		class?: string;
+
+		changeRenderer?: Snippet;
+
+		showChangeAs: 'absolute' | 'percentage' | 'percentage-point';
+
+		formatString?: string;
+		changeFormatString?: string;
 	}
 
 	let {
 		label = '',
 		value,
 		unit = '',
-		change = '',
-		status = 'neutral',
 		translation = '',
 		comparisonValue = '',
 		hero = 'value',
 		size = 'lg',
 		layout = 'vertical',
 		showIcon = true,
-		class: classes = ''
+		class: classes = '',
+		goodIs = 'high',
+		changeRenderer = undefined,
+		showChangeAs,
+		formatString = ',.0f',
+		changeFormatString
 	}: Props = $props();
-
-	const statusTextClass: Record<Status, string> = {
-		positive: 'text-color-surface-positive',
-		negative: 'text-color-surface-negative',
-		neutral: 'text-color-data-neutral-1'
-	};
-
-	const statusIcon = {
-		positive: ArrowTrendingUp,
-		negative: ArrowTrendingDown,
-		neutral: undefined
-	};
 
 	let metricRole = $derived(size === 'lg' ? 'metric' : 'metric-sm');
 	let labelRole = $derived(size === 'lg' ? 'label' : 'label-sm');
 	let bodyRole = $derived(size === 'lg' ? 'body' : 'body-sm');
 
-	let hasChange = $derived(!!change);
+	let hasChange = $derived(typeof value !== 'undefined' && typeof comparisonValue !== 'undefined');
 	let heroIsChange = $derived(hero === 'change' && hasChange);
 	let iconSize = $derived(
 		heroIsChange
@@ -94,7 +92,8 @@
 				? 'h-4 w-4'
 				: 'h-3.5 w-3.5'
 	);
-	let icon = $derived(showIcon ? statusIcon[status] : undefined);
+
+	let f = $derived(format(formatString ?? '.0f'));
 </script>
 
 <div
@@ -110,12 +109,24 @@
 
 	<div class="flex items-baseline gap-1">
 		{#if heroIsChange}
-			{#if icon}
-				<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} />
+			{#if changeRenderer}
+				{@render changeRenderer()}
+			{:else}
+				<ChangeIndicator
+					{showIcon}
+					{iconSize}
+					{size}
+					{hero}
+					{value}
+					{comparisonValue}
+					{goodIs}
+					{showChangeAs}
+					{formatString}
+					{changeFormatString}
+				/>
 			{/if}
-			<span class={classNames(metricRole, statusTextClass[status])}>{change}</span>
 		{:else}
-			<span class={classNames(metricRole, 'text-color-text')}>{value}</span>
+			<span class={classNames(metricRole, 'text-color-text')}>{f(value)}</span>
 			{#if unit}
 				<span class={classNames(bodyRole, 'text-color-text-muted')}>{unit}</span>
 			{/if}
@@ -128,18 +139,30 @@
 	{#if (heroIsChange && value) || (!heroIsChange && hasChange) || comparisonValue}
 		<div class="flex items-baseline gap-1">
 			{#if heroIsChange}
-				<span class={classNames(labelRole, 'text-color-text')}>{value}</span>
+				<span class={classNames(labelRole, 'text-color-text')}>{f(value)}</span>
 				{#if unit}
 					<span class={classNames(bodyRole, 'text-color-text-muted')}>{unit}</span>
 				{/if}
 			{:else if hasChange}
-				{#if icon}
-					<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} />
+				{#if changeRenderer}
+					{@render changeRenderer()}
+				{:else}
+					<ChangeIndicator
+						{showIcon}
+						{iconSize}
+						{size}
+						{hero}
+						{value}
+						{comparisonValue}
+						{goodIs}
+						{showChangeAs}
+						{formatString}
+						{changeFormatString}
+					/>
 				{/if}
-				<span class={classNames(labelRole, statusTextClass[status])}>{change}</span>
 			{/if}
 			{#if comparisonValue}
-				<span class={classNames(labelRole, 'text-color-text-muted')}>vs {comparisonValue}</span>
+				<span class={classNames(labelRole, 'text-color-text-muted')}>vs {f(comparisonValue)}</span>
 			{/if}
 		</div>
 	{/if}
