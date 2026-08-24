@@ -28,6 +28,18 @@
 	const baseImage = $derived(getImage(src));
 	const lightImage = $derived(getImage(constructPath(src, '-light')));
 	const darkImage = $derived(getImage(constructPath(src, '-dark')));
+
+	// Nothing under $lib/assets/images matched, so the fallback below emits `src`
+	// as a bare relative URL. The prerenderer then crawls it as a page link and
+	// the build fails with an opaque 500, so surface the real cause at authoring
+	// time. Images live in $lib/assets/images only — never alongside the content.
+	$effect(() => {
+		if (!baseImage && !lightImage && !darkImage) {
+			console.warn(
+				`[EnhancedImage] no image found for "${src}" in $lib/assets/images — expected ${src}, or a ${constructPath(src, '-light')} / ${constructPath(src, '-dark')} pair.`
+			);
+		}
+	});
 </script>
 
 {#if theme.currentMode === 'light' && lightImage}

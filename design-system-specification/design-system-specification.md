@@ -966,23 +966,42 @@ The rules intervene to prevent one move: encoding a weight, colour, or spacing d
 }
 
 /* -- Content flow (context themes; each rung a --primitive-spacing-{n}) */
+:root {
+	--flow-prose-tight: 0.25rem;
+	--flow-prose-default: 1rem;
+	--flow-prose-loose: 1.5rem;
+	--flow-prose-section: 2.5rem;
+	--flow-product-tight: 0.25rem;
+	--flow-product-default: 0.5rem;
+	--flow-product-loose: 1rem;
+	--flow-product-section: 1.5rem;
+	--flow-compact-tight: 0.25rem;
+	--flow-compact-default: 0.25rem;
+	--flow-compact-loose: 0.5rem;
+	--flow-compact-section: 0.5rem;
+	--flow-tight: var(--flow-product-tight);
+	--flow-default: var(--flow-product-default);
+	--flow-loose: var(--flow-product-loose);
+	--flow-section: var(--flow-product-section);
+}
+
 .flow-prose {
-	--flow-tight: 0.25rem;
-	--flow-default: 1rem;
-	--flow-loose: 1.5rem;
-	--flow-section: 2.5rem;
+	--flow-tight: var(--flow-prose-tight);
+	--flow-default: var(--flow-prose-default);
+	--flow-loose: var(--flow-prose-loose);
+	--flow-section: var(--flow-prose-section);
 }
 .flow-product {
-	--flow-tight: 0.25rem;
-	--flow-default: 0.5rem;
-	--flow-loose: 1rem;
-	--flow-section: 1.5rem;
+	--flow-tight: var(--flow-product-tight);
+	--flow-default: var(--flow-product-default);
+	--flow-loose: var(--flow-product-loose);
+	--flow-section: var(--flow-product-section);
 }
 .flow-compact {
-	--flow-tight: 0.25rem;
-	--flow-default: 0.25rem;
-	--flow-loose: 0.5rem;
-	--flow-section: 0.5rem;
+	--flow-tight: var(--flow-compact-tight);
+	--flow-default: var(--flow-compact-default);
+	--flow-loose: var(--flow-compact-loose);
+	--flow-section: var(--flow-compact-section);
 }
 ```
 

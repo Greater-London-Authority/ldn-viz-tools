@@ -17,7 +17,7 @@
 	 * **Alternatives**: normally the [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation) or other plot component would be used rather than using `ChartContainer` directly.
 	 */
 	const { Story } = defineMeta({
-		title: 'Charts/Components/ChartContainer/ChartContainer',
+		title: 'Charts/Components/ChartContainer',
 		component: ChartContainer,
 		tags: ['autodocs']
 	});

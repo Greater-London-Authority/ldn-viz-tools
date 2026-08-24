@@ -37,10 +37,13 @@ When rationale matters, follow the spec links.
    size/weight/leading arrive with it. Every colour is a semantic token. Never
    `text-3xl`, never a raw hex, never `--primitive-*` in authored code.
 2. **Size, weight, and colour are three orthogonal axes.** A "subtle heading" is
-   a heading in a muted colour; an "emphasised caption" is Caption + `.text-strong`.
-   Don't invent a size to express weight or colour. (Extending: read `references/tokens.md`.)
+   a heading in a muted colour; an "emphasised caption" is Caption at a heavier
+   weight (`font-semibold`). Don't invent a size to express weight or colour.
+   (The spec's `.text-strong`/`.text-soft` modifiers are **not implemented** — see
+   `references/typography.md`. Extending: read `references/tokens.md`.)
 3. **Rhythm is a property of context, not of type.** Spacing between blocks comes
-   from a `flow` context, not from margins bundled onto a role. (See `references/flow.md`.)
+   from a `flow` context, not from margins bundled onto a role. Flow is a **layout**
+   system and ships as its own plugin, not part of typography. (See `references/flow.md`.)
 
 ## Router — read the reference(s) for the task
 
@@ -62,10 +65,12 @@ rather than guessing from memory — the details are exacting.
 
 ## Where it lives in code (shared anchors)
 
-- **Tailwind plugin (roles, contexts, flow, semantics, responsive):**
-  `packages/themes/tailwind-custom/typography/*.cjs` — consumed **from source**
-  via `packages/themes/ldn-theme.cjs` (a workspace symlink). Edits are live from
-  source, but **restart the dev/Storybook server** — Tailwind reads its config at load.
+- **Tailwind plugin (roles, contexts, semantics, responsive):**
+  `packages/themes/tailwind-custom/typography/*.cjs`; **flow** is a separate,
+  peer plugin at `packages/themes/tailwind-custom/flow/{flow,index}.cjs`. Both are
+  consumed **from source** via `packages/themes/ldn-theme.cjs` (a workspace
+  symlink). Edits are live from source, but **restart the dev/Storybook server** —
+  Tailwind reads its config at load.
 - **Emitted CSS:** `packages/themes/styles/*.css` (`typography.css`, `flow.css`,
   `spacing.css`, `grid-spacing.css`, `light.css`, `dark.css`).
 - **Emitted token JS:** `packages/themes/styles/js/color-tokens.js`,

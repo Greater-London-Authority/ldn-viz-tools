@@ -22,7 +22,7 @@
 		{/snippet}
 	</CopyButton>
 	<pre
-		class="pt-spacing-lg"
+		class="pt-4"
 		{...restProps}
 		{@attach (node) => {
 			codeContent = node.textContent;
