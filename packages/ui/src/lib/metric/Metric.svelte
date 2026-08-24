@@ -36,7 +36,7 @@
 		comparisonValue?: number;
 
 		/** Which figure leads: the absolute value, or the change. */
-		hero?: 'value' | 'change';
+		hero?: 'value' | 'change' | 'translation';
 
 		/** Size of the metric. */
 		size?: 'lg' | 'sm';
@@ -83,6 +83,8 @@
 
 	let hasChange = $derived(typeof value !== 'undefined' && typeof comparisonValue !== 'undefined');
 	let heroIsChange = $derived(hero === 'change' && hasChange);
+	let heroIsTranslation = $derived(hero === 'translation' && translation);
+
 	let iconSize = $derived(
 		heroIsChange
 			? size === 'lg'
@@ -107,8 +109,8 @@
 		<p class={classNames(labelRole, 'text-color-text-muted')}>{label}</p>
 	{/if}
 
-	<div class="flex items-baseline gap-1">
-		{#if heroIsChange}
+	{#if heroIsChange}
+		<div class="flex items-baseline gap-1">
 			{#if changeRenderer}
 				{@render changeRenderer()}
 			{:else}
@@ -125,45 +127,83 @@
 					{changeFormatString}
 				/>
 			{/if}
-		{:else}
-			<span class={classNames(metricRole, 'text-color-text')}>{f(value)}</span>
-			{#if unit}
-				<span class={classNames(bodyRole, 'text-color-text-muted')}>{unit}</span>
-			{/if}
-		{/if}
-		{#if translation}
-			<span class={classNames(bodyRole, 'text-color-text-muted')}>{translation}</span>
-		{/if}
-	</div>
 
-	{#if (heroIsChange && value) || (!heroIsChange && hasChange) || comparisonValue}
-		<div class="flex items-baseline gap-1">
-			{#if heroIsChange}
+			{#if translation}
+				<span class={classNames(bodyRole, 'text-color-text-muted')}>{translation}</span>
+			{/if}
+		</div>
+
+		{#if value || comparisonValue}
+			<div class="flex items-baseline gap-1">
 				<span class={classNames(labelRole, 'text-color-text')}>{f(value)}</span>
 				{#if unit}
 					<span class={classNames(bodyRole, 'text-color-text-muted')}>{unit}</span>
 				{/if}
-			{:else if hasChange}
-				{#if changeRenderer}
-					{@render changeRenderer()}
-				{:else}
-					<ChangeIndicator
-						{showIcon}
-						{iconSize}
-						{size}
-						{hero}
-						{value}
-						{comparisonValue}
-						{goodIs}
-						{showChangeAs}
-						{formatString}
-						{changeFormatString}
-					/>
+
+				{#if comparisonValue}
+					<span class={classNames(labelRole, 'text-color-text-muted')}>vs {f(comparisonValue)}</span
+					>
 				{/if}
+			</div>
+		{/if}
+	{:else if heroIsTranslation}
+		<div class="flex items-baseline gap-1">
+			<span class={classNames(metricRole, 'text-color-text')}>{translation}</span>
+
+			<span class={classNames(labelRole, 'text-color-text-muted')}>{f(value)}</span>
+		</div>
+
+		{#if value && comparisonValue}
+			<div class="flex items-baseline gap-1">
+				<span class={classNames(labelRole, 'text-color-text')}>{f(value)}</span>
+				{#if unit}
+					<span class={classNames(bodyRole, 'text-color-text-muted')}>{unit}</span>
+				{/if}
+
+				{#if comparisonValue}
+					<span class={classNames(labelRole, 'text-color-text-muted')}>vs {f(comparisonValue)}</span
+					>
+				{/if}
+			</div>
+		{/if}
+	{:else}
+		<div class="flex items-baseline gap-1">
+			<span class={classNames(metricRole, 'text-color-text')}>{f(value)}</span>
+			{#if unit}
+				<span class={classNames(bodyRole, 'text-color-text-muted')}>{unit}</span>
 			{/if}
-			{#if comparisonValue}
-				<span class={classNames(labelRole, 'text-color-text-muted')}>vs {f(comparisonValue)}</span>
+
+			{#if translation}
+				<span class={classNames(bodyRole, 'text-color-text-muted')}>{translation}</span>
 			{/if}
 		</div>
+
+		{#if hasChange || comparisonValue}
+			<div class="flex items-baseline gap-1">
+				{#if hasChange}
+					{#if changeRenderer}
+						{@render changeRenderer()}
+					{:else}
+						<ChangeIndicator
+							{showIcon}
+							{iconSize}
+							{size}
+							{hero}
+							{value}
+							{comparisonValue}
+							{goodIs}
+							{showChangeAs}
+							{formatString}
+							{changeFormatString}
+						/>
+					{/if}
+				{/if}
+
+				{#if comparisonValue}
+					<span class={classNames(labelRole, 'text-color-text-muted')}>vs {f(comparisonValue)}</span
+					>
+				{/if}
+			</div>
+		{/if}
 	{/if}
 </div>

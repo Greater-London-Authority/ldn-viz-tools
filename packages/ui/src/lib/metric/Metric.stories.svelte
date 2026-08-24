@@ -95,8 +95,24 @@
 		<div class="flex flex-col gap-6">
 			<Metric {...args} hero="value" layout="vertical" />
 			<Metric {...args} hero="change" layout="vertical" />
+			<Metric
+				{...args}
+				label="Highest average daily footfall"
+				hero="translation"
+				layout="vertical"
+				translation="June"
+				comparisonValue={undefined}
+			/>
 			<Metric {...args} hero="value" layout="horizontal" />
 			<Metric {...args} hero="change" layout="horizontal" />
+			<Metric
+				{...args}
+				label="Highest average daily footfall"
+				hero="translation"
+				layout="horizontal"
+				translation="June"
+				comparisonValue={undefined}
+			/>
 		</div>
 	{/snippet}
 </Story>
