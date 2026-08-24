@@ -36,6 +36,10 @@
 	<Sidebar bind:state />
 {/snippet}
 
+{#snippet sidebarSlim()}
+	<Sidebar width="slim" />
+{/snippet}
+
 {#snippet sidebarWide()}
 	<Sidebar width="wide" />
 {/snippet}
@@ -120,6 +124,16 @@
 	{/snippet}
 </Story>
 
+<Story name="Slim sidebar">
+	{#snippet template(args)}
+		<AppShell
+			{...args}
+			sidebar={sidebarSlim}
+			sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
+		></AppShell>
+	{/snippet}
+</Story>
+
 <Story name="Wide sidebar">
 	{#snippet template(args)}
 		<AppShell
@@ -145,6 +159,17 @@
 <Story name="Sidebar Push: left with tabs">
 	{#snippet template(args)}
 		<AppShell {...args} sidebar={sidebarWithTabs} sidebarPush sidebarPlacement={{ initial: 'left' }}
+		></AppShell>
+	{/snippet}
+</Story>
+
+<Story name="Slim sidebar push">
+	{#snippet template(args)}
+		<AppShell
+			{...args}
+			sidebarPush
+			sidebar={sidebarSlim}
+			sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left', xl: 'right' }}
 		></AppShell>
 	{/snippet}
 </Story>

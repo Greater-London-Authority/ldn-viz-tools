@@ -383,18 +383,30 @@ StyleDictionary.registerFormat({
 
 /**
  * Custom format that generates tailwind flow config based on css variables
+ *
+ * Emits FOUR context-agnostic rung keys, not twelve context-prefixed ones. A
+ * `mt-flow-product-section` utility would resolve the flat --flow-product-section
+ * var directly, making it context-INdependent by construction: dropped inside a
+ * .flow-prose container it pins that one gap to 24px (= --primitive-spacing-6),
+ * i.e. `mt-6` wearing a flow badge, and it opts the element out of the rhythm it
+ * sits in. A component that must hold its density wherever it lands declares its
+ * own context class instead (Toast does this), which gives the whole subtree one
+ * density rather than pinning gaps individually.
+ *
+ * So rung utilities carry a RELATIONSHIP, never a density; density comes from the
+ * context class in scope at runtime. The four rung names are the contract, hence
+ * this format does not read tokens. The twelve flat --flow-{context}-{step} vars
+ * are untouched — they remain the value source the context blocks reference; they
+ * simply stop being reachable from a utility.
  */
 
-const formatTailwindFlow = (token) => {
-	return `  "flow-${token.attributes.type}": "var(--${token.name}, ${token.value / 16}rem)"`;
-};
+const FLOW_STEPS = ['tight', 'default', 'loose', 'section'];
 
 StyleDictionary.registerFormat({
 	name: 'tw/css-flow-variables',
-	format({ dictionary }) {
-		return `module.exports = {
-        ${dictionary.allTokens.map(formatTailwindFlow).join(',\n')}
-      }`;
+	format() {
+		const entries = FLOW_STEPS.map((step) => `  "flow-${step}": "var(--flow-${step})"`).join(',\n');
+		return `module.exports = {\n${entries}\n}`;
 	}
 });
 
@@ -569,15 +581,44 @@ const formatFlow = (dictionary) => {
 		byContext[context][step] = `${token.value / 16}rem`;
 	});
 
-	return Object.keys(byContext)
+	const contexts = Object.keys(byContext);
+
+	// Flat vars — the single value source. Consumed by the context blocks below
+	// and by the Tailwind utilities generated from tw/css-flow-variables, whose
+	// var() references would otherwise resolve to their literal fallback forever.
+	const flat = contexts
+		.flatMap((context) =>
+			FLOW_STEP_ORDER.filter((step) => byContext[context][step] !== undefined).map(
+				(step) => `  --flow-${context}-${step}: ${byContext[context][step]};`
+			)
+		)
+		.join('\n');
+
+	// Context blocks reference the flat vars rather than restating values.
+	const blocks = contexts
 		.map((context) => {
-			const steps = byContext[context];
-			const vars = FLOW_STEP_ORDER.filter((step) => steps[step] !== undefined)
-				.map((step) => `--flow-${step}: ${steps[step]};`)
+			const vars = FLOW_STEP_ORDER.filter((step) => byContext[context][step] !== undefined)
+				.map((step) => `--flow-${step}: var(--flow-${context}-${step});`)
 				.join(' ');
 			return `.flow-${context} { ${vars} }`;
 		})
 		.join('\n');
+
+	// Product is the library's default density: emit its ramp as the bare
+	// --flow-{rung} vars on :root so the four rungs are ALWAYS defined, then let
+	// context classes override. Without this, a `mt-flow-section` in a component
+	// with no ancestor context class resolves an undefined custom property — the
+	// declaration is invalid at computed-value time and margin-top falls back to
+	// 0, a silent no-op. Coherent with contexts.cjs, where product is already the
+	// default typography context. `.flow-product` stays meaningful: it arms the
+	// owl, which :root cannot do.
+	const defaultRamp = FLOW_STEP_ORDER.filter(
+		(step) => byContext.product && byContext.product[step] !== undefined
+	)
+		.map((step) => `  --flow-${step}: var(--flow-product-${step});`)
+		.join('\n');
+
+	return `:root {\n${flat}\n${defaultRamp}\n}\n\n${blocks}`;
 };
 
 StyleDictionary.registerFormat({

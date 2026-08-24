@@ -22,7 +22,7 @@
 	const height = 20;
 </script>
 
-<div class="chart flow-product flex flex-col items-center">
+<div class="flow-product chart flex flex-col items-center">
 	{#if title}<p class="axis-title">{title}</p>{/if}
 
 	<svg viewBox={`0 0 ${width} ${height + 30}`} class="max-w-3xl">
