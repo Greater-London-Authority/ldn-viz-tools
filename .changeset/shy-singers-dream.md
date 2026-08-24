@@ -2,4 +2,4 @@
 '@ldn-viz/themes': minor
 ---
 
-Update to styledictionary process to add flow to emitted styles.
+CHANGED: to styledictionary process updated to add flow to emitted styles.
