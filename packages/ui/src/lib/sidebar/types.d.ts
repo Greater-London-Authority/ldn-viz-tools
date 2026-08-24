@@ -21,7 +21,7 @@ export interface SidebarProps {
 	/**
 	 * Width of the sidebar.
 	 */
-	width?: 'standard' | 'wide';
+	width?: 'slim' | 'standard' | 'wide';
 	/**
 	 * Position of the sidebar which can be `fixed` to the screen so it's always shown
 	 * in the same screen location regardless of scroll position or `absolute`,

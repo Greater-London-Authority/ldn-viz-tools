@@ -20,7 +20,7 @@
 	 *
 	 */
 	const { Story } = defineMeta({
-		title: 'Ui/Card',
+		title: 'Ui/Components/Card',
 		component: Card,
 		tags: ['autodocs'],
 		argTypes: {

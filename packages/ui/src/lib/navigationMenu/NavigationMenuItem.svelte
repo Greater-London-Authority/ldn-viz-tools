@@ -8,6 +8,7 @@
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
+	import { childListClass, itemTextClass, listItemClass } from './styles';
 
 	let {
 		id = randomId(),
@@ -81,32 +82,11 @@
 		}
 	});
 
-	let textClasses = $derived(
-		classNames(
-			`flex w-full items-center level-${level} label-tight p-1.5 hover:text-color-interactive-primary-hover hover:underline `,
-			isActive ? 'text-color-interactive-primary-active underline' : '',
-			level === 1 ? 'text-color-text' : 'text-color-text-muted'
-		)
-	);
+	let textClass = $derived(itemTextClass({ level, isActive }));
 
-	const orientationClasses: Record<'vertical' | 'horizontal', string> = $derived({
-		vertical: '',
-		horizontal: `w-full ${level === 1 ? 'absolute z-10' : 'relative'}`
-	});
+	let listClass = $derived(listItemClass({ level, index, orientation: orientation! }));
 
-	const listClasses: Record<'vertical' | 'horizontal', string> = $derived({
-		vertical:
-			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-border-muted') : '',
-		horizontal: `relative bg-color-container ${level === 1 ? '' : ''}`
-	});
-
-	let childClasses = $derived(
-		classNames(
-			!isExpanded ? 'hidden' : `${level === 2 ? 'pl-4' : ''} mb-1`,
-			orientationClasses[orientation!]
-		)
-	);
-	let listItemClasses = $derived(classNames(listClasses[orientation!]));
+	let childClass = $derived(childListClass({ level, orientation: orientation!, isExpanded }));
 
 	const constructURL = (href?: string) => {
 		if (!copySearchParams || !href) {
@@ -121,20 +101,20 @@
 	};
 </script>
 
-<li class={listItemClasses}>
+<li class={listClass} data-level={level}>
 	{#if hasChildren}
 		<div {id} class="flex items-center justify-between">
 			{#if href}
 				<a
 					href={constructURL(href)}
-					class={textClasses}
+					class={textClass}
 					{...currentPage}
 					onclick={() => onChange?.(id)}
 				>
 					{title}
 				</a>
 			{:else}
-				<button class={textClasses} onclick={() => toggleMenu()}>
+				<button class={textClass} onclick={() => toggleMenu()}>
 					{title}
 				</button>
 			{/if}
@@ -146,7 +126,6 @@
 					emphasis="secondary"
 					variant="text"
 					size="sm"
-					class="level-{level}"
 					aria-label="More {title} pages"
 					aria-expanded={isExpanded}
 					aria-controls={`${id}-menu`}
@@ -167,7 +146,7 @@
 		<a
 			{id}
 			href={constructURL(href)}
-			class={textClasses}
+			class={`${textClass} pr-4`}
 			{...currentPage}
 			onclick={() => onChange?.(id)}
 		>
@@ -176,7 +155,7 @@
 	{/if}
 
 	{#if hasChildren}
-		<ul id={childMenuId} class={childClasses}>
+		<ul id={childMenuId} class={childClass}>
 			{#each toggledChildren as child}
 				<NavigationMenuItem
 					href={child.href}

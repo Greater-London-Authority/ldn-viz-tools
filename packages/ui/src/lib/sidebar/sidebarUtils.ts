@@ -45,6 +45,12 @@ export const tabIconOverride = '[&>button>svg]:mr-0 [&>button>svg]:mb-1';
 
 // The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {
+	slim: {
+		left: 'max-w-[308px] min-[488px]:min-w-[308px] w-[calc(100vw-80px)]',
+		right: 'max-w-[308px] min-[488px]:min-w-[308px] w-[calc(100vw-80px)]',
+		top: 'w-full',
+		bottom: 'w-full'
+	},
 	standard: {
 		left: 'max-w-[408px] min-[488px]:min-w-[408px] w-[calc(100vw-80px)]',
 		right: 'max-w-[408px] min-[488px]:min-w-[408px] w-[calc(100vw-80px)]',
@@ -60,6 +66,12 @@ export const widthLookup: WidthLookup = {
 };
 
 export const heightLookup: WidthLookup = {
+	slim: {
+		left: 'h-full',
+		right: 'h-full',
+		top: 'h-[60dvh] max-h-[800px]', //TODO breakpoints?
+		bottom: 'h-[60dvh] max-h-[800px]'
+	},
 	standard: {
 		left: 'h-full',
 		right: 'h-full',
