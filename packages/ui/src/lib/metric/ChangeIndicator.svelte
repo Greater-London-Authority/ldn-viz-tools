@@ -10,7 +10,7 @@
 		iconSize: string;
 		size?: 'lg' | 'sm';
 
-		hero?: 'value' | 'change';
+		hero?: 'value' | 'change' | 'translation';
 
 		value: number;
 		comparisonValue: number;
