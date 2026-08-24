@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-Add slim variant of sidebar
+CHANGED: `Sidebar` now has a `slim` variant
