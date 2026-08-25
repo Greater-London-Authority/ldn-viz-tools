@@ -8,7 +8,7 @@
 	 * May appear several times down a page, one per section; sits below
 	 * [PageTitle](./?path=/docs/ui-components-titlegroup-pagetitle--documentation)'s hero in the prose titling ladder.
 	 *
-	 ** This component exists as a convenience wrapper as correct element structure within a flow container would produce the same result
+	 * This component exists as a convenience wrapper as correct element structure within a flow container would produce the same result
 	 *
 	 */
 
