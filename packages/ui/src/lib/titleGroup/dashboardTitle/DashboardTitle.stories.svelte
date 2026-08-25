@@ -8,10 +8,12 @@
 	 * Sits at the top of the product titling ladder, above
 	 * [SectionTitle](./?path=/docs/ui-components-titlegroup-sectiontitle--documentation).
 	 *
+	 * This component exists as a convenience wrapper as correct element structure within a flow container would produce the same result
+	 *
 	 */
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components/TitleGroup/DashboardTitle',
+		title: 'Ui/Components - Layout And Themes/TitleGroup/Product/DashboardTitle',
 		component: DashboardTitle,
 		tags: ['autodocs'],
 		args: {

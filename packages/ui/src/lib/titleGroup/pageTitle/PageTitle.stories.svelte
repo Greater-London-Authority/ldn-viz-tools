@@ -7,10 +7,13 @@
 	 *
 	 * May have multiple [SectionBreak](./?path=/docs/ui-components-titlegroup-sectionbreak-documentation)
 	 * headings beneath it.
+	 *
+	 * This component exists as a convenience wrapper as correct element structure within a flow container would produce the same result
+	 *
 	 */
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components/TitleGroup/PageTitle',
+		title: 'Ui/Components - Layout And Themes/TitleGroup/Prose/PageTitle',
 		component: PageTitle,
 		tags: ['autodocs'],
 		args: {

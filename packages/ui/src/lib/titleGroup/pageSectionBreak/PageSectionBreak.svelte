@@ -1,9 +1,9 @@
 <script lang="ts">
 	/**
-	 * `PageTitle` — the hero title of a prose page.
+	 * `PageSectionBreak` — marks a new section within a long-form prose page.
 	 *
-	 * May have multiple [SectionBreak](./?path=/docs/ui-components-titlegroup-sectionbreak-documentation)
-	 * headings beneath it.
+	 * May appear several times down a page, one per section; sits below
+	 * [PageTitle](./?path=/docs/ui-components-titlegroup-pagetitle--documentation)'s hero in the prose titling ladder.
 	 *
 	 * This component exists as a convenience wrapper as correct element structure within a flow container would produce the same result
 	 *
@@ -13,19 +13,12 @@
 
 	interface Props {
 		title?: string;
-		subhead?: string;
+		subtitle?: string;
 		eyebrow?: string;
 		class?: string;
-		hero?: 'headline' | 'display';
 	}
 
-	let {
-		title = '',
-		subhead = '',
-		eyebrow = '',
-		hero = 'headline',
-		class: classes = ''
-	}: Props = $props();
+	let { title = '', subtitle = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
 <div class={classNames('flow-prose prose', classes)}>
@@ -33,9 +26,9 @@
 		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
 	{/if}
 	{#if title}
-		<h1 class={`${hero} text-color-text`}>{title}</h1>
+		<h2 class="title-1 text-color-text">{title}</h2>
 	{/if}
-	{#if subhead}
-		<p class="subhead text-color-text-muted">{subhead}</p>
+	{#if subtitle}
+		<p class="subtitle text-color-text-muted">{subtitle}</p>
 	{/if}
 </div>

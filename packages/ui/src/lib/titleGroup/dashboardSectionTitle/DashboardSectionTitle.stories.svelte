@@ -1,9 +1,9 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import SectionTitle from './SectionTitle.svelte';
+	import DashboardSectionTitle from './DashboardSectionTitle.svelte';
 
 	/**
-	 * `SectionTitle` — groups a run of cards or panels within a dashboard, a
+	 * `DashboardSectionTitle` — groups a run of cards or panels within a dashboard, a
 	 * mid-dashboard heading.
 	 *
 	 * Sits one step below [DashboardTitle](.?path=/docs/ui-components-titlegroup-dashboarditle--documentation);
@@ -12,8 +12,8 @@
 	 */
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components/TitleGroup/SectionTitle',
-		component: SectionTitle,
+		title: 'Ui/Components - Layout And Themes/TitleGroup/Product/DashboardSectionTitle',
+		component: DashboardSectionTitle,
 		tags: ['autodocs'],
 		args: {
 			title: 'Dashboard section title'

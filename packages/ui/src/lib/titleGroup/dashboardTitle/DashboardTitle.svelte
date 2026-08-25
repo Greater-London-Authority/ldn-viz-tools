@@ -5,6 +5,8 @@
 	 * Sits at the top of the product titling ladder, above
 	 * [SectionTitle](./?path=/docs/ui-components-titlegroup-sectiontitle--documentation).
 	 *
+	 * This component exists as a convenience wrapper as correct element structure within a flow container would produce the same result
+	 *
 	 * @component
 	 */
 	import { classNames } from '../../utils/classNames.js';
@@ -19,7 +21,7 @@
 	let { title = '', subtitle = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
-<div class={classNames('product flow-product flex flex-col items-start', classes)}>
+<div class={classNames('flow-product product', classes)}>
 	{#if eyebrow}
 		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
 	{/if}

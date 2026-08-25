@@ -1,9 +1,10 @@
 <script lang="ts">
 	/**
-	 * `SectionBreak` — marks a new section within a long-form prose page.
+	 * `DashnoardSectionTitle` — groups a run of cards or panels within a dashboard, a
+	 * mid-dashboard heading.
 	 *
-	 * May appear several times down a page, one per section; sits below
-	 * [PageTitle](./?path=/docs/ui-components-titlegroup-pagetitle--documentation)'s hero in the prose titling ladder.
+	 * Sits one step below [DashboardTitle](.?path=/docs/ui-components-titlegroup-dashboarditle--documentation);
+	 * may appear several times down a page.
 	 *
 	 * @component
 	 */
@@ -19,12 +20,12 @@
 	let { title = '', subtitle = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
-<div class={classNames('prose flex flex-col items-start', classes)}>
+<div class={classNames('flow-product product', classes)}>
 	{#if eyebrow}
 		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
 	{/if}
 	{#if title}
-		<h2 class="title-1 text-color-text">{title}</h2>
+		<h2 class="section-head text-color-text">{title}</h2>
 	{/if}
 	{#if subtitle}
 		<p class="subtitle text-color-text-muted">{subtitle}</p>
