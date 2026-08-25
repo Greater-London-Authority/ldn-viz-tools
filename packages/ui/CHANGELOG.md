@@ -1,5 +1,17 @@
 # ldn-viz-tools-ui
 
+## 24.2.0
+
+### Minor Changes
+
+- df7cd85: ADDED: `Metric` component — a single figure with reference/context value and change.
+- 7a8499d: ADDED: `DashboardTitle`, `SectionTitle`, `PageTitle` and `SectionBreak` components.
+- af4d3bd: CHANGED: `Sidebar` now has a `slim` variant
+- 47c3895: Extends interactive-primary token set with -text to address color contrast issues in dark mode.
+- 50f265c: - CHANGED: toaster now interprets a `timeToLive` of `0` as infinity (as it does for negative values), rather than DEFAULT_TIME_TO_LIVE
+  - CHANGED: `classNames` now trims whitespace within a single argument
+  - FIXED: `NavigationMenu` can now return matches for a item with no href (if there is no more specific match)
+
 ## 24.1.0
 
 ### Minor Changes
