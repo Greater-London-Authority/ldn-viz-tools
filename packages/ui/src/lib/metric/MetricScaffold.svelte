@@ -24,18 +24,23 @@
 	let labelRole = $derived(size === 'lg' ? 'label' : 'label-sm');
 </script>
 
-<div class={classNames('product space-y-1')}>
+<div class={classNames('product space-y-1')} data-testid="metric">
 	{#if label}
 		<p class={classNames(labelRole, 'text-color-text-muted')}>{label}</p>
 	{/if}
 
-	<div class={classNames('flex', layout === 'vertical' ? 'flex-col gap-1' : 'flex-row gap-2')}>
-		<div>
+	<div class={classNames('flex', layout === 'vertical' ? 'flex-col gap-1' : 'flex-row gap-1')}>
+		<div data-testid="metric-primary">
 			{@render primary()}
 		</div>
 
+		<!-- N.B Micro adjustments of margin required below to line things up visually across breakpoints -->
 		<div
-			class={classNames('flex', layout === 'vertical' ? 'flex-row items-center gap-1' : 'flex-col')}
+			class={classNames(
+				'flex',
+				layout === 'vertical' ? 'flex-row gap-1' : '-mt-1 flex-col sm:-mt-0.5 md:mt-0 xl:mt-1'
+			)}
+			data-testid="metric-secondary"
 		>
 			{@render secondary()}
 		</div>

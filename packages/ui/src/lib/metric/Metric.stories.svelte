@@ -117,15 +117,16 @@
 	{/snippet}
 </Story>
 
+<!-- N.B You may need to visually separate the unit from change in a horizontal layout by adding perenthesis -->
 <Story name="Hero and layout combinations - with unit">
 	{#snippet template(args)}
 		<div class="flex flex-col gap-6">
 			<Metric {...args} hero="value" layout="vertical" unit="people" />
 			<Metric {...args} hero="change" layout="vertical" unit="people" />
 			<Metric {...args} hero="translation" layout="vertical" translation="June" unit="people" />
-			<Metric {...args} hero="value" layout="horizontal" unit="people" />
-			<Metric {...args} hero="change" layout="horizontal" unit="people" />
-			<Metric {...args} hero="translation" layout="horizontal" translation="June" unit="people" />
+			<Metric {...args} hero="value" layout="horizontal" unit="(people)" />
+			<Metric {...args} hero="change" layout="horizontal" unit="(people)" />
+			<Metric {...args} hero="translation" layout="horizontal" translation="June" unit="(people)" />
 		</div>
 	{/snippet}
 </Story>

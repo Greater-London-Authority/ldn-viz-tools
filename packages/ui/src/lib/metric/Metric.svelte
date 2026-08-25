@@ -106,42 +106,43 @@
 
 <!-- Default primary group (Big number) -->
 {#snippet primaryGroup()}
-	{#if heroIsChange}
-		<ChangeIndicator
-			{showIcon}
-			{iconSize}
-			{size}
-			{hero}
-			{value}
-			comparisonValue={comparisonValue!}
-			{goodIs}
-			{showChangeAs}
-			{formatString}
-			{changeFormatString}
-		/>
-	{:else}
-		<!--If hero is default value or translation-->
-		<span class={classNames(metricRole, 'text-color-text')}>{heroValue}</span>
-	{/if}
-	{#if translation && !heroIsTranslation}
-		<span class={classNames(bodyRole, 'text-color-text-muted')}>{translation}</span>
-	{/if}
-	{#if heroIsTranslation}
-		<span class={classNames(bodyRole, 'text-color-text-muted')}>({value})</span>
-	{/if}
+	<div class="flex items-end gap-1">
+		{#if heroIsChange}
+			<ChangeIndicator
+				{showIcon}
+				{iconSize}
+				{size}
+				{hero}
+				{value}
+				comparisonValue={comparisonValue!}
+				{goodIs}
+				{showChangeAs}
+				{formatString}
+				{changeFormatString}
+			/>
+		{:else}
+			<!--If hero is default value or translation-->
+			<span class={classNames(metricRole, 'text-color-text')}>{heroValue}</span>
+		{/if}
 
-	<!-- TODO:
-	{#if unit}
+		{#if translation && !heroIsTranslation}
+			<span class={classNames(bodyRole, 'text-color-text-muted')}>{translation}</span>
+		{/if}
+		{#if heroIsTranslation}
+			<span class={classNames(bodyRole, 'text-color-text-muted')}>({f(value)})</span>
+		{/if}
+
+		{#if unit}
 			<span class={classNames(bodyRole, 'text-color-text-muted')}>{unit}</span>
 		{/if}
-		-->
+	</div>
 {/snippet}
 
 <!-- Default secondary group (supporting numbers) -->
 {#snippet secondaryGroup()}
 	{#if comparisonValue}
 		{#if heroIsChange}
-			<span class={classNames(labelRole, 'text-color-text')}>{value}</span>
+			<span class={classNames(labelRole, 'text-color-text')}>{f(value)}</span>
 		{:else}
 			<ChangeIndicator
 				{showIcon}
@@ -156,7 +157,7 @@
 				{changeFormatString}
 			/>
 		{/if}
-		<span class={classNames(labelRole, 'flex-shrink-0 text-color-text-muted')}>
+		<span class={classNames(labelRole, 'text-nowrap text-color-text-muted')}>
 			vs {f(comparisonValue)}
 		</span>
 	{/if}

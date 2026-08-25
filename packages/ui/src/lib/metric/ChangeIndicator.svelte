@@ -117,7 +117,7 @@
 	});
 </script>
 
-<div class="flex items-center">
+<div class="flex">
 	{#if icon}
 		<span class="sr-only">{value < 0 ? 'down' : 'up'}</span>
 		<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} />
