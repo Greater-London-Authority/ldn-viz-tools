@@ -189,7 +189,7 @@
 		/* See: https://svelecte.vercel.app/theme */
 		.form-select.svelecte {
 			/** Custom css varibales **/
-			--sv-min-height: 42px;
+			--sv-min-height: 40px;
 			--sv-bg: var(--color-surface);
 			--sv-color: var(--color-text);
 			--sv-disabled-bg: var(--color-interactive-disabled-muted);
