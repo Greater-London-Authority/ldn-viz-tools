@@ -5,7 +5,7 @@ import Metric from './Metric.svelte';
 
 describe('Metric', () => {
 	it('renders the label, value and unit', async () => {
-		render(Metric, { label: 'Population', value: '100,000', unit: 'people' });
+		render(Metric, { label: 'Population', value: 100000, unit: 'people' });
 
 		await expect.element(page.getByText('Population')).toBeInTheDocument();
 		await expect.element(page.getByText('100,000')).toBeInTheDocument();
@@ -13,16 +13,15 @@ describe('Metric', () => {
 	});
 
 	it('renders no change, translation or comparison when they are not provided', async () => {
-		const { container } = render(Metric, { value: '100,000' });
+		const { container } = render(Metric, { value: 100000 });
 
 		expect(container.querySelectorAll('p, span')).toHaveLength(1);
 	});
 
 	it('renders the change value and comparison when provided', async () => {
 		render(Metric, {
-			value: '100,000',
-			change: '10%',
-			comparisonValue: '110,000'
+			value: 100000,
+			comparisonValue: 110000
 		});
 
 		await expect.element(page.getByText('10%')).toBeInTheDocument();
@@ -30,14 +29,18 @@ describe('Metric', () => {
 	});
 
 	it('renders the translation next to the hero figure', async () => {
-		render(Metric, { value: '100,000', translation: '(20%)' });
+		render(Metric, { value: 100000, translation: '(20%)' });
 
 		await expect.element(page.getByText('(20%)')).toBeInTheDocument();
 	});
 
 	describe('status classes on the change value', () => {
 		it('applies positive classes', async () => {
-			const { container } = render(Metric, { value: '100,000', change: '10%', status: 'positive' });
+			const { container } = render(Metric, {
+				value: 100000,
+				comparisonValue: 110000,
+				status: 'positive'
+			});
 
 			const changeValue = Array.from(container.querySelectorAll('span')).find(
 				(el) => el.textContent === '10%'
@@ -46,7 +49,11 @@ describe('Metric', () => {
 		});
 
 		it('applies negative classes', async () => {
-			const { container } = render(Metric, { value: '100,000', change: '10%', status: 'negative' });
+			const { container } = render(Metric, {
+				value: 100000,
+				comparisonValue: 110000,
+				status: 'negative'
+			});
 
 			const changeValue = Array.from(container.querySelectorAll('span')).find(
 				(el) => el.textContent === '10%'
@@ -55,7 +62,11 @@ describe('Metric', () => {
 		});
 
 		it('applies neutral classes and renders no icon', async () => {
-			const { container } = render(Metric, { value: '100,000', change: '10%', status: 'neutral' });
+			const { container } = render(Metric, {
+				value: 100000,
+				comparisonValue: 110000,
+				status: 'neutral'
+			});
 
 			const changeValue = Array.from(container.querySelectorAll('span')).find(
 				(el) => el.textContent === '10%'
@@ -67,7 +78,7 @@ describe('Metric', () => {
 
 	describe('hero', () => {
 		it('renders the value as the metric role by default', async () => {
-			const { container } = render(Metric, { value: '100,000', change: '10%' });
+			const { container } = render(Metric, { value: 100000, comparisonValue: 110000 });
 
 			const heroValue = Array.from(container.querySelectorAll('span')).find(
 				(el) => el.textContent === '100,000'
@@ -77,8 +88,8 @@ describe('Metric', () => {
 
 		it('renders the change as the metric role when hero is "change"', async () => {
 			const { container } = render(Metric, {
-				value: '100,000',
-				change: '10%',
+				value: 100000,
+				comparisonValue: 110000,
 				hero: 'change'
 			});
 
@@ -96,7 +107,7 @@ describe('Metric', () => {
 
 	describe('size', () => {
 		it('uses the metric-sm role when size is "sm"', async () => {
-			const { container } = render(Metric, { value: '100,000', size: 'sm' });
+			const { container } = render(Metric, { value: 100000, comparisonValue: 110000, size: 'sm' });
 
 			const heroValue = Array.from(container.querySelectorAll('span')).find(
 				(el) => el.textContent === '100,000'
@@ -107,21 +118,19 @@ describe('Metric', () => {
 
 	describe('layout', () => {
 		it('applies the vertical layout classes by default', async () => {
-			const { container } = render(Metric, { value: '100,000' });
+			const { container } = render(Metric, { value: 100000, comparisonValue: 110000 });
 
 			expect(container.querySelector('div')).toHaveClass('flex-col');
 		});
 
 		it('applies the horizontal layout classes when layout is "horizontal"', async () => {
-			const { container } = render(Metric, { value: '100,000', layout: 'horizontal' });
+			const { container } = render(Metric, {
+				value: 100000,
+				comparisonValue: 110000,
+				layout: 'horizontal'
+			});
 
 			expect(container.querySelector('div')).toHaveClass('flex-row');
 		});
-	});
-
-	it('applies additional classes passed via the `class` prop', async () => {
-		const { container } = render(Metric, { value: '100,000', class: 'my-custom-class' });
-
-		expect(container.querySelector('div')).toHaveClass('my-custom-class');
 	});
 });

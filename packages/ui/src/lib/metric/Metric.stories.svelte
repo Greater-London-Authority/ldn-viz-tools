@@ -5,11 +5,6 @@
 	/**
 	 * `Metric` — a single figure with an optional previous value and change.
 	 *
-	 *
-	 * `size` maps to the type roles: `lg` → `metric`/`label`/`body`, `sm` →
-	 * `metric-sm`/`label-sm`/`body-sm`. `layout` arranges the parts vertically
-	 * (stacked) or horizontally (inline).
-	 *
 	 */
 
 	const { Story } = defineMeta({
@@ -19,16 +14,11 @@
 		args: {
 			label: 'Population',
 			value: 100000,
-			status: 'positive',
 			comparisonValue: 110000
 		},
 		argTypes: {
-			status: {
-				options: ['positive', 'negative', 'neutral'],
-				control: { type: 'select' }
-			},
 			hero: {
-				options: ['value', 'change'],
+				options: ['value', 'change', 'translation'],
 				control: { type: 'radio' }
 			},
 			size: {
@@ -72,7 +62,7 @@
 			<Metric {...args} showChangeAs="percentage" />
 			<Metric
 				{...args}
-				formatString=".0%"
+				formatString={',.0%'}
 				value={0.05}
 				comparisonValue={0.2}
 				showChangeAs="percentage-point"
@@ -103,6 +93,7 @@
 			/>
 			<Metric
 				{...args}
+				size="sm"
 				label="Highest average daily footfall"
 				hero="translation"
 				layout="horizontal"
@@ -126,13 +117,36 @@
 	{/snippet}
 </Story>
 
+<Story name="Hero and layout combinations - with unit">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-6">
+			<Metric {...args} hero="value" layout="vertical" unit="people" />
+			<Metric {...args} hero="change" layout="vertical" unit="people" />
+			<Metric {...args} hero="translation" layout="vertical" translation="June" unit="people" />
+			<Metric {...args} hero="value" layout="horizontal" unit="people" />
+			<Metric {...args} hero="change" layout="horizontal" unit="people" />
+			<Metric {...args} hero="translation" layout="horizontal" translation="June" unit="people" />
+		</div>
+	{/snippet}
+</Story>
+
 <Story name="Without icon" args={{ showIcon: false }} />
 
-<Story name="Custom change renderer">
+<Story name="Custom Primary renderer">
 	{#snippet template(args)}
 		<Metric {...args} hero="change" goodIs="high">
-			{#snippet changeRenderer()}
-				The change was 10,000.
+			{#snippet primaryRenderer()}
+				<span class="text-color-surface-accent">The change was 10,000</span>
+			{/snippet}
+		</Metric>
+	{/snippet}
+</Story>
+
+<Story name="Custom Secondary renderer">
+	{#snippet template(args)}
+		<Metric {...args} hero="change" goodIs="high">
+			{#snippet secondaryRenderer()}
+				<span class="text-color-surface-accent">The change was 10,000</span>
 			{/snippet}
 		</Metric>
 	{/snippet}

@@ -6,18 +6,34 @@
 	import { classNames } from '../utils/classNames.js';
 
 	interface Props {
+		/** If `true`, then the direction icon is rendered beside the change value. */
 		showIcon: boolean;
+
+		/** Size of the icon (as tailwind classes setting the height and width)*/
 		iconSize: string;
+
+		/** Size of the Metric. */
 		size?: 'lg' | 'sm';
 
+		/** Which figure leads: the absolute value, the change, or the translation. */
 		hero?: 'value' | 'change' | 'translation';
 
+		/** The absolute figure, e.g. "100,000". */
 		value: number;
+
+		/** Prior value to compare against; rendered as "vs {comparisonValue}". */
 		comparisonValue: number;
+
+		/** If `goodIs = 'high'` then an increase (from `comparisonValue` to `value`) is interpreted as good and rendered in green; if it is `low` then an increase is interpreted as bad and rendered in red. */
 		goodIs: 'high' | 'low';
 
+		/** Whether to show absolute change, percentage change, or change in percentage-points (this requires `value` and `comparisonValue` to be expressed as proportions). */
 		showChangeAs: 'absolute' | 'percentage' | 'percentage-point';
-		formatString: string;
+
+		/** Format string applied to value (in format understood by d3-format) */
+		formatString?: string;
+
+		/** Format string applied to the change (in format understood by d3-format). If not provided (and `showChangeAs` is not `percentage-point`), will fall back on `formatString`. */
 		changeFormatString?: string;
 	}
 
@@ -73,10 +89,9 @@
 	let heroIsChange = $derived(hero === 'change' && !!change);
 	let changeSize = $derived.by(() => {
 		if (heroIsChange) {
-			// was metricRole
 			return size === 'lg' ? 'metric' : 'metric-sm';
 		} else {
-			return size === 'lg' ? 'label' : 'label-sm';
+			return size === 'lg' ? 'label-tight' : 'label-sm-tight';
 		}
 	});
 
@@ -90,6 +105,10 @@
 			const f = format(changeFormatString ?? formatString ?? ',.0%');
 			return f((value - comparisonValue) / comparisonValue);
 		} else if (showChangeAs === 'percentage-point') {
+			// N.B. if changeFormatString isn't set, don't fall back on the
+			// value of formatString as we generally want the value and
+			// change to be formatted differently (one as a percentage,
+			// the other as percetnage-points)
 			const f = format(changeFormatString ?? '.0f');
 			return f(value * 100 - comparisonValue * 100) + 'pp';
 		} else {
@@ -98,7 +117,11 @@
 	});
 </script>
 
-{#if icon}
-	<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} />
-{/if}
-<span class={classNames(changeSize, statusTextClass[status])}>{formattedChange} </span>
+<div class="flex items-center">
+	{#if icon}
+		<span class="sr-only">{value < 0 ? 'down' : 'up'}</span>
+		<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} />
+	{/if}
+	<span class={classNames(changeSize, statusTextClass[status])}>{formattedChange}</span>
+	<span class="sr-only">{status}</span>
+</div>
