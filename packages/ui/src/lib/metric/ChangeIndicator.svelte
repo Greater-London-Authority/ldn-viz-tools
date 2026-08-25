@@ -108,7 +108,7 @@
 			// N.B. if changeFormatString isn't set, don't fall back on the
 			// value of formatString as we generally want the value and
 			// change to be formatted differently (one as a percentage,
-			// the other as percetnage-points)
+			// the other as percentage-points)
 			const f = format(changeFormatString ?? '.0f');
 			return f(value * 100 - comparisonValue * 100) + 'pp';
 		} else {
