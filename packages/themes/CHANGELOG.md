@@ -1,5 +1,12 @@
 # @ldn-viz/themes
 
+## 9.1.0
+
+### Minor Changes
+
+- 47c3895: Extends interactive-primary token set with -text to address color contrast issues in dark mode.
+- af4d3bd: CHANGED: to styledictionary process updated to add flow to emitted styles.
+
 ## 9.0.0
 
 ### Major Changes

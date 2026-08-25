@@ -1,5 +1,16 @@
 # ldn-viz-tools-maps
 
+## 17.0.0
+
+### Patch Changes
+
+- Updated dependencies [df7cd85]
+- Updated dependencies [7a8499d]
+- Updated dependencies [af4d3bd]
+- Updated dependencies [47c3895]
+- Updated dependencies [50f265c]
+  - @ldn-viz/ui@24.2.0
+
 ## 16.0.0
 
 ### Minor Changes
