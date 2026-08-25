@@ -38,3 +38,5 @@ yarn-error.log*
 
 *.d.ts
 *.ts.map
+
+llm-docs/

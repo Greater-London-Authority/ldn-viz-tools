@@ -12,13 +12,13 @@ thumbnail: cta-dataviz-4.svg
 	import { Callout, theme, ColorLegend, Select, Checkbox } from '@ldn-viz/ui'
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
-    import ColorStackedBar from '$lib/components/charts/exampleCharts/bars/ColorStackedBar.svelte'
-    import ColorMultipleLine from '$lib/components/charts/exampleCharts/lines/ColorMultipleLine.svelte'
-    import ColorDualLine from '$lib/components/charts/exampleCharts/lines/ColorDualLine.svelte'
-    import ColorBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorBoroughMap.svelte'
-    import ColorDivergingBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorDivergingBoroughMap.svelte'
+    import ColorStackedBar from '$lib/components/charts/illustrativeCharts/ColorStackedBar.svelte'
+    import ColorMultipleLine from '$lib/components/charts/illustrativeCharts/ColorMultipleLine.svelte'
+    import ColorDualLine from '$lib/components/charts/illustrativeCharts/ColorDualLine.svelte'
+    import ColorBoroughMap from '$lib/components/charts/illustrativeCharts/ColorBoroughMap.svelte'
+    import ColorDivergingBoroughMap from '$lib/components/charts/illustrativeCharts/ColorDivergingBoroughMap.svelte'
     import ColorRampGenerator from '$lib/components/ramp/ColorRampGenerator.svelte'
-    import ColorStackedBarLikert from '$lib/components/charts/exampleCharts/bars/ColorStackedBarLikert.svelte'
+    import ColorStackedBarLikert from '$lib/components/charts/illustrativeCharts/ColorStackedBarLikert.svelte'
     import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
     import { hsl } from 'd3';
     import { scaleSequential } from 'd3-scale';

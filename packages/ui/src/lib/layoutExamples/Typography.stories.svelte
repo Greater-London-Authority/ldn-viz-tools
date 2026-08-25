@@ -37,7 +37,7 @@
 
 <Story name="Typography">
 	<div class="container py-16">
-		<div class="prose flow-prose">
+		<div class="flow-prose prose">
 			<!-- Hero cluster — eyebrow kicker, headline and subhead couple tight to the title -->
 			<p class="eyebrow">GLA City Intelligence</p>
 			<h1 class="headline">State of London</h1>

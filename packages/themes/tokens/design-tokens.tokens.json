@@ -2966,6 +2966,21 @@
 					"description": "",
 					"type": "color",
 					"value": "{primitive.light-mode.color.mode.light.grey.200}"
+				},
+				"primary-text": {
+					"description": "",
+					"type": "color",
+					"value": "{semantic-color.light-mode.palette.blue.700}"
+				},
+				"primary-text-hover": {
+					"description": "",
+					"type": "color",
+					"value": "{semantic-color.light-mode.palette.blue.800}"
+				},
+				"primary-text-active": {
+					"description": "",
+					"type": "color",
+					"value": "{semantic-color.light-mode.palette.blue.900}"
 				}
 			},
 			"label": {
@@ -4195,6 +4210,21 @@
 					"description": "",
 					"type": "color",
 					"value": "{primitive.dark-mode.color.mode.dark.grey.300}"
+				},
+				"primary-text": {
+					"description": "",
+					"type": "color",
+					"value": "{semantic-color.dark-mode.palette.blue.700}"
+				},
+				"primary-text-hover": {
+					"description": "",
+					"type": "color",
+					"value": "{semantic-color.dark-mode.palette.blue.800}"
+				},
+				"primary-text-active": {
+					"description": "",
+					"type": "color",
+					"value": "{semantic-color.dark-mode.palette.blue.900}"
 				}
 			},
 			"label": {

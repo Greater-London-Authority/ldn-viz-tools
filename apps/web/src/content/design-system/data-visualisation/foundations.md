@@ -7,6 +7,10 @@ heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-1.svg
 ---
 
+<script>
+    import FoundationsDualLine from '$lib/components/charts/illustrativeCharts/FoundationsDualLine.svelte'
+</script>
+
 ## Principles
 
 A visualisation rarely _just shows_ the raw data. It is a curated slice, summary or framing of data to tell a story. If your story is important, your charts should work hard to highlight and communicate it clearly.
@@ -70,7 +74,7 @@ Whatever format of data visualisation you are producing, keep these fundamentals
 - **Say what you see** -
   Help the reader by titling the chart with a description of what you want them to see in the graphic. You could also use colour in your title text to connect to data points in your chart.
 
-![An example chart, using the LDN City Data Design System, with a narrative title, labelled data points and highlighted date ranges.](/data-viz-foundations-chart-example-01.png)
+<FoundationsDualLine />
 
 ### Charts in context
 

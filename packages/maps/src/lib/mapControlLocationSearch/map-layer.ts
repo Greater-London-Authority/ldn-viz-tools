@@ -1,5 +1,5 @@
-import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
 import type { Geolocation, GeolocationBounds, GeolocationCoords } from '@ldn-viz/ui';
+import { GLIDE_ANIMATION_OPTIONS } from '../themes/animations';
 
 import type {
 	FlyToOptions,

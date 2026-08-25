@@ -15,6 +15,16 @@ export const getAllDocs = () => {
 	return docs;
 };
 
+export const resolveNavItems = <T extends { href?: string; children?: T[] }>(
+	items: T[],
+	resolve: (path: string) => string
+): T[] =>
+	items.map((item) => ({
+		...item,
+		href: item.href ? resolve(item.href) : item.href,
+		children: item.children ? resolveNavItems(item.children, resolve) : item.children
+	}));
+
 function slugFromPath(path: string) {
 	return path.replaceAll(/\/src\/content\/|\/index|\.md$/g, '');
 }

@@ -57,7 +57,7 @@
 		},
 		argTypes: {
 			width: {
-				options: ['standard', 'wide'],
+				options: ['slim', 'standard', 'wide'],
 				control: { type: 'radio' }
 			},
 			theme: {
@@ -148,6 +148,8 @@
 {/snippet}
 
 <Story name="Default" />
+
+<Story name="Slim" args={{ width: 'slim' }} />
 
 <Story name="Wide" args={{ width: 'wide' }} />
 

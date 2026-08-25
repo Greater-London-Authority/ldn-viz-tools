@@ -47,17 +47,17 @@ module.exports = {
 			lineHeight: 'var(--caption-line-height)'
 		},
 		':where(a):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--color-interactive-primary)',
+			color: 'var(--color-interactive-primary-text)',
 			textDecoration: 'underline',
 			textUnderlineOffset: '2px',
-			textDecorationColor: 'var(--color-interactive-primary)',
+			textDecorationColor: 'var(--color-interactive-primary-text)',
 			textDecorationThickness: '1px'
 		},
 		':where(a:hover):not(:where(.not-prose, .not-prose *))': {
-			color: 'var(--color-interactive-primary-hover)',
+			color: 'var(--color-interactive-primary-text-hover)',
 			textDecoration: 'none',
 			textUnderlineOffset: '2px',
-			textDecorationColor: 'var(--color-interactive-primary)',
+			textDecorationColor: 'var(--color-interactive-primary-text-hover)',
 			textDecorationThickness: '1px'
 		},
 		':where(hr):not(:where(.not-prose, .not-prose *))': {

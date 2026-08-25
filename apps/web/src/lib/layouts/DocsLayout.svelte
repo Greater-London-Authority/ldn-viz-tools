@@ -6,10 +6,7 @@
 	let { children, navigation } = $props();
 </script>
 
-<AppShell
-	sidebarPlacement={{ initial: 'left' }}
-	sidebarAlwaysOpen={{ initial: false, '2xl': true }}
->
+<AppShell sidebarPlacement={{ initial: 'left' }} sidebarAlwaysOpen={{ initial: false, xl: true }}>
 	{#snippet sidebar()}
 		<DocsSidebar {navigation} />
 	{/snippet}

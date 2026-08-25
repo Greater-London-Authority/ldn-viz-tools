@@ -3,9 +3,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const ldnColors = require('./styles/tw-extend/color');
 const ldnSpacing = require('./styles/tw-extend/spacing');
+const ldnFlow = require('./styles/tw-extend/flow');
 const ldnGridSpacing = require('./styles/tw-extend/gridspacing');
 const plugin = require('tailwindcss/plugin');
 
+const customFlow = require('./tailwind-custom/flow');
 const customTypography = require('./tailwind-custom/typography/typography');
 const customForms = require('./tailwind-custom/forms');
 
@@ -28,6 +30,8 @@ const config = {
 			spacing: {
 				...ldnSpacing
 			},
+			margin: { ...ldnFlow },
+			gap: { ...ldnFlow },
 			fontFamily: {
 				sans: ['"Inter"', ...defaultTheme.fontFamily.sans]
 			}
@@ -95,6 +99,10 @@ const config = {
 			});
 		}),
 		// LDN default form themeing check ui/src/lib/Typography.mdx for more
+		// Registered immediately before customTypography: flow rules and typography
+		// role rules can target the same element, so this preserves the cascade
+		// order that held when flow shipped inside the typography plugin.
+		customFlow,
 		customTypography,
 		// provides form-element reset
 		require('@tailwindcss/forms')({ strategy: 'class' }),

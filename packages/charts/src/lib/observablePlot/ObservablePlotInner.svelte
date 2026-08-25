@@ -149,7 +149,7 @@
 	import * as ObservablePlot from '@observablehq/plot';
 	import * as Plot from '../observablePlotFragments/plot';
 
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { derived, writable, type Writable } from 'svelte/store';
 
 	interface Props {
@@ -208,48 +208,19 @@
 		...rest
 	}: Props = $props();
 
+	let width = $state(0);
+
+	const resolvedSpec = $derived(spec ? { ...spec, width } : spec);
+
 	const renderPlot = (node: HTMLDivElement) => {
 		node.innerHTML = '';
 
 		if (applyDefaults) {
-			node.appendChild(Plot.plot(spec));
+			node.appendChild(Plot.plot(resolvedSpec));
 		} else {
-			node.appendChild(ObservablePlot.plot(spec));
+			node.appendChild(ObservablePlot.plot(resolvedSpec));
 		}
 	};
-
-	let width = $state(0);
-
-	onMount(() => {
-		// updateDimensions();
-		window.addEventListener('resize', updateDimensions);
-		return () => {
-			window.removeEventListener('resize', updateDimensions);
-		};
-	});
-
-	/*
-	afterUpdate(() => {
-		updateDimensions();
-	});
-	*/
-
-	const updateDimensions = () => {
-		if (spec && spec.width !== width) {
-			spec.width = width;
-
-			// the #key block is no longer triggering a re-render when spec.width changes
-			if (domNode) {
-				renderPlot(domNode);
-			}
-		}
-	};
-
-	$effect(() => {
-		if (width) {
-			updateDimensions();
-		}
-	});
 
 	// svelte-ignore state_referenced_locally
 	const tooltipData = derived(tooltipStore, ($tooltipStore) =>
@@ -258,7 +229,7 @@
 	setContext('tooltipData', tooltipData);
 </script>
 
-{#key spec}
+{#key resolvedSpec}
 	<div
 		use:renderPlot
 		{...rest}

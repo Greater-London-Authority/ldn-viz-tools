@@ -78,9 +78,9 @@
 	const styleClasses = {
 		solid: {
 			primary:
-				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active dark:hover:text-color-inverse-text',
+				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active',
 			secondary:
-				'bg-color-interactive-secondary text-color-static-white hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active dark:hover:text-color-inverse-text',
+				'bg-color-interactive-secondary text-color-inverse-text hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active',
 			positive:
 				'bg-color-interactive-positive text-color-static-white hover:bg-color-interactive-positive-hover focus:ring-color-interactive-focus active:bg-color-interactive-positive-active dark:text-color-inverse-text',
 			negative:
@@ -90,9 +90,9 @@
 		},
 		square: {
 			primary:
-				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active dark:hover:text-color-inverse-text',
+				'bg-color-interactive-primary text-color-static-white hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active',
 			secondary:
-				'bg-color-interactive-secondary text-color-static-white hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active dark:hover:text-color-inverse-text',
+				'bg-color-interactive-secondary text-color-inverse-text hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active',
 			positive:
 				'bg-color-interactive-positive text-color-static-white hover:bg-color-interactive-positive-hover focus:ring-color-interactive-focus active:bg-color-interactive-positive-active dark:text-color-inverse-text',
 			negative:
@@ -114,7 +114,7 @@
 		},
 		text: {
 			primary:
-				'bg-transparent text-color-interactive-primary underline hover:text-color-interactive-primary-hover hover:no-underline active:text-color-interactive-primary-active',
+				'bg-transparent text-color-interactive-primary-text underline hover:text-color-interactive-primary-text-hover hover:no-underline active:text-color-interactive-primary-text-active',
 			secondary:
 				'bg-transparent text-color-text-muted underline hover:text-color-interactive-secondary-hover hover:no-underline active:text-color-interactive-secondary-active',
 			positive:
@@ -126,7 +126,7 @@
 		},
 		brand: {
 			primary:
-				'bg-color-inverse-surface text-color-inverse-text border-b-4 border-color-static-brand hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active',
+				'bg-color-inverse-surface text-color-inverse-text border-b-4 border-color-static-brand hover:bg-color-interactive-primary-hover active:bg-color-interactive-primary-active dark:hover:text-color-text',
 			secondary:
 				'bg-color-surface-muted text-color-text border-b-4 border-color-static-brand hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active hover:text-color-inverse-text',
 			positive:
@@ -160,7 +160,7 @@
 
 	const buttonClass = $derived(
 		classNames(
-			'product inline-flex justify-center items-center disabled:cursor-not-allowed',
+			'product inline-flex justify-center items-center disabled:cursor-not-allowed ',
 			'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-interactive-focus focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-surface',
 			styleClasses[variant][emphasis],
 			sizeClasses[size],

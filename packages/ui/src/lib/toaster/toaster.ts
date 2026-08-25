@@ -16,7 +16,8 @@ export const messages: Writable<ToastMessage[]> = writable([]);
 export const newToastMessage = (text: string, options: ToastMessageOptions = {}) => {
 	const id = options.id ? options.id : randomId();
 	const type = options.type ? options.type : ToastType.Notice;
-	const timeToLive = options.timeToLive ? options.timeToLive : DEFAULT_TIME_TO_LIVE;
+	const timeToLive =
+		typeof options.timeToLive === 'number' ? options.timeToLive : DEFAULT_TIME_TO_LIVE;
 
 	const msg: ToastMessage = {
 		text: text,

@@ -6,9 +6,9 @@
 	 * @component
 	 */
 
-	import { onMount, getContext } from 'svelte';
 	import { pointOnFeature } from '@turf/turf';
-	import { GLIDE_ANIMATION_OPTIONS } from '@ldn-viz/maps';
+	import { getContext, onMount } from 'svelte';
+	import { GLIDE_ANIMATION_OPTIONS } from '../../../themes/animations';
 
 	const findFlyPoint = (map, containerHeight, mapCoords) => {
 		const mapRect = map.getContainer().getBoundingClientRect();
