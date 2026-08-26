@@ -3,4 +3,4 @@
 '@ldn-viz/ui': minor
 ---
 
-Apply correct css variables to form-label class
+CHANGED: Apply correct CSS variables to `form-label` class
