@@ -25,7 +25,7 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapRadiusSearch layerId="gla/ldn-viz-tools/test-data/point" />
+					<MapRadiusSearch layerId="gla/ldn-viz-tools/test-data/point" maxRadius={500} />
 				</MapControlGroup>
 			</Map>
 		</div>
