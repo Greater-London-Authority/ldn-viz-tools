@@ -8,9 +8,9 @@
 	let { children, hint, subTitle }: Props = $props();
 </script>
 
-<header class="text-color-text">
+<header class="product flex flex-col gap-flow-tight">
 	<div class="flex items-end justify-between">
-		<h2 class="text-base font-semibold leading-snug">
+		<h2 class="label">
 			<!-- The title of the section. -->
 			{@render children?.()}
 		</h2>
@@ -22,7 +22,7 @@
 	</div>
 
 	{#if subTitle}
-		<div class="my-1 text-xs">
+		<div class="caption text-color-text-muted">
 			<!-- Optional longer subtitle to display below the main title. -->
 			{@render subTitle?.()}
 		</div>

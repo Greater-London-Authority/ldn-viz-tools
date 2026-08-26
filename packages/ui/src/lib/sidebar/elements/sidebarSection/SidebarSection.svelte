@@ -14,15 +14,17 @@
 	let { title = '', children }: Props = $props();
 </script>
 
-<section class="border-b border-color-border-muted last-of-type:border-0">
-	<div class="space-y-4 bg-color-container-level-1 pb-4 text-sm text-color-text">
-		{#if typeof title != 'string'}
-			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->
-			{@render title()}
-		{:else if title}
-			<SidebarSectionTitle>{title}</SidebarSectionTitle>
-		{/if}
-		<!-- The content to be displayed inside this section. -->
+<section
+	class="product body-sm flex flex-col gap-flow-tight border-b border-color-border-muted pb-4 last-of-type:border-0"
+>
+	{#if typeof title != 'string'}
+		<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->
+		{@render title()}
+	{:else if title}
+		<SidebarSectionTitle>{title}</SidebarSectionTitle>
+	{/if}
+	<!-- The content to be displayed inside this section. -->
+	<div class="flex flex-col gap-flow-default">
 		{@render children?.()}
 	</div>
 </section>

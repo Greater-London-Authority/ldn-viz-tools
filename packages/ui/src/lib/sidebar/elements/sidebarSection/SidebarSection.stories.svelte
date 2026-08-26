@@ -1,6 +1,7 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Overlay from '../../../overlay/Overlay.svelte';
+	import Select from '../../../select/Select.svelte';
 	import SidebarGroupTitle from './sidebarGroupTitle/SidebarGroupTitle.svelte';
 	import SidebarSection from './SidebarSection.svelte';
 	import SidebarSectionTitle from './sidebarSectionTitle/SidebarSectionTitle.svelte';
@@ -17,16 +18,24 @@
 	});
 </script>
 
+{#snippet demoContent()}
+	<Select label="Boroughs" options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))} />
+	<Select
+		label="Data view options"
+		options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))}
+	/>
+{/snippet}
+
 <Story name="Default">
 	{#snippet template()}
-		<SidebarSection title="Section Title">Section</SidebarSection>
+		<SidebarSection title="Section Title">{@render demoContent()}</SidebarSection>
 	{/snippet}
 </Story>
 
 <Story name="With Titled Group">
 	{#snippet template()}
 		<SidebarSection title="Section Title">
-			Section Content
+			{@render demoContent()}
 			<div>
 				<SidebarGroupTitle>
 					Pay Attention to this group
@@ -34,7 +43,7 @@
 						<Overlay hintLabel="why">Because it's Awesome!</Overlay>
 					{/snippet}
 				</SidebarGroupTitle>
-				Grouped content
+				{@render demoContent()}
 			</div>
 		</SidebarSection>
 	{/snippet}
@@ -57,18 +66,20 @@
 				</SidebarSectionTitle>
 			{/snippet}
 
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-			labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-			laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-			voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-			non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<div>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+				labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+				laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+				voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+				cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
 
 			<div>
 				<SidebarGroupTitle>
 					Pay Attention to this group
 					{#snippet hint()}<Overlay hintLabel="why">Because it's Awesome!</Overlay>{/snippet}
 				</SidebarGroupTitle>
-				Grouped content
+				{@render demoContent()}
 			</div>
 		</SidebarSection>
 	{/snippet}

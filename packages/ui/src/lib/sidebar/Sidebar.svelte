@@ -40,7 +40,9 @@
 	}: SidebarProps = $props();
 
 	const wrapperClasses = $derived(`${position} z-30 ${theme}`);
-	const sidebarClasses = $derived(`flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = $derived(
+		`product flow-product flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`
+	); // p-6 pad on container or elements (overflow position)
 
 	// expose internal state to parent component
 	state = sidebarState;
@@ -139,7 +141,7 @@
 				{:else}
 					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text">
 						{#if header}
-							<div class="pb-4">
+							<div>
 								<!-- typically contains a `<SidebarHeader>` -->
 								{@render header()}
 							</div>
@@ -151,7 +153,7 @@
 									<TabPanel
 										tabPanelId={`${tab.id}-panel`}
 										tabId={tab.id}
-										class="space-y-4 bg-color-container-level-1"
+										class="mt-flow-section flex flex-col gap-flow-section"
 									>
 										{@const SvelteComponent = component}
 										<SvelteComponent />
@@ -161,7 +163,7 @@
 						{/if}
 
 						{#if sections || header}
-							<div class="space-y-4">
+							<div class="mt-flow-section flex flex-col gap-flow-section">
 								<!-- contains main sidebar content - typically a sequence of `<SidebarSection>`s -->
 								{@render sections?.()}
 							</div>

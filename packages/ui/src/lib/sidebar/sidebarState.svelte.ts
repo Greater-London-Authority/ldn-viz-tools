@@ -1,11 +1,11 @@
 import { getContext, setContext } from 'svelte';
-import type { PlacementType } from './types';
+import type { PlacementType, SidebarProps } from './types';
 
 export class SidebarState {
 	isOpen: boolean = $state(false);
 	isAlwaysOpen: boolean = $state(false);
 	placement: PlacementType = $state('left');
-	width: 'standard' | 'wide' = $state('standard');
+	width: SidebarProps['width'] = $state('standard');
 	orientation: 'vertical' | 'horizontal' = $derived(
 		['top', 'bottom'].includes(this.placement) ? 'horizontal' : 'vertical'
 	);

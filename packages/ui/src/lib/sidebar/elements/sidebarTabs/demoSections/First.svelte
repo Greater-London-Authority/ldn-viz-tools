@@ -21,11 +21,11 @@
 </script>
 
 <SidebarSection title="First Section Title">
-	<SidebarGroup title="First Group Title">
+	<SidebarGroup title="Filters">
 		<Select {options} label="Label" id="example-input-1" />
 		<Select {options} label="Label" id="example-input-2" />
 	</SidebarGroup>
-	<SidebarGroup title="Second Group Title">
+	<SidebarGroup title="Options">
 		<RadioButtonGroupSolid options={buttonGroupOptions} name="Radio Group One" />
 	</SidebarGroup>
 </SidebarSection>

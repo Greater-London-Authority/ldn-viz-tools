@@ -1,6 +1,7 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Overlay from '../../../overlay/Overlay.svelte';
+	import Select from '../../../select/Select.svelte';
 	import SidebarGroup from './SidebarGroup.svelte';
 	import SidebarGroupTitle from './sidebarGroupTitle/SidebarGroupTitle.svelte';
 
@@ -17,9 +18,19 @@
 	});
 </script>
 
+{#snippet content()}
+	<Select label="Boroughs" options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))} />
+	<Select
+		label="Data view options"
+		options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))}
+	/>
+{/snippet}
+
 <Story name="Default (string title)">
 	{#snippet template()}
-		<SidebarGroup title="Group Title">Grouped content</SidebarGroup>
+		<SidebarGroup title="Group Title">
+			{@render content()}
+		</SidebarGroup>
 	{/snippet}
 </Story>
 
@@ -34,7 +45,8 @@
 					{#snippet hint()}<Overlay hintLabel="why">Because it's Awesome!</Overlay>{/snippet}
 				</SidebarGroupTitle>
 			{/snippet}
-			Grouped content
+
+			{@render content()}
 		</SidebarGroup>
 	{/snippet}
 </Story>
@@ -42,6 +54,8 @@
 <!-- With no title, only the children are rendered (the `title=''` fallback). -->
 <Story name="Content only (no title)">
 	{#snippet template()}
-		<SidebarGroup>Grouped content with no title</SidebarGroup>
+		<SidebarGroup>
+			{@render content()}
+		</SidebarGroup>
 	{/snippet}
 </Story>

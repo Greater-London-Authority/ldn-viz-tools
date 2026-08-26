@@ -1,10 +1,10 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import CookieControlSettings from '../../../analytics/CookieControlSettings.svelte';
+	import PrivacyPolicyLink from '../../../analytics/PrivacyPolicyLink.svelte';
 	import LogoCIU from '../../../logos/LogoCIU.svelte';
 	import LogoMayor from '../../../logos/LogoMayor.svelte';
 	import ThemeSwitcher from '../../../theme/ThemeSwitcher.svelte';
-	import PrivacyPolicyLink from '../../../analytics/PrivacyPolicyLink.svelte';
 	import SidebarFooter from './SidebarFooter.svelte';
 
 	// hack to make the "View cookie settings" link appear
@@ -27,8 +27,8 @@
 			{#snippet menu()}
 				<div class="flex justify-between">
 					<ul class="flex space-x-2">
-						<li><CookieControlSettings size="sm" /></li>
-						<li><PrivacyPolicyLink size="sm" /></li>
+						<li><CookieControlSettings size="xs" /></li>
+						<li><PrivacyPolicyLink size="xs" /></li>
 					</ul>
 					<ThemeSwitcher size="xs" />
 				</div>
@@ -64,8 +64,8 @@
 			{#snippet menu()}
 				<div class="flex justify-between">
 					<ul class="flex space-x-2">
-						<li><CookieControlSettings size="sm" /></li>
-						<li><PrivacyPolicyLink size="sm" /></li>
+						<li><CookieControlSettings size="xs" /></li>
+						<li><PrivacyPolicyLink size="xs" /></li>
 					</ul>
 					<ThemeSwitcher size="xs" />
 				</div>

@@ -16,9 +16,12 @@
 	import type { SidebarProps } from './types';
 
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import PrivacyPolicyLink from '../analytics/PrivacyPolicyLink.svelte';
 	import Button from '../button/Button.svelte';
 	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
+	import SidebarGroup from './elements/sidebarSection/SidebarGroup.svelte';
+	import SidebarSectionTitle from './elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
 
 	export let tabs = [
 		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
@@ -104,23 +107,51 @@
 {#snippet sections()}
 	{@const sections = [1, 2]}
 	{#each sections as _section}
-		<SidebarSection title="Section Title">
-			Section Content
-			<div>
-				<SidebarGroupTitle>
-					Group Title
-					{#snippet hint()}
-						<Overlay>
-							<p class="mb-4">Any content you want can go here</p>
+		<SidebarSection>
+			<SidebarSectionTitle>
+				Section Title
+				{#snippet hint()}
+					<Overlay>
+						<div class="caption">
+							<p>Any content you want can go here</p>
 							<p>
 								Maecenas ut libero vel nibh maximus feugiat non sed tortor. Sed in lacinia dui, nec
 								venenatis sapien. Etiam venenatis felis.
 							</p>
-						</Overlay>
-					{/snippet}
-				</SidebarGroupTitle>
-				Grouped content
-			</div>
+						</div>
+					</Overlay>
+				{/snippet}
+
+				{#snippet subTitle()}
+					Select a borough to download usage stats by LSOA. And more words as this is a long sub
+					title
+				{/snippet}
+			</SidebarSectionTitle>
+
+			<SidebarGroup title="Options">
+				<Select
+					label="Boroughs"
+					options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))}
+				/>
+				<Select
+					label="Data view options"
+					options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))}
+				/>
+			</SidebarGroup>
+
+			<SidebarGroup>
+				{#snippet title()}
+					<SidebarGroupTitle>Filters</SidebarGroupTitle>
+				{/snippet}
+				<Select
+					label="Grouped control one"
+					options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))}
+				/>
+				<Select
+					label="Grouped control two"
+					options={['one', 'two', 'three'].map((d) => ({ label: d, value: d }))}
+				/>
+			</SidebarGroup>
 		</SidebarSection>
 	{/each}
 {/snippet}
@@ -134,8 +165,8 @@
 		{#snippet menu()}
 			<div class="flex justify-between">
 				<ul class="flex space-x-2">
-					<li>View Cookie settings</li>
-					<li>Privacy Policy</li>
+					<!-- <li><CookieControlSettings size="xs" /></li> -->
+					<li><PrivacyPolicyLink size="xs" /></li>
 				</ul>
 				<ThemeSwitcher size="xs" />
 			</div>
@@ -154,9 +185,11 @@
 <Story name="Wide" args={{ width: 'wide' }} />
 
 {#snippet longcontent()}
-	{@const sections = [1, 2, 3, 4]}
-	{#each sections as _section}
-		<SidebarSection title="Section Title">
+	{@const lgsections = [1, 2, 3, 4]}
+	{#each lgsections as _section}
+		{@render sections()}
+
+		<!-- <SidebarSection title="Section Title">
 			Section Content
 			<div>
 				<SidebarGroupTitle>
@@ -173,7 +206,7 @@
 				</SidebarGroupTitle>
 				Grouped content
 			</div>
-		</SidebarSection>
+		</SidebarSection> -->
 	{/each}
 {/snippet}
 
