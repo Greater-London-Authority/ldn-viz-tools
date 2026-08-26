@@ -4,6 +4,9 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsx } from 'mdsx';
 import contentIndex from './.velite/docs.json' with { type: 'json' }; //TODO - other content beyond docs
 import { mdsxConfig } from './mdsx.config.ts';
+
+const dev = process.env.NODE_ENV === 'development';
+
 const config = {
 	preprocess: [vitePreprocess(), mdsx(mdsxConfig)],
 	kit: {
@@ -11,7 +14,8 @@ const config = {
 			'$content/*': '.velite/*'
 		},
 		adapter: adapter(),
-		prerender: { entries: ['*', ...contentIndex.map((d) => d.slugFull)] }
+		prerender: { entries: ['*', ...contentIndex.map((d) => d.slugFull)] },
+		paths: { base: dev ? '' : '/city-data' }
 	},
 	onwarn: (warning, handler) => {
 		if (warning.code === 'css_unused_selector') return;

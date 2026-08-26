@@ -17,5 +17,12 @@
 			size="xs"
 		/>
 	</div>
-	<Table {title} data={tokenData} tableSpec={tokenTableSpec} imageDownloadButton={false} />
+	<Table
+		{title}
+		data={tokenData}
+		tableSpec={tokenTableSpec}
+		imageDownloadButton={false}
+		dataDownloadButton={false}
+		zebraStripe
+	/>
 </div>

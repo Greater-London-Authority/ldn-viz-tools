@@ -1,5 +1,20 @@
 # ldn-viz-tools-charts
 
+## 9.2.0
+
+### Minor Changes
+
+- 589906c: FIXED: correctly add dashed line style
+
+### Patch Changes
+
+- Updated dependencies [df7cd85]
+- Updated dependencies [7a8499d]
+- Updated dependencies [af4d3bd]
+- Updated dependencies [47c3895]
+- Updated dependencies [50f265c]
+  - @ldn-viz/ui@24.2.0
+
 ## 9.1.0
 
 ### Minor Changes

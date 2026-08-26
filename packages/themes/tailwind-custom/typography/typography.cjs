@@ -3,7 +3,6 @@ const plugin = require('tailwindcss/plugin');
 const contexts = require('./contexts');
 const roles = require('./roles');
 const semantics = require('./semantics');
-const flow = require('./flow');
 const responsive = require('./responsive');
 
 module.exports = plugin(function ({ addComponents }) {
@@ -11,45 +10,17 @@ module.exports = plugin(function ({ addComponents }) {
 	addComponents({
 		'.prose': contexts.prose,
 		'.product': contexts.product,
-		// chart values don't scale per-breakpoint, so unlike prose/product it's
-		// not added to the responsive role loop below.
+		// chart values don't scale per-breakpoint (md-pinned), but chart IS in the
+		// context loop below so that it seals against an outer context.
 		'.chart': contexts.chart
 	});
 
-	// Add flow
-	addComponents(flow);
 	// Add semantics
 	addComponents(semantics);
 
 	// Add roles
 	const rolesKeys = Object.keys(roles);
 	addComponents(Object.fromEntries(rolesKeys.map((role) => [`.${role}`, roles[role]])));
-
-	// Responsive by default - no `.responsive` modifier needed. Fixed roles
-	// (identical values at every breakpoint, e.g. Body/Label/Caption) just get
-	// no-op media queries here; only the roles that actually scale move.
-	['prose', 'product'].forEach((context) => {
-		rolesKeys.forEach((role) => {
-			const mapping = responsive[context][role];
-			if (!mapping) return;
-
-			const sel = [
-				`.${context}.${role}`,
-				`.${context} .${role}`,
-				`.not-prose .${context}.${role}`,
-				`.not-prose .${context} .${role}`,
-				`.not-prose.${context} .${role}`
-			].join(', ');
-
-			addComponents({
-				[sel]: mapping.default,
-				...(mapping.sm ? { '@screen sm': { [sel]: mapping.sm } } : {}),
-				...(mapping.md ? { '@screen md': { [sel]: mapping.md } } : {}),
-				...(mapping.lg ? { '@screen lg': { [sel]: mapping.lg } } : {}),
-				...(mapping.xl ? { '@screen xl': { [sel]: mapping.xl } } : {})
-			});
-		});
-	});
 
 	function buildContextResponsiveVars(responsiveByRole) {
 		const result = {
@@ -71,38 +42,46 @@ module.exports = plugin(function ({ addComponents }) {
 		return result;
 	}
 
-	// --prose-max-width used to scale only inside the `.prose.responsive`
-	// aggregate; now that scaling is on by default, it moves onto plain
-	// `.prose` (base value already in contexts.cjs) with the same @screen steps.
-	const proseResponsive = buildContextResponsiveVars(responsive.prose);
+	// Responsive by default — no `.responsive` modifier needed. Fixed roles
+	// (identical values at every breakpoint, e.g. Body/Label/Caption) just restate
+	// the same value in each media query; only the roles that scale move.
+	//
+	// Every context publishes its full role set at every breakpoint, on itself.
+	// Never on the role element: a declaration on the element beats an inherited
+	// one outright, so an element-level rule from an outer context overrides a
+	// nested context's own values. Setting the vars on the context and letting
+	// them inherit makes the innermost declared context win at any depth, with
+	// no specificity or source-order contest.
+	//
+	// --prose-max-width rides along on the same @screen steps (base value also in
+	// contexts.cjs); it is prose-only, hence the `extra` hook.
+	//
+	// `responsive.cjs` has no `chart` key — chart values are mode-invariant, so the
+	// `|| {}` guard leaves chart with the md-pinned block from contexts.cjs. Chart is
+	// still in the loop so that it SEALS: nothing targets the role element any more,
+	// so a chart nested in prose/product now wins for the roles it defines. Roles it
+	// does not define (e.g. `body`) still fall through to the enclosing context —
+	// intended.
+	['prose', 'product', 'chart'].forEach((context) => {
+		const r = buildContextResponsiveVars(responsive[context] || {});
+		const extra = (mode) =>
+			context === 'prose'
+				? { '--prose-max-width': `var(--typography-${mode}-prose-readable-width)` }
+				: {};
 
-	addComponents({
-		'.prose': {
-			...proseResponsive.default
-		},
-		'@screen sm': {
-			'.prose': {
-				...proseResponsive.sm,
-				'--prose-max-width': 'var(--typography-sm-prose-readable-width)'
-			}
-		},
-		'@screen md': {
-			'.prose': {
-				...proseResponsive.md,
-				'--prose-max-width': 'var(--typography-md-prose-readable-width)'
-			}
-		},
-		'@screen lg': {
-			'.prose': {
-				...proseResponsive.lg,
-				'--prose-max-width': 'var(--typography-lg-prose-readable-width)'
-			}
-		},
-		'@screen xl': {
-			'.prose': {
-				...proseResponsive.xl,
-				'--prose-max-width': 'var(--typography-xl-prose-readable-width)'
-			}
-		}
+		// Chart contributes nothing here (no `chart` key in responsive.cjs), so drop
+		// empty blocks rather than emitting a bare `.chart {}` into the sheet.
+		const block = (mode, vars) => {
+			const decls = { ...vars, ...extra(mode) };
+			return Object.keys(decls).length ? { [`.${context}`]: decls } : {};
+		};
+
+		addComponents({
+			...block('base', r.default),
+			'@screen sm': block('sm', r.sm),
+			'@screen md': block('md', r.md),
+			'@screen lg': block('lg', r.lg),
+			'@screen xl': block('xl', r.xl)
+		});
 	});
 });
