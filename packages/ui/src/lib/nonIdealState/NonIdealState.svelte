@@ -26,7 +26,7 @@
 </script>
 
 <div
-	class="flow-product flex h-full w-full flex-col items-center justify-center border border-color-border-muted bg-color-surface-neutral-muted px-2 py-2 text-center text-color-text-muted"
+	class="flow-product product flex h-full w-full flex-col items-center justify-center border border-color-border-muted bg-color-surface-neutral-muted px-2 py-2 text-center text-color-text-muted"
 >
 	{#if spinner}
 		<LoadingIndicator class="h-12 w-12" />
@@ -39,7 +39,7 @@
 		{/if}
 	{/if}
 
-	<span class="max-w-xl text-lg font-bold">
+	<span class="title max-w-xl">
 		<!-- contains the title text, displayed below the icon -->
 		{#if title}
 			{@render title()}
@@ -48,7 +48,7 @@
 		{/if}
 	</span>
 
-	<div class="max-w-xl">
+	<div class="body max-w-xl">
 		<!-- inserted into a `<div>` below the description -->
 		{@render children?.()}
 	</div>

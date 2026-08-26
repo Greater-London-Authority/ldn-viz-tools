@@ -85,23 +85,23 @@
 	onmouseenter={() => (isHovered = true)}
 	onmouseleave={() => (isHovered = false)}
 >
-	<div class="flow-product h-full p-4">
+	<div class="flow-product product h-full p-4">
 		{#if title}
-			<p class="text-2xl font-bold">
+			<p class="title">
 				<!-- Title text, displayed at top of card in large font-->
 				{@render title?.()}
 			</p>
 		{/if}
 
 		{#if body}
-			<p class=" prose h-full leading-snug">
+			<p class="body h-full">
 				<!-- longer description text displayed below the title in smaller font -->
 				{@render body?.()}
 			</p>
 		{/if}
 	</div>
 	<div
-		class=" mt-4 flex items-center justify-between px-4 py-2 transition"
+		class="label mt-4 flex items-center justify-between px-4 py-2 transition"
 		style:color={ctaTextColor}
 		style:background-color={isHovered ? ctaColorHover : ctaColor}
 	>
