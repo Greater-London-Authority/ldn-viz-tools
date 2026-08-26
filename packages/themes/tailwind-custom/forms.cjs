@@ -62,7 +62,11 @@ module.exports = plugin(function ({ addComponents }) {
 		},
 		'.form-label': {
 			color: 'var(--color-label)',
-			'font-weight': 500
+			'font-family': 'var(--label-font-family)',
+			'font-weight': 'var(--label-font-weight)',
+			'letter-spacing': 'var(--label-letter-spacing)',
+			'font-size': 'var(--label-font-size)',
+			'line-height': 'var(--label-line-height)'
 		},
 		'.form-select': {
 			'background-image': `url("${svgToDataUri(
