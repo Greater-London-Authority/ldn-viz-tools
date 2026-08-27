@@ -100,6 +100,7 @@
 		 */
 		ariaHidden?: boolean;
 		controls?: import('svelte').Snippet;
+		legend?: import('svelte').Snippet;
 		tooltip?: import('svelte').Snippet;
 
 		/**
@@ -159,6 +160,9 @@
 		{id}
 	>
 		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+		{@render controls?.()}
+
+		<!-- separate snippet for the legend, so the main chart can be aligned if legends wrap over a different number of lines-->
 		{@render controls?.()}
 
 		<ObservablePlotInner

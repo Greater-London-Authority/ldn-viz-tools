@@ -479,3 +479,27 @@
 		<ObservablePlot {...args} {spec} data={chartData} applyDefaults={false} />
 	{/snippet}
 </Story>
+
+<!--
+	The `legend` snippet is rendered between the controls and the chart body.
+	It is kept separate from the `controls` snippet so that, when two charts are placed side-by-side,
+	the chart bodies stay aligned even if their legends wrap over a different number of lines.
+-->
+<Story name="With legend snippet">
+	{#snippet template(args)}
+		<ObservablePlot {...args} {spec} data={chartData}>
+			{#snippet legend()}
+				<div class="mb-4 flex flex-wrap gap-4 text-sm">
+					<span class="flex items-center gap-2">
+						<span class="inline-block h-3 w-3 rounded-full bg-color-palette-blue-500"></span>
+						Variable A
+					</span>
+					<span class="flex items-center gap-2">
+						<span class="inline-block h-3 w-3 rounded-full bg-color-palette-red-500"></span>
+						Variable B
+					</span>
+				</div>
+			{/snippet}
+		</ObservablePlot>
+	{/snippet}
+</Story>
