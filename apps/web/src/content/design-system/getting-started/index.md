@@ -23,7 +23,7 @@ The system is available as node modules for installation using your favourite pa
 <code>npm i @ldn-viz/maps</code> <p>components for rendering maps</p>
 <code>npm i @ldn-viz/tables</code> <p>components for rendering tables</p>
 <code>npm i @ldn-viz/themes</code> <p>CSS and design tokens</p>
-<code>npm i @ldn-viz/utils</code> <p>utility functions (such as for constructing color scales)</p>
+<code>npm i @ldn-viz/utils</code> <p>utility functions (such as for constructing colour scales)</p>
 
 ### From a CDN
 

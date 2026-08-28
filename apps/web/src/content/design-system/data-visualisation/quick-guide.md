@@ -297,5 +297,5 @@ To ensure consistency and correct contrast across all charts, use the following 
 
 ## Further reading
 
-- [A deeper dive into data visualisation color theory](/design-system/data-visualisation/colour-foundations)
-- [More on color use within our wider design system](/design-system/foundations/colour)
+- [A deeper dive into data visualisation colour theory](/design-system/data-visualisation/colour-foundations)
+- [More on colour use within our wider design system](/design-system/foundations/colour)

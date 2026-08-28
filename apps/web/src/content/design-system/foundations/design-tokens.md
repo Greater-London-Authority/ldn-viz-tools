@@ -63,7 +63,7 @@ thumbnail: cta-foundations-3.svg
 
 ## Principles
 
-Design tokens are the single source of truth for naming and storing design decisions such as colors, typography, spacing, and more. They ensure consistency, scalability, and maintainability across all our applications.
+Design tokens are the single source of truth for naming and storing design decisions such as colours, typography, spacing, and more. They ensure consistency, scalability, and maintainability across all our applications.
 
 ### Token Tiers
 
@@ -79,7 +79,7 @@ Primitive tokens represent all available **options** within the system. These to
 
 Semantic tokens encapsulate **design decisions** giving an understandable intent to the raw value defined in a primitive token.
 
-Semantic color tokens allow for mode switching between light and dark.
+Semantic colour tokens allow for mode switching between light and dark.
 
 ### Token names
 
@@ -105,7 +105,7 @@ $color-surface-positive-muted
 ```
 
 **Implied defaults**
-We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text color is `$color-text` rather than `$color-text-default`
+We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text colour is `$color-text` rather than `$color-text-default`
 
 Following our naming convention ensures that each token is clearly defined and easily understandable.
 
@@ -117,21 +117,21 @@ Following our naming convention ensures that each token is clearly defined and e
 
 Token categories are **color**, **spacing**, **typography**, **flow** and **grid**
 
-| Category     | Detail                                                                                                                                                            |
-| :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `color`      | Semantic color tokens enable mode switching. They encode the fundamental design decisions for color and have been tested to conform with accessibility standards. |
-| `spacing`    | Spacing tokens are used to give a consistent rhythm and flow to our user interfaces.                                                                              |
-| `typography` | Typography tokens define font family, size, weight, line-height and letter-spacing for text and typographic elements.                                             |
-| `flow`       | Flow tokens hold the vertical space between stacked blocks, as a set of four relationships resolved per context.                                                  |
-| `grid`       | Grid tokens hold the horizontal structure of a layout — the gutter between columns and the padding at the edge of a container, per breakpoint.                    |
+| Category     | Detail                                                                                                                                                              |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `color`      | Semantic colour tokens enable mode switching. They encode the fundamental design decisions for colour and have been tested to conform with accessibility standards. |
+| `spacing`    | Spacing tokens are used to give a consistent rhythm and flow to our user interfaces.                                                                                |
+| `typography` | Typography tokens define font family, size, weight, line-height and letter-spacing for text and typographic elements.                                               |
+| `flow`       | Flow tokens hold the vertical space between stacked blocks, as a set of four relationships resolved per context.                                                    |
+| `grid`       | Grid tokens hold the horizontal structure of a layout — the gutter between columns and the padding at the edge of a container, per breakpoint.                      |
 
 The three categories after `color` resolve their values from the spacing scale rather than defining new ones, so they are decisions about how space is applied rather than a separate supply of it.
 
-The following applies to tokens in the color category. Spacing, typography, flow and grid are documented subsequently.
+The following applies to tokens in the colour category. Spacing, typography, flow and grid are documented subsequently.
 
 #### Variant
 
-Many color tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
+Many colour tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
 
 | Variant   | Details                                                         |
 | :-------- | :-------------------------------------------------------------- |
@@ -141,7 +141,7 @@ Many color tokens are defined with an **inverse** counterpart that is used to in
 
 #### Concept
 
-The token **concept** guides us in how to apply the token. For color tokens, values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
+The token **concept** guides us in how to apply the token. For colour tokens, values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
 
 ![An isometric illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.svg)
 
@@ -149,7 +149,7 @@ The token **concept** guides us in how to apply the token. For color tokens, val
 
 | Concept       | Detail                                                          |
 | :------------ | :-------------------------------------------------------------- |
-| `static`      | Colors that stay the same regardless of mode                    |
+| `static`      | Colours that stay the same regardless of mode                   |
 | `canvas`      | The base layer of an application                                |
 | `container`   | Containers are organisational elements that form page structure |
 | `surface`     | Information layer that sits in front of the canvas layer        |
@@ -167,7 +167,7 @@ The system deliberately avoids component tier tokens with the exception of token
 | Concept         | Detail                                                       |
 | :-------------- | :----------------------------------------------------------- |
 | `chart-surface` | The base layer of a chart                                    |
-| `chart-axis`    | The color of chart axes                                      |
+| `chart-axis`    | The colour of chart axes                                     |
 | `chart-grid`    | Grid-line elements for charts                                |
 | `chart-label`   | Label elements for use on charts, with a `muted` counterpart |
 
@@ -199,12 +199,12 @@ The **role** signifies _intent_. Roles **primary**, **secondary** define a hiera
 
 #### Emphasis
 
-The majority of color tokens are defined with a **muted** counterpart which lets us create further visual hierarchy in our designs.
+The majority of colour tokens are defined with a **muted** counterpart which lets us create further visual hierarchy in our designs.
 
-| Emphasis | Detail                                |
-| :------- | :------------------------------------ |
-| `muted`  | Reduces the emphasis of color         |
-| `wash`   | Reduces the emphasis of color further |
+| Emphasis | Detail                                 |
+| :------- | :------------------------------------- |
+| `muted`  | Reduces the emphasis of colour         |
+| `wash`   | Reduces the emphasis of colour further |
 
 `muted` is available across most concepts. `wash` is a third step for text only, where a reading hierarchy needs more than two levels.
 

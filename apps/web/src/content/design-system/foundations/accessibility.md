@@ -21,7 +21,7 @@ Since September 2018, all public sector bodies have been required by law to ensu
 
 ### Practical Steps for Compliance
 
-- **Contrast Ratios**: Ensure that text and interactive elements have sufficient color contrast. WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text.
+- **Contrast Ratios**: Ensure that text and interactive elements have sufficient colour contrast. WCAG 2.1 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text.
 
 - **Keyboard Accessibility**: Make sure all functionality is accessible via keyboard. This includes form controls, links, and other interactive elements.
 
