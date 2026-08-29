@@ -54,32 +54,45 @@ thumbnail: cta-foundations-4.svg
 
 ## Principles
 
-Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. We have developed a typographic system to unify our apps, charts and graphical output. When combined with our spacing rules our designs and interfaces should be balanced and harmonious.
-
-A typographic system is more than a set of sizes. It is a set of decisions — about size, weight, leading and the relationships between them — made once and recorded, so that they need not be made again on every screen. What follows describes those decisions and the reasoning behind them.
+Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. When combined with our spacing rules our typographic system ensures our designs and interfaces are balanced and harmonious.
 
 ### Font
 
-We use the sans serif font Inter. Inter is a variable font family carefully crafted and designed for computer screens, available via Google Fonts under the Open Font License. By using webfonts in our applications we can be reasonably certain that Inter will be used under normal circumstances. All weights are included, so there is no risk of a browser synthesising a bold or a semibold from a lighter face, which produces a coarser letterform than the designed one.
+We use the sans serif font Inter. Inter is a variable font family designed for computer screens, available via Google Fonts under the Open Font License. By using webfonts in our applications we can be reasonably certain that Inter will be used under normal circumstances. All weights are included, so there is no risk of a browser synthesising a bold or a semibold from a lighter face, which produces a coarser letterform than the designed one.
 
 A fallback stack is always provided:
 
-```
-"Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+```CSS
+'Inter',
+'ui-sans-serif',
+'system-ui',
+'-apple-system',
+'BlinkMacSystemFont',
+'Segoe UI',
+'Roboto',
+'Helvetica Neue',
+'Arial',
+'Noto Sans',
+'sans-serif',
+'Apple Color Emoji',
+'Segoe UI Emoji',
+'Segoe UI Symbol',
+'Noto Color Emoji'
 ```
 
 ### Roles
 
-The system describes type by **role** rather than by size. A role names the job a piece of text does — a control label, the title of a card, the tick on a chart axis — and carries with it every property that job requires: font family, size, weight, line height and letter spacing.
+The system describes type by **role** rather than by size. A role names the **job** a piece of text does — an input **label**, the **title** of a card, the **tick** on a chart axis — and dictates every property that job requires: font family, size, weight, line height and letter spacing.
 
-This is the central idea of the system, and it is worth being clear about why. A size on its own is not a decision; it is the outcome of one. Choosing twenty pixels semibold for a card title answers a question that has already been answered elsewhere in the product, and answers it a little differently each time. Naming the role instead means the question is asked once. It also means the answer can be revised centrally: if card titles should sit a step larger, that change is made in one place and everything bound to the role follows.
+This is the central idea of the system. If card titles should sit a step larger, that change is made in one place and everything bound to the role follows.
+
+### Type scale
 
 Roles are what designs and code should reference. Beneath them sits a scale of raw values that the roles draw from. That scale is deliberately private — it is the material the system is built from, rather than a menu to choose from.
 
 ### Type sets
 
-Roles are grouped into three **type sets**, each intended for a different kind of surface. A type set is not a different typeface; it is the same ideas tuned for a different reading situation.
+Roles are grouped into three **type sets**, each intended for a different kind of surface. A type set is not a different typeface; it is the same ideas tuned for a different context.
 
 | Type set    | Intended for                                                                        |
 | ----------- | ----------------------------------------------------------------------------------- |
@@ -87,7 +100,7 @@ Roles are grouped into three **type sets**, each intended for a different kind o
 | **Prose**   | Long passages of reading — articles, guidance, help content, documentation          |
 | **Chart**   | The text in and around a chart — titles, axis labels, ticks and annotations         |
 
-The sets share several role names deliberately. Body means sixteen pixels regular in both Product and Prose, but its line height differs between them: a reading column wants generous leading and a dense interface does not. Naming them the same thing, and letting the set decide the treatment, is what allows a component to be written once and read correctly in either context.
+The sets share several role names. Body means sixteen pixels regular in both Product and Prose, but its line height differs between them: a reading column needs generous leading and a dense interface does not. Naming them the same thing, and letting the set decide the treatment, is what allows a component to be written once and read correctly in either context.
 
 The sets can be combined and will work together, but this should be done with consideration. Reading content placed on an application surface — a help article inside a dashboard, for instance — is better given the Prose set for that whole region than assembled from a mixture of the two.
 
@@ -101,11 +114,9 @@ Product carries fewer roles than Prose, because application chrome has shallower
 
 #### The heading ladder
 
-Three roles carry structure, and they behave differently from one another.
+**Page head** and **Section head** are page scaffolding. Each occupies a specific position — one page title at the top, section heads repeating down the page to group content. Section heads are one step above the content beneath them, because they may appear several times and a large heading repeated reads as noise rather than as structure.
 
-**Page head** and **Section head** are page furniture. Each occupies a fixed position — one page title at the top, section heads repeating down the page to group content — so each is named for that position. Section heads are kept deliberately calm, one step above the content beneath them, because they may appear several times and a large heading repeated six times reads as noise rather than as structure.
-
-**Title** is different in kind. It is the general case: the title of an object, at whatever depth that object sits. A card, a panel, a modal, a callout and a drawer all take the same Title. What distinguishes them in a given layout is not a different size but a different treatment, which is what allows the ladder to nest without multiplying the number of roles.
+**Title** is different. It is the general case: the title of an object, at whatever depth that object sits. A card, a panel, a modal, a callout and a drawer all take the same Title. What distinguishes them in a given layout is not a different size but a different treatment, which is what allows the ladder to nest without multiplying the number of roles.
 
 #### One title, three treatments
 
@@ -117,7 +128,7 @@ Every container that can carry a title has one **primary slot**. Whatever occupi
 | Demoted    | `Eyebrow`  | 14px | 500    | A title steps aside — for instance a card title yielding to a chart that carries its own title |
 | Supporting | `Subtitle` | 16px | 400    | A supporting line sitting beneath a dominant title                                             |
 
-Because all three are real roles rather than informal adjustments, moving a title between treatments is a matter of changing which role it takes. Three worked examples:
+Moving a title between treatments is a matter of changing which role it takes. Three worked examples:
 
 - **A card containing one titled chart.** The chart's title is dominant; the card's own title becomes an Eyebrow above it, or is omitted. If the chart is untitled, the card title is dominant.
 - **A card containing two equal charts.** Each chart sits in its own panel, and each panel's title is dominant — they are primary within sibling panels rather than competing for one slot. The card title above them becomes an Eyebrow labelling the group.
@@ -125,7 +136,7 @@ Because all three are real roles rather than informal adjustments, moving a titl
 
 #### Metrics
 
-A metric standing alone, or set within flowing text, uses its normal line height. A metric sitting beside labels is a different thing: it is a single value to be aligned with its companions, and a generous line height pushes it out of that alignment, because a tall line box centres the numeral and adds leading that a small label does not have.
+A metric standing alone, or set within flowing text, uses its normal line height. A metric sitting beside labels is a single value to be aligned with its companions, and a generous line height pushes it out of that alignment, because a tall line box centres the numeral and adds leading that a small label does not have.
 
 In any label or comparison cluster a metric therefore takes a tight, near-single line height, and the cluster is aligned as a unit:
 
@@ -137,53 +148,51 @@ The comparison values themselves are data labels rather than metrics, and take t
 
 ### The Prose set
 
-Prose carries a fuller ladder, because rich content has genuine depth and needs a heading level for each step of it.
+Prose carries a fuller ladder than Product, because rich content has depth and needs more differentiation.
 
 <div class="not-prose prose my-8">
     <TypographyTable items={proseRoles} />
 </div>
 
-#### Hero and content are separate tiers
+#### Hero and content
 
-The hero slot sits above the content region as page chrome. It holds either a Display, or a Headline with its Subhead — not both. The content region beneath then runs its own count of headings, starting at Title 1, whatever the hero above it happened to be.
-
-The two do not collide because they belong to different structural tiers. This is the same reasoning a content management system follows when it demotes an article's own first heading on a page that already carries a hero heading.
+In an article layout the hero or banner area sits above the content region. It holds either a Display, or a Headline with its Subhead. The content region beneath then runs its own count of headings, starting at Title 1.
 
 #### Eyebrows
 
 An Eyebrow is a short overline introducing the heading below it. It appears in both Prose and Product and looks the same in each, but it is doing a different job.
 
-In Prose it is a composition choice: a kicker deliberately placed above a heading, used within the titling components rather than in ordinary flowing content. In Product it is what a Title becomes when it steps aside. The shared treatment is intentional, so that the two read consistently wherever they meet, but they remain separate roles belonging to separate sets.
+In Prose it is a composition choice: a kicker placed above a heading, used within the titling components rather than in ordinary flowing content. In Product it is what a Title becomes when it is subordinated, eg. when a card title is suppressed to in relation to the chart title it contains. The two read consistently, but they remain separate roles belonging to separate sets.
 
 ### The Chart set
 
-Charts are a distinct context and carry their own complete vocabulary. Two things justify that, and both need to hold.
+Charts are a distinct context and have their own vocabulary.
 
-The first is that charts have needs the general scale should not carry. A dense chart wants a tick label smaller than anything the interface should use, and lowering the interface floor to accommodate it would affect every screen.
-
-The second is that charts are consumed on their own. Teams build charts against these roles without adopting the rest of the system, and a vocabulary used on its own has to be complete and self-describing on its own terms. Someone naming the text in a chart should not have to learn the application heading ladder first.
+A dense chart needs a tick label smaller than anything the interface should use, and lowering the interface floor to accommodate it would affect every screen.
 
 <div class="not-prose chart my-8">
     <TypographyTable items={chartRoles} />
 </div>
 
-The first three roles carry no values of their own: they refer to their Product equivalents for every property. A chart is an object sitting in a container, so it titles like one — and referring rather than copying means the two cannot drift apart, and the chart inherits the responsive behaviour of the Product roles automatically.
+The first three roles refer to their Product equivalents for every property. The chart inherits the responsive behaviour of the Product roles automatically.
 
-Axis title and Data label match Product's Label and Body small in size and weight, but hold their own values, so that chart anatomy can be adjusted without affecting the interface around it.
+Axis title and Data label match Product's Label and Body small in size and weight, but reference distinct values, so that chart anatomy can be adjusted without affecting the interface around it.
 
-There is no separate role for a legend. A legend entry is a data label and takes Data label; a legend's own heading takes Axis title. A dedicated legend role would describe a position rather than a job, which is the test a new role has to pass.
+There is no separate role for a legend. A legend is a data label.
 
-Ticks are single-line by nature and take a line height equal to their font size, so that they sit precisely against axes and gridlines rather than drifting within a taller line box.
+Ticks are single-line by nature and take a line height equal to their font size, so that they sit precisely against axes and gridlines.
 
 ### Size, weight and colour are separate
 
-Size, weight and colour are three independent axes, and keeping them separate is what stops the set of roles from sprawling.
+Size, weight and colour are three independent axes. A "subtle heading" is a heading in a muted colour. An "emphasised caption" is a caption at a heavier weight. Expressing either as a new size would add a role that describes an appearance rather than a job.
 
-Most apparent gaps in a type scale are not missing sizes. A "subtle heading" is a heading in a muted colour. An "emphasised caption" is a caption at a heavier weight. Expressing either as a new size would add a role that describes an appearance rather than a job, and doing that repeatedly is how a set of roles stops meaning anything.
+Weight performs two tasks:
 
-Weight itself divides in two. **Identity weight** is part of what a role is — a Label is medium, a heading is semibold — and it is carried by the role, so it is never chosen separately. **Emphasis weight** rides on top of a role, for a bold run within a paragraph, and stays a separate choice; folding it into the role would mean maintaining a bold variant of every role that might ever need one.
+**Identity weight** is part of what a role is — a Label is medium, a heading is semibold — and it is defined by the role, so it is never chosen separately.
 
-Four weights are in use: regular (400), medium (500), semibold (600) and bold (700).
+**Emphasis weight** is applied on top of a role, for a bold run within a paragraph, and stays a separate choice.
+
+Four weights are: regular (400), medium (500), semibold (600) and bold (700).
 
 ### Responsive sizing
 
@@ -217,7 +226,7 @@ Values are set for the smallest screen first, so that the hierarchy is correct t
 | Caption  | 12   | 12   | 12   | 12   | 12   |
 | Eyebrow  | 14   | 14   | 14   | 14   | 14   |
 
-Two coincidences here are intentional. Subhead matches Title 1 at the smallest size only; the two sit in different regions of the page and are told apart by weight and colour. Lead sits above Title 4 at every width, because Lead is body-tier emphasis rather than a rung of the heading ladder, so an introductory paragraph reading slightly larger than a fourth-level subheading is expected.
+Subhead matches Title 1 at the smallest size only; the two sit in different regions of the page and are differentiated by weight and colour. Lead sits above Title 4 at every width, because Lead is body-tier emphasis rather than a rung of the heading ladder, so an introductory paragraph reading slightly larger than a fourth-level subheading is expected.
 
 #### Product sizes at each breakpoint
 
@@ -253,14 +262,6 @@ Two Prose roles are exceptions, and take a line height relative to their own siz
 | Prose Body    | 16px | 26px        | 1.625 |
 | Prose Body sm | 14px | 22px        | 1.571 |
 
-These two only, and in the Prose set only. A grid quantised to four pixels cannot express the leading a reading column wants at sixteen pixels: twenty-four is too tight to read comfortably at length, twenty-eight is too airy, and the grid offers no step between them. Product Body deliberately keeps the grid value, because a dense interface wants the tighter setting.
-
-### Space between blocks is not typography
-
-The space between one block and the next belongs to the stack those blocks sit in, not to the type inside them. The same heading wants generous air above it in an article and very little in a dashboard card, so that space is never bundled into a role.
-
-It is handled by [content flow](/design-system/foundations/flow), described separately.
-
 ---
 
 ## Practice
@@ -277,9 +278,7 @@ A type set is applied as a class on a containing element. Everything inside it r
 <div class="chart">…</div>
 ```
 
-The class is required. Role classes read values that exist only inside a type set, so a role used outside one will not size correctly.
-
-An application surface will normally also want a flow context, which governs the space between blocks. The two are separate systems that happen to share the words _product_ and _prose_:
+An application surface will normally also want a flow context, which governs the space between blocks.
 
 ```html
 <section class="flow-product product">…</section>
@@ -297,13 +296,13 @@ Inside `prose`, ordinary HTML elements are styled for you. Headings take the Tit
 </div>
 ```
 
-<div class="border border-color-border-muted p-4 my-4">
+<div class="prose border border-color-border-muted p-4 my-4">
 	<h2>Title</h2>
-	<p>Body copy.</p>
-	<p class="lead">An introductory paragraph.</p>
+	<p class="lead">An introductory paragraph</p>
+    <p>Body copy</p>
 </div>
 
-Headings map by depth: `h1` to `h4` take Title 1 to Title 4. Display and Headline are hero chrome and are never reached from a content heading — they are applied deliberately, by class. There is no fifth level: an `h5` falls back to Body, because Title 4 is the floor of the ladder.
+Headings map by depth: `h1` to `h4` take Title 1 to Title 4. `Display` and `Headline` are hero chrome and have to be applied deliberately, by class. There is no fifth level: an `h5` falls back to Body, because Title 4 is the floor of the ladder.
 
 The `prose` class also limits its own width for readability, to a measure of roughly seventy characters. Figures, tables, code blocks and pull quotes are meant to break out wider than that column; body text is not. If a column feels stranded on a wide screen, the answer is to let those elements break out rather than to lengthen the line.
 
@@ -331,7 +330,7 @@ Because `prose` styles elements automatically, you will sometimes need to opt ou
 
 ### Product requires explicit roles
 
-The `product` class establishes the type set but applies no styling to elements. This is deliberate: an application's markup carries no reliable typographic meaning — a heading element might be a page title or a widget label — so nothing is assumed. Apply the role you want.
+The `product` class establishes the type set but applies no styling to elements. Apply the role directly to the element.
 
 ```html
 <div class="product">
@@ -351,8 +350,6 @@ The `product` class establishes the type set but applies no styling to elements.
 
 ### Choosing a role for an interface element
 
-These conventions are settled, and are worth applying rather than judging by eye each time. They cover most of what appears in an application.
-
 | Element                                          | Role                                       |
 | ------------------------------------------------ | ------------------------------------------ |
 | Input label, tab, navigation item, button        | `label` — see _single-line controls_ below |
@@ -367,15 +364,11 @@ These conventions are settled, and are worth applying rather than judging by eye
 | Chart axis name                                  | `axis-title`                               |
 | Chart tick or scale label                        | `tick`, or `tick-sm` when dense            |
 
-Two of these are worth drawing out. Control and navigation labels take `label` even where older markup used sixteen pixels — a control label is the Label role rather than a larger size. And a sidebar's _section_ headings are labels rather than titles, so that navigation group headings stay small and do not compete with page content.
-
-Where an existing element uses a size from outside the system, move it to the correct role even if that visibly resizes it.
-
 ### Single-line controls
 
 `label-tight` and `label-sm-tight` are the same size and weight as `label` and `label-sm`, with the line height reduced to match the font size.
 
-They exist for controls whose text is a single line, vertically centred, where the component's own padding governs its height — buttons, tabs and chips. A reading line height there adds leading that fights the centring and makes the control size unpredictably.
+They exist for controls whose text is a single line, vertically centred, where the component's own padding governs its height — buttons, tabs and chips.
 
 ```html
 <button class="label-tight">Download</button>
@@ -401,11 +394,11 @@ The titling roles are designed to be used together. Write the group as flat sibl
 	<p class="subtitle">Rolling 24-hour mean</p>
 </div>
 
-The eyebrow closes up to the heading below it, the subtitle closes up to the heading above it, and the larger break that separates one section from the next moves above the whole group. Reproducing the same appearance with generic classes — a small muted paragraph in place of the Subtitle — will look almost identical but will not be recognised as a titling group, and the spacing will be wrong. That is a practical reason to reach for the named role.
+The eyebrow closes up to the heading below it, the subtitle closes up to the heading above it, and the larger break that separates one section from the next moves above the whole group. Reproducing the same appearance with generic classes — a small muted paragraph in place of the Subtitle — will look almost identical but will not be recognised as a titling group, and the spacing will be wrong.
 
 ### Emphasis and colour
 
-Colour is a separate axis. Bind text colour to a semantic token rather than to a value.
+Colour is a separate axis. Bind text colour to a semantic token.
 
 ```html
 <p class="body text-color-text">Primary text</p>
@@ -415,21 +408,19 @@ Colour is a separate axis. Bind text colour to a semantic token rather than to a
 
 Text and label tokens descend in emphasis — `text`, `text-muted`, `text-wash`, and `label`, `label-muted`. Text or an icon sitting on a filled control uses an inverse token so that it themes correctly against the fill. Some roles are already muted by default: Subhead, Subtitle, Lead, Eyebrow and the chart roles.
 
-Where the intent is genuine emphasis within a role, change the weight:
+Where the intent is emphasis within a role, change the weight:
 
 ```html
 <p class="body">Readings are <span class="font-semibold">provisional</span>.</p>
 ```
 
-Reach for this when the job is to emphasise. If a role looks wrong at its own weight, the role is usually the thing to reconsider.
-
 ### Things to avoid
 
-**Sizes from outside the system.** Tailwind's own `text-xl`, `text-3xl` and similar are not part of this scale. If a role looks wrong at its size, check that the role is right before overriding it.
+**Sizes from outside the system.** Tailwind's own `text-xl`, `text-3xl` etc. are not part of this scale. If a role looks wrong at its size, check that the role is right before overriding it.
 
 **Breakpoint variants on type.** Roles already carry a value at every breakpoint, and every breakpoint has been checked to confirm the hierarchy holds. Writing `md:section-head`, or setting a size per breakpoint, works against that.
 
-**Setting a weight alongside a role** in order to reach a particular look. The role carries its own weight.
+**Setting a weight alongside a role** in order to reach a particular look. The role defines its own weight.
 
 **Mixing type sets within one region.** Reading content on an application surface is better given its own `prose` container than assembled from a mixture.
 
