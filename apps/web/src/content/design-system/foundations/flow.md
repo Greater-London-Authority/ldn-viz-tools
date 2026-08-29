@@ -9,8 +9,6 @@ thumbnail: cta-foundations-3.svg
 
 ## Principles
 
-Spacing is important, as it affects how elements are perceived as being grouped together.
-
 Flow defines the vertical relationship between one block and the next allowing a reader to see at a glance which things belong together and where one part of the page ends and another begins.
 
 ### Space and sequence
