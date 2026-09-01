@@ -2798,7 +2798,7 @@
 					"value": "{semantic-color.light-mode.palette.blue.500}"
 				},
 				"primary": {
-					"description": "",
+					"description": "Used for primary, on brand, interactive elements. Where higher contrast is needed dark mode use the 'primary-text' modified set.",
 					"type": "color",
 					"value": "{semantic-color.light-mode.palette.blue.700}"
 				},
@@ -2968,7 +2968,7 @@
 					"value": "{primitive.light-mode.color.mode.light.grey.200}"
 				},
 				"primary-text": {
-					"description": "",
+					"description": "Provides a higher contrast in dark mode than non modified primary token. Used for links.",
 					"type": "color",
 					"value": "{semantic-color.light-mode.palette.blue.700}"
 				},
@@ -3074,12 +3074,12 @@
 				"interactive": {
 					"description": "Geographic elements that afford user interaction",
 					"type": "color",
-					"value": "{semantic-color.light-mode.interactive.primary}"
+					"value": "{semantic-color.light-mode.palette.blue.700}"
 				},
 				"interactive-hover": {
 					"description": "",
 					"type": "color",
-					"value": "{semantic-color.light-mode.interactive.primary-hover}"
+					"value": "{semantic-color.light-mode.palette.blue.800}"
 				},
 				"interactive-selected": {
 					"description": "",
@@ -3089,7 +3089,7 @@
 				"interactive-focus": {
 					"description": "",
 					"type": "color",
-					"value": "{semantic-color.light-mode.interactive.focus}"
+					"value": "{semantic-color.light-mode.palette.blue.700}"
 				},
 				"interactive-disabled": {
 					"description": "",
@@ -4042,7 +4042,7 @@
 					"value": "{semantic-color.dark-mode.palette.blue.500}"
 				},
 				"primary": {
-					"description": "",
+					"description": "Used for primary, on brand, interactive elements. Where higher contrast is needed dark mode use the 'primary-text' modified set.",
 					"type": "color",
 					"value": "{semantic-color.dark-mode.palette.blue.500}"
 				},
@@ -4212,7 +4212,7 @@
 					"value": "{primitive.dark-mode.color.mode.dark.grey.300}"
 				},
 				"primary-text": {
-					"description": "",
+					"description": "Provides a higher contrast in dark mode than non modified primary token. Used for links.",
 					"type": "color",
 					"value": "{semantic-color.dark-mode.palette.blue.700}"
 				},
@@ -4318,12 +4318,12 @@
 				"interactive": {
 					"description": "Geographic elements that afford user interaction",
 					"type": "color",
-					"value": "{semantic-color.dark-mode.interactive.primary}"
+					"value": "{semantic-color.dark-mode.palette.blue.700}"
 				},
 				"interactive-hover": {
 					"description": "",
 					"type": "color",
-					"value": "{semantic-color.dark-mode.interactive.primary-hover}"
+					"value": "{semantic-color.dark-mode.palette.blue.800}"
 				},
 				"interactive-selected": {
 					"description": "",
@@ -4333,7 +4333,7 @@
 				"interactive-focus": {
 					"description": "",
 					"type": "color",
-					"value": "{semantic-color.dark-mode.interactive.focus}"
+					"value": "{semantic-color.dark-mode.palette.blue.700}"
 				},
 				"interactive-disabled": {
 					"description": "",
