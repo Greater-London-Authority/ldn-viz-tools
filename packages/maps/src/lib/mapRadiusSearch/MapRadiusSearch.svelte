@@ -120,7 +120,11 @@
 	};
 
 	const clickCTA = () => {
-		onCTA(pointFeature, ring);
+		if (radius > 0) {
+			onCTA(pointFeature, ring);
+		} else {
+			onCTA(pointFeature, undefined);
+		}
 	};
 
 	const clickMap = (ev: { lngLat: any }) => {
