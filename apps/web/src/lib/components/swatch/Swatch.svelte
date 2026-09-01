@@ -92,6 +92,7 @@
 
 	const swatchClass = $derived(
 		classNames(
+			'product',
 			'text-left !items-stretch !no-underline hover:bg-color-interactive-primary-muted-hover',
 			'border-color-border-muted bg-color-container flex-col justify-between border shadow-sm',
 			sizeClasses[size]
@@ -106,11 +107,11 @@
 
 	{#if size !== 'xs'}
 		<div class={textSize}>
-			<p class="text-color-text-muted">{name}</p>
+			<p class="label-sm text-color-text-muted">{name}</p>
 			{#if lastButtonId !== id}
-				<p class="text-color-text">{value}</p>
+				<p class="label-sm text-color-text">{value}</p>
 			{:else}
-				<p class="text-color-interactive-primary-active">Copied!</p>
+				<p class="label-sm text-color-interactive-primary-active">Copied!</p>
 			{/if}
 			{#if description}
 				<p>Description: {description}</p>
@@ -121,11 +122,11 @@
 	{#if size === 'xs'}
 		{@const trimmedName = name.split('-').pop()}
 		<div class={textSize}>
-			<p class="text-color-text-muted">{trimmedName}</p>
+			<p class="label-sm text-color-text-muted">{trimmedName}</p>
 			{#if lastButtonId !== id}
-				<p class="text-color-text">{value}</p>
+				<p class="label-sm text-color-text">{value}</p>
 			{:else}
-				<p class="text-color-interactive-primary-active">Copied!</p>
+				<p class="label-sm text-color-interactive-primary-active">Copied!</p>
 			{/if}
 		</div>
 	{/if}

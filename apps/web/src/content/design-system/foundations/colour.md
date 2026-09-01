@@ -12,6 +12,41 @@ thumbnail: cta-foundations-2.svg
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
 
+
+ const getTokenByConcept = (startKey = null, obj= tokens.mode[theme.currentMode ?? 'light']) => {
+        // Determine the starting point
+        let start = obj;
+        if (startKey) {
+            if (!(startKey in obj)) return []; // key not found
+            start = obj[startKey];
+        }
+
+        // Recursive search
+        const results = [];
+
+        function recurse(current) {
+            if (!current || typeof current !== 'object') return;
+
+            if ('value' in current) results.push(current);
+
+            for (const k in current) {
+            if (typeof current[k] === 'object') {
+                recurse(current[k]);
+            }
+            }
+        }
+
+        recurse(start);
+
+        results.sort((a, b) => {
+            const nameA = a.name?.toString().toLowerCase() || '';
+            const nameB = b.name?.toString().toLowerCase() || '';
+            return nameA.localeCompare(nameB);
+        });
+
+        return results;
+    }
+
     let paletteTokens = $derived(
         Object.fromEntries(
             Object.entries(
@@ -34,6 +69,21 @@ thumbnail: cta-foundations-2.svg
         )
 	);
   
+    let themeColorsOrdered = [
+            'color-data-primary', 
+            'color-data-secondary',
+            'color-data-tertiary',
+            'color-data-context',
+            'color-data-positive',
+            'color-data-negative',
+            'color-data-male',
+            'color-data-female',
+            'color-data-empty',
+            'color-data-neutral-0',
+            'color-data-neutral-1'
+        ]
+
+    let themeColors = $derived(getTokenByConcept('data').filter(token => themeColorsOrdered.includes(token.name)).sort((a, b) => themeColorsOrdered.indexOf(a.name) - themeColorsOrdered.indexOf(b.name)));
    
 </script>
 
@@ -92,7 +142,6 @@ The global colour palette contains the hints and shades that are used as a basis
 ### Semantic colour reference
 
 <div class="not-prose">
-
-<SwatchGrid tokenData={dataTokens.categorical} title="Colors for categorical data"/>
-
+<SwatchGrid tokenData={themeColors} title="Colors for data" size="sm"/>
+<SwatchGrid tokenData={dataTokens.categorical} title="Colors for categorical data" size="sm"/>
 </div>

@@ -8,6 +8,7 @@ heroImage: header-design-system-overflow.svg
 thumbnail: cta-design-system.svg
 ---
 
+<div class="prose flow-prose max-w-prose">
 <p class="lead">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.</p>
 
 ## Installation
@@ -26,6 +27,8 @@ The system is available as node modules for installation using your favourite pa
 <code>npm i @ldn-viz/utils</code> <p>utility functions (such as for constructing colour scales)</p>
 
 ### From a CDN
+
+</div>
 
 <div class="not-prose">
 
