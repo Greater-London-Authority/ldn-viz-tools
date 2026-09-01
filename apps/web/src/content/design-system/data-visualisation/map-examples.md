@@ -32,25 +32,25 @@ For more complex interactive map examples using DeckGL and MapLibre, see [LDN Vi
 
 ## Choropleth Maps
 
-### Sequential (stepped) color
+### Sequential (stepped) colour
 
-Values for each London borough are visualised in (5) discrete colour steps along a sequential color ramp. This is helpful if you are communicating broader groups.
+Values for each London borough are visualised in (5) discrete colour steps along a sequential colour ramp. This is helpful if you are communicating broader groups.
 
 <div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
     <ExampleBoroughChoropleth containerWidth={contentWidth} containerHeight={contentHeight} />
 </div>
 
-### Sequential (continuous) color
+### Sequential (continuous) colour
 
-Values for each London borough are mapped along a continuous sequential color ramp. This shows a more nuanced view of the values and difference between each region.
+Values for each London borough are mapped along a continuous sequential colour ramp. This shows a more nuanced view of the values and difference between each region.
 
 <div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
     <ExampleBoroughChoroplethContinuous containerWidth={contentWidth} containerHeight={contentHeight} />
 </div>
 
-### Diverging (stepped) color
+### Diverging (stepped) colour
 
-Values for each London borough are binned into (10) discrete colour steps along a diverging color ramp. An additional discrete grey step is added in the middle for values of zero change.
+Values for each London borough are binned into (10) discrete colour steps along a diverging colour ramp. An additional discrete grey step is added in the middle for values of zero change.
 
 <div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
     <ExampleBoroughChoroplethDiverging containerWidth={contentWidth} containerHeight={contentHeight} />

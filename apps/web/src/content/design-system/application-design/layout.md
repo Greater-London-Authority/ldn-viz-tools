@@ -54,15 +54,15 @@ Our layouts follow an adaptive pattern going from 6 columns (sm) 8 columns (md) 
 
 Although it can be tempting to compress a lot into a small space we strive to let our applications 'breathe' by allowing for whitespace and page rhythm.
 
-Space on a page has three owners, and most spacing decisions become straightforward once it is clear which one applies. The stack owns the vertical gaps between blocks that sit one above another, which come from [content flow](/design-system/foundations/flow). The grid owns the horizontal gaps between objects tiled across a width, which come from the gutter values below. The component owns the space inside its own box — padding, borders, indents — which comes from the [spacing scale](/design-system/foundations/design-tokens).
+Space on a page has determining factors, and spacing decisions should become straightforward once it is clear which one applies. The stack determines the vertical gaps between blocks that sit one above another, which come from [content flow](/design-system/foundations/flow). The grid determines the horizontal gaps between objects tiled across a width, which come from the gutter values below. The component determines the space inside its own box — padding, borders, indents — which comes from the [spacing scale](/design-system/foundations/design-tokens).
 
 A page built this way contains very few chosen measurements. Where a number is being picked by hand, it is usually a sign that one of the three systems has been bypassed.
 
 ### Grids
 
-There are two column grids, chosen by the kind of surface. They are distinct grids with their own values rather than one grid stretched to serve both.
+There are two distinct types of grid, with their own values, determined by the kind of surface that they appear on.
 
-The **contained** grid is centred and limited in width, with edge space that grows as the viewport widens. It suits document-like surfaces: reading content, guidance, settings and forms, where content should not sprawl across a wide screen.
+The **contained** grid is centred and limited in width, with edge space that grows as the viewport widens. It suits document-like surfaces: reading content, guidance, settings and forms, where content should not stretch across a wide screen.
 
 | Breakpoint | Columns | Edge space | Gutter |
 | ---------- | ------- | ---------- | ------ |
@@ -86,23 +86,21 @@ The **fluid** grid runs full width, with columns that stretch and edge space tha
 
 In both cases the edge space is the padding of the containing frame, and the grid's own margin is zero. The grid describes the columns and the gutters within the padded width rather than insetting from the edge a second time.
 
-The fluid gutter is held at sixteen pixels at every width so that cards tile at a consistent density. It runs a little looser than the eight-pixel vertical rhythm of a product surface, so that cards sit slightly further apart horizontally than content stacks within them, which is the conventional dashboard reading. Two relationships keep a field of cards reading as tiled rather than loose: the gutter should not exceed a card's own interior padding, and the edge space should sit at or above the gutter so that it frames the field against the viewport.
+The fluid gutter is held at sixteen pixels at every width so that cards tile at a consistent density. It runs a little looser than the eight-pixel vertical rhythm of a product surface, so that cards sit slightly further apart horizontally than content stacks within them, which is the conventional dashboard reading.
 
-Cards span whole columns by default. A card that genuinely needs a width the columns do not offer may take one, in the same way a figure breaks out of a reading column — a deliberate and occasional exception. If such exceptions run past roughly one card in ten, the column count is the thing to reconsider.
-
-The side panel of a dashboard sits outside the canvas grid. A control panel is application chrome rather than a grid column, so the fluid grid applies to the canvas region only and the canvas fills whatever width remains beside the panel. When the panel is dismissed the canvas reflows into the reclaimed width, because the grid fills its container rather than assuming a fixed panel width.
+The side panel of a dashboard sits outside the canvas grid. A control panel is application chrome rather than a grid column, so the fluid grid applies to the canvas region only and the canvas fills whatever width remains beside the panel.
 
 ### Anatomy
 
 #### Header
 
-The header sits at the top of the page and carries the application title and highest level of inter page navigation (if applicable).
+The header sits at the top of the page and contains the application title and highest level of inter page navigation (if applicable).
 
 ![A typical dashboard style application with header highlighted](/layout/layout-header.png)
 
 #### Footer
 
-The footer is used to root the base of application page and can carry secondary/ tertiary navigation elements as well as branding and links to user preference settings.
+The footer is used to root the base of application page and can contain secondary/ tertiary navigation elements as well as branding and links to user preference settings.
 
 ![A typical dashboard style application with footer highlighted](/layout/layout-footer.png)
 
@@ -120,7 +118,7 @@ The canvas is the main area of the application.
 
 ### Layers
 
-If the canvas exists on the lowest layer of the application we can think of things placed upon the canvas as being at points of increased elevation. This is achieved with subtle use of color and shadow in give a sense of height. If we think of three ui elements, a **Card**, a **Tooltip** and a **Modal**, The card element sits at a level just above the canvas. The Tooltip is slightly elevated above the card, and the Modal is at the highest level of elevation. [See Ui component section for individual component usage](/design-system/application-design/ui-components)
+If the canvas exists on the lowest layer of the application we can think of things placed upon the canvas as being at points of increased elevation. This is achieved with subtle use of colour and shadow in give a sense of height. If we think of three ui elements, a **Card**, a **Tooltip** and a **Modal**, The card element sits at a level just above the canvas. The Tooltip is slightly elevated above the card, and the Modal is at the highest level of elevation. [See Ui component section for individual component usage](/design-system/application-design/ui-components)
 
 ## Practice
 
@@ -140,7 +138,7 @@ you can find more information on component usage in [our storybook ](https://gre
 
 ### Gutters
 
-Two classes apply the gutter values, and carry their breakpoint changes with them.
+Two classes apply the gutter values `grid-gutter` and `grid-gutter-fluid`.
 
 ```html
 <!-- A dashboard canvas: the gutter stays at 16px across every width -->
@@ -169,6 +167,4 @@ The space between blocks within a section comes from a [flow](/design-system/fou
 </section>
 ```
 
-Two context classes and one stated relationship, with no chosen measurements. The `product` class establishes the type set, so that `section-head` and `subtitle` resolve correctly; `flow-product` establishes how far apart the blocks sit.
-
-A few things are worth knowing when working this way. An element wrapped around two blocks takes their place in the sequence, so their spacing then has to be set by hand — flattening the wrapper is usually the fix. The classes `product` and `flow-product` are separate and most surfaces want both. And a gap utility should not be placed on an element that already declares a flow context, since the context is already separating that element's children.
+The `product` class establishes the type set, so that `section-head` and `subtitle` resolve correctly; `flow-product` establishes how far apart the blocks sit.

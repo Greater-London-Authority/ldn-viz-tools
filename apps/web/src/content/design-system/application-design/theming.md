@@ -23,7 +23,7 @@ Modes are applied to applications as a whole, but can be overridden on a per com
 
 #### Light mode
 
-We consider the light mode as the default. In this mode the use of semantic color design tokens will default to their light mode variant. Canvas and surface elements will default to light background.
+We consider the light mode as the default. In this mode the use of semantic colour design tokens will default to their light mode variant. Canvas and surface elements will default to light background.
 
 In light mode the `<Header>`, `<Footer>`, `<Sidebar>` components stay in dark mode by default. This is to reinforce structure and brand recognition.
 
@@ -31,7 +31,7 @@ In certain scenarios these components can be styled in full light mode (as the s
 
 #### Dark mode
 
-In dark mode all components adopt their dark mode variants, contrast levels remain consistent, but color hues adapt to the dark surface elements.
+In dark mode all components adopt their dark mode variants, contrast levels remain consistent, but colour hues adapt to the dark surface elements.
 
 ## Practice
 
@@ -100,4 +100,4 @@ You can check [our storybook](https://greater-london-authority.github.io/ldn-viz
 
 ### Using raw colour values
 
-If you are preparing a presentation in a non web format (e.g. Powerpoint) where you are not using css or web technologies you may use raw color values. In all other circumstances you should use the tokens provided by the design system.
+If you are preparing a presentation in a non web format (e.g. Powerpoint) where you are not using css or web technologies you may use raw colour values. In all other circumstances you should use the tokens provided by the design system.
