@@ -15,6 +15,11 @@
 
 	interface Props {
 		/**
+		 * Bindable prop to access active state for conditionally rendering tooltips/popovers.
+		 */
+		searchActive: boolean;
+
+		/**
 		 * Maximum size of radius in metres
 		 */
 		maxRadius: number;
@@ -39,6 +44,7 @@
 	}
 
 	let {
+		searchActive = $bindable(false),
 		maxRadius,
 		ctaLabel = 'Search',
 		onCTA = (_pointFeature, _radiusFeature) => null,
@@ -48,7 +54,6 @@
 	const mapStore: MapLibreStore = getContext('mapStore');
 
 	let isOpen: boolean = $state(false);
-	let searchActive: boolean = $state(false);
 
 	let center = $state<[number, number] | undefined>(undefined);
 	let pointFeature = $derived({
@@ -190,7 +195,7 @@
 	</Button>
 {:else}
 	<div
-		class="product flow-product pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-container p-2 shadow-sm"
+		class="flow-product product pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-container p-2 shadow-sm"
 	>
 		<div class="flex items-center justify-between">
 			<p class="eyebrow">Search at point</p>
