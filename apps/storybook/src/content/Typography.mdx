@@ -4,10 +4,10 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Typography
 
-The system describes type by **role** rather than by size. A role names the job a piece of text does, and carries the font, size, weight, line height and letter spacing that job requires. Choosing a role is therefore the whole decision.
+The system describes type by **role** rather than by size. A role names the job a piece of text does, and defines the font, size, weight, line height and letter spacing that job requires. Choosing the correct role is therefore the decision to make.
 
 ```html
-<!-- The role carries its own size and weight -->
+<!-- The role defines its own size and weight -->
 <h2 class="section-head">Air quality</h2>
 <p class="body-sm">Rolling 24-hour mean.</p>
 
@@ -15,7 +15,7 @@ The system describes type by **role** rather than by size. A role names the job 
 <h2 class="text-3xl font-semibold">Air quality</h2>
 ```
 
-The full reasoning, and the responsive size tables, are on the [Typography foundation page](https://greater-london-authority.github.io/ldn-viz-tools/). This page covers what to type.
+The full reasoning, and the responsive size tables, are on the [Typography foundation page](https://greater-london-authority.github.io/ldn-viz-tools/).
 
 ## Type sets
 
@@ -39,7 +39,7 @@ Several role names appear in more than one set. `body` is sixteen pixels regular
 
 Reading content on an application surface should be given its own `prose` container rather than assembled from a mixture of sets.
 
-Note that `product` and `flow-product` are separate classes: one sets the type, the other the spacing between blocks. Most surfaces want both.
+Note that `product` and `flow-product` are separate classes: one sets the type, the other the spacing between blocks. Most surfaces will require both.
 
 ## Product roles
 
@@ -60,7 +60,7 @@ Sizes shown are at `xl`. Roles marked as scaling carry a smaller value at narrow
 | `label-sm`     | 12   | 500    | Labels in dense contexts, column headers                     |
 | `caption`      | 12   | 400    | Metadata, badges, the smallest functional text               |
 
-The `product` class sets the values but styles no elements. An application's markup carries no reliable typographic meaning — a heading element might be a page title or a widget label — so nothing is assumed and the role is always applied explicitly.
+The `product` class sets the values but styles no elements. An application's markup tends not to contain reliable typographic meaning — a heading element might be a page title or a widget label — so nothing is assumed and the role is always applied explicitly.
 
 ### Choosing between them
 
@@ -75,8 +75,6 @@ The `product` class sets the values but styles no elements. An application's mar
 | Modal, callout, panel or drawer heading          | `title`                                 |
 | Sidebar or navigation section heading            | `label`                                 |
 
-Control and navigation labels take `label` even where older markup used sixteen pixels. Sidebar _section_ headings are labels rather than titles, so that navigation group headings stay small.
-
 ### Single-line controls
 
 `label-tight` and `label-sm-tight` are the same size and weight as `label` or `label-sm`; with the line height reduced to match the font size. They exist for controls whose text is one line, vertically centred, where the component's padding governs its height.
@@ -89,7 +87,7 @@ They must not wrap. Label text running to more than one line uses `label` or `la
 
 ### Titles and treatments
 
-Every container that can carry a title has one primary slot. What occupies it takes `title`; a title that gives up the slot takes `eyebrow` or is omitted; a supporting line beneath a dominant title takes `subtitle`. Moving a title between treatments is a change of role rather than an adjustment.
+Every container that can carry a title has one primary slot. What occupies it takes `title`; a title that gives up the slot takes `eyebrow` or is omitted; a supporting line beneath a dominant title takes `subtitle`. Moving a title between treatments comes from a change of role.
 
 A card containing a titled chart is the common case: the chart's title is dominant, and the card's own title becomes an eyebrow above it, or is left out.
 

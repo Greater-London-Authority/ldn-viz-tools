@@ -4,9 +4,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Flow
 
-Flow governs the vertical space between stacked blocks. A container declares a context, and the gaps within it follow from that, rather than being set element by element.
+Flow governs the vertical space between stacked elements. A container declares a context, and the gaps within it follow from that, rather than being set element by element.
 
-The full reasoning is on the [Flow foundation page](https://greater-london-authority.github.io/ldn-viz-tools/). This page covers what to type.
+The full reasoning is on the [Flow foundation page](https://greater-london-authority.github.io/ldn-viz-tools/).
 
 ## Declaring a context
 
@@ -16,15 +16,15 @@ The full reasoning is on the [Flow foundation page](https://greater-london-autho
 <div class="flow-compact">…</div>
 ```
 
-One class. It sets the four relationships (see below) and enables the spacing between that element's direct children.
+Adding a single flow-\* class sets the four relationships (see below) and enables the spacing between that element's direct children.
 
-Contexts nest, and the innermost applies. A component whose spacing must hold wherever it is placed should declare its own context rather than depend on the one it is dropped into.
+When flow contexts nest the innermost applies. A component whose spacing must hold wherever it is placed should declare its own context rather than depend on the one it is dropped into.
 
-A surface usually wants a type set as well — `product` and `flow-product` are separate systems that share a word.
+A surface usually needs a type set as well — `product` defines the type set and `flow-product` defines the rhythm context.
 
 ## The four relationships
 
-The vocabulary is four names, each describing how closely two blocks are related. The distance those names produce is decided by the context they sit in.
+Each of the four named relationships describe how closely two blocks are related. The distance those names produce is decided by the context they sit in.
 
 | Relationship | Prose | Product | Compact |
 | ------------ | ----- | ------- | ------- |
@@ -33,7 +33,7 @@ The vocabulary is four names, each describing how closely two blocks are related
 | loose        | 24px  | 16px    | 8px     |
 | section      | 40px  | 24px    | 8px     |
 
-**Compact** is for small spaces and so collapses the ramp — tight equals default, loose equals section. A small surface cannot carry four distinguishable gaps.
+**Compact** is for small spaces and so collapses the ramp — tight equals default, loose equals section. A small surface cannot contain four distinguishable gaps.
 
 Values come from Figma through Style Dictionary into `styles/flow.css`. Nothing in the ramp is written by hand in CSS, and a component should never restate one of these numbers.
 
@@ -74,9 +74,9 @@ What is recognised, from `packages/themes/tailwind-custom/flow/flow.cjs`:
 
 Headings here include `.display`, `.headline`, `.page-head` and `.section-head` as well as the elements.
 
-Two implementation details, in case you are debugging: the selectors use `:is()` rather than `:where()`, so the context class carries specificity and beats element resets such as `p { margin: 0 }`; and every pair excludes `.sr-only`, `[hidden]` and `template` at both ends, so a conditionally rendered sibling neither receives a gap nor becomes the thing a real element couples to.
+Two implementation details: the selectors use `:is()` rather than `:where()`, so the context class carries specificity and beats element resets such as `p { margin: 0 }`; and every pair excludes `.sr-only`, `[hidden]` and `template`, so a conditionally rendered sibling neither receives a gap nor becomes the thing a real element couples to.
 
-## Role classes earn the spacing
+## Role classes and spacing
 
 Most of the rules match on the role class, not only the element. Using the right typography role is therefore also how the spacing is obtained.
 
@@ -110,13 +110,13 @@ The `mt-` form goes on the element needing space above it. The `gap-` form goes 
 </section>
 ```
 
-A stated relationship always beats an inferred one — every rule excludes elements carrying `mt-flow-`, so no override is needed.
+A stated relationship always beats an inferred one — every rule excludes elements with `mt-flow-`, so no override is needed.
 
-These carry a relationship rather than a distance: `mt-flow-section` produces 24px in a product context and 40px in a prose one. If a gap must be a fixed size regardless of surroundings, it is not flow.
+These define a relationship rather than a distance: `mt-flow-section` produces 24px in a product context and 40px in a prose one. If a gap must be a fixed size regardless of surroundings, it is not flow.
 
-There are deliberately no context-prefixed utilities. `mt-flow-product-section` does not exist, because it would pin one gap to a fixed distance wherever it appeared, which is `mt-6` under another name. A component needing fixed density declares its own context class instead.
+There are deliberately no context-prefixed utilities. `mt-flow-product-section` does not exist, because it would pin one gap to a fixed distance wherever it appeared. A component needing fixed density declares its own context class instead.
 
-## Which system owns the gap
+## Which system controls the gap
 
 | Gap                                | Owner         | Comes from                           |
 | ---------------------------------- | ------------- | ------------------------------------ |
@@ -156,4 +156,4 @@ The current values already fall on relationships, so these are equivalent swaps:
 | `InputWrapper`, `CheckboxGroup` | `space-y-1` | `gap-flow-tight`                    |
 | `Toast`                         | `mb-1`      | remove — `flow-compact` provides it |
 
-Card grids using `gap-4` should move to `grid-gutter-fluid`, or `grid-gutter` on a contained surface. That one changes the result rather than preserving it — a contained surface will legitimately shift at `sm` and above — so it is worth reviewing visually.
+Card grids using `gap-4` should move to `grid-gutter-fluid`, or `grid-gutter` on a contained surface.
