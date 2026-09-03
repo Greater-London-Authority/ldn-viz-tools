@@ -10,16 +10,18 @@
 	import TestPopup from '../mapMarker/TestPopup.svelte';
 	import TestTooltip from '../mapMarker/TestTooltip.svelte';
 	import testData from '../testData.json';
-	import MapRadiusSearch from './MapRadiusSearch.svelte';
+	import MapPointSearch from './MapPointSearch.svelte';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 	const sourceId = 'gla/ldn-viz-tools/test-data';
 
 	const { Story } = defineMeta({
-		title: 'Maps/Components/MapRadiusSearch',
-		component: MapRadiusSearch,
+		title: 'Maps/Components/MapPointSearch',
+		component: MapPointSearch,
 		tags: ['autodocs']
 	});
+
+	let searchActive = $state(false);
 </script>
 
 <Story name="Default">
@@ -32,14 +34,14 @@
 				}}
 			>
 				<MapControlGroup position="TopLeft">
-					<MapRadiusSearch maxRadius={500} onCTA={(point, radius) => console.log(point, radius)} />
+					<MapPointSearch maxRadius={500} onCTA={(point, radius) => console.log(point, radius)} />
 				</MapControlGroup>
 			</Map>
 		</div>
 	{/snippet}
 </Story>
 
-<Story name="Tooltips">
+<Story name="Disable tooltips when search active">
 	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
@@ -57,8 +59,8 @@
 				>
 					<MapLayerView
 						id={`${sourceId}/polygon`}
-						tooltip={TestTooltip}
-						popup={TestPopup}
+						tooltip={!searchActive ? TestTooltip : undefined}
+						popup={!searchActive ? TestPopup : undefined}
 						spec={{
 							type: 'fill',
 							filter: ['==', '$type', 'Polygon'],
@@ -72,7 +74,52 @@
 				</MapLayerSource>
 
 				<MapControlGroup position="TopLeft">
-					<MapRadiusSearch maxRadius={500} onCTA={(point, radius) => console.log(point, radius)} />
+					<MapPointSearch
+						bind:searchActive
+						maxRadius={500}
+						onCTA={(point, radius) => console.log(point, radius)}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Point only">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapPointSearch
+						searchType="point"
+						onCTA={(point, radius) => console.log(point, radius)}
+					/>
+				</MapControlGroup>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Radius only">
+	{#snippet template()}
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				whenMapLoads={loadTestLayers}
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapControlGroup position="TopLeft">
+					<MapPointSearch
+						searchType="radius"
+						maxRadius={500}
+						onCTA={(point, radius) => console.log(point, radius)}
+					/>
 				</MapControlGroup>
 			</Map>
 		</div>
