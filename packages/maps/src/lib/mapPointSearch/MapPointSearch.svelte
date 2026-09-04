@@ -9,7 +9,7 @@
 	import type { Feature, FeatureCollection } from 'geojson';
 	import type { LngLatLike, Map as MapLibreMap, Marker as MarkerType } from 'maplibre-gl';
 	import maplibre_gl from 'maplibre-gl';
-	import { getContext, onDestroy, type Snippet } from 'svelte';
+	import { getContext, onDestroy, onMount, type Snippet } from 'svelte';
 
 	interface Props {
 		/**
@@ -114,36 +114,42 @@
 
 	/*********************************************************/
 	// Create Map Pin element for maplibre to add marker to DOM
-	const mapPin = document.createElement('div');
-	let mapPinHovered: boolean = $state(false);
+	let mapPin: HTMLElement;
 
-	const mapPinSvg = (hover: boolean) => {
-		let pinColor = hover ? hoverColorToken : fillColorToken;
-		const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z" fill="${theme.tokenNameToValue(pinColor, theme.currentTheme)}"/></svg>`;
-		return svg;
-	};
-	$effect(() => {
-		mapPin.innerHTML = mapPinSvg(mapPinHovered);
-	});
-	mapPin.style.width = '32px';
-	mapPin.style.height = '32px';
+	onMount(() => {
+		mapPin = document.createElement('div');
+		let mapPinHovered: boolean = $state(false);
 
-	// Add event listeners for hover and click on map pin
-	mapPin.addEventListener('mouseenter', () => {
-		if (!searchActive) {
-			mapPin.style.cursor = 'pointer';
-		} else {
-			mapPin.style.cursor = 'crosshair';
-		}
-		mapPinHovered = true;
-	});
+		const mapPinSvg = (hover: boolean) => {
+			let pinColor = hover ? hoverColorToken : fillColorToken;
+			const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z" fill="${theme.tokenNameToValue(pinColor, theme.currentTheme)}"/></svg>`;
+			return svg;
+		};
+		$effect(() => {
+			if (mapPin) {
+				mapPin.innerHTML = mapPinSvg(mapPinHovered);
+			}
+		});
+		mapPin.style.width = '32px';
+		mapPin.style.height = '32px';
 
-	mapPin.addEventListener('mouseleave', () => {
-		mapPinHovered = false;
-	});
+		// Add event listeners for hover and click on map pin
+		mapPin.addEventListener('mouseenter', () => {
+			if (!searchActive) {
+				mapPin.style.cursor = 'pointer';
+			} else {
+				mapPin.style.cursor = 'crosshair';
+			}
+			mapPinHovered = true;
+		});
 
-	mapPin.addEventListener('click', () => {
-		isOpen = true;
+		mapPin.addEventListener('mouseleave', () => {
+			mapPinHovered = false;
+		});
+
+		mapPin.addEventListener('click', () => {
+			isOpen = true;
+		});
 	});
 
 	/*********************************************************/
