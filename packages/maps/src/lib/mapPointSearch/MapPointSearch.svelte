@@ -10,9 +10,13 @@
 	import type { LngLatLike, Map as MapLibreMap, Marker as MarkerType } from 'maplibre-gl';
 	import { Marker } from 'maplibre-gl';
 	import { getContext, onDestroy, type Snippet } from 'svelte';
-	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
 
 	interface Props {
+		/**
+		 * Bindable prop to pass layer into parent's `MapDeckOverlay` component to avoid duplicate overlays.
+		 */
+		layer: GeoJsonLayer | undefined;
+
 		/**
 		 * Bindable prop to access active state for conditionally rendering tooltips/popovers.
 		 */
@@ -24,9 +28,16 @@
 		searchType?: 'point' | 'radius' | 'both';
 
 		/**
-		 * Set radius value when map is clicked. Default value is 0.
+		 * Set radius value when map is clicked if it should appear immediately. Default value is 0.
 		 */
 		radius?: number;
+
+		/**
+		 * Set a fixed radius instead of allowing the user to choose a custom radius.
+		 * Turns off radius slider. When `true` it will draw at your chosen radius or maxRadius if no radius is provided.
+		 * Default value is false.
+		 */
+		fixRadius?: boolean;
 
 		/**
 		 * Maximum size of radius in metres. Default value is 500.
@@ -56,7 +67,7 @@
 		/**
 		 * Custom 'call to action' button contents.
 		 */
-		cta?: Snippet;
+		ctaContents?: Snippet;
 
 		/**
 		 * Function to be called when user clicks call to action button (which may have different names depending on user need).
@@ -67,30 +78,41 @@
 		) => any;
 
 		/**
+		 * Custom `cancel` button contents.
+		 */
+		cancelContents?: Snippet;
+
+		/**
 		 * Function to be called when user clicks 'Cancel' button
 		 */
 		onCancel?: () => any;
 	}
 
 	let {
+		layer = $bindable(),
 		searchActive = $bindable(false),
 		searchType = 'both',
 		radius = $bindable(0),
+		fixRadius = false,
 		maxRadius = 500,
 		fillColorToken = 'geo.interactive',
 		lineColorToken = 'geo.feature',
 		hoverColorToken = 'geo.interactive.hover',
 		title,
-		cta,
+		ctaContents,
 		onCTA = (_pointFeature, _radiusFeature) => null,
+		cancelContents,
 		onCancel = () => null
 	}: Props = $props();
 
 	const mapStore: MapLibreStore = getContext('mapStore');
 
+	// svelte-ignore state_referenced_locally
 	let isRadiusSearch: boolean = searchType === 'radius' || searchType === 'both';
+	// svelte-ignore state_referenced_locally
 	let isPointSearch: boolean = searchType === 'point' || searchType === 'both';
 
+	/*********************************************************/
 	// Create Map Pin element for maplibre to add marker to DOM
 	const mapPin = document.createElement('div');
 	let mapPinHovered: boolean = $state(false);
@@ -108,7 +130,11 @@
 
 	// Add event listeners for hover and click on map pin
 	mapPin.addEventListener('mouseenter', () => {
-		mapPin.style.cursor = 'pointer';
+		if (!searchActive) {
+			mapPin.style.cursor = 'pointer';
+		} else {
+			mapPin.style.cursor = 'crosshair';
+		}
 		mapPinHovered = true;
 	});
 
@@ -119,6 +145,8 @@
 	mapPin.addEventListener('click', () => {
 		isOpen = true;
 	});
+
+	/*********************************************************/
 
 	let marker: MarkerType | undefined = $state(undefined);
 
@@ -133,24 +161,31 @@
 	let isOpen: boolean = $state(false);
 
 	// If radius is not set externally, set the radius to maxRadius so it's visible when user clicks the map
+	// svelte-ignore state_referenced_locally
 	radius = radius === 0 && isRadiusSearch && !isPointSearch ? maxRadius : radius;
 
 	let center = $state<[number, number] | undefined>(undefined);
-	let pointFeature = $derived({
-		type: 'FeatureCollection',
-		features: [
-			{
-				type: 'Feature',
-				properties: {},
-				geometry: {
-					type: 'Point',
-					coordinates: center
+	let pointFeature: FeatureCollection | undefined = $derived(
+		center
+			? {
+					type: 'FeatureCollection',
+					features: [
+						{
+							type: 'Feature',
+							properties: {},
+							geometry: {
+								type: 'Point',
+								coordinates: center
+							}
+						}
+					]
 				}
-			}
-		]
-	});
+			: undefined
+	);
 
-	let clampedRadius = $derived(Math.min(radius, maxRadius));
+	let clampedRadius = $derived(
+		fixRadius && radius ? radius : fixRadius && !radius ? maxRadius : Math.min(radius, maxRadius)
+	);
 
 	let ring = $derived.by(() => {
 		if (isRadiusSearch && center) {
@@ -158,6 +193,42 @@
 		}
 		return undefined;
 	});
+
+	type RGBA = [number, number, number, number];
+
+	let radiusLayer = $derived(
+		new GeoJsonLayer({
+			id: 'location-radius',
+			data: ring,
+			filled: true,
+			getFillColor: theme.colorTokenNameToRGBArray(fillColorToken, theme.currentTheme) as RGBA,
+			pickable: true,
+			autoHighlight: true,
+			highlightColor: [...theme.colorTokenNameToRGBArray(hoverColorToken, theme.currentTheme), 25],
+			opacity: 0.1,
+			stroked: true,
+			getLineColor: theme.colorTokenNameToRGBArray(lineColorToken, theme.currentTheme) as RGBA,
+			lineWidthScale: 2,
+			lineWidthMinPixels: 1,
+			onClick: () => {
+				isOpen = true;
+			}
+		})
+	);
+
+	// Function to ensure layer prop updates and passes up to parent for display in `MapDeckOverlay`.
+	const updateLayer = (center: [number, number] | undefined) => {
+		if (center) {
+			layer = radiusLayer;
+		}
+	};
+
+	$effect(() => {
+		updateLayer(center);
+	});
+
+	/*********************************************************/
+	// Event handlers and related functions
 
 	const setCursorStyle = (cursorStyle: string) => {
 		if ($mapStore) {
@@ -171,16 +242,21 @@
 		if (searchActive && $mapStore) {
 			setCursorStyle('crosshair');
 
-			$mapStore.once('click', (ev) => {
-				clickMap($mapStore, ev);
-				setCursorStyle('grab');
-				toggleSearch(false);
+			$mapStore.on('click', (ev) => {
+				if (searchActive) {
+					clickMap($mapStore, ev);
+				}
 			});
 		}
 	};
 
 	const toggleModalOpen = () => {
 		isOpen = !isOpen;
+
+		if (!isOpen) {
+			setCursorStyle('grab');
+			toggleSearch(false);
+		}
 	};
 
 	const clearFeatures = () => {
@@ -241,61 +317,45 @@
 		}
 	};
 
-	type RGBA = [number, number, number, number];
-
-	let radiusLayer = $derived(
-		new GeoJsonLayer({
-			id: 'location-radius',
-			data: ring,
-			filled: true,
-			getFillColor: theme.colorTokenNameToRGBArray(fillColorToken, theme.currentTheme) as RGBA,
-			pickable: true,
-			autoHighlight: true,
-			highlightColor: [...theme.colorTokenNameToRGBArray(hoverColorToken, theme.currentTheme), 25],
-			opacity: 0.1,
-			stroked: true,
-			getLineColor: theme.colorTokenNameToRGBArray(lineColorToken, theme.currentTheme) as RGBA,
-			lineWidthScale: 2,
-			lineWidthMinPixels: 1,
-			onClick: () => {
-				isOpen = true;
-			}
-		})
-	);
-
 	onDestroy(() => {
 		clearFeatures();
 	});
 </script>
 
 {#snippet radiusControls()}
-	<fieldset>
-		<legend class="label">Radius (max {maxRadius} metres)</legend>
-		<div class="grid grid-cols-3 items-center gap-2">
-			<div class="col-span-2">
-				<Input
-					type="range"
-					name="searchRadius"
-					id="searchRadius"
-					min="0"
-					max={`${maxRadius}`}
-					bind:value={radius}
-					aria-label="Select radius"
-				/>
+	{#if fixRadius}
+		<p>Searching fixed radius ({radius ?? maxRadius} metres)</p>
+	{:else}
+		<fieldset>
+			<legend class="label">Radius (max {maxRadius} metres)</legend>
+			<div class="grid grid-cols-3 items-center gap-2">
+				<div class="col-span-2">
+					<Input
+						type="range"
+						name="searchRadius"
+						id="searchRadius"
+						min="0"
+						max={`${maxRadius}`}
+						//@ts-expect-error
+						bind:value={radius}
+						aria-label="Select radius"
+					/>
+				</div>
+				<div class="col-span-1 w-16">
+					<Input
+						type="text"
+						name="searchRadiusText"
+						id="searchRadiusText"
+						min="0"
+						max={`${maxRadius}`}
+						//@ts-expect-error
+						bind:value={radius}
+						aria-label="Enter desired radius"
+					/>
+				</div>
 			</div>
-			<div class="col-span-1 w-16">
-				<Input
-					type="text"
-					name="searchRadiusText"
-					id="searchRadiusText"
-					min="0"
-					max={`${maxRadius}`}
-					bind:value={radius}
-					aria-label="Enter desired radius"
-				/>
-			</div>
-		</div>
-	</fieldset>
+		</fieldset>
+	{/if}
 {/snippet}
 
 {#if !isOpen}
@@ -341,19 +401,17 @@
 				{/if}
 			</div>
 			<div class="mt-flow-loose flex justify-between">
-				<Button
-					variant="outline"
-					size="sm"
-					emphasis="secondary"
-					onclick={clickCancel}
-					aria-label="Cancel point search and close"
-				>
-					Cancel
+				<Button variant="outline" size="sm" emphasis="secondary" onclick={clickCancel}>
+					{#if cancelContents}
+						{@render cancelContents()}
+					{:else}
+						Cancel <span class="sr-only">search and close</span>
+					{/if}
 				</Button>
 				{#if center}
 					<Button size="sm" class="gap-1" onclick={clickCTA}>
-						{#if cta}
-							{@render cta()}
+						{#if ctaContents}
+							{@render ctaContents()}
 						{:else}
 							Search
 						{/if}
@@ -366,6 +424,3 @@
 
 <!-- TODO: WHY THIS EXIST? -->
 <!-- <MapCursorEvent {layerId} {clickMap} /> -->
-
-<!-- TODO Move out of this component and pass layers to parent component to avoid creating multiple DeckOverlays -->
-<MapDeckOverlay layers={[radiusLayer]} />
