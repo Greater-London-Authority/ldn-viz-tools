@@ -8,7 +8,7 @@
 	import * as turf from '@turf/turf';
 	import type { Feature, FeatureCollection } from 'geojson';
 	import type { LngLatLike, Map as MapLibreMap, Marker as MarkerType } from 'maplibre-gl';
-	import { Marker } from 'maplibre-gl';
+	import maplibre_gl from 'maplibre-gl';
 	import { getContext, onDestroy, type Snippet } from 'svelte';
 
 	interface Props {
@@ -306,7 +306,7 @@
 	const setMarker = (map: MapLibreMap, coords: LngLatLike) => {
 		clearMarker();
 
-		marker = new Marker({
+		marker = new maplibre_gl.Marker({
 			element: mapPin,
 			anchor: 'bottom'
 		})
