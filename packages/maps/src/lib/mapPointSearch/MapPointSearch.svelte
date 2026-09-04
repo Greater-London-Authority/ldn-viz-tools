@@ -220,6 +220,8 @@
 	const updateLayer = (center: [number, number] | undefined) => {
 		if (center) {
 			layer = radiusLayer;
+		} else {
+			layer = undefined;
 		}
 	};
 
@@ -250,7 +252,7 @@
 		}
 	};
 
-	const toggleModalOpen = () => {
+	const toggleModal = () => {
 		isOpen = !isOpen;
 
 		if (!isOpen) {
@@ -267,12 +269,12 @@
 	};
 
 	const clickHandler = () => {
-		toggleModalOpen();
+		toggleModal();
 		toggleSearch(true);
 	};
 
 	const clickCancel = () => {
-		toggleModalOpen();
+		toggleModal();
 
 		clearFeatures();
 
@@ -280,6 +282,8 @@
 	};
 
 	const clickCTA = () => {
+		toggleModal();
+
 		if (radius > 0) {
 			onCTA(pointFeature, ring);
 		} else {
@@ -384,7 +388,7 @@
 				variant="text"
 				size="xs"
 				class="cursor-pointer bg-color-container text-color-text"
-				onclick={toggleModalOpen}
+				onclick={toggleModal}
 				aria-label="Close legend"
 			>
 				<Icon src={XMark} theme="mini" class="h-5 w-5" />

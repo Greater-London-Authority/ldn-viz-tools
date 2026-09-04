@@ -26,7 +26,11 @@
 		tags: ['autodocs']
 	});
 
-	let layer: any = $state();
+	let layer1: any = $state();
+	let layer2: any = $state();
+	let layer3: any = $state();
+	let layer4: any = $state();
+	let layer5: any = $state();
 	let searchActive = $state(false);
 </script>
 
@@ -55,7 +59,7 @@
 	</MapLayerSource>
 {/snippet}
 
-{#snippet overlay()}
+{#snippet overlay(layer: any)}
 	<MapDeckOverlay layers={[layer]} />
 {/snippet}
 
@@ -67,13 +71,13 @@
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{@render overlay()}
+				{@render overlay(layer1)}
 
 				{@render testLayers(searchActive)}
 
 				<MapControlGroup position="TopLeft">
 					<MapPointSearch
-						bind:layer
+						bind:layer={layer1}
 						bind:searchActive
 						onCTA={(point, radius) => console.log(point, radius)}
 					/>
@@ -92,13 +96,13 @@
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{@render overlay()}
+				{@render overlay(layer2)}
 
 				{@render testLayers(searchActive)}
 
 				<MapControlGroup position="TopLeft">
 					<MapPointSearch
-						bind:layer
+						bind:layer={layer2}
 						searchType="point"
 						onCTA={(point, radius) => console.log(point, radius)}
 					/>
@@ -117,13 +121,13 @@
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{@render overlay()}
+				{@render overlay(layer3)}
 
 				{@render testLayers(searchActive)}
 
 				<MapControlGroup position="TopLeft">
 					<MapPointSearch
-						bind:layer
+						bind:layer={layer3}
 						searchType="radius"
 						onCTA={(point, radius) => console.log(point, radius)}
 					/>
@@ -141,13 +145,13 @@
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{@render overlay()}
+				{@render overlay(layer4)}
 
 				{@render testLayers(searchActive)}
 
 				<MapControlGroup position="TopLeft">
 					<MapPointSearch
-						bind:layer
+						bind:layer={layer4}
 						searchType="radius"
 						fixRadius={true}
 						onCTA={(point, radius) => console.log(point, radius)}
@@ -166,13 +170,13 @@
 					transformRequest: appendOSKeyToUrl(OS_KEY)
 				}}
 			>
-				{@render overlay()}
+				{@render overlay(layer5)}
 
 				{@render testLayers(searchActive)}
 
 				<MapControlGroup position="TopLeft">
 					<MapPointSearch
-						bind:layer
+						bind:layer={layer5}
 						searchType="radius"
 						radius={200}
 						fixRadius={true}
