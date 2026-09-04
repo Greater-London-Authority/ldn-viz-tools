@@ -161,10 +161,10 @@ export const Plot = {
 	pointY: (data?: Data, options?: DotYOptions) => {
 		return ObservablePlot.dotY(data, { ...getDefault('defaultPoint'), ...options });
 	},
-	ruleX: (data?: Data, options?: RuleYOptions) => {
+	ruleX: (data?: Data, options?: RuleXOptions) => {
 		return ObservablePlot.ruleX(data, { ...getDefault('defaultRule'), ...options });
 	},
-	ruleY: (data?: Data, options?: RuleXOptions) => {
+	ruleY: (data?: Data, options?: RuleYOptions) => {
 		return ObservablePlot.ruleY(data, { ...getDefault('defaultRule'), ...options });
 	},
 	text: (data?: Data, options?: TextOptions) => ObservablePlot.text(data, { ...options }),
