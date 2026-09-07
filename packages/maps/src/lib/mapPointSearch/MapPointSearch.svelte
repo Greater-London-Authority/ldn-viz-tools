@@ -5,11 +5,18 @@
 	import { XMark } from '@steeze-ui/heroicons';
 	import { MapPinSimpleArea } from '@steeze-ui/phosphor-icons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-    import { circle } from "@turf/circle";
+	import { circle } from '@turf/circle';
 	import type { Feature, FeatureCollection } from 'geojson';
 	import type { LngLatLike, Map as MapLibreMap, Marker as MarkerType } from 'maplibre-gl';
 	import maplibre_gl from 'maplibre-gl';
 	import { getContext, onDestroy, onMount, type Snippet } from 'svelte';
+
+	/**
+	 * The `MapPointSearch` component allows you to add a point/radius search as a `MapControl` within a `Map` component.
+	 * By default, it exposes a `searchActive` prop to allow you to disable tooltips/popovers when the search is active.
+	 * It also has a `maxRadius` which defaults to 500 metres if not set.
+	 * @component
+	 */
 
 	interface Props {
 		/**
@@ -78,14 +85,14 @@
 		) => any;
 
 		/**
-		 * Custom 'cancel' button contents.
+		 * Custom 'clear' button contents.
 		 */
-		cancelContents?: Snippet;
+		clearContents?: Snippet;
 
 		/**
-		 * Function to be called when user clicks 'Cancel' button
+		 * Function to be called when user clicks 'Clear' button
 		 */
-		onCancel?: () => any;
+		onClear?: () => any;
 	}
 
 	let {
@@ -101,8 +108,8 @@
 		title,
 		ctaContents,
 		onCTA = (_pointFeature, _radiusFeature) => null,
-		cancelContents,
-		onCancel = () => null
+		clearContents,
+		onClear = () => null
 	}: Props = $props();
 
 	const mapStore: MapLibreStore = getContext('mapStore');
@@ -276,18 +283,18 @@
 		toggleSearch(true);
 	};
 
-	const clickCancel = () => {
+	const clickClear = () => {
 		toggleModal();
 
 		clearFeatures();
 
-		onCancel();
+		onClear();
 	};
 
 	const clickCTA = () => {
 		toggleModal();
 
-       onCTA(pointFeature, radius > 0 ? ring : undefined)
+		onCTA(pointFeature, radius > 0 ? ring : undefined);
 	};
 
 	const clickMap = (map: MapLibreMap, ev: { lngLat: any }) => {
@@ -388,7 +395,7 @@
 				size="xs"
 				class="cursor-pointer bg-color-container text-color-text"
 				onclick={toggleModal}
-				aria-label="Close legend"
+				aria-label="Close search box"
 			>
 				<Icon src={XMark} theme="mini" class="h-5 w-5" />
 			</Button>
@@ -400,18 +407,18 @@
 				{:else if center && isPointSearch}
 					You've selected a point.
 				{:else}
-					<p class="caption"><span class="font-bold">Hint:</span> Click a position on the map</p>
+					<p class="caption">Click a position on the map to begin.</p>
 				{/if}
 			</div>
-			<div class="mt-flow-loose flex justify-between">
-				<Button variant="outline" size="sm" emphasis="secondary" onclick={clickCancel}>
-					{#if cancelContents}
-						{@render cancelContents()}
-					{:else}
-						Cancel <span class="sr-only">search and close</span>
-					{/if}
-				</Button>
-				{#if center}
+			{#if center}
+				<div class="mt-flow-loose flex justify-between">
+					<Button variant="outline" size="sm" emphasis="secondary" onclick={clickClear}>
+						{#if clearContents}
+							{@render clearContents()}
+						{:else}
+							Clear <span class="sr-only">search and close</span>
+						{/if}
+					</Button>
 					<Button size="sm" class="gap-1" onclick={clickCTA}>
 						{#if ctaContents}
 							{@render ctaContents()}
@@ -419,11 +426,8 @@
 							Search
 						{/if}
 					</Button>
-				{/if}
-			</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}
-
-<!-- TODO: WHY THIS EXIST? -->
-<!-- <MapCursorEvent {layerId} {clickMap} /> -->
