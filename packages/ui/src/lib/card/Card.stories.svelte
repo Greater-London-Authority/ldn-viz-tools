@@ -102,7 +102,7 @@
 	name="With custom header snippet"
 	args={{ title: 'Card title', subtitle: 'A supporting subtitle' }}
 >
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class="max-w-xl">
 			<Card>
 				{#snippet header()}

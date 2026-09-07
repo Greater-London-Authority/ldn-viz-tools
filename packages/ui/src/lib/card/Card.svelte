@@ -43,9 +43,9 @@
 		actions?: Snippet;
 		children?: Snippet;
 		class?: string;
-		/** Optional header snippet over-ride */
+		/** Optional snippet to replace default header. */
 		header?: Snippet;
-		/** Optional footer snippet over-ride */
+		/** Optional snippet to replace default footer. */
 		footer?: Snippet;
 	}
 

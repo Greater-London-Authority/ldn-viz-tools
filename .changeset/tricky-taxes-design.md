@@ -2,4 +2,4 @@
 '@ldn-viz/ui': minor
 ---
 
-Add header and footer snippets to cards for full custom replacement
+CHANGED: `Card` now accepts optional `header` and `footer` snippets to replace defaults
