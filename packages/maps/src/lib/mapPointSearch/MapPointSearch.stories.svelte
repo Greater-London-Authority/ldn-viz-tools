@@ -112,7 +112,7 @@
 	{/snippet}
 </Story>
 
-<!-- Set `searchType` to `radius` to disable point search. By default, if no radius is set, when the radius is drawn it will render a circle at the maxRadius. Set a radius to override this. -->
+<!-- Set `searchType` to `radius` to disable point search. By default, if no radius is set, when the radius is drawn it will render a circle at the `maxRadius`. Set a `radius` to override this. -->
 <Story name="Radius only">
 	{#snippet template()}
 		<div class="h-[100dvh] w-[100dvw]">

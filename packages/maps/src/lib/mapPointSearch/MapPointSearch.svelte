@@ -5,7 +5,7 @@
 	import { XMark } from '@steeze-ui/heroicons';
 	import { MapPinSimpleArea } from '@steeze-ui/phosphor-icons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import * as turf from '@turf/turf';
+    import { circle } from "@turf/circle";
 	import type { Feature, FeatureCollection } from 'geojson';
 	import type { LngLatLike, Map as MapLibreMap, Marker as MarkerType } from 'maplibre-gl';
 	import maplibre_gl from 'maplibre-gl';
@@ -23,12 +23,12 @@
 		searchActive?: boolean;
 
 		/**
-		 * Type of search to instantiate. Defaults to 'both' (point with radius search).
+		 * Type of search to instantiate. Defaults to `'both'` (point with radius search).
 		 */
 		searchType?: 'point' | 'radius' | 'both';
 
 		/**
-		 * Set radius value when map is clicked if it should appear immediately. Default value is 0.
+		 * Set radius value when map is clicked if it should appear immediately. Default value is `0`.
 		 */
 		radius?: number;
 
@@ -40,27 +40,27 @@
 		fixRadius?: boolean;
 
 		/**
-		 * Maximum size of radius in metres. Default value is 500.
+		 * Maximum size of radius in metres. Default value is `500`.
 		 */
 		maxRadius?: number;
 
 		/**
-		 * Fill colour token for point icon and radius. Default is 'geo.interactive'.
+		 * Fill colour token for point icon and radius. Default is `'geo.interactive'`.
 		 */
 		fillColorToken?: string;
 
 		/**
-		 * Line colour token for point icon and radius. Default is 'geo.feature'.
+		 * Line colour token for point icon and radius. Default is `'geo.feature'`.
 		 */
 		lineColorToken?: string;
 
 		/**
-		 * Hover fill colour token for point icon and radius. Default is 'geo.feature'.
+		 * Hover fill colour token for point icon and radius. Default is `'geo.interactive.hover'`.
 		 */
 		hoverColorToken?: string;
 
 		/**
-		 * Custom title for search popup. Defaults to 'Search at point' and 'Search within radius'.
+		 * Custom title for search popup. Defaults to `'Search at point'` and `'Search within radius'`.
 		 */
 		title?: Snippet;
 
@@ -78,7 +78,7 @@
 		) => any;
 
 		/**
-		 * Custom `cancel` button contents.
+		 * Custom 'cancel' button contents.
 		 */
 		cancelContents?: Snippet;
 
@@ -107,11 +107,8 @@
 
 	const mapStore: MapLibreStore = getContext('mapStore');
 
-	// svelte-ignore state_referenced_locally
-	let isRadiusSearch: boolean = searchType === 'radius' || searchType === 'both';
-	// svelte-ignore state_referenced_locally
-	let isPointSearch: boolean = searchType === 'point' || searchType === 'both';
-
+	let isRadiusSearch = $derived(searchType === 'radius' || searchType === 'both');
+	let isPointSearch = $derived(searchType === 'point' || searchType === 'both');
 	/*********************************************************/
 	// Create Map Pin element for maplibre to add marker to DOM
 	let mapPin: HTMLElement;
@@ -195,7 +192,7 @@
 
 	let ring = $derived.by(() => {
 		if (isRadiusSearch && center) {
-			return turf.circle(center, clampedRadius, { steps: 64, units: 'meters' });
+			return circle(center, clampedRadius, { steps: 64, units: 'meters' });
 		}
 		return undefined;
 	});
@@ -290,11 +287,7 @@
 	const clickCTA = () => {
 		toggleModal();
 
-		if (radius > 0) {
-			onCTA(pointFeature, ring);
-		} else {
-			onCTA(pointFeature, undefined);
-		}
+       onCTA(pointFeature, radius > 0 ? ring : undefined)
 	};
 
 	const clickMap = (map: MapLibreMap, ev: { lngLat: any }) => {
