@@ -12,8 +12,10 @@
 	 * when it owns the primary slot, and steps down to an eyebrow
 	 * (`emphasis="secondary"`) when a titled element inside owns it.
 	 *
-	 * Surface construction (border, padding, shadow) lives on the card. Corner
-	 * radius matches the design source (square) and can be overridden via `class`.
+	 * Surface construction (border, padding, shadow) lives on the card.
+	 *
+	 * Header and Footer snippets are provided as an escape hatch where fine grained
+	 * control is required for adding contols or other novel elements.
 	 *
 	 * @component
 	 */
@@ -41,6 +43,10 @@
 		actions?: Snippet;
 		children?: Snippet;
 		class?: string;
+		/** Optional header snippet over-ride */
+		header?: Snippet;
+		/** Optional footer snippet over-ride */
+		footer?: Snippet;
 	}
 
 	let {
@@ -56,7 +62,9 @@
 		note = '',
 		actions,
 		children,
-		class: classes = ''
+		class: classes = '',
+		header = undefined,
+		footer = undefined
 	}: Props = $props();
 
 	let hasActions = $derived(!!(actions || byline || source || note));
@@ -68,11 +76,21 @@
 		classes
 	)}
 >
-	<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
+	{#if !header}
+		<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
+	{:else}
+		{@render header()}
+	{/if}
+
 	{#if children}
 		<div class="min-w-0">{@render children()}</div>
 	{/if}
-	{#if hasActions}
-		<ChromeFooter {byline} {source} {note} {actions} />
+
+	{#if !footer}
+		{#if hasActions}
+			<ChromeFooter {byline} {source} {note} {actions} />
+		{/if}
+	{:else}
+		{@render footer()}
 	{/if}
 </div>
