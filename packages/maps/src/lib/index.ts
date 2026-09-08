@@ -11,6 +11,7 @@ export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 export { default as MapLegend } from './mapLegend/MapLegend.svelte';
+export { default as MapPointSearch } from './mapPointSearch/MapPointSearch.svelte';
 
 // Location Search
 export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
