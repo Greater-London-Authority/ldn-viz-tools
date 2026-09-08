@@ -2,4 +2,4 @@
 '@ldn-viz/maps': minor
 ---
 
-ADDED: MapPointSearch component
+ADDED: `MapPointSearch` component
