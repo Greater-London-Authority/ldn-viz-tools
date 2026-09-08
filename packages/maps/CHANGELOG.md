@@ -1,5 +1,18 @@
 # ldn-viz-tools-maps
 
+## 18.0.0
+
+### Minor Changes
+
+- 706f891: ADDED: `MapPointSearch` component
+
+### Patch Changes
+
+- Updated dependencies [861cf62]
+- Updated dependencies [ff50fb5]
+- Updated dependencies [0e464ed]
+  - @ldn-viz/ui@24.3.0
+
 ## 17.0.0
 
 ### Patch Changes

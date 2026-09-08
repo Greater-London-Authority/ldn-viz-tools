@@ -1,5 +1,16 @@
 # ldn-viz-tools-ui
 
+## 24.3.0
+
+### Minor Changes
+
+- 861cf62: CHANGED: Apply correct CSS variables to `form-label` class
+- 0e464ed: CHANGED: `Card` now accepts optional `header` and `footer` snippets to replace defaults
+
+### Patch Changes
+
+- ff50fb5: FIXED: if no name is provided to `RadioButtonGroupSolid`, generate a random id rather than falling back on empty string (if a page included two `RadioButtonGroupSolid` with no `name` then clicking the second would scroll to the first)
+
 ## 24.2.0
 
 ### Minor Changes

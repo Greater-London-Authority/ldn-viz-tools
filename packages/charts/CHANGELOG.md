@@ -1,5 +1,15 @@
 # ldn-viz-tools-charts
 
+## 9.2.1
+
+### Patch Changes
+
+- 9e952e2: FIXED: correct swapped types for `ruleX`/`ruleY`
+- Updated dependencies [861cf62]
+- Updated dependencies [ff50fb5]
+- Updated dependencies [0e464ed]
+  - @ldn-viz/ui@24.3.0
+
 ## 9.2.0
 
 ### Minor Changes
