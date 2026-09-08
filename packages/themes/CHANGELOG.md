@@ -1,5 +1,15 @@
 # @ldn-viz/themes
 
+## 9.2.0
+
+### Minor Changes
+
+- 861cf62: CHANGED: Apply correct CSS variables to `form-label` class
+
+### Patch Changes
+
+- 5f02903: Update Interactive geo token value for better contrast
+
 ## 9.1.0
 
 ### Minor Changes
