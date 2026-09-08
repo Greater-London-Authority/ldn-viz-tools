@@ -9,6 +9,7 @@
 
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { classNames } from '../utils/classNames';
+	import { randomId } from '../utils/randomId';
 	import type { RadioButtonSolidProps } from './types';
 
 	let {
@@ -22,7 +23,7 @@
 		iconPlacement = 'above'
 	}: RadioButtonSolidProps = $props();
 
-	let inputID = $derived(`input-${name || ''}-${id}`);
+	let inputID = $derived(`input-${name || randomId()}-${id}`);
 
 	const labelClasses = $derived(
 		classNames(
