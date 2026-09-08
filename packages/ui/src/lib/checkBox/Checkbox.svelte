@@ -30,7 +30,7 @@
 	}: CheckboxProps = $props();
 </script>
 
-<div class="flex items-center">
+<div class="product flex items-center">
 	<input
 		{id}
 		{name}
@@ -46,7 +46,7 @@
 	/>
 
 	{#if label}
-		<label class="form-label ml-2 font-normal" for={id}>{label}</label>
+		<label class="body ml-2 font-normal" for={id}>{label}</label>
 	{/if}
 
 	{#if hint}

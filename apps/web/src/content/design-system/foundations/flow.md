@@ -9,21 +9,17 @@ thumbnail: cta-foundations-3.svg
 
 ## Principles
 
-Flow is the system that governs vertical space — the gaps between one block and the next as they stack down a page. Where typography makes a single passage of text legible, flow makes a sequence of passages readable as a structure, so that a reader can see at a glance which things belong together and where one part of the page ends and another begins.
+Flow defines the vertical relationship between one block and the next allowing a reader to see at a glance which things belong together and where one part of the page ends and another begins.
 
-Rhythm of this kind is doing real work. Consistent spacing between paragraphs makes a column of text settle. A larger gap above a heading separates what follows from what came before, before the reader has read a word of either. A caption sitting close beneath its image is understood to belong to it. These are not decorative decisions, and making them ad hoc, element by element, is what makes an interface feel unresolved.
+### Space and sequence
 
-### Space belongs to the stack
+The space between two blocks results from the sequence they are part of, and the context that the sequence appears in. A container declares which kind of surface it is, and the spacing within it follows from that.
 
-The space between two blocks belongs to the sequence they are part of, rather than to either block. This is why the system does not attach margins to type roles.
-
-Consider a second-level heading. In a long article it wants generous air above it, because the reader is arriving at a new part of a substantial document. In a dense dashboard card the same heading wants very little, because the card is small and the reader is scanning. It is the same heading in both cases. If the space travelled with it, the system would need a variant of the role for every context it might appear in, and the separation between type and space — which is what allows either to be adjusted without disturbing the other — would collapse.
-
-Instead a container declares which kind of surface it is, and the spacing within it follows from that.
+For example a second-level heading needs more space above it when used in a long article than when used in a card on a dashboard.
 
 ### Four relationships
 
-The whole vocabulary is four steps. Each names a **relationship** between two blocks — how closely bound together they are — rather than a distance.
+There are four **relationships** governing the space between blocks.
 
 | Step        | The relationship it describes                                                                |
 | ----------- | -------------------------------------------------------------------------------------------- |
@@ -32,11 +28,10 @@ The whole vocabulary is four steps. Each names a **relationship** between two bl
 | **Loose**   | Deliberate breathing room, as around a figure, a table or a chart                            |
 | **Section** | A major break, as above the heading that begins a new part of the page                       |
 
-Naming the relationship rather than the distance is what allows the same document structure to be read at different densities. A caption is bound to its image whether it appears in an article or in a dashboard; only how close it sits changes.
-
 ### Three contexts
 
-A **context** decides how far apart the four relationships actually sit. Three are provided, each for a different kind of surface.
+There are three **contexts** corresponding to different types of surface.
+The context dictates the spacing values allotted to the four relationships.
 
 | Context     | Intended for                                                      | Tight | Default | Loose | Section |
 | ----------- | ----------------------------------------------------------------- | ----- | ------- | ----- | ------- |
@@ -44,33 +39,27 @@ A **context** decides how far apart the four relationships actually sit. Three a
 | **Product** | Applications and dashboards, where information is condensed       | 4px   | 8px     | 16px  | 24px    |
 | **Compact** | Small self-contained surfaces — toasts, tooltips, alerts, dialogs | 4px   | 4px     | 8px   | 8px     |
 
-Prose is the most generous, because a reading column benefits from air and the page is not competing for space. Product is roughly half as open, because a dashboard is dense by nature and generous spacing there pushes content below the fold without helping anyone read it.
+Prose is the most generous, because a reading column benefits from air and the page is not competing for space. Product is roughly half as open, because a dashboard is dense.
 
-Compact deliberately collapses the ramp: tight and default are the same, and so are loose and section. This is not an oversight. Within a surface a hundred pixels tall, four distinguishable gaps cannot be perceived as a hierarchy, and attempting them produces something that reads as inconsistent rather than as structured. Two effective values are what the surface can carry.
+Compact deliberately collapses the ramp: tight and default are the same, and so are loose and section. This is because the total range is too small (4px - 8px) to enable 4 visually distinct levels.
 
-A new kind of surface with its own density would be a fourth context assigning different distances to the same four relationships. It would not be a new set of names.
+### Contexts behave differently
 
-### Reading content and application content behave differently
+A section of prose contains a significant amount of semantic markup (headings, figures, paragraphs, etc.) from which the correct spacing is inferred, so it is not necessary for the document author to specify spacing manually.
 
-The most common observation about flow is that it appears to work by itself in reading content, and to do very little in a dashboard. Both are accurate, and the reason is worth understanding, because it explains what is expected of an author in each case.
-
-In reading content, the markup already describes what each element is. A heading element announces that it is a heading; a figure announces that it is a figure set apart from the text. Because that description is present, the system can work out which relationship applies to each gap, and it does. An author writing an article does not choose any spacing at all.
-
-An application is built largely from generic containers, which describe nothing. A division holding a chart looks exactly like a division holding a filter. Nothing can be inferred from that, so only the general rule applies and every gap comes out the same. The system has not failed; there is simply nothing for it to read.
-
-The consequence is a difference in who assigns the relationship, not a difference in the system. In reading content it is inferred from the markup. In an application the author names it, from the same four names. The ramp, the contexts and the concept are shared.
+In contrast, an application often includes many elements that fulfil different roles, and it is therefore necessary to specify the appropriate relationship to obtain the correct spacing.
 
 ### What flow does not govern
 
-Not every gap on a page belongs to flow. Three things own space, and it is worth being able to tell them apart:
+Not every gap on a page belongs to flow. Three things determine space:
 
-- **The stack** owns the vertical gaps between blocks that sit one above another. This is flow.
-- **The grid** owns the horizontal gaps between objects tiled across a width — cards in a row, panels side by side. These come from the [layout grid](/design-system/application-design/layout), which sets them responsively.
-- **The component** owns the space inside its own box: padding, the indent of a list, the space around a border. These come from the [spacing scale](/design-system/foundations/design-tokens).
+- **Flow** determines the vertical gaps between blocks that sit one above another.
+- **The grid** determines the horizontal gaps between objects — cards in a row, panels side by side. These are set responsively by the [layout grid](/design-system/application-design/layout).
+- **The component** determines the space inside its own box: padding, the indent of a list, the space around a border. These come from the [spacing scale](/design-system/foundations/design-tokens).
 
-A useful way to tell the first from the third: ask whether the gap exists because two things sit next to one another, or because one thing has an inside. Sibling blocks are spaced by the stack. A card's own padding belongs to the card, and stays the same wherever the card is placed.
+Sibling blocks are spaced by flow. A card's own padding belongs to the card, and stays the same wherever the card is placed.
 
-A related question settles the harder cases. If the children of a container are a stack of blocks, their spacing is flow. If they are a structure — the cells of a table, the parts of a button — it is construction, and belongs to the component. A form's fields stack; a table's cells do not.
+If the children of a container are a stack of blocks, their spacing is flow. If they are a structure — the cells of a table, the parts of a button — it is construction, and spacing belongs to the component.
 
 ---
 
@@ -88,11 +77,11 @@ A context is applied as a class on a containing element.
 <div class="flow-compact">…</div>
 ```
 
-The class does two things at once: it sets the four relationships to that context's distances, and it enables the spacing between that element's own children. A single class is all that is needed.
+The class provides values to the four relationships, setting the appropriate spacing to the elements children.
 
-Contexts can be nested, and the innermost one applies. A toast inside a dashboard can declare `flow-compact` and will space its contents accordingly, whatever surrounds it. A component whose spacing must be the same wherever it is placed should declare its own context rather than relying on the one it happens to be dropped into.
+Contexts can be nested, and the innermost one applies. A toast inside a dashboard can declare `flow-compact` and will space its contents accordingly, regardless of the context of it's ancestors. A component whose spacing must be the same wherever it is placed should declare its own context.
 
-A surface will usually want a type set as well as a flow context. The two are separate systems that share the words _product_ and _prose_:
+A surface will usually require a type set as well as a flow context. The two are separate systems that share the words _product_ and _prose_:
 
 ```html
 <section class="flow-product product">…</section>
@@ -117,7 +106,7 @@ Inside `flow-prose`, the spacing follows from the markup. These are the relation
 | Between a term and its definition in a description list                 | Tight        |
 | Between one term-and-definition pair and the next                       | Default      |
 
-The last entry in the heading group is worth drawing out. When an eyebrow introduces a heading, the major break moves above the eyebrow rather than sitting between them, because the eyebrow is the top of that titling group rather than a stray line before it.
+<!-- The last entry in the heading group is worth drawing out. When an eyebrow introduces a heading, the major break moves above the eyebrow rather than sitting between them, because the eyebrow is the top of that titling group rather than a stray line before it. -->
 
 An article needs no spacing classes at all:
 
@@ -137,9 +126,9 @@ An article needs no spacing classes at all:
 </article>
 ```
 
-### Type roles take part in the spacing
+### Type roles and spacing
 
-Most of these relationships are recognised from the role class an element carries, not only from the element itself. Applying the right typography role therefore also produces the right spacing, and applying a generic approximation produces neither.
+Relationships are determined by a type element's role class. Applying the right typography role produces the right spacing, applying a generic approximation does not.
 
 ```html
 <!-- Recognised as a heading and its supporting line, and closed up accordingly -->
@@ -155,14 +144,13 @@ The roles taken into account are the heading elements, the four Title roles, Dis
 
 ### In an application, name the relationship
 
-Where nothing can be inferred, say which relationship applies. Four utilities are available, matching the four names, in two forms:
+Where nothing can be inferred, say which relationship applies. Four utilities are available, matching the four relationship names.
+
+The `mt-` form goes on the element that needs space above it.
 
 ```
 mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section
-gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
 ```
-
-The `mt-` form goes on the element that needs space above it. The `gap-` form goes on a flex or grid container to space its children, and should be used on a container that is not itself a flow context — a context already spaces its children, so doing both produces twice the gap.
 
 ```html
 <section class="flow-product product">
@@ -175,9 +163,28 @@ The `mt-` form goes on the element that needs space above it. The `gap-` form go
 </section>
 ```
 
+The `gap-` form goes on a flex or grid container to space its children, and should be used on a container that is not itself a flow context — a context already spaces its children, so doing both produces twice the gap.
+
+```
+gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
+```
+
+```html
+<section class="flow-product product">
+	<h2 class="section-head">Monitoring sites</h2>
+	<p class="subtitle">Twelve active sensors</p>
+
+	<div class="mt-flow-section flex flex-col gap-flow-tight">
+		<!-- a further part of the section, deliberately set apart with a tight flow-->
+	</div>
+</section>
+```
+
 A relationship named by the author always takes precedence over one the system would have inferred. There is no need to raise specificity or use `!important` to override the automatic spacing.
 
-Note that these carry a relationship and not a distance. `mt-flow-section` produces a different gap in a prose context than in a product one, which is the intended behaviour: the element keeps its relationship to what precedes it, and the surface decides how far that is. If a gap needs to be a fixed size regardless of surroundings, it is not flow — it is construction, and belongs to the component that owns it.
+**Note** `mt-flow-section` produces a different gap in a prose context than in a product one: the element keeps its relationship to what precedes it, and the surface decides how far that is.
+
+If a gap needs to be a fixed size regardless of surroundings, it is not flow — it is construction.
 
 ### Space inside a component
 
@@ -193,8 +200,6 @@ In practice most interior spacing settles on five values:
 | `6`   | 24px  | More generous interior padding             |
 | `8`   | 32px  | Large surfaces and page-level insets       |
 
-A value outside this set is worth a second look. It is usually either a gap between blocks that has been chosen by hand, or a measurement that should be derived from the element it aligns to rather than picked from a scale.
-
 ### A worked example
 
 A section of a dashboard: a heading, a supporting line, a row of chart cards, and a source note.
@@ -207,12 +212,16 @@ Written by hand, it might look like this:
 		<h2 class="section-head mb-1">Rough sleeping</h2>
 		<p class="body-sm text-color-text-muted">Quarterly</p>
 	</div>
-	<div class="grid grid-cols-3 gap-4">…</div>
+	<div class="grid grid-cols-3 gap-4">
+		<!-- cards -->
+	</div>
 	<p class="caption mt-2">Source: CHAIN</p>
 </div>
 ```
 
-There are four chosen numbers here, none of which is wrong exactly, and none of which will follow if the system is adjusted. The wrapper exists only to hold a margin. The trailing margin adds to the parent's gap rather than replacing it, so the actual space beneath the grid is the sum of two decisions made separately. And the heading and its supporting line are joined by a margin rather than being recognised as a pair.
+There are four chosen numbers here, none of which is wrong exactly, and none of which will follow if the system is adjusted.
+
+The wrapper exists only to hold a margin. The trailing margin adds to the parent's gap rather than replacing it, so the actual space beneath the grid is the sum of two decisions made separately. And the heading and its supporting line are joined by a margin rather than being recognised as a pair.
 
 Using the system:
 
@@ -233,7 +242,7 @@ The wrapper has gone. The subtitle is recognised as a supporting line and closes
 
 ### Things to watch for
 
-**A wrapping element interrupts the spacing.** The relationships apply between elements that are direct children of the container that declares the context. A division wrapped around two of them takes their place in the sequence, and their spacing becomes yours to set. This is the most common reason flow appears not to work. Remove the wrapper unless it is a genuine unit, such as a figure and its caption.
+**A wrapping element interrupts the spacing.** The relationships apply between elements that are direct children of the container that declares the context. A `div` wrapped around two of them takes their place in the sequence, and their spacing is removed from the flow. This is the most common reason flow appears not to work. Remove the wrapper unless it is a genuine unit, such as a figure and its caption.
 
 **Space above a first element has nothing to sit between.** Applying a relationship to the first child of a container has no visible effect, and may push the whole container down rather than its contents. Apply space to the element that needs it above.
 

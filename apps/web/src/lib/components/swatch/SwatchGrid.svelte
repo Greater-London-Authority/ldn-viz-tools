@@ -13,7 +13,7 @@
 	const sizeClasses = {
 		// xs: 'grid grid-cols-6 gap-1 pb-4 pt-2 md:grid-cols-9 xl:grid-cols-11',
 		xs: 'flex flex-wrap gap-1 pb-2',
-		sm: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
+		sm: 'grid grid-cols-4 gap-4 pb-2 pt-2 md:grid-cols-6',
 		md: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
 		lg: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4',
 		xl: 'grid grid-cols-2 gap-4 pb-2 pt-2 md:grid-cols-4'

@@ -63,7 +63,7 @@ thumbnail: cta-foundations-3.svg
 
 ## Principles
 
-Design tokens are the single source of truth for naming and storing design decisions such as colors, typography, spacing, and more. They ensure consistency, scalability, and maintainability across all our applications.
+Design tokens are the single source of truth for naming and storing design decisions such as colours, typography, spacing, and more. They ensure consistency, scalability, and maintainability across all our applications.
 
 ### Token Tiers
 
@@ -73,13 +73,13 @@ Tokens are defined in two tiers with reference to a raw value.
 
 #### Primitive
 
-Primitive tokens represent all available **options** within the system. These tokens should not be directly referenced in an application. Think of **primitive** tokens as the well from which values are drawn and poured into other tokens.
+Primitive tokens represent all available **options** within the system. These tokens should not be directly referenced in an application.
 
 #### Semantic
 
 Semantic tokens encapsulate **design decisions** giving an understandable intent to the raw value defined in a primitive token.
 
-Semantic color tokens allow for mode switching between light and dark.
+Semantic colour tokens allow for mode switching between light and dark, as each semantic token is associated with a primitive value for both modes.
 
 ### Token names
 
@@ -87,7 +87,7 @@ Tokens are named following a logical structure that flows from left to right to 
 
 `(tier) -> category -> variant -> concept -> role -> emphasis -> state`
 
-Token names don't need to contain each element of this convention.
+Token names don't need to contain every element of this convention.
 
 `category -> concept`
 
@@ -105,11 +105,11 @@ $color-surface-positive-muted
 ```
 
 **Implied defaults**
-We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text color is `$color-text` rather than `$color-text-default`
+We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text colour is `$color-text` rather than `$color-text-default`
 
 Following our naming convention ensures that each token is clearly defined and easily understandable.
 
-**Notation** The `$` prefix used above denotes a token rather than any particular implementation of one. A token is a design decision that should be transportable — the same decision reaches a stylesheet as a custom property, a Tailwind project as a utility class, and a design file as a variable, without the decision itself belonging to any of them. This page therefore names tokens in that neutral form. The Practice section below shows how each form is written in code.
+**Notation** The `$` prefix used above denotes a token rather than an implementation of one. The values of design tokens can be accessed in different forms in different contexts: as custom properties in CSS stylesheets, utility classes in Tailwind projects, and variables within Figma. The Practice section below shows how each form is written in code.
 
 [Read the Practice section for more on token use](#practice) and a full listing of available tokens.
 
@@ -117,21 +117,17 @@ Following our naming convention ensures that each token is clearly defined and e
 
 Token categories are **color**, **spacing**, **typography**, **flow** and **grid**
 
-| Category     | Detail                                                                                                                                                            |
-| :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `color`      | Semantic color tokens enable mode switching. They encode the fundamental design decisions for color and have been tested to conform with accessibility standards. |
-| `spacing`    | Spacing tokens are used to give a consistent rhythm and flow to our user interfaces.                                                                              |
-| `typography` | Typography tokens define font family, size, weight, line-height and letter-spacing for text and typographic elements.                                             |
-| `flow`       | Flow tokens hold the vertical space between stacked blocks, as a set of four relationships resolved per context.                                                  |
-| `grid`       | Grid tokens hold the horizontal structure of a layout — the gutter between columns and the padding at the edge of a container, per breakpoint.                    |
-
-The three categories after `color` resolve their values from the spacing scale rather than defining new ones, so they are decisions about how space is applied rather than a separate supply of it.
-
-The following applies to tokens in the color category. Spacing, typography, flow and grid are documented subsequently.
+| Category     | Detail                                                                                                                                                              |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `color`      | Semantic colour tokens enable mode switching. They encode the fundamental design decisions for colour and have been tested to conform with accessibility standards. |
+| `spacing`    | Spacing tokens are used to give a consistent rhythm and flow to our user interfaces.                                                                                |
+| `typography` | Typography tokens define font family, size, weight, line-height and letter-spacing for text and typographic elements.                                               |
+| `flow`       | Flow tokens hold the vertical space between stacked blocks, as a set of four relationships resolved per context.                                                    |
+| `grid`       | Grid tokens hold the horizontal structure of a layout — the gutter between columns and the padding at the edge of a container, per breakpoint.                      |
 
 #### Variant
 
-Many color tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
+Many colour tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
 
 | Variant   | Details                                                         |
 | :-------- | :-------------------------------------------------------------- |
@@ -141,7 +137,7 @@ Many color tokens are defined with an **inverse** counterpart that is used to in
 
 #### Concept
 
-The token **concept** guides us in how to apply the token. For color tokens, values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
+The token **concept** guides us in how to apply the token. For colour tokens, values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
 
 ![An isometric illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.svg)
 
@@ -149,7 +145,7 @@ The token **concept** guides us in how to apply the token. For color tokens, val
 
 | Concept       | Detail                                                          |
 | :------------ | :-------------------------------------------------------------- |
-| `static`      | Colors that stay the same regardless of mode                    |
+| `static`      | Colours that stay the same regardless of mode                   |
 | `canvas`      | The base layer of an application                                |
 | `container`   | Containers are organisational elements that form page structure |
 | `surface`     | Information layer that sits in front of the canvas layer        |
@@ -167,11 +163,11 @@ The system deliberately avoids component tier tokens with the exception of token
 | Concept         | Detail                                                       |
 | :-------------- | :----------------------------------------------------------- |
 | `chart-surface` | The base layer of a chart                                    |
-| `chart-axis`    | The color of chart axes                                      |
+| `chart-axis`    | The colour of chart axes                                     |
 | `chart-grid`    | Grid-line elements for charts                                |
 | `chart-label`   | Label elements for use on charts, with a `muted` counterpart |
 
-These describe chart _chrome_ — the furniture around the data. The colour of the data itself comes from the `data` concept, listed in the reference tables below.
+These describe chart _chrome_ — the scaffold around the data. The colour of the data itself comes from the `data` concept, listed in the reference tables below.
 
 | Concept           | Detail                                                                                     |
 | :---------------- | :----------------------------------------------------------------------------------------- |
@@ -180,7 +176,7 @@ These describe chart _chrome_ — the furniture around the data. The colour of t
 | `geo-label`       | Label elements for use with maps and geographic visualisations, with a `muted` counterpart |
 | `geo-annotation`  | Annotations over maps and geographic visualisations, with a `muted` counterpart            |
 
-Both groups also carry an `inverse` variant for use against an inverted background.
+Both `chart-*` and `geo-*` have an `inverse` variant for use against an inverted background.
 
 #### Role
 
@@ -199,16 +195,33 @@ The **role** signifies _intent_. Roles **primary**, **secondary** define a hiera
 
 #### Emphasis
 
-The majority of color tokens are defined with a **muted** counterpart which lets us create further visual hierarchy in our designs.
+The majority of colour tokens are defined with a **muted** counterpart which lets us create further visual hierarchy in our designs.
 
-| Emphasis | Detail                                |
-| :------- | :------------------------------------ |
-| `muted`  | Reduces the emphasis of color         |
-| `wash`   | Reduces the emphasis of color further |
+| Emphasis | Detail                                 |
+| :------- | :------------------------------------- |
+| `muted`  | Reduces the emphasis of colour         |
+| `wash`   | Reduces the emphasis of colour further |
 
 `muted` is available across most concepts. `wash` is a third step for text only, where a reading hierarchy needs more than two levels.
 
 **Container level exception**
+
+`$container-*` tokens, applied to organisational elements that form page structure, use a `level-*` modifier to give them relative distance from the canvas.
+
+<div class="grid grid-cols-4 grid-gutter">
+    <div class="flex flex-col space-y-1">
+        <div class="bg-color-container h-8 w-full"></div><code>$color-container</code>
+    </div>
+    <div class="flex flex-col space-y-1">
+        <div class="bg-color-container-level-1 h-8 w-full"></div><code>$color-container-level-1</code>
+    </div>
+    <div class="flex flex-col space-y-1">
+        <div class="bg-color-container-level-2 h-8 w-full"></div><code>$color-container-level-2</code>
+    </div>
+    <div class="flex flex-col space-y-1">
+        <div class="bg-color-container-level-3 h-8 w-full"></div><code>$color-container-level-3</code>
+    </div>
+</div>
 
 | Emphasis  | Detail                                      |
 | :-------- | :------------------------------------------ |
@@ -254,9 +267,7 @@ Spacing tokens define the spacing between and around elements of the application
 --spacing-4: 1rem;
 ```
 
-**The numbered scale has two layers.** `$spacing-{n}` is the public one, and is what applications and components use. Behind it sits `$primitive-spacing-{n}`, which holds the value and is referenced only by the public layer and by the flow and grid tokens. Nothing in an application should bind to the primitive, including a component's own internal spacing.
-
-Vertical rhythm between stacked blocks — paragraph to paragraph, or the break above a section heading — is not taken from this scale directly. It comes from the flow tokens described below, so that the same content can be set at a different density without every gap being revisited.
+Vertical rhythm between stacked blocks — paragraph to paragraph, or the break above a section heading comes from the flow tokens described below, and is dependant on the density context.
 
 [Read more about relative units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units#lengths)
 
@@ -266,7 +277,7 @@ Vertical rhythm between stacked blocks — paragraph to paragraph, or the break 
 
 ### Flow tokens
 
-Flow tokens hold the vertical space between one block and the next. Rather than a scale of sizes, they are four **relationships**, describing how closely two stacked blocks are bound together.
+Flow tokens define the vertical space between one block and the next. Rather than a scale of sizes, they are four **relationships**, describing how closely two stacked blocks sit together.
 
 | Token           | The relationship it describes                             |
 | :-------------- | :-------------------------------------------------------- |
@@ -277,7 +288,7 @@ Flow tokens hold the vertical space between one block and the next. Rather than 
 
 The distance each one produces is decided by the **context** it is used in. Three contexts are defined — `prose`, `product` and `compact` — each mapping the same four relationships onto different rungs of the spacing scale. A relationship therefore travels with the content, while the density travels with the surface.
 
-Because a token here names a relationship rather than a size, a value should never be substituted for one. Reaching for a spacing token where a flow token belongs pins that one gap to a fixed distance, and it will no longer follow when the surface around it changes.
+Because a token here names a relationship rather than a specific size, a value should never be substituted for one. Using a spacing token where a flow token belongs pins that one gap to a fixed distance, and it will no longer follow when the surface around it changes.
 
 [Read the chapter dedicated to content flow for the values and their use](/design-system/foundations/flow).
 
@@ -285,16 +296,9 @@ Because a token here names a relationship rather than a size, a value should nev
 
 ### Grid tokens
 
-Grid tokens hold the horizontal structure of a layout: the gutter between columns, and the padding at the edge of a container. Both carry a value per breakpoint, and both exist twice — once for each of the two grid archetypes.
+Grid tokens define the horizontal structure of a layout: the gutter between columns, and the padding at the edge of a container.
 
-| Token                                    | Detail                                                      |
-| :--------------------------------------- | :---------------------------------------------------------- |
-| `$grid-spacing-{breakpoint}-contained-*` | For centred, width-limited surfaces such as reading content |
-| `$grid-spacing-{breakpoint}-fluid-*`     | For full-width surfaces such as a dashboard canvas          |
-
-Each carries a `gutter` and a `container-padding`. The two archetypes are separate sets of decisions rather than one set stretched to serve both: the contained gutter and edge space grow as the viewport widens, while the fluid ones stay constant so that a canvas fills the width available at a consistent density.
-
-These are the source of the space between tiled objects — cards in a row, panels side by side. That space belongs to the grid rather than to the objects in it, which is why it is not taken from a component's own spacing.
+These are the source of the space between tiled objects — cards in a row, panels side by side. That space belongs to the grid rather than to the objects in it.
 
 [Read the documentation on application layout for the values](/design-system/application-design/layout).
 
@@ -304,11 +308,11 @@ These are the source of the space between tiled objects — cards in a row, pane
 
 #### Role
 
-A typographic role names the job a piece of text does, and carries every property that job requires: font family, size, weight, line-height and letter-spacing. Roles hold a value at each breakpoint and resolve themselves as the viewport changes, so a descriptive name is all an author needs.
+A typographic role names the job a piece of text does and contains every property that job requires: font family, size, weight, line-height and letter-spacing. Roles hold a value at each breakpoint and resolve themselves as the viewport changes, so a descriptive name is all an author needs.
 
 #### Type set
 
-Roles are grouped into three **type sets**, one for each kind of surface. The set is the variant segment of a typography token name, and it decides what a role name resolves to — `body` is sixteen pixels in both `product` and `prose`, with a different line-height in each.
+Roles are grouped into three **type sets**, one for each kind of surface.
 
 | Type set  | Intended for                                                 |
 | :-------- | :----------------------------------------------------------- |
@@ -316,13 +320,22 @@ Roles are grouped into three **type sets**, one for each kind of surface. The se
 | `prose`   | Long passages of reading — articles, guidance, documentation |
 | `chart`   | Text in and around a chart                                   |
 
-A set defines only the roles its surface needs, so the three do not hold the same list. Several role names appear in more than one set, which is deliberate: the same job in a different reading situation wants a different treatment, not a different name.
+A set defines only the roles its surface needs, so the three do not hold the same list. Several role names appear in more than one set as the same job in a different reading situation takes a different treatment, not a different name.
 
-| Type set  | Roles                                                                                                                      |
-| :-------- | :------------------------------------------------------------------------------------------------------------------------- |
-| `product` | `page-head` `section-head` `title` `subtitle` `eyebrow` `metric` `metric-sm` `body` `body-sm` `label` `label-sm` `caption` |
-| `prose`   | `display` `headline` `subhead` `title-1` to `title-4` `subtitle` `lead` `body` `body-sm` `caption` `eyebrow`               |
-| `chart`   | `title` `subtitle` `eyebrow` `axis-title` `label` `tick` `tick-sm`                                                         |
+| `product`      | `prose`             | `chart`      |
+| :------------- | :------------------ | :----------- |
+| `page-head`    | `display`           | `title`      |
+| `section-head` | `headline`          | `subtitle`   |
+| `title`        | `subhead`           | `eyebrow`    |
+| `subtitle`     | `title-1`–`title-4` | `axis-title` |
+| `eyebrow`      | `subtitle`          | `label`      |
+| `metric`       | `lead`              | `tick`       |
+| `metric-sm`    | `body`              | `tick-sm`    |
+| `body`         | `body-sm`           |              |
+| `body-sm`      | `caption`           |              |
+| `label`        | `eyebrow`           |              |
+| `label-sm`     |                     |              |
+| `caption`      |                     |              |
 
 #### Variants
 
@@ -330,10 +343,8 @@ Two suffixes recur. Neither is a general scale that can be applied to any role.
 
 | Suffix  | Detail                                                                                                 |
 | :------ | :----------------------------------------------------------------------------------------------------- |
-| `sm`    | A smaller sibling of a role, for a denser context. Only the roles listed above carry one.              |
+| `sm`    | A smaller sibling of a role, for a denser context.                                                     |
 | `tight` | A `label` or `label-sm` with its line-height reduced to match the font size, for single-line controls. |
-
-Size is one of three independent axes, alongside weight and colour. A quieter heading is a heading in a muted colour rather than a smaller role, and an emphasised caption is a caption at a heavier weight. Keeping the three separate is what stops the set of roles growing every time a new appearance is wanted.
 
 [Read the chapter dedicated to typography for the values and their use](/design-system/foundations/typography).
 
@@ -357,20 +368,26 @@ Size is one of three independent axes, alongside weight and colour. A quieter he
 
 ### Using tokens in code
 
-A token reaches code in three forms. Which one you use depends on the project rather than on the token — the decision it carries is the same in each.
+A token reaches code in three forms: Tailwind utility classes, CSS custom properties and as a Javascript object. Which one you use depends on the project rather than on the token — the decision it encapsulates is the same.
 
 #### Tailwind utility classes
 
-In a project using `@ldn-viz/themes` as a Tailwind preset, tokens are available through Tailwind's utility patterns. The token name follows the utility prefix:
+In a project using `@ldn-viz/themes` as a Tailwind preset, tokens are available through Tailwind's utility patterns.
+
+The token name follows the utility prefix eg:
+
+`text-` (utility prefix) `color-text` (token reference)
 
 ```html
 <p class="body text-color-text">Default text on a container</p>
 <div class="border border-color-border bg-color-container">…</div>
 ```
 
-Spacing follows the same pattern, using the numbered scale: `p-4` applies 16px of padding, `mt-2` an 8px top margin. Flow relationships have their own utilities, `mt-flow-{relationship}` and `gap-flow-{relationship}`, and are never available as padding.
+Spacing follows the same pattern, using the numbered scale: `p-4` applies 16px of padding, `mt-2` an 8px top margin.
 
-Typographic roles are applied as the bare role name — `body`, `title`, `label` — within an element carrying its type set.
+Flow relationships have their own utilities, `mt-flow-{relationship}` and `gap-flow-{relationship}`.
+
+Typographic roles are applied as the bare role name — `body`, `title`, `label`.
 
 #### CSS custom properties
 
@@ -394,4 +411,6 @@ import tokens from '@ldn-viz/themes/styles/js/color-tokens.js';
 const seriesColor = tokens.mode.light.data.categorical.blue;
 ```
 
-The mode should be selected programmatically from the application's current theme rather than hard-coded, so that a value passed to a library follows a mode switch in the same way a CSS token does. Note that a token with no emphasis suffix appears under the key `default`.
+The mode should be selected programmatically from the application's current theme rather than hard-coded, so that a value passed to a library follows a mode switch in the same way a CSS token does.
+
+**Note:** a token with no emphasis suffix appears under the key `default`.
