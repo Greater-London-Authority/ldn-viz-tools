@@ -83,13 +83,16 @@
 	};
 
 	// Classes applied to the wrapper element
-	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
 	let wrapperClasses = $derived(
 		classNames('h-full w-full flex relative', heightClass) // overflow-hidden
 	);
 
-	let sidebarWidthClasses = $derived(widthLookup[sidebarState.width][sidebarState.placement]);
-	let sidebarHeightClasses = $derived(heightLookup[sidebarState.width][sidebarState.placement]);
+	let sidebarWidthClasses = $derived(
+		widthLookup[sidebarState.width ?? 'standard'][sidebarState.placement]
+	);
+	let sidebarHeightClasses = $derived(
+		heightLookup[sidebarState.width ?? 'standard'][sidebarState.placement]
+	);
 
 	$effect(() => {
 		sidebarState.isOpen = respondToWidthChange(innerWidth);
