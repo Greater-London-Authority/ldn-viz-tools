@@ -24,7 +24,7 @@
 		width = 'standard',
 		position = 'absolute',
 		theme = 'dark',
-		placement = 'right',
+		placement = undefined,
 		tabs = [],
 		selectedTabId = $bindable(undefined),
 		state = $bindable(),
@@ -45,9 +45,11 @@
 	// expose internal state to parent component
 	state = sidebarState;
 
-	// If a context provides a reactive placement use that
-	// svelte-ignore state_referenced_locally
-	sidebarState.placement = placement;
+	// An explicit `placement` prop overrides the AppShell's breakpoint resolution;
+	// with no prop the getter returns `undefined` and the AppShell's value is used.
+	// This installs a getter rather than writing a value, so it neither depends on
+	// initialisation order nor freezes at the prop's first value.
+	sidebarState.overridePlacement(() => placement);
 
 	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
 	// svelte-ignore state_referenced_locally

@@ -13,9 +13,6 @@
 	import { classNames } from '../utils/classNames';
 	import { getSetting } from './utils/getSettingByScreenWidth';
 
-	setSidebarState();
-	let sidebarState = getSidebarState();
-
 	interface Props {
 		/**
 		 * Object expressing the sidebar position (`top`, `bottom`, `left`, `right`) at different screen sizes.
@@ -58,6 +55,18 @@
 
 	let innerWidth = $state(0);
 
+	/*
+		Below are settings for Breakpoint Prop and Always Open Prop.
+		This is the secret sauce that allows us to pass an object containing different props per breakpoint.
+		The breakpoints are configurable if required, but use defaults: Demo to follow.
+		See also appShell/utils/getSettingByScreenWidth
+	*/
+	// Placement is *pulled* from here by the sidebar state rather than assigned
+	// into it, so there is no window in which a stale value is visible and no
+	// dependence on whether this component or its child initialises first.
+	setSidebarState(() => getSetting(sidebarPlacement, innerWidth));
+	let sidebarState = getSidebarState();
+
 	(() => {
 		if (getSetting(sidebarAlwaysOpen, innerWidth)) {
 			sidebarState.isOpen = true;
@@ -79,19 +88,11 @@
 		classNames('h-full w-full flex relative', heightClass) // overflow-hidden
 	);
 
-	/*
-		Below are settings for Breakpoint Prop and Always Open Prop.
-		This is the secret sauce that allows us to pass an object containing different props per breakpoint.
-		The breakpoints are configurable if required, but use defaults: Demo to follow.
-		See also appShell/utils/getSettingByScreenWidth 
-	*/
-	let breakPointProp = $derived(getSetting(sidebarPlacement, innerWidth));
-	let sidebarWidthClasses = $derived(widthLookup[sidebarState.width][breakPointProp]);
-	let sidebarHeightClasses = $derived(heightLookup[sidebarState.width][breakPointProp]);
+	let sidebarWidthClasses = $derived(widthLookup[sidebarState.width][sidebarState.placement]);
+	let sidebarHeightClasses = $derived(heightLookup[sidebarState.width][sidebarState.placement]);
 
 	$effect(() => {
 		sidebarState.isOpen = respondToWidthChange(innerWidth);
-		sidebarState.placement = breakPointProp;
 	});
 </script>
 
@@ -99,7 +100,7 @@
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
-	<main class={classNames('w-full', breakPointProp === 'right' ? '' : 'order-1')}>
+	<main class={classNames('w-full', sidebarState.placement === 'right' ? '' : 'order-1')}>
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
 			<p class="product body font-bold">
@@ -120,7 +121,7 @@
 	{#if (sidebarState.isAlwaysOpen || (sidebarPush && sidebarState.isOpen)) && sidebarState.width}
 		<div
 			class={classNames('flex', sidebarHeightClasses)}
-			transition:slide={{ duration: 300, axis: transitionAxis[breakPointProp] }}
+			transition:slide={{ duration: 300, axis: transitionAxis[sidebarState.placement] }}
 		>
 			<div class={classNames('shrink-0', sidebarWidthClasses)}></div>
 		</div>
