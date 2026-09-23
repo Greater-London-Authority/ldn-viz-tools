@@ -103,7 +103,7 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 			// feature object (both geometry and features).
 			const data = props.data ?? [];
 			index.load(
-				data.map((d, i) => ({
+				data.map((d: any, i: number) => ({
 					type: 'Feature' as const,
 					geometry: { type: 'Point' as const, coordinates: this.positionOf(d, i, data) },
 					properties: d
