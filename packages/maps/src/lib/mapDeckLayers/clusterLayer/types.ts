@@ -11,6 +11,12 @@ type BaseRenderProps<FeatureT> = {
 	getPosition: (f: FeatureT) => [number, number];
 	updateTriggers?: Record<string, unknown>;
 
+	/**
+	 * Wraps a row derived from a feature (e.g. when one feature is drawn as several rows), so
+	 * that picking the row resolves back to the feature. See CompositeLayer.getSubLayerRow.
+	 */
+	makeRow: <R extends object>(row: R, source: FeatureT, index: number) => R;
+
 	/** Everything CompositeLayer.getSubLayerProps injects: pickable, opacity, extensions, ... */
 	[prop: string]: unknown;
 };

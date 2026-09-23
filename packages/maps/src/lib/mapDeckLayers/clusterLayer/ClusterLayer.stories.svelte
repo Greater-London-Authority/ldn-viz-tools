@@ -55,6 +55,7 @@
 	import { ClusterLayer } from './clusterLayer';
 	import { donutClusters } from './donutClusters';
 	import { circleClusters, circlePoints } from './renderers';
+	import { splitClusters } from './splitClusters';
 	import type { ClusterPickingObject, PointPickingObject } from './types';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
@@ -147,7 +148,7 @@
 			number
 		];
 
-	const donutTooltipText = (
+	const breakdownTooltipText = (
 		object: ClusterPickingObject<EventFeature> | PointPickingObject<EventFeature>
 	) => {
 		if (!object.isCluster) return tooltipText(object);
@@ -161,6 +162,10 @@
 		return `${object.pointCount} events: ${breakdown}`;
 	};
 
+	const eventTypeColorsRGB = Object.fromEntries(
+		Object.keys(eventTypeColors).map((type) => [type, eventTypeRGB(type)])
+	);
+
 	const makeDonutLayer = (args: ClusterArgs) =>
 		new ClusterLayer({
 			id: 'events',
@@ -171,9 +176,27 @@
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: donutClusters<EventFeature>({
 				getKey: eventTypeOf,
-				colors: Object.fromEntries(
-					Object.keys(eventTypeColors).map((type) => [type, eventTypeRGB(type)])
-				),
+				colors: eventTypeColorsRGB,
+				order: Object.keys(eventTypeColors)
+			}),
+			renderPoints: circlePoints<EventFeature>({
+				getColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
+				minRadius: 5,
+				maxRadius: 12
+			})
+		});
+
+	const makeSplitLayer = (args: ClusterArgs) =>
+		new ClusterLayer({
+			id: 'events',
+			data: events,
+			clusterRadius: args.clusterRadius,
+			clusterMaxZoom: args.clusterMaxZoom,
+			pickable: true,
+			onHover: onMouseOverTooltipHandler,
+			renderClusters: splitClusters<EventFeature>({
+				getKey: eventTypeOf,
+				colors: eventTypeColorsRGB,
 				order: Object.keys(eventTypeColors)
 			}),
 			renderPoints: circlePoints<EventFeature>({
@@ -244,7 +267,31 @@ donut show the proportion of the events in that cluster with each `event_type`.
 				}}
 			>
 				<MapDeckOverlay {layers} />
-				<MapDeckTooltips {layers} spec={{ events: donutTooltipText }} />
+				<MapDeckTooltips {layers} spec={{ events: breakdownTooltipText }} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This example replaces the default `splitClusters()` renderer with `donutClusters()`.
+
+This splits each cluster into one circle per `event_type`.
+Each circle is sized by the number of events of that type, and labelled with that
+number. The circles are drawn by a `CanvasIconLayer`, with one icon per event type.
+ -->
+<Story name="Split clusters">
+	{#snippet template(args)}
+		{@const layers = [makeSplitLayer(args as ClusterArgs)]}
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+				<MapDeckTooltips {layers} spec={{ events: breakdownTooltipText }} />
 			</Map>
 		</div>
 	{/snippet}
