@@ -28,6 +28,15 @@ export type SplitClusterStyle<DataT> = {
 	/** Extra pixels between neighbouring circles. */
 	gap?: number;
 
+	/** If `true`, draw the ring on which each cluster's circles are placed. */
+	showRing?: boolean;
+
+	/** Color of the ring. */
+	ringColor?: Color;
+
+	/** Width of the ring, in pixels. */
+	ringWidth?: number;
+
 	showCount?: boolean;
 	textColor?: Color;
 	maxTextSize?: number;
@@ -40,6 +49,14 @@ export type SplitClusterStyle<DataT> = {
 
 	/** Triggers for the options above. Change `updateTriggers.paint` to redraw the circles. */
 	updateTriggers?: Record<string, unknown>;
+};
+
+/** The ring drawn behind a cluster's circles. */
+type Ring = {
+	position: [number, number];
+
+	/** Twice the radius of the ring, in pixels. */
+	diameter: number;
 };
 
 const FALLBACK: Color = [180, 180, 180, 255];
@@ -62,6 +79,9 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		strokeColor = [255, 255, 255, 255],
 		strokeWidth = 0.12,
 		gap = 2,
+		showRing = false,
+		ringColor = [120, 120, 120, 255],
+		ringWidth = 1.5,
 		showCount = true,
 		textColor = [255, 255, 255, 255],
 		maxTextSize = 14,
@@ -88,7 +108,22 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		}
 	};
 
+	// A ring is an icon drawn `diameter` pixels wide, with a circle touching the edges of the canvas.
+	// Icons are scaled to `size`, so the line is drawn thinner on the canvas for larger rings,
+	// to keep its on-screen width at `ringWidth`.
+	const paintRing = (ctx: CanvasRenderingContext2D, diameter: number) => {
+		const c = ctx.canvas.width / 2;
+		const lineWidth = (ringWidth * ctx.canvas.width) / diameter;
+		ctx.beginPath();
+		ctx.arc(c, c, c - lineWidth / 2, 0, Math.PI * 2);
+		ctx.lineWidth = lineWidth;
+		ctx.strokeStyle = rgba(ringColor);
+		ctx.stroke();
+	};
+
 	return (props) => {
+		const rings: Ring[] = [];
+
 		// Resolved once per render: getLeaves walks the supercluster index, which is far too
 		// expensive to do inside an accessor.
 		const rows = props.data.flatMap((f, i) => {
@@ -107,8 +142,14 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 			// and these circles just touch, then 2 r = 2*R*sin(pi/n), so R = r / sin(pi/n).
 			const widest = Math.max(...parts.map((p) => p.radius)) + gap / 2;
 			const spread = parts.length === 1 ? 0 : widest / Math.sin(Math.PI / parts.length);
+
 			// Two circles read best side by side; more than two fan from the top.
 			const phase = parts.length === 2 ? Math.PI : -Math.PI / 2;
+
+			if (showRing && spread > 0) {
+				// Rounded so that rings of similar sizes share an icon.
+				rings.push({ position, diameter: Math.round(2 * spread) });
+			}
 
 			return parts.map((p, j) => {
 				const angle = (j / parts.length) * Math.PI * 2 + phase;
@@ -134,7 +175,27 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 			...updateTriggers
 		};
 
-		const layers: LayersList = [
+		const layers: LayersList = [];
+
+		if (rings.length) {
+			layers.push(
+				new CanvasIconLayer<Ring>({
+					...props,
+					id: `${props.id}-split-rings`,
+					data: rings,
+					pickable: false,
+					iconSize,
+					getIconKey: (r) => String(r.diameter),
+					paint: (ctx, r) => paintRing(ctx, r.diameter),
+					getPosition: (r) => r.position,
+					sizeUnits: 'pixels',
+					getSize: (r) => r.diameter,
+					updateTriggers: triggers
+				})
+			);
+		}
+
+		layers.push(
 			new CanvasIconLayer<Row>({
 				...props,
 				id: `${props.id}-split`,
@@ -148,7 +209,7 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 				getSize: (r) => r.size,
 				updateTriggers: triggers
 			})
-		];
+		);
 
 		if (showCount) {
 			layers.push(

@@ -205,6 +205,28 @@
 				maxRadius: 12
 			})
 		});
+
+	const makeSplitLayerWithRing = (args: ClusterArgs) =>
+		new ClusterLayer({
+			id: 'events',
+			data: events,
+			clusterRadius: args.clusterRadius,
+			clusterMaxZoom: args.clusterMaxZoom,
+			pickable: true,
+			onHover: onMouseOverTooltipHandler,
+			renderClusters: splitClusters<EventFeature>({
+				getKey: eventTypeOf,
+				colors: eventTypeColorsRGB,
+				order: Object.keys(eventTypeColors),
+				showRing: true,
+				ringWidth: 3
+			}),
+			renderPoints: circlePoints<EventFeature>({
+				getColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
+				minRadius: 5,
+				maxRadius: 12
+			})
+		});
 </script>
 
 <!--
@@ -283,6 +305,27 @@ number. The circles are drawn by a `CanvasIconLayer`, with one icon per event ty
 <Story name="Split clusters">
 	{#snippet template(args)}
 		{@const layers = [makeSplitLayer(args as ClusterArgs)]}
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+				<MapDeckTooltips {layers} spec={{ events: breakdownTooltipText }} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- 
+This example also replaces the default `splitClusters()` renderer with `donutClusters()`.
+It changes the options, to also draw a ring to visually group the markers corresponding to the same cluster.
+-->
+<Story name="Split clusters - with ring">
+	{#snippet template(args)}
+		{@const layers = [makeSplitLayerWithRing(args as ClusterArgs)]}
 
 		<div class="h-[100dvh] w-[100dvw]">
 			<Map
