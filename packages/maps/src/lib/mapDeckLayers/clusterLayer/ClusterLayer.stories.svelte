@@ -53,9 +53,9 @@
 	import MapDeckTooltips from '../../mapDeckTooltips/MapDeckTooltips.svelte';
 	import { onMouseOverTooltipHandler } from '../../mapDeckTooltips/stores';
 	import { ClusterLayer } from './clusterLayer';
-	import { donutClusters } from './donutClusters';
-	import { circleClusters, circlePoints } from './renderers';
-	import { splitClusters } from './splitClusters';
+	import { circleClusters, circlePoints } from './renderers/defaultRenderers';
+	import { donutClusters } from './renderers/donutClusters';
+	import { splitClusters } from './renderers/splitClusters';
 	import type { ClusterPickingObject, PointPickingObject } from './types';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
