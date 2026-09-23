@@ -100,9 +100,11 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 
 			const position = props.getPosition(f);
 
-			// Place the circles on a ring wide enough that neighbours just touch. For n
-			// circles of radius r around a ring of radius R, neighbouring centres are
-			// 2*R*sin(pi/n) apart, so R = r / sin(pi/n) makes that 2r.
+			// Place the circles on a ring wide enough that neighbours would just touch,
+			// if all circles were the width of the widest circle.
+			// For n points arranged around a ring of radius R, neighbouring points are 2*R*sin(pi/n) apart.
+			// If each of these points is the center of a circle of radius r,
+			// and these circles just touch, then 2 r = 2*R*sin(pi/n), so R = r / sin(pi/n).
 			const widest = Math.max(...parts.map((p) => p.radius)) + gap / 2;
 			const spread = parts.length === 1 ? 0 : widest / Math.sin(Math.PI / parts.length);
 			// Two circles read best side by side; more than two fan from the top.
