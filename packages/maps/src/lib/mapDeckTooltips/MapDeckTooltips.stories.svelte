@@ -28,7 +28,7 @@
 	import { Checkbox, theme } from '@ldn-viz/ui';
 	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
 	import DemoTooltipComponent from './demo/DemoTooltipComponent.svelte';
-	import { onMouseOverTooltipHandler } from './stores';
+	import { closeTooltipOnLeave, onMouseOverTooltipHandler } from './stores';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
@@ -105,6 +105,9 @@
 	let visibilityLayers: Layer[] = $derived.by(() => [
 		getBoroughLayerWithVisibility(boroughLayerVisible)
 	]);
+
+	const l1 = [getBoroughLayer()];
+	const l2 = [getBoroughLayer()];
 </script>
 
 <!-- Here every feature in a layer is assigned the same string as a Tooltip. -->
@@ -155,6 +158,67 @@
 					}}
 				/>
 			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+As the map is zoomed-in, the curosr can move from a feature off the top of the
+map without triggering another deck.g `onHover` event.
+In the top map, the tooltip stays open; 
+in the second map `use:closeTooltipOnLeave` ensures that the tooltip closes
+when the cursor leaves the map.
+-->
+<Story name="Example - clsoing tooltips when cursor leaves map">
+	{#snippet template()}
+		<div class="flex flex-col gap-4">
+			<div class="h-32 w-[100dvw] bg-color-container-level-2"></div>
+
+			<div>
+				<div class="h-[100dvh] w-[100dvw]">
+					<Map
+						options={{
+							transformRequest: appendOSKeyToUrl(OS_KEY),
+							zoom: 14,
+							center: [-0.141944, 51.500833],
+							bounds: undefined
+						}}
+					>
+						<MapDeckOverlay layers={l1} />
+
+						<MapDeckTooltips
+							layers={l1}
+							spec={{
+								boroughLayer: (feature) => feature?.properties?.name
+							}}
+						/>
+					</Map>
+				</div>
+			</div>
+
+			<div>
+				<div class="h-32 w-[100dvw] bg-color-container-level-2"></div>
+
+				<div class="h-[100dvh] w-[100dvw]" use:closeTooltipOnLeave>
+					<Map
+						options={{
+							transformRequest: appendOSKeyToUrl(OS_KEY),
+							zoom: 14,
+							center: [-0.141944, 51.500833],
+							bounds: undefined
+						}}
+					>
+						<MapDeckOverlay layers={l2} />
+
+						<MapDeckTooltips
+							layers={l2}
+							spec={{
+								boroughLayer: (feature) => feature?.properties?.name
+							}}
+						/>
+					</Map>
+				</div>
+			</div>
 		</div>
 	{/snippet}
 </Story>
