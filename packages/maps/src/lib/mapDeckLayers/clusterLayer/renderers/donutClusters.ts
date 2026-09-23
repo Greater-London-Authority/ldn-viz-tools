@@ -1,10 +1,10 @@
 import type { Color, LayersList } from '@deck.gl/core';
 import { TextLayer } from '@deck.gl/layers';
 import type { AnyProps, ClusterFeature } from 'supercluster';
-import { CanvasIconLayer, ICON_PX, rgba } from '../canvasIconLayer/canvasIconLayer';
+import { CanvasIconLayer, ICON_PX, rgba } from '../../canvasIconLayer/canvasIconLayer';
+import type { ClusterRenderer } from '../types';
 import { tallyBy } from './clusterRows';
-import { clusterRadiusRamp } from './renderers';
-import type { ClusterRenderer } from './types';
+import { clusterRadiusRamp } from './defaultRenderers';
 
 export type DonutClusterStyle<DataT> = {
 	/** The category each point is counted under, e.g. `(d) => d.properties.event_type`. */

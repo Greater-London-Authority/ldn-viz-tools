@@ -1,7 +1,7 @@
 import type { Color } from '@deck.gl/core';
 import { ScatterplotLayer, TextLayer } from '@deck.gl/layers';
 import type { AnyProps, ClusterFeature, PointFeature } from 'supercluster';
-import type { ClusterRenderer, PointRenderer } from './types';
+import type { ClusterRenderer, PointRenderer } from '../types';
 
 /** Area scales with count, so radius scales with sqrt(count). */
 export const clusterRadiusRamp =

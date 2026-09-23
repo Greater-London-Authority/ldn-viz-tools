@@ -8,7 +8,7 @@ import type {
 	UpdateParameters
 } from '@deck.gl/core';
 import Supercluster, { type AnyProps, type ClusterFeature, type PointFeature } from 'supercluster';
-import { circleClusters, circlePoints } from './renderers';
+import { circleClusters, circlePoints } from './renderers/defaultRenderers';
 import type {
 	ClusterLayerOwnProps,
 	ClusterLayerProps,

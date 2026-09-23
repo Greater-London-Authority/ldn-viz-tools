@@ -2,10 +2,10 @@ import type { Color, LayersList } from '@deck.gl/core';
 import { TextLayer } from '@deck.gl/layers';
 import type { AnyProps } from 'supercluster';
 
-import { CanvasIconLayer, ICON_PX, rgba } from '../canvasIconLayer/canvasIconLayer';
+import { CanvasIconLayer, ICON_PX, rgba } from '../../canvasIconLayer/canvasIconLayer';
+import type { ClusterRenderer } from '../types';
 import { tallyBy } from './clusterRows';
-import { clusterRadiusRamp } from './renderers';
-import type { ClusterRenderer } from './types';
+import { clusterRadiusRamp } from './defaultRenderers';
 
 export type SplitClusterStyle<DataT> = {
 	/** The category each cluster is split on, e.g. `(d) => d.properties.event_type`. */
