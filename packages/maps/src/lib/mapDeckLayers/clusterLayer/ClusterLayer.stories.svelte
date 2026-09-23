@@ -152,11 +152,11 @@
 </Story>
 
 <!--
-This example still uses the default  `circleClusters()` and `circlePoints()` rednerer functions, 
-but provides options to change their appearance.
+This example still uses the default  `circleClusters()` and `circlePoints()`
+renderer functions, but provides options to change their appearance.
 
-Here clusters have a different colour, and the color of each point is now determined by its
- `event_type` using a `getColor` function.
+Here clusters have a different colour, and the color of each point is now
+determined by its `event_type` using a `getColor` function.
  -->
 <Story name="Custom styling">
 	{#snippet template(args)}

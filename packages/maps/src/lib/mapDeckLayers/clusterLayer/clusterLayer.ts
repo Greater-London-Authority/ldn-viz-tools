@@ -83,7 +83,8 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 	}
 
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {
-		// Building the index is the expensive part and only depends on the data and some props (not on the viewport)
+		// Building the index is the expensive part and is onyl necessary if
+		// there are changes to the data or some props (not on the viewport)
 		const rebuildIndex =
 			changeFlags.dataChanged ||
 			props.clusterRadius !== oldProps.clusterRadius ||
