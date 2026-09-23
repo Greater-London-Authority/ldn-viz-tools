@@ -52,6 +52,7 @@ export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelt
 
 export * from './mapDeckLayers/canvasIconLayer/canvasIconLayer';
 export * from './mapDeckLayers/clusterLayer/index';
+export * from './mapDeckLayers/nonOverlappingLayer/nonOverlappingGlyphLayer';
 
 // Drawing
 export { default as MapDraw } from './mapDraw/MapDraw.svelte';
