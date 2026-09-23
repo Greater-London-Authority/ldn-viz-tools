@@ -53,6 +53,7 @@
 	import MapDeckTooltips from '../../mapDeckTooltips/MapDeckTooltips.svelte';
 	import { onMouseOverTooltipHandler } from '../../mapDeckTooltips/stores';
 	import { ClusterLayer } from './clusterLayer';
+	import { donutClusters } from './donutClusters';
 	import { circleClusters, circlePoints } from './renderers';
 	import type { ClusterPickingObject, PointPickingObject } from './types';
 
@@ -88,6 +89,9 @@
 			? `${object.pointCount} events`
 			: `${object.point.properties?.event_name} (${object.point.properties?.borough})`;
 
+	/**************************************************************************/
+	// For default example
+
 	const makeDefaultLayer = (args: ClusterArgs) =>
 		new ClusterLayer({
 			id: 'events',
@@ -98,6 +102,8 @@
 			onHover: onMouseOverTooltipHandler
 		});
 
+	/**************************************************************************/
+	// For example of customizing default renderers
 	const eventTypeColors: Record<string, string> = {
 		'general community': 'data.categorical.blue',
 		'arts & culture': 'data.categorical.darkpink',
@@ -129,6 +135,53 @@
 				maxRadius: 12
 			})
 		});
+
+	/**************************************************************************/
+	// For example of using a custom renderer (donut renderer)
+	const eventTypeOf = (d: EventFeature) => String(d.properties?.event_type).toLowerCase();
+
+	const eventTypeRGB = (eventType: string) =>
+		theme.colorTokenNameToRGBArray(eventTypeColors[eventType] ?? 'data.primary') as [
+			number,
+			number,
+			number
+		];
+
+	const donutTooltipText = (
+		object: ClusterPickingObject<EventFeature> | PointPickingObject<EventFeature>
+	) => {
+		if (!object.isCluster) return tooltipText(object);
+
+		const counts: Record<string, number> = {};
+		for (const p of object.points) counts[eventTypeOf(p)] = (counts[eventTypeOf(p)] ?? 0) + 1;
+		const breakdown = Object.entries(counts)
+			.sort(([, a], [, b]) => b - a)
+			.map(([type, n]) => `${n} ${type}`)
+			.join(', ');
+		return `${object.pointCount} events: ${breakdown}`;
+	};
+
+	const makeDonutLayer = (args: ClusterArgs) =>
+		new ClusterLayer({
+			id: 'events',
+			data: events,
+			clusterRadius: args.clusterRadius,
+			clusterMaxZoom: args.clusterMaxZoom,
+			pickable: true,
+			onHover: onMouseOverTooltipHandler,
+			renderClusters: donutClusters<EventFeature>({
+				getKey: eventTypeOf,
+				colors: Object.fromEntries(
+					Object.keys(eventTypeColors).map((type) => [type, eventTypeRGB(type)])
+				),
+				order: Object.keys(eventTypeColors)
+			}),
+			renderPoints: circlePoints<EventFeature>({
+				getColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
+				minRadius: 5,
+				maxRadius: 12
+			})
+		});
 </script>
 
 <!--
@@ -152,7 +205,7 @@
 </Story>
 
 <!--
-This example still uses the default  `circleClusters()` and `circlePoints()`
+This example still uses the default `circleClusters()` and `circlePoints()`
 renderer functions, but provides options to change their appearance.
 
 Here clusters have a different colour, and the color of each point is now
@@ -170,6 +223,28 @@ determined by its `event_type` using a `getColor` function.
 			>
 				<MapDeckOverlay {layers} />
 				<MapDeckTooltips {layers} spec={{ events: tooltipText }} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This example replaces the default `circleClusters()` renderer with `donutClusters()`.
+This draws each cluster as a donut using a `CanvasIconLayer`. The segments of each
+donut show the proportion of the events in that cluster with each `event_type`.
+ -->
+<Story name="Donut clusters">
+	{#snippet template(args)}
+		{@const layers = [makeDonutLayer(args as ClusterArgs)]}
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+				<MapDeckTooltips {layers} spec={{ events: donutTooltipText }} />
 			</Map>
 		</div>
 	{/snippet}
