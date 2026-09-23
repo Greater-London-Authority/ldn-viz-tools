@@ -50,6 +50,7 @@ export { default as BoroughsContextLayer } from './mapContextLayers/boroughsCont
 // Deck.gl
 export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelte';
 
+export * from './mapDeckLayers/canvasIconLayer/canvasIconLayer';
 export * from './mapDeckLayers/clusterLayer/index';
 
 // Drawing

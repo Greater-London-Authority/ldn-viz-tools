@@ -3,3 +3,4 @@
 ---
 
 ADDED: cluster layer
+ADDED: CanvasIconLayer
