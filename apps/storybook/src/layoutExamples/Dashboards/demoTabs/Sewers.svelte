@@ -1,11 +1,13 @@
 <script>
+	import {
+		CheckboxGroup,
+		Overlay,
+		SidebarGroup,
+		SidebarGroupTitle,
+		SidebarSection,
+		theme
+	} from '@ldn-viz/ui';
 	import { writable } from 'svelte/store';
-	import CheckboxGroup from '../../../checkBox/CheckboxGroup.svelte';
-	import Overlay from '../../../overlay/Overlay.svelte';
-	import SidebarGroup from '../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
-	import SidebarGroupTitle from '../../../sidebar/elements/sidebarSection/sidebarGroupTitle/SidebarGroupTitle.svelte';
-	import SidebarSection from '../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import { theme } from '../../../theme/themeState.svelte';
 
 	const selectedSewerLayer = writable(['sewer-combined']);
 	const selectedSewerOverflowLayer = writable(['sewer_overflows_48hrs_yes']);

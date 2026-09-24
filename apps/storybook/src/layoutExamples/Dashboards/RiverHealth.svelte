@@ -3,21 +3,24 @@
 	import { Map, appendOSKeyToUrl } from '@ldn-viz/maps';
 	import { Table } from '@ldn-viz/tables';
 
-	import AppShell from '../../appShell/AppShell.svelte';
-	import Breadcrumbs from '../../breadcrumbs/Breadcrumbs.svelte';
-	import Card from '../../card/Card.svelte';
-	import Footer from '../../footer/Footer.svelte';
-	import Header from '../../header/Header.svelte';
-	import HeaderItem from '../../header/HeaderItem.svelte';
-	import HeaderRight from '../../header/HeaderRight.svelte';
-	import HeaderTitle from '../../header/HeaderTitle.svelte';
-	import LogoCIU from '../../logos/LogoCIU.svelte';
-	import LogoMayor from '../../logos/LogoMayor.svelte';
-	import NavigationMenu from '../../navigationMenu/NavigationMenu.svelte';
-	import Sidebar from '../../sidebar/Sidebar.svelte';
-	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
-	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
+	import {
+		AppShell,
+		Breadcrumbs,
+		Card,
+		Footer,
+		Header,
+		HeaderItem,
+		HeaderRight,
+		HeaderTitle,
+		LogoCIU,
+		LogoMayor,
+		NavigationMenu,
+		Sidebar,
+		SidebarFooter,
+		SidebarHeader,
+		ThemeSwitcher
+	} from '@ldn-viz/ui';
+
 	import { Demo1 } from './demoTabs';
 
 	// Public OS demo key used across the Map stories.

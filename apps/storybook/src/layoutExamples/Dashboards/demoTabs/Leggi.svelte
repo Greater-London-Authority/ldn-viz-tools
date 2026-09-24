@@ -1,11 +1,12 @@
 <script lang="ts">
-	import Button from '../../../button/Button.svelte';
-	import InputWrapper from '../../../input/InputWrapper.svelte';
-	import Select from '../../../select/Select.svelte';
-	import SidebarGroup from '../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
-	import SidebarSection from '../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import SidebarSectionTitle from '../../../sidebar/elements/sidebarSection/sidebarSectionTitle/SidebarSectionTitle.svelte';
-
+	import {
+		Button,
+		InputWrapper,
+		Select,
+		SidebarGroup,
+		SidebarSection,
+		SidebarSectionTitle
+	} from '@ldn-viz/ui';
 	type Item = { label: string; value: number };
 
 	/* Borough Items */

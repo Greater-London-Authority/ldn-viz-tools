@@ -1,15 +1,17 @@
 <script lang="ts">
+	import {
+		AppShell,
+		CookieControlSettings,
+		LogoCIU,
+		LogoMayor,
+		PrivacyPolicyLink,
+		Sidebar,
+		SidebarFooter,
+		SidebarHeader,
+		ThemeSwitcher
+	} from '@ldn-viz/ui';
 	import { ArrowDownTray, ChartBar, Funnel } from '@steeze-ui/heroicons';
-	import AppShell from '../../appShell/AppShell.svelte';
-	import LogoCIU from '../../logos/LogoCIU.svelte';
-	import LogoMayor from '../../logos/LogoMayor.svelte';
-	import Sidebar from '../../sidebar/Sidebar.svelte';
-	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
-	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 
-	import CookieControlSettings from '../../analytics/CookieControlSettings.svelte';
-	import PrivacyPolicyLink from '../../analytics/PrivacyPolicyLink.svelte';
 	import { Demo1, Leggi, Sewers } from './demoTabs';
 
 	const tabs = [
