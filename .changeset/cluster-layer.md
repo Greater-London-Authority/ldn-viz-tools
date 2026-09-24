@@ -2,5 +2,6 @@
 '@ldn-viz/maps': minor
 ---
 
-ADDED: cluster layer
-ADDED: CanvasIconLayer
+ADDED: `CanvasIconLayer`
+ADDED: `ClusterLayer`
+ADDED: `MultiClusterLayer`
