@@ -1,5 +1,4 @@
-import geojsonRbush from '@turf/geojson-rbush';
-import type { Point } from 'geojson';
+import KDBush from 'kdbush';
 /*
 This uses a heuristic that iteratively identifies markers that overlap other markers, and simultaneously moves all such markers away from the markers that they overlap with.
 
@@ -80,29 +79,24 @@ const initializeOverlaps = (
 	possiblyFutureOverlappingNeighbours: { [x: string]: RepositionNode[][] },
 	numIterations: number
 ) => {
-	const tree = geojsonRbush<Point, { id: string | number; originalObj: RepositionNode }>();
-
-	tree.load(
-		data.map((d) => ({
-			type: 'Feature' as const,
-			properties: { id: d.id, originalObj: d },
-			geometry: { type: 'Point' as const, coordinates: [d.x, d.y] }
-		}))
-	);
+	const index = new KDBush(data.length);
+	for (const d of data) {
+		index.add(d.x, d.y);
+	}
+	index.finish();
 
 	const maxRadius = Math.max(0, ...data.map((d) => d.radius));
 
 	for (const point of data) {
-		// Indexed points are centres with no footprint, so the query box must reach far enough to
+		// Indexed points are centres with no footprint, so the query radius must reach far enough to
 		// include the centre of the largest possible neighbour that could touch this point, after
 		// both have moved towards each other on every iteration.
 		const margin = point.radius + maxRadius + numIterations * (stepSizeOf(point) + maxRadius / 2);
 
-		// N.B. could instead store just a list of ids here
-		const pp = tree
-			.search([point.x - margin, point.y - margin, point.x + margin, point.y + margin])
-			.features.filter((f) => f.properties.id !== point.id)
-			.map((f) => f.properties.originalObj);
+		const pp = index
+			.within(point.x, point.y, margin)
+			.map((i) => data[i])
+			.filter((p) => p.id !== point.id);
 
 		overlappingNeighbours[point.id] = [];
 		possiblyFutureOverlappingNeighbours[point.id] = [];

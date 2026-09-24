@@ -50,6 +50,7 @@
 		"@ldn-viz/utils": "*",
 		"@turf/centroid": "^7.1.0",
 		"@turf/turf": "^7.4.0",
+		"kdbush": "^4.0.2",
 		"maplibre-gl": "^4.1.0",
 		"supercluster": "^8.0.1",
 		"svelte-floating-ui": "1.6.2",
