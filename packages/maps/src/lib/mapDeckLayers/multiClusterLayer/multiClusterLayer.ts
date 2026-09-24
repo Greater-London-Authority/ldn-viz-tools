@@ -14,6 +14,7 @@ import {
 } from '../clusterLayer/renderers/defaultRenderers';
 import type { ClusterRenderProps, PointRenderProps } from '../clusterLayer/types';
 import {
+	MIN_ZOOM_STEP,
 	NonOverlappingGlyphLayer,
 	type GlyphRenderProps,
 	type NonOverlappingRow
@@ -56,6 +57,7 @@ export type MultiClusterLayerOwnProps<DataT = any> = {
 	 * The zoom interval at which the non-overlapping layout is re-computed. For example, `0.5`
 	 * re-computes it as the zoom level crosses 12, 12.5, 13, 13.5, ...
 	 * Clusters themselves are only re-computed at integer zoom levels.
+	 * Values below `MIN_ZOOM_STEP` (0.01) are treated as `MIN_ZOOM_STEP`.
 	 */
 	zoomStep?: number;
 
@@ -110,7 +112,7 @@ const defaultProps: DefaultProps<MultiClusterLayerProps> = {
 	},
 	clusterRadius: { type: 'number', value: 60, min: 1 },
 	clusterMaxZoom: { type: 'number', value: 16, min: 0 },
-	zoomStep: { type: 'number', value: 1, min: 0 },
+	zoomStep: { type: 'number', value: 1, min: MIN_ZOOM_STEP },
 	maxIterations: { type: 'number', value: 40, min: 0 }
 };
 

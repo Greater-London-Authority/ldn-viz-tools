@@ -84,6 +84,7 @@ export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
 	 * With `radiusUnits: 'pixels'`, the zoom interval at which positions are re-computed.
 	 * For example, `0.5` re-computes them as the zoom level crosses 12, 12.5, 13, 13.5, ...
 	 * Smaller steps keep glyphs closer together, at the cost of re-computing more often.
+	 * Values below `MIN_ZOOM_STEP` (0.01) are treated as `MIN_ZOOM_STEP`.
 	 */
 	zoomStep?: number;
 
@@ -113,6 +114,11 @@ export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
 export type NonOverlappingGlyphLayerProps<DataT = any> = NonOverlappingGlyphLayerOwnProps<DataT> &
 	CompositeLayerProps;
 
+/**
+ * The smallest `zoomStep` that is used (this is to avoid division-by-zero errors).
+ */
+export const MIN_ZOOM_STEP = 0.01;
+
 const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
 	data: { type: 'array', value: [], compare: 1 },
 
@@ -126,7 +132,7 @@ const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
 
 	getGlyphRadius: { type: 'accessor', value: 10 },
 	radiusUnits: 'meters',
-	zoomStep: { type: 'number', value: 1, min: 0 },
+	zoomStep: { type: 'number', value: 1, min: MIN_ZOOM_STEP },
 	maxIterations: { type: 'number', value: 40, min: 0 },
 
 	showLeaderLines: true,
@@ -216,7 +222,8 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 		const { viewport } = this.context;
 		const inPixels = props.radiusUnits === 'pixels';
 
-		const zoom = Math.floor(viewport.zoom / props.zoomStep) * props.zoomStep;
+		const zoomStep = Math.max(props.zoomStep, MIN_ZOOM_STEP);
+		const zoom = Math.floor(viewport.zoom / zoomStep) * zoomStep;
 
 		// As for deck's own accessors, a change to a function-valued `getGlyphRadius` is only noticed
 		// via updateTriggers; a change to a constant is noticed directly.
