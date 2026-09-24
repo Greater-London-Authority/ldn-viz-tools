@@ -184,7 +184,6 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 
 	declare state: {
 		rows: NonOverlappingRow<DataT>[];
-		haveAdjustedPositions: boolean;
 		/** Zoom level (a multiple of `zoomStep`) the current positions were computed for. */
 		zoom: number;
 	};
@@ -214,11 +213,6 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 	}
 
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {
-		if (changeFlags.dataChanged === 'init') {
-			// skip - we'll get called again in a moment for a viewport change
-			return;
-		}
-
 		const { viewport } = this.context;
 		const inPixels = props.radiusUnits === 'pixels';
 
@@ -240,7 +234,6 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 			props.radiusUnits !== oldProps.radiusUnits ||
 			props.zoomStep !== oldProps.zoomStep ||
 			props.maxIterations !== oldProps.maxIterations ||
-			(changeFlags.viewportChanged && !this.state.haveAdjustedPositions) ||
 			(inPixels && zoom !== this.state.zoom);
 
 		if (!shouldUpdate) return;
@@ -259,7 +252,7 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 			props.maxIterations
 		);
 
-		this.setState({ rows, haveAdjustedPositions: true, zoom });
+		this.setState({ rows, zoom });
 	}
 
 	renderLayers() {
