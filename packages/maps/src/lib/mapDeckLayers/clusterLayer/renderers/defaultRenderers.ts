@@ -34,6 +34,12 @@ export type CircleClusterStyle = {
 	minRadius?: number;
 	maxRadius?: number;
 	radiusScale?: number;
+
+	/**
+	 * Triggers for the layers' accessors, keyed by deck accessor name (e.g. `getRadius`), and
+	 * merged into the layers' own.
+	 */
+	updateTriggers?: Record<string, unknown>;
 };
 
 /**
@@ -51,7 +57,8 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 		maxTextSize = 18,
 		minRadius,
 		maxRadius,
-		radiusScale
+		radiusScale,
+		updateTriggers
 	} = style;
 
 	const radiusOf = clusterRadiusRamp({ minRadius, maxRadius, radiusScale });
@@ -68,7 +75,8 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 			getLineColor: strokeColor,
 			getLineWidth: strokeWidth,
 			updateTriggers: {
-				...props.updateTriggers
+				...props.updateTriggers,
+				...updateTriggers
 			}
 		}),
 
@@ -88,7 +96,8 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 			characterSet: '0123456789.k',
 			updateTriggers: {
 				...props.updateTriggers,
-				getSize: [props.zoom]
+				...updateTriggers,
+				getSize: [props.zoom, updateTriggers?.getRadius, updateTriggers?.getSize]
 			}
 		})
 	];
