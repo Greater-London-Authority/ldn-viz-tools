@@ -118,7 +118,12 @@
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: circleClusters({
 				color: theme.colorTokenNameToRGBArray('data.secondary') as [number, number, number],
-				strokeColor: [255, 255, 255, 180],
+				strokeColor: [...theme.colorTokenNameToRGBArray('geo.inverse.feature.default'), 180] as [
+					number,
+					number,
+					number,
+					number
+				],
 				strokeWidth: 3,
 				minRadius: 12,
 				radiusScale: 4

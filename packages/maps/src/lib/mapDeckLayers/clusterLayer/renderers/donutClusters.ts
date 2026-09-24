@@ -2,6 +2,7 @@ import type { Color, LayersList } from '@deck.gl/core';
 import { TextLayer } from '@deck.gl/layers';
 import type { AnyProps, ClusterFeature } from 'supercluster';
 import { CanvasIconLayer, ICON_PX, rgba } from '../../canvasIconLayer/canvasIconLayer';
+import { tokenColor } from '../../tokenColor';
 import type { ClusterRenderer } from '../types';
 import { tallyBy } from './clusterRows';
 import { clusterRadiusRamp } from './defaultRenderers';
@@ -44,8 +45,6 @@ export type DonutClusterStyle<DataT> = {
 
 type Slice = { key: string; count: number };
 
-const FALLBACK: Color = [180, 180, 180, 255];
-
 /**
  * Renders clusters as donuts, whose segments show the proportion of the cluster's points in each
  * category returned by `getKey`, using a `CanvasIconLayer`. A `TextLayer` renders the number of
@@ -62,10 +61,10 @@ export const donutClusters = <DataT extends AnyProps = AnyProps>(
 		colors,
 		order,
 		ringWidth = 0.4,
-		holeColor = [255, 255, 255, 230],
-		strokeColor = [255, 255, 255, 255],
+		holeColor = tokenColor('geo.inverse.feature.default', 230),
+		strokeColor = tokenColor('geo.inverse.feature.default'),
 		showCount = true,
-		textColor = [60, 60, 60, 255],
+		textColor = tokenColor('geo.label.default'),
 		maxTextSize = 16,
 		minRadius = 12,
 		maxRadius = 48,
@@ -74,6 +73,7 @@ export const donutClusters = <DataT extends AnyProps = AnyProps>(
 		updateTriggers
 	} = style;
 
+	const fallbackColor = tokenColor('data.neutral.0');
 	const radiusOf = clusterRadiusRamp({ minRadius, maxRadius, radiusScale });
 
 	const paintDonut = (ctx: CanvasRenderingContext2D, slices: Slice[]) => {
@@ -96,7 +96,7 @@ export const donutClusters = <DataT extends AnyProps = AnyProps>(
 			ctx.arc(c, c, outer, angle, end);
 			ctx.arc(c, c, inner, end, angle, true);
 			ctx.closePath();
-			ctx.fillStyle = rgba(colors[key] ?? FALLBACK);
+			ctx.fillStyle = rgba(colors[key] ?? fallbackColor);
 			ctx.fill();
 			if (slices.length > 1) {
 				ctx.lineWidth = size / 64;

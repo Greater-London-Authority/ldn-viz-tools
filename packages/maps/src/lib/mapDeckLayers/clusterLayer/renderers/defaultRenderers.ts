@@ -1,6 +1,7 @@
 import type { Color } from '@deck.gl/core';
 import { ScatterplotLayer, TextLayer } from '@deck.gl/layers';
 import type { AnyProps, ClusterFeature, PointFeature } from 'supercluster';
+import { tokenColor } from '../../tokenColor';
 import type { ClusterRenderer, PointRenderer } from '../types';
 
 /** Area scales with count, so radius scales with sqrt(count). */
@@ -50,10 +51,10 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 	style: CircleClusterStyle = {}
 ): ClusterRenderer<DataT> {
 	const {
-		color = [0, 92, 176],
-		strokeColor = [255, 255, 255, 100],
+		color = tokenColor('data.primary'),
+		strokeColor = tokenColor('geo.inverse.feature.default', 100),
 		strokeWidth = 5,
-		textColor = [255, 255, 255],
+		textColor = tokenColor('inverse.text.default'),
 		maxTextSize = 18,
 		minRadius,
 		maxRadius,
@@ -135,8 +136,8 @@ export function circlePoints<DataT extends AnyProps = AnyProps>(
 	style: CirclePointStyle<DataT> = {}
 ): PointRenderer<DataT> {
 	const {
-		getColor = [214, 66, 66] as Color,
-		strokeColor = [255, 255, 255, 100],
+		getColor = tokenColor('data.secondary'),
+		strokeColor = tokenColor('geo.inverse.feature.default', 100),
 		strokeWidth = 1.5,
 		minRadius,
 		maxRadius,

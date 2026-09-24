@@ -14,6 +14,7 @@ import {
 } from '../clusterLayer/renderers/defaultRenderers';
 import type { ClusterRenderProps, PointRenderProps } from '../clusterLayer/types';
 import { toDataArray, type LayerDataInput } from '../layerData';
+import { tokenColor } from '../tokenColor';
 import {
 	MIN_ZOOM_STEP,
 	NonOverlappingGlyphLayer,
@@ -87,7 +88,7 @@ export type MultiClusterLayerOwnProps<DataT = any> = {
 	/** If `true`, then draw a line from each moved glyph back to its original position. */
 	showLeaderLines?: boolean;
 
-	/** Color of the leader line. */
+	/** Color of the leader line. Defaults to the `geo.annotation.muted` token. */
 	leaderLineColor?: Color;
 
 	/** Width of the leader line, in pixels. */
@@ -109,18 +110,14 @@ export type MultiClusterLayerProps<DataT = any> = MultiClusterLayerOwnProps<Data
 // (85 degrees north or south).
 const WORLD_BOUNDS: [number, number, number, number] = [-180, -85, 180, 85];
 
-const DEFAULT_COLOR: Color = [128, 128, 128];
-
 // Shared by the renderers and by the radius calculations used to space the glyphs apart
 const CLUSTER_STYLE: CircleClusterStyle = {
 	minRadius: 8,
 	maxRadius: 20,
 	radiusScale: 1.5,
-	strokeColor: [255, 255, 255],
 	strokeWidth: 1.5
 };
 const POINT_STYLE: CirclePointStyle<AnyProps> = {
-	strokeColor: [255, 255, 255],
 	strokeWidth: 1.5
 };
 
@@ -144,7 +141,8 @@ const defaultProps: DefaultProps<MultiClusterLayerProps> = {
 	maxIterations: { type: 'number', value: 40, min: 0 },
 
 	showLeaderLines: true,
-	leaderLineColor: { type: 'color', value: [128, 128, 128] },
+	// Resolved from the theme by NonOverlappingGlyphLayer when not set
+	leaderLineColor: { type: 'color', value: null, optional: true },
 	leaderLineWidth: { type: 'number', value: 1, min: 0 },
 	leaderLineEndRadius: { type: 'number', value: 2, min: 0 }
 };
@@ -177,8 +175,15 @@ const renderGlyphs =
 		// the glyph), and the circle renderers do not derive rows of their own.
 		const makeRow = <R extends object>(row: R) => row;
 
+		const defaultColor = tokenColor('data.neutral.1');
+		const strokeColor = tokenColor('geo.inverse.feature.default');
+
 		const clusterLayers = Object.entries(clusterRows).map(([key, rows]) =>
-			circleClusters<DataT & AnyProps>({ ...CLUSTER_STYLE, color: colors[key] ?? DEFAULT_COLOR })({
+			circleClusters<DataT & AnyProps>({
+				...CLUSTER_STYLE,
+				color: colors[key] ?? defaultColor,
+				strokeColor
+			})({
 				...props,
 				id: `${props.id}-clusters-${key}`,
 				data: rows,
@@ -192,7 +197,8 @@ const renderGlyphs =
 
 		const pointLayer = circlePoints<DataT & AnyProps>({
 			...POINT_STYLE,
-			getColor: (d) => colors[getKey(d)] ?? DEFAULT_COLOR,
+			strokeColor,
+			getColor: (d) => colors[getKey(d)] ?? defaultColor,
 			updateTriggers: { getColor: colors }
 		})({
 			...props,

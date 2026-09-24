@@ -3,6 +3,7 @@ import { TextLayer } from '@deck.gl/layers';
 import type { AnyProps } from 'supercluster';
 
 import { CanvasIconLayer, ICON_PX, rgba } from '../../canvasIconLayer/canvasIconLayer';
+import { tokenColor } from '../../tokenColor';
 import type { ClusterRenderer } from '../types';
 import { tallyBy } from './clusterRows';
 import { clusterRadiusRamp } from './defaultRenderers';
@@ -59,8 +60,6 @@ type Ring = {
 	diameter: number;
 };
 
-const FALLBACK: Color = [180, 180, 180, 255];
-
 /**
  * Splits each cluster into one circle per category returned by `getKey`, each sized by its own
  * count and fanned out around the cluster centre. The circles are drawn by a `CanvasIconLayer`,
@@ -77,14 +76,14 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		getKey,
 		colors,
 		order,
-		strokeColor = [255, 255, 255, 255],
+		strokeColor = tokenColor('geo.inverse.feature.default'),
 		strokeWidth = 0.12,
 		gap = 2,
 		showRing = false,
-		ringColor = [120, 120, 120, 255],
+		ringColor = tokenColor('geo.feature.default'),
 		ringWidth = 1.5,
 		showCount = true,
-		textColor = [255, 255, 255, 255],
+		textColor = tokenColor('inverse.text.default'),
 		maxTextSize = 14,
 		minRadius,
 		maxRadius,
@@ -93,6 +92,7 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		updateTriggers
 	} = style;
 
+	const fallbackColor = tokenColor('data.neutral.0');
 	const radiusOf = clusterRadiusRamp({ minRadius, maxRadius, radiusScale });
 
 	const paintDisc = (ctx: CanvasRenderingContext2D, key: string) => {
@@ -100,7 +100,7 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		const lineWidth = c * strokeWidth;
 		ctx.beginPath();
 		ctx.arc(c, c, c - lineWidth / 2, 0, Math.PI * 2);
-		ctx.fillStyle = rgba(colors[key] ?? FALLBACK);
+		ctx.fillStyle = rgba(colors[key] ?? fallbackColor);
 		ctx.fill();
 		if (lineWidth > 0) {
 			ctx.lineWidth = lineWidth;

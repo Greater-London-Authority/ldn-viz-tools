@@ -12,6 +12,7 @@ import { LineLayer, ScatterplotLayer } from '@deck.gl/layers';
 import type { Feature, Point, Position } from 'geojson';
 
 import { toDataArray, type LayerDataInput } from '../layerData';
+import { tokenColor } from '../tokenColor';
 import { reposition } from './movePoints';
 
 /** One row per feature, carrying both its original and its shifted position. */
@@ -103,7 +104,7 @@ export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
 	/** If `true`, then draw a line from each moved glyph back to its original position. */
 	showLeaderLines?: boolean;
 
-	/** Color of the leader line.  */
+	/** Color of the leader line. Defaults to the `geo.annotation.muted` token. */
 	leaderLineColor?: Color;
 
 	/** Width of the leader line, in pixels. */
@@ -141,7 +142,8 @@ const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
 	maxIterations: { type: 'number', value: 40, min: 0 },
 
 	showLeaderLines: true,
-	leaderLineColor: { type: 'color', value: [128, 128, 128] },
+	// Resolved from the theme in renderLayers when not set
+	leaderLineColor: { type: 'color', value: null, optional: true },
 	leaderLineWidth: { type: 'number', value: 1, min: 0 },
 	leaderLineEndRadius: { type: 'number', value: 1.5, min: 0 }
 };
@@ -288,6 +290,8 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 			leaderLineEndRadius
 		} = this.props;
 
+		const lineColor = leaderLineColor ?? tokenColor('geo.annotation.muted');
+
 		// Wrapping each row means picking resolves back to the original datum.
 		const glyphRows = rows.map((row, i) => this.getSubLayerRow(row, row.datum, i));
 		const movedRows = glyphRows.filter((row) => row.hasMoved);
@@ -302,7 +306,7 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 						getWidth: leaderLineWidth,
 						getSourcePosition: (row: NonOverlappingRow<DataT>) => row.shiftedPosition,
 						getTargetPosition: (row: NonOverlappingRow<DataT>) => row.originalPosition,
-						getColor: leaderLineColor
+						getColor: lineColor
 					})
 				),
 
@@ -315,7 +319,7 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 						radiusUnits,
 						getRadius: leaderLineEndRadius,
 						getPosition: (row: NonOverlappingRow<DataT>) => row.originalPosition,
-						getFillColor: leaderLineColor
+						getFillColor: lineColor
 					})
 				),
 
