@@ -28,11 +28,6 @@ const stepSizeOf = (point: RepositionNode) => point.radius / 2;
 // so that floating point error does not leave them overlapping
 const OVERLAP_MARGIN = 0.01;
 
-// treats markers as circles
-const circlesAreTouching = (a: RepositionNode, b: RepositionNode) => {
-	return Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) <= Math.pow(a.radius + b.radius, 2);
-};
-
 const JITTER_DISTANCE = 0.0000001;
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 const jitterPositions = (data: RepositionNode[]) => {
@@ -70,7 +65,8 @@ const classifyNeighbour = (
 	} else {
 		// the gap between the two can close by at most the sum of their step sizes per iteration
 		let earliest = Math.ceil((distance - minDistance) / (stepSizeOf(point) + stepSizeOf(p)));
-		if (earliest < numIterationsRemaining) {
+		// include those that could overlap after the final move, so that `overlapping` is accurate
+		if (earliest <= numIterationsRemaining) {
 			possiblyFutureOverlappingNeighbours[point.id][earliest - 1].push(p);
 		}
 	}
@@ -239,13 +235,13 @@ export const reposition = (data: RepositionNode[], maxIterations = 40) => {
 		applyNewPositions(data);
 	}
 
-	// final check for debugging
+	// If the last move left some markers overlapping, refresh the neighbour lists so that they
+	// include any overlaps created by that move. Otherwise they already match the final positions.
+	if (numOverlaps) {
+		updateOverlaps(data, overlappingNeighbours, possiblyFutureOverlappingNeighbours, 0);
+	}
+
 	for (const point of data) {
-		point.overlapping = false;
-		for (let p of overlappingNeighbours[point.id]) {
-			if (circlesAreTouching(point, p)) {
-				point.overlapping = true;
-			}
-		}
+		point.overlapping = overlappingNeighbours[point.id].length > 0;
 	}
 };

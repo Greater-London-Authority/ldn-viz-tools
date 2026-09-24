@@ -190,6 +190,21 @@ describe('reposition', () => {
 		expect(nodes.map(({ id, radius }) => ({ id, radius }))).toEqual(before);
 	});
 
+	test('sets overlapping on points left overlapping by the final move', () => {
+		// Each outer pair is separated by the single move, which pushes the inner two (1 and 2)
+		// into each other, although they did not overlap beforehand
+		const nodes: RepositionNode[] = [
+			{ id: 0, x: 0, y: 0, radius: 10 },
+			{ id: 1, x: 12, y: 0, radius: 10 },
+			{ id: 2, x: 37, y: 0, radius: 10 },
+			{ id: 3, x: 49, y: 0, radius: 10 }
+		];
+		reposition(nodes, 1);
+
+		expect(overlappingPairs(nodes).map(([a, b]) => [a.id, b.id])).toEqual([[1, 2]]);
+		expect(nodes.map((n) => n.overlapping)).toEqual([false, true, true, false]);
+	});
+
 	test('sets overlapping to false on every point once no overlaps remain', () => {
 		const nodes = randomLayout(2, 100, 500, () => 10);
 		reposition(nodes);
