@@ -1,5 +1,5 @@
 import { CompositeLayer } from '@deck.gl/core';
-import type { Feature, Point, Position } from 'geojson';
+import type { Feature, Point } from 'geojson';
 
 import type {
 	DefaultProps,
@@ -37,8 +37,9 @@ const defaultProps: DefaultProps<ClusterLayerProps> = {
 
 	// Assumes GeoJSON point features; pass `getPosition` for any other shape.
 	getPosition: {
-		type: 'accessor',
-		value: (d: AnyProps) => (d as Feature<Point>).geometry.coordinates
+		type: 'function',
+		value: (d: AnyProps) => (d as Feature<Point>).geometry.coordinates,
+		compare: false
 	},
 
 	clusterRadius: { type: 'number', value: 60, min: 1 },
@@ -74,21 +75,17 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 		return changeFlags.somethingChanged;
 	}
 
-	/** Resolve `getPosition`, which may be either a constant or a function. */
-	private positionOf(datum: DataT, index: number, data: DataT[]): Position {
-		const { getPosition } = this.props;
-		return typeof getPosition === 'function'
-			? getPosition(datum, { index, data, target: [] })
-			: getPosition;
-	}
-
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {
 		// Building the index is the expensive part and is onyl necessary if
 		// there are changes to the data or some props (not on the viewport)
+		// As for deck's own accessors, a change to `getPosition` is only noticed via updateTriggers,
+		// so that an inline function doesn't rebuild the index on every render
+		const triggers = changeFlags.updateTriggersChanged;
 		const rebuildIndex =
 			changeFlags.dataChanged ||
 			props.clusterRadius !== oldProps.clusterRadius ||
-			props.clusterMaxZoom !== oldProps.clusterMaxZoom;
+			props.clusterMaxZoom !== oldProps.clusterMaxZoom ||
+			(triggers && (triggers.all || triggers.getPosition));
 
 		if (rebuildIndex) {
 			const index = new Supercluster<DataT, AnyProps>({
@@ -103,9 +100,9 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 			// feature object (both geometry and features).
 			const data = props.data ?? [];
 			index.load(
-				data.map((d: any, i: number) => ({
+				data.map((d) => ({
 					type: 'Feature' as const,
-					geometry: { type: 'Point' as const, coordinates: this.positionOf(d, i, data) },
+					geometry: { type: 'Point' as const, coordinates: props.getPosition(d) },
 					properties: d
 				}))
 			);

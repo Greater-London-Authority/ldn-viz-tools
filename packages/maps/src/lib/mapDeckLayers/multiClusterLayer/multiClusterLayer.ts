@@ -38,13 +38,19 @@ export type ClusterByTypeGlyph<DataT> = {
 export type MultiClusterLayerOwnProps<DataT = any> = {
 	data?: DataT[] | null;
 
-	/** The type each point is clustered by, e.g. `(d) => d.properties.event_type`. */
+	/**
+	 * The type each point is clustered by, e.g. `(d) => d.properties.event_type`.
+	 * Like deck's accessors, a new function is only noticed when `updateTriggers.getKey` changes.
+	 */
 	getKey: (d: DataT) => string;
 
 	/** Circle color for each type. Types not listed here are drawn in grey. */
 	colors?: Record<string, Color>;
 
-	/** Returns the position of a point. Assumes GeoJSON point features by default. */
+	/**
+	 * Returns the position of a point. Assumes GeoJSON point features by default.
+	 * Like deck's accessors, a new function is only noticed when `updateTriggers.getPosition` changes.
+	 */
 	getPosition?: (d: DataT) => Position;
 
 	/** The radius (in pixels) within which points of the same type are grouped into a cluster. */
@@ -204,10 +210,14 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 	}
 
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {
+		// As for deck's own accessors, changes to `getKey` and `getPosition` are only noticed via
+		// updateTriggers, so that inline functions don't rebuild the indexes on every render
+		const triggers = changeFlags.updateTriggersChanged;
 		const rebuildIndexes =
 			changeFlags.dataChanged ||
 			props.clusterRadius !== oldProps.clusterRadius ||
-			props.clusterMaxZoom !== oldProps.clusterMaxZoom;
+			props.clusterMaxZoom !== oldProps.clusterMaxZoom ||
+			(triggers && (triggers.all || triggers.getKey || triggers.getPosition));
 
 		if (rebuildIndexes) {
 			const byKey: Record<string, DataT[]> = {};

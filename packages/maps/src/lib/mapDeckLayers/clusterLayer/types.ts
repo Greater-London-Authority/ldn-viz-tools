@@ -1,4 +1,4 @@
-import type { Accessor, CompositeLayerProps, Layer, LayersList } from '@deck.gl/core';
+import type { CompositeLayerProps, Layer, LayersList } from '@deck.gl/core';
 import type { Position } from 'geojson';
 import type { AnyProps, ClusterFeature, PointFeature } from 'supercluster';
 
@@ -75,8 +75,12 @@ export type ClusterLayerOwnProps<DataT extends AnyProps = AnyProps> = {
 	 */
 	renderPoints?: PointRenderer<DataT>;
 
-	/** GeoJSON coordinates, i.e. `number[]` rather than deck's narrower `Position` tuple. */
-	getPosition?: Accessor<DataT, Position>;
+	/**
+	 * Returns the position of a point, as GeoJSON coordinates (i.e. `number[]` rather than deck's
+	 * narrower `Position` tuple). Assumes GeoJSON point features by default.
+	 * As for deck's own accessors, a new function is only noticed when `updateTriggers.getPosition` changes.
+	 */
+	getPosition?: (d: DataT) => Position;
 
 	clusterRadius?: number;
 	clusterMaxZoom?: number;
