@@ -59,6 +59,12 @@ export type MultiClusterLayerOwnProps<DataT = any> = {
 	 */
 	zoomStep?: number;
 
+	/**
+	 * The maximum number of iterations used to move glyphs apart.
+	 * This can be increased if you are prepared to spend longer to better separate densely overlapping glyphs.
+	 */
+	maxIterations?: number;
+
 	/** Read by @deck.gl/mapbox off the top-level layer and applied to the whole sublayer tree.
 	 * Declared here because it is not one of deck's own layer props. */
 	beforeId?: string;
@@ -104,7 +110,8 @@ const defaultProps: DefaultProps<MultiClusterLayerProps> = {
 	},
 	clusterRadius: { type: 'number', value: 60, min: 1 },
 	clusterMaxZoom: { type: 'number', value: 16, min: 0 },
-	zoomStep: { type: 'number', value: 1, min: 0 }
+	zoomStep: { type: 'number', value: 1, min: 0 },
+	maxIterations: { type: 'number', value: 40, min: 0 }
 };
 
 type GlyphRow<DataT> = NonOverlappingRow<ClusterByTypeGlyph<DataT>>;
@@ -254,7 +261,7 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 
 	renderLayers() {
 		const { glyphs, zoom } = this.state;
-		const { getKey, colors, zoomStep } = this.props;
+		const { getKey, colors, zoomStep, maxIterations } = this.props;
 
 		return new NonOverlappingGlyphLayer<ClusterByTypeGlyph<DataT>>(
 			this.getSubLayerProps({
@@ -263,6 +270,7 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 				getPosition: (g: ClusterByTypeGlyph<DataT>) => g.position,
 				radiusUnits: 'pixels',
 				zoomStep,
+				maxIterations,
 				// Each glyph is spaced according to its own radius, plus a small gap
 				getGlyphRadius: (g: ClusterByTypeGlyph<DataT>) => g.radius + 1,
 				leaderLineEndRadius: 2,

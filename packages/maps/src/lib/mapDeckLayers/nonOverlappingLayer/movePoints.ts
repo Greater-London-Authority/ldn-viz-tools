@@ -22,8 +22,6 @@ export type RepositionNode = {
 	[key: string]: any;
 };
 
-const NUM_ITERATIONS = 40;
-
 // the maximum distance a marker moves on each iteration
 const stepSizeOf = (point: RepositionNode) => point.radius / 2;
 
@@ -210,10 +208,10 @@ const applyNewPositions = (data: RepositionNode[]) => {
  * Moves markers apart so that they do not overlap. Mutates the nodes it is given: `x` and `y` are
  * updated, and `hasMoved` is set to `true` on any node that has moved.
  *
- * @param data markers, each with a position and a `radius` (in the same units as the position)
+ * Stops after `maxIterations` iterations, even if some markers still overlap.
  */
-export const reposition = (data: RepositionNode[]) => {
-	const numIterations = NUM_ITERATIONS;
+export const reposition = (data: RepositionNode[], maxIterations = 40) => {
+	const numIterations = maxIterations;
 
 	let numOverlaps;
 

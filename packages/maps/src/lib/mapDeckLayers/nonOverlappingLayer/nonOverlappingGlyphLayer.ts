@@ -87,6 +87,12 @@ export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
 	 */
 	zoomStep?: number;
 
+	/**
+	 * The maximum number of iterations used to move glyphs apart.
+	 * This can be increased if you are prepared to spend longer to better separate densely overlapping glyphs.
+	 */
+	maxIterations?: number;
+
 	/** If `true`, then draw a line from each moved glyph back to its original position. */
 	showLeaderLines?: boolean;
 
@@ -121,6 +127,7 @@ const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
 	getGlyphRadius: { type: 'accessor', value: 10 },
 	radiusUnits: 'meters',
 	zoomStep: { type: 'number', value: 1, min: 0 },
+	maxIterations: { type: 'number', value: 40, min: 0 },
 
 	showLeaderLines: true,
 	leaderLineColor: { type: 'color', value: [128, 128, 128] },
@@ -134,7 +141,8 @@ const computeLayout = <DataT>(
 	radiusOf: (d: DataT, i: number) => number,
 	project: (xyz: number[]) => number[],
 	unproject: (xyz: number[]) => number[],
-	pixelsPerUnit: number
+	pixelsPerUnit: number,
+	maxIterations: number
 ): NonOverlappingRow<DataT>[] => {
 	const originalPositions = data.map(positionOf);
 	const radii = data.map(radiusOf);
@@ -145,7 +153,7 @@ const computeLayout = <DataT>(
 		return { id: i, x, y, radius: radii[i] * pixelsPerUnit, hasMoved: false };
 	});
 
-	reposition(nodes);
+	reposition(nodes, maxIterations);
 
 	return nodes.map((node, i) => ({
 		datum: data[i],
@@ -231,6 +239,7 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 			radiusChanged ||
 			props.radiusUnits !== oldProps.radiusUnits ||
 			props.zoomStep !== oldProps.zoomStep ||
+			props.maxIterations !== oldProps.maxIterations ||
 			(changeFlags.viewportChanged && !this.state.haveAdjustedPositions) ||
 			(inPixels && zoom !== this.state.zoom);
 
@@ -246,7 +255,8 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 			(xyz) => viewport.unproject(xyz),
 			// Positions are projected at the current (fractional) zoom, where distances are
 			// 2^(viewport.zoom - zoom) times larger than at the zoom we lay out for
-			inPixels ? Math.pow(2, viewport.zoom - zoom) : 1 / viewport.metersPerPixel
+			inPixels ? Math.pow(2, viewport.zoom - zoom) : 1 / viewport.metersPerPixel,
+			props.maxIterations
 		);
 
 		this.setState({ rows, haveAdjustedPositions: true, zoom });
