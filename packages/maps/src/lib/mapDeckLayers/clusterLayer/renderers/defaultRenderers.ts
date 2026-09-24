@@ -68,8 +68,7 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 			getLineColor: strokeColor,
 			getLineWidth: strokeWidth,
 			updateTriggers: {
-				...props.updateTriggers,
-				getRadius: [props.zoom]
+				...props.updateTriggers
 			}
 		}),
 
@@ -154,7 +153,7 @@ export function circlePoints<DataT extends AnyProps = AnyProps>(
 			updateTriggers: {
 				...props.updateTriggers,
 				...updateTriggers,
-				getFillColor: [props.zoom, updateTriggers?.getColor]
+				getFillColor: [updateTriggers?.getColor]
 			}
 		});
 }
