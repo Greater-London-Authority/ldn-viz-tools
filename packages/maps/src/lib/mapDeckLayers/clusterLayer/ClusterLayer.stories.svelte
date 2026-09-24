@@ -15,7 +15,8 @@
 	 *
 	 * When a lone point is picked, `info.object` is `{ isCluster: false, point }`, where `point` is the
 	 * original feature. When a cluster is picked, it is
-	 * `{ isCluster: true, clusterId, pointCount, expansionZoom, points }`.
+	 * `{ isCluster: true, clusterId, pointCount, expansionZoom, points }`. With `splitClusters`, it
+	 * also has `key`: the category of the circle that was picked.
 	 *
 	 * **Alternatives**: If you want to split the data into groups and cluster tha separately, use the
 	 * [MultiClusterLayer](./?path=/docs/maps-components-deckgl-multiclusterlayer--documentation).

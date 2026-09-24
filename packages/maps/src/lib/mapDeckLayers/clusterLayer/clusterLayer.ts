@@ -132,6 +132,10 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 	}
 
 	getPickingInfo(params: GetPickingInfoParams): PickingInfo {
+		// The picked row, before super.getPickingInfo replaces it with the feature it was derived from.
+		const row = params.info.object as { key?: unknown } | undefined;
+		const rowKey = typeof row?.key === 'string' ? row.key : undefined;
+
 		const info = super.getPickingInfo(params);
 		const feature = info.object as ClusterOrPoint<DataT> | undefined;
 
@@ -146,6 +150,7 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 				clusterId,
 				pointCount,
 				expansionZoom: this.state.index.getClusterExpansionZoom(clusterId),
+				...(rowKey !== undefined && { key: rowKey }),
 
 				// Fetch all points, not just the default limit of 10.
 				// TODO: prop to specify limit?

@@ -56,7 +56,15 @@ export type ClusterPickingObject<DataT> = {
 	pointCount: number;
 	/** The zoom at which this cluster splits apart. */
 	expansionZoom: number;
+
+	/** All the points in the cluster, including those in categories other than `key`. */
 	points: DataT[];
+
+	/**
+	 * The category of the part of the cluster that was picked, for renderers that draw each
+	 * category separately (e.g. `splitClusters`). Not set for renderers that draw the cluster as one.
+	 */
+	key?: string;
 };
 
 /** The type of `info.object` when the user picks/clicks the rendering of a non-clustered point. */

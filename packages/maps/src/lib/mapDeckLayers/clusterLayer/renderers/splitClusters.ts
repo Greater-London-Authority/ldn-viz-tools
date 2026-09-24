@@ -67,7 +67,8 @@ const FALLBACK: Color = [180, 180, 180, 255];
  * with one icon per category, and a `TextLayer` renders the count on each circle.
  *
  * One cluster becomes several rendered rows, so each row is wrapped with `props.makeRow`;
- * picking any of them still resolves back to the whole cluster.
+ * picking any of them still resolves back to the whole cluster, with `key` set to the category
+ * of the circle that was picked.
  */
 export const splitClusters = <DataT extends AnyProps = AnyProps>(
 	style: SplitClusterStyle<DataT>
