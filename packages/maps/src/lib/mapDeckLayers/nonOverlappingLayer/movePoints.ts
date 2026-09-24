@@ -84,7 +84,11 @@ const initializeOverlaps = (
 	}
 	index.finish();
 
-	const maxRadius = Math.max(0, ...data.map((d) => d.radius));
+	// N.B. this is a loop rather than Math.max(...radii), to avoid overflowing the call stack for large arrays
+	let maxRadius = 0;
+	for (const d of data) {
+		if (d.radius > maxRadius) maxRadius = d.radius;
+	}
 
 	for (const point of data) {
 		// Indexed points are centres with no footprint, so the query radius must reach far enough to
