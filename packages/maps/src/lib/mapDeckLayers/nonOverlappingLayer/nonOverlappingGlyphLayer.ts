@@ -11,6 +11,7 @@ import { CompositeLayer } from '@deck.gl/core';
 import { LineLayer, ScatterplotLayer } from '@deck.gl/layers';
 import type { Feature, Point, Position } from 'geojson';
 
+import { toDataArray, type LayerDataInput } from '../layerData';
 import { reposition } from './movePoints';
 
 /** One row per feature, carrying both its original and its shifted position. */
@@ -53,7 +54,11 @@ export type GlyphRenderer<DataT = any> = (
 ) => Layer | LayersList | null;
 
 export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
-	data?: DataT[] | null;
+	/**
+	 * An array of data or a GeoJSON FeatureCollection, or a URL or promise that resolves to one
+	 * (loaded as for deck's own layers). The layer is empty until the data has loaded.
+	 */
+	data?: LayerDataInput<DataT>;
 
 	/**
 	 * A function that receives options/props as an argument, and returns a Deck.gl Layer (or list of layers) that will be used to render the glyphs at their shifted positions.
@@ -121,8 +126,6 @@ export type NonOverlappingGlyphLayerProps<DataT = any> = NonOverlappingGlyphLaye
 export const MIN_ZOOM_STEP = 0.01;
 
 const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
-	data: { type: 'array', value: [], compare: 1 },
-
 	// Compared by reference, so a new renderer (e.g. with different options) re-renders the glyphs
 	renderGlyphs: { type: 'function', value: () => null, compare: true },
 
@@ -257,7 +260,7 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 
 		if (!shouldUpdate) return;
 
-		const data = (props.data ?? []) as DataT[];
+		const data = toDataArray<DataT>(props.data);
 
 		const rows = computeLayout(
 			data,

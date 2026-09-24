@@ -50,7 +50,7 @@
 		symbolTriangle,
 		type SymbolType
 	} from 'd3-shape';
-	import type { Feature, FeatureCollection, Point } from 'geojson';
+	import type { Feature, Point } from 'geojson';
 	import Map from '../../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../../map/util';
 	import MapDeckOverlay from '../../mapDeckOverlay/MapDeckOverlay.svelte';
@@ -72,14 +72,6 @@
 		});
 
 	type EventFeature = Feature<Point>;
-
-	let events: EventFeature[] = $state([]);
-
-	fetch(DATA_URL)
-		.then((response) => response.json())
-		.then((collection: FeatureCollection<Point>) => {
-			events = collection.features;
-		});
 
 	const eventTypeColors: Record<string, string> = {
 		'general community': 'data.categorical.blue',
@@ -147,7 +139,7 @@
 
 	const sharedProps = (args: { size: number }) => ({
 		id: 'events',
-		data: events,
+		data: DATA_URL,
 		getPosition: (d: EventFeature) => d.geometry.coordinates as [number, number],
 		getSize: args.size,
 		sizeUnits: 'pixels' as const,

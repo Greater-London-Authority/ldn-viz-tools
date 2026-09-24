@@ -68,7 +68,7 @@
 <script lang="ts">
 	import { ScatterplotLayer } from '@deck.gl/layers';
 	import { theme } from '@ldn-viz/ui';
-	import type { Feature, FeatureCollection, Point } from 'geojson';
+	import type { Feature, Point } from 'geojson';
 	import Map from '../../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../../map/util';
 	import MapDeckOverlay from '../../mapDeckOverlay/MapDeckOverlay.svelte';
@@ -94,14 +94,6 @@
 		});
 
 	type EventFeature = Feature<Point>;
-
-	let events: EventFeature[] = $state([]);
-
-	fetch(DATA_URL)
-		.then((response) => response.json())
-		.then((collection: FeatureCollection<Point>) => {
-			events = collection.features;
-		});
 
 	type GlyphArgs = {
 		getGlyphRadius: number;
@@ -139,7 +131,7 @@
 	const makeLayer = (args: GlyphArgs) =>
 		new NonOverlappingGlyphLayer<EventFeature>({
 			id: 'events',
-			data: events,
+			data: DATA_URL,
 			getGlyphRadius: args.getGlyphRadius,
 			showLeaderLines: args.showLeaderLines,
 			leaderLineWidth: args.leaderLineWidth,

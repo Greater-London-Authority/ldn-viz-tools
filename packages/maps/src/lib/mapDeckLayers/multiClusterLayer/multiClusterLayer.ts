@@ -13,6 +13,7 @@ import {
 	type CirclePointStyle
 } from '../clusterLayer/renderers/defaultRenderers';
 import type { ClusterRenderProps, PointRenderProps } from '../clusterLayer/types';
+import { toDataArray, type LayerDataInput } from '../layerData';
 import {
 	MIN_ZOOM_STEP,
 	NonOverlappingGlyphLayer,
@@ -42,7 +43,11 @@ export type ClusterByTypeGlyph<DataT> = {
 };
 
 export type MultiClusterLayerOwnProps<DataT = any> = {
-	data?: DataT[] | null;
+	/**
+	 * An array of data or a GeoJSON FeatureCollection, or a URL or promise that resolves to one
+	 * (loaded as for deck's own layers). The layer is empty until the data has loaded.
+	 */
+	data?: LayerDataInput<DataT>;
 
 	/**
 	 * The type each point is clustered by, e.g. `(d) => d.properties.event_type`.
@@ -126,7 +131,6 @@ const pointRadiusOf = (zoom: number) =>
 	pointRadiusRamp(POINT_STYLE)(zoom) + POINT_STYLE.strokeWidth! / 2;
 
 const defaultProps: DefaultProps<MultiClusterLayerProps> = {
-	data: { type: 'array', value: [], compare: 1 },
 	getKey: { type: 'function', value: () => '', compare: false },
 	colors: { type: 'object', value: {}, compare: 1 },
 	getPosition: {
@@ -251,7 +255,7 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 
 		if (rebuildIndexes) {
 			const byKey: Record<string, DataT[]> = {};
-			for (const d of props.data ?? []) (byKey[props.getKey(d)] ??= []).push(d);
+			for (const d of toDataArray<DataT>(props.data)) (byKey[props.getKey(d)] ??= []).push(d);
 
 			const indexes = Object.fromEntries(
 				Object.entries(byKey).map(([key, data]) => {

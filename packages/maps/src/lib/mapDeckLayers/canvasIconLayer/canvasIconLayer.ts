@@ -3,6 +3,8 @@ import { CompositeLayer } from '@deck.gl/core';
 import type { IconLayerProps } from '@deck.gl/layers';
 import { IconLayer } from '@deck.gl/layers';
 
+import { featuresOf, type FeatureCollectionData } from '../layerData';
+
 /**
  * The icon descriptor returned to IconLayer's `getIcon`.
  *
@@ -53,8 +55,20 @@ export type CanvasIconLayerOwnProps<DataT> = {
 	mask: boolean;
 };
 
+/**
+ * Any data that IconLayer accepts, or a GeoJSON FeatureCollection (or a promise of one), whose
+ * features are then the data.
+ */
+type CanvasIconLayerData<DataT> = {
+	data?:
+		| IconLayerProps<DataT>['data']
+		| FeatureCollectionData<DataT>
+		| Promise<FeatureCollectionData<DataT>>;
+};
+
 export type CanvasIconLayerProps<DataT = unknown> = CanvasIconLayerOwnProps<DataT> &
-	Omit<IconLayerProps<DataT>, 'iconAtlas' | 'iconMapping' | 'getIcon'> &
+	CanvasIconLayerData<DataT> &
+	Omit<IconLayerProps<DataT>, 'data' | 'iconAtlas' | 'iconMapping' | 'getIcon'> &
 	CompositeLayerProps;
 
 /** Default for `iconSize`. */
@@ -105,7 +119,8 @@ const defaultProps: DefaultProps<CanvasIconLayerProps> = {
  */
 export class CanvasIconLayer<DataT = any> extends CompositeLayer<
 	Required<CanvasIconLayerOwnProps<DataT>> &
-		Omit<IconLayerProps<DataT>, 'iconAtlas' | 'iconMapping' | 'getIcon'>
+		CanvasIconLayerData<DataT> &
+		Omit<IconLayerProps<DataT>, 'data' | 'iconAtlas' | 'iconMapping' | 'getIcon'>
 > {
 	static layerName = 'CanvasIconLayer';
 	static defaultProps = defaultProps;
@@ -187,7 +202,8 @@ export class CanvasIconLayer<DataT = any> extends CompositeLayer<
 			this.getSubLayerProps({
 				id: `icons-${this.state.version}`,
 				...forwarded,
-				data,
+				// Other data (arrays, iterables, binary data) is passed through to IconLayer unchanged
+				data: featuresOf<DataT>(data) ?? data,
 				getIcon: (d: DataT) => this.iconFor(d),
 				updateTriggers: {
 					...updateTriggers,

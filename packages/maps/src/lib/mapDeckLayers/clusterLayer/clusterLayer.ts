@@ -8,6 +8,7 @@ import type {
 	UpdateParameters
 } from '@deck.gl/core';
 import Supercluster, { type AnyProps, type ClusterFeature, type PointFeature } from 'supercluster';
+import { toDataArray } from '../layerData';
 import { circleClusters, circlePoints } from './renderers/defaultRenderers';
 import type {
 	ClusterLayerOwnProps,
@@ -30,8 +31,6 @@ export const isCluster = <DataT extends AnyProps>(
 ): feature is ClusterFeature<AnyProps> => Boolean((feature.properties as AnyProps)?.cluster);
 
 const defaultProps: DefaultProps<ClusterLayerProps> = {
-	data: { type: 'array', value: [], compare: 1 },
-
 	// Compared by reference, so a new renderer (e.g. with different options) re-renders the layer
 	renderClusters: { type: 'function', value: DEFAULT_CLUSTER_RENDERER, compare: true },
 	renderPoints: { type: 'function', value: DEFAULT_POINT_RENDERER, compare: true },
@@ -103,7 +102,7 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 			// is a point at the location returned by `getPosition`,
 			// and whose `properties` attribute contains the entire original
 			// feature object (both geometry and properties).
-			const data = props.data ?? [];
+			const data = toDataArray<DataT>(props.data);
 			index.load(
 				data.map((d) => ({
 					type: 'Feature' as const,

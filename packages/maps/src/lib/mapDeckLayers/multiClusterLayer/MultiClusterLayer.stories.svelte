@@ -61,7 +61,7 @@
 <script lang="ts">
 	import { MVTLayer } from '@deck.gl/geo-layers';
 	import { theme } from '@ldn-viz/ui';
-	import type { Feature, FeatureCollection, Point } from 'geojson';
+	import type { Feature, Point } from 'geojson';
 	import Map from '../../map/Map.svelte';
 	import { appendOSKeyToUrl } from '../../map/util';
 	import MapDeckOverlay from '../../mapDeckOverlay/MapDeckOverlay.svelte';
@@ -85,14 +85,6 @@
 		});
 
 	type EventFeature = Feature<Point>;
-
-	let events: EventFeature[] = $state([]);
-
-	fetch(DATA_URL)
-		.then((response) => response.json())
-		.then((collection: FeatureCollection<Point>) => {
-			events = collection.features;
-		});
 
 	type ClusterArgs = { clusterRadius: number; clusterMaxZoom: number; zoomStep: number };
 
@@ -125,15 +117,48 @@
 
 	const boroughOf = (d: EventFeature) => String(d.properties?.borough);
 
-	const boroughColor = theme.colorTokenNameToRGBArray('data.categorical.blue') as [
-		number,
-		number,
-		number
-	];
-
 	// every borough is drawn in the same color
-	const boroughColors = $derived(
-		Object.fromEntries(events.map((d) => [boroughOf(d), boroughColor]))
+	const boroughColors = Object.fromEntries(
+		[
+			'Newham',
+			'Harrow',
+			'Sutton',
+			'Bexley',
+			'Barking and Dagenham',
+			'Haringey',
+			'Lewisham',
+			'Barnet',
+			'Southwark',
+			'Brent',
+			'Hackney',
+			'Hillingdon',
+			'Lambeth',
+			'Greenwich',
+			'Croydon',
+			'Wandsworth',
+			'Kingston upon Thames',
+			'Islington',
+			'Hounslow',
+			'Hammersmith and Fulham',
+			'Camden',
+			'Richmond upon Thames',
+			'Merton',
+			'Waltham Forest',
+			'Ealing',
+			'Enfield',
+			'Redbridge',
+			'Westminster',
+			'Kensington and Chelsea',
+			'Bromley',
+			'Havering',
+			'Tower Hamlets',
+			'City of London',
+			'Barking & Dagenham',
+			'City Of London'
+		].map((b) => [
+			b,
+			theme.colorTokenNameToRGBArray('data.categorical.blue') as [number, number, number]
+		])
 	);
 
 	const boroughTooltipText = (glyph: ClusterByTypeGlyph<EventFeature>) =>
@@ -154,7 +179,7 @@
 	const makeBoroughLayer = (args: ClusterArgs) =>
 		new MultiClusterLayer<EventFeature>({
 			id: 'events',
-			data: events,
+			data: DATA_URL,
 			getKey: boroughOf,
 			colors: boroughColors,
 			clusterRadius: args.clusterRadius,
@@ -167,7 +192,7 @@
 	const makeLayer = (args: ClusterArgs) =>
 		new MultiClusterLayer<EventFeature>({
 			id: 'events',
-			data: events,
+			data: DATA_URL,
 			getKey: eventTypeOf,
 			colors: eventTypeColorsRGB,
 			clusterRadius: args.clusterRadius,

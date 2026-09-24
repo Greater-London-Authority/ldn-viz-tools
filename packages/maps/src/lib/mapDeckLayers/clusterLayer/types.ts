@@ -1,6 +1,7 @@
 import type { CompositeLayerProps, Layer, LayersList } from '@deck.gl/core';
 import type { Position } from 'geojson';
 import type { AnyProps, ClusterFeature, PointFeature } from 'supercluster';
+import type { LayerDataInput } from '../layerData';
 
 type BaseRenderProps<FeatureT> = {
 	id: string;
@@ -71,7 +72,11 @@ export type ClusterPickingObject<DataT> = {
 export type PointPickingObject<DataT> = { isCluster: false; point: DataT };
 
 export type ClusterLayerOwnProps<DataT extends AnyProps = AnyProps> = {
-	data?: DataT[] | null;
+	/**
+	 * An array of data or a GeoJSON FeatureCollection, or a URL or promise that resolves to one
+	 * (loaded as for deck's own layers). The layer is empty until the data has loaded.
+	 */
+	data?: LayerDataInput<DataT>;
 
 	/**
 	 * A function that receives options/props as an argument, and returns a Deck.gl Layer (or list of layers) that will be used to render clusters.
