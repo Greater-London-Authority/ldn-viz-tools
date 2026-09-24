@@ -55,15 +55,6 @@
 
 	let innerWidth = $state(0);
 
-	/*
-		Below are settings for Breakpoint Prop and Always Open Prop.
-		This is the secret sauce that allows us to pass an object containing different props per breakpoint.
-		The breakpoints are configurable if required, but use defaults: Demo to follow.
-		See also appShell/utils/getSettingByScreenWidth
-	*/
-	// Placement is *pulled* from here by the sidebar state rather than assigned
-	// into it, so there is no window in which a stale value is visible and no
-	// dependence on whether this component or its child initialises first.
 	setSidebarState(() => getSetting(sidebarPlacement, innerWidth));
 	let sidebarState = getSidebarState();
 
