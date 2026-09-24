@@ -156,6 +156,32 @@ describe('reposition', () => {
 		expect(second.map(({ x, y }) => ({ x, y }))).toEqual(first.map(({ x, y }) => ({ x, y })));
 	});
 
+	test('does not move any point when maxIterations is 0', () => {
+		const nodes: RepositionNode[] = [
+			{ id: 0, x: 50, y: 50, radius: 10 },
+			{ id: 1, x: 55, y: 50, radius: 10 }
+		];
+		reposition(nodes, 0);
+
+		expect(nodes.map(({ x, y }) => ({ x, y }))).toEqual([
+			{ x: 50, y: 50 },
+			{ x: 55, y: 50 }
+		]);
+		expect(nodes.some((n) => n.hasMoved)).toBe(false);
+	});
+
+	test('moves each point at most once when maxIterations is 1', () => {
+		const nodes: RepositionNode[] = [
+			{ id: 0, x: 50, y: 50, radius: 10 },
+			{ id: 1, x: 51, y: 50, radius: 10 }
+		];
+		reposition(nodes, 1);
+
+		// a single move is capped at the step size (half the radius)
+		expect(nodes[0].x).toBeCloseTo(45);
+		expect(nodes[1].x).toBeCloseTo(56);
+	});
+
 	test('does not change the radius or id of any point', () => {
 		const nodes = randomLayout(1, 50, 100, (i) => 2 + (i % 7));
 		const before = nodes.map(({ id, radius }) => ({ id, radius }));

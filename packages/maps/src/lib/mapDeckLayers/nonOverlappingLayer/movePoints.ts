@@ -210,9 +210,7 @@ const applyNewPositions = (data: RepositionNode[]) => {
 export const reposition = (data: RepositionNode[], maxIterations = 40) => {
 	const numIterations = maxIterations;
 
-	let numOverlaps;
-
-	let i = 0;
+	let numOverlaps = 0;
 
 	let overlappingNeighbours: { [x: string]: RepositionNode[] } = {};
 	let possiblyFutureOverlappingNeighbours: { [x: string]: RepositionNode[][] } = {};
@@ -224,22 +222,21 @@ export const reposition = (data: RepositionNode[], maxIterations = 40) => {
 		possiblyFutureOverlappingNeighbours,
 		numIterations
 	);
-	numOverlaps = computeNewPosition(data, overlappingNeighbours);
-	applyNewPositions(data);
 
-	while (numOverlaps && i < numIterations) {
-		const numIterationsRemaining = numIterations - i;
+	for (let i = 0; i < numIterations; i++) {
+		if (i > 0) {
+			if (!numOverlaps) break;
 
-		updateOverlaps(
-			data,
-			overlappingNeighbours,
-			possiblyFutureOverlappingNeighbours,
-			numIterationsRemaining
-		);
+			// i moves have been made, so numIterations - i remain
+			updateOverlaps(
+				data,
+				overlappingNeighbours,
+				possiblyFutureOverlappingNeighbours,
+				numIterations - i
+			);
+		}
 		numOverlaps = computeNewPosition(data, overlappingNeighbours);
 		applyNewPositions(data);
-
-		i += 1;
 	}
 
 	// final check for debugging
