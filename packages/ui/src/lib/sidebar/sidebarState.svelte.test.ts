@@ -64,7 +64,7 @@ describe('SidebarState', () => {
 		expect(state.placement).toBe('bottom');
 	});
 
-	// The regression this whole design exists to prevent. Previously <Sidebar>
+	// Regression test for a bug in which <Sidebar>
 	// wrote its own `placement` prop into the shared state at init, so a re-init
 	// with no prop reset placement to the prop default and the AppShell's value
 	// was lost until something happened to re-run its effect.
