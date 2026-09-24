@@ -21,6 +21,8 @@ export class SidebarState {
 	}
 
 	get placement(): PlacementType {
+		// Using a getter in this way ensures we always check the 3 potential values in the correct
+		// order of precedence, regardless of the order in which the Sidebar and AppShell have rendered.
 		return this.#placementOverride?.() ?? this.#placementByBreakpoint?.() ?? DEFAULT_PLACEMENT;
 	}
 
