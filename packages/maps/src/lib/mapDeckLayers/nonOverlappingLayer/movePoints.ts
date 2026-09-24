@@ -33,16 +33,19 @@ const circlesAreTouching = (a: RepositionNode, b: RepositionNode) => {
 	return Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) <= Math.pow(a.radius + b.radius, 2);
 };
 
+const JITTER_DISTANCE = 0.0000001;
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 const jitterPositions = (data: RepositionNode[]) => {
-	// deal with exactly coincident positions
-	let positions = new Set();
-	for (let datum of data) {
-		let pos = `${datum.x}_${datum.y}`;
-		if (positions.has(pos)) {
-			datum.x += Math.random() * 0.0000001;
-			datum.y += Math.random() * 0.0000001;
-		} else {
-			positions.add(pos);
+	// Deal with exactly coincident positions. The offset depends only on a marker's order within
+	// its group of duplicates, so that the layout is the same each time it is recomputed.
+	const numSeen = new Map<string, number>();
+	for (const datum of data) {
+		const pos = `${datum.x}_${datum.y}`;
+		const k = numSeen.get(pos) ?? 0;
+		numSeen.set(pos, k + 1);
+		if (k > 0) {
+			datum.x += JITTER_DISTANCE * Math.cos(k * GOLDEN_ANGLE);
+			datum.y += JITTER_DISTANCE * Math.sin(k * GOLDEN_ANGLE);
 		}
 	}
 };

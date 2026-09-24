@@ -145,6 +145,17 @@ describe('reposition', () => {
 		expect(overlappingPairs(nodes)).toHaveLength(0);
 	});
 
+	test('positions points at exactly the same position identically on every run', () => {
+		const makeNodes = (): RepositionNode[] =>
+			[0, 1, 2, 3].map((id) => ({ id, x: 50, y: 50, radius: 10 }));
+		const first = makeNodes();
+		const second = makeNodes();
+		reposition(first);
+		reposition(second);
+
+		expect(second.map(({ x, y }) => ({ x, y }))).toEqual(first.map(({ x, y }) => ({ x, y })));
+	});
+
 	test('does not change the radius or id of any point', () => {
 		const nodes = randomLayout(1, 50, 100, (i) => 2 + (i % 7));
 		const before = nodes.map(({ id, radius }) => ({ id, radius }));
