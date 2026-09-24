@@ -4,7 +4,7 @@
 	 *
 	 * `remountSidebar` lets a test destroy and recreate the <Sidebar> without
 	 * destroying the parent <AppShell>, recreating what happens during an HMR
-     * update or a SvelteKit client-side navigation.
+	 * update or a SvelteKit client-side navigation.
 	 */
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import type { PlacementType, SidebarPlacement } from '../sidebar/types';

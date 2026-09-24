@@ -46,9 +46,7 @@
 	state = sidebarState;
 
 	// An explicit `placement` prop overrides the AppShell's breakpoint resolution;
-	// with no prop the getter returns `undefined` and the AppShell's value is used.
-	// This installs a getter rather than writing a value, so it neither depends on
-	// initialisation order nor freezes at the prop's first value.
+	// if it is not provided the AppShell's value will not be overridden.
 	sidebarState.overridePlacement(() => placement);
 
 	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
