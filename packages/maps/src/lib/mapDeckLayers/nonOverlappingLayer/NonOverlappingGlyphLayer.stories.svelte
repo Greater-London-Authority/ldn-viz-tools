@@ -20,6 +20,11 @@
 	 * Positions are then re-calculated whenever the zoom level crosses a multiple of `zoomStep`.
 	 *
 	 * When a glyph is picked, `info.object` is the original datum.
+	 *
+	 * Limitations:
+	 * - If the user adjusts the pitch of the map by tilting it, then the pixels corresponding to two geographic points may be brought closer together, resulting in their markers overlapping. Currently we ignore this, as our maps are normally intended to be viewed end-on.
+	 * - Meters mode uses one `metersPerPixel` for all glyphs. This gives neglibile error for city-scale data, but may cause noticable errors for maps covering a large latitude range. Our maps usually show only Greater London.
+	 * - Increasing the max number of iterations also increases the length of time taken by each individual iteration. This is because more potential candidates for future overlap must tbe considered.
 	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/NonOverlappingGlyphLayer',
