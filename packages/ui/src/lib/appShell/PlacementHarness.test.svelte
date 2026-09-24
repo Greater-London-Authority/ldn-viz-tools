@@ -2,10 +2,9 @@
 	/**
 	 * Test-only harness for AppShell.svelte.test.ts.
 	 *
-	 * `remountSidebar` lets a test destroy and recreate the <Sidebar> while the
-	 * <AppShell> around it stays alive. That is the condition an HMR update or a
-	 * SvelteKit client-side navigation produces, and the one that used to leave
-	 * the sidebar on the wrong side of the screen.
+	 * `remountSidebar` lets a test destroy and recreate the <Sidebar> without
+	 * destroying the parent <AppShell>, recreating what happens during an HMR
+     * update or a SvelteKit client-side navigation.
 	 */
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import type { PlacementType, SidebarPlacement } from '../sidebar/types';
