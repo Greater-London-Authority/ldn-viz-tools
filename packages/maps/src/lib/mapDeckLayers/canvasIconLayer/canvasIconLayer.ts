@@ -115,8 +115,9 @@ export class CanvasIconLayer<DataT = any> extends CompositeLayer<
 		icons: Map<string, CanvasIconDef>;
 
 		/**
-		 * Incremented whenever existing icons become stale. IconLayer never refetches an id it
-		 * has already packed, so this is included in icon ids to force it to use the new artwork.
+		 * Incremented whenever existing icons become stale. `IconLayer` never refetches or evicts an
+		 * icon it has already packed, so `version` is included in the sublayer id: a new `IconLayer` starts
+		 * with an empty atlas, and the old one (with all of its stale icons) is released.
 		 */
 		version: number;
 	};
@@ -146,7 +147,7 @@ export class CanvasIconLayer<DataT = any> extends CompositeLayer<
 
 	private iconFor(datum: DataT): CanvasIconDef {
 		const key = this.keyOf(datum);
-		const { icons, version } = this.state;
+		const { icons } = this.state;
 
 		const hit = icons.get(key);
 		if (hit) return hit;
@@ -165,7 +166,7 @@ export class CanvasIconLayer<DataT = any> extends CompositeLayer<
 		}
 
 		const icon: CanvasIconDef = {
-			id: `${version}:${key}`,
+			id: key,
 			url,
 			width: iconSize,
 			height: iconSize,
@@ -184,16 +185,13 @@ export class CanvasIconLayer<DataT = any> extends CompositeLayer<
 
 		return new IconLayer<DataT>(
 			this.getSubLayerProps({
-				id: 'icons',
+				id: `icons-${this.state.version}`,
 				...forwarded,
 				data,
 				getIcon: (d: DataT) => this.iconFor(d),
 				updateTriggers: {
 					...updateTriggers,
-					getIcon: [
-						this.state.version,
-						typeof getIconKey === 'function' ? updateTriggers?.getIconKey : getIconKey
-					]
+					getIcon: [typeof getIconKey === 'function' ? updateTriggers?.getIconKey : getIconKey]
 				}
 			})
 		);
