@@ -173,7 +173,7 @@ const computeLayout = <DataT>(
 /**
  * NonOverlappingGlyphLayer is a composite layer that moves glyphs apart so that they do not
  * overlap, and renders them using the layer(s) returned by the `renderGlyphs()` prop.
- * Glyphs that have moved are optinally joined to their original position by a leader line.
+ * Glyphs that have moved are optionally joined to their original position by a leader line.
  *
  * With `radiusUnits: 'meters'` (the default), positions are computed once, at the zoom level of
  * the first viewport, and then stay fixed in geographic space (so glyphs sized in meters remain

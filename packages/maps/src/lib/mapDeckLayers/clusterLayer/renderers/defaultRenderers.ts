@@ -95,9 +95,6 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 	];
 }
 
-/**
- * Renders clusters as a `ScatterplotLayer` (which renders a circle for each point).
- */
 export type CirclePointStyle<DataT extends AnyProps> = {
 	/** Fill color accessor. */
 	getColor?: Color | ((datum: DataT) => Color);
@@ -123,6 +120,9 @@ export type CirclePointStyle<DataT extends AnyProps> = {
 	updateTriggers?: Record<string, unknown>;
 };
 
+/**
+ * Renders clusters as a `ScatterplotLayer` (which renders a circle for each points).
+ */
 export function circlePoints<DataT extends AnyProps = AnyProps>(
 	style: CirclePointStyle<DataT> = {}
 ): PointRenderer<DataT> {

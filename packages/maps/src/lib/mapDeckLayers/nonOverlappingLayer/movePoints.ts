@@ -1,7 +1,7 @@
 import geojsonRbush from '@turf/geojson-rbush';
 import type { Point } from 'geojson';
 /*
-This uses a heuristic that iteratively identifies markers that overlap other markers, and simultaneously moves all such makers away from the markers that they overlap with.
+This uses a heuristic that iteratively identifies markers that overlap other markers, and simultaneously moves all such markers away from the markers that they overlap with.
 
 Each marker is treated as a circle with its own radius; two markers overlap if the distance between their centres is no more than the sum of their radii.
 On each iteration, a marker moves just far enough to separate it from the markers it overlaps, up to a maximum step size that is proportional to its own radius.

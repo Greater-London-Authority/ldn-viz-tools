@@ -52,7 +52,7 @@ const defaultProps: DefaultProps<ClusterLayerProps> = {
  * `renderClusters` and `renderPoints` functions provided as props.
  *
  * Picking a non-clustered point returns the original feature;
- * picking a cluster an object that includes an array of the features in contains
+ * picking a cluster returns an object that includes an array of the features it contains
  * (and other details).
  */
 export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends CompositeLayer<
@@ -76,7 +76,7 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 	}
 
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {
-		// Building the index is the expensive part and is onyl necessary if
+		// Building the index is the expensive part and is only necessary if
 		// there are changes to the data or some props (not on the viewport)
 		// As for deck's own accessors, a change to `getPosition` is only noticed via updateTriggers,
 		// so that an inline function doesn't rebuild the index on every render
@@ -94,10 +94,10 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 			});
 
 			// We pass supercluster a modified copy of the data, in which
-			// each feature has been replaced by a new feature whoe geometry
+			// each feature has been replaced by a new feature whose geometry
 			// is a point at the location returned by `getPosition`,
 			// and whose `properties` attribute contains the entire original
-			// feature object (both geometry and features).
+			// feature object (both geometry and properties).
 			const data = props.data ?? [];
 			index.load(
 				data.map((d) => ({
@@ -110,7 +110,7 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 			this.setState({ index });
 		}
 
-		// Only update when index has been rebuilt, or zoom has moved passed an
+		// Only update when index has been rebuilt, or zoom has moved past an
 		// integer threshold (not on every fractional change in zoom level).
 		const zoom = Math.floor(this.context.viewport.zoom);
 		if (rebuildIndex || zoom !== this.state.zoom) {

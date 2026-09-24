@@ -17,7 +17,7 @@
 	 * in geographic space, so glyphs sized in meters remain non-overlapping at every zoom level.
 	 *
 	 * Alternatively, set `radiusUnits` to `'pixels'` to space glyphs that are sized in pixels.
-	 * Positions are then re-calculated whenever the zoom level crosses an integer threshold.
+	 * Positions are then re-calculated whenever the zoom level crosses a multiple of `zoomStep`.
 	 *
 	 * When a glyph is picked, `info.object` is the original datum.
 	 */

@@ -5,17 +5,17 @@
 	 * The `MultiClusterLayer` is similar to [ClusterLayer](./?path=/docs/maps-components-deckgl-clusterlayer--documentation).
 	 * However, rather than clustering all points together, it first separates them into groups based on the value
 	 * returned by the `getKey` function, then clusters each group separately, and uses a
-	 * [NonOverlappingGlyphLayer](.?path=/docs/maps-components-deckgl-nonoverlappingglyphlayer--documentation)
+	 * [NonOverlappingGlyphLayer](./?path=/docs/maps-components-deckgl-nonoverlappingglyphlayer--documentation)
 	 * to avoid overlap between cluster markers from different groups.
 	 *
 	 * The clusters are re-calculated whenever the map crosses an integer zoom level.
 	 * The layout of their markers is re-calculated whenever it crosses a multiple of `zoomStep`.
 	 *
 	 * **N.B.** This layer sizes markers in pixels (rather than meters);
-	 * to avoid ovelaps when the map is zoomed out to just before the threshold at which the layout would be updated,
+	 * to avoid overlaps when the map is zoomed out to just before the threshold at which the layout would be updated,
 	 * the layout is computed for the zoom at the bottom of the current `zoomStep` range.
 	 * At zoom 12.9 with `zoomStep: 1`, gaps are about 2^12.9/2^12 = 2^0.9 = ~1.9 larger than they need to be.
-	 * Decreasing `zoomStep` reduces this, as the cost of recomputing the layout more frequently.
+	 * Decreasing `zoomStep` reduces this, at the cost of recomputing the layout more frequently.
 	 * An alternative would be to instead set marker sizes in meters, but they would then get larger as the map zooms in.
 	 *
 	 *
@@ -95,7 +95,7 @@
 	type ClusterArgs = { clusterRadius: number; clusterMaxZoom: number; zoomStep: number };
 
 	/**************************************************************************/
-	// exampel of grouping by event_type
+	// example of grouping by event_type
 
 	const eventTypeColors: Record<string, string> = {
 		'general community': 'data.categorical.blue',
@@ -119,7 +119,7 @@
 			: `${glyph.points[0].properties?.event_name} (${glyph.points[0].properties?.borough})`;
 
 	/**************************************************************************/
-	// exmaple of grouping by borough
+	// example of grouping by borough
 
 	const boroughOf = (d: EventFeature) => String(d.properties?.borough);
 
