@@ -12,6 +12,11 @@
 	 *
 	 * All other IconLayer props (e.g. `getPosition`, `getColor`, `getSize`) are passed through.
 	 *
+	 * **N.N** this will not work well if the number of distinct icons required is very large.
+	 * There is some performance overhead incurred by rendering each icon to an HTML Canvas,
+	 * serialising to a `data:` URL, and then converting to a WebGL texture.
+	 * Also, if the icons do not all fit in the WebGL `MAX_TEXTURE_SIZE`, then an error will occur.
+	 *
 	 * **Alternatives**:  if you only need to draw circles, use the [ScatterplotLayer](https://deck.gl/docs/api-reference/layers/scatterplot-layer).
 	 * If you need to use a small set of dsitinct icons, condier pre-rendering them as an iconAtlas for an [IconLayer](https://deck.gl/docs/api-reference/layers/icon-layer).
 	 * If the number of icons to render is large, and they are relatively simple, consider writing a layer that renders them susing a custom shader.
