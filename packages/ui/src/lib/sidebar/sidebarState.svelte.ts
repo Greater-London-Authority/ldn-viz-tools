@@ -16,8 +16,8 @@ export class SidebarState {
 	/** Supplied by `<Sidebar>` when a consumer passes an explicit `placement` prop. */
 	#placementOverride: PlacementGetter | undefined = $state(undefined);
 
-	constructor(placementGetter?: PlacementGetter) {
-		this.#placementByBreakpoint = placementGetter;
+	constructor(placementByBreakpoint?: PlacementGetter) {
+		this.#placementByBreakpoint = placementByBreakpoint;
 	}
 
 	get placement(): PlacementType {
@@ -28,8 +28,8 @@ export class SidebarState {
 		this.#placementOverride = () => value;
 	}
 
-	overridePlacement(placementGetter: PlacementGetter) {
-		this.#placementOverride = placementGetter;
+	overridePlacement(placementOverride: PlacementGetter) {
+		this.#placementOverride = placementOverride;
 	}
 
 	orientation: 'vertical' | 'horizontal' = $derived(
@@ -41,8 +41,8 @@ export class SidebarState {
 // module is replaced by HMR.
 const SIDEBAR_KEY = Symbol.for('SIDEBAR');
 
-export function setSidebarState(placementGetter?: PlacementGetter) {
-	return setContext(SIDEBAR_KEY, new SidebarState(placementGetter));
+export function setSidebarState(placementByBreakpoint?: PlacementGetter) {
+	return setContext(SIDEBAR_KEY, new SidebarState(placementByBreakpoint));
 }
 
 export function getSidebarState() {
