@@ -17,6 +17,9 @@
 	 * original feature. When a cluster is picked, it is
 	 * `{ isCluster: true, clusterId, pointCount, expansionZoom, points }`.
 	 *
+	 * **Alternatives**: If you want to split the data into groups and cluster tha separately, use the
+	 * [MultiClusterLayer](./?path=/docs/maps-components-deckgl-multiclusterlayer--documentation).
+	 *
 	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/ClusterLayer',

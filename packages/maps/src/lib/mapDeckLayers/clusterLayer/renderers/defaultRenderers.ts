@@ -17,6 +17,14 @@ export const pointRadiusRamp =
 	(zoom: number) =>
 		Math.min(minRadius + Math.sqrt(Math.max(0, zoom - fromZoom)) * radiusScale, maxRadius);
 
+/** Abbreviates a count in the same way as supercluster's `point_count_abbreviated` (e.g. "1.2k"). */
+export const abbreviateCount = (count: number) =>
+	count >= 10000
+		? `${Math.round(count / 1000)}k`
+		: count >= 1000
+			? `${Math.round(count / 100) / 10}k`
+			: String(count);
+
 export type CircleClusterStyle = {
 	color?: Color;
 	strokeColor?: Color;
@@ -71,8 +79,7 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 			// Let clicks fall through to the circle underneath.
 			pickable: false,
 			sizeUnits: 'pixels',
-			// point_count_abbreviated is a number below 1000, a string ("1.2k") above it.
-			getText: (f) => String(f.properties.point_count_abbreviated),
+			getText: (f) => abbreviateCount(props.getPointCount(f)),
 			getSize: (f) => Math.min(radiusOf(props.getPointCount(f)) * 0.9, maxTextSize),
 			getColor: textColor,
 			getTextAnchor: 'middle' as const,

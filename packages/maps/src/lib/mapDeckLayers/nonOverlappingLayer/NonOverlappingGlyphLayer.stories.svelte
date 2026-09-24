@@ -3,11 +3,12 @@
 
 	/**
 	 * `NonOverlappingGlyphLayer` is a Deck.gl `CompositeLayer` that moves glyphs apart so that they
-	 * do not overlap. Each glyph is treated as a circle of radius `glyphRadius` (in meters).
+	 * do not overlap. Each glyph is treated as a circle of radius `getGlyphRadius` (in meters),
+	 * which may be either a constant or a function returning the radius of each glyph.
 	 *
 	 * The glyphs are drawn by the layer(s) returned from the `renderGlyphs` function. This function
 	 * receives the shifted position of each glyph (`getPosition`), the original datum (`getDatum`),
-	 * and the `radius` that the glyphs were spaced for.
+	 * and the radius that each glyph was spaced for (`getRadius`).
 	 *
 	 * Glyphs that have moved are joined to their original position by a leader line, unless
 	 * `showLeaderLines` is `false`.
@@ -15,14 +16,18 @@
 	 * Positions are calculated once, at the zoom level of the first viewport. They then stay fixed
 	 * in geographic space, so glyphs sized in meters remain non-overlapping at every zoom level.
 	 *
+	 * Alternatively, set `radiusUnits` to `'pixels'` to space glyphs that are sized in pixels.
+	 * Positions are then re-calculated whenever the zoom level crosses an integer threshold.
+	 *
 	 * When a glyph is picked, `info.object` is the original datum.
 	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/NonOverlappingGlyphLayer',
 		tags: ['autodocs'],
 		argTypes: {
-			glyphRadius: {
-				description: 'The radius (in meters) of each glyph, used when moving glyphs apart.',
+			getGlyphRadius: {
+				description:
+					'The radius (in meters) of each glyph, used when moving glyphs apart. Either a constant, or a function of the datum.',
 				table: { type: { summary: 'number' }, defaultValue: { summary: '10' } },
 				control: { type: 'range', min: 50, max: 1000, step: 50 }
 			},
@@ -44,7 +49,7 @@
 			}
 		},
 		args: {
-			glyphRadius: 300,
+			getGlyphRadius: 300,
 			showLeaderLines: true,
 			leaderLineWidth: 1,
 			leaderLineEndRadius: 50
@@ -94,7 +99,7 @@
 		});
 
 	type GlyphArgs = {
-		glyphRadius: number;
+		getGlyphRadius: number;
 		showLeaderLines: boolean;
 		leaderLineWidth: number;
 		leaderLineEndRadius: number;
@@ -115,30 +120,26 @@
 			eventTypeColors[String(d.properties?.event_type).toLowerCase()] ?? 'data.primary'
 		) as [number, number, number];
 
-	// Draws each glyph as a circle of the given radius (in meters), coloured by event type
-	const renderCircles =
-		(glyphRadius: number) =>
-		({ radius, getDatum, ...props }: GlyphRenderProps<EventFeature>) =>
-			new ScatterplotLayer<NonOverlappingRow<EventFeature>>({
-				...props,
-				radiusUnits: 'meters',
-				getRadius: glyphRadius,
-				getFillColor: (row) => eventTypeRGB(getDatum(row)),
-				stroked: true,
-				getLineColor: [255, 255, 255],
-				lineWidthUnits: 'pixels',
-				getLineWidth: 1
-			});
+	// Draws each glyph as a circle of the radius it was spaced for, coloured by event type
+	const renderCircles = ({ getDatum, ...props }: GlyphRenderProps<EventFeature>) =>
+		new ScatterplotLayer<NonOverlappingRow<EventFeature>>({
+			...props,
+			getFillColor: (row) => eventTypeRGB(getDatum(row)),
+			stroked: true,
+			getLineColor: [255, 255, 255],
+			lineWidthUnits: 'pixels',
+			getLineWidth: 1
+		});
 
 	const makeLayer = (args: GlyphArgs) =>
 		new NonOverlappingGlyphLayer<EventFeature>({
 			id: 'events',
 			data: events,
-			glyphRadius: args.glyphRadius,
+			getGlyphRadius: args.getGlyphRadius,
 			showLeaderLines: args.showLeaderLines,
 			leaderLineWidth: args.leaderLineWidth,
 			leaderLineEndRadius: args.leaderLineEndRadius,
-			renderGlyphs: renderCircles(args.glyphRadius),
+			renderGlyphs: renderCircles,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler
 		});

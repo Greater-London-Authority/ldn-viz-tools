@@ -19,6 +19,9 @@ export type NonOverlappingRow<DataT> = {
 	originalPosition: Position;
 	shiftedPosition: Position;
 	hasMoved: boolean;
+
+	/** The radius (in `radiusUnits`) that the glyph was spaced for. */
+	radius: number;
 };
 
 /** The type of props provided as an argument to a renderGlyphs() function. */
@@ -32,8 +35,11 @@ export type GlyphRenderProps<DataT> = {
 	/** Returns the original datum for a feature. */
 	getDatum: (row: NonOverlappingRow<DataT>) => DataT;
 
-	/** The radius (in meters) that glyphs were spaced for; glyphs should be drawn no larger than this, or they may overlap. */
-	radius: number;
+	/** Returns the radius that a glyph was spaced for; glyphs should be drawn no larger than this, or they may overlap. */
+	getRadius: (row: NonOverlappingRow<DataT>) => number;
+
+	/** The units of the radius returned by `getRadius`. */
+	radiusUnits: 'meters' | 'pixels';
 
 	updateTriggers?: Record<string, unknown>;
 
@@ -57,8 +63,29 @@ export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
 	/** GeoJSON coordinates, i.e. `number[]` rather than deck's narrower `Position` tuple. */
 	getPosition?: Accessor<DataT, Position>;
 
-	/** Glyphs are treated as circles of this radius (in meters) when moving them apart. */
-	glyphRadius?: number;
+	/**
+	 * Glyphs are treated as circles of this radius (in `radiusUnits`) when moving them apart.
+	 * Either a constant, or a function returning the radius of each glyph. When passing a function,
+	 * use `updateTriggers.getGlyphRadius` to indicate when the radii should be re-calculated.
+	 */
+	getGlyphRadius?: Accessor<DataT, number>;
+
+	/**
+	 * The units of `getGlyphRadius` and `leaderLineEndRadius`.
+	 *
+	 * With `'meters'`, positions are computed once and stay fixed in geographic space.
+	 * With `'pixels'`, positions are re-computed whenever the zoom level crosses a multiple of
+	 * `zoomStep`. They are computed for the zoom level at the bottom of that range, so glyphs
+	 * that stay the same size on screen only move further apart as the map is zoomed in.
+	 */
+	radiusUnits?: 'meters' | 'pixels';
+
+	/**
+	 * With `radiusUnits: 'pixels'`, the zoom interval at which positions are re-computed.
+	 * For example, `0.5` re-computes them as the zoom level crosses 12, 12.5, 13, 13.5, ...
+	 * Smaller steps keep glyphs closer together, at the cost of re-computing more often.
+	 */
+	zoomStep?: number;
 
 	/** If `true`, then draw a line from each moved glyph back to its original position. */
 	showLeaderLines?: boolean;
@@ -69,7 +96,7 @@ export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
 	/** Width of the leader line, in pixels. */
 	leaderLineWidth?: number;
 
-	/** Radius of the marker drawn at the original position of each moved glyph, in meters. */
+	/** Radius of the marker drawn at the original position of each moved glyph, in `radiusUnits`. */
 	leaderLineEndRadius?: number;
 
 	/** Read by @deck.gl/mapbox off the top-level layer and applied to the whole sublayer tree.
@@ -91,7 +118,9 @@ const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
 		value: (d: any) => (d as Feature<Point>).geometry.coordinates
 	},
 
-	glyphRadius: { type: 'number', value: 10, min: 0 },
+	getGlyphRadius: { type: 'accessor', value: 10 },
+	radiusUnits: 'meters',
+	zoomStep: { type: 'number', value: 1, min: 0 },
 
 	showLeaderLines: true,
 	leaderLineColor: { type: 'color', value: [128, 128, 128] },
@@ -102,26 +131,28 @@ const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
 const computeLayout = <DataT>(
 	data: DataT[],
 	positionOf: (d: DataT, i: number) => Position,
+	radiusOf: (d: DataT, i: number) => number,
 	project: (xyz: number[]) => number[],
 	unproject: (xyz: number[]) => number[],
-	pixelsPerMeter: number,
-	glyphRadius: number
+	pixelsPerUnit: number
 ): NonOverlappingRow<DataT>[] => {
 	const originalPositions = data.map(positionOf);
+	const radii = data.map(radiusOf);
 
 	// reposition() works in screen space, and mutates the nodes it is given
 	const nodes = originalPositions.map((position, i) => {
 		const [x, y] = project(position);
-		return { id: i, x, y, hasMoved: false };
+		return { id: i, x, y, radius: radii[i] * pixelsPerUnit, hasMoved: false };
 	});
 
-	reposition(nodes, pixelsPerMeter, glyphRadius);
+	reposition(nodes);
 
 	return nodes.map((node, i) => ({
 		datum: data[i],
 		originalPosition: originalPositions[i],
 		shiftedPosition: unproject([node.x, node.y]),
-		hasMoved: node.hasMoved
+		hasMoved: node.hasMoved,
+		radius: radii[i]
 	}));
 };
 
@@ -130,8 +161,10 @@ const computeLayout = <DataT>(
  * overlap, and renders them using the layer(s) returned by the `renderGlyphs()` prop.
  * Glyphs that have moved are optinally joined to their original position by a leader line.
  *
- * Positions are computed once, at the zoom level of the first viewport, and then stay fixed
- * in geographic space (so glyphs sized in meters remain non-overlapping at any zoom).
+ * With `radiusUnits: 'meters'` (the default), positions are computed once, at the zoom level of
+ * the first viewport, and then stay fixed in geographic space (so glyphs sized in meters remain
+ * non-overlapping at any zoom). With `radiusUnits: 'pixels'`, positions are re-computed whenever
+ * the zoom level crosses a multiple of `zoomStep`.
  *
  * Picking a glyph returns the original datum.
  */
@@ -144,6 +177,8 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 	declare state: {
 		rows: NonOverlappingRow<DataT>[];
 		haveAdjustedPositions: boolean;
+		/** Zoom level (a multiple of `zoomStep`) the current positions were computed for. */
+		zoom: number;
 	};
 
 	// override this so viewport changes trigger call to updateState
@@ -162,39 +197,66 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 			: getPosition;
 	}
 
+	/** Resolve `getGlyphRadius`, which may be either a constant or a function. */
+	private radiusOf(datum: DataT, index: number, data: DataT[]): number {
+		const { getGlyphRadius } = this.props;
+		return typeof getGlyphRadius === 'function'
+			? getGlyphRadius(datum, { index, data, target: [] })
+			: getGlyphRadius;
+	}
+
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {
 		if (changeFlags.dataChanged === 'init') {
 			// skip - we'll get called again in a moment for a viewport change
 			return;
 		}
 
+		const { viewport } = this.context;
+		const inPixels = props.radiusUnits === 'pixels';
+
+		const zoom = Math.floor(viewport.zoom / props.zoomStep) * props.zoomStep;
+
+		// As for deck's own accessors, a change to a function-valued `getGlyphRadius` is only noticed
+		// via updateTriggers; a change to a constant is noticed directly.
+		const updateTriggersChanged = changeFlags.updateTriggersChanged;
+		const radiusChanged =
+			(typeof props.getGlyphRadius !== 'function' &&
+				props.getGlyphRadius !== oldProps.getGlyphRadius) ||
+			(updateTriggersChanged &&
+				(updateTriggersChanged.all || updateTriggersChanged.getGlyphRadius));
+
+		// Pixel distances between glyphs only change with zoom, not when panning
 		const shouldUpdate =
 			changeFlags.dataChanged ||
-			props.glyphRadius !== oldProps.glyphRadius ||
-			(changeFlags.viewportChanged && !this.state.haveAdjustedPositions);
+			radiusChanged ||
+			props.radiusUnits !== oldProps.radiusUnits ||
+			props.zoomStep !== oldProps.zoomStep ||
+			(changeFlags.viewportChanged && !this.state.haveAdjustedPositions) ||
+			(inPixels && zoom !== this.state.zoom);
 
 		if (!shouldUpdate) return;
 
-		const { viewport } = this.context;
 		const data = (props.data ?? []) as DataT[];
 
 		const rows = computeLayout(
 			data,
 			(d, i) => this.positionOf(d, i, data),
+			(d, i) => this.radiusOf(d, i, data),
 			(xyz) => viewport.project(xyz),
 			(xyz) => viewport.unproject(xyz),
-			1 / viewport.metersPerPixel,
-			props.glyphRadius
+			// Positions are projected at the current (fractional) zoom, where distances are
+			// 2^(viewport.zoom - zoom) times larger than at the zoom we lay out for
+			inPixels ? Math.pow(2, viewport.zoom - zoom) : 1 / viewport.metersPerPixel
 		);
 
-		this.setState({ rows, haveAdjustedPositions: true });
+		this.setState({ rows, haveAdjustedPositions: true, zoom });
 	}
 
 	renderLayers() {
 		const rows = this.state.rows ?? [];
 		const {
 			renderGlyphs,
-			glyphRadius,
+			radiusUnits,
 			showLeaderLines,
 			leaderLineColor,
 			leaderLineWidth,
@@ -225,7 +287,7 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 						id: 'original-positions',
 						data: movedRows,
 						pickable: false,
-						radiusUnits: 'meters',
+						radiusUnits,
 						getRadius: leaderLineEndRadius,
 						getPosition: (row: NonOverlappingRow<DataT>) => row.originalPosition,
 						getFillColor: leaderLineColor
@@ -236,7 +298,8 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 				this.getSubLayerProps({
 					id: 'glyphs',
 					data: glyphRows,
-					radius: glyphRadius,
+					radiusUnits,
+					getRadius: (row: NonOverlappingRow<DataT>) => row.radius,
 					getPosition: (row: NonOverlappingRow<DataT>) => row.shiftedPosition as [number, number],
 					getDatum: (row: NonOverlappingRow<DataT>) => row.datum
 				}) as GlyphRenderProps<DataT>
