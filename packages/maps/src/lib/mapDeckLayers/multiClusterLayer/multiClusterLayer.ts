@@ -230,7 +230,7 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 	// The default implementation ignores viewport changes, so we need to override it.
 	// We need to update in response to a viewport change if the zoom level crossed
 	// an integer threshold; other viewport changes (e.g. panning) should be ignored.
-	// (The NonOverlappingGlyphLayer sublyaer is notified of viewport changes itself, so re-computes
+	// (The NonOverlappingGlyphLayer sublayer is notified of viewport changes itself, so re-computes
 	// the layout at each multiple of `zoomStep` without this layer re-rendering.)
 	shouldUpdateState({ changeFlags }: UpdateParameters<this>) {
 		return (

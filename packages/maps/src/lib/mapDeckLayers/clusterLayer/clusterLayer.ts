@@ -52,7 +52,7 @@ const defaultProps: DefaultProps<ClusterLayerProps> = {
  * It renders clusters and lone points separately, using the layers returned by calling the
  * `renderClusters` and `renderPoints` functions provided as props.
  *
- * Picking a non-clustered point returns the original feature;
+ * Picking a non-clustered point returns the original feature (with an added `isCluster: false`);
  * picking a cluster returns an object that includes an array of the features it contains
  * (and other details).
  */

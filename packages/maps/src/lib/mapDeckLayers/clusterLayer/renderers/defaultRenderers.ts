@@ -120,7 +120,7 @@ export type CirclePointStyle<DataT extends AnyProps> = {
 };
 
 /**
- * Renders clusters as a `ScatterplotLayer` (which renders a circle for each points).
+ * Renders points as a `ScatterplotLayer` (which renders a circle for each points).
  */
 export function circlePoints<DataT extends AnyProps = AnyProps>(
 	style: CirclePointStyle<DataT> = {}

@@ -300,7 +300,7 @@ donut show the proportion of the events in that cluster with each `event_type`.
 </Story>
 
 <!--
-This example replaces the default `splitClusters()` renderer with `donutClusters()`.
+This example replaces the default `circleClusters()` renderer with `splitClusters()`.
 
 This splits each cluster into one circle per `event_type`.
 Each circle is sized by the number of events of that type, and labelled with that
@@ -324,7 +324,7 @@ number. The circles are drawn by a `CanvasIconLayer`, with one icon per event ty
 </Story>
 
 <!-- 
-This example also replaces the default `splitClusters()` renderer with `donutClusters()`.
+This example also replaces the default `circleClusters()` renderer with `splitClusters()`.
 It changes the options, to also draw a ring to visually group the markers corresponding to the same cluster.
 -->
 <Story name="Split clusters - with ring">
