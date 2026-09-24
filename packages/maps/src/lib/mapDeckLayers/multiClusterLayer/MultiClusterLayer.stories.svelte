@@ -172,7 +172,7 @@
 			data: `${TILE_BASE_URL}/boroughs/{z}/{x}/{y}.mvt`,
 			filled: false,
 			stroked: true,
-			getLineColor: [168, 168, 168, 255],
+			getLineColor: theme.colorTokenNameToRGBArray('geo.feature') as [number, number, number],
 			lineWidthMinPixels: 2
 		});
 
