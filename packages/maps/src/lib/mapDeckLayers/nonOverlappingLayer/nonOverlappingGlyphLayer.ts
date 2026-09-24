@@ -57,6 +57,7 @@ export type NonOverlappingGlyphLayerOwnProps<DataT = any> = {
 
 	/**
 	 * A function that receives options/props as an argument, and returns a Deck.gl Layer (or list of layers) that will be used to render the glyphs at their shifted positions.
+	 * The glyphs are re-rendered whenever a different function is passed.
 	 */
 	renderGlyphs: GlyphRenderer<DataT>;
 
@@ -122,7 +123,8 @@ export const MIN_ZOOM_STEP = 0.01;
 const defaultProps: DefaultProps<NonOverlappingGlyphLayerProps> = {
 	data: { type: 'array', value: [], compare: 1 },
 
-	renderGlyphs: { type: 'function', value: () => null, compare: false },
+	// Compared by reference, so a new renderer (e.g. with different options) re-renders the glyphs
+	renderGlyphs: { type: 'function', value: () => null, compare: true },
 
 	// Assumes GeoJSON point features; pass `getPosition` for any other shape.
 	getPosition: {
@@ -194,12 +196,23 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 		zoom: number;
 	};
 
-	// override this so viewport changes trigger call to updateState
-	shouldUpdateState(params: UpdateParameters<this>) {
-		if (params.changeFlags.viewportChanged) {
-			return true;
-		}
-		return super.shouldUpdateState(params);
+	/** The zoom level (a multiple of `zoomStep`) that positions are computed for at the current zoom. */
+	private layoutZoom(props: this['props']): number {
+		const zoomStep = Math.max(props.zoomStep, MIN_ZOOM_STEP);
+		return Math.floor(this.context.viewport.zoom / zoomStep) * zoomStep;
+	}
+
+	// The default implementation ignores viewport changes, so we need to override it.
+	// We need to update in response to a viewport change if the zoom level crossed
+	// an integer threshold, and we are working with pixels;
+	// other viewport changes (e.g. panning) should be ignored.
+	shouldUpdateState({ props, changeFlags }: UpdateParameters<this>) {
+		return (
+			changeFlags.propsOrDataChanged ||
+			(changeFlags.viewportChanged &&
+				props.radiusUnits === 'pixels' &&
+				this.layoutZoom(props) !== this.state.zoom)
+		);
 	}
 
 	/** Resolve `getPosition`, which may be either a constant or a function. */
@@ -222,8 +235,7 @@ export class NonOverlappingGlyphLayer<DataT = Feature<Point>> extends CompositeL
 		const { viewport } = this.context;
 		const inPixels = props.radiusUnits === 'pixels';
 
-		const zoomStep = Math.max(props.zoomStep, MIN_ZOOM_STEP);
-		const zoom = Math.floor(viewport.zoom / zoomStep) * zoomStep;
+		const zoom = this.layoutZoom(props);
 
 		// As for deck's own accessors, a change to a function-valued `getGlyphRadius` is only noticed
 		// via updateTriggers; a change to a constant is noticed directly.

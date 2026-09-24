@@ -32,8 +32,9 @@ export const isCluster = <DataT extends AnyProps>(
 const defaultProps: DefaultProps<ClusterLayerProps> = {
 	data: { type: 'array', value: [], compare: 1 },
 
-	renderClusters: { type: 'function', value: DEFAULT_CLUSTER_RENDERER, compare: false },
-	renderPoints: { type: 'function', value: DEFAULT_POINT_RENDERER, compare: false },
+	// Compared by reference, so a new renderer (e.g. with different options) re-renders the layer
+	renderClusters: { type: 'function', value: DEFAULT_CLUSTER_RENDERER, compare: true },
+	renderPoints: { type: 'function', value: DEFAULT_POINT_RENDERER, compare: true },
 
 	// Assumes GeoJSON point features; pass `getPosition` for any other shape.
 	getPosition: {
@@ -69,10 +70,14 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 		points: PointFeature<DataT>[];
 	};
 
-	// The default implementation updates on prop and data changes, but not on viewport changes.
-	// We therefore over-ride it, so that updateState() re-runs whenever anything has changed.
+	// The default implementation ignores viewport changes, so we need to override it.
+	// We need to update in response to a viewport change if the zoom level crossed
+	// an integer threshold; other viewport changes (e.g. panning) should be ignored.
 	shouldUpdateState({ changeFlags }: UpdateParameters<this>) {
-		return changeFlags.somethingChanged;
+		return (
+			changeFlags.propsOrDataChanged ||
+			(changeFlags.viewportChanged && Math.floor(this.context.viewport.zoom) !== this.state.zoom)
+		);
 	}
 
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {

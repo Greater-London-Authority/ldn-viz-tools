@@ -67,11 +67,13 @@ export type ClusterLayerOwnProps<DataT extends AnyProps = AnyProps> = {
 
 	/**
 	 * A function that receives options/props as an argument, and returns a Deck.gl Layer (or list of layers) that will be used to render clusters.
+	 * The clusters are re-rendered whenever a different function is passed.
 	 */
 	renderClusters?: ClusterRenderer<DataT>;
 
 	/**
 	 * A function that receives options/props as an argument, and returns a Deck.gl Layer (or list of layers) that will be used to render individual points.
+	 * The points are re-rendered whenever a different function is passed.
 	 */
 	renderPoints?: PointRenderer<DataT>;
 

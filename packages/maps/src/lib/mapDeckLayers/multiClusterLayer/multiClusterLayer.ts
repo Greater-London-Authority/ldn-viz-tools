@@ -165,7 +165,8 @@ const renderGlyphs =
 
 		const pointLayer = circlePoints<DataT & AnyProps>({
 			...POINT_STYLE,
-			getColor: (d) => colors[getKey(d)] ?? DEFAULT_COLOR
+			getColor: (d) => colors[getKey(d)] ?? DEFAULT_COLOR,
+			updateTriggers: { getColor: colors }
 		})({
 			...props,
 			id: `${props.id}-points`,
@@ -203,10 +204,16 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 		glyphs: ClusterByTypeGlyph<DataT>[];
 	};
 
-	// The default implementation updates on prop and data changes, but not on viewport changes.
-	// We therefore over-ride it, so that updateState() re-runs whenever anything has changed.
+	// The default implementation ignores viewport changes, so we need to override it.
+	// We need to update in response to a viewport change if the zoom level crossed
+	// an integer threshold; other viewport changes (e.g. panning) should be ignored.
+	// (The NonOverlappingGlyphLayer sublyaer is notified of viewport changes itself, so re-computes
+	// the layout at each multiple of `zoomStep` without this layer re-rendering.)
 	shouldUpdateState({ changeFlags }: UpdateParameters<this>) {
-		return changeFlags.somethingChanged;
+		return (
+			changeFlags.propsOrDataChanged ||
+			(changeFlags.viewportChanged && Math.floor(this.context.viewport.zoom) !== this.state.zoom)
+		);
 	}
 
 	updateState({ props, oldProps, changeFlags }: UpdateParameters<this>) {
