@@ -33,6 +33,12 @@ export type ClusterByTypeGlyph<DataT> = {
 
 	/** Radius of the glyph (including its stroke), in pixels. */
 	radius: number;
+
+	/** The supercluster id of the cluster, within the index for its type. Only set on clusters, not points. */
+	clusterId?: number;
+
+	/** The zoom level at which this cluster splits apart. Only set on clusters, not points. */
+	expansionZoom?: number;
 };
 
 export type MultiClusterLayerOwnProps<DataT = any> = {
@@ -72,6 +78,18 @@ export type MultiClusterLayerOwnProps<DataT = any> = {
 	 * This can be increased if you are prepared to spend longer to better separate densely overlapping glyphs.
 	 */
 	maxIterations?: number;
+
+	/** If `true`, then draw a line from each moved glyph back to its original position. */
+	showLeaderLines?: boolean;
+
+	/** Color of the leader line. */
+	leaderLineColor?: Color;
+
+	/** Width of the leader line, in pixels. */
+	leaderLineWidth?: number;
+
+	/** Radius of the marker drawn at the original position of each moved glyph, in pixels. */
+	leaderLineEndRadius?: number;
 
 	/** Read by @deck.gl/mapbox off the top-level layer and applied to the whole sublayer tree.
 	 * Declared here because it is not one of deck's own layer props. */
@@ -119,7 +137,12 @@ const defaultProps: DefaultProps<MultiClusterLayerProps> = {
 	clusterRadius: { type: 'number', value: 60, min: 1 },
 	clusterMaxZoom: { type: 'number', value: 16, min: 0 },
 	zoomStep: { type: 'number', value: 1, min: MIN_ZOOM_STEP },
-	maxIterations: { type: 'number', value: 40, min: 0 }
+	maxIterations: { type: 'number', value: 40, min: 0 },
+
+	showLeaderLines: true,
+	leaderLineColor: { type: 'color', value: [128, 128, 128] },
+	leaderLineWidth: { type: 'number', value: 1, min: 0 },
+	leaderLineEndRadius: { type: 'number', value: 2, min: 0 }
 };
 
 type GlyphRow<DataT> = NonOverlappingRow<ClusterByTypeGlyph<DataT>>;
@@ -259,13 +282,15 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 				for (const f of index.getClusters(WORLD_BOUNDS, zoom)) {
 					const position = f.geometry.coordinates as [number, number];
 					if (isCluster(f)) {
-						const count = f.properties.point_count;
+						const { cluster_id: clusterId, point_count: count } = f.properties;
 						glyphs.push({
 							key,
 							position,
 							count,
-							points: index.getLeaves(f.properties.cluster_id, Infinity).map((l) => l.properties),
-							radius: clusterRadiusOf(count)
+							points: index.getLeaves(clusterId, Infinity).map((l) => l.properties),
+							radius: clusterRadiusOf(count),
+							clusterId,
+							expansionZoom: index.getClusterExpansionZoom(clusterId)
 						});
 					} else {
 						const point = f.properties as DataT;
@@ -280,7 +305,16 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 
 	renderLayers() {
 		const { glyphs, zoom } = this.state;
-		const { getKey, colors, zoomStep, maxIterations } = this.props;
+		const {
+			getKey,
+			colors,
+			zoomStep,
+			maxIterations,
+			showLeaderLines,
+			leaderLineColor,
+			leaderLineWidth,
+			leaderLineEndRadius
+		} = this.props;
 
 		return new NonOverlappingGlyphLayer<ClusterByTypeGlyph<DataT>>(
 			this.getSubLayerProps({
@@ -292,7 +326,10 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 				maxIterations,
 				// Each glyph is spaced according to its own radius, plus a small gap
 				getGlyphRadius: (g: ClusterByTypeGlyph<DataT>) => g.radius + 1,
-				leaderLineEndRadius: 2,
+				showLeaderLines,
+				leaderLineColor,
+				leaderLineWidth,
+				leaderLineEndRadius,
 				renderGlyphs: renderGlyphs<DataT>(zoom, getKey, colors)
 			})
 		);

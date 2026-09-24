@@ -20,7 +20,9 @@
 	 *
 	 *
 	 * When a glyph is picked, `info.object` is `{ key, position, count, points, radius }`, where
-	 * `points` are the original features.
+	 * `points` are the original features. Clusters also have `clusterId` and
+	 * `expansionZoom` (the zoom level at which the cluster splits apart) attributes.
+	 * The `expansionZoom` can be used in a click handler to zoom-in to the level at which a cluster expands.
 	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL/MultiClusterLayer',
