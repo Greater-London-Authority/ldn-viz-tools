@@ -22,7 +22,9 @@
 	 * When a glyph is picked, `info.object` is `{ key, position, count, points, radius }`, where
 	 * `points` are the original features. Clusters also have `clusterId` and
 	 * `expansionZoom` (the zoom level at which the cluster splits apart) attributes.
-	 * The `expansionZoom` can be used in a click handler to zoom-in to the level at which a cluster expands.
+	 *
+	 * If `clickToZoom` is `true`, clicking a cluster zooms the map in on it, to the zoom level at which
+	 * it splits apart (its `expansionZoom`).
 	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL Layers/MultiClusterLayer',
@@ -45,12 +47,19 @@
 					'The zoom interval at which the non-overlapping layout is re-calculated; e.g. `0.5` re-calculates it at 12, 12.5, 13, 13.5, ...',
 				table: { type: { summary: 'number' }, defaultValue: { summary: '1' } },
 				control: { type: 'range', min: 0.1, max: 1, step: 0.1 }
+			},
+			clickToZoom: {
+				description:
+					'If `true`, clicking a cluster zooms the map in on it, to the zoom level at which it splits apart.',
+				table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+				control: { type: 'boolean' }
 			}
 		},
 		args: {
 			clusterRadius: 60,
 			clusterMaxZoom: 16,
-			zoomStep: 0.1
+			zoomStep: 0.1,
+			clickToZoom: true
 		},
 		parameters: {
 			layout: 'full'
@@ -59,10 +68,12 @@
 </script>
 
 <script lang="ts">
+	import type { PickingInfo } from '@deck.gl/core';
 	import { MVTLayer } from '@deck.gl/geo-layers';
 	import { theme } from '@ldn-viz/ui';
 	import type { Feature, Point } from 'geojson';
 	import Map from '../../map/Map.svelte';
+	import MapControlGroup from '../../mapControlGroup/MapControlGroup.svelte';
 	import { appendOSKeyToUrl } from '../../map/util';
 	import MapDeckOverlay from '../../mapDeckOverlay/MapDeckOverlay.svelte';
 	import MapDeckTooltips from '../../mapDeckTooltips/MapDeckTooltips.svelte';
@@ -86,7 +97,12 @@
 
 	type EventFeature = Feature<Point>;
 
-	type ClusterArgs = { clusterRadius: number; clusterMaxZoom: number; zoomStep: number };
+	type ClusterArgs = {
+		clusterRadius: number;
+		clusterMaxZoom: number;
+		zoomStep: number;
+		clickToZoom: boolean;
+	};
 
 	/**************************************************************************/
 	// example of grouping by event_type
@@ -111,6 +127,42 @@
 		glyph.count > 1
 			? `${glyph.count} ${glyph.key} events`
 			: `${glyph.points[0].properties?.event_name} (${glyph.points[0].properties?.borough})`;
+
+	/**************************************************************************/
+	// example of providing an onClick handler
+
+	let clickedGlyph: ClusterByTypeGlyph<EventFeature> | null = $state(null);
+
+	const onGlyphClick = (info: PickingInfo) => {
+		const glyph = info.object as ClusterByTypeGlyph<EventFeature> | undefined;
+
+		// Lone points have no `expansionZoom`
+		if (glyph?.expansionZoom === undefined) {
+			clickedGlyph = null;
+			return false;
+		}
+
+		clickedGlyph = glyph;
+
+		// Returning `false` leaves the event unhandled, so `clickToZoom` still zooms in on the
+		// cluster; returning `true` would stop it.
+		return false;
+	};
+
+	const makeClickableLayer = (args: ClusterArgs) =>
+		new MultiClusterLayer<EventFeature>({
+			id: 'events',
+			data: DATA_URL,
+			getKey: eventTypeOf,
+			colors: eventTypeColorsRGB,
+			clusterRadius: args.clusterRadius,
+			clusterMaxZoom: args.clusterMaxZoom,
+			zoomStep: args.zoomStep,
+			clickToZoom: args.clickToZoom,
+			pickable: true,
+			onHover: onMouseOverTooltipHandler,
+			onClick: onGlyphClick
+		});
 
 	/**************************************************************************/
 	// example of grouping by borough
@@ -185,6 +237,7 @@
 			clusterRadius: args.clusterRadius,
 			clusterMaxZoom: args.clusterMaxZoom,
 			zoomStep: args.zoomStep,
+			clickToZoom: args.clickToZoom,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler
 		});
@@ -198,6 +251,7 @@
 			clusterRadius: args.clusterRadius,
 			clusterMaxZoom: args.clusterMaxZoom,
 			zoomStep: args.zoomStep,
+			clickToZoom: args.clickToZoom,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler
 		});
@@ -219,6 +273,52 @@ of its type. Where glyphs would overlap, they are moved apart.
 			>
 				<MapDeckOverlay {layers} />
 				<MapDeckTooltips {layers} spec={{ events: tooltipText }} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This example passes an `onClick` handler to the layer. When a cluster is clicked, the handler
+receives a `PickingInfo` whose `object` is a `ClusterByTypeGlyph`, and lists the events in that
+cluster in a panel. Lone points are distinguished from clusters by having no `expansionZoom`.
+
+A user-supplied `onClick` runs before `clickToZoom`. If it returns `true`, the click is treated as
+handled, and the map does not zoom in on the cluster. This handler returns `false`, so the map still
+zooms when `clickToZoom` is `true`.
+-->
+<Story name="Click handler">
+	{#snippet template(args)}
+		{@const layers = [makeClickableLayer(args as ClusterArgs)]}
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+				<MapDeckTooltips {layers} spec={{ events: tooltipText }} />
+
+				<MapControlGroup position="TopRight">
+					<div
+						class="pointer-events-auto max-h-96 w-72 overflow-y-auto bg-color-container p-3 text-color-text"
+					>
+						{#if clickedGlyph}
+							<p class="font-bold">
+								{clickedGlyph.count}
+								{clickedGlyph.key} events in this cluster
+							</p>
+							<ul class="mt-2 list-disc pl-5">
+								{#each clickedGlyph.points as point, i (i)}
+									<li>{point.properties?.event_name}</li>
+								{/each}
+							</ul>
+						{:else}
+							<p>Click a cluster to list its events.</p>
+						{/if}
+					</div>
+				</MapControlGroup>
 			</Map>
 		</div>
 	{/snippet}

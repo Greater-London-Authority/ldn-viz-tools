@@ -9,6 +9,7 @@ import type {
 } from '@deck.gl/core';
 import Supercluster, { type AnyProps, type ClusterFeature, type PointFeature } from 'supercluster';
 import { toDataArray } from '../layerData';
+import { zoomTo } from '../zoomTo';
 import { circleClusters, circlePoints } from './renderers/defaultRenderers';
 import type {
 	ClusterLayerOwnProps,
@@ -43,7 +44,8 @@ const defaultProps: DefaultProps<ClusterLayerProps> = {
 	},
 
 	clusterRadius: { type: 'number', value: 60, min: 1 },
-	clusterMaxZoom: { type: 'number', value: 16, min: 0 }
+	clusterMaxZoom: { type: 'number', value: 16, min: 0 },
+	clickToZoom: false
 };
 
 /**
@@ -149,6 +151,7 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 				clusterId,
 				pointCount,
 				expansionZoom: this.state.index.getClusterExpansionZoom(clusterId),
+				position: feature.geometry.coordinates as [number, number],
 				...(rowKey !== undefined && { key: rowKey }),
 
 				// Fetch all points, not just the default limit of 10.
@@ -160,6 +163,21 @@ export class ClusterLayer<DataT extends AnyProps = Feature<Point>> extends Compo
 		}
 
 		return { ...info, object } as PickingInfo;
+	}
+
+	onClick(info: PickingInfo, pickingEvent: unknown): boolean {
+		// Let a user-supplied onClick handle the event (and optionally mark it as handled) first
+		if (super.onClick(info, pickingEvent)) return true;
+
+		const object = info.object as
+			| ClusterPickingObject<DataT>
+			| PointPickingObject<DataT>
+			| undefined;
+		if (!this.props.clickToZoom || !object?.isCluster) return false;
+
+		// Zoom in on the cluster, to the zoom level at which it splits apart
+		zoomTo(this.context, object.position, object.expansionZoom);
+		return true;
 	}
 
 	renderLayers() {

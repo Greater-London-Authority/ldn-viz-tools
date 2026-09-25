@@ -1,4 +1,10 @@
-import type { Color, CompositeLayerProps, DefaultProps, UpdateParameters } from '@deck.gl/core';
+import type {
+	Color,
+	CompositeLayerProps,
+	DefaultProps,
+	PickingInfo,
+	UpdateParameters
+} from '@deck.gl/core';
 import { CompositeLayer } from '@deck.gl/core';
 import type { Feature, Point, Position } from 'geojson';
 import Supercluster, { type AnyProps } from 'supercluster';
@@ -15,6 +21,7 @@ import {
 import type { ClusterRenderProps, PointRenderProps } from '../clusterLayer/types';
 import { toDataArray, type LayerDataInput } from '../layerData';
 import { tokenColor } from '../tokenColor';
+import { zoomTo } from '../zoomTo';
 import {
 	MIN_ZOOM_STEP,
 	NonOverlappingGlyphLayer,
@@ -97,6 +104,13 @@ export type MultiClusterLayerOwnProps<DataT = any> = {
 	/** Radius of the marker drawn at the original position of each moved glyph, in pixels. */
 	leaderLineEndRadius?: number;
 
+	/**
+	 * If `true`, clicking a cluster zooms the map in on it, to the zoom level at which it splits
+	 * apart (`expansionZoom`). The zoom is requested through the Deck `onViewStateChange` prop,
+	 * which `MapDeckOverlay` applies to the MapLibre map.
+	 */
+	clickToZoom?: boolean;
+
 	/** Read by @deck.gl/mapbox off the top-level layer and applied to the whole sublayer tree.
 	 * Declared here because it is not one of deck's own layer props. */
 	beforeId?: string;
@@ -144,7 +158,8 @@ const defaultProps: DefaultProps<MultiClusterLayerProps> = {
 	// Resolved from the theme by NonOverlappingGlyphLayer when not set
 	leaderLineColor: { type: 'color', value: null, optional: true },
 	leaderLineWidth: { type: 'number', value: 1, min: 0 },
-	leaderLineEndRadius: { type: 'number', value: 2, min: 0 }
+	leaderLineEndRadius: { type: 'number', value: 2, min: 0 },
+	clickToZoom: false
 };
 
 type GlyphRow<DataT> = NonOverlappingRow<ClusterByTypeGlyph<DataT>>;
@@ -311,6 +326,19 @@ export class MultiClusterLayer<DataT = Feature<Point>> extends CompositeLayer<
 
 			this.setState({ zoom, glyphs });
 		}
+	}
+
+	onClick(info: PickingInfo, pickingEvent: unknown): boolean {
+		// Let a user-supplied onClick handle the event (and optionally mark it as handled) first
+		if (super.onClick(info, pickingEvent)) return true;
+
+		const glyph = info.object as ClusterByTypeGlyph<DataT> | undefined;
+		if (!this.props.clickToZoom || glyph?.expansionZoom === undefined) return false;
+
+		// Zoom in on the cluster (at its original, rather than shifted, position), to the zoom level
+		// at which it splits apart
+		zoomTo(this.context, glyph.position, glyph.expansionZoom);
+		return true;
 	}
 
 	renderLayers() {

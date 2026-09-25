@@ -57,6 +57,8 @@ export type ClusterPickingObject<DataT> = {
 	pointCount: number;
 	/** The zoom at which this cluster splits apart. */
 	expansionZoom: number;
+	/** The position of the cluster, as `[longitude, latitude]`. */
+	position: [number, number];
 
 	/** All the points in the cluster, including those in categories other than `key`. */
 	points: DataT[];
@@ -109,6 +111,13 @@ export type ClusterLayerOwnProps<DataT extends AnyProps = AnyProps> = {
 
 	clusterRadius?: number;
 	clusterMaxZoom?: number;
+
+	/**
+	 * If `true`, clicking a cluster zooms the map in on it, to the zoom level at which it splits
+	 * apart (`expansionZoom`). The zoom is requested through the Deck `onViewStateChange` prop,
+	 * which `MapDeckOverlay` applies to the MapLibre map.
+	 */
+	clickToZoom?: boolean;
 
 	/** Read by @deck.gl/mapbox off the top-level layer and applied to the whole sublayer tree.
 	 * Declared here because it is not one of deck's own layer props. */

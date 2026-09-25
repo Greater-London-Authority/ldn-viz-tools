@@ -15,8 +15,11 @@
 	 *
 	 * When a lone point is picked, `info.object` is `{ isCluster: false, point }`, where `point` is the
 	 * original feature. When a cluster is picked, it is
-	 * `{ isCluster: true, clusterId, pointCount, expansionZoom, points }`. With `splitClusters`, it
-	 * also has `key`: the category of the circle that was picked.
+	 * `{ isCluster: true, clusterId, pointCount, expansionZoom, position, points }`. With
+	 * `splitClusters`, it also has `key`: the category of the circle that was picked.
+	 *
+	 * If `clickToZoom` is `true`, clicking a cluster zooms the map in on it, to the zoom level at which
+	 * it splits apart (its `expansionZoom`).
 	 *
 	 * **Alternatives**: If you want to split the data into groups and cluster tha separately, use the
 	 * [MultiClusterLayer](./?path=/docs/maps-components-deckgl-layers-multiclusterlayer--documentation).
@@ -36,11 +39,18 @@
 					'The maximum zoom level at which points are clustered; above this, every point is shown individually.',
 				table: { type: { summary: 'number' }, defaultValue: { summary: '16' } },
 				control: { type: 'range', min: 0, max: 20, step: 1 }
+			},
+			clickToZoom: {
+				description:
+					'If `true`, clicking a cluster zooms the map in on it, to the zoom level at which it splits apart.',
+				table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+				control: { type: 'boolean' }
 			}
 		},
 		args: {
 			clusterRadius: 60,
-			clusterMaxZoom: 16
+			clusterMaxZoom: 16,
+			clickToZoom: true
 		},
 		parameters: {
 			layout: 'full'
@@ -49,9 +59,11 @@
 </script>
 
 <script lang="ts">
+	import type { PickingInfo } from '@deck.gl/core';
 	import { theme } from '@ldn-viz/ui';
 	import type { Feature, Point } from 'geojson';
 	import Map from '../../map/Map.svelte';
+	import MapControlGroup from '../../mapControlGroup/MapControlGroup.svelte';
 	import { appendOSKeyToUrl } from '../../map/util';
 	import MapDeckOverlay from '../../mapDeckOverlay/MapDeckOverlay.svelte';
 	import MapDeckTooltips from '../../mapDeckTooltips/MapDeckTooltips.svelte';
@@ -77,7 +89,7 @@
 
 	type EventFeature = Feature<Point>;
 
-	type ClusterArgs = { clusterRadius: number; clusterMaxZoom: number };
+	type ClusterArgs = { clusterRadius: number; clusterMaxZoom: number; clickToZoom: boolean };
 
 	const tooltipText = (
 		object: ClusterPickingObject<EventFeature> | PointPickingObject<EventFeature>
@@ -95,8 +107,44 @@
 			data: DATA_URL,
 			clusterRadius: args.clusterRadius,
 			clusterMaxZoom: args.clusterMaxZoom,
+			clickToZoom: args.clickToZoom,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler
+		});
+
+	/**************************************************************************/
+	// For example of providing an onClick handler
+
+	let clickedCluster: ClusterPickingObject<EventFeature> | null = $state(null);
+
+	const onClusterClick = (info: PickingInfo) => {
+		const object = info.object as
+			| ClusterPickingObject<EventFeature>
+			| PointPickingObject<EventFeature>
+			| undefined;
+
+		if (!object?.isCluster) {
+			clickedCluster = null;
+			return false;
+		}
+
+		clickedCluster = object;
+
+		// Returning `false` leaves the event unhandled, so `clickToZoom` still zooms in on the
+		// cluster; returning `true` would stop it.
+		return false;
+	};
+
+	const makeClickableLayer = (args: ClusterArgs) =>
+		new ClusterLayer({
+			id: 'events',
+			data: DATA_URL,
+			clusterRadius: args.clusterRadius,
+			clusterMaxZoom: args.clusterMaxZoom,
+			clickToZoom: args.clickToZoom,
+			pickable: true,
+			onHover: onMouseOverTooltipHandler,
+			onClick: onClusterClick
 		});
 
 	/**************************************************************************/
@@ -114,6 +162,7 @@
 			data: DATA_URL,
 			clusterRadius: args.clusterRadius,
 			clusterMaxZoom: args.clusterMaxZoom,
+			clickToZoom: args.clickToZoom,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: circleClusters({
@@ -173,6 +222,7 @@
 			data: DATA_URL,
 			clusterRadius: args.clusterRadius,
 			clusterMaxZoom: args.clusterMaxZoom,
+			clickToZoom: args.clickToZoom,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: donutClusters<EventFeature>({
@@ -193,6 +243,7 @@
 			data: DATA_URL,
 			clusterRadius: args.clusterRadius,
 			clusterMaxZoom: args.clusterMaxZoom,
+			clickToZoom: args.clickToZoom,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: splitClusters<EventFeature>({
@@ -213,6 +264,7 @@
 			data: DATA_URL,
 			clusterRadius: args.clusterRadius,
 			clusterMaxZoom: args.clusterMaxZoom,
+			clickToZoom: args.clickToZoom,
 			pickable: true,
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: splitClusters<EventFeature>({
@@ -245,6 +297,49 @@
 			>
 				<MapDeckOverlay {layers} />
 				<MapDeckTooltips {layers} spec={{ events: tooltipText }} />
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+This example passes an `onClick` handler to the layer. When a cluster is clicked, the handler
+receives a `PickingInfo` whose `object` is a `ClusterPickingObject`, and lists the events in that
+cluster in a panel.
+
+A user-supplied `onClick` runs before `clickToZoom`. If it returns `true`, the click is treated as
+handled, and the map does not zoom in on the cluster. This handler returns `false`, so the map still
+zooms when `clickToZoom` is `true`.
+ -->
+<Story name="Click handler">
+	{#snippet template(args)}
+		{@const layers = [makeClickableLayer(args as ClusterArgs)]}
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+				<MapDeckTooltips {layers} spec={{ events: tooltipText }} />
+
+				<MapControlGroup position="TopRight">
+					<div
+						class="pointer-events-auto max-h-96 w-72 overflow-y-auto bg-color-container p-3 text-color-text"
+					>
+						{#if clickedCluster}
+							<p class="font-bold">{clickedCluster.pointCount} events in this cluster</p>
+							<ul class="mt-2 list-disc pl-5">
+								{#each clickedCluster.points as point, i (i)}
+									<li>{point.properties?.event_name}</li>
+								{/each}
+							</ul>
+						{:else}
+							<p>Click a cluster to list its events.</p>
+						{/if}
+					</div>
+				</MapControlGroup>
 			</Map>
 		</div>
 	{/snippet}
