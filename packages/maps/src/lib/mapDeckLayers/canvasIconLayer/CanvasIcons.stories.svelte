@@ -18,8 +18,8 @@
 	 * Also, if the icons do not all fit in the WebGL `MAX_TEXTURE_SIZE`, then an error will occur.
 	 *
 	 * **Alternatives**:  if you only need to draw circles, use the [ScatterplotLayer](https://deck.gl/docs/api-reference/layers/scatterplot-layer).
-	 * If you need to use a small set of dsitinct icons, condier pre-rendering them as an iconAtlas for an [IconLayer](https://deck.gl/docs/api-reference/layers/icon-layer).
-	 * If the number of icons to render is large, and they are relatively simple, consider writing a layer that renders them susing a custom shader.
+	 * If you need to use a small set of distinct icons, consider pre-rendering them as an iconAtlas for an [IconLayer](https://deck.gl/docs/api-reference/layers/icon-layer).
+	 * If the number of icons to render is large, and they are relatively simple, consider writing a layer that renders them using a custom shader.
 	 */
 	const { Story } = defineMeta({
 		title: 'Maps/Components/DeckGL Layers/CanvasIconLayer',
