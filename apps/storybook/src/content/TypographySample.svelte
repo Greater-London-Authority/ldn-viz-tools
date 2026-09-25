@@ -41,6 +41,9 @@
 		The words here are placeholder, but every element is real, so we can see how the London City
 		Data Design System (lcd-ds) styles a whole document rather than a single component.
 	</p>
+	<!-- </div>
+
+<div class="mt-flow-loose">
 	<ObservablePlot
 		spec={singleLineSpec}
 		data={singleLineData}
@@ -52,6 +55,22 @@
 		note="Data for demonstration only"
 		chartDescription="The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"
 	/>
+</div>
+
+<div class="flow-prose prose mt-flow-section"> -->
+
+	<ObservablePlot
+		spec={singleLineSpec}
+		data={singleLineData}
+		title="In London, Variable A's value has fallen steadily since 2017"
+		subTitle="London monthly estimated variable value (GBP), January 2015 to March 2024"
+		alt="Line chart of London's variable A values"
+		byline="GLA City Intelligence"
+		source="LDN Viz Tools Demo Data"
+		note="Data for demonstration only"
+		chartDescription="The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"
+	/>
+
 	<p>
 		A chart like the one above rarely stands alone. It sits inside a train of thought, and the text
 		around it has to carry its own weight without fighting the figure for attention. A common worry
