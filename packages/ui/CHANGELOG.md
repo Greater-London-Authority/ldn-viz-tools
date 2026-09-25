@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 24.3.1
+
+### Patch Changes
+
+- d39b003: FIXED: `AppShell` sidebar placement is no longer lost during HMR or client-side navigation
+
 ## 24.3.0
 
 ### Minor Changes
