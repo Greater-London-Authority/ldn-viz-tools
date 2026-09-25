@@ -97,7 +97,10 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 		}),
 
 		new TextLayer<ClusterFeature<AnyProps>>({
+			fontFamily: 'Inter',
+
 			...props,
+
 			id: `${props.id}-counts`,
 			// Let clicks fall through to the circle underneath.
 			pickable: false,

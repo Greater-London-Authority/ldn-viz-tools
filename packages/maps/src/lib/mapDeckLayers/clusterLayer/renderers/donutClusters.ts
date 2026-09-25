@@ -146,7 +146,10 @@ export const donutClusters = <DataT extends AnyProps = AnyProps>(
 		if (showCount) {
 			layers.push(
 				new TextLayer<ClusterFeature<AnyProps>>({
+					fontFamily: 'Inter',
+
 					...props,
+
 					id: `${props.id}-counts`,
 					// Let picks fall through to the donut underneath.
 					pickable: false,

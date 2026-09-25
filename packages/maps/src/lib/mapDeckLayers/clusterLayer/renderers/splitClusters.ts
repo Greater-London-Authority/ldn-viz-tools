@@ -222,7 +222,10 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		if (showCount) {
 			layers.push(
 				new TextLayer<Row>({
+					fontFamily: 'Inter',
+
 					...props,
+
 					id: `${props.id}-split-counts`,
 					data: rows,
 					// Let picks fall through to the circle underneath.
