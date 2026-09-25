@@ -1,5 +1,19 @@
 # ldn-viz-tools-maps
 
+## 18.1.0
+
+### Minor Changes
+
+- a30bd58: ADDED: `closeTooltipOnLeave` action
+- 9d1ac28: ADDED: `CanvasIconLayer`
+  ADDED: `ClusterLayer`
+  ADDED: `MultiClusterLayer`
+
+### Patch Changes
+
+- Updated dependencies [d39b003]
+  - @ldn-viz/ui@24.3.1
+
 ## 18.0.0
 
 ### Minor Changes
