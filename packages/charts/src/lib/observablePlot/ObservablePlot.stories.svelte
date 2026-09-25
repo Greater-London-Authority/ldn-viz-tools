@@ -259,7 +259,7 @@
 								clickedIndex = d.index;
 								clickedValue = chartData[d.index];
 							},
-							'Path'
+							'path'
 						)
 					})
 				]

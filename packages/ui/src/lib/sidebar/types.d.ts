@@ -36,9 +36,11 @@ export interface SidebarProps {
 	theme?: 'light' | 'dark';
 
 	/**
-	 * The placement on screen of the sidebar
+	 * The placement on screen of the sidebar.
+	 *
+	 * Leave unset inside an `AppShell` so the placement follows its
+	 * `sidebarPlacement` breakpoints; setting it overrides them at every size.
 	 */
-
 	placement?: PlacementType;
 
 	/**

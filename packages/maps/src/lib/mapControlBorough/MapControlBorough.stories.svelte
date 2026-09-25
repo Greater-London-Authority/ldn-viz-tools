@@ -29,7 +29,6 @@
 
 	const transformRequest = appendOSKeyToUrl('vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP');
 
-	let mapStore: MapLibreStore = $state(writable());
 	let mapStorePreselected: MapLibreStore = $state(writable());
 	let mapStoreGreaterLondon: MapLibreStore = $state(writable());
 

@@ -82,7 +82,7 @@
 					(_ev: any, d: { index: number }) => {
 						clickedValue = chartData[d.index];
 					},
-					'Circle'
+					'circle'
 				)
 			})
 		]

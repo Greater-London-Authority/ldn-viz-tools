@@ -86,13 +86,6 @@ export const heightLookup: WidthLookup = {
 	}
 };
 
-export const wrapperFlowLookup: PlacementLookup = {
-	left: 'flex-row-reverse',
-	right: 'flex-row',
-	top: 'flex-col-reverse',
-	bottom: 'flex-col'
-};
-
 export const transitionAxis: { [key: string]: 'x' | 'y' } = {
 	left: 'x',
 	right: 'x',
