@@ -79,9 +79,6 @@
 	</div>
 </section>
 
-<!-- <div
-	class="container relative mx-auto -mt-24 border-t-[6px] border-color-surface-accent bg-color-canvas py-6 lg:py-12 xl:-mt-32 xl:py-16"
-> -->
 <div
 	class="container relative mx-auto -mt-24 border-t-[6px] border-color-surface-accent bg-color-canvas p-0 xl:-mt-32"
 >
