@@ -5,7 +5,7 @@
 	 * The `MultiClusterLayer` is similar to [ClusterLayer](./?path=/docs/maps-components-deckgl-clusterlayer--documentation).
 	 * However, rather than clustering all points together, it first separates them into groups based on the value
 	 * returned by the `getKey` function, then clusters each group separately, and uses a
-	 * [NonOverlappingGlyphLayer](./?path=/docs/maps-components-deckgl-nonoverlappingglyphlayer--documentation)
+	 * [NonOverlappingGlyphLayer](./?path=/docs/maps-components-deckgl-layers-nonoverlappingglyphlayer--documentation)
 	 * to avoid overlap between cluster markers from different groups.
 	 *
 	 * The clusters are re-calculated whenever the map crosses an integer zoom level.
@@ -25,7 +25,7 @@
 	 * The `expansionZoom` can be used in a click handler to zoom-in to the level at which a cluster expands.
 	 */
 	const { Story } = defineMeta({
-		title: 'Maps/Components/DeckGL/MultiClusterLayer',
+		title: 'Maps/Components/DeckGL Layers/MultiClusterLayer',
 		tags: ['autodocs'],
 		argTypes: {
 			clusterRadius: {

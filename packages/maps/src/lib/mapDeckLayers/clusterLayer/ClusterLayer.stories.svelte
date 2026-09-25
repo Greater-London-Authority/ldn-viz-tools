@@ -19,11 +19,11 @@
 	 * also has `key`: the category of the circle that was picked.
 	 *
 	 * **Alternatives**: If you want to split the data into groups and cluster tha separately, use the
-	 * [MultiClusterLayer](./?path=/docs/maps-components-deckgl-multiclusterlayer--documentation).
+	 * [MultiClusterLayer](./?path=/docs/maps-components-deckgl-layers-multiclusterlayer--documentation).
 	 *
 	 */
 	const { Story } = defineMeta({
-		title: 'Maps/Components/DeckGL/ClusterLayer',
+		title: 'Maps/Components/DeckGL Layers/ClusterLayer',
 		tags: ['autodocs'],
 		argTypes: {
 			clusterRadius: {

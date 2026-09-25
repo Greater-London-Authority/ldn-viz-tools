@@ -27,7 +27,7 @@
 	 * - Increasing the max number of iterations also increases the length of time taken by each individual iteration. This is because more potential candidates for future overlap must tbe considered.
 	 */
 	const { Story } = defineMeta({
-		title: 'Maps/Components/DeckGL/NonOverlappingGlyphLayer',
+		title: 'Maps/Components/DeckGL Layers/NonOverlappingGlyphLayer',
 		tags: ['autodocs'],
 		argTypes: {
 			getGlyphRadius: {

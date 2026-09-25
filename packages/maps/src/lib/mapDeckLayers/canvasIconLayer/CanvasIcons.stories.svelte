@@ -22,7 +22,7 @@
 	 * If the number of icons to render is large, and they are relatively simple, consider writing a layer that renders them susing a custom shader.
 	 */
 	const { Story } = defineMeta({
-		title: 'Maps/Components/DeckGL/CanvasIconLayer',
+		title: 'Maps/Components/DeckGL Layers/CanvasIconLayer',
 		tags: ['autodocs'],
 		argTypes: {
 			size: {
