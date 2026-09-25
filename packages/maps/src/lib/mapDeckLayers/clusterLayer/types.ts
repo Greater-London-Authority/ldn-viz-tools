@@ -85,7 +85,7 @@ export type ClusterLayerOwnProps<DataT extends AnyProps = AnyProps> = {
 	 * As for deck's own layers, a renderer with a new style (e.g. a new call to `circleClusters()`)
 	 * updates constant values, such as colors, straight away. Function accessors, such as radius
 	 * ramps, only update when the data changes (at the next integer zoom) or when the matching
-	 * trigger in the style's `updateTriggers` changes, e.g. `updateTriggers: { getRadius: [minRadius] }`.
+	 * trigger in the style's `updateTriggers` changes, e.g. `updateTriggers: { getRadius: [radiusMinPixels] }`.
 	 */
 	renderClusters?: ClusterRenderer<DataT>;
 
@@ -95,8 +95,8 @@ export type ClusterLayerOwnProps<DataT extends AnyProps = AnyProps> = {
 	 *
 	 * As for deck's own layers, a renderer with a new style (e.g. a new call to `circlePoints()`)
 	 * updates constant values, such as colors, straight away. Function accessors, such as a
-	 * `getColor` function, only update when the data changes (at the next integer zoom) or when the
-	 * matching trigger in the style's `updateTriggers` changes, e.g. `updateTriggers: { getColor: [palette] }`.
+	 * `getFillColor` function, only update when the data changes (at the next integer zoom) or when the
+	 * matching trigger in the style's `updateTriggers` changes, e.g. `updateTriggers: { getFillColor: [palette] }`.
 	 */
 	renderPoints?: PointRenderer<DataT>;
 

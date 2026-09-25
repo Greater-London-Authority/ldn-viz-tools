@@ -21,10 +21,11 @@ export type SplitClusterStyle<DataT> = {
 	 */
 	order?: string[];
 
-	strokeColor?: Color;
+	/** Outline color of the circles. */
+	getLineColor?: Color;
 
-	/** Stroke width, as a fraction of each circle's radius. */
-	strokeWidth?: number;
+	/** Outline width, as a fraction of each circle's radius. */
+	lineWidthFraction?: number;
 
 	/** Extra pixels between neighbouring circles. */
 	gap?: number;
@@ -41,8 +42,14 @@ export type SplitClusterStyle<DataT> = {
 	showCount?: boolean;
 	textColor?: Color;
 	maxTextSize?: number;
-	minRadius?: number;
-	maxRadius?: number;
+
+	/** Radius (in pixels) of a circle for a single point; larger circles grow from this. */
+	radiusMinPixels?: number;
+
+	/** Maximum radius (in pixels). */
+	radiusMaxPixels?: number;
+
+	/** How quickly the radius grows with the square root of the count. */
 	radiusScale?: number;
 
 	/** Width and height of the canvas each circle is drawn on, in pixels. */
@@ -76,8 +83,8 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		getKey,
 		colors,
 		order,
-		strokeColor = tokenColor('geo.inverse.feature.default'),
-		strokeWidth = 0.12,
+		getLineColor = tokenColor('geo.inverse.feature.default'),
+		lineWidthFraction = 0.12,
 		gap = 2,
 		showRing = false,
 		ringColor = tokenColor('geo.feature.default'),
@@ -85,26 +92,26 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		showCount = true,
 		textColor = tokenColor('inverse.text.default'),
 		maxTextSize = 14,
-		minRadius,
-		maxRadius,
+		radiusMinPixels,
+		radiusMaxPixels,
 		radiusScale,
 		iconSize = ICON_PX,
 		updateTriggers
 	} = style;
 
 	const fallbackColor = tokenColor('data.neutral.0');
-	const radiusOf = clusterRadiusRamp({ minRadius, maxRadius, radiusScale });
+	const radiusOf = clusterRadiusRamp({ radiusMinPixels, radiusMaxPixels, radiusScale });
 
 	const paintDisc = (ctx: CanvasRenderingContext2D, key: string) => {
 		const c = ctx.canvas.width / 2;
-		const lineWidth = c * strokeWidth;
+		const lineWidth = c * lineWidthFraction;
 		ctx.beginPath();
 		ctx.arc(c, c, c - lineWidth / 2, 0, Math.PI * 2);
 		ctx.fillStyle = rgba(colors[key] ?? fallbackColor);
 		ctx.fill();
 		if (lineWidth > 0) {
 			ctx.lineWidth = lineWidth;
-			ctx.strokeStyle = rgba(strokeColor);
+			ctx.strokeStyle = rgba(getLineColor);
 			ctx.stroke();
 		}
 	};

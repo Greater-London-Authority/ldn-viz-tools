@@ -27,13 +27,19 @@ export type DonutClusterStyle<DataT> = {
 	holeColor?: Color;
 
 	/** Color of the thin gaps between segments, and the outline of the ring. */
-	strokeColor?: Color;
+	getLineColor?: Color;
 
 	showCount?: boolean;
 	textColor?: Color;
 	maxTextSize?: number;
-	minRadius?: number;
-	maxRadius?: number;
+
+	/** Radius (in pixels) of a cluster of a single point; larger clusters grow from this. */
+	radiusMinPixels?: number;
+
+	/** Maximum radius (in pixels). */
+	radiusMaxPixels?: number;
+
+	/** How quickly the radius grows with the square root of the count. */
 	radiusScale?: number;
 
 	/** Width and height of the canvas each donut is drawn on, in pixels. */
@@ -62,19 +68,19 @@ export const donutClusters = <DataT extends AnyProps = AnyProps>(
 		order,
 		ringWidth = 0.4,
 		holeColor = tokenColor('geo.inverse.feature.default', 230),
-		strokeColor = tokenColor('geo.inverse.feature.default'),
+		getLineColor = tokenColor('geo.inverse.feature.default'),
 		showCount = true,
 		textColor = tokenColor('geo.label.default'),
 		maxTextSize = 16,
-		minRadius = 12,
-		maxRadius = 48,
+		radiusMinPixels = 12,
+		radiusMaxPixels = 48,
 		radiusScale = 3,
 		iconSize = ICON_PX,
 		updateTriggers
 	} = style;
 
 	const fallbackColor = tokenColor('data.neutral.0');
-	const radiusOf = clusterRadiusRamp({ minRadius, maxRadius, radiusScale });
+	const radiusOf = clusterRadiusRamp({ radiusMinPixels, radiusMaxPixels, radiusScale });
 
 	const paintDonut = (ctx: CanvasRenderingContext2D, slices: Slice[]) => {
 		const size = ctx.canvas.width;
@@ -100,7 +106,7 @@ export const donutClusters = <DataT extends AnyProps = AnyProps>(
 			ctx.fill();
 			if (slices.length > 1) {
 				ctx.lineWidth = size / 64;
-				ctx.strokeStyle = rgba(strokeColor);
+				ctx.strokeStyle = rgba(getLineColor);
 				ctx.stroke();
 			}
 			angle = end;

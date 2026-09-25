@@ -112,20 +112,20 @@ const WORLD_BOUNDS: [number, number, number, number] = [-180, -85, 180, 85];
 
 // Shared by the renderers and by the radius calculations used to space the glyphs apart
 const CLUSTER_STYLE: CircleClusterStyle = {
-	minRadius: 8,
-	maxRadius: 20,
+	radiusMinPixels: 8,
+	radiusMaxPixels: 20,
 	radiusScale: 1.5,
-	strokeWidth: 1.5
+	getLineWidth: 1.5
 };
 const POINT_STYLE: CirclePointStyle<AnyProps> = {
-	strokeWidth: 1.5
+	getLineWidth: 1.5
 };
 
 // The stroke is centred on the edge of the circle, so half of it lies outside the radius
 const clusterRadiusOf = (count: number) =>
-	clusterRadiusRamp(CLUSTER_STYLE)(count) + CLUSTER_STYLE.strokeWidth! / 2;
+	clusterRadiusRamp(CLUSTER_STYLE)(count) + CLUSTER_STYLE.getLineWidth! / 2;
 const pointRadiusOf = (zoom: number) =>
-	pointRadiusRamp(POINT_STYLE)(zoom) + POINT_STYLE.strokeWidth! / 2;
+	pointRadiusRamp(POINT_STYLE)(zoom) + POINT_STYLE.getLineWidth! / 2;
 
 const defaultProps: DefaultProps<MultiClusterLayerProps> = {
 	getKey: { type: 'function', value: () => '', compare: false },
@@ -176,13 +176,13 @@ const renderGlyphs =
 		const makeRow = <R extends object>(row: R) => row;
 
 		const defaultColor = tokenColor('data.neutral.1');
-		const strokeColor = tokenColor('geo.inverse.feature.default');
+		const lineColor = tokenColor('geo.inverse.feature.default');
 
 		const clusterLayers = Object.entries(clusterRows).map(([key, rows]) =>
 			circleClusters<DataT & AnyProps>({
 				...CLUSTER_STYLE,
-				color: colors[key] ?? defaultColor,
-				strokeColor
+				getFillColor: colors[key] ?? defaultColor,
+				getLineColor: lineColor
 			})({
 				...props,
 				id: `${props.id}-clusters-${key}`,
@@ -197,9 +197,9 @@ const renderGlyphs =
 
 		const pointLayer = circlePoints<DataT & AnyProps>({
 			...POINT_STYLE,
-			strokeColor,
-			getColor: (d) => colors[getKey(d)] ?? defaultColor,
-			updateTriggers: { getColor: colors }
+			getLineColor: lineColor,
+			getFillColor: (d) => colors[getKey(d)] ?? defaultColor,
+			updateTriggers: { getFillColor: colors }
 		})({
 			...props,
 			id: `${props.id}-points`,

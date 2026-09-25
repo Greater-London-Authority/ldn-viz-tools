@@ -6,17 +6,20 @@ import type { ClusterRenderer, PointRenderer } from '../types';
 
 /** Area scales with count, so radius scales with sqrt(count). */
 export const clusterRadiusRamp =
-	({ minRadius = 8, maxRadius = 42, radiusScale = 3 } = {}) =>
+	({ radiusMinPixels = 8, radiusMaxPixels = 42, radiusScale = 3 } = {}) =>
 	(count: number) =>
-		Math.min(minRadius + Math.sqrt(count) * radiusScale, maxRadius);
+		Math.min(radiusMinPixels + Math.sqrt(count) * radiusScale, radiusMaxPixels);
 
 /** A single point has no count to scale by, so zoom drives it instead, using the same
  * min + sqrt(growth) * scale shape. Fed the integer query zoom, so points step in size with
  * the clusters rather than resizing through every fractional zoom. */
 export const pointRadiusRamp =
-	({ minRadius = 3, maxRadius = 10, radiusScale = 1.5, fromZoom = 10 } = {}) =>
+	({ radiusMinPixels = 3, radiusMaxPixels = 10, radiusScale = 1.5, fromZoom = 10 } = {}) =>
 	(zoom: number) =>
-		Math.min(minRadius + Math.sqrt(Math.max(0, zoom - fromZoom)) * radiusScale, maxRadius);
+		Math.min(
+			radiusMinPixels + Math.sqrt(Math.max(0, zoom - fromZoom)) * radiusScale,
+			radiusMaxPixels
+		);
 
 /** Abbreviates a count in the same way as supercluster's `point_count_abbreviated` (e.g. "1.2k"). */
 export const abbreviateCount = (count: number) =>
@@ -27,13 +30,25 @@ export const abbreviateCount = (count: number) =>
 			: String(count);
 
 export type CircleClusterStyle = {
-	color?: Color;
-	strokeColor?: Color;
-	strokeWidth?: number;
+	/** Fill color of the circles. */
+	getFillColor?: Color;
+
+	/** Outline color of the circles. */
+	getLineColor?: Color;
+
+	/** Outline width of the circles (in pixels). */
+	getLineWidth?: number;
+
 	textColor?: Color;
 	maxTextSize?: number;
-	minRadius?: number;
-	maxRadius?: number;
+
+	/** Radius (in pixels) of a cluster of a single point; larger clusters grow from this. */
+	radiusMinPixels?: number;
+
+	/** Maximum radius (in pixels). */
+	radiusMaxPixels?: number;
+
+	/** How quickly the radius grows with the square root of the count. */
 	radiusScale?: number;
 
 	/**
@@ -51,18 +66,18 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 	style: CircleClusterStyle = {}
 ): ClusterRenderer<DataT> {
 	const {
-		color = tokenColor('data.primary'),
-		strokeColor = tokenColor('geo.inverse.feature.default', 100),
-		strokeWidth = 5,
+		getFillColor = tokenColor('data.primary'),
+		getLineColor = tokenColor('geo.inverse.feature.default', 100),
+		getLineWidth = 5,
 		textColor = tokenColor('inverse.text.default'),
 		maxTextSize = 18,
-		minRadius,
-		maxRadius,
+		radiusMinPixels,
+		radiusMaxPixels,
 		radiusScale,
 		updateTriggers
 	} = style;
 
-	const radiusOf = clusterRadiusRamp({ minRadius, maxRadius, radiusScale });
+	const radiusOf = clusterRadiusRamp({ radiusMinPixels, radiusMaxPixels, radiusScale });
 
 	return (props) => [
 		new ScatterplotLayer<ClusterFeature<AnyProps>>({
@@ -72,9 +87,9 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 			lineWidthUnits: 'pixels',
 			stroked: true,
 			getRadius: (f) => radiusOf(props.getPointCount(f)),
-			getFillColor: color,
-			getLineColor: strokeColor,
-			getLineWidth: strokeWidth,
+			getFillColor,
+			getLineColor,
+			getLineWidth,
 			updateTriggers: {
 				...props.updateTriggers,
 				...updateTriggers
@@ -105,24 +120,25 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 }
 
 export type CirclePointStyle<DataT extends AnyProps> = {
-	/** Fill color accessor. */
-	getColor?: Color | ((datum: DataT) => Color);
+	/** Fill color, or an accessor that receives the point's datum. */
+	getFillColor?: Color | ((datum: DataT) => Color);
 
-	/** Stroke color */
-	strokeColor?: Color;
+	/** Outline color of the circles. */
+	getLineColor?: Color;
 
-	/** Stroke width. */
-	strokeWidth?: number;
+	/** Outline width of the circles (in pixels). */
+	getLineWidth?: number;
 
 	/** Minimum radius (in pixels). */
-	minRadius?: number;
+	radiusMinPixels?: number;
 
 	/** Maximum radius (in pixels). */
-	maxRadius?: number;
+	radiusMaxPixels?: number;
 
+	/** How quickly the radius grows with the square root of the zoom above `fromZoom`. */
 	radiusScale?: number;
 
-	/** The zoom level below which the radius is clamped at `minRadius`. */
+	/** The zoom level below which the radius is clamped at `radiusMinPixels`. */
 	fromZoom?: number;
 
 	/** Triggers for the accessors above, merged into the layer's own. */
@@ -136,17 +152,17 @@ export function circlePoints<DataT extends AnyProps = AnyProps>(
 	style: CirclePointStyle<DataT> = {}
 ): PointRenderer<DataT> {
 	const {
-		getColor = tokenColor('data.secondary'),
-		strokeColor = tokenColor('geo.inverse.feature.default', 100),
-		strokeWidth = 1.5,
-		minRadius,
-		maxRadius,
+		getFillColor = tokenColor('data.secondary'),
+		getLineColor = tokenColor('geo.inverse.feature.default', 100),
+		getLineWidth = 1.5,
+		radiusMinPixels,
+		radiusMaxPixels,
 		radiusScale,
 		fromZoom,
 		updateTriggers
 	} = style;
 
-	const radiusOf = pointRadiusRamp({ minRadius, maxRadius, radiusScale, fromZoom });
+	const radiusOf = pointRadiusRamp({ radiusMinPixels, radiusMaxPixels, radiusScale, fromZoom });
 
 	return (props) =>
 		new ScatterplotLayer<PointFeature<DataT>>({
@@ -157,13 +173,14 @@ export function circlePoints<DataT extends AnyProps = AnyProps>(
 			stroked: true,
 			getRadius: radiusOf(props.zoom),
 			getFillColor:
-				typeof getColor === 'function' ? (f) => getColor(props.getDatum(f)) : (getColor as Color),
-			getLineColor: strokeColor,
-			getLineWidth: strokeWidth,
+				typeof getFillColor === 'function'
+					? (f) => getFillColor(props.getDatum(f))
+					: (getFillColor as Color),
+			getLineColor,
+			getLineWidth,
 			updateTriggers: {
 				...props.updateTriggers,
-				...updateTriggers,
-				getFillColor: [updateTriggers?.getColor]
+				...updateTriggers
 			}
 		});
 }

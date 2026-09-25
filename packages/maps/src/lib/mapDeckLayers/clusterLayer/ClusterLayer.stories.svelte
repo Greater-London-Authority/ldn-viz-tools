@@ -117,24 +117,24 @@
 			pickable: true,
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: circleClusters({
-				color: theme.colorTokenNameToRGBArray('data.secondary') as [number, number, number],
-				strokeColor: [...theme.colorTokenNameToRGBArray('geo.inverse.feature.default'), 180] as [
+				getFillColor: theme.colorTokenNameToRGBArray('data.secondary') as [number, number, number],
+				getLineColor: [...theme.colorTokenNameToRGBArray('geo.inverse.feature.default'), 180] as [
 					number,
 					number,
 					number,
 					number
 				],
-				strokeWidth: 3,
-				minRadius: 12,
+				getLineWidth: 3,
+				radiusMinPixels: 12,
 				radiusScale: 4
 			}),
 			renderPoints: circlePoints<EventFeature>({
-				getColor: (d: EventFeature) =>
+				getFillColor: (d: EventFeature) =>
 					theme.colorTokenNameToRGBArray(
 						eventTypeColors[String(d.properties?.event_type).toLowerCase()] ?? 'data.primary'
 					) as [number, number, number],
-				minRadius: 5,
-				maxRadius: 12
+				radiusMinPixels: 5,
+				radiusMaxPixels: 12
 			})
 		});
 
@@ -181,9 +181,9 @@
 				order: Object.keys(eventTypeColors)
 			}),
 			renderPoints: circlePoints<EventFeature>({
-				getColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
-				minRadius: 5,
-				maxRadius: 12
+				getFillColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
+				radiusMinPixels: 5,
+				radiusMaxPixels: 12
 			})
 		});
 
@@ -201,9 +201,9 @@
 				order: Object.keys(eventTypeColors)
 			}),
 			renderPoints: circlePoints<EventFeature>({
-				getColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
-				minRadius: 5,
-				maxRadius: 12
+				getFillColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
+				radiusMinPixels: 5,
+				radiusMaxPixels: 12
 			})
 		});
 
@@ -223,9 +223,9 @@
 				ringWidth: 3
 			}),
 			renderPoints: circlePoints<EventFeature>({
-				getColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
-				minRadius: 5,
-				maxRadius: 12
+				getFillColor: (d: EventFeature) => eventTypeRGB(eventTypeOf(d)),
+				radiusMinPixels: 5,
+				radiusMaxPixels: 12
 			})
 		});
 </script>
@@ -255,7 +255,7 @@ This example still uses the default `circleClusters()` and `circlePoints()`
 renderer functions, but provides options to change their appearance.
 
 Here clusters have a different colour, and the color of each point is now
-determined by its `event_type` using a `getColor` function.
+determined by its `event_type` using a `getFillColor` function.
  -->
 <Story name="Custom styling">
 	{#snippet template(args)}
