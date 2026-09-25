@@ -1,5 +1,7 @@
 import type { Color } from '@deck.gl/core';
 import { ScatterplotLayer, TextLayer } from '@deck.gl/layers';
+import { theme } from '@ldn-viz/ui';
+import { colorWithBestContrast } from '@ldn-viz/utils';
 import type { AnyProps, ClusterFeature, PointFeature } from 'supercluster';
 import { tokenColor } from '../../tokenColor';
 import type { ClusterRenderer, PointRenderer } from '../types';
@@ -69,7 +71,7 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 		getFillColor = tokenColor('data.primary'),
 		getLineColor = tokenColor('geo.inverse.feature.default', 100),
 		getLineWidth = 5,
-		textColor = tokenColor('inverse.text.default'),
+		textColor,
 		maxTextSize = 18,
 		radiusMinPixels,
 		radiusMaxPixels,
@@ -107,7 +109,13 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 			sizeUnits: 'pixels',
 			getText: (f) => abbreviateCount(props.getPointCount(f)),
 			getSize: (f) => Math.min(radiusOf(props.getPointCount(f)) * 0.9, maxTextSize),
-			getColor: textColor,
+			getColor:
+				textColor ??
+				colorWithBestContrast(
+					getFillColor,
+					theme.colorTokenNameToRGBArray('inverse.text'),
+					theme.colorTokenNameToRGBArray('text')
+				),
 			getTextAnchor: 'middle' as const,
 			getAlignmentBaseline: 'center' as const,
 			fontWeight: 600,
