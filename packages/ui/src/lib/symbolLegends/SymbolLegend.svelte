@@ -1,30 +1,22 @@
 <script lang="ts">
+	import { theme } from '@ldn-viz/ui';
+
 	/**
-	 * The `<ColorLegend>` component draws a legend for a D3 color scale.
+	 * The `<SymbolLegend>` component draws a legend using for a D3 symbol scale.
 	 *
 	 * @component
 	 */
 
 	// This file is based on
-	// https://observablehq.com/@d3/color-legend
-	// Copyright 2021, Observable Inc.
-	// Released under the ISC license.
-
-	// It has been modified to use Svelte rather than just D3.js, and to allow a value on the scale to be highlighted.
-
-	import { quantile, range } from 'd3-array';
-	import { axisBottom } from 'd3-axis';
-	import { format } from 'd3-format';
-	import { interpolate, interpolateRound, quantize } from 'd3-interpolate';
-	import { scaleBand, scaleLinear } from 'd3-scale';
-	import { select } from 'd3-selection';
-	import { theme } from '../theme/themeState.svelte';
+	// https://d3-legend.susielu.com/
+	// Copyright 2015, Susie Lu
+	// Released under the Apache-2.0 license.
 
 	interface Props {
 		/**
-		 * A d3 color scale object
+		 * A color token name.
 		 */
-		color: any;
+		colorToken: any;
 		/**
 		 * Title to display above the colors.
 		 */
@@ -105,22 +97,6 @@
 		rightLabel = '',
 		reverse = false
 	}: Props = $props();
-
-	const ramp = (color: any, n = 256) => {
-		const canvas = document.createElement('canvas');
-		canvas.width = n;
-		canvas.height = 1;
-		const context = canvas.getContext('2d');
-		if (context) {
-			for (let i = 0; i < n; ++i) {
-				context.fillStyle = color(i / (n - 1));
-
-				const xp = reverse ? n - i : i;
-				context.fillRect(xp, 0, 1, 1);
-			}
-		}
-		return canvas.toDataURL();
-	};
 
 	let axisState = $derived.by(() => {
 		let x;
@@ -215,130 +191,24 @@
 
 		return { x, n, tickF, tickAdjust, tickValues: tv };
 	});
-
-	let ticksRef: SVGElement | undefined = $state();
-
-	const updateLegend = (
-		axisState: { x: any; n?: number; tickF: any; tickAdjust: any; tickValues: any },
-		ticksRef?: SVGElement
-	) => {
-		if (ticksRef) {
-			const bottomAxis = axisBottom(axisState.x)
-				.ticks(ticks, typeof axisState.tickF === 'string' ? axisState.tickF : undefined)
-				.tickSize(tickSize)
-				.tickValues(axisState.tickValues!);
-
-			if (typeof axisState.tickF === 'function') {
-				const formatter = axisState.tickF;
-				bottomAxis.tickFormat((d) => {
-					const value = formatter(d);
-					return value ?? '';
-				});
-			}
-
-			select(ticksRef)
-				.call(bottomAxis as any, 0)
-				.call(axisState.tickAdjust)
-				.call((g: any) => g.select('.domain').remove());
-
-			// clear the `font-family="sans-serif"` attribute applied by the axis generator,
-			// so the font-family used on the rest of the page (Inter) is used
-			select(ticksRef).attr('font-family', null);
-		}
-	};
-
-	$effect(() => {
-		updateLegend(axisState, ticksRef);
-	});
-
-	$inspect('axisState', axisState);
-	$inspect('color', color);
 </script>
 
 <svg
 	width="100%"
-	viewBox="0  0 {width} {height}"
+	viewBox="0 0 {width} {height}"
 	style="overflow: visible; display: block;"
 	class="text-color-text"
 >
-	{#if !color}
-		<text>Loading...</text>
-	{:else if color.interpolate}
-		<!-- continuous -->
-
-		<image
-			x={marginLeft}
+	<!-- ordinal -->
+	<g>
+		{#each color.domain() as d, i (i)}
+		<circle
+			x={axisState.x(d)}
 			y={marginTop}
-			width={width - marginLeft - marginRight}
+			width={Math.max(0, axisState.x.bandwidth() - 1)}
 			height={height - marginTop - marginBottom}
-			preserveAspectRatio="none"
-			xlink:href={ramp(color.copy().domain(quantize(interpolate(0, 1), axisState.n)))}
+			fill={theme.tokenNameToValue(color, theme.currentTheme)}
 		/>
-	{:else if color.interpolator}
-		<!-- sequential -->
-
-		<image
-			x={marginLeft}
-			y={marginTop}
-			width={width - marginLeft - marginRight}
-			height={height - marginTop - marginBottom}
-			preserveAspectRatio="none"
-			xlink:href={ramp(color.interpolator())}
-		/>
-	{:else if color.invertExtent}
-		<!--threshold -->
-		<g>
-			{#each color.range() as d, i (i)}
-				<rect
-					x={reverse ? axisState.x(i) : axisState.x(i - 1)}
-					y={marginTop}
-					width={reverse
-						? axisState.x(i - 1) - axisState.x(i)
-						: axisState.x(i) - axisState.x(i - 1)}
-					height={height - marginTop - marginBottom}
-					fill={d}
-				/>
-			{/each}
-		</g>
-	{:else}
-		<!-- ordinal -->
-		<g>
-			{#each color.domain() as d, i (i)}
-				<rect
-					x={axisState.x(d)}
-					y={marginTop}
-					width={Math.max(0, axisState.x.bandwidth() - 1)}
-					height={height - marginTop - marginBottom}
-					fill={color(d)}
-				/>
-			{/each}
-		</g>
-	{/if}
-
-	<text
-		x={marginLeft}
-		y={marginTop - 6}
-		font-size="10px"
-		text-anchor="start"
-		font-weight="bold"
-		fill="currentColor">{title}</text
-	>
-
-	<g id="ticks" bind:this={ticksRef} transform={`translate(0,${height - marginBottom})`} />
-
-	<text x={0} y={height + 5} text-anchor="start" font-size="10px" fill="currentColor">
-		{leftLabel}
-	</text>
-
-	<text x={width} y={height + 5} text-anchor="end" font-size="10px" fill="currentColor">
-		{rightLabel}
-	</text>
-
-	{#if highlightedValue}
-		<g
-			transform={`translate(${axisState.x(highlightedValue)}, ${height - marginBottom + 10} ) scale(10) `}
-		>
-			<path d={`M-0.5,0 L0.5,0 L 0,-${Math.sqrt(2 / 3)} Z`} fill="currentColor" />
-		</g>
-	{/if}
+		{/each}
+	</g>
 </svg>
