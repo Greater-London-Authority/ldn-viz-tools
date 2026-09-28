@@ -105,10 +105,23 @@
 	let silentQueryTextUpdate = $state(false);
 	let showSuggestionList = $state(false);
 
+	/**
+	 * If `true`, the user pressed Enter before suggestions were returned.
+	 */
+	let pendingEnterSelection = $state(false);
+
 	// apply fallback - can't set directly with a bindable
 	if (!suggestions) {
 		suggestions = [];
 	}
+
+	// Auto-select first result when it becomes available, if pendingEnterSelection
+	$effect(() => {
+		if (pendingEnterSelection && suggestions && suggestions.length > 0) {
+			pendingEnterSelection = false;
+			onSelect(suggestions[0]);
+		}
+	});
 
 	const updateSuggestionsNow = async () => {
 		if (!query || query.length < 3) {
@@ -269,6 +282,10 @@
 
 	const navigateSuggestionList = (event: Event) => {
 		if (!showSuggestionList || !suggestions || suggestions.length === 0) {
+			const pressEvent = event as KeyboardEvent;
+			if (pressEvent.key === 'Enter' && query && query.length >= 3) {
+				pendingEnterSelection = true;
+			}
 			return;
 		}
 
@@ -295,6 +312,7 @@
 		selected = null;
 		suggestions = [];
 		showSuggestionList = false;
+		pendingEnterSelection = false;
 
 		onSearchClear();
 	};
