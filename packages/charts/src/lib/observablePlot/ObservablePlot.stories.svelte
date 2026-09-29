@@ -34,7 +34,7 @@
 </script>
 
 <script lang="ts">
-	import { Button, Select, theme } from '@ldn-viz/ui';
+	import { Button, Input, Select, theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
@@ -52,6 +52,7 @@
 	let clickedValue: any | undefined = $state(undefined);
 	let clickedIndex: any | undefined = $state(undefined);
 	let hoveredValue: any | undefined = $state(undefined);
+	let yearValue: string = $state('2024');
 
 	const tooltipStore: Writable<Position> = writable();
 
@@ -121,6 +122,11 @@
 				}
 			})
 		]
+	});
+
+	let specYearSlider = $derived({
+		...spec,
+		marks: [...spec.marks, Plot.ruleX([yearValue])]
 	});
 
 	let width = $state('w-96');
@@ -310,6 +316,25 @@
 					<div class="w-52">
 						<Select label="Another input" options={[]} />
 					</div>
+				</div>
+			{/snippet}
+		</ObservablePlot>
+	{/snippet}
+</Story>
+
+<Story name="With slider control">
+	{#snippet template(args)}
+		<ObservablePlot {...args} spec={specYearSlider} data={chartData}>
+			{#snippet controls()}
+				<div class="mb-4 flex items-center gap-4">
+					<Input
+						label="Year: {yearValue}"
+						type="range"
+						name="range"
+						min="2015"
+						max="2024"
+						bind:value={yearValue}
+					/>
 				</div>
 			{/snippet}
 		</ObservablePlot>
