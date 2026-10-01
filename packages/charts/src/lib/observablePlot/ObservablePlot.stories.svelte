@@ -35,6 +35,7 @@
 
 <script lang="ts">
 	import { Button, Input, Select, theme } from '@ldn-viz/ui';
+	import { max } from 'd3';
 	import { format } from 'd3-format';
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
@@ -128,7 +129,19 @@
 
 	let specYearSlider = $derived({
 		...spec,
-		marks: [...spec.marks, Plot.ruleX([yearValue])]
+		marks: [
+			...spec.marks,
+			Plot.ruleX([yearValue]),
+			Plot.text([0], {
+				x: new Date(`${yearValue}-01-01T00:00:01`),
+				y: max(chartData, (d) => d.Value),
+				text: [yearValue],
+				dy: 0,
+				dx: 13,
+				rotate: 90,
+				textAnchor: 'start'
+			})
+		]
 	});
 
 	let width = $state('w-96');
