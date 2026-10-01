@@ -53,6 +53,8 @@
 	let clickedIndex: any | undefined = $state(undefined);
 	let hoveredValue: any | undefined = $state(undefined);
 	let yearValue: string = $state('2024');
+	let minYear: string = '2015';
+	let maxYear: string = '2024';
 
 	const tooltipStore: Writable<Position> = writable();
 
@@ -326,15 +328,20 @@
 	{#snippet template(args)}
 		<ObservablePlot {...args} spec={specYearSlider} data={chartData}>
 			{#snippet controls()}
-				<div class="mb-4 flex items-center gap-4">
+				<div class="mb-4 flex max-w-48 flex-col">
 					<Input
 						label="Year: {yearValue}"
+						id="year-slider"
 						type="range"
-						name="range"
-						min="2015"
-						max="2024"
+						name="year-slider"
+						min={minYear}
+						max={maxYear}
 						bind:value={yearValue}
 					/>
+					<div class="flex justify-between">
+						<span class="form-label text-xs">{minYear}</span>
+						<span class="form-label text-xs">{maxYear}</span>
+					</div>
 				</div>
 			{/snippet}
 		</ObservablePlot>
