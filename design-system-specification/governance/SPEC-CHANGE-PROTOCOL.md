@@ -1,61 +1,85 @@
 # Spec change protocol
 
-_How changes flow through the GLA / ldn-viz design system without the spec drifting into misinformation. Lives beside `DECISIONS.md`. Read the core rule; the rest is mechanics._
+This is a practical guide to changing the [design system specification](../design-system-specification.md). It covers how the specification is put together, the order in which to make a change, and how to confirm that the specification still matches the code before you open a pull request.
 
-## The core rule
+It does not describe how decisions are agreed. The [README](../README.md) explains when a change needs a Request for Comment (RFC) or an Architectural Decision Record (ADR), and the [ADR lifecycle](./ADR-LIFECYCLE.md) explains how ADRs are written, accepted and changed.
 
-**For anything with a concrete value or name, the spec is downstream of the build — never the source.** The emitted CSS in `styles/` is ground truth: it ships, and the Style Dictionary build is deterministic (reproducible zero-diff). So the spec's value content is _generated_ from that output, and only its prose — intent, rationale, role logic — is hand-written. Generated numbers can be out of date (a rerun fixes that); they can't be silently wrong.
+## How the specification is put together
 
-Three artifacts, three distinct jobs — don't blur them:
+The specification contains two kinds of content.
 
-- **`DECISIONS.md`** — the decision ledger. One line per settled decision. The _why_.
-- **Figma variables → token export → `styles/`** — the value source. The _what_, authoritative.
-- **`design-system-specification.md`** — the reconciled narrative. Prose by hand; value tables + CSS appendix generated.
+**Hand-written prose** explains what each part of the system is for and why it works the way it does. You edit it directly.
 
-## Two kinds of change, two directions
+**Generated blocks** hold the values: the responsive type matrices, the spacing tables and the CSS appendix. They sit between pairs of markers, such as `<!-- GEN:spacing-table START -->` and `<!-- GEN:spacing-table END -->`. The markers do not appear in the rendered page. There are five of these blocks: `prose-matrix`, `product-matrix`, `spacing-table`, `spacing-alias` and `css-appendix`.
 
-**A decision** (rename a role, refine chart typography, "tick should be X"): enters as prose, flows _down_ the pipeline.
+The values in the generated blocks come from the build, not from the specification. They travel in one direction:
 
-1. Add a one-line entry to `DECISIONS.md`.
-2. Write/adjust the **intent** in the spec prose (not the numbers).
-3. Make it real in **Figma**, re-export tokens, rebuild.
-4. Regenerate the spec's value blocks so the numbers catch up (`regen_spec.py gen`).
-5. Update the pinned value in `regen_spec.py`'s `PINNED` list if the decision changed a checked value.
+1. Values are set as variables in Figma.
+2. The variables are exported to `packages/themes/tokens/design-tokens.tokens.json`.
+3. Style Dictionary (`packages/themes/sd.build.js`) turns the tokens into CSS in `packages/themes/styles/`.
+4. `gen_spec.py` reads that CSS and rewrites the generated blocks.
 
-**A value/name reality** (what a token actually is): only ever flows _up_ from Figma. Never hand-edit a value in the spec and treat it as truth — that is exactly what caused the earlier drift. Figma → tokens → emitted → reconcile spec to it.
+This is set out in [ADR-0001](../decisions/0001-sources-of-truth.md). In practice, it means you never type a value into a generated block. A value edited by hand is overwritten the next time the blocks are regenerated. Until then, the specification disagrees with the CSS that consumers receive. If a value is wrong, it is corrected in Figma and flows down from there.
 
-## The tool: `regen_spec.py`
+## The scripts
 
-Generates the pure-value blocks and lints the hand-written prose values. stdlib Python; run from the repo root (or pass `--spec` / `--styles` / `--project`).
+Three scripts in [`../scripts`](../scripts) support this. The [README](../README.md#running-the-scripts) shows how to run them.
 
-- `python3 regen_spec.py verify-build --project .` — reproduce the SD build, diff vs shipped `styles/`. A zero-diff means the emitted output is trustworthy. **Run this first, every session.**
-- `python3 regen_spec.py gen` — regenerate the four marked blocks (CSS appendix, spacing table, prose matrix, product matrix) from `styles/`. Prose is untouched.
-- `python3 regen_spec.py check` — exit non-zero if any generated block is stale **or** any pinned decision no longer matches the emitted output. This is the guard: run before every hand-off / commit.
+- **`verify_build.py`** runs the Style Dictionary build and compares the result with the CSS committed in `packages/themes/styles/`. If they match, the committed CSS is a reliable basis for the specification.
+- **`gen_spec.py`** regenerates the five blocks from the committed CSS. With `--check`, it changes nothing and reports any block that is out of date.
+- **`check_spec.py`** checks the committed CSS and the Tailwind plugins against the rules the system depends on. It does not read the specification.
 
-Generated blocks are wrapped in `<!-- GEN:name START -->` … `<!-- GEN:name END -->` markers (invisible in rendered markdown). Everything outside the markers is hand-written and safe to edit freely. The current spec already has the four markers in place.
+`check_spec.py` checks two things:
 
-The `PINNED` list in the script encodes decisions that also appear as prose values (caption = 12, tick = 14 / tick-sm = 12, prose body reading-leading 1.625, eyebrow weight 500, …). When `check` flags one, it means a decision effectively changed — update the prose that states it, then re-pin. This is the machine-checkable link between `DECISIONS.md` and the spec.
+- **Pinned values.** The `PINNED` list near the top of the script holds values that the specification also states in its prose, such as the 12px caption, the 14px chart tick and the 1.625 reading leading for prose body text. If the CSS no longer matches one of these, the prose that states it is now wrong.
+- **Structural rules.** These include:
+  - each `--spacing-{n}` refers to the matching primitive;
+  - the flow scale matches the values set in Figma;
+  - every flow rule is attached directly to its context element;
+  - typography values are set on the context element;
+  - chart roles that share a name with a product role have the same size;
+  - every generated Tailwind extension file is used somewhere.
 
-## One canonical home
+Each of these rules comes from an ADR. The comment above each constant in the script names the ADR it comes from.
 
-Loose downloads are the root of the version confusion. Pick one home — ideally the **ldn-viz git repo**, with the spec under `docs/` alongside `DECISIONS.md`, `regen_spec.py`, and this file. Rule: **only files at `HEAD` are canonical; anything in Downloads is disposable.** Archive the scattered copies now. Git gives you history and diffs, which is precisely what "which version is real" needs. (If staying in Claude Projects instead, treat the Project files as that home and update them at the end of every session.)
+## Before you start
 
-Claude can't be the source of truth between threads — its memory is limited and project-scoped, so each thread re-derives from the canonical files. That is the safe design: the files are authoritative; a thread is a worker that reads them in and writes changes back.
+Run `verify_build.py` before you change anything. If it reports a difference, the committed CSS does not match what the tokens produce. This usually means someone changed the tokens or the build without rebuilding. Resolve that first, so that the differences you see later come from your own change.
 
-## The per-thread ritual
+## Making a change that rests on a decision
 
-**Start:** load `DECISIONS.md`, the spec, the latest token export, and the pipeline (`sd.build.js`, `sd.config.json`). Run `verify-build`. A green diff is your trustworthy baseline before touching anything.
+A change of this kind needs an accepted ADR, for example renaming a role, changing a type size or adding a flow step. Make the change in this order once the ADR is accepted:
 
-**During:** make changes per the two-directions rule above. Structural/destructive edits: propose, then write. Verify migrations with a full scan, not a sample.
+1. Update the rule in [`RULES.md`](../RULES.md) and cite the ADR.
+2. Make the change in Figma, export the tokens to `packages/themes/tokens/design-tokens.tokens.json`, and rebuild with `npm run build-tokens` in `packages/themes`.
+3. Run `gen_spec.py` to bring the generated blocks up to date.
+4. Update the prose that describes the changed rule. List the sections you changed in the ADR's `spec` field.
+5. Run `check_spec.py`. If a pinned value or structural rule now fails because of the change you intended, update the constant in `check_spec.py` and point its comment at the new ADR. If it fails for a reason you did not intend, the build has regressed: fix the build, not the check.
+6. Commit the tokens, the CSS in `packages/themes/styles/`, the specification, `RULES.md` and any script changes in the same pull request. Reviewers can then see the decision, the values and the description together.
 
-**End:** update `DECISIONS.md`; `gen`; `check` (must be green); commit. Hand off as a single dated bundle with a one-line manifest — not scattered files.
+Not every decision changes a value. A decision about naming or documentation may only need steps 1, 4 and 6.
 
-## First application: retiring the t-shirt spacing scale
+## Making an everyday fix
 
-The very first move is a **scope decision** — record it in `DECISIONS.md` before doing anything, because it determines where the work happens:
+Corrections that do not change a rule do not need an ADR. Examples are a typo, an unclear sentence or a broken link. Edit the prose directly and confirm that `gen_spec.py --check` still passes. You only touched hand-written text, so `check_spec.py` gives the same result as before.
 
-- **spec-only** — document the numbered scale as canonical, t-shirt as deprecated (already done in the spec's Spacing section).
-- **Figma** — delete the `semantic-spacing` t-shirt variables once nothing authored references them.
-- **repo / emission** — migrate component bindings from `--spacing-{tshirt}` onto `--primitive-spacing-{n}`, then drop the t-shirt emit; full-scan verify.
+If you find a value in the prose that disagrees with the generated blocks, the generated value is the correct one. Change the prose to match. If the generated value itself looks wrong, raise it as an issue, because changing it means changing Figma.
 
-Hard constraint through all of it: `semantic-flow`, `semantic-spacing`, and `grid-spacing` reference `primitive.spacing` and divide the resolved value by 16 expecting **px**. The shared primitive value must stay **px in the token graph**; rem conversion happens only at emit time. Any migration step that changes this reintroduces NaN / wrong units — the single easiest thing to break.
+## Changing what the generated blocks contain
+
+Some changes to the specification requires changes to the scripts.
+
+- **A new role appears in the type matrices.** `gen_spec.py` stops with an error if the CSS contains a prose or product role that the matrix does not list. Add the role to `PROSE_ROWS` or `PRODUCT_ROWS` in `gen_spec.py`. A product role that should not have its own row can go in `PRODUCT_MATRIX_OMIT` instead. There is no equivalent for prose roles. Several roles can share a row only if they have the same size at every breakpoint. The script checks this.
+- **A row label needs renaming.** Row labels come from `PROSE_ROWS` and `PRODUCT_ROWS`, not from the specification. Edit them there and regenerate.
+- **A new generated block.** Write a function in `gen_spec.py` that returns the block's Markdown. Add the function to `BLOCKS` under the block's name. Then place the `START` and `END` markers for that name in the specification where the block should appear.
+
+## Before you open a pull request
+
+Both of these must finish without an error:
+
+```sh
+python3 design-system-specification/scripts/gen_spec.py --check
+python3 design-system-specification/scripts/check_spec.py
+```
+
+They are not run in continuous integration, so the author of the pull request is responsible for running them.

@@ -444,7 +444,7 @@ Two intentional coincidences, neither an inversion. Subhead (28) equals Title 1 
 
 One intentional tie, not an inversion: Page head equals Metric at every breakpoint — a heading and a numeral that rarely sit adjacent, scaled together so the pairing stays consistent. Metric Sm is fixed at 20px, level with `Title`; the two rarely appear together, and weight (Bold Metric Sm versus Semibold `Title`) separates them where they do. If a hero metric needs to out-rank a page title on a given surface, promote the Metric one tier locally (Metric → Page-head+1) rather than changing the global tokens.
 
-**Row labels in the generated matrix above** come from `PROSE_ROWS` / `PRODUCT_ROWS` in `regen_spec.py`, not from this prose. They still read `Dashboard head` and `Card / Panel title` until those lists are updated and `regen_spec.py gen` is re-run against the migrated build.
+**Row labels in the generated matrix above** come from `PROSE_ROWS` / `PRODUCT_ROWS` in `scripts/gen_spec.py`, not from this prose. They still read `Dashboard head` and `Card / Panel title` until those lists are updated and `scripts/gen_spec.py` is re-run against the migrated build.
 
 **Figma note.** Each breakpoint maps onto a variable mode: one mode per breakpoint, with every role taking its value from the matrix column. Fixed roles carry the same value in all modes; scaling roles differ per mode. Since every column is pre-verified for order, no mode can produce an inverted hierarchy.
 
