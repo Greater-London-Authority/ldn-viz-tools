@@ -22,7 +22,7 @@
 // computes to (0,1,3) and the obvious `[&>li+li]:mt-0` only reaches (0,1,2). That
 // was the footnote ghost-margin bug. The list rules keep a descendant reach WITHIN
 // a list that is itself a direct child of the flow root, so nested lists retain
-// their rhythm without reaching into components. Guarded by regen_spec.py check.
+// their rhythm without reaching into components. Guarded by design-system-specification/scripts/check_spec.py.
 
 module.exports = {
 	// No context variable blocks here. The ramp's values live in
