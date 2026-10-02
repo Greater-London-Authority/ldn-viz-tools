@@ -139,28 +139,28 @@
 	const tooltip_render = $derived(tooltip);
 </script>
 
-{#key spec}
-	<ChartContainer
-		{data}
-		{title}
-		subtitle={subTitle}
-		{alt}
-		{source}
-		{note}
-		{byline}
-		{dataDownloadButton}
-		{imageDownloadButton}
-		{filename}
-		{...rest}
-		chartHeight="h-fit"
-		{chartWidth}
-		description={chartDescription}
-		{columnMapping}
-		{id}
-	>
-		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
-		{@render controls?.()}
+<ChartContainer
+	{data}
+	{title}
+	subtitle={subTitle}
+	{alt}
+	{source}
+	{note}
+	{byline}
+	{dataDownloadButton}
+	{imageDownloadButton}
+	{filename}
+	{...rest}
+	chartHeight="h-fit"
+	{chartWidth}
+	description={chartDescription}
+	{columnMapping}
+	{id}
+>
+	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+	{@render controls?.()}
 
+	{#key spec}
 		<ObservablePlotInner
 			{data}
 			{domNode}
@@ -176,8 +176,8 @@
 				{@render tooltip_render?.()}
 			{/snippet}
 		</ObservablePlotInner>
-	</ChartContainer>
-{/key}
+	{/key}
+</ChartContainer>
 
 <style>
 	:global(.defaultColorLegendLabel-swatch) {
