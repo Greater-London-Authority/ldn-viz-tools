@@ -69,10 +69,25 @@ _The following decisions relate to Figma_
 - **The cell is the unit you swap.** Its renderer (text, number, boolean or mini-chart) is swapped in, and alignment belongs to the renderer.
 - **Widths are xs 64, sm 88, md 120, lg 220, xl 300, or fill.** Fill is set on the instance. It is not a variant.
 
-## [0008 — Charts](./decisions/0007-charts)
+## [0008 — Charts](./decisions/0008-charts)
 
 - **Observable Plot draws real charts. Figma charts are representative.** They are built to look right, not to be accurate to the data.
 - **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export.
 - **The designer composes what goes in the slot for each chart.** The legend, plot and footer (notes and citation) are not built into the container or into the plot.
 - **Category and x-axis labels sit below the baseline.** Y-axis ticks sit to the left of the plot.
 - **A chart is on-system when its text uses `Chart/*` roles and its colours use `data/*` and `chart/*` tokens.**
+
+## [0009 — Documentation](./decisions/0009-documentation)
+
+- **AI can be used to assist in documentation, but every output must be read and checked** Ai generated output has proven to be verbose and confusing for human readable docs. It's ok to use AI to scaffold component documentation, but it _must_ be verified by a human.
+- **Sweeps only do the basics.** While sweeping a component, we fill in its metadata and description and add an intro doc frame. Usage guidance, accessibility notes and full strips of states are left for a separate documentation pass.
+- **All doc frames follow the same pattern.** The pattern is written up in the `ds-doc-frame` skill. Text in a doc frame uses the `Doc/*` styles rather than the product typography roles.
+- **Foundation doc frames go on the page for that foundation.** We haven't yet agreed where component doc frames should live, so until we do, we'll place them together in batches rather than one at a time wherever they happen to land.
+
+## [0010 — Figma Conventions](./decisions/0010-figma-conventions)
+
+- **Names starting with `.DS-` are documentation scaffolding.** We only audit these on the Get Started page. `.DS-Page-Head` is just a page marker and can be ignored.
+- **Names starting with a single `.` are private sub-components.** They aren't published, but they are real components.
+- **Documentation text uses the `Doc/*` text styles.** This is a separate family of styles kept only for documentation: `Doc/Title`, `Doc/Heading`, `Doc/Subheading`, `Doc/Body`, `Doc/Body-sm`, `Doc/Caption` and `Doc/Mono`. They are for the doc frame itself, meaning its title, intro and captions. Components shown as examples inside a doc frame keep their own styles. `Doc/*` styles are never used in product designs, and product roles are never used for documentation text.
+- **We never skip a real component during a sweep**, whether it is published or private.
+- **The component archive page is not audited.**
