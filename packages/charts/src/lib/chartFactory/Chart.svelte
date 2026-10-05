@@ -135,7 +135,9 @@
 			return null;
 		}
 
-		const sortedData = ['line', 'lineChartWithLineStyles'].includes(options.chartType)
+		const sortedData = ['line', 'lineChartWithLineStyles', 'lineChartWithForecast'].includes(
+			options.chartType
+		)
 			? sortByField(data, 'xd')
 			: data;
 		return chartFn(options, sortedData, colorChoice, width); // N.B. width is only used by line chart
