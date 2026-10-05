@@ -52,12 +52,13 @@ export const lineChartWithLineStyles = (
 
 		...getZeroYLine(options),
 
-		...new Set(data.map((d) => d.z2)).values().map((v, i) =>
+		...Array.from(new Set(data.map((d) => d.z2))).map((v, i) =>
 			Plot.line(
 				data.filter((d) => d.z2 === v),
 				{
 					x: 'xd',
 					y: 'y',
+					fx: options.faceted ? 'z2' : undefined,
 
 					strokeDasharray: ['4,0', '4,4'][i % 2],
 
