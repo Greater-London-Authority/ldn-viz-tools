@@ -132,7 +132,7 @@
 
 		if (!chartFn) {
 			console.error('No chart generator function found for chart of type:', options.chartType);
-			return {};
+			return null;
 		}
 
 		const sortedData = ['line', 'lineChartWithLineStyles'].includes(options.chartType)
@@ -186,6 +186,13 @@
 		filename={dataset}
 		{controls}
 	>
-		<NonIdealState>Data is loading.</NonIdealState>
+		{#if !spec}
+			<NonIdealState>
+				{#snippet title()}Chart could not be displayed{/snippet}
+				Unknown chart type "{options.chartType}".
+			</NonIdealState>
+		{:else}
+			<NonIdealState>Data is loading.</NonIdealState>
+		{/if}
 	</ChartContainer>
 {/if}

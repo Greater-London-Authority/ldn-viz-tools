@@ -2,7 +2,7 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import Chart from './Chart.svelte';
-	import type { ChartDataRow } from './chartOptions';
+	import type { ChartDataRow, ChartOptions } from './chartOptions';
 
 	/**
 	 * The `Chart` component renders a chart from a `data` array and a set of `options`.
@@ -22,6 +22,27 @@
 			.sort((a, b) => (a.xd as Date).getTime() - (b.xd as Date).getTime());
 	};
 
+	const lineOptions: ChartOptions = {
+		chartType: 'line',
+		type: 'date',
+		ytickformat: '.0%',
+		tooltipFormatValue: '.1%',
+
+		timeperiod_type: 'Annual',
+		includeZero: true,
+		insetRight: 60,
+		insetLeft: 40,
+		xDomain: [new Date('1995-01-01'), new Date('2025-01-01')]
+	};
+
+	// The cast is needed because `chartType` is deliberately not one of the supported types
+	const invalidOptions = { ...lineOptions, chartType: 'notAChartType' } as unknown as ChartOptions;
+
+	const invalidChartData: ChartDataRow[] = [
+		{ xd: new Date('2023-01-01'), b: 'London', y: 0.11 },
+		{ xd: new Date('2024-01-01'), b: 'London', y: 0.1 }
+	];
+
 	const { Story } = defineMeta({
 		title: 'Charts/Components/Chart',
 		component: Chart,
@@ -36,18 +57,7 @@
 			note: 'Core LLO Indicator',
 
 			dataset: 'pay_gap_gender',
-			options: {
-				chartType: 'line',
-				type: 'date',
-				ytickformat: '.0%',
-				tooltipFormatValue: '.1%',
-
-				timeperiod_type: 'Annual',
-				includeZero: true,
-				insetRight: 60,
-				insetLeft: 40,
-				xDomain: [new Date('1995-01-01'), new Date('2025-01-01')]
-			},
+			options: lineOptions,
 			columnMapping: {
 				xd: 'date',
 				b: 'geography',
@@ -69,3 +79,6 @@
 		{/await}
 	{/snippet}
 </Story>
+
+<!-- If `options.chartType` does not match a supported chart type, the chart is replaced by a message naming the unrecognised type (and an error is logged to the console). The message is shown even when `data` is present. -->
+<Story name="Invalid Chart Type" args={{ options: invalidOptions, data: invalidChartData }} />
