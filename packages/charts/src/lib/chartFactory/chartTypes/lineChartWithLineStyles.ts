@@ -1,4 +1,4 @@
-import { Plot } from '@ldn-viz/charts';
+import { Plot } from '../../observablePlotFragments/plot';
 import type { ChartDataRow, ColorChoice, LineChartWithLineStylesOptions } from '../chartOptions';
 import {
 	getAxisTypeAndTickFormat,

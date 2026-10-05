@@ -1,4 +1,4 @@
-import { Plot } from '@ldn-viz/charts';
+import { Plot } from '../observablePlotFragments/plot';
 import { theme } from '@ldn-viz/ui';
 import { extent, ticks, tickStep } from 'd3-array';
 import { formatLocale } from 'd3-format';

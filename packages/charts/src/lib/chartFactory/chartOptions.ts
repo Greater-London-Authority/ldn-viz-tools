@@ -320,7 +320,7 @@ export type ChartGenerator = (
 ) => PlotOptions;
 
 type ExtraMarksArgs = {
-	Plot: typeof import('@ldn-viz/charts').Plot;
+	Plot: typeof import('../observablePlotFragments/plot').Plot;
 	options: ChartOptions;
 	colorChoice: ColorChoice;
 	data: ChartDataRow[];

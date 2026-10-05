@@ -1,4 +1,4 @@
-import { Plot } from '@ldn-viz/charts';
+import { Plot } from '../../observablePlotFragments/plot';
 import type { BarChartStackedTimeseriesOptions, ChartDataRow, ColorChoice } from '../chartOptions';
 import { getZeroYLine, makeTooltip } from '../utils';
 

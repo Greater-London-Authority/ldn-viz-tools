@@ -1,4 +1,4 @@
-import { Plot } from '@ldn-viz/charts';
+import { Plot } from '../../observablePlotFragments/plot';
 import type { ChartDataRow, ColorChoice, PairedDotplotOptions } from '../chartOptions';
 
 import { theme } from '@ldn-viz/ui';

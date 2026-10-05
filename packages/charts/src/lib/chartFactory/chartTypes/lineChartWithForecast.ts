@@ -1,4 +1,4 @@
-import {Plot} from "@ldn-viz/charts";
+import { Plot } from '../../observablePlotFragments/plot';
 import {theme} from "@ldn-viz/ui";
 import type {ChartDataRow, ColorChoice, LineChartWithForecastOptions} from "../chartOptions";
 

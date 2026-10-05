@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ChartContainer, ObservablePlotInner } from '@ldn-viz/charts';
+	import ChartContainer from '../chartContainer/ChartContainer.svelte';
+	import ObservablePlotInner from '../observablePlot/ObservablePlotInner.svelte';
 	import { NonIdealState, theme } from '@ldn-viz/ui';
 
 	import { type ChartDataRow, type ChartOptions } from './chartOptions';

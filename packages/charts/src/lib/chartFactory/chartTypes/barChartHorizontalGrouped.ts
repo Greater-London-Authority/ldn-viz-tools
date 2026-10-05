@@ -1,4 +1,4 @@
-import { Plot } from '@ldn-viz/charts';
+import { Plot } from '../../observablePlotFragments/plot';
 import type { BarChartHorizontalGroupedOptions, ChartDataRow, ColorChoice } from '../chartOptions';
 import { getZeroXLine, makeTooltip } from '../utils';
 
