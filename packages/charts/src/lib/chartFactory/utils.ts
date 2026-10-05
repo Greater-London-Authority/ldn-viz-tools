@@ -11,40 +11,6 @@ export type ChartDataOptions = {
 	hide?: string[];
 };
 
-export function fetchChartData(dataset: string): Promise<Response> {
-	//TODO: replace with wrapper
-	const PUBLIC_CHART_DATA_API_URL =
-		'https://apps.london.gov.uk/api/tables/state_of_london/chart_data';
-	return fetch(`${PUBLIC_CHART_DATA_API_URL}?dataset=eq.${dataset}`);
-}
-
-export function loadChartData(dataset: string, options: ChartDataOptions): Promise<ChartDataRow[]> {
-	const convertVal = (val: string): string | number | Date => {
-		if (options.type === 'integer') return +val;
-		if (
-			options.type === 'date' &&
-			!['Financial Year', 'Academic Year'].includes(options.timeperiod_type ?? '')
-		)
-			return new Date(val.replace(/\//g, '-'));
-		return val;
-	};
-
-	return fetchChartData(dataset)
-		.then((res) => res.json())
-		.then((dataRes) => {
-			const newData = dataRes
-				.map((d: ChartDataRow) => ({ ...d, xd: convertVal(d.xd as string) }))
-				.filter((d: ChartDataRow) => !(d.xd instanceof Date && isNaN((d.xd as Date).getTime())))
-				.filter((d: ChartDataRow) => !options.hide || !options.hide.includes(d.b));
-
-			if (options.type === 'date' || dataset === 'job_posts') {
-				newData.sort((a: ChartDataRow, b: ChartDataRow) => (a.xd as number) - (b.xd as number));
-			}
-
-			return newData;
-		});
-}
-
 export function getTooltip(
 	d: ChartDataRow,
 	dateFormatter: (d: Date) => string,
