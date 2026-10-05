@@ -8,6 +8,7 @@
 
 	import type { Snippet } from 'svelte';
 	import type { ChartDataRow, ChartOptions } from './chartOptions';
+	import { getDescription } from './descriptions';
 	import { getColorScale } from './utils';
 
 	type ChartProps = {
@@ -141,7 +142,7 @@
 		return chartFn(options, sortedData, colorChoice, width); // N.B. width is only used by line chart
 	});
 
-	let description = ''; // $derived(getDescription(options, data, colorChoice));
+	let description = $derived(getDescription(options, data, colorChoice));
 
 	let isMapChoropleth = $derived(
 		options?.chartType === 'boroughChoropleth' || options?.chartType === 'wardChoropleth'
