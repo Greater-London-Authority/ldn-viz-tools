@@ -64,20 +64,33 @@
 		return themeSpecificColor ?? options?.colorScale ?? getColorScale(data);
 	});
 
-	let spec = $derived.by(() => (facetVal: string) => {
-		const filteredDate = data.filter((d) => d.b === facetVal);
+	let chartFn = $derived.by(() => {
+		const fn = chartFns[options.chartType];
+		if (!fn) {
+			console.error('No chart generator function found for chart of type:', options.chartType);
+		}
+		return fn;
+	});
 
-		// filter the colors, so each facet only includes legend for corresponding color
-		const colorChoiceFacet =
-			colorChoice.domain && colorChoice.range
-				? {
-						domain: [facetVal],
-						range: [colorChoice.range[colorChoice.domain.indexOf(facetVal)] ?? colorChoice.range[0]]
-					}
-				: {};
+	let spec = $derived.by(() => {
+		if (!chartFn) return null;
 
-		const chartFn = chartFns[options.chartType];
-		return chartFn(options, filteredDate, colorChoiceFacet, width);
+		return (facetVal: string) => {
+			const filteredDate = data.filter((d) => d.b === facetVal);
+
+			// filter the colors, so each facet only includes legend for corresponding color
+			const colorChoiceFacet =
+				colorChoice.domain && colorChoice.range
+					? {
+							domain: [facetVal],
+							range: [
+								colorChoice.range[colorChoice.domain.indexOf(facetVal)] ?? colorChoice.range[0]
+							]
+						}
+					: {};
+
+			return chartFn(options, filteredDate, colorChoiceFacet, width);
+		};
 	});
 
 	let description = $derived(
@@ -125,6 +138,13 @@
 		{columnMapping}
 		filename={dataset}
 	>
-		<NonIdealState>Data is loading.</NonIdealState>
+		{#if !spec}
+			<NonIdealState>
+				{#snippet title()}Chart could not be displayed{/snippet}
+				Unknown chart type "{options.chartType}".
+			</NonIdealState>
+		{:else}
+			<NonIdealState>Data is loading.</NonIdealState>
+		{/if}
 	</ChartContainer>
 {/if}

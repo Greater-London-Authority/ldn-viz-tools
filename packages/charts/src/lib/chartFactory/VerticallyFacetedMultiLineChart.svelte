@@ -67,14 +67,24 @@
 
 	let width = $state(0);
 
-	let spec = $derived.by(() => (facetVal: string) => {
-		const filteredData = data.filter((d) => d.z2 === facetVal);
+	let chartFn = $derived.by(() => {
+		const fn = chartFns[options.chartType];
+		if (!fn) {
+			console.error('No chart generator function found for chart of type:', options.chartType);
+		}
+		return fn;
+	});
 
-		const chartFn = chartFns[options.chartType];
+	let spec = $derived.by(() => {
+		if (!chartFn) return null;
 
-		let baseSpec = chartFn(options, filteredData, colorChoice, width);
+		return (facetVal: string) => {
+			const filteredData = data.filter((d) => d.z2 === facetVal);
 
-		return baseSpec ? { ...baseSpec, title: facetVal } : baseSpec;
+			let baseSpec = chartFn(options, filteredData, colorChoice, width);
+
+			return baseSpec ? { ...baseSpec, title: facetVal } : baseSpec;
+		};
 	});
 
 	let description = $derived(
@@ -115,6 +125,13 @@
 		{columnMapping}
 		filename={dataset}
 	>
-		<NonIdealState>Data is loading.</NonIdealState>
+		{#if !spec}
+			<NonIdealState>
+				{#snippet title()}Chart could not be displayed{/snippet}
+				Unknown chart type "{options.chartType}".
+			</NonIdealState>
+		{:else}
+			<NonIdealState>Data is loading.</NonIdealState>
+		{/if}
 	</ChartContainer>
 {/if}
