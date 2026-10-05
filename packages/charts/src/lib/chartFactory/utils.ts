@@ -45,12 +45,17 @@ export function makeTooltip(
 }
 
 export const getColorScale = (data: ChartDataRow[]): ColorChoice => {
-	let domain = new Array(...new Set(data.map((d) => d.b))).sort();
+	// rows without a `b` value shouldn't contribute an `undefined` entry to the domain
+	let domain = new Array(...new Set(data.map((d) => d.b).filter((b) => b != null))).sort();
 
 	// ensure "London" comes first (if it is present)
 	if (domain.includes('London')) {
 		domain = ['London', ...domain.filter((d) => d !== 'London')];
 	}
+
+	// `b` may be a number at runtime, so do string matching on a stringified copy;
+	// `domain` keeps the original values so that it still matches the data
+	const labels = domain.map(String);
 
 	const colors = [
 		theme.tokenNameToValue('data.primary'),
@@ -64,11 +69,11 @@ export const getColorScale = (data: ChartDataRow[]): ColorChoice => {
 		theme.tokenNameToValue('data.categorical.yellow')
 	];
 
-	if (domain.length === 2 && (domain[0].startsWith('London') || domain[1].startsWith('London'))) {
+	if (domain.length === 2 && (labels[0].startsWith('London') || labels[1].startsWith('London'))) {
 		return {
 			type: 'ordinal',
 			domain,
-			range: domain.map((v) =>
+			range: labels.map((v) =>
 				v.includes('London')
 					? theme.tokenNameToValue('data.primary')
 					: theme.tokenNameToValue('data.context')
@@ -76,23 +81,23 @@ export const getColorScale = (data: ChartDataRow[]): ColorChoice => {
 		};
 	} else if (
 		domain.length == 2 &&
-		domain[0].includes('Domestic') &&
-		domain[1].includes('International')
+		labels[0].includes('Domestic') &&
+		labels[1].includes('International')
 	) {
 		return {
 			type: 'ordinal',
 			domain,
-			range: domain.map((v) =>
+			range: labels.map((v) =>
 				v.includes('Domestic')
 					? theme.tokenNameToValue('data.primary')
 					: theme.tokenNameToValue('data.secondary')
 			)
 		};
-	} else if (domain.length == 2 && domain[0].includes('Inner') && domain[1].includes('Outer')) {
+	} else if (domain.length == 2 && labels[0].includes('Inner') && labels[1].includes('Outer')) {
 		return {
 			type: 'ordinal',
 			domain,
-			range: domain.map((v) =>
+			range: labels.map((v) =>
 				v.includes('Inner')
 					? theme.tokenNameToValue('data.primary')
 					: theme.tokenNameToValue('data.secondary')
