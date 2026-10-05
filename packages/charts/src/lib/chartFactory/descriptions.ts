@@ -1,9 +1,9 @@
-import { max, min } from 'd3-array';
+import { max, min, type Numeric } from 'd3-array';
 import { utcFormat } from 'd3-time-format';
 import type { ChartDataRow, ChartOptions, ColorChoice } from './chartOptions';
 
 const dateFormatter = utcFormat('%Y');
-const formatDate = (d) => (d instanceof Date ? dateFormatter(d) : d);
+const formatDate = (d: unknown) => (d instanceof Date ? dateFormatter(d) : d);
 
 const join = (arr: (string | number)[], addQuotes = true) => {
 	let a = arr;
@@ -28,33 +28,36 @@ export const getDescription = (
 	data: ChartDataRow[],
 	colorChoice: ColorChoice
 ) => {
-	const xds = data.map((d) => d.xd);
+	// `xd` may hold strings, numbers or Dates; d3's min/max compare any of these at runtime,
+	// but their overloads can't express the mixed union, so we cast
+	const xds = data.map((d) => d.xd) as Numeric[];
+	const domain = colorChoice.domain ?? [];
 	let timeStatement = `showing values between ${formatDate(min(xds))} and ${formatDate(max(xds))}`;
 
 	if (options.chartType === 'line' || options.chartType === 'slopeChart') {
 		let part = '';
-		if (colorChoice.domain.length === 1) {
-			part = `with a single line for ${colorChoice.domain[0]}`;
+		if (domain.length === 1) {
+			part = `with a single line for ${domain[0]}`;
 		} else {
-			part = `with lines for ${join(colorChoice.domain)}`;
+			part = `with lines for ${join(domain)}`;
 		}
 
 		return `Line chart ${part} ${timeStatement}.`;
 	} else if (options.chartType === 'barChartVertical') {
 		return `Bar chart showing values for ${timeStatement}.`; // TODO: ix xd always time
 	} else if (options.chartType === 'barChartStacked') {
-		return `Stacked bar chart  ${timeStatement}, with categories ${join(colorChoice.domain)}.`;
+		return `Stacked bar chart  ${timeStatement}, with categories ${join(domain)}.`;
 	} else if (options.chartType === 'lineChartWithLineStyles') {
 		timeStatement = `showing values between ${formatDate(min(xds))} and ${formatDate(max(xds))}`;
 
 		const z2s = data.map((d) => d.z2);
 
-		return `Line chart ${timeStatement}. Line color distinguishes between ${join(colorChoice.domain)}. Line style distinguishes between ${join(unique(z2s))}`;
+		return `Line chart ${timeStatement}. Line color distinguishes between ${join(domain)}. Line style distinguishes between ${join(unique(z2s))}`;
 	} else if (options.chartType === 'barChartStackedTimeseries') {
 		// The stacked bar chart is difficult to compeletely descibe concisely.
 		// For each
 
-		return `Stacked bar chart of a time-series ${timeStatement}, with categories ${join(colorChoice.domain)}.`;
+		return `Stacked bar chart of a time-series ${timeStatement}, with categories ${join(domain)}.`;
 	} else if (
 		options.chartType === 'barChartVerticalGrouped' ||
 		options.chartType === 'barChartHorizontalGrouped'
@@ -66,7 +69,7 @@ export const getDescription = (
 	} else if (options.chartType === 'pairedDotPlot') {
 		// this data doesn't have time as xd
 
-		let timeStatement = `showing values between ${formatDate(min(colorChoice.domain))} and ${formatDate(max(colorChoice.domain))}`;
+		let timeStatement = `showing values between ${formatDate(min(domain))} and ${formatDate(max(domain))}`;
 		const xds = data.map((d) => d.xd);
 
 		return `Paired dot plot ${timeStatement}, with categories ${join(unique(xds))}.`;

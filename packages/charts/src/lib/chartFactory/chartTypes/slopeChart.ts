@@ -16,7 +16,7 @@ export const slopeChart = (
 			insetRight: options.insetRight ?? 120, // need space for labels to right of plot
 
 			...getAxisTypeAndTickFormat(options.timeperiod_type),
-			tickFormat: (d) => utcFormat('%Y')(new Date(d))
+			tickFormat: (d: string | number | Date) => utcFormat('%Y')(new Date(d))
 		},
 
 		y: {

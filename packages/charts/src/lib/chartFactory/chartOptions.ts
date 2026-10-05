@@ -119,12 +119,12 @@ interface BaseChartOptions {
 		range: string[];
 	};
 	colorScaleLight?: {
-		domain: number[];
+		domain: (number | string)[];
 		range: string[];
 	};
 
 	colorScaleDark?: {
-		domain: number[];
+		domain: (number | string)[];
 		range: string[];
 	};
 

@@ -72,7 +72,7 @@ export const lineChart = (
 			stroke: 'b',
 			title: makeTooltip(options),
 			tip: 'xy',
-			sort: (d) => -(colorChoice.domain || []).indexOf(d.b) // N.B. by default "lines are drawn in input order"
+			sort: (d: ChartDataRow) => -(colorChoice.domain || []).indexOf(d.b) // N.B. by default "lines are drawn in input order"
 		}),
 
 		// reference lines
@@ -92,7 +92,7 @@ export const lineChart = (
 				fill: 'white',
 				fillOpacity: 1,
 				r: 5,
-				sort: (d) => -(colorChoice?.domain || []).indexOf(d.b) // N.B. by default "lines are drawn in input order"
+				sort: (d: ChartDataRow) => -(colorChoice?.domain || []).indexOf(d.b) // N.B. by default "lines are drawn in input order"
 			})
 		),
 

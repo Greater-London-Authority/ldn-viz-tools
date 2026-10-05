@@ -25,7 +25,7 @@ export const barChartHorizontal = (
 	},
 
 	color: {
-		legend: colorChoice.domain?.length > 1 ? true : false,
+		legend: (colorChoice.domain?.length ?? 0) > 1,
 		...colorChoice
 	},
 

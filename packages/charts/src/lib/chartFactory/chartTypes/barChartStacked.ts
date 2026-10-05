@@ -12,7 +12,7 @@ export const barChartStacked = (
 	x: {
 		label: null,
 		type: options.xScaleType ?? undefined,
-		padding: colorChoice.domain?.length < 3 ? 0.5 : 0.3
+		padding: (colorChoice.domain?.length ?? 0) < 3 ? 0.5 : 0.3
 	},
 
 	y: {
