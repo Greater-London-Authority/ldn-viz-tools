@@ -93,7 +93,8 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 					joinedData?.features ?? [],
 					Plot.pointer(
 						Plot.geoCentroid({
-							title: (d) => `${d.properties.name}\n${f(+d.properties.value)}`
+							title: (d) =>
+								`${d.properties.name}\n${d.properties.value == null ? 'No data' : f(+d.properties.value)}`
 						})
 					)
 				)
