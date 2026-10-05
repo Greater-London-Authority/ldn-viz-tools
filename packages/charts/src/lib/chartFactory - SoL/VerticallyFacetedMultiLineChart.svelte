@@ -1,54 +1,49 @@
 <script lang="ts">
 	import { ChartContainer, ObservablePlotInner } from '@ldn-viz/charts';
-	import { NonIdealState, theme } from '@ldn-viz/ui';
+	import { NonIdealState } from '@ldn-viz/ui';
 
-	import { chartOptions, type ChartDataRow } from './chartOptions';
+	import { chartOptions } from '$lib/components/charts/chartOptions';
+	import { getColorScale, loadChartData, type ChartDataRow } from '$lib/components/charts/utils';
+	import { getColumnMapping } from '$lib/utils';
 	import { chartFns } from './chartTypes';
 	import { getDescription } from './descriptions';
-	import { getColorScale } from './utils';
 
 	type ChartProps = {
-		/**
-		 * Title that is displayed in large text above the plot.
-		 */
 		title: string;
-
-		/**
-		 * Subtitle that is displayed below the title, but above the plot.
-		 */
-		subTitle?: string;
-
-		/**
-		 * What appears in the footer:
-		 *
-		 * * `byline` (string) - statement of who created the visualization
-		 * * `source` (string) - statement of where the data came from
-		 * * `note` (string) - any additional footnotes
-		 */
+		subtitle?: string;
 		source?: string;
 		byline?: string;
+		lloindicator?: string;
 		note?: string;
-
-		/**
-		 * Data being visualized (as an array of objects); also used by the data download button.
-		 */
-		data: ChartDataRow[];
-
-		/**
-		 * Identifier for the dataset. Used as the `id` attribute of the chart and as the file name for downloaded data or image files.
-		 */
 		dataset: string;
-
-		/**
-		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
-		 */
-		columnMapping?: Record<string, string>;
 	};
 
-	let { title, subTitle, source, byline, dataset, data, note, columnMapping }: ChartProps =
-		$props();
+	let { title, subtitle, source, byline, dataset, lloindicator, note }: ChartProps = $props();
+
+	let lloLabel = $derived(
+		lloindicator === 'core'
+			? 'Core LLO Indicator'
+			: lloindicator
+				? 'Supplementary LLO Indicator'
+				: undefined
+	);
+
+	let combinedNote = $derived([lloLabel, note].filter(Boolean).join(' | '));
 
 	let options = $derived(chartOptions[dataset]);
+
+	let data = $state<ChartDataRow[]>([]);
+	$effect(() => {
+		let cancelled = false;
+		loadChartData(dataset, options).then((newData) => {
+			if (!cancelled) {
+				data = newData;
+			}
+		});
+		return () => {
+			cancelled = true;
+		};
+	});
 
 	let facetVals = $derived(
 		options.facetOrder ?? [
@@ -56,11 +51,7 @@
 		]
 	);
 
-	let colorChoice = $derived.by(() => {
-		const themeSpecificColor =
-			theme.currentMode === 'light' ? options?.colorScaleLight : options?.colorScaleDark;
-		return themeSpecificColor ?? options?.colorScale ?? getColorScale(data);
-	});
+	const colorChoice = $derived(getColorScale(data));
 
 	let width = $state(0);
 
@@ -74,20 +65,21 @@
 		return baseSpec ? { ...baseSpec, title: facetVal } : baseSpec;
 	});
 
+	let columnMapping = $derived(getColumnMapping(dataset));
 	let description = $derived(
 		getDescription(options, data, colorChoice) + '' //` The chart has separate facets for ${joinUnique(data.map((d) => d.z2))}.`
 	);
 </script>
 
 {#if spec && data.length > 0}
-	<div class="py-typography-spacing-3xl w-full" bind:clientWidth={width}>
+	<div class="w-full py-typography-spacing-3xl" bind:clientWidth={width}>
 		<ChartContainer
 			{data}
 			{title}
-			subtitle={subTitle}
+			subTitle={subtitle}
 			{source}
 			{byline}
-			{note}
+			note={combinedNote}
 			dataDownloadButton={true}
 			imageDownloadButton
 			chartHeight="h-fit"
@@ -104,7 +96,7 @@
 	<ChartContainer
 		{data}
 		{title}
-		subtitle={subTitle}
+		subTitle={subtitle}
 		{source}
 		{byline}
 		{note}

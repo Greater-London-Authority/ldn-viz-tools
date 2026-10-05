@@ -36,7 +36,7 @@
 		/**
 		 * Data being visualized (as an array of objects); also used by the data download button.
 		 */
-		data?: ChartDataRow[];
+		data: ChartDataRow[];
 
 		/**
 		 * Identifier for the dataset. Used as the `id` attribute of the chart and as the file name for downloaded data or image files.
@@ -121,7 +121,6 @@
 
 	let width = $state(0);
 
-	// let colorChoice = $derived(options.colorScale ?? getColorScale(data));
 	let colorChoice = $derived.by(() => {
 		const themeSpecificColor =
 			theme.currentMode === 'light' ? options?.colorScaleLight : options?.colorScaleDark;
