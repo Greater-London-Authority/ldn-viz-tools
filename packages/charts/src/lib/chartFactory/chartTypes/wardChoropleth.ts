@@ -28,7 +28,7 @@ export const wardChoropleth = (
 	const areaNameField = 'xd';
 	const valueField = 'y';
 
-	let joinedData = {};
+	let joinedData: FeatureCollection = geoData;
 
 	if (geoData && data.length > 0) {
 		// Keep the first row for each area
