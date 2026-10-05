@@ -5,7 +5,7 @@
 	import type { ChartDataRow } from './chartOptions';
 
 	/**
-	 * The `Chart` component renders a chart from either a `data` array or a named `dataset`, and a set of `options`, which are merged over the default options for that dataset.
+	 * The `Chart` component renders a chart from a `data` array and a set of `options`.
 	 * It picks a chart generator based on `options.chartType`, and renders the result in an [ObservablePlot](./?path=/docs/charts-components-observableplot--documentation).
 	 *
 	 * In this example, the data is fetched from the State of London API and passed in as the `data` prop.
