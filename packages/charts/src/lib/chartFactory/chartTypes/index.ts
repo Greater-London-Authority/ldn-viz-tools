@@ -1,3 +1,4 @@
+import type { ChartGenerator } from '../chartOptions';
 import { barChartHorizontal } from './barChartHorizontal';
 import { barChartHorizontalGrouped } from './barChartHorizontalGrouped';
 import { barChartStacked } from './barChartStacked';
@@ -5,7 +6,6 @@ import { barChartStackedTimeseries } from './barChartStackedTimeseries';
 import { barChartVertical } from './barChartVertical';
 import { barChartVerticalGrouped } from './barChartVerticalGrouped';
 import { boroughChoropleth } from './boroughChoropleth';
-import type { ChartGenerator } from './chartOptions';
 import { histogram } from './histogram';
 import { incomeSlopeChart } from './incomeSlopeChart';
 import { lineChart } from './lineChart';
