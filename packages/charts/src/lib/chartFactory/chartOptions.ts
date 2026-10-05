@@ -186,6 +186,26 @@ export interface LineChartWithLineStylesOptions extends BaseChartOptions {
 	reference_lines?: { label: string; y: number; strokeDasharray?: string }[];
 }
 
+export interface LineChartWithForecastOptions extends BaseChartOptions {
+	chartType: 'lineChartWithForecast';
+
+	/**
+	 * Horizontal reference lines/rules to draw.
+	 */
+	reference_lines?: { label: string; y: number; strokeDasharray?: string }[];
+
+	/**
+	 * If provided for date-based line charts, shades the chart area from this date onward
+	 * and draws the projected part of each series with a dashed line.
+	 */
+	projectedStart?: string;
+
+	/**
+	 * Label to use on the x-axis for charts whose x variable is not time.
+	 */
+	xAxisLabel?: string | null;
+}
+
 export interface BarChartHorizontalOptions extends BaseChartOptions {
 	chartType: 'barChartHorizontal';
 
@@ -246,6 +266,7 @@ export interface CoreChartOptions extends BaseChartOptions {
 export type ChartOptions =
 	| LineChartOptions
 	| LineChartWithLineStylesOptions
+	| LineChartWithForecastOptions
 	| BarChartHorizontalOptions
 	| BarChartHorizontalGroupedOptions
 	| BarChartStackedTimeseriesOptions

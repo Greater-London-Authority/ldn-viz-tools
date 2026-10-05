@@ -1,15 +1,23 @@
 import {Plot} from "@ldn-viz/charts";
 import {theme} from "@ldn-viz/ui";
-import type {ChartOptions, ChartDataRow, ColorChoice} from "../chartOptions";
+import type {ChartDataRow, ColorChoice, LineChartWithForecastOptions} from "../chartOptions";
 
 import {extent, ticks, tickStep} from "d3-array";
 import { formatAxisTick, makeTooltip } from "../utils";
 
-const getDomain = (data: ChartDataRow[], options: ChartOptions) => {
+// Unlike the shared `getDomain` in utils, this pads the domain by a further 20% of a tick step
+// beyond the outermost gridlines (except at 0).
+const getDomain = (data: ChartDataRow[], options: LineChartWithForecastOptions): [number, number] => {
 
     const nt = options.numTicks ?? 5;
 
-    const range = extent( data.map(d => d.y)  )
+    const [min, max] = extent( data.map(d => d.y)  )
+
+    if (min === undefined || max === undefined) {
+        return [0, 1];
+    }
+
+    const range: [number, number] = [min, max];
 
     if (options.includeZero && range[0] > 0){
         range[0] = 0;
@@ -19,7 +27,7 @@ const getDomain = (data: ChartDataRow[], options: ChartOptions) => {
     const tickVals = ticks(range[0], range[1], nt)
     const stepSize = tickStep(range[0], range[1], nt)
 
-    let start = tickVals[0];
+    let start = tickVals[0] ?? range[0];
     if (start > range[0]){
         start -= stepSize;
     }
@@ -27,7 +35,7 @@ const getDomain = (data: ChartDataRow[], options: ChartOptions) => {
         start -= stepSize * 0.2;
     }
 
-    let end = tickVals.slice(-1)[0];
+    let end = tickVals[tickVals.length - 1] ?? range[1];
 
     if (end < range[1]){
         end += stepSize;
@@ -41,7 +49,7 @@ const getDomain = (data: ChartDataRow[], options: ChartOptions) => {
 
 const getComparableX = (value: ChartDataRow['xd']) => value instanceof Date ? value.getTime() : value;
 
-export const filterDataToXDomain = (data: ChartDataRow[], options: ChartOptions) => {
+export const filterDataToXDomain = (data: ChartDataRow[], options: LineChartWithForecastOptions) => {
     if (!options.xDomain || options.type !== 'date') return data;
 
     const [start, end] = options.xDomain.map((value) =>
@@ -54,7 +62,7 @@ export const filterDataToXDomain = (data: ChartDataRow[], options: ChartOptions)
     });
 };
 
-export const lineChartWithForecast = (options: ChartOptions, data: ChartDataRow[], colorChoice: ColorChoice) => {
+export const lineChartWithForecast = (options: LineChartWithForecastOptions, data: ChartDataRow[], colorChoice: ColorChoice) => {
     const filteredData = filterDataToXDomain(data, options);
     const yDomain = options.yDomain ?? getDomain(filteredData, options);
 
