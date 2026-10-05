@@ -41,7 +41,7 @@ export const boroughChoropleth = (
 				...feature,
 				properties: {
 					...feature.properties,
-					value: d ? d[valueField] : 0
+					value: d ? d[valueField] : undefined
 				}
 			});
 		}
