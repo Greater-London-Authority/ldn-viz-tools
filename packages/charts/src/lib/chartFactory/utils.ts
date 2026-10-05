@@ -3,7 +3,7 @@ import { theme } from '@ldn-viz/ui';
 import { extent, ticks, tickStep } from 'd3-array';
 import { formatLocale } from 'd3-format';
 import { utcFormat } from 'd3-time-format';
-import type { ChartDataRow, ChartOptions } from './chartOptions';
+import type { ChartDataRow, ChartOptions, ColorChoice } from './chartOptions';
 
 export type ChartDataOptions = {
 	type?: string;
@@ -44,7 +44,7 @@ export function makeTooltip(
 	return (d: ChartDataRow) => getTooltip(d, dateFormatter, valueFormatter);
 }
 
-export const getColorScale = (data: ChartDataRow[]) => {
+export const getColorScale = (data: ChartDataRow[]): ColorChoice => {
 	let domain = new Array(...new Set(data.map((d) => d.b))).sort();
 
 	// ensure "London" comes first (if it is present)

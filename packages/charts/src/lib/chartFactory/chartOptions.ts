@@ -114,19 +114,17 @@ interface BaseChartOptions {
 	/**
 	 * Can be used to override color scale.
 	 */
-	colorScale?: {
-		domain: (number | string)[];
-		range: string[];
-	};
-	colorScaleLight?: {
-		domain: (number | string)[];
-		range: string[];
-	};
+	colorScale?: ColorScaleOverride;
 
-	colorScaleDark?: {
-		domain: (number | string)[];
-		range: string[];
-	};
+	/**
+	 * Overrides `colorScale` when the light theme is active.
+	 */
+	colorScaleLight?: ColorScaleOverride;
+
+	/**
+	 * Overrides `colorScale` when the dark theme is active.
+	 */
+	colorScaleDark?: ColorScaleOverride;
 
 	height?: number;
 
@@ -282,9 +280,14 @@ export type ChartDataRow = {
 	[key: string]: unknown;
 };
 
+export type ColorScaleOverride = {
+	domain: (number | string)[];
+	range: string[];
+};
+
 export type ColorChoice = {
 	type?: ScaleType;
-	domain?: string[];
+	domain?: (number | string)[];
 	range?: string[];
 };
 
