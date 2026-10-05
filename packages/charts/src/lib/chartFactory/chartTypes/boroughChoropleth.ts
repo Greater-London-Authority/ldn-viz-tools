@@ -11,6 +11,15 @@ import type { Feature, FeatureCollection } from 'geojson';
 
 import boroughs from './boroughs_simplified.json' with { type: 'json' };
 
+// We need to cast "{ reverse: true} as any" because an error in the type says that 'reversed' is expected instead of 'reverse'
+const geoData: FeatureCollection = {
+	...boroughs,
+	type: 'FeatureCollection' as const,
+	features: boroughs.features.map(
+		(feature) => rewind(feature as any, { reverse: true } as any) as Feature
+	)
+};
+
 export const boroughChoropleth = (
 	options: ChartOptions,
 	data: ChartDataRow[],
@@ -21,22 +30,20 @@ export const boroughChoropleth = (
 	const areaNameField = 'xd';
 	const valueField = 'y';
 
-	// We need to cast "{ reverse: true} as any" because an error in the type says that 'reversed' is expected instead of 'reverse'
-	const geoData: FeatureCollection = {
-		...boroughs,
-		type: 'FeatureCollection' as const,
-		features: boroughs.features.map(
-			(feature) => rewind(feature as any, { reverse: true } as any) as Feature
-		)
-	};
-
 	let joinedData: FeatureCollection = geoData;
 
 	if (geoData && data.length > 0) {
+		// Keep the first row for each area
+		const rowsByArea = new Map<unknown, ChartDataRow>();
+		for (const row of data) {
+			const area = row[areaNameField];
+			if (!rowsByArea.has(area)) rowsByArea.set(area, row);
+		}
+
 		const joinedFeatures = [];
 
 		for (const feature of geoData.features) {
-			const d = data.find((d: any) => d[areaNameField] === feature.properties?.name);
+			const d = rowsByArea.get(feature.properties?.name);
 			joinedFeatures.push({
 				...feature,
 				properties: {
