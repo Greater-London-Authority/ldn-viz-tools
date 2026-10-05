@@ -2,10 +2,9 @@
 	import { ChartContainer, ObservablePlotInner } from '@ldn-viz/charts';
 	import { NonIdealState, theme } from '@ldn-viz/ui';
 
-	import { chartOptions } from './chartOptions';
 	import { chartFns } from './chartTypes/index';
 
-	import type { ChartDataRow } from './chartOptions';
+	import type { ChartDataRow, ChartOptions } from './chartOptions';
 	import { getDescription, joinUnique } from './descriptions';
 	import { getColorScale } from './utils';
 
@@ -45,12 +44,15 @@
 		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
 		 */
 		columnMapping?: Record<string, string>;
+
+		/**
+		 * Options that determine the chart type, the structure of the data, and how the chart is styled.
+		 */
+		options: ChartOptions;
 	};
 
-	let { title, subTitle, source, byline, dataset, data, note, columnMapping }: ChartProps =
+	let { title, subTitle, source, byline, dataset, data, note, columnMapping, options }: ChartProps =
 		$props();
-
-	let options = $derived(chartOptions[dataset]);
 
 	let facetVals = $derived(options.facetOrder ?? [...new Set(data.map((d) => d.b))]);
 
