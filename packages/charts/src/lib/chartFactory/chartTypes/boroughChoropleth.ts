@@ -1,5 +1,5 @@
-import { Plot } from '../../observablePlotFragments/plot';
 import { theme } from '@ldn-viz/ui';
+import { Plot } from '../../observablePlotFragments/plot';
 
 import type { ChartDataRow, ChartOptions, ColorChoice } from '../chartOptions';
 
@@ -26,7 +26,6 @@ export const boroughChoropleth = (
 	colorChoice: ColorChoice,
 	width: number
 ) => {
-	const optionsWithTooltip = options as ChartOptions & { tooltipFormatValue?: string };
 	const areaNameField = 'xd';
 	const valueField = 'y';
 
@@ -61,7 +60,7 @@ export const boroughChoropleth = (
 		height: width
 	};
 
-	let f = format(optionsWithTooltip.tooltipFormatValue ?? options.ytickformat ?? '.0f');
+	let f = format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
 
 	return {
 		projection: geoMercator().fitExtent(
