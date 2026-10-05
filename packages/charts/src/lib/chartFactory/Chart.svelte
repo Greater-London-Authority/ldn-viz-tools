@@ -9,23 +9,70 @@
 	import { getColorScale } from './utils';
 
 	type ChartProps = {
+		/**
+		 * Title that is displayed in large text above the plot.
+		 */
 		title: string;
 
+		/**
+		 * Subtitle that is displayed below the title, but above the plot.
+		 */
 		subTitle?: string;
+
+		/**
+		 * What appears in the footer:
+		 *
+		 * * `byline` (string) - statement of who created the visualization
+		 * * `source` (string) - statement of where the data came from
+		 * * `note` (string) - any additional footnotes
+		 */
 		source?: string;
 		byline?: string;
 		note?: string;
 
+		/**
+		 * Data being visualized (as an array of objects); also used by the data download button.
+		 */
 		data?: ChartDataRow[];
 
+		/**
+		 * Identifier for the dataset. Used as the `id` attribute of the chart and as the file name for downloaded data or image files.
+		 */
 		dataset: string;
 
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
 		columnMapping?: Record<string, string>;
 
+		/**
+		 * Options that determine the chart type, the structure of the data, and how the chart is styled.
+		 */
 		options: ChartOptions;
 
+		/**
+		 * Snippet rendering controls (e.g. inputs for filtering the data), passed through to the `ChartContainer`.
+		 */
 		controls?: Snippet;
+
+		/**
+		 * Data Download Button in the footer
+		 *
+		 * Defaults to true which allows user to select download in either 'CSV' or 'JSON' format.
+		 * Set to false to hide completely.
+		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
+		 *
+		 */
 		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+
+		/**
+		 * Image Download Button in the footer
+		 *
+		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
+		 * Set to false to hide completely.
+		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
+		 *
+		 */
 		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
 	};
 
