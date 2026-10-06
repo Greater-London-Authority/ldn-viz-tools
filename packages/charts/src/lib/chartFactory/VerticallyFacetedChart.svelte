@@ -102,10 +102,6 @@
 	);
 </script>
 
-<!--
-<pre>{JSON.stringify(options, null, 2)}</pre>
--->
-
 {#if spec && data.length > 0}
 	<div class="w-full py-8" bind:clientWidth={width}>
 		<ChartContainer
