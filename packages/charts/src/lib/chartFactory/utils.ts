@@ -157,8 +157,15 @@ export const getGridStrokeOpacity = (
  * Construct the domain for the chart.
  * For line charts, we try to ensure that there is one grid-line above the
  * highest data-point, and one grid-line below the lowest, so the data appears nicely contained.
+ *
+ * `padding` extends the domain beyond those outermost grid-lines by that fraction of a tick step
+ * (except where the grid-line is at 0).
  */
-export const getDomain = (data: ChartDataRow[], options: ChartOptions) => {
+export const getDomain = (
+	data: ChartDataRow[],
+	options: ChartOptions,
+	{ padding = 0 }: { padding?: number } = {}
+): [number, number] => {
 	const nt = options.numTicks ?? 5;
 
 	const [min, max] = extent(data.map((d) => d.y));
@@ -180,11 +187,17 @@ export const getDomain = (data: ChartDataRow[], options: ChartOptions) => {
 	if (start > range[0]) {
 		start -= stepSize;
 	}
+	if (start !== 0) {
+		start -= stepSize * padding;
+	}
 
 	let end = tickVals[tickVals.length - 1] ?? range[1];
 
 	if (end < range[1]) {
 		end += stepSize;
+	}
+	if (end !== 0) {
+		end += stepSize * padding;
 	}
 
 	return [start, end];
