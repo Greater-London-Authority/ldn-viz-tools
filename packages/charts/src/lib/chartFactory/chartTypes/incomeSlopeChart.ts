@@ -29,7 +29,7 @@ export const incomeSlopeChart = (
 	color: {
 		legend: true,
 		type: 'ordinal' as const,
-		domain: ['London', 'Rest of UK'],
+		domain: options.xDomain,
 		range: [theme.tokenNameToValue('data.primary'), theme.tokenNameToValue('data.context')]
 	},
 
@@ -76,8 +76,9 @@ export const incomeSlopeChart = (
 			}
 		),
 
+		// labels for the first group go to the left of its line; all others to the right
 		Plot.text(
-			data.filter((d) => thresholds.includes(d.b) && d.xd === 'London'),
+			data.filter((d) => thresholds.includes(d.b) && d.xd === options.xDomain?.[0]),
 			{
 				x: 'xd',
 				y: 'y',
@@ -89,7 +90,7 @@ export const incomeSlopeChart = (
 		),
 
 		Plot.text(
-			data.filter((d) => thresholds.includes(d.b) && d.xd !== 'London'),
+			data.filter((d) => thresholds.includes(d.b) && d.xd !== options.xDomain?.[0]),
 			{
 				x: 'xd',
 				y: 'y',

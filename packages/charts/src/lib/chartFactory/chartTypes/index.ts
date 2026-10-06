@@ -22,7 +22,7 @@ const asGenerator = (fn: (...args: any[]) => any): ChartGenerator =>
 	fn as unknown as ChartGenerator;
 
 export const chartFns: Record<string, ChartGenerator> = {
-	histogram,
+	histogram: asGenerator(histogram),
 	barChartStacked,
 	barChartStackedTimeseries: asGenerator(barChartStackedTimeseries),
 	barChartHorizontalGrouped: asGenerator(barChartHorizontalGrouped),

@@ -1,9 +1,9 @@
 import { Plot } from '../../observablePlotFragments/plot';
 import type { RectYOptions } from '@observablehq/plot';
-import type { ChartDataRow, ChartOptions, ColorChoice } from '../chartOptions';
+import type { ChartDataRow, ColorChoice, HistogramOptions } from '../chartOptions';
 
 export const histogram = (
-	options: ChartOptions,
+	options: HistogramOptions,
 	data: ChartDataRow[],
 	colorChoice: ColorChoice
 ) => ({
@@ -11,7 +11,7 @@ export const histogram = (
 	marginRight: 100,
 
 	x: {
-		label: 'Vacancy Rate',
+		label: options.xAxisLabel ?? null,
 		tickFormat: '.2%',
 		insetLeft: options.insetLeft ?? 80,
 		insetRight: 0, // need space for labels to right of plot
@@ -19,7 +19,7 @@ export const histogram = (
 	},
 
 	y: {
-		label: 'Count',
+		label: options.yAxisLabel === undefined ? 'Count' : options.yAxisLabel,
 
 		domain: options.yDomain,
 
@@ -39,7 +39,7 @@ export const histogram = (
 	},
 
 	marks: [
-		Plot.gridX({ interval: '2 years' }),
+		Plot.gridX({ interval: options.gridXInterval }),
 		Plot.gridY(),
 
 		Plot.axisX({

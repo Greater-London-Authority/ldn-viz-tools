@@ -76,8 +76,9 @@ interface BaseChartOptions {
 	/**
 	 * Override for x-axis. This is used mostly to ensure that there is always an x-axis tick and gridline to the left of the first datapoint.
 	 * (doing this automatically by finding the extent and then adjusting by a scale interval is more awkward for this axis as we are working with dates rounded to different resolutions)
+	 * For charts with a categorical x-axis (e.g. `incomeSlope`), this is the ordered list of categories.
 	 */
-	xDomain?: [Date, Date] | [number, number];
+	xDomain?: [Date, Date] | [number, number] | string[];
 
 	indexLine?: number;
 
@@ -241,6 +242,26 @@ export interface BarChartStackedTimeseriesOptions extends BaseChartOptions {
 	xInterval?: string;
 }
 
+export interface HistogramOptions extends BaseChartOptions {
+	chartType: 'histogram';
+
+	/**
+	 * Label to use on the x-axis (the binned values). Defaults to no label.
+	 */
+	xAxisLabel?: string | null;
+
+	/**
+	 * Label to use on the y-axis (the count in each bin). Defaults to 'Count'.
+	 */
+	yAxisLabel?: string | null;
+
+	/**
+	 * Spacing between vertical grid lines, in x-axis units (e.g. 0.05 for every 5 percentage points).
+	 * Defaults to Plot's automatic tick spacing.
+	 */
+	gridXInterval?: number;
+}
+
 export interface PairedDotplotOptions extends BaseChartOptions {
 	chartType: 'pairedDotPlot';
 
@@ -256,7 +277,6 @@ export interface CoreChartOptions extends BaseChartOptions {
 		| 'barChartVertical'
 		| 'barChartVerticalGrouped'
 		| 'barChartStacked'
-		| 'histogram'
 		| 'incomeSlope'
 		| 'slopeChart'
 		| 'boroughChoropleth'
@@ -270,6 +290,7 @@ export type ChartOptions =
 	| BarChartHorizontalOptions
 	| BarChartHorizontalGroupedOptions
 	| BarChartStackedTimeseriesOptions
+	| HistogramOptions
 	| PairedDotplotOptions
 	| CoreChartOptions;
 

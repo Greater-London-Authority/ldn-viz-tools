@@ -126,6 +126,7 @@
 
 	const histogramOptions: ChartOptions = {
 		chartType: 'histogram',
+		xAxisLabel: 'Vacancy Rate',
 		faceted: true,
 		type: 'date',
 		ytickformat: null,
@@ -144,7 +145,8 @@
 		x_order: null,
 		timeperiod_type: 'Quarter',
 		includeZero: true,
-		yDomain: [0, 2000]
+		yDomain: [0, 2000],
+		xDomain: ['London', 'Rest of UK']
 	};
 
 	const slopeChartOptions: ChartOptions = {
