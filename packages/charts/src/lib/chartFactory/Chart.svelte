@@ -144,14 +144,10 @@
 	});
 
 	let description = $derived(getDescription(options, data, colorChoice));
-
-	let isMapChoropleth = $derived(
-		options?.chartType === 'boroughChoropleth' || options?.chartType === 'wardChoropleth'
-	);
 </script>
 
 {#if spec && data.length > 0}
-	<div class="w-full py-8" class:map-legend-rotated={isMapChoropleth} bind:clientWidth={width}>
+	<div class="w-full py-8" bind:clientWidth={width}>
 		<ObservablePlot
 			{data}
 			{spec}
