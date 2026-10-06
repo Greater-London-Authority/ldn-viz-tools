@@ -1,9 +1,8 @@
-import { Plot } from '../../observablePlotFragments/plot';
 import { theme } from '@ldn-viz/ui';
+import { Plot } from '../../observablePlotFragments/plot';
 import type { ChartDataRow, ColorChoice, LineChartWithForecastOptions } from '../chartOptions';
 
 import {
-	formatAxisTick,
 	getAxisTypeAndTickFormat,
 	getDomain,
 	getGridStrokeOpacity,
@@ -210,7 +209,7 @@ export const lineChartWithForecast = (
 			Plot.gridY(),
 
 			Plot.axisY({
-				tickFormat: (d: unknown) => formatAxisTick(Number(d), options.ytickformat)
+				tickFormat: options.ytickformat
 			}),
 
 			...getZeroYLine(options),

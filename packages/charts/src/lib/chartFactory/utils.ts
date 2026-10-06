@@ -1,8 +1,8 @@
-import { Plot } from '../observablePlotFragments/plot';
 import { theme } from '@ldn-viz/ui';
 import { extent, ticks, tickStep } from 'd3-array';
 import { formatLocale } from 'd3-format';
 import { utcFormat } from 'd3-time-format';
+import { Plot } from '../observablePlotFragments/plot';
 import type { ChartDataRow, ChartOptions, ColorChoice } from './chartOptions';
 
 export type ChartDataOptions = {
@@ -251,19 +251,4 @@ export const getZeroYLine = (options: ChartOptions) => {
 		return [Plot.ruleY([0])];
 	}
 	return [];
-};
-
-// TODO: review - this came from population projections
-// directly used only by lineChartWithForecast
-export const formatAxisTick = (value: number, spec?: string | null): string => {
-	if (spec?.includes('s')) {
-		const abs = Math.abs(value);
-		if (abs >= 1_000_000) {
-			const millions = value / 1_000_000;
-			return `${millions.toFixed(1)}M`;
-		}
-	}
-
-	const formatter = enGBLocale.format(spec ?? ',.0f');
-	return formatter(value);
 };
