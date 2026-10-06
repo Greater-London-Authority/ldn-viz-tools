@@ -1,6 +1,6 @@
-import { Plot } from '../../observablePlotFragments/plot';
 import { theme } from '@ldn-viz/ui';
 import { format } from 'd3-format';
+import { Plot } from '../../observablePlotFragments/plot';
 import type { ChartDataRow, ChartOptions, ColorChoice } from '../chartOptions';
 import { getAxisTypeAndTickFormat, getZeroYLine, makeTooltip } from '../utils';
 
@@ -9,7 +9,7 @@ const thresholds = ['10', '50', '90'];
 export const incomeSlopeChart = (
 	options: ChartOptions,
 	data: ChartDataRow[],
-	colorChoice: ColorChoice
+	_colorChoice: ColorChoice
 ) => ({
 	x: {
 		label: null,

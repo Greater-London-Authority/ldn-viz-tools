@@ -111,7 +111,7 @@
 		>
 			<!-- wait until the container has been measured, rather than building specs for zero width -->
 			{#if width > 0}
-				{#each facetVals as facetVal}
+				{#each facetVals as facetVal (facetVal)}
 					<ObservablePlotInner id={`${dataset}-${facetVal}`} {data} spec={spec(facetVal)} />
 				{/each}
 			{/if}

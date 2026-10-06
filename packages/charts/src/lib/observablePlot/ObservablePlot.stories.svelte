@@ -433,7 +433,7 @@
 </Story>
 
 <Story name="Combines multiple ObservablePlot images into single SVG">
-	{#snippet template(args)}
+	{#snippet template()}
 		<div class=" py-typography-spacing-3xl w-full">
 			<ChartContainer
 				title="Two ObservablePlotInner plots in one ChartContainer..."

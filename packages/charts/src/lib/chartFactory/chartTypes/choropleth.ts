@@ -58,7 +58,7 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 			height: width
 		};
 
-		let f = enGBLocale.format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
+		const f = enGBLocale.format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
 
 		return {
 			projection: geoMercator().fitExtent(
