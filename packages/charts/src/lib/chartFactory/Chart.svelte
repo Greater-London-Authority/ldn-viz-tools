@@ -151,11 +151,7 @@
 </script>
 
 {#if spec && data.length > 0}
-	<div
-		class="py-typography-spacing-3xl w-full"
-		class:map-legend-rotated={isMapChoropleth}
-		bind:clientWidth={width}
-	>
+	<div class="w-full py-8" class:map-legend-rotated={isMapChoropleth} bind:clientWidth={width}>
 		<ObservablePlot
 			{data}
 			{spec}

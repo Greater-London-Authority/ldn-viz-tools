@@ -2,9 +2,9 @@ import { theme } from '@ldn-viz/ui';
 import { Plot } from '../../observablePlotFragments/plot';
 
 import type { ChartDataRow, ChartOptions, ColorChoice } from '../chartOptions';
+import { enGBLocale } from '../utils';
 
 import rewind from '@turf/rewind';
-import { format } from 'd3-format';
 import { geoMercator } from 'd3-geo';
 
 import type { Feature, FeatureCollection } from 'geojson';
@@ -59,7 +59,7 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 			height: width
 		};
 
-		let f = format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
+		let f = enGBLocale.format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
 
 		return {
 			projection: geoMercator().fitExtent(
@@ -78,7 +78,7 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 				type: 'threshold',
 				legend: true,
 				label: '',
-				tickFormat: options.ytickformat,
+				tickFormat: options.ytickformat ? enGBLocale.format(options.ytickformat) : undefined,
 				tickRotate: 45
 			},
 			width: viewbox.width,

@@ -24,6 +24,14 @@ export function getTooltip(
 	return [d.b, d.xd, y].join('\n');
 }
 
+// N.B. we need to define the format locale to ensure the currency formatter is set to use £ rather than $
+export const enGBLocale = formatLocale({
+	currency: ['£', ''],
+	thousands: ',',
+	grouping: [3],
+	decimal: '.'
+});
+
 export function makeTooltip(
 	options: Pick<
 		import('./chartOptions').ChartOptions,
@@ -31,12 +39,7 @@ export function makeTooltip(
 	>
 ): (d: ChartDataRow) => string {
 	const spec = options.tooltipFormatValue ?? options.ytickformat;
-	// N.B. we need to define the format locale to ensure the currency formatter is set to use £ rather than $
-	const valueFormatter = spec
-		? formatLocale({ currency: ['£', ''], thousands: ',', grouping: [3], decimal: '.' }).format(
-				spec
-			)
-		: undefined;
+	const valueFormatter = spec ? enGBLocale.format(spec) : undefined;
 
 	const dateFormat = options.tooltipFormatDate ?? '%d %B %Y';
 	const dateFormatter = utcFormat(dateFormat);
@@ -248,11 +251,6 @@ export const formatAxisTick = (value: number, spec?: string | null): string => {
 		}
 	}
 
-	const formatter = formatLocale({
-		currency: ['£', ''],
-		thousands: ',',
-		grouping: [3],
-		decimal: '.'
-	}).format(spec ?? ',.0f');
+	const formatter = enGBLocale.format(spec ?? ',.0f');
 	return formatter(value);
 };

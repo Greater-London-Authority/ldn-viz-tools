@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { NonIdealState, theme } from '@ldn-viz/ui';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from '../observablePlot/ObservablePlotInner.svelte';
-	import { NonIdealState, theme } from '@ldn-viz/ui';
 
 	import { type ChartDataRow, type ChartOptions } from './chartOptions';
 	import { chartFns } from './chartTypes';
@@ -94,7 +94,7 @@
 </script>
 
 {#if spec && data.length > 0}
-	<div class="py-typography-spacing-3xl w-full" bind:clientWidth={width}>
+	<div class="w-full py-8" bind:clientWidth={width}>
 		<ChartContainer
 			{data}
 			{title}
