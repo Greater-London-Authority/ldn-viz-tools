@@ -1,6 +1,7 @@
-import { max, min, type Numeric } from 'd3-array';
+import { extent, type Numeric } from 'd3-array';
 import { utcFormat } from 'd3-time-format';
 import type { ChartDataRow, ChartOptions, ColorChoice } from './chartOptions';
+import { enGBLocale } from './utils';
 
 const dateFormatter = utcFormat('%Y');
 const formatDate = (d: unknown) => (d instanceof Date ? dateFormatter(d) : d);
@@ -19,74 +20,149 @@ const join = (arr: (string | number)[], addQuotes = true) => {
 	return `${a.slice(0, -1).join(', ')} and ${a.at(-1)}`;
 };
 
-const unique = (arr: any[]) => Array.from(new Set(arr));
+const unique = <T>(arr: T[]) => Array.from(new Set(arr));
+
+// unique values, ignoring rows where the field is missing
+const uniqueDefined = <T>(arr: (T | null | undefined)[]) =>
+	unique(arr.filter((d): d is T => d != null && d !== ''));
 
 export const joinUnique = (arr: any[]) => join(unique(arr));
+
+// Joins the non-empty fragments with single spaces and ends the sentence with a full stop.
+const sentence = (...parts: (string | number | undefined | false)[]) =>
+	parts.filter((p) => p !== undefined && p !== false && p !== '').join(' ') + '.';
+
+// Describes the range of `values` if they are dates or numbers, or lists them if they are categories.
+const rangeStatement = (values: unknown[]) => {
+	const defined = values.filter((d) => d != null);
+	if (defined.length === 0) {
+		return '';
+	}
+
+	if (defined.every((d) => d instanceof Date || typeof d === 'number')) {
+		// d3's extent compares Dates and numbers at runtime, but its overloads can't express the
+		// mixed union, so we cast
+		const [lo, hi] = extent(defined as Numeric[]);
+		return `showing values between ${formatDate(lo)} and ${formatDate(hi)}`;
+	}
+
+	return `showing values for ${join(unique(defined.map(String)))}`;
+};
 
 export const getDescription = (
 	options: ChartOptions,
 	data: ChartDataRow[],
 	colorChoice: ColorChoice
 ) => {
-	// `xd` may hold strings, numbers or Dates; d3's min/max compare any of these at runtime,
-	// but their overloads can't express the mixed union, so we cast
-	const xds = data.map((d) => d.xd) as Numeric[];
-	const domain = colorChoice.domain ?? [];
-	let timeStatement = `showing values between ${formatDate(min(xds))} and ${formatDate(max(xds))}`;
+	const xds = data.map((d) => d.xd);
+	const xStatement = rangeStatement(xds);
 
-	if (options.chartType === 'line' || options.chartType === 'slopeChart') {
-		let part = '';
-		if (domain.length === 1) {
-			part = `with a single line for ${domain[0]}`;
-		} else {
-			part = `with lines for ${join(domain)}`;
+	// the color domain is empty when there are too many series to color; fall back to the data
+	const domain = colorChoice.domain ?? [];
+	const series = domain.length > 0 ? domain : uniqueDefined(data.map((d) => d.b));
+
+	// e.g. "showing values between 2010 and 2020, with categories "A" and "B""
+	const withCategories = (statement: string, categories: (string | number)[]) =>
+		[statement, categories.length > 0 && `with categories ${join(categories)}`]
+			.filter(Boolean)
+			.join(', ');
+
+	const linesFor = (s: (string | number)[]) => {
+		if (s.length === 0) return undefined;
+		return s.length === 1 ? `with a single line for ${s[0]}` : `with lines for ${join(s)}`;
+	};
+
+	switch (options.chartType) {
+		case 'line':
+			return sentence('Line chart', linesFor(series), xStatement);
+
+		case 'slopeChart':
+			return sentence('Slope chart', linesFor(series), xStatement);
+
+		case 'lineChartWithForecast': {
+			const description = sentence('Line chart', linesFor(series), xStatement);
+			const projectedStart = options.projectedStart ? new Date(options.projectedStart) : null;
+			if (options.type === 'date' && projectedStart && !isNaN(projectedStart.getTime())) {
+				return `${description} Values from ${formatDate(projectedStart)} onwards are projections.`;
+			}
+			return description;
 		}
 
-		return `Line chart ${part} ${timeStatement}.`;
-	} else if (options.chartType === 'barChartVertical') {
-		return `Bar chart showing values for ${timeStatement}.`; // TODO: ix xd always time
-	} else if (options.chartType === 'barChartStacked') {
-		return `Stacked bar chart  ${timeStatement}, with categories ${join(domain)}.`;
-	} else if (options.chartType === 'lineChartWithLineStyles') {
-		timeStatement = `showing values between ${formatDate(min(xds))} and ${formatDate(max(xds))}`;
+		case 'lineChartWithLineStyles': {
+			const z2s = uniqueDefined(data.map((d) => d.z2));
+			return [
+				sentence('Line chart', xStatement),
+				series.length > 0 && sentence('Line color distinguishes between', join(series)),
+				z2s.length > 0 && sentence('Line style distinguishes between', join(z2s))
+			]
+				.filter(Boolean)
+				.join(' ');
+		}
 
-		const z2s = data.map((d) => d.z2);
+		case 'barChartVertical':
+			return sentence('Bar chart', xStatement);
 
-		return `Line chart ${timeStatement}. Line color distinguishes between ${join(domain)}. Line style distinguishes between ${join(unique(z2s))}`;
-	} else if (options.chartType === 'barChartStackedTimeseries') {
-		// The stacked bar chart is difficult to compeletely descibe concisely.
-		// For each
+		case 'barChartStacked':
+			return sentence('Stacked bar chart', withCategories(xStatement, series));
 
-		return `Stacked bar chart of a time-series ${timeStatement}, with categories ${join(domain)}.`;
-	} else if (
-		options.chartType === 'barChartVerticalGrouped' ||
-		options.chartType === 'barChartHorizontalGrouped'
-	) {
-		const xds = data.map((d) => d.xd);
-		const bs = data.map((d) => d.b);
+		case 'barChartStackedTimeseries':
+			return sentence('Stacked bar chart of a time-series', withCategories(xStatement, series));
 
-		return `A grouped bar chart. The groups correspond to ${join(unique(xds))}. Within each group, the bars correspond to ${join(unique(bs))}.`;
-	} else if (options.chartType === 'pairedDotPlot') {
-		// this data doesn't have time as xd
+		case 'barChartVerticalGrouped':
+		case 'barChartHorizontalGrouped': {
+			const groups = uniqueDefined(xds.map((d) => String(formatDate(d))));
+			const bs = uniqueDefined(data.map((d) => d.b));
+			return [
+				'A grouped bar chart.',
+				groups.length > 0 && sentence('The groups correspond to', join(groups)),
+				bs.length > 0 && sentence('Within each group, the bars correspond to', join(bs))
+			]
+				.filter(Boolean)
+				.join(' ');
+		}
 
-		let timeStatement = `showing values between ${formatDate(min(domain as Numeric[]))} and ${formatDate(max(domain as Numeric[]))}`;
-		const xds = data.map((d) => d.xd);
+		case 'pairedDotPlot':
+			// in this chart, the compared values are the color domain rather than `xd`
+			return sentence(
+				'Paired dot plot',
+				withCategories(rangeStatement(domain), uniqueDefined(xds.map(String)))
+			);
 
-		return `Paired dot plot ${timeStatement}, with categories ${join(unique(xds))}.`;
-	} else if (options.chartType === 'barChartHorizontal') {
-		const bs = data.map((d) => d.xd);
+		case 'barChartHorizontal': {
+			const bars = uniqueDefined(xds.map(String));
+			return sentence('Bar chart', bars.length > 0 && `with bars corresponding to ${join(bars)}`);
+		}
 
-		return `Bar chart with bars corresponding to ${join(unique(bs))}.`; // TODO: ix xd always time
-	} else if (options.chartType === 'incomeSlope') {
-		return `Slope chart showing household income for each decile in London and the rest of the UK.`; // TODO: ix xd always time
-	} else if (options.chartType === 'histogram') {
-		return `Paired histograms of vacancy rates in Inner London and Outer London.`; // TODO: ix xd always time
+		case 'incomeSlope': {
+			// `xd` holds the groups being compared; each line joins the values of one `b` across them
+			const groups = uniqueDefined(xds.map(String));
+			const bs = uniqueDefined(data.map((d) => d.b));
+			return sentence(
+				'Slope chart',
+				groups.length > 0 && `comparing ${join(groups)}`,
+				bs.length > 0 && `for ${join(bs)}`
+			);
+		}
+
+		case 'histogram':
+			return series.length > 1
+				? sentence('Histograms of values for', join(series))
+				: sentence('Histogram of values', series.length === 1 && `for ${join(series)}`);
+
+		case 'boroughChoropleth':
+		case 'wardChoropleth': {
+			const areaType = options.chartType === 'boroughChoropleth' ? 'borough' : 'ward';
+			const [lo, hi] = extent(data, (d) => d.y);
+			const f = enGBLocale.format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
+			return [
+				`Map of London shaded by value for each ${areaType}.`,
+				lo !== undefined && hi !== undefined && sentence('Values range from', f(lo), 'to', f(hi))
+			]
+				.filter(Boolean)
+				.join(' ');
+		}
 	}
 
-	return `TODO: ${options.chartType}`;
+	// generic fallback for any chart type without a specific description
+	return sentence('Chart', xStatement, series.length > 0 && `for ${join(series)}`);
 };
-
-// review: health
-// Public satisfaction with the NHS chart gone?
-
-// CYP: obesity plot
