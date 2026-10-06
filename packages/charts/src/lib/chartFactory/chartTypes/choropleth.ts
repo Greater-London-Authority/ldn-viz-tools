@@ -1,4 +1,3 @@
-import { theme } from '@ldn-viz/ui';
 import { Plot } from '../../observablePlotFragments/plot';
 
 import type { ChartDataRow, ChartOptions, ColorChoice } from '../chartOptions';
@@ -70,11 +69,8 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 				geoData
 			),
 			color: {
-				domain: options.colorScale?.domain ?? [0],
-				range:
-					theme.currentMode === 'light'
-						? (options.colorScaleLight?.range ?? options.colorScale?.range ?? [0])
-						: (options.colorScaleDark?.range ?? options.colorScale?.range ?? [0]),
+				domain: colorChoice.domain ?? [0],
+				range: colorChoice.range ?? [0],
 				type: 'threshold',
 				legend: true,
 				label: '',
