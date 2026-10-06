@@ -7,7 +7,7 @@
 	import { chartFns } from './chartTypes/index';
 
 	import type { Snippet } from 'svelte';
-	import type { ChartDataRow, ChartOptions } from './chartOptions';
+	import type { ChartDataRow, ChartGenerator, ChartOptions } from './chartOptions';
 	import { getDescription } from './descriptions';
 	import { getColorScale } from './utils';
 
@@ -127,13 +127,17 @@
 		return themeSpecificColor ?? options?.colorScale ?? getColorScale(data);
 	});
 
-	let spec = $derived.by(() => {
-		const chartFn = chartFns[options.chartType];
-
-		if (!chartFn) {
+	let chartFn = $derived.by((): ChartGenerator | undefined => {
+		const fn = chartFns[options.chartType];
+		if (!fn) {
 			console.error('No chart generator function found for chart of type:', options.chartType);
-			return null;
 		}
+		return fn;
+	});
+
+	let spec = $derived.by(() => {
+		// wait until the container has been measured, rather than building a spec for zero width
+		if (!chartFn || width === 0) return null;
 
 		const sortedData = ['line', 'lineChartWithLineStyles', 'lineChartWithForecast'].includes(
 			options.chartType
@@ -146,7 +150,7 @@
 	let description = $derived(getDescription(options, data, colorChoice));
 </script>
 
-{#if spec && data.length > 0}
+{#if chartFn && data.length > 0}
 	<div class="w-full py-8" bind:clientWidth={width}>
 		<ObservablePlot
 			{data}
@@ -180,7 +184,7 @@
 		filename={dataset}
 		{controls}
 	>
-		{#if !spec}
+		{#if !chartFn}
 			<NonIdealState>
 				{#snippet title()}Chart could not be displayed{/snippet}
 				Unknown chart type "{options.chartType}".

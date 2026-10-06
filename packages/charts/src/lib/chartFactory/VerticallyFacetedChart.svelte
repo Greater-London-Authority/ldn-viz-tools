@@ -122,9 +122,12 @@
 			{columnMapping}
 			alt={description}
 		>
-			{#each facetVals as facetVal}
-				<ObservablePlotInner id={`${dataset}-${facetVal}`} {data} spec={spec(facetVal)} />
-			{/each}
+			<!-- wait until the container has been measured, rather than building specs for zero width -->
+			{#if width > 0}
+				{#each facetVals as facetVal}
+					<ObservablePlotInner id={`${dataset}-${facetVal}`} {data} spec={spec(facetVal)} />
+				{/each}
+			{/if}
 		</ChartContainer>
 	</div>
 {:else}
