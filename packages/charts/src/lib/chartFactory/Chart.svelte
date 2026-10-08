@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { ColorLegend, NonIdealState, theme } from '@ldn-viz/ui';
+	import { scaleThreshold } from 'd3-scale';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlot from '../observablePlot/ObservablePlot.svelte';
-
-	import { NonIdealState, theme } from '@ldn-viz/ui';
 
 	import { chartFns } from './chartTypes/index';
 
@@ -148,10 +148,31 @@
 	});
 
 	let description = $derived(getDescription(options, data, colorChoice));
+
+	let colorScale = $derived(
+		options.chartType === 'choropleth'
+			? scaleThreshold()
+					.domain(options.colorScale?.domain ?? [0])
+					.range(
+						theme.currentMode === 'light'
+							? (options.colorScaleLight?.range ?? options.colorScale?.range ?? [0])
+							: (options.colorScaleDark?.range ?? options.colorScale?.range ?? [0])
+					)
+			: undefined
+	);
 </script>
 
 {#if chartFn && data.length > 0}
 	<div class="w-full py-8" bind:clientWidth={width}>
+		{#snippet plotControls()}
+			{@render controls?.()}
+			{#if options.chartType === 'choropleth'}
+				<div class="w-80">
+					<ColorLegend color={colorScale} tickFormat={options.ytickformat} />
+				</div>
+			{/if}
+		{/snippet}
+
 		<ObservablePlot
 			{data}
 			{spec}
@@ -166,7 +187,7 @@
 			{columnMapping}
 			filename={dataset}
 			alt={description}
-			{controls}
+			controls={plotControls}
 		/>
 	</div>
 {:else}
