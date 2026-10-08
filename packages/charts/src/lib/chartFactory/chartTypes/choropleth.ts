@@ -130,6 +130,14 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 
 		const f = enGBLocale.format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
 
+		// Plot skips features whose fill value is missing, so draw them separately
+		const { missingDataColor } = options as ChoroplethOptions;
+		const missingDataFeatures = missingDataColor
+			? (joinedData?.features ?? []).filter(
+					(d) => d.properties?.value == null || Number.isNaN(+d.properties.value)
+				)
+			: [];
+
 		return {
 			projection: geoMercator().fitExtent(
 				[
@@ -155,6 +163,15 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 					stroke: 'white',
 					strokeWidth: 1
 				}),
+				...(missingDataFeatures.length > 0
+					? [
+							Plot.geo(missingDataFeatures, {
+								fill: missingDataColor,
+								stroke: 'white',
+								strokeWidth: 1
+							})
+						]
+					: []),
 				Plot.tip(
 					joinedData?.features ?? [],
 					Plot.pointer(

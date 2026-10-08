@@ -296,6 +296,12 @@ export interface ChoroplethOptions extends BaseChartOptions {
 	 * Defaults to `'name'`. Use `'id'` for wards or other areas with non-unique names.
 	 */
 	joinKey?: 'name' | 'id';
+
+	/**
+	 * Fill color for areas with no matching data row (or a missing value).
+	 * If not set, these areas are not drawn.
+	 */
+	missingDataColor?: string;
 }
 
 // Chart types that need no fields beyond BaseChartOptions.
