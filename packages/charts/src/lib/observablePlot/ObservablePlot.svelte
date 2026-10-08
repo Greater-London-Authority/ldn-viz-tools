@@ -161,21 +161,23 @@
 	{@render controls?.()}
 
 	{#key spec}
-		<ObservablePlotInner
-			{data}
-			{domNode}
-			{tooltipStore}
-			{tooltipOffset}
-			{spec}
-			{applyDefaults}
-			{ariaHidden}
-			ariaDescribedBy="{id}-description"
-			{id}
-		>
-			{#snippet tooltip()}
-				{@render tooltip_render?.()}
-			{/snippet}
-		</ObservablePlotInner>
+		{#if spec}
+			<ObservablePlotInner
+				{data}
+				{domNode}
+				{tooltipStore}
+				{tooltipOffset}
+				{spec}
+				{applyDefaults}
+				{ariaHidden}
+				ariaDescribedBy="{id}-description"
+				{id}
+			>
+				{#snippet tooltip()}
+					{@render tooltip_render?.()}
+				{/snippet}
+			</ObservablePlotInner>
+		{/if}
 	{/key}
 </ChartContainer>
 
