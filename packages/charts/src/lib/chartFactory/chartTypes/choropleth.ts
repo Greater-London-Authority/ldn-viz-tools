@@ -142,7 +142,7 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 				domain: colorChoice.domain ?? [0],
 				range: colorChoice.range ?? [0],
 				type: 'threshold',
-				legend: true,
+				legend: false,
 				label: '',
 				tickFormat: options.ytickformat ? enGBLocale.format(options.ytickformat) : undefined,
 				tickRotate: 45
