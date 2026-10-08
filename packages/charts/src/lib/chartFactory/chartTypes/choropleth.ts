@@ -13,6 +13,7 @@ import rewind from '@turf/rewind';
 import { geoMercator } from 'd3-geo';
 import { createSubscriber } from 'svelte/reactivity';
 
+import type { RenderFunction } from '@observablehq/plot';
 import type { Feature, FeatureCollection } from 'geojson';
 
 const fetchGeoJSON = async (geojsonURL: string) => {
@@ -78,6 +79,67 @@ export const makeChoroplethFromURL = (geojsonURL: string, joinKey: string) => {
 	};
 };
 
+const areaIndexAttribute = 'data-area-index';
+
+// Render transform for a geo mark: records on each path the index of the feature it draws
+const tagAreas: RenderFunction = (index, scales, values, dimensions, context, next) => {
+	const g = next?.(index, scales, values, dimensions, context) ?? null;
+	g?.querySelectorAll('path').forEach((path, i) =>
+		path.setAttribute(areaIndexAttribute, String(index[i]))
+	);
+	return g;
+};
+
+/*
+ * Render transform for the tip mark: shows the tip for the area under the cursor, pointing at the cursor.
+ *
+ * Plot.pointer would instead pick the area whose centroid is nearest the cursor, but only within
+ * 40px of it, so large areas would show no tip over most of their extent.
+ */
+const tipForHoveredArea: RenderFunction = (index, scales, values, dimensions, context, next) => {
+	const svg = context.ownerSVGElement;
+
+	const render = (hovered?: { i: number; x: number; y: number }) => {
+		if (!hovered) return next?.([], scales, values, dimensions, context) ?? null;
+
+		// place the tip at the cursor rather than at the area's centroid
+		const x: number[] = [];
+		const y: number[] = [];
+		x[hovered.i] = hovered.x;
+		y[hovered.i] = hovered.y;
+		const valuesAtCursor = { ...values, x, y } as typeof values;
+		return next?.([hovered.i], scales, valuesAtCursor, dimensions, context) ?? null;
+	};
+
+	let g = render();
+
+	const show = (hovered?: { i: number; x: number; y: number }) => {
+		const replacement = render(hovered);
+		if (g && replacement) g.replaceWith(replacement);
+		g = replacement;
+	};
+
+	const update = (event: PointerEvent) => {
+		const area = (event.target as Element).closest(`[${areaIndexAttribute}]`);
+		const ctm = svg.getScreenCTM();
+		if (!area || !ctm) return show();
+
+		// convert from page coordinates to the SVG's own (possibly scaled) coordinates
+		const { x, y } = new DOMPoint(event.clientX, event.clientY).matrixTransform(ctm.inverse());
+		show({ i: Number(area.getAttribute(areaIndexAttribute)), x, y });
+	};
+
+	svg.addEventListener('pointermove', update);
+	// a tap shows the tip on touch screens, where there is no hover
+	svg.addEventListener('pointerdown', update);
+	svg.addEventListener('pointerleave', (event) => {
+		// a touch "leaves" as soon as the finger lifts, so keep the tapped area's tip visible
+		if (event.pointerType !== 'touch') show();
+	});
+
+	return g;
+};
+
 /**
  * Builds a choropleth chart generator for a set of areas.
  *
@@ -130,13 +192,13 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 
 		const f = enGBLocale.format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
 
+		const features = joinedData?.features ?? [];
+
 		// Plot skips features whose fill value is missing, so draw them separately
 		const { missingDataColor } = options as ChoroplethOptions;
-		const missingDataFeatures = missingDataColor
-			? (joinedData?.features ?? []).filter(
-					(d) => d.properties?.value == null || Number.isNaN(+d.properties.value)
-				)
-			: [];
+		const hasMissingValue = (d: Feature) =>
+			d.properties?.value == null || Number.isNaN(+d.properties.value);
+		const showMissingData = !!missingDataColor && features.some(hasMissingValue);
 
 		return {
 			projection: geoMercator().fitExtent(
@@ -158,28 +220,32 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 			width: viewbox.width,
 			height: viewbox.height,
 			marks: [
-				Plot.geo(joinedData?.features ?? [], {
+				Plot.geo(features, {
 					fill: 'value',
 					stroke: 'white',
-					strokeWidth: 1
+					strokeWidth: 1,
+					render: tagAreas
 				}),
-				...(missingDataFeatures.length > 0
+				...(showMissingData
 					? [
-							Plot.geo(missingDataFeatures, {
+							Plot.geo(features, {
+								filter: hasMissingValue,
 								fill: missingDataColor,
 								stroke: 'white',
-								strokeWidth: 1
+								strokeWidth: 1,
+								render: tagAreas
 							})
 						]
 					: []),
 				Plot.tip(
-					joinedData?.features ?? [],
-					Plot.pointer(
-						Plot.geoCentroid({
-							title: (d) =>
-								`${d.properties.name}\n${d.properties.value == null ? 'No data' : f(+d.properties.value)}`
-						})
-					)
+					features,
+					Plot.geoCentroid({
+						title: (d: Feature) =>
+							`${d.properties?.name}\n${d.properties?.value == null ? 'No data' : f(+d.properties.value)}`,
+						// so the tip never sits between the cursor and the area beneath it
+						pointerEvents: 'none',
+						render: tipForHoveredArea
+					})
 				)
 			]
 		};

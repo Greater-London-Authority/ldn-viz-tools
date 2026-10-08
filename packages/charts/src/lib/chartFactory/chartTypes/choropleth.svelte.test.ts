@@ -1,7 +1,9 @@
+import type { PlotOptions } from '@observablehq/plot';
 import { flushSync } from 'svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ChartDataRow, ChartOptions, ChoroplethOptions } from '../chartOptions';
-import { choropleth, makeChoroplethFromURL } from './choropleth';
+import { plot } from '../../observablePlotFragments/plot';
+import { choropleth, makeChoropleth, makeChoroplethFromURL } from './choropleth';
 
 const geojson = {
 	type: 'FeatureCollection',
@@ -219,8 +221,106 @@ describe('choropleth', () => {
 
 			const marks = geoMarks(spec);
 			expect(marks).toHaveLength(2);
-			expect(marks[1].data.map((d) => d.properties.name)).toEqual(['B']);
 			expect(marks[1].fill).toBe('#ccc');
+
+			// only area B, which has no data, is drawn by the second mark
+			const svg = plot(spec as PlotOptions);
+			const missingDataPaths = svg
+				.querySelectorAll('g[aria-label="geo"]')[1]
+				.querySelectorAll('path');
+			expect(missingDataPaths).toHaveLength(1);
+			expect(missingDataPaths[0].getAttribute('data-area-index')).toBe('1');
 		});
+	});
+});
+
+describe('choropleth tooltip', () => {
+	const square = (name: string, x0: number) => ({
+		type: 'Feature',
+		properties: { name },
+		geometry: {
+			type: 'Polygon',
+			coordinates: [
+				[
+					[x0, 0],
+					[x0 + 1, 0],
+					[x0 + 1, 1],
+					[x0, 1],
+					[x0, 0]
+				]
+			]
+		}
+	});
+
+	// two large areas side by side, so most of each is far (> 40px) from its centroid
+	const drawMap = (missingDataColor?: string) => {
+		const generator = makeChoropleth({ features: [square('West', 0), square('East', 1)] }, 'name');
+		const options = { chartType: 'choropleth', missingDataColor } as unknown as ChartOptions;
+		const svg = plot(
+			generator(options, [{ xd: 'West', b: '', y: 5 }], colorChoice, 600) as PlotOptions
+		);
+		document.body.appendChild(svg);
+		return svg;
+	};
+
+	const pointAt = (svg: Element, name: string, type = 'pointermove', offset = 0) => {
+		const area = svg.querySelector(`[data-area-index="${name === 'West' ? 0 : 1}"]`)!;
+		const { x, y, width, height } = area.getBoundingClientRect();
+		area.dispatchEvent(
+			new PointerEvent(type, {
+				bubbles: true,
+				clientX: x + width / 2 + offset,
+				clientY: y + height / 2 + offset
+			})
+		);
+	};
+
+	const tip = (svg: Element) => svg.querySelector('g[aria-label="tip"]');
+	const tipText = (svg: Element) =>
+		tip(svg)
+			?.textContent?.replace(/\u200b/g, ' ')
+			.trim();
+
+	afterEach(() => {
+		document.body.innerHTML = '';
+	});
+
+	it('shows the tip for the area under the cursor', () => {
+		const svg = drawMap();
+		expect(tipText(svg)).toBe('');
+
+		pointAt(svg, 'West');
+		expect(tipText(svg)).toBe('West 5');
+	});
+
+	it('shows the tip for an area with no data', () => {
+		const svg = drawMap('#ccc');
+		pointAt(svg, 'East');
+		expect(tipText(svg)).toBe('East No data');
+	});
+
+	it('places the tip at the cursor, not at the centroid', () => {
+		const svg = drawMap();
+		const tipPosition = () => tip(svg)!.querySelector('g')!.getAttribute('transform');
+
+		pointAt(svg, 'West');
+		const atCentre = tipPosition();
+		pointAt(svg, 'West', 'pointermove', 100);
+		expect(tipText(svg)).toBe('West 5');
+		expect(tipPosition()).not.toBe(atCentre);
+	});
+
+	it('hides the tip when the cursor leaves the map', () => {
+		const svg = drawMap();
+		pointAt(svg, 'West');
+		svg.dispatchEvent(new PointerEvent('pointerleave', { pointerType: 'mouse' }));
+		expect(tipText(svg)).toBe('');
+	});
+
+	it('shows the tip when an area is tapped, and keeps it after the finger lifts', () => {
+		const svg = drawMap('#ccc');
+		pointAt(svg, 'East', 'pointerdown');
+		svg.dispatchEvent(new PointerEvent('pointerleave', { pointerType: 'touch' }));
+		expect(tipText(svg)).toBe('East No data');
 	});
 });
