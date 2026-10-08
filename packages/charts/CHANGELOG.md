@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 9.4.1
+
+### Patch Changes
+
+- 3c77293: FIXED: choropleth tooltips now open when they should
+
 ## 9.4.0
 
 ### Minor Changes
