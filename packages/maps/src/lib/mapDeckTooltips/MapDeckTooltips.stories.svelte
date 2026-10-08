@@ -163,13 +163,13 @@
 </Story>
 
 <!--
-As the map is zoomed-in, the curosr can move from a feature off the top of the
+As the map is zoomed-in, the cursor can move from a feature off the top of the
 map without triggering another deck.g `onHover` event.
 In the top map, the tooltip stays open; 
 in the second map `use:closeTooltipOnLeave` ensures that the tooltip closes
 when the cursor leaves the map.
 -->
-<Story name="Example - clsoing tooltips when cursor leaves map">
+<Story name="Example - closing tooltips when cursor leaves map">
 	{#snippet template()}
 		<div class="flex flex-col gap-4">
 			<div class="h-32 w-[100dvw] bg-color-container-level-2"></div>

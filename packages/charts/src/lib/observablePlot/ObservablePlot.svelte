@@ -139,45 +139,47 @@
 	const tooltip_render = $derived(tooltip);
 </script>
 
-{#key spec}
-	<ChartContainer
-		{data}
-		{title}
-		subtitle={subTitle}
-		{alt}
-		{source}
-		{note}
-		{byline}
-		{dataDownloadButton}
-		{imageDownloadButton}
-		{filename}
-		{...rest}
-		chartHeight="h-fit"
-		{chartWidth}
-		description={chartDescription}
-		{columnMapping}
-		{id}
-	>
-		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
-		{@render controls?.()}
+<ChartContainer
+	{data}
+	{title}
+	subtitle={subTitle}
+	{alt}
+	{source}
+	{note}
+	{byline}
+	{dataDownloadButton}
+	{imageDownloadButton}
+	{filename}
+	{...rest}
+	chartHeight="h-fit"
+	{chartWidth}
+	description={chartDescription}
+	{columnMapping}
+	{id}
+>
+	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+	{@render controls?.()}
 
-		<ObservablePlotInner
-			{data}
-			{domNode}
-			{tooltipStore}
-			{tooltipOffset}
-			{spec}
-			{applyDefaults}
-			{ariaHidden}
-			ariaDescribedBy="{id}-description"
-			{id}
-		>
-			{#snippet tooltip()}
-				{@render tooltip_render?.()}
-			{/snippet}
-		</ObservablePlotInner>
-	</ChartContainer>
-{/key}
+	{#key spec}
+		{#if spec}
+			<ObservablePlotInner
+				{data}
+				{domNode}
+				{tooltipStore}
+				{tooltipOffset}
+				{spec}
+				{applyDefaults}
+				{ariaHidden}
+				ariaDescribedBy="{id}-description"
+				{id}
+			>
+				{#snippet tooltip()}
+					{@render tooltip_render?.()}
+				{/snippet}
+			</ObservablePlotInner>
+		{/if}
+	{/key}
+</ChartContainer>
 
 <style>
 	:global(.defaultColorLegendLabel-swatch) {
