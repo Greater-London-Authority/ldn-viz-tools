@@ -1,5 +1,12 @@
 # ldn-viz-tools-charts
 
+## 9.4.0
+
+### Minor Changes
+
+- 362fc2c: CHANGED: use our own ColorLegend component in choropleths, rather than ObservablePlot default
+- e846d93: CHANGED: allow user to specify the color of areas with no associated data in choropleths rendered by `Chart`.
+
 ## 9.3.0
 
 ### Minor Changes
