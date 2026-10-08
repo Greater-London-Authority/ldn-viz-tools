@@ -271,6 +271,33 @@ export interface PairedDotplotOptions extends BaseChartOptions {
 	compareValues?: [string, string];
 }
 
+/**
+ * Types of area for which the GLA geographies API provides boundaries.
+ */
+export type ChoroplethAreaType =
+	| 'borough'
+	| 'ward-2022'
+	| 'ward-2021'
+	| 'msoa-2021'
+	| 'lsoa-2021'
+	| 'lsoa-2011'
+	| 'oa-2021';
+
+export interface ChoroplethOptions extends BaseChartOptions {
+	chartType: 'choropleth';
+
+	/**
+	 * Type of area to draw; determines which boundaries are fetched.
+	 */
+	areaType: ChoroplethAreaType;
+
+	/**
+	 * Property on the area features that will be used to match against each data row's `xd` field.
+	 * Defaults to `'name'`. Use `'id'` for wards or other areas with non-unique names.
+	 */
+	joinKey?: 'name' | 'id';
+}
+
 // Chart types that need no fields beyond BaseChartOptions.
 export interface CoreChartOptions extends BaseChartOptions {
 	chartType:
@@ -278,9 +305,7 @@ export interface CoreChartOptions extends BaseChartOptions {
 		| 'barChartVerticalGrouped'
 		| 'barChartStacked'
 		| 'incomeSlope'
-		| 'slopeChart'
-		| 'boroughChoropleth'
-		| 'wardChoropleth';
+		| 'slopeChart';
 }
 
 export type ChartOptions =
@@ -292,6 +317,7 @@ export type ChartOptions =
 	| BarChartStackedTimeseriesOptions
 	| HistogramOptions
 	| PairedDotplotOptions
+	| ChoroplethOptions
 	| CoreChartOptions;
 
 export type ChartDataRow = {

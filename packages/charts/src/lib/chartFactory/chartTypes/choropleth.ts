@@ -1,12 +1,82 @@
 import { Plot } from '../../observablePlotFragments/plot';
 
-import type { ChartDataRow, ChartOptions, ColorChoice } from '../chartOptions';
+import type {
+	ChartDataRow,
+	ChartOptions,
+	ChoroplethAreaType,
+	ChoroplethOptions,
+	ColorChoice
+} from '../chartOptions';
 import { enGBLocale } from '../utils';
 
 import rewind from '@turf/rewind';
 import { geoMercator } from 'd3-geo';
+import { createSubscriber } from 'svelte/reactivity';
 
 import type { Feature, FeatureCollection } from 'geojson';
+
+const fetchGeoJSON = async (geojsonURL: string) => {
+	const response = await fetch(geojsonURL, {
+		headers: { Accept: 'application/geo+json' }
+	});
+	if (!response.ok) {
+		throw new Error(
+			`Failed to fetch GeoJSON from ${geojsonURL}: ${response.status} ${response.statusText}`
+		);
+	}
+
+	const geojson = await response.json();
+	if (!Array.isArray(geojson?.features)) {
+		throw new Error(`Response from ${geojsonURL} is not a GeoJSON FeatureCollection`);
+	}
+	if (geojson.features.length === 0) {
+		throw new Error(`Response from ${geojsonURL} contains no areas`);
+	}
+
+	return geojson as { features: unknown[] };
+};
+
+/**
+ * Builds a choropleth chart generator for areas whose GeoJSON is fetched from `geojsonURL`.
+ *
+ * The GeoJSON is only requested the first time a chart is drawn, so registering the
+ * generator in `chartFns` costs nothing until it is used. Until the request completes
+ * the generator returns an empty map; a chart whose spec is computed reactively (e.g. in
+ * a `$derived`) then redraws itself once the areas arrive.
+ *
+ * `joinKey` is the feature property matched against each data row's `xd` field.
+ */
+export const makeChoroplethFromURL = (geojsonURL: string, joinKey: string) => {
+	let loadedGenerator: ReturnType<typeof makeChoropleth> | undefined;
+	let request: Promise<void> | undefined;
+
+	const load = () =>
+		(request ??= fetchGeoJSON(geojsonURL).then(
+			(geojson) => {
+				loadedGenerator = makeChoropleth(geojson, joinKey);
+			},
+			(error) => console.error(error)
+		));
+
+	// Lets a reactive caller re-run once the GeoJSON has loaded
+	const subscribe = createSubscriber((update) => {
+		let subscribed = true;
+		load().then(() => {
+			if (subscribed) update();
+		});
+		return () => {
+			subscribed = false;
+		};
+	});
+
+	return (options: ChartOptions, data: ChartDataRow[], colorChoice: ColorChoice, width: number) => {
+		if (loadedGenerator) return loadedGenerator(options, data, colorChoice, width);
+
+		subscribe();
+		load();
+		return { width, height: width, marks: [] };
+	};
+};
 
 /**
  * Builds a choropleth chart generator for a set of areas.
@@ -98,3 +168,33 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 		};
 	};
 };
+
+const geographiesURL = 'https://apps.london.gov.uk/api/tables/geographies/areas_simplified';
+
+// One generator per area type and join key, so each set of boundaries is fetched at most once
+const generators = new Map<string, ReturnType<typeof makeChoroplethFromURL>>();
+
+const generatorFor = (areaType: ChoroplethAreaType, joinKey: 'name' | 'id') => {
+	const cacheKey = `${areaType}|${joinKey}`;
+	let generator = generators.get(cacheKey);
+	if (!generator) {
+		const url = `${geographiesURL}?type=eq.${encodeURIComponent(areaType)}`;
+		generator = makeChoroplethFromURL(url, joinKey);
+		generators.set(cacheKey, generator);
+	}
+	return generator;
+};
+
+/**
+ * Choropleth of London areas.
+ *
+ * `options.areaType` determines which set of boundaries to load,
+ * and `options.joinKey` determiens which field on each area is joined
+ * against the `xd` field of the rows of data.
+ */
+export const choropleth = (
+	options: ChoroplethOptions,
+	data: ChartDataRow[],
+	colorChoice: ColorChoice,
+	width: number
+) => generatorFor(options.areaType, options.joinKey ?? 'name')(options, data, colorChoice, width);

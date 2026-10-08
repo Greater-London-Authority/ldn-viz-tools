@@ -189,7 +189,8 @@
 	};
 
 	const boroughChoroplethOptions: ChartOptions = {
-		chartType: 'boroughChoropleth',
+		chartType: 'choropleth',
+		areaType: 'borough',
 		type: 'character',
 		timeperiod_type: null,
 		ytickformat: '.0%',
@@ -401,7 +402,7 @@
 	}}
 />
 
-<!-- `chartType: 'boroughChoropleth'` joins the rows to the borough boundaries by matching `xd` to the borough name, and colours each borough by `y`. -->
+<!-- `chartType: 'choropleth'` with `areaType: 'borough'` fetches the borough boundaries, joins the rows to them by matching `xd` to the borough name, and colours each borough by `y`. Set `joinKey: 'id'` to match `xd` to GSS codes instead (needed for wards and smaller areas, whose names are not unique). -->
 <Story
 	name="Borough Choropleth"
 	args={{

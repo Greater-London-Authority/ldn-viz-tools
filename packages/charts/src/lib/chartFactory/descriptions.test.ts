@@ -153,16 +153,22 @@ describe('getDescription', () => {
 	});
 
 	it.each([
-		['boroughChoropleth', 'borough'],
-		['wardChoropleth', 'ward']
-	])('%s', (chartType, areaType) => {
+		['borough', 'borough'],
+		['ward-2022', 'ward'],
+		['lsoa-2021', 'LSOA'],
+		['oa-2021', 'output area']
+	])('choropleth of %s', (areaType, areaName) => {
 		const data = [
 			{ xd: 'E09000001', b: 'x', y: 12.3 },
 			{ xd: 'E09000002', b: 'x', y: 45.6 }
 		];
 		expect(
-			getDescription(opts(chartType, { type: 'character', ytickformat: '.1f' }), data, {})
-		).toBe(`Map of London shaded by value for each ${areaType}. Values range from 12.3 to 45.6.`);
+			getDescription(
+				opts('choropleth', { type: 'character', ytickformat: '.1f', areaType }),
+				data,
+				{}
+			)
+		).toBe(`Map of London shaded by value for each ${areaName}. Values range from 12.3 to 45.6.`);
 	});
 
 	it('uses a generic fallback for unknown chart types', () => {
@@ -186,8 +192,7 @@ describe('getDescription', () => {
 			'barChartHorizontal',
 			'incomeSlope',
 			'histogram',
-			'boroughChoropleth',
-			'wardChoropleth'
+			'choropleth'
 		]) {
 			for (const data of [timeseries, []]) {
 				const text = getDescription(opts(chartType), data, {});

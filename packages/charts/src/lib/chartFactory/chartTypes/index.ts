@@ -5,7 +5,7 @@ import { barChartStacked } from './barChartStacked';
 import { barChartStackedTimeseries } from './barChartStackedTimeseries';
 import { barChartVertical } from './barChartVertical';
 import { barChartVerticalGrouped } from './barChartVerticalGrouped';
-import { boroughChoropleth } from './boroughChoropleth';
+import { choropleth } from './choropleth';
 import { histogram } from './histogram';
 import { incomeSlopeChart } from './incomeSlopeChart';
 import { lineChart } from './lineChart';
@@ -13,7 +13,6 @@ import { lineChartWithForecast } from './lineChartWithForecast';
 import { lineChartWithLineStyles } from './lineChartWithLineStyles';
 import { pairedDotplot } from './pairedDotplot';
 import { slopeChart } from './slopeChart';
-import { wardChoropleth } from './wardChoropleth';
 
 // Generators typed with chart-specific option subtypes need a cast to satisfy
 // ChartGenerator (which accepts the full ChartOptions union). The cast is sound
@@ -36,6 +35,5 @@ export const chartFns: Record<string, ChartGenerator> = {
 	pairedDotPlot: asGenerator(pairedDotplot),
 
 	incomeSlope: incomeSlopeChart,
-	boroughChoropleth: asGenerator(boroughChoropleth),
-	wardChoropleth: asGenerator(wardChoropleth)
+	choropleth: asGenerator(choropleth)
 };

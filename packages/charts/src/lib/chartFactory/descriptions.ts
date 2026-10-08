@@ -1,6 +1,6 @@
 import { extent, type Numeric } from 'd3-array';
 import { utcFormat } from 'd3-time-format';
-import type { ChartDataRow, ChartOptions, ColorChoice } from './chartOptions';
+import type { ChartDataRow, ChartOptions, ChoroplethAreaType, ColorChoice } from './chartOptions';
 import { enGBLocale } from './utils';
 
 const dateFormatter = utcFormat('%Y');
@@ -25,6 +25,17 @@ const unique = <T>(arr: T[]) => Array.from(new Set(arr));
 // unique values, ignoring rows where the field is missing
 const uniqueDefined = <T>(arr: (T | null | undefined)[]) =>
 	unique(arr.filter((d): d is T => d != null && d !== ''));
+
+// how each area type is named in a description, e.g. "for each ward"
+const areaTypeNames: Record<ChoroplethAreaType, string> = {
+	borough: 'borough',
+	'ward-2022': 'ward',
+	'ward-2021': 'ward',
+	'msoa-2021': 'MSOA',
+	'lsoa-2021': 'LSOA',
+	'lsoa-2011': 'LSOA',
+	'oa-2021': 'output area'
+};
 
 export const joinUnique = (arr: any[]) => join(unique(arr));
 
@@ -149,9 +160,8 @@ export const getDescription = (
 				? sentence('Histograms of values for', join(series))
 				: sentence('Histogram of values', series.length === 1 && `for ${join(series)}`);
 
-		case 'boroughChoropleth':
-		case 'wardChoropleth': {
-			const areaType = options.chartType === 'boroughChoropleth' ? 'borough' : 'ward';
+		case 'choropleth': {
+			const areaType = areaTypeNames[options.areaType] ?? 'area';
 			const [lo, hi] = extent(data, (d) => d.y);
 			const f = enGBLocale.format(options.tooltipFormatValue ?? options.ytickformat ?? '.0f');
 			return [
