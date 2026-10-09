@@ -162,9 +162,9 @@ export interface EndOfLineLabelOptions {
 	labelLineWidth?: number;
 
 	/**
-	 * If `true`, end-of-line labels on line charts are auto-spaced using
-	 * Observable Plot's `dodgeY` transform instead of the manual `labelNudges`
-	 * branch. Opt-in per chart so we can A/B the two approaches.
+	 * If `true`, end-of-line labels on line charts are automatically pushed apart
+	 * vertically wherever they would overlap, instead of using the manual
+	 * `labelNudges`. Opt-in per chart so we can A/B the two approaches.
 	 */
 	autoDodgeLabels?: boolean;
 }
