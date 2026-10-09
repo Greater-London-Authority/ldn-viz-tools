@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { ArrowDownTray, ChartBar, Funnel } from '@steeze-ui/heroicons';
 
-	import AppShell from '../../appShell/AppShell.svelte';
+	import {
+		AppShell,
+		LogoCIU,
+		LogoMayor,
+		Overlay,
+		Sidebar,
+		SidebarFooter,
+		SidebarHeader,
+		ThemeSwitcher
+	} from '@ldn-viz/ui';
 
-	import LogoCIU from '../../logos/LogoCIU.svelte';
-	import LogoMayor from '../../logos/LogoMayor.svelte';
-	import Overlay from '../../overlay/Overlay.svelte';
-
-	import Sidebar from '../../sidebar/Sidebar.svelte';
-	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
-	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-
-	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
 	import { Demo1, Pop1, Sewers } from './demoTabs';
 
 	const tabs = [

@@ -7,7 +7,7 @@
 	import SimpleDashboard from './Dashboards/SimpleDashboard.svelte';
 
 	let { Story } = defineMeta({
-		title: 'Ui/Example Layouts/Dashboards',
+		title: 'Example Layouts/Dashboards',
 		parameters: {
 			layout: 'fullscreen'
 		},

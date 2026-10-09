@@ -1,9 +1,5 @@
 <script lang="ts">
-	import InputWrapper from '../../../input/InputWrapper.svelte';
-	import Select from '../../../select/Select.svelte';
-	import SidebarGroup from '../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
-	import SidebarSection from '../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-
+	import { InputWrapper, Select, SidebarGroup, SidebarSection } from '@ldn-viz/ui';
 	/* Projection Component Options */
 	type Option = { label: string; value: number };
 	const componentOptions: Option[] = [
