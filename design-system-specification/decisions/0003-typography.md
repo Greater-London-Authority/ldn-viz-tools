@@ -25,18 +25,50 @@ We needed a system that sets type by what text does and the context in which it 
 
 ## Decision
 
-- **There are three contexts: prose, product and chart.** Prose is for reading, product is for interfaces, and chart is for data graphics. Every piece of text belongs to one of them.
+- **There are two contexts: Longform and Product.** Longform is for reading, Product is for interfaces, tables, charts and maps. Each context has a typeset that defines semantic roles.
+
 - **Bind to a role, never a size.** Pick the role for what the text does. Size, line height and weight are determined by role.
+
+- **Typesets share the same role vocabulary.** Roles are defined in sets of three: sm, md, lg in each set, with the exception of 'eyebrow' which is singular. Role sets are:
+
+  | Role     | Description                                                                                          |
+  | -------- | ---------------------------------------------------------------------------------------------------- |
+  | Display  | Expressive, high-impact type. Use sparingly.                                                         |
+  | Headline | Primary statement of a page or section. Sets topic and structure.                                    |
+  | Subhead  | Supporting statement paired with a headline or display.                                              |
+  | Title    | Names a discrete unit of context: block of prose or component such as a card, panel, chart or table. |
+  | Subtitle | Secondary context paired with a title.                                                               |
+  | Body     | Default reading for sustained running text. The baseline for other roles.                            |
+  | Label    | Functional text. Heavier than caption for recognition.                                               |
+  | Metric   | A figure presented as the content itself. Tabular numerals, quick comprehension.                     |
+  | Caption  | Subordinate annotation for images, charts, sources, and helper text. Smaller and tighter than body.  |
+  | Eyebrow  | Short signpost above a headline or title. Categorises or orients.                                    |
+
+  Distinctions:
+  - **Display vs Headline**: display is impact; headline is communication.
+  - **Label vs Caption**: labels are needed to use the interface; captions are optional commentary.
+  - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
+  - **Pairing** subhead pairs with headline/display, subtitle with title
+
+- **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
+
 - **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins.
-- **A nested context overrides only the roles it defines.** Everything else comes from the context around it. Body text inside a chart is still the surrounding body.
-- **A role name means the same thing everywhere.** The chart roles `title`, `subtitle` and `eyebrow` are aliases of the product roles with the same names, so they always have the same values. If two contexts give different values for a shared name, that is a bug.
-- **Role sets are closed.** Adding a role needs a decision. Reuse an existing role first: a legend entry is a chart `label`.
-- **Hierarchy follows structure.** In prose, h1–h4 map to Title 1–4, and Display and Headline are for heroes only. In product, the order is page-head → section-head → title.
-- **A title group has one dominant title.** When the title gives way, it becomes an eyebrow. A subtitle is a separate slot, not a weaker title.
-- **Variants change treatment, not size.** Tight label (line height 1) is for single-line controls and adds no new size.
-- **Typography sets type, not space.** The vertical space between pieces of text is set by flow.
 
-## Options considered
+- **A nested context overrides only the roles it defines.** Everything else comes from the context around it.
 
-- **Roles named by what text does, within a context**
-- **Roles named by component or size** (`card-panel-title`, t-shirt roles). This was the earlier approach. It meant the same job was styled in different ways from place to place.
+- **Longform typeset also defines flow. Product typeset does not** The vertical space between pieces of text is set by flow.
+
+- **Line heights in three ratios** Line height is defined in three ratios based on simple formula: `font-size + k` - where font-size and k are4 measured in px.
+  The ratios are:
+
+| tight           | default         | loose            |
+| --------------- | --------------- | ---------------- |
+| font-size + 4px | font-size + 8px | font-size + 12px |
+
+- **Aliases Provided** A small set of component level semantic aliases is output to make the system easier to communicate to users who
+
+- **Aliases Provided** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma.
+
+## Consequences
+
+**Usage aliases are a convenience only**; where possible, the typeset-role tokens should be used directly, as they are the stable, canonical API of the system. (This does not violate [0002](./0002-token-naming-grammar.md) as these are classes and not tokens)

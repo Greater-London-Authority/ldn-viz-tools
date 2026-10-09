@@ -24,30 +24,29 @@ Consistent naming grammar for design tokens should be clear and logical. Keep it
 ## Decision
 
 - Two tiers: primitive → semantic. Primitives hold values. Semantic tokens say what a value is for. Components use semantic tokens only, never primitives or raw values.
-
-- Primitives are named by their value.
+- Primitives carry the `primitive-` prefix and are named by their value.
   --primitive-typography-font-size-14 · --primitive-typography-font-weight-semi-bold · --primitive-spacing-4 (4 × 4px)
+- Semantic tokens drop the tier segment (it is inferred after being output from Figma), and are named by their role, never by value or component.
+  `title` (role), not 20 (value) and not card-panel-title (component).
+- One grammar for every token, general to specific: `(tier) → category → variant → concept → role → emphasis → state → property/value`. Segments that don't apply are left out; the rest never change order.
+- Minimum: a category plus at least one more segment.
+- Each segment has a fixed set of values, listed in the spec. A new value needs a spec change.
+- The grammar applied to each category:
 
-- Semantic tokens are named by their role, never by value or component.
-  title, not 20 (value) and not card-panel-title (component).
+| Category   | Pattern                                                                   | Example                                                                           |
+| ---------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Typography | --typography-{breakpoint}-{context}[-{role}][-{size}]-{property}          | --typography-base-product-title-font-size, --typography-base-prose-readable-width |
+| Colour     | --color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}] | --color-interactive-primary-muted-hover, --color-static-black                     |
+| Spacing    | --spacing-{value}                                                         | --spacing-4                                                                       |
+| Flow       | --flow-[{context}-]{step}                                                 | --flow-prose-loose, --flow-loose                                                  |
+| Shadow     | --shadow[-{value}]                                                        | --shadow, --shadow-md, --shadow-inner                                             |
 
-- One pattern per category:
-
-| Category   | Pattern                                     | Example                                   |
-| ---------- | ------------------------------------------- | ----------------------------------------- |
-| Typography | --typography-{mode}-{context}-{role}-{prop} | --typography-base-product-title-font-size |
-| Colour     | --color-{group}[-{variant}][-{state}]       | --color-interactive-primary-muted-hover   |
-| Spacing    | --spacing-{n}                               | --spacing-4                               |
-| Flow       | --flow-[{context}-]{step}                   | --flow-prose-loose, --flow-loose          |
-
-- The context segment decides the family. It is prose, product or chart, and families never mix: a Product/\* component uses product tokens only.
-
+- More than one variant: breakpoint or scope first, then context, layout or inverse. md-product, md-contained, chart-inverse.
+- One accepted outlier: --color-interactive-disabled-muted puts state before emphasis.
+- The context segment decides the family. It is prose, product or compact; chart is a context in typography and a scope in colour. Families never mix: a Product/\* component uses product tokens only.
 - Role names are generic within a context. Product names say where something sits in the hierarchy (page-head, section-head, title). Chart names say which part of the chart it is (axis-title, tick), because that's the vocabulary chart users already have.
-
-- Name segments run from general to specific, and modifiers go last. label-sm, primary-muted-hover.
-
-- The default has no modifier: title and --flow-{step} are the plain forms.
-
+- Implied defaults: a default is left out unless another segment follows it. --shadow is the default shadow, and title and --flow-{step} are the plain forms. base is written in --typography-base-product-title-font-size because more segments follow it.
+- The same word can fill two slots: text is a concept in color-text and an emphasis in interactive-primary-text.
 - Spelling: lowercase kebab-case throughout. Multi-word values are hyphenated (semi-bold, page-head). Fractional steps use a hyphen, because dots aren't valid in CSS names: --spacing-0-5, not --spacing-0.5
 
 ## Options considered

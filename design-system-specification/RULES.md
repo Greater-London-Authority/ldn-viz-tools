@@ -10,23 +10,29 @@
 ## [0002 — Token Naming Grammar](./decisions/0002-token-naming-grammar)
 
 - Two tiers: primitive → semantic. Primitives hold values. Semantic tokens say what a value is for. Components use semantic tokens only, never primitives or raw values.
-- Primitives are named by their value.
+- Primitives carry the `primitive-` prefix and are named by their value.
   --primitive-typography-font-size-14 · --primitive-typography-font-weight-semi-bold · --primitive-spacing-4 (4 × 4px)
-- Semantic tokens are named by their role, never by value or component.
-  title, not 20 (value) and not card-panel-title (component).
-- One pattern per category:
+- Semantic tokens drop the tier segment (it is inferred after being output from Figma), and are named by their role, never by value or component.
+  `title` (role), not 20 (value) and not card-panel-title (component).
+- One grammar for every token, general to specific: `(tier) → category → variant → concept → role → emphasis → state → property/value`. Segments that don't apply are left out; the rest never change order.
+- Minimum: a category plus at least one more segment.
+- Each segment has a fixed set of values, listed in the spec. A new value needs a spec change.
+- The grammar applied to each category:
 
-| Category   | Pattern                                     | Example                                   |
-| ---------- | ------------------------------------------- | ----------------------------------------- |
-| Typography | --typography-{mode}-{context}-{role}-{prop} | --typography-base-product-title-font-size |
-| Colour     | --color-{group}[-{variant}][-{state}]       | --color-interactive-primary-muted-hover   |
-| Spacing    | --spacing-{n}                               | --spacing-4                               |
-| Flow       | --flow-[{context}-]{step}                   | --flow-prose-loose, --flow-loose          |
+| Category   | Pattern                                                                   | Example                                                                           |
+| ---------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Typography | --typography-{breakpoint}-{context}[-{role}][-{size}]-{property}          | --typography-base-product-title-font-size, --typography-base-prose-readable-width |
+| Colour     | --color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}] | --color-interactive-primary-muted-hover, --color-static-black                     |
+| Spacing    | --spacing-{value}                                                         | --spacing-4                                                                       |
+| Flow       | --flow-[{context}-]{step}                                                 | --flow-prose-loose, --flow-loose                                                  |
+| Shadow     | --shadow[-{value}]                                                        | --shadow, --shadow-md, --shadow-inner                                             |
 
-- The context segment decides the family. It is prose, product or chart, and families never mix: a Product/\* component uses product tokens only.
+- More than one variant: breakpoint or scope first, then context, layout or inverse. md-product, md-contained, chart-inverse.
+- One accepted outlier: --color-interactive-disabled-muted puts state before emphasis.
+- The context segment decides the family. It is prose, product or compact; chart is a context in typography and a scope in colour. Families never mix: a Product/\* component uses product tokens only.
 - Role names are generic within a context. Product names say where something sits in the hierarchy (page-head, section-head, title). Chart names say which part of the chart it is (axis-title, tick), because that's the vocabulary chart users already have.
-- Name segments run from general to specific, and modifiers go last. label-sm, primary-muted-hover.
-- The default has no modifier: title and --flow-{step} are the plain forms.
+- Implied defaults: a default is left out unless another segment follows it. --shadow is the default shadow, and title and --flow-{step} are the plain forms. base is written in --typography-base-product-title-font-size because more segments follow it.
+- The same word can fill two slots: text is a concept in color-text and an emphasis in interactive-primary-text.
 - Spelling: lowercase kebab-case throughout. Multi-word values are hyphenated (semi-bold, page-head). Fractional steps use a hyphen, because dots aren't valid in CSS names: --spacing-0-5, not --spacing-0.5
 
 ## [0003 — Typography](./decisions/0003-typography)
@@ -41,6 +47,12 @@
 - **A title group has one dominant title.** When the title gives way, it becomes an eyebrow. A subtitle is a separate slot, not a weaker title.
 - **Variants change treatment, not size.** Tight label (line height 1) is for single-line controls and adds no new size.
 - **Typography sets type, not space.** The vertical space between pieces of text is set by flow.
+- **Line heights in three ratios** Line height is defined in three ratios based on simple formula: `font-size + k` - where font-size and k are4 measured in px.
+  The ratios are:
+
+| tight           | default         | loose            |
+| --------------- | --------------- | ---------------- |
+| font-size + 4px | font-size + 8px | font-size + 12px |
 
 ## [0004 — Spacing](./decisions/0004-spacing)
 
@@ -71,7 +83,7 @@ _The following decisions relate to Figma_
 
 ## [0008 — Charts](./decisions/0008-charts)
 
-- **Observable Plot draws real charts. Figma charts are representative.** They are built to look right, not to be accurate to the data.
+- **Observable Plot or D3 draws real charts. Figma charts are representative.** They are built to look right, not to be accurate to the data.
 - **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export.
 - **The designer composes what goes in the slot for each chart.** The legend, plot and footer (notes and citation) are not built into the container or into the plot.
 - **Category and x-axis labels sit below the baseline.** Y-axis ticks sit to the left of the plot.
@@ -91,3 +103,9 @@ _The following decisions relate to Figma_
 - **Documentation text uses the `Doc/*` text styles.** This is a separate family of styles kept only for documentation: `Doc/Title`, `Doc/Heading`, `Doc/Subheading`, `Doc/Body`, `Doc/Body-sm`, `Doc/Caption` and `Doc/Mono`. They are for the doc frame itself, meaning its title, intro and captions. Components shown as examples inside a doc frame keep their own styles. `Doc/*` styles are never used in product designs, and product roles are never used for documentation text.
 - **We never skip a real component during a sweep**, whether it is published or private.
 - **The component archive page is not audited.**
+
+## [0011 - Elevation](./decisions/0011-elevation.md)
+
+- **an elevation class adds a corresponding shadow**
+- **Elevation runs on a numbered scale from -1 to 6** elevation--1 is an inner shadow putting a ui element 'below' the canvas. elevation-0 is 'on the canvas' and has no visual effect. `elevation-1` though `elevation-6` raise elements up off the canvas in a step by step.
+- **Elevation is visual, z-index is architectural**
