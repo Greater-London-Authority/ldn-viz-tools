@@ -1,5 +1,11 @@
 # ldn-viz-tools-charts
 
+## 9.5.0
+
+### Minor Changes
+
+- f07079f: CHANGED: enabe `autoDodgeLabels` for `lineChartWithForecasts`
+
 ## 9.4.1
 
 ### Patch Changes
