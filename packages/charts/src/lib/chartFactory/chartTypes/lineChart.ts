@@ -1,5 +1,6 @@
 import { Plot } from '../../observablePlotFragments/plot';
 import type { ChartDataRow, ColorChoice, LineChartOptions } from '../chartOptions';
+import { getEndOfLineLabelMarks } from '../endOfLineLabels';
 
 import {
 	getAxisTypeAndTickFormat,
@@ -100,73 +101,7 @@ export const lineChart = (
 			? [options.extraMarks({ Plot, options, colorChoice, data, makeTooltip })]
 			: []),
 
-		// End-of-line series labels.
-		// Three rendering modes:
-		//   (a) autoDodgeLabels=true — single text mark wrapped in Plot.dodgeY
-		//       so Plot auto-spaces overlapping labels (James's suggestion).
-		//   (b) labelNudges configured — nudged series rendered as separate
-		//       marks so each carries its own dx/dy; non-nudged share default.
-		//   (c) neither — single default text mark.
-		...(() => {
-			if (width > MIN_WIDTH_FOR_LABELS && options.autoDodgeLabels) {
-				return [
-					Plot.text(
-						data,
-						Plot.dodgeY(
-							{ anchor: 'middle', padding: 2 },
-							Plot.selectLast({
-								x: 'xd',
-								y: 'y',
-								fx: options.faceted ? 'z2' : undefined,
-								text: 'b',
-								fill: 'b',
-								textAnchor: 'start',
-								dx: 10,
-								lineWidth: options.labelLineWidth
-							})
-						)
-					)
-				];
-			}
-
-			const nudges = options.labelNudges ?? {};
-			const nudgedSeries = Object.keys(nudges);
-			const defaultData =
-				nudgedSeries.length > 0 ? data.filter((d) => !nudgedSeries.includes(d.b)) : data;
-
-			const defaultMark = Plot.text(
-				defaultData,
-				Plot.selectLast({
-					x: 'xd',
-					y: 'y',
-					fx: options.faceted ? 'z2' : undefined,
-					text: 'b',
-					fill: 'b',
-					textAnchor: 'start',
-					dx: 10,
-					lineWidth: options.labelLineWidth
-				})
-			);
-
-			const nudgedMarks = nudgedSeries.map((name) => {
-				const n = nudges[name];
-				return Plot.text(
-					data.filter((d) => d.b === name),
-					Plot.selectLast({
-						x: 'xd',
-						y: 'y',
-						fx: options.faceted ? 'z2' : undefined,
-						text: 'b',
-						fill: 'b',
-						textAnchor: 'start',
-						dx: 10 + (n.dx ?? 0),
-						dy: n.dy ?? 0,
-						lineWidth: options.labelLineWidth
-					})
-				);
-			});
-
-			return width > MIN_WIDTH_FOR_LABELS ? [defaultMark, ...nudgedMarks] : [];
-		})()
+		// End-of-line series labels
+		...(width > MIN_WIDTH_FOR_LABELS ? getEndOfLineLabelMarks(data, options) : [])
 	]
 });

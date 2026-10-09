@@ -142,19 +142,10 @@ interface BaseChartOptions {
 	extraMarks?: (args: ExtraMarksArgs) => any;
 }
 
-export interface LineChartOptions extends BaseChartOptions {
-	chartType: 'line';
-
-	/**
-	 * Horizontal reference lines/rules to draw.
-	 */
-	reference_lines?: { label: string; y: number; strokeDasharray?: string }[];
-
-	/**
-	 * List values of `b` for which rows of data should be hidden.
-	 */
-	hide?: string[];
-
+/**
+ * Options controlling the labels drawn at the end of each line, shared by line chart types.
+ */
+export interface EndOfLineLabelOptions {
 	/**
 	 * Per-series pixel offsets for end-of-line labels, keyed by series name (`b`).
 	 * Use to nudge labels apart when two lines end at similar y-values.
@@ -171,11 +162,25 @@ export interface LineChartOptions extends BaseChartOptions {
 	labelLineWidth?: number;
 
 	/**
-	 * If `true`, end-of-line labels on line charts are auto-spaced using
-	 * Observable Plot's `dodgeY` transform instead of the manual `labelNudges`
-	 * branch. Opt-in per chart so we can A/B the two approaches.
+	 * If `true`, end-of-line labels on line charts are automatically pushed apart
+	 * vertically wherever they would overlap, instead of using the manual
+	 * `labelNudges`. Opt-in per chart so we can A/B the two approaches.
 	 */
 	autoDodgeLabels?: boolean;
+}
+
+export interface LineChartOptions extends BaseChartOptions, EndOfLineLabelOptions {
+	chartType: 'line';
+
+	/**
+	 * Horizontal reference lines/rules to draw.
+	 */
+	reference_lines?: { label: string; y: number; strokeDasharray?: string }[];
+
+	/**
+	 * List values of `b` for which rows of data should be hidden.
+	 */
+	hide?: string[];
 }
 
 export interface LineChartWithLineStylesOptions extends BaseChartOptions {
@@ -187,7 +192,7 @@ export interface LineChartWithLineStylesOptions extends BaseChartOptions {
 	reference_lines?: { label: string; y: number; strokeDasharray?: string }[];
 }
 
-export interface LineChartWithForecastOptions extends BaseChartOptions {
+export interface LineChartWithForecastOptions extends BaseChartOptions, EndOfLineLabelOptions {
 	chartType: 'lineChartWithForecast';
 
 	/**

@@ -1,6 +1,7 @@
 import { theme } from '@ldn-viz/ui';
 import { Plot } from '../../observablePlotFragments/plot';
 import type { ChartDataRow, ColorChoice, LineChartWithForecastOptions } from '../chartOptions';
+import { getEndOfLineLabelMarks } from '../endOfLineLabels';
 
 import {
 	getAxisTypeAndTickFormat,
@@ -238,19 +239,7 @@ export const lineChartWithForecast = (
 							})
 						),
 
-						Plot.text(
-							filteredData,
-							Plot.selectLast({
-								x: 'xd',
-								y: 'y',
-								fx: options.faceted ? 'z2' : undefined,
-
-								text: 'b',
-								fill: 'b',
-								textAnchor: 'start',
-								dx: 10
-							})
-						)
+						...getEndOfLineLabelMarks(filteredData, options)
 					]
 				: [])
 		]
