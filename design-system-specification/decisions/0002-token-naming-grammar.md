@@ -33,21 +33,25 @@ Consistent naming grammar for design tokens should be clear and logical. Keep it
 - Each segment has a fixed set of values, listed in the spec. A new value needs a spec change.
 - The grammar applied to each category:
 
-| Category   | Pattern                                                                   | Example                                                                           |
-| ---------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Typography | --typography-{breakpoint}-{context}[-{role}][-{size}]-{property}          | --typography-base-product-title-font-size, --typography-base-prose-readable-width |
-| Colour     | --color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}] | --color-interactive-primary-muted-hover, --color-static-black                     |
-| Spacing    | --spacing-{value}                                                         | --spacing-4                                                                       |
-| Flow       | --flow-[{context}-]{step}                                                 | --flow-prose-loose, --flow-loose                                                  |
-| Shadow     | --shadow[-{value}]                                                        | --shadow, --shadow-md, --shadow-inner                                             |
+| Category   | Pattern                                                                   | Example                                                       |
+| ---------- | ------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Typography | --typography-{breakpoint}-{context}[-{role}][-{size}]-{property}          | --typography-base-product-title-md-font-size                  |
+| Colour     | --color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}] | --color-interactive-primary-muted-hover, --color-static-black |
+| Spacing    | --spacing-{value}                                                         | --spacing-4                                                   |
+| Flow       | --flow-[{context}-]{step}                                                 | --flow-spacious-loose, --flow-loose                           |
+| Shadow     | --shadow[-{value}]                                                        | --shadow, --shadow-md, --shadow-inner                         |
+| Elevation  | --elevation-{value}                                                       | --elevation-0, --elevation-1                                  |
 
 - More than one variant: breakpoint or scope first, then context, layout or inverse. md-product, md-contained, chart-inverse.
 - One accepted outlier: --color-interactive-disabled-muted puts state before emphasis.
-- The context segment decides the family. It is prose, product or compact; chart is a context in typography and a scope in colour. Families never mix: a Product/\* component uses product tokens only.
-- Role names are generic within a context. Product names say where something sits in the hierarchy (page-head, section-head, title). Chart names say which part of the chart it is (axis-title, tick), because that's the vocabulary chart users already have.
-- Implied defaults: a default is left out unless another segment follows it. --shadow is the default shadow, and title and --flow-{step} are the plain forms. base is written in --typography-base-product-title-font-size because more segments follow it.
+- The context segment decides the family. In typography it is longform or product ([0003](./0003-typography.md)); in flow it is spacious, standard or compact ([0005](./0005-flow.md)). chart is not a typography context, only a scope in colour. Families never mix: a Product/\* component uses product tokens only. Charts and tables use the product typeset, or the usage aliases provided for them.
+- Role names are the shared role vocabulary of [0003](./0003-typography.md): display, headline, subhead, title, subtitle, body, label, metric, caption and eyebrow. Both typesets use the same names. They say what the text does, not which component it sits in.
+- Implied defaults: a default is left out unless another segment follows it. --shadow is the default shadow, and --flow-{step} is the plain form (standard context). base is written in --typography-base-product-title-md-font-size because more segments follow it.
+- One exception: md is the default typography role size, but it is always written (title-md, not title). Role sizes exist to guide the designer, not to restrict them, so all three sizes stay explicit. eyebrow has no size.
+- Accepted exception to role-only naming: the usage aliases in [0003](./0003-typography.md) are component-level names. They are allowed because they are classes, not tokens, and they are a convenience layer over the typeset roles, which remain the canonical API.
+- Shadow tokens are still emitted, but stepped elevation uses `elevation-{0–6}` ([0011](./0011-elevation.md)), not a shadow size.
 - The same word can fill two slots: text is a concept in color-text and an emphasis in interactive-primary-text.
-- Spelling: lowercase kebab-case throughout. Multi-word values are hyphenated (semi-bold, page-head). Fractional steps use a hyphen, because dots aren't valid in CSS names: --spacing-0-5, not --spacing-0.5
+- Spelling: lowercase kebab-case throughout. Multi-word values are hyphenated (semi-bold, line-height). Context classes put the kind first: `typeset-longform`, `typeset-product`, `flow-spacious`. Fractional steps use a hyphen, because dots aren't valid in CSS names: --spacing-0-5, not --spacing-0.5
 
 ## Options considered
 

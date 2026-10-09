@@ -28,10 +28,10 @@ Charts also arrive from outside the system, such as SVG exports.
 ## Decision
 
 - **Observable Plot or D3 draws real charts. Figma charts are representative.** They are built to look right, not to be accurate to the data.
-- **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export.
+- **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export. The hint is an optional Svelte slot for a hint/overlay component, not a typography role.
 - **The designer composes what goes in the slot for each chart.** The legend, plot and footer (notes and citation) are not built into the container or into the plot.
 - **Category and x-axis labels sit below the baseline.** Y-axis ticks sit to the left of the plot.
-- **A chart is on-system when its text uses `Chart/*` roles and its colours use `data/*` and `chart/*` tokens.**
+- **A chart is on-system when its text uses the product typeset roles or the usage aliases, and its colours use `data/*` and `chart/*` tokens.** Both are valid for chart text ([0003](./0003-typography.md)).
 
 ## Options considered
 

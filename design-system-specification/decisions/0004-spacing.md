@@ -35,6 +35,6 @@ Space in a layout does one of two jobs. It builds a component: padding, list ind
 
 ## Consequences
 
-- T-shirt spacing (`--spacing-md`) and `--typography-spacing-*` are retired. Map any that remain by size: `xxs`→1, `xs`→2, `sm`→3, `md`→4, `lg`→5, and so on.
+- T-shirt spacing (`--spacing-md`) and `--typography-spacing-*` are retired, as is the `space-before` typography property ([0003](./0003-typography.md)). Map any that remain by size: `xxs`→1, `xs`→2, `sm`→3, `md`→4, `lg`→5, and so on.
 - Each `--spacing-{n}` is a plain `var()` reference to `--primitive-spacing-{n}`.
 - ⚠ **The spacing primitive must stay in px in the token graph.** Flow, spacing and grid tokens all divide it by 16 to get rem. Changing it to rem breaks all three without an error.

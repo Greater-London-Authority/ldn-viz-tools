@@ -19,13 +19,13 @@ pr_url: ''
 
 ## Context
 
-A title group consists of a stack: 'Eyebrow'(optional), 'Title', 'Subtitle' and we use this device though out our designs, eg. on components such as Cards, Charts and Tables.
+A title group consists of a stack: 'Eyebrow'(optional), 'Title', 'Subtitle' and we use this device throughout our designs, eg. on components such as Cards, Charts and Tables.
 
 Because a card or a panel can contain another titled element, eg. a chart, or a pair of charts within a card, we need a strategy to avoid the titles clashing.
 
 ## Decision
 
-- **Dominant and Demoted treatments** When a title group exists in isolation it takes on the dominant treatment: 'Eyebrow'(optional), 'Title', 'Subtitle'. When two or more title groups exist in the same component they are assigned either a dominant treatment: 'Title', 'Subtitle', with the competing title group(s) demoted to: 'Eyebrow'.
+- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When two or more title groups exist in the same component, one keeps the dominant treatment ('Title', 'Subtitle') and each competing group is demoted. A demoted group holds only an 'Eyebrow'.
 
 ## Consequences
 

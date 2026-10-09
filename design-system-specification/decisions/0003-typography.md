@@ -19,7 +19,7 @@ pr_url: ''
 
 ## Context
 
-Text in the design system appears on three kinds of surface: long-form reading content, product interfaces such as dashboards or maps, and charts. Each needs its own size, leading and density, yet they draw on one type scale and often nest inside each other, as when a chart sits in a card on a page of prose.
+Text in the design system appears on two kinds of surface: long-form reading content, product interfaces such as dashboards or maps or charts. Each needs its own size, leading and density, yet they draw on one type scale and often nest inside each other, as when a chart sits in a card on a page of prose.
 
 We needed a system that sets type by what text does and the context in which it sits, and that works with the spacing rules to keep layouts balanced.
 
@@ -48,7 +48,7 @@ We needed a system that sets type by what text does and the context in which it 
   - **Display vs Headline**: display is impact; headline is communication.
   - **Label vs Caption**: labels are needed to use the interface; captions are optional commentary.
   - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
-  - **Pairing** subhead pairs with headline/display, subtitle with title
+  - **Pairing**: subhead pairs with headline/display, subtitle with title.
 
 - **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
 
@@ -56,18 +56,18 @@ We needed a system that sets type by what text does and the context in which it 
 
 - **A nested context overrides only the roles it defines.** Everything else comes from the context around it.
 
-- **Longform typeset also defines flow. Product typeset does not** The vertical space between pieces of text is set by flow.
+- **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`.
 
-- **Line heights in three ratios** Line height is defined in three ratios based on simple formula: `font-size + k` - where font-size and k are4 measured in px.
+- **Longform typeset also defines flow. Product typeset does not.** Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
+
+- **Line heights in three ratios.** Line height is defined in three ratios based on a simple formula: `font-size + k`, where font-size and k are measured in px.
   The ratios are:
 
 | tight           | default         | loose            |
 | --------------- | --------------- | ---------------- |
 | font-size + 4px | font-size + 8px | font-size + 12px |
 
-- **Aliases Provided** A small set of component level semantic aliases is output to make the system easier to communicate to users who
-
-- **Aliases Provided** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma.
+- **Aliases provided.** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma.
 
 ## Consequences
 

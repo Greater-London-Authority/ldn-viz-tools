@@ -19,54 +19,87 @@
 - Each segment has a fixed set of values, listed in the spec. A new value needs a spec change.
 - The grammar applied to each category:
 
-| Category   | Pattern                                                                   | Example                                                                           |
-| ---------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Typography | --typography-{breakpoint}-{context}[-{role}][-{size}]-{property}          | --typography-base-product-title-font-size, --typography-base-prose-readable-width |
-| Colour     | --color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}] | --color-interactive-primary-muted-hover, --color-static-black                     |
-| Spacing    | --spacing-{value}                                                         | --spacing-4                                                                       |
-| Flow       | --flow-[{context}-]{step}                                                 | --flow-prose-loose, --flow-loose                                                  |
-| Shadow     | --shadow[-{value}]                                                        | --shadow, --shadow-md, --shadow-inner                                             |
+| Category   | Pattern                                                                   | Example                                                       |
+| ---------- | ------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Typography | --typography-{breakpoint}-{context}[-{role}][-{size}]-{property}          | --typography-base-product-title-md-font-size                  |
+| Colour     | --color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}] | --color-interactive-primary-muted-hover, --color-static-black |
+| Spacing    | --spacing-{value}                                                         | --spacing-4                                                   |
+| Flow       | --flow-[{context}-]{step}                                                 | --flow-spacious-loose, --flow-loose                           |
+| Shadow     | --shadow[-{value}]                                                        | --shadow, --shadow-md, --shadow-inner                         |
+| Elevation  | --elevation-{value}                                                       | --elevation-0, --elevation-1                                  |
 
 - More than one variant: breakpoint or scope first, then context, layout or inverse. md-product, md-contained, chart-inverse.
 - One accepted outlier: --color-interactive-disabled-muted puts state before emphasis.
-- The context segment decides the family. It is prose, product or compact; chart is a context in typography and a scope in colour. Families never mix: a Product/\* component uses product tokens only.
-- Role names are generic within a context. Product names say where something sits in the hierarchy (page-head, section-head, title). Chart names say which part of the chart it is (axis-title, tick), because that's the vocabulary chart users already have.
-- Implied defaults: a default is left out unless another segment follows it. --shadow is the default shadow, and title and --flow-{step} are the plain forms. base is written in --typography-base-product-title-font-size because more segments follow it.
+- The context segment decides the family. In typography it is longform or product ([0003](./decisions/0003-typography)); in flow it is spacious, standard or compact ([0005](./decisions/0005-flow)). chart is not a typography context, only a scope in colour. Families never mix: a Product/\* component uses product tokens only. Charts and tables use the product typeset, or the usage aliases provided for them.
+- Role names are the shared role vocabulary of [0003](./decisions/0003-typography): display, headline, subhead, title, subtitle, body, label, metric, caption and eyebrow. Both typesets use the same names. They say what the text does, not which component it sits in.
+- Implied defaults: a default is left out unless another segment follows it. --shadow is the default shadow, and --flow-{step} is the plain form (standard context). base is written in --typography-base-product-title-md-font-size because more segments follow it.
+- One exception: md is the default typography role size, but it is always written (title-md, not title). Role sizes exist to guide the designer, not to restrict them, so all three sizes stay explicit. eyebrow has no size.
+- Accepted exception to role-only naming: the usage aliases in [0003](./decisions/0003-typography) are component-level names. They are allowed because they are classes, not tokens, and they are a convenience layer over the typeset roles, which remain the canonical API.
+- Shadow tokens are still emitted, but stepped elevation uses `elevation-{0–6}` ([0011](./decisions/0011-elevation)), not a shadow size.
 - The same word can fill two slots: text is a concept in color-text and an emphasis in interactive-primary-text.
-- Spelling: lowercase kebab-case throughout. Multi-word values are hyphenated (semi-bold, page-head). Fractional steps use a hyphen, because dots aren't valid in CSS names: --spacing-0-5, not --spacing-0.5
+- Spelling: lowercase kebab-case throughout. Multi-word values are hyphenated (semi-bold, line-height). Context classes put the kind first: `typeset-longform`, `typeset-product`, `flow-spacious`. Fractional steps use a hyphen, because dots aren't valid in CSS names: --spacing-0-5, not --spacing-0.5
 
 ## [0003 — Typography](./decisions/0003-typography)
 
-- **There are three contexts: prose, product and chart.** Prose is for reading, product is for interfaces, and chart is for data graphics. Every piece of text belongs to one of them.
+- **There are two contexts: Longform and Product.** Longform is for reading, Product is for interfaces, tables, charts and maps. Each context has a typeset that defines semantic roles.
+
 - **Bind to a role, never a size.** Pick the role for what the text does. Size, line height and weight are determined by role.
+
+- **Typesets share the same role vocabulary.** Roles are defined in sets of three: sm, md, lg in each set, with the exception of 'eyebrow' which is singular. Role sets are:
+
+  | Role     | Description                                                                                          |
+  | -------- | ---------------------------------------------------------------------------------------------------- |
+  | Display  | Expressive, high-impact type. Use sparingly.                                                         |
+  | Headline | Primary statement of a page or section. Sets topic and structure.                                    |
+  | Subhead  | Supporting statement paired with a headline or display.                                              |
+  | Title    | Names a discrete unit of context: block of prose or component such as a card, panel, chart or table. |
+  | Subtitle | Secondary context paired with a title.                                                               |
+  | Body     | Default reading for sustained running text. The baseline for other roles.                            |
+  | Label    | Functional text. Heavier than caption for recognition.                                               |
+  | Metric   | A figure presented as the content itself. Tabular numerals, quick comprehension.                     |
+  | Caption  | Subordinate annotation for images, charts, sources, and helper text. Smaller and tighter than body.  |
+  | Eyebrow  | Short signpost above a headline or title. Categorises or orients.                                    |
+
+  Distinctions:
+  - **Display vs Headline**: display is impact; headline is communication.
+  - **Label vs Caption**: labels are needed to use the interface; captions are optional commentary.
+  - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
+  - **Pairing**: subhead pairs with headline/display, subtitle with title.
+
+- **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
+
 - **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins.
-- **A nested context overrides only the roles it defines.** Everything else comes from the context around it. Body text inside a chart is still the surrounding body.
-- **A role name means the same thing everywhere.** The chart roles `title`, `subtitle` and `eyebrow` are aliases of the product roles with the same names, so they always have the same values. If two contexts give different values for a shared name, that is a bug.
-- **Role sets are closed.** Adding a role needs a decision. Reuse an existing role first: a legend entry is a chart `label`.
-- **Hierarchy follows structure.** In prose, h1–h4 map to Title 1–4, and Display and Headline are for heroes only. In product, the order is page-head → section-head → title.
-- **A title group has one dominant title.** When the title gives way, it becomes an eyebrow. A subtitle is a separate slot, not a weaker title.
-- **Variants change treatment, not size.** Tight label (line height 1) is for single-line controls and adds no new size.
-- **Typography sets type, not space.** The vertical space between pieces of text is set by flow.
-- **Line heights in three ratios** Line height is defined in three ratios based on simple formula: `font-size + k` - where font-size and k are4 measured in px.
+
+- **A nested context overrides only the roles it defines.** Everything else comes from the context around it.
+
+- **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`.
+
+- **Longform typeset also defines flow. Product typeset does not.** Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./decisions/0005-flow)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
+
+- **Line heights in three ratios.** Line height is defined in three ratios based on a simple formula: `font-size + k`, where font-size and k are measured in px.
   The ratios are:
 
 | tight           | default         | loose            |
 | --------------- | --------------- | ---------------- |
 | font-size + 4px | font-size + 8px | font-size + 12px |
 
+- **Aliases provided.** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma. They are a convenience only; where possible use the typeset-role tokens directly.
+
 ## [0004 — Spacing](./decisions/0004-spacing)
 
-- **Decide the job first.** Space that builds a component, such as padding, borders or indents, uses the spacing scale. Space between blocks of content uses flow ([0005-flow](./decisions/0005-flow)).
+- **Decide the job first.** Space that builds a component, such as padding, borders or indents, uses the spacing scale. Space between blocks of content uses flow ([0005](./decisions/0005-flow)).
 - **Use `--spacing-{n}`, never the primitive.**
 - **There is one scale, numbered in 4px steps.** `--spacing-4` is 16px. There are no named spacing sets apart from flow and grid.
 
-## [0005 — flow](./decisions/0005-flow)
+## [0005 — Flow](./decisions/0005-flow)
 
-- **Flow sets the space between blocks. Typography never does.**
-- **The context defines the value of the step.** There are four steps: `tight`, `default`, `loose` and `section`. `flow-prose`, `flow-product` and `flow-compact` each give them their own values. Product is the default.
-- **Flow assigns steps based on markup, and authors can override them.** Headings, captions and block objects get a step without extra classes. An `mt-flow-{step}` or `gap-flow-{step}` class replaces the assigned step.
+- **Flow sets the space between blocks.** Typography does not set space itself: `typeset-longform` automatically adds the `flow-spacious` context, and flow supplies the space ([0003](./decisions/0003-typography)).
+- **There are three flow contexts:** `flow-spacious`, `flow-standard` and `flow-compact`. Standard is the default.
+- **The context defines the value of the step.** There are four steps: `tight`, `default`, `loose` and `section`.
+- **Flow assigns steps based on markup, and authors can override them using utility classes.** When a flow context is initiated, its direct children are spaced vertically to the default step of that context. In a `typeset-longform` context, where `flow-spacious` is applied automatically, headings, captions and block objects are assigned a step from the markup without extra classes.
+  Where an override is needed, or a context cannot infer spacing from markup alone, an `mt-flow-{step}` or `gap-flow-{step}` class replaces the assigned step.
 - **Flow spaces only the direct children of its context.**
-- **A component that declares its own context or spacing is sealed.** Outer flow stops at it. To keep its density wherever it is placed, a component declares a context. It does not fix individual gaps.
+- **A component that declares its own context or spacing is sealed.** Outer flow stops at it. To keep its density wherever it is placed, a component must declare its own context.
 
 ## [0006 — Visual rules](./decisions/0006-visual-rules)
 
@@ -84,10 +117,10 @@ _The following decisions relate to Figma_
 ## [0008 — Charts](./decisions/0008-charts)
 
 - **Observable Plot or D3 draws real charts. Figma charts are representative.** They are built to look right, not to be accurate to the data.
-- **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export.
+- **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export. The hint is an optional Svelte slot for a hint/overlay component, not a typography role.
 - **The designer composes what goes in the slot for each chart.** The legend, plot and footer (notes and citation) are not built into the container or into the plot.
 - **Category and x-axis labels sit below the baseline.** Y-axis ticks sit to the left of the plot.
-- **A chart is on-system when its text uses `Chart/*` roles and its colours use `data/*` and `chart/*` tokens.**
+- **A chart is on-system when its text uses the product typeset roles or the usage aliases, and its colours use `data/*` and `chart/*` tokens.** Both are valid for chart text ([0003](./decisions/0003-typography)).
 
 ## [0009 — Documentation](./decisions/0009-documentation)
 
@@ -104,8 +137,12 @@ _The following decisions relate to Figma_
 - **We never skip a real component during a sweep**, whether it is published or private.
 - **The component archive page is not audited.**
 
-## [0011 - Elevation](./decisions/0011-elevation.md)
+## [0011 — Elevation](./decisions/0011-elevation)
 
-- **an elevation class adds a corresponding shadow**
-- **Elevation runs on a numbered scale from -1 to 6** elevation--1 is an inner shadow putting a ui element 'below' the canvas. elevation-0 is 'on the canvas' and has no visual effect. `elevation-1` though `elevation-6` raise elements up off the canvas in a step by step.
-- **Elevation is visual, z-index is architectural**
+- **An elevation class adds a corresponding shadow.**
+- **Elevation runs on a numbered scale from 0 to 6.** `elevation-0` is 'on the canvas' and has no visual effect. `elevation-1` through `elevation-6` raise elements up off the canvas step by step.
+- **Elevation is visual, z-index is architectural.**
+
+## [0012 — Title Groupings](./decisions/0012-title-groupings)
+
+- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When two or more title groups exist in the same component, one keeps the dominant treatment ('Title', 'Subtitle') and each competing group is demoted. A demoted group holds only an 'Eyebrow'.
