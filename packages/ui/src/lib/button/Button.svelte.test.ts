@@ -21,6 +21,21 @@ describe('Button Component', () => {
 		await expect.element(button).toHaveClass('bg-color-interactive-primary');
 	});
 
+	it('uses vertical padding that aligns the default size with form controls', async () => {
+		const children = createRawSnippet(() => ({
+			render: () => '<span>Click me</span>',
+			setup: () => {}
+		}));
+
+		render(Button, {
+			children
+		});
+
+		const button = page.getByRole('button');
+		await expect.element(button).toHaveClass('py-1.5');
+		await expect.element(button).not.toHaveClass('py-2');
+	});
+
 	it('calls onclick handler when clicked', async () => {
 		const onclick = vi.fn();
 		const children = createRawSnippet(() => ({
