@@ -74,4 +74,23 @@ describe('Input', () => {
 		// `aria-describedby` is only used for the description, so is absent once there's an error.
 		await expect.element(input).not.toHaveAttribute('aria-describedby');
 	});
+
+	it('keeps a range input at a value outside the default 0-100 range', async () => {
+		// Svelte >= 5.57 applies `type` before the other spread attributes, so the
+		// value is set while the default range is in effect and clamped to 100,
+		// which is then clamped up to `min`.
+		render(Input, { label: 'Year', type: 'range', min: '2025', max: '2051', value: '2051' });
+
+		await expect.element(page.getByLabelText('Year')).toHaveValue('2051');
+	});
+
+	it('keeps a range input at its value when min and max are set after it renders', async () => {
+		// Before `min`/`max` arrive, the browser clamps the value to the default
+		// range of 0-100; it then re-clamps to the new `min` when they are set.
+		const { rerender } = render(Input, { label: 'Year', type: 'range', value: '2026' });
+
+		await rerender({ min: '2025', max: '2051' });
+
+		await expect.element(page.getByLabelText('Year')).toHaveValue('2026');
+	});
 });
