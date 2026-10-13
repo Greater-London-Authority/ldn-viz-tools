@@ -79,6 +79,8 @@ export { default as Sidebar } from './sidebar/Sidebar.svelte';
 export { getSidebarState, setSidebarState } from './sidebar/sidebarState.svelte';
 export { default as Spinner } from './spinners/Spinner.svelte';
 export { default as Switch } from './switch/Switch.svelte';
+export { default as Toc } from './tableOfContents/Toc.svelte';
+export { default as TocItem } from './tableOfContents/TocItem.svelte';
 export { default as TabLabel } from './tabs/TabLabel.svelte';
 export { default as TabList } from './tabs/TabList.svelte';
 export { default as TabPanel } from './tabs/TabPanel.svelte';
