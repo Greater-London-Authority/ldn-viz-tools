@@ -105,9 +105,12 @@ describe('tokenName', () => {
 		expect(invalid).toEqual([]);
 	});
 
-	it('drops a trailing default', () => {
+	it('drops a trailing default from semantic tokens only', () => {
 		expect(tokenName({ path: ['flow', 'standard', 'default'] })).toBe('flow-standard');
 		expect(tokenName({ path: ['focus-ring', 'default'], type: 'shadow' })).toBe('focus-ring');
+		expect(tokenName({ path: ['primitive', 'typography', 'font-family', 'default'] })).toBe(
+			'primitive-typography-font-family-default'
+		);
 	});
 
 	it('maps collections onto the grammar', () => {

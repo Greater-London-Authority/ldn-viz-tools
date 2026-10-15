@@ -138,14 +138,17 @@ const referencesIn = (value) => {
  * keeps negative steps distinct (scale.-1 -> scale--1, scale.1 -> scale-1).
  *  - color.{light-mode,dark-mode}.* -> color-*  (the mode is carried by the selector)
  *  - primitive shadows              -> shadow-* (shadows have no primitive tier)
- *  - a trailing `default` is dropped (--flow-standard, --focus-ring)
+ *  - a trailing `default` is dropped from semantic tokens (--flow-standard,
+ *    --focus-ring), but kept on primitives (--primitive-typography-font-family-default)
  */
 export const tokenName = (token) => {
 	let path = token.path;
 
 	if (path[0] === 'color') path = ['color', ...path.slice(2)];
 	if (token.type === 'shadow' && path[0] === 'primitive') path = path.slice(1);
-	if (path.length > 1 && path.at(-1) === 'default') path = path.slice(0, -1);
+	if (path[0] !== 'primitive' && path.length > 1 && path.at(-1) === 'default') {
+		path = path.slice(0, -1);
+	}
 
 	return path.join('-');
 };
