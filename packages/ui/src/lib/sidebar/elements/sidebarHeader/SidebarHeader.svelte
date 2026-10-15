@@ -32,7 +32,7 @@
 	let { title, branded = 'true', hint, subTitle }: Props = $props();
 
 	let headerClasses = $derived(
-		classNames('py-1 bg-color-container-level-1 text-color-text', brandClasses[branded.toString()])
+		classNames('py-1 bg-color-surface-muted text-color-text', brandClasses[branded.toString()])
 	);
 </script>
 

@@ -9,7 +9,7 @@
 	let { children, menu }: Props = $props();
 </script>
 
-<footer class="mt-auto bg-color-container-level-1 pt-4 text-color-text">
+<footer class="mt-auto bg-color-surface-muted pt-4 text-color-text">
 	<!-- content to display above menu/links - typically a row of logos -->
 	{@render children?.()}
 	{#if menu}

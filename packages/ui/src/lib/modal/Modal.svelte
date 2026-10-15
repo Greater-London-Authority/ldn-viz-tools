@@ -89,7 +89,7 @@
 
 	const modalClass = $derived(
 		classNames(
-			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container shadow-xl pointer-events-auto',
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-surface shadow-xl pointer-events-auto',
 			widthClasses[width]
 		)
 	);
@@ -128,7 +128,7 @@
 				}}
 			>
 				<div
-					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text ${headerTheme}`}
+					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-surface-muted p-3 pr-4 text-color-text ${headerTheme}`}
 				>
 					<Dialog.Title class="product label">
 						{@render title?.()}

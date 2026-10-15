@@ -1,4 +1,4 @@
-import tokens from '@ldn-viz/themes/styles/js/color-tokens.js';
+import tokens from '@ldn-viz/themes/colors.js';
 import { describe, expect, it } from 'vitest';
 import { theme } from './themeState.svelte';
 

@@ -25,7 +25,7 @@
 
 {#snippet placeholderChart()}
 	<div
-		class="flex h-full w-full items-center justify-center bg-color-container-level-1 text-color-text-muted"
+		class="flex h-full w-full items-center justify-center bg-color-surface-muted text-color-text-muted"
 	>
 		Chart would go here.
 	</div>

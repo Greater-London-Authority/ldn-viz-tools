@@ -72,7 +72,7 @@
 
 	let tabListClasses = $derived(
 		classNames(
-			'product bg-color-container text-color-text',
+			'product bg-color-surface text-color-text',
 			orientationClasses[orientation],
 			classes
 		)

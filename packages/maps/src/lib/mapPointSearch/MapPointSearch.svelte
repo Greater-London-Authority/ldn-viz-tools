@@ -380,7 +380,7 @@
 	</Button>
 {:else}
 	<div
-		class="flow-product product pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-container p-2 shadow-sm"
+		class="flow-product product pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-surface p-2 shadow-sm"
 	>
 		<div class="flex items-center justify-between">
 			<p class="eyebrow">
@@ -393,7 +393,7 @@
 			<Button
 				variant="text"
 				size="xs"
-				class="cursor-pointer bg-color-container text-color-text"
+				class="cursor-pointer bg-color-surface text-color-text"
 				onclick={toggleModal}
 				aria-label="Close search box"
 			>

@@ -94,7 +94,7 @@
 		classNames(
 			'product',
 			'text-left !items-stretch !no-underline hover:bg-color-interactive-primary-muted-hover',
-			'border-color-border-muted bg-color-container flex-col justify-between border shadow-sm',
+			'border-color-border-muted bg-color-surface flex-col justify-between border shadow-sm',
 			sizeClasses[size]
 		)
 	);

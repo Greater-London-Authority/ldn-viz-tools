@@ -60,7 +60,7 @@
 		'ring-inset ring-2 ring-offset-2 ring-color-surface ring-offset-color-border hover:ring-offset-color-border focus-visible:ring-offset-color-border';
 
 	const optionClasses =
-		'rounded-full bg-color-container hover:bg-color-container hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-border-muted hover:ring-2 hover:ring-color-surface focus-visible:ring-offset-color-border-muted';
+		'rounded-full bg-color-surface hover:bg-color-surface hover:ring-inset hover:ring-offset-2 hover:ring-offset-color-border-muted hover:ring-2 hover:ring-color-surface focus-visible:ring-offset-color-border-muted';
 </script>
 
 {#if disabled && !alwaysShowcolorChip}

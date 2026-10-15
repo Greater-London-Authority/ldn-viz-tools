@@ -28,7 +28,7 @@
 
 {#if isOpen}
 	<div
-		class="product pointer-events-auto flex w-full flex-col gap-3 bg-color-container px-4 py-3 sm:max-w-96"
+		class="product pointer-events-auto flex w-full flex-col gap-3 bg-color-surface px-4 py-3 sm:max-w-96"
 		bind:clientWidth={width}
 	>
 		<div class="flex justify-between align-middle">
@@ -36,7 +36,7 @@
 			<Button
 				variant="text"
 				size="sm"
-				class="absolute right-1 top-1 cursor-pointer bg-color-container text-color-text"
+				class="absolute right-1 top-1 cursor-pointer bg-color-surface text-color-text"
 				onclick={handleClick}
 				aria-label="Close legend"
 			>

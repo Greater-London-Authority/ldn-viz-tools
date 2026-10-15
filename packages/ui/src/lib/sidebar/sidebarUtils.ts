@@ -34,7 +34,7 @@ export const tabLayoutOverride: PlacementLookup = {
 };
 
 // These classes overide the theme of default tabs in a sidebar context
-export const tabThemeOverride = '[&>button]:bg-color-container [&>button]:no-underline';
+export const tabThemeOverride = '[&>button]:bg-color-surface [&>button]:no-underline';
 
 // These classes overide the 'horizontal' style of tablabels in a sidebar context
 export const tabLabelOverride =

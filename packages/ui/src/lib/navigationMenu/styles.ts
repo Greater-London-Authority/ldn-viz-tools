@@ -86,7 +86,7 @@ export const childListClass = ({
 		'mb-1',
 		isIndented ? 'pl-2' : '',
 		orientation === 'horizontal'
-			? `w-full bg-color-container' ${level === 1 ? 'absolute z-10' : 'relative'}`
+			? `w-full bg-color-surface' ${level === 1 ? 'absolute z-10' : 'relative'}`
 			: ''
 	);
 };

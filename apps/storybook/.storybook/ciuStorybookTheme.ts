@@ -1,4 +1,4 @@
-import colors from '@ldn-viz/themes/styles/js/color-tokens';
+import colors from '@ldn-viz/themes/colors.js';
 import { create } from 'storybook/theming/create';
 
 export default create({

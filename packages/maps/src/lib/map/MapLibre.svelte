@@ -148,7 +148,7 @@
 			@apply align-middle;
 			@apply text-color-text;
 			@apply pt-0.5;
-			@apply bg-color-container;
+			@apply bg-color-surface;
 		}
 
 		.maplibregl-ctrl-attrib-inner a {
@@ -175,7 +175,7 @@
 
 		.maplibregl-ctrl-attrib.maplibregl-compact {
 			/* background-color: hsla(0, 0%, 100%, 0.8); */
-			@apply bg-color-container;
+			@apply bg-color-surface;
 		}
 	}
 </style>

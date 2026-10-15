@@ -48,7 +48,6 @@ thumbnail: cta-foundations-3.svg
 
     const staticTokens = $derived(getTokenByConcept('static'))
     const canvasTokens = $derived(getTokenByConcept('canvas'))
-    const containerTokens = $derived(getTokenByConcept('container'))
     const surfaceTokens = $derived(getTokenByConcept('surface'))
     const interactiveTokens = $derived(getTokenByConcept('interactive'))
 	const textTokens = $derived(getTokenByConcept('text'))
@@ -143,16 +142,15 @@ The token **concept** guides us in how to apply the token. For colour tokens, va
 
 <figcaption>Conceptual model of application ui layering</figcaption>
 
-| Concept       | Detail                                                          |
-| :------------ | :-------------------------------------------------------------- |
-| `static`      | Colours that stay the same regardless of mode                   |
-| `canvas`      | The base layer of an application                                |
-| `container`   | Containers are organisational elements that form page structure |
-| `surface`     | Information layer that sits in front of the canvas layer        |
-| `interactive` | Objects on the information layer that are interactive           |
-| `text`        | Text elements                                                   |
-| `label`       | Specific text used for labelling                                |
-| `border`      | Borders around surfaces and containers                          |
+| Concept       | Detail                                                   |
+| :------------ | :------------------------------------------------------- |
+| `static`      | Colours that stay the same regardless of mode            |
+| `canvas`      | The base layer of an application                         |
+| `surface`     | Information layer that sits in front of the canvas layer |
+| `interactive` | Objects on the information layer that are interactive    |
+| `text`        | Text elements                                            |
+| `label`       | Specific text used for labelling                         |
+| `border`      | Borders around surfaces                                  |
 
 Icons take the colour of the element they sit in rather than having a concept of their own. An icon on a filled control uses the inverse text token, and an icon beside a label uses the same token as the label.
 
@@ -203,31 +201,6 @@ The majority of colour tokens are defined with a **muted** counterpart which let
 | `wash`   | Reduces the emphasis of colour further |
 
 `muted` is available across most concepts. `wash` is a third step for text only, where a reading hierarchy needs more than two levels.
-
-**Container level exception**
-
-`$container-*` tokens, applied to organisational elements that form page structure, use a `level-*` modifier to give them relative distance from the canvas.
-
-<div class="grid grid-cols-4 grid-gutter">
-    <div class="flex flex-col space-y-1">
-        <div class="bg-color-container h-8 w-full"></div><code>$color-container</code>
-    </div>
-    <div class="flex flex-col space-y-1">
-        <div class="bg-color-container-level-1 h-8 w-full"></div><code>$color-container-level-1</code>
-    </div>
-    <div class="flex flex-col space-y-1">
-        <div class="bg-color-container-level-2 h-8 w-full"></div><code>$color-container-level-2</code>
-    </div>
-    <div class="flex flex-col space-y-1">
-        <div class="bg-color-container-level-3 h-8 w-full"></div><code>$color-container-level-3</code>
-    </div>
-</div>
-
-| Emphasis  | Detail                                      |
-| :-------- | :------------------------------------------ |
-| `level-1` | One level of elevation above the default    |
-| `level-2` | Two levels of elevation above the default   |
-| `level-3` | Three levels of elevation above the default |
 
 #### State
 
@@ -356,7 +329,6 @@ Two suffixes recur. Neither is a general scale that can be applied to any role.
 
 <TokenTable title="Static" tokenData={staticTokens} />
 <TokenTable title="Canvas" tokenData={canvasTokens} />
-<TokenTable title="Container" tokenData={containerTokens} />
 <TokenTable title="Surface" tokenData={surfaceTokens} />
 <TokenTable title="Interactive" tokenData={interactiveTokens} />
 <TokenTable title="Text" tokenData={textTokens} />
@@ -379,8 +351,8 @@ The token name follows the utility prefix eg:
 `text-` (utility prefix) `color-text` (token reference)
 
 ```html
-<p class="body text-color-text">Default text on a container</p>
-<div class="border border-color-border bg-color-container">…</div>
+<p class="body text-color-text">Default text on a surface</p>
+<div class="border border-color-border bg-color-surface">…</div>
 ```
 
 Spacing follows the same pattern, using the numbered scale: `p-4` applies 16px of padding, `mt-2` an 8px top margin.
@@ -399,14 +371,20 @@ padding: var(--spacing-4);
 margin-top: var(--flow-section);
 ```
 
-The stylesheets are imported from the themes package. Colour, spacing, flow and grid each have their own file.
+The custom properties and the classes are imported together from the themes package:
+
+```css
+@import '@ldn-viz/themes/index.css';
+```
+
+A project that only needs the custom properties, and writes its own classes, imports `@ldn-viz/themes/tokens.css` instead.
 
 #### JavaScript
 
 Colour tokens are also published as a JavaScript object, for cases where a value has to be passed to a library rather than declared in CSS — a chart's series colours, for instance. Step into the relevant mode, then follow the token name:
 
 ```js
-import tokens from '@ldn-viz/themes/styles/js/color-tokens.js';
+import tokens from '@ldn-viz/themes/colors.js';
 
 const seriesColor = tokens.mode.light.data.categorical.blue;
 ```
