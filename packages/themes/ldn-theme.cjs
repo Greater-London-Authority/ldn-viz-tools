@@ -17,12 +17,12 @@ const config = {
 	theme: {
 		container: {
 			padding: {
-				DEFAULT: ldnGridSpacing['grid-spacing-base-contained-container-padding'],
-				sm: ldnGridSpacing['grid-spacing-sm-contained-container-padding'],
-				md: ldnGridSpacing['grid-spacing-md-contained-container-padding'],
-				lg: ldnGridSpacing['grid-spacing-lg-contained-container-padding'],
-				xl: ldnGridSpacing['grid-spacing-xl-contained-container-padding'],
-				'2xl': ldnGridSpacing['grid-spacing-2xl-contained-container-padding']
+				DEFAULT: ldnGridSpacing['grid-base-contained-container-padding'],
+				sm: ldnGridSpacing['grid-sm-contained-container-padding'],
+				md: ldnGridSpacing['grid-md-contained-container-padding'],
+				lg: ldnGridSpacing['grid-lg-contained-container-padding'],
+				xl: ldnGridSpacing['grid-xl-contained-container-padding'],
+				'2xl': ldnGridSpacing['grid-2xl-contained-container-padding']
 			}
 		},
 		extend: {
@@ -64,7 +64,7 @@ const config = {
 			// Builds the `@media (min-width: ...)` overrides for a grid-spacing token across breakpoints.
 			const buildResponsiveStyles = (cssProperty, gridSpacingKey) => {
 				return Object.keys(screens).reduce((styles, breakpoint) => {
-					const token = ldnGridSpacing[`grid-spacing-${breakpoint}-${gridSpacingKey}`];
+					const token = ldnGridSpacing[`grid-${breakpoint}-${gridSpacingKey}`];
 					if (!token) return styles;
 
 					styles[`@media (min-width: ${screens[breakpoint]})`] = {
@@ -78,15 +78,15 @@ const config = {
 				'.container-fluid': {
 					width: '100%',
 					marginInline: 'auto',
-					paddingInline: ldnGridSpacing['grid-spacing-base-fluid-container-padding'],
+					paddingInline: ldnGridSpacing['grid-base-fluid-container-padding'],
 					...buildResponsiveStyles('paddingInline', 'fluid-container-padding')
 				},
 				'.grid-gutter': {
-					gap: ldnGridSpacing['grid-spacing-base-contained-gutter'],
+					gap: ldnGridSpacing['grid-base-contained-gutter'],
 					...buildResponsiveStyles('gap', 'contained-gutter')
 				},
 				'.grid-gutter-fluid': {
-					gap: ldnGridSpacing['grid-spacing-base-fluid-gutter'],
+					gap: ldnGridSpacing['grid-base-fluid-gutter'],
 					...buildResponsiveStyles('gap', 'fluid-gutter')
 				}
 			});

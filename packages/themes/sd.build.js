@@ -1,126 +1,66 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
-import { fileHeader } from 'style-dictionary/utils';
+import { fileHeader, getReferences, usesReferences } from 'style-dictionary/utils';
+import { normaliseTokens, tokenName } from './sd/normalise.js';
 
 /*===============================================
-  CUSTOM PARSER 
-  First we need to parse the tokens file to sanitise ready for processing.
+  CUSTOM PARSER
+  The Figma export is normalised in one step (see sd/normalise.js) before any
+  filtering, so filters and formats only ever see the specification's grammar.
 */
-
-const traverseAndReplace = (obj, oldStr, newStr) => {
-	if (typeof obj === 'string') {
-		return obj.replace(oldStr, newStr);
-	} else if (Array.isArray(obj)) {
-		return obj.map((item) => traverseAndReplace(item, oldStr, newStr));
-	} else if (typeof obj === 'object' && obj !== null) {
-		const result = {};
-		Object.keys(obj).forEach((key) => {
-			result[key] = traverseAndReplace(obj[key], oldStr, newStr);
-		});
-		return result;
-	} else {
-		return obj;
-	}
-};
-
-const replaceStringInMode = (obj, mode, oldStr, newStr) => {
-	if (typeof obj !== 'object' || obj === null) {
-		return obj;
-	}
-
-	// Replace strings in the specified mode within the semantic key
-	if (obj['semantic-color'] && obj['semantic-color'][mode]) {
-		obj['semantic-color'][mode] = traverseAndReplace(obj['semantic-color'][mode], oldStr, newStr);
-	}
-
-	// Recursively apply the function to all keys of the object
-	Object.keys(obj).forEach((key) => {
-		obj[key] = replaceStringInMode(obj[key], mode, oldStr, newStr);
-	});
-
-	return obj;
-};
-
-// Recursively rename keys in the `obj` object. The `keyMap` object is a mapping from old keys to their replacements; keys that are not in `keyMap` are not renamed.
-const renameKeysDeep = (obj, keyMap) => {
-	if (typeof obj !== 'object' || obj === null) {
-		return obj;
-	}
-
-	if (Array.isArray(obj)) {
-		return obj.map((item) => renameKeysDeep(item, keyMap));
-	}
-
-	const renamedObj = {};
-	Object.keys(obj).forEach((key) => {
-		const newKey = keyMap[key] || key;
-		renamedObj[newKey] = renameKeysDeep(obj[key], keyMap);
-	});
-	return renamedObj;
-};
 
 StyleDictionary.registerParser({
 	name: 'json-parser',
 	pattern: /\.json$/,
-	parser: ({ contents }) => {
-		try {
-			const jsonObj = JSON.parse(contents);
-
-			const replacements = [
-				['primitive.mode 1.', 'primitive.'],
-				['primitive.light-mode.', 'primitive.'],
-				['primitive.dark-mode.', 'primitive.'],
-				['primitive.base.', 'primitive.'],
-				['primitive.sm.', 'primitive.'],
-				['primitive.md.', 'primitive.'],
-				['primitive.lg.', 'primitive.'],
-				['primitive.xl.', 'primitive.'],
-				['primitive.2xl.', 'primitive.'],
-				['semantic-typography.', 'typography.'],
-				['focus ring', 'focus-ring']
-			];
-
-			const cleanedJson = replacements.reduce((result, [oldValue, newValue]) => {
-				return traverseAndReplace(result, oldValue, newValue);
-			}, jsonObj);
-
-			// Replace the references to modes
-			const lightParsed = replaceStringInMode(
-				cleanedJson,
-				'light-mode',
-				'semantic-color.light-mode',
-				'mode.light'
-			);
-
-			const darkParsed = replaceStringInMode(
-				lightParsed,
-				'dark-mode',
-				'semantic-color.dark-mode',
-				'mode.dark'
-			);
-
-			const output = renameKeysDeep(darkParsed, {
-				'semantic-color': 'mode',
-				'semantic-spacing': 'spacing',
-				'semantic-typography': 'typography',
-				'semantic-flow': 'flow',
-				'custom-shadow': 'shadow',
-				'light-mode': 'light',
-				'dark-mode': 'dark'
-			});
-
-			// console.log(output);
-
-			return output;
-		} catch (error) {
-			console.error(error);
-			process.exit(1);
-		}
-	}
+	parser: ({ contents }) => normaliseTokens(JSON.parse(contents))
 });
 
 /*=========================================================
   CUSTOM FILTERS
+  Filters select by token type and path, not by excluding every other category.
+*/
+
+const isPrimitive = (token) => token.path[0] === 'primitive';
+const isShadow = (token) => token.type === 'shadow';
+const isColor = (token) => token.type === 'color';
+const isSeed = (token) => token.path.includes('seed');
+
+// The two dimension scales: spacing, and the type scale with its line heights.
+const isPrimitiveScale = (token) =>
+	isPrimitive(token) &&
+	(token.path[1] === 'spacing' ||
+		(token.path[1] === 'typography' && ['scale', 'line-height'].includes(token.path[2])));
+
+const isMode = (mode) => (token) => token.path[0] === 'color' && token.path[1] === `${mode}-mode`;
+const isCategory = (category) => (token) => token.path[0] === category;
+
+const filters = {
+	cssPrimitiveFilter: (token) =>
+		isPrimitive(token) && !isShadow(token) && !isPrimitiveScale(token) && !isSeed(token),
+	cssPrimitiveScaleFilter: isPrimitiveScale,
+	cssLightModeFilter: isMode('light'),
+	cssDarkModeFilter: isMode('dark'),
+	cssSpacingFilter: isCategory('spacing'),
+	cssGridFilter: isCategory('grid'),
+	cssFlowFilter: isCategory('flow'),
+	cssTypographyFilter: isCategory('typography'),
+	shadowFilter: isShadow,
+	twFilter: (token) => isColor(token) && (isMode('light')(token) || isPrimitive(token)),
+	twSpacingFilter: isCategory('spacing'),
+	twFlowFilter: isCategory('flow'),
+	twGridFilter: isCategory('grid'),
+	jsFilter: (token) =>
+		isColor(token) &&
+		(token.path[0] === 'color' ||
+			(isPrimitive(token) && token.path[2] !== 'mode' && !isSeed(token)))
+};
+
+Object.entries(filters).forEach(([name, filter]) =>
+	StyleDictionary.registerFilter({ name, filter })
+);
+
+/*=========================================================
+  CUSTOM TRANSFORMS
 */
 
 const transformString = (str, replace = 'mode', regex = /.*-color/) => {
@@ -128,210 +68,44 @@ const transformString = (str, replace = 'mode', regex = /.*-color/) => {
 	return str.replace(regex, replace);
 };
 
-/*
- THESE ARE CONTITIONS TO FILTER ON AND A HELPER FUNCTION TO CREATE MATCHING FILTERS
- These are a convenience to avoid long filter strings such as
- token.attributes.category === 'primitive' || token.attributes.category === 'spacing' || token....
- The objects defined here are allowed through - everything else is filtered out. Acts as a yes gate
- The not: array allows for partial filtering of object keys. Acts as a no gate
-*/
-
-const matchesCondition = (token, condition) => {
-	return Object.entries(condition).every(([field, filter]) => {
-		const val = token.attributes[field];
-
-		if (typeof filter === 'object' && filter.not) {
-			return !filter.not.includes(val);
-		}
-		return filter === val;
-	});
-};
-const tokenMatchesAnyCondition = (token, conditions) => {
-	return conditions.some((condition) => matchesCondition(token, condition));
-};
-
-const createFilter = (conditions) => (token) => tokenMatchesAnyCondition(token, conditions);
-
-/*------------------------------------------*/
-
-// Generic primitives.css carries the NON-scale primitives (colour, font-family,
-// font-weight, breakpoint) via css/variables, which emits raw values. The two
-// dimension SCALES - spacing (type 'spacing') and font-size (subitem 'size') -
-// are excluded here and emitted by custom/primitive-scale instead, because they
-// need px->rem conversion at emit time while their token-graph value stays px
-// (so tokens that reference them - flow, t-shirt spacing, grid - resolve correctly).
-const conditionsPrimitive = [
-	{ category: 'primitive', type: { not: ['spacing'] }, subitem: { not: ['seed', 'size'] } }
-];
-const conditionsPrimitiveScale = [
-	{ category: 'primitive', type: 'spacing' },
-	{ category: 'primitive', subitem: 'size' }
-];
-
-const conditionsColorModes = [{ category: 'mode' }];
-const conditionsColorModeLight = [{ category: 'mode', type: 'light' }];
-const conditionsColorModeDark = [{ category: 'mode', type: 'dark' }];
-const conditionsSpacing = [{ category: 'spacing' }];
-const conditionsTypography = [
-	{ category: 'typography' },
-	{ category: 'primitive', subitem: 'size' }
-];
-const conditionsFlow = [{ category: 'flow' }];
-const conditionsGridSpacing = [{ category: 'grid-spacing' }];
-const conditionsTw = [
-	...conditionsColorModeLight,
-	{
-		category: 'primitive',
-		type: { not: ['spacing', 'typography'] },
-		subitem: { not: ['light', 'dark', 'seed', 'spacing', 'typography'] }
-	}
-];
-const conditionsJs = [
-	...conditionsColorModes,
-	{
-		category: 'primitive',
-		type: { not: ['spacing', 'typography'] },
-		item: { not: ['mode'] },
-		subitem: { not: ['seed'] }
-	}
-];
-const conditionsShadow = [
-	{
-		category: {
-			not: ['focus ring', 'spacing', 'primitive', 'mode', 'typography', 'flow', 'grid-spacing']
-		}
-	}
-];
-
-// REGISTER THE CUSTOM FILTERS USING OUR MATCHING CONDITIONS
-
-StyleDictionary.registerFilter({
-	name: 'cssPrimitiveFilter',
-	filter: (token) => createFilter(conditionsPrimitive)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'cssPrimitiveScaleFilter',
-	filter: (token) => createFilter(conditionsPrimitiveScale)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'cssLightModeFilter',
-	filter: (token) => createFilter(conditionsColorModeLight)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'cssDarkModeFilter',
-	filter: (token) => createFilter(conditionsColorModeDark)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'cssSpacingFilter',
-	filter: (token) => createFilter(conditionsSpacing)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'cssGridSpacingFilter',
-	filter: (token) => createFilter(conditionsGridSpacing)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'cssFlowFilter',
-	filter: (token) => createFilter(conditionsFlow)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'cssTypographyFilter',
-	filter: (token) => createFilter(conditionsTypography)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'twFilter',
-	filter: (token) => createFilter(conditionsTw)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'twSpacingFilter',
-	filter: (token) => createFilter(conditionsSpacing)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'twFlowFilter',
-	filter: (token) => createFilter(conditionsFlow)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'twGridSpacingFilter',
-	filter: (token) => createFilter(conditionsGridSpacing)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'jsFilter',
-	filter: (token) => createFilter(conditionsJs)(token)
-});
-
-StyleDictionary.registerFilter({
-	name: 'shadowFilter',
-	filter: (token) => createFilter(conditionsShadow)(token)
-});
-
-/*=========================================================
-  CUSTOM TRANSFORMS
-*/
-
-//remove 'light' or 'dark' mode key from name and swicth mode to color
-// Before: mode-dark-text-muted - not humarn readable token name for css
-// After: color-text-muted - correct token naming schema for consumption
-
-const transformModeName = (path) => {
-	return transformString(path.join('-'), 'color', /.*(mode-(dark|light))/);
-};
-
 StyleDictionary.registerTransform({
-	name: 'modeName',
+	name: 'name/grammar',
 	type: transformTypes.name,
-	filter: (token) => {
-		return token.path[0] === 'mode';
-	},
-	transform: (token) => {
-		return transformModeName(token.path);
-	}
+	transform: tokenName
 });
 
-//Don't apply units to typography where not needed
+/**
+ * Units, keyed on path. Dimensions arrive from Figma as unitless px.
+ *  - font weights stay unitless
+ *  - breakpoints become px (media queries can't use rem from custom properties)
+ *  - everything else becomes rem
+ * Only literal values are transformed; tokens that reference them inherit the
+ * converted value, so no format divides by 16 itself.
+ */
 StyleDictionary.registerTransform({
-	name: 'typography/unitless',
+	name: 'dimension/grammar',
 	type: transformTypes.value,
-	filter: (token) => {
-		const unitlessDimensions = ['line-height', 'font-weight', 'letter-spacing'];
-		return unitlessDimensions.some((i) => token.path.includes(i));
-	},
+	filter: (token) => token.type === 'dimension' && typeof token.value === 'number',
 	transform: (token) => {
-		return token.original.value;
-	}
-});
-
-//Don't apply units to spacing when not needed.
-// Keeps ALL dimension tokens as raw px in the resolved value, so the custom
-// formats (spacing, grid-spacing, flow, primitive-scale) can do their own /16
-// rem/em conversion. This matters for the shared primitive-spacing scale, which
-// semantic-flow / semantic-spacing / grid-spacing all REFERENCE - they divide
-// the resolved px by 16, so the primitive must stay px in the token graph and
-// be converted to rem only at emit time (see custom/primitive-scale).
-StyleDictionary.registerTransform({
-	name: 'spacing/unitless',
-	type: transformTypes.value,
-	filter: (token) => {
-		return token.type === 'dimension';
-	},
-	transform: (token) => {
-		return token.original.value;
+		if (token.path.includes('font-weight')) return token.value;
+		if (token.path[1] === 'breakpoint') return `${token.value}px`;
+		return token.value === 0 ? '0' : `${token.value / 16}rem`;
 	}
 });
 
 /*=========================================================
   CUSTOM FORMATS
 */
+
+// var(--<referenced>, <resolved>) when a token is authored as an alias, so the
+// semantic layer references the primitive rather than restating it.
+const cssValue = (token, dictionary) => {
+	if (usesReferences(token.original.value)) {
+		const [ref] = getReferences(token.original.value, dictionary.unfilteredTokens);
+		if (ref) return `var(--${ref.name}, ${token.value})`;
+	}
+	return token.value;
+};
 
 /**
  * Custom format that generates tailwind color config based on css variables
@@ -358,18 +132,14 @@ StyleDictionary.registerFormat({
 });
 
 /**
- * Custom format that generates tailwind spacing config based on css variables
- */
-
-/**
  * Custom format that exposes the numbered spacing scale to Tailwind.
  * The Tailwind key mirrors the native numeric scale ('4', '2.5', 'px') so it can
  * drop in as theme.extend.spacing; the CSS var uses the CSS-safe emitted name
- * ('--spacing-4', '---spacing-2-5', '---spacing-px').
+ * ('--spacing-4', '--spacing-2-5', '--spacing-px').
  */
 const formatTailwindSpacing = (token) => {
-	const key = String(token.attributes.type).replace(/^(\d+)-(\d+)$/, '$1.$2');
-	return `"${key}": "var(--${token.name}, ${token.value / 16}rem)"`;
+	const key = String(token.path[1]).replace(/^(\d+)-(\d+)$/, '$1.$2');
+	return `"${key}": "var(--${token.name}, ${token.value})"`;
 };
 
 StyleDictionary.registerFormat({
@@ -384,10 +154,10 @@ StyleDictionary.registerFormat({
 /**
  * Custom format that generates tailwind flow config based on css variables
  *
- * Emits FOUR context-agnostic rung keys, not twelve context-prefixed ones. A
- * `mt-flow-product-section` utility would resolve the flat --flow-product-section
- * var directly, making it context-INdependent by construction: dropped inside a
- * .flow-prose container it pins that one gap to 24px (= --primitive-spacing-6),
+ * Emits FOUR context-agnostic rung keys, not one per context and step. A
+ * `mt-flow-standard-section` utility would resolve the flat
+ * --flow-standard-section var directly, making it context-INdependent by
+ * construction: dropped inside a .flow-spacious container it pins that one gap,
  * i.e. `mt-6` wearing a flow badge, and it opts the element out of the rhythm it
  * sits in. A component that must hold its density wherever it lands declares its
  * own context class instead (Toast does this), which gives the whole subtree one
@@ -395,8 +165,8 @@ StyleDictionary.registerFormat({
  *
  * So rung utilities carry a RELATIONSHIP, never a density; density comes from the
  * context class in scope at runtime. The four rung names are the contract, hence
- * this format does not read tokens. The twelve flat --flow-{context}-{step} vars
- * are untouched — they remain the value source the context blocks reference; they
+ * this format does not read tokens. The flat --flow-{context}[-{step}] vars are
+ * untouched — they remain the value source the context blocks reference; they
  * simply stop being reachable from a utility.
  */
 
@@ -411,277 +181,91 @@ StyleDictionary.registerFormat({
 });
 
 /**
- * Custom format that generates tailwind gridSpacing config based on css variables
+ * Custom format that generates tailwind grid config based on css variables
  */
 
-const formatTailwindGridSpacing = (token) => {
-	return `  "${token.name}": "var(--${token.name}, ${token.value / 16}rem)"`;
-};
+const formatTailwindGrid = (token) => `  "${token.name}": "var(--${token.name}, ${token.value})"`;
 
 StyleDictionary.registerFormat({
-	name: 'tw/css-grid-spacing-variables',
+	name: 'tw/css-grid-variables',
 	format({ dictionary }) {
 		return `module.exports = {
-        ${dictionary.allTokens.map(formatTailwindGridSpacing).join(',\n')}
+        ${dictionary.allTokens.map(formatTailwindGrid).join(',\n')}
       }`;
 	}
 });
 
-// If a token's authored value is an alias (e.g. font-weight -> a primitive),
-// emit it as var(--<primitive>, <resolved fallback>) so the semantic layer
-// REFERENCES the primitive rather than restating it - matching the colour
-// tokens. Returns the kebab primitive var name, or null for literals.
-// (Honours the platform's outputReferences intent for this custom format.)
-const referencedVarName = (token) => {
-	const authored = token.original && token.original.value;
-	if (typeof authored === 'string' && authored.trim().startsWith('{')) {
-		return authored.trim().replace(/[{}]/g, '').split('.').join('-');
-	}
-	return null;
-};
-
 /**
  * Custom format for typography
+ *
+ * Line height is emitted as a unitless ratio (line-height / font-size of the
+ * same role), not as a reference to the line-height primitive, so that it
+ * scales with the font size it sits beside. Every other property references the
+ * primitive it is authored against.
  */
+const formatTypography = (dictionary) => {
+	const byPath = new Map(dictionary.allTokens.map((token) => [token.path.join('.'), token]));
 
-const formatTypography = (dictionary) => (token) => {
-	// Token field names vary between the no-hyphen ('fontsize') and hyphenated ('font-size')
-	// naming conventions used across different breakpoints/sets in the tokens file.
-	const lastSegment = token.path.at(-1);
-	const isFontSize =
-		token.path[0] === 'typography' && (lastSegment === 'fontsize' || lastSegment === 'font-size');
-	const isLineHeight =
-		token.path[0] === 'typography' &&
-		(lastSegment === 'lineheight' || lastSegment === 'line-height');
-	const isReadableWidth = token.path[0] === 'typography' && lastSegment === 'readable-width';
-
-	// Get the corresponding font size for a line-height token, as a resolved
-	// px number. Uses the sibling token's final resolved `.value` (not
-	// `.original.value`), so it works whether the font-size is authored as a
-	// primitive reference OR a semantic→semantic alias (e.g. aliased chart
-	// roles referencing product) — parsing the primitive name out of
-	// `.original.value` broke as soon as a role aliased another semantic
-	// token instead of a primitive.
-	const getFontSizeForLineHeight = (token) => {
-		if (!isLineHeight) return null;
-
-		// Construct the correct font size path (matching the same naming convention as lastSegment)
-		const fontSizeKey = lastSegment === 'line-height' ? 'font-size' : 'fontsize';
-		const fontSizePath = [...token.path.slice(0, -1), fontSizeKey];
-
-		const fontSizeToken = fontSizePath.reduce(
-			(obj, key) => (obj && obj[key] ? obj[key] : null),
-			dictionary.tokens
-		);
-		return fontSizeToken ? fontSizeToken.value : null;
+	const lineHeightRatio = (token) => {
+		const fontSize = byPath.get([...token.path.slice(0, -1), 'font-size'].join('.'));
+		const ratio = parseFloat(token.value) / parseFloat(fontSize ? fontSize.value : '1rem');
+		return Number(ratio.toFixed(4));
 	};
 
-	const applyCSSVariable = (token) => {
-		if (isFontSize) {
-			const ref = referencedVarName(token);
-			// Literal today; when a primitive font-size scale is authored and the
-			// role aliases it, `original.value` becomes a reference and this emits
-			// var(--primitive-typography-font-size-<px>, <rem>).
-			const px = typeof token.original.value === 'number' ? token.original.value : token.value;
-			const rem = px / 16;
-			return ref ? ` --${token.name}: var(--${ref}, ${rem}rem)` : ` --${token.name}: ${rem}rem`;
-		}
-
-		if (isLineHeight) {
-			// Always computed unitless (ratio). Line-height is deliberately NOT a
-			// primitive reference: the emitted value is line-height/font-size, not a px alias.
-			const fontSizePx = getFontSizeForLineHeight(token);
-			const unitlessLineHeight = fontSizePx ? token.value / fontSizePx : token.value / 16;
-			return `  --${token.name}: ${unitlessLineHeight.toFixed(4)}`;
-		}
-
-		if (isReadableWidth) {
-			return ` --${token.name}: ${token.original.value / 16}rem`;
-		}
-
-		// font-family, font-weight, letter-spacing, space-before: reference the
-		// primitive when authored as an alias (family, weight), else literal.
-		const ref = referencedVarName(token);
-		return ref
-			? ` --${token.name}: var(--${ref}, ${token.value})`
-			: ` --${token.name}: ${token.value}`;
-	};
-
-	return applyCSSVariable(token);
+	return dictionary.allTokens
+		.map((token) => {
+			const value =
+				token.path.at(-1) === 'line-height' ? lineHeightRatio(token) : cssValue(token, dictionary);
+			return `  --${token.name}: ${value};`;
+		})
+		.join('\n');
 };
 
 StyleDictionary.registerFormat({
 	name: 'custom/typography',
 	format({ dictionary }) {
-		return `:root {
-		${dictionary.allTokens
-			.filter((token) => token.path[0] !== 'primitive')
-			.map(formatTypography(dictionary))
-			.join(';\n')}
-      }`;
-	}
-});
-
-/**
- * Custom format for spacing
- */
-const formatSpacing = (token) => {
-	const ref = referencedVarName(token);
-	return ` --${token.name}: var(--${ref}, ${token.value / 16}rem)`;
-};
-
-StyleDictionary.registerFormat({
-	name: 'custom/spacing',
-	format({ dictionary }) {
-		return `:root {
-        ${dictionary.allTokens.map(formatSpacing).join(';\n')}
-      }`;
-	}
-});
-
-/**
- * Custom format for the dimension PRIMITIVE scales (spacing + font-size).
- *
- * These live in the token graph as raw px (see spacing/unitless) so that tokens
- * which reference them resolve to px for their own /16 maths. Here - at emit
- * time only - we convert px -> rem. token.name is already CSS-safe kebab
- * (name/kebab maps the authored U+2024 in fractional keys to '-', e.g.
- * '0.5' -> primitive-spacing-0-5, 'px' -> primitive-spacing-px), so we emit it
- * verbatim. Produces e.g.:
- *   --primitive-spacing-4: 1rem;
- *   --primitive-typography-font-size-40: 2.5rem;
- */
-const formatPrimitiveScale = (token) => ` --${token.name}: ${token.value / 16}rem;`;
-
-StyleDictionary.registerFormat({
-	name: 'custom/primitive-scale',
-	format({ dictionary }) {
-		return `:root {
-        ${dictionary.allTokens.map(formatPrimitiveScale).join('\n')}
-      }`;
+		return `:root {\n${formatTypography(dictionary)}\n}\n`;
 	}
 });
 
 /**
  * Custom format for flow
  *
- * Flow tokens are keyed [context][step] (e.g. prose.tight, product.section) - a
- * context class carrying a 4-step ramp, not one flat var per context. Group by
- * context and key the var on the step, so tight/default/loose/section don't
- * collapse onto a single `--flow-${context}` var (last-token-wins).
+ * Flow tokens are keyed [context][step] (e.g. spacious.tight, standard.section):
+ * a context class carrying a 4-step ramp. The flat --flow-{context}[-{step}]
+ * vars are the single value source; each context class maps them onto the bare
+ * --flow-{step} vars that the owl rules and utilities read.
  */
-const FLOW_STEP_ORDER = ['tight', 'default', 'loose', 'section'];
-
 const formatFlow = (dictionary) => {
-	const byContext = {};
+	const contexts = [...new Set(dictionary.allTokens.map((token) => token.path[1]))];
+	const flowVar = (context, step) =>
+		step === 'default' ? `--flow-${context}` : `--flow-${context}-${step}`;
 
-	dictionary.allTokens.forEach((token) => {
-		const [, context, step] = token.path;
-		byContext[context] = byContext[context] || {};
-		byContext[context][step] = `${token.value / 16}rem`;
-	});
-
-	const contexts = Object.keys(byContext);
-
-	// Flat vars — the single value source. Consumed by the context blocks below
-	// and by the Tailwind utilities generated from tw/css-flow-variables, whose
-	// var() references would otherwise resolve to their literal fallback forever.
-	const flat = contexts
-		.flatMap((context) =>
-			FLOW_STEP_ORDER.filter((step) => byContext[context][step] !== undefined).map(
-				(step) => `  --flow-${context}-${step}: ${byContext[context][step]};`
-			)
-		)
+	const flat = dictionary.allTokens
+		.map((token) => `  --${token.name}: ${cssValue(token, dictionary)};`)
 		.join('\n');
 
-	// Context blocks reference the flat vars rather than restating values.
-	const blocks = contexts
-		.map((context) => {
-			const vars = FLOW_STEP_ORDER.filter((step) => byContext[context][step] !== undefined)
-				.map((step) => `--flow-${step}: var(--flow-${context}-${step});`)
-				.join(' ');
-			return `.flow-${context} { ${vars} }`;
-		})
-		.join('\n');
+	const ramp = (context) =>
+		FLOW_STEPS.map((step) => `--flow-${step}: var(${flowVar(context, step)});`).join(' ');
 
-	// Product is the library's default density: emit its ramp as the bare
-	// --flow-{rung} vars on :root so the four rungs are ALWAYS defined, then let
-	// context classes override. Without this, a `mt-flow-section` in a component
-	// with no ancestor context class resolves an undefined custom property — the
-	// declaration is invalid at computed-value time and margin-top falls back to
-	// 0, a silent no-op. Coherent with contexts.cjs, where product is already the
-	// default typography context. `.flow-product` stays meaningful: it arms the
-	// owl, which :root cannot do.
-	const defaultRamp = FLOW_STEP_ORDER.filter(
-		(step) => byContext.product && byContext.product[step] !== undefined
-	)
-		.map((step) => `  --flow-${step}: var(--flow-product-${step});`)
-		.join('\n');
+	const blocks = contexts.map((context) => `.flow-${context} { ${ramp(context)} }`).join('\n');
 
-	return `:root {\n${flat}\n${defaultRamp}\n}\n\n${blocks}`;
+	// Content outside any declared context takes standard, so its ramp is also
+	// set on :root. Without it, a `mt-flow-section` with no ancestor context
+	// class resolves an undefined custom property and margin-top falls back to
+	// 0, a silent no-op. `.flow-standard` stays meaningful: it arms the owl,
+	// which :root cannot do.
+	const defaultRamp = FLOW_STEPS.map(
+		(step) => `  --flow-${step}: var(${flowVar('standard', step)});`
+	).join('\n');
+
+	return `:root {\n${flat}\n${defaultRamp}\n}\n\n${blocks}\n`;
 };
 
 StyleDictionary.registerFormat({
 	name: 'custom/flow',
 	format({ dictionary }) {
 		return formatFlow(dictionary);
-	}
-});
-
-/**
- * Custom format for grid-spacing
- */
-const formatGridSpacing = (token) => `--${token.name}: ${token.value / 16}rem`;
-
-StyleDictionary.registerFormat({
-	name: 'custom/grid-spacing',
-	format({ dictionary }) {
-		return `:root {
-        ${dictionary.allTokens.map(formatGridSpacing).join(';\n')}
-      }`;
-	}
-});
-
-/**
- * Custom format for shadows
- */
-
-const groupShadows = (tokens) =>
-	Object.values(
-		tokens.reduce((acc, token) => {
-			const { category } = token.attributes;
-
-			if (!acc[category]) {
-				acc[category] = {
-					category,
-					values: []
-				};
-			}
-
-			acc[category].values.push(token.original.value);
-			return acc;
-		}, {})
-	);
-
-const formatShadows = (dictionary) => {
-	const grouped = groupShadows(dictionary.allTokens);
-
-	return grouped
-		.map(({ category, values }) => {
-			return `--${category}: ${values.map(
-				({ radius, color, offsetX, offsetY, spread }) =>
-					`${offsetX}px ${offsetY}px ${radius}px ${spread}px ${color}`
-			)}`;
-		})
-		.join(';\n');
-};
-
-StyleDictionary.registerFormat({
-	name: 'custom/shadows',
-	format({ dictionary }) {
-		return `:root {
-			${formatShadows(dictionary)};
-		}`;
 	}
 });
 
@@ -768,14 +352,20 @@ function makeHierarchical(input, formatter = (x) => x) {
 	return result;
 }
 
+// Importers of the docs and JS modules read semantic colours as
+// `mode.{light,dark}`, so the color.{light-mode,dark-mode} groups are re-keyed
+// to keep that shape until these exports are reworked (RFC 0003, workstream 5).
+const withModeShape = ({ color, ...tokens }) =>
+	color ? { ...tokens, mode: { light: color['light-mode'], dark: color['dark-mode'] } } : tokens;
+
 // (FOR DOCS) -> Make Heirachical(add defaults to structure), then Format Token meta for docs
 const formatForDocumentation = (dictionary) => {
-	return makeHierarchical(dictionary.tokens, (token) => formatTokenForDocs(token));
+	return makeHierarchical(withModeShape(dictionary.tokens), (token) => formatTokenForDocs(token));
 };
 
 // (FOR JS) -> Make Heirachical(add defaults to structure), then Format Token meta for js
 const formatForJs = (dictionary) => {
-	return makeHierarchical(dictionary.tokens, (token) => formatTokenForJs(token));
+	return makeHierarchical(withModeShape(dictionary.tokens), (token) => formatTokenForJs(token));
 };
 
 // Register custom docs formatter

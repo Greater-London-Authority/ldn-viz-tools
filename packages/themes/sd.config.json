@@ -1,11 +1,16 @@
 {
 	"source": ["./tokens/**/*.json"],
 	"parsers": ["json-parser"],
-
 	"platforms": {
 		"css": {
-			"transformGroup": "css",
-			"transforms": ["modeName", "size/pxToRem", "typography/unitless", "spacing/unitless"],
+			"transforms": [
+				"attribute/cti",
+				"name/grammar",
+				"dimension/grammar",
+				"color/css",
+				"fontFamily/css",
+				"shadow/css/shorthand"
+			],
 			"buildPath": "./styles/",
 			"files": [
 				{
@@ -18,8 +23,11 @@
 				},
 				{
 					"destination": "primitive-scale.css",
-					"format": "custom/primitive-scale",
-					"filter": "cssPrimitiveScaleFilter"
+					"format": "css/variables",
+					"filter": "cssPrimitiveScaleFilter",
+					"options": {
+						"selector": ":root"
+					}
 				},
 				{
 					"destination": "light.css",
@@ -43,7 +51,7 @@
 				},
 				{
 					"destination": "spacing.css",
-					"format": "custom/spacing",
+					"format": "css/variables",
 					"filter": "cssSpacingFilter",
 					"options": {
 						"selector": ":root",
@@ -53,8 +61,13 @@
 				},
 				{
 					"destination": "grid-spacing.css",
-					"format": "custom/grid-spacing",
-					"filter": "cssGridSpacingFilter"
+					"format": "css/variables",
+					"filter": "cssGridFilter",
+					"options": {
+						"selector": ":root",
+						"outputReferences": true,
+						"outputReferenceFallbacks": true
+					}
 				},
 				{
 					"destination": "flow.css",
@@ -64,23 +77,20 @@
 				{
 					"destination": "typography.css",
 					"format": "custom/typography",
-					"filter": "cssTypographyFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
+					"filter": "cssTypographyFilter"
 				},
 				{
 					"destination": "shadows.css",
-					"format": "custom/shadows",
-					"filter": "shadowFilter"
+					"format": "css/variables",
+					"filter": "shadowFilter",
+					"options": {
+						"selector": ":root"
+					}
 				}
 			]
 		},
 		"web": {
-			"transformGroup": "web",
-			"transforms": ["modeName", "spacing/unitless"],
+			"transforms": ["attribute/cti", "name/grammar", "dimension/grammar", "color/css"],
 			"buildPath": "./styles/",
 			"files": [
 				{
@@ -95,8 +105,8 @@
 				},
 				{
 					"destination": "tw-extend/gridspacing.cjs",
-					"format": "tw/css-grid-spacing-variables",
-					"filter": "twGridSpacingFilter"
+					"format": "tw/css-grid-variables",
+					"filter": "twGridFilter"
 				},
 				{
 					"destination": "tw-extend/flow.cjs",
@@ -117,11 +127,12 @@
 						"minify": true
 					}
 				}
-			]
+			],
+			"transforms": ["name/grammar"]
 		},
 		"docs": {
 			"transformGroup": "js",
-			"transforms": ["name/kebab"],
+			"transforms": ["name/grammar"],
 			"buildPath": "./docs/tokens/",
 			"files": [
 				{
