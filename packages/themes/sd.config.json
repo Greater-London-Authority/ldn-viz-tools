@@ -14,78 +14,16 @@
 			"buildPath": "./styles/",
 			"files": [
 				{
-					"destination": "primitives.css",
-					"format": "css/variables",
-					"filter": "cssPrimitiveFilter",
-					"options": {
-						"selector": ":root"
-					}
+					"destination": "tokens.css",
+					"format": "css/tokens"
 				},
 				{
-					"destination": "primitive-scale.css",
-					"format": "css/variables",
-					"filter": "cssPrimitiveScaleFilter",
-					"options": {
-						"selector": ":root"
-					}
+					"destination": "system.css",
+					"format": "css/system"
 				},
 				{
-					"destination": "light.css",
-					"format": "css/variables",
-					"filter": "cssLightModeFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
-				},
-				{
-					"destination": "dark.css",
-					"format": "css/variables",
-					"filter": "cssDarkModeFilter",
-					"options": {
-						"selector": ":root.dark, .dark",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
-				},
-				{
-					"destination": "spacing.css",
-					"format": "css/variables",
-					"filter": "cssSpacingFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
-				},
-				{
-					"destination": "grid-spacing.css",
-					"format": "css/variables",
-					"filter": "cssGridFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
-				},
-				{
-					"destination": "flow.css",
-					"format": "custom/flow",
-					"filter": "cssFlowFilter"
-				},
-				{
-					"destination": "typography.css",
-					"format": "custom/typography",
-					"filter": "cssTypographyFilter"
-				},
-				{
-					"destination": "shadows.css",
-					"format": "css/variables",
-					"filter": "shadowFilter",
-					"options": {
-						"selector": ":root"
-					}
+					"destination": "index.css",
+					"format": "css/index"
 				}
 			]
 		},
@@ -120,7 +58,7 @@
 			"buildPath": "./styles/",
 			"files": [
 				{
-					"destination": "js/color-tokens.js",
+					"destination": "colors.js",
 					"format": "custom/js",
 					"filter": "jsFilter",
 					"options": {

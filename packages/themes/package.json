@@ -7,6 +7,22 @@
 	},
 	"license": "MIT",
 	"type": "module",
+	"exports": {
+		"./index.css": "./styles/index.css",
+		"./tokens.css": "./styles/tokens.css",
+		"./system.css": "./styles/system.css",
+		"./tailwind": "./ldn-theme.cjs",
+		"./colors.js": "./styles/colors.js",
+		"./docs/tokens/tokens.js": "./docs/tokens/tokens.js",
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"ldn-theme.cjs",
+		"tailwind-custom",
+		"styles",
+		"docs",
+		"MIGRATION.md"
+	],
 	"scripts": {
 		"build": "npm run build-tokens",
 		"build-tokens": "node ./sd.build.js",

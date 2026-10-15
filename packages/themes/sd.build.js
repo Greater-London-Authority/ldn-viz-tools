@@ -1,6 +1,11 @@
 import StyleDictionary from 'style-dictionary';
 import { transformTypes } from 'style-dictionary/enums';
-import { fileHeader, getReferences, usesReferences } from 'style-dictionary/utils';
+import {
+	fileHeader,
+	formattedVariables,
+	getReferences,
+	usesReferences
+} from 'style-dictionary/utils';
 import { normaliseTokens, tokenName } from './sd/normalise.js';
 
 /*===============================================
@@ -221,13 +226,6 @@ const formatTypography = (dictionary) => {
 		.join('\n');
 };
 
-StyleDictionary.registerFormat({
-	name: 'custom/typography',
-	format({ dictionary }) {
-		return `:root {\n${formatTypography(dictionary)}\n}\n`;
-	}
-});
-
 /**
  * Custom format for flow
  *
@@ -236,19 +234,14 @@ StyleDictionary.registerFormat({
  * vars are the single value source; each context class maps them onto the bare
  * --flow-{step} vars that the owl rules and utilities read.
  */
-const formatFlow = (dictionary) => {
-	const contexts = [...new Set(dictionary.allTokens.map((token) => token.path[1]))];
-	const flowVar = (context, step) =>
-		step === 'default' ? `--flow-${context}` : `--flow-${context}-${step}`;
+const flowVar = (context, step) =>
+	step === 'default' ? `--flow-${context}` : `--flow-${context}-${step}`;
 
+// The custom properties: the flat ramp of every context, plus the default ramp.
+const formatFlowProperties = (dictionary) => {
 	const flat = dictionary.allTokens
 		.map((token) => `  --${token.name}: ${cssValue(token, dictionary)};`)
 		.join('\n');
-
-	const ramp = (context) =>
-		FLOW_STEPS.map((step) => `--flow-${step}: var(${flowVar(context, step)});`).join(' ');
-
-	const blocks = contexts.map((context) => `.flow-${context} { ${ramp(context)} }`).join('\n');
 
 	// Content outside any declared context takes standard, so its ramp is also
 	// set on :root. Without it, a `mt-flow-section` with no ancestor context
@@ -259,14 +252,74 @@ const formatFlow = (dictionary) => {
 		(step) => `  --flow-${step}: var(${flowVar('standard', step)});`
 	).join('\n');
 
-	return `:root {\n${flat}\n${defaultRamp}\n}\n\n${blocks}\n`;
+	return `${flat}\n${defaultRamp}`;
+};
+
+// The context classes, which map one context's ramp onto the bare --flow-{step} vars.
+const formatFlowClasses = (dictionary) => {
+	const contexts = [...new Set(dictionary.allTokens.map((token) => token.path[1]))];
+	const ramp = (context) =>
+		FLOW_STEPS.map((step) => `--flow-${step}: var(${flowVar(context, step)});`).join(' ');
+
+	return contexts.map((context) => `.flow-${context} { ${ramp(context)} }`).join('\n');
+};
+
+/*=========================================================
+  PUBLIC OUTPUTS (RFC 0003, workstream 2)
+  tokens.css  every custom property: the source
+  system.css  every class the specification names: a window onto tokens.css
+  index.css   imports both
+*/
+
+// The same dictionary, narrowed to the tokens one filter selects.
+const subset = (dictionary, filter) => ({
+	...dictionary,
+	allTokens: dictionary.allTokens.filter(filter)
+});
+
+const variables = (dictionary, filter, outputReferences) =>
+	formattedVariables({
+		format: 'css',
+		dictionary: subset(dictionary, filter),
+		outputReferences,
+		outputReferenceFallbacks: outputReferences
+	});
+
+// Grouped in the order the deprecated files were imported, so the cascade is unchanged.
+const formatTokens = (dictionary) => {
+	const section = (title, body) => `  /* ${title} */\n${body}`;
+	const root = [
+		section('Primitives', variables(dictionary, filters.cssPrimitiveFilter, false)),
+		section('Primitive scale', variables(dictionary, filters.cssPrimitiveScaleFilter, false)),
+		section('Colour: light mode', variables(dictionary, filters.cssLightModeFilter, true)),
+		section('Spacing', variables(dictionary, filters.cssSpacingFilter, true)),
+		section('Grid', variables(dictionary, filters.cssGridFilter, true)),
+		section('Typography', formatTypography(subset(dictionary, filters.cssTypographyFilter))),
+		section('Flow', formatFlowProperties(subset(dictionary, filters.cssFlowFilter))),
+		section('Shadow and elevation', variables(dictionary, filters.shadowFilter, false))
+	].join('\n\n');
+	const dark = variables(dictionary, filters.cssDarkModeFilter, true);
+
+	return `:root {\n${root}\n}\n\n:root.dark, .dark {\n${dark}\n}\n`;
 };
 
 StyleDictionary.registerFormat({
-	name: 'custom/flow',
-	format({ dictionary }) {
-		return formatFlow(dictionary);
-	}
+	name: 'css/tokens',
+	format: async ({ dictionary, file }) => `${await fileHeader({ file })}${formatTokens(dictionary)}`
+});
+
+// Only the flow context classes so far. Workstream 3 generates the rest of the
+// classes here and retires the Tailwind plugins.
+StyleDictionary.registerFormat({
+	name: 'css/system',
+	format: async ({ dictionary, file }) =>
+		`${await fileHeader({ file })}${formatFlowClasses(subset(dictionary, filters.cssFlowFilter))}\n`
+});
+
+StyleDictionary.registerFormat({
+	name: 'css/index',
+	format: async ({ file }) =>
+		`${await fileHeader({ file })}@import './tokens.css';\n@import './system.css';\n`
 });
 
 /**
