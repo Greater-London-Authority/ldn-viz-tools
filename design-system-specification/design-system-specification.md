@@ -94,7 +94,7 @@ Tokens are generally named taking one value per segment, however a token may hav
 1. breakpoint or scope.
 2. context (typeset or flow), layout or mode.
 
-Where a set has a default value, that value's name is dropped when no further segment follows it. `--color-border` is the default border colour and `--color-border-default` is not valid.
+Where a semantic set has a default value, that value's name is dropped when no further segment follows it. `--color-border` is the default border colour and `--color-border-default` is not valid.
 
 [Flow](#flow) is set by a context class (`.flow-spacious`, `.flow-standard` or `.flow-compact`), which assigns values to the steps (`tight`, `default`, `loose`, `section`). The tokens always name the context: `--flow-standard-tight`, `--flow-standard`, `--flow-standard-loose` and so on. **The utilities don't**: `.mt-flow-{step}` and `.gap-flow-{step}` resolve against the nearest context. The default step follows the implied-default rule, so the utility is `.mt-flow`, not `.mt-flow-default`.
 
