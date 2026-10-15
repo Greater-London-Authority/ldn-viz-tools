@@ -1,6 +1,6 @@
 # Spacing
 
-Distilled from the spec's _Spacing Scale_. Emitted: `packages/themes/styles/spacing.css`
+Distilled from the spec's _Spacing Scale_. Emitted: `packages/themes/styles/tokens.css`
 (+ `tw-extend/spacing.cjs`). Independent of the type scale.
 
 ## The numbered scale (what authors use)

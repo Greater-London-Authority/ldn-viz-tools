@@ -40,7 +40,7 @@ evidence.
 
 - Clone or pull the branch actually being documented. Confirm the branch and commit.
 - Run the token build if values are involved: `node ./sd.build.js` in
-  `packages/themes`. Read the emitted `styles/*.css`.
+  `packages/themes`. Read the emitted `styles/tokens.css` and `styles/system.css`.
 - Read the plugin source for anything behavioural — selectors, class names, plugin
   registration, theme wiring.
 - Extract value tables by parsing emitted CSS, not by transcribing them.

@@ -10,7 +10,7 @@ Verified against branch `flow`.
 - `packages/themes/tailwind-custom/typography/roles.cjs` — the role utility classes (which vars a role reads)
 - `packages/themes/tailwind-custom/typography/semantics.cjs` — element styling inside `.prose` only
 - `packages/themes/tailwind-custom/typography/responsive.cjs` — per-breakpoint font-size and line-height
-- `packages/themes/styles/typography.css` — emitted `--typography-{mode}-{family}-{role}-{prop}`
+- `packages/themes/styles/tokens.css` — emitted `--typography-{mode}-{family}-{role}-{prop}`
 - Developer guide: `packages/ui/src/lib/Typography.mdx`
 
 ## The one rule

@@ -1,8 +1,8 @@
 # Colour
 
 Distilled from the spec's _Semantic Layer: Colour_. Emitted tokens:
-`packages/themes/styles/js/color-tokens.js` (JS tree, keyed by `mode.light`/`mode.dark`)
-and `packages/themes/styles/{light,dark}.css` (CSS custom props `--color-*`).
+`packages/themes/styles/colors.js` (JS tree, keyed by `mode.light`/`mode.dark`)
+and `packages/themes/styles/tokens.css` (CSS custom props `--color-*`).
 
 ## Principle
 

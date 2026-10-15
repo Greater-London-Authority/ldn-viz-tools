@@ -40,7 +40,7 @@ the visual hierarchy:
 - **`data.categorical.grey` is gone** — the categorical palette dropped grey
   (now blue, darkpink, pink, red, yellow, green, purple, orange, turquoise). For a
   neutral/no-data swatch use **`data.empty`**.
-- Always validate a path against `packages/themes/styles/js/color-tokens.js` → `mode.light`.
+- Always validate a path against `packages/themes/styles/colors.js` → `mode.light`.
 
 ## 4. The context-wrapper catch (biggest gotcha)
 

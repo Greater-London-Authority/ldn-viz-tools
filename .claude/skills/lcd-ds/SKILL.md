@@ -71,9 +71,9 @@ rather than guessing from memory — the details are exacting.
   consumed **from source** via `packages/themes/ldn-theme.cjs` (a workspace
   symlink). Edits are live from source, but **restart the dev/Storybook server** —
   Tailwind reads its config at load.
-- **Emitted CSS:** `packages/themes/styles/*.css` (`typography.css`, `flow.css`,
-  `spacing.css`, `grid-spacing.css`, `light.css`, `dark.css`).
-- **Emitted token JS:** `packages/themes/styles/js/color-tokens.js`,
+- **Emitted CSS:** `packages/themes/styles/tokens.css` (every custom property, light on
+  `:root`, dark on `.dark`), `system.css` (flow context classes) and `index.css` (imports both).
+- **Emitted token JS:** `packages/themes/styles/colors.js`,
   `packages/themes/styles/tw-extend/*.cjs`.
 - **Token source + build:** `packages/themes/tokens/design-tokens.tokens.json`,
   `packages/themes/sd.config.json`, `packages/themes/sd.build.js` (Style Dictionary).

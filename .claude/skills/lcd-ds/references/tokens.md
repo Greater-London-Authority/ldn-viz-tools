@@ -15,7 +15,7 @@ and meant to grow.
 
 Style Dictionary builds emitted output from token source:
 `packages/themes/tokens/design-tokens.tokens.json` + `sd.config.json` + `sd.build.js`
-→ `packages/themes/styles/*.css`, `styles/js/color-tokens.js`, `styles/tw-extend/*.cjs`.
+→ `packages/themes/styles/{tokens,system,index}.css`, `styles/colors.js`, `styles/tw-extend/*.cjs`.
 `outputReferences: true` is on for typography, so aliases emit as `var(...)`
 references rather than restated values. The Tailwind plugin in
 `tailwind-custom/typography/*.cjs` consumes the emitted primitives to build role
@@ -68,7 +68,7 @@ for part of name.split('.'):
 Exposed as `theme.tokenNameToValue(name)` and `theme.currentTheme`
 (`packages/ui/src/lib/theme/themeState.svelte.ts`), where `currentTheme` is
 `color-tokens.js`'s `mode[light|dark]`. **Validate a path** against
-`packages/themes/styles/js/color-tokens.js` → `mode.light`.
+`packages/themes/styles/colors.js` → `mode.light`.
 
 > History: it previously threw on a missing `.default`, which blanked whole charts.
 > Now it degrades. Don't rely on the throw; a missing token = wrong/absent value

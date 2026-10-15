@@ -65,4 +65,4 @@ Plot.line(data, {
   the ui/web Storybook keeps the old code. Chart _example stories_ import from
   source and refresh live; the built package does not.
 - When validating a token path, resolve it against the emitted tree:
-  `packages/themes/styles/js/color-tokens.js` → `mode.light` (or `.dark`).
+  `packages/themes/styles/colors.js` → `mode.light` (or `.dark`).

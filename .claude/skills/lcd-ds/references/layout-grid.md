@@ -2,7 +2,7 @@
 
 Distilled from the spec's _Layout Grid_. Sits one level above type, independent of
 it. Grid tokens: `--grid-spacing-{mode}-{contained|fluid}-{gutter|container-padding}`
-(emitted `packages/themes/styles/grid-spacing.css`, `tw-extend/gridspacing.cjs`),
+(emitted `packages/themes/styles/tokens.css`, `tw-extend/gridspacing.cjs`),
 resolving from `--primitive-spacing-{n}`.
 
 ## Core rule
