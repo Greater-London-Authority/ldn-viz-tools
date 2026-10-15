@@ -118,7 +118,7 @@ _`mode-light` `mode-dark` variants are only applicable on primitive tier._
 
 **Color:** `--color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}]`
 
-_Scope, mode and inverse are all variants: `--color-chart-inverse-axis`. A mode variant can be followed directly by a value: `--color-static-black`. `--color-interactive-disabled-muted` is an accepted outlier: it puts state before emphasis._
+_Scope, mode and inverse are all variants: `--color-inverse-chart-axis`. A mode variant can be followed directly by a value: `--color-static-black`. `--color-interactive-disabled-muted` is an accepted outlier: it puts state before emphasis._
 
 **Typography:** `--typography-{breakpoint}-{typeset}[-{role}][-{size}]-{property}`
 
