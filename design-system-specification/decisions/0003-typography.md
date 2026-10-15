@@ -54,8 +54,6 @@ We needed a system that sets type by what text does and the context in which it 
 
 - **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins.
 
-- **A nested context overrides only the roles it defines.** Everything else comes from the context around it.
-
 - **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`.
 
 - **Longform typeset also defines flow. Product typeset does not.** Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.

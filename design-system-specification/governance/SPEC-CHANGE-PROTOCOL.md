@@ -67,7 +67,7 @@ If you find a value in the prose that disagrees with the generated blocks, the g
 
 ## Changing what the generated blocks contain
 
-Some changes to the specification requires changes to the scripts.
+Some changes to the specification require changes to the scripts.
 
 - **A new role appears in the type matrices.** `gen_spec.py` stops with an error if the CSS contains a prose or product role that the matrix does not list. Add the role to `PROSE_ROWS` or `PRODUCT_ROWS` in `gen_spec.py`. A product role that should not have its own row can go in `PRODUCT_MATRIX_OMIT` instead. There is no equivalent for prose roles. Several roles can share a row only if they have the same size at every breakpoint. The script checks this.
 - **A row label needs renaming.** Row labels come from `PROSE_ROWS` and `PRODUCT_ROWS`, not from the specification. Edit them there and regenerate.

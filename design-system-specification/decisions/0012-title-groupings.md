@@ -25,7 +25,18 @@ Because a card or a panel can contain another titled element, eg. a chart, or a 
 
 ## Decision
 
-- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When two or more title groups exist in the same component, one keeps the dominant treatment ('Title', 'Subtitle') and each competing group is demoted. A demoted group holds only an 'Eyebrow'.
+- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow.
+
+Worked examples:
+
+- **A card containing text, with no titled element inside it.** The card's title
+  group is the only one, so it can have an eyebrow, a title and a subtitle.
+- **A card containing one chart, where the chart is the main subject.** The
+  designer makes the chart's group dominant. The chart has a title and
+  subtitle, and the card's title is set as an eyebrow.
+- **A card containing two related charts.** The designer makes the card's group
+  dominant, so the card has a title and subtitle. Each chart's title is set as
+  an eyebrow.
 
 ## Consequences
 
