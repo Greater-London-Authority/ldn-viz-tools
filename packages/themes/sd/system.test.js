@@ -291,3 +291,30 @@ describe('muted colour', () => {
 		expect(css).toMatch(/:where\(p\.lead\)[^{]*\{[^}]*color: var\(--color-text-muted\);/);
 	});
 });
+
+describe('measure', () => {
+	it('caps the children of longform and formatted product, not the typeset itself', () => {
+		expect(css).toMatch(
+			/\.typeset-longform, \.typeset-product--formatted \{\n {2}--readable-width: 36rem;/
+		);
+		expect(css).toMatch(
+			/\.typeset-longform > :where\(:not\([^)]*\)\)[^{]*\{\n {2}max-width: var\(--readable-width\);/
+		);
+		expect(css).not.toMatch(/\.typeset-product > :where\(:not/);
+	});
+
+	it('lets block objects, nested typesets, escapes and breakouts run full width', () => {
+		const exempt = css.match(/\.typeset-longform > :where\(:not\(([^)]*)\)\)/)[1].split(', ');
+		for (const selector of [
+			'figure',
+			'table',
+			'pre',
+			'.chart',
+			'.not-typeset',
+			'.breakout',
+			'.typeset-product'
+		]) {
+			expect(exempt, selector).toContain(selector);
+		}
+	});
+});

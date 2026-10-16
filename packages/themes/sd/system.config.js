@@ -31,7 +31,8 @@ export const typesets = [
 		className: 'typeset-longform',
 		flow: 'spacious',
 		text: { role: 'body', size: 'md' },
-		content: true
+		content: true,
+		measure: true
 	},
 	{
 		token: 'product',
@@ -42,7 +43,9 @@ export const typesets = [
 		// must not pick up content styles. Formatted content (Markdown, CMS
 		// output) in a product setting takes the variant, which adds flow and
 		// content styles. It works alone or beside the base class.
-		variants: [{ className: 'typeset-product--formatted', flow: 'standard', content: true }]
+		variants: [
+			{ className: 'typeset-product--formatted', flow: 'standard', content: true, measure: true }
+		]
 	}
 ];
 
@@ -107,6 +110,22 @@ export const flow = {
 export const content = {
 	file: 'sd/content.css',
 	escape: 'not-typeset'
+};
+
+// The reading measure. A typeset class with `measure` caps its direct
+// children at `width`, so running text stays within a readable line length,
+// while block objects and anything marked `breakout` run the full width of
+// the container. The cap sits at the typeset's specificity, so a max-width
+// utility on a child wins.
+//
+// 36rem is about 75 characters of body text in Inter, inside WCAG 1.4.8's
+// 80. It is in rem, not ch, so every child shares one right edge: ch
+// resolves against each element's own font size. Placeholder until the
+// export carries a longform readable-width token.
+export const measure = {
+	width: '36rem',
+	breakout: 'breakout',
+	exempt: ['figure', 'img', 'video', 'iframe', 'table', 'pre', '.chart']
 };
 
 // The .form-* classes, hand-written in `file` (sd/forms.js).

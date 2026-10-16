@@ -195,6 +195,27 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		...contexts.map((context) => rule(`.flow-${context} > *`, ramp(context)))
 	]);
 
+	/* Measure --------------------------------------------------------- */
+
+	// The typeset caps its children, not itself, so block objects, nested
+	// typesets, escaped blocks and breakouts keep the full width.
+	const { measure: m } = cfg;
+	const measured = typesetClasses.filter((t) => t.measure).map((t) => `.${t.className}`);
+	const exempt = [
+		...m.exempt,
+		`.${cfg.content.escape}`,
+		`.${m.breakout}`,
+		...typesetClasses.map((t) => `.${t.className}`)
+	].join(', ');
+	const measureSection = measured.length
+		? section('Measure', [
+				rule(measured.join(', '), { '--readable-width': m.width }),
+				rule(measured.map((s) => `${s} > :where(:not(${exempt}))`).join(', '), {
+					'max-width': 'var(--readable-width)'
+				})
+			])
+		: '';
+
 	/* Roles and aliases ------------------------------------------------ */
 
 	const roleRule = (selector, role, extra = {}) =>
@@ -407,6 +428,7 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		layout,
 		typesetSection,
 		flowContexts,
+		measureSection,
 		typesetText,
 		elementAliases,
 		contentStyles,
