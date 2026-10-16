@@ -112,22 +112,33 @@ export const content = {
 	escape: 'not-typeset'
 };
 
-// The reading measure. A typeset class with `measure` caps its direct
-// children at `multiple` times the font size of the typeset's text role, so
-// running text stays within a readable line length at every breakpoint and
-// grows if the body size does. Block objects and anything marked `breakout`
-// run the full width of the container. The cap sits at the typeset's
-// specificity, so a max-width utility on a child wins.
+// The measure: three widths for the direct children of a typeset class
+// with `measure`. Text and wide are multiples of the font size of the
+// typeset's text role, so they hold their character count at every
+// breakpoint and grow if the body size does; full is the container.
+//
+//   text  running text: paragraphs, headings, lists, quotes
+//   wide  the default for the `wide` elements (figures, charts, media)
+//   full  nested typesets and .not-typeset blocks
 //
 // 38 times body size is about 79 characters of running text in Inter, the
-// widest that stays inside WCAG 1.4.8's 80. The width is worked out on the
-// typeset from its body size, not in ch on each element, so headings and
-// paragraphs share one right edge. Placeholder until the export carries a
-// longform readable-width token.
+// widest that stays inside WCAG 1.4.8's 80; wide is about one and a half
+// times that. Widths are worked out on the typeset rather than in ch on each
+// element, so every child at a width shares one right edge. They are also
+// set on :root, so the classes work outside a formatted typeset.
+//
+// `classes` set a child's width explicitly; they sit at the typeset's
+// specificity and come after its defaults, so they win, and a max-width
+// utility wins over both. Placeholder multiples until the export carries
+// readable-width tokens.
 export const measure = {
-	multiple: 38,
-	breakout: 'breakout',
-	exempt: ['figure', 'img', 'video', 'iframe', 'table', 'pre', '.chart']
+	widths: { text: 38, wide: 56 },
+	wide: ['figure', 'img', 'video', 'iframe', 'table', 'pre', '.chart'],
+	classes: {
+		'width-content': 'text',
+		'width-content-wide': 'wide',
+		'width-content-full': 'full'
+	}
 };
 
 // The .form-* classes, hand-written in `file` (sd/forms.js).

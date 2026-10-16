@@ -197,28 +197,40 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 
 	/* Measure --------------------------------------------------------- */
 
-	// The typeset caps its children, not itself, so block objects, nested
-	// typesets, escaped blocks and breakouts keep the full width.
+	// A typeset caps its children, not itself, so each child takes its own
+	// width: text by default, wide for block objects, and full (no cap) for
+	// nested typesets and escaped blocks. The width properties are worked
+	// out on the typeset from its body size, and on :root from the default
+	// typeset's, so the width classes work anywhere.
 	const { measure: m } = cfg;
-	const measured = typesetClasses.filter((t) => t.measure).map((t) => `.${t.className}`);
-	const exempt = [
-		...m.exempt,
-		`.${cfg.content.escape}`,
-		`.${m.breakout}`,
-		...typesetClasses.map((t) => `.${t.className}`)
-	].join(', ');
+	const measuredClasses = typesetClasses.filter((t) => t.measure);
+	const measured = measuredClasses.map((t) => `.${t.className}`);
+	const widthProperties = (typeset) => {
+		const size = `var(--${cfg.roleClass(typeset.text.role, typeset.text.size)}-font-size)`;
+		return {
+			...Object.fromEntries(
+				Object.entries(m.widths).map(([name, multiple]) => [
+					`--measure-${name}`,
+					`calc(${size} * ${multiple})`
+				])
+			),
+			'--measure-full': 'none'
+		};
+	};
+	const defaultTypeset = cfg.typesets.find((t) => t.isDefault);
+	const full = [`.${cfg.content.escape}`, ...typesetClasses.map((t) => `.${t.className}`)];
+	const children = (filter) => measured.map((s) => `${s} > :where(${filter})`).join(', ');
 	const measureSection = measured.length
 		? section('Measure', [
-				...typesetClasses
-					.filter((t) => t.measure)
-					.map((t) =>
-						rule(`.${t.className}`, {
-							'--readable-width': `calc(var(--${cfg.roleClass(t.text.role, t.text.size)}-font-size) * ${m.multiple})`
-						})
-					),
-				rule(measured.map((s) => `${s} > :where(:not(${exempt}))`).join(', '), {
-					'max-width': 'var(--readable-width)'
-				})
+				rule(':root', widthProperties(defaultTypeset)),
+				...measuredClasses.map((t) => rule(`.${t.className}`, widthProperties(t))),
+				rule(children(`:not(${[...m.wide, ...full].join(', ')})`), {
+					'max-width': 'var(--measure-text)'
+				}),
+				rule(children(m.wide.join(', ')), { 'max-width': 'var(--measure-wide)' }),
+				...Object.entries(m.classes).map(([className, width]) =>
+					rule(`.${className}`, { 'max-width': `var(--measure-${width})` })
+				)
 			])
 		: '';
 

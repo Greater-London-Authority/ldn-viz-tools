@@ -293,30 +293,47 @@ describe('muted colour', () => {
 });
 
 describe('measure', () => {
-	it('caps the children of longform and formatted product, not the typeset itself', () => {
-		for (const typeset of ['typeset-longform', 'typeset-product--formatted']) {
-			expect(css, typeset).toContain(
-				`.${typeset} {\n  --readable-width: calc(var(--body-md-font-size) * 38);\n}`
+	const section = css.slice(css.indexOf('/* Measure */'), css.indexOf('/* Typeset text */'));
+
+	it('sets text and wide as multiples of body size on each formatted typeset and :root', () => {
+		for (const selector of [':root', '.typeset-longform', '.typeset-product--formatted']) {
+			expect(section, selector).toContain(
+				`${selector} {\n  --measure-text: calc(var(--body-md-font-size) * 38);\n  --measure-wide: calc(var(--body-md-font-size) * 56);\n  --measure-full: none;\n}`
 			);
 		}
-		expect(css).toMatch(
-			/\.typeset-longform > :where\(:not\([^)]*\)\)[^{]*\{\n {2}max-width: var\(--readable-width\);/
-		);
-		expect(css).not.toMatch(/\.typeset-product > :where\(:not/);
 	});
 
-	it('lets block objects, nested typesets, escapes and breakouts run full width', () => {
-		const exempt = css.match(/\.typeset-longform > :where\(:not\(([^)]*)\)\)/)[1].split(', ');
+	it('caps running text at text and block objects at wide; nested typesets and escapes are uncapped', () => {
+		const text = section.match(
+			/\.typeset-longform > :where\(:not\(([^)]*)\)\)[^{]*\{\n {2}max-width: var\(--measure-text\);/
+		);
+		expect(text).toBeTruthy();
 		for (const selector of [
 			'figure',
 			'table',
 			'pre',
 			'.chart',
 			'.not-typeset',
-			'.breakout',
 			'.typeset-product'
 		]) {
-			expect(exempt, selector).toContain(selector);
+			expect(text[1].split(', '), selector).toContain(selector);
 		}
+		expect(section).toMatch(
+			/\.typeset-longform > :where\(figure, img, video, iframe, table, pre, \.chart\)[^{]*\{\n {2}max-width: var\(--measure-wide\);/
+		);
+		expect(section).not.toMatch(/\.typeset-product > :where/);
+	});
+
+	it('gives every width a class, after the defaults so it wins', () => {
+		const at = (s) => section.indexOf(s);
+		for (const [name, width] of [
+			['width-content', 'text'],
+			['width-content-wide', 'wide'],
+			['width-content-full', 'full']
+		]) {
+			expect(section, name).toContain(`.${name} {\n  max-width: var(--measure-${width});\n}`);
+			expect(at(`.${name} {`), name).toBeGreaterThan(at('max-width: var(--measure-wide)'));
+		}
+		expect(section).not.toMatch(/\.breakout/);
 	});
 });

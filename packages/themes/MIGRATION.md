@@ -132,7 +132,13 @@ The classes change as follows. These are placeholder mappings until RFC 0002's d
 
 `body-sm`, `label-sm`, `metric-sm` and `eyebrow` keep their names.
 
-`typeset-longform` and `typeset-product--formatted` cap their children at a reading measure of 38 times their body text size (608px at 16px, about 79 characters), as `.prose` capped itself. Figures, charts, tables, code blocks and media run full width; add `.breakout` to any other child that should.
+`.prose` capped its own width. `typeset-longform` and `typeset-product--formatted` cap each of their children instead, at one of three widths:
+
+| Width                        | At 16px body | Default for                                                 | Class                 |
+| ---------------------------- | ------------ | ----------------------------------------------------------- | --------------------- |
+| `--measure-text` (38 × body) | 608px        | running text                                                | `.width-content`      |
+| `--measure-wide` (56 × body) | 896px        | figures, images, video, embeds, tables, code blocks, charts | `.width-content-wide` |
+| `--measure-full`             | no cap       | nested typesets, `.not-typeset`                             | `.width-content-full` |
 
 Content styles for unclassed markup (Markdown, CMS output) now apply inside both `typeset-longform` and `typeset-product`, not only inside `prose`. The escape class is renamed.
 
