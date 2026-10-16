@@ -64,9 +64,10 @@ If nothing changes, the v4 classes from RFC 0002 will be written as more Tailwin
 
   | Output                  | Contains                                                                                                                           | Kind         |
   | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+  | `reset.css`             | Element defaults at zero specificity (`:where()`), for consumers without Tailwind's preflight (workstream 3)                       | Base         |
   | `tokens.css`            | Every custom property: primitives, light mode on `:root`, dark mode on `.dark`, spacing, grid, flow, typography, shadow, elevation | Source       |
   | `system.css`            | Every class the specification names (workstream 3)                                                                                 | Window       |
-  | `index.css`             | Imports `tokens.css` and `system.css`                                                                                              | Convenience  |
+  | `index.css`             | Imports `reset.css`, `tokens.css` and `system.css`, in that order                                                                  | Convenience  |
   | `tailwind`              | The Tailwind preset (workstream 4)                                                                                                 | Window       |
   | `colors.js`             | Resolved colour values for light and dark                                                                                          | Value export |
   | `scss`                  | Sass variables and maps with resolved values                                                                                       | Value export |
@@ -148,11 +149,13 @@ If nothing changes, the v4 classes from RFC 0002 will be written as more Tailwin
   - Style Dictionary also emits one resolved, flat `tokens.json` for tooling. The scripts read that file instead of parsing CSS, so they no longer depend on how CSS files are split or named.
   - `gen_spec.py` writes the blocks the spec now marks.
   - `check_spec.py` checks `system.css` for every class the spec names, instead of checking Tailwind plugins and `tw-extend` usage.
+  - `adr_check.py`, specified in `ADR-LIFECYCLE.md` but not yet written, is added and run with the other checks. `RULES.md` stays hand-written: editing it is the moment someone restates a decision as a rule, and that friction is a useful check. The script catches the structural drift: front matter, symmetric links, statuses against folders, the amendment limit, and every live ADR cited in `RULES.md`.
+  - `check_spec.py` also checks every class `RULES.md` names against `system.css`, which catches the content drift the citation check can't. `RULES.md` names the default flow utility `.mt-flow`, for example, while the generator and markup use `.mt-flow-default`.
   - `SPEC-CHANGE-PROTOCOL.md` names `lcd-ds.tokens.json`, and settles whether `packages/themes/styles/` is committed or stays gitignored (see open questions).
 - **Why it has to break.** The files the scripts read are removed in workstream 2.
-- **Affected surface.** `scripts/spec_common.py`, `gen_spec.py`, `check_spec.py`, `verify_build.py`, `governance/SPEC-CHANGE-PROTOCOL.md`, `packages/themes/.gitignore`.
+- **Affected surface.** `scripts/spec_common.py`, `gen_spec.py`, `check_spec.py`, `verify_build.py`, `scripts/adr_check.py` (new), `governance/SPEC-CHANGE-PROTOCOL.md`, `packages/themes/.gitignore`.
 - **Migration.** None outside the team.
-- **Change-sets.** (1) Tooling JSON output. (2) Scripts. (3) Protocol.
+- **Change-sets.** (1) Tooling JSON output. (2) Scripts. (3) `adr_check.py`. (4) Protocol.
 - **ADRs this produces.** None. Process changes go in governance, not ADRs ([writing documentation](../writing-documentation.md)).
 
 ## Sequencing

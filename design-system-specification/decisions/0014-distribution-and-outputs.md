@@ -28,9 +28,10 @@ pr_url: ''
 
   | Output                  | Contains                                                  | Kind         |
   | ----------------------- | --------------------------------------------------------- | ------------ |
+  | `reset.css`             | Element defaults at zero specificity                      | Base         |
   | `tokens.css`            | Every custom property; light on `:root`, dark on `.dark`  | Source       |
   | `system.css`            | Every class the specification names                       | Window       |
-  | `index.css`             | Imports `tokens.css` and `system.css`                     | Convenience  |
+  | `index.css`             | Imports `reset.css`, `tokens.css` and `system.css`        | Convenience  |
   | `tailwind`              | The Tailwind preset                                       | Window       |
   | `colors.js`             | Resolved colour values for light and dark                 | Value export |
   | `scss`                  | Sass variables and maps with resolved values              | Value export |
