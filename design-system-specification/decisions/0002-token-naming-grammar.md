@@ -24,8 +24,8 @@ Consistent naming grammar for design tokens should be clear and logical. Keep it
 ## Decision
 
 - **Two tiers:** primitive → semantic. Primitives hold values. Semantic tokens say what a value is for. Components use semantic tokens only, never primitives or raw values.
-  - Primitives carry the `primitive-` prefix and are named by their value.
-    --primitive-typography-font-size-14 · --primitive-typography-font-weight-semi-bold · --primitive-spacing-4 (4 × 4px)
+  - Primitives carry the `primitive-` prefix and are named by their value, or by their step on a scale.
+    --primitive-typography-scale-14 (step 14, 72px) · --primitive-typography-font-weight-semi-bold · --primitive-spacing-4 (4 × 4px)
   - Semantic tokens drop the tier segment (it is inferred after being output from Figma), and are named by their role, never by value or component.
     `title` (role), not 20 (value) and not card-panel-title (component).
 - **One grammar for every token, general to specific:** `(tier) → category → variant → concept → role → emphasis → state → property/value`. Segments that don't apply are left out; the rest never change order.

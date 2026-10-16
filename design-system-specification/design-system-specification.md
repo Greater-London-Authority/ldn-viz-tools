@@ -311,11 +311,79 @@ Line height is defined in three steps based on a simple formula: `font-size + k`
 #### typeset-longform full matrix
 
 <!-- GEN:longform-matrix START -->
+
+| Role          | base  | sm    | md    | lg    | xl    | Weight |
+| ------------- | ----- | ----- | ----- | ----- | ----- | ------ |
+| `display-sm`  | 32/40 | 36/44 | 40/48 | 48/56 | 56/64 | 700    |
+| `display-md`  | 36/44 | 40/48 | 48/56 | 56/64 | 64/72 | 700    |
+| `display-lg`  | 40/48 | 48/56 | 56/64 | 64/72 | 72/80 | 700    |
+| `headline-sm` | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 700    |
+| `headline-md` | 28/36 | 28/36 | 30/38 | 30/38 | 30/38 | 700    |
+| `headline-lg` | 30/38 | 32/40 | 36/44 | 36/44 | 40/48 | 700    |
+| `subhead-sm`  | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
+| `subhead-md`  | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 400    |
+| `subhead-lg`  | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 400    |
+| `title-sm`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
+| `title-md`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
+| `title-lg`    | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 600    |
+| `subtitle-sm` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
+| `subtitle-md` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
+| `subtitle-lg` | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
+| `body-sm`     | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 400    |
+| `body-md`     | 16/28 | 16/28 | 16/28 | 16/28 | 16/28 | 400    |
+| `body-lg`     | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
+| `label-sm`    | 12/20 | 12/20 | 12/20 | 12/20 | 12/20 | 500    |
+| `label-md`    | 14/22 | 14/22 | 14/22 | 14/22 | 14/22 | 500    |
+| `label-lg`    | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 500    |
+| `metric-sm`   | 20/24 | 20/24 | 20/24 | 20/24 | 20/24 | 700    |
+| `metric-md`   | 24/28 | 24/28 | 24/28 | 24/28 | 24/28 | 700    |
+| `metric-lg`   | 28/32 | 30/34 | 32/36 | 32/36 | 36/40 | 700    |
+| `caption-sm`  | 12/16 | 12/16 | 12/16 | 12/16 | 12/16 | 400    |
+| `caption-md`  | 14/18 | 14/18 | 14/18 | 14/18 | 14/18 | 400    |
+| `caption-lg`  | 16/20 | 16/20 | 16/20 | 16/20 | 16/20 | 400    |
+| `eyebrow`     | 14/18 | 14/18 | 14/18 | 14/18 | 14/18 | 500    |
+
+_Font size / line height in px. Breakpoints: base <640, sm ≥640, md ≥768, lg ≥1024, xl ≥1280._
+
 <!-- GEN:longform-matrix END -->
 
 #### typeset-product full matrix
 
 <!-- GEN:product-matrix START -->
+
+| Role          | base  | sm    | md    | lg    | xl    | Weight |
+| ------------- | ----- | ----- | ----- | ----- | ----- | ------ |
+| `display-sm`  | 32/40 | 36/44 | 40/48 | 48/56 | 56/64 | 700    |
+| `display-md`  | 36/44 | 40/48 | 48/56 | 56/64 | 64/72 | 700    |
+| `display-lg`  | 40/48 | 48/56 | 56/64 | 64/72 | 72/80 | 700    |
+| `headline-sm` | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 700    |
+| `headline-md` | 28/36 | 28/36 | 30/38 | 30/38 | 30/38 | 700    |
+| `headline-lg` | 30/38 | 32/40 | 36/44 | 36/44 | 40/48 | 700    |
+| `subhead-sm`  | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
+| `subhead-md`  | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 400    |
+| `subhead-lg`  | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 400    |
+| `title-sm`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
+| `title-md`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
+| `title-lg`    | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 600    |
+| `subtitle-sm` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
+| `subtitle-md` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
+| `subtitle-lg` | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
+| `body-sm`     | 14/22 | 14/22 | 14/22 | 14/22 | 14/22 | 400    |
+| `body-md`     | 16/24 | 16/24 | 16/24 | 16/24 | 16/24 | 400    |
+| `body-lg`     | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
+| `label-sm`    | 12/20 | 12/20 | 12/20 | 12/20 | 12/20 | 500    |
+| `label-md`    | 14/22 | 14/22 | 14/22 | 14/22 | 14/22 | 500    |
+| `label-lg`    | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 500    |
+| `metric-sm`   | 20/24 | 20/24 | 20/24 | 20/24 | 20/24 | 700    |
+| `metric-md`   | 24/28 | 24/28 | 24/28 | 24/28 | 24/28 | 700    |
+| `metric-lg`   | 28/32 | 30/34 | 32/36 | 32/36 | 36/40 | 700    |
+| `caption-sm`  | 12/16 | 12/16 | 12/16 | 12/16 | 12/16 | 400    |
+| `caption-md`  | 14/18 | 14/18 | 14/18 | 14/18 | 14/18 | 400    |
+| `caption-lg`  | 16/20 | 16/20 | 16/20 | 16/20 | 16/20 | 400    |
+| `eyebrow`     | 14/18 | 14/18 | 14/18 | 14/18 | 14/18 | 500    |
+
+_Font size / line height in px. Breakpoints: base <640, sm ≥640, md ≥768, lg ≥1024, xl ≥1280._
+
 <!-- GEN:product-matrix END -->
 
 ### Usage Aliases
@@ -329,6 +397,37 @@ Aliases are named `{place}-{part}`, for example: `.card-title`, `.chart-tick`, `
 The set of aliases is defined in the `usage` style set in Figma. Adding an alias to be output from the system requires a recorded decision.
 
 <!-- GEN:alias-table START -->
+
+| Alias                         | Role           | Adds                           |
+| ----------------------------- | -------------- | ------------------------------ |
+| `.chart-title`                | `.title-sm`    |                                |
+| `.chart-subtitle`             | `.subtitle-sm` | muted colour                   |
+| `.chart-axis-title`           | `.label-md`    | muted colour                   |
+| `.chart-label`                | `.label-md`    |                                |
+| `.chart-tick`                 | `.caption-md`  | tabular numerals, muted colour |
+| `.chart-tick-sm`              | `.caption-sm`  | tabular numerals, muted colour |
+| `.chart-note`                 | `.caption-sm`  |                                |
+| `.table-title`                | `.title-sm`    |                                |
+| `.table-subtitle`             | `.subtitle-sm` | muted colour                   |
+| `.table-col-head`             | `.label-md`    | tabular numerals               |
+| `.table-col-head-sm`          | `.label-sm`    | tabular numerals               |
+| `.table-cell`                 | `.body-sm`     | tabular numerals               |
+| `.dashboard-main-title`       | `.headline-md` |                                |
+| `.dashboard-main-subtitle`    | `.subhead-md`  | muted colour                   |
+| `.dashboard-section-title`    | `.headline-sm` |                                |
+| `.dashboard-section-subtitle` | `.subhead-sm`  | muted colour                   |
+| `.header-title`               | `.title-sm`    |                                |
+| `.sidebar-title`              | `.title-sm`    |                                |
+| `.dialog-title`               | `.label-lg`    |                                |
+| `.card-title`                 | `.title-sm`    |                                |
+| `.card-subtitle`              | `.subtitle-sm` | muted colour                   |
+| `.hint-text`                  | `.caption-sm`  |                                |
+| `.input-label`                | `.label-md`    |                                |
+| `.placeholder`                | `.body-sm`     |                                |
+| `.field-value`                | `.body-sm`     |                                |
+| `.button-label`               | `.label-md`    |                                |
+| `.button-label-sm`            | `.label-sm`    |                                |
+
 <!-- GEN:alias-table END -->
 
 ### Title Groups
@@ -365,6 +464,29 @@ Space does one of two jobs. Space that builds a component, such as padding or
 an indent, uses the spacing scale. Space between blocks of content uses [flow](#flow) and changes with its context.
 
 <!-- GEN:spacing-table START -->
+
+| Token           | px  | rem       |
+| --------------- | --- | --------- |
+| `--spacing-1`   | 4   | 0.25rem   |
+| `--spacing-2`   | 8   | 0.5rem    |
+| `--spacing-3`   | 12  | 0.75rem   |
+| `--spacing-4`   | 16  | 1rem      |
+| `--spacing-5`   | 20  | 1.25rem   |
+| `--spacing-6`   | 24  | 1.5rem    |
+| `--spacing-7`   | 28  | 1.75rem   |
+| `--spacing-8`   | 32  | 2rem      |
+| `--spacing-10`  | 40  | 2.5rem    |
+| `--spacing-12`  | 48  | 3rem      |
+| `--spacing-14`  | 56  | 3.5rem    |
+| `--spacing-16`  | 64  | 4rem      |
+| `--spacing-20`  | 80  | 5rem      |
+| `--spacing-24`  | 96  | 6rem      |
+| `--spacing-px`  | 1   | 0.0625rem |
+| `--spacing-0-5` | 2   | 0.125rem  |
+| `--spacing-1-5` | 6   | 0.375rem  |
+| `--spacing-2-5` | 10  | 0.625rem  |
+| `--spacing-3-5` | 14  | 0.875rem  |
+
 <!-- GEN:spacing-table END -->
 
 ## Flow
@@ -380,6 +502,16 @@ Flow spaces only the direct children of its context, and each child gets the `de
 A component that declares its own flow context or spacing is sealed: the flow around it stops at its edge. A component keeps its density wherever it is placed only if it declares its own context.
 
 <!-- GEN:flow-table START -->
+
+| Step      | Utility            | spacious | standard | compact |
+| --------- | ------------------ | -------- | -------- | ------- |
+| `tight`   | `.mt-flow-tight`   | 4        | 4        | 4       |
+| `default` | `.mt-flow`         | 16       | 8        | 4       |
+| `loose`   | `.mt-flow-loose`   | 24       | 16       | 8       |
+| `section` | `.mt-flow-section` | 40       | 24       | 8       |
+
+_Values in px._
+
 <!-- GEN:flow-table END -->
 
 ## Elevation
