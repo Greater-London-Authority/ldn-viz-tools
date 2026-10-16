@@ -1,93 +1,49 @@
-# Token architecture & naming
+# Design tokens
 
-Distilled from _token-architecture-and-naming.md_, the spec's _Primitive Scale_,
-_Generative Logic_, _Line Height Scale_, and _Extending the System_. The naming
-doc is the canonical reference for exact keys.
+Spec section: Design Tokens. ADRs: [0002](../../../../design-system-specification/decisions/0002-token-naming-grammar.md), [0013](../../../../design-system-specification/decisions/0013-token-export-and-parsing.md), [0014](../../../../design-system-specification/decisions/0014-distribution-and-outputs.md).
 
-## Two tiers (the third was fiction)
+## Tiers
 
-**Primitive → Semantic.** Components bind to **semantic only** — never primitives,
-never raw hex. The primitive layer is the closed, finite part (17 font-size steps,
-4 weights, one spacing scale, the palette); the semantic layer above is open-ended
-and meant to grow.
+There are two tiers. A primitive has a value and is named by that value or by its step on a scale: `--primitive-spacing-4`, `--primitive-typography-scale-0`. A semantic token is named by its role: `--color-border`, `--flow-standard-loose`.
 
-## Build pipeline
+Components and pages use semantic tokens, or classes built on them. Never use a `--primitive-*` token or a raw value in authored code. `.text-strong` and `.text-soft` in `system.css` bind font-weight primitives, as system code; don't copy that pattern.
 
-Style Dictionary builds emitted output from token source:
-`packages/themes/tokens/design-tokens.tokens.json` + `sd.config.json` + `sd.build.js`
-→ `packages/themes/styles/{tokens,system,index}.css`, `styles/colors.js`, `styles/tw-extend/*.cjs`.
-`outputReferences: true` is on for typography, so aliases emit as `var(...)`
-references rather than restated values. The Tailwind plugin in
-`tailwind-custom/typography/*.cjs` consumes the emitted primitives to build role
-utilities and contexts.
+The Figma export has a `semantic` segment. The build removes it, so `semantic/flow/spacious/section` becomes `--flow-spacious-section`.
 
-## Primitive font-size scale (17 steps, step 0 = 16px)
+## Grammar
 
-Two-region: a doubling-chain upper half (12→24→48, 14→28→56, 16→32→64, 18→36,
-20→40) + a dense near-constant-ratio lower half (12→14→16→18→20→22→24→26→28→30→32).
-Hand-placed exceptions: 22, 26, 30, 76. Steps −2…14 = 12,14,16,18,20,22,24,26,28,
-30,32,36,40,48,56,64,76.
+Every token name uses the same segments in the same order, leaving out those that don't apply:
 
-## Line-height — two policies by role
+`(tier) → category → variant → concept → role → emphasis → state → property/value`
 
-- **Grid leading** (most roles): rounded to the 4px grid. A _reference for
-  authoring_, not a cascade participant — emitted line-height is a computed
-  **unitless ratio**, never a `var()` to a px value.
-- **Reading leading** (prose body only): `prose body` 16→26 (1.625),
-  `prose body-sm` 14→22 (1.571). Product `body`/`body-sm` keep grid leading
-  (24/20) for denser UI. The three aliased chart object roles reference their
-  product source for line-height too.
+| Category | Pattern | Example |
+| --- | --- | --- |
+| Typography | `--typography-{breakpoint}-{typeset}[-{role}][-{size}]-{property}` | `--typography-base-product-title-md-font-size` |
+| Colour | `--color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}]` | `--color-interactive-primary-muted-hover` |
+| Spacing | `--spacing-{value}` | `--spacing-4` |
+| Flow | `--flow-{context}[-{step}]` | `--flow-spacious-loose` |
+| Grid | `--grid-{breakpoint}-{layout}-{property}` | `--grid-md-contained-gutter` |
+| Shadow | `--shadow[-{value}]` | `--shadow-md` |
+| Elevation | `--elevation-{value}` | `--elevation-1` |
 
-## Weights (Inter, 4 weights, named not numeric)
+Each segment has a fixed list of values, in the spec's Segment values table. A new value needs a spec change.
 
-`--primitive-typography-font-weight-{regular|medium|semi-bold|bold}` = 400/500/600/700.
-Note the emitted spelling **`semi-bold`** (hyphenated) — there is no `-semibold`.
-Identity weight is bundled into a role; emphasis weight rides on top
-(`.text-strong`/`.text-soft`). See `references/typography.md`.
+When a token has two variants, breakpoint or scope comes first, then typeset, flow context, layout or inverse: `--color-inverse-chart-axis`, `--grid-md-contained-gutter`.
 
-## Semantic typography keys
+A default value is dropped when nothing follows it. `--color-border` is the default border colour, and `--flow-standard` is the default step of the standard context. A typeset, flow context or role size is always written: `title-md`, never `title`.
 
-Roles are keyed by **context family** — `Product/*`, `Prose/*`, `Chart/*` — with
-no cross-mixing (the context prefix dictates the family). Exact role keys live in
-the naming doc §"Roles by family". Object-tier chart roles alias product roles
-(`chart/title` → `product/title`) — the only semantic→semantic aliasing; everything
-else aliases primitives.
+Names are lowercase kebab-case. Fractional steps use a hyphen: `--spacing-0-5`.
 
-## Runtime resolution — `tokenNameToValue`
+`--color-interactive-disabled-muted` puts state before emphasis. It is the one accepted exception.
 
-`packages/utils/src/colors/tokenNameToValue.ts`. Walks a dotted path (`chart.surface`,
-`data.primary`) against a theme tree, with a `.default` fallback per segment:
+## Role properties
 
-```
-for part of name.split('.'):
-  if val[part]            -> descend
-  else if val.default?.[part] -> descend via default
-  else                    -> console.error + return undefined   // guarded; does NOT throw
-```
+`system.css` copies each typography token onto a short name for the current typeset and breakpoint: `--title-md-font-size`, `--body-md-line-height`. Role classes, usage aliases and the hand-written content and form styles use these short names. They aren't tokens, and aren't in `tokens.json`.
 
-Exposed as `theme.tokenNameToValue(name)` and `theme.currentTheme`
-(`packages/ui/src/lib/theme/themeState.svelte.ts`), where `currentTheme` is
-`color-tokens.js`'s `mode[light|dark]`. **Validate a path** against
-`packages/themes/styles/colors.js` → `mode.light`.
+## Usage aliases
 
-> History: it previously threw on a missing `.default`, which blanked whole charts.
-> Now it degrades. Don't rely on the throw; a missing token = wrong/absent value
->
-> - a console error.
+Usage aliases are classes named for where they are used, such as `.card-title` and `.chart-tick`. Each points to a role. They are allowed to name a component because they are classes, not tokens. They come from the `usage` style set in Figma (`tokens/lcd-ds-usage.tokens.json`). The list is in [typography.md](typography.md).
 
-## Extending the system (work in order before adding anything)
+## Reading a value
 
-1. Assume it's a **naming** problem, not a missing token — check the UI→role mapping.
-2. Decide **size gap vs axis gap** — most gaps are an existing role at a different
-   weight/colour, not a new size.
-3. If genuinely a new size, the 17 steps already contain it — assign a role.
-4. A new role must earn a **one-sentence job** ("the h3 depth in prose"). "Like
-   Body but bigger" is emphasis/context, not a role.
-5. Add at the **semantic layer, once, centrally** — never a new primitive step for
-   a single-surface need.
-6. Name in the context's register: product roles are **structural/generic**
-   (`Title`, not `CardTitle`); chart roles are **anatomical/specific** (`Chart Tick`).
-   A new _family_ needs both divergent values AND standalone consumption (chart passes; most don't).
-
-To change the spec itself, follow `design-system-specification/SPEC-CHANGE-PROTOCOL.md`
-(and log rulings in `DECISIONS.md`).
+`styles/tokens.json` has every token, keyed by its custom property name. Each entry has `value`, `type`, `path`, `references` and, for colours, `dark`. Use it to check a value rather than reading `tokens.css`.

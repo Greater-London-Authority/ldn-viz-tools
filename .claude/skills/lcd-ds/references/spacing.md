@@ -1,73 +1,26 @@
 # Spacing
 
-Distilled from the spec's _Spacing Scale_. Emitted: `packages/themes/styles/tokens.css`
-(+ `tw-extend/spacing.cjs`). Independent of the type scale.
+Spec section: Spacing. ADR: [0004](../../../../design-system-specification/decisions/0004-spacing.md).
 
-## The numbered scale (what authors use)
+## The scale
 
-The index encodes the multiplier of a 4px unit: `--spacing-4` = 4×4 = 16px.
-Tailwind utilities compile to the alias: **`mt-{n}` → `margin-top: var(--spacing-{n})`**,
-so `mt-4` = 16px, `p-2` = 8px. Fractional sub-steps keep Tailwind's dot on the
-class: `mt-1.5` → `var(--spacing-1-5)` (6px).
+`--spacing-{n}` is `n` × 4px. `--spacing-4` is 16px.
 
-Common rungs: 1=4, 2=8, 3=12, 4=16, 5=20, 6=24, 7=28, 8=32, 9=36, 10=40, 11=44,
-12=48, 14=56, 16=64, 20=80, 24=96 … up to 96=384. Sub-steps: `px`=1, `0.5`=2,
-`1.5`=6, `2.5`=10, `3.5`=14.
+| Steps | Values |
+| --- | --- |
+| Whole | 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 20, 24 (4px to 96px) |
+| Half and pixel | `px` (1px), `0-5` (2px), `1-5` (6px), `2-5` (10px), `3-5` (14px) |
 
-## Two tiers — never bind the private one
+Each `--spacing-{n}` references `--primitive-spacing-{n}`. Use the semantic token, never the primitive.
 
-- **`--primitive-spacing-{n}`** — the private source (the one place a value is
-  defined). Only `flow`, `grid-spacing`, and the `--spacing-{n}` alias reference it.
-- **`--spacing-{n}`** — a thin public alias, a pure `var(--primitive-spacing-{n})`
-  reference (the colour `outputReferences` pattern). **Authored code and components
-  bind here (via `mt-{n}` etc.), never to `--primitive-*`.**
+In Tailwind, the preset maps these steps to `var(--spacing-{n})`, so `p-4` and `gap-2` use the scale. Half steps keep Tailwind's dot: `mt-1.5`. Tailwind's own steps that aren't on the scale, such as `9`, `11` and anything above `24`, still work and aren't tokens. Don't use them.
 
-There is deliberately **no** named spacing-role set beyond `flow` (vertical rhythm)
-and `grid-spacing` (layout structure). A numbered alias carries no decision and is
-free; a named role must earn a one-sentence job those two don't cover.
+## Spacing or flow
 
-## Which system for which job
+Space inside a component, such as padding, a border or an indent, uses the spacing scale. Space between blocks of content uses [flow](flow.md), which changes with the context.
 
-Three owners. The test is **ownership**, not the gap's appearance:
+To decide, ask whether the children are a stack of blocks or parts of one structure. A card's contents and a form's fields are stacks, so they use flow. A table's cells and a row of buttons are structure, so they use spacing.
 
-> **Does this gap exist because two things sit next to each other, or because one
-> thing has an inside?**
+Horizontal space is never flow. The gap between tiled cards is a grid gutter ([layout-grid.md](layout-grid.md)). The gap between a button's icon and its label is spacing.
 
-- **Vertical, between stacked siblings** → the **stack** owns it → a `flow` rung
-  (`mt-flow-{rung}` / `gap-flow-{rung}`). See `references/flow.md`.
-- **Horizontal, between tiled objects** (cards in a grid, side-by-side panels) →
-  the **grid** owns it → `.grid-gutter` / `.grid-gutter-fluid`, **not** a hardcoded
-  `gap-{n}`. See `references/layout-grid.md`.
-- **Inside a component's box** — padding, border widths, list indents, cell padding
-  → the **component** owns it → `--spacing-{n}` / `p-{n}` / `mt-{n}`.
-
-Shorter form: **if the children are a stack of blocks it's flow; if they're a
-structure it's construction.** A card's contents stack; a form's fields stack. A
-table's cells don't; a button row doesn't.
-
-This supersedes the older _rhythm-vs-construction_ gate, which asked for a judgement
-about a gap's _nature_ and proved unanswerable in practice.
-
-**Construction shortlist.** Real usage across `packages/ui/src` concentrates almost
-entirely on five rungs — `4` (16px), `2` (8px), `6` (24px), `1` (4px), `8` (32px).
-Reach for these first; anything outside the set is usually a flow gap in disguise,
-or an alignment value that should derive from the element it aligns to.
-
-Line-height governs space _within_ a text block; spacing tokens govern space
-_between_ elements. Whitespace around text uses the spacing scale, not the
-font-size/line-height primitives.
-
-## Retired: the t-shirt scale (migration mapping)
-
-The old `--spacing-{xxs…9xl}` and the em-relative `--typography-spacing-*` are
-**retired** — neither is emitted. Every value was an exact rung, so migration is a
-rename-by-alias (no re-scaling):
-
-```
-xxs→1  xs→2  sm→3  md→4  lg→5  xl→6  2xl→7  3xl→8  4xl→10  5xl→12  6xl→14  7xl→16  8xl→20  9xl→24
-```
-
-`--typography-spacing-*` was construction spacing (padding/borders), so it maps to
-numbered `--spacing-{n}` (NOT to `flow`). E.g. `!my-typography-spacing-sm` →
-`!my-3`; `pt-typography-spacing-4xl` → `pt-10`. Full migration recipe (and the
-"scope class removals to `class=` attributes" footgun): `references/migration.md`.
+There are no named spacing sets apart from flow and the grid.

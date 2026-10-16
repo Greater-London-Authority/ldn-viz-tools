@@ -1,87 +1,93 @@
-# Migrating a package to the new system
+# Migration
 
-How to sweep a package (e.g. `apps/web`, a component library) off retired classes
-and renamed tokens onto the current lcd-ds. Records the mappings AND the footguns
-learned doing it — several are not obvious.
+[packages/themes/MIGRATION.md](../../../../packages/themes/MIGRATION.md) is the full v3 to v4 guide for `@ldn-viz/themes` 10, including imports, every token rename and the type scale primitives. This file has the class mappings used most often, the older retired names, and how to migrate a component.
 
-## 1. Retired spacing classes → numbered scale
+The design review in RFC 0002 may change a few of the class mappings. The structure and names on the right-hand side are set by the spec.
 
-`--typography-spacing-*` and the t-shirt `--spacing-{xxs…9xl}` are **not emitted**.
-Rename-by-alias (exact rungs, no re-scaling), preserving the utility prefix:
+## Imports
 
-```
-xxs→1  xs→2  sm→3  md→4  lg→5  xl→6  2xl→7  3xl→8  4xl→10  5xl→12  6xl→14  7xl→16  8xl→20  9xl→24
-```
+The nine old stylesheet imports become `@import '@ldn-viz/themes/index.css';`. The Tailwind preset is `require('@ldn-viz/themes/tailwind')`. `styles/tw-extend/*`, `tailwind-custom/*`, `ldn-theme.cjs` and `styles/js/color-tokens.js` are gone; `colors.js` replaces the last.
 
-`{prefix}-typography-spacing-{size}` → `{prefix}-{n}`. E.g. `!my-typography-spacing-sm`
-→ `!my-3`; `pt-typography-spacing-4xl` → `pt-10`.
+## Typography classes
 
-## 2. Retired typography role classes → new roles
+| v3 | v4 |
+| --- | --- |
+| `prose`, `prose flow-prose` | `typeset-longform` |
+| `product` | `typeset-product` |
+| `product` around Markdown or CMS output | `typeset-product--formatted` |
+| `chart` as a type context | `typeset-product`, with the `chart-*` aliases |
+| `not-prose` | `not-typeset`, or nothing beside a typeset class |
+| `display`, `headline`, `subhead` | `display-lg`, `headline-lg`, `subhead-lg` |
+| `title-1`, `title-2` | `headline-lg`, `headline-sm` |
+| `title-3`, `title-4` | `title-lg`, `title-md` |
+| `page-head`, `section-head` | `headline-md`, `title-lg` |
+| `title`, `subtitle` | `title-sm`, `subtitle-sm` |
+| `lead` | `body-lg text-color-text-muted` |
+| `body`, `label`, `caption` | `body-md`, `label-md`, `caption-sm` |
+| `metric` | `metric-lg` |
+| `label-tight`, `label-sm-tight` | `label-md leading-none`, `label-sm leading-none` |
+| `axis-title`, `tick`, `tick-sm` | `chart-axis-title`, `chart-tick`, `chart-tick-sm` |
 
-Old t-shirt roles are gone (defined in 0 theme files). Size-rank mapping preserves
-the visual hierarchy:
+`body-sm`, `label-sm`, `metric-sm` and `eyebrow` keep their names.
 
-| Old        | New       |     | Old                     | New        |
-| ---------- | --------- | --- | ----------------------- | ---------- |
-| `title-lg` | `title-1` |     | `body-lg`               | `lead`     |
-| `title-md` | `title-2` |     | `body-md`               | `body`     |
-| `title-sm` | `title-3` |     | `body-xs`               | `caption`  |
-| `title-xs` | `title-4` |     | `label-lg` / `label-md` | `label`    |
-|            |           |     | `label-xs`              | `label-sm` |
+The retired `.prose` class capped its own width. The v4 typesets cap each child instead (see the measure in [typography.md](typography.md)).
 
-`body-sm` / `label-sm` are valid new roles — leave them. Dead helpers: **`format`**
-(undefined) and **`.responsive`** (no-op — scaling is automatic) should be removed.
+## Flow
 
-## 3. Renamed tokens
+| v3 | v4 |
+| --- | --- |
+| `.flow-prose`, `--flow-prose-*` | `.flow-spacious`, `--flow-spacious-*` |
+| `.flow-product`, `--flow-product-*` | `.flow-standard`, `--flow-standard-*` |
+| `--flow-{context}-default` | `--flow-{context}` |
+| `.mt-flow-default`, `.gap-flow-default` | `.mt-flow`, `.gap-flow` |
 
-- **`chart.background` → `chart.surface`** — token path AND CSS var
-  (`--color-chart-background` → `--color-chart-surface`). Update
-  `theme.tokenNameToValue('chart.background')` calls and any `--color-chart-background`.
-- **`data.categorical.grey` is gone** — the categorical palette dropped grey
-  (now blue, darkpink, pink, red, yellow, green, purple, orange, turquoise). For a
-  neutral/no-data swatch use **`data.empty`**.
-- Always validate a path against `packages/themes/styles/colors.js` → `mode.light`.
+Values are unchanged.
 
-## 4. The context-wrapper catch (biggest gotcha)
+## Colour and grid
 
-Renaming role classes is **not sufficient on its own**. Role utilities only size
-inside a `.prose`/`.product`/`.chart` **ancestor** (selector `.{context} .{role}`).
-`flow-prose`/`flow-product` provide rhythm, NOT the type vars. A package with no
-context wrapper (e.g. `apps/web` today) needs `.prose` around article/markdown
-content and `.product` around chrome (ToC, banners, cards) for any role class —
-old or new — to resolve. Treat renames-without-wrappers as a staging step, not a
-working state, and say so.
+| v3 | v4 |
+| --- | --- |
+| `--color-container` | `--color-surface` |
+| `--color-container-level-{1,2,3}` | `--color-surface-muted` |
+| `--color-inverse-container[-level-*]` | `--color-inverse-surface[-muted]` |
+| `--color-chart-inverse-*` | `--color-inverse-chart-*` |
+| `--color-geo-inverse-*` | `--color-inverse-geo-*` |
+| `--grid-spacing-{bp}-*` | `--grid-{bp}-*` |
 
-## 5. Tooling footguns (verified the hard way)
+The three container levels become one, so stacked levels need another way to separate them, such as a border. The same renames apply to Tailwind colour classes, such as `bg-color-surface-muted`, and to `colors.js` keys: `surface.muted`, `inverse.chart.*`.
 
-- **BSD/macOS `sed` has no `\b`.** Use `perl` for word-boundary substitutions.
-- **Never word-remove a common token globally.** Stripping `format` repo-wide
-  broke `import { format } from 'd3-format'` and prose ("non web format"). Scope
-  class edits to attributes only:
-  ```
-  perl -0777 -i -pe 's{class="([^"]*)"}{ "class=\"" . join(" ",
-    grep { $_ ne "format" && $_ ne "responsive" && length } split(/\s+/, $1)) . "\"" }ge' <files>
-  ```
-  Role/spacing renames are safe global (hyphenated tokens don't collide with JS/prose).
-- **`find | while read` breaks on spaces in paths** (e.g. `SwatchGrid copy.svelte`).
-  Use `find -print0 | xargs -0 …` or `-print0 | while IFS= read -r -d ''`.
-- **`.postcss`/`.css` `@apply` of a retired class is a hard build error**; the same
-  class in plain markup only renders dead (no error). The build flags the former.
-- **`.md`/`.svelte` template-literal classes** (`class={`…`}`) and specimen data
-  values (`class: 'title-sm'`) need handling too, not just `class="…"`.
+## Older retired names
 
-## 6. Rebuild what's consumed via dist
+These were retired before v4 and still appear in a few files.
 
-After editing source in `@ldn-viz/{charts,ui,utils}`, rebuild it
-(`npm run build -w @ldn-viz/<pkg>`; `utils` before `charts`/`ui`) so consumers see
-it. The `themes` Tailwind plugin is source-consumed but needs a **dev-server
-restart** (Tailwind reads config at load). Then verify: build the app
-(`npm run build -w @ldn-viz/<app>`) and grep that no retired class/token remains.
+| Retired | Replacement |
+| --- | --- |
+| `--spacing-{xxs…9xl}` | `xxs→1 xs→2 sm→3 md→4 lg→5 xl→6 2xl→7 3xl→8 4xl→10 5xl→12 6xl→14 7xl→16 8xl→20 9xl→24` |
+| `{prefix}-typography-spacing-{size}` | `{prefix}-{n}` from the same map, so 4xl padding becomes `pt-10` |
+| `chart.background`, `--color-chart-background` | `chart.surface`, `--color-chart-surface` |
+| `data.categorical.grey` | `data.empty` |
+| `format`, `responsive` classes | Remove |
 
-## 7. Verify
+## Migrating a component
 
-```
-grep -rnE "typography-spacing-|\b(title|body|label)-(xs|md|lg)\b" src   # → none
-grep -rnoE 'class="[^"]*\b(format|responsive)\b' src                     # → none
-# validate every tokenNameToValue path resolves against color-tokens.js mode.light
-```
+1. Text. Choose each role by what the text does, not by its current size. `text-sm` is `label-md` on a button and `body-sm` on helper text. Remove `text-*`, `font-*` and `leading-*` utilities that sit beside a role. If a role changes the size, record the before and after.
+2. Typeset. Make sure the component, or a container above it, has a typeset class.
+3. Vertical space. If the children are a stack of blocks, use a flow context and let the rules set the steps; use `mt-flow-*` only to override. If they are parts of one structure, keep spacing-scale utilities.
+4. Horizontal space. Always spacing, or a grid gutter between tiled items.
+5. Off-scale values. Snap `p-[15px]` and similar to the nearest spacing step, and record it.
+6. Corners. Remove `rounded-*` unless the element is round.
+7. Elevation. Replace `shadow-*` with the matching `elevation-*` class (see [elevation.md](elevation.md)).
+8. Colour. Replace palette and hex colours with semantic tokens.
+
+If no role fits, stop and ask rather than guessing.
+
+Report every class change, every size change, how each spacing utility was classified, and anything left unmapped.
+
+## Checking a sweep
+
+- Use `perl` for word-boundary replacements. BSD `sed` on macOS has no `\b`.
+- Limit class renames to `class` attributes when the old name is a common word. A global removal of `format` once broke `import { format } from 'd3-format'`.
+- Check `class={…}` template literals and class names in data, not only `class="…"`.
+- An `@apply` of a removed class fails the build. The same class in markup fails silently.
+- Use `find -print0 | xargs -0`, because some paths contain spaces.
+- Rebuild the packages you changed (see SKILL.md), then grep for the old names.

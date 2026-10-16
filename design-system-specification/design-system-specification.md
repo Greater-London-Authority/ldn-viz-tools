@@ -538,6 +538,18 @@ representative: they are built to look right, not to be accurate to the data.
 Chart text uses the product typeset roles or the usage aliases. Chart colours
 use the `data` and `chart` colour tokens.
 
+Series take `--color-data-primary`, `--color-data-secondary` and
+`--color-data-tertiary`, in that order. These are the blue, dark pink and orange
+of the categorical palette, chosen to be told apart easily in light and dark
+mode. To highlight one series against the rest, use `--color-data-primary` for
+it and `--color-data-context` for the others.
+
+A chart that needs other colours takes them from the categorical palette,
+`--color-data-categorical-{hue}`. Use two or three in a chart, not the whole
+palette. Areas with no data use `--color-data-empty`.
+
+The background, axes, grid lines and labels use the `chart` tokens.
+
 # Addendum: suggested extensions
 
 _This addendum is not part of the specification. It lists content the decision records support but this skeleton does not yet cover, and points to check once the new tokens have been exported and built._
@@ -546,11 +558,6 @@ _This addendum is not part of the specification. It lists content the decision r
 
 ## To verify after the token export
 
-- **Elevation tokens.** Whether elevation is emitted as `--elevation-{value}` tokens or exists only as classes mapped onto the shadow tokens. The Category row, the Elevation step row and the Elevation pattern depend on this.
-- **Typeset segment.** That the exported context segment is spelled `longform`.
 - **`readable-width`.** Decided in [0015](./decisions/0015-system-classes.md): a typeset property with no role, in three widths (text, wide, full) applied to a formatted typeset's children. It needs adding to the export; the build uses multiples of the typeset's body size as placeholders until then.
-- **Surface levels.** Container colours, and the `level-1` to `level-3` emphasis that went with them, have been removed in favour of `surface`. Check whether surfaces take their own levels.
-- **Typography breakpoints.** That the typography tokens still vary by breakpoint now that the typesets have changed.
-- **Typeface tokens.** How the display, default and code purposes are emitted, for example `--primitive-typography-font-family-{purpose}`.
-- **Font weights.** That only the four listed weights are emitted. The current build also emits `--primitive-typography-font-weight-light` (300).
-- **Emphasis modifiers.** That `.text-strong` and `.text-soft` are emitted. They are new and do not ship in the current build.
+- **Surface levels.** Container colours, and the `level-1` to `level-3` emphasis that went with them, have been removed in favour of `surface`. The current export has no surface levels. Check whether that is intended.
+- **Font weights.** The Font Weight table lists four weights. The build also emits `--primitive-typography-font-weight-light` (300).

@@ -1,71 +1,76 @@
 # Colour
 
-Distilled from the spec's _Semantic Layer: Colour_. Emitted tokens:
-`packages/themes/styles/colors.js` (JS tree, keyed by `mode.light`/`mode.dark`)
-and `packages/themes/styles/tokens.css` (CSS custom props `--color-*`).
+The spec has no Colour section or ADR yet. The naming grammar is in [tokens.md](tokens.md). This file describes the build: `--color-*` in `tokens.css` and `colors.js`.
 
-## Principle
+## Modes
 
-Two tiers: a **primitive palette** (never referenced directly) feeds a **semantic
-layer** of role-named tokens. Components bind to semantic tokens only — never a
-primitive, never a raw hex. One theme, two **modes** (light/dark); every semantic
-token carries a value per mode, so a bound component themes automatically.
+Every semantic colour has a light and a dark value. Light is on `:root`, dark on `.dark`. A component that uses semantic tokens switches mode without any change.
 
-- Ten hues (grey, blue, green, yellow, orange, red, pink, darkpink, + purple &
-  turquoise in the data set), each 100–1100.
+## Groups
 
-## Semantic groups (choose by what the element _is_)
+Choose the token by what the element is.
 
-| Group            | Tokens (shape)                                                                                                                                    | Job                                               |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| **Text**         | `text`, `text-muted`, `text-wash`, `label`, `label-muted`                                                                                         | Foreground text/labels, descending emphasis       |
-| **Surface**      | `surface`, `surface-muted`, `surface-accent`, `surface-{negative,positive,caution,neutral,empty}(-muted)`, `surface-alpha,beta`                   | Fills/backgrounds incl. status tints              |
-| **Container**    | `container`, `container-level-1,2,3`                                                                                                              | Layered container backgrounds (elevation/nesting) |
-| **Canvas**       | `canvas`, `canvas-muted`                                                                                                                          | Base page background                              |
-| **Border**       | `border`, `border-muted`                                                                                                                          | Strokes/dividers                                  |
-| **Interactive**  | `interactive/{intent}[-muted][-state]`                                                                                                            | All control colours — the systematic core (below) |
-| **Inverse**      | `inverse/text(-muted,-wash)`, `inverse/surface(-muted)`, `inverse/container[-level-N]`                                                            | Content on an inverse surface                     |
-| **Static**       | `static/brand,white,black`                                                                                                                        | Mode-independent fixed colours (rare)             |
-| **Data**         | `data/categorical/{hue}`, `data/{primary,secondary,tertiary}`, `data/{positive,negative,neutral/0,neutral/1,empty,context}`, `data/{male,female}` | Chart/series colours                              |
-| **Chart chrome** | `chart/{axis,grid,surface,label,label-muted}` (+ `chart/inverse/*`)                                                                               | Non-data chart furniture                          |
-| **Geo**          | `geo/{feature,label,annotation}(-muted)`, `geo/interactive[-state]`                                                                               | Map colours                                       |
+| Group | Tokens | Use for |
+| --- | --- | --- |
+| Text | `--color-text`, `--color-text-muted`, `--color-text-wash` | Text, in decreasing emphasis |
+| Label | `--color-label`, `--color-label-muted` | Labels on controls |
+| Canvas | `--color-canvas`, `--color-canvas-muted` | The page background |
+| Surface | `--color-surface`, `--color-surface-muted`, `--color-surface-accent`, `--color-surface-{status}`, `--color-surface-alpha`, `--color-surface-beta`, each with a `-muted` version | Backgrounds of cards, panels and status areas |
+| Border | `--color-border`, `--color-border-muted` | Borders and dividers |
+| Interactive | `--color-interactive-*` | Controls (below) |
+| Inverse | `--color-inverse-text`, `--color-inverse-surface`, `--color-inverse-canvas`, `--color-inverse-border`, `--color-inverse-chart-*`, `--color-inverse-geo-*` | Content on an inverse background |
+| Static | `--color-static-white`, `--color-static-black`, `--color-static-brand` | Colours that don't change with mode |
+| Data | `--color-data-primary`, `--color-data-secondary`, `--color-data-tertiary`, `--color-data-categorical-{hue}`, `--color-data-{status}`, `--color-data-neutral-0`, `--color-data-neutral-1`, `--color-data-empty`, `--color-data-context`, `--color-data-male`, `--color-data-female` | Chart and map data |
+| Chart | `--color-chart-axis`, `--color-chart-grid`, `--color-chart-label`, `--color-chart-label-muted`, `--color-chart-surface` | Chart furniture |
+| Geo | `--color-geo-feature`, `--color-geo-label`, `--color-geo-annotation`, each with a `-muted` version, and `--color-geo-interactive-*` | Maps |
+| Palette | `--color-palette-{hue}-{step}` | Not for components. Use a semantic group |
 
-## Interactive token logic
+`{status}` is positive, negative, caution, neutral or empty for surfaces, and positive or negative for data.
 
-`interactive/{intent}[-muted][-state]`:
+The categorical hues are blue, darkpink, green, orange, pink, purple, red, turquoise and yellow. There is no grey; use `--color-data-empty` for no data.
 
-- **intent**: `primary`, `secondary`, `positive`, `negative`, `caution` (+ standalone
-  states `selected`, `on`, `off`, `dragged`, `focus`, `error`, `disabled`).
-- **variant**: base or `-muted` (lower-emphasis fill of same intent).
-- **state**: base (rest), `-hover`, `-active`.
+## Data colours
 
-So a primary button: `interactive/primary` → `-primary-hover` → `-primary-active`
-(muted twin via `-muted-*`). **One `interactive/{intent}` serves both fill and
-text** — the bound property decides application. `disabled` splits: fill →
-`interactive/disabled-muted`, text/icon → `interactive/disabled`.
+For chart and map series:
 
-## Applying in components
+| Need | Tokens |
+| --- | --- |
+| One to three series | `--color-data-primary`, then `--color-data-secondary`, then `--color-data-tertiary` |
+| One series highlighted against the rest | `--color-data-primary` for it, `--color-data-context` for the others |
+| More series, or a series with its own meaning | Two or three of `--color-data-categorical-{hue}`, never the whole palette |
+| No data | `--color-data-empty` |
 
-- Bind fills/strokes/text to semantic tokens — never primitives or hex.
-- By role: label → `label`/`text`; control fill → `interactive/{intent}`;
-  card bg → `container`/`surface`; status tint → `surface-{status}`.
-- Text/icon on a filled control → `inverse/text` (themes against the fill).
-- Prefer themed tokens; reserve `static/*` for genuine fixed-contrast needs.
+Primary, secondary and tertiary reference the categorical blue, dark pink and orange. `--color-data-context` is a grey.
 
-## Utility / runtime forms
+The docs page `apps/web/src/content/design-system/data-visualisation/quick-guide.md` covers sequential and diverging scales.
 
-- **Tailwind:** `text-color-{token}`, `bg-color-{token}`, `border-color-{token}`,
-  from `packages/themes/styles/tw-extend/color.cjs`. CSS var form is `--color-{token}`
-  with `/` → `-` (e.g. `chart/surface` → `--color-chart-surface`).
-- **Runtime (charts/JS):** `theme.tokenNameToValue('data.primary')` resolves a
-  dotted path against `theme.currentTheme`. See `references/charts.md` and
-  `references/tokens.md`.
+## Interactive tokens
 
-## Gotchas
+`--color-interactive-{intent}[-muted][-{state}]`:
 
-- **`chart.background` was renamed to `chart.surface`** (both the token path and
-  the CSS var `--color-chart-surface`). Old name is gone. If you see
-  `Cannot read properties of undefined (reading 'background')` from a chart, it's
-  a stale `chart.background` lookup — see `references/migration.md`.
-- `label-muted` in a grep is often part of `text-color-label-muted` (a colour
-  token), not the typography `label` role — don't confuse the two.
+- Intents: primary, secondary, positive, negative and caution.
+- `-muted` is the lower-emphasis version of the same intent.
+- States: `-hover` and `-active`. Positive, negative and caution also have `-focussed`, as in `--color-interactive-positive-focussed`.
+- Primary also has `--color-interactive-primary-text` with hover and active states, for links and text buttons.
+- Standalone states: `--color-interactive-selected`, `--color-interactive-on`, `--color-interactive-off`, `--color-interactive-dragged`, `--color-interactive-focus`, `--color-interactive-error`, `--color-interactive-disabled` and `--color-interactive-disabled-muted`.
+
+A disabled fill uses `--color-interactive-disabled-muted`. Disabled text or icons use `--color-interactive-disabled`.
+
+Text or an icon on a filled control uses `--color-inverse-text`.
+
+## In Tailwind
+
+The preset adds each token without its leading dashes as a Tailwind colour, so `--color-text-muted` is available as `text-color-text-muted`, and `--color-surface` as `bg-color-surface`.
+
+## In JavaScript
+
+`colors.js` default-exports the resolved values as a tree: `mode.light.chart.surface`, `mode.dark.data.primary`. Only the group and role are nested. Emphasis and state stay joined, as in `surface['accent-muted']` and `interactive.primary['muted-hover']`. A group's own value is under `default`: `text.default`.
+
+In components, read colours through the theme so they follow the mode:
+
+```js
+theme.tokenNameToValue('data.primary');
+theme.currentTheme.chart.surface;
+```
+
+`tokenNameToValue` (`packages/utils/src/colors/tokenNameToValue.ts`) walks a dotted path and falls back to `default` at each level. A path that doesn't exist logs `Color name "…" not defined in theme.` and returns `undefined`. Check a path against `mode.light` in `colors.js`.

@@ -1,252 +1,117 @@
 # Typography
 
-Distilled from the spec's _Semantic Layer: Prose / Product / Chart_, _Structural
-hierarchy_, _Composition & Hierarchy Resolution_ and _Font Weight_ sections.
-Verified against branch `flow`.
+Spec section: Typography. ADRs: [0003](../../../../design-system-specification/decisions/0003-typography.md), [0012](../../../../design-system-specification/decisions/0012-title-groupings.md), [0015](../../../../design-system-specification/decisions/0015-system-classes.md).
 
-**Code anchors:**
+Code: `typesets`, `roles`, `content`, `measure` and `usage` in `packages/themes/sd/system.config.js`. Output: the Typesets, Measure, Typeset text, Longform element aliases, Content styles, Usage aliases, Roles and Emphasis sections of `system.css`.
 
-- `packages/themes/tailwind-custom/typography/contexts.cjs` — the three context classes (which vars a family defines)
-- `packages/themes/tailwind-custom/typography/roles.cjs` — the role utility classes (which vars a role reads)
-- `packages/themes/tailwind-custom/typography/semantics.cjs` — element styling inside `.prose` only
-- `packages/themes/tailwind-custom/typography/responsive.cjs` — per-breakpoint font-size and line-height
-- `packages/themes/styles/tokens.css` — emitted `--typography-{mode}-{family}-{role}-{prop}`
-- Developer guide: `packages/ui/src/lib/Typography.mdx`
+## Typesets
 
-## The one rule
+A typeset gives every role its values. There are two:
 
-**Bind to a role, never a size.** Pick the role for the job; size, line-height,
-weight, letter-spacing and (for companions) colour arrive with it. Never Tailwind
-`text-*` sizes, never `--primitive-*`.
+| Class | For | Flow context | Content styles | Measure |
+| --- | --- | --- | --- | --- |
+| `typeset-longform` | Reading: articles, docs, reports | `flow-spacious` | Yes | Yes |
+| `typeset-product` | Interfaces, tables, charts, maps | None | No | No |
+| `typeset-product--formatted` | Markdown or CMS output inside a product setting | `flow-standard` | Yes | Yes |
 
-## Three families, set by surface — no cross-mixing
+Set the typeset once, on a container. Text takes its values from the nearest typeset, so a typeset nested inside another wins. `typeset-product--formatted` works on its own or beside `typeset-product`.
 
-| Family    | For                                                       | Typography context | Usual flow partner |
-| --------- | --------------------------------------------------------- | ------------------ | ------------------ |
-| `prose`   | reading content — markdown, help, rich text               | `.prose`           | `.flow-prose`      |
-| `product` | app/dashboard UI — pages, cards, panels, controls, tables | `.product`         | `.flow-product`    |
-| `chart`   | chart chrome and chart-internal text                      | `.chart`           | (host's context)   |
+Product is the default. Its role properties are also set on `:root`, so a role class outside any typeset still works.
 
-**A role only resolves inside its context.** Role utilities set
-`font-size: var(--title-3-font-size)` etc., and those locals are defined **only**
-inside `.prose` / `.product` / `.chart`. A role class with no context ancestor does
-not size — it silently inherits.
+Each typeset sets unclassed text inside it to `body-md`, so rendered Markdown needs no classes.
 
-> Note the asymmetry with flow, which now defines the product ramp on `:root`.
-> Typography has **no `:root` default**. A context class is mandatory.
+The two typesets have the same values for every role except two line heights. `body-sm` is 14/26 in longform and 14/22 in product. `body-md` is 16/28 in longform and 16/24 in product. The full values are in the spec's generated matrices.
 
-`flow-*` sets rhythm vars only — it does **not** set type vars. `product` and
-`flow-product` are two systems sharing a word.
+## Roles
 
-### How a role resolves (worth knowing when debugging)
+A role class is `{role}-{size}`, with sizes `sm`, `md` and `lg`. `eyebrow` has no size. Choose the role for what the text does; the role sets size, weight, line height and letter spacing, at every breakpoint.
 
-1. `.product` (or `.prose`/`.chart`) defines `--title-font-size` etc. from
-   `--typography-md-product-title-font-size`.
-2. `responsive.cjs` re-declares font-size and line-height on `.{context} .{role}`
-   at `default` **and** all four breakpoints, which outspecifies (1).
-3. `roles.cjs` `.title` reads the locals.
+| Role | Use for |
+| --- | --- |
+| `display` | High-impact text. Use sparingly |
+| `headline` | The main statement of a page or major section |
+| `subhead` | Supporting line under a headline or display |
+| `title` | The name of a unit within the page: a card, panel, chart, table or block of prose |
+| `subtitle` | Supporting line under a title |
+| `body` | Running text |
+| `label` | Text needed to use the interface: buttons, inputs, tabs |
+| `metric` | A figure shown as the content itself |
+| `caption` | Optional notes: image and chart captions, sources, helper text |
+| `eyebrow` | Short signpost above a headline or title |
 
-So the md-pinning visible in `contexts.cjs` only ever governs family, weight and
-letter-spacing — none of which scale. **The responsive scale is not inert.** (This
-was an open worry; it is closed.)
+Headlines open a page or section; titles name the units inside it. Labels are needed to use the interface; captions aren't.
 
-Chart is exempt from the responsive loop by design: chart values are identical at
-every breakpoint.
+`subhead`, `subtitle` and `eyebrow` are set in `--color-text-muted`. `metric` uses tabular numerals.
 
-## Prose roles (xl defaults; scaling noted)
+The role set is closed. Adding a role needs an ADR.
 
-| Role       | px  | Weight | Job                                                       |
-| ---------- | --- | ------ | --------------------------------------------------------- |
-| `display`  | 76  | 700    | Homepage hero. Hero chrome, outside content flow. Scales. |
-| `headline` | 56  | 700    | Subpage hero. Takes a `subhead`. Scales.                  |
-| `subhead`  | 28  | 400    | Companion under a `headline` (muted).                     |
-| `title-1`  | 36  | 600    | Content h1. Scales.                                       |
-| `title-2`  | 30  | 600    | Content h2. Scales.                                       |
-| `title-3`  | 24  | 600    | Content h3. Scales.                                       |
-| `title-4`  | 20  | 600    | Content h4 — floor of the ladder.                         |
-| `subtitle` | 18  | 400    | Companion under a content title (muted).                  |
-| `lead`     | 22  | 400    | Standfirst/intro paragraph (muted).                       |
-| `body`     | 16  | 400    | Default reading text. Reading leading 1.625.              |
-| `body-sm`  | 14  | 400    | Secondary/dense reading. Reading leading 1.571.           |
-| `caption`  | 12  | 400    | Metadata, smallest text.                                  |
-| `eyebrow`  | 14  | 500    | Overline above a display/headline/title (muted).          |
+Don't add Tailwind size, weight or line-height utilities to a role class. Change the role instead, or use an emphasis class.
 
-- **`.prose` styles bare elements.** `h1`–`h4` → `title-1`–`title-4`, `p` → `body`,
-  `p.lead` → `lead`, `figcaption`/`.caption` → `caption`, plus links, `hr`, lists,
-  blockquotes, tables and inline `code`. All via
-  `:where(el):not(:where(.not-prose, .not-prose *))` — zero added specificity, so an
-  explicit role class overrides. `h5` has no case; it falls to `body`.
-- **`.prose` also caps its own width**: `max-width: var(--prose-max-width)`, set from
-  `--typography-{mode}-prose-readable-width` at every breakpoint. There is **no
-  `.prose-column` class and no `--readable-width` variable** — older docs claim both.
-- **`.not-prose`** is the escape hatch, at block or element level.
-- **Hero slot is Display OR Headline+Subhead — not both.** Content headings restart
-  at `title-1` regardless of the hero above; they are separate structural tiers.
+## Emphasis
 
-## Product roles (xl defaults)
+`.text-strong` sets the semi-bold weight and `.text-soft` sets regular, on any role.
 
-| Role           | px  | Weight | Job                                                               |
-| -------------- | --- | ------ | ----------------------------------------------------------------- |
-| `page-head`    | 36  | 700    | Top page title. Scales. Optional `subtitle`.                      |
-| `section-head` | 28  | 600    | Groups cards; repeats down a page. Scales. Optional `subtitle`.   |
-| `title`        | 20  | 600    | Object title — card/panel/modal/callout/drawer.                   |
-| `subtitle`     | 16  | 400    | Supporting line under any heading/title (muted).                  |
-| `eyebrow`      | 14  | 500    | Overline above a title; also the demoted-title treatment (muted). |
-| `metric`       | 36  | 700    | Hero stat numerals. Scales with page-head.                        |
-| `metric-sm`    | 20  | 700    | Secondary/in-card KPI.                                            |
-| `body`         | 16  | 400    | Default UI text, field values, menu items.                        |
-| `body-sm`      | 14  | 400    | Helper/hint/secondary, table cells.                               |
-| `label`        | 14  | 500    | Control/nav labels — buttons, inputs, tabs.                       |
-| `label-sm`     | 12  | 500    | Dense labels, column headers.                                     |
-| `caption`      | 12  | 400    | Metadata, badges.                                                 |
+## Weights and line heights
 
-**`.product` applies no element styles** — it defines vars only. Dashboard markup
-carries no reliable typographic meaning, so nothing is assumed. Apply the role class.
+Weights are regular 400, medium 500, semi-bold 600 and bold 700, as `--primitive-typography-font-weight-{name}`. The weight name is hyphenated: semi-bold.
 
-Tight single-line variants are real utilities: `label-tight` / `label-sm-tight` —
-same size/weight, `line-height: 1`, for buttons/tabs/chips that must never wrap.
-Live in `Button`, `TabLabel`, `NavigationMenuItem`, `ThemeSwitcher`,
-`MultipleActionButton`, `GeocoderSuggestion(List)`. They reuse `label`/`label-sm`'s
-vars — **no dedicated `semantic-typography` entry**, so they cannot be retuned
-independently. OPEN.
+Line heights are the font size plus 4px (tight), 8px (default) or 12px (loose).
 
-**Resolve by element, not by eye** (settled conventions):
-control/nav labels → `label` (even where legacy used 16px); input values/placeholder/body
-→ `body`; helper/hint/secondary → `body-sm`; small functional/metadata → `caption`;
-genuine component titles → `title`; sidebar/nav _section_ headings → `label`, not a title.
+## Longform element aliases
 
-## Chart roles
+Inside `typeset-longform`, headings and some elements take a role without a class:
 
-| Class        | px  | Weight | Line height | Job                                              |
-| ------------ | --- | ------ | ----------- | ------------------------------------------------ |
-| `title`      | 20  | 600    | inherited   | Chart title when it owns the primary slot        |
-| `subtitle`   | 16  | 400    | inherited   | Supporting line under a chart title              |
-| `eyebrow`    | 14  | 500    | inherited   | A chart title that has yielded the slot          |
-| `axis-title` | 14  | 500    | 20          | Axis names, series/legend **titles**             |
-| `label`      | 14  | 400    | 20          | Data/value labels, annotations, legend _entries_ |
-| `tick`       | 14  | 400    | 1.0         | Axis tick / scale labels, default density        |
-| `tick-sm`    | 12  | 400    | 1.0         | Smaller tick tier, at the 12px floor             |
+| Element | Role |
+| --- | --- |
+| `h1` | `headline-lg` |
+| `h2` | `headline-sm` |
+| `h3` | `title-lg` |
+| `h4` | `title-md` |
+| `h5` | `title-sm` |
+| `p.lead` | `body-lg`, muted |
+| `figcaption` | `caption-sm` |
 
-`title` / `subtitle` / `eyebrow` are **semantic→semantic aliases** of their product
-sources — every property referenced, so they cannot drift and they inherit product's
-responsive behaviour. This is the only place in typography where a semantic role
-references another semantic role. `axis-title` and `label` are metric twins of
-product `label` / `body-sm` but hold their own values.
+These have zero added specificity, so a role class on the element wins.
 
-Inside `.chart`, the shared class names (`title`, `subtitle`, `eyebrow`, `label`)
-resolve to chart values; `axis-title`, `tick` and `tick-sm` are chart-only classes.
+## Content styles
 
-- **There is no `legend` role** — a legend entry is a data label → `label`. A legend
-  _title_ → `axis-title`.
-- **`chart/note` is a token, not a class.** It emits at all five modes in
-  `typography.css` but has no entry in `contexts.cjs` or `roles.cjs`, so there is no
-  `.note` utility. Chart is eight roles in tokens, seven usable in code. Don't
-  document `.note` as available until it is wired.
-- **Compressed tick density (12 / 11) is spec-only.** Emitted default is 14 / 12.
-- `0.86` in an export is a rem bug ≈ 14px. Always correct it to the intended role.
+Inside `typeset-longform` and `typeset-product--formatted`, `sd/content.css` styles unclassed links, inline text (`b`, `i`, `mark`, `abbr`, `small`, `kbd`), code blocks, lists, description lists, blockquotes, `hr`, tables, `figcaption` and `summary`.
 
-## The primary-slot rule (recursive) — how `title` gets its treatment
+Content styles and element aliases stop at `.not-typeset` and at a nested typeset. `typeset-product` on its own has no content styles, so component markup inside it isn't restyled.
 
-Every titling container has one primary slot. Whatever owns it takes the **dominant**
-`title` (20/600/primary); a title that yields drops to **`eyebrow`** (14/500/secondary)
-or is omitted; a dominant title's supporting line is **`subtitle`** (16/400/muted).
-Because all three are real roles, a demotion is a token swap, not a note. E.g. a card
-whose chart has its own title: the chart title is dominant, the card title becomes an
-`eyebrow` above it.
+## Measure
 
-Ladder: `page-head → section-head → title { dominant | eyebrow | absent }`.
-`page-head`/`section-head` are page furniture (fixed positions, positional names);
-`title` is the recursive general case, hence the bare name.
+Inside `typeset-longform` and `typeset-product--formatted`, each direct child has a maximum width:
 
-## Companion coupling (eyebrow / subtitle / subhead)
+| Width | Value | Applies to |
+| --- | --- | --- |
+| `--measure-text` | 38 × body size (608px at 16px) | Running text |
+| `--measure-wide` | 56 × body size (896px at 16px) | `figure`, `img`, `video`, `iframe`, `table`, `pre`, `.chart` |
+| `--measure-full` | none | Nested typesets, `.not-typeset` |
 
-A companion hugs its heading with `--flow-tight`; the section break sits **above an
-eyebrow** that introduces a heading. Enforced by owl rules in
-`packages/themes/tailwind-custom/flow/flow.cjs` (block "4b") for flat sibling markup:
+`.width-content`, `.width-content-wide` and `.width-content-full` set a child's width directly. A Tailwind `max-w-*` utility wins over both.
 
-```html
-<p class="eyebrow">GLA City Intelligence</p>
-<!-- section break above -->
-<h1 class="headline">State of London</h1>
-<!-- hugs eyebrow (flow-tight) -->
-<p class="subhead">…</p>
-<!-- hugs headline (flow-tight) -->
-```
+The multiples are provisional until the export has readable-width tokens.
 
-**Using the right role class is what earns the rhythm.** `body-sm
-text-color-text-muted` looks like a subtitle and gets none of the coupling. Details
-and selector ordering: `references/flow.md`.
+## Usage aliases
 
-## Weight & emphasis
+Each alias applies a role, sometimes with tabular numerals or the muted colour. Use the role class where you can; the aliases are for people using the CSS without the roles.
 
-Each role bundles its **identity weight** — don't set a weight alongside a role.
-For genuine emphasis riding on top of a role, use Tailwind's weight utilities
-(`font-semibold`, `font-normal`).
+| Place | Aliases |
+| --- | --- |
+| Charts | `.chart-title`, `.chart-subtitle`, `.chart-axis-title`, `.chart-label`, `.chart-tick`, `.chart-tick-sm`, `.chart-note` |
+| Tables | `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm`, `.table-cell` |
+| Dashboards | `.dashboard-main-title`, `.dashboard-main-subtitle`, `.dashboard-section-title`, `.dashboard-section-subtitle` |
+| Interface | `.header-title`, `.sidebar-title`, `.dialog-title`, `.card-title`, `.card-subtitle`, `.hint-text`, `.input-label`, `.placeholder`, `.field-value`, `.button-label`, `.button-label-sm` |
 
-> **`.text-strong` / `.text-soft` do not exist.** The spec's _Emphasis modifier_
-> section specifies them and older skill copy cites them, but there is no match
-> anywhere in `packages/themes`. Either build them or drop them from the spec.
-> Same for the per-context weight identity example (`--headline-weight` on a flow
-> context) — specified, not implemented.
+The role each alias uses is in the spec's alias table. Adding an alias needs an ADR and a change to the Figma `usage` set.
 
-Four weights ship: 400 / 500 / 600 / 700. The emitted primitive spelling is
-`--primitive-typography-font-weight-semi-bold` — **hyphenated**, no `semibold`.
+## Title groups
 
-## Responsive
+A title group is an optional eyebrow, a title and a subtitle, at the top of a card, chart, table or panel.
 
-Automatic and on by default at five breakpoints (`base`, `sm` 640, `md` 768,
-`lg` 1024, `xl` 1280). Scaling roles: prose `display`, `headline`, `title-1`,
-`title-2`, `title-3`; product `page-head`, `section-head`, `metric`. Everything else
-fixed; chart never scales.
+A group on its own can have all three parts. When a component contains two or more title groups, the designer makes one dominant. The dominant group has a title and an optional subtitle, and no eyebrow. Each other group becomes an eyebrow, using the text that would have been its title.
 
-Every breakpoint column is pre-verified so a role never overtakes the one above it —
-which is why the Title ladder and the two Metric roles scale as groups.
+For example, a card holding one chart, where the chart is the subject: the chart has the title and subtitle, and the card's title becomes an eyebrow.
 
-## Line height, two policies
-
-- **Grid leading** — 4px-aligned, for structural roles that stack against
-  grid-aligned neighbours. A reference for authoring, not a cascade `var()`:
-  emitted line-height is always a computed unitless ratio.
-- **Reading leading** — `prose/body` 1.625 and `prose/body-sm` 1.571, **these two
-  only**. Product body/body-sm keep grid leading (24/20) for denser UI.
-
-One exception to the literals rule: the three aliased chart roles reference their
-product source for line-height and letter-spacing too. State it as an exception,
-never as an absolute.
-
-## Colour on text
-
-Bind to a semantic token, descending in emphasis: `text-color-text` → `-text-muted`
-→ `-text-wash`; labels `…-label` → `-label-muted`. Text/icon on a filled control →
-`inverse/text`. Some roles already carry colour: `subhead`, `subtitle`, `lead`,
-`eyebrow`, `axis-title`, `tick`, `tick-sm` are muted in `roles.cjs`. See
-`references/colour.md`.
-
-## Gotchas
-
-- **`.responsive` is retired** — scaling is automatic. No `md:section-head`, no
-  per-breakpoint type variants.
-- **`.format` is retired** — vertical rhythm consolidated on `flow`; `format.cjs`
-  no longer exists.
-- **`.prose` is ours, not Tailwind's.** `@tailwindcss/typography` is a dependency of
-  `@ldn-viz/themes` but is **never registered** — not in `ldn-theme.cjs`, not in any
-  downstream config (all are `presets: [ldn-theme]`, `plugins: []`). No `--tw-prose-*`
-  variable exists in source or emitted CSS. The only `.prose` comes from
-  `contexts.cjs` + `semantics.cjs`, so the plugin's modifier API is inert here:
-  `prose-lg`, `prose-invert`, `prose-headings:…`, `max-w-prose` are all no-ops.
-  Older docs claim the plugin is "still exposed for HTML you don't control" — it
-  isn't. The dependency itself looks vestigial and is a candidate for removal
-  (also present, unused, in `packages/tables/package.json`).
-- **Don't mix families in one region.** Embedded reading content on a product
-  surface gets its own `.prose` container.
-- Retired role classes (`title-{xs,sm,md,lg}`, `body-{xs,md,lg}`, `label-{xs,md,lg}`)
-  → mapping in `references/migration.md`.
-
-## Not implemented (spec-only — don't build against)
-
-- Fluid `clamp()` display tokens (`display`, `headline`, `page-head`, `metric`).
-- `.text-strong` / `.text-soft`, and per-context weight identity variables.
-- `.prose-column` / `--readable-width` (the working mechanism is `--prose-max-width`
-  on `.prose` itself).
-- A dedicated backing token for `label-tight` / `label-sm-tight`.
-- `.note` for `chart/note`.
+In `@ldn-viz/ui`, `TitleGroup` in `packages/ui/src/lib/chrome/` renders a group with `eyebrow`, `title-sm` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it through `ChromeHeader`.

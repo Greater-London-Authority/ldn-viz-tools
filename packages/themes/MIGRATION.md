@@ -142,7 +142,7 @@ The classes change as follows. These are placeholder mappings until RFC 0002's d
 | `--measure-wide` (56 × body) | 896px        | figures, images, video, embeds, tables, code blocks, charts | `.width-content-wide` |
 | `--measure-full`             | no cap       | nested typesets, `.not-typeset`                             | `.width-content-full` |
 
-Content styles for unclassed markup (Markdown, CMS output) now apply inside both `typeset-longform` and `typeset-product`, not only inside `prose`. The escape class is renamed.
+Content styles for unclassed markup (Markdown, CMS output) now apply inside `typeset-longform` and `typeset-product--formatted`, not only inside `prose`. `typeset-product` on its own sets type only. The escape class is renamed.
 
 | Old          | New            |
 | ------------ | -------------- |
