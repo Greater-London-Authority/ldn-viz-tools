@@ -4,7 +4,7 @@
 
 The [Design System Specification](./design-system-specification.md) is the canonical reference for understanding the London City Data Design System (LCD-DS)
 
-The content of the specification is hand written. The tables of values it contains are generated from tokens and CSS by the scripts in [./scripts](./scripts) (see [Running the scripts](#running-the-scripts)).
+The content of the specification is hand written. The tables of values it contains are generated from the `packages/themes` build by the scripts in [./scripts](./scripts) (see [Running the scripts](#running-the-scripts)).
 
 ## Governance
 
@@ -30,23 +30,39 @@ The @ldn-viz-tools component library that is built using the design system is do
 
 ## Running the scripts
 
-The scripts in [./scripts](./scripts) keep the value tables in the specification in step with the CSS emitted by `packages/themes`. They need Python 3.8 or later and nothing else. Run them from the repo root:
+The scripts in [./scripts](./scripts) keep the specification and the decision records in step with the build output of `packages/themes`. They need Python 3.8 or later and no other packages. The build itself needs Node, with the repository's dependencies installed.
+
+The build output in `packages/themes/styles/` is not committed, so build the tokens before running the scripts:
 
 ```sh
-# 1. Rebuild the tokens and confirm the output matches the shipped packages/themes/styles/
+cd packages/themes && npm run build-tokens && cd ../..
+```
+
+Then run the scripts from the repository root, in this order:
+
+```sh
+# 1. Rebuild the tokens and confirm the result is identical to the build in packages/themes/styles/
 python3 design-system-specification/scripts/verify_build.py
 
 # 2. Regenerate the value tables in design-system-specification.md
 python3 design-system-specification/scripts/gen_spec.py
-#    or, to only report stale tables without writing (exits 1 if any are stale):
+#    or, to report stale tables without writing them (exits 1 if any are stale):
 python3 design-system-specification/scripts/gen_spec.py --check
 
-# 3. Check no invariant or pinned decision has drifted from the emitted CSS (exits 1 on failure)
+# 3. Check the build against the values and rules the specification states, and
+#    the class and token names in RULES.md (exits 1 on failure)
 python3 design-system-specification/scripts/check_spec.py
+
+# 4. Check the decision records against ADR-LIFECYCLE.md (exits 1 on failure)
+python3 design-system-specification/scripts/adr_check.py
+#    after adding an ADR or changing its status, regenerate decisions/INDEX.md first:
+python3 design-system-specification/scripts/adr_check.py --write-index
 ```
 
-Run them in that order. `verify_build.py` needs Node, because it runs `sd.build.js`.
+`verify_build.py` runs the build a second time and compares the two results, so a difference means the build is not reproducible or `styles/` is out of date. `gen_spec.py` and `check_spec.py` read `styles/tokens.json`, `styles/system.css` and `RULES.md`. `adr_check.py` reads `decisions/` and `RULES.md`, and does not need the build.
 
-Each script finds the spec and `packages/themes` on its own. Use `--spec`, `--styles` or `--project` to point at other paths, and `--help` to list the options.
+`check_spec.py` and `adr_check.py` can also report `[WARN]` lines. A warning does not fail the run. It marks something to follow up, such as a primitive value no role uses, or a proposed ADR that `RULES.md` does not cite yet.
 
-Values that encode a decision, such as the pinned font sizes and the flow ramp, live in `scripts/check_spec.py`. When an ADR changes one of them, update it there.
+Each script finds the specification and `packages/themes` without being told where they are. Use `--spec`, `--styles`, `--rules` or `--project` to point at other paths, and `--help` to list the options.
+
+Values that encode a decision, such as the role weights, the type scale and the flow ramp, are pinned near the top of `scripts/check_spec.py`. When an ADR changes one of them, update it there.
