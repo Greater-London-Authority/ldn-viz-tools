@@ -351,7 +351,7 @@ The token name follows the utility prefix eg:
 `text-` (utility prefix) `color-text` (token reference)
 
 ```html
-<p class="body text-color-text">Default text on a surface</p>
+<p class="body-md text-color-text">Default text on a surface</p>
 <div class="border border-color-border bg-color-surface">…</div>
 ```
 

@@ -55,10 +55,10 @@
 			<p class="eyebrow text-color-text-muted">{@html eyebrow}</p>
 		{/if}
 		{#if title}
-			<div class="title text-color-text">{@html title}</div>
+			<div class="title-sm text-color-text">{@html title}</div>
 		{/if}
 		{#if subtitle}
-			<p class="subtitle text-color-text-muted">{@html subtitle}</p>
+			<p class="subtitle-sm text-color-text-muted">{@html subtitle}</p>
 		{/if}
 	</div>
 {/if}

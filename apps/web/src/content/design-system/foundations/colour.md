@@ -126,7 +126,7 @@ The global colour palette contains the hints and shades that are used as a basis
 <p class="text-color-palette-grey-900">Use of a global class token</p>
 ```
 
-<div class="not-prose py-spacing-xl">
+<div class="not-typeset py-spacing-xl">
 <SwatchGrid tokenData={paletteTokens.grey} title="Grey" size="xs" />
 <SwatchGrid tokenData={paletteTokens.blue} title="Blue" size="xs" />
 <SwatchGrid tokenData={paletteTokens.green} title="Green" size="xs" />
@@ -141,7 +141,7 @@ The global colour palette contains the hints and shades that are used as a basis
 
 ### Semantic colour reference
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={themeColors} title="Colors for data" size="sm"/>
 <SwatchGrid tokenData={dataTokens.categorical} title="Colors for categorical data" size="sm"/>
 </div>

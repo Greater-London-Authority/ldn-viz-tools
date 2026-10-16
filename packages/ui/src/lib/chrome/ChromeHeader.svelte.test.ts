@@ -19,8 +19,8 @@ describe('ChromeHeader', () => {
 			eyebrow: 'Eyebrow'
 		});
 
-		expect(container.querySelector('.title')?.textContent).toBe('Chart title');
-		expect(container.querySelector('.subtitle')?.textContent).toBe('Chart subtitle');
+		expect(container.querySelector('.title-sm')?.textContent).toBe('Chart title');
+		expect(container.querySelector('.subtitle-sm')?.textContent).toBe('Chart subtitle');
 		expect(container.querySelector('.eyebrow')?.textContent).toBe('Eyebrow');
 	});
 
@@ -30,7 +30,7 @@ describe('ChromeHeader', () => {
 			emphasis: 'secondary'
 		});
 
-		expect(container.querySelector('.title')).toBeNull();
+		expect(container.querySelector('.title-sm')).toBeNull();
 		expect(container.querySelector('.eyebrow')?.textContent).toBe('Chart title');
 	});
 
@@ -102,6 +102,6 @@ describe('ChromeHeader', () => {
 		const { container } = render(ChromeHeader, { hint: 'Helpful context' });
 
 		expect(container.firstElementChild).toBeTruthy();
-		expect(container.querySelector('.title')).toBeNull();
+		expect(container.querySelector('.title-sm')).toBeNull();
 	});
 });

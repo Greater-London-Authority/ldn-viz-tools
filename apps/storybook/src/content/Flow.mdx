@@ -11,8 +11,8 @@ The full reasoning is on the [Flow foundation page](https://greater-london-autho
 ## Declaring a context
 
 ```html
-<article class="flow-prose">…</article>
-<section class="flow-product">…</section>
+<article class="flow-spacious">…</article>
+<section class="flow-standard">…</section>
 <div class="flow-compact">…</div>
 ```
 
@@ -42,9 +42,9 @@ Values come from Figma through Style Dictionary into `styles/flow.css`. Nothing 
 Inside `flow-prose` the relationships are recognised from the markup, so an article needs no spacing classes:
 
 ```html
-<article class="flow-prose prose">
+<article class="typeset-longform">
 	<h2>Air quality</h2>
-	<p class="subtitle">Rolling 24-hour mean</p>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
 	<p>Concentrations fell across every monitored borough…</p>
 	<figure>
 		<img src="/no2.svg" alt="Nitrogen dioxide concentration" />
@@ -82,11 +82,11 @@ Most of the rules match on the role class, not only the element. Using the right
 
 ```html
 <!-- Recognised as a heading and its supporting line -->
-<h2 class="section-head">Rough sleeping</h2>
-<p class="subtitle">Quarterly</p>
+<h2 class="title-lg">Rough sleeping</h2>
+<p class="subtitle-sm">Quarterly</p>
 
 <!-- Visually near-identical, not recognised, takes the default gap -->
-<h2 class="section-head">Rough sleeping</h2>
+<h2 class="title-lg">Rough sleeping</h2>
 <p class="body-sm text-color-text-muted">Quarterly</p>
 ```
 
@@ -102,9 +102,9 @@ gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
 The `mt-` form goes on the element needing space above it. The `gap-` form goes on a flex or grid container that is not itself a flow context.
 
 ```html
-<section class="flow-product product">
-	<h2 class="section-head">Monitoring sites</h2>
-	<p class="subtitle">Twelve active sensors</p>
+<section class="flow-standard typeset-product">
+	<h2 class="title-lg">Monitoring sites</h2>
+	<p class="subtitle-sm">Twelve active sensors</p>
 
 	<div class="mt-flow-section">…</div>
 </section>

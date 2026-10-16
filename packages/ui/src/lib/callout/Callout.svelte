@@ -50,9 +50,9 @@
 	};
 
 	const sizeClasses = {
-		sm: 'product border shadow-sm text-color-text px-2 pt-2 ',
-		md: 'product border-l-[5px] border shadow-sm text-color-text px-2 pt-2 ',
-		lg: 'product border-l-[5px] border shadow-sm text-color-text px-4 pt-4'
+		sm: 'typeset-product border shadow-sm text-color-text px-2 pt-2 ',
+		md: 'typeset-product border-l-[5px] border shadow-sm text-color-text px-2 pt-2 ',
+		lg: 'typeset-product border-l-[5px] border shadow-sm text-color-text px-4 pt-4'
 	};
 
 	const titleClasses = {
@@ -78,7 +78,7 @@
 
 <aside class={calloutClasses} aria-labelledby={id}>
 	{#if title}
-		<h3 {id} class={classNames('title', titleClasses[size])}>
+		<h3 {id} class={classNames('title-sm', titleClasses[size])}>
 			{@render title?.()}
 		</h3>
 	{:else}
@@ -86,7 +86,7 @@
 	{/if}
 
 	{#if body}
-		<div class={classNames('body', bodyClasses[size])}>
+		<div class={classNames('body-md', bodyClasses[size])}>
 			{@render body?.()}
 		</div>
 	{/if}

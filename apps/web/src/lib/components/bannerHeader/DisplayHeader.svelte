@@ -56,10 +56,10 @@
 
 	<div class="relative z-10 flex h-full items-center">
 		<div class="container mx-auto">
-			<div class="flow-prose prose">
-				<p class="display">{title}</p>
+			<div class="typeset-longform">
+				<p class="display-lg">{title}</p>
 				{#if subTitle}
-					<p class="subhead">{subTitle}</p>
+					<p class="subhead-lg">{subTitle}</p>
 				{/if}
 			</div>
 		</div>

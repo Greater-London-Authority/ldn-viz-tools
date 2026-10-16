@@ -92,7 +92,7 @@ describe('Metric', () => {
 
 			const heroValue = page.getByTestId('metric-primary').getByText('100,000');
 
-			await expect.element(heroValue).toHaveClass('metric');
+			await expect.element(heroValue).toHaveClass('metric-lg');
 		});
 
 		it('renders the change as the metric role when hero is "change"', async () => {
@@ -107,8 +107,8 @@ describe('Metric', () => {
 				.getByTestId('metric-secondary')
 				.getByText('100,000', { exact: true });
 
-			await expect.element(heroChange).toHaveClass('metric');
-			await expect.element(supportingValue).toHaveClass('label-tight');
+			await expect.element(heroChange).toHaveClass('metric-lg');
+			await expect.element(supportingValue).toHaveClass('label-md', 'leading-none');
 		});
 	});
 

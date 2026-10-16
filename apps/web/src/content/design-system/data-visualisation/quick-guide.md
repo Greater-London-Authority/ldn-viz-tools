@@ -219,7 +219,7 @@ We developed our categorical colour palettes by carefully balancing the requirem
 
 These categorical colours pass differentiation tests for all but small lines, but don't use them all in a single chart.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={dataTokens.categorical} title="Categorical palette"/>
 </div>
 
@@ -227,7 +227,7 @@ These categorical colours pass differentiation tests for all but small lines, bu
 
 We've created semantic tokens to simplify and standardise the use of our colours.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={themeColors} title="Semantic Colour tokens"/>
 </div>
 
@@ -289,7 +289,7 @@ Our default diverging scale, is red (negative) to blue (positive). This is to av
 
 To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's `background, axis, grids and labels`.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={chartColors} title="Chart colour tokens"/>
 </div>
 

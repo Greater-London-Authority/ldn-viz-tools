@@ -8,7 +8,7 @@ The system describes type by **role** rather than by size. A role names the job 
 
 ```html
 <!-- The role carries its own size and weight -->
-<h2 class="section-head">Air quality</h2>
+<h2 class="title-lg">Air quality</h2>
 <p class="body-sm">Rolling 24-hour mean.</p>
 
 <!-- Re-answers a question the system has already answered -->
@@ -28,8 +28,8 @@ Roles are grouped into three sets, one for each kind of surface. A set is applie
 | `chart`   | Text in and around a chart                                           |
 
 ```html
-<article class="flow-prose prose">…</article>
-<section class="flow-product product">…</section>
+<article class="typeset-longform">…</article>
+<section class="flow-standard typeset-product">…</section>
 <div class="chart">…</div>
 ```
 
@@ -82,7 +82,7 @@ Control and navigation labels take `label` even where older markup used sixteen 
 `label-tight` and `label-sm-tight` are the same size and weight as `label` or `label-sm`; with the line height reduced to match the font size. They exist for controls whose text is one line, vertically centred, where the component's padding governs its height.
 
 ```html
-<button class="label-tight">Download</button>
+<button class="label-md leading-none">Download</button>
 ```
 
 They must not wrap. Label text running to more than one line uses `label` or `label-sm`.
@@ -118,9 +118,9 @@ The `prose` class also limits its own width to a measure of roughly seventy char
 Use `not-prose` to opt out, at block or element level. This is most often needed around an embedded component with its own styling.
 
 ```html
-<div class="prose">
+<div class="typeset-longform">
 	<h3>Styled by the set</h3>
-	<div class="not-prose">
+	<div class="not-typeset">
 		<h3>Not styled</h3>
 	</div>
 </div>
@@ -153,10 +153,10 @@ Chart sizes are the same at every breakpoint.
 The titling roles are designed to be used together. Written as flat siblings inside a flow context, the spacing between them follows from the roles.
 
 ```html
-<section class="flow-product product">
+<section class="flow-standard typeset-product">
 	<p class="eyebrow">Air quality</p>
-	<h2 class="section-head">Nitrogen dioxide</h2>
-	<p class="subtitle">Rolling 24-hour mean</p>
+	<h2 class="title-lg">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
 </section>
 ```
 
@@ -167,9 +167,9 @@ The eyebrow closes up to the heading below it, the subtitle to the heading above
 Colour is a separate axis. Bind to a semantic token.
 
 ```html
-<p class="body text-color-text">Primary text</p>
+<p class="body-md text-color-text">Primary text</p>
 <p class="body-sm text-color-text-muted">Secondary text</p>
-<span class="label text-color-label">Control label</span>
+<span class="label-md text-color-label">Control label</span>
 ```
 
 Text and label tokens descend in emphasis — `text`, `text-muted`, `text-wash`, and `label`, `label-muted`. Text or an icon on a filled control uses an inverse token. Subhead, Subtitle, Lead, Eyebrow and the chart roles are already muted.
@@ -177,7 +177,7 @@ Text and label tokens descend in emphasis — `text`, `text-muted`, `text-wash`,
 For emphasis within a role, change the weight:
 
 ```html
-<p class="body">Readings are <span class="font-semibold">provisional</span>.</p>
+<p class="body-md">Readings are <span class="font-semibold">provisional</span>.</p>
 ```
 
 Four weights are in use: 400, 500, 600 and 700. Each role carries its own, so a weight should not be set alongside a role to reach a particular look. If a role looks wrong at its own weight, the role is usually the thing to reconsider.

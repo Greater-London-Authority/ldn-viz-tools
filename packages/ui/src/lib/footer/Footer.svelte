@@ -41,8 +41,8 @@
 
 	{#if showCiuLogo}
 		<div class="flex bg-color-surface px-4 pb-4 text-color-text sm:flex-row-reverse md:px-8">
-			<div class="product">
-				<p class="caption mb-1 tracking-wide">Designed and developed by</p>
+			<div class="typeset-product">
+				<p class="caption-sm mb-1 tracking-wide">Designed and developed by</p>
 				<LogoCIU class="h-4" />
 			</div>
 		</div>

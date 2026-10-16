@@ -27,9 +27,9 @@
 	let { size = 'sm' }: Props = $props();
 
 	const highlightedClasses =
-		'bg-color-interactive-selected text-color-static-white py-1 px-2 cursor-pointer label-tight';
+		'bg-color-interactive-selected text-color-static-white py-1 px-2 cursor-pointer label-md leading-none';
 	const nonHighlightedClasses =
-		'text-color-text hover:bg-color-interactive-primary-muted-hover py-1 px-2 cursor-pointer label-tight';
+		'text-color-text hover:bg-color-interactive-primary-muted-hover py-1 px-2 cursor-pointer label-md leading-none';
 	const buttonClasses =
 		'rounded-full text-xs p-1 min-w-6 min-h-6 bg-color-interactive-secondary text-color-static-white hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active dark:hover:text-color-inverse-text';
 </script>
@@ -60,7 +60,7 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Portal>
 		<DropdownMenu.Content
-			class="product z-40 border border-color-border-muted bg-color-surface capitalize shadow "
+			class="typeset-product z-40 border border-color-border-muted bg-color-surface capitalize shadow "
 			preventScroll={false}
 			aria-label="Select current theme mode"
 		>

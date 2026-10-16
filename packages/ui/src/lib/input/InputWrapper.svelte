@@ -43,7 +43,7 @@
 	);
 </script>
 
-<div class="product flex flex-col space-y-1">
+<div class="typeset-product flex flex-col space-y-1">
 	<div class="flex justify-between">
 		{#if label}
 			<label for={id} class={labelClasses}>

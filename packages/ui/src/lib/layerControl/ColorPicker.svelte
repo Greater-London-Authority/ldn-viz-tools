@@ -95,7 +95,7 @@
 			Colour
 		{/snippet}
 
-		<span class="caption mb-2 inline-block">Click to assign a colour to this layer.</span>
+		<span class="caption-sm mb-2 inline-block">Click to assign a colour to this layer.</span>
 
 		<div class="flex flex-wrap gap-0.5">
 			{#each colorNames as colorOption}

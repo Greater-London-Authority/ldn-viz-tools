@@ -155,15 +155,15 @@ Setting a gap by hand is worth avoiding here even where it produces the right re
 The space between blocks within a section comes from a [flow](/design-system/foundations/flow) context rather than from margins set on each element. Declaring the context on the section is usually enough; a relationship is stated explicitly only where nothing could infer it.
 
 ```html
-<section class="flow-product product">
-	<h2 class="section-head">Rough sleeping</h2>
-	<p class="subtitle">Quarterly</p>
+<section class="flow-standard typeset-product">
+	<h2 class="title-lg">Rough sleeping</h2>
+	<p class="subtitle-sm">Quarterly</p>
 
 	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
 		<!-- cards -->
 	</div>
 
-	<p class="caption">Source: CHAIN</p>
+	<p class="caption-sm">Source: CHAIN</p>
 </section>
 ```
 

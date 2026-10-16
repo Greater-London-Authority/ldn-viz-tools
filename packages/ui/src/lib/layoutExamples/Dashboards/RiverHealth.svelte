@@ -117,14 +117,14 @@
 		sidebarAlwaysOpen={{ initial: false, md: true }}
 	>
 		{#snippet main()}
-			<div class="product h-full bg-color-canvas-muted p-6">
+			<div class="typeset-product h-full bg-color-canvas-muted p-6">
 				<div class="flex flex-col gap-6">
 					<Breadcrumbs {breadcrumbs} />
 
 					<!-- Page head -->
 					<div class="flex flex-col gap-1">
-						<h1 class="page-head text-color-text">London's river health</h1>
-						<p class="subtitle text-color-text-muted">
+						<h1 class="headline-md text-color-text">London's river health</h1>
+						<p class="subtitle-sm text-color-text-muted">
 							Water quality monitoring across the capital's rivers, 2018–2024.
 						</p>
 					</div>
@@ -142,8 +142,8 @@
 
 					<!-- Section head -->
 					<div class="flex flex-col gap-1">
-						<h2 class="section-head text-color-text">Water quality trends</h2>
-						<p class="subtitle text-color-text-muted">
+						<h2 class="title-lg text-color-text">Water quality trends</h2>
+						<p class="subtitle-sm text-color-text-muted">
 							Comparing long-term index scores and reported incidents.
 						</p>
 					</div>
@@ -216,8 +216,8 @@
 	</AppShell>
 
 	<Footer showCiuLogo>
-		<div class="product flex flex-col gap-1">
-			<p class="label">London's river health</p>
+		<div class="typeset-product flex flex-col gap-1">
+			<p class="label-md">London's river health</p>
 			<p class="body-sm text-color-text-muted">
 				An example layout from the London City Data design system.
 			</p>

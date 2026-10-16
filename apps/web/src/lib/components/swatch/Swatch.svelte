@@ -92,7 +92,7 @@
 
 	const swatchClass = $derived(
 		classNames(
-			'product',
+			'typeset-product',
 			'text-left !items-stretch !no-underline hover:bg-color-interactive-primary-muted-hover',
 			'border-color-border-muted bg-color-surface flex-col justify-between border shadow-sm',
 			sizeClasses[size]

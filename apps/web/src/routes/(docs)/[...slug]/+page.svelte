@@ -10,7 +10,7 @@
 	const tocItems = $derived(data.metadata.toc);
 
 	let wrapperClass = $derived(
-		classNames('flow-prose prose', data.metadata.layout === 'index' ? 'max-w-full' : '')
+		classNames('typeset-longform', data.metadata.layout === 'index' ? 'max-w-full' : '')
 	);
 </script>
 
@@ -28,7 +28,7 @@
 	/>
 {/if}
 
-<div class="container flow-prose mx-auto pt-8">
+<div class="container flow-spacious mx-auto pt-8">
 	<div class="flex justify-between">
 		<div class={wrapperClass}>
 			<PageComponent />

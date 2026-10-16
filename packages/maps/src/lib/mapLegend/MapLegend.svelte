@@ -28,7 +28,7 @@
 
 {#if isOpen}
 	<div
-		class="product pointer-events-auto flex w-full flex-col gap-3 bg-color-surface px-4 py-3 sm:max-w-96"
+		class="typeset-product pointer-events-auto flex w-full flex-col gap-3 bg-color-surface px-4 py-3 sm:max-w-96"
 		bind:clientWidth={width}
 	>
 		<div class="flex justify-between align-middle">

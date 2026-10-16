@@ -11,44 +11,44 @@ thumbnail: cta-foundations-4.svg
     import TypographyTable from '$lib/components/typography/TypographyTable.svelte'
 
     const proseRoles = [
-        {text: 'Display', usage: 'Large, impactful text for a homepage hero. Sits above the content as page chrome.', class: 'display'},
-        {text: 'Headline', usage: 'The hero heading for a subpage — the alternative to Display in the same slot.', class: 'headline'},
-        {text: 'Subhead', usage: 'A supporting line immediately beneath a Headline.', class: 'subhead'},
-        {text: 'Title 1', usage: 'The top heading within the content itself.', class: 'title-1'},
-        {text: 'Title 2', usage: 'The second level of heading.', class: 'title-2'},
-        {text: 'Title 3', usage: 'The third level of heading.', class: 'title-3'},
-        {text: 'Title 4', usage: 'The fourth and final level of heading.', class: 'title-4'},
-        {text: 'Subtitle', usage: 'A supporting line immediately beneath a Title.', class: 'subtitle'},
-        {text: 'Lead', usage: 'An introductory or standfirst paragraph, set slightly larger than body text.', class: 'lead'},
-        {text: 'Body', usage: 'Default reading text — the paragraphs that make up the content.', class: 'body'},
+        {text: 'Display', usage: 'Large, impactful text for a homepage hero. Sits above the content as page chrome.', class: 'display-lg'},
+        {text: 'Headline', usage: 'The hero heading for a subpage — the alternative to Display in the same slot.', class: 'headline-lg'},
+        {text: 'Subhead', usage: 'A supporting line immediately beneath a Headline.', class: 'subhead-lg'},
+        {text: 'Title 1', usage: 'The top heading within the content itself.', class: 'headline-lg'},
+        {text: 'Title 2', usage: 'The second level of heading.', class: 'headline-sm'},
+        {text: 'Title 3', usage: 'The third level of heading.', class: 'title-lg'},
+        {text: 'Title 4', usage: 'The fourth and final level of heading.', class: 'title-md'},
+        {text: 'Subtitle', usage: 'A supporting line immediately beneath a Title.', class: 'subtitle-sm'},
+        {text: 'Lead', usage: 'An introductory or standfirst paragraph, set slightly larger than body text.', class: 'body-lg text-color-text-muted'},
+        {text: 'Body', usage: 'Default reading text — the paragraphs that make up the content.', class: 'body-md'},
         {text: 'Body small', usage: 'Secondary or denser reading text.', class: 'body-sm'},
-        {text: 'Caption', usage: 'Metadata and the smallest text on the page.', class: 'caption'},
+        {text: 'Caption', usage: 'Metadata and the smallest text on the page.', class: 'caption-sm'},
         {text: 'Eyebrow', usage: 'A short overline introducing the heading below it.', class: 'eyebrow'}
         ]
 
     const productRoles = [
-        {text: 'Page head', usage: 'The title of the page. One per page.', class: 'page-head'},
-        {text: 'Section head', usage: 'Groups related content within a page. May appear several times.', class: 'section-head'},
-        {text: 'Title', usage: 'The title of an object — a card, panel, modal, callout or drawer.', class: 'title'},
-        {text: 'Subtitle', usage: 'A supporting line beneath any heading or title.', class: 'subtitle'},
+        {text: 'Page head', usage: 'The title of the page. One per page.', class: 'headline-md'},
+        {text: 'Section head', usage: 'Groups related content within a page. May appear several times.', class: 'title-lg'},
+        {text: 'Title', usage: 'The title of an object — a card, panel, modal, callout or drawer.', class: 'title-sm'},
+        {text: 'Subtitle', usage: 'A supporting line beneath any heading or title.', class: 'subtitle-sm'},
         {text: 'Eyebrow', usage: 'A short overline above a title, and the treatment a Title takes when it steps aside.', class: 'eyebrow'},
-        {text: '1,284', usage: 'Metric — a headline figure or hero statistic.', class: 'metric'},
+        {text: '1,284', usage: 'Metric — a headline figure or hero statistic.', class: 'metric-lg'},
         {text: '87.4%', usage: 'Metric small — a secondary figure, or a KPI within a card.', class: 'metric-sm'},
-        {text: 'Body', usage: 'Default interface text — field values, menu items, descriptions.', class: 'body'},
+        {text: 'Body', usage: 'Default interface text — field values, menu items, descriptions.', class: 'body-md'},
         {text: 'Body small', usage: 'Secondary and denser text — hints, helper text, table cells.', class: 'body-sm'},
-        {text: 'Label', usage: 'Identifies a control — buttons, inputs, tabs, navigation items.', class: 'label'},
+        {text: 'Label', usage: 'Identifies a control — buttons, inputs, tabs, navigation items.', class: 'label-md'},
         {text: 'Label small', usage: 'The same job in dense contexts, and for table column headers.', class: 'label-sm'},
-        {text: 'Caption', usage: 'Metadata, badges and the smallest functional text.', class: 'caption'}
+        {text: 'Caption', usage: 'Metadata, badges and the smallest functional text.', class: 'caption-sm'}
         ]
 
     const chartRoles = [
-        {text: 'Title', usage: "The chart's own title, when the chart owns the primary slot.", class: 'title'},
-        {text: 'Subtitle', usage: 'A supporting line beneath a chart title.', class: 'subtitle'},
+        {text: 'Title', usage: "The chart's own title, when the chart owns the primary slot.", class: 'chart-title'},
+        {text: 'Subtitle', usage: 'A supporting line beneath a chart title.', class: 'chart-subtitle'},
         {text: 'Eyebrow', usage: 'What a chart title becomes when it steps aside for another heading.', class: 'eyebrow'},
-        {text: 'Axis title', usage: 'Names an axis, a series, or a legend.', class: 'axis-title'},
-        {text: 'Data label', usage: 'Value labels, annotations and legend entries.', class: 'label'},
-        {text: '2024', usage: 'Tick — axis and scale labels at the default density.', class: 'tick'},
-        {text: '2024', usage: 'Tick small — the smaller tick tier, for denser charts.', class: 'tick-sm'}
+        {text: 'Axis title', usage: 'Names an axis, a series, or a legend.', class: 'chart-axis-title'},
+        {text: 'Data label', usage: 'Value labels, annotations and legend entries.', class: 'chart-label'},
+        {text: '2024', usage: 'Tick — axis and scale labels at the default density.', class: 'chart-tick'},
+        {text: '2024', usage: 'Tick small — the smaller tick tier, for denser charts.', class: 'chart-tick-sm'}
         ]
 </script>
 
@@ -108,7 +108,7 @@ The sets can be combined and will work together, but this should be done with co
 
 Product carries fewer roles than Prose, because application chrome has shallower structure than rich content. The sizes shown below are those used on the widest screens; several roles grow with screen size, which is described under _Responsive sizing_.
 
-<div class="not-prose product my-8">
+<div class="typeset-product my-8">
     <TypographyTable items={productRoles} />
 </div>
 
@@ -150,7 +150,7 @@ The comparison values themselves are data labels rather than metrics, and take t
 
 Prose carries a fuller ladder than Product, because rich content has depth and needs more differentiation.
 
-<div class="not-prose prose my-8">
+<div class="typeset-longform my-8">
     <TypographyTable items={proseRoles} />
 </div>
 
@@ -170,7 +170,7 @@ Charts are a distinct context and have their own vocabulary.
 
 A dense chart needs a tick label smaller than anything the interface should use, and lowering the interface floor to accommodate it would affect every screen.
 
-<div class="not-prose chart my-8">
+<div class="not-typeset chart my-8">
     <TypographyTable items={chartRoles} />
 </div>
 
@@ -273,15 +273,15 @@ Two Prose roles are exceptions, and take a line height relative to their own siz
 A type set is applied as a class on a containing element. Everything inside it resolves its roles from that set.
 
 ```html
-<article class="prose">…</article>
-<section class="product">…</section>
+<article class="typeset-longform">…</article>
+<section class="typeset-product">…</section>
 <div class="chart">…</div>
 ```
 
 An application surface will normally also want a flow context, which governs the space between blocks.
 
 ```html
-<section class="flow-product product">…</section>
+<section class="flow-standard typeset-product">…</section>
 ```
 
 ### Prose styles its content automatically
@@ -289,16 +289,16 @@ An application surface will normally also want a flow context, which governs the
 Inside `prose`, ordinary HTML elements are styled for you. Headings take the Title ladder, paragraphs take Body, captions take Caption, and links, lists, blockquotes and tables are handled too. Standard content needs no classes.
 
 ```html
-<div class="prose">
+<div class="typeset-longform">
 	<h2>Title</h2>
 	<p>Body copy.</p>
-	<p class="lead">An introductory paragraph.</p>
+	<p class="body-lg text-color-text-muted">An introductory paragraph.</p>
 </div>
 ```
 
-<div class="prose border border-color-border-muted p-4 my-4">
+<div class="typeset-longform border border-color-border-muted p-4 my-4">
 	<h2>Title</h2>
-	<p class="lead">An introductory paragraph</p>
+	<p class="body-lg text-color-text-muted">An introductory paragraph</p>
     <p>Body copy</p>
 </div>
 
@@ -311,21 +311,21 @@ The `prose` class also limits its own width for readability, to a measure of rou
 Because `prose` styles elements automatically, you will sometimes need to opt out — most often around an embedded component that brings its own styling. Use `not-prose`, at either block or element level.
 
 ```html
-<div class="prose">
+<div class="typeset-longform">
 	<h3>Title</h3>
-	<div class="not-prose">
+	<div class="not-typeset">
 		<h3>I have escaped</h3>
 	</div>
-	<h3 class="not-prose">So have I</h3>
+	<h3 class="not-typeset">So have I</h3>
 </div>
 ```
 
 <div class="border border-color-border-muted p-4 my-4">
 	<h3>Title</h3>
-	<div class="not-prose">
+	<div class="not-typeset">
 		<h3>I have escaped</h3>
 	</div>
-	<h3 class="not-prose">So have I</h3>
+	<h3 class="not-typeset">So have I</h3>
 </div>
 
 ### Product requires explicit roles
@@ -333,19 +333,19 @@ Because `prose` styles elements automatically, you will sometimes need to opt ou
 The `product` class establishes the type set but applies no styling to elements. Apply the role directly to the element.
 
 ```html
-<div class="product">
+<div class="typeset-product">
 	<h2>No role applied</h2>
-	<h2 class="section-head">Section head</h2>
-	<p class="body">Body copy.</p>
-	<span class="label">Control label</span>
+	<h2 class="title-lg">Section head</h2>
+	<p class="body-md">Body copy.</p>
+	<span class="label-md">Control label</span>
 </div>
 ```
 
-<div class="not-prose product border border-color-border-muted p-4 my-4">
+<div class="typeset-product border border-color-border-muted p-4 my-4">
 	<h2>No role applied</h2>
-	<h2 class="section-head">Section head</h2>
-	<p class="body">Body copy.</p>
-	<span class="label">Control label</span>
+	<h2 class="title-lg">Section head</h2>
+	<p class="body-md">Body copy.</p>
+	<span class="label-md">Control label</span>
 </div>
 
 ### Choosing a role for an interface element
@@ -371,7 +371,7 @@ The `product` class establishes the type set but applies no styling to elements.
 They exist for controls whose text is a single line, vertically centred, where the component's own padding governs its height — buttons, tabs and chips.
 
 ```html
-<button class="label-tight">Download</button>
+<button class="label-md leading-none">Download</button>
 ```
 
 These must not wrap. Label text running to more than one line uses the standard `label` or `label-sm`.
@@ -381,17 +381,17 @@ These must not wrap. Label text running to more than one line uses the standard 
 The titling roles are designed to be used together. Write the group as flat sibling elements and give each its role; the spacing between them is handled by the flow system.
 
 ```html
-<section class="flow-product product">
+<section class="flow-standard typeset-product">
 	<p class="eyebrow">Air quality</p>
-	<h2 class="section-head">Nitrogen dioxide</h2>
-	<p class="subtitle">Rolling 24-hour mean</p>
+	<h2 class="title-lg">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
 </section>
 ```
 
-<div class="not-prose product flow-product border border-color-border-muted p-4 my-4">
+<div class="typeset-product flow-standard border border-color-border-muted p-4 my-4">
 	<p class="eyebrow">Air quality</p>
-	<h2 class="section-head">Nitrogen dioxide</h2>
-	<p class="subtitle">Rolling 24-hour mean</p>
+	<h2 class="title-lg">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
 </div>
 
 The eyebrow closes up to the heading below it, the subtitle closes up to the heading above it, and the larger break that separates one section from the next moves above the whole group. Reproducing the same appearance with generic classes — a small muted paragraph in place of the Subtitle — will look almost identical but will not be recognised as a titling group, and the spacing will be wrong.
@@ -401,9 +401,9 @@ The eyebrow closes up to the heading below it, the subtitle closes up to the hea
 Colour is a separate axis. Bind text colour to a semantic token.
 
 ```html
-<p class="body text-color-text">Primary text</p>
+<p class="body-md text-color-text">Primary text</p>
 <p class="body-sm text-color-text-muted">Secondary text</p>
-<span class="label text-color-label">Control label</span>
+<span class="label-md text-color-label">Control label</span>
 ```
 
 Text and label tokens descend in emphasis — `text`, `text-muted`, `text-wash`, and `label`, `label-muted`. Text or an icon sitting on a filled control uses an inverse token so that it themes correctly against the fill. Some roles are already muted by default: Subhead, Subtitle, Lead, Eyebrow and the chart roles.
@@ -411,7 +411,7 @@ Text and label tokens descend in emphasis — `text`, `text-muted`, `text-wash`,
 Where the intent is emphasis within a role, change the weight:
 
 ```html
-<p class="body">Readings are <span class="font-semibold">provisional</span>.</p>
+<p class="body-md">Readings are <span class="font-semibold">provisional</span>.</p>
 ```
 
 ### Things to avoid

@@ -18,10 +18,10 @@ const toLevel = (level: number): Level => Math.min(Math.max(level, 1), MAX_LEVEL
  * typography role is emitted per level, so nothing relies on class order.
  */
 const LEVEL_STYLES: Record<Level, { type: string; color: string }> = {
-	1: { type: 'label-tight', color: 'text-color-text' },
-	2: { type: 'label-tight', color: 'text-color-text-muted' },
-	3: { type: 'label-sm-tight', color: 'text-color-muted' },
-	4: { type: 'label-sm-tight', color: 'text-color-text-wash' }
+	1: { type: 'label-md leading-none', color: 'text-color-text' },
+	2: { type: 'label-md leading-none', color: 'text-color-text-muted' },
+	3: { type: 'label-sm leading-none', color: 'text-color-muted' },
+	4: { type: 'label-sm leading-none', color: 'text-color-text-wash' }
 };
 
 /**

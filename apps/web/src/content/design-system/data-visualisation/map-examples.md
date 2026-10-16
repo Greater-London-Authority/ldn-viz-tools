@@ -22,7 +22,7 @@ thumbnail: cta-dataviz-2.svg
 
 </script>
 
-<p class="lead">We generally display spatial data using choropleth maps, but sometimes use symbol maps or grid cartograms. </p>
+<p class="body-lg text-color-text-muted">We generally display spatial data using choropleth maps, but sometimes use symbol maps or grid cartograms. </p>
 
 These examples show how we use our colour system with Observable Plot to produce simple SVG choropleth and symbol maps that can be used in interactive dashboards or static reports.
 

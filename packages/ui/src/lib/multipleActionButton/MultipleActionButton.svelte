@@ -102,7 +102,7 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class="product z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
+					class="typeset-product z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>
@@ -122,9 +122,9 @@
 												class="mr-1 h-5 w-5 text-color-surface-accent"
 											/>
 										{/if}
-										<p class="label-tight">{option.menuLabel}</p>
+										<p class="label-md leading-none">{option.menuLabel}</p>
 									</div>
-									<p class="caption text-color-text-muted">
+									<p class="caption-sm text-color-text-muted">
 										{option.menuDescription}
 									</p>
 								</DropdownMenu.Item>

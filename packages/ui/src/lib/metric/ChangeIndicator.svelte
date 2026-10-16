@@ -89,9 +89,9 @@
 	let heroIsChange = $derived(hero === 'change' && !!change);
 	let changeSize = $derived.by(() => {
 		if (heroIsChange) {
-			return size === 'lg' ? 'metric' : 'metric-sm';
+			return size === 'lg' ? 'metric-lg' : 'metric-sm';
 		} else {
-			return size === 'lg' ? 'label-tight' : 'label-sm-tight';
+			return size === 'lg' ? 'label-md leading-none' : 'label-sm leading-none';
 		}
 	});
 

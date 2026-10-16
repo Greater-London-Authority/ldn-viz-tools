@@ -22,8 +22,8 @@
 
 <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
 	<div class="mx-2 max-w-md bg-white shadow-lg lg:w-[470px]">
-		<div class="dark product relative bg-color-surface-muted p-4 text-color-text">
-			<p class="label">{config.app_name}: Log In</p>
+		<div class="dark typeset-product relative bg-color-surface-muted p-4 text-color-text">
+			<p class="label-md">{config.app_name}: Log In</p>
 		</div>
 
 		<form class="space-y-4 p-3">

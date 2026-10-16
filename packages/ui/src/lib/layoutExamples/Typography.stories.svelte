@@ -37,13 +37,13 @@
 
 <Story name="Typography">
 	<div class="container py-16">
-		<div class="flow-prose prose">
+		<div class="typeset-longform">
 			<!-- Hero cluster — eyebrow kicker, headline and subhead couple tight to the title -->
 			<p class="eyebrow">GLA City Intelligence</p>
-			<h1 class="headline">State of London</h1>
-			<p class="subhead">A sample data notebook, styled by the London City Data Design System</p>
+			<h1 class="headline-lg">State of London</h1>
+			<p class="subhead-lg">A sample data notebook, styled by the London City Data Design System</p>
 
-			<p class="lead">
+			<p class="body-lg text-color-text-muted">
 				This page is an example of long-form analytical content — the kind of borough profile or
 				briefing where a paragraph sets up a chart, a chart earns a table, and a table needs a
 				footnote.
@@ -99,7 +99,7 @@
 			</p>
 			<hr />
 			<h2>What to expect from here on out</h2>
-			<p class="subtitle">A tour of every element the design system styles</p>
+			<p class="subtitle-sm">A tour of every element the design system styles</p>
 			<div>
 				<p>
 					What follows is placeholder copy standing in for the body of a report, written to exercise

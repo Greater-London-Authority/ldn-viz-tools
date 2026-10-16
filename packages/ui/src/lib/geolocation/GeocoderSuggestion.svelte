@@ -44,7 +44,7 @@
 		data-geocoder-suggestion-id={suggestion.id}
 	>
 		{#if suggestion.name}
-			<p class="label-tight pointer-events-none mb-1 underline">{suggestion.name}</p>
+			<p class="label-md pointer-events-none mb-1 leading-none underline">{suggestion.name}</p>
 		{/if}
 		{#if suggestion.address}
 			<p class="body-sm pointer-events-none">{suggestion.address}</p>

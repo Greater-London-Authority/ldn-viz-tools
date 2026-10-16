@@ -72,8 +72,8 @@ If the children of a container are a stack of blocks, their spacing is flow. If 
 A context is applied as a class on a containing element.
 
 ```html
-<article class="flow-prose">…</article>
-<section class="flow-product">…</section>
+<article class="flow-spacious">…</article>
+<section class="flow-standard">…</section>
 <div class="flow-compact">…</div>
 ```
 
@@ -84,7 +84,7 @@ Contexts can be nested, and the innermost one applies. A toast inside a dashboar
 A surface will usually require a type set as well as a flow context. The two are separate systems that share the words _product_ and _prose_:
 
 ```html
-<section class="flow-product product">…</section>
+<section class="flow-standard typeset-product">…</section>
 ```
 
 ### Reading content spaces itself
@@ -111,9 +111,9 @@ Inside `flow-prose`, the spacing follows from the markup. These are the relation
 An article needs no spacing classes at all:
 
 ```html
-<article class="flow-prose prose">
+<article class="typeset-longform">
 	<h2>Air quality</h2>
-	<p class="subtitle">Rolling 24-hour mean across twelve sites</p>
+	<p class="subtitle-sm">Rolling 24-hour mean across twelve sites</p>
 	<p>Concentrations fell across every monitored borough during the period…</p>
 
 	<figure>
@@ -132,11 +132,11 @@ Relationships are determined by a type element's role class. Applying the right 
 
 ```html
 <!-- Recognised as a heading and its supporting line, and closed up accordingly -->
-<h2 class="section-head">Rough sleeping</h2>
-<p class="subtitle">Quarterly</p>
+<h2 class="title-lg">Rough sleeping</h2>
+<p class="subtitle-sm">Quarterly</p>
 
 <!-- Looks almost identical, but is not recognised, and takes the ordinary gap -->
-<h2 class="section-head">Rough sleeping</h2>
+<h2 class="title-lg">Rough sleeping</h2>
 <p class="body-sm text-color-text-muted">Quarterly</p>
 ```
 
@@ -153,9 +153,9 @@ mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section
 ```
 
 ```html
-<section class="flow-product product">
-	<h2 class="section-head">Monitoring sites</h2>
-	<p class="subtitle">Twelve active sensors</p>
+<section class="flow-standard typeset-product">
+	<h2 class="title-lg">Monitoring sites</h2>
+	<p class="subtitle-sm">Twelve active sensors</p>
 
 	<div class="mt-flow-section">
 		<!-- a further part of the section, deliberately set apart -->
@@ -170,9 +170,9 @@ gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
 ```
 
 ```html
-<section class="flow-product product">
-	<h2 class="section-head">Monitoring sites</h2>
-	<p class="subtitle">Twelve active sensors</p>
+<section class="flow-standard typeset-product">
+	<h2 class="title-lg">Monitoring sites</h2>
+	<p class="subtitle-sm">Twelve active sensors</p>
 
 	<div class="mt-flow-section flex flex-col gap-flow-tight">
 		<!-- a further part of the section, deliberately set apart with a tight flow-->
@@ -209,13 +209,13 @@ Written by hand, it might look like this:
 ```html
 <div class="flex flex-col gap-6">
 	<div>
-		<h2 class="section-head mb-1">Rough sleeping</h2>
+		<h2 class="title-lg mb-1">Rough sleeping</h2>
 		<p class="body-sm text-color-text-muted">Quarterly</p>
 	</div>
 	<div class="grid grid-cols-3 gap-4">
 		<!-- cards -->
 	</div>
-	<p class="caption mt-2">Source: CHAIN</p>
+	<p class="caption-sm mt-2">Source: CHAIN</p>
 </div>
 ```
 
@@ -226,15 +226,15 @@ The wrapper exists only to hold a margin. The trailing margin adds to the parent
 Using the system:
 
 ```html
-<section class="flow-product product">
-	<h2 class="section-head">Rough sleeping</h2>
-	<p class="subtitle">Quarterly</p>
+<section class="flow-standard typeset-product">
+	<h2 class="title-lg">Rough sleeping</h2>
+	<p class="subtitle-sm">Quarterly</p>
 
 	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
 		<!-- cards -->
 	</div>
 
-	<p class="caption">Source: CHAIN</p>
+	<p class="caption-sm">Source: CHAIN</p>
 </section>
 ```
 

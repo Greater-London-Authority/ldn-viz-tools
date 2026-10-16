@@ -62,7 +62,7 @@
 		{#if hasFootnotes}
 			<!-- eslint-disable svelte/no-at-html-tags -->
 			<ul
-				class="product caption mr-4 flex min-w-40 max-w-xl flex-col gap-1 text-color-text-muted [&_a:hover]:text-color-interactive-primary-hover [&_a:hover]:no-underline [&_a]:underline"
+				class="typeset-product caption-sm mr-4 flex min-w-40 max-w-xl flex-col gap-1 text-color-text-muted [&_a:hover]:text-color-interactive-primary-hover [&_a:hover]:no-underline [&_a]:underline"
 			>
 				{#if byline}<li>{@html byline}</li>{/if}
 				{#if source}<li><span class="mr-1 font-bold">Source:</span>{@html source}</li>{/if}
