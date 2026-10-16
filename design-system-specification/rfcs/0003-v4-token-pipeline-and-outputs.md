@@ -125,7 +125,7 @@ If nothing changes, the v4 classes from RFC 0002 will be written as more Tailwin
 
 ## Workstream 4 — Tailwind preset
 
-- **The change.** Now: the preset extends the theme from four `tw-extend` files and adds five plugins. Proposed: the preset only maps the Tailwind theme onto the custom properties (colours, spacing, `screens` from the breakpoint tokens, `boxShadow` from the shadow tokens, font families), and keeps `@tailwindcss/forms` and the custom form styles. It is generated as one file, not assembled from four.
+- **The change.** Now: the preset extends the theme from four `tw-extend` files and adds five plugins. Proposed: the preset only maps the Tailwind theme onto the custom properties (colours, spacing, `screens` from the breakpoint tokens, `boxShadow` from the shadow tokens, font families). It is generated as one file, not assembled from four, and adds no plugins. The form styles move to `system.css` as plain CSS, so they are available without Tailwind like every other class, and `@tailwindcss/forms` is dropped.
 - **Why it has to break.** The plugins move to `system.css` (workstream 3), so a Tailwind consumer must also import `system.css` or `index.css`.
 - **Affected surface.** `ldn-theme.cjs`, `tw-extend/*.cjs`, the six `tailwind.config.cjs` files. `@tailwindcss/typography` is listed in `packages/tables/package.json` but not used, and is removed.
 - **Migration.** Tailwind configs change their preset import path. Apps add the `system.css` import.

@@ -52,8 +52,8 @@ Generating the classes from the same dictionary as the properties keeps the two 
 
 - Breaking for consumers who relied on the preset alone. A Tailwind app imports `index.css` (or `system.css`) as well as the preset. `packages/themes/MIGRATION.md` lists the change.
 - Responsive and state variants of system classes stop working. A scan of `packages` and `apps` found none in use.
-- `tailwind-custom/typography/` and `tailwind-custom/flow/` are removed, with the layout and base plugins in `ldn-theme.cjs`. `tailwind-custom/forms.cjs` stays until workstream 4.
-- The Tailwind copies of the flow utilities (`styles/tw-extend/flow.cjs`) still ship and are removed with the generated preset (workstream 4).
+- `tailwind-custom/` and `ldn-theme.cjs` are removed. The Tailwind preset is generated (`styles/tailwind.cjs`) and only maps the theme onto the custom properties; it adds no plugins.
+- The form classes (`.form-input`, `.form-checkbox` and the rest) are plain CSS in `system.css`, written by hand in `sd/forms.css`: a port of `@tailwindcss/forms` with the system's form styles folded in. `@tailwindcss/forms` is no longer a dependency. The select chevron is a data URI, which can't read a custom property, so the build writes one per mode from the resolved colour token.
 - `scripts/check_spec.py` reads the removed plugin files. It is rewritten against the new outputs in workstream 6.
 - `.not-prose` becomes `.not-typeset`. Internal uses (the docs site and Storybook) move in phase 5.
 - A selector can't tell which ancestor typeset is nearest, so content nested three typesets deep (longform, product, longform) gets no content styles. `@scope` removes this limit.

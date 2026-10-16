@@ -38,6 +38,6 @@ This amends the consequences of 0005. Its rules stand.
 
 ## Consequences
 
-- `tailwind-custom/flow/` is removed. `tw-extend/flow.cjs` still ships until the generated preset replaces it (RFC 0003, workstream 4).
+- `tailwind-custom/flow/` and `tw-extend/flow.cjs` are removed. The Tailwind preset no longer defines flow spacing, so `mt-flow-*` and `gap-flow-*` come only from `system.css`.
 - Tailwind variants of the flow utilities (`md:mt-flow-loose`) no longer exist.
 - `--flow-tight`, `--flow-default`, `--flow-loose` and `--flow-section` are still set on `:root` (pointing at standard), so a utility outside any context resolves.
