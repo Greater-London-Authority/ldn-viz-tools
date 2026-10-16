@@ -79,7 +79,9 @@ describe('formatSystem', () => {
 			...config.typesets.map((t) => t.className),
 			...roleClasses,
 			...config.flow.contexts.map((c) => `flow-${c}`),
-			...config.flow.steps.flatMap((s) => [`mt-flow-${s}`, `gap-flow-${s}`]),
+			...config.flow.steps.flatMap((s) =>
+				['mt-flow', 'gap-flow'].map((p) => config.flow.utility(p, s))
+			),
 			...Object.keys(config.emphasis),
 			...config.elevation.map((n) => `elevation-${n}`),
 			'container-fluid',
@@ -105,6 +107,13 @@ describe('formatSystem', () => {
 		expect(css).toMatch(
 			/\.typeset-longform > \* \{\n {2}--flow-tight: var\(--flow-spacious-tight\);/
 		);
+	});
+
+	it('names the default flow utility without the step, and lets it override the owl', () => {
+		expect(css).toMatch(/^\.mt-flow \{/m);
+		expect(css).toMatch(/^\.gap-flow \{/m);
+		expect(css).not.toMatch(/\.(mt|gap)-flow-default\b/);
+		expect(css).toContain(':not(.sr-only, [hidden], template, .mt-flow, [class*="mt-flow-"])');
 	});
 
 	it('gives metric roles and tabular aliases tabular numerals', () => {

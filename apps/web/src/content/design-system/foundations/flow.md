@@ -149,7 +149,7 @@ Where nothing can be inferred, say which relationship applies. Four utilities ar
 The `mt-` form goes on the element that needs space above it.
 
 ```
-mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section
+mt-flow-tight     mt-flow     mt-flow-loose     mt-flow-section
 ```
 
 ```html
@@ -166,7 +166,7 @@ mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section
 The `gap-` form goes on a flex or grid container to space its children, and should be used on a container that is not itself a flow context — a context already spaces its children, so doing both produces twice the gap.
 
 ```
-gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
+gap-flow-tight    gap-flow    gap-flow-loose    gap-flow-section
 ```
 
 ```html

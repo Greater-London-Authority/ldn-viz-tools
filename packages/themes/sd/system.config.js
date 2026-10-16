@@ -99,7 +99,10 @@ export const flow = {
 	// Elements set off from their neighbours by the loose step.
 	blockObjects: ['figure', 'img', 'table', 'pre', 'blockquote', '.chart'],
 	// Never spaced, and never what a neighbour is spaced from.
-	collapsed: ['.sr-only', '[hidden]', 'template']
+	collapsed: ['.sr-only', '[hidden]', 'template'],
+	// Utility names follow the implied-default rule (ADR 0002): `.mt-flow`, not
+	// `.mt-flow-default`.
+	utility: (prefix, step) => (step === 'default' ? prefix : `${prefix}-${step}`)
 };
 
 // Element styles for unclassed markup (Markdown, CMS output), hand-written in

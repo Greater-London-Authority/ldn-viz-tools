@@ -381,7 +381,9 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	const root = `:is(${roots.join(', ')})`;
 	const collapsed = cfg.flow.collapsed.join(', ');
 	const visible = `:not(${collapsed})`;
-	const unset = ':not([class*="mt-flow-"])';
+	const { utility } = cfg.flow;
+	const override = `.${utility('mt-flow', 'default')}, [class*="mt-flow-"]`;
+	const unset = `:not(${override})`;
 	const is = (selectors) => `:is(${selectors.join(', ')})`;
 
 	const { majorHeadings, minorHeadings, companions, overline } = cfg.flowRoles;
@@ -401,10 +403,10 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		// this. :where() keeps it at zero specificity, so any class still wins.
 		rule(`:where(${roots.join(', ')}) > *`, { 'margin-block': '0' }),
 		// 1 · every visible sibling gets the default step
-		rule(`${root} > ${visible} + :not(${collapsed}, [class*="mt-flow-"])`, margin('default')),
+		rule(`${root} > ${visible} + :not(${collapsed}, ${override})`, margin('default')),
 		// 2 · block objects are set off above and below
 		rule(`${root} > ${visible} + ${blocks}${unset}`, margin('loose')),
-		rule(`${root} > ${blocks} + :not(${collapsed}, [class*="mt-flow-"])`, margin('loose')),
+		rule(`${root} > ${blocks} + :not(${collapsed}, ${override})`, margin('loose')),
 		// 3 · space before headings: major and minor
 		rule(`${root} > ${visible} + ${major}${unset}`, margin('section')),
 		rule(`${root} > ${visible} + ${minor}${unset}`, margin('loose')),
@@ -428,8 +430,8 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	// Utilities carry a relationship, never a density: the value comes from
 	// the context in scope.
 	const flowUtilities = section('Flow utilities', [
-		...steps.map((step) => rule(`.mt-flow-${step}`, margin(step))),
-		...steps.map((step) => rule(`.gap-flow-${step}`, { gap: `var(--flow-${step})` }))
+		...steps.map((step) => rule(`.${utility('mt-flow', step)}`, margin(step))),
+		...steps.map((step) => rule(`.${utility('gap-flow', step)}`, { gap: `var(--flow-${step})` }))
 	]);
 
 	/* Elevation -------------------------------------------------------- */

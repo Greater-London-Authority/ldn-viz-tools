@@ -92,8 +92,10 @@ The flow contexts are renamed, and the `default` step is implied.
 | `--flow-product-{tight,loose,section}` | `--flow-standard-{tight,loose,section}` |
 | `--flow-product-default`               | `--flow-standard`                       |
 | `--flow-compact-default`               | `--flow-compact`                        |
+| `.mt-flow-default`                     | `.mt-flow`                              |
+| `.gap-flow-default`                    | `.gap-flow`                             |
 
-The values are unchanged. `--flow-{tight,default,loose,section}` and the `mt-flow-*` and `gap-flow-*` utilities are unchanged.
+The values are unchanged. `--flow-{tight,default,loose,section}` and the other `mt-flow-*` and `gap-flow-*` utilities are unchanged.
 
 ### Typography
 

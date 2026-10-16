@@ -84,8 +84,8 @@ they also **arm the rules**, which `:root` cannot do.
 Four keys, exposed through the theme's `margin` and `gap` keys:
 
 ```
-mt-flow-tight    mt-flow-default    mt-flow-loose    mt-flow-section
-gap-flow-tight   gap-flow-default   gap-flow-loose   gap-flow-section
+mt-flow-tight    mt-flow    mt-flow-loose    mt-flow-section
+gap-flow-tight   gap-flow   gap-flow-loose   gap-flow-section
 ```
 
 - `mt-flow-*` → the element needing the gap **above** it.
@@ -222,7 +222,7 @@ component interiors.
 
 | Component                       | From        | To                                  |
 | ------------------------------- | ----------- | ----------------------------------- |
-| `Card`                          | `gap-2`     | `gap-flow-default`                  |
+| `Card`                          | `gap-2`     | `gap-flow`                  |
 | `InputWrapper`, `CheckboxGroup` | `space-y-1` | `gap-flow-tight`                    |
 | `Toast`                         | `mb-1`      | delete — `flow-compact` supplies it |
 

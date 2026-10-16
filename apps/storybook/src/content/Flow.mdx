@@ -95,8 +95,8 @@ Most of the rules match on the role class, not only the element. Using the right
 Generic containers (such as `div` element), describe nothing, so only the general rule applies and every gap comes out the same. Use `mt-flow-*` and `gap-flow-*` classes to explicitly name the relationship where it matters:
 
 ```
-mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section
-gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
+mt-flow-tight     mt-flow     mt-flow-loose     mt-flow-section
+gap-flow-tight    gap-flow    gap-flow-loose    gap-flow-section
 ```
 
 The `mt-` form goes on the element needing space above it. The `gap-` form goes on a flex or grid container that is not itself a flow context.
@@ -152,7 +152,7 @@ The current values already fall on relationships, so these are equivalent swaps:
 
 | Component                       | From        | To                                  |
 | ------------------------------- | ----------- | ----------------------------------- |
-| `Card`                          | `gap-2`     | `gap-flow-default`                  |
+| `Card`                          | `gap-2`     | `gap-flow`                  |
 | `InputWrapper`, `CheckboxGroup` | `space-y-1` | `gap-flow-tight`                    |
 | `Toast`                         | `mb-1`      | remove — `flow-compact` provides it |
 
