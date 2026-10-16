@@ -25,7 +25,7 @@ The nine old stylesheet imports become `@import '@ldn-viz/themes/index.css';`. T
 | `lead` | `body-lg text-color-text-muted` |
 | `body`, `label`, `caption` | `body-md`, `label-md`, `caption-sm` |
 | `metric` | `metric-lg` |
-| `label-tight`, `label-sm-tight` | `label-md leading-none`, `label-sm leading-none` |
+| `label-tight`, `label-sm-tight` | `label-md`, `label-sm`. No single-line variant: keep the role's line height and reduce padding where a control's height must not change |
 | `axis-title`, `tick`, `tick-sm` | `chart-axis-title`, `chart-tick`, `chart-tick-sm` |
 
 `body-sm`, `label-sm`, `metric-sm` and `eyebrow` keep their names.
@@ -54,7 +54,7 @@ Values are unchanged.
 | `--color-geo-inverse-*` | `--color-inverse-geo-*` |
 | `--grid-spacing-{bp}-*` | `--grid-{bp}-*` |
 
-The three container levels become one, so stacked levels need another way to separate them, such as a border. The same renames apply to Tailwind colour classes, such as `bg-color-surface-muted`, and to `colors.js` keys: `surface.muted`, `inverse.chart.*`.
+The three container levels become one. A surface's level is set by its colour and an elevation class. The same renames apply to Tailwind colour classes, such as `bg-color-surface-muted`, and to `colors.js` keys: `surface.muted`, `inverse.chart.*`.
 
 ## Older retired names
 
@@ -70,7 +70,7 @@ These were retired before v4 and still appear in a few files.
 
 ## Migrating a component
 
-1. Text. Choose each role by what the text does, not by its current size. `text-sm` is `label-md` on a button and `body-sm` on helper text. Remove `text-*`, `font-*` and `leading-*` utilities that sit beside a role. If a role changes the size, record the before and after.
+1. Text. Choose each role by what the text does, not by its current size. `text-sm` is `label-md` on a button and `body-sm` on helper text. Remove `text-*`, `font-*` and `leading-*` utilities: the preset no longer defines them, so they produce nothing. If a role changes the size, record the before and after.
 2. Typeset. Make sure the component, or a container above it, has a typeset class.
 3. Vertical space. If the children are a stack of blocks, use a flow context and let the rules set the steps; use `mt-flow-*` only to override. If they are parts of one structure, keep spacing-scale utilities.
 4. Horizontal space. Always spacing, or a grid gutter between tiled items.

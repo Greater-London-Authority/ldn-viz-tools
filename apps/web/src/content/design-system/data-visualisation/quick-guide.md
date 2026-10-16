@@ -116,7 +116,7 @@ thumbnail: cta-dataviz-4.svg
     
 
     let chartColorsOrdered = [
-            'color-chart-background', 
+            'color-chart-surface', 
             'color-chart-axis', 
             'color-chart-grid', 
             'color-chart-label', 
@@ -287,7 +287,7 @@ Our default diverging scale, is red (negative) to blue (positive). This is to av
 
 ### Chart styling
 
-To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's `background, axis, grids and labels`.
+To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's surface, axis, grid and labels.
 
 <div class="not-typeset">
 <SwatchGrid tokenData={chartColors} title="Chart colour tokens"/>

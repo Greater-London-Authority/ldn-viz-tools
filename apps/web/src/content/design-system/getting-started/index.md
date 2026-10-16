@@ -33,24 +33,7 @@ The system is available as node modules for installation using your favourite pa
 <div class="not-typeset">
 
 ```html
-<link
-	href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes@6.0.0/styles/global.min.css"
-	rel="stylesheet"
-/>
-```
-
-```html
-<link
-	href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes@6.0.0/styles/dark.min.css"
-	rel="stylesheet"
-/>
-```
-
-```html
-<link
-	href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes@6.0.0/styles/light.min.css"
-	rel="stylesheet"
-/>
+<link href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes/styles/index.css" rel="stylesheet" />
 ```
 
 </div>

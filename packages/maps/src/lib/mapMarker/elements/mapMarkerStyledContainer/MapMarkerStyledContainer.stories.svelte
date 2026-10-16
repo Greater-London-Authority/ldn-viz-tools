@@ -89,7 +89,7 @@ The container's `preventZoom` handler stops scroll events from being interpreted
 		<div class="mb-4 mt-32 flex items-center justify-center">
 			<MapMarkerStyledContainer class="max-h-48">
 				<div class="w-auto max-w-64">
-					<h1 class="mb-2 text-lg font-medium">Scrollable content</h1>
+					<h1 class="label-lg mb-2">Scrollable content</h1>
 					{#each Array(15) as _, i (i)}
 						<p>Line {i + 1}: content goes here. Content goes here. Content goes here.</p>
 					{/each}

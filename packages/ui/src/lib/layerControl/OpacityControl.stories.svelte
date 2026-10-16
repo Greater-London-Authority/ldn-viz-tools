@@ -23,7 +23,7 @@
 <Story name="Default">
 	{#snippet template()}
 		<OpacityControl label="Borough" bind:opacity />
-		<pre class="mt-4 text-xs">{opacity}</pre>
+		<pre class="caption-sm mt-4">{opacity}</pre>
 	{/snippet}
 </Story>
 
@@ -41,6 +41,6 @@
 			<OpacityControl label="Transparent" bind:opacity={opacityMin} />
 			<OpacityControl label="Opaque" bind:opacity={opacityMax} />
 		</div>
-		<pre class="mt-4 text-xs">min: {opacityMin}, max: {opacityMax}</pre>
+		<pre class="caption-sm mt-4">min: {opacityMin}, max: {opacityMax}</pre>
 	{/snippet}
 </Story>

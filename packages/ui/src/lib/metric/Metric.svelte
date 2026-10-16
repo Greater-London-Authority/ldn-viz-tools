@@ -76,7 +76,7 @@
 	}: Props = $props();
 
 	let metricRole = $derived(size === 'lg' ? 'metric-lg' : 'metric-sm');
-	let labelRole = $derived(size === 'lg' ? 'label-md leading-none' : 'label-sm leading-none');
+	let labelRole = $derived(size === 'lg' ? 'label-md' : 'label-sm');
 	let bodyRole = $derived(size === 'lg' ? 'body-md' : 'body-sm');
 
 	let hasChange = $derived(typeof value !== 'undefined' && typeof comparisonValue !== 'undefined');

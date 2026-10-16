@@ -94,19 +94,17 @@
 		classNames(
 			'typeset-product',
 			'text-left !items-stretch !no-underline hover:bg-color-interactive-primary-muted-hover',
-			'border-color-border-muted bg-color-surface flex-col justify-between border shadow-sm',
+			'border-color-border-muted bg-color-surface flex-col justify-between border elevation-1',
 			sizeClasses[size]
 		)
 	);
-
-	const textSize = $derived(size === 'xs' ? 'text-xs' : 'text-sm');
 </script>
 
 <Button variant="text" onclick={copyToClipboard} class={swatchClass}>
 	<div class="aspect-video" style:background-color={value}></div>
 
 	{#if size !== 'xs'}
-		<div class={textSize}>
+		<div>
 			<p class="label-sm text-color-text-muted">{name}</p>
 			{#if lastButtonId !== id}
 				<p class="label-sm text-color-text">{value}</p>
@@ -114,14 +112,14 @@
 				<p class="label-sm text-color-interactive-primary-active">Copied!</p>
 			{/if}
 			{#if description}
-				<p>Description: {description}</p>
+				<p class="body-sm">Description: {description}</p>
 			{/if}
 		</div>
 	{/if}
 
 	{#if size === 'xs'}
 		{@const trimmedName = name.split('-').pop()}
-		<div class={textSize}>
+		<div>
 			<p class="label-sm text-color-text-muted">{trimmedName}</p>
 			{#if lastButtonId !== id}
 				<p class="label-sm text-color-text">{value}</p>

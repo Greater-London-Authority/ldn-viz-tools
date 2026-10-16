@@ -45,7 +45,9 @@ Headlines open a page or section; titles name the units inside it. Labels are ne
 
 The role set is closed. Adding a role needs an ADR.
 
-Don't add Tailwind size, weight or line-height utilities to a role class. Change the role instead, or use an emphasis class.
+The preset has no Tailwind size, weight or line-height utilities, so `text-sm`, `font-bold` and `leading-none` produce nothing. Change the role instead, or use an emphasis class.
+
+No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, takes a label role: `label-lg`, or `label-md` one level down. `.dialog-title` is `label-lg` for the same reason.
 
 ## Emphasis
 
@@ -53,7 +55,7 @@ Don't add Tailwind size, weight or line-height utilities to a role class. Change
 
 ## Weights and line heights
 
-Weights are regular 400, medium 500, semi-bold 600 and bold 700, as `--primitive-typography-font-weight-{name}`. The weight name is hyphenated: semi-bold.
+Weights are light 300, regular 400, medium 500, semi-bold 600 and bold 700, as `--primitive-typography-font-weight-{name}`. No role uses light. The weight name is hyphenated: semi-bold.
 
 Line heights are the font size plus 4px (tight), 8px (default) or 12px (loose).
 
@@ -91,7 +93,7 @@ Inside `typeset-longform` and `typeset-product--formatted`, each direct child ha
 
 `.width-content`, `.width-content-wide` and `.width-content-full` set a child's width directly. A Tailwind `max-w-*` utility wins over both.
 
-The multiples are provisional until the export has readable-width tokens.
+The multiples are set in `packages/themes/sd/system.config.js`, not in the export ([0015](../../../../design-system-specification/decisions/0015-system-classes.md)).
 
 ## Usage aliases
 

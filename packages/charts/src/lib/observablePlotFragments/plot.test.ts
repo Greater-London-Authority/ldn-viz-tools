@@ -111,7 +111,7 @@ describe('plot()', () => {
 
 		expect(spec.style).toEqual({
 			color: 'red',
-			fontSize: '0.875rem',
+			fontSize: 'var(--caption-md-font-size, 0.875rem)',
 			fontFamily: expect.any(String),
 			background: 'value(chart.surface)',
 			extra: 'thing'

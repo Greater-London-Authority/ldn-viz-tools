@@ -5,7 +5,7 @@
 </script>
 
 <div class="flex justify-between">
-	<ul class="flex space-x-2 leading-none">
+	<ul class="flex space-x-2">
 		<li><CookieControlSettings size="xs" /></li>
 		<li><PrivacyPolicyLink size="xs" /></li>
 	</ul>

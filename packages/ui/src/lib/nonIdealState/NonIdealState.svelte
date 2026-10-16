@@ -39,7 +39,7 @@
 		{/if}
 	{/if}
 
-	<span class="max-w-xl text-lg font-bold">
+	<span class="title-sm max-w-xl">
 		<!-- contains the title text, displayed below the icon -->
 		{#if title}
 			{@render title()}

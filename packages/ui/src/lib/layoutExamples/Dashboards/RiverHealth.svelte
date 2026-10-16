@@ -123,8 +123,8 @@
 
 					<!-- Page head -->
 					<div class="flex flex-col gap-1">
-						<h1 class="headline-md text-color-text">London's river health</h1>
-						<p class="subtitle-sm text-color-text-muted">
+						<h1 class="dashboard-main-title">London's river health</h1>
+						<p class="dashboard-main-subtitle">
 							Water quality monitoring across the capital's rivers, 2018–2024.
 						</p>
 					</div>

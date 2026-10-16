@@ -111,7 +111,7 @@
 						<div class="divide-y divide-color-border-muted">
 							{#each options as option (option.id)}
 								<DropdownMenu.Item
-									class="group  w-full cursor-pointer p-2 text-left hover:bg-color-interactive-primary-muted-hover"
+									class="group w-full cursor-pointer px-2 py-1 text-left hover:bg-color-interactive-primary-muted-hover"
 									onSelect={() => changeOption(option)}
 								>
 									<div class="flex items-center">
@@ -122,7 +122,7 @@
 												class="mr-1 h-5 w-5 text-color-surface-accent"
 											/>
 										{/if}
-										<p class="label-md leading-none">{option.menuLabel}</p>
+										<p class="label-md">{option.menuLabel}</p>
 									</div>
 									<p class="caption-sm text-color-text-muted">
 										{option.menuDescription}

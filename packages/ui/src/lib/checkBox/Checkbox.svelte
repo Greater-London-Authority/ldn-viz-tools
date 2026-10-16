@@ -46,7 +46,7 @@
 	/>
 
 	{#if label}
-		<label class="body-md ml-2 font-normal" for={id}>{label}</label>
+		<label class="form-label ml-2" for={id}>{label}</label>
 	{/if}
 
 	{#if hint}

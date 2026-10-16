@@ -144,7 +144,11 @@
 
 		.maplibregl-ctrl-attrib-inner,
 		.mapboxgl-ctrl-attrib-inner {
-			@apply text-xs;
+			font-family: var(--caption-sm-font-family);
+			font-size: var(--caption-sm-font-size);
+			font-weight: var(--caption-sm-font-weight);
+			letter-spacing: var(--caption-sm-letter-spacing);
+			line-height: var(--caption-sm-line-height);
 			@apply align-middle;
 			@apply text-color-text;
 			@apply pt-0.5;

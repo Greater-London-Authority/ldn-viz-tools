@@ -180,13 +180,20 @@
 {/key}
 
 <style>
-	:global(.defaultColorLegendLabel-swatch) {
-		font-size: var(--label-font-size);
-	}
+	:global(.defaultColorLegendLabel-swatch),
 	:global(.defaultColorLegendLabel-ramp) {
-		font-size: var(--label-font-size);
+		font-family: var(--label-md-font-family);
+		font-size: var(--label-md-font-size);
+		font-weight: var(--label-md-font-weight);
+		letter-spacing: var(--label-md-letter-spacing);
+		line-height: var(--label-md-line-height);
 	}
 	:global(.defaultColorLegendLabel-ramp .tick) {
-		font-size: var(--tick-sm-font-size);
+		font-family: var(--caption-sm-font-family);
+		font-size: var(--caption-sm-font-size);
+		font-weight: var(--caption-sm-font-weight);
+		letter-spacing: var(--caption-sm-letter-spacing);
+		font-variant-numeric: tabular-nums;
+		fill: var(--color-text-muted);
 	}
 </style>

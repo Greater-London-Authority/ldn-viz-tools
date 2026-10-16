@@ -153,7 +153,7 @@
 			>
 				<table>
 					<tbody>
-						<tr class="font-medium">
+						<tr class="table-col-head">
 							<th>Event</th>
 							<th class="px-4">Layer</th>
 							<th>Site</th>

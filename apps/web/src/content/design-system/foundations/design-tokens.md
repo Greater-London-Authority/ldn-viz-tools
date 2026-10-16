@@ -259,7 +259,7 @@ Flow tokens define the vertical space between one block and the next. Rather tha
 | `$flow-loose`   | Deliberate breathing room, as around a figure or a chart  |
 | `$flow-section` | A major break, as above a heading beginning a new part    |
 
-The distance each one produces is decided by the **context** it is used in. Three contexts are defined — `prose`, `product` and `compact` — each mapping the same four relationships onto different rungs of the spacing scale. A relationship therefore travels with the content, while the density travels with the surface.
+The distance each one produces is decided by the **context** it is used in. Three contexts are defined — `spacious`, `standard` and `compact` — each mapping the same four relationships onto different rungs of the spacing scale. A relationship therefore travels with the content, while the density travels with the surface.
 
 Because a token here names a relationship rather than a specific size, a value should never be substituted for one. Using a spacing token where a flow token belongs pins that one gap to a fixed distance, and it will no longer follow when the surface around it changes.
 
@@ -283,41 +283,26 @@ These are the source of the space between tiled objects — cards in a row, pane
 
 A typographic role names the job a piece of text does and contains every property that job requires: font family, size, weight, line-height and letter-spacing. Roles hold a value at each breakpoint and resolve themselves as the viewport changes, so a descriptive name is all an author needs.
 
-#### Type set
+There are ten roles: `display`, `headline`, `subhead`, `title`, `subtitle`, `body`, `label`, `metric`, `caption` and `eyebrow`.
 
-Roles are grouped into three **type sets**, one for each kind of surface.
+#### Typeset
 
-| Type set  | Intended for                                                 |
-| :-------- | :----------------------------------------------------------- |
-| `product` | Applications and dashboards, where information is condensed  |
-| `prose`   | Long passages of reading — articles, guidance, documentation |
-| `chart`   | Text in and around a chart                                   |
+A **typeset** gives every role its values for one kind of surface. There are two, and both have all ten roles.
 
-A set defines only the roles its surface needs, so the three do not hold the same list. Several role names appear in more than one set as the same job in a different reading situation takes a different treatment, not a different name.
+| Typeset    | Intended for                                                 |
+| :--------- | :----------------------------------------------------------- |
+| `longform` | Long passages of reading — articles, guidance, documentation |
+| `product`  | Applications, dashboards, tables, charts and maps            |
 
-| `product`      | `prose`             | `chart`      |
-| :------------- | :------------------ | :----------- |
-| `page-head`    | `display`           | `title`      |
-| `section-head` | `headline`          | `subtitle`   |
-| `title`        | `subhead`           | `eyebrow`    |
-| `subtitle`     | `title-1`–`title-4` | `axis-title` |
-| `eyebrow`      | `subtitle`          | `label`      |
-| `metric`       | `lead`              | `tick`       |
-| `metric-sm`    | `body`              | `tick-sm`    |
-| `body`         | `body-sm`           |              |
-| `body-sm`      | `caption`           |              |
-| `label`        | `eyebrow`           |              |
-| `label-sm`     |                     |              |
-| `caption`      |                     |              |
+The two typesets give each role the same size and weight. They differ in the line height of body text, which is more open in longform.
 
-#### Variants
+#### Size
 
-Two suffixes recur. Neither is a general scale that can be applied to any role.
+Every role except `eyebrow` comes in three sizes: `sm`, `md` and `lg`.
 
-| Suffix  | Detail                                                                                                 |
-| :------ | :----------------------------------------------------------------------------------------------------- |
-| `sm`    | A smaller sibling of a role, for a denser context.                                                     |
-| `tight` | A `label` or `label-sm` with its line-height reduced to match the font size, for single-line controls. |
+#### Usage aliases
+
+A usage alias is a class named for the place it is used, such as `card-title` or `chart-tick`. Each one applies a role. Chart text uses these aliases.
 
 [Read the chapter dedicated to typography for the values and their use](/design-system/foundations/typography).
 
@@ -359,7 +344,7 @@ Spacing follows the same pattern, using the numbered scale: `p-4` applies 16px o
 
 Flow relationships have their own utilities, `mt-flow-{relationship}` and `gap-flow-{relationship}`.
 
-Typographic roles are applied as the bare role name — `body`, `title`, `label`.
+Typographic roles are applied as a class named for the role and its size, such as `body-md`, `title-sm` or `label-md`. The eyebrow has no size, so its class is `eyebrow`.
 
 #### CSS custom properties
 

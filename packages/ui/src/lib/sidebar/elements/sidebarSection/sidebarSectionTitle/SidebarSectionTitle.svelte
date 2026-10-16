@@ -10,7 +10,7 @@
 
 <header class="text-color-text">
 	<div class="flex items-end justify-between">
-		<h2 class="text-base font-semibold leading-snug">
+		<h2 class="label-lg">
 			<!-- The title of the section. -->
 			{@render children?.()}
 		</h2>
@@ -22,7 +22,7 @@
 	</div>
 
 	{#if subTitle}
-		<div class="my-1 text-xs">
+		<div class="caption-sm my-1">
 			<!-- Optional longer subtitle to display below the main title. -->
 			{@render subTitle?.()}
 		</div>

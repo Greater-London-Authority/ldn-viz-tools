@@ -108,7 +108,7 @@ describe('Metric', () => {
 				.getByText('100,000', { exact: true });
 
 			await expect.element(heroChange).toHaveClass('metric-lg');
-			await expect.element(supportingValue).toHaveClass('label-md', 'leading-none');
+			await expect.element(supportingValue).toHaveClass('label-md');
 		});
 	});
 

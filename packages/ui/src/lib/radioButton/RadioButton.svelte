@@ -53,7 +53,7 @@
 			: ''}
 	/>
 	{#if label}
-		<span class="form-label ml-2 font-normal">{label}</span>
+		<span class="form-label ml-2">{label}</span>
 	{/if}
 
 	{#if hint}

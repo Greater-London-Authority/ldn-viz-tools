@@ -51,9 +51,7 @@
 	class="typeset-product body-sm absolute left-0 top-11 z-40 max-h-[60vh] w-full overflow-y-scroll bg-color-surface text-color-text shadow-lg"
 >
 	{#if suggestions.length === 0}
-		<li class="label-md pointer-events-none w-full px-2.5 py-1.5 leading-none">
-			No locations found
-		</li>
+		<li class="label-md pointer-events-none w-full px-2.5 py-0.5">No locations found</li>
 	{:else}
 		{#each suggestions as suggestion, i (suggestion.id)}
 			{#if i < maxSuggestions}

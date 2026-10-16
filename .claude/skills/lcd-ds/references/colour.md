@@ -50,7 +50,7 @@ The docs page `apps/web/src/content/design-system/data-visualisation/quick-guide
 
 - Intents: primary, secondary, positive, negative and caution.
 - `-muted` is the lower-emphasis version of the same intent.
-- States: `-hover` and `-active`. Positive, negative and caution also have `-focussed`, as in `--color-interactive-positive-focussed`.
+- States: `-hover` and `-active`. Positive, negative and caution also have `-focus`, as in `--color-interactive-positive-focus`.
 - Primary also has `--color-interactive-primary-text` with hover and active states, for links and text buttons.
 - Standalone states: `--color-interactive-selected`, `--color-interactive-on`, `--color-interactive-off`, `--color-interactive-dragged`, `--color-interactive-focus`, `--color-interactive-error`, `--color-interactive-disabled` and `--color-interactive-disabled-muted`.
 

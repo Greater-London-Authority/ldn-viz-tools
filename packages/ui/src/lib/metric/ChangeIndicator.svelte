@@ -91,7 +91,7 @@
 		if (heroIsChange) {
 			return size === 'lg' ? 'metric-lg' : 'metric-sm';
 		} else {
-			return size === 'lg' ? 'label-md leading-none' : 'label-sm leading-none';
+			return size === 'lg' ? 'label-md' : 'label-sm';
 		}
 	});
 

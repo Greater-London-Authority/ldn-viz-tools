@@ -4,8 +4,8 @@
 	import HelpText from './HelpText.svelte';
 
 	/**
-	 * The `HelpText` component wraps its slotted `children` in a muted, small,
-	 * medium-weight `<span>` used for supplementary help text within menus.
+	 * The `HelpText` component wraps its `children` in a `<span>` set in
+	 * `.hint-text` and the muted text colour. Use it for help text in menus.
 	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Menus/HelpText',

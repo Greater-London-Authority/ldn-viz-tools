@@ -41,7 +41,7 @@ The legend and plot go in the slot. The container doesn't build them.
 
 `ObservablePlotInner.svelte` sets `--plot-background: var(--color-chart-surface)`.
 
-The Plot defaults set font size directly: `0.875rem` on the plot and `14` on text marks. They don't use the chart aliases.
+The plot's root style sets `fontSize: 'var(--caption-md-font-size, 0.875rem)'`, the role behind `.chart-tick`. Tip and annotation marks set no font size, so they inherit it. SVG text in some table cell renderers (`StackedBar`, `BarChart`, `Histogram`, `BarDivergingCell`) still sets a size in px.
 
 ```js
 Plot.line(data, {
@@ -55,6 +55,6 @@ Plot.line(data, {
 
 `TableContainer` (`packages/tables/src/lib/table/TableContainer.svelte`) sets `typeset-product` and uses `ChromeHeader` for its title group.
 
-Table text in `packages/tables` uses Tailwind sizes and weights (`text-sm`, `font-bold`), not the table aliases. The aliases `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm` and `.table-cell` exist in `system.css` for use outside the package.
+Table text uses the aliases `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm` and `.table-cell`. In `packages/tables`, `.table-cell` is on the table and `.table-col-head` on column and group heads.
 
 In Figma, tables are a kit of cells, rows and header rows. Cell widths are xs 64, sm 88, md 120, lg 220, xl 300, or fill. Code is authoritative.

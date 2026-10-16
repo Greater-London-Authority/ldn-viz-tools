@@ -102,15 +102,15 @@
 		},
 		outline: {
 			primary:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-primary hover:bg-color-interactive-primary-muted-hover hover:underline active:bg-color-interactive-primary-muted-active',
+				'bg-transparent text-color-text border px-2 border-color-interactive-primary hover:bg-color-interactive-primary-muted-hover hover:underline active:bg-color-interactive-primary-muted-active',
 			secondary:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-secondary hover:bg-color-interactive-secondary-muted-hover hover:underline active:bg-color-interactive-secondary-muted-active',
+				'bg-transparent text-color-text border px-2 border-color-interactive-secondary hover:bg-color-interactive-secondary-muted-hover hover:underline active:bg-color-interactive-secondary-muted-active',
 			positive:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-positive hover:bg-color-interactive-positive-muted-hover hover:underline active:bg-color-interactive-positive-muted-active',
+				'bg-transparent text-color-text border px-2 border-color-interactive-positive hover:bg-color-interactive-positive-muted-hover hover:underline active:bg-color-interactive-positive-muted-active',
 			negative:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-negative hover:bg-color-interactive-negative-muted-hover hover:underline active:bg-color-interactive-negative-muted-active',
+				'bg-transparent text-color-text border px-2 border-color-interactive-negative hover:bg-color-interactive-negative-muted-hover hover:underline active:bg-color-interactive-negative-muted-active',
 			caution:
-				'bg-transparent text-color-text border px-2 pt-1 pb-1 border-color-interactive-caution hover:bg-color-interactive-caution-muted-hover hover:underline active:bg-color-interactive-caution-muted-active'
+				'bg-transparent text-color-text border px-2 border-color-interactive-caution hover:bg-color-interactive-caution-muted-hover hover:underline active:bg-color-interactive-caution-muted-active'
 		},
 		text: {
 			primary:
@@ -149,19 +149,13 @@
 	};
 
 	const sizeClasses = $derived({
-		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'label-sm leading-none px-1 min-w-6 min-h-6',
-		sm:
-			variant === 'square'
-				? 'w-8 h-8 flex-col'
-				: 'label-md leading-none px-2 py-1.5 min-w-8 min-h-8',
-		md:
-			variant === 'square'
-				? 'w-10 h-10 flex-col'
-				: 'label-md leading-none px-4 py-2 min-w-10 min-h-10',
+		xs: variant === 'square' ? 'w-6 h-6 flex-col' : 'button-label-sm px-1 min-w-6 min-h-6',
+		sm: variant === 'square' ? 'w-8 h-8 flex-col' : 'button-label px-2 py-0.5 min-w-8 min-h-8',
+		md: variant === 'square' ? 'w-10 h-10 flex-col' : 'button-label px-4 py-1.5 min-w-10 min-h-10',
 		lg:
 			variant === 'square'
-				? 'w-16 h-16 label-sm leading-none flex-col'
-				: 'label-md leading-none px-4 py-2 min-w-16 min-h-16'
+				? 'w-16 h-16 button-label-sm flex-col'
+				: 'button-label px-4 py-2 min-w-16 min-h-16'
 	});
 
 	const buttonClass = $derived(
@@ -172,7 +166,7 @@
 			sizeClasses[size],
 			disabled === true ? disabledClasses[variant] : '',
 			href && disabled === true ? 'pointer-events-none' : '',
-			slim === true ? '!py-0 !px-0 !min-h-0 leading-none text-left text-nowrap' : '',
+			slim === true ? '!py-0 !px-0 !min-h-0 text-left text-nowrap' : '',
 			classes ?? '',
 			fullWidth ? 'w-full' : ''
 		)

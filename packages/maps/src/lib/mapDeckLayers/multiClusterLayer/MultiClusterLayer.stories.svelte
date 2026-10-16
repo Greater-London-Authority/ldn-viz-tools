@@ -305,7 +305,7 @@ zooms when `clickToZoom` is `true`.
 						class="pointer-events-auto max-h-96 w-72 overflow-y-auto bg-color-surface p-3 text-color-text"
 					>
 						{#if clickedGlyph}
-							<p class="font-bold">
+							<p class="label-lg">
 								{clickedGlyph.count}
 								{clickedGlyph.key} events in this cluster
 							</p>

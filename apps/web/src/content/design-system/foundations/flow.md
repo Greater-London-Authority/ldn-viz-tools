@@ -33,13 +33,13 @@ There are four **relationships** governing the space between blocks.
 There are three **contexts** corresponding to different types of surface.
 The context dictates the spacing values allotted to the four relationships.
 
-| Context     | Intended for                                                      | Tight | Default | Loose | Section |
-| ----------- | ----------------------------------------------------------------- | ----- | ------- | ----- | ------- |
-| **Prose**   | Long passages of reading — articles, guidance, documentation      | 4px   | 16px    | 24px  | 40px    |
-| **Product** | Applications and dashboards, where information is condensed       | 4px   | 8px     | 16px  | 24px    |
-| **Compact** | Small self-contained surfaces — toasts, tooltips, alerts, dialogs | 4px   | 4px     | 8px   | 8px     |
+| Context      | Intended for                                                      | Tight | Default | Loose | Section |
+| ------------ | ----------------------------------------------------------------- | ----- | ------- | ----- | ------- |
+| **Spacious** | Long passages of reading — articles, guidance, documentation      | 4px   | 16px    | 24px  | 40px    |
+| **Standard** | Applications and dashboards, where information is condensed       | 4px   | 8px     | 16px  | 24px    |
+| **Compact**  | Small self-contained surfaces — toasts, tooltips, alerts, dialogs | 4px   | 4px     | 8px   | 8px     |
 
-Prose is the most generous, because a reading column benefits from air and the page is not competing for space. Product is roughly half as open, because a dashboard is dense.
+Spacious is the most generous, because a reading column benefits from air and the page is not competing for space. Standard is roughly half as open, because a dashboard is dense.
 
 Compact deliberately collapses the ramp: tight and default are the same, and so are loose and section. This is because the total range is too small (4px - 8px) to enable 4 visually distinct levels.
 
@@ -65,7 +65,7 @@ If the children of a container are a stack of blocks, their spacing is flow. If 
 
 ## Practice
 
-**This guidance applies to projects using `@ldn-viz/themes` in a project using Tailwind.**
+**This guidance applies to projects that import `@ldn-viz/themes/index.css`.** The flow classes don't need Tailwind. The spacing utilities in the examples, such as `p-4`, come from the Tailwind preset.
 
 ### Setting a context
 
@@ -79,9 +79,9 @@ A context is applied as a class on a containing element.
 
 The class provides values to the four relationships, setting the appropriate spacing to the elements children.
 
-Contexts can be nested, and the innermost one applies. A toast inside a dashboard can declare `flow-compact` and will space its contents accordingly, regardless of the context of it's ancestors. A component whose spacing must be the same wherever it is placed should declare its own context.
+Contexts can be nested, and the innermost one applies. A toast inside a dashboard can declare `flow-compact` and will space its contents accordingly, regardless of the context of its ancestors. A component whose spacing must be the same wherever it is placed should declare its own context.
 
-A surface will usually require a type set as well as a flow context. The two are separate systems that share the words _product_ and _prose_:
+A surface will usually need a typeset as well as a flow context. `typeset-longform` sets `flow-spacious` itself. `typeset-product` sets no flow context, so add one:
 
 ```html
 <section class="flow-standard typeset-product">…</section>
@@ -89,18 +89,18 @@ A surface will usually require a type set as well as a flow context. The two are
 
 ### Reading content spaces itself
 
-Inside `flow-prose`, the spacing follows from the markup. These are the relationships the system recognises:
+Inside a flow context, or inside `typeset-longform`, the spacing follows from the markup. These are the relationships the system recognises:
 
 | Where                                                                   | Relationship |
 | ----------------------------------------------------------------------- | ------------ |
 | Between any two blocks, as a general rule                               | Default      |
 | Above and below a figure, image, table, code block, blockquote or chart | Loose        |
-| Above a first- or second-level heading                                  | Section      |
-| Above a third- or fourth-level heading                                  | Loose        |
+| Above a first- or second-level heading, a display or a headline         | Section      |
+| Above a third- to fifth-level heading, or a title                       | Loose        |
 | Between two headings that follow one another                            | Tight        |
 | Between a heading and a subtitle or subhead directly beneath it         | Tight        |
 | Between an eyebrow and the heading directly below it                    | Tight        |
-| Above an eyebrow that introduces a heading                              | Section      |
+| Above an eyebrow that introduces a first- or second-level heading       | Section      |
 | Between an image and its caption                                        | Tight        |
 | Between list items, and around a nested list                            | Tight        |
 | Between a term and its definition in a description list                 | Tight        |
@@ -140,7 +140,7 @@ Relationships are determined by a type element's role class. Applying the right 
 <p class="body-sm text-color-text-muted">Quarterly</p>
 ```
 
-The roles taken into account are the heading elements, the four Title roles, Display, Headline, Page head, Section head, Subtitle, Subhead and Eyebrow.
+The rules recognise the heading elements `h1` to `h5`, the display, headline, subhead, title, subtitle and eyebrow roles, and the title and subtitle usage aliases such as `card-title` and `chart-subtitle`.
 
 ### In an application, name the relationship
 
@@ -174,7 +174,7 @@ gap-flow-tight    gap-flow    gap-flow-loose    gap-flow-section
 	<h2 class="title-lg">Monitoring sites</h2>
 	<p class="subtitle-sm">Twelve active sensors</p>
 
-	<div class="mt-flow-section flex flex-col gap-flow-tight">
+	<div class="mt-flow-section gap-flow-tight flex flex-col">
 		<!-- a further part of the section, deliberately set apart with a tight flow-->
 	</div>
 </section>
@@ -182,7 +182,7 @@ gap-flow-tight    gap-flow    gap-flow-loose    gap-flow-section
 
 A relationship named by the author always takes precedence over one the system would have inferred. There is no need to raise specificity or use `!important` to override the automatic spacing.
 
-**Note** `mt-flow-section` produces a different gap in a prose context than in a product one: the element keeps its relationship to what precedes it, and the surface decides how far that is.
+**Note** `mt-flow-section` produces a different gap in a spacious context than in a standard one: the element keeps its relationship to what precedes it, and the surface decides how far that is.
 
 If a gap needs to be a fixed size regardless of surroundings, it is not flow — it is construction.
 
@@ -248,12 +248,12 @@ The wrapper has gone. The subtitle is recognised as a supporting line and closes
 
 **A context class and a gap utility on the same element will double the space.** The context already separates that element's children. Use one or the other.
 
-**Use the `mt-` and `gap-` forms.** Other margin directions are generated by the theme's configuration but are not part of the system, and horizontal space is not flow's to give.
+**Only the `mt-` and `gap-` forms exist.** Flow sets vertical space only. Horizontal space comes from the grid or the spacing scale.
 
 **There are no padding utilities for the four relationships.** Padding is a component's own space, and comes from the spacing scale.
 
-**`product` and `flow-product` are different classes.** The first sets the type set; the second sets the spacing. Most application surfaces want both.
+**`typeset-product` sets no spacing.** It sets the typeset only. Add `flow-standard` to space its children. Most application surfaces want both.
 
-**A chart is both a typography context and a set-apart block.** The `chart` class names a type set, and it also marks an element that should be given room above and below it in a flow. A chart in an article legitimately wants both. This is intentional rather than a conflict.
+**The `chart` class marks a set-apart block.** A child with the `chart` class gets the loose step above and below it, like a figure. It sets no typography. Chart text uses the chart usage aliases, such as `chart-title` and `chart-tick`.
 
 **Figures beside metrics look closer than they are.** Metrics use a tightened line height so that numerals align with their labels, so the visible gap beneath a metric is smaller than beneath a paragraph at the same setting. The spacing is correct; the line box is smaller.

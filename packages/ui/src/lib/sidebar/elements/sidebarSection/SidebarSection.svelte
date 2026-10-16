@@ -15,7 +15,7 @@
 </script>
 
 <section class="border-b border-color-border-muted last-of-type:border-0">
-	<div class="space-y-4 bg-color-surface-muted pb-4 text-sm text-color-text">
+	<div class="body-sm space-y-4 bg-color-surface-muted pb-4 text-color-text">
 		{#if typeof title != 'string'}
 			<!-- An optional `<SidebarSectionTitle>` component, which can accept a subtitle. -->
 			{@render title()}

@@ -42,7 +42,7 @@ describe('ColorLegendOrdinalChips', () => {
 	it('does not render a title element when no title is given', async () => {
 		const { container } = render(ColorLegendOrdinalChips, { scale: ordinalScale });
 
-		expect(container.querySelector('.font-semibold.text-color-label')).toBeNull();
+		expect(container.querySelector('.chart-axis-title')).toBeNull();
 	});
 
 	it('defaults to a horizontal, wrapping layout', async () => {
@@ -75,10 +75,10 @@ describe('ColorLegendOrdinalChips', () => {
 
 		const highlightedRow = rows[1];
 		expect(highlightedRow.querySelector('.mr-1.h-4.w-4')).toHaveClass('ring-2');
-		expect(highlightedRow.querySelector('span.items-center')).toHaveClass('font-semibold');
+		expect(highlightedRow.querySelector('span.items-center')).toHaveClass('text-strong');
 
 		const otherRow = rows[0];
 		expect(otherRow.querySelector('.mr-1.h-4.w-4')).not.toHaveClass('ring-2');
-		expect(otherRow.querySelector('span.items-center')).toHaveClass('font-normal');
+		expect(otherRow.querySelector('span.items-center')).toHaveClass('text-soft');
 	});
 });

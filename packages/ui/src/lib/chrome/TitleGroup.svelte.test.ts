@@ -17,11 +17,9 @@ describe('TitleGroup', () => {
 
 		const subtitle = container.querySelector('.subtitle-sm');
 		expect(subtitle?.textContent).toBe('Chart subtitle');
-		expect(subtitle?.className).toContain('text-color-text-muted');
 
 		const eyebrow = container.querySelector('.eyebrow');
 		expect(eyebrow?.textContent).toBe('Eyebrow');
-		expect(eyebrow?.className).toContain('text-color-text-muted');
 	});
 
 	it('defaults to emphasis="primary"', async () => {

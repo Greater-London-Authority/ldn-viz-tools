@@ -97,7 +97,7 @@
 	<main class={classNames('w-full min-w-0', sidebarState.placement === 'right' ? '' : 'order-1')}>
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
-			<p class="typeset-product body-md font-bold">
+			<p class="typeset-product body-md">
 				Provide some main content. The main content you provide should have appropriate padding
 				applied...
 			</p>

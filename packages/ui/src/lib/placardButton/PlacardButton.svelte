@@ -87,14 +87,14 @@
 >
 	<div class="flow-standard h-full p-4">
 		{#if title}
-			<p class="text-2xl font-bold">
+			<p class="card-title">
 				<!-- Title text, displayed at top of card in large font-->
 				{@render title?.()}
 			</p>
 		{/if}
 
 		{#if body}
-			<p class=" typeset-longform h-full leading-snug">
+			<p class="body-md h-full">
 				<!-- longer description text displayed below the title in smaller font -->
 				{@render body?.()}
 			</p>

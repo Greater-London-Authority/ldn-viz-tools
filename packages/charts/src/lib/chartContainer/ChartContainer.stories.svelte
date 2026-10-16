@@ -249,7 +249,7 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 			alt="Simple description of type of chart"
 		>
 			{#snippet legend()}
-				<div class="mb-4 flex flex-wrap gap-4 text-sm">
+				<div class="chart-label mb-4 flex flex-wrap gap-4">
 					<span class="flex items-center gap-2">
 						<span class="inline-block h-3 w-3 rounded-full bg-color-palette-blue-500"></span>
 						Variable A

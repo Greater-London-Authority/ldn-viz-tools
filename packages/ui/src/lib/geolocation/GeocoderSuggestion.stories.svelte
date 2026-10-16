@@ -44,7 +44,7 @@
 <Story name="Default">
 	{#snippet template()}
 		<div class="m-6 w-72 space-y-6">
-			<ul class="bg-color-surface text-sm text-color-text shadow-lg">
+			<ul class="elevation-4 bg-color-surface text-color-text">
 				<GeocoderSuggestion suggestion={fullSuggestion} {onSuggestionEvent} highlighted={null} />
 			</ul>
 		</div>
@@ -54,7 +54,7 @@
 <Story name="Highlighted">
 	{#snippet template()}
 		<div class="m-6 w-72 space-y-6">
-			<ul class="bg-color-surface text-sm text-color-text shadow-lg">
+			<ul class="elevation-4 bg-color-surface text-color-text">
 				<GeocoderSuggestion
 					suggestion={fullSuggestion}
 					{onSuggestionEvent}
@@ -72,7 +72,7 @@ The `name` and <code>address</code> fields render independently. The first sugge
 <Story name="Name only / address only">
 	{#snippet template()}
 		<div class="m-6 w-72 space-y-6">
-			<ul class="bg-color-surface text-sm text-color-text shadow-lg">
+			<ul class="elevation-4 bg-color-surface text-color-text">
 				<GeocoderSuggestion
 					suggestion={nameOnlySuggestion}
 					{onSuggestionEvent}

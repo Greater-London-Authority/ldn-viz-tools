@@ -329,7 +329,7 @@ zooms when `clickToZoom` is `true`.
 						class="pointer-events-auto max-h-96 w-72 overflow-y-auto bg-color-surface p-3 text-color-text"
 					>
 						{#if clickedCluster}
-							<p class="font-bold">{clickedCluster.pointCount} events in this cluster</p>
+							<p class="label-lg">{clickedCluster.pointCount} events in this cluster</p>
 							<ul class="mt-2 list-disc pl-5">
 								{#each clickedCluster.points as point, i (i)}
 									<li>{point.properties?.event_name}</li>

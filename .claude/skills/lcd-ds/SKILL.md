@@ -22,8 +22,9 @@ The specification is [design-system-specification.md](../../../design-system-spe
 | `tokens.css` | Every custom property. Light mode on `:root`, dark on `.dark` |
 | `system.css` | Every class the spec names: typesets, roles, usage aliases, flow, measure, content styles, forms, emphasis, elevation, layout and focus styles |
 | `index.css` | Imports `reset.css`, `tokens.css` and `system.css`, in that order |
-| `tailwind.cjs` | The Tailwind preset, imported as `@ldn-viz/themes/tailwind`. It maps Tailwind's theme onto the custom properties and adds no classes |
+| `tailwind.cjs` | The Tailwind preset, imported as `@ldn-viz/themes/tailwind`. It maps Tailwind's theme onto the custom properties and adds no classes. It empties Tailwind's font sizes, weights and line heights, so `text-sm`, `font-bold` and `leading-*` produce nothing |
 | `colors.js` | Resolved colour values, as `mode.light` and `mode.dark` |
+| `tokens.scss` | Every custom property as a Sass `!default` variable with its resolved value, plus `$modes`, `$breakpoints`, `$typography` and `$grid` maps. Not used in this repo |
 | `tokens.json` | Every token with its value, for tooling. Not published |
 
 An app imports `@ldn-viz/themes/index.css`. A Tailwind app also uses the preset, and imports `index.css` before the `@tailwind` directives so a utility wins over a system class.
@@ -96,13 +97,9 @@ The spec or ADRs describe these, and the build doesn't have them or doesn't enfo
 
 | Described | Source | In the build |
 | --- | --- | --- |
-| Readable-width tokens | [0015](../../../design-system-specification/decisions/0015-system-classes.md) | `--measure-text` and `--measure-wide` are 38 and 56 times the body size, set in `system.config.js` |
 | Layout grid, Colour and Accessibility sections | Spec scope | No section or ADR. [layout-grid.md](references/layout-grid.md) and [colour.md](references/colour.md) describe the build |
-| Generated Sass | [0014](../../../design-system-specification/decisions/0014-distribution-and-outputs.md) | Not built, and not in the exports map |
-| Square corners | [0006](../../../design-system-specification/decisions/0006-visual-rules.md) | Not enforced: the preset keeps Tailwind's `rounded-*` |
-| Semantic tokens only | [0002](../../../design-system-specification/decisions/0002-token-naming-grammar.md) | Not enforced: the preset keeps Tailwind's sizes, weights and line heights (`text-sm`, `font-semibold`), and the Plot defaults set font sizes directly |
-| Four font weights | Spec, Font Weight | The build also has `--primitive-typography-font-weight-light` |
-| `focus` as the state value | Spec, Segment values | Three interactive tokens end `-focussed`, such as `--color-interactive-positive-focussed` |
+| Square corners | [0006](../../../design-system-specification/decisions/0006-visual-rules.md) | Not enforced: the preset keeps Tailwind's `rounded-*` for things that are round |
+| Semantic tokens only | [0002](../../../design-system-specification/decisions/0002-token-naming-grammar.md) | Not enforced: SVG text in some table renderers, deck.gl cluster labels and Plot options in chart stories set sizes and weights directly |
 
 ## Names after the design review
 

@@ -53,7 +53,7 @@
 				<span
 					class={classNames(
 						'chart-label items-center',
-						d === highlightedValue ? 'font-semibold' : 'font-normal'
+						d === highlightedValue ? 'text-strong' : 'text-soft'
 					)}
 				>
 					{d}
