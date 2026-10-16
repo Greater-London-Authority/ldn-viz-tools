@@ -104,7 +104,7 @@ The type sets are renamed and every role gains a size. Names follow `--typograph
 | `--typography-{bp}-prose-{role}-{prop}`                   | `--typography-{bp}-longform-{role}-{size}-{prop}`    |
 | `--typography-{bp}-product-{role}-{prop}`                 | `--typography-{bp}-product-{role}-{size}-{prop}`     |
 | `--typography-{bp}-chart-{role}-{prop}`                   | No equivalent: the version 4 export has no chart set |
-| `--typography-{bp}-prose-readable-width`                  | No equivalent                                        |
+| `--typography-{bp}-prose-readable-width`                  | `--measure-text` (see below)                         |
 | `--typography-{bp}-prose-{display,headline}-space-before` | No equivalent                                        |
 
 The roles in each set are `display`, `headline`, `title`, `subtitle`, `subhead`, `body`, `label`, `caption` and `metric`, each in `sm`, `md` and `lg`, plus `eyebrow`, which has no size. `subhead`, `subtitle` and `eyebrow` are set in the muted text colour, as before.
