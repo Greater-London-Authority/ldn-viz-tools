@@ -12,7 +12,7 @@ thumbnail: cta-application-design.svg
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="prose lead">This section covers guidance on regular patterns applied to our applications and products.</p>
+<p class="typeset-longform body-lg text-color-text-muted">This section covers guidance on regular patterns applied to our applications and products.</p>
 
 <div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] grid-gutter">
 

@@ -33,10 +33,10 @@ There are many variations, but typically teh variant is `trxt` and the size is `
 		<div class="space-y-8">
 			{#each variants as variant}
 				<div class="space-y-2">
-					<p class="font-bold capitalize">{variant}</p>
+					<p class="label-lg capitalize">{variant}</p>
 					{#each emphases as emphasis}
 						<div class="flex flex-wrap items-center gap-4">
-							<span class="text-color-text-secondary w-24 text-sm capitalize">{emphasis}</span>
+							<span class="caption-md w-24 capitalize text-color-text-muted">{emphasis}</span>
 							{#each sizes as size}
 								<Trigger {variant} {emphasis} {size} slim={false} hintLabel={size} />
 							{/each}

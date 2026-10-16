@@ -148,7 +148,7 @@
 	</HelpText>
 
 	<div class="flex w-96 flex-col gap-1">
-		<span class="font-bold">Values not assigned to a category:</span>
+		<span class="label-lg">Values not assigned to a category:</span>
 		<ul
 			class="list-none border-2 border-transparent"
 			ondragover={(ev) => dragOver(ev, '')}
@@ -206,7 +206,7 @@
 								}
 							}}
 							value={groupName}
-							class="padding-0 width-fit border-0 font-bold"
+							class="field-value text-strong padding-0 width-fit border-0"
 						/>
 						<Button
 							onclick={() => deleteCat(groupName)}
@@ -231,7 +231,7 @@
 								onclick={() => removeFromCat(groupName, val)}
 								variant="text"
 								size="sm"
-								class="h-5 py-0 leading-5"
+								class="h-5 py-0"
 								title="Click to remove value from category"
 							>
 								<Icon src={Minus} theme="solid" class="mr-2 h-4 w-4" aria-hidden="true" />

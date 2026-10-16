@@ -10,45 +10,27 @@ thumbnail: cta-foundations-4.svg
 <script>
     import TypographyTable from '$lib/components/typography/TypographyTable.svelte'
 
-    const proseRoles = [
-        {text: 'Display', usage: 'Large, impactful text for a homepage hero. Sits above the content as page chrome.', class: 'display'},
-        {text: 'Headline', usage: 'The hero heading for a subpage — the alternative to Display in the same slot.', class: 'headline'},
-        {text: 'Subhead', usage: 'A supporting line immediately beneath a Headline.', class: 'subhead'},
-        {text: 'Title 1', usage: 'The top heading within the content itself.', class: 'title-1'},
-        {text: 'Title 2', usage: 'The second level of heading.', class: 'title-2'},
-        {text: 'Title 3', usage: 'The third level of heading.', class: 'title-3'},
-        {text: 'Title 4', usage: 'The fourth and final level of heading.', class: 'title-4'},
-        {text: 'Subtitle', usage: 'A supporting line immediately beneath a Title.', class: 'subtitle'},
-        {text: 'Lead', usage: 'An introductory or standfirst paragraph, set slightly larger than body text.', class: 'lead'},
-        {text: 'Body', usage: 'Default reading text — the paragraphs that make up the content.', class: 'body'},
-        {text: 'Body small', usage: 'Secondary or denser reading text.', class: 'body-sm'},
-        {text: 'Caption', usage: 'Metadata and the smallest text on the page.', class: 'caption'},
-        {text: 'Eyebrow', usage: 'A short overline introducing the heading below it.', class: 'eyebrow'}
-        ]
-
-    const productRoles = [
-        {text: 'Page head', usage: 'The title of the page. One per page.', class: 'page-head'},
-        {text: 'Section head', usage: 'Groups related content within a page. May appear several times.', class: 'section-head'},
-        {text: 'Title', usage: 'The title of an object — a card, panel, modal, callout or drawer.', class: 'title'},
-        {text: 'Subtitle', usage: 'A supporting line beneath any heading or title.', class: 'subtitle'},
-        {text: 'Eyebrow', usage: 'A short overline above a title, and the treatment a Title takes when it steps aside.', class: 'eyebrow'},
-        {text: '1,284', usage: 'Metric — a headline figure or hero statistic.', class: 'metric'},
-        {text: '87.4%', usage: 'Metric small — a secondary figure, or a KPI within a card.', class: 'metric-sm'},
-        {text: 'Body', usage: 'Default interface text — field values, menu items, descriptions.', class: 'body'},
-        {text: 'Body small', usage: 'Secondary and denser text — hints, helper text, table cells.', class: 'body-sm'},
-        {text: 'Label', usage: 'Identifies a control — buttons, inputs, tabs, navigation items.', class: 'label'},
-        {text: 'Label small', usage: 'The same job in dense contexts, and for table column headers.', class: 'label-sm'},
-        {text: 'Caption', usage: 'Metadata, badges and the smallest functional text.', class: 'caption'}
+    const roles = [
+        {text: 'Display', usage: 'High-impact text, such as a homepage hero. Use sparingly.', class: 'display-lg'},
+        {text: 'Headline', usage: 'The main statement of a page or a major section.', class: 'headline-lg'},
+        {text: 'Subhead', usage: 'A supporting line under a headline or display.', class: 'subhead-lg'},
+        {text: 'Title', usage: 'The name of a unit within the page: a card, panel, chart, table or block of prose.', class: 'title-md'},
+        {text: 'Subtitle', usage: 'A supporting line under a title.', class: 'subtitle-md'},
+        {text: 'Body', usage: 'Running text.', class: 'body-md'},
+        {text: 'Label', usage: 'Text needed to use the interface: buttons, inputs, tabs.', class: 'label-md'},
+        {text: '1,284', usage: 'Metric: a figure shown as the content itself.', class: 'metric-lg'},
+        {text: 'Caption', usage: 'Optional notes: image and chart captions, sources, helper text.', class: 'caption-sm'},
+        {text: 'Eyebrow', usage: 'A short signpost above a headline or title.', class: 'eyebrow'}
         ]
 
     const chartRoles = [
-        {text: 'Title', usage: "The chart's own title, when the chart owns the primary slot.", class: 'title'},
-        {text: 'Subtitle', usage: 'A supporting line beneath a chart title.', class: 'subtitle'},
-        {text: 'Eyebrow', usage: 'What a chart title becomes when it steps aside for another heading.', class: 'eyebrow'},
-        {text: 'Axis title', usage: 'Names an axis, a series, or a legend.', class: 'axis-title'},
-        {text: 'Data label', usage: 'Value labels, annotations and legend entries.', class: 'label'},
-        {text: '2024', usage: 'Tick — axis and scale labels at the default density.', class: 'tick'},
-        {text: '2024', usage: 'Tick small — the smaller tick tier, for denser charts.', class: 'tick-sm'}
+        {text: 'Title', usage: 'chart-title: the title of a chart.', class: 'chart-title'},
+        {text: 'Subtitle', usage: 'chart-subtitle: a supporting line under a chart title.', class: 'chart-subtitle'},
+        {text: 'Axis title', usage: 'chart-axis-title: the name of an axis.', class: 'chart-axis-title'},
+        {text: 'Data label', usage: 'chart-label: value labels, annotations and legend entries.', class: 'chart-label'},
+        {text: '2024', usage: 'chart-tick: axis and scale labels.', class: 'chart-tick'},
+        {text: '2024', usage: 'chart-tick-sm: tick labels on a dense chart.', class: 'chart-tick-sm'},
+        {text: 'Source: GLA', usage: 'chart-note: notes and sources under a chart.', class: 'chart-note'}
         ]
 </script>
 
@@ -58,21 +40,14 @@ Typography is the art and technique of arranging type to make written language l
 
 ### Font
 
-We use the sans serif font Inter. Inter is a variable font family designed for computer screens, available via Google Fonts under the Open Font License. By using webfonts in our applications we can be reasonably certain that Inter will be used under normal circumstances. All weights are included, so there is no risk of a browser synthesising a bold or a semibold from a lighter face, which produces a coarser letterform than the designed one.
+We use the sans serif font Inter. Inter is a variable font family designed for computer screens, available via Google Fonts under the Open Font License. Code blocks use Source Code Pro.
 
-A fallback stack is always provided:
+The base styles set Inter with this fallback stack:
 
 ```CSS
 'Inter',
 'ui-sans-serif',
 'system-ui',
-'-apple-system',
-'BlinkMacSystemFont',
-'Segoe UI',
-'Roboto',
-'Helvetica Neue',
-'Arial',
-'Noto Sans',
 'sans-serif',
 'Apple Color Emoji',
 'Segoe UI Emoji',
@@ -82,121 +57,90 @@ A fallback stack is always provided:
 
 ### Roles
 
-The system describes type by **role** rather than by size. A role names the **job** a piece of text does — an input **label**, the **title** of a card, the **tick** on a chart axis — and dictates every property that job requires: font family, size, weight, line height and letter spacing.
+The system describes type by **role** rather than by size. A role names the **job** a piece of text does, such as the **label** on an input or the **title** of a card. The role sets every property that job needs: font family, size, weight, line height and letter spacing.
 
-This is the central idea of the system. If card titles should sit a step larger, that change is made in one place and everything bound to the role follows.
+If card titles should be a step larger, that change is made in one place and everything that uses the role follows.
+
+There are ten roles:
+
+<div class="typeset-product my-8">
+    <TypographyTable items={roles} />
+</div>
+
+Every role except Eyebrow comes in three sizes, `sm`, `md` and `lg`, and the class is the role and size together: `title-sm`, `body-md`, `headline-lg`. The Eyebrow class is `eyebrow`.
+
+Headlines open a page or a section. Titles name the units inside it. Labels are needed to use the interface; captions are not.
 
 ### Type scale
 
-Roles are what designs and code should reference. Beneath them sits a scale of raw values that the roles draw from. That scale is deliberately private — it is the material the system is built from, rather than a menu to choose from.
+Roles are what designs and code should reference. Beneath them sits a scale of raw values that the roles draw from. That scale is private to the system. Designs and code use the roles instead.
 
-### Type sets
+### Typesets
 
-Roles are grouped into three **type sets**, each intended for a different kind of surface. A type set is not a different typeface; it is the same ideas tuned for a different context.
+A **typeset** gives every role its values for one kind of surface. There are two.
 
-| Type set    | Intended for                                                                        |
-| ----------- | ----------------------------------------------------------------------------------- |
-| **Product** | Applications and dashboards, where information is condensed and tasks are the focus |
-| **Prose**   | Long passages of reading — articles, guidance, help content, documentation          |
-| **Chart**   | The text in and around a chart — titles, axis labels, ticks and annotations         |
+| Typeset              | Intended for                                                         |
+| -------------------- | -------------------------------------------------------------------- |
+| **typeset-longform** | Long passages of reading: articles, guidance, help, documentation    |
+| **typeset-product**  | Applications and dashboards, and the text in tables, charts and maps |
 
-The sets share several role names. Body means sixteen pixels regular in both Product and Prose, but its line height differs between them: a reading column needs generous leading and a dense interface does not. Naming them the same thing, and letting the set decide the treatment, is what allows a component to be written once and read correctly in either context.
+Both typesets have all ten roles, and give each role the same size and weight. They differ in the line height of body text. A reading column needs more space between lines than a dense interface:
 
-The sets can be combined and will work together, but this should be done with consideration. Reading content placed on an application surface — a help article inside a dashboard, for instance — is better given the Prose set for that whole region than assembled from a mixture of the two.
+| Role      | `typeset-longform` | `typeset-product` |
+| --------- | ------------------ | ----------------- |
+| `body-md` | 16px / 28px        | 16px / 24px       |
+| `body-sm` | 14px / 26px        | 14px / 22px       |
 
-### The Product set
+Because the role names are the same, a component can be written once and read correctly in either typeset.
 
-Product carries fewer roles than Prose, because application chrome has shallower structure than rich content. The sizes shown below are those used on the widest screens; several roles grow with screen size, which is described under _Responsive sizing_.
+Reading content placed on an application surface, such as a help article inside a dashboard, is better given `typeset-longform` for that whole region than assembled from a mixture of the two.
 
-<div class="not-prose product my-8">
-    <TypographyTable items={productRoles} />
-</div>
+### Title groups
 
-#### The heading ladder
+A title group is an optional eyebrow, a title and a subtitle, at the top of a card, chart, table or panel.
 
-**Page head** and **Section head** are page scaffolding. Each occupies a specific position — one page title at the top, section heads repeating down the page to group content. Section heads are one step above the content beneath them, because they may appear several times and a large heading repeated reads as noise rather than as structure.
+When a component contains two or more title groups, one is made dominant. The dominant group has a title and an optional subtitle. Each other group becomes an eyebrow, using the text that would have been its title.
 
-**Title** is different. It is the general case: the title of an object, at whatever depth that object sits. A card, a panel, a modal, a callout and a drawer all take the same Title. What distinguishes them in a given layout is not a different size but a different treatment, which is what allows the ladder to nest without multiplying the number of roles.
+| Treatment  | Role          | Size | Weight | When it applies                                                     |
+| ---------- | ------------- | ---- | ------ | ------------------------------------------------------------------- |
+| Dominant   | `title-sm`    | 20px | 600    | The group is the subject of its container                           |
+| Demoted    | `eyebrow`     | 14px | 500    | Another group is dominant, for example a chart inside a titled card |
+| Supporting | `subtitle-sm` | 18px | 400    | A supporting line under a dominant title                            |
 
-#### One title, three treatments
+Two examples:
 
-Every container that can carry a title has one **primary slot**. Whatever occupies that slot takes the dominant treatment. A title that gives up the slot to something else steps down to the eyebrow treatment, or is left out.
+- **A card containing one titled chart.** The chart's title is dominant. The card's own title becomes an eyebrow above it, or is left out. If the chart has no title, the card title is dominant.
+- **A small card holding a single figure.** The label sits above the metric as an eyebrow, which is the same treatment a demoted title takes, so a group of these cards reads consistently beside a titled card.
 
-| Treatment  | Role       | Size | Weight | When it applies                                                                                |
-| ---------- | ---------- | ---- | ------ | ---------------------------------------------------------------------------------------------- |
-| Dominant   | `Title`    | 20px | 600    | The element owns its container's primary slot                                                  |
-| Demoted    | `Eyebrow`  | 14px | 500    | A title steps aside — for instance a card title yielding to a chart that carries its own title |
-| Supporting | `Subtitle` | 16px | 400    | A supporting line sitting beneath a dominant title                                             |
+### Usage aliases
 
-Moving a title between treatments is a matter of changing which role it takes. Three worked examples:
+A usage alias is a class named for the place it is used, such as `card-title` or `chart-tick`. Each alias applies a role, and some also set the muted text colour or tabular numerals. Use a role class where you can. The aliases are for code that names the place rather than the role.
 
-- **A card containing one titled chart.** The chart's title is dominant; the card's own title becomes an Eyebrow above it, or is omitted. If the chart is untitled, the card title is dominant.
-- **A card containing two equal charts.** Each chart sits in its own panel, and each panel's title is dominant — they are primary within sibling panels rather than competing for one slot. The card title above them becomes an Eyebrow labelling the group.
-- **A small chip card holding a single figure.** The label sits in the Eyebrow treatment above the Metric, which is the same treatment a demoted title takes, so a group of chips reads consistently beside a titled card.
+Chart text uses the chart aliases:
 
-#### Metrics
-
-A metric standing alone, or set within flowing text, uses its normal line height. A metric sitting beside labels is a single value to be aligned with its companions, and a generous line height pushes it out of that alignment, because a tall line box centres the numeral and adds leading that a small label does not have.
-
-In any label or comparison cluster a metric therefore takes a tight, near-single line height, and the cluster is aligned as a unit:
-
-- **Inline** — "1,284 users" reading as one line. Align to the baseline.
-- **Stacked** — the figure above its label. The gap between them is then the gap you set, rather than the gap plus leading.
-- **Comparison** — a large figure beside a smaller stack of values. Centre these against one another rather than aligning baselines; a large numeral baseline-aligned to a small multi-line block appears to sag.
-
-The comparison values themselves are data labels rather than metrics, and take the existing small roles.
-
-### The Prose set
-
-Prose carries a fuller ladder than Product, because rich content has depth and needs more differentiation.
-
-<div class="not-prose prose my-8">
-    <TypographyTable items={proseRoles} />
-</div>
-
-#### Hero and content
-
-In an article layout the hero or banner area sits above the content region. It holds either a Display, or a Headline with its Subhead. The content region beneath then runs its own count of headings, starting at Title 1.
-
-#### Eyebrows
-
-An Eyebrow is a short overline introducing the heading below it. It appears in both Prose and Product and looks the same in each, but it is doing a different job.
-
-In Prose it is a composition choice: a kicker placed above a heading, used within the titling components rather than in ordinary flowing content. In Product it is what a Title becomes when it is subordinated, eg. when a card title is suppressed to in relation to the chart title it contains. The two read consistently, but they remain separate roles belonging to separate sets.
-
-### The Chart set
-
-Charts are a distinct context and have their own vocabulary.
-
-A dense chart needs a tick label smaller than anything the interface should use, and lowering the interface floor to accommodate it would affect every screen.
-
-<div class="not-prose chart my-8">
+<div class="typeset-product my-8">
     <TypographyTable items={chartRoles} />
 </div>
 
-The first three roles refer to their Product equivalents for every property. The chart inherits the responsive behaviour of the Product roles automatically.
+There is no separate alias for a legend. A legend entry uses `chart-label`.
 
-Axis title and Data label match Product's Label and Body small in size and weight, but reference distinct values, so that chart anatomy can be adjusted without affecting the interface around it.
-
-There is no separate role for a legend. A legend is a data label.
-
-Ticks are single-line by nature and take a line height equal to their font size, so that they sit precisely against axes and gridlines.
+The full list of aliases and their roles is under [choosing a role](#choosing-a-role-for-an-interface-element).
 
 ### Size, weight and colour are separate
 
 Size, weight and colour are three independent axes. A "subtle heading" is a heading in a muted colour. An "emphasised caption" is a caption at a heavier weight. Expressing either as a new size would add a role that describes an appearance rather than a job.
 
-Weight performs two tasks:
+Weight has two uses:
 
-**Identity weight** is part of what a role is — a Label is medium, a heading is semibold — and it is defined by the role, so it is never chosen separately.
+**Identity weight** is part of what a role is, and the role sets it. Labels and eyebrows are medium, titles are semibold, and headlines, display and metrics are bold.
 
-**Emphasis weight** is applied on top of a role, for a bold run within a paragraph, and stays a separate choice.
+**Emphasis weight** is applied on top of a role, for example to a bold run within a paragraph.
 
-Four weights are: regular (400), medium (500), semibold (600) and bold (700).
+There are five weights: light (300), regular (400), medium (500), semibold (600) and bold (700). No role uses light.
 
 ### Responsive sizing
 
-Screen sizes and resolutions vary, so a single size for a role is not enough. Each role holds a value at each of five breakpoints and resolves itself as the viewport changes.
+Some roles change size as the viewport widens. The breakpoints are:
 
 | Breakpoint | Minimum width | CSS                          |
 | ---------- | ------------- | ---------------------------- |
@@ -206,226 +150,222 @@ Screen sizes and resolutions vary, so a single size for a role is not enough. Ea
 | `lg`       | 1024px        | `@media (min-width: 1024px)` |
 | `xl`       | 1280px        | `@media (min-width: 1280px)` |
 
-Values are set for the smallest screen first, so that the hierarchy is correct there, and grow upward. The governing rule is that a role never overtakes the role above it and never falls below the role beneath it, at any width. A role therefore only grows if the roles it must stay ordered against grow with it — which is why the Title ladder and the two Metric roles change as groups rather than individually.
+These roles change size, in pixels, in both typesets:
 
-#### Prose sizes at each breakpoint
+| Role          | base | `sm` | `md` | `lg` | `xl` |
+| ------------- | ---- | ---- | ---- | ---- | ---- |
+| `display-lg`  | 40   | 48   | 56   | 64   | 72   |
+| `display-md`  | 36   | 40   | 48   | 56   | 64   |
+| `display-sm`  | 32   | 36   | 40   | 48   | 56   |
+| `headline-lg` | 30   | 32   | 36   | 36   | 40   |
+| `headline-md` | 28   | 28   | 30   | 30   | 30   |
+| `metric-lg`   | 28   | 30   | 32   | 32   | 36   |
 
-| Role     | base | `sm` | `md` | `lg` | `xl` |
-| -------- | ---- | ---- | ---- | ---- | ---- |
-| Display  | 40   | 48   | 56   | 64   | 76   |
-| Headline | 32   | 36   | 40   | 48   | 56   |
-| Subhead  | 28   | 28   | 28   | 28   | 28   |
-| Title 1  | 28   | 30   | 32   | 32   | 36   |
-| Title 2  | 24   | 26   | 28   | 30   | 30   |
-| Title 3  | 22   | 22   | 22   | 24   | 24   |
-| Title 4  | 20   | 20   | 20   | 20   | 20   |
-| Subtitle | 18   | 18   | 18   | 18   | 18   |
-| Lead     | 22   | 22   | 22   | 22   | 22   |
-| Body     | 16   | 16   | 16   | 16   | 16   |
-| Body sm  | 14   | 14   | 14   | 14   | 14   |
-| Caption  | 12   | 12   | 12   | 12   | 12   |
-| Eyebrow  | 14   | 14   | 14   | 14   | 14   |
-
-Subhead matches Title 1 at the smallest size only; the two sit in different regions of the page and are differentiated by weight and colour. Lead sits above Title 4 at every width, because Lead is body-tier emphasis rather than a rung of the heading ladder, so an introductory paragraph reading slightly larger than a fourth-level subheading is expected.
-
-#### Product sizes at each breakpoint
-
-| Role         | base | `sm` | `md` | `lg` | `xl` |
-| ------------ | ---- | ---- | ---- | ---- | ---- |
-| Page head    | 28   | 30   | 32   | 32   | 36   |
-| Metric       | 28   | 30   | 32   | 32   | 36   |
-| Section head | 24   | 24   | 26   | 26   | 28   |
-| Title        | 20   | 20   | 20   | 20   | 20   |
-| Metric small | 20   | 20   | 20   | 20   | 20   |
-| Body         | 16   | 16   | 16   | 16   | 16   |
-| Body small   | 14   | 14   | 14   | 14   | 14   |
-| Label        | 14   | 14   | 14   | 14   | 14   |
-| Caption      | 12   | 12   | 12   | 12   | 12   |
-| Label small  | 12   | 12   | 12   | 12   | 12   |
-
-Page head and Metric match at every width. They are a heading and a numeral that rarely sit next to one another, and they grow together so the pairing stays consistent where they do. Metric small sits level with Title for the same reason, with weight separating them.
-
-Chart sizes are the same at every breakpoint.
+Every other role has one size at every breakpoint. The role class picks up the value for the current breakpoint, so there is no need to set a size per breakpoint.
 
 You can test the roles on this page by resizing your browser, or by emulating a device in your browser's developer tools.
 
 ### Line height
 
-Line height follows two policies, chosen by what the text has to align with.
+Line height is the font size plus 4px, 8px or 12px.
 
-Most roles take a line height rounded to the four-pixel grid that the spacing scale is built on, so that a block of text composes predictably against the margins and gaps around it. It is proportionally tight at the top of the scale and generous at the bottom, which is how a 76px Display and a 12px Caption can both look correctly set.
+| Added | Roles                                              |
+| ----- | -------------------------------------------------- |
+| 4px   | Metric, Caption and Eyebrow                        |
+| 8px   | Every other role                                   |
+| 12px  | `body-md` and `body-sm` in `typeset-longform` only |
 
-Two Prose roles are exceptions, and take a line height relative to their own size instead:
-
-| Role          | Size | Line height | Ratio |
-| ------------- | ---- | ----------- | ----- |
-| Prose Body    | 16px | 26px        | 1.625 |
-| Prose Body sm | 14px | 22px        | 1.571 |
+Because every line height is a whole number of pixels, a block of text composes predictably against the margins and gaps around it.
 
 ---
 
 ## Practice
 
-**This guidance applies to projects using `@ldn-viz/themes` in a project using Tailwind.**
+**This guidance applies to projects that import `@ldn-viz/themes/index.css`.** The typesets and roles don't need Tailwind. The colour and spacing utilities in the examples, such as `text-color-text-muted` and `p-4`, come from the Tailwind preset.
 
-### Setting a type set
+### Setting a typeset
 
-A type set is applied as a class on a containing element. Everything inside it resolves its roles from that set.
+A typeset is applied as a class on a containing element. Everything inside it takes its role values from that typeset. Where typesets are nested, the inner one applies.
 
 ```html
-<article class="prose">…</article>
-<section class="product">…</section>
-<div class="chart">…</div>
+<article class="typeset-longform">…</article>
+<section class="typeset-product">…</section>
 ```
 
-An application surface will normally also want a flow context, which governs the space between blocks.
+`typeset-product` is the default, so a role class outside any typeset takes its product values.
+
+An application surface will normally also want a flow context, which sets the space between blocks. `typeset-longform` sets its own.
 
 ```html
-<section class="flow-product product">…</section>
+<section class="flow-standard typeset-product">…</section>
 ```
 
-### Prose styles its content automatically
+### Longform styles its content automatically
 
-Inside `prose`, ordinary HTML elements are styled for you. Headings take the Title ladder, paragraphs take Body, captions take Caption, and links, lists, blockquotes and tables are handled too. Standard content needs no classes.
+Inside `typeset-longform`, ordinary HTML elements are styled for you. Headings take headline and title roles, paragraphs take Body and captions take Caption. Links, lists, blockquotes and tables are styled too. Standard content needs no classes.
 
 ```html
-<div class="prose">
+<div class="typeset-longform">
 	<h2>Title</h2>
-	<p>Body copy.</p>
 	<p class="lead">An introductory paragraph.</p>
+	<p>Body copy.</p>
 </div>
 ```
 
-<div class="prose border border-color-border-muted p-4 my-4">
+<div class="typeset-longform border border-color-border-muted p-4 my-4">
 	<h2>Title</h2>
 	<p class="lead">An introductory paragraph</p>
     <p>Body copy</p>
 </div>
 
-Headings map by depth: `h1` to `h4` take Title 1 to Title 4. `Display` and `Headline` are hero chrome and have to be applied deliberately, by class. There is no fifth level: an `h5` falls back to Body, because Title 4 is the floor of the ladder.
+These elements take a role without a class:
 
-The `prose` class also limits its own width for readability, to a measure of roughly seventy characters. Figures, tables, code blocks and pull quotes are meant to break out wider than that column; body text is not. If a column feels stranded on a wide screen, the answer is to let those elements break out rather than to lengthen the line.
+| Element      | Role             |
+| ------------ | ---------------- |
+| `h1`         | `headline-lg`    |
+| `h2`         | `headline-sm`    |
+| `h3`         | `title-lg`       |
+| `h4`         | `title-md`       |
+| `h5`         | `title-sm`       |
+| `p.lead`     | `body-lg`, muted |
+| `figcaption` | `caption-sm`     |
 
-#### Escaping the prose context
+A role class on the element replaces its default role. Display has to be applied by class.
 
-Because `prose` styles elements automatically, you will sometimes need to opt out — most often around an embedded component that brings its own styling. Use `not-prose`, at either block or element level.
+`typeset-longform` also limits the width of each block inside it for readability. Running text is limited to 38 times the body size, which is 608px at a 16px body size. Figures, images, videos, tables, code blocks and charts can be wider, up to 56 times the body size (896px). To set a block's width directly, use `width-content`, `width-content-wide` or `width-content-full`.
+
+#### Leaving the longform typeset
+
+Because `typeset-longform` styles elements automatically, you will sometimes need to opt out, most often around an embedded component that brings its own styling. Use `not-typeset`, on a block or on a single element.
 
 ```html
-<div class="prose">
+<div class="typeset-longform">
 	<h3>Title</h3>
-	<div class="not-prose">
+	<div class="not-typeset">
 		<h3>I have escaped</h3>
 	</div>
-	<h3 class="not-prose">So have I</h3>
+	<h3 class="not-typeset">So have I</h3>
 </div>
 ```
 
 <div class="border border-color-border-muted p-4 my-4">
 	<h3>Title</h3>
-	<div class="not-prose">
+	<div class="not-typeset">
 		<h3>I have escaped</h3>
 	</div>
-	<h3 class="not-prose">So have I</h3>
+	<h3 class="not-typeset">So have I</h3>
 </div>
+
+A typeset nested inside `typeset-longform` also stops its automatic styling.
 
 ### Product requires explicit roles
 
-The `product` class establishes the type set but applies no styling to elements. Apply the role directly to the element.
+`typeset-product` sets the typeset and gives unclassed text the Body role. It doesn't style headings or other elements, so apply the role directly to the element.
 
 ```html
-<div class="product">
+<div class="typeset-product">
 	<h2>No role applied</h2>
-	<h2 class="section-head">Section head</h2>
-	<p class="body">Body copy.</p>
-	<span class="label">Control label</span>
+	<h2 class="title-lg">Section title</h2>
+	<p class="body-md">Body copy.</p>
+	<span class="label-md">Control label</span>
 </div>
 ```
 
-<div class="not-prose product border border-color-border-muted p-4 my-4">
+<div class="typeset-product border border-color-border-muted p-4 my-4">
 	<h2>No role applied</h2>
-	<h2 class="section-head">Section head</h2>
-	<p class="body">Body copy.</p>
-	<span class="label">Control label</span>
+	<h2 class="title-lg">Section title</h2>
+	<p class="body-md">Body copy.</p>
+	<span class="label-md">Control label</span>
 </div>
+
+For Markdown or other formatted content inside an application, use `typeset-product--formatted`. It styles links, lists, blockquotes and tables as `typeset-longform` does, limits the width of each block, and sets the standard flow context. It doesn't give headings a role, so a heading needs a role class.
 
 ### Choosing a role for an interface element
 
-| Element                                          | Role                                       |
-| ------------------------------------------------ | ------------------------------------------ |
-| Input label, tab, navigation item, button        | `label` — see _single-line controls_ below |
-| Field value, placeholder, menu item              | `body`                                     |
-| Helper text, hints, descriptions, secondary copy | `body-sm`                                  |
-| Table column header                              | `label`                                    |
-| Table cell                                       | `body-sm`                                  |
-| Tooltip, badge, tag, metadata                    | `caption`                                  |
-| Modal, callout, panel or drawer heading          | `title`                                    |
-| Sidebar or navigation section heading            | `label`                                    |
-| Chart legend entry                               | `label`, inside `chart`                    |
-| Chart axis name                                  | `axis-title`                               |
-| Chart tick or scale label                        | `tick`, or `tick-sm` when dense            |
+Each usage alias applies the role shown. Use the alias, or the role class with the same treatment.
 
-### Single-line controls
+| Element                    | Alias                        | Role                                  |
+| -------------------------- | ---------------------------- | ------------------------------------- |
+| Dashboard title            | `dashboard-main-title`       | `headline-md`                         |
+| Dashboard subtitle         | `dashboard-main-subtitle`    | `subhead-md`, muted                   |
+| Dashboard section title    | `dashboard-section-title`    | `headline-sm`                         |
+| Dashboard section subtitle | `dashboard-section-subtitle` | `subhead-sm`, muted                   |
+| Header title               | `header-title`               | `title-sm`                            |
+| Sidebar title              | `sidebar-title`              | `title-sm`                            |
+| Dialog title               | `dialog-title`               | `label-lg`                            |
+| Card title                 | `card-title`                 | `title-sm`                            |
+| Card subtitle              | `card-subtitle`              | `subtitle-sm`, muted                  |
+| Input label                | `input-label`                | `label-md`                            |
+| Placeholder                | `placeholder`                | `body-sm`                             |
+| Field value                | `field-value`                | `body-sm`                             |
+| Helper text and hints      | `hint-text`                  | `caption-sm`                          |
+| Button label               | `button-label`               | `label-md`                            |
+| Small button label         | `button-label-sm`            | `label-sm`                            |
+| Table title                | `table-title`                | `title-sm`                            |
+| Table subtitle             | `table-subtitle`             | `subtitle-sm`, muted                  |
+| Table column header        | `table-col-head`             | `label-md`, tabular numerals          |
+| Small table column header  | `table-col-head-sm`          | `label-sm`, tabular numerals          |
+| Table cell                 | `table-cell`                 | `body-sm`, tabular numerals           |
+| Chart title                | `chart-title`                | `title-sm`                            |
+| Chart subtitle             | `chart-subtitle`             | `subtitle-sm`, muted                  |
+| Chart axis title           | `chart-axis-title`           | `label-md`, muted                     |
+| Chart data label or legend | `chart-label`                | `label-md`                            |
+| Chart tick                 | `chart-tick`                 | `caption-md`, muted, tabular numerals |
+| Small chart tick           | `chart-tick-sm`              | `caption-sm`, muted, tabular numerals |
+| Chart note or source       | `chart-note`                 | `caption-sm`                          |
 
-`label-tight` and `label-sm-tight` are the same size and weight as `label` and `label-sm`, with the line height reduced to match the font size.
-
-They exist for controls whose text is a single line, vertically centred, where the component's own padding governs its height — buttons, tabs and chips.
-
-```html
-<button class="label-tight">Download</button>
-```
-
-These must not wrap. Label text running to more than one line uses the standard `label` or `label-sm`.
+Controls such as buttons, tabs and chips use the label role's line height. Their own padding sets their height.
 
 ### Titling groups
 
 The titling roles are designed to be used together. Write the group as flat sibling elements and give each its role; the spacing between them is handled by the flow system.
 
 ```html
-<section class="flow-product product">
+<section class="flow-standard typeset-product">
 	<p class="eyebrow">Air quality</p>
-	<h2 class="section-head">Nitrogen dioxide</h2>
-	<p class="subtitle">Rolling 24-hour mean</p>
+	<h2 class="title-lg">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
 </section>
 ```
 
-<div class="not-prose product flow-product border border-color-border-muted p-4 my-4">
+<div class="typeset-product flow-standard border border-color-border-muted p-4 my-4">
 	<p class="eyebrow">Air quality</p>
-	<h2 class="section-head">Nitrogen dioxide</h2>
-	<p class="subtitle">Rolling 24-hour mean</p>
+	<h2 class="title-lg">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
 </div>
 
-The eyebrow closes up to the heading below it, the subtitle closes up to the heading above it, and the larger break that separates one section from the next moves above the whole group. Reproducing the same appearance with generic classes — a small muted paragraph in place of the Subtitle — will look almost identical but will not be recognised as a titling group, and the spacing will be wrong.
+The eyebrow closes up to the heading below it, the subtitle closes up to the heading above it, and the larger break that separates one section from the next moves above the whole group. Reproducing the same appearance with generic classes, such as a small muted paragraph in place of the subtitle, will look almost identical but will not be recognised as a titling group, and the spacing will be wrong.
 
 ### Emphasis and colour
 
 Colour is a separate axis. Bind text colour to a semantic token.
 
 ```html
-<p class="body text-color-text">Primary text</p>
+<p class="body-md text-color-text">Primary text</p>
 <p class="body-sm text-color-text-muted">Secondary text</p>
-<span class="label text-color-label">Control label</span>
+<span class="label-md text-color-label">Control label</span>
 ```
 
-Text and label tokens descend in emphasis — `text`, `text-muted`, `text-wash`, and `label`, `label-muted`. Text or an icon sitting on a filled control uses an inverse token so that it themes correctly against the fill. Some roles are already muted by default: Subhead, Subtitle, Lead, Eyebrow and the chart roles.
+Text and label tokens descend in emphasis: `text`, `text-muted`, `text-wash`, and `label`, `label-muted`. Text or an icon on a filled control uses an inverse token so that it themes correctly against the fill. Subhead, Subtitle and Eyebrow are muted by default, and so is the longform lead paragraph. The muted chart aliases are listed in the table above.
 
-Where the intent is emphasis within a role, change the weight:
+Where the intent is emphasis within a role, change the weight. `text-strong` sets semibold and `text-soft` sets regular, on any role:
 
 ```html
-<p class="body">Readings are <span class="font-semibold">provisional</span>.</p>
+<p class="body-md">Readings are <span class="text-strong">provisional</span>.</p>
 ```
 
 ### Things to avoid
 
-**Sizes from outside the system.** Tailwind's own `text-xl`, `text-3xl` etc. are not part of this scale. If a role looks wrong at its size, check that the role is right before overriding it.
+**Tailwind's type utilities.** The Tailwind preset removes Tailwind's font sizes, weights and line heights, so `text-xl`, `font-bold` and `leading-tight` have no effect. Use a role, or `text-strong` and `text-soft` for weight.
 
-**Breakpoint variants on type.** Roles already carry a value at every breakpoint, and every breakpoint has been checked to confirm the hierarchy holds. Writing `md:section-head`, or setting a size per breakpoint, works against that.
+**Setting a size per breakpoint.** Roles already have a value at every breakpoint.
 
 **Setting a weight alongside a role** in order to reach a particular look. The role defines its own weight.
 
-**Mixing type sets within one region.** Reading content on an application surface is better given its own `prose` container than assembled from a mixture.
+**Mixing typesets within one region.** Reading content on an application surface is better given its own `typeset-longform` container than assembled from a mixture.
 
-**Referring to the private scale.** The raw values beneath the roles are internal to the system, including within a component. Bind to the role.
+**Referring to the private scale.** The raw values beneath the roles are internal to the system, including within a component. Use the role.
 
-### A note on the `prose` class
+### The Tailwind Typography plugin
 
-The `prose` class here is our own, and is unrelated to the Tailwind Typography plugin, which this system does not use. The modifiers that plugin provides — `prose-lg`, `prose-invert`, `prose-headings:` and similar — have no effect. Size comes from the roles, and the reading measure is set by `prose` itself.
+The system does not use the Tailwind Typography plugin. Its `prose` class and modifiers such as `prose-lg` and `prose-invert` have no effect. Size comes from the roles, and the reading width is set by `typeset-longform`.

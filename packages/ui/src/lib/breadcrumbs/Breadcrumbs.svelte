@@ -26,7 +26,7 @@
 </script>
 
 {#if breadcrumbs && breadcrumbs.length > 0}
-	<div class="product body-sm py-2 text-color-text-muted">
+	<div class="typeset-product body-sm py-2 text-color-text-muted">
 		{#each breadcrumbs as c, i (c.label)}
 			{#if i == breadcrumbs.length - 1}
 				<span class="text-color-interactive-primary">

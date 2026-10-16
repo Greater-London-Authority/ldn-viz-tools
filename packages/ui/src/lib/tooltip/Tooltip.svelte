@@ -56,7 +56,7 @@
 
 		<Tooltip.Portal>
 			<Tooltip.Content
-				class="product body-sm z-50 max-w-[200px] border border-color-border-muted bg-color-container p-2 shadow-lg"
+				class="typeset-product body-sm z-50 max-w-[200px] border border-color-border-muted bg-color-surface p-2 shadow-lg"
 			>
 				{@render children?.()}
 

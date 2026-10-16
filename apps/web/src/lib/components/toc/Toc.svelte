@@ -60,7 +60,7 @@
 {#if toc?.items?.length}
 	<div class="ml-8 hidden max-w-[250px] lg:block">
 		<aside class="sticky top-0">
-			<p class="product label-sm mb-4 pt-4">On this page</p>
+			<p class="typeset-product label-sm mb-4 pt-4">On this page</p>
 			<ul class="border-l border-color-border-muted">
 				{#each toc.items as { title, url, items }, index (index)}
 					<TocItem {title} {url} {items} {activeUrl} />

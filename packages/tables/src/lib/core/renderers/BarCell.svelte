@@ -30,7 +30,7 @@
 </script>
 
 <div class="flex h-full items-center py-1">
-	<div class="relative flex w-full bg-color-surface-neutral text-xs">
+	<div class="label-sm relative flex w-full bg-color-surface-neutral tabular-nums">
 		<div
 			style:width={scale(+value) + '%'}
 			style:background-color={getVal(value, color)}

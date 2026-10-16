@@ -1,4 +1,4 @@
-import tokens from '@ldn-viz/themes/styles/js/color-tokens.js';
+import tokens from '@ldn-viz/themes/colors.js';
 import { colorToRGBArray, tokenNameToValue } from '@ldn-viz/utils';
 import { mode, type SystemModeValue } from 'mode-watcher';
 

@@ -75,9 +75,9 @@
 		secondaryRenderer
 	}: Props = $props();
 
-	let metricRole = $derived(size === 'lg' ? 'metric' : 'metric-sm');
-	let labelRole = $derived(size === 'lg' ? 'label-tight' : 'label-sm-tight');
-	let bodyRole = $derived(size === 'lg' ? 'body' : 'body-sm');
+	let metricRole = $derived(size === 'lg' ? 'metric-lg' : 'metric-sm');
+	let labelRole = $derived(size === 'lg' ? 'label-md' : 'label-sm');
+	let bodyRole = $derived(size === 'lg' ? 'body-md' : 'body-sm');
 
 	let hasChange = $derived(typeof value !== 'undefined' && typeof comparisonValue !== 'undefined');
 	let heroIsChange = $derived(hero === 'change' && hasChange);

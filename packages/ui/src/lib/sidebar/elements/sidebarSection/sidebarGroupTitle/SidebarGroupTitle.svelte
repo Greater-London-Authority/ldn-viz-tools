@@ -10,7 +10,7 @@
 
 <div class=" text-color-text">
 	<div class="flex items-end justify-between">
-		<h3 class="text-sm font-semibold leading-snug">
+		<h3 class="label-md">
 			<!-- The title. -->
 			{@render children?.()}
 		</h3>
@@ -22,7 +22,7 @@
 	</div>
 
 	{#if subTitle}
-		<div class="my-1 text-xs">
+		<div class="caption-sm my-1">
 			<!-- Optional longer subtitle to display below the main title. -->
 			{@render subTitle?.()}
 		</div>

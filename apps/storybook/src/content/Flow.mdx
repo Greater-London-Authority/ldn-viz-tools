@@ -4,47 +4,49 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Flow
 
-Flow governs the vertical space between stacked blocks. A container declares a context, and the gaps within it follow from that, rather than being set element by element.
+Flow is the vertical space between stacked blocks. A container declares a flow context, and the context sets the space between its direct children.
 
-The full reasoning is on the [Flow foundation page](https://greater-london-authority.github.io/ldn-viz-tools/). This page covers what to type.
+The reasoning is on the [Flow foundation page](https://greater-london-authority.github.io/ldn-viz-tools/).
 
 ## Declaring a context
 
 ```html
-<article class="flow-prose">…</article>
-<section class="flow-product">…</section>
+<article class="flow-spacious">…</article>
+<section class="flow-standard">…</section>
 <div class="flow-compact">…</div>
 ```
 
-One class. It sets the four relationships (see below) and enables the spacing between that element's direct children.
+The class sets a value for each of the four steps (see below) and spaces the element's direct children.
 
-Contexts nest, and the innermost applies. A component whose spacing must hold wherever it is placed should declare its own context rather than depend on the one it is dropped into.
+Two typesets also set a context: `typeset-longform` sets `flow-spacious`, and `typeset-product--formatted` sets `flow-standard`. `typeset-product` sets no flow, so add a flow class beside it when its children are a stack.
 
-A surface usually wants a type set as well — `product` and `flow-product` are separate systems that share a word.
+Contexts nest, and the innermost applies. Outside any context, the steps take the `flow-standard` values from `:root`.
 
-## The four relationships
+A component whose spacing must stay the same wherever it is placed declares its own context. Flow from outside doesn't reach inside it.
 
-The vocabulary is four names, each describing how closely two blocks are related. The distance those names produce is decided by the context they sit in.
+## The four steps
 
-| Relationship | Prose | Product | Compact |
-| ------------ | ----- | ------- | ------- |
-| tight        | 4px   | 4px     | 4px     |
-| default      | 16px  | 8px     | 4px     |
-| loose        | 24px  | 16px    | 8px     |
-| section      | 40px  | 24px    | 8px     |
+Each step names how closely two blocks are related. The context sets the distance.
 
-**Compact** is for small spaces and so collapses the ramp — tight equals default, loose equals section. A small surface cannot carry four distinguishable gaps.
+| Step      | `flow-spacious` | `flow-standard` | `flow-compact` |
+| --------- | --------------- | --------------- | -------------- |
+| `tight`   | 4px             | 4px             | 4px            |
+| `default` | 16px            | 8px             | 4px            |
+| `loose`   | 24px            | 16px            | 8px            |
+| `section` | 40px            | 24px            | 8px            |
 
-Values come from Figma through Style Dictionary into `styles/flow.css`. Nothing in the ramp is written by hand in CSS, and a component should never restate one of these numbers.
+`flow-compact` is for small spaces. In it, `tight` equals `default` and `loose` equals `section`, because a small surface can't show four different gaps.
 
-## Reading content spaces itself
+The values come from Figma through Style Dictionary, as the `--flow-*` properties in `tokens.css`. A component should not repeat one of these numbers.
 
-Inside `flow-prose` the relationships are recognised from the markup, so an article needs no spacing classes:
+## Steps from the markup
+
+In every flow context, and in `typeset-longform` and `typeset-product--formatted`, the step above each child is chosen from its element or class. An article needs no spacing classes:
 
 ```html
-<article class="flow-prose prose">
+<article class="typeset-longform">
 	<h2>Air quality</h2>
-	<p class="subtitle">Rolling 24-hour mean</p>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
 	<p>Concentrations fell across every monitored borough…</p>
 	<figure>
 		<img src="/no2.svg" alt="Nitrogen dioxide concentration" />
@@ -55,105 +57,83 @@ Inside `flow-prose` the relationships are recognised from the markup, so an arti
 </article>
 ```
 
-What is recognised, from `packages/themes/tailwind-custom/flow/flow.cjs`:
+The rules are the Flow rules section of `system.css`, generated from `flowRoles` in `packages/themes/sd/system.config.js`. In this table a heading is any of `h1` to `h5`, `display-*`, `headline-*`, `title-*` and the title aliases.
 
-| Where                                                                  | Relationship |
-| ---------------------------------------------------------------------- | ------------ |
-| Between any two blocks                                                 | default      |
-| Either side of `figure`, `img`, `table`, `pre`, `blockquote`, `.chart` | loose        |
-| Above `h1`, `h2`, `.title-1`, `.title-2`                               | section      |
-| Above `h3`, `h4`, `.title-3`, `.title-4`                               | loose        |
-| Between two consecutive headings                                       | tight        |
-| Heading followed by `.subtitle` or `.subhead`                          | tight        |
-| `.eyebrow` followed by a heading                                       | tight        |
-| Above an `.eyebrow` that introduces a heading                          | section      |
-| `figure > figcaption`                                                  | tight        |
-| `li + li`, and a list nested inside an `li`                            | tight        |
-| `dl > dd`                                                              | tight        |
-| `dl > dt`                                                              | default      |
+| Child                                                                                                         | Step above it |
+| ------------------------------------------------------------------------------------------------------------- | ------------- |
+| Any child after the first                                                                                     | `default`     |
+| `figure`, `img`, `table`, `pre`, `blockquote`, `.chart`, and the child after one                              | `loose`       |
+| `h1`, `h2`, `display-*`, `headline-*`, `.dashboard-main-title`, `.dashboard-section-title`                    | `section`     |
+| `h3`, `h4`, `h5`, `title-*`, `.card-title`, `.chart-title`, `.table-title`, `.header-title`, `.sidebar-title` | `loose`       |
+| A heading straight after another heading                                                                      | `tight`       |
+| `subhead-*`, `subtitle-*` or a subtitle alias straight after a heading                                        | `tight`       |
+| A heading straight after an `.eyebrow`                                                                        | `tight`       |
+| An `.eyebrow` straight before `h1`, `h2`, `display-*`, `headline-*` or a dashboard title                      | `section`     |
+| `figcaption` in a `figure`                                                                                    | `tight`       |
+| `li + li`, and a list nested inside an `li`                                                                   | `tight`       |
+| `dd` in a `dl`                                                                                                | `tight`       |
+| `dt` in a `dl`, except the first                                                                              | `default`     |
 
-Headings here include `.display`, `.headline`, `.page-head` and `.section-head` as well as the elements.
+The subtitle aliases are `.card-subtitle`, `.chart-subtitle`, `.table-subtitle`, `.dashboard-main-subtitle` and `.dashboard-section-subtitle`.
 
-Two implementation details, in case you are debugging: the selectors use `:is()` rather than `:where()`, so the context class carries specificity and beats element resets such as `p { margin: 0 }`; and every pair excludes `.sr-only`, `[hidden]` and `template` at both ends, so a conditionally rendered sibling neither receives a gap nor becomes the thing a real element couples to.
+For debugging: the rules use `:is()` on the context class, so they win over element resets such as `p { margin: 0 }`. Every rule skips `.sr-only`, `[hidden]` and `template` at both ends, so a hidden sibling gets no space and nothing is spaced from it. The rules for direct children also skip an element with an `mt-flow` class.
 
-## Role classes earn the spacing
+## Role classes set the step
 
-Most of the rules match on the role class, not only the element. Using the right typography role is therefore also how the spacing is obtained.
+Most rules match the role class as well as the element, so choosing the right typography role also gives the right space.
 
 ```html
-<!-- Recognised as a heading and its supporting line -->
-<h2 class="section-head">Rough sleeping</h2>
-<p class="subtitle">Quarterly</p>
+<!-- A heading and its subtitle: tight -->
+<h2 class="title-lg">Rough sleeping</h2>
+<p class="subtitle-sm">Quarterly</p>
 
-<!-- Visually near-identical, not recognised, takes the default gap -->
-<h2 class="section-head">Rough sleeping</h2>
+<!-- Looks similar, not matched: default -->
+<h2 class="title-lg">Rough sleeping</h2>
 <p class="body-sm text-color-text-muted">Quarterly</p>
 ```
 
-## In an application, state the relationship
+## Setting a step by hand
 
-Generic containers (such as `div` element), describe nothing, so only the general rule applies and every gap comes out the same. Use `mt-flow-*` and `gap-flow-*` classes to explicitly name the relationship where it matters:
+A `div` matches only the `default` rule, so every gap between `div` children is `default`. Use the flow utilities to set a step where it matters:
 
 ```
-mt-flow-tight     mt-flow-default     mt-flow-loose     mt-flow-section
-gap-flow-tight    gap-flow-default    gap-flow-loose    gap-flow-section
+mt-flow-tight     mt-flow     mt-flow-loose     mt-flow-section
+gap-flow-tight    gap-flow    gap-flow-loose    gap-flow-section
 ```
 
-The `mt-` form goes on the element needing space above it. The `gap-` form goes on a flex or grid container that is not itself a flow context.
+`mt-flow-*` goes on the element that needs space above it. `gap-flow-*` goes on a flex or grid container that is not itself a flow context.
 
 ```html
-<section class="flow-product product">
-	<h2 class="section-head">Monitoring sites</h2>
-	<p class="subtitle">Twelve active sensors</p>
+<section class="flow-standard typeset-product">
+	<h2 class="title-lg">Monitoring sites</h2>
+	<p class="subtitle-sm">Twelve active sensors</p>
 
 	<div class="mt-flow-section">…</div>
 </section>
 ```
 
-A stated relationship always beats an inferred one — every rule excludes elements carrying `mt-flow-`, so no override is needed.
+An `mt-flow-*` class replaces the step the rules would give. The rules for direct children skip an element with one, so no extra specificity is needed.
 
-These carry a relationship rather than a distance: `mt-flow-section` produces 24px in a product context and 40px in a prose one. If a gap must be a fixed size regardless of surroundings, it is not flow.
+The utilities resolve against the nearest context: `mt-flow-section` is 24px in `flow-standard` and 40px in `flow-spacious`. If a gap must be the same size everywhere, use the spacing scale instead.
 
-There are deliberately no context-prefixed utilities. `mt-flow-product-section` does not exist, because it would pin one gap to a fixed distance wherever it appeared, which is `mt-6` under another name. A component needing fixed density declares its own context class instead.
+There are no utilities with a context in the name, such as `mt-flow-standard-section`. That would be a fixed gap, the same as `mt-6`. A component that needs a fixed density declares its own context.
 
-## Which system owns the gap
+## Flow, grid or spacing
 
-| Gap                                | Owner         | Comes from                           |
-| ---------------------------------- | ------------- | ------------------------------------ |
-| Vertical, between stacked siblings | the stack     | a flow relationship                  |
-| Horizontal, between tiled objects  | the grid      | `grid-gutter` or `grid-gutter-fluid` |
-| Inside a component's own box       | the component | `p-{n}`, `mt-{n}` and similar        |
+| Gap                              | Set by                                 |
+| -------------------------------- | -------------------------------------- |
+| Vertical, between stacked blocks | A flow step                            |
+| Horizontal, between tiled items  | `grid-gutter` or `grid-gutter-fluid`   |
+| Inside a component               | Spacing: `p-{n}`, `mt-{n}` and similar |
 
-If the children of a container are a stack of blocks, it is flow. If they are a structure — a table's cells, a button's parts — it is the component's own space. A card's contents stack; a form's fields stack; a table's cells do not.
+If a container's children are a stack of blocks, use flow. If they are parts of one structure, such as a table's cells or a button's icon and label, use spacing. A card's contents and a form's fields are stacks. A table's cells are not.
 
-Interior spacing settles on five values in practice: `1`, `2`, `4`, `6` and `8`. Anything else is usually a stack gap chosen by hand, or a measurement that should be derived from the element it aligns to.
+There are no padding utilities for the steps. Padding is space inside a component.
 
-There are no padding utilities for the four relationships. Padding is a component's own space.
+## Things to avoid
 
-## Things to watch for
-
-**A wrapping element interrupts the spacing.** The rules match direct children of the container that declares the context. This is the most common reason flow appears not to work.
-
-**Space above a first element has nothing to sit between**, and may push the whole container down instead.
-
-**A context class and a gap utility on the same element double the space.**
-
-**Use the `mt-` and `gap-` forms.** Other margin directions are generated by the theme's configuration but are not part of the system, and only `mt-flow-` is recognised by the rules as a stated relationship.
-
-**`product` and `flow-product` are different classes** — a type set and a spacing context.
-
-**`.chart` appears in both systems by design** — a type set, and an element given room above and below it in a flow. Not a conflict.
-
-**A chart container's slot is not a stack.** A plot's internal margins belong to the plot and should not be re-expressed as flow relationships.
-
-## Migrating existing components
-
-The current values already fall on relationships, so these are equivalent swaps:
-
-| Component                       | From        | To                                  |
-| ------------------------------- | ----------- | ----------------------------------- |
-| `Card`                          | `gap-2`     | `gap-flow-default`                  |
-| `InputWrapper`, `CheckboxGroup` | `space-y-1` | `gap-flow-tight`                    |
-| `Toast`                         | `mb-1`      | remove — `flow-compact` provides it |
-
-Card grids using `gap-4` should move to `grid-gutter-fluid`, or `grid-gutter` on a contained surface. That one changes the result rather than preserving it — a contained surface will legitimately shift at `sm` and above — so it is worth reviewing visually.
+- A wrapper element between the context and the blocks. The rules match direct children only, so the blocks inside the wrapper get no space. This is the most common reason flow seems not to work.
+- `mt-flow-*` on a first child. There is nothing above it to space from, and the margin can push the whole container down.
+- A context class and `gap-flow-*` on the same element. The margin and the gap add together.
+- Margins in other directions. Only `mt-flow-*` and `gap-flow-*` exist.
+- Flow steps inside a chart. A plot's internal margins belong to the plot. `.chart` is matched by flow as a block that gets the `loose` step.

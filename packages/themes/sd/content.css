@@ -1,0 +1,254 @@
+/*===============================================
+  CONTENT STYLES (RFC 0003, workstream 3; ADR 0015)
+  Element styles for markup the author doesn't class: rendered Markdown, CMS
+  output. Written here by hand, as bare element selectors; sd/content.js
+  scopes every rule to each typeset that takes content styles, stops it at
+  .not-typeset and at a nested typeset, and keeps it at the typeset's
+  specificity, so a class on the element wins. Never write a typeset or
+  .not-typeset selector here.
+
+  The reset (sd/reset.js) has already removed the browser's defaults; these
+  rules put back what content needs.
+
+  Values are custom properties only: tokens, role properties
+  (--body-sm-font-size) or flow steps (--flow-tight). The build fails on any
+  other var(). Type comes from the usage aliases where it can; it is set here
+  only where no role fits.
+*/
+
+/* Text-level ------------------------------------------------------------ */
+
+a {
+	color: var(--color-interactive-primary-text);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 2px;
+}
+
+a:visited {
+	color: var(--color-interactive-primary-text);
+}
+
+a:hover {
+	color: var(--color-interactive-primary-text-hover);
+	text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+	text-decoration: none;
+}
+
+strong,
+b {
+	font-weight: var(--primitive-typography-font-weight-semi-bold);
+}
+
+em,
+i {
+	font-style: italic;
+}
+
+mark {
+	background-color: var(--color-surface-caution-muted);
+	color: inherit;
+}
+
+abbr[title] {
+	cursor: help;
+}
+
+small {
+	font-size: 0.875em;
+}
+
+/* Code ------------------------------------------------------------------ */
+
+code,
+kbd {
+	font-size: 0.875em;
+	background-color: var(--color-surface-muted);
+	padding: 0.125em var(--spacing-1);
+}
+
+kbd {
+	border: 1px solid var(--color-border-muted);
+	border-bottom-width: 2px;
+}
+
+pre {
+	background-color: var(--color-surface-muted);
+	padding: var(--spacing-4);
+	overflow-x: auto;
+}
+
+pre code {
+	font-size: inherit;
+	background-color: transparent;
+	padding: 0;
+}
+
+/* Lists ----------------------------------------------------------------- */
+
+ul,
+ol {
+	padding-inline-start: var(--spacing-6);
+}
+
+ul {
+	list-style-type: disc;
+}
+
+ul ul {
+	list-style-type: circle;
+}
+
+ul ul ul {
+	list-style-type: square;
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+ol ol {
+	list-style-type: lower-alpha;
+}
+
+ol ol ol {
+	list-style-type: lower-roman;
+}
+
+li {
+	padding-inline-start: var(--spacing-1);
+}
+
+li::marker {
+	color: var(--color-text-muted);
+}
+
+/* A loose list item holds paragraphs or a nested list. */
+li > * + * {
+	margin-top: var(--flow-tight);
+}
+
+dt {
+	font-weight: var(--primitive-typography-font-weight-semi-bold);
+}
+
+dd {
+	padding-inline-start: var(--spacing-4);
+}
+
+/* Quotes ---------------------------------------------------------------- */
+
+blockquote {
+	color: var(--color-text-muted);
+	border-inline-start: var(--spacing-1) solid var(--color-static-brand);
+	padding-inline-start: var(--spacing-4);
+}
+
+blockquote > * + * {
+	margin-top: var(--flow-tight);
+}
+
+cite {
+	font-style: normal;
+}
+
+/* Rules ----------------------------------------------------------------- */
+
+hr {
+	border-top-color: var(--color-border-muted);
+}
+
+/* Tables ---------------------------------------------------------------- */
+
+table {
+	width: 100%;
+	table-layout: auto;
+}
+
+caption {
+	caption-side: top;
+	text-align: start;
+	color: var(--color-text-muted);
+	padding-bottom: var(--spacing-2);
+}
+
+th,
+td {
+	padding: var(--spacing-2);
+	text-align: start;
+}
+
+th {
+	font-weight: var(--primitive-typography-font-weight-semi-bold);
+	vertical-align: bottom;
+}
+
+td {
+	vertical-align: baseline;
+	font-variant-numeric: tabular-nums;
+}
+
+thead {
+	border-bottom: 1px solid var(--color-border);
+}
+
+tbody tr {
+	border-bottom: 1px solid var(--color-border-muted);
+}
+
+tbody tr:last-child {
+	border-bottom-width: 0;
+}
+
+tfoot {
+	border-top: 1px solid var(--color-border);
+}
+
+/* Figures and media ------------------------------------------------------ */
+
+figcaption {
+	color: var(--color-text-muted);
+}
+
+figure > * + figcaption {
+	margin-top: var(--flow-tight);
+}
+
+/* Disclosure ------------------------------------------------------------ */
+
+summary {
+	cursor: pointer;
+	font-weight: var(--primitive-typography-font-weight-semi-bold);
+}
+
+details > * + * {
+	margin-top: var(--flow-tight);
+}
+
+/* Print and forced colours ---------------------------------------------- */
+
+@media print {
+	pre,
+	table,
+	blockquote,
+	figure {
+		break-inside: avoid;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		break-after: avoid;
+	}
+}
+
+/* Forced colours strips the code background, so give it a border. */
+@media (forced-colors: active) {
+	:not(pre) > code {
+		border: 1px solid;
+	}
+}

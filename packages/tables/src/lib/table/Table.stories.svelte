@@ -366,12 +366,12 @@
 	{#snippet template()}
 		<div class="flex max-w-2xl flex-col gap-4">
 			<div class="border border-color-border-muted p-2">
-				<span class="font-bold">Separate control</span>
+				<span class="label-lg">Separate control</span>
 				<Input bind:value={pageInput.value} type="text" label="Set page here"></Input>
 			</div>
 
 			<div class="border border-color-border-muted p-2">
-				<span class="font-bold">Table component</span>
+				<span class="label-lg">Table component</span>
 
 				<Table {data} {tableSpec} paginate pageSize={5} bind:page />
 			</div>

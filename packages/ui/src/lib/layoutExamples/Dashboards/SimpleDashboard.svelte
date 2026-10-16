@@ -97,14 +97,14 @@
 </Header>
 <AppShell>
 	{#snippet main()}
-		<div class="product h-full bg-color-canvas-muted p-6">
+		<div class="typeset-product h-full bg-color-canvas-muted p-6">
 			<div class="flex flex-col gap-6">
 				<Breadcrumbs {breadcrumbs} />
 
 				<!-- Page head -->
 				<div class="flex flex-col gap-1">
-					<h1 class="page-head text-color-text">Simple dashboard</h1>
-					<p class="subtitle text-color-text-muted">
+					<h1 class="dashboard-main-title">Simple dashboard</h1>
+					<p class="dashboard-main-subtitle">
 						An example layout assembled from the design-system pieces: a breadcrumb, a page head, a
 						one-up card and a two-up card row.
 					</p>

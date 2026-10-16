@@ -49,20 +49,20 @@ color-text-muted;
 --color-text-muted;
 
 // variable application
-.my-class: var(--color-text-muted)
+.my-class {
+	color: var(--color-text-muted);
+}
 ```
 
 [Read the mozilla docs for more about using css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties#using_the_root_pseudo-class)
 
-The inclusion of styles from `primitives.css`, `light.css` and `dark.css` will allow you to use mode aware variables.
-
-`primatives` and `light` are scoped to the root:
+The custom properties are in `tokens.css`, which `index.css` imports. The light values are scoped to the root:
 
 ```css
 :root { ...
 ```
 
-`dark` is scoped to a `.dark` root modifier
+The dark values are scoped to a `.dark` class:
 
 ```css
 :root.dark, .dark { ...
@@ -72,14 +72,16 @@ this means you can target mode switching with a `.dark` class, and any children 
 
 ```html
 <body class="dark">
-	All ancestors will inherit dark mode
+	All descendants will inherit dark mode
 </body>
 ```
 
 You can use the same method to apply the dark mode at a component level
 
 ```css
-.text-class: var(--color-text);
+.text-class {
+	color: var(--color-text);
+}
 ```
 
 ```html
@@ -94,7 +96,7 @@ You can use the same method to apply the dark mode at a component level
 </div>
 ```
 
-If working in an environment that uses the tailwind setup from `@ldn-viz/themes` package the theme switching and css setup is already done.
+The Tailwind preset from `@ldn-viz/themes` adds each colour token as a Tailwind colour, such as `text-color-text-muted`. It adds no CSS of its own, so a Tailwind project imports `index.css` as well.
 
 You can check [our storybook](https://greater-london-authority.github.io/ldn-viz-tools/) for further information.
 

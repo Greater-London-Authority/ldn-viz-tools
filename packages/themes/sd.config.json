@@ -1,107 +1,45 @@
 {
-	"source": ["./tokens/**/*.json"],
+	"source": ["./tokens/lcd-ds.tokens.json"],
 	"parsers": ["json-parser"],
-
 	"platforms": {
 		"css": {
-			"transformGroup": "css",
-			"transforms": ["modeName", "size/pxToRem", "typography/unitless", "spacing/unitless"],
+			"transforms": [
+				"attribute/cti",
+				"name/grammar",
+				"dimension/grammar",
+				"color/css",
+				"fontFamily/css",
+				"shadow/css/shorthand"
+			],
 			"buildPath": "./styles/",
 			"files": [
 				{
-					"destination": "primitives.css",
-					"format": "css/variables",
-					"filter": "cssPrimitiveFilter",
-					"options": {
-						"selector": ":root"
-					}
+					"destination": "reset.css",
+					"format": "css/reset"
 				},
 				{
-					"destination": "primitive-scale.css",
-					"format": "custom/primitive-scale",
-					"filter": "cssPrimitiveScaleFilter"
+					"destination": "tokens.css",
+					"format": "css/tokens"
 				},
 				{
-					"destination": "light.css",
-					"format": "css/variables",
-					"filter": "cssLightModeFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
+					"destination": "tokens.json",
+					"format": "json/tooling"
 				},
 				{
-					"destination": "dark.css",
-					"format": "css/variables",
-					"filter": "cssDarkModeFilter",
-					"options": {
-						"selector": ":root.dark, .dark",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
+					"destination": "system.css",
+					"format": "css/system"
 				},
 				{
-					"destination": "spacing.css",
-					"format": "custom/spacing",
-					"filter": "cssSpacingFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
+					"destination": "index.css",
+					"format": "css/index"
 				},
 				{
-					"destination": "grid-spacing.css",
-					"format": "custom/grid-spacing",
-					"filter": "cssGridSpacingFilter"
+					"destination": "tokens.scss",
+					"format": "scss/values"
 				},
 				{
-					"destination": "flow.css",
-					"format": "custom/flow",
-					"filter": "cssFlowFilter"
-				},
-				{
-					"destination": "typography.css",
-					"format": "custom/typography",
-					"filter": "cssTypographyFilter",
-					"options": {
-						"selector": ":root",
-						"outputReferences": true,
-						"outputReferenceFallbacks": true
-					}
-				},
-				{
-					"destination": "shadows.css",
-					"format": "custom/shadows",
-					"filter": "shadowFilter"
-				}
-			]
-		},
-		"web": {
-			"transformGroup": "web",
-			"transforms": ["modeName", "spacing/unitless"],
-			"buildPath": "./styles/",
-			"files": [
-				{
-					"destination": "tw-extend/color.cjs",
-					"format": "tw/css-variables",
-					"filter": "twFilter"
-				},
-				{
-					"destination": "tw-extend/spacing.cjs",
-					"format": "tw/css-spacing-variables",
-					"filter": "twSpacingFilter"
-				},
-				{
-					"destination": "tw-extend/gridspacing.cjs",
-					"format": "tw/css-grid-spacing-variables",
-					"filter": "twGridSpacingFilter"
-				},
-				{
-					"destination": "tw-extend/flow.cjs",
-					"format": "tw/css-flow-variables",
-					"filter": "twFlowFilter"
+					"destination": "tailwind.cjs",
+					"format": "tw/preset"
 				}
 			]
 		},
@@ -110,18 +48,18 @@
 			"buildPath": "./styles/",
 			"files": [
 				{
-					"destination": "js/color-tokens.js",
+					"destination": "colors.js",
 					"format": "custom/js",
 					"filter": "jsFilter",
 					"options": {
 						"minify": true
 					}
 				}
-			]
+			],
+			"transforms": ["name/grammar"]
 		},
 		"docs": {
-			"transformGroup": "js",
-			"transforms": ["name/kebab"],
+			"transforms": ["attribute/cti", "name/grammar", "dimension/grammar", "color/css"],
 			"buildPath": "./docs/tokens/",
 			"files": [
 				{

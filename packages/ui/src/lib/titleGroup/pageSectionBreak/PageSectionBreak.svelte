@@ -21,14 +21,14 @@
 	let { title = '', subtitle = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
-<div class={classNames('flow-prose prose', classes)}>
+<div class={classNames('typeset-longform', classes)}>
 	{#if eyebrow}
 		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
 	{/if}
 	{#if title}
-		<h2 class="title-1 text-color-text">{title}</h2>
+		<h2 class="headline-lg text-color-text">{title}</h2>
 	{/if}
 	{#if subtitle}
-		<p class="subtitle text-color-text-muted">{subtitle}</p>
+		<p class="subtitle-sm text-color-text-muted">{subtitle}</p>
 	{/if}
 </div>

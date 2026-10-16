@@ -116,7 +116,7 @@ thumbnail: cta-dataviz-3.svg
     
 
     let chartColorsOrdered = [
-            'color-chart-background', 
+            'color-chart-surface', 
             'color-chart-axis', 
             'color-chart-grid', 
             'color-chart-label', 

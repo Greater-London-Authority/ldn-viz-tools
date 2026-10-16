@@ -30,11 +30,11 @@
 <div
 	role="alert"
 	id={message.id}
-	class="product text-color-text shadow-lg"
+	class="typeset-product text-color-text shadow-lg"
 	out:fade={{ duration: 100 }}
 >
 	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
-		<div class="title mb-1 flex items-center justify-between">
+		<div class="title-sm mb-1 flex items-center justify-between">
 			{message.type}
 			{#if message.closeButton}
 				<Button

@@ -23,7 +23,7 @@ The Figma file mixes several kinds of thing on the same pages: published compone
 
 When we audit the file or sweep through it, we need to be able to tell these apart just by looking at the layer name. Otherwise we risk skipping something that matters, or spending time migrating something that is only there to hold the docs together.
 
-The documentation also needs its own text. Titles, intro prose and captions on doc frames are not part of any product, so they shouldn't be set in product typography roles. If they were, it would be hard to tell documentation from the components it describes, and any change to a product role would change the docs too.
+The documentation also needs its own text. Titles, intro and captions on doc frames are not part of any product, so they shouldn't be set in product typography roles. If they were, it would be hard to tell documentation from the components it describes, and any change to a product role would change the docs too.
 
 ## Decision
 

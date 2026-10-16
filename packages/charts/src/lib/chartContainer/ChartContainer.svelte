@@ -176,7 +176,7 @@
 		classNames(
 			chartWidth,
 			'break-inside-avoid',
-			alignMultiple ? 'contents not-prose chart' : 'flex flex-col not-prose chart'
+			alignMultiple ? 'contents typeset-product chart' : 'flex flex-col typeset-product chart'
 		)
 	);
 

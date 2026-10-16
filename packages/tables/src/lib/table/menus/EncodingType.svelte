@@ -128,26 +128,26 @@
 </script>
 
 <Overlay overlayType="popover" hintLabel="Encoding">
-	<h2 class="text-large font-bold">Visual Encoding</h2>
+	<h2 class="label-lg">Visual Encoding</h2>
 
-	<h3 class="text-large font-bold">Rows</h3>
 	<RadioButtonGroup
+		label="Rows"
 		options={unaggregatedOptions}
 		name="cell-encoding"
 		bind:selectedId={selectedCellEncoding}
 		onChange={setCellEncoding}
 	/>
 
-	<h3 class="text-large font-bold">Groups</h3>
 	<RadioButtonGroup
+		label="Groups"
 		options={aggregatedOptions}
 		name="group-encoding"
 		bind:selectedId={selectedGroupEncoding}
 		onChange={setGroupEncoding}
 	/>
 
-	<h3 class="text-large font-bold">Column Summary</h3>
 	<RadioButtonGroup
+		label="Column Summary"
 		options={aggregatedOptions}
 		name="column-encoding"
 		bind:selectedId={selectedColumnEncoding}

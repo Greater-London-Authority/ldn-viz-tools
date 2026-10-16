@@ -51,7 +51,7 @@
 	</SidebarGroup>
 </SidebarSection>
 <SidebarSection title="Download Data">
-	<span class="text-xs">
+	<span class="caption-sm">
 		For access to the full LEGGI dataset, and more about our methodology, click below to visit the
 		London Datastore.
 	</span>
@@ -60,7 +60,7 @@
 	</SidebarGroup>
 </SidebarSection>
 <SidebarSection title="Definitions">
-	<span class="text-xs"> For more details on the definitions and terms used in this tool. </span>
+	<span class="caption-sm"> For more details on the definitions and terms used in this tool. </span>
 	<SidebarGroup>
 		<Button emphasis="secondary" class="w-full">View definitions</Button>
 	</SidebarGroup>

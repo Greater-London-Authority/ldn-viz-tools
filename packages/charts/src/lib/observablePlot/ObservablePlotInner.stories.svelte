@@ -518,7 +518,7 @@ We therefore provide a `preprocessOptions` function, which splits one mark into 
 	{#snippet template(args)}
 		<div class="flex flex-col gap-4">
 			<div>
-				<p class="mb-2 font-bold">addEventHandler (click only)</p>
+				<p class="label-lg mb-2">addEventHandler (click only)</p>
 				<ObservablePlotInner {...args} spec={specClickOnly} data={chartData} />
 			</div>
 
@@ -534,7 +534,7 @@ We therefore provide a `preprocessOptions` function, which splits one mark into 
 	{#snippet template(args)}
 		<div class="flex flex-col gap-4">
 			<div>
-				<p class="mb-2 font-bold">addMultipleEventHandlers (click + mouseenter/leave)</p>
+				<p class="label-lg mb-2">addMultipleEventHandlers (click + mouseenter/leave)</p>
 				<ObservablePlotInner {...args} spec={specMultipleEventHandlers} data={chartData} />
 			</div>
 

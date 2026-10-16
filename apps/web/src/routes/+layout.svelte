@@ -114,10 +114,10 @@
 	{@render children()}
 
 	<Footer showCiuLogo showCookieMenu>
-		<div class="pb-4 text-sm lg:w-1/6">
+		<div class="pb-4 lg:w-1/6">
 			<nav>
-				<h3 class="mb-1 font-semibold">Links</h3>
-				<ul class="text-color-text-muted">
+				<h3 class="label-md text-strong mb-1">Links</h3>
+				<ul class="body-sm text-color-text-muted">
 					<li>
 						<a href="https://data.london.gov.uk/" target="_blank" class="hover:underline">
 							London Data Store
@@ -132,10 +132,10 @@
 			</nav>
 		</div>
 
-		<div class="pb-4 text-sm lg:w-1/6">
+		<div class="pb-4 lg:w-1/6">
 			<nav>
-				<h3 class="mb-1 font-semibold">Contact</h3>
-				<ul class="text-color-text-muted">
+				<h3 class="label-md text-strong mb-1">Contact</h3>
+				<ul class="body-sm text-color-text-muted">
 					<li>email: <a href="mailto:gis@london.gov.uk">gis@london.gov.uk</a></li>
 				</ul>
 			</nav>

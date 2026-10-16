@@ -68,7 +68,7 @@
 
 	let ragClasses = $derived(
 		classNames(
-			'text-sm inline-flex items-center',
+			'table-cell inline-flex items-center',
 			benchmarkComparisonClass[compared?.good as 'good']
 		)
 	);

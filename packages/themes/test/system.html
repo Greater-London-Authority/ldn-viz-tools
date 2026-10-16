@@ -1,0 +1,635 @@
+<!doctype html>
+<!--
+  System CSS verification page (RFC 0003, Verification: plain HTML, index.css only).
+
+  Loads nothing from the system but index.css: no Tailwind, no components.
+  The harness styles below only lay the page out; they never set type, flow
+  or shadow on a specimen.
+
+  Run from packages/themes after `npm run build`:
+    python3 -m http.server 8000
+  then open http://localhost:8000/test/system.html
+  (served, not file://, so the page can read system.css's rules).
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>System CSS check</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+		/>
+		<link rel="stylesheet" href="../styles/index.css" />
+		<style>
+			/* Harness only. */
+			/* Tailwind's sr-only, which the system does not ship. */
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				border-width: 0;
+			}
+			body {
+				margin: 0;
+				background: var(--color-canvas);
+			}
+			.h-bar {
+				position: sticky;
+				top: 0;
+				z-index: 10;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				align-items: center;
+				padding: 8px 16px;
+				background: var(--color-surface-muted, var(--color-canvas-muted));
+				border-bottom: 1px solid var(--color-border);
+				font:
+					13px/1.4 system-ui,
+					sans-serif;
+			}
+			.h-bar button,
+			.h-bar label {
+				font: inherit;
+			}
+			.h-bar output {
+				font-weight: 600;
+			}
+			.h-section {
+				padding: 32px 16px;
+				border-bottom: 1px solid var(--color-border);
+			}
+			.h-heading {
+				margin: 0 0 16px;
+				font:
+					600 12px/1.4 system-ui,
+					sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--color-text-muted);
+			}
+			.h-note {
+				margin: 0 0 16px;
+				max-width: 70ch;
+				font:
+					13px/1.5 system-ui,
+					sans-serif;
+				color: var(--color-text-muted);
+			}
+			.h-cols {
+				display: grid;
+				gap: 24px;
+				grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+			}
+			.h-panel {
+				min-width: 0;
+				padding: 16px;
+				background: var(--color-surface);
+				border: 1px solid var(--color-border);
+			}
+			.h-table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			.h-table td,
+			.h-table th {
+				padding: 6px 8px 6px 0;
+				vertical-align: baseline;
+				border-bottom: 1px solid var(--color-border-muted, var(--color-border));
+				text-align: left;
+			}
+			.h-meta,
+			.h-table th {
+				font:
+					12px/1.4 ui-monospace,
+					monospace;
+				color: var(--color-text-muted);
+				white-space: nowrap;
+			}
+			.h-table th {
+				font-weight: 600;
+			}
+			.h-readout {
+				color: var(--color-surface-accent);
+			}
+			.h-scroll {
+				overflow-x: auto;
+			}
+			/* "Show gaps": outlines every flow child so margins read as gaps. */
+			.h-gaps [class*='flow-'] > *,
+			.h-gaps .typeset-longform > *,
+			.h-gaps .gap-demo > * {
+				outline: 1px dashed var(--color-border-strong, var(--color-border));
+			}
+			.h-gaps .h-margin-label {
+				display: inline;
+			}
+			.h-margin-label {
+				display: none;
+				font:
+					11px/1 ui-monospace,
+					monospace;
+				color: var(--color-text-muted);
+			}
+			.h-elev {
+				display: grid;
+				place-items: center;
+				height: 96px;
+				background: var(--color-surface);
+				font:
+					12px/1.4 ui-monospace,
+					monospace;
+			}
+			.h-grid-cell {
+				padding: 8px;
+				background: var(--color-surface-muted, var(--color-canvas-muted));
+				font:
+					12px/1.4 ui-monospace,
+					monospace;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="h-bar">
+			<button type="button" id="mode">Toggle dark mode</button>
+			<label><input type="checkbox" id="gaps" /> Show gaps</label>
+			<span>Viewport <output id="width"></output>px · breakpoint <output id="bp"></output></span>
+			<span>Mode <output id="modeName">light</output></span>
+		</div>
+
+		<section class="h-section">
+			<h2 class="h-heading">1 · Roles per typeset</h2>
+			<p class="h-note">
+				Every role class, rendered inside each typeset. The readout is the computed font-size /
+				line-height · weight, so a change between breakpoints shows when you resize. The product
+				column is the default typeset (set on :root).
+			</p>
+			<div class="h-cols">
+				<div class="h-panel">
+					<div class="h-meta">.typeset-longform</div>
+					<div class="h-scroll">
+						<table class="h-table typeset-longform" data-roles></table>
+					</div>
+				</div>
+				<div class="h-panel">
+					<div class="h-meta">.typeset-product</div>
+					<div class="h-scroll">
+						<table class="h-table typeset-product" data-roles></table>
+					</div>
+				</div>
+				<div class="h-panel">
+					<div class="h-meta">no typeset class (:root default)</div>
+					<div class="h-scroll"><table class="h-table" data-roles></table></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">2 · Nesting: the innermost typeset wins</h2>
+			<div class="h-cols">
+				<div class="h-panel typeset-longform">
+					<p class="body-md" data-readout>Longform body-md</p>
+					<div class="typeset-product">
+						<p class="body-md" data-readout>Product body-md, nested in longform</p>
+						<div class="typeset-longform">
+							<p class="body-md" data-readout>Longform body-md, nested again</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">3 · Flow contexts</h2>
+			<p class="h-note">
+				The same markup in each context. Expect: section step above the eyebrow and h2; tight
+				between eyebrow → heading → subtitle; loose around the figure and above h3; tight inside
+				lists, the dl and under the figcaption. Turn on "Show gaps" to see the margins.
+			</p>
+			<div class="h-cols" id="flowCols"></div>
+			<template id="flowSample">
+				<p class="body-md">Opening paragraph, the first child, gets no margin.</p>
+				<p class="eyebrow">Eyebrow</p>
+				<h2 class="headline-md">Headline after an eyebrow</h2>
+				<p class="subhead-md">Subhead couples to it</p>
+				<p class="body-md">Body paragraph after the title group.</p>
+				<figure>
+					<div class="h-grid-cell" style="height: 60px">figure</div>
+					<figcaption class="caption-sm">Caption binds to its figure</figcaption>
+				</figure>
+				<p class="body-md">Paragraph after a block object.</p>
+				<h3 class="title-md">A minor heading</h3>
+				<p class="subtitle-md">Subtitle under it</p>
+				<ul class="body-md">
+					<li>List item</li>
+					<li>
+						List item
+						<ul>
+							<li>Nested</li>
+						</ul>
+					</li>
+				</ul>
+				<dl class="body-md">
+					<dt class="label-md">Term</dt>
+					<dd>Definition</dd>
+					<dt class="label-md">Term</dt>
+					<dd>Definition</dd>
+				</dl>
+				<p class="sr-only">Screen-reader only, adds no gap</p>
+				<p class="body-md mt-flow-section">This one opts in to mt-flow-section.</p>
+			</template>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">4 · Longform without classes</h2>
+			<p class="h-note">
+				Markup as Markdown renders it: no class on any child. Text takes body-md from the typeset,
+				headings and the caption take their role from the Figma usage set, and flow is spacious with
+				steps assigned from the markup. The last h3 has .title-sm, which must win over the element
+				alias.
+			</p>
+			<div class="h-panel typeset-longform" id="longform">
+				<h1 data-readout>h1 heading</h1>
+				<p data-readout>A bare paragraph, set as body-md by the typeset.</p>
+				<p class="lead" data-readout>p.lead, the lead paragraph</p>
+				<h2 data-readout>h2 heading</h2>
+				<p>Paragraph under an h2.</p>
+				<h3 data-readout>h3 heading</h3>
+				<p>Paragraph under an h3.</p>
+				<ul>
+					<li>List item</li>
+					<li>List item</li>
+				</ul>
+				<blockquote>A blockquote, set off by the loose step.</blockquote>
+				<h4 data-readout>h4 heading</h4>
+				<p>Paragraph under an h4.</p>
+				<h5 data-readout>h5 heading</h5>
+				<figure>
+					<div class="h-grid-cell" style="height: 60px">figure</div>
+					<figcaption data-readout>figcaption</figcaption>
+				</figure>
+				<p>Paragraph after the figure.</p>
+				<h3 class="title-sm" data-readout>h3 with .title-sm</h3>
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">5 · Usage aliases</h2>
+			<p class="h-note">Each alias with the role it points at, read from system.css.</p>
+			<div class="h-cols">
+				<div class="h-panel h-scroll">
+					<table class="h-table" id="aliases"></table>
+				</div>
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">6 · Emphasis</h2>
+			<div class="h-panel">
+				<p class="body-md" data-readout>body-md, identity weight</p>
+				<p class="body-md text-strong" data-readout>body-md .text-strong</p>
+				<p class="title-md" data-readout>title-md, identity weight</p>
+				<p class="title-md text-soft" data-readout>title-md .text-soft</p>
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">7 · Elevation</h2>
+			<div class="h-cols" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr))">
+				<div class="h-elev elevation-0">elevation-0</div>
+				<div class="h-elev elevation-1">elevation-1</div>
+				<div class="h-elev elevation-2">elevation-2</div>
+				<div class="h-elev elevation-3">elevation-3</div>
+				<div class="h-elev elevation-4">elevation-4</div>
+				<div class="h-elev elevation-5">elevation-5</div>
+				<div class="h-elev elevation-6">elevation-6</div>
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">8 · Flow utilities, nested contexts and gap</h2>
+			<p class="h-note">
+				A nested context takes the gap above it from its parent, and gives its own density to its
+				children. Utilities resolve against the nearest context.
+			</p>
+			<div class="h-cols">
+				<div class="h-panel typeset-longform">
+					<p class="body-md">typeset-longform (spacious)</p>
+					<p class="body-md">spacious default above</p>
+					<div class="flow-compact">
+						<p class="body-sm">.flow-compact: spacious default above this block</p>
+						<p class="body-sm">compact default inside</p>
+						<p class="body-sm mt-flow-loose">mt-flow-loose: compact loose</p>
+					</div>
+					<p class="body-md mt-flow-loose">mt-flow-loose: spacious loose</p>
+				</div>
+				<div class="h-panel flow-standard">
+					<p class="body-sm">first</p>
+					<p class="body-sm mt-flow-tight">mt-flow-tight</p>
+					<p class="body-sm mt-flow">mt-flow</p>
+					<p class="body-sm mt-flow-loose">mt-flow-loose</p>
+					<p class="body-sm mt-flow-section">mt-flow-section</p>
+				</div>
+				<div class="h-panel flow-compact">
+					<div class="gap-demo gap-flow-loose" style="display: flex; flex-direction: column">
+						<div class="h-grid-cell">gap-flow-loose</div>
+						<div class="h-grid-cell">in flow-compact</div>
+						<div class="h-grid-cell">→ compact loose</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="h-section" style="padding-inline: 0">
+			<h2 class="h-heading" style="padding-inline: 16px">9 · Layout grid</h2>
+			<div class="container-fluid">
+				<div class="grid-gutter" style="display: grid; grid-template-columns: repeat(4, 1fr)">
+					<div class="h-grid-cell">.container-fluid</div>
+					<div class="h-grid-cell">.grid-gutter</div>
+					<div class="h-grid-cell">padding and gap</div>
+					<div class="h-grid-cell">change per breakpoint</div>
+				</div>
+			</div>
+			<div class="container-fluid" style="margin-top: 16px">
+				<div class="grid-gutter-fluid" style="display: grid; grid-template-columns: repeat(4, 1fr)">
+					<div class="h-grid-cell">.grid-gutter-fluid</div>
+					<div class="h-grid-cell"></div>
+					<div class="h-grid-cell"></div>
+					<div class="h-grid-cell"></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">10 · Base: focus and text colour</h2>
+			<p class="h-note">
+				Tab through: keyboard focus shows the focus ring; a mouse click does not.
+			</p>
+			<div class="h-panel">
+				<button type="button" class="label-md">A button</button>
+				<a href="#mode" class="body-md">A link</a>
+				<input class="body-md" placeholder="An input" />
+			</div>
+		</section>
+
+		<section class="h-section">
+			<h2 class="h-heading">11 · Content styles: unclassed markup</h2>
+			<p class="h-note">
+				The same Markdown-like markup in each set-up. Inside a typeset it takes the content styles
+				(sd/content.css) in longform and in formatted product. Plain .typeset-product sets type
+				only, as a component root does. With no typeset class, or inside .not-typeset, it keeps the
+				reset: no list markers, no link colour. In the nested panel, the plain product island takes
+				neither longform's content styles nor its own.
+			</p>
+			<div class="h-cols" id="contentCols"></div>
+			<template id="contentSample">
+				<h2>Heading two</h2>
+				<p>
+					A paragraph with <a href="#mode">a link</a>, <strong>strong</strong>, <em>emphasis</em>,
+					<code>inline code</code>, <kbd>Ctrl</kbd> + <kbd>C</kbd>, <mark>marked text</mark>,
+					<abbr title="Greater London Authority">GLA</abbr>, H<sub>2</sub>O, x<sup>2</sup> and
+					<small>small print</small>.
+				</p>
+				<ul>
+					<li>Unordered item</li>
+					<li>
+						Item with a nested list
+						<ul>
+							<li>
+								Second level
+								<ul>
+									<li>Third level</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ol>
+					<li>Ordered item</li>
+					<li>
+						<p>Loose item, first paragraph.</p>
+						<p>Loose item, second paragraph.</p>
+						<ol>
+							<li>
+								Second level
+								<ol>
+									<li>Third level</li>
+								</ol>
+							</li>
+						</ol>
+					</li>
+				</ol>
+				<dl>
+					<dt>Term</dt>
+					<dd>Definition of the term.</dd>
+				</dl>
+				<blockquote>
+					<p>A quotation that runs over a line or two, as quotations do.</p>
+					<cite>Someone quotable</cite>
+				</blockquote>
+				<hr />
+				<table>
+					<caption>
+						A table caption
+					</caption>
+					<thead>
+						<tr>
+							<th>Borough</th>
+							<th>Population</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Camden</td>
+							<td>210,100</td>
+						</tr>
+						<tr>
+							<td>Hackney</td>
+							<td>259,200</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>Total</td>
+							<td>469,300</td>
+						</tr>
+					</tfoot>
+				</table>
+				<figure>
+					<div class="h-grid-cell" style="height: 48px">figure</div>
+					<figcaption>A figure caption</figcaption>
+				</figure>
+				<pre><code>const block = 'code';</code></pre>
+				<details>
+					<summary>A summary</summary>
+					<p>Disclosed content.</p>
+				</details>
+			</template>
+		</section>
+
+		<script>
+			const root = document.documentElement;
+			const px = (v) => Math.round(parseFloat(v) * 10) / 10;
+			const readout = (el) => {
+				const s = getComputedStyle(el);
+				const tnum = s.fontVariantNumeric.includes('tabular-nums') ? ' · tabular-nums' : '';
+				return `${px(s.fontSize)} / ${px(s.lineHeight)} · ${s.fontWeight}${tnum}`;
+			};
+
+			// Roles and aliases come from system.css itself: a class rule whose
+			// font-size reads var(--{role}-font-size).
+			const systemRules = () => {
+				const sheet = [...document.styleSheets].find((s) => s.href?.endsWith('/styles/index.css'));
+				const system = [...sheet.cssRules].find((r) => r.href?.endsWith('system.css'));
+				return [...system.styleSheet.cssRules].filter((r) => r.style);
+			};
+			const rules = systemRules();
+			const roleOf = (rule) => /var\(--([\w-]+)-font-size\)/.exec(rule.style.fontSize)?.[1];
+			const classRules = rules.filter(
+				(r) =>
+					/^\.[\w-]+$/.test(r.selectorText) && !r.selectorText.startsWith('.typeset-') && roleOf(r)
+			);
+			// Each role set largest first: lg, md, sm.
+			const roleName = (name) => name.replace(/-(lg|md|sm)$/, '');
+			const sizeRank = (name) => ['lg', 'md', 'sm'].indexOf(name.split('-').at(-1));
+			const roleOrder = [
+				...new Set(
+					classRules
+						.filter((r) => r.selectorText.slice(1) === roleOf(r))
+						.map((r) => roleName(roleOf(r)))
+				)
+			];
+			const roles = classRules
+				.filter((r) => r.selectorText.slice(1) === roleOf(r))
+				.sort(
+					(a, b) =>
+						roleOrder.indexOf(roleName(roleOf(a))) - roleOrder.indexOf(roleName(roleOf(b))) ||
+						sizeRank(roleOf(a)) - sizeRank(roleOf(b))
+				);
+			const aliases = classRules.filter((r) => r.selectorText.slice(1) !== roleOf(r));
+
+			for (const table of document.querySelectorAll('[data-roles]')) {
+				table.innerHTML = roles
+					.map((r) => {
+						const name = r.selectorText.slice(1);
+						return `<tr><th>.${name}</th><td><span class="${name}" data-readout>Aa 1,111.1<br />Aa 8,888.8</span></td></tr>`;
+					})
+					.join('');
+			}
+
+			document.getElementById('aliases').innerHTML =
+				'<tr><th>alias</th><th>role</th><th>specimen (product)</th></tr>' +
+				aliases
+					.map(
+						(r) =>
+							`<tr><th>${r.selectorText}</th><td class="h-meta">.${roleOf(r)}</td><td><span class="${r.selectorText.slice(1)}" data-readout>Specimen 1,111.1<br />Specimen 8,888.8</span></td></tr>`
+					)
+					.join('');
+
+			const flowCols = document.getElementById('flowCols');
+			for (const cls of ['typeset-longform', 'flow-spacious', 'flow-standard', 'flow-compact']) {
+				const panel = document.createElement('div');
+				panel.className = 'h-panel';
+				panel.innerHTML = `<div class="h-meta">.${cls}</div>`;
+				const ctx = document.createElement('div');
+				ctx.className = cls;
+				ctx.append(document.getElementById('flowSample').content.cloneNode(true));
+				panel.append(ctx);
+				flowCols.append(panel);
+			}
+
+			const contentCols = document.getElementById('contentCols');
+			const contentPanels = [
+				['.typeset-longform', (el) => (el.className = 'typeset-longform')],
+				['.typeset-product--formatted', (el) => (el.className = 'typeset-product--formatted')],
+				['.typeset-product (type only)', (el) => (el.className = 'typeset-product')],
+				['no typeset class', () => {}],
+				[
+					'.typeset-longform > .not-typeset',
+					(el) => {
+						el.className = 'typeset-longform';
+						const escape = document.createElement('div');
+						escape.className = 'not-typeset';
+						escape.append(...el.childNodes);
+						el.append(escape);
+					}
+				],
+				[
+					'.typeset-longform > .typeset-product',
+					(el) => {
+						el.className = 'typeset-longform';
+						const island = document.createElement('div');
+						island.className = 'typeset-product h-panel';
+						island.append(...el.childNodes);
+						el.append(island);
+					}
+				]
+			];
+			for (const [label, setUp] of contentPanels) {
+				const panel = document.createElement('div');
+				panel.className = 'h-panel';
+				panel.innerHTML = `<div class="h-meta">${label}</div>`;
+				const ctx = document.createElement('div');
+				ctx.append(document.getElementById('contentSample').content.cloneNode(true));
+				setUp(ctx);
+				panel.append(ctx);
+				contentCols.append(panel);
+			}
+
+			// Margin labels on every flow child.
+			for (const el of document.querySelectorAll('[class*="flow-"] > *, .typeset-longform > *')) {
+				const label = document.createElement('span');
+				label.className = 'h-margin-label';
+				label.dataset.margin = '';
+				el.prepend(label);
+			}
+
+			const breakpoints = ['sm', 'md', 'lg', 'xl', '2xl'].map((name) => [
+				name,
+				parseFloat(getComputedStyle(root).getPropertyValue(`--primitive-breakpoint-${name}`))
+			]);
+
+			const refresh = () => {
+				const w = window.innerWidth;
+				document.getElementById('width').value = w;
+				document.getElementById('bp').value =
+					breakpoints.filter(([, min]) => w >= min).at(-1)?.[0] ?? 'base';
+				// The readout goes inside the specimen: a sibling would itself be
+				// spaced by flow and change the gaps being checked.
+				for (const el of document.querySelectorAll('[data-readout]')) {
+					let meta = el.querySelector(':scope > .h-readout');
+					if (!meta) {
+						meta = document.createElement('span');
+						meta.className = 'h-meta h-readout';
+						meta.style.display = 'block';
+						el.append(meta);
+					}
+					meta.textContent = readout(el);
+				}
+				for (const label of document.querySelectorAll('[data-margin]')) {
+					label.textContent = `mt ${px(getComputedStyle(label.parentElement).marginTop)}px `;
+				}
+			};
+
+			document.getElementById('mode').addEventListener('click', () => {
+				root.classList.toggle('dark');
+				document.getElementById('modeName').value = root.classList.contains('dark')
+					? 'dark'
+					: 'light';
+			});
+			document.getElementById('gaps').addEventListener('change', (e) => {
+				document.body.classList.toggle('h-gaps', e.target.checked);
+			});
+			window.addEventListener('resize', refresh);
+			document.fonts.ready.then(refresh);
+			refresh();
+		</script>
+	</body>
+</html>

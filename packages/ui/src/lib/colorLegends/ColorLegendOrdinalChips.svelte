@@ -35,9 +35,9 @@
 	}: Props = $props();
 </script>
 
-<div class="chart flex flex-col">
+<div class="typeset-product chart flex flex-col">
 	{#if title}
-		<span class="axis-title mb-1 text-color-label">{title}</span>
+		<span class="chart-axis-title mb-1 text-color-label">{title}</span>
 	{/if}
 
 	<div class={orientation === 'horizontal' ? 'flex flex-wrap gap-2' : 'flex flex-col'}>
@@ -52,8 +52,8 @@
 				></div>
 				<span
 					class={classNames(
-						'label items-center',
-						d === highlightedValue ? 'font-semibold' : 'font-normal'
+						'chart-label items-center',
+						d === highlightedValue ? 'text-strong' : 'text-soft'
 					)}
 				>
 					{d}

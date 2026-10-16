@@ -45,9 +45,9 @@
 	{#snippet template()}
 		<TableContainer title="Some famous people" subTitle="A guess of their favourite pets">
 			{#snippet table()}
-				<table class="w-full text-left text-sm text-color-text">
+				<table class="table-cell w-full text-left text-color-text">
 					<thead>
-						<tr>
+						<tr class="table-col-head">
 							<th class="pr-4">First name</th>
 							<th class="pr-4">Last name</th>
 							<th>Pet</th>
@@ -80,7 +80,7 @@
 			hint="Favourite pets are illustrative guesses, not survey data."
 		>
 			{#snippet table()}
-				<table class="w-full text-left text-sm text-color-text">
+				<table class="table-cell w-full text-left text-color-text">
 					<tbody>
 						{#each data as row}
 							<tr>
@@ -106,7 +106,7 @@
 			note="These are only guesses!"
 		>
 			{#snippet table()}
-				<table class="w-full text-left text-sm text-color-text">
+				<table class="table-cell w-full text-left text-color-text">
 					<tbody>
 						{#each data as row}
 							<tr>
@@ -130,7 +130,7 @@
 			alt="A table of famous people and a guess of their favourite pets"
 		>
 			{#snippet table()}
-				<table class="w-full text-left text-sm text-color-text">
+				<table class="table-cell w-full text-left text-color-text">
 					<tbody>
 						{#each data as row}
 							<tr>
@@ -159,7 +159,7 @@
 			description="This table lists three well-known figures alongside an illustrative guess of the kind of pet they might have kept. It is placeholder data for demonstration only."
 		>
 			{#snippet table()}
-				<table class="w-full text-left text-sm text-color-text">
+				<table class="table-cell w-full text-left text-color-text">
 					<tbody>
 						{#each data as row}
 							<tr>
@@ -186,7 +186,7 @@
 			columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
 		>
 			{#snippet table()}
-				<table class="w-full text-left text-sm text-color-text">
+				<table class="table-cell w-full text-left text-color-text">
 					<tbody>
 						{#each data as row}
 							<tr>
@@ -213,7 +213,7 @@
 			<Card title="Some famous people" subtitle="A guess of their favourite pets">
 				<TableContainer source="Made-up data" byline="Compiled by the GLA">
 					{#snippet table()}
-						<table class="w-full text-left text-sm text-color-text">
+						<table class="table-cell w-full text-left text-color-text">
 							<tbody>
 								{#each data as row}
 									<tr>
@@ -243,7 +243,7 @@
 				<div class="grid gap-x-12 gap-y-6 sm:grid-cols-2">
 					<TableContainer title="Dog people">
 						{#snippet table()}
-							<table class="w-full text-left text-sm text-color-text">
+							<table class="table-cell w-full text-left text-color-text">
 								<tbody>
 									{#each data.filter((r) => r.pet === 'dog') as row}
 										<tr>
@@ -257,7 +257,7 @@
 					</TableContainer>
 					<TableContainer title="Cat people">
 						{#snippet table()}
-							<table class="w-full text-left text-sm text-color-text">
+							<table class="table-cell w-full text-left text-color-text">
 								<tbody>
 									{#each data.filter((r) => r.pet === 'cat') as row}
 										<tr>

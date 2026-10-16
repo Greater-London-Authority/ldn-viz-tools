@@ -116,7 +116,7 @@ thumbnail: cta-dataviz-4.svg
     
 
     let chartColorsOrdered = [
-            'color-chart-background', 
+            'color-chart-surface', 
             'color-chart-axis', 
             'color-chart-grid', 
             'color-chart-label', 
@@ -213,7 +213,7 @@ We developed our categorical colour palettes by carefully balancing the requirem
 
 Switching between our light and dark categorical palettes is easy, because they have a consistent colour naming scheme (`categorical-blue, red, green, etc`).
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={dataTokens.categorical} title="Categorical palette"/>
 </div>
 
@@ -239,7 +239,7 @@ Using high contrast and easily differentiable colours are particularly important
 
 We've created semantic tokens to simplify and standardise the use of our colours.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={themeColors} title="Semantic colour tokens"/>
 </div>
 
@@ -273,9 +273,9 @@ Sometimes you need to show missing (or filtered out) data. Here you can use `col
 
 ### Chart styling
 
-To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's `background, axis, grids and labels`.
+To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's surface, axis, grid and labels.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={chartColors} title="Chart colour tokens"/>
 </div>
 

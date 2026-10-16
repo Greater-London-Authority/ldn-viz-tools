@@ -37,13 +37,13 @@
 
 <Story name="Typography">
 	<div class="container py-16">
-		<div class="flow-prose prose">
+		<div class="typeset-longform">
 			<!-- Hero cluster — eyebrow kicker, headline and subhead couple tight to the title -->
 			<p class="eyebrow">GLA City Intelligence</p>
-			<h1 class="headline">State of London</h1>
-			<p class="subhead">A sample data notebook, styled by the London City Data Design System</p>
+			<h1 class="headline-lg">State of London</h1>
+			<p class="subhead-lg">A sample data notebook, styled by the London City Data Design System</p>
 
-			<p class="lead">
+			<p class="body-lg text-color-text-muted">
 				This page is an example of long-form analytical content — the kind of borough profile or
 				briefing where a paragraph sets up a chart, a chart earns a table, and a table needs a
 				footnote.
@@ -76,16 +76,15 @@
 				</p>
 			</blockquote>
 			<p>
-				The answer is no. Vertical rhythm is a property of the context, not of the type inside it.
-				Wrapping the document in a <code>div</code> element with the <code>flow-prose</code> class
-				applied means consecutive blocks — a
-				<code>p</code>, a figure, a heading — space themselves, so a chart between two paragraphs
-				lands with the <em>right</em> gap, not an arbitrary one.
+				No. The document sits in a <code>div</code> with the <code>typeset-longform</code> class,
+				which sets the <code>flow-spacious</code> flow context. The context sets the space above each
+				of its direct children by what the child is, so a chart between two paragraphs gets more space
+				than a paragraph after a paragraph.
 			</p>
 			<p>
-				The <code>flow-prose</code> context also caps reading columns at a legible width through
-				<code>--readable-width</code>, while letting wide elements like charts and tables
-				<em>break out</em> beyond the column when they need the room.
+				The typeset also limits the width of each child. Running text is capped at
+				<code>--measure-text</code>, 38 times the body size. Charts, tables and figures are capped
+				at <code>--measure-wide</code>, 56 times the body size, so they can be wider than the text.
 			</p>
 			<p>
 				The rest of this page runs through every typographic element the system styles, so we can
@@ -93,21 +92,19 @@
 			</p>
 
 			<p>
-				For the full vocabulary — roles, families and the one binding rule — see the <a
-					href="/?path=/docs/ui-typography--docs">Typography guide</a
+				The roles and their sizes are listed in the <a
+					href="/?path=/docs/foundations-typography--docs">Typography guide</a
 				>.
 			</p>
 			<hr />
 			<h2>What to expect from here on out</h2>
-			<p class="subtitle">A tour of every element the design system styles</p>
-			<div>
-				<p>
-					What follows is placeholder copy standing in for the body of a report, written to exercise
-					the design system itself. It works through every sensible typographic element a notebook
-					might use, such as <strong>bold text</strong>, unordered lists, ordered lists, code
-					samples, block quotes, <em>and even italics</em>.
-				</p>
-			</div>
+			<p class="subhead-sm">A tour of every element the design system styles</p>
+			<p>
+				What follows is placeholder copy standing in for the body of a report, written to exercise
+				the design system itself. It works through every sensible typographic element a notebook
+				might use, such as <strong>bold text</strong>, unordered lists, ordered lists, code samples,
+				block quotes, <em>and even italics</em>.
+			</p>
 			<p>It's worth covering all of these, for a few reasons:</p>
 			<ol>
 				<li>A document should read as one coherent piece, not a pile of mismatched components.</li>
@@ -204,13 +201,14 @@
 				<em>okay</em> out of the box, even with no highlighting.
 			</p>
 			<p>Here's roughly how you set the chart above to use the design system's data colour:</p>
-			<!-- <pre><code class="language-js">Plot.line(data, {
-	  x: 'Month',
-	  y: 'Value',
-	  stroke: theme.currentTheme.data.primary,
-	  tip: true,
-	})
-	  </code></pre> -->
+			<pre><code class="language-js"
+					>{`Plot.line(data, {
+  x: 'Month',
+  y: 'Value',
+  stroke: theme.currentTheme.data.primary,
+  tip: true
+})`}</code
+				></pre>
 			<p>Binding to the theme's data colour means the chart re-themes with the rest of the page.</p>
 			<h3>What about nested lists?</h3>
 			<p>
@@ -303,9 +301,9 @@
 				</dd>
 				<dt>Why cap the reading column but let charts break out?</dt>
 				<dd>
-					Body text is easiest to read at a limited measure, so <code>flow-prose</code> caps it via
-					<code>--readable-width</code>. Charts, tables and figures carry more information, so
-					they're allowed to break out wider than the column when the viewport gives them room.
+					Body text is easiest to read at a limited width, so <code>typeset-longform</code> caps it
+					at <code>--measure-text</code>. Charts, tables and figures need more room, so they are
+					capped at the wider <code>--measure-wide</code>.
 				</dd>
 			</dl>
 			<p class="eyebrow">Building blocks</p>
@@ -327,8 +325,7 @@
 				>
 			</table>
 			<p>
-				Inline code should read cleanly too — whether that's a token like <code
-					>--readable-width</code
+				Inline code should read cleanly too — whether that's a token like <code>--measure-text</code
 				>
 				or a package name like <code>@ldn-viz/charts</code>.
 			</p>
@@ -347,14 +344,13 @@
 			</p>
 			<h4>This is the first h4</h4>
 			<p>
-				And it marks the floor of the heading ladder. Keep content to h1–h4;
-				<code>h5</code> and <code>h6</code> aren't styled, because by <code>h4</code> the heading is already
-				close to body size and there's nowhere sensible left to go.
+				Inside <code>typeset-longform</code>, an <code>h4</code> takes the <code>title-md</code>
+				role. Headings <code>h1</code> to <code>h5</code> each take a role, so they need no class.
 			</p>
+			<h5>This is an h5</h5>
 			<p>
-				Making an <code>h5</code> smaller than the body copy it introduces would invert the hierarchy,
-				so the ladder stops at four levels by design. If you need more structure than that, the section
-				probably wants splitting.
+				An <code>h5</code> takes the <code>title-sm</code> role, which is still larger than body
+				text. An <code>h6</code> has no role. If a section needs more levels than five, split it.
 			</p>
 			<h3>Stacked headings, one more time</h3>
 			<h4>Including an h4 tucked straight under an h3</h4>
