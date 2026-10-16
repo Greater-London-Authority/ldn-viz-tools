@@ -132,8 +132,8 @@ export const content = {
 //
 // `classes` set a child's width explicitly; they sit at the typeset's
 // specificity and come after its defaults, so they win, and a max-width
-// utility wins over both. Placeholder multiples until the export carries
-// readable-width tokens.
+// utility wins over both. The multiples are set here rather than in the
+// export because a Figma variable can't follow the body size (ADR 0015).
 export const measure = {
 	widths: { text: 38, wide: 56 },
 	wide: ['figure', 'img', 'video', 'iframe', 'table', 'pre', '.chart'],

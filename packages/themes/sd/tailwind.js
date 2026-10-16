@@ -83,11 +83,17 @@ export const formatPreset = (dictionary, filters, breakpoints) => {
 		])
 	);
 
+	// Type is set by the role classes in system.css, so Tailwind's own sizes,
+	// weights and line heights are emptied rather than extended (ADR 0002).
+	// Its rounded-* utilities stay, for things that are round (ADR 0006).
 	const preset = {
 		darkMode: 'class',
 		theme: {
 			screens,
 			container: { padding: containerPadding },
+			fontSize: {},
+			fontWeight: {},
+			lineHeight: {},
 			extend: {
 				colors: entries(primitivesFirst(select(filters.twFilter)), colorKey),
 				spacing: entries(select(filters.twSpacingFilter), spacingKey),

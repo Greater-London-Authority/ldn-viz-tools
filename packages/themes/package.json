@@ -13,6 +13,7 @@
 		"./tokens.css": "./styles/tokens.css",
 		"./system.css": "./styles/system.css",
 		"./tailwind": "./styles/tailwind.cjs",
+		"./tokens.scss": "./styles/tokens.scss",
 		"./colors.js": "./styles/colors.js",
 		"./docs/tokens/tokens.js": "./docs/tokens/tokens.js",
 		"./package.json": "./package.json"

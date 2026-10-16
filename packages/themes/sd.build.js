@@ -10,6 +10,7 @@ import { readFileSync } from 'node:fs';
 import { normaliseTokens, tokenName } from './sd/normalise.js';
 import { formatReset } from './sd/reset.js';
 import { formatSystem } from './sd/system.js';
+import { formatSass } from './sd/sass.js';
 import { formatPreset } from './sd/tailwind.js';
 import { readUsage } from './sd/usage.js';
 import {
@@ -190,6 +191,7 @@ const formatFlowProperties = (dictionary) => {
   system.css  every class the specification names: a window onto tokens.css
   index.css   imports all three, reset first
   tailwind    the preset, mapping Tailwind's theme onto tokens.css (sd/tailwind.js)
+  tokens.scss resolved values as Sass variables and maps (sd/sass.js)
 */
 
 // The same dictionary, narrowed to the tokens one filter selects.
@@ -292,6 +294,13 @@ const formatTooling = (dictionary) => {
 StyleDictionary.registerFormat({
 	name: 'json/tooling',
 	format: ({ dictionary }) => `${JSON.stringify(formatTooling(dictionary), null, '\t')}\n`
+});
+
+// The Sass value export (sd/sass.js), built from the same map as tokens.json.
+StyleDictionary.registerFormat({
+	name: 'scss/values',
+	format: async ({ dictionary, file }) =>
+		`${await fileHeader({ file, commentStyle: 'short' })}${formatSass(formatTooling(dictionary), ['sm', 'md', 'lg', 'xl', '2xl'])}\n`
 });
 
 // Every class the specification names (sd/system.js). The usage aliases are

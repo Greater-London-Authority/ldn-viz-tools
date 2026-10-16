@@ -30,10 +30,8 @@ ROLE_WEIGHTS = {"display": 700, "headline": 700, "subhead": 400, "title": 600,
                 "subtitle": 400, "body": 400, "label": 500, "metric": 700,
                 "caption": 400, "eyebrow": 500}
 
-# Font weights (spec: Typography › Font Weight). The spec names four; light
-# (300) is also emitted, which the spec's addendum records as open.
-FONT_WEIGHTS = {"regular": 400, "medium": 500, "semi-bold": 600, "bold": 700}
-FONT_WEIGHTS_UNLISTED = {"light"}
+# Font weights (spec: Typography › Font Weight).
+FONT_WEIGHTS = {"light": 300, "regular": 400, "medium": 500, "semi-bold": 600, "bold": 700}
 
 # Typeface purposes (spec: Typography › Typeface).
 TYPEFACES = {"display": "Inter", "default": "Inter", "code": "Source Code Pro"}
@@ -209,7 +207,7 @@ def check_primitives(r, tokens):
             fails.append(f"font-weight-{name} = {got}, pinned {want}")
     emitted = {k.rsplit("font-weight-", 1)[1] for k in tokens
                if k.startswith("--primitive-typography-font-weight-")}
-    unlisted = emitted - set(FONT_WEIGHTS) - FONT_WEIGHTS_UNLISTED
+    unlisted = emitted - set(FONT_WEIGHTS)
     if unlisted:
         fails.append(f"weights the spec does not list: {sorted(unlisted)}")
     for purpose, want in TYPEFACES.items():
@@ -224,9 +222,6 @@ def check_primitives(r, tokens):
         if f"--elevation-{step}" not in tokens:
             fails.append(f"--elevation-{step} is missing")
     r.result(fails, "weights, typefaces, breakpoints and elevation 0 to 6 match the spec")
-    if emitted & FONT_WEIGHTS_UNLISTED:
-        print(f"  [NOTE] also emitted, open in the spec's addendum: "
-              f"{sorted(emitted & FONT_WEIGHTS_UNLISTED)}")
 
     # The formula also generates the primitive line heights. A primitive no
     # role uses can drift without reaching a page, so it warns.

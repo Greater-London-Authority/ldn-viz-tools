@@ -6,27 +6,27 @@ Version 10 rebuilds the token pipeline on the version 4 Figma export ([RFC 0003]
 
 The package now has an `exports` map, and only the paths it lists can be imported. Three set-ups are supported:
 
-| Set-up      | Import                                                                                    |
-| ----------- | ----------------------------------------------------------------------------------------- |
-| Full system | `@import '@ldn-viz/themes/index.css';`, plus the Tailwind preset if the app uses Tailwind |
-| Tokens only | `@import '@ldn-viz/themes/tokens.css';`                                                   |
-| Values only | `import colors from '@ldn-viz/themes/colors.js';`                                         |
+| Set-up      | Import                                                                                              |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| Full system | `@import '@ldn-viz/themes/index.css';`, plus the Tailwind preset if the app uses Tailwind           |
+| Tokens only | `@import '@ldn-viz/themes/tokens.css';`                                                             |
+| Values only | `import colors from '@ldn-viz/themes/colors.js';`, or `@use '@ldn-viz/themes/tokens.scss';` in Sass |
 
 `tokens.css` holds every custom property. `system.css` holds the classes the specification names: typesets, roles, usage aliases, flow, emphasis, elevation, the grid classes and the focus styles. `reset.css` sets element defaults at zero specificity, for apps without Tailwind's preflight. `index.css` imports all three, reset first.
 
-The Tailwind preset only maps Tailwind's theme onto the custom properties: it adds no classes and no plugins, and `@tailwindcss/forms` is no longer a dependency. The `.form-*` classes, like the typography, flow, layout and base classes, are in `system.css`. A Tailwind app imports `index.css` (or `system.css`) as well as the preset, before the `@tailwind` directives, so a utility still wins over a system class.
+The Tailwind preset only maps Tailwind's theme onto the custom properties: it adds no classes and no plugins, and `@tailwindcss/forms` is no longer a dependency. The `.form-*` classes, like the typography, flow, layout and base classes, are in `system.css`. A Tailwind app imports `index.css` (or `system.css`) as well as the preset, before the `@tailwind` directives, so a utility still wins over a system class. The preset also removes Tailwind's font sizes, weights and line heights, so `text-sm`, `font-semibold` and `leading-tight` no longer exist. Set type with a role class or a usage alias instead (see [Typography](#typography)).
 
 Every path the package published before version 10 is removed. Replace each one as follows:
 
-| Old path                                                                                                                                                                                     | New path                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `styles/primitives.css`, `styles/primitive-scale.css`, `styles/light.css`, `styles/dark.css`, `styles/spacing.css`, `styles/grid-spacing.css`, `styles/typography.css`, `styles/shadows.css` | `tokens.css`, or `index.css` for the full system                                                  |
-| `styles/flow.css`                                                                                                                                                                            | `index.css` (properties in `tokens.css`, context classes in `system.css`)                         |
-| `styles/js/color-tokens.js`                                                                                                                                                                  | `colors.js` (same shape: `mode.light`, `mode.dark`)                                               |
-| `ldn-theme`, `ldn-theme.cjs`                                                                                                                                                                 | `tailwind`                                                                                        |
-| `styles/tw-extend/*.cjs`, `tailwind-custom/*`                                                                                                                                                | No replacement: use the preset at `tailwind`                                                      |
-| `styles/sass/*.scss`                                                                                                                                                                         | No replacement yet: generated Sass follows in a later release                                     |
-| `docs/tokens/tokens.js`                                                                                                                                                                      | Same shape; dimensions now in rem (were the px number with `rem` appended), font weights unitless |
+| Old path                                                                                                                                                                                     | New path                                                                                                                                                             |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `styles/primitives.css`, `styles/primitive-scale.css`, `styles/light.css`, `styles/dark.css`, `styles/spacing.css`, `styles/grid-spacing.css`, `styles/typography.css`, `styles/shadows.css` | `tokens.css`, or `index.css` for the full system                                                                                                                     |
+| `styles/flow.css`                                                                                                                                                                            | `index.css` (properties in `tokens.css`, context classes in `system.css`)                                                                                            |
+| `styles/js/color-tokens.js`                                                                                                                                                                  | `colors.js` (same shape: `mode.light`, `mode.dark`)                                                                                                                  |
+| `ldn-theme`, `ldn-theme.cjs`                                                                                                                                                                 | `tailwind`                                                                                                                                                           |
+| `styles/tw-extend/*.cjs`, `tailwind-custom/*`                                                                                                                                                | No replacement: use the preset at `tailwind`                                                                                                                         |
+| `styles/sass/*.scss`                                                                                                                                                                         | `tokens.scss`: every custom property as a Sass variable with its resolved value, and maps by mode (`$modes`) and breakpoint (`$breakpoints`, `$typography`, `$grid`) |
+| `docs/tokens/tokens.js`                                                                                                                                                                      | Same shape; dimensions now in rem (were the px number with `rem` appended), font weights unitless                                                                    |
 
 The nine old imports in an `app.postcss` become one:
 
@@ -53,7 +53,7 @@ The container colours were removed in version 4. `surface` replaces them.
 | `--color-inverse-container`                         | `--color-inverse-surface`       |
 | `--color-inverse-container-level-1`, `-2`, `-3`     | `--color-inverse-surface-muted` |
 
-The three levels collapse into one, so a design that stacked levels needs another way to separate them, such as a border.
+The three levels collapse into one. A surface's level is now set by its colour and an elevation class (`elevation-1` to `elevation-6`).
 
 The same rule applies to Tailwind classes (`bg-color-container-level-1` → `bg-color-surface-muted`, `ring-color-container-level-1` → `ring-color-surface-muted`) and to JavaScript keys (`mode.light.container.default` → `mode.light.surface.default`, `mode.light.container['level-1']` → `mode.light.surface.muted`).
 
@@ -113,24 +113,24 @@ The roles in each set are `display`, `headline`, `title`, `subtitle`, `subhead`,
 
 The classes change as follows. These are placeholder mappings until RFC 0002's design review.
 
-| Old class                        | New class                                                              |
-| -------------------------------- | ---------------------------------------------------------------------- |
-| `prose`, `prose flow-prose`      | `typeset-longform` (brings `flow-spacious`)                            |
-| `product`                        | `typeset-product` (type only)                                          |
-| `product` around Markdown or CMS | `typeset-product--formatted` (adds `flow-standard` and content styles) |
-| `flow-prose`, `flow-product`     | `flow-spacious`, `flow-standard`                                       |
-| `not-prose`                      | `not-typeset`, or nothing beside a typeset class                       |
-| `display`, `headline`, `subhead` | `display-lg`, `headline-lg`, `subhead-lg`                              |
-| `title-1`, `title-2`             | `headline-lg`, `headline-sm`                                           |
-| `title-3`, `title-4`             | `title-lg`, `title-md`                                                 |
-| `page-head`, `section-head`      | `headline-md`, `title-lg`                                              |
-| `title`, `subtitle`              | `title-sm`, `subtitle-sm`                                              |
-| `lead`                           | `body-lg text-color-text-muted`                                        |
-| `body`, `label`, `caption`       | `body-md`, `label-md`, `caption-sm`                                    |
-| `metric`                         | `metric-lg`                                                            |
-| `label-tight`, `label-sm-tight`  | `label-md leading-none`, `label-sm leading-none`                       |
-| `axis-title`, `tick`, `tick-sm`  | `chart-axis-title`, `chart-tick`, `chart-tick-sm`                      |
-| `chart` (as a type context)      | `typeset-product`, with the `chart-*` aliases                          |
+| Old class                        | New class                                                                                                    |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `prose`, `prose flow-prose`      | `typeset-longform` (brings `flow-spacious`)                                                                  |
+| `product`                        | `typeset-product` (type only)                                                                                |
+| `product` around Markdown or CMS | `typeset-product--formatted` (adds `flow-standard` and content styles)                                       |
+| `flow-prose`, `flow-product`     | `flow-spacious`, `flow-standard`                                                                             |
+| `not-prose`                      | `not-typeset`, or nothing beside a typeset class                                                             |
+| `display`, `headline`, `subhead` | `display-lg`, `headline-lg`, `subhead-lg`                                                                    |
+| `title-1`, `title-2`             | `headline-lg`, `headline-sm`                                                                                 |
+| `title-3`, `title-4`             | `title-lg`, `title-md`                                                                                       |
+| `page-head`, `section-head`      | `headline-md`, `title-lg`                                                                                    |
+| `title`, `subtitle`              | `title-sm`, `subtitle-sm`                                                                                    |
+| `lead`                           | `body-lg text-color-text-muted`                                                                              |
+| `body`, `label`, `caption`       | `body-md`, `label-md`, `caption-sm`                                                                          |
+| `metric`                         | `metric-lg`                                                                                                  |
+| `label-tight`, `label-sm-tight`  | `label-md`, `label-sm`: controls take the role's line height, so adjust padding where a fixed height matters |
+| `axis-title`, `tick`, `tick-sm`  | `chart-axis-title`, `chart-tick`, `chart-tick-sm`                                                            |
+| `chart` (as a type context)      | `typeset-product`, with the `chart-*` aliases                                                                |
 
 `body-sm`, `label-sm`, `metric-sm` and `eyebrow` keep their names.
 

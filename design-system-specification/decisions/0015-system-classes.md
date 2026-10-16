@@ -60,6 +60,6 @@ Generating the classes from the same dictionary as the properties keeps the two 
 - `scripts/check_spec.py` reads the removed plugin files. It is rewritten against the new outputs in workstream 6.
 - `.not-prose` becomes `.not-typeset`. Internal uses (the docs site and Storybook) move in phase 5.
 - A selector can't tell which ancestor typeset is nearest, so content nested three typesets deep (longform, product, longform) gets no content styles. `@scope` removes this limit.
-- The multiples are placeholders in `sd/system.config.js` until the Figma export carries readable-width tokens, which answers the specification's open question on it: a typeset property with no role.
+- The multiples are set in `sd/system.config.js`, not in the Figma export. A Figma variable holds a fixed value, and a width that follows the body size can't be expressed as one. This answers the specification's open question on `readable-width`, which is no longer a token property.
 - Product has no element aliases yet, so unclassed headings in `typeset-product--formatted` take body text until the usage export adds them.
 - [0016](./0016-flow-in-system-css.md) amends [0005](./0005-flow.md) for the flow rules that moved.

@@ -32,6 +32,12 @@ describe('Tailwind preset', () => {
 		expect(preset.theme.extend.boxShadow.DEFAULT).toMatch(/^var\(--shadow,/);
 	});
 
+	it("removes Tailwind's font sizes, weights and line heights: type is set by role classes", () => {
+		expect(preset.theme.fontSize).toEqual({});
+		expect(preset.theme.fontWeight).toEqual({});
+		expect(preset.theme.lineHeight).toEqual({});
+	});
+
 	it('takes screens from the breakpoint tokens as px, since media queries cannot read var()', () => {
 		expect(preset.theme.screens).toEqual({
 			sm: '640px',

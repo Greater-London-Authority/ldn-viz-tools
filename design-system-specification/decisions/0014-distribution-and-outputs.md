@@ -34,10 +34,10 @@ pr_url: ''
   | `index.css`             | Imports `reset.css`, `tokens.css` and `system.css`        | Convenience  |
   | `tailwind`              | The Tailwind preset                                       | Window       |
   | `colors.js`             | Resolved colour values for light and dark                 | Value export |
-  | `scss`                  | Sass variables and maps with resolved values              | Value export |
+  | `tokens.scss`           | Sass variables and maps with resolved values              | Value export |
   | `docs/tokens/tokens.js` | Every token with its metadata, for the documentation site | Value export |
 
-- **Three set-ups match the specification's tiers:** the full system (`index.css`, plus the preset with Tailwind), tokens only (`tokens.css`) and values only (`colors.js` or `scss`).
+- **Three set-ups match the specification's tiers:** the full system (`index.css`, plus the preset with Tailwind), tokens only (`tokens.css`) and values only (`colors.js` or `tokens.scss`).
 - **Typography and flow are not split into separate files**, because a typeset class turns on a flow context, so their selectors have to be imported together.
 - **Old paths are not kept.** The release that introduces this map removes them, and a migration table maps every published path to its replacement.
 

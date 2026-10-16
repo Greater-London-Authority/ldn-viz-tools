@@ -87,7 +87,7 @@ Each segment has a fixed set of values. Within a segment, values are grouped by 
 |                  | Size           | `sm` `md` `lg` …                                                                              | `--shadow-md`, `--typography-base-product-body-sm-font-size` |
 |                  | Shadow type    | `inner`                                                                                       | `--shadow-inner`                                             |
 |                  | Elevation step | `0` to `6`                                                                                    | `--elevation-1`                                              |
-|                  | Typography     | `font-family` `font-size` `font-weight` `line-height` `letter-spacing` `readable-width`       | `--typography-base-product-title-md-line-height`             |
+|                  | Typography     | `font-family` `font-size` `font-weight` `line-height` `letter-spacing`                        | `--typography-base-product-title-md-line-height`             |
 
 Tokens are generally named taking one value per segment, however a token may have multiple values in the variant segment, in this instance the values are applied in this order:
 
@@ -254,10 +254,11 @@ We output a small set of [aliases](#Usage Aliases), but where possible, use the 
 
 ### Font Weight
 
-The system uses four font weights:
+The system has five font weights. No role uses light.
 
 | Token                                          | Weight   | Numeral |
 | ---------------------------------------------- | -------- | ------- |
+| `--primitive-typography-font-weight-light`     | Light    | 300     |
 | `--primitive-typography-font-weight-regular`   | Regular  | 400     |
 | `--primitive-typography-font-weight-medium`    | Medium   | 500     |
 | `--primitive-typography-font-weight-semi-bold` | Semibold | 600     |
@@ -522,6 +523,11 @@ at different levels of elevation. Each level is shown by a shadow.
 Elevation runs from `elevation-0` to `elevation-6`. `elevation-0` sits on the
 canvas and has no visual effect. Each step above it raises a surface further.
 
+A surface's level is set by its colour and its elevation. The surface colour
+is `--color-surface`, or `--color-surface-muted` to set it apart from what is
+around it, and the elevation step is the level. There are no colour tokens for
+levels.
+
 Elevation is visual only. Stacking order is set by z-index, which is
 independent of elevation.
 
@@ -552,12 +558,6 @@ The background, axes, grid lines and labels use the `chart` tokens.
 
 # Addendum: suggested extensions
 
-_This addendum is not part of the specification. It lists content the decision records support but this skeleton does not yet cover, and points to check once the new tokens have been exported and built._
+_This addendum is not part of the specification. It lists content the decision records support but this skeleton does not yet cover._
 
 - **Layout grid, Colour and Accessibility** are listed in the scope above but have no decision record yet.
-
-## To verify after the token export
-
-- **`readable-width`.** Decided in [0015](./decisions/0015-system-classes.md): a typeset property with no role, in three widths (text, wide, full) applied to a formatted typeset's children. It needs adding to the export; the build uses multiples of the typeset's body size as placeholders until then.
-- **Surface levels.** Container colours, and the `level-1` to `level-3` emphasis that went with them, have been removed in favour of `surface`. The current export has no surface levels. Check whether that is intended.
-- **Font weights.** The Font Weight table lists four weights. The build also emits `--primitive-typography-font-weight-light` (300).
