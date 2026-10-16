@@ -22,6 +22,10 @@
 					"format": "css/tokens"
 				},
 				{
+					"destination": "tokens.json",
+					"format": "json/tooling"
+				},
+				{
 					"destination": "system.css",
 					"format": "css/system"
 				},
@@ -51,8 +55,7 @@
 			"transforms": ["name/grammar"]
 		},
 		"docs": {
-			"transformGroup": "js",
-			"transforms": ["name/grammar"],
+			"transforms": ["attribute/cti", "name/grammar", "dimension/grammar", "color/css"],
 			"buildPath": "./docs/tokens/",
 			"files": [
 				{

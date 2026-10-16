@@ -128,7 +128,7 @@ const cssValue = (token, dictionary) => {
  * scales with the font size it sits beside. Every other property references the
  * primitive it is authored against.
  */
-const formatTypography = (dictionary) => {
+const typographyValues = (dictionary) => {
 	const byPath = new Map(dictionary.allTokens.map((token) => [token.path.join('.'), token]));
 
 	const lineHeightRatio = (token) => {
@@ -137,12 +137,13 @@ const formatTypography = (dictionary) => {
 		return Number(ratio.toFixed(4));
 	};
 
+	return (token) => (token.path.at(-1) === 'line-height' ? lineHeightRatio(token) : null);
+};
+
+const formatTypography = (dictionary) => {
+	const ratio = typographyValues(dictionary);
 	return dictionary.allTokens
-		.map((token) => {
-			const value =
-				token.path.at(-1) === 'line-height' ? lineHeightRatio(token) : cssValue(token, dictionary);
-			return `  --${token.name}: ${value};`;
-		})
+		.map((token) => `  --${token.name}: ${ratio(token) ?? cssValue(token, dictionary)};`)
 		.join('\n');
 };
 
@@ -160,22 +161,26 @@ const FLOW_STEPS = ['tight', 'default', 'loose', 'section'];
 const flowVar = (context, step) =>
 	step === 'default' ? `--flow-${context}` : `--flow-${context}-${step}`;
 
+// Content outside any declared context takes standard, so its ramp is also
+// set on :root. Without it, a `mt-flow-section` with no ancestor context
+// class resolves an undefined custom property and margin-top falls back to
+// 0, a silent no-op. `.flow-standard` stays meaningful: it arms the owl,
+// which :root cannot do.
+const defaultRamp = FLOW_STEPS.map((step) => ({
+	name: `flow-${step}`,
+	references: flowVar('standard', step).slice(2)
+}));
+
 // The custom properties: the flat ramp of every context, plus the default ramp.
 const formatFlowProperties = (dictionary) => {
 	const flat = dictionary.allTokens
 		.map((token) => `  --${token.name}: ${cssValue(token, dictionary)};`)
 		.join('\n');
+	const ramp = defaultRamp
+		.map(({ name, references }) => `  --${name}: var(--${references});`)
+		.join('\n');
 
-	// Content outside any declared context takes standard, so its ramp is also
-	// set on :root. Without it, a `mt-flow-section` with no ancestor context
-	// class resolves an undefined custom property and margin-top falls back to
-	// 0, a silent no-op. `.flow-standard` stays meaningful: it arms the owl,
-	// which :root cannot do.
-	const defaultRamp = FLOW_STEPS.map(
-		(step) => `  --flow-${step}: var(${flowVar('standard', step)});`
-	).join('\n');
-
-	return `${flat}\n${defaultRamp}`;
+	return `${flat}\n${ramp}`;
 };
 
 /*=========================================================
@@ -201,19 +206,29 @@ const variables = (dictionary, filter, outputReferences) =>
 		outputReferenceFallbacks: outputReferences
 	});
 
-// Grouped in the order the deprecated files were imported, so the cascade is unchanged.
+// Grouped in the order the deprecated files were imported, so the cascade is
+// unchanged. tokens.json (below) reads the same list, so the two can't drift.
+// `refs`: whether an alias is written as var(--referenced, <resolved>).
+const rootSections = [
+	{ title: 'Primitives', filter: filters.cssPrimitiveFilter, refs: false },
+	{ title: 'Primitive scale', filter: filters.cssPrimitiveScaleFilter, refs: false },
+	{ title: 'Colour: light mode', filter: filters.cssLightModeFilter, refs: true },
+	{ title: 'Spacing', filter: filters.cssSpacingFilter, refs: true },
+	{ title: 'Grid', filter: filters.cssGridFilter, refs: true },
+	{ title: 'Typography', filter: filters.cssTypographyFilter, format: formatTypography },
+	{ title: 'Flow', filter: filters.cssFlowFilter, format: formatFlowProperties },
+	{ title: 'Shadow and elevation', filter: filters.shadowFilter, refs: false }
+];
+
 const formatTokens = (dictionary) => {
-	const section = (title, body) => `  /* ${title} */\n${body}`;
-	const root = [
-		section('Primitives', variables(dictionary, filters.cssPrimitiveFilter, false)),
-		section('Primitive scale', variables(dictionary, filters.cssPrimitiveScaleFilter, false)),
-		section('Colour: light mode', variables(dictionary, filters.cssLightModeFilter, true)),
-		section('Spacing', variables(dictionary, filters.cssSpacingFilter, true)),
-		section('Grid', variables(dictionary, filters.cssGridFilter, true)),
-		section('Typography', formatTypography(subset(dictionary, filters.cssTypographyFilter))),
-		section('Flow', formatFlowProperties(subset(dictionary, filters.cssFlowFilter))),
-		section('Shadow and elevation', variables(dictionary, filters.shadowFilter, false))
-	].join('\n\n');
+	const root = rootSections
+		.map(({ title, filter, refs, format }) => {
+			const body = format
+				? format(subset(dictionary, filter))
+				: variables(dictionary, filter, refs);
+			return `  /* ${title} */\n${body}`;
+		})
+		.join('\n\n');
 	const dark = variables(dictionary, filters.cssDarkModeFilter, true);
 
 	return `:root {\n${root}\n}\n\n:root.dark, .dark {\n${dark}\n}\n`;
@@ -222,6 +237,61 @@ const formatTokens = (dictionary) => {
 StyleDictionary.registerFormat({
 	name: 'css/tokens',
 	format: async ({ dictionary, file }) => `${await fileHeader({ file })}${formatTokens(dictionary)}`
+});
+
+/**
+ * tokens.json: every custom property tokens.css declares, flat and resolved,
+ * for the specification tooling (RFC 0003, workstream 6). Keyed by the
+ * property name exactly as tokens.css writes it. `value` is the resolved value
+ * (the fallback inside var()), `references` the property an alias points at,
+ * and `dark` the value under .dark, where the property has one.
+ */
+const referenceOf = (token, dictionary) => {
+	if (!usesReferences(token.original.value)) return undefined;
+	const [ref] = getReferences(token.original.value, dictionary.unfilteredTokens);
+	return ref ? `--${ref.name}` : undefined;
+};
+
+const entry = (token, dictionary, value = token.value) => ({
+	value,
+	type: token.type,
+	path: token.path.join('.'),
+	...(referenceOf(token, dictionary) && { references: referenceOf(token, dictionary) }),
+	...(token.description && { description: token.description })
+});
+
+const formatTooling = (dictionary) => {
+	const tokens = {};
+	const ratio = typographyValues(subset(dictionary, filters.cssTypographyFilter));
+
+	for (const { filter, refs } of rootSections) {
+		for (const token of dictionary.allTokens.filter(filter)) {
+			const lineHeight = ratio(token);
+			const e = entry(token, dictionary, lineHeight ?? token.value);
+			// Primitives, shadows and line-height ratios are written without var(),
+			// so they have no alias to report.
+			if (refs === false || lineHeight !== null) delete e.references;
+			tokens[`--${token.name}`] = e;
+		}
+	}
+	for (const { name, references } of defaultRamp) {
+		const target = tokens[`--${references}`];
+		tokens[`--${name}`] = { value: target.value, type: target.type, references: `--${references}` };
+	}
+	for (const token of dictionary.allTokens.filter(filters.cssDarkModeFilter)) {
+		const name = `--${token.name}`;
+		const { value, references } = entry(token, dictionary);
+		tokens[name] = {
+			...(tokens[name] ?? { type: token.type, path: token.path.join('.') }),
+			dark: { value, ...(references && { references }) }
+		};
+	}
+	return tokens;
+};
+
+StyleDictionary.registerFormat({
+	name: 'json/tooling',
+	format: ({ dictionary }) => `${JSON.stringify(formatTooling(dictionary), null, '\t')}\n`
 });
 
 // Every class the specification names (sd/system.js). The usage aliases are
