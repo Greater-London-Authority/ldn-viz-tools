@@ -1,0 +1,880 @@
+{
+  "Typeset": {
+    "longform": {
+      "display-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.display.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.display.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.display.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.display.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.display.lg.line-height}"
+        }
+      },
+      "display-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.display.md.font-family}",
+          "fontSize": "{semantic-typography.longform.display.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.display.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.display.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.display.md.line-height}"
+        }
+      },
+      "display-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.display.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.display.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.display.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.display.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.display.sm.line-height}"
+        }
+      },
+      "headline-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.headline.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.headline.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.headline.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.headline.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.headline.lg.line-height}"
+        }
+      },
+      "headline-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.headline.md.font-family}",
+          "fontSize": "{semantic-typography.longform.headline.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.headline.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.headline.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.headline.md.line-height}"
+        }
+      },
+      "headline-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.headline.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.headline.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.headline.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.headline.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.headline.sm.line-height}"
+        }
+      },
+      "subhead-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.subhead.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.subhead.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.subhead.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.subhead.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.subhead.lg.line-height}"
+        }
+      },
+      "subhead-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.subhead.md.font-family}",
+          "fontSize": "{semantic-typography.longform.subhead.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.subhead.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.subhead.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.subhead.md.line-height}"
+        }
+      },
+      "subhead-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.subhead.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.subhead.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.subhead.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.subhead.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.subhead.sm.line-height}"
+        }
+      },
+      "title-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.title.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.title.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.title.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.title.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.title.lg.line-height}"
+        }
+      },
+      "title-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.title.md.font-family}",
+          "fontSize": "{semantic-typography.longform.title.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.title.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.title.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.title.md.line-height}"
+        }
+      },
+      "title-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.title.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.title.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.title.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.title.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.title.sm.line-height}"
+        }
+      },
+      "subtitle-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.subtitle.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.subtitle.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.subtitle.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.subtitle.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.subtitle.lg.line-height}"
+        }
+      },
+      "subtitle-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.subtitle.md.font-family}",
+          "fontSize": "{semantic-typography.longform.subtitle.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.subtitle.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.subtitle.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.subtitle.md.line-height}"
+        }
+      },
+      "subtitle-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.subtitle.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.subtitle.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.subtitle.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.subtitle.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.subtitle.sm.line-height}"
+        }
+      },
+      "body-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.body.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.body.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.body.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.body.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.body.lg.line-height}"
+        }
+      },
+      "body-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.body.md.font-family}",
+          "fontSize": "{semantic-typography.longform.body.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.body.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.body.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.body.md.line-height}"
+        }
+      },
+      "body-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.body.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.body.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.body.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.body.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.body.sm.line-height}"
+        }
+      },
+      "label-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.label.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.label.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.label.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.label.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.label.lg.line-height}"
+        }
+      },
+      "label-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.label.md.font-family}",
+          "fontSize": "{semantic-typography.longform.label.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.label.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.label.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.label.md.line-height}"
+        }
+      },
+      "label-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.label.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.label.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.label.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.label.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.label.sm.line-height}"
+        }
+      },
+      "metric-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.metric.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.metric.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.metric.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.metric.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.metric.lg.line-height}"
+        }
+      },
+      "metric-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.metric.md.font-family}",
+          "fontSize": "{semantic-typography.longform.metric.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.metric.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.metric.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.metric.md.line-height}"
+        }
+      },
+      "metric-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.metric.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.metric.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.metric.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.metric.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.metric.sm.line-height}"
+        }
+      },
+      "eyebrow": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.eyebrow.font-family}",
+          "fontSize": "{semantic-typography.longform.eyebrow.font-size}",
+          "fontWeight": "{semantic-typography.longform.eyebrow.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.eyebrow.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.eyebrow.line-height}"
+        }
+      },
+      "caption": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.caption.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.caption.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.caption.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.caption.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.caption.sm.line-height}"
+        }
+      }
+    },
+    "product": {
+      "display-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.display.lg.font-family}",
+          "fontSize": "{semantic-typography.product.display.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.display.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.display.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.display.lg.line-height}"
+        }
+      },
+      "display-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.display.md.font-family}",
+          "fontSize": "{semantic-typography.product.display.md.font-size}",
+          "fontWeight": "{semantic-typography.product.display.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.display.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.display.md.line-height}"
+        }
+      },
+      "display-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.display.sm.font-family}",
+          "fontSize": "{semantic-typography.product.display.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.display.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.display.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.display.sm.line-height}"
+        }
+      },
+      "headline-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.headline.lg.font-family}",
+          "fontSize": "{semantic-typography.product.headline.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.headline.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.headline.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.headline.lg.line-height}"
+        }
+      },
+      "headline-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.headline.md.font-family}",
+          "fontSize": "{semantic-typography.product.headline.md.font-size}",
+          "fontWeight": "{semantic-typography.product.headline.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.headline.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.headline.md.line-height}"
+        }
+      },
+      "headline-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.headline.sm.font-family}",
+          "fontSize": "{semantic-typography.product.headline.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.headline.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.headline.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.headline.sm.line-height}"
+        }
+      },
+      "subhead-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.subhead.lg.font-family}",
+          "fontSize": "{semantic-typography.product.subhead.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.subhead.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.subhead.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.subhead.lg.line-height}"
+        }
+      },
+      "subhead-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.subhead.md.font-family}",
+          "fontSize": "{semantic-typography.product.subhead.md.font-size}",
+          "fontWeight": "{semantic-typography.product.subhead.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.subhead.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.subhead.md.line-height}"
+        }
+      },
+      "subhead-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.subhead.sm.font-family}",
+          "fontSize": "{semantic-typography.product.subhead.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.subhead.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.subhead.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.subhead.sm.line-height}"
+        }
+      },
+      "title-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.title.lg.font-family}",
+          "fontSize": "{semantic-typography.product.title.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.title.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.title.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.title.lg.line-height}"
+        }
+      },
+      "title-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.title.md.font-family}",
+          "fontSize": "{semantic-typography.product.title.md.font-size}",
+          "fontWeight": "{semantic-typography.product.title.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.title.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.title.md.line-height}"
+        }
+      },
+      "title-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.title.sm.font-family}",
+          "fontSize": "{semantic-typography.product.title.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+        }
+      },
+      "subtitle-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.subtitle.lg.font-family}",
+          "fontSize": "{semantic-typography.product.subtitle.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.subtitle.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.subtitle.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.subtitle.lg.line-height}"
+        }
+      },
+      "subtitle-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.subtitle.md.font-family}",
+          "fontSize": "{semantic-typography.product.subtitle.md.font-size}",
+          "fontWeight": "{semantic-typography.product.subtitle.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.subtitle.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.subtitle.md.line-height}"
+        }
+      },
+      "subtitle-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.subtitle.sm.font-family}",
+          "fontSize": "{semantic-typography.product.subtitle.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.subtitle.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.subtitle.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.subtitle.sm.line-height}"
+        }
+      },
+      "body-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.body.lg.font-family}",
+          "fontSize": "{semantic-typography.product.body.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.body.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.body.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.body.lg.line-height}"
+        }
+      },
+      "body-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.body.md.font-family}",
+          "fontSize": "{semantic-typography.product.body.md.font-size}",
+          "fontWeight": "{semantic-typography.product.body.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.body.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.body.md.line-height}"
+        }
+      },
+      "body-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.body.sm.font-family}",
+          "fontSize": "{semantic-typography.product.body.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.body.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.body.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.body.sm.line-height}"
+        }
+      },
+      "label-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.label.lg.font-family}",
+          "fontSize": "{semantic-typography.product.label.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.label.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.label.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.label.lg.line-height}"
+        }
+      },
+      "label-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.label.md.font-family}",
+          "fontSize": "{semantic-typography.product.label.md.font-size}",
+          "fontWeight": "{semantic-typography.product.label.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.label.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.label.md.line-height}"
+        }
+      },
+      "label-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.label.sm.font-family}",
+          "fontSize": "{semantic-typography.product.label.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.label.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.label.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.label.sm.line-height}"
+        }
+      },
+      "metric-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.metric.lg.font-family}",
+          "fontSize": "{semantic-typography.product.metric.lg.font-size}",
+          "fontWeight": "{semantic-typography.product.metric.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.product.metric.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.metric.lg.line-height}"
+        }
+      },
+      "metric-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.metric.md.font-family}",
+          "fontSize": "{semantic-typography.product.metric.md.font-size}",
+          "fontWeight": "{semantic-typography.product.metric.md.font-weight}",
+          "letterSpacing": "{semantic-typography.product.metric.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.metric.md.line-height}"
+        }
+      },
+      "metric-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.metric.sm.font-family}",
+          "fontSize": "{semantic-typography.product.metric.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.metric.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.metric.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.metric.sm.line-height}"
+        }
+      },
+      "eyebrow": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.eyebrow.font-family}",
+          "fontSize": "{semantic-typography.product.eyebrow.font-size}",
+          "fontWeight": "{semantic-typography.product.eyebrow.font-weight}",
+          "letterSpacing": "{semantic-typography.product.eyebrow.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.eyebrow.line-height}"
+        }
+      },
+      "caption": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.product.caption.sm.font-family}",
+          "fontSize": "{semantic-typography.product.caption.sm.font-size}",
+          "fontWeight": "{semantic-typography.product.caption.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.product.caption.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.product.caption.sm.line-height}"
+        }
+      }
+    }
+  },
+  "Usage": {
+    "product": {
+      "chart": {
+        "title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
+            "fontSize": "{semantic-typography.product.title.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+          }
+        },
+        "subtitle": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.subtitle.sm.font-family}",
+            "fontSize": "{semantic-typography.product.subtitle.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.subtitle.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.subtitle.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.subtitle.sm.line-height}"
+          }
+        },
+        "axis-title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.md.font-family}",
+            "fontSize": "{semantic-typography.product.label.md.font-size}",
+            "fontWeight": "{semantic-typography.product.label.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.md.line-height}"
+          }
+        },
+        "label": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.md.font-family}",
+            "fontSize": "{semantic-typography.product.label.md.font-size}",
+            "fontWeight": "{semantic-typography.product.label.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.md.line-height}"
+          }
+        },
+        "tick": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.caption.md.font-family}",
+            "fontSize": "{semantic-typography.product.caption.md.font-size}",
+            "fontWeight": "{semantic-typography.product.caption.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.caption.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.caption.md.line-height}"
+          }
+        },
+        "tick-sm": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.caption.sm.font-family}",
+            "fontSize": "{semantic-typography.product.caption.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.caption.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.caption.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.caption.sm.line-height}"
+          }
+        },
+        "note": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.caption.sm.font-family}",
+            "fontSize": "{semantic-typography.product.caption.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.caption.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.caption.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.caption.sm.line-height}"
+          }
+        }
+      },
+      "table": {
+        "title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
+            "fontSize": "{semantic-typography.product.title.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+          }
+        },
+        "subtitle": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.subtitle.sm.font-family}",
+            "fontSize": "{semantic-typography.product.subtitle.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.subtitle.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.subtitle.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.subtitle.sm.line-height}"
+          }
+        },
+        "col-head": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.md.font-family}",
+            "fontSize": "{semantic-typography.product.label.md.font-size}",
+            "fontWeight": "{semantic-typography.product.label.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.md.line-height}"
+          }
+        },
+        "col-head-sm": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.sm.font-family}",
+            "fontSize": "{semantic-typography.product.label.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.label.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.sm.line-height}"
+          }
+        },
+        "cell": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.body.sm.font-family}",
+            "fontSize": "{semantic-typography.product.body.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.body.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.body.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.body.sm.line-height}"
+          }
+        }
+      },
+      "ui": {
+        "dashboard-main-title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.headline.md.font-family}",
+            "fontSize": "{semantic-typography.product.headline.md.font-size}",
+            "fontWeight": "{semantic-typography.product.headline.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.headline.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.headline.md.line-height}"
+          }
+        },
+        "dashboard-main-subtitle": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.subhead.md.font-family}",
+            "fontSize": "{semantic-typography.product.subhead.md.font-size}",
+            "fontWeight": "{semantic-typography.product.subhead.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.subhead.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.subhead.md.line-height}"
+          }
+        },
+        "dashboard-section-title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.headline.sm.font-family}",
+            "fontSize": "{semantic-typography.product.headline.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.headline.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.headline.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.headline.sm.line-height}"
+          }
+        },
+        "dashboard-section-subtitle": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.subhead.sm.font-family}",
+            "fontSize": "{semantic-typography.product.subhead.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.subhead.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.subhead.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.subhead.sm.line-height}"
+          }
+        },
+        "header-title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
+            "fontSize": "{semantic-typography.product.title.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+          }
+        },
+        "sidebar-title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
+            "fontSize": "{semantic-typography.product.title.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+          }
+        },
+        "dialog-title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.lg.font-family}",
+            "fontSize": "{semantic-typography.product.label.lg.font-size}",
+            "fontWeight": "{semantic-typography.product.label.lg.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.lg.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.lg.line-height}"
+          }
+        },
+        "card-title": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
+            "fontSize": "{semantic-typography.product.title.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+          }
+        },
+        "card-subtitle": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.subtitle.sm.font-family}",
+            "fontSize": "{semantic-typography.product.subtitle.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.subtitle.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.subtitle.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.subtitle.sm.line-height}"
+          }
+        },
+        "hint-text": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.caption.sm.font-family}",
+            "fontSize": "{semantic-typography.product.caption.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.caption.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.caption.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.caption.sm.line-height}"
+          }
+        },
+        "input-label": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.md.font-family}",
+            "fontSize": "{semantic-typography.product.label.md.font-size}",
+            "fontWeight": "{semantic-typography.product.label.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.md.line-height}"
+          }
+        },
+        "placeholder": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.body.sm.font-family}",
+            "fontSize": "{semantic-typography.product.body.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.body.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.body.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.body.sm.line-height}"
+          }
+        },
+        "field-value": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.body.sm.font-family}",
+            "fontSize": "{semantic-typography.product.body.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.body.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.body.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.body.sm.line-height}"
+          }
+        },
+        "button-label": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.md.font-family}",
+            "fontSize": "{semantic-typography.product.label.md.font-size}",
+            "fontWeight": "{semantic-typography.product.label.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.md.line-height}"
+          }
+        },
+        "button-label-sm": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.label.sm.font-family}",
+            "fontSize": "{semantic-typography.product.label.sm.font-size}",
+            "fontWeight": "{semantic-typography.product.label.sm.font-weight}",
+            "letterSpacing": "{semantic-typography.product.label.sm.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.label.sm.line-height}"
+          }
+        }
+      }
+    },
+    "longform": {
+      "h1": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.headline.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.headline.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.headline.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.headline.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.headline.lg.line-height}"
+        }
+      },
+      "h2": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.headline.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.headline.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.headline.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.headline.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.headline.sm.line-height}"
+        }
+      },
+      "h3": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.title.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.title.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.title.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.title.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.title.lg.line-height}"
+        }
+      },
+      "h4": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.title.md.font-family}",
+          "fontSize": "{semantic-typography.longform.title.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.title.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.title.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.title.md.line-height}"
+        }
+      },
+      "h5": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.title.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.title.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.title.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.title.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.title.sm.line-height}"
+        }
+      },
+      "p.lead": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.body.lg.font-family}",
+          "fontSize": "{semantic-typography.longform.body.lg.font-size}",
+          "fontWeight": "{semantic-typography.longform.body.lg.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.body.lg.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.body.lg.line-height}"
+        }
+      },
+      "figcaption": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.caption.sm.font-family}",
+          "fontSize": "{semantic-typography.longform.caption.sm.font-size}",
+          "fontWeight": "{semantic-typography.longform.caption.sm.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.caption.sm.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.caption.sm.line-height}"
+        }
+      }
+    }
+  }
+}

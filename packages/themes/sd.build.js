@@ -6,7 +6,12 @@ import {
 	getReferences,
 	usesReferences
 } from 'style-dictionary/utils';
+import { readFileSync } from 'node:fs';
 import { normaliseTokens, tokenName } from './sd/normalise.js';
+import { formatReset } from './sd/reset.js';
+import { formatSystem } from './sd/system.js';
+import { readUsage } from './sd/usage.js';
+import { content as contentConfig, usage as usageConfig } from './sd/system.config.js';
 
 /*===============================================
   CUSTOM PARSER
@@ -231,8 +236,9 @@ const formatTypography = (dictionary) => {
  *
  * Flow tokens are keyed [context][step] (e.g. spacious.tight, standard.section):
  * a context class carrying a 4-step ramp. The flat --flow-{context}[-{step}]
- * vars are the single value source; each context class maps them onto the bare
- * --flow-{step} vars that the owl rules and utilities read.
+ * vars are the single value source; each context class in system.css
+ * (sd/system.js) maps them onto the bare --flow-{step} vars that the flow
+ * rules and utilities read.
  */
 const flowVar = (context, step) =>
 	step === 'default' ? `--flow-${context}` : `--flow-${context}-${step}`;
@@ -255,20 +261,12 @@ const formatFlowProperties = (dictionary) => {
 	return `${flat}\n${defaultRamp}`;
 };
 
-// The context classes, which map one context's ramp onto the bare --flow-{step} vars.
-const formatFlowClasses = (dictionary) => {
-	const contexts = [...new Set(dictionary.allTokens.map((token) => token.path[1]))];
-	const ramp = (context) =>
-		FLOW_STEPS.map((step) => `--flow-${step}: var(${flowVar(context, step)});`).join(' ');
-
-	return contexts.map((context) => `.flow-${context} { ${ramp(context)} }`).join('\n');
-};
-
 /*=========================================================
-  PUBLIC OUTPUTS (RFC 0003, workstream 2)
+  PUBLIC OUTPUTS (RFC 0003, workstreams 2 and 3)
+  reset.css   element defaults, at zero specificity (sd/reset.js)
   tokens.css  every custom property: the source
   system.css  every class the specification names: a window onto tokens.css
-  index.css   imports both
+  index.css   imports all three, reset first
 */
 
 // The same dictionary, narrowed to the tokens one filter selects.
@@ -308,18 +306,28 @@ StyleDictionary.registerFormat({
 	format: async ({ dictionary, file }) => `${await fileHeader({ file })}${formatTokens(dictionary)}`
 });
 
-// Only the flow context classes so far. Workstream 3 generates the rest of the
-// classes here and retires the Tailwind plugins.
+// Every class the specification names (sd/system.js). The usage aliases are
+// read from the Figma usage export, which is not part of the token graph; the
+// content styles from the hand-written sd/content.css.
+const aliases = readUsage(JSON.parse(readFileSync(usageConfig.file, 'utf8')), usageConfig);
+const content = readFileSync(contentConfig.file, 'utf8');
+
 StyleDictionary.registerFormat({
 	name: 'css/system',
 	format: async ({ dictionary, file }) =>
-		`${await fileHeader({ file })}${formatFlowClasses(subset(dictionary, filters.cssFlowFilter))}\n`
+		`${await fileHeader({ file })}${formatSystem(dictionary, aliases, content)}\n`
+});
+
+StyleDictionary.registerFormat({
+	name: 'css/reset',
+	format: async ({ dictionary, file }) =>
+		`${await fileHeader({ file })}${formatReset(dictionary)}\n`
 });
 
 StyleDictionary.registerFormat({
 	name: 'css/index',
 	format: async ({ file }) =>
-		`${await fileHeader({ file })}@import './tokens.css';\n@import './system.css';\n`
+		`${await fileHeader({ file })}@import './reset.css';\n@import './tokens.css';\n@import './system.css';\n`
 });
 
 /**

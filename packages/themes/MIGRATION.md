@@ -12,7 +12,9 @@ The package now has an `exports` map, and only the paths it lists can be importe
 | Tokens only | `@import '@ldn-viz/themes/tokens.css';`                                                   |
 | Values only | `import colors from '@ldn-viz/themes/colors.js';`                                         |
 
-`tokens.css` holds every custom property. `system.css` holds the classes the specification names, and `index.css` imports both. So far `system.css` holds the flow context classes. The typography and flow rules still come from the Tailwind preset, and move into `system.css` in a later release.
+`tokens.css` holds every custom property. `system.css` holds the classes the specification names: typesets, roles, usage aliases, flow, emphasis, elevation, the grid classes and the focus styles. `reset.css` sets element defaults at zero specificity, for apps without Tailwind's preflight. `index.css` imports all three, reset first.
+
+The Tailwind preset no longer adds typography, flow, layout or base classes. A Tailwind app imports `index.css` (or `system.css`) as well as the preset, before the `@tailwind` directives, so a utility still wins over a system class.
 
 Every path the package published before version 10 is removed. Replace each one as follows:
 
@@ -106,6 +108,12 @@ The type sets are renamed and every role gains a size. Names follow `--typograph
 | `--typography-{bp}-prose-{display,headline}-space-before` | No equivalent                                        |
 
 The roles in each set are `display`, `headline`, `title`, `subtitle`, `subhead`, `body`, `label`, `caption` and `metric`, each in `sm`, `md` and `lg`, plus `eyebrow`, which has no size. Which new role and size replaces each old role (for example `title-1` or `page-head`) is set by RFC 0002.
+
+Content styles for unclassed markup (Markdown, CMS output) now apply inside both `typeset-longform` and `typeset-product`, not only inside `prose`. The escape class is renamed.
+
+| Old          | New            |
+| ------------ | -------------- |
+| `.not-prose` | `.not-typeset` |
 
 The type scale primitives are now numbered by step rather than by pixel size.
 

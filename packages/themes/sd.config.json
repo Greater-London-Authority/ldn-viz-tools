@@ -1,5 +1,5 @@
 {
-	"source": ["./tokens/**/*.json"],
+	"source": ["./tokens/lcd-ds.tokens.json"],
 	"parsers": ["json-parser"],
 	"platforms": {
 		"css": {
@@ -13,6 +13,10 @@
 			],
 			"buildPath": "./styles/",
 			"files": [
+				{
+					"destination": "reset.css",
+					"format": "css/reset"
+				},
 				{
 					"destination": "tokens.css",
 					"format": "css/tokens"
