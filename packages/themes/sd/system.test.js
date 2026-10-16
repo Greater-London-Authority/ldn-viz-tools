@@ -294,9 +294,11 @@ describe('muted colour', () => {
 
 describe('measure', () => {
 	it('caps the children of longform and formatted product, not the typeset itself', () => {
-		expect(css).toMatch(
-			/\.typeset-longform, \.typeset-product--formatted \{\n {2}--readable-width: 36rem;/
-		);
+		for (const typeset of ['typeset-longform', 'typeset-product--formatted']) {
+			expect(css, typeset).toContain(
+				`.${typeset} {\n  --readable-width: calc(var(--body-md-font-size) * 38);\n}`
+			);
+		}
 		expect(css).toMatch(
 			/\.typeset-longform > :where\(:not\([^)]*\)\)[^{]*\{\n {2}max-width: var\(--readable-width\);/
 		);

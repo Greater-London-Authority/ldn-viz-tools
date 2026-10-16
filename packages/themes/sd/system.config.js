@@ -113,17 +113,19 @@ export const content = {
 };
 
 // The reading measure. A typeset class with `measure` caps its direct
-// children at `width`, so running text stays within a readable line length,
-// while block objects and anything marked `breakout` run the full width of
-// the container. The cap sits at the typeset's specificity, so a max-width
-// utility on a child wins.
+// children at `multiple` times the font size of the typeset's text role, so
+// running text stays within a readable line length at every breakpoint and
+// grows if the body size does. Block objects and anything marked `breakout`
+// run the full width of the container. The cap sits at the typeset's
+// specificity, so a max-width utility on a child wins.
 //
-// 36rem is about 75 characters of body text in Inter, inside WCAG 1.4.8's
-// 80. It is in rem, not ch, so every child shares one right edge: ch
-// resolves against each element's own font size. Placeholder until the
-// export carries a longform readable-width token.
+// 38 times body size is about 79 characters of running text in Inter, the
+// widest that stays inside WCAG 1.4.8's 80. The width is worked out on the
+// typeset from its body size, not in ch on each element, so headings and
+// paragraphs share one right edge. Placeholder until the export carries a
+// longform readable-width token.
 export const measure = {
-	width: '36rem',
+	multiple: 38,
 	breakout: 'breakout',
 	exempt: ['figure', 'img', 'video', 'iframe', 'table', 'pre', '.chart']
 };

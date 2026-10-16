@@ -209,7 +209,13 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	].join(', ');
 	const measureSection = measured.length
 		? section('Measure', [
-				rule(measured.join(', '), { '--readable-width': m.width }),
+				...typesetClasses
+					.filter((t) => t.measure)
+					.map((t) =>
+						rule(`.${t.className}`, {
+							'--readable-width': `calc(var(--${cfg.roleClass(t.text.role, t.text.size)}-font-size) * ${m.multiple})`
+						})
+					),
 				rule(measured.map((s) => `${s} > :where(:not(${exempt}))`).join(', '), {
 					'max-width': 'var(--readable-width)'
 				})
