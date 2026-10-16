@@ -151,7 +151,7 @@ If nothing changes, the v4 classes from RFC 0002 will be written as more Tailwin
   - `check_spec.py` checks `system.css` for every class the spec names, instead of checking Tailwind plugins and `tw-extend` usage.
   - `adr_check.py`, specified in `ADR-LIFECYCLE.md` but not yet written, is added and run with the other checks. `RULES.md` stays hand-written: editing it is the moment someone restates a decision as a rule, and that friction is a useful check. The script catches the structural drift: front matter, symmetric links, statuses against folders, the amendment limit, and every live ADR cited in `RULES.md`.
   - `check_spec.py` also checks every class `RULES.md` names against `system.css`, which catches the content drift the citation check can't. `RULES.md` names the default flow utility `.mt-flow`, for example, while the generator and markup use `.mt-flow-default`.
-  - `SPEC-CHANGE-PROTOCOL.md` names `lcd-ds.tokens.json`, and settles whether `packages/themes/styles/` is committed or stays gitignored (see open questions).
+  - `SPEC-CHANGE-PROTOCOL.md` names `lcd-ds.tokens.json`, and settles whether `packages/themes/styles/` is committed or stays gitignored (see open questions; it stays gitignored).
 - **Why it has to break.** The files the scripts read are removed in workstream 2.
 - **Affected surface.** `scripts/spec_common.py`, `gen_spec.py`, `check_spec.py`, `verify_build.py`, `scripts/adr_check.py` (new), `governance/SPEC-CHANGE-PROTOCOL.md`, `packages/themes/.gitignore`.
 - **Migration.** None outside the team.
@@ -201,7 +201,7 @@ Phases 1 to 4 don't depend on RFC 0002 decisions. Phase 6 does.
 2. Which typeset applies when no `typeset-*` class is set: one set on `:root`, or none?
 3. Do `.mt-flow-*` and `.gap-flow-*` stay in the Tailwind theme as well, to keep responsive variants, or move entirely to `system.css`?
 4. Is `elevation` emitted as its own custom properties (`--elevation-{n}`), or only as classes pointing at the shadow tokens? In the export, elevation values are copies of the shadow values, not aliases, so the two can drift.
-5. Is `packages/themes/styles/` committed, so that `verify_build.py` compares against something, or does it stay gitignored with verification against a fresh build?
+5. ~~Is `packages/themes/styles/` committed, so that `verify_build.py` compares against something, or does it stay gitignored with verification against a fresh build?~~ Closed: it stays gitignored. `verify_build.py` rebuilds and compares with the local build, and reviewers see value changes in the specification's generated blocks ([spec change protocol](../governance/SPEC-CHANGE-PROTOCOL.md)).
 6. Font weight `light` is still in the export, while the spec lists four weights. Is it removed in Figma or filtered out in the pipeline?
 7. The `usage` style set is not in the export yet. Until it is, are the alias classes listed in the naming config?
 8. ~~Should the `exports` map keep `ldn-theme.cjs` at its current path permanently, as the name many configs already use?~~ Closed as no longer relevant: workstream 2 does not keep the old paths, so the preset is published only at `tailwind`.

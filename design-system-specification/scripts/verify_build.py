@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-verify_build.py — reproduce the Style Dictionary build and diff it against the
-shipped styles/. A zero-diff means the emitted output is trustworthy as the
-source the spec is generated from.
+verify_build.py — run the Style Dictionary build again and diff it against the
+build already in styles/. styles/ is not committed (RFC 0003), so a zero-diff
+means the build is reproducible and the local output is current: a sound
+source for the spec's generated blocks.
 
 Typical flow:  verify_build.py  ->  gen_spec.py  ->  check_spec.py
 (see governance/SPEC-CHANGE-PROTOCOL.md)
@@ -32,10 +33,10 @@ def cmd_verify_build(project):
             if not os.path.exists(old) or open(new,"rb").read() != open(old,"rb").read():
                 diffs.append(os.path.relpath(new, styles))
     if diffs:
-        print("BUILD NOT REPRODUCIBLE — differs from shipped:")
+        print("BUILD NOT REPRODUCIBLE — differs from the previous build in styles/:")
         for d in diffs: print("  " + d)
         sys.exit(1)
-    print(f"verify-build: zero-diff — build reproduces shipped styles/ ({project})")
+    print(f"verify-build: zero-diff — build reproduces styles/ ({project})")
 
 
 def main():
