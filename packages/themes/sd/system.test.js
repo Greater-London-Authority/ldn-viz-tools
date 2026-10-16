@@ -98,7 +98,7 @@ describe('formatSystem', () => {
 	});
 
 	it('sets the default typeset on :root', () => {
-		expect(css).toMatch(/:root, \.typeset-product \{/);
+		expect(css).toMatch(/:root, \.typeset-product, \.typeset-product--formatted \{/);
 	});
 
 	it('gives the longform typeset the spacious flow ramp', () => {
@@ -131,7 +131,7 @@ describe('formatSystem', () => {
 
 	it('sets product body text on body, never on :root, so rem is unchanged', () => {
 		expect(css).toMatch(
-			/\nbody, \.typeset-product \{\n {2}font-family: var\(--body-md-font-family\);/
+			/\nbody, \.typeset-product, \.typeset-product--formatted \{\n {2}font-family: var\(--body-md-font-family\);/
 		);
 		expect(css).not.toMatch(/:root[^{]*\{[^}]*\n {2}font-size:/);
 	});
@@ -169,11 +169,12 @@ describe('formatReset', () => {
 describe('content styles', () => {
 	const longform = '.typeset-longform';
 	const product = '.typeset-product';
-	const bounds = boundary(longform, [longform, product], 'not-typeset');
+	const formatted = '.typeset-product--formatted';
+	const bounds = boundary(longform, [longform, product, formatted], 'not-typeset');
 
 	it('stops at the escape and at a different nested typeset, not the same one', () => {
 		expect(bounds).toBe(
-			'.not-typeset, .not-typeset *, .typeset-longform .typeset-product, .typeset-longform .typeset-product *'
+			'.not-typeset, .not-typeset *, .typeset-longform :is(.typeset-product, .typeset-product--formatted), .typeset-longform :is(.typeset-product, .typeset-product--formatted) *'
 		);
 	});
 
@@ -183,7 +184,7 @@ describe('content styles', () => {
 		);
 	});
 
-	it('scopes every rule to both typesets that take content styles', () => {
+	it('scopes every rule to longform and formatted product, never to plain product', () => {
 		const section = css.slice(
 			css.indexOf('/* Content styles */'),
 			css.indexOf('/* Usage aliases */')
@@ -194,10 +195,17 @@ describe('content styles', () => {
 		expect(selectors.length).toBeGreaterThan(0);
 		for (const selector of selectors) {
 			expect(selector, selector).toMatch(
-				/^\.typeset-(longform|product) :where\(.+\):not\(:where\(\.not-typeset, /
+				/^\.typeset-(longform|product--formatted) :where\(.+\):not\(:where\(\.not-typeset, /
 			);
 		}
 		expect(section).toMatch(/@media print \{\n {2}\.typeset-longform :where\(pre\)/);
+	});
+
+	it('gives formatted product the standard flow ramp; plain product has none', () => {
+		expect(css).toMatch(
+			/\.typeset-product--formatted > \* \{\n {2}--flow-tight: var\(--flow-standard-tight\);/
+		);
+		expect(css).not.toMatch(/\.typeset-product > \* \{/);
 	});
 
 	it('never applies from :root, so an unclassed product page keeps the reset', () => {
@@ -259,5 +267,27 @@ describe('form styles', () => {
 	it('fails when a chevron names a colour that is not a token', () => {
 		const forms = '.form-select { background-image: chevron(dark, --color-nope); }';
 		expect(() => formatSystem(dictionary, aliases, { forms })).toThrow(/--color-nope/);
+	});
+});
+
+describe('muted colour', () => {
+	const ruleFor = (selector) => {
+		const start = css.indexOf(`\n${selector} {`);
+		return css.slice(start, css.indexOf('}', start));
+	};
+
+	it('sets secondary roles, and their aliases, in the muted text colour', () => {
+		for (const selector of ['.subtitle-sm', '.subhead-lg', '.eyebrow', '.card-subtitle']) {
+			expect(ruleFor(selector), selector).toContain('color: var(--color-text-muted);');
+		}
+		expect(ruleFor('.title-sm')).not.toContain('color:');
+	});
+
+	it('sets chart axis text and the lead paragraph muted, though their roles are not', () => {
+		for (const selector of ['.chart-axis-title', '.chart-tick', '.chart-tick-sm']) {
+			expect(ruleFor(selector), selector).toContain('color: var(--color-text-muted);');
+		}
+		expect(ruleFor('.body-lg')).not.toContain('color:');
+		expect(css).toMatch(/:where\(p\.lead\)[^{]*\{[^}]*color: var\(--color-text-muted\);/);
 	});
 });

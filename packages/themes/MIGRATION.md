@@ -107,7 +107,30 @@ The type sets are renamed and every role gains a size. Names follow `--typograph
 | `--typography-{bp}-prose-readable-width`                  | No equivalent                                        |
 | `--typography-{bp}-prose-{display,headline}-space-before` | No equivalent                                        |
 
-The roles in each set are `display`, `headline`, `title`, `subtitle`, `subhead`, `body`, `label`, `caption` and `metric`, each in `sm`, `md` and `lg`, plus `eyebrow`, which has no size. Which new role and size replaces each old role (for example `title-1` or `page-head`) is set by RFC 0002.
+The roles in each set are `display`, `headline`, `title`, `subtitle`, `subhead`, `body`, `label`, `caption` and `metric`, each in `sm`, `md` and `lg`, plus `eyebrow`, which has no size. `subhead`, `subtitle` and `eyebrow` are set in the muted text colour, as before.
+
+The classes change as follows. These are placeholder mappings until RFC 0002's design review.
+
+| Old class                        | New class                                                              |
+| -------------------------------- | ---------------------------------------------------------------------- |
+| `prose`, `prose flow-prose`      | `typeset-longform` (brings `flow-spacious`)                            |
+| `product`                        | `typeset-product` (type only)                                          |
+| `product` around Markdown or CMS | `typeset-product--formatted` (adds `flow-standard` and content styles) |
+| `flow-prose`, `flow-product`     | `flow-spacious`, `flow-standard`                                       |
+| `not-prose`                      | `not-typeset`, or nothing beside a typeset class                       |
+| `display`, `headline`, `subhead` | `display-lg`, `headline-lg`, `subhead-lg`                              |
+| `title-1`, `title-2`             | `headline-lg`, `headline-sm`                                           |
+| `title-3`, `title-4`             | `title-lg`, `title-md`                                                 |
+| `page-head`, `section-head`      | `headline-md`, `title-lg`                                              |
+| `title`, `subtitle`              | `title-sm`, `subtitle-sm`                                              |
+| `lead`                           | `body-lg text-color-text-muted`                                        |
+| `body`, `label`, `caption`       | `body-md`, `label-md`, `caption-sm`                                    |
+| `metric`                         | `metric-lg`                                                            |
+| `label-tight`, `label-sm-tight`  | `label-md leading-none`, `label-sm leading-none`                       |
+| `axis-title`, `tick`, `tick-sm`  | `chart-axis-title`, `chart-tick`, `chart-tick-sm`                      |
+| `chart` (as a type context)      | `typeset-product`, with the `chart-*` aliases                          |
+
+`body-sm`, `label-sm`, `metric-sm` and `eyebrow` keep their names.
 
 Content styles for unclassed markup (Markdown, CMS output) now apply inside both `typeset-longform` and `typeset-product`, not only inside `prose`. The escape class is renamed.
 

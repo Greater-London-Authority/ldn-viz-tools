@@ -73,6 +73,22 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		...new Set([...aliasesFor(roleTokens), ...roleClassesFor(roleTokens)])
 	];
 
+	// Every typeset class: each typeset, then its variants, which share its
+	// token and text but set their own flow and content.
+	const typesetClasses = cfg.typesets.flatMap((typeset) => [
+		typeset,
+		...(typeset.variants ?? []).map((variant) => ({
+			...typeset,
+			flow: undefined,
+			content: undefined,
+			variants: undefined,
+			isDefault: false,
+			...variant
+		}))
+	]);
+	const classesOf = (typeset) =>
+		typesetClasses.filter((t) => t.token === typeset.token).map((t) => `.${t.className}`);
+
 	const tokenPath = (breakpoint, typeset, role, size, property) =>
 		['typography', breakpoint, typeset, role, size, property].filter(Boolean).join('-');
 
@@ -126,7 +142,7 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	// inheritance. Above base, a role is restated only where one of its
 	// values changes, which keeps the sheet small.
 	const typesetSelector = (typeset) =>
-		typeset.isDefault ? `:root, .${typeset.className}` : `.${typeset.className}`;
+		[...(typeset.isDefault ? [':root'] : []), ...classesOf(typeset)].join(', ');
 
 	const roleDeclarations = (bp, typeset, role) =>
 		Object.fromEntries(
@@ -175,7 +191,7 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	// A typeset that brings a flow context comes first, so an explicit flow
 	// class on the same element wins.
 	const flowContexts = section('Flow contexts', [
-		...cfg.typesets.filter((t) => t.flow).map((t) => rule(`.${t.className} > *`, ramp(t.flow))),
+		...typesetClasses.filter((t) => t.flow).map((t) => rule(`.${t.className} > *`, ramp(t.flow))),
 		...contexts.map((context) => rule(`.flow-${context} > *`, ramp(context)))
 	]);
 
@@ -204,7 +220,7 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	// The default typeset sets its text on body, not :root: a font-size on the
 	// root element would redefine rem for every rem in the system.
 	const textSelector = (typeset) =>
-		typeset.isDefault ? `body, .${typeset.className}` : `.${typeset.className}`;
+		[...(typeset.isDefault ? ['body'] : []), ...classesOf(typeset)].join(', ');
 
 	const typesetText = section(
 		'Typeset text',
@@ -214,28 +230,40 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	);
 
 	// Aliases for tabular content take tabular numerals, as metric does, so
-	// figures line up in a column or along an axis.
-	const { tabularNumerals = [] } = cfg.usage;
-	const aliasExtra = (alias) =>
-		tabularNumerals.some(
-			(name) => alias.selector === `.${name}` || alias.selector.startsWith(`.${name}-`)
-		)
-			? { 'font-variant-numeric': 'tabular-nums' }
-			: {};
+	// figures line up in a column or along an axis. Some aliases take the muted
+	// text colour although their role doesn't.
+	const { tabularNumerals = [], muted = [] } = cfg.usage;
+	const matches = (alias, names) =>
+		names.some(
+			(name) =>
+				alias.selector === name ||
+				alias.selector === `.${name}` ||
+				alias.selector.startsWith(`.${name}-`)
+		);
+	const aliasExtra = (alias) => ({
+		...(matches(alias, tabularNumerals) ? { 'font-variant-numeric': 'tabular-nums' } : {}),
+		...(matches(alias, muted) ? { color: ref('color-text-muted') } : {})
+	});
 
-	const typesetFor = (token) => {
-		const typeset = cfg.typesets.find((t) => t.token === token);
-		if (!typeset) throw new Error(`Usage aliases reference an unknown typeset: ${token}`);
-		return typeset;
-	};
+	// Extras are written in the config as var(); check they read real tokens.
+	for (const role of cfg.roles)
+		for (const value of Object.values(role.extra ?? {}))
+			for (const [, name] of value.matchAll(/var\(--([\w-]+)/g)) ref(name);
 
 	// Element aliases and content styles reach unclassed markup inside a
-	// typeset. Both stop at the escape class and at a typeset nested inside,
-	// whose own rules take over (sd/content.js).
+	// typeset class with `content`. Both stop at the escape class and at a
+	// typeset nested inside, whose own rules take over (sd/content.js).
 	const scopeOf = (typeset) => {
 		const selector = `.${typeset.className}`;
-		const others = cfg.typesets.map((t) => `.${t.className}`);
+		const others = typesetClasses.map((t) => `.${t.className}`);
 		return { selector, bounds: boundary(selector, others, cfg.content.escape) };
+	};
+	const contentScopes = typesetClasses.filter((t) => t.content).map(scopeOf);
+
+	const contentScopesFor = (token) => {
+		if (!cfg.typesets.some((t) => t.token === token))
+			throw new Error(`Usage aliases reference an unknown typeset: ${token}`);
+		return typesetClasses.filter((t) => t.token === token && t.content).map(scopeOf);
 	};
 
 	// Longform aliases are element defaults inside the longform typeset. :where()
@@ -245,10 +273,11 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		'Longform element aliases',
 		aliases
 			.filter((a) => !a.selector.startsWith('.'))
-			.map((a) => {
-				const { selector, bounds } = scopeOf(typesetFor(a.typeset));
-				return roleRule(scopeSelector(a.selector, selector, bounds), findRole(a));
-			})
+			.flatMap((a) =>
+				contentScopesFor(a.typeset).map(({ selector, bounds }) =>
+					roleRule(scopeSelector(a.selector, selector, bounds), findRole(a), aliasExtra(a))
+				)
+			)
 	);
 
 	// Hand-written element styles for unclassed markup. They may read tokens,
@@ -263,13 +292,7 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	};
 
 	const contentStyles = content
-		? section('Content styles', [
-				formatContent(
-					content,
-					cfg.typesets.filter((t) => t.content).map(scopeOf),
-					checkSheet('content.css')
-				)
-			])
+		? section('Content styles', [formatContent(content, contentScopes, checkSheet('content.css'))])
 		: '';
 
 	// A colour token's resolved value in one mode, for the data URIs in
@@ -314,7 +337,7 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	// component can't easily override.
 	const roots = [
 		...contexts.map((c) => `.flow-${c}`),
-		...cfg.typesets.filter((t) => t.flow).map((t) => `.${t.className}`)
+		...typesetClasses.filter((t) => t.flow).map((t) => `.${t.className}`)
 	];
 	const root = `:is(${roots.join(', ')})`;
 	const collapsed = cfg.flow.collapsed.join(', ');

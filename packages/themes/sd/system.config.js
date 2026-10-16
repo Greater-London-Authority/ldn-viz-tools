@@ -22,7 +22,9 @@ export const gridBreakpoints = ['base', 'sm', 'md', 'lg', 'xl', '2xl'];
 // it; `text` is the role bare text inside it takes, so unclassed markup (such
 // as rendered Markdown) is set without a class on every element, and a typeset
 // nested in another resets text to its own size. `content` scopes the element
-// styles in sd/content.css to the typeset (see `content` below).
+// styles in sd/content.css, and the typeset's element aliases, to the typeset
+// (see `content` below). A variant is a further class for the same typeset,
+// with its own flow and content settings.
 export const typesets = [
 	{
 		token: 'longform',
@@ -36,7 +38,11 @@ export const typesets = [
 		className: 'typeset-product',
 		isDefault: true,
 		text: { role: 'body', size: 'md' },
-		content: true
+		// Product sets type only: component roots carry it, and their markup
+		// must not pick up content styles. Formatted content (Markdown, CMS
+		// output) in a product setting takes the variant, which adds flow and
+		// content styles. It works alone or beside the base class.
+		variants: [{ className: 'typeset-product--formatted', flow: 'standard', content: true }]
 	}
 ];
 
@@ -49,14 +55,17 @@ export const roleProperties = [
 ];
 
 // Role sets: sm, md and lg, except eyebrow, which has no size.
-// `extra` is added to the role class, for behaviour the role's description
-// requires but no token carries.
+// `extra` is added to the role class and to every alias of the role, for
+// behaviour the role's description requires but no token carries. Secondary
+// roles (subhead, subtitle, eyebrow) are set in the muted text colour, which
+// the theme switches for dark mode.
+const MUTED = { color: 'var(--color-text-muted)' };
 export const roles = [
 	{ token: 'display', sizes: ['sm', 'md', 'lg'] },
 	{ token: 'headline', sizes: ['sm', 'md', 'lg'] },
-	{ token: 'subhead', sizes: ['sm', 'md', 'lg'] },
+	{ token: 'subhead', sizes: ['sm', 'md', 'lg'], extra: MUTED },
 	{ token: 'title', sizes: ['sm', 'md', 'lg'] },
-	{ token: 'subtitle', sizes: ['sm', 'md', 'lg'] },
+	{ token: 'subtitle', sizes: ['sm', 'md', 'lg'], extra: MUTED },
 	{ token: 'body', sizes: ['sm', 'md', 'lg'] },
 	{ token: 'label', sizes: ['sm', 'md', 'lg'] },
 	{
@@ -65,7 +74,7 @@ export const roles = [
 		extra: { 'font-variant-numeric': 'tabular-nums' }
 	},
 	{ token: 'caption', sizes: ['sm', 'md', 'lg'] },
-	{ token: 'eyebrow', sizes: [] }
+	{ token: 'eyebrow', sizes: [], extra: MUTED }
 ];
 
 // The role class for a role and size: .title-md, .eyebrow
@@ -91,7 +100,7 @@ export const flow = {
 };
 
 // Element styles for unclassed markup (Markdown, CMS output), hand-written in
-// `file` and scoped by sd/content.js to every typeset with `content: true`.
+// `file` and scoped by sd/content.js to every typeset class with `content: true`.
 // They apply only under the typeset's class, never from :root, so a product
 // page with no typeset class keeps the reset. `escape` opts a block out, and
 // also stops the typeset's element aliases.
@@ -125,6 +134,10 @@ export const usage = {
 	unprefixedPlaces: ['ui'],
 	// Aliases that set figures in columns or on axes, given tabular numerals.
 	// Each matches the alias of that name and any alias it prefixes
-	// (table-col matches .table-col-head and .table-col-head-sm).
-	tabularNumerals: ['chart-tick', 'table-cell', 'table-col']
+	// (table-col matches .table-col-head and .table-col-head-sm); an element
+	// alias is matched by its selector (p.lead).
+	tabularNumerals: ['chart-tick', 'table-cell', 'table-col'],
+	// Aliases set in the muted text colour although their role is not, matched
+	// the same way: chart axis text, and the longform lead paragraph.
+	muted: ['chart-axis-title', 'chart-tick', 'p.lead']
 };

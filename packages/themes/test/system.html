@@ -383,9 +383,10 @@
 			<h2 class="h-heading">11 · Content styles: unclassed markup</h2>
 			<p class="h-note">
 				The same Markdown-like markup in each set-up. Inside a typeset it takes the content styles
-				(sd/content.css). With no typeset class, or inside .not-typeset, it keeps the reset: no list
-				markers, no link colour. In the nested panel, the product island takes product's content
-				styles, not longform's.
+				(sd/content.css) in longform and in formatted product. Plain .typeset-product sets type
+				only, as a component root does. With no typeset class, or inside .not-typeset, it keeps the
+				reset: no list markers, no link colour. In the nested panel, the plain product island takes
+				neither longform's content styles nor its own.
 			</p>
 			<div class="h-cols" id="contentCols"></div>
 			<template id="contentSample">
@@ -547,7 +548,8 @@
 			const contentCols = document.getElementById('contentCols');
 			const contentPanels = [
 				['.typeset-longform', (el) => (el.className = 'typeset-longform')],
-				['.typeset-product', (el) => (el.className = 'typeset-product')],
+				['.typeset-product--formatted', (el) => (el.className = 'typeset-product--formatted')],
+				['.typeset-product (type only)', (el) => (el.className = 'typeset-product')],
 				['no typeset class', () => {}],
 				[
 					'.typeset-longform > .not-typeset',
