@@ -10,8 +10,13 @@ import { readFileSync } from 'node:fs';
 import { normaliseTokens, tokenName } from './sd/normalise.js';
 import { formatReset } from './sd/reset.js';
 import { formatSystem } from './sd/system.js';
+import { formatPreset } from './sd/tailwind.js';
 import { readUsage } from './sd/usage.js';
-import { content as contentConfig, usage as usageConfig } from './sd/system.config.js';
+import {
+	content as contentConfig,
+	forms as formsConfig,
+	usage as usageConfig
+} from './sd/system.config.js';
 
 /*===============================================
   CUSTOM PARSER
@@ -57,8 +62,6 @@ const filters = {
 	shadowFilter: isShadow,
 	twFilter: (token) => isColor(token) && (isMode('light')(token) || isPrimitive(token)),
 	twSpacingFilter: isCategory('spacing'),
-	twFlowFilter: isCategory('flow'),
-	twGridFilter: isCategory('grid'),
 	jsFilter: (token) =>
 		isColor(token) &&
 		(token.path[0] === 'color' ||
@@ -118,94 +121,6 @@ const cssValue = (token, dictionary) => {
 };
 
 /**
- * Custom format that generates tailwind color config based on css variables
- */
-
-const formatTailwindColor = (token) => {
-	let originalName = token.name;
-
-	let transformedName =
-		token.path[0] === 'primitive'
-			? transformString(originalName, 'color-', /.*-color-/)
-			: transformString(originalName, 'color-', /.*mode-/);
-
-	return `  "${transformedName}": "var(--${token.name}, ${token.value})"`;
-};
-
-StyleDictionary.registerFormat({
-	name: 'tw/css-variables',
-	format({ dictionary }) {
-		return `module.exports = {
-        ${dictionary.allTokens.map(formatTailwindColor).join(',\n')}
-      }`;
-	}
-});
-
-/**
- * Custom format that exposes the numbered spacing scale to Tailwind.
- * The Tailwind key mirrors the native numeric scale ('4', '2.5', 'px') so it can
- * drop in as theme.extend.spacing; the CSS var uses the CSS-safe emitted name
- * ('--spacing-4', '--spacing-2-5', '--spacing-px').
- */
-const formatTailwindSpacing = (token) => {
-	const key = String(token.path[1]).replace(/^(\d+)-(\d+)$/, '$1.$2');
-	return `"${key}": "var(--${token.name}, ${token.value})"`;
-};
-
-StyleDictionary.registerFormat({
-	name: 'tw/css-spacing-variables',
-	format({ dictionary }) {
-		return `module.exports = {
-        ${dictionary.allTokens.map(formatTailwindSpacing).join(',\n')}
-      }`;
-	}
-});
-
-/**
- * Custom format that generates tailwind flow config based on css variables
- *
- * Emits FOUR context-agnostic rung keys, not one per context and step. A
- * `mt-flow-standard-section` utility would resolve the flat
- * --flow-standard-section var directly, making it context-INdependent by
- * construction: dropped inside a .flow-spacious container it pins that one gap,
- * i.e. `mt-6` wearing a flow badge, and it opts the element out of the rhythm it
- * sits in. A component that must hold its density wherever it lands declares its
- * own context class instead (Toast does this), which gives the whole subtree one
- * density rather than pinning gaps individually.
- *
- * So rung utilities carry a RELATIONSHIP, never a density; density comes from the
- * context class in scope at runtime. The four rung names are the contract, hence
- * this format does not read tokens. The flat --flow-{context}[-{step}] vars are
- * untouched — they remain the value source the context blocks reference; they
- * simply stop being reachable from a utility.
- */
-
-const FLOW_STEPS = ['tight', 'default', 'loose', 'section'];
-
-StyleDictionary.registerFormat({
-	name: 'tw/css-flow-variables',
-	format() {
-		const entries = FLOW_STEPS.map((step) => `  "flow-${step}": "var(--flow-${step})"`).join(',\n');
-		return `module.exports = {\n${entries}\n}`;
-	}
-});
-
-/**
- * Custom format that generates tailwind grid config based on css variables
- */
-
-const formatTailwindGrid = (token) => `  "${token.name}": "var(--${token.name}, ${token.value})"`;
-
-StyleDictionary.registerFormat({
-	name: 'tw/css-grid-variables',
-	format({ dictionary }) {
-		return `module.exports = {
-        ${dictionary.allTokens.map(formatTailwindGrid).join(',\n')}
-      }`;
-	}
-});
-
-/**
  * Custom format for typography
  *
  * Line height is emitted as a unitless ratio (line-height / font-size of the
@@ -240,6 +155,8 @@ const formatTypography = (dictionary) => {
  * (sd/system.js) maps them onto the bare --flow-{step} vars that the flow
  * rules and utilities read.
  */
+const FLOW_STEPS = ['tight', 'default', 'loose', 'section'];
+
 const flowVar = (context, step) =>
 	step === 'default' ? `--flow-${context}` : `--flow-${context}-${step}`;
 
@@ -267,6 +184,7 @@ const formatFlowProperties = (dictionary) => {
   tokens.css  every custom property: the source
   system.css  every class the specification names: a window onto tokens.css
   index.css   imports all three, reset first
+  tailwind    the preset, mapping Tailwind's theme onto tokens.css (sd/tailwind.js)
 */
 
 // The same dictionary, narrowed to the tokens one filter selects.
@@ -308,14 +226,23 @@ StyleDictionary.registerFormat({
 
 // Every class the specification names (sd/system.js). The usage aliases are
 // read from the Figma usage export, which is not part of the token graph; the
-// content styles from the hand-written sd/content.css.
+// content and form styles from the hand-written sd/content.css and sd/forms.css.
 const aliases = readUsage(JSON.parse(readFileSync(usageConfig.file, 'utf8')), usageConfig);
-const content = readFileSync(contentConfig.file, 'utf8');
+const sheets = {
+	content: readFileSync(contentConfig.file, 'utf8'),
+	forms: readFileSync(formsConfig.file, 'utf8')
+};
 
 StyleDictionary.registerFormat({
 	name: 'css/system',
 	format: async ({ dictionary, file }) =>
-		`${await fileHeader({ file })}${formatSystem(dictionary, aliases, content)}\n`
+		`${await fileHeader({ file })}${formatSystem(dictionary, aliases, sheets)}\n`
+});
+
+// The Tailwind preset (sd/tailwind.js): the theme mapped onto the custom properties.
+StyleDictionary.registerFormat({
+	name: 'tw/preset',
+	format: ({ dictionary }) => formatPreset(dictionary, filters, ['sm', 'md', 'lg', 'xl', '2xl'])
 });
 
 StyleDictionary.registerFormat({

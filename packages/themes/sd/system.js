@@ -9,8 +9,8 @@
   the order that matters for equal-specificity ties:
 
     base, layout, typeset properties, flow contexts, typeset text,
-    longform element aliases, content styles, product aliases, role classes,
-    emphasis,
+    longform element aliases, content styles, product aliases, forms, role
+    classes, emphasis,
     flow rules and utilities, elevation
 
   Every custom property a rule reads is checked against the dictionary, so a
@@ -19,6 +19,7 @@
 */
 
 import { boundary, formatContent, scopeSelector } from './content.js';
+import { formatForms } from './forms.js';
 import * as config from './system.config.js';
 
 const INDENT = '  ';
@@ -40,10 +41,11 @@ const section = (title, rules) => `/* ${title} */\n${rules.filter(Boolean).join(
 
 /**
  * Builds the sheet from a Style Dictionary dictionary (names already
- * transformed), the alias list from sd/usage.js and the text of the content
- * stylesheet (sd/content.css).
+ * transformed), the alias list from sd/usage.js and the text of the
+ * hand-written sheets: { content: sd/content.css, forms: sd/forms.css }.
  */
-export const formatSystem = (dictionary, aliases, content = '', cfg = config) => {
+export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => {
+	const { content = '', forms = '' } = sheets;
 	const tokens = new Map(dictionary.allTokens.map((token) => [token.name, token]));
 
 	// var(--name), after checking the token exists.
@@ -256,13 +258,32 @@ export const formatSystem = (dictionary, aliases, content = '', cfg = config) =>
 		...roleSizes.flatMap((r) => cfg.roleProperties.map((p) => `${r.className}-${p}`)),
 		...steps.map((step) => `flow-${step}`)
 	]);
+	const checkSheet = (file) => (name) => {
+		if (!readable.has(name)) throw new Error(`${file} reads --${name}, which is not a token`);
+	};
+
 	const contentStyles = content
 		? section('Content styles', [
-				formatContent(content, cfg.typesets.filter((t) => t.content).map(scopeOf), (name) => {
-					if (!readable.has(name))
-						throw new Error(`content.css reads --${name}, which is not a token`);
-				})
+				formatContent(
+					content,
+					cfg.typesets.filter((t) => t.content).map(scopeOf),
+					checkSheet('content.css')
+				)
 			])
+		: '';
+
+	// A colour token's resolved value in one mode, for the data URIs in
+	// forms.css, which can't read a custom property.
+	const resolveColour = (mode, name) => {
+		const token = dictionary.allTokens.find(
+			(t) => t.name === name && t.path[0] === 'color' && t.path[1] === `${mode}-mode`
+		);
+		if (!token) throw new Error(`forms.css reads --${name} in ${mode} mode, which is not a token`);
+		return token.value;
+	};
+
+	const formStyles = forms
+		? section('Forms', [formatForms(forms, checkSheet('forms.css'), resolveColour)])
 		: '';
 
 	// Product aliases resolve against the nearest typeset, like role classes.
@@ -367,6 +388,7 @@ export const formatSystem = (dictionary, aliases, content = '', cfg = config) =>
 		elementAliases,
 		contentStyles,
 		classAliases,
+		formStyles,
 		roleSection,
 		emphasis,
 		flowRules,

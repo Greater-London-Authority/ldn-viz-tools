@@ -12,14 +12,12 @@
 		"./reset.css": "./styles/reset.css",
 		"./tokens.css": "./styles/tokens.css",
 		"./system.css": "./styles/system.css",
-		"./tailwind": "./ldn-theme.cjs",
+		"./tailwind": "./styles/tailwind.cjs",
 		"./colors.js": "./styles/colors.js",
 		"./docs/tokens/tokens.js": "./docs/tokens/tokens.js",
 		"./package.json": "./package.json"
 	},
 	"files": [
-		"ldn-theme.cjs",
-		"tailwind-custom",
 		"styles",
 		"docs",
 		"MIGRATION.md"
@@ -33,13 +31,12 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@tailwindcss/forms": "^0.5.7",
-		"esm-env": "^1.0.0",
-		"mini-svg-data-uri": "^1.4.4"
+		"esm-env": "^1.0.0"
 	},
 	"devDependencies": {
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
+		"mini-svg-data-uri": "^1.4.4",
 		"npm-bundled": "^2.0.1",
 		"npm-packlist": "^10.0.0",
 		"postcss": "^8.5.30",

@@ -20,7 +20,8 @@ const allTokens = (node, path = []) =>
 
 const content = readFileSync(new URL('./content.css', import.meta.url), 'utf8');
 const dictionary = { allTokens: allTokens(tree) };
-const css = formatSystem(dictionary, aliases, content);
+const forms = readFileSync(new URL('./forms.css', import.meta.url), 'utf8');
+const css = formatSystem(dictionary, aliases, { content, forms });
 
 const hasClass = (name) => new RegExp(`\\.${name}(?![\\w-])`).test(css);
 
@@ -208,13 +209,55 @@ describe('content styles', () => {
 	});
 
 	it('fails when the stylesheet reads a custom property that is not a token', () => {
-		expect(() => formatSystem(dictionary, aliases, 'a { color: var(--color-link); }')).toThrow(
-			/--color-link/
-		);
+		expect(() =>
+			formatSystem(dictionary, aliases, { content: 'a { color: var(--color-link); }' })
+		).toThrow(/--color-link/);
 	});
 
 	it('allows role properties and flow steps', () => {
 		const sheet = 'p { font-size: var(--body-sm-font-size); margin-top: var(--flow-tight); }';
-		expect(() => formatSystem(dictionary, aliases, sheet)).not.toThrow();
+		expect(() => formatSystem(dictionary, aliases, { content: sheet })).not.toThrow();
+	});
+});
+
+describe('form styles', () => {
+	const section = css.slice(css.indexOf('/* Forms */'), css.indexOf('/* Roles */'));
+
+	it('writes every .form-* class without Tailwind', () => {
+		for (const name of [
+			'form-input',
+			'form-textarea',
+			'form-select',
+			'form-multiselect',
+			'form-checkbox',
+			'form-radio',
+			'form-label',
+			'form-range'
+		]) {
+			expect(section, name).toMatch(new RegExp(`\\.${name}(?![\\w-])`));
+		}
+		expect(section).not.toMatch(/--tw-/);
+	});
+
+	it('draws the select chevron in each mode from the resolved token', () => {
+		expect(section).not.toMatch(/chevron\(/);
+		const token = (mode, value) => ({
+			name: 'color-chevron',
+			path: ['color', `${mode}-mode`, 'chevron'],
+			value
+		});
+		const withChevron = {
+			allTokens: [...dictionary.allTokens, token('light', '#111111'), token('dark', '#eeeeee')]
+		};
+		const forms = `.form-select { background-image: chevron(light, --color-chevron); }
+.dark .form-select { background-image: chevron(dark, --color-chevron); }`;
+		const out = formatSystem(withChevron, aliases, { forms });
+		expect(out).toContain("stroke='%23111111'");
+		expect(out).toContain("stroke='%23eeeeee'");
+	});
+
+	it('fails when a chevron names a colour that is not a token', () => {
+		const forms = '.form-select { background-image: chevron(dark, --color-nope); }';
+		expect(() => formatSystem(dictionary, aliases, { forms })).toThrow(/--color-nope/);
 	});
 });

@@ -28,32 +28,10 @@
 				{
 					"destination": "index.css",
 					"format": "css/index"
-				}
-			]
-		},
-		"web": {
-			"transforms": ["attribute/cti", "name/grammar", "dimension/grammar", "color/css"],
-			"buildPath": "./styles/",
-			"files": [
-				{
-					"destination": "tw-extend/color.cjs",
-					"format": "tw/css-variables",
-					"filter": "twFilter"
 				},
 				{
-					"destination": "tw-extend/spacing.cjs",
-					"format": "tw/css-spacing-variables",
-					"filter": "twSpacingFilter"
-				},
-				{
-					"destination": "tw-extend/gridspacing.cjs",
-					"format": "tw/css-grid-variables",
-					"filter": "twGridFilter"
-				},
-				{
-					"destination": "tw-extend/flow.cjs",
-					"format": "tw/css-flow-variables",
-					"filter": "twFlowFilter"
+					"destination": "tailwind.cjs",
+					"format": "tw/preset"
 				}
 			]
 		},

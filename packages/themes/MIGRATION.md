@@ -14,7 +14,7 @@ The package now has an `exports` map, and only the paths it lists can be importe
 
 `tokens.css` holds every custom property. `system.css` holds the classes the specification names: typesets, roles, usage aliases, flow, emphasis, elevation, the grid classes and the focus styles. `reset.css` sets element defaults at zero specificity, for apps without Tailwind's preflight. `index.css` imports all three, reset first.
 
-The Tailwind preset no longer adds typography, flow, layout or base classes. A Tailwind app imports `index.css` (or `system.css`) as well as the preset, before the `@tailwind` directives, so a utility still wins over a system class.
+The Tailwind preset only maps Tailwind's theme onto the custom properties: it adds no classes and no plugins, and `@tailwindcss/forms` is no longer a dependency. The `.form-*` classes, like the typography, flow, layout and base classes, are in `system.css`. A Tailwind app imports `index.css` (or `system.css`) as well as the preset, before the `@tailwind` directives, so a utility still wins over a system class.
 
 Every path the package published before version 10 is removed. Replace each one as follows:
 

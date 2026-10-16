@@ -13,7 +13,7 @@
   follows the :not().
 */
 
-import postcss from 'postcss';
+import { printSheet, readSheet } from './sheet.js';
 
 const PSEUDO_ELEMENT = /(::[\w-]+(?:\([^)]*\))?)$/;
 
@@ -50,37 +50,11 @@ export const scopeSelector = (selector, scope, bounds) => {
  *  - check(name): throws if a custom property may not be read
  */
 export const formatContent = (source, scopes, check) => {
-	const root = postcss.parse(source);
-
-	root.walkDecls((decl) => {
-		for (const [, name] of decl.value.matchAll(/var\(--([\w-]+)/g)) check(name);
-	});
-
+	const root = readSheet(source, check);
 	root.walkRules((rule) => {
-		const indent = rule.parent.type === 'atrule' ? '  ' : '';
-		rule.selector = rule.selectors
-			.flatMap((selector) =>
-				scopes.map(({ selector: scope, bounds }) => scopeSelector(selector, scope, bounds))
-			)
-			.join(`,\n${indent}`);
+		rule.selectors = rule.selectors.flatMap((selector) =>
+			scopes.map(({ selector: scope, bounds }) => scopeSelector(selector, scope, bounds))
+		);
 	});
-
-	// Output is laid out the same as the rest of system.css, whatever the
-	// source's indentation.
-	root.walkComments((comment) => comment.remove());
-	root.each((node, index) => {
-		node.raws.before = index ? '\n\n' : '';
-		node.raws.after = '\n';
-	});
-	root.walkRules((rule) => {
-		const depth = rule.parent.type === 'atrule' ? 1 : 0;
-		if (depth) rule.raws.before = rule.prev() ? '\n\n  ' : '\n  ';
-		rule.raws.after = `\n${'  '.repeat(depth)}`;
-		rule.raws.between = ' ';
-		rule.walkDecls((decl) => {
-			decl.raws.before = `\n${'  '.repeat(depth + 1)}`;
-		});
-		rule.raws.semicolon = true;
-	});
-	return root.toString().trim();
+	return printSheet(root);
 };

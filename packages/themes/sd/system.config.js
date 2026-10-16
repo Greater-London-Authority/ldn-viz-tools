@@ -100,6 +100,11 @@ export const content = {
 	escape: 'not-typeset'
 };
 
+// The .form-* classes, hand-written in `file` (sd/forms.js).
+export const forms = {
+	file: 'sd/forms.css'
+};
+
 export const emphasis = {
 	'text-strong': 'var(--primitive-typography-font-weight-semi-bold)',
 	'text-soft': 'var(--primitive-typography-font-weight-regular)'
