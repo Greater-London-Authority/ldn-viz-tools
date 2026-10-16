@@ -10,7 +10,13 @@
 	const tocItems = $derived(data.metadata.toc);
 
 	let wrapperClass = $derived(
-		classNames('typeset-longform', data.metadata.layout === 'index' ? 'max-w-full' : '')
+		// min-w-0 lets the column shrink beside the contents list, so wide code
+		// blocks scroll inside it. Index pages lay out cards, not running text,
+		// so they lift the reading measure.
+		classNames(
+			'typeset-longform min-w-0 flex-1',
+			data.metadata.layout === 'index' ? '[--readable-width:none]' : ''
+		)
 	);
 </script>
 
@@ -28,7 +34,7 @@
 	/>
 {/if}
 
-<div class="container flow-spacious mx-auto pt-8">
+<div class="flow-spacious container mx-auto pt-8">
 	<div class="flex justify-between">
 		<div class={wrapperClass}>
 			<PageComponent />
