@@ -203,6 +203,6 @@ The roles use four weights: 400, 500, 600 and 700. Don't set a weight beside a r
 
 ## Things to avoid
 
-- `text-*` sizes, `font-*` weights and `leading-*` line heights. They produce nothing.
+- `text-*` sizes, `font-*` weights and `leading-*` line height classes. They have no effect.
 - Breakpoint variants such as `md:title-lg`. Role classes are plain CSS, not Tailwind utilities, so the variants don't exist. The roles already change size where needed.
 - The primitive tokens under the roles, such as `--primitive-typography-*`. Use a role class.
