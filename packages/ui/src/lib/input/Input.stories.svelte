@@ -47,7 +47,7 @@
 		<div class="flex w-96 flex-col gap-4">
 			<Input {...args} name="bind-value-input" bind:value placeholder="Type here..." />
 			<div class="h-4">
-				<span class="font-medium dark:text-white">Value:</span>
+				<span class="dark:text-white">Value:</span>
 				{value}
 			</div>
 		</div>

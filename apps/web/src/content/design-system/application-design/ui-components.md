@@ -7,7 +7,7 @@ heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design-4.svg
 ---
 
-<p class="prose lead">The full documentation and examples for ui components can be found on our <a href="https://greater-london-authority.github.io/ldn-viz-tools">storybook</a>
+<p class="typeset-longform body-lg text-color-text-muted">The full documentation and examples for ui components can be found on our <a href="https://greater-london-authority.github.io/ldn-viz-tools">storybook</a>
 </p>
 
 ## Buttons

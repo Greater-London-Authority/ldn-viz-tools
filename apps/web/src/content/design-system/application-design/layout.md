@@ -86,7 +86,7 @@ The **fluid** grid runs full width, with columns that stretch and edge space tha
 
 In both cases the edge space is the padding of the containing frame, and the grid's own margin is zero. The grid describes the columns and the gutters within the padded width rather than insetting from the edge a second time.
 
-The fluid gutter is held at sixteen pixels at every width so that cards tile at a consistent density. It runs a little looser than the eight-pixel vertical rhythm of a product surface, so that cards sit slightly further apart horizontally than content stacks within them, which is the conventional dashboard reading.
+The fluid gutter is held at sixteen pixels at every width so that cards tile at a consistent density. It runs a little looser than the 8px default step of the standard flow context, so that cards sit slightly further apart horizontally than content stacks within them, which is the conventional dashboard reading.
 
 The side panel of a dashboard sits outside the canvas grid. A control panel is application chrome rather than a grid column, so the fluid grid applies to the canvas region only and the canvas fills whatever width remains beside the panel.
 
@@ -148,23 +148,23 @@ Two classes apply the gutter values `grid-gutter` and `grid-gutter-fluid`.
 <div class="grid-gutter grid grid-cols-12">…</div>
 ```
 
-Setting a gap by hand is worth avoiding here even where it produces the right result today. On a fluid surface `gap-4` happens to match the gutter at every width, so the error is invisible until the value is adjusted. On a contained surface it is already too narrow at four of the six breakpoints.
+Setting a gap by hand is worth avoiding here even where it produces the right result today. On a fluid surface `gap-4` happens to match the gutter at every width, so the error is invisible until the value is adjusted. On a contained surface it is already too narrow at five of the six breakpoints.
 
 ### Vertical rhythm on a canvas
 
 The space between blocks within a section comes from a [flow](/design-system/foundations/flow) context rather than from margins set on each element. Declaring the context on the section is usually enough; a relationship is stated explicitly only where nothing could infer it.
 
 ```html
-<section class="flow-product product">
-	<h2 class="section-head">Rough sleeping</h2>
-	<p class="subtitle">Quarterly</p>
+<section class="flow-standard typeset-product">
+	<h2 class="title-lg">Rough sleeping</h2>
+	<p class="subtitle-sm">Quarterly</p>
 
 	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
 		<!-- cards -->
 	</div>
 
-	<p class="caption">Source: CHAIN</p>
+	<p class="caption-sm">Source: CHAIN</p>
 </section>
 ```
 
-The `product` class establishes the type set, so that `section-head` and `subtitle` resolve correctly; `flow-product` establishes how far apart the blocks sit.
+`typeset-product` sets the typeset, so `title-lg` and `subtitle-sm` take their product values. `flow-standard` sets how far apart the blocks sit.

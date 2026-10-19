@@ -227,7 +227,7 @@
 
 {#snippet unstyledContent()}
 	<div class="bg-color-surface-accent p-4 text-color-text">
-		<p class="text-bold mb-2 text-xl">Unstyled Content</p>
+		<p class="label-lg mb-2">Unstyled Content</p>
 		<p class="mb-2">
 			This content does not inherit styles directly from the sidebar. Though it will be affected by
 			the .dark class modifier...

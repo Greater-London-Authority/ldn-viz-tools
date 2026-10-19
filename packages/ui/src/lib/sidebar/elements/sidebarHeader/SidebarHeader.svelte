@@ -32,13 +32,13 @@
 	let { title, branded = 'true', hint, subTitle }: Props = $props();
 
 	let headerClasses = $derived(
-		classNames('py-1 bg-color-container-level-1 text-color-text', brandClasses[branded.toString()])
+		classNames('py-1 bg-color-surface-muted text-color-text', brandClasses[branded.toString()])
 	);
 </script>
 
 <header class={headerClasses}>
 	<div class="flex items-end justify-between">
-		<h1 class="text-xl font-bold leading-tight">{@html title}</h1>
+		<h1 class="sidebar-title">{@html title}</h1>
 
 		{#if hint}
 			<!-- An optional `<Overlay>` component to provide additional explanation. -->
@@ -47,7 +47,7 @@
 	</div>
 
 	{#if subTitle}
-		<div class="pt-1 text-sm">
+		<div class="body-sm pt-1">
 			<!-- Optional longer subtitle to display below the main title. -->
 			{@render subTitle?.()}
 		</div>

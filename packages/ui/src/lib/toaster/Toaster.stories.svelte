@@ -252,7 +252,7 @@ Consider carefully whether overriding the default styles is actually a good idea
 		<div class="flex gap-6">
 			<Button onclick={toastNotice}>Notice</Button>
 		</div>
-		<Toaster position="TopRight" classes="rounded-lg bg-color-container p-3 shadow-2xl" />
+		<Toaster position="TopRight" classes="rounded-lg bg-color-surface p-3 shadow-2xl" />
 	{/snippet}
 </Story>
 

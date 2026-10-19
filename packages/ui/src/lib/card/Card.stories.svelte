@@ -33,7 +33,7 @@
 </script>
 
 {#snippet body()}
-	<p class="body text-color-text-muted">
+	<p class="body-md text-color-text-muted">
 		Maecenas ut libero vel nibh maximus feugiat non sed tortor. Card content sits between the header
 		and the actions row.
 	</p>
@@ -91,7 +91,7 @@
 			<Card {...args}>
 				{@render body()}
 				{#snippet actions()}
-					<span class="label text-color-text-muted">actions snippet</span>
+					<span class="label-md text-color-text-muted">actions snippet</span>
 				{/snippet}
 			</Card>
 		</div>
@@ -109,7 +109,7 @@
 					<div class="flex items-end justify-between">
 						<div>
 							<p class="eyebrow">Fully custom</p>
-							<h3 class="title">Head snippet</h3>
+							<h3 class="title-sm">Head snippet</h3>
 						</div>
 
 						<Input type="range" name="range" label="Header control" />
@@ -132,7 +132,7 @@
 				{#snippet footer()}
 					<div class="flex items-center justify-between">
 						<div>
-							<p class="caption">Fully custom footer snippet</p>
+							<p class="caption-sm">Fully custom footer snippet</p>
 						</div>
 
 						<Input type="range" name="range" label="Header control" />

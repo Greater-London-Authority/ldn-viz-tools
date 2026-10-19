@@ -12,7 +12,7 @@ thumbnail: cta-dataviz.svg
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="prose lead">Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.</p>
+<p class="typeset-longform body-lg text-color-text-muted">Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.</p>
 
 <div class="grid grid-cols-2 2xl:grid-cols-4 grid-rows-[auto] grid-gutter">
 

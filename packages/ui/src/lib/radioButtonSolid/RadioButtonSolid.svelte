@@ -30,7 +30,7 @@
 			disabled
 				? '!bg-color-interactive-disabled-muted !text-color-interactive-disabled cursor-not-allowed'
 				: 'bg-color-interactive-off text-color-text cursor-pointer',
-			'product label ring-color-container-level-1 hover:bg-color-interactive-primary-muted-hover peer-checked:text-color-static-white peer-checked:bg-color-interactive-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
+			'typeset-product label-md ring-color-surface-muted hover:bg-color-interactive-primary-muted-hover peer-checked:text-color-static-white peer-checked:bg-color-interactive-on flex min-h-11 w-full flex-col items-center justify-center p-2 text-center ring-1',
 			'peer-focus:ring-offset-color-interactive-focus peer-focus:ring-color-surface peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-inset peer-focus:ring-offset-2'
 		)
 	);

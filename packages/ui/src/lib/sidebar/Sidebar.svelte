@@ -40,7 +40,7 @@
 	}: SidebarProps = $props();
 
 	const wrapperClasses = $derived(`${position} z-30 ${theme}`);
-	const sidebarClasses = $derived(`flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = $derived(`flex flex-col grow bg-color-surface-muted pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
 
 	// expose internal state to parent component
 	state = sidebarState;
@@ -91,7 +91,7 @@
 	{#if tabs.length}
 		<div
 			class={classNames(
-				'absolute bg-color-container',
+				'absolute bg-color-surface',
 				tabPlacementClasses,
 				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
 			)}
@@ -151,7 +151,7 @@
 									<TabPanel
 										tabPanelId={`${tab.id}-panel`}
 										tabId={tab.id}
-										class="space-y-4 bg-color-container-level-1"
+										class="space-y-4 bg-color-surface-muted"
 									>
 										{@const SvelteComponent = component}
 										<SvelteComponent />

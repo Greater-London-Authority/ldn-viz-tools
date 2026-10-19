@@ -65,7 +65,7 @@
 	// Does this need to be derived for the sake of the story? TO BE DISCUSSED
 	const labelClass = $derived(
 		classNames(
-			'form-label  leading-none',
+			'form-label',
 			labelOn === 'right' ? 'pl-2' : 'pr-2',
 			disabled ? 'text-color-interactive-disabled' : 'text-color-label'
 		)

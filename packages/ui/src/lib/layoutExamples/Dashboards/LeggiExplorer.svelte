@@ -23,8 +23,8 @@
 	{#snippet main()}
 		<div class="h-full bg-color-canvas-muted p-6 pl-24">
 			<div class="mb-4">
-				<h1 class="text-2xl font-bold text-color-text">This is the main content area</h1>
-				<h2 class="text-xl text-color-text-muted">
+				<h1 class="dashboard-main-title">This is the main content area</h1>
+				<h2 class="dashboard-main-subtitle">
 					Maecenas ut libero vel nibh maximus feugiat non sed tortor.
 				</h2>
 			</div>

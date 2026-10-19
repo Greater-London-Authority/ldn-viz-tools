@@ -1,6 +1,6 @@
-<div class="responsive prose px-4 py-6">
+<div class="responsive typeset-longform px-4 py-6">
 	<h3>Aggregated Counts across London</h3>
-	<p class="lead">
+	<p class="body-lg text-color-text-muted">
 		This is demo content, showing how to construct tabs. This one is styled as prose.
 	</p>
 	<p>

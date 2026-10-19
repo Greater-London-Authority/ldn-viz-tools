@@ -7,27 +7,44 @@
 	},
 	"license": "MIT",
 	"type": "module",
+	"exports": {
+		"./index.css": "./styles/index.css",
+		"./reset.css": "./styles/reset.css",
+		"./tokens.css": "./styles/tokens.css",
+		"./system.css": "./styles/system.css",
+		"./tailwind": "./styles/tailwind.cjs",
+		"./tokens.scss": "./styles/tokens.scss",
+		"./colors.js": "./styles/colors.js",
+		"./docs/tokens/tokens.js": "./docs/tokens/tokens.js",
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"styles",
+		"docs",
+		"MIGRATION.md"
+	],
 	"scripts": {
 		"build": "npm run build-tokens",
 		"build-tokens": "node ./sd.build.js",
 		"format": "prettier --check . --write",
 		"lint": "prettier --check . && eslint . && publint",
-		"test": "echo no tests",
-		"test:unit": "echo no tests"
+		"test": "vitest run",
+		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@tailwindcss/forms": "^0.5.7",
-		"esm-env": "^1.0.0",
-		"mini-svg-data-uri": "^1.4.4"
+		"esm-env": "^1.0.0"
 	},
 	"devDependencies": {
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
+		"mini-svg-data-uri": "^1.4.4",
 		"npm-bundled": "^2.0.1",
 		"npm-packlist": "^10.0.0",
+		"postcss": "^8.5.30",
 		"prettier": "^3.4.2",
 		"publint": "^0.2.7",
 		"style-dictionary": "^5.2.0",
-		"tailwindcss": "^3.4.17"
+		"tailwindcss": "^3.4.17",
+		"vitest": "^4.0.16"
 	}
 }

@@ -31,11 +31,10 @@ Space in a layout does one of two jobs. It builds a component: padding, list ind
 
 - **One numbered scale, with rhythm handled separately by flow** (chosen)
 - **T-shirt sizes (`xs`–`lg`).** Retired. The names hid the value, so they gave no help when matching a design, and they did not separate construction from rhythm.
-- **Typography-owned spacing (`--typography-spacing-*`).** Retired. It tied space to type roles, which made each role answer for layout as well as type ([0003](./0003-typography.md): typography sets type, not space).
 - **Named spacing roles per component.** Not adopted. They would grow into a component-scoped token set, which [0002](./0002-token-naming-grammar.md) rules out.
 
 ## Consequences
 
-- T-shirt spacing (`--spacing-md`) and `--typography-spacing-*` are retired. Map any that remain by size: `xxs`→1, `xs`→2, `sm`→3, `md`→4, `lg`→5, and so on.
+- T-shirt spacing (`--spacing-md`) and `--typography-spacing-*` are retired, as is the `space-before` typography property ([0003](./0003-typography.md)). Map any that remain by size: `xxs`→1, `xs`→2, `sm`→3, `md`→4, `lg`→5, and so on.
 - Each `--spacing-{n}` is a plain `var()` reference to `--primitive-spacing-{n}`.
 - ⚠ **The spacing primitive must stay in px in the token graph.** Flow, spacing and grid tokens all divide it by 16 to get rem. Changing it to rem breaks all three without an error.

@@ -8,7 +8,7 @@
 		url: string;
 		image: string;
 		title: string;
-		titleClass: 'title-3' | 'title-4';
+		titleClass: 'title-lg' | 'title-md';
 		cta?: string;
 		children?: Snippet;
 	};
@@ -16,7 +16,7 @@
 		url,
 		image,
 		title,
-		titleClass = 'title-3',
+		titleClass = 'title-lg',
 		children,
 		cta = 'Read more'
 	}: Props = $props();
@@ -27,7 +27,7 @@
 	const href = $derived(isExternal ? url : resolve(url, {}));
 </script>
 
-<div class="flow-product">
+<div class="flow-standard">
 	<a {href} target={isExternal ? '_blank' : undefined}>
 		<EnhancedImage src={image} />
 	</a>

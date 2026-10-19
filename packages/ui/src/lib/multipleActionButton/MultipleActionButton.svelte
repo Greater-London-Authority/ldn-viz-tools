@@ -102,7 +102,7 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class="product z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
+					class="typeset-product z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>
@@ -111,7 +111,7 @@
 						<div class="divide-y divide-color-border-muted">
 							{#each options as option (option.id)}
 								<DropdownMenu.Item
-									class="group  w-full cursor-pointer p-2 text-left hover:bg-color-interactive-primary-muted-hover"
+									class="group w-full cursor-pointer px-2 py-1 text-left hover:bg-color-interactive-primary-muted-hover"
 									onSelect={() => changeOption(option)}
 								>
 									<div class="flex items-center">
@@ -122,9 +122,9 @@
 												class="mr-1 h-5 w-5 text-color-surface-accent"
 											/>
 										{/if}
-										<p class="label-tight">{option.menuLabel}</p>
+										<p class="label-md">{option.menuLabel}</p>
 									</div>
-									<p class="caption text-color-text-muted">
+									<p class="caption-sm text-color-text-muted">
 										{option.menuDescription}
 									</p>
 								</DropdownMenu.Item>

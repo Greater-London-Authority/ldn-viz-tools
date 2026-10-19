@@ -172,7 +172,7 @@ when the cursor leaves the map.
 <Story name="Example - clsoing tooltips when cursor leaves map">
 	{#snippet template()}
 		<div class="flex flex-col gap-4">
-			<div class="h-32 w-[100dvw] bg-color-container-level-2"></div>
+			<div class="h-32 w-[100dvw] bg-color-surface-muted"></div>
 
 			<div>
 				<div class="h-[100dvh] w-[100dvw]">
@@ -197,7 +197,7 @@ when the cursor leaves the map.
 			</div>
 
 			<div>
-				<div class="h-32 w-[100dvw] bg-color-container-level-2"></div>
+				<div class="h-32 w-[100dvw] bg-color-surface-muted"></div>
 
 				<div class="h-[100dvh] w-[100dvw]" use:closeTooltipOnLeave>
 					<Map

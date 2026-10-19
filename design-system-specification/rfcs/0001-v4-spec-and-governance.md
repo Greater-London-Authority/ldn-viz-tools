@@ -9,8 +9,6 @@ reviewers: [James Scott-Brown]
 
 # RFC 0001 — Version 4: specification, skills and governance
 
-_Outline. Headings and the notes under them show what each section needs to cover; the content is still to be written._
-
 ## Summary
 
 One paragraph on what version 4 changes and why these three pieces of work (the breaking specification change, the skills update and the new governance) are planned together.

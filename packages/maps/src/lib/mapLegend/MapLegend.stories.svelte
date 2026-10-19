@@ -99,7 +99,7 @@
 						{#key width}
 							{#if layers[0].visible}
 								<div class="flex flex-col gap-1">
-									<p class="text-sm font-semibold text-color-text">{layers[0].label}</p>
+									<p class="label-md text-color-text">{layers[0].label}</p>
 									<ColorLegend
 										color={layers[0][currentThemeMode!]}
 										title={layers[0].title}
@@ -160,7 +160,7 @@
 						{#key width}
 							{#if layers[0].visible}
 								<div class="flex flex-col gap-1">
-									<p class="text-sm font-semibold text-color-text">{layers[0].label}</p>
+									<p class="label-md text-color-text">{layers[0].label}</p>
 									<ColorLegend
 										color={layers[0][currentThemeMode!]}
 										title={layers[0].title}
@@ -169,7 +169,7 @@
 								</div>
 							{/if}
 						{/key}
-						<div class="border-t border-color-border pt-3 text-sm">
+						<div class="border-t border-color-border pt-3">
 							<Input type="range" label="Opacity" name="opacity" />
 						</div>
 					</MapLegend>
@@ -194,7 +194,7 @@
 							{#each layers as layer (layer.id)}
 								{#if layer.visible}
 									<div class="flex flex-col gap-1">
-										<p class="text-sm font-semibold text-color-text">{layer.label}</p>
+										<p class="label-md text-color-text">{layer.label}</p>
 										<ColorLegend color={layer[currentThemeMode!]} title={layer.title} {width} />
 									</div>
 								{/if}
@@ -235,7 +235,7 @@
 <Story name="Toggle layer visibility">
 	{#snippet template({ args })}
 		<div class="mb-4 flex flex-col space-y-2">
-			<p class="font-bold">Layers</p>
+			<p class="label-lg">Layers</p>
 			<LayerControlGroup
 				bind:layersState={layerState}
 				{options}
@@ -259,13 +259,13 @@
 								{#each layers as layer (layer.id)}
 									{#if layer.visible}
 										<div class="flex flex-col gap-1">
-											<p class="text-sm font-semibold text-color-text">{layer.label}</p>
+											<p class="label-md text-color-text">{layer.label}</p>
 											<ColorLegend color={layer[currentThemeMode!]} title={layer.title} {width} />
 										</div>
 									{/if}
 								{/each}
 							{:else}
-								<p class="text-sm text-color-text">Please choose a layer.</p>
+								<p class="text-color-text">Please choose a layer.</p>
 							{/if}
 						{/key}
 					</MapLegend>
@@ -311,7 +311,7 @@ Passing `isOpen={false}` causes the legend to be initially closed, and render as
 						{#key width}
 							{#if layers[0].visible}
 								<div class="flex flex-col gap-1">
-									<p class="text-sm font-semibold text-color-text">{layers[0].label}</p>
+									<p class="label-md text-color-text">{layers[0].label}</p>
 									<ColorLegend
 										color={layers[0][currentThemeMode!]}
 										title={layers[0].title}

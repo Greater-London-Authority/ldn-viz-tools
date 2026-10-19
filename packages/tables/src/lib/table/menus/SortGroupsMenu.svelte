@@ -74,7 +74,7 @@
 
 <Overlay hintLabel="Sort groups" overlayType="popover">
 	<div class="flex flex-col gap-2">
-		<h2 class="text-large font-bold">Sort groups</h2>
+		<h2 class="label-lg">Sort groups</h2>
 
 		<Select
 			options={aggregationOptions}

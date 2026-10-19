@@ -241,7 +241,7 @@
 			selectedFilters: {JSON.stringify(selectedFilters)}
 		</p>
 		<div class="pt-2">
-			<p class="font-semibold">Visible data:</p>
+			<p class="label-lg">Visible data:</p>
 			{#each filteredData as d}
 				<p>{d}</p>
 			{/each}

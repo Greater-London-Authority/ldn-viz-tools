@@ -103,9 +103,9 @@
 </script>
 
 <div
-	class="product pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-container-level-1 p-4 shadow"
+	class="typeset-product pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-surface-muted p-4 shadow"
 >
-	<p class="form-label text-sm">Upload</p>
+	<p class="form-label">Upload</p>
 
 	{#if upload.state === 'pending'}
 		<div

@@ -190,7 +190,7 @@
 
 			{@const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
 
-			<div class="prose pt-4">
+			<div class="typeset-longform pt-4">
 				{#each sections as _section (_section)}
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci leo, lacinia

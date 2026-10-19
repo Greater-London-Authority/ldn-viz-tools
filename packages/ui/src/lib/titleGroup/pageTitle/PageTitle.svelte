@@ -28,14 +28,14 @@
 	}: Props = $props();
 </script>
 
-<div class={classNames('flow-prose prose', classes)}>
+<div class={classNames('typeset-longform', classes)}>
 	{#if eyebrow}
 		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
 	{/if}
 	{#if title}
-		<h1 class={`${hero} text-color-text`}>{title}</h1>
+		<h1 class={`${hero}-lg text-color-text`}>{title}</h1>
 	{/if}
 	{#if subhead}
-		<p class="subhead text-color-text-muted">{subhead}</p>
+		<p class="subhead-lg text-color-text-muted">{subhead}</p>
 	{/if}
 </div>

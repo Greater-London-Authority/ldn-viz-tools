@@ -3,7 +3,7 @@
 </script>
 
 <MapMarkerPlacement placement="none">
-	<div class="w-fit border border-color-border-muted bg-color-container p-4 text-color-text shadow">
+	<div class="w-fit border border-color-border-muted bg-color-surface p-4 text-color-text shadow">
 		No placement.
 	</div>
 </MapMarkerPlacement>
