@@ -1,7 +1,7 @@
 ---
 id: '0002'
 title: Version 4 — typesets and flow
-status: draft
+status: accepted
 date: 2026-09-28
 authors: [Chris Knight]
 reviewers: [James Scott-Brown, Mike Brondbjerg]
@@ -14,6 +14,21 @@ reviewers: [James Scott-Brown, Mike Brondbjerg]
 The v3 refactor introduced contexts (prose, product, compact) and type sets (prose, product, chart) so that a report and a dashboard could set type and space differently. The concept is sound, but the implementation has problems: the names are ambiguous, a context takes several classes to set up, and the documentation doesn't do a good enough job in explaining how to use it.
 
 This RFC reconsiders contexts to be closer to the product archetypes we already design (dashboard, map, notebook, report and documentation). Each archetype selects a type set and a density, and is applied in one step. The documentation is then restructured around a plain hierarchy of foundations. Typography, flow and the docs are planned together because the names and the structure of each depend on the others.
+
+## Outcome
+
+The reviewers accepted this RFC. Its outcome was recorded on 20 October 2026. The RFC set the scope of the work. The ADRs listed under [Decisions this RFC produced](#decisions-this-rfc-produced) record each decision as it is made, and they can change as the work continues.
+
+Archetypes were not adopted as classes. Each archetype maps to a typeset, a flow context and a grid. The docs page on application types will set out that mapping, as part of the docs restructure. Contexts became two typesets and three flow contexts:
+
+- `typeset-longform` is for reading, in reports and documentation. It also sets the `flow-spacious` context, so one class sets both type and spacing.
+- `typeset-product` is for interfaces: dashboards, maps, notebooks, and components such as charts and tables. It sets type only.
+- `typeset-product--formatted` is for content from a CMS or Markdown in a product setting. It adds the `flow-standard` context and styles unclassed text elements ([0015](../decisions/0015-system-classes.md)).
+- `flow-spacious`, `flow-standard` and `flow-compact` set spacing without setting a typeset, so flow can be applied on its own in a product context or elsewhere ([0016](../decisions/0016-flow-in-system-css.md)).
+
+A product can mix archetypes, such as a dashboard set in product with a landing page set in longform, and contexts can nest ([0016](../decisions/0016-flow-in-system-css.md)).
+
+The four flow steps (`tight`, `default`, `loose` and `section`) stay. The rest of workstream 3 (which step each element takes, coupling, and hero spacing) continues in [0005](../decisions/0005-flow.md).
 
 ## Motivation
 
@@ -40,8 +55,8 @@ If nothing changes, every new consumer adds markup that uses `prose` and `flow-*
 - **Design tokens.** The primitive and semantic token structure stays. Changes to tokens are limited to renames that follow from workstreams 1–3.
 - **The underlying spacing scale.** `--spacing-{n}` and the decision that construction space and rhythm are separate jobs ([0004](../decisions/0004-spacing.md)) stay as they are.
 - **The grid system.** Behaviour is unchanged. Only its names and its explanation change, as part of workstream 4.
-- **Chart roles.** The chart role set stays as specified ([0008](../decisions/0008-charts.md)), apart from any rename that follows from workstream 2.
-- **Figma.** Figma variables and styles follow the code renames.
+- **Chart roles.** The plan was to keep the chart role set as specified ([0008](../decisions/0008-charts.md)). Instead, the chart typeset was removed. Chart text takes product roles and the chart usage aliases, such as `chart-title` and `chart-label`.
+- **Figma.** The plan was for Figma variables and styles to follow the code renames. Instead, Figma is the source, and the code follows the export ([0013](../decisions/0013-token-export-and-parsing.md)).
 
 ## Workstream 1 — Archetypes replace contexts
 
@@ -73,9 +88,9 @@ If nothing changes, every new consumer adds markup that uses `prose` and `flow-*
 
 - **The change.** Now: three type sets (prose, product, chart), with roles that share names across sets and sometimes alias each other. Proposed: a smaller, plainly named set of type sets, each tied to the archetypes that use it, with a role inventory a user can learn from one page.
 - **To be defined.**
-  - How many type sets are needed. A starting hypothesis is one set for reading (report, documentation, the prose cells of a notebook) and one for interfaces (dashboard, map, notebook chrome), with chart kept as a component-level set. The research in the appendix suggests report and documentation may differ enough in base size to need separate values.
+  - How many type sets are needed. A starting hypothesis is one set for reading (report, documentation, the prose cells of a notebook) and one for interfaces (dashboard, map, notebook chrome), with chart kept as a component-level set.
   - Names for the sets that say what they are for, replacing "prose" and "product".
-  - Base size, scale ratio, line height and measure for each set, checked against the appendix research and real pages.
+  - Base size, scale ratio, line height and measure for each set, checked against real pages.
   - Responsive values. The current per-breakpoint matrices need a visual review at each breakpoint, particularly for heading steps on small screens.
   - Whether monospace (notebook and documentation) and tabular numerals (dashboard values) need roles of their own, or are treatments of existing roles.
   - Whether map labels need a cartographic set, or stay within the maps package.
@@ -121,14 +136,14 @@ If nothing changes, every new consumer adds markup that uses `prose` and `flow-*
 
 ## Sequencing
 
-| Phase | Work                                                                             | Exit condition                                                          |
-| ----- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| 0     | RFC 0001 governance in place; full usage scan; this RFC accepted                 | RFC accepted; scan results recorded in this RFC                         |
-| 1     | Archetype mapping, type set names and application method decided                 | Archetypes and Typography ADRs accepted                                 |
-| 2     | Type set values and responsive review; flow and density rules                    | Type sets and Flow ADRs accepted; specimens reviewed at each breakpoint |
-| 3     | Implementation in `themes` with deprecated aliases; internal components migrated | No internal use of old classes; build and checks pass                   |
-| 4     | Docs restructure and skills update                                               | New navigation live; skills reviewed against the released spec          |
-| 5     | Release; consuming teams migrate; old classes removed in the following release   | Aliases removed                                                         |
+| Phase | Work                                                                             | Exit condition                                                          | Status                                                                                             |
+| ----- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| 0     | RFC 0001 governance in place; full usage scan; this RFC accepted                 | RFC accepted; scan results recorded in this RFC                         | Done                                                                                               |
+| 1     | Archetype mapping, type set names and application method decided                 | Archetypes and Typography ADRs accepted                                 | Done. Archetypes became guidance, not an ADR (see Outcome).                                        |
+| 2     | Type set values and responsive review; flow and density rules                    | Type sets and Flow ADRs accepted; specimens reviewed at each breakpoint | Done, apart from the specimen review at each breakpoint, which moves to the Figma foundation pages |
+| 3     | Implementation in `themes` with deprecated aliases; internal components migrated | No internal use of old classes; build and checks pass                   | Done                                                                                               |
+| 4     | Docs restructure and skills update                                               | New navigation live; skills reviewed against the released spec          | In progress                                                                                        |
+| 5     | Release; consuming teams migrate; old classes removed in the following release   | Aliases removed                                                         | Not started                                                                                        |
 
 ## Verification
 
@@ -148,58 +163,21 @@ If nothing changes, every new consumer adds markup that uses `prose` and `flow-*
 
 - **Change fatigue.** A second breaking change soon after v3 may cost goodwill. Deprecated aliases and a clear migration guide reduce this.
 - **The archetype mapping does not fit real products.** Some products mix archetypes, such as a report with an embedded dashboard. Nesting needs to be tested on real pages in phase 1, not only on specimens.
-- **The research is unvalidated.** The figures in the appendix were generated with an LLM. They are a starting point for discussion, and each value needs checking before it goes into the spec.
 - **Losing simplicity again.** Detail could build up during implementation as it did in v3. Each ADR should be tested against one question: can a new developer apply this from the docs page alone?
 - **Scope growth.** Monospace, tabular numerals and cartographic labels could each turn into a workstream. Any that do should become separate RFCs.
 
 ## Open questions
 
-1. Is the starting hypothesis of two type sets (reading and interface) plus chart enough, or do report and documentation need separate values?
-2. How is an archetype applied: a class, a data attribute, or a layout component?
-3. Can a page contain more than one archetype, and if so, what are the nesting rules?
-4. What do we call the type sets, given that "prose" and "product" are being retired?
-5. Do the docs lead with archetypes, or introduce them inside Typography and Spacing?
+1. ~~Is the starting hypothesis of two type sets (reading and interface) plus chart enough, or do report and documentation need separate values?~~ Closed: there are two typesets and no chart typeset. Reports and documentation share `typeset-longform`. Dashboards, maps and notebooks use `typeset-product`, and content from a CMS or Markdown in a product setting uses `typeset-product--formatted` ([0003](../decisions/0003-typography.md), [0015](../decisions/0015-system-classes.md)).
+2. ~~How is an archetype applied: a class, a data attribute, or a layout component?~~ Closed: archetypes are not applied directly. A class sets the typeset, and `typeset-longform` sets the `flow-spacious` context as well. A flow context class can be set on its own ([0016](../decisions/0016-flow-in-system-css.md)).
+3. ~~Can a page contain more than one archetype, and if so, what are the nesting rules?~~ Closed: yes. The innermost typeset wins through inheritance ([0015](../decisions/0015-system-classes.md)). A nested flow context takes its space above from the outer context, and only its own children take the new density ([0016](../decisions/0016-flow-in-system-css.md)).
+4. ~~What do we call the type sets, given that "prose" and "product" are being retired?~~ Closed: `longform` and `product`, with the `--formatted` modifier on product. The flow contexts are `spacious`, `standard` and `compact`.
+5. ~~Do the docs lead with archetypes, or introduce them inside Typography and Spacing?~~ Closed: the docs lead with the foundations. Archetypes appear on the application types page under Application design, which names the typeset, flow context and grid for each one.
 
-## Decisions this RFC will produce
+## Decisions this RFC produced
 
-- Archetypes (new)
-- Typography (supersedes [0003](../decisions/0003-typography.md))
-- Type sets (new, or part of Typography)
-- Flow (supersedes [0005](../decisions/0005-flow.md))
-- Documentation (amends [0009](../decisions/0009-documentation.md))
-
-## Appendix — Archetype research
-
-_Generated with an LLM. Unvalidated; to be checked before any value enters the spec._
-
-### Behaviour
-
-| Axis                        | Dashboard                                  | Map                                             | Notebook                         | Report                             | Documentation                              |
-| --------------------------- | ------------------------------------------ | ----------------------------------------------- | -------------------------------- | ---------------------------------- | ------------------------------------------ |
-| Reading order               | Non-linear scan, ranked by position        | Exploratory, spatial                            | Sequential with backtracking     | Linear, set by the author          | Entered mid-page, one section, left        |
-| Time to first understanding | 2–5s                                       | 5–15s (orient, then explore)                    | Minutes, resumed across sessions | 10–30 min sustained                | 30s–2 min per task                         |
-| Mutability                  | Read-only; data changes beneath the reader | Content read-only; the view changes             | Read-write; the user writes it   | Fixed, versioned, citable          | Fixed for the reader, versioned by release |
-| Success condition           | Nothing needs a second look                | User finds a place they didn't know to look for | Result can be reproduced         | Argument can be followed and cited | Task completes without leaving the page    |
-
-### Typography
-
-| Axis            | Dashboard                                                 | Map                                                  | Notebook                                        | Report                                         | Documentation                     |
-| --------------- | --------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------- | --------------------------------- |
-| Base size       | 14px UI; values 20–48px                                   | 14px chrome; 11–13px map labels                      | 15–16px text; 13–14px mono                      | 17–19px                                        | 16px                              |
-| Scale ratio     | 1.125 for UI; a wider display scale for values            | Near-flat, 2–3 sizes; hierarchy by weight and colour | 1.125; headings must not dominate their cell    | 1.25–1.333                                     | 1.25                              |
-| Line height     | 1.2–1.3                                                   | 1.2 chrome; 1.1 map labels                           | 1.5                                             | 1.6–1.7                                        | 1.6                               |
-| Measure         | None; tooltips and empty states 45–55ch                   | 40–50ch (limited by panel)                           | 70–80ch text; code by column, not ch            | 60–70ch                                        | 65–75ch                           |
-| Number of roles | About 10, flat                                            | About 6 UI, plus a cartographic set                  | About 8 UI, plus a full text set and a mono set | About 8, deeply nested                         | About 12, the largest             |
-| Families        | Sans, with tabular numerals                               | Sans, with a condensed cut for labels                | Sans and mono; mono is structural               | Sans or serif, with mono for figures           | Sans and mono; mono is structural |
-| Numerals        | Tabular lining, required; decimal alignment; slashed zero | Tabular for coordinates and scale readouts           | Tabular in outputs                              | Tabular in tables; oldstyle acceptable in text | Tabular in API tables             |
-
-### Structure and density
-
-| Axis                | Dashboard                                      | Map                                                | Notebook                            | Report                     | Documentation                            |
-| ------------------- | ---------------------------------------------- | -------------------------------------------------- | ----------------------------------- | -------------------------- | ---------------------------------------- |
-| Viewport            | Fixed frame, panels scroll inside              | Fixed frame, canvas fills; panels float or dock    | Page scrolls, and each cell scrolls | One continuous scroll      | Page scrolls, with fixed side rails      |
-| Scroll areas        | 2–6                                            | 2–3                                                | 1, plus one per cell                | 1                          | 3 (navigation, content, contents)        |
-| Density             | Highest                                        | Two levels: low on the canvas, high in panels      | Medium, alternating                 | Lowest                     | Medium                                   |
-| Chrome to content   | About 20:80                                    | About 15:85; chrome sits over content              | About 10:90                         | About 5:95                 | About 35:65                              |
-| Layering            | Flat; z-index for overlays only                | Structural; content sits under and over the canvas | Flat                                | Flat                       | Flat, with sticky rails                  |
-| Responsive approach | Restructure: grid becomes a stack, panels drop | Pan and zoom; panels become a bottom sheet         | Reflow; code scrolls sideways       | Reflow, limited by measure | Restructure; navigation becomes a drawer |
+- [0003 Typography](../decisions/0003-typography.md) was rewritten around the longform and product typesets, in place of a new ADR that superseded it. It also covers the type sets, so there is no separate Type sets ADR.
+- [0005 Flow](../decisions/0005-flow.md) was rewritten around the spacious, standard and compact contexts, and is amended by [0016](../decisions/0016-flow-in-system-css.md).
+- [0015 System classes](../decisions/0015-system-classes.md), proposed in RFC 0003, adds `typeset-product--formatted` and the content styles.
+- There is no Archetypes ADR (see Outcome).
+- Changes to [0009 Documentation](../decisions/0009-documentation.md) for the docs restructure will be recorded when that work is done.

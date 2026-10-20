@@ -46,7 +46,9 @@ Only live decisions sit in `decisions/`. Superseded, retired and declined record
 
 ADR numbers are sequential, four digits, and never reused. A date-based scheme is avoided because two decisions on the same day would collide, and because the date is already in the front matter.
 
-An RFC is used only for a programme of work that will produce several ADRs, such as version 4. A single decision goes straight to a `proposed` ADR. When an RFC is accepted, the ADRs it lists carry the decisions and the RFC itself is not updated again.
+An RFC is used only for a programme of work that will produce several ADRs, such as version 4. A single decision goes straight to a `proposed` ADR.
+
+An RFC has one of three statuses. It is `open` while reviewers comment on it. It becomes `accepted` when they sign it off, or `rejected` if the work does not go ahead. An accepted RFC sets the scope of the work. The ADRs record each decision as it is made, and the scope can change once the work starts. When the work is done, the RFC's outcome, open questions and list of decisions are brought up to date, and it is not changed after that.
 
 ## Statuses
 
