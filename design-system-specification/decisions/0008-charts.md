@@ -30,11 +30,12 @@ The guidance on data colour was written in the docs site's data visualisation pa
 ## Decision
 
 - **Observable Plot or D3 draws real charts. Figma charts are representative.** They are built to look right, not to be accurate to the data.
-- **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export. The hint is an optional Svelte slot for a hint/overlay component, not a typography role.
-- **The designer composes what goes in the slot for each chart.** The legend, plot and footer (notes and citation) are not built into the container or into the plot.
+- **`ChartContainer` is fixed chrome around the chart.** A `ChromeHeader` sits above, with a title and an optional eyebrow, subtitle and hint. A `ChromeFooter` sits below, with the byline, source and note, a link to the chart description, and the data and image download buttons. The hint is an optional help overlay, not a typography role.
+- **The designer composes the middle of the container for each chart.** It has slots for controls, the legend and the plot. The legend has its own slot so that plots side by side stay aligned when their legends wrap to different heights.
 - **Category and x-axis labels sit below the baseline.** Y-axis ticks sit to the left of the plot.
 - **A chart is on-system when its text uses the product typeset roles or the usage aliases, and its colours use `data/*` and `chart/*` tokens, or the palette ramps for a quantitative scale.** Both are valid for chart text ([0003](./0003-typography.md)).
 - **Series take the data roles in order:** `--color-data-primary`, `--color-data-secondary`, then `--color-data-tertiary`. In light mode they are categorical blue, dark pink and orange. In dark mode they are cyan, pink and orange. Each role has a value for each mode, so a chart switches without changes.
+- **Categories with no order or ranking can use the categorical palette instead.** Such a chart can colour them with `--color-data-categorical-{hue}` rather than the series roles.
 - **To highlight one series, set it in `--color-data-primary` and the rest in `--color-data-context`.** Context is grey.
 - **A chart uses no more than three categorical colours.** A chart that needs colours beyond the three series roles takes them from `--color-data-categorical-{hue}`, choosing hues with the most contrast against the background. Where more categories need telling apart, use labels, line styles or small multiples.
 - **Common encodings have their own roles:**
