@@ -16,6 +16,10 @@
   4. Multi-layer shadows (a group of `0`, `1` ... layer tokens) become one
      `shadow` token whose value is the list of layers, in the shape Style
      Dictionary's shadow/css/shorthand transform expects.
+  5. The measure variables (typography.{breakpoint}.{typeset}.measure) are
+     dropped. They exist so designers can bind a text width in Figma, but a
+     Figma variable can't follow the body size, so system.css works out
+     --measure-* itself (ADR 0015). normalise.test.js checks they still match.
 */
 
 export const isToken = (node) =>
@@ -111,14 +115,23 @@ const normaliseTree = (node, primitiveKeys) => {
 	return result;
 };
 
+const dropMeasure = (tree) => {
+	for (const breakpoint of Object.values(tree.typography ?? {})) {
+		for (const typeset of Object.values(breakpoint)) delete typeset.measure;
+	}
+	return tree;
+};
+
 export const normaliseTokens = (json) => {
 	const primitiveKeys = new Set(Object.keys(json.primitive ?? {}).map(kebab));
 
-	return Object.fromEntries(
-		Object.entries(json).map(([collection, tree]) => [
-			normaliseCollection(collection),
-			normaliseTree(tree, primitiveKeys)
-		])
+	return dropMeasure(
+		Object.fromEntries(
+			Object.entries(json).map(([collection, tree]) => [
+				normaliseCollection(collection),
+				normaliseTree(tree, primitiveKeys)
+			])
+		)
 	);
 };
 

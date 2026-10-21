@@ -7,6 +7,7 @@ import {
 	resolvePath,
 	tokenName
 } from './normalise.js';
+import { measure } from './system.config.js';
 
 const raw = JSON.parse(readFileSync(new URL('../tokens/lcd-ds.tokens.json', import.meta.url)));
 const tree = normaliseTokens(raw);
@@ -69,6 +70,22 @@ describe('normaliseTokens', () => {
 		expect(md.value.map((layer) => layer.offsetY)).toEqual(['2px', '4px']);
 		expect(tree.elevation['1'].type).toBe('shadow');
 		expect(tokens.filter((token) => token.type === 'custom-shadow')).toEqual([]);
+	});
+
+	it('drops the measure variables, which match the widths system.css works out', () => {
+		expect(tokens.filter((token) => token.path.includes('measure'))).toEqual([]);
+		for (const [breakpoint, typesets] of Object.entries(raw['semantic-typography'] ?? {})) {
+			for (const [typeset, roles] of Object.entries(typesets)) {
+				if (!roles.measure) continue;
+				const ref = tree.typography[breakpoint][typeset].body.md['font-size'].value;
+				const body = resolvePath(tree, ref.slice(1, -1)).value;
+				for (const [width, multiple] of Object.entries(measure.widths)) {
+					expect(parseFloat(roles.measure[width].value), `${breakpoint} ${typeset} ${width}`).toBe(
+						body * multiple
+					);
+				}
+			}
+		}
 	});
 
 	it('marks inner shadows as inset', () => {
