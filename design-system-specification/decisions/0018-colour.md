@@ -30,7 +30,7 @@ The spec lists colour in its scope, but no decision describes how colour tokens 
 - **Text and icons on a filled control use `--color-inverse-text`.** The exception is `primary`, whose fill stays dark in both modes, so its text uses `--color-static-white`.
 - **Disabled text and icons use `--color-interactive-disabled`. A disabled fill uses `--color-interactive-disabled-muted`.**
 - **Content on an inverse background uses the `inverse` tokens**, such as `--color-inverse-text` on `--color-inverse-surface`.
-- **`static` colours don't change with the mode.** They are for the few places that must look the same in both, such as the brand colour.
+- **`static` colours don't change with the mode.** They are for the few places that must look the same in both: `--color-static-white`, `--color-static-black`, `--color-static-brand`, and the GLA brand hues as `--color-static-gla-{hue}`.
 - **Charts use the `chart` and `data` tokens, and maps use the `geo` tokens.**
 
 ## Options considered
@@ -43,4 +43,4 @@ The spec lists colour in its scope, but no decision describes how colour tokens 
 
 - `Button.svelte` sets `text-color-static-white` with `dark:text-color-inverse-text` on the positive, negative and caution variants. Both can be replaced by `text-color-inverse-text`.
 - In Figma, the positive, negative and caution button labels bind to `inverse/text`.
-- The Tailwind preset adds some primitives as colours, such as `color-static-seed-grey`. They are not semantic tokens.
+- The Tailwind preset exposes semantic tokens only. It stops adding the `seed` and `gla` primitives as colours. The GLA hues come back as semantic `static/gla/{hue}` variables added in Figma, so `color-static-gla-pink` and the other class names don't change.

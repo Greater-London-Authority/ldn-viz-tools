@@ -54,11 +54,13 @@ We needed a system that sets type by what text does and the context in which it 
 
 - **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
 
-- **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins.
+- **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins. Layout components such as `Sidebar` set no typeset. They take product from `:root`, and the content passed into them sets its own typeset where it needs another.
 
 - **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`. The `typeset-product--formatted` modifier is for content from a CMS or Markdown in a product setting ([0015](./0015-system-classes.md)).
 
 - **Longform and formatted product typesets also define flow. Plain product does not.** `typeset-product--formatted` adds the `flow-standard` context and styles unclassed HTML elements. `typeset-product` sets no flow. Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
+
+- **Line height comes from the role.** There are no line-height utilities. A control whose height must not change keeps its role's line height and reduces its padding. The `slim` button has no padding to reduce, so it sets `line-height: 1` to line up with the text beside it.
 
 - **Type changes at five breakpoints:** `base`, `sm`, `md`, `lg` and `xl`. There are no `2xl` typography tokens, so type at `2xl` is the same as at `xl`.
 
