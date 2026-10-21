@@ -178,3 +178,37 @@ Worked examples:
 - **A card containing two related charts.** The designer makes the card's group
   dominant, so the card has a title and subtitle. Each chart's title is set as
   an eyebrow.
+
+## [0013 — Token export and parsing](./decisions/0013-token-export-and-parsing.md)
+
+- **The token source is `packages/themes/tokens/lcd-ds.tokens.json`, as Figma exports it.** It is normalised in one step before Style Dictionary filters or formats any token.
+- **Emitted names follow the naming grammar ([0002](./decisions/0002-token-naming-grammar.md)).** Colour modes move from the name to the selector. A trailing `default` is dropped from semantic tokens and kept on primitives.
+- **Filters select tokens by type and path. One transform sets units by path:** font weights are unitless, breakpoints are `px`, and other dimensions are `rem`.
+- **Tests check that every reference resolves, and that every emitted name is unique and follows the grammar.**
+
+## [0014 — Distribution and outputs](./decisions/0014-distribution-and-outputs.md)
+
+- **CSS custom properties are the public surface.** Every other output is a window onto them or an export of their resolved values.
+- **Only the paths in the package's `exports` map can be imported:** `reset.css`, `tokens.css`, `system.css`, `index.css`, `tailwind`, `colors.js`, `tokens.scss` and `docs/tokens/tokens.js`.
+- **There are three set-ups:** the full system (`index.css`, plus the preset with Tailwind), tokens only (`tokens.css`), and values only (`colors.js` or `tokens.scss`).
+- **Typography and flow are in one file**, because a typeset class turns on a flow context.
+
+## [0015 — System classes](./decisions/0015-system-classes.md)
+
+- **Every class the spec names is generated into `system.css` as plain CSS**, with its name taken from `sd/system.config.js`. No class is written by hand, and the Tailwind preset adds none.
+- **A typeset publishes its roles' properties on itself, and role classes read them**, so the innermost typeset wins. Product is the default and is also set on `:root`.
+- **`system.css` is unlayered and is imported before Tailwind's directives**, so a Tailwind utility wins at equal specificity.
+- **`reset.css` removes browser defaults at zero specificity.** A typeset restores what its content needs.
+- **Plain `typeset-product` sets type only.** `typeset-product--formatted` adds `flow-standard` and content styles for unclassed markup. `typeset-longform` always brings both. `.not-typeset` stops content styles.
+- **A formatted typeset caps each child at one of three widths:** text (about 80 characters), wide and full. `.width-content`, `.width-content-wide` and `.width-content-full` set a child's width explicitly.
+- **Secondary roles (`subhead`, `subtitle` and `eyebrow`) use the muted text colour.** Aliases for figures in columns or on axes use tabular numerals.
+- **The build fails if a class reads a custom property that isn't a token.**
+
+## [0016 — Flow in system.css](./decisions/0016-flow-in-system-css.md)
+
+Amends [0005](./decisions/0005-flow.md).
+
+- **The flow context classes, rules and utilities are generated into `system.css`.** The values stay in `tokens.css`. There are no Tailwind variants of the utilities, such as `md:mt-flow-loose`.
+- **A flow context never sets a typeset.** `typeset-longform` sets `flow-spacious` as well as the typeset.
+- **A context sets its ramp on its children**, so the space above a nested context comes from the outer context.
+- **Flow sets its children's block margins to zero at zero specificity**, so a browser margin can't collapse with a flow step.

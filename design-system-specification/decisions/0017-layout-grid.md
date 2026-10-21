@@ -4,7 +4,7 @@ title: Pages use a contained or a fluid layout, with padding and gutters set by 
 status: proposed
 date: 2026-10-21
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [Layout grid, Spacing]
 breaking: false
 supersedes: []

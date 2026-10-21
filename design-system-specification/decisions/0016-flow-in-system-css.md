@@ -1,10 +1,10 @@
 ---
 id: '0016'
 title: Flow rules and utilities are generated into system.css, and a context's ramp is set on its children
-status: proposed
-date: 2026-10-16
+status: accepted
+date: 2026-10-21
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [Flow, Spacing]
 breaking: true
 supersedes: []

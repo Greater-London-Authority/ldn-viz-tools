@@ -4,7 +4,7 @@ title: The system targets WCAG 2.2 AA, with one focus outline and stated contras
 status: proposed
 date: 2026-10-21
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [Accessibility, Colour, Typography]
 breaking: false
 supersedes: []

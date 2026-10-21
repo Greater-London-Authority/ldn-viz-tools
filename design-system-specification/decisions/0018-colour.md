@@ -4,7 +4,7 @@ title: Colour is chosen by role from semantic tokens that have a value for each 
 status: proposed
 date: 2026-10-21
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [Colour]
 breaking: false
 supersedes: []

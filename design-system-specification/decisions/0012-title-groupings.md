@@ -4,7 +4,7 @@ title: Title Groupings
 status: accepted
 date: 2026-10-05
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [Typography]
 breaking: false
 supersedes: []
