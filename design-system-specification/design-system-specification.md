@@ -549,9 +549,9 @@ Chart text uses the product typeset roles or the usage aliases. Chart colours
 use the `data` and `chart` colour tokens.
 
 Series take `--color-data-primary`, `--color-data-secondary` and
-`--color-data-tertiary`, in that order. These are the blue, dark pink and orange
-of the categorical palette, chosen to be told apart easily in light and dark
-mode. To highlight one series against the rest, use `--color-data-primary` for
+`--color-data-tertiary`, in that order. In light mode these are the blue, dark
+pink and orange of the categorical palette. In dark mode they are cyan, pink and
+orange. To highlight one series against the rest, use `--color-data-primary` for
 it and `--color-data-context` for the others.
 
 A chart that needs other colours takes them from the categorical palette,

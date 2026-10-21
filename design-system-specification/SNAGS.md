@@ -29,7 +29,6 @@ Differences between the spec, the build and the code, found while rewriting the 
 | Snag | Where | Notes |
 | --- | --- | --- |
 | The scope list and the sections don't match | `design-system-specification.md`, top | Scope lists Layout grid, Colour and Accessibility, which have no section. Sections include Visual Rules and Charts and Tables, which aren't in the scope list |
-| Data colour guidance is in the spec without an ADR | Spec, Charts and Tables | Added from the docs quick guide. Consider amending ADR 0008 so RULES.md can cite it |
 | RULES.md names the Figma file as "Design System ver 3.1" | `RULES.md`, 0001 | Update when the new Figma file is in use |
 | Class mappings are marked as placeholders | `rfcs/0003-…md:41`, `packages/themes/MIGRATION.md:114` | Kept until RFC 0002's design review |
 | Two caption couplings in ADR 0005 are not built | `packages/themes/sd/content.css` (`caption`), `flow` in `packages/themes/sd/system.config.js` | A table `caption` uses `padding-bottom: var(--spacing-2)` rather than the `tight` step. A caption role or `.chart-note` after a block object takes `loose` rather than `tight`. Fix with W3 T6 |
