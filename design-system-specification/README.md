@@ -22,6 +22,14 @@ More details can be found in [ADR-LIFECYCLE](./governance/ADR-LIFECYCLE.md)
 
 Templates for **Architectural Decision Record (adr)** and **Request For Comment (rfc)** are in [./governance/templates](./governance/templates)
 
+## Working with Figma
+
+The published Figma library is "Design System ver 3.1". The version 4 components are being moved into "Design System ver 4.0", which replaces it at the version 4 release. Both are dynamic-page files.
+
+Agents reach Figma through the figma-console MCP and its Desktop Bridge plugin, on port 9223.
+
+A session that works only in Figma has no access to the repository. Nothing decided in it is checked against the build until the tokens are exported and rebuilt.
+
 ## Documentation
 
 The documentation of the design system lives at: [apps.london.gov.uk/city-data/design-system](https://apps.london.gov.uk/city-data/design-system)

@@ -34,4 +34,4 @@ Applications are represented by a conceptual 'stack' of elements, with `canvas` 
 ## Consequences
 
 - `elevation-1` should be used instead of `shadow-sm`. Shadow tokens are still emitted, but stepped elevation is always expressed with an elevation class.
-- Container colours (`--color-container-level-*`) are deprecated in favour of `surface`.
+- Container colours (`--color-container-level-*`) are removed. Level 0 becomes `surface`, and levels 1 to 3 become `surface-muted` ([0018](./0018-colour.md)).
