@@ -68,13 +68,17 @@
   - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
   - **Pairing**: subhead pairs with headline/display, subtitle with title.
 
+- **Small headings can take label roles.** No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, can take `label-lg`, or `label-md` one level down. `.dialog-title` uses `label-lg` for this reason.
+
 - **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
 
 - **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins.
 
-- **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`.
+- **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`. The `typeset-product--formatted` modifier is for content from a CMS or Markdown in a product setting ([0015](./decisions/0015-system-classes.md)).
 
-- **Longform typeset also defines flow. Product typeset does not.** Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./decisions/0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
+- **Longform and formatted product typesets also define flow. Plain product does not.** `typeset-product--formatted` adds the `flow-standard` context and styles unclassed HTML elements. `typeset-product` sets no flow. Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./decisions/0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
+
+- **Type changes at five breakpoints:** `base`, `sm`, `md`, `lg` and `xl`. There are no `2xl` typography tokens, so type at `2xl` is the same as at `xl`.
 
 - **Line heights in three ratios.** Line height is defined in three ratios based on a simple formula: `font-size + k`, where font-size and k are measured in px.
   The ratios are:
@@ -83,7 +87,9 @@
 | --------------- | --------------- | ---------------- |
 | font-size + 4px | font-size + 8px | font-size + 12px |
 
-- **Aliases provided.** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma. They are a convenience only; where possible use the typeset-role tokens directly.
+- **Every role is set in Inter, with a fallback stack.** If Inter fails to load, text falls back through this stack: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`. Figma holds only `Inter`, so the stack is added at build time.
+
+- **Aliases provided.** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma. They are a convenience only; where possible use the typeset-role classes directly.
 
 ## [0004 — Spacing](./decisions/0004-spacing.md)
 
@@ -94,12 +100,14 @@
 ## [0005 — Flow](./decisions/0005-flow.md)
 
 - **Flow sets the space between blocks.** Typography does not set space itself: `typeset-longform` automatically adds the `flow-spacious` context, and flow supplies the space ([0003](./decisions/0003-typography.md)).
-- **There are three flow contexts:** `flow-spacious`, `flow-standard` and `flow-compact`. Standard is the default.
+- **There are three flow contexts:** `flow-spacious`, `flow-standard` and `flow-compact`. Standard is the default. `typeset-longform` sets `flow-spacious`, and `typeset-product--formatted` sets `flow-standard`.
 - **The context defines the value of the step.** There are four steps: `tight`, `default`, `loose` and `section`.
-- **Flow assigns steps based on markup, and authors can override them using utility classes.** When a flow context is initiated, its direct children are spaced vertically to the default step of that context. In a `typeset-longform` context, where `flow-spacious` is applied automatically, headings, captions and block objects are assigned a step from the markup without extra classes.
-  Where an override is needed, or a context cannot infer spacing from markup alone, an `mt-flow-{step}` or `gap-flow-{step}` class replaces the assigned step.
-- **Flow spaces only the direct children of its context.**
-- **A component that declares its own context or spacing is sealed.** Outer flow stops at it. To keep its density wherever it is placed, a component must declare its own context.
+- **Choose the context by the space available.** `flow-compact` is for surfaces too small to show four distinct gaps, such as control panels, map overlays, tooltips and dense sidebars. Other product surfaces use `flow-standard`, and reading content uses `flow-spacious` through `typeset-longform`.
+- **Flow assigns steps from the markup in every flow context.** Any child takes `default`. A block object (`figure`, `img`, `table`, `pre`, `blockquote`, `.chart`) and the child after it take `loose`. Major headings (`h1`, `h2`, `display-*`, `headline-*`) take `section`, and minor headings (`h3` to `h5`, `title-*`) take `loose`. Headings below `h5` are discouraged and have no rule. The spec has the full table.
+- **Parts that belong together are coupled at the `tight` step:** the parts of a title group ([0012](./decisions/0012-title-groupings.md)), and a caption with what it captions (`figcaption`, a table `caption`, and a caption role or `.chart-note` after a block object). An eyebrow before a major heading takes `section`.
+- **There is no separate hero spacing.** The space above display type is the `section` step, or comes from the layout.
+- **Authors override a step with a utility.** `mt-flow-{step}` sets the space above one element. `gap-flow-{step}` sets the gap between the children of a flex or grid container that is not a flow context.
+- **Flow spaces only the direct children of its context.** Outer flow spaces a component's root and goes no further, so no class is needed to seal a component. A component declares its own context only to set the density of its own children.
 
 ## [0006 — Visual rules](./decisions/0006-visual-rules.md)
 
@@ -145,7 +153,8 @@ _The following decisions relate to Figma_
 
 ## [0012 — Title Groupings](./decisions/0012-title-groupings.md)
 
-- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow.
+- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
+- **Titles default to `title-sm`.** A title group's title uses `title-sm` unless the design needs a larger one.
 
 Worked examples:
 
@@ -153,7 +162,9 @@ Worked examples:
   group is the only one, so it can have an eyebrow, a title and a subtitle.
 - **A card containing one chart, where the chart is the main subject.** The
   designer makes the chart's group dominant. The chart has a title and
-  subtitle, and the card's title is set as an eyebrow.
+  subtitle, and the card's title is set as an eyebrow. The eyebrow sits
+  directly above the chart's title, but it is the card's demoted group, not
+  part of the chart's group.
 - **A card containing two related charts.** The designer makes the card's group
   dominant, so the card has a title and subtitle. Each chart's title is set as
   an eyebrow.

@@ -28,7 +28,7 @@ Archetypes were not adopted as classes. Each archetype maps to a typeset, a flow
 
 A product can mix archetypes, such as a dashboard set in product with a landing page set in longform, and contexts can nest ([0016](../decisions/0016-flow-in-system-css.md)).
 
-The four flow steps (`tight`, `default`, `loose` and `section`) stay. The rest of workstream 3 (which step each element takes, coupling, and hero spacing) continues in [0005](../decisions/0005-flow.md).
+The four flow steps (`tight`, `default`, `loose` and `section`) stay. The rest of workstream 3 (which step each element takes, coupling, sealing, choosing a context, and hero spacing) is recorded in [0005](../decisions/0005-flow.md).
 
 ## Motivation
 
@@ -112,7 +112,7 @@ If nothing changes, every new consumer adds markup that uses `prose` and `flow-*
 - **Affected surface.** `flow.css`, both copies of `flow.cjs`, the `mt-flow-*` and `gap-flow-*` utilities, components that declare their own flow context, and the spec section _Content Flow_.
 - **Migration.** Old `flow-*` classes kept as deprecated aliases while workstream 1 migrates. `mt-flow-*` and `gap-flow-*` keep their names if the step names stay.
 - **Change-sets.** (1) Density driven by the archetype. (2) Coupling fixes. (3) Components that set their own density. (4) Old classes removed.
-- **ADRs this produces.** _Flow_ (supersedes [0005](../decisions/0005-flow.md)).
+- **ADRs this produces.** Amendments to [0005 Flow](../decisions/0005-flow.md), and [0016](../decisions/0016-flow-in-system-css.md).
 
 ## Workstream 4 — Documentation and skills
 

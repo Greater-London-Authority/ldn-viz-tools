@@ -440,7 +440,9 @@ Components can contain other titled components. A card might hold a single chart
 When a component contains only one title group, that group can use all three parts.
 The eyebrow is optional.
 
-When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow.
+When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
+
+A title group's title uses `title-sm` unless the design needs a larger one.
 
 Worked examples:
 
@@ -448,7 +450,9 @@ Worked examples:
   group is the only one, so it can have an eyebrow, a title and a subtitle.
 - **A card containing one chart, where the chart is the main subject.** The
   designer makes the chart's group dominant. The chart has a title and
-  subtitle, and the card's title is set as an eyebrow.
+  subtitle, and the card's title is set as an eyebrow. The eyebrow sits
+  directly above the chart's title, but it is the card's demoted group, not
+  part of the chart's group.
 - **A card containing two related charts.** The designer makes the card's group
   dominant, so the card has a title and subtitle. Each chart's title is set as
   an eyebrow.
