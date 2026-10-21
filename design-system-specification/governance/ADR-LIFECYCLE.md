@@ -115,7 +115,7 @@ title: A declared context seals its subtree
 status: accepted # proposed | accepted | declined | superseded | retired
 date: 2026-08-19 # date accepted (or proposed, while proposed)
 released-in: null # package version once sealed, e.g. 4.0.0
-deciders: [] # [unknown — to be agreed in RFC 0001]
+deciders: [] # who has signed this off
 areas: [typography, flow] # foundations the rule governs
 breaking: true # requires consumer migration
 supersedes: []
