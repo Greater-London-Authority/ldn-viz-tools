@@ -10,7 +10,7 @@ export interface BarDivergingCellProps {
 	 */
 	formatString?: string;
 	/**
-	 * Text size of labels (in pixels).
+	 * Text size of labels, in pixels. Unset, the labels use the `table-body` usage alias.
 	 */
 	textSize?: number;
 	/**

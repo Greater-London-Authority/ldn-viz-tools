@@ -59,7 +59,7 @@
 		<text
 			x={x(bar.start) + 6}
 			y={height - 6}
-			font-size="12px"
+			class="chart-tick-sm"
 			fill={theme.tokenNameToValue('text')}
 		>
 			{bar.val}

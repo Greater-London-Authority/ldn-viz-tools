@@ -14,7 +14,7 @@
 	let {
 		value,
 		formatString = '0.0f',
-		textSize = 16,
+		textSize,
 		positiveColor = theme.tokenNameToValue('data.primary'),
 		negativeColor = theme.tokenNameToValue('data.secondary'),
 		backgroundColor = theme.tokenNameToValue('surface.neutral'),
@@ -65,9 +65,10 @@
 						text-anchor="start"
 						fill="white"
 						x={x(value) + textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{:else}
 					<!-- text to left of bar-->
@@ -75,9 +76,10 @@
 						text-anchor="end"
 						fill="black"
 						x={x(value) - textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{/if}
 			{/if}
@@ -100,9 +102,10 @@
 						text-anchor="end"
 						fill="white"
 						x={x(value) - textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{:else}
 					<!-- text to left of bar-->
@@ -110,9 +113,10 @@
 						text-anchor="start"
 						fill="black"
 						x={x(value) + textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{/if}
 			{/if}
