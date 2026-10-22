@@ -554,6 +554,9 @@ pink and orange of the categorical palette. In dark mode they are cyan, pink and
 orange. To highlight one series against the rest, use `--color-data-primary` for
 it and `--color-data-context` for the others.
 
+Categories with no order or ranking can use the categorical palette,
+`--color-data-categorical-{hue}`, instead of the series roles.
+
 A chart that needs other colours takes them from the categorical palette,
 `--color-data-categorical-{hue}`. Use two or three in a chart, not the whole
 palette. Areas with no data use `--color-data-empty`.

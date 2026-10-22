@@ -7,6 +7,7 @@ import {
 	resolvePath,
 	tokenName
 } from './normalise.js';
+import { measure } from './system.config.js';
 
 const raw = JSON.parse(readFileSync(new URL('../tokens/lcd-ds.tokens.json', import.meta.url)));
 const tree = normaliseTokens(raw);
@@ -26,8 +27,7 @@ const CATEGORIES = [
 	'grid',
 	'shadow',
 	'elevation',
-	'breakpoint',
-	'focus-ring'
+	'breakpoint'
 ];
 
 describe('normaliseTokens', () => {
@@ -40,16 +40,7 @@ describe('normaliseTokens', () => {
 
 	it('removes the semantic prefix and nothing else', () => {
 		expect(Object.keys(tree).sort()).toEqual(
-			[
-				'elevation',
-				'flow',
-				'color',
-				'focus-ring',
-				'grid',
-				'primitive',
-				'spacing',
-				'typography'
-			].sort()
+			['elevation', 'flow', 'color', 'grid', 'primitive', 'spacing', 'typography'].sort()
 		);
 		expect(Object.keys(tree.color).sort()).toEqual(['dark-mode', 'light-mode']);
 		expect(tree.color['light-mode'].text.value).toBe('{color.light-mode.palette.grey.900}');
@@ -69,6 +60,22 @@ describe('normaliseTokens', () => {
 		expect(md.value.map((layer) => layer.offsetY)).toEqual(['2px', '4px']);
 		expect(tree.elevation['1'].type).toBe('shadow');
 		expect(tokens.filter((token) => token.type === 'custom-shadow')).toEqual([]);
+	});
+
+	it('drops the measure variables, which match the widths system.css works out', () => {
+		expect(tokens.filter((token) => token.path.includes('measure'))).toEqual([]);
+		for (const [breakpoint, typesets] of Object.entries(raw['semantic-typography'] ?? {})) {
+			for (const [typeset, roles] of Object.entries(typesets)) {
+				if (!roles.measure) continue;
+				const ref = tree.typography[breakpoint][typeset].body.md['font-size'].value;
+				const body = resolvePath(tree, ref.slice(1, -1)).value;
+				for (const [width, multiple] of Object.entries(measure.widths)) {
+					expect(parseFloat(roles.measure[width].value), `${breakpoint} ${typeset} ${width}`).toBe(
+						body * multiple
+					);
+				}
+			}
+		}
 	});
 
 	it('marks inner shadows as inset', () => {
@@ -107,7 +114,6 @@ describe('tokenName', () => {
 
 	it('drops a trailing default from semantic tokens only', () => {
 		expect(tokenName({ path: ['flow', 'standard', 'default'] })).toBe('flow-standard');
-		expect(tokenName({ path: ['focus-ring', 'default'], type: 'shadow' })).toBe('focus-ring');
 		expect(tokenName({ path: ['primitive', 'typography', 'font-family', 'default'] })).toBe(
 			'primitive-typography-font-family-default'
 		);

@@ -305,11 +305,11 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		return typesetClasses.filter((t) => t.token === token && t.content).map(scopeOf);
 	};
 
-	// Longform aliases are element defaults inside the longform typeset. :where()
-	// keeps them at the typeset's specificity, so any role class or utility on
-	// the element wins.
+	// Element aliases are element defaults inside each typeset with content
+	// styles. :where() keeps them at the typeset's specificity, so any role
+	// class or utility on the element wins.
 	const elementAliases = section(
-		'Longform element aliases',
+		'Element aliases',
 		aliases
 			.filter((a) => !a.selector.startsWith('.'))
 			.flatMap((a) =>

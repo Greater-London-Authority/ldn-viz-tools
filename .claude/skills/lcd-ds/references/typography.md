@@ -2,7 +2,7 @@
 
 Spec section: Typography. ADRs: [0003](../../../../design-system-specification/decisions/0003-typography.md), [0012](../../../../design-system-specification/decisions/0012-title-groupings.md), [0015](../../../../design-system-specification/decisions/0015-system-classes.md).
 
-Code: `typesets`, `roles`, `content`, `measure` and `usage` in `packages/themes/sd/system.config.js`. Output: the Typesets, Measure, Typeset text, Longform element aliases, Content styles, Usage aliases, Roles and Emphasis sections of `system.css`.
+Code: `typesets`, `roles`, `content`, `measure` and `usage` in `packages/themes/sd/system.config.js`. Output: the Typesets, Measure, Typeset text, Element aliases, Content styles, Usage aliases, Roles and Emphasis sections of `system.css`.
 
 ## Typesets
 
@@ -59,9 +59,9 @@ Weights are light 300, regular 400, medium 500, semi-bold 600 and bold 700, as `
 
 Line heights are the font size plus 4px (tight), 8px (default) or 12px (loose).
 
-## Longform element aliases
+## Element aliases
 
-Inside `typeset-longform`, headings and some elements take a role without a class:
+Inside `typeset-longform` and `typeset-product--formatted`, headings and some elements take a role without a class. Each typeset uses its own sizes. Plain `typeset-product` doesn't style them, so a heading there needs a role class or a usage alias:
 
 | Element | Role |
 | --- | --- |
