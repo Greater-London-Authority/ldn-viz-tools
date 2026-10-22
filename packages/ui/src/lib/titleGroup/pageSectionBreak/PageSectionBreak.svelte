@@ -1,9 +1,9 @@
 <script lang="ts">
 	/**
-	 * `PageSectionBreak` — marks a new section within a long-form prose page.
+	 * `PageSectionBreak` — marks a new section within a longform page.
 	 *
 	 * May appear several times down a page, one per section; sits below
-	 * [PageTitle](./?path=/docs/ui-components-titlegroup-pagetitle--documentation)'s hero in the prose titling ladder.
+	 * [PageTitle](./?path=/docs/ui-components-layout-and-themes-titlegroup-longform-pagetitle--documentation), one level below the page's title.
 	 *
 	 * This component exists as a convenience wrapper as correct element structure within a flow container would produce the same result
 	 *

@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * `PageTitle` — the hero title of a prose page.
+	 * `PageTitle` — the hero title of a longform page.
 	 *
 	 * May have multiple [SectionBreak](./?path=/docs/ui-components-titlegroup-sectionbreak-documentation)
 	 * headings beneath it.
