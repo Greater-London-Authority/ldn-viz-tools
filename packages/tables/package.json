@@ -43,7 +43,6 @@
 		"test:unit": "vitest run"
 	},
 	"dependencies": {
-		"@ldn-viz/themes": "*",
 		"@ldn-viz/ui": "*",
 		"@ldn-viz/utils": "*",
 		"@melt-ui/svelte": "^0.86.0",
@@ -91,6 +90,7 @@
 		"vitest-browser-svelte": "^2.0.1"
 	},
 	"peerDependencies": {
+		"@ldn-viz/themes": "*",
 		"svelte": "^5.33.0"
 	}
 }

@@ -40,7 +40,5 @@ Differences between the spec, the build and the code, found while rewriting the 
 | Snag | Where | Notes |
 | --- | --- | --- |
 | The scope list and the sections don't match | `design-system-specification.md`, top | Scope lists Layout grid, Colour and Accessibility, which have no section. Sections include Visual Rules and Charts and Tables, which aren't in the scope list |
-| Class mappings are marked as placeholders | `rfcs/0003-…md:41`, `packages/themes/MIGRATION.md:114` | Kept until RFC 0002's design review |
-| Two caption couplings in ADR 0005 are not built | `packages/themes/sd/content.css` (`caption`), `flow` in `packages/themes/sd/system.config.js` | A table `caption` uses `padding-bottom: var(--spacing-2)` rather than the `tight` step. A caption role or `.chart-note` after a block object takes `loose` rather than `tight`. Fix with W3 T6 |
 | Figma measure variables aren't in an ADR | `semantic-typography`: `{longform,product}/measure/{text,wide}`; `packages/themes/sd/normalise.js` step 5 | Added 2026-10-21 so designers can bind a frame's max width to the measure. They are copies (38 and 56 × body-md), dropped by the normaliser and checked against `system.config.js` in `normalise.test.js`. Amend ADR 0015 |
 | `check_spec.py` can't check skill files | `scripts/check_spec.py` | The RULES.md name check was run over the skills from a scratch script that also handles Tailwind utilities, `system.css` custom properties and old names in migration tables. Could become a `--skills` option |
