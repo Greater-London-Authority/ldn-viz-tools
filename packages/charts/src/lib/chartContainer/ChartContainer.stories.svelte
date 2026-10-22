@@ -251,11 +251,11 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 			{#snippet legend()}
 				<div class="chart-label mb-4 flex flex-wrap gap-4">
 					<span class="flex items-center gap-2">
-						<span class="inline-block h-3 w-3 rounded-full bg-color-palette-blue-500"></span>
+						<span class="inline-block h-3 w-3 rounded-full bg-color-data-primary"></span>
 						Variable A
 					</span>
 					<span class="flex items-center gap-2">
-						<span class="inline-block h-3 w-3 rounded-full bg-color-palette-red-500"></span>
+						<span class="inline-block h-3 w-3 rounded-full bg-color-data-secondary"></span>
 						Variable B
 					</span>
 				</div>

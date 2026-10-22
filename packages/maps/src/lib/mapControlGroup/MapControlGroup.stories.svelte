@@ -51,9 +51,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 			>
 				{#each Object.keys(MapControlGroupPositions) as position (position)}
 					<MapControlGroup {position}>
-						<p
-							class="border border-color-border-muted bg-color-surface p-2 text-color-text shadow"
-						>
+						<p class="border border-color-border-muted bg-color-surface p-2 text-color-text shadow">
 							{position}
 						</p>
 					</MapControlGroup>
@@ -146,7 +144,7 @@ bordered container are added.
 			>
 				<MapControlGroup
 					position="TopLeft"
-					classes="space-y-6 rounded border border-color-border-muted bg-color-surface p-3"
+					classes="space-y-6 rounded-full border border-color-border-muted bg-color-surface p-3"
 				>
 					<MapControlPan />
 				</MapControlGroup>

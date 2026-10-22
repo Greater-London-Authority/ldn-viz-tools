@@ -339,7 +339,7 @@
 <!--
 	The `inputClasses` prop applies additional classes to the input element itself
 	(distinct from `classes`, which targets the root container).
-	Here the input is given a rounded, thicker border.
+	Here the input is given a thicker border in the positive colour.
 	This should be used sparingly - think about whetehr deviating from the default styling is really necessary.
 -->
 <Story name="Custom inputClasses">
@@ -348,7 +348,7 @@
 			<p>
 				The <code>inputClasses</code> prop applies additional classes to the input element itself
 				(distinct from <code>classes</code>, which targets the root container). Here the input is
-				given a rounded, thicker border.
+				given a thicker border in the positive colour.
 			</p>
 			<p>Try entering 'brick' or 'london'.</p>
 			<Geocoder
@@ -356,7 +356,7 @@
 				{onLocationSelected}
 				{onSearchError}
 				classes="w-72"
-				inputClasses="rounded-full border-2 border-color-border"
+				inputClasses="border-2 border-color-surface-positive"
 			>
 				{#snippet children({ onSuggestionEvent, attribution, suggestions })}
 					{#if suggestions?.length > 0}

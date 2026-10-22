@@ -244,7 +244,7 @@ older messages are pushed down and hidden.
 
 <!--
 The `classes` prop is appended to the container `<div>`, letting you add custom
-styling (here a padded, rounded, shadowed wrapper) on top of the positioning.
+styling (here a padded, raised wrapper) on top of the positioning.
 Consider carefully whether overriding the default styles is actually a good idea.
 -->
 <Story name="Custom classes">
@@ -252,7 +252,7 @@ Consider carefully whether overriding the default styles is actually a good idea
 		<div class="flex gap-6">
 			<Button onclick={toastNotice}>Notice</Button>
 		</div>
-		<Toaster position="TopRight" classes="rounded-lg bg-color-surface p-3 shadow-2xl" />
+		<Toaster position="TopRight" classes="bg-color-surface p-3 elevation-6" />
 	{/snippet}
 </Story>
 
