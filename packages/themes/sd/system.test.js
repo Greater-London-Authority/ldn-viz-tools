@@ -35,8 +35,10 @@ describe('readUsage', () => {
 			size: 'sm'
 		});
 		expect(bySelector['.chart-tick']).toMatchObject({ role: 'caption', size: 'md' });
-		expect(bySelector['h1']).toMatchObject({ typeset: 'longform', role: 'headline', size: 'lg' });
-		expect(bySelector['p.lead']).toMatchObject({ role: 'body', size: 'lg' });
+		const longform = (selector) =>
+			aliases.find((a) => a.typeset === 'longform' && a.selector === selector);
+		expect(longform('h1')).toMatchObject({ role: 'headline', size: 'lg' });
+		expect(longform('p.lead')).toMatchObject({ role: 'body', size: 'lg' });
 	});
 
 	it('names product aliases {place}-{part}, without the unprefixed places', () => {
@@ -44,9 +46,50 @@ describe('readUsage', () => {
 		expect(bySelector['.ui-card-title']).toBeUndefined();
 	});
 
-	it('gives every alias a unique selector', () => {
-		const selectors = aliases.map((a) => a.selector);
+	it('gives every alias a unique selector within its typeset', () => {
+		const selectors = aliases.map((a) => `${a.typeset} ${a.selector}`);
 		expect(new Set(selectors).size).toBe(selectors.length);
+	});
+
+	describe('product element aliases', () => {
+		const style = (role) => ({
+			$value: { fontSize: `{semantic-typography.product.${role}.font-size}` }
+		});
+		const product = (tree) => readUsage({ Usage: { product: tree } });
+
+		it('reads styles in the formatted group as element selectors', () => {
+			const read = product({
+				formatted: { h2: style('headline.sm') },
+				card: { title: style('title.sm') }
+			});
+			expect(read.map((a) => a.selector)).toEqual(['h2', '.card-title']);
+		});
+
+		it('never turns an element into a class', () => {
+			expect(() => product({ h2: style('headline.sm') })).toThrow(/needs a place/);
+			expect(() => product({ formatted: { h: { x: style('title.sm') } } })).toThrow(
+				/needs a place/
+			);
+		});
+
+		it('styles them only inside typeset-product--formatted', () => {
+			const withH2 = structuredClone(usageJson);
+			withH2.Usage.product.formatted = {
+				h2: {
+					$value: Object.fromEntries(
+						['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing'].map((k) => [
+							k,
+							`{semantic-typography.product.headline.sm.${k.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`)}}`
+						])
+					)
+				}
+			};
+			const out = formatSystem(dictionary, readUsage(withH2, config.usage), { content, forms });
+			const scopes = [...out.matchAll(/^(\.[\w-]+) :where\(h2\)/gm)].map((m) => m[1]);
+			expect(scopes).toContain('.typeset-product--formatted');
+			expect(scopes).not.toContain('.typeset-product');
+			expect(out).not.toMatch(/\.h2[\s,{]/);
+		});
 	});
 
 	it('rejects an alias that references more than one role', () => {

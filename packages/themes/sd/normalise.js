@@ -20,6 +20,9 @@
      dropped. They exist so designers can bind a text width in Figma, but a
      Figma variable can't follow the body size, so system.css works out
      --measure-* itself (ADR 0015). normalise.test.js checks they still match.
+  6. The focus effect style is dropped. Figma needs it to draw focused
+     variants, but components draw focus with their own classes and there are
+     no focus tokens (ADR 0019). Figma also exports it as light-mode hex only.
 */
 
 export const isToken = (node) =>
@@ -115,17 +118,18 @@ const normaliseTree = (node, primitiveKeys) => {
 	return result;
 };
 
-const dropMeasure = (tree) => {
+const dropFigmaOnly = (tree) => {
 	for (const breakpoint of Object.values(tree.typography ?? {})) {
 		for (const typeset of Object.values(breakpoint)) delete typeset.measure;
 	}
+	delete tree.focus;
 	return tree;
 };
 
 export const normaliseTokens = (json) => {
 	const primitiveKeys = new Set(Object.keys(json.primitive ?? {}).map(kebab));
 
-	return dropMeasure(
+	return dropFigmaOnly(
 		Object.fromEntries(
 			Object.entries(json).map(([collection, tree]) => [
 				normaliseCollection(collection),
@@ -151,8 +155,7 @@ const referencesIn = (value) => {
  * keeps negative steps distinct (scale.-1 -> scale--1, scale.1 -> scale-1).
  *  - color.{light-mode,dark-mode}.* -> color-*  (the mode is carried by the selector)
  *  - primitive shadows              -> shadow-* (shadows have no primitive tier)
- *  - a trailing `default` is dropped from semantic tokens (--flow-standard,
- *    --focus-ring), but kept on primitives (--primitive-typography-font-family-default)
+ *  - a trailing `default` is dropped from semantic tokens (--flow-standard), but kept on primitives (--primitive-typography-font-family-default)
  */
 export const tokenName = (token) => {
 	let path = token.path;

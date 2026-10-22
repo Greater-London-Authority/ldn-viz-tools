@@ -1,4 +1,29 @@
 {
+  "focus": {
+    "0": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "innerShadow",
+        "radius": 0,
+        "color": "#ffffffff",
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 4
+      }
+    },
+    "1": {
+      "type": "custom-shadow",
+      "value": {
+        "shadowType": "innerShadow",
+        "radius": 0,
+        "color": "#0067b4ff",
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 2
+      }
+    },
+    "description": "Keyboard focus, as Button draws it in code: an inset 2px interactive/focus line with a 2px surface line inside it."
+  },
   "primitive": {
     "shadow-inner": {
       "description": null,
@@ -2049,108 +2074,6 @@
       }
     }
   },
-  "focus-ring": {
-    "default": {
-      "0": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#0067b4ff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 4
-        }
-      },
-      "1": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#ffffffff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 2
-        }
-      },
-      "description": "adds focus ring to an action or input element"
-    },
-    "negative": {
-      "0": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#cd0000ff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 4
-        }
-      },
-      "1": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#ffffffff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 2
-        }
-      },
-      "description": "adds negative color focus ring to an action or input element"
-    },
-    "positive": {
-      "0": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#007534ff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 4
-        }
-      },
-      "1": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#ffffffff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 2
-        }
-      },
-      "description": "adds positive color focus ring to an action or input element"
-    },
-    "warning": {
-      "0": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#b83700ff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 4
-        }
-      },
-      "1": {
-        "type": "custom-shadow",
-        "value": {
-          "shadowType": "dropShadow",
-          "radius": 0,
-          "color": "#ffffffff",
-          "offsetX": 0,
-          "offsetY": 0,
-          "spread": 2
-        }
-      },
-      "description": "adds warning color focus ring to an action or input element"
-    }
-  },
   "semantic-spacing": {
     "1": {
       "description": "",
@@ -3371,21 +3294,6 @@
           "description": "",
           "type": "color",
           "value": "{semantic-color.light-mode.palette.blue.900}"
-        },
-        "negative-focus": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.light-mode.interactive.negative}"
-        },
-        "positive-focus": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.light-mode.interactive.positive}"
-        },
-        "caution-focus": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.light-mode.interactive.caution}"
         }
       },
       "label": {
@@ -3458,6 +3366,68 @@
           "description": "",
           "type": "color",
           "value": "{primitive.light-mode.color.static.black}"
+        },
+        "gla": {
+          "darkblue": {
+            "description": "GLA darkBlue, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.darkblue}"
+          },
+          "blue": {
+            "description": "GLA blue, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.blue}"
+          },
+          "cyan": {
+            "description": "GLA cyan, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.cyan}"
+          },
+          "green": {
+            "description": "GLA green, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.green}"
+          },
+          "yellow": {
+            "description": "GLA yellow, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.yellow}"
+          },
+          "mustard": {
+            "description": "GLA mustard, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.mustard}"
+          },
+          "orange": {
+            "description": "GLA orange, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.orange}"
+          },
+          "red": {
+            "description": "GLA red, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.red}"
+          },
+          "pink": {
+            "description": "GLA pink, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.pink}"
+          },
+          "darkpink": {
+            "description": "GLA darkPink, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.darkpink}"
+          },
+          "purple": {
+            "description": "GLA purple, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.purple}"
+          },
+          "grey": {
+            "description": "GLA grey, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.light-mode.color.static.gla.grey}"
+          }
         }
       },
       "label-muted": {
@@ -4650,21 +4620,6 @@
           "description": "",
           "type": "color",
           "value": "{semantic-color.dark-mode.palette.blue.900}"
-        },
-        "negative-focus": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.dark-mode.interactive.negative}"
-        },
-        "positive-focus": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.dark-mode.interactive.positive}"
-        },
-        "caution-focus": {
-          "description": "",
-          "type": "color",
-          "value": "{semantic-color.dark-mode.interactive.caution}"
         }
       },
       "label": {
@@ -4737,6 +4692,68 @@
           "description": "",
           "type": "color",
           "value": "{primitive.dark-mode.color.static.black}"
+        },
+        "gla": {
+          "darkblue": {
+            "description": "GLA darkBlue, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.darkblue}"
+          },
+          "blue": {
+            "description": "GLA blue, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.blue}"
+          },
+          "cyan": {
+            "description": "GLA cyan, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.cyan}"
+          },
+          "green": {
+            "description": "GLA green, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.green}"
+          },
+          "yellow": {
+            "description": "GLA yellow, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.yellow}"
+          },
+          "mustard": {
+            "description": "GLA mustard, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.mustard}"
+          },
+          "orange": {
+            "description": "GLA orange, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.orange}"
+          },
+          "red": {
+            "description": "GLA red, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.red}"
+          },
+          "pink": {
+            "description": "GLA pink, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.pink}"
+          },
+          "darkpink": {
+            "description": "GLA darkPink, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.darkpink}"
+          },
+          "purple": {
+            "description": "GLA purple, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.purple}"
+          },
+          "grey": {
+            "description": "GLA grey, the same in both modes.",
+            "type": "color",
+            "value": "{primitive.dark-mode.color.static.gla.grey}"
+          }
         }
       },
       "label-muted": {
@@ -5782,6 +5799,18 @@
               "value": "{primitive.base.typography.font-weight.regular}"
             }
           }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
+          }
         }
       },
       "product": {
@@ -6529,6 +6558,18 @@
               "type": "dimension",
               "value": "{primitive.base.typography.font-weight.regular}"
             }
+          }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
           }
         }
       }
@@ -7280,6 +7321,18 @@
               "value": "{primitive.sm.typography.font-weight.regular}"
             }
           }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
+          }
         }
       },
       "product": {
@@ -8027,6 +8080,18 @@
               "type": "dimension",
               "value": "{primitive.sm.typography.font-weight.regular}"
             }
+          }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
           }
         }
       }
@@ -8778,6 +8843,18 @@
               "value": "{primitive.md.typography.font-weight.regular}"
             }
           }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
+          }
         }
       },
       "product": {
@@ -9525,6 +9602,18 @@
               "type": "dimension",
               "value": "{primitive.md.typography.font-weight.regular}"
             }
+          }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
           }
         }
       }
@@ -10276,6 +10365,18 @@
               "value": "{primitive.lg.typography.font-weight.regular}"
             }
           }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
+          }
         }
       },
       "product": {
@@ -11023,6 +11124,18 @@
               "type": "dimension",
               "value": "{primitive.lg.typography.font-weight.regular}"
             }
+          }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
           }
         }
       }
@@ -11774,6 +11887,18 @@
               "value": "{primitive.xl.typography.font-weight.regular}"
             }
           }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
+          }
         }
       },
       "product": {
@@ -12521,6 +12646,18 @@
               "type": "dimension",
               "value": "{primitive.xl.typography.font-weight.regular}"
             }
+          }
+        },
+        "measure": {
+          "text": {
+            "description": "Width for running text: 38 times body-md, about 79 characters. In code, system.css sets --measure-text from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 608
+          },
+          "wide": {
+            "description": "Width for figures, tables, charts and media: 56 times body-md. In code, system.css sets --measure-wide from the body size; this copy is for Figma and is not exported.",
+            "type": "dimension",
+            "value": 896
           }
         }
       }

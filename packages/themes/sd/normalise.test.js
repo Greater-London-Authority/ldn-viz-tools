@@ -27,8 +27,7 @@ const CATEGORIES = [
 	'grid',
 	'shadow',
 	'elevation',
-	'breakpoint',
-	'focus-ring'
+	'breakpoint'
 ];
 
 describe('normaliseTokens', () => {
@@ -41,16 +40,7 @@ describe('normaliseTokens', () => {
 
 	it('removes the semantic prefix and nothing else', () => {
 		expect(Object.keys(tree).sort()).toEqual(
-			[
-				'elevation',
-				'flow',
-				'color',
-				'focus-ring',
-				'grid',
-				'primitive',
-				'spacing',
-				'typography'
-			].sort()
+			['elevation', 'flow', 'color', 'grid', 'primitive', 'spacing', 'typography'].sort()
 		);
 		expect(Object.keys(tree.color).sort()).toEqual(['dark-mode', 'light-mode']);
 		expect(tree.color['light-mode'].text.value).toBe('{color.light-mode.palette.grey.900}');
@@ -124,7 +114,6 @@ describe('tokenName', () => {
 
 	it('drops a trailing default from semantic tokens only', () => {
 		expect(tokenName({ path: ['flow', 'standard', 'default'] })).toBe('flow-standard');
-		expect(tokenName({ path: ['focus-ring', 'default'], type: 'shadow' })).toBe('focus-ring');
 		expect(tokenName({ path: ['primitive', 'typography', 'font-family', 'default'] })).toBe(
 			'primitive-typography-font-family-default'
 		);

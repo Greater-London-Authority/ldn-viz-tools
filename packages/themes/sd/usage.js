@@ -46,8 +46,12 @@ const styles = (node, path = []) =>
 /**
  * The alias list, in export order:
  *   { selector, typeset, role, size, source }
- * Product aliases become classes: .{place}-{part}, or .{part} for an
- * unprefixed place. Longform keys are already selectors (h1, p.lead).
+ * Element aliases style unclassed markup, and their keys are already
+ * selectors (h1, p.lead). In longform every style is one. In product they sit
+ * in the `formatted` group, because only typeset-product--formatted styles
+ * unclassed markup; designers apply them knowing that. Other product styles
+ * become classes: .{place}-{part}, or .{part} for an unprefixed place. A
+ * product style with no place is an error, so no element ever becomes a class.
  */
 export const readUsage = (json, { unprefixedPlaces = [] } = {}) => {
 	const usage = json.Usage ?? json.usage;
@@ -62,14 +66,20 @@ export const readUsage = (json, { unprefixedPlaces = [] } = {}) => {
 				);
 			}
 
+			const source = ['Usage', typeset, ...path].join('.');
 			let selector;
 			if (typeset === 'longform') {
 				selector = path.join('.');
+			} else if (path[0] === 'formatted' && path.length === 2) {
+				selector = path[1];
 			} else {
 				const [place, ...part] = path.map(kebab);
+				if (part.length === 0 || place === 'formatted') {
+					throw new Error(`Usage alias ${source} needs a place, or belongs in formatted`);
+				}
 				selector = `.${unprefixedPlaces.includes(place) ? part.join('-') : [place, ...part].join('-')}`;
 			}
-			return { selector, ...target, source: ['Usage', typeset, ...path].join('.') };
+			return { selector, ...target, source };
 		})
 	);
 };
