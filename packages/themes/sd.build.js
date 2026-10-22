@@ -7,6 +7,7 @@ import {
 	usesReferences
 } from 'style-dictionary/utils';
 import { readFileSync } from 'node:fs';
+import { isFontFamilyPrimitive, withStack } from './sd/fonts.js';
 import { normaliseTokens, tokenName } from './sd/normalise.js';
 import { formatReset } from './sd/reset.js';
 import { formatSystem } from './sd/system.js';
@@ -61,7 +62,9 @@ const filters = {
 	cssFlowFilter: isCategory('flow'),
 	cssTypographyFilter: isCategory('typography'),
 	shadowFilter: isShadow,
-	twFilter: (token) => isColor(token) && (isMode('light')(token) || isPrimitive(token)),
+	// The preset exposes semantic colours only (ADR 0018); light mode stands in
+	// for both, as each value is a var() that follows the mode.
+	twFilter: (token) => isColor(token) && isMode('light')(token),
 	twSpacingFilter: isCategory('spacing'),
 	jsFilter: (token) =>
 		isColor(token) &&
@@ -105,6 +108,15 @@ StyleDictionary.registerTransform({
 		if (token.path[1] === 'breakpoint') return `${token.value}px`;
 		return token.value === 0 ? '0' : `${token.value / 16}rem`;
 	}
+});
+
+// Figma holds only the family name; the fallback stack is added here, on the
+// primitive, so everything that reads it falls back the same way (ADR 0003).
+StyleDictionary.registerTransform({
+	name: 'font-family/stack',
+	type: transformTypes.value,
+	filter: isFontFamilyPrimitive,
+	transform: withStack
 });
 
 /*=========================================================

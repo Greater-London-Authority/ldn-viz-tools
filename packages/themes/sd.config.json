@@ -7,6 +7,7 @@
 				"attribute/cti",
 				"name/grammar",
 				"dimension/grammar",
+				"font-family/stack",
 				"color/css",
 				"fontFamily/css",
 				"shadow/css/shorthand"

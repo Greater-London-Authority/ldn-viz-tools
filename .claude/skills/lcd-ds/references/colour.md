@@ -60,7 +60,7 @@ Text or an icon on a filled control uses `--color-inverse-text`.
 
 ## In Tailwind
 
-The preset adds each token without its leading dashes as a Tailwind colour, so `--color-text-muted` is available as `text-color-text-muted`, and `--color-surface` as `bg-color-surface`.
+The preset adds each semantic colour token without its leading dashes as a Tailwind colour, and no primitive colours, so `--color-text-muted` is available as `text-color-text-muted`, and `--color-surface` as `bg-color-surface`.
 
 ## In JavaScript
 

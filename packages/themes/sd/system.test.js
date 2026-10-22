@@ -111,6 +111,32 @@ describe('readUsage', () => {
 	});
 });
 
+describe('layout', () => {
+	it('centres .container and steps its width up to each breakpoint (ADR 0017)', () => {
+		expect(css).toMatch(
+			/\n\.container \{\n {2}box-sizing: border-box;\n {2}width: 100%;\n {2}margin-inline: auto;\n {2}padding-inline: var\(--grid-base-contained-container-padding\);/
+		);
+		for (const bp of ['sm', 'md', 'lg', 'xl', '2xl']) {
+			expect(css).toContain(
+				`  .container {\n    max-width: var(--primitive-breakpoint-${bp});\n    padding-inline: var(--grid-${bp}-contained-container-padding);`
+			);
+		}
+	});
+});
+
+describe('caption coupling (ADR 0005)', () => {
+	it('gives a caption after a block object the tight step', () => {
+		const rule = css.match(/\n([^\n]*\) \+ :is\(\.caption-sm[^{]*) \{\n {2}margin-top: ([^;]+);/);
+		expect(rule[1]).toContain(':is(figure, img, table, pre, blockquote, .chart) + ');
+		expect(rule[1]).toContain(':is(.caption-sm, .caption-md, .caption-lg, .chart-note)');
+		expect(rule[2]).toBe('var(--flow-tight)');
+	});
+
+	it('spaces a table caption from its table by the tight step', () => {
+		expect(css).toMatch(/:where\(caption\)[^{]*\{[^}]*padding-bottom: var\(--flow-tight\);/);
+	});
+});
+
 describe('formatSystem', () => {
 	it('emits every class the specification names', () => {
 		const roleClasses = config.roles.flatMap((role) =>

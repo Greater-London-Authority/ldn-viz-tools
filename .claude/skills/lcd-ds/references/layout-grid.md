@@ -1,12 +1,12 @@
 # Layout grid
 
-The spec has no Layout grid section or ADR yet. This file describes the build: `--grid-*` in `tokens.css`, the Layout section of `system.css`, and `container` in the Tailwind preset.
+Rules: [0017](../../../../design-system-specification/decisions/0017-layout-grid.md) (proposed). Build: `--grid-*` in `tokens.css` and the Layout section of `system.css`. The spec's Layout grid section has the generated table of values.
 
 ## Two layouts
 
 | Layout | For | Container padding | Gutter class |
 | --- | --- | --- | --- |
-| Contained | Document-like pages: articles, docs, forms. Centred, with padding that grows with the viewport | Tailwind `container` (from the preset) | `.grid-gutter` |
+| Contained | Document-like pages: articles, docs, forms. Centred, with padding that grows with the viewport | `.container` | `.grid-gutter` |
 | Fluid | Dashboards and app shells. Full width, with constant padding | `.container-fluid` | `.grid-gutter-fluid` |
 
 The grid places blocks horizontally. Vertical space between blocks is [flow](flow.md).

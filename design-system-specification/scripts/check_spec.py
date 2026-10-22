@@ -8,6 +8,9 @@ Reads styles/tokens.json for values, styles/system.css for classes, and RULES.md
 for the class and token names it states. A [WARN] is reported but does not fail
 the run: it marks drift in a value no semantic token uses.
 
+With --skills, check skill files instead: fail if one names a class, token or
+path that packages/themes/MIGRATION.md retires and the build no longer has.
+
 Typical flow:  verify_build.py  ->  gen_spec.py  ->  check_spec.py
 (see governance/SPEC-CHANGE-PROTOCOL.md)
 
@@ -15,7 +18,7 @@ stdlib only. Python 3.8+.
 """
 import argparse, json, os, re, sys
 
-from spec_common import (BREAKPOINTS, DEFAULT_STYLES, FLOW_CONTEXTS, FLOW_STEPS,
+from spec_common import (BREAKPOINTS, DEFAULT_STYLES, REPO_ROOT, FLOW_CONTEXTS, FLOW_STEPS,
                          ROLES, SIZES, SPEC_DIR, TYPESETS, UNSIZED_ROLES,
                          class_names, load_system, load_tokens, parse_rules, px,
                          role_keys, role_label, sections, typography)
@@ -33,8 +36,23 @@ ROLE_WEIGHTS = {"display": 700, "headline": 700, "subhead": 400, "title": 600,
 # Font weights (spec: Typography › Font Weight).
 FONT_WEIGHTS = {"light": 300, "regular": 400, "medium": 500, "semi-bold": 600, "bold": 700}
 
-# Typeface purposes (spec: Typography › Typeface).
+# Typeface purposes (spec: Typography › Typeface), and the generic family that
+# ends each one's fallback stack (0003).
 TYPEFACES = {"display": "Inter", "default": "Inter", "code": "Source Code Pro"}
+TYPEFACE_GENERIC = {"display": "sans-serif", "default": "sans-serif", "code": "monospace"}
+
+# Data colour roles (spec: Charts and Tables; 0008). The series roles and the
+# diverging pair point at a categorical hue in each mode: blue, dark pink and
+# orange in light mode, and cyan (categorical blue), pink and orange in dark.
+DATA_ROLES = {"primary", "secondary", "tertiary", "context", "positive", "negative",
+              "neutral-0", "neutral-1", "male", "female", "empty"}
+DATA_REFERENCES = {  # role: (light reference, dark reference)
+    "primary": ("categorical-blue", "categorical-blue"),
+    "secondary": ("categorical-darkpink", "categorical-pink"),
+    "tertiary": ("categorical-orange", "categorical-orange"),
+    "positive": ("categorical-blue", "categorical-blue"),
+    "negative": ("categorical-red", "categorical-red"),
+}
 
 # The primitive type scale, step -> px (spec: Primitive Typography Scale).
 TYPE_SCALE_PX = {-2: 12, -1: 14, 0: 16, 1: 18, 2: 20, 3: 22, 4: 24, 5: 26, 6: 28,
@@ -211,9 +229,12 @@ def check_primitives(r, tokens):
     if unlisted:
         fails.append(f"weights the spec does not list: {sorted(unlisted)}")
     for purpose, want in TYPEFACES.items():
-        got = tokens.get(f"--primitive-typography-font-family-{purpose}", {}).get("value")
-        if got != want:
-            fails.append(f"font-family-{purpose} = {got!r}, pinned {want!r}")
+        got = tokens.get(f"--primitive-typography-font-family-{purpose}", {}).get("value") or ""
+        stack = [f.strip() for f in got.split(",")]
+        if stack[0] != want:
+            fails.append(f"font-family-{purpose} starts {stack[0]!r}, pinned {want!r}")
+        if TYPEFACE_GENERIC[purpose] not in stack:
+            fails.append(f"font-family-{purpose} has no fallback stack ending in {TYPEFACE_GENERIC[purpose]}")
     for bp, want in BREAKPOINTS_PX.items():
         got = tokens.get(f"--primitive-breakpoint-{bp}", {}).get("value")
         if got is None or px(got) != want:
@@ -354,6 +375,26 @@ def check_outputs(r, styles_dir):
             fails.append(f"styles/{f} is built but not in the exports map")
     r.result(fails, "each styles/ output is in the exports map, or listed as tooling only")
 
+def check_data_roles(r, tokens):
+    r.heading("data colour roles match the spec (0008)")
+    fails = []
+    roles = {k[len("--color-data-"):] for k in tokens
+             if k.startswith("--color-data-") and not k.startswith("--color-data-categorical-")}
+    if roles != DATA_ROLES:
+        fails.append(f"data roles differ: missing {sorted(DATA_ROLES - roles)}, "
+                     f"unlisted {sorted(roles - DATA_ROLES)}")
+    for name, t in tokens.items():
+        if name.startswith("--color-data-") and "dark" not in t:
+            fails.append(f"{name} has no dark value")
+    for role, (light, dark) in DATA_REFERENCES.items():
+        t = tokens.get(f"--color-data-{role}", {})
+        got = (t.get("references"), (t.get("dark") or {}).get("references"))
+        want = (f"--color-data-{light}", f"--color-data-{dark}")
+        if got != want:
+            fails.append(f"--color-data-{role} references {got}, pinned {want}")
+    r.result(fails, f"{len(DATA_ROLES)} roles, each with a dark value; series and diverging "
+                    "roles point at their categorical hues")
+
 # ───────────────────────── RULES.md ───────────────────────────────────────
 
 def name_pattern(name):
@@ -406,6 +447,81 @@ def check_rules_md(r, rules_path, tokens, rules):
             fails.append(f"line {line}: {shown} is not in {where}")
     r.result(fails, f"{checked} class and token names agree with system.css and tokens.json")
 
+# ───────────────────────── skills ─────────────────────────────────────────
+
+SKILLS_DIR = os.path.join(REPO_ROOT, ".claude", "skills")
+MIGRATION = os.path.join(REPO_ROOT, "packages", "themes", "MIGRATION.md")
+# design-system-ops is a gitignored third-party bundle. migration.md lists the
+# old names on purpose.
+SKILLS_SKIPPED = {"design-system-ops", os.path.join("lcd-ds", "references", "migration.md")}
+
+def old_name_pattern(name):
+    """A MIGRATION.md old name -> regex. {a,b} is a choice, any other {x} and
+    * match a name segment, [-x] is optional."""
+    out = ""
+    for part in re.split(r"(\{[^}]*\}|\[[^\]]*\]|\*)", name):
+        if part.startswith("{"):
+            body = part[1:-1]
+            out += "(?:" + "|".join(map(re.escape, body.split(","))) + ")" if "," in body else r"[\w-]+"
+        elif part.startswith("["):
+            out += "(?:" + re.escape(part[1:-1]) + ")?"
+        elif part == "*":
+            out += r"[\w.-]*"
+        else:
+            out += re.escape(part)
+    return re.compile(out + r"\Z")
+
+def retired_names(tokens, classes):
+    """Old names from the first column of MIGRATION.md's Old tables that the
+    build no longer has. One-word class names (title, label) are left out:
+    they are also v4 role names, so a mention of one is usually the role."""
+    names = []
+    for block in open(MIGRATION).read().split("\n\n"):
+        rows = [l for l in block.splitlines() if l.startswith("|")]
+        if len(rows) < 3 or not rows[0].strip("|").strip().startswith("Old"):
+            continue
+        for row in rows[2:]:
+            for name in re.findall(r"`([^`]+)`", row.strip("|").split("|")[0]):
+                for part in name.split():
+                    if part.startswith("-") and not part.startswith("--"):
+                        continue  # a fragment (`-level-2`) of the name before it
+                    if not part.startswith(("--", ".")) and "/" not in part and "-" not in part:
+                        continue
+                    names.append(part)
+    retired = []
+    for name in dict.fromkeys(names):
+        pattern = old_name_pattern(name.lstrip("."))
+        pool = tokens if name.startswith("--") else classes
+        if "/" in name or not any(pattern.match(n) for n in pool):
+            retired.append((name, pattern))
+    return retired
+
+def skill_files(paths):
+    for path in paths:
+        if os.path.isfile(path):
+            yield path
+            continue
+        for dirpath, dirnames, filenames in os.walk(path):
+            rel = os.path.relpath(dirpath, SKILLS_DIR)
+            dirnames[:] = sorted(d for d in dirnames if d not in SKILLS_SKIPPED)
+            for f in sorted(filenames):
+                if f.endswith(".md") and os.path.join(rel, f) not in SKILLS_SKIPPED:
+                    yield os.path.join(dirpath, f)
+
+def check_skills(r, paths, tokens, rules):
+    r.heading("skills name no retired class, token or path")
+    retired = retired_names(tokens.keys(), class_names(rules))
+    fails, files = [], 0
+    for path in skill_files(paths):
+        files += 1
+        for lineno, line in enumerate(open(path).read().splitlines(), 1):
+            spans = re.findall(r"`([^`]+)`", line) + re.findall(r"(?<![\w`-])(--[a-z][\w-]*)", line)
+            for word in {w.lstrip(".") for span in spans for w in span.split()}:
+                hit = next((n for n, p in retired if p.match(word)), None)
+                if hit:
+                    fails.append(f"{os.path.relpath(path, REPO_ROOT)}:{lineno}: {word} (retired: {hit})")
+    r.result(fails, f"{files} skill files, checked against {len(retired)} retired names")
+
 # ───────────────────────── command ────────────────────────────────────────
 
 def cmd_check(styles_dir, rules_path):
@@ -420,6 +536,7 @@ def cmd_check(styles_dir, rules_path):
     check_flow_tokens(r, tokens)
     check_typography(r, tokens, model)
     check_primitives(r, tokens)
+    check_data_roles(r, tokens)
     check_classes(r, rules, css_sections)
     check_flow_css(r, css_sections)
     check_typography_delivery(r, rules)
@@ -430,11 +547,23 @@ def cmd_check(styles_dir, rules_path):
     print("OK" if r.ok else "DRIFT DETECTED")
     sys.exit(0 if r.ok else 1)
 
+def cmd_skills(styles_dir, paths):
+    r = Report()
+    tokens = load_tokens(styles_dir)
+    check_skills(r, paths or [SKILLS_DIR], tokens, parse_rules(load_system(styles_dir)))
+    print("OK" if r.ok else "RETIRED NAMES FOUND")
+    sys.exit(0 if r.ok else 1)
+
 def main():
     ap = argparse.ArgumentParser(description=" ".join(__doc__.strip().split("\n\n")[0].split()))
     ap.add_argument("--styles", default=DEFAULT_STYLES, help="built styles/ directory")
     ap.add_argument("--rules", default=os.path.join(SPEC_DIR, "RULES.md"), help="path to RULES.md")
+    ap.add_argument("--skills", nargs="*", metavar="PATH",
+                    help="instead of the build checks, check skill files (default: every "
+                         "skill in .claude/skills) for names MIGRATION.md retires")
     a = ap.parse_args()
+    if a.skills is not None:
+        cmd_skills(a.styles, a.skills)
     cmd_check(a.styles, a.rules)
 
 if __name__ == "__main__":
