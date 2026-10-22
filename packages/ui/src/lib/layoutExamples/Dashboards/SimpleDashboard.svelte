@@ -122,7 +122,7 @@
 				</Card>
 
 				<!-- 2-up -->
-				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+				<div class="grid-gutter-fluid grid grid-cols-1 md:grid-cols-2">
 					<Card title="Variable A by year" subtitle="Annual totals">
 						<div class="min-w-0">
 							<ObservablePlotInner id="simple-dashboard-bar" spec={barSpec} data={yearly} />

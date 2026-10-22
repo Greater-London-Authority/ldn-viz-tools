@@ -163,7 +163,7 @@
 
 <Story name="All colorways">
 	{#snippet template(args)}
-		<div class="grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+		<div class="grid-gutter-fluid grid max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
 			{#each colorWays as colorWay}
 				<PlacardButton {...args} {colorWay}>
 					{#snippet title()}

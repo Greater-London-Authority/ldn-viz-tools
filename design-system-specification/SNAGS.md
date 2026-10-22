@@ -7,7 +7,6 @@ Differences between the spec, the build and the code, found while rewriting the 
 | Snag | Where | Notes |
 | --- | --- | --- |
 | ColorLegend ticks are 10px | `packages/ui/src/lib/colorLegends/ColorLegend.svelte`: the d3 axis ticks keep the generator's `font-size="10"` | Below the 12px minimum (ADR 0019). At `chart-tick-sm` (12px), ordinal scale ticks overlap. Left at 10px for the v4 release; fix the tick spacing or labelling after it |
-| Components still space children with spacing utilities, not flow | `Card.svelte` (`gap-2`), `InputWrapper` (`space-y-1`), `CheckboxGroup` (`space-y-1`), `Toast` (`mb-1`, no flow context); card grids on `gap-4` | Removed from Flow.mdx, which presented it as done. Moving card grids to `grid-gutter` changes the layout from `sm` up and needs a visual review |
 | Some layouts have no typeset class | The main areas of the `LeggiExplorer`, `PopulationProjection` and `MenuDashboard` layout examples | `Sidebar` sets no typeset and inherits (ADR 0003, D10). Set a typeset on each example's main area |
 | `Button` `slim` grew from 14px to 22px | `packages/ui/src/lib/button/Button.svelte` | The migration removed `leading-none`. Restore `line-height: 1` on slim only (ADR 0003, D10) |
 | Figma and code disagree on large button height | Figma ver 4.0, Buttons: non-square `lg` is 48px; `Button.svelte` `lg` is `min-h-16` (64px). One `brand` `sm` variant is 28px, the rest 32px | Found in the Buttons pilot, 2026-10-20. Predates v4. Decide which is right |
