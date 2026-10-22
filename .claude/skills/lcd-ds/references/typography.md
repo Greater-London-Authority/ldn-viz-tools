@@ -116,4 +116,6 @@ A group on its own can have all three parts. When a component contains two or mo
 
 For example, a card holding one chart, where the chart is the subject: the chart has the title and subtitle, and the card's title becomes an eyebrow.
 
+The parts have no space between them, in either typeset. Their line heights separate them.
+
 In `@ldn-viz/ui`, `TitleGroup` in `packages/ui/src/lib/chrome/` renders a group with `eyebrow`, `title-sm` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it through `ChromeHeader`.

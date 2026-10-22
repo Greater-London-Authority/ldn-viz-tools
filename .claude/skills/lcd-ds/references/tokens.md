@@ -22,13 +22,13 @@ Every token name uses the same segments in the same order, leaving out those tha
 | Colour | `--color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}]` | `--color-interactive-primary-muted-hover` |
 | Spacing | `--spacing-{value}` | `--spacing-4` |
 | Flow | `--flow-{context}[-{step}]` | `--flow-spacious-loose` |
-| Grid | `--grid-{breakpoint}-{layout}-{property}` | `--grid-md-contained-gutter` |
+| Grid | `--grid-{breakpoint}-{layout}-{property}` | `--grid-md-contained-container-padding` |
 | Shadow | `--shadow[-{value}]` | `--shadow-md` |
 | Elevation | `--elevation-{value}` | `--elevation-1` |
 
 Each segment has a fixed list of values, in the spec's Segment values table. A new value needs a spec change.
 
-When a token has two variants, breakpoint or scope comes first, then typeset, flow context, layout or inverse: `--color-inverse-chart-axis`, `--grid-md-contained-gutter`.
+When a token has two variants, breakpoint or scope comes first, then typeset, flow context, layout or inverse: `--color-inverse-chart-axis`, `--grid-md-contained-container-padding`.
 
 A default value is dropped when nothing follows it. `--color-border` is the default border colour, and `--flow-standard` is the default step of the standard context. A typeset, flow context or role size is always written: `title-md`, never `title`.
 

@@ -4900,20 +4900,10 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.base.spacing.4}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.base.spacing.4}"
         }
       },
       "fluid": {
         "container-padding": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.base.spacing.4}"
-        },
-        "gutter": {
           "description": "",
           "type": "dimension",
           "value": "{primitive.base.spacing.4}"
@@ -4926,20 +4916,10 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.sm.spacing.8}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.sm.spacing.5}"
         }
       },
       "fluid": {
         "container-padding": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.sm.spacing.4}"
-        },
-        "gutter": {
           "description": "",
           "type": "dimension",
           "value": "{primitive.sm.spacing.4}"
@@ -4952,11 +4932,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.md.spacing.8}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.md.spacing.6}"
         }
       },
       "fluid": {
@@ -4964,11 +4939,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.md.spacing.6}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.md.spacing.4}"
         }
       }
     },
@@ -4978,11 +4948,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.lg.spacing.16}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.lg.spacing.6}"
         }
       },
       "fluid": {
@@ -4990,11 +4955,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.lg.spacing.6}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.lg.spacing.4}"
         }
       }
     },
@@ -5004,11 +4964,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.xl.spacing.20}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.xl.spacing.8}"
         }
       },
       "fluid": {
@@ -5016,11 +4971,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.xl.spacing.6}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.xl.spacing.4}"
         }
       }
     },
@@ -5030,11 +4980,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.2xl.spacing.24}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.2xl.spacing.8}"
         }
       },
       "fluid": {
@@ -5042,11 +4987,6 @@
           "description": "",
           "type": "dimension",
           "value": "{primitive.2xl.spacing.6}"
-        },
-        "gutter": {
-          "description": "",
-          "type": "dimension",
-          "value": "{primitive.2xl.spacing.4}"
         }
       }
     }

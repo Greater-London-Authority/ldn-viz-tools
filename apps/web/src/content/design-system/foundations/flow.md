@@ -97,9 +97,9 @@ Inside a flow context, or inside `typeset-longform`, the spacing follows from th
 | Above and below a figure, image, table, code block, blockquote or chart | Loose        |
 | Above a first- or second-level heading, a display or a headline         | Section      |
 | Above a third- to fifth-level heading, or a title                       | Loose        |
-| Between two headings that follow one another                            | Tight        |
-| Between a heading and a subtitle or subhead directly beneath it         | Tight        |
-| Between an eyebrow and the heading directly below it                    | Tight        |
+| Between two headings that follow one another                            | None         |
+| Between a heading and a subtitle or subhead directly beneath it         | None         |
+| Between an eyebrow and the heading directly below it                    | None         |
 | Above an eyebrow that introduces a first- or second-level heading       | Section      |
 | Between an image and its caption                                        | Tight        |
 | Between list items, and around a nested list                            | Tight        |
@@ -230,7 +230,7 @@ Using the system:
 	<h2 class="title-lg">Rough sleeping</h2>
 	<p class="subtitle-sm">Quarterly</p>
 
-	<div class="grid-gutter-fluid mt-flow-section grid grid-cols-3">
+	<div class="gap-flow mt-flow-section grid grid-cols-3">
 		<!-- cards -->
 	</div>
 
@@ -238,7 +238,7 @@ Using the system:
 </section>
 ```
 
-The wrapper has gone. The subtitle is recognised as a supporting line and closes up to its heading. The gap beneath the grid is the ordinary one. The gutter between cards comes from the layout grid and adjusts with the viewport. One relationship is stated explicitly, for the one gap nothing could infer.
+The wrapper has gone. The subtitle is recognised as a supporting line and closes up to its heading. The gap beneath the grid is the ordinary one. The space between cards is the context's default step, from `gap-flow`. One relationship is stated explicitly, for the one gap nothing could infer.
 
 ### Things to watch for
 

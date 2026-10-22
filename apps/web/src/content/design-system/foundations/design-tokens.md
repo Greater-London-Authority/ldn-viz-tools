@@ -122,7 +122,7 @@ Token categories are **color**, **spacing**, **typography**, **flow** and **grid
 | `spacing`    | Spacing tokens are used to give a consistent rhythm and flow to our user interfaces.                                                                                |
 | `typography` | Typography tokens define font family, size, weight, line-height and letter-spacing for text and typographic elements.                                               |
 | `flow`       | Flow tokens hold the vertical space between stacked blocks, as a set of four relationships resolved per context.                                                    |
-| `grid`       | Grid tokens hold the horizontal structure of a layout — the gutter between columns and the padding at the edge of a container, per breakpoint.                      |
+| `grid`       | Grid tokens hold the padding at the edge of a container, per breakpoint and layout.                                                                                 |
 
 #### Variant
 
@@ -269,9 +269,9 @@ Because a token here names a relationship rather than a specific size, a value s
 
 ### Grid tokens
 
-Grid tokens define the horizontal structure of a layout: the gutter between columns, and the padding at the edge of a container.
+Grid tokens set the padding at the edge of a container, for each breakpoint and layout.
 
-These are the source of the space between tiled objects — cards in a row, panels side by side. That space belongs to the grid rather than to the objects in it.
+The space between tiled objects, such as cards in a row, comes from flow: `gap-flow` on the grid gives the default step of the context.
 
 [Read the documentation on application layout for the values](/design-system/application-design/layout).
 

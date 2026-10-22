@@ -272,7 +272,7 @@
 <Story name="Two menus on page">
 	{#snippet template(args)}
 		<div class="flow-standard typeset-product">
-			<div class="grid-gutter grid grid-cols-2">
+			<div class="gap-flow grid grid-cols-2">
 				<div>
 					<div class="body-sm mb-4 text-color-text-muted">
 						Current active ID: <strong>{activeMenuItemId}</strong>

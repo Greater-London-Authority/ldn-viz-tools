@@ -73,7 +73,7 @@ These were retired before v4 and still appear in a few files.
 1. Text. Choose each role by what the text does, not by its current size. `text-sm` is `label-md` on a button and `body-sm` on helper text. Remove `text-*`, `font-*` and `leading-*` utilities: the preset no longer defines them, so they produce nothing. If a role changes the size, record the before and after.
 2. Typeset. Make sure the component, or a container above it, has a typeset class.
 3. Vertical space. If the children are a stack of blocks, use a flow context and let the rules set the steps; use `mt-flow-*` only to override. If they are parts of one structure, keep spacing-scale utilities.
-4. Horizontal space. Always spacing, or a grid gutter between tiled items.
+4. Horizontal space. Spacing inside a component, or `gap-flow` between tiled items.
 5. Off-scale values. Snap `p-[15px]` and similar to the nearest spacing step, and record it.
 6. Corners. Remove `rounded-*` unless the element is round.
 7. Elevation. Replace `shadow-*` with the matching `elevation-*` class (see [elevation.md](elevation.md)).

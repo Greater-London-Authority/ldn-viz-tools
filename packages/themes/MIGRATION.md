@@ -74,11 +74,12 @@ In JavaScript, `mode.light.chart.inverse.*` becomes `mode.light.inverse.chart.*`
 
 ### Grid
 
-`spacing` is dropped from the grid tokens.
+`spacing` is dropped from the grid tokens, and the gutter tokens are removed.
 
-| Old                                                                | New                                                        |
-| ------------------------------------------------------------------ | ---------------------------------------------------------- |
-| `--grid-spacing-{bp}-{contained,fluid}-{container-padding,gutter}` | `--grid-{bp}-{contained,fluid}-{container-padding,gutter}` |
+| Old                                                       | New                                               |
+| --------------------------------------------------------- | ------------------------------------------------- |
+| `--grid-spacing-{bp}-{contained,fluid}-container-padding` | `--grid-{bp}-{contained,fluid}-container-padding` |
+| `--grid-spacing-{bp}-{contained,fluid}-gutter`            | No replacement: use `gap-flow` on the grid        |
 
 `{bp}` is `base`, `sm`, `md`, `lg`, `xl` or `2xl`.
 

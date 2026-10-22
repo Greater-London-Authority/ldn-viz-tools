@@ -14,7 +14,7 @@ thumbnail: cta-application-design.svg
 
 <p class="typeset-longform body-lg text-color-text-muted">This section covers guidance on regular patterns applied to our applications and products.</p>
 
-<div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] grid-gutter">
+<div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
 
 <ImageLink
     url="/design-system/application-design/application-types"

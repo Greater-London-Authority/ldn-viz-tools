@@ -52,7 +52,7 @@ The references follow the order of the specification.
 | [spacing.md](references/spacing.md) | The spacing scale, and when to use spacing or flow |
 | [flow.md](references/flow.md) | Flow contexts, steps, the rules that assign steps, utilities |
 | [elevation.md](references/elevation.md) | Elevation classes, shadows, square corners |
-| [layout-grid.md](references/layout-grid.md) | Grid tokens, container padding, gutters |
+| [layout-grid.md](references/layout-grid.md) | Grid tokens, container padding, space between tiled blocks |
 | [colour.md](references/colour.md) | Semantic colour groups, interactive tokens, colour in JavaScript |
 | [charts-and-tables.md](references/charts-and-tables.md) | `ChartContainer`, chart text, Plot defaults, tables |
 | [migration.md](references/migration.md) | v3 to v4 mappings for imports, tokens and classes |
