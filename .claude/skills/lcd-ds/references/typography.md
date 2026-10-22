@@ -102,7 +102,7 @@ Each alias applies a role, sometimes with tabular numerals or the muted colour. 
 | Place | Aliases |
 | --- | --- |
 | Charts | `.chart-title`, `.chart-subtitle`, `.chart-axis-title`, `.chart-label`, `.chart-tick`, `.chart-tick-sm`, `.chart-note` |
-| Tables | `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm`, `.table-cell` |
+| Tables | `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm`, `.table-body` |
 | Dashboards | `.dashboard-main-title`, `.dashboard-main-subtitle`, `.dashboard-section-title`, `.dashboard-section-subtitle` |
 | Interface | `.header-title`, `.sidebar-title`, `.dialog-title`, `.card-title`, `.card-subtitle`, `.hint-text`, `.input-label`, `.placeholder`, `.field-value`, `.button-label`, `.button-label-sm` |
 

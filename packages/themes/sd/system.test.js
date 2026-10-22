@@ -194,7 +194,7 @@ describe('formatSystem', () => {
 			'.metric-lg',
 			'.chart-tick',
 			'.chart-tick-sm',
-			'.table-cell',
+			'.table-body',
 			'.table-col-head',
 			'.table-col-head-sm'
 		]) {

@@ -305,7 +305,7 @@ Each usage alias applies the role shown. Use the alias, or the role class with t
 | Table subtitle             | `table-subtitle`             | `subtitle-sm`, muted                  |
 | Table column header        | `table-col-head`             | `label-md`, tabular numerals          |
 | Small table column header  | `table-col-head-sm`          | `label-sm`, tabular numerals          |
-| Table cell                 | `table-cell`                 | `body-sm`, tabular numerals           |
+| Table body                 | `table-body`                 | `body-sm`, tabular numerals           |
 | Chart title                | `chart-title`                | `title-sm`                            |
 | Chart subtitle             | `chart-subtitle`             | `subtitle-sm`, muted                  |
 | Chart axis title           | `chart-axis-title`           | `label-md`, muted                     |

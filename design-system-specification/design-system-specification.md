@@ -412,7 +412,7 @@ The set of aliases is defined in the `usage` style set in Figma. Adding an alias
 | `.table-subtitle`             | `.subtitle-sm` | muted colour                   |
 | `.table-col-head`             | `.label-md`    | tabular numerals               |
 | `.table-col-head-sm`          | `.label-sm`    | tabular numerals               |
-| `.table-cell`                 | `.body-sm`     | tabular numerals               |
+| `.table-body`                 | `.body-sm`     | tabular numerals               |
 | `.dashboard-main-title`       | `.headline-md` |                                |
 | `.dashboard-main-subtitle`    | `.subhead-md`  | muted colour                   |
 | `.dashboard-section-title`    | `.headline-sm` |                                |

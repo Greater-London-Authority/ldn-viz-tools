@@ -55,6 +55,6 @@ Plot.line(data, {
 
 `TableContainer` (`packages/tables/src/lib/table/TableContainer.svelte`) sets `typeset-product` and uses `ChromeHeader` for its title group.
 
-Table text uses the aliases `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm` and `.table-cell`. In `packages/tables`, `.table-cell` is on the table and `.table-col-head` on column and group heads.
+Table text uses the aliases `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm` and `.table-body`. In `packages/tables`, `.table-body` is on the table and `.table-col-head` on column and group heads.
 
 In Figma, tables are a kit of cells, rows and header rows. Cell widths are xs 64, sm 88, md 120, lg 220, xl 300, or fill. Code is authoritative.
