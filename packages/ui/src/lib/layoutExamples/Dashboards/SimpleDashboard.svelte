@@ -46,20 +46,23 @@
 	const yearLabel = (d: number) => `${d}`;
 
 	// 1-up: line chart
-	const lineSpec = {
+	// $derived re-reads the mark defaults, which hold theme colours, when the
+	// theme changes.
+	let lineSpec = $derived({
 		height: 240,
 		marginLeft: 48,
 		marks: [
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', ticks: years, tickFormat: yearLabel }),
 			Plot.axisY({ label: null }),
-			Plot.ruleY([0]),
-			Plot.line(yearly, { x: 'year', y: 'value', tip: true })
+			Plot.line(yearly, { x: 'year', y: 'value', tip: true }),
+			// baseline last
+			Plot.ruleY([0])
 		]
-	};
+	});
 
 	// 2-up left: bar chart
-	const barSpec = {
+	let barSpec = $derived({
 		height: 240,
 		marginLeft: 48,
 		x: { type: 'band' },
@@ -68,12 +71,13 @@
 			Plot.axisX({ label: 'Year', tickFormat: yearLabel }),
 			Plot.axisY({ label: null }),
 			Plot.barY(yearly, { x: 'year', y: 'value', tip: true }),
+			// baseline last
 			Plot.ruleY([0])
 		]
-	};
+	});
 
 	// 2-up right: area chart
-	const areaSpec = {
+	let areaSpec = $derived({
 		height: 240,
 		marginLeft: 48,
 		marks: [
@@ -82,9 +86,10 @@
 			Plot.axisY({ label: null }),
 			Plot.areaY(yearly, { x: 'year', y: 'value', fillOpacity: 0.15 }),
 			Plot.line(yearly, { x: 'year', y: 'value', tip: true }),
+			// baseline last
 			Plot.ruleY([0])
 		]
-	};
+	});
 </script>
 
 <Header>
@@ -97,43 +102,39 @@
 </Header>
 <AppShell>
 	{#snippet main()}
-		<div class="typeset-product h-full bg-color-canvas-muted p-6">
-			<div class="flex flex-col gap-6">
-				<Breadcrumbs {breadcrumbs} />
+		<div class="container-fluid flow-standard h-full bg-color-canvas-muted pb-6 pt-2">
+			<Breadcrumbs {breadcrumbs} />
 
-				<!-- Page head -->
-				<div class="flex flex-col gap-1">
-					<h1 class="dashboard-main-title">Simple dashboard</h1>
-					<p class="dashboard-main-subtitle">
-						An example layout assembled from the design-system pieces: a breadcrumb, a page head, a
-						one-up card and a two-up card row.
-					</p>
+			<!-- Page head -->
+			<h1 class="dashboard-main-title">Simple dashboard</h1>
+			<p class="dashboard-main-subtitle">
+				An example layout assembled from the design-system pieces: a breadcrumb, a page head, a
+				one-up card and a two-up card row.
+			</p>
+
+			<!-- 1-up -->
+			<Card
+				title="Yearly average, Variable A"
+				subtitle="London yearly average estimated value, 2015–2024"
+				hint="A single full-width card spanning the whole grid."
+			>
+				<div class="min-w-0">
+					<ObservablePlotInner id="simple-dashboard-line" spec={lineSpec} data={yearly} />
 				</div>
+			</Card>
 
-				<!-- 1-up -->
-				<Card
-					title="Yearly average, Variable A"
-					subtitle="London yearly average estimated value, 2015–2024"
-					hint="A single full-width card spanning the whole grid."
-				>
+			<!-- 2-up -->
+			<div class="gap-flow grid grid-cols-1 md:grid-cols-2">
+				<Card title="Variable A by year" subtitle="Annual totals">
 					<div class="min-w-0">
-						<ObservablePlotInner id="simple-dashboard-line" spec={lineSpec} data={yearly} />
+						<ObservablePlotInner id="simple-dashboard-bar" spec={barSpec} data={yearly} />
 					</div>
 				</Card>
-
-				<!-- 2-up -->
-				<div class="grid-gutter-fluid grid grid-cols-1 md:grid-cols-2">
-					<Card title="Variable A by year" subtitle="Annual totals">
-						<div class="min-w-0">
-							<ObservablePlotInner id="simple-dashboard-bar" spec={barSpec} data={yearly} />
-						</div>
-					</Card>
-					<Card title="Variable A over time" subtitle="Cumulative view">
-						<div class="min-w-0">
-							<ObservablePlotInner id="simple-dashboard-area" spec={areaSpec} data={yearly} />
-						</div>
-					</Card>
-				</div>
+				<Card title="Variable A over time" subtitle="Cumulative view">
+					<div class="min-w-0">
+						<ObservablePlotInner id="simple-dashboard-area" spec={areaSpec} data={yearly} />
+					</div>
+				</Card>
 			</div>
 		</div>
 	{/snippet}

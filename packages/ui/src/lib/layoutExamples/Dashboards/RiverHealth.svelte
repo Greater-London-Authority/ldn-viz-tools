@@ -18,6 +18,7 @@
 	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
 	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
 	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
+	import { theme } from '../../theme/themeState.svelte';
 	import { Demo1 } from './demoTabs';
 
 	// Public OS demo key used across the Map stories.
@@ -44,17 +45,25 @@
 		{ year, river: 'Lea', value: 44 + i * 2 }
 	]);
 
-	const trendSpec = {
+	// Series take the data roles in order (ADR 0008). $derived re-reads them
+	// when the theme changes.
+	let trendSpec = $derived({
 		height: 260,
-		marginLeft: 48,
+		marginRight: 18,
+		color: {
+			legend: true,
+			type: 'ordinal',
+			range: [theme.tokenNameToValue('data.primary'), theme.tokenNameToValue('data.secondary')]
+		},
 		marks: [
 			Plot.gridY(),
 			Plot.axisX({ label: 'Year', ticks: years, tickFormat: yearLabel }),
 			Plot.axisY({ label: null }),
-			Plot.ruleY([0]),
-			Plot.line(trend, { x: 'year', y: 'value', stroke: 'river', tip: true })
+			Plot.line(trend, { x: 'year', y: 'value', z: 'river', stroke: 'river', tip: true }),
+			// baseline last
+			Plot.ruleY([0])
 		]
-	};
+	});
 
 	// Reported pollution incidents by monitoring site (horizontal bar).
 	const incidents = [
@@ -66,18 +75,20 @@
 		{ site: 'Teddington', value: 3 }
 	];
 
-	const incidentsSpec = {
+	let incidentsSpec = $derived({
 		height: 260,
 		marginLeft: 90,
+		x: { insetLeft: 0, insetRight: 16 },
 		y: { type: 'band' },
 		marks: [
 			Plot.gridX(),
 			Plot.axisX({ label: 'Incidents' }),
-			Plot.axisY({ label: null, textAnchor: 'end', lineAnchor: 'middle' }),
-			Plot.barX(incidents, { x: 'value', y: 'site', tip: true }),
+			Plot.axisY({ label: null, textAnchor: 'end', lineAnchor: 'middle', dx: 0, dy: 0 }),
+			Plot.barX(incidents, { x: 'value', y: 'site', insetTop: 5, insetBottom: 5, tip: true }),
+			// baseline last
 			Plot.ruleX([0])
 		]
-	};
+	});
 
 	// --- Table --------------------------------------------------------------
 	const sites = [
@@ -117,62 +128,56 @@
 		sidebarAlwaysOpen={{ initial: false, md: true }}
 	>
 		{#snippet main()}
-			<div class="typeset-product h-full bg-color-canvas-muted p-6">
-				<div class="flex flex-col gap-6">
-					<Breadcrumbs {breadcrumbs} />
+			<div class="container-fluid flow-standard h-full bg-color-canvas-muted pb-6 pt-2">
+				<Breadcrumbs {breadcrumbs} />
 
-					<!-- Page head -->
-					<div class="flex flex-col gap-1">
-						<h1 class="dashboard-main-title">London's river health</h1>
-						<p class="dashboard-main-subtitle">
-							Water quality monitoring across the capital's rivers, 2018–2024.
-						</p>
+				<!-- Page head -->
+				<h1 class="dashboard-main-title">London's river health</h1>
+				<p class="dashboard-main-subtitle">
+					Water quality monitoring across the capital's rivers, 2018–2024.
+				</p>
+
+				<!-- 1-up map -->
+				<Card
+					title="Monitoring locations"
+					subtitle="Active water-quality sampling sites"
+					hint="Sites are shown on the Greater London basemap."
+				>
+					<div class="h-96 w-full">
+						<Map options={{ transformRequest: appendOSKeyToUrl(OS_KEY) }} />
 					</div>
+				</Card>
 
-					<!-- 1-up map -->
-					<Card
-						title="Monitoring locations"
-						subtitle="Active water-quality sampling sites"
-						hint="Sites are shown on the Greater London basemap."
-					>
-						<div class="h-96 w-full">
-							<Map options={{ transformRequest: appendOSKeyToUrl(OS_KEY) }} />
+				<!-- Section head -->
+				<h2 class="dashboard-section-title">Water quality trends</h2>
+				<p class="dashboard-section-subtitle">
+					Comparing long-term index scores and reported incidents.
+				</p>
+
+				<!-- 2-up charts -->
+				<div class="gap-flow grid grid-cols-1 md:grid-cols-2">
+					<Card title="Water quality index" subtitle="By river, 2018–2024">
+						<div class="min-w-0">
+							<ObservablePlotInner id="river-trend" spec={trendSpec} data={trend} />
 						</div>
 					</Card>
-
-					<!-- Section head -->
-					<div class="flex flex-col gap-1">
-						<h2 class="title-lg text-color-text">Water quality trends</h2>
-						<p class="subtitle-sm text-color-text-muted">
-							Comparing long-term index scores and reported incidents.
-						</p>
-					</div>
-
-					<!-- 2-up charts -->
-					<div class="grid-gutter-fluid grid grid-cols-1 md:grid-cols-2">
-						<Card title="Water quality index" subtitle="By river, 2018–2024">
-							<div class="min-w-0">
-								<ObservablePlotInner id="river-trend" spec={trendSpec} data={trend} />
-							</div>
-						</Card>
-						<Card title="Pollution incidents" subtitle="By monitoring site, 2024">
-							<div class="min-w-0">
-								<ObservablePlotInner id="river-incidents" spec={incidentsSpec} data={incidents} />
-							</div>
-						</Card>
-					</div>
-
-					<!-- 1-up table -->
-					<Card title="Monitoring sites" subtitle="Latest sampling status">
-						<Table
-							data={sites}
-							{tableSpec}
-							allowSorting
-							dataDownloadButton={false}
-							imageDownloadButton={false}
-						/>
+					<Card title="Pollution incidents" subtitle="By monitoring site, 2024">
+						<div class="min-w-0">
+							<ObservablePlotInner id="river-incidents" spec={incidentsSpec} data={incidents} />
+						</div>
 					</Card>
 				</div>
+
+				<!-- 1-up table -->
+				<Card title="Monitoring sites" subtitle="Latest sampling status">
+					<Table
+						data={sites}
+						{tableSpec}
+						allowSorting
+						dataDownloadButton={false}
+						imageDownloadButton={false}
+					/>
+				</Card>
 			</div>
 		{/snippet}
 
@@ -216,7 +221,7 @@
 	</AppShell>
 
 	<Footer showCiuLogo>
-		<div class="typeset-product flex flex-col gap-1">
+		<div class="flex flex-col gap-1">
 			<p class="label-md">London's river health</p>
 			<p class="body-sm text-color-text-muted">
 				An example layout from the London City Data design system.
