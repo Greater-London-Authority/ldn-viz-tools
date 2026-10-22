@@ -4,30 +4,30 @@ Rules: [0017](../../../../design-system-specification/decisions/0017-layout-grid
 
 ## Two layouts
 
-| Layout | For | Container padding | Gutter class |
-| --- | --- | --- | --- |
-| Contained | Document-like pages: articles, docs, forms. Centred, with padding that grows with the viewport | `.container` | `.grid-gutter` |
-| Fluid | Dashboards and app shells. Full width, with constant padding | `.container-fluid` | `.grid-gutter-fluid` |
+| Layout | For | Container |
+| --- | --- | --- |
+| Contained | Document-like pages: articles, docs, forms. Centred, with padding that grows with the viewport | `.container` |
+| Fluid | Dashboards and app shells. Full width, with constant padding | `.container-fluid` |
 
-The grid places blocks horizontally. Vertical space between blocks is [flow](flow.md).
+The space between tiled blocks, such as cards, is the default [flow](flow.md) step of the context: put `gap-flow` on the grid. A row of cards and a stack of cards are then spaced alike, and both follow the context's density. There are no gutter classes or tokens.
 
 ## Values
 
-| Breakpoint | Contained padding | Contained gutter | Fluid padding | Fluid gutter |
-| --- | --- | --- | --- | --- |
-| `base` | 16 | 16 | 16 | 16 |
-| `sm` (640) | 32 | 20 | 16 | 16 |
-| `md` (768) | 32 | 24 | 24 | 16 |
-| `lg` (1024) | 64 | 24 | 24 | 16 |
-| `xl` (1280) | 80 | 32 | 24 | 16 |
-| `2xl` (1536) | 96 | 32 | 24 | 16 |
+| Breakpoint | Contained padding | Fluid padding |
+| --- | --- | --- |
+| `base` | 16 | 16 |
+| `sm` (640) | 32 | 16 |
+| `md` (768) | 32 | 24 |
+| `lg` (1024) | 64 | 24 |
+| `xl` (1280) | 80 | 24 |
+| `2xl` (1536) | 96 | 24 |
 
-Values in px, from `--grid-{breakpoint}-{contained|fluid}-{container-padding|gutter}`.
+Values in px, from `--grid-{breakpoint}-{contained|fluid}-container-padding`.
 
 There are no column-count tokens. Columns are set with Tailwind's grid utilities.
 
 ## Use
 
 - Put the padding on the page container, not on components.
-- Space between tiled cards or panels is a gutter class, not a `gap-{n}`. `gap-4` matches the fluid gutter but not the contained one at most breakpoints.
+- Space between tiled cards or panels is `gap-flow`, not a `gap-{n}`, so it follows the context.
 - A component's own padding comes from the [spacing scale](spacing.md), whatever grid it sits in.

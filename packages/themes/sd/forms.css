@@ -22,7 +22,9 @@
 	background-color: var(--color-surface);
 	border: 1px solid var(--color-border-muted);
 	border-radius: 0;
-	padding: var(--spacing-2) var(--spacing-3);
+	/* The border sits inside the 8px, as Figma draws strokes, so a one-line
+	   control is 40px and lines up with the default button. */
+	padding: calc(var(--spacing-2) - 1px) var(--spacing-3);
 	font-size: var(--body-md-font-size);
 	line-height: var(--body-md-line-height);
 }

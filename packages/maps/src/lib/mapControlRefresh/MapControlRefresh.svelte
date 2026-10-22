@@ -11,7 +11,7 @@
 		variant="square"
 		emphasis="secondary"
 		title="Refresh page"
-		class="pointer-events-auto shadow dark:border dark:border-color-border"
+		class="elevation-2 pointer-events-auto dark:border dark:border-color-border"
 		onclick={handle}
 	>
 		<Icon src={ArrowPath} class="h-8 w-8 p-1" />

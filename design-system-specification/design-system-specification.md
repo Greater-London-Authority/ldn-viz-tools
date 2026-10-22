@@ -321,15 +321,15 @@ Line height is defined in three steps based on a simple formula: `font-size + k`
 | `headline-sm` | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 700    |
 | `headline-md` | 28/36 | 28/36 | 30/38 | 30/38 | 30/38 | 700    |
 | `headline-lg` | 30/38 | 32/40 | 36/44 | 36/44 | 40/48 | 700    |
-| `subhead-sm`  | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
-| `subhead-md`  | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 400    |
-| `subhead-lg`  | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 400    |
+| `subhead-sm`  | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
+| `subhead-md`  | 22/30 | 22/30 | 22/30 | 24/32 | 24/32 | 400    |
+| `subhead-lg`  | 24/32 | 24/32 | 24/32 | 26/34 | 26/34 | 400    |
 | `title-sm`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
 | `title-md`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
 | `title-lg`    | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 600    |
-| `subtitle-sm` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
-| `subtitle-md` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
-| `subtitle-lg` | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
+| `subtitle-sm` | 16/24 | 16/24 | 16/24 | 16/24 | 16/24 | 400    |
+| `subtitle-md` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
+| `subtitle-lg` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
 | `body-sm`     | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 400    |
 | `body-md`     | 16/28 | 16/28 | 16/28 | 16/28 | 16/28 | 400    |
 | `body-lg`     | 18/30 | 18/30 | 18/30 | 18/30 | 18/30 | 400    |
@@ -360,15 +360,15 @@ _Font size / line height in px. Breakpoints: base <640, sm ≥640, md ≥768, lg
 | `headline-sm` | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 700    |
 | `headline-md` | 28/36 | 28/36 | 30/38 | 30/38 | 30/38 | 700    |
 | `headline-lg` | 30/38 | 32/40 | 36/44 | 36/44 | 40/48 | 700    |
-| `subhead-sm`  | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
-| `subhead-md`  | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 400    |
-| `subhead-lg`  | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 400    |
+| `subhead-sm`  | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
+| `subhead-md`  | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
+| `subhead-lg`  | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 400    |
 | `title-sm`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
 | `title-md`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
 | `title-lg`    | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 600    |
-| `subtitle-sm` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
-| `subtitle-md` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
-| `subtitle-lg` | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
+| `subtitle-sm` | 16/24 | 16/24 | 16/24 | 16/24 | 16/24 | 400    |
+| `subtitle-md` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
+| `subtitle-lg` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
 | `body-sm`     | 14/22 | 14/22 | 14/22 | 14/22 | 14/22 | 400    |
 | `body-md`     | 16/24 | 16/24 | 16/24 | 16/24 | 16/24 | 400    |
 | `body-lg`     | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
@@ -412,7 +412,7 @@ The set of aliases is defined in the `usage` style set in Figma. Adding an alias
 | `.table-subtitle`             | `.subtitle-sm` | muted colour                   |
 | `.table-col-head`             | `.label-md`    | tabular numerals               |
 | `.table-col-head-sm`          | `.label-sm`    | tabular numerals               |
-| `.table-cell`                 | `.body-sm`     | tabular numerals               |
+| `.table-body`                 | `.body-sm`     | tabular numerals               |
 | `.dashboard-main-title`       | `.headline-md` |                                |
 | `.dashboard-main-subtitle`    | `.subhead-md`  | muted colour                   |
 | `.dashboard-section-title`    | `.headline-sm` |                                |
@@ -443,6 +443,8 @@ The eyebrow is optional.
 When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
 
 A title group's title uses `title-sm` unless the design needs a larger one.
+
+The parts of a title group have no space between them. The eyebrow, title and subtitle sit directly on one another, in every typeset and flow context, and their line heights separate them.
 
 Worked examples:
 
@@ -532,9 +534,9 @@ The step each element takes in a flow context, from the build. An `mt-flow-{step
 | any element                        | a block object | `loose`   |
 | a major heading                    | any element    | `section` |
 | a minor heading                    | any element    | `loose`   |
-| a heading                          | a heading      | `tight`   |
-| a subtitle or subhead              | a heading      | `tight`   |
-| a heading                          | an eyebrow     | `tight`   |
+| a heading                          | a heading      | none      |
+| a subtitle or subhead              | a heading      | none      |
+| a heading                          | an eyebrow     | none      |
 | an eyebrow, before a major heading | any element    | `section` |
 | `figure > figcaption`              | —              | `tight`   |
 | a caption                          | a block object | `tight`   |
@@ -542,6 +544,7 @@ The step each element takes in a flow context, from the build. An `mt-flow-{step
 | `:is(ul, ol) li > :is(ul, ol)`     | —              | `tight`   |
 | `dl > dd`                          | —              | `tight`   |
 | `dl > dt`                          | —              | `default` |
+| `dl > dt:first-child`              | —              | none      |
 
 _Later rows win. A heading is a role class, a usage alias or an element alias on that role: major is display and headline (`h1`, `h2`), minor is title (`h3` to `h5`). A block object is `figure`, `img`, `table`, `pre`, `blockquote` or `.chart`._
 
@@ -549,18 +552,18 @@ _Later rows win. A heading is a role class, a usage alias or an element alias on
 
 ## Layout grid
 
-A page uses one of two layouts. `.container` is the contained layout, for document-like pages: its width steps up with the breakpoints and it is centred. `.container-fluid` is the fluid layout, for dashboards and application shells: it fills the viewport. The container's padding sets the page edge. `.grid-gutter` and `.grid-gutter-fluid` set the space between tiled blocks, such as cards, in each layout ([0017](./decisions/0017-layout-grid.md)).
+A page uses one of two layouts. `.container` is the contained layout, for document-like pages: its width steps up with the breakpoints and it is centred. `.container-fluid` is the fluid layout, for dashboards and application shells: it fills the viewport. The container's padding sets the page edge. The space between tiled blocks, such as cards, is the default flow step of the context, set with `gap-flow` on the grid, so a row of blocks and a stack of blocks are spaced alike ([0017](./decisions/0017-layout-grid.md)).
 
 <!-- GEN:grid-table START -->
 
-| Breakpoint | Contained width | Contained padding | Contained gutter | Fluid padding | Fluid gutter |
-| ---------- | --------------- | ----------------- | ---------------- | ------------- | ------------ |
-| `base`     | 100%            | 16                | 16               | 16            | 16           |
-| `sm`       | 640             | 32                | 20               | 16            | 16           |
-| `md`       | 768             | 32                | 24               | 24            | 16           |
-| `lg`       | 1024            | 64                | 24               | 24            | 16           |
-| `xl`       | 1280            | 80                | 32               | 24            | 16           |
-| `2xl`      | 1536            | 96                | 32               | 24            | 16           |
+| Breakpoint | Contained width | Contained padding | Fluid padding |
+| ---------- | --------------- | ----------------- | ------------- |
+| `base`     | 100%            | 16                | 16            |
+| `sm`       | 640             | 32                | 16            |
+| `md`       | 768             | 32                | 24            |
+| `lg`       | 1024            | 64                | 24            |
+| `xl`       | 1280            | 80                | 24            |
+| `2xl`      | 1536            | 96                | 24            |
 
 _Values in px. The fluid layout is always the full width._
 

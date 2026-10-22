@@ -244,7 +244,7 @@
 	<!-- IMPORTANT TODO: data prop and exportData prop for buttons - align usage-->
 	{#if $tooltipStore && $tooltipData}
 		<div
-			class="typeset-product chart-label absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-surface p-2 shadow"
+			class="typeset-product chart-label elevation-2 absolute z-50 max-w-[200px] -translate-x-1/2 -translate-y-full bg-color-surface p-2"
 			style:top={`${$tooltipStore.layerY + tooltipOffset}px`}
 			style:left={`${$tooltipStore.layerX}px`}
 		>

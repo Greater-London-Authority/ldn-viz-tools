@@ -13,7 +13,7 @@ layout: index
 
 <p class="typeset-longform body-lg text-color-text-muted">We build data applications that help Londoners get access to the data they need, and support policy makers to make data driven decisions to improve London for all.</p>
 
-<div class="grid sm:grid-cols-2 grid-rows-[auto] grid-gutter">
+<div class="grid sm:grid-cols-2 grid-rows-[auto] gap-flow">
 
 <ImageLink
     url="/design-system"
@@ -37,7 +37,7 @@ layout: index
 <h3 class="title-lg">Projects</h3>
 <p class="subtitle-sm">A selection of publications, dashboards and maps from the London City Data team.</p>
 
-<div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] grid-gutter">
+<div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
 
 <ImageLink
     url="https://apps.london.gov.uk/state-of-london/"

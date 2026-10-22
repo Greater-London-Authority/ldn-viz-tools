@@ -6,22 +6,23 @@ Differences between the spec, the build and the code, found while rewriting the 
 
 | Snag | Where | Notes |
 | --- | --- | --- |
-| SVG and canvas text sets sizes and weights directly | `font-size="12px"` in `packages/tables/src/lib/core/aggregateRenderers/{StackedBar,BarChart,Histogram}.svelte`; `textSize` props in `BarDivergingCell`, `BarDivergingAxis`, `PairArrowAxis`; `fontWeight` prop in `TextCell`; deck.gl `fontWeight: 600` in `packages/maps/src/lib/mapDeckLayers/clusterLayer/renderers/`; Plot `fontSize`/`fontWeight` options in `ObservablePlotInner.stories.svelte` and the treemap stories | Read the role custom properties (`--caption-sm-font-size` and so on) where the renderer accepts CSS, or resolve them once in JavaScript |
-| Role classes have no font fallback | `font-family` on every role in `system.css` is `var(--primitive-typography-font-family-default, Inter)` | The full stack is only on `body` in `reset.css` and in the preset's `font-sans`. If Inter fails to load, role text falls back to the browser default |
-| Components still space children with spacing utilities, not flow | `Card.svelte` (`gap-2`), `InputWrapper` (`space-y-1`), `CheckboxGroup` (`space-y-1`), `Toast` (`mb-1`, no flow context); card grids on `gap-4` | Removed from Flow.mdx, which presented it as done. Moving card grids to `grid-gutter` changes the layout from `sm` up and needs a visual review |
-| Some layouts have no typeset class | The main areas of the `LeggiExplorer`, `PopulationProjection` and `MenuDashboard` layout examples | `Sidebar` sets no typeset and inherits (ADR 0003, D10). Set a typeset on each example's main area |
-| `Button` `slim` grew from 14px to 22px | `packages/ui/src/lib/button/Button.svelte` | The migration removed `leading-none`. Restore `line-height: 1` on slim only (ADR 0003, D10) |
-| Figma and code disagree on large button height | Figma ver 4.0, Buttons: non-square `lg` is 48px; `Button.svelte` `lg` is `min-h-16` (64px). One `brand` `sm` variant is 28px, the rest 32px | Found in the Buttons pilot, 2026-10-20. Predates v4. Decide which is right |
-| The expanded Menu Sub Item is a separate component in Figma | Figma ver 4.0, Components - Ui, Navigation menu: `Menu Sub Item Expanded` | Figma no longer allows a variant to contain instances of its own set, so `Children=true, Expanded=true` couldn't stay in the `Menu Sub Item` set. Found on paste, 2026-10-21. The set has two variants; code may still treat expanded as a state |
-| Title components don't use the alias roles | `packages/ui/src/lib/titleGroup/`: `DashboardTitle` sets `subtitle-sm` (alias `.dashboard-main-subtitle` is `subhead-md`); `DashboardSectionTitle` sets `title-lg` + `subtitle-sm` (aliases are `headline-sm` + `subhead-sm`); `PageSectionBreak` sets `headline-lg` + `subtitle-sm` and has no size | Figma ver 4.0 follows the aliases and the spec's pairing rule (subhead with headline, subtitle with title), decided 2026-10-21. Figma `Longform/PageSectionBreak` has sizes sm/md/lg on `title-*` + `subtitle-*`. Bring the components into line |
-| Components use shadow utilities, not elevation classes | `shadow-sm`: Callout, MapPointSearch. `shadow`: the map controls, ObservablePlotInner, MultipleActionButton, ThemeSwitcher, FileUpload, MapMarkerStyledContainer. `shadow-lg`: Tooltip, Popover, Toast, GeocoderSuggestionList, LoginForm. `shadow-xl`: Modal | ADR 0011 says stepped elevation always uses `elevation-{0–6}`. Only Card does. The values are the same (`shadow-sm` = `elevation-1` … `shadow-2xl` = `elevation-6`), so the swap doesn't change how anything looks |
-| BarDivergingCell defaults to the series roles | `packages/tables/src/lib/core/renderers/BarDivergingCell.svelte`: `positiveColor` is `data.primary`, `negativeColor` is `data.secondary` | ADR 0008 uses `--color-data-positive` and `--color-data-negative` for diverging data. Figma's `Mini chart - Pos Neg Bar` follows the ADR (decided 2026-10-21). Change the defaults |
-| Heights after the type migration are calculated, not measured | Buttons, tabs, menu items, geocoder suggestions | Check in Storybook |
+
+## After the v4 release
+
+Deferred on purpose. Each has a GitHub issue.
+
+| Snag | Where | Notes |
+| --- | --- | --- |
+| ColorLegend ticks are 10px | `packages/ui/src/lib/colorLegends/ColorLegend.svelte`: the d3 axis ticks keep the generator's `font-size="10"` | Below the 12px minimum (ADR 0019). At `chart-tick-sm` (12px), ordinal scale ticks overlap. Left at 10px for the v4 release; fix the tick spacing or labelling after it |
+| Elevation levels by component aren't decided | Tooltip, Popover, Toast, GeocoderSuggestionList and MapMarkerStyledContainer at `elevation-4`; Modal at `elevation-5`; map controls, ThemeSwitcher and MultipleActionButton at `elevation-2`; Callout and MapPointSearch at `elevation-1`; Card at `elevation-1` | The levels carry over the shadows the components had. ADR 0011 sets the scale but not which component sits where. Decide a level for each kind of component |
 
 ## Figma
 
 | Snag | Where | Notes |
 | --- | --- | --- |
+| One `brand` `sm` button variant is 28px in Figma | Figma ver 4.0, Buttons: the other `sm` variants are 32px, as in code | Found in the Buttons pilot, 2026-10-20. Fix the variant in Figma |
+| The expanded Menu Sub Item is a separate component in Figma | Figma ver 4.0, Components - Ui, Navigation menu: `Menu Sub Item Expanded` | Figma no longer allows a variant to contain instances of its own set, so `Children=true, Expanded=true` couldn't stay in the `Menu Sub Item` set. Found on paste, 2026-10-21. The set has two variants; code may still treat expanded as a state |
+| The Pos Neg Bar kit has no background track | Figma ver 4.0, Components - Tables: `Mini chart - Pos Neg Bar` | `BarDivergingCell` draws a `surface.neutral` track behind the bar, and puts a long bar's label inside it in `inverse.text`. Add both to the kit, or record why Figma leaves them out |
 | Metric and Chrome are on the Typography page | Figma ver 4.0, Typography: `Metric`, `Chrome` | Both are components, not type foundations. Move them when the page structure is settled: Chrome with the chart, table and card components it wraps, Metric with the UI components. `ChromeHeader` and `ChromeFooter` were made local components on 2026-10-21, with their properties recreated |
 | Work In Progress on the Charts page still uses other libraries | Figma ver 4.0, Components - Charts, `Work In Progress` section: `Toggle` (16), `System Icons` (6); the `Community examples` frame uses `Label/*`, `Body Text Medium/Medium`, `Heading Large/Regular` and `color/text/primary` | Not in 3.1 or v4. Rebuild with system components or delete the section |
 | Chrome usage guidance is v3 | Figma ver 4.0, Typography: `Chrome` | Rewrite it. `ChromeHeader`, `ChromeFooter` and `TitleGroup` in `packages/ui/src/lib/chrome/` are used by `Card` and `ChartContainer`; no table component uses them yet. The rules belong in the spec or the docs as well as in Figma |
@@ -45,7 +46,5 @@ Differences between the spec, the build and the code, found while rewriting the 
 | Snag | Where | Notes |
 | --- | --- | --- |
 | The scope list and the sections don't match | `design-system-specification.md`, top | Scope lists Layout grid, Colour and Accessibility, which have no section. Sections include Visual Rules and Charts and Tables, which aren't in the scope list |
-| Class mappings are marked as placeholders | `rfcs/0003-…md:41`, `packages/themes/MIGRATION.md:114` | Kept until RFC 0002's design review |
-| Two caption couplings in ADR 0005 are not built | `packages/themes/sd/content.css` (`caption`), `flow` in `packages/themes/sd/system.config.js` | A table `caption` uses `padding-bottom: var(--spacing-2)` rather than the `tight` step. A caption role or `.chart-note` after a block object takes `loose` rather than `tight`. Fix with W3 T6 |
 | Figma measure variables aren't in an ADR | `semantic-typography`: `{longform,product}/measure/{text,wide}`; `packages/themes/sd/normalise.js` step 5 | Added 2026-10-21 so designers can bind a frame's max width to the measure. They are copies (38 and 56 × body-md), dropped by the normaliser and checked against `system.config.js` in `normalise.test.js`. Amend ADR 0015 |
 | `check_spec.py` can't check skill files | `scripts/check_spec.py` | The RULES.md name check was run over the skills from a scratch script that also handles Tailwind utilities, `system.css` custom properties and old names in migration tables. Could become a `--skills` option |

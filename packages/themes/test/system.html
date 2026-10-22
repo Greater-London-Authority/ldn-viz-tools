@@ -349,21 +349,16 @@
 
 		<section class="h-section" style="padding-inline: 0">
 			<h2 class="h-heading" style="padding-inline: 16px">9 · Layout grid</h2>
-			<div class="container-fluid">
-				<div class="grid-gutter" style="display: grid; grid-template-columns: repeat(4, 1fr)">
+			<div class="container-fluid flow-standard">
+				<div class="gap-flow" style="display: grid; grid-template-columns: repeat(4, 1fr)">
 					<div class="h-grid-cell">.container-fluid</div>
-					<div class="h-grid-cell">.grid-gutter</div>
-					<div class="h-grid-cell">padding and gap</div>
-					<div class="h-grid-cell">change per breakpoint</div>
+					<div class="h-grid-cell">padding changes per breakpoint</div>
+					<div class="h-grid-cell">.gap-flow</div>
+					<div class="h-grid-cell">the context's default step</div>
 				</div>
 			</div>
-			<div class="container-fluid" style="margin-top: 16px">
-				<div class="grid-gutter-fluid" style="display: grid; grid-template-columns: repeat(4, 1fr)">
-					<div class="h-grid-cell">.grid-gutter-fluid</div>
-					<div class="h-grid-cell"></div>
-					<div class="h-grid-cell"></div>
-					<div class="h-grid-cell"></div>
-				</div>
+			<div class="container" style="margin-top: 16px">
+				<div class="h-grid-cell">.container: centred, width steps up per breakpoint</div>
 			</div>
 		</section>
 

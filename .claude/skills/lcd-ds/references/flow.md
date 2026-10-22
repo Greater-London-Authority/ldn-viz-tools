@@ -31,15 +31,15 @@ A context spaces only its direct children. It sets their vertical margins to zer
 | `figure`, `img`, `table`, `pre`, `blockquote`, `.chart`, and the child after one | `loose` |
 | `h1`, `h2`, `display-*`, `headline-*`, `.dashboard-main-title`, `.dashboard-section-title` | `section` |
 | `h3` to `h5`, `title-*`, and the title aliases (`.card-title`, `.chart-title`, `.table-title`, `.header-title`, `.sidebar-title`) | `loose` |
-| A heading straight after another heading | `tight` |
-| A `subhead-*`, `subtitle-*` or subtitle alias straight after a heading | `tight` |
-| A heading straight after an `.eyebrow` | `tight` |
+| A heading straight after another heading | none |
+| A `subhead-*`, `subtitle-*` or subtitle alias straight after a heading | none |
+| A heading straight after an `.eyebrow` | none |
 | An `.eyebrow` before a headline or display | `section` |
 | A `caption-*` class or `.chart-note` straight after a block object | `tight` |
 
 Inside those children, list items, nested lists, `figcaption` in a `figure` and `dd` get `tight`. In a typeset with content styles, a table `caption` is `tight` above its table. A `dt` gets `default`, except the first.
 
-The rules match role classes and elements. A muted `body-sm` under a heading looks like a subtitle but gets `default`. Use `subtitle-*` and it gets `tight`.
+The rules match role classes and elements. A muted `body-sm` under a heading looks like a subtitle but gets `default`. Use `subtitle-*` and it sits directly under the heading, as the parts of a title group do.
 
 `.sr-only`, `[hidden]` and `template` children are skipped, and nothing is spaced from them.
 

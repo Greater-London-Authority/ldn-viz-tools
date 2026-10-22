@@ -21,6 +21,6 @@ Space inside a component, such as padding, a border or an indent, uses the spaci
 
 To decide, ask whether the children are a stack of blocks or parts of one structure. A card's contents and a form's fields are stacks, so they use flow. A table's cells and a row of buttons are structure, so they use spacing.
 
-Horizontal space is never flow. The gap between tiled cards is a grid gutter ([layout-grid.md](layout-grid.md)). The gap between a button's icon and its label is spacing.
+The gap between tiled cards is flow too: `gap-flow` on the grid ([layout-grid.md](layout-grid.md)). The gap between a button's icon and its label is spacing.
 
 There are no named spacing sets apart from flow and the grid.

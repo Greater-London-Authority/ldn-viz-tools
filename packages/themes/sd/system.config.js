@@ -176,7 +176,7 @@ export const usage = {
 	// Each matches the alias of that name and any alias it prefixes
 	// (table-col matches .table-col-head and .table-col-head-sm); an element
 	// alias is matched by its selector (p.lead).
-	tabularNumerals: ['chart-tick', 'table-cell', 'table-col'],
+	tabularNumerals: ['chart-tick', 'table-body', 'table-col'],
 	// Aliases set in the muted text colour although their role is not, matched
 	// the same way: chart axis text, and the longform lead paragraph.
 	muted: ['chart-axis-title', 'chart-tick', 'p.lead']

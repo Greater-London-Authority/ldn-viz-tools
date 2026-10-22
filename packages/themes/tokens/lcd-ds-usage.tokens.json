@@ -680,7 +680,7 @@
             "lineHeight": "{semantic-typography.product.label.sm.line-height}"
           }
         },
-        "cell": {
+        "body": {
           "$type": "typography",
           "$value": {
             "fontFamily": "{semantic-typography.product.body.sm.font-family}",

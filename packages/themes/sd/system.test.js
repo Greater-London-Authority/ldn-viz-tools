@@ -112,6 +112,11 @@ describe('readUsage', () => {
 });
 
 describe('layout', () => {
+	it('has no gutter classes: tiled blocks use gap-flow (ADR 0017)', () => {
+		expect(hasClass('grid-gutter')).toBe(false);
+		expect(hasClass('grid-gutter-fluid')).toBe(false);
+	});
+
 	it('centres .container and steps its width up to each breakpoint (ADR 0017)', () => {
 		expect(css).toMatch(
 			/\n\.container \{\n {2}box-sizing: border-box;\n {2}width: 100%;\n {2}margin-inline: auto;\n {2}padding-inline: var\(--grid-base-contained-container-padding\);/
@@ -121,6 +126,16 @@ describe('layout', () => {
 				`  .container {\n    max-width: var(--primitive-breakpoint-${bp});\n    padding-inline: var(--grid-${bp}-contained-container-padding);`
 			);
 		}
+	});
+});
+
+describe('title groups (ADR 0012)', () => {
+	it('puts no space between the parts of a title group', () => {
+		const zero = [...css.matchAll(/\n([^\n{]+) \{\n {2}margin-top: 0;\n\}/g)].map((m) => m[1]);
+		const titleGroup = zero.filter((s) => !s.includes('dt:first-child'));
+		expect(titleGroup).toHaveLength(3);
+		expect(titleGroup.some((s) => /\) \+ :is\(\.chart-subtitle/.test(s))).toBe(true);
+		expect(titleGroup.some((s) => /> :is\(\.eyebrow\) \+ /.test(s))).toBe(true);
 	});
 });
 
@@ -153,9 +168,8 @@ describe('formatSystem', () => {
 			),
 			...Object.keys(config.emphasis),
 			...config.elevation.map((n) => `elevation-${n}`),
+			'container',
 			'container-fluid',
-			'grid-gutter',
-			'grid-gutter-fluid',
 			...aliases.filter((a) => a.selector.startsWith('.')).map((a) => a.selector.slice(1))
 		];
 		expect(expected.filter((name) => !hasClass(name))).toEqual([]);
@@ -194,7 +208,7 @@ describe('formatSystem', () => {
 			'.metric-lg',
 			'.chart-tick',
 			'.chart-tick-sm',
-			'.table-cell',
+			'.table-body',
 			'.table-col-head',
 			'.table-col-head-sm'
 		]) {

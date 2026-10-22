@@ -50,9 +50,9 @@
 	};
 
 	const sizeClasses = {
-		sm: 'typeset-product border shadow-sm text-color-text px-2 pt-2 ',
-		md: 'typeset-product border-l-[5px] border shadow-sm text-color-text px-2 pt-2 ',
-		lg: 'typeset-product border-l-[5px] border shadow-sm text-color-text px-4 pt-4'
+		sm: 'typeset-product border elevation-1 text-color-text px-2 pt-2 ',
+		md: 'typeset-product border-l-[5px] border elevation-1 text-color-text px-2 pt-2 ',
+		lg: 'typeset-product border-l-[5px] border elevation-1 text-color-text px-4 pt-4'
 	};
 
 	const titleClasses = {

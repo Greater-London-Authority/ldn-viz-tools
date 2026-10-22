@@ -191,7 +191,7 @@ const renderGlyphs =
 		const makeRow = <R extends object>(row: R) => row;
 
 		const defaultColor = tokenColor('data.neutral.1');
-		const lineColor = tokenColor('geo.inverse.feature.default');
+		const lineColor = tokenColor('inverse.geo.feature.default');
 
 		const clusterLayers = Object.entries(clusterRows).map(([key, rows]) =>
 			circleClusters<DataT & AnyProps>({

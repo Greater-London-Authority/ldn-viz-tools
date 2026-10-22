@@ -3,7 +3,7 @@
 	import PageTitle from './PageTitle.svelte';
 
 	/**
-	 * `PageTitle` — the hero title of a prose page.
+	 * `PageTitle` — the hero title of a longform page.
 	 *
 	 * May have multiple [SectionBreak](./?path=/docs/ui-components-titlegroup-sectionbreak-documentation)
 	 * headings beneath it.
@@ -13,7 +13,7 @@
 	 */
 
 	const { Story } = defineMeta({
-		title: 'Ui/Components - Layout And Themes/TitleGroup/Prose/PageTitle',
+		title: 'Ui/Components - Layout And Themes/TitleGroup/Longform/PageTitle',
 		component: PageTitle,
 		tags: ['autodocs'],
 		args: {

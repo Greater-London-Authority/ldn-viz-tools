@@ -4,12 +4,12 @@ import { page } from 'vitest/browser';
 import PageSectionBreak from './PageSectionBreak.svelte';
 
 describe('PageSectionBreak', () => {
-	it('renders the title as an h2 with the headline-lg role', async () => {
+	it('renders the title as an h2 with the title-lg role by default', async () => {
 		const { container } = render(PageSectionBreak, { title: 'Population' });
 
 		const heading = page.getByRole('heading', { level: 2 });
 		await expect.element(heading).toHaveTextContent('Population');
-		expect(container.querySelector('h2')).toHaveClass('headline-lg');
+		expect(container.querySelector('h2')).toHaveClass('title-lg');
 	});
 
 	it('does not render an eyebrow or subtitle by default', async () => {
@@ -39,5 +39,15 @@ describe('PageSectionBreak', () => {
 		const { container } = render(PageSectionBreak, { title: 'Population', class: 'my-class' });
 
 		expect(container.querySelector('div')).toHaveClass('my-class');
+	});
+
+	it('sets the title and subtitle roles from size', async () => {
+		const { container } = render(PageSectionBreak, {
+			title: 'Population',
+			subtitle: 'Growth',
+			size: 'sm'
+		});
+		expect(container.querySelector('h2')).toHaveClass('title-sm');
+		expect(container.querySelector('p')).toHaveClass('subtitle-sm');
 	});
 });

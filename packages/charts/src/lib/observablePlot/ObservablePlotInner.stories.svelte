@@ -328,7 +328,6 @@
 						x: 'date',
 						y: 'value',
 						text: 'label',
-						fontSize: 11,
 						fontWeight: 'bold'
 					},
 
@@ -378,7 +377,6 @@
 					y: 'y',
 					text: 'label',
 					dy: +10,
-					fontSize: 12,
 					fontWeight: 'bold'
 				}
 			),

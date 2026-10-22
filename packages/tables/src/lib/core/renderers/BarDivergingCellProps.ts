@@ -10,20 +10,20 @@ export interface BarDivergingCellProps {
 	 */
 	formatString?: string;
 	/**
-	 * Text size of labels (in pixels).
+	 * Text size of labels, in pixels. Unset, the labels use the `table-body` usage alias.
 	 */
 	textSize?: number;
 	/**
-	 * Color to be applied to bars corresponding to positive values.
+	 * Color to be applied to bars corresponding to positive values. Defaults to the `data.positive` token.
 	 */
 	positiveColor?: string | ((value: number) => string);
 	/**
-	 * Color to be applied to bars corresponding to negative values.
+	 * Color to be applied to bars corresponding to negative values. Defaults to the `data.negative` token.
 	 */
 	negativeColor?: string | ((value: number) => string);
 
 	/**
-	 * Color to be applied to the background 'track'.
+	 * Color to be applied to the background 'track'. Defaults to the `surface.neutral` token.
 	 */
 	backgroundColor?: string;
 

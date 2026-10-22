@@ -95,8 +95,8 @@ def gen_flow_table(styles_dir):
 GRID_BREAKPOINTS = ["base", "sm", "md", "lg", "xl", "2xl"]
 
 def gen_grid_table(styles_dir):
-    """Container padding and gutter for each layout, and the contained width,
-    in px at each breakpoint."""
+    """Container padding for each layout, and the contained width, in px at
+    each breakpoint."""
     tokens = load_tokens(styles_dir)
     def value(name):
         if name not in tokens:
@@ -106,11 +106,9 @@ def gen_grid_table(styles_dir):
     for bp in GRID_BREAKPOINTS:
         width = "100%" if bp == "base" else value(f"--primitive-breakpoint-{bp}")
         rows.append([f"`{bp}`", width,
-                     *(value(f"--grid-{bp}-{layout}-{part}")
-                       for layout in ("contained", "fluid")
-                       for part in ("container-padding", "gutter"))])
-    return (table(["Breakpoint", "Contained width", "Contained padding", "Contained gutter",
-                   "Fluid padding", "Fluid gutter"], rows)
+                     *(value(f"--grid-{bp}-{layout}-container-padding")
+                       for layout in ("contained", "fluid"))])
+    return (table(["Breakpoint", "Contained width", "Contained padding", "Fluid padding"], rows)
             + "\n\n_Values in px. The fluid layout is always the full width._")
 
 # What a selector list in the Flow rules section stands for, named by the
@@ -144,14 +142,16 @@ def gen_flow_map(styles_dir):
         sys.exit("ERROR: no 'Flow rules' section in system.css")
     rows = []
     for selector, decls, _m in parse_rules(css):
-        step = re.fullmatch(r"var\(--flow-(\w+)\)", decls.get("margin-top", ""))
-        if not step:
+        margin = decls.get("margin-top", "")
+        step = re.fullmatch(r"var\(--flow-(\w+)\)", margin)
+        if not step and margin != "0":
             continue
+        shown = f"`{step.group(1)}`" if step else "none"
         inner = selector.split(" > ", 1)[1]
         # Rules inside a list, description list or figure space its items,
         # not flow siblings; show their selector as it is.
         if re.search(r"(^|[\s>])(li|dd|dt|figcaption)\b", inner):
-            rows.append([f"`{inner}`", "—", f"`{step.group(1)}`"])
+            rows.append([f"`{inner}`", "—", shown])
             continue
         before_next = re.search(r":has\(\+ (.*)\)$", inner)
         if before_next:
@@ -160,7 +160,7 @@ def gen_flow_map(styles_dir):
         element, after = flow_group(parts[1]), flow_group(parts[0])
         if before_next:
             element += f", before {flow_group(before_next.group(1))}"
-        rows.append([element, after, f"`{step.group(1)}`"])
+        rows.append([element, after, shown])
     return (table(["Element", "After", "Step"], rows)
             + "\n\n_Later rows win. A heading is a role class, a usage alias or an element alias "
               "on that role: major is display and headline (`h1`, `h2`), minor is title "

@@ -65,9 +65,9 @@ The rules are the Flow rules section of `system.css`, generated from `flowRoles`
 | `figure`, `img`, `table`, `pre`, `blockquote`, `.chart`, and the child after one                              | `loose`       |
 | `h1`, `h2`, `display-*`, `headline-*`, `.dashboard-main-title`, `.dashboard-section-title`                    | `section`     |
 | `h3`, `h4`, `h5`, `title-*`, `.card-title`, `.chart-title`, `.table-title`, `.header-title`, `.sidebar-title` | `loose`       |
-| A heading straight after another heading                                                                      | `tight`       |
-| `subhead-*`, `subtitle-*` or a subtitle alias straight after a heading                                        | `tight`       |
-| A heading straight after an `.eyebrow`                                                                        | `tight`       |
+| A heading straight after another heading                                                                      | none          |
+| `subhead-*`, `subtitle-*` or a subtitle alias straight after a heading                                        | none          |
+| A heading straight after an `.eyebrow`                                                                        | none          |
 | An `.eyebrow` straight before `h1`, `h2`, `display-*`, `headline-*` or a dashboard title                      | `section`     |
 | `figcaption` in a `figure`                                                                                    | `tight`       |
 | `li + li`, and a list nested inside an `li`                                                                   | `tight`       |
@@ -83,7 +83,7 @@ For debugging: the rules use `:is()` on the context class, so they win over elem
 Most rules match the role class as well as the element, so choosing the right typography role also gives the right space.
 
 ```html
-<!-- A heading and its subtitle: tight -->
+<!-- A heading and its subtitle: no space -->
 <h2 class="title-lg">Rough sleeping</h2>
 <p class="subtitle-sm">Quarterly</p>
 
@@ -123,7 +123,7 @@ There are no utilities with a context in the name, such as `mt-flow-standard-sec
 | Gap                              | Set by                                 |
 | -------------------------------- | -------------------------------------- |
 | Vertical, between stacked blocks | A flow step                            |
-| Horizontal, between tiled items  | `grid-gutter` or `grid-gutter-fluid`   |
+| Horizontal, between tiled items  | `gap-flow`, the context's default step |
 | Inside a component               | Spacing: `p-{n}`, `mt-{n}` and similar |
 
 If a container's children are a stack of blocks, use flow. If they are parts of one structure, such as a table's cells or a button's icon and label, use spacing. A card's contents and a form's fields are stacks. A table's cells are not.

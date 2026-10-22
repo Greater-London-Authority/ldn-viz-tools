@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * `PageTitle` — the hero title of a prose page.
+	 * `PageTitle` — the hero title of a longform page.
 	 *
 	 * May have multiple [SectionBreak](./?path=/docs/ui-components-titlegroup-sectionbreak-documentation)
 	 * headings beneath it.
@@ -30,12 +30,12 @@
 
 <div class={classNames('typeset-longform', classes)}>
 	{#if eyebrow}
-		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
+		<p class="eyebrow">{eyebrow}</p>
 	{/if}
 	{#if title}
-		<h1 class={`${hero}-lg text-color-text`}>{title}</h1>
+		<h1 class={`${hero}-lg`}>{title}</h1>
 	{/if}
 	{#if subhead}
-		<p class="subhead-lg text-color-text-muted">{subhead}</p>
+		<p class="subhead-lg">{subhead}</p>
 	{/if}
 </div>

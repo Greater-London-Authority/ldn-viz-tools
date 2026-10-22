@@ -60,13 +60,11 @@
 
 <AppShell sidebarPlacement={{ initial: 'left' }}>
 	{#snippet main()}
-		<div class="h-full bg-color-canvas-muted p-6">
-			<div class="mb-4">
-				<h1 class="dashboard-main-title">This is the main content area</h1>
-				<h2 class="dashboard-main-subtitle">
-					Maecenas ut libero vel nibh maximus feugiat non sed tortor.
-				</h2>
-			</div>
+		<div class="container-fluid flow-standard h-full bg-color-canvas-muted pb-6 pt-2">
+			<h1 class="dashboard-main-title">This is the main content area</h1>
+			<p class="dashboard-main-subtitle">
+				Maecenas ut libero vel nibh maximus feugiat non sed tortor.
+			</p>
 		</div>
 	{/snippet}
 

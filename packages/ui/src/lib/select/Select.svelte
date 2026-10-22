@@ -189,16 +189,23 @@
 		/* See: https://svelecte.vercel.app/theme */
 		.form-select.svelecte {
 			/** Custom css variables **/
-			--sv-min-height: 40px;
+			/* 38px inside the 1px border: 40px in all, as an input and the default button */
+			--sv-min-height: 38px;
 			--sv-bg: var(--color-surface);
 			--sv-color: var(--color-text);
 			--sv-disabled-bg: var(--color-interactive-disabled-muted);
 			--sv-border: var(--color-border-muted) 0px solid;
 			--sv-border-radius: 0px;
 			--sv-general-padding: var(--spacing-2) var(--spacing-3);
+			/* The gap between selected items. Svelecte also pads the selection with it,
+			   which the rule below overrides. */
+			--sv-selection-gap: var(--spacing-1);
+			/* The selected value starts where the options' text does */
+			--sv-selection-wrap-padding: 0;
 			--sv-control-bg: var(--sv-bg);
 
-			--sv-item-wrap-padding: var(--spacing-3) var(--spacing-2);
+			/* Options use the control's padding: 8px + 24px + 8px = 40px */
+			--sv-item-wrap-padding: var(--spacing-2) var(--spacing-3);
 			--sv-item-selected-bg: var(--color-interactive-primary-muted);
 			--sv-item-btn-color: #000;
 			--sv-item-btn-color-hover: #777;
@@ -232,6 +239,19 @@
 		/* Reset allows use of form-select class elsehwere if needed */
 		.form-select.svelecte {
 			padding: 0;
+		}
+
+		/* The dropdown is placed inside the control's border; move it out by the
+		   border's width so its edges, and its options' text, line up with the
+		   control's */
+		.form-select.svelecte .sv_dropdown {
+			left: -1px;
+			width: calc(100% + 2px);
+		}
+
+		/* The selection has the input's padding: the border sits inside the 8px */
+		.form-select.svelecte .sv-control--selection {
+			padding: calc(var(--spacing-2) - 1px) var(--spacing-3);
 		}
 
 		/* Override svelecte */
@@ -272,8 +292,12 @@
 			border: var(--color-border-muted) 1px solid;
 		}
 
+		/* Selected items in a multi-select are body-sm, so an item and its
+		   border fit the 24px line and the control stays 40px */
 		.form-select.svelecte .sv-item--wrap.is-multi {
 			background-color: var(--color-surface);
+			font-size: var(--body-sm-font-size);
+			line-height: var(--body-sm-line-height);
 		}
 
 		/* States */

@@ -103,7 +103,7 @@
 </script>
 
 <div
-	class="typeset-product pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-surface-muted p-4 shadow"
+	class="typeset-product elevation-2 pointer-events-auto flex w-[320px] flex-col gap-2 bg-color-surface-muted p-4"
 >
 	<p class="form-label">Upload</p>
 

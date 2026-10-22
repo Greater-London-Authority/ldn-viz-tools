@@ -60,7 +60,7 @@ We needed a system that sets type by what text does and the context in which it 
 
 - **Longform and formatted product typesets also define flow. Plain product does not.** `typeset-product--formatted` adds the `flow-standard` context and styles unclassed HTML elements. `typeset-product` sets no flow. Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
 
-- **Line height comes from the role.** There are no line-height utilities. A control whose height must not change keeps its role's line height and reduces its padding. The `slim` button has no padding to reduce, so it sets `line-height: 1` to line up with the text beside it.
+- **Line height comes from the role.** There are no line-height utilities. A control whose height must not change keeps its role's line height and reduces its padding. This holds for every control, including the `slim` button, which has no padding: its label keeps the role's line height.
 
 - **Type changes at five breakpoints:** `base`, `sm`, `md`, `lg` and `xl`. There are no `2xl` typography tokens, so type at `2xl` is the same as at `xl`.
 

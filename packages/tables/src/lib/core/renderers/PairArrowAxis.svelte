@@ -8,7 +8,7 @@
 	import { format } from 'd3-format';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
 
-	const height = 20;
+	const height = 24; // room for a 12px tick label above the ticks
 
 	const barEndPadding = 15;
 
@@ -17,7 +17,7 @@
 		extent = [0, 1],
 		width = 100,
 		numTicks = 4,
-		textSize = 8,
+		textSize,
 		..._rest
 	}: PairArrowAxisProps = $props();
 
@@ -45,7 +45,8 @@
 				x={x(tick)}
 				y="-12"
 				fill="currentColor"
-				font-size={`${textSize}px`}
+				class="chart-tick-sm"
+				style:font-size={textSize ? `${textSize}px` : undefined}
 				text-anchor="middle"
 			>
 				{f(tick)}

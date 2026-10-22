@@ -242,7 +242,8 @@
 				.call((g: any) => g.select('.domain').remove());
 
 			// clear the `font-family="sans-serif"` attribute applied by the axis generator,
-			// so the font-family used on the rest of the page (Inter) is used
+			// so the font-family used on the rest of the page (Inter) is used. The
+			// generator's 10px size stays: at 12px, ordinal ticks overlap (SNAGS).
 			select(ticksRef).attr('font-family', null);
 		}
 	};
@@ -315,19 +316,18 @@
 	<text
 		x={marginLeft}
 		y={marginTop - 6}
-		font-size="10px"
+		class="caption-sm text-strong"
 		text-anchor="start"
-		font-weight="bold"
 		fill="currentColor">{title}</text
 	>
 
 	<g id="ticks" bind:this={ticksRef} transform={`translate(0,${height - marginBottom})`} />
 
-	<text x={0} y={height + 5} text-anchor="start" font-size="10px" fill="currentColor">
+	<text x={0} y={height + 5} text-anchor="start" class="chart-tick-sm" fill="currentColor">
 		{leftLabel}
 	</text>
 
-	<text x={width} y={height + 5} text-anchor="end" font-size="10px" fill="currentColor">
+	<text x={width} y={height + 5} text-anchor="end" class="chart-tick-sm" fill="currentColor">
 		{rightLabel}
 	</text>
 

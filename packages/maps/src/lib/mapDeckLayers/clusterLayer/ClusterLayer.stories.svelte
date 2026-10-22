@@ -167,7 +167,7 @@
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: circleClusters({
 				getFillColor: theme.colorTokenNameToRGBArray('data.secondary') as [number, number, number],
-				getLineColor: [...theme.colorTokenNameToRGBArray('geo.inverse.feature.default'), 180] as [
+				getLineColor: [...theme.colorTokenNameToRGBArray('inverse.geo.feature.default'), 180] as [
 					number,
 					number,
 					number,

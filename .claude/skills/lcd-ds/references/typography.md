@@ -102,7 +102,7 @@ Each alias applies a role, sometimes with tabular numerals or the muted colour. 
 | Place | Aliases |
 | --- | --- |
 | Charts | `.chart-title`, `.chart-subtitle`, `.chart-axis-title`, `.chart-label`, `.chart-tick`, `.chart-tick-sm`, `.chart-note` |
-| Tables | `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm`, `.table-cell` |
+| Tables | `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm`, `.table-body` |
 | Dashboards | `.dashboard-main-title`, `.dashboard-main-subtitle`, `.dashboard-section-title`, `.dashboard-section-subtitle` |
 | Interface | `.header-title`, `.sidebar-title`, `.dialog-title`, `.card-title`, `.card-subtitle`, `.hint-text`, `.input-label`, `.placeholder`, `.field-value`, `.button-label`, `.button-label-sm` |
 
@@ -115,5 +115,7 @@ A title group is an optional eyebrow, a title and a subtitle, at the top of a ca
 A group on its own can have all three parts. When a component contains two or more title groups, the designer makes one dominant. The dominant group has a title and an optional subtitle, and no eyebrow. Each other group becomes an eyebrow, using the text that would have been its title.
 
 For example, a card holding one chart, where the chart is the subject: the chart has the title and subtitle, and the card's title becomes an eyebrow.
+
+The parts have no space between them, in either typeset. Their line heights separate them.
 
 In `@ldn-viz/ui`, `TitleGroup` in `packages/ui/src/lib/chrome/` renders a group with `eyebrow`, `title-sm` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it through `ChromeHeader`.

@@ -60,7 +60,7 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Portal>
 		<DropdownMenu.Content
-			class="typeset-product z-40 border border-color-border-muted bg-color-surface capitalize shadow "
+			class="typeset-product elevation-2 z-40 border border-color-border-muted bg-color-surface capitalize "
 			preventScroll={false}
 			aria-label="Select current theme mode"
 		>

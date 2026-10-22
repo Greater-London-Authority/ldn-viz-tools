@@ -52,7 +52,7 @@ If using typescript you can import the `MapControlGroupPositions`enum.
 				{#each Object.keys(MapControlGroupPositions) as position (position)}
 					<MapControlGroup {position}>
 						<p
-							class="border border-color-border-muted bg-color-surface p-2 text-color-text shadow"
+							class="elevation-2 border border-color-border-muted bg-color-surface p-2 text-color-text"
 						>
 							{position}
 						</p>
@@ -117,7 +117,7 @@ On small devices most controls will hide themselves.
 
 				<MapControlGroup position="TopRight">
 					<p
-						class="pointer-events-auto border border-color-border-muted bg-color-surface p-2 text-center text-color-text shadow"
+						class="elevation-2 pointer-events-auto border border-color-border-muted bg-color-surface p-2 text-center text-color-text"
 					>
 						Bespoke controls<br />E.g. Drawing
 					</p>
@@ -146,7 +146,7 @@ bordered container are added.
 			>
 				<MapControlGroup
 					position="TopLeft"
-					classes="space-y-6 rounded border border-color-border-muted bg-color-surface p-3"
+					classes="space-y-6 rounded-full border border-color-border-muted bg-color-surface p-3"
 				>
 					<MapControlPan />
 				</MapControlGroup>

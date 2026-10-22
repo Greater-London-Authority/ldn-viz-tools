@@ -31,7 +31,7 @@
 	};
 
 	let classes = $state(
-		`shadow-lg border border-color-border-muted absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-surface overflow-y-auto`
+		`elevation-4 border border-color-border-muted absolute w-max bottom-[calc(1rem-1px)] left-1/2 transform -translate-x-1/2 bg-color-surface overflow-y-auto`
 	);
 	classes += ' ' + (rest.class || '');
 	delete rest.class;

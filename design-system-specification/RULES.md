@@ -77,7 +77,7 @@
 
 - **Longform and formatted product typesets also define flow. Plain product does not.** `typeset-product--formatted` adds the `flow-standard` context and styles unclassed HTML elements. `typeset-product` sets no flow. Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./decisions/0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
 
-- **Line height comes from the role.** There are no line-height utilities. A control whose height must not change keeps its role's line height and reduces its padding. The `slim` button has no padding to reduce, so it sets `line-height: 1` to line up with the text beside it.
+- **Line height comes from the role.** There are no line-height utilities. A control whose height must not change keeps its role's line height and reduces its padding. This holds for every control, including the `slim` button, which has no padding: its label keeps the role's line height.
 - **Type changes at five breakpoints:** `base`, `sm`, `md`, `lg` and `xl`. There are no `2xl` typography tokens, so type at `2xl` is the same as at `xl`.
 
 - **Line heights in three ratios.** Line height is defined in three ratios based on a simple formula: `font-size + k`, where font-size and k are measured in px.
@@ -104,7 +104,8 @@
 - **The context defines the value of the step.** There are four steps: `tight`, `default`, `loose` and `section`.
 - **Choose the context by the space available.** `flow-compact` is for surfaces too small to show four distinct gaps, such as control panels, map overlays, tooltips and dense sidebars. Other product surfaces use `flow-standard`, and reading content uses `flow-spacious` through `typeset-longform`.
 - **Flow assigns steps from the markup in every flow context.** Any child takes `default`. A block object (`figure`, `img`, `table`, `pre`, `blockquote`, `.chart`) and the child after it take `loose`. Major headings (`h1`, `h2`, `display-*`, `headline-*`) take `section`, and minor headings (`h3` to `h5`, `title-*`) take `loose`. Headings below `h5` are discouraged and have no rule. The spec has the full table.
-- **Parts that belong together are coupled at the `tight` step:** the parts of a title group ([0012](./decisions/0012-title-groupings.md)), and a caption with what it captions (`figcaption`, a table `caption`, and a caption role or `.chart-note` after a block object). An eyebrow before a major heading takes `section`.
+- **The parts of a title group take no step** ([0012](./decisions/0012-title-groupings.md)). An eyebrow before a major heading takes `section`.
+- **A caption is coupled to what it captions at the `tight` step:** `figcaption`, a table `caption`, and a caption role or `.chart-note` after a block object.
 - **There is no separate hero spacing.** The space above display type is the `section` step, or comes from the layout.
 - **Authors override a step with a utility.** `mt-flow-{step}` sets the space above one element. `gap-flow-{step}` sets the gap between the children of a flex or grid container that is not a flow context.
 - **Flow spaces only the direct children of its context.** Outer flow spaces a component's root and goes no further, so no class is needed to seal a component. A component declares its own context only to set the density of its own children.
@@ -166,6 +167,7 @@ _The following decisions relate to Figma_
 
 - **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
 - **Titles default to `title-sm`.** A title group's title uses `title-sm` unless the design needs a larger one.
+- **The parts of a title group have no space between them.** The eyebrow, title and subtitle sit directly on one another, in every typeset and flow context, and their line heights separate them. Flow gives no step between them ([0005](./decisions/0005-flow.md)).
 
 Worked examples:
 

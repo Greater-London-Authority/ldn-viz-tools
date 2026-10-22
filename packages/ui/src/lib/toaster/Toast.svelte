@@ -30,7 +30,7 @@
 <div
 	role="alert"
 	id={message.id}
-	class="typeset-product text-color-text shadow-lg"
+	class="typeset-product elevation-4 text-color-text"
 	out:fade={{ duration: 100 }}
 >
 	<div class="border p-2 pb-4 pl-4 pr-2 {classes}">
