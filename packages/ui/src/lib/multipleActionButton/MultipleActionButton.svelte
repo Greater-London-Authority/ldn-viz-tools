@@ -102,7 +102,7 @@
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Portal>
 				<DropdownMenu.Content
-					class="typeset-product z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1 shadow"
+					class="typeset-product elevation-2 z-[60] flex max-w-sm flex-col border border-color-border-muted bg-color-surface p-1"
 					preventScroll={false}
 				>
 					<DropdownMenu.Group>

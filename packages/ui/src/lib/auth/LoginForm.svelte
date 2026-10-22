@@ -21,8 +21,8 @@
 </script>
 
 <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
-	<div class="mx-2 max-w-md bg-white shadow-lg lg:w-[470px]">
-		<div class="dark typeset-product relative bg-color-surface-muted p-4 text-color-text">
+	<div class="elevation-4 mx-2 max-w-md bg-color-surface lg:w-[470px]">
+		<div class="typeset-product dark relative bg-color-surface-muted p-4 text-color-text">
 			<p class="label-md">{config.app_name}: Log In</p>
 		</div>
 

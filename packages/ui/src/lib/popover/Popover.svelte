@@ -51,7 +51,7 @@
 	{@render popoverTrigger()}
 
 	<Popover.Content
-		class="typeset-product body-sm z-50 w-60 border border-color-border-muted bg-color-surface p-2 shadow-lg"
+		class="typeset-product body-sm elevation-4 z-50 w-60 border border-color-border-muted bg-color-surface p-2"
 	>
 		{#if title}
 			<p class="label-sm">

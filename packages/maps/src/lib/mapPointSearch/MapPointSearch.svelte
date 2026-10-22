@@ -380,7 +380,7 @@
 	</Button>
 {:else}
 	<div
-		class="flow-standard typeset-product pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-surface p-2 shadow-sm"
+		class="flow-standard typeset-product elevation-1 pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-surface p-2"
 	>
 		<div class="flex items-center justify-between">
 			<p class="eyebrow">

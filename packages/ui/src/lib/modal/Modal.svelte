@@ -89,7 +89,7 @@
 
 	const modalClass = $derived(
 		classNames(
-			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-surface shadow-xl pointer-events-auto',
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-surface elevation-5 pointer-events-auto',
 			widthClasses[width]
 		)
 	);

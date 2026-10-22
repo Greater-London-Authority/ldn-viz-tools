@@ -9,4 +9,5 @@
 - CHANGED: `Button` `lg` (not square) is 48px tall, down from 64px. The positive, negative and caution variants use `text-color-inverse-text`.
 - CHANGED: `Select`, `Input` and the other form controls are 40px tall, to line up with the default `Button`. `Select` options are 40px, with the control's padding.
 - CHANGED: `ColorLegend`'s title is `caption-sm` semi-bold and its end labels `chart-tick-sm`.
+- CHANGED: raised components (`Callout`, `Modal`, `Popover`, `Tooltip`, `Toast` and others) use the `elevation-*` classes instead of Tailwind's `shadow-*`, at the same shadows. `LoginForm` uses `bg-color-surface` instead of `bg-white`.
 - FIXED: `AppShell`'s main area can shrink below the width of its widest content.
