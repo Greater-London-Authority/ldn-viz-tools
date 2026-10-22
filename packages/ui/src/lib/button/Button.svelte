@@ -155,7 +155,7 @@
 		lg:
 			variant === 'square'
 				? 'w-16 h-16 button-label-sm flex-col'
-				: 'button-label px-4 py-2 min-w-16 min-h-16'
+				: 'button-label px-4 py-2 min-w-12 min-h-12'
 	});
 
 	const buttonClass = $derived(

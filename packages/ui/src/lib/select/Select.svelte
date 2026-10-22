@@ -189,7 +189,8 @@
 		/* See: https://svelecte.vercel.app/theme */
 		.form-select.svelecte {
 			/** Custom css variables **/
-			--sv-min-height: 40px;
+			/* 38px inside the 1px border: 40px in all, as an input and the default button */
+			--sv-min-height: 38px;
 			--sv-bg: var(--color-surface);
 			--sv-color: var(--color-text);
 			--sv-disabled-bg: var(--color-interactive-disabled-muted);
