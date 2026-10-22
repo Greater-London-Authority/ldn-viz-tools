@@ -6,15 +6,22 @@ Differences between the spec, the build and the code, found while rewriting the 
 
 | Snag | Where | Notes |
 | --- | --- | --- |
+
+## After the v4 release
+
+Deferred on purpose. Each has a GitHub issue.
+
+| Snag | Where | Notes |
+| --- | --- | --- |
 | ColorLegend ticks are 10px | `packages/ui/src/lib/colorLegends/ColorLegend.svelte`: the d3 axis ticks keep the generator's `font-size="10"` | Below the 12px minimum (ADR 0019). At `chart-tick-sm` (12px), ordinal scale ticks overlap. Left at 10px for the v4 release; fix the tick spacing or labelling after it |
-| One `brand` `sm` button variant is 28px in Figma | Figma ver 4.0, Buttons: the other `sm` variants are 32px, as in code | Found in the Buttons pilot, 2026-10-20. Fix the variant in Figma |
-| The expanded Menu Sub Item is a separate component in Figma | Figma ver 4.0, Components - Ui, Navigation menu: `Menu Sub Item Expanded` | Figma no longer allows a variant to contain instances of its own set, so `Children=true, Expanded=true` couldn't stay in the `Menu Sub Item` set. Found on paste, 2026-10-21. The set has two variants; code may still treat expanded as a state |
 | Elevation levels by component aren't decided | Tooltip, Popover, Toast, GeocoderSuggestionList and MapMarkerStyledContainer at `elevation-4`; Modal at `elevation-5`; map controls, ThemeSwitcher and MultipleActionButton at `elevation-2`; Callout and MapPointSearch at `elevation-1`; Card at `elevation-1` | The levels carry over the shadows the components had. ADR 0011 sets the scale but not which component sits where. Decide a level for each kind of component |
 
 ## Figma
 
 | Snag | Where | Notes |
 | --- | --- | --- |
+| One `brand` `sm` button variant is 28px in Figma | Figma ver 4.0, Buttons: the other `sm` variants are 32px, as in code | Found in the Buttons pilot, 2026-10-20. Fix the variant in Figma |
+| The expanded Menu Sub Item is a separate component in Figma | Figma ver 4.0, Components - Ui, Navigation menu: `Menu Sub Item Expanded` | Figma no longer allows a variant to contain instances of its own set, so `Children=true, Expanded=true` couldn't stay in the `Menu Sub Item` set. Found on paste, 2026-10-21. The set has two variants; code may still treat expanded as a state |
 | The Pos Neg Bar kit has no background track | Figma ver 4.0, Components - Tables: `Mini chart - Pos Neg Bar` | `BarDivergingCell` draws a `surface.neutral` track behind the bar, and puts a long bar's label inside it in `inverse.text`. Add both to the kit, or record why Figma leaves them out |
 | Metric and Chrome are on the Typography page | Figma ver 4.0, Typography: `Metric`, `Chrome` | Both are components, not type foundations. Move them when the page structure is settled: Chrome with the chart, table and card components it wraps, Metric with the UI components. `ChromeHeader` and `ChromeFooter` were made local components on 2026-10-21, with their properties recreated |
 | Work In Progress on the Charts page still uses other libraries | Figma ver 4.0, Components - Charts, `Work In Progress` section: `Toggle` (16), `System Icons` (6); the `Community examples` frame uses `Label/*`, `Body Text Medium/Medium`, `Heading Large/Regular` and `color/text/primary` | Not in 3.1 or v4. Rebuild with system components or delete the section |
