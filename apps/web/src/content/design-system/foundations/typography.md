@@ -105,7 +105,7 @@ When a component contains two or more title groups, one is made dominant. The do
 | ---------- | ------------- | ---- | ------ | ------------------------------------------------------------------- |
 | Dominant   | `title-sm`    | 20px | 600    | The group is the subject of its container                           |
 | Demoted    | `eyebrow`     | 14px | 500    | Another group is dominant, for example a chart inside a titled card |
-| Supporting | `subtitle-sm` | 18px | 400    | A supporting line under a dominant title                            |
+| Supporting | `subtitle-sm` | 16px | 400    | A supporting line under a dominant title                            |
 
 Two examples:
 
