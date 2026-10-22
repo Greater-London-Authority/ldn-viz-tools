@@ -46,7 +46,9 @@ Only live decisions sit in `decisions/`. Superseded, retired and declined record
 
 ADR numbers are sequential, four digits, and never reused. A date-based scheme is avoided because two decisions on the same day would collide, and because the date is already in the front matter.
 
-An RFC is used only for a programme of work that will produce several ADRs, such as version 4. A single decision goes straight to a `proposed` ADR. When an RFC is accepted, the ADRs it lists carry the decisions and the RFC itself is not updated again.
+An RFC is used only for a programme of work that will produce several ADRs, such as version 4. A single decision goes straight to a `proposed` ADR.
+
+An RFC has one of three statuses. It is `open` while reviewers comment on it. It becomes `accepted` when they sign it off, or `rejected` if the work does not go ahead. An accepted RFC sets the scope of the work. The ADRs record each decision as it is made, and the scope can change once the work starts. When the work is done, the RFC's outcome, open questions and list of decisions are brought up to date, and it is not changed after that.
 
 ## Statuses
 
@@ -113,7 +115,7 @@ title: A declared context seals its subtree
 status: accepted # proposed | accepted | declined | superseded | retired
 date: 2026-08-19 # date accepted (or proposed, while proposed)
 released-in: null # package version once sealed, e.g. 4.0.0
-deciders: [] # [unknown — to be agreed in RFC 0001]
+deciders: [] # who has signed this off
 areas: [typography, flow] # foundations the rule governs
 breaking: true # requires consumer migration
 supersedes: []
@@ -143,7 +145,7 @@ The sealed-body check compares against the file as it was at the tag named in `r
 
 These points need agreeing before this document is accepted. The proposals are starting points.
 
-- **Who can accept an ADR.** Proposed: one maintainer review for non-breaking ADRs; for `breaking: true`, one design and one engineering maintainer. Names: [unknown — to be agreed].
+- **Who can accept an ADR.** Proposed: one maintainer review for non-breaking ADRs; for `breaking: true`, one design and one engineering maintainer. The maintainers are Chris Knight and James Scott-Brown.
 - **Where discussion happens.** Proposed: on the pull request that adds the `proposed` ADR. Once merged, the status becomes `accepted`.
 - **Who can seal.** Sealing happens during the release, set by whoever cuts the release, as a step in the release checklist.
 - **Declined proposals.** Proposed: always recorded, so the same idea is not proposed again without new information. They are written short, go straight to the archive, and state the conditions under which the idea could be revisited.

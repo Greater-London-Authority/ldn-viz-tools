@@ -332,7 +332,7 @@ Line height is defined in three steps based on a simple formula: `font-size + k`
 | `subtitle-lg` | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
 | `body-sm`     | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 400    |
 | `body-md`     | 16/28 | 16/28 | 16/28 | 16/28 | 16/28 | 400    |
-| `body-lg`     | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
+| `body-lg`     | 18/30 | 18/30 | 18/30 | 18/30 | 18/30 | 400    |
 | `label-sm`    | 12/20 | 12/20 | 12/20 | 12/20 | 12/20 | 500    |
 | `label-md`    | 14/22 | 14/22 | 14/22 | 14/22 | 14/22 | 500    |
 | `label-lg`    | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 500    |
@@ -440,7 +440,9 @@ Components can contain other titled components. A card might hold a single chart
 When a component contains only one title group, that group can use all three parts.
 The eyebrow is optional.
 
-When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow.
+When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
+
+A title group's title uses `title-sm` unless the design needs a larger one.
 
 Worked examples:
 
@@ -448,7 +450,9 @@ Worked examples:
   group is the only one, so it can have an eyebrow, a title and a subtitle.
 - **A card containing one chart, where the chart is the main subject.** The
   designer makes the chart's group dominant. The chart has a title and
-  subtitle, and the card's title is set as an eyebrow.
+  subtitle, and the card's title is set as an eyebrow. The eyebrow sits
+  directly above the chart's title, but it is the card's demoted group, not
+  part of the chart's group.
 - **A card containing two related charts.** The designer makes the card's group
   dominant, so the card has a title and subtitle. Each chart's title is set as
   an eyebrow.
@@ -545,9 +549,9 @@ Chart text uses the product typeset roles or the usage aliases. Chart colours
 use the `data` and `chart` colour tokens.
 
 Series take `--color-data-primary`, `--color-data-secondary` and
-`--color-data-tertiary`, in that order. These are the blue, dark pink and orange
-of the categorical palette, chosen to be told apart easily in light and dark
-mode. To highlight one series against the rest, use `--color-data-primary` for
+`--color-data-tertiary`, in that order. In light mode these are the blue, dark
+pink and orange of the categorical palette. In dark mode they are cyan, pink and
+orange. To highlight one series against the rest, use `--color-data-primary` for
 it and `--color-data-context` for the others.
 
 A chart that needs other colours takes them from the categorical palette,

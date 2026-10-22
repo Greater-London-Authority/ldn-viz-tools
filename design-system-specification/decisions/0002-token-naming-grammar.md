@@ -4,7 +4,7 @@ title: Token Naming Grammar
 status: accepted
 date: 2026-09-30
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [Design Tokens]
 breaking: false
 supersedes: []

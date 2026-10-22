@@ -1,7 +1,7 @@
 ---
 id: 'NNNN'
 title: The Title
-status: draft
+status: open
 date: YYYY-MM-DD
 authors: []
 reviewers: []
@@ -59,4 +59,4 @@ Decisions this RFC needs from reviewers before it can be accepted.
 
 ## Decisions this RFC will produce
 
-A running list of ADRs, filled in as the RFC is written. Once the RFC is accepted, these ADRs outline the decisions and this document is not updated again.
+A running list of ADRs, filled in as the RFC is written. Once the RFC is accepted, these ADRs record the decisions as they are made.

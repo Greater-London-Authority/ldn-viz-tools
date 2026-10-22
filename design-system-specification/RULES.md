@@ -1,11 +1,10 @@
 ## [0001 — Sources of truth](./decisions/0001-sources-of-truth.md)
 
-- Figma file: "Design System ver 3.1" (was "3.0 Agent Enhanced"). Dynamic-page file. Desktop Bridge on port 9223.
-- Figma leads the typography and colour cutover ahead of the repo. Temporary Figma↔code mismatch is accepted.
-- Figma-only sessions have no repo access. Nothing decided in one is verified against emitted output until a rebuild.
-- Spec is authoritative for typography, spacing, flow, grid and colour — design-system-specification.md.
-- Code/Storybook is authoritative for tables and charts (behavioural, data-driven). Figma is representative, not a reimplementation.
-- The spec is downstream of the build. Value tables are generated from emitted styles/; only intent and rationale prose is hand-written. The spec may be out of date against a change from figma, a rerun fixes that, but it must never be silently wrong.
+- **Figma leads design work.** New values and new thinking start in Figma, so a temporary mismatch between Figma and code is accepted.
+- **Values flow from Figma to the spec.** Figma exports the variables, the build transforms them, and the spec's value tables are generated from the build. The tables are never edited by hand. The spec can be out of date after a change in Figma, and a rerun of the scripts fixes that, but it must never be silently wrong.
+- **The ADRs and the spec are authoritative for the rules of typography, spacing, flow, grid and colour.** Their prose, which states intent and rules, is written by hand.
+- **When Figma and the spec disagree, Figma wins on values and the spec wins on rules.** A Figma design that breaks a rule is either progression, which needs an ADR before the spec changes, or regression, which is fixed in Figma. A difference can also be accepted where matching Figma to code one to one makes no sense.
+- **Code and Storybook are authoritative for tables and charts**, because they are behavioural and driven by data. Figma is representative, not a reimplementation.
 
 ## [0002 — Token Naming Grammar](./decisions/0002-token-naming-grammar.md)
 
@@ -68,13 +67,18 @@
   - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
   - **Pairing**: subhead pairs with headline/display, subtitle with title.
 
+- **Small headings can take label roles.** No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, can take `label-lg`, or `label-md` one level down. `.dialog-title` uses `label-lg` for this reason.
+
 - **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
 
-- **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins.
+- **Set the context on the container, not on the text.** Text takes its type from the nearest declared context, and the innermost context wins. Layout components such as `Sidebar` set no typeset. They take product from `:root`, and the content passed into them sets its own typeset where it needs another.
 
-- **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`.
+- **Typesets are referenced as `typeset-{name}`:** `typeset-longform` and `typeset-product`. The `typeset-product--formatted` modifier is for content from a CMS or Markdown in a product setting ([0015](./decisions/0015-system-classes.md)).
 
-- **Longform typeset also defines flow. Product typeset does not.** Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./decisions/0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
+- **Longform and formatted product typesets also define flow. Plain product does not.** `typeset-product--formatted` adds the `flow-standard` context and styles unclassed HTML elements. `typeset-product` sets no flow. Applying `typeset-longform` automatically adds the `flow-spacious` context ([0005](./decisions/0005-flow.md)), so the space before each element comes from the corresponding flow-spacious step defined in CSS. Typography tokens carry no spacing: `--typography-spacing-*` and the `space-before` property are retired.
+
+- **Line height comes from the role.** There are no line-height utilities. A control whose height must not change keeps its role's line height and reduces its padding. The `slim` button has no padding to reduce, so it sets `line-height: 1` to line up with the text beside it.
+- **Type changes at five breakpoints:** `base`, `sm`, `md`, `lg` and `xl`. There are no `2xl` typography tokens, so type at `2xl` is the same as at `xl`.
 
 - **Line heights in three ratios.** Line height is defined in three ratios based on a simple formula: `font-size + k`, where font-size and k are measured in px.
   The ratios are:
@@ -83,7 +87,9 @@
 | --------------- | --------------- | ---------------- |
 | font-size + 4px | font-size + 8px | font-size + 12px |
 
-- **Aliases provided.** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma. They are a convenience only; where possible use the typeset-role tokens directly.
+- **Every role is set in Inter, with a fallback stack.** If Inter fails to load, text falls back through this stack: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`. Figma holds only `Inter`, so the stack is added at build time.
+
+- **Aliases provided.** A small set of component-level semantic aliases is output to make the system easier to communicate to users who only consume the CSS and don't work with the token layer directly. These aliases are defined in the `usage` style set in Figma. They are a convenience only; where possible use the typeset-role classes directly.
 
 ## [0004 — Spacing](./decisions/0004-spacing.md)
 
@@ -94,12 +100,14 @@
 ## [0005 — Flow](./decisions/0005-flow.md)
 
 - **Flow sets the space between blocks.** Typography does not set space itself: `typeset-longform` automatically adds the `flow-spacious` context, and flow supplies the space ([0003](./decisions/0003-typography.md)).
-- **There are three flow contexts:** `flow-spacious`, `flow-standard` and `flow-compact`. Standard is the default.
+- **There are three flow contexts:** `flow-spacious`, `flow-standard` and `flow-compact`. Standard is the default. `typeset-longform` sets `flow-spacious`, and `typeset-product--formatted` sets `flow-standard`.
 - **The context defines the value of the step.** There are four steps: `tight`, `default`, `loose` and `section`.
-- **Flow assigns steps based on markup, and authors can override them using utility classes.** When a flow context is initiated, its direct children are spaced vertically to the default step of that context. In a `typeset-longform` context, where `flow-spacious` is applied automatically, headings, captions and block objects are assigned a step from the markup without extra classes.
-  Where an override is needed, or a context cannot infer spacing from markup alone, an `mt-flow-{step}` or `gap-flow-{step}` class replaces the assigned step.
-- **Flow spaces only the direct children of its context.**
-- **A component that declares its own context or spacing is sealed.** Outer flow stops at it. To keep its density wherever it is placed, a component must declare its own context.
+- **Choose the context by the space available.** `flow-compact` is for surfaces too small to show four distinct gaps, such as control panels, map overlays, tooltips and dense sidebars. Other product surfaces use `flow-standard`, and reading content uses `flow-spacious` through `typeset-longform`.
+- **Flow assigns steps from the markup in every flow context.** Any child takes `default`. A block object (`figure`, `img`, `table`, `pre`, `blockquote`, `.chart`) and the child after it take `loose`. Major headings (`h1`, `h2`, `display-*`, `headline-*`) take `section`, and minor headings (`h3` to `h5`, `title-*`) take `loose`. Headings below `h5` are discouraged and have no rule. The spec has the full table.
+- **Parts that belong together are coupled at the `tight` step:** the parts of a title group ([0012](./decisions/0012-title-groupings.md)), and a caption with what it captions (`figcaption`, a table `caption`, and a caption role or `.chart-note` after a block object). An eyebrow before a major heading takes `section`.
+- **There is no separate hero spacing.** The space above display type is the `section` step, or comes from the layout.
+- **Authors override a step with a utility.** `mt-flow-{step}` sets the space above one element. `gap-flow-{step}` sets the gap between the children of a flex or grid container that is not a flow context.
+- **Flow spaces only the direct children of its context.** Outer flow spaces a component's root and goes no further, so no class is needed to seal a component. A component declares its own context only to set the density of its own children.
 
 ## [0006 — Visual rules](./decisions/0006-visual-rules.md)
 
@@ -120,7 +128,17 @@ _The following decisions relate to Figma_
 - **`ChartContainer` is fixed chrome around a slot.** It has a header (title, with an optional eyebrow, subtitle and hint), a `Content` slot, and actions such as download and export. The hint is an optional Svelte slot for a hint/overlay component, not a typography role.
 - **The designer composes what goes in the slot for each chart.** The legend, plot and footer (notes and citation) are not built into the container or into the plot.
 - **Category and x-axis labels sit below the baseline.** Y-axis ticks sit to the left of the plot.
-- **A chart is on-system when its text uses the product typeset roles or the usage aliases, and its colours use `data/*` and `chart/*` tokens.** Both are valid for chart text ([0003](./decisions/0003-typography.md)).
+- **A chart is on-system when its text uses the product typeset roles or the usage aliases, and its colours use `data/*` and `chart/*` tokens, or the palette ramps for a quantitative scale.** Both are valid for chart text ([0003](./decisions/0003-typography.md)).
+- **Series take the data roles in order:** `--color-data-primary`, `--color-data-secondary`, then `--color-data-tertiary`. In light mode they are categorical blue, dark pink and orange. In dark mode they are cyan, pink and orange. Each role has a value for each mode, so a chart switches without changes.
+- **To highlight one series, set it in `--color-data-primary` and the rest in `--color-data-context`.** Context is grey.
+- **A chart uses no more than three categorical colours.** A chart that needs colours beyond the three series roles takes them from `--color-data-categorical-{hue}`, choosing hues with the most contrast against the background. Where more categories need telling apart, use labels, line styles or small multiples.
+- **Common encodings have their own roles:**
+  - `--color-data-positive` (blue) and `--color-data-negative` (red), for diverging data such as opinion, and for good and bad. Blue and red avoid the red–green pair that many readers can't tell apart.
+  - `--color-data-neutral-0` for "neither" and `--color-data-neutral-1` for "don't know".
+  - `--color-data-male` (green) and `--color-data-female` (purple), for sex in demographic data.
+  - `--color-data-empty`, for missing or filtered-out data.
+- **Quantitative scales are built from the palette ramps. There are no scale tokens.** A sequential scale uses up to five steps of one hue, `--color-palette-blue-{step}` by default, with the higher value on the higher step. Palette steps rise in contrast against the background in both modes, so the scale reverses in dark mode without changes. A diverging scale uses the red ramp for negative values and the blue ramp for positive values, and can add a grey step for values that are exactly zero. A scale that needs more than one hue uses an established perceptually even ramp, such as viridis.
+- **Chart chrome uses the `chart` tokens:** `--color-chart-surface`, `--color-chart-axis`, `--color-chart-grid`, `--color-chart-label` and `--color-chart-label-muted`.
 
 ## [0009 — Documentation](./decisions/0009-documentation.md)
 
@@ -145,7 +163,8 @@ _The following decisions relate to Figma_
 
 ## [0012 — Title Groupings](./decisions/0012-title-groupings.md)
 
-- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow.
+- **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
+- **Titles default to `title-sm`.** A title group's title uses `title-sm` unless the design needs a larger one.
 
 Worked examples:
 
@@ -153,7 +172,43 @@ Worked examples:
   group is the only one, so it can have an eyebrow, a title and a subtitle.
 - **A card containing one chart, where the chart is the main subject.** The
   designer makes the chart's group dominant. The chart has a title and
-  subtitle, and the card's title is set as an eyebrow.
+  subtitle, and the card's title is set as an eyebrow. The eyebrow sits
+  directly above the chart's title, but it is the card's demoted group, not
+  part of the chart's group.
 - **A card containing two related charts.** The designer makes the card's group
   dominant, so the card has a title and subtitle. Each chart's title is set as
   an eyebrow.
+
+## [0013 — Token export and parsing](./decisions/0013-token-export-and-parsing.md)
+
+- **The token source is `packages/themes/tokens/lcd-ds.tokens.json`, as Figma exports it.** It is normalised in one step before Style Dictionary filters or formats any token.
+- **Emitted names follow the naming grammar ([0002](./decisions/0002-token-naming-grammar.md)).** Colour modes move from the name to the selector. A trailing `default` is dropped from semantic tokens and kept on primitives.
+- **Filters select tokens by type and path. One transform sets units by path:** font weights are unitless, breakpoints are `px`, and other dimensions are `rem`.
+- **Tests check that every reference resolves, and that every emitted name is unique and follows the grammar.**
+
+## [0014 — Distribution and outputs](./decisions/0014-distribution-and-outputs.md)
+
+- **CSS custom properties are the public surface.** Every other output is a window onto them or an export of their resolved values.
+- **Only the paths in the package's `exports` map can be imported:** `reset.css`, `tokens.css`, `system.css`, `index.css`, `tailwind`, `colors.js`, `tokens.scss` and `docs/tokens/tokens.js`.
+- **There are three set-ups:** the full system (`index.css`, plus the preset with Tailwind), tokens only (`tokens.css`), and values only (`colors.js` or `tokens.scss`).
+- **Typography and flow are in one file**, because a typeset class turns on a flow context.
+
+## [0015 — System classes](./decisions/0015-system-classes.md)
+
+- **Every class the spec names is generated into `system.css` as plain CSS**, with its name taken from `sd/system.config.js`. No class is written by hand, and the Tailwind preset adds none.
+- **A typeset publishes its roles' properties on itself, and role classes read them**, so the innermost typeset wins. Product is the default and is also set on `:root`.
+- **`system.css` is unlayered and is imported before Tailwind's directives**, so a Tailwind utility wins at equal specificity.
+- **`reset.css` removes browser defaults at zero specificity.** A typeset restores what its content needs.
+- **Plain `typeset-product` sets type only.** `typeset-product--formatted` adds `flow-standard` and content styles for unclassed markup. `typeset-longform` always brings both. `.not-typeset` stops content styles.
+- **A formatted typeset caps each child at one of three widths:** text (about 80 characters), wide and full. `.width-content`, `.width-content-wide` and `.width-content-full` set a child's width explicitly.
+- **Secondary roles (`subhead`, `subtitle` and `eyebrow`) use the muted text colour.** Aliases for figures in columns or on axes use tabular numerals.
+- **The build fails if a class reads a custom property that isn't a token.**
+
+## [0016 — Flow in system.css](./decisions/0016-flow-in-system-css.md)
+
+Amends [0005](./decisions/0005-flow.md).
+
+- **The flow context classes, rules and utilities are generated into `system.css`.** The values stay in `tokens.css`. There are no Tailwind variants of the utilities, such as `md:mt-flow-loose`.
+- **A flow context never sets a typeset.** `typeset-longform` sets `flow-spacious` as well as the typeset.
+- **A context sets its ramp on its children**, so the space above a nested context comes from the outer context.
+- **Flow sets its children's block margins to zero at zero specificity**, so a browser margin can't collapse with a flow step.

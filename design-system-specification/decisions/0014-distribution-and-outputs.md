@@ -1,10 +1,10 @@
 ---
 id: '0014'
 title: Custom properties are the public surface, published through an exports map
-status: proposed
-date: 2026-10-15
+status: accepted
+date: 2026-10-21
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [tokens]
 breaking: true
 supersedes: []

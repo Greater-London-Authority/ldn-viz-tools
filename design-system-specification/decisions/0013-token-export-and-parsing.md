@@ -1,10 +1,10 @@
 ---
 id: '0013'
 title: The Figma export is normalised once, before any filtering
-status: proposed
-date: 2026-10-15
+status: accepted
+date: 2026-10-21
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [tokens]
 breaking: true
 supersedes: []

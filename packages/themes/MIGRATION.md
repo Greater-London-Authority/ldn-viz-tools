@@ -111,7 +111,7 @@ The type sets are renamed and every role gains a size. Names follow `--typograph
 
 The roles in each set are `display`, `headline`, `title`, `subtitle`, `subhead`, `body`, `label`, `caption` and `metric`, each in `sm`, `md` and `lg`, plus `eyebrow`, which has no size. `subhead`, `subtitle` and `eyebrow` are set in the muted text colour, as before.
 
-The classes change as follows. These are placeholder mappings until RFC 0002's design review.
+The classes change as follows.
 
 | Old class                        | New class                                                                                                    |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------ |

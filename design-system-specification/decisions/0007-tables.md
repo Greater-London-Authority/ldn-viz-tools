@@ -4,7 +4,7 @@ title: Tables
 status: accepted
 date: 2026-10-01
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [Tables]
 breaking: false
 supersedes: []

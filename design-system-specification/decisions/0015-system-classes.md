@@ -1,10 +1,10 @@
 ---
 id: '0015'
 title: Every class the specification names is generated as plain CSS in system.css
-status: proposed
-date: 2026-10-16
+status: accepted
+date: 2026-10-21
 released-in: null
-deciders: [Chris Knight]
+deciders: [Chris Knight, James Scott-Brown]
 areas: [tokens, typography, flow]
 breaking: true
 supersedes: []
