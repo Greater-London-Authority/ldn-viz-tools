@@ -4,12 +4,12 @@ import { page } from 'vitest/browser';
 import DashboardTitle from './DashboardTitle.svelte';
 
 describe('DashboardTitle', () => {
-	it('renders the title as an h1 with the headline-md role', async () => {
+	it('renders the title as an h1 with the dashboard-main-title alias', async () => {
 		const { container } = render(DashboardTitle, { title: 'Dashboard title' });
 
 		const heading = page.getByRole('heading', { level: 1 });
 		await expect.element(heading).toHaveTextContent('Dashboard title');
-		expect(container.querySelector('h1')).toHaveClass('headline-md');
+		expect(container.querySelector('h1')).toHaveClass('dashboard-main-title');
 	});
 
 	it('does not render an eyebrow or subtitle by default', async () => {
