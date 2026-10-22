@@ -61,7 +61,7 @@
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
