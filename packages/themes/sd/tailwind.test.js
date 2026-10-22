@@ -26,10 +26,37 @@ describe('Tailwind preset', () => {
 
 	it('keeps the version 3 utility keys', () => {
 		expect(preset.theme.extend.colors['color-surface']).toMatch(/^var\(--color-surface,/);
-		// The semantic token wins a key it shares with a primitive.
 		expect(preset.theme.extend.colors['color-static-white']).toMatch(/^var\(--color-static-white,/);
+		expect(preset.theme.extend.colors['color-static-gla-pink']).toMatch(
+			/^var\(--color-static-gla-pink,/
+		);
 		expect(preset.theme.extend.spacing['2.5']).toMatch(/^var\(--spacing-2-5,/);
 		expect(preset.theme.extend.boxShadow.DEFAULT).toMatch(/^var\(--shadow,/);
+	});
+
+	it('exposes semantic colours only (ADR 0018)', () => {
+		for (const [key, value] of Object.entries(preset.theme.extend.colors)) {
+			expect(value, key).not.toMatch(/^var\(--primitive-/);
+		}
+		expect(
+			Object.keys(preset.theme.extend.colors).filter((k) => /seed|color-mode-/.test(k))
+		).toEqual([]);
+	});
+
+	it("turns off Tailwind's container: .container is in system.css (ADR 0017)", () => {
+		expect(preset.corePlugins).toEqual({ container: false });
+		expect(preset.theme.container).toBeUndefined();
+	});
+
+	it('reads each font family from its primitive, which holds the fallback stack', () => {
+		const [sans] = preset.theme.extend.fontFamily.sans;
+		const [mono] = preset.theme.extend.fontFamily.mono;
+		expect(sans).toMatch(
+			/^var\(--primitive-typography-font-family-default, Inter, ui-sans-serif, /
+		);
+		expect(mono).toMatch(
+			/^var\(--primitive-typography-font-family-code, Source Code Pro, ui-monospace, /
+		);
 	});
 
 	it("removes Tailwind's font sizes, weights and line heights: type is set by role classes", () => {

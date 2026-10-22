@@ -35,8 +35,9 @@ A context spaces only its direct children. It sets their vertical margins to zer
 | A `subhead-*`, `subtitle-*` or subtitle alias straight after a heading | `tight` |
 | A heading straight after an `.eyebrow` | `tight` |
 | An `.eyebrow` before a headline or display | `section` |
+| A `caption-*` class or `.chart-note` straight after a block object | `tight` |
 
-Inside those children, list items, nested lists, `figcaption` in a `figure` and `dd` get `tight`. A `dt` gets `default`, except the first.
+Inside those children, list items, nested lists, `figcaption` in a `figure` and `dd` get `tight`. In a typeset with content styles, a table `caption` is `tight` above its table. A `dt` gets `default`, except the first.
 
 The rules match role classes and elements. A muted `body-sm` under a heading looks like a subtitle but gets `default`. Use `subtitle-*` and it gets `tight`.
 

@@ -519,6 +519,53 @@ _Values in px._
 
 <!-- GEN:flow-table END -->
 
+### Flow element map
+
+The step each element takes in a flow context, from the build. An `mt-flow-{step}` class on the element replaces it.
+
+<!-- GEN:flow-map START -->
+
+| Element                            | After          | Step      |
+| ---------------------------------- | -------------- | --------- |
+| any element                        | any element    | `default` |
+| a block object                     | any element    | `loose`   |
+| any element                        | a block object | `loose`   |
+| a major heading                    | any element    | `section` |
+| a minor heading                    | any element    | `loose`   |
+| a heading                          | a heading      | `tight`   |
+| a subtitle or subhead              | a heading      | `tight`   |
+| a heading                          | an eyebrow     | `tight`   |
+| an eyebrow, before a major heading | any element    | `section` |
+| `figure > figcaption`              | —              | `tight`   |
+| a caption                          | a block object | `tight`   |
+| `:is(ul, ol) li + li`              | —              | `tight`   |
+| `:is(ul, ol) li > :is(ul, ol)`     | —              | `tight`   |
+| `dl > dd`                          | —              | `tight`   |
+| `dl > dt`                          | —              | `default` |
+
+_Later rows win. A heading is a role class, a usage alias or an element alias on that role: major is display and headline (`h1`, `h2`), minor is title (`h3` to `h5`). A block object is `figure`, `img`, `table`, `pre`, `blockquote` or `.chart`._
+
+<!-- GEN:flow-map END -->
+
+## Layout grid
+
+A page uses one of two layouts. `.container` is the contained layout, for document-like pages: its width steps up with the breakpoints and it is centred. `.container-fluid` is the fluid layout, for dashboards and application shells: it fills the viewport. The container's padding sets the page edge. `.grid-gutter` and `.grid-gutter-fluid` set the space between tiled blocks, such as cards, in each layout ([0017](./decisions/0017-layout-grid.md)).
+
+<!-- GEN:grid-table START -->
+
+| Breakpoint | Contained width | Contained padding | Contained gutter | Fluid padding | Fluid gutter |
+| ---------- | --------------- | ----------------- | ---------------- | ------------- | ------------ |
+| `base`     | 100%            | 16                | 16               | 16            | 16           |
+| `sm`       | 640             | 32                | 20               | 16            | 16           |
+| `md`       | 768             | 32                | 24               | 24            | 16           |
+| `lg`       | 1024            | 64                | 24               | 24            | 16           |
+| `xl`       | 1280            | 80                | 32               | 24            | 16           |
+| `2xl`      | 1536            | 96                | 32               | 24            | 16           |
+
+_Values in px. The fluid layout is always the full width._
+
+<!-- GEN:grid-table END -->
+
 ## Elevation
 
 An interface is a stack. The canvas is at the base, and surfaces sit above it

@@ -16,6 +16,10 @@ The package now has an `exports` map, and only the paths it lists can be importe
 
 The Tailwind preset only maps Tailwind's theme onto the custom properties: it adds no classes and no plugins, and `@tailwindcss/forms` is no longer a dependency. The `.form-*` classes, like the typography, flow, layout and base classes, are in `system.css`. A Tailwind app imports `index.css` (or `system.css`) as well as the preset, before the `@tailwind` directives, so a utility still wins over a system class. The preset also removes Tailwind's font sizes, weights and line heights, so `text-sm`, `font-semibold` and `leading-tight` no longer exist. Set type with a role class or a usage alias instead (see [Typography](#typography)).
 
+The preset's colours are the semantic colours only. The primitive colour utilities are removed: the `seed` hues (`bg-color-static-seed-red`) and the palette ramps (`bg-color-mode-light-blue-500`). Use the semantic colour for the role instead. The GLA hues keep their class names (`bg-color-static-gla-pink`), which now come from the semantic `static/gla` colours. The primitive custom properties are still in `tokens.css`.
+
+`.container` is now in `system.css`, and the preset turns off Tailwind's own. It works the same way, with the contained padding at each breakpoint, and is now centred, as `.container-fluid` is.
+
 Every path the package published before version 10 is removed. Replace each one as follows:
 
 | Old path                                                                                                                                                                                     | New path                                                                                                                                                             |

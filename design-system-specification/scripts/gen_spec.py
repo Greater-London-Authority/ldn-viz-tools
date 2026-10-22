@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 gen_spec.py — regenerate the value blocks in design-system-specification.md (the
-two typeset matrices, the usage alias table, the spacing table and the flow
-table) in place, between <!-- GEN:name START/END --> markers, from the build.
+two typeset matrices, the usage alias table, the spacing table, the flow
+table, the flow element map and the grid table) in place, between <!-- GEN:name START/END --> markers, from the build.
 
 With --check, write nothing: exit 1 if any block is stale (i.e. a run without
 --check would change the spec).
@@ -92,12 +92,89 @@ def gen_flow_table(styles_dir):
              *(value(c, step) for c in FLOW_CONTEXTS)] for step in FLOW_STEPS]
     return table(["Step", "Utility", *FLOW_CONTEXTS], rows) + "\n\n_Values in px._"
 
+GRID_BREAKPOINTS = ["base", "sm", "md", "lg", "xl", "2xl"]
+
+def gen_grid_table(styles_dir):
+    """Container padding and gutter for each layout, and the contained width,
+    in px at each breakpoint."""
+    tokens = load_tokens(styles_dir)
+    def value(name):
+        if name not in tokens:
+            sys.exit(f"ERROR: {name} not in tokens.json")
+        return fmt(px(tokens[name]["value"]))
+    rows = []
+    for bp in GRID_BREAKPOINTS:
+        width = "100%" if bp == "base" else value(f"--primitive-breakpoint-{bp}")
+        rows.append([f"`{bp}`", width,
+                     *(value(f"--grid-{bp}-{layout}-{part}")
+                       for layout in ("contained", "fluid")
+                       for part in ("container-padding", "gutter"))])
+    return (table(["Breakpoint", "Contained width", "Contained padding", "Contained gutter",
+                   "Fluid padding", "Fluid gutter"], rows)
+            + "\n\n_Values in px. The fluid layout is always the full width._")
+
+# What a selector list in the Flow rules section stands for, named by the
+# elements in it. The lists are built from the roles in sd/system.config.js.
+def flow_group(selector):
+    sel = re.sub(r':not\(\.mt-flow, \[class\*="mt-flow-"\]\)', "", selector).strip()
+    items = set(re.findall(r"[.\w-]+", re.sub(r":(is|not|has)\(", "(", sel)))
+    if sel.startswith(":not("):
+        return "any element"
+    if "figure" in items and ".chart" in items:
+        return "a block object"
+    if {"h1", "h3"} <= items:
+        return "a heading"
+    if "h1" in items:
+        return "a major heading"
+    if "h3" in items:
+        return "a minor heading"
+    if ".subtitle-sm" in items:
+        return "a subtitle or subhead"
+    if ".eyebrow" in items and len(items) == 1:
+        return "an eyebrow"
+    if ".caption-sm" in items:
+        return "a caption"
+    return f"`{sel}`"
+
+def gen_flow_map(styles_dir):
+    """Each flow rule: the element it spaces, what comes before it, and the
+    step, read from system.css."""
+    css = sections(load_system(styles_dir)).get("Flow rules")
+    if css is None:
+        sys.exit("ERROR: no 'Flow rules' section in system.css")
+    rows = []
+    for selector, decls, _m in parse_rules(css):
+        step = re.fullmatch(r"var\(--flow-(\w+)\)", decls.get("margin-top", ""))
+        if not step:
+            continue
+        inner = selector.split(" > ", 1)[1]
+        # Rules inside a list, description list or figure space its items,
+        # not flow siblings; show their selector as it is.
+        if re.search(r"(^|[\s>])(li|dd|dt|figcaption)\b", inner):
+            rows.append([f"`{inner}`", "—", f"`{step.group(1)}`"])
+            continue
+        before_next = re.search(r":has\(\+ (.*)\)$", inner)
+        if before_next:
+            inner = inner[:before_next.start()]
+        parts = [p.strip() for p in re.split(r" \+ (?![^(]*\))", inner)]
+        element, after = flow_group(parts[1]), flow_group(parts[0])
+        if before_next:
+            element += f", before {flow_group(before_next.group(1))}"
+        rows.append([element, after, f"`{step.group(1)}`"])
+    return (table(["Element", "After", "Step"], rows)
+            + "\n\n_Later rows win. A heading is a role class, a usage alias or an element alias "
+              "on that role: major is display and headline (`h1`, `h2`), minor is title "
+              "(`h3` to `h5`). A block object is `figure`, `img`, `table`, `pre`, `blockquote` "
+              "or `.chart`._")
+
 BLOCKS = {
     "longform-matrix": gen_matrix("longform"),
     "product-matrix":  gen_matrix("product"),
     "alias-table":     gen_alias_table,
     "spacing-table":   gen_spacing_table,
     "flow-table":      gen_flow_table,
+    "flow-map":        gen_flow_map,
+    "grid-table":      gen_grid_table,
 }
 
 # ───────────────────────── marker splicing ────────────────────────────────

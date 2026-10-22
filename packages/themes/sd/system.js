@@ -110,13 +110,14 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 
 	/* Layout ----------------------------------------------------------- */
 
-	const responsive = (selector, property, key, extra = {}) =>
+	// extra: declarations for the base rule; perBreakpoint: for each larger one.
+	const responsive = (selector, property, key, extra = {}, perBreakpoint = () => ({})) =>
 		cfg.gridBreakpoints
 			.map((bp) =>
 				media(
 					bp,
 					rule(selector, {
-						...(bp === 'base' ? extra : {}),
+						...(bp === 'base' ? extra : perBreakpoint(bp)),
 						[property]: ref(`grid-${bp}-${key}`)
 					})
 				)
@@ -125,7 +126,15 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 
 	const layout = section('Layout', [
 		// border-box: without Tailwind's preflight, width plus padding would
-		// overflow the viewport.
+		// overflow the viewport. The contained width steps up to each
+		// breakpoint, as Tailwind's container does, and is centred (ADR 0017).
+		responsive(
+			'.container',
+			'padding-inline',
+			'contained-container-padding',
+			{ 'box-sizing': 'border-box', width: '100%', 'margin-inline': 'auto' },
+			(bp) => ({ 'max-width': ref(`primitive-breakpoint-${bp}`) })
+		),
 		responsive('.container-fluid', 'padding-inline', 'fluid-container-padding', {
 			'box-sizing': 'border-box',
 			width: '100%',
@@ -386,13 +395,15 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	const unset = `:not(${override})`;
 	const is = (selectors) => `:is(${selectors.join(', ')})`;
 
-	const { majorHeadings, minorHeadings, companions, overline } = cfg.flowRoles;
+	const { majorHeadings, minorHeadings, companions, overline, caption, captionAliases } =
+		cfg.flowRoles;
 	const major = is(roleSelectors(majorHeadings));
 	const minor = is(roleSelectors(minorHeadings));
 	const heading = is(roleSelectors([...majorHeadings, ...minorHeadings]));
 	const companion = is(roleSelectors(companions));
 	const eyebrow = is(roleSelectors([overline]));
 	const blocks = is(cfg.flow.blockObjects);
+	const captions = is([...roleClassesFor([caption]), ...captionAliases]);
 
 	const margin = (step) => ({ 'margin-top': `var(--flow-${step})` });
 
@@ -417,8 +428,9 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		rule(`${root} > ${heading} + ${companion}${unset}`, margin('tight')),
 		rule(`${root} > ${eyebrow} + ${heading}${unset}`, margin('tight')),
 		rule(`${root} > ${visible} + ${eyebrow}${unset}:has(+ ${major})`, margin('section')),
-		// 5 · a caption binds to its figure
+		// 5 · a caption binds to its figure, or to the block object above it
 		rule(`${root} > figure > figcaption`, margin('tight')),
+		rule(`${root} > ${blocks} + ${captions}${unset}`, margin('tight')),
 		// 6 · lists that are direct children of the root keep their own rhythm
 		rule(`${root} > :is(ul, ol) li + li`, margin('tight')),
 		rule(`${root} > :is(ul, ol) li > :is(ul, ol)`, margin('tight')),

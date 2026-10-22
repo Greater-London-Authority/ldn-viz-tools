@@ -172,7 +172,7 @@ caption {
 	caption-side: top;
 	text-align: start;
 	color: var(--color-text-muted);
-	padding-bottom: var(--spacing-2);
+	padding-bottom: var(--flow-tight);
 }
 
 th,

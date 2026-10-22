@@ -40,6 +40,17 @@ describe('tokens.json', () => {
 		}
 	});
 
+	it('ends each font-family primitive in its fallback stack (ADR 0003)', () => {
+		for (const name of ['default', 'display']) {
+			expect(rootProps[`--primitive-typography-font-family-${name}`].value).toMatch(
+				/^Inter, ui-sans-serif, .*, sans-serif, .*"Noto Color Emoji"$/
+			);
+		}
+		expect(rootProps['--primitive-typography-font-family-code'].value).toMatch(
+			/^Source Code Pro, ui-monospace, .*, monospace$/
+		);
+	});
+
 	it('resolves the default flow ramp through the standard context', () => {
 		expect(json['--flow-default']).toMatchObject({
 			references: '--flow-standard',

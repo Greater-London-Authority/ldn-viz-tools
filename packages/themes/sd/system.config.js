@@ -90,7 +90,12 @@ export const flowRoles = {
 	majorHeadings: ['display', 'headline'],
 	minorHeadings: ['title'],
 	companions: ['subhead', 'subtitle'],
-	overline: 'eyebrow'
+	overline: 'eyebrow',
+	// A caption couples tight to the block object above it (ADR 0005). Only
+	// the role classes and the aliases named here count: other aliases on the
+	// caption role, such as .chart-tick and .hint-text, aren't captions.
+	caption: 'caption',
+	captionAliases: ['.chart-note']
 };
 
 export const flow = {

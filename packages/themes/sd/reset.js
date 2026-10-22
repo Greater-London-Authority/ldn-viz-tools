@@ -15,27 +15,6 @@
   element selector.
 */
 
-const FONT_SANS = [
-	'ui-sans-serif',
-	'system-ui',
-	'sans-serif',
-	'"Apple Color Emoji"',
-	'"Segoe UI Emoji"',
-	'"Segoe UI Symbol"',
-	'"Noto Color Emoji"'
-].join(', ');
-
-const FONT_MONO = [
-	'ui-monospace',
-	'SFMono-Regular',
-	'Menlo',
-	'Monaco',
-	'Consolas',
-	'"Liberation Mono"',
-	'"Courier New"',
-	'monospace'
-].join(', ');
-
 const HEADINGS = 'h1, h2, h3, h4, h5, h6';
 
 const rules = (ref) => [
@@ -57,7 +36,7 @@ const rules = (ref) => [
 			'-webkit-text-size-adjust': '100%',
 			'-moz-tab-size': '4',
 			'tab-size': '4',
-			'font-family': `${ref('primitive-typography-font-family-default')}, ${FONT_SANS}`,
+			'font-family': ref('primitive-typography-font-family-default'),
 			'font-feature-settings': 'normal',
 			'font-variation-settings': 'normal',
 			'-webkit-tap-highlight-color': 'transparent'
@@ -73,7 +52,7 @@ const rules = (ref) => [
 	[
 		':where(code, kbd, samp, pre)',
 		{
-			'font-family': `${ref('primitive-typography-font-family-code')}, ${FONT_MONO}`,
+			'font-family': ref('primitive-typography-font-family-code'),
 			'font-feature-settings': 'normal',
 			'font-variation-settings': 'normal',
 			'font-size': '1em'
