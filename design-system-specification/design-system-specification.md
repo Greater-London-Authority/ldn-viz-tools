@@ -45,8 +45,6 @@ You can import only the paths listed in the package's `exports` map:
 | `tokens.scss`           | Sass variables and maps with resolved values                                  |
 | `docs/tokens/tokens.js` | Every token with its metadata, for the documentation site                     |
 
-#### Set ups:
-
 - **The full system:** Import `index.css`, and optionally `tailwind` in a Tailwind app.
 - **Adapting existing systems:** Import `tokens.css` and use the CSS custom properties following this specification.
 - **Anywhere:** Import `colors.js` or `tokens.scss` and use the resolved values.
@@ -358,7 +356,7 @@ Both typesets give each role the same weight.
 | Caption  | Regular (400)  |
 | Eyebrow  | Medium (500)   |
 
-##### Emphasis modifier
+#### Emphasis modifier
 
 Two classes change the weight of any role:
 
