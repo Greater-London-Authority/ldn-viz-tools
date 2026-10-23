@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: ['0001']
 amended-by: []
-spec: ['Development', 'Token naming grammar']
+spec: ['Design tokens', 'Token naming grammar']
 pr_url: ''
 ---
 

@@ -57,6 +57,6 @@ Both resolve against the nearest context, and their names don't include the cont
 - `mt-flow-*` on a first child. There is nothing above it to space from, and its margin can collapse through the parent.
 - A flow context and `gap-flow-*` on the same element. The margin and the gap add together.
 
-## Sealed components
+## Components
 
-A component that declares its own flow context or spacing is sealed: flow outside it doesn't reach inside. To keep its density wherever it is placed, a component declares its own context.
+Flow spaces only direct children, so outer flow spaces a component's root and goes no further. No class is needed to seal a component. A component declares its own context only to set the density of its own children, and then keeps that density wherever it is placed.

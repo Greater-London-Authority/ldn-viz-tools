@@ -1,49 +1,67 @@
-# London City Data Design System (LCD-DS)
+# London City Data Design System specification
 
-## Overview
+LCD-DS is a shared set of foundations for the products we build at the GLA. It brings together patterns, components and guidance so that the people who use our work find it consistent and clear, and that while making the work we don't have to solve the same problems from scratch each time.
 
-This design system is a shared set of foundations for the products we build at the GLA. It brings together patterns, components and guidance so that the people who use our work find it consistent and clear, and so that while making the work we don't have to solve the same problems from scratch each time.
+This specification is for designers and developers who build products with the London City Data Design System (LCD-DS), and for teams who adapt it to other tools. It states the [RULES](./RULES.md) that form the system.
+
+Each rule rests on a [decision](./decisions). The link after a rule points to its decision record.
 
 ## Scope
 
-The London City Data Design System is flexible, supporting three tiers of use:
+The system can be used in three ways:
 
-- **The full system:** the tokens and components that combine to create our digital products.
-- **Adapting existing systems:** raw values, alias classes, specifications and guidance that can be adapted outside our core technology stack.
-- **Anywhere:** raw values, specifications and guidance that apply in any medium.
+- **The full system:** the tokens, classes and components that make up our digital products.
+- **Adapting existing systems:** the custom properties, classes, specification and guidance, used outside our core technology stack.
+- **Anywhere:** the values, specification and guidance, used in any medium.
 
-## Governance
+This specification covers:
 
-Decisions about the system are recorded as numbered Architectural Decision Records in [decisions](./decisions). Each accepted decision is summarised in [RULES](./RULES.md).
+- outputs and set-ups
+- design tokens
+- typography
+- spacing
+- flow, the vertical space between blocks
+- the layout grid
+- colour
+- elevation
+- visual rules
+- charts and tables
+- accessibility
 
-If this specification and a decision record disagree, the decision record should be considered correct and this document needs updating. The process for proposing a change is described in the accompanying [README](./README.md).
+## Outputs and set-ups
 
-## Development
+The system is published as the `@ldn-viz/themes` package. Its CSS custom properties are the public interface. The other outputs either read the custom properties or export their resolved values ([0014](./decisions/0014-distribution-and-outputs.md)).
 
-The design system is developed in Figma, which is where new work and new values first appear. Values are exported from Figma as design tokens, then transformed and formatted using [Style Dictionary](https://styledictionary.com/). The primary consumer of the design system is the `ldn-viz-tools` component library.
+You can import only the paths listed in the package's `exports` map:
 
-# Design System Specification
+| Output                  | Contains                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| `reset.css`             | Element defaults at zero specificity                                          |
+| `tokens.css`            | Every custom property. Light values are on `:root` and dark values on `.dark` |
+| `system.css`            | Every class this specification names, as plain CSS                            |
+| `index.css`             | Imports `reset.css`, `tokens.css` and `system.css`, in that order             |
+| `tailwind`              | The Tailwind preset, which maps Tailwind's theme onto the custom properties   |
+| `colors.js`             | Resolved colour values for light and dark mode                                |
+| `tokens.scss`           | Sass variables and maps with resolved values                                  |
+| `docs/tokens/tokens.js` | Every token with its metadata, for the documentation site                     |
 
-This is the specification for the design system's foundations, covering:
+- **The full system:** Import `index.css`, and optionally `tailwind` in a Tailwind app.
+- **Adapting existing systems:** Import `tokens.css` and use the CSS custom properties following this specification.
+- **Anywhere:** Import `colors.js` or `tokens.scss` and use the resolved values.
 
-- Design tokens
-- Typography
-- Spacing
-- Content flow (the vertical space between blocks)
-- Elevation
-- Layout grid
-- Colour
-- Accessibility
+The Tailwind preset doesn't add any classes, so `index.css` works without Tailwind ([0015](./decisions/0015-system-classes.md)).
 
-## Design Tokens
+`reset.css` removes browser defaults. All its selectors have zero specificity, so any class overrides them. To use the classes without the reset, import `tokens.css` and `system.css` instead of `index.css` ([0015](./decisions/0015-system-classes.md)).
 
-Design tokens are defined in Figma as variables. Every token follows the same naming grammar, so that they are simple, flexible and easy to understand.
+## Design tokens
 
-Tokens are defined in two tiers: primitive and semantic. A primitive token holds a raw value and is named by that value, for example `--primitive-spacing-4`. A semantic token says what a value is for and is named by its role, for example `--semantic-flow-spacious-section`. Components use semantic tokens only.
+Design tokens are defined in Figma as variables. Every token follows the same naming grammar, so that they are simple, flexible and easy to understand ([0002](./decisions/0002-token-naming-grammar.md)).
 
-Tokens are exported from Figma as JSON, and the Style Dictionary pipeline turns them into CSS custom properties. To keep the token grammar terse the `semantic` namespace is removed during the Style Dictionary pipeline. The delivered token in the above example becomes `--flow-spacious-section`. The `--primitive` prefix is kept as a guard against direct use.
+Tokens are defined in two tiers: primitive and semantic. A primitive token holds a raw value and is named by that value, for example `--primitive-spacing-4`. A semantic token says what a value is for and is named by its role, for example `--semantic-flow-spacious-section`. Components use semantic tokens only ([0002](./decisions/0002-token-naming-grammar.md)).
 
-_Note: In documentation of token anatomy square brackets `[...]` indicate optional modifiers, while curly braces `{...}` represent dynamic variables or specific design choices._
+Figma exports the tokens as JSON, and the Style Dictionary pipeline turns them into CSS custom properties. The pipeline removes the `semantic` segment to keep names short, so `semantic/flow/spacious/section` becomes `--flow-spacious-section`. Primitives keep their `--primitive` prefix, as a guard against using them directly ([0013](./decisions/0013-token-export-and-parsing.md)).
+
+_Note: In the documentation of token patterns below, square brackets `[...]` indicate optional modifiers, and curly braces `{...}` mark a segment that takes one of a set of values._
 
 ### Token naming grammar
 
@@ -51,16 +69,16 @@ Every token name is built from the same ordered segments, running from general t
 
 `(tier) → category → variant → concept → role → emphasis → state → property/value`
 
-The order of the segments is fixed, segments that don't apply are left out, but the rest never change order.
+Segments that don't apply are left out, the rest never change order.
 
-As a minimum a token name contains a category plus at least one more segment.
-For example: `--color-border` is `--{category}[-{role}]`.
+As a minimum a token name contains a category and at least one more segment.
+For example: `--color-border` is `--{category}[-{role}]` ([0002](./decisions/0002-token-naming-grammar.md)).
 
-Token names are written using lowercase kebab-case. Multi-word values are hyphenated (`semi-bold`, `line-height`). Because dots are not valid in CSS, fractional steps use a hyphen: `--spacing-0-5`.
+Token names are in lowercase kebab-case. Multi-word values are hyphenated (`semi-bold`, `line-height`). Dots are not valid in CSS names, so fractional steps use a hyphen: `--spacing-0-5`.
 
 #### Segment values
 
-Each segment has a fixed set of values. Within a segment, values are grouped by function.
+Each segment has a fixed set of values. Within a segment, values are grouped by function. A new value needs a change to this specification ([0002](./decisions/0002-token-naming-grammar.md)).
 
 | Segment          | Group          | Values                                                                                        | Example                                                      |
 | ---------------- | -------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
@@ -70,10 +88,10 @@ Each segment has a fixed set of values. Within a segment, values are grouped by 
 |                  | Scope          | `chart` `geo`                                                                                 | `--color-chart-axis`                                         |
 |                  | Typeset        | `longform` `product`                                                                          | `--typography-base-longform-body-md-font-size`               |
 |                  | Flow context   | `spacious` `standard` `compact`                                                               | `--flow-spacious-loose`                                      |
-|                  | Layout         | `fluid` `contained`                                                                           | `--grid-md-contained-gutter`                                 |
+|                  | Layout         | `fluid` `contained`                                                                           | `--grid-md-contained-container-padding`                      |
 | Concept          | Interface      | `canvas` `surface` `interactive` `text` `label` `border`                                      | `--color-surface`                                            |
 |                  | Visualisation  | `data` `feature` `annotation` `axis` `grid`                                                   | `--color-geo-feature`                                        |
-|                  | Colour sets    | `palette` `brand`                                                                             | `--color-static-brand`                                       |
+|                  | Colour sets    | `palette` `brand` `gla`                                                                       | `--color-static-brand`                                       |
 | Role             | Hierarchy      | `primary` `secondary` `tertiary`                                                              | `--color-interactive-primary`                                |
 |                  | Feedback       | `positive` `negative` `caution` `neutral`                                                     | `--color-surface-caution`                                    |
 |                  | Surface        | `accent` `alpha` `beta` `empty`                                                               | `--color-surface-accent`                                     |
@@ -88,27 +106,32 @@ Each segment has a fixed set of values. Within a segment, values are grouped by 
 |                  | Shadow type    | `inner`                                                                                       | `--shadow-inner`                                             |
 |                  | Elevation step | `0` to `6`                                                                                    | `--elevation-1`                                              |
 |                  | Typography     | `font-family` `font-size` `font-weight` `line-height` `letter-spacing`                        | `--typography-base-product-title-md-line-height`             |
+|                  | Layout         | `container-padding`                                                                           | `--grid-base-fluid-container-padding`                        |
 
-Tokens are generally named taking one value per segment, however a token may have multiple values in the variant segment, in this instance the values are applied in this order:
+A token takes one value for each segment, except the variant segment, which can take two. The first is a breakpoint or a scope, and the second is a typeset, flow context, layout or mode.
 
-1. breakpoint or scope.
-2. context (typeset or flow), layout or mode.
+Where a semantic set has a default value, that value's name is dropped when no further segment follows it. `--color-border` is the default border colour and `--color-border-default` is not valid. A context or a size is never dropped ([0002](./decisions/0002-token-naming-grammar.md), [0013](./decisions/0013-token-export-and-parsing.md)).
 
-Where a semantic set has a default value, that value's name is dropped when no further segment follows it. `--color-border` is the default border colour and `--color-border-default` is not valid.
+[Flow](#flow) is set by a context class (`.flow-spacious`, `.flow-standard` or `.flow-compact`), which assigns values to the steps (`tight`, `default`, `loose`, `section`). The tokens always name the context: `--flow-standard-tight`, `--flow-standard`, `--flow-standard-loose` and so on. **The utilities don't**: `.mt-flow-{step}` and `.gap-flow-{step}` resolve against the nearest context. The default step follows the implied-default rule, so the utility is `.mt-flow`, not `.mt-flow-default` ([0002](./decisions/0002-token-naming-grammar.md)).
 
-[Flow](#flow) is set by a context class (`.flow-spacious`, `.flow-standard` or `.flow-compact`), which assigns values to the steps (`tight`, `default`, `loose`, `section`). The tokens always name the context: `--flow-standard-tight`, `--flow-standard`, `--flow-standard-loose` and so on. **The utilities don't**: `.mt-flow-{step}` and `.gap-flow-{step}` resolve against the nearest context. The default step follows the implied-default rule, so the utility is `.mt-flow`, not `.mt-flow-default`.
+#### Accepted exceptions to the grammar
+
+These names don't follow the grammar exactly. They are accepted ([0002](./decisions/0002-token-naming-grammar.md)).
+
+- **Typography tokens have two property segments.** A role's size (`sm`, `md` or `lg`) comes before the typography property, as in `--typography-base-product-title-md-font-size`.
+- **`md` is both a breakpoint and a size.** In `--typography-md-product-title-md-font-size` the first `md` is the breakpoint and the second is the size.
+- **Some words are in two segments.** `label` is a concept in `--color-label` and a role in typography. `text` is a concept in `--color-text` and an emphasis in `--color-interactive-primary-text`. `grid` is a category in `--grid-*` and a concept in `--color-chart-grid`.
+- **Primitives are named by their step on a scale.** `--primitive-typography-scale-14` is 72px, and `--primitive-spacing-4` is 16px.
+- **`base` has no breakpoint token.** It is the range below `sm`, so it has no minimum width. Tokens that vary by breakpoint still include it, as in `--typography-base-product-title-md-font-size`.
+- `--color-interactive-disabled-muted` puts state before emphasis.
 
 #### Patterns per tier per category
 
 ##### Primitive
 
-**Breakpoint:** `--primitive-breakpoint-{value}`
+**Breakpoint:** `--primitive-breakpoint-{value}`. The breakpoints are `base` below 640px, `sm` from 640px, `md` from 768px, `lg` from 1024px, `xl` from 1280px and `2xl` from 1536px.
 
-_Breakpoints: `base` <640, `sm` ≥640, `md` ≥768, `lg` ≥1024, `xl` ≥1280, `2xl` ≥1536._
-
-**Color:** `--primitive-color-{variant}-{value}`
-
-_`mode-light` `mode-dark` variants are only applicable on primitive tier._
+**Color:** `--primitive-color-{variant}-{value}`. The `mode-light` and `mode-dark` variants are used only in primitives.
 
 **Typography:** `--primitive-typography-{property}[-{value}]`
 
@@ -116,39 +139,30 @@ _`mode-light` `mode-dark` variants are only applicable on primitive tier._
 
 ##### Semantic
 
-**Color:** `--color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}]`
-
-_Scope, mode and inverse are all variants: `--color-inverse-chart-axis`. A mode variant can be followed directly by a value: `--color-static-black`. `--color-interactive-disabled-muted` is an accepted outlier: it puts state before emphasis._
+**Color:** `--color[-{variant}][-{concept}][-{role}][-{emphasis}][-{state}][-{value}]` Scope, mode and inverse are all variants: `--color-inverse-chart-axis`. A mode variant can be followed directly by a value: `--color-static-black`. `--color-interactive-disabled-muted` is an accepted outlier: it puts state before emphasis.
 
 **Typography:** `--typography-{breakpoint}-{typeset}[-{role}][-{size}]-{property}`
-
-_Every role has a size, `eyebrow` is the only role without one._
+Every role has a size except `eyebrow`.
 
 **Spacing:** `--spacing-{value}`
 
-**Flow:** `--flow-{context}[-{step}]`
+**Flow:** `--flow-{context}[-{step}]` The context is `spacious`, `standard` or `compact`.
 
-_(The context is `spacious`, `standard` or `compact`. Content outside any declared context takes standard. The bare `--flow-*` variables are internal.)_
+**Grid:** `--grid-{breakpoint}-{layout}-container-padding`
 
 **Shadow:** `--shadow[-{value}]`
 
 **Elevation:** `--elevation-{value}`
 
-_(Shadow tokens are still provided, but a stepped level of elevation is expressed with an elevation value from 0 to 6 rather than a shadow size.)_
-
-##### Usage Alias Classes
-
-We provide a small number of classes, that alias the tokens, as a convenience for people who use the CSS without working with tokens. These are named for where they are used, for example: `.card-title`, `.chart-tick`, `.dashboard-section-title`
-
-Semantic tokens are named by _role_, **never** by component. The usage aliases are named for where they are _used_; cards, charts, dashboard sections etc. They are allowed because they are CSS classes that reference the system's tokens, not tokens themselves.
+The system also publishes a small set of classes named for where they are used, such as `.card-title`. They are classes, not tokens, so they are allowed to name a component ([0002](./decisions/0002-token-naming-grammar.md)). They are described in [Usage aliases](#usage-aliases).
 
 ## Typography
 
-Typography is fundamental to the design system anchoring our products' voice, legibility and visual consistency.
+Typography sets the system's voice and keeps text legible and consistent across our products ([0003](./decisions/0003-typography.md)).
 
 ### Typeface
 
-The typeface is **Inter**, everywhere except in code blocks where Source Code Pro is used. The typefaces are available as web-fonts.
+The typeface is **Inter**. Code is set in Source Code Pro. Both are available as web fonts.
 
 | Purpose | Value           |
 | ------- | --------------- |
@@ -156,11 +170,13 @@ The typeface is **Inter**, everywhere except in code blocks where Source Code Pr
 | Default | Inter           |
 | Code    | Source Code Pro |
 
-_Display is intentionally specified as a purpose even though it has the same default value_
+Display is listed as its own purpose, although it has the same value as the default, so that a display face can be added later without renaming tokens.
 
-### Primitive Typography Scale
+If Inter fails to load, text falls back through this stack: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`. Code falls back to the system monospace fonts. The Figma variables have only the first name in each stack. The build adds the rest to the font-family tokens ([0003](./decisions/0003-typography.md)).
 
-The scale comprises 17 steps, anchored at `0` = 16px (standard base body size). Negative = smaller/finer, positive = larger/more expressive.
+### Primitive typography scale
+
+The scale has 17 steps. Step `0` is 16px, the base body size. Negative steps are smaller and positive steps are larger.
 
 | Step | Size (px) | Size (rem) |        |
 | ---- | --------- | ---------- | ------ |
@@ -184,9 +200,9 @@ The scale comprises 17 steps, anchored at `0` = 16px (standard base body size). 
 
 _rem values assume a 16px root font size._
 
-#### Generative Logic
+#### Generative logic
 
-The scale is created from five base sizes: 12, 14, 16, 18, (doubled twice) and 20 (doubled once)
+The scale is built from five base sizes: 12, 14, 16, 18, (doubled twice) and 20 (doubled once)
 
 **Doubling chains:**
 
@@ -196,24 +212,34 @@ The scale is created from five base sizes: 12, 14, 16, 18, (doubled twice) and 2
 - 18 → 36 → 72
 - 20 → 40 (→ 80 if extended)
 
-**Exceptions (no chain membership):** 22, 26, 30 are the scale's three hand-placed values. They are deliberately included in the lower half of the scale as responsive intermediates. Below 32px, adjacent steps hold a near-constant ratio of ~1.07–1.17 (12→14→16→18→20→22→24→26→28→30→32). This close spacing gives fine-grained control in the UI-critical range, where a small perceptual step matters more than it does at display sizes.
+22, 26 and 30 belong to no chain. They are hand-placed values, included in the lower half of the scale as intermediate sizes for responsive type. Below 32px, each step is about 1.07 to 1.17 times the one before (12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32). The close steps give fine control at interface sizes, where a small difference in size is easier to see than it is at display sizes.
 
 **Extending the scale:**
 
 - Above step 14 (72px): extend the doubling chain — 40 → 80, 48 → 96, 56 → 112 etc.
 - Below step -2 (12px): continue the dense-region ratio, giving the next step ≈ 11px.
 
-### Semantic Typesets
+### Typesets
 
-The system has two typesets: longform for reading, and product for interfaces, tables, charts and maps. Both use the same roles. A typeset can give a role its own font, weight, line height, letter-spacing or size; in practice the two differ mainly in line height. Longform is airier, which suits long passages of text, and product is tighter, which suits dashboards.
+The system has two typesets: longform for reading, and product for interfaces, tables, charts and maps. Both use the same roles. A typeset can give a role its own font, weight, line height, letter-spacing or size. Longform is airier, which suits long passages of text, and product is tighter, which suits dashboards ([0003](./decisions/0003-typography.md)).
+
+Apart from line height, the only difference is that `subhead-md` and `subhead-lg` are larger in longform at `lg` and `xl`. The [full matrices](#line-height) give every value.
+
+| Class                        | For                                                 | Flow context    | Content styles and widths |
+| ---------------------------- | --------------------------------------------------- | --------------- | ------------------------- |
+| `typeset-longform`           | Articles, reports and documentation                 | `flow-spacious` | Yes                       |
+| `typeset-product`            | Interfaces, tables, charts and maps                 | None            | No                        |
+| `typeset-product--formatted` | Content from a CMS or Markdown in a product setting | `flow-standard` | Yes                       |
+
+Plain `typeset-product` sets type only. It is used on component roots, whose markup must not pick up content styles. `typeset-product--formatted` works on its own or beside `typeset-product` ([0015](./decisions/0015-system-classes.md)).
 
 The typeset is chosen once, on a wrapper or app root:
 
 ```html
-<body class="typeset-longform"></body>
+<div class="typeset-longform"></div>
 ```
 
-where contexts are nested the inner context takes precedence:
+where contexts are nested the inner context takes precedence ([0015](./decisions/0015-system-classes.md)):
 
 ```html
 <article class="typeset-longform">
@@ -224,9 +250,47 @@ where contexts are nested the inner context takes precedence:
 </article>
 ```
 
+Product is the default typeset. Its role values are also set on `:root`, so a role class outside any typeset still works.
+
+Type changes at five breakpoints: `base`, `sm`, `md`, `lg` and `xl`. There are no `2xl` typography tokens, so type at `2xl` is the same as at `xl` ([0003](./decisions/0003-typography.md)).
+
+#### Content styles
+
+Rendered Markdown and CMS output can't have classes. Inside `typeset-longform` and `typeset-product--formatted`, the system styles these unclassed elements: links, emphasis, inline and block code, lists to three levels, description lists, quotes, rules, tables, figures and disclosure. Print and forced-colours modes have their own rules ([0015](./decisions/0015-system-classes.md)).
+
+Headings and a few other elements also take a role without a class. These element aliases use the sizes of the typeset they are in:
+
+| Element      | Role                       |
+| ------------ | -------------------------- |
+| `h1`         | `headline-lg`              |
+| `h2`         | `headline-sm`              |
+| `h3`         | `title-lg`                 |
+| `h4`         | `title-md`                 |
+| `h5`         | `title-sm`                 |
+| `p.lead`     | `body-lg`, in muted colour |
+| `figcaption` | `caption-sm`               |
+
+An `h1` in plain `typeset-product` stays unstyled. It needs a role class or a usage alias ([0015](./decisions/0015-system-classes.md)).
+
+Content styles and element aliases have zero specificity of their own, so any class on the element wins. They stop at a `.not-typeset` block and at a different typeset nested inside ([0015](./decisions/0015-system-classes.md)).
+
+#### Content widths
+
+A formatted typeset (`typeset-longform` or `typeset-product--formatted`) sets a maximum width on each of its direct children. The typeset itself has no maximum width ([0015](./decisions/0015-system-classes.md)).
+
+| Width            | Value                  | Applies to                                                      |
+| ---------------- | ---------------------- | --------------------------------------------------------------- |
+| `--measure-text` | 38 × body size (608px) | Running text                                                    |
+| `--measure-wide` | 56 × body size (896px) | `figure`, `img`, `video`, `iframe`, `table`, `pre` and `.chart` |
+| `--measure-full` | None                   | Nested typesets and `.not-typeset` blocks                       |
+
+The pixel values are at the 16px body size. `--measure-text` gives about 79 characters of Inter, inside the 80 that WCAG 1.4.8 allows. The widths are multiples of the body size, so the number of characters stays the same if body text grows.
+
+`.width-content`, `.width-content-wide` and `.width-content-full` set a child's width explicitly. A `max-width` utility wins over both the defaults and these classes. The widths are also set on `:root`, so the classes work outside a formatted typeset ([0015](./decisions/0015-system-classes.md)).
+
 #### Roles
 
-Roles are defined in sets of three: sm, md, lg in each set, with the exception of 'eyebrow' which is singular. Role sets are:
+Each role has three sizes, `sm`, `md` and `lg`, except `eyebrow`, which has one ([0003](./decisions/0003-typography.md)).
 
 | Role     | Description                                                                                          |
 | -------- | ---------------------------------------------------------------------------------------------------- |
@@ -239,7 +303,7 @@ Roles are defined in sets of three: sm, md, lg in each set, with the exception o
 | Label    | Functional text. Heavier than caption for recognition.                                               |
 | Metric   | A figure presented as the content itself. Tabular numerals, quick comprehension.                     |
 | Caption  | Subordinate annotation for images, charts, sources, and helper text. Smaller and tighter than body.  |
-| Eyebrow  | Short signpost above a headline or title. Categorises or orients.                                    |
+| Eyebrow  | Short signpost above a headline or title. Categorises or orientates.                                 |
 
 Distinctions:
 
@@ -248,11 +312,17 @@ Distinctions:
 - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
 - **Pairing**: subhead pairs with headline/display, subtitle with title.
 
-Each role can be applied with a class named `.{role}-{size}`, such as `.body-md` or `.title-lg`. The eyebrow class is `.eyebrow`. A role class picks up the values for the current breakpoint and typeset, so there is no need to choose breakpoint tokens by hand.
+No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, can use `label-lg`, or `label-md` one level down ([0003](./decisions/0003-typography.md)).
 
-We output a small set of [aliases](#Usage Aliases), but where possible, use the role classes directly, such as .title-md, because the roles are the system's stable, canonical API.
+The role set is closed. Adding a role needs a decision record, so reuse an existing role through an alias first ([0003](./decisions/0003-typography.md)).
 
-### Font Weight
+Each role can be applied with a class named `.{role}-{size}`, such as `.body-md` or `.title-lg`. The eyebrow class is `.eyebrow`. A role class picks up the values for the current breakpoint and typeset, so there is no need to choose breakpoint tokens by hand ([0015](./decisions/0015-system-classes.md)).
+
+The `metric` roles use tabular numerals. `subhead`, `subtitle` and `eyebrow` use the muted text colour, `--color-text-muted`, on the role class and on every alias of it ([0015](./decisions/0015-system-classes.md)).
+
+The system also publishes [usage aliases](#usage-aliases), but use the role classes where you can, because the roles are the system's stable API ([0003](./decisions/0003-typography.md)).
+
+### Font weight
 
 The system has five font weights. No role uses light.
 
@@ -266,12 +336,12 @@ The system has five font weights. No role uses light.
 
 #### Identity weight vs emphasis weight
 
-- **Identity weight** is attached to [role](#roles) within a [typeset](#semantic-typesets)
+- **Identity weight** is attached to [role](#roles) within a [typeset](#typesets)
 - **Emphasis weight** is a separate modifier that can be applied as an over-ride to give emphasis.
 
-### Per-role identity weights
+#### Per-role identity weights
 
-Both typesets currently give each role the same weight.
+Both typesets give each role the same weight.
 
 | Role     | Weight         |
 | -------- | -------------- |
@@ -286,9 +356,9 @@ Both typesets currently give each role the same weight.
 | Caption  | Regular (400)  |
 | Eyebrow  | Medium (500)   |
 
-##### Emphasis modifier
+#### Emphasis modifier
 
-A small, role-agnostic layer that applies regardless of which role it is applied to:
+Two classes change the weight of any role:
 
 ```css
 .text-strong {
@@ -299,15 +369,17 @@ A small, role-agnostic layer that applies regardless of which role it is applied
 } /* de-emphasize */
 ```
 
-_Binding to a primitive token here is system css and not a pattern to copy_
+These classes are part of `system.css`. Components don't bind to primitive tokens this way.
 
-### Line Height
+### Line height
 
 Line height is defined in three steps based on a simple formula: `font-size + k`, where font-size and k are measured in px.
 
 | tight           | default         | loose            |
 | --------------- | --------------- | ---------------- |
 | font-size + 4px | font-size + 8px | font-size + 12px |
+
+Line height comes from the role. There are no line-height utilities. ([0003](./decisions/0003-typography.md)).
 
 #### typeset-longform full matrix
 
@@ -387,15 +459,13 @@ _Font size / line height in px. Breakpoints: base <640, sm ≥640, md ≥768, lg
 
 <!-- GEN:product-matrix END -->
 
-### Usage Aliases
+### Usage aliases
 
-A small number of usage aliases are provided for people who use the system's CSS without working with its tokens or typesets.
+Usage aliases are classes for people who use the system's CSS without working with its tokens or typesets. Each alias applies an existing role, sometimes with tabular numerals or the muted colour, and resolves against the nearest typeset ([0003](./decisions/0003-typography.md), [0015](./decisions/0015-system-classes.md)).
 
-Each alias class points to an existing typeset role, and resolves against the nearest typeset context.
+Aliases are named `{place}-{part}`, for example `.card-title`, `.chart-tick` and `.dashboard-section-title`.
 
-Aliases are named `{place}-{part}`, for example: `.card-title`, `.chart-tick`, `.dashboard-section-title`.
-
-The set of aliases is defined in the `usage` style set in Figma. Adding an alias to be output from the system requires a recorded decision.
+The aliases are defined in the `usage` style set in Figma, and the classes are generated from its export. Adding an alias needs a decision record ([0003](./decisions/0003-typography.md), [0015](./decisions/0015-system-classes.md)).
 
 <!-- GEN:alias-table START -->
 
@@ -422,29 +492,28 @@ The set of aliases is defined in the `usage` style set in Figma. Adding an alias
 | `.dialog-title`               | `.label-lg`    |                                |
 | `.card-title`                 | `.title-sm`    |                                |
 | `.card-subtitle`              | `.subtitle-sm` | muted colour                   |
-| `.hint-text`                  | `.caption-sm`  |                                |
+| `.input-hint`                 | `.caption-sm`  |                                |
 | `.input-label`                | `.label-md`    |                                |
-| `.placeholder`                | `.body-sm`     |                                |
-| `.field-value`                | `.body-sm`     |                                |
+| `.input-placeholder`          | `.body-sm`     |                                |
+| `.input-value`                | `.body-sm`     |                                |
 | `.button-label`               | `.label-md`    |                                |
 | `.button-label-sm`            | `.label-sm`    |                                |
 
 <!-- GEN:alias-table END -->
 
-### Title Groups
+### Title groups
 
-A title group is the collection of text elements that appear at the top of a component such as a card, chart, table or panel. It can contain up to three parts, stacked in this order: an optional eyebrow, a title and a subtitle. Each part uses the role of the same name.
+A title group is the text at the top of a component such as a card, chart, table or panel. It has up to three parts, stacked in this order: an optional eyebrow, a title and an optional subtitle. Each part uses the role of the same name ([0012](./decisions/0012-title-groupings.md)).
 
-Components can contain other titled components. A card might hold a single chart, or a pair of charts, each of which has its own title group. If every group kept its full treatment, two or more titles of similar weight would compete for dominance.
+A component can contain other titled components. A card might hold one chart, or a pair of charts, each with its own title group. If every group kept all its parts, two or more titles of similar weight would compete.
 
-When a component contains only one title group, that group can use all three parts.
-The eyebrow is optional.
+When a component contains one title group, that group can use all three parts.
 
-When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
+When a component contains two or more title groups, the designer chooses one to be dominant. The dominant group has a title and an optional subtitle, and no eyebrow. Each other group is demoted to an eyebrow, which holds the text that would have been its title. A subtitle pairs only with a dominant title, so a demoted group has no subtitle ([0012](./decisions/0012-title-groupings.md)).
 
-A title group's title uses `title-sm` unless the design needs a larger one.
+A title group's title uses `title-sm` unless the design needs a larger one ([0012](./decisions/0012-title-groupings.md)).
 
-The parts of a title group have no space between them. The eyebrow, title and subtitle sit directly on one another, in every typeset and flow context, and their line heights separate them.
+The parts of a title group have no space between them, in every typeset and flow context. Their line heights separate them ([0005](./decisions/0005-flow.md), [0012](./decisions/0012-title-groupings.md)).
 
 Worked examples:
 
@@ -461,14 +530,13 @@ Worked examples:
 
 _In an article or marketing page block the eyebrow can be used as a purely stylistic kicker above display text or a headline._
 
+[Chrome](#chrome) describes the components that render a title group.
+
 ## Spacing
 
-Spacing uses a single numbered scale. The number is a multiple of 4px:
-`--spacing-4` is 16px. Below 16px there are half steps for finer control
-(`--spacing-1-5` is 6px), and `--spacing-px` is 1px.
+Spacing uses one numbered scale. The number is a multiple of 4px, so `--spacing-4` is 16px. Below 16px there are half steps for finer control (`--spacing-1-5` is 6px), and `--spacing-px` is 1px. Use `--spacing-{n}`, never the primitive. There are no named spacing sets apart from flow ([0004](./decisions/0004-spacing.md)).
 
-Space does one of two jobs. Space that builds a component, such as padding or
-an indent, uses the spacing scale. Space between blocks of content uses [flow](#flow) and changes with its context.
+Space does one of two jobs. Space that builds a component, such as padding, borders or an indent, uses the spacing scale. Space between blocks of content uses [flow](#flow), which changes with its context ([0004](./decisions/0004-spacing.md)).
 
 <!-- GEN:spacing-table START -->
 
@@ -498,15 +566,15 @@ an indent, uses the spacing scale. Space between blocks of content uses [flow](#
 
 ## Flow
 
-Flow is the vertical space between blocks of content, such as a heading and its paragraph, or one card and the next.
+Flow is the vertical space between blocks of content, such as a heading and its paragraph, or one card and the next ([0005](./decisions/0005-flow.md)).
 
-Flow is set on a container as a context: `flow-spacious`, `flow-standard` or `flow-compact`. Standard is the default. Each context gives a value to four steps: `tight`, `default`, `loose` and `section`. The same step is wider in a spacious context than in a compact one (see the table below).
+### Contexts and steps
 
-`typeset-longform` adds `flow-spacious` automatically, and assigns steps to headings, captions and block elements from the markup.
+Flow is set on a container by a context class: `flow-spacious`, `flow-standard` or `flow-compact`. Each context gives a value to four steps: `tight`, `default`, `loose` and `section`. The step says how closely two blocks are related. The context sets the distance ([0005](./decisions/0005-flow.md)).
 
-Flow spaces only the direct children of its context, and each child gets the `default` step. An `mt-flow-{step}` or `gap-flow-{step}` class replaces the assigned step.
+Choose the context by the space available. `flow-compact` is for surfaces too small to show four distinct gaps, such as control panels, map overlays, tooltips and dense sidebars. In it, `tight` equals `default` and `loose` equals `section`. Other product surfaces use `flow-standard`. Reading content uses `flow-spacious`, which `typeset-longform` sets ([0005](./decisions/0005-flow.md)).
 
-A component that declares its own flow context or spacing is sealed: the flow around it stops at its edge. A component keeps its density wherever it is placed only if it declares its own context.
+`typeset-longform` sets `flow-spacious`, and `typeset-product--formatted` sets `flow-standard`. Plain `typeset-product` sets no flow, and a flow context never sets a typeset. Outside any context, the steps take the standard values ([0005](./decisions/0005-flow.md), [0016](./decisions/0016-flow-in-system-css.md)).
 
 <!-- GEN:flow-table START -->
 
@@ -521,9 +589,20 @@ _Values in px._
 
 <!-- GEN:flow-table END -->
 
-### Flow element map
+### Which step each child takes
 
-The step each element takes in a flow context, from the build. An `mt-flow-{step}` class on the element replaces it.
+A flow context spaces only its direct children. It sets their margins to zero, then gives each child, after the first, a top margin. The size of the margin comes from the value that the step receives from the context.
+
+The same rules apply in every context ([0005](./decisions/0005-flow.md), [0016](./decisions/0016-flow-in-system-css.md)), they are:
+
+- Any child is spaced at `default`.
+- A block object, and the child after it, are spaced at `loose`.
+- A major heading is spaced at `section`, and a minor heading at `loose`. Headings below `h5` are discouraged, so `h6` has no rule and is spaced at `default`.
+- The parts of a title group have no step: a heading straight after another heading, a subtitle or subhead straight after its heading, and a heading straight after its eyebrow. An eyebrow before a major heading is spaced at `section`, so the group is set off as one ([0012](./decisions/0012-title-groupings.md)).
+- A caption is coupled to what it captions at the `tight` step: `figcaption` in a `figure`, `caption` in a `table`, and a caption role or `.chart-note` straight after a block object.
+- Inside a child, list items and nested lists are spaced at `tight`. In a `dl`, each `dd` is spaced at `tight`, and each `dt` after the first at `default`.
+
+The table below gives the step for each element:
 
 <!-- GEN:flow-map START -->
 
@@ -550,9 +629,32 @@ _Later rows win. A heading is a role class, a usage alias or an element alias on
 
 <!-- GEN:flow-map END -->
 
+Children with `.sr-only` or `hidden`, and `template` elements, are skipped, and nothing is spaced from them.
+
+### Utilities
+
+`mt-flow-{step}` sets the space above one element, and replaces the step the rules gave it. `gap-flow-{step}` sets the gap between the children of a flex or grid container that is not itself a flow context. Both resolve against the nearest context, and their names don't include the context ([0005](./decisions/0005-flow.md)).
+
+There are no responsive or state variants of the flow utilities, such as `md:mt-flow-loose` ([0016](./decisions/0016-flow-in-system-css.md)).
+
+A context class and `gap-flow-*` on the same element add together, so don't combine them ([0005](./decisions/0005-flow.md)).
+
+### Components and nesting
+
+Flow spaces only the direct children of its context. ([0005](./decisions/0005-flow.md)).
+
+A component that needs its own density declares its own flow context ([0005](./decisions/0005-flow.md)).
+
+The space above a nested context comes from the outer context ([0016](./decisions/0016-flow-in-system-css.md)).
+
 ## Layout grid
 
-A page uses one of two layouts. `.container` is the contained layout, for document-like pages: its width steps up with the breakpoints and it is centred. `.container-fluid` is the fluid layout, for dashboards and application shells: it fills the viewport. The container's padding sets the page edge. The space between tiled blocks, such as cards, is the default flow step of the context, set with `gap-flow` on the grid, so a row of blocks and a stack of blocks are spaced alike ([0017](./decisions/0017-layout-grid.md)).
+A page uses one of two layouts ([0017](./decisions/0017-layout-grid.md)):
+
+- **Contained**, with `.container`, is for document-like pages such as articles, documentation and forms. Its width steps up with the breakpoints, it is centred, and its padding grows with the viewport.
+- **Fluid**, with `.container-fluid`, is for dashboards and application shells. It fills the width of the viewport, and its padding stays between 16px and 24px.
+
+The padding for each breakpoint and layout is set by `--grid-{breakpoint}-{contained|fluid}-container-padding`.
 
 <!-- GEN:grid-table START -->
 
@@ -569,52 +671,155 @@ _Values in px. The fluid layout is always the full width._
 
 <!-- GEN:grid-table END -->
 
+The space between tiled blocks, such as cards or panels, is the default flow step of the context, set with `gap-flow` on the grid or flex container. A row of blocks and a stack of blocks then have the same space between them, and both follow the density of the context ([0017](./decisions/0017-layout-grid.md)).
+
+There are no column tokens. Columns are set with CSS grid, or Tailwind's grid utilities, on each page ([0017](./decisions/0017-layout-grid.md)).
+
+Both layout classes are in `system.css`, so the contained layout works without Tailwind ([0017](./decisions/0017-layout-grid.md)).
+
+## Colour
+
+Every semantic colour has a light and a dark value. Light values are set on `:root` and dark values on `.dark`. A component that uses semantic tokens changes mode with no changes of its own ([0018](./decisions/0018-colour.md)).
+
+### Choosing a colour
+
+Choose a token by the role of the element ([0018](./decisions/0018-colour.md)):
+
+| Group       | Tokens                                                                                                           | Use for                                                      |
+| ----------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Text        | `--color-text`, `--color-text-muted`, `--color-text-wash`                                                        | Text, in decreasing emphasis                                 |
+| Label       | `--color-label`, `--color-label-muted`                                                                           | Labels on controls                                           |
+| Canvas      | `--color-canvas`, `--color-canvas-muted`                                                                         | The page background                                          |
+| Surface     | `--color-surface` and `--color-surface-{role}`, each with a `-muted` version                                     | Cards, panels and status areas                               |
+| Border      | `--color-border`, `--color-border-muted`                                                                         | Borders and dividers                                         |
+| Interactive | `--color-interactive-*`                                                                                          | Controls, links and their states                             |
+| Inverse     | `--color-inverse-*`                                                                                              | Content on an inverse background                             |
+| Static      | `--color-static-white`, `--color-static-black`, `--color-static-brand`, `--color-static-gla-{hue}`               | Colours that don't change with the mode                      |
+| Data        | `--color-data-*`                                                                                                 | Chart and map data ([Charts and tables](#charts-and-tables)) |
+| Chart       | `--color-chart-surface`, `-axis`, `-grid`, `-label`, `-label-muted`                                              | Chart backgrounds, axes, grid lines and labels               |
+| Geo         | `--color-geo-feature`, `-label` and `-annotation`, each with a `-muted` version, and `--color-geo-interactive-*` | Maps                                                         |
+
+The surface roles are `accent`, `alpha`, `beta`, `positive`, `negative`, `caution`, `neutral` and `empty`.
+
+The palette, `--color-palette-{hue}-{step}`, is not used in components. Its one use is a quantitative scale in a chart or map ([0018](./decisions/0018-colour.md), [0008](./decisions/0008-charts.md)).
+
+### Canvas and surface
+
+The canvas is the page background. A surface is a card or panel on it. [Elevation](#elevation) sets a surface apart from the canvas. ([0018](./decisions/0018-colour.md), [0011](./decisions/0011-elevation.md)).
+
+### Interactive colours
+
+Interactive tokens are chosen by intent, then emphasis, then state: `--color-interactive-{intent}[-muted][-{state}]`. The intents are `primary`, `secondary`, `positive`, `negative` and `caution`. The states are `hover` and `active` ([0018](./decisions/0018-colour.md)).
+
+`--color-interactive-primary-text`, with hover and active states, is for links and text buttons. The selection and availability states, such as `--color-interactive-selected` and `--color-interactive-error`, are tokens of their own. Focus has one colour, `--color-interactive-focus` ([0019](./decisions/0019-accessibility.md)).
+
+Text and icons on a filled control use `--color-inverse-text`. The exception is `primary`, whose fill stays dark in both modes. Its text uses `--color-static-white` ([0018](./decisions/0018-colour.md)).
+
+Disabled text and icons use `--color-interactive-disabled`. A disabled fill uses `--color-interactive-disabled-muted` ([0018](./decisions/0018-colour.md)).
+
+### Inverse and static colours
+
+Content on an inverse background uses the `inverse` tokens, such as `--color-inverse-text` on `--color-inverse-surface` ([0018](./decisions/0018-colour.md)).
+
+`static` colours don't change with the mode. They are for the few places that must look the same in both: `--color-static-white`, `--color-static-black`, `--color-static-brand`, and the GLA brand hues as `--color-static-gla-{hue}` ([0018](./decisions/0018-colour.md)).
+
 ## Elevation
 
-An interface is a stack. The canvas is at the base, and surfaces sit above it
-at different levels of elevation. Each level is shown by a shadow.
+An interface is a stack. The canvas is at the base, and surfaces sit above it at different levels of elevation. Each level is shown by a shadow ([0011](./decisions/0011-elevation.md)).
 
-Elevation runs from `elevation-0` to `elevation-6`. `elevation-0` sits on the
-canvas and has no visual effect. Each step above it raises a surface further.
+Elevation runs from `elevation-0` to `elevation-6`. `elevation-0` sits on the canvas and has no visual effect. Each step above it raises a surface further. An elevation class sets the box shadow from its token, `--elevation-{0–6}` ([0011](./decisions/0011-elevation.md)).
 
-A surface's level is set by its colour and its elevation. The surface colour
-is `--color-surface`, or `--color-surface-muted` to set it apart from what is
-around it, and the elevation step is the level. There are no colour tokens for
-levels.
+A surface's level is set by its colour and its elevation. The surface colour is `--color-surface`, or `--color-surface-muted` to set it apart from what is around it, and the elevation step is the level. There are no colour tokens for levels ([0011](./decisions/0011-elevation.md)).
 
-Elevation is visual only. Stacking order is set by z-index, which is
-independent of elevation.
+Elevation is visual only. Stacking order is set by z-index, which is independent of elevation ([0011](./decisions/0011-elevation.md)).
 
-## Visual Rules
+The shadow tokens are still published, but a level of elevation uses an elevation step, not a shadow size ([0002](./decisions/0002-token-naming-grammar.md)). `--elevation-1` to `--elevation-6` have the same values as `--shadow-sm`, `--shadow`, `--shadow-md`, `--shadow-lg`, `--shadow-xl` and `--shadow-2xl`. `--shadow-inner` has no elevation step.
 
-Corners are square. The only exceptions are things that are actually round,
-such as a circular avatar or a dot.
+## Visual rules
 
-## Charts and Tables
+Corners are square. The radius is 0 everywhere. Only things that are round, such as a circular avatar or a dot, have a radius. Bars, cards, cells, buttons, inputs and containers are never rounded ([0006](./decisions/0006-visual-rules.md)).
+
+## Charts and tables
 
 Code is the source of truth for charts and tables. Figma versions are
-representative: they are built to look right, not to be accurate to the data.
+representative: they are built to look right, not to be accurate to the data ([0001](./decisions/0001-sources-of-truth.md), [0008](./decisions/0008-charts.md)). Observable Plot or D3 draws the real charts.
 
 Chart text uses the product typeset roles or the usage aliases. Chart colours
-use the `data` and `chart` colour tokens.
+use the `data` and `chart` colour tokens ([0008](./decisions/0008-charts.md)).
 
-Series take `--color-data-primary`, `--color-data-secondary` and
-`--color-data-tertiary`, in that order. In light mode these are the blue, dark
-pink and orange of the categorical palette. In dark mode they are cyan, pink and
-orange. To highlight one series against the rest, use `--color-data-primary` for
-it and `--color-data-context` for the others.
+Category and x-axis labels sit below the baseline. Y-axis ticks sit to the left of the plot ([0008](./decisions/0008-charts.md)).
 
-Categories with no order or ranking can use the categorical palette,
-`--color-data-categorical-{hue}`, instead of the series roles.
+### Chrome
 
-A chart that needs other colours takes them from the categorical palette,
-`--color-data-categorical-{hue}`. Use two or three in a chart, not the whole
-palette. Areas with no data use `--color-data-empty`.
+Cards, charts and tables share the same chrome: a header above the content and a footer below it. `Card`, `ChartContainer` and `TableContainer` in the component library each build from the same three parts ([0008](./decisions/0008-charts.md)):
 
-The background, axes, grid lines and labels use the `chart` tokens.
+- **`ChromeHeader`** holds a [title group](#title-groups), rendered by `TitleGroup`, and an optional hint at the right. The hint is a help overlay, not a typography role.
+- **`ChromeFooter`** holds the footnotes at the left (byline, source, note, and a button that opens a chart's or table's description) and the actions at the right, such as the data and image download buttons. The footnotes use `caption-sm` in the muted text colour.
+- **`TitleGroup`** renders the eyebrow, title and subtitle, or only an eyebrow when the group is demoted.
 
-# Addendum: suggested extensions
+`Card` is a surface: it has the surface colour, a muted border, `elevation-1` and padding, and spaces its header, content and footer with `gap-flow`.
 
-_This addendum is not part of the specification. It lists content the decision records support but this skeleton does not yet cover._
+The designer composes the middle of `ChartContainer` for each chart. It has slots for the controls, the legend and the plot. The legend has its own slot so that plots side by side stay aligned when their legends wrap to different heights ([0008](./decisions/0008-charts.md)).
 
-- **Layout grid, Colour and Accessibility** are listed in the scope above but have no decision record yet.
+### Data colour
+
+Series take the data roles in order: `--color-data-primary`, `--color-data-secondary`, then `--color-data-tertiary`.
+
+To highlight one series, set it in `--color-data-primary` and the rest in `--color-data-context`, which is grey ([0008](./decisions/0008-charts.md)).
+
+Categories with no order or ranking can use the categorical palette, `--color-data-categorical-{hue}`, instead of the series roles. ([0008](./decisions/0008-charts.md)).
+
+A chart uses no more than three categorical colours. A chart that needs colours beyond the three series roles takes them from the categorical palette, choosing hues with the most contrast against the background. Where more categories need telling apart, use labels, line styles or small multiples ([0008](./decisions/0008-charts.md)).
+
+Common encodings have their own roles ([0008](./decisions/0008-charts.md)):
+
+| Token                                            | Use for                                                                                                                           |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `--color-data-positive`, `--color-data-negative` | Diverging data such as opinion, and good and bad. Blue and red, which avoid the red–green pair that many readers can't tell apart |
+| `--color-data-neutral-0`                         | "Neither"                                                                                                                         |
+| `--color-data-neutral-1`                         | "Don't know"                                                                                                                      |
+| `--color-data-male`, `--color-data-female`       | Sex in demographic data. Green and purple                                                                                         |
+
+### Quantitative scales
+
+Quantitative scales are built from the palette ramps. There are no scale tokens ([0008](./decisions/0008-charts.md)).
+
+A sequential scale uses up to five steps of one hue, `--color-palette-blue-{step}` by default, with the higher value on the higher step. Palette steps rise in contrast against the background in both modes, so the scale reverses in dark mode with no changes.
+
+A diverging scale uses the red ramp for negative values and the blue ramp for positive values. It can add a grey step for values that are exactly zero. A scale that needs more than one hue uses an established perceptually even ramp, such as viridis.
+
+### Chart and map colours
+
+The background, axes, grid lines and labels use the `chart` tokens: `--color-chart-surface`, `--color-chart-axis`, `--color-chart-grid`, `--color-chart-label` and `--color-chart-label-muted`. Maps use the `geo` tokens. Both have `inverse` versions for content on an inverse background ([0008](./decisions/0008-charts.md), [0018](./decisions/0018-colour.md)).
+
+### Tables in Figma
+
+The Figma table kit is built from cells, rows and header rows. Cells have fixed widths, and everything above them hugs, so columns line up. The cell is the unit that is swapped. Its renderer (text, number, boolean or mini-chart) sets its alignment. The widths are xs 64, sm 88, md 120, lg 220, xl 300, or fill, which is set on the instance ([0007](./decisions/0007-tables.md)).
+
+## Accessibility
+
+The target is WCAG 2.2 AA, for components, documentation pages and the Figma library ([0019](./decisions/0019-accessibility.md)).
+
+### Focus
+
+Focus has one colour, `--color-interactive-focus`, and two forms. ([0019](./decisions/0019-accessibility.md)).
+
+- **By default, an outline on `:focus-visible`.** It is `max(2px, 0.08em)` solid, offset by its own width. An element can change it with `--outline-size`, `--outline-style`, `--outline-color` and `--outline-offset`.
+- **On a filled control, an inset ring.** `Button`, `TabLabel`, `CheckboxSolid` and `RadioButtonSolid` turn the outline off and draw two lines inside their edge: 2px of `--color-interactive-focus` at the edge, and 2px of `--color-surface` inside it. The surface line keeps the focus line visible against the control's fill. Because the ring is inside the edge, focus stays visible on the tabbed sidebar buttons.
+
+The Figma `focus` effect style draws the same inset ring with two inner shadows, bound to `interactive/focus` and `surface` ([0019](./decisions/0019-accessibility.md)).
+
+### Contrast
+
+Contrast follows WCAG: 4.5:1 for text, 3:1 for large text, and 3:1 for interface components and the parts of a chart that show data ([0019](./decisions/0019-accessibility.md)).
+
+Two data colours are exceptions to the 3:1 rule:
+
+- `--color-data-context` is for the series behind a highlighted one. It is always used with `--color-data-primary`, and has no meaning on its own.
+- `--color-data-categorical-yellow` is used only for large areas, with an outline or a direct label.
+
+### Text size and width
+
+No text is smaller than 12px. The smallest roles, `label-sm` and `caption-sm`, are 12px ([0019](./decisions/0019-accessibility.md)).
+
+Running text is no wider than 80 characters. The [content widths](#content-widths) keep it to about 79 ([0019](./decisions/0019-accessibility.md), [0015](./decisions/0015-system-classes.md)).

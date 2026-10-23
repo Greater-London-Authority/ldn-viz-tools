@@ -6,6 +6,7 @@ Differences between the spec, the build and the code, found while rewriting the 
 
 | Snag | Where | Notes |
 | --- | --- | --- |
+| `ChartContainer` shows its header for the wrong props | `packages/charts/src/lib/chartContainer/ChartContainer.svelte`: `{#if title \|\| description \|\| eyebrow \|\| hint}` | A subtitle on its own renders no header, and a description on its own renders an empty one with its `mb-2`. `TableContainer` checks `subtitle`, not `description`. Found 2026-10-22 while writing the spec's Chrome section |
 
 ## After the v4 release
 
@@ -25,7 +26,7 @@ Deferred on purpose. Each has a GitHub issue.
 | The Pos Neg Bar kit has no background track | Figma ver 4.0, Components - Tables: `Mini chart - Pos Neg Bar` | `BarDivergingCell` draws a `surface.neutral` track behind the bar, and puts a long bar's label inside it in `inverse.text`. Add both to the kit, or record why Figma leaves them out |
 | Metric and Chrome are on the Typography page | Figma ver 4.0, Typography: `Metric`, `Chrome` | Both are components, not type foundations. Move them when the page structure is settled: Chrome with the chart, table and card components it wraps, Metric with the UI components. `ChromeHeader` and `ChromeFooter` were made local components on 2026-10-21, with their properties recreated |
 | Work In Progress on the Charts page still uses other libraries | Figma ver 4.0, Components - Charts, `Work In Progress` section: `Toggle` (16), `System Icons` (6); the `Community examples` frame uses `Label/*`, `Body Text Medium/Medium`, `Heading Large/Regular` and `color/text/primary` | Not in 3.1 or v4. Rebuild with system components or delete the section |
-| Chrome usage guidance is v3 | Figma ver 4.0, Typography: `Chrome` | Rewrite it. `ChromeHeader`, `ChromeFooter` and `TitleGroup` in `packages/ui/src/lib/chrome/` are used by `Card` and `ChartContainer`; no table component uses them yet. The rules belong in the spec or the docs as well as in Figma |
+| Chrome usage guidance is v3 | Figma ver 4.0, Typography: `Chrome` | Rewrite it from the spec's Chrome section (S14). `ChromeHeader`, `ChromeFooter` and `TitleGroup` in `packages/ui/src/lib/chrome/` are used by `Card`, `ChartContainer` and `TableContainer`. Usage guidance goes in the docs (P9) |
 | The Maps page has no documentation | Figma ver 4.0, Components - Maps | It is a working canvas: dated screenshots, unnamed groups and frames, several `MapDrawingNav Track` drafts, and components without descriptions (Basemaps, London Borough TopoJSON, Air quality base map, PointSearch, SearchPoint, London Basemap). `.grid-indicator` inside Basemaps comes from a library outside 3.1. Needs a documentation pass against `packages/maps` |
 | The Application Shells page has no documentation | Figma ver 4.0, Application Shells | 23 example groups (sidebar, tabbed sidebar, footer and header combinations, and mode examples) with no intro or descriptions. Code has `AppShell` in `packages/ui/src/lib/appShell/`. Needs a doc frame that links the examples to `AppShell` and `Sidebar` |
 | The Dashboard Layouts page has no documentation | Figma ver 4.0, Dashboard Layouts | Seven tabbed-sidebar dashboards at each breakpoint, the fluid frames, and the `Section/*` layouts (1-up, 2-up, 2-up-left, 2-up-right, 3-up, 4-up) with slot properties. The section descriptions assume a 12-column grid; ADR 0017 has no column tokens and leaves columns to each page. Needs a doc frame |
@@ -45,6 +46,3 @@ Deferred on purpose. Each has a GitHub issue.
 
 | Snag | Where | Notes |
 | --- | --- | --- |
-| The scope list and the sections don't match | `design-system-specification.md`, top | Scope lists Layout grid, Colour and Accessibility, which have no section. Sections include Visual Rules and Charts and Tables, which aren't in the scope list |
-| Figma measure variables aren't in an ADR | `semantic-typography`: `{longform,product}/measure/{text,wide}`; `packages/themes/sd/normalise.js` step 5 | Added 2026-10-21 so designers can bind a frame's max width to the measure. They are copies (38 and 56 × body-md), dropped by the normaliser and checked against `system.config.js` in `normalise.test.js`. Amend ADR 0015 |
-| `check_spec.py` can't check skill files | `scripts/check_spec.py` | The RULES.md name check was run over the skills from a scratch script that also handles Tailwind utilities, `system.css` custom properties and old names in migration tables. Could become a `--skills` option |

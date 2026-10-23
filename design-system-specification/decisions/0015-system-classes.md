@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: ['Scope', 'Semantic Typesets', 'Usage Aliases', 'Flow', 'Elevation']
+spec: ['Outputs and set-ups', 'Typesets', 'Roles', 'Usage aliases', 'Accessibility']
 pr_url: ''
 ---
 
@@ -61,5 +61,6 @@ Generating the classes from the same dictionary as the properties keeps the two 
 - `.not-prose` becomes `.not-typeset`. Internal uses (the docs site and Storybook) move in phase 5.
 - A selector can't tell which ancestor typeset is nearest, so content nested three typesets deep (longform, product, longform) gets no content styles. `@scope` removes this limit.
 - The multiples are set in `sd/system.config.js`, not in the Figma export. A Figma variable holds a fixed value, and a width that follows the body size can't be expressed as one. This answers the specification's open question on `readable-width`, which is no longer a token property.
+- Figma has copies of the widths, so designers can bind a frame's maximum width to them: `measure/text` and `measure/wide` for each typeset and breakpoint in `semantic-typography` (608px and 896px, 38 and 56 times `body-md`). The token normaliser drops them, because `system.css` works out `--measure-*` itself, and `normalise.test.js` checks the Figma values against the multiples.
 - The product element aliases copy the longform roles (`h1` `headline-lg` to `h5` `title-sm`, `p.lead` `body-lg`, `figcaption` `caption-sm`) at product sizes. Both sets are to be reviewed.
 - [0016](./0016-flow-in-system-css.md) amends [0005](./0005-flow.md) for the flow rules that moved.

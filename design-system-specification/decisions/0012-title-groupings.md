@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Title groups', 'Which step each child takes']
 pr_url: ''
 ---
 

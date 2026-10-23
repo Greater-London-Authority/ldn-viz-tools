@@ -5,7 +5,7 @@
 
 	/**
 	 * The `HelpText` component wraps its `children` in a `<span>` set in
-	 * `.hint-text` and the muted text colour. Use it for help text in menus.
+	 * `.input-hint` and the muted text colour. Use it for help text in menus.
 	 */
 	const { Story } = defineMeta({
 		title: 'Tables/Components/Menus/HelpText',

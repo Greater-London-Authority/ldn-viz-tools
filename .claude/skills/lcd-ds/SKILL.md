@@ -89,7 +89,16 @@ python3 design-system-specification/scripts/adr_check.py
 
 ## Accessibility
 
-The spec has no Accessibility section yet. The build has one accessibility feature: a focus outline on every focusable element, set in the Base section of `system.css` from `--color-interactive-focus`. An element can change it with `--outline-size`, `--outline-style`, `--outline-color` and `--outline-offset`.
+Spec section: Accessibility. ADR: [0019](../../../design-system-specification/decisions/0019-accessibility.md). The target is WCAG 2.2 AA.
+
+Focus has one colour, `--color-interactive-focus`, and two forms:
+
+- An outline on every focusable element, set in the Base section of `system.css`. An element can change it with `--outline-size`, `--outline-style`, `--outline-color` and `--outline-offset`.
+- An inset ring on filled controls. `Button`, `TabLabel`, `CheckboxSolid` and `RadioButtonSolid` turn the outline off and draw the ring with Tailwind ring utilities: a 2px inset ring in `--color-surface`, offset by 2px of `--color-interactive-focus` (`ring-inset ring-2 ring-color-surface ring-offset-2 ring-offset-color-interactive-focus`). `Button` applies them on `focus-visible`, `TabLabel` on `focus`.
+
+There are no focus-ring tokens and no focus colour for each status.
+
+Text is 4.5:1 against its background, large text and interface parts 3:1. `--color-data-context` and `--color-data-categorical-yellow` are the stated exceptions. No text is smaller than 12px.
 
 ## Not implemented
 
@@ -97,10 +106,10 @@ The spec or ADRs describe these, and the build doesn't have them or doesn't enfo
 
 | Described | Source | In the build |
 | --- | --- | --- |
-| Layout grid, Colour and Accessibility sections | Spec scope | No section or ADR. [layout-grid.md](references/layout-grid.md) and [colour.md](references/colour.md) describe the build |
 | Square corners | [0006](../../../design-system-specification/decisions/0006-visual-rules.md) | Not enforced: the preset keeps Tailwind's `rounded-*` for things that are round |
-| Semantic tokens only | [0002](../../../design-system-specification/decisions/0002-token-naming-grammar.md) | Not enforced: SVG text in some table renderers, deck.gl cluster labels and Plot options in chart stories set sizes and weights directly |
+| Semantic tokens only | [0002](../../../design-system-specification/decisions/0002-token-naming-grammar.md) | Not enforced: map cluster labels set a fitted size, and `textSize` on the table axis and diverging-bar renderers overrides the alias in px |
+| No text smaller than 12px | [0019](../../../design-system-specification/decisions/0019-accessibility.md) | `ColorLegend` ticks are 10px, to be fixed after the release |
 
-## Names after the design review
+## Usage aliases
 
-The structure and naming of typesets, roles, flow contexts and steps are set by the spec. RFC 0002's design review may change a few of the v3 to v4 mappings in [migration.md](references/migration.md), and a later Figma export may add usage aliases.
+A later Figma export may add usage aliases. Check the spec's alias table, which is generated from the build.

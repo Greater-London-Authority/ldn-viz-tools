@@ -206,7 +206,7 @@
 								}
 							}}
 							value={groupName}
-							class="field-value text-strong padding-0 width-fit border-0"
+							class="input-value text-strong padding-0 width-fit border-0"
 						/>
 						<Button
 							onclick={() => deleteCat(groupName)}

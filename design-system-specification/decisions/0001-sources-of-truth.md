@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: ['0013']
-spec: []
+spec: ['London City Data Design System specification', 'Charts and tables']
 pr_url: ''
 ---
 

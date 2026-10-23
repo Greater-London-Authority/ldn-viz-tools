@@ -1,8 +1,8 @@
 ---
 id: '0019'
 title: The system targets WCAG 2.2 AA, with one focus colour and stated contrast exceptions for data colour
-status: proposed
-date: 2026-10-21
+status: accepted
+date: 2026-10-22
 released-in: null
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Accessibility, Colour, Typography]
@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Accessibility', 'Interactive colours']
 pr_url: ''
 ---
 

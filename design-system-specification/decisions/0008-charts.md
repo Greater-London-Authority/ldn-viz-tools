@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Charts and tables', 'Colour']
 pr_url: ''
 ---
 
