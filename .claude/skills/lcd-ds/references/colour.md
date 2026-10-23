@@ -1,6 +1,6 @@
 # Colour
 
-The spec has no Colour section or ADR yet. The naming grammar is in [tokens.md](tokens.md). This file describes the build: `--color-*` in `tokens.css` and `colors.js`.
+Spec section: Colour. ADRs: [0018](../../../../design-system-specification/decisions/0018-colour.md), and [0008](../../../../design-system-specification/decisions/0008-charts.md) for data colour. The naming grammar is in [tokens.md](tokens.md). The build is `--color-*` in `tokens.css` and `colors.js`.
 
 ## Modes
 
@@ -19,7 +19,7 @@ Choose the token by what the element is.
 | Border | `--color-border`, `--color-border-muted` | Borders and dividers |
 | Interactive | `--color-interactive-*` | Controls (below) |
 | Inverse | `--color-inverse-text`, `--color-inverse-surface`, `--color-inverse-canvas`, `--color-inverse-border`, `--color-inverse-chart-*`, `--color-inverse-geo-*` | Content on an inverse background |
-| Static | `--color-static-white`, `--color-static-black`, `--color-static-brand` | Colours that don't change with mode |
+| Static | `--color-static-white`, `--color-static-black`, `--color-static-brand`, `--color-static-gla-{hue}` | Colours that don't change with mode |
 | Data | `--color-data-primary`, `--color-data-secondary`, `--color-data-tertiary`, `--color-data-categorical-{hue}`, `--color-data-{status}`, `--color-data-neutral-0`, `--color-data-neutral-1`, `--color-data-empty`, `--color-data-context`, `--color-data-male`, `--color-data-female` | Chart and map data |
 | Chart | `--color-chart-axis`, `--color-chart-grid`, `--color-chart-label`, `--color-chart-label-muted`, `--color-chart-surface` | Chart furniture |
 | Geo | `--color-geo-feature`, `--color-geo-label`, `--color-geo-annotation`, each with a `-muted` version, and `--color-geo-interactive-*` | Maps |
@@ -50,13 +50,13 @@ The docs page `apps/web/src/content/design-system/data-visualisation/quick-guide
 
 - Intents: primary, secondary, positive, negative and caution.
 - `-muted` is the lower-emphasis version of the same intent.
-- States: `-hover` and `-active`. Positive, negative and caution also have `-focus`, as in `--color-interactive-positive-focus`.
+- States: `-hover` and `-active`. There is one focus colour, `--color-interactive-focus`, for every intent.
 - Primary also has `--color-interactive-primary-text` with hover and active states, for links and text buttons.
 - Standalone states: `--color-interactive-selected`, `--color-interactive-on`, `--color-interactive-off`, `--color-interactive-dragged`, `--color-interactive-focus`, `--color-interactive-error`, `--color-interactive-disabled` and `--color-interactive-disabled-muted`.
 
 A disabled fill uses `--color-interactive-disabled-muted`. Disabled text or icons use `--color-interactive-disabled`.
 
-Text or an icon on a filled control uses `--color-inverse-text`.
+Text or an icon on a filled control uses `--color-inverse-text`, except on `primary`, whose fill stays dark in both modes: its text uses `--color-static-white`.
 
 ## In Tailwind
 

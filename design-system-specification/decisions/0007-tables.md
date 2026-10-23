@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Tables in Figma']
 pr_url: ''
 ---
 

@@ -1,6 +1,6 @@
 # Charts and tables
 
-Spec section: Charts and Tables. ADRs: [0008](../../../../design-system-specification/decisions/0008-charts.md), [0007](../../../../design-system-specification/decisions/0007-tables.md).
+Spec section: Charts and tables. ADRs: [0008](../../../../design-system-specification/decisions/0008-charts.md), [0007](../../../../design-system-specification/decisions/0007-tables.md).
 
 Code is the source of truth for charts and tables. Figma versions are representative.
 
@@ -41,7 +41,7 @@ The legend and plot go in the slot. The container doesn't build them.
 
 `ObservablePlotInner.svelte` sets `--plot-background: var(--color-chart-surface)`.
 
-The plot's root style sets `fontSize: 'var(--caption-md-font-size, 0.875rem)'`, the role behind `.chart-tick`. Tip and annotation marks set no font size, so they inherit it. SVG text in some table cell renderers (`StackedBar`, `BarChart`, `Histogram`, `BarDivergingCell`) still sets a size in px.
+The plot's root style sets `fontSize: 'var(--caption-md-font-size, 0.875rem)'`, the role behind `.chart-tick`. Tip and annotation marks set no font size, so they inherit it. Table cell renderers use the table aliases. `textSize` on `BarDivergingAxis`, `BarDivergingCell` and `PairArrowAxis` is an optional override in px.
 
 ```js
 Plot.line(data, {

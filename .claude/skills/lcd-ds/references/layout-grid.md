@@ -1,6 +1,6 @@
 # Layout grid
 
-Rules: [0017](../../../../design-system-specification/decisions/0017-layout-grid.md) (proposed). Build: `--grid-*` in `tokens.css` and the Layout section of `system.css`. The spec's Layout grid section has the generated table of values.
+Rules: [0017](../../../../design-system-specification/decisions/0017-layout-grid.md). Build: `--grid-*` in `tokens.css` and the Layout section of `system.css`. The spec's Layout grid section has the generated table of values.
 
 ## Two layouts
 

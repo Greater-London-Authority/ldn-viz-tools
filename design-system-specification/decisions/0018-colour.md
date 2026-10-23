@@ -1,8 +1,8 @@
 ---
 id: '0018'
 title: Colour is chosen by role from semantic tokens that have a value for each mode
-status: proposed
-date: 2026-10-21
+status: accepted
+date: 2026-10-22
 released-in: null
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Colour]
@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Colour', 'Chart and map colours']
 pr_url: ''
 ---
 
@@ -26,7 +26,7 @@ The spec lists colour in its scope, but no decision describes how colour tokens 
 - **Every semantic colour has a light and a dark value.** Light values are set on `:root` and dark values on `.dark`. A component that uses semantic tokens changes mode with no changes of its own.
 - **Choose a token by the role of the element:** text, label, canvas, surface, border, interactive, inverse, static, data, chart or geo. The palette (`--color-palette-{hue}-{step}`) is not used in components. Its one use is a quantitative scale in a chart or map ([0008](./0008-charts.md)).
 - **The canvas is the page background, and a surface is a card or panel on it.** The two have the same value in each mode. Elevation sets a surface apart from the canvas ([0011](./0011-elevation.md)). `--color-surface-muted` sets a region apart inside a surface.
-- **Interactive tokens are chosen by intent, then emphasis, then state:** `--color-interactive-{intent}[-muted][-{state}]`. The intents are `primary`, `secondary`, `positive`, `negative` and `caution`. The states are `hover` and `active`, and `focus` for the three status intents.
+- **Interactive tokens are chosen by intent, then emphasis, then state:** `--color-interactive-{intent}[-muted][-{state}]`. The intents are `primary`, `secondary`, `positive`, `negative` and `caution`. The states are `hover` and `active`. Focus has one colour for every intent ([0019](./0019-accessibility.md)).
 - **Text and icons on a filled control use `--color-inverse-text`.** The exception is `primary`, whose fill stays dark in both modes, so its text uses `--color-static-white`.
 - **Disabled text and icons use `--color-interactive-disabled`. A disabled fill uses `--color-interactive-disabled-muted`.**
 - **Content on an inverse background uses the `inverse` tokens**, such as `--color-inverse-text` on `--color-inverse-surface`.

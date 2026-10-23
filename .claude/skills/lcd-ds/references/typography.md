@@ -20,7 +20,7 @@ Product is the default. Its role properties are also set on `:root`, so a role c
 
 Each typeset sets unclassed text inside it to `body-md`, so rendered Markdown needs no classes.
 
-The two typesets have the same values for every role except two line heights. `body-sm` is 14/26 in longform and 14/22 in product. `body-md` is 16/28 in longform and 16/24 in product. The full values are in the spec's generated matrices.
+The two typesets differ in body line heights and in the larger subheads. `body-sm`, `body-md` and `body-lg` are 14/26, 16/28 and 18/30 in longform, and 14/22, 16/24 and 18/26 in product. At `lg` and `xl`, longform `subhead-md` and `subhead-lg` are one step larger than in product. The full values are in the spec's generated matrices.
 
 ## Roles
 
@@ -104,7 +104,7 @@ Each alias applies a role, sometimes with tabular numerals or the muted colour. 
 | Charts | `.chart-title`, `.chart-subtitle`, `.chart-axis-title`, `.chart-label`, `.chart-tick`, `.chart-tick-sm`, `.chart-note` |
 | Tables | `.table-title`, `.table-subtitle`, `.table-col-head`, `.table-col-head-sm`, `.table-body` |
 | Dashboards | `.dashboard-main-title`, `.dashboard-main-subtitle`, `.dashboard-section-title`, `.dashboard-section-subtitle` |
-| Interface | `.header-title`, `.sidebar-title`, `.dialog-title`, `.card-title`, `.card-subtitle`, `.hint-text`, `.input-label`, `.placeholder`, `.field-value`, `.button-label`, `.button-label-sm` |
+| Interface | `.header-title`, `.sidebar-title`, `.dialog-title`, `.card-title`, `.card-subtitle`, `.input-hint`, `.input-label`, `.input-placeholder`, `.input-value`, `.button-label`, `.button-label-sm` |
 
 The role each alias uses is in the spec's alias table. Adding an alias needs an ADR and a change to the Figma `usage` set.
 

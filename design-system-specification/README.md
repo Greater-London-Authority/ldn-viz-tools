@@ -6,13 +6,17 @@ The [Design System Specification](./design-system-specification.md) is the canon
 
 The content of the specification is hand written. The tables of values it contains are generated from the `packages/themes` build by the scripts in [./scripts](./scripts) (see [Running the scripts](#running-the-scripts)).
 
+## Development
+
+The design system is developed in Figma, where new work and new values first appear. Values are exported from Figma as design tokens, then transformed and formatted with [Style Dictionary](https://styledictionary.com/) in `packages/themes`. The main consumer of the design system is the `ldn-viz-tools` component library.
+
 ## Governance
 
 As changes to the specification can introduce breaking changes that affect our production applications we have implemented a simple, formal governance process.
 
 Changes to the design system specification should be raised by submitting a Request For Comment (rfc). This will then be discussed by the design system maintainers and actions agreed upon.
 
-Decisions are logged as numbered Architectural Decision Records which in turn are referenced from the canonical [RULES](./RULES.md) file, with the spec being updated accordingly.
+Decisions are logged as numbered Architectural Decision Records in [decisions](./decisions). Each rule that is in force is summarised in [RULES](./RULES.md) with a link to its record. The specification is then updated to match. If the specification and a decision record disagree, the decision record is correct and the specification needs updating.
 
 More details can be found in [ADR-LIFECYCLE](./governance/ADR-LIFECYCLE.md)
 

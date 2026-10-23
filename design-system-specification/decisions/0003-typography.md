@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Typography', 'Typeface', 'Typesets', 'Roles', 'Line height', 'Usage aliases']
 pr_url: ''
 ---
 

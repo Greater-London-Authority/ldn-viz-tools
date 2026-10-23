@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Elevation', 'Canvas and surface']
 pr_url: ''
 ---
 

@@ -1,8 +1,8 @@
 ---
 id: '0017'
 title: Pages use a contained or a fluid layout, with padding set by breakpoint and flow between blocks
-status: proposed
-date: 2026-10-21
+status: accepted
+date: 2026-10-22
 released-in: null
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Layout grid, Spacing]
@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: []
+spec: ['Layout grid']
 pr_url: ''
 ---
 

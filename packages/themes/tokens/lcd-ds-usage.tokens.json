@@ -782,7 +782,7 @@
             "lineHeight": "{semantic-typography.product.subtitle.sm.line-height}"
           }
         },
-        "hint-text": {
+        "input-hint": {
           "$type": "typography",
           "$value": {
             "fontFamily": "{semantic-typography.product.caption.sm.font-family}",
@@ -802,7 +802,7 @@
             "lineHeight": "{semantic-typography.product.label.md.line-height}"
           }
         },
-        "placeholder": {
+        "input-placeholder": {
           "$type": "typography",
           "$value": {
             "fontFamily": "{semantic-typography.product.body.sm.font-family}",
@@ -812,7 +812,7 @@
             "lineHeight": "{semantic-typography.product.body.sm.line-height}"
           }
         },
-        "field-value": {
+        "input-value": {
           "$type": "typography",
           "$value": {
             "fontFamily": "{semantic-typography.product.body.sm.font-family}",

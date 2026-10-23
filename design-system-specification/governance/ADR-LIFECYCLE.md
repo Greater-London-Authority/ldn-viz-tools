@@ -1,12 +1,12 @@
 # ADR lifecycle
 
-_Status: **draft**, proposed in [RFC 0001](../rfcs/0001-v4-spec-and-governance.md)._
+_Accepted with [RFC 0001](../rfcs/0001-v4-spec-and-governance.md)._
 
 This document describes how design system decisions are recorded, how they change over time, and how the record is kept concise.
 
-The aim of this proposal is that each change to a decision makes the record no harder to read, and that the number of documents a reader must open to understand any one rule stays fixed, however many times that rule has changed.
+The aim is that each change to a decision makes the record no harder to read, and that the number of documents a reader must open to understand any one rule stays fixed, however many times that rule has changed.
 
-## Three layers, three jobs
+## Three layers.
 
 The record is split into three layers. Each has one job and one editing rule.
 
@@ -25,9 +25,10 @@ Work in progress belongs in GitHub issues. An open question becomes an issue; it
 ```
 design-system-specification/
 ├── README.md                          reading order for people and agents
-├── RULES.md                           current truth; cites ADRs; GEN:pinned block
-├── design-system-specification.md     unchanged: prose by hand, values generated
-├── token-architecture-and-naming.md   unchanged
+├── RULES.md                           current truth; cites ADRs
+├── design-system-specification.md     prose by hand, values generated
+├── writing-documentation.md           which document answers which question
+├── SNAGS.md                           problems found, not yet fixed
 ├── decisions/
 │   ├── INDEX.md                       generated: one line per ADR, grouped by status
 │   ├── 0001-sources-of-truth.md       active ADRs only (proposed, accepted)
@@ -36,10 +37,11 @@ design-system-specification/
 │       └── 0004-….md                  superseded, retired and declined ADRs
 ├── rfcs/
 │   └── 0001-v4-spec-and-governance.md programmes that span several decisions
-└─── governance/
-    ├── ADR-LIFECYCLE.md               this document
-    ├── SPEC-CHANGE-PROTOCOL.md        moved from the folder root
-    └── templates/adr.md
+├── governance/
+│   ├── ADR-LIFECYCLE.md               this document
+│   ├── SPEC-CHANGE-PROTOCOL.md        the steps for changing the specification
+│   └── templates/                     adr.md and rfc.md
+└── scripts/                           build checks, spec generation, adr_check.py
 ```
 
 Only live decisions sit in `decisions/`. Superseded, retired and declined records are moved into `decisions/archive/` with `git mv`, keeping their number and filename, so links resolve with a one-segment change and `git log --follow` keeps the history. The effect is that listing the folder shows the current decision set and nothing else.
@@ -96,36 +98,36 @@ Consolidation can also be done by choice, for example at each major release; any
 
 An ADR should fit on one screen, around 60 lines. If an ADR is running long, it usually holds more than one decision.
 
-## Cutover from the current log
+## Cutover from the old log
 
-Backfilling one ADR for every line in the existing changelog would recreate the bloat this proposal is meant to remove. Instead, the cutover applies consolidation once, to everything:
+Backfilling one ADR for every line in the old changelog would have recreated the bloat this process is meant to remove. Instead, the cutover applied consolidation once, to everything ([RFC 0001](../rfcs/0001-v4-spec-and-governance.md)):
 
-1. The current `DECISIONS.md` is moved to `history/DECISIONS-v3.md` and a final line is added pointing to `RULES.md` and `decisions/`. It is not edited again.
-2. A small set of **baseline ADRs** is written, one per section of the current Reference: sources of truth, token and naming grammar, typography contexts and sealing, the chart type set, the spacing public layer, flow, visual rules, tables and charts as code-authoritative, and Figma conventions. Each one restates the rules as they stand, with a _History_ section that links the relevant dated headings in the frozen log. Baseline ADRs are marked `baseline: true` and sealed at the last version 3 release.
-3. `RULES.md` is written from the Reference section, with each rule citing its baseline ADR.
-4. The Open and In flight items become GitHub issues.
+1. `DECISIONS.md` was removed. Its history is in Git, and no frozen copy was kept.
+2. Its rules were restated as **baseline ADRs** 0001 to 0010, one for each area: sources of truth, token naming, typography, spacing, flow, visual rules, tables, charts, documentation and Figma conventions. They are sealed with the other ADRs at the version 4 release.
+3. `RULES.md` was written from the baseline ADRs, with each rule citing its ADR.
 
-The version 4 breaking change then follows as the first ADRs written under the new process.
+The version 4 breaking change then followed as the first ADRs written under the new process, from 0011.
 
 ## Front matter
 
 ```yaml
 id: '0012'
-title: A declared context seals its subtree
+title: Title Groupings
 status: accepted # proposed | accepted | declined | superseded | retired
-date: 2026-08-19 # date accepted (or proposed, while proposed)
+date: 2026-10-05 # date accepted (or proposed, while proposed)
 released-in: null # package version once sealed, e.g. 4.0.0
-deciders: [] # who has signed this off
-areas: [typography, flow] # foundations the rule governs
-breaking: true # requires consumer migration
+deciders: [Chris Knight, James Scott-Brown] # who has signed this off
+areas: [Typography] # foundations the rule governs
+breaking: false # requires consumer migration
 supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: ['Composition & Hierarchy Resolution'] # spec headings this ADR shapes
+spec: ['Title groups', 'Which step each child takes'] # spec headings that describe this ADR
+pr_url: '' # optional: the pull request that accepted the ADR
 ```
 
-`guards` connects a decision to what enforces it, and `spec` connects it to where it is described. Together they let a tool answer "if this ADR is superseded, what else has to change?"
+`spec` names the headings in the specification that describe the decision, so that when an ADR is amended or superseded, the sections to update are listed. `pr_url` links the ADR to its evidence.
 
 ## Automation
 
@@ -143,10 +145,8 @@ The sealed-body check compares against the file as it was at the tag named in `r
 
 ## Governance
 
-These points need agreeing before this document is accepted. The proposals are starting points.
-
-- **Who can accept an ADR.** Proposed: one maintainer review for non-breaking ADRs; for `breaking: true`, one design and one engineering maintainer. The maintainers are Chris Knight and James Scott-Brown.
-- **Where discussion happens.** Proposed: on the pull request that adds the `proposed` ADR. Once merged, the status becomes `accepted`.
-- **Who can seal.** Sealing happens during the release, set by whoever cuts the release, as a step in the release checklist.
-- **Declined proposals.** Proposed: always recorded, so the same idea is not proposed again without new information. They are written short, go straight to the archive, and state the conditions under which the idea could be revisited.
-- **Skills.** `decision-record`, `governance-encoder`, `deprecation-process` and `change-communication` in `design-system-ops`, and the Skills section of the current Reference, need updating to write and read this format. Agents should be told to read `RULES.md` and `INDEX.md` first and never to treat an archived ADR as current.
+- **Who accepts an ADR.** The maintainers, Chris Knight and James Scott-Brown. Both have signed off every ADR so far, and both are named in its `deciders`.
+- **Where discussion happens.** An ADR is written on a feature branch, as `proposed`, and discussed there and on its pull request. Its status becomes `accepted` when the maintainers sign it off, before or with the merge.
+- **Who seals.** Sealing happens during the release, as a step in the release checklist, set by whoever cuts the release. No ADR is sealed yet. The first are sealed at the version 4 release.
+- **Declined proposals.** A declined proposal is recorded, so the same idea is not proposed again without new information. It is written short, goes straight to the archive, and states the conditions under which the idea could be revisited. None has been declined yet.
+- **Skills.** The governance skills, such as `decision-record` and `governance-encoder`, are in `.claude/skills/design-system-ops`, which Git ignores, so they are not part of this repository. Agents read `RULES.md` and `INDEX.md` first, and never treat an archived ADR as current.

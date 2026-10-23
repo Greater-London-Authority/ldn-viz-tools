@@ -1,6 +1,6 @@
 # Elevation and visual rules
 
-Spec sections: Elevation, Visual Rules. ADRs: [0011](../../../../design-system-specification/decisions/0011-elevation.md), [0006](../../../../design-system-specification/decisions/0006-visual-rules.md).
+Spec sections: Elevation, Visual rules. ADRs: [0011](../../../../design-system-specification/decisions/0011-elevation.md), [0006](../../../../design-system-specification/decisions/0006-visual-rules.md).
 
 ## Elevation
 

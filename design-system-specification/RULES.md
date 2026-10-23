@@ -46,26 +46,7 @@
 
 - **Bind to a role, never a size.** Pick the role for what the text does. Size, line height and weight are determined by role.
 
-- **Typesets share the same role vocabulary.** Roles are defined in sets of three: sm, md, lg in each set, with the exception of 'eyebrow' which is singular. Role sets are:
-
-  | Role     | Description                                                                                          |
-  | -------- | ---------------------------------------------------------------------------------------------------- |
-  | Display  | Expressive, high-impact type. Use sparingly.                                                         |
-  | Headline | Primary statement of a page or section. Sets topic and structure.                                    |
-  | Subhead  | Supporting statement paired with a headline or display.                                              |
-  | Title    | Names a discrete unit of context: block of prose or component such as a card, panel, chart or table. |
-  | Subtitle | Secondary context paired with a title.                                                               |
-  | Body     | Default reading for sustained running text. The baseline for other roles.                            |
-  | Label    | Functional text. Heavier than caption for recognition.                                               |
-  | Metric   | A figure presented as the content itself. Tabular numerals, quick comprehension.                     |
-  | Caption  | Subordinate annotation for images, charts, sources, and helper text. Smaller and tighter than body.  |
-  | Eyebrow  | Short signpost above a headline or title. Categorises or orients.                                    |
-
-  Distinctions:
-  - **Display vs Headline**: display is impact; headline is communication.
-  - **Label vs Caption**: labels are needed to use the interface; captions are optional commentary.
-  - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
-  - **Pairing**: subhead pairs with headline/display, subtitle with title.
+- **Typesets share the same ten roles:** display, headline, subhead, title, subtitle, body, label, metric, caption and eyebrow. Each has the sizes `sm`, `md` and `lg`, except eyebrow, which has one. The spec describes what each role is for. A subhead pairs with a headline or display, and a subtitle with a title.
 
 - **Small headings can take label roles.** No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, can take `label-lg`, or `label-md` one level down. `.dialog-title` uses `label-lg` for this reason.
 
@@ -80,12 +61,7 @@
 - **Line height comes from the role.** There are no line-height utilities. A control whose height must not change keeps its role's line height and reduces its padding. This holds for every control, including the `slim` button, which has no padding: its label keeps the role's line height.
 - **Type changes at five breakpoints:** `base`, `sm`, `md`, `lg` and `xl`. There are no `2xl` typography tokens, so type at `2xl` is the same as at `xl`.
 
-- **Line heights in three ratios.** Line height is defined in three ratios based on a simple formula: `font-size + k`, where font-size and k are measured in px.
-  The ratios are:
-
-| tight           | default         | loose            |
-| --------------- | --------------- | ---------------- |
-| font-size + 4px | font-size + 8px | font-size + 12px |
+- **Line height is the font size plus 4px (tight), 8px (default) or 12px (loose).**
 
 - **Every role is set in Inter, with a fallback stack.** If Inter fails to load, text falls back through this stack: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`. Figma holds only `Inter`, so the stack is added at build time.
 
@@ -215,3 +191,26 @@ Amends [0005](./decisions/0005-flow.md).
 - **A flow context never sets a typeset.** `typeset-longform` sets `flow-spacious` as well as the typeset.
 - **A context sets its ramp on its children**, so the space above a nested context comes from the outer context.
 - **Flow sets its children's block margins to zero at zero specificity**, so a browser margin can't collapse with a flow step.
+
+## [0017 — Layout grid](./decisions/0017-layout-grid.md)
+
+- **A page uses one of two layouts.** `.container` is contained, for document-like pages: its width steps up with the breakpoints and it is centred. `.container-fluid` is fluid, for dashboards and application shells: it fills the viewport.
+- **The container's padding sets the page edge.** Components don't add padding at the page edge. The padding is set for each breakpoint and layout by `--grid-{breakpoint}-{contained|fluid}-container-padding`.
+- **Tiled blocks, such as cards, are spaced with `gap-flow`**, the flow step of the context. There are no gutter tokens or classes, and no column tokens.
+- **Both layout classes are in `system.css`**, so the contained layout works without Tailwind.
+
+## [0018 — Colour](./decisions/0018-colour.md)
+
+- **Every semantic colour has a light and a dark value**, on `:root` and `.dark`. A component that uses semantic tokens changes mode with no changes of its own.
+- **Choose a token by the role of the element:** text, label, canvas, surface, border, interactive, inverse, static, data, chart or geo. The palette is used only for quantitative scales in charts and maps.
+- **Canvas and surface have the same value.** Elevation sets a surface apart from the canvas, and `--color-surface-muted` sets a region apart inside a surface.
+- **Interactive tokens are chosen by intent, then emphasis, then state:** `--color-interactive-{intent}[-muted][-{state}]`.
+- **Text and icons on a filled control use `--color-inverse-text`**, except on `primary`, which uses `--color-static-white`. Disabled text uses `--color-interactive-disabled`, and a disabled fill `--color-interactive-disabled-muted`.
+- **`static` colours don't change with the mode:** `--color-static-white`, `--color-static-black`, `--color-static-brand` and `--color-static-gla-{hue}`.
+
+## [0019 — Accessibility](./decisions/0019-accessibility.md)
+
+- **The target is WCAG 2.2 AA**, for components, documentation pages and the Figma library.
+- **Focus has one colour, `--color-interactive-focus`, and two forms:** an outline on `:focus-visible` by default, and an inset ring on filled controls. There are no focus-ring tokens. Figma's `focus` effect style follows the code.
+- **Contrast is 4.5:1 for text, 3:1 for large text, and 3:1 for interface components and meaningful chart parts.** `--color-data-context` and `--color-data-categorical-yellow` are stated exceptions.
+- **No text is smaller than 12px, and running text is no wider than 80 characters.**

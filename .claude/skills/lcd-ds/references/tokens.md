@@ -1,6 +1,6 @@
 # Design tokens
 
-Spec section: Design Tokens. ADRs: [0002](../../../../design-system-specification/decisions/0002-token-naming-grammar.md), [0013](../../../../design-system-specification/decisions/0013-token-export-and-parsing.md), [0014](../../../../design-system-specification/decisions/0014-distribution-and-outputs.md).
+Spec section: Design tokens. ADRs: [0002](../../../../design-system-specification/decisions/0002-token-naming-grammar.md), [0013](../../../../design-system-specification/decisions/0013-token-export-and-parsing.md), [0014](../../../../design-system-specification/decisions/0014-distribution-and-outputs.md).
 
 ## Tiers
 

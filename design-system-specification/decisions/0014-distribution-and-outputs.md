@@ -11,7 +11,7 @@ supersedes: []
 superseded-by: null
 amends: []
 amended-by: []
-spec: ['Scope', 'Development']
+spec: ['Scope', 'Outputs and set-ups']
 pr_url: ''
 ---
 

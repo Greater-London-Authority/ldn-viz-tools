@@ -19,7 +19,7 @@ In Tailwind, the preset maps these steps to `var(--spacing-{n})`, so `p-4` and `
 
 Space inside a component, such as padding, a border or an indent, uses the spacing scale. Space between blocks of content uses [flow](flow.md), which changes with the context.
 
-To decide, ask whether the children are a stack of blocks or parts of one structure. A card's contents and a form's fields are stacks, so they use flow. A table's cells and a row of buttons are structure, so they use spacing.
+To decide, ask whether the space is between blocks or inside one. The space between a card's blocks, and between the fields of a form, is flow. The space inside a field, such as between its label, input and hint, builds the component, so it uses spacing. So do a table's cells and a row of buttons.
 
 The gap between tiled cards is flow too: `gap-flow` on the grid ([layout-grid.md](layout-grid.md)). The gap between a button's icon and its label is spacing.
 
