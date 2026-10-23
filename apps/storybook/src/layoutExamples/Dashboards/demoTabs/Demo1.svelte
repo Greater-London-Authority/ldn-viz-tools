@@ -1,9 +1,5 @@
 <script lang="ts">
-	import RadioButtonGroupSolid from '../../../radioButtonSolid/RadioButtonGroupSolid.svelte';
-	import Select from '../../../select/Select.svelte';
-	import SidebarGroup from '../../../sidebar/elements/sidebarSection/SidebarGroup.svelte';
-	import SidebarSection from '../../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-
+	import { RadioButtonGroupSolid, Select, SidebarGroup, SidebarSection } from '@ldn-viz/ui';
 	/* Select Options */
 	type Option = { label: string; value: number };
 	const options: Option[] = [

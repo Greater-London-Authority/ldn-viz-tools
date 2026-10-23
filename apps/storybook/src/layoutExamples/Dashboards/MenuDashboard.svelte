@@ -1,13 +1,15 @@
 <script lang="ts">
-	import AppShell from '../../appShell/AppShell.svelte';
-	import LogoCIU from '../../logos/LogoCIU.svelte';
-	import LogoMayor from '../../logos/LogoMayor.svelte';
-	import NavigationMenu from '../../navigationMenu/NavigationMenu.svelte';
-	import Sidebar from '../../sidebar/Sidebar.svelte';
-	import SidebarFooter from '../../sidebar/elements/sidebarFooter/SidebarFooter.svelte';
-	import SidebarHeader from '../../sidebar/elements/sidebarHeader/SidebarHeader.svelte';
-	import SidebarSection from '../../sidebar/elements/sidebarSection/SidebarSection.svelte';
-	import ThemeSwitcher from '../../theme/ThemeSwitcher.svelte';
+	import {
+		AppShell,
+		LogoCIU,
+		LogoMayor,
+		NavigationMenu,
+		Sidebar,
+		SidebarFooter,
+		SidebarHeader,
+		SidebarSection,
+		ThemeSwitcher
+	} from '@ldn-viz/ui';
 
 	let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', href: '#accessibility' },
