@@ -92,6 +92,9 @@ Deferred on purpose. Each has a GitHub issue.
 | Dashboard Section rows use a looser gap than their columns | Figma ver 4.0, Dashboard Layouts: `Section/*` row gap `standard/loose`, column gap `standard/default` | ADR 0017: a row and a stack of blocks take the same space. Rebind the row gap to `standard/default`, or record why. Found 2026-10-26 |
 | The table kit shows no stripes, and has a Boolean renderer code lacks | Figma ver 4.0, Components - Tables | `Table Row (kit)` Stripe=true fills the row with `surface-muted`, but each Table Cell's `surface` fill covers it. Code has no boolean renderer; `GoodOrBad` is nearest. Found 2026-10-26 |
 | Layer Control names and GeoCoder differ from code | Figma ver 4.0, Components - Ui | Layer names are `body-md`; code uses `.form-label` (`label-md`). GeoCoder isn't drawn; code has `MapControlLocationSearch`, `MapControlGeocoder` and `MapControlGeolocator`. Found 2026-10-26 |
+| PageSectionBreak's default size differs from code | Figma ver 4.0, Typography: `Longform/PageSectionBreak` defaults to `sm`; `PageSectionBreak.svelte` defaults to `lg` | Found 2026-10-26 |
+| Doc scaffolding on the foundation pages breaks ADR 0010 | Figma ver 4.0: `.ds_cover` lacks the `.DS-` prefix; `.DS-colorSwatch` token names use `Typeset/product/body-md`; the 292 Heroicons labels have no text style; Custom Icons and Phosphor Icons have no section header (too narrow for one; a shared header above both would work) | Found 2026-10-26 in the foundations review |
+| Loose icon frames sit on top of Custom Icons, and one Grid header has odd variant values | Figma ver 4.0: `CircleDashed` and `CircleHalf` on the Icons page; Grid brand `GridHeader-Area-Decline` overflow values `true` and `overflow2` (others use `true` and `false`) | Found 2026-10-26 |
 
 ## Docs
 
