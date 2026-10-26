@@ -92,11 +92,30 @@ Two or three, specific to the component, each with a reason. Don't repeat a USAG
 
 | Archetype | Pages | What it gets |
 | --- | --- | --- |
-| Family | Buttons; form fields; overlays | A family overview frame for what the members share, and a header intro on each member's frame. `Button — family overview` covers the Button variants. `Form fields — family overview` (node `909:286874`, left of the Input row) covers what `InputWrapper` draws for Input, Select, the checkbox and radio groups and LayerControlGroup: label, hint tag, description, error message and optional marker. Their accessibility frames cover only their own control, and their ACCESSIBILITY section points to the overview. `Overlays — family overview` (node `909:288364`, left of the Tooltip row) covers the trigger, `hintLabel`, `Overlay` and when to use Tooltip, Popover or Modal |
-| Light/dark pair | Components - Ui | Light frame: header intro. Dark frame: "Dark mode" label. An accessibility frame in a third column, to the right of the dark frame |
+| Family | Buttons; form fields; overlays | A family overview frame for what the members share, and a header intro on each member's frame. `Button — family overview` covers the Button variants. `Form fields — family overview` (node `909:286874`, in the left column of the Input row) covers what `InputWrapper` draws for Input, Select, the checkbox and radio groups and LayerControlGroup: label, hint tag, description, error message and optional marker. Their accessibility frames cover only their own control, and their ACCESSIBILITY section points to the overview. `Overlays — family overview` (node `909:288364`, in the left column of the Tooltip row) covers the trigger, `hintLabel`, `Overlay` and when to use Tooltip, Popover or Modal |
+| Light/dark pair | Components - Ui | Light frame: header intro. Dark frame: "Dark mode" label. An accessibility frame beside the dark frame, in the same row (see Page layout) |
 | Composite | Modal, Sidebar, Tabs, Header | The intro and the accessibility frame go on the parent. The parts get descriptions only |
 | Foundation | Typography, Elevation, Colour, Spacing | Leave the existing doc frames unchanged |
 | Kit, screen or layout | Charts, Tables, Maps, Application Shells, Dashboard Layouts | Descriptions on the main components. No new frames during W6c |
+
+## Page layout on Components - Ui
+
+Each component has one row, and the rows run down the page in roughly alphabetical order. Within a row the frames sit left to right:
+
+| Column | x (about) | Holds |
+| --- | --- | --- |
+| Left | 0–64 | The frame that holds the main components, where it is separate from the light frame (Header, Footer, Form Login), and the family overviews (Form fields, Overlays) |
+| Light | 2067–2084 | The light doc frame, with the header intro |
+| Dark | 4146–4154 | The dark doc frame, with the mode label |
+| Accessibility | 6224 | `<Name> — Accessibility` |
+
+Rows are about 100px apart, measured from the bottom of the tallest frame in the row above. A wider frame pushes the frames to its right along: Modal's dark and accessibility frames start further right, and SideBar's row also holds the three Sidebar Examples frames before its accessibility frame. The layout was set by hand, so read the positions from the page rather than assuming these values.
+
+When you add a frame:
+
+- Put it in its component's row, in the column for its kind. A new component gets a new row, in alphabetical order, and the rows below move down to keep the gap.
+- Never move a frame in another component's row, except to make room for a new row, and only with the user's agreement.
+- After any change, check the whole page for overlap and clipping, not just the frames you touched.
 
 A frame with absolute positioning (`layoutMode` `NONE`), such as Spinner, doesn't grow with its header. List it and place its intro by hand.
 
@@ -157,7 +176,7 @@ Bind the fill to the colour variable after setting the text style, because the s
 1. Read the code sources and the Figma components for the group. Compare them with Storybook and report differences before changing anything.
 2. Write the descriptions. Run the ds-writing language review on them.
 3. Set the descriptions, then the header properties on the light and dark frames.
-4. Build the accessibility frame for each component that has states to show.
+4. Build the accessibility frame for each component that has states to show, in its row's accessibility column. Turning on a header intro makes a frame taller, and the rows are only about 100px apart, so trim empty space inside the frame rather than let it reach the row below.
 5. Check every frame in the group for overlap, clipped content and the gap to the next frame.
 6. Take screenshots and show them before starting the next group.
 
