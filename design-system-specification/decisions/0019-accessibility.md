@@ -32,6 +32,8 @@ The spec lists accessibility in its scope, but no decision sets a target. The do
 - **Two data colours are exceptions to the 3:1 rule:**
   - `--color-data-context` is meant to recede behind the highlighted series. It is always used alongside `--color-data-primary`, and never carries meaning alone.
   - `--color-data-categorical-yellow` is used only for large areas, with an outline or a direct label.
+- **Disabled controls are exempt from the contrast rules**, as WCAG exempts inactive components.
+- **In dark mode, `--color-interactive-primary-hover` and `--color-interactive-primary-active` are below 3:1 against `--color-surface` and `--color-surface-muted`.** This is accepted. The label identifies the control, and it passes 4.5:1 on each fill.
 - **No text is smaller than 12px.** The smallest roles, `label-sm` and `caption-sm`, are 12px.
 - **Running text is no wider than 80 characters** ([0015](./0015-system-classes.md)).
 
@@ -48,3 +50,4 @@ The spec lists accessibility in its scope, but no decision sets a target. The do
 - In Figma, the four `focus-ring/*` effect styles and the three status focus variables are removed (22 October 2026). The 225 layers that used the styles now use `focus`.
 - The status variants of `Button` also set `focus:ring-color-interactive-focus`, which the `focus-visible:ring-color-surface` on every button overrides. The class can go (C4).
 - The docs accessibility page moves from WCAG 2.1 to 2.2.
+- The contrast frames on the Figma Buttons page show ratios calculated from the v4 variables in each mode (checked 23 October 2026). Disabled rows are still marked as failing in the frames.

@@ -296,8 +296,8 @@ Each usage alias applies the role shown. Use the alias, or the role class with t
 | Card title                 | `card-title`                 | `title-sm`                            |
 | Card subtitle              | `card-subtitle`              | `subtitle-sm`, muted                  |
 | Input label                | `input-label`                | `label-md`                            |
-| Placeholder                | `input-placeholder`          | `body-sm`                             |
-| Field value                | `input-value`                | `body-sm`                             |
+| Placeholder                | `input-placeholder`          | `body-md`                             |
+| Field value                | `input-value`                | `body-md`                             |
 | Helper text and hints      | `input-hint`                 | `caption-sm`                          |
 | Button label               | `button-label`               | `label-md`                            |
 | Small button label         | `button-label-sm`            | `label-sm`                            |

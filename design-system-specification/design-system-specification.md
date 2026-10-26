@@ -494,8 +494,8 @@ The aliases are defined in the `usage` style set in Figma, and the classes are g
 | `.card-subtitle`              | `.subtitle-sm` | muted colour                   |
 | `.input-hint`                 | `.caption-sm`  |                                |
 | `.input-label`                | `.label-md`    |                                |
-| `.input-placeholder`          | `.body-sm`     |                                |
-| `.input-value`                | `.body-sm`     |                                |
+| `.input-placeholder`          | `.body-md`     |                                |
+| `.input-value`                | `.body-md`     |                                |
 | `.button-label`               | `.label-md`    |                                |
 | `.button-label-sm`            | `.label-sm`    |                                |
 
@@ -817,6 +817,10 @@ Two data colours are exceptions to the 3:1 rule:
 
 - `--color-data-context` is for the series behind a highlighted one. It is always used with `--color-data-primary`, and has no meaning on its own.
 - `--color-data-categorical-yellow` is used only for large areas, with an outline or a direct label.
+
+Disabled controls are exempt from these rules, as WCAG exempts inactive components ([0019](./decisions/0019-accessibility.md)).
+
+In dark mode, `--color-interactive-primary-hover` and `--color-interactive-primary-active` are below 3:1 against `--color-surface` and `--color-surface-muted`. The label identifies the control, and passes 4.5:1 on each fill ([0019](./decisions/0019-accessibility.md)).
 
 ### Text size and width
 
