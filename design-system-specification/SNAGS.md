@@ -10,7 +10,6 @@ Differences between the spec, the build and the code, found while rewriting the 
 | Figma has controls that code might follow | Figma ver 4.0, Buttons and Components - Ui | Kept in Figma on 2026-10-23; decide whether code follows each: the Download Menu (one trigger, a grouped menu) in place of two split buttons; a selected fill on menu items; grey labels on disabled checkboxes and radios; a disabled tab; a 48px `Multiple Action` trigger at `lg`, where code puts a 64px square beside a 48px button; prefix and suffix icons on inputs; a collapsed navigation menu; a coloured rail on the current TOC item; a multi-column checkbox group; a root breadcrumb item |
 | Every Button set in Figma has an `Error` axis | Figma ver 4.0, Buttons; `packages/ui/src/lib/button/types.ts` has no error prop | Kept in Figma on 2026-10-23. Decide whether `Button` gets an error state |
 | The switch off track and the unselected button-group fill are below 3:1 | `interactive-off` on `surface` | 1.43:1 in light mode and 1.91:1 in dark mode; the switch thumb on the off track is the same. Found 2026-10-26 |
-| Titles in Callout, TitleGroup and NonIdealState don't follow the page's headings | `Callout.svelte`: always `<h3>`; `TitleGroup`: a `<div>` (Card, ChartContainer, TableContainer); `NonIdealState.svelte`: a `<span>` | Callout's `size` docs say it changes the font size; it changes padding and the border. NonIdealState isn't announced when it appears. Found 2026-10-26 |
 
 ## After the v4 release
 

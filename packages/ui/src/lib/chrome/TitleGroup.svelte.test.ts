@@ -79,4 +79,10 @@ describe('TitleGroup', () => {
 		expect(container.querySelector('.eyebrow')).toBeNull();
 		expect(container.textContent).toBe('');
 	});
+
+	it('renders the title as a heading at headingLevel', async () => {
+		const { container } = render(TitleGroup, { title: 'Chart title', headingLevel: 3 });
+
+		expect(container.querySelector('h3')).toHaveTextContent('Chart title');
+	});
 });

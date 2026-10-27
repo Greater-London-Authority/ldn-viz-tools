@@ -19,13 +19,19 @@
 		spinner?: boolean;
 		icon?: Snippet;
 		title?: Snippet;
+		/**
+		 * The heading level of the title. Leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
 		children?: Snippet;
 	}
 
-	let { spinner = false, icon, title, children }: NonIdealStateProps = $props();
+	let { spinner = false, icon, title, headingLevel, children }: NonIdealStateProps = $props();
 </script>
 
+<!-- A status region, so that screen readers announce the state when it changes -->
 <div
+	role="status"
 	class="flow-standard flex h-full w-full flex-col items-center justify-center border border-color-border-wash bg-color-surface-neutral-muted px-2 py-2 text-center text-color-text-muted"
 >
 	{#if spinner}
@@ -39,14 +45,14 @@
 		{/if}
 	{/if}
 
-	<span class="title-sm max-w-xl">
+	<svelte:element this={headingLevel ? `h${headingLevel}` : 'span'} class="title-sm max-w-xl">
 		<!-- contains the title text, displayed below the icon -->
 		{#if title}
 			{@render title()}
 		{:else}
 			Nothing to display
 		{/if}
-	</span>
+	</svelte:element>
 
 	<div class="max-w-xl">
 		<!-- inserted into a `<div>` below the description -->
