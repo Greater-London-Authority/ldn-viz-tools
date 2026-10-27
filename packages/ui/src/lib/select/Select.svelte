@@ -19,6 +19,7 @@
 
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import type { InputProps } from '../input/types';
+	import { randomId } from '../utils/randomId';
 
 	type SvelectComponentPropsType = ComponentProps<typeof Svelecte>;
 
@@ -102,7 +103,7 @@
 		readSelection,
 
 		// input wrapper stuff
-		id,
+		id = randomId(),
 		disabled,
 		error,
 
@@ -110,16 +111,29 @@
 	}: Props = $props();
 
 	let dndzone = $derived(reorderable ? dnd : undefined);
+
+	// The label points at `id`, so the input takes it unless `inputId` is set
+	let controlId = $derived(inputId || id);
+
+	// The error replaces the description, so the input is described by whichever shows
+	let errorId = $derived(error ? `${id}-error` : undefined);
+	let descriptionId = $derived(restProps.description ? `${id}-description` : undefined);
+	let i18nWithDescription = $derived({
+		...i18n,
+		aria_describedby:
+			errorId ?? descriptionId ?? (i18n as { aria_describedby?: string })?.aria_describedby ?? ''
+	});
+
 	// svelte-ignore state_referenced_locally
 	overrideItemIdKeyNameBeforeInitialisingDndZones(valueField ?? 'value');
 </script>
 
-<InputWrapper {...restProps} {id} {disabled} {error}>
+<InputWrapper {...restProps} id={controlId} {errorId} {descriptionId} {disabled} {error}>
 	<Svelecte
 		bind:value
 		{options}
 		{name}
-		{inputId}
+		inputId={controlId}
 		{required}
 		{optionResolver}
 		{valueAsObject}
@@ -164,7 +178,7 @@
 		{vlItemSize}
 		{searchProps}
 		class={`form-select ${classes} ${error ? 'has-error' : ''}`}
-		{i18n}
+		i18n={i18nWithDescription}
 		{dndzone}
 		{anchor_element}
 		{controlClass}
@@ -207,13 +221,13 @@
 			/* Options use the control's padding: 8px + 24px + 8px = 40px */
 			--sv-item-wrap-padding: var(--spacing-2) var(--spacing-3);
 			--sv-item-selected-bg: var(--color-interactive-primary-muted);
-			--sv-item-btn-color: #000;
-			--sv-item-btn-color-hover: #777;
-			--sv-item-btn-bg: #efefef;
-			--sv-item-btn-bg-hover: #ddd;
+			--sv-item-btn-color: var(--color-text);
+			--sv-item-btn-color-hover: var(--color-text-muted);
+			--sv-item-btn-bg: var(--color-surface-muted);
+			--sv-item-btn-bg-hover: var(--color-interactive-primary-muted-hover);
 
 			--sv-icon-color: var(--color-text-muted);
-			--sv-icon-color-hover: #777;
+			--sv-icon-color-hover: var(--color-text);
 			--sv-icon-bg: transparent;
 			--sv-icon-size: 20px;
 			--sv-separator-bg: var(--color-border-muted);
@@ -224,7 +238,7 @@
 			--sv-dropdown-offset: var(--spacing-2);
 			--sv-dropdown-border: var(--color-border-muted) 1px solid;
 			--sv-dropdown-width: auto;
-			--sv-dropdown-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			--sv-dropdown-shadow: var(--elevation-3);
 			--sv-dropdown-height: 320px;
 
 			--sv-dropdown-active-bg: var(--color-interactive-primary-muted);
@@ -263,13 +277,13 @@
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected,
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected:hover {
 			background-color: var(--color-interactive-selected);
-			color: #fff;
+			color: var(--color-static-white);
 		}
 
 		.form-select.svelecte .in-dropdown.is-selected,
 		.form-select.svelecte .in-dropdown.is-selected:hover {
 			background-color: var(--color-interactive-selected);
-			color: #fff;
+			color: var(--color-static-white);
 		}
 
 		.form-select.svelecte .sv-dropdown-scroll.has-items {
@@ -309,8 +323,10 @@
 			border: var(--color-interactive-primary-hover) 1px solid;
 		}
 
-		.form-select.svelecte:hover {
+		/* Matches the focus style of the other form fields in system.css */
+		.form-select.svelecte.is-focused {
 			border: var(--color-interactive-focus) 1px solid;
+			box-shadow: 0 0 0 1px var(--color-interactive-focus);
 		}
 
 		.form-select.svelecte.is-disabled {
