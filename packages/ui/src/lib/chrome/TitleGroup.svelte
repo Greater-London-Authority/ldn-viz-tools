@@ -47,7 +47,10 @@
 <!-- eslint-disable svelte/no-at-html-tags -->
 {#if emphasis === 'secondary'}
 	{#if title}
-		<p class={classNames('eyebrow', classes)}>{@html title}</p>
+		<svelte:element
+			this={headingLevel ? `h${headingLevel}` : 'p'}
+			class={classNames('eyebrow', classes)}>{@html title}</svelte:element
+		>
 	{/if}
 {:else}
 	<!--

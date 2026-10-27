@@ -33,6 +33,11 @@
 		 */
 		ariaLabel?: string;
 		/**
+		 * The heading level of the title, passed to `TableContainer`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
+		/**
 		 * What appears in the footer:
 		 *
 		 * * `byline` (string) - statement of who created the visualization
@@ -125,6 +130,7 @@
 		title = '',
 		subTitle = '',
 		ariaLabel = undefined,
+		headingLevel = undefined,
 		source = '',
 		byline = '',
 		note = '',
@@ -224,6 +230,7 @@
 		<TableContainer
 			{data}
 			{title}
+			{headingLevel}
 			subtitle={subTitle}
 			{source}
 			{byline}

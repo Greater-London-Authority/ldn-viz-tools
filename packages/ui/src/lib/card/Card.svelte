@@ -29,6 +29,11 @@
 		subtitle?: string;
 		eyebrow?: string;
 		emphasis?: 'primary' | 'secondary';
+		/**
+		 * The heading level of the title, passed to `TitleGroup`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
 		/** Hint affordance in the header (string → info icon opening an `Overlay`, or a snippet). */
 		hint?: string | Snippet;
 		/** Overlay form used when `hint` is a string. */
@@ -54,6 +59,7 @@
 		subtitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
+		headingLevel = undefined,
 		hint,
 		hintType = 'tooltip',
 		hintTitle = undefined,
@@ -77,7 +83,16 @@
 	)}
 >
 	{#if !header}
-		<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
+		<ChromeHeader
+			{title}
+			{subtitle}
+			{eyebrow}
+			{emphasis}
+			{headingLevel}
+			{hint}
+			{hintType}
+			{hintTitle}
+		/>
 	{:else}
 		{@render header()}
 	{/if}
