@@ -9,7 +9,6 @@ Differences between the spec, the build and the code, found while rewriting the 
 | The download buttons in `ChromeFooter` differ between Figma and code | `packages/ui/src/lib/exportButtons/ExportButtons.svelte`; Figma ver 4.0, `ChromeFooter` | Code has two `sm` outline secondary buttons. Figma has two `Multiple Action` buttons, kept by choice on 2026-10-23. Decide whether the code follows Figma |
 | Figma has controls that code might follow | Figma ver 4.0, Buttons and Components - Ui | Kept in Figma on 2026-10-23; decide whether code follows each: the Download Menu (one trigger, a grouped menu) in place of two split buttons; a selected fill on menu items; grey labels on disabled checkboxes and radios; a disabled tab; a 48px `Multiple Action` trigger at `lg`, where code puts a 64px square beside a 48px button; prefix and suffix icons on inputs; a collapsed navigation menu; a coloured rail on the current TOC item; a multi-column checkbox group; a root breadcrumb item |
 | Every Button set in Figma has an `Error` axis | Figma ver 4.0, Buttons; `packages/ui/src/lib/button/types.ts` has no error prop | Kept in Figma on 2026-10-23. Decide whether `Button` gets an error state |
-| The switch off track and the unselected button-group fill are below 3:1 | `interactive-off` on `surface` | 1.43:1 in light mode and 1.91:1 in dark mode; the switch thumb on the off track is the same. Found 2026-10-26 |
 
 ## After the v4 release
 
@@ -35,6 +34,7 @@ Deferred on purpose. Each has a GitHub issue.
 | GeoCoder isn't drawn in Figma | Figma ver 4.0, Components - Ui | Code has `MapControlLocationSearch`, `MapControlGeocoder` and `MapControlGeolocator`. Moved here from the release work on 2026-10-27; no issue yet |
 | Footer and Sidebar differ from code in ways kept for now | Figma ver 4.0, Components - Ui | Footer and Sidebar render light in Figma; code defaults both to dark. Footer Menu has no code component yet. Sidebar Side lacks top and bottom. Kept by choice on 2026-10-27. Moved here from the release work on 2026-10-27; no issue yet |
 | ADR 0019 names two forms of focus, and form fields use a third | `decisions/0019-accessibility.md`; `packages/themes/styles/system.css`: `.form-input:focus` | Fields turn the border `interactive-focus`, add a 1px shadow in the same colour and make the outline transparent. Add the form to the ADR, or change the CSS. Found 2026-10-26. Kept on 2026-10-27: visually and conceptually fine for now. Moved here from the release work on 2026-10-27; no issue yet |
+| The switch off track and the unselected button-group fill are below 3:1 | `interactive-off` on `surface` | 1.43:1 in light mode and 1.91:1 in dark mode; the switch thumb on the off track is the same. Found 2026-10-26. grey-500 would leave the tab and button-group labels at 3.51:1 in light mode, so the fix needs more than a value change. Moved here from the release work on 2026-10-27; no issue yet |
 
 ## Figma
 
