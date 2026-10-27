@@ -94,7 +94,7 @@
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -120,7 +120,7 @@
 			{...args}
 			id="MySpecialChartContainer"
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -134,7 +134,7 @@
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			source="GLA city intelligence"
 			byline="A byline for the chart"
 			note="Be aware that you can provide a note if required"
@@ -154,7 +154,7 @@
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			source="The source of this chart data"
 			byline="A byline for the chart"
 			dataDownloadButton={['JSON', 'CSV']}
@@ -179,7 +179,7 @@
 			{...args}
 			overrideClass="bg-color-palette-red-500"
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			source="The source of this chart data"
 			byline="A byline for the chart"
 			note="Be aware that you can provide a note if required"
@@ -207,7 +207,7 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 				{...args}
 				overrideClass="bg-color-palette-red-500"
 				title="This is the Chart Title"
-				subTitle="Subtitle provides extra context"
+				subtitle="Subtitle provides extra context"
 				source="The source of this chart data"
 				byline="A byline for the chart"
 				note="Be aware that you can provide a note if required"
@@ -221,7 +221,7 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 				{...args}
 				overrideClass="bg-color-palette-red-500"
 				title="This is the Chart Title"
-				subTitle="Subtitle provides extra context. This one is much longer than for the other chart, so will wrap earlier."
+				subtitle="Subtitle provides extra context. This one is much longer than for the other chart, so will wrap earlier."
 				source="The source of this chart data"
 				byline="A byline for the chart"
 				note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so will wrap earlier. It's really excessively long."
@@ -244,7 +244,7 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -267,7 +267,7 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 </Story>
 
 <!--
-You can use HTML to provide additional formatting for the title/subTitle/source/byline/note.
+You can use HTML to provide additional formatting for the title/subtitle/source/byline/note.
 It can also be used to add liks.
 -->
 <Story name="With HTML formatting">
@@ -275,7 +275,7 @@ It can also be used to add liks.
 		<ChartContainer
 			{...args}
 			title="This is the Chart <i>Title</i>"
-			subTitle="<i>Subtitle</i> provides extra context"
+			subtitle="<i>Subtitle</i> provides extra context"
 			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis'>GLA city intelligence</a>"
 			byline="A <i>byline</i> for the chart"
 			note="Be aware that you can provide a <i>note</i> if required"
@@ -295,7 +295,7 @@ It can also be used to add liks.
 		<ChartContainer
 			{...args}
 			title="This is the Chart <i>Title</i>"
-			subTitle="<i>Subtitle</i> provides extra context"
+			subtitle="<i>Subtitle</i> provides extra context"
 			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis' class='underline'>GLA city intelligence</a>"
 			byline="A <i>byline</i> for the chart"
 			note="Be aware that you can provide a <i>note</i> if required"
@@ -321,7 +321,7 @@ It can also be used to add liks.
 			{...args}
 			chartHeight="h-96"
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -340,7 +340,7 @@ It can also be used to add liks.
 			{...args}
 			chartWidth="w-1/2"
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -374,7 +374,7 @@ It can also be used to add liks.
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			source="GLA city intelligence"
 			byline="A byline for the chart"
 			note="Be aware that you can provide a note if required"
@@ -396,7 +396,7 @@ It can also be used to add liks.
 		<ChartContainer
 			{...args}
 			title="This is the Chart Title"
-			subTitle="Subtitle provides extra context"
+			subtitle="Subtitle provides extra context"
 			source="GLA city intelligence"
 			byline="A byline for the chart"
 			data={[

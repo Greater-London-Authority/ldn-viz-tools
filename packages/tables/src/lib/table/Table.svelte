@@ -29,6 +29,10 @@
 		 */
 		subTitle?: string;
 		/**
+		 * Accessible name for the table. Defaults to `title`, without any HTML tags.
+		 */
+		ariaLabel?: string;
+		/**
 		 * What appears in the footer:
 		 *
 		 * * `byline` (string) - statement of who created the visualization
@@ -120,6 +124,7 @@
 		tableSpec,
 		title = '',
 		subTitle = '',
+		ariaLabel = undefined,
 		source = '',
 		byline = '',
 		note = '',
@@ -141,6 +146,9 @@
 		fixedTableWidth = undefined,
 		beforeTable
 	}: Props = $props();
+
+	// The title can hold HTML, so take its text for the name
+	let tableName = $derived(ariaLabel ?? title.replace(/<[^>]*>/g, '').trim());
 
 	const createTable = (data: any[], tableSpec: TableSpec) => {
 		const to = new TableState(tableSpec);
@@ -216,7 +224,7 @@
 		<TableContainer
 			{data}
 			{title}
-			{subTitle}
+			subtitle={subTitle}
 			{source}
 			{byline}
 			{note}
@@ -237,6 +245,7 @@
 					class="table-body w-full table-auto text-color-text"
 					bind:clientWidth={tableWidth}
 					role="table"
+					aria-label={tableName || undefined}
 				>
 					{#if tableSpec.showTableHeader !== false}
 						<TableHeader {tableSpec} table={tableObj} {data} {allowSorting} {tableWidth} />

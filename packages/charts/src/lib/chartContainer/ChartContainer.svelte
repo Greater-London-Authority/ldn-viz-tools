@@ -188,14 +188,14 @@
 </script>
 
 <div class={classes} {id}>
-	{#if alt}
-		<p class="sr-only">{alt}</p>
-	{/if}
-
-	{#if title || description || eyebrow || hint}
+	{#if title || subtitle || eyebrow || hint}
 		<div class="mb-2">
 			<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
 		</div>
+	{/if}
+
+	{#if alt}
+		<p class="sr-only">{alt}</p>
 	{/if}
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
