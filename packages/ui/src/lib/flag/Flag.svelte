@@ -40,6 +40,17 @@
 		notice: 'bg-color-surface-accent'
 	};
 
+	// The status fills lighten in dark mode, so their text darkens with inverse-text.
+	// The alpha and beta fills stay dark enough for white in both modes.
+	const textClass: Record<FlagCondition, string> = {
+		alpha: 'text-color-static-white',
+		beta: 'text-color-static-white',
+		alert: 'text-color-inverse-text',
+		warning: 'text-color-inverse-text',
+		positive: 'text-color-inverse-text',
+		notice: 'text-color-inverse-text'
+	};
+
 	const defaultMessage = {
 		alpha: 'Alpha Preview',
 		beta: 'Beta Preview',
@@ -56,7 +67,7 @@
 		colorClass[condition]
 	)}
 >
-	<div class="label-md uppercase text-color-static-white">
+	<div class={classNames('label-md uppercase', textClass[condition])}>
 		<!-- The message to be displayed in the flag. -->
 		{#if children}
 			{@render children()}
@@ -66,6 +77,6 @@
 	</div>
 
 	{#if link}
-		<a href={link} class="text-color-static-white underline">{linkText}</a>
+		<a href={link} class={classNames('underline', textClass[condition])}>{linkText}</a>
 	{/if}
 </div>
