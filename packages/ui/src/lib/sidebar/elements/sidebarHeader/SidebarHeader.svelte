@@ -29,10 +29,13 @@
 		subTitle?: import('svelte').Snippet;
 	}
 
-	let { title, branded = 'true', hint, subTitle }: Props = $props();
+	let { title, branded = true, hint, subTitle }: Props = $props();
 
 	let headerClasses = $derived(
-		classNames('py-1 bg-color-surface-muted text-color-text', brandClasses[branded.toString()])
+		classNames(
+			'py-1 bg-color-surface-muted text-color-text',
+			branded ? brandClasses.true : brandClasses.false
+		)
 	);
 </script>
 
