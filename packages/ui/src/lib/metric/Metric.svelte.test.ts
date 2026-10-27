@@ -98,7 +98,7 @@ describe('Metric', () => {
 
 			const changeValue = page.getByTestId('metric-secondary').getByText('0', { exact: true });
 
-			await expect.element(changeValue).toHaveClass('text-color-data-neutral-1');
+			await expect.element(changeValue).toHaveClass('text-color-text-muted');
 			expect(page.getByTestId('metric').element().querySelector('svg')).toBeNull();
 		});
 	});

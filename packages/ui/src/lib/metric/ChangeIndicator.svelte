@@ -68,7 +68,7 @@
 	const statusTextClass: Record<Status, string> = {
 		positive: 'text-color-surface-positive',
 		negative: 'text-color-surface-negative',
-		neutral: 'text-color-data-neutral-1'
+		neutral: 'text-color-text-muted'
 	};
 
 	let status: Status = $derived.by(() => {
