@@ -685,19 +685,19 @@ Every semantic colour has a light and a dark value. Light values are set on `:ro
 
 Choose a token by the role of the element ([0018](./decisions/0018-colour.md)):
 
-| Group       | Tokens                                                                                                           | Use for                                                      |
-| ----------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Text        | `--color-text`, `--color-text-muted`, `--color-text-wash`                                                        | Text, in decreasing emphasis                                 |
-| Label       | `--color-label`, `--color-label-muted`                                                                           | Labels on controls                                           |
-| Canvas      | `--color-canvas`, `--color-canvas-muted`                                                                         | The page background                                          |
-| Surface     | `--color-surface` and `--color-surface-{role}`, each with a `-muted` version                                     | Cards, panels and status areas                               |
-| Border      | `--color-border`, `--color-border-muted`                                                                         | Borders and dividers                                         |
-| Interactive | `--color-interactive-*`                                                                                          | Controls, links and their states                             |
-| Inverse     | `--color-inverse-*`                                                                                              | Content on an inverse background                             |
-| Static      | `--color-static-white`, `--color-static-black`, `--color-static-brand`, `--color-static-gla-{hue}`               | Colours that don't change with the mode                      |
-| Data        | `--color-data-*`                                                                                                 | Chart and map data ([Charts and tables](#charts-and-tables)) |
-| Chart       | `--color-chart-surface`, `-axis`, `-grid`, `-label`, `-label-muted`                                              | Chart backgrounds, axes, grid lines and labels               |
-| Geo         | `--color-geo-feature`, `-label` and `-annotation`, each with a `-muted` version, and `--color-geo-interactive-*` | Maps                                                         |
+| Group       | Tokens                                                                                                           | Use for                                                                                                                                                |
+| ----------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Text        | `--color-text`, `--color-text-muted`, `--color-text-wash`                                                        | Text, in decreasing emphasis                                                                                                                           |
+| Label       | `--color-label`, `--color-label-muted`                                                                           | Labels on controls                                                                                                                                     |
+| Canvas      | `--color-canvas`, `--color-canvas-muted`                                                                         | The page background                                                                                                                                    |
+| Surface     | `--color-surface` and `--color-surface-{role}`, each with a `-muted` version                                     | Cards, panels and status areas                                                                                                                         |
+| Border      | `--color-border`, `--color-border-muted`, `--color-border-wash`                                                  | Borders, in decreasing emphasis. `border-muted` is the edge of a control and keeps 3:1 on `surface`; `border-wash` is for dividers and container edges |
+| Interactive | `--color-interactive-*`                                                                                          | Controls, links and their states                                                                                                                       |
+| Inverse     | `--color-inverse-*`                                                                                              | Content on an inverse background                                                                                                                       |
+| Static      | `--color-static-white`, `--color-static-black`, `--color-static-brand`, `--color-static-gla-{hue}`               | Colours that don't change with the mode                                                                                                                |
+| Data        | `--color-data-*`                                                                                                 | Chart and map data ([Charts and tables](#charts-and-tables))                                                                                           |
+| Chart       | `--color-chart-surface`, `-axis`, `-grid`, `-label`, `-label-muted`                                              | Chart backgrounds, axes, grid lines and labels                                                                                                         |
+| Geo         | `--color-geo-feature`, `-label` and `-annotation`, each with a `-muted` version, and `--color-geo-interactive-*` | Maps                                                                                                                                                   |
 
 The surface roles are `accent`, `alpha`, `beta`, `positive`, `negative`, `caution`, `neutral` and `empty`.
 

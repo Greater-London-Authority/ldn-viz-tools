@@ -85,7 +85,7 @@ Leave out anything you can't verify, and say so in your reply.
 
 ### Docs site (`apps/web/src/content`)
 
-Page content sits in `.typeset-longform`. For a product example, nest a `.typeset-product` block. Use `.not-typeset` for a block with no typeset styling. Live examples use `<div class="border border-color-border-muted p-4 my-4">`.
+Page content sits in `.typeset-longform`. For a product example, nest a `.typeset-product` block. Use `.not-typeset` for a block with no typeset styling. Live examples use `<div class="border border-color-border-wash p-4 my-4">`.
 
 Start a page by introducing its subject. Page order is set in `apps/web/src/lib/navigation.ts`.
 
