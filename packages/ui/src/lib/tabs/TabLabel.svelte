@@ -29,7 +29,7 @@
 
 	const tabLabelClasses = classNames(
 		'bg-color-interactive-off text-color-text underline hover:bg-color-interactive-primary-muted hover:no-underline',
-		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-interactive-focus focus:ring-2 focus:outline-none focus:ring-color-surface'
+		'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-interactive-focus focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-surface'
 	);
 
 	let isSelected = $derived(tabId === selectedTabId);
