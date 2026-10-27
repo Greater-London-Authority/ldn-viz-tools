@@ -10,7 +10,7 @@
 
 <header class="text-color-text">
 	<div class="flex items-end justify-between">
-		<h2 class="label-lg">
+		<h2 class="label-md">
 			<!-- The title of the section. -->
 			{@render children?.()}
 		</h2>
