@@ -60,7 +60,7 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Portal>
 		<DropdownMenu.Content
-			class="typeset-product elevation-2 z-40 border border-color-border-muted bg-color-surface capitalize "
+			class="typeset-product elevation-2 z-40 border border-color-border-wash bg-color-surface capitalize "
 			preventScroll={false}
 			aria-label="Select current theme mode"
 		>
@@ -81,7 +81,7 @@
 				{/each}
 			</DropdownMenu.RadioGroup>
 			<DropdownMenu.Separator />
-			<DropdownMenu.Arrow class="text-color-border-muted" />
+			<DropdownMenu.Arrow class="text-color-border-wash" />
 		</DropdownMenu.Content>
 	</DropdownMenu.Portal>
 </DropdownMenu.Root>

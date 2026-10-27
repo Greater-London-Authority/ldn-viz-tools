@@ -77,7 +77,7 @@
 		let classes = keylineLookup[placement];
 		if (tabs) {
 			if (placement === 'left') {
-				classes = `border-r border-color-border-muted`;
+				classes = `border-r border-color-border-wash`;
 			} else {
 				classes = `!border-0`;
 			}

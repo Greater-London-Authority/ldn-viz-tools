@@ -40,7 +40,7 @@
 	setContext('navContext', { orientation, isAlwaysExpanded });
 
 	const orientationClasses = {
-		vertical: 'flex-col border-b border-color-border-muted',
+		vertical: 'flex-col border-b border-color-border-wash',
 		horizontal: 'flex space-x-1 flex-wrap'
 	};
 

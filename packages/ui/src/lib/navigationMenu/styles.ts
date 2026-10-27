@@ -60,7 +60,7 @@ export const listItemClass = ({
 		return '';
 	}
 
-	return 'border-t border-color-border-muted';
+	return 'border-t border-color-border-wash';
 };
 
 /**

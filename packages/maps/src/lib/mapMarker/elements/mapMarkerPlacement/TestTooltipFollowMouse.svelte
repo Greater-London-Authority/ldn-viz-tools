@@ -4,7 +4,7 @@
 
 <MapMarkerPlacement placement="follow">
 	<div
-		class="elevation-2 w-fit border border-color-border-muted bg-color-surface p-4 text-color-text"
+		class="elevation-2 w-fit border border-color-border-wash bg-color-surface p-4 text-color-text"
 	>
 		Following mouse.
 	</div>

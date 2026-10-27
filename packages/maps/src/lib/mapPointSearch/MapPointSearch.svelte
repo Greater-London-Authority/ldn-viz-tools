@@ -381,7 +381,7 @@
 	</Button>
 {:else}
 	<div
-		class="flow-standard typeset-product elevation-1 pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-surface p-2"
+		class="flow-standard typeset-product elevation-1 pointer-events-auto min-w-60 max-w-[300px] border-color-border-wash bg-color-surface p-2"
 	>
 		<div class="flex items-center justify-between">
 			<p class="eyebrow">

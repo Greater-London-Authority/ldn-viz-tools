@@ -230,13 +230,13 @@
 			--sv-icon-color-hover: var(--color-text);
 			--sv-icon-bg: transparent;
 			--sv-icon-size: 20px;
-			--sv-separator-bg: var(--color-border-muted);
+			--sv-separator-bg: var(--color-border-wash);
 			--sv-btn-border: 0;
 			--sv-placeholder-color: var(--color-text-wash);
 
 			--sv-dropdown-bg: var(--sv-bg);
 			--sv-dropdown-offset: var(--spacing-2);
-			--sv-dropdown-border: var(--color-border-muted) 1px solid;
+			--sv-dropdown-border: var(--color-border-wash) 1px solid;
 			--sv-dropdown-width: auto;
 			--sv-dropdown-shadow: var(--elevation-3);
 			--sv-dropdown-height: 320px;
@@ -244,10 +244,10 @@
 			--sv-dropdown-active-bg: var(--color-interactive-primary-muted);
 			--sv-dropdown-selected-bg: var(--color-interactive-primary-muted-active);
 
-			--sv-create-kbd-border: var(--color-border-muted) 1px solid;
+			--sv-create-kbd-border: var(--color-border-wash) 1px solid;
 			--sv-create-kbd-bg: var(--color-surface);
 			--sv-create-disabled-bg: var(--color-interactive-disabled-muted);
-			--sv-loader-border: var(--color-border-muted) 2px solid;
+			--sv-loader-border: var(--color-border-wash) 2px solid;
 		}
 
 		/* Reset allows use of form-select class elsehwere if needed */
@@ -297,13 +297,13 @@
 
 		/* multiple selected items */
 		.form-select.svelecte .sv-item--container > .sv-item--wrap.is-multi {
-			border: var(--color-border-muted) 1px solid;
+			border: var(--color-border-wash) 1px solid;
 			border-right: none;
 			padding-right: var(--spacing-2);
 		}
 
 		.form-select.svelecte .sv-item--container .sv-item--btn {
-			border: var(--color-border-muted) 1px solid;
+			border: var(--color-border-wash) 1px solid;
 		}
 
 		/* Selected items in a multi-select are body-sm, so an item and its

@@ -72,7 +72,7 @@
 
 <div
 	class={classNames(
-		'typeset-product elevation-1 gap-flow flex break-inside-avoid flex-col border border-color-border-muted bg-color-surface p-4 text-color-text',
+		'typeset-product elevation-1 gap-flow flex break-inside-avoid flex-col border border-color-border-wash bg-color-surface p-4 text-color-text',
 		classes
 	)}
 >
