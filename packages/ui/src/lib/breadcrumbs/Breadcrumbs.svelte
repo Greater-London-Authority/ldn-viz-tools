@@ -26,15 +26,16 @@
 </script>
 
 {#if breadcrumbs && breadcrumbs.length > 0}
-	<div class="typeset-product body-sm py-2 text-color-text-muted">
+	<nav aria-label="Breadcrumb" class="typeset-product body-sm py-2 text-color-text-muted">
 		{#each breadcrumbs as c, i (c.label)}
 			{#if i == breadcrumbs.length - 1}
-				<span class="text-color-interactive-primary">
+				<span class="text-color-interactive-primary-text" aria-current="page">
 					{c.label}
 				</span>
 			{:else}
-				<a href={resolve(c.href)} class="underline hover:no-underline">{c.label}</a> &sol;&nbsp;
+				<a href={resolve(c.href)} class="underline hover:no-underline">{c.label}</a>
+				<span aria-hidden="true">&sol;&nbsp;</span>
 			{/if}
 		{/each}
-	</div>
+	</nav>
 {/if}

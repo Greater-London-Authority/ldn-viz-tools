@@ -29,13 +29,16 @@ describe('Breadcrumbs Component', () => {
 		const current = page.getByText('Bar');
 		await expect.element(current).toBeInTheDocument();
 
-		const span = container.querySelector('span');
+		const span = container.querySelector('[aria-current="page"]');
 		expect(span).not.toBeNull();
 		expect(span).toHaveTextContent('Bar');
-		expect(span).toHaveClass('text-color-interactive-primary');
+		expect(span).toHaveClass('text-color-interactive-primary-text');
+	});
 
-		// The last crumb has no aria-current attribute in the current implementation.
-		expect(span).not.toHaveAttribute('aria-current');
+	it('renders a navigation landmark named Breadcrumb', async () => {
+		render(Breadcrumbs, { breadcrumbs });
+
+		await expect.element(page.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
 	});
 
 	it('renders separators between crumbs', async () => {
@@ -64,7 +67,7 @@ describe('Breadcrumbs Component', () => {
 		const { container } = render(Breadcrumbs, { breadcrumbs: [] });
 
 		// Svelte leaves behind an HTML comment as an anchor for the (empty) `{#if}` block.
-		expect(container.querySelector('div')).toBeNull();
+		expect(container.querySelector('nav')).toBeNull();
 		expect(container.textContent).toBe('');
 	});
 
