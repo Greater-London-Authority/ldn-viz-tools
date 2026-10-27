@@ -140,7 +140,7 @@
 
 <!-- Default secondary group (supporting numbers) -->
 {#snippet secondaryGroup()}
-	{#if comparisonValue}
+	{#if hasChange && comparisonValue !== undefined}
 		{#if heroIsChange}
 			<span class={classNames(labelRole, 'text-color-text')}>{f(value)}</span>
 		{:else}
