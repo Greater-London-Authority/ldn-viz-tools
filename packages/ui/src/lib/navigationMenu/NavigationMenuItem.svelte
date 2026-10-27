@@ -29,7 +29,7 @@
 
 	let orientation = navContext.orientation as NavigationMenuProps['orientation'];
 
-	let childMenuId = $derived(title.toLowerCase() + '-menu');
+	let childMenuId = $derived(`${id}-menu`);
 
 	let hasChildren = $derived(children?.length > 0);
 
@@ -128,7 +128,7 @@
 					size="sm"
 					aria-label="More {title} pages"
 					aria-expanded={isExpanded}
-					aria-controls={`${id}-menu`}
+					aria-controls={childMenuId}
 				>
 					<Icon
 						src={ChevronDown}

@@ -1,4 +1,14 @@
 <script lang="ts">
+	/**
+	 * The `<NavigationMenu>` component renders a `<nav>` landmark holding a nested list of links, up to four levels deep.
+	 * An item with children has a chevron button that expands or collapses its list, unless `isAlwaysExpanded` is set.
+	 * Set `orientation` to `horizontal` to lay the top level out in a row, with each submenu floating below its item.
+	 *
+	 * **Alternatives**: use [Breadcrumbs](./?path=/docs/ui-components-breadcrumbs--documentation) to show where the current page sits in a hierarchy, or [Tabs](./?path=/docs/ui-components-tabs--documentation) to switch between views on one page.
+	 *
+	 * @component
+	 */
+
 	import { setContext } from 'svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
