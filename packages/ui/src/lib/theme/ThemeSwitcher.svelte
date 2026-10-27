@@ -11,7 +11,7 @@
 	import { Moon, Sun } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { DropdownMenu } from 'bits-ui';
-	import { mode, setMode } from 'mode-watcher';
+	import { mode, setMode, userPrefersMode } from 'mode-watcher';
 
 	const modes = ['light', 'dark', 'system'] as const;
 
@@ -31,7 +31,7 @@
 	const nonHighlightedClasses =
 		'text-color-text hover:bg-color-interactive-primary-muted-hover py-0 px-2 cursor-pointer label-md';
 	const buttonClasses =
-		'rounded-full p-1 min-w-6 min-h-6 bg-color-interactive-secondary text-color-static-white hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active dark:hover:text-color-inverse-text';
+		'rounded-full p-1 min-w-6 min-h-6 bg-color-interactive-secondary text-color-inverse-text hover:bg-color-interactive-secondary-hover active:bg-color-interactive-secondary-active';
 </script>
 
 <DropdownMenu.Root>
@@ -64,14 +64,22 @@
 			preventScroll={false}
 			aria-label="Select current theme mode"
 		>
-			{#each modes as themeMode (themeMode)}
-				<DropdownMenu.Item
-					onSelect={() => setMode(themeMode)}
-					class={themeMode === mode.current ? highlightedClasses : nonHighlightedClasses}
-				>
-					{themeMode}
-				</DropdownMenu.Item>
-			{/each}
+			<!-- Radio items tell a screen reader which mode is chosen -->
+			<DropdownMenu.RadioGroup
+				value={userPrefersMode.current}
+				onValueChange={(value) => setMode(value as (typeof modes)[number])}
+			>
+				{#each modes as themeMode (themeMode)}
+					<DropdownMenu.RadioItem
+						value={themeMode}
+						class={themeMode === userPrefersMode.current
+							? highlightedClasses
+							: nonHighlightedClasses}
+					>
+						{themeMode}
+					</DropdownMenu.RadioItem>
+				{/each}
+			</DropdownMenu.RadioGroup>
 			<DropdownMenu.Separator />
 			<DropdownMenu.Arrow class="text-color-border-muted" />
 		</DropdownMenu.Content>
