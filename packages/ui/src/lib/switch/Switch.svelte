@@ -1,4 +1,13 @@
 <script lang="ts">
+	/**
+	 * The `<Switch>` component turns a single setting on or off, and the change takes effect straight away.
+	 * It renders a `<button role="switch">` with `aria-checked`, and a label beside it on the left or right.
+	 *
+	 * **Alternatives**: use a [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation) when the choice is submitted with a form rather than applied straight away.
+	 *
+	 * @component
+	 */
+
 	import { Label, Switch } from 'bits-ui';
 	import { classNames } from '../utils/classNames.js';
 	import { randomId } from '../utils/randomId.js';
