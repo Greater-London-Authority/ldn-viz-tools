@@ -10,6 +10,10 @@ order: 2
 
 <script>
     import TypographyTable from '$lib/components/typography/TypographyTable.svelte'
+    import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte'
+    import TokenReference from '$lib/components/tokenReference/TokenReference.svelte'
+    import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte'
+    import { TitleGroup } from '@ldn-viz/ui'
 
     const roles = [
         {text: 'Display', usage: 'High-impact text, such as a homepage hero. Use sparingly.', class: 'display-lg'},
@@ -35,154 +39,68 @@ order: 2
         ]
 </script>
 
-## Principles
+<p class="lead text-color-text-muted">Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. When combined with our spacing rules our typographic system ensures our designs and interfaces are balanced and harmonious.</p>
 
-Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. When combined with our spacing rules our typographic system ensures our designs and interfaces are balanced and harmonious.
+Text is set by role. Choose the role for the job the text does, and the role sets its size, weight and line height.
 
-### Font
+## Use
 
-We use the sans serif font Inter. Inter is a variable font family designed for computer screens, available via Google Fonts under the Open Font License. Code blocks use Source Code Pro.
+<UsageTabs>
+{#snippet full()}
 
-The base styles set Inter with this fallback stack:
+The components set their own type. The title components, such as `TitleGroup`, `DashboardTitle` and `PageTitle`, give each part of a title group its role:
 
-```CSS
-'Inter',
-'ui-sans-serif',
-'system-ui',
-'sans-serif',
-'Apple Color Emoji',
-'Segoe UI Emoji',
-'Segoe UI Symbol',
-'Noto Color Emoji'
+```svelte
+<script>
+	import { TitleGroup } from '@ldn-viz/ui';
+</script>
+
+<TitleGroup
+	eyebrow="Air quality"
+	title="Nitrogen dioxide"
+	subtitle="Rolling 24-hour mean"
+	headingLevel={3}
+/>
 ```
 
-### Roles
-
-The system describes type by **role** rather than by size. A role names the **job** a piece of text does, such as the **label** on an input or the **title** of a card. The role sets every property that job needs: font family, size, weight, line height and letter spacing.
-
-If card titles should be a step larger, that change is made in one place and everything that uses the role follows.
-
-There are ten roles:
-
-<div class="typeset-product my-8">
-    <TypographyTable items={roles} />
+<div class="typeset-product border border-color-border-wash p-4 my-4">
+	<TitleGroup eyebrow="Air quality" title="Nitrogen dioxide" subtitle="Rolling 24-hour mean" headingLevel={3} />
 </div>
 
-Every role except Eyebrow comes in three sizes, `sm`, `md` and `lg`, and the class is the role and size together: `title-sm`, `body-md`, `headline-lg`. The Eyebrow class is `eyebrow`.
+In your own markup, set a typeset on a container and give text a role class, as described below.
 
-Headlines open a page or a section. Titles name the units inside it. Labels are needed to use the interface; captions are not.
+If your app uses Tailwind, as the component library does, the preset removes Tailwind's font sizes, weights and line heights. Type comes from the role classes.
 
-### Type scale
+{/snippet}
+{#snippet adapting()}
 
-Roles are what designs and code should reference. Beneath them sits a scale of raw values that the roles draw from. That scale is private to the system. Designs and code use the roles instead.
+The typesets and role classes are plain CSS. Import `@ldn-viz/themes/index.css`, or `tokens.css` and `system.css` if your app has its own reset, and use them as described below.
 
-### Typesets
+A role class reads custom properties named for the role, such as `--title-sm-font-size`. Each typeset sets them for the current breakpoint, so a rule of your own can use them:
 
-A **typeset** gives every role its values for one kind of surface. There are two.
+```css
+.panel-heading {
+	font-family: var(--title-sm-font-family);
+	font-size: var(--title-sm-font-size);
+	font-weight: var(--title-sm-font-weight);
+	line-height: var(--title-sm-line-height);
+	letter-spacing: var(--title-sm-letter-spacing);
+}
+```
 
-| Typeset              | Intended for                                                         |
-| -------------------- | -------------------------------------------------------------------- |
-| **typeset-longform** | Long passages of reading: articles, guidance, help, documentation    |
-| **typeset-product**  | Applications and dashboards, and the text in tables, charts and maps |
+With `tokens.css` alone, use the typography tokens. Each names a breakpoint and a typeset, such as `--typography-base-product-title-sm-font-size`, so set the values for larger breakpoints in media queries.
 
-Both typesets have all ten roles, and give each role the same size and weight. They differ in the line height of body text. A reading column needs more space between lines than a dense interface:
+{/snippet}
+{#snippet anywhere()}
 
-| Role      | `typeset-longform` | `typeset-product` |
-| --------- | ------------------ | ----------------- |
-| `body-md` | 16px / 28px        | 16px / 24px       |
-| `body-sm` | 14px / 26px        | 14px / 22px       |
+Set text in Inter, which is available from [Google Fonts](https://fonts.google.com/specimen/Inter).
 
-Because the role names are the same, a component can be written once and read correctly in either typeset.
+Choose the typeset for the kind of work: longform for reading, and product for interfaces, tables, charts and maps. Then take each role's size, weight, line height and letter spacing from the [reference](#reference). Roles that change size have a value for each breakpoint.
 
-Reading content placed on an application surface, such as a help article inside a dashboard, is better given `typeset-longform` for that whole region than assembled from a mixture of the two.
+{/snippet}
+</UsageTabs>
 
-### Title groups
-
-A title group is an optional eyebrow, a title and a subtitle, at the top of a card, chart, table or panel.
-
-When a component contains two or more title groups, one is made dominant. The dominant group has a title and an optional subtitle. Each other group becomes an eyebrow, using the text that would have been its title.
-
-| Treatment  | Role          | Size | Weight | When it applies                                                     |
-| ---------- | ------------- | ---- | ------ | ------------------------------------------------------------------- |
-| Dominant   | `title-sm`    | 20px | 600    | The group is the subject of its container                           |
-| Demoted    | `eyebrow`     | 14px | 500    | Another group is dominant, for example a chart inside a titled card |
-| Supporting | `subtitle-sm` | 16px | 400    | A supporting line under a dominant title                            |
-
-Two examples:
-
-- **A card containing one titled chart.** The chart's title is dominant. The card's own title becomes an eyebrow above it, or is left out. If the chart has no title, the card title is dominant.
-- **A small card holding a single figure.** The label sits above the metric as an eyebrow, which is the same treatment a demoted title takes, so a group of these cards reads consistently beside a titled card.
-
-### Usage aliases
-
-A usage alias is a class named for the place it is used, such as `card-title` or `chart-tick`. Each alias applies a role, and some also set the muted text colour or tabular numerals. Use a role class where you can. The aliases are for code that names the place rather than the role.
-
-Chart text uses the chart aliases:
-
-<div class="typeset-product my-8">
-    <TypographyTable items={chartRoles} />
-</div>
-
-There is no separate alias for a legend. A legend entry uses `chart-label`.
-
-The full list of aliases and their roles is under [choosing a role](#choosing-a-role-for-an-interface-element).
-
-### Size, weight and colour are separate
-
-Size, weight and colour are three independent axes. A "subtle heading" is a heading in a muted colour. An "emphasised caption" is a caption at a heavier weight. Expressing either as a new size would add a role that describes an appearance rather than a job.
-
-Weight has two uses:
-
-**Identity weight** is part of what a role is, and the role sets it. Labels and eyebrows are medium, titles are semibold, and headlines, display and metrics are bold.
-
-**Emphasis weight** is applied on top of a role, for example to a bold run within a paragraph.
-
-There are five weights: light (300), regular (400), medium (500), semibold (600) and bold (700). No role uses light.
-
-### Responsive sizing
-
-Some roles change size as the viewport widens. The breakpoints are:
-
-| Breakpoint | Minimum width | CSS                          |
-| ---------- | ------------- | ---------------------------- |
-| base       | —             | the default                  |
-| `sm`       | 640px         | `@media (min-width: 640px)`  |
-| `md`       | 768px         | `@media (min-width: 768px)`  |
-| `lg`       | 1024px        | `@media (min-width: 1024px)` |
-| `xl`       | 1280px        | `@media (min-width: 1280px)` |
-
-These roles change size, in pixels, in both typesets:
-
-| Role          | base | `sm` | `md` | `lg` | `xl` |
-| ------------- | ---- | ---- | ---- | ---- | ---- |
-| `display-lg`  | 40   | 48   | 56   | 64   | 72   |
-| `display-md`  | 36   | 40   | 48   | 56   | 64   |
-| `display-sm`  | 32   | 36   | 40   | 48   | 56   |
-| `headline-lg` | 30   | 32   | 36   | 36   | 40   |
-| `headline-md` | 28   | 28   | 30   | 30   | 30   |
-| `metric-lg`   | 28   | 30   | 32   | 32   | 36   |
-
-Every other role has one size at every breakpoint. The role class picks up the value for the current breakpoint, so there is no need to set a size per breakpoint.
-
-You can test the roles on this page by resizing your browser, or by emulating a device in your browser's developer tools.
-
-### Line height
-
-Line height is the font size plus 4px, 8px or 12px.
-
-| Added | Roles                                              |
-| ----- | -------------------------------------------------- |
-| 4px   | Metric, Caption and Eyebrow                        |
-| 8px   | Every other role                                   |
-| 12px  | `body-md` and `body-sm` in `typeset-longform` only |
-
-Because every line height is a whole number of pixels, a block of text composes predictably against the margins and gaps around it.
-
----
-
-## Practice
-
-**This guidance applies to projects that import `@ldn-viz/themes/index.css`.** The typesets and roles don't need Tailwind. The colour and spacing utilities in the examples, such as `text-color-text-muted` and `p-4`, come from the Tailwind preset.
+The classes in this section work in the full system and in any project that imports `@ldn-viz/themes/index.css`. They don't need Tailwind. The colour and spacing utilities in the examples, such as `text-color-text-muted` and `p-4`, come from the Tailwind preset.
 
 ### Setting a typeset
 
@@ -279,7 +197,7 @@ A typeset nested inside `typeset-longform` also stops its automatic styling.
 	<span class="label-md">Control label</span>
 </div>
 
-For Markdown or other formatted content inside an application, use `typeset-product--formatted`. It styles links, lists, blockquotes and tables as `typeset-longform` does, limits the width of each block, and sets the standard flow context. It doesn't give headings a role, so a heading needs a role class.
+For Markdown or other formatted content inside an application, use `typeset-product--formatted`. It styles links, lists, blockquotes and tables as `typeset-longform` does, limits the width of each block, and sets the standard flow context. It gives headings, `p.lead` and `figcaption` the same roles as `typeset-longform`.
 
 ### Choosing a role for an interface element
 
@@ -370,3 +288,158 @@ Where the intent is emphasis within a role, change the weight. `text-strong` set
 ### The Tailwind Typography plugin
 
 The system does not use the Tailwind Typography plugin. Its `prose` class and modifiers such as `prose-lg` and `prose-invert` have no effect. Size comes from the roles, and the reading width is set by `typeset-longform`.
+
+## How it works
+
+### Font
+
+We use the sans serif font Inter. Inter is a variable font family designed for computer screens, available via Google Fonts under the Open Font License. Code blocks use Source Code Pro.
+
+The base styles set Inter with this fallback stack:
+
+```css
+Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+"Segoe UI Symbol", "Noto Color Emoji"
+```
+
+### Roles
+
+The system describes type by **role** rather than by size. A role names the **job** a piece of text does, such as the **label** on an input or the **title** of a card. The role sets every property that job needs: font family, size, weight, line height and letter spacing.
+
+If card titles should be a step larger, that change is made in one place and everything that uses the role follows.
+
+There are ten roles:
+
+<div class="typeset-product my-8">
+    <TypographyTable items={roles} />
+</div>
+
+Every role except Eyebrow comes in three sizes, `sm`, `md` and `lg`, and the class is the role and size together: `title-sm`, `body-md`, `headline-lg`. The Eyebrow class is `eyebrow`.
+
+Headlines open a page or a section. Titles name the units inside it. Labels are needed to use the interface; captions are not.
+
+### Type scale
+
+Roles are what designs and code should reference. Beneath them sits a scale of raw values that the roles draw from. That scale is private to the system. Designs and code use the roles instead.
+
+### Typesets
+
+A **typeset** gives every role its values for one kind of surface. There are two.
+
+| Typeset              | Intended for                                                         |
+| -------------------- | -------------------------------------------------------------------- |
+| **typeset-longform** | Long passages of reading: articles, guidance, help, documentation    |
+| **typeset-product**  | Applications and dashboards, and the text in tables, charts and maps |
+
+Both typesets have all ten roles, and give each role the same weight. They differ in the line height of body text, and `typeset-longform` sets `subhead-md` and `subhead-lg` larger at the `lg` and `xl` breakpoints. The line heights of body text in each typeset:
+
+| Role      | `typeset-longform` | `typeset-product` |
+| --------- | ------------------ | ----------------- |
+| `body-lg` | 18px / 30px        | 18px / 26px       |
+| `body-md` | 16px / 28px        | 16px / 24px       |
+| `body-sm` | 14px / 26px        | 14px / 22px       |
+
+Because the role names are the same, a component can be written once and read correctly in either typeset.
+
+Reading content placed on an application surface, such as a help article inside a dashboard, is better given `typeset-longform` for that whole region than assembled from a mixture of the two.
+
+### Title groups
+
+A title group is an optional eyebrow, a title and a subtitle, at the top of a card, chart, table or panel.
+
+When a component contains two or more title groups, one is made dominant. The dominant group has a title and an optional subtitle. Each other group becomes an eyebrow, using the text that would have been its title.
+
+| Treatment  | Role          | Size | Weight | When it applies                                                     |
+| ---------- | ------------- | ---- | ------ | ------------------------------------------------------------------- |
+| Dominant   | `title-sm`    | 20px | 600    | The group is the subject of its container                           |
+| Demoted    | `eyebrow`     | 14px | 500    | Another group is dominant, for example a chart inside a titled card |
+| Supporting | `subtitle-sm` | 16px | 400    | A supporting line under a dominant title                            |
+
+Two examples:
+
+- **A card containing one titled chart.** The chart's title is dominant. The card's own title becomes an eyebrow above it, or is left out. If the chart has no title, the card title is dominant.
+- **A small card holding a single figure.** The label sits above the metric as an eyebrow, which is the same treatment a demoted title takes, so a group of these cards reads consistently beside a titled card.
+
+### Usage aliases
+
+A usage alias is a class named for the place it is used, such as `card-title` or `chart-tick`. Each alias applies a role, and some also set the muted text colour or tabular numerals. Use a role class where you can. The aliases are for code that names the place rather than the role.
+
+Chart text uses the chart aliases:
+
+<div class="typeset-product my-8">
+    <TypographyTable items={chartRoles} />
+</div>
+
+There is no separate alias for a legend. A legend entry uses `chart-label`.
+
+The full list of aliases and their roles is under [choosing a role](#choosing-a-role-for-an-interface-element).
+
+### Size, weight and colour are separate
+
+Size, weight and colour are three independent axes. A "subtle heading" is a heading in a muted colour. An "emphasised caption" is a caption at a heavier weight. Expressing either as a new size would add a role that describes an appearance rather than a job.
+
+Weight has two uses:
+
+**Identity weight** is part of what a role is, and the role sets it. Labels and eyebrows are medium, titles are semibold, and headlines, display and metrics are bold.
+
+**Emphasis weight** is applied on top of a role, for example to a bold run within a paragraph.
+
+There are five weights: light (300), regular (400), medium (500), semibold (600) and bold (700). No role uses light.
+
+### Responsive sizing
+
+Some roles change size as the viewport widens. The breakpoints are:
+
+| Breakpoint | Minimum width | CSS                          |
+| ---------- | ------------- | ---------------------------- |
+| base       | —             | the default                  |
+| `sm`       | 640px         | `@media (min-width: 640px)`  |
+| `md`       | 768px         | `@media (min-width: 768px)`  |
+| `lg`       | 1024px        | `@media (min-width: 1024px)` |
+| `xl`       | 1280px        | `@media (min-width: 1280px)` |
+
+These roles change size, in pixels, in both typesets:
+
+| Role          | base | `sm` | `md` | `lg` | `xl` |
+| ------------- | ---- | ---- | ---- | ---- | ---- |
+| `display-lg`  | 40   | 48   | 56   | 64   | 72   |
+| `display-md`  | 36   | 40   | 48   | 56   | 64   |
+| `display-sm`  | 32   | 36   | 40   | 48   | 56   |
+| `headline-lg` | 30   | 32   | 36   | 36   | 40   |
+| `headline-md` | 28   | 28   | 30   | 30   | 30   |
+| `metric-lg`   | 28   | 30   | 32   | 32   | 36   |
+
+In `typeset-longform`, `subhead-lg` is 24px up to `md` and 26px at `lg` and `xl`, and `subhead-md` is 22px, then 24px.
+
+Every other role has one size at every breakpoint. The role class picks up the value for the current breakpoint, so there is no need to set a size per breakpoint.
+
+You can test the roles on this page by resizing your browser, or by emulating a device in your browser's developer tools.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/typography/longform-breakpoints.png" alt="The same report page in typeset-longform at the base and xl breakpoints. The headline is larger at xl, and the body text keeps its size." />
+</figure>
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/typography/product-breakpoints.png" alt="The same dashboard in typeset-product at the base and xl breakpoints. The dashboard title and the metrics are larger at xl, and the card text keeps its size." />
+</figure>
+
+### Line height
+
+Line height is the font size plus 4px, 8px or 12px.
+
+| Added | Roles                           |
+| ----- | ------------------------------- |
+| 4px   | Metric, Caption and Eyebrow     |
+| 8px   | Every other role                |
+| 12px  | Body in `typeset-longform` only |
+
+Because every line height is a whole number of pixels, a block of text composes predictably against the margins and gaps around it.
+
+## Reference
+
+Choose a typeset and a breakpoint to see the values for each role.
+
+<TokenReference group="typography" />
+
+The full rules for type are in the [specification](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/design-system-specification/design-system-specification.md#typography).

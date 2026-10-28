@@ -233,7 +233,7 @@ To set a level of elevation, use an elevation token. `--shadow-inner` has no ele
 
 ### Breakpoints
 
-Breakpoints are used in media queries and as Tailwind prefixes, such as `md:`. A custom property can't be used in a media query, so there are no breakpoint custom properties.
+Breakpoints are used in media queries and as Tailwind prefixes, such as `md:`. A custom property can't be used in a media query, so breakpoints have no semantic tokens. Write the width in the media query.
 
 <TokenReference group="breakpoint" />
 
