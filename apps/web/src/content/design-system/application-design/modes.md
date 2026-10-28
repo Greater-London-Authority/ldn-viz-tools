@@ -8,76 +8,73 @@ thumbnail: cta-application-design-3.svg
 order: 7
 ---
 
-## Principles
+<script>
+	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
+</script>
 
-The system provides a single theme with two "modes" - **light** and **dark**. For legacy reasons the mode occasionally referenced as 'theme' even if it is not strictly true. For example the `ThemeSwitcher` component actually changes the `mode`.
+<p class="lead text-color-text-muted">The system has one theme with two modes, light and dark. Each colour token has a value for each mode, so an application that uses the tokens can switch between them.</p>
 
-### User preference
+The `Theme` and `ThemeSwitcher` components use the word 'theme' for the mode.
 
-Both modes have been carefully considered to have accessible contrast levels. Offering users the ability to choose light or dark mode honours their preferences, which could be due to lighting conditions, accessibility requirements or simply their preferred choice.
+## User preference
 
-### Modes
+Offering users the choice of light or dark mode honours their preference, which could be due to lighting conditions, accessibility needs or simply their preferred choice.
 
-![An illustration of the different light and dark modes that can be applied to applications and components](/theming/mode-examples.png)
+Light mode is the default in the CSS: the values on `:root` are the light values. Give users a way to switch, and to follow the mode set by their device.
 
-Modes are applied to applications as a whole, but can be overridden on a per component basis.
+<figure class="width-content-wide">
+	<EnhancedImage src="/modes/mode-examples.png" alt="The same application in three arrangements: light mode with a light header, sidebar and footer; light mode with a dark header, sidebar and footer; and dark mode. Above each, the stack of canvas and surfaces in those colours" />
+</figure>
 
-#### Light mode
+## Switch the mode
 
-We consider the light mode as the default. In this mode the use of semantic colour design tokens will default to their light mode variant. Canvas and surface elements will default to light background.
+<UsageTabs>
+{#snippet full()}
 
-In light mode the `<Header>`, `<Footer>`, `<Sidebar>` components stay in dark mode by default. This is to reinforce structure and brand recognition.
+Add the `Theme` component to your application's top-level layout. It applies the user's saved choice, or the mode set by their device, when the page loads. `ThemeSwitcher` gives the user a menu of light, dark and system, and can go anywhere in the application, such as the footer.
 
-In certain scenarios these components can be styled in full light mode (as the sidebar for this documentation is)
+```svelte
+<script>
+	import { Theme, ThemeSwitcher } from '@ldn-viz/ui';
+</script>
 
-#### Dark mode
-
-In dark mode all components adopt their dark mode variants, contrast levels remain consistent, but colour hues adapt to the dark surface elements.
-
-## Practice
-
-### Using Css
-
-Assuming you are importing the relevant css files - [see the getting started section](/design-system/getting-started) you can then use css variables to style your application.
-
-Refer to the documentation on [design tokens](/design-system/foundations/design-tokens#reference) for reference. All tokens listed are available as css variables:
-
-```css
-// token name
-color-text-muted;
-
-// css variable
---color-text-muted;
-
-// variable application
-.my-class {
-	color: var(--color-text-muted);
-}
+<Theme />
+…
+<ThemeSwitcher />
 ```
 
-[Read the mozilla docs for more about using css variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties#using_the_root_pseudo-class)
+`ThemeSwitcher` needs `Theme` to be on the page.
 
-The custom properties are in `tokens.css`, which `index.css` imports. The light values are scoped to the root:
+{/snippet}
+{#snippet adapting()}
 
-```css
-:root { ...
-```
-
-The dark values are scoped to a `.dark` class:
+The light values of the colour tokens are set on `:root`, and the dark values on `.dark`:
 
 ```css
-:root.dark, .dark { ...
+:root { … }
+:root.dark, .dark { … }
 ```
 
-this means you can target mode switching with a `.dark` class, and any children of that class will inherit the mode. Applying the class to the html `<body>` element applies the mode globally.
+Add the `dark` class to the root element to switch the whole page to dark mode. Store the user's choice yourself, and read `prefers-color-scheme` to follow their device.
 
 ```html
-<body class="dark">
-	All descendants will inherit dark mode
-</body>
+<html class="dark">
+	…
+</html>
 ```
 
-You can use the same method to apply the dark mode at a component level
+{/snippet}
+{#snippet anywhere()}
+
+In `@ldn-viz/themes/colors.js`, each colour's values are under `mode.light` and `mode.dark`. The [design tokens reference](/design-system/foundations/design-tokens#reference) shows both values side by side.
+
+{/snippet}
+</UsageTabs>
+
+## Dark mode for part of a page
+
+A `.dark` class applies dark mode to everything inside it, whatever the mode of the page. An element without a `.dark` ancestor follows the page.
 
 ```css
 .text-class {
@@ -87,20 +84,33 @@ You can use the same method to apply the dark mode at a component level
 
 ```html
 <div class="dark">
-	<p class="text-class">I'm in dark mode regardless as my parent has a 'dark' class</p>
+	<p class="text-class">I'm in dark mode, because my parent has the dark class.</p>
 </div>
 
 <div>
-	<p class="text-class">
-		I'm in light mode unless a 'dark' class has been applied to one of my ancestors
-	</p>
+	<p class="text-class">I'm in light mode, unless an ancestor has the dark class.</p>
 </div>
 ```
 
-The Tailwind preset from `@ldn-viz/themes` adds each colour token as a Tailwind colour, such as `text-color-text-muted`. It adds no CSS of its own, so a Tailwind project imports `index.css` as well.
+<div class="border border-color-border-wash p-4 my-4">
+	<div class="dark bg-color-canvas p-4">
+		<p class="text-color-text">I'm in dark mode, because my parent has the dark class.</p>
+	</div>
+	<div class="bg-color-canvas p-4">
+		<p class="text-color-text">I'm in light mode, unless an ancestor has the dark class.</p>
+	</div>
+</div>
 
-You can check [our storybook](https://greater-london-authority.github.io/ldn-viz-tools/) for further information.
+There is no light class, so a part of a page can't be kept in light mode while the page is dark.
 
-### Using raw colour values
+### The header, sidebar and footer
 
-If you are preparing a presentation in a non web format (e.g. Powerpoint) where you are not using css or web technologies you may use raw colour values. In all other circumstances you should use the tokens provided by the design system.
+`Header`, `Sidebar` and `Footer` are in dark mode by default. Set `theme="light"` on them to follow the page's mode instead, as the sidebar of this documentation does.
+
+### Inverse colours
+
+Content on a background of the opposite lightness, such as a light panel in dark mode, uses the `inverse` colour tokens, such as `--color-inverse-text` on `--color-inverse-surface`. [Design tokens](/design-system/foundations/design-tokens#inverse) describes the inverse variant.
+
+## Colours outside the browser
+
+In a medium that doesn't use CSS, such as a slide deck, use the resolved colour values from `@ldn-viz/themes/colors.js`. Everywhere else, use the tokens, so the colours change with the mode.

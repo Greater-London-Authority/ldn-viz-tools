@@ -8,42 +8,46 @@ thumbnail: cta-application-design-1.svg
 order: 1
 ---
 
-## Principles
+<script>
+	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+</script>
 
-Our work covers different types of applications which can be roughly grouped into different typologies. Although each application will have it's own considerations of user goals we have established some basic principles to help frame the development of different application types.
+<p class="lead text-color-text-muted">Our work covers different types of applications, which can be roughly grouped into dashboards, maps, notebooks and reports.</p>
 
-### Dashboards
+The application type sets its basic structure: which [layout](/design-system/application-design/page-layout) it uses, what sits in the sidebar and what fills the canvas.
+
+## Dashboards
 
 Dashboards help users to monitor and investigate data.
 
-![A typical dashboard style application](/application-types/dashboard.png)
+A dashboard has a sidebar for navigation and filters, and a canvas that holds several separate visualisations, each in a [card](/design-system/application-design/surfaces-and-chrome#cards). It uses the fluid layout, so the canvas fills the width beside the sidebar, and the product typeset.
 
-### Maps
+<figure class="width-content-wide">
+	<EnhancedImage src="/application-types/dashboard.png" alt="A typical dashboard style application" />
+</figure>
 
-Maps primary focus is the analysis of spacial data.
+## Maps
 
-![A typical map style application](/application-types/map.png)
+The main purpose of a map is the analysis of spatial data.
 
-### Notebooks
+A map can appear as one element within a dashboard. A standalone map application has a sidebar for navigation and filters, and a canvas filled by an interactive map. It uses the fluid layout and the product typeset.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/application-types/map.png" alt="A typical map style application" />
+</figure>
+
+## Notebooks
 
 Notebooks allow for a level of interaction within a narrative flow.
 
-![A typical notebook style application](/application-types/notebook.png)
+A notebook is long-form text broken up by visualisations. It is read like an article, so it uses the contained layout and the longform typeset.
 
-### Reports
+<figure class="width-content-wide">
+	<EnhancedImage src="/application-types/notebook.png" alt="A typical notebook style application" />
+</figure>
 
-Reports are similar to notebooks, but tend to be more in-depth often consisting of multiple notebook type pages.
+## Reports
 
-## Practice
+Reports are similar to notebooks, but tend to be more in-depth, often made of several notebook-type pages.
 
-### Dashboards
-
-Dashboards will generally consist of a global side-bar navigation with the main content canvas holding multiple discrete visualisations in card elements.
-
-### Maps
-
-While maps can appear as elements within a dashboard a standalone map application will consist of a global side-bar navigation with the main content canvas holding a full cover interactive map.
-
-### Notebooks
-
-Notebooks allow for long form copy intersected by visualisation elements that can be both illustrative of the narrative and interactive
+<div class="my-4 border border-dashed border-color-border p-4 body-sm text-color-text-muted">Placeholder: an image of a typical report, with its page navigation.</div>

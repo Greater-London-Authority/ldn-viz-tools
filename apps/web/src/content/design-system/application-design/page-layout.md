@@ -8,157 +8,123 @@ thumbnail: cta-application-design-2.svg
 order: 2
 ---
 
-## Principles
+<script>
+	import { Card, DashboardSectionTitle, DashboardTitle, PlaceholderImage } from '@ldn-viz/ui';
+	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
+</script>
 
-Design for small screens first, starting with a single-column layout.
+<p class="lead text-color-text-muted">An application page is built from a header, a sidebar, a canvas and a footer. The layout grid sets the space at the edge of the page, and flow sets the space between the blocks on it.</p>
 
-<table>
-<thead>
-<tr class="text-left">
-<th>Breakpoint prefix</th>
-<th>Minimum width</th>
-<th>CSS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sm</code></td>
-<td>640px</td>
-<td><code>@media (min-width: 640px)</code></td>
-</tr>
-<tr>
-<td><code>md</code></td>
-<td>768px</td>
-<td><code>@media (min-width: 768px)</code></td>
-</tr>
-<tr>
-<td><code>lg</code></td>
-<td>1024px</td>
-<td><code>@media (min-width: 1024px) </code></td>
-</tr>
-<tr>
-<td><code>xl</code></td>
-<td>1280px</td>
-<td><code>@media (min-width: 1280px) </code></td>
-</tr>
-<tr>
-<td><code>2xl</code></td>
-<td>1536px</td>
-<td><code>@media (min-width: 1536px) </code></td>
-</tr>
-</tbody>
-</table>
+Design for small screens first, starting with a single-column layout, and add columns as the screen widens.
 
-Our layouts follow an adaptive pattern going from 6 columns (sm) 8 columns (md) 12 columns (lg and up)
+## Choose a layout
 
-### Spacing
+A page uses one of two layouts:
 
-Although it can be tempting to compress a lot into a small space we strive to let our applications 'breathe' by allowing for whitespace and page rhythm.
+- **Contained** is for document-like pages, such as articles, documentation, guidance and forms, where content should not stretch across a wide screen. It is centred, its width steps up with the breakpoints, and its padding grows as the viewport widens.
+- **Fluid** is for dashboards and application shells, where the canvas should use the width available. It fills the width of the viewport, and its padding stays between 16px and 24px.
 
-Space on a page has determining factors, and spacing decisions should become straightforward once it is clear which one applies. The gaps between blocks, whether stacked one above another or tiled across a width, come from [content flow](/design-system/foundations/flow). The container sets the space at the page edge, from the padding values below. The component determines the space inside its own box — padding, borders, indents — which comes from the [spacing scale](/design-system/foundations/design-tokens).
+[Application types](/design-system/application-design/application-types) says which layout each type of application uses.
 
-A page built this way contains very few chosen measurements. Where a number is being picked by hand, it is usually a sign that one of the three systems has been bypassed.
+<UsageTabs>
+{#snippet full()}
 
-### Grids
-
-There are two distinct types of grid, with their own values, determined by the kind of surface that they appear on.
-
-The **contained** grid is centred and limited in width, with edge space that grows as the viewport widens. It suits document-like surfaces: reading content, guidance, settings and forms, where content should not stretch across a wide screen.
-
-| Breakpoint | Columns | Edge space |
-| ---------- | ------- | ---------- |
-| base       | 4       | 16px       |
-| `sm`       | 6       | 32px       |
-| `md`       | 8       | 32px       |
-| `lg`       | 12      | 64px       |
-| `xl`       | 12      | 80px       |
-| `2xl`      | 12      | 96px       |
-
-The **fluid** grid runs full width, with columns that stretch and edge space that stays constant. It suits dashboards and application shells, where the canvas should use the width available.
-
-| Breakpoint | Columns | Edge space |
-| ---------- | ------- | ---------- |
-| base       | 4       | 16px       |
-| `sm`       | 6       | 16px       |
-| `md`       | 8       | 24px       |
-| `lg`       | 12      | 24px       |
-| `xl`       | 12      | 24px       |
-| `2xl`      | 12      | 24px       |
-
-In both cases the edge space is the padding of the containing frame, and the grid's own margin is zero. The grid describes the columns within the padded width rather than insetting from the edge a second time.
-
-Cards in a row are spaced by the same flow step as cards in a stack, so a grid of cards has one gap in both directions. In the standard context of a dashboard that is 8px; in a spacious context it is 16px.
-
-The side panel of a dashboard sits outside the canvas grid. A control panel is application chrome rather than a grid column, so the fluid grid applies to the canvas region only and the canvas fills whatever width remains beside the panel.
-
-### Anatomy
-
-#### Header
-
-The header sits at the top of the page and contains the application title and highest level of inter page navigation (if applicable).
-
-![A typical dashboard style application with header highlighted](/layout/layout-header.png)
-
-#### Footer
-
-The footer is used to root the base of application page and can contain secondary/ tertiary navigation elements as well as branding and links to user preference settings.
-
-![A typical dashboard style application with footer highlighted](/layout/layout-footer.png)
-
-#### Sidebar
-
-The sidebar contains top level navigation and filters for the app. Depending on the context this could be a simple page navigation list or a complex set of grouped filters. When used for filters care should be taken so that the filters are at a global level. For example if a filter only effects a single chart on the canvas it would usually be better to co-locate the filter closer to the chart.
-
-![A typical dashboard style application with sidebar highlighted](/layout/layout-sidebar.png)
-
-#### Canvas
-
-The canvas is the main area of the application.
-
-![A typical dashboard style application with canvas area highlighted](/layout/layout-canvas.png)
-
-### Layers
-
-If the canvas exists on the lowest layer of the application we can think of things placed upon the canvas as being at points of increased elevation. This is achieved with subtle use of colour and shadow in give a sense of height. If we think of three ui elements, a **Card**, a **Tooltip** and a **Modal**, The card element sits at a level just above the canvas. The Tooltip is slightly elevated above the card, and the Modal is at the highest level of elevation. [See Ui component section for individual component usage](/design-system/foundations/elevation)
-
-## Practice
-
-### AppShell
-
-The @ldn-viz-tools library contains a AppShell svelte component that orchestrates sidebar positioning across breakpoints.
-
-![A typical dashboard style application with app-shell area highlighted](/layout/layout-appshell.png)
-
-Sidebars can be positioned `top`, `bottom`, `left`, `right`
+Put the page content in `.container` or `.container-fluid`. Both classes are in the system's CSS, so they work without Tailwind:
 
 ```html
-<Appshell sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left' }} >
+<main class="container-fluid">…</main>
 ```
 
-you can find more information on component usage in [our storybook ](https://greater-london-authority.github.io/ldn-viz-tools/?path=/docs/ui-components-layout-and-themes-appshell--documentation)
+In a dashboard or map, [`AppShell`](#appshell) positions the sidebar, and the fluid container goes on the canvas beside it.
+
+{/snippet}
+{#snippet adapting()}
+
+Use the `.container` or `.container-fluid` class from `system.css`:
+
+```html
+<main class="container">…</main>
+```
+
+To build your own container, set its padding from the grid tokens, `--grid-{breakpoint}-{contained|fluid}-container-padding`, in a media query for each breakpoint:
+
+```css
+@media (min-width: 1024px) {
+	.page {
+		padding-inline: var(--grid-lg-fluid-container-padding);
+	}
+}
+```
+
+{/snippet}
+{#snippet anywhere()}
+
+Use the padding in the table below at the edge of each frame. In the contained layout, the content is no wider than the contained width for the breakpoint, and is centred.
+
+{/snippet}
+</UsageTabs>
+
+| Breakpoint | Contained width | Contained padding | Fluid padding |
+| ---------- | --------------- | ----------------- | ------------- |
+| `base`     | 100%            | 16px              | 16px          |
+| `sm`       | 640px           | 32px              | 16px          |
+| `md`       | 768px           | 32px              | 24px          |
+| `lg`       | 1024px          | 64px              | 24px          |
+| `xl`       | 1280px          | 80px              | 24px          |
+| `2xl`      | 1536px          | 96px              | 24px          |
+
+In both layouts, the padding is on the container itself, so components don't add their own padding at the page edge.
+
+There are no column tokens, because the number of columns depends on the content of each page. Set the columns with CSS grid or Tailwind's grid utilities. The [layout grid](/design-system/foundations/layout-grid) page has the breakpoints.
+
+## Space on a page
+
+Although it can be tempting to compress a lot into a small space, we let our applications 'breathe' by allowing for whitespace and page rhythm.
+
+Each space on a page comes from one of three places:
+
+- The space between blocks, stacked or tiled, comes from [flow](/design-system/foundations/flow).
+- The space at the page edge comes from the container's padding.
+- The space inside a component, such as its padding and indents, comes from the [spacing scale](/design-system/foundations/spacing).
+
+A number picked by hand is usually a sign that one of the three has been bypassed.
 
 ### Space between tiled blocks
 
-`gap-flow` on a grid sets the space between its items to the default flow step of the context.
+`gap-flow` on a grid sets the space between its items to the default flow step of the context. Cards in a row then have the same space between them as cards in a stack. In the standard context that is 8px, and in the spacious context 16px.
 
 ```html
-<div class="container-fluid flow-standard">
-	<div class="gap-flow grid grid-cols-3">…</div>
+<div class="flow-standard">
+	<div class="gap-flow grid grid-cols-2">
+		<!-- cards -->
+	</div>
 </div>
 ```
 
-Setting a gap by hand, such as `gap-4`, is worth avoiding: it doesn't change with the context, so the grid drifts from the space around it.
+<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
+	<div class="flow-standard">
+		<div class="grid grid-cols-2 gap-flow">
+			<Card title="Completions"><div class="h-24"><PlaceholderImage /></div></Card>
+			<Card title="Approvals"><div class="h-24"><PlaceholderImage /></div></Card>
+			<Card title="Starts"><div class="h-24"><PlaceholderImage /></div></Card>
+			<Card title="Pipeline"><div class="h-24"><PlaceholderImage /></div></Card>
+		</div>
+	</div>
+</div>
+
+A gap set by hand, such as `gap-4`, doesn't change with the context, so the grid drifts from the space around it.
 
 ### Vertical rhythm on a canvas
 
-The space between blocks within a section comes from a [flow](/design-system/foundations/flow) context rather than from margins set on each element. Declaring the context on the section is usually enough; a relationship is stated explicitly only where nothing could infer it.
+The space between blocks within a section comes from a [flow](/design-system/foundations/flow) context, not from margins set on each element. Declaring the context on the section is usually enough. Set a step explicitly only where nothing else would choose it.
 
 ```html
 <section class="flow-standard typeset-product">
 	<h2 class="title-lg">Rough sleeping</h2>
 	<p class="subtitle-sm">Quarterly</p>
 
-	<div class="gap-flow mt-flow-section grid grid-cols-3">
+	<div class="mt-flow-section gap-flow grid grid-cols-3">
 		<!-- cards -->
 	</div>
 
@@ -167,3 +133,94 @@ The space between blocks within a section comes from a [flow](/design-system/fou
 ```
 
 `typeset-product` sets the typeset, so `title-lg` and `subtitle-sm` take their product values. `flow-standard` sets how far apart the blocks sit.
+
+## Dashboards
+
+A dashboard has a title at the top of the canvas, then sections, each with a section title and a grid of cards. `DashboardTitle` and `DashboardSectionTitle` render headings with the `dashboard-main-title` and `dashboard-section-title` classes.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/page-layout/dashboard-fluid-xl.png" alt="A dashboard at 1280px: a dashboard title and subtitle, a full-width block, then a section title and subtitle above two cards side by side" />
+</figure>
+
+```svelte
+<div class="flow-standard">
+	<DashboardTitle title="Dashboard title" subtitle="A subtitle for this dashboard" />
+	<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" />
+	<div class="gap-flow grid grid-cols-2">
+		<Card title="Title" subtitle="Subtitle">…</Card>
+		<Card title="Title" subtitle="Subtitle">…</Card>
+	</div>
+</div>
+```
+
+<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
+	<div class="flow-standard">
+		<DashboardTitle title="Dashboard title" subtitle="A subtitle for this dashboard" />
+		<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" />
+		<div class="grid grid-cols-2 gap-flow">
+			<Card title="Title" subtitle="Subtitle"><div class="h-24"><PlaceholderImage /></div></Card>
+			<Card title="Title" subtitle="Subtitle"><div class="h-24"><PlaceholderImage /></div></Card>
+		</div>
+	</div>
+</div>
+
+<div class="my-4 border border-dashed border-color-border p-4 body-sm text-color-text-muted">Placeholder: the space between the dashboard title, the sections and the card grid needs checking against the Figma Dashboard Layouts frames.</div>
+
+## Anatomy
+
+### Header
+
+The header sits at the top of the page. It contains the application title and the highest level of navigation between pages, if there is one.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/layout/layout-header.png" alt="A typical dashboard style application with header highlighted" />
+</figure>
+
+### Footer
+
+The footer sits at the base of the page. It can contain secondary and tertiary navigation, branding, and links to user preference settings.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/layout/layout-footer.png" alt="A typical dashboard style application with footer highlighted" />
+</figure>
+
+### Sidebar
+
+The sidebar contains the top-level navigation and filters for the application. Depending on the context, this could be a simple list of pages or a complex set of grouped filters. Filters in the sidebar should apply to the whole page. Place a filter that affects only one chart next to that chart.
+
+The sidebar sits outside the canvas. The fluid layout applies to the canvas only, and the canvas fills the width that remains beside the sidebar.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/layout/layout-sidebar.png" alt="A typical dashboard style application with sidebar highlighted" />
+</figure>
+
+### Canvas
+
+The canvas is the main area of the application.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/layout/layout-canvas.png" alt="A typical dashboard style application with canvas area highlighted" />
+</figure>
+
+### Layers
+
+The canvas is the lowest layer of the application, and the things placed on it sit at higher levels of [elevation](/design-system/foundations/elevation). Each level is shown by a shadow. A card sits just above the canvas at `elevation-1`, a tooltip above it at `elevation-4`, and a modal at `elevation-5`. [Surfaces and chrome](/design-system/application-design/surfaces-and-chrome) describes cards.
+
+## AppShell
+
+`AppShell`, in `@ldn-viz/ui`, sets where the sidebar sits at each breakpoint, whether it is always open and whether opening it pushes the content aside.
+
+<figure class="width-content-wide">
+	<EnhancedImage src="/layout/layout-appshell.png" alt="A typical dashboard style application with app-shell area highlighted" />
+</figure>
+
+The sidebar can sit at the `top`, `bottom`, `left` or `right`. `sidebarPlacement` sets the position from each breakpoint up:
+
+```svelte
+<AppShell sidebarPlacement={{ initial: 'top', md: 'bottom', lg: 'left' }}>
+	{#snippet sidebar()}…{/snippet}
+	{#snippet main()}…{/snippet}
+</AppShell>
+```
+
+[Storybook](https://greater-london-authority.github.io/ldn-viz-tools/?path=/docs/ui-components-layout-and-themes-appshell--documentation) lists its props.
