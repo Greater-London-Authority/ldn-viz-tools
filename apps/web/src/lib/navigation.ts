@@ -2,6 +2,10 @@ import { getAllDocs } from './utils.js';
 
 const allDocs = getAllDocs();
 
+// Pages with an `order` in their front matter come first, in that order.
+const byOrder = (a: { order?: number }, b: { order?: number }) =>
+	(a.order ?? Infinity) - (b.order ?? Infinity);
+
 const introduction = allDocs
 	.filter((doc) => doc.section === 'Getting Started')
 	.filter((doc) => doc.slugFull !== '/design-system/getting-started')
@@ -13,6 +17,7 @@ const introduction = allDocs
 
 const foundations = allDocs
 	.filter((doc) => doc.section === 'Foundations')
+	.sort(byOrder)
 	.filter((doc) => doc.slugFull !== '/design-system/foundations')
 	.map((doc) => ({
 		title: doc.navLabel,
@@ -22,6 +27,7 @@ const foundations = allDocs
 
 const applicationDesign = allDocs
 	.filter((doc) => doc.section === 'Application design')
+	.sort(byOrder)
 	.filter((doc) => doc.slugFull !== '/design-system/application-design')
 	.map((doc) => ({
 		title: doc.navLabel,

@@ -27,6 +27,21 @@ Information should only flow one way: ADR → RULES → spec → docs. Docs can 
 ### Ways to hold the line
 
 - **Start each spec and docs page with a "Who this is for / what it answers" line.** It's a quick self-check while you write.
-- **On docs pages, put "Use" first and "How it works" second**, with the second section linking to the spec rather than restating it. Consumers can stop reading once they have the class they need.
+- **On docs pages, put "Use" first and "How it works" second**, with the second section explaining the spec well enough that the reader doesn't need to open it. Consumers can stop reading once they have the class they need.
 
 The docs site is a natural fit for how-to guides for consumers, explanation pages for designers and reference pages generated from the spec.
+
+### Docs site page template
+
+Each Foundations page has three parts, in this order:
+
+1. An introduction of two or three sentences that says what the foundation is and the rule it follows.
+2. A **Use** section with a `UsageTabs` block, which has a tab for each of the three ways of using the system in the spec's Scope:
+   - **The full system:** the classes and components.
+   - **Adapting existing systems:** the CSS custom properties.
+   - **Anywhere:** the values, and the Figma styles and variables.
+3. A **How it works** section that explains the foundation well enough for a reader to apply it to a case the Use section doesn't cover, without sending them to the spec. A link to the spec section can go at the end of the page.
+
+Application design pages start with an introduction and the guidance, and give a way of using the system its own tab only where the guidance differs for it. Usage guidance can come from a component's `@component` comment, the usage notes in its Figma description and the maintainers. A guideline that becomes a rule needs an ADR first.
+
+The reader's choice of tab is kept for every `UsageTabs` on the site. Set `order` in a page's front matter to place it in the navigation. Foundations pages follow the order of the spec's sections.

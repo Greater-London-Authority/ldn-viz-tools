@@ -5,6 +5,7 @@ section: Foundations
 navLabel: Colour
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations-2.svg
+order: 6
 ---
 
 <script>

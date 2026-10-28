@@ -5,6 +5,7 @@ section: Foundations
 navLabel: Design Tokens
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations-3.svg
+order: 1
 ---
 
 <script>
@@ -244,7 +245,7 @@ Vertical rhythm between stacked blocks — paragraph to paragraph, or the break 
 
 [Read more about relative units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units#lengths)
 
-[Read the documentation on application layout](/design-system/application-design/layout)
+[Read the documentation on application layout](/design-system/application-design/page-layout)
 
 ---
 
@@ -273,7 +274,7 @@ Grid tokens set the padding at the edge of a container, for each breakpoint and 
 
 The space between tiled objects, such as cards in a row, comes from flow: `gap-flow` on the grid gives the default step of the context.
 
-[Read the documentation on application layout for the values](/design-system/application-design/layout).
+[Read the documentation on application layout for the values](/design-system/application-design/page-layout).
 
 ---
 

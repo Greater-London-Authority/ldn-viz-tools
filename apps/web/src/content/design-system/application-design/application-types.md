@@ -5,6 +5,7 @@ section: Application design
 navLabel: Application types
 heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design-1.svg
+order: 1
 ---
 
 ## Principles

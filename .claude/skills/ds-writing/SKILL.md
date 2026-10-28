@@ -87,7 +87,7 @@ Leave out anything you can't verify, and say so in your reply.
 
 Page content sits in `.typeset-longform`. For a product example, nest a `.typeset-product` block. Use `.not-typeset` for a block with no typeset styling. Live examples use `<div class="border border-color-border-wash p-4 my-4">`.
 
-Start a page by introducing its subject. Page order is set in `apps/web/src/lib/navigation.ts`.
+Start a page by introducing its subject. Follow the page template in [writing-documentation.md](../../../design-system-specification/writing-documentation.md#docs-site-page-template).
 
 Public pages leave out:
 
@@ -95,8 +95,6 @@ Public pages leave out:
 - internal token names such as `--primitive-*`
 - open questions and implementation caveats
 - repository paths and commit references
-
-RFC 0002 workstream 4 will restructure the site. Until then, follow the existing pages for frontmatter and sections.
 
 ### Storybook MDX (`packages/*/src/lib/*.mdx`)
 

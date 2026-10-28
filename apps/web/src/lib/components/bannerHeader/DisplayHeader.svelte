@@ -55,7 +55,7 @@
 	{/key}
 
 	<div class="relative z-10 flex h-full items-center">
-		<div class="container mx-auto">
+		<div class="container">
 			<div class="typeset-longform">
 				<p class="display-lg">{title}</p>
 				{#if subTitle}

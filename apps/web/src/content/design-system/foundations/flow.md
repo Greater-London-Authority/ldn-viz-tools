@@ -5,6 +5,7 @@ section: Foundations
 navLabel: Flow
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations-3.svg
+order: 4
 ---
 
 ## Principles
@@ -54,7 +55,7 @@ In contrast, an application often includes many elements that fulfil different r
 Not every gap on a page belongs to flow. Three things determine space:
 
 - **Flow** determines the vertical gaps between blocks that sit one above another.
-- **The grid** determines the horizontal gaps between objects — cards in a row, panels side by side. These are set responsively by the [layout grid](/design-system/application-design/layout).
+- **The grid** determines the horizontal gaps between objects — cards in a row, panels side by side. These are set responsively by the [layout grid](/design-system/foundations/layout-grid).
 - **The component** determines the space inside its own box: padding, the indent of a list, the space around a border. These come from the [spacing scale](/design-system/foundations/design-tokens).
 
 Sibling blocks are spaced by flow. A card's own padding belongs to the card, and stays the same wherever the card is placed.

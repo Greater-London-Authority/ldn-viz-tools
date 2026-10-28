@@ -15,7 +15,7 @@
 		// so they lift the reading measure.
 		classNames(
 			'typeset-longform min-w-0 flex-1',
-			data.metadata.layout === 'index' ? '[--readable-width:none]' : ''
+			data.metadata.layout === 'index' ? '[--measure-text:none] [--measure-wide:none]' : ''
 		)
 	);
 </script>
@@ -34,7 +34,7 @@
 	/>
 {/if}
 
-<div class="flow-spacious container mx-auto pt-8">
+<div class="flow-spacious container pt-8">
 	<div class="flex justify-between">
 		<div class={wrapperClass}>
 			<PageComponent />

@@ -14,7 +14,7 @@
 	{#snippet main()}
 		{@render children?.()}
 
-		<div class="container mx-auto">
+		<div class="container">
 			<PageNav />
 		</div>
 	{/snippet}

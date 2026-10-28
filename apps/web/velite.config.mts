@@ -9,6 +9,7 @@ const baseSchema = s.object({
 	path: s.path(),
 	content: s.markdown(),
 	navLabel: s.string().optional(),
+	order: s.number().optional(),
 	raw: s.raw()
 });
 

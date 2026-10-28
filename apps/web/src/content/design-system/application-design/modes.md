@@ -1,10 +1,11 @@
 ---
-title: Theming
+title: Modes
 description: Accessible themes respecting user preference
 section: Application design
-navLabel: Theming
+navLabel: Modes
 heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design-3.svg
+order: 7
 ---
 
 ## Principles

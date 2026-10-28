@@ -11,7 +11,7 @@
 	subTitle={data.metadata.description}
 	src={data.metadata.heroImage}
 />
-<div class="container mx-auto py-8">
+<div class="container py-8">
 	<div class="typeset-longform max-w-full">
 		<PageComponent />
 	</div>

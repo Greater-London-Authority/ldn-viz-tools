@@ -5,6 +5,7 @@ section: Foundations
 navLabel: Accessibility
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations-1.svg
+order: 9
 ---
 
 <p class="body-lg text-color-text-muted">We are dedicated to creating inclusive and accessible digital experiences for all users. Accessible, inclusive design is closely related to usability, providing varied and flexible ways for users to interact - options which can be useful for everyone</p>
