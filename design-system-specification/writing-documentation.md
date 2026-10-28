@@ -39,7 +39,10 @@ Each Foundations page has three parts, in this order:
 2. A **Use** section with a `UsageTabs` block, which has a tab for each of the three ways of using the system in the spec's Scope:
    - **The full system:** the classes and components.
    - **Adapting existing systems:** the CSS custom properties.
-   - **Anywhere:** the values, and the Figma styles and variables.
+   - **Anywhere:** where to find the values, and how to use them.
+
+   The system doesn't need Tailwind. Show the system's classes and custom properties first, and Tailwind utilities as an option for apps that use Tailwind. Mention Figma only where the reader needs it, because not every reader uses it.
+
 3. A **How it works** section that explains the foundation well enough for a reader to apply it to a case the Use section doesn't cover, without sending them to the spec. A link to the spec section can go at the end of the page.
 
 Application design pages start with an introduction and the guidance, and give a way of using the system its own tab only where the guidance differs for it. Usage guidance can come from a component's `@component` comment, the usage notes in its Figma description and the maintainers. A guideline that becomes a rule needs an ADR first.
