@@ -212,7 +212,7 @@ Inside `typeset-longform`, ordinary HTML elements are styled for you. Headings t
 </div>
 ```
 
-<div class="typeset-longform border border-color-border-muted p-4 my-4">
+<div class="typeset-longform border border-color-border-wash p-4 my-4">
 	<h2>Title</h2>
 	<p class="lead">An introductory paragraph</p>
     <p>Body copy</p>
@@ -248,7 +248,7 @@ Because `typeset-longform` styles elements automatically, you will sometimes nee
 </div>
 ```
 
-<div class="border border-color-border-muted p-4 my-4">
+<div class="border border-color-border-wash p-4 my-4">
 	<h3>Title</h3>
 	<div class="not-typeset">
 		<h3>I have escaped</h3>
@@ -271,7 +271,7 @@ A typeset nested inside `typeset-longform` also stops its automatic styling.
 </div>
 ```
 
-<div class="typeset-product border border-color-border-muted p-4 my-4">
+<div class="typeset-product border border-color-border-wash p-4 my-4">
 	<h2>No role applied</h2>
 	<h2 class="title-lg">Section title</h2>
 	<p class="body-md">Body copy.</p>
@@ -296,8 +296,8 @@ Each usage alias applies the role shown. Use the alias, or the role class with t
 | Card title                 | `card-title`                 | `title-sm`                            |
 | Card subtitle              | `card-subtitle`              | `subtitle-sm`, muted                  |
 | Input label                | `input-label`                | `label-md`                            |
-| Placeholder                | `input-placeholder`          | `body-sm`                             |
-| Field value                | `input-value`                | `body-sm`                             |
+| Placeholder                | `input-placeholder`          | `body-md`                             |
+| Field value                | `input-value`                | `body-md`                             |
 | Helper text and hints      | `input-hint`                 | `caption-sm`                          |
 | Button label               | `button-label`               | `label-md`                            |
 | Small button label         | `button-label-sm`            | `label-sm`                            |
@@ -328,7 +328,7 @@ The titling roles are designed to be used together. Write the group as flat sibl
 </section>
 ```
 
-<div class="typeset-product flow-standard border border-color-border-muted p-4 my-4">
+<div class="typeset-product flow-standard border border-color-border-wash p-4 my-4">
 	<p class="eyebrow">Air quality</p>
 	<h2 class="title-lg">Nitrogen dioxide</h2>
 	<p class="subtitle-sm">Rolling 24-hour mean</p>

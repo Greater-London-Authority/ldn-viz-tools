@@ -2981,6 +2981,11 @@
           "type": "color",
           "value": "{semantic-color.light-mode.palette.grey.500}"
         },
+        "border-wash": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.light-mode.color.mode.dark.grey.400}"
+        },
         "canvas-muted": {
           "type": "color",
           "value": "#151b1eff",
@@ -3035,6 +3040,11 @@
         "value": "{semantic-color.light-mode.text-muted}"
       },
       "border-muted": {
+        "description": "",
+        "type": "color",
+        "value": "{semantic-color.light-mode.palette.grey.500}"
+      },
+      "border-wash": {
         "description": "",
         "type": "color",
         "value": "{semantic-color.light-mode.palette.grey.200}"
@@ -4307,6 +4317,11 @@
           "type": "color",
           "value": "{semantic-color.dark-mode.palette.grey.500}"
         },
+        "border-wash": {
+          "description": "",
+          "type": "color",
+          "value": "{primitive.dark-mode.color.mode.light.grey.200}"
+        },
         "canvas-muted": {
           "type": "color",
           "value": "#f7f8f9ff",
@@ -4361,6 +4376,11 @@
         "value": "{semantic-color.dark-mode.text-muted}"
       },
       "border-muted": {
+        "description": "",
+        "type": "color",
+        "value": "{semantic-color.dark-mode.palette.grey.500}"
+      },
+      "border-wash": {
         "description": "",
         "type": "color",
         "value": "{semantic-color.dark-mode.palette.grey.400}"

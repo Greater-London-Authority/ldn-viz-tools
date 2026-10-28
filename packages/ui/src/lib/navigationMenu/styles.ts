@@ -20,7 +20,7 @@ const toLevel = (level: number): Level => Math.min(Math.max(level, 1), MAX_LEVEL
 const LEVEL_STYLES: Record<Level, { type: string; color: string }> = {
 	1: { type: 'label-md', color: 'text-color-text' },
 	2: { type: 'label-md', color: 'text-color-text-muted' },
-	3: { type: 'label-sm', color: 'text-color-muted' },
+	3: { type: 'label-sm', color: 'text-color-text-muted' },
 	4: { type: 'label-sm', color: 'text-color-text-wash' }
 };
 
@@ -60,7 +60,7 @@ export const listItemClass = ({
 		return '';
 	}
 
-	return 'border-t border-color-border-muted';
+	return 'border-t border-color-border-wash';
 };
 
 /**
@@ -86,7 +86,7 @@ export const childListClass = ({
 		'mb-1',
 		isIndented ? 'pl-2' : '',
 		orientation === 'horizontal'
-			? `w-full bg-color-surface' ${level === 1 ? 'absolute z-10' : 'relative'}`
+			? `w-full bg-color-surface ${level === 1 ? 'absolute z-10' : 'relative'}`
 			: ''
 	);
 };

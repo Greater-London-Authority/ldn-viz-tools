@@ -27,6 +27,10 @@
 		subtitle?: string;
 		eyebrow?: string;
 		emphasis?: 'primary' | 'secondary';
+		/**
+		 * The heading level of the title. Leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
 		class?: string;
 	}
 
@@ -35,6 +39,7 @@
 		subtitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
+		headingLevel = undefined,
 		class: classes = ''
 	}: Props = $props();
 </script>
@@ -42,7 +47,10 @@
 <!-- eslint-disable svelte/no-at-html-tags -->
 {#if emphasis === 'secondary'}
 	{#if title}
-		<p class={classNames('eyebrow', classes)}>{@html title}</p>
+		<svelte:element
+			this={headingLevel ? `h${headingLevel}` : 'p'}
+			class={classNames('eyebrow', classes)}>{@html title}</svelte:element
+		>
 	{/if}
 {:else}
 	<!--
@@ -55,7 +63,10 @@
 			<p class="eyebrow">{@html eyebrow}</p>
 		{/if}
 		{#if title}
-			<div class="title-sm text-color-text">{@html title}</div>
+			<svelte:element
+				this={headingLevel ? `h${headingLevel}` : 'div'}
+				class="title-sm text-color-text">{@html title}</svelte:element
+			>
 		{/if}
 		{#if subtitle}
 			<p class="subtitle-sm">{@html subtitle}</p>

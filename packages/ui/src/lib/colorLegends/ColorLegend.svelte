@@ -251,9 +251,27 @@
 	$effect(() => {
 		updateLegend(axisState, ticksRef);
 	});
+
+	// The svg is one image to a screen reader, so its name carries the title and the scale's range
+	let ariaLabel = $derived.by(() => {
+		const parts = [title || 'Colour legend'];
+		const domain = color?.domain?.() ?? [];
+		if (domain.length) {
+			const isOrdinal = !color.interpolate && !color.interpolator && !color.invertExtent;
+			parts.push(
+				isOrdinal ? domain.join(', ') : `from ${domain[0]} to ${domain[domain.length - 1]}`
+			);
+		}
+		if (leftLabel || rightLabel) {
+			parts.push([leftLabel, rightLabel].filter(Boolean).join(' to '));
+		}
+		return parts.join('. ');
+	});
 </script>
 
 <svg
+	role="img"
+	aria-label={ariaLabel}
 	width="100%"
 	viewBox="0  0 {width} {height}"
 	style="overflow: visible; display: block;"

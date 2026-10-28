@@ -33,7 +33,7 @@
 
 <footer class="{theme} mt-auto">
 	<div
-		class="border-t border-color-border-muted bg-color-surface px-4 py-4 text-color-text sm:flex sm:space-x-4 md:px-8"
+		class="border-t border-color-border-wash bg-color-surface px-4 py-4 text-color-text sm:flex sm:space-x-4 md:px-8"
 	>
 		<!-- Contents of the footer -->
 		{@render children?.()}
@@ -53,11 +53,11 @@
 	{/if}
 
 	{#if footerCookieMenu}
-		<div class="border-t border-color-border-muted bg-color-surface-muted px-4 py-2 md:px-8">
+		<div class="border-t border-color-border-wash bg-color-surface-muted px-4 py-2 md:px-8">
 			{@render footerCookieMenu()}
 		</div>
 	{:else if showCookieMenu}
-		<div class="border-t border-color-border-muted bg-color-surface-muted px-4 py-2 md:px-8">
+		<div class="border-t border-color-border-wash bg-color-surface-muted px-4 py-2 md:px-8">
 			<FooterCookieMenu />
 		</div>
 	{/if}

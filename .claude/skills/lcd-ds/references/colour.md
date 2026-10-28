@@ -16,9 +16,9 @@ Choose the token by what the element is.
 | Label | `--color-label`, `--color-label-muted` | Labels on controls |
 | Canvas | `--color-canvas`, `--color-canvas-muted` | The page background |
 | Surface | `--color-surface`, `--color-surface-muted`, `--color-surface-accent`, `--color-surface-{status}`, `--color-surface-alpha`, `--color-surface-beta`, each with a `-muted` version | Backgrounds of cards, panels and status areas |
-| Border | `--color-border`, `--color-border-muted` | Borders and dividers |
+| Border | `--color-border`, `--color-border-muted`, `--color-border-wash` | Borders, in decreasing emphasis. Use `border-muted` for the edge of a control, such as a field, checkbox or radio: it keeps 3:1 on `surface` (WCAG 1.4.11). Use `border-wash` for dividers and the edges of cards, panels and menus |
 | Interactive | `--color-interactive-*` | Controls (below) |
-| Inverse | `--color-inverse-text`, `--color-inverse-surface`, `--color-inverse-canvas`, `--color-inverse-border`, `--color-inverse-chart-*`, `--color-inverse-geo-*` | Content on an inverse background |
+| Inverse | `--color-inverse-text`, `--color-inverse-surface`, `--color-inverse-canvas`, `--color-inverse-border`, `--color-inverse-border-muted`, `--color-inverse-border-wash`, `--color-inverse-chart-*`, `--color-inverse-geo-*` | Content on an inverse background |
 | Static | `--color-static-white`, `--color-static-black`, `--color-static-brand`, `--color-static-gla-{hue}` | Colours that don't change with mode |
 | Data | `--color-data-primary`, `--color-data-secondary`, `--color-data-tertiary`, `--color-data-categorical-{hue}`, `--color-data-{status}`, `--color-data-neutral-0`, `--color-data-neutral-1`, `--color-data-empty`, `--color-data-context`, `--color-data-male`, `--color-data-female` | Chart and map data |
 | Chart | `--color-chart-axis`, `--color-chart-grid`, `--color-chart-label`, `--color-chart-label-muted`, `--color-chart-surface` | Chart furniture |

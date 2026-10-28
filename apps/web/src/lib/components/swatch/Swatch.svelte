@@ -94,7 +94,7 @@
 		classNames(
 			'typeset-product',
 			'text-left !items-stretch !no-underline hover:bg-color-interactive-primary-muted-hover',
-			'border-color-border-muted bg-color-surface flex-col justify-between border elevation-1',
+			'border-color-border-wash bg-color-surface flex-col justify-between border elevation-1',
 			sizeClasses[size]
 		)
 	);

@@ -29,6 +29,15 @@
 		 */
 		subTitle?: string;
 		/**
+		 * Accessible name for the table. Defaults to `title`, without any HTML tags.
+		 */
+		ariaLabel?: string;
+		/**
+		 * The heading level of the title, passed to `TableContainer`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
+		/**
 		 * What appears in the footer:
 		 *
 		 * * `byline` (string) - statement of who created the visualization
@@ -120,6 +129,8 @@
 		tableSpec,
 		title = '',
 		subTitle = '',
+		ariaLabel = undefined,
+		headingLevel = undefined,
 		source = '',
 		byline = '',
 		note = '',
@@ -141,6 +152,9 @@
 		fixedTableWidth = undefined,
 		beforeTable
 	}: Props = $props();
+
+	// The title can hold HTML, so take its text for the name
+	let tableName = $derived(ariaLabel ?? title.replace(/<[^>]*>/g, '').trim());
 
 	const createTable = (data: any[], tableSpec: TableSpec) => {
 		const to = new TableState(tableSpec);
@@ -216,7 +230,8 @@
 		<TableContainer
 			{data}
 			{title}
-			{subTitle}
+			{headingLevel}
+			subtitle={subTitle}
 			{source}
 			{byline}
 			{note}
@@ -237,6 +252,7 @@
 					class="table-body w-full table-auto text-color-text"
 					bind:clientWidth={tableWidth}
 					role="table"
+					aria-label={tableName || undefined}
 				>
 					{#if tableSpec.showTableHeader !== false}
 						<TableHeader {tableSpec} table={tableObj} {data} {allowSorting} {tableWidth} />

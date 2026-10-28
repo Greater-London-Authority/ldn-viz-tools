@@ -212,5 +212,5 @@ Amends [0005](./decisions/0005-flow.md).
 
 - **The target is WCAG 2.2 AA**, for components, documentation pages and the Figma library.
 - **Focus has one colour, `--color-interactive-focus`, and two forms:** an outline on `:focus-visible` by default, and an inset ring on filled controls. There are no focus-ring tokens. Figma's `focus` effect style follows the code.
-- **Contrast is 4.5:1 for text, 3:1 for large text, and 3:1 for interface components and meaningful chart parts.** `--color-data-context` and `--color-data-categorical-yellow` are stated exceptions.
+- **Contrast is 4.5:1 for text, 3:1 for large text, and 3:1 for interface components and meaningful chart parts.** `--color-data-context` and `--color-data-categorical-yellow` are stated exceptions. Disabled controls are exempt. In dark mode, the primary hover and active fills are below 3:1 against the surfaces. This is accepted because the label passes 4.5:1 on each fill.
 - **No text is smaller than 12px, and running text is no wider than 80 characters.**

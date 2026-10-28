@@ -262,6 +262,6 @@
 		--plot-background: var(--color-chart-surface) !important;
 	}
 	:global(.themed-chart [aria-label='tip']) {
-		stroke: var(--color-border-muted) !important;
+		stroke: var(--color-border-wash) !important;
 	}
 </style>

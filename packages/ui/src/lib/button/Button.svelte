@@ -102,15 +102,15 @@
 		},
 		outline: {
 			primary:
-				'bg-transparent text-color-text border px-2 border-color-interactive-primary hover:bg-color-interactive-primary-muted-hover hover:underline active:bg-color-interactive-primary-muted-active',
+				'bg-transparent text-color-text border border-color-interactive-primary hover:bg-color-interactive-primary-muted-hover hover:underline active:bg-color-interactive-primary-muted-active',
 			secondary:
-				'bg-transparent text-color-text border px-2 border-color-interactive-secondary hover:bg-color-interactive-secondary-muted-hover hover:underline active:bg-color-interactive-secondary-muted-active',
+				'bg-transparent text-color-text border border-color-interactive-secondary hover:bg-color-interactive-secondary-muted-hover hover:underline active:bg-color-interactive-secondary-muted-active',
 			positive:
-				'bg-transparent text-color-text border px-2 border-color-interactive-positive hover:bg-color-interactive-positive-muted-hover hover:underline active:bg-color-interactive-positive-muted-active',
+				'bg-transparent text-color-text border border-color-interactive-positive hover:bg-color-interactive-positive-muted-hover hover:underline active:bg-color-interactive-positive-muted-active',
 			negative:
-				'bg-transparent text-color-text border px-2 border-color-interactive-negative hover:bg-color-interactive-negative-muted-hover hover:underline active:bg-color-interactive-negative-muted-active',
+				'bg-transparent text-color-text border border-color-interactive-negative hover:bg-color-interactive-negative-muted-hover hover:underline active:bg-color-interactive-negative-muted-active',
 			caution:
-				'bg-transparent text-color-text border px-2 border-color-interactive-caution hover:bg-color-interactive-caution-muted-hover hover:underline active:bg-color-interactive-caution-muted-active'
+				'bg-transparent text-color-text border border-color-interactive-caution hover:bg-color-interactive-caution-muted-hover hover:underline active:bg-color-interactive-caution-muted-active'
 		},
 		text: {
 			primary:

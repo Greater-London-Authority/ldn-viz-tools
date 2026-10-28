@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<ColorLegendOrdinalHorizontal>` component draws a legend for an ordinal D3 color scale.
+	 * The `<ColorLegendOrdinalChips>` component draws a legend for an ordinal D3 color scale.
 	 *
 	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-components-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
 	 * @component
@@ -46,7 +46,7 @@
 				<div
 					class={classNames(
 						'mr-1 h-4 w-4 flex-none',
-						d === highlightedValue ? 'ring-2 ring-color-interactive-focus ring-offset-2' : ''
+						d === highlightedValue ? 'ring-2 ring-color-surface-accent ring-offset-2' : ''
 					)}
 					style:background-color={scale(d) as string}
 				></div>

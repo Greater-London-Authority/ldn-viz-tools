@@ -26,8 +26,8 @@ const COLOR_RENAME = {
   'inverse/container-level-1': 'inverse/surface-muted', 'inverse/container-level-2': 'inverse/surface-muted',
   'inverse/container-level-3': 'inverse/surface-muted',
   // Names from the library older than v3, used only by documentation scaffolding.
-  // Renders #D6D8DA in both modes in 3.1, which is border-muted, not border.
-  'Color - ui/color-border': 'border-muted','interactive/text/error': 'interactive/error',
+  // Renders #D6D8DA in both modes in 3.1, which is border-wash, not border.
+  'Color - ui/color-border': 'border-wash','interactive/text/error': 'interactive/error',
   'interactive/text/primary': 'interactive/primary-text', 'interactive/text/primary-active': 'interactive/primary-text-active',
   'interactive/text/secondary': 'interactive/secondary', 'interactive/text/secondary-hover': 'interactive/secondary-hover',
   'interactive/text/secondary-active': 'interactive/secondary-active',

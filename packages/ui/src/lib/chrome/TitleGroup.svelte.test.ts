@@ -79,4 +79,28 @@ describe('TitleGroup', () => {
 		expect(container.querySelector('.eyebrow')).toBeNull();
 		expect(container.textContent).toBe('');
 	});
+
+	it('renders the title as a heading at headingLevel', async () => {
+		const { container } = render(TitleGroup, { title: 'Chart title', headingLevel: 3 });
+
+		expect(container.querySelector('h3')).toHaveTextContent('Chart title');
+	});
+
+	it('keeps the same classes when headingLevel is set', async () => {
+		const { container } = render(TitleGroup, { title: 'Chart title', headingLevel: 2 });
+
+		expect(container.querySelector('h2')?.className).toBe('title-sm text-color-text');
+	});
+
+	it('renders a deferred title as a heading with the eyebrow role', async () => {
+		const { container } = render(TitleGroup, {
+			title: 'Chart title',
+			emphasis: 'secondary',
+			headingLevel: 4
+		});
+
+		const heading = container.querySelector('h4');
+		expect(heading).toHaveTextContent('Chart title');
+		expect(heading).toHaveClass('eyebrow');
+	});
 });

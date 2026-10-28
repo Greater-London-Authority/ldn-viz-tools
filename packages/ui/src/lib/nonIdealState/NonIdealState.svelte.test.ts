@@ -68,4 +68,18 @@ describe('NonIdealState Component', () => {
 
 		await expect.element(page.getByText('The server did not respond.')).toBeInTheDocument();
 	});
+
+	it('is a status region, so screen readers announce changes', async () => {
+		render(NonIdealState, {});
+
+		await expect.element(page.getByRole('status')).toBeInTheDocument();
+	});
+
+	it('renders the title as a heading at headingLevel', async () => {
+		render(NonIdealState, { headingLevel: 2 });
+
+		await expect
+			.element(page.getByRole('heading', { level: 2, name: 'Nothing to display' }))
+			.toBeInTheDocument();
+	});
 });

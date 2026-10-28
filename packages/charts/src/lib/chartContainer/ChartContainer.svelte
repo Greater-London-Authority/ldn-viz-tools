@@ -53,6 +53,11 @@
 		 */
 		emphasis?: 'primary' | 'secondary';
 		/**
+		 * The heading level of the title, passed to `TitleGroup`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
+		/**
 		 * Optional help affordance shown beside the title. A string opens an `Overlay`
 		 * (`hintType` selects tooltip / popover / modal); pass a snippet via `ChromeHeader` for full control.
 		 */
@@ -146,6 +151,7 @@
 		subtitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
+		headingLevel = undefined,
 		hint = undefined,
 		hintType = 'tooltip',
 		hintTitle = undefined,
@@ -188,14 +194,23 @@
 </script>
 
 <div class={classes} {id}>
-	{#if alt}
-		<p class="sr-only">{alt}</p>
+	{#if title || subtitle || eyebrow || hint}
+		<div class="mb-2">
+			<ChromeHeader
+				{title}
+				{subtitle}
+				{eyebrow}
+				{emphasis}
+				{headingLevel}
+				{hint}
+				{hintType}
+				{hintTitle}
+			/>
+		</div>
 	{/if}
 
-	{#if title || description || eyebrow || hint}
-		<div class="mb-2">
-			<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
-		</div>
+	{#if alt}
+		<p class="sr-only">{alt}</p>
 	{/if}
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->

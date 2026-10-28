@@ -57,12 +57,18 @@
 		'no-change': undefined
 	};
 
+	const changeLabel: Record<Change, string> = {
+		increase: 'up',
+		decrease: 'down',
+		'no-change': 'no change'
+	};
+
 	type Status = 'positive' | 'neutral' | 'negative';
 
 	const statusTextClass: Record<Status, string> = {
 		positive: 'text-color-surface-positive',
 		negative: 'text-color-surface-negative',
-		neutral: 'text-color-data-neutral-1'
+		neutral: 'text-color-text-muted'
 	};
 
 	let status: Status = $derived.by(() => {
@@ -118,9 +124,10 @@
 </script>
 
 <div class="flex">
+	<!-- The direction comes from the change, not the value's sign; the status after the figure says whether it is good, from goodIs -->
+	<span class="sr-only">{changeLabel[change]}</span>
 	{#if icon}
-		<span class="sr-only">{value < 0 ? 'down' : 'up'}</span>
-		<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} />
+		<Icon src={icon} class={classNames(iconSize, statusTextClass[status])} aria-hidden="true" />
 	{/if}
 	<span class={classNames(changeSize, statusTextClass[status])}>{formattedChange}</span>
 	<span class="sr-only">{status}</span>

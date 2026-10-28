@@ -49,6 +49,17 @@ describe('CopyButton', () => {
 		expect(navigator.clipboard.writeText).toHaveBeenCalledWith('Content to copy');
 	});
 
+	it('announces the copy in a status region', async () => {
+		render(CopyButton, { content: 'Content to copy' });
+
+		const status = page.getByRole('status');
+		await expect.element(status).toHaveTextContent('');
+
+		await page.getByRole('button').click();
+
+		await expect.element(status).toHaveTextContent('Copied');
+	});
+
 	it('changes appearance after click, and then reverts', async () => {
 		const beforeClick = createRawSnippet(() => ({
 			render: () => '<span>Click me!</span>',

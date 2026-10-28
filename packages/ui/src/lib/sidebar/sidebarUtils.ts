@@ -22,10 +22,10 @@ export const tabPlacementLookup: PlacementLookup = {
 };
 
 export const keylineLookup: PlacementLookup = {
-	left: 'border-r border-color-border-muted',
-	right: 'border-l border-color-border-muted',
-	top: 'border-b border-color-border-muted',
-	bottom: 'border-t border-color-border-muted'
+	left: 'border-r border-color-border-wash',
+	right: 'border-l border-color-border-wash',
+	top: 'border-b border-color-border-wash',
+	bottom: 'border-t border-color-border-wash'
 };
 
 export const tabLayoutOverride: PlacementLookup = {

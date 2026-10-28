@@ -72,13 +72,15 @@
 		<!-- Button text and icon before copy. -->
 		{#if beforeCopy}{@render beforeCopy()}{:else}
 			{label}
-			<Icon src={DocumentDuplicate} class="ml-2 h-5 w-5" />
+			<Icon src={DocumentDuplicate} class="ml-2 h-5 w-5" aria-hidden="true" />
 		{/if}
 	{:else}
 		<!-- Button text and icon after copy. -->
 		{#if afterCopy}{@render afterCopy()}{:else}
 			{label}
-			<Icon src={ClipboardDocumentCheck} class="ml-2 h-5 w-5" />
+			<Icon src={ClipboardDocumentCheck} class="ml-2 h-5 w-5" aria-hidden="true" />
 		{/if}
 	{/if}
 </Button>
+<!-- The live region is always rendered, so a screen reader announces the text when it appears -->
+<span class="sr-only" role="status">{lastButtonId === id ? 'Copied' : ''}</span>

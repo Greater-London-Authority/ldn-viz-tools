@@ -373,14 +373,15 @@
 		variant="square"
 		emphasis="secondary"
 		title="Radius Search"
+		aria-label="Radius search"
 		class="pointer-events-auto"
 		onclick={clickHandler}
 	>
-		<Icon src={MapPinSimpleArea} class="h-8 w-8 p-1" />
+		<Icon src={MapPinSimpleArea} class="h-8 w-8 p-1" aria-hidden="true" />
 	</Button>
 {:else}
 	<div
-		class="flow-standard typeset-product elevation-1 pointer-events-auto min-w-60 max-w-[300px] border-color-border-muted bg-color-surface p-2"
+		class="flow-standard typeset-product elevation-1 pointer-events-auto min-w-60 max-w-[300px] border-color-border-wash bg-color-surface p-2"
 	>
 		<div class="flex items-center justify-between">
 			<p class="eyebrow">
@@ -397,7 +398,7 @@
 				onclick={toggleModal}
 				aria-label="Close search box"
 			>
-				<Icon src={XMark} theme="mini" class="h-5 w-5" />
+				<Icon src={XMark} theme="mini" class="h-5 w-5" aria-hidden="true" />
 			</Button>
 		</div>
 		<div class="flex flex-col">

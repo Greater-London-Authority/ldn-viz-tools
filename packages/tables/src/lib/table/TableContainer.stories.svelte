@@ -43,7 +43,7 @@
 <!-- A minimal table rendered through the `table` snippet, with a title and subtitle above it -->
 <Story name="Default with title and subtitle">
 	{#snippet template()}
-		<TableContainer title="Some famous people" subTitle="A guess of their favourite pets">
+		<TableContainer title="Some famous people" subtitle="A guess of their favourite pets">
 			{#snippet table()}
 				<table class="table-body w-full text-left text-color-text">
 					<thead>

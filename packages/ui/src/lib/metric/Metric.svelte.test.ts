@@ -38,6 +38,23 @@ describe('Metric', () => {
 		await expect.element(secondary.getByText('vs 110,000')).toBeInTheDocument();
 	});
 
+	it('announces a fall between two positive values as down', async () => {
+		render(Metric, { value: 100000, comparisonValue: 110000 });
+
+		const secondary = page.getByTestId('metric-secondary');
+
+		await expect.element(secondary.getByText('down', { exact: true })).toBeInTheDocument();
+	});
+
+	it('renders the change and comparison when the comparison is 0', async () => {
+		render(Metric, { value: 5, comparisonValue: 0 });
+
+		const secondary = page.getByTestId('metric-secondary');
+
+		await expect.element(secondary.getByText('vs 0')).toBeInTheDocument();
+		await expect.element(secondary.getByText('up', { exact: true })).toBeInTheDocument();
+	});
+
 	it('renders the translation next to the hero figure', async () => {
 		render(Metric, { value: 100000, translation: '(20%)' });
 
@@ -81,7 +98,7 @@ describe('Metric', () => {
 
 			const changeValue = page.getByTestId('metric-secondary').getByText('0', { exact: true });
 
-			await expect.element(changeValue).toHaveClass('text-color-data-neutral-1');
+			await expect.element(changeValue).toHaveClass('text-color-text-muted');
 			expect(page.getByTestId('metric').element().querySelector('svg')).toBeNull();
 		});
 	});
