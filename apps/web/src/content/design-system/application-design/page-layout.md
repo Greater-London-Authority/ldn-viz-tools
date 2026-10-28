@@ -188,7 +188,7 @@ The footer sits at the base of the page. It can contain secondary and tertiary n
 
 The sidebar contains the top-level navigation and filters for the application. Depending on the context, this could be a simple list of pages or a complex set of grouped filters. Filters in the sidebar should apply to the whole page. Place a filter that affects only one chart next to that chart.
 
-The sidebar sits outside the canvas. The fluid layout applies to the canvas only, and the canvas fills the width that remains beside the sidebar.
+The sidebar sits beside the canvas. The canvas fills the rest of the width, and the fluid layout applies only to the canvas.
 
 <figure class="width-content-wide">
 	<EnhancedImage src="/layout/layout-sidebar.png" alt="A typical dashboard style application with sidebar highlighted" />

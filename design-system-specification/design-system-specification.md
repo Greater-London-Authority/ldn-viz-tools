@@ -757,7 +757,7 @@ Cards, charts and tables share the same chrome: a header above the content and a
 - **`ChromeFooter`** holds the footnotes at the left (byline, source, note, and a button that opens a chart's or table's description) and the actions at the right, such as the data and image download buttons. The footnotes use `caption-sm` in the muted text colour.
 - **`TitleGroup`** renders the eyebrow, title and subtitle, or only an eyebrow when the group is demoted.
 
-`Card` is a surface: it has the surface colour, a muted border, `elevation-1` and padding, and spaces its header, content and footer with `gap-flow`.
+`Card` is a surface: it has the surface colour, a `border-wash` border, `elevation-1` and padding, and spaces its header, content and footer with `gap-flow`.
 
 The designer composes the middle of `ChartContainer` for each chart. It has slots for the controls, the legend and the plot. The legend has its own slot so that plots side by side stay aligned when their legends wrap to different heights ([0008](./decisions/0008-charts.md)).
 

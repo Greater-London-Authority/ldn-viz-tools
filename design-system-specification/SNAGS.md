@@ -68,6 +68,9 @@ Deferred on purpose. Each has a GitHub issue.
 | Foundation page links point at the site root | `apps/storybook/src/content/{Typography,Flow}.mdx` | Waits for the site structure (RFC 0002 workstream 4) |
 | The CDN link has no version | `apps/web/src/content/design-system/getting-started/index.md` | It serves the latest published version, so it only gives v4 once `@ldn-viz/themes` 10 is released. Pin it then |
 | Demo prose has em dashes and a slogan | `packages/ui/src/lib/layoutExamples/Typography.stories.svelte` | Sample content, so left. Rewrite if it is read as guidance |
+| Application design guidance that no source covers | `apps/web/src/content/design-system/application-design/` | Left out of the W7 drafts on 2026-10-28 until a maintainer sets it: a pattern for resetting every filter on a dashboard; where a date range filter goes and how it works (no component); when to use `CheckboxGroupSolid` rather than `CheckboxGroup`; when to use the brand button (Figma says only "sparingly"); whether a panel inside a card uses elevation or `surface-muted` |
+| The Typography page scrolls sideways on a phone | `apps/web/src/content/design-system/foundations/typography.md` | 435px wide at a 390px viewport, caused by a table. For P10 (site layout fixes). Found 2026-10-28 |
+| `--color-text-wash` is below 4.5:1 in light mode, and stronger than `text-muted` in dark mode | `--color-text-wash` | Light: 4.24:1 on `surface`, 3.75:1 on `surface-muted`. Dark: `#e0e1e2` is 14.28:1, `text-muted` `#c5c8ca` is 11.12:1, so the emphasis order is reversed. Found while writing the Colour page, 2026-10-28 |
 | Unchecked claims kept from older pages | `layout.md` column counts; `typography.md` legend guidance (`chart-label` for legend entries) | Verify or remove. The `theming.md` claim that Header, Footer and Sidebar stay dark in light mode is checked: all three default to `theme='dark'` (2026-10-26) |
 
 ## Spec and governance

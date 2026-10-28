@@ -3,7 +3,7 @@
 	 * `DashboardSectionTitle` — groups a run of cards or panels within a dashboard, a
 	 * mid-dashboard heading.
 	 *
-	 * Sits one step below [DashboardTitle](.?path=/docs/ui-components-titlegroup-dashboarditle--documentation);
+	 * Sits one step below [DashboardTitle](.?path=/docs/ui-components-layout-and-themes-titlegroup-product-dashboardtitle--documentation);
 	 * may appear several times down a page.
 	 *
 	 * @component
