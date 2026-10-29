@@ -80,7 +80,7 @@
 - **The context defines the value of the step.** There are four steps: `tight`, `default`, `loose` and `section`.
 - **Choose the context by the space available.** `flow-compact` is for surfaces too small to show four distinct gaps, such as control panels, map overlays, tooltips and dense sidebars. Other product surfaces use `flow-standard`, and reading content uses `flow-spacious` through `typeset-longform`.
 - **Flow assigns steps from the markup in every flow context.** Any child takes `default`. A block object (`figure`, `img`, `table`, `pre`, `blockquote`, `.chart`) and the child after it take `loose`. Major headings (`h1`, `h2`, `display-*`, `headline-*`) take `section`, and minor headings (`h3` to `h5`, `title-*`) take `loose`. Headings below `h5` are discouraged and have no rule. The spec has the full table.
-- **The parts of a title group take no step** ([0012](./decisions/0012-title-groupings.md)). An eyebrow before a major heading takes `section`.
+- **The parts of a title group take no step** ([0012](./decisions/0012-title-groupings.md)), except a heading after its eyebrow, which takes `tight`. An eyebrow before a major heading takes `section`.
 - **A caption is coupled to what it captions at the `tight` step:** `figcaption`, a table `caption`, and a caption role or `.chart-note` after a block object.
 - **There is no separate hero spacing.** The space above display type is the `section` step, or comes from the layout.
 - **Authors override a step with a utility.** `mt-flow-{step}` sets the space above one element. `gap-flow-{step}` sets the gap between the children of a flex or grid container that is not a flow context.
@@ -143,7 +143,7 @@ _The following decisions relate to Figma_
 
 - **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
 - **Titles default to `title-md`.** A title group's title uses `title-md` unless the design needs a larger one.
-- **The parts of a title group have no space between them.** The eyebrow, title and subtitle sit directly on one another, in every typeset and flow context, and their line heights separate them. Flow gives no step between them ([0005](./decisions/0005-flow.md)).
+- **The title and subtitle have no space between them.** They sit directly on one another, in every typeset and flow context, and their line heights separate them. Flow gives no step between them ([0005](./decisions/0005-flow.md)). The title sits the `tight` step below its eyebrow.
 
 Worked examples:
 

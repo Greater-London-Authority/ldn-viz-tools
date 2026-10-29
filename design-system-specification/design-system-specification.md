@@ -598,7 +598,7 @@ The same rules apply in every context ([0005](./decisions/0005-flow.md), [0016](
 - Any child is spaced at `default`.
 - A block object, and the child after it, are spaced at `loose`.
 - A major heading is spaced at `section`, and a minor heading at `loose`. Headings below `h5` are discouraged, so `h6` has no rule and is spaced at `default`.
-- The parts of a title group have no step: a heading straight after another heading, a subtitle or subhead straight after its heading, and a heading straight after its eyebrow. An eyebrow before a major heading is spaced at `section`, so the group is set off as one ([0012](./decisions/0012-title-groupings.md)).
+- The parts of a title group have no step: a heading straight after another heading, and a subtitle or subhead straight after its heading. A heading straight after its eyebrow is spaced at `tight`. An eyebrow before a major heading is spaced at `section`, so the group is set off as one ([0012](./decisions/0012-title-groupings.md)).
 - A caption is coupled to what it captions at the `tight` step: `figcaption` in a `figure`, `caption` in a `table`, and a caption role or `.chart-note` straight after a block object.
 - Inside a child, list items and nested lists are spaced at `tight`. In a `dl`, each `dd` is spaced at `tight`, and each `dt` after the first at `default`.
 
@@ -615,7 +615,7 @@ The table below gives the step for each element:
 | a minor heading                    | any element    | `loose`   |
 | a heading                          | a heading      | none      |
 | a subtitle or subhead              | a heading      | none      |
-| a heading                          | an eyebrow     | none      |
+| a heading                          | an eyebrow     | `tight`   |
 | an eyebrow, before a major heading | any element    | `section` |
 | `figure > figcaption`              | —              | `tight`   |
 | a caption                          | a block object | `tight`   |
