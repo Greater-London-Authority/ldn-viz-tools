@@ -58,7 +58,7 @@
 <svelte:window bind:scrollY />
 
 {#if toc?.items?.length}
-	<div class="typeset-product ml-8 hidden max-w-[250px] lg:block">
+	<div class="typeset-product hidden w-[200px] shrink-0 lg:block">
 		<aside class="sticky top-0">
 			<p class="label-sm mb-4 pt-10">On this page</p>
 			<ul class="border-l border-color-border-wash">

@@ -9,12 +9,13 @@
 <BannerHeader title={metadata.title} subTitle={metadata.description} src={metadata.heroImage} />
 
 <div class="container">
-	<div class="flex justify-between">
+	<div class="flex gap-8">
 		<!-- min-w-0 lets the column shrink beside the contents list, so wide code
 		blocks scroll inside it. -->
 		<div class="typeset-longform min-w-0 flex-1 pt-10">
 			{@render children()}
 		</div>
+
 		<Toc toc={{ items: metadata.toc }} />
 	</div>
 </div>
