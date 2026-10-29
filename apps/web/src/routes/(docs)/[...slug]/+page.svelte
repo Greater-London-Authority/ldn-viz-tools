@@ -14,8 +14,8 @@
 		// blocks scroll inside it. Index pages lay out cards, not running text,
 		// so they lift the reading measure.
 		classNames(
-			'typeset-longform min-w-0 flex-1',
-			data.metadata.layout === 'index' ? '[--measure-text:none] [--measure-wide:none]' : ''
+			'typeset-longform min-w-0 flex-1'
+			// data.metadata.layout === 'index' ? '[--measure-text:none] [--measure-wide:none]' : ''
 		)
 	);
 </script>
@@ -34,9 +34,9 @@
 	/>
 {/if}
 
-<div class="flow-spacious container pt-8">
+<div class="container pt-8">
 	<div class="flex justify-between">
-		<div class={wrapperClass}>
+		<div class="typeset-longform min-w-0 flex-1">
 			<PageComponent />
 		</div>
 		<Toc toc={{ items: tocItems }} />

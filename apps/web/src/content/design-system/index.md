@@ -11,7 +11,7 @@ layout: index
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="typeset-longform body-lg text-color-text-muted">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
+<p class="subtitle-lg">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
 <div class="grid sm:grid-cols-3 grid-rows-[auto] gap-flow">
 

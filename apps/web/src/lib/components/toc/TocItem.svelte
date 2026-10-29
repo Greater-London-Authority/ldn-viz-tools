@@ -17,7 +17,7 @@
 <li class="pl-4">
 	<a
 		href={url}
-		class={`label-md text-color-text-muted hover:text-color-interactive-primary-hover hover:underline ${highlighted ? 'text-color-interactive-primary' : 'text-color-text-muted'}`}
+		class={`body-sm text-color-text-muted hover:text-color-interactive-primary-hover hover:underline ${highlighted ? 'text-color-interactive-primary' : 'text-color-text-muted'}`}
 		>{title}</a
 	>
 
