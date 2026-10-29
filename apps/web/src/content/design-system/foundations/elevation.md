@@ -14,7 +14,7 @@ thumbnail: cta-foundations-3.svg
 	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
 </script>
 
-<p class="lead text-color-text-muted">Elevation shows how far a surface sits above the canvas. Each level is shown by a shadow.</p>
+<p class="lead">Elevation shows how far a surface sits above the canvas. Each level is shown by a shadow.</p>
 
 Elevation runs from `elevation-0`, which sits on the canvas and has no shadow, to `elevation-6`.
 

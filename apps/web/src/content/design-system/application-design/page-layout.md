@@ -13,7 +13,7 @@ order: 2
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 
-<p class="lead text-color-text-muted">An application page is built from a header, a sidebar, a canvas and a footer. The layout grid sets the space at the edge of the page, and flow sets the space between the blocks on it.</p>
+<p class="lead">An application page is built from a header, a sidebar, a canvas and a footer. The layout grid sets the space at the edge of the page, and flow sets the space between the blocks on it.</p>
 
 Design for small screens first, starting with a single-column layout, and add columns as the screen widens.
 

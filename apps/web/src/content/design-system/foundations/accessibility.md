@@ -12,7 +12,7 @@ order: 9
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 
-<p class="lead text-color-text-muted">We are dedicated to creating inclusive and accessible digital experiences for all users. Accessible, inclusive design is closely related to usability, providing varied and flexible ways for users to interact - options which can be useful for everyone</p>
+<p class="lead">We are dedicated to creating inclusive and accessible digital experiences for all users. Accessible, inclusive design is closely related to usability, providing varied and flexible ways for users to interact - options which can be useful for everyone</p>
 
 Since September 2018, all public sector bodies have been required by law to ensure our sites and apps can be used by those with disabilities. This means meeting the Web Content Accessibility Guidelines (WCAG). These are a set of internationally recognised, testable guidelines based on four guiding principles of accessibility - digital products must be: Perceivable, Operable, Understandable and Robust.
 

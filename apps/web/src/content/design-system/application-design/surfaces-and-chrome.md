@@ -13,7 +13,7 @@ thumbnail: cta-application-design-1.svg
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 
-<p class="lead text-color-text-muted">A surface is a card or panel on the page. Chrome is the header and footer around a card, chart or table: the header has its title, and the footer has its source and actions.</p>
+<p class="lead">A surface is a card or panel on the page. Chrome is the header and footer around a card, chart or table: the header has its title, and the footer has its source and actions.</p>
 
 ## Canvas and surface
 

@@ -12,7 +12,7 @@ layout: 'page'
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 
-<p class="lead text-color-text-muted">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners understand the city through data.</p>
+<p class="lead">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners understand the city through data.</p>
 
 LCD-DS is a set of design tokens, CSS classes and guidance, with a library of Svelte components built on them. You can use it in three ways:
 

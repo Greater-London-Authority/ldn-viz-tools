@@ -12,7 +12,7 @@ thumbnail: cta-foundations-4.svg
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 
-<p class="lead text-color-text-muted">Corners are square: the radius is 0 everywhere.</p>
+<p class="lead">Corners are square: the radius is 0 everywhere.</p>
 
 Only things that are round, such as a circular avatar or a dot, have a radius. Bars, cards, cells, buttons, inputs and containers are never rounded.
 

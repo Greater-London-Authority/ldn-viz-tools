@@ -12,7 +12,7 @@ order: 7
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 
-<p class="lead text-color-text-muted">The system has one theme with two modes, light and dark. Each colour token has a value for each mode, so an application that uses the tokens can switch between them.</p>
+<p class="lead">The system has one theme with two modes, light and dark. Each colour token has a value for each mode, so an application that uses the tokens can switch between them.</p>
 
 The `Theme` and `ThemeSwitcher` components use the word 'theme' for the mode.
 

@@ -12,7 +12,7 @@ thumbnail: cta-foundations-1.svg
 	import TokenReference from '$lib/components/tokenReference/TokenReference.svelte';
 </script>
 
-<p class="lead text-color-text-muted">Spacing is one numbered scale for the space inside a component, such as padding, a border or an indent.</p>
+<p class="lead">Spacing is one numbered scale for the space inside a component, such as padding, a border or an indent.</p>
 
 Each step is a multiple of 4px, so `--spacing-4` is 16px. The space between blocks of content, such as between two paragraphs or two cards, uses [flow](/design-system/foundations/flow) instead.
 
@@ -68,7 +68,7 @@ The whole steps run from `--spacing-1` (4px) to `--spacing-8` (32px), then 10, 1
 
 Below 16px there are half steps for finer control: `--spacing-0-5` (2px), `--spacing-1-5` (6px), `--spacing-2-5` (10px) and `--spacing-3-5` (14px). `--spacing-px` is 1px.
 
-<div class="not-typeset typeset-product my-4 flex flex-col gap-2 border border-color-border-wash p-4">
+<div class="not-typeset typeset-product my-4 flex flex-col gap-2 bg-color-canvas-muted p-4">
 	<div class="flex items-center gap-4"><code class="body-sm w-32">--spacing-1</code><span class="h-4 bg-color-surface-accent" style="width: var(--spacing-1)"></span><span class="body-sm text-color-text-muted">4px</span></div>
 	<div class="flex items-center gap-4"><code class="body-sm w-32">--spacing-2</code><span class="h-4 bg-color-surface-accent" style="width: var(--spacing-2)"></span><span class="body-sm text-color-text-muted">8px</span></div>
 	<div class="flex items-center gap-4"><code class="body-sm w-32">--spacing-3</code><span class="h-4 bg-color-surface-accent" style="width: var(--spacing-3)"></span><span class="body-sm text-color-text-muted">12px</span></div>
@@ -105,7 +105,7 @@ In this card, the padding is spacing and the space between the title and the par
 }
 ```
 
-<div class="not-typeset typeset-product my-4 border border-color-border-wash p-4">
+<div class="not-typeset typeset-product my-4 bg-color-canvas-muted p-4">
 	<div class="flow-standard border border-color-border-wash bg-color-surface p-4">
 		<h3 class="card-title">Housing completions</h3>
 		<p class="body-md">Net additional homes in each borough, 2015 to 2025.</p>

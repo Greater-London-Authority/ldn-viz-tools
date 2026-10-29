@@ -38,7 +38,7 @@ order: 2
         ]
 </script>
 
-<p class="lead text-color-text-muted">Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. When combined with our spacing rules our typographic system ensures our designs and interfaces are balanced and harmonious.</p>
+<p class="lead">Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. When combined with our spacing rules our typographic system ensures our designs and interfaces are balanced and harmonious.</p>
 
 Text is set by role. Choose the role for the job the text does, and the role sets its size, weight and line height.
 

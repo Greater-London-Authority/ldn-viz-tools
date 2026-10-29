@@ -29,7 +29,7 @@ thumbnail: cta-application-design-2.svg
 	let measure = $state('count');
 </script>
 
-<p class="lead text-color-text-muted">Most controls in our products filter what a dashboard, chart or map shows.</p>
+<p class="lead">Most controls in our products filter what a dashboard, chart or map shows.</p>
 
 Choose a control for the kind of choice it offers, give it a label, and put it next to the content it changes.
 

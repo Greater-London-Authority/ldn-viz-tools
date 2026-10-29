@@ -13,7 +13,7 @@ order: 1
 	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
 </script>
 
-<p class="lead text-color-text-muted">Design tokens are named values for the decisions in the system: colours, type, spacing, flow, the layout grid, shadows and elevation.</p>
+<p class="lead">Design tokens are named values for the decisions in the system: colours, type, spacing, flow, the layout grid, shadows and elevation.</p>
 
 The tokens are defined in Figma and published in the `@ldn-viz/themes` package. Each semantic token is named for its purpose, such as `--color-text-muted` for secondary text. When a token's value changes, everything that uses the token takes the new value.
 

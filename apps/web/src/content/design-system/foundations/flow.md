@@ -13,7 +13,7 @@ order: 4
 	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
 </script>
 
-<p class="lead text-color-text-muted">Flow defines the vertical relationship between one block and the next allowing a reader to see at a glance which things belong together and where one part of the page ends and another begins.</p>
+<p class="lead">Flow defines the vertical relationship between one block and the next allowing a reader to see at a glance which things belong together and where one part of the page ends and another begins.</p>
 
 A container sets a flow context, and the context sets the space between its children. The space follows from how closely two blocks are related.
 
@@ -32,7 +32,7 @@ The components set their own flow. In your own markup, put a context class on th
 </section>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="border border-color-border-wash p-4 my-4 bg-color-surface">
 	<section class="flow-standard typeset-product">
 		<h2 class="title-lg">Monitoring sites</h2>
 		<p class="subtitle-sm">Twelve active sensors</p>

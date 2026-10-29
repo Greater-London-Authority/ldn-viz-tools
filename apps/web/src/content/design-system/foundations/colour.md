@@ -30,7 +30,7 @@ order: 6
 	let palette = $derived(tokens.mode[theme.currentMode ?? 'light'].palette);
 </script>
 
-<p class="lead text-color-text-muted">Colour tokens are named for the role of the element they colour, such as text, a surface or a control. Every semantic colour has a light and a dark value.</p>
+<p class="lead">Colour tokens are named for the role of the element they colour, such as text, a surface or a control. Every semantic colour has a light and a dark value.</p>
 
 Our colour system is rooted in the GLA brand palette. The GLA Brand palette consists of 12 different colours. Using these colours as 'seeds' the design system defines a set of colours that balance the requirements of GLA brand recognition, colour differentiation, contrast and interoperability between light and dark themes.
 

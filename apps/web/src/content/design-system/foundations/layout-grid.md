@@ -12,7 +12,7 @@ thumbnail: cta-foundations-2.svg
 	import TokenReference from '$lib/components/tokenReference/TokenReference.svelte';
 </script>
 
-<p class="lead text-color-text-muted">A page uses one of two layouts: contained, for pages people read, or fluid, for dashboards and application shells.</p>
+<p class="lead">A page uses one of two layouts: contained, for pages people read, or fluid, for dashboards and application shells.</p>
 
 The layout's container sets the width of the page and the padding at its edge. The space between tiled blocks, such as cards, is the default [flow](/design-system/foundations/flow) step of the context.
 
@@ -115,20 +115,20 @@ Here the same three panels are tiled in a standard context and then in a spaciou
 </div>
 ```
 
-<div class="not-typeset typeset-product my-4 flex flex-col gap-4 border border-color-border-wash p-4">
+<div class="not-typeset typeset-product my-4 flex flex-col gap-4 bg-color-canvas-muted p-4">
 	<div class="flow-standard">
 		<div class="grid grid-cols-3 gap-flow">
-			<div class="h-16 border border-color-border-wash bg-color-surface-muted"></div>
-			<div class="h-16 border border-color-border-wash bg-color-surface-muted"></div>
-			<div class="h-16 border border-color-border-wash bg-color-surface-muted"></div>
+			<div class="h-16 border border-color-border-wash bg-color-surface-accent-muted"></div>
+			<div class="h-16 border border-color-border-wash bg-color-surface-accent-muted"></div>
+			<div class="h-16 border border-color-border-wash bg-color-surface-accent-muted"></div>
 		</div>
 	</div>
 	<p class="body-sm text-color-text-muted">Standard: 8px between panels</p>
 	<div class="flow-spacious">
 		<div class="grid grid-cols-3 gap-flow">
-			<div class="h-16 border border-color-border-wash bg-color-surface-muted"></div>
-			<div class="h-16 border border-color-border-wash bg-color-surface-muted"></div>
-			<div class="h-16 border border-color-border-wash bg-color-surface-muted"></div>
+			<div class="h-16 border border-color-border-wash bg-color-surface-accent-muted"></div>
+			<div class="h-16 border border-color-border-wash bg-color-surface-accent-muted"></div>
+			<div class="h-16 border border-color-border-wash bg-color-surface-accent-muted"></div>
 		</div>
 	</div>
 	<p class="body-sm text-color-text-muted">Spacious: 16px between panels</p>

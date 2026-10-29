@@ -19,7 +19,7 @@ thumbnail: cta-application-design-3.svg
 	const gettingStarted = { href: `${base}/design-system/getting-started` };
 </script>
 
-<p class="lead text-color-text-muted">A button starts an action or goes to another page. Its variant sets how much weight it has, and its emphasis shows what the action does.</p>
+<p class="lead">A button starts an action or goes to another page. Its variant sets how much weight it has, and its emphasis shows what the action does.</p>
 
 Give each view one main action, and make the actions around it lighter.
 

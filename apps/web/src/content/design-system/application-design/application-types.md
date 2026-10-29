@@ -11,7 +11,7 @@ order: 1
 	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
 </script>
 
-<p class="lead text-color-text-muted">Our work covers different types of applications, which can be roughly grouped into dashboards, maps, notebooks and reports.</p>
+<p class="lead">Our work covers different types of applications, which can be roughly grouped into dashboards, maps, notebooks and reports.</p>
 
 The application type sets its basic structure: which [layout](/design-system/application-design/page-layout) it uses, what sits in the sidebar and what fills the canvas.
 

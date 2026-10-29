@@ -27,7 +27,7 @@ thumbnail: cta-application-design-4.svg
 
 <Toaster />
 
-<p class="lead text-color-text-muted">Feedback tells the reader what has happened or what is happening. An overlay shows extra content over the page when the reader uses a trigger.</p>
+<p class="lead">Feedback tells the reader what has happened or what is happening. An overlay shows extra content over the page when the reader uses a trigger.</p>
 
 Choose a message by how long it needs to stay and how much of the page it's about. Choose an overlay by how much attention its content needs.
 
