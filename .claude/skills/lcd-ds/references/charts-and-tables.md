@@ -10,7 +10,7 @@ A chart is on-system when its text uses product roles or the chart usage aliases
 
 | Text | Alias | Role |
 | --- | --- | --- |
-| Title | `.chart-title` | `title-sm` |
+| Title | `.chart-title` | `title-md` |
 | Subtitle | `.chart-subtitle` | `subtitle-sm`, muted |
 | Axis title, legend title | `.chart-axis-title` | `label-md`, muted |
 | Data label, annotation, legend entry | `.chart-label` | `label-md` |

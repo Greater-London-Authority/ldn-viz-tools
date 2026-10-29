@@ -54,18 +54,17 @@
 	{/if}
 {:else}
 	<!--
-		No gap: the eyebrow / title / subtitle roles carry their own line-heights,
-		which supply the optical spacing (Figma `TitleGroup` uses itemSpacing 0). A
-		flex gap here would sit on top of that leading and read too loose.
+		A flow context: the title sits the tight step below the eyebrow, and the
+		subtitle has no space above it, so its line height separates it (ADR 0012).
 	-->
-	<div class={classNames('flex flex-col', classes)}>
+	<div class={classNames('flow-standard', classes)}>
 		{#if eyebrow}
 			<p class="eyebrow">{@html eyebrow}</p>
 		{/if}
 		{#if title}
 			<svelte:element
 				this={headingLevel ? `h${headingLevel}` : 'div'}
-				class="title-sm text-color-text">{@html title}</svelte:element
+				class="title-md text-color-text">{@html title}</svelte:element
 			>
 		{/if}
 		{#if subtitle}

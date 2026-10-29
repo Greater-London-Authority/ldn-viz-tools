@@ -32,7 +32,7 @@ describe('readUsage', () => {
 		expect(bySelector['.card-title']).toMatchObject({
 			typeset: 'product',
 			role: 'title',
-			size: 'sm'
+			size: 'md'
 		});
 		expect(bySelector['.chart-tick']).toMatchObject({ role: 'caption', size: 'md' });
 		const longform = (selector) =>
@@ -130,12 +130,17 @@ describe('layout', () => {
 });
 
 describe('title groups (ADR 0012)', () => {
-	it('puts no space between the parts of a title group', () => {
+	it('puts no space between stacked headings, or a heading and its companion', () => {
 		const zero = [...css.matchAll(/\n([^\n{]+) \{\n {2}margin-top: 0;\n\}/g)].map((m) => m[1]);
 		const titleGroup = zero.filter((s) => !s.includes('dt:first-child'));
-		expect(titleGroup).toHaveLength(3);
+		expect(titleGroup).toHaveLength(2);
 		expect(titleGroup.some((s) => /\) \+ :is\(\.chart-subtitle/.test(s))).toBe(true);
-		expect(titleGroup.some((s) => /> :is\(\.eyebrow\) \+ /.test(s))).toBe(true);
+		expect(titleGroup.some((s) => /> :is\(\.eyebrow\) \+ /.test(s))).toBe(false);
+	});
+
+	it('gives a heading under its eyebrow the tight step', () => {
+		const rule = css.match(/\n([^\n]*> :is\(\.eyebrow\) \+ [^{]*) \{\n {2}margin-top: ([^;]+);/);
+		expect(rule[2]).toBe('var(--flow-tight)');
 	});
 });
 
