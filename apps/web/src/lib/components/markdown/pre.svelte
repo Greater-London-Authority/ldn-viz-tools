@@ -26,7 +26,5 @@
 		{...restProps}
 		{@attach (node) => {
 			codeContent = node.textContent;
-		}}>
-{@render children?.()}
-</pre>
+		}}>{@render children?.()}</pre>
 </div>
