@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+	import { siteMenu } from '$lib/siteMenu';
 	import { breakPoint, sidebarState } from '$lib/state.svelte';
 	import { resolveNavItems } from '$lib/utils';
 
@@ -9,8 +10,7 @@
 	let { navigation } = $props();
 
 	let activeMenuItem = $derived(findActiveItem(navigation, page, resolve));
-
-	let mainMenu = [{ title: 'Design System', id: 'design-system-docs', href: '/design-system' }];
+	let activeSiteMenuItem = $derived(findActiveItem(siteMenu, page, resolve));
 </script>
 
 <Sidebar sidebarId="sideNav" theme="light" bind:state={sidebarState.state} width={'slim'}>
@@ -18,10 +18,10 @@
 		<SidebarSection>
 			{#if breakPoint.current <= 768}
 				<NavigationMenu
-					items={mainMenu}
+					items={resolveNavItems(siteMenu, resolve)}
 					orientation="horizontal"
 					ariaLabel="main menu"
-					activeMenuItemId={activeMenuItem?.id}
+					activeMenuItemId={activeSiteMenuItem?.id}
 				/>
 			{/if}
 

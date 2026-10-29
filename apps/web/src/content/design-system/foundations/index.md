@@ -3,7 +3,6 @@ title: Foundations
 description: Foundational principles
 section: Foundations
 navLabel: Foundations
-layout: index
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations.svg
 ---

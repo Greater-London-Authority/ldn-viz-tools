@@ -8,7 +8,7 @@
 		url: string;
 		image: string;
 		title: string;
-		titleClass: 'title-lg' | 'title-md';
+		titleClass: 'title-lg' | 'card-title';
 		cta?: string;
 		children?: Snippet;
 	};
@@ -16,7 +16,7 @@
 		url,
 		image,
 		title,
-		titleClass = 'title-lg',
+		titleClass = 'card-title',
 		children,
 		cta = 'Read more'
 	}: Props = $props();

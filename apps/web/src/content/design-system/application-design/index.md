@@ -3,7 +3,6 @@ title: Application design
 description: Guiding principles for consistent presentation
 section: Application design
 navLabel: Application design
-layout: index
 heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design.svg
 ---
@@ -12,9 +11,9 @@ thumbnail: cta-application-design.svg
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="typeset-longform body-lg text-color-text-muted">This section covers guidance on regular patterns applied to our applications and products.</p>
+<p class="subtitle-lg">This section covers guidance on regular patterns applied to our applications and products.</p>
 
-<div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
+<div class="not-typeset grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
 
 <ImageLink
     url="/design-system/application-design/application-types"

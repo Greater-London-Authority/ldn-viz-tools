@@ -3,12 +3,11 @@ title: Getting Started
 description: Getting up and running with the system.
 section: Getting Started
 navLabel: Getting Started
-layout: index
 heroImage: header-design-system-overflow.svg
 thumbnail: cta-design-system.svg
+layout: 'page'
 ---
 
-<div class="typeset-longform max-w-prose">
 <p class="body-lg text-color-text-muted">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners gain insight and understand the city though data.</p>
 
 ## Installation
@@ -28,12 +27,6 @@ The system is available as node modules for installation using your favourite pa
 
 ### From a CDN
 
-</div>
-
-<div class="not-typeset">
-
 ```html
 <link href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes/styles/index.css" rel="stylesheet" />
 ```
-
-</div>

@@ -1,5 +1,5 @@
 import { getContent } from '$lib/utils';
 
 export async function load({ params }) {
-	return getContent(params.slug);
+	return getContent(params.slug ? `design-system/${params.slug}` : 'design-system');
 }

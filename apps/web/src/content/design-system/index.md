@@ -4,7 +4,6 @@ description: A unified approach to UI design, data presentation and mapping.
 section: Overview
 heroImage: header-design-system.svg
 thumbnail: cta-design-system.svg
-layout: index
 ---
 
 <script>
@@ -13,7 +12,7 @@ layout: index
 
 <p class="subtitle-lg">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
-<div class="grid sm:grid-cols-3 grid-rows-[auto] gap-flow">
+<div class="not-typeset mt-flow-section grid sm:grid-cols-3 grid-rows-[auto] gap-flow">
 
 <ImageLink
     url="/design-system/foundations"

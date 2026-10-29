@@ -4,7 +4,6 @@ description: "Part of the Greater London Authority's City Intelligence Unit"
 section: Overview
 navLabel: Home
 heroImage: header-main-overflow.svg
-layout: index
 ---
 
 <script>
@@ -34,44 +33,40 @@ layout: index
 </div>
 
 <h3 class="title-lg mt-flow-section">Projects</h3>
-<p class="subtitle-md">A selection of publications, dashboards and maps from the London City Data team.</p>
+<p class="subtitle-lg">A selection of publications, dashboards and maps from the London City Data team.</p>
 
 <div class="not-typeset grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
 
 <ImageLink
-    url="https://apps.london.gov.uk/state-of-london/"
-    image="sol-2026.jpg"
-    title="State of London Report"
-    titleClass="title-sm">
+url="https://apps.london.gov.uk/state-of-london/"
+image="sol-2026.jpg"
+title="State of London Report">
 
-<p>The State of London report brings together an array of data about how London is performing across its economy, society and environment.</p>
+<p class="body-sm">The State of London report brings together an array of data about how London is performing across its economy, society and environment.</p>
 </ImageLink>
 
 <ImageLink
-    url="https://apps.london.gov.uk/public-realm-trees/"
-    image="public-realm-trees.jpg"
-    title="Public Realm Trees"
-    titleClass="title-sm">
+url="https://apps.london.gov.uk/public-realm-trees/"
+image="public-realm-trees.jpg"
+title="Public Realm Trees">
 
-<p>The London Tree Map shows where more than 1.1 million trees are in streets, parks, and other public spaces across the city.</p>
+<p class="body-sm">The London Tree Map shows where more than 1.1 million trees are in streets, parks, and other public spaces across the city.</p>
 </ImageLink>
 
 <ImageLink
-    url="https://apps.london.gov.uk/population-projections/"
-    image="population-projections.png"
-    title="Population Projections"
-    titleClass="title-sm">
+url="https://apps.london.gov.uk/population-projections/"
+image="population-projections.png"
+title="Population Projections">
 
-<p>London's 2022-based housing-led population projections, produced by GLA demography.</p>
+<p class="body-sm">London's 2022-based housing-led population projections, produced by GLA demography.</p>
 </ImageLink>
 
 <ImageLink
-    url="https://apps.london.gov.uk/cool-spaces/"
-    image="cool-spaces.jpg"
-    title="Cool Spaces Map"
-    titleClass="title-sm">
+url="https://apps.london.gov.uk/cool-spaces/"
+image="cool-spaces.jpg"
+title="Cool Spaces Map">
 
-<p>Cool Spaces are venues and outdoor spaces open to all where Londoners can take respite on hot days.</p>
+<p class="body-sm">Cool Spaces are venues and outdoor spaces open to all where Londoners can take respite on hot days.</p>
 </ImageLink>
 
 </div>
