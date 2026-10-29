@@ -65,7 +65,7 @@
 		{#if title}
 			<svelte:element
 				this={headingLevel ? `h${headingLevel}` : 'div'}
-				class="title-sm text-color-text">{@html title}</svelte:element
+				class="title-md text-color-text">{@html title}</svelte:element
 			>
 		{/if}
 		{#if subtitle}

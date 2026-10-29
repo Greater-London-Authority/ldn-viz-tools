@@ -48,7 +48,7 @@
 
 - **Typesets share the same ten roles:** display, headline, subhead, title, subtitle, body, label, metric, caption and eyebrow. Each has the sizes `sm`, `md` and `lg`, except eyebrow, which has one. The spec describes what each role is for. A subhead pairs with a headline or display, and a subtitle with a title.
 
-- **Small headings can take label roles.** No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, can take `label-lg`, or `label-md` one level down. `.dialog-title` uses `label-lg` for this reason.
+- **Small headings can take label roles.** No title role is smaller than 18px. A heading inside a small container, such as a popover, a sidebar section or a panel, can take `label-lg`, or `label-md` one level down. `.dialog-title` uses `label-lg` for this reason.
 
 - **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
 
@@ -142,7 +142,7 @@ _The following decisions relate to Figma_
 ## [0012 — Title Groupings](./decisions/0012-title-groupings.md)
 
 - **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
-- **Titles default to `title-sm`.** A title group's title uses `title-sm` unless the design needs a larger one.
+- **Titles default to `title-md`.** A title group's title uses `title-md` unless the design needs a larger one.
 - **The parts of a title group have no space between them.** The eyebrow, title and subtitle sit directly on one another, in every typeset and flow context, and their line heights separate them. Flow gives no step between them ([0005](./decisions/0005-flow.md)).
 
 Worked examples:

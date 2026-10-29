@@ -312,7 +312,7 @@ Distinctions:
 - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
 - **Pairing**: subhead pairs with headline/display, subtitle with title.
 
-No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, can use `label-lg`, or `label-md` one level down ([0003](./decisions/0003-typography.md)).
+No title role is smaller than 18px. A heading inside a small container, such as a popover, a sidebar section or a panel, can use `label-lg`, or `label-md` one level down ([0003](./decisions/0003-typography.md)).
 
 The role set is closed. Adding a role needs a decision record, so reuse an existing role through an alias first ([0003](./decisions/0003-typography.md)).
 
@@ -390,21 +390,21 @@ Line height comes from the role. There are no line-height utilities. ([0003](./d
 | `display-sm`  | 32/40 | 36/44 | 40/48 | 48/56 | 56/64 | 700    |
 | `display-md`  | 36/44 | 40/48 | 48/56 | 56/64 | 64/72 | 700    |
 | `display-lg`  | 40/48 | 48/56 | 56/64 | 64/72 | 72/80 | 700    |
-| `headline-sm` | 26/34 | 26/34 | 26/34 | 26/34 | 26/34 | 700    |
-| `headline-md` | 28/36 | 28/36 | 30/38 | 30/38 | 30/38 | 700    |
+| `headline-sm` | 26/34 | 26/34 | 28/36 | 30/38 | 32/40 | 700    |
+| `headline-md` | 28/36 | 28/36 | 30/38 | 32/40 | 36/44 | 700    |
 | `headline-lg` | 30/38 | 32/40 | 36/44 | 36/44 | 40/48 | 700    |
 | `subhead-sm`  | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
 | `subhead-md`  | 22/30 | 22/30 | 22/30 | 24/32 | 24/32 | 400    |
 | `subhead-lg`  | 24/32 | 24/32 | 24/32 | 26/34 | 26/34 | 400    |
-| `title-sm`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
-| `title-md`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
-| `title-lg`    | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 600    |
+| `title-sm`    | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 600    |
+| `title-md`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
+| `title-lg`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
 | `subtitle-sm` | 16/24 | 16/24 | 16/24 | 16/24 | 16/24 | 400    |
 | `subtitle-md` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
 | `subtitle-lg` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
 | `body-sm`     | 14/26 | 14/26 | 14/26 | 14/26 | 14/26 | 400    |
 | `body-md`     | 16/28 | 16/28 | 16/28 | 16/28 | 16/28 | 400    |
-| `body-lg`     | 18/30 | 18/30 | 18/30 | 18/30 | 18/30 | 400    |
+| `body-lg`     | 18/30 | 18/30 | 20/32 | 20/32 | 20/32 | 400    |
 | `label-sm`    | 12/20 | 12/20 | 12/20 | 12/20 | 12/20 | 500    |
 | `label-md`    | 14/22 | 14/22 | 14/22 | 14/22 | 14/22 | 500    |
 | `label-lg`    | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 500    |
@@ -435,9 +435,9 @@ _Font size / line height in px. Breakpoints: base <640, sm ≥640, md ≥768, lg
 | `subhead-sm`  | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
 | `subhead-md`  | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 400    |
 | `subhead-lg`  | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 400    |
-| `title-sm`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
-| `title-md`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
-| `title-lg`    | 24/32 | 24/32 | 24/32 | 24/32 | 24/32 | 600    |
+| `title-sm`    | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 600    |
+| `title-md`    | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 600    |
+| `title-lg`    | 22/30 | 22/30 | 22/30 | 22/30 | 22/30 | 600    |
 | `subtitle-sm` | 16/24 | 16/24 | 16/24 | 16/24 | 16/24 | 400    |
 | `subtitle-md` | 18/26 | 18/26 | 18/26 | 18/26 | 18/26 | 400    |
 | `subtitle-lg` | 20/28 | 20/28 | 20/28 | 20/28 | 20/28 | 400    |
@@ -471,14 +471,14 @@ The aliases are defined in the `usage` style set in Figma, and the classes are g
 
 | Alias                         | Role           | Adds                           |
 | ----------------------------- | -------------- | ------------------------------ |
-| `.chart-title`                | `.title-sm`    |                                |
+| `.chart-title`                | `.title-md`    |                                |
 | `.chart-subtitle`             | `.subtitle-sm` | muted colour                   |
 | `.chart-axis-title`           | `.label-md`    | muted colour                   |
 | `.chart-label`                | `.label-md`    |                                |
 | `.chart-tick`                 | `.caption-md`  | tabular numerals, muted colour |
 | `.chart-tick-sm`              | `.caption-sm`  | tabular numerals, muted colour |
 | `.chart-note`                 | `.caption-sm`  |                                |
-| `.table-title`                | `.title-sm`    |                                |
+| `.table-title`                | `.title-md`    |                                |
 | `.table-subtitle`             | `.subtitle-sm` | muted colour                   |
 | `.table-col-head`             | `.label-md`    | tabular numerals               |
 | `.table-col-head-sm`          | `.label-sm`    | tabular numerals               |
@@ -487,10 +487,10 @@ The aliases are defined in the `usage` style set in Figma, and the classes are g
 | `.dashboard-main-subtitle`    | `.subhead-md`  | muted colour                   |
 | `.dashboard-section-title`    | `.headline-sm` |                                |
 | `.dashboard-section-subtitle` | `.subhead-sm`  | muted colour                   |
-| `.header-title`               | `.title-sm`    |                                |
-| `.sidebar-title`              | `.title-sm`    |                                |
+| `.header-title`               | `.title-md`    |                                |
+| `.sidebar-title`              | `.title-md`    |                                |
 | `.dialog-title`               | `.label-lg`    |                                |
-| `.card-title`                 | `.title-sm`    |                                |
+| `.card-title`                 | `.title-md`    |                                |
 | `.card-subtitle`              | `.subtitle-sm` | muted colour                   |
 | `.input-hint`                 | `.caption-sm`  |                                |
 | `.input-label`                | `.label-md`    |                                |
@@ -511,7 +511,7 @@ When a component contains one title group, that group can use all three parts.
 
 When a component contains two or more title groups, the designer chooses one to be dominant. The dominant group has a title and an optional subtitle, and no eyebrow. Each other group is demoted to an eyebrow, which holds the text that would have been its title. A subtitle pairs only with a dominant title, so a demoted group has no subtitle ([0012](./decisions/0012-title-groupings.md)).
 
-A title group's title uses `title-sm` unless the design needs a larger one ([0012](./decisions/0012-title-groupings.md)).
+A title group's title uses `title-md` unless the design needs a larger one ([0012](./decisions/0012-title-groupings.md)).
 
 The parts of a title group have no space between them, in every typeset and flow context. Their line heights separate them ([0005](./decisions/0005-flow.md), [0012](./decisions/0012-title-groupings.md)).
 

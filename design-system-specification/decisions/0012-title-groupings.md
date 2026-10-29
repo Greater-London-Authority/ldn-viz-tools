@@ -26,7 +26,7 @@ Because a card or a panel can contain another titled element, eg. a chart, or a 
 ## Decision
 
 - **Dominant and demoted treatments.** A title group on its own takes the dominant treatment: 'Eyebrow' (optional), 'Title', 'Subtitle'. When a component contains two or more title groups, the designer chooses which should be dominant. A dominant group has a title and an optional subtitle, and no eyebrow. Demoted groups consist of an eyebrow only. The text that would have been the title is set as the eyebrow. A subtitle pairs only with a dominant title, never with an eyebrow, so a demoted group's subtitle is dropped.
-- **Titles default to `title-sm`.** A title group's title uses `title-sm` unless the design needs a larger one.
+- **Titles default to `title-md`.** A title group's title uses `title-md` unless the design needs a larger one.
 - **The parts of a title group have no space between them.** The eyebrow, title and subtitle sit directly on one another, in every typeset and flow context, and their line heights separate them. Flow gives no step between them ([0005](./0005-flow.md)).
 
 Worked examples:

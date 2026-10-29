@@ -32,7 +32,7 @@ describe('readUsage', () => {
 		expect(bySelector['.card-title']).toMatchObject({
 			typeset: 'product',
 			role: 'title',
-			size: 'sm'
+			size: 'md'
 		});
 		expect(bySelector['.chart-tick']).toMatchObject({ role: 'caption', size: 'md' });
 		const longform = (selector) =>

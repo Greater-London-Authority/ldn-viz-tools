@@ -50,7 +50,7 @@ We needed a system that sets type by what text does and the context in which it 
   - **Headline vs Title**: headlines open a page or major section; titles name the smaller units within it, whether components or prose blocks.
   - **Pairing**: subhead pairs with headline/display, subtitle with title.
 
-- **Small headings can take label roles.** No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, can take `label-lg`, or `label-md` one level down. `.dialog-title` uses `label-lg` for this reason.
+- **Small headings can take label roles.** No title role is smaller than 18px. A heading inside a small container, such as a popover, a sidebar section or a panel, can take `label-lg`, or `label-md` one level down. `.dialog-title` uses `label-lg` for this reason.
 
 - **Role sets are closed.** Adding a role needs a decision. Alias to reuse an existing role first.
 
