@@ -101,7 +101,7 @@ A number picked by hand is usually a sign that one of the three has been bypasse
 </div>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
+<div class="not-typeset p-4 my-4 bg-color-canvas-muted">
 	<div class="flow-standard">
 		<div class="grid grid-cols-2 gap-flow">
 			<Card title="Completions"><div class="h-24"><PlaceholderImage /></div></Card>
@@ -144,6 +144,10 @@ A dashboard has a title at the top of the canvas, then sections, each with a sec
 ```svelte
 <div class="flow-standard">
 	<DashboardTitle title="Dashboard title" subtitle="A subtitle for this dashboard" />
+	<div class="gap-flow grid grid-cols-2">
+		<Card title="Title" subtitle="Subtitle">…</Card>
+		<Card title="Title" subtitle="Subtitle">…</Card>
+	</div>
 	<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" />
 	<div class="gap-flow grid grid-cols-2">
 		<Card title="Title" subtitle="Subtitle">…</Card>
@@ -152,14 +156,18 @@ A dashboard has a title at the top of the canvas, then sections, each with a sec
 </div>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
+<div class="not-typeset  p-4 my-4 bg-color-canvas-muted">
 	<div class="flow-standard">
-		<DashboardTitle title="Dashboard title" subtitle="A subtitle for this dashboard" />
-		<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" />
-		<div class="grid grid-cols-2 gap-flow">
-			<Card title="Title" subtitle="Subtitle"><div class="h-24"><PlaceholderImage /></div></Card>
-			<Card title="Title" subtitle="Subtitle"><div class="h-24"><PlaceholderImage /></div></Card>
-		</div>
+	<DashboardTitle title="Dashboard title" subtitle="A subtitle for this dashboard" />
+	<div class="gap-flow grid grid-cols-2">
+		<Card title="Title" subtitle="Subtitle">…</Card>
+		<Card title="Title" subtitle="Subtitle">…</Card>
+	</div>
+	<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" />
+	<div class="gap-flow grid grid-cols-2">
+		<Card title="Title" subtitle="Subtitle">…</Card>
+		<Card title="Title" subtitle="Subtitle">…</Card>
+	</div>
 	</div>
 </div>
 

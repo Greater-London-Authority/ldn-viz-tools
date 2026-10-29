@@ -93,7 +93,7 @@ Press Tab to move focus to the link and the button below. The link shows the out
 <Button emphasis="primary">A button</Button>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product flex flex-wrap items-center gap-6 body-md">
 		<a href="#focus" class="text-color-interactive-primary-text underline">A link</a>
 		<Button emphasis="primary">A button</Button>

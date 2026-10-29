@@ -91,7 +91,7 @@ A `.dark` class applies dark mode to everything inside it, whatever the mode of 
 </div>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="dark bg-color-canvas p-4">
 		<p class="text-color-text">I'm in dark mode, because my parent has the dark class.</p>
 	</div>

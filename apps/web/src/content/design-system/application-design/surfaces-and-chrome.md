@@ -41,9 +41,7 @@ Use `Card` from `@ldn-viz/ui`. The content goes in its children, and the title g
 </Card>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
-	<Card title="Rough sleeping" subtitle="People seen sleeping rough, by quarter" source="CHAIN" hint="Counts include people seen more than once."><div class="h-40"><PlaceholderImage /></div></Card>
-</div>
+<Card title="Rough sleeping" subtitle="People seen sleeping rough, by quarter" source="CHAIN" hint="Counts include people seen more than once."><div class="h-40"><PlaceholderImage /></div></Card>
 
 [Storybook](https://greater-london-authority.github.io/ldn-viz-tools/?path=/docs/ui-components-card--documentation) lists the props.
 
@@ -118,7 +116,7 @@ When the chart is the main subject, its group is dominant. The card's title beco
 </Card>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
+<div class="p-4 my-4 bg-color-canvas-muted">
 	<Card title="Housing" emphasis="secondary"><ChartContainer id="tg-one" title="Net additional dwellings" subtitle="London, 2015 to 2024" source="GLA" chartHeight="h-40" dataDownloadButton={false} imageDownloadButton={false}><PlaceholderImage /></ChartContainer></Card>
 </div>
 
@@ -135,7 +133,7 @@ The card's group is dominant, and each chart's title becomes an eyebrow:
 </Card>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
+<div class="p-4 my-4 bg-color-canvas-muted">
 	<Card title="Housing" subtitle="London, 2015 to 2024"><div class="grid grid-cols-2 gap-flow"><ChartContainer id="tg-two-a" title="Completions" emphasis="secondary" chartHeight="h-32" dataDownloadButton={false} imageDownloadButton={false}><PlaceholderImage /></ChartContainer><ChartContainer id="tg-two-b" title="Approvals" emphasis="secondary" chartHeight="h-32" dataDownloadButton={false} imageDownloadButton={false}><PlaceholderImage /></ChartContainer></div></Card>
 </div>
 
@@ -158,7 +156,7 @@ A card with only text has no other title group, so its group can have an eyebrow
 </Card>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 bg-color-canvas-muted">
+<div class="p-4 my-4 bg-color-canvas-muted">
 	<Card title="Rough sleeping" byline="GLA City Intelligence" source="CHAIN" note="Provisional">
 		<div class="h-32"><PlaceholderImage /></div>
 		{#snippet actions()}<Button variant="outline" emphasis="secondary" size="sm">Download CSV</Button>{/snippet}

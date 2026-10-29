@@ -68,11 +68,13 @@ A filter panel for a housing dashboard might combine three controls:
 </div>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
-	<div class="typeset-product flow-compact max-w-sm">
-		<RadioButtonGroupSolid label="Period" options={periods} bind:selectedId={period} />
-		<Select label="Borough" options={boroughs} bind:value={borough} searchable clearable />
-		<CheckboxGroup label="Tenure" options={tenures} bind:selectedOptions={tenure} />
+<div class=" bg-color-canvas-muted p-4 my-4">
+	<div class="p-4 bg-color-surface">
+		<div class="typeset-product flow-compact max-w-sm">
+			<RadioButtonGroupSolid label="Period" options={periods} bind:selectedId={period} />
+			<Select label="Borough" options={boroughs} bind:value={borough} searchable clearable />
+			<CheckboxGroup label="Tenure" options={tenures} bind:selectedOptions={tenure} />
+		</div>
 	</div>
 </div>
 
@@ -100,7 +102,7 @@ Fields are required unless they're marked optional, and an optional field shows 
 />
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-surface p-4 my-4">
 	<div class="typeset-product">
 		<RadioButtonGroup
 			label="Measure"

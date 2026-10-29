@@ -43,7 +43,7 @@ The variant sets the weight of a button, from the most to the least:
 <Button variant="brand">Brand</Button>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product flex flex-wrap items-center gap-2">
 		<Button variant="solid">Solid</Button>
 		<Button variant="outline">Outline</Button>
@@ -65,7 +65,7 @@ The emphasis shows what the action does. `primary` is for the main action and `s
 <Button emphasis="caution">Archive</Button>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product flex flex-wrap items-center gap-2">
 		<Button emphasis="primary">Primary</Button>
 		<Button emphasis="secondary">Secondary</Button>
@@ -94,7 +94,7 @@ The main action goes on the right, at the end of the reading order. Cancel and B
 <Button emphasis="negative">Delete</Button>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product flex flex-col gap-4">
 		<div class="flex justify-end gap-2">
 			<Button variant="outline" emphasis="secondary">Cancel</Button>
@@ -127,7 +127,7 @@ A button that goes to another page must be a link, because a screen reader annou
 <Button href="/design-system/getting-started">Get started</Button>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product">
 		<Button {...gettingStarted}>Get started</Button>
 	</div>
@@ -191,7 +191,7 @@ The interactive colour tokens follow the pattern `--color-interactive-{intent}[-
 }
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product">
 		<button class="button-label" style="background: var(--color-interactive-primary); color: var(--color-static-white); padding: var(--spacing-1-5) var(--spacing-4);">Your own button</button>
 	</div>

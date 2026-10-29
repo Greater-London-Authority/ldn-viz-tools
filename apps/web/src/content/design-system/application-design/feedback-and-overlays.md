@@ -51,7 +51,7 @@ A callout is a coloured banner for a short message that the reader should notice
 </Callout>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product flex flex-col gap-4">
 		<Callout status="notice">{#snippet title()}Notice{/snippet}{#snippet body()}Figures are for each financial year.{/snippet}</Callout>
 		<Callout status="positive">{#snippet title()}Up to date{/snippet}{#snippet body()}This data was updated today.{/snippet}</Callout>
@@ -72,9 +72,9 @@ import { newToastMessage, ToastType } from '@ldn-viz/ui';
 newToastMessage('The view was saved.', { type: ToastType.Success, closeButton: true }).post();
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product">
-		<Button variant="outline" emphasis="secondary" onclick={() => saved.post()}>Save view</Button>
+		<Button  onclick={() => saved.post()}>Save view</Button>
 	</div>
 </div>
 
@@ -106,7 +106,7 @@ When content isn't ready, show the reader that something is happening:
 </NonIdealState>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product grid gap-4 sm:grid-cols-2">
 		<div class="h-48"><NonIdealState spinner>{#snippet title()}Loading the map{/snippet}</NonIdealState></div>
 		<div class="h-48"><NonIdealState>{#snippet title()}This chart couldn't load{/snippet}Refresh the page to try again.</NonIdealState></div>
@@ -117,7 +117,7 @@ Without a title, `NonIdealState` reads "Nothing to display". On an error, replac
 
 Where no text says what is loading, a spinner needs a title for screen readers. `LoadingIndicator` sets it to "Loading".
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product"><LoadingIndicator class="h-8 w-8" /></div>
 </div>
 
@@ -156,7 +156,7 @@ An overlay opens from a trigger. The three kinds differ in how they open and how
 </Modal>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product flex flex-wrap items-center gap-6">
 		<Tooltip hintLabel="What is a completion?">A home counts as complete when it's ready to live in.</Tooltip>
 		<Popover hintLabel="About this data">{#snippet title()}About this data{/snippet}Figures come from borough returns. <a href="#overlays">Read the method</a>.</Popover>

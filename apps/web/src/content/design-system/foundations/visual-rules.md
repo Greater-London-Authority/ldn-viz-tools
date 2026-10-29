@@ -63,7 +63,7 @@ A shape that is round, such as a circular avatar, a dot on a map or the mark of 
 <RadioButton id="round-radio" name="shapes" label="Round radio button" selectedId="round-radio" />
 ```
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product flex flex-wrap items-center gap-6">
 		<Button emphasis="primary">Square button</Button>
 		<Checkbox id="square-checkbox" label="Square checkbox" checked={true} />
@@ -73,7 +73,7 @@ A shape that is round, such as a circular avatar, a dot on a map or the mark of 
 
 A card, a bar and a dot, with their corners:
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product flex flex-wrap items-end gap-6 body-sm">
 		<div class="elevation-1 border border-color-border-wash bg-color-surface p-4">A card</div>
 		<div class="flex items-end gap-1">

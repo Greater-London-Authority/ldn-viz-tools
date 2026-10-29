@@ -55,11 +55,9 @@ The components use the colour tokens already. In your own markup, use the custom
 }
 ```
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
-	<div class="typeset-product p-4" style="background: var(--color-surface); border: 1px solid var(--color-border-wash); color: var(--color-text)">
-		<p class="body-md">Text on a surface</p>
-		<p class="body-sm" style="color: var(--color-text-muted)">Secondary text, such as a source</p>
-	</div>
+<div class=" typeset-product p-4 my-4 not-typeset bg-color-surface">
+    <p class="body-md">Text on a surface</p>
+    <p class="body-sm" style="color: var(--color-text-muted)">Secondary text, such as a source</p>
 </div>
 
 If your app uses Tailwind, as the component library does, the preset makes each colour token a utility, such as `bg-color-surface`, `border-color-border-wash` and `text-color-text-muted`.
@@ -71,7 +69,7 @@ For buttons and links, use the components. Each one uses the interactive tokens 
 <Button emphasis="secondary" variant="outline">Clear</Button>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-surface p-4 my-4 not-typeset">
 	<div class="typeset-product flex flex-wrap gap-2">
 		<Button emphasis="primary">Apply filters</Button>
 		<Button emphasis="secondary" variant="outline">Clear</Button>
@@ -158,7 +156,7 @@ Text has three levels of emphasis: `--color-text` for most text, `--color-text-m
 <p style="color: var(--color-text-wash)">The least important text</p>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product flow-compact">
 		<p class="body-md" style="color: var(--color-text)">Text</p>
 		<p class="body-md" style="color: var(--color-text-muted)">Secondary text, such as a source</p>
@@ -177,8 +175,8 @@ The canvas is the page background. A surface is a card or panel on it. The two h
 </div>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset" style="background: var(--color-canvas)">
-	<div class="typeset-product elevation-2 p-4 flow-compact" style="background: var(--color-surface)">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
+	<div class="typeset-product elevation-2 p-4 flow-compact bg-color-surface">
 		<p class="body-md">A panel</p>
 		<div class="body-sm p-4" style="background: var(--color-surface-muted)">A region inside the panel</div>
 	</div>
@@ -193,7 +191,7 @@ The surface roles are `accent`, `alpha`, `beta`, `positive`, `negative`, `cautio
 </Callout>
 ```
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product flex flex-col gap-4">
 		<Callout status="notice">
 			{#snippet title()}Notice{/snippet}
@@ -218,7 +216,7 @@ The surface roles are `accent`, `alpha`, `beta`, `positive`, `negative`, `cautio
 
 Borders have three levels of emphasis, from `--color-border`, the strongest, to `--color-border-wash`. `--color-border-muted` is the edge of a control, such as a field or a checkbox, and keeps a contrast of 3:1 on `--color-surface`. `--color-border-wash` is for dividers and the edges of containers.
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product grid grid-cols-3 gap-4 body-sm">
 		<div class="p-4" style="border: 1px solid var(--color-border)">--color-border</div>
 		<div class="p-4" style="border: 1px solid var(--color-border-muted)">--color-border-muted</div>
@@ -230,7 +228,7 @@ Borders have three levels of emphasis, from `--color-border`, the strongest, to 
 
 Interactive tokens are chosen by intent, then emphasis, then state: `--color-interactive-{intent}[-muted][-{state}]`. The intents are `primary`, `secondary`, `positive`, `negative` and `caution`. The states are `hover` and `active`.
 
-<div class="border border-color-border-wash p-4 my-4 not-typeset">
+<div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product flex flex-wrap gap-2">
 		<Button emphasis="primary">Primary</Button>
 		<Button emphasis="secondary">Secondary</Button>

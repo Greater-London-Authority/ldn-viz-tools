@@ -160,9 +160,9 @@
 					<tr>
 						<td><code>--{t.name}</code></td>
 						<td><code>{shadow(t.value)}</code></td>
-						<td class="bg-color-canvas-muted">
+						<td class="bg-color-canvas-muted align-middle">
 							<span
-								class="m-2 inline-block h-8 w-12 bg-color-surface"
+								class="m-2 inline-block h-12 w-12 bg-color-surface"
 								style:box-shadow={shadow(t.value)}
 							></span>
 						</td>
