@@ -42,6 +42,7 @@
 	<TabList
 		{tabs}
 		ariaLabel="Ways of using the system"
+		class="!items-stretch"
 		selectedTabId={`${uid}-${active?.usage}`}
 		handleSelect={(id) => usageState.set(id.slice(uid.length + 1) as Usage)}
 	/>
@@ -50,7 +51,7 @@
 		<TabPanel
 			tabId={`${uid}-${active.usage}`}
 			tabPanelId={`${uid}-${active.usage}-panel`}
-			class="flow-spacious pt-6"
+			class="flow-spacious !bg-color-canvas-muted px-4 py-6"
 		>
 			{@render active.content?.()}
 		</TabPanel>
