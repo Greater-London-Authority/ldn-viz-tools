@@ -1,7 +1,6 @@
 ---
 title: Layout grid
 description: Contained and fluid page layouts
-section: Foundations
 navLabel: Layout grid
 order: 5
 heroImage: header-foundations-overflow.svg

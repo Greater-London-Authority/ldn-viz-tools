@@ -1,8 +1,8 @@
 ---
 title: Map examples
 description: Guidance on spatial data visualisation
-section: Data visualisation
 navLabel: Map examples
+order: 7
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-2.svg
 ---

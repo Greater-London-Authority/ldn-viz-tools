@@ -15,14 +15,7 @@ const baseSchema = s.object({
 
 const docSchema = baseSchema
 	.extend({
-		toc: s.toc(),
-		section: s.enum([
-			'Overview',
-			'Getting Started',
-			'Foundations',
-			'Application design',
-			'Data visualisation'
-		])
+		toc: s.toc()
 	})
 	.transform((data) => {
 		return {

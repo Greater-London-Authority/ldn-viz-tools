@@ -1,7 +1,6 @@
 ---
 title: Elevation
 description: Surfaces above the canvas
-section: Foundations
 navLabel: Elevation
 order: 7
 heroImage: header-foundations-overflow.svg

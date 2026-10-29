@@ -1,8 +1,8 @@
 ---
 title: Application design
 description: Guiding principles for consistent presentation
-section: Application design
-navLabel: Application design
+navLabel: Application Design
+order: 3
 heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design.svg
 ---

@@ -1,7 +1,6 @@
 ---
 title: Feedback and overlays
 description: Messages, tooltips, popovers and modals
-section: Application design
 navLabel: Feedback and overlays
 order: 6
 heroImage: header-application-design-overflow.svg

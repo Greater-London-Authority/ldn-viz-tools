@@ -1,8 +1,8 @@
 ---
 title: Accessibility
 description: Making data insights available to all
-section: Data visualisation
 navLabel: Accessibility
+order: 3
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-1.svg
 ---

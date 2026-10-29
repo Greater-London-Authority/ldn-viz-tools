@@ -1,7 +1,6 @@
 ---
 title: London City Data
 description: "Part of the Greater London Authority's City Intelligence Unit"
-section: Overview
 navLabel: Home
 heroImage: header-main-overflow.svg
 ---

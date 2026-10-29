@@ -1,7 +1,6 @@
 ---
 title: Flow
 description: Vertical rhythm between stacked blocks
-section: Foundations
 navLabel: Flow
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations-3.svg

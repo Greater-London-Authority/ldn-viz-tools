@@ -1,7 +1,6 @@
 ---
 title: Design System
 description: A unified approach to UI design, data presentation and mapping.
-section: Overview
 heroImage: header-design-system.svg
 thumbnail: cta-design-system.svg
 ---

@@ -1,8 +1,8 @@
 ---
 title: Quantitative colour
 description: Values mapped to colour gradients
-section: Data visualisation
 navLabel: Quantitative colour
+order: 5
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-3.svg
 ---

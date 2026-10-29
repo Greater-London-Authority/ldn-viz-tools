@@ -1,7 +1,6 @@
 ---
 title: Page layout
 description: Coherent presentation structure
-section: Application design
 navLabel: Page layout
 heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design-2.svg

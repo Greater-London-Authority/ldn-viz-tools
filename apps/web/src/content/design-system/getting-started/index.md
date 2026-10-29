@@ -1,8 +1,8 @@
 ---
 title: Getting Started
 description: Getting up and running with the system.
-section: Getting Started
 navLabel: Getting Started
+order: 1
 heroImage: header-design-system-overflow.svg
 thumbnail: cta-design-system.svg
 layout: 'page'

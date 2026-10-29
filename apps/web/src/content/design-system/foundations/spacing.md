@@ -1,7 +1,6 @@
 ---
 title: Spacing
 description: One scale for the space inside components
-section: Foundations
 navLabel: Spacing
 order: 3
 heroImage: header-foundations-overflow.svg

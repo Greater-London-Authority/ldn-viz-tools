@@ -1,7 +1,6 @@
 ---
 title: Actions and emphasis
 description: Choosing and pairing buttons
-section: Application design
 navLabel: Actions and emphasis
 order: 5
 heroImage: header-application-design-overflow.svg

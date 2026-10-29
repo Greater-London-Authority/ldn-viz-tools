@@ -1,7 +1,6 @@
 ---
 title: Accessibility
 description: Ensuring our work is useful for everyone
-section: Foundations
 navLabel: Accessibility
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations-1.svg

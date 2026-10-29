@@ -1,7 +1,6 @@
 ---
 title: Application types
 description: Coherent presentation structures
-section: Application design
 navLabel: Application types
 heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design-1.svg

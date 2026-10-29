@@ -1,8 +1,8 @@
 ---
 title: Data Visualisation
 description: Guiding principles for consistent presentation
-section: Data visualisation
-navLabel: Data visualisation
+navLabel: Data Visualisation
+order: 4
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz.svg
 ---

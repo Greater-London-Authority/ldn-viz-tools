@@ -1,7 +1,6 @@
 ---
 title: Visual rules
 description: Corners and shape
-section: Foundations
 navLabel: Visual rules
 order: 8
 heroImage: header-foundations-overflow.svg
