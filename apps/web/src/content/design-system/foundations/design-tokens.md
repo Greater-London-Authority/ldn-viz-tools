@@ -22,11 +22,11 @@ The tokens are defined in Figma and published in the `@ldn-viz/themes` package. 
 <UsageTabs>
 {#snippet full()}
 
-The components use the tokens already. In your own markup, the system's classes set type and flow. A role class such as `body-md` or `title-sm` sets the font family, size, weight, line height and letter spacing of the text. A flow context such as `flow-standard` sets the space between the blocks inside it. [Typography](/design-system/foundations/typography) and [Flow](/design-system/foundations/flow) describe them.
+The components use the tokens already. In your own markup, the system's classes set type and flow. A role class such as `body-md` or `title-md` sets the font family, size, weight, line height and letter spacing of the text. A flow context such as `flow-standard` sets the space between the blocks inside it. [Typography](/design-system/foundations/typography) and [Flow](/design-system/foundations/flow) describe them.
 
 ```html
 <section class="flow-standard">
-	<h2 class="title-sm">Housing completions</h2>
+	<h2 class="title-md">Housing completions</h2>
 	<p class="body-md">…</p>
 </section>
 ```

@@ -208,10 +208,10 @@ Each usage alias applies the role shown. Use the alias, or the role class with t
 | Dashboard subtitle         | `dashboard-main-subtitle`    | `subhead-md`, muted                   |
 | Dashboard section title    | `dashboard-section-title`    | `headline-sm`                         |
 | Dashboard section subtitle | `dashboard-section-subtitle` | `subhead-sm`, muted                   |
-| Header title               | `header-title`               | `title-sm`                            |
-| Sidebar title              | `sidebar-title`              | `title-sm`                            |
+| Header title               | `header-title`               | `title-md`                            |
+| Sidebar title              | `sidebar-title`              | `title-md`                            |
 | Dialog title               | `dialog-title`               | `label-lg`                            |
-| Card title                 | `card-title`                 | `title-sm`                            |
+| Card title                 | `card-title`                 | `title-md`                            |
 | Card subtitle              | `card-subtitle`              | `subtitle-sm`, muted                  |
 | Input label                | `input-label`                | `label-md`                            |
 | Placeholder                | `input-placeholder`          | `body-md`                             |
@@ -219,12 +219,12 @@ Each usage alias applies the role shown. Use the alias, or the role class with t
 | Helper text and hints      | `input-hint`                 | `caption-sm`                          |
 | Button label               | `button-label`               | `label-md`                            |
 | Small button label         | `button-label-sm`            | `label-sm`                            |
-| Table title                | `table-title`                | `title-sm`                            |
+| Table title                | `table-title`                | `title-md`                            |
 | Table subtitle             | `table-subtitle`             | `subtitle-sm`, muted                  |
 | Table column header        | `table-col-head`             | `label-md`, tabular numerals          |
 | Small table column header  | `table-col-head-sm`          | `label-sm`, tabular numerals          |
 | Table body                 | `table-body`                 | `body-sm`, tabular numerals           |
-| Chart title                | `chart-title`                | `title-sm`                            |
+| Chart title                | `chart-title`                | `title-md`                            |
 | Chart subtitle             | `chart-subtitle`             | `subtitle-sm`, muted                  |
 | Chart axis title           | `chart-axis-title`           | `label-md`, muted                     |
 | Chart data label or legend | `chart-label`                | `label-md`                            |
@@ -252,7 +252,7 @@ The titling roles are designed to be used together. Write the group as flat sibl
 	<p class="subtitle-sm">Rolling 24-hour mean</p>
 </div>
 
-The eyebrow closes up to the heading below it, the subtitle closes up to the heading above it, and the larger break that separates one section from the next moves above the whole group. Reproducing the same appearance with generic classes, such as a small muted paragraph in place of the subtitle, will look almost identical but will not be recognised as a titling group, and the spacing will be wrong.
+The heading sits the tight step below the eyebrow, the subtitle closes up to the heading above it, and the larger break that separates one section from the next moves above the whole group. Reproducing the same appearance with generic classes, such as a small muted paragraph in place of the subtitle, will look almost identical but will not be recognised as a titling group, and the spacing will be wrong.
 
 ### Emphasis and colour
 
@@ -351,7 +351,7 @@ When a component contains two or more title groups, one is made dominant. The do
 
 | Treatment  | Role          | Size | Weight | When it applies                                                     |
 | ---------- | ------------- | ---- | ------ | ------------------------------------------------------------------- |
-| Dominant   | `title-sm`    | 20px | 600    | The group is the subject of its container                           |
+| Dominant   | `title-md`    | 20px | 600    | The group is the subject of its container                           |
 | Demoted    | `eyebrow`     | 14px | 500    | Another group is dominant, for example a chart inside a titled card |
 | Supporting | `subtitle-sm` | 16px | 400    | A supporting line under a dominant title                            |
 

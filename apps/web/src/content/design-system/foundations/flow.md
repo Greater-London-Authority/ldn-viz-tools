@@ -99,7 +99,7 @@ Inside a flow context, or inside `typeset-longform`, the spacing follows from th
 | Above a third- to fifth-level heading, or a title                       | Loose        |
 | Between two headings that follow one another                            | None         |
 | Between a heading and a subtitle or subhead directly beneath it         | None         |
-| Between an eyebrow and the heading directly below it                    | None         |
+| Between an eyebrow and the heading directly below it                    | Tight        |
 | Above an eyebrow that introduces a first- or second-level heading       | Section      |
 | Between an image and its caption                                        | Tight        |
 | Between list items, and around a nested list                            | Tight        |

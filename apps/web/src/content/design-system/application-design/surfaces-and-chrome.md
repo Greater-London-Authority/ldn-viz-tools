@@ -53,7 +53,7 @@ Build a card from the system's classes and custom properties. The role classes s
 ```html
 <div class="card typeset-product elevation-1 gap-flow">
 	<div>
-		<h3 class="title-sm">Rough sleeping</h3>
+		<h3 class="title-md">Rough sleeping</h3>
 		<p class="subtitle-sm">People seen sleeping rough, by quarter</p>
 	</div>
 	<div>…</div>
@@ -83,7 +83,7 @@ A card has these values:
 | Border     | 1px, `--color-border-wash`                                   |
 | Shadow     | `--elevation-1`                                              |
 | Padding    | 16px                                                         |
-| Text       | The product typeset: `title-sm`, `subtitle-sm`, `caption-sm` |
+| Text       | The product typeset: `title-md`, `subtitle-sm`, `caption-sm` |
 
 The [design tokens reference](/design-system/foundations/design-tokens#reference) has the value of each token.
 
@@ -92,7 +92,7 @@ The [design tokens reference](/design-system/foundations/design-tokens#reference
 
 ## Title groups
 
-A title group is the text at the top of a card, chart, table or panel. It has up to three parts, stacked in this order: an optional eyebrow, a title and an optional subtitle. The title uses `title-sm` unless the design needs a larger one. The parts have no space between them. Their line heights set the distance.
+A title group is the text at the top of a card, chart, table or panel. It has up to three parts, stacked in this order: an optional eyebrow, a title and an optional subtitle. The title uses `title-md` unless the design needs a larger one. The title sits 4px below the eyebrow, the `tight` flow step. The subtitle has no space above it, and line height sets the distance.
 
 A component with one title group can use all three parts. A card that contains other titled components, such as a chart, has several groups. Choose one to be dominant. The dominant group has a title and an optional subtitle, and no eyebrow. Each other group shows only an eyebrow, with the text that would have been its title.
 
