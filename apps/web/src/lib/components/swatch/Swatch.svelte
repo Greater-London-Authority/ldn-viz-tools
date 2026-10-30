@@ -107,9 +107,9 @@
 		<div>
 			<p class="label-sm text-color-text-muted">{name}</p>
 			{#if lastButtonId !== id}
-				<p class="label-sm text-color-text">{value}</p>
+				<p class="label-sm text-color-text-muted">{value}</p>
 			{:else}
-				<p class="label-sm text-color-interactive-primary-active">Copied!</p>
+				<p class="label-sm text-color-interactive-primary-text-active">Copied!</p>
 			{/if}
 			{#if description}
 				<p class="body-sm">Description: {description}</p>
@@ -122,9 +122,9 @@
 		<div>
 			<p class="label-sm text-color-text-muted">{trimmedName}</p>
 			{#if lastButtonId !== id}
-				<p class="label-sm text-color-text">{value}</p>
+				<p class="label-sm text-color-text-muted">{value}</p>
 			{:else}
-				<p class="label-sm text-color-interactive-primary-active">Copied!</p>
+				<p class="label-sm text-color-interactive-primary-text-active">Copied!</p>
 			{/if}
 		</div>
 	{/if}

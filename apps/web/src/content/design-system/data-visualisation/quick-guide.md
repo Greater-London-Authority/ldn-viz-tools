@@ -34,6 +34,7 @@ thumbnail: cta-dataviz-4.svg
     // get width & height of wrappers around content components
     // TODO: Code review.. is this ok to share between bindings on component wrappers
     let contentWidth = $state();
+    let contentWidthWide = $state();
 	let contentHeight = $state();
     
 
@@ -245,8 +246,8 @@ For charts where you want to show "other" or "context" data, use `color-data-pri
 
 Quantitative colour scales are used to encode value using gradients of colour. For example, on a choropleth map (below).
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ColorBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
+<div bind:clientWidth={contentWidthWide} bind:clientHeight={contentHeight} class="width-content-wide">
+    <ColorBoroughMap containerWidth={contentWidthWide} containerHeight={contentHeight} />
 </div>
 
 #### Sequential
@@ -261,7 +262,7 @@ A sequential colour scale is a continuous or stepped gradient of colour running 
 
 We typically use up to 5 steps of blue, from light to dark (or the reverse in dark mode).
 
-<div bind:clientWidth={contentWidth} >
+<div>
 {#if mounted}
     <ColorLegend color={ldnBlue5Scale} ticks=0 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
 {/if}
@@ -273,7 +274,7 @@ We typically use up to 5 steps of blue, from light to dark (or the reverse in da
 
 A diverging colour scale is a sequential scale that "diverges" in two directions, typically negative and positive.
 
-<div bind:clientWidth={contentWidth} >
+<div>
 {#if mounted}
     <ColorLegend color={ldnDiverging5Scale} ticks=0 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
 {/if}
@@ -281,7 +282,9 @@ A diverging colour scale is a sequential scale that "diverges" in two directions
 
 Our default diverging scale, is red (negative) to blue (positive). This is to avoid any red/green perception issues, and is a simple augmentation of our default (positive) blue ramp.
 
+<div class="width-content-wide">
 <ColorRampGenerator title='Generate a colour ramp' colorRight='blue' type='Sequential' breaks={5} />
+</div>
 
 **Note:** With diverging scales, you may want to add a central neutral grey step between the positive/negative steps to indicate values that are truly zero.
 

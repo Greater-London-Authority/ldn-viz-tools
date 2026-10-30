@@ -36,7 +36,7 @@ For more complex interactive map examples using DeckGL and MapLibre, see [LDN Vi
 
 Values for each London borough are visualised in (5) discrete colour steps along a sequential colour ramp. This is helpful if you are communicating broader groups.
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
+<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight} class="width-content-wide">
     <ExampleBoroughChoropleth containerWidth={contentWidth} containerHeight={contentHeight} />
 </div>
 
@@ -44,23 +44,21 @@ Values for each London borough are visualised in (5) discrete colour steps along
 
 Values for each London borough are mapped along a continuous sequential colour ramp. This shows a more nuanced view of the values and difference between each region.
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ExampleBoroughChoroplethContinuous containerWidth={contentWidth} containerHeight={contentHeight} />
-</div>
+<ExampleBoroughChoroplethContinuous containerWidth={contentWidth} containerHeight={contentHeight} />
 
 ### Diverging (stepped) colour
 
 Values for each London borough are binned into (10) discrete colour steps along a diverging colour ramp. An additional discrete grey step is added in the middle for values of zero change.
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ExampleBoroughChoroplethDiverging containerWidth={contentWidth} containerHeight={contentHeight} />
-</div>
+<ExampleBoroughChoroplethDiverging containerWidth={contentWidth} containerHeight={contentHeight} />
 
 ### Need your own colour scale?
 
 You can generate your own stepped colour scales using our colour tokens, with this tool:
 
+<div class="width-content-wide">
 <ColorRampGenerator title='Generate a colour ramp' colorRight='blue' type='Sequential' breaks={5} />
+</div>
 
 ## Symbol Maps
 
@@ -68,6 +66,4 @@ Choropleth maps (above) tend to distort data perception, because larger geograph
 
 ### Borough Symbol Map
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ExampleBoroughSymbol containerWidth={contentWidth} containerHeight={contentHeight} />
-</div>
+<ExampleBoroughSymbol containerWidth={contentWidth} containerHeight={contentHeight} />

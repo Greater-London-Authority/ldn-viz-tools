@@ -125,7 +125,7 @@
 	});
 </script>
 
-<div bind:clientWidth={width}>
+<div bind:clientWidth={width} class="width-content-wide">
 	<ObservablePlot
 		{spec}
 		data={leafData}
