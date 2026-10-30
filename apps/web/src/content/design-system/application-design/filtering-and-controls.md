@@ -133,7 +133,7 @@ The system CSS styles native form elements with classes. `.form-label` sets the 
 <p class="body-sm text-color-label-muted" id="borough-description">Boroughs in the GLA area.</p>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
+<div class="bg-color-canvas-muted p-4 my-4">
 	<div class="typeset-product flex max-w-sm flex-col gap-1">
 		<label class="form-label" for="borough-native">Borough</label>
 		<select class="form-select" id="borough-native" aria-describedby="borough-native-description">
