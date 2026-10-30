@@ -25,6 +25,8 @@
 	// absolute external link / mailto, which must be passed through untouched.
 	const isExternal = $derived(/^([a-z][a-z\d+.-]*:|\/\/)/i.test(url));
 	const href = $derived(isExternal ? url : resolve(url, {}));
+
+	const buttonMargin = $derived(children ? '' : '!mt-0 mb-2');
 </script>
 
 <div class="flow-standard">
@@ -39,6 +41,7 @@
 		variant="text"
 		slim
 		emphasis="secondary"
+		class={buttonMargin}
 	>
 		{cta}
 	</Button>

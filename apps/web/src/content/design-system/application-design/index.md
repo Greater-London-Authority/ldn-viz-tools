@@ -1,6 +1,6 @@
 ---
 title: Application design
-description: Guiding principles for consistent presentation
+description: Layouts, surfaces, controls and other patterns for applications.
 navLabel: Application Design
 order: 3
 heroImage: header-application-design-overflow.svg

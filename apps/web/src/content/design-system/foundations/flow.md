@@ -10,7 +10,19 @@ order: 4
 <script>
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 	import TokenReference from '$lib/components/tokenReference/TokenReference.svelte';
-	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+
+	const steps = [
+		{ name: 'Tight', class: 'mt-flow-tight' },
+		{ name: 'Default', class: 'mt-flow' },
+		{ name: 'Loose', class: 'mt-flow-loose' },
+		{ name: 'Section', class: 'mt-flow-section' }
+	];
+
+	const contexts = [
+		{ name: 'Spacious', class: 'flow-spacious', px: [4, 16, 24, 40] },
+		{ name: 'Standard', class: 'flow-standard', px: [4, 8, 16, 24] },
+		{ name: 'Compact', class: 'flow-compact', px: [4, 4, 8, 8] }
+	];
 </script>
 
 <p class="lead">Flow defines the vertical relationship between one block and the next allowing a reader to see at a glance which things belong together and where one part of the page ends and another begins.</p>
@@ -106,9 +118,36 @@ Inside a flow context, or inside `typeset-longform`, the spacing follows from th
 | Between a term and its definition in a description list                 | Tight        |
 | Between one term-and-definition pair and the next                       | Default      |
 
-<figure class="width-content-wide">
-	<EnhancedImage src="/flow/caption-coupling.svg" alt="A figure and caption wrapped together are coupled at the tight step, 4 pixels. Without the wrapper, the caption takes the default step, 16 pixels, like any other block" />
+A caption sits the tight step below its image when both are inside a `figure`, or when the caption has a caption role and follows the image directly. Other text after an image takes the loose step, even when it looks like a caption:
+
+```html
+<figure>
+	<img src="/no2-trend.svg" alt="…" />
+	<figcaption>Source: London Atmospheric Emissions Inventory</figcaption>
 </figure>
+
+<img src="/no2-trend.svg" alt="…" />
+<p class="body-sm text-color-text-muted">Source: London Atmospheric Emissions Inventory</p>
+```
+
+<div class="width-content-wide not-typeset grid gap-4 bg-color-canvas-muted p-4 my-4 sm:grid-cols-2">
+	<div class="bg-color-surface p-4">
+		<div class="flow-spacious typeset-product">
+			<figure>
+				<div class="h-24 bg-color-surface-accent-muted"></div>
+				<figcaption class="caption-sm text-color-text-muted">Source: London Atmospheric Emissions Inventory</figcaption>
+			</figure>
+		</div>
+		<p class="label-sm mt-4">Caption in a figure: tight, 4px</p>
+	</div>
+	<div class="bg-color-surface p-4">
+		<div class="flow-spacious typeset-product">
+			<div class="chart h-24 bg-color-surface-accent-muted"></div>
+			<p class="body-sm text-color-text-muted">Source: London Atmospheric Emissions Inventory</p>
+		</div>
+		<p class="label-sm mt-4">Body text after the image: loose, 24px</p>
+	</div>
+</div>
 
 <!-- The last entry in the heading group is worth drawing out. When an eyebrow introduces a heading, the major break moves above the eyebrow rather than sitting between them, because the eyebrow is the top of that titling group rather than a stray line before it. -->
 
@@ -130,8 +169,8 @@ An article needs no spacing classes at all:
 </article>
 ```
 
-<div class="border border-color-border-wash p-4 my-4">
-	<article class="typeset-longform">
+<div class="bg-color-canvas-muted p-4 my-4 width-content-wide">
+	<article class="typeset-longform width-content bg-color-surface p-4">
 		<h2>Air quality</h2>
 		<p class="subtitle-sm">Rolling 24-hour mean across twelve sites</p>
 		<p>Concentrations fell across every monitored borough during the period…</p>
@@ -158,12 +197,12 @@ Relationships are determined by a type element's role class. Applying the right 
 <p class="body-sm text-color-text-muted">Quarterly</p>
 ```
 
-<div class="typeset-product grid gap-4 sm:grid-cols-2 my-4">
-	<div class="flow-standard border border-color-border-wash p-4">
+<div class="typeset-product grid gap-4 sm:grid-cols-2 width-content-wide bg-color-canvas-muted p-4 my-4 width-content-wide">
+	<div class="flow-standard bg-color-surface p-4">
 		<h2 class="title-lg">Rough sleeping</h2>
 		<p class="subtitle-sm">Quarterly</p>
 	</div>
-	<div class="flow-standard border border-color-border-wash p-4">
+	<div class="flow-standard bg-color-surface p-4">
 		<h2 class="title-lg">Rough sleeping</h2>
 		<p class="body-sm text-color-text-muted">Quarterly</p>
 	</div>
@@ -319,9 +358,24 @@ There are four **relationships** governing the space between blocks.
 | **Loose**   | Deliberate breathing room, as around a figure, a table or a chart                            |
 | **Section** | A major break, as above the heading that begins a new part of the page                       |
 
-<figure class="width-content-wide">
-	<EnhancedImage src="/flow/steps.svg" alt="The four steps in each context, drawn at their actual height: spacious is 4, 16, 24 and 40 pixels, standard is 4, 8, 16 and 24, and compact is 4, 4, 8 and 8" />
-</figure>
+Each pair of bars below is spaced by a step, using the `mt-flow-*` class inside each context:
+
+<div class="width-content-wide not-typeset typeset-product grid gap-4 bg-color-canvas-muted p-4 my-4 sm:grid-cols-3">
+	{#each contexts as context}
+		<div class="bg-color-surface p-4">
+			<p class="label-md">{context.name}</p>
+			{#each steps as step, i}
+				<div class="mt-4">
+					<p class="caption-sm text-color-text-muted">{step.name}, {context.px[i]}px</p>
+					<div class="{context.class} mt-1">
+						<div class="h-3 bg-color-surface-accent-muted"></div>
+						<div class="h-3 bg-color-surface-accent-muted {step.class}"></div>
+					</div>
+				</div>
+			{/each}
+		</div>
+	{/each}
+</div>
 
 ### Three contexts
 
@@ -338,9 +392,30 @@ Spacious is the most generous, because a reading column benefits from air and th
 
 Compact deliberately collapses the ramp: tight and default are the same, and so are loose and section. This is because the total range is too small (4px - 8px) to enable 4 visually distinct levels.
 
-<figure class="width-content-wide">
-	<EnhancedImage src="/flow/contexts.svg" alt="The same paragraph, section title and paragraphs in the spacious and standard contexts. The section step is 40 pixels in spacious and 24 in standard, and the default step is 16 and 8" />
-</figure>
+The same markup in the spacious and standard contexts:
+
+```html
+<div class="flow-spacious typeset-product">
+	<p class="body-md">Concentrations fell across every monitored borough.</p>
+	<h2 class="headline-sm">Method</h2>
+	<p class="body-md">Readings are taken hourly.</p>
+	<p class="body-md">Each site reports a 24-hour mean.</p>
+</div>
+```
+
+<div class="width-content-wide not-typeset grid gap-4 bg-color-canvas-muted p-4 my-4 sm:grid-cols-2">
+	{#each contexts.slice(0, 2) as context}
+		<div class="bg-color-surface p-4">
+			<div class="{context.class} typeset-product">
+				<p class="body-md">Concentrations fell across every monitored borough.</p>
+				<h2 class="headline-sm">Method</h2>
+				<p class="body-md">Readings are taken hourly.</p>
+				<p class="body-md">Each site reports a 24-hour mean.</p>
+			</div>
+			<p class="label-sm mt-4">{context.name}: section {context.px[3]}px, default {context.px[1]}px</p>
+		</div>
+	{/each}
+</div>
 
 ### Contexts behave differently
 

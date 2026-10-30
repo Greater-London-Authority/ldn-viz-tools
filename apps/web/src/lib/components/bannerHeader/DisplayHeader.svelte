@@ -57,7 +57,7 @@
 	<div class="relative z-10 flex h-full items-center">
 		<div class="container">
 			<div class="typeset-longform">
-				<p class="display-lg">{title}</p>
+				<h1 class="display-md">{title}</h1>
 				{#if subTitle}
 					<p class="subhead-lg">{subTitle}</p>
 				{/if}

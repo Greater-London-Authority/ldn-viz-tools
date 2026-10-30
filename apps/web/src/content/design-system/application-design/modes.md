@@ -82,12 +82,12 @@ A `.dark` class applies dark mode to everything inside it, whatever the mode of 
 ```
 
 ```html
-<div class="dark">
-	<p class="text-class">I'm in dark mode, because my parent has the dark class.</p>
+<div class="dark bg-color-canvas">
+	<p class="text-color-text">I'm in dark mode, because my parent has the dark class.</p>
 </div>
 
-<div>
-	<p class="text-class">I'm in light mode, unless an ancestor has the dark class.</p>
+<div class="bg-color-canvas">
+	<p class="text-color-text">I'm in light mode, unless an ancestor has the dark class.</p>
 </div>
 ```
 

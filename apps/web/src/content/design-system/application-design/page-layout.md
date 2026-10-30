@@ -148,7 +148,11 @@ A dashboard has a title at the top of the canvas, then sections, each with a sec
 		<Card title="Title" subtitle="Subtitle">…</Card>
 		<Card title="Title" subtitle="Subtitle">…</Card>
 	</div>
-	<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" />
+	<DashboardSectionTitle
+		title="Dashboard section title"
+		subtitle="A subtitle for this section"
+		class="mt-flow-section"
+	/>
 	<div class="gap-flow grid grid-cols-2">
 		<Card title="Title" subtitle="Subtitle">…</Card>
 		<Card title="Title" subtitle="Subtitle">…</Card>
@@ -156,22 +160,22 @@ A dashboard has a title at the top of the canvas, then sections, each with a sec
 </div>
 ```
 
-<div class="not-typeset  p-4 my-4 bg-color-canvas-muted">
+<div class="not-typeset p-4 my-4 bg-color-canvas-muted">
 	<div class="flow-standard">
-	<DashboardTitle title="Dashboard title" subtitle="A subtitle for this dashboard" />
-	<div class="gap-flow grid grid-cols-2">
-		<Card title="Title" subtitle="Subtitle">…</Card>
-		<Card title="Title" subtitle="Subtitle">…</Card>
-	</div>
-	<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" />
-	<div class="gap-flow grid grid-cols-2">
-		<Card title="Title" subtitle="Subtitle">…</Card>
-		<Card title="Title" subtitle="Subtitle">…</Card>
-	</div>
+		<DashboardTitle title="Dashboard title" subtitle="A subtitle for this dashboard" />
+		<div class="gap-flow grid grid-cols-2">
+			<Card title="Title" subtitle="Subtitle">…</Card>
+			<Card title="Title" subtitle="Subtitle">…</Card>
+		</div>	
+		<DashboardSectionTitle title="Dashboard section title" subtitle="A subtitle for this section" class="mt-flow-section"/>
+		<div class="gap-flow grid grid-cols-2">
+			<Card title="Title" subtitle="Subtitle">…</Card>
+			<Card title="Title" subtitle="Subtitle">…</Card>
+		</div>
 	</div>
 </div>
 
-<div class="my-4 border border-dashed border-color-border p-4 body-sm text-color-text-muted">Placeholder: the space between the dashboard title, the sections and the card grid needs checking against the Figma Dashboard Layouts frames.</div>
+<!-- <div class="my-4 border border-dashed border-color-border p-4 body-sm text-color-text-muted">Placeholder: the space between the dashboard title, the sections and the card grid needs checking against the Figma Dashboard Layouts frames.</div> -->
 
 ## Anatomy
 

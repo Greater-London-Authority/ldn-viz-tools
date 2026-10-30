@@ -146,7 +146,7 @@ The colour tokens are grouped by concept. Each has a value for light mode and da
 
 The palette provides the lowest level semantic tokens. Many of the other semantic tokens are aliases of values within the palette. Each color has values at `100` - `1100`
 
-Quantitative colour scales can be based on the palette colors. see [Data visualisation](design-system/data-visualisation/quantitative-colour).
+Quantitative colour scales can be based on the palette colors. See [Quantitative colour](/design-system/data-visualisation/quantitative-colour).
 
 <TokenReference group="color-palette" />
 

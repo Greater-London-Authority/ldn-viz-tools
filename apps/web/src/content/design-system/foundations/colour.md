@@ -282,6 +282,16 @@ Text needs a contrast of at least 4.5:1 with its background, and large text 3:1.
 
 These tables list the colour tokens for interfaces, with their light and dark values. The data, chart and geo tokens are in the [Design tokens reference](/design-system/foundations/design-tokens#data).
 
+### Palette
+
+The swatches show the palette in the current mode.
+
+<div class="not-typeset width-content-wide">
+{#each hues as [key, label]}
+<SwatchGrid tokenData={palette[key]} title={label} size="xs" />
+{/each}
+</div>
+
 ### Canvas
 
 <TokenReference group="color-canvas" />
@@ -313,15 +323,5 @@ These tables list the colour tokens for interfaces, with their light and dark va
 ### Static
 
 <TokenReference group="color-static" />
-
-### Palette
-
-The swatches show the palette in the current mode.
-
-<div class="not-typeset width-content-wide py-6">
-{#each hues as [key, label]}
-<SwatchGrid tokenData={palette[key]} title={label} size="xs" />
-{/each}
-</div>
 
 The full rules for colour are in the [specification](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/design-system-specification/design-system-specification.md#colour).

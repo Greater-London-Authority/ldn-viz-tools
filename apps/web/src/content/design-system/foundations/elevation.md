@@ -11,6 +11,7 @@ thumbnail: cta-foundations-3.svg
 	import { Card } from '@ldn-viz/ui';
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 	import TokenReference from '$lib/components/tokenReference/TokenReference.svelte';
+	import TokenConcept from '$lib/components/tokenReference/TokenConcept.svelte';
 	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
 </script>
 
@@ -71,7 +72,7 @@ The shadows are the same in light mode and dark mode.
 An interface is a stack. The canvas is at the base, and surfaces sit above it at elevation steps 1 to 6. Text, labels, borders and interactive elements sit on a surface.
 
 <figure class="width-content-wide">
-	<EnhancedImage src="/design-tokens/concept.svg" alt="An interface drawn as layers: the canvas at elevation 0, surfaces at elevations 1 to 6, then text, labels and borders, with interactive elements at the top" />
+	<TokenConcept />
 </figure>
 
 ### The levels
@@ -85,7 +86,7 @@ Each step above `elevation-0` raises a surface further, with a larger and softer
 <div class="elevation-6">…</div>
 ```
 
-<div class="not-typeset typeset-product my-4 grid grid-cols-4 gap-6 bg-color-canvas-muted p-6 sm:grid-cols-7">
+<div class="not-typeset width-content-wide typeset-product my-4 grid grid-cols-4 gap-6 bg-color-canvas-muted p-6 sm:grid-cols-7">
 	<div class="flex flex-col items-center gap-2"><div class="elevation-0 h-14 w-14 bg-color-surface"></div><code class="body-sm">0</code></div>
 	<div class="flex flex-col items-center gap-2"><div class="elevation-1 h-14 w-14 bg-color-surface"></div><code class="body-sm">1</code></div>
 	<div class="flex flex-col items-center gap-2"><div class="elevation-2 h-14 w-14 bg-color-surface"></div><code class="body-sm">2</code></div>
@@ -112,7 +113,7 @@ A card sets its own elevation, border and padding:
 <Card title="Population">…</Card>
 ```
 
-<div class="not-typeset typeset-product my-4 bg-color-canvas-muted p-6">
+<div class="not-typeset width-content-wide typeset-product my-4 bg-color-canvas-muted p-6">
 	<Card title="Population">
 		<p class="body-md">Placeholder content</p>
 	</Card>

@@ -119,7 +119,7 @@
 		</p>
 		<table>
 			<colgroup
-				><col class="w-1/4" />{#each properties as _}<col />{/each}</colgroup
+				><col class="w-1/2" />{#each properties as _}<col />{/each}</colgroup
 			>
 			<thead>
 				<tr>
@@ -130,7 +130,16 @@
 			<tbody>
 				{#each typographyRows as row}
 					<tr>
-						<td><code>{row.role}</code></td>
+						<!-- Inline values, so the sample follows the selects rather than the viewport -->
+						<td>
+							<span
+								class="block whitespace-nowrap"
+								style:font-size={row['font-size']}
+								style:line-height={row['line-height']}
+								style:font-weight={row['font-weight']}
+								style:letter-spacing={row['letter-spacing']}>{row.role}</span
+							>
+						</td>
 						{#each properties as property}
 							<td>{row[property] ? px(row[property]) : '–'}</td>
 						{/each}

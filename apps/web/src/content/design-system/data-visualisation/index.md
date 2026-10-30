@@ -1,6 +1,6 @@
 ---
 title: Data Visualisation
-description: Guiding principles for consistent presentation
+description: Charts, maps and colour for presenting data.
 navLabel: Data Visualisation
 order: 4
 heroImage: header-dataviz-overflow.svg
