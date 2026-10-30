@@ -31,8 +31,8 @@ heroImage: header-main-overflow.svg
 
 </div>
 
-<h3 class="title-lg mt-flow-section">Projects</h3>
-<p class="subtitle-lg">A selection of publications, dashboards and maps from the London City Data team.</p>
+<h3 class="headline-sm mt-flow-section">Projects</h3>
+<p class="subhead-sm">A selection of publications, dashboards and maps from the London City Data team.</p>
 
 <div class="not-typeset grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
 
