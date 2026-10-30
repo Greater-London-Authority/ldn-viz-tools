@@ -12,17 +12,19 @@ layout: 'page'
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 
-<p class="lead">By working with the London City Data Design System (LCD-DS) you will be able to design and build user interfaces quickly and confidently to help Londoners understand the city through data.</p>
+<p class="lead">The London City Data Design System (LCD-DS) helps you design and build user interfaces quickly and confidently, so that Londoners can understand the city through data.</p>
 
-LCD-DS is a set of design tokens, CSS classes and guidance, with a library of Svelte components built on them. You can use it in three ways:
+LCD-DS is a set of design tokens, CSS classes and guidance for interfaces, charts, maps and tables.
 
-- **The full system** for products built with our component library.
+Our component library is built on top of the system using Svelte and Tailwind. You do not need the component library, Svelte or Tailwind to use LCD-DS.
+
+You can use it in three ways:
+
+- **The full system** for products built with the component library.
 
 - **Adapting an existing system**, for products built with other tools, which use the system's CSS.
 
 - **Anywhere**, for work in Figma, print or any other medium, which uses the system's values.
-
-The tokens and classes don't need Svelte or Tailwind. Our component library uses both, but components built in other ways can follow the same tokens and classes.
 
 ## Use
 
@@ -65,6 +67,12 @@ module.exports = {
 };
 ```
 
+The preset sets Tailwind's colours, spacing, shadows and font families to the system's tokens, so `bg-color-surface` uses `--color-surface`.
+
+It removes Tailwind's font sizes, weights and line heights. The system's type role classes, such as `body-md`, set type.
+
+Because `index.css` is imported before the Tailwind directives, a utility class overrides a system class.
+
 Add the `Theme` component to your app's top-level layout. It applies light or dark mode from the user's preference, which they can change with the `ThemeSwitcher` component.
 
 {/snippet}
@@ -96,12 +104,14 @@ The values are published in two forms:
 
 Designers can use the [Design System ver 4.0](https://www.figma.com/design/lIzrJTQTBAt9tu9SYAXeTE/) library in Figma. The tokens are exported from its variables.
 
+This documentation has reference tables showing token values
+
 {/snippet}
 </UsageTabs>
 
 ### Load the font
 
-All three ways use the Inter typeface. The theme package doesn't load it, so add it to your app or install it, for example from [Google Fonts](https://fonts.google.com/specimen/Inter). Without it, text falls back to the system's sans-serif font.
+The system uses the Inter font. The theme package doesn't load it, so add it to your app or install it, for example from [Google Fonts](https://fonts.google.com/specimen/Inter). Without it, text falls back to the system's sans-serif font.
 
 ## How it works
 
@@ -114,13 +124,9 @@ The theme package has four CSS files:
 | `reset.css`  | Default styles for HTML elements                                                 |
 | `index.css`  | All three, in the order reset, tokens, classes                                   |
 
-Any class overrides the rules in `reset.css`. In a Tailwind app, importing `index.css` before the Tailwind directives means a Tailwind utility class also overrides a system class.
+Because the reset comes first in `index.css`, any class overrides its rules.
 
-The Tailwind preset doesn't add classes of its own. It sets Tailwind's colours, spacing, shadows and font families to the custom properties, so `bg-color-surface` uses `--color-surface`. It also removes Tailwind's font sizes, weights and line heights, because the system's role classes, such as `body-md`, set type.
-
-With `index.css` or `system.css`, every page starts in the product typeset, which is for applications and dashboards. A page of reading content, such as an article or documentation, sets `typeset-longform` once on its outermost container. The [Typography](/design-system/foundations/typography) page explains the typesets.
-
-## Upgrading from version 3
+### Upgrading from version 3
 
 Version 4 changes how the theme package is imported, and renames some tokens and classes. The [migration guide](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/themes/MIGRATION.md) lists each change and what replaces it.
 
