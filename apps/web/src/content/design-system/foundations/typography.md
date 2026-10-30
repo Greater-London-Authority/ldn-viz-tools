@@ -40,7 +40,7 @@ order: 2
 
 <p class="lead">Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. When combined with our spacing rules our typographic system ensures our designs and interfaces are balanced and harmonious.</p>
 
-Text is set by role. Choose the role for the job the text does, and the role sets its size, weight and line height.
+Each piece of text has a role, such as title, body or label, chosen for what the text does. The role sets its font, size, weight, line height and letter spacing.
 
 ## Use
 
@@ -62,7 +62,7 @@ The components set their own type. The title components, such as `TitleGroup`, `
 />
 ```
 
-<div class="typeset-product border border-color-border-wash p-4 my-4">
+<div class="typeset-product bg-color-surface p-4 my-4">
 	<TitleGroup eyebrow="Air quality" title="Nitrogen dioxide" subtitle="Rolling 24-hour mean" headingLevel={3} />
 </div>
 
@@ -112,7 +112,7 @@ A typeset is applied as a class on a containing element. Everything inside it ta
 
 `typeset-product` is the default, so a role class outside any typeset takes its product values.
 
-An application surface will normally also want a flow context, which sets the space between blocks. `typeset-longform` sets its own.
+An application surface will normally also want a flow context, which sets the space between blocks. `typeset-longform` sets its own. see [flow](/design-system/foundations/flow)
 
 ```html
 <section class="flow-standard typeset-product">…</section>
@@ -136,19 +136,42 @@ Inside `typeset-longform`, ordinary HTML elements are styled for you. Headings t
     <p>Body copy</p>
 </div>
 
-These elements take a role without a class:
+You don't need to add any classes to these elements within `typeset-longform`. Headings, the lead paragraph and captions take a role:
 
-| Element      | Role             |
-| ------------ | ---------------- |
-| `h1`         | `headline-lg`    |
-| `h2`         | `headline-sm`    |
-| `h3`         | `title-lg`       |
-| `h4`         | `title-md`       |
-| `h5`         | `title-sm`       |
-| `p.lead`     | `body-lg`, muted |
-| `figcaption` | `caption-sm`     |
+| Element                                                          | Role                |
+| ---------------------------------------------------------------- | ------------------- |
+| <span class="headline-lg">h1</span>                              | `headline-lg`       |
+| <span class="headline-sm">h2</span>                              | `headline-sm`       |
+| <span class="title-lg">h3</span>                                 | `title-lg`          |
+| <span class="title-md">h4</span>                                 | `title-md`          |
+| <span class="title-sm">h5</span>                                 | `title-sm`          |
+| <span class="body-lg text-color-text-muted">p.lead</span>        | `body-lg`, muted    |
+| <span class="caption-sm text-color-text-muted">figcaption</span> | `caption-sm`, muted |
+| Any other text                                                   | `body-md`           |
 
-A role class on the element replaces its default role. Display has to be applied by class.
+Other elements keep the role of the text around them, with these changes:
+
+| Element                                                    | Style                                                                                                       |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| <a href="#longform-styles-its-content-automatically">a</a> | Link colour, underlined. The underline thickens on hover                                                    |
+| <strong>strong</strong>, <b>b</b>                          | Semibold                                                                                                    |
+| <em>em</em>, <i>i</i>                                      | Italic                                                                                                      |
+| <mark>mark</mark>                                          | Muted caution background                                                                                    |
+| <abbr title="abbreviation">abbr</abbr>                     | Help cursor, when it has a `title`                                                                          |
+| <small>small</small>                                       | 0.875 times the surrounding size                                                                            |
+| <code>code</code>                                          | 0.875 times the surrounding size, on a muted surface                                                        |
+| <kbd>kbd</kbd>                                             | As `code`, with a border                                                                                    |
+| <cite>cite</cite>                                          | Upright                                                                                                     |
+| <ul><li>ul</li></ul>                                       | Disc markers, then circle and square when nested. Markers are muted                                         |
+| <ol><li>ol</li></ol>                                       | Numbers, then letters and roman numerals when nested                                                        |
+| <dl><dt>dt</dt><dd>dd</dd></dl>                            | Term semibold, description indented                                                                         |
+| <blockquote>blockquote</blockquote>                        | Muted, with a brand-colour rule on the left                                                                 |
+| <pre>pre</pre>                                             | Muted surface, scrolls sideways when too wide                                                               |
+| <details><summary>summary</summary>details</details>       | Summary semibold                                                                                            |
+| `table`                                                    | Full width. Caption muted and above, header cells semibold, figures in tabular numerals, rules between rows |
+| `hr`                                                       | Wash border colour                                                                                          |
+
+A role class on the element replaces its default role.
 
 `typeset-longform` also limits the width of each block inside it for readability. Running text is limited to 38 times the body size, which is 608px at a 16px body size. Figures, images, videos, tables, code blocks and charts can be wider, up to 56 times the body size (896px). To set a block's width directly, use `width-content`, `width-content-wide` or `width-content-full`.
 
@@ -202,35 +225,35 @@ For Markdown or other formatted content inside an application, use `typeset-prod
 
 Each usage alias applies the role shown. Use the alias, or the role class with the same treatment.
 
-| Element                    | Alias                        | Role                                  |
-| -------------------------- | ---------------------------- | ------------------------------------- |
-| Dashboard title            | `dashboard-main-title`       | `headline-md`                         |
-| Dashboard subtitle         | `dashboard-main-subtitle`    | `subhead-md`, muted                   |
-| Dashboard section title    | `dashboard-section-title`    | `headline-sm`                         |
-| Dashboard section subtitle | `dashboard-section-subtitle` | `subhead-sm`, muted                   |
-| Header title               | `header-title`               | `title-md`                            |
-| Sidebar title              | `sidebar-title`              | `title-md`                            |
-| Dialog title               | `dialog-title`               | `label-lg`                            |
-| Card title                 | `card-title`                 | `title-md`                            |
-| Card subtitle              | `card-subtitle`              | `subtitle-sm`, muted                  |
-| Input label                | `input-label`                | `label-md`                            |
-| Placeholder                | `input-placeholder`          | `body-md`                             |
-| Field value                | `input-value`                | `body-md`                             |
-| Helper text and hints      | `input-hint`                 | `caption-sm`                          |
-| Button label               | `button-label`               | `label-md`                            |
-| Small button label         | `button-label-sm`            | `label-sm`                            |
-| Table title                | `table-title`                | `title-md`                            |
-| Table subtitle             | `table-subtitle`             | `subtitle-sm`, muted                  |
-| Table column header        | `table-col-head`             | `label-md`, tabular numerals          |
-| Small table column header  | `table-col-head-sm`          | `label-sm`, tabular numerals          |
-| Table body                 | `table-body`                 | `body-sm`, tabular numerals           |
-| Chart title                | `chart-title`                | `title-md`                            |
-| Chart subtitle             | `chart-subtitle`             | `subtitle-sm`, muted                  |
-| Chart axis title           | `chart-axis-title`           | `label-md`, muted                     |
-| Chart data label or legend | `chart-label`                | `label-md`                            |
-| Chart tick                 | `chart-tick`                 | `caption-md`, muted, tabular numerals |
-| Small chart tick           | `chart-tick-sm`              | `caption-sm`, muted, tabular numerals |
-| Chart note or source       | `chart-note`                 | `caption-sm`                          |
+| Element                                                                                    | Alias                        | Role                                  |
+| ------------------------------------------------------------------------------------------ | ---------------------------- | ------------------------------------- |
+| <span class="typeset-product dashboard-main-title">Dashboard title</span>                  | `dashboard-main-title`       | `headline-md`                         |
+| <span class="typeset-product dashboard-main-subtitle">Dashboard subtitle</span>            | `dashboard-main-subtitle`    | `subhead-md`, muted                   |
+| <span class="typeset-product dashboard-section-title">Dashboard section title</span>       | `dashboard-section-title`    | `headline-sm`                         |
+| <span class="typeset-product dashboard-section-subtitle">Dashboard section subtitle</span> | `dashboard-section-subtitle` | `subhead-sm`, muted                   |
+| <span class="typeset-product header-title">Header title</span>                             | `header-title`               | `title-md`                            |
+| <span class="typeset-product sidebar-title">Sidebar title</span>                           | `sidebar-title`              | `title-md`                            |
+| <span class="typeset-product dialog-title">Dialog title</span>                             | `dialog-title`               | `label-lg`                            |
+| <span class="typeset-product card-title">Card title</span>                                 | `card-title`                 | `title-md`                            |
+| <span class="typeset-product card-subtitle">Card subtitle</span>                           | `card-subtitle`              | `subtitle-sm`, muted                  |
+| <span class="typeset-product input-label">Input label</span>                               | `input-label`                | `label-md`                            |
+| <span class="typeset-product input-placeholder">Placeholder</span>                         | `input-placeholder`          | `body-md`                             |
+| <span class="typeset-product input-value">Field value</span>                               | `input-value`                | `body-md`                             |
+| <span class="typeset-product input-hint">Helper text and hints</span>                      | `input-hint`                 | `caption-sm`                          |
+| <span class="typeset-product button-label">Button label</span>                             | `button-label`               | `label-md`                            |
+| <span class="typeset-product button-label-sm">Small button label</span>                    | `button-label-sm`            | `label-sm`                            |
+| <span class="typeset-product table-title">Table title</span>                               | `table-title`                | `title-md`                            |
+| <span class="typeset-product table-subtitle">Table subtitle</span>                         | `table-subtitle`             | `subtitle-sm`, muted                  |
+| <span class="typeset-product table-col-head">Table column header</span>                    | `table-col-head`             | `label-md`, tabular numerals          |
+| <span class="typeset-product table-col-head-sm">Small table column header</span>           | `table-col-head-sm`          | `label-sm`, tabular numerals          |
+| <span class="typeset-product table-body">Table body</span>                                 | `table-body`                 | `body-sm`, tabular numerals           |
+| <span class="typeset-product chart-title">Chart title</span>                               | `chart-title`                | `title-md`                            |
+| <span class="typeset-product chart-subtitle">Chart subtitle</span>                         | `chart-subtitle`             | `subtitle-sm`, muted                  |
+| <span class="typeset-product chart-axis-title">Chart axis title</span>                     | `chart-axis-title`           | `label-md`, muted                     |
+| <span class="typeset-product chart-label">Chart data label or legend</span>                | `chart-label`                | `label-md`                            |
+| <span class="typeset-product chart-tick">Chart tick</span>                                 | `chart-tick`                 | `caption-md`, muted, tabular numerals |
+| <span class="typeset-product chart-tick-sm">Small chart tick</span>                        | `chart-tick-sm`              | `caption-sm`, muted, tabular numerals |
+| <span class="typeset-product chart-note">Chart note or source</span>                       | `chart-note`                 | `caption-sm`                          |
 
 Controls such as buttons, tabs and chips use the label role's line height. Their own padding sets their height.
 
@@ -283,10 +306,6 @@ Where the intent is emphasis within a role, change the weight. `text-strong` set
 **Mixing typesets within one region.** Reading content on an application surface is better given its own `typeset-longform` container than assembled from a mixture.
 
 **Referring to the private scale.** The raw values beneath the roles are internal to the system, including within a component. Use the role.
-
-### The Tailwind Typography plugin
-
-The system does not use the Tailwind Typography plugin. Its `prose` class and modifiers such as `prose-lg` and `prose-invert` have no effect. Size comes from the roles, and the reading width is set by `typeset-longform`.
 
 ## How it works
 

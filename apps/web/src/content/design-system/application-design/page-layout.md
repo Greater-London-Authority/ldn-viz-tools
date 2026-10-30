@@ -127,7 +127,7 @@ The space between blocks within a section comes from a [flow](/design-system/fou
 		<!-- cards -->
 	</div>
 
-	<p class="caption-sm">Source: CHAIN</p>
+	<p class="caption-sm">Source: GLA City Intelligence</p>
 </section>
 ```
 

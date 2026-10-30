@@ -34,14 +34,14 @@ Use `Card` from `@ldn-viz/ui`. The content goes in its children, and the title g
 <Card
 	title="Rough sleeping"
 	subtitle="People seen sleeping rough, by quarter"
-	source="CHAIN"
+	source="GLA City Intelligence"
 	hint="Counts include people seen more than once."
 >
 	<div class="h-40"><PlaceholderImage /></div>
 </Card>
 ```
 
-<Card title="Rough sleeping" subtitle="People seen sleeping rough, by quarter" source="CHAIN" hint="Counts include people seen more than once."><div class="h-40"><PlaceholderImage /></div></Card>
+<Card title="Rough sleeping" subtitle="People seen sleeping rough, by quarter" source="GLA City Intelligence" hint="Counts include people seen more than once."><div class="h-40"><PlaceholderImage /></div></Card>
 
 [Storybook](https://greater-london-authority.github.io/ldn-viz-tools/?path=/docs/ui-components-card--documentation) lists the props.
 
@@ -57,7 +57,7 @@ Build a card from the system's classes and custom properties. The role classes s
 		<p class="subtitle-sm">People seen sleeping rough, by quarter</p>
 	</div>
 	<div>…</div>
-	<p class="caption-sm">Source: CHAIN</p>
+	<p class="caption-sm">Source: GLA City Intelligence</p>
 </div>
 ```
 
@@ -148,7 +148,12 @@ A card with only text has no other title group, so its group can have an eyebrow
 - **`TitleGroup`** renders the eyebrow, title and subtitle, or only an eyebrow when the group isn't dominant.
 
 ```svelte
-<Card title="Rough sleeping" byline="GLA City Intelligence" source="CHAIN" note="Provisional">
+<Card
+	title="Rough sleeping"
+	byline="GLA City Intelligence"
+	source="GLA City Intelligence"
+	note="Provisional"
+>
 	…
 	{#snippet actions()}
 		<Button variant="outline" emphasis="secondary" size="sm">Download CSV</Button>
@@ -157,7 +162,7 @@ A card with only text has no other title group, so its group can have an eyebrow
 ```
 
 <div class="p-4 my-4 bg-color-canvas-muted">
-	<Card title="Rough sleeping" byline="GLA City Intelligence" source="CHAIN" note="Provisional">
+	<Card title="Rough sleeping" byline="GLA City Intelligence" source="GLA City Intelligence" note="Provisional">
 		<div class="h-32"><PlaceholderImage /></div>
 		{#snippet actions()}<Button variant="outline" emphasis="secondary" size="sm">Download CSV</Button>{/snippet}
 	</Card>

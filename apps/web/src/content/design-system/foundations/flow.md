@@ -244,7 +244,7 @@ Written by hand, it might look like this:
 	<div class="grid grid-cols-3 gap-4">
 		<!-- cards -->
 	</div>
-	<p class="caption-sm mt-2">Source: CHAIN</p>
+	<p class="caption-sm mt-2">Source: GLA City Intelligence</p>
 </div>
 ```
 
@@ -263,7 +263,7 @@ Using the system:
 		<!-- cards -->
 	</div>
 
-	<p class="caption-sm">Source: CHAIN</p>
+	<p class="caption-sm">Source: GLA City Intelligence</p>
 </section>
 ```
 
@@ -276,7 +276,7 @@ Using the system:
 			<div class="h-20 border border-color-border-wash bg-color-surface"></div>
 			<div class="h-20 border border-color-border-wash bg-color-surface"></div>
 		</div>
-		<p class="caption-sm">Source: CHAIN</p>
+		<p class="caption-sm">Source: GLA City Intelligence</p>
 	</section>
 </div>
 
