@@ -44,7 +44,8 @@
 	const modes = ['light', 'dark'].map((mode) => ({
 		mode,
 		canvas: tokens.mode[mode].canvas.default.value,
-		text: tokens.mode[mode].text.default.value
+		text: tokens.mode[mode].text.default.value,
+		border: tokens.mode[mode].border.wash.value
 	}));
 
 	const colourRows = (concept: string) => {
@@ -94,8 +95,9 @@
 							<td style:background={modes[i].canvas} style:color={modes[i].text}>
 								<span class="inline-flex items-center gap-2">
 									<span
-										class="inline-block h-4 w-4 shrink-0 border border-color-border-wash"
+										class="inline-block h-4 w-4 shrink-0 border"
 										style:background={value}
+										style:border-color={modes[i].border}
 									></span>
 									<code style:background="none" style:color="inherit">{value}</code>
 								</span>

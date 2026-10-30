@@ -1,6 +1,6 @@
 ---
 title: Foundations
-description: Foundational principles
+description: Type, colour, spacing and other essentials.
 navLabel: Foundations
 order: 2
 heroImage: header-foundations-overflow.svg
@@ -11,7 +11,7 @@ thumbnail: cta-foundations.svg
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="subtitle-lg">The data visualisation and information design projects undertaken by the City Intelligence unit are diverse in range and scope. From simple charts and static presentations to complex, interactive web applications.</p>
+<p class="subtitle-lg">This section covers the rules every product built with the system follows, from a single chart to a full application.</p>
 
 <div class="not-typeset grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
 

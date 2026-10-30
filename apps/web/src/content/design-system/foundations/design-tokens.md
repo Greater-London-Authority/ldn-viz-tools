@@ -10,7 +10,8 @@ order: 1
 <script>
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 	import TokenReference from '$lib/components/tokenReference/TokenReference.svelte';
-	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+	import TokenDiagram from '$lib/components/tokenReference/TokenDiagram.svelte';
+	import TokenConcept from '$lib/components/tokenReference/TokenConcept.svelte';
 </script>
 
 <p class="lead">Design tokens are named values for the decisions in the system: colours, type, spacing, flow, the layout grid, shadows and elevation.</p>
@@ -22,16 +23,7 @@ The tokens are defined in Figma and published in the `@ldn-viz/themes` package. 
 <UsageTabs>
 {#snippet full()}
 
-The components use the tokens already. In your own markup, the system's classes set type and flow. A role class such as `body-md` or `title-md` sets the font family, size, weight, line height and letter spacing of the text. A flow context such as `flow-standard` sets the space between the blocks inside it. [Typography](/design-system/foundations/typography) and [Flow](/design-system/foundations/flow) describe them.
-
-```html
-<section class="flow-standard">
-	<h2 class="title-md">Housing completions</h2>
-	<p class="body-md">…</p>
-</section>
-```
-
-For other values, use the custom properties:
+The components use the tokens already. In your own markup, each token is a CSS custom property:
 
 ```css
 .summary {
@@ -48,6 +40,15 @@ To use a colour in JavaScript, for example to pass it to a chart library, use `t
 import { theme } from '@ldn-viz/ui';
 
 const seriesColour = theme.tokenNameToValue('data.primary');
+```
+
+Use a class for typography and flow tokens. A type role, such as `title-md`, is set by five tokens: font family, size, weight, line height and letter spacing. Each of those tokens has a value for each typeset and breakpoint. The class sets the text to the values for the typeset and breakpoint it's in, so use the class rather than the tokens. A flow token, such as `--flow-section`, takes its value from the nearest flow context class, such as `flow-standard`. See [Typography](/design-system/foundations/typography) and [Flow](/design-system/foundations/flow) for more detail.
+
+```html
+<section class="flow-standard">
+	<h2 class="title-md">Housing completions</h2>
+	<p class="body-md">…</p>
+</section>
 ```
 
 {/snippet}
@@ -84,13 +85,12 @@ To use the values in code, take them from the theme package:
 
 ### Primitive and semantic tokens
 
-Tokens are in two tiers. A primitive token is a raw value, named by its value or its step on a scale, such as the grey at step 900 of the palette. A semantic token says what a value is for, such as `--color-text`.
+Tokens are in two tiers. A primitive token is named by its value or its step on a scale, such as a light mode or dark mode blue at step 700.
+A semantic is an alias to a primitive token and says what a value is for, such as `--color-surface-accent`.
 
-<figure class="width-content-wide">
-	<EnhancedImage src="/design-tokens/tiers.svg" alt="A semantic token, color-surface-accent, points to color-palette-blue-700, which points to a primitive for each mode: #0067B4 in light mode and #4C9FEA in dark mode" />
-</figure>
+<TokenDiagram diagram="tiers" />
 
-Use semantic tokens only. The components do. Primitive custom properties start with `--primitive-`, so a use of one is easy to spot.
+Use semantic tokens only. In the example above the semantic token `--color-palette-blue-700` aliases a different primitive depending on the user preference for light or dark mode. This lets us adjust colours to be accessible in different [modes](/design-system/application-design/modes). Primitive custom properties start with `--primitive-`, so a use of one is easy to spot.
 
 ### Reading a token name
 
@@ -118,23 +118,21 @@ Typography tokens have a breakpoint and a size in the same name. In `--typograph
 
 ### Concepts
 
-An interface is a stack. The canvas is at the base, and surfaces sit above it at elevation steps 1 to 6, each shown by a shadow. A surface is coloured `surface`, or `surface-muted` to set it apart from what is around it. There are no colour tokens for elevation levels. Text, labels, borders and interactive elements sit on a surface.
+An interface is a stack. The canvas is at the base, and surfaces sit above it at elevation steps 1 to 6. A surface is coloured `surface`, or `surface-muted` to set it apart from what is around it. Text, labels, borders and interactive elements sit on a surface.
 
 <figure class="width-content-wide">
-	<EnhancedImage src="/design-tokens/concept.svg" alt="An interface drawn as layers: the canvas at elevation 0, surfaces at elevations 1 to 6, then text, labels and borders, with interactive elements at the top" />
+	<TokenConcept />
 </figure>
 
 ### Inverse
 
 The inverse variant is for content on an inverse background. The inverse surface is dark in light mode and light in dark mode. Use inverse tokens together, such as `--color-inverse-text` on `--color-inverse-surface`.
 
-<figure class="width-content-wide">
-	<EnhancedImage src="/design-tokens/inverse-variant.svg" alt="color-text, color-inverse-surface and color-inverse-text in light mode and dark mode. The inverse surface and inverse text swap between dark and light" />
-</figure>
+<TokenDiagram diagram="inverse" />
 
 ### Usage aliases
 
-A usage alias is a class named for the place it's used, such as `card-title` or `chart-tick`. Each one applies a type role. Aliases are classes, not tokens, so their names can include a component, as in `card-title`. [Typography](/design-system/foundations/typography) lists them.
+We provide a set of usage aliases for users who aren't fully engaged with the system and just want to know "what's the right class for a card title". A usage alias is a class named for the place it's used, such as `card-title` or `chart-tick`. These classes are an extra layer of semantic sugar. Each one applies a type role for a specific component, as in `card-title`. [Typography](/design-system/foundations/typography) lists them.
 
 ## Reference
 
@@ -143,6 +141,14 @@ These tables list every published semantic token, with its value.
 ### Colour
 
 The colour tokens are grouped by concept. Each has a value for light mode and dark mode. [Colour](/design-system/foundations/colour) explains how to choose one.
+
+#### Palette
+
+The palette provides the lowest level semantic tokens. Many of the other semantic tokens are aliases of values within the palette. Each color has values at `100` - `1100`
+
+Quantitative colour scales can be based on the palette colors. see [Data visualisation](design-system/data-visualisation/quantitative-colour).
+
+<TokenReference group="color-palette" />
 
 #### Canvas
 
@@ -187,12 +193,6 @@ The colour tokens are grouped by concept. Each has a value for light mode and da
 #### Geo
 
 <TokenReference group="color-geo" />
-
-#### Palette
-
-The palette is for quantitative colour scales only.
-
-<TokenReference group="color-palette" />
 
 ### Typography
 
