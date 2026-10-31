@@ -28,16 +28,16 @@ order: 2
         ]
 </script>
 
-<p class="lead">Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed. When combined with our spacing rules our typographic system ensures our designs and interfaces are balanced and harmonious.</p>
-
-Each piece of text has a role, such as title, body or label, chosen for what the text does. The role sets its font, size, weight, line height and letter spacing.
+<p class="lead">Typography defines tone and ensures information is clear, legible, and consistent. Together with our spacing guidelines, it creates a balanced, accessible, and reliable user experience.</p>
 
 ## Use
 
 <UsageTabs>
 {#snippet full()}
 
-The components set their own type. The title components, such as `TitleGroup`, `DashboardTitle` and `PageTitle`, give each part of a title group its role:
+The components already have the typography system applied.
+
+For example if you use the title components like `TitleGroup`, `DashboardTitle` and `PageTitle` they handle setting the type on a title group for you.
 
 ```svelte
 <script>
@@ -56,50 +56,65 @@ The components set their own type. The title components, such as `TitleGroup`, `
 	<TitleGroup eyebrow="Air quality" title="Nitrogen dioxide" subtitle="Rolling 24-hour mean" headingLevel={3} />
 </div>
 
-In your own markup, set a typeset on a container and give text a role class.
-
-If your app uses Tailwind, as the component library does, the preset removes Tailwind's font sizes, weights and line heights.
+Where you can't use a component and in your own markup you need to set your own type. The rest of this page explains how.
 
 {/snippet}
 {#snippet adapting()}
 
-The typesets and role classes are plain CSS. Import `@ldn-viz/themes/index.css`, or `tokens.css` and `system.css` if your app has its own reset.
+Ensure you are loading the font [Inter](https://fonts.google.com/specimen/Inter)
 
-A role class reads custom properties named for the role, such as `--title-sm-font-size`. Each typeset sets them for the current breakpoint, so a rule of your own can use them:
+Import the tokens, the system's classes and a reset:
+
+```css
+@import '@ldn-viz/themes/index.css';
+```
+
+If your app has its own reset, import `tokens.css` and `system.css` instead.
+
+```css
+@import '@ldn-viz/themes/tokens.css';
+@import '@ldn-viz/themes/system.css';
+```
+
+The system provides CSS custom properties by role.
+
+```css
+/* --{role}-font-size */
+--headline-sm-font-size
+```
+
+The typeset sets the value of the custom property across breakpoints so you can create a single class that will follow the type system across different screen widths.
 
 ```css
 .panel-heading {
-	font-family: var(--title-sm-font-family);
-	font-size: var(--title-sm-font-size);
-	font-weight: var(--title-sm-font-weight);
-	line-height: var(--title-sm-line-height);
-	letter-spacing: var(--title-sm-letter-spacing);
+	font-family: var(--headline-sm-font-family);
+	font-size: var(--headline-sm-font-size);
+	font-weight: var(--headline-sm-font-weight);
+	line-height: var(--headline-sm-line-height);
+	letter-spacing: var(--headline-sm-letter-spacing);
 }
 ```
-
-With `tokens.css` alone, use the typography tokens. Each names a breakpoint and a typeset, such as `--typography-base-product-title-sm-font-size`, so set the values for larger breakpoints in media queries.
 
 {/snippet}
 {#snippet anywhere()}
 
 Set text in Inter, which is available from [Google Fonts](https://fonts.google.com/specimen/Inter).
 
-Choose the typeset for the kind of work: longform for reading, and product for interfaces, tables, charts and maps. Then take each role's size, weight, line height and letter spacing from the [reference](#reference). Roles that change size have a value for each breakpoint.
+Choose the right typeset for the context: <b>longform</b> for reading, and <b>product</b> for interfaces, tables, charts and maps. Then take each role's size, weight, line height and letter spacing from the [reference](#reference). Roles that change size have a value for each breakpoint.
 
 {/snippet}
+
 </UsageTabs>
 
-The classes below need only `@ldn-viz/themes/index.css`. The colour and spacing utilities in the examples, such as `text-color-text-muted` and `p-4`, come from the Tailwind preset.
+<p class="body-sm text-color-text-muted"><span class="text-strong">note:</span> Some of the examples below use Tailwind utilities for color and padding. You don't need Tailwind to use the system.</p>
 
 ### Choose a typeset
 
-A typeset sets the values of every role. Set it once, on a wrapper or the app root. Where typesets are nested, the inner one applies.
+Set the right typeset for the page or component you are building. There are two typesets: <b>longform</b> for reading, and <b>product</b> for interfaces, tables, charts and maps.
 
-| Class                        | For                                           | Styles plain HTML | Flow context |
-| ---------------------------- | --------------------------------------------- | ----------------- | ------------ |
-| `typeset-longform`           | Articles, reports and documentation           | Yes               | Spacious     |
-| `typeset-product`            | Interfaces, tables, charts and maps           | No                | None         |
-| `typeset-product--formatted` | Markdown or CMS content inside an application | Yes               | Standard     |
+The typeset dictates the size and spacing behaviour of its children.
+
+Set by adding a class to a containing element. Where typesets are nested the inner one applies.
 
 ```html
 <article class="typeset-longform">
@@ -110,39 +125,45 @@ A typeset sets the values of every role. Set it once, on a wrapper or the app ro
 </article>
 ```
 
-Product is the default, so a role class outside any typeset takes its product values.
-
-`typeset-product` sets type only, so add a [flow context](/design-system/foundations/flow) for the space between blocks:
-
-```html
-<section class="flow-standard typeset-product">…</section>
-```
+Read more detail about [how typesets work](#typesets)
 
 ### Give text a role
 
-In `typeset-product`, give each piece of text a role class. The class is the role and a size, such as `title-lg` or `body-md`. A heading without a class is not styled.
-
-```html
-<div class="typeset-product">
-	<h2>No role applied</h2>
-	<h2 class="title-lg">Section title</h2>
-	<p class="body-md">Body copy.</p>
-	<span class="label-md">Control label</span>
-</div>
-```
-
-<div class="typeset-product border border-color-border-wash p-4 my-4">
-	<h2>No role applied</h2>
-	<h2 class="title-lg">Section title</h2>
-	<p class="body-md">Body copy.</p>
-	<span class="label-md">Control label</span>
-</div>
+The system describes type by <b>role</b>. A role names the <b>job</b> a piece of text does; an article <b>headline</b>, an input <b>label</b>, the <b>title</b> of a chart, and dictates every property that job requires: font family, size, weight, line height and letter spacing.
 
 Each role's job, sizes and weight are listed under [Roles](#roles).
 
+Roles are applied by giving the element a class that corresponds to the role.
+
+```html
+<h3 class="title-lg">The large title role</h3>
+```
+
+The closest typeset context then applies values to the roles properties: font family, size, weight, line height and letter spacing.
+
+```html
+<article class="typeset-longform">
+	<p class="body-md">The medium body title role. Properties set by the longform typeset</p>
+</article>
+
+<article class="typeset-product">
+	<p class="body-md">The medium body title role. Properties set by the product typeset</p>
+</article>
+```
+
+<div class="width-content-wide not-typeset grid gap-4 bg-color-canvas-muted p-4 my-4 md:grid-cols-2">
+	<div class="typeset-longform bg-color-surface p-4 ">
+		<p class="body-md">The medium body title role. Properties set by the longform typeset</p>
+	</div>
+	<div class="typeset-product bg-color-surface p-4 ">
+		<p class="body-md">The medium body title role. Properties set by the product typeset</p>
+	</div>
+	<p class="caption-sm col-span-full text-color-text-muted">The product typeset applies a tighter line height on this role</p>
+</div>
+
 ### Formatted content
 
-Rendered Markdown and CMS output can't have classes. Inside `typeset-longform` and `typeset-product--formatted`, plain HTML is styled without them.
+In some situations like rendering Markdown or content from a CMS, it might not be possible to add classes to every element on the page. Inside `typeset-longform` and `typeset-product--formatted` plain html is styled without the need for direct role classes. A class on the element replaces its default style.
 
 ```html
 <div class="typeset-product--formatted">
@@ -152,19 +173,328 @@ Rendered Markdown and CMS output can't have classes. Inside `typeset-longform` a
 		<li>Source: GLA City Intelligence</li>
 		<li>Updated quarterly</li>
 	</ul>
+	<p class="body-sm">Style over-ride</p>
 </div>
 ```
 
-<div class="typeset-product--formatted bg-color-surface p-4 my-4">
-	<h3>About this data</h3>
-	<p>Counts are provisional until the annual release.</p>
-	<ul>
-		<li>Source: GLA City Intelligence</li>
-		<li>Updated quarterly</li>
-	</ul>
+<div class="width-content-wide bg-color-canvas-muted p-4 my-4">
+	<div class="typeset-product-formatted bg-color-surface p-4">
+		<h3>About this data</h3>
+		<p>Counts are provisional until the annual release.</p>
+		<ul>
+			<li>Source: GLA City Intelligence</li>
+			<li>Updated quarterly</li>
+		</ul>
+		<p class="body-sm">Style over-ride</p>
+	</div>
 </div>
 
-Headings, the lead paragraph and captions take these roles:
+See the [reference](#reference) for the styling that is applied per element.
+
+#### Content width
+
+In a formatted typeset, running text is limited to 38 times the body size, which is 608px at a 16px body size. Figures, images, videos, tables, code blocks and charts can be up to 56 times the body size (896px). To set a block's width directly, use `width-content`, `width-content-wide` or `width-content-full`.
+
+<div class="width-content-full bg-color-canvas-muted p-4 my-4 flex-col space-y-4 body-sm">
+
+<div class="width-content-full bg-color-surface-accent-muted p-4">width-content-full</div>
+<div class="width-content-wide bg-color-surface-accent-muted p-4">width-content-wide</div>
+<div class="width-content bg-color-surface-accent-muted p-4">width-content</div>
+
+</div>
+
+#### Escaping the style
+
+To turn the styling off, for example around an embedded component that has its own styles, add `not-typeset` to a block or to a single element. The styling also stops at a typeset nested inside.
+
+```html
+<div class="typeset-longform">
+	<h3>Title</h3>
+	<div class="not-typeset">
+		<h3>I have escaped</h3>
+	</div>
+	<h3 class="not-typeset">So have I</h3>
+</div>
+```
+
+<div class="width-content-wide bg-color-canvas-muted p-4 my-4">
+<div class="typeset-product-formatted bg-color-surface p-4">
+	<h3>Title</h3>
+	<div class="not-typeset">
+		<h3>I have escaped</h3>
+	</div>
+	<h3 class="not-typeset">So have I</h3>
+	</div>
+</div>
+
+### Usage aliases
+
+The system provides a set of pre-defined usage alias classes. These are classes that are named for where they are applied.
+
+Aliases are named `{place}-{part}`, for example `.card-title`, `.chart-tick` and `.dashboard-section-title`.
+
+```html
+<h3 class="chart-title">A chart title</h3>
+<p class="chart-subtitle">and its subtitle</p>
+```
+
+<div class="width-content-wide bg-color-canvas-muted p-4 my-4">
+<div class="typeset-product-formatted bg-color-surface p-4">
+<h3 class="chart-title">A chart title</h3>
+<p class="chart-subtitle">and its subtitle</p>
+</div>
+</div>
+
+These are a convenience. Each alias applies a role, and some also add the muted text colour or tabular numerals. Use a role class where you can, because the roles are the system's stable API.
+
+Check the [reference](#reference) section for the full set of classes.
+
+### Title groups
+
+A title group is the text at the top of a card, chart, table or panel. It has up to three parts, in this order: an optional eyebrow, a title and an optional subtitle. Write the parts as sibling elements, each with its role:
+
+```html
+<section class="typeset-product flow-standard">
+	<p class="eyebrow">Air quality</p>
+	<h2 class="title-md">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
+</section>
+```
+
+<div class="width-content-wide bg-color-canvas-muted p-4 my-4">
+<div class="typeset-product flow-standard bg-color-surface p-4 my-4">
+	<p class="eyebrow">Air quality</p>
+	<h2 class="title-md">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
+</div>
+</div>
+
+`Card`, `ChartContainer` and `TitleGroup` components set this with their `emphasis` prop. [Surfaces and chrome](/design-system/application-design/surfaces-and-chrome) has more examples.
+
+### Colour and emphasis
+
+Set text colour with a semantic token:
+
+```html
+<p class="body-md text-color-text">Primary text</p>
+<p class="body-sm text-color-text-muted">Secondary text</p>
+<span class="label-md text-color-label">Control label</span>
+```
+
+<div class="width-content-wide bg-color-canvas-muted p-4 my-4">
+<div class="typeset-product flow-standard bg-color-surface p-4 my-4">
+<p class="body-md text-color-text">Primary text</p>
+<p class="body-sm text-color-text-muted">Secondary text</p>
+<span class="label-md text-color-label">Control label</span>
+</div>
+</div>
+
+The text tokens are `--color-text`, `--color-text-muted` and `--color-text-wash`, from most to least emphasis. The label tokens are `--color-label` and `--color-label-muted`. Text or an icon on a filled control uses an inverse token, such as `--color-inverse-text`, so that it contrasts with the fill in light and dark mode.
+
+Subhead, subtitle, eyebrow and the lead paragraph are muted by the system.
+
+See [the foundation section on colour](/design-system/foundations/colour) for more.
+
+To emphasise text within a role, add `text-strong`, which sets semibold. `text-soft` sets regular.
+
+```html
+<p class="body-md">Readings are <span class="text-strong">provisional</span>.</p>
+```
+
+<div class="width-content-wide bg-color-canvas-muted p-4 my-4">
+<div class="typeset-product flow-standard bg-color-surface p-4 my-4">
+<p class="body-md">Readings are <span class="text-strong">provisional</span>.</p>
+</div>
+</div>
+
+### Things to avoid
+
+- Tailwind type utilities such as `text-xl`, `font-bold` and `leading-tight`. The preset removes them. Use a role, or `text-strong` and `text-soft` for weight.
+- Setting a size per breakpoint. Each role already has a value for every breakpoint.
+- Adding a weight to a role to change its look. Use `text-strong` or `text-soft`.
+- Mixing typesets in one region. Give reading content in an application its own `typeset-product--formatted` or `typeset-longform` container.
+- Using the type scale directly, including inside a component. Use a role.
+
+## How it works
+
+### Typeface
+
+We use the sans serif font Inter. Inter is a variable font family designed for computer screens, available via Google Fonts under the Open Font License. By using webfonts in our applications we can be reasonably certain that Inter will be used under normal circumstances. All weights are included, so there is no risk of a browser synthesising a bold or a semibold from a lighter face, which produces a coarser letterform than the designed one.
+
+If Inter fails to load, text falls back through this stack:
+
+```css
+ui-sans-serif,system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto
+Color Emoji"
+```
+
+### Type scale
+
+Every size comes from a scale of 17 steps. Step 0 is 16px, the body size.
+
+| Step | Size | Sample                                                                                  |
+| ---- | ---- | --------------------------------------------------------------------------------------- |
+| 14   | 72px | <span class="whitespace-nowrap" style="font-size: 4.5rem; line-height: 1.2">Ag</span>   |
+| 13   | 64px | <span class="whitespace-nowrap" style="font-size: 4rem; line-height: 1.2">Ag</span>     |
+| 12   | 56px | <span class="whitespace-nowrap" style="font-size: 3.5rem; line-height: 1.2">Ag</span>   |
+| 11   | 48px | <span class="whitespace-nowrap" style="font-size: 3rem; line-height: 1.2">Ag</span>     |
+| 10   | 40px | <span class="whitespace-nowrap" style="font-size: 2.5rem; line-height: 1.2">Ag</span>   |
+| 9    | 36px | <span class="whitespace-nowrap" style="font-size: 2.25rem; line-height: 1.2">Ag</span>  |
+| 8    | 32px | <span class="whitespace-nowrap" style="font-size: 2rem; line-height: 1.2">Ag</span>     |
+| 7    | 30px | <span class="whitespace-nowrap" style="font-size: 1.875rem; line-height: 1.2">Ag</span> |
+| 6    | 28px | <span class="whitespace-nowrap" style="font-size: 1.75rem; line-height: 1.2">Ag</span>  |
+| 5    | 26px | <span class="whitespace-nowrap" style="font-size: 1.625rem; line-height: 1.2">Ag</span> |
+| 4    | 24px | <span class="whitespace-nowrap" style="font-size: 1.5rem; line-height: 1.2">Ag</span>   |
+| 3    | 22px | <span class="whitespace-nowrap" style="font-size: 1.375rem; line-height: 1.2">Ag</span> |
+| 2    | 20px | <span class="whitespace-nowrap" style="font-size: 1.25rem; line-height: 1.2">Ag</span>  |
+| 1    | 18px | <span class="whitespace-nowrap" style="font-size: 1.125rem; line-height: 1.2">Ag</span> |
+| 0    | 16px | <span class="whitespace-nowrap" style="font-size: 1rem; line-height: 1.2">Ag</span>     |
+| -1   | 14px | <span class="whitespace-nowrap" style="font-size: 0.875rem; line-height: 1.2">Ag</span> |
+| -2   | 12px | <span class="whitespace-nowrap" style="font-size: 0.75rem; line-height: 1.2">Ag</span>  |
+
+Designs and code use the roles, which take their sizes from the scale.
+
+#### Generative logic
+
+The scale is built from five base sizes: 12, 14, 16, 18, (doubled twice) and 20 (doubled once)
+
+**Doubling chains:**
+
+- 12 → 24 → 48
+- 14 → 28 → 56
+- 16 → 32 → 64
+- 18 → 36 → 72
+- 20 → 40 (→ 80 if extended)
+
+22, 26 and 30 belong to no chain. They are hand-placed values, included in the lower half of the scale as intermediate sizes for responsive type. Below 32px, each step is about 1.07 to 1.17 times the one before (12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32). The close steps give fine control at interface sizes, where a small difference in size is easier to see than it is at display sizes.
+
+**Extending the scale:**
+
+- Above step 14 (72px): extend the doubling chain — 40 → 80, 48 → 96, 56 → 112 etc.
+- Below step -2 (12px): continue the dense-region ratio, giving the next step ≈ 11px.
+
+### Typesets
+
+The system has two typesets: longform for reading, and product for interfaces, tables, charts and maps. Both use the same [roles](#roles). A typeset gives a role its font, weight, line height, letter-spacing or size. Longform is airier, which suits long passages of text, and product is tighter, which suits dashboards.
+
+| Class                        | For                                                 | Flow context    | Content styles and widths |
+| ---------------------------- | --------------------------------------------------- | --------------- | ------------------------- |
+| `typeset-longform`           | Articles, reports and documentation                 | `flow-spacious` | Yes                       |
+| `typeset-product`            | Interfaces, tables, charts and maps                 | None            | No                        |
+| `typeset-product--formatted` | Content from a CMS or Markdown in a product setting | `flow-standard` | Yes                       |
+
+`typeset-longform` and `typeset-product--formatted` set the vertical spacing through [flow](/design-system/foundations/flow).
+`typeset-product` sets type only, and can be combined with a flow class as required.
+
+The typeset is chosen once, on a wrapper or app root:
+
+```html
+<div class="typeset-longform"></div>
+```
+
+where contexts are nested the inner context takes precedence:
+
+```html
+<article class="typeset-longform">
+	<p class="body-md">I am set by the longform typeset</p>
+	<div class="typeset-product">
+		<p class="body-md">I am set by the product typeset</p>
+	</div>
+</article>
+```
+
+Product is the default typeset. Its role values are also set on `:root`, so a role class outside any typeset still works.
+
+### Roles
+
+A role names the job a piece of text does, such as the label on an input or the title of a card. If card titles need to be a step larger, the change is made to the role and every card title changes with it.
+
+There are ten roles:
+
+<div class="typeset-product width-content-wide">
+    <TypographyTable items={roles} />
+</div>
+
+Each role comes in three sizes, `sm`, `md` and `lg`, except eyebrow, which has one. No title is smaller than 18px, so a heading in a small container, such as a popover or a sidebar section, can use `label-lg`.
+
+Labels and eyebrows are medium (500), titles are semibold (600), and display, headlines and metrics are bold (700). Other roles are regular (400). Metrics use tabular numerals.
+
+### Font weight
+
+The system has five font weights.
+
+| Weight   | Numeral |
+| -------- | ------- |
+| Light    | 300     |
+| Regular  | 400     |
+| Medium   | 500     |
+| Semibold | 600     |
+| Bold     | 700     |
+
+#### Identity weight vs emphasis weight
+
+- **Identity weight** is attached to [role](#roles) within a [typeset](#typesets)
+- **Emphasis weight** is a separate modifier that can be applied as an over-ride to give emphasis.
+
+#### Per-role identity weights
+
+Both typesets give each role the same weight.
+
+| Role     | Weight         |
+| -------- | -------------- |
+| Display  | Bold (700)     |
+| Headline | Bold (700)     |
+| Subhead  | Regular (400)  |
+| Title    | Semibold (600) |
+| Subtitle | Regular (400)  |
+| Body     | Regular (400)  |
+| Label    | Medium (500)   |
+| Metric   | Bold (700)     |
+| Caption  | Regular (400)  |
+| Eyebrow  | Medium (500)   |
+
+### Line height
+
+Line height is defined in three steps based on a simple formula: `font-size + k`, where font-size and k are measured in px.
+
+| tight           | default         | loose            |
+| --------------- | --------------- | ---------------- |
+| font-size + 4px | font-size + 8px | font-size + 12px |
+
+Line height comes from the role. There are no line-height utilities.
+
+### Responsive sizing
+
+Some roles grow as the screen widens. The breakpoints are `sm` (640px), `md` (768px), `lg` (1024px) and `xl` (1280px). Type at wider screens stays at the `xl` size.
+
+These roles change size, in pixels:
+
+| Role          | Typeset  | base | `sm` | `md` | `lg` | `xl` |
+| ------------- | -------- | ---- | ---- | ---- | ---- | ---- |
+| `display-lg`  | Both     | 40   | 48   | 56   | 64   | 72   |
+| `display-md`  | Both     | 36   | 40   | 48   | 56   | 64   |
+| `display-sm`  | Both     | 32   | 36   | 40   | 48   | 56   |
+| `headline-lg` | Both     | 30   | 32   | 36   | 36   | 40   |
+| `headline-md` | Longform | 28   | 28   | 30   | 32   | 36   |
+| `headline-md` | Product  | 28   | 28   | 30   | 30   | 30   |
+| `headline-sm` | Longform | 26   | 26   | 28   | 30   | 32   |
+| `subhead-lg`  | Longform | 24   | 24   | 24   | 26   | 26   |
+| `subhead-md`  | Longform | 22   | 22   | 22   | 24   | 24   |
+| `body-lg`     | Longform | 18   | 18   | 20   | 20   | 20   |
+| `metric-lg`   | Both     | 28   | 30   | 32   | 32   | 36   |
+
+Every other role has one size at every breakpoint.
+
+## Reference
+
+Choose a typeset and a breakpoint to see the values for each role.
+
+<TokenReference group="typography" />
+
+### Formatted content
+
+In a `typeset-longform` or `typeset-product--formatted`: Headings, the lead paragraph and captions take these roles:
 
 | Element                                                          | Role                |
 | ---------------------------------------------------------------- | ------------------- |
@@ -199,33 +529,9 @@ Other elements keep the role of the text around them, with these changes:
 | `table`                                              | Full width. Caption muted and above, header cells semibold, figures in tabular numerals, rules between rows |
 | `hr`                                                 | Wash border colour                                                                                          |
 
-A class on the element replaces its default style.
-
-In a formatted typeset, running text is limited to 38 times the body size, which is 608px at a 16px body size. Figures, images, videos, tables, code blocks and charts can be up to 56 times the body size (896px). To set a block's width directly, use `width-content`, `width-content-wide` or `width-content-full`.
-
-To turn the styling off, for example around an embedded component that has its own styles, add `not-typeset` to a block or to a single element. The styling also stops at a typeset nested inside.
-
-```html
-<div class="typeset-longform">
-	<h3>Title</h3>
-	<div class="not-typeset">
-		<h3>I have escaped</h3>
-	</div>
-	<h3 class="not-typeset">So have I</h3>
-</div>
-```
-
-<div class="border border-color-border-wash p-4 my-4">
-	<h3>Title</h3>
-	<div class="not-typeset">
-		<h3>I have escaped</h3>
-	</div>
-	<h3 class="not-typeset">So have I</h3>
-</div>
-
 ### Usage aliases
 
-A usage alias is a class named for the place it is used, such as `card-title` or `chart-tick`. Each alias applies a role, and some also add the muted text colour or tabular numerals. Use a role class where you can, because the roles are the system's stable API.
+A usage alias is a class named for the place it is used, such as `card-title` or `chart-tick`. Each alias applies a role, and some also add the muted text colour or tabular numerals.
 
 #### Charts
 
@@ -271,172 +577,6 @@ A usage alias is a class named for the place it is used, such as `card-title` or
 | <span class="typeset-product button-label">Button label</span>                   | `button-label`               | `label-md`    | –            |
 | <span class="typeset-product button-label-sm">Button label</span>                | `button-label-sm`            | `label-sm`    | –            |
 
-Controls such as buttons, tabs and chips use the label role's line height. Their own padding sets their height.
-
-### Title groups
-
-A title group is the text at the top of a card, chart, table or panel. It has up to three parts, in this order: an optional eyebrow, a title and an optional subtitle. Write the parts as sibling elements, each with its role:
-
-```html
-<section class="flow-standard typeset-product">
-	<p class="eyebrow">Air quality</p>
-	<h2 class="title-md">Nitrogen dioxide</h2>
-	<p class="subtitle-sm">Rolling 24-hour mean</p>
-</section>
-```
-
-<div class="typeset-product flow-standard bg-color-surface p-4 my-4">
-	<p class="eyebrow">Air quality</p>
-	<h2 class="title-md">Nitrogen dioxide</h2>
-	<p class="subtitle-sm">Rolling 24-hour mean</p>
-</div>
-
-In a flow context, the title sits 4px below the eyebrow and the subtitle sits directly under the title. The flow rules match the parts by their role classes, so a muted paragraph styled to look like a subtitle takes the default space instead.
-
-A card can hold a titled chart, which gives it two title groups. When it does, one group is dominant and has a title and an optional subtitle. Each other group is demoted to an eyebrow, using the text that would have been its title.
-
-The designer chooses which group is dominant. When a card holds one chart that is its main subject, make the chart's group dominant. The card's title becomes an eyebrow above the chart's title. A small card with a single figure has its label as an eyebrow above the metric.
-
-```svelte
-<Card title="Housing" emphasis="secondary">
-	<ChartContainer title="Net additional dwellings" subtitle="London, 2015 to 2024">…</ChartContainer
-	>
-</Card>
-
-<Card title="People seen sleeping rough" emphasis="secondary">
-	<p class="metric-lg">1,284</p>
-</Card>
-```
-
-<div class="width-content-wide not-typeset grid gap-4 bg-color-canvas-muted p-4 my-4 md:grid-cols-2">
-	<Card title="Housing" emphasis="secondary"><ChartContainer id="tg-chart" title="Net additional dwellings" subtitle="London, 2015 to 2024" chartHeight="h-32" dataDownloadButton={false} imageDownloadButton={false}><PlaceholderImage /></ChartContainer></Card>
-	<Card title="People seen sleeping rough" emphasis="secondary"><p class="metric-lg">1,284</p></Card>
-</div>
-
-`Card`, `ChartContainer` and `TitleGroup` set this with their `emphasis` prop. [Surfaces and chrome](/design-system/application-design/surfaces-and-chrome) has more examples.
-
-### Colour and emphasis
-
-Set text colour with a semantic token:
-
-```html
-<p class="body-md text-color-text">Primary text</p>
-<p class="body-sm text-color-text-muted">Secondary text</p>
-<span class="label-md text-color-label">Control label</span>
-```
-
-The text tokens are `text`, `text-muted` and `text-wash`, from most to least emphasis. The label tokens are `label` and `label-muted`. Text or an icon on a filled control uses an inverse token, such as `--color-inverse-text`, so that it contrasts with the fill in light and dark mode.
-
-Subhead, subtitle, eyebrow and the lead paragraph are muted already.
-
-To emphasise text within a role, add `text-strong`, which sets semibold. `text-soft` sets regular.
-
-```html
-<p class="body-md">Readings are <span class="text-strong">provisional</span>.</p>
-```
-
-### Things to avoid
-
-- Tailwind type utilities such as `text-xl`, `font-bold` and `leading-tight`. The preset removes them. Use a role, or `text-strong` and `text-soft` for weight.
-- Setting a size per breakpoint. Each role already has a value for every breakpoint.
-- Adding a weight to a role to change its look. Use `text-strong` or `text-soft`.
-- Mixing typesets in one region. Give reading content in an application its own `typeset-product--formatted` or `typeset-longform` container.
-- Using the type scale directly, including inside a component. Use a role.
-
-## How it works
-
-### Typeface
-
-Text is set in Inter, a variable font designed for screens and available from Google Fonts under the Open Font License. Code is set in Source Code Pro.
-
-If Inter fails to load, text falls back through this stack:
-
-```css
-Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-"Segoe UI Symbol", "Noto Color Emoji"
-```
-
-### Type scale
-
-Every size comes from a scale of 17 steps. Step 0 is 16px, the body size. Up to 32px the steps are 2px apart. Above 32px they are 4px apart up to 40px, then 8px apart up to 72px.
-
-| Step | Size | Sample                                                                                  |
-| ---- | ---- | --------------------------------------------------------------------------------------- |
-| 14   | 72px | <span class="whitespace-nowrap" style="font-size: 4.5rem; line-height: 1.2">Ag</span>   |
-| 13   | 64px | <span class="whitespace-nowrap" style="font-size: 4rem; line-height: 1.2">Ag</span>     |
-| 12   | 56px | <span class="whitespace-nowrap" style="font-size: 3.5rem; line-height: 1.2">Ag</span>   |
-| 11   | 48px | <span class="whitespace-nowrap" style="font-size: 3rem; line-height: 1.2">Ag</span>     |
-| 10   | 40px | <span class="whitespace-nowrap" style="font-size: 2.5rem; line-height: 1.2">Ag</span>   |
-| 9    | 36px | <span class="whitespace-nowrap" style="font-size: 2.25rem; line-height: 1.2">Ag</span>  |
-| 8    | 32px | <span class="whitespace-nowrap" style="font-size: 2rem; line-height: 1.2">Ag</span>     |
-| 7    | 30px | <span class="whitespace-nowrap" style="font-size: 1.875rem; line-height: 1.2">Ag</span> |
-| 6    | 28px | <span class="whitespace-nowrap" style="font-size: 1.75rem; line-height: 1.2">Ag</span>  |
-| 5    | 26px | <span class="whitespace-nowrap" style="font-size: 1.625rem; line-height: 1.2">Ag</span> |
-| 4    | 24px | <span class="whitespace-nowrap" style="font-size: 1.5rem; line-height: 1.2">Ag</span>   |
-| 3    | 22px | <span class="whitespace-nowrap" style="font-size: 1.375rem; line-height: 1.2">Ag</span> |
-| 2    | 20px | <span class="whitespace-nowrap" style="font-size: 1.25rem; line-height: 1.2">Ag</span>  |
-| 1    | 18px | <span class="whitespace-nowrap" style="font-size: 1.125rem; line-height: 1.2">Ag</span> |
-| 0    | 16px | <span class="whitespace-nowrap" style="font-size: 1rem; line-height: 1.2">Ag</span>     |
-| -1   | 14px | <span class="whitespace-nowrap" style="font-size: 0.875rem; line-height: 1.2">Ag</span> |
-| -2   | 12px | <span class="whitespace-nowrap" style="font-size: 0.75rem; line-height: 1.2">Ag</span>  |
-
-Designs and code use the roles, which take their sizes from the scale.
-
-### Roles
-
-A role names the job a piece of text does, such as the label on an input or the title of a card. If card titles need to be a step larger, the change is made to the role and every card title changes with it.
-
-There are ten roles:
-
-<div class="typeset-product my-8">
-    <TypographyTable items={roles} />
-</div>
-
-Each role comes in three sizes, `sm`, `md` and `lg`, except eyebrow, which has one. No title is smaller than 18px, so a heading in a small container, such as a popover or a sidebar section, can use `label-lg`.
-
-Labels and eyebrows are medium (500), titles are semibold (600), and display, headlines and metrics are bold (700). Other roles are regular (400). Metrics use tabular numerals.
-
-A heading in a muted colour or a caption at a heavier weight needs no new role. Use a text colour token or `text-strong`.
-
-### Typesets
-
-Both typesets have the same roles, so a component written with role classes works in either. `typeset-product--formatted` uses the product values.
-
-Line height is the font size plus 4px, 8px or 12px. Metric, caption and eyebrow add 4px. Body adds 12px in longform. Every other role adds 8px.
-
-| Role      | `typeset-longform` | `typeset-product` |
-| --------- | ------------------ | ----------------- |
-| `body-lg` | 18px / 30px        | 18px / 26px       |
-| `body-md` | 16px / 28px        | 16px / 24px       |
-| `body-sm` | 14px / 26px        | 14px / 22px       |
-
-### Responsive sizing
-
-Some roles grow as the screen widens. The breakpoints are `sm` (640px), `md` (768px), `lg` (1024px) and `xl` (1280px). Type at wider screens stays at the `xl` size.
-
-These roles change size, in pixels:
-
-| Role          | Typeset  | base | `sm` | `md` | `lg` | `xl` |
-| ------------- | -------- | ---- | ---- | ---- | ---- | ---- |
-| `display-lg`  | Both     | 40   | 48   | 56   | 64   | 72   |
-| `display-md`  | Both     | 36   | 40   | 48   | 56   | 64   |
-| `display-sm`  | Both     | 32   | 36   | 40   | 48   | 56   |
-| `headline-lg` | Both     | 30   | 32   | 36   | 36   | 40   |
-| `headline-md` | Longform | 28   | 28   | 30   | 32   | 36   |
-| `headline-md` | Product  | 28   | 28   | 30   | 30   | 30   |
-| `headline-sm` | Longform | 26   | 26   | 28   | 30   | 32   |
-| `subhead-lg`  | Longform | 24   | 24   | 24   | 26   | 26   |
-| `subhead-md`  | Longform | 22   | 22   | 22   | 24   | 24   |
-| `body-lg`     | Longform | 18   | 18   | 20   | 20   | 20   |
-| `metric-lg`   | Both     | 28   | 30   | 32   | 32   | 36   |
-
-Every other role has one size at every breakpoint.
-
-## Reference
-
-Choose a typeset and a breakpoint to see the values for each role.
-
-<TokenReference group="typography" />
+Controls such as buttons, tabs and chips use the label role's line height. Their padding sets their height.
 
 The full rules for type are in the [specification](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/design-system-specification/design-system-specification.md#typography).
