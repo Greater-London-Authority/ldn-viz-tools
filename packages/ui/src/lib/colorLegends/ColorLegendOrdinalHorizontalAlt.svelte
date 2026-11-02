@@ -22,8 +22,8 @@
 	const height = 20;
 </script>
 
-<div class="flow-product chart flex flex-col items-center">
-	{#if title}<p class="axis-title">{title}</p>{/if}
+<div class="flow-standard typeset-product chart flex flex-col items-center">
+	{#if title}<p class="chart-axis-title">{title}</p>{/if}
 
 	<svg viewBox={`0 0 ${width} ${height + 30}`} class="max-w-3xl">
 		{#each scale.domain() as val, i}
@@ -38,7 +38,7 @@
 				x={(width * (i + 0.5)) / scale.domain().length}
 				y={height + 20}
 				text-anchor="middle"
-				class="label select-none"
+				class="chart-label select-none"
 				style:font-weight={val === highlightedValue ? 'bold' : 'normal'}
 			>
 				{val}

@@ -1,137 +1,196 @@
 ---
 name: ds-doc-frame
 description: >
-  Build a documentation frame for a component in the GLA/ldn-viz Figma design
-  system, EXACTLY matching the established pattern. Use this whenever creating a
-  doc/overview frame that presents a component (title + intro prose + optional
-  captioned states strip) on any component page. Trigger on: "doc frame",
-  "documentation frame", "overview frame", "housing frame", "document this
-  component", or any time a component is being written up on-canvas in this file.
-  This skill exists because the pattern is exacting and easy to approximate wrong
-  from memory — follow it, do not reconstruct it.
+  How to document a component in the lcd-ds Figma file: the component
+  description, the header intro on the light doc frame, the "Dark mode" label on
+  the dark frame, and the accessibility frame. Use when documenting a component on the canvas, writing a component description,
+  or reviewing a doc frame.
 ---
 
-# DS Doc Frame
+# Doc frames
 
-Constructs a component documentation frame that matches the canonical pattern
-used across the design system (reference: `Product/DashboardTitle` doc frame,
-node `6411:203767`). **Do not hand-roll titles or pick product type roles for
-doc chrome.** Docs have their own `.DS-Section-header` component and a dedicated
-`Doc/*` text-style family. Using product roles (`dashboard-head`, `label`,
-`body-sm`, etc.) for doc chrome is the classic drift — this skill prevents it.
+A component in the Figma file is documented in three places, and each has one job:
 
-## Golden rules (read first)
+| Place | Reader | Contents |
+| --- | --- | --- |
+| Component description | Agents through MCP, Dev Mode, the assets panel | The structured text below |
+| Header intro on the light doc frame | Designers on the canvas | The first paragraph of the description |
+| Accessibility frame | Designers and agents | Each state with its own focus or ARIA behaviour, with notes, and a contrast table |
 
-1. **The header is a component, not hand-built.** Instantiate
-   `.DS-Section-header` (`425:7094`) and set its `Title#425:0` text property to
-   the doc title. Never build a title text layer by hand.
-2. **Doc chrome uses `Doc/*` styles, never product roles.** Intro prose =
-   `Doc/Body`. Captions = `Doc/Caption`. Section titles inside the header are
-   handled by the component itself. This is about the _frame's own_ chrome
-   (title, intro, captions) — the **content specimens** placed inside a doc
-   frame keep whatever styles they legitimately use (product roles for UI
-   components, the `Chart/*` subset for chart specimens, etc.). Doc chrome and
-   specimen content are two different layers; only the chrome is `Doc/*`. The
-   `Doc/*` family is separate from
-   `altSemantic/Product/*` — do not substitute.
-3. **Fixed frame geometry.** Outer width 1280, padding 0. Content frame padding
-   `[32, 60, 32, 60]`, gap 40. These are not adjustable "to taste".
-4. **Colours are tokens.** `text` for prose, `surface-accent` for captions and
-   the mono tag. Bind variables — never raw hex.
-5. **Build from ground truth, not memory.** If any ID below looks stale, re-read
-   the reference frame (`6411:203767`) and the section-header component
-   (`425:7094`) before building. IDs can change between file versions.
-   (All IDs below verified live in file "Design System ver 3.1"; re-verify if
-   the version has since changed.)
+The dark doc frame has no text of its own. Its header shows a "Dark mode" label.
 
-## Exact anatomy
+State each fact once, in the broadest frame it applies to. Text that applies to a family of components, such as all the Button variants, goes in the family overview.
 
+Write the text to [ds-writing](../ds-writing/SKILL.md). ADRs: [0009 Documentation](../../../design-system-specification/decisions/0009-documentation.md), [0010 Figma conventions](../../../design-system-specification/decisions/0010-figma-conventions.md), [0019 Accessibility](../../../design-system-specification/decisions/0019-accessibility.md).
+
+Don't use Figma annotations. Put accessibility facts in a frame on the canvas.
+
+## Sources
+
+For each component, read:
+
+- the `@component` JSDoc comment in its `.svelte` file, for the summary, the props and the alternatives it names
+- the markup and classes in the same file, for the rendered element, ARIA attributes, focus and disabled behaviour
+- the form, focus and colour rules in `packages/themes/styles/system.css` and `tokens.css`
+- the Figma component itself, for its properties and the text style on each text layer
+- [ADR 0019](../../../design-system-specification/decisions/0019-accessibility.md) for focus and contrast
+
+If a public component has no `@component` comment, write the comment in code first and take the description from it. Internal parts and private `.` components don't need one.
+
+Leave out anything you can't trace to one of these.
+
+## Component description
+
+Set it on the component set, or on the component when there is no set. Private `.` components keep an empty description. A component that is only in Figma starts with `Pending: not yet in code.`
+
+Use plain text with uppercase section headers, not markdown. Aim for 120 to 200 words.
+
+```text
+<What it is and when to use it, in one or two sentences.>
+
+IN CODE
+<Component> from @ldn-viz/<package>. <Which Figma properties match which props.>
+
+TEXT STYLES
+<Part>: <text style>. <Part>: <text style>.
+
+USAGE
+<When to use it, and which component to use instead in which case.>
+
+ACCESSIBILITY
+<The rendered element, focus, and anything a screen reader announces.> The Accessibility: <name> frame shows each state and the contrast.
+
+ANTI-PATTERNS
+<One prohibition per line, each with its reason.>
 ```
-Outer frame                     VERTICAL · AUTO/FIXED · padding 0 · gap 0 · width 1280
-  named after the component it documents
-├── .DS-Section-header (instance of 425:7094)   padding [0,60,0,60]
-│     set property  Title#425:0 = "<doc title>"
-│     (internally renders the title on Doc/Title + a "Ldn-viz design system v3"
-│      Doc/Mono tag on surface-accent, and a divider line — all inside the
-│      component; you only set the Title prop)
-└── content                     HORIZONTAL · FIXED/AUTO · padding [32,60,32,60] · gap 40
-    ├── intro prose (TEXT)      style Doc/Body · fill text · width ~440
-    └── states (FRAME)          VERTICAL · AUTO/AUTO · gap 32        [OPTIONAL]
-        └── state (FRAME) × N   VERTICAL · AUTO/AUTO · gap 8
-            ├── caption (TEXT)  style Doc/Caption · fill surface-accent
-            └── <component instance>  (a chosen meaningful variant/state)
+
+### IN CODE
+
+Map the Figma property names to the props. Write "The State variants Error and Disabled match the error and disabled props", not "State Error is the error prop": there is no prop called State. Say which properties have no prop, such as a Focus state that the browser sets, or a Figma axis that code doesn't have. Don't list every prop; Storybook does that.
+
+### TEXT STYLES
+
+Read the text style on each text layer of the default variant. Give the Figma style name, such as `Typeset/product/label-md` or `Usage/product/ui/button-label`. If a style differs by size, say so.
+
+### USAGE
+
+Take the alternatives from the `@component` comment. Give the reason for each choice.
+
+### ACCESSIBILITY
+
+The accessibility frame has the details. Write the rendered element, how focus shows, and what a screen reader announces in an error or disabled state.
+
+### Kits
+
+A chart or table kit uses summary, IN CODE, TEXT STYLES, COLOURS and USAGE. COLOURS names each variable the kit binds, read from Figma, with the ADR 0007 or 0008 role it plays. A kit's parts get one or two sentences.
+
+### ANTI-PATTERNS
+
+Two or three, specific to the component, each with a reason. Don't repeat a USAGE sentence as a prohibition.
+
+## Archetypes
+
+| Archetype | Pages | What it gets |
+| --- | --- | --- |
+| Family | Buttons; form fields; overlays | A family overview frame for what the members share, and a header intro on each member's frame. `Button — family overview` covers the Button variants. `Form fields — family overview` (node `909:286874`, in the left column of the Input row) covers what `InputWrapper` draws for Input, Select, the checkbox and radio groups and LayerControlGroup: label, hint tag, description, error message and optional marker. Their accessibility frames cover only their own control, and their ACCESSIBILITY section points to the overview. `Overlays — family overview` (node `909:288364`, in the left column of the Tooltip row) covers the trigger, `hintLabel`, `Overlay` and when to use Tooltip, Popover or Modal |
+| Light/dark pair | Components - Ui | Light frame: header intro. Dark frame: "Dark mode" label. An accessibility frame beside the dark frame, in the same row (see Page layout) |
+| Composite | Modal, Sidebar, Tabs, Header | The intro and the accessibility frame go on the parent. The parts get descriptions only |
+| Foundation | Typography, Elevation, Colour, Spacing | Leave the existing doc frames unchanged |
+| Kit, screen or layout | Charts, Tables, Maps, Application Shells, Dashboard Layouts | Descriptions on the main components. No new frames during W6c |
+
+## Page layout on Components - Ui
+
+Each component has one row, and the rows run down the page in roughly alphabetical order. Within a row the frames sit left to right:
+
+| Column | x (about) | Holds |
+| --- | --- | --- |
+| Left | 0–64 | The frame that holds the main components, where it is separate from the light frame (Header, Footer, Form Login), and the family overviews (Form fields, Overlays) |
+| Light | 2067–2084 | The light doc frame, with the header intro |
+| Dark | 4146–4154 | The dark doc frame, with the mode label |
+| Accessibility | 6224 | `<Name> — Accessibility` |
+
+Rows are about 100px apart, measured from the bottom of the tallest frame in the row above. A wider frame pushes the frames to its right along: Modal's dark and accessibility frames start further right, and SideBar's row also holds the three Sidebar Examples frames before its accessibility frame. The layout was set by hand, so read the positions from the page rather than assuming these values.
+
+When you add a frame:
+
+- Put it in its component's row, in the column for its kind. A new component gets a new row, in alphabetical order, and the rows below move down to keep the gap.
+- Never move a frame in another component's row, except to make room for a new row, and only with the user's agreement.
+- After any change, check the whole page for overlap and clipping, not just the frames you touched.
+
+A frame with absolute positioning (`layoutMode` `NONE`), such as Spinner, doesn't grow with its header. List it and place its intro by hand.
+
+## The header
+
+Every doc frame starts with an instance of `.DS-Section-header` (node `552:16495` in ver 4.0; find it by name in a new session). Its properties:
+
+| Property | Light frame | Dark frame | Accessibility frame |
+| --- | --- | --- | --- |
+| `Title` | Component name | Component name | `Accessibility: <name>` |
+| `Show intro` | On | Off | On |
+| `Intro` | The description's first paragraph | | The rendered element, in one sentence |
+| `Show mode` | Off | On | Off |
+| `Mode` | | `Dark mode` | |
+
+When you turn `Show intro` on, set the instance's vertical sizing to hug, or the intro is clipped at 110px.
+
+## The accessibility frame
+
+Copy the structure of `Accessibility: Input` (node `908:283239`).
+
+```text
+<Name> — Accessibility        VERTICAL · width of the light frame · fill bound to surface
+├── .DS-Section-header        Title "Accessibility: <name>", intro on
+└── content                   VERTICAL · padding 40 60 60 60 · gap 48
+    ├── states                VERTICAL · gap 40
+    │   └── <state> × N       HORIZONTAL · gap 60
+    │       ├── example       400 wide · an instance in that state
+    │       └── notes         Doc/Subheading title, Doc/Body-sm text 640 wide
+    └── contrast              VERTICAL · gap 16
+        ├── title, intro      Doc/Subheading, Doc/Body-sm
+        └── table             Part · Variable · Needs · Light · Dark
 ```
 
-The **states strip is optional** and, per the standing docs-scope decision, is
-part of the _fuller_ documentation tier. For a lightweight intro/overview frame,
-build the header + intro prose and omit the states strip (or include 2–3
-genuinely meaningful states only). Do NOT exhaustively enumerate every variant —
-responsive behaviour and full state matrices are documented centrally, not
-per-frame.
+States: focus, error, disabled, and any state with its own ARIA, such as selected, expanded or optional. Write what the code does in each state.
 
-## Canonical IDs (verify before use)
+Contrast: measure each part's colour against the colour behind it in both modes, resolving variable aliases for each mode. Text needs 4.5:1 (WCAG 1.4.3). A field border, a control's fill and a focus indicator need 3:1 (WCAG 1.4.11). Disabled parts are exempt (ADR 0019); leave them out of the table. Mark a ratio below its threshold with the word "below" and the `interactive/error` colour, so colour isn't the only signal. Check each failing value against `packages/themes/styles/tokens.css` and log it in SNAGS.
 
-Text styles (`Doc/*` family):
+The Buttons page has contrast frames. Add the focus and disabled notes to them.
 
-- `Doc/Title` — `S:e919a6afd0c314b2fee6d29b86e743c61a693f7d,` (Inter Semi Bold 30)
-- `Doc/Heading` — `S:9bf5a4b49eb03b5920538dd954bb4279b7137b48,` (Inter Semi Bold 24)
-- `Doc/Subheading`— `S:522d9faf209d6a75e98e39d781c367b375ad2f39,` (Inter Medium 20)
-- `Doc/Body` — `S:4891d18cde867dae4cac5d19534cfb3fb9caaa33,` (Inter Regular 16) ← intro prose
-- `Doc/Body-sm` — `S:4a93108c6f3ae8aa40c8a787c6c0a9615764a132,` (Inter Regular 14)
-- `Doc/Caption` — `S:db9d0e4998e97d76268401b3524d22f3f5175659,` (IBM Plex Mono 13) ← state captions
-- `Doc/Mono` — `S:3b3019f652bd8fbfaa76b361af5833f8ad65c6f1,` (IBM Plex Mono 13)
+## Text styles and colours on the frame
 
-Component:
+Text on a doc frame uses the `Doc/*` styles, never product roles ([0010](../../../design-system-specification/decisions/0010-figma-conventions.md)). Components shown in the frame keep their own styles.
 
-- `.DS-Section-header` — component `425:7094`, text property `Title#425:0`
+| Text | Style | Colour variable |
+| --- | --- | --- |
+| Intro | `Doc/Body` (set by the header) | `text` |
+| Section title | `Doc/Subheading` | `text` |
+| Notes | `Doc/Body-sm` | `text` |
+| Table head | `Doc/Body-sm` | `text-muted` |
+| Table values | `Doc/Mono` | `text` |
+| Caption | `Doc/Caption` | `surface-accent` |
 
-Tokens (semantic-color):
+Bind the fill to the colour variable after setting the text style, because the style doesn't set a colour.
 
-- `text` — `VariableID:598:26405`
-- `surface-accent` — `VariableID:600:26430`
+## Steps for each group
 
-Reference frame to copy from if unsure: `6411:203767` (`Product/DashboardTitle`).
+1. Read the code sources and the Figma components for the group. Compare them with Storybook and report differences before changing anything.
+2. Write the descriptions. Run the ds-writing language review on them.
+3. Set the descriptions, then the header properties on the light and dark frames.
+4. Build the accessibility frame for each component that has states to show, in its row's accessibility column. Turning on a header intro makes a frame taller, and the rows are only about 100px apart, so trim empty space inside the frame rather than let it reach the row below.
+5. Check every frame in the group for overlap, clipped content and the gap to the next frame.
+6. Take screenshots and show them before starting the next group.
 
-## Procedure
+## Figma plugin API
 
-1. **Re-verify** the section-header component and `Doc/*` style IDs are current
-   (a quick `getLocalTextStylesAsync` name→id check + `getNodeByIdAsync 425:7094`).
-   If the file version changed, prefer re-reading the reference frame.
-2. Create the **outer frame** (VERTICAL, padding 0, width 1280, hug height),
-   named after the component.
-3. Instantiate **`.DS-Section-header`**, append it, set `Title#425:0`.
-4. Create the **content frame** (HORIZONTAL, padding `[32,60,32,60]`, gap 40).
-5. Add the **intro prose** text on `Doc/Body`, fill `text`, width ~440.
-   - Load the font before setting characters (`figma.loadFontAsync`).
-   - Bind the fill variable — do not use raw hex.
-6. (Optional) Add the **states** strip: for each chosen state, a `state` frame
-   (gap 8) with a `caption` on `Doc/Caption` fill `surface-accent`, then a
-   component instance configured to that state.
-7. **Screenshot to verify** (`figma_capture_screenshot`) — check the header
-   renders, prose wraps at ~440, spacing matches. Iterate up to 3×.
-8. **Placement:** doc-frame placement is currently deferred/batched (no decided
-   home). Place in the working column near siblings with an 80px vertical gap,
-   OR leave for the batched docs pass — check the current standing decision, do
-   not invent a placement.
+- The file uses dynamic pages, so use the async calls: `getNodeByIdAsync`, `getLocalTextStylesAsync`, `getMainComponentAsync`, `getInstancesAsync`, `figma.variables.getVariableByIdAsync`.
+- `globalThis` doesn't persist between `figma_execute` calls. Put all data in each call.
+- Pass `fileKey` on every call, and lock the file with `figma_navigate` before taking screenshots. If the REST screenshot fails, use `figma_capture_screenshot`, which goes through the plugin.
+- `resize()` sets the primary axis to fixed. Set it back to auto if the frame should hug.
+- Load the font before setting characters on a text layer, including a layer inside an instance.
 
-## Known gotchas (this file)
+## Before you finish
 
-- Dynamic-page file: in `figma_execute`, use async variants
-  (`getNodeByIdAsync`, `getStyleByIdAsync`, `getLocalTextStylesAsync`,
-  `getMainComponentAsync`, `figma.variables.getVariableByIdAsync`).
-- `globalThis` does NOT persist across `figma_execute` calls — inline all data.
-- `resize()` resets `primaryAxisSizingMode` to FIXED — set it back to AUTO after
-  any resize if the frame should hug.
-- Read-after-write size measurements can lag one step (stale) — re-read to verify.
-- Setting a text style does not carry the colour — re-bind the fill variable
-  after `setTextStyleIdAsync`.
-
-## Self-check before finishing
-
-- [ ] Header is a `.DS-Section-header` instance with `Title#425:0` set (NOT a
-      hand-built title).
-- [ ] Intro prose is on `Doc/Body`; captions on `Doc/Caption`. No product roles
-      used for doc chrome.
-- [ ] Content padding `[32,60,32,60]`, gap 40; outer width 1280, padding 0.
-- [ ] Fills are bound tokens (`text`, `surface-accent`), no raw hex.
-- [ ] Screenshot verified.
+- Each published component has a description in the template.
+- The light frame has its intro, and the dark frame has its label and no text.
+- Each component with states to show has an accessibility frame.
+- Contrast failures are in SNAGS.

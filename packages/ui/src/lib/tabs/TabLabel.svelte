@@ -23,13 +23,13 @@
 	}: Props = $props();
 
 	const orientationClasses = {
-		vertical: 'label-tight w-20 h-20 p-2 flex flex-col items-center justify-center text-center',
-		horizontal: 'label-tight py-2 px-4 flex items-center select-none'
+		vertical: 'label-md w-20 h-20 p-2 flex flex-col items-center justify-center text-center',
+		horizontal: 'label-md py-1 px-4 flex items-center select-none'
 	};
 
 	const tabLabelClasses = classNames(
 		'bg-color-interactive-off text-color-text underline hover:bg-color-interactive-primary-muted hover:no-underline',
-		'focus:ring-inset focus:ring-offset-2 focus:ring-offset-color-interactive-focus focus:ring-2 focus:outline-none focus:ring-color-surface'
+		'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-interactive-focus focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-surface'
 	);
 
 	let isSelected = $derived(tabId === selectedTabId);

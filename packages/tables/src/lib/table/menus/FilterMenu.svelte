@@ -59,7 +59,7 @@
 
 <!-- TODO: funnel-->
 <Overlay hintLabel="Filter" overlayType="popover">
-	<h2 class="text-large font-bold">Filter</h2>
+	<h2 class="label-lg">Filter</h2>
 
 	<Select options={filterTypes} bind:value={selectedFilterType} label="Show only rows that are:" />
 

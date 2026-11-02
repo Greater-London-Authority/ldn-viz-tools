@@ -149,11 +149,11 @@
 			</Map>
 
 			<div
-				class="dark absolute left-0 top-0 h-[16em] w-full bg-color-container bg-opacity-75 p-2 text-color-text"
+				class="dark absolute left-0 top-0 h-[16em] w-full bg-color-surface bg-opacity-75 p-2 text-color-text"
 			>
 				<table>
 					<tbody>
-						<tr class="font-medium">
+						<tr class="table-col-head">
 							<th>Event</th>
 							<th class="px-4">Layer</th>
 							<th>Site</th>

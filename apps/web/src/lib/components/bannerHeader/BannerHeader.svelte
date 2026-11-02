@@ -55,11 +55,11 @@
 	{/key}
 
 	<div class="relative z-10 flex h-full items-center">
-		<div class="container mx-auto">
-			<div class="flow-prose prose">
-				<p class="headline pt-4">{title}</p>
+		<div class="container">
+			<div class="typeset-longform">
+				<h1 class="headline-lg pt-4">{title}</h1>
 				{#if subTitle}
-					<p class="subhead">{subTitle}</p>
+					<p class="subhead-lg">{subTitle}</p>
 				{/if}
 			</div>
 		</div>

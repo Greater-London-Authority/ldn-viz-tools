@@ -40,7 +40,7 @@ export const getDefaultPlotStyles = () => {
 
 const defaultStyle = () => ({
 	color: theme.tokenNameToValue('chart.label'),
-	fontSize: '0.875rem',
+	fontSize: 'var(--caption-md-font-size, 0.875rem)',
 	fontFamily: fontStack,
 	background: theme.tokenNameToValue('chart.surface')
 });
@@ -156,7 +156,6 @@ const defaultTip = () => ({
 	fill: theme.tokenNameToValue('chart.surface'),
 	fillOpacity: 1,
 	strokeOpacity: 1,
-	fontSize: 14,
 	textPadding: 6,
 	pointerSize: 12
 });
@@ -166,7 +165,6 @@ const defaultAnnotationTip = () => ({
 	fill: theme.tokenNameToValue('chart.surface'),
 	fillOpacity: 0.8,
 	strokeOpacity: 1,
-	fontSize: 14,
 	textPadding: 6,
 	pointerSize: 12,
 	pathFilter: '',
@@ -174,7 +172,6 @@ const defaultAnnotationTip = () => ({
 });
 
 const defaultAnnotationText = () => ({
-	fontSize: 14,
 	fill: theme.tokenNameToValue('chart.label'),
 	dx: 8,
 	dy: 0

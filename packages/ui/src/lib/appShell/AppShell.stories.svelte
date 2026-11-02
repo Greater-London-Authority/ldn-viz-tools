@@ -54,7 +54,7 @@
 
 {#snippet mainContent()}
 	<div class="p-4">
-		<h1 class="text-xl font-bold">Main content</h1>
+		<h1 class="headline-sm">Main content</h1>
 		<p>
 			This story passes a real <code>main</code> snippet, so the <code>{`{@render main()}`}</code>
 			branch is exercised instead of the placeholder text.

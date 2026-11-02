@@ -20,11 +20,16 @@
 	<div>
 		{#if hasPrevPage}
 			{@const prevPage = pages[activeIndex - 1]}
-			<Button href={resolve(prevPage.href, {})} variant="outline" emphasis="secondary">
-				<Icon src={ArrowLeftCircle} theme="outline" class="mr-4 h-8 w-8" aria-hidden="true" />
+			<Button
+				href={resolve(prevPage.href, {})}
+				variant="outline"
+				emphasis="secondary"
+				class="!items-end"
+			>
+				<Icon src={ArrowLeftCircle} theme="outline" class="mr-2 h-6 w-6 " aria-hidden="true" />
 				<div class="flex flex-col">
-					<span class="product label-sm text-color-text-muted"> Previous </span>
-					<span class="product label">{prevPage.title}</span>
+					<span class="typeset-product label-sm text-color-text-muted"> Previous </span>
+					<span class="typeset-product label-md">{prevPage.title}</span>
 				</div>
 			</Button>
 		{/if}
@@ -33,12 +38,17 @@
 		{#if hasNextPage}
 			{@const nextPage = pages[activeIndex + 1]}
 
-			<Button href={resolve(nextPage.href, {})} variant="outline" emphasis="secondary">
+			<Button
+				href={resolve(nextPage.href, {})}
+				variant="outline"
+				emphasis="secondary"
+				class="!items-end"
+			>
 				<div class="flex flex-col">
-					<span class="product label-sm text-color-text-muted"> Next </span>
-					<span class="product label">{nextPage.title}</span>
+					<span class="typeset-product label-sm text-color-text-muted"> Next </span>
+					<span class="typeset-product label-md">{nextPage.title}</span>
 				</div>
-				<Icon src={ArrowRightCircle} theme="outline" class="ml-4 h-8 w-8" aria-hidden="true" />
+				<Icon src={ArrowRightCircle} theme="outline" class="ml-2 h-6 w-6" aria-hidden="true" />
 			</Button>
 		{/if}
 	</div>

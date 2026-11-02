@@ -83,7 +83,7 @@ export const splitClusters = <DataT extends AnyProps = AnyProps>(
 		getKey,
 		colors,
 		order,
-		getLineColor = tokenColor('geo.inverse.feature.default'),
+		getLineColor = tokenColor('inverse.geo.feature.default'),
 		lineWidthFraction = 0.12,
 		gap = 2,
 		showRing = false,

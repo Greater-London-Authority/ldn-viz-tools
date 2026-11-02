@@ -69,7 +69,7 @@ export function circleClusters<DataT extends AnyProps = AnyProps>(
 ): ClusterRenderer<DataT> {
 	const {
 		getFillColor = tokenColor('data.primary'),
-		getLineColor = tokenColor('geo.inverse.feature.default', 100),
+		getLineColor = tokenColor('inverse.geo.feature.default', 100),
 		getLineWidth = 5,
 		textColor,
 		maxTextSize = 18,
@@ -164,7 +164,7 @@ export function circlePoints<DataT extends AnyProps = AnyProps>(
 ): PointRenderer<DataT> {
 	const {
 		getFillColor = tokenColor('data.secondary'),
-		getLineColor = tokenColor('geo.inverse.feature.default', 100),
+		getLineColor = tokenColor('inverse.geo.feature.default', 100),
 		getLineWidth = 1.5,
 		radiusMinPixels,
 		radiusMaxPixels,

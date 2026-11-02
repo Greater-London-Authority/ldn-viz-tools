@@ -29,7 +29,7 @@
 </script>
 
 {#if title}
-	<h3 class={`${size === 'xs' ? 'title-4' : 'title-3'} mb-2`}>{title}</h3>
+	<h3 class={`${size === 'xs' ? 'title-sm' : 'title-md'} mb-2`}>{title}</h3>
 {/if}
 
 <div class={gridClass}>

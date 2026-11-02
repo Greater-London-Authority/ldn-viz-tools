@@ -167,7 +167,7 @@
 			onHover: onMouseOverTooltipHandler,
 			renderClusters: circleClusters({
 				getFillColor: theme.colorTokenNameToRGBArray('data.secondary') as [number, number, number],
-				getLineColor: [...theme.colorTokenNameToRGBArray('geo.inverse.feature.default'), 180] as [
+				getLineColor: [...theme.colorTokenNameToRGBArray('inverse.geo.feature.default'), 180] as [
 					number,
 					number,
 					number,
@@ -326,10 +326,10 @@ zooms when `clickToZoom` is `true`.
 
 				<MapControlGroup position="TopRight">
 					<div
-						class="pointer-events-auto max-h-96 w-72 overflow-y-auto bg-color-container p-3 text-color-text"
+						class="pointer-events-auto max-h-96 w-72 overflow-y-auto bg-color-surface p-3 text-color-text"
 					>
 						{#if clickedCluster}
-							<p class="font-bold">{clickedCluster.pointCount} events in this cluster</p>
+							<p class="label-lg">{clickedCluster.pointCount} events in this cluster</p>
 							<ul class="mt-2 list-disc pl-5">
 								{#each clickedCluster.points as point, i (i)}
 									<li>{point.properties?.event_name}</li>

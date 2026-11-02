@@ -21,7 +21,7 @@
 <Story name="Default">
 	{#snippet template()}
 		<ResizeControl label="Borough" bind:size minSize={1} maxSize={100} />
-		<pre class="mt-4 text-xs">{size}</pre>
+		<pre class="caption-sm mt-4">{size}</pre>
 	{/snippet}
 </Story>
 
@@ -29,7 +29,7 @@
 <Story name="Custom min/max range">
 	{#snippet template()}
 		<ResizeControl label="Borough" bind:size={sizeCustom} minSize={10} maxSize={50} />
-		<pre class="mt-4 text-xs">{sizeCustom}</pre>
+		<pre class="caption-sm mt-4">{sizeCustom}</pre>
 	{/snippet}
 </Story>
 

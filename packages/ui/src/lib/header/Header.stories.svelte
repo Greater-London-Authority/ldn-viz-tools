@@ -67,11 +67,11 @@
 			<HeaderRight>
 				<!-- This would come from your auth menu Component in your app -->
 				<HeaderItem>
-					<span class="text-xs">Logged in as <b>Bob Smith</b></span>
+					<span class="caption-sm">Logged in as <b>Bob Smith</b></span>
 				</HeaderItem>
 
 				<HeaderItem>
-					<a class="text-xs" href="/#">Log Out</a>
+					<a class="label-sm" href="/#">Log Out</a>
 				</HeaderItem>
 			</HeaderRight>
 		</Header>
@@ -114,16 +114,16 @@
 		<Header>
 			<HeaderTitle>App title</HeaderTitle>
 			<HeaderRight>
-				<HeaderItem><a class="text-xs" href="/#">Overview</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Analysis</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Datasets</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Reports</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Dashboards</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Documentation</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Settings</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Notifications</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Help &amp; support</a></HeaderItem>
-				<HeaderItem><a class="text-xs" href="/#">Account</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Overview</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Analysis</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Datasets</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Reports</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Dashboards</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Documentation</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Settings</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Notifications</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Help &amp; support</a></HeaderItem>
+				<HeaderItem><a class="label-sm" href="/#">Account</a></HeaderItem>
 			</HeaderRight>
 		</Header>
 	{/snippet}

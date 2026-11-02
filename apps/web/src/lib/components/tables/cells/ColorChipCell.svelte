@@ -23,7 +23,7 @@
 	);
 
 	let borderClass = $derived.by(() =>
-		value === theme.tokenNameToValue('surface') ? 'border border-color-border-muted' : ''
+		value === theme.tokenNameToValue('surface') ? 'border border-color-border-wash' : ''
 	);
 
 	const copyValue = (value: string) => {

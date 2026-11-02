@@ -53,7 +53,7 @@
 			: ''}
 	/>
 	{#if label}
-		<span class="form-label ml-2 font-normal">{label}</span>
+		<span class="form-label ml-2">{label}</span>
 	{/if}
 
 	{#if hint}
@@ -73,8 +73,8 @@
 <style>
 	.form-radio:before {
 		content: '';
-		width: 0.65em;
-		height: 0.65em;
+		width: 0.625em;
+		height: 0.625em;
 		border-radius: 50%;
 		transform: scale(0);
 		box-shadow: inset 1em 1em var(--color-interactive-primary);

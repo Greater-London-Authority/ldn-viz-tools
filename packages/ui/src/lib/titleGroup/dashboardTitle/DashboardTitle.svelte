@@ -21,14 +21,14 @@
 	let { title = '', subtitle = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
-<div class={classNames('flow-product product', classes)}>
+<div class={classNames('typeset-product flow-standard', classes)}>
 	{#if eyebrow}
-		<p class="eyebrow text-color-text-muted">{eyebrow}</p>
+		<p class="eyebrow">{eyebrow}</p>
 	{/if}
 	{#if title}
-		<h1 class="page-head text-color-text">{title}</h1>
+		<h1 class="dashboard-main-title">{title}</h1>
 	{/if}
 	{#if subtitle}
-		<p class="subtitle text-color-text-muted">{subtitle}</p>
+		<p class="dashboard-main-subtitle">{subtitle}</p>
 	{/if}
 </div>

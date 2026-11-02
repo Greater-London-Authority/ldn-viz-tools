@@ -123,8 +123,16 @@
 	{disabled}
 	{optional}
 	{customOverlay}
+	isGroup
 >
-	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
+	<div
+		{id}
+		role="group"
+		aria-label={ariaLabel}
+		aria-labelledby={label ? `${id}-label` : undefined}
+		aria-describedby={errorId ?? descriptionId}
+		class="flex flex-col space-y-1"
+	>
 		{#if !hideSelectAll}
 			<!--
 			form="" should prevent this checkbox from being included in form

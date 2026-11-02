@@ -37,7 +37,7 @@
 </script>
 
 <Overlay overlayType="popover" hintLabel="Show/Hide Columns">
-	<h2 class="font-bold">Select which columns to display:</h2>
+	<h2 class="label-lg">Select which columns to display:</h2>
 
 	<CheckboxGroup
 		options={fields}
