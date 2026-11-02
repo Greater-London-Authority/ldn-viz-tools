@@ -8,7 +8,7 @@
 		"build:content": "velite",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"dev": "vite dev && velite dev --watch",
+		"dev": "vite dev",
 		"dev:content": "velite dev --watch",
 		"dev:svelte": "vite dev",
 		"format": "prettier --config ../../.prettierrc.js --ignore-path ../../.prettierignore --write .",

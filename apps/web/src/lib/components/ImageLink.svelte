@@ -8,7 +8,7 @@
 		url: string;
 		image: string;
 		title: string;
-		titleClass: 'title-3' | 'title-4';
+		titleClass: 'title-lg' | 'card-title';
 		cta?: string;
 		children?: Snippet;
 	};
@@ -16,7 +16,7 @@
 		url,
 		image,
 		title,
-		titleClass = 'title-3',
+		titleClass = 'card-title',
 		children,
 		cta = 'Read more'
 	}: Props = $props();
@@ -25,9 +25,11 @@
 	// absolute external link / mailto, which must be passed through untouched.
 	const isExternal = $derived(/^([a-z][a-z\d+.-]*:|\/\/)/i.test(url));
 	const href = $derived(isExternal ? url : resolve(url, {}));
+
+	const buttonMargin = $derived(children ? '' : '!mt-0 mb-2');
 </script>
 
-<div class="flow-product">
+<div class="flow-standard">
 	<a {href} target={isExternal ? '_blank' : undefined}>
 		<EnhancedImage src={image} />
 	</a>
@@ -39,6 +41,7 @@
 		variant="text"
 		slim
 		emphasis="secondary"
+		class={buttonMargin}
 	>
 		{cta}
 	</Button>

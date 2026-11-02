@@ -1,4 +1,4 @@
-import tokens from '@ldn-viz/themes/styles/js/color-tokens';
+import tokens from '@ldn-viz/themes/colors.js';
 import { describe, expect, it } from 'vitest';
 import { colorWithBestContrast } from './colorWithBestContrast';
 

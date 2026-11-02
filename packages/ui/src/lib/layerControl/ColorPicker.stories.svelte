@@ -25,7 +25,7 @@
 <Story name="Default swatch grid">
 	{#snippet template()}
 		<ColorPicker label="Borough" colorNames={[]} bind:activeColorName />
-		<pre class="mt-4 text-xs">{activeColorName}</pre>
+		<pre class="caption-sm mt-4">{activeColorName}</pre>
 	{/snippet}
 </Story>
 
@@ -53,6 +53,6 @@
 <Story name="Custom colorNames">
 	{#snippet template()}
 		<ColorPicker label="Borough" {colorNames} bind:activeColorName={activeColorNameCustom} />
-		<pre class="mt-4 text-xs">{activeColorNameCustom}</pre>
+		<pre class="caption-sm mt-4">{activeColorNameCustom}</pre>
 	{/snippet}
 </Story>

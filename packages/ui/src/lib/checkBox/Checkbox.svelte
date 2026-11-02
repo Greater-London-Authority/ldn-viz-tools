@@ -30,7 +30,7 @@
 	}: CheckboxProps = $props();
 </script>
 
-<div class="product flex items-center">
+<div class="typeset-product flex items-center">
 	<input
 		{id}
 		{name}
@@ -40,13 +40,13 @@
 		{disabled}
 		{indeterminate}
 		style={color
-			? `--color-interactive-primary: ${color}; --color-border-muted: ${color}  --tw-ring-color: ${color};`
+			? `--color-interactive-primary: ${color}; --color-border-muted: ${color}; --tw-ring-color: ${color};`
 			: ''}
 		{...restProps}
 	/>
 
 	{#if label}
-		<label class="body ml-2 font-normal" for={id}>{label}</label>
+		<label class="form-label ml-2" for={id}>{label}</label>
 	{/if}
 
 	{#if hint}

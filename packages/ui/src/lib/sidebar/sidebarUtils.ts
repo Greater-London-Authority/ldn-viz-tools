@@ -22,10 +22,10 @@ export const tabPlacementLookup: PlacementLookup = {
 };
 
 export const keylineLookup: PlacementLookup = {
-	left: 'border-r border-color-border-muted',
-	right: 'border-l border-color-border-muted',
-	top: 'border-b border-color-border-muted',
-	bottom: 'border-t border-color-border-muted'
+	left: 'border-r border-color-border-wash',
+	right: 'border-l border-color-border-wash',
+	top: 'border-b border-color-border-wash',
+	bottom: 'border-t border-color-border-wash'
 };
 
 export const tabLayoutOverride: PlacementLookup = {
@@ -34,7 +34,7 @@ export const tabLayoutOverride: PlacementLookup = {
 };
 
 // These classes overide the theme of default tabs in a sidebar context
-export const tabThemeOverride = '[&>button]:bg-color-container [&>button]:no-underline';
+export const tabThemeOverride = '[&>button]:bg-color-surface [&>button]:no-underline';
 
 // These classes overide the 'horizontal' style of tablabels in a sidebar context
 export const tabLabelOverride =

@@ -94,10 +94,10 @@
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
-	<main class={classNames('w-full', sidebarState.placement === 'right' ? '' : 'order-1')}>
+	<main class={classNames('w-full min-w-0', sidebarState.placement === 'right' ? '' : 'order-1')}>
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
-			<p class="product body font-bold">
+			<p class="typeset-product body-md">
 				Provide some main content. The main content you provide should have appropriate padding
 				applied...
 			</p>

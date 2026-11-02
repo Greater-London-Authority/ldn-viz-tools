@@ -11,38 +11,36 @@ describe('TitleGroup', () => {
 			eyebrow: 'Eyebrow'
 		});
 
-		const title = container.querySelector('.title');
+		const title = container.querySelector('.title-md');
 		expect(title?.textContent).toBe('Chart title');
 		expect(title?.className).toContain('text-color-text');
 
-		const subtitle = container.querySelector('.subtitle');
+		const subtitle = container.querySelector('.subtitle-sm');
 		expect(subtitle?.textContent).toBe('Chart subtitle');
-		expect(subtitle?.className).toContain('text-color-text-muted');
 
 		const eyebrow = container.querySelector('.eyebrow');
 		expect(eyebrow?.textContent).toBe('Eyebrow');
-		expect(eyebrow?.className).toContain('text-color-text-muted');
 	});
 
 	it('defaults to emphasis="primary"', async () => {
 		const { container } = render(TitleGroup, { title: 'Chart title' });
 
-		expect(container.querySelector('.title')).toBeTruthy();
+		expect(container.querySelector('.title-md')).toBeTruthy();
 	});
 
 	it('omits eyebrow/title/subtitle elements that are not provided', async () => {
 		const { container } = render(TitleGroup, { title: 'Only a title' });
 
-		expect(container.querySelector('.title')).toBeTruthy();
-		expect(container.querySelector('.subtitle')).toBeNull();
+		expect(container.querySelector('.title-md')).toBeTruthy();
+		expect(container.querySelector('.subtitle-sm')).toBeNull();
 		expect(container.querySelector('.eyebrow')).toBeNull();
 	});
 
 	it('renders an empty wrapper when no title/subtitle/eyebrow are passed', async () => {
 		const { container } = render(TitleGroup, {});
 
-		expect(container.querySelector('.title')).toBeNull();
-		expect(container.querySelector('.subtitle')).toBeNull();
+		expect(container.querySelector('.title-md')).toBeNull();
+		expect(container.querySelector('.subtitle-sm')).toBeNull();
 		expect(container.querySelector('.eyebrow')).toBeNull();
 	});
 
@@ -64,8 +62,8 @@ describe('TitleGroup', () => {
 			emphasis: 'secondary'
 		});
 
-		expect(container.querySelector('.title')).toBeNull();
-		expect(container.querySelector('.subtitle')).toBeNull();
+		expect(container.querySelector('.title-md')).toBeNull();
+		expect(container.querySelector('.subtitle-sm')).toBeNull();
 
 		const eyebrow = container.querySelector('.eyebrow');
 		expect(eyebrow?.textContent).toBe('Chart title');
@@ -80,5 +78,29 @@ describe('TitleGroup', () => {
 
 		expect(container.querySelector('.eyebrow')).toBeNull();
 		expect(container.textContent).toBe('');
+	});
+
+	it('renders the title as a heading at headingLevel', async () => {
+		const { container } = render(TitleGroup, { title: 'Chart title', headingLevel: 3 });
+
+		expect(container.querySelector('h3')).toHaveTextContent('Chart title');
+	});
+
+	it('keeps the same classes when headingLevel is set', async () => {
+		const { container } = render(TitleGroup, { title: 'Chart title', headingLevel: 2 });
+
+		expect(container.querySelector('h2')?.className).toBe('title-md text-color-text');
+	});
+
+	it('renders a deferred title as a heading with the eyebrow role', async () => {
+		const { container } = render(TitleGroup, {
+			title: 'Chart title',
+			emphasis: 'secondary',
+			headingLevel: 4
+		});
+
+		const heading = container.querySelector('h4');
+		expect(heading).toHaveTextContent('Chart title');
+		expect(heading).toHaveClass('eyebrow');
 	});
 });

@@ -59,12 +59,12 @@
 	{#snippet template()}
 		<div class="flex flex-col gap-8">
 			<div class="w-96">
-				<h2 class="text-large font-bold">Control</h2>
+				<h2 class="label-lg">Control</h2>
 				<MergeValuesControl bind:groups={groupings} />
 			</div>
 
 			<div>
-				<h2 class="text-large font-bold">Group object</h2>
+				<h2 class="label-lg">Group object</h2>
 				<pre>{JSON.stringify(groupings, null, 2)}</pre>
 			</div>
 		</div>
@@ -92,7 +92,7 @@
 			</div>
 
 			<div class="text-color-text">
-				<h2 class="text-large font-bold">Callback</h2>
+				<h2 class="label-lg">Callback</h2>
 				<p>Times called: <strong>{callbackCount}</strong></p>
 				<p>Last called at: <strong>{lastChangedAt}</strong></p>
 			</div>
@@ -105,12 +105,12 @@
 	{#snippet template()}
 		<div class="flex flex-col gap-8">
 			<div class="w-96">
-				<h2 class="text-large font-bold">Single value</h2>
+				<h2 class="label-lg">Single value</h2>
 				<MergeValuesControl bind:groups={singleValue} />
 			</div>
 
 			<div class="w-96">
-				<h2 class="text-large font-bold">Empty list</h2>
+				<h2 class="label-lg">Empty list</h2>
 				<MergeValuesControl bind:groups={emptyValues} />
 			</div>
 		</div>

@@ -233,7 +233,7 @@ Once the limit is reached, no further options can be selected.
 <Story name="Binding to value">
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
-			<div>Current value: <span class="font-bold">{selectedValue}</span></div>
+			<div>Current value: <span class="text-strong">{selectedValue}</span></div>
 
 			<Button onclick={() => (selectedValue = 2)}>Reset to 2</Button>
 			<Button variant="outline" emphasis="secondary" onclick={() => (selectedValue = null)}>
@@ -248,7 +248,7 @@ Once the limit is reached, no further options can be selected.
 <Story name="Binding to value - multiple selections">
 	{#snippet template(args)}
 		<div class="flex w-[500px] flex-col gap-2">
-			<div>Current value: <span class="font-bold">{selectedValueMulti}</span></div>
+			<div>Current value: <span class="text-strong">{selectedValueMulti}</span></div>
 
 			<Button onclick={() => (selectedValueMulti = [1, 3])}>Reset to 1 and 3</Button>
 			<Button variant="outline" emphasis="secondary" onclick={() => (selectedValueMulti = null)}>

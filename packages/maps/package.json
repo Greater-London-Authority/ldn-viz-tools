@@ -91,6 +91,7 @@
 		"vitest-browser-svelte": "^2.0.1"
 	},
 	"peerDependencies": {
+		"@ldn-viz/themes": "*",
 		"@ldn-viz/ui": "*",
 		"svelte": "^5.33.0"
 	}

@@ -21,10 +21,10 @@
 
 	let { label, primary, secondary, layout = 'vertical', size }: Props = $props();
 
-	let labelRole = $derived(size === 'lg' ? 'label' : 'label-sm');
+	let labelRole = $derived(size === 'lg' ? 'label-md' : 'label-sm');
 </script>
 
-<div class={classNames('product space-y-1')} data-testid="metric">
+<div class={classNames('typeset-product space-y-1')} data-testid="metric">
 	{#if label}
 		<p class={classNames(labelRole, 'text-color-text-muted')}>{label}</p>
 	{/if}

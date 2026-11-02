@@ -123,7 +123,7 @@
 			...props,
 			getFillColor: (row) => eventTypeRGB(getDatum(row)),
 			stroked: true,
-			getLineColor: theme.colorTokenNameToRGBArray('geo.inverse.feature.default') as [
+			getLineColor: theme.colorTokenNameToRGBArray('inverse.geo.feature.default') as [
 				number,
 				number,
 				number
