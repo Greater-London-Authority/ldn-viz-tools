@@ -475,12 +475,14 @@ These roles change size, in pixels:
 | `display-lg`  | Both     | 40   | 48   | 56   | 64   | 72   |
 | `display-md`  | Both     | 36   | 40   | 48   | 56   | 64   |
 | `display-sm`  | Both     | 32   | 36   | 40   | 48   | 56   |
-| `headline-lg` | Both     | 30   | 32   | 36   | 36   | 40   |
+| `headline-lg` | Longform | 30   | 32   | 36   | 40   | 40   |
+| `headline-lg` | Product  | 30   | 32   | 36   | 36   | 40   |
 | `headline-md` | Longform | 28   | 28   | 30   | 32   | 36   |
 | `headline-md` | Product  | 28   | 28   | 30   | 30   | 30   |
-| `headline-sm` | Longform | 26   | 26   | 28   | 30   | 32   |
+| `headline-sm` | Longform | 26   | 26   | 28   | 30   | 30   |
 | `subhead-lg`  | Longform | 24   | 24   | 24   | 26   | 26   |
 | `subhead-md`  | Longform | 22   | 22   | 22   | 24   | 24   |
+| `title-lg`    | Longform | 22   | 22   | 22   | 24   | 24   |
 | `body-lg`     | Longform | 18   | 18   | 20   | 20   | 20   |
 | `metric-lg`   | Both     | 28   | 30   | 32   | 32   | 36   |
 

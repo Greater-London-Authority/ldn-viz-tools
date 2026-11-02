@@ -9670,12 +9670,12 @@
             "font-size": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.lg.typography.scale.9}"
+              "value": "{primitive.lg.typography.scale.10}"
             },
             "line-height": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.lg.typography.line-height.default.9}"
+              "value": "{primitive.lg.typography.line-height.default.10}"
             },
             "letter-spacing": {
               "type": "dimension",
@@ -9830,12 +9830,12 @@
             "font-size": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.lg.typography.scale.3}"
+              "value": "{primitive.lg.typography.scale.4}"
             },
             "line-height": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.lg.typography.line-height.default.3}"
+              "value": "{primitive.lg.typography.line-height.default.4}"
             },
             "letter-spacing": {
               "type": "dimension",
@@ -11244,12 +11244,12 @@
             "font-size": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.xl.typography.scale.8}"
+              "value": "{primitive.xl.typography.scale.7}"
             },
             "line-height": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.xl.typography.line-height.default.8}"
+              "value": "{primitive.xl.typography.line-height.default.7}"
             },
             "letter-spacing": {
               "type": "dimension",
@@ -11352,12 +11352,12 @@
             "font-size": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.xl.typography.scale.3}"
+              "value": "{primitive.xl.typography.scale.4}"
             },
             "line-height": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.xl.typography.line-height.default.3}"
+              "value": "{primitive.xl.typography.line-height.default.4}"
             },
             "letter-spacing": {
               "type": "dimension",
