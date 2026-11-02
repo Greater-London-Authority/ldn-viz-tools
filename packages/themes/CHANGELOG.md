@@ -1,5 +1,12 @@
 # @ldn-viz/themes
 
+## 10.0.0
+
+### Major Changes
+
+- 257b51d: CHANGED: every class the specification names (typesets, roles, usage aliases, flow, emphasis, elevation, `.container` and the other grid classes, and focus styles) is now generated as plain CSS in `system.css`, and the Tailwind preset no longer adds them. The preset is generated and only maps Tailwind's theme onto the custom properties; the `.form-*` classes are plain CSS in `system.css`, and `@tailwindcss/forms` is no longer a dependency. Tailwind apps import `index.css` as well as the preset. A new `reset.css` (imported first by `index.css`) ports Tailwind's preflight at zero specificity. Unclassed markup (Markdown, CMS output) gets content styles inside `typeset-longform` and `typeset-product--formatted`; `.not-prose` becomes `.not-typeset`. Responsive and state variants of system classes (`md:mt-flow-loose`) are no longer available. See `MIGRATION.md`. The preset exposes semantic colours only: the `seed` and palette-ramp colour utilities are removed. Each font-family custom property now ends in a fallback stack. The grid gutter tokens and the `.grid-gutter` and `.grid-gutter-fluid` classes are removed: space tiled blocks with `gap-flow`. The parts of a title group have no flow step between them. Form controls are 40px tall, with the border inside their padding. The `table/cell` usage alias is renamed `table/body` (`.table-body`), because `.table-cell` is also a Tailwind display utility.
+- eaca94a: CHANGED: rebuild the token pipeline on the version 4 Figma export and publish named outputs through an `exports` map: `index.css`, `tokens.css`, `system.css`, `colors.js` and the Tailwind preset at `@ldn-viz/themes/tailwind`. The per-category `styles/*.css` files, `styles/js/color-tokens.js` and `ldn-theme.cjs` are removed. Several custom properties, classes and JavaScript keys are renamed, including `container` → `surface`, `--grid-spacing-*` → `--grid-*`, `flow-prose`/`flow-product` → `flow-spacious`/`flow-standard`, and the typography set and scale names. See `MIGRATION.md` for the full list.
+
 ## 9.2.0
 
 ### Minor Changes
