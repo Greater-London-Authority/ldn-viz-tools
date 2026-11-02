@@ -1,5 +1,19 @@
 # ldn-viz-tools-charts
 
+## 10.0.0
+
+### Major Changes
+
+- f0d016a: - CHANGED: requires `@ldn-viz/themes` 10, now a peer dependency, and its `index.css` (or `system.css`) loaded by the app. Chart text uses the product typeset with the `chart-*` usage aliases, and Observable Plot text reads the role custom properties.
+
+### Patch Changes
+
+- Updated dependencies [257b51d]
+- Updated dependencies [eaca94a]
+- Updated dependencies [f0d016a]
+  - @ldn-viz/themes@10.0.0
+  - @ldn-viz/ui@25.0.0
+
 ## 9.5.0
 
 ### Minor Changes
