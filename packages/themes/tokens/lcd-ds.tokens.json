@@ -11218,12 +11218,12 @@
             "font-size": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.xl.typography.scale.9}"
+              "value": "{primitive.xl.typography.scale.8}"
             },
             "line-height": {
               "description": "",
               "type": "dimension",
-              "value": "{primitive.xl.typography.line-height.default.9}"
+              "value": "{primitive.xl.typography.line-height.default.8}"
             },
             "letter-spacing": {
               "type": "dimension",
