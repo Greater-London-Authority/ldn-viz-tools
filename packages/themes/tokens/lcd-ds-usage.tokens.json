@@ -571,11 +571,11 @@
         "title": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
-            "fontSize": "{semantic-typography.product.title.sm.font-size}",
-            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
-            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
-            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+            "fontFamily": "{semantic-typography.product.title.md.font-family}",
+            "fontSize": "{semantic-typography.product.title.md.font-size}",
+            "fontWeight": "{semantic-typography.product.title.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.md.line-height}"
           }
         },
         "subtitle": {
@@ -643,11 +643,11 @@
         "title": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
-            "fontSize": "{semantic-typography.product.title.sm.font-size}",
-            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
-            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
-            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+            "fontFamily": "{semantic-typography.product.title.md.font-family}",
+            "fontSize": "{semantic-typography.product.title.md.font-size}",
+            "fontWeight": "{semantic-typography.product.title.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.md.line-height}"
           }
         },
         "subtitle": {
@@ -735,21 +735,21 @@
         "header-title": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
-            "fontSize": "{semantic-typography.product.title.sm.font-size}",
-            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
-            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
-            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+            "fontFamily": "{semantic-typography.product.title.md.font-family}",
+            "fontSize": "{semantic-typography.product.title.md.font-size}",
+            "fontWeight": "{semantic-typography.product.title.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.md.line-height}"
           }
         },
         "sidebar-title": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
-            "fontSize": "{semantic-typography.product.title.sm.font-size}",
-            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
-            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
-            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+            "fontFamily": "{semantic-typography.product.title.md.font-family}",
+            "fontSize": "{semantic-typography.product.title.md.font-size}",
+            "fontWeight": "{semantic-typography.product.title.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.md.line-height}"
           }
         },
         "dialog-title": {
@@ -765,11 +765,11 @@
         "card-title": {
           "$type": "typography",
           "$value": {
-            "fontFamily": "{semantic-typography.product.title.sm.font-family}",
-            "fontSize": "{semantic-typography.product.title.sm.font-size}",
-            "fontWeight": "{semantic-typography.product.title.sm.font-weight}",
-            "letterSpacing": "{semantic-typography.product.title.sm.letter-spacing}",
-            "lineHeight": "{semantic-typography.product.title.sm.line-height}"
+            "fontFamily": "{semantic-typography.product.title.md.font-family}",
+            "fontSize": "{semantic-typography.product.title.md.font-size}",
+            "fontWeight": "{semantic-typography.product.title.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.title.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.title.md.line-height}"
           }
         },
         "card-subtitle": {

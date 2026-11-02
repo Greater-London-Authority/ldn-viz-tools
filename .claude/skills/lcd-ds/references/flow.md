@@ -33,7 +33,7 @@ A context spaces only its direct children. It sets their vertical margins to zer
 | `h3` to `h5`, `title-*`, and the title aliases (`.card-title`, `.chart-title`, `.table-title`, `.header-title`, `.sidebar-title`) | `loose` |
 | A heading straight after another heading | none |
 | A `subhead-*`, `subtitle-*` or subtitle alias straight after a heading | none |
-| A heading straight after an `.eyebrow` | none |
+| A heading straight after an `.eyebrow` | `tight` |
 | An `.eyebrow` before a headline or display | `section` |
 | A `caption-*` class or `.chart-note` straight after a block object | `tight` |
 

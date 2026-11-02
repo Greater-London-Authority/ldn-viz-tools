@@ -22,7 +22,7 @@
 	const orientationClasses = {
 		vertical: 'flex-col w-20 space-y-0.5 pb-0.5',
 		horizontal:
-			'flex border-b-4 border-b-color-surface-accent w-full pt-5 pb-0 space-x-0.5 items-end'
+			'flex border-b-4 border-b-color-surface-accent w-full pb-0 space-x-0.5 items-end'
 	};
 
 	const iconOrientationClasses = {

@@ -419,13 +419,13 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 		// 3 · space before headings: major and minor
 		rule(`${root} > ${visible} + ${major}${unset}`, margin('section')),
 		rule(`${root} > ${visible} + ${minor}${unset}`, margin('loose')),
-		// 4 · the parts of a title group have no space between them: stacked
-		// headings, a companion under its heading, and a heading under its
-		// eyebrow. Line height separates them (ADR 0012). The section step moves
-		// above the eyebrow.
+		// 4 · the parts of a title group sit close: stacked headings and a
+		// companion under its heading have no space, and line height separates
+		// them. A heading under its eyebrow takes the tight step (ADR 0012). The
+		// section step moves above the eyebrow.
 		rule(`${root} > ${heading} + ${heading}${unset}`, { 'margin-top': '0' }),
 		rule(`${root} > ${heading} + ${companion}${unset}`, { 'margin-top': '0' }),
-		rule(`${root} > ${eyebrow} + ${heading}${unset}`, { 'margin-top': '0' }),
+		rule(`${root} > ${eyebrow} + ${heading}${unset}`, margin('tight')),
 		rule(`${root} > ${visible} + ${eyebrow}${unset}:has(+ ${major})`, margin('section')),
 		// 5 · a caption binds to its figure, or to the block object above it
 		rule(`${root} > figure > figcaption`, margin('tight')),

@@ -48,9 +48,13 @@ export const getContent = async (slug: string = 'index') => {
 		error(404, 'Could not find the document.');
 	}
 
+	// A folder's index.md is its landing page. Front matter `layout` overrides this.
+	const layout = metadata.layout ?? (match.path?.endsWith('/index.md') ? 'index' : 'page');
+
 	return {
 		component: content.default,
-		metadata
+		metadata,
+		layout
 	};
 };
 

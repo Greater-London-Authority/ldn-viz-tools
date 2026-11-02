@@ -1,10 +1,10 @@
 <script lang="ts">
-	import DocsLayout from '$lib/layouts/DocsLayout.svelte';
+	import DocsShell from '$lib/layouts/DocsShell.svelte';
 	import { navigation } from '$lib/navigation';
 
 	let { children } = $props();
 </script>
 
-<DocsLayout {navigation}>
+<DocsShell {navigation}>
 	{@render children()}
-</DocsLayout>
+</DocsShell>

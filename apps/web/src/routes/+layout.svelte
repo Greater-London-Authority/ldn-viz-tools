@@ -4,6 +4,7 @@
 
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
+	import { siteMenu } from '$lib/siteMenu';
 	import { breakPoint, sidebarState } from '$lib/state.svelte';
 	import { resolveNavItems } from '$lib/utils';
 	import {
@@ -23,14 +24,9 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import '../app.postcss';
 
-	let mainMenu = [
-		{ title: 'Design System', id: 'design-system-docs', href: '/design-system' }
-		// { title: 'Contact', id: 'contact', href: '/contact' }
-	];
-
 	let { children } = $props();
 
-	let activeMenuItem = $derived(findActiveItem(mainMenu, page, resolve));
+	let activeMenuItem = $derived(findActiveItem(siteMenu, page, resolve));
 
 	$effect(() => {
 		sidebarState.state.isOpen = breakPoint.current >= 1280;
@@ -81,7 +77,7 @@
 
 <div class="flex min-h-dvh flex-col bg-color-surface">
 	<Header>
-		{#if page.data.metadata?.slug !== 'index'}
+		{#if page.data.hasSidebar}
 			<Button
 				variant="square"
 				size="sm"
@@ -101,7 +97,7 @@
 			{#if breakPoint.current >= 768}
 				<HeaderItem>
 					<NavigationMenu
-						items={resolveNavItems(mainMenu, resolve)}
+						items={resolveNavItems(siteMenu, resolve)}
 						orientation="horizontal"
 						ariaLabel="main menu"
 						activeMenuItemId={activeMenuItem?.id}

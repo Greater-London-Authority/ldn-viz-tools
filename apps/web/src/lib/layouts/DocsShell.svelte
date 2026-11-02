@@ -14,7 +14,9 @@
 	{#snippet main()}
 		{@render children?.()}
 
-		<div class="container mx-auto">
+		<!-- We cant wrap the whole content in a container,
+		 but the page nav requires it's own -->
+		<div class="container">
 			<PageNav />
 		</div>
 	{/snippet}

@@ -1,8 +1,8 @@
 ---
 title: Chart examples
 description: Using our design system to produce clear, understandable and accessible charts
-section: Data visualisation
 navLabel: Chart examples
+order: 6
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-2.svg
 ---

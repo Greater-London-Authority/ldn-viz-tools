@@ -1,26 +1,24 @@
 ---
 title: Design System
 description: A unified approach to UI design, data presentation and mapping.
-section: Overview
 heroImage: header-design-system.svg
 thumbnail: cta-design-system.svg
-layout: index
 ---
 
 <script>
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="typeset-longform body-lg text-color-text-muted">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
+<p class="subtitle-lg">The London City Data team have developed this design system to coordinate the design of web applications, product templates and documentation.</p>
 
-<div class="grid sm:grid-cols-3 grid-rows-[auto] gap-flow">
+<div class="not-typeset mt-flow-section grid sm:grid-cols-3 grid-rows-[auto] gap-flow">
 
 <ImageLink
     url="/design-system/foundations"
     image="cta-foundations.svg"
     title="Foundations">
 
-<p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+<p>Type, colour, spacing and other essentials. The rules every product built with the system follows, from a single chart to a full application.</p>
 </ImageLink>
 
 <ImageLink
@@ -28,7 +26,7 @@ layout: index
     image="cta-application-design.svg"
     title="Application Design">
 
-<p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+<p>Guiding principles for consistent presentation. Regular patterns and structures applied to our applications and products.</p>
 </ImageLink>
 
 <ImageLink
@@ -36,7 +34,7 @@ layout: index
     image="cta-dataviz.svg"
     title="Data Visualisation">
 
-<p>A reusable library of type, UI, map & chart components, focused on making interactive data tools & visualisations, faster, better and more accessible.</p>
+<p>Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.</p>
 </ImageLink>
 
 </div>

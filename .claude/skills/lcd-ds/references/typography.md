@@ -47,7 +47,7 @@ The role set is closed. Adding a role needs an ADR.
 
 The preset has no Tailwind size, weight or line-height utilities, so `text-sm`, `font-bold` and `leading-none` produce nothing. Change the role instead, or use an emphasis class.
 
-No title role is smaller than 20px. A heading inside a small container, such as a popover, a sidebar section or a panel, takes a label role: `label-lg`, or `label-md` one level down. `.dialog-title` is `label-lg` for the same reason.
+No title role is smaller than 18px. A heading inside a small container, such as a popover, a sidebar section or a panel, takes a label role: `label-lg`, or `label-md` one level down. `.dialog-title` is `label-lg` for the same reason.
 
 ## Emphasis
 
@@ -118,4 +118,4 @@ For example, a card holding one chart, where the chart is the subject: the chart
 
 The parts have no space between them, in either typeset. Their line heights separate them.
 
-In `@ldn-viz/ui`, `TitleGroup` in `packages/ui/src/lib/chrome/` renders a group with `eyebrow`, `title-sm` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it through `ChromeHeader`.
+In `@ldn-viz/ui`, `TitleGroup` in `packages/ui/src/lib/chrome/` renders a group with `eyebrow`, `title-md` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it through `ChromeHeader`.

@@ -21,7 +21,7 @@
 	let { title = '', subtitle = '', eyebrow = '', class: classes = '' }: Props = $props();
 </script>
 
-<div class={classNames('typeset-product', classes)}>
+<div class={classNames('typeset-product flow-standard', classes)}>
 	{#if eyebrow}
 		<p class="eyebrow">{eyebrow}</p>
 	{/if}

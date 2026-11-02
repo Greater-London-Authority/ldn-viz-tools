@@ -109,7 +109,7 @@
 					<div class="flex items-end justify-between">
 						<div>
 							<p class="eyebrow">Fully custom</p>
-							<h3 class="title-sm">Head snippet</h3>
+							<h3 class="title-md">Head snippet</h3>
 						</div>
 
 						<Input type="range" name="range" label="Header control" />

@@ -11,7 +11,7 @@ describe('TitleGroup', () => {
 			eyebrow: 'Eyebrow'
 		});
 
-		const title = container.querySelector('.title-sm');
+		const title = container.querySelector('.title-md');
 		expect(title?.textContent).toBe('Chart title');
 		expect(title?.className).toContain('text-color-text');
 
@@ -25,13 +25,13 @@ describe('TitleGroup', () => {
 	it('defaults to emphasis="primary"', async () => {
 		const { container } = render(TitleGroup, { title: 'Chart title' });
 
-		expect(container.querySelector('.title-sm')).toBeTruthy();
+		expect(container.querySelector('.title-md')).toBeTruthy();
 	});
 
 	it('omits eyebrow/title/subtitle elements that are not provided', async () => {
 		const { container } = render(TitleGroup, { title: 'Only a title' });
 
-		expect(container.querySelector('.title-sm')).toBeTruthy();
+		expect(container.querySelector('.title-md')).toBeTruthy();
 		expect(container.querySelector('.subtitle-sm')).toBeNull();
 		expect(container.querySelector('.eyebrow')).toBeNull();
 	});
@@ -39,7 +39,7 @@ describe('TitleGroup', () => {
 	it('renders an empty wrapper when no title/subtitle/eyebrow are passed', async () => {
 		const { container } = render(TitleGroup, {});
 
-		expect(container.querySelector('.title-sm')).toBeNull();
+		expect(container.querySelector('.title-md')).toBeNull();
 		expect(container.querySelector('.subtitle-sm')).toBeNull();
 		expect(container.querySelector('.eyebrow')).toBeNull();
 	});
@@ -62,7 +62,7 @@ describe('TitleGroup', () => {
 			emphasis: 'secondary'
 		});
 
-		expect(container.querySelector('.title-sm')).toBeNull();
+		expect(container.querySelector('.title-md')).toBeNull();
 		expect(container.querySelector('.subtitle-sm')).toBeNull();
 
 		const eyebrow = container.querySelector('.eyebrow');
@@ -89,7 +89,7 @@ describe('TitleGroup', () => {
 	it('keeps the same classes when headingLevel is set', async () => {
 		const { container } = render(TitleGroup, { title: 'Chart title', headingLevel: 2 });
 
-		expect(container.querySelector('h2')?.className).toBe('title-sm text-color-text');
+		expect(container.querySelector('h2')?.className).toBe('title-md text-color-text');
 	});
 
 	it('renders a deferred title as a heading with the eyebrow role', async () => {

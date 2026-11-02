@@ -9,19 +9,13 @@ const baseSchema = s.object({
 	path: s.path(),
 	content: s.markdown(),
 	navLabel: s.string().optional(),
+	order: s.number().optional(),
 	raw: s.raw()
 });
 
 const docSchema = baseSchema
 	.extend({
-		toc: s.toc(),
-		section: s.enum([
-			'Overview',
-			'Getting Started',
-			'Foundations',
-			'Application design',
-			'Data visualisation'
-		])
+		toc: s.toc()
 	})
 	.transform((data) => {
 		return {
