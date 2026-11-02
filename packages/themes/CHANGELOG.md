@@ -1,5 +1,11 @@
 # @ldn-viz/themes
 
+## 10.0.1
+
+### Patch Changes
+
+- 41b630b: changed the style of blockqoutes in markdown
+
 ## 10.0.0
 
 ### Major Changes
