@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 24.4.0
+
+### Minor Changes
+
+- 5117a14: FIXED: Input no longer incorrectly clamps value when `type="range"`
+
 ## 24.3.1
 
 ### Patch Changes

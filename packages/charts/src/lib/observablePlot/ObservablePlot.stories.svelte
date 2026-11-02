@@ -34,7 +34,8 @@
 </script>
 
 <script lang="ts">
-	import { Button, Select, theme } from '@ldn-viz/ui';
+	import { Button, Input, Select, theme } from '@ldn-viz/ui';
+	import { max } from 'd3';
 	import { format } from 'd3-format';
 	import type { Writable } from 'svelte/store';
 	import { writable } from 'svelte/store';
@@ -52,6 +53,9 @@
 	let clickedValue: any | undefined = $state(undefined);
 	let clickedIndex: any | undefined = $state(undefined);
 	let hoveredValue: any | undefined = $state(undefined);
+	let yearValue: string = $state('2024');
+	let minYear: string = '2015';
+	let maxYear: string = '2024';
 
 	const tooltipStore: Writable<Position> = writable();
 
@@ -119,6 +123,23 @@
 						y: (d) => '£' + format(',.4~s')(d)
 					}
 				}
+			})
+		]
+	});
+
+	let specYearSlider = $derived({
+		...spec,
+		marks: [
+			...spec.marks,
+			Plot.ruleX([yearValue]),
+			Plot.text([0], {
+				x: new Date(`${yearValue}-01-01T00:00:01`),
+				y: max(chartData, (d) => d.Value),
+				text: [yearValue],
+				dy: 0,
+				dx: 13,
+				rotate: 90,
+				textAnchor: 'start'
 			})
 		]
 	});
@@ -309,6 +330,30 @@
 					</div>
 					<div class="w-52">
 						<Select label="Another input" options={[]} />
+					</div>
+				</div>
+			{/snippet}
+		</ObservablePlot>
+	{/snippet}
+</Story>
+
+<Story name="With slider control">
+	{#snippet template(args)}
+		<ObservablePlot {...args} spec={specYearSlider} data={chartData}>
+			{#snippet controls()}
+				<div class="mb-4 flex max-w-48 flex-col">
+					<Input
+						label="Year: {yearValue}"
+						id="year-slider"
+						type="range"
+						name="year-slider"
+						min={minYear}
+						max={maxYear}
+						bind:value={yearValue}
+					/>
+					<div class="flex justify-between">
+						<span class="form-label text-xs">{minYear}</span>
+						<span class="form-label text-xs">{maxYear}</span>
 					</div>
 				</div>
 			{/snippet}
