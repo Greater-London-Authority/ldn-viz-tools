@@ -393,12 +393,19 @@ export const formatSystem = (dictionary, aliases, sheets = {}, cfg = config) => 
 	const unset = `:not(${override})`;
 	const is = (selectors) => `:is(${selectors.join(', ')})`;
 
-	const { majorHeadings, minorHeadings, companions, overline, caption, captionAliases } =
-		cfg.flowRoles;
+	const {
+		majorHeadings,
+		minorHeadings,
+		companions,
+		companionAliases,
+		overline,
+		caption,
+		captionAliases
+	} = cfg.flowRoles;
 	const major = is(roleSelectors(majorHeadings));
 	const minor = is(roleSelectors(minorHeadings));
 	const heading = is(roleSelectors([...majorHeadings, ...minorHeadings]));
-	const companion = is(roleSelectors(companions));
+	const companion = is([...companionAliases, ...roleClassesFor(companions)]);
 	const eyebrow = is(roleSelectors([overline]));
 	const blocks = is(cfg.flow.blockObjects);
 	const captions = is([...roleClassesFor([caption]), ...captionAliases]);

@@ -228,8 +228,8 @@ Colour differentiation is harder when elements are smaller, as there is physical
 Using high contrast and easily differentiable colours are particularly important when producing line charts. For bar charts and other larger graphical elements, you can lower your contrast a bit.
 
 > As with large text, for graphical objects such as charts and graphs a contrast ratio of 3:1 should be sufficient
-
-<cite>WCAG Guidelines</cite>
+>
+> <cite>WCAG Guidelines</cite>
 
 [Read more on WCAG Guidelines](https://wcag.com/resource/ui-quick-tips-for-designers/)
 

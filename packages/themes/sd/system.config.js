@@ -90,6 +90,15 @@ export const flowRoles = {
 	majorHeadings: ['display', 'headline'],
 	minorHeadings: ['title'],
 	companions: ['subhead', 'subtitle'],
+	// Only the role classes and the aliases named here count as companions:
+	// blockquote takes the subtitle role but is a block object, not a subtitle.
+	companionAliases: [
+		'.chart-subtitle',
+		'.table-subtitle',
+		'.dashboard-main-subtitle',
+		'.dashboard-section-subtitle',
+		'.card-subtitle'
+	],
 	overline: 'eyebrow',
 	// A caption couples tight to the block object above it (ADR 0005). Only
 	// the role classes and the aliases named here count: other aliases on the
