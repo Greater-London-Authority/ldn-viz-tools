@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/themes",
-	"version": "10.0.0",
+	"version": "10.0.1",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Greater-London-Authority/ldn-viz-tools.git"
