@@ -913,6 +913,26 @@
             "letterSpacing": "{semantic-typography.product.caption.sm.letter-spacing}",
             "lineHeight": "{semantic-typography.product.caption.sm.line-height}"
           }
+        },
+        "blockquote": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.subtitle.md.font-family}",
+            "fontSize": "{semantic-typography.product.subtitle.md.font-size}",
+            "fontWeight": "{semantic-typography.product.subtitle.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.subtitle.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.subtitle.md.line-height}"
+          }
+        },
+        "cite": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{semantic-typography.product.caption.md.font-family}",
+            "fontSize": "{semantic-typography.product.caption.md.font-size}",
+            "fontWeight": "{semantic-typography.product.caption.md.font-weight}",
+            "letterSpacing": "{semantic-typography.product.caption.md.letter-spacing}",
+            "lineHeight": "{semantic-typography.product.caption.md.line-height}"
+          }
         }
       }
     },
@@ -985,6 +1005,26 @@
           "fontWeight": "{semantic-typography.longform.caption.sm.font-weight}",
           "letterSpacing": "{semantic-typography.longform.caption.sm.letter-spacing}",
           "lineHeight": "{semantic-typography.longform.caption.sm.line-height}"
+        }
+      },
+      "blockquote": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.subtitle.md.font-family}",
+          "fontSize": "{semantic-typography.longform.subtitle.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.subtitle.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.subtitle.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.subtitle.md.line-height}"
+        }
+      },
+      "cite": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{semantic-typography.longform.caption.md.font-family}",
+          "fontSize": "{semantic-typography.longform.caption.md.font-size}",
+          "fontWeight": "{semantic-typography.longform.caption.md.font-weight}",
+          "letterSpacing": "{semantic-typography.longform.caption.md.letter-spacing}",
+          "lineHeight": "{semantic-typography.longform.caption.md.line-height}"
         }
       }
     }

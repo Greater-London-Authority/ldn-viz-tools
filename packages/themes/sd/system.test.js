@@ -138,6 +138,11 @@ describe('title groups (ADR 0012)', () => {
 		expect(titleGroup.some((s) => /> :is\(\.eyebrow\) \+ /.test(s))).toBe(false);
 	});
 
+	it('leaves blockquote out of the companions, although it takes the subtitle role', () => {
+		const rule = css.match(/\n[^\n]*\) \+ (:is\(\.chart-subtitle[^)]*\))/);
+		expect(rule[1]).not.toContain('blockquote');
+	});
+
 	it('gives a heading under its eyebrow the tight step', () => {
 		const rule = css.match(/\n([^\n]*> :is\(\.eyebrow\) \+ [^{]*) \{\n {2}margin-top: ([^;]+);/);
 		expect(rule[2]).toBe('var(--flow-tight)');

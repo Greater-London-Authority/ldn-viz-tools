@@ -496,18 +496,20 @@ Choose a typeset and a breakpoint to see the values for each role.
 
 ### Formatted content
 
-In a `typeset-longform` or `typeset-product--formatted`: Headings, the lead paragraph and captions take these roles:
+In a `typeset-longform` or `typeset-product--formatted`: Headings, the lead paragraph, quotes and captions take these roles:
 
-| Element                                                          | Role                |
-| ---------------------------------------------------------------- | ------------------- |
-| <span class="headline-lg">h1</span>                              | `headline-lg`       |
-| <span class="headline-sm">h2</span>                              | `headline-sm`       |
-| <span class="title-lg">h3</span>                                 | `title-lg`          |
-| <span class="title-md">h4</span>                                 | `title-md`          |
-| <span class="title-sm">h5</span>                                 | `title-sm`          |
-| <span class="body-lg text-color-text-muted">p.lead</span>        | `body-lg`, muted    |
-| <span class="caption-sm text-color-text-muted">figcaption</span> | `caption-sm`, muted |
-| Any other text                                                   | `body-md`           |
+| Element                                                           | Role                                                       |
+| ----------------------------------------------------------------- | ---------------------------------------------------------- |
+| <span class="headline-lg">h1</span>                               | `headline-lg`                                              |
+| <span class="headline-sm">h2</span>                               | `headline-sm`                                              |
+| <span class="title-lg">h3</span>                                  | `title-lg`                                                 |
+| <span class="title-md">h4</span>                                  | `title-md`                                                 |
+| <span class="title-sm">h5</span>                                  | `title-sm`                                                 |
+| <span class="body-lg text-color-text-muted">p.lead</span>         | `body-lg`, muted                                           |
+| <span class="caption-sm text-color-text-muted">figcaption</span>  | `caption-sm`, muted                                        |
+| <span class="subtitle-md text-color-text-muted">blockquote</span> | `subtitle-md`, muted, with a brand-colour rule on the left |
+| <span class="caption-md text-color-text-muted">cite</span>        | `caption-md`, muted, upright                               |
+| Any other text                                                    | `body-md`                                                  |
 
 Other elements keep the role of the text around them, with these changes:
 
@@ -521,11 +523,9 @@ Other elements keep the role of the text around them, with these changes:
 | <small>small</small>                                 | 0.875 times the surrounding size                                                                            |
 | <code>code</code>                                    | 0.875 times the surrounding size, on a muted surface                                                        |
 | <kbd>kbd</kbd>                                       | As `code`, with a border                                                                                    |
-| <cite>cite</cite>                                    | Upright                                                                                                     |
 | <ul><li>ul</li></ul>                                 | Disc markers, then circle and square when nested. Markers are muted                                         |
 | <ol><li>ol</li></ol>                                 | Numbers, then letters and roman numerals when nested                                                        |
 | <dl><dt>dt</dt><dd>dd</dd></dl>                      | Term semibold, description indented                                                                         |
-| <blockquote>blockquote</blockquote>                  | Muted, with a brand-colour rule on the left                                                                 |
 | <pre>pre</pre>                                       | Muted surface, scrolls sideways when too wide                                                               |
 | <details><summary>summary</summary>details</details> | Summary semibold                                                                                            |
 | `table`                                              | Full width. Caption muted and above, header cells semibold, figures in tabular numerals, rules between rows |

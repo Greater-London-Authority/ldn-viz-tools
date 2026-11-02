@@ -269,8 +269,8 @@ Your mapping or visualisation tool of choice will usually allow you to choose a 
 Lisa Charlotte Muth from Datawrapper has written another [brilliant article exploring different interpolations](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/). This quote from that article is a perfect summing up of the issue.
 
 > All maps are wrong, but some are useful
-
-<cite>Lisa Charlotte Muth (after George Box)</cite>
+>
+> <cite>Lisa Charlotte Muth (after George Box)</cite>
 
 #### Perceptually even
 

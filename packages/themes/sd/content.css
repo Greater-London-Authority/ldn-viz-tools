@@ -152,6 +152,7 @@ blockquote > * + * {
 }
 
 cite {
+	color: var(--color-text-muted);
 	font-style: normal;
 }
 
