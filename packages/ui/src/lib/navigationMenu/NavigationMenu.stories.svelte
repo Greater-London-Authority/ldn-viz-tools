@@ -4,8 +4,12 @@
 	import NavigationMenu from './NavigationMenu.svelte';
 
 	/**
-	 * Primarily intended to be used in vertical orientation in a sidebar or horizontal in the header,
-	 * The `NavigationMenu` component is used to display navigation that can be one or more layers deep.
+	 * The `<NavigationMenu>` component renders a `<nav>` landmark holding a nested list of links, up to four levels deep.
+	 * An item with children has a chevron button that expands or collapses its list, unless `isAlwaysExpanded` is set.
+	 * Set `orientation` to `horizontal` to lay the top level out in a row, with each submenu floating below its item.
+	 *
+	 * **Alternatives**: use [Breadcrumbs](./?path=/docs/ui-components-breadcrumbs--documentation) to show where the current page sits in a hierarchy, or [Tabs](./?path=/docs/ui-components-tabs--documentation) to switch between views on one page.
+	 *
 	 */
 
 	const { Story } = defineMeta({
