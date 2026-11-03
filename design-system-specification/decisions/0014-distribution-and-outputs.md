@@ -3,7 +3,7 @@ id: '0014'
 title: Custom properties are the public surface, published through an exports map
 status: accepted
 date: 2026-10-21
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [tokens]
 breaking: true

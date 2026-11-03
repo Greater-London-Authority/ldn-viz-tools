@@ -3,7 +3,7 @@ id: '0002'
 title: Token Naming Grammar
 status: accepted
 date: 2026-09-30
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Design Tokens]
 breaking: false

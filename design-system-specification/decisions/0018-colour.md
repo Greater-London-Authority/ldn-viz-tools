@@ -3,7 +3,7 @@ id: '0018'
 title: Colour is chosen by role from semantic tokens that have a value for each mode
 status: accepted
 date: 2026-10-22
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Colour]
 breaking: false
