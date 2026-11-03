@@ -37,3 +37,6 @@ jobs:
             echo "Component docstrings and Storybook are not in sync"
             exit 1
           fi
+
+      - name: Run tests
+        run: npm run test
