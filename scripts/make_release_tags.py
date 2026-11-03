@@ -12,7 +12,7 @@ reads every package.json that commit modified, and emits one
 
 Usage: make_release_tags.py [--repo PATH] [--rev REV] [--out FILE]
 
-Unusually, run:
+Usually, run:
 
     make_release_tags.py --rev main
 
