@@ -209,8 +209,7 @@ describe('ObservablePlotInner', () => {
 			id: 'resize-diff'
 		});
 
-		const svgWidth = () =>
-			container.querySelector('#resize-diff svg')?.getAttribute('width');
+		const svgWidth = () => container.querySelector('#resize-diff svg')?.getAttribute('width');
 		const divWidth = () =>
 			String((container.querySelector('#resize-diff') as HTMLElement).clientWidth);
 
