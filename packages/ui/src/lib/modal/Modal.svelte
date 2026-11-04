@@ -16,7 +16,7 @@
 
 	type Props = Dialog.RootProps & {
 		hintLabel?: string;
-		title?: Snippet;
+		title: Snippet;
 		description?: Snippet;
 		trigger?: Snippet<[Record<string, any>]>;
 		buttons?: Snippet;
@@ -47,7 +47,7 @@
 		hintLabel,
 		contentProps,
 		/**
-		 * Title that appears at the top of the modal
+		 * Title that appears at the top of the modal. Required: it names the dialog for screen readers.
 		 */
 		title,
 
@@ -89,12 +89,13 @@
 
 	const modalClass = $derived(
 		classNames(
-			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-surface elevation-5 pointer-events-auto',
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-surface elevation-5 pointer-events-auto outline-none',
 			widthClasses[width]
 		)
 	);
 
-	let descriptionEl: Element;
+	// The dialog itself takes focus on open, so a screen reader reads its title and description.
+	let contentEl: HTMLElement | null = $state(null);
 </script>
 
 {#snippet modalTrigger()}
@@ -121,17 +122,18 @@
 		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
 			<Dialog.Content
 				{...contentProps}
+				bind:ref={contentEl}
 				class={modalClass}
 				onOpenAutoFocus={(e) => {
 					e.preventDefault();
-					descriptionEl?.focus();
+					contentEl?.focus();
 				}}
 			>
 				<div
 					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-surface-muted p-3 pr-4 text-color-text ${headerTheme}`}
 				>
-					<Dialog.Title class="typeset-product label-md">
-						{@render title?.()}
+					<Dialog.Title class="typeset-product title-sm">
+						{@render title()}
 					</Dialog.Title>
 					<Dialog.Close>
 						{#snippet child({ props })}
@@ -145,9 +147,11 @@
 
 				<div class="overflow-y-auto">
 					<div class="px-4 py-6">
-						<Dialog.Description>
-							<span bind:this={descriptionEl}>{@render description?.()}</span>
-						</Dialog.Description>
+						{#if description}
+							<Dialog.Description>
+								{@render description()}
+							</Dialog.Description>
+						{/if}
 						{@render children?.()}
 					</div>
 				</div>
