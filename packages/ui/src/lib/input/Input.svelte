@@ -117,7 +117,7 @@
 				? 'cursor-not-allowed text-color-interactive-disabled placeholder-color-interactive-disabled'
 				: '',
 			type === 'range' ? 'form-range' : 'form-input',
-			'placeholder-color-text-wash'
+			'placeholder-color-text-muted'
 		)
 	);
 

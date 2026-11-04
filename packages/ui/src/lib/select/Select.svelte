@@ -232,7 +232,7 @@
 			--sv-icon-size: 20px;
 			--sv-separator-bg: var(--color-border-wash);
 			--sv-btn-border: 0;
-			--sv-placeholder-color: var(--color-text-wash);
+			--sv-placeholder-color: var(--color-text-muted);
 
 			--sv-dropdown-bg: var(--sv-bg);
 			--sv-dropdown-offset: var(--spacing-2);
