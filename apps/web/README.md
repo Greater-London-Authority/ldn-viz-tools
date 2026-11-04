@@ -5,7 +5,7 @@ This is configured by [`velite.config.js`](./velite.config.js) to scan the `./sr
 
 During `npm run dev`, a plugin in [`vite.config.ts`](./vite.config.ts) runs Velite in watch mode, so new markdown files and front matter changes reach the index while the dev server is running.
 
-`npm run build` runs Velite before the Vite build. To rebuild the index without the dev server, for example after changing the schema, run `npm run build:content`.
+`npm run build` runs Velite before the Vite build. To rebuild the index without doing a full build, for example after changing the schema, run `npm run build:content`.
 
 The [`svelte.config.js`](svelte.config.js) file defines a `$content/*` alias that resolves to `.velite/*`.
 It also specifies that [mdsx](https://github.com/svecosystem/mdsx) should be called as a pre-processor (configured by [`mdsx.config.ts`](./mdsx.config.ts)), so that markdown is rendered as formatted HTML rather than the raw markdown text. `mdsx` also allows Svelte components to be used within markdown documents, similarly to how MDX allows React components to be used within markdown documents. Its blueprint, [`src/lib/blueprints/default.svelte`](./src/lib/blueprints/default.svelte), replaces the HTML for links, images, code blocks and tables with our own components.
