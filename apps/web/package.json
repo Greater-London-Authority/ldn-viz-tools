@@ -27,7 +27,6 @@
 		"@ldn-viz/themes": "*",
 		"@ldn-viz/ui": "*",
 		"@ldn-viz/utils": "*",
-		"mdsvex": "^0.12.6",
 		"topojson-client": "^3.1.0"
 	},
 	"devDependencies": {

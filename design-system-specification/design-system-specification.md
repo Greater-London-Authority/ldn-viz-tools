@@ -223,7 +223,7 @@ The scale is built from five base sizes: 12, 14, 16, 18, (doubled twice) and 20 
 
 The system has two typesets: longform for reading, and product for interfaces, tables, charts and maps. Both use the same roles. A typeset can give a role its own font, weight, line height, letter-spacing or size. Longform is airier, which suits long passages of text, and product is tighter, which suits dashboards ([0003](./decisions/0003-typography.md)).
 
-Apart from line height, the only difference is that `subhead-md` and `subhead-lg` are larger in longform at `lg` and `xl`. The [full matrices](#line-height) give every value.
+Apart from line height, the difference is that seven roles are larger in longform at wider breakpoints: `headline-sm` from `md`, `body-lg` from `md`, and `headline-md`, `headline-lg`, `subhead-md`, `subhead-lg` and `title-lg` at `lg` or `xl`. The [full matrices](#line-height) give every value.
 
 | Class                        | For                                                 | Flow context    | Content styles and widths |
 | ---------------------------- | --------------------------------------------------- | --------------- | ------------------------- |
@@ -513,7 +513,7 @@ When a component contains two or more title groups, the designer chooses one to 
 
 A title group's title uses `title-md` unless the design needs a larger one ([0012](./decisions/0012-title-groupings.md)).
 
-The parts of a title group have no space between them, in every typeset and flow context. Their line heights separate them ([0005](./decisions/0005-flow.md), [0012](./decisions/0012-title-groupings.md)).
+The title and subtitle have no space between them, in every typeset and flow context. Their line heights separate them. The title sits the `tight` step below its eyebrow ([0005](./decisions/0005-flow.md), [0012](./decisions/0012-title-groupings.md)).
 
 Worked examples:
 

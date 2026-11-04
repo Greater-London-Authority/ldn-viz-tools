@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
 import ObservablePlotInner from './ObservablePlotInner.svelte';
+import ObservablePlotInnerHarness from './ObservablePlotInnerHarness.test.svelte';
 
 const data = [
 	{ x: 1, y: 2 },
@@ -183,7 +184,7 @@ describe('ObservablePlotInner', () => {
 		expect(tooltipEl.style.top).toBe('90px'); // 80 + 10
 	});
 
-	it('syncs spec.width to the container clientWidth on mount, re-rendering the plot', async () => {
+	it('renders the plot at the container clientWidth on mount, without mutating spec', async () => {
 		const spec = makeSpec();
 
 		const { container } = render(ObservablePlotInner, {
@@ -192,34 +193,31 @@ describe('ObservablePlotInner', () => {
 			id: 'resize-initial'
 		});
 
-		const containerDiv = container.querySelector('#resize-initial') as HTMLElement;
-		await expect.poll(() => (spec as { width?: number }).width).toBe(containerDiv.clientWidth);
+		await expect
+			.poll(() => {
+				const containerDiv = container.querySelector('#resize-initial') as HTMLElement;
+				return containerDiv.querySelector('svg')?.getAttribute('width');
+			})
+			.toBe(String((container.querySelector('#resize-initial') as HTMLElement).clientWidth));
+		expect((spec as { width?: number }).width).toBeUndefined();
 	});
 
-	it('re-renders via renderPlot on a "resize" event only when spec.width differs from the measured width', async () => {
-		const spec = makeSpec();
-
+	it('re-renders the plot at the new width when the container is resized', async () => {
 		const { container } = render(ObservablePlotInner, {
-			spec,
+			spec: makeSpec(),
 			data,
 			id: 'resize-diff'
 		});
 
-		const containerDiv = container.querySelector('#resize-diff') as HTMLElement;
-		await expect.poll(() => (spec as { width?: number }).width).toBe(containerDiv.clientWidth);
+		const svgWidth = () => container.querySelector('#resize-diff svg')?.getAttribute('width');
+		const divWidth = () =>
+			String((container.querySelector('#resize-diff') as HTMLElement).clientWidth);
 
-		const svgBefore = containerDiv.querySelector('svg');
+		await expect.poll(svgWidth).toBe(divWidth());
 
-		// No actual size change: dispatching "resize" should be a no-op (spec.width already matches).
-		window.dispatchEvent(new Event('resize'));
-		expect(containerDiv.querySelector('svg')).toBe(svgBefore);
+		container.style.width = '300px';
 
-		// Force spec.width out of sync with the real measured width, then simulate a resize.
-		(spec as { width?: number }).width = -1;
-		window.dispatchEvent(new Event('resize'));
-
-		await expect.poll(() => (spec as { width?: number }).width).toBe(containerDiv.clientWidth);
-		expect(containerDiv.querySelector('svg')).not.toBe(svgBefore);
+		await expect.poll(svgWidth).toBe('300');
 	});
 
 	it('remounts with fresh DOM nodes when a new spec object is passed, even if content is equivalent', async () => {
@@ -242,19 +240,25 @@ describe('ObservablePlotInner', () => {
 		expect(divAfter).not.toBe(divBefore);
 	});
 
-	it('does not remount when the same spec object reference is passed again', async () => {
+	it('does not remount when the parent passes the same spec object again', async () => {
 		const spec = makeSpec();
 
-		const { container, rerender } = render(ObservablePlotInner, {
+		const { container, rerender } = render(ObservablePlotInnerHarness, {
 			spec,
 			data,
 			id: 'no-remount-test'
 		});
 
+		// Wait for the initial width measurement, which remounts the div once.
+		await expect
+			.poll(() => container.querySelector('#no-remount-test svg')?.getAttribute('width'))
+			.toBe(String((container.querySelector('#no-remount-test') as HTMLElement).clientWidth));
+
 		const divBefore = container.querySelector('#no-remount-test');
-		await rerender({ spec });
+		await rerender({ spec, ariaHidden: false });
 
 		const divAfter = container.querySelector('#no-remount-test');
+		expect(divAfter?.getAttribute('aria-hidden')).toBe('false');
 		expect(divAfter).toBe(divBefore);
 	});
 });
