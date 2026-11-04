@@ -1,9 +1,11 @@
 # @ldn-viz/maps
 
-Svelte components for maps, built on [MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) and styled with the London City Data Design System (LCD-DS). The package has:
+Svelte components for maps, built on [MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/) and styled with the London City Data Design System (LCD-DS).
+
+The package's exports include:
 
 - `Map`, which creates a MapLibre map and switches its basemap with light and dark mode
-- map controls, such as zoom, fullscreen, geocoder and location search, positioned with `MapControlGroup`
+- map control components, such as zoom buttons and location search, positioned with `MapControlGroup`
 - `MapDeckOverlay` and layers for [deck.gl](https://deck.gl/), and `MapLayerSource` and `MapLayerView` for MapLibre layers
 - `MapDraw`, for drawing areas with [Terra Draw](https://terradraw.io/)
 - Ordnance Survey basemap styles, and constants such as `GREATER_LONDON_BOUNDS`
