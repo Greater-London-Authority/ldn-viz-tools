@@ -14,7 +14,9 @@ The package needs `@ldn-viz/themes` and Svelte 5.33 or later. Set up the theme C
 
 ## Use
 
-Import `Plot` from `@ldn-viz/charts`, not from `@observablehq/plot`, so that marks take the system's styles. Draw the axes with `Plot.axisX()` and `Plot.axisY()`. Axes that Observable Plot creates for you use its own styles.
+Import `Plot` from `@ldn-viz/charts`, not from `@observablehq/plot`, so that the plot uses the default styling from the LCD-DS system rather than those provided by ObservablePlot.
+
+Create the axes explicitly with `Plot.axisX()` and `Plot.axisY()`; axes that are implicitly defined and created by Observable Plot use its own styles.
 
 ```svelte
 <script>
