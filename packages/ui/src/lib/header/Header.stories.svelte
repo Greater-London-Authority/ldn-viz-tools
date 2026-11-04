@@ -79,7 +79,7 @@
 				</HeaderItem>
 
 				<HeaderItem>
-					<a class="label-sm" href="/#">Log Out</a>
+					<a class="label-sm" href="https://www.london.gov.uk/">Log Out</a>
 				</HeaderItem>
 			</HeaderRight>
 		</Header>
