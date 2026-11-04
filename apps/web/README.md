@@ -3,12 +3,12 @@
 This app uses [Velite](https://velite.js.org/) as an application data layer.
 This is configured by [`velite.config.js`](./velite.config.js) to scan the `./src/content` folder for markdown files ('documents'), and saves metadata about these files in the `.velite/docs.json` index file.
 
-As part of `npm run dev`, `velite --watch` is started, which will watch for file changes as long as it is running.
+During `npm run dev`, a plugin in [`vite.config.ts`](./vite.config.ts) runs Velite in watch mode, so new markdown files and front matter changes reach the index while the dev server is running.
 
-The addition of new markdown files, changes to the markdown frontmatter or schema are only picked up after running `npm run build:content` or `npm run build`
+`npm run build` runs Velite before the Vite build. To rebuild the index without the dev server, for example after changing the schema, run `npm run build:content`.
 
 The [`svelte.config.js`](svelte.config.js) file defines a `$content/*` alias that resolves to `.velite/*`.
-It also specifies that [mdsvex](https://mdsvex.pngwn.io/docs) should be called as a pre-processor (configured by [`mdsvex.config.js`](./mdsvex.config.js)), so that markdown is rendered as formatted HTML rather than the raw markdown text. `mdsvex` also allows Svelte components to be used within markdown documents, similarly to how MDX allows React components to be used within markdown documents.
+It also specifies that [mdsx](https://github.com/svecosystem/mdsx) should be called as a pre-processor (configured by [`mdsx.config.ts`](./mdsx.config.ts)), so that markdown is rendered as formatted HTML rather than the raw markdown text. `mdsx` also allows Svelte components to be used within markdown documents, similarly to how MDX allows React components to be used within markdown documents. Its blueprint, [`src/lib/blueprints/default.svelte`](./src/lib/blueprints/default.svelte), replaces the HTML for links, images, code blocks and tables with our own components.
 
 The [`vite.config.ts`](./vite.config.ts) config file allows file-system access to the `./velite` directory.
 
@@ -17,7 +17,7 @@ These can be used within the [`load()` functions of `+page.ts` files](https://sv
 
 ## Images in markdown
 
-We use a custom blueprint which means that rather than being converted directly into an HTML `<img>` element, a markdown image is instead converted to our custom Svelte component defined in `src/lib/components/markdown/img.svelte`.
+We use a custom blueprint which means that rather than being converted directly into an HTML `<img>` element, a markdown image is instead converted to our custom Svelte component defined in `src/lib/components/enhancedImage/EnhancedImage.svelte`.
 This component uses theme aware switching, and the [svelte enhanced-img plugin](https://svelte.dev/docs/kit/images#sveltejs-enhanced-img) for format and resolution optimization.
 
 Include the image using the normal markdown syntax:
