@@ -28,7 +28,7 @@
 	};
 
 	const tabLabelClasses = classNames(
-		'bg-color-interactive-off text-color-text underline hover:bg-color-interactive-primary-muted hover:no-underline',
+		'bg-color-interactive-secondary-muted text-color-text underline hover:bg-color-interactive-primary-muted hover:no-underline',
 		'focus-visible:ring-inset focus-visible:ring-offset-2 focus-visible:ring-offset-color-interactive-focus focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-color-surface'
 	);
 

@@ -1,5 +1,6 @@
 import { describe, test, expect, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { userEvent } from 'vitest/browser';
 import MapControlBorough from './MapControlBorough.svelte';
 import boroughs from './boroughs.json';
 import { GREATER_LONDON_BOUNDS } from '../themes/bounds';
@@ -10,11 +11,16 @@ import { GREATER_LONDON_BOUNDS } from '../themes/bounds';
 // node_modules/svelecte/dist/Svelecte.svelte). There is no ARIA role wired up
 // for the control or its options, so we drive/inspect it via the DOM
 // directly rather than `page.getByRole`.
+//
+// Svelecte only opens the dropdown from the input's `focus` event. A synthetic
+// `input.click()` relies on `focus()` dispatching that event, which is not
+// reliable when test files run in parallel iframes, so use a real click. The
+// click goes on the control, as the selected value covers the input.
 
 const openDropdown = async () => {
-	const input = document.querySelector('input.sv-input--text') as HTMLInputElement;
-	expect(input).toBeTruthy();
-	input.click();
+	const control = document.querySelector('.sv-control') as HTMLElement;
+	expect(control).toBeTruthy();
+	await userEvent.click(control);
 	await vi.waitFor(() => {
 		expect(document.querySelector('.sv_dropdown.is-open')).toBeTruthy();
 	});

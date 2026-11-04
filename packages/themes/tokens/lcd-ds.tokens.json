@@ -3108,7 +3108,7 @@
         "off": {
           "description": "",
           "type": "color",
-          "value": "{primitive.light-mode.color.mode.light.grey.200}"
+          "value": "{primitive.light-mode.color.mode.light.grey.500}"
         },
         "dragged": {
           "description": "",
@@ -3218,17 +3218,17 @@
         "secondary-muted": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.light-mode.palette.grey.100}"
+          "value": "{semantic-color.light-mode.palette.grey.200}"
         },
         "secondary-muted-hover": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.light-mode.palette.grey.200}"
+          "value": "{semantic-color.light-mode.palette.grey.300}"
         },
         "secondary-muted-active": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.light-mode.palette.grey.300}"
+          "value": "{semantic-color.light-mode.palette.grey.400}"
         },
         "primary-hover": {
           "description": "",
@@ -4444,7 +4444,7 @@
         "off": {
           "description": "",
           "type": "color",
-          "value": "{primitive.dark-mode.color.mode.dark.grey.300}"
+          "value": "{primitive.dark-mode.color.mode.dark.grey.500}"
         },
         "dragged": {
           "description": "",
@@ -4554,17 +4554,17 @@
         "secondary-muted": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.100}"
+          "value": "{semantic-color.dark-mode.palette.grey.200}"
         },
         "secondary-muted-hover": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.200}"
+          "value": "{semantic-color.dark-mode.palette.grey.300}"
         },
         "secondary-muted-active": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.300}"
+          "value": "{semantic-color.dark-mode.palette.grey.400}"
         },
         "primary-hover": {
           "description": "",
