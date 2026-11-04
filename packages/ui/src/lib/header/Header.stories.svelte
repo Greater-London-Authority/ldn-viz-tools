@@ -1,11 +1,19 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 	import Header from './Header.svelte';
 	import HeaderItem from './HeaderItem.svelte';
 	import HeaderRight from './HeaderRight.svelte';
 	import HeaderTitle from './HeaderTitle.svelte';
+
+	let subMenu = [
+		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
+		{ title: 'Brand', id: 'brand', href: '/brand' },
+		{ title: 'Color', id: 'color', href: '/color' },
+		{ title: 'Typography', id: 'typography', href: '/typography' },
+		{ title: 'Spacing', id: 'spacing', href: '/spacing' },
+		{ title: 'Design Tokens', id: 'design-tokens', href: '/design-tokens' }
+	];
 
 	/**
 	 * The `<Header>` component appears at the top of a page.
@@ -71,7 +79,7 @@
 				</HeaderItem>
 
 				<HeaderItem>
-					<a class="label-sm" href="/#">Log Out</a>
+					<a class="label-sm" href="https://www.london.gov.uk/">Log Out</a>
 				</HeaderItem>
 			</HeaderRight>
 		</Header>

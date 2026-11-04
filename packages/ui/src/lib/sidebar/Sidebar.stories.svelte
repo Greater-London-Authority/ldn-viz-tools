@@ -17,14 +17,22 @@
 
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
-	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 
-	export let tabs = [
+	let tabs = [
 		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
 		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
 		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
 		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
+	];
+
+	let subMenu = [
+		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
+		{ title: 'Brand', id: 'brand', href: '/brand' },
+		{ title: 'Color', id: 'color', href: '/color' },
+		{ title: 'Typography', id: 'typography', href: '/typography' },
+		{ title: 'Spacing', id: 'spacing', href: '/spacing' },
+		{ title: 'Design Tokens', id: 'design-tokens', href: '/design-tokens' }
 	];
 
 	/**
@@ -40,7 +48,7 @@
 		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
 		tags: ['autodocs'],
-		decorators: [() => SidebarLeftContext as any],
+		decorators: [() => ({ Component: SidebarLeftContext })],
 		render: defaultTemplate,
 		parameters: {
 			layout: 'fullscreen',

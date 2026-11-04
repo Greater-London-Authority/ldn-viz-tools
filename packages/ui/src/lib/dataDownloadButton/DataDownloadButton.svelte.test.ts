@@ -236,10 +236,13 @@ describe('DataDownloadButton', () => {
 		});
 
 		it('awaits an async dataFn before triggering the download', async () => {
-			const dataFn = vi.fn(async () => {
-				await new Promise((resolve) => setTimeout(resolve, 20));
-				return [{ A: 42 }];
-			});
+			let resolveData!: (value: { A: number }[]) => void;
+			const dataFn = vi.fn(
+				() =>
+					new Promise<{ A: number }[]>((resolve) => {
+						resolveData = resolve;
+					})
+			);
 
 			render(DataDownloadButton, {
 				dataFn,
@@ -250,8 +253,10 @@ describe('DataDownloadButton', () => {
 			await page.getByRole('button', { name: 'Download as JSON' }).click();
 
 			// Nothing should be downloaded until the async dataFn resolves.
+			await expect.poll(() => dataFn).toHaveBeenCalled();
 			expect(capturedDownloads.length).toBe(0);
 
+			resolveData([{ A: 42 }]);
 			await expect.poll(() => capturedDownloads.length).toBe(1);
 			const content = JSON.parse(decodeDataUrl(capturedDownloads[0].href));
 			expect(content).toEqual([{ A: 42 }]);
