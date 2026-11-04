@@ -37,6 +37,6 @@ A third level that passes 4.5:1 would sit between 4.5:1 and the 5.83:1 of `--col
 
 ## Consequences
 
-- In Figma, `text-wash` and `inverse/text-wash` alias `text-muted` and `inverse/text-muted` in both modes. Nodes bound to them change colour without being rebound. They are rebound before version 5.
+- In Figma, `text-wash` and `inverse/text-wash` alias `text-muted` and `inverse/text-muted` in both modes. Every other node is bound to `text-muted` or `inverse/text-muted`, apart from the swatches of the deprecated tokens on the Design Tokens page.
 - Input, Geocoder and Select placeholders, the placeholder rule in `forms.css` and `reset.js`, and level 4 of the navigation menu use `--color-text-muted`.
 - In dark mode, `--color-inverse-text-muted` is 3.96:1 on `--color-inverse-surface-muted`. This decision doesn't change that, and it is recorded in `SNAGS.md`.
