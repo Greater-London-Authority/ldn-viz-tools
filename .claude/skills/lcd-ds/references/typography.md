@@ -20,7 +20,7 @@ Product is the default. Its role properties are also set on `:root`, so a role c
 
 Each typeset sets unclassed text inside it to `body-md`, so rendered Markdown needs no classes.
 
-The two typesets differ in body line heights and in the larger subheads. `body-sm`, `body-md` and `body-lg` are 14/26, 16/28 and 18/30 in longform, and 14/22, 16/24 and 18/26 in product. At `lg` and `xl`, longform `subhead-md` and `subhead-lg` are one step larger than in product. The full values are in the spec's generated matrices.
+The two typesets differ in body line heights and in seven sizes at wider breakpoints. `body-sm`, `body-md` and `body-lg` are 14/26, 16/28 and 18/30 in longform, and 14/22, 16/24 and 18/26 in product. From `md`, longform `headline-sm` is 28 to 30px (product stays 26) and `body-lg` is 20/32. At `lg` or `xl`, longform `headline-md`, `headline-lg`, `subhead-md`, `subhead-lg` and `title-lg` are one step larger than in product. The full values are in the spec's generated matrices.
 
 ## Roles
 
@@ -116,6 +116,6 @@ A group on its own can have all three parts. When a component contains two or mo
 
 For example, a card holding one chart, where the chart is the subject: the chart has the title and subtitle, and the card's title becomes an eyebrow.
 
-The parts have no space between them, in either typeset. Their line heights separate them.
+The title and subtitle have no space between them, in either typeset. Their line heights separate them. The title sits the `tight` step below its eyebrow.
 
 In `@ldn-viz/ui`, `TitleGroup` in `packages/ui/src/lib/chrome/` renders a group with `eyebrow`, `title-md` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it through `ChromeHeader`.
