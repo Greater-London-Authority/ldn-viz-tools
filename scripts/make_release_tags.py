@@ -2,7 +2,7 @@
 """
 This script writes a file containing a list of `git tag` commands.
 
-These will tage a commit for each release of each package
+These will tag a commit for each release of each package
 (pointing to the commit where its package.json and CHANGLEOG were updated).
 
 
