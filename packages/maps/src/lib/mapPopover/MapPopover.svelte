@@ -100,8 +100,10 @@
 		popupMaplibrePopup?.remove();
 		popupMaplibrePopup = null;
 
-		unmount(popupInstance);
-		popupInstance = null;
+		if (popupInstance) {
+			unmount(popupInstance);
+			popupInstance = null;
+		}
 	};
 
 	onMount(() => renderComponent(feature, popup));
