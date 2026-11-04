@@ -1,6 +1,8 @@
 # @ldn-viz/themes
 
-The design tokens and CSS for the London City Data Design System (LCD-DS). The other `@ldn-viz` packages use it. Its CSS needs no framework, so you can also use it without them.
+The design tokens and CSS for the London City Data Design System (LCD-DS).
+
+It is used by the other `@ldn-viz` packages, but can also be used without them (and without needing Tailwind or any other framework).
 
 The [design system site](https://apps.london.gov.uk/city-data/design-system) explains the tokens, type, flow, layout and colour, and how to apply them.
 
@@ -36,9 +38,10 @@ module.exports = {
 };
 ```
 
-The preset maps Tailwind's colours, spacing, shadows and font families to the tokens, so `bg-color-surface` uses `--color-surface`. It removes Tailwind's font sizes, weights and line heights: set type with a role class such as `body-md`.
+The preset maps Tailwind's colours, spacing, shadows and font families to the tokens, so `bg-color-surface` uses `--color-surface`.
+It also removes Tailwind's default font sizes, weights and line heights: apply role classes such as `body-md`.
 
-You can also link to `index.css` from a CDN:
+Alternatively, rather than installing the package from NPM, you could load `index.css` from a CDN:
 
 ```html
 <link href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes@10/styles/index.css" rel="stylesheet" />
