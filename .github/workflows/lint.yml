@@ -37,3 +37,8 @@ jobs:
             echo "Component docstrings and Storybook are not in sync"
             exit 1
           fi
+
+      - name: Run tests
+        run: |
+          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install
+          npm run test
