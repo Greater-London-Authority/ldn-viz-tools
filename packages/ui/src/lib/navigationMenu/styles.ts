@@ -21,7 +21,7 @@ const LEVEL_STYLES: Record<Level, { type: string; color: string }> = {
 	1: { type: 'body-sm', color: 'text-color-text' },
 	2: { type: 'body-sm', color: 'text-color-text-muted' },
 	3: { type: 'body-sm', color: 'text-color-text-muted' },
-	4: { type: 'body-sm', color: 'text-color-text-wash' }
+	4: { type: 'body-sm', color: 'text-color-text-muted' }
 };
 
 /**

@@ -289,7 +289,7 @@ Set text colour with a semantic token:
 </div>
 </div>
 
-The text tokens are `--color-text`, `--color-text-muted` and `--color-text-wash`, from most to least emphasis. The label tokens are `--color-label` and `--color-label-muted`. Text or an icon on a filled control uses an inverse token, such as `--color-inverse-text`, so that it contrasts with the fill in light and dark mode.
+The text tokens are `--color-text` and `--color-text-muted`, from most to least emphasis. The label tokens are `--color-label` and `--color-label-muted`. Text or an icon on a filled control uses an inverse token, such as `--color-inverse-text`, so that it contrasts with the fill in light and dark mode.
 
 Subhead, subtitle, eyebrow and the lead paragraph are muted by the system.
 

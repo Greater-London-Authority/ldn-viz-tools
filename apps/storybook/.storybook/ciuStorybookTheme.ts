@@ -40,7 +40,7 @@ export default create({
 	booleanSelectedBg: colors.mode.dark.interactive.on,
 	inputBg: colors.mode.dark.surface.default,
 	inputBorder: colors.mode.dark.border.muted,
-	inputTextColor: colors.mode.dark.text.wash,
+	inputTextColor: colors.mode.dark.text.muted,
 	inputBorderRadius: 1
 });
 
