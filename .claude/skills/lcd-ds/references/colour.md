@@ -12,7 +12,7 @@ Choose the token by what the element is.
 
 | Group | Tokens | Use for |
 | --- | --- | --- |
-| Text | `--color-text`, `--color-text-muted`, `--color-text-wash` | Text, in decreasing emphasis |
+| Text | `--color-text`, `--color-text-muted` | Text, in decreasing emphasis. Placeholders use `text-muted`. `--color-text-wash` and `--color-inverse-text-wash` are deprecated and have the value of their `muted` counterparts until version 5 (ADR 0020) |
 | Label | `--color-label`, `--color-label-muted` | Labels on controls |
 | Canvas | `--color-canvas`, `--color-canvas-muted` | The page background |
 | Surface | `--color-surface`, `--color-surface-muted`, `--color-surface-accent`, `--color-surface-{status}`, `--color-surface-alpha`, `--color-surface-beta`, each with a `-muted` version | Backgrounds of cards, panels and status areas |
