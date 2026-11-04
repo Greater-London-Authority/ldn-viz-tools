@@ -1,6 +1,8 @@
 # @ldn-viz/tables
 
-A Svelte table component, styled with the London City Data Design System (LCD-DS). Cells can show a value as text or as a small visualisation, such as a bar or a dot, and columns can show a summary of their values. The table can let the user sort and group rows, and can paginate or virtualise long tables.
+A Svelte table component, styled with the London City Data Design System (LCD-DS).
+Cells can show a value as text or as a small visualisation (such as a bar or a dot) and column headings can show a summary of their values.
+The table supports sorting and grouping rows, and can paginate or virtualise long tables (depending on the provided options).
 
 [Storybook](https://greater-london-authority.github.io/ldn-viz-tools) documents the table, its renderers and its examples.
 
