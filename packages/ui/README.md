@@ -1,6 +1,6 @@
 # @ldn-viz/ui
 
-Svelte components for interfaces built with the London City Data Design System (LCD-DS): buttons, form controls, cards, overlays, feedback, and layout components such as `AppShell`, `Header` and `Sidebar`.
+Svelte components for building interfaces using the London City Data Design System (LCD-DS).
 
 [Storybook](https://greater-london-authority.github.io/ldn-viz-tools) documents each component's props and states. The [design system site](https://apps.london.gov.uk/city-data/design-system) explains how to apply the system.
 
