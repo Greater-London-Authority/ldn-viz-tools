@@ -67,14 +67,17 @@ The rules are the Flow rules section of `system.css`, generated from `flowRoles`
 | `h3`, `h4`, `h5`, `title-*`, `.card-title`, `.chart-title`, `.table-title`, `.header-title`, `.sidebar-title` | `loose`       |
 | A heading straight after another heading                                                                      | none          |
 | `subhead-*`, `subtitle-*` or a subtitle alias straight after a heading                                        | none          |
-| A heading straight after an `.eyebrow`                                                                        | none          |
+| A heading straight after an `.eyebrow`                                                                        | `tight`       |
 | An `.eyebrow` straight before `h1`, `h2`, `display-*`, `headline-*` or a dashboard title                      | `section`     |
+| A `caption-*` class or `.chart-note` straight after a block object                                            | `tight`       |
 | `figcaption` in a `figure`                                                                                    | `tight`       |
 | `li + li`, and a list nested inside an `li`                                                                   | `tight`       |
 | `dd` in a `dl`                                                                                                | `tight`       |
 | `dt` in a `dl`, except the first                                                                              | `default`     |
 
 The subtitle aliases are `.card-subtitle`, `.chart-subtitle`, `.table-subtitle`, `.dashboard-main-subtitle` and `.dashboard-section-subtitle`.
+
+In `typeset-longform` and `typeset-product--formatted`, a table `caption` sits the `tight` step above its table. The content styles set this as padding, not a flow rule.
 
 For debugging: the rules use `:is()` on the context class, so they win over element resets such as `p { margin: 0 }`. Every rule skips `.sr-only`, `[hidden]` and `template` at both ends, so a hidden sibling gets no space and nothing is spaced from it. The rules for direct children also skip an element with an `mt-flow` class.
 
