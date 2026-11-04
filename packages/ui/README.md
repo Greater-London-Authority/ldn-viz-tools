@@ -33,7 +33,7 @@ module.exports = {
 };
 ```
 
-Add the `Theme` component to your app's top-level layout. It applies light or dark mode from the user's preference, which they can change with `ThemeSwitcher`.
+Add the `Theme` component to your app's top-level layout. It applies light or dark mode from the user's preference, which they can change with the `ThemeSwitcher` component.
 
 ## Use
 
