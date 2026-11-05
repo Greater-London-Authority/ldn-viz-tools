@@ -8,7 +8,12 @@
 
 	import { fade, slide } from 'svelte/transition';
 	import { getSidebarState, setSidebarState } from '../sidebar/sidebarState.svelte';
-	import { heightLookup, transitionAxis, widthLookup } from '../sidebar/sidebarUtils';
+	import {
+		heightLookup,
+		tabOffsetLookup,
+		transitionAxis,
+		widthLookup
+	} from '../sidebar/sidebarUtils';
 	import type { SidebarPlacement } from '../sidebar/types';
 	import { classNames } from '../utils/classNames';
 	import { getSetting } from './utils/getSettingByScreenWidth';
@@ -94,7 +99,13 @@
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
-	<main class={classNames('w-full min-w-0', sidebarState.placement === 'right' ? '' : 'order-1')}>
+	<main
+		class={classNames(
+			'w-full min-w-0',
+			sidebarState.placement === 'right' ? '' : 'order-1',
+			sidebarState.hasTabs ? tabOffsetLookup[sidebarState.placement] : ''
+		)}
+	>
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
 			<p class="typeset-product body-md">

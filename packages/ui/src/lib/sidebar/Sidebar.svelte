@@ -53,6 +53,10 @@
 	// svelte-ignore state_referenced_locally
 	sidebarState.width = width;
 
+	$effect.pre(() => {
+		sidebarState.hasTabs = tabs.length > 0;
+	});
+
 	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
 	let placementClasses = $derived(placementLookup[sidebarState.placement]);
 	let togglePlacementClasses = $derived(togglePlacementLookup[sidebarState.placement]);

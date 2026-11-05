@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
-import { placementLookup, transitionAxis } from '../sidebar/sidebarUtils';
+import { placementLookup, tabOffsetLookup, transitionAxis } from '../sidebar/sidebarUtils';
 import Harness from './PlacementHarness.test.svelte';
 
 // <AppShell> resolves a placement from its `sidebarPlacement` breakpoint object
@@ -81,5 +81,33 @@ describe('AppShell placement', () => {
 		await rerender({ sidebarPlacement: { initial: 'left' }, placement: 'bottom' });
 
 		expect(await wrapperClasses()).toContain(placementLookup.bottom);
+	});
+});
+
+// A tab bar stays on screen when the sidebar is closed, so AppShell pads its
+// content on the side the sidebar is placed, and only when there are tabs.
+describe('AppShell tab bar offset', () => {
+	const mainClasses = async () => {
+		const main = page.getByRole('main');
+		await expect.element(main).toBeInTheDocument();
+		return (await main.element()).className;
+	};
+
+	it('pads the content on the side of a tabbed sidebar', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' }, withTabs: true });
+
+		await expect.poll(mainClasses).toContain(tabOffsetLookup.left);
+	});
+
+	it('follows the placement to the bottom', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'bottom' }, withTabs: true });
+
+		await expect.poll(mainClasses).toContain(tabOffsetLookup.bottom);
+	});
+
+	it('adds no padding when the sidebar has no tabs', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' } });
+
+		expect(await mainClasses()).not.toContain(tabOffsetLookup.left);
 	});
 });
