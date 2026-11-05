@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
-import { placementLookup, transitionAxis } from '../sidebar/sidebarUtils';
+import { placementLookup, tabOffsetLookup, transitionAxis } from '../sidebar/sidebarUtils';
 import Harness from './PlacementHarness.test.svelte';
 
 // <AppShell> resolves a placement from its `sidebarPlacement` breakpoint object
@@ -81,5 +81,70 @@ describe('AppShell placement', () => {
 		await rerender({ sidebarPlacement: { initial: 'left' }, placement: 'bottom' });
 
 		expect(await wrapperClasses()).toContain(placementLookup.bottom);
+	});
+});
+
+// A tab bar stays on screen when the sidebar is closed, so AppShell pads its
+// content on the side the sidebar is placed, and only when there are tabs.
+describe('AppShell tab bar offset', () => {
+	const mainClasses = async () => {
+		const main = page.getByRole('main');
+		await expect.element(main).toBeInTheDocument();
+		return (await main.element()).className;
+	};
+
+	it('pads the content on the side of a tabbed sidebar', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' }, withTabs: true });
+
+		await expect.poll(mainClasses).toContain(tabOffsetLookup.left);
+	});
+
+	it('follows the placement to the bottom', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'bottom' }, withTabs: true });
+
+		await expect.poll(mainClasses).toContain(tabOffsetLookup.bottom);
+	});
+
+	it('adds no padding when the sidebar has no tabs', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' } });
+
+		expect(await mainClasses()).not.toContain(tabOffsetLookup.left);
+	});
+});
+
+// The sidebar sits in an element that sticks to the edge of the viewport, so
+// the sidebar and its tab bar stay on screen on a long page.
+describe('AppShell sticky sidebar', () => {
+	const stickyClasses = async () => {
+		const aside = page.getByRole('complementary');
+		await expect.element(aside).toBeInTheDocument();
+		const wrapper = (await aside.element()).closest('.z-30');
+		return (wrapper?.parentElement as HTMLElement).className;
+	};
+
+	it('sticks a bottom sidebar to the bottom of the viewport', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'bottom' } });
+
+		await expect.poll(stickyClasses).toContain('sticky bottom-0');
+	});
+
+	it('sticks a top sidebar to the top of the viewport', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'top' } });
+
+		await expect.poll(stickyClasses).toContain('sticky top-0');
+	});
+
+	it('sticks a left sidebar to the top of the viewport, at its height', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' } });
+
+		await expect.poll(stickyClasses).toContain('sticky top-0 z-30 h-dvh');
+	});
+});
+
+describe('AppShell tabbed sidebar', () => {
+	it('shows the first tab when no tab is selected', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' }, withTabs: true });
+
+		await expect.element(page.getByText('Tab content')).toBeInTheDocument();
 	});
 });

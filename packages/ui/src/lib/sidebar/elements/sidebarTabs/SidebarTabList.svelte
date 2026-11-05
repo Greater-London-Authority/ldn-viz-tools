@@ -75,8 +75,14 @@
 		)}
 	/>
 	{#if sidebarState?.isOpen && !sidebarState?.isAlwaysOpen}
+		<!-- In a vertical tab bar, the button sticks to the bottom of the screen, so it
+		stays in view while the bar extends below the screen under a page header. -->
 		<div
-			class={`text-color-text-muted hover:bg-color-interactive-secondary-muted-hover hover:text-color-text ${tabLabelOverride}`}
+			class={classNames(
+				'text-color-text-muted hover:bg-color-interactive-secondary-muted-hover hover:text-color-text',
+				sidebarState?.orientation === 'vertical' ? 'sticky bottom-0 bg-color-surface' : '',
+				tabLabelOverride
+			)}
 		>
 			<button onclick={() => (sidebarState.isOpen = !sidebarState?.isOpen)}>
 				<Icon src={XCircle} theme="outline" class="mb-1 h-7 w-7" aria-hidden="true" />

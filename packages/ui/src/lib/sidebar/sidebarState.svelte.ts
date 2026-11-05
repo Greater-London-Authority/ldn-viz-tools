@@ -9,6 +9,8 @@ export class SidebarState {
 	isOpen: boolean = $state(false);
 	isAlwaysOpen: boolean = $state(false);
 	width: SidebarProps['width'] = $state('standard');
+	/** Set by `<Sidebar>`, so that `<AppShell>` can keep its content clear of the tab bar. */
+	hasTabs: boolean = $state(false);
 
 	/** Supplied by `<AppShell>`: the placement resolved from its breakpoint object. */
 	#placementByBreakpoint: PlacementGetter | undefined;
