@@ -1,10 +1,13 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import Footer from '../footer/Footer.svelte';
+	import Header from '../header/Header.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import AppShell from './AppShell.svelte';
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { First, Fourth, Second, Third } from '../sidebar/elements/sidebarTabs/demoSections';
+	import DemoLongSidebarContent from './DemoLongSidebarContent.svelte';
 	import DemoSidebarOpener from './DemoSidebarOpener.svelte';
 
 	let tabs = [
@@ -58,6 +61,32 @@
 
 {#snippet mainWithControl()}
 	<DemoSidebarOpener />
+{/snippet}
+
+{#snippet longSidebar()}
+	<Sidebar>
+		{#snippet sections()}
+			<DemoLongSidebarContent />
+		{/snippet}
+	</Sidebar>
+{/snippet}
+
+{#snippet longSidebarWithTabs()}
+	<Sidebar
+		tabs={[
+			{ id: 'long', label: 'Long', icon: Funnel, content: DemoLongSidebarContent },
+			{ id: 'short', label: 'Short', icon: ChartBar, content: First }
+		]}
+	/>
+{/snippet}
+
+{#snippet longContent()}
+	<div class="typeset-product flow-standard p-4">
+		<h1 class="headline-sm">A long page</h1>
+		{#each Array.from({ length: 30 }, (_, i) => i + 1) as n (n)}
+			<p>Paragraph {n} of the page content.</p>
+		{/each}
+	</div>
 {/snippet}
 
 {#snippet mainContent()}
@@ -252,5 +281,76 @@ when it is provided.
 <Story name="With main snippet provided">
 	{#snippet template(args)}
 		<AppShell {...args} main={mainContent}></AppShell>
+	{/snippet}
+</Story>
+
+<!-- A top or bottom sidebar sticks to the edge of the viewport. Scroll down: the tab bar stays at the bottom of the screen until the footer pushes it up. -->
+<Story name="Sticky bottom tabs on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={sidebarWithTabs}
+				sidebarPlacement={{ initial: 'bottom', md: 'left' }}
+				startOpen={false}
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- A left or right sidebar sticks to the top of the viewport, so it stays in view while the content scrolls. The header scrolls away, and the footer pushes the sidebar up. The Close button stays at the bottom of the screen while the header is in view. -->
+<Story name="Sticky left tabs on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<Header>header that scrolls away</Header>
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={sidebarWithTabs}
+				sidebarPlacement={{ initial: 'left' }}
+				sidebarPush
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- The sidebar and the page are both taller than the screen. Every control in the sidebar can be reached. -->
+<Story name="Long sidebar on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<Header>header that scrolls away</Header>
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={longSidebar}
+				sidebarPlacement={{ initial: 'bottom', md: 'left' }}
+				sidebarPush
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- The sidebar and the page are both taller than the screen. Every control in the sidebar can be reached. -->
+<Story name="Long tabbed sidebar on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<Header>header that scrolls away</Header>
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={longSidebarWithTabs}
+				sidebarPlacement={{ initial: 'bottom', md: 'right' }}
+				sidebarPush
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
 	{/snippet}
 </Story>
