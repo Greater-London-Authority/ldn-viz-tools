@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { Button } from '@ldn-viz/ui';
+	import { Button, EnhancedImage } from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
-	import EnhancedImage from './enhancedImage/EnhancedImage.svelte';
 
 	type Props = {
 		url: string;

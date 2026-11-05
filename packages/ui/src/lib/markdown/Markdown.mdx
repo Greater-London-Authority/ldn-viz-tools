@@ -1,0 +1,15 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Ui/Components/Markdown/Introduction" />
+
+# Markdown components
+
+When `mdsvex` processes Markdown file, it converts Markdown formatting to HTML elements.
+In some cases, we want to control of this output, and so we register a "blueprint" that tells `mdsvex` that instead of emitting specific HTML elements, it should reneder specific Svelte components.
+
+These component tend to be re-used across projects, so they have been lifted up to this library.
+
+- [`MarkdownLink`](./?path=/docs/ui-components-markdown-markdownlink--documentation) is used instead of `<a>` elements, to avoid problems due to links not using `resolve()
+- [`MarkdownPre`](./?path=/docs/ui-components-markdown-markdownpre--documentation) is used instead of `<pre>` elements, to apply some styling and also add a copy button
+- [`MarkdownTable`](./?path=/docs/ui-components-markdown-markdowntable--documentation) is used instead of `<table>` elements, to wrap it in a `<figure>` with the `overflow-x-auto` class applied
+- [`EnhancedImage`](./?path=/docs/ui-components-markdown-enhancedimage--documentation) is used instead of `<img>` elements: it handles conditional switching between image variants based on light/dark mode, and optionally image transformation using `@sveltejs/enhanced-img`
