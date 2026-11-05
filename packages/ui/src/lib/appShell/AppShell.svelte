@@ -80,8 +80,24 @@
 
 	// Classes applied to the wrapper element
 	let wrapperClasses = $derived(
-		classNames('h-full w-full flex relative', heightClass) // overflow-hidden
+		classNames(
+			'h-full w-full flex relative',
+			sidebarState.orientation === 'horizontal' ? 'flex-col' : '',
+			heightClass
+		) // overflow-hidden
 	);
+
+	// A top or bottom sidebar sticks to the edge of the viewport, so its tab bar
+	// or toggle stays on screen on a long page, and whatever follows the
+	// AppShell, such as a footer, pushes it along. The element is in the flow
+	// after the content (bottom) or before it (top), and the sidebar is
+	// positioned against it.
+	const stickyLookup: Record<string, string> = {
+		top: 'sticky top-0 z-30',
+		bottom: 'sticky bottom-0 z-30 order-3',
+		left: '',
+		right: ''
+	};
 
 	let sidebarWidthClasses = $derived(
 		widthLookup[sidebarState.width ?? 'standard'][sidebarState.placement]
@@ -103,6 +119,8 @@
 		class={classNames(
 			'w-full min-w-0',
 			sidebarState.placement === 'right' ? '' : 'order-1',
+			// In a column, the content fills the AppShell, so a bottom sidebar sits at its foot.
+			sidebarState.orientation === 'horizontal' ? 'grow' : '',
 			sidebarState.hasTabs ? tabOffsetLookup[sidebarState.placement] : ''
 		)}
 	>
@@ -116,7 +134,7 @@
 	</main>
 
 	{#if innerWidth !== 0}
-		<div transition:fade={{ duration: 200 }}>
+		<div class={stickyLookup[sidebarState.placement]} transition:fade={{ duration: 200 }}>
 			<!-- a `<Sidebar>` component -->
 			{#if sidebar}{@render sidebar()}{:else}Provide a snippet to render a Sidebar{/if}
 		</div>
@@ -125,7 +143,11 @@
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
 	{#if (sidebarState.isAlwaysOpen || (sidebarPush && sidebarState.isOpen)) && sidebarState.width}
 		<div
-			class={classNames('flex', sidebarHeightClasses)}
+			class={classNames(
+				'flex',
+				sidebarHeightClasses,
+				sidebarState.placement === 'bottom' ? 'order-2' : ''
+			)}
 			transition:slide={{ duration: 300, axis: transitionAxis[sidebarState.placement] }}
 		>
 			<div class={classNames('shrink-0', sidebarWidthClasses)}></div>

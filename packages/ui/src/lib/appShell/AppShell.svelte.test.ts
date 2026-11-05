@@ -111,3 +111,33 @@ describe('AppShell tab bar offset', () => {
 		expect(await mainClasses()).not.toContain(tabOffsetLookup.left);
 	});
 });
+
+// A top or bottom sidebar sits in an element that sticks to the edge of the
+// viewport, so its tab bar stays on screen on a long page. A left or right
+// sidebar is unchanged.
+describe('AppShell sticky sidebar', () => {
+	const stickyClasses = async () => {
+		const aside = page.getByRole('complementary');
+		await expect.element(aside).toBeInTheDocument();
+		const wrapper = (await aside.element()).closest('.z-30');
+		return (wrapper?.parentElement as HTMLElement).className;
+	};
+
+	it('sticks a bottom sidebar to the bottom of the viewport', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'bottom' } });
+
+		await expect.poll(stickyClasses).toContain('sticky bottom-0');
+	});
+
+	it('sticks a top sidebar to the top of the viewport', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'top' } });
+
+		await expect.poll(stickyClasses).toContain('sticky top-0');
+	});
+
+	it('leaves a left sidebar where it was', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' } });
+
+		expect(await stickyClasses()).not.toContain('sticky');
+	});
+});

@@ -1,6 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
+	import Footer from '../footer/Footer.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import AppShell from './AppShell.svelte';
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
@@ -58,6 +59,15 @@
 
 {#snippet mainWithControl()}
 	<DemoSidebarOpener />
+{/snippet}
+
+{#snippet longContent()}
+	<div class="typeset-product flow-standard p-4">
+		<h1 class="headline-sm">A long page</h1>
+		{#each Array.from({ length: 30 }, (_, i) => i + 1) as n (n)}
+			<p>Paragraph {n} of the page content.</p>
+		{/each}
+	</div>
 {/snippet}
 
 {#snippet mainContent()}
@@ -252,5 +262,22 @@ when it is provided.
 <Story name="With main snippet provided">
 	{#snippet template(args)}
 		<AppShell {...args} main={mainContent}></AppShell>
+	{/snippet}
+</Story>
+
+<!-- A top or bottom sidebar sticks to the edge of the viewport. Scroll down: the tab bar stays at the bottom of the screen until the footer pushes it up. -->
+<Story name="Sticky bottom tabs on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={sidebarWithTabs}
+				sidebarPlacement={{ initial: 'bottom' }}
+				startOpen={false}
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
 	{/snippet}
 </Story>
