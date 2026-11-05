@@ -186,8 +186,10 @@ Match the segment structure of neighbouring stories — the sidebar order is dri
 - **UI** (`@ldn-viz/ui`): `Ui/Components/<Group>/<Component>` where groups include `Buttons`,
   `Checkboxes`, `RadioButtons`, `Overlays`, `Legends`, `Layer Controls`, `Geocoder`, `Tabs`, `Toaster`.
   Layout/theme components use `Ui/Components - Layout And Themes/...` (with nested `Sidebar/elements/...`,
-  `Footer/...`, `Meta, Analytics And Cookies/...`). Auth uses `Ui/Auth/...`. Example pages use
-  `Ui/Example Layouts/...`.
+  `Footer/...`, `Meta, Analytics And Cookies/...`). Auth uses `Ui/Auth/...`.
+- **Example layouts** (`apps/storybook/src/layoutExamples`, `apps/storybook/src/content`): whole
+  pages that combine packages use `Example Layouts/...`. They live in the Storybook app, not a
+  package, so that no package imports another just for an example.
 - **Maps** (`@ldn-viz/maps`): `Maps/Components/<Component>`, with sub-groups `MapControls/`,
   `DeckGL/`, `MapMarker/elements/`, `MapContextLayers/`, `MapLayerSource/adaptations/`.
 - **Tables** (`@ldn-viz/tables`): `Tables/Components/<Component>`, sub-groups `Renderers/` and

@@ -36,12 +36,14 @@
 
 <AppShell sidebarPlacement={{ initial: 'left' }} sidebarAlwaysOpen={{ md: true }}>
 	{#snippet main()}
-		<div class="container flow-prose mx-auto h-full bg-color-canvas py-6">
+		<div class="container flow-spacious mx-auto h-full bg-color-canvas py-6">
 			<Breadcrumbs {breadcrumbs} />
 
-			<div class="grid-gutter flex">
+			<div class="gap-flow flex">
 				<div class="w-full">
-					<TypographySample />
+					<TypographySample>
+						<h1>Typography</h1>
+					</TypographySample>
 				</div>
 
 				<div class="sticky top-4 hidden w-1/3 self-start lg:flex">TODO: TOC</div>
@@ -67,8 +69,8 @@
 </AppShell>
 
 <Footer showCiuLogo>
-	<div class="product flex flex-col gap-1">
-		<p class="label">Documentation</p>
+	<div class="flex flex-col gap-1">
+		<p class="label-md">Documentation</p>
 		<p class="body-sm text-color-text-muted">
 			An example layout from the London City Data design system.
 		</p>

@@ -70,9 +70,11 @@
 			<div
 				class="container relative mx-auto flex h-full items-center pb-48 pt-24 xl:pb-64 xl:pt-32"
 			>
-				<div class="flow-prose prose">
-					<h1 class="headline text-color-static-white">A Sample Report</h1>
-					<p class="subhead text-color-static-white">Explore measures and performance in London</p>
+				<div class="flow-spacious">
+					<h1 class="headline-lg text-color-static-white">A Sample Report</h1>
+					<p class="subhead-lg text-color-static-white">
+						Explore measures and performance in London
+					</p>
 				</div>
 			</div>
 		</div>
@@ -84,10 +86,10 @@
 >
 	<AppShell sidebarPlacement={{ initial: 'left' }} sidebarAlwaysOpen={{ md: true }}>
 		{#snippet main()}
-			<div class="flow-prose h-full bg-color-canvas py-4 pl-4 pr-0 xl:pl-8 2xl:pl-16">
+			<div class="flow-spacious h-full bg-color-canvas py-4 pl-4 pr-0 xl:pl-8 2xl:pl-16">
 				<Breadcrumbs {breadcrumbs} />
 
-				<div class="grid-gutter flex">
+				<div class="gap-flow flex">
 					<div class="w-full">
 						<TypographySample />
 					</div>
@@ -112,8 +114,8 @@
 	</AppShell>
 </div>
 <Footer showCiuLogo>
-	<div class="product flex flex-col gap-1">
-		<p class="label">Report</p>
+	<div class="flex flex-col gap-1">
+		<p class="label-md">Report</p>
 		<p class="body-sm text-color-text-muted">
 			An example layout from the London City Data design system.
 		</p>

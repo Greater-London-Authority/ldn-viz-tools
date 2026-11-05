@@ -30,14 +30,15 @@ const preview: Preview = {
 							'Icons'
 						],
 						'Components - Layout And Themes',
-						'*',
-						'Example Layouts'
+						'*'
 					],
 					'Charts',
 					['Introduction', 'Components', ['ChartContainer']],
 					'Maps',
 					'Tables',
-					['*', 'Example Tables']
+					['*', 'Example Tables'],
+					'Example Layouts',
+					['Dashboards', 'Reports', 'Documentation', 'Typography']
 				]
 			}
 		},

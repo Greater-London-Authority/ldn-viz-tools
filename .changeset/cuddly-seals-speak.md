@@ -3,4 +3,4 @@
 '@ldn-viz/ui': patch
 ---
 
-Removes layout examples from the ui package and puts them into storybook, with a new sidebar setion for them. Expand examples to cover Documentation and report content.
+Moves the example layouts from the ui package to the Storybook app, under a new Example Layouts section, because the examples use the charts, maps and tables packages. Adds example layouts for a report and a documentation page, and rewrites the typography sample.
