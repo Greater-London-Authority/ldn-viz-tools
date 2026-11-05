@@ -1,5 +1,5 @@
 <script module lang="ts">
-	type TocMenuItem = {
+	export type TocMenuItem = {
 		title: string;
 		url: string;
 		items: TocMenuItem[];
