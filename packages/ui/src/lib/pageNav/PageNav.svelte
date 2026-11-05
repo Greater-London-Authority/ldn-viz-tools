@@ -1,15 +1,41 @@
-<script>
-	import { resolve } from '$app/paths';
-	import { page } from '$app/state';
-	import { navigation } from '$lib/navigation';
-	import { Button } from '@ldn-viz/ui';
+<script module lang="ts">
+	export type PageNavItem = {
+		title: string;
+		href: string;
+	};
+</script>
+
+<script lang="ts">
+	/**
+	 * The `PageNav` component renders links to the previous and next pages in a sequence of pages.
+	 *
+	 * @component
+	 */
 	import { ArrowLeftCircle, ArrowRightCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import Button from '../button/Button.svelte';
 
-	// An Array of all the pages
-	const pages = navigation.flatMap((p) => [p, ...(p.children.length ? p.children : [])]);
+	interface Props {
+		/**
+		 * The pages, in reading order.
+		 */
+		pages: PageNavItem[];
 
-	const activeIndex = $derived(pages.findIndex((p) => p.href === page.data.metadata.slugFull));
+		/**
+		 * The `href` of the current page. If it doesn't match a page in `pages`, no links are shown.
+		 */
+		currentHref: string;
+
+		/**
+		 * Should be imported from:
+		 * `import { resolve } from '$app/paths';`
+		 */
+		resolve?: (url: string) => string;
+	}
+
+	let { pages, currentHref, resolve = (url: string) => url }: Props = $props();
+
+	const activeIndex = $derived(pages.findIndex((p) => p.href === currentHref));
 
 	const hasActivePage = $derived(activeIndex !== -1);
 	const hasPrevPage = $derived(hasActivePage && activeIndex > 0);
@@ -21,7 +47,7 @@
 		{#if hasPrevPage}
 			{@const prevPage = pages[activeIndex - 1]}
 			<Button
-				href={resolve(prevPage.href, {})}
+				href={resolve(prevPage.href)}
 				variant="outline"
 				emphasis="secondary"
 				class="!items-end"
@@ -39,7 +65,7 @@
 			{@const nextPage = pages[activeIndex + 1]}
 
 			<Button
-				href={resolve(nextPage.href, {})}
+				href={resolve(nextPage.href)}
 				variant="outline"
 				emphasis="secondary"
 				class="!items-end"
