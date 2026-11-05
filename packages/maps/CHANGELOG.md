@@ -1,5 +1,24 @@
 # ldn-viz-tools-maps
 
+## 21.0.0
+
+### Patch Changes
+
+- Updated dependencies [40eaa29]
+- Updated dependencies [40eaa29]
+- Updated dependencies [40eaa29]
+- Updated dependencies [2436d81]
+- Updated dependencies [47f9c91]
+- Updated dependencies [47f9c91]
+- Updated dependencies [cefb966]
+- Updated dependencies [d955276]
+- Updated dependencies [08073c7]
+- Updated dependencies [392c1e1]
+- Updated dependencies [40eaa29]
+- Updated dependencies [a903c49]
+  - @ldn-viz/ui@25.1.0
+  - @ldn-viz/themes@10.0.2
+
 ## 20.0.0
 
 ### Major Changes

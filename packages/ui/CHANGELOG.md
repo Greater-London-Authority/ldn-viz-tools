@@ -1,5 +1,26 @@
 # ldn-viz-tools-ui
 
+## 25.1.0
+
+### Minor Changes
+
+- cefb966: ADDED: `MarkdownLink`. `MarkdownPre`, `MarkdownTable`, and `EnhancedImage` components
+- 08073c7: ADDED: `PageNav` component, which links to the previous and next pages in a sequence
+- a903c49: ADDED: `Toc` table of contents component
+
+### Patch Changes
+
+- 40eaa29: CHANGED: A left or right sidebar in AppShell sticks to the top of the viewport, so it stays in view while the content scrolls. The Close button in a vertical tab bar stays at the bottom of the screen while a page header is in view.
+- 40eaa29: CHANGED: A top or bottom sidebar in AppShell sticks to the edge of the viewport, so its tab bar or toggle stays on screen on a long page, and a footer after the AppShell pushes it along.
+- 40eaa29: CHANGED: AppShell pads its content on the side of a sidebar with tabs, so the tab bar no longer covers the edge of the content.
+- 2436d81: Moves the example layouts from the ui package to the Storybook app, under a new Example Layouts section, because the examples use the charts, maps and tables packages. Replaces the dashboard examples with four that use fictional data: a starter dashboard, an overview dashboard, a map application and a multi-page data explorer. Adds example layouts for a report and a documentation page, and rewrites the typography sample.
+- 47f9c91: FIXED: `CheckboxSolid`, `RadioButtonSolid` and `TabLabel` now use `interactive-secondary-muted` for unselected items, selected `CheckboxSolid` and `RadioButtonSolid` labels are semibold, `NavigationMenu`'s active item is semibold, and the `Sidebar` close button's text darkens on hover.
+- d955276: FIXED: `Modal` moves focus from the trigger to the dialog when it opens, so a screen reader reads its title and description. The `title` snippet is now required, because it names the dialog. The description is only rendered when a `description` snippet is passed. The title is set in `.title-sm` to match Figma.
+- 392c1e1: FIXED: `PlacardButton` shows its hover colours on keyboard focus, and a `newWindow` link uses the `ArrowTopRightOnSquare` icon and tells screen readers it opens in a new tab. The footer text is set in `.label-md`.
+- 40eaa29: FIXED: A Sidebar with tabs shows its first tab when no tab is selected, as Tabs does.
+- Updated dependencies [47f9c91]
+  - @ldn-viz/themes@10.0.2
+
 ## 25.0.0
 
 ### Major Changes
