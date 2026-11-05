@@ -170,7 +170,7 @@
 >
 	{#snippet template(args)}
 		<LayerControlGroup {...args} />
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -185,7 +185,7 @@
 			{ariaLabel}
 		/>
 
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -201,7 +201,7 @@
 			{ariaLabel}
 		/>
 
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -218,7 +218,7 @@
 			{ariaLabel}
 		/>
 
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -232,28 +232,14 @@
 			{ariaLabel}
 		/>
 
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
 <Story name="Disable controls size and opacity controls for some layers">
 	{#snippet template()}
 		<LayerControlGroup options={optionsForGroup2} bind:layersState={state2} {ariaLabel} />
-		<pre class="mt-4 text-xs">{JSON.stringify(state2, null, 2)}</pre>
-	{/snippet}
-</Story>
-
-<Story name="In small text size context">
-	{#snippet template()}
-		<div class="text-sm">
-			<LayerControlGroup
-				options={optionsForGroup}
-				bind:layersState={state1}
-				disableOpacityControl
-				disableSizeControl
-				{ariaLabel}
-			/>
-		</div>
+		<pre class="caption-sm mt-4">{JSON.stringify(state2, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -271,7 +257,7 @@ For example, choropleth layers would cover each other.
 			{ariaLabel}
 		/>
 
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -285,7 +271,7 @@ For example, choropleth layers would cover each other.
 			{ariaLabel}
 		/>
 
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -303,7 +289,7 @@ For example, choropleth layers would cover each other.
 			{ariaLabel}
 		/>
 
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -316,7 +302,7 @@ For example, choropleth layers would cover each other.
 			{ariaLabel}
 			{colorNames}
 		/>
-		<pre class="mt-4 text-xs">{JSON.stringify(state3, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state3, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -329,7 +315,7 @@ For example, choropleth layers would cover each other.
 			hideSelectAll
 			{ariaLabel}
 		/>
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -342,7 +328,7 @@ For example, choropleth layers would cover each other.
 			showAllLabel="Toggle every layer"
 			{ariaLabel}
 		/>
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -357,7 +343,7 @@ For example, choropleth layers would cover each other.
 			name="mutually-exclusive-no-clear"
 			{ariaLabel}
 		/>
-		<pre class="mt-4 text-xs">{JSON.stringify(state1, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(state1, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -365,7 +351,7 @@ For example, choropleth layers would cover each other.
 <Story name="Fill control enabled">
 	{#snippet template()}
 		<LayerControlGroup options={optionsForGroup2} bind:layersState={stateFill} {ariaLabel} />
-		<pre class="mt-4 text-xs">{JSON.stringify(stateFill, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(stateFill, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -377,6 +363,6 @@ For example, choropleth layers would cover each other.
 			bind:layersState={stateIndeterminate}
 			{ariaLabel}
 		/>
-		<pre class="mt-4 text-xs">{JSON.stringify(stateIndeterminate, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(stateIndeterminate, null, 2)}</pre>
 	{/snippet}
 </Story>

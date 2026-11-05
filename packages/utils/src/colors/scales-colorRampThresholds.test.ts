@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getThresholdBreaksColorsLabels } from './scales';
-import ldnColors from '@ldn-viz/themes/styles/js/theme-tokens';
+import ldnColors from '@ldn-viz/themes/colors.js';
 
 describe('getThresholdBreaksColorsLabels', () => {
 	describe('scale type detection - positive', () => {
@@ -436,7 +436,7 @@ describe('getThresholdBreaksColorsLabels', () => {
 				breakCount: 5
 			});
 
-			const defaultColors = ldnColors.theme.light.color.palette;
+			const defaultColors = ldnColors.mode.light.palette;
 			expect(result.colors.length).toBeGreaterThan(0);
 			expect(result.colors[0]).toBe(defaultColors.red[800]);
 			expect(result.colors[5]).toBe(defaultColors.grey[200]); // as 0

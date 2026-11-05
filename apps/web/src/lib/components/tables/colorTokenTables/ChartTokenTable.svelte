@@ -15,6 +15,6 @@
 	);
 </script>
 
-<div class="not-prose">
+<div class="not-typeset">
 	<Table {title} data={tokenTableData} tableSpec={tokenTableSpec} imageDownloadButton={false} />
 </div>

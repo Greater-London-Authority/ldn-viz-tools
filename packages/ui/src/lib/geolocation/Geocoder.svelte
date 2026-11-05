@@ -326,7 +326,7 @@
 		bind:this={input}
 		type="search"
 		{placeholder}
-		class="form-input h-full w-64 min-w-0 max-w-[100%] shrink grow border border-color-border-muted bg-color-surface pl-10 text-color-text placeholder-color-text-wash {inputClasses}"
+		class="form-input h-full w-64 min-w-0 max-w-[100%] shrink grow border border-color-border-muted bg-color-surface pl-10 text-color-text placeholder-color-text-muted {inputClasses}"
 		class:pr-8={showClearButton}
 		value={query}
 		onfocus={reshowSuggestionList}

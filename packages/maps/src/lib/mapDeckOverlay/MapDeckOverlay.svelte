@@ -4,11 +4,12 @@
 	 * It must be used inside a `Map` component, so that it can access the MapLibre map object from the `mapStore` context.
 	 * @component
 	 */
-	import type { Layer } from '@deck.gl/core';
+	import type { Layer, MapViewState, ViewStateChangeParameters } from '@deck.gl/core';
 	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox';
 	import { getContext } from 'svelte';
+	import type { MapStore } from '../map/types';
 
-	const mapStore = getContext('mapStore');
+	const mapStore: MapStore = getContext('mapStore');
 
 	interface Props {
 		/**
@@ -40,7 +41,14 @@
 		deckOverlay = new DeckOverlay({
 			layers,
 			interleaved: false,
-			...options
+			...options,
+			// The MapLibre map controls the view, so apply view state changes requested by
+			// layers (e.g. ClusterLayer's `clickToZoom`) to the map.
+			onViewStateChange: (params: ViewStateChangeParameters<MapViewState>) => {
+				const { longitude, latitude, zoom } = params.viewState;
+				$mapStore?.easeTo({ center: [longitude, latitude], zoom });
+				return options.onViewStateChange?.(params);
+			}
 		});
 
 		$mapStore.addControl(deckOverlay, 'top-left');

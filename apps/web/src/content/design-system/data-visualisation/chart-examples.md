@@ -1,8 +1,8 @@
 ---
 title: Chart examples
 description: Using our design system to produce clear, understandable and accessible charts
-section: Data visualisation
 navLabel: Chart examples
+order: 6
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-2.svg
 ---
@@ -27,7 +27,7 @@ thumbnail: cta-dataviz-2.svg
 
 </script>
 
-<p class="lead">A consistent approach to data presentation ensures that our work is recognisable and easily understood across multiple products and outputs. </p>
+<p class="body-lg text-color-text-muted">A consistent approach to data presentation ensures that our work is recognisable and easily understood across multiple products and outputs. </p>
 
 These examples are a starting point for producing a range of charts that are clear, understandable and accessible.
 

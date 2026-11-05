@@ -22,7 +22,7 @@
 <Story name="Default fill picker">
 	{#snippet template()}
 		<FillTypeControl label="Borough" bind:fillType />
-		<pre class="mt-4 text-xs">{fillType}</pre>
+		<pre class="caption-sm mt-4">{fillType}</pre>
 	{/snippet}
 </Story>
 
@@ -30,7 +30,7 @@
 <Story name="Selected pattern state">
 	{#snippet template()}
 		<FillTypeControl label="Borough" bind:fillType={fillTypePattern} />
-		<pre class="mt-4 text-xs">{fillTypePattern}</pre>
+		<pre class="caption-sm mt-4">{fillTypePattern}</pre>
 	{/snippet}
 </Story>
 

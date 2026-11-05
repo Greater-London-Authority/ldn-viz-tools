@@ -2,7 +2,18 @@
 	import { ObservablePlot, Plot } from '@ldn-viz/charts';
 	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
-	import { monthlyData } from '../layoutExamples/DemoData/demoData';
+	import type { Snippet } from 'svelte';
+	import { monthlyData } from '../layoutExamples/DemoData/monthlyData';
+
+	interface Props {
+		/**
+		 * Page heading content, placed first inside the typeset. Layouts that already have a
+		 * page heading, such as a report with a banner, leave it out.
+		 */
+		children?: Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	// Spec and data for single line example (default)
 	let singleLineData = monthlyData.filter((d) => d.Variable == 'Variable A');
@@ -26,24 +37,13 @@
 	});
 </script>
 
-<div class="flow-prose prose">
-	<!-- Hero cluster — eyebrow kicker, headline and subhead couple tight to the title -->
-	<!-- <p class="eyebrow">GLA City Intelligence</p>
-	<h1 class="headline">State of London</h1>
-	<p class="subhead">A sample data notebook, styled using the London City Data Design System</p>
+<div class="typeset-longform">
+	{@render children?.()}
 
-	<p class="lead">
-		This page is an example of long-form analytical content; a borough profile or briefing where a
-		paragraph sets up a chart, a chart is followed by a table, and a table has a footnote.
-	</p> -->
-	<h1>Foundations</h1>
 	<p>
-		The words here are placeholder, but every element is real, so we can see how the London City
-		Data Design System (lcd-ds) styles a whole document rather than a single component.
+		The London City Data Design System (lcd-ds) styles long documents, such as borough profiles and
+		briefings. A report uses headings, paragraphs, a chart, lists, a table, code and a figure.
 	</p>
-	<!-- </div>
-
-<div class="mt-flow-loose">
 	<ObservablePlot
 		spec={singleLineSpec}
 		data={singleLineData}
@@ -55,270 +55,185 @@
 		note="Data for demonstration only"
 		chartDescription="The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"
 	/>
-</div>
-
-<div class="flow-prose prose mt-flow-section"> -->
-
-	<ObservablePlot
-		spec={singleLineSpec}
-		data={singleLineData}
-		title="In London, Variable A's value has fallen steadily since 2017"
-		subTitle="London monthly estimated variable value (GBP), January 2015 to March 2024"
-		alt="Line chart of London's variable A values"
-		byline="GLA City Intelligence"
-		source="LDN Viz Tools Demo Data"
-		note="Data for demonstration only"
-		chartDescription="The line chart shows monthly time series data for Variable A, measured in GBP (Pounds Sterling). The x axis ranges in months from January 2015 to March 2024. The y axis ranges from £0 to £60,000. Variable A's has fallen steadily since around 2017. Variable A's highest value was £61,816 in February 2015, its lowest value was £11,667 in July 2023, (a change of around -£50,149) and its mean average value was £30,758"
-	/>
-
 	<p>
-		A chart like the one above rarely stands alone. It sits inside a train of thought, and the text
-		around it has to carry its own weight without fighting the figure for attention. A common worry
-		when a document mixes elements is:
+		The text before and after a chart explains what it shows. Authors who put a chart between two
+		paragraphs may ask:
 	</p>
 	<blockquote>
 		<p>
-			Won't the chart's <code>title</code> clash with my <code>h2</code> headings? Do I have to hand-tune
-			spacing every time I drop a figure between two paragraphs?
+			Will the chart's <code>title</code> clash with my <code>h2</code> headings? Do I need to set the
+			spacing each time I add a figure?
 		</p>
 	</blockquote>
 	<p>
-		The answer is no. Vertical rhythm is a property of the context, not of the type inside it.
-		Wrapping the document in a <code>div</code> element with the <code>flow-prose</code> class
-		applied means consecutive blocks — a
-		<code>p</code>, a figure, a heading — space themselves, so a chart between two paragraphs lands
-		with the <em>right</em> gap, not an arbitrary one.
+		No. The document sits in a <code>div</code> with the <code>typeset-longform</code> class, which
+		sets the <code>flow-spacious</code> flow context. The context sets the space above each of its direct
+		children by what the child is, so a chart between two paragraphs gets more space than a paragraph
+		after a paragraph.
 	</p>
 	<p>
-		The <code>flow-prose</code> context also caps reading columns at a legible width through
-		<code>--readable-width</code>, while letting wide elements like charts and tables
-		<em>break out</em> beyond the column when they need the room.
+		The typeset also limits the width of each child. Running text is capped at
+		<code>--measure-text</code>, 38 times the body size. Charts, tables and figures are capped at
+		<code>--measure-wide</code>, 56 times the body size.
 	</p>
 	<p>
-		The rest of this page runs through every typographic element the system styles, so we can
-		confirm they all hold up together:
-	</p>
-
-	<p>
-		For the full vocabulary — roles, families and the one binding rule — see the <a
-			href="/?path=/docs/ui-typography--docs">Typography guide</a
+		The roles and their sizes are listed in the <a href="/?path=/docs/foundations-typography--docs"
+			>Typography guide</a
 		>.
 	</p>
 	<hr />
-	<h2>What to expect from here on out</h2>
-	<p class="subtitle">A tour of every element the design system styles</p>
-	<div>
-		<p>
-			What follows is placeholder copy standing in for the body of a report, written to exercise the
-			design system itself. It works through every sensible typographic element a notebook might
-			use, such as <strong>bold text</strong>, unordered lists, ordered lists, code samples, block
-			quotes, <em>and even italics</em>.
-		</p>
-	</div>
-	<p>It's worth covering all of these, for a few reasons:</p>
-	<ol>
-		<li>A document should read as one coherent piece, not a pile of mismatched components.</li>
-		<li>Authors bind text to a role and let the system pick the size, weight and rhythm.</li>
-		<li>
-			When a report is exported or re-themed, the same roles carry the hierarchy across every
-			surface without a rewrite.
-		</li>
-	</ol>
-	<p>Now we're going to try out another heading level.</p>
-	<h3>Good typography should be invisible</h3>
+	<h2>The elements of a report</h2>
+	<p class="subhead-sm">Each element the typeset styles, in order</p>
 	<p>
-		That's a level-three heading — with any luck the ladder from title to subtitle to body reads
-		clearly, and you notice the argument rather than the type.
+		A report uses the typeset instead of styling each element. Authors add <strong>bold</strong> and
+		<em>italic</em> text with plain HTML. There are three reasons:
 	</p>
-	<p>A principle the design system keeps coming back to:</p>
-	<blockquote>
-		<p>
-			Bind to a role, never to a size. Every piece of text has a job; a section head, a chart title,
-			an axis tick, and the system already names it. Pick the role and the rest arrives with it.
-		</p>
-	</blockquote>
-	<p>Images should sit comfortably in the flow as well:</p>
+	<ol>
+		<li>Every page of the report uses the same sizes and spacing.</li>
+		<li>Authors write plain HTML or Markdown and add no classes.</li>
+		<li>A change to the theme applies to every report without editing the reports.</li>
+	</ol>
+	<h3>A third-level heading</h3>
+	<p>
+		Inside <code>typeset-longform</code>, an <code>h1</code> takes the <code>headline-lg</code>
+		role, an <code>h2</code> takes <code>headline-sm</code> and an <code>h3</code> takes
+		<code>title-lg</code>. A heading after a paragraph gets more space above it than a paragraph
+		does.
+	</p>
 	<figure>
 		<img
 			src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
 			alt="A red telephone box on a London street with the Elizabeth Tower and Big Ben in the background"
 		/>
 		<figcaption>
-			A figure can break out wider than the reading column when it needs the room. The caption stays
-			with its image because the two are wrapped together in a single <code>figure</code>.
+			A figure can be as wide as <code>--measure-wide</code>. The caption is inside the
+			<code>figure</code> element, so it sits close to the image.
 		</figcaption>
 	</figure>
-	<p>Here is an unordered list, to check that shorter items look right in the flow as well:</p>
+	<p>A short unordered list:</p>
 	<ul>
-		<li>Each London borough gets its own profile.</li>
-		<li>Every profile shares the same set of indicators.</li>
-		<li>Later in this page we'll use longer, more complex list items.</li>
+		<li>Each London borough has a profile.</li>
+		<li>Every profile uses the same indicators.</li>
 	</ul>
-	<p>And that's the end of this section.</p>
-	<h2>What if we stack headings?</h2>
-	<h3>A subheading can follow straight after</h3>
+	<h2>Stacked headings</h2>
+	<h3>A heading straight after another heading</h3>
 	<p>
-		Sometimes a section head is followed immediately by a lower-level heading, with no paragraph in
-		between. The flow rule handles this: consecutive headings tuck closer together than a
-		paragraph-then-heading pair would, so the pair reads as one unit.
+		When one heading follows another, the second has no space above it, so the two read as one unit.
 	</p>
-	<h3>When a heading comes after a paragraph …</h3>
-	<p>
-		When a heading follows body text it gets a little more space, as above, to signal a fresh
-		section. Now let's see what a more complex list looks like — the kind used to annotate a set of
-		indicators.
-	</p>
+	<h3>A heading after a paragraph</h3>
+	<p>The next list describes a set of indicators. The first item has three paragraphs.</p>
 	<ul>
 		<li>
 			<p><strong>Employment rate.</strong></p>
-			<p>
-				The share of working-age residents in work. It's a headline indicator, so it usually leads a
-				borough profile and anchors the comparison against the London average.
-			</p>
-			<p>
-				List items like this often run to two or three paragraphs, so the spacing between the
-				paragraphs, the item's lead-in, and the gap to the next item all has to make sense together.
-				Getting that rhythm right is exactly what the <code>flow</code> context is for.
-			</p>
+			<p>The share of working-age residents in work, compared with the London average.</p>
+			<p>The space between paragraphs inside an item is the same as the space between items.</p>
 		</li>
 		<li>
 			<p><strong>Median house price to earnings ratio.</strong></p>
 			<p>
-				A measure of housing affordability — how many years of local earnings it takes to buy a
-				typical home. It pairs naturally with the employment indicator above, which is why the two
-				sit together in the same list.
+				A measure of housing affordability: how many years of local earnings it takes to buy a
+				typical home.
 			</p>
 		</li>
 		<li>
 			<p><strong>Air quality: annual mean NO₂.</strong></p>
-			<p>
-				Nitrogen dioxide concentration at the roadside, against the legal limit. Three items read as
-				a genuine list rather than a pair, and there is plenty more we could add. Filter the data
-				yourself and press <kbd>Enter</kbd> to re-run the notebook.
-			</p>
+			<p>Nitrogen dioxide concentration at the roadside, compared with the legal limit.</p>
 		</li>
 	</ul>
+	<h2>Code</h2>
 	<p>
-		A list like this usually closes with a sentence or two, because jumping straight to the next
-		heading looks abrupt.
+		A notebook can show the code behind a figure. A code block is readable without a syntax
+		highlighter such as <a href="https://highlightjs.org/">highlight.js</a> or
+		<a href="https://prismjs.com/">Prism</a>.
 	</p>
-	<h2>Code should look okay by default.</h2>
-	<p>
-		Data notebooks often show the query or snippet behind a figure. Most authors will reach for a
-		syntax highlighter such as <a href="https://highlightjs.org/">highlight.js</a>
-		or <a href="https://prismjs.com/">Prism</a>, but a code block should still read
-		<em>okay</em> out of the box, even with no highlighting.
-	</p>
-	<p>Here's roughly how you set the chart above to use the design system's data colour:</p>
-	<!-- <pre><code class="language-js">Plot.line(data, {
+	<p>This code sets the line in the chart above to the theme's primary data colour:</p>
+	<pre><code class="language-js"
+			>{`Plot.line(data, {
   x: 'Month',
   y: 'Value',
   stroke: theme.currentTheme.data.primary,
-  tip: true,
-})
-  </code></pre> -->
-	<p>Binding to the theme's data colour means the chart re-themes with the rest of the page.</p>
-	<h3>What about nested lists?</h3>
+  tip: true
+})`}</code
+		></pre>
 	<p>
-		Nesting is best used sparingly — deep hierarchies are hard to scan on screen — but reports do
-		occasionally need a level of structure beneath a point, so the system has to style it well.
+		The colour comes from the theme. Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy a selection.
 	</p>
+	<h3>Nested lists</h3>
+	<p>A nested list groups points under a main point. This one groups indicators by theme.</p>
 	<ol>
 		<li>
-			<strong>Keep structure shallow where you can.</strong>
+			<strong>Work and income</strong>
 			<ul>
-				<li>
-					A flat list is easier to scan than a nested one, so reach for nesting only when the
-					sub-points genuinely belong to their parent.
-				</li>
-				<li>
-					The same holds for navigation in a dashboard — keep it as flat as the content allows.
-				</li>
-				<li>And for the folders in a codebase, deep trees tend to hide more than they organise.</li>
+				<li>Employment rate</li>
+				<li>Median weekly earnings</li>
 			</ul>
 		</li>
 		<li>
-			<strong>When you do nest, one level usually says enough.</strong>
+			<strong>Housing</strong>
 			<ul>
-				<li>Two levels covers almost every real report.</li>
-				<li>Three is rare, and worth pausing over before you commit to it.</li>
-				<li>Beyond that, a table or a set of subheadings is almost always clearer.</li>
+				<li>Median house price to earnings ratio</li>
+				<li>Households in temporary accommodation</li>
 			</ul>
 		</li>
-		<li>
-			<strong>Three items read as a list; two barely do.</strong>
-			<ul>
-				<li>Vary the length of items so the list doesn't look mechanical.</li>
-				<li>Let the indent and marker do the work — no manual spacing needed.</li>
-				<li>Then close the point and move on.</li>
-			</ul>
-		</li>
+		<li><strong>Environment</strong></li>
 	</ol>
 	<p>
-		One quirk of Markdown: a <code>&lt;li&gt;</code> only gets a child <code>&lt;p&gt;</code>
-		when it holds more than one paragraph. The design system styles both the wrapped and unwrapped cases
-		so single-line and multi-paragraph items sit together cleanly.
+		In Markdown, a <code>&lt;li&gt;</code> gets a child <code>&lt;p&gt;</code> only when it has more than
+		one paragraph. The typeset spaces both kinds of item the same way.
 	</p>
 	<ul>
 		<li>
-			<p><strong>Take this nested list as an example.</strong></p>
-			<p>This top-level item has a second paragraph.</p>
+			<p><strong>This item has two paragraphs.</strong></p>
+			<p>This is its second paragraph.</p>
 			<ul>
-				<li>These items won't get <code>&lt;p&gt;</code> tags</li>
-				<li>because they are only one line each</li>
+				<li>These nested items have no <code>&lt;p&gt;</code> tags</li>
+				<li>because each has one line</li>
 			</ul>
 		</li>
 		<li>
-			<p><strong>But this second top-level item will.</strong></p>
-			<p>Its spacing has to stay consistent with the item above.</p>
+			<p><strong>This item also has two paragraphs.</strong></p>
+			<p>Its spacing matches the item above.</p>
 			<ul>
 				<li>
-					<p>
-						Because this item runs to a second line, it now carries a <code>&lt;p&gt;</code>
-						tag of its own.
-					</p>
-					<p>And this is that second line.</p>
+					<p>This nested item has two paragraphs, so each is in a <code>&lt;p&gt;</code> tag.</p>
+					<p>This is the second one.</p>
 				</li>
-				<li><p>Then one more item, so it reads as a proper list.</p></li>
+				<li><p>A nested item with one paragraph in a <code>&lt;p&gt;</code> tag.</p></li>
 			</ul>
 		</li>
-		<li><p>A closing item, with no nested list beneath it.</p></li>
+		<li><p>An item with no nested list.</p></li>
 	</ul>
-	<p>And a sentence to close off the section.</p>
-	<h2>We didn't forget about description lists</h2>
+	<h2>Description lists</h2>
 	<p>
-		Description lists earn their keep in a data notebook — a glossary of indicators, a set of
-		methodology notes, or an FAQ that sits alongside the numbers. Each term pairs with its
-		definition, and the design system keeps that pairing tight.
+		A description list pairs each term with its definition. A report can use one for a glossary of
+		indicators, methodology notes or questions and answers.
 	</p>
 	<dl>
 		<dt>What is the London City Data Design System?</dt>
 		<dd>
-			A shared toolkit of tokens, components and typography roles (lcd-ds) that GLA City
-			Intelligence uses to build charts, dashboards and reports that look and behave as one system.
+			The tokens, components and type roles that GLA City Intelligence uses for charts, dashboards
+			and reports.
 		</dd>
-		<dt>What does "bind to a role, not a size" mean?</dt>
+		<dt>What is a type role?</dt>
 		<dd>
-			Every piece of text has a job — a section head, a chart title, an axis tick. You choose the
-			role and the size, line-height and weight come with it, so the hierarchy stays consistent
-			across every surface.
+			A name for what a piece of text does, such as a section heading, a chart title or an axis
+			tick. The role sets the size, weight and line height.
 		</dd>
-		<dt>Why cap the reading column but let charts break out?</dt>
+		<dt>Why are charts wider than the text?</dt>
 		<dd>
-			Body text is easiest to read at a limited measure, so <code>flow-prose</code> caps it via
-			<code>--readable-width</code>. Charts, tables and figures carry more information, so they're
-			allowed to break out wider than the column when the viewport gives them room.
+			Lines of text are easier to read at a limited width, so <code>typeset-longform</code> caps
+			them at <code>--measure-text</code>. Charts, tables and figures need more room, so they are
+			capped at <code>--measure-wide</code>.
 		</dd>
 	</dl>
-	<p class="eyebrow">Building blocks</p>
-	<h2>There are other elements we need to style</h2>
+	<p class="eyebrow">Other elements</p>
+	<h2>Links, tables and inline code</h2>
 	<p>
-		Links matter in a notebook that cites its sources, like <a href="https://data.london.gov.uk"
+		A report links to its sources, like <a href="https://data.london.gov.uk"
 			>this link to the London Datastore</a
-		>. They pick up a semantic colour token rather than a raw value, so they stay legible and
-		on-brand in both light and dark themes.
+		>. Links use the <code>--color-interactive-primary-text</code> token and an underline.
 	</p>
-	<p>Tables carry the numbers behind the prose. Here's an illustrative one:</p>
+	<p>A table:</p>
 	<table>
 		<thead><tr><th>Borough</th><th>Sub-region</th><th>Indicator</th></tr></thead><tbody
 			><tr><td>Barking and Dagenham</td><td>East</td><td>Employment rate</td></tr><tr
@@ -329,46 +244,28 @@
 		>
 	</table>
 	<p>
-		Inline code should read cleanly too — whether that's a token like <code>--readable-width</code>
-		or a package name like <code>@ldn-viz/charts</code>.
+		Inline code can be a token such as <code>--measure-text</code> or a package name such as
+		<code>@ldn-viz/charts</code>.
 	</p>
-	<h3>Sometimes <code>code</code> appears in a heading</h3>
+	<h3>A heading with <code>code</code> in it</h3>
 	<p>
-		A methodology section might name a token or a function right in its heading. The
-		<em>"wrap it in a code span"</em> approach holds up here, so the inline code reads as code without
-		breaking the heading's weight or size.
-	</p>
-	<p>
-		Code can also sit inside a link — say, pointing to the
+		A methodology section might name a token or function in its heading. Code can also sit inside a
+		link, as in this link to the
 		<a href="https://github.com/Greater-London-Authority/ldn-viz-tools"
 			><code>ldn-viz-tools</code></a
-		> repository. The underline runs beneath the code span, which is a small compromise but far simpler
-		than the effort it would take to avoid.
+		>
+		repository.
 	</p>
-	<h4>This is the first h4</h4>
+	<h4>A fourth-level heading</h4>
 	<p>
-		And it marks the floor of the heading ladder. Keep content to h1–h4;
-		<code>h5</code> and <code>h6</code> aren't styled, because by <code>h4</code> the heading is already
-		close to body size and there's nowhere sensible left to go.
+		Inside <code>typeset-longform</code>, an <code>h4</code> takes the <code>title-md</code> role.
+		Headings <code>h1</code> to <code>h5</code> each take a role, so they need no class.
 	</p>
+	<h5>A fifth-level heading</h5>
 	<p>
-		Making an <code>h5</code> smaller than the body copy it introduces would invert the hierarchy, so
-		the ladder stops at four levels by design. If you need more structure than that, the section probably
-		wants splitting.
+		An <code>h5</code> takes the <code>title-sm</code> role. An <code>h6</code> has no role.
 	</p>
-	<h3>Stacked headings, one more time</h3>
-	<h4>Including an h4 tucked straight under an h3</h4>
-	<p>
-		With any luck the headings above sit closer to each other than they would to a paragraph, so
-		each pair reads as a single unit rather than two loose lines.
-	</p>
-	<p>
-		A closing paragraph gives the document a decent block of text to end on. A heading sitting too
-		near the end tends to look unbalanced, so it's worth rounding off a section with prose rather
-		than a title.
-	</p>
-	<p>
-		That covers every element the London City Data Design System styles in long-form content —
-		enough to trust that a full notebook will hang together on the page.
-	</p>
+	<h3>A third-level heading</h3>
+	<h4>With a fourth-level heading straight after it</h4>
+	<p>The two headings have no space between them.</p>
 </div>

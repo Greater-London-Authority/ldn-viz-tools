@@ -1,10 +1,18 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
-	import { tabs } from '../sidebar/Sidebar.stories.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import AppShell from './AppShell.svelte';
+	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
+	import { First, Fourth, Second, Third } from '../sidebar/elements/sidebarTabs/demoSections';
 	import DemoSidebarOpener from './DemoSidebarOpener.svelte';
+
+	let tabs = [
+		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
+		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
+		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
+		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
+	];
 
 	/**
 	 * The `<AppShell>` is responsible for positioning and orchestrating page content.
@@ -54,7 +62,7 @@
 
 {#snippet mainContent()}
 	<div class="p-4">
-		<h1 class="text-xl font-bold">Main content</h1>
+		<h1 class="headline-sm">Main content</h1>
 		<p>
 			This story passes a real <code>main</code> snippet, so the <code>{`{@render main()}`}</code>
 			branch is exercised instead of the placeholder text.

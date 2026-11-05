@@ -28,6 +28,11 @@
 		subtitle?: string;
 		eyebrow?: string;
 		emphasis?: 'primary' | 'secondary';
+		/**
+		 * The heading level of the title, passed to `TitleGroup`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
 		/** Help affordance on the right: a string (opens an `Overlay`) or a snippet for full control. */
 		hint?: string | Snippet;
 		/** Overlay form used when `hint` is a string. */
@@ -44,6 +49,7 @@
 		subtitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
+		headingLevel = undefined,
 		hint,
 		hintType = 'tooltip',
 		hintTitle = undefined,
@@ -63,7 +69,7 @@
 
 {#if title || subtitle || eyebrow || hint}
 	<div class={classNames('flex items-start justify-between gap-2', classes)}>
-		<TitleGroup {title} {subtitle} {eyebrow} {emphasis} />
+		<TitleGroup {title} {subtitle} {eyebrow} {emphasis} {headingLevel} />
 		{#if hint}
 			<div class="shrink-0 pt-0.5">
 				{#if typeof hint === 'string'}

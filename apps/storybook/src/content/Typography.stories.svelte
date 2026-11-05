@@ -3,7 +3,7 @@
 	import TypographySample from './TypographySample.svelte';
 
 	let { Story } = defineMeta({
-		title: 'Foundations/Typography',
+		title: 'Example Layouts/Typography',
 		parameters: {
 			layout: 'fullscreen'
 		},
@@ -13,6 +13,10 @@
 
 <Story name="Sample">
 	<div class="container py-16">
-		<TypographySample />
+		<TypographySample>
+			<p class="eyebrow">GLA City Intelligence</p>
+			<h1>State of London</h1>
+			<p class="subhead-lg">A sample data notebook, styled by the London City Data Design System</p>
+		</TypographySample>
 	</div>
 </Story>

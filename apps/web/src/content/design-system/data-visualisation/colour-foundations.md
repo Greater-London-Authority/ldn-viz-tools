@@ -1,8 +1,8 @@
 ---
 title: Colour foundations
 description: Carefully considered colours for data visualisation
-section: Data visualisation
 navLabel: Colour foundations
+order: 4
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-4.svg
 ---
@@ -116,7 +116,7 @@ thumbnail: cta-dataviz-4.svg
     
 
     let chartColorsOrdered = [
-            'color-chart-background', 
+            'color-chart-surface', 
             'color-chart-axis', 
             'color-chart-grid', 
             'color-chart-label', 
@@ -213,7 +213,7 @@ We developed our categorical colour palettes by carefully balancing the requirem
 
 Switching between our light and dark categorical palettes is easy, because they have a consistent colour naming scheme (`categorical-blue, red, green, etc`).
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={dataTokens.categorical} title="Categorical palette"/>
 </div>
 
@@ -228,8 +228,8 @@ Colour differentiation is harder when elements are smaller, as there is physical
 Using high contrast and easily differentiable colours are particularly important when producing line charts. For bar charts and other larger graphical elements, you can lower your contrast a bit.
 
 > As with large text, for graphical objects such as charts and graphs a contrast ratio of 3:1 should be sufficient
-
-<cite>WCAG Guidelines</cite>
+>
+> <cite>WCAG Guidelines</cite>
 
 [Read more on WCAG Guidelines](https://wcag.com/resource/ui-quick-tips-for-designers/)
 
@@ -239,7 +239,7 @@ Using high contrast and easily differentiable colours are particularly important
 
 We've created semantic tokens to simplify and standardise the use of our colours.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={themeColors} title="Semantic colour tokens"/>
 </div>
 
@@ -261,7 +261,7 @@ When representing sex in your demography data, use `color-data-male` and `color-
 
 #### Opinion
 
-If you are visualising diverging data (like opinion research) or want to explicitly show if something is good or bad, then use `color-data-good`, and `color-data-bad`.
+If you are visualising diverging data (like opinion research) or want to explicitly show if something is good or bad, then use `color-data-positive`, and `color-data-negative`.
 
 We've chosen blue and red to represent good and bad, to avoid the common red/green colour differentiation issue.
 
@@ -273,9 +273,9 @@ Sometimes you need to show missing (or filtered out) data. Here you can use `col
 
 ### Chart styling
 
-To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's `background, axis, grids and labels`.
+To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's surface, axis, grid and labels.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={chartColors} title="Chart colour tokens"/>
 </div>
 

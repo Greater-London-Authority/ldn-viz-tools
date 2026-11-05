@@ -135,8 +135,8 @@
 	let scale = scaleSequential([0, 100], interpolator);
 </script>
 
-<div class="not-prose flow-product product">
-	<h3 class="title">{title}</h3>
+<div class="flow-standard typeset-product">
+	<h3 class="title-sm">{title}</h3>
 
 	<div class="flex space-x-4">
 		<div class="w-full">

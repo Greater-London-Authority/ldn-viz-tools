@@ -1,20 +1,50 @@
 import { getContext, setContext } from 'svelte';
-import type { PlacementType } from './types';
+import type { PlacementType, SidebarProps } from './types';
+
+export type PlacementGetter = () => PlacementType | undefined;
+
+const DEFAULT_PLACEMENT: PlacementType = 'right';
 
 export class SidebarState {
 	isOpen: boolean = $state(false);
 	isAlwaysOpen: boolean = $state(false);
-	placement: PlacementType = $state('left');
-	width: 'standard' | 'wide' = $state('standard');
+	width: SidebarProps['width'] = $state('standard');
+
+	/** Supplied by `<AppShell>`: the placement resolved from its breakpoint object. */
+	#placementByBreakpoint: PlacementGetter | undefined;
+
+	/** Supplied by `<Sidebar>` when a consumer passes an explicit `placement` prop. */
+	#placementOverride: PlacementGetter | undefined = $state(undefined);
+
+	constructor(placementByBreakpoint?: PlacementGetter) {
+		this.#placementByBreakpoint = placementByBreakpoint;
+	}
+
+	get placement(): PlacementType {
+		// Using a getter in this way ensures we always check the 3 potential values in the correct
+		// order of precedence, regardless of the order in which the Sidebar and AppShell have rendered.
+		return this.#placementOverride?.() ?? this.#placementByBreakpoint?.() ?? DEFAULT_PLACEMENT;
+	}
+
+	set placement(value: PlacementType) {
+		this.#placementOverride = () => value;
+	}
+
+	overridePlacement(placementOverride: PlacementGetter) {
+		this.#placementOverride = placementOverride;
+	}
+
 	orientation: 'vertical' | 'horizontal' = $derived(
 		['top', 'bottom'].includes(this.placement) ? 'horizontal' : 'vertical'
 	);
 }
 
-const SIDEBAR_KEY = Symbol('SIDEBAR');
+// `Symbol.for` rather than `Symbol` so the key keeps its identity when this
+// module is replaced by HMR.
+const SIDEBAR_KEY = Symbol.for('SIDEBAR');
 
-export function setSidebarState() {
-	return setContext(SIDEBAR_KEY, new SidebarState());
+export function setSidebarState(placementByBreakpoint?: PlacementGetter) {
+	return setContext(SIDEBAR_KEY, new SidebarState(placementByBreakpoint));
 }
 
 export function getSidebarState() {

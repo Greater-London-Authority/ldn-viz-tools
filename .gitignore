@@ -40,3 +40,5 @@ yarn-error.log*
 *.ts.map
 
 llm-docs/
+
+.claude/skills/design-system-ops

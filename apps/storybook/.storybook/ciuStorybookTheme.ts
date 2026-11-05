@@ -1,4 +1,4 @@
-import colors from '@ldn-viz/themes/styles/js/color-tokens';
+import colors from '@ldn-viz/themes/colors.js';
 import { create } from 'storybook/theming/create';
 
 export default create({
@@ -16,7 +16,7 @@ export default create({
 	colorSecondary: colors.mode.dark.palette.blue[700],
 
 	// UI
-	appBg: colors.mode.dark.container.default,
+	appBg: colors.mode.dark.surface.default,
 	appContentBg: colors.mode.dark.canvas.muted,
 	appPreviewBg: '#ffffff',
 	appBorderColor: colors.mode.dark.border.muted,
@@ -31,7 +31,7 @@ export default create({
 	barTextColor: colors.mode.dark.text.default,
 	barHoverColor: colors.mode.dark.interactive.primary.default,
 	barSelectedColor: colors.mode.dark.interactive.primary.active,
-	barBg: colors.mode.dark.container['level-2'],
+	barBg: colors.mode.dark.surface.muted,
 
 	// Form colors
 	buttonBg: colors.mode.dark.interactive.primary.default,
@@ -40,7 +40,7 @@ export default create({
 	booleanSelectedBg: colors.mode.dark.interactive.on,
 	inputBg: colors.mode.dark.surface.default,
 	inputBorder: colors.mode.dark.border.muted,
-	inputTextColor: colors.mode.dark.text.wash,
+	inputTextColor: colors.mode.dark.text.muted,
 	inputBorderRadius: 1
 });
 

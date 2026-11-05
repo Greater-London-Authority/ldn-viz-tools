@@ -1,5 +1,5 @@
 const config = {
-	presets: [require('../../packages/themes/ldn-theme')],
+	presets: [require('@ldn-viz/themes/tailwind')],
 	content: [
 		'./src/**/*.{html,js,svelte,ts,mdx,md}',
 		'../../packages/ui/src/**/*.{html,js,svelte,ts,mdx,md}',

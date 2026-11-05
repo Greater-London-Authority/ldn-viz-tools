@@ -83,6 +83,7 @@
 	{disabled}
 	{optional}
 	{customOverlay}
+	isGroup
 >
 	<div class="flex flex-col space-y-0.5">
 		{#if allowClear}
@@ -97,6 +98,9 @@
 			</Button>
 		{/if}
 		<div
+			role="radiogroup"
+			aria-labelledby={label ? `${id}-label` : undefined}
+			aria-describedby={errorId ?? descriptionId}
 			class={orientation === 'vertical'
 				? 'flex flex-col space-y-1'
 				: 'flex flex-wrap gap-x-3 gap-y-1'}

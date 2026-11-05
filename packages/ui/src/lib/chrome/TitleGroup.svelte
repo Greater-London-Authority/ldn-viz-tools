@@ -14,9 +14,9 @@
 	 * Which emphasis applies is decided by the container (the primary-slot rule),
 	 * not chosen on the instance for visual effect.
 	 *
-	 * The type roles (`title`/`subtitle`/`eyebrow`) resolve inside a `product` or
-	 * `chart` context ancestor (e.g. `Card`, `ChartContainer`). Colour is bound
-	 * explicitly so the cluster reads correctly regardless of surface.
+	 * The roles take their values from the nearest typeset (`Card` and
+	 * `ChartContainer` set `typeset-product`). The title sets its colour
+	 * explicitly; the `eyebrow` and `subtitle` roles are muted by their own class.
 	 *
 	 * @component
 	 */
@@ -27,6 +27,10 @@
 		subtitle?: string;
 		eyebrow?: string;
 		emphasis?: 'primary' | 'secondary';
+		/**
+		 * The heading level of the title. Leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
 		class?: string;
 	}
 
@@ -35,6 +39,7 @@
 		subtitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
+		headingLevel = undefined,
 		class: classes = ''
 	}: Props = $props();
 </script>
@@ -42,23 +47,28 @@
 <!-- eslint-disable svelte/no-at-html-tags -->
 {#if emphasis === 'secondary'}
 	{#if title}
-		<p class={classNames('eyebrow text-color-text-muted', classes)}>{@html title}</p>
+		<svelte:element
+			this={headingLevel ? `h${headingLevel}` : 'p'}
+			class={classNames('eyebrow', classes)}>{@html title}</svelte:element
+		>
 	{/if}
 {:else}
 	<!--
-		No gap: the eyebrow / title / subtitle roles carry their own line-heights,
-		which supply the optical spacing (Figma `TitleGroup` uses itemSpacing 0). A
-		flex gap here would sit on top of that leading and read too loose.
+		A flow context: the title sits the tight step below the eyebrow, and the
+		subtitle has no space above it, so its line height separates it (ADR 0012).
 	-->
-	<div class={classNames('flex flex-col', classes)}>
+	<div class={classNames('flow-standard', classes)}>
 		{#if eyebrow}
-			<p class="eyebrow text-color-text-muted">{@html eyebrow}</p>
+			<p class="eyebrow">{@html eyebrow}</p>
 		{/if}
 		{#if title}
-			<div class="title text-color-text">{@html title}</div>
+			<svelte:element
+				this={headingLevel ? `h${headingLevel}` : 'div'}
+				class="title-md text-color-text">{@html title}</svelte:element
+			>
 		{/if}
 		{#if subtitle}
-			<p class="subtitle text-color-text-muted">{@html subtitle}</p>
+			<p class="subtitle-sm">{@html subtitle}</p>
 		{/if}
 	</div>
 {/if}

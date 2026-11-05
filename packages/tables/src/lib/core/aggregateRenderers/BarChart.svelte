@@ -84,7 +84,7 @@
 					x={(x(String(d[0])) ?? 0) + x.bandwidth() / 2}
 					text-anchor="middle"
 					y={height - marginBottom + 10}
-					font-size="12px"
+					class="chart-tick-sm"
 				>
 					{truncateLabel(String(d[0]), 7)}
 				</text>

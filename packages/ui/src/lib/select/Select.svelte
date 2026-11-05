@@ -19,6 +19,7 @@
 
 	import InputWrapper from '../input/InputWrapper.svelte';
 	import type { InputProps } from '../input/types';
+	import { randomId } from '../utils/randomId';
 
 	type SvelectComponentPropsType = ComponentProps<typeof Svelecte>;
 
@@ -102,7 +103,7 @@
 		readSelection,
 
 		// input wrapper stuff
-		id,
+		id = randomId(),
 		disabled,
 		error,
 
@@ -110,16 +111,29 @@
 	}: Props = $props();
 
 	let dndzone = $derived(reorderable ? dnd : undefined);
+
+	// The label points at `id`, so the input takes it unless `inputId` is set
+	let controlId = $derived(inputId || id);
+
+	// The error replaces the description, so the input is described by whichever shows
+	let errorId = $derived(error ? `${id}-error` : undefined);
+	let descriptionId = $derived(restProps.description ? `${id}-description` : undefined);
+	let i18nWithDescription = $derived({
+		...i18n,
+		aria_describedby:
+			errorId ?? descriptionId ?? (i18n as { aria_describedby?: string })?.aria_describedby ?? ''
+	});
+
 	// svelte-ignore state_referenced_locally
 	overrideItemIdKeyNameBeforeInitialisingDndZones(valueField ?? 'value');
 </script>
 
-<InputWrapper {...restProps} {id} {disabled} {error}>
+<InputWrapper {...restProps} id={controlId} {errorId} {descriptionId} {disabled} {error}>
 	<Svelecte
 		bind:value
 		{options}
 		{name}
-		{inputId}
+		inputId={controlId}
 		{required}
 		{optionResolver}
 		{valueAsObject}
@@ -164,7 +178,7 @@
 		{vlItemSize}
 		{searchProps}
 		class={`form-select ${classes} ${error ? 'has-error' : ''}`}
-		{i18n}
+		i18n={i18nWithDescription}
 		{dndzone}
 		{anchor_element}
 		{controlClass}
@@ -189,49 +203,69 @@
 		/* See: https://svelecte.vercel.app/theme */
 		.form-select.svelecte {
 			/** Custom css variables **/
-			--sv-min-height: 40px;
+			/* 38px inside the 1px border: 40px in all, as an input and the default button */
+			--sv-min-height: 38px;
 			--sv-bg: var(--color-surface);
 			--sv-color: var(--color-text);
 			--sv-disabled-bg: var(--color-interactive-disabled-muted);
 			--sv-border: var(--color-border-muted) 0px solid;
 			--sv-border-radius: 0px;
 			--sv-general-padding: var(--spacing-2) var(--spacing-3);
+			/* The gap between selected items. Svelecte also pads the selection with it,
+			   which the rule below overrides. */
+			--sv-selection-gap: var(--spacing-1);
+			/* The selected value starts where the options' text does */
+			--sv-selection-wrap-padding: 0;
 			--sv-control-bg: var(--sv-bg);
 
-			--sv-item-wrap-padding: var(--spacing-3) var(--spacing-2);
+			/* Options use the control's padding: 8px + 24px + 8px = 40px */
+			--sv-item-wrap-padding: var(--spacing-2) var(--spacing-3);
 			--sv-item-selected-bg: var(--color-interactive-primary-muted);
-			--sv-item-btn-color: #000;
-			--sv-item-btn-color-hover: #777;
-			--sv-item-btn-bg: #efefef;
-			--sv-item-btn-bg-hover: #ddd;
+			--sv-item-btn-color: var(--color-text);
+			--sv-item-btn-color-hover: var(--color-text-muted);
+			--sv-item-btn-bg: var(--color-surface-muted);
+			--sv-item-btn-bg-hover: var(--color-interactive-primary-muted-hover);
 
 			--sv-icon-color: var(--color-text-muted);
-			--sv-icon-color-hover: #777;
+			--sv-icon-color-hover: var(--color-text);
 			--sv-icon-bg: transparent;
 			--sv-icon-size: 20px;
-			--sv-separator-bg: var(--color-border-muted);
+			--sv-separator-bg: var(--color-border-wash);
 			--sv-btn-border: 0;
-			--sv-placeholder-color: var(--color-text-wash);
+			--sv-placeholder-color: var(--color-text-muted);
 
 			--sv-dropdown-bg: var(--sv-bg);
 			--sv-dropdown-offset: var(--spacing-2);
-			--sv-dropdown-border: var(--color-border-muted) 1px solid;
+			--sv-dropdown-border: var(--color-border-wash) 1px solid;
 			--sv-dropdown-width: auto;
-			--sv-dropdown-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			--sv-dropdown-shadow: var(--elevation-3);
 			--sv-dropdown-height: 320px;
 
 			--sv-dropdown-active-bg: var(--color-interactive-primary-muted);
 			--sv-dropdown-selected-bg: var(--color-interactive-primary-muted-active);
 
-			--sv-create-kbd-border: var(--color-border-muted) 1px solid;
+			--sv-create-kbd-border: var(--color-border-wash) 1px solid;
 			--sv-create-kbd-bg: var(--color-surface);
 			--sv-create-disabled-bg: var(--color-interactive-disabled-muted);
-			--sv-loader-border: var(--color-border-muted) 2px solid;
+			--sv-loader-border: var(--color-border-wash) 2px solid;
 		}
 
 		/* Reset allows use of form-select class elsehwere if needed */
 		.form-select.svelecte {
 			padding: 0;
+		}
+
+		/* The dropdown is placed inside the control's border; move it out by the
+		   border's width so its edges, and its options' text, line up with the
+		   control's */
+		.form-select.svelecte .sv_dropdown {
+			left: -1px;
+			width: calc(100% + 2px);
+		}
+
+		/* The selection has the input's padding: the border sits inside the 8px */
+		.form-select.svelecte .sv-control--selection {
+			padding: calc(var(--spacing-2) - 1px) var(--spacing-3);
 		}
 
 		/* Override svelecte */
@@ -243,13 +277,13 @@
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected,
 		.form-select.svelecte .sv-item--wrap.in-dropdown.sv-dd-item-active.is-selected:hover {
 			background-color: var(--color-interactive-selected);
-			color: #fff;
+			color: var(--color-static-white);
 		}
 
 		.form-select.svelecte .in-dropdown.is-selected,
 		.form-select.svelecte .in-dropdown.is-selected:hover {
 			background-color: var(--color-interactive-selected);
-			color: #fff;
+			color: var(--color-static-white);
 		}
 
 		.form-select.svelecte .sv-dropdown-scroll.has-items {
@@ -263,17 +297,21 @@
 
 		/* multiple selected items */
 		.form-select.svelecte .sv-item--container > .sv-item--wrap.is-multi {
-			border: var(--color-border-muted) 1px solid;
+			border: var(--color-border-wash) 1px solid;
 			border-right: none;
 			padding-right: var(--spacing-2);
 		}
 
 		.form-select.svelecte .sv-item--container .sv-item--btn {
-			border: var(--color-border-muted) 1px solid;
+			border: var(--color-border-wash) 1px solid;
 		}
 
+		/* Selected items in a multi-select are body-sm, so an item and its
+		   border fit the 24px line and the control stays 40px */
 		.form-select.svelecte .sv-item--wrap.is-multi {
 			background-color: var(--color-surface);
+			font-size: var(--body-sm-font-size);
+			line-height: var(--body-sm-line-height);
 		}
 
 		/* States */
@@ -285,8 +323,10 @@
 			border: var(--color-interactive-primary-hover) 1px solid;
 		}
 
-		.form-select.svelecte:hover {
+		/* Matches the focus style of the other form fields in system.css */
+		.form-select.svelecte.is-focused {
 			border: var(--color-interactive-focus) 1px solid;
+			box-shadow: 0 0 0 1px var(--color-interactive-focus);
 		}
 
 		.form-select.svelecte.is-disabled {

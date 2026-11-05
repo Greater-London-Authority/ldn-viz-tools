@@ -14,14 +14,26 @@
 	let {
 		value,
 		formatString = '0.0f',
-		textSize = 16,
-		positiveColor = theme.tokenNameToValue('data.primary'),
-		negativeColor = theme.tokenNameToValue('data.secondary'),
-		backgroundColor = theme.tokenNameToValue('surface.neutral'),
+		textSize,
+		positiveColor,
+		negativeColor,
+		backgroundColor,
 		extent = [0, 1],
 		width = 100,
 		..._rest
 	}: BarDivergingCellProps = $props();
+
+	// Theme colours are read here rather than as prop defaults, so they follow
+	// a change of theme. Diverging data takes the positive and negative roles
+	// (ADR 0008).
+	let colors = $derived({
+		positive: positiveColor ?? theme.tokenNameToValue('data.positive'),
+		negative: negativeColor ?? theme.tokenNameToValue('data.negative'),
+		track: backgroundColor ?? theme.tokenNameToValue('surface.neutral'),
+		axis: theme.tokenNameToValue('chart.axis'),
+		text: theme.tokenNameToValue('text'),
+		onBar: theme.tokenNameToValue('inverse.text')
+	});
 
 	const height = 30;
 
@@ -42,7 +54,7 @@
 			{width}
 			y={barVerticalPadding}
 			height={height - 2 * barVerticalPadding}
-			fill={backgroundColor}
+			fill={colors.track}
 		/>
 
 		<!-- data bar -->
@@ -52,32 +64,34 @@
 				width={x(0) - x(value)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={getVal(value, negativeColor) as string}
+				fill={getVal(value, colors.negative) as string}
 			/>
 
 			<!-- zero line -->
-			<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+			<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke={colors.axis} />
 
 			{#if formatString}
 				{#if value < extent[0] / 2}
 					<!-- text inside bar, which is pointing left -->
 					<text
 						text-anchor="start"
-						fill="white"
+						fill={colors.onBar}
 						x={x(value) + textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{:else}
 					<!-- text to left of bar-->
 					<text
 						text-anchor="end"
-						fill="black"
+						fill={colors.text}
 						x={x(value) - textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{/if}
 			{/if}
@@ -87,32 +101,34 @@
 				width={x(value) - x(0)}
 				y={barVerticalPadding}
 				height={height - 2 * barVerticalPadding}
-				fill={getVal(value, positiveColor) as string}
+				fill={getVal(value, colors.positive) as string}
 			/>
 
 			<!-- zero line -->
-			<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke="black" />
+			<line x1={x(0)} x2={x(0)} y1={0} y2={height} stroke={colors.axis} />
 
 			{#if formatString}
 				{#if value > extent[1] / 2}
 					<!-- text inside bar, which is pointing right -->
 					<text
 						text-anchor="end"
-						fill="white"
+						fill={colors.onBar}
 						x={x(value) - textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{:else}
 					<!-- text to left of bar-->
 					<text
 						text-anchor="start"
-						fill="black"
+						fill={colors.text}
 						x={x(value) + textPadding}
-						y={height / 2}
+						y={height / 2 - 1}
 						dominant-baseline="central"
-						font-size={`${textSize}px`}>{f(+value)}</text
+						class="table-body"
+						style:font-size={textSize ? `${textSize}px` : undefined}>{f(+value)}</text
 					>
 				{/if}
 			{/if}

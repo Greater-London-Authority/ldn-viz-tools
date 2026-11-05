@@ -1,0 +1,150 @@
+<script lang="ts">
+	import { NonIdealState, theme } from '@ldn-viz/ui';
+	import ChartContainer from '../chartContainer/ChartContainer.svelte';
+	import ObservablePlotInner from '../observablePlot/ObservablePlotInner.svelte';
+
+	import { chartFns } from './chartTypes/index';
+
+	import type { ChartDataRow, ChartOptions } from './chartOptions';
+	import { getDescription, joinUnique } from './descriptions';
+	import { getColorScale } from './utils';
+
+	type ChartProps = {
+		/**
+		 * Title that is displayed in large text above the plot.
+		 */
+		title: string;
+
+		/**
+		 * Subtitle that is displayed below the title, but above the plot.
+		 */
+		subTitle?: string;
+
+		/**
+		 * What appears in the footer:
+		 *
+		 * * `byline` (string) - statement of who created the visualization
+		 * * `source` (string) - statement of where the data came from
+		 * * `note` (string) - any additional footnotes
+		 */
+		source?: string;
+		byline?: string;
+		note?: string;
+
+		/**
+		 * Data being visualized (as an array of objects); also used by the data download button.
+		 */
+		data: ChartDataRow[];
+
+		/**
+		 * Identifier for the dataset. Used as the `id` attribute of the chart and as the file name for downloaded data or image files.
+		 */
+		dataset: string;
+
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
+		columnMapping?: Record<string, string>;
+
+		/**
+		 * Options that determine the chart type, the structure of the data, and how the chart is styled.
+		 */
+		options: ChartOptions;
+	};
+
+	let { title, subTitle, source, byline, dataset, data, note, columnMapping, options }: ChartProps =
+		$props();
+
+	let facetVals = $derived(options.facetOrder ?? [...new Set(data.map((d) => d.b))]);
+
+	let width = $state(0);
+
+	let colorChoice = $derived.by(() => {
+		const themeSpecificColor =
+			theme.currentMode === 'light' ? options?.colorScaleLight : options?.colorScaleDark;
+		return themeSpecificColor ?? options?.colorScale ?? getColorScale(data);
+	});
+
+	let chartFn = $derived.by(() => {
+		const fn = chartFns[options.chartType];
+		if (!fn) {
+			console.error('No chart generator function found for chart of type:', options.chartType);
+		}
+		return fn;
+	});
+
+	let spec = $derived.by(() => {
+		if (!chartFn) return null;
+
+		return (facetVal: string) => {
+			const filteredDate = data.filter((d) => d.b === facetVal);
+
+			// filter the colors, so each facet only includes legend for corresponding color
+			const colorChoiceFacet =
+				colorChoice.domain && colorChoice.range
+					? {
+							domain: [facetVal],
+							range: [
+								colorChoice.range[colorChoice.domain.indexOf(facetVal)] ?? colorChoice.range[0]
+							]
+						}
+					: {};
+
+			return chartFn(options, filteredDate, colorChoiceFacet, width);
+		};
+	});
+
+	let description = $derived(
+		getDescription(options, data, colorChoice) +
+			(data.map((d) => d.z2).some((d) => !!d)
+				? ` The chart has separate facets for ${joinUnique(data.map((d) => d.z2))}.`
+				: '')
+	);
+</script>
+
+{#if spec && data.length > 0}
+	<div class="w-full py-8" bind:clientWidth={width}>
+		<ChartContainer
+			{data}
+			{title}
+			subtitle={subTitle}
+			{source}
+			{byline}
+			{note}
+			dataDownloadButton={true}
+			imageDownloadButton
+			chartHeight="h-fit"
+			id={dataset}
+			{columnMapping}
+			alt={description}
+		>
+			<!-- wait until the container has been measured, rather than building specs for zero width -->
+			{#if width > 0}
+				{#each facetVals as facetVal (facetVal)}
+					<ObservablePlotInner id={`${dataset}-${facetVal}`} {data} spec={spec(facetVal)} />
+				{/each}
+			{/if}
+		</ChartContainer>
+	</div>
+{:else}
+	<ChartContainer
+		{data}
+		{title}
+		subtitle={subTitle}
+		{source}
+		{byline}
+		{note}
+		id={dataset}
+		{columnMapping}
+		filename={dataset}
+	>
+		{#if !spec}
+			<NonIdealState>
+				{#snippet title()}Chart could not be displayed{/snippet}
+				Unknown chart type "{options.chartType}".
+			</NonIdealState>
+		{:else}
+			<NonIdealState>Data is loading.</NonIdealState>
+		{/if}
+	</ChartContainer>
+{/if}

@@ -126,6 +126,34 @@ describe('Callout Component', () => {
 			const aside = container.querySelector('aside');
 			expect(aside).toHaveClass('border-l-[5px]');
 		});
+
+		it('sets the title and body roles for each size', async () => {
+			for (const [size, titleRole, bodyRole] of [
+				['sm', 'label-md', 'body-sm'],
+				['md', 'title-sm', 'body-md'],
+				['lg', 'title-md', 'body-lg']
+			] as const) {
+				const { container } = render(Callout, {
+					size,
+					title: titleSnippet('Title'),
+					body: bodySnippet('Body')
+				});
+
+				expect(container.querySelector('h3')).toHaveClass(titleRole);
+				expect(container.querySelector('aside > div')).toHaveClass(bodyRole);
+			}
+		});
+	});
+
+	it('renders the title at headingLevel', async () => {
+		const { container } = render(Callout, {
+			headingLevel: 2,
+			title: titleSnippet('Title'),
+			body: bodySnippet('Body')
+		});
+
+		expect(container.querySelector('h2')).toHaveTextContent('Title');
+		expect(container.querySelector('h3')).toBeNull();
 	});
 
 	it('associates the title with the container via aria-labelledby', async () => {

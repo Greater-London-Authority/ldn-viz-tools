@@ -1,6 +1,7 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
+	import Button from '../button/Button.svelte';
 	import Geolocator from './Geolocator.svelte';
 
 	const { Story } = defineMeta({
@@ -93,13 +94,7 @@ This story mocks the browser API to reject, then triggers a search.
 		<div class="m-6 space-y-6">
 			<p></p>
 			<p>Press "Simulate permission denied" to open the error modal.</p>
-			<button
-				type="button"
-				class="rounded border border-color-border px-3 py-1 text-color-text"
-				onclick={simulateError}
-			>
-				Simulate permission denied
-			</button>
+			<Button variant="outline" onclick={simulateError}>Simulate permission denied</Button>
 			<Geolocator bind:this={geolocator} {onLocationFound} {onSearchError} />
 		</div>
 	{/snippet}

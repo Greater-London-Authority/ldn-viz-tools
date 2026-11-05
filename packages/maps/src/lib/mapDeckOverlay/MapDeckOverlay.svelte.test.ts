@@ -21,7 +21,8 @@ describe('MapDeckOverlay', () => {
 	function createMockMap() {
 		return {
 			addControl: vi.fn(),
-			removeControl: vi.fn()
+			removeControl: vi.fn(),
+			easeTo: vi.fn()
 		};
 	}
 
@@ -40,7 +41,8 @@ describe('MapDeckOverlay', () => {
 		expect(MapboxOverlay).toHaveBeenCalledWith({
 			layers,
 			interleaved: false,
-			pickingRadius: 5
+			pickingRadius: 5,
+			onViewStateChange: expect.any(Function)
 		});
 
 		expect(mockMap.addControl).toHaveBeenCalledTimes(1);
@@ -67,5 +69,27 @@ describe('MapDeckOverlay', () => {
 		});
 
 		expect(MapboxOverlay).toHaveBeenCalledTimes(1);
+	});
+
+	test('view state changes requested by layers move the map, and are passed to options.onViewStateChange', async () => {
+		const mockMap = createMockMap();
+		const mapStore = writable(mockMap);
+		const onViewStateChange = vi.fn();
+
+		render(MapDeckOverlay, {
+			props: { layers: [], options: { onViewStateChange } },
+			context: new Map([['mapStore', mapStore]])
+		});
+
+		const instance = mockMap.addControl.mock.calls[0][0];
+		const params = {
+			viewId: 'mapbox',
+			viewState: { longitude: -0.1, latitude: 51.5, zoom: 12 },
+			interactionState: {}
+		};
+		instance.options.onViewStateChange(params);
+
+		expect(mockMap.easeTo).toHaveBeenCalledWith({ center: [-0.1, 51.5], zoom: 12 });
+		expect(onViewStateChange).toHaveBeenCalledWith(params);
 	});
 });

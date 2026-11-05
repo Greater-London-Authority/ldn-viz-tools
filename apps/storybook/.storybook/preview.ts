@@ -61,7 +61,10 @@ const preview: Preview = {
 		}
 	},
 	decorators: [
-		() => ThemeContext as any,
+		// Return `{ Component }`, not the bare component: Storybook treats a
+		// decorator result with no enumerable keys as empty and swaps in the
+		// story's own component without args.
+		() => ({ Component: ThemeContext }),
 		withThemeByClassName({
 			themes: {
 				light: '',

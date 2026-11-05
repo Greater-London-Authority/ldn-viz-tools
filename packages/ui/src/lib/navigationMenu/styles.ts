@@ -18,24 +18,24 @@ const toLevel = (level: number): Level => Math.min(Math.max(level, 1), MAX_LEVEL
  * typography role is emitted per level, so nothing relies on class order.
  */
 const LEVEL_STYLES: Record<Level, { type: string; color: string }> = {
-	1: { type: 'label-tight', color: 'text-color-text' },
-	2: { type: 'label-tight', color: 'text-color-text-muted' },
-	3: { type: 'label-sm-tight', color: 'text-color-muted' },
-	4: { type: 'label-sm-tight', color: 'text-color-text-wash' }
+	1: { type: 'body-sm', color: 'text-color-text' },
+	2: { type: 'body-sm', color: 'text-color-text-muted' },
+	3: { type: 'body-sm', color: 'text-color-text-muted' },
+	4: { type: 'body-sm', color: 'text-color-text-muted' }
 };
 
 /**
  * Classes for the link or toggle button that carries the item's title.
  * When active, the active colour replaces the level colour rather than
- * being layered on top of it.
+ * being layered on top of it, and the item is set in semibold.
  */
 export const itemTextClass = ({ level, isActive }: { level: number; isActive: boolean }) => {
 	const { type, color } = LEVEL_STYLES[toLevel(level)];
 
 	return classNames(
-		'flex w-full items-center hover:text-color-interactive-primary-text-hover hover:underline py-2',
+		'flex w-full items-center hover:text-color-interactive-primary-text-hover hover:underline py-1',
 		type,
-		isActive ? 'text-color-interactive-primary-text-active underline' : color
+		isActive ? 'text-color-interactive-primary-text-active underline text-strong' : color
 	);
 };
 
@@ -60,7 +60,7 @@ export const listItemClass = ({
 		return '';
 	}
 
-	return 'border-t border-color-border-muted';
+	return 'border-t border-color-border-wash';
 };
 
 /**
@@ -86,7 +86,7 @@ export const childListClass = ({
 		'mb-1',
 		isIndented ? 'pl-2' : '',
 		orientation === 'horizontal'
-			? `w-full bg-color-container' ${level === 1 ? 'absolute z-10' : 'relative'}`
+			? `w-full bg-color-surface ${level === 1 ? 'absolute z-10' : 'relative'}`
 			: ''
 	);
 };

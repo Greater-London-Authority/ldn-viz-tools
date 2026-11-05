@@ -3,6 +3,13 @@
 	import Button from '../button/Button.svelte';
 	import type { SwitchProps } from './Switch.svelte';
 	import Switch from './Switch.svelte';
+	/**
+	 * The `<Switch>` component turns a single setting on or off, and the change takes effect straight away.
+	 * It renders a `<button role="switch">` with `aria-checked`, and a label beside it on the left or right.
+	 *
+	 * **Alternatives**: use a [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation) when the choice is submitted with a form rather than applied straight away.
+	 *
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Switch',

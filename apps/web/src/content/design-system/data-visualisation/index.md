@@ -1,9 +1,8 @@
 ---
 title: Data Visualisation
-description: Guiding principles for consistent presentation
-section: Data visualisation
-navLabel: Data visualisation
-layout: index
+description: Charts, maps and colour for presenting data.
+navLabel: Data Visualisation
+order: 4
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz.svg
 ---
@@ -12,9 +11,9 @@ thumbnail: cta-dataviz.svg
     import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="prose lead">Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.</p>
+<p class="subtitle-lg">Good data visualisation isn’t just for internal decision making, it’s crucial for helping Londoners to better understand their city.</p>
 
-<div class="grid grid-cols-2 2xl:grid-cols-4 grid-rows-[auto] grid-gutter">
+<div class="not-typeset grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
 
 <ImageLink
     url="/design-system/data-visualisation/foundations"
