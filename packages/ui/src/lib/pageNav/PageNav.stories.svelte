@@ -3,6 +3,7 @@
 	import PageNav from './PageNav.svelte';
 	/**
 	 * The `PageNav` component renders links to the previous and next pages in a sequence of pages.
+	 *
 	 */
 
 	const { Story } = defineMeta({
