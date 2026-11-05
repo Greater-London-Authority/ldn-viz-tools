@@ -2,6 +2,7 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from '../button/Button.svelte';
 	import Footer from '../footer/Footer.svelte';
+	import Header from '../header/Header.svelte';
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import AppShell from './AppShell.svelte';
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
@@ -274,8 +275,26 @@ when it is provided.
 				heightClass="grow"
 				main={longContent}
 				sidebar={sidebarWithTabs}
-				sidebarPlacement={{ initial: 'bottom' }}
+				sidebarPlacement={{ initial: 'bottom', md: 'left' }}
 				startOpen={false}
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- A left or right sidebar sticks to the top of the viewport, so it stays in view while the content scrolls. The header scrolls away, and the footer pushes the sidebar up. The Close button stays at the bottom of the screen while the header is in view. -->
+<Story name="Sticky left tabs on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<Header>header that scrolls away</Header>
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={sidebarWithTabs}
+				sidebarPlacement={{ initial: 'left' }}
+				sidebarPush
 			></AppShell>
 			<Footer showCiuLogo showCookieMenu />
 		</div>

@@ -87,16 +87,18 @@
 		) // overflow-hidden
 	);
 
-	// A top or bottom sidebar sticks to the edge of the viewport, so its tab bar
-	// or toggle stays on screen on a long page, and whatever follows the
-	// AppShell, such as a footer, pushes it along. The element is in the flow
-	// after the content (bottom) or before it (top), and the sidebar is
-	// positioned against it.
+	// The sidebar is positioned against an element that sticks to the edge of
+	// the viewport, so the sidebar and its tab bar or toggle stay on screen on a
+	// long page, and whatever follows the AppShell, such as a footer, pushes them
+	// along. A top or bottom element is in the flow before or after the content.
 	const stickyLookup: Record<string, string> = {
 		top: 'sticky top-0 z-30',
 		bottom: 'sticky bottom-0 z-30 order-3',
-		left: '',
-		right: ''
+		// A left or right sidebar sticks to the top of the viewport at the viewport's
+		// height, so it stays in view while the content scrolls. The element has no
+		// width; the sidebar extends from it over the push spacer, if there is one.
+		left: 'sticky top-0 z-30 h-dvh self-start',
+		right: 'sticky top-0 z-30 h-dvh self-start order-2'
 	};
 
 	let sidebarWidthClasses = $derived(
