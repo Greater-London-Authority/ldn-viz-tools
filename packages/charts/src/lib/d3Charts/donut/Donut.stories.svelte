@@ -33,8 +33,9 @@
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
-			title="Proportion of all Fruit Sales"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			title="Fruit sales"
+			subtitle="Proportion of all fruit sold in last 12 months"
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 			chartHeight="h-200px"
 			data={fruitSales}
@@ -51,8 +52,9 @@ To save space, the table can be hiden, in which case a separate color legend is 
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
-			title="Proportion of all Fruit Sales"
-			chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
+			title="Fruit sales"
+			subtitle="Proportion of all fruit sold in last 12 months"
+			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 			chartHeight="h-200px"
 			data={fruitSales}
