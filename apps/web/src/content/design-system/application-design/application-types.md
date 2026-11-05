@@ -8,7 +8,7 @@ order: 1
 ---
 
 <script>
-	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+	import { EnhancedImage } from '@ldn-viz/ui';
 </script>
 
 <p class="lead">Our work covers different types of applications, which can be roughly grouped into dashboards, maps, notebooks and reports.</p>

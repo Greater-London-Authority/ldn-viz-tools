@@ -8,11 +8,10 @@ thumbnail: cta-application-design-3.svg
 ---
 
 <script>
-	import { Button } from '@ldn-viz/ui';
+	import { Button, EnhancedImage } from '@ldn-viz/ui';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Bars3 } from '@steeze-ui/heroicons';
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
-	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
 	import { base } from '$app/paths';
 	// velite reads src and href attributes as file paths, so these are passed by spread
 	const menuIcon = { src: Bars3 };

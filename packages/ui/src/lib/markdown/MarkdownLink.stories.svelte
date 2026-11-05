@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import LinkResolverDemo from './LinkResolverDemo.svelte';
+	import MarkdownContextDemo from './MarkdownContextDemo.svelte';
 	import MarkdownLink from './MarkdownLink.svelte';
 
 	/**
@@ -39,10 +39,10 @@
 <!-- With the base path `/city-data`, the href `/design-system` resolves to `/city-data/design-system`. -->
 <Story name="Root relative with resolver" args={{ href: '/design-system' }}>
 	{#snippet template(args)}
-		<LinkResolverDemo resolve={(href) => `/city-data${href}`}>
+		<MarkdownContextDemo resolve={(href) => `/city-data${href}`}>
 			<div class="typeset-longform">
 				<p>Read the <MarkdownLink href={args.href}>design system guidance</MarkdownLink>.</p>
 			</div>
-		</LinkResolverDemo>
+		</MarkdownContextDemo>
 	{/snippet}
 </Story>
