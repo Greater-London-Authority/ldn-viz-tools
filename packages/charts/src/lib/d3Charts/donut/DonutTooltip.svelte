@@ -12,8 +12,8 @@
 
 {#if visible}
 	<div
-		class="typeset-product chart-label elevation-2 fixed z-10 bg-color-surface p-2"
-		style="left: {x}px; top: {y + 30}px; transform: translate(-50%, -100%)"
+		class="typeset-product chart-label elevation-2 pointer-events-none absolute z-10 w-max max-w-[200px] bg-color-surface p-2"
+		style="left: {x}px; top: {y - 10}px; transform: translate(-50%, -100%)"
 	>
 		<div class="tooltip-name mb-1">{category}</div>
 		<div class="tooltip-value">{quantity}</div>

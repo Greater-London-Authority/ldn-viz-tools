@@ -1,3 +1,19 @@
+<script lang="ts" module>
+	export type DonutSize = 'sm' | 'md' | 'lg';
+
+	/**
+	 * Each size's ring diameter, and the narrowest container it is drawn in.
+	 * A container narrower than `minWidth` steps the donut down a size.
+	 */
+	export const donutSizes: Record<DonutSize, { diameter: number; minWidth: number }> = {
+		sm: { diameter: 80, minWidth: 0 },
+		md: { diameter: 160, minWidth: 200 },
+		lg: { diameter: 300, minWidth: 320 }
+	};
+
+	const sizeOrder: DonutSize[] = ['sm', 'md', 'lg'];
+</script>
+
 <script lang="ts" generics="T extends Record<string, any>">
 	/**
 	 * The `Donut` is a D3 chart component that displays categorical data as slices (or arcs) within a ring, representing proportions of a total (100%).
@@ -31,21 +47,11 @@
 		 */
 		colorMapping: Record<string, string>;
 		/**
-		 * Width of donut
+		 * The largest size to draw. A narrower container steps the donut down a size.
+		 * `sm` is a ring with no labels, legend or tooltip, to sit beside a metric.
+		 * `md` has a legend below the ring. `lg` adds labels on the ring where they fit.
 		 */
-		width?: number;
-		/**
-		 * Height of donut
-		 */
-		height?: number;
-		/**
-		 * Margin of donut
-		 */
-		margin?: number;
-		/**
-		 * Minimum angle to dipslay label in chart segment
-		 */
-		minAngle?: number;
+		size?: DonutSize;
 		/**
 		 * Tooltips on donut segment, defaults to true.
 		 */
@@ -61,13 +67,29 @@
 		colorMapping,
 		labelField = 'label',
 		countField = 'value',
-		width = 300,
-		height = 300,
-		margin = 0,
-		minAngle = 0.5,
+		size = 'lg',
 		hideTooltip = false,
 		hideTable = false
 	}: Props<T> = $props();
+
+	/**
+	 * Size: the smaller of the `size` prop and the largest size the container fits
+	 */
+
+	let containerWidth: number | undefined = $state();
+
+	let drawnSize = $derived.by(() => {
+		if (containerWidth === undefined) return size;
+		const fits = sizeOrder.filter((s) => donutSizes[s].minWidth <= containerWidth!);
+		const largestFit = fits[fits.length - 1] ?? 'sm';
+		return sizeOrder[Math.min(sizeOrder.indexOf(size), sizeOrder.indexOf(largestFit))];
+	});
+
+	let diameter = $derived(Math.min(donutSizes[drawnSize].diameter, containerWidth ?? Infinity));
+
+	let showLabels = $derived(drawnSize === 'lg');
+	let showLegend = $derived(drawnSize !== 'sm');
+	let showTooltip = $derived(!hideTooltip);
 
 	/**
 	 * Donut segments
@@ -75,28 +97,53 @@
 
 	let total = $derived(sum(data.map((d) => Number(d[countField]))));
 
-	let outerRadius = $derived(Math.min(width, height) / 2 - margin);
-	let innerRadius = $derived(Math.min(width, height) / 4 - margin);
+	const minRingWidth = 12;
+	// Gap between slices in px, the same width at every size and radius.
+	const separatorWidth = 2;
+
+	let outerRadius = $derived(diameter / 2);
+	let innerRadius = $derived(Math.min(outerRadius / 2, outerRadius - minRingWidth));
+	let labelRadius = $derived((innerRadius + outerRadius) / 2);
 
 	let pieGenerator = $derived(
 		pie<T>()
 			.value((d) => d[countField])
 			.sort(null)
-			.padAngle(0.005)
+			.padAngle(separatorWidth / outerRadius)
 	);
 
 	let pieData: PieArcDatum<T>[] = $derived(pieGenerator(data));
 
-	let arcPath = $derived(arc<PieArcDatum<T>>().innerRadius(innerRadius).outerRadius(outerRadius));
+	let arcPath = $derived(
+		arc<PieArcDatum<T>>().innerRadius(innerRadius).outerRadius(outerRadius).padRadius(outerRadius)
+	);
 
-	const shouldShowLabel = (slice: PieArcDatum<T>) => slice.endAngle - slice.startAngle >= minAngle;
+	let labelArc = $derived(arc<PieArcDatum<T>>().innerRadius(labelRadius).outerRadius(labelRadius));
 
 	const formatPercent = (val: number, total: number) => ((val / total) * 100).toFixed(1) + '%';
 
-	let labelArc = $derived(
-		arc<PieArcDatum<T>>()
-			.innerRadius((0.9 * height) / 2)
-			.outerRadius((0.5 * height) / 2)
+	/**
+	 * Labels on donut - shown when the label fits along the slice's arc and across the ring.
+	 * Text width is estimated from the label-md size.
+	 */
+
+	const labelCharWidth = 8;
+	const labelHeight = 16;
+	const labelPadding = 8;
+
+	const shouldShowLabel = (slice: PieArcDatum<T>) => {
+		const textWidth = formatPercent(slice.data[countField], total).length * labelCharWidth;
+		const arcLength = (slice.endAngle - slice.startAngle) * labelRadius;
+		return (
+			arcLength >= textWidth + labelPadding &&
+			outerRadius - innerRadius >= labelHeight + labelPadding
+		);
+	};
+
+	let ariaLabel = $derived(
+		pieData
+			.map((slice) => `${slice.data[labelField]} ${formatPercent(slice.data[countField], total)}`)
+			.join(', ')
 	);
 
 	/**
@@ -109,13 +156,14 @@
 	let tooltipLabel = $state('');
 	let tooltipValue = $state('');
 
-	let svgEl: SVGSVGElement | undefined = $state();
-
 	const onMouseEnter = (slice: PieArcDatum<T>) => {
-		if (!svgEl) return;
+		if (!showTooltip) return;
 
-		tooltipX = labelArc.centroid(slice)[0] + width / 2;
-		tooltipY = labelArc.centroid(slice)[1] + height / 2;
+		// Anchor above the slice's label, or at the slice's centre when it has none
+		const [x, y] = labelArc.centroid(slice);
+		const labelOffset = showLabels && shouldShowLabel(slice) ? labelHeight / 2 : 0;
+		tooltipX = x + outerRadius;
+		tooltipY = y + outerRadius - labelOffset;
 
 		tooltipLabel = String(slice.data[labelField]);
 		tooltipValue = formatPercent(slice.data[countField], total);
@@ -140,61 +188,70 @@
 </script>
 
 {#if data?.length}
-	<div class="flex flex-col gap-2">
-		{#if hideTable}
+	<div
+		class="typeset-product mt-flow-tight flex flex-col gap-2"
+		class:w-fit={size === 'sm'}
+		bind:clientWidth={containerWidth}
+		data-size={drawnSize}
+	>
+		{#if showLegend && hideTable}
 			<ColorLegendOrdinalChips
 				scale={scaleOrdinal(Object.keys(colorMapping), Object.values(colorMapping))}
 			/>
 		{/if}
 
-		<div class="flex w-full">
-			<svg
-				bind:this={svgEl}
-				{width}
-				{height}
-				viewBox="{-width / 2} {-height / 2} {width} {height}"
-				style:max-width="100%"
-				style:height="auto"
-			>
-				{#each pieData as slice (slice.data[labelField])}
-					<path
-						d={arcPath(slice)}
-						fill={colorMapping[slice.data[labelField]]}
-						style:stroke="var(--color-chart-surface)"
-						role="listitem"
-						cursor="pointer"
-						onmouseenter={() => onMouseEnter(slice)}
-						onmouseleave={onMouseLeave}
+		<div
+			class={drawnSize === 'lg'
+				? 'flex flex-wrap items-start gap-4'
+				: 'flex flex-col items-start gap-4'}
+		>
+			<div class="relative shrink-0">
+				<svg
+					width={diameter}
+					height={diameter}
+					viewBox="{-outerRadius} {-outerRadius} {diameter} {diameter}"
+					role="img"
+					aria-label={ariaLabel}
+				>
+					{#each pieData as slice (slice.data[labelField])}
+						<!-- The tooltip repeats the legend and the svg's label, so hover alone is enough. -->
+						<!-- svelte-ignore a11y_no_static_element_interactions -->
+						<path
+							d={arcPath(slice)}
+							fill={colorMapping[slice.data[labelField]]}
+							cursor={showTooltip ? 'pointer' : undefined}
+							onmouseenter={() => onMouseEnter(slice)}
+							onmouseleave={onMouseLeave}
+						/>
+
+						{#if showLabels && shouldShowLabel(slice)}
+							<text
+								class="chart-label"
+								text-anchor="middle"
+								dominant-baseline="central"
+								pointer-events="none"
+								aria-hidden="true"
+								style:fill={textColor(colorMapping[slice.data[labelField]])}
+								transform="translate({labelArc.centroid(slice)})"
+							>
+								{formatPercent(slice.data[countField], total)}
+							</text>
+						{/if}
+					{/each}
+				</svg>
+
+				{#if showTooltip}
+					<DonutTooltip
+						x={tooltipX}
+						y={tooltipY}
+						category={tooltipLabel}
+						quantity={tooltipValue}
+						visible={tooltipVisible}
 					/>
+				{/if}
+			</div>
 
-					{#if shouldShowLabel(slice)}
-						<text
-							class="chart-label"
-							text-anchor="middle"
-							dominant-baseline="central"
-							pointer-events="none"
-							style:fill={textColor(colorMapping[slice.data[labelField]])}
-							transform="translate({labelArc.centroid({
-								...slice
-							})})"
-						>
-							{formatPercent(slice.data[countField], total)}
-						</text>
-					{/if}
-				{/each}
-			</svg>
-
-			{#if !hideTooltip}
-				<DonutTooltip
-					x={tooltipX}
-					y={tooltipY}
-					category={tooltipLabel}
-					quantity={tooltipValue}
-					visible={tooltipVisible}
-				/>
-			{/if}
-
-			{#if !hideTable}
+			{#if showLegend && !hideTable}
 				<DonutLegend {data} {labelField} {countField} {colorMapping} />
 			{/if}
 		</div>

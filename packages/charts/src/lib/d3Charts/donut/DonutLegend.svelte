@@ -29,7 +29,7 @@
 	});
 </script>
 
-<div class="typeset-product chart-label m-4 flex flex-col p-4">
+<div class="typeset-product chart-label flex flex-col">
 	<div class="mb-2 flex justify-between">
 		<span class="text-strong tabular-nums">
 			Total: {countFormatter(total)}
