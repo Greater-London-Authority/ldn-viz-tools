@@ -93,9 +93,11 @@
 
 	const formatPercent = (val: number, total: number) => ((val / total) * 100).toFixed(1) + '%';
 
-	let labelArc = arc<PieArcDatum<T>>()
-		.innerRadius((0.9 * height) / 2)
-		.outerRadius((0.5 * height) / 2);
+	let labelArc = $derived(
+		arc<PieArcDatum<T>>()
+			.innerRadius((0.9 * height) / 2)
+			.outerRadius((0.5 * height) / 2)
+	);
 
 	/**
 	 * Donut tooltips
@@ -158,7 +160,7 @@
 					<path
 						d={arcPath(slice)}
 						fill={colorMapping[slice.data[labelField]]}
-						stroke={theme.tokenNameToValue('chart.surface')}
+						style:stroke="var(--color-chart-surface)"
 						role="listitem"
 						cursor="pointer"
 						onmouseenter={() => onMouseEnter(slice)}
@@ -167,9 +169,9 @@
 
 					{#if shouldShowLabel(slice)}
 						<text
+							class="chart-label"
 							text-anchor="middle"
-							font-size="0.8em"
-							font-weight="500"
+							dominant-baseline="central"
 							pointer-events="none"
 							style:fill={textColor(colorMapping[slice.data[labelField]])}
 							transform="translate({labelArc.centroid({

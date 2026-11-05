@@ -19,7 +19,7 @@
 		countFormatter = (v) => v.toLocaleString()
 	}: Props<T> = $props();
 
-	let total = $derived(sum(data.map((d) => d.value)));
+	let total = $derived(sum(data.map((d) => Number(d[countField]))));
 
 	let orderedData = $derived.by(() => {
 		const order = Object.keys(colorMapping);
@@ -29,9 +29,9 @@
 	});
 </script>
 
-<div class="m-4 flex flex-col p-4">
+<div class="typeset-product chart-label m-4 flex flex-col p-4">
 	<div class="mb-2 flex justify-between">
-		<span class="font-bold">
+		<span class="text-strong tabular-nums">
 			Total: {countFormatter(total)}
 		</span>
 	</div>
@@ -44,14 +44,14 @@
 			></div>
 
 			<div class="w-24">
-				{entry.label}
+				{entry[labelField]}
 			</div>
 
-			<div class="w-14 text-center font-bold">
+			<div class="chart-label w-14 text-right tabular-nums">
 				{percentFormatter(entry[countField], total)}
 			</div>
 
-			<div class="w-20 text-right">
+			<div class="w-20 text-right tabular-nums">
 				{countFormatter(entry[countField])}
 			</div>
 		</div>
