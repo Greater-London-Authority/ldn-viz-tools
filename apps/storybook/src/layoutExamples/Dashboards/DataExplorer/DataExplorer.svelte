@@ -16,13 +16,11 @@
 		HeaderTitle,
 		NavigationMenu,
 		NonIdealState,
-		Sidebar,
-		SidebarHeader
+		Sidebar
 	} from '@ldn-viz/ui';
-	import { ArrowDownTray, DocumentText, Funnel, InformationCircle } from '@steeze-ui/heroicons';
+	import { ArrowDownTray, DocumentText, Funnel } from '@steeze-ui/heroicons';
 	import { componentGroups, months, teams } from '../../DemoData/designSystemUsage';
 	import { setExplorerState } from './explorerState.svelte';
-	import AboutTab from './tabs/AboutTab.svelte';
 	import DownloadsTab from './tabs/DownloadsTab.svelte';
 	import FiltersTab from './tabs/FiltersTab.svelte';
 	import ReportsTab from './tabs/ReportsTab.svelte';
@@ -39,8 +37,7 @@
 	const tabs = [
 		{ id: 'filters', label: 'Filters', icon: Funnel, content: FiltersTab },
 		{ id: 'reports', label: 'Reports', icon: DocumentText, content: ReportsTab },
-		{ id: 'downloads', label: 'Downloads', icon: ArrowDownTray, content: DownloadsTab },
-		{ id: 'about', label: 'About', icon: InformationCircle, content: AboutTab }
+		{ id: 'downloads', label: 'Downloads', icon: ArrowDownTray, content: DownloadsTab }
 	];
 	let selectedTabId = $state('filters');
 
@@ -126,9 +123,8 @@
 
 	<AppShell
 		heightClass="grow"
-		sidebarPush
 		sidebarPlacement={{ initial: 'bottom', md: 'left' }}
-		sidebarAlwaysOpen={{ initial: false, lg: true }}
+		sidebarAlwaysOpen={{ initial: false, md: true }}
 	>
 		{#snippet main()}
 			<div class="container-fluid flow-standard h-full bg-color-canvas-muted py-6">
@@ -212,15 +208,7 @@
 		{/snippet}
 
 		{#snippet sidebar()}
-			<Sidebar {tabs} bind:selectedTabId>
-				{#snippet header()}
-					<SidebarHeader title="Design system explorer">
-						{#snippet subTitle()}
-							<p>Filter the data, read the reports or download the data.</p>
-						{/snippet}
-					</SidebarHeader>
-				{/snippet}
-			</Sidebar>
+			<Sidebar {tabs} bind:selectedTabId />
 		{/snippet}
 	</AppShell>
 
