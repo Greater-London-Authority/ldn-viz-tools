@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * `MarkdownTable` is rendered instead of the `<table>` HTML element in markdown processed by mdsvex.
+	 * It wraps the table in a `<figure>` that scrolls horizontally when the table is wider than its container.
+	 *
+	 * @component
+	 */
+
 	import type { Snippet } from 'svelte';
 
 	let { children, ...restProps }: { children: Snippet } & Record<string, any> = $props();
