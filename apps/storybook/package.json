@@ -34,6 +34,7 @@
 		"@ldn-viz/themes": "*",
 		"@ldn-viz/ui": "*",
 		"@playwright/test": "^1.49.1",
+		"@steeze-ui/heroicons": "^2.4.2",
 		"@storybook/addon-a11y": "^10.5.5",
 		"@storybook/addon-docs": "^10.5.5",
 		"@storybook/addon-svelte-csf": "^5.1.2",
