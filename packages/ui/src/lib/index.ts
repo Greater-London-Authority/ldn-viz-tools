@@ -93,6 +93,8 @@ export { default as PageTitle } from './titleGroup/pageTitle/PageTitle.svelte';
 export * from './toaster/toaster';
 export { default as Toaster } from './toaster/Toaster.svelte';
 export * from './toaster/types';
+export { default as Toc, type TocMenuItem } from './toc/Toc.svelte';
+export { default as TocItem } from './toc/TocItem.svelte';
 export { default as Tooltip } from './tooltip/Tooltip.svelte';
 export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPreference.js';
 export { classNames } from './utils/classNames.js';

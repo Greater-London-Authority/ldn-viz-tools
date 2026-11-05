@@ -1,5 +1,5 @@
 <script module lang="ts">
-	type TocMenuItem = {
+	export type TocMenuItem = {
 		title: string;
 		url: string;
 		items: TocMenuItem[];
@@ -11,13 +11,12 @@
 
 	import TocItem from './TocItem.svelte';
 
-	interface TableOfContent {
+	interface TableOfContents {
 		items?: TocMenuItem[];
 	}
 
-	let { toc }: { toc: TableOfContent } = $props();
+	let { toc }: { toc: TableOfContents } = $props();
 
-	///
 	let scrollY = $state(0);
 
 	let mounted = false;
