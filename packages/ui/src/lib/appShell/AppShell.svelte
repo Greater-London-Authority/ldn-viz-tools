@@ -8,7 +8,12 @@
 
 	import { fade, slide } from 'svelte/transition';
 	import { getSidebarState, setSidebarState } from '../sidebar/sidebarState.svelte';
-	import { heightLookup, transitionAxis, widthLookup } from '../sidebar/sidebarUtils';
+	import {
+		heightLookup,
+		tabOffsetLookup,
+		transitionAxis,
+		widthLookup
+	} from '../sidebar/sidebarUtils';
 	import type { SidebarPlacement } from '../sidebar/types';
 	import { classNames } from '../utils/classNames';
 	import { getSetting } from './utils/getSettingByScreenWidth';
@@ -75,8 +80,26 @@
 
 	// Classes applied to the wrapper element
 	let wrapperClasses = $derived(
-		classNames('h-full w-full flex relative', heightClass) // overflow-hidden
+		classNames(
+			'h-full w-full flex relative',
+			sidebarState.orientation === 'horizontal' ? 'flex-col' : '',
+			heightClass
+		) // overflow-hidden
 	);
+
+	// The sidebar is positioned against an element that sticks to the edge of
+	// the viewport, so the sidebar and its tab bar or toggle stay on screen on a
+	// long page, and whatever follows the AppShell, such as a footer, pushes them
+	// along. A top or bottom element is in the flow before or after the content.
+	const stickyLookup: Record<string, string> = {
+		top: 'sticky top-0 z-30',
+		bottom: 'sticky bottom-0 z-30 order-3',
+		// A left or right sidebar sticks to the top of the viewport at the viewport's
+		// height, so it stays in view while the content scrolls. The element has no
+		// width; the sidebar extends from it over the push spacer, if there is one.
+		left: 'sticky top-0 z-30 h-dvh self-start',
+		right: 'sticky top-0 z-30 h-dvh self-start order-2'
+	};
 
 	let sidebarWidthClasses = $derived(
 		widthLookup[sidebarState.width ?? 'standard'][sidebarState.placement]
@@ -94,7 +117,15 @@
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
-	<main class={classNames('w-full min-w-0', sidebarState.placement === 'right' ? '' : 'order-1')}>
+	<main
+		class={classNames(
+			'w-full min-w-0',
+			sidebarState.placement === 'right' ? '' : 'order-1',
+			// In a column, the content fills the AppShell, so a bottom sidebar sits at its foot.
+			sidebarState.orientation === 'horizontal' ? 'grow' : '',
+			sidebarState.hasTabs ? tabOffsetLookup[sidebarState.placement] : ''
+		)}
+	>
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
 			<p class="typeset-product body-md">
@@ -105,7 +136,7 @@
 	</main>
 
 	{#if innerWidth !== 0}
-		<div transition:fade={{ duration: 200 }}>
+		<div class={stickyLookup[sidebarState.placement]} transition:fade={{ duration: 200 }}>
 			<!-- a `<Sidebar>` component -->
 			{#if sidebar}{@render sidebar()}{:else}Provide a snippet to render a Sidebar{/if}
 		</div>
@@ -114,7 +145,11 @@
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
 	{#if (sidebarState.isAlwaysOpen || (sidebarPush && sidebarState.isOpen)) && sidebarState.width}
 		<div
-			class={classNames('flex', sidebarHeightClasses)}
+			class={classNames(
+				'flex',
+				sidebarHeightClasses,
+				sidebarState.placement === 'bottom' ? 'order-2' : ''
+			)}
 			transition:slide={{ duration: 300, axis: transitionAxis[sidebarState.placement] }}
 		>
 			<div class={classNames('shrink-0', sidebarWidthClasses)}></div>
