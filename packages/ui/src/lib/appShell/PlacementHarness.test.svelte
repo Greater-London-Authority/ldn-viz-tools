@@ -9,21 +9,31 @@
 	import Sidebar from '../sidebar/Sidebar.svelte';
 	import type { PlacementType, SidebarPlacement } from '../sidebar/types';
 	import AppShell from './AppShell.svelte';
+	import TabContent from './TabContentHarness.test.svelte';
 
 	interface Props {
 		sidebarPlacement?: SidebarPlacement;
 		/** Explicit placement passed through to <Sidebar>, if any. */
 		placement?: PlacementType;
 		remountSidebar?: boolean;
+		/** Gives the <Sidebar> tabs, so it shows a tab bar. */
+		withTabs?: boolean;
 	}
 
-	let { sidebarPlacement, placement = undefined, remountSidebar = false }: Props = $props();
+	let {
+		sidebarPlacement,
+		placement = undefined,
+		remountSidebar = false,
+		withTabs = false
+	}: Props = $props();
+
+	const tabs = [{ id: 'one', label: 'One', content: TabContent }];
 </script>
 
 <AppShell {sidebarPlacement}>
 	{#snippet sidebar()}
 		{#key remountSidebar}
-			<Sidebar {placement} />
+			<Sidebar {placement} tabs={withTabs ? tabs : []} />
 		{/key}
 	{/snippet}
 	{#snippet main()}

@@ -21,6 +21,15 @@ export const tabPlacementLookup: PlacementLookup = {
 	bottom: '-top-[81px] inset-x-0'
 };
 
+// The tab bar stays on screen when the sidebar is closed. It is 80px across,
+// plus a 1px keyline, so AppShell pads its content by 81px on that side.
+export const tabOffsetLookup: PlacementLookup = {
+	left: 'pl-[81px]',
+	right: 'pr-[81px]',
+	top: 'pt-[81px]',
+	bottom: 'pb-[81px]'
+};
+
 export const keylineLookup: PlacementLookup = {
 	left: 'border-r border-color-border-wash',
 	right: 'border-l border-color-border-wash',
