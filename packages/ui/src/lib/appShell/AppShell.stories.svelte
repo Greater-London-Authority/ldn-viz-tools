@@ -7,6 +7,7 @@
 	import AppShell from './AppShell.svelte';
 	import { ChartBar, Funnel, Map, MapPin } from '@steeze-ui/heroicons';
 	import { First, Fourth, Second, Third } from '../sidebar/elements/sidebarTabs/demoSections';
+	import DemoLongSidebarContent from './DemoLongSidebarContent.svelte';
 	import DemoSidebarOpener from './DemoSidebarOpener.svelte';
 
 	let tabs = [
@@ -60,6 +61,23 @@
 
 {#snippet mainWithControl()}
 	<DemoSidebarOpener />
+{/snippet}
+
+{#snippet longSidebar()}
+	<Sidebar>
+		{#snippet sections()}
+			<DemoLongSidebarContent />
+		{/snippet}
+	</Sidebar>
+{/snippet}
+
+{#snippet longSidebarWithTabs()}
+	<Sidebar
+		tabs={[
+			{ id: 'long', label: 'Long', icon: Funnel, content: DemoLongSidebarContent },
+			{ id: 'short', label: 'Short', icon: ChartBar, content: First }
+		]}
+	/>
 {/snippet}
 
 {#snippet longContent()}
@@ -294,6 +312,42 @@ when it is provided.
 				main={longContent}
 				sidebar={sidebarWithTabs}
 				sidebarPlacement={{ initial: 'left' }}
+				sidebarPush
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- The sidebar and the page are both taller than the screen. Every control in the sidebar can be reached. -->
+<Story name="Long sidebar on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<Header>header that scrolls away</Header>
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={longSidebar}
+				sidebarPlacement={{ initial: 'bottom', md: 'left' }}
+				sidebarPush
+			></AppShell>
+			<Footer showCiuLogo showCookieMenu />
+		</div>
+	{/snippet}
+</Story>
+
+<!-- The sidebar and the page are both taller than the screen. Every control in the sidebar can be reached. -->
+<Story name="Long tabbed sidebar on a long page">
+	{#snippet template(args)}
+		<div class="flex min-h-dvh flex-col">
+			<Header>header that scrolls away</Header>
+			<AppShell
+				{...args}
+				heightClass="grow"
+				main={longContent}
+				sidebar={longSidebarWithTabs}
+				sidebarPlacement={{ initial: 'bottom', md: 'right' }}
 				sidebarPush
 			></AppShell>
 			<Footer showCiuLogo showCookieMenu />
