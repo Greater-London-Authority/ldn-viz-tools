@@ -140,3 +140,11 @@ describe('AppShell sticky sidebar', () => {
 		await expect.poll(stickyClasses).toContain('sticky top-0 z-30 h-dvh');
 	});
 });
+
+describe('AppShell tabbed sidebar', () => {
+	it('shows the first tab when no tab is selected', async () => {
+		render(Harness, { sidebarPlacement: { initial: 'left' }, withTabs: true });
+
+		await expect.element(page.getByText('Tab content')).toBeInTheDocument();
+	});
+});

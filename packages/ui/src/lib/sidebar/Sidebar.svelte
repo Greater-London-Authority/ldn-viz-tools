@@ -57,6 +57,13 @@
 		sidebarState.hasTabs = tabs.length > 0;
 	});
 
+	// Show the first tab unless a tab that exists is selected, as `<Tabs>` does.
+	$effect.pre(() => {
+		if (tabs.length && !tabs.some((tab) => tab.id === selectedTabId)) {
+			selectedTabId = tabs[0].id;
+		}
+	});
+
 	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
 	let placementClasses = $derived(placementLookup[sidebarState.placement]);
 	let togglePlacementClasses = $derived(togglePlacementLookup[sidebarState.placement]);
