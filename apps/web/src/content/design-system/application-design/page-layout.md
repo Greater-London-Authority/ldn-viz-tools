@@ -8,8 +8,7 @@ order: 2
 ---
 
 <script>
-	import { Card, DashboardSectionTitle, DashboardTitle, PlaceholderImage } from '@ldn-viz/ui';
-	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+	import { Card, DashboardSectionTitle, DashboardTitle, EnhancedImage, PlaceholderImage } from '@ldn-viz/ui';
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 

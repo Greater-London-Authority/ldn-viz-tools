@@ -28,7 +28,7 @@ Templates for **Architectural Decision Record (adr)** and **Request For Comment 
 
 ## Working with Figma
 
-The published Figma library is "Design System ver 3.1". The version 4 components are being moved into "Design System ver 4.0", which replaces it at the version 4 release. Both are dynamic-page files.
+The published Figma library is "Design System ver 4.0".
 
 Agents reach Figma through the figma-console MCP and its Desktop Bridge plugin, on port 9223.
 

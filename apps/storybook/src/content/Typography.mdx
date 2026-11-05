@@ -37,7 +37,7 @@ A nested typeset wins over the one around it.
 
 Each typeset sets unclassed text inside it to `body-md`. `body` is set to `body-md` too.
 
-The two typesets give every role the same size and weight. They differ in two line heights: `body-sm` is 14/26 in longform and 14/22 in product, and `body-md` is 16/28 in longform and 16/24 in product.
+The two typesets give every role the same weight. They differ in the body line heights: `body-sm`, `body-md` and `body-lg` are 14/26, 16/28 and 18/30 in longform, and 14/22, 16/24 and 18/26 in product. At wider breakpoints, longform `headline-*`, `subhead-md`, `subhead-lg`, `title-lg` and `body-lg` are larger than in product.
 
 ## Roles
 
@@ -73,9 +73,9 @@ These choices come from the usage aliases in the next section.
 | Button                        | `label-md`    |
 | Small button                  | `label-sm`    |
 | Input label                   | `label-md`    |
-| Field value, placeholder      | `body-sm`     |
+| Field value, placeholder      | `body-md`     |
 | Helper text, hint             | `caption-sm`  |
-| Card, header or sidebar title | `title-sm`    |
+| Card, header or sidebar title | `title-md`    |
 | Card subtitle                 | `subtitle-sm` |
 | Dialog title                  | `label-lg`    |
 | Dashboard title               | `headline-md` |
@@ -92,14 +92,14 @@ A usage alias applies a role under a name for where it is used. Some aliases als
 
 | Alias                         | Role          | Adds                           |
 | ----------------------------- | ------------- | ------------------------------ |
-| `.chart-title`                | `title-sm`    |                                |
+| `.chart-title`                | `title-md`    |                                |
 | `.chart-subtitle`             | `subtitle-sm` | muted colour                   |
 | `.chart-axis-title`           | `label-md`    | muted colour                   |
 | `.chart-label`                | `label-md`    |                                |
 | `.chart-tick`                 | `caption-md`  | tabular numerals, muted colour |
 | `.chart-tick-sm`              | `caption-sm`  | tabular numerals, muted colour |
 | `.chart-note`                 | `caption-sm`  |                                |
-| `.table-title`                | `title-sm`    |                                |
+| `.table-title`                | `title-md`    |                                |
 | `.table-subtitle`             | `subtitle-sm` | muted colour                   |
 | `.table-col-head`             | `label-md`    | tabular numerals               |
 | `.table-col-head-sm`          | `label-sm`    | tabular numerals               |
@@ -108,15 +108,15 @@ A usage alias applies a role under a name for where it is used. Some aliases als
 | `.dashboard-main-subtitle`    | `subhead-md`  | muted colour                   |
 | `.dashboard-section-title`    | `headline-sm` |                                |
 | `.dashboard-section-subtitle` | `subhead-sm`  | muted colour                   |
-| `.header-title`               | `title-sm`    |                                |
-| `.sidebar-title`              | `title-sm`    |                                |
+| `.header-title`               | `title-md`    |                                |
+| `.sidebar-title`              | `title-md`    |                                |
 | `.dialog-title`               | `label-lg`    |                                |
-| `.card-title`                 | `title-sm`    |                                |
+| `.card-title`                 | `title-md`    |                                |
 | `.card-subtitle`              | `subtitle-sm` | muted colour                   |
 | `.input-hint`                 | `caption-sm`  |                                |
 | `.input-label`                | `label-md`    |                                |
-| `.input-placeholder`          | `body-sm`     |                                |
-| `.input-value`                | `body-sm`     |                                |
+| `.input-placeholder`          | `body-md`     |                                |
+| `.input-value`                | `body-md`     |                                |
 | `.button-label`               | `label-md`    |                                |
 | `.button-label-sm`            | `label-sm`    |                                |
 
@@ -167,7 +167,7 @@ A title group is an optional `eyebrow`, a title and a subtitle, at the top of a 
 
 When a component holds two or more title groups, the designer makes one dominant. The dominant group has a title and an optional subtitle, and no eyebrow. Each other group is shown as an eyebrow, using the text that would have been its title. For a card holding one chart that is the card's subject, the chart has the title and subtitle, and the card's title becomes an eyebrow.
 
-In `@ldn-viz/ui`, `TitleGroup` renders a group with `eyebrow`, `title-sm` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it.
+In `@ldn-viz/ui`, `TitleGroup` renders a group with `eyebrow`, `title-md` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it.
 
 In a flow context, the roles set the space between the parts:
 
@@ -179,7 +179,7 @@ In a flow context, the roles set the space between the parts:
 </section>
 ```
 
-The eyebrow, title and subtitle sit directly on one another, with no flow step between them. `body-sm text-color-text-muted` in place of `subtitle-sm` looks similar but gets the `default` step. See [Flow](./?path=/docs/foundations-flow--docs).
+The title sits the `tight` step below the eyebrow, and the subtitle sits directly under the title with no step. `body-sm text-color-text-muted` in place of `subtitle-sm` looks similar but gets the `default` step. See [Flow](./?path=/docs/foundations-flow--docs).
 
 ## Colour and emphasis
 
@@ -191,7 +191,7 @@ Set colour with a semantic token class:
 <span class="label-md text-color-label">Control label</span>
 ```
 
-The text tokens are `text`, `text-muted` and `text-wash`. The label tokens are `label` and `label-muted`.
+The text tokens are `text` and `text-muted`. The label tokens are `label` and `label-muted`.
 
 `text-strong` sets the semi-bold weight (600) and `text-soft` sets regular (400), on any role:
 

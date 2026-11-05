@@ -30,14 +30,15 @@ const preview: Preview = {
 							'Icons'
 						],
 						'Components - Layout And Themes',
-						'*',
-						'Example Layouts'
+						'*'
 					],
 					'Charts',
 					['Introduction', 'Components', ['ChartContainer']],
 					'Maps',
 					'Tables',
-					['*', 'Example Tables']
+					['*', 'Example Tables'],
+					'Example Layouts',
+					['Dashboards', 'Reports', 'Documentation', 'Typography']
 				]
 			}
 		},
@@ -61,7 +62,10 @@ const preview: Preview = {
 		}
 	},
 	decorators: [
-		() => ThemeContext as any,
+		// Return `{ Component }`, not the bare component: Storybook treats a
+		// decorator result with no enumerable keys as empty and swaps in the
+		// story's own component without args.
+		() => ({ Component: ThemeContext }),
 		withThemeByClassName({
 			themes: {
 				light: '',

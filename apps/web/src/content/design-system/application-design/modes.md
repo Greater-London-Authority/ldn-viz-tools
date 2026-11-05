@@ -8,7 +8,7 @@ order: 7
 ---
 
 <script>
-	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
+	import { EnhancedImage } from '@ldn-viz/ui';
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 </script>
 

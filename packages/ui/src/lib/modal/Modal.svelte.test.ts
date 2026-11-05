@@ -163,6 +163,58 @@ describe('Modal', () => {
 		await expect.element(trigger).not.toHaveFocus();
 	});
 
+	it('moves focus to the dialog when it opens', async () => {
+		render(Modal, {
+			open: false,
+			title: makeSnippet('Modal title'),
+			description: makeSnippet('Modal description')
+		});
+
+		await page.getByRole('button', { name: 'More Info' }).click();
+
+		await expect.element(page.getByRole('dialog')).toHaveFocus();
+	});
+
+	it('names and describes the focused dialog from its title and description', async () => {
+		render(Modal, {
+			open: true,
+			title: makeSnippet('Modal title'),
+			description: makeSnippet('Modal description')
+		});
+
+		const dialog = page.getByRole('dialog', { name: 'Modal title' });
+		await expect.element(dialog).toHaveAccessibleDescription('Modal description');
+	});
+
+	it('focuses a dialog with no description, and gives it no description', async () => {
+		render(Modal, {
+			open: false,
+			title: makeSnippet('Modal title')
+		});
+
+		await page.getByRole('button', { name: 'More Info' }).click();
+
+		const dialog = page.getByRole('dialog', { name: 'Modal title' });
+		await expect.element(dialog).toHaveFocus();
+		await expect.element(dialog).not.toHaveAttribute('aria-describedby');
+	});
+
+	it('returns focus to the trigger when it closes', async () => {
+		render(Modal, {
+			open: false,
+			title: makeSnippet('Modal title'),
+			description: makeSnippet('Modal description')
+		});
+
+		const trigger = page.getByRole('button', { name: 'More Info' });
+		await trigger.click();
+		await expect.element(page.getByRole('dialog')).toHaveFocus();
+
+		await userEvent.keyboard('{Escape}');
+
+		await expect.element(trigger).toHaveFocus();
+	});
+
 	it('renders custom buttons snippet', async () => {
 		render(Modal, {
 			open: true,

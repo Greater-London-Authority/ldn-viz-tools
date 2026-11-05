@@ -113,7 +113,7 @@ const rules = (ref) => [
 	[':where(ol, ul, menu)', { 'list-style': 'none', margin: '0', padding: '0' }],
 	[':where(dialog)', { padding: '0' }],
 	[':where(textarea)', { resize: 'vertical' }],
-	[':where(input, textarea)::placeholder', { opacity: '1', color: ref('color-text-wash') }],
+	[':where(input, textarea)::placeholder', { opacity: '1', color: ref('color-text-muted') }],
 	[':where(button, [role="button"])', { cursor: 'pointer' }],
 	[':where(:disabled)', { cursor: 'default' }],
 	[

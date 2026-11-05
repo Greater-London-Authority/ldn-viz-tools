@@ -3,7 +3,7 @@ id: '0015'
 title: Every class the specification names is generated as plain CSS in system.css
 status: accepted
 date: 2026-10-21
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [tokens, typography, flow]
 breaking: true

@@ -2905,9 +2905,9 @@
           }
         },
         "text-wash": {
-          "description": "",
+          "description": "Deprecated: use inverse/text-muted. Has the value of inverse/text-muted until version 5.",
           "type": "color",
-          "value": "{semantic-color.light-mode.palette.grey.200}"
+          "value": "{semantic-color.light-mode.inverse.text-muted}"
         },
         "geo": {
           "feature": {
@@ -3108,7 +3108,7 @@
         "off": {
           "description": "",
           "type": "color",
-          "value": "{primitive.light-mode.color.mode.light.grey.200}"
+          "value": "{primitive.light-mode.color.mode.light.grey.500}"
         },
         "dragged": {
           "description": "",
@@ -3218,17 +3218,17 @@
         "secondary-muted": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.light-mode.palette.grey.100}"
+          "value": "{semantic-color.light-mode.palette.grey.200}"
         },
         "secondary-muted-hover": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.light-mode.palette.grey.200}"
+          "value": "{semantic-color.light-mode.palette.grey.300}"
         },
         "secondary-muted-active": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.light-mode.palette.grey.300}"
+          "value": "{semantic-color.light-mode.palette.grey.400}"
         },
         "primary-hover": {
           "description": "",
@@ -3342,9 +3342,9 @@
         "value": "{semantic-color.light-mode.palette.grey.300}"
       },
       "text-wash": {
-        "description": "",
+        "description": "Deprecated: use text-muted. Has the value of text-muted until version 5.",
         "type": "color",
-        "value": "{semantic-color.light-mode.palette.grey.600}"
+        "value": "{semantic-color.light-mode.text-muted}"
       },
       "canvas-muted": {
         "type": "color",
@@ -4241,9 +4241,9 @@
           }
         },
         "text-wash": {
-          "description": "",
+          "description": "Deprecated: use inverse/text-muted. Has the value of inverse/text-muted until version 5.",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.200}"
+          "value": "{semantic-color.dark-mode.inverse.text-muted}"
         },
         "geo": {
           "feature": {
@@ -4444,7 +4444,7 @@
         "off": {
           "description": "",
           "type": "color",
-          "value": "{primitive.dark-mode.color.mode.dark.grey.300}"
+          "value": "{primitive.dark-mode.color.mode.dark.grey.500}"
         },
         "dragged": {
           "description": "",
@@ -4554,17 +4554,17 @@
         "secondary-muted": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.100}"
+          "value": "{semantic-color.dark-mode.palette.grey.200}"
         },
         "secondary-muted-hover": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.200}"
+          "value": "{semantic-color.dark-mode.palette.grey.300}"
         },
         "secondary-muted-active": {
           "description": "",
           "type": "color",
-          "value": "{semantic-color.dark-mode.palette.grey.300}"
+          "value": "{semantic-color.dark-mode.palette.grey.400}"
         },
         "primary-hover": {
           "description": "",
@@ -4678,9 +4678,9 @@
         "value": "{semantic-color.dark-mode.palette.grey.300}"
       },
       "text-wash": {
-        "description": "",
+        "description": "Deprecated: use text-muted. Has the value of text-muted until version 5.",
         "type": "color",
-        "value": "{semantic-color.dark-mode.palette.grey.1000}"
+        "value": "{semantic-color.dark-mode.text-muted}"
       },
       "canvas-muted": {
         "type": "color",

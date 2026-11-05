@@ -48,7 +48,7 @@
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-	color: var(--color-text-wash);
+	color: var(--color-text-muted);
 	opacity: 1;
 }
 

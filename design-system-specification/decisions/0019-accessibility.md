@@ -3,7 +3,7 @@ id: '0019'
 title: The system targets WCAG 2.2 AA, with one focus colour and stated contrast exceptions for data colour
 status: accepted
 date: 2026-10-22
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Accessibility, Colour, Typography]
 breaking: false

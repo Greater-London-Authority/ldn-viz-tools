@@ -21,7 +21,7 @@ const LEVEL_STYLES: Record<Level, { type: string; color: string }> = {
 	1: { type: 'body-sm', color: 'text-color-text' },
 	2: { type: 'body-sm', color: 'text-color-text-muted' },
 	3: { type: 'body-sm', color: 'text-color-text-muted' },
-	4: { type: 'body-sm', color: 'text-color-text-wash' }
+	4: { type: 'body-sm', color: 'text-color-text-muted' }
 };
 
 /**
@@ -35,7 +35,7 @@ export const itemTextClass = ({ level, isActive }: { level: number; isActive: bo
 	return classNames(
 		'flex w-full items-center hover:text-color-interactive-primary-text-hover hover:underline py-1',
 		type,
-		isActive ? 'text-color-interactive-primary-text-active underline font-semibold' : color
+		isActive ? 'text-color-interactive-primary-text-active underline text-strong' : color
 	);
 };
 

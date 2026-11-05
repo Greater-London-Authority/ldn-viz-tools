@@ -8,11 +8,10 @@ thumbnail: cta-foundations-3.svg
 ---
 
 <script>
-	import { Card } from '@ldn-viz/ui';
+	import { Card, EnhancedImage } from '@ldn-viz/ui';
 	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
 	import TokenReference from '$lib/components/tokenReference/TokenReference.svelte';
 	import TokenConcept from '$lib/components/tokenReference/TokenConcept.svelte';
-	import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte';
 </script>
 
 <p class="lead">Elevation shows how far a surface sits above the canvas. Each level is shown by a shadow.</p>

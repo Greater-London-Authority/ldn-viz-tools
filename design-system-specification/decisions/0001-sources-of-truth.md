@@ -3,7 +3,7 @@ id: '0001'
 title: Sources of truth
 status: accepted
 date: 2026-09-30
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: []
 breaking: false

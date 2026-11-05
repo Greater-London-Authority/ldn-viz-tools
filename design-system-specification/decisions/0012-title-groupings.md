@@ -3,7 +3,7 @@ id: '0012'
 title: Title Groupings
 status: accepted
 date: 2026-10-05
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Typography]
 breaking: false

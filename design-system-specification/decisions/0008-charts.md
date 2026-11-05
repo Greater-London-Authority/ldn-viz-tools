@@ -3,7 +3,7 @@ id: '0008'
 title: Charts
 status: accepted
 date: 2026-10-01
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [Charts]
 breaking: false

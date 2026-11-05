@@ -18,11 +18,12 @@
 const BY_BREAKPOINT = ['typography', 'grid'];
 
 // A string is quoted so a multi-word family stays one value. A value with a
-// comma (a shadow with layers) is wrapped so it stays one entry in a map.
+// comma (a shadow with layers, a font stack) is wrapped so it stays one entry
+// in a map; a stack already quotes its multi-word families (sd/fonts.js).
 const sassValue = ({ value, type }) => {
-	if (type === 'string') return `"${value}"`;
 	const text = String(value);
-	return text.includes(',') ? `(${text})` : text;
+	if (text.includes(',')) return `(${text})`;
+	return type === 'string' ? `"${text}"` : text;
 };
 
 const sassMap = (entries, indent = '\t') =>

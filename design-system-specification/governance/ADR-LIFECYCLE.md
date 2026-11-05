@@ -147,6 +147,6 @@ The sealed-body check compares against the file as it was at the tag named in `r
 
 - **Who accepts an ADR.** The maintainers, Chris Knight and James Scott-Brown. Both have signed off every ADR so far, and both are named in its `deciders`.
 - **Where discussion happens.** An ADR is written on a feature branch, as `proposed`, and discussed there and on its pull request. Its status becomes `accepted` when the maintainers sign it off, before or with the merge.
-- **Who seals.** Sealing happens during the release, as a step in the release checklist, set by whoever cuts the release. No ADR is sealed yet. The first are sealed at the version 4 release.
+- **Who seals.** Sealing happens during the release, as a step in the release checklist, set by whoever cuts the release. ADRs 0001 to 0019 were sealed at the version 4 release, themes 10.0.0.
 - **Declined proposals.** A declined proposal is recorded, so the same idea is not proposed again without new information. It is written short, goes straight to the archive, and states the conditions under which the idea could be revisited. None has been declined yet.
 - **Skills.** The governance skills, such as `decision-record` and `governance-encoder`, are in `.claude/skills/design-system-ops`, which Git ignores, so they are not part of this repository. Agents read `RULES.md` and `INDEX.md` first, and never treat an archived ADR as current.

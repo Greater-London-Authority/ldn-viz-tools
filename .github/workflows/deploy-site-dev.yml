@@ -1,6 +1,8 @@
 name: Deploy website to https://dev.ldn-gis.co.uk/city-data
 
 on:
+  push:
+    branches: ['dev']
   workflow_dispatch:
 
 jobs:

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BannerHeader from '$lib/components/bannerHeader/BannerHeader.svelte';
-	import Toc from '$lib/components/toc/Toc.svelte';
+	import { Toc } from '@ldn-viz/ui';
 	import type { Snippet } from 'svelte';
 
 	let { metadata, children }: { metadata: Record<string, any>; children: Snippet } = $props();

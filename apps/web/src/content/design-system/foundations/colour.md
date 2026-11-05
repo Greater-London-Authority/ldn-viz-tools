@@ -132,7 +132,7 @@ Colours should be referenced using token names. Hex values are provided here onl
 
 | Group       | Tokens                                                                                             | Use for                                        |
 | ----------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| Text        | `--color-text`, `--color-text-muted`, `--color-text-wash`                                          | Text, in decreasing emphasis                   |
+| Text        | `--color-text`, `--color-text-muted`                                                               | Text, in decreasing emphasis                   |
 | Label       | `--color-label`, `--color-label-muted`                                                             | Labels on controls                             |
 | Canvas      | `--color-canvas`, `--color-canvas-muted`                                                           | The page background                            |
 | Surface     | `--color-surface` and `--color-surface-{role}`, each with a `-muted` version                       | Cards, panels and status areas                 |
@@ -148,19 +148,17 @@ The data, chart and geo colours are described in [Data visualisation](/design-sy
 
 ### Text and labels
 
-Text has three levels of emphasis: `--color-text` for most text, `--color-text-muted` for secondary text such as a source, and `--color-text-wash` for the least important text. Labels on controls use `--color-label` and `--color-label-muted`.
+Text has two levels of emphasis: `--color-text` for most text, and `--color-text-muted` for secondary text such as a source or a placeholder. Labels on controls use `--color-label` and `--color-label-muted`.
 
 ```html
 <p style="color: var(--color-text)">Text</p>
 <p style="color: var(--color-text-muted)">Secondary text, such as a source</p>
-<p style="color: var(--color-text-wash)">The least important text</p>
 ```
 
 <div class="bg-color-canvas-muted p-4 my-4 not-typeset">
 	<div class="typeset-product flow-compact">
 		<p class="body-md" style="color: var(--color-text)">Text</p>
 		<p class="body-md" style="color: var(--color-text-muted)">Secondary text, such as a source</p>
-		<p class="body-md" style="color: var(--color-text-wash)">The least important text</p>
 	</div>
 </div>
 

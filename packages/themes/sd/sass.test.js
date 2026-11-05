@@ -12,7 +12,8 @@ const variables = Object.fromEntries(
 describe('tokens.scss', () => {
 	it('has a variable for every custom property in tokens.json, with its resolved value', () => {
 		for (const [name, { value, type }] of Object.entries(json)) {
-			const want = type === 'string' ? `"${value}"` : String(value);
+			const text = String(value);
+			const want = type === 'string' && !text.includes(',') ? `"${text}"` : text;
 			expect(variables[name.slice(2)]?.replace(/^\((.*)\)$/, '$1')).toBe(want);
 		}
 	});

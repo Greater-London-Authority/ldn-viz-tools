@@ -3,7 +3,7 @@ id: '0013'
 title: The Figma export is normalised once, before any filtering
 status: accepted
 date: 2026-10-21
-released-in: null
+released-in: 10.0.0
 deciders: [Chris Knight, James Scott-Brown]
 areas: [tokens]
 breaking: true

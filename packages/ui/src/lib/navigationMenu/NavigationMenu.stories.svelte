@@ -33,7 +33,7 @@
 	let activeMenuItemId = $state('layout');
 	let activeMenuItemId2 = $state('applications');
 
-	export let subMenu = [
+	let subMenu = [
 		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
 		{ title: 'Brand', id: 'brand', href: '/brand' },
 		{ title: 'Color', id: 'color', href: '/color' },

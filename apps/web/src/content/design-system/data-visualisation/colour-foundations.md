@@ -261,7 +261,7 @@ When representing sex in your demography data, use `color-data-male` and `color-
 
 #### Opinion
 
-If you are visualising diverging data (like opinion research) or want to explicitly show if something is good or bad, then use `color-data-good`, and `color-data-bad`.
+If you are visualising diverging data (like opinion research) or want to explicitly show if something is good or bad, then use `color-data-positive`, and `color-data-negative`.
 
 We've chosen blue and red to represent good and bad, to avoid the common red/green colour differentiation issue.
 

@@ -91,7 +91,7 @@ To use the system's classes as well, such as the typesets, flow contexts and `.c
 You can also link to `index.css` from a CDN:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes/styles/index.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@ldn-viz/themes@10/styles/index.css" rel="stylesheet" />
 ```
 
 {/snippet}

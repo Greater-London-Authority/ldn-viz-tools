@@ -214,3 +214,9 @@ Amends [0005](./decisions/0005-flow.md).
 - **Focus has one colour, `--color-interactive-focus`, and two forms:** an outline on `:focus-visible` by default, and an inset ring on filled controls. There are no focus-ring tokens. Figma's `focus` effect style follows the code.
 - **Contrast is 4.5:1 for text, 3:1 for large text, and 3:1 for interface components and meaningful chart parts.** `--color-data-context` and `--color-data-categorical-yellow` are stated exceptions. Disabled controls are exempt. In dark mode, the primary hover and active fills are below 3:1 against the surfaces. This is accepted because the label passes 4.5:1 on each fill.
 - **No text is smaller than 12px, and running text is no wider than 80 characters.**
+
+## [0020 — Text emphasis](./decisions/0020-text-emphasis.md)
+
+- **Text has two emphasis levels, `--color-text` and `--color-text-muted`.** Placeholders and other secondary text use `--color-text-muted`.
+- **Every `--color-inverse-*` token has a base counterpart, and the two are added, changed and removed together.**
+- **`--color-text-wash` and `--color-inverse-text-wash` are deprecated** and have the value of their `muted` counterparts until version 5.
