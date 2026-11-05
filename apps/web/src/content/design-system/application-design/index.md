@@ -1,47 +1,53 @@
 ---
 title: Application design
-description: Guiding principles for consistent presentation
-section: Application design
-navLabel: Application design
-layout: index
+description: Layouts, surfaces, controls and other patterns for applications.
+navLabel: Application Design
+order: 3
 heroImage: header-application-design-overflow.svg
 thumbnail: cta-application-design.svg
 ---
 
 <script>
-	import { Button } from '@ldn-viz/ui'
-    import EnhancedImage from '$lib/components/enhancedImage/EnhancedImage.svelte'
+    import ImageLink from '$lib/components/ImageLink.svelte';
 </script>
 
-<p class="prose lead">This section covers guidance on regular patterns applied to our applications and products.</p>
+<p class="subtitle-lg">This section covers guidance on regular patterns applied to our applications and products.</p>
 
-<div class="grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-4">
-    <div>
-        <a href="/design-system/application-design/application-types">
-        <EnhancedImage src='cta-application-design-1.svg'/>
-        </a>
-        <h3 class="title-3">Application types</h3>
-        <Button href="/design-system/application-design/application-types" variant="text" slim emphasis="secondary">Read more</Button>
-    </div>
-    <div>
-        <a href="/design-system/application-design/layout" >
-        <EnhancedImage src='cta-application-design-2.svg'/>
-        </a>
-        <h3 class="title-3">Layout</h3>
-        <Button href="/design-system/application-design/layout" variant="text" slim emphasis="secondary">Read more</Button>
-    </div>
-    <div>
-        <a href="/design-system/application-design/theming">
-        <EnhancedImage src=cta-application-design-3.svg/>
-        </a>
-        <h3 class="title-3">Theming</h3>
-        <Button href="/design-system/application-design/theming" variant="text" slim emphasis="secondary">Read more</Button>
-    </div>
-    <div>
-        <a href="/design-system/application-design/ui-components">
-        <EnhancedImage src=cta-application-design-4.svg/>
-        </a>
-        <h3 class="title-3">Ui components</h3>
-        <Button href="/design-system/application-design/ui-components" variant="text" slim emphasis="secondary">Read more</Button>
-    </div>
+<div class="not-typeset grid grid-cols-2 xl:grid-cols-4 grid-rows-[auto] gap-flow">
+
+<ImageLink
+    url="/design-system/application-design/application-types"
+    image="cta-application-design-1.svg"
+    title="Application types"/>
+
+<ImageLink
+    url="/design-system/application-design/page-layout"
+    image="cta-application-design-2.svg"
+    title="Page layout"/>
+
+<ImageLink
+    url="/design-system/application-design/surfaces-and-chrome"
+    image="cta-application-design-1.svg"
+    title="Surfaces and chrome"/>
+
+<ImageLink
+    url="/design-system/application-design/filtering-and-controls"
+    image="cta-application-design-2.svg"
+    title="Filtering and controls"/>
+
+<ImageLink
+    url="/design-system/application-design/actions-and-emphasis"
+    image="cta-application-design-3.svg"
+    title="Actions and emphasis"/>
+
+<ImageLink
+    url="/design-system/application-design/feedback-and-overlays"
+    image="cta-application-design-4.svg"
+    title="Feedback and overlays"/>
+
+<ImageLink
+    url="/design-system/application-design/modes"
+    image="cta-application-design-3.svg"
+    title="Modes"/>
+
 </div>

@@ -1,5 +1,6 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import Input from '../input/Input.svelte';
 	import Card from './Card.svelte';
 
 	/**
@@ -15,12 +16,14 @@
 	 * when it owns the primary slot, and steps down to an eyebrow
 	 * (`emphasis="secondary"`) when a titled element inside owns it.
 	 *
-	 * Surface construction (border, padding, shadow) lives on the card. Corner
-	 * radius matches the design source (square) and can be overridden via `class`.
+	 * Surface construction (border, padding, shadow) lives on the card.
+	 *
+	 * Header and Footer snippets are provided as an escape hatch where fine grained
+	 * control is required for adding contols or other novel elements.
 	 *
 	 */
 	const { Story } = defineMeta({
-		title: 'Ui/Card',
+		title: 'Ui/Components/Card',
 		component: Card,
 		tags: ['autodocs'],
 		argTypes: {
@@ -30,7 +33,7 @@
 </script>
 
 {#snippet body()}
-	<p class="body text-color-text-muted">
+	<p class="body-md text-color-text-muted">
 		Maecenas ut libero vel nibh maximus feugiat non sed tortor. Card content sits between the header
 		and the actions row.
 	</p>
@@ -88,7 +91,52 @@
 			<Card {...args}>
 				{@render body()}
 				{#snippet actions()}
-					<span class="label text-color-text-muted">actions snippet</span>
+					<span class="label-md text-color-text-muted">actions snippet</span>
+				{/snippet}
+			</Card>
+		</div>
+	{/snippet}
+</Story>
+
+<Story
+	name="With custom header snippet"
+	args={{ title: 'Card title', subtitle: 'A supporting subtitle' }}
+>
+	{#snippet template()}
+		<div class="max-w-xl">
+			<Card>
+				{#snippet header()}
+					<div class="flex items-end justify-between">
+						<div>
+							<p class="eyebrow">Fully custom</p>
+							<h3 class="title-md">Head snippet</h3>
+						</div>
+
+						<Input type="range" name="range" label="Header control" />
+					</div>
+				{/snippet}
+				{@render body()}</Card
+			>
+		</div>
+	{/snippet}
+</Story>
+
+<Story
+	name="With custom footer snippet"
+	args={{ title: 'Card title', subtitle: 'A supporting subtitle' }}
+>
+	{#snippet template(args)}
+		<div class="max-w-xl">
+			<Card {...args}>
+				{@render body()}
+				{#snippet footer()}
+					<div class="flex items-center justify-between">
+						<div>
+							<p class="caption-sm">Fully custom footer snippet</p>
+						</div>
+
+						<Input type="range" name="range" label="Header control" />
+					</div>
 				{/snippet}
 			</Card>
 		</div>

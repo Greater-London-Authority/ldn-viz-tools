@@ -32,7 +32,7 @@ export const findActiveItem = (
 			const itemPath = item?.href ?? '';
 			const bestMatchPath = bestMatch?.href ?? '';
 
-			if (itemPath.split('/').length > bestMatchPath.split('/').length) {
+			if (!bestMatch || itemPath.split('/').length > bestMatchPath.split('/').length) {
 				bestMatch = item;
 			}
 		}

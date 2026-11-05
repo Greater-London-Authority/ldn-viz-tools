@@ -17,20 +17,28 @@
 
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import Button from '../button/Button.svelte';
-	import { subMenu } from '../navigationMenu/NavigationMenu.stories.svelte';
 	import NavigationMenu from '../navigationMenu/NavigationMenu.svelte';
 
-	export let tabs = [
+	let tabs = [
 		{ id: 'markers', label: 'Markers', icon: ChartBar, content: First },
 		{ id: 'filters', label: 'Filters', icon: Funnel, content: Second },
 		{ id: 'analysis', label: 'Analysis', icon: Map, content: Third },
 		{ id: 'layers', label: 'Layers', icon: MapPin, content: Fourth }
 	];
 
+	let subMenu = [
+		{ title: 'Accessibility', id: 'accessibility', href: '/accessibility' },
+		{ title: 'Brand', id: 'brand', href: '/brand' },
+		{ title: 'Color', id: 'color', href: '/color' },
+		{ title: 'Typography', id: 'typography', href: '/typography' },
+		{ title: 'Spacing', id: 'spacing', href: '/spacing' },
+		{ title: 'Design Tokens', id: 'design-tokens', href: '/design-tokens' }
+	];
+
 	/**
 	 * The `<Sidebar>` component renders a sidebar that is typically used to display controls and textual explanation.
 	 *
-	 * It should generally be used inside an [AppShell](.//?path=/docs/app-appshell--documentation).
+	 * It should generally be used inside an [AppShell](.//?path=/docs/ui-components-layout-and-themes-appshell--documentation).
 	 *
 	 * Note that when the sidebar is collapsed, it is removed by the `AppShell` (rather than merely being hidden).
 	 * Any state that should be restored when it is re-opened should be persisted in a Svelte Store.
@@ -40,7 +48,7 @@
 		title: 'Ui/Components - Layout And Themes/Sidebar',
 		component: Sidebar,
 		tags: ['autodocs'],
-		decorators: [() => SidebarLeftContext as any],
+		decorators: [() => ({ Component: SidebarLeftContext })],
 		render: defaultTemplate,
 		parameters: {
 			layout: 'fullscreen',
@@ -57,7 +65,7 @@
 		},
 		argTypes: {
 			width: {
-				options: ['standard', 'wide'],
+				options: ['slim', 'standard', 'wide'],
 				control: { type: 'radio' }
 			},
 			theme: {
@@ -149,6 +157,8 @@
 
 <Story name="Default" />
 
+<Story name="Slim" args={{ width: 'slim' }} />
+
 <Story name="Wide" args={{ width: 'wide' }} />
 
 {#snippet longcontent()}
@@ -225,7 +235,7 @@
 
 {#snippet unstyledContent()}
 	<div class="bg-color-surface-accent p-4 text-color-text">
-		<p class="text-bold mb-2 text-xl">Unstyled Content</p>
+		<p class="label-lg mb-2">Unstyled Content</p>
 		<p class="mb-2">
 			This content does not inherit styles directly from the sidebar. Though it will be affected by
 			the .dark class modifier...

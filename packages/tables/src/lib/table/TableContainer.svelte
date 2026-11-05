@@ -59,6 +59,11 @@
 		 */
 		emphasis?: 'primary' | 'secondary';
 		/**
+		 * The heading level of the title, passed to `TitleGroup`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
+		/**
 		 * Optional help affordance shown beside the title. A string opens an `Overlay`
 		 * (`hintType` selects tooltip / popover / modal).
 		 */
@@ -134,6 +139,7 @@
 		subtitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
+		headingLevel = undefined,
 		hint = undefined,
 		hintType = 'tooltip',
 		hintTitle = undefined,
@@ -171,18 +177,27 @@
 {@render numRowsControlSlot?.()}
 
 <div
-	class={`table-container product not-prose break-inside-avoid ${tableWidth}`}
+	class={`table-container typeset-product break-inside-avoid ${tableWidth}`}
 	bind:this={tableToCapture}
 	id="captureElement"
 >
 	{#if title || subtitle || eyebrow || hint}
 		<div class="mb-2">
-			<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
+			<ChromeHeader
+				{title}
+				{subtitle}
+				{eyebrow}
+				{emphasis}
+				{headingLevel}
+				{hint}
+				{hintType}
+				{hintTitle}
+			/>
 		</div>
 	{/if}
 
 	{#if alt}
-		<h5 class="sr-only">{alt}</h5>
+		<p class="sr-only">{alt}</p>
 	{/if}
 
 	{#if beforeTable}

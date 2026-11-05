@@ -192,7 +192,7 @@
 	{/if}
 
 	{#if label}
-		<label class="form-label font-normal leading-none" for={optionId}>{label}</label>
+		<label class="form-label" for={optionId}>{label}</label>
 	{/if}
 
 	{#if hint}

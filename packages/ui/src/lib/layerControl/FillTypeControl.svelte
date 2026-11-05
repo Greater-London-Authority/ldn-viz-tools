@@ -86,7 +86,7 @@
 			Fill type
 		{/snippet}
 
-		<span class="caption mb-2 inline-block">Click to assign a fill type to this layer.</span>
+		<span class="caption-sm mb-2 inline-block">Click to assign a fill type to this layer.</span>
 
 		<div class="flex flex-col gap-2">
 			<div class="flex flex-wrap gap-0.5">

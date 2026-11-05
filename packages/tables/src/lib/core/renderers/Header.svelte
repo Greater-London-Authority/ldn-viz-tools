@@ -25,7 +25,7 @@
 	let alignmentClass = $derived(alignmentClasses[alignHeader]);
 </script>
 
-<div class="h-full w-full py-0.5 font-semibold" style:color>
+<div class="table-col-head h-full w-full py-0.5" style:color>
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<svelte:element
 		this={allowSorting ? 'button' : 'div'}
@@ -34,7 +34,7 @@
 	>
 		{#if superscriptText}
 			<div class="text-left">
-				<span class="text-xs font-normal">{superscriptText}</span><br />
+				<span class="caption-sm">{superscriptText}</span><br />
 				<span>{label}</span>
 			</div>
 		{:else}

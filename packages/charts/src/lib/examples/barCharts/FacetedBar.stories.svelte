@@ -10,10 +10,6 @@
 		title: 'Charts/Examples/Bar Charts'
 	});
 
-	$effect.root(() => {
-		$inspect(theme.currentTheme.data.primary);
-	});
-
 	let spec = $derived({
 		marginRight: 120, // adjust margin right to suit your label length
 		marginTop: 20, // adjust top margin to better suit facetY,

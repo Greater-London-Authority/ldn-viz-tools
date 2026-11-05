@@ -26,7 +26,7 @@
 	{#snippet groupSizes()}
 		{#each table.groupingFields as colName (colName)}
 			<div
-				class="was-th flex font-bold"
+				class="was-th table-col-head flex"
 				role="columnheader"
 				style:width={sumWidths([
 					table.widths.groupLabel,

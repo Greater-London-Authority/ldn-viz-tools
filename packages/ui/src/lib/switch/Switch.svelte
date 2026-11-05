@@ -1,4 +1,13 @@
 <script lang="ts">
+	/**
+	 * The `<Switch>` component turns a single setting on or off, and the change takes effect straight away.
+	 * It renders a `<button role="switch">` with `aria-checked`, and a label beside it on the left or right.
+	 *
+	 * **Alternatives**: use a [Checkbox](./?path=/docs/ui-components-checkboxes-checkbox--documentation) when the choice is submitted with a form rather than applied straight away.
+	 *
+	 * @component
+	 */
+
 	import { Label, Switch } from 'bits-ui';
 	import { classNames } from '../utils/classNames.js';
 	import { randomId } from '../utils/randomId.js';
@@ -65,7 +74,7 @@
 	// Does this need to be derived for the sake of the story? TO BE DISCUSSED
 	const labelClass = $derived(
 		classNames(
-			'form-label  leading-none',
+			'form-label',
 			labelOn === 'right' ? 'pl-2' : 'pr-2',
 			disabled ? 'text-color-interactive-disabled' : 'text-color-label'
 		)

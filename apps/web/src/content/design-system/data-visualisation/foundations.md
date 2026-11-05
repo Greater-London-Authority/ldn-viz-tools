@@ -1,11 +1,15 @@
 ---
 title: Foundations
 description: Remove the noise, highlight the signal
-section: Data visualisation
 navLabel: Foundations
+order: 1
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-1.svg
 ---
+
+<script>
+    import FoundationsDualLine from '$lib/components/charts/illustrativeCharts/FoundationsDualLine.svelte'
+</script>
 
 ## Principles
 
@@ -14,8 +18,8 @@ A visualisation rarely _just shows_ the raw data. It is a curated slice, summary
 As noted by Andy Kirk, in his book “[Data Visualisation](https://visualisingdata.com/book/)”, one of Dieter Rams’ 10 Principles of good design is particularly pertinent to our field.
 
 > Good design is as little design as possible. Less, but better.
-
-<cite>Dieter Rams</cite>
+>
+> <cite>Dieter Rams</cite>
 
 In data visualisation, “Less, but better” means removing unnecessary visual clutter, but keeping and highlighting only elements that reinforce the point we are trying to make, or story we are trying to tell.
 
@@ -70,7 +74,7 @@ Whatever format of data visualisation you are producing, keep these fundamentals
 - **Say what you see** -
   Help the reader by titling the chart with a description of what you want them to see in the graphic. You could also use colour in your title text to connect to data points in your chart.
 
-![An example chart, using the LDN City Data Design System, with a narrative title, labelled data points and highlighted date ranges.](/data-viz-foundations-chart-example-01.png)
+<FoundationsDualLine />
 
 ### Charts in context
 

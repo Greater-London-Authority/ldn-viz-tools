@@ -74,7 +74,7 @@
 
 <Story name="Outline" args={{ variant: 'outline' }} />
 
-<Story name="Text" args={{ variant: 'text', emphasis: 'secondary' }} />
+<Story name="Text" args={{ variant: 'text' }} />
 
 <Story name="Disabled">
 	{#snippet template(args)}
@@ -119,13 +119,13 @@
 				>&nbsp;a bit more
 			</p>
 
-			<p class="flex flex-wrap text-lg">
+			<p class="body-lg flex flex-wrap">
 				sometime you may want a buttton to&nbsp<Button {...args} slim variant="text" size="lg">
 					go with the flow
 				</Button>&nbsp;a bit more
 			</p>
 
-			<p class="flex flex-wrap text-lg">
+			<p class="body-lg flex flex-wrap">
 				sometime you may want a buttton to&nbsp;<Button
 					{...args}
 					slim

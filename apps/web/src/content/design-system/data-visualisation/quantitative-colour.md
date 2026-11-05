@@ -1,8 +1,8 @@
 ---
 title: Quantitative colour
 description: Values mapped to colour gradients
-section: Data visualisation
 navLabel: Quantitative colour
+order: 5
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-3.svg
 ---
@@ -12,13 +12,13 @@ thumbnail: cta-dataviz-3.svg
 	import { Callout, theme, ColorLegend, Select, Checkbox } from '@ldn-viz/ui'
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
-    import ColorStackedBar from '$lib/components/charts/exampleCharts/bars/ColorStackedBar.svelte'
-    import ColorMultipleLine from '$lib/components/charts/exampleCharts/lines/ColorMultipleLine.svelte'
-    import ColorDualLine from '$lib/components/charts/exampleCharts/lines/ColorDualLine.svelte'
-    import ColorBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorBoroughMap.svelte'
-    import ColorDivergingBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorDivergingBoroughMap.svelte'
+    import ColorStackedBar from '$lib/components/charts/illustrativeCharts/ColorStackedBar.svelte'
+    import ColorMultipleLine from '$lib/components/charts/illustrativeCharts/ColorMultipleLine.svelte'
+    import ColorDualLine from '$lib/components/charts/illustrativeCharts/ColorDualLine.svelte'
+    import ColorBoroughMap from '$lib/components/charts/illustrativeCharts/ColorBoroughMap.svelte'
+    import ColorDivergingBoroughMap from '$lib/components/charts/illustrativeCharts/ColorDivergingBoroughMap.svelte'
     import ColorRampGenerator from '$lib/components/ramp/ColorRampGenerator.svelte'
-    import ColorStackedBarLikert from '$lib/components/charts/exampleCharts/bars/ColorStackedBarLikert.svelte'
+    import ColorStackedBarLikert from '$lib/components/charts/illustrativeCharts/ColorStackedBarLikert.svelte'
     import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
     import { hsl } from 'd3';
     import { scaleSequential } from 'd3-scale';
@@ -34,6 +34,7 @@ thumbnail: cta-dataviz-3.svg
     // get width & height of wrappers around content components
     // TODO: Code review.. is this ok to share between bindings on component wrappers
     let contentWidth = $state();
+    let contentWidthWide = $state();
 	let contentHeight = $state();
     
 
@@ -116,7 +117,7 @@ thumbnail: cta-dataviz-3.svg
     
 
     let chartColorsOrdered = [
-            'color-chart-background', 
+            'color-chart-surface', 
             'color-chart-axis', 
             'color-chart-grid', 
             'color-chart-label', 
@@ -199,23 +200,25 @@ A quantitative colour scale is a continuous (smooth or stepped) gradient of colo
 
 These quantitative colour scales are commonly used to encode data on a (choropleth) map, or the value of data points on a chart.
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ColorBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
+<div bind:clientWidth={contentWidthWide} bind:clientHeight={contentHeight} class="width-content-wide">
+<ColorBoroughMap containerWidth={contentWidthWide} containerHeight={contentHeight} />
 </div>
 
 #### Sequential
 
 A sequential colour scale is a gradient of colour (continuous or stepped) that runs in one direction. For example, on a light background, a gradient from light to dark blue, might be mapped to values that run from 1 to 100.
 
-<div bind:clientWidth={contentWidth} >
+<div bind:clientWidth={contentWidth}>
 {#if mounted}
-    <ColorLegend color={ldnBlueScale} ticks=5 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
+<ColorLegend color={ldnBlueScale} ticks=5 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
 {/if}
 </div>
 
 Typically, the higher the contrast with the background, the higher the value is assumed to be by the reader. On a light background, a domain of 1 to 100 would be mapped from light to dark blue. The darker blue having the higher contrast and so the higher value. The opposite is true in dark mode.
 
-<ColorRampGenerator title='Generate a colour ramp' colorRight='blue' type='Sequential' breaks={5} />
+<div class="width-content-wide">
+  <ColorRampGenerator title='Generate a colour ramp' colorRight='blue' type='Sequential' breaks={5} />
+</div>
 
 #### Diverging
 
@@ -223,9 +226,7 @@ A diverging colour scale works in the same way as the single “direction” seq
 
 Typically we use 2 diverging, single hue, stepped gradients, but a diverging colour scale can also be a continuous gradient of colour.
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ColorDivergingBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
-</div>
+<ColorDivergingBoroughMap containerWidth={contentWidthWide} containerHeight={contentHeight} />
 
 Our default diverging scale, is red (negative) to blue (positive). This is to avoid any red/green perception issues, and is a simple augmentation of our default (positive) blue ramp.
 
@@ -268,8 +269,8 @@ Your mapping or visualisation tool of choice will usually allow you to choose a 
 Lisa Charlotte Muth from Datawrapper has written another [brilliant article exploring different interpolations](https://blog.datawrapper.de/interpolation-for-color-scales-and-maps/). This quote from that article is a perfect summing up of the issue.
 
 > All maps are wrong, but some are useful
-
-<cite>Lisa Charlotte Muth (after George Box)</cite>
+>
+> <cite>Lisa Charlotte Muth (after George Box)</cite>
 
 #### Perceptually even
 
@@ -279,21 +280,17 @@ While multi-hued scales can help users differentiate between steps on a scale, p
 
 **Don't use this**
 
-<div bind:clientWidth={contentWidth} >
 {#if mounted}
-    <ColorLegend color={angryRainbowScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidth}/>
+<ColorLegend color={angryRainbowScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidthWide}/>
 {/if}
-</div>
 
 If you do need multi-hued colour scales, it’s best practice to [use well established perceptually even ramps like the Viridis ramps](https://d3js.org/d3-scale-chromatic/sequential#interpolateViridis).
 
 **Use this**
 
-<div bind:clientWidth={contentWidth} >
 {#if mounted}
-    <ColorLegend color={viridisScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidth}/>
+<ColorLegend color={viridisScale} ticks=0 marginTop=0 marginBottom=0 height=32 width={contentWidthWide}/>
 {/if}
-</div>
 
 **Note**: If you have more complex ramp generation needs, see the 'further reading' section (below) and use tools like [gka.github.io/palettes](https://gka.github.io/palettes/) and the [obumbratta.com/colour](https://obumbratta.com/colour).
 

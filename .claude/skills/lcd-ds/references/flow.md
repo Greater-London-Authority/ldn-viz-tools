@@ -1,83 +1,62 @@
-# Flow & vertical rhythm
+# Flow
 
-Distilled from the spec's _Content Flow_ section. Implementation:
-`packages/themes/tailwind-custom/typography/flow.cjs` (Tailwind plugin) →
-emitted context vars in `packages/themes/styles/flow.css`.
+Spec section: Flow. ADRs: [0005](../../../../design-system-specification/decisions/0005-flow.md), [0016](../../../../design-system-specification/decisions/0016-flow-in-system-css.md).
 
-## Principle
+Code: `flow` and `flowRoles` in `packages/themes/sd/system.config.js`. Output: the Flow contexts, Flow rules and Flow utilities sections of `system.css`.
 
-Vertical rhythm is a property of the **context**, not of the type inside it.
-Never bundle margin onto a role. An author picks a context and wraps companions
-with their primary; everything else follows. No margin is computed by hand.
+## Contexts and steps
 
-## The four-step ramp, remapped per context
+Flow is the vertical space between blocks. A flow context sets a value for each of four steps:
 
-| Ramp role        | `flow-prose` | `flow-product` | `flow-compact` |
-| ---------------- | ------------ | -------------- | -------------- |
-| `--flow-tight`   | 4            | 4              | 4              |
-| `--flow-default` | 16           | 8              | 4              |
-| `--flow-loose`   | 24           | 16             | 8              |
-| `--flow-section` | 40           | 24             | 8              |
+| Step | Utility | `flow-spacious` | `flow-standard` | `flow-compact` |
+| --- | --- | --- | --- | --- |
+| `tight` | `.mt-flow-tight` | 4 | 4 | 4 |
+| `default` | `.mt-flow` | 16 | 8 | 4 |
+| `loose` | `.mt-flow-loose` | 24 | 16 | 8 |
+| `section` | `.mt-flow-section` | 40 | 24 | 8 |
 
-`flow-compact` (tooltips/alerts/dialogs) also tightens body-tier leading to ~1.3
-(`--flow-leading: 1.3`). A new density is one new theme remapping four variables —
-don't hand-set margins to get there.
+Values in px. A step names how closely two blocks are related, and the context sets the distance.
 
-**The context class is both the variable scope AND the flow root** — e.g.
-`flow-prose` alone; there is no separate bare `.flow` root. (Note: `flow-*` sets
-_rhythm_ vars only; typography role vars come from the separate `.prose`/`.product`
-context class — see `references/typography.md`.)
+`typeset-longform` sets `flow-spacious`, and `typeset-product--formatted` sets `flow-standard`. `typeset-product` sets no flow. Outside any context, the steps take the standard values from `:root`.
 
-## The owl rules (what's actually implemented)
+In `flow-compact`, `tight` and `default` are equal, and so are `loose` and `section`. That is intended.
 
-Consecutive visible children of a flow context auto-space; structural exceptions
-get more/less. From `flow.cjs`, in order (later rules win at equal specificity):
+## Which step each child gets
 
-1. base — every visible sibling → `--flow-default`.
-2. block objects (`figure, img, table, pre, blockquote, .chart`) → `--flow-loose` above and below.
-3. before headings — `h1,h2,.title-1,.title-2` → `--flow-section`; `h3,h4,.title-3,.title-4` → `--flow-loose`.
-4. stacked headings (heading + heading) → `--flow-tight`.
-5. `figure > figcaption` → `--flow-tight` (coupling by nesting).
-6. lists: `li + li`, `li > ul/ol` → `--flow-tight`; `dl > dd` tight, `dl > dt` default.
-7. **companion coupling (block "4b"):**
-   - `heading + :is(.subtitle, .subhead)` → `--flow-tight`
-   - `.eyebrow + heading` → `--flow-tight`
-   - `prev + .eyebrow:has(+ heading)` → `--flow-section` (break moves above the eyebrow)
+A context spaces only its direct children. It sets their vertical margins to zero, then sets a top margin on each child after the first:
 
-Headings covered by "4b" include `h1..h4`, `[class*="title-"]`, `.display`,
-`.headline`, `.page-head`, `.section-head`. The `:not(.sr-only,[hidden],template)`
-guard keeps collapsed/non-rendered siblings off the owl axis.
+| Child | Step above it |
+| --- | --- |
+| Any child | `default` |
+| `figure`, `img`, `table`, `pre`, `blockquote`, `.chart`, and the child after one | `loose` |
+| `h1`, `h2`, `display-*`, `headline-*`, `.dashboard-main-title`, `.dashboard-section-title` | `section` |
+| `h3` to `h5`, `title-*`, and the title aliases (`.card-title`, `.chart-title`, `.table-title`, `.header-title`, `.sidebar-title`) | `loose` |
+| A heading straight after another heading | none |
+| A `subhead-*`, `subtitle-*` or subtitle alias straight after a heading | none |
+| A heading straight after an `.eyebrow` | `tight` |
+| An `.eyebrow` before a headline or display | `section` |
+| A `caption-*` class or `.chart-note` straight after a block object | `tight` |
 
-The guard uses `:is()` (not `:where()`) so the context class carries (0,1,0)
-specificity and beats element resets like `p { margin: 0 }`. **Ordering is
-load-bearing** — companion/eyebrow rules sit after the base+heading rules so they
-override at equal specificity.
+Inside those children, list items, nested lists, `figcaption` in a `figure` and `dd` get `tight`. In a typeset with content styles, a table `caption` is `tight` above its table. A `dt` gets `default`, except the first.
 
-## Coupling: two mechanisms
+The rules match role classes and elements. A muted `body-sm` under a heading looks like a subtitle but gets `default`. Use `subtitle-*` and it sits directly under the heading, as the parts of a title group do.
 
-- **By nesting** (spec's canonical mechanism): a companion lives inside a
-  compound-unit wrapper with its primary (`figure`/`figcaption`), invisible to the
-  owl (child of `figure`, not of `.flow`). The wrapper participates in flow as one block.
-- **By sibling rule** (what we chose for titling clusters): flat markup where a
-  `.subtitle`/`.subhead` after a heading and an `.eyebrow` before one snap to
-  `--flow-tight` via the owl rules above. This keeps authors writing flat markup
-  and matches how stacked headings already work.
+`.sr-only`, `[hidden]` and `template` children are skipped, and nothing is spaced from them.
 
-> Spec note: the prose still says "wrap companions with their primary". The
-> titling-cluster coupling is implemented as **sibling rules**, not wrappers;
-> `figure/figcaption` remains the only wrapper case. If reconciling, update the
-> Content Flow section to describe companion coupling as automatic sibling behaviour.
+## Utilities
 
-## Hero spacing (proportional)
+`mt-flow-{step}` sets the space above one element and replaces the step the rules gave it. It works by exclusion: every rule skips an element with an `mt-flow` class.
 
-Hero-tier margins scale with the type via `em` (hero line-heights are unitless):
-`.display { margin-block-start: 0.75em }`. The gap _below_ a hero to its subhead
-stays coupling (`flow-tight`); only the space above is proportional. Figma stores
-precomputed per-breakpoint `hero/space-before` values.
+`gap-flow-{step}` sets the gap between children of a flex or grid container.
 
-## Readable width (prose)
+Both resolve against the nearest context, and their names don't include the context.
 
-`.flow-prose { --readable-width: clamp(45ch, 90vw, 70ch); }` and
-`.prose-column { max-width: var(--readable-width); }`. Body text is width-capped
-for legibility; **figures, tables, code, pull quotes break out wider** rather than
-widening the measure. That is the intended way to use wide viewports.
+## Things to avoid
+
+- A wrapper `div` between the context and the blocks. Flow spaces direct children only, so the blocks inside the wrapper get no space.
+- `mt-flow-*` on a first child. There is nothing above it to space from, and its margin can collapse through the parent.
+- A flow context and `gap-flow-*` on the same element. The margin and the gap add together.
+
+## Components
+
+Flow spaces only direct children, so outer flow spaces a component's root and goes no further. No class is needed to seal a component. A component declares its own context only to set the density of its own children, and then keeps that density wherever it is placed.

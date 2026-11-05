@@ -19,7 +19,7 @@ export const defaultPlotStyleFunctions: DefaultPlotStyleFunctions = {
 	defaultXAxis: () => defaultXAxis,
 	defaultYAxis: () => defaultYAxis,
 	defaultLine: () => defaultLine(),
-	defaultDashedLine: () => defaultDashedLine,
+	defaultDashedLine: () => defaultDashedLine(),
 	defaultDot: () => defaultDot(),
 	defaultPoint: () => defaultPoint(),
 	defaultArea: () => defaultArea(),
@@ -40,12 +40,12 @@ export const getDefaultPlotStyles = () => {
 
 const defaultStyle = () => ({
 	color: theme.tokenNameToValue('chart.label'),
-	fontSize: '0.875rem',
+	fontSize: 'var(--caption-md-font-size, 0.875rem)',
 	fontFamily: fontStack,
 	background: theme.tokenNameToValue('chart.surface')
 });
 
-const defaultSize = {
+export const defaultSize = {
 	height: 440, // opinionated approx half of full page width. 2:1 ratio
 	marginLeft: 0,
 	marginRight: 8,
@@ -53,7 +53,7 @@ const defaultSize = {
 	marginBottom: 52
 };
 
-const defaultSizeFacet = {
+export const defaultSizeFacet = {
 	height: 660, // opinionated normal chart height * 1.5 for additional fy height & spacing
 	marginLeft: 0,
 	marginBottom: 52,
@@ -118,10 +118,10 @@ const defaultLine = () => ({
 	strokeWidth: 2
 });
 
-const defaultDashedLine = {
-	...defaultLine,
+const defaultDashedLine = () => ({
+	...defaultLine(),
 	strokeDasharray: '5,5'
-};
+});
 
 const defaultDot = () => ({
 	// simplest mark for dense scatterplots
@@ -156,7 +156,6 @@ const defaultTip = () => ({
 	fill: theme.tokenNameToValue('chart.surface'),
 	fillOpacity: 1,
 	strokeOpacity: 1,
-	fontSize: 14,
 	textPadding: 6,
 	pointerSize: 12
 });
@@ -166,7 +165,6 @@ const defaultAnnotationTip = () => ({
 	fill: theme.tokenNameToValue('chart.surface'),
 	fillOpacity: 0.8,
 	strokeOpacity: 1,
-	fontSize: 14,
 	textPadding: 6,
 	pointerSize: 12,
 	pathFilter: '',
@@ -174,7 +172,6 @@ const defaultAnnotationTip = () => ({
 });
 
 const defaultAnnotationText = () => ({
-	fontSize: 14,
 	fill: theme.tokenNameToValue('chart.label'),
 	dx: 8,
 	dy: 0

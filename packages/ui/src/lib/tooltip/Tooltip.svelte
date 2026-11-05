@@ -56,11 +56,11 @@
 
 		<Tooltip.Portal>
 			<Tooltip.Content
-				class="product body-sm z-50 max-w-[200px] border border-color-border-muted bg-color-container p-2 shadow-lg"
+				class="typeset-product body-sm elevation-4 z-50 max-w-[200px] border border-color-border-wash bg-color-surface p-2"
 			>
 				{@render children?.()}
 
-				<Tooltip.Arrow class="text-color-border-muted" />
+				<Tooltip.Arrow class="text-color-border-wash" />
 			</Tooltip.Content>
 		</Tooltip.Portal>
 	</Tooltip.Root>

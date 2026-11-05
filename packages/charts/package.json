@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/charts",
-	"version": "9.1.0",
+	"version": "10.0.0",
 	"keywords": [
 		"svelte"
 	],
@@ -45,7 +45,14 @@
 	"dependencies": {
 		"@ldn-viz/ui": "*",
 		"@ldn-viz/utils": "*",
-		"@observablehq/plot": "^0.6.16"
+		"@observablehq/plot": "^0.6.16",
+		"@turf/rewind": "^5.1.5",
+		"d3": "^7.9.0",
+		"d3-array": "^3.2.4",
+		"d3-dsv": "^3.0.1",
+		"d3-format": "^3.1.0",
+		"d3-geo": "^2.0.2",
+		"d3-time-format": "^4.1.0"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -54,11 +61,16 @@
 		"@ldn-viz/config-typescript": "*",
 		"@ldn-viz/config-vitest": "*",
 		"@playwright/test": "^1.49.1",
+		"@steeze-ui/heroicons": "^2.4.2",
+		"@steeze-ui/svelte-icon": "^1.6.2",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.58.0",
 		"@sveltejs/package": "^2.3.7",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.0.0",
+		"@types/d3": "^7.4.3",
+		"@types/d3-dsv": "^3.0.7",
+		"@types/d3-format": "^3.0.4",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
@@ -77,6 +89,7 @@
 		"vitest-browser-svelte": "^2.0.1"
 	},
 	"peerDependencies": {
+		"@ldn-viz/themes": "*",
 		"svelte": "^5.33.0"
 	}
 }

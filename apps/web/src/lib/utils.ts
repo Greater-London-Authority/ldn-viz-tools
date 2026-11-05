@@ -15,6 +15,16 @@ export const getAllDocs = () => {
 	return docs;
 };
 
+export const resolveNavItems = <T extends { href?: string; children?: T[] }>(
+	items: T[],
+	resolve: (path: string) => string
+): T[] =>
+	items.map((item) => ({
+		...item,
+		href: item.href ? resolve(item.href) : item.href,
+		children: item.children ? resolveNavItems(item.children, resolve) : item.children
+	}));
+
 function slugFromPath(path: string) {
 	return path.replaceAll(/\/src\/content\/|\/index|\.md$/g, '');
 }
@@ -38,9 +48,13 @@ export const getContent = async (slug: string = 'index') => {
 		error(404, 'Could not find the document.');
 	}
 
+	// A folder's index.md is its landing page. Front matter `layout` overrides this.
+	const layout = metadata.layout ?? (match.path?.endsWith('/index.md') ? 'index' : 'page');
+
 	return {
 		component: content.default,
-		metadata
+		metadata,
+		layout
 	};
 };
 

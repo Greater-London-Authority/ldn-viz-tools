@@ -81,7 +81,7 @@
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
-			name="station-type"
+			name="station-type-default"
 			bind:selectedId
 			{...args}
 		/>
@@ -93,7 +93,6 @@
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
-			name="station-type"
 			bind:selectedId={selectedId2}
 			label="RadioGroup Label"
 			{...args}
@@ -106,7 +105,6 @@
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
-			name="station-type"
 			bind:selectedId={selectedId3}
 			label="RadioGroup Label"
 			description="This is a description"
@@ -120,7 +118,6 @@
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
-			name="station-type"
 			bind:selectedId={selectedId4}
 			label="RadioGroup Label"
 			hint="Contextual Hint"
@@ -164,7 +161,6 @@ different values as the `name` prop.
 <Story name="With Icons above">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
-			name="station-type"
 			options={optionsForGroupIconsAbove}
 			bind:selectedId={selectedId7}
 			{...args}
@@ -176,7 +172,6 @@ different values as the `name` prop.
 <Story name="With Icons below">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
-			name="station-type"
 			options={optionsForGroupIconsBelow}
 			bind:selectedId={selectedId8}
 			{...args}
@@ -188,7 +183,6 @@ different values as the `name` prop.
 <Story name="With 2 options">
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
-			name="station-type"
 			options={[optionsForGroup[0], optionsForGroup[1]]}
 			bind:selectedId={selectedId9}
 			{...args}
@@ -201,7 +195,6 @@ different values as the `name` prop.
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
-			name="station-type"
 			bind:selectedId={selectedId10}
 			label="RadioGroup Label"
 			hint="Contextual Hint"
@@ -215,11 +208,7 @@ different values as the `name` prop.
 
 <Story name="With RawIcon">
 	{#snippet template(args)}
-		<RadioButtonGroupSolid
-			name="station-type"
-			options={optionsForGroupRawIcon}
-			bind:selectedId={selectedId11}
-			{...args}
+		<RadioButtonGroupSolid options={optionsForGroupRawIcon} bind:selectedId={selectedId11} {...args}
 		></RadioButtonGroupSolid>
 		<p class="mt-8 text-color-text-muted">Selected id: {selectedId11}</p>
 	{/snippet}
@@ -227,11 +216,7 @@ different values as the `name` prop.
 
 <Story name="Many options (overflow)">
 	{#snippet template(args)}
-		<RadioButtonGroupSolid
-			name="station-type"
-			options={manyOptions}
-			bind:selectedId={selectedId12}
-			{...args}
+		<RadioButtonGroupSolid options={manyOptions} bind:selectedId={selectedId12} {...args}
 		></RadioButtonGroupSolid>
 		<p class="mt-8 text-color-text-muted">Selected id: {selectedId12}</p>
 	{/snippet}
@@ -241,7 +226,6 @@ different values as the `name` prop.
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
-			name="station-type"
 			bind:selectedId={selectedId13}
 			label="RadioGroup Label"
 			{...args}
@@ -254,7 +238,6 @@ different values as the `name` prop.
 	{#snippet template(args)}
 		<RadioButtonGroupSolid
 			options={optionsForGroup}
-			name="station-type"
 			bind:selectedId={selectedIdForError}
 			label="Preferred mode of transport"
 			hint="Contextual Hint"

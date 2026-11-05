@@ -1,6 +1,6 @@
 {
 	"name": "@ldn-viz/ui",
-	"version": "24.1.0",
+	"version": "25.0.0",
 	"keywords": [
 		"svelte"
 	],
@@ -89,6 +89,7 @@
 		"vitest-browser-svelte": "^2.0.1"
 	},
 	"peerDependencies": {
+		"@ldn-viz/themes": "*",
 		"svelte": "^5.33.0"
 	}
 }

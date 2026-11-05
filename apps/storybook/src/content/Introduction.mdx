@@ -1,0 +1,71 @@
+import { Markdown, Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Welcome to Storybook for `@ldn-viz-tools`
+
+## A collection of components and patterns for rapid, consistent data visualization design for the City Intelligence Unit at the [Greater London Authority](https://www.london.gov.uk).
+
+The components are built on the London City Data Design System (LCD-DS): its design tokens, CSS classes and guidance. The [design system site](https://apps.london.gov.uk/city-data/design-system) explains the system and how to apply it. Each component's props and states are on its page in this Storybook.
+
+This site provides documentation and examples for the `@ldn-viz` packages:
+
+- the [`@ldn-viz/charts`](https://www.npmjs.com/package/@ldn-viz/charts) package contains components for visualizing data
+- the [`@ldn-viz/maps`](https://www.npmjs.com/package/@ldn-viz/maps) package contains components for rendering maps
+- the [`@ldn-viz/tables`](https://www.npmjs.com/package/@ldn-viz/tables) package contains components for rendering tables, with visualizations in cells and column summaries
+- the [`@ldn-viz/ui`](https://www.npmjs.com/package/@ldn-viz/ui) package contains general UI components like modals or sidebars
+- the [`@ldn-viz/themes`](https://www.npmjs.com/package/@ldn-viz/themes) package contains CSS and design tokens that are used by other components
+- the [`@ldn-viz/utils`](https://www.npmjs.com/package/@ldn-viz/utils) package contains utility functions, such as for colour scales
+
+The source code for these packages (and for this Storybook site) are in a [monorepo on GitHub](https://github.com/Greater-London-Authority/ldn-viz-tools).
+
+## Set-up
+
+Install the theme package and the component packages you need:
+
+```sh
+npm i @ldn-viz/themes @ldn-viz/ui
+```
+
+Each component package needs `@ldn-viz/themes` and Svelte 5.33 or later. `@ldn-viz/maps` also needs `@ldn-viz/ui`.
+
+Import the CSS in your app's main stylesheet, before the Tailwind directives, so that a utility class overrides a system class:
+
+```css
+@import '@ldn-viz/themes/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+The components are styled with Tailwind 3 classes. Add the preset to your Tailwind config, and include the component packages in `content` so that Tailwind generates the classes they use:
+
+```js
+module.exports = {
+	presets: [require('@ldn-viz/themes/tailwind')],
+	content: ['./src/**/*.{html,js,svelte,ts}', './node_modules/@ldn-viz/*/dist/**/*.{js,svelte}']
+};
+```
+
+The preset removes Tailwind's font sizes, weights and line heights. Set type with a role class such as `body-md`. See [Typography](./?path=/docs/foundations-typography--docs) and [Flow](./?path=/docs/foundations-flow--docs).
+
+Add the `Theme` component to your app's top-level layout. It applies light or dark mode from the user's preference.
+
+The system uses the Inter font, which the theme package doesn't load. Add it to your app, for example from [Google Fonts](https://fonts.google.com/specimen/Inter).
+
+The [Getting started](https://apps.london.gov.uk/city-data/design-system/getting-started) page covers the other set-ups, for apps that don't use the components. To upgrade from version 3, follow the [migration guide](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/packages/themes/MIGRATION.md).
+
+### Latest package versions
+
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fcharts?label=%40ldn-viz%2Fcharts%20version) ](https://www.npmjs.com/package/@ldn-viz/charts)
+
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fmaps?label=%40ldn-viz%2Fmaps%20version) ](https://www.npmjs.com/package/@ldn-viz/maps)
+
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Ftables?label=%40ldn-viz%2Ftables%20version) ](https://www.npmjs.com/package/@ldn-viz/tables)
+
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fui?label=%40ldn-viz%2Fui%20version) ](https://www.npmjs.com/package/@ldn-viz/ui)
+
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Fthemes?label=%40ldn-viz%2Fthemes%20version) ](https://www.npmjs.com/package/@ldn-viz/themes)
+
+[ ![npm](https://img.shields.io/npm/v/%40ldn-viz%2Futils?label=%40ldn-viz%2Futils%20version) ](https://www.npmjs.com/package/@ldn-viz/utils)

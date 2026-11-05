@@ -1,19 +1,21 @@
-import { withThemeByClassName } from './withThemeByClassName';
 import type { Preview } from '@storybook/sveltekit';
 import '../src/app.postcss';
-import { docs } from './ciuStorybookTheme';
 import ThemeContext from '../src/lib/decorators/ThemeContext.svelte';
+import { docs } from './ciuStorybookTheme';
+import { withThemeByClassName } from './withThemeByClassName';
 
 const preview: Preview = {
 	parameters: {
 		options: {
 			storySort: {
 				order: [
+					'Foundations',
 					'Ui',
 					[
 						'Introduction',
-						'Typography',
-						'Form Element Styling',
+						'Icons',
+						'Theme',
+						'User Preference',
 						'Auth',
 						'Components',
 						[
@@ -28,11 +30,15 @@ const preview: Preview = {
 							'Icons'
 						],
 						'Components - Layout And Themes',
-						'*',
-						'Examples'
+						'*'
 					],
 					'Charts',
-					['Introduction', 'Components', ['ChartContainer']]
+					['Introduction', 'Components', ['ChartContainer']],
+					'Maps',
+					'Tables',
+					['*', 'Example Tables'],
+					'Example Layouts',
+					['Dashboards', 'Reports', 'Documentation', 'Typography']
 				]
 			}
 		},
@@ -56,7 +62,10 @@ const preview: Preview = {
 		}
 	},
 	decorators: [
-		() => ThemeContext as any,
+		// Return `{ Component }`, not the bare component: Storybook treats a
+		// decorator result with no enumerable keys as empty and swaps in the
+		// story's own component without args.
+		() => ({ Component: ThemeContext }),
 		withThemeByClassName({
 			themes: {
 				light: '',

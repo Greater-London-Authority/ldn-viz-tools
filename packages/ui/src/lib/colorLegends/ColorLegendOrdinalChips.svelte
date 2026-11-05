@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<ColorLegendOrdinalHorizontal>` component draws a legend for an ordinal D3 color scale.
+	 * The `<ColorLegendOrdinalChips>` component draws a legend for an ordinal D3 color scale.
 	 *
 	 * **Alternatives**: [ColorLegend](./?path=/docs/ui-components-legends-colorlegend--documentation) can draw a legend for an ordinal scale, but with a different appearance.
 	 * @component
@@ -35,9 +35,9 @@
 	}: Props = $props();
 </script>
 
-<div class="chart flex flex-col">
+<div class="typeset-product chart flex flex-col">
 	{#if title}
-		<span class="axis-title mb-1 text-color-label">{title}</span>
+		<span class="chart-axis-title mb-1 text-color-label">{title}</span>
 	{/if}
 
 	<div class={orientation === 'horizontal' ? 'flex flex-wrap gap-2' : 'flex flex-col'}>
@@ -46,14 +46,14 @@
 				<div
 					class={classNames(
 						'mr-1 h-4 w-4 flex-none',
-						d === highlightedValue ? 'ring-2 ring-color-interactive-focus ring-offset-2' : ''
+						d === highlightedValue ? 'ring-2 ring-color-surface-accent ring-offset-2' : ''
 					)}
 					style:background-color={scale(d) as string}
 				></div>
 				<span
 					class={classNames(
-						'label items-center',
-						d === highlightedValue ? 'font-semibold' : 'font-normal'
+						'chart-label items-center',
+						d === highlightedValue ? 'text-strong' : 'text-soft'
 					)}
 				>
 					{d}

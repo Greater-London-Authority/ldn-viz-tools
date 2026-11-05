@@ -1,317 +1,239 @@
 ---
 title: Design Tokens
 description: A single source of truth
-section: Foundations
 navLabel: Design Tokens
 heroImage: header-foundations-overflow.svg
 thumbnail: cta-foundations-3.svg
+order: 1
 ---
 
 <script>
-	import { Callout, theme } from '@ldn-viz/ui';
-	import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
-	import TokenTable from '$lib/components/tables/colorTokenTables/TokenTable.svelte'
-
-    const getTokenByConcept = (startKey = null, obj= tokens.mode[theme.currentMode ?? 'light']) => {
-        // Determine the starting point
-        let start = obj;
-        if (startKey) {
-            if (!(startKey in obj)) return []; // key not found
-            start = obj[startKey];
-        }
-
-        // Recursive search
-        const results = [];
-
-        function recurse(current) {
-            if (!current || typeof current !== 'object') return;
-
-            if ('value' in current) results.push(current);
-
-            for (const k in current) {
-            if (typeof current[k] === 'object') {
-                recurse(current[k]);
-            }
-            }
-        }
-
-        recurse(start);
-
-        results.sort((a, b) => {
-            const nameA = a.name?.toString().toLowerCase() || '';
-            const nameB = b.name?.toString().toLowerCase() || '';
-            return nameA.localeCompare(nameB);
-        });
-
-        return results;
-    }
-
-    const staticTokens = $derived(getTokenByConcept('static'))
-    const canvasTokens = $derived(getTokenByConcept('canvas'))
-    const containerTokens = $derived(getTokenByConcept('container'))
-    const surfaceTokens = $derived(getTokenByConcept('surface'))
-    const interactiveTokens = $derived(getTokenByConcept('interactive'))
-	const textTokens = $derived(getTokenByConcept('text'))
-    const labelTokens = $derived(getTokenByConcept('label'))
-    // icon??
-    const borderTokens = $derived(getTokenByConcept('border'))
-
-    const geoTokens = $derived(getTokenByConcept('geo'))
-    const chartTokens = $derived(getTokenByConcept('chart'))
-    const dataTokens = $derived(getTokenByConcept('data'))
-
+	import UsageTabs from '$lib/components/usageTabs/UsageTabs.svelte';
+	import TokenReference from '$lib/components/tokenReference/TokenReference.svelte';
+	import TokenDiagram from '$lib/components/tokenReference/TokenDiagram.svelte';
+	import TokenConcept from '$lib/components/tokenReference/TokenConcept.svelte';
 </script>
 
-## Principles
+<p class="lead">Design tokens are named values for the decisions in the system: colours, type, spacing, flow, the layout grid, shadows and elevation.</p>
 
-Design tokens are the single source of truth for naming and storing design decisions such as colors, typography, spacing, and more. They ensure consistency, scalability, and maintainability across all our applications.
+The tokens are defined in Figma and published in the `@ldn-viz/themes` package. Each semantic token is named for its purpose, such as `--color-text-muted` for secondary text. When a token's value changes, everything that uses the token takes the new value.
 
-### Token Tiers
+## Use
 
-Tokens are defined in two tiers with reference to a raw value.
+<UsageTabs>
+{#snippet full()}
 
-![An image illustrating the conceptual hierarchy of deign tokens](/design-tokens/tiers.png)
-
-#### Primitive
-
-Primitive tokens represent all available **options** within the system. These tokens should not be directly referenced in an application. Think of **primitive** tokens as the well from which values are drawn and poured into other tokens.
-
-#### Semantic
-
-Semantic tokens encapsulate **design decisions** giving an understandable intent to the raw value defined in a primitive token.
-
-Semantic color tokens allow for mode switching between light and dark.
-
-### Token names
-
-Tokens are named following a logical structure that flows from left to right to make it simple to understand how they should be used.
-
-`(tier) -> category -> variant -> concept -> role -> emphasis -> state`
-
-Token names don't need to contain each element of this convention.
-
-`category -> concept`
-
-is the minimum required:
-
-```html
-<!-- // category - concept -->
-$color-text
-
-<!-- // category - concept - emphasis -->
-$color-text-muted
-
-<!-- // category - concept - role - emphasis -->
-$color-surface-positive-muted
-```
-
-**Implied defaults**
-We do not enforce a 'default' keyword for default values. For example the correct token to apply the default text color is `$color-text` rather than `$color-text-default`
-
-Following our naming convention ensures that each token is clearly defined and easily understandable.
-
-[Read the Practice section for more on token use](#practice) and a full listing of available tokens.
-
-#### Category
-
-Token categories are **color**, **spacing** and **typography**
-
-| Category     | Detail                                                                                                                                                            |
-| :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `color`      | Semantic color tokens enable mode switching. They encode the fundamental design decisions for color and have been tested to conform with accessibility standards. |
-| `spacing`    | Spacing tokens are used to give a consistent rhythm and flow to our user interfaces.                                                                              |
-| `typography` | Typography tokens define fonts, size, line-height and spacing for text and typographic elements.                                                                  |
-
-The following applies to tokens in the color category. Spacing and Typography are documented subsequently.
-
-#### Variant
-
-Many color tokens are defined with an **inverse** counterpart that is used to invert the current light/ dark mode. This usage is different from mode switching at an application level.
-
-| Variant   | Details                                                         |
-| :-------- | :-------------------------------------------------------------- |
-| `inverse` | Applies a colour that is inverse to the currently selected mode |
-
-![Swatches showing tokens with inverse variant in light and dark mode](/design-tokens/inverse-variant.png)
-
-#### Concept
-
-The token **concept** guides us in how to apply the token. For color tokens, values include **brand**, **text** and **surface**. These are conceptual groupings of elements and **_not_** specific components. For example the **_canvas_** element is an abstract surface, not inherently an HTML `<canvas>` element. Our semantic tokens are designed to emphasise meaning over mechanics.
-
-##### Conceptual model of application ui layering
-
-![An isomorphic illustration showing a user interface structured as conceptual layers raising towards the user](/design-tokens/mental-model.svg)
-
-| Concept       | Detail                                                          |
-| :------------ | :-------------------------------------------------------------- |
-| `static`      | Colors that stay the same regardless of mode                    |
-| `canvas`      | The base layer of an application                                |
-| `container`   | Containers are organisational elements that form page structure |
-| `surface`     | Information layer that sits in front of the canvas layer        |
-| `interactive` | Objects on the information layer that are interactive           |
-| `text`        | Text elements                                                   |
-| `label`       | Specific text used for labelling                                |
-| `icon`        | Icons                                                           |
-| `border`      | Borders around surfaces and containers                          |
-
-##### Component-type exceptions
-
-The system deliberately avoids component tier tokens with the exception of tokens for charts and geographic features. Rather than extending the naming hierarchy these tokens are group-prefixed at the 'concept' level.
-
-| Concept         | Detail                           |
-| :-------------- | :------------------------------- |
-| `chart-surface` | The base layer of a chart        |
-| `chart-axis`    | The color of chart axes          |
-| `chart-grid`    | Grid-line element fo charts      |
-| `chart-label`   | Label elements for use on charts |
-
-| Concept           | Detail                                                         |
-| :---------------- | :------------------------------------------------------------- |
-| `geo-feature`     | A geographic feature                                           |
-| `geo-interactive` | Geographic elements that are interactive                       |
-| `geo-label`       | Label elements for use with maps and geographic visualisations |
-| `geo-annotation`  | Annotations over maps and geographic visualisations            |
-
-#### Role
-
-The **role** signifies _intent_. Roles **primary**, **secondary** define a hierarchical role. **Positive**, **negative**, **caution** define a feedback role.
-
-| Role        | Detail                                                                          |
-| :---------- | :------------------------------------------------------------------------------ |
-| `primary`   | Ranking first in importance or consideration over others                        |
-| `secondary` | Supporting or less critical                                                     |
-| `positive`  | Success and confirmation                                                        |
-| `negative`  | Errors and danger                                                               |
-| `caution`   | Warnings and potential hazards                                                  |
-| `neutral`   | Informational or inactive (this is different from `disabled` which is stateful) |
-
-#### Emphasis
-
-The majority of color tokens are defined with a **muted** counterpart which lets us create further visual hierarchy in our designs.
-
-| Emphasis | Detail                                |
-| :------- | :------------------------------------ |
-| `muted`  | Reduces the emphasis of color         |
-| `wash`   | Reduces the emphasis of color further |
-
-##### Container level exception
-
-| Emphasis  | Detail                                      |
-| :-------- | :------------------------------------------ |
-| `level-1` | One level of elevation above the default    |
-| `level-2` | Two levels of elevation above the default   |
-| `level-3` | Three levels of elevation above the default |
-
-#### State
-
-Interactive elements have states such as **hover**, **active**, **focus**, **disabled**
-
-| State      | Detail                                                                                                                  |
-| :--------- | :---------------------------------------------------------------------------------------------------------------------- |
-| `hover`    | Triggered when a user places a cursor over an element without clicking it.                                              |
-| `active`   | Occurs at the exact moment an element is being pressed or clicked.                                                      |
-| `focus`    | Indicates an element is currently highlighted to receive input, typically via keyboard navigation (Tab key) or a click. |
-| `selected` | Represents a persistent choice made by the user among several options                                                   |
-| `disabled` | Indicates an element exists but is currently non-interactive and cannot be used.                                        |
-| `error`    | Signals that a user's input is invalid or that a system failure has occurred.                                           |
-| `on`       | Represents the "active" or "enabled" state of a binary toggle or switch.                                                |
-| `off`      | Represents the "inactive" or "disabled" state of a binary toggle or switch.                                             |
-| `dragged`  | Occurs when a user clicks and moves an element from its original position to another.                                   |
-
----
-
-### Spacing Tokens
-
-The structure of our spacing tokens is a numbered scale, where the index is the multiplier of the 4px base unit (`--spacing-4` = 4 × 4px = 16px). It runs **1, 2, 3, 4, 5, ..., 24**, plus sub-steps (`px`, `0-5`, `1-5`, `2-5`, `3-5`) for finer gaps.
-
-Spacing tokens define the spacing between and around elements of the application interface. Spacing tokens are available in `rem` units, based on the root `<html>` font size.
+The components use the tokens already. In your own markup, each token is a CSS custom property:
 
 ```css
---spacing-4: 1rem;
+.summary {
+	color: var(--color-text-muted);
+	padding: var(--spacing-4);
+}
 ```
 
-Vertical rhythm between stacked blocks (paragraph-to-paragraph, section breaks) is handled separately by the content flow `--flow-*` tokens rather than by binding spacing tokens directly to text.
+If your app uses Tailwind, as the component library does, the theme package's preset makes each token a utility. The utility's prefix comes first, then the token name without the `--`, so `bg-color-surface` sets the background to `--color-surface`. Spacing utilities use the numbered scale, so `p-4` is 16px of padding.
 
-[Read more about relative units](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units#lengths)
-
-[Read the documentation on application layout](/design-system/application-design/layout)
-
----
-
-### Typography tokens
-
-#### Role
-
-Typographic roles are responsive to screen size allowing use of semantic, descriptive names. The definitions encompass font-family, font-size, font-weight, line-height and letter-spacing.
-
-The different role groupings are:
-
-| Role       | Use Case                                                                                 |
-| :--------- | :--------------------------------------------------------------------------------------- |
-| `Display`  | Large, impactful text for grabbing attention                                             |
-| `Headline` | To create immediate impact and guide the reader's eye                                    |
-| `Subhead`  | To immediately follow a headline and provide further clarification                       |
-| `Title`    | To provide waymarkers, define hierarchy and impart information throughout an application |
-| `Subtitle` | To immediately follow a title element and provide further clarification                  |
-| `Body`     | Passages of copy and bodies of text                                                      |
-| `Label`    | Used for single-line scenarios, and labelling discrete elements of the ui                |
-
-#### Emphasis
-
-Certain roles have an emphasis scale that can be applied.
-
-| Emphasis | Detail      |
-| :------- | :---------- |
-| `lg`     | Large       |
-| `md`     | Medium      |
-| `sm`     | Small       |
-| `xs`     | Extra small |
-
-[Read the chapter dedicated to typography for more details](/design-system/foundations/typography).
-
----
-
-## Practice
-
-### Semantic token reference tables
-
-<TokenTable title="Static" tokenData={staticTokens} />
-<TokenTable title="Canvas" tokenData={canvasTokens} />
-<TokenTable title="Container" tokenData={containerTokens} />
-<TokenTable title="Surface" tokenData={surfaceTokens} />
-<TokenTable title="Interactive" tokenData={interactiveTokens} />
-<TokenTable title="Text" tokenData={textTokens} />
-<TokenTable title="Label" tokenData={labelTokens} />
-<TokenTable title="Border" tokenData={borderTokens} />
-<!-- ?? -->
-<TokenTable title="Geo" tokenData={geoTokens} />
-<TokenTable title="Chart" tokenData={chartTokens} />
-<TokenTable title="Data" tokenData={dataTokens} />
-
-####
-
-<!-- ### Via npm using tailwind
-
-If using the `@ldn-viz` package via npm in a project using tailwind css our tokens are accessible as part of tailwind's utility class pattern.
-
-`text-($token-name)` will apply the token to text elements. `bg-($token-name)` will apply the token to the background element etc.
-
-In the two examples above `text-color-text` and `bg-color-container` show tokens applied via tailwind classes.
-
-Spacing tokens are available in the same pattern: `mb-spacing-lg` will apply the `$spacing-large` token to the bottom margin of the targeted html element.
-
-### CSS variables
-
-If using as css variables the color tokens can be used by replacing the color type with `theme`
-
-```css
-color: var(--theme-text-primary);
-```
-
-### As Javascript variables
-
-Color Tokens are available from `@ldn-viz/themes` package and can be accessed under both light and dark themes. You need to step into the relevant theme object `[theme][mode]` (this should be handled programmatically by your app) then you can access the token variable under the regular naming convention:
+To use a colour in JavaScript, for example to pass it to a chart library, use `theme` from `@ldn-viz/ui`. It returns the value for the current mode:
 
 ```js
-let color = color.data.categorical.blue;
-``` -->
+import { theme } from '@ldn-viz/ui';
+
+const seriesColour = theme.tokenNameToValue('data.primary');
+```
+
+Use a class for typography and flow tokens. A type role, such as `title-md`, is set by five tokens: font family, size, weight, line height and letter spacing. Each of those tokens has a value for each typeset and breakpoint. The class sets the text to the values for the typeset and breakpoint it's in, so use the class rather than the tokens. A flow token, such as `--flow-section`, takes its value from the nearest flow context class, such as `flow-standard`. See [Typography](/design-system/foundations/typography) and [Flow](/design-system/foundations/flow) for more detail.
+
+```html
+<section class="flow-standard">
+	<h2 class="title-md">Housing completions</h2>
+	<p class="body-md">…</p>
+</section>
+```
+
+{/snippet}
+{#snippet adapting()}
+
+Each token is a CSS custom property:
+
+```css
+.panel {
+	color: var(--color-text-muted);
+	padding: var(--spacing-4);
+	box-shadow: var(--elevation-2);
+}
+```
+
+Colour tokens have a value for each mode. The light values are set on `:root`, and the dark values on `.dark`, so an element inside `.dark` takes the dark value of the same token.
+
+`var(--flow-section)` and the other flow steps take their value from the nearest flow context, set with a class such as `.flow-standard`.
+
+{/snippet}
+{#snippet anywhere()}
+
+The [reference](#reference) lists every token with its value. Colour tokens have a value for light mode and a value for dark mode.
+
+To use the values in code, take them from the theme package:
+
+- `@ldn-viz/themes/colors.js` has every colour for each mode, such as `mode.light.text.default`.
+- `@ldn-viz/themes/tokens.scss` has every token as a Sass variable, such as `$color-text`.
+
+{/snippet}
+</UsageTabs>
+
+## How it works
+
+### Primitive and semantic tokens
+
+Tokens are in two tiers. A primitive token is named by its value or its step on a scale, such as a light mode or dark mode blue at step 700.
+A semantic is an alias to a primitive token and says what a value is for, such as `--color-surface-accent`.
+
+<TokenDiagram diagram="tiers" />
+
+Use semantic tokens only. In the example above the semantic token `--color-palette-blue-700` aliases a different primitive depending on the user preference for light or dark mode. This lets us adjust colours to be accessible in different [modes](/design-system/application-design/modes). Primitive custom properties start with `--primitive-`, so a use of one is easy to spot.
+
+### Reading a token name
+
+A token name is built from segments, from general to specific:
+
+`category → variant → concept → role → emphasis → state → value`
+
+A segment that doesn't apply is left out, and the rest keep their order. `--color-interactive-primary-hover` is the category `color`, the concept `interactive`, the role `primary` and the state `hover`.
+
+| Segment  | What it says                                    | Examples                                                          |
+| -------- | ----------------------------------------------- | ----------------------------------------------------------------- |
+| Category | The kind of value                               | `color` `spacing` `typography` `flow` `grid` `shadow` `elevation` |
+| Variant  | A mode, scope, breakpoint, typeset or context   | `inverse` `static` `chart` `geo` `md` `product` `standard`        |
+| Concept  | The thing the value is for                      | `canvas` `surface` `interactive` `text` `border` `data`           |
+| Role     | Its place in a hierarchy, or what it signals    | `primary` `secondary` `positive` `negative` `caution` `title`     |
+| Emphasis | Less contrast than the default                  | `muted` `wash`                                                    |
+| State    | An interaction, selection or availability state | `hover` `active` `selected` `disabled`                            |
+| Value    | A size, step or property                        | `sm` `md` `lg` `4` `font-size`                                    |
+
+Names are lowercase, with hyphens between words. A fractional step uses a hyphen, so `--spacing-0-5` is 2px.
+
+A default token has no `-default` suffix. `--color-border` is the default border colour, and there's no `--color-border-default`. A flow context and a size are always named, as in `--flow-standard-loose` and `--shadow-md`.
+
+Typography tokens have a breakpoint and a size in the same name. In `--typography-md-product-title-md-font-size`, the first `md` is the breakpoint and the second is the size of the title. The smallest breakpoint is `base`, which covers widths below `sm`.
+
+### Concepts
+
+An interface is a stack. The canvas is at the base, and surfaces sit above it at elevation steps 1 to 6. A surface is coloured `surface`, or `surface-muted` to set it apart from what is around it. Text, labels, borders and interactive elements sit on a surface.
+
+<figure class="width-content-wide">
+	<TokenConcept />
+</figure>
+
+### Inverse
+
+The inverse variant is for content on an inverse background. The inverse surface is dark in light mode and light in dark mode. Use inverse tokens together, such as `--color-inverse-text` on `--color-inverse-surface`.
+
+<TokenDiagram diagram="inverse" />
+
+### Usage aliases
+
+We provide a set of usage aliases for users who aren't fully engaged with the system and just want to know "what's the right class for a card title". A usage alias is a class named for the place it's used, such as `card-title` or `chart-tick`. These classes are an extra layer of semantic sugar. Each one applies a type role for a specific component, as in `card-title`. [Typography](/design-system/foundations/typography) lists them.
+
+## Reference
+
+These tables list every published semantic token, with its value.
+
+### Colour
+
+The colour tokens are grouped by concept. Each has a value for light mode and dark mode. [Colour](/design-system/foundations/colour) explains how to choose one.
+
+#### Palette
+
+The palette provides the lowest level semantic tokens. Many of the other semantic tokens are aliases of values within the palette. Each color has values at `100` - `1100`
+
+Quantitative colour scales can be based on the palette colors. See [Quantitative colour](/design-system/data-visualisation/quantitative-colour).
+
+<TokenReference group="color-palette" />
+
+#### Canvas
+
+<TokenReference group="color-canvas" />
+
+#### Surface
+
+<TokenReference group="color-surface" />
+
+#### Text
+
+<TokenReference group="color-text" />
+
+#### Label
+
+<TokenReference group="color-label" />
+
+#### Border
+
+<TokenReference group="color-border" />
+
+#### Interactive
+
+<TokenReference group="color-interactive" />
+
+#### Inverse
+
+<TokenReference group="color-inverse" />
+
+#### Static
+
+<TokenReference group="color-static" />
+
+#### Data
+
+<TokenReference group="color-data" />
+
+#### Chart
+
+<TokenReference group="color-chart" />
+
+#### Geo
+
+<TokenReference group="color-geo" />
+
+### Typography
+
+Choose a typeset and a breakpoint to see the values for each role. [Typography](/design-system/foundations/typography) explains the roles and typesets.
+
+<TokenReference group="typography" />
+
+### Spacing
+
+[Spacing](/design-system/foundations/spacing) explains the scale.
+
+<TokenReference group="spacing" />
+
+### Flow
+
+[Flow](/design-system/foundations/flow) explains the contexts and steps.
+
+<TokenReference group="flow" />
+
+### Layout grid
+
+These tokens set the padding at the edge of a container, for each breakpoint and layout. [Layout grid](/design-system/foundations/layout-grid) explains the layouts.
+
+<TokenReference group="grid" />
+
+### Elevation
+
+[Elevation](/design-system/foundations/elevation) explains the levels.
+
+<TokenReference group="elevation" />
+
+### Shadow
+
+To set a level of elevation, use an elevation token. `--shadow-inner` has no elevation step.
+
+<TokenReference group="shadow" />
+
+### Breakpoints
+
+Breakpoints are used in media queries and as Tailwind prefixes, such as `md:`. A custom property can't be used in a media query, so breakpoints have no semantic tokens. Write the width in the media query.
+
+<TokenReference group="breakpoint" />
+
+The full rules for tokens are in the [specification](https://github.com/Greater-London-Authority/ldn-viz-tools/blob/main/design-system-specification/design-system-specification.md#design-tokens).

@@ -66,9 +66,9 @@
 		<div class="w-96">
 			<LayerControl {...args} bind:layerState name="default" />
 		</div>
-		<pre class="mt-4 text-xs">{JSON.stringify(layerState, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(layerState, null, 2)}</pre>
 
-		<p class="mt-4 text-sm">
+		<p class="body-sm mt-4">
 			Active Color is: <span
 				style={`color: ${theme.tokenNameToValue(layerState.colorName, theme.currentTheme)}`}
 			>
@@ -137,7 +137,7 @@
 			<LayerControl bind:layerState={layerStates.fuel_poverty} label="Fuel Poverty" />
 		</div>
 
-		<div class="mt-4 text-xs">
+		<div class="caption-sm mt-4">
 			Layer states are:
 
 			<pre>{JSON.stringify(layerState, null, 2)}</pre>
@@ -190,7 +190,7 @@
 			label="Borough"
 			controlsInUse={['color', 'opacity', 'size', 'fill']}
 		/>
-		<pre class="mt-4 text-xs">{JSON.stringify(fillLayerState, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(fillLayerState, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -205,7 +205,7 @@
 			name="mutually-exclusive-layer"
 			bind:selectedOptionId={radioSelectedId}
 		/>
-		<pre class="mt-4 text-xs">Selected: {radioSelectedId}</pre>
+		<pre class="caption-sm mt-4">Selected: {radioSelectedId}</pre>
 	{/snippet}
 </Story>
 
@@ -222,7 +222,7 @@ Here the min/max marker sizes are set to 10/50 (overriding the default 1/100)
 <Story name="Custom min/max marker size">
 	{#snippet template()}
 		<LayerControl bind:layerState={sizeLayerState} label="Borough" minSize={10} maxSize={50} />
-		<pre class="mt-4 text-xs">{JSON.stringify(sizeLayerState, null, 2)}</pre>
+		<pre class="caption-sm mt-4">{JSON.stringify(sizeLayerState, null, 2)}</pre>
 	{/snippet}
 </Story>
 
@@ -235,7 +235,7 @@ Here the min/max marker sizes are set to 10/50 (overriding the default 1/100)
 					<Trigger {...props} size="xs" hintLabel="More information" />
 				{/snippet}
 				This is a custom overlay: it supersedes the hint prop and can contain
-				<span class="text-lg font-bold italic">richer</span> content.
+				<span class="body-lg text-strong italic">richer</span> content.
 			</Overlay>
 		{/snippet}
 		<LayerControl

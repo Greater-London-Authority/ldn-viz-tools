@@ -14,7 +14,7 @@
 	 *
 	 */
 	const { Story } = defineMeta({
-		title: 'Ui/ExportButtons',
+		title: 'Ui/Components/ExportButtons',
 		component: ExportButtons,
 		tags: ['autodocs']
 	});

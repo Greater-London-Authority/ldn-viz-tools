@@ -1,5 +1,65 @@
 # ldn-viz-tools-maps
 
+## 20.0.0
+
+### Major Changes
+
+- f0d016a: - CHANGED: requires `@ldn-viz/themes` 10, now a peer dependency, and its `index.css` (or `system.css`) loaded by the app. Map controls, legends and markers use the v4 role classes and typesets, and the `surface` colours in place of `container`.
+  - FIXED: the cluster layers' outline and hole colours use `inverse.geo.feature`, the v4 name for `geo.inverse.feature`, which no longer resolved and logged a warning.
+
+### Patch Changes
+
+- Updated dependencies [257b51d]
+- Updated dependencies [eaca94a]
+- Updated dependencies [f0d016a]
+  - @ldn-viz/themes@10.0.0
+  - @ldn-viz/ui@25.0.0
+
+## 19.0.0
+
+### Patch Changes
+
+- Updated dependencies [5117a14]
+  - @ldn-viz/ui@24.4.0
+
+## 18.1.0
+
+### Minor Changes
+
+- a30bd58: ADDED: `closeTooltipOnLeave` action
+- 9d1ac28: ADDED: `CanvasIconLayer`
+  ADDED: `ClusterLayer`
+  ADDED: `MultiClusterLayer`
+
+### Patch Changes
+
+- Updated dependencies [d39b003]
+  - @ldn-viz/ui@24.3.1
+
+## 18.0.0
+
+### Minor Changes
+
+- 706f891: ADDED: `MapPointSearch` component
+
+### Patch Changes
+
+- Updated dependencies [861cf62]
+- Updated dependencies [ff50fb5]
+- Updated dependencies [0e464ed]
+  - @ldn-viz/ui@24.3.0
+
+## 17.0.0
+
+### Patch Changes
+
+- Updated dependencies [df7cd85]
+- Updated dependencies [7a8499d]
+- Updated dependencies [af4d3bd]
+- Updated dependencies [47c3895]
+- Updated dependencies [50f265c]
+  - @ldn-viz/ui@24.2.0
+
 ## 16.0.0
 
 ### Minor Changes

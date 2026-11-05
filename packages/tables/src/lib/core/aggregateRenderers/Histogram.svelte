@@ -63,11 +63,16 @@
 			{/each}
 		</g>
 
-		<text x={x(hints[0]) + 4} y={height - marginBottom + 10} font-size="12px" text-anchor="middle">
+		<text
+			x={x(hints[0]) + 4}
+			y={height - marginBottom + 10}
+			class="chart-tick-sm"
+			text-anchor="middle"
+		>
 			{hints[0]}
 		</text>
 
-		<text x={x(hints[1])} y={height - marginBottom + 10} font-size="12px" text-anchor="middle">
+		<text x={x(hints[1])} y={height - marginBottom + 10} class="chart-tick-sm" text-anchor="middle">
 			{hints[1]}
 		</text>
 	</svg>

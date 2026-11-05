@@ -1,8 +1,8 @@
 ---
 title: Quick colour guide
 description: Simple guide to using colour in data visualisation
-section: Data visualisation
 navLabel: Quick colour guide
+order: 2
 heroImage: header-dataviz-overflow.svg
 thumbnail: cta-dataviz-4.svg
 ---
@@ -12,13 +12,13 @@ thumbnail: cta-dataviz-4.svg
 	import { Callout, theme, ColorLegend, Select, Checkbox } from '@ldn-viz/ui'
     import tokens from '@ldn-viz/themes/docs/tokens/tokens.js';
     import SwatchGrid from '$lib/components/swatch/SwatchGrid.svelte'
-    import ColorStackedBar from '$lib/components/charts/exampleCharts/bars/ColorStackedBar.svelte'
-    import ColorMultipleLine from '$lib/components/charts/exampleCharts/lines/ColorMultipleLine.svelte'
-    import ColorDualLine from '$lib/components/charts/exampleCharts/lines/ColorDualLine.svelte'
-    import ColorBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorBoroughMap.svelte'
-    import ColorDivergingBoroughMap from '$lib/components/charts/exampleCharts/maps/ColorDivergingBoroughMap.svelte'
+    import ColorStackedBar from '$lib/components/charts/illustrativeCharts/ColorStackedBar.svelte'
+    import ColorMultipleLine from '$lib/components/charts/illustrativeCharts/ColorMultipleLine.svelte'
+    import ColorDualLine from '$lib/components/charts/illustrativeCharts/ColorDualLine.svelte'
+    import ColorBoroughMap from '$lib/components/charts/illustrativeCharts/ColorBoroughMap.svelte'
+    import ColorDivergingBoroughMap from '$lib/components/charts/illustrativeCharts/ColorDivergingBoroughMap.svelte'
     import ColorRampGenerator from '$lib/components/ramp/ColorRampGenerator.svelte'
-    import ColorStackedBarLikert from '$lib/components/charts/exampleCharts/bars/ColorStackedBarLikert.svelte'
+    import ColorStackedBarLikert from '$lib/components/charts/illustrativeCharts/ColorStackedBarLikert.svelte'
     import {getColorRamp, tokenNameToValue} from '@ldn-viz/utils'
     import { hsl } from 'd3';
     import { scaleSequential } from 'd3-scale';
@@ -34,6 +34,7 @@ thumbnail: cta-dataviz-4.svg
     // get width & height of wrappers around content components
     // TODO: Code review.. is this ok to share between bindings on component wrappers
     let contentWidth = $state();
+    let contentWidthWide = $state();
 	let contentHeight = $state();
     
 
@@ -116,7 +117,7 @@ thumbnail: cta-dataviz-4.svg
     
 
     let chartColorsOrdered = [
-            'color-chart-background', 
+            'color-chart-surface', 
             'color-chart-axis', 
             'color-chart-grid', 
             'color-chart-label', 
@@ -219,7 +220,7 @@ We developed our categorical colour palettes by carefully balancing the requirem
 
 These categorical colours pass differentiation tests for all but small lines, but don't use them all in a single chart.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={dataTokens.categorical} title="Categorical palette"/>
 </div>
 
@@ -227,7 +228,7 @@ These categorical colours pass differentiation tests for all but small lines, bu
 
 We've created semantic tokens to simplify and standardise the use of our colours.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={themeColors} title="Semantic Colour tokens"/>
 </div>
 
@@ -245,8 +246,8 @@ For charts where you want to show "other" or "context" data, use `color-data-pri
 
 Quantitative colour scales are used to encode value using gradients of colour. For example, on a choropleth map (below).
 
-<div bind:clientWidth={contentWidth} bind:clientHeight={contentHeight}>
-    <ColorBoroughMap containerWidth={contentWidth} containerHeight={contentHeight} />
+<div bind:clientWidth={contentWidthWide} bind:clientHeight={contentHeight} class="width-content-wide">
+    <ColorBoroughMap containerWidth={contentWidthWide} containerHeight={contentHeight} />
 </div>
 
 #### Sequential
@@ -261,7 +262,7 @@ A sequential colour scale is a continuous or stepped gradient of colour running 
 
 We typically use up to 5 steps of blue, from light to dark (or the reverse in dark mode).
 
-<div bind:clientWidth={contentWidth} >
+<div>
 {#if mounted}
     <ColorLegend color={ldnBlue5Scale} ticks=0 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
 {/if}
@@ -273,7 +274,7 @@ We typically use up to 5 steps of blue, from light to dark (or the reverse in da
 
 A diverging colour scale is a sequential scale that "diverges" in two directions, typically negative and positive.
 
-<div bind:clientWidth={contentWidth} >
+<div>
 {#if mounted}
     <ColorLegend color={ldnDiverging5Scale} ticks=0 marginTop=0 marginBottom=24 height=56 width={contentWidth}/>
 {/if}
@@ -281,15 +282,17 @@ A diverging colour scale is a sequential scale that "diverges" in two directions
 
 Our default diverging scale, is red (negative) to blue (positive). This is to avoid any red/green perception issues, and is a simple augmentation of our default (positive) blue ramp.
 
+<div class="width-content-wide">
 <ColorRampGenerator title='Generate a colour ramp' colorRight='blue' type='Sequential' breaks={5} />
+</div>
 
 **Note:** With diverging scales, you may want to add a central neutral grey step between the positive/negative steps to indicate values that are truly zero.
 
 ### Chart styling
 
-To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's `background, axis, grids and labels`.
+To ensure consistency and correct contrast across all charts, use the following tokens to define your chart's surface, axis, grid and labels.
 
-<div class="not-prose">
+<div class="not-typeset">
 <SwatchGrid tokenData={chartColors} title="Chart colour tokens"/>
 </div>
 
@@ -297,5 +300,5 @@ To ensure consistency and correct contrast across all charts, use the following 
 
 ## Further reading
 
-- [A deeper dive into data visualisation color theory](/design-system/data-visualisation/colour-foundations)
-- [More on color use within our wider design system](/design-system/foundations/colour)
+- [A deeper dive into data visualisation colour theory](/design-system/data-visualisation/colour-foundations)
+- [More on colour use within our wider design system](/design-system/foundations/colour)

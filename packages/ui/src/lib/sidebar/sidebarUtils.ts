@@ -21,11 +21,20 @@ export const tabPlacementLookup: PlacementLookup = {
 	bottom: '-top-[81px] inset-x-0'
 };
 
+// The tab bar stays on screen when the sidebar is closed. It is 80px across,
+// plus a 1px keyline, so AppShell pads its content by 81px on that side.
+export const tabOffsetLookup: PlacementLookup = {
+	left: 'pl-[81px]',
+	right: 'pr-[81px]',
+	top: 'pt-[81px]',
+	bottom: 'pb-[81px]'
+};
+
 export const keylineLookup: PlacementLookup = {
-	left: 'border-r border-color-border-muted',
-	right: 'border-l border-color-border-muted',
-	top: 'border-b border-color-border-muted',
-	bottom: 'border-t border-color-border-muted'
+	left: 'border-r border-color-border-wash',
+	right: 'border-l border-color-border-wash',
+	top: 'border-b border-color-border-wash',
+	bottom: 'border-t border-color-border-wash'
 };
 
 export const tabLayoutOverride: PlacementLookup = {
@@ -34,7 +43,7 @@ export const tabLayoutOverride: PlacementLookup = {
 };
 
 // These classes overide the theme of default tabs in a sidebar context
-export const tabThemeOverride = '[&>button]:bg-color-container [&>button]:no-underline';
+export const tabThemeOverride = '[&>button]:bg-color-surface [&>button]:no-underline';
 
 // These classes overide the 'horizontal' style of tablabels in a sidebar context
 export const tabLabelOverride =
@@ -45,6 +54,12 @@ export const tabIconOverride = '[&>button>svg]:mr-0 [&>button>svg]:mb-1';
 
 // The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
 export const widthLookup: WidthLookup = {
+	slim: {
+		left: 'max-w-[308px] min-[488px]:min-w-[308px] w-[calc(100vw-80px)]',
+		right: 'max-w-[308px] min-[488px]:min-w-[308px] w-[calc(100vw-80px)]',
+		top: 'w-full',
+		bottom: 'w-full'
+	},
 	standard: {
 		left: 'max-w-[408px] min-[488px]:min-w-[408px] w-[calc(100vw-80px)]',
 		right: 'max-w-[408px] min-[488px]:min-w-[408px] w-[calc(100vw-80px)]',
@@ -60,6 +75,12 @@ export const widthLookup: WidthLookup = {
 };
 
 export const heightLookup: WidthLookup = {
+	slim: {
+		left: 'h-full',
+		right: 'h-full',
+		top: 'h-[60dvh] max-h-[800px]', //TODO breakpoints?
+		bottom: 'h-[60dvh] max-h-[800px]'
+	},
 	standard: {
 		left: 'h-full',
 		right: 'h-full',
@@ -72,13 +93,6 @@ export const heightLookup: WidthLookup = {
 		top: 'h-[60dvh] max-h-[800px]', //TODO breakpoints?
 		bottom: 'h-[60dvh] max-h-[800px]'
 	}
-};
-
-export const wrapperFlowLookup: PlacementLookup = {
-	left: 'flex-row-reverse',
-	right: 'flex-row',
-	top: 'flex-col-reverse',
-	bottom: 'flex-col'
 };
 
 export const transitionAxis: { [key: string]: 'x' | 'y' } = {

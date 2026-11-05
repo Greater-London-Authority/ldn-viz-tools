@@ -1,5 +1,70 @@
 # ldn-viz-tools-charts
 
+## 10.0.0
+
+### Major Changes
+
+- f0d016a: - CHANGED: requires `@ldn-viz/themes` 10, now a peer dependency, and its `index.css` (or `system.css`) loaded by the app. Chart text uses the product typeset with the `chart-*` usage aliases, and Observable Plot text reads the role custom properties.
+
+### Patch Changes
+
+- Updated dependencies [257b51d]
+- Updated dependencies [eaca94a]
+- Updated dependencies [f0d016a]
+  - @ldn-viz/themes@10.0.0
+  - @ldn-viz/ui@25.0.0
+
+## 9.5.0
+
+### Minor Changes
+
+- f07079f: CHANGED: enabe `autoDodgeLabels` for `lineChartWithForecasts`
+
+## 9.4.1
+
+### Patch Changes
+
+- 3c77293: FIXED: choropleth tooltips now open when they should
+
+## 9.4.0
+
+### Minor Changes
+
+- 362fc2c: CHANGED: use our own ColorLegend component in choropleths, rather than ObservablePlot default
+- e846d93: CHANGED: allow user to specify the color of areas with no associated data in choropleths rendered by `Chart`.
+
+## 9.3.0
+
+### Minor Changes
+
+- e9e2397: FIXED: The `ObservablePlot` component no longer re-renders the `controls` snippet when the `spec` is updated. Previously a slider control that updated the chart would be re-created when its value channged, preventing it from being smoothly adjusted.
+- d583a6c: ADDED: export `Chart` chart factory component.
+
+## 9.2.1
+
+### Patch Changes
+
+- 9e952e2: FIXED: correct swapped types for `ruleX`/`ruleY`
+- Updated dependencies [861cf62]
+- Updated dependencies [ff50fb5]
+- Updated dependencies [0e464ed]
+  - @ldn-viz/ui@24.3.0
+
+## 9.2.0
+
+### Minor Changes
+
+- 589906c: FIXED: correctly add dashed line style
+
+### Patch Changes
+
+- Updated dependencies [df7cd85]
+- Updated dependencies [7a8499d]
+- Updated dependencies [af4d3bd]
+- Updated dependencies [47c3895]
+- Updated dependencies [50f265c]
+  - @ldn-viz/ui@24.2.0
+
 ## 9.1.0
 
 ### Minor Changes

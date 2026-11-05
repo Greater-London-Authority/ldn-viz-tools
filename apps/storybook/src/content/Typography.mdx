@@ -1,0 +1,208 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+Text is styled with a role class, such as `title-md` or `body-sm`. A role names what the text does, and sets its font, size, weight, line height and letter spacing at every breakpoint.
+
+```html
+<h2 class="title-lg">Air quality</h2>
+<p class="body-sm">Rolling 24-hour mean.</p>
+```
+
+Tailwind's font size, weight and line-height utilities produce nothing in this system. The preset in `@ldn-viz/themes` empties those scales, so `text-3xl`, `font-semibold` and `leading-none` have no effect.
+
+The reasoning and the per-breakpoint values are on the [Typography foundation page](https://apps.london.gov.uk/city-data/design-system/foundations/typography).
+
+## Typesets
+
+A typeset gives every role its values. Set it once, on a container.
+
+| Class                        | For                                             | Flow context    |
+| ---------------------------- | ----------------------------------------------- | --------------- |
+| `typeset-longform`           | Reading: articles, documentation, reports       | `flow-spacious` |
+| `typeset-product`            | Interfaces, dashboards, tables, charts and maps | None            |
+| `typeset-product--formatted` | Markdown or CMS output inside an interface      | `flow-standard` |
+
+```html
+<article class="typeset-longform">…</article>
+<section class="typeset-product">…</section>
+<div class="typeset-product--formatted">{@html markdown}</div>
+```
+
+Product is the default. Its role values are also set on `:root`, so a role class outside any typeset uses the product values.
+
+A nested typeset wins over the one around it.
+
+Each typeset sets unclassed text inside it to `body-md`. `body` is set to `body-md` too.
+
+The two typesets give every role the same weight. They differ in the body line heights: `body-sm`, `body-md` and `body-lg` are 14/26, 16/28 and 18/30 in longform, and 14/22, 16/24 and 18/26 in product. At wider breakpoints, longform `headline-*`, `subhead-md`, `subhead-lg`, `title-lg` and `body-lg` are larger than in product.
+
+## Roles
+
+A role class is `{role}-{size}`, with sizes `sm`, `md` and `lg`. `eyebrow` has one size and no suffix.
+
+| Role       | Classes                                     | Weight | Use for                                                   |
+| ---------- | ------------------------------------------- | ------ | --------------------------------------------------------- |
+| `display`  | `display-sm`, `display-md`, `display-lg`    | 700    | High-impact text. Use sparingly                           |
+| `headline` | `headline-sm`, `headline-md`, `headline-lg` | 700    | The main statement of a page or major section             |
+| `subhead`  | `subhead-sm`, `subhead-md`, `subhead-lg`    | 400    | A supporting line under a headline or display             |
+| `title`    | `title-sm`, `title-md`, `title-lg`          | 600    | The name of a card, panel, chart, table or block of prose |
+| `subtitle` | `subtitle-sm`, `subtitle-md`, `subtitle-lg` | 400    | A supporting line under a title                           |
+| `body`     | `body-sm`, `body-md`, `body-lg`             | 400    | Running text                                              |
+| `label`    | `label-sm`, `label-md`, `label-lg`          | 500    | Text needed to use the interface: buttons, inputs, tabs   |
+| `metric`   | `metric-sm`, `metric-md`, `metric-lg`       | 700    | A figure shown as the content itself                      |
+| `caption`  | `caption-sm`, `caption-md`, `caption-lg`    | 400    | Optional notes: captions, sources, helper text            |
+| `eyebrow`  | `eyebrow`                                   | 500    | A short signpost above a headline or title                |
+
+Headlines open a page or section, and titles name the units inside it. Labels are needed to use the interface, and captions are not.
+
+`subhead-*`, `subtitle-*` and `eyebrow` are set in `--color-text-muted`. `metric-*` uses tabular numerals.
+
+Most roles are the same size at every breakpoint. `display-*`, `headline-md`, `headline-lg` and `metric-lg` get larger at wider breakpoints, and in longform so do `headline-sm`, `subhead-md`, `subhead-lg`, `title-lg` and `body-lg`. For example, `headline-lg` is 30px below 640px and 40px from 1280px.
+
+Line heights are the font size plus 4px, 8px or 12px. A control such as a button uses its role's line height, and its padding sets its height.
+
+## Choosing a role in an interface
+
+These choices come from the usage aliases in the next section.
+
+| Text                          | Class         |
+| ----------------------------- | ------------- |
+| Button                        | `label-md`    |
+| Small button                  | `label-sm`    |
+| Input label                   | `label-md`    |
+| Field value, placeholder      | `body-md`     |
+| Helper text, hint             | `caption-sm`  |
+| Card, header or sidebar title | `title-md`    |
+| Card subtitle                 | `subtitle-sm` |
+| Dialog title                  | `label-lg`    |
+| Dashboard title               | `headline-md` |
+| Dashboard section title       | `headline-sm` |
+| Table column header           | `label-md`    |
+| Dense table column header     | `label-sm`    |
+| Table cell                    | `body-sm`     |
+
+A small heading inside an interface, such as a group heading in a menu or footer, uses a label role. `dialog-title` is `label-lg` for the same reason.
+
+## Usage aliases
+
+A usage alias applies a role under a name for where it is used. Some aliases also add the muted colour or tabular numerals. Use the role class where you can, because the roles are the stable names.
+
+| Alias                         | Role          | Adds                           |
+| ----------------------------- | ------------- | ------------------------------ |
+| `.chart-title`                | `title-md`    |                                |
+| `.chart-subtitle`             | `subtitle-sm` | muted colour                   |
+| `.chart-axis-title`           | `label-md`    | muted colour                   |
+| `.chart-label`                | `label-md`    |                                |
+| `.chart-tick`                 | `caption-md`  | tabular numerals, muted colour |
+| `.chart-tick-sm`              | `caption-sm`  | tabular numerals, muted colour |
+| `.chart-note`                 | `caption-sm`  |                                |
+| `.table-title`                | `title-md`    |                                |
+| `.table-subtitle`             | `subtitle-sm` | muted colour                   |
+| `.table-col-head`             | `label-md`    | tabular numerals               |
+| `.table-col-head-sm`          | `label-sm`    | tabular numerals               |
+| `.table-body`                 | `body-sm`     | tabular numerals               |
+| `.dashboard-main-title`       | `headline-md` |                                |
+| `.dashboard-main-subtitle`    | `subhead-md`  | muted colour                   |
+| `.dashboard-section-title`    | `headline-sm` |                                |
+| `.dashboard-section-subtitle` | `subhead-sm`  | muted colour                   |
+| `.header-title`               | `title-md`    |                                |
+| `.sidebar-title`              | `title-md`    |                                |
+| `.dialog-title`               | `label-lg`    |                                |
+| `.card-title`                 | `title-md`    |                                |
+| `.card-subtitle`              | `subtitle-sm` | muted colour                   |
+| `.input-hint`                 | `caption-sm`  |                                |
+| `.input-label`                | `label-md`    |                                |
+| `.input-placeholder`          | `body-md`     |                                |
+| `.input-value`                | `body-md`     |                                |
+| `.button-label`               | `label-md`    |                                |
+| `.button-label-sm`            | `label-sm`    |                                |
+
+An alias takes its values from the nearest typeset, the same as a role class. There is no chart typeset: put chart text in `typeset-product` and use the `chart-*` aliases.
+
+## Longform
+
+Inside `typeset-longform`, these elements take a role without a class:
+
+| Element      | Role             |
+| ------------ | ---------------- |
+| `h1`         | `headline-lg`    |
+| `h2`         | `headline-sm`    |
+| `h3`         | `title-lg`       |
+| `h4`         | `title-md`       |
+| `h5`         | `title-sm`       |
+| `p.lead`     | `body-lg`, muted |
+| `figcaption` | `caption-sm`     |
+
+These rules have zero specificity, so a role class on the element wins.
+
+`typeset-longform` and `typeset-product--formatted` also style unclassed links, inline text such as `strong`, `mark` and `kbd`, code blocks, lists, description lists, blockquotes, `hr`, tables, `figcaption` and `summary`. `typeset-product` has no content styles, so component markup inside it is not restyled.
+
+In the same two typesets, each direct child has a maximum width:
+
+| Applies to                                                   | Maximum width                                             |
+| ------------------------------------------------------------ | --------------------------------------------------------- |
+| Text blocks                                                  | `--measure-text`, 38 × the `body-md` size (608px at 16px) |
+| `figure`, `img`, `video`, `iframe`, `table`, `pre`, `.chart` | `--measure-wide`, 56 × the `body-md` size (896px at 16px) |
+| `.not-typeset` and nested typesets                           | None                                                      |
+
+`.width-content`, `.width-content-wide` and `.width-content-full` set a child's width directly.
+
+Add `not-typeset` to a block to stop the element roles, content styles and measure inside it. This is useful around an embedded component with its own styling.
+
+```html
+<div class="typeset-longform">
+	<h3>Styled by the typeset</h3>
+	<div class="not-typeset">
+		<h3>Not styled</h3>
+	</div>
+</div>
+```
+
+## Title groups
+
+A title group is an optional `eyebrow`, a title and a subtitle, at the top of a card, chart, table or panel.
+
+When a component holds two or more title groups, the designer makes one dominant. The dominant group has a title and an optional subtitle, and no eyebrow. Each other group is shown as an eyebrow, using the text that would have been its title. For a card holding one chart that is the card's subject, the chart has the title and subtitle, and the card's title becomes an eyebrow.
+
+In `@ldn-viz/ui`, `TitleGroup` renders a group with `eyebrow`, `title-md` and `subtitle-sm`. `Card`, `ChartContainer` and `TableContainer` use it.
+
+In a flow context, the roles set the space between the parts:
+
+```html
+<section class="flow-standard typeset-product">
+	<p class="eyebrow">Air quality</p>
+	<h2 class="title-lg">Nitrogen dioxide</h2>
+	<p class="subtitle-sm">Rolling 24-hour mean</p>
+</section>
+```
+
+The title sits the `tight` step below the eyebrow, and the subtitle sits directly under the title with no step. `body-sm text-color-text-muted` in place of `subtitle-sm` looks similar but gets the `default` step. See [Flow](./?path=/docs/foundations-flow--docs).
+
+## Colour and emphasis
+
+Set colour with a semantic token class:
+
+```html
+<p class="body-md text-color-text">Primary text</p>
+<p class="body-sm text-color-text-muted">Secondary text</p>
+<span class="label-md text-color-label">Control label</span>
+```
+
+The text tokens are `text` and `text-muted`. The label tokens are `label` and `label-muted`.
+
+`text-strong` sets the semi-bold weight (600) and `text-soft` sets regular (400), on any role:
+
+```html
+<p class="body-md">Readings are <span class="text-strong">provisional</span>.</p>
+```
+
+The roles use four weights: 400, 500, 600 and 700. Don't set a weight beside a role to change how it looks. Choose a different role, or use `text-strong` or `text-soft`.
+
+## Things to avoid
+
+- `text-*` sizes, `font-*` weights and `leading-*` line height classes. They have no effect.
+- Breakpoint variants such as `md:title-lg`. Role classes are plain CSS, not Tailwind utilities, so the variants don't exist. The roles already change size where needed.
+- The primitive tokens under the roles, such as `--primitive-typography-*`. Use a role class.

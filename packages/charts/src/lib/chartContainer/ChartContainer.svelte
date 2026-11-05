@@ -30,10 +30,16 @@
 	interface Props {
 		/**
 		 * Title that is displayed in large text above the plot.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		title?: string;
 		/**
 		 * Subtitle that is displayed below the title, but above the plot.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		subtitle?: string;
 		/**
@@ -46,6 +52,11 @@
 		 * inside a `Card` that owns the primary title.
 		 */
 		emphasis?: 'primary' | 'secondary';
+		/**
+		 * The heading level of the title, passed to `TitleGroup`. It changes the element, not the styling;
+		 * leave it unset for a title that isn't a heading.
+		 */
+		headingLevel?: 2 | 3 | 4 | 5 | 6;
 		/**
 		 * Optional help affordance shown beside the title. A string opens an `Overlay`
 		 * (`hintType` selects tooltip / popover / modal); pass a snippet via `ChromeHeader` for full control.
@@ -65,6 +76,9 @@
 		 * * `byline` (string) - statement of who created the visualization
 		 * * `source` (string) - statement of where the data came from
 		 * * `note` (string) - any additional footnotes
+		 *
+		 * **Warning**: these are rendered as raw HTML and are not sanitized, so they must never be
+		 * set from unsanitized user input, as doing so would create an XSS vulnerability.
 		 */
 		source?: string;
 		byline?: string;
@@ -137,6 +151,7 @@
 		subtitle = '',
 		eyebrow = '',
 		emphasis = 'primary',
+		headingLevel = undefined,
 		hint = undefined,
 		hintType = 'tooltip',
 		hintTitle = undefined,
@@ -167,7 +182,7 @@
 		classNames(
 			chartWidth,
 			'break-inside-avoid',
-			alignMultiple ? 'contents not-prose chart' : 'flex flex-col not-prose chart'
+			alignMultiple ? 'contents typeset-product chart' : 'flex flex-col typeset-product chart'
 		)
 	);
 
@@ -179,14 +194,23 @@
 </script>
 
 <div class={classes} {id}>
-	{#if alt}
-		<p class="sr-only">{alt}</p>
+	{#if title || subtitle || eyebrow || hint}
+		<div class="mb-2">
+			<ChromeHeader
+				{title}
+				{subtitle}
+				{eyebrow}
+				{emphasis}
+				{headingLevel}
+				{hint}
+				{hintType}
+				{hintTitle}
+			/>
+		</div>
 	{/if}
 
-	{#if title || description || eyebrow || hint}
-		<div class="mb-2">
-			<ChromeHeader {title} {subtitle} {eyebrow} {emphasis} {hint} {hintType} {hintTitle} />
-		</div>
+	{#if alt}
+		<p class="sr-only">{alt}</p>
 	{/if}
 
 	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->

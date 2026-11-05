@@ -1,11 +1,10 @@
 <script lang="ts">
 	/**
-	 * `ChromeFooter` — the footer row shared by `Card`, `ChartContainer` and
-	 * `TableContainer`; the positional counterpart to `ChromeHeader`. Footnotes
-	 * (byline / source / note, plus an optional `footnoteExtra` snippet — e.g. a
-	 * "View description" trigger) sit on the left; an `actions` snippet (e.g. export
-	 * buttons) sits on the right, justified apart and bottom-aligned. Renders nothing
-	 * when it has neither footnotes nor actions.
+	 * `ChromeFooter` — renders the footer row at the bototm of a `Card`, `ChartContainer` and
+	 * `TableContainer` (the byline / source / note, and download buttons).
+	 *
+	 * The optional `footnoteExtra` snippet (e.g. a "View description" trigger) renders on the left;
+	 * an optional `actions` snippet (e.g. alternative export buttons) renders on the right.
 	 *
 	 * @component
 	 */
@@ -13,13 +12,36 @@
 	import { classNames } from '../utils/classNames.js';
 
 	interface Props {
+		/**
+		 * Statement of who created the visualization.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
+		 */
 		byline?: string;
+
+		/**
+		 * Statement of where the data came from.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
+		 */
 		source?: string;
+
+		/**
+		 * Any additional footnotes.
+		 *
+		 * **Warning**: this is rendered as raw HTML and is not sanitized, so it must never be set
+		 * from unsanitized user input, as doing so would create an XSS vulnerability.
+		 */
 		note?: string;
+
 		/** Extra footnote content, appended to the footnotes list (e.g. a "View description" trigger). */
 		footnoteExtra?: Snippet;
+
 		/** Right-aligned actions (e.g. download buttons). */
 		actions?: Snippet;
+
 		class?: string;
 	}
 
@@ -40,11 +62,11 @@
 		{#if hasFootnotes}
 			<!-- eslint-disable svelte/no-at-html-tags -->
 			<ul
-				class="product caption mr-4 flex min-w-40 max-w-xl flex-col gap-1 text-color-text-muted [&_a:hover]:text-color-interactive-primary-hover [&_a:hover]:no-underline [&_a]:underline"
+				class="typeset-product caption-sm mr-4 flex min-w-40 max-w-xl flex-col gap-1 text-color-text-muted [&_a:hover]:text-color-interactive-primary-hover [&_a:hover]:no-underline [&_a]:underline"
 			>
 				{#if byline}<li>{@html byline}</li>{/if}
-				{#if source}<li><span class="mr-1 font-bold">Source:</span>{@html source}</li>{/if}
-				{#if note}<li><span class="mr-1 font-bold">Note:</span>{@html note}</li>{/if}
+				{#if source}<li><span class="text-strong mr-1">Source:</span>{@html source}</li>{/if}
+				{#if note}<li><span class="text-strong mr-1">Note:</span>{@html note}</li>{/if}
 				{@render footnoteExtra?.()}
 			</ul>
 			<!-- eslint-enable svelte/no-at-html-tags -->

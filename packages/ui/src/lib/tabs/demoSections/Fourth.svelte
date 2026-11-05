@@ -4,9 +4,9 @@
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 </script>
 
-<div class="prose px-4 py-6">
+<div class="typeset-longform px-4 py-6">
 	<h3>If you liked it...</h3>
-	<p class="lead">...then you should have put a map in it.</p>
+	<p class="body-lg text-color-text-muted">...then you should have put a map in it.</p>
 	<p>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat interdum quam faucibus
 		gravida. Nunc in odio nec eros sodales consequat. Donec id est sapien. Mauris sit amet semper

@@ -104,3 +104,11 @@ The process for making a release is:
 - merge from the `main` branch to `dev`, using the 'merge commit' option
 
 The version number badges on the README will update automatically.
+
+Each time that we publish packages, we tag the corresponding commit with tags for each package that was released.
+This is a semi-manual process:
+
+- after completing the rest of the release process, do a `git fetch origin main` and run `python3 scripts/make_release_tags.py --rev main`
+- review the `git-tag-commands.sh` file this wrote, and correct it if necessary
+- execute it with `sh git-tag-commands.sh` to apply the tags
+- push the tags to GitHub with `git push origin --tags`
