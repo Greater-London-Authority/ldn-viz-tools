@@ -1,5 +1,12 @@
 # ldn-viz-tools-maps
 
+## 22.0.0
+
+### Patch Changes
+
+- Updated dependencies [cb71a0c]
+  - @ldn-viz/ui@25.2.0
+
 ## 21.0.0
 
 ### Patch Changes
