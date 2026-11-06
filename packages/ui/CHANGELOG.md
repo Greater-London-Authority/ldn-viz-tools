@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 25.3.0
+
+### Minor Changes
+
+- ba41cbd: CHANGED: `Toc` accepts a `topClass` prop
+
 ## 25.2.0
 
 ### Minor Changes
