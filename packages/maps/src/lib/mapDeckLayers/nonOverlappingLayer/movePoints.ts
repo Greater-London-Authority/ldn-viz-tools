@@ -21,11 +21,15 @@ export type RepositionNode = {
 	[key: string]: any;
 };
 
-// the maximum distance a marker moves on each iteration
+/**
+ * the maximum distance a marker moves on each iteration
+ */
 const stepSizeOf = (point: RepositionNode) => point.radius / 2;
 
-// markers are moved slightly further than needed to just touch (as a fraction of their radius),
-// so that floating point error does not leave them overlapping
+/**
+ * markers are moved slightly further than needed to just touch (as a fraction of their radius),
+ * so that floating point error does not leave them overlapping
+ */
 const OVERLAP_MARGIN = 0.01;
 
 const JITTER_DISTANCE = 0.0000001;

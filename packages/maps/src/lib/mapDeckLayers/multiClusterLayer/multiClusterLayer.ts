@@ -20,14 +20,14 @@ import {
 } from '../clusterLayer/renderers/defaultRenderers';
 import type { ClusterRenderProps, PointRenderProps } from '../clusterLayer/types';
 import { toDataArray, type LayerDataInput } from '../layerData';
-import { tokenColor } from '../tokenColor';
-import { zoomTo } from '../zoomTo';
 import {
 	MIN_ZOOM_STEP,
 	NonOverlappingGlyphLayer,
 	type GlyphRenderProps,
 	type NonOverlappingRow
 } from '../nonOverlappingLayer/nonOverlappingGlyphLayer';
+import { tokenColor } from '../tokenColor';
+import { zoomTo } from '../zoomTo';
 
 /**
  * A cluster (or lone point) containing points of a single type.
@@ -119,12 +119,16 @@ export type MultiClusterLayerOwnProps<DataT = any> = {
 export type MultiClusterLayerProps<DataT = any> = MultiClusterLayerOwnProps<DataT> &
 	CompositeLayerProps;
 
-// this covers the full range of longitudes (-180 degrees to 180 degrees),
-// and truncates the latitude at approximately the value that makes the projected map square
-// (85 degrees north or south).
+/**
+ * this covers the full range of longitudes (-180 degrees to 180 degrees),
+ * and truncates the latitude at approximately the value that makes the projected map square
+ * (85 degrees north or south).
+ */
 const WORLD_BOUNDS: [number, number, number, number] = [-180, -85, 180, 85];
 
-// Shared by the renderers and by the radius calculations used to space the glyphs apart
+/**
+ * Shared by the renderers and by the radius calculations used to space the glyphs apart
+ */
 const CLUSTER_STYLE: CircleClusterStyle = {
 	radiusMinPixels: 8,
 	radiusMaxPixels: 20,

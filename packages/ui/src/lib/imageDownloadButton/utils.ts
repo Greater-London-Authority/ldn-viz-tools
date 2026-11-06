@@ -240,8 +240,10 @@ function getBounds(elements) {
 
 //
 
-// Given an array of SVG elements, composites them into a single SVG element,
-// and then serializes the result to a blob.
+/**
+ * Given an array of SVG elements, composites them into a single SVG element,
+ * and then serializes the result to a blob.
+ */
 async function serializeAll(elements, { padding = 10 } = {}) {
 	const svgns = 'http://www.w3.org/2000/svg';
 	const xmlns = 'http://www.w3.org/2000/xmlns/';

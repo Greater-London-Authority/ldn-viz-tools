@@ -10,7 +10,9 @@
 	import { getSidebarState } from '../../../sidebar/sidebarState.svelte';
 
 	interface Props {
-		// `id` for sidebar container, to point to for screen readers
+		/**
+		 * `id` for sidebar container, to point to for screen readers
+		 */
 		sidebarId?: string; //FROM STATE
 		icon?: import('svelte').Snippet;
 		[key: string]: any;

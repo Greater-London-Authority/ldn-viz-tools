@@ -19,9 +19,11 @@ import type {
 	PointPickingObject
 } from './types';
 
-// this covers the full range of longitudes (-180 degrees to 180 degrees),
-// and truncates the latitude at approximately the value that makes the projected map square
-// (85 degrees north or south).
+/**
+ * this covers the full range of longitudes (-180 degrees to 180 degrees),
+ * and truncates the latitude at approximately the value that makes the projected map square
+ * (85 degrees north or south).
+ */
 const WORLD_BOUNDS: [number, number, number, number] = [-180, -85, 180, 85];
 
 const DEFAULT_CLUSTER_RENDERER = circleClusters();

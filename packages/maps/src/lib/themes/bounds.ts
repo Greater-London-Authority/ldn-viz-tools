@@ -8,14 +8,16 @@ export const centerOfBounds = (bounds: BoundsPoints) => {
 	return [midpoint(bounds[0][0], bounds[1][0]), midpoint(bounds[0][1], bounds[1][1])] as Point;
 };
 
-// scaleBounds returns a new bounds that scales the input bounds by the
-// specified scaleFactor { x, y } using the center as the origin.
-//
-// Given the factors:
-// - { x: 1.1, y: 1.1 } then both width and height will be 10% bigger;
-// - { x: 0.5, y: 1 } then width will be 50% bigger and height left unchanged;
-// - { x: 2, y: 0 } then width will be twice as big and height as zero;
-// - etc.
+/**
+ * scaleBounds returns a new bounds that scales the input bounds by the
+ * specified scaleFactor { x, y } using the center as the origin.
+ *
+ * Given the factors:
+ * - { x: 1.1, y: 1.1 } then both width and height will be 10% bigger;
+ * - { x: 0.5, y: 1 } then width will be 50% bigger and height left unchanged;
+ * - { x: 2, y: 0 } then width will be twice as big and height as zero;
+ * - etc.
+ */
 export const scaleBounds = (bounds: BoundsPoints, scaleFactor: ScaleFactor = { x: 1, y: 1 }) => {
 	const numberOrDefault = (n: number | undefined, elseDefault: number) => {
 		return typeof n === 'number' ? n : elseDefault;
