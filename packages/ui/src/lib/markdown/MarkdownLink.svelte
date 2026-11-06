@@ -9,17 +9,21 @@
 	 * from `'$app/paths'`, so that links include the app's base path.
 	 * Without a resolver, the href is unchanged.
 	 *
+	 * Other props are passed through to the `<a>` element.
+	 *
 	 * @component
 	 */
 
 	import type { Snippet } from 'svelte';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { getMarkdownLinkResolver } from './linkResolver';
 
-	let { href, children }: { href: string; children: Snippet } = $props();
+	let { href, children, ...rest }: HTMLAnchorAttributes & { href: string; children: Snippet } =
+		$props();
 
 	const resolve = getMarkdownLinkResolver();
 </script>
 
-<a href={href.startsWith('/') ? resolve(href) : href}>
+<a {...rest} href={href.startsWith('/') ? resolve(href) : href}>
 	{@render children()}
 </a>
