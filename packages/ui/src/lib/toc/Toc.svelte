@@ -9,13 +9,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	import { classNames } from '../utils/classNames';
 	import TocItem from './TocItem.svelte';
 
 	interface TableOfContents {
 		items?: TocMenuItem[];
 	}
 
-	let { toc }: { toc: TableOfContents } = $props();
+	let { toc, topClass }: { toc: TableOfContents; topClass?: string } = $props();
 
 	let scrollY = $state(0);
 
@@ -58,7 +59,7 @@
 
 {#if toc?.items?.length}
 	<div class="typeset-product hidden w-[200px] shrink-0 lg:block">
-		<aside class="sticky top-0">
+		<aside class={classNames('sticky', topClass ?? 'top-0')}>
 			<p class="label-sm mb-4 pt-10">On this page</p>
 			<ul class="border-l border-color-border-wash">
 				{#each toc.items as { title, url, items }, index (index)}
