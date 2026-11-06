@@ -1,5 +1,11 @@
 # ldn-viz-tools-ui
 
+## 25.2.0
+
+### Minor Changes
+
+- cb71a0c: CHANGED: `MarkdownLink` passes extra props to its `<a>` element
+
 ## 25.1.0
 
 ### Minor Changes
