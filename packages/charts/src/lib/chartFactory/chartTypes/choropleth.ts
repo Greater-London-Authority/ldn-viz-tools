@@ -81,7 +81,9 @@ export const makeChoroplethFromURL = (geojsonURL: string, joinKey: string) => {
 
 const areaIndexAttribute = 'data-area-index';
 
-// Render transform for a geo mark: records on each path the index of the feature it draws
+/**
+ * Render transform for a geo mark: records on each path the index of the feature it draws
+ */
 const tagAreas: RenderFunction = (index, scales, values, dimensions, context, next) => {
 	const g = next?.(index, scales, values, dimensions, context) ?? null;
 	g?.querySelectorAll('path').forEach((path, i) =>
@@ -254,7 +256,9 @@ export const makeChoropleth = (geojson: { features: unknown[] }, joinKey: string
 
 const geographiesURL = 'https://apps.london.gov.uk/api/tables/geographies/areas_simplified';
 
-// One generator per area type and join key, so each set of boundaries is fetched at most once
+/**
+ * One generator per area type and join key, so each set of boundaries is fetched at most once
+ */
 const generators = new Map<string, ReturnType<typeof makeChoroplethFromURL>>();
 
 const generatorFor = (areaType: ChoroplethAreaType, joinKey: 'name' | 'id') => {

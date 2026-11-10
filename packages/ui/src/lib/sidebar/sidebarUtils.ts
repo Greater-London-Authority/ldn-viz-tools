@@ -21,8 +21,10 @@ export const tabPlacementLookup: PlacementLookup = {
 	bottom: '-top-[81px] inset-x-0'
 };
 
-// The tab bar stays on screen when the sidebar is closed. It is 80px across,
-// plus a 1px keyline, so AppShell pads its content by 81px on that side.
+/**
+ * The tab bar stays on screen when the sidebar is closed. It is 80px across,
+ * plus a 1px keyline, so AppShell pads its content by 81px on that side.
+ */
 export const tabOffsetLookup: PlacementLookup = {
 	left: 'pl-[81px]',
 	right: 'pr-[81px]',
@@ -42,17 +44,25 @@ export const tabLayoutOverride: PlacementLookup = {
 	horizontal: '!w-full !h-auto !flex !flex-row !space-y-0 !p-0 !float-left !border-b-0'
 };
 
-// These classes overide the theme of default tabs in a sidebar context
+/**
+ * These classes overide the theme of default tabs in a sidebar context
+ */
 export const tabThemeOverride = '[&>button]:bg-color-surface [&>button]:no-underline';
 
-// These classes overide the 'horizontal' style of tablabels in a sidebar context
+/**
+ * These classes overide the 'horizontal' style of tablabels in a sidebar context
+ */
 export const tabLabelOverride =
 	'[&>button]:label-sm [&>button]:w-20 [&>button]:h-20 [&>button]:p-2 [&>button]:flex [&>button]:flex-col [&>button]:items-center [&>button]:justify-center [&>button]:text-center';
 
-// These classes override the margin-right on icons in 'horizontal' style tabLabels in a sidebar context
+/**
+ * These classes override the margin-right on icons in 'horizontal' style tabLabels in a sidebar context
+ */
 export const tabIconOverride = '[&>button>svg]:mr-0 [&>button>svg]:mb-1';
 
-// The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
+/**
+ * The width and height classes are a bit complex to accommodate absolutely positioned nav trigger elements...
+ */
 export const widthLookup: WidthLookup = {
 	slim: {
 		left: 'max-w-[308px] min-[488px]:min-w-[308px] w-[calc(100vw-80px)]',

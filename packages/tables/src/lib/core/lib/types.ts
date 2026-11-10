@@ -1,5 +1,5 @@
+import type { ScaleBand, ScaleOrdinal, ScaleThreshold } from 'd3-scale';
 import type { Component } from 'svelte';
-import type { ScaleBand, ScaleThreshold, ScaleOrdinal } from 'd3-scale';
 
 // ============================================================================
 // Core Data Types
@@ -121,7 +121,9 @@ export type ColSpec = {
 	};
 };
 
-// Resolved column spec with renderer components (not strings)
+/**
+ * Resolved column spec with renderer components (not strings)
+ */
 export type ResolvedColSpec = Omit<ColSpec, 'cell' | 'group' | 'column' | 'header'> & {
 	cell?: {
 		renderer?: Component;
