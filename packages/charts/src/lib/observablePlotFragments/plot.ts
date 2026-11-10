@@ -85,7 +85,9 @@ export const plot = (options: PlotOptions = {}) => {
 
 export const getDefault = (element: any) => defaultPlotStyleFunctions[element]();
 
-// Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
+/**
+ * Object contains a custom function for each mark, that wraps the existing mark but provides default styling and props
+ */
 export const Plot = {
 	...ObservablePlot,
 	plot,

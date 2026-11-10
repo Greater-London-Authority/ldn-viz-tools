@@ -76,7 +76,9 @@ export const ICON_PX = 128;
 
 export const rgba = (c: Color) => `rgba(${c[0]},${c[1]},${c[2]},${(c[3] ?? 255) / 255})`;
 
-// Props forwarded unchanged to the IconLayer sublayer.
+/**
+ * Props forwarded unchanged to the IconLayer sublayer.
+ */
 const FORWARDED_PROPS = [
 	'sizeScale',
 	'sizeUnits',
@@ -94,7 +96,9 @@ const FORWARDED_PROPS = [
 	'textureParameters'
 ] as const;
 
-// IconLayer's defaults, except for the props this layer sets itself.
+/**
+ * IconLayer's defaults, except for the props this layer sets itself.
+ */
 const iconLayerDefaultProps: Record<string, unknown> = { ...IconLayer.defaultProps };
 for (const name of ['iconAtlas', 'iconMapping', 'getIcon']) delete iconLayerDefaultProps[name];
 

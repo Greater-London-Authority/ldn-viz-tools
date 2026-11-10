@@ -10,4 +10,7 @@ export * from './observablePlotFragments/plot.js';
 
 export { default as Chart } from './chartFactory/Chart.svelte';
 export * from './chartFactory/chartOptions';
+export { chartFns } from './chartFactory/chartTypes';
+export { getDescription } from './chartFactory/descriptions';
+export { getEndOfLineLabelMarks } from './chartFactory/endOfLineLabels';
 export * from './chartFactory/utils';

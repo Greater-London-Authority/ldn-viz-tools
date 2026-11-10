@@ -22,11 +22,15 @@ const join = (arr: (string | number)[], addQuotes = true) => {
 
 const unique = <T>(arr: T[]) => Array.from(new Set(arr));
 
-// unique values, ignoring rows where the field is missing
+/**
+ * unique values, ignoring rows where the field is missing
+ */
 const uniqueDefined = <T>(arr: (T | null | undefined)[]) =>
 	unique(arr.filter((d): d is T => d != null && d !== ''));
 
-// how each area type is named in a description, e.g. "for each ward"
+/**
+ * how each area type is named in a description, e.g. "for each ward"
+ */
 const areaTypeNames: Record<ChoroplethAreaType, string> = {
 	borough: 'borough',
 	'ward-2022': 'ward',
@@ -39,11 +43,15 @@ const areaTypeNames: Record<ChoroplethAreaType, string> = {
 
 export const joinUnique = (arr: any[]) => join(unique(arr));
 
-// Joins the non-empty fragments with single spaces and ends the sentence with a full stop.
+/**
+ * Joins the non-empty fragments with single spaces and ends the sentence with a full stop.
+ */
 const sentence = (...parts: (string | number | undefined | false)[]) =>
 	parts.filter((p) => p !== undefined && p !== false && p !== '').join(' ') + '.';
 
-// Describes the range of `values` if they are dates or numbers, or lists them if they are categories.
+/**
+ * Describes the range of `values` if they are dates or numbers, or lists them if they are categories.
+ */
 const rangeStatement = (values: unknown[]) => {
 	const defined = values.filter((d) => d != null);
 	if (defined.length === 0) {

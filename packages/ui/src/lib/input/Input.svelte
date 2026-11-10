@@ -85,8 +85,10 @@
 		}
 	});
 
-	// Svelte does not allow bind:type and bind:value simultaneously so this
-	// function acts as the input change handler.
+	/**
+	 * Svelte does not allow bind:type and bind:value simultaneously so this
+	 * function acts as the input change handler.
+	 */
 	const formatAndUpdateValue = () => {
 		if (!format) {
 			return;
