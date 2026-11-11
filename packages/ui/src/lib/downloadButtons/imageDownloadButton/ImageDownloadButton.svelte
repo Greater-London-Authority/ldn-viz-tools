@@ -10,9 +10,10 @@
 	 * placing them inside a div and applying the classes `absolute inset-0 pointer-events-none` to the second.
 	 * You can then place the SVG that should be hidden into an SVG with the `data-capture-ignore` attribute applied.
 	 *
-	 * **Deprecated**: use [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead.
-	 * In a chart or table footer, `ExportButtons` with `variant="separate"` shows this button. It will be removed from the
-	 * package exports in the next major version.
+	 * **Deprecated export**: importing this component from `@ldn-viz/ui` is deprecated. Use
+	 * [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead. The component stays in
+	 * the library, because `ExportButtons` uses it when `variant="separate"`. Only the export will be removed, in the next
+	 * major version.
 	 *
 	 * @component
 	 */

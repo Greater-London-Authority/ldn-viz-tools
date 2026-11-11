@@ -4,9 +4,10 @@
 	/**
 	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.
 	 *
-	 * **Deprecated**: use [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead.
-	 * In a chart or table footer, `ExportButtons` with `variant="separate"` shows this button. It will be removed from the
-	 * package exports in the next major version.
+	 * **Deprecated export**: importing this component from `@ldn-viz/ui` is deprecated. Use
+	 * [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead. The component stays in
+	 * the library, because `ExportButtons` uses it when `variant="separate"`. Only the export will be removed, in the next
+	 * major version.
 	 *
 	 * @component
 	 */
