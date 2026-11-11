@@ -11,6 +11,9 @@
 	];
 	/**
 	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.
+	 *
+	 * **Deprecated**: use [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead.
+	 * It will be removed from the package exports in the next major version.
 	 */
 
 	const { Story } = defineMeta({

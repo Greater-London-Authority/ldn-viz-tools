@@ -144,7 +144,7 @@ A card with only text has no other title group, so its group can have an eyebrow
 `Card`, `ChartContainer` and `TableContainer` share the same chrome: a header above the content and a footer below it, built from three parts:
 
 - **`ChromeHeader`** has the title group at the left and an optional hint at the right. The hint is an information icon that opens a help overlay.
-- **`ChromeFooter`** has the footnotes at the left: a byline, the source, a note and, on a chart or table, a button that opens its description. The actions sit at the right, such as the data and image download buttons. The footnotes use `caption-sm` in the muted text colour.
+- **`ChromeFooter`** has the footnotes at the left: a byline, the source, a note and, on a chart or table, a button that opens its description. The actions sit at the right, such as the download button. The footnotes use `caption-sm` in the muted text colour.
 - **`TitleGroup`** renders the eyebrow, title and subtitle, or only an eyebrow when the group isn't dominant.
 
 ```svelte
@@ -168,7 +168,7 @@ A card with only text has no other title group, so its group can have an eyebrow
 	</Card>
 </div>
 
-`ChartContainer` adds the download buttons and the description button. The middle of a chart container has separate slots for the controls, the legend and the plot, so that plots side by side stay aligned when their legends wrap to different heights. The [Data visualisation](/design-system/data-visualisation) pages describe the plot.
+`ChartContainer` adds the download button and the description button. Its `exportButtonsVariant` prop sets the download button to a button with the text "Download" (`standard`, the default), an icon (`compact`), or separate data and image buttons (`separate`). The middle of a chart container has separate slots for the controls, the legend and the plot, so that plots side by side stay aligned when their legends wrap to different heights. The [Data visualisation](/design-system/data-visualisation) pages describe the plot.
 
 <div class="my-4 border border-dashed border-color-border p-4 body-sm text-color-text-muted">Placeholder: a TableContainer example, once TableContainer is exported from @ldn-viz/tables.</div>
 

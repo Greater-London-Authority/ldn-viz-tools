@@ -1,6 +1,4 @@
 <script module lang="ts">
-	import { ArrowDownTray } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import DownloadButton from './DownloadButton.svelte';
 
@@ -11,12 +9,12 @@
 	];
 
 	/**
-	 * The `<DownloadButton>` component renders a button that combines both data and image download options.
-	 * It uses a MultipleActionButton to allow users to select between CSV, JSON, PNG, and SVG formats.
+	 * The `<DownloadButton>` component renders one button that opens a menu of download formats.
+	 * The menu has a Data group (CSV, JSON) and an Image group (PNG, SVG). Choosing a format downloads the file.
 	 *
-	 * This component is useful when you want to provide multiple download options (both data and images) in a single button.
+	 * The Data group shows when `data` or `dataFn` is set. The Image group shows when `htmlNode` is set.
+	 * Set `compact` for an icon-only button, for example in a chart footer.
 	 */
-
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/DownloadButton',
 		component: DownloadButton,
@@ -43,10 +41,12 @@
 					defaultValue: { summary: "['PNG', 'SVG']" },
 					type: { summary: 'array' }
 				}
-			}
+			},
+			compact: { control: { type: 'boolean' } }
 		},
 		args: {
-			data: data
+			data,
+			filename: 'download'
 		}
 	});
 </script>
@@ -59,217 +59,74 @@
 
 <div
 	bind:this={htmlNode}
-	class="flex w-fit flex-col gap-2 bg-color-container-level-0 pb-8 text-color-text-primary"
+	class="typeset-product flow-standard w-fit bg-color-surface pb-8 text-color-text"
 >
-	<h2 class="text-lg font-bold">A title</h2>
-	<p class="text-color-text-secondary" data-capture-ignore>A paragraph of text...</p>
-	<p data-capture-ignore>Something that will not be included in the downloaded image.</p>
+	<h2 class="title-md">A title</h2>
+	<p class="body-md text-color-text-muted" data-capture-ignore>
+		This paragraph has <code>data-capture-ignore</code>, so it is left out of the image.
+	</p>
 	<LogoByCiu class="w-80" />
 </div>
 
-<Story
-	name="Default (All Formats)"
-	args={{ filename: 'download', data: data, htmlNode: htmlNode }}
-	parameters={{
-		options: {
-			showPanel: true
-		}
-	}}
->
+<Story name="Default">
 	{#snippet template(args)}
-		<DownloadButton {...args} {htmlNode}>
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
+		<DownloadButton {...args} {htmlNode} />
 	{/snippet}
 </Story>
 
-<Story name="Data Only (CSV and JSON)">
+<!-- A compact button shows only the download icon. `label` sets its accessible name. -->
+<Story name="Compact">
 	{#snippet template(args)}
-		<DownloadButton {...args} {data} filename="data-export">
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
+		<DownloadButton {...args} {htmlNode} compact />
 	{/snippet}
 </Story>
 
-<Story name="Image Only (PNG and SVG)">
+<!-- Without `htmlNode`, the menu has only the Data group. -->
+<Story name="Data Only">
 	{#snippet template(args)}
-		<DownloadButton {...args} data={undefined} {htmlNode} filename="chart-export">
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
+		<DownloadButton {...args} filename="data-export" />
 	{/snippet}
 </Story>
 
-<Story name="All Data and Image Formats">
+<!-- Without `data` or `dataFn`, the menu has only the Image group. -->
+<Story name="Image Only">
 	{#snippet template(args)}
-		<DownloadButton {...args} {data} {htmlNode} filename="combined-export">
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
+		<DownloadButton {...args} data={undefined} {htmlNode} filename="chart-export" />
 	{/snippet}
 </Story>
 
+<!-- `dataFormats` and `imageFormats` choose which formats each group lists. -->
 <Story name="Custom Format Selection">
 	{#snippet template(args)}
 		<DownloadButton
 			{...args}
-			{data}
 			{htmlNode}
 			dataFormats={['JSON']}
 			imageFormats={['SVG']}
 			filename="custom-export"
-		>
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
+		/>
 	{/snippet}
 </Story>
 
-<Story name="CSV Only">
-	{#snippet template(args)}
-		<DownloadButton {...args} {data} dataFormats={['CSV']} filename="csv-export">
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
-	{/snippet}
-</Story>
-
-<Story name="PNG Only">
-	{#snippet template(args)}
-		<DownloadButton
-			{...args}
-			{htmlNode}
-			data={undefined}
-			imageFormats={['PNG']}
-			filename="png-export"
-		>
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
-	{/snippet}
-</Story>
-
+<!-- `columnMapping` renames the columns in CSV and JSON files. -->
 <Story name="With Column Mapping">
 	{#snippet template(args)}
 		<DownloadButton
 			{...args}
-			{data}
 			{htmlNode}
 			columnMapping={{ A: 'Column X', B: 'Column Y', C: 'Column Z' }}
 			filename="renamed-columns"
-		>
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
+		/>
 	{/snippet}
 </Story>
 
-<Story name="Full Width">
-	{#snippet template(args)}
-		<div class="w-full">
-			<DownloadButton {...args} {data} {htmlNode} filename="download" fullWidth>
-				{#snippet afterLabel()}
-					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-				{/snippet}
-			</DownloadButton>
-		</div>
-	{/snippet}
-</Story>
-
-<Story name="Different Button Styles">
-	{#snippet template(args)}
-		<div class="flex flex-col space-y-2">
-			<DownloadButton {...args} {data} {htmlNode} filename="download" emphasis="primary">
-				{#snippet afterLabel()}
-					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-				{/snippet}
-			</DownloadButton>
-			<DownloadButton {...args} {data} {htmlNode} filename="download" emphasis="secondary">
-				{#snippet afterLabel()}
-					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-				{/snippet}
-			</DownloadButton>
-			<DownloadButton {...args} {data} {htmlNode} filename="download" variant="outline" size="sm">
-				{#snippet afterLabel()}
-					<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-				{/snippet}
-			</DownloadButton>
-		</div>
-	{/snippet}
-</Story>
-
-<Story name="Disabled">
-	{#snippet template(args)}
-		<DownloadButton {...args} {data} {htmlNode} disabled={true} filename="download">
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
-	{/snippet}
-</Story>
-
-<Story name="With Icon Before Label">
-	{#snippet template(args)}
-		<DownloadButton {...args} {data} {htmlNode} filename="download">
-			{#snippet beforeLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="mr-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
-	{/snippet}
-</Story>
-
-<Story name="Data from Function">
+<!-- `dataFn` is called when a data format is chosen. It can return a promise. -->
+<Story name="Data From Function">
 	{#snippet template(args)}
 		<DownloadButton
 			{...args}
-			dataFn={() =>
-				Array.from({ length: 10 }, () => ({
-					value: Math.floor(Math.random() * 100),
-					category: ['A', 'B', 'C'][Math.floor(Math.random() * 3)]
-				}))}
-			{htmlNode}
-			filename="random-data"
-		>
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
-	{/snippet}
-</Story>
-
-<Story name="Custom Image Settings">
-	{#snippet template(args)}
-		<DownloadButton
-			{...args}
-			{htmlNode}
-			imageFormats={['PNG']}
-			padding={50}
-			scaleFactor={3}
-			filename="high-res-export"
-		>
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
-	{/snippet}
-</Story>
-
-<Story name="All Formats with Data Function">
-	{#snippet template(args)}
-		<DownloadButton
-			{...args}
+			data={undefined}
 			dataFn={async () => {
-				// Simulate async data fetching
 				await new Promise((resolve) => setTimeout(resolve, 100));
 				return [
 					{ name: 'Item 1', value: 100 },
@@ -278,13 +135,40 @@
 				];
 			}}
 			{htmlNode}
-			dataFormats={['CSV', 'JSON']}
-			imageFormats={['PNG', 'SVG']}
 			filename="async-data-export"
-		>
-			{#snippet afterLabel()}
-				<Icon src={ArrowDownTray} theme="mini" class="ml-2 h-5 w-5" aria-hidden="true" />
-			{/snippet}
-		</DownloadButton>
+		/>
+	{/snippet}
+</Story>
+
+<!-- `padding` and `scaleFactor` set the margin and resolution of PNG files. -->
+<Story name="Custom Image Settings">
+	{#snippet template(args)}
+		<DownloadButton
+			{...args}
+			data={undefined}
+			{htmlNode}
+			imageFormats={['PNG']}
+			padding={50}
+			scaleFactor={3}
+			filename="high-res-export"
+		/>
+	{/snippet}
+</Story>
+
+<!-- `fullWidth` makes the standard button fill its parent. It has no effect on a compact button. -->
+<Story name="Full Width">
+	{#snippet template(args)}
+		<div class="w-80">
+			<DownloadButton {...args} {htmlNode} fullWidth />
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Disabled">
+	{#snippet template(args)}
+		<div class="flex items-center gap-4">
+			<DownloadButton {...args} {htmlNode} disabled />
+			<DownloadButton {...args} {htmlNode} compact disabled />
+		</div>
 	{/snippet}
 </Story>

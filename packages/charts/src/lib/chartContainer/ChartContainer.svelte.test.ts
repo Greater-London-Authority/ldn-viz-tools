@@ -62,7 +62,20 @@ describe('ChartContainer', () => {
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).toContain('Download as');
+		expect(
+			Array.from(captureElement.querySelectorAll('button')).some(
+				(b) => b.textContent?.trim() === 'Download'
+			)
+		).toBe(true);
+	});
+
+	it('should show separate data and image buttons when exportButtonsVariant is separate', async () => {
+		const { container } = render(ChartContainer, {
+			props: { imageDownloadButton: true, exportButtonsVariant: 'separate' }
+		});
+
+		const captureElement = container.querySelector('#captureElement');
+		expect(captureElement?.textContent).toContain('Download as');
 	});
 
 	it('should hide export buttons when showExport is false', async () => {
@@ -72,7 +85,11 @@ describe('ChartContainer', () => {
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).not.toContain('Download as');
+		expect(
+			Array.from(captureElement.querySelectorAll('button')).some(
+				(b) => b.textContent?.trim() === 'Download'
+			)
+		).toBe(false);
 	});
 
 	it('should render note when provided', async () => {

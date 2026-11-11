@@ -110,6 +110,11 @@
 		 */
 		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
 		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
+		/**
 		 * Tailwind class to set chart area height
 		 */
 		chartHeight?: string;
@@ -163,6 +168,7 @@
 		filename = '',
 		data = undefined,
 		imageDownloadButton = true,
+		exportButtonsVariant = 'standard',
 		chartHeight = 'h-60',
 		overrideClass = '',
 		chartWidth = 'w-full',
@@ -256,6 +262,7 @@
 		{dataDownloadButton}
 		{imageDownloadButton}
 		{columnMapping}
+		variant={exportButtonsVariant}
 	/>
 {/snippet}
 

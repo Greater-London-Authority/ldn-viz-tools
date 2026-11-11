@@ -12,9 +12,10 @@ const demoData = [
 // Decode a `data:application/csv;base64,...` or `data:application/json;base64,...` URL.
 const decodeDataUrl = (dataUrl: string) => window.atob(dataUrl.split(',')[1]);
 
-describe('ExportButtons', () => {
+describe('ExportButtons (separate)', () => {
 	it('renders the data download button when dataDownloadButton is truthy and dataForDownload is defined', async () => {
 		const { container } = render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: true,
@@ -26,6 +27,7 @@ describe('ExportButtons', () => {
 
 	it('hides the data download button when dataForDownload is undefined, even if dataDownloadButton is truthy', async () => {
 		const { container } = render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: true,
@@ -37,6 +39,7 @@ describe('ExportButtons', () => {
 
 	it('passes formats={["CSV", "JSON"]} to DataDownloadButton when dataDownloadButton === true', async () => {
 		render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: true,
@@ -51,6 +54,7 @@ describe('ExportButtons', () => {
 
 	it('passes a custom formats array to DataDownloadButton unchanged', async () => {
 		render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: ['CSV'],
@@ -65,6 +69,7 @@ describe('ExportButtons', () => {
 
 	it('renders the image download button unconditionally, regardless of dataForDownload', async () => {
 		const { container } = render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
@@ -76,6 +81,7 @@ describe('ExportButtons', () => {
 
 	it('passes formats={["PNG", "SVG"]} to ImageDownloadButton when imageDownloadButton === true', async () => {
 		render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
@@ -90,6 +96,7 @@ describe('ExportButtons', () => {
 
 	it('passes a custom formats array to ImageDownloadButton unchanged', async () => {
 		render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
@@ -104,6 +111,7 @@ describe('ExportButtons', () => {
 
 	it('hides the image download button when imageDownloadButton === false', async () => {
 		const { container } = render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
 			dataDownloadButton: false,
@@ -115,6 +123,7 @@ describe('ExportButtons', () => {
 
 	it('forwards filename to DataDownloadButton unchanged', async () => {
 		render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: ['CSV'],
@@ -143,6 +152,7 @@ describe('ExportButtons', () => {
 
 	it('forwards columnMapping to DataDownloadButton unchanged', async () => {
 		render(ExportButtons, {
+			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
 			dataDownloadButton: ['CSV'],
@@ -168,5 +178,87 @@ describe('ExportButtons', () => {
 
 		const csvContent = decodeDataUrl(anchors[0].getAttribute('href')!);
 		expect(csvContent.split('\n')[0]).toBe('Date,Amount');
+	});
+});
+
+describe('ExportButtons (compact and standard)', () => {
+	it('renders one Download button with a text label by default', async () => {
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
+			dataForDownload: demoData,
+			dataDownloadButton: true,
+			imageDownloadButton: true
+		});
+
+		const button = page.getByRole('button', { name: 'Download' });
+		await expect.element(button).toBeInTheDocument();
+		expect(button.element().textContent?.trim()).toBe('Download');
+		expect(page.getByRole('button', { name: /Download as/ }).query()).toBeNull();
+	});
+
+	it('renders an icon-only Download button when variant is compact', async () => {
+		render(ExportButtons, {
+			variant: 'compact',
+			elementToCapture: document.createElement('div'),
+			dataForDownload: demoData,
+			dataDownloadButton: true,
+			imageDownloadButton: true
+		});
+
+		const button = page.getByRole('button', { name: 'Download' });
+		await expect.element(button).toBeInTheDocument();
+		expect(button.element().textContent?.trim()).toBe('');
+	});
+
+	it('lists the formats passed in dataDownloadButton and imageDownloadButton', async () => {
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
+			dataForDownload: demoData,
+			dataDownloadButton: ['CSV'],
+			imageDownloadButton: ['PNG']
+		});
+
+		await page.getByRole('button', { name: 'Download' }).click();
+
+		await expect.element(page.getByRole('menuitem', { name: /CSV/ })).toBeInTheDocument();
+		await expect.element(page.getByRole('menuitem', { name: /PNG/ })).toBeInTheDocument();
+		expect(page.getByRole('menuitem', { name: /JSON/ }).query()).toBeNull();
+		expect(page.getByRole('menuitem', { name: /SVG/ }).query()).toBeNull();
+	});
+
+	it('leaves out the data group when dataForDownload is undefined', async () => {
+		render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
+			dataForDownload: undefined,
+			dataDownloadButton: true,
+			imageDownloadButton: true
+		});
+
+		await page.getByRole('button', { name: 'Download' }).click();
+
+		await expect.element(page.getByRole('menuitem', { name: /PNG/ })).toBeInTheDocument();
+		expect(page.getByRole('menuitem', { name: /CSV/ }).query()).toBeNull();
+	});
+
+	it('renders nothing when no format is offered', async () => {
+		const { container } = render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
+			dataForDownload: demoData,
+			dataDownloadButton: false,
+			imageDownloadButton: false
+		});
+
+		expect(container.querySelector('button')).toBeNull();
+	});
+
+	it('marks the controls with data-capture-ignore', async () => {
+		const { container } = render(ExportButtons, {
+			elementToCapture: document.createElement('div'),
+			dataForDownload: demoData,
+			dataDownloadButton: true,
+			imageDownloadButton: true
+		});
+
+		expect(container.querySelector('[data-capture-ignore] button')).not.toBeNull();
 	});
 });

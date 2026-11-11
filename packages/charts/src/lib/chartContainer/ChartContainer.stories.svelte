@@ -367,7 +367,7 @@ It can also be used to add liks.
 </Story>
 
 <!--
-	Both download buttons can be hidden by setting `dataDownloadButton={false}` and `imageDownloadButton={false}`.
+	The download button can be hidden by setting `dataDownloadButton={false}` and `imageDownloadButton={false}`.
 -->
 <Story name="No download buttons">
 	{#snippet template(args)}
@@ -412,6 +412,33 @@ It can also be used to add liks.
 		>
 			{@render placeholderChart()}
 		</ChartContainer>
+	{/snippet}
+</Story>
+
+<!--
+	`exportButtonsVariant` sets how the download controls are shown: a button with the text "Download" (`standard`, the default),
+	an icon (`compact`), or separate data and image buttons (`separate`).
+-->
+<Story name="Download button variants">
+	{#snippet template(args)}
+		<div class="flex flex-col gap-8">
+			{#each ['compact', 'standard', 'separate'] as const as variant (variant)}
+				<ChartContainer
+					{...args}
+					id={`variant-${variant}`}
+					title={`exportButtonsVariant="${variant}"`}
+					source="GLA city intelligence"
+					data={[
+						{ Month: '2015-01-01', Value: 53623.9 },
+						{ Month: '2015-02-01', Value: 61816.0 }
+					]}
+					exportButtonsVariant={variant}
+					description="A description of the chart."
+				>
+					{@render placeholderChart()}
+				</ChartContainer>
+			{/each}
+		</div>
 	{/snippet}
 </Story>
 

@@ -114,6 +114,11 @@
 		 *
 		 */
 		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
 		filename?: string;
 		/**
 		 * Tailwind class to set table area height
@@ -151,6 +156,7 @@
 		dataDownloadButton = true,
 		data = undefined,
 		imageDownloadButton = ['PNG'],
+		exportButtonsVariant = 'standard',
 		filename = '',
 		tableHeight = 'h-auto',
 		overrideClass = '',
@@ -273,6 +279,7 @@
 			{dataDownloadButton}
 			{imageDownloadButton}
 			{filename}
+			variant={exportButtonsVariant}
 		/>
 	{/if}
 {/snippet}

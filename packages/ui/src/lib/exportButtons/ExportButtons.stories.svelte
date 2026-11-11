@@ -4,10 +4,12 @@
 	import ExportButtons from './ExportButtons.svelte';
 
 	/**
-	 * `ExportButtons` — a trailing group of download controls: a data-download button
-	 * (CSV / JSON) and an image-download button (PNG / SVG). It composes the shared
-	 * `DataDownloadButton` and `ImageDownloadButton`, so any titled container (`Card`,
-	 * `ChartContainer`, `TableContainer`) can offer the same export affordance.
+	 * `ExportButtons` — the download controls for data (CSV / JSON) and an image (PNG / SVG),
+	 * so any titled container (`Card`, `ChartContainer`, `TableContainer`) can offer the same export affordance.
+	 *
+	 * `variant` sets the density. `standard` (the default) is one `DownloadButton` with the text "Download",
+	 * `compact` is one icon-only `DownloadButton`, and `separate` is a
+	 * `DataDownloadButton` and an `ImageDownloadButton` side by side.
 	 *
 	 * Pass the DOM node to capture for the image via `elementToCapture` — it works for
 	 * any element (a chart's SVG, a table wrapper, a card body), not only charts.
@@ -16,7 +18,10 @@
 	const { Story } = defineMeta({
 		title: 'Ui/Components/ExportButtons',
 		component: ExportButtons,
-		tags: ['autodocs']
+		tags: ['autodocs'],
+		argTypes: {
+			variant: { options: ['compact', 'standard', 'separate'], control: { type: 'radio' } }
+		}
 	});
 </script>
 
@@ -31,11 +36,32 @@
 	let bothNode: HTMLDivElement = $state() as HTMLDivElement;
 	let restrictedNode: HTMLDivElement = $state() as HTMLDivElement;
 	let noDataNode: HTMLDivElement = $state() as HTMLDivElement;
+	let variantsNode: HTMLDivElement = $state() as HTMLDivElement;
 </script>
 
 {#snippet placeholderChart()}
 	<div class="sr-only">Example image holder - hidden so as not to present misleading layout</div>
 {/snippet}
+
+<!-- The three variants, from most to least compact. -->
+<Story name="Variants">
+	{#snippet template()}
+		<div bind:this={variantsNode}>
+			{@render placeholderChart()}
+		</div>
+		<div class="flex flex-col items-start gap-4">
+			{#each ['compact', 'standard', 'separate'] as const as variant (variant)}
+				<ExportButtons
+					{variant}
+					elementToCapture={variantsNode}
+					dataForDownload={demoData}
+					dataDownloadButton={true}
+					imageDownloadButton={true}
+				/>
+			{/each}
+		</div>
+	{/snippet}
+</Story>
 
 <Story name="Only data download enabled">
 	{#snippet template()}
@@ -85,7 +111,7 @@
 
 <!--
 	Here the data format is restricted to CSV and the image	format is restricted to PNG.
-	As there is only a single format, the buttons render as a normal button (rather than a [MultipleActionButton](./?path=/docs/docs/ui-components-buttons-multipleactionbutton--documentation)).
+	With `variant="separate"`, each button has a single format, so it renders as a normal button (rather than a [MultipleActionButton](./?path=/docs/docs/ui-components-buttons-multipleactionbutton--documentation)).
 -->
 <Story name="Restricted choice of formats">
 	{#snippet template()}
@@ -99,23 +125,40 @@
 			imageDownloadButton={['PNG']}
 			filename="my-chart-export"
 		/>
+		<ExportButtons
+			variant="separate"
+			elementToCapture={restrictedNode}
+			dataForDownload={demoData}
+			dataDownloadButton={['CSV']}
+			imageDownloadButton={['PNG']}
+			filename="my-chart-export"
+		/>
 	{/snippet}
 </Story>
 
 <!--
-	The data-download button only renders when `dataForDownload` is truthy.
-	When `dataForDownload={undefined}`, the data download button is not rendered.
+	Data downloads are only offered when `dataForDownload` is truthy.
+	When `dataForDownload={undefined}`, the Download menu has no Data group (open it to see), and with `variant="separate"` the data download button is not rendered.
 -->
-<Story name="Data button hidden when no data">
+<Story name="Data downloads hidden when no data">
 	{#snippet template()}
 		<div bind:this={noDataNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportButtons
-			elementToCapture={noDataNode}
-			dataForDownload={undefined}
-			dataDownloadButton={true}
-			imageDownloadButton={true}
-		/>
+		<div class="flex flex-col items-start gap-4">
+			<ExportButtons
+				elementToCapture={noDataNode}
+				dataForDownload={undefined}
+				dataDownloadButton={true}
+				imageDownloadButton={true}
+			/>
+			<ExportButtons
+				variant="separate"
+				elementToCapture={noDataNode}
+				dataForDownload={undefined}
+				dataDownloadButton={true}
+				imageDownloadButton={true}
+			/>
+		</div>
 	{/snippet}
 </Story>

@@ -1,5 +1,6 @@
 <script lang="ts">
-	/* The `<ImageDownloadButton>` component renders a button which, when clicked on, downloads an image file showing either an `HTML` or `SVG` element and its children.
+	/**
+	 * The `<ImageDownloadButton>` component renders a button which, when clicked on, downloads an image file showing either an `HTML` or `SVG` element and its children.
 	 *
 	 * **Note**: This will not convert a non svg element into an svg, but will download an existing svg element as an svg file.
 	 *
@@ -8,6 +9,10 @@
 	 * To hide only part of an SVG, separate the content into two SVG elements, and superimpose them by
 	 * placing them inside a div and applying the classes `absolute inset-0 pointer-events-none` to the second.
 	 * You can then place the SVG that should be hidden into an SVG with the `data-capture-ignore` attribute applied.
+	 *
+	 * **Deprecated**: use [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead.
+	 * In a chart or table footer, `ExportButtons` with `variant="separate"` shows this button. It will be removed from the
+	 * package exports in the next major version.
 	 *
 	 * @component
 	 */
@@ -104,7 +109,7 @@
 	{options}
 	bind:state={selectedOption}
 	menuTitle="Select image format"
-	onClick={() => downloadImage(htmlNode, padding, format, filename, scaleFactor)}
+	onClick={() => downloadImage(htmlNode, padding, format as 'PNG' | 'SVG', filename, scaleFactor)}
 	{disabled}
 	{fullWidth}
 	{...restProps}

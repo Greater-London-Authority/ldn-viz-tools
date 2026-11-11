@@ -3,6 +3,11 @@
 	import type { ButtonProps } from '../../button/types';
 	/**
 	 * The `<DataDownloadButton>` component renders a button which, when clicked on, triggers the download of a file containing data that was passed as a prop.
+	 *
+	 * **Deprecated**: use [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead.
+	 * In a chart or table footer, `ExportButtons` with `variant="separate"` shows this button. It will be removed from the
+	 * package exports in the next major version.
+	 *
 	 * @component
 	 */
 

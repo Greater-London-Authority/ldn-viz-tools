@@ -4,6 +4,7 @@
  */
 
 import { toPng } from 'html-to-image';
+import { toSVG } from './plotToSvg';
 
 /**
  * Finds the largest child SVG element within an HTML element.
@@ -160,6 +161,17 @@ export const serializeSvg = (svgNode: SVGElement): Promise<string> => {
 };
 
 /**
+ * Serializes an element containing one or more Observable Plot figures to a data URL.
+ *
+ * @param node - The element containing the Observable Plot figures
+ * @returns A promise that resolves to a data URL string
+ */
+export const serializeObservablePlot = async (node: HTMLElement): Promise<string> => {
+	const svgString = await toSVG(node);
+	return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgString)}`;
+};
+
+/**
  * Triggers a download from a data URL.
  *
  * @param url - The data URL to download
@@ -207,6 +219,22 @@ export const downloadImage = async (
 	};
 
 	if (format === 'SVG') {
+		// Observable Plot charts render as <figure> elements containing the SVG and an HTML legend.
+		// These go through toSVG, which composites the legend and the plot into a single SVG.
+		const isFigure = htmlNode.nodeName === 'FIGURE';
+		const hasFigure = htmlNode.querySelector('figure') !== null;
+		const childDivs = Array.from(htmlNode.querySelectorAll(':scope > div'));
+		const hasGrandchildFigures = childDivs.some((div) => div.querySelector('figure') !== null);
+
+		if (isFigure || hasFigure || hasGrandchildFigures) {
+			serializeObservablePlot(htmlNode as HTMLElement)
+				.then((dataUrl: string) => downloadFromURL(dataUrl, filename, format))
+				.catch((error: any) => {
+					console.error('Error serializing SVG:', error);
+				});
+			return;
+		}
+
 		const svgNode = findNearestChildSvg(htmlNode);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions

@@ -66,6 +66,11 @@
 		 */
 		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
 		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
+		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
 		filename?: string;

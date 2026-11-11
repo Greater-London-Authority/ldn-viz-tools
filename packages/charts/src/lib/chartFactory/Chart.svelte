@@ -77,6 +77,12 @@
 		 *
 		 */
 		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+
+		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
 	};
 
 	let {
@@ -91,7 +97,8 @@
 		options,
 		controls,
 		dataDownloadButton,
-		imageDownloadButton
+		imageDownloadButton,
+		exportButtonsVariant
 	}: ChartProps = $props();
 
 	const sortByField = (data: ChartDataRow[], fieldName: string) => {
@@ -182,6 +189,7 @@
 			{byline}
 			{dataDownloadButton}
 			{imageDownloadButton}
+			{exportButtonsVariant}
 			{note}
 			id={dataset}
 			{columnMapping}
@@ -199,6 +207,7 @@
 		{byline}
 		{dataDownloadButton}
 		{imageDownloadButton}
+		{exportButtonsVariant}
 		{note}
 		id={dataset}
 		{columnMapping}
