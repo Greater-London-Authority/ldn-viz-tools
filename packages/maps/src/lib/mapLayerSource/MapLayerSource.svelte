@@ -23,7 +23,7 @@
 		 * A unique ID to reference the source in the map. Provided to slotted
 		 * component as context via the key `mapLayerSourceId`.
 		 */
-		id: any;
+		id: string;
 		/**
 		 * A MapLibre source specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/sources/).
 		 * Provided to slotted component as context via the key `mapLayerSourceSpec`.

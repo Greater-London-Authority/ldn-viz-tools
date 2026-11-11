@@ -59,8 +59,14 @@
 	{disabled}
 	{optional}
 	{customOverlay}
+	isGroup
 >
-	<div class="flex">
+	<div
+		role="radiogroup"
+		aria-labelledby={label ? `${id}-label` : undefined}
+		aria-describedby={errorId ?? descriptionId}
+		class="flex"
+	>
 		{#if options.length}
 			{#each options as option}
 				<RadioButtonSolid
@@ -70,7 +76,7 @@
 					bind:selectedId
 					{name}
 					icon={option.icon}
-					rawIcon={option.rawIcon}
+					RawIcon={option.rawIcon}
 					iconPlacement={option.iconPlacement}
 				/>
 			{/each}

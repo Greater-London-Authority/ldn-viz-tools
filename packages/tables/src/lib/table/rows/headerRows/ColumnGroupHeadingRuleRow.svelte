@@ -1,8 +1,13 @@
 <script lang="ts">
 	import { sum } from 'd3-array';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import Scaffolding from '../Scaffolding.svelte';
 
-	let { table } = $props();
+	interface Props {
+		table: TableState;
+	}
+
+	let { table }: Props = $props();
 
 	let cellWidths = $derived(table.columnSpec.map((c: { computedWidth: any }) => c.computedWidth));
 
@@ -20,7 +25,7 @@
 		{#if table.colGroups && table.colGroups.length > 0}
 			{#each table.colGroups || [] as colGroup (colGroup)}
 				<div
-					class="border-b border-color-ui-border-primary"
+					class="border-b border-color-border"
 					style:width={getWidth(colGroup)}
 					style:height="1px"
 				></div>
@@ -30,11 +35,7 @@
 				{/if}
 			{/each}
 		{:else}
-			<div
-				class="border-b border-color-ui-border-primary"
-				style:width="100%"
-				style:height="1px"
-			></div>
+			<div class="border-b border-color-border" style:width="100%" style:height="1px"></div>
 		{/if}
 	{/snippet}
 </Scaffolding>

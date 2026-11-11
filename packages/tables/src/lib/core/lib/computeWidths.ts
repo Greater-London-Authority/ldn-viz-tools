@@ -1,8 +1,12 @@
 import { sum } from 'd3-array';
+import type { ColGroup, ColSpec } from './types';
 
-// TODO: call when grouping changes
+/**
+ * Column spec with computed width added.
+ */
+export type ColSpecWithWidth = ColSpec & { computedWidth: number };
 
-const parseWidth = (width: number | string) => {
+const parseWidth = (width: number | string): number => {
 	if (typeof width === 'number') {
 		return width;
 	} else {
@@ -10,39 +14,47 @@ const parseWidth = (width: number | string) => {
 	}
 };
 
-export const computeWidths = (table: any, width: number) => {
-	let availableWidth = width;
+/**
+ * Computes column widths based on available space.
+ * Returns a new array of column specs with computedWidth set.
+ */
+export const computeColumnWidths = (
+	columns: ColSpec[],
+	colGroups: ColGroup[],
+	colGroupGap: number,
+	totalWidth: number
+): ColSpecWithWidth[] => {
+	let availableWidth = totalWidth;
 
 	// subtract gaps
-	const gapWidth = table.gapWidth || 0;
-	const numColGroups = (table.colGroups || []).length;
-	const totalGapWidth = gapWidth * numColGroups;
-
+	const numColGroups = (colGroups || []).length;
+	const totalGapWidth = (colGroupGap ?? 0) * numColGroups;
 	availableWidth -= totalGapWidth;
 
 	// subtract space for group controls
-	availableWidth -= (table.colGroups || []).length * (table.colGroupGap ?? 0);
+	availableWidth -= (colGroups || []).length * (colGroupGap ?? 0);
 
 	// subtract fixed widths
-	const absoluteWidths = table.columnSpec
-		.filter((c: any) => c.width !== undefined)
-		.map((d: any) => parseWidth(d.width)); // TODO: remove 'px' if necessary?
+	const absoluteWidths = columns
+		.filter((c) => c.width !== undefined)
+		.map((c) => parseWidth(c.width!));
 	availableWidth -= sum(absoluteWidths);
 
 	// determine scale factor
-	const relativeWidths = table.columnSpec
-		.filter((c: any) => c.width === undefined)
-		.map((c: any) => c.relativeWidth || 1)
-		.filter((d: any) => d);
+	const relativeWidths = columns
+		.filter((c) => c.width === undefined)
+		.map((c) => c.relativeWidth || 1);
 	const totalRelWidth = sum(relativeWidths);
 
-	// set widths
-	for (const col of table.columnSpec) {
-		if (col.width) {
-			col.computedWidth = parseWidth(col.width);
-		} else {
-			const relativeWidth = col.relativeWidth ?? 1;
-			col.computedWidth = Math.floor(availableWidth * (relativeWidth / totalRelWidth));
-		}
-	}
+	// compute widths for each column
+	return columns.map((col) => {
+		const computedWidth = col.width
+			? parseWidth(col.width)
+			: Math.floor(availableWidth * ((col.relativeWidth ?? 1) / totalRelWidth));
+
+		return {
+			...col,
+			computedWidth
+		};
+	});
 };

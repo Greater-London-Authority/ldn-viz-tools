@@ -1,5 +1,155 @@
 # ldn-viz-tools-charts
 
+## 10.0.1
+
+### Patch Changes
+
+- a90116e: CHANGED: several chart factory functions are now exported (`chartFns`, `getDescription`, `getEndOfLineLabelMarks`)
+
+## 10.0.0
+
+### Major Changes
+
+- f0d016a: - CHANGED: requires `@ldn-viz/themes` 10, now a peer dependency, and its `index.css` (or `system.css`) loaded by the app. Chart text uses the product typeset with the `chart-*` usage aliases, and Observable Plot text reads the role custom properties.
+
+### Patch Changes
+
+- Updated dependencies [257b51d]
+- Updated dependencies [eaca94a]
+- Updated dependencies [f0d016a]
+  - @ldn-viz/themes@10.0.0
+  - @ldn-viz/ui@25.0.0
+
+## 9.5.0
+
+### Minor Changes
+
+- f07079f: CHANGED: enabe `autoDodgeLabels` for `lineChartWithForecasts`
+
+## 9.4.1
+
+### Patch Changes
+
+- 3c77293: FIXED: choropleth tooltips now open when they should
+
+## 9.4.0
+
+### Minor Changes
+
+- 362fc2c: CHANGED: use our own ColorLegend component in choropleths, rather than ObservablePlot default
+- e846d93: CHANGED: allow user to specify the color of areas with no associated data in choropleths rendered by `Chart`.
+
+## 9.3.0
+
+### Minor Changes
+
+- e9e2397: FIXED: The `ObservablePlot` component no longer re-renders the `controls` snippet when the `spec` is updated. Previously a slider control that updated the chart would be re-created when its value channged, preventing it from being smoothly adjusted.
+- d583a6c: ADDED: export `Chart` chart factory component.
+
+## 9.2.1
+
+### Patch Changes
+
+- 9e952e2: FIXED: correct swapped types for `ruleX`/`ruleY`
+- Updated dependencies [861cf62]
+- Updated dependencies [ff50fb5]
+- Updated dependencies [0e464ed]
+  - @ldn-viz/ui@24.3.0
+
+## 9.2.0
+
+### Minor Changes
+
+- 589906c: FIXED: correctly add dashed line style
+
+### Patch Changes
+
+- Updated dependencies [df7cd85]
+- Updated dependencies [7a8499d]
+- Updated dependencies [af4d3bd]
+- Updated dependencies [47c3895]
+- Updated dependencies [50f265c]
+  - @ldn-viz/ui@24.2.0
+
+## 9.1.0
+
+### Minor Changes
+
+- 5a76198: FIXED: `ObservablePlot` now passes `subtitle` (rather than `SubTitle`) to `ChartContainer`, fixing regression when prop was renamed
+- e013788: CHANGED: replaced many `any` types with tighter types
+- e0d5450: CHANGED: adjusted size of Observable Plot color legends
+
+### Patch Changes
+
+- Updated dependencies [e013788]
+  - @ldn-viz/ui@24.1.0
+
+## 9.0.0
+
+### Major Changes
+
+- 864fdfb: CHANGED: `ChartContainer` is now constructed using the `ChromeHeader` and `ChromeFooter` from `@ldn-viz/ui`.
+  CHANGED: `ChartContainer` now accepts `eyebrow`, `emphasis` (`primary`/`secondary`) and `hint`/`hintType`/`hintTitle` props
+  CHANGED: `ChartContainer` props have been renamed: `subtitle` replaces `subTitle`, and `description` replaces `chartDescription`
+  REMOVED: `ExportBtns` has been moved to `@ldn-viz/ui` and renamed to `ExportButtons`; its `chartToCapture` prop has been renamed to `elementToCapture`
+  REMOVED: `Title`/`Subtitlte`/`Footer` have been removed - use the `ChromeHeader` and `ChromeFooter` from `@ldn-viz/ui` instead.
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Minor Changes
+
+- a223a29: CHANGED: apply the `break-inside-avoid` class to the `ChartContainer` to avoid pagebreaks splitting it across pages when printed
+
+### Patch Changes
+
+- Updated dependencies [0e03ccc]
+- Updated dependencies [864fdfb]
+- Updated dependencies [0d7953b]
+- Updated dependencies [2633ae9]
+- Updated dependencies [2633ae9]
+- Updated dependencies [62ec2b9]
+- Updated dependencies [bddeccb]
+- Updated dependencies [6d20c4e]
+- Updated dependencies [3a6075a]
+- Updated dependencies [e1e3928]
+  - @ldn-viz/ui@24.0.0
+  - @ldn-viz/utils@4.0.0
+
+## 8.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Minor Changes
+
+- 638c76d: CHANGED: allow `columnMapping` prop to be supplied to `ChartContainer` or `ObservablePlot`
+- 8035407: CHANGED: apply styling to links in chart footers
+- b5ac9bb: CHANGED: downloaded images of `ObservablePlot` plots now include the legend
+- d73427a: FIXED: when an `ObservablePlot` image is downloaded as an SVG, the size of the SVG is now set correctly
+- 0c15080: CHANGED: `ObservablePlot` can now passes the `id` prop through to `ChartContainer`
+
+### Patch Changes
+
+- Updated dependencies [d73427a]
+- Updated dependencies [9269ac2]
+- Updated dependencies [ac203e1]
+  - @ldn-viz/ui@23.0.0
+  - @ldn-viz/utils@3.0.0
+
+## 7.1.0
+
+### Minor Changes
+
+- 6ffd5e2: CHANGED: allow HTML formatting to be used in chart title/subTitle/source/byline/note
+
+### Patch Changes
+
+- Updated dependencies [6c3607d]
+- Updated dependencies [8402081]
+- Updated dependencies [792b3f6]
+- Updated dependencies [2398df2]
+  - @ldn-viz/ui@22.0.0
+
 ## 7.0.0
 
 ### Major Changes

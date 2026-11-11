@@ -10,6 +10,11 @@
 	import InputWrapper from './InputWrapper.svelte';
 	import { type InputAsNonTextArea, type InputAsTextArea, type InputComponentProps } from './types';
 
+	/**
+	 * The `Input` component renders a labelled form input (or, if `type` is `textarea`, a `<textarea>`), with support for a `description`, `hint`, `error` message, and `optional`/required state.
+	 * The value can be reformatted on blur (for example, trimming whitespace) via the `format` prop.
+	 * @component
+	 */
 	let {
 		type = 'text',
 		inputmode = undefined,
@@ -59,8 +64,31 @@
 
 	let input: HTMLInputElement | HTMLTextAreaElement | undefined = $state(undefined);
 
-	// Svelte does not allow bind:type and bind:value simultaneously so this
-	// function acts as the input change handler.
+	// Svelte may apply `type="range"` before `min` and `max`, causing the
+	//  browser to clamp the value using the default min/max (0/100)
+	// before the correct min/max are applied; when they are applied the value
+	// is reclamped. For example, if a slider should have a range of 2025-2050
+	// and value of 2030, the value will first be clamped to 100 (by the default
+	// range 0-100), and then this will be clamped to 2025 (by the correct range
+	// 2025-2050).
+	// This effect re-applies the value immediately
+	// (Svelte would otherwise re-apply it only when it changes).
+	// I think this became an issue after https://github.com/sveltejs/svelte/pull/18345
+	$effect(() => {
+		if (type !== 'range' || !input) return;
+
+		// Read the bounds so this re-runs when they change.
+		void [nonTextAreaRestProps.min, nonTextAreaRestProps.max];
+
+		if (input.value !== `${value}`) {
+			input.value = `${value}`;
+		}
+	});
+
+	/**
+	 * Svelte does not allow bind:type and bind:value simultaneously so this
+	 * function acts as the input change handler.
+	 */
 	const formatAndUpdateValue = () => {
 		if (!format) {
 			return;
@@ -86,12 +114,12 @@
 	let inputClasses = $derived(
 		classNames(
 			'm-0',
-			error ? 'border-color-input-border-error' : '',
+			error ? 'border-color-interactive-error' : '',
 			disabled
-				? 'cursor-not-allowed text-color-input-label-disabled placeholder-color-input-label-disabled'
+				? 'cursor-not-allowed text-color-interactive-disabled placeholder-color-interactive-disabled'
 				: '',
 			type === 'range' ? 'form-range' : 'form-input',
-			'placeholder-color-input-placeholder'
+			'placeholder-color-text-muted'
 		)
 	);
 

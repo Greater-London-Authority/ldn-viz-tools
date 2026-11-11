@@ -1,5 +1,152 @@
 # ldn-viz-tools-ui
 
+## 25.3.0
+
+### Minor Changes
+
+- ba41cbd: CHANGED: `Toc` accepts a `topClass` prop
+
+## 25.2.0
+
+### Minor Changes
+
+- cb71a0c: CHANGED: `MarkdownLink` passes extra props to its `<a>` element
+
+## 25.1.0
+
+### Minor Changes
+
+- cefb966: ADDED: `MarkdownLink`. `MarkdownPre`, `MarkdownTable`, and `EnhancedImage` components
+- 08073c7: ADDED: `PageNav` component, which links to the previous and next pages in a sequence
+- a903c49: ADDED: `Toc` table of contents component
+
+### Patch Changes
+
+- 40eaa29: CHANGED: A left or right sidebar in AppShell sticks to the top of the viewport, so it stays in view while the content scrolls. The Close button in a vertical tab bar stays at the bottom of the screen while a page header is in view.
+- 40eaa29: CHANGED: A top or bottom sidebar in AppShell sticks to the edge of the viewport, so its tab bar or toggle stays on screen on a long page, and a footer after the AppShell pushes it along.
+- 40eaa29: CHANGED: AppShell pads its content on the side of a sidebar with tabs, so the tab bar no longer covers the edge of the content.
+- 2436d81: Moves the example layouts from the ui package to the Storybook app, under a new Example Layouts section, because the examples use the charts, maps and tables packages. Replaces the dashboard examples with four that use fictional data: a starter dashboard, an overview dashboard, a map application and a multi-page data explorer. Adds example layouts for a report and a documentation page, and rewrites the typography sample.
+- 47f9c91: FIXED: `CheckboxSolid`, `RadioButtonSolid` and `TabLabel` now use `interactive-secondary-muted` for unselected items, selected `CheckboxSolid` and `RadioButtonSolid` labels are semibold, `NavigationMenu`'s active item is semibold, and the `Sidebar` close button's text darkens on hover.
+- d955276: FIXED: `Modal` moves focus from the trigger to the dialog when it opens, so a screen reader reads its title and description. The `title` snippet is now required, because it names the dialog. The description is only rendered when a `description` snippet is passed. The title is set in `.title-sm` to match Figma.
+- 392c1e1: FIXED: `PlacardButton` shows its hover colours on keyboard focus, and a `newWindow` link uses the `ArrowTopRightOnSquare` icon and tells screen readers it opens in a new tab. The footer text is set in `.label-md`.
+- 40eaa29: FIXED: A Sidebar with tabs shows its first tab when no tab is selected, as Tabs does.
+- Updated dependencies [47f9c91]
+  - @ldn-viz/themes@10.0.2
+
+## 25.0.0
+
+### Major Changes
+
+- f0d016a: - CHANGED: requires `@ldn-viz/themes` 10, now a peer dependency, and its `index.css` (or `system.css`) loaded by the app. Components set type with v4 role classes and usage aliases (`label-md`, `button-label`, `dashboard-main-title`), typesets with `typeset-product` and `typeset-longform`, and flow with `flow-standard` and `gap-flow`. See the themes `MIGRATION.md`.
+  - CHANGED: `Card` spaces its header, content and footer with `gap-flow`: 8px in a standard flow context, as before, and 4px in a compact one.
+  - CHANGED: the parts of a title group have no space between them, in `TitleGroup` and in `DashboardTitle`, `DashboardSectionTitle`, `PageTitle` and `PageSectionBreak`.
+  - CHANGED: `DashboardTitle` and `DashboardSectionTitle` use the dashboard usage aliases, as Figma does: the section title is `headline-sm`, and the subtitles are `subhead-md` and `subhead-sm`. `PageSectionBreak` has a `size` prop (`sm`, `md`, `lg`) that sets `title-{size}` and `subtitle-{size}`; the default, `lg`, replaces `headline-lg`.
+  - CHANGED: `Button` `lg` (not square) is 48px tall, down from 64px. The positive, negative and caution variants use `text-color-inverse-text`.
+  - CHANGED: `Select`, `Input` and the other form controls are 40px tall, to line up with the default `Button`. `Select` options are 40px, with the control's padding.
+  - CHANGED: `ColorLegend`'s title is `caption-sm` semi-bold and its end labels `chart-tick-sm`.
+  - CHANGED: raised components (`Callout`, `Modal`, `Popover`, `Tooltip`, `Toast` and others) use the `elevation-*` classes instead of Tailwind's `shadow-*`, at the same shadows. `LoginForm` uses `bg-color-surface` instead of `bg-white`.
+  - FIXED: `AppShell`'s main area can shrink below the width of its widest content.
+
+### Patch Changes
+
+- Updated dependencies [257b51d]
+- Updated dependencies [eaca94a]
+  - @ldn-viz/themes@10.0.0
+
+## 24.4.0
+
+### Minor Changes
+
+- 5117a14: FIXED: Input no longer incorrectly clamps value when `type="range"`
+
+## 24.3.1
+
+### Patch Changes
+
+- d39b003: FIXED: `AppShell` sidebar placement is no longer lost during HMR or client-side navigation
+
+## 24.3.0
+
+### Minor Changes
+
+- 861cf62: CHANGED: Apply correct CSS variables to `form-label` class
+- 0e464ed: CHANGED: `Card` now accepts optional `header` and `footer` snippets to replace defaults
+
+### Patch Changes
+
+- ff50fb5: FIXED: if no name is provided to `RadioButtonGroupSolid`, generate a random id rather than falling back on empty string (if a page included two `RadioButtonGroupSolid` with no `name` then clicking the second would scroll to the first)
+
+## 24.2.0
+
+### Minor Changes
+
+- df7cd85: ADDED: `Metric` component — a single figure with reference/context value and change.
+- 7a8499d: ADDED: `DashboardTitle`, `SectionTitle`, `PageTitle` and `SectionBreak` components.
+- af4d3bd: CHANGED: `Sidebar` now has a `slim` variant
+- 47c3895: Extends interactive-primary token set with -text to address color contrast issues in dark mode.
+- 50f265c: - CHANGED: toaster now interprets a `timeToLive` of `0` as infinity (as it does for negative values), rather than DEFAULT_TIME_TO_LIVE
+  - CHANGED: `classNames` now trims whitespace within a single argument
+  - FIXED: `NavigationMenu` can now return matches for a item with no href (if there is no more specific match)
+
+## 24.1.0
+
+### Minor Changes
+
+- e013788: CHANGED: replaced many `any` types with tighter types
+
+## 24.0.0
+
+### Major Changes
+
+- 864fdfb: ADDED: `ExportButtons` (moved from `@ldn-viz/charts`); its `chartToCapture` prop has been renamed to `elementToCapture`
+
+  ADDED: `Card`, `ChromeHeader`, `ChromeFooter` and `TitleGroup`
+
+- 3a6075a: CHANGED: refactored state managment
+  FIXED: fix bug in bar length in `BarCell`
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Minor Changes
+
+- 0e03ccc: FIXED: `MultipleActionButton` is disabled if it has no options
+- 0d7953b: FIXED: highlighted value marker in `ColorLegend` now changes color based on theme, so remains visible in dark mode
+- 2633ae9: FIXED: rawIcons now work again in `RadioButtonSolid` and `Tab`
+- 2633ae9: FIXED: updated class name applied to highlighted location in `GeocoderSuggestion`
+- 62ec2b9: FIXED: the error modal in `Geolocator` no longer has a "More info" trigger rendered
+- bddeccb: CHANGED: made `open` prop optional for `Overlay`/`Popover`/`Tooltip`
+- 6d20c4e: FIXED: replace various uses of old color tokens
+
+## 23.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Minor Changes
+
+- d73427a: FIXED: when an `ObservablePlot` image is downloaded as an SVG, the size of the SVG is now set correctly
+- ac203e1: CHANGED: changes to `ImageDownloadButton` needed for downloaded images of `ObservablePlot` plots to include the legend
+
+## 22.1.0
+
+### Minor Changes
+
+- e3ca40c: ADDED: Breadcrumbs component
+- 6d6d424: CHANGED: add `alwaysShowcolorChip` prop that allows color chips to be displayed in `LayerControl` when color editing is disabled
+- 01c499c: CHANGED: added the `disableHoverableContent` prop to `Tooltip` component, allowing tooltips to be kept open as cursor moves from the tooltip trigger to its content.
+
+## 22.0.0
+
+### Major Changes
+
+- 6c3607d: CHANGED: `HandleRedirectFromAuth` now receives `goto` as a prop rather than importing it from `'$app/navigation'`
+- 8402081: FIXED: in the `ColorLegend` component, the tick labels are now formatted with the default font-fmaily for the page, rather than `sans-serif`
+
+### Minor Changes
+
+- 792b3f6: CHANGED: ThemeSwitcher icon now has a title tooltip expalining what it does before it is clicked on.
+- 2398df2: FIXED: don't throw a ReferenceError when checking whether CookieControl is undefined if it is undefined
+
 ## 21.2.0
 
 ### Minor Changes
@@ -744,7 +891,7 @@
 ### Major Changes
 
 - 3c90996: CHANGED - switch from using `@rgossiaux/svelte-heroicons` to using `@steeze-ui/heroicons` as an icon library
-- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `rawIcon` prop)
+- 3c90996: CHANGED - `TabbedSidebarWrapper`'s `tab` prop now includes `@steeze-ui/heroicons` `IconThemeSource` objects as the `icon` prop (or raw Svelte components as the `RawIcon` prop)
 
 ### Minor Changes
 

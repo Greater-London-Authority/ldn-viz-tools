@@ -24,7 +24,7 @@
 		width = 'standard',
 		position = 'absolute',
 		theme = 'dark',
-		placement = 'right',
+		placement = undefined,
 		tabs = [],
 		selectedTabId = $bindable(undefined),
 		state = $bindable(),
@@ -40,18 +40,29 @@
 	}: SidebarProps = $props();
 
 	const wrapperClasses = $derived(`${position} z-30 ${theme}`);
-	const sidebarClasses = $derived(`flex flex-col grow bg-color-container-level-1 pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
+	const sidebarClasses = $derived(`flex flex-col grow bg-color-surface-muted pb-6 ${classes}`); // p-6 pad on container or elements (overflow position)
 
 	// expose internal state to parent component
 	state = sidebarState;
 
-	// If a context provides a reactive placement use that
-	// svelte-ignore state_referenced_locally
-	sidebarState.placement = placement;
+	// An explicit `placement` prop overrides the AppShell's breakpoint resolution;
+	// if it is not provided the AppShell's value will not be overridden.
+	sidebarState.overridePlacement(() => placement);
 
 	// set a store containing the width of the sidebar (for use in app shell and elsewhere up the tree)
 	// svelte-ignore state_referenced_locally
 	sidebarState.width = width;
+
+	$effect.pre(() => {
+		sidebarState.hasTabs = tabs.length > 0;
+	});
+
+	// Show the first tab unless a tab that exists is selected, as `<Tabs>` does.
+	$effect.pre(() => {
+		if (tabs.length && !tabs.some((tab) => tab.id === selectedTabId)) {
+			selectedTabId = tabs[0].id;
+		}
+	});
 
 	let component = $derived(tabs.find((tab) => tab.id === selectedTabId)?.content);
 	let placementClasses = $derived(placementLookup[sidebarState.placement]);
@@ -77,7 +88,7 @@
 		let classes = keylineLookup[placement];
 		if (tabs) {
 			if (placement === 'left') {
-				classes = `border-r border-color-ui-border-secondary`;
+				classes = `border-r border-color-border-wash`;
 			} else {
 				classes = `!border-0`;
 			}
@@ -91,7 +102,7 @@
 	{#if tabs.length}
 		<div
 			class={classNames(
-				'absolute bg-color-container-level-0',
+				'absolute bg-color-surface',
 				tabPlacementClasses,
 				tabKeylineClasses(sidebarState.placement, sidebarState.isOpen)
 			)}
@@ -137,7 +148,7 @@
 					<!-- usually contains a `<SidebarFooter>` -->
 					{@render footer?.()}
 				{:else}
-					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text-primary">
+					<div class="flex h-full flex-col overflow-y-auto px-6 pt-6 text-color-text">
 						{#if header}
 							<div class="pb-4">
 								<!-- typically contains a `<SidebarHeader>` -->
@@ -151,7 +162,7 @@
 									<TabPanel
 										tabPanelId={`${tab.id}-panel`}
 										tabId={tab.id}
-										class="space-y-4 bg-color-container-level-1"
+										class="space-y-4 bg-color-surface-muted"
 									>
 										{@const SvelteComponent = component}
 										<SvelteComponent />

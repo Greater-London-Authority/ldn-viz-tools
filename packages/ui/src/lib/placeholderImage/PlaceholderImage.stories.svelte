@@ -3,10 +3,8 @@
 	import PlaceholderImage from './PlaceholderImage.svelte';
 
 	/**
-	 * The `<PlaceholderImage>` component shows a generic placeholder image as an
-	 * `<svg>` element. This can be used in place of a real image or whilst one
-	 * is loading. This avoids the layout of a page or widget changing suddenly
-	 * due to a slow or user initiated image loads.
+	 * The `<PlaceholderImage>` component fills its container with a muted panel and a photo icon, to stand in for an image that hasn't loaded or isn't available yet.
+	 * It is decorative: the icon is hidden from screen readers, so give the surrounding content any text a reader needs.
 	 *
 	 * **Alternatives**: if you need a placeholder that can display a message, consider using the [NonIdealState](./?path=/docs/ui-components-nonidealstate--documentation) component.
 	 */

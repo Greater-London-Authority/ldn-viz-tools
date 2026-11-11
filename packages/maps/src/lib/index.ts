@@ -11,6 +11,7 @@ export { default as MapControlPan } from './mapControlPan/MapControlPan.svelte';
 export { default as MapControlRefresh } from './mapControlRefresh/MapControlRefresh.svelte';
 export { default as MapControlZoom } from './mapControlZoom/MapControlZoom.svelte';
 export { default as MapLegend } from './mapLegend/MapLegend.svelte';
+export { default as MapPointSearch } from './mapPointSearch/MapPointSearch.svelte';
 
 // Location Search
 export { default as MapControlGeocoder } from './mapControlLocationSearch/MapControlGeocoder.svelte';
@@ -48,6 +49,11 @@ export { default as BoroughsContextLayer } from './mapContextLayers/boroughsCont
 
 // Deck.gl
 export { default as MapDeckOverlay } from './mapDeckOverlay/MapDeckOverlay.svelte';
+
+export * from './mapDeckLayers/canvasIconLayer/canvasIconLayer';
+export * from './mapDeckLayers/clusterLayer/index';
+export * from './mapDeckLayers/multiClusterLayer/multiClusterLayer';
+export * from './mapDeckLayers/nonOverlappingLayer/nonOverlappingGlyphLayer';
 
 // Drawing
 export { default as MapDraw } from './mapDraw/MapDraw.svelte';

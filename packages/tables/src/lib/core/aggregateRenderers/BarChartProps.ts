@@ -9,8 +9,9 @@ export interface BarChartProps {
 	color: string | ((val: any) => string);
 	/**
 	 * Categorical scale used to determine horizontal position of bar.
+	 * Optional: when omitted, bars are positioned by descending frequency.
 	 */
-	posScale: any;
+	posScale?: any;
 	/**
 	 * Width of cell (in pixels).
 	 */

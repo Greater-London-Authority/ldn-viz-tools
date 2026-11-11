@@ -36,7 +36,7 @@
 		 */
 		ariaLabel: string;
 
-		onChange?: any;
+		onChange?: (id: Tab['id']) => void;
 	}
 
 	let {

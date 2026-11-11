@@ -4,7 +4,7 @@
 
 <MapMarkerPlacement placement="center">
 	<div
-		class="w-fit border border-color-ui-border-secondary bg-color-container-level-0 p-4 text-color-text-primary shadow"
+		class="elevation-2 w-fit border border-color-border-wash bg-color-surface p-4 text-color-text"
 	>
 		Centered above feature.
 	</div>

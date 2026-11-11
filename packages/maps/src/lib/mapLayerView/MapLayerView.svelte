@@ -25,12 +25,12 @@
 		 * A unique ID to reference the layer in the map. Provided to slotted
 		 * component as context via the key `mapLayerViewId`.
 		 */
-		id: any;
+		id: string;
 		/**
 		 * The ID of the layer to insert this layer before. If no ID is provided this
 		 * layer will be inserted above all existing layers.
 		 */
-		beforeId?: any;
+		beforeId?: string;
 		/**
 		 * A MapLibre layer specification [MapLibre docs](https://maplibre.org/maplibre-style-spec/layers/).
 		 * Provided to slotted component as context via the key `mapLayerViewSpec`.

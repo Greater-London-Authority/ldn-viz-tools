@@ -1,8 +1,4 @@
 export { default as ChartContainer } from './chartContainer/ChartContainer.svelte';
-export { default as ExportBtns } from './chartContainer/ExportBtns.svelte';
-export { default as Footer } from './chartContainer/Footer.svelte';
-export { default as SubTitle } from './chartContainer/SubTitle.svelte';
-export { default as Title } from './chartContainer/Title.svelte';
 
 export { default as ObservablePlot } from './observablePlot/ObservablePlot.svelte';
 
@@ -11,3 +7,10 @@ export { default as ObservablePlotInner } from './observablePlot/ObservablePlotI
 
 export * from './observablePlotFragments/observablePlotFragments';
 export * from './observablePlotFragments/plot.js';
+
+export { default as Chart } from './chartFactory/Chart.svelte';
+export * from './chartFactory/chartOptions';
+export { chartFns } from './chartFactory/chartTypes';
+export { getDescription } from './chartFactory/descriptions';
+export { getEndOfLineLabelMarks } from './chartFactory/endOfLineLabels';
+export * from './chartFactory/utils';

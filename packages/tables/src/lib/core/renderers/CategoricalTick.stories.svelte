@@ -47,3 +47,67 @@
 		</div>
 	{/snippet}
 </Story>
+
+<!-- With `showValues={false}` the tick renders without its text label (a blank spacer). -->
+<Story name="Without values">
+	{#snippet template(args)}
+		<div class="flex w-36 flex-col">
+			<CategoricalTick
+				{...args}
+				value="a"
+				color={args.color}
+				posScale={args.posScale}
+				showValues={false}
+			/>
+			<CategoricalTick
+				{...args}
+				value="b"
+				color={args.color}
+				posScale={args.posScale}
+				showValues={false}
+			/>
+			<CategoricalTick
+				{...args}
+				value="c"
+				color={args.color}
+				posScale={args.posScale}
+				showValues={false}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- The `color` prop can be a function of the value. -->
+<Story name="Color as a function">
+	{#snippet template(args)}
+		<div class="flex w-36 flex-col">
+			<CategoricalTick
+				{...args}
+				value="a"
+				posScale={args.posScale}
+				color={(value) => (String(value) === 'a' ? 'crimson' : 'steelblue')}
+			/>
+			<CategoricalTick
+				{...args}
+				value="b"
+				posScale={args.posScale}
+				color={(value) => (String(value) === 'a' ? 'crimson' : 'steelblue')}
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- A long category label overflows the cell width. -->
+<Story name="Long category label">
+	{#snippet template()}
+		<div class="flex w-36 flex-col">
+			<CategoricalTick
+				value="A very long category label that overflows"
+				color="steelblue"
+				posScale={scaleBand()
+					.range([0, 1])
+					.domain(['A very long category label that overflows', 'b', 'c'])}
+			/>
+		</div>
+	{/snippet}
+</Story>

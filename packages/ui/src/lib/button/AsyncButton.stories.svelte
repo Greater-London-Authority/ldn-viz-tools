@@ -1,8 +1,8 @@
 <script module lang="ts">
-	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { DocumentArrowUp } from '@steeze-ui/heroicons';
-	import AsyncButton from './AsyncButton.svelte';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import AsyncButton from './AsyncButton.svelte';
 	import { type AsyncButtonProps } from './types';
 
 	/**
@@ -29,7 +29,7 @@
 				}
 			},
 			emphasis: {
-				options: ['primary', 'secondary', 'positive', 'negative', 'caution'],
+				options: ['primary', 'muted', 'positive', 'negative', 'caution'],
 				control: { type: 'radio' }
 			},
 			working: {
@@ -57,12 +57,18 @@
 		return new Promise((r) => setTimeout(r, 3000));
 	};
 
+	const rejectAfterThreeSeconds = () => {
+		return new Promise((_, reject) =>
+			setTimeout(() => reject(new Error('Simulated async failure')), 3000)
+		);
+	};
+
 	let working = $state(false);
 
 	const variants: AsyncButtonProps['variant'][] = ['solid', 'brand', 'outline', 'text', 'square'];
 	const emphasis: AsyncButtonProps['emphasis'][] = [
 		'primary',
-		'secondary',
+		'muted',
 		'positive',
 		'caution',
 		'negative'
@@ -73,7 +79,7 @@
 	<AsyncButton {...args} bind:working onclick={waitThreeSeconds}>Click me!</AsyncButton>
 	<div class="mt-4">
 		Working:
-		<span class:text-color-ui-negative={!working} class:text-color-ui-positive={working}>
+		<span class:text-color-surface-negative={!working} class:text-color-surface-positive={working}>
 			{working}
 		</span>
 	</div>
@@ -113,5 +119,27 @@
 <Story name="Reduced motion">
 	{#snippet template(args)}
 		<AsyncButton {...args} onclick={waitThreeSeconds} class="capitalize">Click me!</AsyncButton>
+	{/snippet}
+</Story>
+
+<!-- If the `onclick` handler rejects, `doClick` logs the error and its `finally` block resets `working` back to `false`, so the button becomes interactive again. -->
+<Story name="Rejected onclick">
+	{#snippet template(args)}
+		<AsyncButton {...args} onclick={rejectAfterThreeSeconds}>Click me (will fail)</AsyncButton>
+	{/snippet}
+</Story>
+
+<Story name="Disabled">
+	{#snippet template(args)}
+		<AsyncButton {...args} disabled onclick={waitThreeSeconds}>Click me!</AsyncButton>
+	{/snippet}
+</Story>
+
+<Story name="Square and non-default size">
+	{#snippet template(args)}
+		<AsyncButton {...args} variant="square" size="lg" onclick={waitThreeSeconds}>
+			<Icon src={DocumentArrowUp} class="mb-1 h-6 w-6" aria-hidden="true" />
+			Upload
+		</AsyncButton>
 	{/snippet}
 </Story>

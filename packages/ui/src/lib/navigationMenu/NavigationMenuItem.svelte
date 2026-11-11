@@ -8,6 +8,7 @@
 	import Button from '../button/Button.svelte';
 	import { classNames } from '../utils/classNames';
 	import { randomId } from '../utils/randomId';
+	import { childListClass, itemTextClass, listItemClass } from './styles';
 
 	let {
 		id = randomId(),
@@ -18,7 +19,8 @@
 		isExpanded = $bindable(false),
 		onChange,
 		index,
-		active
+		active,
+		copySearchParams
 	}: NavigationMenuItemProps = $props();
 
 	const navContext: Record<keyof NavigationMenuProps, any> = getContext('navContext');
@@ -27,7 +29,7 @@
 
 	let orientation = navContext.orientation as NavigationMenuProps['orientation'];
 
-	let childMenuId = $derived(title.toLowerCase() + '-menu');
+	let childMenuId = $derived(`${id}-menu`);
 
 	let hasChildren = $derived(children?.length > 0);
 
@@ -80,43 +82,39 @@
 		}
 	});
 
-	let textClasses = $derived(
-		classNames(
-			`flex w-full items-center level-${level} p-1.5 hover:text-color-action-primary-hover hover:underline `,
-			isActive ? 'text-color-action-text-primary-active underline' : '',
-			level === 1 ? 'text-color-text-primary text-base' : 'text-color-text-secondary text-sm'
-		)
-	);
+	let textClass = $derived(itemTextClass({ level, isActive }));
 
-	const orientationClasses: Record<'vertical' | 'horizontal', string> = $derived({
-		vertical: '',
-		horizontal: `w-full ${level === 1 ? 'absolute z-10' : 'relative'}`
-	});
+	let listClass = $derived(listItemClass({ level, index, orientation: orientation! }));
 
-	const listClasses: Record<'vertical' | 'horizontal', string> = $derived({
-		vertical:
-			level === 1 ? (index === 0 ? 'border-t-0' : 'border-t border-color-ui-border-secondary') : '',
-		horizontal: `relative bg-color-container-level-0 ${level === 1 ? '' : ''}`
-	});
+	let childClass = $derived(childListClass({ level, orientation: orientation!, isExpanded }));
 
-	let childClasses = $derived(
-		classNames(
-			!isExpanded ? 'hidden' : `${level === 2 ? 'pl-4' : ''} mb-1`,
-			orientationClasses[orientation!]
-		)
-	);
-	let listItemClasses = $derived(classNames(listClasses[orientation!]));
+	const constructURL = (href?: string) => {
+		if (!copySearchParams || !href) {
+			return href;
+		}
+
+		const parameterString = new URL(window.location.href).search;
+		const target = new URL(href);
+		target.search = parameterString;
+
+		return target.toString();
+	};
 </script>
 
-<li class={listItemClasses}>
+<li class={listClass} data-level={level}>
 	{#if hasChildren}
 		<div {id} class="flex items-center justify-between">
 			{#if href}
-				<a {href} class={textClasses} {...currentPage} onclick={() => onChange(id)}>
+				<a
+					href={constructURL(href)}
+					class={textClass}
+					{...currentPage}
+					onclick={() => onChange?.(id)}
+				>
 					{title}
 				</a>
 			{:else}
-				<button class={textClasses} onclick={() => toggleMenu()}>
+				<button class={textClass} onclick={() => toggleMenu()}>
 					{title}
 				</button>
 			{/if}
@@ -128,10 +126,9 @@
 					emphasis="secondary"
 					variant="text"
 					size="sm"
-					class="level-{level}"
 					aria-label="More {title} pages"
 					aria-expanded={isExpanded}
-					aria-controls={`${id}-menu`}
+					aria-controls={childMenuId}
 				>
 					<Icon
 						src={ChevronDown}
@@ -146,13 +143,19 @@
 			{/if}
 		</div>
 	{:else}
-		<a {id} {href} class={textClasses} {...currentPage} onclick={() => onChange(id)}>
+		<a
+			{id}
+			href={constructURL(href)}
+			class={`${textClass} pr-4`}
+			{...currentPage}
+			onclick={() => onChange?.(id)}
+		>
 			{title}
 		</a>
 	{/if}
 
 	{#if hasChildren}
-		<ul id={childMenuId} class={childClasses}>
+		<ul id={childMenuId} class={childClass}>
 			{#each toggledChildren as child}
 				<NavigationMenuItem
 					href={child.href}

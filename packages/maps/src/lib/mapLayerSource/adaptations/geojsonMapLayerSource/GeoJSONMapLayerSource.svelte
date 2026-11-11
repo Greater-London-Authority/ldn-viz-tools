@@ -10,6 +10,7 @@
 
 	import { getContext } from 'svelte';
 	import { writable } from 'svelte/store';
+	import type { FeatureCollection } from 'geojson';
 	import MapLayerSource from '../../MapLayerSource.svelte';
 
 	const mapStore = getContext('mapStore');
@@ -19,7 +20,7 @@
 		 * A unique ID to reference the source in the map. Provided to slotted
 		 * component as context via the key `mapLayerSourceId`.
 		 */
-		id: any;
+		id: string;
 		/**
 		 * URL to fetch the GeoJSON from.
 		 */
@@ -33,7 +34,7 @@
 		/**
 		 * Applies any transformations to the GeoJSON before it's added to the map.
 		 */
-		transform?: any;
+		transform?: (geojson: FeatureCollection) => FeatureCollection;
 		/**
 		 * Called when the source is added to the map. The raw geojson can be
 		 * accessed within this callback.  The function accepts an object with the

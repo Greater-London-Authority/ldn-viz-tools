@@ -1,0 +1,30 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TableColWidths from './TableColWidths.stories.svelte';
+
+<Meta title="Tables/Example Tables/Column Widths" />
+
+# Column Widths
+
+## Default
+
+This is the default behaviour: equally sized columns, which respond to changes in the width of the parent container.
+
+<Canvas of={TableColWidths.Default} />
+
+## Fixed-width table
+
+Here the table has a fixed width.
+
+<Canvas of={TableColWidths.FixedWidthTable} />
+
+## One column with fixed size
+
+Here the first column has a fixed width.
+
+<Canvas of={TableColWidths.OneColumnWithFixedSize} />
+
+## Relative column sizes
+
+Here the column sizes are set to 3, 1, and 2 (in relative units).
+
+<Canvas of={TableColWidths.RelativeColumnSizes} />

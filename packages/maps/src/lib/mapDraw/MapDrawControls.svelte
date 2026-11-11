@@ -16,6 +16,7 @@
 	import { fly } from 'svelte/transition';
 	import type { GeoJSONStoreFeatures, TerraDraw } from 'terra-draw';
 	import FileUpload from './FileUpload.svelte';
+	import type { MapDraw, Modes } from './MapDrawState.svelte';
 
 	interface Props {
 		/**
@@ -45,8 +46,8 @@
 		 */
 		uploadDownload: [boolean, boolean];
 
-		drawModes: any;
-		mapDraw: any;
+		drawModes: Modes;
+		mapDraw: MapDraw;
 	}
 
 	let { terraDraw, onDone, uploadDownload, drawModes, mapDraw, onStart, onCancel }: Props =
@@ -66,7 +67,7 @@
 		select: Cursor
 	};
 
-	const clickEdit = () => {
+	export const clickEdit = () => {
 		// Set default mode
 		drawModes.mode.selected = drawModes.mode.previous
 			? drawModes.mode.previous
@@ -89,7 +90,7 @@
 		showOptions = !showOptions;
 	};
 
-	const clickMode = (mode: string) => {
+	export const clickMode = (mode: string) => {
 		if (drawModes.mode.selected !== 'select') {
 			if (mode !== 'select') {
 				toggleOptions();
@@ -103,20 +104,20 @@
 		terraDraw.setMode(mode);
 	};
 
-	const clickSelect = () => {
+	export const clickSelect = () => {
 		showOptions = false;
 		drawModes.mode.selected = 'select';
 		terraDraw.setMode('select');
 	};
 
-	const clickClear = () => {
+	export const clickClear = () => {
 		terraDraw.clear();
 		drawModes.mode.selected = drawModes.mode.previous;
 		mapDraw.features.current = terraDraw.getSnapshot();
 		showOptions = false;
 	};
 
-	const clickCancel = () => {
+	export const clickCancel = () => {
 		mapDraw.features.current = JSON.parse(mapDraw.features.previous as string);
 
 		terraDraw.clear();
@@ -129,7 +130,7 @@
 		onCancel();
 	};
 
-	const clickDone = () => {
+	export const clickDone = () => {
 		drawModes.mode.selected = 'render';
 
 		mapDraw.controlMode.current = 'default';
@@ -141,7 +142,7 @@
 		mapDraw.features.saved = mapDraw.features.current;
 	};
 
-	const clickUpload = () => {
+	export const clickUpload = () => {
 		drawModes.mode.selected = 'select';
 		terraDraw.setMode('select');
 		mapDraw.controlMode.current = 'upload';
@@ -195,7 +196,7 @@
 						variant="square"
 						emphasis="secondary"
 						class="{drawModes.mode.selected === mode
-							? '!bg-color-action-background-secondary-active'
+							? '!bg-color-interactive-secondary-active !text-color-inverse-text'
 							: null} pointer-events-auto capitalize"
 						size="lg"
 						onclick={() => clickMode(mode)}

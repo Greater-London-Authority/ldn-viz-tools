@@ -144,15 +144,19 @@
 
 		.maplibregl-ctrl-attrib-inner,
 		.mapboxgl-ctrl-attrib-inner {
-			@apply text-xs;
+			font-family: var(--caption-sm-font-family);
+			font-size: var(--caption-sm-font-size);
+			font-weight: var(--caption-sm-font-weight);
+			letter-spacing: var(--caption-sm-letter-spacing);
+			line-height: var(--caption-sm-line-height);
 			@apply align-middle;
-			@apply text-color-text-primary;
+			@apply text-color-text;
 			@apply pt-0.5;
-			@apply bg-color-container-level-0;
+			@apply bg-color-surface;
 		}
 
 		.maplibregl-ctrl-attrib-inner a {
-			@apply text-color-text-primary;
+			@apply text-color-text;
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button,
@@ -165,16 +169,17 @@
 		}
 
 		.maplibregl-ctrl-attrib-inner a {
-			@apply text-color-text-primary;
+			@apply text-color-text;
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-button {
-			@apply bg-color-text-primary;
+			@apply bg-color-inverse-text;
+			@apply dark:bg-color-text;
 		}
 
 		.maplibregl-ctrl-attrib.maplibregl-compact {
 			/* background-color: hsla(0, 0%, 100%, 0.8); */
-			@apply bg-color-container-level-0;
+			@apply bg-color-surface;
 		}
 	}
 </style>

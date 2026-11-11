@@ -25,10 +25,10 @@
 	import { appendOSKeyToUrl } from '../map/util';
 
 	import type { Layer } from '@deck.gl/core';
-	import { Checkbox } from '@ldn-viz/ui';
+	import { Checkbox, theme } from '@ldn-viz/ui';
 	import MapDeckOverlay from '../mapDeckOverlay/MapDeckOverlay.svelte';
 	import DemoTooltipComponent from './demo/DemoTooltipComponent.svelte';
-	import { onMouseOverTooltipHandler } from './stores';
+	import { closeTooltipOnLeave, onMouseOverTooltipHandler } from './stores';
 
 	const OS_KEY = 'vmRzM4mAA1Ag0hkjGh1fhA2hNLEM6PYP';
 
@@ -38,41 +38,32 @@
 		return new MVTLayer({
 			id: 'boroughLayer',
 			data: `${TILE_BASE_URL}/boroughs/{z}/{x}/{y}.mvt`,
-
 			filled: true,
-			getFillColor: () => [255, 0, 0],
-			opacity: 1,
-
+			getFillColor: () =>
+				theme.colorTokenNameToRGBArray('geo.interactive') as [number, number, number],
+			opacity: 0.5,
 			stroked: true,
-			getLineColor: [168, 168, 168, 255],
-
-			lineWidthScale: 5,
-			lineWidthMinPixels: 4,
-
+			getLineColor: () => theme.colorTokenNameToRGBArray('geo.feature') as [number, number, number],
+			lineWidthScale: 3,
+			lineWidthMinPixels: 2,
 			pickable: true, // not needed?
-			//	onClick: onClickTooltipHandler
-			onHover: onMouseOverTooltipHandler
+			onClick: onMouseOverTooltipHandler
 		});
 	};
-
 	const getWardsLayer = () => {
 		return new MVTLayer({
 			id: 'wardLayer',
 			data: `${TILE_BASE_URL}/wards-2022-clipped/{z}/{x}/{y}.mvt`,
-
 			filled: true,
-			getFillColor: () => [0, 255, 0],
-			opacity: 1,
-
+			getFillColor: () => theme.colorTokenNameToRGBArray('geo.feature') as [number, number, number],
+			opacity: 0.5,
 			stroked: true,
-			getLineColor: [168, 168, 168, 255],
-
+			getLineColor: () =>
+				theme.colorTokenNameToRGBArray('geo.feature.muted') as [number, number, number],
 			lineWidthScale: 2,
 			lineWidthMinPixels: 1,
-
 			pickable: true,
-			//onClick: onClickTooltipHandler,
-			onHover: onMouseOverTooltipHandler
+			onClick: onMouseOverTooltipHandler
 		});
 	};
 
@@ -89,6 +80,34 @@
 		}
 		return l;
 	});
+
+	// Borough layer whose deck.gl `visible` prop is bound to a checkbox, so we
+	// can exercise the `layerObj.visible !== false` render guard.
+	const getBoroughLayerWithVisibility = (visible: boolean) => {
+		return new MVTLayer({
+			id: 'boroughLayer',
+			data: `${TILE_BASE_URL}/boroughs/{z}/{x}/{y}.mvt`,
+			filled: true,
+			getFillColor: () =>
+				theme.colorTokenNameToRGBArray('geo.interactive') as [number, number, number],
+			opacity: 0.5,
+			stroked: true,
+			getLineColor: () => theme.colorTokenNameToRGBArray('geo.feature') as [number, number, number],
+			lineWidthScale: 3,
+			lineWidthMinPixels: 2,
+			pickable: true,
+			onClick: onMouseOverTooltipHandler,
+			visible
+		});
+	};
+
+	let boroughLayerVisible = $state(true);
+	let visibilityLayers: Layer[] = $derived.by(() => [
+		getBoroughLayerWithVisibility(boroughLayerVisible)
+	]);
+
+	const l1 = [getBoroughLayer()];
+	const l2 = [getBoroughLayer()];
 </script>
 
 <!-- Here every feature in a layer is assigned the same string as a Tooltip. -->
@@ -143,6 +162,67 @@
 	{/snippet}
 </Story>
 
+<!--
+As the map is zoomed-in, the cursor can move from a feature off the top of the
+map without triggering another deck.g `onHover` event.
+In the top map, the tooltip stays open; 
+in the second map `use:closeTooltipOnLeave` ensures that the tooltip closes
+when the cursor leaves the map.
+-->
+<Story name="Example - closing tooltips when cursor leaves map">
+	{#snippet template()}
+		<div class="flex flex-col gap-4">
+			<div class="h-32 w-[100dvw] bg-color-surface-muted"></div>
+
+			<div>
+				<div class="h-[100dvh] w-[100dvw]">
+					<Map
+						options={{
+							transformRequest: appendOSKeyToUrl(OS_KEY),
+							zoom: 14,
+							center: [-0.141944, 51.500833],
+							bounds: undefined
+						}}
+					>
+						<MapDeckOverlay layers={l1} />
+
+						<MapDeckTooltips
+							layers={l1}
+							spec={{
+								boroughLayer: (feature) => feature?.properties?.name
+							}}
+						/>
+					</Map>
+				</div>
+			</div>
+
+			<div>
+				<div class="h-32 w-[100dvw] bg-color-surface-muted"></div>
+
+				<div class="h-[100dvh] w-[100dvw]" use:closeTooltipOnLeave>
+					<Map
+						options={{
+							transformRequest: appendOSKeyToUrl(OS_KEY),
+							zoom: 14,
+							center: [-0.141944, 51.500833],
+							bounds: undefined
+						}}
+					>
+						<MapDeckOverlay layers={l2} />
+
+						<MapDeckTooltips
+							layers={l2}
+							spec={{
+								boroughLayer: (feature) => feature?.properties?.name
+							}}
+						/>
+					</Map>
+				</div>
+			</div>
+		</div>
+	{/snippet}
+</Story>
+
 <!-- Here the Tooltip is rendered by a custom component, which ahs access to the feature object.
   Each layer can use a separate component to render the Tooltips for its features.
   -->
@@ -164,6 +244,63 @@
 					spec={{
 						wardLayer: DemoTooltipComponent,
 						boroughLayer: DemoTooltipComponent
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+ Different spec types can be mixed within a single `spec`: here the wards use a
+ plain string while the boroughs use a function of the feature.
+ -->
+<Story name="Example - mixed spec per layer">
+	{#snippet template()}
+		<Checkbox label="Show wards" bind:checked={showWards} />
+		<Checkbox label="Show boroughs" bind:checked={showBoroughs} />
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay {layers} />
+
+				<MapDeckTooltips
+					{layers}
+					spec={{
+						wardLayer: 'This is one of the Wards',
+						boroughLayer: (feature) => feature?.properties?.name
+					}}
+				/>
+			</Map>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+ Toggling a layer's visibility off (deck.gl `visible: false`)
+ prevents the corresponding tooltip being opened, so hovering over a hidden
+ borough doesn't dispaly a tooltip.
+ -->
+<Story name="Example - hidden layer">
+	{#snippet template()}
+		<Checkbox label="Borough layer visible" bind:checked={boroughLayerVisible} />
+
+		<div class="h-[100dvh] w-[100dvw]">
+			<Map
+				options={{
+					transformRequest: appendOSKeyToUrl(OS_KEY)
+				}}
+			>
+				<MapDeckOverlay layers={visibilityLayers} />
+
+				<MapDeckTooltips
+					layers={visibilityLayers}
+					spec={{
+						boroughLayer: 'This is one of the Boroughs'
 					}}
 				/>
 			</Map>

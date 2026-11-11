@@ -1,7 +1,4 @@
 {
-	"[svelte]": {
-		"editor.defaultFormatter": "svelte.svelte-vscode"
-	},
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 
 	"editor.formatOnSave": true,
@@ -17,5 +14,6 @@
 	"vitest.disableWorkspaceWarning": true,
 	"svelte.plugin.svelte.compilerWarnings": {
 		"css_unused_selector": "ignore"
-	}
+	},
+	"cSpell.words": ["colour", "visualisation", "visualisations", "WCAG"]
 }

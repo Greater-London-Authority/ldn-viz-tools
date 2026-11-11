@@ -1,0 +1,491 @@
+import StyleDictionary from 'style-dictionary';
+import { transformTypes } from 'style-dictionary/enums';
+import {
+	fileHeader,
+	formattedVariables,
+	getReferences,
+	usesReferences
+} from 'style-dictionary/utils';
+import { readFileSync } from 'node:fs';
+import { isFontFamilyPrimitive, withStack } from './sd/fonts.js';
+import { normaliseTokens, tokenName } from './sd/normalise.js';
+import { formatReset } from './sd/reset.js';
+import { formatSystem } from './sd/system.js';
+import { formatSass } from './sd/sass.js';
+import { formatPreset } from './sd/tailwind.js';
+import { readUsage } from './sd/usage.js';
+import {
+	content as contentConfig,
+	forms as formsConfig,
+	usage as usageConfig
+} from './sd/system.config.js';
+
+/*===============================================
+  CUSTOM PARSER
+  The Figma export is normalised in one step (see sd/normalise.js) before any
+  filtering, so filters and formats only ever see the specification's grammar.
+*/
+
+StyleDictionary.registerParser({
+	name: 'json-parser',
+	pattern: /\.json$/,
+	parser: ({ contents }) => normaliseTokens(JSON.parse(contents))
+});
+
+/*=========================================================
+  CUSTOM FILTERS
+  Filters select by token type and path, not by excluding every other category.
+*/
+
+const isPrimitive = (token) => token.path[0] === 'primitive';
+const isShadow = (token) => token.type === 'shadow';
+const isColor = (token) => token.type === 'color';
+const isSeed = (token) => token.path.includes('seed');
+
+// The two dimension scales: spacing, and the type scale with its line heights.
+const isPrimitiveScale = (token) =>
+	isPrimitive(token) &&
+	(token.path[1] === 'spacing' ||
+		(token.path[1] === 'typography' && ['scale', 'line-height'].includes(token.path[2])));
+
+const isMode = (mode) => (token) => token.path[0] === 'color' && token.path[1] === `${mode}-mode`;
+const isCategory = (category) => (token) => token.path[0] === category;
+
+const filters = {
+	cssPrimitiveFilter: (token) =>
+		isPrimitive(token) && !isShadow(token) && !isPrimitiveScale(token) && !isSeed(token),
+	cssPrimitiveScaleFilter: isPrimitiveScale,
+	cssLightModeFilter: isMode('light'),
+	cssDarkModeFilter: isMode('dark'),
+	cssSpacingFilter: isCategory('spacing'),
+	cssGridFilter: isCategory('grid'),
+	cssFlowFilter: isCategory('flow'),
+	cssTypographyFilter: isCategory('typography'),
+	shadowFilter: isShadow,
+	// The preset exposes semantic colours only (ADR 0018); light mode stands in
+	// for both, as each value is a var() that follows the mode.
+	twFilter: (token) => isColor(token) && isMode('light')(token),
+	twSpacingFilter: isCategory('spacing'),
+	jsFilter: (token) =>
+		isColor(token) &&
+		(token.path[0] === 'color' ||
+			(isPrimitive(token) && token.path[2] !== 'mode' && !isSeed(token)))
+};
+
+Object.entries(filters).forEach(([name, filter]) =>
+	StyleDictionary.registerFilter({ name, filter })
+);
+
+/*=========================================================
+  CUSTOM TRANSFORMS
+*/
+
+const transformString = (str, replace = 'mode', regex = /.*-color/) => {
+	// Use a regular expression to replace everything before regex with replace
+	return str.replace(regex, replace);
+};
+
+StyleDictionary.registerTransform({
+	name: 'name/grammar',
+	type: transformTypes.name,
+	transform: tokenName
+});
+
+/**
+ * Units, keyed on path. Dimensions arrive from Figma as unitless px.
+ *  - font weights stay unitless
+ *  - breakpoints become px (media queries can't use rem from custom properties)
+ *  - everything else becomes rem
+ * Only literal values are transformed; tokens that reference them inherit the
+ * converted value, so no format divides by 16 itself.
+ */
+StyleDictionary.registerTransform({
+	name: 'dimension/grammar',
+	type: transformTypes.value,
+	filter: (token) => token.type === 'dimension' && typeof token.value === 'number',
+	transform: (token) => {
+		if (token.path.includes('font-weight')) return token.value;
+		if (token.path[1] === 'breakpoint') return `${token.value}px`;
+		return token.value === 0 ? '0' : `${token.value / 16}rem`;
+	}
+});
+
+// Figma holds only the family name; the fallback stack is added here, on the
+// primitive, so everything that reads it falls back the same way (ADR 0003).
+StyleDictionary.registerTransform({
+	name: 'font-family/stack',
+	type: transformTypes.value,
+	filter: isFontFamilyPrimitive,
+	transform: withStack
+});
+
+/*=========================================================
+  CUSTOM FORMATS
+*/
+
+// var(--<referenced>, <resolved>) when a token is authored as an alias, so the
+// semantic layer references the primitive rather than restating it.
+const cssValue = (token, dictionary) => {
+	if (usesReferences(token.original.value)) {
+		const [ref] = getReferences(token.original.value, dictionary.unfilteredTokens);
+		if (ref) return `var(--${ref.name}, ${token.value})`;
+	}
+	return token.value;
+};
+
+/**
+ * Custom format for typography
+ *
+ * Line height is emitted as a unitless ratio (line-height / font-size of the
+ * same role), not as a reference to the line-height primitive, so that it
+ * scales with the font size it sits beside. Every other property references the
+ * primitive it is authored against.
+ */
+const typographyValues = (dictionary) => {
+	const byPath = new Map(dictionary.allTokens.map((token) => [token.path.join('.'), token]));
+
+	const lineHeightRatio = (token) => {
+		const fontSize = byPath.get([...token.path.slice(0, -1), 'font-size'].join('.'));
+		const ratio = parseFloat(token.value) / parseFloat(fontSize ? fontSize.value : '1rem');
+		return Number(ratio.toFixed(4));
+	};
+
+	return (token) => (token.path.at(-1) === 'line-height' ? lineHeightRatio(token) : null);
+};
+
+const formatTypography = (dictionary) => {
+	const ratio = typographyValues(dictionary);
+	return dictionary.allTokens
+		.map((token) => `  --${token.name}: ${ratio(token) ?? cssValue(token, dictionary)};`)
+		.join('\n');
+};
+
+/**
+ * Custom format for flow
+ *
+ * Flow tokens are keyed [context][step] (e.g. spacious.tight, standard.section):
+ * a context class carrying a 4-step ramp. The flat --flow-{context}[-{step}]
+ * vars are the single value source; each context class in system.css
+ * (sd/system.js) maps them onto the bare --flow-{step} vars that the flow
+ * rules and utilities read.
+ */
+const FLOW_STEPS = ['tight', 'default', 'loose', 'section'];
+
+const flowVar = (context, step) =>
+	step === 'default' ? `--flow-${context}` : `--flow-${context}-${step}`;
+
+// Content outside any declared context takes standard, so its ramp is also
+// set on :root. Without it, a `mt-flow-section` with no ancestor context
+// class resolves an undefined custom property and margin-top falls back to
+// 0, a silent no-op. `.flow-standard` stays meaningful: it arms the owl,
+// which :root cannot do.
+const defaultRamp = FLOW_STEPS.map((step) => ({
+	name: `flow-${step}`,
+	references: flowVar('standard', step).slice(2)
+}));
+
+// The custom properties: the flat ramp of every context, plus the default ramp.
+const formatFlowProperties = (dictionary) => {
+	const flat = dictionary.allTokens
+		.map((token) => `  --${token.name}: ${cssValue(token, dictionary)};`)
+		.join('\n');
+	const ramp = defaultRamp
+		.map(({ name, references }) => `  --${name}: var(--${references});`)
+		.join('\n');
+
+	return `${flat}\n${ramp}`;
+};
+
+/*=========================================================
+  PUBLIC OUTPUTS (RFC 0003, workstreams 2 and 3)
+  reset.css   element defaults, at zero specificity (sd/reset.js)
+  tokens.css  every custom property: the source
+  system.css  every class the specification names: a window onto tokens.css
+  index.css   imports all three, reset first
+  tailwind    the preset, mapping Tailwind's theme onto tokens.css (sd/tailwind.js)
+  tokens.scss resolved values as Sass variables and maps (sd/sass.js)
+*/
+
+// The same dictionary, narrowed to the tokens one filter selects.
+const subset = (dictionary, filter) => ({
+	...dictionary,
+	allTokens: dictionary.allTokens.filter(filter)
+});
+
+const variables = (dictionary, filter, outputReferences) =>
+	formattedVariables({
+		format: 'css',
+		dictionary: subset(dictionary, filter),
+		outputReferences,
+		outputReferenceFallbacks: outputReferences
+	});
+
+// Grouped in the order the deprecated files were imported, so the cascade is
+// unchanged. tokens.json (below) reads the same list, so the two can't drift.
+// `refs`: whether an alias is written as var(--referenced, <resolved>).
+const rootSections = [
+	{ title: 'Primitives', filter: filters.cssPrimitiveFilter, refs: false },
+	{ title: 'Primitive scale', filter: filters.cssPrimitiveScaleFilter, refs: false },
+	{ title: 'Colour: light mode', filter: filters.cssLightModeFilter, refs: true },
+	{ title: 'Spacing', filter: filters.cssSpacingFilter, refs: true },
+	{ title: 'Grid', filter: filters.cssGridFilter, refs: true },
+	{ title: 'Typography', filter: filters.cssTypographyFilter, format: formatTypography },
+	{ title: 'Flow', filter: filters.cssFlowFilter, format: formatFlowProperties },
+	{ title: 'Shadow and elevation', filter: filters.shadowFilter, refs: false }
+];
+
+const formatTokens = (dictionary) => {
+	const root = rootSections
+		.map(({ title, filter, refs, format }) => {
+			const body = format
+				? format(subset(dictionary, filter))
+				: variables(dictionary, filter, refs);
+			return `  /* ${title} */\n${body}`;
+		})
+		.join('\n\n');
+	const dark = variables(dictionary, filters.cssDarkModeFilter, true);
+
+	return `:root {\n${root}\n}\n\n:root.dark, .dark {\n${dark}\n}\n`;
+};
+
+StyleDictionary.registerFormat({
+	name: 'css/tokens',
+	format: async ({ dictionary, file }) => `${await fileHeader({ file })}${formatTokens(dictionary)}`
+});
+
+/**
+ * tokens.json: every custom property tokens.css declares, flat and resolved,
+ * for the specification tooling (RFC 0003, workstream 6). Keyed by the
+ * property name exactly as tokens.css writes it. `value` is the resolved value
+ * (the fallback inside var()), `references` the property an alias points at,
+ * and `dark` the value under .dark, where the property has one.
+ */
+const referenceOf = (token, dictionary) => {
+	if (!usesReferences(token.original.value)) return undefined;
+	const [ref] = getReferences(token.original.value, dictionary.unfilteredTokens);
+	return ref ? `--${ref.name}` : undefined;
+};
+
+const entry = (token, dictionary, value = token.value) => ({
+	value,
+	type: token.type,
+	path: token.path.join('.'),
+	...(referenceOf(token, dictionary) && { references: referenceOf(token, dictionary) }),
+	...(token.description && { description: token.description })
+});
+
+const formatTooling = (dictionary) => {
+	const tokens = {};
+	const ratio = typographyValues(subset(dictionary, filters.cssTypographyFilter));
+
+	for (const { filter, refs } of rootSections) {
+		for (const token of dictionary.allTokens.filter(filter)) {
+			const lineHeight = ratio(token);
+			const e = entry(token, dictionary, lineHeight ?? token.value);
+			// Primitives, shadows and line-height ratios are written without var(),
+			// so they have no alias to report.
+			if (refs === false || lineHeight !== null) delete e.references;
+			tokens[`--${token.name}`] = e;
+		}
+	}
+	for (const { name, references } of defaultRamp) {
+		const target = tokens[`--${references}`];
+		tokens[`--${name}`] = { value: target.value, type: target.type, references: `--${references}` };
+	}
+	for (const token of dictionary.allTokens.filter(filters.cssDarkModeFilter)) {
+		const name = `--${token.name}`;
+		const { value, references } = entry(token, dictionary);
+		tokens[name] = {
+			...(tokens[name] ?? { type: token.type, path: token.path.join('.') }),
+			dark: { value, ...(references && { references }) }
+		};
+	}
+	return tokens;
+};
+
+StyleDictionary.registerFormat({
+	name: 'json/tooling',
+	format: ({ dictionary }) => `${JSON.stringify(formatTooling(dictionary), null, '\t')}\n`
+});
+
+// The Sass value export (sd/sass.js), built from the same map as tokens.json.
+StyleDictionary.registerFormat({
+	name: 'scss/values',
+	format: async ({ dictionary, file }) =>
+		`${await fileHeader({ file, commentStyle: 'short' })}${formatSass(formatTooling(dictionary), ['sm', 'md', 'lg', 'xl', '2xl'])}\n`
+});
+
+// Every class the specification names (sd/system.js). The usage aliases are
+// read from the Figma usage export, which is not part of the token graph; the
+// content and form styles from the hand-written sd/content.css and sd/forms.css.
+const aliases = readUsage(JSON.parse(readFileSync(usageConfig.file, 'utf8')), usageConfig);
+const sheets = {
+	content: readFileSync(contentConfig.file, 'utf8'),
+	forms: readFileSync(formsConfig.file, 'utf8')
+};
+
+StyleDictionary.registerFormat({
+	name: 'css/system',
+	format: async ({ dictionary, file }) =>
+		`${await fileHeader({ file })}${formatSystem(dictionary, aliases, sheets)}\n`
+});
+
+// The Tailwind preset (sd/tailwind.js): the theme mapped onto the custom properties.
+StyleDictionary.registerFormat({
+	name: 'tw/preset',
+	format: ({ dictionary }) => formatPreset(dictionary, filters, ['sm', 'md', 'lg', 'xl', '2xl'])
+});
+
+StyleDictionary.registerFormat({
+	name: 'css/reset',
+	format: async ({ dictionary, file }) =>
+		`${await fileHeader({ file })}${formatReset(dictionary)}\n`
+});
+
+StyleDictionary.registerFormat({
+	name: 'css/index',
+	format: async ({ file }) =>
+		`${await fileHeader({ file })}@import './reset.css';\n@import './tokens.css';\n@import './system.css';\n`
+});
+
+/**
+ * Custom format functions for documentation and js variables - where heiracical grouping with the addition of a 'default' key
+ * makes the structure easier to step though
+ */
+
+// Format a single token object for documentation style
+const formatTokenForDocs = ({ name, value, type, description = '' }) => ({
+	name: transformString(name, 'color', /.*(mode-(dark|light))/),
+	value,
+	type,
+	description
+});
+
+// Format a single token object for javascript retuning only the value
+const formatTokenForJs = ({ value }) => value;
+
+// Helper: Check if a node is a token
+const isToken = (node) => Object.hasOwn(node, 'value');
+
+// Helper: split key into base/variant
+const splitKey = (key) => {
+	const index = key.indexOf('-');
+
+	if (index === -1) {
+		return { base: key, variant: null };
+	}
+
+	return {
+		base: key.slice(0, index),
+		variant: key.slice(index + 1)
+	};
+};
+
+function makeHierarchical(input, formatter = (x) => x) {
+	// Stop at a token and apply the formatter function
+	if (isToken(input)) {
+		return formatter(input);
+	}
+
+	// Group entries by base key
+	const groups = {};
+
+	for (const [key, value] of Object.entries(input)) {
+		const { base, variant } = splitKey(key);
+
+		if (!groups[base]) {
+			groups[base] = { base: null, variants: {} };
+		}
+
+		if (variant) {
+			groups[base].variants[variant] = value;
+		} else {
+			groups[base].base = value;
+		}
+	}
+
+	// Build result with sibling awareness
+	const result = {};
+
+	for (const [base, { base: baseValue, variants }] of Object.entries(groups)) {
+		const hasVariants = Object.keys(variants).length > 0;
+
+		if (!hasVariants) {
+			// No siblings → keep structure
+			result[base] = makeHierarchical(baseValue, formatter);
+			continue;
+		}
+
+		// Siblings detected → introduce default
+		result[base] = {};
+
+		if (baseValue !== null) {
+			result[base].default = makeHierarchical(baseValue, formatter);
+		}
+
+		for (const [variant, value] of Object.entries(variants, formatter)) {
+			result[base][variant] = makeHierarchical(value, formatter);
+		}
+	}
+
+	return result;
+}
+
+// Importers of the docs and JS modules read semantic colours as
+// `mode.{light,dark}`, so the color.{light-mode,dark-mode} groups are re-keyed
+// to keep that shape until these exports are reworked (RFC 0003, workstream 5).
+const withModeShape = ({ color, ...tokens }) =>
+	color ? { ...tokens, mode: { light: color['light-mode'], dark: color['dark-mode'] } } : tokens;
+
+// (FOR DOCS) -> Make Heirachical(add defaults to structure), then Format Token meta for docs
+const formatForDocumentation = (dictionary) => {
+	return makeHierarchical(withModeShape(dictionary.tokens), (token) => formatTokenForDocs(token));
+};
+
+// (FOR JS) -> Make Heirachical(add defaults to structure), then Format Token meta for js
+const formatForJs = (dictionary) => {
+	return makeHierarchical(withModeShape(dictionary.tokens), (token) => formatTokenForJs(token));
+};
+
+// Register custom docs formatter
+StyleDictionary.registerFormat({
+	name: 'custom/docs',
+	format: async ({ dictionary, file }) => {
+		const header = await fileHeader({ file });
+		return `${header} 
+			export default 
+				${JSON.stringify(formatForDocumentation(dictionary), null, 2)}
+			`;
+	}
+});
+
+// Register custom js formatter
+StyleDictionary.registerFormat({
+	name: 'custom/js',
+	format: async ({ dictionary, file }) => {
+		const header = await fileHeader({ file });
+		return `${header} 
+			export default 
+				${JSON.stringify(formatForJs(dictionary), null, 2)}
+			`;
+	}
+});
+
+console.log('Build started...');
+console.log('\n==============================================');
+
+// APPLY THE CONFIGURATION
+// IMPORTANT: the registration of custom transforms
+// needs to be done _before_ applying the configuration
+// N.B. we supress warnings because warnings about
+// "filtered out token references were found;"
+// are expected due to how we split output across multiple files.
+const sd = new StyleDictionary('./sd.config.json', {
+	warnings: 'disabled'
+});
+
+// FINALLY, BUILD ALL THE PLATFORMS
+await sd.buildAllPlatforms();
+
+console.log('\n==============================================');
+console.log('\nBuild completed!');

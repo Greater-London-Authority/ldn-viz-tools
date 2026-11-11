@@ -1,10 +1,10 @@
 <script module lang="ts">
 	import { theme } from '@ldn-viz/ui';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { format } from 'd3-format';
 	import { yearlyData } from '../../../data/demoData';
 	import ObservablePlot from '../../observablePlot/ObservablePlot.svelte';
 	import { Plot } from '../../observablePlotFragments/plot';
-	import { format } from 'd3-format';
 
 	const { Story } = defineMeta({
 		title: 'Charts/Examples/Bar Charts'
@@ -24,9 +24,9 @@
 		color: {
 			legend: true,
 			range: [
-				theme.currentTheme.color.data.primary,
-				theme.currentTheme.color.data.secondary,
-				theme.currentTheme.color.data.tertiary
+				theme.tokenNameToValue('data.primary'),
+				theme.tokenNameToValue('data.secondary'),
+				theme.tokenNameToValue('data.tertiary')
 			]
 		},
 		marks: [

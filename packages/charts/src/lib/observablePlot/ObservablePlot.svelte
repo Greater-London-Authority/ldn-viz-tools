@@ -8,7 +8,7 @@
 	import type { Position } from './types.ts';
 
 	import { randomId } from '@ldn-viz/ui';
-	import { writable } from 'svelte/store';
+	import { writable, type Writable } from 'svelte/store';
 	import ChartContainer from '../chartContainer/ChartContainer.svelte';
 	import ObservablePlotInner from './ObservablePlotInner.svelte';
 
@@ -72,14 +72,14 @@
 		/**
 		 * Provides a way to access the DOM node into which the visualization is rendered.
 		 */
-		domNode?: any;
+		domNode?: HTMLDivElement;
 		/**
 		 * A store that stores details of the moused-over point.
 		 * Used for custom tooltips.
 		 */
-		tooltipStore?: any;
+		tooltipStore?: Writable<Position | undefined>;
 		/** A y-offset between data points and tooltips (pixels). */
-		tooltipOffset?: any;
+		tooltipOffset?: number;
 		/**
 		 * If `false`, then use the `Plot.plot` function provided by Observable Plot (rather than the wrapper provided by `@ldn-viz`),
 		 * so that default chart-level styling is not applied.
@@ -88,7 +88,7 @@
 		/**
 		 * Value set as the `id` attribute of the chart, for use in description (defaults to randomly generated value).
 		 */
-		id?: any;
+		id?: string;
 		/**
 		 * Detailed description of the chart for use by screen readers and in a modal for sighted users.
 		 */
@@ -101,6 +101,12 @@
 		ariaHidden?: boolean;
 		controls?: import('svelte').Snippet;
 		tooltip?: import('svelte').Snippet;
+
+		/**
+		 * An optional object defining a mapping from the names of attributes in the `data` prop to the names of columns in the downloaded file.
+		 */
+		columnMapping?: undefined | { [oldName: string]: string };
+
 		[key: string]: any;
 	}
 
@@ -126,58 +132,70 @@
 		ariaHidden = true,
 		controls,
 		tooltip,
+		columnMapping = undefined,
 		...rest
 	}: Props = $props();
 
 	const tooltip_render = $derived(tooltip);
 </script>
 
-{#key spec}
-	<ChartContainer
-		{data}
-		{title}
-		{subTitle}
-		{alt}
-		{source}
-		{note}
-		{byline}
-		{dataDownloadButton}
-		{imageDownloadButton}
-		{filename}
-		{...rest}
-		chartHeight="h-fit"
-		{chartWidth}
-		{chartDescription}
-	>
-		<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
-		{@render controls?.()}
+<ChartContainer
+	{data}
+	{title}
+	subtitle={subTitle}
+	{alt}
+	{source}
+	{note}
+	{byline}
+	{dataDownloadButton}
+	{imageDownloadButton}
+	{filename}
+	{...rest}
+	chartHeight="h-fit"
+	{chartWidth}
+	description={chartDescription}
+	{columnMapping}
+	{id}
+>
+	<!-- any controls to be displayed below the title and subTitle, but above the chart itself -->
+	{@render controls?.()}
 
-		<ObservablePlotInner
-			{data}
-			{domNode}
-			{tooltipStore}
-			{tooltipOffset}
-			{spec}
-			{applyDefaults}
-			{ariaHidden}
-			ariaDescribedBy="{id}-description"
-			{id}
-		>
-			{#snippet tooltip()}
-				{@render tooltip_render?.()}
-			{/snippet}
-		</ObservablePlotInner>
-
-		{#snippet description()}
-			<p class="sr-only" id="{id}-description">
-				{chartDescription}
-			</p>
-		{/snippet}
-	</ChartContainer>
-{/key}
+	{#key spec}
+		{#if spec}
+			<ObservablePlotInner
+				{data}
+				{domNode}
+				{tooltipStore}
+				{tooltipOffset}
+				{spec}
+				{applyDefaults}
+				{ariaHidden}
+				ariaDescribedBy="{id}-description"
+				{id}
+			>
+				{#snippet tooltip()}
+					{@render tooltip_render?.()}
+				{/snippet}
+			</ObservablePlotInner>
+		{/if}
+	{/key}
+</ChartContainer>
 
 <style>
-	:global(.defaultColorLegendLabel-swatch) {
-		font-size: 1rem;
+	:global(.defaultColorLegendLabel-swatch),
+	:global(.defaultColorLegendLabel-ramp) {
+		font-family: var(--label-md-font-family);
+		font-size: var(--label-md-font-size);
+		font-weight: var(--label-md-font-weight);
+		letter-spacing: var(--label-md-letter-spacing);
+		line-height: var(--label-md-line-height);
+	}
+	:global(.defaultColorLegendLabel-ramp .tick) {
+		font-family: var(--caption-sm-font-family);
+		font-size: var(--caption-sm-font-size);
+		font-weight: var(--caption-sm-font-weight);
+		letter-spacing: var(--caption-sm-letter-spacing);
+		font-variant-numeric: tabular-nums;
+		fill: var(--color-text-muted);
 	}
 </style>

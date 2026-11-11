@@ -4,9 +4,9 @@
 	 * @component
 	 */
 
+	import type { HistogramProps } from '$lib/core/aggregateRenderers/HistogramProps';
 	import { type Bin, bin, max } from 'd3-array';
 	import { type ScaleLinear, scaleLinear } from 'd3-scale';
-	import type { HistogramProps } from '$lib/core/aggregateRenderers/HistogramProps';
 
 	// TODO: move labels to separate span so they don't get truncated if max val is multiple digits
 
@@ -46,7 +46,7 @@
 	);
 </script>
 
-{#if bins}
+{#if bins && values.length > 0}
 	<svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
 		<g fill={color}>
 			{#each bins as d (d[0])}
@@ -63,11 +63,16 @@
 			{/each}
 		</g>
 
-		<text x={x(hints[0]) + 4} y={height - marginBottom + 10} font-size="12px" text-anchor="middle">
+		<text
+			x={x(hints[0]) + 4}
+			y={height - marginBottom + 10}
+			class="chart-tick-sm"
+			text-anchor="middle"
+		>
 			{hints[0]}
 		</text>
 
-		<text x={x(hints[1])} y={height - marginBottom + 10} font-size="12px" text-anchor="middle">
+		<text x={x(hints[1])} y={height - marginBottom + 10} class="chart-tick-sm" text-anchor="middle">
 			{hints[1]}
 		</text>
 	</svg>

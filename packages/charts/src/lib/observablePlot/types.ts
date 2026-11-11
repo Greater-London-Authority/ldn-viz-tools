@@ -29,22 +29,36 @@ export type AddClickFunction = (
 ) => SVGElement | null;
 
 export type AddEventHandlerFunction = (
-	eventName: any,
-	eventHandler: any,
+	eventName: string,
+	eventHandler: EventHandler,
 	markShape?: string
-) => (index: any, scales: any, values: any, dimensions: any, context: any, next: any) => any;
+) => (
+	index: number[],
+	scales: any,
+	values: any,
+	dimensions: any,
+	context: any,
+	next: RenderFunction | undefined
+) => SVGElement | null;
 
 export type AddEventHandlerInnerFunction = (
-	eventName: any,
-	eventHandler: any,
-	marks: any,
+	eventName: string,
+	eventHandler: EventHandler,
+	marks: ArrayLike<Element>,
 	values: any,
-	index: any
+	index: number[]
 ) => void;
 
 export type RegisterTooltipFunction = (
 	posStore: any,
 	markShape?: string
-) => (index: any, scales: any, values: any, dimensions: any, context: any, next: any) => any;
+) => (
+	index: number[],
+	scales: any,
+	values: any,
+	dimensions: any,
+	context: any,
+	next: RenderFunction | undefined
+) => SVGElement | null;
 
 export type EventHandler = any;

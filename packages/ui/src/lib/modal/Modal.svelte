@@ -1,4 +1,11 @@
 <script lang="ts">
+	/**
+	 * The `Modal` component displays content in a dialog that overlays the rest of the page, built on top of the `bits-ui` `Dialog` primitive.
+	 * It supports a `title`, `description` and `buttons` snippet, and can be opened by a custom `trigger` snippet or the default [Trigger](./?path=/docs/ui-components-overlays-overlay--documentation) button.
+	 *
+	 * **Alternatives**: for less disruptive explanatory content, consider a [Tooltip](./?path=/docs/ui-components-overlays-tooltip--documentation) or [Popover](./?path=/docs/ui-components-overlays-popover--documentation) instead, or use the [Overlay](./?path=/docs/ui-components-overlays-overlay--documentation) component to choose between them.
+	 * @component
+	 */
 	import { XMark } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Dialog, type WithoutChild } from 'bits-ui';
@@ -9,7 +16,7 @@
 
 	type Props = Dialog.RootProps & {
 		hintLabel?: string;
-		title?: Snippet;
+		title: Snippet;
 		description?: Snippet;
 		trigger?: Snippet<[Record<string, any>]>;
 		buttons?: Snippet;
@@ -40,7 +47,7 @@
 		hintLabel,
 		contentProps,
 		/**
-		 * Title that appears at the top of the modal
+		 * Title that appears at the top of the modal. Required: it names the dialog for screen readers.
 		 */
 		title,
 
@@ -82,12 +89,13 @@
 
 	const modalClass = $derived(
 		classNames(
-			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-container-level-0 shadow-xl pointer-events-auto',
+			'inline-block w-full max-h-full flex flex-col text-left align-middle transition-all transform bg-color-surface elevation-5 pointer-events-auto outline-none',
 			widthClasses[width]
 		)
 	);
 
-	let descriptionEl: Element;
+	// The dialog itself takes focus on open, so a screen reader reads its title and description.
+	let contentEl: HTMLElement | null = $state(null);
 </script>
 
 {#snippet modalTrigger()}
@@ -114,17 +122,18 @@
 		<div class="pointer-events-none fixed inset-2 z-50 flex items-center justify-center sm:inset-8">
 			<Dialog.Content
 				{...contentProps}
+				bind:ref={contentEl}
 				class={modalClass}
 				onOpenAutoFocus={(e) => {
 					e.preventDefault();
-					descriptionEl?.focus();
+					contentEl?.focus();
 				}}
 			>
 				<div
-					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-container-level-1 p-3 pr-4 text-color-text-primary ${headerTheme}`}
+					class={`relative flex items-center justify-between border-l-[5px] border-color-static-brand bg-color-surface-muted p-3 pr-4 text-color-text ${headerTheme}`}
 				>
-					<Dialog.Title class="font-medium">
-						{@render title?.()}
+					<Dialog.Title class="typeset-product title-sm">
+						{@render title()}
 					</Dialog.Title>
 					<Dialog.Close>
 						{#snippet child({ props })}
@@ -138,9 +147,11 @@
 
 				<div class="overflow-y-auto">
 					<div class="px-4 py-6">
-						<Dialog.Description>
-							<span bind:this={descriptionEl}>{@render description?.()}</span>
-						</Dialog.Description>
+						{#if description}
+							<Dialog.Description>
+								{@render description()}
+							</Dialog.Description>
+						{/if}
 						{@render children?.()}
 					</div>
 				</div>

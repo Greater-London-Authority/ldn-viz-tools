@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { colorWithBestContrast } from '@ldn-viz/utils';
-	import { ArrowRight } from '@steeze-ui/heroicons';
+	import { ArrowRight, ArrowTopRightOnSquare } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { type Snippet } from 'svelte';
 	import { theme } from '../theme/themeState.svelte';
@@ -19,6 +19,7 @@
 		href?: string;
 		/**
 		 * If `true`, then the target of the link will open in a new browser tab or window.
+		 * The default icon changes to `ArrowTopRightOnSquare`, and screen readers hear "(opens in a new tab)".
 		 */
 		newWindow?: boolean;
 		/**
@@ -59,60 +60,68 @@
 	let textColor = $derived(
 		colorWithBestContrast(
 			bgColor,
-			theme.tokenNameToValue('text.primary'),
-			theme.tokenNameToValue('text.inverse.primary')
+			theme.tokenNameToValue('text'),
+			theme.tokenNameToValue('inverse.text')
 		)
 	);
 
 	let ctaTextColor = $derived(
 		colorWithBestContrast(
 			ctaColorHover,
-			theme.tokenNameToValue('text.primary'),
-			theme.tokenNameToValue('text.inverse.primary')
+			theme.tokenNameToValue('text'),
+			theme.tokenNameToValue('inverse.text')
 		)
 	);
-
-	let isHovered = $state(false);
 </script>
 
 <a
 	{href}
 	target={newWindow ? '_blank' : '_self'}
-	rel={newWindow ? 'noopener noreferrer' : ''}
-	class="group flex h-full flex-col transition"
+	rel={newWindow ? 'noopener noreferrer' : undefined}
+	class="group flex h-full flex-col bg-[var(--placard-bg)] transition hover:bg-[var(--placard-bg-hover)] focus-visible:bg-[var(--placard-bg-hover)]"
 	style:color={textColor}
-	style:background-color={isHovered ? bgColorHover : bgColor}
-	onmouseenter={() => (isHovered = true)}
-	onmouseleave={() => (isHovered = false)}
+	style:--placard-bg={bgColor}
+	style:--placard-bg-hover={bgColorHover}
+	style:--placard-cta={ctaColor}
+	style:--placard-cta-hover={ctaColorHover}
 >
-	<div class="h-full space-y-2 p-4">
+	<div class="flow-standard h-full p-4">
 		{#if title}
-			<p class="text-2xl font-bold">
+			<p class="card-title">
 				<!-- Title text, displayed at top of card in large font-->
 				{@render title?.()}
 			</p>
 		{/if}
 
 		{#if body}
-			<p class=" prose h-full leading-snug">
+			<p class="body-md h-full">
 				<!-- longer description text displayed below the title in smaller font -->
 				{@render body?.()}
 			</p>
 		{/if}
 	</div>
 	<div
-		class=" mt-4 flex items-center justify-between px-4 py-2 transition"
+		class="mt-4 flex items-center justify-between bg-[var(--placard-cta)] px-4 py-2 transition group-hover:bg-[var(--placard-cta-hover)] group-focus-visible:bg-[var(--placard-cta-hover)]"
 		style:color={ctaTextColor}
-		style:background-color={isHovered ? ctaColorHover : ctaColor}
 	>
 		<!-- text displayed at bottom of button, vertically aligned with icon-->
-		{@render footer?.()}
+		<span class="label-md">
+			{@render footer?.()}
+			{#if newWindow}
+				<span class="sr-only">(opens in a new tab)</span>
+			{/if}
+		</span>
 
-		<!-- icon positioned at bottom-right of button (defaults to `ArrowRight`) -->
+		<!-- icon positioned at bottom-right of button (defaults to `ArrowRight`, or `ArrowTopRightOnSquare` when `newWindow` is set) -->
 		{#if icon}
 			{@render icon()}
 		{:else}
-			<Icon src={ArrowRight} theme="solid" class="h-5 w-5" aria-hidden="true" />
+			<Icon
+				src={newWindow ? ArrowTopRightOnSquare : ArrowRight}
+				theme="solid"
+				class="h-5 w-5"
+				aria-hidden="true"
+			/>
 		{/if}
 	</div>
 </a>

@@ -8,15 +8,18 @@ const MAX_MESSAGES = 3;
 
 export const messages: Writable<ToastMessage[]> = writable([]);
 
-// newToastMessage creates a storable message that can be posted or refreshed
-// by the user dev using the ToastMessage.post function.
-//
-// Often there is no need to store and reuse a toast. You can simple fire and
-// forget: newToastMessage("This is a notice!").post().
+/**
+ * newToastMessage creates a storable message that can be posted or refreshed
+ * by the user dev using the ToastMessage.post function.
+ *
+ * Often there is no need to store and reuse a toast. You can simple fire and
+ * forget: newToastMessage("This is a notice!").post().
+ */
 export const newToastMessage = (text: string, options: ToastMessageOptions = {}) => {
 	const id = options.id ? options.id : randomId();
 	const type = options.type ? options.type : ToastType.Notice;
-	const timeToLive = options.timeToLive ? options.timeToLive : DEFAULT_TIME_TO_LIVE;
+	const timeToLive =
+		typeof options.timeToLive === 'number' ? options.timeToLive : DEFAULT_TIME_TO_LIVE;
 
 	const msg: ToastMessage = {
 		text: text,

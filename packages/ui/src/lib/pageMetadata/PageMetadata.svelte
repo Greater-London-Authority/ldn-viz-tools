@@ -26,7 +26,7 @@
 		/**
 		 * URL of the favicon. By default, assumes there is a favicon.ico file in the static folder.
 		 */
-		favicon?: any;
+		favicon?: string;
 		/**
 		 * The object type - see [this documentation](https://ogp.me/#types)
 		 */

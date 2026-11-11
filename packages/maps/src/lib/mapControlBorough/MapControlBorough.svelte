@@ -48,6 +48,6 @@
 	});
 </script>
 
-<div class="pointer-events-auto invisible z-[999] flex w-64 flex-col shadow sm:visible">
+<div class="elevation-2 pointer-events-auto invisible z-[999] flex w-64 flex-col sm:visible">
 	<Select bind:value={selectedBorough} {options} label="" placeholder="Select a Borough to zoom" />
 </div>

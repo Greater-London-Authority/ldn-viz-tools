@@ -9,6 +9,7 @@
 	import { scaleLinear } from 'd3-scale';
 
 	import type { ViolinProps } from '$lib/core/aggregateRenderers/ViolinProps';
+	import { theme } from '@ldn-viz/ui';
 	import { area, curveCatmullRom } from 'd3-shape';
 
 	let { values, extent = [0, 1], width = 100, ..._rest }: ViolinProps = $props();
@@ -62,16 +63,28 @@
 
 <!-- TODO: tooltips -->
 <svg viewBox={`0 0 ${width} ${height}`} {width} {height}>
-	<path d={areaGenerator(bins)} fill="lightgrey" />
+	<path d={areaGenerator(bins)} fill={theme.tokenNameToValue('data.primary')} />
 
 	<!-- line from q1 to q3 -->
 	{#if box.q1 !== undefined && box.q3 !== undefined}
-		<line x1={x(box.q1)} x2={x(box.q3)} y1={height / 2} y2={height / 2} stroke="black" />
+		<line
+			x1={x(box.q1)}
+			x2={x(box.q3)}
+			y1={height / 2}
+			y2={height / 2}
+			stroke={theme.tokenNameToValue('chart.axis')}
+		/>
 	{/if}
 
 	<!-- median -->
 	{#if box.q2 !== undefined}
-		<line x1={x(box.q2)} x2={x(box.q2)} y1={height * 0.25} y2={height * 0.75} stroke="black" />
+		<line
+			x1={x(box.q2)}
+			x2={x(box.q2)}
+			y1={height * 0.25}
+			y2={height * 0.75}
+			stroke={theme.tokenNameToValue('chart.axis')}
+		/>
 	{/if}
 
 	<!-- mean -->
@@ -81,7 +94,7 @@
 			x2={x(box.mean)}
 			y1={height * 0.25}
 			y2={height * 0.75}
-			stroke="black"
+			stroke={theme.tokenNameToValue('chart.axis')}
 			stroke-dasharray="2,2"
 		/>
 	{/if}

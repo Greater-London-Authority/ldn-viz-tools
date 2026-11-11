@@ -5,7 +5,7 @@
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
-			"outputs": [".svelte-kit/**", "dist/**", "docs/**", "styles/**"]
+			"outputs": [".svelte-kit/**", "dist/**", "storybook-static/**", "styles/**"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"]

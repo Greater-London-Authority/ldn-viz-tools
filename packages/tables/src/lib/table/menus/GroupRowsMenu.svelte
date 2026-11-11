@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import { Overlay, Select } from '@ldn-viz/ui';
 
 	interface Props {
-		table: TableData;
+		table: TableState;
 		onChange: () => void;
 	}
 
@@ -38,13 +38,12 @@
 				...sortingCols.filter((d) => !!d),
 				...table.columnSpec.filter((f) => !table.groupingFields.includes(f.short_label))
 			];
-			table.setColumnSpec(table.columnSpec);
 			//   */
 
 			const cols = (groupingSelection || []).map((o) => o.id);
 
 			if (JSON.stringify(table.groupingFields) !== JSON.stringify(cols)) {
-				table.setGrouping(cols);
+				table.groupingFields = cols;
 				onChange();
 			}
 		}

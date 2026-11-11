@@ -14,6 +14,7 @@
 	import { flip, offset, shift } from 'svelte-floating-ui/dom';
 	import { type Writable, writable } from 'svelte/store';
 	import MapMarkerStyledContainer from '../mapMarker/elements/mapMarkerStyledContainer/MapMarkerStyledContainer.svelte';
+	import { isConstructor } from '../utils/isConstructor';
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		strategy: 'fixed', //or absolute
@@ -94,10 +95,6 @@
 			? layers.find((l) => l.id === $mousedOverObject?.layer?.id)
 			: undefined
 	);
-
-	function isConstructor(obj: any) {
-		return !!obj.prototype && !!obj.prototype.constructor.name;
-	}
 </script>
 
 <svelte:window onmousemove={mousemove} />

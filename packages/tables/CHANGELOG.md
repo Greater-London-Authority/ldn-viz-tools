@@ -1,5 +1,73 @@
 # @ldn-viz/tables
 
+## 8.0.0
+
+### Major Changes
+
+- f0d016a: - CHANGED: requires `@ldn-viz/themes` 10, now a peer dependency instead of a dependency, and its `index.css` (or `system.css`) loaded by the app. Tables use the `table-*` usage aliases; the cell alias is `table-body`.
+  - CHANGED: `BarDivergingCell`, `BarDivergingAxis` and `PairArrowAxis` labels use the `table-body` and `chart-tick-sm` aliases. `textSize` is an optional override with no default. Axis ticks grow from 8px to 12px, and the axes are 24px tall.
+  - CHANGED: the aggregate renderers' labels use `chart-tick-sm`.
+  - FIXED: `Table` no longer takes `display: table-cell` from a Tailwind utility of the same name as the old cell alias.
+  - CHANGED: `BarDivergingCell` colours diverging data with the `data.positive` and `data.negative` roles by default (negative bars were dark pink and are now red), and its zero line and labels use the `chart.axis`, `text` and `inverse.text` tokens, so they show in dark mode. The theme colours follow a change of theme.
+
+### Patch Changes
+
+- Updated dependencies [257b51d]
+- Updated dependencies [eaca94a]
+- Updated dependencies [f0d016a]
+  - @ldn-viz/themes@10.0.0
+  - @ldn-viz/ui@25.0.0
+
+## 7.0.0
+
+### Major Changes
+
+- 46f1a37: CHANGED: refactor how state is handled within table library
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Minor Changes
+
+- 864fdfb: CHANGED: `TableContainer` is now constructed using the `ChromeHeader` and `ChromeFooter` from `@ldn-viz/ui`
+  CHANGED: `TableContainer` now accepts `eyebrow`, `emphasis` (`primary`/`secondary`), `description`, and `hint`/`hintType`/`hintTitle` props
+  CHANGED: `TableContainer` prop `subTitle` has been renamed to `subtitle`
+  CHANGED: package no longer depends on `@ldn-viz/charts`
+
+### Patch Changes
+
+- Updated dependencies [0e03ccc]
+- Updated dependencies [864fdfb]
+- Updated dependencies [0d7953b]
+- Updated dependencies [2633ae9]
+- Updated dependencies [2633ae9]
+- Updated dependencies [62ec2b9]
+- Updated dependencies [bddeccb]
+- Updated dependencies [6d20c4e]
+- Updated dependencies [3a6075a]
+- Updated dependencies [e1e3928]
+  - @ldn-viz/ui@24.0.0
+  - @ldn-viz/themes@9.0.0
+  - @ldn-viz/utils@4.0.0
+
+## 6.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [638c76d]
+- Updated dependencies [8035407]
+- Updated dependencies [b5ac9bb]
+- Updated dependencies [d73427a]
+- Updated dependencies [9269ac2]
+- Updated dependencies [ac203e1]
+- Updated dependencies [0c15080]
+  - @ldn-viz/charts@8.0.0
+  - @ldn-viz/ui@23.0.0
+  - @ldn-viz/themes@8.0.0
+  - @ldn-viz/utils@3.0.0
+
 ## 5.2.0
 
 ### Minor Changes

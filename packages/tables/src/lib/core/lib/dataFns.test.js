@@ -21,21 +21,27 @@ test('can group based on single variable', () => {
 			color: undefined,
 			order: [0, 1],
 			parentGroup: undefined,
-			childGroups: []
+			childGroups: [],
+			isExpanded: true,
+			maxRows: undefined
 		},
 		{
 			name: '2',
 			color: undefined,
 			order: [2, 3],
 			parentGroup: undefined,
-			childGroups: []
+			childGroups: [],
+			isExpanded: true,
+			maxRows: undefined
 		},
 		{
 			name: '3',
 			color: undefined,
 			order: [4, 5],
 			parentGroup: undefined,
-			childGroups: []
+			childGroups: [],
+			isExpanded: true,
+			maxRows: undefined
 		}
 	];
 

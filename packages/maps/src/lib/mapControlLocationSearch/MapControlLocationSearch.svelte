@@ -45,7 +45,7 @@
 		/**
 		 * Called when the user clears the search box.
 		 */
-		onSearchClear?: any;
+		onSearchClear?: () => void;
 		/**
 		 * Passed to the suggestions dropdown to limit the number of suggestions
 		 * shown at once.
@@ -90,7 +90,7 @@
 	});
 </script>
 
-<div class="flex shadow" {...rest}>
+<div class="elevation-2 flex" {...rest}>
 	<MapControlGeocoder
 		{adapter}
 		onLocationSelected={onLocationFound}

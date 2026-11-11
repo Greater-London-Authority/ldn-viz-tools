@@ -8,9 +8,8 @@
 	 * @component
 	 */
 
-	import { goto } from '$app/navigation';
-	import { accessToken, authError, type OAuthConfig, refreshToken, roles, userName } from './auth';
 	import { onMount } from 'svelte';
+	import { accessToken, authError, type OAuthConfig, refreshToken, roles, userName } from './auth';
 
 	const refreshAccessToken = async (oauth_config: OAuthConfig): Promise<void> => {
 		fetch(oauth_config.token_endpoint, {
@@ -117,8 +116,9 @@
 
 	interface Props {
 		config: OAuthConfig;
+		goto: (url: string | URL, options: any) => Promise<void>;
 	}
 
-	let { config }: Props = $props();
+	let { config, goto }: Props = $props();
 	onMount(() => getAccessToken(config));
 </script>

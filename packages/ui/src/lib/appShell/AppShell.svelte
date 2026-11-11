@@ -8,13 +8,15 @@
 
 	import { fade, slide } from 'svelte/transition';
 	import { getSidebarState, setSidebarState } from '../sidebar/sidebarState.svelte';
-	import { heightLookup, transitionAxis, widthLookup } from '../sidebar/sidebarUtils';
+	import {
+		heightLookup,
+		tabOffsetLookup,
+		transitionAxis,
+		widthLookup
+	} from '../sidebar/sidebarUtils';
 	import type { SidebarPlacement } from '../sidebar/types';
 	import { classNames } from '../utils/classNames';
 	import { getSetting } from './utils/getSettingByScreenWidth';
-
-	setSidebarState();
-	let sidebarState = getSidebarState();
 
 	interface Props {
 		/**
@@ -58,6 +60,9 @@
 
 	let innerWidth = $state(0);
 
+	setSidebarState(() => getSetting(sidebarPlacement, innerWidth));
+	let sidebarState = getSidebarState();
+
 	(() => {
 		if (getSetting(sidebarAlwaysOpen, innerWidth)) {
 			sidebarState.isOpen = true;
@@ -74,24 +79,37 @@
 	};
 
 	// Classes applied to the wrapper element
-	// wrapperFlowLookup classes determine the flex direction based on sidebar placement
 	let wrapperClasses = $derived(
-		classNames('h-full w-full flex relative', heightClass) // overflow-hidden
+		classNames(
+			'h-full w-full flex relative',
+			sidebarState.orientation === 'horizontal' ? 'flex-col' : '',
+			heightClass
+		) // overflow-hidden
 	);
 
-	/*
-		Below are settings for Breakpoint Prop and Always Open Prop.
-		This is the secret sauce that allows us to pass an object containing different props per breakpoint.
-		The breakpoints are configurable if required, but use defaults: Demo to follow.
-		See also appShell/utils/getSettingByScreenWidth 
-	*/
-	let breakPointProp = $derived(getSetting(sidebarPlacement, innerWidth));
-	let sidebarWidthClasses = $derived(widthLookup[sidebarState.width][breakPointProp]);
-	let sidebarHeightClasses = $derived(heightLookup[sidebarState.width][breakPointProp]);
+	// The sidebar is positioned against an element that sticks to the edge of
+	// the viewport, so the sidebar and its tab bar or toggle stay on screen on a
+	// long page, and whatever follows the AppShell, such as a footer, pushes them
+	// along. A top or bottom element is in the flow before or after the content.
+	const stickyLookup: Record<string, string> = {
+		top: 'sticky top-0 z-30',
+		bottom: 'sticky bottom-0 z-30 order-3',
+		// A left or right sidebar sticks to the top of the viewport at the viewport's
+		// height, so it stays in view while the content scrolls. The element has no
+		// width; the sidebar extends from it over the push spacer, if there is one.
+		left: 'sticky top-0 z-30 h-dvh self-start',
+		right: 'sticky top-0 z-30 h-dvh self-start order-2'
+	};
+
+	let sidebarWidthClasses = $derived(
+		widthLookup[sidebarState.width ?? 'standard'][sidebarState.placement]
+	);
+	let sidebarHeightClasses = $derived(
+		heightLookup[sidebarState.width ?? 'standard'][sidebarState.placement]
+	);
 
 	$effect(() => {
 		sidebarState.isOpen = respondToWidthChange(innerWidth);
-		sidebarState.placement = breakPointProp;
 	});
 </script>
 
@@ -99,10 +117,18 @@
 <svelte:window bind:innerWidth />
 
 <div class={wrapperClasses}>
-	<main class={classNames('w-full', breakPointProp === 'right' ? '' : 'order-1')}>
+	<main
+		class={classNames(
+			'w-full min-w-0',
+			sidebarState.placement === 'right' ? '' : 'order-1',
+			// In a column, the content fills the AppShell, so a bottom sidebar sits at its foot.
+			sidebarState.orientation === 'horizontal' ? 'grow' : '',
+			sidebarState.hasTabs ? tabOffsetLookup[sidebarState.placement] : ''
+		)}
+	>
 		<!-- The main content of the page. -->
 		{#if main}{@render main()}{:else}
-			<p class="font-bold">
+			<p class="typeset-product body-md">
 				Provide some main content. The main content you provide should have appropriate padding
 				applied...
 			</p>
@@ -110,7 +136,7 @@
 	</main>
 
 	{#if innerWidth !== 0}
-		<div transition:fade={{ duration: 200 }}>
+		<div class={stickyLookup[sidebarState.placement]} transition:fade={{ duration: 200 }}>
 			<!-- a `<Sidebar>` component -->
 			{#if sidebar}{@render sidebar()}{:else}Provide a snippet to render a Sidebar{/if}
 		</div>
@@ -119,8 +145,12 @@
 	<!-- This div exists to push content to the side of the sidebar	when sidebarPush is set to true-->
 	{#if (sidebarState.isAlwaysOpen || (sidebarPush && sidebarState.isOpen)) && sidebarState.width}
 		<div
-			class={classNames('flex', sidebarHeightClasses)}
-			transition:slide={{ duration: 300, axis: transitionAxis[breakPointProp] }}
+			class={classNames(
+				'flex',
+				sidebarHeightClasses,
+				sidebarState.placement === 'bottom' ? 'order-2' : ''
+			)}
+			transition:slide={{ duration: 300, axis: transitionAxis[sidebarState.placement] }}
 		>
 			<div class={classNames('shrink-0', sidebarWidthClasses)}></div>
 		</div>

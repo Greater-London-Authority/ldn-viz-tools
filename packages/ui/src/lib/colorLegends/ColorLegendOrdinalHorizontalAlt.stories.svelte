@@ -15,6 +15,16 @@
 	const ordinalScale = scaleOrdinal()
 		.domain(['A', 'B', 'C', 'D'])
 		.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']);
+
+	const longLabelScale = scaleOrdinal()
+		.domain([
+			'Very low deprivation',
+			'Low deprivation',
+			'Medium deprivation',
+			'High deprivation',
+			'Very high deprivation'
+		])
+		.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c']);
 </script>
 
 <Story name="Default">
@@ -39,6 +49,30 @@
 				title="Current EPC Rating"
 				highlightedValue="B"
 			/>
+		</div>
+	{/snippet}
+</Story>
+
+<!--
+If the labels are too long they will overlap - consider using the 
+ [ColorLegendOrdinalChips](./?path=/docs/ui-components-legends-colorlegendordinalchips--documentation)
+ component instead.
+ -->
+<Story name="Long category labels">
+	{#snippet template()}
+		<div class="w-[600px]">
+			<ColorLegendOrdinalHorizontalAlt
+				scale={longLabelScale}
+				title="Index of Multiple Deprivation"
+			/>
+		</div>
+	{/snippet}
+</Story>
+
+<Story name="Without title">
+	{#snippet template()}
+		<div class="w-[400px]">
+			<ColorLegendOrdinalHorizontalAlt scale={ordinalScale} />
 		</div>
 	{/snippet}
 </Story>

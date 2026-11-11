@@ -144,7 +144,7 @@ export const redirectToAuthorizationEndpoint = async (oauth_config: OAuthConfig)
  * @param url
  * @param options
  */
-export const fetchWithAuth = (url: string, options: any) => {
+export const fetchWithAuth = (url: string, options?: RequestInit) => {
 	const newOptions = {
 		...(options || {}),
 		headers: {

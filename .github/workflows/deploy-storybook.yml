@@ -36,12 +36,12 @@ jobs:
         run: npm run build
 
       - name: Build storybook site
-        run: npm run build-storybook -w apps/docs
+        run: npm run build-storybook -w apps/storybook
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./apps/docs/storybook-static
+          path: ./apps/storybook/storybook-static
 
   deploy:
     environment:

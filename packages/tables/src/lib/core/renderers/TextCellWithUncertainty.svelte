@@ -4,9 +4,9 @@
 	 * The first entry of `contextVals` is interpreted as indicating whether the value is uncertain;
 	 * @component
 	 */
+	import type { TextCellWithUncertaintyProps } from '$lib/core/renderers/TextCellWithUncertaintyProps';
 	import { format } from 'd3-format';
 	import { classNames } from '../../utils/utilityFns.js';
-	import type { TextCellWithUncertaintyProps } from '$lib/core/renderers/TextCellWithUncertaintyProps';
 
 	let {
 		value,
@@ -26,9 +26,7 @@
 	let alignmentClass = $derived(alignmentClasses[alignText ?? 'center']);
 
 	let textColor = $derived(
-		contextVals.length > 0 && !contextVals[0]
-			? 'text-color-text-secondary'
-			: 'text-color-text-primary'
+		contextVals.length > 0 && !contextVals[0] ? 'text-color-text-muted' : 'text-color-text'
 	);
 </script>
 

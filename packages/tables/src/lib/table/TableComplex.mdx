@@ -1,0 +1,36 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TableComplex from './TableComplex.stories.svelte';
+
+<Meta title="Tables/Example Tables/Visual Renderers" />
+
+# Visual Renderers
+
+## Default
+
+<Canvas of={TableComplex.Default} />
+
+## Table with uncertain values in columns
+
+This example shows how the encoding used for a column can be influenced by the value of a second column.
+In this case, some fields also have associated fields that record whether the value is known or merely estimated.
+
+<Canvas of={TableComplex.TableWithUncertainValuesInColumns} />
+
+## High Streets Benchmark Table
+
+<Canvas of={TableComplex.HighStreetsBenchmarkTable} />
+
+## Metrics Example
+
+<Canvas of={TableComplex.MetricsExample} />
+
+## Metrics Example - virtualised
+
+<Canvas of={TableComplex.MetricsExampleVirtualised} />
+
+## Salary Example
+
+Try sorting by Salary, or **Group Rows** by _Position_ then **Sort groups** by _Mean Salary_.
+This example dataset is from the [DataTables project](https://datatables.net/examples/data_sources/js_array.html).
+
+<Canvas of={TableComplex.SalaryExample} />

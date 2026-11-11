@@ -4,6 +4,6 @@ export interface TextCellProps {
 	fontWeight?: string | ((value: number | string) => string);
 	visibility?: string | ((value: number | string) => string);
 	formatString?: string | undefined;
-
+	color?: string | undefined;
 	[key: string]: any;
 }

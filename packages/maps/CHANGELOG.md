@@ -1,5 +1,167 @@
 # ldn-viz-tools-maps
 
+## 23.0.0
+
+### Patch Changes
+
+- Updated dependencies [ba41cbd]
+  - @ldn-viz/ui@25.3.0
+
+## 22.0.0
+
+### Patch Changes
+
+- Updated dependencies [cb71a0c]
+  - @ldn-viz/ui@25.2.0
+
+## 21.0.0
+
+### Patch Changes
+
+- Updated dependencies [40eaa29]
+- Updated dependencies [40eaa29]
+- Updated dependencies [40eaa29]
+- Updated dependencies [2436d81]
+- Updated dependencies [47f9c91]
+- Updated dependencies [47f9c91]
+- Updated dependencies [cefb966]
+- Updated dependencies [d955276]
+- Updated dependencies [08073c7]
+- Updated dependencies [392c1e1]
+- Updated dependencies [40eaa29]
+- Updated dependencies [a903c49]
+  - @ldn-viz/ui@25.1.0
+  - @ldn-viz/themes@10.0.2
+
+## 20.0.0
+
+### Major Changes
+
+- f0d016a: - CHANGED: requires `@ldn-viz/themes` 10, now a peer dependency, and its `index.css` (or `system.css`) loaded by the app. Map controls, legends and markers use the v4 role classes and typesets, and the `surface` colours in place of `container`.
+  - FIXED: the cluster layers' outline and hole colours use `inverse.geo.feature`, the v4 name for `geo.inverse.feature`, which no longer resolved and logged a warning.
+
+### Patch Changes
+
+- Updated dependencies [257b51d]
+- Updated dependencies [eaca94a]
+- Updated dependencies [f0d016a]
+  - @ldn-viz/themes@10.0.0
+  - @ldn-viz/ui@25.0.0
+
+## 19.0.0
+
+### Patch Changes
+
+- Updated dependencies [5117a14]
+  - @ldn-viz/ui@24.4.0
+
+## 18.1.0
+
+### Minor Changes
+
+- a30bd58: ADDED: `closeTooltipOnLeave` action
+- 9d1ac28: ADDED: `CanvasIconLayer`
+  ADDED: `ClusterLayer`
+  ADDED: `MultiClusterLayer`
+
+### Patch Changes
+
+- Updated dependencies [d39b003]
+  - @ldn-viz/ui@24.3.1
+
+## 18.0.0
+
+### Minor Changes
+
+- 706f891: ADDED: `MapPointSearch` component
+
+### Patch Changes
+
+- Updated dependencies [861cf62]
+- Updated dependencies [ff50fb5]
+- Updated dependencies [0e464ed]
+  - @ldn-viz/ui@24.3.0
+
+## 17.0.0
+
+### Patch Changes
+
+- Updated dependencies [df7cd85]
+- Updated dependencies [7a8499d]
+- Updated dependencies [af4d3bd]
+- Updated dependencies [47c3895]
+- Updated dependencies [50f265c]
+  - @ldn-viz/ui@24.2.0
+
+## 16.0.0
+
+### Minor Changes
+
+- e013788: CHANGED: replaced many `any` types with tighter types
+
+### Patch Changes
+
+- Updated dependencies [e013788]
+  - @ldn-viz/ui@24.1.0
+
+## 15.0.0
+
+### Major Changes
+
+- e1e3928: CHANGED: update typography to use new approach from design system 3.1
+
+### Patch Changes
+
+- Updated dependencies [0e03ccc]
+- Updated dependencies [864fdfb]
+- Updated dependencies [0d7953b]
+- Updated dependencies [2633ae9]
+- Updated dependencies [2633ae9]
+- Updated dependencies [62ec2b9]
+- Updated dependencies [bddeccb]
+- Updated dependencies [6d20c4e]
+- Updated dependencies [3a6075a]
+- Updated dependencies [e1e3928]
+  - @ldn-viz/ui@24.0.0
+  - @ldn-viz/utils@4.0.0
+
+## 14.0.0
+
+### Major Changes
+
+- 9269ac2: CHANGED: Update tokens to new design system
+
+### Patch Changes
+
+- Updated dependencies [d73427a]
+- Updated dependencies [9269ac2]
+- Updated dependencies [ac203e1]
+  - @ldn-viz/ui@23.0.0
+  - @ldn-viz/utils@3.0.0
+
+## 13.0.0
+
+### Minor Changes
+
+- 6c89899: CHANGED: expose functions from `MapDraw` component, so users of the component can trigger the actions that would result from clicking the control buttons
+
+### Patch Changes
+
+- Updated dependencies [e3ca40c]
+- Updated dependencies [6d6d424]
+- Updated dependencies [01c499c]
+  - @ldn-viz/ui@22.1.0
+
+## 12.0.0
+
+### Patch Changes
+
+- Updated dependencies [6c3607d]
+- Updated dependencies [8402081]
+- Updated dependencies [792b3f6]
+- Updated dependencies [2398df2]
+  - @ldn-viz/ui@22.0.0
+
 ## 11.0.0
 
 ### Minor Changes

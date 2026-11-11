@@ -42,3 +42,56 @@
 		/>
 	{/snippet}
 </Story>
+
+<!-- With no posScale, bars fall back to the default band scale, ordered by descending frequency. -->
+<Story name="No posScale (default band scale)">
+	{#snippet template()}
+		<BarChart
+			values={['a', 'a', 'b', 'b', 'b', 'b', 'c', 'c', 'd']}
+			color={scaleOrdinal<string, string>()
+				.domain(['a', 'b', 'c', 'd'])
+				.range(['#c5dcf2', '#8fb4db', '#628dba', '#3b6894', '#18446c'])}
+		/>
+	{/snippet}
+</Story>
+
+<!-- `color` accepts a plain string, applied to every bar. -->
+<Story name="Solid color string">
+	{#snippet template()}
+		<BarChart values={['a', 'a', 'b', 'b', 'b', 'b', 'c', 'c']} color="lightgrey" />
+	{/snippet}
+</Story>
+
+<!-- With more than 3 distinct categories, labels are suppressed by the `sortedData.length <= 3` guard. -->
+<Story name="Many bars">
+	{#snippet template()}
+		<BarChart
+			values={['a', 'a', 'b', 'b', 'b', 'c', 'c', 'd', 'e', 'e', 'f', 'g']}
+			color="lightgrey"
+		/>
+	{/snippet}
+</Story>
+
+<!-- Null / missing values are counted as a distinct "null" category. -->
+<Story name="Null / missing values">
+	{#snippet template()}
+		<BarChart values={['a', 'a', null, null, 'b', null]} color="lightgrey" />
+	{/snippet}
+</Story>
+
+<!-- Labels longer than 7 characters are truncated with an ellipsis by `truncateLabel`. -->
+<Story name="Long category labels">
+	{#snippet template()}
+		<BarChart
+			values={['alpha-long', 'alpha-long', 'beta-longer', 'gamma-longest']}
+			color="lightgrey"
+		/>
+	{/snippet}
+</Story>
+
+<!-- With no values, nothing is rendered. -->
+<Story name="Empty values">
+	{#snippet template()}
+		<BarChart values={[]} color="lightgrey" />
+	{/snippet}
+</Story>

@@ -12,11 +12,11 @@
 
 	interface Props {
 		/**
-		 * A Stroke color token (e.g., `stroke-color-palette-blue-200`) to set the color of the background circle.
+		 * A stroke colour class from a semantic colour token (e.g., `stroke-color-surface-empty`, the default) to set the colour of the background circle.
 		 */
 		circleColorClass?: string;
 		/**
-		 * A Stroke color token (e.g., `stroke-color-palette-pink-500`) to set the color of the arc whose movement is animated.
+		 * A stroke colour class from a semantic colour token (e.g., `stroke-color-interactive-primary-active`, the default) to set the colour of the arc whose movement is animated.
 		 */
 		arcColorClass?: string;
 		/**
@@ -31,8 +31,10 @@
 
 	let { circleColorClass = '', arcColorClass = '', title = undefined, ...rest }: Props = $props();
 
-	let circleClasses = $derived(classNames(circleColorClass || 'stroke-color-ui-empty'));
-	let pathClasses = $derived(classNames(arcColorClass || 'stroke-color-action-primary-active'));
+	let circleClasses = $derived(classNames(circleColorClass || 'stroke-color-surface-empty'));
+	let pathClasses = $derived(
+		classNames(arcColorClass || 'stroke-color-interactive-primary-active')
+	);
 </script>
 
 <svg

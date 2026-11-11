@@ -49,11 +49,11 @@
 		aria-disabled={disabled}
 		{disabled}
 		style={color
-			? `--theme-input-border: ${color}; --theme-input-border-selected: ${color}; --theme-input-background-active: ${color}; --tw-ring-color: ${color};`
+			? `--color-border-muted: ${color}; --color-interactive-selected: ${color}; --color-interactive-primary: ${color}; --tw-ring-color: ${color};`
 			: ''}
 	/>
 	{#if label}
-		<span class="form-label ml-2 font-normal">{label}</span>
+		<span class="form-label ml-2">{label}</span>
 	{/if}
 
 	{#if hint}
@@ -73,11 +73,11 @@
 <style>
 	.form-radio:before {
 		content: '';
-		width: 0.65em;
-		height: 0.65em;
+		width: 0.625em;
+		height: 0.625em;
 		border-radius: 50%;
 		transform: scale(0);
-		box-shadow: inset 1em 1em var(--theme-input-background-active);
+		box-shadow: inset 1em 1em var(--color-interactive-primary);
 	}
 	.form-radio:checked:before {
 		transform: scale(1);

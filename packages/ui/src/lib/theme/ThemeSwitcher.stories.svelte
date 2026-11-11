@@ -23,4 +23,6 @@
 
 <Story name="Default" />
 
-<Story name="With size" args={{ size: 'xs' }} />
+<Story name="With size xs" args={{ size: 'xs' }} />
+
+<Story name="With size md" args={{ size: 'md' }} />

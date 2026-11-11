@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { TableData } from '$lib/core/lib/dataObj';
+	import type { TableState } from '$lib/core/lib/tableState.svelte';
 	import { CheckboxGroup, Overlay } from '@ldn-viz/ui';
 
 	interface Props {
-		table: TableData;
+		table: TableState;
 		onChange: () => void;
 	}
 
@@ -29,15 +29,15 @@
 		return new_fields;
 	});
 
-	let fieldSelection = $state(table.visibleFields);
+	let fieldSelection = $derived(table.visibleFields);
 	const updateVisibility = (newFields) => {
-		table.setVisibleFields(newFields);
+		table.visibleFields = newFields;
 		onChange();
 	};
 </script>
 
 <Overlay overlayType="popover" hintLabel="Show/Hide Columns">
-	<h2 class="font-bold">Select which columns to display:</h2>
+	<h2 class="label-lg">Select which columns to display:</h2>
 
 	<CheckboxGroup
 		options={fields}

@@ -1,5 +1,8 @@
 <script module lang="ts">
-	import { SidebarLeftContext, SidebarTopContext } from '../../../../../../../apps/docs/src/lib/';
+	import {
+		SidebarLeftContext,
+		SidebarTopContext
+	} from '../../../../../../../apps/storybook/src/lib';
 
 	import { Map as MapIcon, Square3Stack3d } from '@steeze-ui/heroicons';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
@@ -20,7 +23,7 @@
 	let { Story } = defineMeta({
 		title: 'Ui/Components - Layout And Themes/Sidebar/elements/SidebarTabs',
 		component: SidebarTabList,
-		decorators: [() => SidebarLeftContext as any],
+		decorators: [() => ({ Component: SidebarLeftContext })],
 		tags: ['autodocs'],
 		args: { tabs: tabs }
 	});

@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * The `<CheckboxGroupSolid>` component provides a way to create a set of `<CheckboxSolid>` components defined by an array of objects.
+	 * The `<CheckboxGroupSolid>` component provides a way to create a set of [CheckboxSolid](./?path=/docs/ui-components-checkboxes-checkboxsolid--documentation) components defined by an array of objects.
 	 *
 	 * **Alternatives**: if representing a set of options that are mutually exclusive, use the [RadioButtonSolid](./?path=/docs/ui-components-radiobuttons-radiobuttongroupsolid--documentation).
 	 * Consider using the [Checkbox](./?path=/docs/ui-components--checkboxes-checkbox--documentation)/[CheckboxGroup](./?path=/docs/ui-components-checkboxes-checkboxgroup--documentation).
@@ -123,8 +123,16 @@
 	{disabled}
 	{optional}
 	{customOverlay}
+	isGroup
 >
-	<div {id} role="group" aria-label={ariaLabel} class="flex flex-col space-y-1">
+	<div
+		{id}
+		role="group"
+		aria-label={ariaLabel}
+		aria-labelledby={label ? `${id}-label` : undefined}
+		aria-describedby={errorId ?? descriptionId}
+		class="flex flex-col space-y-1"
+	>
 		{#if !hideSelectAll}
 			<!--
 			form="" should prevent this checkbox from being included in form
@@ -152,7 +160,7 @@
 						disabled={option.disabled || disabled}
 						checked={selectionState[option.id]}
 						icon={option.icon}
-						rawIcon={option.rawIcon}
+						RawIcon={option.rawIcon}
 						iconPlacement={option.iconPlacement}
 						onchange={() => updateSelectedOptions(option.id)}
 					/>

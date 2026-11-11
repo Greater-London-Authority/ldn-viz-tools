@@ -25,17 +25,17 @@
 		/**
 		 * Function to be called when user clicks 'Done' button.
 		 */
-		onDone?: (_args: any) => any;
+		onDone?: (_features: GeoJSONStoreFeatures[]) => void;
 
 		/**
 		 * Function to be called when user clicks 'Edit' button.
 		 */
-		onStart?: () => any;
+		onStart?: () => void;
 
 		/**
 		 * Function to be called when user clicks 'Cancel' button.
 		 */
-		onCancel?: () => any;
+		onCancel?: () => void;
 
 		/**
 		 * If [true, false], then Geojson upload only is enabled.
@@ -63,9 +63,38 @@
 
 	let drawModes = new Modes();
 	let mapDraw = new MapDraw();
+	let mapDrawControls:
+		| {
+				clickEdit: () => void;
+				clickMode: () => void;
+				clickSelect: () => void;
+				clickClear: () => void;
+				clickCancel: () => void;
+				clickUpload: () => void;
+		  }
+		| undefined = $state(undefined);
 
 	let terraDraw: TerraDraw | undefined = $state(undefined);
 	let adapter: any = $state();
+
+	export const clickEdit = () => {
+		mapDrawControls?.clickEdit();
+	};
+	export const clickMode = () => {
+		mapDrawControls?.clickMode();
+	};
+	export const clickSelect = () => {
+		mapDrawControls?.clickSelect();
+	};
+	export const clickClear = () => {
+		mapDrawControls?.clickClear();
+	};
+	export const clickCancel = () => {
+		mapDrawControls?.clickCancel();
+	};
+	export const clickUpload = () => {
+		mapDrawControls?.clickUpload();
+	};
 
 	const createTerraDraw = (mapStore: unknown) => {
 		if (terraDraw) {
@@ -123,6 +152,7 @@
 
 {#if terraDraw}
 	<MapDrawControls
+		bind:this={mapDrawControls}
 		{terraDraw}
 		{uploadDownload}
 		{onStart}

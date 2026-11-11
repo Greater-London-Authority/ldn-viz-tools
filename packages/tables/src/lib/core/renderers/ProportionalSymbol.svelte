@@ -4,10 +4,11 @@
 	 * @component
 	 */
 	import type { ProportionalSymbolProps } from '$lib/core/renderers/ProportionalSymbolProps';
+	import { theme } from '@ldn-viz/ui';
 	import { format } from 'd3-format';
 
 	let {
-		color = 'steelblue',
+		color = theme.tokenNameToValue('data.primary'),
 		value,
 		showValues = false,
 		formatString = '0.0f',
