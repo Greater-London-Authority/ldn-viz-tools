@@ -66,7 +66,7 @@
 		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
 		 *
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: true | false | ('CSV' | 'JSON')[];
 
 		/**
 		 * Image Download Button in the footer
@@ -76,7 +76,13 @@
 		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
 		 *
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: true | false | ('PNG' | 'SVG')[];
+
+		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
 	};
 
 	let {
@@ -90,8 +96,9 @@
 		note,
 		options,
 		controls,
-		dataDownloadButton,
-		imageDownloadButton
+		dataDownload,
+		imageDownload,
+		exportButtonsVariant
 	}: ChartProps = $props();
 
 	const sortByField = (data: ChartDataRow[], fieldName: string) => {
@@ -180,8 +187,9 @@
 			{subTitle}
 			{source}
 			{byline}
-			{dataDownloadButton}
-			{imageDownloadButton}
+			{dataDownload}
+			{imageDownload}
+			{exportButtonsVariant}
 			{note}
 			id={dataset}
 			{columnMapping}
@@ -197,8 +205,9 @@
 		subtitle={subTitle}
 		{source}
 		{byline}
-		{dataDownloadButton}
-		{imageDownloadButton}
+		{dataDownload}
+		{imageDownload}
+		{exportButtonsVariant}
 		{note}
 		id={dataset}
 		{columnMapping}

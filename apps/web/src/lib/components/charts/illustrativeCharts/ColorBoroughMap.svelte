@@ -99,8 +99,8 @@
 	spec={mapSpec}
 	data={demoBoroughPercent}
 	title="Example"
-	imageDownloadButton={false}
-	dataDownloadButton={false}
+	imageDownload={false}
+	dataDownload={false}
 	alt="Choropleth map of London boroughs and their variable values"
 	chartDescription="The choropleth map of London shows the rate of something at a borough level. The lowest value is 9% in Merton. The highest value is 97% in Hounslow. The mean value is 50%."
 />

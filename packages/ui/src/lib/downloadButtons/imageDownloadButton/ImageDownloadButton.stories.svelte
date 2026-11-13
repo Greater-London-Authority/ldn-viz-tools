@@ -2,6 +2,23 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	import ImageDownloadButton from './ImageDownloadButton.svelte';
+	/**
+	 * The `<ImageDownloadButton>` component renders a button which, when clicked on, downloads an image file showing either an `HTML` or `SVG` element and its children.
+	 *
+	 * **Note**: This will not convert a non svg element into an svg, but will download an existing svg element as an svg file.
+	 *
+	 * To hide elements, apply the attribute `data-capture-ignore` and they will not be included in the downloaded image.
+	 * Note that this will not work for elements within an SVG (e.g., `<rect>`, `<text>`, `<line>`).
+	 * To hide only part of an SVG, separate the content into two SVG elements, and superimpose them by
+	 * placing them inside a div and applying the classes `absolute inset-0 pointer-events-none` to the second.
+	 * You can then place the SVG that should be hidden into an SVG with the `data-capture-ignore` attribute applied.
+	 *
+	 * **Deprecated export**: importing this component from `@ldn-viz/ui` is deprecated. Use
+	 * [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead. The component stays in
+	 * the library, because `ExportButtons` uses it when `variant="separate"`. Only the export will be removed, in the next
+	 * major version.
+	 *
+	 */
 
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/ImageDownloadButton',
@@ -24,7 +41,7 @@
 <script lang="ts">
 	import { Camera } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import LogoByCiu from '../logos/LogoByCIU.svelte';
+	import LogoByCiu from '../../logos/LogoByCIU.svelte';
 
 	let htmlNode: HTMLElement = $state() as HTMLElement;
 	let htmlNode2: HTMLElement = $state() as HTMLElement;

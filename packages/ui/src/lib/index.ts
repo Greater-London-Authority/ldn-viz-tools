@@ -25,8 +25,10 @@ export { default as ColorLegend } from './colorLegends/ColorLegend.svelte';
 export { default as ColorLegendOrdinalChips } from './colorLegends/ColorLegendOrdinalChips.svelte';
 export { default as ColorLegendOrdinalHorizontalAlt } from './colorLegends/ColorLegendOrdinalHorizontalAlt.svelte';
 export { default as CopyButton } from './copyButton/CopyButton.svelte';
-export { default as DataDownloadButton } from './dataDownloadButton/DataDownloadButton.svelte';
+export { downloadCSV, downloadJSON } from './downloadButtons/dataDownloadButton/utils';
+export { default as DownloadButton } from './downloadButtons/downloadButton/DownloadButton.svelte';
 export { default as ExportButtons } from './exportButtons/ExportButtons.svelte';
+export { downloadImage } from './downloadButtons/imageDownloadButton/utils';
 export { default as Flag } from './flag/Flag.svelte';
 export { default as Footer } from './footer/Footer.svelte';
 export { default as Geocoder } from './geolocation/Geocoder.svelte';
@@ -39,7 +41,6 @@ export { default as Header } from './header/Header.svelte';
 export { default as HeaderItem } from './header/HeaderItem.svelte';
 export { default as HeaderRight } from './header/HeaderRight.svelte';
 export { default as HeaderTitle } from './header/HeaderTitle.svelte';
-export { default as ImageDownloadButton } from './imageDownloadButton/ImageDownloadButton.svelte';
 export { default as Input } from './input/Input.svelte';
 export { default as InputWrapper } from './input/InputWrapper.svelte';
 export { default as LayerControl } from './layerControl/LayerControl.svelte';
@@ -51,10 +52,10 @@ export { default as LogoLOTI } from './logos/LogoLOTI.svelte';
 export { default as LogoMayor } from './logos/LogoMayor.svelte';
 export { default as EnhancedImage } from './markdown/EnhancedImage.svelte';
 export * from './markdown/imageContext';
+export * from './markdown/linkResolver';
 export { default as MarkdownLink } from './markdown/MarkdownLink.svelte';
 export { default as MarkdownPre } from './markdown/MarkdownPre.svelte';
 export { default as MarkdownTable } from './markdown/MarkdownTable.svelte';
-export * from './markdown/linkResolver';
 export { default as MergeValuesControl } from './mergeValuesControl/MergeValuesControl.svelte';
 export { default as Metric } from './metric/Metric.svelte';
 export { default as Modal } from './modal/Modal.svelte';
@@ -107,3 +108,17 @@ export { prefersDarkMode, prefersReducedMotion } from './userPreference/userPref
 export { classNames } from './utils/classNames.js';
 export { randomId } from './utils/randomId.js';
 export { default as Well } from './well/Well.svelte';
+
+// Re-exported as constants so that editors show the deprecation, which a JSDoc tag on `export { default as … }` does not.
+import DataDownloadButtonComponent from './downloadButtons/dataDownloadButton/DataDownloadButton.svelte';
+import ImageDownloadButtonComponent from './downloadButtons/imageDownloadButton/ImageDownloadButton.svelte';
+
+/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
+export const DataDownloadButton = DataDownloadButtonComponent;
+/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
+export type DataDownloadButton = ReturnType<typeof DataDownloadButtonComponent>;
+
+/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
+export const ImageDownloadButton = ImageDownloadButtonComponent;
+/** @deprecated Use `DownloadButton` instead. To be removed from the exports in the next major version. */
+export type ImageDownloadButton = ReturnType<typeof ImageDownloadButtonComponent>;

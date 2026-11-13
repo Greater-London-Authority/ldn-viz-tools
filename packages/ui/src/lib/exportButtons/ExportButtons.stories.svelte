@@ -4,19 +4,25 @@
 	import ExportButtons from './ExportButtons.svelte';
 
 	/**
-	 * `ExportButtons` — a trailing group of download controls: a data-download button
-	 * (CSV / JSON) and an image-download button (PNG / SVG). It composes the shared
-	 * `DataDownloadButton` and `ImageDownloadButton`, so any titled container (`Card`,
-	 * `ChartContainer`, `TableContainer`) can offer the same export affordance.
+	 * `ExportButtons` renders the download controls in the footer of a `ChartContainer` or
+	 * `TableContainer`, or any other container: data as CSV or JSON, and an image as PNG or SVG.
 	 *
-	 * Pass the DOM node to capture for the image via `elementToCapture` — it works for
-	 * any element (a chart's SVG, a table wrapper, a card body), not only charts.
+	 * `variant` sets how the controls are shown:
+	 * - `standard` (default): one `DownloadButton`as an text button with the text "Download" that opens a menu of every format
+	 * - `compact`: one icon-only `DownloadButton`
+	 * - `outline`: one `DownloadButton` as an outline button with the text "Download" that opens a menu of every format
+	 * - `separate`: a data button and an image button, each with its own format menu
+	 *
+	 * `elementToCapture` is the node saved as the image. It can be any element, such as a chart, a table wrapper or a card body.
 	 *
 	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/ExportButtons',
 		component: ExportButtons,
-		tags: ['autodocs']
+		tags: ['autodocs'],
+		argTypes: {
+			variant: { options: ['compact', 'standard', 'separate'], control: { type: 'radio' } }
+		}
 	});
 </script>
 
@@ -31,11 +37,32 @@
 	let bothNode: HTMLDivElement = $state() as HTMLDivElement;
 	let restrictedNode: HTMLDivElement = $state() as HTMLDivElement;
 	let noDataNode: HTMLDivElement = $state() as HTMLDivElement;
+	let variantsNode: HTMLDivElement = $state() as HTMLDivElement;
 </script>
 
 {#snippet placeholderChart()}
 	<div class="sr-only">Example image holder - hidden so as not to present misleading layout</div>
 {/snippet}
+
+<!-- The three variants, from most to least compact. -->
+<Story name="Variants">
+	{#snippet template()}
+		<div bind:this={variantsNode}>
+			{@render placeholderChart()}
+		</div>
+		<div class="flex flex-col items-start gap-4">
+			{#each ['compact', 'standard', 'outline', 'separate'] as const as variant (variant)}
+				<ExportButtons
+					{variant}
+					elementToCapture={variantsNode}
+					dataForDownload={demoData}
+					dataDownload={true}
+					imageDownload={true}
+				/>
+			{/each}
+		</div>
+	{/snippet}
+</Story>
 
 <Story name="Only data download enabled">
 	{#snippet template()}
@@ -45,8 +72,8 @@
 		<ExportButtons
 			elementToCapture={bothNode}
 			dataForDownload={demoData}
-			dataDownloadButton={true}
-			imageDownloadButton={false}
+			dataDownload={true}
+			imageDownload={false}
 		/>
 	{/snippet}
 </Story>
@@ -59,14 +86,14 @@
 		<ExportButtons
 			elementToCapture={bothNode}
 			dataForDownload={demoData}
-			dataDownloadButton={false}
-			imageDownloadButton={true}
+			dataDownload={false}
+			imageDownload={true}
 		/>
 	{/snippet}
 </Story>
 
 <!--
-	With both `dataDownloadButton` and `imageDownloadButton` set to `true`, the default format options are
+	With both `dataDownload` and `imageDownload` set to `true`, the default format options are
 	offered: CSV/JSON for data and PNG/SVG for the image.
 -->
 <Story name="Both image and data download enabled">
@@ -77,15 +104,15 @@
 		<ExportButtons
 			elementToCapture={bothNode}
 			dataForDownload={demoData}
-			dataDownloadButton={true}
-			imageDownloadButton={true}
+			dataDownload={true}
+			imageDownload={true}
 		/>
 	{/snippet}
 </Story>
 
 <!--
 	Here the data format is restricted to CSV and the image	format is restricted to PNG.
-	As there is only a single format, the buttons render as a normal button (rather than a [MultipleActionButton](./?path=/docs/docs/ui-components-buttons-multipleactionbutton--documentation)).
+	With `variant="separate"`, each button has a single format, so it renders as a normal button (rather than a [MultipleActionButton](./?path=/docs/docs/ui-components-buttons-multipleactionbutton--documentation)).
 -->
 <Story name="Restricted choice of formats">
 	{#snippet template()}
@@ -95,27 +122,44 @@
 		<ExportButtons
 			elementToCapture={restrictedNode}
 			dataForDownload={demoData}
-			dataDownloadButton={['CSV']}
-			imageDownloadButton={['PNG']}
+			dataDownload={['CSV']}
+			imageDownload={['PNG']}
+			filename="my-chart-export"
+		/>
+		<ExportButtons
+			variant="separate"
+			elementToCapture={restrictedNode}
+			dataForDownload={demoData}
+			dataDownload={['CSV']}
+			imageDownload={['PNG']}
 			filename="my-chart-export"
 		/>
 	{/snippet}
 </Story>
 
 <!--
-	The data-download button only renders when `dataForDownload` is truthy.
-	When `dataForDownload={undefined}`, the data download button is not rendered.
+	Data downloads are only offered when `dataForDownload` is truthy.
+	When `dataForDownload={undefined}`, the Download menu has no Data group (open it to see), and with `variant="separate"` the data download button is not rendered.
 -->
-<Story name="Data button hidden when no data">
+<Story name="Data downloads hidden when no data">
 	{#snippet template()}
 		<div bind:this={noDataNode}>
 			{@render placeholderChart()}
 		</div>
-		<ExportButtons
-			elementToCapture={noDataNode}
-			dataForDownload={undefined}
-			dataDownloadButton={true}
-			imageDownloadButton={true}
-		/>
+		<div class="flex flex-col items-start gap-4">
+			<ExportButtons
+				elementToCapture={noDataNode}
+				dataForDownload={undefined}
+				dataDownload={true}
+				imageDownload={true}
+			/>
+			<ExportButtons
+				variant="separate"
+				elementToCapture={noDataNode}
+				dataForDownload={undefined}
+				dataDownload={true}
+				imageDownload={true}
+			/>
+		</div>
 	{/snippet}
 </Story>

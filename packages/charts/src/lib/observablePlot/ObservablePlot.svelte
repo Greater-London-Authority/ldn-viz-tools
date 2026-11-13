@@ -55,7 +55,7 @@
 		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
 		 *
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: true | false | ('CSV' | 'JSON')[];
 		/**
 		 * Image Download Button in the footer
 		 *
@@ -64,7 +64,12 @@
 		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
 		 *
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: true | false | ('PNG' | 'SVG')[];
+		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -120,8 +125,8 @@
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
-		imageDownloadButton = true,
+		dataDownload = true,
+		imageDownload = true,
 		filename = '',
 		domNode = undefined,
 		tooltipStore = writable<Position>(),
@@ -147,8 +152,8 @@
 	{source}
 	{note}
 	{byline}
-	{dataDownloadButton}
-	{imageDownloadButton}
+	{dataDownload}
+	{imageDownload}
 	{filename}
 	{...rest}
 	chartHeight="h-fit"

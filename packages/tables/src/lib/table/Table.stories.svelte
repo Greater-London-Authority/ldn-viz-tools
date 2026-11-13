@@ -315,7 +315,7 @@
 
 <Story name="No Export buttons">
 	{#snippet template()}
-		<Table {data} {tableSpec} dataDownloadButton={false} imageDownloadButton={false} />
+		<Table {data} {tableSpec} dataDownload={false} imageDownload={false} />
 	{/snippet}
 </Story>
 
@@ -324,8 +324,8 @@
 		<Table
 			{data}
 			{tableSpec}
-			dataDownloadButton
-			imageDownloadButton
+			dataDownload
+			imageDownload
 			columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
 		/>
 	{/snippet}
@@ -457,6 +457,6 @@
 <!-- Restrict data downloads to CSV only, and hide the image download button entirely -->
 <Story name="Restricted download formats">
 	{#snippet template()}
-		<Table {data} {tableSpec} dataDownloadButton={['CSV']} imageDownloadButton={false} />
+		<Table {data} {tableSpec} dataDownload={['CSV']} imageDownload={false} />
 	{/snippet}
 </Story>

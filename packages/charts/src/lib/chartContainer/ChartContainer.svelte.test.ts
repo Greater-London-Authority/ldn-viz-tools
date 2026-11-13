@@ -1,5 +1,5 @@
 import { createRawSnippet } from 'svelte';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 
@@ -57,22 +57,39 @@ describe('ChartContainer', () => {
 
 	it('should show export buttons when showExport is true', async () => {
 		const { container } = render(ChartContainer, {
-			props: { imageDownloadButton: true }
+			props: { imageDownload: true }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).toContain('Download as');
+		expect(
+			Array.from(captureElement.querySelectorAll('button')).some(
+				(b) => b.textContent?.trim() === 'Download'
+			)
+		).toBe(true);
+	});
+
+	it('should show separate data and image buttons when exportButtonsVariant is separate', async () => {
+		const { container } = render(ChartContainer, {
+			props: { imageDownload: true, exportButtonsVariant: 'separate' }
+		});
+
+		const captureElement = container.querySelector('#captureElement');
+		expect(captureElement?.textContent).toContain('Download as');
 	});
 
 	it('should hide export buttons when showExport is false', async () => {
 		const { container } = render(ChartContainer, {
-			props: { imageDownloadButton: false }
+			props: { imageDownload: false }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
 		expect(captureElement).toBeTruthy();
-		expect(captureElement.textContent).not.toContain('Download as');
+		expect(
+			Array.from(captureElement.querySelectorAll('button')).some(
+				(b) => b.textContent?.trim() === 'Download'
+			)
+		).toBe(false);
 	});
 
 	it('should render note when provided', async () => {
@@ -112,8 +129,8 @@ describe('ChartContainer', () => {
 				byline: '',
 				note: '',
 				description: '',
-				dataDownloadButton: false,
-				imageDownloadButton: false
+				dataDownload: false,
+				imageDownload: false
 			}
 		});
 

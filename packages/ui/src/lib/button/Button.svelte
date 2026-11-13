@@ -6,8 +6,7 @@
 	 * **Alternatives**: there are several more specialized buttons, which have specific functionality
 	 * ([AsyncButton](./?path=/docs/ui-components-buttons-asyncbutton--documentation),
 	 * [CopyButton](./?path=/docs/ui-components-buttons-copybutton--documentation),
-	 * [DataDownloadButton](./?path=/docs/ui-components-buttons-datadownloadbutton--documentation),
-	 * [ImageDownloadButton](./?path=/docs/ui-components-buttons-imagedownloadbutton--documentation)),
+	 * [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation)),
 	 * the ability to trigger one of several different actions
 	 * ([MultipleActionButton](./?path=/docs/ui-components-buttons-multipleactionbutton--documentation)),
 	 * or which can display multiple lines of description as a call-to-action

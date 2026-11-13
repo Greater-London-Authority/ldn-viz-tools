@@ -55,7 +55,7 @@
 		 * If set to `false`, then the button is hidden.
 		 *
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: true | false | ('CSV' | 'JSON')[];
 		/**
 		 * Image Download Button in the footer
 		 *
@@ -64,7 +64,7 @@
 		 * If set to `false`, then the button is hidden.
 		 *
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: true | false | ('PNG' | 'SVG')[];
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -134,8 +134,8 @@
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
-		imageDownloadButton = ['PNG'],
+		dataDownload = true,
+		imageDownload = ['PNG'],
 		filename = '',
 		height = 1000,
 		// tableObj = $bindable(undefined),
@@ -235,8 +235,8 @@
 			{source}
 			{byline}
 			{note}
-			{dataDownloadButton}
-			{imageDownloadButton}
+			{dataDownload}
+			{imageDownload}
 			{filename}
 			{columnMapping}
 		>

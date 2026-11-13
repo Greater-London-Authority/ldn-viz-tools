@@ -100,7 +100,7 @@
 		 * If set to `false`, then the button is hidden.
 		 *
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: true | false | ('CSV' | 'JSON')[];
 		/**
 		 * The Data passed to the data Download Button(s) in the footer
 		 */
@@ -113,7 +113,12 @@
 		 * If set to `false`, then the button is hidden.
 		 *
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: true | false | ('PNG' | 'SVG')[];
+		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'separate';
 		filename?: string;
 		/**
 		 * Tailwind class to set table area height
@@ -148,9 +153,10 @@
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
+		dataDownload = true,
 		data = undefined,
-		imageDownloadButton = ['PNG'],
+		imageDownload = ['PNG'],
+		exportButtonsVariant = 'standard',
 		filename = '',
 		tableHeight = 'h-auto',
 		overrideClass = '',
@@ -219,7 +225,7 @@
 
 	{@render paginationControls?.()}
 
-	{#if source || byline || note || hasDescription || dataDownloadButton || imageDownloadButton}
+	{#if source || byline || note || hasDescription || dataDownload || imageDownload}
 		<div class="mt-2">
 			<ChromeFooter
 				{source}
@@ -270,9 +276,10 @@
 			elementToCapture={tableToCapture}
 			{columnMapping}
 			dataForDownload={data}
-			{dataDownloadButton}
-			{imageDownloadButton}
+			{dataDownload}
+			{imageDownload}
 			{filename}
+			variant={exportButtonsVariant}
 		/>
 	{/if}
 {/snippet}

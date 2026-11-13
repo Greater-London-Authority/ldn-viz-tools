@@ -91,7 +91,7 @@
 		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'
 		 *
 		 */
-		dataDownloadButton?: true | false | ('CSV' | 'JSON')[];
+		dataDownload?: true | false | ('CSV' | 'JSON')[];
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -108,7 +108,12 @@
 		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'
 		 *
 		 */
-		imageDownloadButton?: true | false | ('PNG' | 'SVG')[];
+		imageDownload?: true | false | ('PNG' | 'SVG')[];
+		/**
+		 * How the download controls in the footer are shown: one icon-only button (`compact`), one button
+		 * with a text label (`standard`), or a data button and an image button (`separate`).
+		 */
+		exportButtonsVariant?: 'standard' | 'compact' | 'outline' | 'separate';
 		/**
 		 * Tailwind class to set chart area height
 		 */
@@ -159,10 +164,11 @@
 		source = '',
 		byline = '',
 		note = '',
-		dataDownloadButton = true,
+		dataDownload = true,
 		filename = '',
 		data = undefined,
-		imageDownloadButton = true,
+		imageDownload = true,
+		exportButtonsVariant = 'standard',
 		chartHeight = 'h-60',
 		overrideClass = '',
 		chartWidth = 'w-full',
@@ -189,7 +195,7 @@
 	let hasDescription = $derived(!!description);
 	let descriptionIsString = $derived(typeof description === 'string');
 	let hasActions = $derived(
-		!!(source || byline || note || hasDescription || dataDownloadButton || imageDownloadButton)
+		!!(source || byline || note || hasDescription || dataDownload || imageDownload)
 	);
 </script>
 
@@ -253,9 +259,10 @@
 		elementToCapture={chartToCapture}
 		{filename}
 		dataForDownload={data}
-		{dataDownloadButton}
-		{imageDownloadButton}
+		{dataDownload}
+		{imageDownload}
 		{columnMapping}
+		variant={exportButtonsVariant}
 	/>
 {/snippet}
 
@@ -275,7 +282,7 @@
 					variant="text"
 					size="xs"
 					emphasis="secondary"
-					class="!p-0"
+					slim
 					onclick={() => (descriptionOpen = true)}>View description</Button
 				>
 			</li>

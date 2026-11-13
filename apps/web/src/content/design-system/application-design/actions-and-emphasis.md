@@ -150,7 +150,7 @@ Some actions have a component of their own:
 | ----------------------------------------------------------------------- | -------------------------------------------------- |
 | An action that takes time, such as saving                               | `AsyncButton`, which shows a spinner while it runs |
 | Copying text                                                            | `CopyButton`                                       |
-| Downloading a chart's data or image                                     | `DataDownloadButton` and `ImageDownloadButton`     |
+| Downloading a chart's data or image                                     | `DownloadButton`                                   |
 | One action in several versions, such as a download in different formats | `MultipleActionButton`                             |
 
 `MultipleActionButton` has a chevron that opens a menu of versions of its action. Each option must be a version of the same action, because the button runs the one chosen.
