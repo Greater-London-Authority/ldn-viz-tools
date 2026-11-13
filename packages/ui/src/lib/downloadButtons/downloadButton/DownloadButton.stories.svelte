@@ -13,7 +13,6 @@
 	 * The menu has a Data group (CSV, JSON) and an Image group (PNG, SVG). Choosing a format downloads the file.
 	 *
 	 * The Data group shows when `data` or `dataFn` is set. The Image group shows when `htmlNode` is set.
-	 * Set `compact` for an icon-only button, for example in a chart footer.
 	 */
 	const { Story } = defineMeta({
 		title: 'Ui/Components/Buttons/DownloadButton',

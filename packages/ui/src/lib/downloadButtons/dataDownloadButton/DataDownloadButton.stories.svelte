@@ -16,6 +16,7 @@
 	 * [DownloadButton](./?path=/docs/ui-components-buttons-downloadbutton--documentation) instead. The component stays in
 	 * the library, because `ExportButtons` uses it when `variant="separate"`. Only the export will be removed, in the next
 	 * major version.
+	 *
 	 */
 
 	const { Story } = defineMeta({

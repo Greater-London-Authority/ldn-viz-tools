@@ -4,15 +4,15 @@
 	import ExportButtons from './ExportButtons.svelte';
 
 	/**
-	 * `ExportButtons` — the download controls for data (CSV / JSON) and an image (PNG / SVG),
-	 * so any titled container (`Card`, `ChartContainer`, `TableContainer`) can offer the same export affordance.
+	 * `ExportButtons` renders the download controls in the footer of a `ChartContainer` or
+	 * `TableContainer`, or any other container: data as CSV or JSON, and an image as PNG or SVG.
 	 *
-	 * `variant` sets the density. `standard` (the default) is one `DownloadButton` with the text "Download",
-	 * `compact` is one icon-only `DownloadButton`, and `separate` is a
-	 * `DataDownloadButton` and an `ImageDownloadButton` side by side.
+	 * `variant` sets how the controls are shown:
+	 * - `standard` (default): one `DownloadButton` with the text "Download" that opens a menu of every format
+	 * - `compact`: one icon-only `DownloadButton`
+	 * - `separate`: a data button and an image button, each with its own format menu
 	 *
-	 * Pass the DOM node to capture for the image via `elementToCapture` — it works for
-	 * any element (a chart's SVG, a table wrapper, a card body), not only charts.
+	 * `elementToCapture` is the node saved as the image. It can be any element, such as a chart, a table wrapper or a card body.
 	 *
 	 */
 	const { Story } = defineMeta({
