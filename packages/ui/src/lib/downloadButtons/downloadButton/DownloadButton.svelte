@@ -7,11 +7,11 @@
 	 * @component
 	 */
 
-	import { ArrowDownTray } from '@steeze-ui/heroicons';
+	import { DownloadSimple } from '@steeze-ui/phosphor-icons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { DropdownMenu } from 'bits-ui';
-	import Button from '../../button/Button.svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import Button from '../../button/Button.svelte';
 	import { classNames } from '../../utils/classNames';
 	import { downloadCSV, downloadJSON } from '../dataDownloadButton/utils';
 	import { downloadImage } from '../imageDownloadButton/utils';
@@ -144,7 +144,7 @@
 	// the small label and a 4px gap; the compact trigger is a 28px outline square.
 	let standardClasses = $derived(
 		classNames(
-			'button-label-sm gap-1',
+			'label-sm gap-1',
 			isDisabled
 				? ''
 				: '!text-color-text hover:!text-color-interactive-primary-text-hover active:!text-color-interactive-primary-text-active'
@@ -181,10 +181,10 @@
 				title={compact ? label : undefined}
 			>
 				{#if compact}
-					<Icon src={ArrowDownTray} theme="mini" class="h-4 w-4" aria-hidden="true" />
+					<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
 				{:else}
 					{label}
-					<Icon src={ArrowDownTray} theme="mini" class="h-5 w-5" aria-hidden="true" />
+					<Icon src={DownloadSimple} size="18px" aria-hidden="true" />
 				{/if}
 			</Button>
 		{/snippet}

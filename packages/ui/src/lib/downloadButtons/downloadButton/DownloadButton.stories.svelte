@@ -155,15 +155,6 @@
 	{/snippet}
 </Story>
 
-<!-- `fullWidth` makes the standard button fill its parent. It has no effect on a compact button. -->
-<Story name="Full Width">
-	{#snippet template(args)}
-		<div class="w-80">
-			<DownloadButton {...args} {htmlNode} fullWidth />
-		</div>
-	{/snippet}
-</Story>
-
 <Story name="Disabled">
 	{#snippet template(args)}
 		<div class="flex items-center gap-4">
