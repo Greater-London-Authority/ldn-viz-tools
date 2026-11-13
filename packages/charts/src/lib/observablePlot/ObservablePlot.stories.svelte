@@ -363,13 +363,7 @@
 
 <Story name="No downloads">
 	{#snippet template(args)}
-		<ObservablePlot
-			{...args}
-			{spec}
-			data={chartData}
-			dataDownloadButton={false}
-			imageDownloadButton={false}
-		/>
+		<ObservablePlot {...args} {spec} data={chartData} dataDownload={false} imageDownload={false} />
 	{/snippet}
 </Story>
 
@@ -379,8 +373,8 @@
 			{...args}
 			{spec}
 			data={chartData}
-			imageDownloadButton={false}
-			dataDownloadButton={['CSV']}
+			imageDownload={false}
+			dataDownload={['CSV']}
 		/>
 	{/snippet}
 </Story>
@@ -391,8 +385,8 @@
 			{...args}
 			{spec}
 			data={chartData}
-			imageDownloadButton={['PNG']}
-			dataDownloadButton={false}
+			imageDownload={['PNG']}
+			dataDownload={false}
 		/>
 	{/snippet}
 </Story>
@@ -413,8 +407,8 @@
 					{...args}
 					{spec}
 					data={chartData}
-					imageDownloadButton={['PNG']}
-					dataDownloadButton={false}
+					imageDownload={['PNG']}
+					dataDownload={false}
 				/>
 			</div>
 		</div>
@@ -442,8 +436,8 @@
 				byline="A byline for the chart"
 				chartDescription="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 				alt="Simple description of type of chart"
-				imageDownloadButton={['SVG']}
-				dataDownloadButton={true}
+				imageDownload={['SVG']}
+				dataDownload={true}
 				data={monthlyData}
 				chartHeight="h-fit"
 				id="multiple"
@@ -477,7 +471,7 @@
 			data={chartData}
 			columnMapping={{ Month: 'Date', Value: 'Amount (GBP)', Variable: 'Series' }}
 			filename="financial-data"
-			dataDownloadButton={['CSV', 'JSON']}
+			dataDownload={['CSV', 'JSON']}
 		/>
 	{/snippet}
 </Story>

@@ -16,5 +16,5 @@
 </script>
 
 <div class="not-typeset">
-	<Table {title} data={tokenTableData} tableSpec={tokenTableSpec} imageDownloadButton={false} />
+	<Table {title} data={tokenTableData} tableSpec={tokenTableSpec} imageDownload={false} />
 </div>

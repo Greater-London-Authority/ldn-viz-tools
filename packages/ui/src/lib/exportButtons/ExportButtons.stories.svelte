@@ -50,13 +50,13 @@
 			{@render placeholderChart()}
 		</div>
 		<div class="flex flex-col items-start gap-4">
-			{#each ['compact', 'standard', 'separate'] as const as variant (variant)}
+			{#each ['compact', 'standard', 'outline', 'separate'] as const as variant (variant)}
 				<ExportButtons
 					{variant}
 					elementToCapture={variantsNode}
 					dataForDownload={demoData}
-					dataDownloadButton={true}
-					imageDownloadButton={true}
+					dataDownload={true}
+					imageDownload={true}
 				/>
 			{/each}
 		</div>
@@ -71,8 +71,8 @@
 		<ExportButtons
 			elementToCapture={bothNode}
 			dataForDownload={demoData}
-			dataDownloadButton={true}
-			imageDownloadButton={false}
+			dataDownload={true}
+			imageDownload={false}
 		/>
 	{/snippet}
 </Story>
@@ -85,14 +85,14 @@
 		<ExportButtons
 			elementToCapture={bothNode}
 			dataForDownload={demoData}
-			dataDownloadButton={false}
-			imageDownloadButton={true}
+			dataDownload={false}
+			imageDownload={true}
 		/>
 	{/snippet}
 </Story>
 
 <!--
-	With both `dataDownloadButton` and `imageDownloadButton` set to `true`, the default format options are
+	With both `dataDownload` and `imageDownload` set to `true`, the default format options are
 	offered: CSV/JSON for data and PNG/SVG for the image.
 -->
 <Story name="Both image and data download enabled">
@@ -103,8 +103,8 @@
 		<ExportButtons
 			elementToCapture={bothNode}
 			dataForDownload={demoData}
-			dataDownloadButton={true}
-			imageDownloadButton={true}
+			dataDownload={true}
+			imageDownload={true}
 		/>
 	{/snippet}
 </Story>
@@ -121,16 +121,16 @@
 		<ExportButtons
 			elementToCapture={restrictedNode}
 			dataForDownload={demoData}
-			dataDownloadButton={['CSV']}
-			imageDownloadButton={['PNG']}
+			dataDownload={['CSV']}
+			imageDownload={['PNG']}
 			filename="my-chart-export"
 		/>
 		<ExportButtons
 			variant="separate"
 			elementToCapture={restrictedNode}
 			dataForDownload={demoData}
-			dataDownloadButton={['CSV']}
-			imageDownloadButton={['PNG']}
+			dataDownload={['CSV']}
+			imageDownload={['PNG']}
 			filename="my-chart-export"
 		/>
 	{/snippet}
@@ -149,15 +149,15 @@
 			<ExportButtons
 				elementToCapture={noDataNode}
 				dataForDownload={undefined}
-				dataDownloadButton={true}
-				imageDownloadButton={true}
+				dataDownload={true}
+				imageDownload={true}
 			/>
 			<ExportButtons
 				variant="separate"
 				elementToCapture={noDataNode}
 				dataForDownload={undefined}
-				dataDownloadButton={true}
-				imageDownloadButton={true}
+				dataDownload={true}
+				imageDownload={true}
 			/>
 		</div>
 	{/snippet}

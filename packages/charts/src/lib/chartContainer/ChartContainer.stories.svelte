@@ -138,9 +138,9 @@
 			source="GLA city intelligence"
 			byline="A byline for the chart"
 			note="Be aware that you can provide a note if required"
-			dataDownloadButton={['JSON', 'CSV']}
+			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownloadButton
+			imageDownload
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -157,9 +157,9 @@
 			subtitle="Subtitle provides extra context"
 			source="The source of this chart data"
 			byline="A byline for the chart"
-			dataDownloadButton={['JSON', 'CSV']}
+			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownloadButton
+			imageDownload
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -183,9 +183,9 @@
 			source="The source of this chart data"
 			byline="A byline for the chart"
 			note="Be aware that you can provide a note if required"
-			dataDownloadButton={['JSON', 'CSV']}
+			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownloadButton={['PNG']}
+			imageDownload={['PNG']}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -211,9 +211,9 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 				source="The source of this chart data"
 				byline="A byline for the chart"
 				note="Be aware that you can provide a note if required"
-				dataDownloadButton={['JSON', 'CSV']}
+				dataDownload={['JSON', 'CSV']}
 				data={[]}
-				imageDownloadButton={['PNG']}
+				imageDownload={['PNG']}
 				alignMultiple
 			/>
 
@@ -225,9 +225,9 @@ This story show how you can place two (or more) charts side-by-side, and ensure 
 				source="The source of this chart data"
 				byline="A byline for the chart"
 				note="Be aware that you can provide a note if required. This one is much longer than for the other chart, so will wrap earlier. It's really excessively long."
-				dataDownloadButton={['JSON', 'CSV']}
+				dataDownload={['JSON', 'CSV']}
 				data={[]}
-				imageDownloadButton={['PNG']}
+				imageDownload={['PNG']}
 				alignMultiple
 			/>
 		</div>
@@ -279,9 +279,9 @@ It can also be used to add liks.
 			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis'>GLA city intelligence</a>"
 			byline="A <i>byline</i> for the chart"
 			note="Be aware that you can provide a <i>note</i> if required"
-			dataDownloadButton={['JSON', 'CSV']}
+			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownloadButton
+			imageDownload
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -299,9 +299,9 @@ It can also be used to add liks.
 			source="<a href='https://www.london.gov.uk/programmes-strategies/research-and-analysis' class='underline'>GLA city intelligence</a>"
 			byline="A <i>byline</i> for the chart"
 			note="Be aware that you can provide a <i>note</i> if required"
-			dataDownloadButton={['JSON', 'CSV']}
+			dataDownload={['JSON', 'CSV']}
 			data={[]}
-			imageDownloadButton
+			imageDownload
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 			id="MyCustomChart"
@@ -356,8 +356,8 @@ It can also be used to add liks.
 	{#snippet template(args)}
 		<ChartContainer
 			{...args}
-			dataDownloadButton={false}
-			imageDownloadButton={false}
+			dataDownload={false}
+			imageDownload={false}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -367,7 +367,7 @@ It can also be used to add liks.
 </Story>
 
 <!--
-	The download button can be hidden by setting `dataDownloadButton={false}` and `imageDownloadButton={false}`.
+	The download button can be hidden by setting `dataDownload={false}` and `imageDownload={false}`.
 -->
 <Story name="No download buttons">
 	{#snippet template(args)}
@@ -378,8 +378,8 @@ It can also be used to add liks.
 			source="GLA city intelligence"
 			byline="A byline for the chart"
 			note="Be aware that you can provide a note if required"
-			dataDownloadButton={false}
-			imageDownloadButton={false}
+			dataDownload={false}
+			imageDownload={false}
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -405,8 +405,8 @@ It can also be used to add liks.
 			]}
 			columnMapping={{ Month: 'Date', Value: 'Amount (GBP)' }}
 			filename="my-custom-chart-data"
-			dataDownloadButton={['CSV', 'JSON']}
-			imageDownloadButton
+			dataDownload={['CSV', 'JSON']}
+			imageDownload
 			description="This is a detailed description of the chart for screen reader and sighted users to better understand what the chart is showing them."
 			alt="Simple description of type of chart"
 		>
@@ -422,7 +422,7 @@ It can also be used to add liks.
 <Story name="Download button variants">
 	{#snippet template(args)}
 		<div class="flex flex-col gap-8">
-			{#each ['compact', 'standard', 'separate'] as const as variant (variant)}
+			{#each ['compact', 'standard', 'outline', 'separate'] as const as variant (variant)}
 				<ChartContainer
 					{...args}
 					id={`variant-${variant}`}

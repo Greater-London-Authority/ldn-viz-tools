@@ -1,8 +1,8 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
-	import TableContainer from './TableContainer.svelte';
 	import { Card } from '@ldn-viz/ui';
+	import TableContainer from './TableContainer.svelte';
 
 	/**
 	 * `TableContainer` wraps a table with the shared chrome primitives: a `ChromeHeader`
@@ -181,8 +181,8 @@
 		<TableContainer
 			title="Some famous people"
 			{data}
-			dataDownloadButton
-			imageDownloadButton
+			dataDownload
+			imageDownload
 			columnMapping={{ first_name: 'First Name', last_name: 'Last Name', pet: 'Pet' }}
 		>
 			{#snippet table()}

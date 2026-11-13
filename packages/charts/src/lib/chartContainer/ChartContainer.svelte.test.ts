@@ -1,5 +1,5 @@
 import { createRawSnippet } from 'svelte';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 
@@ -57,7 +57,7 @@ describe('ChartContainer', () => {
 
 	it('should show export buttons when showExport is true', async () => {
 		const { container } = render(ChartContainer, {
-			props: { imageDownloadButton: true }
+			props: { imageDownload: true }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
@@ -71,7 +71,7 @@ describe('ChartContainer', () => {
 
 	it('should show separate data and image buttons when exportButtonsVariant is separate', async () => {
 		const { container } = render(ChartContainer, {
-			props: { imageDownloadButton: true, exportButtonsVariant: 'separate' }
+			props: { imageDownload: true, exportButtonsVariant: 'separate' }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
@@ -80,7 +80,7 @@ describe('ChartContainer', () => {
 
 	it('should hide export buttons when showExport is false', async () => {
 		const { container } = render(ChartContainer, {
-			props: { imageDownloadButton: false }
+			props: { imageDownload: false }
 		});
 
 		const captureElement = container.querySelector('#captureElement');
@@ -129,8 +129,8 @@ describe('ChartContainer', () => {
 				byline: '',
 				note: '',
 				description: '',
-				dataDownloadButton: false,
-				imageDownloadButton: false
+				dataDownload: false,
+				imageDownload: false
 			}
 		});
 

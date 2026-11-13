@@ -108,8 +108,8 @@ When the chart is the main subject, its group is dominant. The card's title beco
 		title="Net additional dwellings"
 		subtitle="London, 2015 to 2024"
 		source="GLA"
-		dataDownloadButton={false}
-		imageDownloadButton={false}
+		dataDownload={false}
+		imageDownload={false}
 	>
 		<PlaceholderImage />
 	</ChartContainer>
@@ -117,7 +117,7 @@ When the chart is the main subject, its group is dominant. The card's title beco
 ```
 
 <div class="p-4 my-4 bg-color-canvas-muted">
-	<Card title="Housing" emphasis="secondary"><ChartContainer id="tg-one" title="Net additional dwellings" subtitle="London, 2015 to 2024" source="GLA" chartHeight="h-40" dataDownloadButton={false} imageDownloadButton={false}><PlaceholderImage /></ChartContainer></Card>
+	<Card title="Housing" emphasis="secondary"><ChartContainer id="tg-one" title="Net additional dwellings" subtitle="London, 2015 to 2024" source="GLA" chartHeight="h-40" dataDownload={false} imageDownload={false}><PlaceholderImage /></ChartContainer></Card>
 </div>
 
 ### A card with two related charts
@@ -134,7 +134,7 @@ The card's group is dominant, and each chart's title becomes an eyebrow:
 ```
 
 <div class="p-4 my-4 bg-color-canvas-muted">
-	<Card title="Housing" subtitle="London, 2015 to 2024"><div class="grid grid-cols-2 gap-flow"><ChartContainer id="tg-two-a" title="Completions" emphasis="secondary" chartHeight="h-32" dataDownloadButton={false} imageDownloadButton={false}><PlaceholderImage /></ChartContainer><ChartContainer id="tg-two-b" title="Approvals" emphasis="secondary" chartHeight="h-32" dataDownloadButton={false} imageDownloadButton={false}><PlaceholderImage /></ChartContainer></div></Card>
+	<Card title="Housing" subtitle="London, 2015 to 2024"><div class="grid grid-cols-2 gap-flow"><ChartContainer id="tg-two-a" title="Completions" emphasis="secondary" chartHeight="h-32" dataDownload={false} imageDownload={false}><PlaceholderImage /></ChartContainer><ChartContainer id="tg-two-b" title="Approvals" emphasis="secondary" chartHeight="h-32" dataDownload={false} imageDownload={false}><PlaceholderImage /></ChartContainer></div></Card>
 </div>
 
 A card with only text has no other title group, so its group can have an eyebrow, a title and a subtitle.

@@ -33,13 +33,13 @@
 		 * Supply a custom list of formats as an array of strings. Current options either 'CSV', or 'JSON'.
 		 * If set to `false`, data downloads are not offered.
 		 */
-		dataDownloadButton: true | false | ('CSV' | 'JSON')[];
+		dataDownload: true | false | ('CSV' | 'JSON')[];
 		/**
 		 * Defaults to true which allows user to select download in either 'PNG' or 'SVG' format.
 		 * Supply a custom list of formats as an array of strings. Current options either 'PNG', or 'SVG'.
 		 * If set to `false`, image downloads are not offered.
 		 */
-		imageDownloadButton: true | false | ('PNG' | 'SVG')[];
+		imageDownload: true | false | ('PNG' | 'SVG')[];
 		/**
 		 * The file name to be used for the downloaded data or image file.
 		 */
@@ -52,32 +52,32 @@
 		 * How the controls are shown: one icon-only button (`compact`), one button with a text label
 		 * (`standard`), or a data button and an image button (`separate`).
 		 */
-		variant?: 'standard' | 'compact' | 'separate';
+		variant?: 'standard' | 'compact' | 'separate' | 'outline';
 	}
 
 	let {
 		elementToCapture,
 		dataForDownload,
-		dataDownloadButton,
-		imageDownloadButton,
+		dataDownload,
+		imageDownload,
 		filename = '',
 		columnMapping = undefined,
 		variant = 'standard'
 	}: Props = $props();
 
 	let dataFormats = $derived(
-		!dataDownloadButton || !dataForDownload
+		!dataDownload || !dataForDownload
 			? []
-			: dataDownloadButton === true
+			: dataDownload === true
 				? (['CSV', 'JSON'] as ('CSV' | 'JSON')[])
-				: dataDownloadButton
+				: dataDownload
 	);
 	let imageFormats = $derived(
-		!imageDownloadButton || !elementToCapture
+		!imageDownload || !elementToCapture
 			? []
-			: imageDownloadButton === true
+			: imageDownload === true
 				? (['PNG', 'SVG'] as ('PNG' | 'SVG')[])
-				: imageDownloadButton
+				: imageDownload
 	);
 </script>
 
@@ -128,6 +128,7 @@
 			{imageFormats}
 			{filename}
 			compact={variant === 'compact'}
+			outline={variant === 'outline'}
 		/>
 	</div>
 {/if}

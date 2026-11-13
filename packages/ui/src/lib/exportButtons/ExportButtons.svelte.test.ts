@@ -18,8 +18,8 @@ describe('ExportButtons (separate)', () => {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: true,
-			imageDownloadButton: false
+			dataDownload: true,
+			imageDownload: false
 		});
 
 		expect(container.textContent).toContain('Download as CSV');
@@ -30,8 +30,8 @@ describe('ExportButtons (separate)', () => {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
-			dataDownloadButton: true,
-			imageDownloadButton: false
+			dataDownload: true,
+			imageDownload: false
 		});
 
 		expect(container.textContent).not.toContain('Download as');
@@ -42,8 +42,8 @@ describe('ExportButtons (separate)', () => {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: true,
-			imageDownloadButton: false
+			dataDownload: true,
+			imageDownload: false
 		});
 
 		await expect.element(page.getByRole('button', { name: 'Download as CSV' })).toBeInTheDocument();
@@ -57,8 +57,8 @@ describe('ExportButtons (separate)', () => {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: ['CSV'],
-			imageDownloadButton: false
+			dataDownload: ['CSV'],
+			imageDownload: false
 		});
 
 		await expect.element(page.getByRole('button', { name: 'Download as CSV' })).toBeInTheDocument();
@@ -72,20 +72,20 @@ describe('ExportButtons (separate)', () => {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
-			dataDownloadButton: false,
-			imageDownloadButton: true
+			dataDownload: false,
+			imageDownload: true
 		});
 
 		expect(container.textContent).toContain('Download as PNG');
 	});
 
-	it('passes formats={["PNG", "SVG"]} to ImageDownloadButton when imageDownloadButton === true', async () => {
+	it('passes formats={["PNG", "SVG"]} to ImageDownloadButton when imageDownload === true', async () => {
 		render(ExportButtons, {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
-			dataDownloadButton: false,
-			imageDownloadButton: true
+			dataDownload: false,
+			imageDownload: true
 		});
 
 		await expect.element(page.getByRole('button', { name: 'Download as PNG' })).toBeInTheDocument();
@@ -94,13 +94,13 @@ describe('ExportButtons (separate)', () => {
 			.toBeInTheDocument();
 	});
 
-	it('passes a custom formats array to ImageDownloadButton unchanged', async () => {
+	it('passes a custom formats array to ImageDownload unchanged', async () => {
 		render(ExportButtons, {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
-			dataDownloadButton: false,
-			imageDownloadButton: ['PNG']
+			dataDownload: false,
+			imageDownload: ['PNG']
 		});
 
 		await expect.element(page.getByRole('button', { name: 'Download as PNG' })).toBeInTheDocument();
@@ -109,25 +109,25 @@ describe('ExportButtons (separate)', () => {
 		).toBeNull();
 	});
 
-	it('hides the image download button when imageDownloadButton === false', async () => {
+	it('hides the image download button when imageDownload === false', async () => {
 		const { container } = render(ExportButtons, {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
-			dataDownloadButton: false,
-			imageDownloadButton: false
+			dataDownload: false,
+			imageDownload: false
 		});
 
 		expect(container.textContent).not.toContain('Download as');
 	});
 
-	it('forwards filename to DataDownloadButton unchanged', async () => {
+	it('forwards filename to DataDownload unchanged', async () => {
 		render(ExportButtons, {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: ['CSV'],
-			imageDownloadButton: false,
+			dataDownload: ['CSV'],
+			imageDownload: false,
 			filename: 'my-chart-export'
 		});
 
@@ -150,13 +150,13 @@ describe('ExportButtons (separate)', () => {
 		expect(anchors[0].getAttribute('download')).toBe('my-chart-export.csv');
 	});
 
-	it('forwards columnMapping to DataDownloadButton unchanged', async () => {
+	it('forwards columnMapping to DataDownload unchanged', async () => {
 		render(ExportButtons, {
 			variant: 'separate',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: ['CSV'],
-			imageDownloadButton: false,
+			dataDownload: ['CSV'],
+			imageDownload: false,
 			columnMapping: { Month: 'Date', Value: 'Amount' }
 		});
 
@@ -186,8 +186,8 @@ describe('ExportButtons (compact and standard)', () => {
 		render(ExportButtons, {
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: true,
-			imageDownloadButton: true
+			dataDownload: true,
+			imageDownload: true
 		});
 
 		const button = page.getByRole('button', { name: 'Download' });
@@ -201,8 +201,8 @@ describe('ExportButtons (compact and standard)', () => {
 			variant: 'compact',
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: true,
-			imageDownloadButton: true
+			dataDownload: true,
+			imageDownload: true
 		});
 
 		const button = page.getByRole('button', { name: 'Download' });
@@ -210,12 +210,12 @@ describe('ExportButtons (compact and standard)', () => {
 		expect(button.element().textContent?.trim()).toBe('');
 	});
 
-	it('lists the formats passed in dataDownloadButton and imageDownloadButton', async () => {
+	it('lists the formats passed in dataDownload and imageDownload', async () => {
 		render(ExportButtons, {
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: ['CSV'],
-			imageDownloadButton: ['PNG']
+			dataDownload: ['CSV'],
+			imageDownload: ['PNG']
 		});
 
 		await page.getByRole('button', { name: 'Download' }).click();
@@ -230,8 +230,8 @@ describe('ExportButtons (compact and standard)', () => {
 		render(ExportButtons, {
 			elementToCapture: document.createElement('div'),
 			dataForDownload: undefined,
-			dataDownloadButton: true,
-			imageDownloadButton: true
+			dataDownload: true,
+			imageDownload: true
 		});
 
 		await page.getByRole('button', { name: 'Download' }).click();
@@ -244,8 +244,8 @@ describe('ExportButtons (compact and standard)', () => {
 		const { container } = render(ExportButtons, {
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: false,
-			imageDownloadButton: false
+			dataDownload: false,
+			imageDownload: false
 		});
 
 		expect(container.querySelector('button')).toBeNull();
@@ -255,8 +255,8 @@ describe('ExportButtons (compact and standard)', () => {
 		const { container } = render(ExportButtons, {
 			elementToCapture: document.createElement('div'),
 			dataForDownload: demoData,
-			dataDownloadButton: true,
-			imageDownloadButton: true
+			dataDownload: true,
+			imageDownload: true
 		});
 
 		expect(container.querySelector('[data-capture-ignore] button')).not.toBeNull();
