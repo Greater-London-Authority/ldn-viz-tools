@@ -77,6 +77,11 @@
 		compact?: boolean;
 
 		/**
+		 * If `true`, the button has an outline.
+		 */
+		outline?: boolean;
+
+		/**
 		 * If `true`, the user will not be able to interact with the button to download data.
 		 */
 		disabled?: boolean;
@@ -104,6 +109,7 @@
 		filename = 'download',
 		label = 'Download',
 		compact = false,
+		outline = false,
 		disabled = false,
 		fullWidth = false,
 		class: className = '',
@@ -142,15 +148,8 @@
 
 	// The Figma triggers override the Button defaults: the text trigger uses the body text colour,
 	// the small label and a 4px gap; the compact trigger is a 28px outline square.
-	let standardClasses = $derived(
-		classNames(
-			'label-sm gap-1',
-			isDisabled
-				? ''
-				: '!text-color-text hover:!text-color-interactive-primary-text-hover active:!text-color-interactive-primary-text-active'
-		)
-	);
-	const compactClasses = '!h-7 !w-7 !min-h-0 !min-w-0 !p-0';
+	let standardClasses = $derived(classNames('gap-1'));
+	const compactClasses = '!h-6 !w-6 !min-h-0 !min-w-0 !p-0';
 
 	const download = async (format: MenuOption['id']) => {
 		if (format === 'JSON') {
@@ -169,10 +168,10 @@
 			<Button
 				{...restProps}
 				{...props}
-				variant={compact ? 'outline' : 'text'}
-				emphasis={compact ? 'secondary' : 'primary'}
-				size={compact ? 'xs' : 'sm'}
-				slim={!compact}
+				variant={compact || outline ? 'outline' : 'text'}
+				emphasis="secondary"
+				size={'xs'}
+				slim={!compact && !outline}
 				fullWidth={fullWidth && !compact}
 				data-capture-ignore
 				class={classNames(compact ? compactClasses : standardClasses, className)}
