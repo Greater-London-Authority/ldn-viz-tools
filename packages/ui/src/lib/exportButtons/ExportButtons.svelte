@@ -4,8 +4,9 @@
 	 * `TableContainer`, or any other container: data as CSV or JSON, and an image as PNG or SVG.
 	 *
 	 * `variant` sets how the controls are shown:
-	 * - `standard` (default): one `DownloadButton` with the text "Download" that opens a menu of every format
+	 * - `standard` (default): one `DownloadButton`as an text button with the text "Download" that opens a menu of every format
 	 * - `compact`: one icon-only `DownloadButton`
+	 * - `outline`: one `DownloadButton` as an outline button with the text "Download" that opens a menu of every format
 	 * - `separate`: a data button and an image button, each with its own format menu
 	 *
 	 * `elementToCapture` is the node saved as the image. It can be any element, such as a chart, a table wrapper or a card body.
