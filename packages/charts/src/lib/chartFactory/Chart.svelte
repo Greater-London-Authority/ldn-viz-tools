@@ -163,7 +163,7 @@
 </script>
 
 {#if chartFn && data.length > 0}
-	<div class="w-full py-8" bind:clientWidth={width}>
+	<div class="w-full" bind:clientWidth={width}>
 		{#snippet plotControls()}
 			{@render controls?.()}
 			{#if options.chartType === 'choropleth'}
