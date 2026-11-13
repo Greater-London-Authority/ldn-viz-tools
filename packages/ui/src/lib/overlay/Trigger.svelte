@@ -44,16 +44,15 @@
 	}: Props = $props();
 </script>
 
-<Button {size} {emphasis} {variant} {slim} {...restProps}>
+<Button {size} {emphasis} {variant} {slim} {...restProps} class="!justify-end">
 	{#if children}
 		{@render children()}
 	{:else}
 		{hintLabel}
-
 		<Icon
 			src={InformationCircle}
 			theme="mini"
-			class="ml-0.5 h-[18px] w-[18px]"
+			class="ml-0.5 h-[18px] w-[18px] shrink-0"
 			aria-hidden="true"
 		/>
 	{/if}

@@ -1,6 +1,7 @@
 <script module lang="ts">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Input from '../input/Input.svelte';
+	import Overlay from '../overlay/Overlay.svelte';
 	import Card from './Card.svelte';
 
 	/**
@@ -62,6 +63,53 @@
 	{#snippet template(args)}
 		<div class="max-w-xl">
 			<Card {...args}>{@render body()}</Card>
+		</div>
+	{/snippet}
+</Story>
+
+<!-- Hint snippet over-rides hint prop: Custom hintLabel applied to the Overlay -->
+<Story name="With hint types" args={{ title: 'Card title' }}>
+	{#snippet template(args)}
+		<div class="gap-flow flex max-w-xl flex-col">
+			<Card {...args}>
+				{#snippet hint()}
+					<Overlay overlayType="tooltip" hintLabel="">This is a tooltip.</Overlay>
+				{/snippet}
+				{@render body()}
+			</Card>
+			<Card {...args} emphasis="secondary">
+				{#snippet hint()}
+					<Overlay overlayType="popover" hintLabel="">This is a Popover.</Overlay>
+				{/snippet}
+				{@render body()}
+			</Card>
+			<Card {...args}>
+				{#snippet hint()}
+					<Overlay
+						overlayType="modal"
+						modalTitle="Modal title"
+						modalDescription="This is a modal description"
+						hintLabel=""
+					>
+						This is the modal content
+					</Overlay>
+				{/snippet}
+				{@render body()}
+			</Card>
+
+			<Card {...args} eyebrow="Eyebrow" subtitle="The subtitle">
+				{#snippet hint()}
+					<Overlay
+						overlayType="modal"
+						modalTitle="Modal title"
+						modalDescription="This is a modal description"
+						hintLabel=""
+					>
+						This is the modal content
+					</Overlay>
+				{/snippet}
+				{@render body()}
+			</Card>
 		</div>
 	{/snippet}
 </Story>
